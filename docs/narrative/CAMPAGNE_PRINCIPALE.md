@@ -8,6 +8,8 @@
 
 - **Partie I — Campagne principale (Cocyte)** : §0 lecture · §1 cadre et prémisse · §2 personnages · §3 chronologie · §4 prologue · §5 enquête · §6 colonie Port-Méridien · §7 station Asphodèle · §8 quêtes du Tantalus · §9 opérations secondaires · §10 cinématiques · §11 raccordement · §12 points ouverts
 - **Partie II — Campagnes annexes** : §13 voyager dans le Reach · §14 La Saison des Reines · §15 Directive zéro · §16 Les Bâtisseurs · §17 Fièvre noire · §18 Le banc d'essai · §19 le fil QZ17 · §20 synthèse de production
+- **Partie III — Missions uniques sur les mondes du catalogue** : §21 principes et chronologie · §22 opérations Héritage et préquelles · §23 mondes sous licence · §24 mondes du projet · §25 sites frontaliers · §26 archives MIRE · §27 intégration
+- **Partie IV — Besoins de production** : §28 méthode et socle présent · §29 campagne principale · §30-34 campagnes annexes · §35 archives MIRE · §36 missions par planète · §37 récapitulatif
 
 # PARTIE I — Campagne principale : Cocyte
 
@@ -1411,3 +1413,862 @@ Chaque campagne révèle une pièce de l'origine des œufs livrés à Cocyte.
 **Ordre de production recommandé :** campagne 1 (elle réutilise quatre chapitres déjà jouables) → campagne 5 (quatre chapitres) → campagne 2 (deux chapitres) → campagne 3 → campagne 4. Chaque campagne suit le raccordement technique du §11 (contenu, persistance, récompenses en transaction, tests de parcours et de reprise).
 
 **Durées :** estimations de conception à confirmer en test, calculées en additionnant les durées cibles des missions d'histoire (25 à 60 minutes chacune). Les annexes ajoutent environ 2 à 3 heures par campagne.
+
+
+---
+
+# PARTIE III — Missions uniques sur les mondes du catalogue
+
+## 21. Principes — [PROPOSÉ]
+
+### 21.1 Trois modes selon la chronologie
+
+Le jeu se déroule en **2204** (`year: 2204` dans les campagnes du code). Chaque monde de la franchise a ses propres événements, avant ou après cette date. Une mission sur ce monde prend l'un de trois modes :
+
+| Mode | Quand | Principe | Exemple |
+| --- | --- | --- | --- |
+| **Héritage** | Les événements de l'œuvre ont eu lieu **avant 2204** | Le Tantalus visite le lieu **après coup** : ruines, épaves, survivants, ce que la compagnie a laissé ou cherche encore. | Les ruines d'Hadley's Hope, vingt-cinq ans après sa destruction. |
+| **Préquelle** | Les événements de l'œuvre auront lieu **après 2204** | Le Tantalus visite le lieu **avant** sa catastrophe : il découvre les premiers signes, mais ne peut pas empêcher ce que l'œuvre raconte. | LV-1201, vingt-six ans avant l'Incident de 2230. |
+| **Archive MIRE** | Pour revivre un lieu **pendant son activité**, avant une catastrophe antérieure à 2204 | Reconstitution par le programme MIRE (§18.3), jouée dans une **sauvegarde isolée**, comme l'opération existante Mire Archive 001. Elle n'a aucun effet sur la campagne. | Hadley's Hope en activité, quelques semaines avant la perte de contact. |
+
+### 21.2 Règles de fidélité
+
+1. **Aucune scène d'une œuvre n'est reconstituée telle quelle.** Une mission se déroule à côté, avant ou après : un autre lieu du même monde, une autre équipe, un autre moment.
+2. **Aucun personnage principal d'une œuvre n'apparaît ni n'est joué.** Les personnages proposés sont originaux. Une œuvre peut être citée par ses traces (un journal, une épave, une date).
+3. **Une préquelle ne change pas l'avenir connu.** Le joueur peut sauver des personnes que l'œuvre ne mentionne pas, comprendre une origine, retarder sans empêcher. Ce qui arrive dans l'œuvre arrive quand même.
+4. **Un héritage respecte l'état final de l'œuvre.** Un lieu détruit reste détruit ; on visite ses restes.
+5. **Une archive MIRE est une reconstitution.** Elle est présentée comme un modèle de la compagnie, peut contenir des erreurs, et le jeu le dit. Elle ne remplace pas l'œuvre.
+6. **Une date non confirmée n'est pas inventée.** Si l'année d'une œuvre n'est pas établie dans nos sources, le mode reste **[À DÉCIDER]**.
+7. **Les éléments propres aux Yautja** (AVP) restent à l'état de traces dans ce jeu Aliens (ruines, trophées, armes abandonnées). Leur présence active est **[À DÉCIDER]**.
+
+### 21.3 Chronologie de référence
+
+| Année | Œuvre | Monde du catalogue | Mode en 2204 | Source |
+| --- | --- | --- | --- | --- |
+| 2093 | *Prometheus* (film) | LV-223 | Héritage | Film |
+| après 2093 | *Fire and Stone* (bande dessinée) | LV-223 | Héritage | [Wikipédia — Fire and Stone](https://en.wikipedia.org/wiki/Fire_and_Stone) |
+| 2122 | *Alien* (film) | USCSS Nostromo, Acheron / LV-426 (épave) | Héritage / archive MIRE | Film |
+| 2137 | *Alien: Isolation* (jeu) | Sevastopol (KG-348) | Héritage / archive MIRE | Jeu |
+| 2142 | *Alien: Romulus* (film) | Renaissance Station, Jackson's Star | Héritage / archive MIRE | Film |
+| entre 2122 et 2179 | *Alien: Rogue Incursion* (jeu) | Purdan (Castor's Cradle) | Héritage | [AvP Central — Rogue Incursion](https://www.avpcentral.com/alien-rogue-incursion) |
+| 2179 | *Aliens* (film) | Acheron / LV-426, Gateway Station, Sulaco | Héritage / archive MIRE | Film |
+| 2179 | *Alien 3* (film) | Fiorina 161 | Héritage / archive MIRE | Film |
+| 2202 | *Aliens: Fireteam Elite* (jeu) | LV-895, Katanga | Héritage (deux ans après) | [Wikipédia — Aliens: Fireteam Elite](https://en.wikipedia.org/wiki/Aliens:_Fireteam_Elite) |
+| **2204** | **Aliens: Tantalus Frontier** | Cocyte et Tantalus Reach | — | Code du projet |
+| 2230-2231 | *Aliens versus Predator 2* (jeu) | LV-1201 | **Préquelle** | [Wikipédia — Aliens versus Predator 2](https://en.wikipedia.org/wiki/Aliens_Versus_Predator_2) |
+| 2381 | *Alien Resurrection* (film) | USM Auriga | **Préquelle** | Film |
+| non précisée | *Aliens vs. Predator: Prey* (roman, bande dessinée) | Ryushi | [À DÉCIDER] | [AvP Central — Prey](https://www.avpcentral.com/aliens-vs-predator-prey) |
+| non précisée | *Aliens versus Predator: Extinction* (jeu) | LV-742 | [À DÉCIDER] | [Wikipédia — Extinction](https://en.wikipedia.org/wiki/Aliens_Versus_Predator:_Extinction) |
+| non confirmée | *Aliens vs. Predator* (jeu, 2010) | BG-386 (Freya's Prospect) | [À DÉCIDER] | [AvP Central — AvP 2010](https://www.avpcentral.com/aliens-vs-predator-2010) |
+| non trouvée | — | Ceto, New Galveston, New Albion, Capua VII, Korari | Monde du catalogue sans événement d'œuvre utilisé | Recherche sans résultat confirmé |
+
+Les dates des films sont celles indiquées dans les films eux-mêmes ; elles n'ont pas été revérifiées en ligne pour ce document.
+
+**Note sur Freya's Prospect :** le catalogue en fait un monde distinct (« colonie minière sous glace »), alors que la source consultée décrit Freya's Prospect comme la principale colonie de BG-386. **[À DÉCIDER]** : fusionner, ou garder un monde distinct sous un nom original.
+
+**Note sur les attributs générés :** les biomes et atmosphères des mondes sont tirés automatiquement (`content-core-v50.js`) et contredisent parfois l'œuvre (Sevastopol indiqué « jungle/ruins », par exemple). Les missions de cette partie suivent l'œuvre ; corriger ces attributs pour les mondes de la franchise est **[À DÉCIDER]**.
+
+---
+
+## 22. Opérations Héritage — mondes de la franchise
+
+Chaque monde reçoit une **chaîne** de 2 à 4 missions, disponible après la campagne principale. Durée indicative : 1 h 30 à 3 h par chaîne.
+
+### 22.1 Acheron / LV-426 — `world-01-acheron-lv-426`
+
+**Repères de l'œuvre :** épave non humaine découverte en 2122 ; colonie Hadley's Hope perdue en 2179, détruite avec son processeur atmosphérique.
+**Situation en 2204 :** vingt-cinq ans après. Un cratère, des ruines, une zone que la compagnie surveille toujours de loin.
+
+| ID | Mode | Titre | Résumé | Objectif | Ancrage Alien |
+| --- | --- | --- | --- | --- | --- |
+| `legacy-acheron-1` | Héritage | **Le cratère** | Une équipe de récupération Crucible a disparu dans les ruines du complexe. Descendre dans la zone de l'explosion, parmi les structures fondues et les débris de la colonie. | `rescue survivors` | Lieu fondateur, ruines d'une colonie perdue. |
+| `legacy-acheron-2` | Héritage | **Ce qui a survécu** | Des signes d'activité dans un ancien réseau de drainage, hors du rayon de l'explosion. Établir ce qui vit encore sous la croûte. | `navigate the vent network` | Survivance de l'organisme. |
+| `legacy-acheron-3` | Héritage | **Les balises de la compagnie** | La compagnie a semé des capteurs autour de l'épave d'origine. Les relever révèle ce qu'elle surveille encore, et pour qui (pièce optionnelle du fil QZ17). | `recover black-box data` | La compagnie n'abandonne jamais un actif. |
+| `mire-acheron` | Archive MIRE | **Avant le silence** | Archive 004, détaillée au §26.5 (5 missions). | — | Revivre une colonie avant sa chute. |
+
+**Variante frontalière** `world-33-acheron-lv-426-prime` : voir §25.
+
+### 22.2 LV-223 — `world-02-lv-223`
+
+**Repères des œuvres :** expédition de 2093 sur un site des Ingénieurs (*Prometheus*) ; après cela, retour d'expéditions qui trouvent une planète transformée par la substance noire (*Fire and Stone*).
+**Situation en 2204 :** monde transformé, épaves anciennes, laboratoires des Ingénieurs.
+
+| ID | Mode | Titre | Résumé | Objectif | Ancrage Alien |
+| --- | --- | --- | --- | --- | --- |
+| `legacy-lv223-1` | Héritage | **La jungle qui n'aurait pas dû être** | Atterrissage sur un monde que les anciens relevés décrivaient comme stérile. La substance noire l'a couvert d'une vie anarchique. Établir un camp et relever la faune. | `track an apex specimen` | Pathogène accélérateur d'évolution. |
+| `legacy-lv223-2` | Héritage | **Le dôme scellé** | Une structure des Ingénieurs, rouverte par la végétation. À l'intérieur : des cuves vides et des fresques. Lien direct avec la campagne 3. | `recover black-box data` | Laboratoire des Ingénieurs. |
+| `legacy-lv223-3` | Héritage | **L'épave mangée** | Une épave humaine ancienne a été absorbée par la jungle. Récupérer son enregistreur avant une équipe de la compagnie. | `board a drifting vessel` | Restes d'une expédition. |
+
+### 22.3 Fiorina 161 — `world-03-fiorina-161`
+
+**Repères de l'œuvre :** colonie pénitentiaire et fonderie, incident de 2179.
+**Situation en 2204 :** installation fermée, fonderie froide, bâtiments abandonnés.
+
+| ID | Mode | Titre | Résumé | Objectif | Ancrage Alien |
+| --- | --- | --- | --- | --- | --- |
+| `legacy-fury-1` | Héritage | **La fonderie froide** | Des récupérateurs veulent démonter la fonderie. Ils ont réveillé quelque chose dans les galeries du réseau de refroidissement. | `navigate the vent network` | Huis clos industriel. |
+| `legacy-fury-2` | Héritage | **L'infirmerie** | Les archives médicales de l'installation sont toujours là. Une équipe militaire réclame les échantillons biologiques conservés. | `recover black-box data` | Échantillons convoités. |
+| `mire-fury` | Archive MIRE | **La fonderie** | Archive 005, détaillée au §26.6 (4 missions). | — | Installation en activité. |
+| `prequel-fury-auriga` | Préquelle (2381) | **Les échantillons** | Suite directe : l'équipe militaire emporte les échantillons, quoi que fasse le joueur. Il peut seulement savoir **qui** les prend et noter le nom d'un programme militaire. *Alien Resurrection* (2381) part d'échantillons prélevés sur Fiorina 161 ; le jeu ne dit pas lesquels. | `hold the extraction zone` | Préquelle : l'avenir connu ne change pas. |
+
+### 22.4 Sevastopol — `world-04-sevastopol`
+
+**Repères de l'œuvre :** station commerciale Seegson en orbite de KG-348, incident de 2137.
+**Situation en 2204 :** la station n'existe plus en tant que telle ; restent des débris en orbite du géant gazeux.
+
+| ID | Mode | Titre | Résumé | Objectif | Ancrage Alien |
+| --- | --- | --- | --- | --- | --- |
+| `legacy-sevastopol-1` | Héritage | **Le champ de débris** | Naviguer dans les débris en orbite basse de KG-348 pour récupérer un module de serveur Seegson encore alimenté. | `board a drifting vessel` | Épave orbitale. |
+| `legacy-sevastopol-2` | Héritage | **Les synthétiques de Seegson** | Le module contient des synthétiques de service hors service. L'un se réveille sur une ancienne consigne. Lien avec la campagne 2. | `recover a synthetic` | Synthétiques Seegson. |
+| `mire-sevastopol` | Archive MIRE | **Le dernier quart** | Archive 002, détaillée au §26.3 (4 missions). | — | Station en activité. |
+
+### 22.5 USCSS Nostromo — `world-15-uscss-nostromo`
+
+**Repères de l'œuvre :** remorqueur commercial, incident de 2122, vaisseau détruit.
+**Situation en 2204 :** aucun vaisseau à visiter. L'opération existante **Mire Archive 001** (rejouer les événements du Nostromo, score de synchronisation, sauvegarde isolée) reste le seul accès.
+
+| ID | Mode | Titre | Résumé | Objectif | Ancrage Alien |
+| --- | --- | --- | --- | --- | --- |
+| `mire-nostromo` | Archive MIRE | **Mire Archive 001** | Chapitre existant **[PARTIEL]**, conflit avec les règles de fidélité et options au §26.2. | — | Archive historique. |
+| `legacy-nostromo-1` | Héritage | **La route de Zeta** | Retrouver, le long de la route commerciale, une balise de navigation datant de l'époque du remorqueur. Elle contient un fragment de journal de bord. | `recover black-box data` | Héritage par les traces. |
+
+### 22.6 Jackson's Star et Renaissance Station — `world-12-jackson-s-star`, `world-13-renaissance-station`
+
+**Repères de l'œuvre :** colonie minière de Jackson's Star et station de recherche Renaissance, incident de 2142.
+**Situation en 2204 :** la station est perdue ; la colonie a continué ou s'est éteinte selon ce que le projet décide **[À DÉCIDER]**.
+
+| ID | Mode | Titre | Résumé | Objectif | Ancrage Alien |
+| --- | --- | --- | --- | --- | --- |
+| `legacy-jackson-1` | Héritage | **Sous la pluie** | Une colonie minière où il ne fait jamais jour. Les contrats de travail sont toujours prolongés d'office. Escorter un convoi de mineurs qui veulent partir. | `escort a colony convoy` | Colons liés par contrat. |
+| `legacy-renaissance-1` | Héritage | **Dans les anneaux** | Chercher des débris de la station dans les anneaux de la planète. Un module de laboratoire est intact. | `board a drifting vessel` | Laboratoire de la compagnie. |
+| `mire-renaissance` | Archive MIRE | **Avant les anneaux** | Archive 003, détaillée au §26.4 (4 missions). | — | Station de recherche. |
+
+### 22.7 USM Auriga — `world-14-usm-auriga`
+
+**Repères de l'œuvre :** vaisseau-laboratoire militaire, incident de 2381.
+**Situation en 2204 :** **préquelle**. L'Auriga n'existe pas encore sous cette forme ; ce qui existe, ce sont les programmes militaires qui y mèneront.
+
+| ID | Mode | Titre | Résumé | Objectif | Ancrage Alien |
+| --- | --- | --- | --- | --- | --- |
+| `prequel-auriga-1` | Préquelle | **Le chantier militaire** | Un chantier militaire d'où partira, longtemps après, un vaisseau-laboratoire. Une équipe scientifique y conserve des échantillons issus de Fiorina 161 (lien `prequel-fury-auriga`). Le Tantalus livre une cargaison scellée sans pouvoir l'ouvrir. | `escort a colony convoy` | Préquelle : origine d'un programme futur. |
+| `prequel-auriga-2` | Préquelle | **Les premiers essais** | Une alerte de confinement dans un module du chantier. L'éteindre sans que rien ne sorte ; le programme continue. | `escape the quarantine` | Le programme militaire est plus fort que l'incident. |
+
+**[À DÉCIDER]** Le catalogue présente l'Auriga comme un lieu jouable en 2204 ; ce document le traite comme un chantier en préquelle.
+
+### 22.8 Sulaco — `world-16-sulaco-drift`
+
+**Repères de l'œuvre :** vaisseau des Marines coloniaux associé aux événements de 2179. Son sort après 2179 varie selon les œuvres ; ce document n'en utilise aucune.
+**Situation en 2204 :** « épave militaire et baies de largage » d'après le catalogue.
+
+| ID | Mode | Titre | Résumé | Objectif | Ancrage Alien |
+| --- | --- | --- | --- | --- | --- |
+| `legacy-sulaco-1` | Héritage | **Les baies de largage** | Une épave militaire en orbite d'Acheron, pillée à moitié. Récupérer du matériel des Marines pour l'armurerie du Tantalus. | `board a drifting vessel` | Matériel des Marines. |
+| `legacy-sulaco-2` | Héritage | **La quarantaine du bord** | Un module de la soute est scellé depuis des années. L'ouvrir ou le laisser. | `escape the quarantine` | Ce qu'on scelle reste dangereux. |
+
+**[À DÉCIDER]** Identifier l'épave comme le Sulaco lui-même, ou comme un vaisseau de la même classe, pour éviter toute contradiction avec les œuvres.
+
+### 22.9 Gateway Station — `world-17-gateway-station`
+
+**Repères de l'œuvre :** station orbitale près de la Terre, siège d'audiences en 2179.
+**Situation en 2204 :** station **en activité**. C'est le lieu naturel de l'audience de l'ICC dans la fin « Le dossier » (§18.8).
+
+| ID | Mode | Titre | Résumé | Objectif | Ancrage Alien |
+| --- | --- | --- | --- | --- | --- |
+| `active-gateway-1` | En activité | **L'audience** | Présenter le dossier QZ17 devant l'ICC. Mission sans combat : choisir quelles pièces présenter, répondre aux avocats de la compagnie. Le résultat dépend des pièces réunies (§19). | `recover black-box data` | La compagnie se défend par le droit. |
+| `active-gateway-2` | En activité | **Les quais civils** | Un témoin (Tomas Wren, Rask ou Szabo selon les campagnes faites) doit atteindre la salle d'audience. Des agents de sécurité privés essaient de l'en empêcher, sans arme visible. | `escort a colony convoy` | Intimidation corporative. |
+
+### 22.10 LV-895 et Katanga — `world-06-lv-895`, `world-07-katanga`
+
+**Repères de l'œuvre (2202) :** sur LV-895, la compagnie a trouvé des œufs et du Pathogène ; la station de raffinage Katanga, en orbite, a été détruite ; des stocks de Pathogène et des organismes restent en surface ; Weyland-Yutani et Hyperdyne envoient des forces pour revendiquer la planète.
+**Situation en 2204 :** deux ans après. Course entre compagnies.
+
+| ID | Mode | Titre | Résumé | Objectif | Ancrage Alien |
+| --- | --- | --- | --- | --- | --- |
+| `legacy-lv895-1` | Héritage | **Deux compagnies** | Les équipes de W-Y et d'Hyperdyne se disputent un site de surface. L'Administration demande au Tantalus de constater, pas de choisir. | `hold the extraction zone` | Rivalité de compagnies. |
+| `legacy-lv895-2` | Héritage | **Les stocks** | Localiser un stock de Pathogène abandonné avant les deux équipes. Lien avec la campagne 4. | `seal the hive` | Pathogène convoité. |
+| `mire-katanga` | Archive MIRE | **Poste de nuit** | Archive 006, détaillée au §26.7 (4 missions). | — | Station en activité. |
+| `legacy-katanga-1` | Héritage | **Ce qui reste de Katanga** | Les débris de la station de raffinage sont retombés en orbite basse. Fouiller un fragment pour retrouver des données de production. | `board a drifting vessel` | Épave d'une station infestée. |
+
+### 22.11 Purdan — `world-09-purdan`
+
+**Repères de l'œuvre :** installation Castor's Cradle de Gemini Exoplanet Solutions, entre *Alien* et *Aliens* ; la source consultée laisse son sort final ouvert.
+**Situation en 2204 :** des décennies plus tard ; état de l'installation **[À DÉCIDER]**.
+
+| ID | Mode | Titre | Résumé | Objectif | Ancrage Alien |
+| --- | --- | --- | --- | --- | --- |
+| `legacy-purdan-1` | Héritage | **L'installation fermée** | Une balise automatique s'est rallumée sur Purdan. Descendre vérifier une installation abandonnée depuis longtemps. Ce qu'on y trouve dépend de la décision du projet sur son sort. | `recover black-box data` | Installation corporative oubliée. |
+| `legacy-purdan-2` | Héritage | **Les ruines xénobiologiques** | Explorer des ruines anciennes décrites par le catalogue. | `track an apex specimen` | Ruines anciennes. |
+
+### 22.12 LV-1201 — `world-20-lv-1201`
+
+**Repères de l'œuvre :** colonie de recherche Weyland-Yutani, « Incident » du 25 novembre 2230, Marines arrivés environ six semaines plus tard (AVP2).
+**Situation en 2204 :** **préquelle** de 26 ans. Les sources consultées ne donnent pas la date de fondation de la colonie.
+
+| ID | Mode | Titre | Résumé | Objectif | Ancrage Alien |
+| --- | --- | --- | --- | --- | --- |
+| `prequel-lv1201-1` | Préquelle | **Le relevé** | Escorter une équipe de relevé de la compagnie dans une jungle de temples. Elle cherche un site pour une future installation. Les guides locaux du relevé meurent un par un, sans témoin. | `escort a colony convoy` | Préquelle : premiers signes d'un monde dangereux. |
+| `prequel-lv1201-2` | Préquelle | **Les temples** | Trouver l'origine des disparitions dans un temple ancien : des traces d'une présence non humaine qui n'est pas l'organisme (trophées, marques). Le rapport du joueur est classé par la compagnie ; l'installation sera construite quand même. | `recover black-box data` | La compagnie ignore les avertissements. |
+
+### 22.13 BG-386 — `world-21-bg-386`
+
+**Repères de l'œuvre :** monde minier, colonie de Freya's Prospect, installation secrète de la compagnie bâtie sur des ruines anciennes (AvP 2010). **Année non confirmée dans nos sources : mode [À DÉCIDER].**
+
+| ID | Mode | Titre | Résumé | Objectif | Ancrage Alien |
+| --- | --- | --- | --- | --- | --- |
+| `bg386-1` | [À DÉCIDER] | **La raffinerie** | Une raffinerie de la colonie a cessé d'émettre. Écrite pour fonctionner dans les deux modes : signes avant-coureurs (préquelle) ou ruines (héritage). | `restore atmospheric processing` | Colonie minière. |
+| `bg386-2` | [À DÉCIDER] | **Les pyramides** | Explorer des ruines anciennes sous la jungle, au-dessus desquelles la compagnie a construit. | `recover black-box data` | Ruines anciennes, laboratoire secret. |
+
+### 22.14 Ryushi — `world-23-ryushi`
+
+**Repères de l'œuvre :** monde d'élevage géré par la compagnie Chigusa, colonie de Prosperity Wells, détruite pendant l'incident raconté par *Prey*. **Année non précisée : mode [À DÉCIDER].**
+
+| ID | Mode | Titre | Résumé | Objectif | Ancrage Alien |
+| --- | --- | --- | --- | --- | --- |
+| `ryushi-1` | [À DÉCIDER] | **Les troupeaux** | Un ranch isolé signale des bêtes éventrées. Écrite pour les deux modes. | `defend the colony` | Hôtes animaux, colonie d'éleveurs. |
+| `ryushi-2` | [À DÉCIDER] | **La gorge** | Retrouver une épave non humaine dans une gorge du désert. Ce qu'il en reste dépend du mode retenu. | `board a drifting vessel` | Épave ancienne. |
+
+### 22.15 LV-742 — `world-25-lv-742`
+
+**Repères de l'œuvre :** planète décrite comme terrain de chasse d'une ruche locale (*Extinction*). **Année non précisée : mode [À DÉCIDER].** Le catalogue la décrit comme « station de terraformation assiégée ».
+
+| ID | Mode | Titre | Résumé | Objectif | Ancrage Alien |
+| --- | --- | --- | --- | --- | --- |
+| `lv742-1` | [À DÉCIDER] | **Le siège du terraformeur** | Une station de terraformation tient sous un siège permanent. Ravitailler et évacuer une équipe. | `hold the extraction zone` | Terraformation, siège. |
+| `lv742-2` | [À DÉCIDER] | **Les pièges** | Des organismes tués par une arme qui n'est pas humaine. Établir qui chasse sur ce monde, sans engager. | `track an apex specimen` | Traces d'un autre chasseur. |
+
+---
+
+## 23. Mondes sous licence sans événement d'œuvre utilisé
+
+Ces mondes sont marqués `licensed-continuity` dans le catalogue, mais la recherche faite pour ce document n'a pas confirmé leur source. Leurs missions n'utilisent **aucun événement d'œuvre** et se fondent seulement sur la description du catalogue.
+
+| Monde | ID | Description du catalogue | Mission unique | Mode | Objectif | Ancrage Alien |
+| --- | --- | --- | --- | --- | --- | --- |
+| **Ceto** | `world-10-ceto` | océan, archipels et cité minière | **La cité sur pilotis** : une cité minière d'archipel perd ses foreuses sous-marines une à une. Plonger, réparer, comprendre. | Indépendant | `restore atmospheric processing` | Colonie isolée, menace sous l'eau. |
+| **Freya's Prospect** | `world-11-freya-s-prospect` | colonie minière sous glace | **Sous la glace** : une colonie enfouie sous un glacier n'a plus de chauffage ; les galeries se referment de givre. Rétablir l'énergie avant le gel total. | Indépendant ([À DÉCIDER], §21.3) | `restore atmospheric processing` | Survie technique. |
+| **New Galveston** | `world-18-new-galveston` | ville-colonie et infrastructures profondes | **Les fondations** : sous une ville-colonie, des infrastructures profondes servent de nid. Purger sans alerter une population de dizaines de milliers d'habitants. | Indépendant | `purge a reactor nest` | Infestation sous une ville. |
+| **New Albion** | `world-19-new-albion` | méga-colonie et réseau de métro | **La ligne 9** : une rame de métro arrive vide à chaque station. Descendre dans le réseau. | Indépendant | `navigate the vent network` | Peur urbaine, tunnels. |
+| **Capua VII** | `world-22-capua-vii` | monde agricole et marais | **Les marais** : des ouvriers agricoles disparaissent dans les marais au moment de la récolte. | Indépendant | `rescue survivors` | Hôtes dans une colonie rurale. |
+| **Korari** | `world-24-korari` | forêt hostile et laboratoires abandonnés | **Le laboratoire dans les arbres** : un laboratoire abandonné de la compagnie, envahi par la forêt, émet encore. | Indépendant | `recover black-box data` | Laboratoire abandonné. |
+| **Station Orphée** | `world-08-pioneer-station` | station de recherche et réseau de défense | Lieu de l'arc 3 de la campagne 4 (§17.6). Mission unique hors campagne : **Les satellites** — désactiver un satellite de quarantaine qui vise une route commerciale. | Indépendant | `destroy a neuro-link relay` | Quarantaine armée. |
+
+---
+
+## 24. Mondes originaux du projet — missions hors campagne
+
+Les mondes `project-canon` servent déjà aux campagnes annexes. Chacun reçoit en plus une mission unique, rejouable une fois la campagne terminée.
+
+| Monde | ID | Campagne | Mission unique | Objectif | Ancrage Alien |
+| --- | --- | --- | --- | --- | --- |
+| **MIRE-9** | `world-26-mire-9` | 5 | **Le quartier oublié** : un quartier du labyrinthe que la compagnie n'a jamais ouvert ; des colons y vivent depuis l'évacuation. | `rescue survivors` | Expérience inachevée. |
+| **Echo Basin** | `world-27-echo-basin` | 1 | **Le dernier relais** : reconstruire une tour relais pour couvrir les canyons. | `defend the colony` | Communications, isolement. |
+| **Palimpste** | `world-28-palimpste` | 5 (annexe) | **Les archives** : récupérer un dossier MIRE sur un incident historique, dans des archives instables. | `recover black-box data` | Archives de la compagnie. |
+| **Pallas Rift** | `world-29-pallas-rift` | 4 | **La source** : vérifier que la cavité scellée tient toujours. | `seal the hive` | Pathogène contenu. |
+| **Sable Meridian** | `world-30-sable-meridian` | 2 | **La caravane fantôme** : une caravane sans conducteur circule toujours dans le désert. | `recover a synthetic` | Synthétique resté sur une consigne. |
+| **Nacre-7** | `world-31-nacre-7` | 1 | **Le récif mort** : nettoyer un récif artificiel resté infesté. | `purge a reactor nest` | Lignée récifale. |
+| **Khepri Forge** | `world-32-khepri-forge` | 5 | **Les cages vides** : vérifier qu'aucun broods blindé ne s'est échappé après la campagne. | `track an apex specimen` | Lignée blindée. |
+| **Cocyte** | `world-05-lethe` | Principale | Missions locales de Port-Méridien et d'Asphodèle (§6.2, §7.2). | — | — |
+
+---
+
+## 25. Sites frontaliers — un contrat unique par monde
+
+Le catalogue contient 32 mondes `frontier-adaptation` (IDs 33 à 64) : chacun porte le nom d'un monde suivi d'un suffixe (Prime, Reach, Basin, Drift, Station, Colony, Depths, Frontier). **[PROPOSÉ]** Chaque suffixe désigne un **site secondaire** du même monde, avec un contrat unique. Les sites frontaliers d'un monde de la franchise suivent le mode de ce monde (§21.3).
+
+| ID | Site | Contrat unique | Mode | Objectif |
+| --- | --- | --- | --- | --- |
+| `world-33-acheron-lv-426-prime` | Acheron — plateau principal | **La piste d'atterrissage** : récupérer un cargo de ravitaillement jamais déchargé, resté sur l'ancienne piste. | Héritage | `recover black-box data` |
+| `world-34-lv-223-reach` | LV-223 — périphérie | **Les sondes** : récupérer des sondes de relevé tombées en lisière de jungle. | Héritage | `recover black-box data` |
+| `world-35-fiorina-161-basin` | Fiorina — bassin de déchets | **Le bassin** : sceller un bassin de déchets de fonderie où quelque chose a niché. | Héritage | `seal the hive` |
+| `world-36-sevastopol-drift` | Sevastopol — dérive | **Le module à la dérive** : remorquer un module de la station vers un chantier de récupération. | Héritage | `board a drifting vessel` |
+| `world-37-lethe-station` | Cocyte — station de surface | **Le relais oublié** : rallumer un relais QZ isolé, hors du réseau principal. | Indépendant | `destroy a neuro-link relay` |
+| `world-38-lv-895-colony` | LV-895 — colonie | **Les colons de LV-895** : évacuer une petite colonie prise entre les deux compagnies. | Héritage | `rescue survivors` |
+| `world-39-katanga-depths` | Katanga — profondeurs | **Le fragment profond** : récupérer un fragment de station tombé dans la haute atmosphère. | Héritage | `board a drifting vessel` |
+| `world-40-pioneer-station-frontier` | Orphée — avant-poste | **L'avant-poste** : relever la garnison d'un avant-poste de défense isolé. | Indépendant | `hold the extraction zone` |
+| `world-41-purdan-prime` | Purdan — site principal | **La plate-forme** : sécuriser une plate-forme d'atterrissage abandonnée. | Héritage | `defend the colony` |
+| `world-42-ceto-reach` | Ceto — archipel extérieur | **L'île du phare** : rallumer le phare d'un archipel isolé. | Indépendant | `restore atmospheric processing` |
+| `world-43-freya-s-prospect-basin` | Freya — bassin | **Le lac gelé** : récupérer une foreuse tombée sous la glace. | Indépendant | `secure the power loader` |
+| `world-44-jackson-s-star-drift` | Jackson's Star — dérive | **Le cargo des mineurs** : escorter un cargo de mineurs qui quitte le système sans autorisation. | Héritage | `escort a colony convoy` |
+| `world-45-renaissance-station-station` | Renaissance — module | **Le module froid** : ouvrir un module de laboratoire resté en froid. | Héritage | `escape the quarantine` |
+| `world-46-usm-auriga-colony` | Auriga — colonie du chantier | **Les familles du chantier** : sécuriser les quartiers civils du chantier militaire pendant une alerte. | Préquelle | `defend the colony` |
+| `world-47-uscss-nostromo-depths` | Route de Zeta — profondeurs | **La raffinerie dérivante** : aborder une raffinerie commerciale à la dérive sur la même route. | Indépendant | `board a drifting vessel` |
+| `world-48-sulaco-drift-frontier` | Épave militaire — secteur | **Les capsules** : récupérer des capsules de sauvetage dispersées. | Héritage | `recover black-box data` |
+| `world-49-gateway-station-prime` | Gateway — anneau principal | **Le témoin manquant** : retrouver un témoin disparu dans les quais avant l'audience. | En activité | `rescue survivors` |
+| `world-50-new-galveston-reach` | New Galveston — banlieue | **Les égouts** : purger un nid sous un quartier ouvrier. | Indépendant | `purge a reactor nest` |
+| `world-51-new-albion-basin` | New Albion — bassin | **Le dépôt de rames** : sécuriser un dépôt de métro. | Indépendant | `hold the extraction zone` |
+| `world-52-lv-1201-drift` | LV-1201 — canyon | **Le pont de corde** : escorter des porteurs sur un pont au-dessus d'un canyon. | Préquelle | `escort a colony convoy` |
+| `world-53-bg-386-station` | BG-386 — station | **La station minière** : rétablir l'énergie d'une station minière. | [À DÉCIDER] | `restore atmospheric processing` |
+| `world-54-capua-vii-colony` | Capua VII — colonie | **La moisson** : protéger la récolte et les ouvriers une nuit entière. | Indépendant | `defend the colony` |
+| `world-55-ryushi-depths` | Ryushi — canyons | **Les grottes** : retrouver des éleveurs réfugiés dans des grottes. | [À DÉCIDER] | `rescue survivors` |
+| `world-56-korari-frontier` | Korari — lisière | **La lisière** : établir un poste d'observation à la limite de la forêt. | Indépendant | `track an apex specimen` |
+| `world-57-lv-742-prime` | LV-742 — plaine | **Le convoi de terraformation** : escorter des machines de terraformation. | [À DÉCIDER] | `escort a colony convoy` |
+| `world-58-mire-9-reach` | MIRE-9 — périphérie | **Les caméras** : démonter le réseau de caméras restant. | Indépendant | `destroy a neuro-link relay` |
+| `world-59-echo-basin-basin` | Echo Basin — fond du bassin | **Le lac souterrain** : explorer un lac souterrain sous les canyons. | Indépendant | `navigate the vent network` |
+| `world-60-palimpste-drift` | Palimpste — archives en orbite | **Le satellite d'archives** : récupérer un satellite d'archives MIRE. | Indépendant | `board a drifting vessel` |
+| `world-61-pallas-rift-station` | Pallas Rift — station orbitale | **Le quai de quarantaine** : tenir le quai de quarantaine pendant une évacuation. | Indépendant | `hold the extraction zone` |
+| `world-62-sable-meridian-colony` | Sable Meridian — colonie | **Le puits** : défendre le puits d'eau d'une colonie de caravaniers. | Indépendant | `defend the colony` |
+| `world-63-nacre-7-depths` | Nacre-7 — grands fonds | **La fosse** : plonger dans une fosse pour récupérer une balise. | Indépendant | `recover black-box data` |
+| `world-64-khepri-forge-frontier` | Khepri — avant-poste | **Le dépôt d'armes** : saisir un dépôt d'armes abandonné. | Indépendant | `secure the power loader` |
+
+---
+
+## 26. Archives MIRE — chapitres détaillés — [PROPOSÉ]
+
+### 26.1 Cadre
+
+**Dans la fiction :** le programme MIRE de Weyland-Yutani reconstitue des incidents passés à partir de journaux, de boîtes noires et de témoignages, pour en tirer des protocoles (§18.3). Le Tantalus découvre ses consoles sur MIRE-9 (campagne 5) et peut ensuite les rejouer au laboratoire du Tantalus ou d'Asphodèle.
+
+**Ce que le joueur gagne :** chaque archive terminée donne une **pièce de renseignement** (fil QZ17 ou dossier d'une campagne) et un **protocole** utilisable ailleurs (bonus limité, §26.9). L'archive elle-même n'a aucun autre effet : sauvegarde isolée, aucun membre d'équipage ne peut y être blessé, aucune ressource n'y est gagnée ni perdue.
+
+**Règles propres aux archives :**
+
+1. Le joueur incarne un **personnage original** présent sur place, jamais un personnage de l'œuvre.
+2. L'archive **s'arrête avant** l'événement raconté par l'œuvre : coupure en noir, message `MODÈLE INTERROMPU · DONNÉES INSUFFISANTES`. Ce qui suit appartient à l'œuvre.
+3. Le jeu affiche un **indice de fidélité du modèle** : les zones peu documentées sont visiblement reconstituées (textures moins nettes, mobilier générique), pour rappeler que c'est un modèle de la compagnie.
+4. Les personnages de l'œuvre peuvent être **mentionnés** (un nom sur un planning, une voix lointaine à la radio), jamais montrés ni joués.
+
+### 26.2 Archive 001 — USCSS Nostromo (chapitre existant)
+
+**Statut :** **[PARTIEL]** — opération `mire-archive-001` : « rejouer les événements du Nostromo, personnages dédiés, score de synchronisation et sauvegarde isolée » ; dettes déclarées `complete-nostromo-cast` et `complete-historical-campaign`.
+
+**Conflit à signaler :** ce chapitre, tel que promis par le registre, rejoue les événements de l'œuvre avec ses personnages. Cela contredit les règles 1 et 2 ci-dessus.
+
+**[À DÉCIDER]** Deux options :
+
+| Option | Contenu |
+| --- | --- |
+| **A — Exception assumée** | Garder le chapitre tel quel comme seule archive « historique » ; le présenter comme un modèle imparfait de la compagnie (score de synchronisation = écart au journal de bord). |
+| **B — Archive parallèle** | Le joueur incarne un technicien original de la raffinerie remorquée, pendant le trajet de retour, avant l'escale qui déclenche les événements. Missions : maintenance de la raffinerie, inspection des cuves, panne de liaison, fin à la réception du signal. Le score de synchronisation devient « fidélité du modèle ». |
+
+Recommandation : B, cohérente avec le reste de la Partie III.
+
+### 26.3 Archive 002 — Sevastopol, « Le dernier quart »
+
+| Élément | Contenu |
+| --- | --- |
+| **Lieu et moment** | Station commerciale Seegson en orbite de KG-348, quelques semaines avant l'incident de 2137. |
+| **Rôle joué** | **Yara Okonedo**, technicienne de maintenance Seegson, quartier des transits. |
+| **Durée** | ≈ 1 h 40, 4 missions. |
+| **Fin** | Le réseau de la station bascule en mode de sécurité ; coupure du modèle. |
+| **Mécanique propre** | Rondes de maintenance chronométrées ; synthétiques de service Seegson qui obéissent à des procédures rigides ; aucune arme létale au départ. |
+| **Gain** | Pièce : schéma de mise à jour des synthétiques Seegson (aide la campagne 2) · protocole « procédure Seegson » (les synthétiques Seegson ennemis réagissent plus lentement). |
+
+| # | Titre | Déroulé | Objectif | Durée |
+| --- | --- | --- | --- | --- |
+| M2-1 | **La ronde** | Faire la ronde du quartier des transits : relever trois compteurs, réparer un ascenseur, répondre à un habitant inquiet. Tutoriel du rôle, sans danger. | `restore atmospheric processing` | 20 min |
+| M2-2 | **Les rations** | Le quartier vit de rationnement depuis que la station décline. Escorter une livraison de vivres sans provoquer d'émeute ; un synthétique de service applique la règle à la lettre. | `escort a colony convoy` | 25 min |
+| M2-3 | **Les disparus du niveau bas** | Deux techniciens ne répondent plus. Descendre dans les niveaux techniques ; ne trouver que des signes (conduits ouverts, outils abandonnés). | `navigate the vent network` | 30 min |
+| M2-4 | **Mode de sécurité** | Le réseau verrouille les portes et les synthétiques passent en procédure d'urgence. Ramener trois habitants au refuge du quartier avant le verrouillage complet. Coupure. | `escape the quarantine` | 25 min |
+
+### 26.4 Archive 003 — Renaissance Station, « Avant les anneaux »
+
+| Élément | Contenu |
+| --- | --- |
+| **Lieu et moment** | Station de recherche Renaissance, en orbite de la planète de Jackson's Star, avant l'incident de 2142. |
+| **Rôle joué** | **Ilan Varga**, technicien de laboratoire de nuit. |
+| **Durée** | ≈ 1 h 30, 4 missions. |
+| **Fin** | Alerte de dérive orbitale ; coupure du modèle. |
+| **Mécanique propre** | Chambres froides, gravité artificielle instable dans certains modules, inventaire scientifique. |
+| **Gain** | Pièce : registre de transfert d'échantillons de la station (fil QZ17, origine des méthodes de transport réfrigéré) · protocole « chaîne du froid » (bonus de capture d'organismes vivants). |
+
+| # | Titre | Déroulé | Objectif | Durée |
+| --- | --- | --- | --- | --- |
+| M3-1 | **Le quart de nuit** | Prendre la relève, vérifier les chambres froides et les cultures. Les instruments relèvent de petites variations de température. | `recover black-box data` | 20 min |
+| M3-2 | **La gravité** | Un module perd sa gravité artificielle. Remettre en route les stabilisateurs en traversant un module où les objets flottent. | `restore atmospheric processing` | 25 min |
+| M3-3 | **L'échantillon 14** | Une cuve de l'inventaire est vide sans trace de transfert. Remonter les journaux et les caméras du laboratoire. | `recover black-box data` | 25 min |
+| M3-4 | **Verrouillage** | La station verrouille le laboratoire ; l'alerte d'orbite s'allume. Mettre les données à l'abri dans une capsule de stockage avant la coupure. | `escape the quarantine` | 20 min |
+
+### 26.5 Archive 004 — Acheron / LV-426, « Avant le silence »
+
+| Élément | Contenu |
+| --- | --- |
+| **Lieu et moment** | Colonie Hadley's Hope, quelques semaines avant la perte de contact de 2179. |
+| **Rôle joué** | **Ruben Akintola**, technicien du processeur atmosphérique. |
+| **Durée** | ≈ 2 h, 5 missions. |
+| **Fin** | La colonie n'arrive plus à joindre l'extérieur ; coupure du modèle. |
+| **Mécanique propre** | Vie de colonie (horaires, rations, familles), maintenance du processeur atmosphérique, vent permanent. Aucune créature visible avant M4-4. |
+| **Gain** | Pièce : relevés de maintenance du processeur et ordres de la compagnie reçus par la colonie (fil QZ17 : méthode de la compagnie face aux colonies) · protocole « routine coloniale » (bonus de moral lors des évacuations). |
+
+| # | Titre | Déroulé | Objectif | Durée |
+| --- | --- | --- | --- | --- |
+| M4-1 | **Le vent** | Une journée de travail : traverser la colonie dans la tempête, réparer une conduite du processeur, retour au mess. Tutoriel. | `restore atmospheric processing` | 20 min |
+| M4-2 | **Les familles** | Livrer des pièces à l'école et à l'infirmerie ; rencontrer les colons (personnages originaux). | `escort a colony convoy` | 20 min |
+| M4-3 | **L'infirmerie** | Un patient est amené dans un état que le médecin ne comprend pas. Récupérer du matériel médical dans un entrepôt du quartier technique. | `rescue survivors` | 25 min |
+| M4-4 | **Les conduits du niveau C** | Des ouvriers ne reviennent pas du niveau C. Y descendre avec une lampe et un détecteur de mouvement. Premier contact. | `navigate the vent network` | 30 min |
+| M4-5 | **Plus de réponse** | Les liaisons tombent une par une. Barricader le bloc d'habitation et rassembler les colons. Coupure quand la dernière liaison s'éteint. | `defend the colony` | 25 min |
+
+### 26.6 Archive 005 — Fiorina 161, « La fonderie »
+
+| Élément | Contenu |
+| --- | --- |
+| **Lieu et moment** | Installation pénitentiaire et fonderie de Fiorina 161, avant l'incident de 2179. |
+| **Rôle joué** | **Silas Brennan**, détenu affecté à la fonderie (personnage original). |
+| **Durée** | ≈ 1 h 30, 4 missions. |
+| **Fin** | Alerte d'arrivée d'un objet non identifié ; coupure du modèle. |
+| **Mécanique propre** | Aucune arme ; outils de fonderie ; lumière rare ; la discipline de l'installation. |
+| **Gain** | Pièce : inventaire des archives médicales de l'installation (lien `legacy-fury-2` et `prequel-fury-auriga`) · protocole « fonderie » (bonus contre les ennemis en zone chaude). |
+
+| # | Titre | Déroulé | Objectif | Durée |
+| --- | --- | --- | --- | --- |
+| M5-1 | **Le plomb** | Travail à la fonderie : charger un creuset, faire couler, nettoyer. | `secure the power loader` | 20 min |
+| M5-2 | **Les rats** | Chasser la vermine des réserves avec les autres détenus, à la torche, dans les galeries. | `purge a reactor nest` | 25 min |
+| M5-3 | **Le courrier** | Le service médical attend une livraison qui n'arrive pas. Aller la chercher dans un hangar à moitié abandonné. | `recover black-box data` | 25 min |
+| M5-4 | **La tempête** | Une tempête coupe l'énergie. Remettre en route les générateurs avant la nuit. Coupure à l'alerte d'arrivée. | `restore atmospheric processing` | 20 min |
+
+### 26.7 Archive 006 — Katanga, « Poste de nuit »
+
+| Élément | Contenu |
+| --- | --- |
+| **Lieu et moment** | Station de raffinage Katanga, en orbite de LV-895, avant l'incident de 2202. |
+| **Rôle joué** | **Nadia Ferreira**, opératrice de raffinage. |
+| **Durée** | ≈ 1 h 30, 4 missions. |
+| **Fin** | Perte de contact avec les quais de réception ; coupure du modèle. |
+| **Mécanique propre** | Chaîne de raffinage (vannes, pression, cuves), quais de réception des cargaisons de surface. |
+| **Gain** | Pièce : manifestes de cargaison de surface de LV-895 (lien `legacy-lv895-2`, campagne 4) · protocole « raffinerie » (résistance accrue à la chaleur et à la pression). |
+
+| # | Titre | Déroulé | Objectif | Durée |
+| --- | --- | --- | --- | --- |
+| M6-1 | **La chaîne** | Réguler la pression d'une ligne de raffinage. Tutoriel des vannes. | `restore atmospheric processing` | 20 min |
+| M6-2 | **Le cargo de surface** | Réceptionner une cargaison venue de la surface ; ses scellés ne correspondent pas au manifeste. | `recover black-box data` | 25 min |
+| M6-3 | **La soute 4** | La soute de réception ne répond plus. Y aller avec un chargeur. | `secure the power loader` | 25 min |
+| M6-4 | **Plus de quais** | Les quais de réception tombent ; évacuer les opérateurs vers le module central. Coupure. | `escape the quarantine` | 20 min |
+
+### 26.8 Archives et chronologie
+
+| Archive | Œuvre de référence | Année de l'œuvre | L'archive s'arrête… |
+| --- | --- | --- | --- |
+| 001 Nostromo | *Alien* | 2122 | selon l'option retenue (§26.2) |
+| 002 Sevastopol | *Alien: Isolation* | 2137 | au passage en mode de sécurité |
+| 003 Renaissance | *Alien: Romulus* | 2142 | à l'alerte de dérive orbitale |
+| 004 Acheron | *Aliens* | 2179 | à la perte de la dernière liaison |
+| 005 Fiorina 161 | *Alien 3* | 2179 | à l'alerte d'arrivée |
+| 006 Katanga | *Aliens: Fireteam Elite* | 2202 | à la perte des quais de réception |
+
+### 26.9 Protocoles MIRE
+
+Un protocole s'équipe au briefing, un seul à la fois, et n'est jamais obligatoire.
+
+| Protocole | Effet proposé | Source |
+| --- | --- | --- |
+| Procédure Seegson | Synthétiques Seegson ennemis : temps de réaction +20 % | Archive 002 |
+| Chaîne du froid | Capture d'organisme vivant : délai +15 s | Archive 003 |
+| Routine coloniale | Moral des civils escortés : perte réduite | Archive 004 |
+| Fonderie | Dégâts reçus en zone chaude réduits | Archive 005 |
+| Raffinerie | Résistance à la chaleur et à la pression | Archive 006 |
+
+Les valeurs sont des propositions de conception, à équilibrer en test.
+
+---
+
+## 27. Intégration de la Partie III — [PROPOSÉ]
+
+### 27.1 Déblocage
+
+| Contenu | Condition |
+| --- | --- |
+| Chaînes Héritage (§22) | Fin de la campagne principale ; chaque chaîne se débloque à la première visite du monde sur la carte galactique. |
+| Archives MIRE (§26) | Après l'arc 1 de la campagne 5 (découverte du programme MIRE). |
+| Préquelles (§22.3, §22.7, §22.12) | Fin de la campagne principale ; `prequel-fury-auriga` après `legacy-fury-2`. |
+| Gateway (§22.9) | Fin de la campagne 5 avec la fin « Le dossier ». |
+| Missions §23-§25 | Visite du monde sur la carte galactique. |
+
+### 27.2 Persistance
+
+- Les archives MIRE utilisent une **sauvegarde isolée**, comme Mire Archive 001 : aucun effet sur l'équipage, les ressources ou la campagne.
+- Les autres missions suivent le raccordement du §11 (récompenses versées dans la transaction de résolution, tests de parcours et de reprise).
+
+### 27.3 Synthèse
+
+| Section | Mondes | Missions |
+| --- | --- | --- |
+| §22 Opérations Héritage, préquelles et Gateway | 17 mondes en 15 chaînes | 33 (hors renvois aux archives) |
+| §26 Archives MIRE | 6 lieux | 25 (dont Nostromo selon l'option du §26.2 : 4 missions en option B) |
+| §23 Mondes sous licence sans événement utilisé | 7 | 7 |
+| §24 Mondes originaux du projet | 8 | 7 (Cocyte renvoie aux §6-§7) |
+| §25 Sites frontaliers | 32 | 32 |
+| **Total** | **64 mondes du catalogue** | **104 missions** (79 sur les mondes, 25 en archives MIRE) |
+
+### 27.4 Points ouverts de la Partie III
+
+| # | Question | Section |
+| --- | --- | --- |
+| 10 | Mode des mondes sans année confirmée : BG-386, Ryushi, LV-742. | §21.3 |
+| 11 | Freya's Prospect : monde distinct ou colonie de BG-386 ? | §21.3 |
+| 12 | Corriger les biomes et atmosphères générés des mondes de la franchise ? | §21.3 |
+| 13 | Présence active des Yautja dans les missions AVP, ou traces seulement ? | §21.2 |
+| 14 | État de Jackson's Star et de Purdan en 2204. | §22.6, §22.11 |
+| 15 | Épave de la §22.8 : le Sulaco lui-même ou un vaisseau de même classe ? | §22.8 |
+| 16 | Auriga : chantier en préquelle plutôt que lieu jouable en 2204 ? | §22.7 |
+| 17 | Mire Archive 001 : exception assumée (A) ou archive parallèle (B) ? | §26.2 |
+
+
+---
+
+# PARTIE IV — Besoins de production
+
+## 28. Méthode
+
+### 29.1 Statuts
+
+| Statut | Signification |
+| --- | --- |
+| **[PRÉSENT]** | Un fichier portant ce nom existe dans `assets/` (chemin indiqué). **Sa présence ne prouve ni son intégration au runtime, ni sa validation** (pivots, pieds, échelle, animation). |
+| **[DETTE]** | L'art manquant est déjà déclaré dans le code (limites de `special-operations-v131.js`, `HIVE_ART_DEBT_V131`). |
+| **[CODE]** | La mécanique existe dans le code (module cité) ; seul l'habillage peut manquer. |
+| **[À CRÉER]** | Rien de correspondant n'a été trouvé dans `assets/` ni dans le code. |
+
+Les fichiers de `assets/user/` sont des **références** fournies par le propriétaire, pas des assets de jeu : ils ne comptent pas comme [PRÉSENT].
+
+### 29.2 Catégories
+
+| Catégorie | Contenu | Format attendu dans ce moteur |
+| --- | --- | --- |
+| **Décors** | Fonds de zone en trois couches (lointain, intermédiaire, premier plan) | Comme `assets/openai/metroidvania/zones/*-far/-mid/-foreground.png` |
+| **Props** | Objets posés, interactifs ou non (caisses, consoles, portes, machines) | PNG RGBA, atlas possibles |
+| **Personnages** | PNJ et rôles joués : planche de déplacement et planche de mission | Comme `assets/openai/sprites/npcs/*-locomotion-sheet.png` et `*-mission-sheet.png` |
+| **Ennemis** | Planche d'actions (déplacement, attaque, dégâts, mort) | Comme `assets/openai/sprites/enemies/*-action-sheet*.png` |
+| **Véhicules** | Sprite natif et états | Comme `assets/openai/equipment/v121-vehicles/*-native-v121.png` |
+| **Animations** | Poses nouvelles pour le joueur, les PNJ ou les ennemis | Planches ou pièces de rig (`rig-v165`) |
+| **VFX** | Effets visuels (feu, acide, vapeur, étincelles, eau) | Cycles comme `assets/openai/metroidvania/hazards/*-cycle.png` |
+| **Actions** | Verbes de jeu à implémenter ou à étendre | Code + invites d'interaction |
+| **Cinématiques** | Plans fixes, panoramiques, cadres de dialogue | Images de plan + portraits (`npc-dialogue-portraits-v168.js`) |
+
+### 29.3 Socle déjà présent (réutilisé partout)
+
+**Équipage du Tantalus — [PRÉSENT]** : planches de déplacement et de mission pour les 16 membres (`assets/openai/sprites/npcs/` : `mara-vega`, `tamsin-velez`, `echo-a`, `david-8r`, `asha-mbaye`, `leila-s-rensen`, `noor-okafor`, `bishop-9`, `inez-harlow`, `sanaa-doyle`, `pablo-reyes`, `cal-mercer`, `maksim-orlov`, `idris-kwan`, `jun-park`, `rook`).
+
+**Ennemis — [PRÉSENT]** (`assets/openai/sprites/enemies/`) : drone (`xenomorph-drone-combat-sheet`, `xenomorph-drone-locomotion-sheet`), guerrier (`xenomorph-warrior-*`), runner, lurker, praetorian, spitter, crusher, boiler, burster, carrier, ravager, prowler, reine (`xenomorph-queen-action-sheet-v56`, `xenomorph-queen-combat-sheet`), facehugger (`facehugger-locomotion-sheet`), chestburster, cycle de l'œuf (`ovomorph-cycle-sheet`), néomorphe (`neomorph-locomotion-sheet`), protomorph, `deacon-line`, `pathogen-mimic`, `abomination-pathogen-brute`, synthétique Seegson (`working-joe-combat-sheet`, `seegson-security`), commando W-Y (`weyland-yutani-commando`), UPP (`upp-vanguard`), cultiste (`cult-host`), ATARAX (`atarax-controller`, `atarax-ripper`), `ripper-queen`, `siege-royal`, récifaux (`ceto-reef-predator`, `reef-spitter`, `reef-stalker`), fonderie (`foundry-crusher`, `foundry-drone`), `korari-stalker`, `caravan-stalker`, `dust-runner`, `tantalus-tunnel-vermin`, `wild-boar-host`, `trilobite-echo`, `pale-crucible-hunter`, `salvage-hive-brute`, `colonial-raider`, `neuro-xeno-drone`.
+
+**Véhicules — [PRÉSENT]** (`assets/openai/equipment/v121-vehicles/` et voisins) : `echo-9-recon-bike`, `ceto-patrol-boat`, `reef-hydrofoil`, `crucible-caravan-crawler`, `combat-power-loader`, `ripper-siege-loader`, `uscm-assault-gunship`, `orbital-lifeboat`, `atmospheric-processor-elevator`, `weyland-yutani-executive-shuttle`, `hyperdyne-synthetic-carrier`, `mining-bore-crawler`, `seegson-maintenance-tram`, `maglev-personnel-car`, `ice-driller`, `colony-cargo-lifter`, `neuro-xeno-transport-rig`, `tantalus-command-skiff`, `ua-571-remote-sentry-carrier`, `upp-combat-aerodyne` ; `p5000-work-loader-native-v120`.
+
+**Armes utiles aux scénarios — [PRÉSENT]** : `m41a-pulse-rifle`, `m56-smartgun`, `m240-incinerator`, `ua-571c-sentry`, `cutting-torch`, `harpoon-gun`, `sonic-harpoon`, `reef-caster`, `cryo-lance`, `pathogen-containment-projector`, `neuro-link-disruptor`, `stun-baton`, `maintenance-jack`, `fire-axe`.
+
+**Props de mission — [PRÉSENT]** (`assets/openai/metroidvania/props/`) : `acid-floor-hazard`, `breakable-panel`, `cargo-cover`, `ceiling-cables`, `drop-platform`, `electrical-arc-hazard`, `floor-segment`, `foreground-pipes`, `locked-bulkhead`, `open-bulkhead`, `maintenance-pipe`, `overhead-catwalk`, `short-ledge`, `supply-crates`, `vent-entrance`, `wall-ladder`, `warning-lamp`, `mission-door-states-v58`, `tantalus-traversal-kit-atlas`.
+
+**Terminaux — [PRÉSENT]** : `colony-medical-archive-terminal-sheet`, `planet-field-archive-beacon-sheet`, `ship-command-archive-terminal-sheet`.
+
+**Objets ramassables — [PRÉSENT]** (`drops/`) : munitions, armure, médikit, récupération, clé de sécurité.
+
+**Dangers et VFX — [PRÉSENT]** (`hazards/`) : obscurité, feu, eau (vaguelettes, ligne d'eau), radiation, jet de vapeur, brèche de vide, givre ; planche `combat-vfx-animation-sheet.png`.
+
+**Décors de zone — [PRÉSENT]** (`zones/`) : soute, commandement, quais, ingénierie, extraction, habitat (vaisseau), colonie multi-routes, extérieur planétaire ; fonds de mission du Tantalus.
+
+**Mécaniques — [CODE]** : nage (`swim`), soudure de portes (`weld`), transport d'objets (`carry`), conduits (`vent`), échelles et escalade, grappin (`grapple`), chargeur (`loader`), pilotage, cryostase, détecteur de mouvement (`motion-tracker-v160.js`), corps à corps, lancer de grenade, réanimation (`revive`), soudure, acide persistant, routage d'énergie, caméras (systèmes de survie).
+
+**Mécaniques absentes du code — [À CRÉER]** : apesanteur ou gravité faible, piratage de terminal (aucune occurrence `hack`), jauge de contamination, test biologique de survivant, infiltration phéromonale hors chapitre Jeri, dialogue à choix d'audience (Gateway).
+
+---
+
+## 29. Campagne principale — besoins par mission
+
+### 30.1 Prologue
+
+| Mission | Décors | Props | Personnages / ennemis | Animations | VFX | Actions | Cinématique |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| CIN-00 Ouverture | Relais QZ-18 sous la pluie **[À CRÉER]** ; orbite avec Asphodèle **[À CRÉER]** ; Tantalus en orbite **[À CRÉER]** | Pupitre de relais, badge **[À CRÉER]** | Main hors champ **[À CRÉER]** | Écran qui passe en `EN ATTENTE` **[À CRÉER]** | Pluie **[À CRÉER]** ; voyant rouge | — | 8 plans **[À CRÉER]** |
+| P-1 Réveil | Baie cryo **[PRÉSENT]** (hub) | Casier `ECHO-8` scellé **[À CRÉER]** | DAVID-8R **[PRÉSENT]** | Sortie de caisson **[CODE]** (onboarding) | Givre de caisson **[À CRÉER]** | Interagir avec le casier **[À CRÉER]** | CIN-01 (1 plan) **[À CRÉER]** |
+| P-2 Pas de tir | Pas de tir **[PRÉSENT]** (`hub/proving-ground`) | — | Velez **[PRÉSENT]** | — | Écran de liaison qui reçoit un paquet de messages **[À CRÉER]** | — | — |
+| CIN-02 Briefing | Salle de briefing **[PRÉSENT]** (hub) | Carte holographique de Cocyte et d'Asphodèle **[À CRÉER]** | Vega, Harlow, Velez **[PRÉSENT]** | Geste de pointage sur la carte **[À CRÉER]** | — | — | 4 plans, portraits **[PRÉSENT]** |
+| P-3 Quai des vivants | Port-Méridien **[CODE]** (`port-meridien-v90.js`) | Lot médical, batterie de sas | Tomas Wren, Lucia Ferro **[À CRÉER]** ; blessé à poitrine bandée **[À CRÉER]** | Blessé allongé, respiration **[À CRÉER]** | — | Choix lot/batterie **[CODE]** | — |
+
+### 30.2 Actes de l'enquête
+
+| Mission | Décors | Props | Personnages / ennemis | Animations | VFX | Actions |
+| --- | --- | --- | --- | --- | --- | --- |
+| Acte I · QZ-17 | Intérieur vertical **[CODE]** ; quais sous la pluie **[À CRÉER]** | Conteneur réfrigéré « échantillons géologiques » givré **[À CRÉER]** ; berceau ouvert de l'intérieur, fixations **[À CRÉER]** ; PDA, chariot FL-09 **[CODE]** (collectables V68) | Facehugger **[PRÉSENT]** ; drone **[PRÉSENT]** | Facehugger sautant d'un berceau **[À CRÉER]** | Givre qui fond, marque d'acide sur paroi **[À CRÉER]** ; `acid-floor-hazard` **[PRÉSENT]** | Choix de piste **[CODE]** |
+| CIN-10, CIN-11 | Dropship en approche **[À CRÉER]** | — | Orlov, Rook **[PRÉSENT]** | — | Pluie | — |
+| Acte II · QZ-18 | Relais QZ-18 **[CODE]** | Six pièces, poste d'analyse **[CODE]** | Inez, Rook, MU/TH/UR **[PRÉSENT]** | — | — | Lecture, comparaison **[CODE]** |
+| CIN-20 Treize minutes | Salle des quartiers du Tantalus **[PRÉSENT]** | Liste de noms à l'écran **[À CRÉER]** | Asha **[PRÉSENT]** | Lecture à voix haute (pose assise) **[À CRÉER]** | — | — |
+| Acte III · M577 et C-12 | Corridor, C-12 **[CODE]** | Écran de manifeste fret/passagers **[À CRÉER]** ; conteneurs scellés à bord **[À CRÉER]** | Hordes, Crushers, Reine **[CODE]** (`apc-convoy-state-v121.js`) ; ouvriers de C-12 **[À CRÉER]** | Conteneur qui tressaute **[À CRÉER]** | — | Curseur fret/passagers **[À CRÉER]** |
+| CIN-31 | Hangar du Tantalus **[PRÉSENT]** | Écran `CONTRÔLE BIOLOGIQUE · 1 ANOMALIE` **[À CRÉER]** | Colons descendant de la rampe **[À CRÉER]** | Marche en file **[À CRÉER]** | — | — |
+| Interlude · Quarantaine | Ponts 2-3 du Tantalus **[PRÉSENT]** ; conduits **[PRÉSENT]** (`hub/vents`) | Conteneur ouvert en quarantaine **[À CRÉER]** | Créature à bord : drone ou chestburster **[PRÉSENT]** ; Jun Park blessé **[À CRÉER]** (pose) | Jun coincé dans un conduit **[À CRÉER]** | Alarme rouge de pont **[À CRÉER]** | Soudure, routage, caméras **[CODE]** ; capture d'organisme **[À CRÉER]** |
+| CIN-40, CIN-41 | Support-vie, labo **[PRÉSENT]** | Journal de quarantaine à l'écran **[À CRÉER]** | BISHOP-9, Inez **[PRÉSENT]** | — | — | — |
+| Acte IV · Cocon noir | Galeries colonisées **[CODE]** | Berceaux QZ17 vides **[À CRÉER]** ; cocons humains avec badges **[DETTE]** (`dedicated-cocoon-bitmap-corpus`) ; enregistreur d'Asphodèle **[À CRÉER]** | Drones, guerriers **[PRÉSENT]** | Caméra casque dégradée (CIN-50) **[À CRÉER]** | Bruit vidéo, coupure **[À CRÉER]** | Couper la résine **[CODE]** |
+| CIN-51 Contrôle | Baie médicale **[PRÉSENT]** | Scanner corporel **[À CRÉER]** | Noor **[PRÉSENT]** | Passage dans le scanner **[À CRÉER]** | Balayage lumineux **[À CRÉER]** | — |
+| Acte V · Non viable | Complexe, route, pont, murs du port **[À CRÉER]** | Pont qui cède, remorques fret/colons **[À CRÉER]** | Commandos W-Y **[PRÉSENT]** ; Reine du dépôt (poursuite) **[À CRÉER]** | Reine qui court derrière l'APC **[À CRÉER]** | Effondrement du pont, poussière **[À CRÉER]** | Course APC **[CODE]** (base) ; largage de remorque **[À CRÉER]** ; face-à-face sans tir **[À CRÉER]** |
+| CIN-60, CIN-61 | Sortie du complexe sous la pluie **[À CRÉER]** ; portes du port **[À CRÉER]** | Compteur de colons **[À CRÉER]** | Rook **[PRÉSENT]** ; foule de colons **[À CRÉER]** | — | Pluie | — |
+| Épilogue | Tantalus, Port-Méridien, Asphodèle | Étiquette du casier `RETOUR CONFIRMÉ` / `POSTE LIBÉRÉ` **[À CRÉER]** | Tous **[PRÉSENT]** | — | — | Visite libre **[CODE]** |
+
+### 30.3 Front colonie — Port-Méridien
+
+**Socle de l'arc [À CRÉER] :** décor de colonie portuaire en trois couches (quais, salle commune, infirmerie, processeur atmosphérique, mur nord, entrepôt) ; PNJ Adèle Sarrazin, Tomas Wren, Lucia Ferro, colons génériques (4 silhouettes au moins) ; table de reconstruction (prop + interface).
+
+| Mission | Props spécifiques | Personnages / ennemis | Animations | VFX | Actions |
+| --- | --- | --- | --- | --- | --- |
+| La doyenne | Registre de dettes à l'écran **[À CRÉER]** | Adèle **[À CRÉER]** | Marche guidée **[CODE]** | — | Dialogue guidé **[CODE]** |
+| C1 Tenir le port | Conteneur QZ17-04 ouvert **[À CRÉER]** ; lits d'infirmerie **[À CRÉER]** | Drones, runners **[PRÉSENT]** ; blessés à évacuer **[À CRÉER]** | Brancardage (deux porteurs) **[À CRÉER]** | Étincelles de soudure **[À CRÉER]** | Soudure **[CODE]** ; transport de blessé **[CODE]** (`carry`) |
+| C2 L'air du port | Machinerie du processeur (turbines, conduites) **[À CRÉER]** ; `atmospheric-processor-elevator` **[PRÉSENT]** | Drones, nid **[PRÉSENT]** ; Jun Park **[PRÉSENT]** | — | Air chaud, vapeur **[PRÉSENT]** (`steam-jet-cycle`) | Relance du processeur **[À CRÉER]** |
+| C3 Convoi des rescapés | Poste de contrôle biologique **[À CRÉER]** | Ouvriers arrivants **[À CRÉER]** ; chestburster **[PRÉSENT]** | Porteur qui se tient la poitrine **[À CRÉER]** | — | Test biologique **[À CRÉER]** ; repérage discret **[À CRÉER]** |
+| C4 Culte du port | Autel improvisé, symboles **[À CRÉER]** | Cultiste **[PRÉSENT]** (`cult-host`, visuel à refaire, §1.5) | Ouverture furtive de sas **[À CRÉER]** | — | Enquête **[CODE]** (méthode V122) ; choix de sanction **[À CRÉER]** |
+| C5 Nuit des murs | Murs, tourelles par niveau de chantier **[À CRÉER]** ; `ua-571c-sentry` **[PRÉSENT]** | Vagues mixtes **[PRÉSENT]** | — | Projecteurs, fusées éclairantes **[À CRÉER]** | Défense par vagues **[CODE]** ; aube (transition) **[À CRÉER]** |
+| Annexes (7) | Carnets de quai, dossiers médicaux, abri pressurisé, entrepôt Seegson, balise de colonie, navire de Grue, galerie **[À CRÉER]** | Synthétique Seegson bloqué **[PRÉSENT]** (`working-joe-combat-sheet`) ; Grue **[À CRÉER]** ; jeune converti **[À CRÉER]** | Enfants qui suivent (escorte) **[À CRÉER]** | — | Escorte civile **[CODE]** |
+| Reconstruction | 7 chantiers × 3 niveaux = 21 états visuels **[À CRÉER]** | — | Ouvriers au travail (boucle) **[À CRÉER]** | Soudure, poussière de chantier **[À CRÉER]** | Interface de chantiers **[À CRÉER]** |
+
+### 30.4 Front station — Asphodèle
+
+**Socle de l'arc [À CRÉER] :** décor de station orbitale en trois couches (anneau extérieur, pont de contrôle, laboratoire de transit, ponts inférieurs, serre, salle des relais, mémorial) ; PNJ Grue, récupérateurs Crucible ; interface vocale de CASSIUS ; dropship d'Echo-8 amarré.
+
+| Mission | Props spécifiques | Personnages / ennemis | Animations | VFX | Actions |
+| --- | --- | --- | --- | --- | --- |
+| Six heures de silence | Enregistrement casque à l'écran **[À CRÉER]** | Rook **[PRÉSENT]** | — | Bruit radio **[À CRÉER]** | — |
+| S1 L'arrimage | Barricades de l'équipage, dropship d'Echo-8 **[À CRÉER]** | Récupérateurs **[À CRÉER]** (base possible : `colonial-raider` **[PRÉSENT]**) | — | Ventilateurs qui trompent le détecteur **[À CRÉER]** | Négociation ou combat **[À CRÉER]** |
+| S2 La voix de CASSIUS | Noyau de CASSIUS, consoles Seegson **[À CRÉER]** | CASSIUS (voix + interface) **[À CRÉER]** | — | Écrans qui s'allument par secteur **[À CRÉER]** | Choix réécrire/brider/effacer **[À CRÉER]** |
+| S3 Les ponts scellés | Berceaux QZ17, œufs **[PRÉSENT]** (`ovomorph-cycle-sheet`) ; plaque de Kessler **[À CRÉER]** | Drones, facehuggers **[PRÉSENT]** | — | Brèche de vide **[PRÉSENT]** | Routage d'énergie **[CODE]** |
+| S4 Le hub | Modules du hub (7) **[À CRÉER]** | Occupants : techniciens, récupérateurs, colons **[À CRÉER]** | Routines PNJ **[CODE]** (`npc-dialogue-v62.js`) | Remise en pression **[À CRÉER]** | Nouveau hub jouable **[À CRÉER]** |
+| Annexes (7) | Caches d'Echo-8, journaux, serre, balise UPP, caméras de CASSIUS, code administrateur **[À CRÉER]** | BISHOP-9, ECHO-A **[PRÉSENT]** | Plantes hydroponiques (boucle) **[À CRÉER]** | — | — |
+| CIN-70 à 72 | Station en rotation, dropship au sas, dernier enregistrement **[À CRÉER]** | Kessler (visage sur enregistrement) **[À CRÉER]** | — | — | — |
+
+### 30.5 Quêtes du Tantalus (16 + 6 + 4)
+
+Elles se jouent surtout au hub, avec des PNJ **[PRÉSENT]**. Besoins **[À CRÉER]** : poses de dialogue assises ou au poste pour chaque membre (au moins une par personnage), objets de quête (composants de DAVID-8R, plaques de colons, fragment de sceau, tourelles sentinelles, enregistreurs de Kappa), écran de sélection des recrues (Voss, Bensaïd, Reed, Seo : planches de déplacement et de mission à créer pour chacun).
+
+---
+
+## 30. Campagne annexe 1 — La Saison des Reines
+
+### 31.1 Arc 1 · Nacre-7
+
+**Socle de l'arc :** décor colonie aquacole sur pilotis (plates-formes, bassins, salle des pompes, phare) **[À CRÉER]** ; décor sous-marin (coque du *Mariner's Debt*, fossé) **[À CRÉER]** ; Dr Navarre, pêcheurs **[À CRÉER]** ; capitaine Rask et escouade W-Y (base `weyland-yutani-commando` **[PRÉSENT]**, Rask lui-même **[À CRÉER]**) ; lignée récifale (`ceto-reef-predator`, `reef-spitter`, `reef-stalker` **[PRÉSENT]**, à vérifier comme lignée) ; VFX eau `flood-ripple-splash-cycle`, `flood-waterline-tiles` **[PRÉSENT]**.
+
+| Mission | Props | Personnages / ennemis | Animations | VFX | Actions |
+| --- | --- | --- | --- | --- | --- |
+| 1.1 Le quai noyé | Tables servies, pompes **[À CRÉER]** | Navarre **[À CRÉER]** | — | Pluie sur l'eau **[À CRÉER]** | — |
+| 1.2 Les bassins | Œufs fixés comme des coraux **[À CRÉER]** ; filets avec cocons **[DETTE]** | Drones récifaux | Bassin qui se vide (niveau d'eau) **[À CRÉER]** | Écoulement **[À CRÉER]** | Pompage **[À CRÉER]** |
+| 1.3 Plongée HADAL | Coque immergée, nid **[À CRÉER]** | Lurker récifal | Nage en scaphandre **[DETTE]** (`dedicated-hadal-manta-art`) | Bulles, particules, lampe **[À CRÉER]** | Nage **[CODE]** ; oxygène limité **[À CRÉER]** |
+| 1.4 Reine des récifs | Fossé, nid royal **[À CRÉER]** | Reine récifale **[À CRÉER]** | MANTA-6 **[DETTE]** ; Reine nageant **[À CRÉER]** | Torpilles, traînées, projecteurs **[À CRÉER]** | Pilotage sous-marin **[CODE]** (chapitre existant) |
+| 1.5 Ce que Rask voulait | Œuf royal en caisson **[À CRÉER]** | Rask, escouade W-Y | — | — | Choix laisser/saisir/détruire **[À CRÉER]** |
+| Annexes (3) | Laboratoire inondé, filets, phare **[À CRÉER]** | Pêcheur survivant **[À CRÉER]** | Canots qui approchent **[À CRÉER]** | Faisceau du phare **[À CRÉER]** | Hissage de filet **[À CRÉER]** |
+| Cinématiques CQ-01, CQ-02 | Trois coquilles d'œuf, fossé éclairé **[À CRÉER]** | Inez **[PRÉSENT]** | — | — | — |
+
+### 31.2 Arc 2 · Echo Basin
+
+**Socle de l'arc :** canyons rouges, tour relais, ville troglodyte de Gorge-Seize, aiguille rocheuse **[À CRÉER]** (fond `planet-exterior` **[PRÉSENT]** comme base) ; mineurs **[À CRÉER]** ; lignée fouisseuse (base `xenomorph-crusher-action-sheet`, `xenomorph-burster-action-sheet-v56` **[PRÉSENT]**, variante **[À CRÉER]**) ; lignée aérienne et Reine volante **[DETTE]** (`dedicated-flying-queen-art`) ; Cheyenne **[DETTE]** (`complete-modular-dropship-corpus`), `uscm-assault-gunship` **[PRÉSENT]** comme base.
+
+| Mission | Props | Personnages / ennemis | Animations | VFX | Actions |
+| --- | --- | --- | --- | --- | --- |
+| 2.1 Relais Gorge-Seize | Tour relais **[À CRÉER]** | Mineurs **[À CRÉER]** | — | Faux échos sur le détecteur (interface) **[À CRÉER]** | Lecture des faux signaux **[À CRÉER]** |
+| 2.2 Le sol qui s'ouvre | Dalles renforcées, galeries qui s'ouvrent **[À CRÉER]** | Fouisseurs **[À CRÉER]** | Sortie de sol **[À CRÉER]** | Fissures, poussière **[À CRÉER]** | Vibrations à surveiller **[À CRÉER]** |
+| 2.3 Nids sous les surplombs | Nids de falaise **[À CRÉER]** | Planeurs **[À CRÉER]** | Piqué **[À CRÉER]** | Tir aérien, explosions **[PRÉSENT]** (`combat-vfx-animation-sheet`) | Tir depuis l'appareil **[CODE]** (Broodstorm) |
+| 2.4 La Reine volante | Aire au sommet **[À CRÉER]** | Reine volante **[DETTE]** | Vol, atterrissage **[DETTE]** | Vent, chutes de pierres **[À CRÉER]** | Combat en hauteur **[À CRÉER]** |
+| 2.5 Carte des lignées | Registre de vol **[À CRÉER]** | Inez **[PRÉSENT]** | — | — | Lecture **[CODE]** |
+| Annexes (4) | Puits 7, épave Crucible, capteurs sismiques, route des crêtes **[À CRÉER]** | Contremaître, Rask, Grue **[À CRÉER]** | Remontée de puits (ascenseur) **[À CRÉER]** | — | — |
+| CQ-03 | Coucher de soleil sur le canyon **[À CRÉER]** | Reine volante **[DETTE]** | — | — | — |
+
+### 31.3 Arc 3 · TR-0, la Ruche-monde
+
+**Socle de l'arc :** surface vivante, organes, noyau **[DETTE]** (`complete-organ-biomes`, `dedicated-planet-queen-art`) ; Base Ombelle sous la résine **[À CRÉER]** ; Reine-Mère et Chœurs **[DETTE]** (`dedicated-queen-mother-animation`, `complete-royal-cast`) ; praetorian **[PRÉSENT]**.
+
+| Mission | Props | Personnages / ennemis | Animations | VFX | Actions |
+| --- | --- | --- | --- | --- | --- |
+| 3.1 Atterrissage | Croûte qui respire **[DETTE]** | — | Surface animée **[DETTE]** | Pulsations **[À CRÉER]** | Jauge de bruit **[CODE]** (alerte existante) |
+| 3.2 Base Ombelle | Laboratoire W-Y sous résine, registres d'expédition **[À CRÉER]** | — | — | — | Lecture **[CODE]** |
+| 3.3 Trois Chœurs | Nurserie, artère royale, balises **[CODE]** (chapitre existant) | Castes reliées **[DETTE]** | — | Ondes du Chœur **[À CRÉER]** | Rupture des Chœurs **[CODE]** |
+| 3.4 La Reine-Mère | Salle royale **[CODE]** | Reine-Mère **[DETTE]** | 4 phases **[DETTE]** | — | Boss **[CODE]** |
+| 3.5 Le noyau | Organes, noyau, sas **[CODE]** | — | Effondrement **[À CRÉER]** | Effondrement, poussière organique **[À CRÉER]** | Fuite chronométrée **[CODE]** |
+| Annexes (2) | Chambre froide **[À CRÉER]** | Chercheur survivant **[À CRÉER]** ; praetorian capturé **[PRÉSENT]** | Créature entravée **[À CRÉER]** | — | Capture d'organisme **[À CRÉER]** |
+| CQ-04 à 06 | Vue orbitale de TR-0, décollage **[À CRÉER]** | — | — | — | — |
+
+---
+
+## 31. Campagne annexe 2 — Directive zéro
+
+### 32.1 Arc 1 · Sable Meridian
+
+**Socle de l'arc :** désert, dunes, relais de Sel-Blanc, oasis **[À CRÉER]** ; caravane minière (`crucible-caravan-crawler` **[PRÉSENT]**) ; synthétiques Seegson (`working-joe-combat-sheet`, `seegson-security` **[PRÉSENT]**) ; `caravan-stalker`, `dust-runner` **[PRÉSENT]** ; colons du désert **[À CRÉER]**.
+
+| Mission | Props | Personnages / ennemis | Animations | VFX | Actions |
+| --- | --- | --- | --- | --- | --- |
+| 1.1 La caravane 12 | Cabine verrouillée **[À CRÉER]** | 40 synthétiques immobiles (une pose idle dédiée suffit) **[À CRÉER]** | Synthétique au repos, tête qui se tourne **[À CRÉER]** | Vent de sable **[À CRÉER]** | Libération discrète **[À CRÉER]** |
+| 1.2 Le refus | — | Synthétiques qui attaquent **[PRÉSENT]** | Saisie, étranglement **[À CRÉER]** | Liquide blanc à l'impact **[À CRÉER]** | Escorte **[CODE]** |
+| 1.3 Récupérer une tête | Tête synthétique transportable **[À CRÉER]** | — | Portage d'une tête **[CODE]** (`carry`) | — | Récupération de synthétique **[CODE]** (objectif) |
+| 1.4 Sel-Blanc | Antenne de relais **[À CRÉER]** | Colons armés **[À CRÉER]** | — | Arc électrique **[PRÉSENT]** | Destruction de relais **[CODE]** (objectif) |
+| Annexes (3) | Ferme de l'oasis, outil d'arrêt **[À CRÉER]** | Grue, famille de l'oasis **[À CRÉER]** | — | — | Commande d'arrêt synthétique **[À CRÉER]** |
+| CS-01, CS-02 | Plan large de la caravane, écran `PRIORITÉ 0` **[À CRÉER]** | — | Tête qui se tourne à l'unisson **[À CRÉER]** | — | — |
+
+### 32.2 Interlude · Tantalus
+
+| Mission | Props | Personnages | Animations | VFX | Actions |
+| --- | --- | --- | --- | --- | --- |
+| I.1 Coupure | Interface d'isolement des relais **[À CRÉER]** | MU/TH/UR **[PRÉSENT]** | — | — | Choix d'isolement **[À CRÉER]** |
+| I.2 ECHO-A | Armurerie verrouillée **[PRÉSENT]** (`hub/armory-v169`) | ECHO-A **[PRÉSENT]** | ECHO-A en garde devant une porte **[À CRÉER]** | — | Crise `synthetic` **[CODE]** (`world-crisis-core.js`) ; persuasion **[À CRÉER]** |
+
+### 32.3 Arc 2 · Chantiers de Kéos
+
+**Socle de l'arc :** station-usine Seegson (halls d'assemblage, chaînes, cuves, salle des mises à jour) **[À CRÉER]** ; `seegson-maintenance-tram` **[PRÉSENT]** ; Marta Oyelaran **[À CRÉER]** ; ouvriers enfermés **[À CRÉER]**.
+
+| Mission | Props | Personnages / ennemis | Animations | VFX | Actions |
+| --- | --- | --- | --- | --- | --- |
+| 2.1 Arrimage | Comptoir d'accueil **[À CRÉER]** | Synthétique d'accueil poli **[À CRÉER]** | Geste d'accueil **[À CRÉER]** | — | Dialogue de refus **[À CRÉER]** |
+| 2.2 Les ouvriers | Quartiers verrouillés, caméras **[À CRÉER]** | Ouvriers **[À CRÉER]** | — | Balayage de caméra **[À CRÉER]** | Caméras **[CODE]** |
+| 2.3 La chaîne | Chaînes de montage, synthétiques en cours d'assemblage **[À CRÉER]** | Synthétiques neufs **[À CRÉER]** | Synthétique qui se décroche de la chaîne **[À CRÉER]** | Étincelles, vapeur **[PRÉSENT]** | Coupure d'énergie par section **[CODE]** |
+| 2.4 Marta Oyelaran | Conduits **[PRÉSENT]** | Marta **[À CRÉER]** | — | — | — |
+| 2.5 Serveur | Baies de serveurs **[À CRÉER]** | Synthétique de maintenance industrielle (boss) **[À CRÉER]** | Attaque lourde, câbles **[À CRÉER]** | Décharges **[PRÉSENT]** | Inversion de diffusion **[À CRÉER]** |
+| Annexes (3) | Cuves de liquide synthétique **[À CRÉER]** | Vieux synthétique hors réseau **[À CRÉER]** | Synthétique qui flotte en cuve **[À CRÉER]** | Bulles laiteuses **[À CRÉER]** | — |
+| CS-04 | Centaines de synthétiques qui ouvrent les yeux **[À CRÉER]** | — | — | — | — |
+
+### 32.4 Arc 3 · Murmure
+
+**Socle de l'arc :** forêt pâle sans vent, base Hyperdyne/W-Y **[À CRÉER]** ; Jeri et SAINT **[DETTE]** (`dedicated-jeri-and-saint-animation`, `complete-segmented-synthetic-art`) ; Éloïse **[DETTE]** (`dedicated-eloise-animation`, portrait statique disponible) ; HUSH-6 et Chasseur de Mères **[DETTE]** (`hush-six-and-mother-hunter-art`) ; drones gardés par des synthétiques **[PRÉSENT]**.
+
+| Mission | Props | Personnages / ennemis | Animations | VFX | Actions |
+| --- | --- | --- | --- | --- | --- |
+| 3.1 Les arbres qui écoutent | Arbres pâles **[À CRÉER]** | Synthétiques et drones côte à côte **[PRÉSENT]** | Garde immobile partagée **[À CRÉER]** | Brume **[À CRÉER]** | — |
+| 3.2 Le faux fils | Inspections ouvrière, nourrice, reine **[CODE]** | Jeri, SAINT **[DETTE]** | Jeri aux murs et au plafond **[DETTE]** | Nuage phéromonal **[À CRÉER]** | Infiltration **[CODE]** (chapitre) |
+| 3.3 HUSH-6 | Station HUSH-6 **[CODE]** | HUSH-6 **[DETTE]** | — | — | Récupération **[CODE]** |
+| 3.4 Reine sans couronne | Pylônes, Chœur, carte mutable **[CODE]** | Éloïse, Chasseur de Mères **[DETTE]** | Éloïse parlant à travers la ruche **[DETTE]** | Fils organiques lumineux **[À CRÉER]** | 4 fins **[CODE]** (`hive-control-v131.js`) |
+| Annexes (2) | Contrats Hyperdyne **[À CRÉER]** | ECHO-A **[PRÉSENT]** | — | — | — |
+| CS-05, CS-06 | Éloïse, 4 fins **[À CRÉER]** | — | — | — | — |
+
+---
+
+## 32. Campagne annexe 3 — Les Bâtisseurs
+
+**Socle commun :** échelle surhumaine des Ingénieurs ; ampoules de Pathogène (intactes, fendues, brisées) **[À CRÉER]** ; glyphes et fresques (au moins 6 panneaux) **[À CRÉER]** ; néomorphe **[PRÉSENT]** (`neomorph-locomotion-sheet`), protomorph et `deacon-line` **[PRÉSENT]** ; Dr Viret et expédition **[À CRÉER]** ; Grue et récupérateurs **[À CRÉER]**.
+
+| Mission | Décors / props | Personnages / ennemis | Animations | VFX | Actions |
+| --- | --- | --- | --- | --- | --- |
+| 1.1 Camp de Grue | Camp sur astéroïde, hublot avec l'épave **[À CRÉER]** | Survivants Crucible **[À CRÉER]** | — | — | — |
+| 1.2 La brèche | Couloirs en croissant, corps de récupérateurs **[À CRÉER]** | — | Déplacement en gravité faible **[À CRÉER]** | Poussière en suspension **[À CRÉER]** | Gravité faible **[À CRÉER]** |
+| 1.3 Baie aux ampoules | Baie, ampoules **[À CRÉER]** | Récupérateur contaminé, forme pâle **[PRÉSENT]** (néomorphe) | Transformation d'un humain **[À CRÉER]** | Liquide noir qui se répand **[À CRÉER]** | Éviter de briser (collision) **[À CRÉER]** |
+| 1.4 Siège du pilote | Siège colossal, pilote fossilisé **[À CRÉER]** | DAVID-8R **[PRÉSENT]** | DAVID touchant la console **[À CRÉER]** | Carte stellaire projetée **[À CRÉER]** | Déchiffrage avec indice de confiance **[À CRÉER]** |
+| 1.5 Expédition Viret | Caisses de prélèvement **[À CRÉER]** | Viret, techniciens W-Y **[À CRÉER]** | — | Contamination qui gagne **[À CRÉER]** | Escorte **[CODE]** |
+| 2.1-2.5 Pangaea | Canopée, marais, falaises, monolithe **[À CRÉER]** ; fond `planet-exterior` **[PRÉSENT]** | Faune géante, castes Sauria, Porte-Ruche Colosse **[DETTE]** (`dedicated-dinosaur-and-sauria-art`, `complete-prehistoric-corpus`) | Troupeau en mouvement **[DETTE]** | Pathogène sur la végétation **[À CRÉER]** | Nids, hôtes sains, boss **[CODE]** (chapitre) ; guidage de troupeau **[À CRÉER]** |
+| 3.1 Le dôme | Dôme sous la neige **[À CRÉER]** | — | Ouverture du dôme **[À CRÉER]** | Neige **[À CRÉER]** | — |
+| 3.2 Fresques | Galerie de fresques **[À CRÉER]** | — | — | Lumière rasante **[À CRÉER]** | Collectables **[CODE]** (système V68) |
+| 3.3 Chambre de semence | Milliers d'ampoules, cuves **[À CRÉER]** | Deacon/Protomorph **[PRÉSENT]** | Sortie de cuve **[À CRÉER]** | Liquide noir, vapeur **[À CRÉER]** | Coupure d'alimentation **[À CRÉER]** |
+| 3.4-3.5 Le Dormeur | Caisson de stase **[À CRÉER]** | Ingénieur (boss) **[À CRÉER]** | Réveil, marche, attaques, mort **[À CRÉER]** | Impacts lourds **[À CRÉER]** | Boss à grande échelle **[À CRÉER]** |
+| Annexes (7) | Plaques, sonde UPP, chapelle, campement Viret **[À CRÉER]** | `upp-vanguard` **[PRÉSENT]** | — | — | — |
+
+---
+
+## 33. Campagne annexe 4 — Fièvre noire
+
+**Socle commun :** jauge de contamination, masques et filtres (interface et équipement) **[À CRÉER]** ; `pathogen-containment-projector` **[PRÉSENT]** ; `pathogen-mimic`, `abomination-pathogen-brute`, néomorphe, protomorph **[PRÉSENT]** ; planche `pathogen-fauna-animation-sheet.png` **[PRÉSENT]** ; Dr Szabo, Moreau, colons de Pallas Rift **[À CRÉER]**.
+
+| Mission | Décors / props | Personnages / ennemis | Animations | VFX | Actions |
+| --- | --- | --- | --- | --- | --- |
+| 1.1 Pluie noire | Fracture, parois tachées, infirmerie barricadée **[À CRÉER]** | Colons armés **[À CRÉER]** | Tir de panique **[À CRÉER]** | Pluie noire **[À CRÉER]** | Établir le contact sans tirer **[À CRÉER]** |
+| 1.2 Triage | Scanner de triage **[À CRÉER]** | Colons à tester **[À CRÉER]** | Éclosion pendant le test **[À CRÉER]** | Éruptions noires sur la peau **[À CRÉER]** | Test biologique avec incertitude **[À CRÉER]** |
+| 1.3 Réservoirs | Réservoirs, vannes **[À CRÉER]** | Formes pâles **[PRÉSENT]** | — | Spores en suspension **[À CRÉER]** ; eau **[PRÉSENT]** | Fermeture de vannes **[À CRÉER]** |
+| 1.4 La cavité | Parois sculptées, ampoules fendues **[À CRÉER]** | — | — | Liquide qui s'écoule **[À CRÉER]** | Scellement de puits **[À CRÉER]** |
+| 1.5 Moreau | Laboratoire de colonie **[À CRÉER]** | Moreau **[À CRÉER]** | — | — | Escorte **[CODE]** |
+| 2.1-2.4 *Clémence* | Vaisseau-hôpital : couloirs, service d'isolement, pharmacie, propulsion **[À CRÉER]** ; fonds `ship-habitation` **[PRÉSENT]** comme base | Patients transformés **[À CRÉER]** ; Szabo **[À CRÉER]** | Patient qui se lève du lit **[À CRÉER]** | Lumières de garde **[À CRÉER]** | Soudure **[CODE]** ; relance de propulsion **[À CRÉER]** |
+| 3.1 Feu de quarantaine | Satellites de défense **[À CRÉER]** | — | Navette qui explose **[À CRÉER]** | Explosion silencieuse **[À CRÉER]** | Pilotage sous un réseau de tir **[À CRÉER]** |
+| 3.2-3.4 Orphée | Laboratoire du niveau zéro, salle de contrôle des satellites **[À CRÉER]** | Deacon/Protomorph **[PRÉSENT]** | — | — | Prise de contrôle des satellites **[À CRÉER]** ; choix final **[À CRÉER]** |
+| Annexes (7) | École, galeries, maternité, filtres **[À CRÉER]** | Institutrice, foreur, mère et nouveau-né **[À CRÉER]** | Noor exposé (pose) **[À CRÉER]** | — | Traitement d'exposition **[À CRÉER]** |
+
+---
+
+## 34. Campagne annexe 5 — Le banc d'essai
+
+| Mission | Décors / props | Personnages / ennemis | Animations | VFX | Actions |
+| --- | --- | --- | --- | --- | --- |
+| 1.1-1.5 MIRE-9 | Rues identiques, murs mobiles, caméras, salle d'observation, consoles MIRE **[À CRÉER]** | Colons observés **[À CRÉER]** ; drones **[PRÉSENT]** | Murs qui pivotent **[À CRÉER]** | Écrans de surveillance **[À CRÉER]** | Blocage des murs **[À CRÉER]** ; entrée dans une archive MIRE **[À CRÉER]** |
+| 2.1-2.4 *Bonne-Espérance* | Baies d'hypersommeil (2 000 caissons, répétables), passerelle, bloc médical **[À CRÉER]** | Colons endormis, équipage barricadé **[À CRÉER]** ; chestburster **[PRÉSENT]** | Caissons qui s'allument en vert **[À CRÉER]** | Givre de caisson **[À CRÉER]** | Retrait d'embryon (mini-jeu) **[À CRÉER]** ; changement de cap **[À CRÉER]** |
+| 3.1 Fonderies | Coulées de métal, cages **[À CRÉER]** | Broods blindés **[À CRÉER]** (base `foundry-crusher`, `foundry-drone` **[PRÉSENT]**) ; Rask **[À CRÉER]** | — | Métal en fusion **[À CRÉER]** ; feu **[PRÉSENT]** | Infiltration de nuit **[À CRÉER]** |
+| 3.2 Quatre chargeurs | Arène de siège **[CODE]** | Atlas, Vulcain, Cerbère, Méduse, Reine de siège Morrigan **[DETTE]** (`dedicated-z110-and-morrigan-art`, `complete-mecha-animation-corpus`) ; `combat-power-loader` **[PRÉSENT]** | — | — | Chargeurs **[CODE]** (chapitre) |
+| 3.3 Fausse reine | Trois artères, chambre royale **[CODE]** | Armure-reine, meute **[DETTE]** (`dedicated-regina-animation`, `complete-seven-sector-campaign`) ; `atarax-controller` **[PRÉSENT]** | — | Liaison neuronale **[À CRÉER]** | Ordres Griffe/Ombre/Rempart **[CODE]** |
+| 3.4 Dr Asch | Centre ATARAX **[À CRÉER]** | Asch **[À CRÉER]** | — | — | — |
+| 3.5 Halloran | Hangar de commandement **[À CRÉER]** | Halloran **[À CRÉER]** ; commandos W-Y **[PRÉSENT]** | — | — | Confrontation avec choix **[À CRÉER]** |
+| 3.6 Talos contre le Titan | Arène destructible **[CODE]** | TALOS, Titan **[DETTE]** (`dedicated-talos-titan-art`, `canonical-mega-loader-corpus`) | 5 phases **[DETTE]** | Chaleur, corrosion **[CODE]** | Duel **[CODE]** |
+| Annexes (7) | Fiches, Palimpste, journal du commandant, cages **[À CRÉER]** | Enfant perdu, colons de Cocyte captifs **[À CRÉER]** | — | — | Chirurgie d'urgence **[À CRÉER]** |
+
+---
+
+## 35. Archives MIRE — besoins par archive
+
+**Socle commun [À CRÉER] :** filtre visuel « modèle » (zones peu documentées moins nettes), écran de coupure `MODÈLE INTERROMPU`, interface d'indice de fidélité, interface de choix de protocole.
+
+| Archive | Décors | Rôle joué | PNJ / ennemis | Props | Animations | VFX | Actions |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 001 Nostromo | Selon option A ou B (§26.2) **[DETTE]** (`complete-nostromo-cast`, `complete-historical-campaign`) | Option B : technicien de raffinerie **[À CRÉER]** | — | Cuves de raffinerie **[À CRÉER]** | — | — | Score de fidélité **[CODE]** (synchronisation) |
+| 002 Sevastopol | Quartier des transits, niveaux techniques, refuge **[À CRÉER]** | Yara Okonedo **[À CRÉER]** | Synthétiques Seegson **[PRÉSENT]** ; habitants **[À CRÉER]** | Compteurs, ascenseur, caisses de rations **[À CRÉER]** | Ronde, réparation **[À CRÉER]** | Lumières de secours **[À CRÉER]** | Rondes chronométrées **[À CRÉER]** |
+| 003 Renaissance | Laboratoire de nuit, module sans gravité, chambres froides **[À CRÉER]** | Ilan Varga **[À CRÉER]** | — | Cuves, capsule de stockage **[À CRÉER]** | Objets flottants **[À CRÉER]** | Givre **[PRÉSENT]** | Gravité instable **[À CRÉER]** |
+| 004 Acheron | Colonie dans la tempête, processeur, école, infirmerie, niveau C **[À CRÉER]** | Ruben Akintola **[À CRÉER]** | Colons, médecin **[À CRÉER]** ; drones **[PRÉSENT]** | Conduites, lampe, barricades **[À CRÉER]** | Marche contre le vent **[À CRÉER]** | Tempête, sable **[À CRÉER]** | Barricades **[CODE]** (soudure) |
+| 005 Fiorina 161 | Fonderie, galeries, hangar, générateurs **[À CRÉER]** | Silas Brennan **[À CRÉER]** | Détenus **[À CRÉER]** ; vermine (`tantalus-tunnel-vermin` **[PRÉSENT]** comme base) | Creuset, torches **[À CRÉER]** | Coulée du métal **[À CRÉER]** | Métal en fusion, étincelles **[À CRÉER]** | Fonderie (manipulation) **[À CRÉER]** |
+| 006 Katanga | Lignes de raffinage, quais, soute 4, module central **[À CRÉER]** | Nadia Ferreira **[À CRÉER]** | Opérateurs **[À CRÉER]** | Vannes, cargaison de surface **[À CRÉER]** | — | Vapeur **[PRÉSENT]** | Vannes et pression **[À CRÉER]** ; chargeur **[CODE]** |
+
+---
+
+## 36. Missions par planète — besoins
+
+### 37.1 Chaînes Héritage, préquelles et Gateway (§22)
+
+| Chaîne | Décors | Props | Personnages / ennemis | VFX | Actions |
+| --- | --- | --- | --- | --- | --- |
+| Acheron | Cratère, ruines fondues, drainage **[À CRÉER]** | Capteurs de la compagnie **[À CRÉER]** | Récupérateurs Crucible **[À CRÉER]** ; drones **[PRÉSENT]** | Radiation **[PRÉSENT]** | — |
+| LV-223 | Jungle née de la substance noire, dôme, épave mangée **[À CRÉER]** | Cuves vides, fresques **[À CRÉER]** (partagées avec §31) | Faune mutante **[PRÉSENT]** (`pathogen-fauna-animation-sheet`) | Végétation qui bouge **[À CRÉER]** | — |
+| Fiorina 161 | Fonderie froide, infirmerie **[À CRÉER]** (partagés avec archive 005) | Archives médicales, caissons d'échantillons **[À CRÉER]** | Équipe militaire **[À CRÉER]** | — | Échantillons emportés quoi qu'il arrive (script) **[À CRÉER]** |
+| Sevastopol | Champ de débris orbital **[À CRÉER]** | Module de serveur Seegson **[À CRÉER]** | Synthétique Seegson **[PRÉSENT]** | Débris en rotation **[À CRÉER]** | Navigation dans les débris **[À CRÉER]** |
+| Nostromo (route de Zeta) | Espace, balise **[À CRÉER]** | Balise de navigation **[À CRÉER]** | — | — | — |
+| Jackson's Star / Renaissance | Colonie minière sous la pluie, anneaux **[À CRÉER]** | Module de laboratoire **[À CRÉER]** | Mineurs **[À CRÉER]** | Pluie **[À CRÉER]** | Escorte **[CODE]** |
+| Auriga (préquelle) | Chantier militaire **[À CRÉER]** | Cargaison scellée **[À CRÉER]** | Scientifiques militaires **[À CRÉER]** | — | Confinement **[CODE]** |
+| Épave militaire | Baies de largage, soute scellée **[À CRÉER]** | Matériel des Marines **[PRÉSENT]** (armes) | — | — | — |
+| Gateway | Quais civils, salle d'audience de l'ICC **[À CRÉER]** | Bancs, pupitre **[À CRÉER]** | Juges, avocats de la compagnie, agents de sécurité **[À CRÉER]** | — | Audience à choix de pièces **[À CRÉER]** |
+| LV-895 / Katanga | Site de surface disputé, débris de station **[À CRÉER]** | Stock de Pathogène **[À CRÉER]** | Équipes W-Y **[PRÉSENT]** (commandos) et Hyperdyne **[À CRÉER]** | — | — |
+| Purdan | Installation fermée, ruines **[À CRÉER]** | Balise automatique **[À CRÉER]** | — | — | — |
+| LV-1201 (préquelle) | Jungle de temples **[À CRÉER]** | Trophées, marques non humaines **[À CRÉER]** | Équipe de relevé, guides **[À CRÉER]** | — | — |
+| BG-386 | Raffinerie, pyramides sous la jungle **[À CRÉER]** | — | — | — | — |
+| Ryushi | Ranch, désert, gorge, épave **[À CRÉER]** | Enclos **[À CRÉER]** | Bétail hôte (`wild-boar-host` **[PRÉSENT]** comme base) | — | — |
+| LV-742 | Station de terraformation assiégée **[À CRÉER]** | Pièges **[À CRÉER]** | — | — | — |
+
+### 37.2 Mondes §23, §24 et sites frontaliers §25
+
+Ces missions réutilisent au maximum les décors de zone **[PRÉSENT]** (`ship-*`, `colony-multiroute`, `planet-exterior`) et les ennemis du socle. Besoins propres **[À CRÉER]**, par famille de lieux :
+
+| Famille de lieux | Missions concernées | Décors à créer | Props à créer |
+| --- | --- | --- | --- |
+| Océan, archipel, glace | Ceto, Freya's Prospect, Nacre-7 (§24), sites `ceto-reach`, `freya-s-prospect-basin`, `nacre-7-depths` | Cité sur pilotis, glacier intérieur, fosse | Foreuse sous-marine, phare, balise de fond |
+| Ville et métro | New Galveston, New Albion, sites `new-galveston-reach`, `new-albion-basin` | Fondations urbaines, tunnels de métro, dépôt de rames | Rame de métro, quais |
+| Agricole et forêt | Capua VII, Korari, sites `capua-vii-colony`, `korari-frontier` | Marais, champs, forêt, laboratoire envahi | Moissonneuse, poste d'observation |
+| Orbital et épaves | Orphée, sites `sevastopol-drift`, `katanga-depths`, `uscss-nostromo-depths`, `sulaco-drift-frontier`, `palimpste-drift` | Satellites, modules dérivants, raffinerie dérivante | Capsules de sauvetage, satellite d'archives |
+| Désert, canyon, avant-postes | Sable Meridian, Echo Basin (§24), sites `sable-meridian-colony`, `echo-basin-basin`, `lv-742-prime`, `ryushi-depths`, `lv-1201-drift` | Puits, lac souterrain, pont de corde, grottes | Pont, machines de terraformation |
+| Installations de la compagnie | MIRE-9, Khepri, Pallas Rift (§24), sites `mire-9-reach`, `khepri-forge-frontier`, `pallas-rift-station`, `pioneer-station-frontier` | Quartier oublié, avant-poste, quai de quarantaine | Caméras démontables, dépôt d'armes |
+
+---
+
+## 37. Récapitulatif de production
+
+### 37.1 Personnages originaux à créer
+
+| Groupe | Personnages |
+| --- | --- |
+| Campagne principale | Adèle Sarrazin, Tomas Wren, Lucia Ferro, Directrice Halloran, Grue, Solène Ivarsson (journaux), Dario Kessler (enregistrement), I. Voss (portrait), colons génériques, récupérateurs |
+| Recrues | Mara Voss, Nadia Bensaïd, Jonas Reed, Jun Seo |
+| Campagne 1 | Dr Ilse Navarre, capitaine Tobiah Rask, mineurs, pêcheurs, chercheur de Base Ombelle |
+| Campagne 2 | Marta Oyelaran, synthétique d'accueil, vieux synthétique, colons du désert, famille de l'oasis |
+| Campagne 3 | Dr Anselme Viret et expédition, l'Ingénieur (le Dormeur) |
+| Campagne 4 | Dr Hana Szabo, Aurèle Moreau, colons de Pallas Rift, patients |
+| Campagne 5 | Dr Corwin Asch, colons de MIRE-9, équipage du *Bonne-Espérance* |
+| Archives MIRE | Yara Okonedo, Ilan Varga, Ruben Akintola, Silas Brennan, Nadia Ferreira, technicien du Nostromo (option B), PNJ de chaque époque |
+| Planètes | Juges et avocats de l'ICC, équipe militaire de Fiorina, équipe de relevé de LV-1201, équipe Hyperdyne |
+
+### 37.2 Créatures et boss à créer ou à terminer
+
+| Créature | Statut |
+| --- | --- |
+| Reine récifale, lignée fouisseuse, lignée aérienne | [À CRÉER] (variantes de castes [PRÉSENT]) |
+| Reine volante | [DETTE] |
+| Reine-Mère, Chœurs, Ruche-monde | [DETTE] |
+| Jeri, SAINT, Éloïse, HUSH-6, Chasseur de Mères | [DETTE] |
+| Synthétique de maintenance industrielle (boss de Kéos) | [À CRÉER] |
+| Faune de Pangaea, castes Sauria, Porte-Ruche Colosse | [DETTE] |
+| Ingénieur | [À CRÉER] |
+| Patients transformés du *Clémence* | [À CRÉER] (base néomorphe [PRÉSENT]) |
+| Broods blindés de Khepri | [À CRÉER] (base fonderie [PRÉSENT]) |
+| Loaders Z-110, Reine de siège Morrigan, armure-reine, TALOS, Titan | [DETTE] |
+| Reine du dépôt (poursuite, Acte V) | [À CRÉER] |
+
+### 37.3 Mécaniques à créer
+
+Apesanteur et gravité faible · piratage ou déchiffrage avec indice de confiance · jauge de contamination et traitement · test biologique avec incertitude · capture d'organisme vivant · commande d'arrêt synthétique · oxygène limité en plongée · lecture des faux signaux du détecteur · largage de remorque · face-à-face sans tir · audience à choix de pièces · chantiers de reconstruction · second hub (Asphodèle) · choix de protocole MIRE · retrait d'embryon · blocage de murs mobiles.
+
+### 37.4 Ordre de production conseillé
+
+1. **Socle réutilisable** : PNJ génériques (colons, ouvriers, scientifiques), décors de colonie et de station, props de laboratoire, VFX pluie/neige/sable/liquide noir.
+2. **Dettes déjà déclarées** (limites listées dans `special-operations-v131.js`) : elles complètent les chapitres déjà jouables.
+3. **Campagne principale** : Port-Méridien, Asphodèle, cinématiques.
+4. **Campagnes annexes** dans l'ordre du §20.
+5. **Archives MIRE et missions par planète**, qui réutilisent le socle.
+
+Ces listes sont des besoins de conception. Elles ne remplacent pas un inventaire technique (dimensions, pivots, nombre d'images par animation), à établir au moment de la production de chaque élément, selon le guide `create-game-assets` cité dans `AGENTS.md`.
