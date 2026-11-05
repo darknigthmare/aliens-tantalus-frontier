@@ -15,6 +15,7 @@
 - **Partie VII — Vues et organisation des hubs** : §40 trois vues (latérale, couloir de profondeur, plan au sol à 35°) · §41 Tantalus pièce par pièce · §42 Asphodèle · §43 Port-Méridien · §44 liste complète de ce qui reste à faire et à générer
 - **Décisions validées (2026-11-05)** : §45
 - **Partie VIII — Musique : prompts pour Google Flow Music** : §46 méthode et palette · §47 hub et voyage · §48 campagne principale · §49 campagnes annexes · §50 archives et missions spéciales · §51 récapitulatif
+- **Partie IX — Feuille de route pour rendre le jeu attractif** : §52 principes, état et renommage bloqué · §53 feuille de route détaillée · §54 ordre de travail
 
 # PARTIE I — Campagne principale : Cocyte
 
@@ -1922,9 +1923,9 @@ Le propriétaire veut **les deux** : des archives **fidèles à 100 % aux évén
 | `mire-fidele-nostromo` | *Alien* | 2122 | USCSS Nostromo | Chapitre existant **Mire Archive 001** [PARTIEL] ; dettes `complete-nostromo-cast`, `complete-historical-campaign` |
 | `mire-fidele-lv223` | *Prometheus* | 2093 | LV-223 | — |
 | `mire-fidele-sevastopol` | *Alien: Isolation* | 2137 | Sevastopol | — |
-| `mire-fidele-renaissance` | *Alien: Romulus* | 2142 | Renaissance Station | Pièces de costumes d'Andy et Navarro préparées hors dépôt (`SPRITE_PACK_V170.md`) |
+| `mire-fidele-renaissance` | *Alien: Romulus* | 2142 | Renaissance Station | Pièces de costumes d'Andy et Navarro préparées hors dépôt (`docs/development/SPRITE_PACK_V170.md`) |
 | `mire-fidele-acheron` | *Aliens* | 2179 | Acheron / LV-426 | — |
-| `mire-fidele-fiorina` | *Alien 3* | 2179 | Fiorina 161 | Costume Ripley *Alien 3* préparé hors dépôt (`SPRITE_PACK_V170.md`) |
+| `mire-fidele-fiorina` | *Alien 3* | 2179 | Fiorina 161 | Costume Ripley *Alien 3* préparé hors dépôt (`docs/development/SPRITE_PACK_V170.md`) |
 | `mire-fidele-katanga` | *Aliens: Fireteam Elite* | 2202 | Katanga, LV-895 | — |
 | `mire-fidele-auriga` | *Alien Resurrection* | 2381 | USM Auriga | **Hors chronologie** (MIRE ne peut pas modéliser 2381 en 2204) : contenu bonus, signalé comme tel. Costume Ripley 8 préparé hors dépôt |
 
@@ -3383,3 +3384,181 @@ Instrumental jungle hunting-ground tension music, no vocals. Tribal-like low dru
 3. Si un morceau est trop « épique » ou trop propre, ajouter au prompt : *more silence, more dissonance, less melody, darker, sparse*.
 4. Garder une trace du prompt et de la version retenue pour chaque piste, et vérifier les conditions d'utilisation de l'outil (droits, marquage éventuel) avant intégration au jeu.
 5. Les fichiers retenus vont dans `assets/audio/music/` avec une mise à jour de `assets/audio/manifest.json` et de la note de provenance (`LICENSE_NOTICE.md`), qui indique aujourd'hui que l'audio est produit par synthèse hors ligne : cette note devra mentionner l'outil de génération.
+
+
+---
+
+# PARTIE IX — Feuille de route pour rendre le jeu attractif
+
+## 52. Principes et état au 2026-11-05
+
+### 52.1 Principes
+
+1. **Finir avant d'ajouter.** Une heure de jeu finie attire davantage que dix chapitres partiels.
+2. **Le son et les sensations d'abord.** Dans un jeu Alien, la peur passe par le son, le rythme et les silences.
+3. **Mesurer avec des joueurs.** Les tests techniques du dépôt (4 062 tests Node à cette date, 4 061 réussis, 0 échec, 1 non exécuté) prouvent la robustesse, pas l'intérêt.
+4. **Respecter les protections du dépôt.** Certaines données sont protégées volontairement (§52.3) ; les lever est une décision du propriétaire.
+
+### 52.2 Statuts
+
+| Statut | Signification |
+| --- | --- |
+| **Fait** | Livré dans cette PR ou déjà présent dans le dépôt |
+| **Prêt** | Conçu en détail, réalisable sans décision supplémentaire |
+| **Bloqué** | Dépend d'une décision ou d'une ressource indisponible ici |
+| **À faire** | Non commencé |
+
+### 52.3 Renommage dans le code : bloqué par une protection volontaire
+
+**Tentative faite le 2026-11-05**, sur une branche locale non publiée :
+
+- `content-core-v50.js` : Lethe → Cocyte, Pioneer Station → Station Orphée, emplacement de Freya's Prospect → Hiémale, description de BG-386 avec Freya's Prospect, secteurs passés au Tantalus Reach, provenance `project-canon`, biomes et atmosphères corrigés pour 16 mondes de la franchise. **Les 64 identifiants de mondes et leurs valeurs de danger, d'infestation et de stabilité restaient identiques** (comparaison champ par champ avec `main`).
+- Textes affichés : `COCYTE · …` dans les scènes du convoi et de QZ-18, « TR-0 · LA RUCHE-MONDE ».
+- Les 68 suites de tests liées aux fichiers modifiés passaient (1 188 tests, 0 échec).
+
+**Pourquoi rien n'a été publié :** l'audit V179 (`scripts/audit-succession-v163.mjs`) classe `src/content-core-v50.js` parmi les **`protectedGameplayBytes`**, avec `src/save.js` et `src/cloud-sync-v119.js`. Les vérificateurs `verify-audit-continuation-v163.mjs` et `verify-parallel-completion-v165.mjs` refusent donc toute modification de ce fichier. C'est une protection voulue des données de jeu, pas une empreinte oubliée.
+
+**Options pour le propriétaire :**
+
+| Option | Contenu | Conséquence |
+| --- | --- | --- |
+| **A — Lever la protection pour cette modification** | Ajouter un maillon d'audit (V183) qui déclare la nouvelle empreinte de `content-core-v50.js` et autorise cette seule modification dans les vérificateurs V163 et V165 | Renommage complet et cohérent ; les identifiants et l'équilibrage restent stables |
+| **B — Renommer seulement l'affichage** | Laisser `content-core-v50.js` intact et remplacer le nom des mondes au moment de l'affichage | Moins sûr : les noms existent alors en double, et chaque écran doit passer par la couche d'affichage |
+| **C — Reporter** | Garder les anciens noms dans le code jusqu'à une intégration groupée | Le jeu et la bible restent en désaccord sur les noms |
+
+Recommandation : **A**. Le correctif est prêt (patch local de 9 fichiers + module de succession V183), et pourra être republié dès que la levée de protection est validée.
+
+**Fiches de référence non renommées :** `premium-personnel-v119.js` (Maeko Hayes, Jonas Harper), `franchise-costumes-v119.js` (tenues « de Lethe ») et les cultistes Darwin Era des catalogues d'ennemis décrivent des éléments réels d'*Aliens: Dark Descent*, avec leur source citée. Depuis la décision d'avoir des **archives MIRE fidèles**, ils restent des références de cette œuvre. Les renommer rendrait leur source fausse. Solène Ivarsson et Dario Kessler restent des personnages originaux de la bible, pas des remplacements de ces fiches.
+
+---
+
+## 53. Feuille de route détaillée
+
+### 53.1 Tranche verticale : la première heure
+
+**Objectif :** une séquence jouable sans coupure, au niveau final : ouverture → réveil → qualification → Port-Méridien → briefing → Acte II (QZ-18) → retour et compte rendu.
+
+| Tâche | Statut | Dépend de |
+| --- | --- | --- |
+| Écrire l'enchaînement exact des écrans et transitions | Prêt (§4, §5.2) | — |
+| CIN-00, CIN-01, CIN-02, CIN-20 (plans, textes) | Prêt (§4, §10) | Art des plans |
+| Raccorder prologue → Port-Méridien → briefing → QZ-18 dans l'état de campagne | À faire | `storyCampaign` (§11) |
+| Musique de la séquence : M-01, M-02, M-05, M-06, M-07 | Prêt (prompts §47-48) | Génération par le propriétaire |
+| Bruitages de la séquence (détecteur, pas, portes, sas, pluie, relais) | À faire | §53.2 |
+| Test de jeu de la séquence par 3 à 5 joueurs | À faire | Séquence jouable |
+
+**Critère de réussite :** un joueur extérieur finit la séquence sans aide, en moins de 70 minutes, et sait dire ce qui s'est passé à QZ-18.
+
+### 53.2 Audio
+
+| Tâche | Statut | Remarque |
+| --- | --- | --- |
+| 31 prompts musicaux | **Fait** (§46-51, fichier `PROMPTS_MUSIQUE_FLOW.md`) | — |
+| Génération des musiques | Bloqué ici | Faite par le propriétaire avec Flow Music |
+| Élargir les emplacements audio du jeu | À faire | Le jeu n'a que 5 emplacements de bruitages et 3 de musique, figés dans `AUDIO_SLOTS_V77` (`src/audio-assets-v77.js`) ; il faut les étendre avant d'ajouter des pistes |
+| Musique par scène (hub, mission, alerte, boss, fin) | À faire | `resolveViewAudioSceneV77` ne distingue que menu, hub et mission |
+| Bruitages prioritaires (≈ 40) : détecteur (variantes), pas par sol, portes, sas, ascenseurs, alarmes, pluie, cris par caste, armes principales | À faire | Le dépôt sait synthétiser des sons originaux hors ligne (`scripts/generate-audio-v132.mjs`) ; c'est une piste possible |
+| Mise à jour de la provenance audio | À faire | `LICENSE_NOTICE.md` décrit aujourd'hui une synthèse hors ligne ; il faudra y mentionner l'outil utilisé |
+
+**Critère :** chaque action du joueur et chaque événement de menace a un son ; les silences sont voulus, jamais des absences.
+
+### 53.3 Sensations de jeu et tension
+
+| Tâche | Statut |
+| --- | --- |
+| Session de réglage du tir (recul, impact, réaction des ennemis, retour sonore) avec captures avant/après | À faire |
+| Directeur de tension : apparitions dosées selon le stress, temps calmes garantis | À faire |
+| Fausses alertes du détecteur de mouvement (échos, ventilateurs) | Prêt (§14.5, §7.2) |
+| Comportements propres à chaque caste (plafond, contournement, fuite de la lumière, embuscade) | À faire, selon `game-ai` (`AGENTS.md`) |
+
+**Critère :** en test, les joueurs décrivent la peur ou la tension, pas seulement la difficulté.
+
+### 53.4 Art provisoire
+
+| Tâche | Statut |
+| --- | --- |
+| Liste des chapitres à art provisoire ou en dette | **Fait** (§28.1, §37.2) |
+| Masquer les chapitres non finis derrière un statut « en préparation » | À faire (décision du propriétaire) |
+| Terminer d'abord l'art des 4 chapitres de la campagne 1 | À faire |
+| Production d'images | Bloqué ici | Aucun outil de génération d'image dans cette session |
+
+### 53.5 Progression
+
+| Tâche | Statut |
+| --- | --- |
+| Tableau « ce que le joueur gagne à chaque heure » | À faire |
+| Récompenses visibles au hub (trophées, râteliers, colonie) | Prêt (§41, §43) |
+| Option de mort définitive de l'équipage et blessures durables | À faire |
+| État de colonie et chantiers | Prêt (§6.3, §43) |
+
+**Critère :** aucune heure de jeu sans gain visible ni décision.
+
+### 53.6 Personnages
+
+| Tâche | Statut |
+| --- | --- |
+| Quêtes des 16 membres d'équipage | **Fait** en conception (§8, §14-18) |
+| Répliques réactives (mission ratée, colon mort, retour blessé) | À faire |
+| Scènes collectives du mess | Prêt (§8.2) |
+| Portraits expressifs (3 expressions par membre) | À faire |
+
+### 53.7 Rejouabilité
+
+| Tâche | Statut |
+| --- | --- |
+| Contrats locaux, missions par planète, archives MIRE | **Fait** en conception (§6, §7, §21-26, §39) |
+| Modificateurs de partie (cauchemar, mort définitive, ressources rares) | À faire |
+| Score par mission | À faire |
+| Coop locale du convoi (déclarée inachevée dans `special-operations-v131.js`) | À faire |
+
+### 53.8 Options et accessibilité
+
+| Tâche | Statut | Constat dans le code |
+| --- | --- | --- |
+| Manette, tactile, trois difficultés, réduction des mouvements, volume | Présent | Mentions dans le code (manette 11 fichiers, tactile 66, difficulté 18, réduction des mouvements 79, volume 31) ; qualité non évaluée |
+| Mode daltonien | À faire | Aucune occurrence |
+| Version anglaise | À faire | `index.html` en `lang="fr"`, aucun système de traduction (`i18n`) |
+| Remappage complet des commandes | À vérifier | 4 fichiers mentionnent un remappage |
+| Taille du texte | À faire | — |
+
+### 53.9 Interface et lisibilité
+
+| Tâche | Statut |
+| --- | --- |
+| Écran d'objectif toujours accessible | À faire |
+| Carte du Tantalus et de la station | Prêt (§41, §42) |
+| Audit « aucun écran technique pour le joueur » | À faire |
+
+### 53.10 Présentation publique
+
+| Tâche | Statut |
+| --- | --- |
+| Page de présentation, résumé en une phrase | À faire |
+| Bande-annonce de 60 à 90 secondes issue de la tranche verticale | Bloqué par §53.1 |
+| 6 à 8 captures soignées | Bloqué par §53.1 |
+| Décision sur la diffusion au regard de la propriété intellectuelle (`LICENSE_NOTICE.md`) | Décision du propriétaire |
+
+### 53.11 Tests de jeu
+
+| Tâche | Statut |
+| --- | --- |
+| Protocole : 3 à 5 joueurs, sans aide, notes sur les blocages, l'ennui et la peur | Prêt |
+| Grille de notes (moment, lieu, réaction, cause supposée) | Prêt |
+| Première session | Bloqué par §53.1 |
+
+---
+
+## 54. Ordre de travail
+
+| Étape | Contenu | Pourquoi maintenant |
+| --- | --- | --- |
+| 1 | Décision sur la protection de `content-core-v50.js` (§52.3) | Débloque le renommage, déjà prêt |
+| 2 | Extension des emplacements audio + génération des musiques M-01 à M-07 | Prérequis de la tranche verticale |
+| 3 | Tranche verticale (§53.1) avec bruitages prioritaires | Ce qui attire et ce qui se montre |
+| 4 | Réglage des sensations et de la tension (§53.3) | Rend la tranche convaincante |
+| 5 | Premier test de jeu (§53.11) | Mesure avant d'aller plus loin |
+| 6 | Masquage ou finition de l'art provisoire (§53.4) | Évite la mauvaise impression |
+| 7 | Progression et personnages (§53.5-53.6) | Donne envie de continuer |
+| 8 | Version anglaise et mode daltonien (§53.8) | Élargit le public |
+| 9 | Présentation publique (§53.10) | Quand la tranche est prête |
+| 10 | Campagnes annexes, dans l'ordre du §20 | Une fois le cœur du jeu solide |
