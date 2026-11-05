@@ -13,6 +13,8 @@
 - **Partie V — Audit complet des manques** : §38 corrections, personnages, ennemis, véhicules, armes, costumes, props, décors, animations, VFX, systèmes, audio, interface, cinématiques
 - **Partie VI — Missions sur les lieux originaux de la bible** : §39
 - **Partie VII — Vues et organisation des hubs** : §40 trois vues (latérale, couloir de profondeur, plan au sol à 35°) · §41 Tantalus pièce par pièce · §42 Asphodèle · §43 Port-Méridien · §44 liste complète de ce qui reste à faire et à générer
+- **Décisions validées (2026-11-05)** : §45
+- **Partie VIII — Musique : prompts pour Google Flow Music** : §46 méthode et palette · §47 hub et voyage · §48 campagne principale · §49 campagnes annexes · §50 archives et missions spéciales · §51 récapitulatif
 
 # PARTIE I — Campagne principale : Cocyte
 
@@ -217,7 +219,7 @@ Postes et salles : `HUB_NPC_ROSTER` (`src/hub-v52-runtime.js`). Fonctions narrat
 | Plan | Image | Son / texte |
 | --- | --- | --- |
 | 1 | Noir. Une ligne de télémétrie verte. | Bip de relais régulier. |
-| 2 | Relais QZ-18 sous la pluie de Cocyte. | `LETHE · RELAIS QZ-18 · 18:41` |
+| 2 | Relais QZ-18 sous la pluie de Cocyte. | `COCYTE · RELAIS QZ-18 · 18:41` |
 | 3 | Pupitre : un brouillon de détresse s'écrit, puis passe en `EN ATTENTE`. | Le bip ralentit. |
 | 4 | Un badge sur le pupitre, nom illisible. Une main hors champ le prend. | Aucune voix. |
 | 5 | Le message part : `18:54`. | `TREIZE MINUTES` |
@@ -392,7 +394,7 @@ Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-m
 | Ordres de livraison archivés par CASSIUS | Station S2 |
 | Témoignage de Tomas Wren | Colonie, annexe *Ce que le quai a vu* |
 
-**[À DÉCIDER]** Identité du signataire du badge. Option A : jamais établie (on accuse un système, pas une personne). Option B : établie avec 6 pièces sur 7, le texte rappelant ce qui reste non prouvé. Recommandation : B.
+**Validé (2026-11-05) :** l'identité du signataire du badge est établie seulement si le joueur réunit 6 pièces sur 7. Le texte de retour rappelle alors ce qui reste non prouvé. Avec moins de pièces, elle reste « non établie ».
 
 **Fins [PROPOSÉ] :**
 
@@ -621,7 +623,7 @@ Elles utilisent le système de rapport existant (`npc-dialogue-v62.js`) : confia
 
 | Recrue | Titre | Front | Résumé |
 | --- | --- | --- | --- |
-| **Mara Voss « RIVET »** | **Le même nom** | Station | Ancienne du chantier orbital ; elle répare la station. Elle porte le nom du contremaître I. Voss. **[À DÉCIDER]** lien familial ou homonymie. |
+| **Mara Voss « RIVET »** | **Le même nom** | Station | Ancienne du chantier orbital ; elle répare la station. Elle porte le nom du contremaître I. Voss : **lien familial validé (2026-11-05)**. Elle rejoint l'équipage pour prouver que son parent n'a pas signé à 18:43 ; son recrutement débloque une pièce de contexte sur I. Voss. |
 | **Nadia Bensaïd « SUTURE »** | **Pas de blessé sans extraction** | Colonie | Venue d'une colonie isolée ; rejoint l'équipage quand Port-Méridien atteint *Rétablie*. |
 | **Jonas Reed « BASTION »** | **Sécurité embarquée** | Enquête | Ancien agent de sécurité de cargos ; il a convoyé des scellés QZ17 sans savoir ce qu'ils contenaient. Témoignage au dossier. |
 | **Jun Seo « BALISE »** | **Itinéraires terrestres** | Colonie | Connaît les routes de convoi ; le recruter avant l'Acte III facilite le corridor. |
@@ -691,15 +693,15 @@ Les chapitres Mire Archive 001, Protocole Z-110, Jeri, Éloïse, A.T.A.X.-Q, Le 
 
 | # | Question | Section |
 | --- | --- | --- |
-| 1 | Valider les noms originaux du §1.5 (Cocyte, Station Orphée, Enfants de l'Hôte Parfait, Solène Ivarsson, Dario Kessler) avant le renommage dans le code. | §1.5 |
-| 2 | Identité du signataire du badge : jamais (A) ou sous condition (B) ? | §5.7 |
-| 3 | Mara Voss liée à I. Voss, ou homonymie ? | §8.3 |
-| 4 | Valider la répartition des chapitres V131 dans les campagnes annexes (§13.4) et le déplacement de leur `worldId`. | §9.2, §13.4 |
-| 5 | Noms proposés (Asphodèle, CASSIUS, Adèle Sarrazin, Tomas Wren, Lucia Ferro, Halloran, Grue) à valider. | §2.3 |
-| 6 | ICC et Marshals coloniaux : les ajouter comme institutions du récit, sans faction jouable ? | §1.6 |
-| 7 | Valider les nouveaux lieux des campagnes annexes (TR-0, Kéos, Murmure, Tyndare, Pangaea comme monde, Hiéron, *Clémence*, *Bonne-Espérance*, Base Ombelle) et leurs personnages (Navarre, Rask, Oyelaran, Viret, Szabo, Moreau, Asch). | §14-18 |
-| 8 | Définir MIRE comme programme de modélisation de la compagnie ? | §18.3 |
-| 9 | Ordre et conditions de déblocage des campagnes annexes. | §13.5 |
+| 1 | Valider les noms originaux du §1.5 (Cocyte, Station Orphée, Enfants de l'Hôte Parfait, Solène Ivarsson, Dario Kessler) avant le renommage dans le code. | §1.5 — **Validé** |
+| 2 | Identité du signataire du badge : jamais (A) ou sous condition (B) ? | §5.7 — **Validé : révélée avec 6 pièces sur 7** |
+| 3 | Mara Voss liée à I. Voss, ou homonymie ? | §8.3 — **Validé : lien familial** |
+| 4 | Valider la répartition des chapitres V131 dans les campagnes annexes (§13.4) et le déplacement de leur `worldId`. | §9.2, §13.4 — **Validé : répartition et déplacement des mondes** |
+| 5 | Noms proposés (Asphodèle, CASSIUS, Adèle Sarrazin, Tomas Wren, Lucia Ferro, Halloran, Grue) à valider. | §2.3 — **Validé** |
+| 6 | ICC et Marshals coloniaux : les ajouter comme institutions du récit, sans faction jouable ? | §1.6 — **Validé : les deux gardés** |
+| 7 | Valider les nouveaux lieux des campagnes annexes (TR-0, Kéos, Murmure, Tyndare, Pangaea comme monde, Hiéron, *Clémence*, *Bonne-Espérance*, Base Ombelle) et leurs personnages (Navarre, Rask, Oyelaran, Viret, Szabo, Moreau, Asch). | §14-18 — **Validé** |
+| 8 | Définir MIRE comme programme de modélisation de la compagnie ? | §18.3 — **Validé (archives fidèles et originales)** |
+| 9 | Ordre et conditions de déblocage des campagnes annexes. | §13.5 — **Validé : déblocage progressif** |
 
 
 ---
@@ -1436,13 +1438,13 @@ Le jeu se déroule en **2204** (`year: 2204` dans les campagnes du code). Chaque
 
 ### 21.2 Règles de fidélité
 
-1. **Aucune scène d'une œuvre n'est reconstituée telle quelle.** Une mission se déroule à côté, avant ou après : un autre lieu du même monde, une autre équipe, un autre moment.
-2. **Aucun personnage principal d'une œuvre n'apparaît ni n'est joué.** Les personnages proposés sont originaux. Une œuvre peut être citée par ses traces (un journal, une épave, une date).
+1. **Hors archives MIRE fidèles, aucune scène d'une œuvre n'est reconstituée telle quelle.** Une mission se déroule à côté, avant ou après : un autre lieu du même monde, une autre équipe, un autre moment.
+2. **Hors archives MIRE fidèles, aucun personnage principal d'une œuvre n'apparaît ni n'est joué.** Les personnages proposés sont originaux. Une œuvre peut être citée par ses traces (un journal, une épave, une date).
 3. **Une préquelle ne change pas l'avenir connu.** Le joueur peut sauver des personnes que l'œuvre ne mentionne pas, comprendre une origine, retarder sans empêcher. Ce qui arrive dans l'œuvre arrive quand même.
 4. **Un héritage respecte l'état final de l'œuvre.** Un lieu détruit reste détruit ; on visite ses restes.
-5. **Une archive MIRE est une reconstitution.** Elle est présentée comme un modèle de la compagnie, peut contenir des erreurs, et le jeu le dit. Elle ne remplace pas l'œuvre.
-6. **Une date non confirmée n'est pas inventée.** Si l'année d'une œuvre n'est pas établie dans nos sources, le mode reste **[À DÉCIDER]**.
-7. **Les éléments propres aux Yautja** (AVP) restent à l'état de traces dans ce jeu Aliens (ruines, trophées, armes abandonnées). Leur présence active est **[À DÉCIDER]**.
+5. **Une archive MIRE est une reconstitution, de deux types (validé le 2026-11-05).** Les **archives fidèles** reconstituent au plus près les événements connus d'une œuvre, avec ses personnages. Les **archives originales** sont des préquelles ou suites avec des personnages originaux. Dans les deux cas, le jeu les présente comme des modèles de la compagnie.
+6. **Une date non confirmée n'est pas inventée.** Pour BG-386, Ryushi et LV-742, le propriétaire a fixé le mode **héritage** (validé le 2026-11-05) : leurs événements ont eu lieu avant 2204.
+7. **Les Yautja (validé le 2026-11-05)** restent surtout à l'état de traces (ruines, trophées, armes abandonnées). Ils peuvent **apparaître brièvement** dans des lieux adaptés, sans que les missions soient centrées sur eux. Une **mission dédiée** fait le lien avec *Yautja : la Longue Chasse* (§22.16).
 
 ### 21.3 Chronologie de référence
 
@@ -1460,16 +1462,16 @@ Le jeu se déroule en **2204** (`year: 2204` dans les campagnes du code). Chaque
 | **2204** | **Aliens: Tantalus Frontier** | Cocyte et Tantalus Reach | — | Code du projet |
 | 2230-2231 | *Aliens versus Predator 2* (jeu) | LV-1201 | **Préquelle** | [Wikipédia — Aliens versus Predator 2](https://en.wikipedia.org/wiki/Aliens_Versus_Predator_2) |
 | 2381 | *Alien Resurrection* (film) | USM Auriga | **Préquelle** | Film |
-| non précisée | *Aliens vs. Predator: Prey* (roman, bande dessinée) | Ryushi | [À DÉCIDER] | [AvP Central — Prey](https://www.avpcentral.com/aliens-vs-predator-prey) |
-| non précisée | *Aliens versus Predator: Extinction* (jeu) | LV-742 | [À DÉCIDER] | [Wikipédia — Extinction](https://en.wikipedia.org/wiki/Aliens_Versus_Predator:_Extinction) |
-| non confirmée | *Aliens vs. Predator* (jeu, 2010) | BG-386 (Freya's Prospect) | [À DÉCIDER] | [AvP Central — AvP 2010](https://www.avpcentral.com/aliens-vs-predator-2010) |
+| non précisée | *Aliens vs. Predator: Prey* (roman, bande dessinée) | Ryushi | Héritage (décision) | [AvP Central — Prey](https://www.avpcentral.com/aliens-vs-predator-prey) |
+| non précisée | *Aliens versus Predator: Extinction* (jeu) | LV-742 | Héritage (décision) | [Wikipédia — Extinction](https://en.wikipedia.org/wiki/Aliens_Versus_Predator:_Extinction) |
+| non confirmée | *Aliens vs. Predator* (jeu, 2010) | BG-386 (Freya's Prospect) | Héritage (décision) | [AvP Central — AvP 2010](https://www.avpcentral.com/aliens-vs-predator-2010) |
 | non trouvée | — | Ceto, New Galveston, New Albion, Capua VII, Korari | Monde du catalogue sans événement d'œuvre utilisé | Recherche sans résultat confirmé |
 
 Les dates des films sont celles indiquées dans les films eux-mêmes ; elles n'ont pas été revérifiées en ligne pour ce document.
 
-**Note sur Freya's Prospect :** le catalogue en fait un monde distinct (« colonie minière sous glace »), alors que la source consultée décrit Freya's Prospect comme la principale colonie de BG-386. **[À DÉCIDER]** : fusionner, ou garder un monde distinct sous un nom original.
+**Freya's Prospect (validé le 2026-11-05) :** fusionné avec BG-386, dont il devient la colonie principale. L'emplacement `world-11-freya-s-prospect` devient un **nouveau monde glacé original**, nom proposé **Hiémale (TR-311)**, identifiant technique conservé.
 
-**Note sur les attributs générés :** les biomes et atmosphères des mondes sont tirés automatiquement (`content-core-v50.js`) et contredisent parfois l'œuvre (Sevastopol indiqué « jungle/ruins », par exemple). Les missions de cette partie suivent l'œuvre ; corriger ces attributs pour les mondes de la franchise est **[À DÉCIDER]**.
+**Attributs générés (validé le 2026-11-05) :** les biomes et atmosphères des mondes de la franchise seront corrigés à la main (§22.17). Les autres mondes gardent leurs valeurs générées.
 
 ---
 
@@ -1538,7 +1540,7 @@ Chaque monde reçoit une **chaîne** de 2 à 4 missions, disponible après la ca
 ### 22.6 Jackson's Star et Renaissance Station — `world-12-jackson-s-star`, `world-13-renaissance-station`
 
 **Repères de l'œuvre :** colonie minière de Jackson's Star et station de recherche Renaissance, incident de 2142.
-**Situation en 2204 :** la station est perdue ; la colonie a continué ou s'est éteinte selon ce que le projet décide **[À DÉCIDER]**.
+**Situation en 2204 (validé) :** la station est perdue ; la colonie minière est **toujours habitée, en déclin**, sous contrat de la compagnie.
 
 | ID | Mode | Titre | Résumé | Objectif | Ancrage Alien |
 | --- | --- | --- | --- | --- | --- |
@@ -1556,7 +1558,7 @@ Chaque monde reçoit une **chaîne** de 2 à 4 missions, disponible après la ca
 | `prequel-auriga-1` | Préquelle | **Le chantier militaire** | Un chantier militaire d'où partira, longtemps après, un vaisseau-laboratoire. Une équipe scientifique y conserve des échantillons issus de Fiorina 161 (lien `prequel-fury-auriga`). Le Tantalus livre une cargaison scellée sans pouvoir l'ouvrir. | `escort a colony convoy` | Préquelle : origine d'un programme futur. |
 | `prequel-auriga-2` | Préquelle | **Les premiers essais** | Une alerte de confinement dans un module du chantier. L'éteindre sans que rien ne sorte ; le programme continue. | `escape the quarantine` | Le programme militaire est plus fort que l'incident. |
 
-**[À DÉCIDER]** Le catalogue présente l'Auriga comme un lieu jouable en 2204 ; ce document le traite comme un chantier en préquelle.
+**Validé (2026-11-05) : les deux.** L'Auriga est jouable en **préquelle** (le chantier, ci-dessus) et en **archive MIRE fidèle** (§26.10). **Limite de cohérence :** en 2204, MIRE ne peut pas reconstituer des événements de 2381. Cette archive est donc proposée **hors chronologie**, comme contenu bonus du menu des archives, et le jeu l'indique.
 
 ### 22.8 Sulaco — `world-16-sulaco-drift`
 
@@ -1568,7 +1570,7 @@ Chaque monde reçoit une **chaîne** de 2 à 4 missions, disponible après la ca
 | `legacy-sulaco-1` | Héritage | **Les baies de largage** | Une épave militaire en orbite d'Acheron, pillée à moitié. Récupérer du matériel des Marines pour l'armurerie du Tantalus. | `board a drifting vessel` | Matériel des Marines. |
 | `legacy-sulaco-2` | Héritage | **La quarantaine du bord** | Un module de la soute est scellé depuis des années. L'ouvrir ou le laisser. | `escape the quarantine` | Ce qu'on scelle reste dangereux. |
 
-**[À DÉCIDER]** Identifier l'épave comme le Sulaco lui-même, ou comme un vaisseau de la même classe, pour éviter toute contradiction avec les œuvres.
+**Validé (2026-11-05) :** l'épave est un **vaisseau de la même classe** que le Sulaco, nom proposé **USS Gonfalon**, pour ne contredire aucune œuvre sur le sort du Sulaco.
 
 ### 22.9 Gateway Station — `world-17-gateway-station`
 
@@ -1595,11 +1597,11 @@ Chaque monde reçoit une **chaîne** de 2 à 4 missions, disponible après la ca
 ### 22.11 Purdan — `world-09-purdan`
 
 **Repères de l'œuvre :** installation Castor's Cradle de Gemini Exoplanet Solutions, entre *Alien* et *Aliens* ; la source consultée laisse son sort final ouvert.
-**Situation en 2204 :** des décennies plus tard ; état de l'installation **[À DÉCIDER]**.
+**Situation en 2204 (validé) :** des décennies plus tard, Purdan est **toujours habité, en déclin** ; l'installation de Castor's Cradle est fermée, mais une colonie vit à proximité.
 
 | ID | Mode | Titre | Résumé | Objectif | Ancrage Alien |
 | --- | --- | --- | --- | --- | --- |
-| `legacy-purdan-1` | Héritage | **L'installation fermée** | Une balise automatique s'est rallumée sur Purdan. Descendre vérifier une installation abandonnée depuis longtemps. Ce qu'on y trouve dépend de la décision du projet sur son sort. | `recover black-box data` | Installation corporative oubliée. |
+| `legacy-purdan-1` | Héritage | **L'installation fermée** | Une balise automatique s'est rallumée sur Purdan. Descendre vérifier une installation abandonnée depuis longtemps. Des colons du voisinage y entrent pour récupérer du matériel, et certains ne ressortent pas. | `recover black-box data` | Installation corporative oubliée. |
 | `legacy-purdan-2` | Héritage | **Les ruines xénobiologiques** | Explorer des ruines anciennes décrites par le catalogue. | `track an apex specimen` | Ruines anciennes. |
 
 ### 22.12 LV-1201 — `world-20-lv-1201`
@@ -1614,30 +1616,73 @@ Chaque monde reçoit une **chaîne** de 2 à 4 missions, disponible après la ca
 
 ### 22.13 BG-386 — `world-21-bg-386`
 
-**Repères de l'œuvre :** monde minier, colonie de Freya's Prospect, installation secrète de la compagnie bâtie sur des ruines anciennes (AvP 2010). **Année non confirmée dans nos sources : mode [À DÉCIDER].**
+**Repères de l'œuvre :** monde minier, colonie de Freya's Prospect, installation secrète de la compagnie bâtie sur des ruines anciennes (AvP 2010). **Année non confirmée dans nos sources ; mode héritage fixé par le propriétaire.** Freya's Prospect est la colonie principale de ce monde.
 
 | ID | Mode | Titre | Résumé | Objectif | Ancrage Alien |
 | --- | --- | --- | --- | --- | --- |
-| `bg386-1` | [À DÉCIDER] | **La raffinerie** | Une raffinerie de la colonie a cessé d'émettre. Écrite pour fonctionner dans les deux modes : signes avant-coureurs (préquelle) ou ruines (héritage). | `restore atmospheric processing` | Colonie minière. |
-| `bg386-2` | [À DÉCIDER] | **Les pyramides** | Explorer des ruines anciennes sous la jungle, au-dessus desquelles la compagnie a construit. | `recover black-box data` | Ruines anciennes, laboratoire secret. |
+| `bg386-1` | Héritage | **La raffinerie** | Une raffinerie de la colonie a cessé d'émettre. La colonie de Freya's Prospect vit encore autour des ruines de l'incident ; la raffinerie a cessé d'émettre. | `restore atmospheric processing` | Colonie minière. |
+| `bg386-2` | Héritage | **Les pyramides** | Explorer des ruines anciennes sous la jungle, au-dessus desquelles la compagnie a construit. | `recover black-box data` | Ruines anciennes, laboratoire secret. |
 
 ### 22.14 Ryushi — `world-23-ryushi`
 
-**Repères de l'œuvre :** monde d'élevage géré par la compagnie Chigusa, colonie de Prosperity Wells, détruite pendant l'incident raconté par *Prey*. **Année non précisée : mode [À DÉCIDER].**
+**Repères de l'œuvre :** monde d'élevage géré par la compagnie Chigusa, colonie de Prosperity Wells, détruite pendant l'incident raconté par *Prey*. **Année non précisée ; mode héritage fixé par le propriétaire.**
 
 | ID | Mode | Titre | Résumé | Objectif | Ancrage Alien |
 | --- | --- | --- | --- | --- | --- |
-| `ryushi-1` | [À DÉCIDER] | **Les troupeaux** | Un ranch isolé signale des bêtes éventrées. Écrite pour les deux modes. | `defend the colony` | Hôtes animaux, colonie d'éleveurs. |
-| `ryushi-2` | [À DÉCIDER] | **La gorge** | Retrouver une épave non humaine dans une gorge du désert. Ce qu'il en reste dépend du mode retenu. | `board a drifting vessel` | Épave ancienne. |
+| `ryushi-1` | Héritage | **Les troupeaux** | Des éleveurs se sont réinstallés après la destruction de Prosperity Wells ; un ranch isolé signale des bêtes éventrées. | `defend the colony` | Hôtes animaux, colonie d'éleveurs. |
+| `ryushi-2` | Héritage | **La gorge** | Retrouver une épave non humaine dans une gorge du désert. Il n'en reste qu'une carcasse fouillée depuis longtemps, mais quelque chose y niche. | `board a drifting vessel` | Épave ancienne. |
 
 ### 22.15 LV-742 — `world-25-lv-742`
 
-**Repères de l'œuvre :** planète décrite comme terrain de chasse d'une ruche locale (*Extinction*). **Année non précisée : mode [À DÉCIDER].** Le catalogue la décrit comme « station de terraformation assiégée ».
+**Repères de l'œuvre :** planète décrite comme terrain de chasse d'une ruche locale (*Extinction*). **Année non précisée ; mode héritage fixé par le propriétaire.** Le catalogue la décrit comme « station de terraformation assiégée ».
 
 | ID | Mode | Titre | Résumé | Objectif | Ancrage Alien |
 | --- | --- | --- | --- | --- | --- |
-| `lv742-1` | [À DÉCIDER] | **Le siège du terraformeur** | Une station de terraformation tient sous un siège permanent. Ravitailler et évacuer une équipe. | `hold the extraction zone` | Terraformation, siège. |
-| `lv742-2` | [À DÉCIDER] | **Les pièges** | Des organismes tués par une arme qui n'est pas humaine. Établir qui chasse sur ce monde, sans engager. | `track an apex specimen` | Traces d'un autre chasseur. |
+| `lv742-1` | Héritage | **Le siège du terraformeur** | Une station de terraformation tient sous un siège permanent. Ravitailler et évacuer une équipe. | `hold the extraction zone` | Terraformation, siège. |
+| `lv742-2` | Héritage | **Les pièges** | Des organismes tués par une arme qui n'est pas humaine. Établir qui chasse sur ce monde, sans engager. Une silhouette camouflée peut être aperçue brièvement (§21.2, règle 7). | `track an apex specimen` | Traces d'un autre chasseur. |
+
+### 22.16 Mission dédiée — lien avec *Yautja : la Longue Chasse*
+
+**Validé (2026-11-05) :** une chaîne côté AVP fait le lien avec l'autre jeu du propriétaire. Les Yautja y restent des tiers : le joueur ne les combat pas frontalement et la mission n'est pas centrée sur eux.
+
+**Lieu proposé :** LV-742, décrit par *Extinction* comme terrain de chasse d'une ruche locale (mode héritage).
+
+| ID | Type | Titre | Résumé | Objectif | Ancrage |
+| --- | --- | --- | --- | --- | --- |
+| `avp-hunt-1` | Annexe | **La réserve** | Une équipe de relevé coloniale a disparu dans une zone où les organismes semblent **élevés** autour de structures anciennes. Le Tantalus la retrouve à moitié : les survivants parlent de « silhouettes qui tremblent dans l'air ». | `rescue survivors` | Terrain de chasse ; présence aperçue, jamais affrontée. |
+| `avp-hunt-2` | Annexe | **Les trophées** | Un site de trophées : crânes d'organismes et armes humaines anciennes. Le joueur choisit de ne rien toucher, ou de prélever une pièce pour Inez. Prélever déclenche une traque brève par un chasseur camouflé, que le joueur doit **fuir**. | `escape the quarantine` | Les règles de la chasse ne concernent pas les humains, tant qu'ils ne volent rien. |
+| `avp-hunt-3` | Annexe | **La saison** | La ruche de la réserve déborde. Évacuer le dernier camp pendant qu'un chasseur traverse la zone sans s'occuper des Marines. | `hold the extraction zone` | Deux espèces, une seule voie de sortie. |
+
+**Lien avec l'autre jeu — [À DÉCIDER] avec le propriétaire :** marques de clan, équipement abandonné et architecture des structures doivent reprendre le contenu de *Yautja : la Longue Chasse* (clan, époque, matériaux). Cette bible ne connaît de ce jeu que son homeworld (vue au sol à 35°) ; elle n'invente pas son histoire. Un éventuel lien de sauvegarde entre les deux jeux est aussi à décider.
+
+**Apparitions brèves ailleurs (règle 7) :** LV-1201 (traces dans les temples, une silhouette au loin), BG-386 (pyramides), Ryushi (épave de la gorge).
+
+### 22.17 Biomes et atmosphères corrigés — [PROPOSÉ]
+
+**Validé (2026-11-05) :** correction des mondes de la franchise. Les valeurs ci-dessous s'appuient sur la description du catalogue et sur l'œuvre. Une atmosphère marquée « à vérifier » n'est pas établie par nos sources : elle doit être confirmée avant d'être écrite dans le code.
+
+| Monde | ID | Biomes actuels | Biomes proposés | Atmosphère actuelle | Atmosphère proposée |
+| --- | --- | --- | --- | --- | --- |
+| Acheron / LV-426 | `world-01-acheron-lv-426` | industrial / caverns | industrial / ruins | breathable | storm |
+| LV-223 | `world-02-lv-223` | foundry / habitation | jungle / ruins | toxic | toxic |
+| Fiorina 161 | `world-03-fiorina-161` | cryogenic / reactor | foundry / caverns | thin | à vérifier |
+| Sevastopol | `world-04-sevastopol` | jungle / ruins | orbital / ruins | corrosive | vacuum |
+| LV-895 | `world-06-lv-895` | badlands / laboratory | jungle / ruins | storm | à vérifier |
+| Katanga | `world-07-katanga` | orbital / hive | orbital / ruins | breathable | vacuum |
+| Purdan | `world-09-purdan` | industrial / caverns | colony / ruins | thin | à vérifier |
+| Jackson's Star | `world-12-jackson-s-star` | jungle / ruins | colony / mines | storm | storm |
+| Renaissance Station | `world-13-renaissance-station` | oceanic / mines | orbital / laboratory | breathable | vacuum |
+| USM Auriga | `world-14-usm-auriga` | badlands / laboratory | shipyard / laboratory | toxic | vacuum |
+| USCSS Nostromo | `world-15-uscss-nostromo` | orbital / hive | orbital / reactor | thin | vacuum |
+| Épave de même classe (Sulaco Drift) | `world-16-sulaco-drift` | colony / shipyard | orbital / shipyard | corrosive | vacuum |
+| Gateway Station | `world-17-gateway-station` | industrial / caverns | orbital / habitation | vacuum | breathable (intérieur) |
+| LV-1201 | `world-20-lv-1201` | jungle / ruins | jungle / ruins | toxic | à vérifier |
+| BG-386 (et Freya's Prospect) | `world-21-bg-386` | oceanic / mines | jungle / mines | thin | à vérifier |
+| Ryushi | `world-23-ryushi` | orbital / hive | badlands / habitation | vacuum | à vérifier |
+| LV-742 | `world-25-lv-742` | industrial / caverns | industrial / hive | breathable | à vérifier |
+
+Les mondes sans source trouvée (Ceto, New Galveston, New Albion, Capua VII, Korari) et Hiémale gardent leurs valeurs ou reçoivent des valeurs tirées de leur seule description, au choix du propriétaire.
+
 
 ---
 
@@ -1648,7 +1693,7 @@ Ces mondes sont marqués `licensed-continuity` dans le catalogue, mais la recher
 | Monde | ID | Description du catalogue | Mission unique | Mode | Objectif | Ancrage Alien |
 | --- | --- | --- | --- | --- | --- | --- |
 | **Ceto** | `world-10-ceto` | océan, archipels et cité minière | **La cité sur pilotis** : une cité minière d'archipel perd ses foreuses sous-marines une à une. Plonger, réparer, comprendre. | Indépendant | `restore atmospheric processing` | Colonie isolée, menace sous l'eau. |
-| **Freya's Prospect** | `world-11-freya-s-prospect` | colonie minière sous glace | **Sous la glace** : une colonie enfouie sous un glacier n'a plus de chauffage ; les galeries se referment de givre. Rétablir l'énergie avant le gel total. | Indépendant ([À DÉCIDER], §21.3) | `restore atmospheric processing` | Survie technique. |
+| **Hiémale** (TR-311, remplace Freya's Prospect) | `world-11-freya-s-prospect` | colonie minière sous glace (description conservée) | **Sous la glace** : une colonie enfouie sous un glacier n'a plus de chauffage ; les galeries se referment de givre. Rétablir l'énergie avant le gel total. | Indépendant | `restore atmospheric processing` | Survie technique. |
 | **New Galveston** | `world-18-new-galveston` | ville-colonie et infrastructures profondes | **Les fondations** : sous une ville-colonie, des infrastructures profondes servent de nid. Purger sans alerter une population de dizaines de milliers d'habitants. | Indépendant | `purge a reactor nest` | Infestation sous une ville. |
 | **New Albion** | `world-19-new-albion` | méga-colonie et réseau de métro | **La ligne 9** : une rame de métro arrive vide à chaque station. Descendre dans le réseau. | Indépendant | `navigate the vent network` | Peur urbaine, tunnels. |
 | **Capua VII** | `world-22-capua-vii` | monde agricole et marais | **Les marais** : des ouvriers agricoles disparaissent dans les marais au moment de la récolte. | Indépendant | `rescue survivors` | Hôtes dans une colonie rurale. |
@@ -1690,7 +1735,7 @@ Le catalogue contient 32 mondes `frontier-adaptation` (IDs 33 à 64) : chacun po
 | `world-40-pioneer-station-frontier` | Orphée — avant-poste | **L'avant-poste** : relever la garnison d'un avant-poste de défense isolé. | Indépendant | `hold the extraction zone` |
 | `world-41-purdan-prime` | Purdan — site principal | **La plate-forme** : sécuriser une plate-forme d'atterrissage abandonnée. | Héritage | `defend the colony` |
 | `world-42-ceto-reach` | Ceto — archipel extérieur | **L'île du phare** : rallumer le phare d'un archipel isolé. | Indépendant | `restore atmospheric processing` |
-| `world-43-freya-s-prospect-basin` | Freya — bassin | **Le lac gelé** : récupérer une foreuse tombée sous la glace. | Indépendant | `secure the power loader` |
+| `world-43-freya-s-prospect-basin` | Hiémale — bassin | **Le lac gelé** : récupérer une foreuse tombée sous la glace. | Indépendant | `secure the power loader` |
 | `world-44-jackson-s-star-drift` | Jackson's Star — dérive | **Le cargo des mineurs** : escorter un cargo de mineurs qui quitte le système sans autorisation. | Héritage | `escort a colony convoy` |
 | `world-45-renaissance-station-station` | Renaissance — module | **Le module froid** : ouvrir un module de laboratoire resté en froid. | Héritage | `escape the quarantine` |
 | `world-46-usm-auriga-colony` | Auriga — colonie du chantier | **Les familles du chantier** : sécuriser les quartiers civils du chantier militaire pendant une alerte. | Préquelle | `defend the colony` |
@@ -1743,7 +1788,7 @@ Le catalogue contient 32 mondes `frontier-adaptation` (IDs 33 à 64) : chacun po
 | **A — Exception assumée** | Garder le chapitre tel quel comme seule archive « historique » ; le présenter comme un modèle imparfait de la compagnie (score de synchronisation = écart au journal de bord). |
 | **B — Archive parallèle** | Le joueur incarne un technicien original de la raffinerie remorquée, pendant le trajet de retour, avant l'escale qui déclenche les événements. Missions : maintenance de la raffinerie, inspection des cuves, panne de liaison, fin à la réception du signal. Le score de synchronisation devient « fidélité du modèle ». |
 
-Recommandation : B, cohérente avec le reste de la Partie III.
+**Validé (2026-11-05) : les deux.** Mire Archive 001 reste une **archive fidèle** (option A, elle reconstitue les événements connus). L'option B devient une **archive originale** distincte, `mire-nostromo-b` (4 missions). Les autres archives suivent le même principe (§26.10).
 
 ### 26.3 Archive 002 — Sevastopol, « Le dernier quart »
 
@@ -1861,6 +1906,37 @@ Un protocole s'équipe au briefing, un seul à la fois, et n'est jamais obligato
 
 Les valeurs sont des propositions de conception, à équilibrer en test.
 
+### 26.10 Archives fidèles et archives originales — validé le 2026-11-05
+
+Le propriétaire veut **les deux** : des archives **fidèles à 100 % aux événements connus**, et des archives **originales** (préquelles ou suites).
+
+| Type | Contenu | Personnages | Fin |
+| --- | --- | --- | --- |
+| **Archive fidèle** | Reconstitution des événements connus d'une œuvre, dans leur ordre | Ceux de l'œuvre | Celle de l'œuvre |
+| **Archive originale** | Préquelle ou suite, à côté des événements | Originaux | S'arrête avant l'événement de l'œuvre, ou se situe après |
+
+**Archives fidèles proposées :**
+
+| ID | Œuvre | Année | Lieu | Remarque |
+| --- | --- | --- | --- | --- |
+| `mire-fidele-nostromo` | *Alien* | 2122 | USCSS Nostromo | Chapitre existant **Mire Archive 001** [PARTIEL] ; dettes `complete-nostromo-cast`, `complete-historical-campaign` |
+| `mire-fidele-lv223` | *Prometheus* | 2093 | LV-223 | — |
+| `mire-fidele-sevastopol` | *Alien: Isolation* | 2137 | Sevastopol | — |
+| `mire-fidele-renaissance` | *Alien: Romulus* | 2142 | Renaissance Station | Pièces de costumes d'Andy et Navarro préparées hors dépôt (`SPRITE_PACK_V170.md`) |
+| `mire-fidele-acheron` | *Aliens* | 2179 | Acheron / LV-426 | — |
+| `mire-fidele-fiorina` | *Alien 3* | 2179 | Fiorina 161 | Costume Ripley *Alien 3* préparé hors dépôt (`SPRITE_PACK_V170.md`) |
+| `mire-fidele-katanga` | *Aliens: Fireteam Elite* | 2202 | Katanga, LV-895 | — |
+| `mire-fidele-auriga` | *Alien Resurrection* | 2381 | USM Auriga | **Hors chronologie** (MIRE ne peut pas modéliser 2381 en 2204) : contenu bonus, signalé comme tel. Costume Ripley 8 préparé hors dépôt |
+
+**Archives originales :** les cinq archives des §26.3 à §26.7, plus `mire-nostromo-b` (ancienne option B du §26.2 : technicien de la raffinerie remorquée, 4 missions).
+
+**Conséquences pour la production :**
+
+- Chaque archive fidèle demande les **personnages de l'œuvre** (planches, portraits), ses **lieux** reconstitués et son **découpage** en chapitres, à établir œuvre par œuvre. La Partie IV ne les comptait pas : ils s'ajoutent au §44.1.
+- Le dépôt indique être « préparé pour un titulaire de licence de la franchise » (`LICENSE_NOTICE.md`). Reproduire fidèlement des œuvres relève de cette licence et du propriétaire ; cette bible ne le vérifie pas.
+- Les règles 1 et 2 du §21.2 ne s'appliquent pas aux archives fidèles.
+
+
 ---
 
 ## 27. Intégration de la Partie III — [PROPOSÉ]
@@ -1895,14 +1971,14 @@ Les valeurs sont des propositions de conception, à équilibrer en test.
 
 | # | Question | Section |
 | --- | --- | --- |
-| 10 | Mode des mondes sans année confirmée : BG-386, Ryushi, LV-742. | §21.3 |
-| 11 | Freya's Prospect : monde distinct ou colonie de BG-386 ? | §21.3 |
-| 12 | Corriger les biomes et atmosphères générés des mondes de la franchise ? | §21.3 |
-| 13 | Présence active des Yautja dans les missions AVP, ou traces seulement ? | §21.2 |
-| 14 | État de Jackson's Star et de Purdan en 2204. | §22.6, §22.11 |
-| 15 | Épave de la §22.8 : le Sulaco lui-même ou un vaisseau de même classe ? | §22.8 |
-| 16 | Auriga : chantier en préquelle plutôt que lieu jouable en 2204 ? | §22.7 |
-| 17 | Mire Archive 001 : exception assumée (A) ou archive parallèle (B) ? | §26.2 |
+| 10 | Mode des mondes sans année confirmée : BG-386, Ryushi, LV-742. | §21.3 — **Validé : héritage** |
+| 11 | Freya's Prospect : monde distinct ou colonie de BG-386 ? | §21.3 — **Validé : fusion avec BG-386, nouveau monde glacé Hiémale** |
+| 12 | Corriger les biomes et atmosphères générés des mondes de la franchise ? | §21.3 — **Validé : correction (§22.17)** |
+| 13 | Présence active des Yautja dans les missions AVP, ou traces seulement ? | §21.2 — **Validé : traces, apparitions brèves, mission dédiée** |
+| 14 | État de Jackson's Star et de Purdan en 2204. | §22.6, §22.11 — **Validé : habités, en déclin** |
+| 15 | Épave de la §22.8 : le Sulaco lui-même ou un vaisseau de même classe ? | §22.8 — **Validé : vaisseau de même classe** |
+| 16 | Auriga : chantier en préquelle plutôt que lieu jouable en 2204 ? | §22.7 — **Validé : préquelle et archive fidèle hors chronologie** |
+| 17 | Mire Archive 001 : exception assumée (A) ou archive parallèle (B) ? | §26.2 — **Validé : les deux types** |
 
 
 ---
@@ -2737,7 +2813,7 @@ Reprises du contrat du homeworld de Yautja, adaptées à ce moteur Canvas 2D :
 | Pièce | Vue actuelle | Vue proposée | Existant | Props à ajouter | Effets et animations | Interactions nouvelles |
 | --- | --- | --- | --- | --- | --- | --- |
 | Sas d'arrivée `arrival-airlock` | V1 | V1 | 6 | Douche de décontamination, râtelier de dépôt d'armes, scanner | Brouillard de décontamination | Dépôt des armes avant le scanner (Acte IV) |
-| Hangar dropship `dropship-hangar` | V1 | V1 (enveloppe protégée) ; **[À DÉCIDER]** pour une V2 | 5 | Cheyenne posé, chariot de munitions, rampe | Moteurs qui chauffent, vapeur | Départs en mission |
+| Hangar dropship `dropship-hangar` | V1 | **V2 (validé : enveloppe rouverte)** | 5 | Cheyenne posé, chariot de munitions, rampe, pont roulant, zone de chargement | Moteurs qui chauffent, vapeur, gyrophares | Départs en mission ; préparation de l'équipe en profondeur |
 | Réacteur `reactor` | V1 | V1 | 6 | Cœur du réacteur visible, tableau d'énergie | Lueur pulsée, chaleur | Service d'énergie (quête de Kwan) |
 | Support-vie `life-support` | V1 | V1 | 6 | Grands filtres, ventilateurs | Air qui circule, filtres qui vibrent | Améliorations de filtres (campagne 4) |
 | Capteurs `sensor-array` | V1 | V1 | 6 | Antennes, écrans d'écoute | Spectres radio | « Écoute de nuit » |
@@ -2750,12 +2826,12 @@ Reprises du contrat du homeworld de Yautja, adaptées à ce moteur Canvas 2D :
 
 | Élément | Nombre |
 | --- | --- |
-| Pièces passant en V2 | 6 (briefing, mess, comptoir civil, baie véhicules, logistique, colonne de maintenance) |
-| Pièces restant en V1 | 29, dont 4 à enveloppe protégée |
+| Pièces passant en V2 | 7 (briefing, mess, comptoir civil, baie véhicules, logistique, colonne de maintenance, hangar dropship) |
+| Pièces restant en V1 | 28, dont 3 à enveloppe protégée (passerelle, cockpit, pas de tir) |
 | Props à ajouter | ≈ 110 (3 en moyenne par pièce), plus ≈ 35 états liés aux campagnes |
 | Effets et animations d'ambiance | ≈ 70 |
 | Interactions nouvelles | ≈ 25 |
-| Fonds V2 à refaire (3 couches + bande de sol) | 6 pièces |
+| Fonds V2 à refaire (3 couches + bande de sol) | 7 pièces |
 
 ---
 
@@ -2869,6 +2945,7 @@ La station tourne sur elle-même : son **anneau extérieur** (quais, marché) do
 | Ambiances | ≈ 70 | §38.13 |
 | Bruitages | ≈ 200 | §38.13 |
 | Portraits de dialogue | 30 nouveaux | §38.14 |
+| Archives MIRE fidèles | 8 archives : personnages des œuvres (planches, portraits), lieux reconstitués, découpage en chapitres | §26.10 |
 
 ### 44.2 À faire (code et données)
 
@@ -2893,6 +2970,416 @@ Les 17 points ouverts des §12 et §27.4, plus :
 
 | # | Question | Section |
 | --- | --- | --- |
-| 18 | Ouvrir l'enveloppe protégée du hangar dropship pour une vue V2 ? | §41.2 |
-| 19 | Valider la répartition V1 / V2 / V3 du Tantalus, d'Asphodèle et de Port-Méridien. | §41-43 |
-| 20 | Échelle et projection exactes de la V2 (profondeur de la bande, facteur oblique). | §40.3 |
+| 18 | Ouvrir l'enveloppe protégée du hangar dropship pour une vue V2 ? | §41.2 — **Validé : hangar en V2** |
+| 19 | Valider la répartition V1 / V2 / V3 du Tantalus, d'Asphodèle et de Port-Méridien. | §41-43 — **Validé (avec le hangar en plus)** |
+| 20 | Échelle et projection exactes de la V2 (profondeur de la bande, facteur oblique). | §40.3 — **Ouvert : à fixer à l'implémentation** |
+
+---
+
+## 45. Décisions validées le 2026-11-05
+
+Réponses du propriétaire aux points ouverts. Les tableaux des §12, §27.4 et §44.3 indiquent la décision ligne par ligne.
+
+| Sujet | Décision | Effet |
+| --- | --- | --- |
+| Noms originaux (§1.5) | Validés | Cocyte, Station Orphée, Enfants de l'Hôte Parfait, Solène Ivarsson, Dario Kessler deviennent la référence du renommage dans le code |
+| Signataire du badge | Révélé avec 6 pièces sur 7 | §5.7 |
+| Mara Voss | Lien familial avec I. Voss | §8.3 |
+| Noms de la campagne principale | Validés | Asphodèle, CASSIUS, Sarrazin, Wren, Ferro, Halloran, Grue |
+| ICC et Marshals coloniaux | Gardés | Institutions du récit, sans faction jouable |
+| Chapitres V131 | Répartis dans les campagnes annexes, mondes déplacés | Changement de `worldId` à faire dans les données, identifiants conservés |
+| MIRE | Programme de modélisation de la compagnie, **archives fidèles et originales** | §21.2, §26.10 |
+| Lieux et personnages des campagnes annexes | Validés | §14 à §18 |
+| Ordre des campagnes annexes | Déblocage progressif | §13.5 |
+| Yautja | Traces surtout, apparitions brèves, mission dédiée liée à *Yautja : la Longue Chasse* | §21.2, §22.16 |
+| BG-386, Ryushi, LV-742 | Mode héritage | §22.13 à §22.15 |
+| Freya's Prospect | Fusionné avec BG-386 ; nouveau monde glacé **Hiémale** | §21.3, §23 |
+| Biomes et atmosphères | Corrigés pour les mondes de la franchise | §22.17 |
+| Jackson's Star, Purdan | Habités, en déclin | §22.6, §22.11 |
+| Épave en orbite d'Acheron | Vaisseau de même classe que le Sulaco (USS Gonfalon) | §22.8 |
+| USM Auriga | Préquelle **et** archive fidèle hors chronologie | §22.7, §26.10 |
+| Hangar dropship | Passe en couloir de profondeur (V2) | §41.2 ; sa géométrie protégée doit être refaite et retestée |
+| Répartition des vues | Validée (7 pièces du Tantalus en V2 avec le hangar) | §41 à §43 |
+| Échelle de la V2 | **Ouvert** | À fixer à l'implémentation |
+
+
+---
+
+# PARTIE VIII — Musique : prompts pour Google Flow Music
+
+## 46. Méthode
+
+### 46.1 Ce que l'on sait de l'outil
+
+D'après les guides consultés (novembre 2026) : Flow Music utilise le modèle Lyria 3.5 ; un morceau dure **jusqu'à environ 3 minutes** ; le prompt peut décrire genre, ambiance, instruments, tempo et durée ; l'outil propose de **remplacer une section, prolonger (Extend) ou décliner (Cover)** un morceau ; il est conseillé de décrire **ce que le morceau doit faire**, de générer deux versions et de corriger une section à la fois. Les règles exactes de l'outil (noms d'artistes, longueur maximale du prompt, langues) n'ont pas été vérifiées.
+
+Sources : [Jack Righteous — guide Google Flow Music 2026](https://jackrighteous.com/fr/blogs/music-creation-process-guide/google-flow-music-complete-guide-2026), [Google — Lyria 3.5](https://blog.google/innovation-and-ai/models-and-research/google-labs/lyria-3-5/?type=AI).
+
+### 46.2 Choix d'écriture
+
+- **Prompts en anglais**, par convention ; l'outil accepte du texte, mais l'avantage de l'anglais n'est pas vérifié.
+- **Aucun nom de compositeur, de film ou de jeu dans les prompts.** L'ambiance de la franchise est décrite par ses traits musicaux. Cela évite un éventuel refus de l'outil et la copie de thèmes protégés. Les morceaux restent des **compositions originales**, comme l'exige `LICENSE_NOTICE.md`.
+- **Toujours « instrumental, no vocals »**, sauf les chœurs sans paroles indiqués.
+- **Boucles :** pour la musique de hub ou d'exploration, demander une fin qui revient au début ; couper ensuite la boucle dans un éditeur audio.
+
+### 46.3 Palette commune de la franchise (à garder d'un morceau à l'autre)
+
+| Trait | Description |
+| --- | --- |
+| Cordes | Nappes tenues très graves ou très aiguës, clusters dissonants, glissandos lents, trémolos nerveux |
+| Cuivres | Gonflements lents des cors et trombones graves, appels militaires en sourdine |
+| Bois | Flûtes et clarinettes basses étranges, souffles, notes tenues fragiles |
+| Percussions | Caisse claire militaire, frappes métalliques type enclume, timbales profondes, percussions industrielles |
+| Électronique | Bourdons analogiques chauds, impulsions de sonar, échos à bande, souffle de machine |
+| Espace sonore | Grand vide, longues réverbérations, silences, dynamique très large (du presque rien au fortissimo) |
+| Chœurs | Rares, sans paroles, murmurés ou tenus, jamais héroïques |
+
+### 46.4 Le motif du relais
+
+Un **motif de trois notes descendantes**, comme un bip de relais qui ralentit, sert de signature au jeu (il rappelle l'ouverture, §4). Conseil : générer d'abord le **thème principal (M-01)**, garder la version où le motif est le plus net, puis utiliser **Cover** à partir de ce morceau pour les pièces qui doivent le rappeler (indiquées « motif du relais »).
+
+---
+
+## 47. Hub, menus et voyage
+
+### M-01 · Thème principal — *Tantalus Frontier*
+
+| Usage | Durée | Tempo | Boucle | Motif du relais |
+| --- | --- | --- | --- | --- |
+| Écran titre, cinématique d'ouverture (CIN-00) | 2 min 30 | 60 BPM, rubato | Non | Oui (référence) |
+
+```
+Instrumental cinematic sci-fi horror main theme, no vocals. Opens in near silence with a low analog drone and a slow three-note descending motif played on a lonely muted trumpet, like a distress beacon slowing down. Dissonant high string clusters creep in, low brass swells rise and fall, distant metallic anvil hits mark the pulse. A restrained military snare enters halfway, giving a sense of duty and dread, then the full orchestra swells once to a cold, unresolved climax before collapsing back into the drone and the three-note motif. Mood: isolation, deep space, corporate menace, quiet courage. Wide dynamics, long reverb, 60 BPM rubato, about 2 minutes 30 seconds.
+```
+
+### M-02 · Tantalus, quart de nuit (hub calme)
+
+| Usage | Durée | Tempo | Boucle | Motif du relais |
+| --- | --- | --- | --- | --- |
+| Hub du Tantalus hors alerte | 3 min | 55 BPM | Oui | Discret |
+
+```
+Instrumental ambient underscore for a military spaceship at night, no vocals. Warm low synth pad, soft hum of ship machinery, sparse piano notes, gentle sustained strings, occasional sonar-like pings. The three-note descending motif appears once, very softly, on celesta. Calm but never fully safe: a faint dissonant string note lingers underneath. Feeling of a tired crew resting between missions, home among the stars. Slow, 55 BPM, seamless loop that ends where it began, about 3 minutes.
+```
+
+### M-03 · Tantalus, alerte à bord
+
+| Usage | Durée | Tempo | Boucle |
+| --- | --- | --- | --- |
+| Crises à bord (xénomorphe, synthétique, pathogène), interlude « Quarantaine » | 2 min 30 | 120 BPM | Oui |
+
+```
+Instrumental tense action-horror cue for an alarm aboard a spaceship, no vocals. Pulsing low synth ostinato like a klaxon, frantic string tremolos, stabbing low brass, industrial metallic percussion, sharp military snare rolls. Moments of sudden silence broken by dissonant orchestral hits, as if something moves in the vents. Claustrophobic, urgent, mechanical. 120 BPM, loopable, about 2 minutes 30 seconds.
+```
+
+### M-04 · Hypersommeil (voyage galactique)
+
+| Usage | Durée | Tempo | Boucle |
+| --- | --- | --- | --- |
+| Carte galactique, trajets entre systèmes | 3 min | Sans pulsation | Oui |
+
+```
+Instrumental slow ambient piece about cryosleep travel between stars, no vocals. Very slow evolving synth pads, glassy high strings, soft breathing-like textures, faint heartbeat-like low pulse, distant harp harmonics. Weightless, cold, serene but lonely, time stretching. No drums. Seamless loop, about 3 minutes.
+```
+
+### M-05 · Briefing
+
+| Usage | Durée | Tempo | Boucle | Motif du relais |
+| --- | --- | --- | --- | --- |
+| Salle de briefing, choix de mission | 2 min | 80 BPM | Oui | Oui |
+
+```
+Instrumental military briefing underscore, no vocals. Steady muted snare pattern, low strings in a determined ostinato, restrained horns, analog synth pulses like tactical displays. The three-note descending motif played by low horns as a reminder of the lost signal. Focused, serious, professional soldiers preparing, with an undercurrent of dread. 80 BPM, loopable, about 2 minutes.
+```
+
+---
+
+## 48. Campagne principale — Cocyte
+
+### M-06 · Cocyte, la pluie sur les relais (exploration)
+
+| Usage | Durée | Tempo | Boucle |
+| --- | --- | --- | --- |
+| Actes I et II, exploration des relais QZ | 3 min | 65 BPM | Oui |
+
+```
+Instrumental atmospheric horror exploration music, no vocals. Constant soft rain texture, low droning cellos, eerie woodwind breaths, sparse metallic taps like water dripping on steel, faint radio static and sonar pings. Long silences between phrases. A lonely, abandoned industrial relay station on a stormy colony world, something unseen nearby. 65 BPM, slow, loopable, about 3 minutes.
+```
+
+### M-07 · L'enquête (analyse des preuves)
+
+| Usage | Durée | Tempo | Boucle | Motif du relais |
+| --- | --- | --- | --- | --- |
+| Poste d'analyse, retours d'enquête, dossier QZ17 | 2 min 30 | 70 BPM | Oui | Oui |
+
+```
+Instrumental investigative underscore, no vocals. Ticking clock-like percussion, muted piano repeated notes, soft analog synth arpeggio, low strings questioning in unresolved intervals. The three-note descending motif returns on vibraphone, slightly out of time, like timestamps being compared. Cold, precise, uneasy, a mystery about delayed distress calls. 70 BPM, loopable, about 2 minutes 30 seconds.
+```
+
+### M-08 · Contact (combat contre la ruche)
+
+| Usage | Durée | Tempo | Boucle |
+| --- | --- | --- | --- |
+| Combats sur Cocyte, Acte IV | 2 min 30 | 130 BPM | Oui |
+
+```
+Instrumental intense sci-fi horror combat music, no vocals. Driving low string ostinato, aggressive brass stabs, pounding timpani and metallic anvil hits, fast military snare, screeching high string clusters like creatures in the walls. Relentless, chaotic, desperate firefight in dark tunnels against a hive. 130 BPM, loopable, about 2 minutes 30 seconds.
+```
+
+### M-09 · Corridor de feu (course du M577)
+
+| Usage | Durée | Tempo | Boucle |
+| --- | --- | --- | --- |
+| Acte III, convoi blindé ; Acte V, course | 2 min 30 | 140 BPM | Oui |
+
+```
+Instrumental high-speed military action cue, no vocals. Heavy rolling percussion like tank treads, propulsive low brass, galloping string ostinato, industrial clanks, rising tension every 16 bars. An armored personnel carrier racing through a burning corridor while creatures chase it. Heroic but grim, never triumphant. 140 BPM, loopable, about 2 minutes 30 seconds.
+```
+
+### M-10 · Port-Méridien, le jour (reconstruction)
+
+| Usage | Durée | Tempo | Boucle |
+| --- | --- | --- | --- |
+| Vue de gestion de la colonie, chantiers | 3 min | 75 BPM | Oui |
+
+```
+Instrumental hopeful frontier colony theme, no vocals. Warm acoustic guitar and soft strings, gentle hand percussion, distant work sounds blended as rhythm, a simple folk-like melody on oboe. Underneath, a faint low drone reminds that the colony is fragile and surrounded by danger. Rebuilding, community, rain clearing for a moment. 75 BPM, loopable, about 3 minutes.
+```
+
+### M-11 · La nuit des murs (siège de la colonie)
+
+| Usage | Durée | Tempo | Boucle |
+| --- | --- | --- | --- |
+| Mission C5, défenses de nuit | 3 min | 110 BPM | Oui |
+
+```
+Instrumental siege music for a colony defending its walls at night, no vocals. Ominous low brass chords, steady war drums, tense string ostinato, metallic alarms woven into percussion, the oboe melody from the colony theme returning broken and minor. Builds wave after wave, with short silences between attacks. Desperate resistance until dawn. 110 BPM, loopable, about 3 minutes.
+```
+
+### M-12 · Asphodèle, la station morte
+
+| Usage | Durée | Tempo | Boucle |
+| --- | --- | --- | --- |
+| Front station S1 à S3 | 3 min | Sans pulsation | Oui |
+
+```
+Instrumental dark ambient for an abandoned orbital station, no vocals. Deep hum of dead machinery, slow metallic groans, eerie high string harmonics, distant fragments of an old corporate announcement melody on a detuned synth, breathing ventilation sounds. Long silences, sudden low swells. Emptiness, lost crew, something still awake. No steady beat, loopable, about 3 minutes.
+```
+
+### M-13 · CASSIUS
+
+| Usage | Durée | Tempo | Boucle |
+| --- | --- | --- | --- |
+| Pont de contrôle, dialogue avec l'IA (S2) | 2 min | 90 BPM, mécanique | Oui |
+
+```
+Instrumental cold machine-intelligence theme, no vocals. Precise repeating analog synth arpeggios, clean digital bleeps, glassy pads, a slow string line that never resolves. Polite, logical, inhuman, obeying old orders with no one left to correct it. Hypnotic and unsettling. 90 BPM, strictly mechanical rhythm, loopable, about 2 minutes.
+```
+
+### M-14 · Asphodèle, le hub vivant
+
+| Usage | Durée | Tempo | Boucle |
+| --- | --- | --- | --- |
+| Hub Asphodèle après S4 | 3 min | 70 BPM | Oui |
+
+```
+Instrumental calm orbital hub music, no vocals. The same machinery hum as an abandoned station, but now warm: soft synth pads, gentle marimba pulses, light strings, a quiet hopeful melody on French horn, faint marketplace murmur as texture. A reclaimed station coming back to life above a stormy planet. 70 BPM, loopable, about 3 minutes.
+```
+
+### M-15 · Non viable (finale de la campagne)
+
+| Usage | Durée | Tempo | Boucle | Motif du relais |
+| --- | --- | --- | --- | --- |
+| Acte V, confrontation avec la compagnie et la Reine du dépôt | 3 min | 120 BPM | Non | Oui |
+
+```
+Instrumental epic but dark finale cue, no vocals except a wordless low choir. Begins with cold corporate synth pulses and a tense string pedal, then explodes into full orchestra: thunderous timpani, anvil hits, massive low brass, frantic strings, the three-note descending motif blasted by the horns as a call to resist. A giant creature pursues an armored convoy toward the colony walls. Ends abruptly on a single held dissonant chord. 120 BPM, about 3 minutes.
+```
+
+### M-16 · Fin « Le relais parle »
+
+| Usage | Durée | Tempo | Motif du relais |
+| --- | --- | --- | --- |
+| Fin favorable | 2 min 30 | 60 BPM | Oui, résolu |
+
+```
+Instrumental emotional ending theme, no vocals. Solo piano and soft strings, then warm horns. The three-note descending motif finally rises and resolves into a major chord, like a distress call answered at last. Dignified, bittersweet, hopeful, the losses still remembered. Slow 60 BPM, about 2 minutes 30 seconds.
+```
+
+### M-17 · Fin « Le fret d'abord »
+
+| Usage | Durée | Tempo |
+| --- | --- | --- |
+| Fin où la compagnie l'emporte | 2 min | 55 BPM |
+
+```
+Instrumental somber ending, no vocals. Cold synth drone, a slow minor string elegy, the three-note descending motif played once more on a lonely muted trumpet and left unresolved. Corporate victory, quiet defeat, a colony handed over. Slow 55 BPM, about 2 minutes.
+```
+
+### M-18 · Fin « Les vivants, sans preuve »
+
+| Usage | Durée | Tempo |
+| --- | --- | --- |
+| Fin ambiguë | 2 min | 60 BPM |
+
+```
+Instrumental ambiguous ending, no vocals. Gentle colony guitar melody over low dissonant strings that refuse to settle, soft rain texture, a distant military snare fading out. People saved, truth lost, an uncertain future. Slow 60 BPM, about 2 minutes.
+```
+
+---
+
+## 49. Campagnes annexes
+
+### M-19 · La Saison des Reines — sous la surface
+
+| Usage | Durée | Tempo | Boucle |
+| --- | --- | --- | --- |
+| Nacre-7, plongée HADAL, récifs | 3 min | 60 BPM | Oui |
+
+```
+Instrumental underwater horror ambient, no vocals. Muffled deep bass drones, slow bubbling textures, whale-like low brass glissandi, glassy high harmonics, a distant pulse like a submarine sonar. Pressure, darkness, something huge circling below. Slow 60 BPM, loopable, about 3 minutes.
+```
+
+### M-20 · La Saison des Reines — les Reines (boss)
+
+| Usage | Durée | Tempo | Boucle |
+| --- | --- | --- | --- |
+| Reine récifale, Reine volante, Reine-Mère | 3 min | 135 BPM | Oui |
+
+```
+Instrumental monstrous boss battle music, no vocals except a wordless low choir. Massive low brass roars, pounding timpani and metallic anvil hits, savage string ostinatos, shrieking high clusters, an ominous three-voice choir chord pulsing like a hive mind. A colossal alien queen defending her nest. Overwhelming, primal, terrifying. 135 BPM, loopable, about 3 minutes.
+```
+
+### M-21 · Directive zéro — synthétiques
+
+| Usage | Durée | Tempo | Boucle |
+| --- | --- | --- | --- |
+| Sable Meridian, Kéos | 3 min | 100 BPM | Oui |
+
+```
+Instrumental unsettling synthetic-uprising music, no vocals. Rigid mechanical rhythms of factory percussion, cold analog synth sequences, clean bell tones repeating like instructions, slow strings that slowly bend out of tune as if obedience is breaking. Dozens of artificial workers standing still in the sand, then all turning at once. 100 BPM, loopable, about 3 minutes.
+```
+
+### M-22 · Directive zéro — le Chœur d'Éloïse (finale)
+
+| Usage | Durée | Tempo | Boucle |
+| --- | --- | --- | --- |
+| Murmure, pylônes, Chasseur de Mères | 3 min | 90 BPM | Non |
+
+```
+Instrumental eerie finale, wordless choir allowed, no lyrics. A soft synthetic voice-like pad merges with an organic breathing choir, glassy synth arpeggios entwine with low pulsing biological textures, strings rising in strange harmonies. Beautiful and wrong at the same time: a machine and a hive singing together. Builds to a vast, sorrowful climax. 90 BPM, about 3 minutes.
+```
+
+### M-23 · Les Bâtisseurs — l'épave et le temple
+
+| Usage | Durée | Tempo | Boucle |
+| --- | --- | --- | --- |
+| Dérive de Tyndare, Hiéron | 3 min | Sans pulsation | Oui |
+
+```
+Instrumental ancient alien sacred ambient, no vocals except a distant wordless choir. Enormous slow low brass chords, deep organ-like drones, ritual-like slow drum beats far away, eerie high string harmonics, a simple solemn melody on a low flute. Vast, ancient, cathedral-like, beyond human scale, both awe-inspiring and threatening. No steady beat, loopable, about 3 minutes.
+```
+
+### M-24 · Les Bâtisseurs — le Dormeur (boss)
+
+| Usage | Durée | Tempo |
+| --- | --- | --- |
+| Combat contre l'Ingénieur | 3 min | 110 BPM |
+
+```
+Instrumental colossal boss battle, no vocals except a powerful wordless choir. Crushing low brass, giant drums, slow heavy orchestral blows like footsteps of a giant, dark choir chords, frantic strings in between. An ancient towering being awakens and attacks. Majestic, merciless, overwhelming. 110 BPM, about 3 minutes.
+```
+
+### M-25 · Fièvre noire — contamination
+
+| Usage | Durée | Tempo | Boucle |
+| --- | --- | --- | --- |
+| Pallas Rift, vaisseau-hôpital *Clémence* | 3 min | 75 BPM | Oui |
+
+```
+Instrumental body-horror contamination ambient, no vocals. Wet organic textures, slow sickly string glissandi, detuned music-box notes, hospital monitor beeps woven into the rhythm, low throbbing pulse like a fever. Quarantine, black rain, patients changing in their beds. Nauseous, intimate, dread. 75 BPM, loopable, about 3 minutes.
+```
+
+### M-26 · Le banc d'essai — la compagnie
+
+| Usage | Durée | Tempo | Boucle |
+| --- | --- | --- | --- |
+| MIRE-9, *Bonne-Espérance*, Khepri Forge | 3 min | 95 BPM | Oui |
+
+```
+Instrumental cold corporate-conspiracy music, no vocals. Clean minimalist synth pulses, sterile piano, precise string ostinatos, distant industrial foundry clangs, an elegant but heartless melody on strings like a polished boardroom. Experiments on colonists, cameras everywhere, everything legal on paper. 95 BPM, loopable, about 3 minutes.
+```
+
+### M-27 · Le banc d'essai — Talos contre le Titan
+
+| Usage | Durée | Tempo |
+| --- | --- | --- |
+| Duel final en exosquelette | 3 min | 145 BPM |
+
+```
+Instrumental giant-scale mech battle music, no vocals. Heavy industrial percussion, hydraulic hisses as rhythm, thunderous low brass, driving strings, metallic anvil hits, a defiant horn theme answering a monstrous low brass roar. A pilot in a heavy loader suit fighting a titanic creature in a collapsing foundry. Epic, mechanical, brutal. 145 BPM, about 3 minutes.
+```
+
+---
+
+## 50. Archives MIRE, planètes et missions spéciales
+
+### M-28 · Archives MIRE — le modèle
+
+| Usage | Durée | Tempo | Boucle |
+| --- | --- | --- | --- |
+| Menu des archives, archives originales | 3 min | 70 BPM | Oui |
+
+```
+Instrumental retro-futuristic simulation music, no vocals. Warm vintage analog synthesizers, slightly wobbly tape-echo textures, soft drum machine, glitchy pauses as if a recording skips, a nostalgic melody that sometimes drifts out of tune. A corporate computer reconstructing a past disaster from old records. Nostalgic, uncanny, artificial. 70 BPM, loopable, about 3 minutes.
+```
+
+### M-29 · Ruines de l'héritage (missions sur les mondes connus)
+
+| Usage | Durée | Tempo | Boucle |
+| --- | --- | --- | --- |
+| Opérations Héritage (Acheron, Fiorina, Sevastopol…) | 3 min | 60 BPM | Oui |
+
+```
+Instrumental elegiac exploration music for ruins of past disasters, no vocals. Lonely solo cello, wind textures, slow dissonant string clusters, distant metallic resonances, faint echoes of a military snare from long ago. Visiting the remains of places where others died decades before. Haunted, respectful, ominous. 60 BPM, loopable, about 3 minutes.
+```
+
+### M-30 · L'audience (Gateway)
+
+| Usage | Durée | Tempo |
+| --- | --- | --- |
+| Audience de l'ICC, mission sans combat | 2 min 30 | 72 BPM |
+
+```
+Instrumental courtroom tension music, no vocals. Restrained low strings, measured timpani strokes like a judge's gavel, a cold synth pad, a hesitant oboe line rising as evidence is presented. Truth against corporate lawyers in a sterile hearing room. Tense, quiet, dignified. 72 BPM, about 2 minutes 30 seconds.
+```
+
+### M-31 · La réserve (mission liée à *Yautja : la Longue Chasse*)
+
+| Usage | Durée | Tempo | Boucle |
+| --- | --- | --- | --- |
+| Chaîne `avp-hunt` sur LV-742 | 3 min | 85 BPM | Oui |
+
+```
+Instrumental jungle hunting-ground tension music, no vocals. Tribal-like low drums at a distance, rattling percussion, clicking textures, humid jungle ambience, low brass swells, nervous high strings. Two predators share the same territory and the humans are only passing through. Primal, watchful, the feeling of being observed from the trees. 85 BPM, loopable, about 3 minutes.
+```
+
+---
+
+## 51. Récapitulatif et conseils
+
+| Groupe | Pistes |
+| --- | --- |
+| Hub, menus, voyage | M-01 à M-05 |
+| Campagne principale | M-06 à M-18 |
+| Campagnes annexes | M-19 à M-27 |
+| Archives, planètes, missions spéciales | M-28 à M-31 |
+| **Total** | **31 pistes** (le §38.13 estimait environ 18 pistes) |
+
+**Conseils de production :**
+
+1. Générer M-01 en premier et choisir la version au motif le plus net ; s'en servir comme référence (Cover) pour M-02, M-05, M-07, M-15 à M-17.
+2. Pour une boucle, générer, puis couper le morceau au même point de mesure en début et en fin dans un éditeur audio.
+3. Si un morceau est trop « épique » ou trop propre, ajouter au prompt : *more silence, more dissonance, less melody, darker, sparse*.
+4. Garder une trace du prompt et de la version retenue pour chaque piste, et vérifier les conditions d'utilisation de l'outil (droits, marquage éventuel) avant intégration au jeu.
+5. Les fichiers retenus vont dans `assets/audio/music/` avec une mise à jour de `assets/audio/manifest.json` et de la note de provenance (`LICENSE_NOTICE.md`), qui indique aujourd'hui que l'audio est produit par synthèse hors ligne : cette note devra mentionner l'outil de génération.
