@@ -3367,6 +3367,21 @@ Instrumental jungle hunting-ground tension music, no vocals. Tribal-like low dru
 
 ---
 
+### 50.1 Correspondance avec les emplacements audio du jeu
+
+Après la PR #43, le jeu lit ces fichiers s'ils existent (`assets/audio/music/<emplacement>.ogg`, ou `.mp3`, `.wav`, `.m4a`, `.webm`), puis `npm run audio:scan` met à jour le manifeste :
+
+| Emplacement | Piste conseillée | Joué dans |
+| --- | --- | --- |
+| `menu` | M-01 | Menus et écran titre |
+| `hub` | M-02 | Hub du Tantalus |
+| `mission` | M-06 (ou M-08 pour une version plus tendue) | Missions et Bioforge |
+| `travel` | M-04 | Carte galactique |
+| `briefing` | M-05 | Écran des opérations |
+| `archives` | M-28 | Archives |
+
+Les autres pistes (alerte, boss, fins, campagnes annexes) attendent de nouveaux emplacements reliés à des moments précis du jeu.
+
 ## 51. Récapitulatif et conseils
 
 | Groupe | Pistes |
@@ -3408,7 +3423,7 @@ Instrumental jungle hunting-ground tension music, no vocals. Tribal-like low dru
 | **Bloqué** | Dépend d'une décision ou d'une ressource indisponible ici |
 | **À faire** | Non commencé |
 
-### 52.3 Renommage dans le code : bloqué par une protection volontaire
+### 52.3 Renommage dans le code : protection levée pour ce changement, PR #42
 
 **Tentative faite le 2026-11-05**, sur une branche locale non publiée :
 
@@ -3416,7 +3431,7 @@ Instrumental jungle hunting-ground tension music, no vocals. Tribal-like low dru
 - Textes affichés : `COCYTE · …` dans les scènes du convoi et de QZ-18, « TR-0 · LA RUCHE-MONDE ».
 - Les 68 suites de tests liées aux fichiers modifiés passaient (1 188 tests, 0 échec).
 
-**Pourquoi rien n'a été publié :** l'audit V179 (`scripts/audit-succession-v163.mjs`) classe `src/content-core-v50.js` parmi les **`protectedGameplayBytes`**, avec `src/save.js` et `src/cloud-sync-v119.js`. Les vérificateurs `verify-audit-continuation-v163.mjs` et `verify-parallel-completion-v165.mjs` refusent donc toute modification de ce fichier. C'est une protection voulue des données de jeu, pas une empreinte oubliée.
+**Pourquoi la première tentative n'a pas été publiée :** l'audit V179 (`scripts/audit-succession-v163.mjs`) classe `src/content-core-v50.js` parmi les **`protectedGameplayBytes`**, avec `src/save.js` et `src/cloud-sync-v119.js`. Les vérificateurs `verify-audit-continuation-v163.mjs` et `verify-parallel-completion-v165.mjs` refusent donc toute modification de ce fichier. C'est une protection voulue des données de jeu, pas une empreinte oubliée.
 
 **Options pour le propriétaire :**
 
@@ -3426,7 +3441,7 @@ Instrumental jungle hunting-ground tension music, no vocals. Tribal-like low dru
 | **B — Renommer seulement l'affichage** | Laisser `content-core-v50.js` intact et remplacer le nom des mondes au moment de l'affichage | Moins sûr : les noms existent alors en double, et chaque écran doit passer par la couche d'affichage |
 | **C — Reporter** | Garder les anciens noms dans le code jusqu'à une intégration groupée | Le jeu et la bible restent en désaccord sur les noms |
 
-Recommandation : **A**. Le correctif est prêt (patch local de 9 fichiers + module de succession V183), et pourra être republié dès que la levée de protection est validée.
+**Décision du propriétaire (2026-11-05) : option A.** Le renommage est publié dans la **PR #42** : module source uniquement `scripts/audit-original-names-v183.mjs` (12 reçus de succession), résolveur V182 prolongé sans réécrire d'enregistrement historique, suite Node complète identique à `main` (4 062 tests, 4 061 réussis, 0 échec, 1 non exécuté), contrôle de publication et build réussis.
 
 **Fiches de référence non renommées :** `premium-personnel-v119.js` (Maeko Hayes, Jonas Harper), `franchise-costumes-v119.js` (tenues « de Lethe ») et les cultistes Darwin Era des catalogues d'ennemis décrivent des éléments réels d'*Aliens: Dark Descent*, avec leur source citée. Depuis la décision d'avoir des **archives MIRE fidèles**, ils restent des références de cette œuvre. Les renommer rendrait leur source fausse. Solène Ivarsson et Dario Kessler restent des personnages originaux de la bible, pas des remplacements de ces fiches.
 
@@ -3455,8 +3470,8 @@ Recommandation : **A**. Le correctif est prêt (patch local de 9 fichiers + modu
 | --- | --- | --- |
 | 31 prompts musicaux | **Fait** (§46-51, fichier `PROMPTS_MUSIQUE_FLOW.md`) | — |
 | Génération des musiques | Bloqué ici | Faite par le propriétaire avec Flow Music |
-| Élargir les emplacements audio du jeu | À faire | Le jeu n'a que 5 emplacements de bruitages et 3 de musique, figés dans `AUDIO_SLOTS_V77` (`src/audio-assets-v77.js`) ; il faut les étendre avant d'ajouter des pistes |
-| Musique par scène (hub, mission, alerte, boss, fin) | À faire | `resolveViewAudioSceneV77` ne distingue que menu, hub et mission |
+| Élargir les emplacements audio du jeu | **Fait** (PR #43, après la #42) | 10 emplacements de bruitages (+ `checkpoint`, `locked`, `kill`, `pickup`, `victory`, avec sons de secours synthétisés) et 6 de musique (+ `travel`, `briefing`, `archives`, qui rejouent la musique du menu tant qu'aucun fichier n'existe) |
+| Musique par scène | Partiel (PR #43) | Carte galactique → `travel`, opérations → `briefing`, archives → `archives` ; alerte, boss et fins demandent encore des points d'accroche dans le jeu |
 | Bruitages prioritaires (≈ 40) : détecteur (variantes), pas par sol, portes, sas, ascenseurs, alarmes, pluie, cris par caste, armes principales | À faire | Le dépôt sait synthétiser des sons originaux hors ligne (`scripts/generate-audio-v132.mjs`) ; c'est une piste possible |
 | Mise à jour de la provenance audio | À faire | `LICENSE_NOTICE.md` décrit aujourd'hui une synthèse hors ligne ; il faudra y mentionner l'outil utilisé |
 
