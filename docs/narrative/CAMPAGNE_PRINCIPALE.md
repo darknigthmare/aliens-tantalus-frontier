@@ -13,7 +13,7 @@
 - **Partie V — Audit complet des manques** : §38 corrections, personnages, ennemis, véhicules, armes, costumes, props, décors, animations, VFX, systèmes, audio, interface, cinématiques
 - **Partie VI — Missions sur les lieux originaux de la bible** : §39
 - **Partie VII — Vues et organisation des hubs** : §40 trois vues (latérale, couloir de profondeur, plan au sol à 35°) · §41 Tantalus pièce par pièce · §42 Asphodèle · §43 Port-Méridien · §44 liste complète de ce qui reste à faire et à générer
-- **Décisions validées (2026-11-05)** : §45
+- **Décisions validées (2026-11-05)** : §45, cadrage de la deuxième série §45.1
 - **Partie VIII — Musique : prompts pour Google Flow Music** : §46 méthode et palette · §47 hub et voyage · §48 campagne principale · §49 campagnes annexes · §50 archives et missions spéciales · §51 récapitulatif
 - **Partie IX — Feuille de route pour rendre le jeu attractif** : §52 principes, état et renommage bloqué · §53 feuille de route détaillée · §54 ordre de travail
 
@@ -151,7 +151,7 @@ Institutions mentionnées dans le récit **[PROPOSÉ]**, sans entrée de faction
 
 ### 2.1 Le joueur
 
-**Echo-9 (« la Relève Echo-9 »)** — Marine colonial sorti d'hypersommeil pour remplacer l'équipe Echo-8, disparue sur la station Asphodèle. Apparence définie au créateur de personnage. Parle peu, décrit ses actions, garde toujours un trajet de retour en vue. Il ne sait de la mission que ce que le briefing lui dit : il découvre le reste en même temps que le joueur.
+**Echo-9 (« la Relève Echo-9 »)** — Marine colonial sorti d'hypersommeil pour remplacer l'équipe Echo-8, disparue sur la station Asphodèle. Apparence définie au créateur de personnage. **Passé au choix du joueur** parmi une liste d'origines écrites (§45.1) ; l'origine choisie modifie certaines répliques, sans changer l'histoire principale. Parle peu, décrit ses actions, garde toujours un trajet de retour en vue. Il ne sait de la mission que ce que le briefing lui dit : il découvre le reste en même temps que le joueur.
 
 ### 2.2 L'équipage du Tantalus
 
@@ -2840,13 +2840,13 @@ Reprises du contrat du homeworld de Yautja, adaptées à ce moteur Canvas 2D :
 
 ### 42.1 Organisation
 
-La station tourne sur elle-même : son **anneau extérieur** (quais, marché) donne sur un **moyeu** (pont de contrôle, relais) relié par des rayons aux **ponts inférieurs** (laboratoire, quartiers). La vue de navigation générale est en **V3** (plan de l'anneau à 35°) ; les modules s'ouvrent en V1 ou V2.
+La station tourne sur elle-même : son **anneau extérieur** (quais, marché) donne sur un **moyeu** (pont de contrôle, relais) relié par des rayons aux **ponts inférieurs** (laboratoire, quartiers). La station est un **hub explorable complet** (décision §45.1) : l'anneau, les rayons et le moyeu se parcourent à pied en **V3** (vue à 35°), et chaque module s'ouvre par une porte en V1 ou V2. Aucun module n'est atteint par un simple menu.
 
 ### 42.2 Modules
 
 | Module | Vue | Props | Effets et animations | PNJ | Fonction en jeu | Débloqué par |
 | --- | --- | --- | --- | --- | --- | --- |
-| **Plan de la station** | V3 | Anneau, rayons, moyeu, vaisseaux amarrés | Rotation lente, navettes qui arrivent | — | Navigation entre modules | S4 |
+| **Plan de la station** | V3 | Anneau, rayons, moyeu, vaisseaux amarrés | Rotation lente, navettes qui arrivent | Passants, équipes de maintenance | Espace parcouru à pied entre les modules | S4 |
 | **Quais d'arrimage** | V2 | Passerelles, bras d'arrimage, caisses, vaisseau de Grue | Gyrophares, vapeur de dépressurisation | Dockers, récupérateurs | Navettes vers la colonie et le Tantalus | S1 |
 | **Marché de l'anneau** | V2 | Étals Crucible, pièces détachées, comptoir | Enseignes lumineuses, fumée | Marchands Crucible | Commerce de pièces et d'armes | *Le pacte de l'anneau* |
 | **Pont de contrôle** | V1 | Consoles Seegson, noyau de CASSIUS, carte du réseau QZ | Écrans du réseau, voix de CASSIUS | Techniciens | Relais à ouvrir, état de Port-Méridien | S4 |
@@ -2973,7 +2973,7 @@ Les 17 points ouverts des §12 et §27.4, plus :
 | --- | --- | --- |
 | 18 | Ouvrir l'enveloppe protégée du hangar dropship pour une vue V2 ? | §41.2 — **Validé : hangar en V2** |
 | 19 | Valider la répartition V1 / V2 / V3 du Tantalus, d'Asphodèle et de Port-Méridien. | §41-43 — **Validé (avec le hangar en plus)** |
-| 20 | Échelle et projection exactes de la V2 (profondeur de la bande, facteur oblique). | §40.3 — **Ouvert : à fixer à l'implémentation** |
+| 20 | Échelle et projection exactes de la V2 (profondeur de la bande, facteur oblique). | §40.3 — **Validé : bande large** ; valeurs numériques à fixer à l'implémentation |
 
 ---
 
@@ -3001,7 +3001,33 @@ Réponses du propriétaire aux points ouverts. Les tableaux des §12, §27.4 et 
 | USM Auriga | Préquelle **et** archive fidèle hors chronologie | §22.7, §26.10 |
 | Hangar dropship | Passe en couloir de profondeur (V2) | §41.2 ; sa géométrie protégée doit être refaite et retestée |
 | Répartition des vues | Validée (7 pièces du Tantalus en V2 avec le hangar) | §41 à §43 |
-| Échelle de la V2 | **Ouvert** | À fixer à l'implémentation |
+| Échelle de la V2 | **Bande large**, type arcade AVP | Valeurs numériques à fixer à l'implémentation (§45.1) |
+
+
+### 45.1 Décisions de cadrage (deuxième série, 2026-11-05)
+
+Réponses du propriétaire aux questions sur les parties peu détaillées. Chaque ligne indique ce qui reste à concevoir.
+
+| Sujet | Décision | Conséquence pour la conception |
+| --- | --- | --- |
+| Ton horreur / action | **Variable selon la mission** | Chaque fiche de mission déclare son registre : *horreur* (peu d'ennemis, munitions rares, fuite), *tension* (montée puis combat) ou *action* (vagues). Le directeur de tension (§53.3) lit ce registre. Registres à attribuer mission par mission. |
+| Echo-9 | **Mixte** : apparence libre, passé et répliques écrits | Le passé est **choisi par le joueur** dans une liste d'origines à écrire : le parcours **avant** l'affectation au Tantalus (par exemple vétéran d'une unité anéantie, ancien garde de colonie, dossier caviardé), Echo-9 restant un Marine colonial. Chaque origine : un court texte, 3 à 6 répliques propres, une ou deux options de dialogue. Liste des origines à rédiger. |
+| Mort de l'équipage | **Option choisie au début de la partie** | Mort définitive activable ; sinon blessures et convalescence. Option non modifiable en cours de partie, sauf vers « blessures ». |
+| Narration | **Texte + portraits** | Sons de voix courts, cinématiques en plans fixes dans le moteur (§10). Pas de doublage. |
+| Plateforme de référence | **PC clavier-souris** | Réglages, tests et tranche verticale faits au clavier-souris. Manette et tactile restent présents mais secondaires. |
+| Durée de la campagne principale | **25 h et plus** | La bible ne chiffre pas encore la durée actuelle de la campagne de Cocyte. Il faut la chiffrer puis l'étendre : missions locales de Port-Méridien et d'Asphodèle, quêtes du Tantalus, missions de nuit (§39.2), reconstruction (§6.3). |
+| Temps de la colonie | **Entre les missions** | Chaque retour au hub fait avancer d'un cycle les chantiers, les ressources et les événements de Port-Méridien. |
+| Asphodèle | **Hub explorable complet** | Le plan V3 (§42) devient un espace parcouru à pied (anneau, rayons, moyeu), et non un menu de navigation. Les 12 modules sont tous accessibles à pied, avec portes et points d'arrivée vérifiés (`AGENTS.md`). |
+| Langues | **Français et anglais dès maintenant** | Mettre en place un système de traduction avant d'écrire de nouveaux textes. Tout nouveau texte joueur est écrit dans les deux langues. Les textes existants (en dur dans le code) sont à extraire. |
+| Coopération | **Coop locale et en ligne** : un joueur remplace un membre IA de l'escouade | Pas de mode séparé : la coop se branche sur l'escouade. Le code déclare aujourd'hui une coop locale du convoi inachevée (`special-operations-v131.js`) ; il n'y a pas de réseau. L'en-ligne demande une architecture à concevoir (hôte, synchronisation, reprise). |
+| Mort d'un joueur en coop | **Mélange** des trois règles | Proposition à valider : relève par un coéquipier pendant un délai ; à défaut, la règle d'équipage s'applique (blessure ou mort définitive) et le joueur reprend un autre membre de l'escouade ou attend le prochain checkpoint s'il n'en reste aucun. |
+| Source des images | **Génération par IA**, faite par le propriétaire | Les listes de production (§28-37, §44) servent de commandes d'images. Une génération ne certifie pas la fidélité aux œuvres (`AGENTS.md`) ; la provenance est à noter dans `LICENSE_NOTICE.md`. |
+| Diffusion | **Entre gratuite publique et privée, non décidé** | §53.10 reste une décision du propriétaire. |
+| Profondeur V2 | **Bande large**, type arcade AVP | Déplacement libre en profondeur, échelle des sprites nettement réduite au fond. Valeurs exactes à fixer et tester. |
+| Musiques de moments de jeu | **Toutes** : alerte, boss/reine, fins, retour au calme | Quatre nouveaux emplacements musicaux et leurs points d'accroche dans le jeu (§53.2). |
+| Lien avec *Yautja : la Longue Chasse* (`avp-hunt`, LV-742) | **Les trois en parallèle** | Un clan de l'autre jeu à une autre époque, des objets reconnaissables, et un chasseur partagé qui apparaît brièvement. Le clan et le chasseur sont à choisir dans l'autre projet. |
+| Première archive MIRE fidèle | **Hadley's Hope (*Aliens*)** | Première archive à produire dans l'ordre du §26.10. |
+| Accessibilité | **Tout** | Mode daltonien, taille du texte, sous-titres des sons, remappage complet (§53.8). |
 
 
 ---
@@ -3471,7 +3497,7 @@ Les autres pistes (alerte, boss, fins, campagnes annexes) attendent de nouveaux 
 | 31 prompts musicaux | **Fait** (§46-51, fichier `PROMPTS_MUSIQUE_FLOW.md`) | — |
 | Génération des musiques | Bloqué ici | Faite par le propriétaire avec Flow Music |
 | Élargir les emplacements audio du jeu | **Fait** (PR #43, après la #42) | 10 emplacements de bruitages (+ `checkpoint`, `locked`, `kill`, `pickup`, `victory`, avec sons de secours synthétisés) et 6 de musique (+ `travel`, `briefing`, `archives`, qui rejouent la musique du menu tant qu'aucun fichier n'existe) |
-| Musique par scène | Partiel (PR #43) | Carte galactique → `travel`, opérations → `briefing`, archives → `archives` ; alerte, boss et fins demandent encore des points d'accroche dans le jeu |
+| Musique par scène | Partiel (PR #43) | Carte galactique → `travel`, opérations → `briefing`, archives → `archives`. Validé (§45.1) : ajouter alerte, boss/reine, fins et retour au calme, avec leurs points d'accroche dans le jeu |
 | Bruitages prioritaires (≈ 40) : détecteur (variantes), pas par sol, portes, sas, ascenseurs, alarmes, pluie, cris par caste, armes principales | À faire | Le dépôt sait synthétiser des sons originaux hors ligne (`scripts/generate-audio-v132.mjs`) ; c'est une piste possible |
 | Mise à jour de la provenance audio | À faire | `LICENSE_NOTICE.md` décrit aujourd'hui une synthèse hors ligne ; il faudra y mentionner l'outil utilisé |
 
@@ -3495,7 +3521,7 @@ Les autres pistes (alerte, boss, fins, campagnes annexes) attendent de nouveaux 
 | Liste des chapitres à art provisoire ou en dette | **Fait** (§28.1, §37.2) |
 | Masquer les chapitres non finis derrière un statut « en préparation » | À faire (décision du propriétaire) |
 | Terminer d'abord l'art des 4 chapitres de la campagne 1 | À faire |
-| Production d'images | Bloqué ici | Aucun outil de génération d'image dans cette session |
+| Production d'images | Bloqué ici | Génération par IA faite par le propriétaire (§45.1) ; aucun outil de génération d'image dans cette session |
 
 ### 53.5 Progression
 
@@ -3503,7 +3529,7 @@ Les autres pistes (alerte, boss, fins, campagnes annexes) attendent de nouveaux 
 | --- | --- |
 | Tableau « ce que le joueur gagne à chaque heure » | À faire |
 | Récompenses visibles au hub (trophées, râteliers, colonie) | Prêt (§41, §43) |
-| Option de mort définitive de l'équipage et blessures durables | À faire |
+| Option de mort définitive de l'équipage (choisie au début de la partie) et blessures durables | À faire |
 | État de colonie et chantiers | Prêt (§6.3, §43) |
 
 **Critère :** aucune heure de jeu sans gain visible ni décision.
@@ -3524,17 +3550,18 @@ Les autres pistes (alerte, boss, fins, campagnes annexes) attendent de nouveaux 
 | Contrats locaux, missions par planète, archives MIRE | **Fait** en conception (§6, §7, §21-26, §39) |
 | Modificateurs de partie (cauchemar, mort définitive, ressources rares) | À faire |
 | Score par mission | À faire |
-| Coop locale du convoi (déclarée inachevée dans `special-operations-v131.js`) | À faire |
+| Coop locale et en ligne : un joueur remplace un membre IA de l'escouade (§45.1) ; coop locale du convoi déclarée inachevée dans `special-operations-v131.js`, aucun réseau dans le code | À faire |
 
 ### 53.8 Options et accessibilité
 
 | Tâche | Statut | Constat dans le code |
 | --- | --- | --- |
 | Manette, tactile, trois difficultés, réduction des mouvements, volume | Présent | Mentions dans le code (manette 11 fichiers, tactile 66, difficulté 18, réduction des mouvements 79, volume 31) ; qualité non évaluée |
-| Mode daltonien | À faire | Aucune occurrence |
-| Version anglaise | À faire | `index.html` en `lang="fr"`, aucun système de traduction (`i18n`) |
-| Remappage complet des commandes | À vérifier | 4 fichiers mentionnent un remappage |
-| Taille du texte | À faire | — |
+| Mode daltonien | À faire (validé §45.1) | Aucune occurrence |
+| Version anglaise | À faire, **dès maintenant** (§45.1) | `index.html` en `lang="fr"`, aucun système de traduction (`i18n`) |
+| Remappage complet des commandes | À vérifier puis compléter (validé §45.1) | 4 fichiers mentionnent un remappage |
+| Taille du texte | À faire (validé §45.1) | — |
+| Sous-titres des sons importants | À faire (validé §45.1) | — |
 
 ### 53.9 Interface et lisibilité
 
@@ -3551,7 +3578,7 @@ Les autres pistes (alerte, boss, fins, campagnes annexes) attendent de nouveaux 
 | Page de présentation, résumé en une phrase | À faire |
 | Bande-annonce de 60 à 90 secondes issue de la tranche verticale | Bloqué par §53.1 |
 | 6 à 8 captures soignées | Bloqué par §53.1 |
-| Décision sur la diffusion au regard de la propriété intellectuelle (`LICENSE_NOTICE.md`) | Décision du propriétaire |
+| Décision sur la diffusion au regard de la propriété intellectuelle (`LICENSE_NOTICE.md`) | Décision du propriétaire : entre gratuite publique et privée, non tranchée (§45.1) |
 
 ### 53.11 Tests de jeu
 
@@ -3569,11 +3596,11 @@ Les autres pistes (alerte, boss, fins, campagnes annexes) attendent de nouveaux 
 | --- | --- | --- |
 | 1 | Décision sur la protection de `content-core-v50.js` (§52.3) | Débloque le renommage, déjà prêt |
 | 2 | Extension des emplacements audio + génération des musiques M-01 à M-07 | Prérequis de la tranche verticale |
-| 3 | Tranche verticale (§53.1) avec bruitages prioritaires | Ce qui attire et ce qui se montre |
+| 3 | Système de traduction FR/EN, puis tranche verticale (§53.1) avec bruitages prioritaires | Les textes de la tranche sont écrits dans les deux langues (§45.1) |
 | 4 | Réglage des sensations et de la tension (§53.3) | Rend la tranche convaincante |
 | 5 | Premier test de jeu (§53.11) | Mesure avant d'aller plus loin |
 | 6 | Masquage ou finition de l'art provisoire (§53.4) | Évite la mauvaise impression |
 | 7 | Progression et personnages (§53.5-53.6) | Donne envie de continuer |
-| 8 | Version anglaise et mode daltonien (§53.8) | Élargit le public |
+| 8 | Mode daltonien et autres options d'accessibilité (§53.8) | Élargit le public ; la traduction anglaise, elle, commence dès l'étape 3 (§45.1) |
 | 9 | Présentation publique (§53.10) | Quand la tranche est prête |
 | 10 | Campagnes annexes, dans l'ordre du §20 | Une fois le cœur du jeu solide |
