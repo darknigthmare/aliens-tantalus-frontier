@@ -15,7 +15,7 @@ export function mountCampaignDebriefV161(root, { save, campaignId, onReview } = 
   const document = root.ownerDocument || globalThis.document;
   const section = element(document, 'section', 'campaign-story-v160');
   section.dataset.convoyStoryReturn = model.id;
-  section.setAttribute('aria-label', 'Compte rendu du convoi de Lethe');
+  section.setAttribute('aria-label', 'Compte rendu du convoi de Cocyte');
   section.append(element(document, 'p', 'campaign-story-v160__status', model.status),
     element(document, 'h3', '', model.title), element(document, 'p', '', model.summary),
     element(document, 'p', 'campaign-story-v160__protocol', `Axe de lecture : ${model.protocolLabel}`));

@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { reviewedOriginalNamesDigestV183 } from './audit-original-names-v183.mjs';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { copyFileSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
@@ -797,9 +798,11 @@ test('V182 refuses unreviewed bytes even when the caller forges its source manif
   for (const [path, receipt] of Object.entries(INTEGRATION_SOURCES_V182)) {
     assert.equal(Object.isFrozen(receipt), true);
     assert.equal(Object.isFrozen(receipt.predecessors), true);
-    assert.equal(sha(read(path)), receipt.currentSha256, path);
+    // A later V183 receipt (audit-original-names-v183.mjs) may continue this exact V182 endpoint.
+    const reviewed = reviewedOriginalNamesDigestV183(path, receipt.currentSha256);
+    assert.equal(sha(read(path)), reviewed, path);
     for (const predecessor of Object.values(receipt.predecessors).filter(Boolean))
-      assert.equal(reviewedIntegrationDigestV182(path, predecessor), receipt.currentSha256, path);
+      assert.equal(reviewedIntegrationDigestV182(path, predecessor), reviewed, path);
     assert.throws(() => reviewedIntegrationDigestV182(path, '0'.repeat(64)), /Incorrect V182 branch endpoint/, path);
     const changed = name => name === path ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
     assert.throws(() => verifyAuditSuccessionV163(previous, current, changed),

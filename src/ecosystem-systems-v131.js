@@ -119,7 +119,7 @@ export function ecosystemDossierV131(state) {
     : queen && state.defenceElapsed < 22 ? 'E sur les deux balises ; défendre 22 s. Le compteur progresse seulement dans leur secteur.'
     : hive ? 'Effondrement : revenir au sas d’insertion et maintenir E 2 s avant la fin du compte à rebours.'
     : 'Rejoindre le sas à droite et maintenir E 2 s pour confirmer l’extraction.';
-  return { phase: ecosystemPhaseV131(state), title: queen ? 'LE CHANT DE LA REINE-MÈRE' : hive ? 'LV-XENO · LA RUCHE-MONDE' : 'PANGAEA · LA SECONDE EXTINCTION',
+  return { phase: ecosystemPhaseV131(state), title: queen ? 'LE CHANT DE LA REINE-MÈRE' : hive ? 'TR-0 · LA RUCHE-MONDE' : 'PANGAEA · LA SECONDE EXTINCTION',
     instruction, pressureLabel: queen ? 'EMPRISE' : hive ? 'ALERTE PLANÈTE' : 'INTÉGRITÉ BIOSPHÈRE',
     pressure: queen || hive ? state.pressure : state.integrity,
     artworkStatus: 'original-vector-prototype', canonExact: false, implementationStatus: 'partial' };

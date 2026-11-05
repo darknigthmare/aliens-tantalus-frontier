@@ -17,9 +17,9 @@ export function mountConvoyReturnHistoryV162(root, { save } = {}) {
   const section = element(document, 'section', 'convoy-history-v162');
   section.dataset.convoyReturnHistory = 'true';
   section.setAttribute('aria-label', 'Journal des sorties du convoi');
-  section.append(element(document, 'p', 'convoy-history-v162__eyebrow', 'LIAISON LETHE · ARCHIVES'),
+  section.append(element(document, 'p', 'convoy-history-v162__eyebrow', 'LIAISON COCYTE · ARCHIVES'),
     element(document, 'h3', '', 'Journal du convoi'),
-    element(document, 'p', 'convoy-history-v162__intro', 'Les transmissions conservées du corridor de Lethe. Les huit dernières sorties restent dans le journal.'));
+    element(document, 'p', 'convoy-history-v162__intro', 'Les transmissions conservées du corridor de Cocyte. Les huit dernières sorties restent dans le journal.'));
   const list = element(document, 'div', 'convoy-history-v162__list');
   for (const entry of entries) {
     const details = element(document, 'details', 'convoy-history-v162__entry');

@@ -57,7 +57,7 @@ const PHASES = Object.freeze({
   briefing: Object.freeze({ title: 'Le message arrivé trop tard',
     location: 'TANTALUS · SALLE DE BRIEFING',
     lines: Object.freeze([
-      LINE('MU/TH/UR', 'QZ-18. Le relais de Lethe ne répond plus. Sa mémoire locale est notre seule piste.'),
+      LINE('MU/TH/UR', 'QZ-18. Le relais de Cocyte ne répond plus. Sa mémoire locale est notre seule piste.'),
       LINE('Inez Harlow · liaison science', 'Ramenez les relevés, pas une accusation. Une panne aujourd’hui ne prouve pas une panne au moment de la détresse.'),
       LINE('Echo-9', 'Je remets le poste en service, puis je confronte les documents avant d’ouvrir la sortie.')
     ]),
@@ -69,7 +69,7 @@ const PHASES = Object.freeze({
       LINE('MU/TH/UR', 'Le complément de bilan exige le dossier complet et un retour validé. Une retraite ne remplace pas les pièces manquantes.')
     ]), objective: 'Choisir un protocole de compte rendu, ou conserver le bilan standard.' }),
   approach: Object.freeze({ title: 'À portée du relais',
-    location: 'LETHE · APPROCHE DE QZ-18',
+    location: 'COCYTE · APPROCHE DE QZ-18',
     lines: Object.freeze([
       LINE('Rook · liaison reconnaissance', 'Les accès supérieurs desservent ingénierie et sécurité. Le fret reste au niveau du quai.'),
       LINE('Echo-9', 'Je commence par le PDA à l’ouest. Pas de réseau extérieur : je conserve les originaux locaux.')

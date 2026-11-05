@@ -21,7 +21,7 @@ const campaign = (id, operationId, name, summary, objective) => Object.freeze({ 
 export const ECOSYSTEM_CAMPAIGNS_V131 = Object.freeze([
   campaign('special-queen-mother-v131', 'queen-mother-song', 'LE CHANT DE LA REINE-MÈRE',
     'Trois Chœurs entretiennent une emprise maternelle. La nurserie et les balises déterminent le repli.', 'Rompre les Chœurs, battre la Reine-Mère en quatre phases puis défendre les balises.'),
-  campaign('special-hive-world-v131', 'hive-world', 'LV-XENO · LA RUCHE-MONDE',
+  campaign('special-hive-world-v131', 'hive-world', 'TR-0 · LA RUCHE-MONDE',
     'Une surface vivante relie quatre organes à un noyau. Le bruit augmente une alerte qui transforme la route basse.', 'Détruire quatre organes, neutraliser le noyau et revenir au sas avant l’effondrement.'),
   campaign('special-pangaea-v131', 'pangaea-second-extinction', 'PANGAEA · LA SECONDE EXTINCTION',
     'Préserver une population saine face à sept castes Sauria et à une infection transmise dans les biomes.', 'Contenir trois nids, sauver trois hôtes puis neutraliser le Porte-Ruche Colosse.')

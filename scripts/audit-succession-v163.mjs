@@ -1,5 +1,6 @@
 /** Byte-anchored V162 -> V163 continuation; historical documents stay immutable. */
 import assert from 'node:assert/strict';
+import { reviewedOriginalNamesDigestV183 } from './audit-original-names-v183.mjs';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { historicalIntegrationViewV182, reviewedIntegrationDigestV182,
@@ -665,7 +666,8 @@ export function verifyFollowupV179(current, readSource = readRepository) {
   assert.deepEqual(record.auditLibraries.map(row=>row.path).sort(),Object.keys(V179_BASELINE_WITNESS.auditLibraryPredecessors).sort());
   for(const row of record.auditLibraries){assert.equal(row.previousSha256,V179_BASELINE_WITNESS.auditLibraryPredecessors[row.path]);assert.equal(sha(readSource(row.path)),reviewedIntegrationDigestV182(row.path,row.currentSha256),'Unreviewed V179 audit library: '+row.path);}
   assert.deepEqual(record.protectedGameplayBytes,V179_BASELINE_WITNESS.protectedGameplayBytes);
-  for(const[path,expected]of Object.entries(record.protectedGameplayBytes))assert.equal(sha(readSource(path)),expected,'MainN Save/catalogue/cloud contract changed: '+path);
+  // V183: an owner-validated successor (audit-original-names-v183.mjs) may replace protected bytes.
+  for(const[path,expected]of Object.entries(record.protectedGameplayBytes))assert.equal(sha(readSource(path)),reviewedOriginalNamesDigestV183(path,expected),'MainN Save/catalogue/cloud contract changed: '+path);
   assert.deepEqual(record.visualOpenFindings,{basis:'HISTORICAL_SOURCE70_STATIC_READBACK_5PNGS_NOT_CURRENT_V179',openP2Areas:['briefing/Mire','cryo/pods','medical/morgue','quarantine/Bioforge'],currentV179VisualClosure:false,discardedFalsePositive:'hangar bracket: door painted after bracket'});
   assert.deepEqual(record.referenceAdmission,{activeMasterAliases:0,sourceVersionPending:45,pr7ProposalsActivated:0,newPlayableContent:0,upstreamCommit:'284e9da402b5be0da3f561459ea96224e9d59b6c',gameCatalogBaselineCommit:V179_BASELINE_WITNESS.mainCommit});
   assert.deepEqual(record.currentWorkstreams?.map(row=>row.id),['C179-REFERENCES','C179-WORKSHOP','C179-TRIALS-OBSERVATION']);

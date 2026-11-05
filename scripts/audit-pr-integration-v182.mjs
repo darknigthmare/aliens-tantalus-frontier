@@ -2,6 +2,7 @@
  * branches. A branch receipt remains evidence for its own bytes; the integrated
  * bytes receive a separate admission and never inherit an old pass or art claim. */
 import assert from 'node:assert/strict';
+import { reviewedOriginalNamesDigestV183 } from './audit-original-names-v183.mjs';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 
@@ -616,12 +617,13 @@ export const INTEGRATION_SOURCE_ONLY_PATHS_V182 = Object.freeze([
  * a SHA read from a caller-provided progress record cannot admit altered bytes. */
 export function reviewedIntegrationDigestV182(path, branchEndpoint) {
   const receipt = INTEGRATION_SOURCES_V182[path];
-  if (!receipt) return branchEndpoint;
+  // V183 successors (scripts/audit-original-names-v183.mjs) continue this join.
+  if (!receipt) return reviewedOriginalNamesDigestV183(path, branchEndpoint);
   assert.ok(validHash(branchEndpoint), 'Missing V182 branch endpoint: ' + path);
   assert.ok(Object.values(receipt.predecessors).includes(branchEndpoint),
     'Incorrect V182 branch endpoint: ' + path);
   assert.ok(validHash(receipt.currentSha256), 'Invalid V182 source digest: ' + path);
-  return receipt.currentSha256;
+  return reviewedOriginalNamesDigestV183(path, receipt.currentSha256);
 }
 
 /** Strip only this additive continuation. Unexpected roots and modified old
@@ -757,13 +759,13 @@ export function verifyIntegrationV182(current, readSource = readRepository) {
     assert.deepEqual(keys(receipt.predecessors), ['catalogue', 'main', 'qa']);
     assert.ok(['runtime', 'verifier', 'qa', 'workflow', 'document', 'tooling', 'configuration'].includes(receipt.kind));
     for (const predecessor of Object.values(receipt.predecessors)) assert.ok(predecessor === null || validHash(predecessor));
-    assert.equal(sha(readSource(path)), receipt.currentSha256, 'Unreviewed V182 source bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedOriginalNamesDigestV183(path, receipt.currentSha256), 'Unreviewed V182 source bytes: ' + path);
   }
   assert.deepEqual(record.auditLibraries.map(row => row.path), ['scripts/audit-pr-integration-v182.mjs']);
   for (const row of record.auditLibraries) {
     assert.deepEqual(keys(row), ['path', 'sha256']);
     assert.ok(validHash(row.sha256));
-    assert.equal(sha(readSource(row.path)), row.sha256, 'Unreviewed V182 integration library: ' + row.path);
+    assert.equal(sha(readSource(row.path)), reviewedOriginalNamesDigestV183(row.path, row.sha256), 'Unreviewed V182 integration library: ' + row.path);
   }
   verifyQaBranchV181(current, readSource);
   return Object.freeze({ joinedSources: Object.keys(INTEGRATION_SOURCES_V182).length,

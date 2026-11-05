@@ -285,6 +285,8 @@ const FORGE_TOOLING_V140 = new Set([
   'docs/development/CLOTURE_EXCEL_20261101.xlsx',
   'docs/development/EXCEL_CLOSURE_20261101.json',
   'docs/development/EXCEL_CLOSURE_20261101.md',
+  // V183 original-names succession receipts: source-only audit, never shipped.
+  'scripts/audit-original-names-v183.mjs',
   // Source-only narrative design bible; never shipped in a built distribution.
   'docs/narrative',
   'docs/narrative/CAMPAGNE_PRINCIPALE.md',
