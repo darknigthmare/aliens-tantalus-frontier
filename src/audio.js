@@ -1,4 +1,4 @@
-import { AudioAssetBankV77, emptyAudioManifestV77, normalizeAudioManifestV77 } from './audio-assets-v77.js';
+import { AudioAssetBankV77, emptyAudioManifestV77, normalizeAudioManifestV77, AUDIO_MUSIC_FALLBACK_V184 } from './audio-assets-v77.js';
 
 const level = (value, fallback = 1) => Number.isFinite(Number(value)) ? Math.max(0, Math.min(1, Number(value))) : fallback;
 export class AudioDirector {
@@ -166,8 +166,14 @@ export class AudioDirector {
       }, 180); this.timers.add(timer);
     });
   }
+  // V184 mission feedback. Each effect keeps a short synth fallback until a file exists.
+  checkpoint() { return this.playEffect('checkpoint', () => { this.tone(523, 0.09, 'sine', 0.07, 0); this.tone(784, 0.16, 'sine', 0.05, 0); }); }
+  locked() { return this.playEffect('locked', () => this.tone(110, 0.16, 'square', 0.07, -30)); }
+  kill() { return this.playEffect('kill', () => this.tone(68, 0.1, 'triangle', 0.08, -28)); }
+  pickup() { return this.playEffect('pickup', () => this.tone(660, 0.07, 'triangle', 0.05, 90)); }
+  victory() { return this.playEffect('victory', () => { this.tone(392, 0.22, 'sine', 0.06, 0); this.tone(587, 0.34, 'sine', 0.045, 0); }); }
   setScene(scene) {
-    const next = ['menu', 'hub', 'mission'].includes(scene) ? scene : null;
+    const next = ['menu', 'hub', 'mission', 'travel', 'briefing', 'archives'].includes(scene) ? scene : null;
     if (this.scene === next) return this.playScene();
     this.scene = next; this.sceneGeneration += 1; this.stopEffects(); this.stopMusic(0.35);
     return this.playScene();
@@ -181,7 +187,9 @@ export class AudioDirector {
     const current = () => !this.disposed && generation === this.sceneGeneration && this._enabled && this.volumes.music > 0 && this.volumes.master > 0;
     try {
       await this.prepare();
-      for (const source of this.sources('music', scene)) {
+      const own = this.sources('music', scene);
+      const playlist = own.length || !AUDIO_MUSIC_FALLBACK_V184[scene] ? own : this.sources('music', AUDIO_MUSIC_FALLBACK_V184[scene]);
+      for (const source of playlist) {
         const failureKey = `music:${source.path}:${source.sha256}`;
         if ((this.decodeFailures.get(failureKey) || 0) > this.now()) continue;
         const file = await this.bank.load(source); if (!current()) return false; if (!file) continue;

@@ -12,6 +12,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedAudioSlotsDigestV184 } from './audit-audio-slots-v184.mjs';
 
 const readRepository = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -74,18 +75,19 @@ export const ORIGINAL_NAMES_SUCCESSORS_V183 = freeze({
 
 export function reviewedOriginalNamesDigestV183(path, endpoint) {
   const receipt = ORIGINAL_NAMES_SUCCESSORS_V183[path];
-  if (!receipt) return endpoint;
+  // V184 (audit-audio-slots-v184.mjs) continues this chain.
+  if (!receipt) return reviewedAudioSlotsDigestV184(path, endpoint);
   assert.equal(endpoint, receipt.previousSha256, 'Broken V182-to-V183 source chain: ' + path);
   assert.ok(validHash(receipt.currentSha256), 'Invalid V183 source digest: ' + path);
   assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A V183 successor must identify changed bytes: ' + path);
-  return receipt.currentSha256;
+  return reviewedAudioSlotsDigestV184(path, receipt.currentSha256);
 }
 
 export function verifyOriginalNamesV183(readSource = readRepository) {
   for (const [path, receipt] of Object.entries(ORIGINAL_NAMES_SUCCESSORS_V183)) {
     assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
     assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
-    assert.equal(sha(readSource(path)), receipt.currentSha256, 'Unreviewed V183 source bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedAudioSlotsDigestV184(path, receipt.currentSha256), 'Unreviewed V183 source bytes: ' + path);
   }
   return Object.freeze({ successors: Object.keys(ORIGINAL_NAMES_SUCCESSORS_V183).length });
 }

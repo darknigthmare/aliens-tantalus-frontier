@@ -2903,14 +2903,16 @@ function handleGameEvent(event) {
   }
   if (event.type === 'shot') saveSystem.data.statistics.shots += 1;
   if (event.type === 'kill') {
+    audio.kill();
     saveSystem.data.statistics.kills += 1;
     log.textContent = `MENACE NEUTRALISÉE · ${escapeHtml(event.enemy?.name || 'CONTACT')} · ${saveSystem.data.statistics.kills} éliminations`;
   }
   if (event.type === 'vehicle') log.textContent = event.occupied ? 'POSTE DE CONDUITE OCCUPÉ · rôles et armement actifs.' : 'PROGRESSION À PIED.';
-  if (event.type === 'locked') log.textContent = `ACCÈS REFUSÉ · ${event.requirement}`;
-  if (event.type === 'checkpoint') { recordOperationFlag(saveSystem.data, `checkpoint-${event.checkpoint}`); log.textContent = `CHECKPOINT ${event.checkpoint} SÉCURISÉ.`; }
+  if (event.type === 'locked') { audio.locked(); log.textContent = `ACCÈS REFUSÉ · ${event.requirement}`; }
+  if (event.type === 'checkpoint') { audio.checkpoint(); recordOperationFlag(saveSystem.data, `checkpoint-${event.checkpoint}`); log.textContent = `CHECKPOINT ${event.checkpoint} SÉCURISÉ.`; }
   if (event.type === 'power-restored' || event.type === 'shortcut' || event.type === 'archive-recovered') recordOperationFlag(saveSystem.data, event.type);
   if (event.type === 'supply') {
+    audio.pickup();
     saveSystem.data.player.ammo.primary += Number(event.amount) || 60;
     recordOperationFlag(saveSystem.data, 'supply');
   }
@@ -2936,6 +2938,7 @@ function handleGameEvent(event) {
     // Repeated terminal events after durable resolution cannot even rewrite the
     // profile timestamp, let alone manufacture a second result or payment.
     if (!saveSystem.data.strategy.currentOperation) return false;
+    audio.victory();
     // The V70 resolution validator compares the terminal payload with the
     // native checkpoint. Persist the exact extracted state before clearing the
     // active operation so forged or stale rewards remain fail-closed.
