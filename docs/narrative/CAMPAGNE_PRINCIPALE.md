@@ -4059,7 +4059,7 @@ Les autres pistes (alerte, boss, fins, campagnes annexes) attendent de nouveaux 
 | --- | --- | --- |
 | Manette, tactile, trois difficultés, réduction des mouvements, volume | Présent | Mentions dans le code (manette 11 fichiers, tactile 66, difficulté 18, réduction des mouvements 79, volume 31) ; qualité non évaluée |
 | Mode daltonien | À faire (validé §45.1) | Aucune occurrence |
-| Version anglaise | À faire, **dès maintenant** (§45.1) | `index.html` en `lang="fr"`, aucun système de traduction (`i18n`) |
+| Version anglaise | En cours : système et premiers écrans dans la PR #44 (§55.1) | `index.html` en `lang="fr"`, aucun système de traduction (`i18n`) |
 | Remappage complet des commandes | À vérifier puis compléter (validé §45.1) | 4 fichiers mentionnent un remappage |
 | Taille du texte | À faire (validé §45.1) | — |
 | Sous-titres des sons importants | À faire (validé §45.1) | — |
@@ -4119,6 +4119,8 @@ Cette section traduit les décisions des §45.1 à §45.3 en travail sur le code
 | Constat | Proposition |
 | --- | --- |
 | `index.html` est en `lang="fr"` ; les textes du joueur sont écrits en dur dans les modules (`src/`, 530 fichiers) ; aucun système de traduction | Modules de dictionnaires `fr` et `en` indexés par clé, fonction `t(clé, paramètres)`, réglage `settings.language` (défaut `fr`) |
+
+**État (2026-11-06) :** étape 1 faite dans la **PR #44** (V185) : réglage de langue par appareil, hors de la sauvegarde ; écran titre, rail, titres de vue, bandeau et panneau Système traduits ; 5 tests ; `test:all` 4 067 tests, 0 échec. Le reste des textes est encore en français (créateur de personnage, hub, missions, dialogues).
 
 **Ordre de travail :**
 
