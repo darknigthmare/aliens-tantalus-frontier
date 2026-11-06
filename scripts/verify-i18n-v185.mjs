@@ -172,9 +172,10 @@ test('V185 crew interaction prompts translate the action and keep the crew name'
 });
 
 test('V185 automatic layer translates catalog text, upper-case variants and patterns only in English', async () => {
-  const { autoTranslateV185, autoCatalogSizeV185 } = await import('../src/i18n-auto-v185.js');
+  const { autoTranslateV185, loadCatalogV185 } = await import('../src/i18n-auto-v185.js');
   const { EN_CATALOG_V185, EN_PATTERNS_V185 } = await import('../src/i18n-en-catalog-v185.js');
-  const size = autoCatalogSizeV185();
+  const size = await loadCatalogV185();
+  assert.equal(size.exact, Object.keys(EN_CATALOG_V185).length);
   assert.ok(size.exact > 0);
   const [french, english] = Object.entries(EN_CATALOG_V185).find(([fr]) => fr !== fr.toUpperCase() && fr.length > 8);
   setLanguageV185('fr', { storage: memoryStorage(), document: null });
@@ -196,4 +197,16 @@ test('V185 automatic layer translates catalog text, upper-case variants and patt
     assert.equal(autoTranslateV185(sample), EN_PATTERNS_V185[pattern].replace('{0}', '7'));
   }
   setLanguageV185('fr', { storage: memoryStorage(), document: null });
+});
+
+test('V185 automatic layer translates joined messages piece by piece and keeps unknown pieces', async () => {
+  const { autoTranslateV185, loadCatalogV185 } = await import('../src/i18n-auto-v185.js');
+  const { EN_CATALOG_V185 } = await import('../src/i18n-en-catalog-v185.js');
+  await loadCatalogV185();
+  const [a, b] = Object.entries(EN_CATALOG_V185).filter(([fr]) => /^[A-ZÀ-Ý].*\.$/.test(fr) && fr.length > 20 && !fr.includes(' · ')).slice(0, 2);
+  setLanguageV185('en', { storage: memoryStorage(), document: null });
+  assert.equal(autoTranslateV185(`${a[0]} ${b[0]}`), `${a[1]} ${b[1]}`);
+  assert.equal(autoTranslateV185(`Pièce inconnue · ${a[0]}`), `Pièce inconnue · ${a[1]}`);
+  setLanguageV185('fr', { storage: memoryStorage(), document: null });
+  assert.equal(autoTranslateV185(`${a[0]} ${b[0]}`), `${a[0]} ${b[0]}`);
 });
