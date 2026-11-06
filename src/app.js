@@ -157,6 +157,7 @@ import { resolvePlayerAppearancePreviewWeaponV127 } from './player-appearance-lo
 import { createUserReferenceEffectsGalleryV95 } from './user-reference-effects-v95.js';
 import { createUserReferenceLibraryV100 } from './user-reference-library-v100.js';
 import { createUserSpecimenBenchV106 } from './user-specimen-bench-v106.js';
+import { installAutoTranslationV185 } from './i18n-auto-v185.js';
 import { tV185, tFromFrenchV185, tKeepFrenchV185, translateHubPromptV185, initLanguageV185, setLanguageV185, currentLanguageV185, STRINGS_V185, LANGUAGE_EVENT_V185 } from './i18n-v185.js';
 
 const byId = (id) => document.getElementById(id);
@@ -4132,6 +4133,8 @@ function retranslateStandardLabelV185(element, key, french) {
 
 function setupLanguageV185() {
   initLanguageV185();
+  // V185: displayed French text that is in the English catalog is replaced on screen.
+  installAutoTranslationV185();
   retranslateStandardLabelV185(byId('return-title'), 'top.menu', 'MENU PRINCIPAL');
   const select = byId('language-select-v185');
   if (select) {

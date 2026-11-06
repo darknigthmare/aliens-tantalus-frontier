@@ -170,3 +170,28 @@ test('V185 crew interaction prompts translate the action and keep the crew name'
   setLanguageV185('fr', { storage: memoryStorage(), document: null });
   assert.equal(translateHubPromptV185('E — Extraire le renseignement synthétique · DAVID-8R'), 'E — Extraire le renseignement synthétique · DAVID-8R');
 });
+
+test('V185 automatic layer translates catalog text, upper-case variants and patterns only in English', async () => {
+  const { autoTranslateV185, autoCatalogSizeV185 } = await import('../src/i18n-auto-v185.js');
+  const { EN_CATALOG_V185, EN_PATTERNS_V185 } = await import('../src/i18n-en-catalog-v185.js');
+  const size = autoCatalogSizeV185();
+  assert.ok(size.exact > 0);
+  const [french, english] = Object.entries(EN_CATALOG_V185).find(([fr]) => fr !== fr.toUpperCase() && fr.length > 8);
+  setLanguageV185('fr', { storage: memoryStorage(), document: null });
+  assert.equal(autoTranslateV185(french), french);
+  setLanguageV185('en', { storage: memoryStorage(), document: null });
+  assert.equal(autoTranslateV185(french), english);
+  assert.equal(autoTranslateV185(`  ${french} `), `  ${english} `);
+  assert.equal(autoTranslateV185(french.toUpperCase()), english.toUpperCase());
+  assert.equal(autoTranslateV185('Texte totalement inconnu du catalogue'), 'Texte totalement inconnu du catalogue');
+  assert.equal(autoTranslateV185(42), 42);
+  for (const [fr, en] of Object.entries(EN_PATTERNS_V185)) {
+    assert.deepEqual((fr.match(/\{\d+\}/g) || []).sort(), (en.match(/\{\d+\}/g) || []).sort(), fr);
+  }
+  const pattern = Object.keys(EN_PATTERNS_V185).find(fr => /^\S.*\{0\}/.test(fr) && !fr.includes('{1}'));
+  if (pattern) {
+    const sample = pattern.replace('{0}', '7');
+    assert.equal(autoTranslateV185(sample), EN_PATTERNS_V185[pattern].replace('{0}', '7'));
+  }
+  setLanguageV185('fr', { storage: memoryStorage(), document: null });
+});

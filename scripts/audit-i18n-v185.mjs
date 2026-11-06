@@ -35,7 +35,7 @@ export const I18N_SUCCESSORS_V185 = freeze({
   },
   'src/app.js': {
     previousSha256: 'dca634852e81b557a9e7bc736ef77b2c2a4037dda86286bf99775e8470401aab',
-    currentSha256: '44a73278b8461fc8888ddf58d5286488f9192f24a6e01480a0c3360f7d4b7ba6'
+    currentSha256: '482835e65677c536085a1344cf61c3ffa5e09e2af1b8029b949e000a533038ae'
   },
   'src/hub-v71-runtime.js': {
     previousSha256: '289b6c489f20563b39ac3cebda505dcefc0008d6237948a4d154100c7ad183a4',
@@ -51,7 +51,7 @@ export const I18N_SUCCESSORS_V185 = freeze({
   },
   'sw.js': {
     previousSha256: 'c3e1b4a7f3bf10623f3e3962a309f981bd895f7ddb81d5a4dc03a79fa648b8aa',
-    currentSha256: '0821d76eece02b42d87756c08796487f4123da7701a0480b3744a2fbf0a0b07c'
+    currentSha256: 'ff86bba365c3875c8ebaeb0abe13b2a6185ccd5f1a030b4ee5b15ac0e4a12f9b'
   }
 });
 
