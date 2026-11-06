@@ -73,7 +73,49 @@ export const STRINGS_V185 = freeze({
     'settings.music': 'MUSIQUE',
     'settings.data': 'Données',
     'settings.export': 'EXPORTER LA SAUVEGARDE',
-    'settings.import': 'IMPORTER UNE SAUVEGARDE'
+    'settings.import': 'IMPORTER UNE SAUVEGARDE',
+    'creator.eyebrow': 'DOSSIER PERSONNEL · ECHO-9',
+    'creator.heading': 'Votre relève commence ici.',
+    'creator.profile': 'Profil {profile} : la partie précédente ne sera remplacée qu’à la validation. Annuler la conserve intégralement.',
+    'creator.figureAlt': 'Présentation de la tenue Echo-9 existante',
+    'creator.figure': 'Tenue Echo-9 · apparence de départ existante',
+    'creator.identity': 'Identité du marine',
+    'creator.name': 'Nom du marine',
+    'creator.namePlaceholder': 'Prénom et nom',
+    'creator.callsign': 'Indicatif radio',
+    'creator.intro': 'Vous rejoignez les Marines coloniaux à bord du Tantalus. Votre nom et votre indicatif suivront cette campagne. Mara Vega reste votre commandante.',
+    'creator.note': 'Dotation initiale : M41A, M4A3, détecteur de mouvements et kit médical. Ce dossier ne propose pas encore de variantes corporelles animées.',
+    'creator.cancel': 'ANNULER',
+    'creator.submit': 'VALIDER ET SORTIR DE CRYOSTASE',
+    'creator.saveFailed': 'Sauvegarde impossible. Votre ancienne partie est conservée.',
+    'creator.error.name': 'Le nom doit contenir 2 à 40 caractères : lettres, chiffres, espaces, apostrophes ou traits d’union, sans commande ni balisage.',
+    'creator.error.reserved': 'Mara Vega est un PNJ de l’équipage. Choisissez une identité distincte pour le joueur.',
+    'creator.error.callsign': 'L’indicatif doit contenir 2 à 16 lettres ASCII, chiffres ou traits d’union.',
+    'title.recovery': 'Profil {profile} inaccessible. Sauvegarde préservée. Ouvrez Système pour récupérer les données ou choisir un autre profil.',
+    'title.profileStatus': 'PROFIL {profile} · J{day} {hour}:{minute} · SAUVEGARDE LOCALE',
+    'title.profileRecovery': 'PROFIL {profile} · RÉCUPÉRATION REQUISE',
+    'title.live.back': 'Retour au menu principal. Système sélectionné.',
+    'title.live.idle': 'Écran titre. Appuyez pour ouvrir le menu principal.',
+    'title.live.menuOpen': 'Menu principal ouvert.',
+    'title.live.menuClosed': 'Menu fermé. Appuyez pour commencer.',
+    'title.live.confirm': 'Confirmez pour remplacer la partie du profil {profile}.',
+    'title.live.changed': 'Le profil a changé. Confirmez à nouveau la nouvelle partie.',
+    'title.live.failed': 'Nouvelle partie non créée : {reason}',
+    'title.live.unavailable': 'sauvegarde indisponible',
+    'title.live.cancelled': 'Nouvelle partie annulée. La sauvegarde est conservée.',
+    'title.continue': 'CONTINUER',
+    'title.enter': 'ENTRER SUR LE TANTALUS',
+    'title.createCharacter': 'CRÉER MON PERSONNAGE',
+    'title.resumeWelcome': 'REPRENDRE L’ACCUEIL',
+    'title.resumeExercise': 'REPRENDRE L’EXERCICE',
+    'title.joinQuay': 'REJOINDRE LE QUAI',
+    'title.resumeQuay': 'REPRENDRE LE QUAI',
+    'title.resumeOpening': 'REPRENDRE LA PRISE DE POSTE',
+    'title.resumeOperation': 'REPRENDRE L’OPÉRATION',
+    'title.summary.create': 'Créez le personnage de ce profil pour commencer à bord du Tantalus.',
+    'title.summary.operation': 'Une opération est engagée. Retrouvez sa préparation ou son point sauvegardé depuis le déploiement.',
+    'title.summary.route': 'Retrouvez votre déploiement dans les opérations.',
+    'title.summary.ship': 'Reprenez votre partie à bord du Tantalus.'
   }),
   en: freeze({
     'skip.content': 'Skip to content',
@@ -137,7 +179,49 @@ export const STRINGS_V185 = freeze({
     'settings.music': 'MUSIC',
     'settings.data': 'Data',
     'settings.export': 'EXPORT SAVE',
-    'settings.import': 'IMPORT A SAVE'
+    'settings.import': 'IMPORT A SAVE',
+    'creator.eyebrow': 'PERSONNEL FILE · ECHO-9',
+    'creator.heading': 'Your relief starts here.',
+    'creator.profile': 'Profile {profile}: the previous game is only replaced once you confirm. Cancelling keeps it intact.',
+    'creator.figureAlt': 'Existing Echo-9 outfit',
+    'creator.figure': 'Echo-9 outfit · existing starting appearance',
+    'creator.identity': 'Marine identity',
+    'creator.name': 'Marine name',
+    'creator.namePlaceholder': 'First and last name',
+    'creator.callsign': 'Radio callsign',
+    'creator.intro': 'You are joining the Colonial Marines aboard the Tantalus. Your name and callsign will follow this campaign. Mara Vega remains your commanding officer.',
+    'creator.note': 'Starting kit: M41A, M4A3, motion tracker and medkit. This file does not offer animated body variants yet.',
+    'creator.cancel': 'CANCEL',
+    'creator.submit': 'CONFIRM AND LEAVE CRYOSLEEP',
+    'creator.saveFailed': 'Save failed. Your previous game is kept.',
+    'creator.error.name': 'The name must be 2 to 40 characters: letters, digits, spaces, apostrophes or hyphens, with no commands or markup.',
+    'creator.error.reserved': 'Mara Vega is a crew NPC. Choose a distinct identity for the player.',
+    'creator.error.callsign': 'The callsign must be 2 to 16 ASCII letters, digits or hyphens.',
+    'title.recovery': 'Profile {profile} unreadable. Save preserved. Open System to recover the data or choose another profile.',
+    'title.profileStatus': 'PROFILE {profile} · D{day} {hour}:{minute} · LOCAL SAVE',
+    'title.profileRecovery': 'PROFILE {profile} · RECOVERY REQUIRED',
+    'title.live.back': 'Back to the main menu. System selected.',
+    'title.live.idle': 'Title screen. Press to open the main menu.',
+    'title.live.menuOpen': 'Main menu open.',
+    'title.live.menuClosed': 'Menu closed. Press to start.',
+    'title.live.confirm': 'Confirm to replace the game in profile {profile}.',
+    'title.live.changed': 'The profile changed. Confirm the new game again.',
+    'title.live.failed': 'New game not created: {reason}',
+    'title.live.unavailable': 'save unavailable',
+    'title.live.cancelled': 'New game cancelled. The save is kept.',
+    'title.continue': 'CONTINUE',
+    'title.enter': 'BOARD THE TANTALUS',
+    'title.createCharacter': 'CREATE MY CHARACTER',
+    'title.resumeWelcome': 'RESUME THE WELCOME',
+    'title.resumeExercise': 'RESUME THE EXERCISE',
+    'title.joinQuay': 'JOIN THE QUAY',
+    'title.resumeQuay': 'RESUME THE QUAY',
+    'title.resumeOpening': 'RESUME TAKING POST',
+    'title.resumeOperation': 'RESUME THE OPERATION',
+    'title.summary.create': 'Create this profile\u2019s character to begin aboard the Tantalus.',
+    'title.summary.operation': 'An operation is under way. Return to its preparation or its saved point from deployment.',
+    'title.summary.route': 'Find your deployment in operations.',
+    'title.summary.ship': 'Resume your game aboard the Tantalus.'
   })
 });
 
@@ -172,9 +256,25 @@ function setOwnText(element, text) {
   node.textContent = lead + text + trail;
 }
 
+// Text produced in French by a module (validation messages, for example) is
+// translated by matching its exact French dictionary entry; unknown text is kept.
+export function tFromFrenchV185(text) {
+  if (typeof text !== 'string') return text;
+  const key = Object.keys(STRINGS_V185.fr).find(candidate => STRINGS_V185.fr[candidate] === text);
+  return key ? tV185(key, text) : text;
+}
+
 export function applyStaticTranslationsV185(root = globalThis.document) {
   if (!root?.querySelectorAll) return 0;
   let count = 0;
+  // data-i18n-attr="placeholder:key;alt:key" translates attributes.
+  for (const element of root.querySelectorAll('[data-i18n-attr]')) {
+    for (const pair of String(element.dataset.i18nAttr).split(';')) {
+      const [name, key] = pair.split(':').map(part => part?.trim());
+      if (name && key && /^(?:placeholder|alt|title|aria-label)$/.test(name)) element.setAttribute(name, tV185(key, element.getAttribute(name) || ''));
+    }
+    count += 1;
+  }
   for (const element of root.querySelectorAll('[data-i18n]')) { setOwnText(element, tV185(element.dataset.i18n, '')); count += 1; }
   for (const element of root.querySelectorAll('[data-i18n-aria]')) { element.setAttribute('aria-label', tV185(element.dataset.i18nAria, element.getAttribute('aria-label') || '')); count += 1; }
   return count;

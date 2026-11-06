@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import {
   STRINGS_V185, LANGUAGES_V185, DEFAULT_LANGUAGE_V185, LANGUAGE_STORAGE_KEY_V185,
-  tV185, setLanguageV185, readStoredLanguageV185, normalizeLanguageV185, applyStaticTranslationsV185
+  tV185, tFromFrenchV185, setLanguageV185, readStoredLanguageV185, normalizeLanguageV185, applyStaticTranslationsV185
 } from '../src/i18n-v185.js';
 
 const memoryStorage = (initial = {}) => {
@@ -19,10 +19,12 @@ test('V185 French and English dictionaries declare the same keys with non-empty 
   for (const language of LANGUAGES_V185) for (const [key, text] of Object.entries(STRINGS_V185[language])) assert.ok(text.trim(), `${language}:${key}`);
 });
 
-test('V185 every key marked in index.html exists in both languages', async () => {
-  const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
-  const keys = [...html.matchAll(/data-i18n(?:-aria)?="([^"]+)"/g)].map(match => match[1]);
-  assert.ok(keys.length >= 20);
+test('V185 every key marked in index.html and the player creator exists in both languages', async () => {
+  const html = (await readFile(new URL('../index.html', import.meta.url), 'utf8'))
+    + await readFile(new URL('../src/player-creator-ui-v84.js', import.meta.url), 'utf8');
+  const keys = [...html.matchAll(/data-i18n(?:-aria)?="([^"]+)"/g)].map(match => match[1])
+    .concat([...html.matchAll(/data-i18n-attr="([^"]+)"/g)].flatMap(match => match[1].split(';').map(pair => pair.split(':')[1])));
+  assert.ok(keys.length >= 30);
   for (const key of keys) for (const language of LANGUAGES_V185) assert.ok(STRINGS_V185[language][key], `${language}:${key}`);
   // The French markup is the source text: each marked French string matches the dictionary.
   for (const match of html.matchAll(/data-i18n="([^"]+)">([^<]*)/g)) {
@@ -58,7 +60,7 @@ test('V185 static translation replaces only the element own text and keeps child
   const nav = { dataset: { i18n: 'nav.settings' }, childNodes: [child, text(' Système')], children: [child] };
   const plain = { dataset: { i18n: 'title.start' }, childNodes: [], children: [], textContent: '' };
   const aria = { dataset: { i18nAria: 'nav.main' }, getAttribute: () => 'Navigation principale', setAttribute(name, value) { this[name] = value; } };
-  const root = { querySelectorAll: selector => (selector === '[data-i18n]' ? [label, nav, plain] : [aria]) };
+  const root = { querySelectorAll: selector => (selector === '[data-i18n]' ? [label, nav, plain] : selector === '[data-i18n-aria]' ? [aria] : []) };
   setLanguageV185('en', { storage: memoryStorage(), document: null });
   assert.equal(applyStaticTranslationsV185(root), 4);
   assert.equal(label.childNodes[0], child);
@@ -69,4 +71,32 @@ test('V185 static translation replaces only the element own text and keeps child
   setLanguageV185('fr', { storage: memoryStorage(), document: null });
   applyStaticTranslationsV185(root);
   assert.equal(label.childNodes[1].textContent, ' Coop locale');
+});
+
+test('V185 French module messages and attributes are translated without changing the validator', async () => {
+  const { validatePlayerIdentityV84 } = await import('../src/player-onboarding-v84.js');
+  const result = validatePlayerIdentityV84({ name: 'x', callsign: '!' });
+  assert.equal(result.ok, false);
+  setLanguageV185('en', { storage: memoryStorage(), document: null });
+  for (const message of Object.values(result.errors)) assert.notEqual(tFromFrenchV185(message), message, message);
+  assert.equal(tFromFrenchV185('Texte inconnu'), 'Texte inconnu');
+  assert.equal(tV185('creator.profile', '', { profile: 2 }).startsWith('Profile 2:'), true);
+  const input = { dataset: { i18nAttr: 'placeholder:creator.namePlaceholder;onclick:creator.name' }, attrs: { placeholder: 'Prénom et nom' },
+    getAttribute(name) { return this.attrs[name] ?? null; }, setAttribute(name, value) { this.attrs[name] = value; } };
+  applyStaticTranslationsV185({ querySelectorAll: selector => (selector === '[data-i18n-attr]' ? [input] : []) });
+  assert.equal(input.attrs.placeholder, 'First and last name');
+  assert.equal(input.attrs.onclick, undefined);
+  setLanguageV185('fr', { storage: memoryStorage(), document: null });
+  assert.equal(tFromFrenchV185(result.errors.name), result.errors.name);
+});
+
+test('V185 French title templates reproduce the previous French text exactly', () => {
+  setLanguageV185('fr', { storage: memoryStorage(), document: null });
+  assert.equal(tV185('title.profileStatus', '', { profile: 1, day: '01', hour: '06', minute: '00' }), 'PROFIL 1 · J01 06:00 · SAUVEGARDE LOCALE');
+  assert.equal(tV185('title.live.confirm', '', { profile: 2 }), 'Confirmez pour remplacer la partie du profil 2.');
+  assert.equal(tV185('title.live.failed', '', { reason: 'sauvegarde indisponible' }), 'Nouvelle partie non créée : sauvegarde indisponible');
+  setLanguageV185('en', { storage: memoryStorage(), document: null });
+  assert.equal(tV185('title.profileStatus', '', { profile: 1, day: '01', hour: '06', minute: '00' }), 'PROFILE 1 · D01 06:00 · LOCAL SAVE');
+  assert.equal(tFromFrenchV185('ENTRER SUR LE TANTALUS'), 'BOARD THE TANTALUS');
+  setLanguageV185('fr', { storage: memoryStorage(), document: null });
 });

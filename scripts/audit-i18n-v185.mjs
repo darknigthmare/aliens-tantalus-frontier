@@ -37,9 +37,13 @@ export const I18N_SUCCESSORS_V185 = freeze({
     previousSha256: 'dca634852e81b557a9e7bc736ef77b2c2a4037dda86286bf99775e8470401aab',
     currentSha256: 'f9346cd4be0dd240b28846142653a5381e5b9c8225ee0fcfeb9630f370cd0cae'
   },
+  'src/player-creator-ui-v84.js': {
+    previousSha256: '6eab777a85e20594def1881aa9637fc1fab981281ea8e033c5afa2d253bb978d',
+    currentSha256: '0b5174e5ff3948b5ec987bc2fdee1aca277d64d4eb668ef369461df272bb566f'
+  },
   'src/title-screen-v61.js': {
     previousSha256: '62466850a993e23cae9219e0ec8655b237251784fa70b91ad8a9487e3bb5922d',
-    currentSha256: '541c4d8440b60c5b807f5647a3f4fd5df8263ebdc9c19ab1a8d902d3b09be67c'
+    currentSha256: 'e0c10ca738df12c78b48a24d79cb049aea2ac3e1c08ec270d3eed750fe267342'
   },
   'sw.js': {
     previousSha256: 'c3e1b4a7f3bf10623f3e3962a309f981bd895f7ddb81d5a4dc03a79fa648b8aa',
