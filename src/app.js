@@ -669,7 +669,7 @@ function closeHubDialogue({ resume = true, restoreFocus = true } = {}) {
   pendingNpcConversationV62 = null;
   byId('hub-dialogue-choices').replaceChildren();
   byId('hub-dialogue-continue').hidden = false;
-  byId('hub-dialogue-continue').textContent = 'OUVRIR LA STATION';
+  byId('hub-dialogue-continue').textContent = tFromFrenchV185('OUVRIR LA STATION');
   if (resume && activeView === 'hub' && !activeHubStation) hubEngine.resume();
   return wasOpen;
 }
@@ -713,7 +713,7 @@ function openHubDialogue(interaction) {
   });
   byId('hub-dialogue-choices').replaceChildren();
   byId('hub-dialogue-continue').hidden = false;
-  byId('hub-dialogue-continue').textContent = 'OUVRIR LA STATION';
+  byId('hub-dialogue-continue').textContent = tFromFrenchV185('OUVRIR LA STATION');
   hubDialogueUiV76.open({ initialFocus: byId('hub-dialogue-continue') });
   return true;
 }
@@ -765,7 +765,7 @@ function chooseNpcDialogueV62(choiceId) {
   byId('hub-dialogue-text').textContent = result.response;
   byId('hub-dialogue-choices').replaceChildren();
   byId('hub-dialogue-continue').hidden = false;
-  byId('hub-dialogue-continue').textContent = 'TERMINER L’ÉCHANGE';
+  byId('hub-dialogue-continue').textContent = tFromFrenchV185('TERMINER L’ÉCHANGE');
   byId('hub-dialogue-continue').focus({ preventScroll: true });
   return true;
 }
@@ -958,14 +958,14 @@ function openOnboardingDialogueV84(interaction) {
   const contract = ONBOARDING_DIALOGUES_V84[state.phase];
   hubEngine.pause();
   pendingOnboardingDialogV84 = { owner: currentOwnerV84(), phase: state.phase, node: state.dialogueNode };
-  byId('hub-dialogue-speaker').textContent = `${contract.speaker.name} · ${contract.speaker.role}`;
-  byId('hub-dialogue-text').textContent = contract.lines[state.dialogueNode];
+  byId('hub-dialogue-speaker').textContent = `${tFromFrenchV185(contract.speaker.name)} · ${tFromFrenchV185(contract.speaker.role)}`;
+  byId('hub-dialogue-text').textContent = tFromFrenchV185(contract.lines[state.dialogueNode]);
   setDialogueSpeakerPortraitV168(byId('hub-dialogue-image'), {
     crewId: contact.crewId, name: contract.speaker.name
   });
   byId('hub-dialogue-choices').replaceChildren();
   byId('hub-dialogue-continue').hidden = false;
-  byId('hub-dialogue-continue').textContent = state.dialogueNode === contract.lines.length - 1 ? 'CONSIGNES REÇUES' : 'ÉCOUTER LA SUITE';
+  byId('hub-dialogue-continue').textContent = tFromFrenchV185(state.dialogueNode === contract.lines.length - 1 ? 'CONSIGNES REÇUES' : 'ÉCOUTER LA SUITE');
   hubDialogueUiV76.open({ initialFocus: byId('hub-dialogue-continue') });
   return true;
 }
@@ -1036,18 +1036,18 @@ function openOpeningDialogueV88() {
   hubEngine.pause();
   const owner = currentOwnerV84();
   pendingOpeningDialogV88 = { owner, phase: state.phase, node: state.signalNode };
-  byId('hub-dialogue-speaker').textContent = state.phase === 'signal' ? 'DAVID-8R · RELAIS DU TANTALUS' : 'MANIFESTE · FRET DE SECOURS';
-  byId('hub-dialogue-text').textContent = state.phase === 'signal' ? OPENING_SIGNAL_V88[state.signalNode] : 'Une seule place est disponible dans la soute de première sortie. Le lot choisi est scellé ici, puis consommé au départ : il ne sera pas renouvelé en rechargeant la partie.';
+  byId('hub-dialogue-speaker').textContent = tFromFrenchV185(state.phase === 'signal' ? 'DAVID-8R · RELAIS DU TANTALUS' : 'MANIFESTE · FRET DE SECOURS');
+  byId('hub-dialogue-text').textContent = tFromFrenchV185(state.phase === 'signal' ? OPENING_SIGNAL_V88[state.signalNode] : 'Une seule place est disponible dans la soute de première sortie. Le lot choisi est scellé ici, puis consommé au départ : il ne sera pas renouvelé en rechargeant la partie.');
   setDialogueSpeakerPortraitV168(byId('hub-dialogue-image'), state.phase === 'signal'
     ? { crewId: 'crew-10-david-8r', name: 'DAVID-8R' }
     : { name: 'Manifeste de fret' });
   const choices = byId('hub-dialogue-choices');
   choices.replaceChildren();
   byId('hub-dialogue-continue').hidden = state.phase === 'manifest';
-  byId('hub-dialogue-continue').textContent = state.signalNode === OPENING_SIGNAL_V88.length - 1 ? 'REJOINDRE LE HANGAR' : 'ÉCOUTER LA SUITE';
+  byId('hub-dialogue-continue').textContent = tFromFrenchV185(state.signalNode === OPENING_SIGNAL_V88.length - 1 ? 'REJOINDRE LE HANGAR' : 'ÉCOUTER LA SUITE');
   if (state.phase === 'manifest') for (const [freight, label] of [['medical', 'MÉDICAMENTS · +2 TROUSSES'], ['energy', 'ÉNERGIE · −2 CARBURANT']]) {
     const button = document.createElement('button');
-    button.type = 'button'; button.className = 'hub-dialogue-choice'; button.dataset.openingFreightV88 = freight; button.textContent = label;
+    button.type = 'button'; button.className = 'hub-dialogue-choice'; button.dataset.openingFreightV88 = freight; button.textContent = tFromFrenchV185(label);
     button.onclick = () => {
       try { commitOpeningEventV88({ type: 'freight', freight }, owner); closeHubDialogue(); renderAll(); toast('Fret scellé. Rejoignez la salle de briefing pour votre première sortie.'); }
       catch (error) { toast(error.message); }

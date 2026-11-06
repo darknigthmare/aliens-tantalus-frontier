@@ -131,3 +131,42 @@ test('V185 French objective and prompt entries are copied verbatim from the modu
   for (const key of Object.keys(STRINGS_V185.fr).filter(key => key.startsWith('toast.'))) assert.ok(hubSources.includes(`toast('${STRINGS_V185.fr[key]}')`), key);
   for (const key of Object.keys(STRINGS_V185.fr).filter(key => key.startsWith('hub.deckShort.'))) assert.ok(hubSources.includes(`shortName: '${STRINGS_V185.fr[key]}'`), key);
 });
+
+test('V185 first-hour dialogue entries are copied verbatim from their modules', async () => {
+  const read = async path => readFile(new URL('../' + path, import.meta.url), 'utf8');
+  const onboarding = await read('src/player-onboarding-v84.js');
+  const opening = (await read('src/player-opening-v88.js')) + (await read('src/app.js'));
+  const app = await read('src/app.js');
+  const check = (prefix, source) => {
+    const keys = Object.keys(STRINGS_V185.fr).filter(key => key.startsWith(prefix));
+    assert.ok(keys.length, prefix);
+    for (const key of keys) assert.ok(source.includes(`'${STRINGS_V185.fr[key]}'`), key);
+  };
+  check('dlg.v84.', onboarding);
+  check('dlg.v88.', opening);
+  check('post.', opening);
+  check('dlg.btn.', app);
+  check('error.', app);
+  const { ONBOARDING_DIALOGUES_V84 } = await import('../src/player-onboarding-v84.js');
+  const { OPENING_SIGNAL_V88, OPENING_POSTS_V88 } = await import('../src/player-opening-v88.js');
+  setLanguageV185('en', { storage: memoryStorage(), document: null });
+  const lines = Object.values(ONBOARDING_DIALOGUES_V84).flatMap(entry => entry.lines).concat(OPENING_SIGNAL_V88, Object.values(OPENING_POSTS_V88).map(post => post.label));
+  for (const line of lines) assert.notEqual(tFromFrenchV185(line), line, line);
+  setLanguageV185('fr', { storage: memoryStorage(), document: null });
+});
+
+test('V185 crew interaction prompts translate the action and keep the crew name', async () => {
+  const { HUB_NPC_ROSTER } = await import('../src/hub-v52-runtime.js');
+  const { translateHubPromptV185 } = await import('../src/i18n-v185.js');
+  assert.equal(HUB_NPC_ROSTER.length, 16);
+  const roster = await readFile(new URL('../src/hub-v52-runtime.js', import.meta.url), 'utf8');
+  const actions = Object.keys(STRINGS_V185.fr).filter(key => key.startsWith('npc.action.'));
+  assert.equal(actions.length, 16);
+  for (const key of actions) assert.ok(roster.includes(`'${STRINGS_V185.fr[key]}')`), key);
+  setLanguageV185('en', { storage: memoryStorage(), document: null });
+  assert.equal(translateHubPromptV185('E — Extraire le renseignement synthétique · DAVID-8R'), 'E — Extract the synthetic intelligence · DAVID-8R');
+  assert.equal(translateHubPromptV185('E — Inconnu · Rook'), 'E — Inconnu · Rook');
+  assert.equal(translateHubPromptV185('F / ENTRÉE — TIRER · 2 MENACES'), 'F / ENTER — FIRE · 2 THREATS');
+  setLanguageV185('fr', { storage: memoryStorage(), document: null });
+  assert.equal(translateHubPromptV185('E — Extraire le renseignement synthétique · DAVID-8R'), 'E — Extraire le renseignement synthétique · DAVID-8R');
+});

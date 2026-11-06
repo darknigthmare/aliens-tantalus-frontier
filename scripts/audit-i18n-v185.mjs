@@ -19,7 +19,7 @@ const freeze = value => {
 export const I18N_SUCCESSORS_V185 = freeze({
   'index.html': {
     previousSha256: 'a4f5bf1470b0b736451ffbb74cc7c07994d2c9a6f9816bb9e81f53016253d6f5',
-    currentSha256: '3e178ad85613044a91d7bdbca6d1e2cb3e77e07e7f9f7dbaad8f1980bfd6f19a'
+    currentSha256: '337a0b230d0b075bf70e5122240f1ce8e0d2deaebbbd563a15496ea92b5f4d66'
   },
   'package.json': {
     previousSha256: 'ff849b03809ae5f0e8bb0949cc76291330425f881d6cd113cca536a20c79cd61',
@@ -35,7 +35,7 @@ export const I18N_SUCCESSORS_V185 = freeze({
   },
   'src/app.js': {
     previousSha256: 'dca634852e81b557a9e7bc736ef77b2c2a4037dda86286bf99775e8470401aab',
-    currentSha256: '4b74fbb10167a4b9ee44b31312d13e623e0cd829be46cb1bb881bd34a8c3b889'
+    currentSha256: '44a73278b8461fc8888ddf58d5286488f9192f24a6e01480a0c3360f7d4b7ba6'
   },
   'src/hub-v71-runtime.js': {
     previousSha256: '289b6c489f20563b39ac3cebda505dcefc0008d6237948a4d154100c7ad183a4',
