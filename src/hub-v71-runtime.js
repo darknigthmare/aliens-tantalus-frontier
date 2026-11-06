@@ -1,4 +1,5 @@
 import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
+import { tV185, tFromFrenchV185, translateHubPromptV185 } from './i18n-v185.js';
 import { HUB_DOOR_PASSAGE_V142, getHubDoorFaceV142, projectHubDoorActorV142,
   closingHubDoorProgressV142, drawHubDoorFaceV142 } from './hub-door-passage-v142.js';
 import {
@@ -1203,10 +1204,10 @@ export class HubGame extends HubGameV62 {
     ctx.strokeRect(18.5, 18.5, 700, 82);
     ctx.fillStyle = '#9adbac';
     ctx.font = '700 13px ui-monospace, monospace';
-    ctx.fillText(`USS TANTALUS // ${deck.shortName}`, 36, 41);
+    ctx.fillText(`USS TANTALUS // ${tFromFrenchV185(deck.shortName)}`, 36, 41);
     ctx.fillStyle = '#d3ddd5';
     ctx.font = '700 15px ui-monospace, monospace';
-    let title = room.name.toUpperCase();
+    let title = tFromFrenchV185(room.name).toUpperCase();
     if (ctx.measureText(title).width > 410) {
       while (title.length > 1 && ctx.measureText(`${title}…`).width > 410) title = title.slice(0, -1);
       title += '…';
@@ -1214,9 +1215,9 @@ export class HubGame extends HubGameV62 {
     ctx.fillText(title, 36, 65);
     ctx.fillStyle = '#9cc9aa';
     ctx.font = '700 12px ui-monospace, monospace';
-    ctx.fillText(`SANTÉ ${Math.round(this.player.health)}% · MENACES ${threats}`, 466, 41);
+    ctx.fillText(tV185('hub.canvas.status', `SANTÉ ${Math.round(this.player.health)}% · MENACES ${threats}`, { health: Math.round(this.player.health), threats }), 466, 41);
     ctx.font = '700 11px ui-monospace, monospace';
-    ctx.fillText(`16 SALLES · ANNEXES ${this.hubCommercialStateV71.visitedAnnexIds.length}/${HUB_ANNEXES_V71.length}`, 466, 65);
+    ctx.fillText(tV185('hub.canvas.rooms', `16 SALLES · ANNEXES ${this.hubCommercialStateV71.visitedAnnexIds.length}/${HUB_ANNEXES_V71.length}`, { visited: this.hubCommercialStateV71.visitedAnnexIds.length, total: HUB_ANNEXES_V71.length }), 466, 65);
     this.drawSinglePromptV71(ctx, prompt);
   }
 
@@ -1514,6 +1515,7 @@ export class HubGame extends HubGameV62 {
 
   drawSinglePromptV71(ctx, prompt) {
     if (!prompt) return;
+    prompt = translateHubPromptV185(prompt);
     ctx.font = '700 13px ui-monospace, monospace';
     const width = Math.min(940, Math.max(360, ctx.measureText(prompt).width + 48));
     const x = (VIEW_WIDTH - width) / 2;

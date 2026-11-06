@@ -41,7 +41,7 @@
   <title>ALIENS: TANTALUS FRONTIER</title>
 </head>
 <body>
-  <a class="skip-link" href="#workspace">Aller au contenu</a>
+  <a class="skip-link" href="#workspace" data-i18n="skip.content">Aller au contenu</a>
   <div id="boot" class="boot" role="status">
     <div class="boot-mark">ATF</div>
     <p>MU/TH/UR // INITIALISATION DU RUNTIME v86</p>
@@ -56,12 +56,12 @@
       <p class="title-project">TANTALUS FRONTIER</p>
       <span class="title-divider" aria-hidden="true"></span>
       <p id="title-recovery-warning" class="title-recovery-warning" role="alert" hidden></p>
-      <button id="title-start" class="title-start" type="button">APPUYER POUR COMMENCER</button>
-      <nav id="title-menu" class="title-menu" aria-label="Menu principal" hidden>
+      <button id="title-start" class="title-start" type="button" data-i18n="title.start">APPUYER POUR COMMENCER</button>
+      <nav id="title-menu" class="title-menu" aria-label="Menu principal" data-i18n-aria="title.menu" hidden>
         <button id="title-continue" type="button">CONTINUER</button>
-        <button id="title-new" type="button" data-confirm="false">NOUVELLE PARTIE</button>
-        <button id="title-forge" type="button">FRONTIER FORGE</button>
-        <button id="title-options" type="button">SYSTÈME</button>
+        <button id="title-new" type="button" data-confirm="false" data-i18n="title.new">NOUVELLE PARTIE</button>
+        <button id="title-forge" type="button" data-i18n="title.forge">FRONTIER FORGE</button>
+        <button id="title-options" type="button" data-i18n="title.options">SYSTÈME</button>
       </nav>
       <p id="title-profile-status" class="title-profile-status">PROFIL 1 · SAUVEGARDE LOCALE</p>
     </div>
@@ -70,20 +70,20 @@
   </section>
 
   <div id="app" class="app" hidden>
-    <aside class="rail" aria-label="Navigation principale">
+    <aside class="rail" aria-label="Navigation principale" data-i18n-aria="nav.main">
       <div class="brand"><span class="brand-kicker">ALIENS</span><strong>TANTALUS</strong><span>FRONTIER // 2204</span></div>
       <nav id="nav">
-        <button class="nav-button" data-view="command"><span>01</span> Commandement</button>
-        <button class="nav-button" data-view="galaxy"><span>02</span> Carte galactique</button>
-        <button class="nav-button" data-view="operations" data-developer-only-v110 hidden><span>DEV</span> Planification</button>
-        <button class="nav-button" data-view="archives"><span>04</span> Archives</button>
-        <button class="nav-button active" data-view="hub"><span>05</span> USS Tantalus</button>
-        <button class="nav-button" data-view="armory"><span>06</span> Armurerie</button>
-        <button class="nav-button" data-view="bestiary"><span>07</span> Xénobiologie</button>
-        <button class="nav-button" data-view="xenotrials"><span>WY</span> Xeno Trials</button>
-        <button class="nav-button" data-view="vehicles"><span>08</span> Véhicules</button>
-        <button class="nav-button" data-view="crew"><span>09</span> Echo-9</button>
-        <button class="nav-button" data-view="settings"><span>10</span> Système</button>
+        <button class="nav-button" data-view="command" data-i18n="nav.command"><span>01</span> Commandement</button>
+        <button class="nav-button" data-view="galaxy" data-i18n="nav.galaxy"><span>02</span> Carte galactique</button>
+        <button class="nav-button" data-view="operations" data-developer-only-v110 hidden data-i18n="nav.operations"><span>DEV</span> Planification</button>
+        <button class="nav-button" data-view="archives" data-i18n="nav.archives"><span>04</span> Archives</button>
+        <button class="nav-button active" data-view="hub" data-i18n="nav.hub"><span>05</span> USS Tantalus</button>
+        <button class="nav-button" data-view="armory" data-i18n="nav.armory"><span>06</span> Armurerie</button>
+        <button class="nav-button" data-view="bestiary" data-i18n="nav.bestiary"><span>07</span> Xénobiologie</button>
+        <button class="nav-button" data-view="xenotrials" data-i18n="nav.xenotrials"><span>WY</span> Xeno Trials</button>
+        <button class="nav-button" data-view="vehicles" data-i18n="nav.vehicles"><span>08</span> Véhicules</button>
+        <button class="nav-button" data-view="crew" data-i18n="nav.crew"><span>09</span> Echo-9</button>
+        <button class="nav-button" data-view="settings" data-i18n="nav.settings"><span>10</span> Système</button>
       </nav>
       <div class="rail-footer"><span class="status-dot"></span> Liaison MU/TH/UR active<small id="save-state">Chargement du profil</small></div>
     </aside>
@@ -92,7 +92,7 @@
       <header class="topbar" role="banner">
         <button id="menu-toggle" class="icon-button" aria-label="Ouvrir la navigation">☰</button>
         <div><span id="breadcrumb">SHIP // USS TANTALUS</span><h1 id="view-title">USS Tantalus</h1></div>
-        <div class="top-metrics"><span><b id="clock">J01 06:00</b>TEMPS NAVIRE</span><span><b>v86.0.0</b>RUNTIME</span><button id="return-title" class="button compact">MENU PRINCIPAL</button><button id="quick-save" class="button compact">SAUVEGARDER</button></div>
+        <div class="top-metrics"><span><b id="clock">J01 06:00</b>TEMPS NAVIRE</span><span><b>v86.0.0</b>RUNTIME</span><button id="return-title" class="button compact">MENU PRINCIPAL</button><button id="quick-save" class="button compact" data-i18n="top.save">SAUVEGARDER</button></div>
       </header>
 
       <main id="workspace" tabindex="-1">
@@ -152,15 +152,15 @@
         </section>
 
         <section class="view active" data-panel="hub">
-          <h1 class="sr-only">Niveau jouable de l’USS Tantalus</h1>
+          <h1 class="sr-only" data-i18n="hub.srTitle">Niveau jouable de l’USS Tantalus</h1>
           <button id="exit-hub" class="button runtime-exit" type="button">QUITTER VERS COMMANDEMENT</button>
-          <button class="button field-media-capture-v135" type="button" data-field-media-capture-v135>PHOTOGRAPHIER</button>
-          <div id="hub-training-controls-v132" class="button-row" role="group" aria-label="Commandes du pupitre" hidden></div>
-          <div class="hub-level-heading"><div><p class="eyebrow">4 PONTS // 16 SALLES // 13 ANNEXES</p><h2>USS Tantalus</h2></div><div id="hub-system-readout" class="hub-system-readout"></div></div>
+          <button class="button field-media-capture-v135" type="button" data-field-media-capture-v135 data-i18n="hub.photo">PHOTOGRAPHIER</button>
+          <div id="hub-training-controls-v132" class="button-row" role="group" aria-label="Commandes du pupitre" data-i18n-aria="hub.consoleControls" hidden></div>
+          <div class="hub-level-heading"><div><p class="eyebrow" data-i18n="hub.eyebrow">4 PONTS // 16 SALLES // 13 ANNEXES</p><h2>USS Tantalus</h2></div><div id="hub-system-readout" class="hub-system-readout"></div></div>
           <div class="hub-level-shell">
-            <canvas id="hub-canvas" width="1280" height="720" tabindex="0" aria-label="Niveau jouable de l’USS Tantalus"></canvas>
-            <div class="hub-touch-controls runtime-touch" role="group" aria-label="Contrôles tactiles du hub">
-              <button type="button" data-hub-control="left" aria-label="Aller à gauche">←</button><button type="button" data-hub-control="right" aria-label="Aller à droite">→</button><button type="button" data-hub-control="up" aria-label="Monter">W</button><button type="button" data-hub-control="down" aria-label="Descendre">S</button><button type="button" data-hub-control="jump" aria-label="Sauter">↑</button><button type="button" data-hub-control="crouch" aria-label="S’accroupir">C</button><button type="button" data-hub-control="depth" aria-label="Détecteur de mouvement ; profondeur dans les conduits" title="Q : détecteur de mouvement, ou profondeur dans les conduits">Q</button><button type="button" data-hub-control="aim-high" data-proving-ground-control-v81 hidden disabled aria-label="Viser la cible haute">↗</button><button type="button" data-hub-control="aim-low" data-proving-ground-control-v81 hidden disabled aria-label="Viser la cible basse">↘</button><button type="button" data-hub-control="reload" data-proving-ground-control-v81 hidden disabled aria-label="Recharger le M41A">R</button><button type="button" data-hub-control="fire" aria-label="Tirer">F</button><button type="button" data-hub-control="interact" aria-label="Interagir">E</button>
+            <canvas id="hub-canvas" width="1280" height="720" tabindex="0" aria-label="Niveau jouable de l’USS Tantalus" data-i18n-aria="hub.srTitle"></canvas>
+            <div class="hub-touch-controls runtime-touch" role="group" aria-label="Contrôles tactiles du hub" data-i18n-aria="hub.touch">
+              <button type="button" data-hub-control="left" data-i18n-aria="hub.touch.left" aria-label="Aller à gauche">←</button><button type="button" data-hub-control="right" data-i18n-aria="hub.touch.right" aria-label="Aller à droite">→</button><button type="button" data-hub-control="up" data-i18n-aria="hub.touch.up" aria-label="Monter">W</button><button type="button" data-hub-control="down" data-i18n-aria="hub.touch.down" aria-label="Descendre">S</button><button type="button" data-hub-control="jump" data-i18n-aria="hub.touch.jump" aria-label="Sauter">↑</button><button type="button" data-hub-control="crouch" data-i18n-aria="hub.touch.crouch" aria-label="S’accroupir">C</button><button type="button" data-hub-control="depth" data-i18n-aria="hub.touch.depth" aria-label="Détecteur de mouvement ; profondeur dans les conduits" title="Q : détecteur de mouvement, ou profondeur dans les conduits">Q</button><button type="button" data-hub-control="aim-high" data-proving-ground-control-v81 hidden disabled data-i18n-aria="hub.touch.aimHigh" aria-label="Viser la cible haute">↗</button><button type="button" data-hub-control="aim-low" data-proving-ground-control-v81 hidden disabled data-i18n-aria="hub.touch.aimLow" aria-label="Viser la cible basse">↘</button><button type="button" data-hub-control="reload" data-proving-ground-control-v81 hidden disabled data-i18n-aria="hub.touch.reload" aria-label="Recharger le M41A">R</button><button type="button" data-hub-control="fire" data-i18n-aria="hub.touch.fire" aria-label="Tirer">F</button><button type="button" data-hub-control="interact" data-i18n-aria="hub.touch.interact" aria-label="Interagir">E</button>
             </div>
           </div>
           <div class="hub-level-readout" aria-live="polite"><span id="hub-deck-label">PONT COMMANDEMENT</span><strong id="hub-room-label">Passerelle</strong><span id="hub-prompt">A/D marcher · W/S grimper · C ramper · Q détecteur / profondeur en conduits · F tirer · E utiliser</span></div>
@@ -289,13 +289,13 @@
         </section>
 
         <section class="view" data-panel="settings">
-          <div class="section-intro"><div><p class="eyebrow">SAUVEGARDE // ACCESSIBILITÉ // RUNTIME</p><h2>Système</h2></div></div>
+          <div class="section-intro"><div><p class="eyebrow">SAUVEGARDE // ACCESSIBILITÉ // RUNTIME</p><h2 data-i18n="settings.heading">Système</h2></div></div>
           <article id="save-recovery-notice" class="panel" role="alert" hidden><h3>Sauvegarde protégée</h3><p id="save-recovery-message"></p><p>Le fichier original n’a pas été remplacé. Exportez ses données brutes, choisissez un autre profil ou importez une sauvegarde valide. Une nouvelle partie ne remplace ce profil qu’après confirmation dans le menu principal.</p></article>
           <div class="settings-grid">
-            <article class="panel"><header><h3>Profils</h3></header><div id="profile-list"></div><section id="cloud-profiles-v119" aria-label="Compte et synchronisation des profils"></section></article>
-            <article class="panel"><header><h3>Expérience</h3></header><label>DIFFICULTÉ<select id="setting-difficulty"><option value="story">Histoire</option><option value="standard">Standard</option><option value="nightmare">Cauchemar</option></select></label><label>QUALITÉ<select id="setting-quality"><option value="low">Basse</option><option value="high">Haute</option></select></label><label>CONTRASTE<select id="setting-contrast"><option value="standard">Standard</option><option value="high">Renforcé</option></select></label><label>AIDE À LA VISÉE<select id="setting-aim-assist"><option value="off">Désactivée</option><option value="standard">Standard</option><option value="high">Forte</option></select></label><label>SECOUSSES CAMÉRA<input id="setting-screen-shake" type="range" min="0" max="1" step="0.05"></label><label><input id="setting-coop" type="checkbox"> Coop locale</label><label><input id="setting-motion" type="checkbox"> Réduire les mouvements</label><label><input id="setting-subtitles" type="checkbox"> Sous-titres</label><label>EFFETS AUDIO<input id="setting-effects" type="range" min="0" max="1" step="0.05"></label><label>MUSIQUE<input id="setting-music" type="range" min="0" max="1" step="0.05"></label></article>
+            <article class="panel"><header><h3 data-i18n="settings.profiles">Profils</h3></header><div id="profile-list"></div><section id="cloud-profiles-v119" aria-label="Compte et synchronisation des profils"></section></article>
+            <article class="panel"><header><h3 data-i18n="settings.experience">Expérience</h3></header><label data-i18n="settings.language">LANGUE<select id="language-select-v185"><option value="fr">Français</option><option value="en">English</option></select></label><label data-i18n="settings.difficulty">DIFFICULTÉ<select id="setting-difficulty"><option value="story" data-i18n="settings.difficulty.story">Histoire</option><option value="standard" data-i18n="settings.difficulty.standard">Standard</option><option value="nightmare" data-i18n="settings.difficulty.nightmare">Cauchemar</option></select></label><label data-i18n="settings.quality">QUALITÉ<select id="setting-quality"><option value="low" data-i18n="settings.quality.low">Basse</option><option value="high" data-i18n="settings.quality.high">Haute</option></select></label><label data-i18n="settings.contrast">CONTRASTE<select id="setting-contrast"><option value="standard" data-i18n="settings.contrast.standard">Standard</option><option value="high" data-i18n="settings.contrast.high">Renforcé</option></select></label><label data-i18n="settings.aim">AIDE À LA VISÉE<select id="setting-aim-assist"><option value="off" data-i18n="settings.aim.off">Désactivée</option><option value="standard" data-i18n="settings.aim.standard">Standard</option><option value="high" data-i18n="settings.aim.high">Forte</option></select></label><label data-i18n="settings.shake">SECOUSSES CAMÉRA<input id="setting-screen-shake" type="range" min="0" max="1" step="0.05"></label><label data-i18n="settings.coop"><input id="setting-coop" type="checkbox"> Coop locale</label><label data-i18n="settings.motion"><input id="setting-motion" type="checkbox"> Réduire les mouvements</label><label data-i18n="settings.subtitles"><input id="setting-subtitles" type="checkbox"> Sous-titres</label><label data-i18n="settings.effects">EFFETS AUDIO<input id="setting-effects" type="range" min="0" max="1" step="0.05"></label><label data-i18n="settings.music">MUSIQUE<input id="setting-music" type="range" min="0" max="1" step="0.05"></label></article>
             <article class="panel"><header><h3>Scène d’accueil</h3></header><label>VAISSEAU<select id="setting-title-ship-v87" aria-describedby="setting-title-ship-status-v87"></select></label><label>NOM SUR LA COQUE CONESTOGA<input id="setting-title-ship-name-v87" type="text" maxlength="24" autocomplete="off" spellcheck="false" placeholder="TANTALUS"></label><p id="setting-title-ship-status-v87" aria-live="polite">Présentation visuelle uniquement. Le nom modifiable est peint sur la coque Conestoga ; les autres modèles conservent leur identité.</p><button id="setting-title-preview-v87" class="button wide" type="button">VOIR L’ACCUEIL</button></article>
-            <article class="panel"><header><h3>Données</h3></header><button id="save-export" class="button wide">EXPORTER LA SAUVEGARDE</button><button id="save-session-export-v144" class="button wide" hidden>EXPORTER CETTE SESSION</button><label class="button wide file-button">IMPORTER UNE SAUVEGARDE<input id="save-import" type="file" accept="application/json"></label><button id="install-app" class="button wide" hidden>INSTALLER L’APPLICATION</button></article>
+            <article class="panel"><header><h3 data-i18n="settings.data">Données</h3></header><button id="save-export" class="button wide">EXPORTER LA SAUVEGARDE</button><button id="save-session-export-v144" class="button wide" hidden>EXPORTER CETTE SESSION</button><label class="button wide file-button" data-i18n="settings.import">IMPORTER UNE SAUVEGARDE<input id="save-import" type="file" accept="application/json"></label><button id="install-app" class="button wide" hidden>INSTALLER L’APPLICATION</button></article>
           </div>
         </section>
 
@@ -332,12 +332,12 @@
         <img id="hub-dialogue-image" src="/assets/openai/ui/dialogue/mara-vega-operations-v61.png" alt="">
       </div>
       <div class="hub-dialogue-copy">
-        <p class="eyebrow">TRANSMISSION LOCALE // USS TANTALUS</p>
+        <p class="eyebrow" data-i18n="dlg.eyebrow">TRANSMISSION LOCALE // USS TANTALUS</p>
         <h3 id="hub-dialogue-speaker">LT. MARA VEGA</h3>
         <p id="hub-dialogue-text"></p>
-        <div id="hub-dialogue-choices" class="hub-dialogue-choices" role="group" aria-label="Réponses disponibles"></div>
+        <div id="hub-dialogue-choices" class="hub-dialogue-choices" role="group" aria-label="Réponses disponibles" data-i18n-aria="dlg.choices"></div>
         <div class="button-row">
-          <button id="hub-dialogue-cancel" class="button" type="button">REPRENDRE LE CONTRÔLE</button>
+          <button id="hub-dialogue-cancel" class="button" type="button" data-i18n="dlg.cancel">REPRENDRE LE CONTRÔLE</button>
           <button id="hub-dialogue-continue" class="button primary" type="button">OUVRIR LA STATION</button>
         </div>
       </div>

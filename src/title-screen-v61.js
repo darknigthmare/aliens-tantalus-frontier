@@ -1,4 +1,5 @@
 import { resolveTitleMenuContextV89, titleMenuOwnerV89, sameTitleMenuOwnerV89 } from './title-menu-context-v89.js';
+import { tV185, tFromFrenchV185 } from './i18n-v185.js';
 
 export const TITLE_SCREEN_SCHEMA = 61;
 
@@ -136,21 +137,21 @@ export class TitleScreenController {
     this.continueButton.disabled = Boolean(recovery);
     if (this.recoveryWarning) {
       this.recoveryWarning.hidden = !recovery;
-      this.recoveryWarning.textContent = recovery ? `Profil ${recovery.profile} inaccessible. Sauvegarde préservée. Ouvrez Système pour récupérer les données ou choisir un autre profil.` : '';
+      this.recoveryWarning.textContent = recovery ? tV185('title.recovery', `Profil ${recovery.profile} inaccessible. Sauvegarde préservée. Ouvrez Système pour récupérer les données ou choisir un autre profil.`, { profile: recovery.profile }) : '';
     }
-    this.continueButton.textContent = this.menuContextV89.continueLabel;
+    this.continueButton.textContent = tFromFrenchV185(this.menuContextV89.continueLabel);
     if (this.resumeContextV89) {
       this.resumeContextV89.hidden = Boolean(recovery);
-      this.resumeContextV89.textContent = recovery ? '' : this.menuContextV89.summary;
+      this.resumeContextV89.textContent = recovery ? '' : tFromFrenchV185(this.menuContextV89.summary);
       this.resumeContextV89.dataset.context = this.menuContextV89.kind;
     }
     const day = String(save?.clock?.day || 1).padStart(2, '0');
     const hour = String(Math.floor(save?.clock?.hour || 0)).padStart(2, '0');
     const minute = String(Math.floor(((save?.clock?.hour || 0) % 1) * 60 + 0.000001)).padStart(2, '0');
-    this.profileStatus.textContent = 'PROFIL ' + (save?.profile || 1) + ' · J' + day + ' ' + hour + ':' + minute + ' · SAUVEGARDE LOCALE';
-    if (recovery) this.profileStatus.textContent = `PROFIL ${recovery.profile} · RÉCUPÉRATION REQUISE`;
-    this.liveStatus.textContent = restoreMenu ? 'Retour au menu principal. Système sélectionné.'
-      : 'Écran titre. Appuyez pour ouvrir le menu principal.';
+    this.profileStatus.textContent = tV185('title.profileStatus', 'PROFIL ' + (save?.profile || 1) + ' · J' + day + ' ' + hour + ':' + minute + ' · SAUVEGARDE LOCALE', { profile: save?.profile || 1, day, hour, minute });
+    if (recovery) this.profileStatus.textContent = tV185('title.profileRecovery', `PROFIL ${recovery.profile} · RÉCUPÉRATION REQUISE`, { profile: recovery.profile });
+    this.liveStatus.textContent = restoreMenu ? tV185('title.live.back', 'Retour au menu principal. Système sélectionné.')
+      : tV185('title.live.idle', 'Écran titre. Appuyez pour ouvrir le menu principal.');
     document.documentElement.classList.add('title-mode');
     this.scene?.show?.(save);
     this.scheduleFocus(restoreMenu ? this.optionsButton : this.startButton, this.state);
@@ -177,7 +178,7 @@ export class TitleScreenController {
     this.root.dataset.state = 'menu';
     this.startButton.hidden = true;
     this.menu.hidden = false;
-    this.liveStatus.textContent = 'Menu principal ouvert.';
+    this.liveStatus.textContent = tV185('title.live.menuOpen', 'Menu principal ouvert.');
     this.focusButton(this.menuButtons()[0]);
   }
 
@@ -188,7 +189,7 @@ export class TitleScreenController {
     this.root.dataset.state = 'idle';
     this.menu.hidden = true;
     this.startButton.hidden = false;
-    this.liveStatus.textContent = 'Menu fermé. Appuyez pour commencer.';
+    this.liveStatus.textContent = tV185('title.live.menuClosed', 'Menu fermé. Appuyez pour commencer.');
     this.focusButton(this.startButton);
   }
 
@@ -220,22 +221,22 @@ export class TitleScreenController {
       this.confirmSave = this.getSave();
       this.confirmRecovery = this.getRecoveryStatus();
       this.newButton.dataset.confirm = 'true';
-      this.newButton.textContent = 'CONFIRMER LA NOUVELLE PARTIE';
-      this.liveStatus.textContent = 'Confirmez pour remplacer la partie du profil ' + (this.confirmRecovery?.profile || this.confirmSave?.profile || 1) + '.';
+      this.newButton.textContent = tV185('title.newConfirm', 'CONFIRMER LA NOUVELLE PARTIE');
+      this.liveStatus.textContent = tV185('title.live.confirm', 'Confirmez pour remplacer la partie du profil ' + (this.confirmRecovery?.profile || this.confirmSave?.profile || 1) + '.', { profile: this.confirmRecovery?.profile || this.confirmSave?.profile || 1 });
       clearTimeout(this.confirmTimer);
       this.confirmTimer = setTimeout(() => this.cancelNewTimelineConfirmation(), 5000);
       return;
     }
     if (this.confirmSave !== this.getSave() || this.confirmRecovery !== this.getRecoveryStatus()) {
       this.cancelNewTimelineConfirmation();
-      this.liveStatus.textContent = 'Le profil a changé. Confirmez à nouveau la nouvelle partie.';
+      this.liveStatus.textContent = tV185('title.live.changed', 'Le profil a changé. Confirmez à nouveau la nouvelle partie.');
       return;
     }
     this.cancelNewTimelineConfirmation();
     try {
       if (this.onNewTimeline?.() === false) return;
     } catch (error) {
-      this.liveStatus.textContent = 'Nouvelle partie non créée : ' + (error.message || 'sauvegarde indisponible');
+      this.liveStatus.textContent = tV185('title.live.failed', 'Nouvelle partie non créée : ' + (error.message || 'sauvegarde indisponible'), { reason: tFromFrenchV185(error.message) || tV185('title.live.unavailable', 'sauvegarde indisponible') });
       return;
     }
     this.hide();
@@ -249,7 +250,7 @@ export class TitleScreenController {
     this.confirmRecovery = null;
     if (!this.newButton) return;
     this.newButton.dataset.confirm = 'false';
-    this.newButton.textContent = 'NOUVELLE PARTIE';
+    this.newButton.textContent = tV185('title.new', 'NOUVELLE PARTIE');
   }
 
   handleKeydown(event) {
@@ -275,7 +276,7 @@ export class TitleScreenController {
   goBack() {
     if (this.newButton.dataset.confirm === 'true') {
       this.cancelNewTimelineConfirmation();
-      this.liveStatus.textContent = 'Nouvelle partie annulée. La sauvegarde est conservée.';
+      this.liveStatus.textContent = tV185('title.live.cancelled', 'Nouvelle partie annulée. La sauvegarde est conservée.');
     } else this.closeMenu();
   }
 

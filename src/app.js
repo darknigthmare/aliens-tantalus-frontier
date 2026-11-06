@@ -157,6 +157,8 @@ import { resolvePlayerAppearancePreviewWeaponV127 } from './player-appearance-lo
 import { createUserReferenceEffectsGalleryV95 } from './user-reference-effects-v95.js';
 import { createUserReferenceLibraryV100 } from './user-reference-library-v100.js';
 import { createUserSpecimenBenchV106 } from './user-specimen-bench-v106.js';
+import { installAutoTranslationV185 } from './i18n-auto-v185.js';
+import { tV185, tFromFrenchV185, tKeepFrenchV185, translateHubPromptV185, initLanguageV185, setLanguageV185, currentLanguageV185, STRINGS_V185, LANGUAGE_EVENT_V185 } from './i18n-v185.js';
 
 const byId = (id) => document.getElementById(id);
 const all = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -358,7 +360,8 @@ const COST_LABELS = Object.freeze({
 function toast(message) {
   const item = document.createElement('div');
   item.className = 'toast';
-  item.textContent = String(message);
+  // V185: known French messages are shown in the chosen language.
+  item.textContent = String(tFromFrenchV185(message));
   byId('toast-region').append(item);
   setTimeout(() => item.remove(), 3600);
 }
@@ -667,7 +670,7 @@ function closeHubDialogue({ resume = true, restoreFocus = true } = {}) {
   pendingNpcConversationV62 = null;
   byId('hub-dialogue-choices').replaceChildren();
   byId('hub-dialogue-continue').hidden = false;
-  byId('hub-dialogue-continue').textContent = 'OUVRIR LA STATION';
+  byId('hub-dialogue-continue').textContent = tFromFrenchV185('OUVRIR LA STATION');
   if (resume && activeView === 'hub' && !activeHubStation) hubEngine.resume();
   return wasOpen;
 }
@@ -711,7 +714,7 @@ function openHubDialogue(interaction) {
   });
   byId('hub-dialogue-choices').replaceChildren();
   byId('hub-dialogue-continue').hidden = false;
-  byId('hub-dialogue-continue').textContent = 'OUVRIR LA STATION';
+  byId('hub-dialogue-continue').textContent = tFromFrenchV185('OUVRIR LA STATION');
   hubDialogueUiV76.open({ initialFocus: byId('hub-dialogue-continue') });
   return true;
 }
@@ -763,7 +766,7 @@ function chooseNpcDialogueV62(choiceId) {
   byId('hub-dialogue-text').textContent = result.response;
   byId('hub-dialogue-choices').replaceChildren();
   byId('hub-dialogue-continue').hidden = false;
-  byId('hub-dialogue-continue').textContent = 'TERMINER L’ÉCHANGE';
+  byId('hub-dialogue-continue').textContent = tFromFrenchV185('TERMINER L’ÉCHANGE');
   byId('hub-dialogue-continue').focus({ preventScroll: true });
   return true;
 }
@@ -814,7 +817,7 @@ function showView(name) {
   document.documentElement.classList.toggle('mission-mode', name === 'play');
   document.documentElement.classList.toggle('bioforge-mode', name === 'bioforge');
   byId('breadcrumb').textContent = VIEW_META[name][0];
-  byId('view-title').textContent = VIEW_META[name][1];
+  byId('view-title').textContent = tV185(`view.${name}`, VIEW_META[name][1]);
   document.querySelector('.rail').classList.remove('open');
   if (name === 'hub') {
     hubEngine.setReducedMotion(saveSystem.data.settings.reducedMotion);
@@ -956,14 +959,14 @@ function openOnboardingDialogueV84(interaction) {
   const contract = ONBOARDING_DIALOGUES_V84[state.phase];
   hubEngine.pause();
   pendingOnboardingDialogV84 = { owner: currentOwnerV84(), phase: state.phase, node: state.dialogueNode };
-  byId('hub-dialogue-speaker').textContent = `${contract.speaker.name} · ${contract.speaker.role}`;
-  byId('hub-dialogue-text').textContent = contract.lines[state.dialogueNode];
+  byId('hub-dialogue-speaker').textContent = `${tFromFrenchV185(contract.speaker.name)} · ${tFromFrenchV185(contract.speaker.role)}`;
+  byId('hub-dialogue-text').textContent = tFromFrenchV185(contract.lines[state.dialogueNode]);
   setDialogueSpeakerPortraitV168(byId('hub-dialogue-image'), {
     crewId: contact.crewId, name: contract.speaker.name
   });
   byId('hub-dialogue-choices').replaceChildren();
   byId('hub-dialogue-continue').hidden = false;
-  byId('hub-dialogue-continue').textContent = state.dialogueNode === contract.lines.length - 1 ? 'CONSIGNES REÇUES' : 'ÉCOUTER LA SUITE';
+  byId('hub-dialogue-continue').textContent = tFromFrenchV185(state.dialogueNode === contract.lines.length - 1 ? 'CONSIGNES REÇUES' : 'ÉCOUTER LA SUITE');
   hubDialogueUiV76.open({ initialFocus: byId('hub-dialogue-continue') });
   return true;
 }
@@ -1034,18 +1037,18 @@ function openOpeningDialogueV88() {
   hubEngine.pause();
   const owner = currentOwnerV84();
   pendingOpeningDialogV88 = { owner, phase: state.phase, node: state.signalNode };
-  byId('hub-dialogue-speaker').textContent = state.phase === 'signal' ? 'DAVID-8R · RELAIS DU TANTALUS' : 'MANIFESTE · FRET DE SECOURS';
-  byId('hub-dialogue-text').textContent = state.phase === 'signal' ? OPENING_SIGNAL_V88[state.signalNode] : 'Une seule place est disponible dans la soute de première sortie. Le lot choisi est scellé ici, puis consommé au départ : il ne sera pas renouvelé en rechargeant la partie.';
+  byId('hub-dialogue-speaker').textContent = tFromFrenchV185(state.phase === 'signal' ? 'DAVID-8R · RELAIS DU TANTALUS' : 'MANIFESTE · FRET DE SECOURS');
+  byId('hub-dialogue-text').textContent = tFromFrenchV185(state.phase === 'signal' ? OPENING_SIGNAL_V88[state.signalNode] : 'Une seule place est disponible dans la soute de première sortie. Le lot choisi est scellé ici, puis consommé au départ : il ne sera pas renouvelé en rechargeant la partie.');
   setDialogueSpeakerPortraitV168(byId('hub-dialogue-image'), state.phase === 'signal'
     ? { crewId: 'crew-10-david-8r', name: 'DAVID-8R' }
     : { name: 'Manifeste de fret' });
   const choices = byId('hub-dialogue-choices');
   choices.replaceChildren();
   byId('hub-dialogue-continue').hidden = state.phase === 'manifest';
-  byId('hub-dialogue-continue').textContent = state.signalNode === OPENING_SIGNAL_V88.length - 1 ? 'REJOINDRE LE HANGAR' : 'ÉCOUTER LA SUITE';
+  byId('hub-dialogue-continue').textContent = tFromFrenchV185(state.signalNode === OPENING_SIGNAL_V88.length - 1 ? 'REJOINDRE LE HANGAR' : 'ÉCOUTER LA SUITE');
   if (state.phase === 'manifest') for (const [freight, label] of [['medical', 'MÉDICAMENTS · +2 TROUSSES'], ['energy', 'ÉNERGIE · −2 CARBURANT']]) {
     const button = document.createElement('button');
-    button.type = 'button'; button.className = 'hub-dialogue-choice'; button.dataset.openingFreightV88 = freight; button.textContent = label;
+    button.type = 'button'; button.className = 'hub-dialogue-choice'; button.dataset.openingFreightV88 = freight; button.textContent = tFromFrenchV185(label);
     button.onclick = () => {
       try { commitOpeningEventV88({ type: 'freight', freight }, owner); closeHubDialogue(); renderAll(); toast('Fret scellé. Rejoignez la salle de briefing pour votre première sortie.'); }
       catch (error) { toast(error.message); }
@@ -1173,7 +1176,7 @@ function showTitleScreen() {
   forgePlaytest = null;
   standaloneContext = null;
   document.documentElement.classList.remove('hub-mode', 'mission-mode', 'bioforge-mode', 'forge-mode');
-  byId('return-title').textContent = 'MENU PRINCIPAL';
+  byId('return-title').textContent = tV185('top.menu', 'MENU PRINCIPAL');
   byId('retreat-mission').textContent = 'BATTRE EN RETRAITE';
   titleScreen.show();
   audio.setScene('menu');
@@ -1913,12 +1916,35 @@ function renderCrew() {
   }).join('') || '<article class="panel"><p>Aucune combinaison ne correspond à ces filtres.</p></article>';
 }
 
+// V185: first-hour objectives are written in French by their own modules, with
+// values inside. The French text is kept as is; English is chosen by phase and
+// its values are read back from the French text.
+function translateObjectiveV185(kind, objective) {
+  const text = objective?.text;
+  if (typeof text !== 'string') return text;
+  const freight = medical => tV185(medical ? 'freight.medical' : 'freight.energy', '');
+  const freightLower = medical => tV185(medical ? 'freight.medical.lower' : 'freight.energy.lower', '');
+  if (kind === 'exercise') {
+    const phase = objective.phase === 'console' || objective.phase === 'return' ? objective.phase : 'arm';
+    return tKeepFrenchV185(`exercise.${phase}`, text);
+  }
+  if (kind === 'opening' && objective.phase === 'ready') return tKeepFrenchV185('opening.ready', text, { freight: freight(text.includes('Fret médical')) });
+  if (kind === 'port') {
+    const seconds = (/\((\d+) s/.exec(text) || [])[1] || '';
+    if (objective.phase === 'unload') return tKeepFrenchV185('port.unload', text, { freight: freightLower(text.includes('lot médical')) });
+    if (objective.phase === 'triage') return tKeepFrenchV185('port.triage', text, { seconds, note: tV185(text.includes('Votre lot médical') ? 'port.triage.medical' : 'port.triage.energy', '') });
+    if (objective.phase === 'power') return tKeepFrenchV185('port.power', text, { seconds });
+    if (objective.phase === 'escort' && text.startsWith('CIVILS · Revenez')) return tKeepFrenchV185('port.gather', text);
+  }
+  return tKeepFrenchV185(`${kind}.${objective.phase}`, text);
+}
+
 function renderHubStatus(status = lastHubStatus) {
   lastHubStatus = status || lastHubStatus;
   const deck = status?.deck ?? saveSystem.data.hub.deck;
   const room = status?.roomName || HUB_DECKS[deck]?.rooms.find((entry) => entry.id === saveSystem.data.hub.roomId)?.name || saveSystem.data.hub.roomId;
-  byId('hub-deck-label').textContent = status?.deckName || HUB_DECKS[deck]?.name || `PONT ${deck + 1}`;
-  byId('hub-room-label').textContent = room;
+  byId('hub-deck-label').textContent = tFromFrenchV185(status?.deckName || HUB_DECKS[deck]?.name || `PONT ${deck + 1}`);
+  byId('hub-room-label').textContent = tFromFrenchV185(room);
   if (standaloneContext === 'forge-playtest' && forgePlaytest?.kind === 'ship') {
     const session = hubEngine.forgeSessionV141;
     const required = session ? session.project.rooms.filter(entry => session.reachableRoomIds.includes(entry.id))
@@ -1931,16 +1957,16 @@ function renderHubStatus(status = lastHubStatus) {
   } else {
     const objectiveV84 = getPlayerOnboardingObjectiveV84(saveSystem.data.onboardingV84);
     const openingObjectiveV88 = getPlayerOpeningObjectiveV88(saveSystem.data.openingV88, saveSystem.data.onboardingV84);
-    byId('hub-onboarding-objective-v84').textContent = objectiveV84 && !objectiveV84.completed ? `${saveSystem.data.player.name} · ${objectiveV84.text} ${objectiveV84.phase === 'wake' ? 'E / UTILISER : reprendre le contrôle.' : 'A/D : marcher · ESPACE : franchir · E / UTILISER : interagir.'}` : '';
-    if (openingObjectiveV88) byId('hub-onboarding-objective-v84').textContent = `${openingObjectiveV88.text} · A/D marcher · W/S ascenseur · E utiliser`;
+    byId('hub-onboarding-objective-v84').textContent = objectiveV84 && !objectiveV84.completed ? `${saveSystem.data.player.name} · ${translateObjectiveV185('onboarding', objectiveV84)} ${objectiveV84.phase === 'wake' ? tV185('hub.hint.wake', 'E / UTILISER : reprendre le contrôle.') : tV185('hub.hint.walk', 'A/D : marcher · ESPACE : franchir · E / UTILISER : interagir.')}` : '';
+    if (openingObjectiveV88) byId('hub-onboarding-objective-v84').textContent = `${translateObjectiveV185('opening', openingObjectiveV88)} · ${tV185('hub.hint.opening', 'A/D marcher · W/S ascenseur · E utiliser')}`;
     const exerciseObjectiveV89 = getOpeningExerciseObjectiveV89(saveSystem.data.openingExerciseV89, saveSystem.data.openingV88, saveSystem.data.onboardingV84);
-    if (exerciseObjectiveV89) byId('hub-onboarding-objective-v84').textContent = exerciseObjectiveV89.text;
+    if (exerciseObjectiveV89) byId('hub-onboarding-objective-v84').textContent = translateObjectiveV185('exercise', exerciseObjectiveV89);
     const portObjectiveV90 = getPortMeridienObjectiveV90(saveSystem.data.portMeridienV90, saveSystem.data.openingV88, saveSystem.data.onboardingV84);
-    if (portObjectiveV90) byId('hub-onboarding-objective-v84').textContent = portObjectiveV90.text;
+    if (portObjectiveV90) byId('hub-onboarding-objective-v84').textContent = translateObjectiveV185('port', portObjectiveV90);
     byId('hub-onboarding-objective-v84').hidden = Boolean(hubEngine.isPortMeridienV90?.());
   }
-  byId('exit-hub').textContent = standaloneContext === 'forge-playtest' ? 'RETOUR FRONTIER FORGE'
-    : hubEngine.isPortMeridienV90?.() ? 'SUSPENDRE · TABLEAU DE BORD' : 'QUITTER VERS COMMANDEMENT';
+  byId('exit-hub').textContent = standaloneContext === 'forge-playtest' ? tV185('hub.exitForge', 'RETOUR FRONTIER FORGE')
+    : hubEngine.isPortMeridienV90?.() ? tV185('hub.exitPort', 'SUSPENDRE · TABLEAU DE BORD') : tV185('hub.exit', 'QUITTER VERS COMMANDEMENT');
   const provingGroundActiveV81 = Boolean(
     status?.provingGroundActiveV81
     || status?.activeAnnexId === 'proving-ground'
@@ -1950,8 +1976,8 @@ function renderHubStatus(status = lastHubStatus) {
   const provingScoreV81 = Math.max(0, Number(status?.provingGroundScoreV81) || 0);
   const forgeShipSessionV141 = standaloneContext === 'forge-playtest' && forgePlaytest?.kind === 'ship' ? hubEngine.forgeSessionV141 : null;
   const provingAmmoV81 = `${Math.max(0, Number(status?.provingGroundMagazineV81) || 0)}/${Math.max(0, Number(status?.provingGroundReserveV81) || 0)}`;
-  byId('hub-prompt').textContent = status?.prompt || 'A/D marcher · W/S grimper · C ramper · F tirer · E utiliser';
-  byId('hub-system-readout').innerHTML = `<span>SANTÉ <b>${Math.round(status?.health ?? saveSystem.data.hub.playerHealth ?? 100)}%</b></span><span>MENACES <b>${status?.threats ?? saveSystem.data.hub.activeCrisis?.count ?? 0}</b></span><span>ROUTE <b>${status?.route?.source || 'TANTALUS'}</b></span><span>${provingGroundActiveV81 ? 'QUALIF M41A' : 'NIVEAU'} <b>${provingGroundActiveV81 ? `${escapeHtml(provingPhaseV81)} · ${provingScoreV81} · ${provingAmmoV81}` : forgeShipSessionV141 ? `${forgeShipSessionV141.reachableRoomIds.length} SALLES` : `${status?.route?.nodeCount || 26} ZONES`}</b></span>`;
+  byId('hub-prompt').textContent = translateHubPromptV185(status?.prompt || 'A/D marcher · W/S grimper · C ramper · F tirer · E utiliser');
+  byId('hub-system-readout').innerHTML = `<span>${tV185('hub.readout.health', 'SANTÉ')} <b>${Math.round(status?.health ?? saveSystem.data.hub.playerHealth ?? 100)}%</b></span><span>${tV185('hub.readout.threats', 'MENACES')} <b>${status?.threats ?? saveSystem.data.hub.activeCrisis?.count ?? 0}</b></span><span>${tV185('hub.readout.route', 'ROUTE')} <b>${status?.route?.source || 'TANTALUS'}</b></span><span>${provingGroundActiveV81 ? tV185('hub.readout.qualif', 'QUALIF M41A') : tV185('hub.readout.level', 'NIVEAU')} <b>${provingGroundActiveV81 ? `${escapeHtml(provingPhaseV81)} · ${provingScoreV81} · ${provingAmmoV81}` : forgeShipSessionV141 ? tV185('hub.readout.rooms', `${forgeShipSessionV141.reachableRoomIds.length} SALLES`, { count: forgeShipSessionV141.reachableRoomIds.length }) : tV185('hub.readout.zones', `${status?.route?.nodeCount || 26} ZONES`, { count: status?.route?.nodeCount || 26 })}</b></span>`;
   const hubView = document.querySelector('.view[data-panel="hub"]');
   if (hubView) hubView.dataset.provingGroundActiveV81 = String(provingGroundActiveV81);
   all('[data-proving-ground-control-v81]').forEach((button) => {
@@ -2007,7 +2033,7 @@ function renderProfiles() {
   byId('profile-list').innerHTML = saveSystem.listProfiles().map((profile) => `<article class="profile-row"><div><strong>PROFIL ${profile.profile}${profile.profile === saveSystem.profile && !recovery ? ' · ACTIF' : ''}</strong><span>${profile.empty ? 'Emplacement vide' : escapeHtml(profile.release || 'Sauvegarde locale')}</span></div><div class="button-row"><button class="button compact" data-profile="${profile.profile}">${profile.empty ? 'CRÉER' : profile.status === 'ready' ? 'CHARGER' : 'RÉESSAYER'}</button>${profile.status === 'corrupt' ? `<button class="button compact" data-export-profile="${profile.profile}">EXPORTER LE FICHIER BRUT</button>` : ''}</div></article>`).join('');
   all('.view[data-panel="settings"] [id^="setting-"]').forEach((control) => { control.disabled = Boolean(recovery); });
   byId('quick-save').disabled = Boolean(recovery);
-  byId('save-export').textContent = recovery ? 'EXPORTER LE FICHIER ORIGINAL' : 'EXPORTER LA SAUVEGARDE';
+  byId('save-export').textContent = recovery ? 'EXPORTER LE FICHIER ORIGINAL' : tV185('settings.export', 'EXPORTER LA SAUVEGARDE');
   byId('setting-difficulty').value = saveSystem.data.settings.difficulty;
   byId('setting-coop').checked = saveSystem.data.settings.coop;
   byId('setting-motion').checked = saveSystem.data.settings.reducedMotion;
@@ -4094,7 +4120,38 @@ function bind() {
   bindDelegatedActions();
 }
 
+// V185: the language preference is read before any screen is shown. Switching
+// language retranslates marked markup, the current view title when it is the
+// standard one, and the settings panel.
+// A label is retranslated only while it still shows its standard text in one
+// of the two languages; contextual labels (Forge, debrief) are left alone.
+function retranslateStandardLabelV185(element, key, french) {
+  if (!element) return;
+  const known = [french, ...Object.values(STRINGS_V185).map(strings => strings[key]).filter(Boolean)];
+  if (known.includes(element.textContent)) element.textContent = tV185(key, french);
+}
+
+function setupLanguageV185() {
+  initLanguageV185();
+  // V185: displayed French text that is in the English catalog is replaced on screen.
+  installAutoTranslationV185();
+  retranslateStandardLabelV185(byId('return-title'), 'top.menu', 'MENU PRINCIPAL');
+  const select = byId('language-select-v185');
+  if (select) {
+    select.value = currentLanguageV185();
+    select.addEventListener('change', () => setLanguageV185(select.value));
+  }
+  document.addEventListener(LANGUAGE_EVENT_V185, () => {
+    if (select) select.value = currentLanguageV185();
+    if (VIEW_META[activeView]) retranslateStandardLabelV185(byId('view-title'), `view.${activeView}`, VIEW_META[activeView][1]);
+    retranslateStandardLabelV185(byId('return-title'), 'top.menu', 'MENU PRINCIPAL');
+    renderProfiles();
+    if (lastHubStatus) renderHubStatus(lastHubStatus);
+  });
+}
+
 async function boot() {
+  setupLanguageV185();
   const validation = validateContent();
   if (!validation.ok) throw new Error(`Contrat de contenu invalide : ${validation.failures.join(', ')}`);
   setupEditor();
