@@ -100,3 +100,34 @@ test('V185 French title templates reproduce the previous French text exactly', (
   assert.equal(tFromFrenchV185('ENTRER SUR LE TANTALUS'), 'BOARD THE TANTALUS');
   setLanguageV185('fr', { storage: memoryStorage(), document: null });
 });
+
+test('V185 every core hub deck and room name has an English entry matched from its French name', async () => {
+  const { HUB_DECKS } = await import('../src/hub-game.js');
+  setLanguageV185('en', { storage: memoryStorage(), document: null });
+  const names = HUB_DECKS.flatMap(deck => [deck.name, ...deck.rooms.map(room => room.name)]);
+  assert.equal(names.length, 20);
+  for (const name of names) assert.notEqual(tFromFrenchV185(name), name, name);
+  assert.equal(tFromFrenchV185('A / D — marcher · MAJ — courir · ESPACE — franchir · E — utiliser'), 'A / D — walk · SHIFT — run · SPACE — vault · E — use');
+  setLanguageV185('fr', { storage: memoryStorage(), document: null });
+  for (const name of names) assert.equal(tFromFrenchV185(name), name);
+});
+
+test('V185 French objective and prompt entries are copied verbatim from the modules that own them', async () => {
+  const sources = {
+    onboarding: 'src/player-onboarding-v84.js', opening: 'src/player-opening-v88.js',
+    exercise: 'src/opening-exercise-v89.js', port: 'src/port-meridien-v90.js'
+  };
+  const read = async path => readFile(new URL('../' + path, import.meta.url), 'utf8');
+  for (const [prefix, path] of Object.entries(sources)) {
+    const source = await read(path);
+    const keys = Object.keys(STRINGS_V185.fr).filter(key => key.startsWith(prefix + '.') && !STRINGS_V185.fr[key].includes('{'));
+    assert.ok(keys.length >= 3, prefix);
+    for (const key of keys) assert.ok(source.includes(STRINGS_V185.fr[key]), key);
+  }
+  const hubSources = (await read('src/hub-v51-runtime.js')) + (await read('src/hub-game.js')) + (await read('src/app.js'));
+  for (const key of Object.keys(STRINGS_V185.fr).filter(key => key.startsWith('hub.prompt.') && !STRINGS_V185.fr[key].includes('{') && key !== 'hub.prompt.markup' && key !== 'hub.prompt.counter')) {
+    assert.ok(hubSources.includes(STRINGS_V185.fr[key]), key);
+  }
+  for (const key of Object.keys(STRINGS_V185.fr).filter(key => key.startsWith('toast.'))) assert.ok(hubSources.includes(`toast('${STRINGS_V185.fr[key]}')`), key);
+  for (const key of Object.keys(STRINGS_V185.fr).filter(key => key.startsWith('hub.deckShort.'))) assert.ok(hubSources.includes(`shortName: '${STRINGS_V185.fr[key]}'`), key);
+});

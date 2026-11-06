@@ -19,7 +19,7 @@ const freeze = value => {
 export const I18N_SUCCESSORS_V185 = freeze({
   'index.html': {
     previousSha256: 'a4f5bf1470b0b736451ffbb74cc7c07994d2c9a6f9816bb9e81f53016253d6f5',
-    currentSha256: 'ea3b8a40a0664d232e15294c59640a0522d0657d4b49d7bd16cd6b5ca0a26b45'
+    currentSha256: '3e178ad85613044a91d7bdbca6d1e2cb3e77e07e7f9f7dbaad8f1980bfd6f19a'
   },
   'package.json': {
     previousSha256: 'ff849b03809ae5f0e8bb0949cc76291330425f881d6cd113cca536a20c79cd61',
@@ -35,7 +35,11 @@ export const I18N_SUCCESSORS_V185 = freeze({
   },
   'src/app.js': {
     previousSha256: 'dca634852e81b557a9e7bc736ef77b2c2a4037dda86286bf99775e8470401aab',
-    currentSha256: 'f9346cd4be0dd240b28846142653a5381e5b9c8225ee0fcfeb9630f370cd0cae'
+    currentSha256: '4b74fbb10167a4b9ee44b31312d13e623e0cd829be46cb1bb881bd34a8c3b889'
+  },
+  'src/hub-v71-runtime.js': {
+    previousSha256: '289b6c489f20563b39ac3cebda505dcefc0008d6237948a4d154100c7ad183a4',
+    currentSha256: '0013ef68e3db38888a83e97b88ab5615b8a3b4ebe9f229c7d659a5381433956a'
   },
   'src/player-creator-ui-v84.js': {
     previousSha256: '6eab777a85e20594def1881aa9637fc1fab981281ea8e033c5afa2d253bb978d',
