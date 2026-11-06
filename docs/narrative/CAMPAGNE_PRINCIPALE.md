@@ -15,7 +15,7 @@
 - **Partie VII — Vues et organisation des hubs** : §40 trois vues (latérale, couloir de profondeur, plan au sol à 35°) · §41 Tantalus pièce par pièce · §42 Asphodèle · §43 Port-Méridien · §44 liste complète de ce qui reste à faire et à générer
 - **Décisions validées** : §45, cadrage des deuxième et troisième séries §45.1-45.2 · registres des missions §0.3 · origines d'Echo-9 §2.4
 - **Partie VIII — Musique : prompts pour Google Flow Music** : §46 méthode et palette · §47 hub et voyage · §48 campagne principale · §49 campagnes annexes · §50 archives et missions spéciales · §51 récapitulatif
-- **Partie IX — Feuille de route pour rendre le jeu attractif** : §52 principes, état et renommage bloqué · §53 feuille de route détaillée · §54 ordre de travail
+- **Partie IX — Feuille de route pour rendre le jeu attractif** : §52 principes, état et renommage · §53 feuille de route détaillée · §54 ordre de travail · §55 conception technique des décisions de cadrage
 
 # PARTIE I — Campagne principale : Cocyte
 
@@ -45,7 +45,7 @@ Les missions locales reprennent les objectifs déjà définis dans `content-core
 
 Chaque mission de ce document indique son **ancrage Alien** : l'élément de l'univers qui la justifie (cycle biologique, matériel des Marines, procédure de la compagnie, isolement, synthétique, infrastructure coloniale). Une mission sans ancrage n'est pas retenue.
 
-### 0.3 Registre de chaque mission — [PROPOSÉ, à valider]
+### 0.3 Registre de chaque mission — validé le 2026-11-06
 
 **Décision (§45.1, §45.2) :** le ton varie selon la mission ; Claude propose un registre par mission, le propriétaire valide.
 
@@ -102,7 +102,7 @@ Le registre est une donnée de la fiche de mission ; il règle le directeur de t
 
 **Répartition proposée hors quêtes de bord :** 11 Horreur, 11 Tension, 5 Action, 9 Calme (36 missions). Les quatre nouvelles missions principales et les huit nouvelles annexes du §5.9 ont leur registre dans les tableaux du §5.9. Les autres parties sont au §0.4.
 
-### 0.4 Registres des autres parties — [PROPOSÉ, à valider]
+### 0.4 Registres des autres parties — validé le 2026-11-06
 
 Abréviations : **H** Horreur · **T** Tension · **A** Action · **C** Calme (définitions au §0.3). Les numéros renvoient aux tableaux des arcs.
 
@@ -311,7 +311,7 @@ Postes et salles : `HUB_NPC_ROSTER` (`src/hub-v52-runtime.js`). Fonctions narrat
 | **CASSIUS** | Station Asphodèle | Système de gestion Seegson de la station. Applique la quarantaine à la lettre depuis des semaines, sans personne pour la corriger. Ni malveillant ni conscient : obéissant. |
 | **Grue** | Crucible Salvage Compact | Capitaine récupératrice installée sur l'anneau extérieur d'Asphodèle. |
 
-### 2.4 Origines d'Echo-9 — [PROPOSÉ, à valider]
+### 2.4 Origines d'Echo-9 — validé le 2026-11-06, avec capacités
 
 **Décision (§45.2) :** 20 origines au choix, rédigées ici. Echo-9 reste un Marine colonial sorti d'hypersommeil pour remplacer Echo-8 ; l'origine décrit **ce qu'il était avant** son affectation au Tantalus.
 
@@ -709,7 +709,7 @@ Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-m
 | **« Le fret d'abord »** | Option *Céder le dépôt* choisie, ou décision de Vega avec un dossier de moins de 5 pièces | La colonie passe sous administration de la compagnie. Inez démissionne. Le dossier est classé « incident technique ». |
 | **« Les vivants, sans preuve »** | Option *Tenir la colonie* choisie | La colonie tient cette nuit-là, mais la clause s'applique. Vega est relevée à l'arrivée. |
 
-#### 5.7.1 Choix final : options ouvertes par les choix cumulés — [PROPOSÉ]
+#### 5.7.1 Choix final : options ouvertes par les choix cumulés — validé le 2026-11-06
 
 | Option recommandée par Echo-9 | Toujours proposée ? | Condition pour qu'elle apparaisse | Fin |
 | --- | --- | --- | --- |
@@ -734,7 +734,7 @@ La fin affichée et le nombre de colons arrivés (CIN-61) viennent toujours de l
 
 Jouable, sans combat. Visite du Tantalus, de Port-Méridien et, si elle est reprise, d'Asphodèle. Chaque personnage a une réplique finale selon la fin. Le Tantalus se prépare à repartir : la baie cryo rouvre ses caissons. Sur le casier de l'Echo-8 : `RETOUR CONFIRMÉ` ou `POSTE LIBÉRÉ` (§7.4).
 
-### 5.9 Durée de la campagne principale et extension vers 25 h — [PROPOSÉ]
+### 5.9 Durée de la campagne principale et extension vers 25 h — validé le 2026-11-06
 
 **Décision (§45.1, §45.2) :** 25 h et plus, avec les quatre leviers.
 
@@ -786,7 +786,7 @@ Ne sont pas comptés : les 22 quêtes du Tantalus (§8), dont la durée dépend 
 
 Les nouvelles missions ne réutilisent aucun identifiant existant et ne changent pas les 7 pièces du dossier (§5.7). Leur registre complète la répartition du §0.3.
 
-### 5.10 Fiches des missions ajoutées — [PROPOSÉ]
+### 5.10 Fiches des missions ajoutées — validé le 2026-11-06
 
 Statuts de production : **[PRÉSENT]** dans le dépôt, **[À CRÉER]**, comme au §28.
 
@@ -3515,6 +3515,16 @@ Réponses du propriétaire aux questions sur les parties peu détaillées. Chaqu
 | Fins | **Choix cumulés et choix final** | Réécrit : §5.6 (étape 2) et §5.7.1. Echo-9 recommande une option à Vega ; les options ouvertes dépendent des choix cumulés ; Vega suit si sa confiance est au moins *operationnel*. |
 | Après la fin | **Continuer et nouvelle partie +** | Continuer avec la même sauvegarde vers les campagnes annexes (§13). La nouvelle partie + repart du prologue avec une partie des acquis, à définir (la sauvegarde d'origine reste intacte). |
 
+### 45.3 Validations du 2026-11-06
+
+| Proposition | Décision |
+| --- | --- |
+| Origines d'Echo-9 (§2.4) | **Validées avec capacités** : 19 capacités à régler et tester ; `origin-20` sans capacité |
+| Registres (§0.3, §0.4) | **Validés** |
+| Choix final (§5.7.1) | **Validé** : recommandation d'Echo-9, suivie si la confiance de Vega est au moins *operationnel* |
+| Missions ajoutées (§5.9, §5.10) | **Toutes validées** : 4 principales, 8 annexes, CIN-21, CIN-59, CIN-73 |
+| Lien *Yautja : la Longue Chasse* (§22.16) | **Validé** : Gardiens du Confinement, Garde du Seuil devenu ancien, époque bien après |
+
 
 ---
 
@@ -4028,7 +4038,7 @@ Les autres pistes (alerte, boss, fins, campagnes annexes) attendent de nouveaux 
 | Répliques réactives (mission ratée, colon mort, retour blessé) | À faire |
 | Scènes collectives du mess | Prêt (§8.2) |
 | Portraits expressifs (3 expressions par membre) | À faire |
-| 20 origines d'Echo-9 : validation, puis capacités et répliques en jeu (§2.4) | Rédigé, à valider |
+| 20 origines d'Echo-9 avec capacités : réglage des capacités, répliques en jeu (§2.4) | Validé, à implémenter |
 
 ### 53.7 Rejouabilité
 
@@ -4095,3 +4105,100 @@ Les autres pistes (alerte, boss, fins, campagnes annexes) attendent de nouveaux 
 | 8 | Mode daltonien et autres options d'accessibilité (§53.8) | Élargit le public ; la traduction anglaise, elle, commence dès l'étape 3 (§45.1) |
 | 9 | Présentation publique (§53.10) | Quand la tranche est prête |
 | 10 | Campagnes annexes, dans l'ordre du §20 | Une fois le cœur du jeu solide |
+
+---
+
+## 55. Conception technique des décisions de cadrage — [PROPOSÉ]
+
+Cette section traduit les décisions des §45.1 à §45.3 en travail sur le code. Chaque point part de ce qui existe, vérifié dans le dépôt le 2026-11-06 ; rien n'est encore implémenté.
+
+**Contrainte commune :** `src/save.js` fait partie des `protectedGameplayBytes` de l'audit V179, comme `src/content-core-v50.js` (§52.3). Presque tous les points ci-dessous touchent la sauvegarde. Chaque lot qui la modifie demande donc une **levée de protection par le propriétaire** et un maillon d'audit, comme V183 pour le renommage. Les migrations restent additives : une ancienne sauvegarde sans le nouveau champ reçoit une valeur par défaut et ne perd rien.
+
+### 55.1 Traduction français / anglais
+
+| Constat | Proposition |
+| --- | --- |
+| `index.html` est en `lang="fr"` ; les textes du joueur sont écrits en dur dans les modules (`src/`, 530 fichiers) ; aucun système de traduction | Modules de dictionnaires `fr` et `en` indexés par clé, fonction `t(clé, paramètres)`, réglage `settings.language` (défaut `fr`) |
+
+**Ordre de travail :**
+
+1. Créer le système et le réglage de langue, avec un test qui vérifie que chaque clé existe dans les deux langues.
+2. Extraire les textes **écran par écran**, en commençant par la tranche verticale (§53.1). Un texte non extrait reste en français ; il ne doit jamais afficher une clé brute au joueur.
+3. Écrire tout nouveau texte directement dans les deux dictionnaires (décision §45.1). Les répliques des origines (§2.4) sont déjà rédigées en FR et EN.
+4. Mettre `lang` du document à jour selon la langue choisie.
+
+**Distribution :** les nouveaux modules sont livrés au joueur ; vérifier qu'ils passent `verify-public-release-v86.mjs` et `check:built` comme les autres modules d'exécution.
+
+### 55.2 Coopération locale et en ligne
+
+| Constat | Source |
+| --- | --- |
+| Une coop locale à deux existe : réglage `settings.coop`, `engine.setCoop()`, apparence et équipement propres à J2 (`coopAppearanceV126`), J2 prend la place d'un allié existant | `src/app.js`, `src/game-v52-runtime.js` |
+| Plusieurs chapitres la forcent à `false` | `apc-convoy-runtime-v121.js` (`setCoop`), `black-cocoon-runtime-v121.js`, `c12-horde-runtime-v121.js`, `archive-relay-runtime-v122.js`, `legacy-operations-v131.js`, `mecha-missions-v131.js` |
+| L'escouade compte Echo-9 et jusqu'à 4 alliés | `configureMissionSquad`, `MAX_SQUAD_SIZE = 4` |
+| Supabase sert à l'authentification et à la synchronisation des sauvegardes, pas au jeu en temps réel | `cloud-auth-v119.js`, `cloud-sync-v119.js` |
+
+**Proposition, en trois étapes :**
+
+1. **Coop locale jusqu'à 5** : généraliser J2 en J2 à J5, chacun remplaçant un allié. Réglage du nombre de joueurs, une manette par joueur.
+2. **En ligne, hôte qui fait autorité** : la partie de l'hôte simule tout ; les invités envoient leurs commandes et reçoivent l'état. Les canaux Realtime de Supabase servent de salon (présence) et de relais de messages (diffusion), avec le compte existant.
+3. **Mesure avant engagement** : latence aller-retour, débit de messages et quotas du plan Supabase, comportement à la coupure. Si le relais Realtime ne suffit pas pour un jeu d'action, garder Supabase pour le salon et la mise en relation, et passer les échanges de jeu en pair à pair (WebRTC). Cette alternative n'est pas évaluée ici.
+
+**Règles déjà décidées :** mort d'un invité (§45.2) ; l'invité garde objets et expérience, versés par la même transaction de fin de mission que l'hôte, jamais par un message réseau seul ; seule l'histoire de l'hôte avance. Les chapitres qui désactivent la coop restent en solo tant qu'ils ne sont pas adaptés un par un.
+
+### 55.3 Sauvegarde en mission selon le registre
+
+`AGENTS.md` distingue quatre états : campagne, reprise de mission, espace de travail Forge, checkpoints de playtest. La sauvegarde en mission passe par la **reprise de mission** (`src/game-production-resume.js`) et les checkpoints existants ; elle ne touche ni la Forge ni les checkpoints de playtest.
+
+| Registre (§0.3) | Checkpoints | Terminal physique | Libre hors combat |
+| --- | --- | --- | --- |
+| Horreur | Oui | Oui | Non |
+| Tension | Oui | Oui | Oui |
+| Action | Oui | — | Oui |
+| Calme | — | — | Oui |
+
+- **Terminal** : objet du décor avec interaction depuis le sol praticable (règle des portes, §40.3), animation de quelques secondes pendant laquelle le joueur est exposé.
+- **Hors combat** : aucun ennemi en alerte et aucune menace dans un rayon à définir ; sinon le bouton est refusé avec un message en jeu.
+- Une donnée de reprise invalide renvoie au dernier checkpoint valide, jamais ailleurs.
+
+### 55.4 Difficulté à la carte
+
+`DIFFICULTIES` (`src/game-runtime.js`) définit `story`, `standard` et `nightmare` avec `enemyHealth`, `enemyDamage`, `enemySpeed`, `spawnMultiplier` et `rewardMultiplier`. L'opération stocke `difficulty` comme un identifiant (`src/save.js`).
+
+**Proposition :** un quatrième identifiant `custom` qui lit des réglages séparés dans la sauvegarde : santé, dégâts et vitesse des ennemis, nombre d'apparitions, **munitions trouvées** et **fréquence des alertes** (ces deux derniers sont nouveaux). Le multiplicateur de récompense est calculé à partir des autres réglages, pas choisi librement. Une valeur hors bornes est ramenée à `standard`.
+
+### 55.5 Mort de l'équipage : rendre la mort définitive optionnelle
+
+**Constat :** la mort définitive **existe déjà**. Un membre dont la santé tombe à 0 passe en `deceased` et entre au mémorial (`save.memorial`) ; sinon il passe en `injured` avec des blessures datées (`src/save.js`).
+
+**Proposition :** un réglage `crewPermadeath`, choisi à la création de la partie (décision §45.1). Désactivé, un membre à 0 passe en `injured` avec une blessure grave et une convalescence, au lieu de `deceased`. Le réglage peut seulement passer de « activé » à « désactivé » en cours de partie. Les parties existantes gardent le comportement actuel (activé), pour ne pas ressusciter des morts déjà inscrits au mémorial.
+
+### 55.6 Origine d'Echo-9
+
+Champ du profil joueur (`origin-01` à `origin-20`), choisi au créateur de personnage ; une valeur absente ou inconnue devient `origin-20` (§2.4). Les 19 capacités sont des modificateurs bornés, appliqués au déploiement comme l'équipement des membres (`attachCrewDeploymentV85` sert de modèle). Chaque capacité est réglée avec une même scène avant/après (`AGENTS.md`).
+
+### 55.7 Registre, musique et directeur de tension
+
+Le registre devient un champ de la fiche de mission. Il est lu par :
+
+- le directeur de tension (§53.3) pour doser les apparitions ;
+- l'audio : silence et alerte en Horreur, alerte plus tôt en Action ; emplacements à ajouter à `AUDIO_SLOTS_V77` (alerte, boss, fins, retour au calme, §45.1) ;
+- la règle de sauvegarde (§55.3).
+
+### 55.8 Continuer après la fin, nouvelle partie +
+
+- **Continuer** : après l'épilogue, la même sauvegarde ouvre la carte galactique et les campagnes annexes (§13.5).
+- **Nouvelle partie +** : crée un **nouveau** profil à partir d'une copie. La sauvegarde d'origine n'est jamais modifiée. Ce qui passe d'une partie à l'autre (origine, apparence, une partie de l'arsenal, archives MIRE débloquées) est à décider ; les choix d'histoire, la colonie et le dossier repartent de zéro.
+
+### 55.9 Ordre conseillé
+
+| Lot | Contenu | Pourquoi d'abord |
+| --- | --- | --- |
+| 1 | Traduction (§55.1), étapes 1 et 2 sur la tranche verticale | Tout nouveau texte doit naître dans les deux langues |
+| 2 | Registre et sauvegarde (§55.3, §55.7) | Fixe le rythme de la tranche verticale |
+| 3 | Mort optionnelle et origine (§55.5, §55.6) | Choix de création de partie |
+| 4 | Difficulté à la carte (§55.4) | Réglages pour les tests de jeu |
+| 5 | Coop locale à 5, puis mesures en ligne (§55.2) | Le plus lourd ; dépend des autres |
+| 6 | Continuer et nouvelle partie + (§55.8) | Après la fin de la campagne principale |
+
+Les lots 2 à 6 modifient la sauvegarde : chacun demande la levée de protection décrite en tête de section.
