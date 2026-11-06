@@ -185,8 +185,10 @@ test('V185 automatic layer translates catalog text, upper-case variants and patt
   assert.equal(autoTranslateV185(french.toUpperCase()), english.toUpperCase());
   assert.equal(autoTranslateV185('Texte totalement inconnu du catalogue'), 'Texte totalement inconnu du catalogue');
   assert.equal(autoTranslateV185(42), 42);
+  // English may drop a hole French needs (a plural mark, for example), never add one.
   for (const [fr, en] of Object.entries(EN_PATTERNS_V185)) {
-    assert.deepEqual((fr.match(/\{\d+\}/g) || []).sort(), (en.match(/\{\d+\}/g) || []).sort(), fr);
+    const holes = new Set(fr.match(/\{\d+\}/g) || []);
+    for (const hole of en.match(/\{\d+\}/g) || []) assert.ok(holes.has(hole), fr);
   }
   const pattern = Object.keys(EN_PATTERNS_V185).find(fr => /^\S.*\{0\}/.test(fr) && !fr.includes('{1}'));
   if (pattern) {
