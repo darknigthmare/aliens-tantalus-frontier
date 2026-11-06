@@ -56,6 +56,26 @@
           }
         ],
         "fallback": "synth"
+      },
+      "checkpoint": {
+        "sources": [],
+        "fallback": "synth"
+      },
+      "locked": {
+        "sources": [],
+        "fallback": "synth"
+      },
+      "kill": {
+        "sources": [],
+        "fallback": "synth"
+      },
+      "pickup": {
+        "sources": [],
+        "fallback": "synth"
+      },
+      "victory": {
+        "sources": [],
+        "fallback": "synth"
       }
     },
     "music": {
@@ -90,6 +110,18 @@
             "sha256": "f956d3cb9bcca77f65b118de0b6ed2e2d182a576bb7d50708e354d8f5a12f3d6"
           }
         ],
+        "fallback": "silence"
+      },
+      "travel": {
+        "sources": [],
+        "fallback": "silence"
+      },
+      "briefing": {
+        "sources": [],
+        "fallback": "silence"
+      },
+      "archives": {
+        "sources": [],
         "fallback": "silence"
       }
     }

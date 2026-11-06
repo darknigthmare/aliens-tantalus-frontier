@@ -4,9 +4,17 @@ export const AUDIO_FORMATS_V77 = Object.freeze([
   { extension: 'webm', mime: 'audio/webm' }
 ]);
 export const AUDIO_MIME_V77 = Object.freeze(Object.fromEntries(AUDIO_FORMATS_V77.map(x => ['.' + x.extension, x.mime])));
-export const AUDIO_SLOTS_V77 = Object.freeze({ sfx: Object.freeze(['shot', 'tracker', 'hit', 'ui', 'alarm']), music: Object.freeze(['menu', 'hub', 'mission']) });
+// V184 (owner-approved, 2026-11-05): new slots for mission feedback and view music.
+// A slot without a file keeps the synth fallback (effects) or the legacy scene (music).
+export const AUDIO_SLOTS_V77 = Object.freeze({
+  sfx: Object.freeze(['shot', 'tracker', 'hit', 'ui', 'alarm', 'checkpoint', 'locked', 'kill', 'pickup', 'victory']),
+  music: Object.freeze(['menu', 'hub', 'mission', 'travel', 'briefing', 'archives'])
+});
+// New view scenes fall back to the legacy music they used before V184.
+export const AUDIO_MUSIC_FALLBACK_V184 = Object.freeze({ travel: 'menu', briefing: 'menu', archives: 'menu' });
 // Leaving a playable world must invalidate its pending music and delayed effects.
-export const resolveViewAudioSceneV77 = view => ['play', 'bioforge'].includes(view) ? 'mission' : view === 'hub' ? 'hub' : 'menu';
+export const resolveViewAudioSceneV77 = view => ['play', 'bioforge'].includes(view) ? 'mission' : view === 'hub' ? 'hub'
+  : view === 'galaxy' ? 'travel' : view === 'operations' ? 'briefing' : view === 'archives' ? 'archives' : 'menu';
 export const emptyAudioManifestV77 = () => ({ schema: 1, tracks: Object.fromEntries(Object.entries(AUDIO_SLOTS_V77)
   .map(([kind, ids]) => [kind, Object.fromEntries(ids.map(id => [id, { sources: [], fallback: kind === 'sfx' ? 'synth' : 'silence' }]))])) });
 
