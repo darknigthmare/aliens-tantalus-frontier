@@ -784,7 +784,79 @@ Ne sont pas comptés : les 22 quêtes du Tantalus (§8), dont la durée dépend 
 | `station-a-anneau` | **La nuit de l'anneau** | Grue | Si le pacte de l'anneau est conclu : défendre le marché pendant une coupure d'énergie. | Action |
 | `station-a-sas` | **Le sas 7** | Idris Kwan | Un sas extérieur se cycle seul la nuit : trouver ce qui l'actionne. | Horreur |
 
-Les nouvelles missions ne créent aucun identifiant existant et ne changent pas les 7 pièces du dossier (§5.7). Leur registre complète la répartition du §0.3.
+Les nouvelles missions ne réutilisent aucun identifiant existant et ne changent pas les 7 pièces du dossier (§5.7). Leur registre complète la répartition du §0.3.
+
+### 5.10 Fiches des missions ajoutées — [PROPOSÉ]
+
+Statuts de production : **[PRÉSENT]** dans le dépôt, **[À CRÉER]**, comme au §28.
+
+#### `story-quai-nord` · Le quai nord (Horreur, ≈ 35 min)
+
+**Placement :** après l'Acte II, avant C2. **Donneur :** Asha Mbaye, qui a lu le message libéré (CIN-20).
+
+1. **CIN-21 « Le quai nord »** (25 s) : le dropship d'Orlov se pose sur la dalle du quai nord de QZ-18. Une navette manque à son emplacement ; une civière est restée au bord du quai.
+2. Exploration des abris du quai, de la salle d'attente et du hangar de maintenance. Le détecteur de mouvement s'affole puis se tait.
+3. Les noms du message libéré sont écrits à la craie sur une porte blindée : le personnel s'est enfermé dans la chambre froide du quai.
+4. Ouvrir la chambre froide demande de rétablir l'énergie du quai (`restore atmospheric processing`) ; le bruit attire des drones.
+5. Selon le temps mis et les choix de route : de 0 à 4 survivants ramenés.
+
+**Conséquences :** `story-quai-nord-survivors` = 0-4, ajoutés à la population de Port-Méridien ; ils apparaissent à l'appel de CIN-61. Aucune pièce de dossier.
+**Ancrage Alien :** ceux qu'une priorité de fret a laissés derrière.
+**Besoins :** décor du quai nord (dalle, abris, chambre froide) [À CRÉER] ; drones [PRÉSENT] ; civière, inscriptions à la craie, porte blindée [À CRÉER] ; CIN-21 [À CRÉER].
+
+#### `story-route-depot` · La route du dépôt (Tension, ≈ 35 min)
+
+**Placement :** après C3, avant l'Acte IV. **Donneur :** Inez Harlow, qui veut savoir où mène la destination absente du bon (Acte I).
+
+1. Suivre en surface les traces de chariot depuis QZ-17 : ornières dans la boue, bornes de compagnie sans nom.
+2. Une clôture électrifiée, coupée de l'intérieur. Des ventilations chaudes sortent du sol.
+3. Contourner une patrouille de drones par un fossé de drainage, ou la nettoyer (bruit).
+4. Atteindre une grille de ventilation du dépôt : la caméra casque se dégrade (transition directe vers CIN-50).
+
+**Conséquences :** ouvre l'Acte IV ; `story-depot-approach` = `drain` | `fence` change le point de départ de la sortie de l'Acte IV.
+**Ancrage Alien :** une installation de la compagnie qui n'existe sur aucune carte.
+**Besoins :** extérieur de surface pluvieux, clôture, bornes, ventilations [À CRÉER] ; drones [PRÉSENT] ; effet de dégradation de caméra casque [À CRÉER, partagé avec CIN-50].
+
+#### `story-moyeu` · Le moyeu (Horreur, ≈ 35 min)
+
+**Placement :** entre S3 et S4. **Donneur :** Idris Kwan, à la radio.
+
+1. **CIN-73 « Le moyeu »** (20 s) : vue des rayons de la station depuis l'anneau ; les lumières s'éteignent section par section vers le centre.
+2. Monter un rayon par l'échelle de service : la gravité baisse à chaque palier (déplacement plus lent, sauts plus longs).
+3. Au moyeu, en gravité très faible : les objets flottent, le détecteur repère tout ce qui bouge, y compris les débris.
+4. Atteindre le cœur de CASSIUS et lancer la remise en pression préparée pour S4.
+
+**Conséquences :** S4 commence avec la remise en pression amorcée ; si CASSIUS a été conservé, il parle pendant la montée et indique les pièges de pression.
+**Ancrage Alien :** station tournante, IA de gestion, le détecteur qui ment.
+**Besoins :** rayon, échelle, moyeu en gravité faible [À CRÉER] ; mécanique de gravité variable [À CRÉER] ; débris flottants (VFX) [À CRÉER] ; CIN-73 [À CRÉER].
+
+#### `story-recuperation` · L'atterrissage (Tension, ≈ 35 min)
+
+**Placement :** début de l'Acte V, avant le conseil de guerre. **Donneur :** Mara Vega.
+
+1. Prendre position sur une crête au-dessus du dépôt avant l'arrivée de l'équipe de récupération.
+2. **CIN-59 « L'atterrissage »** (20 s) : un transport de la compagnie se pose ; des commandos débarquent en ordre.
+3. Observer sans être vu : compter les effectifs, identifier le matériel (caisses de confinement, armes), photographier l'ordre affiché sur la tablette d'un officier.
+4. Être repéré met fin à l'observation : repli sous le feu, sans obligation de combat.
+
+**Conséquences :** chaque information rapportée devient un avantage au conseil de guerre (§5.6, étape 1) : effectifs connus, matériel connu, ordre écrit. L'ordre écrit **n'est pas** une pièce du dossier : il prouve l'intention de récupérer, pas ce qui s'est passé.
+**Ancrage Alien :** l'équipe de récupération de la compagnie et ses « actifs ».
+**Besoins :** commandos Weyland-Yutani [PRÉSENT au catalogue] ; transport de la compagnie [À CRÉER] ; mécanique d'observation (photographie, comptage) [À CRÉER] ; CIN-59 [À CRÉER].
+
+#### Annexes ajoutées
+
+| ID | Déroulé | Conséquence | Besoins |
+| --- | --- | --- | --- |
+| `colony-a-ecole` | Après C1. Trouver un local sans conduit ouvert, puis ramener tables, tableau et réserves de l'école évacuée, sous alerte. | Moral de la colonie + ; scène de classe au hub de Port-Méridien | Intérieur d'école [À CRÉER], props de classe [À CRÉER] |
+| `colony-a-pluie` | Après C2. Suivre les gouttières jusqu'à la citerne du toit ; une ouverture faite par le haut, de l'acide sur le bord. Sceller la citerne (`seal the hive`). | Chantier Eau + ; Lucia Ferro écarte l'eau comme cause des « malaises » : la piste des hôtes (`colony-a-ferro`) se confirme | Toits et citernes [À CRÉER], acide [PRÉSENT] |
+| `colony-a-registre` | Après l'Acte II. Récupérer dans la capitainerie inondée le registre des navettes ; une page manque. | Ajoute un détail au témoignage de Wren (aucune nouvelle pièce) | Capitainerie [À CRÉER] |
+| `colony-a-ferme` | Après *La balise du hameau*. Convaincre une famille de quitter ses serres ; l'escorter de nuit (`escort a colony convoy`). | Population + ; nourriture + si les semences sont emportées | Serres de ferme [À CRÉER], famille (3 PNJ) [À CRÉER] |
+| `station-a-kessler` | Après S3. Ouvrir le casier de Kessler dans le dropship d'Echo-8 resté au sas : photos, lettre non envoyée, ordre de mission. | Le casier vide du Tantalus reçoit ses effets ; réplique de Tamsin Velez | Intérieur du dropship d'Echo-8 [À CRÉER], effets personnels [À CRÉER] |
+| `station-a-ivarsson` | Après *Les journaux de l'équipage*. Fouiller le bureau d'Ivarsson : autorisations signées, demandes de levée de quarantaine refusées par la compagnie. | Complète §7.4 ; aucune nouvelle pièce | Bureau [À CRÉER], terminaux Seegson [PRÉSENT] |
+| `station-a-anneau` | Si le pacte de l'anneau est conclu. Coupure d'énergie sur le marché ; défendre les étals et les récupérateurs jusqu'au retour du courant (`hold the extraction zone`). | Commerce de Grue + | Marché de l'anneau (§42.2) [À CRÉER] |
+| `station-a-sas` | Un sas extérieur se cycle seul la nuit. Trouver ce qui l'actionne : un câble rongé, puis un nid dans la gaine (`navigate the vent network`). | Sécurité de la station + | Sas extérieur [À CRÉER], gaine technique [À CRÉER] |
+
+**Cinématiques ajoutées :** CIN-21, CIN-59, CIN-73 (CIN-49 n'est pas nécessaire : `story-route-depot` enchaîne sur CIN-50). Elles suivent les contraintes du §10.
 
 ---
 
@@ -1038,16 +1110,19 @@ Les chapitres Mire Archive 001, Protocole Z-110, Jeri, Éloïse, A.T.A.X.-Q, Le 
 | CIN-10 | Les quais déserts | Acte I | 30 s | [PROPOSÉ] |
 | CIN-11 | Ouvert de l'intérieur | Acte I | 25 s | [PROPOSÉ] |
 | CIN-20 | Treize minutes | Acte II | 40 s | [PROPOSÉ] |
+| CIN-21 | Le quai nord | `story-quai-nord` | 25 s | [PROPOSÉ] |
 | CIN-31 | Le sas refermé | Acte III | 30 s | [PROPOSÉ] |
 | CIN-40 | Jun Park ne répond plus | Interlude | 30 s | [PROPOSÉ] |
 | CIN-41 | Ce que BISHOP-9 savait | Interlude | 45 s | [PROPOSÉ] |
 | CIN-50 | Les dernières images | Acte IV | 35 s | [PROPOSÉ] |
 | CIN-51 | Contrôle biologique | Acte IV | 25 s | [PROPOSÉ] |
+| CIN-59 | L'atterrissage | `story-recuperation` | 20 s | [PROPOSÉ] |
 | CIN-60 | Dernier départ | Acte V | 30 s | [PROPOSÉ] |
 | CIN-61 | Les portes du port | Acte V | 45 s | [PROPOSÉ] |
 | CIN-70 | Six heures de silence | Station | 40 s | [PROPOSÉ] |
 | CIN-71 | La voix de CASSIUS | Station S2 | 40 s | [PROPOSÉ] |
 | CIN-72 | Le dernier enregistrement d'Echo-8 | Station S3 | 30 s | [PROPOSÉ] |
+| CIN-73 | Le moyeu | `story-moyeu` | 20 s | [PROPOSÉ] |
 | CIN-80 | Premières lumières | Colonie, palier *Rétablie* | 30 s | [PROPOSÉ] |
 | CIN-90 | Fins (×3) | Épilogue | 60 s | [PROPOSÉ] |
 
@@ -2027,11 +2102,28 @@ Chaque monde reçoit une **chaîne** de 2 à 4 missions, disponible après la ca
 
 | ID | Type | Titre | Résumé | Objectif | Ancrage |
 | --- | --- | --- | --- | --- | --- |
-| `avp-hunt-1` | Annexe | **La réserve** | Une équipe de relevé coloniale a disparu dans une zone où les organismes semblent **élevés** autour de structures anciennes. Le Tantalus la retrouve à moitié : les survivants parlent de « silhouettes qui tremblent dans l'air ». | `rescue survivors` | Terrain de chasse ; présence aperçue, jamais affrontée. |
+| `avp-hunt-1` | Annexe | **La réserve** | Une équipe de relevé coloniale a disparu dans une zone où les organismes semblent **parqués** autour de structures anciennes. Le Tantalus la retrouve à moitié : les survivants parlent de « silhouettes qui tremblent dans l'air ». | `rescue survivors` | Terrain de chasse ; présence aperçue, jamais affrontée. |
 | `avp-hunt-2` | Annexe | **Les trophées** | Un site de trophées : crânes d'organismes et armes humaines anciennes. Le joueur choisit de ne rien toucher, ou de prélever une pièce pour Inez. Prélever déclenche une traque brève par un chasseur camouflé, que le joueur doit **fuir**. | `escape the quarantine` | Les règles de la chasse ne concernent pas les humains, tant qu'ils ne volent rien. |
 | `avp-hunt-3` | Annexe | **La saison** | La ruche de la réserve déborde. Évacuer le dernier camp pendant qu'un chasseur traverse la zone sans s'occuper des Marines. | `hold the extraction zone` | Deux espèces, une seule voie de sortie. |
 
-**Lien avec l'autre jeu — [À DÉCIDER] avec le propriétaire :** marques de clan, équipement abandonné et architecture des structures doivent reprendre le contenu de *Yautja : la Longue Chasse* (clan, époque, matériaux). Cette bible ne connaît de ce jeu que son homeworld (vue au sol à 35°) ; elle n'invente pas son histoire. Un éventuel lien de sauvegarde entre les deux jeux est aussi à décider.
+**Lien avec l'autre jeu — validé le 2026-11-06 (« les trois en parallèle ») :**
+
+| Élément | Choix | Source dans *Yautja : la Longue Chasse* |
+| --- | --- | --- |
+| Clan | **Gardiens du Confinement** (`CL10`) : doctrine « isolement des menaces incontrôlées » ; gestes « fermer un passage, guider une créature hors du couloir puis maintenir une voie d'extraction » ; « la retenue d'un tir peut compter davantage qu'un trophée si elle préserve le retour des autres » | `app/game/clanWarBibleV6Source.json`, entrée `W3-CL10` (dépôt `darknigthmare/yautja-la-longue-chasse`, commit `23b48e1`) |
+| Chasseur partagé | **Garde du Seuil** (`threshold-guard`), responsable du confinement du vaisseau de clan, ici devenu **un ancien** | `app/game/systems/clanShipOperations.ts` (nom, rôle, réplique d'arrivée) |
+| Époque | **Bien après** les événements de l'autre jeu | Décision du propriétaire ; aucune date de l'autre jeu n'est reprise ni contredite |
+| Objets reconnaissables | Guides et obstacles qui marquent les pistes fermées et ouvertes ; dispositifs visibles retirés ou replacés | Accords `W3-DIP17` (« Réserve disputée ») et `W3-DIP03` (corridor de sortie de la proie) |
+
+**Ce que cela change dans la chaîne :**
+
+- **LV-742 est une réserve tenue par les Gardiens du Confinement.** La ruche locale n'y est pas élevée pour le plaisir de la chasse : le clan la **confine** et ferme les passages vers les zones où d'autres chassent. Les « structures anciennes » de `avp-hunt-1` sont leurs bornes et leurs obstacles de piste.
+- **`avp-hunt-1` · La réserve** : les survivants de l'équipe de relevé ont franchi une piste fermée. Echo-9 trouve les guides de piste (bornes, barrières, dispositifs) et peut lire qu'une zone est fermée. Respecter les bornes à la sortie évite toute rencontre.
+- **`avp-hunt-2` · Les trophées** : prélever une pièce est, pour ce clan, un acte constaté qui « ouvre enquête ou riposte » (`W3-CL10`, champ *Rupture*). La traque brève reste une fuite ; ne rien prendre la supprime.
+- **`avp-hunt-3` · La saison** : la ruche déborde la réserve. Le **Garde du Seuil**, ancien, apparaît une seule fois : il ferme un passage et guide le flux de créatures hors du couloir d'évacuation, puis disparaît. Il ne parle pas aux Marines et ne combat pas à leurs côtés ; si l'escouade tire sur lui, il se retire et le couloir n'est plus tenu (registre A conservé).
+- **Pas de lien de sauvegarde** entre les deux jeux à ce stade : le lien est narratif et visuel.
+
+**Règles de fidélité à l'autre jeu :** reprendre les noms, rôles et doctrines tels qu'ils sont écrits dans ses fichiers ; ne pas inventer d'histoire personnelle au Garde du Seuil au-delà de son rôle et de son âge ; faire valider l'apparence d'ancien par le propriétaire, puisque l'autre jeu le dessine avec une illustration fixe de Yautja (`clanShipCrew.ts`, rôle d'art `guard`).
 
 **Apparitions brèves ailleurs (règle 7) :** LV-1201 (traces dans les temples, une silhouette au loin), BG-386 (pyramides), Ryushi (épave de la gorge).
 
@@ -3402,7 +3494,7 @@ Réponses du propriétaire aux questions sur les parties peu détaillées. Chaqu
 | Diffusion | **Entre gratuite publique et privée, non décidé** | §53.10 reste une décision du propriétaire. |
 | Profondeur V2 | **Bande large**, type arcade AVP | Déplacement libre en profondeur, échelle des sprites nettement réduite au fond. Valeurs exactes à fixer et tester. |
 | Musiques de moments de jeu | **Toutes** : alerte, boss/reine, fins, retour au calme | Quatre nouveaux emplacements musicaux et leurs points d'accroche dans le jeu (§53.2). |
-| Lien avec *Yautja : la Longue Chasse* (`avp-hunt`, LV-742) | **Les trois en parallèle** | Un clan de l'autre jeu à une autre époque, des objets reconnaissables, et un chasseur partagé qui apparaît brièvement. Le clan et le chasseur sont à choisir dans l'autre projet. |
+| Lien avec *Yautja : la Longue Chasse* (`avp-hunt`, LV-742) | **Les trois en parallèle** | Un clan de l'autre jeu à une autre époque, des objets reconnaissables, et un chasseur partagé qui apparaît brièvement. Choisis le 2026-11-06 : **Gardiens du Confinement**, **Garde du Seuil** devenu ancien, époque **bien après** (§22.16). |
 | Première archive MIRE fidèle | **Hadley's Hope (*Aliens*)** | Première archive à produire dans l'ordre du §26.10. |
 | Accessibilité | **Tout** | Mode daltonien, taille du texte, sous-titres des sons, remappage complet (§53.8). |
 
