@@ -13,7 +13,7 @@
 - **Partie V — Audit complet des manques** : §38 corrections, personnages, ennemis, véhicules, armes, costumes, props, décors, animations, VFX, systèmes, audio, interface, cinématiques
 - **Partie VI — Missions sur les lieux originaux de la bible** : §39
 - **Partie VII — Vues et organisation des hubs** : §40 trois vues (latérale, couloir de profondeur, plan au sol à 35°) · §41 Tantalus pièce par pièce · §42 Asphodèle · §43 Port-Méridien · §44 liste complète de ce qui reste à faire et à générer
-- **Décisions validées (2026-11-05)** : §45, cadrage de la deuxième série §45.1
+- **Décisions validées** : §45, cadrage des deuxième et troisième séries §45.1-45.2 · registres des missions §0.3 · origines d'Echo-9 §2.4
 - **Partie VIII — Musique : prompts pour Google Flow Music** : §46 méthode et palette · §47 hub et voyage · §48 campagne principale · §49 campagnes annexes · §50 archives et missions spéciales · §51 récapitulatif
 - **Partie IX — Feuille de route pour rendre le jeu attractif** : §52 principes, état et renommage bloqué · §53 feuille de route détaillée · §54 ordre de travail
 
@@ -44,6 +44,63 @@ Les missions locales reprennent les objectifs déjà définis dans `content-core
 ### 0.2 Règle d'écriture des missions
 
 Chaque mission de ce document indique son **ancrage Alien** : l'élément de l'univers qui la justifie (cycle biologique, matériel des Marines, procédure de la compagnie, isolement, synthétique, infrastructure coloniale). Une mission sans ancrage n'est pas retenue.
+
+### 0.3 Registre de chaque mission — [PROPOSÉ, à valider]
+
+**Décision (§45.1, §45.2) :** le ton varie selon la mission ; Claude propose un registre par mission, le propriétaire valide.
+
+| Registre | Ce que le joueur vit | Rythme des ennemis | Ressources | Sauvegarde (§45.2) |
+| --- | --- | --- | --- | --- |
+| **Horreur** | Peu de combats, beaucoup de signes ; fuir est souvent le bon choix | Rares, imprévisibles, souvent invisibles | Munitions rares | Checkpoints et **terminaux de sauvegarde physiques** uniquement |
+| **Tension** | Montée lente, puis un ou deux combats intenses | Dosés par le directeur de tension (§53.3) | Normales | Checkpoints, terminaux, **sauvegarde libre hors combat** |
+| **Action** | Vagues, défense, poursuite | Nombreux, annoncés | Abondantes, ravitaillement | Checkpoints, sauvegarde libre hors combat |
+| **Calme** | Dialogue, enquête, hub, sans combat | Aucun | — | Libre |
+
+Le registre est une donnée de la fiche de mission ; il règle le directeur de tension, la musique (alerte ou silence) et la règle de sauvegarde. Il n'est pas réglable par le joueur ; la difficulté l'est (§45.2).
+
+**Campagne principale (Partie I) :**
+
+| Mission | Registre proposé | Raison |
+| --- | --- | --- |
+| P-1 Réveil en cryostase | Calme | Création du personnage, aucun ennemi |
+| P-2 Qualification au pas de tir | Calme | Entraînement |
+| P-3 / `colony-intro-quai` Le quai des vivants | Tension | Premier contact avec la menace, triage sous pression |
+| Acte I — La cargaison fantôme | **Horreur** | Le texte prévoit « peu de combats, beaucoup de signes » et un parasite |
+| Acte II — Le dernier relais | Tension | Enquête au relais, menace en arrière-plan |
+| Acte III A — Ramener le blindé | **Action** | Convoi, horde, Crushers, Reine en barrage |
+| Acte III B — C-12 | Tension | 45 secondes à tenir, conteneur qui frappe |
+| Interlude — Quarantaine à bord | **Horreur** | Traque dans les ponts, conduits, créature unique |
+| Acte IV — Cocon noir | **Horreur** | Réveil dans la résine, sans arme garantie |
+| Acte V — Non viable | **Action** | Course APC, poursuite de Reine, face-à-face |
+| Épilogue | Calme | Visite sans combat |
+| `colony-intro-doyenne` | Calme | Visite du port |
+| `colony-c1` Tenir le port | Action | Défense et soudure des sas |
+| `colony-c2` L'air du port | Tension | Descente technique, nid dans la chaleur |
+| `colony-c3` Le convoi des rescapés | Horreur | Un embryon parmi les arrivants, aucune panique possible |
+| `colony-c4` Le culte du port | Tension | Enquête de nuit, puis choix |
+| `colony-c5` La nuit des murs | Action | Défense jusqu'à l'aube |
+| `colony-a-quai` | Tension | Escorte d'un témoin |
+| `colony-a-ferro` | Horreur | Patients disparus, hôtes non diagnostiqués |
+| `colony-a-abri` | Tension | Escorte civile sans arme lourde |
+| `colony-a-seegson` | Tension | Entrepôt abandonné, synthétique bloqué |
+| `colony-a-balise` | Horreur | Fermes isolées, silence radio |
+| `colony-a-crucible` | Calme | Négociation |
+| `colony-a-converti` | Horreur | Descente vers les galeries |
+| `station-intro-silence` | Calme | Écoute de l'enregistrement, à bord |
+| `station-s1` L'arrimage | Horreur | Station morte, détecteur saturé |
+| `station-s2` La voix de CASSIUS | Tension | Rétablir l'énergie, dialogue avec l'IA |
+| `station-s3` Les ponts scellés | Horreur | Laboratoire, berceaux ouverts |
+| `station-s4` Le hub Asphodèle | Action | Dernière purge |
+| `station-a-echo8` | Horreur | Suivre les traces d'une équipe perdue |
+| `station-a-grue` | Calme | Négociation |
+| `station-a-journaux` | Horreur | Ponts vides, journaux |
+| `station-a-hydro` | Tension | Remise en route de la serre |
+| `station-a-sonde` | Tension | Récupération en extérieur |
+| `station-a-cassius` / `station-a-bishop` | Calme | Archives et dialogue |
+| Quêtes `ship-*` | Calme | Hub, sauf `ship-doyle` et `ship-orlov` (Tension : sortie de récupération) et `ship-park` (Horreur : conduits) |
+| Contrats locaux de Port-Méridien | Selon l'objectif | Purge et ronde : Action · escorte, filtres, récupération, chargeur : Tension · recherche de disparus, sceller une ouverture : Horreur |
+
+**Répartition proposée hors quêtes de bord :** 11 Horreur, 11 Tension, 5 Action, 9 Calme (36 missions). Les registres des campagnes annexes (§14-18), des missions de planète (§22-25), des archives MIRE (§26) et des lieux originaux (§39) suivront dans une passe dédiée, une fois cette répartition validée.
 
 ---
 
@@ -151,7 +208,7 @@ Institutions mentionnées dans le récit **[PROPOSÉ]**, sans entrée de faction
 
 ### 2.1 Le joueur
 
-**Echo-9 (« la Relève Echo-9 »)** — Marine colonial sorti d'hypersommeil pour remplacer l'équipe Echo-8, disparue sur la station Asphodèle. Apparence définie au créateur de personnage. **Passé au choix du joueur** parmi une liste d'origines écrites (§45.1) ; l'origine choisie modifie certaines répliques, sans changer l'histoire principale. Parle peu, décrit ses actions, garde toujours un trajet de retour en vue. Il ne sait de la mission que ce que le briefing lui dit : il découvre le reste en même temps que le joueur.
+**Echo-9 (« la Relève Echo-9 »)** — Marine colonial sorti d'hypersommeil pour remplacer l'équipe Echo-8, disparue sur la station Asphodèle. Apparence définie au créateur de personnage. **Passé au choix du joueur** parmi 20 origines écrites (§2.4) ; l'origine choisie modifie certaines répliques, sans changer l'histoire principale. Parle peu, décrit ses actions, garde toujours un trajet de retour en vue. Il ne sait de la mission que ce que le briefing lui dit : il découvre le reste en même temps que le joueur.
 
 ### 2.2 L'équipage du Tantalus
 
@@ -191,6 +248,191 @@ Postes et salles : `HUB_NPC_ROSTER` (`src/hub-v52-runtime.js`). Fonctions narrat
 | **Directrice Halloran** | Weyland-Yutani | Responsable régionale du réseau QZ. Ne s'adresse au Tantalus que par messages différés. Cite toujours une clause. |
 | **CASSIUS** | Station Asphodèle | Système de gestion Seegson de la station. Applique la quarantaine à la lettre depuis des semaines, sans personne pour la corriger. Ni malveillant ni conscient : obéissant. |
 | **Grue** | Crucible Salvage Compact | Capitaine récupératrice installée sur l'anneau extérieur d'Asphodèle. |
+
+### 2.4 Origines d'Echo-9 — [PROPOSÉ, à valider]
+
+**Décision (§45.2) :** 20 origines au choix, rédigées ici. Echo-9 reste un Marine colonial sorti d'hypersommeil pour remplacer Echo-8 ; l'origine décrit **ce qu'il était avant** son affectation au Tantalus.
+
+**Règles communes :**
+
+1. **Choix au créateur de personnage**, après l'apparence. Une fiche de 4 à 6 lignes, un portrait d'archive (photo de dossier) et la réplique d'entrée.
+2. **L'histoire principale ne change pas.** L'origine change des répliques, ajoute une option de dialogue dans certaines scènes et donne un petit avantage.
+3. **Avantage modeste.** Une seule capacité, utile dans une situation précise, jamais indispensable. Les recrues actuelles ont des traits sans effet mécanique (`TRAITS_V119`, `mechanicalBonus: false`, `crew-recruitment-v85.js`) ; si le propriétaire préfère la même règle pour Echo-9, la colonne « Capacité » devient purement descriptive.
+4. **Trois répliques écrites par origine**, en français et en anglais (règle §45.1) : *Réveil* (P-1, réponse à DAVID-8R), *Réaction* (une scène de la campagne principale), *Retour* (épilogue ou scène de mess).
+5. **Une scène de reconnaissance** : un personnage de la campagne réagit à l'origine (colonne « Écho dans la campagne »). Elle n'ouvre aucune récompense, conformément à la règle des quêtes (§8).
+6. **Identifiants** : `origin-01` à `origin-20`, stockés dans le profil du personnage. Une valeur absente ou inconnue revient à `origin-20` (dossier caviardé), qui fonctionne sans texte propre à l'origine.
+
+#### 2.4.1 Vue d'ensemble
+
+| ID | Origine | Capacité proposée | Écho dans la campagne |
+| --- | --- | --- | --- |
+| `origin-01` | Survivant d'une section anéantie | **Sang-froid** : la visée tremble moins pendant une alerte | Tamsin Velez (*Ceux d'Echo-8*) |
+| `origin-02` | Ancien garde de colonie | **Calmer les civils** : une escorte civile panique moins vite | Adèle Sarrazin (*La doyenne*) |
+| `origin-03` | Adjoint des Marshals coloniaux | **Procès-verbal** : une pièce du dossier se lit avec un indice supplémentaire | Mara Vega (*La ligne de commandement*) |
+| `origin-04` | Docker de frontière | **Cariste** : manœuvre plus rapide du chargeur (`secure the power loader`) | Tomas Wren (*Ce que le quai a vu*) |
+| `origin-05` | Technicien de terraformation | **Processeur** : réparation plus rapide des systèmes atmosphériques | Jun Park (C2 *L'air du port*) |
+| `origin-06` | Enfant d'une colonie évacuée | **Réflexe d'abri** : repère les abris et sas sûrs sur la carte | Asha Mbaye (*Les noms de Port-Méridien*) |
+| `origin-07` | Mineur sous contrat endetté | **Galeries** : se déplace plus vite dans les conduits et galeries étroites | Grue (*Le prix de Grue*) |
+| `origin-08` | Infirmier de vaisseau-hôpital | **Triage** : soins sur un coéquipier plus rapides | Noor Okafor (*Le registre des pertes*) |
+| `origin-09` | Pilote de navette suspendu | **Approche** : fenêtre d'extraction un peu plus longue | Maksim Orlov (*Fenêtre de tir*) |
+| `origin-10` | Ancien agent de sécurité de la compagnie | **Codes périmés** : une porte de la compagnie par mission s'ouvre sans piratage | Halloran (message de l'Acte II), BISHOP-9 |
+| `origin-11` | Transfuge de l'UPP | **Matériel de l'Union** : utilise sans pénalité les armes et balises UPP | Rook (*La balise rouge*) |
+| `origin-12` | Récupérateur de frontière | **Fouille** : un peu plus de matériaux par caisse ouverte | Grue (*Le pacte de l'anneau*) |
+| `origin-13` | Opérateur de relais | **Triangulation** : le détecteur de mouvement filtre mieux les échos | Rook (*Six heures*) |
+| `origin-14` | Condamnation commuée en engagement | **Débrouille** : crochetage des casiers et armoires sans outil | Sanaa Doyle (*Les sentinelles*) |
+| `origin-15` | Mécanicien de blindés | **Atelier** : réparation de terrain du M577 et des tourelles | Cal Mercer (*Remettre le M577 en état*) |
+| `origin-16` | Biologiste de terrain | **Échantillons** : un prélèvement par mission sans contamination | Inez Harlow (*Le sceau*) |
+| `origin-17` | Enfant de Marines | **Discipline** : ordres d'escouade exécutés plus vite | Tamsin Velez, Pablo Reyes |
+| `origin-18` | Garde de convoi | **Formation de convoi** : l'escorte de véhicules subit moins de dégâts | Cal Mercer (Acte III) |
+| `origin-19` | Survivant d'un abordage | **Combat rapproché** : dégâts accrus dans les couloirs étroits | Pablo Reyes (*La charge de trop*) |
+| `origin-20` | Dossier caviardé | **Aucune** ; fil secondaire propre (§2.4.3) | DAVID-8R, CASSIUS |
+
+Les valeurs chiffrées des capacités (pourcentages, durées) sont à fixer au réglage, avec les mêmes scènes avant/après (`AGENTS.md`).
+
+#### 2.4.2 Fiches
+
+**`origin-01` · Survivant d'une section anéantie**
+Engagé à 19 ans, affecté à une section de garnison sur un poste de frontière. Une nuit, le poste cesse d'émettre ; Echo-9 est retrouvé seul, deux jours plus tard, dans un sas de maintenance, sans souvenir clair. Le rapport officiel parle de « contamination industrielle » et le classe. Il a demandé une réaffectation sur un vaisseau, n'importe lequel. *Ancrage : unité perdue, rapport étouffé par la compagnie ; rien n'y nomme une créature.*
+- Réveil — FR : « Echo-8 perdue. Ça me rappelle quelque chose. » · EN : "Echo-8 lost. That rings a bell."
+- Réaction (Acte IV, cocons) — FR : « C'est ça qu'ils appelaient contamination. » · EN : "So that's what they called contamination."
+- Retour — FR : « Cette fois, quelqu'un écrit le vrai rapport. » · EN : "This time, someone writes the real report."
+
+**`origin-02` · Ancien garde de colonie**
+Six ans de sécurité civile dans une colonie agricole : bagarres de cantine, fuites de serre, enfants perdus dans les champs. Pas d'arme lourde, beaucoup de patience. La colonie a fermé faute de rendement ; il s'est engagé pour ne pas monter dans le cargo de rapatriement. *Ancrage : colonies sous charte, sécurité civile sous-équipée.*
+- Réveil — FR : « Des civils à protéger ? Alors je sais par où commencer. » · EN : "Civilians to protect? Then I know where to start."
+- Réaction (`colony-a-abri`) — FR : « On ne court pas. On marche vite, et on se tient la main. » · EN : "Nobody runs. We walk fast, and we hold hands."
+- Retour — FR : « Une colonie, ça tient par ses gens. Pas par ses murs. » · EN : "A colony holds because of its people. Not its walls."
+
+**`origin-03` · Adjoint des Marshals coloniaux**
+Adjoint auxiliaire d'un Marshal colonial pendant trois ans : constats, saisies, témoins qui changent de version. Il a vu des enquêtes fermées par un simple courrier de la compagnie. Il a rejoint les Marines par un programme de transfert. *Ancrage : Colonial Marshals, institution gardée au §1.6.*
+- Réveil — FR : « Qui a écrit l'ordre de mission ? Je voudrais le lire. » · EN : "Who wrote the mission order? I'd like to read it."
+- Réaction (Acte I, PDA contre courriel) — FR : « Deux versions. Une seule a l'heure exacte. » · EN : "Two versions. Only one has the exact time."
+- Retour — FR : « Un dossier ne sauve personne. Mais il empêche de recommencer. » · EN : "A file saves no one. But it stops it happening again."
+
+**`origin-04` · Docker de frontière**
+Dix ans sur les quais d'un port de transit : chargeurs, conteneurs scellés, bons de fret signés sans regarder. Un jour, un conteneur est arrivé froid alors qu'il devait être chaud ; il a posé la question, et perdu sa place. *Ancrage : chargeur, fret scellé, priorité de fret (§5.2).*
+- Réveil — FR : « Un chargeur à bord ? Bien. On en aura besoin. » · EN : "A loader aboard? Good. We'll need one."
+- Réaction (Acte I, conteneur givré) — FR : « Givré de l'intérieur, froid coupé. Ce n'est pas de la roche. » · EN : "Frosted inside, cooling off. That's not rock."
+- Retour — FR : « Je regarderai toujours ce qu'il y a dans les caisses. » · EN : "I'll always check what's in the crates."
+
+**`origin-05` · Technicien de terraformation**
+Technicien de maintenance sur un processeur atmosphérique : quarts de nuit, filtres, alarmes de pression. Il connaît l'odeur d'un processeur qui chauffe trop. Son contrat a pris fin quand l'usine est passée en automatique. *Ancrage : processeurs atmosphériques, colonies en terraformation.*
+- Réveil — FR : « Quelle est l'atmosphère de Cocyte ? Respirable, ou presque ? » · EN : "What's Cocyte's atmosphere like? Breathable, or nearly?"
+- Réaction (C2, nid dans la chaleur) — FR : « Ils aiment la chaleur. Le processeur en produit plus que tout le port. » · EN : "They like heat. The processor makes more than the whole port."
+- Retour — FR : « Le processeur tourne. Ils respireront demain aussi. » · EN : "The processor's running. They'll breathe tomorrow too."
+
+**`origin-06` · Enfant d'une colonie évacuée**
+Sa colonie natale a été évacuée quand il avait neuf ans, « pour raison sanitaire ». Il a grandi dans un camp de transit, puis dans des foyers. Il ne sait pas ce qui est arrivé à ceux qui sont restés. *Ancrage : évacuation de colonie, information retenue.*
+- Réveil — FR : « Une colonie en quarantaine ? Combien de personnes encore dedans ? » · EN : "A quarantined colony? How many people still inside?"
+- Réaction (CIN-61, l'appel des colons) — FR : « Lisez tous les noms. Même ceux qui ne répondent pas. » · EN : "Read every name. Even the ones who don't answer."
+- Retour — FR : « Personne n'est venu pour nous. Moi, je suis venu. » · EN : "No one came for us. I came."
+
+**`origin-07` · Mineur sous contrat endetté**
+Né dans une colonie minière, endetté auprès de la compagnie avant même son premier quart. L'engagement chez les Marines efface une partie de la dette. Il connaît les galeries étroites, l'eau qui monte, le bruit d'une poutre qui cède. *Ancrage : contrats de la compagnie, colonies minières.*
+- Réveil — FR : « Combien de temps de service avant que la dette soit effacée ? » · EN : "How long until the debt's cleared?"
+- Réaction (Acte IV, galerie basse) — FR : « Une galerie, ça parle avant de tomber. Écoutez. » · EN : "A tunnel talks before it falls. Listen."
+- Retour — FR : « Ma dette est payée. La leur aussi, j'espère. » · EN : "My debt's paid. Theirs too, I hope."
+
+**`origin-08` · Infirmier de vaisseau-hôpital**
+Quatre ans sur un vaisseau-hôpital civil des routes de frontière : brûlures, décompressions, maladies de colonie. Il a vu un patient se plaindre de la poitrine sans qu'aucun examen ne montre rien ; le vaisseau a ensuite été mis en quarantaine, et il a été réaffecté. *Ancrage : vaisseau-hôpital (lien avec* Clémence*, §17), symptômes non diagnostiqués.*
+- Réveil — FR : « Le blessé du quai, je peux le voir avant qu'on parte ? » · EN : "The injured man from the dock — can I see him before we go?"
+- Réaction (C3, contrôle biologique) — FR : « Douleur à la poitrine, pas de fièvre. Isolez-le. Maintenant. » · EN : "Chest pain, no fever. Isolate him. Now."
+- Retour — FR : « Noor tient le registre. Je tiens la liste de ceux qu'on a sauvés. » · EN : "Noor keeps the register. I keep the list of the ones we saved."
+
+**`origin-09` · Pilote de navette suspendu**
+Pilote de navette de transfert, suspendu pour avoir posé son appareil hors zone afin de récupérer des ouvriers. La compagnie a payé l'amende et l'a licencié. Il s'est engagé pour voler encore ; on l'a mis dans l'infanterie. *Ancrage : dropship, ordre contre vies.*
+- Réveil — FR : « Qui pilote le dropship ? Je voudrais le rencontrer. » · EN : "Who flies the dropship? I'd like to meet them."
+- Réaction (Acte V, fenêtre d'Orlov) — FR : « Trente secondes de plus. Il peut les tenir. » · EN : "Thirty more seconds. He can hold them."
+- Retour — FR : « Un jour, je reprendrai les commandes. Pas aujourd'hui. » · EN : "Someday I'll fly again. Not today."
+
+**`origin-10` · Ancien agent de sécurité de la compagnie**
+Cinq ans dans la sécurité d'un complexe de recherche de la compagnie. Il a escorté des caisses sans manifeste et signé des registres d'accès qu'on lui a ensuite demandé de détruire. Il a démissionné ; l'engagement est arrivé peu après, avec une recommandation qu'il n'a pas demandée. *Ancrage : sécurité de la compagnie, dossiers détruits. Ce n'est pas un agent infiltré : la campagne ne le transforme pas en traître.*
+- Réveil — FR : « Le Tantalus est sous contrat avec qui, exactement ? » · EN : "Who exactly holds the Tantalus contract?"
+- Réaction (message d'Halloran, Acte II) — FR : « Je connais ce ton. C'est celui d'un ordre qu'on ne signera pas. » · EN : "I know that tone. It's an order no one will sign."
+- Retour — FR : « J'ai ouvert les caisses, cette fois. » · EN : "This time, I opened the crates."
+
+**`origin-11` · Transfuge de l'UPP**
+Ancien soldat de l'Union des Peuples Progressistes, passé du côté de l'Alliance après la perte de son unité, abandonnée par son commandement. Accent conservé, loyauté vérifiée trois fois. Certains marines ne lui parlent pas. *Ancrage : rivalité UPP (§1.6, balise UPP de* La balise rouge*).*
+- Réveil — FR : « Mon dossier est arrivé avant moi, je suppose. » · EN : "My file got here before me, I suppose."
+- Réaction (`station-a-sonde`) — FR : « Cette balise appelle un poste qui n'existe plus. Je peux la faire taire. » · EN : "That beacon calls a post that's gone. I can silence it."
+- Retour — FR : « Deux drapeaux. Les mêmes bureaux. » · EN : "Two flags. Same offices."
+
+**`origin-12` · Récupérateur de frontière**
+Équipier d'un remorqueur de récupération : épaves, cargos à la dérive, pièces revendues sans poser de question. L'équipage a abordé une épave de trop ; il est le seul à être ressorti. Il s'est engagé pour avoir des armes la prochaine fois. *Ancrage : récupérateurs (Crucible, Grue), épaves.*
+- Réveil — FR : « On fouille avant de tirer, ou après ? » · EN : "Do we search before we shoot, or after?"
+- Réaction (`station-a-grue`) — FR : « Grue ne ment pas. Elle ne dit juste pas tout. » · EN : "Grue doesn't lie. She just doesn't tell it all."
+- Retour — FR : « Ce qu'on récupère ici, on le garde pour eux. » · EN : "What we salvage here, we keep for them."
+
+**`origin-13` · Opérateur de relais**
+Opérateur d'une station de relais isolée : files de messages, priorités de fret, alertes météo. Il a déjà vu un message de détresse rester en attente derrière une priorité commerciale, et n'a rien dit. *Ancrage : réseau de relais, cœur de l'Acte II.*
+- Réveil — FR : « Le relais de Cocyte, il émet encore ? » · EN : "Is Cocyte's relay still transmitting?"
+- Réaction (CIN-20, « Treize minutes ») — FR : « J'aurais pu être celui qui a appuyé sur « en attente ». » · EN : "I could have been the one who pressed 'hold'."
+- Retour — FR : « Plus aucun message ne reste en attente. Pas sur ma ligne. » · EN : "No message stays on hold. Not on my line."
+
+**`origin-14` · Condamnation commuée en engagement**
+Condamné pour vol de matériel sur un chantier spatial, il a accepté un engagement en échange d'une peine réduite. Il n'en parle pas. Il ouvre les casiers plus vite que ses propriétaires. *Ancrage : programmes d'engagement contre remise de peine, sans référence à un lieu de la franchise.*
+- Réveil — FR : « Mon dossier dit beaucoup de choses. Lisez la dernière ligne. » · EN : "My file says a lot. Read the last line."
+- Réaction (`ship-armory`, inventaire contradictoire) — FR : « Quelqu'un a pris sur le registre, pas dans les râteliers. » · EN : "Someone stole from the ledger, not the racks."
+- Retour — FR : « Ma peine est finie. Je reste quand même. » · EN : "My sentence is over. I'm staying anyway."
+
+**`origin-15` · Mécanicien de blindés**
+Mécanicien de parc dans un dépôt de véhicules de l'armée coloniale : chenilles, tourelles, moteurs qui gèlent. Il connaît les blindés comme le M577 par leurs pannes. *Ancrage : APC, tourelles sentinelles.*
+- Réveil — FR : « Il y a un M577 à bord ? Dans quel état ? » · EN : "There's an M577 aboard? What shape is it in?"
+- Réaction (Acte III, manifeste du M577) — FR : « Trois conteneurs, c'est six places et une suspension cassée. » · EN : "Three containers is six seats and a broken suspension."
+- Retour — FR : « Il a tenu. On lui doit au moins une révision complète. » · EN : "It held. We owe it a full service at least."
+
+**`origin-16` · Biologiste de terrain**
+Biologiste sur des mondes sans vie complexe : lichens, bactéries, carottes de glace. Il s'est engagé quand son programme a été racheté et fermé. Il n'a jamais vu d'organisme comme ceux de Cocyte, et ne prétend pas savoir ce qu'ils sont. *Ancrage : la science de la franchise découvre, elle ne sait pas d'avance.*
+- Réveil — FR : « On a des kits de prélèvement ? Stériles ? » · EN : "Do we have sampling kits? Sterile ones?"
+- Réaction (Acte I, berceau ouvert) — FR : « Ces fixations retiennent quelque chose de vivant. Je ne sais pas quoi. » · EN : "Those restraints hold something alive. I don't know what."
+- Retour — FR : « Inez a raison. On ne conclut pas. On rapporte. » · EN : "Inez is right. We don't conclude. We report."
+
+**`origin-17` · Enfant de Marines**
+Fils ou fille de deux Marines coloniaux, élevé sur des bases et dans des vaisseaux de transport. Il connaît les règles avant de les apprendre ; on attend de lui qu'il les applique mieux que les autres. *Ancrage : tradition des Marines coloniaux.*
+- Réveil — FR : « Relève Echo-9, au rapport. Quels sont les ordres ? » · EN : "Echo-9 relief, reporting. What are the orders?"
+- Réaction (Acte V, conseil de guerre) — FR : « Les ordres disent une chose. Les gens, une autre. Je suis les gens. » · EN : "The orders say one thing. The people say another. I'm with the people."
+- Retour — FR : « Ma mère aurait fait pareil. Je crois. » · EN : "My mother would've done the same. I think."
+
+**`origin-18` · Garde de convoi**
+Garde armé sur des convois terrestres entre colonies et sites miniers : routes longues, embuscades rares, ennui permanent. Il sait où placer les véhicules, et quand ne pas s'arrêter. *Ancrage : convoi, APC (Actes III et V).*
+- Réveil — FR : « Il y a des routes sur Cocyte, ou seulement de la boue ? » · EN : "Are there roads on Cocyte, or just mud?"
+- Réaction (Acte V, pont qui cède) — FR : « On ne laisse pas une remorque. On laisse du poids. Videz-la. » · EN : "We don't leave a trailer. We leave weight. Empty it."
+- Retour — FR : « Tout le convoi est arrivé. C'est rare. » · EN : "The whole convoy made it. That's rare."
+
+**`origin-19` · Survivant d'un abordage**
+Membre d'équipage d'un cargo abordé par des pillards dans une zone sans patrouille. Combat au couteau dans les coursives ; il a survécu caché dans un conduit de ventilation pendant deux jours. Il s'est engagé pour ne plus jamais se cacher. *Ancrage : couloirs étroits, conduits ; la menace était humaine.*
+- Réveil — FR : « Les conduits du Tantalus sont assez grands pour quelqu'un ? » · EN : "Are the Tantalus vents big enough for a person?"
+- Réaction (Interlude, conduits) — FR : « J'ai passé deux jours dans un conduit. Je sais où il ne faut pas être. » · EN : "I spent two days in a vent. I know where not to be."
+- Retour — FR : « Je ne me suis pas caché, cette fois. » · EN : "I didn't hide this time."
+
+**`origin-20` · Dossier caviardé**
+Le dossier d'Echo-9 est presque entièrement noirci. DAVID-8R ne peut en lire que le matricule et la date d'engagement. Le joueur ne choisit pas de passé : il le découvre (§2.4.3). *Ancrage : dossiers de la compagnie, synthétiques qui citent leurs restrictions.*
+- Réveil — FR : « Mon dossier ? Qu'est-ce qu'il dit ? » DAVID-8R : « Très peu de choses lisibles. » · EN : "My file? What does it say?" DAVID-8R: "Very little that's legible."
+- Réaction (S2, CASSIUS) — FR : CASSIUS : « Votre matricule figure dans une liste de transfert. Je n'ai pas l'autorisation de la lire. » · EN: CASSIUS: "Your service number is on a transfer list. I'm not cleared to read it."
+- Retour — FR : « Je ne sais toujours pas d'où je viens. Je sais où je vais. » · EN : "I still don't know where I'm from. I know where I'm going."
+
+#### 2.4.3 Fil secondaire du dossier caviardé — [PROPOSÉ]
+
+Réservé à `origin-20`. Quatre fragments, un par lieu, sans combat propre :
+
+| Fragment | Où | Ce qu'il dit |
+| --- | --- | --- |
+| 1 | DAVID-8R, quête *Mémoire récupérée* | Le matricule d'Echo-9 a été réaffecté deux fois avant le Tantalus. |
+| 2 | CASSIUS, S2 | Le matricule figure sur une liste de transfert de la station Asphodèle, non exécutée. |
+| 3 | Salle des relais d'Asphodèle | Un message retenu, adressé à Echo-9 par un expéditeur inconnu, jamais livré. |
+| 4 | Épilogue | Le joueur choisit l'une de quatre origines (`origin-01`, `-06`, `-10` ou `-13`) comme passé retrouvé, ou garde le dossier fermé. |
+
+**Règle :** le fil ne révèle aucun secret qui changerait l'histoire principale ; Echo-9 n'est pas un synthétique ni un agent de la compagnie. Le passé retrouvé ne débloque que les répliques *Retour* de l'origine choisie.
+
+#### 2.4.4 Production
+
+| Élément | Nombre | Remarque |
+| --- | --- | --- |
+| Fiches d'origine (FR + EN) | 20 | Texte ci-dessus |
+| Répliques | 60 + 4 fragments | Toutes en FR et EN |
+| Portraits d'archive (photo de dossier) | 20 | Génération par IA (§45.1) ; ils montrent un cadre de dossier, pas le visage du joueur |
+| Scènes de reconnaissance | 20 | Une réplique de PNJ chacune, dans une scène existante |
+| Capacités | 19 | À régler et tester ; `origin-20` n'en a pas |
 
 ---
 
@@ -3029,6 +3271,23 @@ Réponses du propriétaire aux questions sur les parties peu détaillées. Chaqu
 | Première archive MIRE fidèle | **Hadley's Hope (*Aliens*)** | Première archive à produire dans l'ordre du §26.10. |
 | Accessibilité | **Tout** | Mode daltonien, taille du texte, sous-titres des sons, remappage complet (§53.8). |
 
+### 45.2 Décisions de cadrage (troisième série, 2026-11-06)
+
+| Sujet | Décision | Conséquence pour la conception |
+| --- | --- | --- |
+| Mort d'un joueur en coop | **Proposition du §45.1 validée** | Relève par un coéquipier pendant un délai ; à défaut, règle de l'équipage (blessure ou mort définitive) ; le joueur reprend un autre membre de l'escouade, ou attend le prochain checkpoint s'il n'en reste aucun. |
+| Coop en ligne | **Passer par le compte Supabase existant** | Le dépôt utilise déjà Supabase pour l'authentification (`src/cloud-auth-v119.js`, SDK `src/vendor/supabase-2.117.2.js`) et la synchronisation de sauvegarde (`src/cloud-sync-v119.js`). Piste à évaluer : les canaux Realtime de Supabase (diffusion et présence) pour relayer les entrées et l'état entre l'hôte et les invités. Latence, quotas du compte et reprise après coupure sont à mesurer avant de s'engager. |
+| Nombre de joueurs | **Taille de l'escouade** | `MAX_SQUAD_SIZE = 4` dans `src/save.js` (membres affectés). Le nombre exact de joueurs (4, ou Echo-9 plus 4) est à confirmer dans le moteur. |
+| Gains de l'invité | **Objets et expérience** | L'invité garde ce qu'il gagne ; seule l'histoire de l'hôte avance. Les objets gagnés passent par la même validation de fin de mission que ceux de l'hôte. |
+| Origines d'Echo-9 | **20 origines, rédigées par Claude** | §2.4 : fiches, capacités proposées, 60 répliques FR/EN, fil du dossier caviardé. À valider. |
+| Registres des missions | **Claude propose, le propriétaire valide** | §0.3 : registres de la campagne principale. Les autres parties suivront. |
+| Sauvegarde en mission | **Terminaux physiques et sauvegarde libre hors combat**, avec les checkpoints | Proposition liée au registre (§0.3) : en Horreur, terminaux seulement ; en Tension et Action, sauvegarde libre hors combat en plus. |
+| Extension vers 25 h | **Les quatre leviers** | Plus de missions principales, plus d'annexes écrites, contrats locaux générés, gestion de la colonie et de la station. Chiffrage à faire avant d'écrire. |
+| Économie | **Crédits et ressources** | Le code a déjà les deux : `credits`, `alloy`, `fuel`, `medical`, `research`, `pathogen` (`src/save.js`). La décision confirme ce modèle. |
+| Difficulté | **Les quatre** | Le code a déjà trois niveaux : `story`, `standard`, `nightmare` (`src/game-runtime.js`), qui couvrent le mode histoire et le mode cauchemar. À ajouter : des réglages séparés (munitions, dégâts, fréquence des alertes). |
+| Fins | **Choix cumulés et choix final** | Les conditions du §5.7 (dossier, colonie, Asphodèle) ouvrent ou ferment les options d'un choix final au conseil de guerre de l'Acte V. Le choix, aujourd'hui attribué à Mara Vega, devient une décision du joueur proposée à Vega. À réécrire au §5.6-5.7. |
+| Après la fin | **Continuer et nouvelle partie +** | Continuer avec la même sauvegarde vers les campagnes annexes (§13). La nouvelle partie + repart du prologue avec une partie des acquis, à définir (la sauvegarde d'origine reste intacte). |
+
 
 ---
 
@@ -3542,6 +3801,7 @@ Les autres pistes (alerte, boss, fins, campagnes annexes) attendent de nouveaux 
 | Répliques réactives (mission ratée, colon mort, retour blessé) | À faire |
 | Scènes collectives du mess | Prêt (§8.2) |
 | Portraits expressifs (3 expressions par membre) | À faire |
+| 20 origines d'Echo-9 : validation, puis capacités et répliques en jeu (§2.4) | Rédigé, à valider |
 
 ### 53.7 Rejouabilité
 
@@ -3549,6 +3809,10 @@ Les autres pistes (alerte, boss, fins, campagnes annexes) attendent de nouveaux 
 | --- | --- |
 | Contrats locaux, missions par planète, archives MIRE | **Fait** en conception (§6, §7, §21-26, §39) |
 | Modificateurs de partie (cauchemar, mort définitive, ressources rares) | À faire |
+| Difficulté à la carte (munitions, dégâts, fréquence des alertes), en plus des niveaux `story`, `standard`, `nightmare` existants (§45.2) | À faire |
+| Terminaux de sauvegarde physiques et sauvegarde libre hors combat selon le registre (§0.3, §45.2) | À faire |
+| Choix final ouvert par les choix cumulés ; réécriture du §5.6-5.7 (§45.2) | À faire |
+| Continuer après la fin et nouvelle partie + (§45.2) | À faire |
 | Score par mission | À faire |
 | Coop locale et en ligne : un joueur remplace un membre IA de l'escouade (§45.1) ; coop locale du convoi déclarée inachevée dans `special-operations-v131.js`, aucun réseau dans le code | À faire |
 
