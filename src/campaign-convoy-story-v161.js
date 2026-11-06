@@ -43,7 +43,7 @@ export function chooseConvoyStoryProtocolV161(value, protocolId, { now = 0 } = {
 const line = (speaker, text) => Object.freeze({ speaker, text });
 const phases = Object.freeze({
   briefing: { title: 'Ramener le blindé', location: 'TANTALUS · ORDRE DE CONVOYAGE', lines: [
-    line('MU/TH/UR', 'Lethe. Le corridor de récupération est coupé. Le M577 doit rejoindre notre périmètre avec son opérateur.'),
+    line('MU/TH/UR', 'Cocyte. Le corridor de récupération est coupé. Le M577 doit rejoindre notre périmètre avec son opérateur.'),
     line('Rook · liaison reconnaissance', 'Deux barrages lourds sont signalés. Je garde la liaison ; l’état du véhicule compte davantage qu’un score.'),
     line('Echo-9', 'Je ramène le blindé. Je confirme le passage au sas avant de déclarer le corridor franchi.')
   ], objective: 'Traverser les trois voies, neutraliser les barrages et confirmer le passage au sas.' },
@@ -51,15 +51,15 @@ const phases = Object.freeze({
     line('Rook · liaison reconnaissance', 'Choisissez le point à examiner en premier au retour : le véhicule ou la route. Je préparerai les questions pour que nous ne perdions aucun relevé.'),
     line('MU/TH/UR', 'Le bilan utilisera les relevés de cette sortie. Une interruption ne sera pas présentée comme une extraction.')
   ], objective: 'Choisir le premier point du compte rendu, puis confirmer le manifeste du M577.' },
-  approach: { title: 'Trois voies, une sortie', location: 'LETHE · GALERIE DU CORRIDOR', lines: [
+  approach: { title: 'Trois voies, une sortie', location: 'COCYTE · GALERIE DU CORRIDOR', lines: [
     line('Rook · liaison reconnaissance', 'Le couloir offre trois voies. Changez de voie pour reprendre un contact dans l’axe ; les impacts ne traversent pas les autres voies.'),
     line('Echo-9', 'Je surveille le contact, la chaleur et la bande. Une rafale sans marge de refroidissement ne nous ouvrira pas la route.')
   ], objective: 'W/S : voie supérieure/inférieure. Espace : accélérer ; F : tourelle ; R : recharger.' },
-  deployment: { title: 'Dernier contrôle avant départ', location: 'LETHE · M577 AU POINT DE DÉPART', lines: [
+  deployment: { title: 'Dernier contrôle avant départ', location: 'COCYTE · M577 AU POINT DE DÉPART', lines: [
     line('MU/TH/UR', 'Blindé de mission affecté. Le carburant, la bande et la réserve sont finis.'),
     line('Rook · liaison reconnaissance', 'Le mode fini rejoint le sas après les barrages. Le mode sans fin reste un choix distinct avant le départ ; son score ne vaut pas un retour.')
   ], objective: 'Le véhicule attend votre commande E ; aucun départ automatique.' },
-  'player-control': { title: 'La liaison reste ouverte', location: 'LETHE · CONTRÔLE DU CONVOI', lines: [
+  'player-control': { title: 'La liaison reste ouverte', location: 'COCYTE · CONTRÔLE DU CONVOI', lines: [
     line('Rook · liaison reconnaissance', 'Je confirme chaque barrage sur la radio. Au périmètre, maintenez E trois secondes : c’est le passage du blindé qui clôt la sortie.'),
     line('Echo-9', 'Reçu. Si nous devons nous replier, le compte rendu gardera ce qui s’est réellement passé.')
   ], objective: 'E : engager le convoi. Garder une réserve de tir pour le barrage final.' }
@@ -146,7 +146,7 @@ export function campaignStoryReturnV161(save) {
   return { id: CONVOY_STORY_ID_V161, provenance: 'tantalus-project-original', canonExact: false,
     operationId: operation.id, title: 'Corridor de feu · compte rendu',
     status: success ? complete ? 'PASSAGE DU BLINDÉ CONFIRMÉ' : 'RÉSULTAT CONSERVÉ · RELEVÉ INCOMPLET' : 'SORTIE CLOSE · RETOUR NON CONFIRMÉ',
-    summary: 'Liaison de retour du convoi de Lethe. Les observations de la sortie restent séparées des objectifs annoncés.',
+    summary: 'Liaison de retour du convoi de Cocyte. Les observations de la sortie restent séparées des objectifs annoncés.',
     protocolLabel: protocol?.label || 'Bilan standard', questions, selectedTopic,
     readingComplete: questions.every(question => question.read),
     canReview: !save.strategy.currentOperation,

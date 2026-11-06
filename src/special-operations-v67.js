@@ -16,7 +16,7 @@ export const SPECIAL_OPERATIONS_V67 = Object.freeze([
   }),
   freezeOperation({
     id: 'hive-world',
-    promisedTitle: 'LV-XENO : LA RUCHE-MONDE', kind: 'mission', implementationStatus: 'missing', playable: false, productionOrder: 15,
+    promisedTitle: 'TR-0 : LA RUCHE-MONDE', kind: 'mission', implementationStatus: 'missing', playable: false, productionOrder: 15,
     promiseSummary: 'Approche orbitale, biomes vivants, organes internes, indice d’alerte et Planet Queen.',
     requiredMechanics: ['living-world', 'organ-biomes', 'planet-alert', 'planet-queen']
   }),

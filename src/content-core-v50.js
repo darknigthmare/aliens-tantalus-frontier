@@ -57,13 +57,13 @@ const worldSeeds = [
   ['LV-223', 'Zeta II Reticuli', 'temples des Ingénieurs et biologie Pathogen', 'screen-canon'],
   ['Fiorina 161', 'Neroidia', 'fonderie carcérale et tunnels', 'screen-canon'],
   ['Sevastopol', 'KG-348', 'station commerciale en désintégration', 'licensed-continuity'],
-  ['Lethe', 'Cerberus', 'Dead Hills, Olduvai, Pharos et Tantalus Base', 'licensed-continuity'],
+  ['Cocyte', 'Tantalus Reach', 'Port-Méridien, relais QZ, complexe C-12 et galeries du dépôt', 'project-canon', 'Lethe'],
   ['LV-895', 'Outer Veil', 'colonies, ruines et installations Pala', 'licensed-continuity'],
   ['Katanga', 'Frontier Line', 'raffinerie orbitale infestée', 'licensed-continuity'],
-  ['Pioneer Station', 'Cerberus', 'station de recherche et réseau de défense', 'licensed-continuity'],
+  ['Station Orphée', 'Tantalus Reach', 'station de recherche et réseau de défense', 'project-canon', 'Pioneer Station'],
   ['Purdan', 'Far Spinward', 'monde colonial et ruines xénobiologiques', 'licensed-continuity'],
   ['Ceto', 'Frontier Line', 'océan, archipels et cité minière', 'licensed-continuity'],
-  ['Freya’s Prospect', 'Frontier Line', 'colonie minière sous glace', 'licensed-continuity'],
+  ['Hiémale', 'Tantalus Reach', 'colonie minière sous glace', 'project-canon', 'Freya’s Prospect'],
   ['Jackson’s Star', 'Outer Systems', 'colonie industrielle pluvieuse', 'screen-canon'],
   ['Renaissance Station', 'Jackson System', 'laboratoires Renaissance et anneaux techniques', 'screen-canon'],
   ['USM Auriga', 'Deep Space', 'vaisseau-laboratoire militaire', 'screen-canon'],
@@ -73,7 +73,7 @@ const worldSeeds = [
   ['New Galveston', 'Frontier Line', 'ville-colonie et infrastructures profondes', 'licensed-continuity'],
   ['New Albion', 'Frontier Line', 'méga-colonie et réseau de métro', 'licensed-continuity'],
   ['LV-1201', 'Outer Rim', 'temples, jungle et laboratoires corporatifs', 'licensed-continuity'],
-  ['BG-386', 'Outer Rim', 'raffinerie, pyramides et jungle', 'licensed-continuity'],
+  ['BG-386', 'Outer Rim', 'Freya’s Prospect, raffinerie, pyramides et jungle', 'licensed-continuity'],
   ['Capua VII', 'Far Spinward', 'monde agricole et marais', 'licensed-continuity'],
   ['Ryushi', 'Chigusa', 'ranchs, désert et ruines', 'licensed-continuity'],
   ['Korari', 'Outer Veil', 'forêt hostile et laboratoires abandonnés', 'licensed-continuity'],
@@ -88,25 +88,54 @@ const worldSeeds = [
 ];
 
 const worldSuffixes = ['Prime', 'Reach', 'Basin', 'Drift', 'Station', 'Colony', 'Depths', 'Frontier'];
+// Owner-validated corrections (2026-11-05) for franchise worlds whose generated
+// biome/atmosphere contradicted the source work. Unconfirmed atmospheres keep
+// their generated value; identifiers and gameplay hashes are untouched.
+const WORLD_ENVIRONMENT_CORRECTIONS = Object.freeze({
+  'world-01-acheron-lv-426': { biomes: ['industrial', 'ruins'], atmosphere: 'storm' },
+  'world-02-lv-223': { biomes: ['jungle', 'ruins'], atmosphere: 'toxic' },
+  'world-03-fiorina-161': { biomes: ['foundry', 'caverns'] },
+  'world-04-sevastopol': { biomes: ['orbital', 'ruins'], atmosphere: 'vacuum' },
+  'world-06-lv-895': { biomes: ['jungle', 'ruins'] },
+  'world-07-katanga': { biomes: ['orbital', 'ruins'], atmosphere: 'vacuum' },
+  'world-09-purdan': { biomes: ['colony', 'ruins'] },
+  'world-12-jackson-s-star': { biomes: ['colony', 'mines'], atmosphere: 'storm' },
+  'world-13-renaissance-station': { biomes: ['orbital', 'laboratory'], atmosphere: 'vacuum' },
+  'world-14-usm-auriga': { biomes: ['shipyard', 'laboratory'], atmosphere: 'vacuum' },
+  'world-15-uscss-nostromo': { biomes: ['orbital', 'reactor'], atmosphere: 'vacuum' },
+  'world-16-sulaco-drift': { biomes: ['orbital', 'shipyard'], atmosphere: 'vacuum' },
+  'world-17-gateway-station': { biomes: ['orbital', 'habitation'], atmosphere: 'breathable' },
+  'world-20-lv-1201': { biomes: ['jungle', 'ruins'] },
+  'world-21-bg-386': { biomes: ['jungle', 'mines'] },
+  'world-23-ryushi': { biomes: ['badlands', 'habitation'] },
+  'world-25-lv-742': { biomes: ['industrial', 'hive'] }
+});
 export const WORLDS = Object.freeze(Array.from({ length: 64 }, (_, index) => {
   const seed = worldSeeds[index % worldSeeds.length];
   const secondPass = index >= worldSeeds.length;
-  const name = secondPass ? `${seed[0]} — ${worldSuffixes[index % worldSuffixes.length]}` : seed[0];
-  const danger = 1 + ((hash(name) >>> 3) % 10);
-  const biomes = [
+  const suffix = worldSuffixes[index % worldSuffixes.length];
+  const name = secondPass ? `${seed[0]} — ${suffix}` : seed[0];
+  // Renamed seeds keep their legacy name for the identifier and gameplay hashes,
+  // so saves, references and generated danger/infestation values stay stable.
+  const legacy = seed[4] || seed[0];
+  const legacyName = secondPass ? `${legacy} — ${suffix}` : legacy;
+  const danger = 1 + ((hash(legacyName) >>> 3) % 10);
+  const id = `world-${String(index + 1).padStart(2, '0')}-${slug(legacyName)}`;
+  const correction = WORLD_ENVIRONMENT_CORRECTIONS[id] || {};
+  const biomes = correction.biomes ? [...correction.biomes] : [
     pick(['industrial', 'colony', 'orbital', 'badlands', 'oceanic', 'jungle', 'cryogenic', 'foundry'], index),
     pick(['hive', 'laboratory', 'mines', 'ruins', 'reactor', 'habitation', 'caverns', 'shipyard'], index, 2)
   ];
   return {
-    id: `world-${String(index + 1).padStart(2, '0')}-${slug(name)}`,
+    id,
     name,
     sector: seed[1],
     description: seed[2],
     provenance: secondPass ? 'frontier-adaptation' : seed[3],
     danger,
     biomes,
-    atmosphere: pick(['breathable', 'toxic', 'thin', 'corrosive', 'vacuum', 'storm'], index),
-    infestation: clamp((hash(`${name}:infestation`) % 101), 0, 100),
+    atmosphere: correction.atmosphere || pick(['breathable', 'toxic', 'thin', 'corrosive', 'vacuum', 'storm'], index),
+    infestation: clamp((hash(`${legacyName}:infestation`) % 101), 0, 100),
     stability: clamp(100 - danger * 7 + (index % 13), 5, 95),
     faction: FACTIONS[index % (FACTIONS.length - 1)].id,
     kit: `kit-${String((index % 27) + 1).padStart(2, '0')}`
