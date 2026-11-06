@@ -100,7 +100,69 @@ Le registre est une donnée de la fiche de mission ; il règle le directeur de t
 | Quêtes `ship-*` | Calme | Hub, sauf `ship-doyle` et `ship-orlov` (Tension : sortie de récupération) et `ship-park` (Horreur : conduits) |
 | Contrats locaux de Port-Méridien | Selon l'objectif | Purge et ronde : Action · escorte, filtres, récupération, chargeur : Tension · recherche de disparus, sceller une ouverture : Horreur |
 
-**Répartition proposée hors quêtes de bord :** 11 Horreur, 11 Tension, 5 Action, 9 Calme (36 missions). Les registres des campagnes annexes (§14-18), des missions de planète (§22-25), des archives MIRE (§26) et des lieux originaux (§39) suivront dans une passe dédiée, une fois cette répartition validée.
+**Répartition proposée hors quêtes de bord :** 11 Horreur, 11 Tension, 5 Action, 9 Calme (36 missions). Les quatre nouvelles missions principales et les huit nouvelles annexes du §5.9 ont leur registre dans les tableaux du §5.9. Les autres parties sont au §0.4.
+
+### 0.4 Registres des autres parties — [PROPOSÉ, à valider]
+
+Abréviations : **H** Horreur · **T** Tension · **A** Action · **C** Calme (définitions au §0.3). Les numéros renvoient aux tableaux des arcs.
+
+**Campagnes annexes (§14-18) :**
+
+| Campagne | Missions d'histoire | Annexes |
+| --- | --- | --- |
+| 1 · La Saison des Reines | Arc 1 : 1.1 H · 1.2 T · 1.3 H · 1.4 A · 1.5 A — Arc 2 : 2.1 T · 2.2 A · 2.3 A · 2.4 A · 2.5 C — Arc 3 : 3.1 H · 3.2 H · 3.3 A · 3.4 A · 3.5 A | `queens-a-navarre` H · `-filets` H · `-phare` T · `-mineurs` H · `-rask` T · `-sorensen` T · `-grue` T · `-ombelle` T · `-echantillon` A |
+| 2 · Directive zéro | Arc 1 : 1.1 H · 1.2 A · 1.3 T · 1.4 A — Interlude : I.1 C · I.2 H — Arc 2 : 2.1 H · 2.2 T · 2.3 A · 2.4 T · 2.5 A — Arc 3 : 3.1 T · 3.2 H · 3.3 T · 3.4 A | `synth-a-grue` T · `-oasis` T · `-david` C · `-cuves` T · `-bishop` C · `-joe` T · `-hyperdyne` T · `-echoa` C |
+| 3 · Les Bâtisseurs | Arc 1 : 1.1 C · 1.2 H · 1.3 H · 1.4 T · 1.5 A — Arc 2 : 2.1 H · 2.2 T · 2.3 A · 2.4 T · 2.5 A — Arc 3 : 3.1 T · 3.2 T · 3.3 T · 3.4 H · 3.5 A | `builders-a-grue` H · `-sonde` T · `-fresque` T · `-viret` T · `-troupeau` T · `-david` C · `-viret2` C |
+| 4 · Fièvre noire | Arc 1 : 1.1 H · 1.2 T · 1.3 H · 1.4 H · 1.5 T — Arc 2 : 2.1 H · 2.2 A · 2.3 T · 2.4 T — Arc 3 : 3.1 T · 3.2 A · 3.3 C · 3.4 A | `fever-a-ecole` T · `-foreuse` H · `-noor` T · `-maternite` T · `-park` T · `-moreau` C · `-szabo` H |
+| 5 · Le banc d'essai | Arc 1 : 1.1 T · 1.2 T · 1.3 H · 1.4 H · 1.5 A — Arc 2 : 2.1 H · 2.2 H · 2.3 T · 2.4 A — Arc 3 : 3.1 T · 3.2 A · 3.3 A · 3.4 C · 3.5 T · 3.6 A | `bench-a-fiches` C · `-enfant` H · `-palimpste` T · `-noor` T · `-capitaine` C · `-bishop` C · `-cages` T |
+
+Les quêtes du Tantalus liées aux campagnes annexes (`ship-q-*`, `ship-s-*`, `ship-b-*`, `ship-f-*`, `ship-e-*`) sont en **C**.
+
+**Missions de planète de la franchise (§22) :**
+
+| Monde | Registres |
+| --- | --- |
+| Acheron / LV-426 | `legacy-acheron-1` H · `-2` H · `-3` T |
+| LV-223 | `legacy-lv223-1` T · `-2` H · `-3` T |
+| Fiorina 161 | `legacy-fury-1` H · `-2` H · `prequel-fury-auriga` T |
+| Sevastopol | `legacy-sevastopol-1` T · `-2` T |
+| Nostromo (route de Zeta) | `legacy-nostromo-1` T |
+| Jackson's Star, Renaissance | `legacy-jackson-1` T · `legacy-renaissance-1` T |
+| USM Auriga | `prequel-auriga-1` T · `-2` H |
+| Épave de même classe que le Sulaco | `legacy-sulaco-1` T · `-2` H |
+| Gateway Station | `active-gateway-1` C · `-2` T |
+| LV-895, Katanga | `legacy-lv895-1` T · `-2` T · `legacy-katanga-1` T |
+| Purdan | `legacy-purdan-1` H · `-2` T |
+| LV-1201 | `prequel-lv1201-1` T · `-2` H |
+| BG-386 | `bg386-1` T · `-2` H |
+| Ryushi | `ryushi-1` T · `-2` H |
+| LV-742 | `lv742-1` A · `-2` T |
+| Lien *Yautja : la Longue Chasse* | `avp-hunt-1` H · `-2` H · `-3` A |
+
+**Mondes sans œuvre et mondes originaux (§23-24) :** Ceto H · Hiémale H · New Galveston H · New Albion H · Capua VII H · Korari T · MIRE-9 T · Echo Basin A · Palimpste T · Pallas Rift T · Sable Meridian T · Nacre-7 A · Khepri Forge T.
+
+**Contrats frontaliers (§25) et missions des lieux inventés (§39) :** registre déduit de l'objectif, comme pour les contrats locaux de Cocyte (§0.3) :
+
+| Registre | Objectifs |
+| --- | --- |
+| A | `defend the colony`, `hold the extraction zone`, `purge a reactor nest`, `destroy a neuro-link relay` |
+| T | `escort a colony convoy`, `recover black-box data`, `restore atmospheric processing`, `board a drifting vessel`, `secure the power loader`, `recover a synthetic`, `track an apex specimen`, `capture a live organism` |
+| H | `seal the hive`, `navigate the vent network`, `escape the quarantine`, `rescue survivors` |
+
+Les missions **D** (défi) du §39 gardent le registre de leur objectif ; seule leur difficulté augmente.
+
+**Archives MIRE (§26) :**
+
+| Archive | Registres |
+| --- | --- |
+| 001 Nostromo (chapitre existant) | H |
+| 002 Sevastopol | M2-1 T · M2-2 T · M2-3 H · M2-4 H |
+| 003 Renaissance | M3-1 T · M3-2 T · M3-3 H · M3-4 H |
+| 004 Acheron | M4-1 C · M4-2 C · M4-3 T · M4-4 H · M4-5 H |
+| 005 Fiorina 161 | M5-1 C · M5-2 T · M5-3 T · M5-4 H |
+| 006 Katanga | M6-1 C · M6-2 T · M6-3 H · M6-4 H |
+
+Les archives originales jouent des civils ou des techniciens : aucune n'est en Action. Les **archives fidèles** (§26.10) prennent le registre de l'œuvre, mission par mission, quand elles seront écrites. Ordre indicatif : *Alien*, *Alien: Isolation*, *Alien: Romulus*, *Alien 3* en H ; *Prometheus* en T ; *Aliens* (Hadley's Hope, première à produire) en T puis A ; *Aliens: Fireteam Elite* et *Alien Resurrection* en A.
 
 ---
 
@@ -611,13 +673,13 @@ Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-m
 **Situation [PROPOSÉ] :** Halloran déclare Port-Méridien **non viable** au titre de la charte, avec effet à l'arrivée d'une équipe de récupération de la compagnie. L'équipe (commandos Weyland-Yutani, déjà au catalogue) vient « sécuriser les actifs » du dépôt et de la colonie. Pendant ce temps, la ruche du dépôt, privée de livraisons, sort vers la surface et coupe la route du complexe au port.
 
 1. **Conseil de guerre** au Tantalus : chaque membre dont la confiance est *solide* propose un avantage (tourelles de Sanaa, blindage de Cal, fenêtre d'Orlov, route de Leila).
-2. **Décision de Mara Vega**, selon les preuves réunies : laisser la compagnie récupérer le dépôt (l'ordre reste ambigu, la consigne de préservation est écrite), ou bloquer l'équipe de récupération et protéger la colonie.
+2. **Choix final du joueur** (décision §45.2) : Echo-9 recommande une ligne à Mara Vega. Les options proposées dépendent des choix cumulés de la campagne (§5.7.1). Vega suit la recommandation si sa confiance envers l'escouade est au moins *operationnel* (`NPC_TRUST_LEVELS_V62`) ; sinon elle tranche elle-même selon le dossier : protéger la colonie avec 5 pièces ou plus, laisser la compagnie récupérer le dépôt en dessous.
 3. **CIN-60 « Dernier départ »** : le M577 quitte le complexe sous la pluie avec les derniers ouvriers.
 4. Nouvelle course APC **[PROPOSÉ]**, à construire à partir du chapitre existant.
 5. Point médian **[PROPOSÉ]** : un pont cède ; lâcher la remorque de fret ou celle des colons en retard.
 6. Poursuite de Reine **[PROPOSÉ]** : la Reine du dépôt, nourrie par les livraisons QZ17.
 7. Arrivée aux murs de Port-Méridien : la course débouche sur C5 (§6.2).
-8. Si Vega a bloqué la compagnie : face-à-face au quai avec l'équipe de récupération. Le joueur ne gagne pas en tirant : il gagne si le dossier est assez solide pour que les commandos reçoivent l'ordre de se retirer (ou si l'ICC est saisie via Asphodèle, §7).
+8. Si la colonie est protégée : face-à-face au quai avec l'équipe de récupération. Le joueur ne gagne pas en tirant : il gagne si le dossier est assez solide pour que les commandos reçoivent l'ordre de se retirer (ou si l'ICC est saisie via Asphodèle, §7).
 
 **CIN-61 « Les portes du port »** : Rook fait l'appel des colons arrivés. Le nombre affiché est la somme réelle des sauvetages de la campagne.
 
@@ -643,13 +705,86 @@ Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-m
 
 | Fin | Condition | Résultat |
 | --- | --- | --- |
-| **« Le relais parle »** | Vega protège la colonie + dossier ≥ 5 pièces + Asphodèle reprise | Le dossier part vers l'ICC et les Marshals coloniaux depuis Asphodèle. La clause de non-viabilité tombe si la colonie a atteint le palier *Autonome*. Port-Méridien garde sa charte. |
-| **« Le fret d'abord »** | Vega laisse la compagnie récupérer le dépôt | La colonie passe sous administration de la compagnie. Inez démissionne. Le dossier est classé « incident technique ». |
-| **« Les vivants, sans preuve »** | Vega protège la colonie + dossier < 5 pièces | La colonie tient cette nuit-là, mais la clause s'applique. Vega est relevée à l'arrivée. |
+| **« Le relais parle »** | Option *Transmettre* choisie (ou décision de Vega : protéger, avec dossier ≥ 5 pièces et Asphodèle reprise) | Le dossier part vers l'ICC et les Marshals coloniaux depuis Asphodèle. La clause de non-viabilité tombe si la colonie a atteint le palier *Autonome*. Port-Méridien garde sa charte. |
+| **« Le fret d'abord »** | Option *Céder le dépôt* choisie, ou décision de Vega avec un dossier de moins de 5 pièces | La colonie passe sous administration de la compagnie. Inez démissionne. Le dossier est classé « incident technique ». |
+| **« Les vivants, sans preuve »** | Option *Tenir la colonie* choisie | La colonie tient cette nuit-là, mais la clause s'applique. Vega est relevée à l'arrivée. |
+
+#### 5.7.1 Choix final : options ouvertes par les choix cumulés — [PROPOSÉ]
+
+| Option recommandée par Echo-9 | Toujours proposée ? | Condition pour qu'elle apparaisse | Fin |
+| --- | --- | --- | --- |
+| **Transmettre** : protéger la colonie et envoyer le dossier à l'ICC et aux Marshals coloniaux | Non | Asphodèle reprise (S4) **et** salle des relais ouverte (*Relais en dérive* ×3) **et** dossier ≥ 5 pièces | « Le relais parle » |
+| **Tenir la colonie** : bloquer l'équipe de récupération sans canal sûr | Oui | — | « Les vivants, sans preuve » |
+| **Céder le dépôt** : laisser la compagnie récupérer le dépôt et négocier l'évacuation | Oui | — | « Le fret d'abord » |
+
+**Ce qui ferme ou change une option :**
+
+| Choix cumulé | Effet sur le choix final |
+| --- | --- |
+| Conteneurs ramenés à l'Acte III (`story-m577-manifest`) | Chaque conteneur à bord est une pièce que la compagnie réclame : avec 2 ou 3 conteneurs, *Céder le dépôt* est présenté par Halloran comme « restitution » et ne coûte aucun moral à l'équipage. |
+| Créature capturée à l'Interlude (`story-quarantine-outcome` = `captured`) | Halloran l'exige en plus du dépôt ; *Tenir la colonie* déclenche une tentative de récupération à bord du Tantalus pendant C5. |
+| Palier de la colonie (§6.3) | Avec *Autonome*, la clause de non-viabilité tombe dans « Le relais parle ». En dessous, la charte est seulement suspendue en attente d'enquête. |
+| Choix CASSIUS (S2-S4) | CASSIUS conservé : il confirme les ordres de livraison devant Halloran (réplique au conseil). Effacé : la pièce *Ordres de livraison archivés par CASSIUS* n'est acquise que si elle a été récupérée en S2. |
+| Confiance de Vega | En dessous de *operationnel*, la recommandation n'est pas suivie : Vega décide (§5.6, étape 2). |
+| Origine `origin-03` ou `origin-10` | Réplique supplémentaire au conseil de guerre, sans effet sur les conditions. |
+
+La fin affichée et le nombre de colons arrivés (CIN-61) viennent toujours de l'état réel de la sauvegarde ; aucune option n'est accordée par une cinématique.
 
 ### 5.8 Épilogue — « Ce que le retour devra raconter » — [PROPOSÉ]
 
 Jouable, sans combat. Visite du Tantalus, de Port-Méridien et, si elle est reprise, d'Asphodèle. Chaque personnage a une réplique finale selon la fin. Le Tantalus se prépare à repartir : la baie cryo rouvre ses caissons. Sur le casier de l'Echo-8 : `RETOUR CONFIRMÉ` ou `POSTE LIBÉRÉ` (§7.4).
+
+### 5.9 Durée de la campagne principale et extension vers 25 h — [PROPOSÉ]
+
+**Décision (§45.1, §45.2) :** 25 h et plus, avec les quatre leviers.
+
+**Méthode d'estimation.** Les missions de la campagne principale n'ont pas de durée écrite (§0.1 dit seulement « courte », « moyenne », « longue »). Les campagnes annexes en ont : en moyenne **25 min** pour une intro (15 missions chiffrées), **35 min** pour une principale (51), **47 min** pour une finale (5) et **20 à 30 min** pour les missions courtes chiffrées des arcs. Ces moyennes sont appliquées ci-dessous. Ce sont des ordres de grandeur à confirmer par les tests de jeu (§53.11), pas des mesures.
+
+**Contenu actuel, estimé :**
+
+| Bloc | Missions | Durée unitaire | Total |
+| --- | --- | --- | --- |
+| Intros (P-1, P-2, P-3, *La doyenne*, *Six heures de silence*) | 5 | 25 min | ≈ 2 h 05 |
+| Principales (Actes I à IV, Acte III en deux missions, Interlude, C1-C5, S1-S4) | 15 | 35 min | ≈ 8 h 45 |
+| Finale (Acte V) | 1 | 47 min | ≈ 0 h 47 |
+| Annexes de la colonie et de la station | 14 | 25 min | ≈ 5 h 50 |
+| **Total estimé** | 35 | — | **≈ 17 h 30** |
+
+Ne sont pas comptés : les 22 quêtes du Tantalus (§8), dont la durée dépend du hub ; l'épilogue ; les contrats locaux ; la gestion de la colonie. **Écart à combler : ≈ 7 h 30.**
+
+**Plan d'extension par levier :**
+
+| Levier | Ajout proposé | Estimation |
+| --- | --- | --- |
+| 1. Missions principales | 4 nouvelles missions (tableau ci-dessous) | 4 × 35 min ≈ 2 h 20 |
+| 2. Annexes écrites | 8 nouvelles annexes (tableau ci-dessous) | 8 × 25 min ≈ 3 h 20 |
+| 3. Contrats locaux générés | Un contrat proposé à chaque cycle de colonie ; on compte qu'un joueur en fait environ 6 sur la campagne | 6 × 20 min ≈ 2 h |
+| 4. Gestion de la colonie et de la station | Un cycle par retour au hub (§45.1), soit environ 25 cycles de quelques minutes : chantiers, affectations, événements | ≈ 2 h |
+| **Total ajouté** | — | **≈ 9 h 40**, soit **≈ 27 h** au total |
+
+**Nouvelles missions principales :**
+
+| ID | Titre | Placement | Résumé | Registre (§0.3) | Ancrage Alien |
+| --- | --- | --- | --- | --- | --- |
+| `story-quai-nord` | **Le quai nord** | Après l'Acte II | Retourner au quai nord de QZ-18, d'où la navette est partie à 18:54 sans les blessés. Chercher le personnel du message libéré : survivants retranchés ou traces de leur sort. Ramène des colons à Port-Méridien ; n'ajoute pas de pièce au dossier (qui reste à 7). | Horreur | Message de détresse arrivé trop tard, ceux qu'on a laissés. |
+| `story-route-depot` | **La route du dépôt** | Avant l'Acte IV | Suivre en surface la destination absente du bon de QZ-17 jusqu'aux abords du dépôt : pistes de chariot, clôture, ventilations chaudes. La mission s'arrête au signal perdu qui ouvre CIN-50 ; la capture reste hors champ. | Tension | Installation de la compagnie qui n'apparaît sur aucune carte. |
+| `story-moyeu` | **Le moyeu** | Entre S3 et S4 | Atteindre le cœur de CASSIUS au centre de la station par les rayons, en gravité réduite, pour préparer la remise en pression. | Horreur | Station tournante, IA de gestion, conduits. |
+| `story-recuperation` | **L'atterrissage** | Début de l'Acte V, avant le conseil de guerre | Observer l'atterrissage de l'équipe de récupération de la compagnie au dépôt sans être vu : effectifs, matériel, ordre écrit. Ce que l'escouade rapporte s'ajoute aux avantages du conseil de guerre. Aucun combat contre les commandos n'est requis. | Tension | Équipe de récupération de la compagnie, actifs biologiques. |
+
+**Nouvelles annexes :**
+
+| ID | Titre | Donneur | Résumé | Registre |
+| --- | --- | --- | --- | --- |
+| `colony-a-ecole` | **La salle de classe** | Adèle Sarrazin | Rouvrir l'école du port après C1 ; trouver un local sûr et ramener le matériel d'un bâtiment évacué. | Tension |
+| `colony-a-pluie` | **Les citernes** | Lucia Ferro | L'eau de pluie stockée a un goût d'acide : suivre les gouttières jusqu'à une citerne percée par le haut. | Horreur |
+| `colony-a-registre` | **Le registre du port** | Tomas Wren | Récupérer le registre des arrivées de navettes dans la capitainerie, ouverte aux intempéries. | Tension |
+| `colony-a-ferme` | **La dernière ferme** | Leila Sørensen | Après *La balise du hameau*, ramener une famille qui refuse de quitter ses serres. | Tension |
+| `station-a-kessler` | **Le casier de Kessler** | ECHO-A | Après S3, retrouver les effets personnels du sergent Kessler dans les quartiers d'Echo-8 à bord du dropship resté au sas. | Calme |
+| `station-a-ivarsson` | **L'administratrice** | Asha Mbaye | Après *Les journaux de l'équipage*, fouiller le bureau de Solène Ivarsson, dont le journal s'arrête avec ceux des survivants (§7.4) : les autorisations qu'elle a signées et celles qu'on lui a imposées. N'ajoute pas de pièce au dossier. | Tension |
+| `station-a-anneau` | **La nuit de l'anneau** | Grue | Si le pacte de l'anneau est conclu : défendre le marché pendant une coupure d'énergie. | Action |
+| `station-a-sas` | **Le sas 7** | Idris Kwan | Un sas extérieur se cycle seul la nuit : trouver ce qui l'actionne. | Horreur |
+
+Les nouvelles missions ne créent aucun identifiant existant et ne changent pas les 7 pièces du dossier (§5.7). Leur registre complète la répartition du §0.3.
 
 ---
 
@@ -3277,15 +3412,15 @@ Réponses du propriétaire aux questions sur les parties peu détaillées. Chaqu
 | --- | --- | --- |
 | Mort d'un joueur en coop | **Proposition du §45.1 validée** | Relève par un coéquipier pendant un délai ; à défaut, règle de l'équipage (blessure ou mort définitive) ; le joueur reprend un autre membre de l'escouade, ou attend le prochain checkpoint s'il n'en reste aucun. |
 | Coop en ligne | **Passer par le compte Supabase existant** | Le dépôt utilise déjà Supabase pour l'authentification (`src/cloud-auth-v119.js`, SDK `src/vendor/supabase-2.117.2.js`) et la synchronisation de sauvegarde (`src/cloud-sync-v119.js`). Piste à évaluer : les canaux Realtime de Supabase (diffusion et présence) pour relayer les entrées et l'état entre l'hôte et les invités. Latence, quotas du compte et reprise après coupure sont à mesurer avant de s'engager. |
-| Nombre de joueurs | **Taille de l'escouade** | `MAX_SQUAD_SIZE = 4` dans `src/save.js` (membres affectés). Le nombre exact de joueurs (4, ou Echo-9 plus 4) est à confirmer dans le moteur. |
+| Nombre de joueurs | **Taille de l'escouade** | Vérifié dans le moteur : `configureMissionSquad` (`src/game-v52-runtime.js`) déploie Echo-9 (`player-echo9`) et jusqu'à **4 alliés** (`MAX_SQUAD_SIZE = 4`, `src/save.js`). La coop va donc jusqu'à **5 joueurs** : l'hôte et 4 invités. Le moteur a déjà une coop locale à deux (« J2 », `coopEnabled`) où le second joueur prend la place d'un allié existant au lieu d'en créer un ; plusieurs chapitres spéciaux la désactivent (`coopEnabled = false`, par exemple `apc-convoy-runtime-v121.js`, `black-cocoon-runtime-v121.js`). C'est la base à étendre. |
 | Gains de l'invité | **Objets et expérience** | L'invité garde ce qu'il gagne ; seule l'histoire de l'hôte avance. Les objets gagnés passent par la même validation de fin de mission que ceux de l'hôte. |
 | Origines d'Echo-9 | **20 origines, rédigées par Claude** | §2.4 : fiches, capacités proposées, 60 répliques FR/EN, fil du dossier caviardé. À valider. |
-| Registres des missions | **Claude propose, le propriétaire valide** | §0.3 : registres de la campagne principale. Les autres parties suivront. |
+| Registres des missions | **Claude propose, le propriétaire valide** | §0.3 (campagne principale) et §0.4 (campagnes annexes, planètes, archives MIRE, lieux inventés). |
 | Sauvegarde en mission | **Terminaux physiques et sauvegarde libre hors combat**, avec les checkpoints | Proposition liée au registre (§0.3) : en Horreur, terminaux seulement ; en Tension et Action, sauvegarde libre hors combat en plus. |
-| Extension vers 25 h | **Les quatre leviers** | Plus de missions principales, plus d'annexes écrites, contrats locaux générés, gestion de la colonie et de la station. Chiffrage à faire avant d'écrire. |
+| Extension vers 25 h | **Les quatre leviers** | Chiffré au §5.9 : ≈ 17 h 30 estimées aujourd'hui, ≈ 27 h avec 4 missions principales, 8 annexes, contrats locaux et cycles de gestion. |
 | Économie | **Crédits et ressources** | Le code a déjà les deux : `credits`, `alloy`, `fuel`, `medical`, `research`, `pathogen` (`src/save.js`). La décision confirme ce modèle. |
 | Difficulté | **Les quatre** | Le code a déjà trois niveaux : `story`, `standard`, `nightmare` (`src/game-runtime.js`), qui couvrent le mode histoire et le mode cauchemar. À ajouter : des réglages séparés (munitions, dégâts, fréquence des alertes). |
-| Fins | **Choix cumulés et choix final** | Les conditions du §5.7 (dossier, colonie, Asphodèle) ouvrent ou ferment les options d'un choix final au conseil de guerre de l'Acte V. Le choix, aujourd'hui attribué à Mara Vega, devient une décision du joueur proposée à Vega. À réécrire au §5.6-5.7. |
+| Fins | **Choix cumulés et choix final** | Réécrit : §5.6 (étape 2) et §5.7.1. Echo-9 recommande une option à Vega ; les options ouvertes dépendent des choix cumulés ; Vega suit si sa confiance est au moins *operationnel*. |
 | Après la fin | **Continuer et nouvelle partie +** | Continuer avec la même sauvegarde vers les campagnes annexes (§13). La nouvelle partie + repart du prologue avec une partie des acquis, à définir (la sauvegarde d'origine reste intacte). |
 
 
@@ -3811,7 +3946,7 @@ Les autres pistes (alerte, boss, fins, campagnes annexes) attendent de nouveaux 
 | Modificateurs de partie (cauchemar, mort définitive, ressources rares) | À faire |
 | Difficulté à la carte (munitions, dégâts, fréquence des alertes), en plus des niveaux `story`, `standard`, `nightmare` existants (§45.2) | À faire |
 | Terminaux de sauvegarde physiques et sauvegarde libre hors combat selon le registre (§0.3, §45.2) | À faire |
-| Choix final ouvert par les choix cumulés ; réécriture du §5.6-5.7 (§45.2) | À faire |
+| Choix final ouvert par les choix cumulés (§5.7.1) : écrit, à implémenter | À faire |
 | Continuer après la fin et nouvelle partie + (§45.2) | À faire |
 | Score par mission | À faire |
 | Coop locale et en ligne : un joueur remplace un membre IA de l'escouade (§45.1) ; coop locale du convoi déclarée inachevée dans `special-operations-v131.js`, aucun réseau dans le code | À faire |
