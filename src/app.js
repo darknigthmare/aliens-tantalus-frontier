@@ -157,6 +157,7 @@ import { resolvePlayerAppearancePreviewWeaponV127 } from './player-appearance-lo
 import { createUserReferenceEffectsGalleryV95 } from './user-reference-effects-v95.js';
 import { createUserReferenceLibraryV100 } from './user-reference-library-v100.js';
 import { createUserSpecimenBenchV106 } from './user-specimen-bench-v106.js';
+import { tV185, initLanguageV185, setLanguageV185, currentLanguageV185, STRINGS_V185, LANGUAGE_EVENT_V185 } from './i18n-v185.js';
 
 const byId = (id) => document.getElementById(id);
 const all = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -814,7 +815,7 @@ function showView(name) {
   document.documentElement.classList.toggle('mission-mode', name === 'play');
   document.documentElement.classList.toggle('bioforge-mode', name === 'bioforge');
   byId('breadcrumb').textContent = VIEW_META[name][0];
-  byId('view-title').textContent = VIEW_META[name][1];
+  byId('view-title').textContent = tV185(`view.${name}`, VIEW_META[name][1]);
   document.querySelector('.rail').classList.remove('open');
   if (name === 'hub') {
     hubEngine.setReducedMotion(saveSystem.data.settings.reducedMotion);
@@ -1173,7 +1174,7 @@ function showTitleScreen() {
   forgePlaytest = null;
   standaloneContext = null;
   document.documentElement.classList.remove('hub-mode', 'mission-mode', 'bioforge-mode', 'forge-mode');
-  byId('return-title').textContent = 'MENU PRINCIPAL';
+  byId('return-title').textContent = tV185('top.menu', 'MENU PRINCIPAL');
   byId('retreat-mission').textContent = 'BATTRE EN RETRAITE';
   titleScreen.show();
   audio.setScene('menu');
@@ -2007,7 +2008,7 @@ function renderProfiles() {
   byId('profile-list').innerHTML = saveSystem.listProfiles().map((profile) => `<article class="profile-row"><div><strong>PROFIL ${profile.profile}${profile.profile === saveSystem.profile && !recovery ? ' · ACTIF' : ''}</strong><span>${profile.empty ? 'Emplacement vide' : escapeHtml(profile.release || 'Sauvegarde locale')}</span></div><div class="button-row"><button class="button compact" data-profile="${profile.profile}">${profile.empty ? 'CRÉER' : profile.status === 'ready' ? 'CHARGER' : 'RÉESSAYER'}</button>${profile.status === 'corrupt' ? `<button class="button compact" data-export-profile="${profile.profile}">EXPORTER LE FICHIER BRUT</button>` : ''}</div></article>`).join('');
   all('.view[data-panel="settings"] [id^="setting-"]').forEach((control) => { control.disabled = Boolean(recovery); });
   byId('quick-save').disabled = Boolean(recovery);
-  byId('save-export').textContent = recovery ? 'EXPORTER LE FICHIER ORIGINAL' : 'EXPORTER LA SAUVEGARDE';
+  byId('save-export').textContent = recovery ? 'EXPORTER LE FICHIER ORIGINAL' : tV185('settings.export', 'EXPORTER LA SAUVEGARDE');
   byId('setting-difficulty').value = saveSystem.data.settings.difficulty;
   byId('setting-coop').checked = saveSystem.data.settings.coop;
   byId('setting-motion').checked = saveSystem.data.settings.reducedMotion;
@@ -4094,7 +4095,35 @@ function bind() {
   bindDelegatedActions();
 }
 
+// V185: the language preference is read before any screen is shown. Switching
+// language retranslates marked markup, the current view title when it is the
+// standard one, and the settings panel.
+// A label is retranslated only while it still shows its standard text in one
+// of the two languages; contextual labels (Forge, debrief) are left alone.
+function retranslateStandardLabelV185(element, key, french) {
+  if (!element) return;
+  const known = [french, ...Object.values(STRINGS_V185).map(strings => strings[key]).filter(Boolean)];
+  if (known.includes(element.textContent)) element.textContent = tV185(key, french);
+}
+
+function setupLanguageV185() {
+  initLanguageV185();
+  retranslateStandardLabelV185(byId('return-title'), 'top.menu', 'MENU PRINCIPAL');
+  const select = byId('language-select-v185');
+  if (select) {
+    select.value = currentLanguageV185();
+    select.addEventListener('change', () => setLanguageV185(select.value));
+  }
+  document.addEventListener(LANGUAGE_EVENT_V185, () => {
+    if (select) select.value = currentLanguageV185();
+    if (VIEW_META[activeView]) retranslateStandardLabelV185(byId('view-title'), `view.${activeView}`, VIEW_META[activeView][1]);
+    retranslateStandardLabelV185(byId('return-title'), 'top.menu', 'MENU PRINCIPAL');
+    renderProfiles();
+  });
+}
+
 async function boot() {
+  setupLanguageV185();
   const validation = validateContent();
   if (!validation.ok) throw new Error(`Contrat de contenu invalide : ${validation.failures.join(', ')}`);
   setupEditor();

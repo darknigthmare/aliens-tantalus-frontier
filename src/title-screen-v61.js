@@ -1,4 +1,5 @@
 import { resolveTitleMenuContextV89, titleMenuOwnerV89, sameTitleMenuOwnerV89 } from './title-menu-context-v89.js';
+import { tV185 } from './i18n-v185.js';
 
 export const TITLE_SCREEN_SCHEMA = 61;
 
@@ -220,7 +221,7 @@ export class TitleScreenController {
       this.confirmSave = this.getSave();
       this.confirmRecovery = this.getRecoveryStatus();
       this.newButton.dataset.confirm = 'true';
-      this.newButton.textContent = 'CONFIRMER LA NOUVELLE PARTIE';
+      this.newButton.textContent = tV185('title.newConfirm', 'CONFIRMER LA NOUVELLE PARTIE');
       this.liveStatus.textContent = 'Confirmez pour remplacer la partie du profil ' + (this.confirmRecovery?.profile || this.confirmSave?.profile || 1) + '.';
       clearTimeout(this.confirmTimer);
       this.confirmTimer = setTimeout(() => this.cancelNewTimelineConfirmation(), 5000);
@@ -249,7 +250,7 @@ export class TitleScreenController {
     this.confirmRecovery = null;
     if (!this.newButton) return;
     this.newButton.dataset.confirm = 'false';
-    this.newButton.textContent = 'NOUVELLE PARTIE';
+    this.newButton.textContent = tV185('title.new', 'NOUVELLE PARTIE');
   }
 
   handleKeydown(event) {

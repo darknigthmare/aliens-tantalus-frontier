@@ -3,11 +3,12 @@
  * Adds mission-feedback effects (checkpoint, locked, kill, pickup, victory) with
  * synth fallbacks, and view music scenes (travel, briefing, archives) that fall
  * back to the legacy menu music until a file exists. Continues the V183 chain:
- * each receipt names the exact predecessor bytes it replaces. This module
- * imports no other audit, so it can never admit a resolver's own bytes. */
+ * each receipt names the exact predecessor bytes it replaces. It imports only
+ * its V185 successor, which imports no audit and cannot admit a resolver's bytes. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedI18nDigestV185 } from './audit-i18n-v185.mjs';
 
 const readRepository = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -46,18 +47,19 @@ export const AUDIO_SLOTS_SUCCESSORS_V184 = freeze({
 
 export function reviewedAudioSlotsDigestV184(path, endpoint) {
   const receipt = AUDIO_SLOTS_SUCCESSORS_V184[path];
-  if (!receipt) return endpoint;
+  // V185 (audit-i18n-v185.mjs) continues this chain.
+  if (!receipt) return reviewedI18nDigestV185(path, endpoint);
   assert.equal(endpoint, receipt.previousSha256, 'Broken V183-to-V184 source chain: ' + path);
   assert.ok(validHash(receipt.currentSha256), 'Invalid V184 source digest: ' + path);
   assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A V184 successor must identify changed bytes: ' + path);
-  return receipt.currentSha256;
+  return reviewedI18nDigestV185(path, receipt.currentSha256);
 }
 
 export function verifyAudioSlotsV184(readSource = readRepository) {
   for (const [path, receipt] of Object.entries(AUDIO_SLOTS_SUCCESSORS_V184)) {
     assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
     assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
-    assert.equal(sha(readSource(path)), receipt.currentSha256, 'Unreviewed V184 source bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedI18nDigestV185(path, receipt.currentSha256), 'Unreviewed V184 source bytes: ' + path);
   }
   return Object.freeze({ successors: Object.keys(AUDIO_SLOTS_SUCCESSORS_V184).length });
 }
