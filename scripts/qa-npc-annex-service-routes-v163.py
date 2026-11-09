@@ -22,11 +22,23 @@ parser.add_argument('--route', choices=['all', 'maksim-arrival', 'inez-bioforge'
 parser.add_argument('--comparison-stage', choices=['before', 'after'], default='after')
 parser.add_argument('--fixture', type=Path, help='Optional disclosed native Save reused byte-for-byte for before/after.')
 parser.add_argument('--return-cpu-throttle', type=float, default=1, help='Optional CDP CPU slowdown,1..8, only for the native occupied-return phase.')
+parser.add_argument('--dependency-resource-profile', choices=['standard', 'ci-slow4'], default='standard',
+                    help='Only the Asha/Jun prerequisite wall resource budget: standard900s; ci-slow4=360 native seconds x4 wall. Native360s and stall45s guards stay unchanged.')
 args = parser.parse_args()
 if not 1 <= args.return_cpu_throttle <= 8:
     parser.error('--return-cpu-throttle must be between1 and8.')
 if args.return_cpu_throttle > 1 and args.comparison_stage != 'after':
     parser.error('--return-cpu-throttle applies only to --comparison-stage after.')
+dependency_resource_profile = {
+    'name': args.dependency_resource_profile,
+    'wallBudgetMs': {'standard': 900000, 'ci-slow4': 360 * 4 * 1000}[args.dependency_resource_profile],
+    'simBudgetSeconds': 360, 'stallBudgetMs': 45000,
+    'scope': 'asha-jun-native-return-prerequisite-only',
+    'appliesToSelectedRoute': args.comparison_stage == 'after' and args.route in ['all', 'asha-refuge'],
+    'unchangedGuards': {'playerDoorWallMs': 45000, 'occupationSimSeconds': 50,
+                        'occupationWallMs': 360000, 'collectionSimSeconds': 150,
+                        'collectionWallMs': 480000},
+    'gameplayClockSpeedOrSchedulerChanged': False}
 repo = Path(__file__).resolve().parents[1]
 output = args.output.resolve()
 if output == repo or repo in output.parents:
@@ -60,15 +72,17 @@ ROUTES = [
          returnAction='[data-strategy-action="colony-relief"]')]
 report = {'status': 'running', 'checks': [], 'captures': [], 'pageErrors': [], 'requestFailures': [], 'httpErrors': [],
           'comparisonStage': args.comparison_stage, 'routes': [],
+          'dependencyResourceProfile': dependency_resource_profile,
           'method': 'Disclosed05h30 native Save imports; actual5h salvage or12h research watch,3h reconnaissance or4h colony-relief return; keyboard/E, physical courtesy, exact leaf reload and occupied arrival. Evaluations only observe.',
           'limitations': ['Automated native controls, not human participants.',
                          'Five native parent/annex watches; Mara uses the real west bulkhead. Asha separately observes the existing Jun-sanitary interdeck return before testing her own occupied arrival.',
-                         'Jun prerequisite:900s wall/360s native simulation/45s without physical progress, justified by the observed316.033s return; each player door passage keeps45s. Asha occupation retains50s simulation/360s wall/45s stall and final collection150s simulation/480s wall/45s stall.',
+                         f'Jun prerequisite resource profile {args.dependency_resource_profile}: {dependency_resource_profile["wallBudgetMs"] / 1000:g}s wall/360s native simulation/45s without physical progress. The default standard900s is retained; explicit ci-slow4 budgets360 native seconds x4 wall only. Each player door passage keeps45s. Asha occupation retains50s simulation/360s wall/45s stall and final collection150s simulation/480s wall/45s stall.',
                          'Asha fixture adds exactly20 research to pay the existing vehicle-doctrine12h command in one mutation; other fixture resources remain defaults.',
                          'Native strategy elapsed hours are not observed walking hours.',
                          'Covered source/destination chart changes are not walking distance or back-facing art.',
                          'Other native timetable handoffs and courtesy lifecycle/context handoffs remain explicitly observedTravel:false.',
                          'No new art, canonical motion or artistic1:1 approval. Before-stage images are comparisons, not V163 feature checks.']}
+print('DEPENDENCY_RESOURCE_PROFILE ' + json.dumps(dependency_resource_profile, separators=(',', ':')), flush=True)
 
 
 
@@ -177,7 +191,10 @@ def walk_to(page, config, x, precise=False):
 
 NATIVE_ASHA_DEPENDENCY_V163 = '''function createAshaDependencyV163(opts,started) {
   const dependencyId='jun-sanitary',crewId='crew-11-jun-park';
-  const wallBudgetMs=900000,simBudgetSeconds=360,stallBudgetMs=45000;
+  const resourceProfile=Object.hasOwn(opts,'dependencyResourceProfile')?opts.dependencyResourceProfile:'standard';
+  if(!['standard','ci-slow4'].includes(resourceProfile))throw new RangeError('Unknown Asha dependency resource profile');
+  const simBudgetSeconds=360,stallBudgetMs=45000,
+    wallBudgetMs=resourceProfile==='ci-slow4'?simBudgetSeconds*4*1000:900000;
   let first=null,lastPose=null,lastOwner=null,lastProgressAt=started,simSeconds=0,seen=false;
   const originMatches=o=>o&&o.crewId===crewId&&o.deck===3&&o.roomId==='life-support'
     &&Math.abs(o.x-3158)<.25&&o.y===532&&o.source==='legacy-physical-owner';
@@ -251,7 +268,8 @@ NATIVE_ASHA_DEPENDENCY_V163 = '''function createAshaDependencyV163(opts,started)
     }
     const timeoutAfter=check(now);return timeoutAfter?failed(timeoutAfter):{status:'waiting',reason:'jun-physical-return-in-progress'};
   }
-  const snapshot=now=>({dependencyId,simSeconds,wallMs:now-started,lastProgressAgeMs:now-lastProgressAt,
+  const snapshot=now=>({dependencyId,resourceProfile,resourceScope:'asha-jun-native-return-prerequisite-only',
+    simSeconds,wallMs:now-started,lastProgressAgeMs:now-lastProgressAt,
     simBudgetSeconds,wallBudgetMs,stallBudgetMs,observedOrigin:first?.dependency?.origin||null});
   return{dependencyId,observe,check,snapshot};
 }'''
@@ -311,8 +329,9 @@ def arm_asha_return_dependency(page, config):
       const h=__ATF_HUB__,full=h.getSnapshot().npcAnnexRoutesV163.routes[opts.id],focused=readEntry(h);
       if(JSON.stringify(full)!==JSON.stringify(focused))
         throw new Error('The focused native service entry differs from the complete hub snapshot');
+      const progress=createProgress(opts,started);
       window.__ATF_ASHA_JUN_DEPENDENCY_V163__=new Promise(resolve=>{
-        const progress=createProgress(opts,started),samples=[];
+        const samples=[];
         let done=false,raf,latest=null,origin=null,lastSampleAt=-Infinity,frames=0;
         function finish(status,reason){if(done)return;done=true;clearInterval(timer);cancelAnimationFrame(raf);
           resolve({status,reason,frames,...progress.snapshot(performance.now()),origin,latest,samples});}
@@ -332,7 +351,11 @@ def arm_asha_return_dependency(page, config):
         }
         const timer=setInterval(()=>{const failure=progress.check(performance.now());if(failure)finish('failed',failure);},1000);
         raf=requestAnimationFrame(frame);
-      });return{routeId:opts.id,mode:'same-exported-native-component',completeEntryMatchesSnapshot:true};}''', config)
+      });const limits=progress.snapshot(performance.now());
+      return{routeId:opts.id,mode:'same-exported-native-component',completeEntryMatchesSnapshot:true,
+        resourceProfile:limits.resourceProfile,resourceScope:limits.resourceScope,wallBudgetMs:limits.wallBudgetMs,
+        simBudgetSeconds:limits.simBudgetSeconds,stallBudgetMs:limits.stallBudgetMs};}''',
+        {**config, 'dependencyResourceProfile': args.dependency_resource_profile})
     report.setdefault('ashaDependencyBindings', []).append(binding)
 
 
@@ -343,7 +366,8 @@ def prepare_asha_return_dependency(page, config):
     acknowledgement = page.evaluate('''async()=>{const r=await window.__ATF_ASHA_JUN_DEPENDENCY_V163__;
       return{status:r.status,reason:r.reason,simSeconds:r.simSeconds,wallMs:r.wallMs,
         lastProgressAgeMs:r.lastProgressAgeMs,returned:r.latest?.dependency?.returned||null,
-        observedOrigin:r.observedOrigin};}''')
+        observedOrigin:r.observedOrigin,resourceProfile:r.resourceProfile,resourceScope:r.resourceScope,
+        wallBudgetMs:r.wallBudgetMs,simBudgetSeconds:r.simBudgetSeconds,stallBudgetMs:r.stallBudgetMs};}''')
     report.setdefault('ashaDependencyAcknowledgements', []).append(acknowledgement)
     if acknowledgement['status'] != 'returned':
         # Preserve the actual failed acknowledgement before the assertion.
@@ -357,7 +381,8 @@ def prepare_asha_return_dependency(page, config):
         actor = dependency.get('actor') or {}
         owner = latest.get('owner') or {}
         origin = acknowledgement.get('observedOrigin') or {}
-        diagnostic = {key: acknowledgement.get(key) for key in ['status', 'reason', 'simSeconds', 'wallMs', 'lastProgressAgeMs']}
+        diagnostic = {key: acknowledgement.get(key) for key in ['status', 'reason', 'resourceProfile', 'resourceScope', 'wallBudgetMs',
+            'simBudgetSeconds', 'stallBudgetMs', 'simSeconds', 'wallMs', 'lastProgressAgeMs']}
         diagnostic['observedOrigin'] = {key: origin.get(key) for key in ['crewId', 'deck', 'roomId', 'x', 'y', 'source']}
         diagnostic['latest'] = {'nativeTime': latest.get('nativeTime'), 'running': latest.get('running'),
             'deck': latest.get('deck'), 'annex': latest.get('annex'), 'player': latest.get('player'),

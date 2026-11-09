@@ -2,12 +2,14 @@
  *
  * Baseline: ec2378df98a2d9af4394536a39ed943199ddcb8a (merged V185).
  * Each receipt identifies exact predecessor and reviewed successor bytes.
- * This terminal module imports no audit, preventing circular self-admission.
+ * V187 continues this chain without rewriting any of these receipts. Its
+ * terminal module imports no audit, preventing circular self-admission.
  * It makes no gameplay, workbook completion, translation coverage or art claim.
  */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedNativeQaResourcesDigestV187 } from './audit-native-qa-resources-v187.mjs';
 
 const readRepository = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -53,11 +55,11 @@ export const I18N_MAINTENANCE_SOURCE_ONLY_PATHS_V186 = Object.freeze([
 
 export function reviewedI18nMaintenanceDigestV186(path, endpoint) {
   const receipt = I18N_MAINTENANCE_SUCCESSORS_V186[path];
-  if (!receipt) return endpoint;
+  if (!receipt) return reviewedNativeQaResourcesDigestV187(path, endpoint);
   assert.equal(endpoint, receipt.previousSha256, 'Broken V185-to-V186 source chain: ' + path);
   assert.ok(validHash(receipt.currentSha256), 'Invalid V186 source digest: ' + path);
   assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A V186 successor must identify changed bytes: ' + path);
-  return receipt.currentSha256;
+  return reviewedNativeQaResourcesDigestV187(path, receipt.currentSha256);
 }
 
 export function verifyI18nMaintenanceV186(readSource = readRepository) {

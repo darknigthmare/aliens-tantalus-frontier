@@ -108,7 +108,7 @@ export function reportObservedV186(catalog, observation) {
       return { text: french, translation: english, status: english !== french ? 'translated' : 'unchanged-review-needed', sources: [...sources].sort(order) };
     });
     return {
-      scope: 'Supplied observed texts only; unchanged text can be a proper name, shared wording or an unknown translation. No source extraction or journey coverage is implied.',
+      scope: 'Supplied observed texts only. translated means changed output, including a partially translated joined message; it is not complete linguistic coverage. Unchanged text can be a proper name, shared wording or an unknown translation. All outputs require contextual review. No source extraction, journey coverage or workbook completion is implied.',
       observed: texts.length, translated: texts.filter(entry => entry.status === 'translated').length, texts
     };
   } finally {

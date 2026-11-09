@@ -300,6 +300,10 @@ const FORGE_TOOLING_V140 = new Set([
   'scripts/verify-i18n-maintenance-v186.mjs',
   'scripts/qa-i18n-dynamic-v186.py',
   'docs/development/I18N_MAINTENANCE_V186.md',
+  // V187 bounded native-QA resource profiles, source-only exact paths.
+  'scripts/audit-native-qa-resources-v187.mjs',
+  'scripts/verify-native-qa-resources-v187.mjs',
+  'docs/development/NATIVE_QA_RESOURCES_V187.md',
   // Source-only narrative design bible; never shipped in a built distribution.
   'docs/narrative',
   'docs/narrative/CAMPAGNE_PRINCIPALE.md',

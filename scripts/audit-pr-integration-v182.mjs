@@ -3,6 +3,7 @@
  * bytes receive a separate admission and never inherit an old pass or art claim. */
 import assert from 'node:assert/strict';
 import { reviewedOriginalNamesDigestV183 } from './audit-original-names-v183.mjs';
+import { reviewedNativeQaDependencyGuardDigestV187 } from './audit-native-qa-resources-v187.mjs';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 
@@ -712,8 +713,9 @@ export function verifyQaBranchV181(current, readSource = readRepository) {
   const guard = [...readSource('scripts/qa-npc-annex-service-routes-v163.py').toString()
     .matchAll(/^NATIVE_ASHA_DEPENDENCY_V163 = '''[\s\S]*?'''/gm)];
   assert.equal(guard.length, 1, 'Asha dependency guard must have one exact definition');
-  assert.equal(sha(guard[0][0]), QA_BRANCH_CONSTANTS_V181.V180_BASELINE_WITNESS.dependencyGuardSha256,
-    'V180 dependency guard or budgets changed');
+  assert.equal(sha(guard[0][0]), reviewedNativeQaDependencyGuardDigestV187(
+    QA_BRANCH_CONSTANTS_V181.V180_BASELINE_WITNESS.dependencyGuardSha256),
+    'Unreviewed successor of the V180 dependency guard or budgets');
   assert.equal(sha(readSource('docs/forge/xeno-trials/' + current.workbook)),
     QA_BRANCH_CONSTANTS_V181.V181_BASELINE_WITNESS.workbookSha256, 'QA historical workbook bytes changed');
   return Object.freeze({ runtimeSuccessors: 0, qaSuccessors: 2, verifierSuccessors: 4,

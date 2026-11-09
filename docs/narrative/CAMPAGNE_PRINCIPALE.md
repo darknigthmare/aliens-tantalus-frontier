@@ -4089,6 +4089,8 @@ Les autres pistes (alerte, boss, fins, campagnes annexes) attendent de nouveaux 
 | Grille de notes (moment, lieu, réaction, cause supposée) | Prêt |
 | Première session | Bloqué par §53.1 |
 
+**Suivi automatisé du 2026-11-09 :** le commit `8219837892fc8c5ede58f2c500a934192fea1ae0` réussit ses 4 094 tests Node (un test artistique optionnel ignoré), les 19 contrôles Chromium FR/EN et quatre workflows GitHub. La CI Excel reste à 14/15 : le préalable Jun/Asha atteint son plafond de 900 s murales alors que Jun progresse encore. Le [lot V187](../development/NATIVE_QA_RESOURCES_V187.md) qualifie un profil de ressources explicite, en conservant les limites natives, l'immobilité et l'arrivée physique exacte. Ce suivi ne remplace pas les sessions humaines prévues ci-dessus ; ses nouveaux résultats demandent leur propre tête vérifiée.
+
 ---
 
 ## 54. Ordre de travail

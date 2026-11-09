@@ -12,6 +12,7 @@ import { verifyAudioSlotsV184 } from './audit-audio-slots-v184.mjs';
 import { verifyOriginalNamesV183 } from './audit-original-names-v183.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
+import { NATIVE_QA_RESOURCES_SUCCESSORS_V187 } from './audit-native-qa-resources-v187.mjs';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = value => createHash('sha256').update(value).digest('hex');
@@ -40,7 +41,8 @@ test('V186 rejects changed reviewed bytes and arbitrary predecessor endpoints', 
   assert.equal(reviewedI18nMaintenanceDigestV186('src/unreviewed.js', 'unchanged'), 'unchanged');
   assert.equal(Object.hasOwn(I18N_MAINTENANCE_SUCCESSORS_V186, 'scripts/audit-i18n-maintenance-v186.mjs'), false);
   assert.equal(Object.hasOwn(I18N_MAINTENANCE_SUCCESSORS_V186, 'src/save.js'), false);
-  const terminal = read('scripts/audit-i18n-maintenance-v186.mjs').toString();
+  assert.equal(Object.hasOwn(NATIVE_QA_RESOURCES_SUCCESSORS_V187, 'scripts/audit-native-qa-resources-v187.mjs'), false);
+  const terminal = read('scripts/audit-native-qa-resources-v187.mjs').toString();
   assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(terminal), false, 'The terminal audit must not import another audit.');
 });
 

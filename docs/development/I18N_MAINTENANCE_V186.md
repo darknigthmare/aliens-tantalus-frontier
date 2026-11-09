@@ -34,6 +34,8 @@ node scripts/i18n-catalog-maintenance-v186.mjs report /tmp/textes-observes.json
 
 Le rapport passe ces seuls textes dans la couche automatique réellement utilisée par le jeu, regroupe les occurrences identiques et conserve leurs sources. `unchanged-review-needed` demande une lecture : il peut s'agir d'un nom propre, d'un terme commun aux deux langues ou d'une traduction inconnue. Ce statut n'est pas un décompte de défauts. Les traductions explicites par clés de `i18n-v185.js` et les textes peints dans les images ont un autre périmètre.
 
+`translated` signifie seulement « sortie différente de l'entrée ». Une chaîne assemblée peut être traduite en partie : `Bonjour · Texte non répertorié` devient `Hello · Texte non répertorié` dans la fixture de test. Toutes les sorties demandent une relecture contextualisée ; ce compteur ne certifie ni une traduction complète ni une clôture Excel.
+
 Ce relevé n'est pas un extracteur JavaScript ou HTML. Il ne prouve aucun parcours de jeu et ne découvre pas les textes qui ne lui ont pas été fournis. Pour une recette navigateur, conserver séparément le build, le parcours, la langue, les captures et les éventuelles fixtures.
 
 ## Fusionner des traductions relues

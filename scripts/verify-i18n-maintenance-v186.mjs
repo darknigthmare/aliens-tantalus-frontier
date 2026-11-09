@@ -98,13 +98,17 @@ test('V186 observed report uses real automatic translation and keeps unknown tex
   setLanguageV185('en', { document: null, persist: false });
   const report = reportObservedV186(catalog(), { texts: [
     { text: 'Bonjour', source: 'title' }, { text: 'Objets : 7', source: 'hub' },
-    { text: 'Rook', source: 'hub' }, { text: 'Bonjour', source: 'hub' }
+    { text: 'Rook', source: 'hub' }, { text: 'Bonjour', source: 'hub' },
+    { text: 'Bonjour · Texte non répertorié', source: 'partial joined message' }
   ] });
-  assert.equal(report.observed, 3);
-  assert.equal(report.translated, 2);
+  assert.equal(report.observed, 4);
+  assert.equal(report.translated, 3);
   assert.deepEqual(report.texts.find(entry => entry.text === 'Bonjour').sources, ['hub', 'title']);
   assert.equal(report.texts.find(entry => entry.text === 'Objets : 7').translation, 'Items: 7');
   assert.equal(report.texts.find(entry => entry.text === 'Rook').status, 'unchanged-review-needed');
+  assert.equal(report.texts.find(entry => entry.text === 'Bonjour · Texte non répertorié').translation, 'Hello · Texte non répertorié');
+  assert.match(report.scope, /partially translated joined message/);
+  assert.match(report.scope, /All outputs require contextual review/);
   assert.equal(currentLanguageV185(), 'en');
   setLanguageV185('fr', { document: null, persist: false });
 });

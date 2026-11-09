@@ -46,6 +46,7 @@
     "test:all": "node scripts/test-release-v143.mjs",
     "test:i18n-v185": "node --test scripts/verify-i18n-v185.mjs scripts/verify-i18n-auto-dynamic-v185.mjs scripts/verify-i18n-maintenance-v186.mjs scripts/verify-i18n-audit-v186.mjs",
     "i18n:check": "node scripts/i18n-catalog-maintenance-v186.mjs check",
+    "test:qa:resources:v187": "node --test scripts/verify-native-qa-resources-v187.mjs",
     "check:built": "node scripts/verify-release-artifact-v143.mjs",
     "test:trials": "node --test scripts/verify-xeno-trials-v145.mjs",
     "test:trials:plan": "node --test scripts/verify-xeno-trials-plan-v146.mjs",
