@@ -103,7 +103,8 @@ export function autoTranslateV185(text) {
 
 export function autoCatalogSizeV185() { return { exact: exact.size, patterns: compiled.length }; }
 
-// French originals of translated nodes, so switching back restores them.
+// Keep both sides of each change. The game can reuse a node for another message
+// while English is active; only restore text still owned by this layer.
 const originalText = new WeakMap();
 const originalAttributes = new WeakMap();
 
@@ -116,20 +117,24 @@ function skipped(node) {
 
 function translateTextNode(node) {
   const value = node.nodeValue;
+  if (originalText.get(node)?.translated === value) return;
+  originalText.delete(node);
   if (!value || !value.trim() || skipped(node)) return;
   const translated = autoTranslateV185(value);
-  if (translated !== value) { originalText.set(node, value); node.nodeValue = translated; }
+  if (translated !== value) { originalText.set(node, { french: value, translated }); node.nodeValue = translated; }
 }
 
 function translateAttributes(element) {
   if (skipped(element)) return;
   for (const name of ATTRIBUTES) {
     const value = element.getAttribute?.(name);
+    const saved = originalAttributes.get(element) || {};
+    if (saved[name]?.translated === value) continue;
+    delete saved[name];
     if (!value) continue;
     const translated = autoTranslateV185(value);
     if (translated === value) continue;
-    const saved = originalAttributes.get(element) || {};
-    saved[name] = value;
+    saved[name] = { french: value, translated };
     originalAttributes.set(element, saved);
     element.setAttribute(name, translated);
   }
@@ -147,16 +152,24 @@ function walk(root, documentRef) {
 }
 
 function restore(root, documentRef) {
-  const walker = documentRef.createTreeWalker(root, 5);
-  for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+  const restoreNode = node => {
     if (node.nodeType === 3) {
-      const french = originalText.get(node);
-      if (french !== undefined) { node.nodeValue = french; originalText.delete(node); }
+      const saved = originalText.get(node);
+      if (saved?.translated === node.nodeValue) node.nodeValue = saved.french;
+      originalText.delete(node);
     } else {
       const saved = originalAttributes.get(node);
-      if (saved) { for (const [name, value] of Object.entries(saved)) node.setAttribute(name, value); originalAttributes.delete(node); }
+      if (saved) {
+        for (const [name, { french, translated }] of Object.entries(saved)) {
+          if (node.getAttribute(name) === translated) node.setAttribute(name, french);
+        }
+        originalAttributes.delete(node);
+      }
     }
-  }
+  };
+  restoreNode(root);
+  const walker = documentRef.createTreeWalker(root, 5);
+  for (let node = walker.nextNode(); node; node = walker.nextNode()) restoreNode(node);
 }
 
 function patchCanvas(globalRef) {

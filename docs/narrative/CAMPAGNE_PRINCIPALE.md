@@ -4059,7 +4059,7 @@ Les autres pistes (alerte, boss, fins, campagnes annexes) attendent de nouveaux 
 | --- | --- | --- |
 | Manette, tactile, trois difficultés, réduction des mouvements, volume | Présent | Mentions dans le code (manette 11 fichiers, tactile 66, difficulté 18, réduction des mouvements 79, volume 31) ; qualité non évaluée |
 | Mode daltonien | À faire (validé §45.1) | Aucune occurrence |
-| Version anglaise | En cours : système et premiers écrans dans la PR #44 (§55.1) | `index.html` en `lang="fr"`, aucun système de traduction (`i18n`) |
+| Version anglaise | Partielle : PR #44 intégrée ; entretien et retour FR fiabilisés dans le lot V186 (§55.1) | Dictionnaires explicites et catalogue automatique DOM/Canvas ; textes inconnus en français, revue linguistique et parcours complets encore ouverts |
 | Remappage complet des commandes | À vérifier puis compléter (validé §45.1) | 4 fichiers mentionnent un remappage |
 | Taille du texte | À faire (validé §45.1) | — |
 | Sous-titres des sons importants | À faire (validé §45.1) | — |
@@ -4095,9 +4095,9 @@ Les autres pistes (alerte, boss, fins, campagnes annexes) attendent de nouveaux 
 
 | Étape | Contenu | Pourquoi maintenant |
 | --- | --- | --- |
-| 1 | Décision sur la protection de `content-core-v50.js` (§52.3) | Débloque le renommage, déjà prêt |
-| 2 | Extension des emplacements audio + génération des musiques M-01 à M-07 | Prérequis de la tranche verticale |
-| 3 | Système de traduction FR/EN, puis tranche verticale (§53.1) avec bruitages prioritaires | Les textes de la tranche sont écrits dans les deux langues (§45.1) |
+| 1 | Renommage intégré par la PR #42 : Cocyte, Station Orphée, Hiémale et TR-0 ; identifiants historiques conservés (§52.3) | Étape réalisée ; les références documentaires des jeux sources gardent leurs noms |
+| 2 | Emplacements audio étendus par la PR #43 ; génération des musiques M-01 à M-07 encore attendue du propriétaire | Les emplacements présents ne prouvent pas la livraison des morceaux |
+| 3 | FR/EN intégré par la PR #44 : entretenir le catalogue, vérifier la tranche verticale (§53.1), puis bruitages prioritaires | Les textes de la tranche sont écrits dans les deux langues (§45.1) ; la couverture automatique ne clôt pas la revue des parcours |
 | 4 | Réglage des sensations et de la tension (§53.3) | Rend la tranche convaincante |
 | 5 | Premier test de jeu (§53.11) | Mesure avant d'aller plus loin |
 | 6 | Masquage ou finition de l'art provisoire (§53.4) | Évite la mauvaise impression |
@@ -4110,22 +4110,27 @@ Les autres pistes (alerte, boss, fins, campagnes annexes) attendent de nouveaux 
 
 ## 55. Conception technique des décisions de cadrage — [PROPOSÉ]
 
-Cette section traduit les décisions des §45.1 à §45.3 en travail sur le code. Chaque point part de ce qui existe, vérifié dans le dépôt le 2026-11-06 ; rien n'est encore implémenté.
+Cette section traduit les décisions des §45.1 à §45.3 en travail sur le code. Le constat initial date du 2026-11-06 ; les états datés ci-dessous distinguent les éléments intégrés des propositions encore ouvertes.
 
 **Contrainte commune :** `src/save.js` fait partie des `protectedGameplayBytes` de l'audit V179, comme `src/content-core-v50.js` (§52.3). Presque tous les points ci-dessous touchent la sauvegarde. Chaque lot qui la modifie demande donc une **levée de protection par le propriétaire** et un maillon d'audit, comme V183 pour le renommage. Les migrations restent additives : une ancienne sauvegarde sans le nouveau champ reçoit une valeur par défaut et ne perd rien.
 
 ### 55.1 Traduction français / anglais
 
-| Constat | Proposition |
+| État courant | Suite à réaliser |
 | --- | --- |
-| `index.html` est en `lang="fr"` ; les textes du joueur sont écrits en dur dans les modules (`src/`, 530 fichiers) ; aucun système de traduction | Modules de dictionnaires `fr` et `en` indexés par clé, fonction `t(clé, paramètres)`, réglage `settings.language` (défaut `fr`) |
+| `src/i18n-v185.js` possède les dictionnaires FR/EN et le réglage par appareil `atf-language-v185`, hors sauvegarde ; la langue du document suit le choix | Poursuivre l'écriture bilingue des nouveaux textes et la validation des parcours |
+| `src/i18n-auto-v185.js` traduit les textes DOM, certains attributs et le texte Canvas à partir de `src/i18n-en-catalog-v185.js`, chargé à la demande en anglais | Compléter les textes inconnus à partir de relevés vérifiables ; contrôler le contexte, la mise en page et le vocabulaire |
 
-**État (2026-11-06) :** étape 1 faite dans la **PR #44** (V185) : réglage de langue par appareil, hors de la sauvegarde ; écran titre, rail, titres de vue, bandeau et panneau Système traduits ; 5 tests ; `test:all` 4 067 tests, 0 échec. Le reste des textes est encore en français (créateur de personnage, hub, missions, dialogues).
+**État relu le 2026-11-09 sur `ec2378df98a2d9af4394536a39ed943199ddcb8a` :** la **PR #44** est intégrée. Au-delà du titre et de Système, les traductions explicites couvrent notamment le créateur, les objectifs, les répliques de début de partie et les invites du hub ; le catalogue automatique contient 6 038 textes et 437 modèles. Les 13 tests V185 existent dans ce commit. Sa CI release réussit avec 4 074 tests passés et un ignoré ; ses 15 jobs Excel réussissent. Ces résultats ne certifient ni l'intégralité des traductions ni la fidélité artistique 1:1.
+
+**Lot V186 (2026-11-09) :** correction de la restauration d'un texte dynamique au retour en français : un ancien original ne doit pas écraser une mise à jour, un texte vidé ou un attribut supprimé. Outil versionné de validation du catalogue, de rapport sur un relevé de textes observés et de fusion de traductions relues vers une proposition séparée. Quatre libellés de profils observés dans Système sont complétés en anglais ; le catalogue atteint 6 042 textes exacts et 437 modèles. Méthode, commandes et preuves : [entretien FR/EN V186](../development/I18N_MAINTENANCE_V186.md). Ce lot ne modifie pas les statuts historiques des classeurs Excel.
+
+**Restent ouverts :** extraction et revue contextualisée des textes manquants, panneaux dont les lettres sont intégrées aux images, métadonnées documentaires Alien_base, parcours complets des missions et de la première heure, vérification mobile/lecteur d'écran et relecture par un anglophone. Un texte inconnu reste en français ; il n'est pas déclaré traduit sur la seule présence du mécanisme automatique.
 
 **Ordre de travail :**
 
-1. Créer le système et le réglage de langue, avec un test qui vérifie que chaque clé existe dans les deux langues.
-2. Extraire les textes **écran par écran**, en commençant par la tranche verticale (§53.1). Un texte non extrait reste en français ; il ne doit jamais afficher une clé brute au joueur.
+1. Maintenir le système et le réglage de langue intégrés, avec les tests de parité des clés et de changements de langue.
+2. Relever et revoir les textes **écran par écran**, en commençant par la tranche verticale (§53.1). Le rapport V186 porte sur le relevé fourni, pas sur tous les textes possibles du jeu. Un texte non extrait reste en français ; il ne doit jamais afficher une clé brute au joueur.
 3. Écrire tout nouveau texte directement dans les deux dictionnaires (décision §45.1). Les répliques des origines (§2.4) sont déjà rédigées en FR et EN.
 4. Mettre `lang` du document à jour selon la langue choisie.
 

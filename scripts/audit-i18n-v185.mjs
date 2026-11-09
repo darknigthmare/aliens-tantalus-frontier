@@ -3,10 +3,12 @@
  * save, a French/English dictionary for the title screen, navigation, view
  * titles and the System settings panel, and its tests. Continues the V184
  * chain: each receipt names the exact predecessor bytes it replaces. This
- * module imports no other audit, so it can never admit a resolver's own bytes. */
+ * module imports only the terminal V186 successor, which imports no audit and
+ * cannot admit a resolver's own bytes. Historical V185 receipts stay intact. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedI18nMaintenanceDigestV186 } from './audit-i18n-maintenance-v186.mjs';
 
 const readRepository = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -57,18 +59,18 @@ export const I18N_SUCCESSORS_V185 = freeze({
 
 export function reviewedI18nDigestV185(path, endpoint) {
   const receipt = I18N_SUCCESSORS_V185[path];
-  if (!receipt) return endpoint;
+  if (!receipt) return reviewedI18nMaintenanceDigestV186(path, endpoint);
   assert.equal(endpoint, receipt.previousSha256, 'Broken V184-to-V185 source chain: ' + path);
   assert.ok(validHash(receipt.currentSha256), 'Invalid V185 source digest: ' + path);
   assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A V185 successor must identify changed bytes: ' + path);
-  return receipt.currentSha256;
+  return reviewedI18nMaintenanceDigestV186(path, receipt.currentSha256);
 }
 
 export function verifyI18nV185(readSource = readRepository) {
   for (const [path, receipt] of Object.entries(I18N_SUCCESSORS_V185)) {
     assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
     assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
-    assert.equal(sha(readSource(path)), receipt.currentSha256, 'Unreviewed V185 source bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedI18nMaintenanceDigestV186(path, receipt.currentSha256), 'Unreviewed V185 source bytes: ' + path);
   }
   return Object.freeze({ successors: Object.keys(I18N_SUCCESSORS_V185).length });
 }

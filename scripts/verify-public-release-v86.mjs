@@ -292,6 +292,14 @@ const FORGE_TOOLING_V140 = new Set([
   'scripts/audit-audio-slots-v184.mjs',
   // V185 French/English succession receipts: source-only audit, never shipped.
   'scripts/audit-i18n-v185.mjs',
+  // V186 FR/EN maintenance and regression QA stay source-only, exact paths.
+  'scripts/audit-i18n-maintenance-v186.mjs',
+  'scripts/verify-i18n-audit-v186.mjs',
+  'scripts/verify-i18n-auto-dynamic-v185.mjs',
+  'scripts/i18n-catalog-maintenance-v186.mjs',
+  'scripts/verify-i18n-maintenance-v186.mjs',
+  'scripts/qa-i18n-dynamic-v186.py',
+  'docs/development/I18N_MAINTENANCE_V186.md',
   // Source-only narrative design bible; never shipped in a built distribution.
   'docs/narrative',
   'docs/narrative/CAMPAGNE_PRINCIPALE.md',
