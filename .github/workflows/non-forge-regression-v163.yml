@@ -136,7 +136,7 @@ jobs:
               python scripts/qa-campaign-lethe-v163.py --base "$ATF_BASE_URL" --output "$RUNNER_TEMP/atf-gameplay-v163/campaign" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/campaign.log" || { status=1; annotate_failure scripts/qa-campaign-lethe-v163.py "$RUNNER_TEMP/atf-gameplay-v163/campaign/report.json"; }
               ;;
             crew-lifts)
-              python scripts/qa-npc-annex-service-routes-v163.py --base "$ATF_BASE_URL" --comparison-stage after --output "$RUNNER_TEMP/atf-gameplay-v163/crew" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/crew.log" || { status=1; annotate_failure scripts/qa-npc-annex-service-routes-v163.py "$RUNNER_TEMP/atf-gameplay-v163/crew/report.json"; }
+              python scripts/qa-npc-annex-service-routes-v163.py --base "$ATF_BASE_URL" --comparison-stage after --dependency-resource-profile ci-slow4 --output "$RUNNER_TEMP/atf-gameplay-v163/crew" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/crew.log" || { status=1; annotate_failure scripts/qa-npc-annex-service-routes-v163.py "$RUNNER_TEMP/atf-gameplay-v163/crew/report.json"; }
               python scripts/qa-hub-lift-transit-v163.py --base "$ATF_BASE_URL" --comparison-stage after --output "$RUNNER_TEMP/atf-gameplay-v163/lifts" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/lifts.log" || { status=1; annotate_failure scripts/qa-hub-lift-transit-v163.py "$RUNNER_TEMP/atf-gameplay-v163/lifts/report.json"; }
               ;;
             crew-leases)

@@ -1143,6 +1143,139 @@ test('annex-service QA keeps physical, simulation and wall guards and cleans eve
   }
 });
 
+function dependencyProfileCliV187(argv) {
+  const path = process.env.ATF_QA_ANNEX_SERVICE_SOURCE || new URL('qa-npc-annex-service-routes-v163.py', import.meta.url).pathname;
+  // Execute the real argparse declarations and report selection via AST.
+  // This avoids importing browser tooling in the Node contracts job; it is
+  // a CLI/report fixture, not a browser or native gameplay journey.
+  const python = `import argparse,ast,contextlib,io,json,os,sys
+from pathlib import Path
+tree=ast.parse(Path(sys.argv[1]).read_text())
+nodes=[]
+for n in tree.body:
+ if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id in ['parser','args','dependency_resource_profile','report'] for t in n.targets): nodes.append(n)
+ elif isinstance(n,ast.Expr) and isinstance(n.value,ast.Call):
+  f=n.value.func
+  if isinstance(f,ast.Attribute) and isinstance(f.value,ast.Name) and f.value.id=='parser' and f.attr=='add_argument': nodes.append(n)
+  elif isinstance(f,ast.Name) and f.id=='print' and n.value.args and isinstance(n.value.args[0],ast.BinOp) and isinstance(n.value.args[0].left,ast.Constant) and n.value.args[0].left.value=='DEPENDENCY_RESOURCE_PROFILE ': nodes.append(n)
+scope={'argparse':argparse,'json':json,'os':os,'Path':Path}
+sys.argv=['qa-npc-annex-service-routes-v163.py','--output','/tmp/declared-cli-fixture',*json.loads(sys.argv[2])]
+out=io.StringIO(); err=io.StringIO()
+try:
+ with contextlib.redirect_stdout(out),contextlib.redirect_stderr(err): exec(compile(ast.Module(body=nodes,type_ignores=[]),'<actual-resource-profile-cli>','exec'),scope)
+ arm=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='arm_asha_return_dependency')
+ evaluate=next(n for n in ast.walk(arm) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=='evaluate')
+ scope['config']={'id':'asha-refuge','declaredFixture':'argument-wiring'}
+ options=eval(compile(ast.Expression(evaluate.args[1]),'<actual-browser-profile-argument>','eval'),scope)
+ result={'exitCode':0,'profile':scope['args'].dependency_resource_profile,'report':scope['report']['dependencyResourceProfile'],'log':out.getvalue(),'browserOptions':options,'originalConfig':scope['config']}
+except SystemExit as error: result={'exitCode':error.code,'stderr':err.getvalue(),'log':out.getvalue()}
+print(json.dumps(result))`;
+  return JSON.parse(execFileSync('python3', ['-c', python, path, JSON.stringify(argv)],
+    { encoding: 'utf8', timeout: 30000 }));
+}
+
+test('Asha prerequisite resource profile is explicit in the actual CLI, report and startup log', () => {
+  for (const [argv, name, wall] of [
+    [[], 'standard', 900000],
+    [['--dependency-resource-profile', 'standard'], 'standard', 900000],
+    [['--dependency-resource-profile', 'ci-slow4'], 'ci-slow4', 1440000]
+  ]) {
+    const result = dependencyProfileCliV187(argv);
+    assert.equal(result.exitCode, 0); assert.equal(result.profile, name);
+    assert.equal(result.report.name, name); assert.equal(result.report.wallBudgetMs, wall);
+    assert.equal(result.report.simBudgetSeconds, 360); assert.equal(result.report.stallBudgetMs, 45000);
+    assert.equal(result.report.scope, 'asha-jun-native-return-prerequisite-only');
+    assert.deepEqual(result.report.unchangedGuards, { playerDoorWallMs: 45000,
+      occupationSimSeconds: 50, occupationWallMs: 360000,
+      collectionSimSeconds: 150, collectionWallMs: 480000 });
+    assert.equal(result.report.gameplayClockSpeedOrSchedulerChanged, false);
+    assert.deepEqual(JSON.parse(result.log.trim().replace(/^DEPENDENCY_RESOURCE_PROFILE /, '')), result.report);
+    assert.deepEqual(result.browserOptions, { id: 'asha-refuge', declaredFixture: 'argument-wiring', dependencyResourceProfile: name });
+    assert.deepEqual(result.originalConfig, { id: 'asha-refuge', declaredFixture: 'argument-wiring' },
+      'Only the dependency callback receives the selected profile; the route config is not mutated.');
+  }
+  for (const invalid of ['automatic', 'ci-slow5', '1440', '__proto__', '']) {
+    const result = dependencyProfileCliV187(['--dependency-resource-profile', invalid]);
+    assert.equal(result.exitCode, 2); assert.match(result.stderr, /invalid choice/);
+    assert.equal(result.log, '', 'An invalid profile fails before recording any selected resource profile.');
+  }
+  const unused = dependencyProfileCliV187(['--dependency-resource-profile', 'ci-slow4', '--route', 'jun-water']);
+  assert.equal(unused.report.appliesToSelectedRoute, false, 'Other route guards do not acquire this profile.');
+});
+
+test('actual Asha dependency observer keeps standard900s while explicit ci-slow4 observes a complete315s return after900s wall', async () => {
+  const source = serviceQaCallbackV163('arm_asha_return_dependency');
+  // Deliberate observer samples and RAF/timer doubles test budgets only.
+  // The samples do not claim to simulate Jun's native path or renderer.
+  for (const profile of [undefined, 'standard', 'ci-slow4']) {
+    const h = ashaDependencyHostV163();
+    const config = profile === undefined ? ashaQaConfigV163 : { ...ashaQaConfigV163, dependencyResourceProfile: profile };
+    const binding = await h.run(source, config);
+    let result = null;
+    const pending = h.sandbox.__ATF_ASHA_JUN_DEPENDENCY_V163__.then(value => { result = value; });
+    await h.frame(0);
+    for (let step = 1; !result && step <= 63; step++) {
+      h.dependency.actor.x -= 1; h.dependency.actor.time += 5;
+      await h.frame(16000, 5);
+    }
+    const name = profile ?? 'standard', wall = name === 'ci-slow4' ? 1440000 : 900000;
+    assert.equal(binding.resourceProfile, name); assert.equal(binding.wallBudgetMs, wall);
+    assert.equal(binding.resourceScope, 'asha-jun-native-return-prerequisite-only');
+    if (name === 'ci-slow4') {
+      assert.equal(result, null, 'The extended wall resource alone does not invent a completed return.');
+      h.returnJun(); await h.frame(0, 0); await pending;
+      assert.equal(result.status, 'returned'); assert.equal(result.reason, 'jun-complete-native-return');
+      assert.equal(result.simSeconds, 315); assert.equal(result.wallMs, 1008000);
+      assert.equal(result.frames, 65); assert.equal(result.latest.nativeTime, 315);
+      assert.equal(result.latest.dependency.returned.observedTravel, true);
+    } else {
+      await pending;
+      assert.equal(result.status, 'failed'); assert.equal(result.reason, 'jun-wall-budget-exhausted');
+      assert.equal(result.wallMs, 912000, 'The original900s guard is not silently widened.');
+    }
+    assert.equal(result.resourceProfile, name); assert.equal(result.wallBudgetMs, wall);
+    assert.equal(result.simBudgetSeconds, 360); assert.equal(result.stallBudgetMs, 45000);
+    assert.equal(h.rafs.size, 0); assert.equal(h.timers.size, 0);
+  }
+});
+
+test('ci-slow4 retains its1440s wall bound,360s native bound,45s stall and exact handoff/return guards', async () => {
+  const source = serviceQaCallbackV163('arm_asha_return_dependency');
+  const config = { ...ashaQaConfigV163, dependencyResourceProfile: 'ci-slow4' };
+  for (const mode of ['wall', 'simulation', 'stall', 'priority', 'incomplete-return']) {
+    const h = ashaDependencyHostV163(); await h.run(source, config);
+    let result = null;
+    const pending = h.sandbox.__ATF_ASHA_JUN_DEPENDENCY_V163__.then(value => { result = value; });
+    await h.frame(0);
+    if (mode === 'stall') await h.frame(45000, 45);
+    else if (mode === 'priority') {
+      h.dependency.nativeHandoff = { observedTravel: false }; await h.frame(1000, 1);
+    } else if (mode === 'incomplete-return') {
+      h.returnJun(); h.dependency.returned.crossings = 1; await h.frame(1000, 1);
+    } else {
+      for (let step = 1; !result && step <= (mode === 'wall' ? 48 : 361); step++) {
+        h.dependency.actor.x -= 1; h.dependency.actor.time += mode === 'wall' ? 5 : 1;
+        await h.frame(mode === 'wall' ? 30000 : 1000, mode === 'wall' ? 5 : 1);
+      }
+    }
+    await pending;
+    assert.equal(result.status, 'failed', mode);
+    assert.equal(result.reason, { wall: 'jun-wall-budget-exhausted', simulation: 'jun-simulation-budget-exhausted',
+      stall: 'jun-no-physical-progress', priority: 'jun-priority-handoff-is-not-a-return',
+      'incomplete-return': 'jun-lost-without-complete-physical-return' }[mode], mode);
+    assert.equal(result.wallBudgetMs, 1440000); assert.equal(result.simBudgetSeconds, 360); assert.equal(result.stallBudgetMs, 45000);
+    if (mode === 'wall') assert.equal(result.wallMs, 1440000);
+    assert.equal(h.rafs.size, 0); assert.equal(h.timers.size, 0);
+  }
+  const create = runInContext('(' + serviceQaLiteralV180('NATIVE_ASHA_DEPENDENCY_V163') + ')', createContext({ structuredClone }));
+  for (const invalid of ['automatic', 'ci-slow5', '', null, 4, {}, []]) {
+    assert.throws(() => create({ ...ashaQaConfigV163, dependencyResourceProfile: invalid }, 0),
+      /Unknown Asha dependency resource profile/);
+  }
+  assert.equal(create({ ...config, wallBudgetMs: 1e12, simBudgetSeconds: 1e12, stallBudgetMs: 1e12 }, 0).snapshot(0).wallBudgetMs,
+    1440000, 'Caller-supplied arbitrary budgets never replace the named resource contract.');
+});
+
 function prerequisiteControlBudgetV163(cases) {
   const directory = mkdtempSync(join(tmpdir(), 'asha-prerequisite-control-'));
   const input = join(directory, 'input.json'), output = join(directory, 'output.json');
