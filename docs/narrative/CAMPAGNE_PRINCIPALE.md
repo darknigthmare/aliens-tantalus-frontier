@@ -15,7 +15,7 @@
 - **Partie VII — Vues et organisation des hubs** : §40 trois vues (latérale, couloir de profondeur, plan au sol à 35°) · §41 Tantalus pièce par pièce · §42 Asphodèle · §43 Port-Méridien · §44 liste complète de ce qui reste à faire et à générer
 - **Décisions validées** : §45, cadrage des deuxième et troisième séries §45.1-45.2 · registres des missions §0.3 · origines d'Echo-9 §2.4
 - **Partie VIII — Musique : prompts pour Google Flow Music** : §46 méthode et palette · §47 hub et voyage · §48 campagne principale · §49 campagnes annexes · §50 archives et missions spéciales · §51 récapitulatif
-- **Partie IX — Feuille de route pour rendre le jeu attractif** : §52 principes, état et renommage · §53 feuille de route détaillée · §54 ordre de travail · §55 conception technique des décisions de cadrage
+- **Partie IX — Feuille de route pour rendre le jeu attractif** : §52 principes, état et renommage · §53 feuille de route détaillée · §54 ordre de travail · §55 conception technique des décisions de cadrage · §56 priorités P0 et P1 (validées le 2026-11-12)
 
 # PARTIE I — Campagne principale : Cocyte
 
@@ -4211,3 +4211,107 @@ Le registre devient un champ de la fiche de mission. Il est lu par :
 | 6 | Continuer et nouvelle partie + (§55.8) | Après la fin de la campagne principale |
 
 Les lots 2 à 6 modifient la sauvegarde : chacun demande la levée de protection décrite en tête de section.
+
+---
+
+## 56. Priorités P0 et P1 — validées le 2026-11-12
+
+**Décision du propriétaire (2026-11-12) :** la bible ne classait pas ses tâches par priorité. Le classement ci-dessous est validé. Il reprend l'ordre des §54 et §55.9 : la tranche verticale passe d'abord, puis les choix de création de partie et les options.
+
+### 56.1 Cadre du lot V188
+
+- **Levée de protection accordée** pour `src/save.js` et les autres `protectedGameplayBytes` touchés par ces priorités (§52.3, §55). Chaque octet modifié reçoit un reçu exact dans `scripts/audit-tantalus-priorities-v188.mjs`, qui prolonge la chaîne V183 → V187 sans réécrire les reçus existants.
+- Les migrations restent **additives**. Une sauvegarde sans le nouveau champ reçoit une valeur par défaut et ne perd rien. Les identifiants existants sont conservés.
+- Les valeurs chiffrées ci-dessous sont **[PROPOSÉ]** : elles ont été choisies prudentes et réglables, et elles restent à confirmer par les tests de jeu (§53.11). Une valeur peut être réglée sans nouvelle décision. Changer une règle demande une décision.
+- **Outils de développement :** Spec Kit et Claude Code Game Studios ont été adoptés aux révisions de `.ai-tools/sources.json`. Leurs fichiers sont listés avec leur empreinte dans `.ai-tools/adopted-v188.json`. Ils restent source uniquement et sont refusés dans un build.
+
+### 56.2 P0 — tranche verticale de la première heure
+
+| # | Tâche | Source | Statut au 2026-11-12 |
+| --- | --- | --- | --- |
+| P0-1 | Enchaînement prologue → Port-Méridien → briefing → Acte II (QZ-18) → retour, suivi par un état de campagne `storyCampaign` | §53.1, §11 | À faire |
+| P0-2 | Environ 40 bruitages prioritaires synthétisés hors ligne, et provenance audio mise à jour | §53.2 | À faire |
+| P0-3 | Emplacements musicaux alerte, boss, fins et retour au calme, avec leurs points d'accroche | §53.2, §55.7 | À faire |
+| P0-4 | Écran d'objectif toujours accessible, en mission comme au hub | §53.9 | À faire |
+| P0-5 | Réglage du tir (recul, impact, réaction, son), mesuré avant et après sur une même scène | §53.3 | À faire |
+| P0-6 | Directeur de tension piloté par le registre | §53.3, §55.7 | À faire |
+| P0-7 | Fausses alertes du détecteur de mouvement | §53.3, §14.5, §7.2 | À faire |
+| P0-8 | Registre de mission (champ de la fiche) et sauvegarde en mission selon le registre : terminaux et sauvegarde libre hors combat | §0.3, §55.3, §55.7 | À faire |
+
+### 56.3 P1 — après la tranche
+
+| # | Tâche | Source | Statut au 2026-11-12 |
+| --- | --- | --- | --- |
+| P1-1 | Comportements propres à chaque caste : plafond, contournement, fuite de la lumière, embuscade | §53.3 | À faire |
+| P1-2 | Mort définitive de l'équipage optionnelle, choisie à la création de la partie | §55.5 | À faire |
+| P1-3 | Origines d'Echo-9 : choix au créateur et capacités bornées | §2.4, §55.6 | À faire |
+| P1-4 | Difficulté à la carte (`custom`) | §55.4 | À faire |
+| P1-5 | Accessibilité : mode daltonien, taille du texte, sous-titres des sons importants, remappage des commandes | §53.8 | À faire |
+| P1-6 | Répliques réactives : mission ratée, colon mort, retour blessé | §53.6 | À faire |
+
+Les tâches suivantes ne font partie ni du P0 ni du P1 : coop étendue (§55.2), nouvelle partie + (§55.8), présentation publique (§53.10) et production d'images (§53.4, faite par le propriétaire).
+
+### 56.4 Valeurs proposées — [PROPOSÉ]
+
+**Sauvegarde libre « hors combat » (§55.3).** Le bouton est accepté seulement si les trois conditions suivantes sont réunies :
+
+- aucun ennemi n'est en état d'alerte ou de poursuite ;
+- aucun ennemi vivant ne se trouve à moins de **640 px** du joueur, soit environ un écran de large ;
+- le joueur n'a reçu aucun dégât depuis **8 s**.
+
+Sinon, le refus s'affiche en jeu : « Impossible de sauvegarder : menace à proximité. » Le terminal physique demande **3 s** d'interaction exposée. Il est refusé pour la même menace proche, mais il reste accepté si le joueur a reçu un dégât récent.
+
+**Directeur de tension (§53.3).** L'intensité va de 0 à 100. Elle monte avec les dégâts reçus (+1 par point de vie perdu), les ennemis visibles à moins de 640 px (+4 par ennemi et par seconde, plafonnés à +12 par seconde) et le manque de munitions (+5 sous 20 % du chargeur et de la réserve). Hors contact, elle baisse de 6 par seconde.
+
+Le directeur passe par trois phases :
+
+1. **Montée** : les apparitions suivent le registre.
+2. **Pic** : il s'enclenche quand l'intensité atteint 85 ou plus. Aucune nouvelle apparition.
+3. **Relâche** : elle commence quand l'intensité redescend sous 30. Aucune apparition pendant une durée garantie de **30 s en Horreur, 20 s en Tension et 10 s en Action**. Le registre Calme n'a pas d'apparitions.
+
+| Registre | Multiplicateur d'apparition en montée |
+| --- | --- |
+| Horreur | 0,5 |
+| Tension | 0,8 |
+| Action | 1,2 |
+
+**Fausses alertes du détecteur (§53.3).** Elles se produisent en Horreur et en Tension seulement, toutes les **45 à 90 s** tirées au hasard, à condition qu'aucun contact réel n'ait eu lieu depuis 15 s. L'écho dure **1,2 s**. Il est placé à 300-600 px, dans la direction d'une source plausible : ventilation, porte ou machine. En se rapprochant, le joueur voit la cause sous forme d'un sous-titre : « Écho : ventilation ».
+
+**Capacités des origines (§2.4).** Toutes les capacités restent modestes : de **10 à 15 %** quand elles sont chiffrées, une seule fois par mission quand elles sont ponctuelles. `origin-20` n'a pas de capacité.
+
+| Origine | Valeur proposée |
+| --- | --- |
+| 01 | −15 % de dispersion en alerte |
+| 02 | Panique des civils escortés −25 % |
+| 03 | +1 indice sur un document par mission |
+| 04 | Chargeur P-5000 : vitesse +10 % |
+| 05 | Réparation des systèmes atmosphériques +20 % |
+| 06 | Abris et sas sûrs signalés sur la carte |
+| 07 | Vitesse en conduit +15 % |
+| 08 | Soin d'un équipier +20 % |
+| 09 | Fenêtre d'extraction +10 s |
+| 10 | Une porte de la compagnie par mission ouverte sans piratage |
+| 11 | Armes UPP sans pénalité |
+| 12 | Matériaux par caisse +10 % |
+| 13 | Échos du détecteur : faux échos identifiés, rayon −30 % |
+| 14 | Casiers ouverts sans outil |
+| 15 | Réparation du M577 et des tourelles +20 % |
+| 16 | Un échantillon sans contamination par mission |
+| 17 | Ordres d'escouade exécutés 15 % plus vite |
+| 18 | Dégâts subis par le véhicule escorté −10 % |
+| 19 | Dégâts en couloir étroit +10 % |
+
+**Bruitages prioritaires (§53.2), 40 sons synthétisés.** Ils sont générés hors ligne par `scripts/generate-audio-v132.mjs`, sans échantillon externe.
+
+| Famille | Sons |
+| --- | --- |
+| Détecteur (4) | impulsion, contact proche, contact lointain, écho faux |
+| Pas (5) | métal, grille, béton, eau, résine |
+| Portes et sas (6) | porte qui s'ouvre, porte qui se ferme, porte verrouillée, sas qui se pressurise, sas qui se dépressurise, porte forcée |
+| Ascenseurs (2) | départ, arrivée |
+| Alarmes (3) | alerte générale, quarantaine, compte à rebours |
+| Ambiance (4) | pluie extérieure, pluie sur tôle, ventilation, bourdonnement de relais |
+| Cris par caste (8) | drone, guerrier, rôdeur, cracheur, Crusher, reine, facehugger, chestburster |
+| Armes principales (8) | rafale du M41A, grenade du M41A, pistolet, fusil à pompe, smartgun, lance-flammes, rechargement, cliquetis à vide |
+
+**Répliques réactives (§53.6).** Les déclencheurs sont une mission ratée, un colon mort et un retour blessé. Il y a une réplique par déclencheur et par profil (humain et synthétique), en français et en anglais. La même réplique ne se répète pas pendant 3 jours de jeu.
