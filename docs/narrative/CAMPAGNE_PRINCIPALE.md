@@ -4227,27 +4227,27 @@ Les lots 2 à 6 modifient la sauvegarde : chacun demande la levée de protection
 
 ### 56.2 P0 — tranche verticale de la première heure
 
-| # | Tâche | Source | Statut au 2026-11-12 |
+| # | Tâche | Source | Statut |
 | --- | --- | --- | --- |
-| P0-1 | Enchaînement prologue → Port-Méridien → briefing → Acte II (QZ-18) → retour, suivi par un état de campagne `storyCampaign` | §53.1, §11 | À faire |
-| P0-2 | Environ 40 bruitages prioritaires synthétisés hors ligne, et provenance audio mise à jour | §53.2 | À faire |
-| P0-3 | Emplacements musicaux alerte, boss, fins et retour au calme, avec leurs points d'accroche | §53.2, §55.7 | À faire |
-| P0-4 | Écran d'objectif toujours accessible, en mission comme au hub | §53.9 | À faire |
-| P0-5 | Réglage du tir (recul, impact, réaction, son), mesuré avant et après sur une même scène | §53.3 | À faire |
-| P0-6 | Directeur de tension piloté par le registre | §53.3, §55.7 | À faire |
-| P0-7 | Fausses alertes du détecteur de mouvement | §53.3, §14.5, §7.2 | À faire |
-| P0-8 | Registre de mission (champ de la fiche) et sauvegarde en mission selon le registre : terminaux et sauvegarde libre hors combat | §0.3, §55.3, §55.7 | À faire |
+| P0-1 | Enchaînement prologue → Port-Méridien → briefing → Acte II (QZ-18) → retour, suivi par un état de campagne `storyCampaign` | §53.1, §11 | Fait (V188) : étape dérivée, QZ-18 planifié, compte rendu suivi ; parcours joueur complet à tester |
+| P0-2 | Environ 40 bruitages prioritaires synthétisés hors ligne, et provenance audio mise à jour | §53.2 | Fait (V188) : 40 sons originaux branchés ; provenance dans `LICENSE_NOTICE.md` |
+| P0-3 | Emplacements musicaux alerte, boss, fins et retour au calme, avec leurs points d'accroche | §53.2, §55.7 | Fait (V188) pour les emplacements et accroches ; morceaux Flow attendus du propriétaire ; `ending` sans accroche |
+| P0-4 | Écran d'objectif toujours accessible, en mission comme au hub | §53.9 | Fait (V188) : pause et touche O, FR/EN |
+| P0-5 | Réglage du tir (recul, impact, réaction, son), mesuré avant et après sur une même scène | §53.3 | Fait (V188), mesuré avant/après ; ressenti à confirmer en test de jeu |
+| P0-6 | Directeur de tension piloté par le registre | §53.3, §55.7 | Fait (V188) |
+| P0-7 | Fausses alertes du détecteur de mouvement | §53.3, §14.5, §7.2 | Fait (V188) |
+| P0-8 | Registre de mission (champ de la fiche) et sauvegarde en mission selon le registre : terminaux et sauvegarde libre hors combat | §0.3, §55.3, §55.7 | Fait (V188) ; terminal = dernier checkpoint sécurisé, sans objet de décor dédié |
 
 ### 56.3 P1 — après la tranche
 
-| # | Tâche | Source | Statut au 2026-11-12 |
+| # | Tâche | Source | Statut |
 | --- | --- | --- | --- |
-| P1-1 | Comportements propres à chaque caste : plafond, contournement, fuite de la lumière, embuscade | §53.3 | À faire |
-| P1-2 | Mort définitive de l'équipage optionnelle, choisie à la création de la partie | §55.5 | À faire |
-| P1-3 | Origines d'Echo-9 : choix au créateur et capacités bornées | §2.4, §55.6 | À faire |
-| P1-4 | Difficulté à la carte (`custom`) | §55.4 | À faire |
-| P1-5 | Accessibilité : mode daltonien, taille du texte, sous-titres des sons importants, remappage des commandes | §53.8 | À faire |
-| P1-6 | Répliques réactives : mission ratée, colon mort, retour blessé | §53.6 | À faire |
+| P1-1 | Comportements propres à chaque caste : plafond, contournement, fuite de la lumière, embuscade | §53.3 | Partiel (V188) : drone, rôdeur, embusqué ; plafond en attente de géométrie |
+| P1-2 | Mort définitive de l'équipage optionnelle, choisie à la création de la partie | §55.5 | Fait (V188) |
+| P1-3 | Origines d'Echo-9 : choix au créateur et capacités bornées | §2.4, §55.6 | Partiel (V188) : choix au créateur, 20 valeurs ; 2 capacités raccordées sur 19 |
+| P1-4 | Difficulté à la carte (`custom`) | §55.4 | Fait (V188) |
+| P1-5 | Accessibilité : mode daltonien, taille du texte, sous-titres des sons importants, remappage des commandes | §53.8 | Fait (V188) ; tailles en px et palette Canvas à reprendre |
+| P1-6 | Répliques réactives : mission ratée, colon mort, retour blessé | §53.6 | Fait (V188) : notification au retour ; intégration au mess à faire |
 
 Les tâches suivantes ne font partie ni du P0 ni du P1 : coop étendue (§55.2), nouvelle partie + (§55.8), présentation publique (§53.10) et production d'images (§53.4, faite par le propriétaire).
 
@@ -4315,3 +4315,7 @@ Le directeur passe par trois phases :
 | Armes principales (8) | rafale du M41A, grenade du M41A, pistolet, fusil à pompe, smartgun, lance-flammes, rechargement, cliquetis à vide |
 
 **Répliques réactives (§53.6).** Les déclencheurs sont une mission ratée, un colon mort et un retour blessé. Il y a une réplique par déclencheur et par profil (humain et synthétique), en français et en anglais. La même réplique ne se répète pas pendant 3 jours de jeu.
+
+### 56.5 Suivi du lot V188
+
+Réalisation, mesures, vérifications et limites : [rapport V188](../development/PRIORITIES_P0_P1_V188.md). Les statuts « Fait » ci-dessus désignent un raccordement au jeu vérifié par des tests Node sur le moteur réel et des contrôles Chromium. Ils ne remplacent pas le test de la tranche par 3 à 5 joueurs (§53.11), qui reste à faire.

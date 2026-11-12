@@ -32,7 +32,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
     "previousSha256": "95287e9c3f9be2b88db9e391a9a143c4c69be8956b6763e4113645974b9e878d",
-    "currentSha256": "159dd2b5adcf8905afaa78ffcb8b79771aaf404771b92fbdd919b3010d0ea00d"
+    "currentSha256": "45a3f15746794e3a7ca847a509c7dcbd06a7b50ab9c21360289b807a3386fa74"
   },
   "index.html": {
     "previousSha256": "337a0b230d0b075bf70e5122240f1ce8e0d2deaebbbd563a15496ea92b5f4d66",
@@ -64,7 +64,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "328c764b2bf467d0bc21ae86abf415a7722bd0a88cba486eb2167c22fa8f0b84",
-    "currentSha256": "cde94488be4f459d21e546b204e5ee870e4a75d5856f572b8b6bc16b4bd8d761"
+    "currentSha256": "dd9642dc24e300d043a006955e607d1b0891e3c33e9dd03bdb7c4fb242b9ad62"
   },
   "src/app.js": {
     "previousSha256": "482835e65677c536085a1344cf61c3ffa5e09e2af1b8029b949e000a533038ae",
@@ -108,7 +108,8 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
 export const TANTALUS_PRIORITIES_SOURCE_ONLY_PATHS_V188 = Object.freeze([
   'scripts/audit-tantalus-priorities-v188.mjs',
   'scripts/verify-tantalus-priorities-v188.mjs',
-  '.ai-tools/adopted-v188.json'
+  '.ai-tools/adopted-v188.json',
+  'docs/development/PRIORITIES_P0_P1_V188.md'
 ]);
 
 export function reviewedTantalusPrioritiesDigestV188(path, endpoint) {
