@@ -28,9 +28,12 @@ export const ORIGINS_V188 = Object.freeze([
   o('origin-20', 'Dossier caviardé', 'Redacted file', 'Aucune capacité ; fil secondaire propre', 'No ability; own side thread')
 ]);
 export const DEFAULT_ORIGIN_V188 = 'origin-20';
-// Abilities already connected to a runtime hook. The others carry their
-// validated value and are listed as "à raccorder" in the V188 report.
-export const CONNECTED_ORIGIN_ABILITIES_V188 = Object.freeze(['origin-13', 'origin-18']);
+// Abilities connected to a runtime hook (run-options-runtime-v188.js and the
+// tension director). origin-03 and origin-16 need content the bible does not
+// define yet (extra clue texts, a sample system); origin-11 has no penalty to
+// remove because the game has no UPP weapon penalty; origin-20 has no ability.
+export const CONNECTED_ORIGIN_ABILITIES_V188 = Object.freeze(['origin-01', 'origin-02', 'origin-04', 'origin-05', 'origin-06',
+  'origin-07', 'origin-08', 'origin-09', 'origin-10', 'origin-12', 'origin-13', 'origin-14', 'origin-15', 'origin-17', 'origin-18', 'origin-19']);
 
 export function normalizeOriginV188(value) {
   return ORIGINS_V188.some(origin => origin.id === value) ? value : DEFAULT_ORIGIN_V188;

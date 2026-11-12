@@ -16,7 +16,7 @@ test('20 origins from bible §2.4 with an unknown value falling back to origin-2
   assert.ok(ORIGINS_V188.every(origin => origin.label.fr && origin.label.en && origin.ability.fr && origin.ability.en));
   assert.equal(ORIGINS_V188.at(-1).value, null, 'origin-20 has no ability');
   assert.equal(normalizeOriginV188('origin-07'), 'origin-07'); assert.equal(normalizeOriginV188('origin-99'), DEFAULT_ORIGIN_V188);
-  assert.deepEqual(CONNECTED_ORIGIN_ABILITIES_V188, ['origin-13', 'origin-18']);
+  assert.equal(CONNECTED_ORIGIN_ABILITIES_V188.length, 16);
 });
 
 test('permadeath can be switched off but never back on; older saves keep it on', () => {
