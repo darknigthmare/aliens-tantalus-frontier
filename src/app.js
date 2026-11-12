@@ -1,3 +1,4 @@
+import { applyAccessibilityV188, installKeyRemapV188, mountKeyBindingsUiV188, normalizeKeyBindingsV188, soundCaptionV188 } from './accessibility-v188.js';
 import { spareCrewMemberV188, normalizeCrewPermadeathV188, normalizeCustomDifficultyV188, normalizeOriginV188, CUSTOM_DIFFICULTY_BOUNDS_V188 } from './run-options-v188.js';
 import { cueForGameEventV188, casteCueV188 } from './audio-cues-v188.js';
 import { deriveStoryCampaignV188, markStoryDebriefSeenV188, STORY_RELAY_CAMPAIGN_ID_V188 } from './story-campaign-v188.js';
@@ -463,6 +464,7 @@ function runTimedMutation(mutation, successMessage, { duringTransitV116 = false 
   return result;
 }
 
+let keyBindingsUiV188 = null;
 function applyRuntimeSettings() {
   const settings = saveSystem.data.settings;
   document.documentElement.classList.toggle('reduced-motion', Boolean(settings.reducedMotion));
@@ -472,6 +474,7 @@ function applyRuntimeSettings() {
   hubEngine.setReducedMotion(Boolean(settings.reducedMotion));
   engine.setCoop(Boolean(settings.coop));
   audio.setVolumes({ effects: settings.effects ?? 0.7, music: settings.music ?? 0.45 });
+  applyAccessibilityV188(settings);
 }
 
 const BIOFORGE_EVENT_MESSAGES_V80 = Object.freeze({
@@ -2054,6 +2057,9 @@ function renderProfiles() {
   byId('quick-save').disabled = Boolean(recovery);
   byId('save-export').textContent = recovery ? 'EXPORTER LE FICHIER ORIGINAL' : tV185('settings.export', 'EXPORTER LA SAUVEGARDE');
   byId('setting-difficulty').value = saveSystem.data.settings.difficulty;
+  if (byId('setting-colorblind-v188')) byId('setting-colorblind-v188').value = saveSystem.data.settings.colorblindV188 || 'off';
+  if (byId('setting-text-scale-v188')) byId('setting-text-scale-v188').value = String(saveSystem.data.settings.textScaleV188 || 1);
+  keyBindingsUiV188?.render();
   if (byId('setting-permadeath-v188')) {
     byId('setting-permadeath-v188').checked = saveSystem.data.settings.crewPermadeathV188 !== false;
     byId('setting-permadeath-v188').disabled = saveSystem.data.settings.crewPermadeathV188 === false;
@@ -2982,7 +2988,11 @@ function handleGameEvent(event) {
   // V188 priority cues and in-mission music moods (bible §53.2, §55.7).
   const enemyV188 = event.type === 'spotted' ? engine.enemies?.find?.((entry) => entry.id === event.enemyId) : null;
   const cueV188 = enemyV188 ? casteCueV188(enemyV188) : cueForGameEventV188(event);
-  if (cueV188) audio.cue(cueV188);
+  if (cueV188) {
+    audio.cue(cueV188);
+    const captionV188 = saveSystem.data.settings.subtitles ? soundCaptionV188(cueV188, document.documentElement.lang) : null;
+    if (captionV188) engine.pushCaption?.('sound', captionV188);
+  }
   if (event.type === 'tension-phase-v188') audio.setMusicMoodV188(event.phase === 'peak' ? 'alert'
     : event.phase === 'relax' || event.register === 'horror' ? 'calm' : 'mission');
   if (enemyV188?.isBoss || event.type === 'mecha-boss-warning-v131') audio.setMusicMoodV188('boss');
@@ -4077,8 +4087,19 @@ function bind() {
     'setting-subtitles': ['subtitles', (element) => element.checked],
     'setting-effects': ['effects', (element) => Number(element.value)],
     'setting-music': ['music', (element) => Number(element.value)],
-    'setting-permadeath-v188': ['crewPermadeathV188', (element) => normalizeCrewPermadeathV188(saveSystem.data.settings.crewPermadeathV188, element.checked)]
+    'setting-permadeath-v188': ['crewPermadeathV188', (element) => normalizeCrewPermadeathV188(saveSystem.data.settings.crewPermadeathV188, element.checked)],
+    'setting-colorblind-v188': ['colorblindV188', (element) => element.value],
+    'setting-text-scale-v188': ['textScaleV188', (element) => Number(element.value)]
   };
+  // V188 complete J1 key remapping (§53.8): capture-phase translation layer.
+  installKeyRemapV188(globalThis, () => saveSystem.data?.settings?.keyBindingsV188);
+  keyBindingsUiV188 = mountKeyBindingsUiV188(byId('setting-key-bindings-v188'), {
+    getBindings: () => saveSystem.data.settings.keyBindingsV188, language: document.documentElement.lang,
+    onChange: (bindings) => {
+      try { saveSystem.commit({ settings: { ...saveSystem.data.settings, keyBindingsV188: normalizeKeyBindingsV188(bindings) } }); }
+      catch (error) { toast(error.message); }
+    }
+  });
   for (const key of Object.keys(CUSTOM_DIFFICULTY_BOUNDS_V188)) {
     const element = byId(`setting-custom-${key}-v188`); if (!element) continue;
     element.onchange = () => {

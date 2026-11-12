@@ -1,3 +1,4 @@
+import { normalizeColorblindV188, normalizeTextScaleV188, normalizeKeyBindingsV188, defaultKeyBindingsV188 } from './accessibility-v188.js';
 import { spareCrewMemberV188, normalizeOriginV188, normalizeCustomDifficultyV188, DEFAULT_CUSTOM_DIFFICULTY_V188 } from './run-options-v188.js';
 import { createStoryCampaignV188, normalizeStoryCampaignV188 } from './story-campaign-v188.js';
 import { COSTUMES, CREW, RELEASE, VEHICLES, WORLDS, CAMPAIGNS, WEAPONS, EQUIPMENT } from './content.js';
@@ -389,6 +390,9 @@ export function createDefaultSave(profile = 1) {
       effects: 0.7,
       coop: false,
       crewPermadeathV188: true,
+      colorblindV188: 'off',
+      textScaleV188: 1,
+      keyBindingsV188: defaultKeyBindingsV188(),
       customDifficultyV188: { ...DEFAULT_CUSTOM_DIFFICULTY_V188 }
     },
     statistics: { playSeconds: 0, kills: 0, shots: 0, hits: 0, deaths: 0, rescues: 0, rooms: 0, campaigns: 0, strategicActions: 0, research: 0, procurements: 0, retreats: 0 }
@@ -2390,6 +2394,9 @@ export function migrateSave(input, profile = 1) {
   migrated.settings.screenShake = numberBetween(settings.screenShake, base.settings.screenShake, 0, 1);
   // V188 additive run options: older saves keep permadeath and standard values.
   migrated.settings.crewPermadeathV188 = settings.crewPermadeathV188 !== false;
+  migrated.settings.colorblindV188 = normalizeColorblindV188(settings.colorblindV188);
+  migrated.settings.textScaleV188 = normalizeTextScaleV188(settings.textScaleV188);
+  migrated.settings.keyBindingsV188 = normalizeKeyBindingsV188(settings.keyBindingsV188);
   migrated.settings.customDifficultyV188 = { ...normalizeCustomDifficultyV188(settings.customDifficultyV188) };
   migrated.player.originV188 = normalizeOriginV188(player.originV188);
   const aimAssist = settings.aimAssist;

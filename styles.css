@@ -1036,3 +1036,12 @@ button:disabled {
 @media(max-width:600px) { .cloud-auth-v119 { grid-template-columns:1fr; } }
 .mission-aim-help-v130 { margin: 10px 0 18px; color: #b7ccb9; font-size: .78rem; line-height: 1.7; }
 .mission-aim-help-v130 kbd { padding: 2px 6px; border: 1px solid #46624e; border-radius: 3px; background: #17241c; color: #e4f4e8; font: inherit; white-space: nowrap; }
+
+/* V188 accessibility (bible §53.8): colour-blind correction and text size.
+   Text size scales every rem-based size; the remaining px sizes are listed in the V188 report. */
+html { font-size: calc(100% * var(--atf-text-scale-v188, 1)); }
+html[data-colorblind-v188="protanopia"] canvas, html[data-colorblind-v188="protanopia"] .panel { filter: url(#atf-cb-protanopia-v188); }
+html[data-colorblind-v188="deuteranopia"] canvas, html[data-colorblind-v188="deuteranopia"] .panel { filter: url(#atf-cb-deuteranopia-v188); }
+html[data-colorblind-v188="tritanopia"] canvas, html[data-colorblind-v188="tritanopia"] .panel { filter: url(#atf-cb-tritanopia-v188); }
+.key-bindings-v188 { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 6px; }
+.custom-difficulty-v188 { border: 1px solid rgba(131, 213, 161, .35); padding: 8px; display: grid; gap: 6px; }

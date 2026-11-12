@@ -36,11 +36,11 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "index.html": {
     "previousSha256": "337a0b230d0b075bf70e5122240f1ce8e0d2deaebbbd563a15496ea92b5f4d66",
-    "currentSha256": "2eee50d290ab65d4e13dea15904432fe8cfc5c99f965efa3acd5b16de39ec28e"
+    "currentSha256": "b36be58497a7e12b4d22bb3472ada31cea3e23d3517d809fbf3499783df38af1"
   },
   "package.json": {
     "previousSha256": "ff133a405bfc1ef2afa7085fcb2a6cde27a9f52c4af0de5172a058b47082eb48",
-    "currentSha256": "7930dbc3281a0106e1554223995872965aa3335d590cd3098346689d9dbd7633"
+    "currentSha256": "023e5044b3c20faf5d56624ecd3b98a0d4a9ef2099aa33e03c9252474341e31d"
   },
   "scripts/audit-native-qa-resources-v187.mjs": {
     "previousSha256": "6be75d792e8ae0ba4d1ad6cbdaa4285e78bd958fda2eeaa23e510a5b2b49190d",
@@ -64,11 +64,11 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "328c764b2bf467d0bc21ae86abf415a7722bd0a88cba486eb2167c22fa8f0b84",
-    "currentSha256": "69bcacc221b8da4ff5cd891ac75f4d869e4b41133404857eaf5fa24984f7291c"
+    "currentSha256": "95c86db268a54567151dbacc40711172677fd7d6f7601d1b5ca98039840b0c4b"
   },
   "src/app.js": {
     "previousSha256": "482835e65677c536085a1344cf61c3ffa5e09e2af1b8029b949e000a533038ae",
-    "currentSha256": "fd27863b8e5a81a359071ec81e751c9ade9fd7393c0b4194f15bd74ad2651b4d"
+    "currentSha256": "19c163c2852a107a520f29ca9b1c09eb9c6c779cd5b55cf3b2729398d41b16cd"
   },
   "src/audio-assets-v77.js": {
     "previousSha256": "bbbc868dbf7e0715be6d717d1c5ff142246a95a52ba3ff2e97f4ad11c9f34ce2",
@@ -92,7 +92,11 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/save.js": {
     "previousSha256": "afd5b289887c3a6be5d704ad9b501d9cd7bfeae4514fdfb4eaf21095e6d42304",
-    "currentSha256": "0fc5c9fedbe58f4e1fbf1afe7bc8a28385aa1848b837b5243249451ed3e15dac"
+    "currentSha256": "a0d0ceb6088da0bed3216a714f5b2708d4fd40220a500c281c0b603c38b566ee"
+  },
+  "styles.css": {
+    "previousSha256": "5d7f49517ea4377aaf2847e7ef5f5dd5f6e4b015301e1280072d41fd9edab36c",
+    "currentSha256": "50bb521df711879b4656ce0f2fccf14b5fcb3adc0a980f4e44e9f9ed9155d8e9"
   }
 });
 // END V188 SOURCE RECEIPTS
