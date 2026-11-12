@@ -4,6 +4,9 @@ import { readFileSync } from 'node:fs';
 import { CAMPAIGNS, WORLDS } from '../src/content.js';
 import { createDefaultSave, migrateSave, beginOperation, resolveOperation } from '../src/save.js';
 import { applyCampaignConsequence } from '../src/campaign-consequences.js';
+import { currentReactiveLineV188 } from '../src/reactive-lines-v188.js';
+import { buildCrewUiModelV85 } from '../src/crew-ui-v85.js';
+import { CREW } from '../src/content.js';
 import { REACTIVE_TRIGGERS_V188, REACTIVE_LINES_V188, detectReactiveTriggersV188, selectReactiveLinesV188,
   normalizeReactiveLinesV188 } from '../src/reactive-lines-v188.js';
 
@@ -54,4 +57,18 @@ test('memory migrates additively and drops malformed entries; app wires the line
     [{ crewId: 'x', trigger: 'mission-failed', day: 2 }]);
   const app = readFileSync(new URL('../src/app.js', import.meta.url), 'utf8');
   assert.match(app, /detectReactiveTriggersV188\(saveSystem\.data, candidate, operation/);
+});
+
+test('the mess debrief topic repeats the recent reaction for 3 days, then drops it', () => {
+  const { after, operation } = failedRelay();
+  const triggers = detectReactiveTriggersV188(after, after, operation, { success: false });
+  const [line] = selectReactiveLinesV188(after, triggers, { operation });
+  assert.ok(line);
+  assert.equal(currentReactiveLineV188(after, line.crewId), REACTIVE_LINES_V188[line.trigger].human.fr);
+  const model = buildCrewUiModelV85(after, CREW);
+  const member = model.members.find(entry => entry.id === line.crewId);
+  assert.equal(member?.conversationV120?.mode, 'service');
+  const debrief = member.conversationV120.topics.find(topic => topic.id === 'debrief');
+  assert.ok(debrief.reactionV188); assert.ok(debrief.answer.includes(line.text));
+  after.clock.day += 3; assert.equal(currentReactiveLineV188(after, line.crewId), null);
 });

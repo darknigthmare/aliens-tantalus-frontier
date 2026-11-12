@@ -72,3 +72,12 @@ export function selectReactiveLinesV188(save, triggers, { operation = null, isSy
   if (save) save.reactiveLinesV188 = memory;
   return lines;
 }
+
+/** The member's reactive line still current (within the repeat window), as
+ * shown again in the mess debrief topic. Returns null when none applies. */
+export function currentReactiveLineV188(save, crewId, { synthetic = false, language = 'fr' } = {}) {
+  const memory = normalizeReactiveLinesV188(save?.reactiveLinesV188), day = Number(save?.clock?.day) || 0;
+  const entry = [...memory.said].reverse().find(said => said.crewId === crewId && day - said.day < REACTIVE_REPEAT_DAYS_V188);
+  if (!entry) return null;
+  return REACTIVE_LINES_V188[entry.trigger][synthetic ? 'synthetic' : 'human'][language === 'en' ? 'en' : 'fr'];
+}

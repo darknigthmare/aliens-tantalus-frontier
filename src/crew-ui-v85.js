@@ -1,3 +1,4 @@
+import { currentReactiveLineV188 } from './reactive-lines-v188.js';
 import { APTITUDE_DEFINITIONS_V85, deriveRecruitIdentityV119, resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
 import { getPremiumPersonnelV119 } from './premium-personnel-v119.js';
 import { buildCrewConversationV120, selectCrewConversationTopicV120 } from './crew-conversations-v120.js';
@@ -19,6 +20,14 @@ export function buildCrewUiModelV85(save, catalog = []) {
   const candidates = list(save.recruitmentV85?.candidates).map(profile => ({ ...profile, recruitV85: profile, identityV119: deriveRecruitIdentityV119(profile), aptitudesV85: profile.aptitudes, gearV85: profile.gear, candidate: true, status: 'candidat' }));
   const memory = normalizeCrewConversationMemoryV135(save.crewConversationMemoryV135, { crew: save.crew, catalog, clock: save.clock });
   for (const member of [...members, ...candidates]) member.conversationV120 = buildCrewConversationV120(member, { roster: members, campaignCatalog: CAMPAIGNS, equipmentCatalog: [...WEAPONS, ...EQUIPMENT] });
+  // V188 (bible §53.6): the member's recent reaction is repeated in the mess debrief.
+  for (const member of members) {
+    const conversation = member.conversationV120, line = conversation?.mode === 'service'
+      && currentReactiveLineV188(save, member.id, { synthetic: member.species === 'synthetic' });
+    if (!line || !Array.isArray(conversation.topics)) continue;
+    member.conversationV120 = { ...conversation, topics: conversation.topics.map(topic => topic.id === 'debrief'
+      ? { ...topic, answer: `${topic.answer} « ${line} »`, reactionV188: true } : topic) };
+  }
   const archives = getPremiumPersonnelV119(save);
   return { members, candidates, archives, active: members.filter(m => m.selected), reserve: members.filter(m => !m.selected),
     locked: Boolean(save.strategy?.currentOperation || (save.onboardingV84 && save.onboardingV84.phase !== 'complete')),
