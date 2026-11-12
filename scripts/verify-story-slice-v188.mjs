@@ -111,3 +111,55 @@ test('the ending music plays at Operations once the four Cocyte chapters are com
   const app = readFileSync(new URL('../src/app.js', import.meta.url), 'utf8');
   assert.match(app, /\['operations', 'command'\]\.includes\(name\) && storyEndingReachedV188\(saveSystem\.data\) \? 'ending'/);
 });
+
+import { SaveSystem, resolveOperation } from '../src/save.js';
+import { advancePlayerOnboardingV84, validatePlayerIdentityV84 } from '../src/player-onboarding-v84.js';
+import { advancePlayerOpeningV88, OPENING_POSTS_V88, OPENING_RELAY_SECONDS_V88 } from '../src/player-opening-v88.js';
+import { advancePortMeridienV90, PORT_POSTS_V90, portTaskSecondsV90 } from '../src/port-meridien-v90.js';
+
+test('journey: the real state machines walk the whole first hour and storyCampaign follows every step', () => {
+  const values = new Map(), system = new SaveSystem({ getItem: k => values.get(k) ?? null, setItem: (k, v) => values.set(k, v), removeItem: k => values.delete(k) });
+  system.newPlayerTimelineV84(validatePlayerIdentityV84({ name: 'Test Marine', callsign: 'TEST' }).identity, 1);
+  const save = system.data, steps = [deriveStoryCampaignV188(save).step];
+  // Wake-up and welcome (§4).
+  const onboard = event => { const r = advancePlayerOnboardingV84(save.onboardingV84, event); assert.ok(r.ok, `${JSON.stringify(event)} ${r.reason}`); save.onboardingV84 = r.state; };
+  onboard('wake-confirmed');
+  for (const part of ['medical', 'briefing']) { for (let node = 0; node < 2; node++) onboard({ type: `${part}-next`, dialogueNode: node }); onboard(`${part}-complete`); }
+  steps.push(deriveStoryCampaignV188(save).step);
+  // Ship duties and qualification (§4.2).
+  const open = (event, evidence = {}) => { const r = advancePlayerOpeningV88(save.openingV88, event, { onboardingComplete: true,
+    roomId: OPENING_POSTS_V88[save.openingV88.phase]?.roomId, physicalContact: true, ...evidence }); assert.ok(r.ok, `${JSON.stringify(event)} ${r.reason}`); save.openingV88 = r.state; };
+  open('berth'); open('armory', { weaponIds: ['weapon-001-m41a-pulse-rifle'] });
+  const receipt = 'm41a-qualification-v81:session-1:qualification';
+  open('qualified', { qualificationId: receipt, qualificationReceiptIds: [receipt] });
+  open('relay', { relaySeconds: OPENING_RELAY_SECONDS_V88 });
+  for (let node = 0; node < 3; node++) open({ type: 'signal-next', node });
+  open({ type: 'freight', freight: 'medical' });
+  assert.equal(save.openingV88.phase, 'ready');
+  // Port-Méridien (§6).
+  const port = (action, extra = {}) => {
+    const post = PORT_POSTS_V90[save.portMeridienV90.phase];
+    const actor = post ? { x: post.x - 20, y: post.y - 80, w: 40, h: 80, alive: true, grounded: true, facing: 1 } : { x: 0, y: 0, w: 40, h: 80, alive: true, grounded: true };
+    const r = advancePortMeridienV90(save.portMeridienV90, action, { openingPhase: 'ready', onboardingComplete: true, revision: save.portMeridienV90.revision,
+      briefingContact: true, freight: 'medical', actor, taskSeconds: portTaskSecondsV90(save.portMeridienV90), ...extra });
+    assert.ok(r.ok, `${action} ${r.reason}`); save.portMeridienV90 = r.state;
+  };
+  port('board'); steps.push(deriveStoryCampaignV188(save).step);
+  for (const action of ['unload', 'carry', 'triage', 'power', 'escort']) port(action);
+  port('escort', { civiliansX: [2160, 2215, 2270] }); port('report');
+  assert.equal(save.portMeridienV90.phase, 'complete');
+  // Briefing → QZ-18 → return → debrief (§5.2).
+  const briefing = deriveStoryCampaignV188(save); steps.push(briefing.step);
+  const campaign = CAMPAIGNS.find(entry => entry.id === briefing.recommendedCampaignId);
+  beginOperation(save, campaign, WORLDS.find(entry => entry.id === campaign.worldId)); steps.push(deriveStoryCampaignV188(save).step);
+  // A retreat closes the operation and sends the player back to the briefing.
+  assert.equal(resolveOperation(save, { success: false, reason: 'retreat' }).ok, true);
+  assert.equal(deriveStoryCampaignV188(save).step, 'briefing');
+  // A native QZ-18 success (covered end to end by verify-campaign-story-v160) records the chapter.
+  save.galaxy.completedCampaignIds.push(STORY_RELAY_CAMPAIGN_ID_V188);
+  steps.push(deriveStoryCampaignV188(save).step);
+  markStoryDebriefSeenV188(save, STORY_RELAY_CAMPAIGN_ID_V188); steps.push(deriveStoryCampaignV188(save).step);
+  assert.deepEqual(steps, ['wake', 'ship', 'port', 'briefing', 'qz18', 'debrief', 'next']);
+  assert.ok(system.commit(save));
+  assert.deepEqual(system.load(1).storyCampaignV188.debriefSeen, [STORY_RELAY_CAMPAIGN_ID_V188], 'the debrief marker survives save and reload');
+});
