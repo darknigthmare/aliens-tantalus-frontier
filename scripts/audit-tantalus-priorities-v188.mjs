@@ -30,9 +30,25 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
     "previousSha256": "fe1591ced8f54e576de99963bb6034ee35a06d07cafa5022279bd04ac9fef8ab",
     "currentSha256": "1e2de4cf1ae7c1e5c22d42d5f82e7242b5550d651c73012b0e345fb89c51d311"
   },
+  "bioforge-v80.css": {
+    "previousSha256": "7c81329084b7f189fc6893571ff50f1b806de302360c4a5a5ca9056732555d39",
+    "currentSha256": "759e4893bdb3cbc163e4e24432adf1b582429ca7377f0aa153abe22cf6b64178"
+  },
+  "catalog-v62.css": {
+    "previousSha256": "bfa4b96ed445e8274760e3f7ad9cf876d9eec5ee5ab958f0c66e88177b01c780",
+    "currentSha256": "4d0b0b616d94531e2c03f1c8259dbf7efd33142a57650ea24d05496c84fae1da"
+  },
+  "command-v110.css": {
+    "previousSha256": "4c22914bedd2d9de880126cd29dd5e458d37e85d56603fae15600b4621b94c42",
+    "currentSha256": "1dcf80ad24a380b68a268e0e9dba2029ea6cf05ff5acb7b550ce33de6ba97703"
+  },
   "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
     "previousSha256": "95287e9c3f9be2b88db9e391a9a143c4c69be8956b6763e4113645974b9e878d",
     "currentSha256": "25e2d8ae61a4f54067a2fb2d651d991b0fcede1f38efb51139c13a1f3a791cd1"
+  },
+  "hub-level.css": {
+    "previousSha256": "13e29b3719e1246d595dadca4c786cbeb5a471dece902104b0ccd29a1de9908d",
+    "currentSha256": "12c8e9e7f561a2eaec89fe9dfac46a190b1cd801a303cd85e95820b66821c818"
   },
   "index.html": {
     "previousSha256": "337a0b230d0b075bf70e5122240f1ce8e0d2deaebbbd563a15496ea92b5f4d66",
@@ -41,6 +57,14 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   "package.json": {
     "previousSha256": "ff133a405bfc1ef2afa7085fcb2a6cde27a9f52c4af0de5172a058b47082eb48",
     "currentSha256": "db6f5f4707ca70af96e40010d5fc1175ae4711a0e5573ad89af54ef2a9ff20a7"
+  },
+  "player-onboarding-v84.css": {
+    "previousSha256": "ae49e974d70f1a46dbd28da6d5515fac0124c992591cf0c1c50ad3e7e3d1cfbf",
+    "currentSha256": "3e31fb2592b3501dae86271a8cc50be24f0c0bfd64545938617301b98138b242"
+  },
+  "runtime-level.css": {
+    "previousSha256": "28f938a757c83c1ca286d8520afd164fe1b6f8bc1524bfd9d3fb8e7e0f36f4f8",
+    "currentSha256": "ef091c01725ac2d23ac7faf541d6ece9bce39c2752185ff6a778a978da6bfbb1"
   },
   "scripts/audit-native-qa-resources-v187.mjs": {
     "previousSha256": "6be75d792e8ae0ba4d1ad6cbdaa4285e78bd958fda2eeaa23e510a5b2b49190d",
@@ -94,17 +118,37 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
     "previousSha256": "0b5174e5ff3948b5ec987bc2fdee1aca277d64d4eb668ef369461df272bb566f",
     "currentSha256": "c3550bbe7b521b9585f5f9260d7ed1d747de660bdbdc0d0b156645e90a5daeba"
   },
+  "src/refuge-v87.css": {
+    "previousSha256": "fce1e18a977737d258969dac8bed077c9a65b58857e3e916248bd5c835e01751",
+    "currentSha256": "af34f1b5237ad0103e2abf9707030eb65293ae2deb08853f6bc20ad258ee6f7d"
+  },
   "src/save.js": {
     "previousSha256": "afd5b289887c3a6be5d704ad9b501d9cd7bfeae4514fdfb4eaf21095e6d42304",
     "currentSha256": "dd20004effccaa0767f7d9cc8ef8325e8d79bc488b12fd830c5c5f2bc0007ffc"
   },
+  "src/ship-port-v87.css": {
+    "previousSha256": "280b758be54bcb9433fb8353dc73b6bb047b79ce9f1210c47e5bde05ec9f29b9",
+    "currentSha256": "45bf14ef6d7ef549d4b88b732d199f85c05f2524dc34ae67e7617c88361971fa"
+  },
   "styles.css": {
     "previousSha256": "5d7f49517ea4377aaf2847e7ef5f5dd5f6e4b015301e1280072d41fd9edab36c",
-    "currentSha256": "50bb521df711879b4656ce0f2fccf14b5fcb3adc0a980f4e44e9f9ed9155d8e9"
+    "currentSha256": "438063f6ff36781754ba1748f0ff4a061a4b5170a4003466349b16be874be548"
   },
   "sw.js": {
     "previousSha256": "ff86bba365c3875c8ebaeb0abe13b2a6185ccd5f1a030b4ee5b15ac0e4a12f9b",
     "currentSha256": "23ea49973f38fd7c967504e1986b2f96d24b20569c53e5049a63c4809d7ee085"
+  },
+  "title-screen-v61.css": {
+    "previousSha256": "3a748b04d5e6c9a7e04c189b2c1910c3163a0840968be6bcbb6352e10e16369f",
+    "currentSha256": "88fe408917883476acd0e645178319e231a53dbc4192d5d50d0af79a772be4fd"
+  },
+  "xeno-trials-fullscreen-v119.css": {
+    "previousSha256": "861ce30fd8721d0406fdef9e6881ac3220f3a58ab4d46b7e1878463063b26682",
+    "currentSha256": "972fb0679d394bfb5426a84cc748657a72ca0d567cad037899fd010819800712"
+  },
+  "xeno-trials-v96.css": {
+    "previousSha256": "7b34c819ecd9f6843d59f7534e902603ad80fa1b02d55ecdfc1ee5ac82a4b5ea",
+    "currentSha256": "8f682f017674d4078583fec043d4e85721700884606a7d16889d8d4512d7998a"
   }
 });
 // END V188 SOURCE RECEIPTS

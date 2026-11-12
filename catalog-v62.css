@@ -43,7 +43,7 @@
 .catalog-v119__showroom--lift .catalog-v119__showroom-structure { inset: -20% 25%; border: 12px solid #41554d; background: repeating-linear-gradient(0deg, #081313 0 54px, #293c33 55px 62px); }
 .catalog-v119__station-list { display: grid; gap: 7px; padding-left: 25px; font: 11px/1.5 var(--mono, monospace); }
 .catalog-v119__station-list li { padding: 8px; border-bottom: 1px solid var(--catalog-v62-line); }
-.catalog-v119__station-list span { display: block; color: var(--catalog-v62-muted); font-size: 10px; }
+.catalog-v119__station-list span { display: block; color: var(--catalog-v62-muted); font-size: calc(10px * var(--atf-text-scale-v188, 1)); }
 .catalog-v119__vehicle-variants { display: flex; flex-wrap: wrap; gap: 6px; }
 .catalog-v119__vehicle-variants button[aria-pressed="true"] { border-color: var(--catalog-v62-green); color: var(--catalog-v62-green); }
 @media (max-width: 1200px) { .catalog-v62.catalog-v119__vehicle-workbench { grid-template-columns: minmax(165px, .55fr) minmax(210px, .7fr) minmax(320px, 1.4fr); } }
@@ -143,7 +143,7 @@
 .catalog-v62__tree-count {
   min-width: 27px;
   color: rgba(208, 227, 214, .42);
-  font-size: 9px;
+  font-size: calc(9px * var(--atf-text-scale-v188, 1));
   text-align: right;
 }
 
@@ -286,7 +286,7 @@
 
 .catalog-v62__card-title {
   color: var(--catalog-v62-ink);
-  font-size: 13px;
+  font-size: calc(13px * var(--atf-text-scale-v188, 1));
   line-height: 1.25;
 }
 
@@ -342,7 +342,7 @@
 .catalog-v62__detail-heading h3 {
   margin: 5px 0 8px;
   color: var(--catalog-v62-ink);
-  font-size: 19px;
+  font-size: calc(19px * var(--atf-text-scale-v188, 1));
   line-height: 1.12;
 }
 
@@ -460,7 +460,7 @@
 
 .catalog-v62__relation small {
   color: rgba(208, 227, 214, .38);
-  font-size: 7px;
+  font-size: calc(7px * var(--atf-text-scale-v188, 1));
   text-transform: uppercase;
 }
 

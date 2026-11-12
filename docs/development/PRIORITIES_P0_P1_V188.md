@@ -91,7 +91,7 @@ Toutes les suites listées ci-dessous ont été exécutées.
 - **Terminal de sauvegarde** : le terminal est le dernier checkpoint sécurisé. Aucun objet de décor dédié n'a été dessiné.
 - **Origines** : 17 capacités ont leur valeur, mais aucun raccordement au jeu (chargeur, civils, dossiers, conduits, soins, extraction, portes de la compagnie, UPP, fouille, casiers, M577, échantillons, ordres, couloirs). Le fil du dossier caviardé (§2.4.3) n'est pas écrit dans le jeu.
 - **Castes** : le comportement de plafond attend une géométrie de plafond dans les niveaux. Les mouvements ajoutés sont bornés au sol courant, ce qui reste prudent sur les sols segmentés.
-- **Taille du texte** : elle agit sur les tailles en `rem` (environ 65 % des règles). Les tailles en `px` restent à reprendre.
+- **Taille du texte** : elle agit sur les tailles en `rem` et sur les 108 tailles en `px` des écrans du joueur. Les feuilles de Frontier Forge (outil d’édition) restent inchangées, car leurs octets sont épinglés par les audits historiques de Forge.
 - **Mode daltonien** : c'est une correction de couleur globale. Les couleurs codées en dur dans le Canvas n'ont pas encore de palette dédiée.
 - **Répliques** : elles s'affichent en notification au retour. Elles ne sont pas encore intégrées aux conversations du mess.
 - **Non mesuré** : le test de la tranche par 3 à 5 joueurs (§53.11), le ressenti du tir, la peur et la durée de la première heure.
