@@ -315,6 +315,7 @@ const FORGE_TOOLING_V140 = new Set([
   'scripts/generate-audio-v188.mjs',
   'scripts/verify-audio-cues-v188.mjs',
   'scripts/verify-combat-feel-v188.mjs',
+  'scripts/verify-run-options-v188.mjs',
   // Source-only narrative design bible; never shipped in a built distribution.
   'docs/narrative',
   'docs/narrative/CAMPAGNE_PRINCIPALE.md',

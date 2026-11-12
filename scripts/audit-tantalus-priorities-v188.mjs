@@ -34,9 +34,13 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
     "previousSha256": "95287e9c3f9be2b88db9e391a9a143c4c69be8956b6763e4113645974b9e878d",
     "currentSha256": "159dd2b5adcf8905afaa78ffcb8b79771aaf404771b92fbdd919b3010d0ea00d"
   },
+  "index.html": {
+    "previousSha256": "337a0b230d0b075bf70e5122240f1ce8e0d2deaebbbd563a15496ea92b5f4d66",
+    "currentSha256": "2eee50d290ab65d4e13dea15904432fe8cfc5c99f965efa3acd5b16de39ec28e"
+  },
   "package.json": {
     "previousSha256": "ff133a405bfc1ef2afa7085fcb2a6cde27a9f52c4af0de5172a058b47082eb48",
-    "currentSha256": "010924a967275d7ef7da2587d0887063f8cb2ea65fc345c35880ab7d07b6a5b7"
+    "currentSha256": "7930dbc3281a0106e1554223995872965aa3335d590cd3098346689d9dbd7633"
   },
   "scripts/audit-native-qa-resources-v187.mjs": {
     "previousSha256": "6be75d792e8ae0ba4d1ad6cbdaa4285e78bd958fda2eeaa23e510a5b2b49190d",
@@ -60,11 +64,11 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "328c764b2bf467d0bc21ae86abf415a7722bd0a88cba486eb2167c22fa8f0b84",
-    "currentSha256": "41ba51d3a12ce91c886270380b4d0acd5cdd07d4e1373a09cbca8ea041b486d7"
+    "currentSha256": "69bcacc221b8da4ff5cd891ac75f4d869e4b41133404857eaf5fa24984f7291c"
   },
   "src/app.js": {
     "previousSha256": "482835e65677c536085a1344cf61c3ffa5e09e2af1b8029b949e000a533038ae",
-    "currentSha256": "08a44a70f335826207fd78c9d8d13388d7ad2be11fd36ea8014b00dfcd0a3fe6"
+    "currentSha256": "fd27863b8e5a81a359071ec81e751c9ade9fd7393c0b4194f15bd74ad2651b4d"
   },
   "src/audio-assets-v77.js": {
     "previousSha256": "bbbc868dbf7e0715be6d717d1c5ff142246a95a52ba3ff2e97f4ad11c9f34ce2",
@@ -76,11 +80,19 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/game-production-runtime.js": {
     "previousSha256": "f0c9ff64ce004cc0dd8d028e3a62a717364fa0c1425eafb16b2ae8f808715419",
-    "currentSha256": "4c5beb526fbe875cf9d8f4e0b716d3666df466494a0ed5ed6c4b591ecf46ea2b"
+    "currentSha256": "e632d07221dbb7cbad93b08300a5f7d736c5d17688a8e82f994f59ee946294f4"
+  },
+  "src/game-runtime.js": {
+    "previousSha256": "9005aae32379ade306e187ea6c3d156f1a3083178bc0c0808d9963cdd6b8f379",
+    "currentSha256": "a2dd71ff5cfc8b450172618f82a0f98710a4736e9cc64818a06b949ff7aba6d0"
+  },
+  "src/player-creator-ui-v84.js": {
+    "previousSha256": "0b5174e5ff3948b5ec987bc2fdee1aca277d64d4eb668ef369461df272bb566f",
+    "currentSha256": "c3550bbe7b521b9585f5f9260d7ed1d747de660bdbdc0d0b156645e90a5daeba"
   },
   "src/save.js": {
     "previousSha256": "afd5b289887c3a6be5d704ad9b501d9cd7bfeae4514fdfb4eaf21095e6d42304",
-    "currentSha256": "1c5a6b23734c8a2c38e874c90798f8d5198b0d9650ed1201d51b47e5bf779cbc"
+    "currentSha256": "0fc5c9fedbe58f4e1fbf1afe7bc8a28385aa1848b837b5243249451ed3e15dac"
   }
 });
 // END V188 SOURCE RECEIPTS

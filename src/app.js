@@ -1,3 +1,4 @@
+import { spareCrewMemberV188, normalizeCrewPermadeathV188, normalizeCustomDifficultyV188, normalizeOriginV188, CUSTOM_DIFFICULTY_BOUNDS_V188 } from './run-options-v188.js';
 import { cueForGameEventV188, casteCueV188 } from './audio-cues-v188.js';
 import { deriveStoryCampaignV188, markStoryDebriefSeenV188, STORY_RELAY_CAMPAIGN_ID_V188 } from './story-campaign-v188.js';
 import {
@@ -916,11 +917,16 @@ function captureHubPoseV84() {
     visited: [...new Set(hubEngine.state.visited)] };
 }
 const playerCreatorUiV84 = new PlayerCreatorUiV84({
-  onSubmit: (identity) => {
+  onSubmit: (identity, choices = {}) => {
     const owner = creatorOwnerV84;
     if (!ownsTimelineV84(owner)) throw new Error('Le profil a changé. Annulez puis rouvrez le dossier.');
     if (saveSystem.storage.getItem(saveSystem.key(owner.target)) !== owner.original) throw new Error('Ce profil a changé dans un autre onglet. Annulez pour le recharger sans l’écraser.');
     saveSystem.newPlayerTimelineV84(identity, owner.target);
+    // V188 new-game choices (§55.5, §55.6): origin and optional crew permadeath.
+    const candidate = clone(saveSystem.data);
+    candidate.player.originV188 = normalizeOriginV188(choices.originV188);
+    candidate.settings.crewPermadeathV188 = choices.crewPermadeathV188 !== false;
+    saveSystem.commit(candidate);
   },
   onComplete: () => {
     creatorOwnerV84 = null;
@@ -2048,6 +2054,15 @@ function renderProfiles() {
   byId('quick-save').disabled = Boolean(recovery);
   byId('save-export').textContent = recovery ? 'EXPORTER LE FICHIER ORIGINAL' : tV185('settings.export', 'EXPORTER LA SAUVEGARDE');
   byId('setting-difficulty').value = saveSystem.data.settings.difficulty;
+  if (byId('setting-permadeath-v188')) {
+    byId('setting-permadeath-v188').checked = saveSystem.data.settings.crewPermadeathV188 !== false;
+    byId('setting-permadeath-v188').disabled = saveSystem.data.settings.crewPermadeathV188 === false;
+  }
+  for (const key of Object.keys(CUSTOM_DIFFICULTY_BOUNDS_V188)) {
+    const element = byId(`setting-custom-${key}-v188`);
+    if (element) element.value = saveSystem.data.settings.customDifficultyV188?.[key] ?? 1;
+  }
+  if (byId('setting-custom-v188')) byId('setting-custom-v188').hidden = saveSystem.data.settings.difficulty !== 'custom';
   byId('setting-coop').checked = saveSystem.data.settings.coop;
   byId('setting-motion').checked = saveSystem.data.settings.reducedMotion;
   byId('setting-subtitles').checked = saveSystem.data.settings.subtitles;
@@ -2549,6 +2564,8 @@ function startMissionRuntimeV62(context) {
     apexDossier: operationLoadout.apexDossier,
     neuroProfile: operationLoadout.neuroProfile,
     difficulty: operationLoadout.difficulty,
+    customDifficultyV188: saveSystem.data.settings.customDifficultyV188,
+    originV188: saveSystem.data.player.originV188,
     accessibility: {
       reducedMotion: Boolean(saveSystem.data.settings.reducedMotion),
       subtitles: Boolean(saveSystem.data.settings.subtitles),
@@ -2932,7 +2949,9 @@ function handleGameEvent(event) {
   if (event.type === 'squad-lost') {
     const casualtyOperation = saveSystem.data.strategy.currentOperation;
     const lost = saveSystem.data.crew.find((member) => member.id === event.crewId);
-    if (lost && lost.status !== 'deceased') {
+    const sparedV188 = Boolean(lost && lost.status !== 'deceased'
+      && spareCrewMemberV188(saveSystem.data, lost, { operationId: casualtyOperation?.id || null }));
+    if (lost && lost.status !== 'deceased' && !sparedV188) {
       lost.health = 0;
       lost.status = 'deceased';
       lost.injuries = Array.isArray(lost.injuries) ? lost.injuries : [];
@@ -2949,7 +2968,8 @@ function handleGameEvent(event) {
       saveSystem.data.statistics.deaths += 1;
     }
     recordOperationFlag(saveSystem.data, `squad-lost-${event.crewId}`);
-    log.textContent = `PERTE CONFIRMÉE · ${event.name || event.crewId} rejoint le mémorial`;
+    log.textContent = sparedV188 ? `BLESSÉ GRAVE · ${event.name || event.crewId} évacué · convalescence`
+      : `PERTE CONFIRMÉE · ${event.name || event.crewId} rejoint le mémorial`;
   }
   if (event.type === 'shot') saveSystem.data.statistics.shots += 1;
   if (event.type === 'kill') {
@@ -3591,6 +3611,8 @@ function launchForgeMissionPlaytest(project, { reveal = true } = {}) {
     apexDossier: operationLoadout.apexDossier,
     neuroProfile: operationLoadout.neuroProfile,
     difficulty: operationLoadout.difficulty,
+    customDifficultyV188: saveSystem.data.settings.customDifficultyV188,
+    originV188: saveSystem.data.player.originV188,
     accessibility: clone(sandbox.settings),
     editorProject: project,
     forgeJourneyV141: true,
@@ -4054,10 +4076,25 @@ function bind() {
     'setting-motion': ['reducedMotion', (element) => element.checked],
     'setting-subtitles': ['subtitles', (element) => element.checked],
     'setting-effects': ['effects', (element) => Number(element.value)],
-    'setting-music': ['music', (element) => Number(element.value)]
+    'setting-music': ['music', (element) => Number(element.value)],
+    'setting-permadeath-v188': ['crewPermadeathV188', (element) => normalizeCrewPermadeathV188(saveSystem.data.settings.crewPermadeathV188, element.checked)]
   };
+  for (const key of Object.keys(CUSTOM_DIFFICULTY_BOUNDS_V188)) {
+    const element = byId(`setting-custom-${key}-v188`); if (!element) continue;
+    element.onchange = () => {
+      try {
+        const customDifficultyV188 = normalizeCustomDifficultyV188({ ...saveSystem.data.settings.customDifficultyV188, [key]: Number(element.value) });
+        saveSystem.commit({ settings: { ...saveSystem.data.settings, customDifficultyV188: { ...customDifficultyV188 } } }); renderProfiles();
+      } catch (error) { renderProfiles(); toast(error.message); }
+    };
+  }
   for (const [id, [key, read]] of Object.entries(settingBindings)) byId(id).onchange = (event) => {
-    try { saveSystem.commit({ settings: { ...saveSystem.data.settings, [key]: read(event.target) } }); applyRuntimeSettings(); }
+    try {
+      saveSystem.commit({ settings: { ...saveSystem.data.settings, [key]: read(event.target) } }); applyRuntimeSettings();
+      if (byId('setting-custom-v188')) byId('setting-custom-v188').hidden = saveSystem.data.settings.difficulty !== 'custom';
+      if (byId('setting-permadeath-v188')) Object.assign(byId('setting-permadeath-v188'), {
+        checked: saveSystem.data.settings.crewPermadeathV188 !== false, disabled: saveSystem.data.settings.crewPermadeathV188 === false });
+    }
     catch (error) { renderProfiles(); toast(error.message); }
   };
   const updateTitleShipV87 = () => {

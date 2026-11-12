@@ -53,6 +53,7 @@ import { withTensionDirectorV188 } from './tension-director-v188.js';
 import { withMissionObjectivePanelV188 } from './mission-objective-panel-v188.js';
 import { withFootstepCuesV188 } from './audio-cues-v188.js';
 import { withCombatFeelV188 } from './combat-feel-v188.js';
+import { withRunOptionsRuntimeV188 } from './run-options-runtime-v188.js';
 
 export * from './game-production-core.js';
 
@@ -88,7 +89,7 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   });
 }
 
-export class GameEngine extends withCombatFeelV188(withFootstepCuesV188(withMissionObjectivePanelV188(withTensionDirectorV188(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(V158ProductionEngine))))))))) {
+export class GameEngine extends withRunOptionsRuntimeV188(withCombatFeelV188(withFootstepCuesV188(withMissionObjectivePanelV188(withTensionDirectorV188(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(V158ProductionEngine)))))))))) {
   start(options = {}) {
     options = isolateForgeMissionOptionsV136(options);
     this.expectedMissionSignatureV130 = options.missionLevel?.signature || null;
