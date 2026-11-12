@@ -49,6 +49,7 @@ import { withMotionTrackerV160 } from './motion-tracker-v160.js';
 import { withMagazineRecoveryWorldV168 } from './weapon-magazine-recovery-runtime-v168.js';
 import { captureMagazineFeedV168, restoreEquippedMagazineFeedV177 } from './weapon-magazine-world-v168.js';
 import { withArchiveRelayPresentationV160 } from './archive-relay-presentation-v160.js';
+import { withTensionDirectorV188 } from './tension-director-v188.js';
 
 export * from './game-production-core.js';
 
@@ -84,7 +85,7 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   });
 }
 
-export class GameEngine extends withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(V158ProductionEngine))))) {
+export class GameEngine extends withTensionDirectorV188(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(V158ProductionEngine)))))) {
   start(options = {}) {
     options = isolateForgeMissionOptionsV136(options);
     this.expectedMissionSignatureV130 = options.missionLevel?.signature || null;

@@ -2373,6 +2373,17 @@ function handleQuickSaveV86() {
     if (!saveSystem.recoveryNeeded && engine.running && engine.mission && !captureMissionResumeState()) {
       throw new Error('Mission non enregistrée : cette session ne correspond plus au profil actif.');
     }
+    // V188: the mission register decides between free save and terminals (§55.3).
+    if (!saveSystem.recoveryNeeded && engine.running && engine.mission?.state === 'active' && engine.missionSavePolicyV188) {
+      const policy = engine.missionSavePolicyV188();
+      if (!policy.allowed) {
+        if (policy.mode === 'terminal') {
+          const terminal = engine.beginTerminalSaveV188();
+          toast(terminal.allowed ? 'Terminal : sauvegarde en cours, restez à couvert 3 secondes.' : terminal.message);
+        } else toast(policy.message);
+        return false;
+      }
+    }
     commitCurrentRuntimeV78({ includeSessionTime: true });
     sessionStart = Date.now(); renderClock(); toast('Sauvegarde locale confirmée.');
     return true;
@@ -2935,6 +2946,10 @@ function handleGameEvent(event) {
   }
   if (event.type === 'vehicle') log.textContent = event.occupied ? 'POSTE DE CONDUITE OCCUPÉ · rôles et armement actifs.' : 'PROGRESSION À PIED.';
   if (event.type === 'locked') { audio.locked(); log.textContent = `ACCÈS REFUSÉ · ${event.requirement}`; }
+  if (event.type === 'terminal-save-v188') {
+    try { commitCurrentRuntimeV78({ includeSessionTime: true }); sessionStart = Date.now(); renderClock(); toast('Terminal : sauvegarde confirmée.'); }
+    catch (error) { toast(error.message); }
+  }
   if (event.type === 'checkpoint') { audio.checkpoint(); recordOperationFlag(saveSystem.data, `checkpoint-${event.checkpoint}`); log.textContent = `CHECKPOINT ${event.checkpoint} SÉCURISÉ.`; }
   if (event.type === 'power-restored' || event.type === 'shortcut' || event.type === 'archive-recovered') recordOperationFlag(saveSystem.data, event.type);
   if (event.type === 'supply') {
