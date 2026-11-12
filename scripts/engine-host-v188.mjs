@@ -54,11 +54,11 @@ export async function prepare(engine) {
 export function tick(engine, seconds, rate = 60) {
   for (let remaining = seconds; remaining > 1e-9;) { const dt = Math.min(remaining, 1 / rate); engine.update(dt); remaining -= dt; }
 }
-export async function fixture({ campaign = CAMPAIGNS[0], seed = 1321, options: extra = {} } = {}) {
+export async function fixture({ campaign = CAMPAIGNS[0], seed = 1321, options: extra = {}, keepEnemies = false } = {}) {
   const browser = host(), events = [];
   const options = { world: WORLDS[0], campaign, weapon: WEAPONS[0], enemyCatalog: ENEMIES, equipment: [], crew: [], seed, ...extra };
   options.missionLevel = buildMissionLevelV52({ ...options, templateId: 'ship-interior-vertical', levelSeeds: LEVEL_SEEDS });
   const engine = new GameEngine(browser.canvas, { onEvent: event => events.push(event) }); engine.start(options); await prepare(engine);
-  engine.enemies = []; engine.squadActors = []; engine.hazards = []; engine.coopEnabled = false;
+  engine.spawnedEnemiesV188 = engine.enemies; engine.enemies = keepEnemies ? engine.enemies : []; engine.squadActors = []; engine.hazards = []; engine.coopEnabled = false;
   return { ...browser, engine, events };
 }

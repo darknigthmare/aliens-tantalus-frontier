@@ -40,7 +40,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "package.json": {
     "previousSha256": "ff133a405bfc1ef2afa7085fcb2a6cde27a9f52c4af0de5172a058b47082eb48",
-    "currentSha256": "9847c30c71087556150681b2d5f5d3c0c5002f5e03d70f4426fb7814a19e85da"
+    "currentSha256": "db6f5f4707ca70af96e40010d5fc1175ae4711a0e5573ad89af54ef2a9ff20a7"
   },
   "scripts/audit-native-qa-resources-v187.mjs": {
     "previousSha256": "6be75d792e8ae0ba4d1ad6cbdaa4285e78bd958fda2eeaa23e510a5b2b49190d",
@@ -64,7 +64,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "328c764b2bf467d0bc21ae86abf415a7722bd0a88cba486eb2167c22fa8f0b84",
-    "currentSha256": "b0daf681ae4d67e805edf6601aca78154bbac89c4190c660a4ce1646332bf3e5"
+    "currentSha256": "cde94488be4f459d21e546b204e5ee870e4a75d5856f572b8b6bc16b4bd8d761"
   },
   "src/app.js": {
     "previousSha256": "482835e65677c536085a1344cf61c3ffa5e09e2af1b8029b949e000a533038ae",
@@ -80,7 +80,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/game-production-runtime.js": {
     "previousSha256": "f0c9ff64ce004cc0dd8d028e3a62a717364fa0c1425eafb16b2ae8f808715419",
-    "currentSha256": "e632d07221dbb7cbad93b08300a5f7d736c5d17688a8e82f994f59ee946294f4"
+    "currentSha256": "40dc9feedb496e6e9edec1c16b0d8a6a7b884d845ec0a4e2da28cbd1d674b741"
   },
   "src/game-runtime.js": {
     "previousSha256": "9005aae32379ade306e187ea6c3d156f1a3083178bc0c0808d9963cdd6b8f379",

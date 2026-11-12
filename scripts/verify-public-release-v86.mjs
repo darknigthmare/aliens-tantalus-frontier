@@ -318,6 +318,7 @@ const FORGE_TOOLING_V140 = new Set([
   'scripts/verify-run-options-v188.mjs',
   'scripts/verify-accessibility-v188.mjs',
   'scripts/verify-reactive-lines-v188.mjs',
+  'scripts/verify-caste-behaviors-v188.mjs',
   // Source-only narrative design bible; never shipped in a built distribution.
   'docs/narrative',
   'docs/narrative/CAMPAGNE_PRINCIPALE.md',
