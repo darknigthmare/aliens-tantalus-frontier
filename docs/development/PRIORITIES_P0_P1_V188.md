@@ -78,7 +78,7 @@ Toutes les suites listées ci-dessous ont été exécutées.
   | `e485f0a` | 4 130 | 4 129 | 0 | 1 |
 
   Le résultat de la tête finale figure dans la description de la branche.
-- `npm run check` réussit. `npm run i18n:check` donne 6 074 textes exacts et 441 modèles.
+- `npm run check`, `npm run build` et `npm run check:built` réussissent. Les 11 nouveaux modules d'exécution sont ajoutés à la coquille hors ligne de `sw.js`. `npm run i18n:check` donne 6 074 textes exacts et 441 modèles.
 - Chromium, sur le serveur `scripts/dev.mjs` :
   - chargement de l'app sans erreur de console ;
   - présence des réglages ;

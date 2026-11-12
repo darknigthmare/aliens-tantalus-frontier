@@ -101,6 +101,10 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   "styles.css": {
     "previousSha256": "5d7f49517ea4377aaf2847e7ef5f5dd5f6e4b015301e1280072d41fd9edab36c",
     "currentSha256": "50bb521df711879b4656ce0f2fccf14b5fcb3adc0a980f4e44e9f9ed9155d8e9"
+  },
+  "sw.js": {
+    "previousSha256": "ff86bba365c3875c8ebaeb0abe13b2a6185ccd5f1a030b4ee5b15ac0e4a12f9b",
+    "currentSha256": "23ea49973f38fd7c967504e1986b2f96d24b20569c53e5049a63c4809d7ee085"
   }
 });
 // END V188 SOURCE RECEIPTS
