@@ -70,7 +70,7 @@ test('storyCampaignV188 migrates additively and rejects invalid entries', () => 
 
 test('app routes the briefing to the story recommendation and marks the debrief as read', () => {
   const app = readFileSync(new URL('../src/app.js', import.meta.url), 'utf8');
-  const plan = app.indexOf('strategy.plannedCampaignId)\n'), story = app.indexOf('deriveStoryCampaignV188(saveSystem.data).recommendedCampaignId');
+  const plan = app.indexOf('strategy.plannedCampaignId)\n'), story = app.indexOf('deriveStoryCampaignV188(saveSystem.data).recommendedCampaignId', plan);
   const fallback = app.indexOf('galaxy.unlockedWorldIds.includes(entry.worldId))', plan);
   assert.ok(plan > 0 && story > plan && fallback > story, 'planned → story → first unlocked');
   assert.match(app, /markStoryDebriefSeenV188\(candidate, campaign\.id\)/);
