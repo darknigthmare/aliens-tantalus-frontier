@@ -71,3 +71,11 @@ export function deriveStoryCampaignV188(save, { language = null } = {}) {
   if (!story.debriefSeen.includes(STORY_RELAY_CAMPAIGN_ID_V188)) return result('debrief', current ? null : pick('debrief'), STORY_RELAY_CAMPAIGN_ID_V188);
   return result('next', current ? null : pick('next'), null);
 }
+
+// The four playable Cocyte chapters (bible §5, Lethe continuity V163). Until a
+// dedicated Act V exists, finishing all four is the current end of the story.
+export const STORY_ENDING_CHAPTERS_V188 = Object.freeze(['special-archive-relay', 'special-apc-convoy', 'special-c12-horde', 'special-black-cocoon']);
+export function storyEndingReachedV188(save) {
+  const completed = Array.isArray(save?.galaxy?.completedCampaignIds) ? save.galaxy.completedCampaignIds : [];
+  return STORY_ENDING_CHAPTERS_V188.every(id => completed.includes(id));
+}

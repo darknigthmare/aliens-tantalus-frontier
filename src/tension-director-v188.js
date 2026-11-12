@@ -180,6 +180,28 @@ export function withTensionDirectorV188(Base) {
       save.remaining = Math.max(0, save.remaining - step);
       if (save.remaining === 0) { this.terminalSaveV188 = null; this.onEvent?.({ type: 'terminal-save-v188' }); }
     }
+    // Placeholder save terminal at the secured checkpoint (Canvas primitives,
+    // no bitmap): drawn in world space with the other mission objects.
+    saveTerminalVisibleV188() {
+      return Boolean(this.checkpoint && Number.isFinite(this.checkpoint.x) && Number.isFinite(this.checkpoint.y)
+        && missionRegisterProfileV188(this.missionRegisterV188).save.terminal);
+    }
+    drawObjective(ctx) {
+      super.drawObjective(ctx);
+      if (!ctx || !this.saveTerminalVisibleV188()) return;
+      const x = this.checkpoint.x, foot = this.checkpoint.y + finite(this.player?.h, 80), saving = Boolean(this.terminalSaveV188);
+      const px = finite(this.player?.x) + finite(this.player?.w) / 2;
+      const inReach = Math.hypot(px - x, finite(this.player?.y) - this.checkpoint.y) <= SAVE_RULES_V188.terminalReach;
+      ctx.save();
+      ctx.fillStyle = '#1c2622'; ctx.fillRect(x - 14, foot - 58, 28, 58);
+      ctx.fillStyle = '#2e3b35'; ctx.fillRect(x - 18, foot - 62, 36, 8);
+      const pulse = .55 + .45 * Math.sin(finite(this.animationTime) * (saving ? 9 : 3));
+      ctx.fillStyle = saving ? `rgba(233,208,122,${pulse})` : `rgba(141,240,176,${pulse})`; ctx.fillRect(x - 10, foot - 50, 20, 14);
+      ctx.fillStyle = '#0a110e'; ctx.fillRect(x - 8, foot - 30, 16, 3); ctx.fillRect(x - 8, foot - 24, 16, 3);
+      if (inReach) { ctx.font = '11px monospace'; ctx.textAlign = 'center'; ctx.fillStyle = '#8df0b0';
+        ctx.fillText(saving ? 'SAUVEGARDE…' : 'TERMINAL · SAUVEGARDER', x, foot - 70); }
+      ctx.restore();
+    }
     drawHud(ctx) {
       super.drawHud(ctx);
       const save = this.terminalSaveV188; if (!save || !ctx) return;

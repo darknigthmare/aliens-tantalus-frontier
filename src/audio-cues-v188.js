@@ -192,6 +192,7 @@ export function cueForGameEventV188(event) {
     case 'false-echo-v188': return 'tracker-false-echo';
     case 'grenade-exploded-v130': return 'weapon-m41a-grenade';
     case 'squad-fire': return 'weapon-m41a-burst';
+    case 'ceiling-drop-v188': return 'cry-drone';
     case 'spotted': return casteCueV188(event.enemy || event);
     case 'mission-vent-exit-start': return 'door-forced';
     default: break;

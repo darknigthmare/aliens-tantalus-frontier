@@ -56,3 +56,23 @@ test('production engine: an ambusher stays still (invisible to the tracker) unti
   assert.equal(enemy.casteV188.triggered, true); assert.equal(engine.casteStatsV188.ambusher, 1);
   engine.stop();
 });
+
+test('production engine: a drone under a real platform clings motionless, flipped, then drops on the player', async () => {
+  const { engine, enemy, p } = await arena('drone', 300);
+  const floorY = enemy.y + enemy.h;
+  const anchor = engine.platforms.filter(entry => !entry.lift && floorY - (entry.y + entry.h) > 200 + enemy.h && floorY - (entry.y + entry.h) < 420 + enemy.h)[0];
+  assert.ok(anchor, 'the vertical ship level has a real platform at ceiling height above this floor');
+  Object.assign(enemy, { x: anchor.x + anchor.w / 2 - enemy.w / 2, y: floorY - enemy.h }); delete enemy.casteV188;
+  engine.attachCeilingDronesV188();
+  assert.equal(enemy.casteV188?.mode, 'ceiling'); const hangY = enemy.y;
+  assert.equal(hangY, anchor.y + anchor.h);
+  p.x = enemy.x + 400; tick(engine, .5);
+  assert.equal(enemy.y, hangY, 'stays on the ceiling'); assert.equal(enemy.casteV188.mode, 'ceiling');
+  let flipped = false; const ctx = engine.canvas.getContext('2d'); const scale = ctx.scale;
+  ctx.scale = (x, y) => { if (y === -1) flipped = true; return scale?.(x, y); }; engine.drawEnemy(ctx, enemy); assert.ok(flipped, 'drawn upside down');
+  const events = []; const original = engine.onEvent; engine.onEvent = event => { events.push(event); original?.(event); };
+  p.x = enemy.x; p.y = floorY - p.h; tick(engine, .4);
+  assert.notEqual(enemy.casteV188.mode, 'ceiling'); assert.ok(events.some(event => event.type === 'ceiling-drop-v188'));
+  assert.ok(enemy.y > hangY, 'falls from the ceiling');
+  engine.stop();
+});

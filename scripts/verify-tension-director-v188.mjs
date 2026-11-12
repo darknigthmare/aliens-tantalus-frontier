@@ -126,3 +126,15 @@ test('production engine: a horror mission produces a false echo on the tracker a
   assert.ok(events.some(event => event.type === 'false-echo-revealed-v188'));
   engine.stop();
 });
+
+test('production engine: the save terminal is drawn at the secured checkpoint in terminal registers only', async () => {
+  const { engine, text } = await fixture({ campaign: { ...CAMPAIGNS[0], registerV188: 'horror' } });
+  engine.checkpoint = { id: 'insertion', x: engine.player.x + engine.player.w / 2, y: engine.player.y };
+  assert.equal(engine.saveTerminalVisibleV188(), true);
+  const ctx = engine.canvas.getContext('2d'); let rects = 0; const fillRect = ctx.fillRect; ctx.fillRect = (...args) => { rects++; return fillRect?.(...args); };
+  text.length = 0; engine.drawObjective(ctx);
+  assert.ok(rects >= 5, 'terminal body, screen and keys drawn'); assert.ok(text.includes('TERMINAL · SAUVEGARDER'), 'prompt in reach');
+  engine.stop();
+  const action = await fixture({ campaign: { ...CAMPAIGNS[0], registerV188: 'action' } });
+  assert.equal(action.engine.saveTerminalVisibleV188(), false); action.engine.stop();
+});

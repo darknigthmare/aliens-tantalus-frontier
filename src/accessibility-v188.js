@@ -60,8 +60,8 @@ export const KEY_ACTIONS_V188 = Object.freeze([
   { id: 'jump', code: 'Space', fr: 'Sauter / franchir', en: 'Jump / vault' }, { id: 'fire', code: 'KeyF', fr: 'Tirer', en: 'Fire' },
   { id: 'interact', code: 'KeyE', fr: 'Utiliser', en: 'Use' }, { id: 'tracker', code: 'KeyQ', fr: 'Détecteur', en: 'Tracker' },
   { id: 'reload', code: 'KeyR', fr: 'Recharger', en: 'Reload' }, { id: 'crawl', code: 'KeyC', fr: 'Ramper', en: 'Crawl' },
-  { id: 'sprint', code: 'ShiftLeft', fr: 'Courir', en: 'Sprint' }, { id: 'pause', code: 'KeyP', fr: 'Pause', en: 'Pause' },
-  { id: 'objectives', code: 'KeyO', fr: 'Objectifs', en: 'Objectives' }
+  { id: 'aim', code: 'ShiftLeft', fr: 'Viser', en: 'Aim' }, { id: 'crouch', code: 'KeyZ', fr: 'S’accroupir', en: 'Crouch' }, { id: 'pause', code: 'KeyP', fr: 'Pause', en: 'Pause' },
+  { id: 'objectives', code: 'KeyM', fr: 'Objectifs', en: 'Objectives' }
 ].map(Object.freeze));
 const CODE = /^(Key[A-Z]|Digit[0-9]|Numpad[0-9]|Arrow(Up|Down|Left|Right)|Space|Shift(Left|Right)|Control(Left|Right)|Alt(Left|Right)|Tab|Backquote|Minus|Equal|BracketLeft|BracketRight|Semicolon|Quote|Comma|Period|Slash|Backslash)$/;
 

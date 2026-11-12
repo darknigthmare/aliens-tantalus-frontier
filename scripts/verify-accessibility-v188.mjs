@@ -21,7 +21,7 @@ test('colour-blind modes and text sizes are bounded and migrate additively', () 
 });
 
 test('bindings are unique, invalid codes fall back and conflicts never duplicate a key', () => {
-  assert.equal(KEY_ACTIONS_V188.length, 13);
+  assert.equal(KEY_ACTIONS_V188.length, 14);
   assert.deepEqual(normalizeKeyBindingsV188({ jump: 'NotAKey' }), defaultKeyBindingsV188());
   const swapped = normalizeKeyBindingsV188({ jump: 'KeyJ', fire: 'Space' });
   assert.equal(swapped.jump, 'KeyJ'); assert.equal(swapped.fire, 'Space');

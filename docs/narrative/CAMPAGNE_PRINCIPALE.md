@@ -4232,7 +4232,7 @@ Les lots 2 à 6 modifient la sauvegarde : chacun demande la levée de protection
 | P0-1 | Enchaînement prologue → Port-Méridien → briefing → Acte II (QZ-18) → retour, suivi par un état de campagne `storyCampaign` | §53.1, §11 | Fait (V188) : étape dérivée, QZ-18 planifié, compte rendu suivi ; parcours joueur complet à tester |
 | P0-2 | Environ 40 bruitages prioritaires synthétisés hors ligne, et provenance audio mise à jour | §53.2 | Fait (V188) : 40 sons originaux branchés ; provenance dans `LICENSE_NOTICE.md` |
 | P0-3 | Emplacements musicaux alerte, boss, fins et retour au calme, avec leurs points d'accroche | §53.2, §55.7 | Fait (V188) pour les emplacements et accroches ; morceaux Flow attendus du propriétaire ; `ending` sans accroche |
-| P0-4 | Écran d'objectif toujours accessible, en mission comme au hub | §53.9 | Fait (V188) : pause et touche O, FR/EN |
+| P0-4 | Écran d'objectif toujours accessible, en mission comme au hub | §53.9 | Fait (V188) : pause et touche M, FR/EN |
 | P0-5 | Réglage du tir (recul, impact, réaction, son), mesuré avant et après sur une même scène | §53.3 | Fait (V188), mesuré avant/après ; ressenti à confirmer en test de jeu |
 | P0-6 | Directeur de tension piloté par le registre | §53.3, §55.7 | Fait (V188) |
 | P0-7 | Fausses alertes du détecteur de mouvement | §53.3, §14.5, §7.2 | Fait (V188) |

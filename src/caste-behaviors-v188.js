@@ -6,15 +6,18 @@
 //   player looks away — the side-view reading of "contournement";
 // - ambusher (pouncer, "stalk-and-pounce"): stays still until close, so the
 //   motion tracker cannot see it, then lunges.
-// The ceiling behaviour needs ceiling geometry the levels do not have yet; it
-// is reported as remaining work. Movement only ever reverts to a position the
+// - drone ceiling ambush: under the underside of a real platform above.
+// Movement only ever reverts to a position the
 // base AI already held, or adds a bounded step on the current support.
 
 export const CASTE_BEHAVIORS_V188 = Object.freeze({
   schema: 188,
   drone: Object.freeze({ watchedDistance: 240, retreatSpeed: 70, retreatSeconds: .6, cooldown: 3 }),
   runner: Object.freeze({ minDistance: 140, maxDistance: 360, holdSeconds: 1.2, dashFactor: 1.4, dashSeconds: .5 }),
-  ambusher: Object.freeze({ triggerDistance: 200, lungeFactor: 1.6, lungeSeconds: .5 })
+  ambusher: Object.freeze({ triggerDistance: 200, lungeFactor: 1.6, lungeSeconds: .5 }),
+  // Ceiling: one drone in three clings under a real platform 200-420 px above
+  // its floor, motionless (invisible to the tracker), and drops on the player.
+  ceiling: Object.freeze({ minHeight: 200, maxHeight: 420, dropReach: 90, everyNth: 3 })
 });
 
 const finite = (n, fallback = 0) => Number.isFinite(n) ? n : fallback;
@@ -45,6 +48,12 @@ export function withCasteBehaviorsV188(Base) {
   if (Base.casteBehaviorsRuntimeV188) return Base;
   return class CasteBehaviorsV188 extends Base {
     static casteBehaviorsRuntimeV188 = true;
+    drawEnemy(ctx, enemy) {
+      if (enemy?.casteV188?.mode !== 'ceiling' || !ctx?.save) return super.drawEnemy(ctx, enemy);
+      const cy = finite(enemy.y) + finite(enemy.h) / 2;
+      ctx.save(); ctx.translate(0, cy * 2); ctx.scale(1, -1);
+      try { return super.drawEnemy(ctx, enemy); } finally { ctx.restore(); }
+    }
     supportBoundsV188(enemy) {
       const foot = finite(enemy.y) + finite(enemy.h), x = centerX(enemy);
       const surface = (Array.isArray(this.platforms) ? this.platforms : []).find(p => !p.lift && Math.abs(finite(p.y) - foot) < 4
@@ -56,7 +65,38 @@ export function withCasteBehaviorsV188(Base) {
       const next = Math.max(bounds.min, Math.min(bounds.max, enemy.x + dx)), moved = next - enemy.x;
       enemy.x = next; return moved;
     }
+    start(options = {}) {
+      const result = super.start(options);
+      this.attachCeilingDronesV188();
+      return result;
+    }
+    ceilingAnchorV188(enemy) {
+      const rules = CASTE_BEHAVIORS_V188.ceiling, foot = finite(enemy.y) + finite(enemy.h), x = centerX(enemy);
+      return (Array.isArray(this.platforms) ? this.platforms : []).filter(p => !p.lift && x >= p.x + 8 && x <= p.x + p.w - 8)
+        .map(p => ({ p, height: foot - (finite(p.y) + finite(p.h, 0)) }))
+        .filter(({ height }) => height >= rules.minHeight + finite(enemy.h) && height <= rules.maxHeight + finite(enemy.h))
+        .sort((a, b) => a.height - b.height)[0]?.p || null;
+    }
+    attachCeilingDronesV188() {
+      let index = 0;
+      for (const enemy of Array.isArray(this.enemies) ? this.enemies : []) {
+        if (casteBehaviorIdV188(enemy) !== 'drone' || !enemy.alive || enemy.dormant) continue;
+        if (index++ % CASTE_BEHAVIORS_V188.ceiling.everyNth !== 0) continue;
+        const anchor = this.ceilingAnchorV188(enemy); if (!anchor) continue;
+        enemy.casteV188 = { mode: 'ceiling', clock: 0, cooldown: 0, triggered: false, floorY: enemy.y };
+        enemy.y = finite(anchor.y) + finite(anchor.h, 0); enemy.vx = 0; enemy.vy = 0; enemy.grounded = false;
+        (this.casteStatsV188 ||= { drone: 0, runner: 0, ambusher: 0, ceiling: 0 }).ceiling = (this.casteStatsV188.ceiling || 0) + 1;
+      }
+    }
     updateEnemy(enemy, delta) {
+      if (enemy?.casteV188?.mode === 'ceiling') {
+        const player = this.player, rules = CASTE_BEHAVIORS_V188.ceiling;
+        const below = player && finite(player.y) > finite(enemy.y) && Math.abs(centerX(player) - centerX(enemy)) <= rules.dropReach;
+        if (enemy.alive && !below && !(enemy.hurtClock > 0)) { enemy.vx = 0; enemy.vy = 0; return undefined; }
+        enemy.casteV188.mode = 'idle'; enemy.alert = true; enemy.revealed = Math.max(finite(enemy.revealed), 1);
+        this.onEvent?.({ type: 'ceiling-drop-v188', enemyId: enemy.id });
+        this.pushCaption?.('danger', 'Au plafond !');
+      }
       const caste = casteBehaviorIdV188(enemy), beforeX = enemy?.x;
       const result = super.updateEnemy(enemy, delta);
       if (!caste || !enemy.alive || enemy.dormant || !Number.isFinite(delta) || delta <= 0 || enemy.attacking || enemy.pendingMelee

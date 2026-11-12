@@ -5,6 +5,7 @@ import { CAMPAIGNS, WORLDS } from '../src/content.js';
 import { createDefaultSave, migrateSave, beginOperation } from '../src/save.js';
 import { deriveStoryCampaignV188, markStoryDebriefSeenV188, normalizeStoryCampaignV188,
   STORY_RELAY_CAMPAIGN_ID_V188, STORY_SLICE_STEPS_V188 } from '../src/story-campaign-v188.js';
+import { storyEndingReachedV188, STORY_ENDING_CHAPTERS_V188 } from '../src/story-campaign-v188.js';
 import { buildObjectivePanelV188, OBJECTIVE_PANEL_V188 } from '../src/mission-objective-panel-v188.js';
 import { fixture, tick } from './engine-host-v188.mjs';
 import { createPortMeridienV90, normalizePortMeridienV90, PORT_RECEIPT_V90 } from '../src/port-meridien-v90.js';
@@ -83,18 +84,28 @@ test('objective panel lists real tasks, register save rule, in both languages', 
   assert.match(fr.footer, /Horreur · Sauvegarde au terminal sécurisé/);
   const en = buildObjectivePanelV188({ register: 'action', language: 'en', objectives: { extract: false }, initial: { extract: false } });
   assert.equal(en.title, 'OBJECTIVES'); assert.match(en.footer, /Action · Free save out of combat/);
-  assert.equal(OBJECTIVE_PANEL_V188.key, 'KeyO');
+  assert.equal(OBJECTIVE_PANEL_V188.key, 'KeyM');
 });
 
-test('production engine: pause overlay and O key show the objective panel', async () => {
+test('production engine: pause overlay and M key show the objective panel', async () => {
   const { engine, text } = await fixture();
   assert.ok(engine.getSnapshot().objectivePanelV188.steps.some(step => step.key === 'extract'));
-  globalThis.dispatchEvent(Object.assign(new Event('keydown'), { code: 'KeyO', repeat: false }));
-  assert.ok(engine.objectivePeekV188 > 0, 'O opens the panel');
+  globalThis.dispatchEvent(Object.assign(new Event('keydown'), { code: 'KeyM', repeat: false }));
+  assert.ok(engine.objectivePeekV188 > 0, 'M opens the panel');
   text.length = 0; engine.drawHud(engine.canvas.getContext('2d'));
   assert.ok(text.includes('OBJECTIFS'), 'panel drawn in play');
   tick(engine, 4.1); assert.equal(engine.objectivePeekV188, 0);
   engine.togglePause(); text.length = 0; engine.drawStateOverlay(engine.canvas.getContext('2d'));
   assert.ok(text.includes('OPÉRATION EN PAUSE')); assert.ok(text.includes('OBJECTIFS'), 'panel drawn while paused');
   engine.stop();
+});
+
+test('the ending music plays at Operations once the four Cocyte chapters are complete', () => {
+  const save = createDefaultSave();
+  assert.equal(storyEndingReachedV188(save), false);
+  save.galaxy.completedCampaignIds.push(...STORY_ENDING_CHAPTERS_V188.slice(0, 3)); assert.equal(storyEndingReachedV188(save), false);
+  save.galaxy.completedCampaignIds.push(STORY_ENDING_CHAPTERS_V188[3]); assert.equal(storyEndingReachedV188(save), true);
+  for (const id of STORY_ENDING_CHAPTERS_V188) assert.ok(CAMPAIGNS.some(entry => entry.id === id), id);
+  const app = readFileSync(new URL('../src/app.js', import.meta.url), 'utf8');
+  assert.match(app, /name === 'operations' && storyEndingReachedV188\(saveSystem\.data\) \? 'ending'/);
 });

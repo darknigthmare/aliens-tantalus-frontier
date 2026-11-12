@@ -1,17 +1,17 @@
 // V188 — objective always reachable in mission (bible §53.9, P0-4).
 // The pause overlay lists the operation objective, the step list and the save
-// rule of the register; O shows the same panel for a few seconds in play.
+// rule of the register; M shows the same panel for a few seconds in play.
 import { currentLanguageV185 } from './i18n-v185.js';
 import { missionRegisterProfileV188 } from './mission-register-v188.js';
 
-export const OBJECTIVE_PANEL_V188 = Object.freeze({ schema: 188, peekSeconds: 4, key: 'KeyO' });
+export const OBJECTIVE_PANEL_V188 = Object.freeze({ schema: 188, peekSeconds: 4, key: 'KeyM' });
 
 const LABELS = Object.freeze({
   fr: { title: 'OBJECTIFS', power: 'Rétablir l’énergie', route: 'Sécuriser la route', boss: 'Neutraliser la menace principale',
-    archive: 'Récupérer les archives', extract: 'Rejoindre l’extraction', register: 'Registre', hint: 'O : objectifs',
+    archive: 'Récupérer les archives', extract: 'Rejoindre l’extraction', register: 'Registre', hint: 'M : objectifs',
     save: { free: 'Sauvegarde libre hors combat', terminal: 'Sauvegarde au terminal sécurisé', checkpoint: 'Checkpoints seulement' } },
   en: { title: 'OBJECTIVES', power: 'Restore power', route: 'Secure the route', boss: 'Neutralise the main threat',
-    archive: 'Recover the archives', extract: 'Reach extraction', register: 'Register', hint: 'O: objectives',
+    archive: 'Recover the archives', extract: 'Reach extraction', register: 'Register', hint: 'M: objectives',
     save: { free: 'Free save out of combat', terminal: 'Save at the secured terminal', checkpoint: 'Checkpoints only' } }
 });
 const REGISTER_EN = Object.freeze({ horror: 'Horror', tension: 'Tension', action: 'Action', calm: 'Calm' });

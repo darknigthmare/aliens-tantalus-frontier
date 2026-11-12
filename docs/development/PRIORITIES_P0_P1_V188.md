@@ -29,7 +29,7 @@ Document de développement, uniquement dans les sources. Les priorités et les v
 | P0-1 | `src/story-campaign-v188.js` | Étape de la première heure dérivée des machines existantes. QZ-18 est planifié après Port-Méridien. Objectif du hub. Compte rendu marqué lu aux Opérations. |
 | P0-2 | `src/audio-cues-v188.js`, `scripts/generate-audio-v188.mjs` | 40 bruitages WAV synthétisés hors ligne, branchés aux événements, aux pas selon le sol, au tir par arme et au clic à vide. |
 | P0-3 | `src/audio.js`, `src/audio-assets-v77.js` | Ambiances alerte, boss, fins et calme pilotées par le directeur de tension et les boss. Repli sur les musiques existantes. |
-| P0-4 | `src/mission-objective-panel-v188.js` | Objectifs en pause et avec la touche O, en FR et EN. |
+| P0-4 | `src/mission-objective-panel-v188.js` | Objectifs en pause et avec la touche M (O sert au tir de J2 en coop), en FR et EN. |
 | P0-5 | `src/combat-feel-v188.js` | Secousse par tir, marqueur d'impact, recul de 4 px et confirmation d'élimination, tous soumis au réglage de secousses. |
 | P0-6 | `src/tension-director-v188.js` | Intensité, pic et relâche garantie. Les vagues de horde attendent la phase de montée. |
 | P0-7 | `src/tension-director-v188.js` | Faux échos du détecteur en Horreur et en Tension, avec leur source révélée à l'approche. |
@@ -38,7 +38,7 @@ Document de développement, uniquement dans les sources. Les priorités et les v
 | P1-2 | `src/run-options-v188.js`, `src/save.js` | Mort définitive au choix : blessure grave de 3 jours au lieu du mémorial. Elle peut être désactivée, jamais réactivée. |
 | P1-3 | `src/run-options-v188.js`, créateur | 20 origines, `origin-20` par défaut. Capacités raccordées : `origin-13` et `origin-18`. |
 | P1-4 | `src/run-options-v188.js`, `src/game-runtime.js` | Difficulté `custom` : six valeurs bornées et récompense calculée. |
-| P1-5 | `src/accessibility-v188.js` | Mode daltonien, taille du texte, sous-titres de 17 sons, remappage de 13 actions. |
+| P1-5 | `src/accessibility-v188.js` | Mode daltonien, taille du texte, sous-titres de 17 sons, remappage de 14 actions. |
 | P1-6 | `src/reactive-lines-v188.js` | Répliques après une mission ratée, une perte de colons ou un retour blessé, sans répétition pendant 3 jours. |
 
 ## Mesure du tir (P0-5)
