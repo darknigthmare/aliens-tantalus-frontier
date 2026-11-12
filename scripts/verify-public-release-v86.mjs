@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import { readdir, readFile, lstat } from 'node:fs/promises';
 import { basename, join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { validateContent, RELEASE } from '../src/content.js';
 import { APP_RELEASE_V143 } from '../src/release-info-v143.js';
 import { AUDIO_FORMATS_V77, AUDIO_SLOTS_V77 } from '../src/audio-assets-v77.js';
@@ -304,6 +306,9 @@ const FORGE_TOOLING_V140 = new Set([
   'scripts/audit-native-qa-resources-v187.mjs',
   'scripts/verify-native-qa-resources-v187.mjs',
   'docs/development/NATIVE_QA_RESOURCES_V187.md',
+  // V188 P0/P1 priority audit (bible §56), source-only exact paths.
+  'scripts/audit-tantalus-priorities-v188.mjs',
+  'scripts/verify-tantalus-priorities-v188.mjs',
   // Source-only narrative design bible; never shipped in a built distribution.
   'docs/narrative',
   'docs/narrative/CAMPAGNE_PRINCIPALE.md',
@@ -539,12 +544,30 @@ const PRIVATE_TEXT = [
   /['"]V\d+_(?:BATCH_\d+|[A-Z_]*IMAGEGEN)/
 ];
 
+// V188 AI development tooling (Spec Kit, Claude Code Game Studios) stays
+// source-only: exact adopted paths from .ai-tools/adopted-v188.json and their
+// parent directories, never admitted in a built distribution.
+const AI_TOOLS_ADOPTED_V188 = (() => {
+  const manifest = JSON.parse(readFileSync(new URL('../.ai-tools/adopted-v188.json', import.meta.url), 'utf8'));
+  const paths = new Set(['.ai-tools/adopted-v188.json']);
+  for (const tool of manifest.tools) for (const { path } of tool.files) {
+    const segments = path.split('/');
+    for (let index = 1; index <= segments.length; index++) paths.add(segments.slice(0, index).join('/'));
+  }
+  for (const root of ['docs', '.ai-tools']) paths.delete(root);
+  return Object.freeze(paths);
+})();
+const AI_TOOLS_FILE_SHA256_V188 = new Map(JSON.parse(readFileSync(new URL('../.ai-tools/adopted-v188.json', import.meta.url), 'utf8'))
+  .tools.flatMap(tool => tool.files.map(({ path, sha256 }) => [path, sha256])));
+export const AI_TOOLS_SOURCE_ONLY_PATHS_V188 = AI_TOOLS_ADOPTED_V188;
+
 // Pure checks are exported so adversarial cases can be verified without placing
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
   if (V179_SOURCE_ONLY_SCRIPTS.has(path)) return !built;
   if (!built && FORGE_TOOLING_V140.has(path)) return true;
+  if (!built && AI_TOOLS_ADOPTED_V188.has(path)) return true;
   if (FORGE_STYLES_V140.has(path)) return true;
   const segments = path.split('/');
   if (segments.some(part => !part || part === '.' || part === '..' || PRIVATE_SEGMENT.test(part))) return false;
@@ -600,6 +623,13 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
       assert.equal(entry.isFile(), true, `Unsupported filesystem entry: ${path}`);
       files++; if (path.startsWith('assets/')) assets++;
       if (USER_REFERENCE_JPG_PATHS_V100.has(path)) userReferenceJpgs++;
+      if (!built && AI_TOOLS_FILE_SHA256_V188.has(path)) {
+        // Third-party tooling keeps its exact upstream bytes (examples may name
+        // generic home paths); it is source-only and rejected from any build.
+        const digest = createHash('sha256').update(await readFile(join(directory, entry.name))).digest('hex');
+        assert.equal(digest, AI_TOOLS_FILE_SHA256_V188.get(path), `Unreviewed AI tooling bytes: ${path}`);
+        continue;
+      }
       if (ROOT_FILES.has(path) || path === 'src/vendor/supabase-LICENSE.txt' || /\.(?:js|mjs|py|json|css|html|md|webmanifest)$/i.test(path)) {
         const text = await readFile(join(directory, entry.name), 'utf8');
         assert.equal(isPublicDistributionTextV86(text), true, `Private source metadata in distribution: ${path}`);
