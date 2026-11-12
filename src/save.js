@@ -1,3 +1,4 @@
+import { createStoryCampaignV188, normalizeStoryCampaignV188 } from './story-campaign-v188.js';
 import { COSTUMES, CREW, RELEASE, VEHICLES, WORLDS, CAMPAIGNS, WEAPONS, EQUIPMENT } from './content.js';
 import { normalizeCrewConversationMemoryV135 } from './crew-conversation-memory-v135.js';
 import { normalizePlayerWardrobeV135 } from './player-wardrobe-v135.js';
@@ -362,6 +363,7 @@ export function createDefaultSave(profile = 1) {
     archiveRelayArchivesV122: createArchiveRelayArchiveV122(),
     convoyReturnHistoryV162: createConvoyReturnHistoryV162(),
     letheContinuityV163: createLetheContinuityV163(),
+    storyCampaignV188: createStoryCampaignV188(),
     alphaBravoDoctrine: createAlphaBravoDoctrineV69(),
     alienSurvivalSystems: createAlienSurvivalSystemsV70(),
     bioforgeV80: createBioforgeV80(),
@@ -2373,6 +2375,8 @@ export function migrateSave(input, profile = 1) {
 
   const editor = isRecord(source.editor) ? source.editor : {};
   migrated.editor = { ...base.editor, ...editor, projects: Array.isArray(editor.projects) ? editor.projects.filter(isRecord).slice(0, 128) : base.editor.projects };
+  // V188 additive field: an older save simply has no debrief read yet.
+  migrated.storyCampaignV188 = normalizeStoryCampaignV188(source.storyCampaignV188);
   migrated.memorial = Array.isArray(source.memorial) ? source.memorial.filter(isRecord).slice(0, 512) : base.memorial;
   const settings = isRecord(source.settings) ? source.settings : {};
   migrated.settings = { ...base.settings, ...settings };

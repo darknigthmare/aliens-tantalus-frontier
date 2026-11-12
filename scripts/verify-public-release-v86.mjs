@@ -310,6 +310,8 @@ const FORGE_TOOLING_V140 = new Set([
   'scripts/audit-tantalus-priorities-v188.mjs',
   'scripts/verify-tantalus-priorities-v188.mjs',
   'scripts/verify-tension-director-v188.mjs',
+  'scripts/verify-story-slice-v188.mjs',
+  'scripts/engine-host-v188.mjs',
   // Source-only narrative design bible; never shipped in a built distribution.
   'docs/narrative',
   'docs/narrative/CAMPAGNE_PRINCIPALE.md',

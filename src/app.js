@@ -1,3 +1,4 @@
+import { deriveStoryCampaignV188, markStoryDebriefSeenV188, STORY_RELAY_CAMPAIGN_ID_V188 } from './story-campaign-v188.js';
 import {
   RELEASE, CONTENT_COUNTS, WORLDS, CAMPAIGNS, WEAPONS, EQUIPMENT, ENEMIES, VEHICLES,
   CREW, COSTUMES, LEVEL_SEEDS, SHIP_MODULES, APEX_DOSSIERS, NEURO_XENO_PROFILES,
@@ -1431,6 +1432,8 @@ function renderOperationPlan() {
   } catch (error) { toast(error.message); }
   let campaign = CAMPAIGNS.find((entry) => entry.id === saveSystem.data.strategy.currentOperation?.campaignId)
     || CAMPAIGNS.find((entry) => entry.id === saveSystem.data.strategy.plannedCampaignId)
+    // V188: the first-hour slice routes the briefing to QZ-18 (bible §53.1).
+    || CAMPAIGNS.find((entry) => entry.id === deriveStoryCampaignV188(saveSystem.data).recommendedCampaignId)
     || CAMPAIGNS.find((entry) => saveSystem.data.galaxy.unlockedWorldIds.includes(entry.worldId));
   if (!campaign) return;
   saveSystem.data.strategy.plannedCampaignId = campaign.id;
@@ -1477,6 +1480,11 @@ function renderOperationPlan() {
   byId('operation-launch').onclick = () => launchCampaign(campaign);
   const abandonButton = byId('operation-abandon-v69');
   if (abandonButton) abandonButton.onclick = abandonBlockedOperationV69;
+  if (campaign.id === STORY_RELAY_CAMPAIGN_ID_V188 && !saveSystem.data.strategy.currentOperation
+    && deriveStoryCampaignV188(saveSystem.data).step === 'debrief') {
+    try { const candidate = clone(saveSystem.data); if (markStoryDebriefSeenV188(candidate, campaign.id)) saveSystem.commit(candidate); }
+    catch (error) { toast(error.message); }
+  }
   mountCampaignDebriefV160(byId('operation-plan'), {
     save: saveSystem.data,
     campaignId: campaign.id,
@@ -1963,6 +1971,10 @@ function renderHubStatus(status = lastHubStatus) {
     if (exerciseObjectiveV89) byId('hub-onboarding-objective-v84').textContent = translateObjectiveV185('exercise', exerciseObjectiveV89);
     const portObjectiveV90 = getPortMeridienObjectiveV90(saveSystem.data.portMeridienV90, saveSystem.data.openingV88, saveSystem.data.onboardingV84);
     if (portObjectiveV90) byId('hub-onboarding-objective-v84').textContent = translateObjectiveV185('port', portObjectiveV90);
+    const storyV188 = deriveStoryCampaignV188(saveSystem.data);
+    if (!portObjectiveV90 && !exerciseObjectiveV89 && !(objectiveV84 && !objectiveV84.completed) && storyV188.objective) {
+      byId('hub-onboarding-objective-v84').textContent = storyV188.objective;
+    }
     byId('hub-onboarding-objective-v84').hidden = Boolean(hubEngine.isPortMeridienV90?.());
   }
   byId('exit-hub').textContent = standaloneContext === 'forge-playtest' ? tV185('hub.exitForge', 'RETOUR FRONTIER FORGE')
