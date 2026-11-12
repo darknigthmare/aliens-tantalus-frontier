@@ -817,7 +817,7 @@ function showView(name) {
   }
   if (activeView === 'xenotrials' && name !== 'xenotrials' && typeof xenoTrialsUiV96 !== 'undefined') xenoTrialsUiV96?.close();
   activeView = name;
-  audio.setScene(name === 'operations' && storyEndingReachedV188(saveSystem.data) ? 'ending' : resolveViewAudioSceneV77(name));
+  audio.setScene(['operations', 'command'].includes(name) && storyEndingReachedV188(saveSystem.data) ? 'ending' : resolveViewAudioSceneV77(name));
   all('.view').forEach((view) => view.classList.toggle('active', view.dataset.panel === name));
   all('.nav-button').forEach((button) => button.classList.toggle('active', button.dataset.view === name));
   document.documentElement.classList.toggle('hub-mode', name === 'hub');
@@ -1224,15 +1224,19 @@ function renderCommandMissionsV110() {
   const destination = byId('command-world-v110'), select = byId('command-mission-v110');
   const active = saveSystem.data.strategy.currentOperation;
   const eligible = getCommandMissionsV110(saveSystem.data, CAMPAIGNS);
-  const selected = CAMPAIGNS.find(c => c.id === (active?.campaignId || saveSystem.data.strategy.plannedCampaignId));
+  const selected = CAMPAIGNS.find(c => c.id === (active?.campaignId || saveSystem.data.strategy.plannedCampaignId
+    || deriveStoryCampaignV188(saveSystem.data).recommendedCampaignId));
   const worldIds = new Set(eligible.map(c => c.worldId));
   const preferredWorld = active?.worldId || destination.value;
   const worldId = worldIds.has(preferredWorld) ? preferredWorld : '';
   destination.innerHTML = '<option value="">Toutes les routes ouvertes</option>' + WORLDS.filter(w => worldIds.has(w.id))
     .map(w => `<option value="${escapeHtml(w.id)}">${escapeHtml(w.name)}</option>`).join('');
   destination.value = worldId; destination.disabled = Boolean(active);
-  const missions = getCommandMissionsV110(saveSystem.data, CAMPAIGNS, worldId);
-  select.innerHTML = missions.map(c => `<option value="${escapeHtml(c.id)}">${escapeHtml(c.name)}</option>`).join('');
+  // V188 (bible §53.1): the story recommendation comes first and is preselected.
+  const recommendedV188 = deriveStoryCampaignV188(saveSystem.data).recommendedCampaignId;
+  const missions = getCommandMissionsV110(saveSystem.data, CAMPAIGNS, worldId)
+    .sort((a, b) => (b.id === recommendedV188) - (a.id === recommendedV188));
+  select.innerHTML = missions.map(c => `<option value="${escapeHtml(c.id)}">${c.id === recommendedV188 ? '★ ' : ''}${escapeHtml(c.name)}</option>`).join('');
   // Selecting a destination is a filter, never an implicit campaign/save mutation.
   select.value = missions.some(c => c.id === selected?.id) ? selected.id : '';
   select.disabled = Boolean(active) || !missions.length;

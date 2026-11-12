@@ -33,6 +33,7 @@ test('the slice walks creation → wake → ship → port → briefing → qz18 
   assert.equal(briefing.step, 'briefing'); assert.equal(briefing.recommendedCampaignId, STORY_RELAY_CAMPAIGN_ID_V188);
   assert.match(briefing.objective, /QZ-18/);
   assert.match(deriveStoryCampaignV188(save, { language: 'en' }).objective, /The Last Relay/);
+  assert.match(briefing.objective, /table tactique/);
   save.strategy.currentOperation = { campaignId: STORY_RELAY_CAMPAIGN_ID_V188 };
   assert.equal(deriveStoryCampaignV188(save).step, 'qz18');
   save.strategy.currentOperation = null; save.galaxy.completedCampaignIds.push(STORY_RELAY_CAMPAIGN_ID_V188);
@@ -74,6 +75,7 @@ test('app routes the briefing to the story recommendation and marks the debrief 
   assert.ok(plan > 0 && story > plan && fallback > story, 'planned → story → first unlocked');
   assert.match(app, /markStoryDebriefSeenV188\(candidate, campaign\.id\)/);
   assert.match(app, /storyV188\.objective/);
+  assert.match(app, /\.sort\(\(a, b\) => \(b\.id === recommendedV188\) - \(a\.id === recommendedV188\)\)/, 'command list puts the recommendation first');
 });
 
 test('objective panel lists real tasks, register save rule, in both languages', () => {
@@ -107,5 +109,5 @@ test('the ending music plays at Operations once the four Cocyte chapters are com
   save.galaxy.completedCampaignIds.push(STORY_ENDING_CHAPTERS_V188[3]); assert.equal(storyEndingReachedV188(save), true);
   for (const id of STORY_ENDING_CHAPTERS_V188) assert.ok(CAMPAIGNS.some(entry => entry.id === id), id);
   const app = readFileSync(new URL('../src/app.js', import.meta.url), 'utf8');
-  assert.match(app, /name === 'operations' && storyEndingReachedV188\(saveSystem\.data\) \? 'ending'/);
+  assert.match(app, /\['operations', 'command'\]\.includes\(name\) && storyEndingReachedV188\(saveSystem\.data\) \? 'ending'/);
 });

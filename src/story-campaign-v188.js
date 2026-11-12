@@ -11,20 +11,20 @@ const MAX_SEEN = 32;
 
 const TEXT = Object.freeze({
   briefing: {
-    fr: 'BRIEFING · Port-Méridien attend des réponses. Opérations : préparez « Le dernier relais » (QZ-18), puis déployez.',
-    en: 'BRIEFING · Port-Méridien wants answers. Operations: prepare "The Last Relay" (QZ-18), then deploy.'
+    fr: 'BRIEFING · Port-Méridien attend des réponses. Salle de briefing, table tactique : préparez « Le dernier relais » (QZ-18), puis déployez.',
+    en: 'BRIEFING · Port-Méridien wants answers. Briefing room, tactical table: prepare "The Last Relay" (QZ-18), then deploy.'
   },
   qz18: {
     fr: 'ACTE II · QZ-18 : reconstituez le dossier du relais et revenez à bord.',
     en: 'ACT II · QZ-18: rebuild the relay case file and return aboard.'
   },
   debrief: {
-    fr: 'COMPTE RENDU · Opérations : lisez le dossier de QZ-18 et la suite recommandée.',
-    en: 'DEBRIEF · Operations: read the QZ-18 case file and the recommended next step.'
+    fr: 'COMPTE RENDU · Salle de briefing, table tactique : lisez le dossier de QZ-18 et la suite recommandée.',
+    en: 'DEBRIEF · Briefing room, tactical table: read the QZ-18 case file and the recommended next step.'
   },
   next: {
-    fr: 'COCYTE · Opérations : poursuivez la campagne avec le chapitre recommandé.',
-    en: 'COCYTE · Operations: continue the campaign with the recommended chapter.'
+    fr: 'COCYTE · Salle de briefing, table tactique : poursuivez la campagne avec le chapitre recommandé.',
+    en: 'COCYTE · Briefing room, tactical table: continue the campaign with the recommended chapter.'
   }
 });
 
