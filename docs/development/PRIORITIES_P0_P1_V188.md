@@ -85,13 +85,41 @@ Toutes les suites listées ci-dessous ont été exécutées.
   - nouvelle partie par le créateur : l'origine choisie et la mort définitive désactivée sont enregistrées dans la sauvegarde ;
   - libellés anglais affichés après le changement de langue.
 
+## Passe 2 (2026-11-12)
+
+| Point | Résultat |
+| --- | --- |
+| Plafond (P1-1) | Un drone éligible sur trois s'accroche sous une vraie plateforme située 200 à 420 px au-dessus de son sol. Il reste immobile, donc invisible au détecteur, et il est dessiné à l'envers. Il se laisse tomber sur le joueur qui passe dessous ou quand il est touché. Il quitte le plafond si un autre système le déplace. Pas de plafond dans les missions Ruche ni dans les chapitres `special-`. |
+| Terminal (P0-8) | Une console de remplacement est dessinée en primitives Canvas, sans image, au checkpoint sécurisé, avec l'invite « TERMINAL · SAUVEGARDER » à portée. |
+| Fins (P0-3) | L'ambiance `ending` joue au Commandement une fois les quatre chapitres jouables de Cocyte terminés. |
+| Touche des objectifs (P0-4) | C'est maintenant M, car O sert au tir de J2 en coop locale. Le remappage couvre 14 actions, avec Viser (Maj) et S'accroupir (Z). |
+| Tranche (P0-1) | Les joueurs passent par le Commandement (table tactique), où QZ-18 était 112ᵉ sur 121 ordres. Il est désormais en tête, marqué ★ et présélectionné. Les objectifs nomment la table tactique de la salle de briefing. |
+| Origines (P1-3) | 16 capacités sur 19 sont raccordées : 01, 02, 04 à 10, 12 à 15, 17 à 19. |
+| Taille du texte (P1-5) | Les 108 tailles en `px` des écrans du joueur suivent le réglage. |
+| Répliques (P1-6) | La réplique récente est reprise pendant 3 jours dans « La dernière sortie » du panneau d'équipage. |
+
+QA Chromium de la passe 2, à partir d'une sauvegarde injectée « Port-Méridien terminé » :
+- objectif du hub correct ;
+- sortie vers le Commandement : « ★ QZ-18 · LE DERNIER RELAIS » en tête et présélectionné ;
+- plan opérationnel affiché ;
+- `plannedCampaignId` enregistré ;
+- aucune erreur de console.
+
 ## Limites et travail restant
 
-- **Musiques** : les emplacements alerte, boss, fins et calme jouent la musique existante tant que les morceaux Flow du propriétaire manquent (§53.2). L'emplacement `ending` n'a pas encore de point d'accroche dans le jeu, faute de fin de campagne jouable.
-- **Terminal de sauvegarde** : le terminal est le dernier checkpoint sécurisé. Aucun objet de décor dédié n'a été dessiné.
-- **Origines** : 17 capacités ont leur valeur, mais aucun raccordement au jeu (chargeur, civils, dossiers, conduits, soins, extraction, portes de la compagnie, UPP, fouille, casiers, M577, échantillons, ordres, couloirs). Le fil du dossier caviardé (§2.4.3) n'est pas écrit dans le jeu.
-- **Castes** : le comportement de plafond attend une géométrie de plafond dans les niveaux. Les mouvements ajoutés sont bornés au sol courant, ce qui reste prudent sur les sols segmentés.
-- **Taille du texte** : elle agit sur les tailles en `rem` et sur les 108 tailles en `px` des écrans du joueur. Les feuilles de Frontier Forge (outil d’édition) restent inchangées, car leurs octets sont épinglés par les audits historiques de Forge.
-- **Mode daltonien** : c'est une correction de couleur globale. Les couleurs codées en dur dans le Canvas n'ont pas encore de palette dédiée.
-- **Répliques** : elles s'affichent en notification au retour. Elles ne sont pas encore intégrées aux conversations du mess.
+- **Musiques** : les quatre ambiances jouent la musique existante tant que les morceaux Flow du propriétaire manquent (§53.2).
+- **Terminal de sauvegarde** : la console est un placeholder en primitives Canvas. L'art définitif reste à produire par le propriétaire.
+- **Origines à compléter dans la bible** :
+  - `origin-03` (*Procès-verbal*) : texte des indices supplémentaires, pièce par pièce ;
+  - `origin-16` (*Échantillons*) : système d'échantillons et de contamination, absent du jeu ;
+  - `origin-11` (*Matériel de l'Union*) : sans objet, car le jeu n'applique aucune pénalité aux armes UPP ;
+  - le fil du dossier caviardé (§2.4.3) n'est pas encore écrit dans le jeu.
+- **Origines raccordées par adaptation** :
+  - 02 : convoi de survivants, faute d'escorte civile en mission ;
+  - 14 : conduit fermé au chalumeau, faute de casiers ;
+  - 19 : « couloir étroit » mesuré comme un plafond à moins de 140 px au-dessus de la tête.
+- **Castes** : les mouvements ajoutés restent bornés au sol courant.
+- **Mode daltonien** : correction de couleur globale (canvas et panneaux). Une palette Canvas dédiée n'est pas faite.
+- **Répliques** : le texte est repris en français dans la réponse du mess. La réponse complète est dynamique et ne passe donc pas par le catalogue anglais.
+- **Frontier Forge** : les tailles de texte de l'outil d'édition ne suivent pas le réglage, car leurs octets sont épinglés.
 - **Non mesuré** : le test de la tranche par 3 à 5 joueurs (§53.11), le ressenti du tir, la peur et la durée de la première heure.
