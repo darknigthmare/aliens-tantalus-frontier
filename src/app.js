@@ -1,3 +1,4 @@
+import { detectReactiveTriggersV188, selectReactiveLinesV188 } from './reactive-lines-v188.js';
 import { applyAccessibilityV188, installKeyRemapV188, mountKeyBindingsUiV188, normalizeKeyBindingsV188, soundCaptionV188 } from './accessibility-v188.js';
 import { spareCrewMemberV188, normalizeCrewPermadeathV188, normalizeCustomDifficultyV188, normalizeOriginV188, CUSTOM_DIFFICULTY_BOUNDS_V188 } from './run-options-v188.js';
 import { cueForGameEventV188, casteCueV188 } from './audio-cues-v188.js';
@@ -2806,10 +2807,20 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   const resolvedSuccess = outcome?.ok ? outcome.success !== false : false;
   if (!outcome?.ok) return outcome;
   if (campaign && world) applyCampaignConsequence(candidate, campaign, world, { success: resolvedSuccess });
+  // V188 reactive lines (bible §53.6): failure, colonist loss, injured return.
+  const reactiveLinesV188 = selectReactiveLinesV188(candidate,
+    detectReactiveTriggersV188(saveSystem.data, candidate, operation, { success: resolvedSuccess }), {
+      operation, language: document.documentElement.lang,
+      isSynthetic: (member) => (resolveCrewDefinitionV85(member, CREW)?.species || CREW.find((entry) => entry.id === member.id)?.species) === 'synthetic'
+    });
   advanceGalaxy(candidate, { hours: resolvedSuccess ? 4 : 8, generateCrisis: true });
   candidate.scene = 'hub';
   saveSystem.commit(candidate);
   renderAll();
+  for (const line of reactiveLinesV188) {
+    const name = resolveCrewDefinitionV85(saveSystem.data.crew.find((member) => member.id === line.crewId) || { id: line.crewId }, CREW)?.name || line.crewId;
+    toast(`${name} : « ${line.text} »`);
+  }
   return outcome;
 }
 

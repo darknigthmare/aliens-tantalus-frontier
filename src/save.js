@@ -1,3 +1,4 @@
+import { createReactiveLinesV188, normalizeReactiveLinesV188 } from './reactive-lines-v188.js';
 import { normalizeColorblindV188, normalizeTextScaleV188, normalizeKeyBindingsV188, defaultKeyBindingsV188 } from './accessibility-v188.js';
 import { spareCrewMemberV188, normalizeOriginV188, normalizeCustomDifficultyV188, DEFAULT_CUSTOM_DIFFICULTY_V188 } from './run-options-v188.js';
 import { createStoryCampaignV188, normalizeStoryCampaignV188 } from './story-campaign-v188.js';
@@ -367,6 +368,7 @@ export function createDefaultSave(profile = 1) {
     convoyReturnHistoryV162: createConvoyReturnHistoryV162(),
     letheContinuityV163: createLetheContinuityV163(),
     storyCampaignV188: createStoryCampaignV188(),
+    reactiveLinesV188: createReactiveLinesV188(),
     alphaBravoDoctrine: createAlphaBravoDoctrineV69(),
     alienSurvivalSystems: createAlienSurvivalSystemsV70(),
     bioforgeV80: createBioforgeV80(),
@@ -2387,6 +2389,7 @@ export function migrateSave(input, profile = 1) {
   migrated.editor = { ...base.editor, ...editor, projects: Array.isArray(editor.projects) ? editor.projects.filter(isRecord).slice(0, 128) : base.editor.projects };
   // V188 additive field: an older save simply has no debrief read yet.
   migrated.storyCampaignV188 = normalizeStoryCampaignV188(source.storyCampaignV188);
+  migrated.reactiveLinesV188 = normalizeReactiveLinesV188(source.reactiveLinesV188);
   migrated.memorial = Array.isArray(source.memorial) ? source.memorial.filter(isRecord).slice(0, 512) : base.memorial;
   const settings = isRecord(source.settings) ? source.settings : {};
   migrated.settings = { ...base.settings, ...settings };
