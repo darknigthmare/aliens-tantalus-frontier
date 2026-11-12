@@ -15,8 +15,8 @@ function stub(engine, name, implementation, body) {
   try { return body(); } finally { proto[name] = original; }
 }
 
-test('every origin except 03, 11, 16 and 20 is connected to a runtime hook', () => {
-  assert.deepEqual(CONNECTED_ORIGIN_ABILITIES_V188, ORIGINS_V188.map(o => o.id).filter(id => !['origin-03', 'origin-11', 'origin-16', 'origin-20'].includes(id)));
+test('every origin ability 01-19 is connected; origin-20 has none', () => {
+  assert.deepEqual(CONNECTED_ORIGIN_ABILITIES_V188, ORIGINS_V188.map(o => o.id).filter(id => id !== 'origin-20'));
 });
 
 test('origin-01 narrows multi-pellet spread only during an alert', async () => {
@@ -122,4 +122,64 @@ test('origin-07 and origin-08 scale duct movement and rescue duration', async ()
   stub(m, 'reserveSquadRescueV132', function () { this.squadDoctrineV132 = { tasks: [{ kind: 'rescue', duration: 2.4 }] }; return { applied: true, reserved: true }; },
     () => m.reserveSquadRescueV132(m.player, {}, 'rescue'));
   assert.equal(m.squadDoctrineV132.tasks[0].duration, 2); m.stop();
+});
+
+import { ORIGIN_CLUES_V188 } from '../src/run-options-v188.js';
+import { ARCHIVE_RELAY_CAMPAIGN_V122, ARCHIVE_RELAY_DOCUMENT_IDS_V122 } from '../src/archive-relay-state-v122.js';
+import { buildArchiveRelayLevelV122, ARCHIVE_RELAY_PROPS_V122 } from '../src/archive-relay-runtime-v122.js';
+import { CAMPAIGNS, WORLDS, WEAPONS, ENEMIES, LEVEL_SEEDS } from '../src/content.js';
+import { GameEngine } from '../src/game-production-runtime.js';
+import { host, prepare } from './engine-host-v188.mjs';
+import { createDefaultSave, beginOperation, resolveOperation } from '../src/save.js';
+
+test('origin-03 [PROPOSÉ]: every QZ-18 piece has a cross-checking clue in both languages; the first piece read shows it once', async () => {
+  for (const id of ARCHIVE_RELAY_DOCUMENT_IDS_V122) {
+    assert.ok(ORIGIN_CLUES_V188[id]?.fr.startsWith('Procès-verbal'), id); assert.ok(ORIGIN_CLUES_V188[id].en.startsWith('Report'), id);
+  }
+  const world = WORLDS.find(entry => entry.id === ARCHIVE_RELAY_CAMPAIGN_V122.worldId);
+  const level = buildArchiveRelayLevelV122({ campaign: ARCHIVE_RELAY_CAMPAIGN_V122, world, levelSeeds: LEVEL_SEEDS, seed: 160 });
+  const browser = host(), events = [], engine = new GameEngine(browser.canvas, { onEvent: event => events.push(event) });
+  engine.start({ campaign: ARCHIVE_RELAY_CAMPAIGN_V122, world, missionLevel: level, levelSeed: level.levelSeed, weapon: WEAPONS[0],
+    enemyCatalog: ENEMIES, equipment: [], crew: [], seed: 160, originV188: 'origin-03' });
+  await prepare(engine);
+  const prop = ARCHIVE_RELAY_PROPS_V122.pda;
+  Object.assign(engine.player, { x: prop.x - engine.player.w / 2, y: prop.groundY - engine.player.h, vx: 0, vy: 0, grounded: true, climbing: false });
+  assert.equal(engine.interact(), true, 'the real PDA station opens');
+  const [first] = engine.getArchiveRelayReaderV122().documents.map(doc => doc.id);
+  assert.equal(engine.markArchiveRelayReadV122(first).applied, true);
+  assert.equal(engine.giveOriginClueV188('engineering-clock'), false, 'one clue per mission');
+  const clues = events.filter(event => event.type === 'origin-clue-v188');
+  assert.equal(clues.length, 1); assert.equal(clues[0].documentId, first); assert.equal(clues[0].text, ORIGIN_CLUES_V188[first].fr);
+  engine.stop();
+});
+
+test('origin-11 [PROPOSÉ]: +10% damage with a UPP primary weapon only', async () => {
+  const upp = WEAPONS.find(weapon => /Type 88/.test(weapon.name));
+  assert.ok(upp, 'a UPP weapon exists in the catalogue');
+  const { engine } = await fixture({ options: { originV188: 'origin-11', weapon: upp } });
+  assert.equal(engine.uppWeaponV188, true);
+  const enemy = () => ({ id: 'e', x: 0, y: 0, w: 40, h: 60, alive: true, health: 1000, maxHealth: 1000, armor: 0, revealed: 0 });
+  engine.player.weaponMode = 'primary';
+  const primary = engine.applyEnemyDamage(enemy(), 100, { owner: engine.player });
+  engine.player.weaponMode = 'secondary';
+  const sidearm = engine.applyEnemyDamage(enemy(), 100, { owner: engine.player });
+  assert.ok(Math.abs(primary / sidearm - 1.1) < 1e-9, `${primary} vs ${sidearm}`);
+  engine.stop();
+  const plain = await fixture({ options: { originV188: 'origin-11', weapon: WEAPONS[0] } });
+  assert.equal(plain.engine.uppWeaponV188, false); plain.engine.stop();
+});
+
+test('origin-16 [PROPOSÉ]: the real resolveOperation adds exactly one biological sample after a successful mission', () => {
+  const run = origin => {
+    const save = createDefaultSave(); save.needsPlayerCreationV84 = false; save.player.originV188 = origin;
+    const campaign = CAMPAIGNS.find(entry => !entry.id.startsWith('special-') && save.galaxy.unlockedWorldIds.includes(entry.worldId));
+    const world = WORLDS.find(entry => entry.id === campaign.worldId);
+    beginOperation(save, campaign, world);
+    const before = save.galaxy.resources.pathogen;
+    const outcome = resolveOperation(save, { success: true, kills: 10 });
+    return { ok: outcome.ok, success: outcome.success, gained: save.galaxy.resources.pathogen - before };
+  };
+  const biologist = run('origin-16'), other = run('origin-20');
+  assert.equal(biologist.ok, true); assert.equal(other.ok, true);
+  assert.equal(biologist.gained - other.gained, 1);
 });

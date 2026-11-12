@@ -1,4 +1,5 @@
 import { currentReactiveLineV188 } from './reactive-lines-v188.js';
+import { currentLanguageV185 } from './i18n-v185.js';
 import { APTITUDE_DEFINITIONS_V85, deriveRecruitIdentityV119, resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
 import { getPremiumPersonnelV119 } from './premium-personnel-v119.js';
 import { buildCrewConversationV120, selectCrewConversationTopicV120 } from './crew-conversations-v120.js';
@@ -23,7 +24,8 @@ export function buildCrewUiModelV85(save, catalog = []) {
   // V188 (bible §53.6): the member's recent reaction is repeated in the mess debrief.
   for (const member of members) {
     const conversation = member.conversationV120, line = conversation?.mode === 'service'
-      && currentReactiveLineV188(save, member.id, { synthetic: member.species === 'synthetic' });
+      && currentReactiveLineV188(save, member.id, { synthetic: member.species === 'synthetic',
+        language: (() => { try { return currentLanguageV185(); } catch { return 'fr'; } })() });
     if (!line || !Array.isArray(conversation.topics)) continue;
     member.conversationV120 = { ...conversation, topics: conversation.topics.map(topic => topic.id === 'debrief'
       ? { ...topic, answer: `${topic.answer} « ${line} »`, reactionV188: true } : topic) };

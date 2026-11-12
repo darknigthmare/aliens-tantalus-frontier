@@ -109,11 +109,7 @@ QA Chromium de la passe 2, à partir d'une sauvegarde injectée « Port-Méridie
 
 - **Musiques** : les quatre ambiances jouent la musique existante tant que les morceaux Flow du propriétaire manquent (§53.2).
 - **Terminal de sauvegarde** : la console est un placeholder en primitives Canvas. L'art définitif reste à produire par le propriétaire.
-- **Origines à compléter dans la bible** :
-  - `origin-03` (*Procès-verbal*) : texte des indices supplémentaires, pièce par pièce ;
-  - `origin-16` (*Échantillons*) : système d'échantillons et de contamination, absent du jeu ;
-  - `origin-11` (*Matériel de l'Union*) : sans objet, car le jeu n'applique aucune pénalité aux armes UPP ;
-  - le fil du dossier caviardé (§2.4.3) n'est pas encore écrit dans le jeu.
+- **Origines** : les 19 capacités sont raccordées. Les solutions pour 03, 11 et 16 sont décrites au §56.6, encore **[PROPOSÉ]**. Le fil du dossier caviardé (§2.4.3) attend le hub Asphodèle.
 - **Origines raccordées par adaptation** :
   - 02 : convoi de survivants, faute d'escorte civile en mission ;
   - 14 : conduit fermé au chalumeau, faute de casiers ;

@@ -4244,7 +4244,7 @@ Les lots 2 à 6 modifient la sauvegarde : chacun demande la levée de protection
 | --- | --- | --- | --- |
 | P1-1 | Comportements propres à chaque caste : plafond, contournement, fuite de la lumière, embuscade | §53.3 | Fait (V188) : drone (recul, plafond), rôdeur, embusqué |
 | P1-2 | Mort définitive de l'équipage optionnelle, choisie à la création de la partie | §55.5 | Fait (V188) |
-| P1-3 | Origines d'Echo-9 : choix au créateur et capacités bornées | §2.4, §55.6 | Partiel (V188) : 16 capacités sur 19 raccordées ; 03 et 16 attendent du contenu (§56.6), 11 sans objet |
+| P1-3 | Origines d'Echo-9 : choix au créateur et capacités bornées | §2.4, §55.6 | Fait (V188) : 19 capacités raccordées, dont 03, 11 et 16 selon les propositions du §56.6 ; fil caviardé lié à Asphodèle |
 | P1-4 | Difficulté à la carte (`custom`) | §55.4 | Fait (V188) |
 | P1-5 | Accessibilité : mode daltonien, taille du texte, sous-titres des sons importants, remappage des commandes | §53.8 | Fait (V188) ; palette Canvas dédiée non faite (correction globale active) |
 | P1-6 | Répliques réactives : mission ratée, colon mort, retour blessé | §53.6 | Fait (V188) : notification au retour et reprise au mess pendant 3 jours |
@@ -4283,7 +4283,7 @@ Le directeur passe par trois phases :
 | --- | --- |
 | 01 | −15 % de dispersion en alerte |
 | 02 | Panique des civils escortés −25 % |
-| 03 | +1 indice sur un document par mission |
+| 03 | Première pièce lue : un indice de recoupement (§56.6) |
 | 04 | Chargeur P-5000 : vitesse +10 % |
 | 05 | Réparation des systèmes atmosphériques +20 % |
 | 06 | Abris et sas sûrs signalés sur la carte |
@@ -4291,12 +4291,12 @@ Le directeur passe par trois phases :
 | 08 | Soin d'un équipier +20 % |
 | 09 | Fenêtre d'extraction +10 s |
 | 10 | Une porte de la compagnie par mission ouverte sans piratage |
-| 11 | Armes UPP sans pénalité |
+| 11 | +10 % de dégâts avec une arme UPP (§56.6) |
 | 12 | Matériaux par caisse +10 % |
 | 13 | Échos du détecteur : faux échos identifiés, rayon −30 % |
 | 14 | Casiers ouverts sans outil |
 | 15 | Réparation du M577 et des tourelles +20 % |
-| 16 | Un échantillon sans contamination par mission |
+| 16 | +1 échantillon biologique par mission réussie (§56.6) |
 | 17 | Ordres d'escouade exécutés 15 % plus vite |
 | 18 | Dégâts subis par le véhicule escorté −10 % |
 | 19 | Dégâts en couloir étroit +10 % |
@@ -4320,10 +4320,14 @@ Le directeur passe par trois phases :
 
 Réalisation, mesures, vérifications et limites : [rapport V188](../development/PRIORITIES_P0_P1_V188.md). Les statuts « Fait » ci-dessus désignent un raccordement au jeu vérifié par des tests Node sur le moteur réel et des contrôles Chromium. Ils ne remplacent pas le test de la tranche par 3 à 5 joueurs (§53.11), qui reste à faire.
 
-### 56.6 À compléter dans la bible — [À DÉCIDER]
+### 56.6 Origines 03, 11 et 16 — [PROPOSÉ], implémenté le 2026-11-12
 
-| # | Question | Pourquoi |
-| --- | --- | --- |
-| 1 | `origin-03` *Procès-verbal* : quel indice supplémentaire chaque pièce du dossier révèle-t-elle ? (une phrase FR/EN par pièce de QZ-18 et des pièces de terrain) | La capacité ne peut pas inventer des faits d'enquête |
-| 2 | `origin-16` *Échantillons* : faut-il créer un système de prélèvement et de contamination, ou réinterpréter la capacité (par exemple, une analyse de résidu sans scanner par mission) ? | Le jeu n'a aucun système d'échantillons |
-| 3 | `origin-11` *Matériel de l'Union* : faut-il ajouter une pénalité aux armes UPP pour les autres origines, ou changer la capacité ? | Aucune pénalité n'existe ; la capacité est sans effet |
+Le propriétaire a demandé une solution pour chaque question. Les trois propositions sont raccordées au jeu ; elles restent révisables.
+
+| # | Origine | Problème | Solution proposée et implémentée |
+| --- | --- | --- | --- |
+| 1 | `origin-03` *Procès-verbal* | La capacité ne peut pas inventer des faits d'enquête | La **première pièce lue** dans la mission affiche un indice de recoupement. Chaque indice relie seulement des faits déjà écrits dans d'autres pièces du même dossier : heures 18:39 à 18:54, accès local du badge, télémétrie sans défaut, série QZ17. Il y a un indice par pièce de QZ-18 et des pièces de terrain, en FR et EN. |
+| 2 | `origin-16` *Échantillons* | Le jeu n'a aucun système de prélèvement | La capacité est réinterprétée en **+1 échantillon biologique** (ressource `pathogen`) après chaque mission réussie. La règle actuelle reste respectée : un dossier documentaire comme QZ-18 n'en donne pas. Un vrai système de prélèvement pourra la remplacer plus tard. |
+| 3 | `origin-11` *Matériel de l'Union* | Aucune pénalité n'existe pour les armes UPP | Je n'ajoute **pas de pénalité** aux 19 autres origines, car cela changerait l'équilibrage de tout le jeu. La capacité devient **+10 % de dégâts** avec une arme principale de fabrication UPP (Type 88, AK-4047…). |
+
+**Reste à faire pour les origines :** le fil du dossier caviardé (`origin-20`, §2.4.3). Ses quatre fragments sont placés dans des lieux qui n'existent pas encore dans le jeu : la quête de DAVID-8R, CASSIUS en S2, la salle des relais d'Asphodèle et l'épilogue. **Proposition :** l'intégrer avec le second hub Asphodèle (§42). Le placer ailleurs déplacerait des scènes de la bible.

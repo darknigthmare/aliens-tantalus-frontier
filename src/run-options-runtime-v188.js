@@ -1,6 +1,7 @@
 // V188 — runtime side of the run options: custom difficulty extras (ammo found,
 // alert frequency) and the origin abilities already connected to a hook.
-import { originV188 } from './run-options-v188.js';
+import { originV188, ORIGIN_CLUES_V188 } from './run-options-v188.js';
+import { currentLanguageV185 } from './i18n-v185.js';
 import { measureThreatV188 } from './mission-register-v188.js';
 
 const near = (a, b, reach) => Math.hypot((a.x + (a.w || 0) / 2) - (b.x + (b.w || 0) / 2), (a.y + (a.h || 0) / 2) - (b.y + (b.h || 0) / 2)) < reach;
@@ -10,7 +11,8 @@ export function withRunOptionsRuntimeV188(Base) {
   return class RunOptionsRuntimeV188 extends Base {
     static runOptionsRuntimeV188 = true;
     start(options = {}) {
-      this.originV188 = originV188(options.originV188);
+      this.originV188 = originV188(options.originV188); this.originClueGivenV188 = false;
+      this.uppWeaponV188 = /\bUPP\b|Union des Peuples|Type 88|AK-4047/i.test(JSON.stringify(options.weapon || {}));
       const result = super.start(options);
       const tuning = this.difficultyRuntime || {};
       this.ammoFoundV188 = Number.isFinite(tuning.ammoFound) ? tuning.ammoFound : 1;
@@ -140,7 +142,31 @@ export function withRunOptionsRuntimeV188(Base) {
     applyEnemyDamage(enemy, rawDamage, source = {}) {
       const bonus = this.originValueV188('corridorDamage');
       const boosted = bonus && source.owner === this.player && Number.isFinite(rawDamage) && this.narrowCorridorV188();
-      return super.applyEnemyDamage(enemy, boosted ? rawDamage * (1 + bonus) : rawDamage, source);
+      // origin-11 Matériel de l'Union [PROPOSÉ]: +10% with a UPP primary weapon.
+      const upp = this.originValueV188('uppDamage'), uppShot = upp && this.uppWeaponV188 && source.owner === this.player
+        && this.player?.weaponMode !== 'secondary' && Number.isFinite(rawDamage);
+      const damage = Number.isFinite(rawDamage) ? rawDamage * (boosted ? 1 + bonus : 1) * (uppShot ? 1 + upp : 1) : rawDamage;
+      return super.applyEnemyDamage(enemy, damage, source);
+    }
+    // origin-03 Procès-verbal [PROPOSÉ]: the first piece read in the mission adds a cross-checking clue.
+    giveOriginClueV188(documentId) {
+      const clue = ORIGIN_CLUES_V188[documentId];
+      if (this.originClueGivenV188 || !this.originValueV188('clues') || !clue) return false;
+      let language = 'fr'; try { language = currentLanguageV185(); } catch {}
+      this.originClueGivenV188 = true;
+      this.pushCaption?.('mission', clue[language === 'en' ? 'en' : 'fr']);
+      this.onEvent?.({ type: 'origin-clue-v188', documentId, text: clue[language === 'en' ? 'en' : 'fr'] });
+      return true;
+    }
+    markArchiveRelayReadV122(documentId) {
+      const result = super.markArchiveRelayReadV122(documentId);
+      if (result?.applied) this.giveOriginClueV188(documentId);
+      return result;
+    }
+    collectNarrativeEvidenceV132(actor = this.player, evidenceId = this.nearestNarrativeEvidenceV132?.(actor)?.id) {
+      const result = super.collectNarrativeEvidenceV132(actor, evidenceId);
+      if (result) this.giveOriginClueV188(evidenceId);
+      return result;
     }
     // origin-18 Convoy formation: the escorted vehicle takes 10% less damage.
     damageVehicle(amount, source) {

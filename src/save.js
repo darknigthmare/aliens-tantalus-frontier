@@ -1985,6 +1985,8 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
     const documentationOnlyV122 = operation.campaignId === ARCHIVE_RELAY_CAMPAIGN_V122.id;
     // A recovered text dossier is not a biological specimen or an extermination.
     if (!documentationOnlyV122) changeStrategicValue(save, 'pathogen', Math.max(1, Math.ceil((specialRewardV121?.kills ?? kills) / 5)));
+    // V188 origin-16 Échantillons [PROPOSÉ]: one contamination-free sample per successful mission.
+    if (!documentationOnlyV122 && save.player?.originV188 === 'origin-16') changeStrategicValue(save, 'pathogen', 1);
     worldState.stability = clamp(worldState.stability + 8);
     worldState.infestation = clamp(worldState.infestation - (documentationOnlyV122 ? 0 : containment ? 11 : 7));
     worldState.quarantine = clamp(worldState.quarantine + (containment ? 8 : 4));
