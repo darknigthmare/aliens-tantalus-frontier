@@ -76,6 +76,446 @@
       "victory": {
         "sources": [],
         "fallback": "synth"
+      },
+      "tracker-pulse": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/tracker-pulse.wav",
+            "mime": "audio/wav",
+            "bytes": 9746,
+            "sha256": "29a2f5dfc49530b99a6b49305f80b91e421850a1c16a86da9107c21ed4a4fadb"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "tracker-near": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/tracker-near.wav",
+            "mime": "audio/wav",
+            "bytes": 6218,
+            "sha256": "8e9589dce1be27887624365d56dd08df92f22b3ea258d53fb68576400c4faf9c"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "tracker-far": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/tracker-far.wav",
+            "mime": "audio/wav",
+            "bytes": 13274,
+            "sha256": "a71751e719efbe08c9131f26633266be6fc7c3d3b416ccafc6f1df76c0dca0ec"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "tracker-false-echo": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/tracker-false-echo.wav",
+            "mime": "audio/wav",
+            "bytes": 15920,
+            "sha256": "2e723ce6338199e5ce111010a53849976b8e9c38fa4b665c27b5361cde0db7b9"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "step-metal": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/step-metal.wav",
+            "mime": "audio/wav",
+            "bytes": 7100,
+            "sha256": "8b3aad5f80001f6acbb9a20f56e9c637f7edddf35f75031a793f2f0f35025566"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "step-grating": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/step-grating.wav",
+            "mime": "audio/wav",
+            "bytes": 7982,
+            "sha256": "0840fc42c2e66ae3a25c49dedd8d307e9c8020b168762f013541988552714023"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "step-concrete": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/step-concrete.wav",
+            "mime": "audio/wav",
+            "bytes": 5778,
+            "sha256": "1bf409457c770743f6069feadbd9d05bcf6c5d1bd707e54a16717e8c52b3d769"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "step-water": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/step-water.wav",
+            "mime": "audio/wav",
+            "bytes": 10628,
+            "sha256": "14d89c595319c429f24839a7a5453099f3c2f132a24f6d76f4d368774bea7a30"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "step-resin": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/step-resin.wav",
+            "mime": "audio/wav",
+            "bytes": 9746,
+            "sha256": "1d80a99a168553e2063b4b058bd33d216d7793cb886d373a29e4158c669bcfa0"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "door-open": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/door-open.wav",
+            "mime": "audio/wav",
+            "bytes": 30914,
+            "sha256": "5333403cc364f6e3d800d2d90714a502755f0673ee4d5890c2e1c1825b5d0279"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "door-close": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/door-close.wav",
+            "mime": "audio/wav",
+            "bytes": 27386,
+            "sha256": "57e3314ac5bdf42e353021c25d461ca27ef7390a68c4096755b2b55f12ca24ae"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "door-locked": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/door-locked.wav",
+            "mime": "audio/wav",
+            "bytes": 13274,
+            "sha256": "911b8bedcda3ad4697fef4330291b71019df43cfe29dbde05a19ed3558593b2f"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "airlock-pressurize": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/airlock-pressurize.wav",
+            "mime": "audio/wav",
+            "bytes": 70604,
+            "sha256": "e73090033ec7315e50f72f56a405c4302a88607c094281e62102af3b8510a448"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "airlock-depressurize": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/airlock-depressurize.wav",
+            "mime": "audio/wav",
+            "bytes": 70604,
+            "sha256": "55fa30241b514c795d53b0e1268087bdc1b7e81a10b3eeee904bc5e4d1677057"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "door-forced": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/door-forced.wav",
+            "mime": "audio/wav",
+            "bytes": 39734,
+            "sha256": "c6946a1fa64fa99e6952d12891750859615ea5bebd04221b7fdbf8eed415778f"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "lift-depart": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/lift-depart.wav",
+            "mime": "audio/wav",
+            "bytes": 52964,
+            "sha256": "6d747fb5bf9288c883040d9c162dec8ea4030750c592bf7fd537e6dadf16456a"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "lift-arrive": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/lift-arrive.wav",
+            "mime": "audio/wav",
+            "bytes": 39734,
+            "sha256": "85e12b3acd0856ee6e34ad25dabb2f81e39c74ecc8015d748fed509353fd1030"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "alarm-general": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/alarm-general.wav",
+            "mime": "audio/wav",
+            "bytes": 61784,
+            "sha256": "ca7739c17857d5664ada9acb4479857ba505fd2ca1a6cece79c89599f34c6355"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "alarm-quarantine": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/alarm-quarantine.wav",
+            "mime": "audio/wav",
+            "bytes": 70604,
+            "sha256": "c6e7cc2fde8c278d33e30983c529986f89bf9849c4e9a6dda3b797aced14a4ef"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "alarm-countdown": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/alarm-countdown.wav",
+            "mime": "audio/wav",
+            "bytes": 44144,
+            "sha256": "10ec01972e9579be9ad97198d175fe161bd1c287fd19480a52b6e3618566f54f"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "ambience-rain": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/ambience-rain.wav",
+            "mime": "audio/wav",
+            "bytes": 176444,
+            "sha256": "1f4c958d9f62cf4c222d8ac5c57488f8cc490ecff970a47c1ed031c1fa4db672"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "ambience-rain-roof": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/ambience-rain-roof.wav",
+            "mime": "audio/wav",
+            "bytes": 176444,
+            "sha256": "2db29adb3f5932d2866785dfdb3171a973b983aedfa297e7f9d7d5ce49ebadd7"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "ambience-ventilation": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/ambience-ventilation.wav",
+            "mime": "audio/wav",
+            "bytes": 176444,
+            "sha256": "d204596d4d113d37d1ab7292bb264141492ed11b37926fbebfd7767becb29836"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "ambience-relay-hum": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/ambience-relay-hum.wav",
+            "mime": "audio/wav",
+            "bytes": 176444,
+            "sha256": "a4701d0f02e9b1a81793492f728afa081fb4858ad1c3c48639b12b3a9e8e6b1e"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "cry-drone": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/cry-drone.wav",
+            "mime": "audio/wav",
+            "bytes": 39734,
+            "sha256": "5fff638a187c394db7caed9780c52b8b364de857e84dffb83e22eaa87d6992d8"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "cry-warrior": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/cry-warrior.wav",
+            "mime": "audio/wav",
+            "bytes": 35324,
+            "sha256": "662444e7ecd81b08d480702505b84046ef371af721be2d02201ac2f2cd14065f"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "cry-runner": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/cry-runner.wav",
+            "mime": "audio/wav",
+            "bytes": 24300,
+            "sha256": "2c108e9d72dbb3cc64c3f3f78e64007947287df9c341bef2f1a10b7733d63f37"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "cry-spitter": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/cry-spitter.wav",
+            "mime": "audio/wav",
+            "bytes": 30914,
+            "sha256": "01f28d92184e3eab51f154772d60945f82162bb1ef67e9dbeb4fe2e4d0751801"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "cry-crusher": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/cry-crusher.wav",
+            "mime": "audio/wav",
+            "bytes": 48554,
+            "sha256": "c88349a7bbada6e1cd766e059c92bb3f0c15f539451ffa12952da95b8332b11d"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "cry-queen": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/cry-queen.wav",
+            "mime": "audio/wav",
+            "bytes": 70604,
+            "sha256": "0cd9627c60fe8e5eb59aab2bfb2a573e62e8de63a5f1503d71b7bc69363bea41"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "cry-facehugger": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/cry-facehugger.wav",
+            "mime": "audio/wav",
+            "bytes": 19890,
+            "sha256": "b2da743a73239af9432eb9d0247653e0caef6f2b9f88b8279d148466f02d027b"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "cry-chestburster": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/cry-chestburster.wav",
+            "mime": "audio/wav",
+            "bytes": 26504,
+            "sha256": "0e9c69f32f1a854f9a048c120e209016f2b34a77e8ba890a82917dc2f81f24b3"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "weapon-m41a-burst": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/weapon-m41a-burst.wav",
+            "mime": "audio/wav",
+            "bytes": 18566,
+            "sha256": "2edb675353eadd1f772fea5968702a2beb47b9b26ee745d53a0e9636d126d82d"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "weapon-m41a-grenade": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/weapon-m41a-grenade.wav",
+            "mime": "audio/wav",
+            "bytes": 26504,
+            "sha256": "242eb7257557e123474f1c665708ff25f8959fb3f525c8e4924c180b9846a4a2"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "weapon-pistol": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/weapon-pistol.wav",
+            "mime": "audio/wav",
+            "bytes": 8864,
+            "sha256": "3d17762c2ef2d011490b01f77ceae000a3a06ae684feb3729e2d40be964f58b5"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "weapon-shotgun": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/weapon-shotgun.wav",
+            "mime": "audio/wav",
+            "bytes": 22094,
+            "sha256": "eb3e34c98317e9bbe0d6b68454376f85537e4aa8d7db00d78ec2d2c04fd87438"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "weapon-smartgun": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/weapon-smartgun.wav",
+            "mime": "audio/wav",
+            "bytes": 19890,
+            "sha256": "e5273f95a72f67448b090f4747e46cc62d1f10ff977341da02b480f1e246d178"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "weapon-flamethrower": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/weapon-flamethrower.wav",
+            "mime": "audio/wav",
+            "bytes": 35324,
+            "sha256": "a6310e1bf811650e8142e83672e4c36862fe67c09ce7342372b4b71bb2c49972"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "weapon-reload": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/weapon-reload.wav",
+            "mime": "audio/wav",
+            "bytes": 22094,
+            "sha256": "546c9423041df071cef3949cb6a2eb75d6037f46a49e4b5a4e466a9c87d528de"
+          }
+        ],
+        "fallback": "synth"
+      },
+      "weapon-dry-fire": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/weapon-dry-fire.wav",
+            "mime": "audio/wav",
+            "bytes": 5336,
+            "sha256": "ab404e790b24a81e3cf51061880c15a645ba15c60bc674ada650b2ffda884391"
+          }
+        ],
+        "fallback": "synth"
       }
     },
     "music": {
@@ -121,6 +561,22 @@
         "fallback": "silence"
       },
       "archives": {
+        "sources": [],
+        "fallback": "silence"
+      },
+      "alert": {
+        "sources": [],
+        "fallback": "silence"
+      },
+      "boss": {
+        "sources": [],
+        "fallback": "silence"
+      },
+      "ending": {
+        "sources": [],
+        "fallback": "silence"
+      },
+      "calm": {
         "sources": [],
         "fallback": "silence"
       }

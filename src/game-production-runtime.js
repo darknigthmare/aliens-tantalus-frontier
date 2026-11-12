@@ -51,6 +51,8 @@ import { captureMagazineFeedV168, restoreEquippedMagazineFeedV177 } from './weap
 import { withArchiveRelayPresentationV160 } from './archive-relay-presentation-v160.js';
 import { withTensionDirectorV188 } from './tension-director-v188.js';
 import { withMissionObjectivePanelV188 } from './mission-objective-panel-v188.js';
+import { withFootstepCuesV188 } from './audio-cues-v188.js';
+import { withCombatFeelV188 } from './combat-feel-v188.js';
 
 export * from './game-production-core.js';
 
@@ -86,7 +88,7 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   });
 }
 
-export class GameEngine extends withMissionObjectivePanelV188(withTensionDirectorV188(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(V158ProductionEngine))))))) {
+export class GameEngine extends withCombatFeelV188(withFootstepCuesV188(withMissionObjectivePanelV188(withTensionDirectorV188(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(V158ProductionEngine))))))))) {
   start(options = {}) {
     options = isolateForgeMissionOptionsV136(options);
     this.expectedMissionSignatureV130 = options.missionLevel?.signature || null;

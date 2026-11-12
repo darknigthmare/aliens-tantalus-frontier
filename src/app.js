@@ -1,3 +1,4 @@
+import { cueForGameEventV188, casteCueV188 } from './audio-cues-v188.js';
 import { deriveStoryCampaignV188, markStoryDebriefSeenV188, STORY_RELAY_CAMPAIGN_ID_V188 } from './story-campaign-v188.js';
 import {
   RELEASE, CONTENT_COUNTS, WORLDS, CAMPAIGNS, WEAPONS, EQUIPMENT, ENEMIES, VEHICLES,
@@ -2958,6 +2959,14 @@ function handleGameEvent(event) {
   }
   if (event.type === 'vehicle') log.textContent = event.occupied ? 'POSTE DE CONDUITE OCCUPÉ · rôles et armement actifs.' : 'PROGRESSION À PIED.';
   if (event.type === 'locked') { audio.locked(); log.textContent = `ACCÈS REFUSÉ · ${event.requirement}`; }
+  // V188 priority cues and in-mission music moods (bible §53.2, §55.7).
+  const enemyV188 = event.type === 'spotted' ? engine.enemies?.find?.((entry) => entry.id === event.enemyId) : null;
+  const cueV188 = enemyV188 ? casteCueV188(enemyV188) : cueForGameEventV188(event);
+  if (cueV188) audio.cue(cueV188);
+  if (event.type === 'tension-phase-v188') audio.setMusicMoodV188(event.phase === 'peak' ? 'alert'
+    : event.phase === 'relax' || event.register === 'horror' ? 'calm' : 'mission');
+  if (enemyV188?.isBoss || event.type === 'mecha-boss-warning-v131') audio.setMusicMoodV188('boss');
+  if (event.type === 'boss-defeated' || event.type === 'mecha-boss-defeated-v131') audio.setMusicMoodV188('mission');
   if (event.type === 'terminal-save-v188') {
     try { commitCurrentRuntimeV78({ includeSessionTime: true }); sessionStart = Date.now(); renderClock(); toast('Terminal : sauvegarde confirmée.'); }
     catch (error) { toast(error.message); }
