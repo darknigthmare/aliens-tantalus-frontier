@@ -66,6 +66,7 @@ test('production engine: a drone under a real platform clings motionless, flippe
   engine.attachCeilingDronesV188();
   assert.equal(enemy.casteV188?.mode, 'ceiling'); const hangY = enemy.y;
   assert.equal(hangY, anchor.y + anchor.h);
+  assert.equal(enemy.casteV188.hangX, enemy.x);
   p.x = enemy.x + 400; tick(engine, .5);
   assert.equal(enemy.y, hangY, 'stays on the ceiling'); assert.equal(enemy.casteV188.mode, 'ceiling');
   let flipped = false; const ctx = engine.canvas.getContext('2d'); const scale = ctx.scale;
@@ -74,5 +75,15 @@ test('production engine: a drone under a real platform clings motionless, flippe
   p.x = enemy.x; p.y = floorY - p.h; tick(engine, .4);
   assert.notEqual(enemy.casteV188.mode, 'ceiling'); assert.ok(events.some(event => event.type === 'ceiling-drop-v188'));
   assert.ok(enemy.y > hangY, 'falls from the ceiling');
+  engine.stop();
+});
+
+test('an enemy moved by another system leaves the ceiling; hive and authored chapters never attach', async () => {
+  const { engine, enemy } = await arena('drone', 300);
+  enemy.casteV188 = { mode: 'ceiling', hangX: enemy.x, hangY: enemy.y, clock: 0, cooldown: 0 };
+  enemy.x += 30; tick(engine, 1 / 60);
+  assert.notEqual(enemy.casteV188.mode, 'ceiling');
+  engine.isHiveMissionV131 = () => true; delete enemy.casteV188;
+  engine.attachCeilingDronesV188(); assert.equal(enemy.casteV188, undefined);
   engine.stop();
 });

@@ -78,17 +78,22 @@ export function withCasteBehaviorsV188(Base) {
         .sort((a, b) => a.height - b.height)[0]?.p || null;
     }
     attachCeilingDronesV188() {
+      // Hive-control missions direct the castes themselves; dedicated authored
+      // chapters keep their staging.
+      if (this.isHiveMissionV131?.() || String(this.campaign?.id || this.missionPlan?.campaign?.id || '').startsWith('special-')) return;
       let index = 0;
       for (const enemy of Array.isArray(this.enemies) ? this.enemies : []) {
         if (casteBehaviorIdV188(enemy) !== 'drone' || !enemy.alive || enemy.dormant) continue;
         if (index++ % CASTE_BEHAVIORS_V188.ceiling.everyNth !== 0) continue;
         const anchor = this.ceilingAnchorV188(enemy); if (!anchor) continue;
-        enemy.casteV188 = { mode: 'ceiling', clock: 0, cooldown: 0, triggered: false, floorY: enemy.y };
-        enemy.y = finite(anchor.y) + finite(anchor.h, 0); enemy.vx = 0; enemy.vy = 0; enemy.grounded = false;
+        enemy.y = finite(anchor.y) + finite(anchor.h, 0);
+        enemy.casteV188 = { mode: 'ceiling', clock: 0, cooldown: 0, triggered: false, hangX: enemy.x, hangY: enemy.y }; enemy.vx = 0; enemy.vy = 0; enemy.grounded = false;
         (this.casteStatsV188 ||= { drone: 0, runner: 0, ambusher: 0, ceiling: 0 }).ceiling = (this.casteStatsV188.ceiling || 0) + 1;
       }
     }
     updateEnemy(enemy, delta) {
+      // Another system moved the enemy (scripted placement, resume): it leaves the ceiling.
+      if (enemy?.casteV188?.mode === 'ceiling' && (enemy.x !== enemy.casteV188.hangX || enemy.y !== enemy.casteV188.hangY)) enemy.casteV188.mode = 'idle';
       if (enemy?.casteV188?.mode === 'ceiling') {
         const player = this.player, rules = CASTE_BEHAVIORS_V188.ceiling;
         const below = player && finite(player.y) > finite(enemy.y) && Math.abs(centerX(player) - centerX(enemy)) <= rules.dropReach;
