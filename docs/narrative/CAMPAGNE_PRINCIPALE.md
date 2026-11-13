@@ -517,9 +517,9 @@ Réservé à `origin-20`. Quatre fragments, un par lieu, sans combat propre :
 
 **But :** apprendre les commandes, comprendre pourquoi le Tantalus est là, rencontrer l'équipage et poser la question centrale (le fret contre les vivants) avant le premier contact.
 
-### CIN-00 · Ouverture — [PROPOSÉ]
+### CIN-00 · Ouverture — [EXISTANT] (V188, `story-cinematics-v188.js`)
 
-60 à 75 s, passable.
+60 à 75 s, passable. Jouée à chaque nouvelle partie avant le créateur (65 s). Plans dessinés en primitives Canvas ; l'espace, la planète et le Tantalus reprennent les couches existantes de l'écran titre.
 
 | Plan | Image | Son / texte |
 | --- | --- | --- |
@@ -536,7 +536,7 @@ Réservé à `origin-20`. Quatre fragments, un par lieu, sans combat propre :
 
 Le poste de cryostase attend la confirmation ; DAVID-8R accueille la Relève Echo-9. Création du personnage. Tamsin Velez rappelle la règle : avant une sortie, on identifie l'objectif et la voie de retour.
 
-**Ajout [PROPOSÉ]** — DAVID-8R, pendant le réveil : « Vous remplacez l'équipe Echo-8. Elle a abordé la station Asphodèle il y a trente et une heures. Le contact a été perdu à la sixième. Je n'ai pas d'autre information. » **CIN-01 « Le casier vide »** (20 s) : le casier `ECHO-8`, vidé et scellé.
+**Ajout [EXISTANT] (V188)** — DAVID-8R, pendant le réveil : « Vous remplacez l'équipe Echo-8. Elle a abordé la station Asphodèle il y a trente et une heures. Le contact a été perdu à la sixième. Je n'ai pas d'autre information. » **CIN-01 « Le casier vide »** (20 s) : le casier `ECHO-8`, vidé et scellé. Elle est jouée juste après la confirmation du réveil, une seule fois par partie.
 
 *Ancrage Alien : réveil d'hypersommeil, relève d'une équipe perdue, synthétique de bord.*
 
@@ -544,11 +544,13 @@ Le poste de cryostase attend la confirmation ; DAVID-8R accueille la Relève Ech
 
 `hub-opening-exercise-v89.js` : échelle, pas de tir, cibles, rétablissement de la liaison prioritaire.
 
-**[PROPOSÉ]** La liaison prioritaire, rétablie à la fin de l'exercice, laisse passer un paquet de messages de Port-Méridien vieux de plusieurs jours, d'un coup. Le dernier date de quatre heures. Mara Vega coupe l'exercice.
+**[EXISTANT] (V188, séquence `cin-p2`)** La liaison prioritaire, rétablie à la fin de l'exercice, laisse passer un paquet de messages de Port-Méridien vieux de plusieurs jours, d'un coup. Le dernier date de quatre heures. Mara Vega coupe l'exercice.
 
 *Ancrage Alien : communications retardées, colonie isolée.*
 
-### CIN-02 · Le briefing — [PROPOSÉ]
+### CIN-02 · Le briefing — [EXISTANT] (V188)
+
+Jouée une fois, avant le premier embarquement vers Port-Méridien (42 s), sur une carte holographique de Cocyte et d'Asphodèle dessinée en primitives.
 
 Salle de briefing. Mara Vega projette Cocyte et la station.
 
@@ -566,7 +568,7 @@ Salle de briefing. Mara Vega projette Cocyte et la station.
 
 `port-meridien-v90.js` (reçu existant `port-meridien:quai-des-vivants:v90`) : porter un lot au triage, assister un blessé, réalimenter le sas, rassembler trois habitants et les guider vers le sas éclairé.
 
-**[PROPOSÉ]** C'est aussi l'intro du front colonie (§6). Premier choix « vivants ou matériel » : lot médical ou batterie de sas. Tomas Wren, en passant : « Les conteneurs scellés partent avant nous depuis trois semaines. » Lucia Ferro montre un blessé dont la poitrine est bandée : « Il est tombé malade après une nuit au quai nord. Il ne se souvient pas de la nuit. » Le joueur ne voit rien de plus. Noor Okafor, à la radio : « Ramenez-le en quarantaine. Pas au triage. »
+**[EXISTANT] (V188, séquences `cin-p3-wren` à l'arrivée et `cin-p3-ferro` après le triage)** C'est aussi l'intro du front colonie (§6). Premier choix « vivants ou matériel » : lot médical ou batterie de sas. Tomas Wren, en passant : « Les conteneurs scellés partent avant nous depuis trois semaines. » Lucia Ferro montre un blessé dont la poitrine est bandée : « Il est tombé malade après une nuit au quai nord. Il ne se souvient pas de la nuit. » Le joueur ne voit rien de plus. Noor Okafor, à la radio : « Ramenez-le en quarantaine. Pas au triage. »
 
 *Ancrage Alien : premier signe du cycle biologique (hôte qui ne se souvient pas), évacuation de colons.*
 
@@ -617,7 +619,7 @@ Contenu existant : briefing « Le message arrivé trop tard » ; protocoles *Aud
 - Le message retenu (« Secours immédiat, personnel coincé au quai nord ») venait du quai nord de QZ-18, où partaient les navettes vers Port-Méridien. Les treize minutes ont laissé une navette partir avec un conteneur QZ17 et sans les blessés.
 - Quatrième question optionnelle au retour, si l'Acte I est terminé : *« Quel fret avait la priorité ? »* — la série de scellés QZ17.
 - Le profil « priorité cargaison » ne s'active pas au relais : il est **autorisé à distance par la station Asphodèle**. Rook identifie la signature. Cela débloque l'intro du front station.
-- **CIN-20 « Treize minutes »** (40 s) : Asha Mbaye lit le message libéré à 18:54. Les noms du personnel du quai nord défilent. Pas de musique.
+- **CIN-20 « Treize minutes »** (40 s) — **[EXISTANT] (V188)**, avec la réponse de Halloran en dernier plan, au premier compte rendu de QZ-18 : Asha Mbaye lit le message libéré à 18:54. Les noms du personnel du quai nord défilent. Pas de musique.
 - Mara Vega transmet le dossier par le seul canal disponible, le réseau QZ. Réponse différée de la Directrice Halloran : « Priorité cargaison maintenue, conformément à la clause d'acheminement. Toute ouverture de scellé engage la responsabilité de l'unité. »
 
 *Ancrage Alien : la compagnie contrôle les communications ; la vie humaine passe après le contrat.*
@@ -1104,12 +1106,12 @@ Les chapitres Mire Archive 001, Protocole Z-110, Jeri, Éloïse, A.T.A.X.-Q, Le 
 
 | ID | Titre | Partie | Durée | Statut |
 | --- | --- | --- | --- | --- |
-| CIN-00 | Ouverture | Titre | 60-75 s | [PROPOSÉ] |
-| CIN-01 | Le casier vide | Prologue | 20 s | [PROPOSÉ] |
-| CIN-02 | Le briefing | Prologue | 45 s | [PROPOSÉ] |
+| CIN-00 | Ouverture | Titre | 60-75 s | [EXISTANT] V188 (placeholder Canvas) |
+| CIN-01 | Le casier vide | Prologue | 20 s | [EXISTANT] V188 (placeholder Canvas) |
+| CIN-02 | Le briefing | Prologue | 45 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-10 | Les quais déserts | Acte I | 30 s | [PROPOSÉ] |
 | CIN-11 | Ouvert de l'intérieur | Acte I | 25 s | [PROPOSÉ] |
-| CIN-20 | Treize minutes | Acte II | 40 s | [PROPOSÉ] |
+| CIN-20 | Treize minutes | Acte II | 40 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-21 | Le quai nord | `story-quai-nord` | 25 s | [PROPOSÉ] |
 | CIN-31 | Le sas refermé | Acte III | 30 s | [PROPOSÉ] |
 | CIN-40 | Jun Park ne répond plus | Interlude | 30 s | [PROPOSÉ] |
@@ -4331,3 +4333,29 @@ Le propriétaire a demandé une solution pour chaque question. Les trois proposi
 | 3 | `origin-11` *Matériel de l'Union* | Aucune pénalité n'existe pour les armes UPP | Je n'ajoute **pas de pénalité** aux 19 autres origines, car cela changerait l'équilibrage de tout le jeu. La capacité devient **+10 % de dégâts** avec une arme principale de fabrication UPP (Type 88, AK-4047…). |
 
 **Reste à faire pour les origines :** le fil du dossier caviardé (`origin-20`, §2.4.3). Ses quatre fragments sont placés dans des lieux qui n'existent pas encore dans le jeu : la quête de DAVID-8R, CASSIUS en S2, la salle des relais d'Asphodèle et l'épilogue. **Proposition :** l'intégrer avec le second hub Asphodèle (§42). Le placer ailleurs déplacerait des scènes de la bible.
+
+### 56.7 Refonte du prologue (V188, 2026-11-13)
+
+Les ajouts **[PROPOSÉ]** du §4, CIN-20 et la réponse de Halloran (§5.2) sont désormais jouables. Ils reposent sur un lecteur de cinématiques Canvas 2D conforme au §10 : plans scriptés, cadres de dialogue avec les portraits relus de l'équipage, passables avec Échap, plan suivant avec Espace ou un clic. Les cinématiques sont revisibles dans Système → Cinématiques et ne donnent aucune récompense.
+
+| Moment | Séquence | Déclencheur |
+| --- | --- | --- |
+| Nouvelle partie | CIN-00 *Ouverture* (8 plans, 65 s) | Avant le créateur de personnage, à chaque nouvelle partie |
+| P-1 | CIN-01 *Le casier vide* (réplique de DAVID-8R, puis le casier scellé) | Confirmation du réveil |
+| P-2 | `cin-p2` *La liaison prioritaire* (paquet de messages, puis Mara Vega) | Liaison rétablie à la console de l'exercice |
+| Avant P-3 | CIN-02 *Le briefing* (Vega, Vega, Harlow, Velez) | Premier embarquement depuis la salle de briefing |
+| P-3 | `cin-p3-wren` puis `cin-p3-ferro` (Lucia Ferro, Noor Okafor à la radio) | Arrivée au quai, puis fin du triage |
+| Retour de QZ-18 | CIN-20 *Treize minutes*, puis Halloran | Premier compte rendu de QZ-18 lu |
+
+**Textes écrits pour combler la bible — [PROPOSÉ] :**
+
+- La réplique de Mara Vega qui coupe l'exercice : « Velez, on coupe l'exercice. Echo-9, rendez l'arme au pas de tir et montez en salle de briefing. » La règle de l'exercice V89 (retour au pas de tir) reste inchangée.
+- Le nombre de messages retardés : 37 sur six jours, le dernier datant de 4 h.
+- Les noms du personnel du quai nord dans CIN-20 : E. Okonjo, P. Lindqvist, S. Arenas, D. Haddad, K. Brandt. Ce sont aussi les noms à la craie de `story-quai-nord`.
+- Toutes les versions anglaises des répliques du prologue.
+
+**Toujours à faire :**
+
+- L'art définitif des plans (§29.1). Les décors actuels sont des placeholders en primitives Canvas.
+- L'interaction physique avec le casier `ECHO-8` dans la baie cryo (quête `ship-cryo`).
+- Une voix et un geste de pointage sur la carte (CIN-02).

@@ -28,14 +28,25 @@ const TEXT = Object.freeze({
   }
 });
 
-export function createStoryCampaignV188() { return { schema: 188, debriefSeen: [] }; }
+export function createStoryCampaignV188() { return { schema: 188, debriefSeen: [], cinematicsSeen: [] }; }
 
 export function normalizeStoryCampaignV188(raw) {
   const base = createStoryCampaignV188();
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return base;
   const seen = Array.isArray(raw.debriefSeen) ? raw.debriefSeen : [];
   base.debriefSeen = [...new Set(seen.filter(id => typeof id === 'string' && /^[a-z0-9-]{1,80}$/.test(id)))].slice(0, MAX_SEEN);
+  const cinematics = Array.isArray(raw.cinematicsSeen) ? raw.cinematicsSeen : [];
+  base.cinematicsSeen = [...new Set(cinematics.filter(id => typeof id === 'string' && /^cin-[a-z0-9-]{1,40}$/.test(id)))].slice(0, MAX_SEEN);
   return base;
+}
+
+/** Mutates the given candidate save. Returns true when it changed. */
+export function markStoryCinematicSeenV188(save, cinematicId) {
+  if (!save || typeof cinematicId !== 'string' || !/^cin-[a-z0-9-]{1,40}$/.test(cinematicId)) return false;
+  const state = normalizeStoryCampaignV188(save.storyCampaignV188);
+  if (state.cinematicsSeen.includes(cinematicId)) { save.storyCampaignV188 = state; return false; }
+  state.cinematicsSeen = [...state.cinematicsSeen, cinematicId].slice(-MAX_SEEN);
+  save.storyCampaignV188 = state; return true;
 }
 
 /** Mutates the given candidate save. Returns true when it changed. */

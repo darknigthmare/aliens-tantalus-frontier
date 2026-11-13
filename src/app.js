@@ -2,7 +2,8 @@ import { detectReactiveTriggersV188, selectReactiveLinesV188 } from './reactive-
 import { applyAccessibilityV188, installKeyRemapV188, mountKeyBindingsUiV188, normalizeKeyBindingsV188, soundCaptionV188 } from './accessibility-v188.js';
 import { spareCrewMemberV188, normalizeCrewPermadeathV188, normalizeCustomDifficultyV188, normalizeOriginV188, CUSTOM_DIFFICULTY_BOUNDS_V188 } from './run-options-v188.js';
 import { cueForGameEventV188, casteCueV188 } from './audio-cues-v188.js';
-import { deriveStoryCampaignV188, markStoryDebriefSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, storyEndingReachedV188 } from './story-campaign-v188.js';
+import { deriveStoryCampaignV188, markStoryDebriefSeenV188, markStoryCinematicSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, storyEndingReachedV188 } from './story-campaign-v188.js';
+import { CinematicPlayerV188, CINEMATICS_V188 } from './story-cinematics-v188.js';
 import {
   RELEASE, CONTENT_COUNTS, WORLDS, CAMPAIGNS, WEAPONS, EQUIPMENT, ENEMIES, VEHICLES,
   CREW, COSTUMES, LEVEL_SEEDS, SHIP_MODULES, APEX_DOSSIERS, NEURO_XENO_PROFILES,
@@ -942,6 +943,25 @@ const playerCreatorUiV84 = new PlayerCreatorUiV84({
   },
   onCancel: () => { creatorOwnerV84 = null; titleScreen.show(); titleScreen.openMenu(); }
 });
+// V188 prologue cinematics (bible §4, §10): skippable, replayable, never rewarded.
+const cinematicPlayerV188 = new CinematicPlayerV188();
+function playStoryCinematicV188(id, { once = true, record = true } = {}) {
+  const seen = saveSystem.data?.storyCampaignV188?.cinematicsSeen || [];
+  if (!CINEMATICS_V188[id] || once && seen.includes(id)) return Promise.resolve('already-seen');
+  const resumeHub = activeView === 'hub' && hubEngine.running;
+  if (resumeHub) hubEngine.pause();
+  const music = CINEMATICS_V188[id].music;
+  if (music) audio.setMusicMoodV188(music); else audio.stopMusic?.(0.6);
+  return cinematicPlayerV188.play(id, { language: document.documentElement.lang,
+    reducedMotion: Boolean(saveSystem.data?.settings?.reducedMotion) }).then(result => {
+    if (record && !creatorOwnerV84) {
+      try { const candidate = clone(saveSystem.data); if (markStoryCinematicSeenV188(candidate, id)) saveSystem.commit(candidate); } catch (error) { toast(error.message); }
+    }
+    if (resumeHub && activeView === 'hub') hubEngine.resume();
+    audio.setScene(resolveViewAudioSceneV77(activeView));
+    return result;
+  });
+}
 function openPlayerCreatorV84(profile) {
   refugeControllerV87.close();
   if (creatorOwnerV84) return false;
@@ -949,7 +969,8 @@ function openPlayerCreatorV84(profile) {
   hubEngine.stop(false); engine.stop(); bioforgeRuntimeV80.stop({ reason: 'player-creation' });
   if (typeof xenoTrialsUiV96 !== 'undefined') xenoTrialsUiV96?.close();
   titleScreen.hide();
-  playerCreatorUiV84.open(profile);
+  // CIN-00 opens every new game; skipping it goes straight to the creator.
+  playStoryCinematicV188('cin-00', { once: false, record: false }).then(() => { if (creatorOwnerV84) playerCreatorUiV84.open(profile); });
   return false;
 }
 function commitOnboardingEventV84(event, owner = hubOwnerV84) {
@@ -962,6 +983,8 @@ function commitOnboardingEventV84(event, owner = hubOwnerV84) {
   saveSystem.commit(candidate);
   hubEngine.setOnboardingV84(saveSystem.data.onboardingV84);
   renderHubStatus();
+  // P-1 / CIN-01: DAVID-8R's line about Echo-8, then the sealed locker.
+  if ((typeof event === 'string' ? event : event?.type) === 'wake-confirmed') void playStoryCinematicV188('cin-01');
   return result.state;
 }
 function openOnboardingDialogueV84(interaction) {
@@ -1037,6 +1060,8 @@ function handleOpeningExerciseV89(interaction, owner = hubOwnerV84) {
     saveSystem.commit(candidate);
     hubEngine.setOpeningExerciseV89(saveSystem.data.openingExerciseV89);
     renderHubStatus();
+    // P-2: the restored priority link releases days of Port-Méridien messages; Vega cuts the exercise.
+    if (event === 'repair') void playStoryCinematicV188('cin-p2');
     if (event !== 'restart') toast(event === 'interrupt' ? 'EXERCICE INTERROMPU · Signal prioritaire. Cibles et chrono suspendus : rejoignez la console.'
       : event === 'repair' ? 'Liaison prioritaire rétablie. Rejoignez le pas de tir pour terminer la qualification.' : 'Qualification reprise : terminez les cibles restantes.');
     return true;
@@ -1089,7 +1114,13 @@ function handleOpeningActionV88(interaction) {
   try {
     if (['opening:signal', 'opening:manifest'].includes(interaction.action)) return openOpeningDialogueV88();
     if (interaction.action === 'opening:ready') {
-      if (saveSystem.data.portMeridienV90?.phase === 'pending') return boardPortMeridienV90();
+      // CIN-02 plays once before the first boarding (bible §4).
+      if (saveSystem.data.portMeridienV90?.phase === 'pending') {
+        if (!(saveSystem.data.storyCampaignV188?.cinematicsSeen || []).includes('cin-02')) {
+          void playStoryCinematicV188('cin-02').then(() => boardPortMeridienV90()); return true;
+        }
+        return boardPortMeridienV90();
+      }
       return openHubDialogue({ ...interaction, action: 'navigate:operations' });
     }
     commitOpeningEventV88(interaction.phase);
@@ -1119,7 +1150,8 @@ function boardPortMeridienV90() {
     Object.assign(candidate.hub, captureHubPoseV84());
     saveSystem.commit(candidate);
     hubEngine.stop(false); showView('hub');
-    toast('Port-Méridien · le quai est encore habité. Le fret est à la rampe.'); return true;
+    toast('Port-Méridien · le quai est encore habité. Le fret est à la rampe.');
+    void playStoryCinematicV188('cin-p3-wren'); return true;
   } catch (error) { toast(`Débarquement non enregistré : ${error.message}`); return false; }
 }
 
@@ -1148,6 +1180,7 @@ function handlePortMeridienV90(interaction, owner = hubOwnerV84) {
     saveSystem.commit({ portMeridienV90: result.state });
     if (action !== 'checkpoint') hubEngine.setPortMeridienV90(saveSystem.data.portMeridienV90);
     if (action === 'report') toast('Constat transmis : trois habitants secourus, balise automatique contradictoire.');
+    if (action === 'triage') void playStoryCinematicV188('cin-p3-ferro');
     return true;
   } catch (error) {
     toast(`Quai non enregistré : ${error.message} · E pour réessayer.`);
@@ -1497,7 +1530,10 @@ function renderOperationPlan() {
   if (abandonButton) abandonButton.onclick = abandonBlockedOperationV69;
   if (campaign.id === STORY_RELAY_CAMPAIGN_ID_V188 && !saveSystem.data.strategy.currentOperation
     && deriveStoryCampaignV188(saveSystem.data).step === 'debrief') {
-    try { const candidate = clone(saveSystem.data); if (markStoryDebriefSeenV188(candidate, campaign.id)) saveSystem.commit(candidate); }
+    try {
+      const candidate = clone(saveSystem.data);
+      if (markStoryDebriefSeenV188(candidate, campaign.id)) { saveSystem.commit(candidate); void playStoryCinematicV188('cin-20'); }
+    }
     catch (error) { toast(error.message); }
   }
   mountCampaignDebriefV160(byId('operation-plan'), {
@@ -2065,6 +2101,14 @@ function renderProfiles() {
   if (byId('setting-colorblind-v188')) byId('setting-colorblind-v188').value = saveSystem.data.settings.colorblindV188 || 'off';
   if (byId('setting-text-scale-v188')) byId('setting-text-scale-v188').value = String(saveSystem.data.settings.textScaleV188 || 1);
   keyBindingsUiV188?.render();
+  const replayV188 = byId('setting-cinematics-v188');
+  if (replayV188) {
+    const seen = new Set(['cin-00', ...(saveSystem.data.storyCampaignV188?.cinematicsSeen || [])]);
+    const lang = document.documentElement.lang === 'en' ? 'en' : 'fr';
+    replayV188.replaceChildren(...Object.values(CINEMATICS_V188).filter(entry => seen.has(entry.id)).map(entry => Object.assign(document.createElement('button'), {
+      type: 'button', className: 'button wide', textContent: `${entry.id.toUpperCase()} · ${entry.title[lang]}`,
+      onclick: () => void playStoryCinematicV188(entry.id, { once: false, record: false }) })));
+  }
   if (byId('setting-permadeath-v188')) {
     byId('setting-permadeath-v188').checked = saveSystem.data.settings.crewPermadeathV188 !== false;
     byId('setting-permadeath-v188').disabled = saveSystem.data.settings.crewPermadeathV188 === false;

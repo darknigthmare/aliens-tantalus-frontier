@@ -61,11 +61,11 @@ test('the real beginOperation on the recommended campaign enters the qz18 step',
 });
 
 test('storyCampaignV188 migrates additively and rejects invalid entries', () => {
-  assert.deepEqual(createDefaultSave().storyCampaignV188, { schema: 188, debriefSeen: [] });
-  assert.deepEqual(migrateSave({ schema: 52 }).storyCampaignV188, { schema: 188, debriefSeen: [] });
+  assert.deepEqual(createDefaultSave().storyCampaignV188, { schema: 188, debriefSeen: [], cinematicsSeen: [] });
+  assert.deepEqual(migrateSave({ schema: 52 }).storyCampaignV188, { schema: 188, debriefSeen: [], cinematicsSeen: [] });
   const migrated = migrateSave({ schema: 52, storyCampaignV188: { debriefSeen: [STORY_RELAY_CAMPAIGN_ID_V188, 'Bad Id', 7] } });
   assert.deepEqual(migrated.storyCampaignV188.debriefSeen, [STORY_RELAY_CAMPAIGN_ID_V188]);
-  assert.deepEqual(normalizeStoryCampaignV188([1]), { schema: 188, debriefSeen: [] });
+  assert.deepEqual(normalizeStoryCampaignV188([1]), { schema: 188, debriefSeen: [], cinematicsSeen: [] });
 });
 
 test('app routes the briefing to the story recommendation and marks the debrief as read', () => {

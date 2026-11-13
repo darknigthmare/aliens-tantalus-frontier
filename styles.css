@@ -1045,3 +1045,9 @@ html[data-colorblind-v188="deuteranopia"] canvas, html[data-colorblind-v188="deu
 html[data-colorblind-v188="tritanopia"] canvas, html[data-colorblind-v188="tritanopia"] .panel { filter: url(#atf-cb-tritanopia-v188); }
 .key-bindings-v188 { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 6px; }
 .custom-difficulty-v188 { border: 1px solid rgba(131, 213, 161, .35); padding: 8px; display: grid; gap: 6px; }
+
+/* V188 cinematics (bible §10): fullscreen Canvas overlay, skippable. */
+.cinematic-v188 { position: fixed; inset: 0; z-index: 10000; background: #000; display: grid; place-items: center; }
+.cinematic-v188 canvas { width: min(100vw, calc(100vh * 16 / 9)); height: auto; max-height: 100vh; aspect-ratio: 16 / 9; display: block; cursor: pointer; }
+.cinematic-skip-v188 { position: absolute; right: 16px; bottom: 16px; }
+.cinematic-replay-v188 { display: grid; gap: 6px; }
