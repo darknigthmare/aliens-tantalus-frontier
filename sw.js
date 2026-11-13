@@ -194,6 +194,7 @@ const SHELL = Object.freeze([
   '/src/hub-echo8-locker-v188.js',
   '/src/m577-manifest-ui-v188.js',
   '/src/story-choice-ui-v188.js',
+  '/src/story-dossier-v188.js',
   '/src/tension-director-v188.js',
   '/src/audio-score-v132.js',
   '/src/audio.js',

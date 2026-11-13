@@ -1055,3 +1055,8 @@ html[data-colorblind-v188="tritanopia"] canvas, html[data-colorblind-v188="trita
 .m577-manifest-v188 { max-width: 560px; border: 1px solid rgba(131, 213, 161, .5); background: #071009; color: #d8e6d8; padding: 20px; }
 .m577-manifest-v188 input[type="range"] { width: 100%; }
 .m577-manifest-v188 footer { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+
+/* V188 QZ17 dossier (bible §5.7). */
+.story-dossier-v188 { margin-top: 12px; border-top: 1px solid rgba(131, 213, 161, .3); padding-top: 8px; }
+.story-dossier-v188 ul { list-style: none; padding: 0; margin: 6px 0; display: grid; gap: 2px; }
+.story-dossier-v188 li[data-held="false"] { opacity: .6; }

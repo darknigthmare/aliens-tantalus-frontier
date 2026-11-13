@@ -703,6 +703,14 @@ Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-m
 | Ordres de livraison archivés par CASSIUS | Station S2 |
 | Témoignage de Tomas Wren | Colonie, annexe *Ce que le quai a vu* |
 
+**[EXISTANT] V188 (`story-dossier-v188.js`)** : le dossier est calculé uniquement depuis l'état enregistré, et affiché au Commandement (« DOSSIER QZ17 · n/7 »). Pièces lisibles aujourd'hui :
+- les deux pièces de l'Acte I : la contradiction PDA / courriel découverte, puis la piste choisie ;
+- le verdict de QZ-18, avec la signature de Rook ;
+- l'issue de l'Interlude ;
+- l'Acte IV terminé.
+
+Les pièces de CASSIUS (S2) et de Wren (annexe colonie) sont affichées « pas encore jouables ».
+
 **Validé (2026-11-05) :** l'identité du signataire du badge est établie seulement si le joueur réunit 6 pièces sur 7. Le texte de retour rappelle alors ce qui reste non prouvé. Avec moins de pièces, elle reste « non établie ».
 
 **Fins [PROPOSÉ] :**
@@ -714,6 +722,14 @@ Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-m
 | **« Les vivants, sans preuve »** | Option *Tenir la colonie* choisie | La colonie tient cette nuit-là, mais la clause s'applique. Vega est relevée à l'arrivée. |
 
 #### 5.7.1 Choix final : options ouvertes par les choix cumulés — validé le 2026-11-06
+
+**Logique [EXISTANT] V188** (`finalChoiceOptionsV188`, `resolveFinalChoiceV188`, testée) :
+- *Transmettre* n'est ouvert que si Asphodèle est reprise et sa salle des relais ouverte ; ce n'est pas encore jouable.
+- Les modificateurs sont appliqués : *restitution* avec 2 conteneurs ou plus, tentative de récupération à bord si la créature a été capturée.
+- Vega suit la recommandation si la loyauté de Mara Vega est d'au moins 55 (niveau *operationnel*).
+- Sinon, avec 5 pièces mais sans canal sûr, Vega tient la colonie (**[PROPOSÉ]**, cas non écrit).
+
+Le conseil de guerre et les fins attendent l'Acte V jouable.
 
 | Option recommandée par Echo-9 | Toujours proposée ? | Condition pour qu'elle apparaisse | Fin |
 | --- | --- | --- | --- |

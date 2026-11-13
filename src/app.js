@@ -1,3 +1,4 @@
+import { storyDossierV188 } from './story-dossier-v188.js';
 import { withHubEcho8LockerV188, echo8LockerNotesV188 } from './hub-echo8-locker-v188.js';
 import { detectReactiveTriggersV188, selectReactiveLinesV188 } from './reactive-lines-v188.js';
 import { applyAccessibilityV188, installKeyRemapV188, mountKeyBindingsUiV188, normalizeKeyBindingsV188, soundCaptionV188 } from './accessibility-v188.js';
@@ -1344,6 +1345,21 @@ function renderCommandMissionsV110() {
   // Selecting a destination is a filter, never an implicit campaign/save mutation.
   select.value = missions.some(c => c.id === selected?.id) ? selected.id : '';
   select.disabled = Boolean(active) || !missions.length;
+  // V188 (bible §5.7): the QZ17 dossier, read from recorded state only.
+  const dossierHostV188 = byId('story-dossier-v188');
+  if (dossierHostV188) {
+    const en = document.documentElement.lang === 'en', dossier = storyDossierV188(saveSystem.data, en ? 'en' : 'fr');
+    const title = document.createElement('h4'); title.textContent = `${en ? 'QZ17 FILE' : 'DOSSIER QZ17'} · ${dossier.count}/${dossier.total}`;
+    const list = document.createElement('ul');
+    for (const piece of dossier.pieces) {
+      const item = document.createElement('li'); item.dataset.held = String(piece.held);
+      item.textContent = `${piece.held ? '■' : '□'} ${piece.label}${piece.unavailable ? (en ? ' (not playable yet)' : ' (pas encore jouable)') : ''}`;
+      list.append(item);
+    }
+    const signer = document.createElement('p'); signer.className = 'hint';
+    signer.textContent = dossier.signerEstablished ? (en ? 'Badge signer: established.' : 'Signataire du badge : établi.') : (en ? 'Badge signer: not established (6 pieces needed).' : 'Signataire du badge : non établi (6 pièces nécessaires).');
+    dossierHostV188.replaceChildren(title, list, signer);
+  }
   byId('command-mission-status-v110').textContent = active ? 'MISSION ACTIVE · manifeste verrouillé'
     : `${missions.length} ordres reçus. Sélectionnez une affectation pour consulter son manifeste.`;
 }
