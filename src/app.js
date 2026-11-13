@@ -818,6 +818,8 @@ function showView(name) {
   }
   if (activeView === 'xenotrials' && name !== 'xenotrials' && typeof xenoTrialsUiV96 !== 'undefined') xenoTrialsUiV96?.close();
   activeView = name;
+  // V188: the QZ-18 debrief counts as read only when the player opens the briefing table.
+  if (['operations', 'command'].includes(name)) queueMicrotask(markStoryDebriefOnViewV188);
   audio.setScene(['operations', 'command'].includes(name) && storyEndingReachedV188(saveSystem.data) ? 'ending' : resolveViewAudioSceneV77(name));
   all('.view').forEach((view) => view.classList.toggle('active', view.dataset.panel === name));
   all('.nav-button').forEach((button) => button.classList.toggle('active', button.dataset.view === name));
@@ -943,6 +945,17 @@ const playerCreatorUiV84 = new PlayerCreatorUiV84({
   },
   onCancel: () => { creatorOwnerV84 = null; titleScreen.show(); titleScreen.openMenu(); }
 });
+function markStoryDebriefOnViewV188() {
+  if (!['operations', 'command'].includes(activeView) || saveSystem.data.strategy.currentOperation
+    || deriveStoryCampaignV188(saveSystem.data).step !== 'debrief') return;
+  try {
+    const candidate = clone(saveSystem.data);
+    if (markStoryDebriefSeenV188(candidate, STORY_RELAY_CAMPAIGN_ID_V188)) {
+      saveSystem.commit(candidate); renderHubStatus?.();
+      void playStoryCinematicV188('cin-20').then(() => playStoryCinematicV188('cin-20-rook'));
+    }
+  } catch (error) { toast(error.message); }
+}
 // V188 prologue cinematics (bible §4, §10): skippable, replayable, never rewarded.
 const cinematicPlayerV188 = new CinematicPlayerV188();
 function playStoryCinematicV188(id, { once = true, record = true } = {}) {
@@ -1528,14 +1541,6 @@ function renderOperationPlan() {
   byId('operation-launch').onclick = () => launchCampaign(campaign);
   const abandonButton = byId('operation-abandon-v69');
   if (abandonButton) abandonButton.onclick = abandonBlockedOperationV69;
-  if (campaign.id === STORY_RELAY_CAMPAIGN_ID_V188 && !saveSystem.data.strategy.currentOperation
-    && deriveStoryCampaignV188(saveSystem.data).step === 'debrief') {
-    try {
-      const candidate = clone(saveSystem.data);
-      if (markStoryDebriefSeenV188(candidate, campaign.id)) { saveSystem.commit(candidate); void playStoryCinematicV188('cin-20'); }
-    }
-    catch (error) { toast(error.message); }
-  }
   mountCampaignDebriefV160(byId('operation-plan'), {
     save: saveSystem.data,
     campaignId: campaign.id,

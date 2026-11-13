@@ -73,7 +73,7 @@ test('app routes the briefing to the story recommendation and marks the debrief 
   const plan = app.indexOf('strategy.plannedCampaignId)\n'), story = app.indexOf('deriveStoryCampaignV188(saveSystem.data).recommendedCampaignId', plan);
   const fallback = app.indexOf('galaxy.unlockedWorldIds.includes(entry.worldId))', plan);
   assert.ok(plan > 0 && story > plan && fallback > story, 'planned → story → first unlocked');
-  assert.match(app, /markStoryDebriefSeenV188\(candidate, campaign\.id\)/);
+  assert.match(app, /markStoryDebriefSeenV188\(candidate, STORY_RELAY_CAMPAIGN_ID_V188\)/);
   assert.match(app, /storyV188\.objective/);
   assert.match(app, /\.sort\(\(a, b\) => \(b\.id === recommendedV188\) - \(a\.id === recommendedV188\)\)/, 'command list puts the recommendation first');
 });

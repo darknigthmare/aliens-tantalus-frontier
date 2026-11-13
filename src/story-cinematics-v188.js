@@ -79,6 +79,12 @@ export const CINEMATICS_V188 = Object.freeze({
     shot(12, 'dialogue', { scene: 'quarters', radio: true, line: line('DIRECTRICE HALLORAN · RÉSEAU QZ', null,
       'Priorité cargaison maintenue, conformément à la clause d’acheminement. Toute ouverture de scellé engage la responsabilité de l’unité.',
       'Cargo priority maintained, in accordance with the routing clause. Any opening of a seal engages the unit’s liability.') })
+  ]) }),
+  // Bible §5.2 weaving: Rook identifies the remote signature (line [PROPOSÉ], §56.7).
+  'cin-20-rook': Object.freeze({ id: 'cin-20-rook', title: t('La signature', 'The signature'), music: null, shots: Object.freeze([
+    shot(10, 'dialogue', { scene: 'quarters', line: line('ROOK', 'crew-06-rook',
+      'Le profil « priorité cargaison » n’a pas été activé au relais. Il a été autorisé à distance. La signature vient de la station Asphodèle.',
+      'The “cargo priority” profile wasn’t activated at the relay. It was authorised remotely. The signature comes from Asphodèle station.') })
   ]) })
 });
 export const CINEMATIC_IDS_V188 = Object.freeze(Object.keys(CINEMATICS_V188));
