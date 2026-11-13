@@ -1,3 +1,4 @@
+import { colonySnapshotV188, investColonySiteV188, applyColonyOperationResultV188, COLONY_TIERS_V188 } from './colony-reconstruction-v188.js';
 import { storyDossierV188 } from './story-dossier-v188.js';
 import { withHubEcho8LockerV188, echo8LockerNotesV188 } from './hub-echo8-locker-v188.js';
 import { detectReactiveTriggersV188, selectReactiveLinesV188 } from './reactive-lines-v188.js';
@@ -1325,6 +1326,44 @@ function renderCommand() {
   renderCommandMissionsV110();
 }
 
+const COLONY_REASONS_V188 = {
+  fr: { locked: 'Ouvre après l’Acte II.', 'operation-active': 'Pas pendant une mission.', 'awaiting-validation': 'Attend une opération réussie sur Cocyte.',
+    'population-limit': 'Trop de chantiers actifs pour la population ramenée.', resources: 'Ressources insuffisantes.', complete: 'Terminé.' },
+  en: { locked: 'Opens after Act II.', 'operation-active': 'Not during a mission.', 'awaiting-validation': 'Awaits a successful operation on Cocyte.',
+    'population-limit': 'Too many active sites for the people brought back.', resources: 'Not enough resources.', complete: 'Complete.' }
+};
+// V188 (bible §6.3): Port-Méridien reconstruction table at the briefing table.
+function renderColonyReconstructionV188() {
+  const host = byId('colony-reconstruction-v188'); if (!host) return;
+  const en = document.documentElement.lang === 'en', lang = en ? 'en' : 'fr', snapshot = colonySnapshotV188(saveSystem.data, lang);
+  const title = document.createElement('h4');
+  title.textContent = `${en ? 'PORT-MÉRIDIEN RECONSTRUCTION' : 'RECONSTRUCTION DE PORT-MÉRIDIEN'} · ${COLONY_TIERS_V188.find(tier => tier.id === snapshot.tier).label[lang].toUpperCase()}`;
+  if (!snapshot.open) { const hint = document.createElement('p'); hint.className = 'hint'; hint.textContent = COLONY_REASONS_V188[lang].locked; host.replaceChildren(title, hint); return; }
+  const info = document.createElement('p'); info.className = 'hint';
+  info.textContent = en ? `Active sites ${snapshot.active}/${snapshot.activeLimit} · people brought back: ${snapshot.rescued}` : `Chantiers actifs ${snapshot.active}/${snapshot.activeLimit} · personnes ramenées : ${snapshot.rescued}`;
+  const list = document.createElement('ul');
+  for (const entry of snapshot.sites) {
+    const item = document.createElement('li'), label = document.createElement('span');
+    label.textContent = `${entry.criterion} · ${'■'.repeat(entry.validated)}${'▣'.repeat(entry.invested - entry.validated)}${'□'.repeat(3 - entry.invested)} ${entry.current || ''}`;
+    item.append(label);
+    if (entry.next) {
+      const cost = Object.entries(entry.next.cost).map(([key, value]) => `${value} ${key}`).join(' · ');
+      const button = Object.assign(document.createElement('button'), { type: 'button', className: 'button compact',
+        textContent: `${entry.pending ? (en ? 'AWAITING' : 'EN ATTENTE') : (en ? 'BUILD' : 'LANCER')} · ${entry.next.label} (${cost} · ${entry.next.hours} h)` });
+      button.disabled = entry.pending;
+      button.onclick = () => {
+        try {
+          const candidate = clone(saveSystem.data), result = investColonySiteV188(candidate, entry.id);
+          if (!result.ok) { toast(COLONY_REASONS_V188[lang][result.reason] || result.reason); return; }
+          saveSystem.commit(candidate); renderAll(); toast(en ? 'Site work started; an operation on Cocyte will validate it.' : 'Chantier lancé ; une opération réussie sur Cocyte le validera.');
+        } catch (error) { toast(error.message); }
+      };
+      item.append(button);
+    }
+    list.append(item);
+  }
+  host.replaceChildren(title, info, list);
+}
 function renderCommandMissionsV110() {
   const destination = byId('command-world-v110'), select = byId('command-mission-v110');
   const active = saveSystem.data.strategy.currentOperation;
@@ -1360,6 +1399,7 @@ function renderCommandMissionsV110() {
     signer.textContent = dossier.signerEstablished ? (en ? 'Badge signer: established.' : 'Signataire du badge : établi.') : (en ? 'Badge signer: not established (6 pieces needed).' : 'Signataire du badge : non établi (6 pièces nécessaires).');
     dossierHostV188.replaceChildren(title, list, signer);
   }
+  renderColonyReconstructionV188();
   byId('command-mission-status-v110').textContent = active ? 'MISSION ACTIVE · manifeste verrouillé'
     : `${missions.length} ordres reçus. Sélectionnez une affectation pour consulter son manifeste.`;
 }
@@ -2942,6 +2982,8 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   const resolvedSuccess = outcome?.ok ? outcome.success !== false : false;
   if (!outcome?.ok) return outcome;
   if (campaign && world) applyCampaignConsequence(candidate, campaign, world, { success: resolvedSuccess });
+  // V188 reconstruction (bible §6.3): an operation on Cocyte validates or damages a site.
+  const colonyChangeV188 = applyColonyOperationResultV188(candidate, { success: resolvedSuccess, worldId: operation.worldId || campaign?.worldId });
   // V188 reactive lines (bible §53.6): failure, colonist loss, injured return.
   const reactiveLinesV188 = selectReactiveLinesV188(candidate,
     detectReactiveTriggersV188(saveSystem.data, candidate, operation, { success: resolvedSuccess }), {
@@ -2952,6 +2994,8 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   candidate.scene = 'hub';
   saveSystem.commit(candidate);
   renderAll();
+  if (colonyChangeV188?.validated) toast(document.documentElement.lang === 'en' ? `Port-Méridien: site level validated (${colonyChangeV188.validated} ${colonyChangeV188.level}).` : `Port-Méridien : niveau de chantier validé (${colonyChangeV188.validated} ${colonyChangeV188.level}).`);
+  if (colonyChangeV188?.damaged) toast(document.documentElement.lang === 'en' ? `Port-Méridien: a site lost one functioning level (${colonyChangeV188.damaged}).` : `Port-Méridien : un chantier perd un niveau de fonctionnement (${colonyChangeV188.damaged}).`);
   for (const line of reactiveLinesV188) {
     const name = resolveCrewDefinitionV85(saveSystem.data.crew.find((member) => member.id === line.crewId) || { id: line.crewId }, CREW)?.name || line.crewId;
     toast(`${name} : « ${line.text} »`);

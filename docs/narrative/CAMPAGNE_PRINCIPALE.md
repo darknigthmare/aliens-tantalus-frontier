@@ -934,7 +934,9 @@ C'est ce qui relie la reconstruction à l'intrigue : **chaque chantier terminé 
 | Chargeur bloqué | `secure the power loader` | Vitesse des chantiers + |
 | Sceller une ouverture | `seal the hive` | Infestation − |
 
-### 6.3 Reconstruction — [PROPOSÉ]
+### 6.3 Reconstruction — [PARTIEL] V188
+
+> **État V188.** La table existe dans la vue Commandement (« RECONSTRUCTION DE PORT-MÉRIDIEN », `src/colony-reconstruction-v188.js`, sauvegarde `colonyV188`). Les adaptations et valeurs retenues sont au §56.8.
 
 Après C2, Asha ouvre la **table de reconstruction** (salle commune de Port-Méridien, ou console des quartiers du Tantalus). Chaque chantier a trois niveaux et correspond à un **critère de viabilité** de la charte.
 
@@ -4392,3 +4394,22 @@ Après QZ-18, la table tactique recommande l'Acte I (★) tant qu'il n'est pas t
 - L'art définitif des plans (§29.1). Les décors actuels sont des placeholders en primitives Canvas.
 - ~~L'interaction physique avec le casier `ECHO-8` dans la baie cryo~~ : **fait (V188)**. Le casier scellé est dessiné en primitives dans la baie cryo ; E affiche les faits établis jusque-là. Ces trois notes sont **[PROPOSÉ]** : sceau et abordage, puis quarantaine (après CIN-02), puis signature d'Asphodèle (après « La signature »). Le reste du fil `ship-cryo` (effets de Kessler, étiquettes de l'épilogue) dépend de la station.
 - Une voix et un geste de pointage sur la carte (CIN-02).
+
+### 56.8 Reconstruction de Port-Méridien (V188, 2026-11-13)
+
+La table du §6.3 est jouable dans la vue Commandement. Les sept chantiers, leurs trois niveaux, leurs critères et leurs référents reprennent le tableau du §6.3. La sauvegarde ajoute `colonyV188` (niveaux investis et validés par chantier) ; les anciennes sauvegardes reçoivent une table vide.
+
+| Règle du §6.3 | Mise en œuvre V188 | Statut |
+| --- | --- | --- |
+| Ouverture après C2 | Ouverture après QZ-18 (Acte II), C2 n'étant pas jouable | [PROPOSÉ] |
+| Ressources et temps stratégique ; rien pendant une mission | Coût payé en ressources existantes, horloge avancée ; refus si une opération est en cours | [EXISTANT] V188 |
+| Validation par une mission locale | Validation du plus ancien niveau en attente après une opération réussie sur Cocyte (`world-05-lethe`), en attendant les missions C1–C5 | [PROPOSÉ] |
+| Échec : perte d'un niveau de fonctionnement | Opération ratée sur Cocyte : le chantier le plus avancé perd un niveau validé ; l'investissement reste | [EXISTANT] V188 |
+| Population et chantiers actifs | 1 chantier en attente + 1 par tranche de deux personnes ramenées (3 civils du quai, colons du manifeste M577) | [PROPOSÉ] |
+| Stabilité | +3 de stabilité de Cocyte par niveau validé | [PROPOSÉ] |
+| Paliers | Survie, Rétablie (3 chantiers niveau 1), Autonome (5 chantiers niveau 2) ; Libre attend la fin « Le relais parle » | [PARTIEL] |
+| Ressources régulières (Autonome) | +150 crédits et +10 alliage à chaque opération réussie sur Cocyte | [PROPOSÉ] |
+
+**Coûts [PROPOSÉ] :** niveau 1 : 400 crédits, 20 alliage, 6 h ; niveau 2 : 900 crédits, 45 alliage, 5 recherche, 12 h ; niveau 3 : 1 600 crédits, 80 alliage, 12 recherche, 24 h.
+
+**Toujours à faire :** les missions locales C1–C5 et les annexes, le recrutement de Nadia Bensaïd (palier Rétablie), la console physique dans la salle commune ou les quartiers, l'épilogue du palier Libre.

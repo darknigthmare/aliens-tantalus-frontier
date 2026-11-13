@@ -122,7 +122,15 @@ Suite de la refonte (même journée) :
 
 Non vérifiés dans le navigateur : CIN-02, `cin-p2` et les répliques du quai. Ils exigent un parcours physique dans le hub ; leurs déclencheurs sont couverts par les tests Node.
 
+## Reconstruction de Port-Méridien (§6.3, §56.8)
+
+- Table dans la vue Commandement : sept chantiers à trois niveaux, coûts en ressources et en heures, limite de chantiers en attente selon les personnes ramenées.
+- Une opération réussie sur Cocyte valide le plus ancien niveau en attente (+3 de stabilité) ; une opération ratée retire un niveau validé sans rendre les ressources.
+- Sauvegarde additive `colonyV188`.
+- Vérifications : `scripts/verify-colony-reconstruction-v188.mjs` (5 tests) ; parcours Chromium sur une sauvegarde après QZ-17 : un chantier lancé débite 400 crédits et 20 alliage, avance l'horloge de 6 h et passe « EN ATTENTE », sans erreur de page.
+
 ## Limites et travail restant
+
 
 - **Musiques** : les quatre ambiances jouent la musique existante tant que les morceaux Flow du propriétaire manquent (§53.2).
 - **Terminal de sauvegarde** : la console est un placeholder en primitives Canvas. L'art définitif reste à produire par le propriétaire.

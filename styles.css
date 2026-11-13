@@ -1060,3 +1060,5 @@ html[data-colorblind-v188="tritanopia"] canvas, html[data-colorblind-v188="trita
 .story-dossier-v188 { margin-top: 12px; border-top: 1px solid rgba(131, 213, 161, .3); padding-top: 8px; }
 .story-dossier-v188 ul { list-style: none; padding: 0; margin: 6px 0; display: grid; gap: 2px; }
 .story-dossier-v188 li[data-held="false"] { opacity: .6; }
+
+.colony-reconstruction-v188 li { display: grid; gap: 4px; margin-bottom: 6px; }
