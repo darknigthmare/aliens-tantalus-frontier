@@ -1,5 +1,6 @@
 import test from 'node:test';
 import { COMPLETION_SOURCES_V186, completionRuntimeSourcesV186, reviewedCompletionDigestV186 } from './audit-xeno-trials-completion-v186.mjs';
+import { STAGE_OPERATIONS_SUCCESSORS_V188, STAGE_OPERATIONS_NEW_INPUTS_V188 } from './audit-xeno-stage-operations-v188.mjs';
 import { reviewedOriginalNamesDigestV183 } from './audit-original-names-v183.mjs';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -675,7 +676,7 @@ test('V178 resolves only exact MainM successors while every V177 witness stays h
   assert.deepEqual(Object.keys(effective).filter(path=>Object.hasOwn(current.runtimeSourceSha256,path)).sort(),
     Object.keys(current.runtimeSourceSha256).sort());
   assert.deepEqual(Object.keys(effective).filter(path=>!Object.hasOwn(current.runtimeSourceSha256,path)).sort(),
-    [...new Set(['src/tactical-reload-v77.js','src/weapon-actions-v130.js',...Object.keys(V179_SOURCE_GROUPS.runtimeChanges),...Object.keys(V179_SOURCE_GROUPS.newRuntimeSources),...Object.entries(INTEGRATION_SOURCES_V182).filter(([,r])=>r.kind==='runtime').map(([path])=>path),...Object.entries(COMPLETION_SOURCES_V186).filter(([,r])=>r.kind==='runtime').map(([path])=>path)].filter(path=>!Object.hasOwn(current.runtimeSourceSha256,path)))].sort(), 'Only explicitly reviewed V179 additions and two historic compatibility exports extend the147witness');
+    [...new Set(['src/tactical-reload-v77.js','src/weapon-actions-v130.js',...Object.keys(V179_SOURCE_GROUPS.runtimeChanges),...Object.keys(V179_SOURCE_GROUPS.newRuntimeSources),...Object.entries(INTEGRATION_SOURCES_V182).filter(([,r])=>r.kind==='runtime').map(([path])=>path),...Object.entries(COMPLETION_SOURCES_V186).filter(([,r])=>r.kind==='runtime').map(([path])=>path),...Object.entries({...STAGE_OPERATIONS_SUCCESSORS_V188,...STAGE_OPERATIONS_NEW_INPUTS_V188}).filter(([,r])=>r.kind==='runtime').map(([path])=>path)].filter(path=>!Object.hasOwn(current.runtimeSourceSha256,path)))].sort(), 'Only explicitly reviewed successor runtimes and two historic compatibility exports extend the147witness');
   assert.equal(current.runtimeSourceSha256['src/npc-interdeck-routes-v165.js'],
     '5330095a1f6d277e71e473c6b741c671fe02c4d4fc44133b3f5a37ccfebb103a');
   assert.equal(effective['src/npc-interdeck-routes-v165.js'],V178_RUNTIME_SUCCESSORS['src/npc-interdeck-routes-v165.js'].currentSha256);

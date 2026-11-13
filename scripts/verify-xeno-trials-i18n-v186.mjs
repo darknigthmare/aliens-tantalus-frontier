@@ -11,6 +11,7 @@ import { XENO_TRIALS_STAGES_V96 as stages } from '../src/xeno-trials-data-v96.js
 import { getXenoTrialsHordeViewV180 } from '../src/xeno-trials-horde-ui-v180.js';
 
 const review = JSON.parse(readFileSync(new URL('../docs/forge/xeno-trials/i18n-trials-review-v186.json', import.meta.url), 'utf8'));
+const operationsReview = JSON.parse(readFileSync(new URL('../docs/forge/xeno-trials/i18n-operations-review-v188.json', import.meta.url), 'utf8'));
 const hash = object => createHash('sha256').update(JSON.stringify(Object.fromEntries(Object.entries(object)
   .sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0)))).digest('hex');
 function english(callback) {
@@ -25,12 +26,12 @@ test('reviewed Trials additions preserve all 6042 historical exact strings and 4
     patterns: [437, '2a73debae859ed72d75e6fb8cc13b19e07aee05bea5f18242aacd8972aee4415'] };
   const historical = {};
   for (const kind of ['exact', 'patterns']) {
-    const added = new Set(review[kind].map(entry => entry.fr));
+    const added = new Set([...review[kind], ...operationsReview[kind]].map(entry => entry.fr));
     historical[kind] = Object.fromEntries(Object.entries(catalog[kind]).filter(([fr]) => !added.has(fr)));
     assert.equal(Object.keys(historical[kind]).length, expected[kind][0]);
     assert.equal(hash(historical[kind]), expected[kind][1]);
   }
-  const regenerated = mergeReviewV186(historical, review);
+  const regenerated = mergeReviewV186(mergeReviewV186(historical, review), operationsReview);
   assert.equal(hash(regenerated.exact), hash(catalog.exact)); assert.equal(hash(regenerated.patterns), hash(catalog.patterns));
   assert.equal(validateCatalogV186(catalog).omittedPatternSlots, 1);
 });

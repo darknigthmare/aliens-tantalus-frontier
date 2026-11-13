@@ -19,6 +19,8 @@ import { getEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
 import { getEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
 import { getXenoTrialsRosterPageV179, getXenoTrialsRosterProfileV179 } from './xeno-trials-roster-v179.js';
 import { XENO_TRIALS_HORDE_PROTOCOLS_V186 as HORDE_PROTOCOLS } from './xeno-trials-horde-v180.js';
+import { XENO_TRIALS_OPERATIONS_V188 as OPERATIONS } from './xeno-trials-operations-v188.js';
+import { getXenoTrialsOperationBriefingV188, getXenoTrialsOperationHudV188 } from './xeno-trials-operation-presentation-v188.js';
 import { getXenoTrialsProgramPageV186 } from './xeno-trials-programs-v186.js';
 import { getXenoTrialsHordeBriefingV180, getXenoTrialsHordeViewV180, isXenoTrialsHordeActivityV180 } from './xeno-trials-horde-ui-v180.js';
 
@@ -36,9 +38,10 @@ export const getXenoTrialsSpecialLabelV96 = special => Object.hasOwn(XENO_TRIALS
   ? XENO_TRIALS_SPECIAL_LABELS_V96[special] : 'Attaque spéciale';
 export const getXenoTrialsFighterSpecialLabelV147 = fighter => getXenoTrialsSignatureV147(fighter)?.label
   || getXenoTrialsSpecialLabelV96(fighter?.special);
-const controlLabel = { left: 'Aller à gauche', right: 'Aller à droite', jump: 'Sauter', guard: 'Maintenir la garde', light: 'Frappe rapide', heavy: 'Frappe lourde', special: 'Attaque spéciale', super: 'Super chargé' };
+const controlLabel = { left: 'Aller à gauche', right: 'Aller à droite', jump: 'Sauter', guard: 'Maintenir la garde', light: 'Frappe rapide', heavy: 'Frappe lourde', special: 'Attaque spéciale', super: 'Super chargé', interact: 'Maintenir pour interagir avec l’objectif' };
 const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
 const hordeStatsV180 = view => view ? `<dl class="xt-horde-briefing-grid"><div><dt>VAGUES</dt><dd>${view.waves || '—'}</dd></div><div><dt>POPULATION</dt><dd>${view.total || '—'}</dd></div><div><dt>PV PAR CONTACT</dt><dd>${view.minimum && view.maximum ? `${view.minimum}–${view.maximum}` : '—'}</dd></div><div><dt>SIMULTANÉS MAX.</dt><dd>${view.simultaneous || '—'}</dd></div></dl>` : '';
+const combatBriefingV188 = activity => getXenoTrialsOperationBriefingV188(activity) || getXenoTrialsHordeBriefingV180(activity);
 const activityBranchV179 = branch => branch === 'events' ? 'challenges' : branch;
 const challengeBranchV179 = id => CHALLENGES.find(entry => entry.id === id)?.eventV179 ? 'events' : 'challenges';
 
@@ -102,12 +105,12 @@ export class XenoTrialsUiV96 {
         <span class="xt-vital-value xt-super-value-v148" data-xt="${side}-super-value" hidden></span><progress class="xt-super-meter-v148" data-xt="${side}-super" max="100" value="0" aria-label="Jauge de super ${i ? 'adversaire' : 'joueur'}" hidden></progress></div>`).join('')}
         <div class="xt-match-clock"><span data-xt="round">MANCHE 1</span><strong data-xt="clock" role="timer" aria-live="off" aria-label="Secondes restantes">99</strong><span class="xt-clock-unit">SECONDES</span><strong data-xt="score" aria-label="Manches gagnées : joueur — adversaire">0 — 0</strong></div>
         <div class="xt-horde-telemetry" data-xt="horde-hud" hidden><span class="xt-horde-link">MIRE / TÉLÉMÉTRIE TACTIQUE</span><div class="xt-horde-counter-row"><div><span>CONTACTS ACTIFS</span><strong data-xt="horde-alive">0</strong></div><div><span>RENFORTS EN ATTENTE</span><strong data-xt="horde-remaining">0</strong></div></div><span data-xt="horde-phase" class="xt-horde-phase"></span><span class="xt-horde-total" data-xt="horde-kills"></span><progress data-xt="horde-progress" class="xt-horde-progress" max="1" value="0" aria-label="Contacts neutralisés sur la population totale"></progress></div>
-      <section data-xt="boss-hud" class="xt-boss-hud-v186" hidden><span>CONTACT MAJEUR</span><strong data-xt="boss-name"></strong><span data-xt="boss-phase"></span><progress data-xt="boss-hp" max="1" value="1" aria-label="Santé du contact majeur"></progress><span data-xt="boss-hp-value"></span></section><div class="xt-hud-meta-v186"><p class="xt-input-device-v186" data-xt="input-device" role="status">CLAVIER / TACTILE</p><p data-xt="checkpoint-status" class="xt-checkpoint-v186" role="status" aria-live="polite"></p><button type="button" class="button" data-xt="retry-checkpoint" hidden>RÉESSAYER LA SAUVEGARDE DE REPRISE</button></div></div><p data-xt="horde-announcement" class="xt-sr-only" role="status" aria-live="polite"></p>
+      <section data-xt="boss-hud" class="xt-boss-hud-v186" hidden><span>CONTACT MAJEUR</span><strong data-xt="boss-name"></strong><span data-xt="boss-phase"></span><progress data-xt="boss-hp" max="1" value="1" aria-label="Santé du contact majeur"></progress><span data-xt="boss-hp-value"></span></section><section data-xt="operation-hud" class="xt-operation-hud-v188" hidden><div><span data-xt="operation-phase"></span><strong data-xt="operation-title"></strong></div><p data-xt="operation-instruction"></p><progress data-xt="operation-progress" max="1" value="0" aria-label="Progression de l’objectif"></progress><span data-xt="operation-progress-value"></span><span data-xt="operation-integrity"></span><p data-xt="operation-hint"></p><p data-xt="operation-hazard"></p></section><div class="xt-hud-meta-v186"><p class="xt-input-device-v186" data-xt="input-device" role="status">CLAVIER / TACTILE</p><p data-xt="checkpoint-status" class="xt-checkpoint-v186" role="status" aria-live="polite"></p><button type="button" class="button" data-xt="retry-checkpoint" hidden>RÉESSAYER LA SAUVEGARDE DE REPRISE</button></div></div><p data-xt="horde-announcement" class="xt-sr-only" role="status" aria-live="polite"></p>
       <div class="xt-arena"><canvas width="1000" height="560" tabindex="0" data-xt="canvas" aria-label="Arène de combat Xeno Trials" aria-describedby="xeno-trials-help-v96"></canvas>
       <p data-xt="health" class="xt-sr-only" aria-label="Santé et endurance des combattants"></p></div>
-      <div class="xt-actions"><button class="button" data-xt="pause" disabled>PAUSE</button><button type="button" class="button" data-xt="taunt" hidden disabled>T · DÉFI</button><button type="button" class="button" data-xt="skip-sequence" hidden>PASSER LA PRÉSENTATION</button><button class="button" data-xt="next" hidden>MANCHE SUIVANTE</button><button class="button" data-xt="retry-save" hidden>RÉESSAYER LA SAUVEGARDE DU RÉSULTAT</button></div><section data-xt="pause-overlay" class="xt-pause-overlay-v119" role="dialog" aria-modal="true" aria-labelledby="xeno-trials-pause-title-v119" hidden><h2 id="xeno-trials-pause-title-v119">ÉVALUATION SUSPENDUE</h2><p>Q/D ou flèches · Saut Z/↑ · Garde S/↓ · Attaques J/K/L · Super I (jauge pleine) · P ou Échap pour reprendre.</p><p class="xt-input-hint-v186" data-xt="input-hint">CLAVIER / TACTILE / MANETTE STANDARD · Stick ou croix : déplacement · A : saut · LT : garde · X/Y/B : attaques · RT : super · Start/Back : pause. Relâchez les commandes après une reprise.</p><p>La simulation et le chrono sont arrêtés. Reprenez l’évaluation ou abandonnez-la sans gain.</p><button type="button" class="button" data-xt="retry-checkpoint-overlay" hidden>RÉESSAYER LA SAUVEGARDE DE REPRISE</button><button type="button" class="button primary" data-xt="resume-overlay">REPRENDRE</button><button type="button" class="button danger-outline" data-xt="abandon-overlay">ABANDONNER · SANS GAIN</button></section>
+      <div class="xt-actions"><button class="button" data-xt="pause" disabled>PAUSE</button><button type="button" class="button" data-xt="taunt" hidden disabled>T · DÉFI</button><button type="button" class="button" data-xt="skip-sequence" hidden>PASSER LA PRÉSENTATION</button><button class="button" data-xt="next" hidden>MANCHE SUIVANTE</button><button class="button" data-xt="retry-save" hidden>RÉESSAYER LA SAUVEGARDE DU RÉSULTAT</button></div><section data-xt="pause-overlay" class="xt-pause-overlay-v119" role="dialog" aria-modal="true" aria-labelledby="xeno-trials-pause-title-v119" hidden><h2 id="xeno-trials-pause-title-v119">ÉVALUATION SUSPENDUE</h2><p>Q/D ou flèches · Saut Z/↑ · Garde S/↓ · Attaques J/K/L · Super I (jauge pleine) · P ou Échap pour reprendre.</p><p data-xt="operation-input-hint" hidden>E / L3 / INTERAGIR : maintenez au sol près de la cible indiquée. Évitez les zones de danger annoncées avant leur activation.</p><p data-xt="operation-orders" hidden></p><p class="xt-input-hint-v186" data-xt="input-hint">CLAVIER / TACTILE / MANETTE STANDARD · Stick ou croix : déplacement · A : saut · LT : garde · X/Y/B : attaques · RT : super · Start/Back : pause. Relâchez les commandes après une reprise.</p><p>La simulation et le chrono sont arrêtés. Reprenez l’évaluation ou abandonnez-la sans gain.</p><button type="button" class="button" data-xt="retry-checkpoint-overlay" hidden>RÉESSAYER LA SAUVEGARDE DE REPRISE</button><button type="button" class="button primary" data-xt="resume-overlay">REPRENDRE</button><button type="button" class="button danger-outline" data-xt="abandon-overlay">ABANDONNER · SANS GAIN</button></section>
       <div data-xt="controls" class="xt-controls" role="group" aria-label="Commandes de combat tactiles">
-        ${[['left','←'],['right','→'],['jump','SAUT'],['guard','GARDE'],['light','J · RAPIDE'],['heavy','K · LOURD'],['special','L · SPÉCIAL'],['super','I · SUPER']].map(([key,label]) => `<button type="button" data-xeno-action="${key}" aria-label="${controlLabel[key]}">${label}</button>`).join('')}
+        ${[['left','←'],['right','→'],['jump','SAUT'],['guard','GARDE'],['light','J · RAPIDE'],['heavy','K · LOURD'],['special','L · SPÉCIAL'],['super','I · SUPER'],['interact','E · INTERAGIR']].map(([key,label]) => `<button type="button" data-xeno-action="${key}" ${key === 'interact' ? 'hidden' : ''} aria-label="${controlLabel[key]}">${label}</button>`).join('')}
       </div><details class="xt-combat-help"><summary>COMMANDES ET CONSIGNES</summary><p data-xt="mode-help" class="xt-help"></p><p id="xeno-trials-help-v96" class="xt-help">Déplacement : Q/D ou flèches · Saut : Z/↑/Espace · Garde : S/↓ · Attaques : J/K/L · Super : I, pour les spécimens compatibles. Jauge gagnée sur les contacts effectifs, conservée entre manches et consommée au départ. Défi : T lorsque disponible ; annulé par déplacement, attaque, garde ou impact. La simulation continue. Pause : P ou Échap. Lors d’une saisie, maintenir GARDE permet le dégagement sans marteler une touche. La garde ordinaire consomme de l’endurance. Coups lourds pour briser une garde épuisée.</p></details></section>
       <button type="button" class="button" data-xt="new-duel" hidden>PRÉPARER UN AUTRE DUEL</button>
       <div data-xt="result" class="xt-result" role="status" aria-live="polite"></div>
@@ -289,8 +292,8 @@ export class XenoTrialsUiV96 {
     this.el('branches').innerHTML = BRANCHES.map((branch, index) => `<button type="button" data-xt-branch="${branch.id}" class="xt-branch-v119${branch.id === 'horde' ? ' xt-branch-horde' : ''}"><span class="xt-branch-code">MIRE / ${String(index + 1).padStart(2, '0')}<i aria-hidden="true">${branch.id === 'horde' ? 'CONFINEMENT' : 'ÉVALUATION'}</i></span><strong>${escapeHtml(branch.label)}</strong><p>${escapeHtml(branch.description)}</p><span class="xt-branch-open">OUVRIR LE PROGRAMME <b aria-hidden="true">↗</b></span></button>`).join('');
     this.el('branch-title').textContent = BRANCHES.find(branch => branch.id === this.branchV119)?.label || '';
     this.el('renew-contracts').hidden = this.branchV119 !== 'contracts';
-    const entries = this.branchV119 === 'horde' ? HORDE_PROTOCOLS : this.branchV119 === 'campaign' ? CAMPAIGN : this.branchV119 === 'contracts' ? getXenoTrialsContractsV119(state.modesV119.contractCycle) : ['challenges', 'events'].includes(this.branchV119) ? CHALLENGES.filter(entry => Boolean(entry.eventV179) === (this.branchV119 === 'events')) : [];
-    this.el('activity-count').textContent = this.branchV119 === 'horde' ? `${entries.length} PROTOCOLES / CONTACTS SIMULTANÉS / SURVIE CONTINUE` : `${entries.length} DOSSIERS / ${this.branchV119 === 'events' ? 'DUELS SUCCESSIFS' : 'ÉVALUATION COMPARATIVE'}`;
+    const entries = this.branchV119 === 'operations' ? OPERATIONS : this.branchV119 === 'horde' ? HORDE_PROTOCOLS : this.branchV119 === 'campaign' ? CAMPAIGN : this.branchV119 === 'contracts' ? getXenoTrialsContractsV119(state.modesV119.contractCycle) : ['challenges', 'events'].includes(this.branchV119) ? CHALLENGES.filter(entry => Boolean(entry.eventV179) === (this.branchV119 === 'events')) : [];
+    this.el('activity-count').textContent = this.branchV119 === 'operations' ? `${entries.length} OPÉRATIONS / OBJECTIFS PHYSIQUES / DANGERS DE TERRAIN` : this.branchV119 === 'horde' ? `${entries.length} PROTOCOLES / CONTACTS SIMULTANÉS / SURVIE CONTINUE` : `${entries.length} DOSSIERS / ${this.branchV119 === 'events' ? 'DUELS SUCCESSIFS' : 'ÉVALUATION COMPARATIVE'}`;
     const page = getXenoTrialsProgramPageV186(entries, { page: this.programPageV186, kind: this.branchV119 === 'horde' ? this.el('program-filter').value : 'all' });
     this.programPageV186 = page.page;
     this.el('program-filter-label').hidden = this.branchV119 !== 'horde';
@@ -299,18 +302,18 @@ export class XenoTrialsUiV96 {
     this.el('program-next').disabled = !page.hasNext;
     this.el('activity-board').innerHTML = page.entries.map((entry, index) => {
       const activity = resolveXenoTrialsActivityV119({ branch: activityBranchV179(this.branchV119), id: entry.id }, state.modesV119);
-      const horde = getXenoTrialsHordeBriefingV180(activity);
-      const cleared = this.branchV119 === 'horde' ? state.modesV119.hordeCleared?.includes(entry.id) : this.branchV119 === 'campaign' ? state.modesV119.campaignCleared.includes(entry.id) : this.branchV119 === 'contracts' ? state.modesV119.claimedContracts.includes(entry.id) : state.modesV119.challengesCleared.includes(entry.id);
+      const horde = combatBriefingV188(activity);
+      const cleared = this.branchV119 === 'operations' ? state.modesV119.operationsCleared?.includes(entry.id) : this.branchV119 === 'horde' ? state.modesV119.hordeCleared?.includes(entry.id) : this.branchV119 === 'campaign' ? state.modesV119.campaignCleared.includes(entry.id) : this.branchV119 === 'contracts' ? state.modesV119.claimedContracts.includes(entry.id) : state.modesV119.challengesCleared.includes(entry.id);
       const opponentId = activity?.opponentId || entry.opponentId || entry.opponentIds?.[0], fighter = FIGHTERS.find(fighter => fighter.id === opponentId);
       const locked = this.branchV119 === 'campaign' && !isXenoTrialsMissionOpenV119(entry.id, state.modesV119) || this.branchV119 === 'contracts' && cleared
         || ['challenges', 'events'].includes(this.branchV119) && state.modesV119.challengeRun && state.modesV119.challengeRun.id !== entry.id;
       const passage = !horde && entry.opponentIds?.length > 1 ? ` · Passage ${(activity?.bout || 0) + 1}/${entry.opponentIds.length}` : '';
       const stage = STAGES.find(stage => stage.id === activity?.stageId);
-      return `<article class="xt-activity-v119 ${cleared ? 'validated' : ''}${horde ? ' xt-horde-protocol' : ''}"${entry.eventV179 ? ' data-xt-event="true"' : ''}${horde ? ' data-xt-horde="true"' : ''}>${horde && stage?.backdrop ? `<div class="xt-activity-image"><img src="${stage.backdrop}" alt="" loading="lazy"><span>PROTOCOLE ${String(entries.indexOf(entry) + 1).padStart(2, '0')} / ${escapeHtml(stage.label)}</span></div>` : ''}<p class="eyebrow">${escapeHtml(horde ? 'ALERTE MIRE / HORDE SIMULTANÉE' : entry.act || (entry.eventV179 ? 'ALERTE MIRE / DUELS SUCCESSIFS' : this.branchV119 === 'contracts' ? 'CIBLE ASSIGNÉE' : 'ÉPREUVE FIXE'))}</p><h3>${escapeHtml(entry.title || entry.label)}</h3><strong>${escapeHtml(horde ? horde.pressureLabel : fighter?.label || 'Cible à définir')}${passage}</strong><p>${escapeHtml(entry.briefing || entry.description)}</p>${entry.bossFinaleV186 ? `<p class="xt-boss-order-v186">FINALE · ${escapeHtml(FIGHTERS.find(fighter => fighter.id === entry.bossFinaleV186.fighterId)?.label || 'Contact majeur')} · ${entry.bossFinaleV186.hp} PV</p>` : ''}${hordeStatsV180(horde)}${!horde && activity?.waveLabel ? `<p>${escapeHtml(activity.waveLabel)}</p>` : ''}${!horde ? `<p>${escapeHtml(getXenoTrialsRuleTextV119(activity?.rules || entry.rules))}</p>` : ''}${stage && !horde ? `<p>${escapeHtml(stage.label)}</p>` : ''}<span class="xt-activity-reward">${cleared ? 'VALIDÉ · Récompense déjà accordée' : `PRIME DE VALIDATION · ${activity?.reward ?? entry.reward ?? 0} crédits Trials`}</span><button type="button" class="button ${locked ? '' : 'primary'}" data-xt-activity="${entry.id}" ${locked ? 'disabled' : ''}>${locked ? cleared ? 'CONTRAT TERMINÉ' : state.modesV119.challengeRun ? 'SÉRIE EN COURS' : 'ACCRÉDITATION REQUISE' : cleared ? 'REJOUER' : activity?.bout > 0 ? 'POURSUIVRE LA SÉRIE' : horde ? 'OUVRIR LE PROTOCOLE →' : 'BRIEFING · CHOISIR MON SPÉCIMEN'}</button></article>`;
+      return `<article class="xt-activity-v119 ${cleared ? 'validated' : ''}${horde ? ' xt-horde-protocol' : ''}"${entry.operationV188 || this.branchV119 === 'operations' ? ' data-xt-operation="true"' : ''}${entry.eventV179 ? ' data-xt-event="true"' : ''}${horde ? ' data-xt-horde="true"' : ''}>${horde && stage?.backdrop ? `<div class="xt-activity-image"><img src="${stage.backdrop}" alt="" loading="lazy"><span>PROTOCOLE ${String(entries.indexOf(entry) + 1).padStart(2, '0')} / ${escapeHtml(stage.label)}</span></div>` : ''}<p class="eyebrow">${escapeHtml(horde?.operation ? 'MIRE / OPÉRATION DE TERRAIN' : horde ? 'ALERTE MIRE / HORDE SIMULTANÉE' : entry.act || (entry.eventV179 ? 'ALERTE MIRE / DUELS SUCCESSIFS' : this.branchV119 === 'contracts' ? 'CIBLE ASSIGNÉE' : 'ÉPREUVE FIXE'))}</p><h3>${escapeHtml(entry.title || entry.label)}</h3><strong>${escapeHtml(horde ? horde.pressureLabel : fighter?.label || 'Cible à définir')}${passage}</strong><p>${escapeHtml(entry.briefing || entry.description)}</p>${entry.bossFinaleV186 ? `<p class="xt-boss-order-v186">FINALE · ${escapeHtml(FIGHTERS.find(fighter => fighter.id === entry.bossFinaleV186.fighterId)?.label || 'Contact majeur')} · ${entry.bossFinaleV186.hp} PV</p>` : ''}${hordeStatsV180(horde)}${!horde && activity?.waveLabel ? `<p>${escapeHtml(activity.waveLabel)}</p>` : ''}${!horde ? `<p>${escapeHtml(getXenoTrialsRuleTextV119(activity?.rules || entry.rules))}</p>` : ''}${stage && !horde ? `<p>${escapeHtml(stage.label)}</p>` : ''}<span class="xt-activity-reward">${cleared ? 'VALIDÉ · Récompense déjà accordée' : `PRIME DE VALIDATION · ${activity?.reward ?? entry.reward ?? 0} crédits Trials`}</span><button type="button" class="button ${locked ? '' : 'primary'}" data-xt-activity="${entry.id}" ${locked ? 'disabled' : ''}>${locked ? cleared ? 'CONTRAT TERMINÉ' : state.modesV119.challengeRun ? 'SÉRIE EN COURS' : 'ACCRÉDITATION REQUISE' : cleared ? 'REJOUER' : activity?.bout > 0 ? 'POURSUIVRE LA SÉRIE' : horde ? 'OUVRIR LE PROTOCOLE →' : 'BRIEFING · CHOISIR MON SPÉCIMEN'}</button></article>`;
     }).join('');
     const activity = this.activityV119 && resolveXenoTrialsActivityV119(this.activityV119, state.modesV119);
-    const horde = getXenoTrialsHordeBriefingV180(activity);
-    this.el('briefing').innerHTML = activity ? `<div class="xt-briefing-identity"><p class="eyebrow">${escapeHtml(activity.supervisor || 'MIRE / ORDRES D’ÉVALUATION')}</p><h2>${escapeHtml(activity.title)}</h2><span>${horde ? 'HORDE / CONFINEMENT CONTINU' : 'DOSSIER / ÉVALUATION COMPARATIVE'}</span></div><div class="xt-briefing-orders">${!horde && activity.waveLabel ? `<h3>PASSAGE ${activity.bout + 1}/${activity.opponentIds.length} · ${escapeHtml(activity.waveLabel)}</h3>` : ''}<p>${escapeHtml(activity.briefing || activity.description || 'Cible demandée par l’opérateur.')}</p>${horde ? `${hordeStatsV180(horde)}<p class="xt-horde-orders">${escapeHtml(horde.orders)}</p>` : `<strong>${escapeHtml(getXenoTrialsRuleTextV119(activity.rules))}</strong>`}${activity.secondary ? `<p>OBJECTIF SECONDAIRE · ${escapeHtml(activity.secondary.label)} · +50 crédits à la première validation.</p>` : ''}${activity.event ? `<p>${escapeHtml(activity.event)}</p>` : ''}</div>` : '';
+    const horde = combatBriefingV188(activity);
+    this.el('briefing').innerHTML = activity ? `<div class="xt-briefing-identity"><p class="eyebrow">${escapeHtml(activity.supervisor || 'MIRE / ORDRES D’ÉVALUATION')}</p><h2>${escapeHtml(activity.title)}</h2><span>${horde?.operation ? 'OPÉRATION / OBJECTIF DE TERRAIN' : horde ? 'HORDE / CONFINEMENT CONTINU' : 'DOSSIER / ÉVALUATION COMPARATIVE'}</span></div><div class="xt-briefing-orders">${!horde && activity.waveLabel ? `<h3>PASSAGE ${activity.bout + 1}/${activity.opponentIds.length} · ${escapeHtml(activity.waveLabel)}</h3>` : ''}<p>${escapeHtml(activity.briefing || activity.description || 'Cible demandée par l’opérateur.')}</p>${horde ? `${hordeStatsV180(horde)}<p class="xt-horde-orders">${escapeHtml(horde.orders)}</p>` : `<strong>${escapeHtml(getXenoTrialsRuleTextV119(activity.rules))}</strong>`}${activity.secondary ? `<p>OBJECTIF SECONDAIRE · ${escapeHtml(activity.secondary.label)} · +50 crédits à la première validation.</p>` : ''}${activity.event ? `<p>${escapeHtml(activity.event)}</p>` : ''}</div>` : '';
   }
 
   confirmFighters() {
@@ -344,7 +347,7 @@ export class XenoTrialsUiV96 {
   }
   renderPreviews() {
     const activity = this.activityV119 && resolveXenoTrialsActivityV119(this.activityV119, this.state().modesV119);
-    const horde = getXenoTrialsHordeBriefingV180(activity);
+    const horde = combatBriefingV188(activity);
     const ids = [this.selected, this.form.elements.opponentId.value];
     this.el('portraits').innerHTML = ids.map((id, i) => {
       const f = FIGHTERS.find(entry => entry.id === id); if (!f) return '';
@@ -364,7 +367,7 @@ export class XenoTrialsUiV96 {
     const stage = STAGES.find(s => s.id === this.form.elements.stageId.value) || STAGES[0];
     const matchup = ids.map(id => FIGHTERS.find(f => f.id === id)?.label || '').join(' contre ');
     this.el('arena-matchup').textContent = horde ? `${FIGHTERS.find(f => f.id === this.selected)?.label} · ${horde.waveLabel} · ${horde.populationLabel} · ${horde.healthLabel}` : `${matchup} · Deux manches gagnantes`;
-    this.el('arena-rules').textContent = horde ? `${horde.orders} Une seule évaluation ; votre santé est conservée entre les vagues.` : 'Deux manches gagnantes. Présentation des deux spécimens, puis décompte 3–2–1. Le chrono ne démarre qu’au signal de combat.';
+    this.el('arena-rules').textContent = horde?.operation ? horde.orders : horde ? `${horde.orders} Une seule évaluation ; votre santé est conservée entre les vagues.` : 'Deux manches gagnantes. Présentation des deux spécimens, puis décompte 3–2–1. Le chrono ne démarre qu’au signal de combat.';
     const locked = !this.active || this.selectionStep !== 'arena' || this.isRunning() || this.state().pending || this.unsavedResult;
     this.el('arena-cards').innerHTML = (horde ? [stage] : STAGES).map(s => `<button type="button" class="xt-arena-card" data-xt-arena="${s.id}" aria-pressed="${s.id === stage.id}" ${locked || activity?.stageId && activity.stageId !== s.id ? 'disabled' : ''} style="--xt-back:${s.background};--xt-floor:${s.floor};--xt-accent:${s.accent}"><span class="xt-arena-thumbnail">${s.backdrop ? `<img src="${s.backdrop}" alt="" loading="lazy">` : '<i></i><i></i><i></i>'}</span><strong>${s.label}</strong><small>${activity?.stageId ? 'Environnement assigné à l’évaluation' : s.backdrop ? 'SECTEUR RÉPERTORIÉ' : 'SECTEUR MIRE'} · 2D</small></button>`).join('');
     this.el('stage-preview').innerHTML = `<div class="xt-stage-scene" style="--xt-back:${stage.background};--xt-floor:${stage.floor};--xt-accent:${stage.accent}">${stage.backdrop ? `<img src="${stage.backdrop}" alt="Aperçu du décor sélectionné">` : '<i></i><i></i><i></i><i></i><i></i>'}<span>${stage.label}</span></div><p>${horde ? `${horde.pressureLabel} · ${horde.waveLabel} · ${horde.healthLabel}` : matchup} · ${escapeHtml(stage.label)}</p>`;
@@ -424,7 +427,7 @@ export class XenoTrialsUiV96 {
     try {
       this.onCommit(transaction.state);
       this.el('retry-checkpoint').hidden = this.el('retry-checkpoint-overlay').hidden = true;
-      this.el('checkpoint-status').textContent = `REPRISE CONSERVÉE · VAGUE ${snapshot.hordeV180.wave} / ${snapshot.hordeV180.waveCount}`;
+      this.el('checkpoint-status').textContent = snapshot.operationV188 ? 'REPRISE CONSERVÉE · OBJECTIFS ET DANGERS ENREGISTRÉS' : `REPRISE CONSERVÉE · VAGUE ${snapshot.hordeV180.wave} / ${snapshot.hordeV180.waveCount}`;
       return true;
     } catch {
       this.el('retry-checkpoint').hidden = this.el('retry-checkpoint-overlay').hidden = false;
@@ -439,11 +442,31 @@ export class XenoTrialsUiV96 {
       this.el('input-device').textContent = deviceHint; this.lastGamepadHintV186 = deviceHint;
     }
     if (snapshot.resumedV186 && snapshot.paused && snapshot.checkpointV186?.saved !== false && this.lastResumedTickV186 !== snapshot.tick) {
-      this.el('checkpoint-status').textContent = 'Reprise de la vague conservée. Reprenez avec P, Start ou le bouton Reprendre.';
+      this.el('checkpoint-status').textContent = snapshot.operationV188 ? 'Reprise de l’opération conservée. Reprenez avec P, Start ou le bouton Reprendre.' : 'Reprise de la vague conservée. Reprenez avec P, Start ou le bouton Reprendre.';
       this.lastResumedTickV186 = snapshot.tick;
     }
     const wasPaused = this.root.getAttribute('data-xt-paused') === 'true';
     const horde = getXenoTrialsHordeViewV180(snapshot);
+    const operation = snapshot.operationViewV188 || getXenoTrialsOperationHudV188(snapshot);
+    this.root.setAttribute('data-xt-operation', String(Boolean(operation)));
+    this.el('operation-hud').hidden = !operation;
+    this.el('operation-input-hint').hidden = this.el('operation-orders').hidden = !operation;
+    if (operation) this.el('operation-orders').textContent = operation.orders;
+    const interactControl = this.root.querySelector('[data-xeno-action="interact"]');
+    if (interactControl) interactControl.hidden = !operation;
+    if (operation) {
+      this.el('operation-title').textContent = operation.title;
+      this.el('operation-phase').textContent = snapshot.paused ? 'PAUSE' : operation.phase;
+      this.el('operation-instruction').textContent = operation.instruction;
+      this.el('operation-progress').max = Math.max(1, operation.progress.total);
+      this.el('operation-progress').value = operation.progress.done;
+      this.el('operation-progress-value').textContent = operation.progress.label;
+      this.el('operation-integrity').textContent = operation.integrity === null || operation.integrity === undefined ? '' : `INTÉGRITÉ ${Math.ceil(operation.integrity)} / 100`;
+      this.el('operation-hint').textContent = operation.hint;
+      const hazard = snapshot.stageHazardViewV188;
+      this.el('operation-hazard').textContent = hazard && ['warning', 'active'].includes(hazard.phase) ? `${hazard.phase === 'warning' ? 'DANGER ANNONCÉ' : 'DANGER ACTIF'} · ${hazard.label} · ${hazard.hint || 'Quittez la zone balisée.'}` : '';
+      this.el('operation-hazard').setAttribute('data-active', String(hazard?.phase === 'active'));
+    }
     if (!horde || snapshot.phase === 'match-over')
       this.el('retry-checkpoint').hidden = this.el('retry-checkpoint-overlay').hidden = true;
     const hudFighters = horde ? snapshot.fighters.slice(0, 1) : snapshot.fighters.slice(0, 2);
@@ -462,13 +485,14 @@ export class XenoTrialsUiV96 {
     if (horde) {
       this.el('horde-alive').textContent = String(horde.alive);
       this.el('horde-remaining').textContent = String(horde.remaining);
-      this.el('horde-phase').textContent = horde.phase;
+      this.el('horde-phase').textContent = operation ? 'CONTACTS DE TERRAIN' : horde.phase;
       this.el('horde-kills').textContent = `${horde.kills} / ${horde.total} NEUTRALISÉS`;
       this.el('horde-progress').max = Math.max(1, horde.total);
       this.el('horde-progress').value = horde.kills;
-      if (this.hordeAnnouncementV180 !== horde.announcement) {
-        this.el('horde-announcement').textContent = horde.announcement;
-        this.hordeAnnouncementV180 = horde.announcement;
+      const announcement = operation ? `${snapshot.paused ? 'PAUSE' : operation.phase}. ${operation.instruction}` : horde.announcement;
+      if (this.hordeAnnouncementV180 !== announcement) {
+        this.el('horde-announcement').textContent = announcement;
+        this.hordeAnnouncementV180 = announcement;
       }
     } else if (this.hordeAnnouncementV180) { this.el('horde-announcement').textContent = ''; this.hordeAnnouncementV180 = null; }
     this.el('health').textContent = hudFighters.map((f, i) => `${i === 0 ? 'Vous' : 'Adversaire'} : ${Math.ceil(f.hp)} PV · ${Math.floor(f.stamina)} endurance`).join(' / ');
@@ -505,12 +529,12 @@ export class XenoTrialsUiV96 {
     }
     this.el('clock').textContent = String(Math.ceil(snapshot.timeRemaining));
     this.el('clock').setAttribute('data-low', String(snapshot.timeRemaining <= 10));
-    this.el('round').textContent = horde ? horde.waveLabel : `MANCHE ${snapshot.round}`;
-    this.el('score').textContent = horde ? `${horde.kills} / ${horde.total}` : `${snapshot.wins.player} — ${snapshot.wins.opponent}`;
-    this.el('score').setAttribute('aria-label', horde ? 'Contacts neutralisés sur la population totale' : 'Manches gagnées : joueur — adversaire');
+    this.el('round').textContent = operation ? 'OPÉRATION' : horde ? horde.waveLabel : `MANCHE ${snapshot.round}`;
+    this.el('score').textContent = operation ? `${operation.progress.done} / ${operation.progress.total}` : horde ? `${horde.kills} / ${horde.total}` : `${snapshot.wins.player} — ${snapshot.wins.opponent}`;
+    this.el('score').setAttribute('aria-label', operation ? 'Objectifs validés' : horde ? 'Contacts neutralisés sur la population totale' : 'Manches gagnées : joueur — adversaire');
     const phase = snapshot.paused ? 'PAUSE' : snapshot.presentation?.blocksSimulation ? snapshot.presentation.countdown ? `DÉPART DANS ${snapshot.presentation.countdown}` : 'PRÉSENTATION DES SPÉCIMENS' : { intro: 'PRÉPARATION', active: 'COMBAT', 'round-over': 'FIN DE MANCHE', 'match-over': 'ÉVALUATION TERMINÉE' }[snapshot.phase];
     const grapple = snapshot.grappleViewV153;
-    const text = horde ? `${horde.phase} · ${horde.waveLabel}` : `${grapple?.target === 'player' ? 'SAISIE · MAINTENIR S / GARDE POUR SE DÉGAGER · ' : ''}${phase} · Manche ${snapshot.round} · ${snapshot.wins.player} — ${snapshot.wins.opponent} · ${Math.ceil(snapshot.timeRemaining)} s`;
+    const text = operation ? `${operation.phase} · ${operation.instruction}` : horde ? `${horde.phase} · ${horde.waveLabel}` : `${grapple?.target === 'player' ? 'SAISIE · MAINTENIR S / GARDE POUR SE DÉGAGER · ' : ''}${phase} · Manche ${snapshot.round} · ${snapshot.wins.player} — ${snapshot.wins.opponent} · ${Math.ceil(snapshot.timeRemaining)} s`;
     if (this.lastStatus !== text && !this.unsavedResult) { this.message(text); this.lastStatus = text; }
     this.el('next').hidden = Boolean(horde) || snapshot.phase !== 'round-over';
     const outroPlaying = snapshot.outroV155?.phase === 'playing' || snapshot.terminalV156?.phase === 'playing' || snapshot.exitV157?.phase === 'playing' || snapshot.landingV157?.phase === 'playing';
@@ -574,11 +598,11 @@ export class XenoTrialsUiV96 {
       return `<article class="xt-fighter ${this.selected === f.id ? 'selected' : ''}"><button type="button" data-xt-fighter="${f.id}" aria-pressed="${this.selected === f.id}" ${running || state.pending ? 'disabled' : ''}>${portrait}<strong>${f.label}</strong><small>${roleLabel[f.role]} · ${f.hp} PV</small><small>${getXenoTrialsFighterSpecialLabelV147(f)}</small>${getXenoTrialsSuperV148(f) ? `<small>Super : ${getXenoTrialsSuperV148(f).label}</small>` : ''}</button>${unlocked ? '<span class="xt-owned">ACQUIS</span>' : `<button type="button" class="xt-unlock" data-xt-unlock="${f.id}" ${this.unsavedResult || state.pending || state.credits < cost ? 'disabled' : ''}>DÉBLOQUER · ${cost}</button>`}</article>`;
     }).join('') || '<p class="xt-help">Aucun spécimen ne correspond à ces filtres. Votre sélection est conservée.</p>';
     const activity = this.activityV119 && resolveXenoTrialsActivityV119(this.activityV119, state.modesV119);
-    const horde = getXenoTrialsHordeBriefingV180(activity);
+    const horde = combatBriefingV188(activity);
     if (!running) this.root.setAttribute('data-xt-mode', horde ? 'horde' : 'duel');
-    this.el('start').textContent = horde ? 'ENGAGER LE PROTOCOLE HORDE' : 'LANCER LE DUEL';
+    this.el('start').textContent = horde?.operation ? 'ENGAGER L’OPÉRATION' : horde ? 'ENGAGER LE PROTOCOLE HORDE' : 'LANCER LE DUEL';
     this.el('confirm-fighters').textContent = horde ? 'CONFIRMER · VÉRIFIER LE SECTEUR →' : 'CONFIRMER · CHOISIR L’ARÈNE →';
-    this.el('restart').textContent = state.pending?.checkpointV186 ? `REPRENDRE LA VAGUE ${state.pending.checkpointV186.snapshot.hordeV180.wave}` : state.pending?.config?.activityV119?.branch === 'horde' ? 'RECOMMENCER LE PROTOCOLE SAUVEGARDÉ' : 'RECOMMENCER LE DUEL SAUVEGARDÉ';
+    this.el('restart').textContent = state.pending?.config?.operationV188 ? state.pending?.checkpointV186 ? 'REPRENDRE L’OPÉRATION CONSERVÉE' : 'RECOMMENCER L’OPÉRATION SAUVEGARDÉE' : state.pending?.checkpointV186 ? `REPRENDRE LA VAGUE ${state.pending.checkpointV186.snapshot.hordeV180.wave}` : state.pending?.config?.activityV119?.branch === 'horde' ? 'RECOMMENCER LE PROTOCOLE SAUVEGARDÉ' : 'RECOMMENCER LE DUEL SAUVEGARDÉ';
     this.el('restart-from-start').hidden = !state.pending?.checkpointV186 || running;
     this.el('restart-from-start').disabled = Boolean(this.unsavedResult);
     this.el('mode-help').textContent = horde ? horde.orders : 'Deux manches gagnantes. Surveillez votre endurance et punissez les attaques manquées.';
@@ -600,7 +624,7 @@ export class XenoTrialsUiV96 {
     this.root.setAttribute('data-xt-step', this.selectionStep);
     this.root.setAttribute('data-xt-unsaved', String(Boolean(this.unsavedResult)));
     this.root.setAttribute('data-xt-recovery',String(Boolean(state.pending && !running)));
-    this.el('steps').innerHTML = [['fighters','01 · COMBATTANTS'],['arena','02 · ARÈNE'],['combat',horde ? '03 · HORDE' : '03 · DUEL']].map(([id,label]) => `<span ${id === this.selectionStep ? 'aria-current="step"' : ''}>${label}</span>`).join('');
+    this.el('steps').innerHTML = [['fighters','01 · COMBATTANTS'],['arena','02 · ARÈNE'],['combat',horde ? horde?.operation ? '03 · OPÉRATION' : '03 · HORDE' : '03 · DUEL']].map(([id,label]) => `<span ${id === this.selectionStep ? 'aria-current="step"' : ''}>${label}</span>`).join('');
     this.el('new-duel').hidden = this.selectionStep !== 'combat' || running || Boolean(state.pending) || Boolean(this.unsavedResult);
     this.el('new-duel').textContent = state.modesV119.challengeRun ? 'POURSUIVRE LA SÉRIE' : this.activityV119 && this.branchV119 !== 'on-demand' ? 'RETOUR AUX ÉVALUATIONS' : 'PRÉPARER UN AUTRE DUEL';
     this.el('restart').hidden = !state.pending || running;

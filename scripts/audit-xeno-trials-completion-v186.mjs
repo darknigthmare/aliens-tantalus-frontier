@@ -2,12 +2,14 @@
  * Versions 179/180 identify two source histories, not a linear replacement of
  * the already integrated reference/workshop, QA and language branches.
  * Every accepted endpoint is named and byte-pinned. No old execution or artistic
- * result is transferred. This terminal module imports no other audit and never
- * admits its own bytes. All historical receipt constants remain unchanged.
+ * result is transferred. V188 explicitly succeeds this join; the V186 receipt
+ * constants below remain unchanged and V188 pins the relay's changed bytes.
  */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedStageOperationsDigestV188, stageOperationsRuntimeSourcesV188,
+  verifyStageOperationsV188 } from './audit-xeno-stage-operations-v188.mjs';
 const freeze = value => { if (value && typeof value === 'object') { Object.values(value).forEach(freeze); Object.freeze(value); } return value; };
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const readRepository = path => readFileSync(new URL('../' + path, import.meta.url));
@@ -737,18 +739,18 @@ export const COMPLETION_SOURCES_V186 = freeze({
 
 export function reviewedCompletionDigestV186(path, endpoint) {
   const record = COMPLETION_SOURCES_V186[path];
-  if (!record) return endpoint;
+  if (!record) return reviewedStageOperationsDigestV188(path, endpoint);
   assert.ok(validHash(endpoint), 'Missing V186 completion predecessor: ' + path);
   assert.ok(Object.values(record.predecessors).includes(endpoint), 'Incorrect V186 completion predecessor: ' + path);
   assert.ok(validHash(record.currentSha256), 'Invalid V186 completion digest: ' + path);
-  return record.currentSha256;
+  return reviewedStageOperationsDigestV188(path, record.currentSha256);
 }
 /** Called only after the full historical admission has validated its sources. */
 export function completionRuntimeSourcesV186(historical) {
   const result = { ...historical };
   for (const [path, record] of Object.entries(COMPLETION_SOURCES_V186))
-    if (record.kind === 'runtime') result[path] = record.currentSha256;
-  return Object.freeze(result);
+    if (record.kind === 'runtime') result[path] = reviewedStageOperationsDigestV188(path, record.currentSha256);
+  return stageOperationsRuntimeSourcesV188(result);
 }
 export function verifyCompletionV186(readSource = readRepository) {
   for (const [path, record] of Object.entries(COMPLETION_SOURCES_V186)) {
@@ -758,8 +760,9 @@ export function verifyCompletionV186(readSource = readRepository) {
     assert.deepEqual(Object.keys(record.predecessors).filter(key=>key!=='integration182').sort(), Object.keys(COMPLETION_BASELINES_V186).sort());
     for (const endpoint of Object.values(record.predecessors)) assert.ok(endpoint===null || validHash(endpoint), 'Invalid V186 completion predecessor: ' + path);
     assert.ok(validHash(record.currentSha256));
-    assert.equal(sha(readSource(path)), record.currentSha256, 'Unreviewed V186 completion bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedStageOperationsDigestV188(path, record.currentSha256), 'Unreviewed V186 completion bytes: ' + path);
   }
+  verifyStageOperationsV188(readSource);
   return Object.freeze({ sources: Object.keys(COMPLETION_SOURCES_V186).length,
     runtime: Object.values(COMPLETION_SOURCES_V186).filter(record=>record.kind==='runtime').length,
     historicalResultsTransferred: false });

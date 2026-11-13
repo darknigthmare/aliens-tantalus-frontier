@@ -7,6 +7,8 @@ import {createXenoTrialsMatchV96,stepXenoTrialsMatchV96,getXenoTrialsSnapshotV96
 import {createXenoTrialsProgressV96,beginXenoTrialsV96,normalizeXenoTrialsProgressV96,checkpointXenoTrialsV186} from '../src/xeno-trials-progress-v96.js';
 import {createXenoTrialsHordeCheckpointV186} from '../src/xeno-trials-horde-checkpoint-v186.js';
 import {getXenoTrialsBodyBoundsV105 as bounds} from '../src/xeno-trials-geometry-v105.js';
+import {getXenoTrialsArtV96} from '../src/xeno-trials-data-v96.js';
+import {getXenoTrialsSpriteAtlasV188} from '../src/xeno-trials-sprite-atlas-v188.js';
 
 // Production engine/controller and the real UI checkpoint method. DOM, RAF,
 // image decoding and standard gamepads are declared deterministic host doubles.
@@ -183,8 +185,21 @@ test('native engine kills render source-backed KO ghosts while other horde enemi
  for(let frame=0;frame<60;frame++){
   h.frames(1);const state=h.state();assert.ok(state.defeatedViewsV186.length<=16);
   if(state.defeatedViewsV186.length&&state.fighters.some(f=>f.side==='opponent'&&f.hp>0)){
-   saw=true;const ghostIds=new Set(state.defeatedViewsV186.map(ghost=>ghost.instanceId));
-   assert.ok(state.rigViewsV154.some(view=>ghostIds.has(view.side)&&view.reactionV186?.state==='ko'));
+   saw=true;
+   // V188 admits drawn corpses for four identities. A genuine ghost must
+   // retain its exact source receipt through either admitted renderer.
+   for(const ghost of state.defeatedViewsV186){
+    const view=state.rigViewsV154.find(view=>view.side===ghost.instanceId);assert.ok(view);
+    const atlas=getXenoTrialsSpriteAtlasV188(ghost,getXenoTrialsArtV96(ghost.id));
+    if(atlas){
+     assert.equal(view.spriteAtlasV188?.fighterId,ghost.id);
+     assert.equal(view.spriteAtlasV188?.phase,'ko');
+     assert.ok(['ko-fall','ko-ground'].includes(view.spriteAtlasV188?.frameId));
+     assert.equal(view.spriteAtlasV188?.path,atlas.texture.path);
+     assert.equal(view.spriteAtlasV188?.sha256,atlas.texture.sha256);
+     assert.ok(view.bounds.bottom<=450+1e-6,'Drawn KO never floats below the contact line');
+    }else assert.equal(view.reactionV186?.state,'ko');
+   }
    const ids=new Set(state.fighters.map(f=>f.instanceIdV180));assert.ok(state.defeatedViewsV186.every(ghost=>!ids.has(ghost.instanceId)));
    const saved=createXenoTrialsHordeCheckpointV186(state,t.config);assert.ok(saved);assert.ok(!('defeatedViewsV186' in saved.snapshot));break;
   }

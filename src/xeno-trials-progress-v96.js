@@ -4,6 +4,9 @@ import { createXenoTrialsModesProgressV119, normalizeXenoTrialsModesProgressV119
 import { getXenoTrialsHordeProtocolV180 } from './xeno-trials-horde-v180.js';
 import { createXenoTrialsHordeCheckpointV186, normalizeXenoTrialsHordeCheckpointV186,
   isXenoTrialsCheckpointForwardV186 } from './xeno-trials-horde-checkpoint-v186.js';
+import { getXenoTrialsOperationV188, validateXenoTrialsOperationSnapshotV188,
+  getXenoTrialsOperationReceiptV188, isXenoTrialsOperationForwardV188 } from './xeno-trials-operations-v188.js';
+import { validateXenoTrialsStageHazardsV188, isXenoTrialsStageHazardsForwardV188 } from './xeno-trials-stage-hazards-v188.js';
 
 const fighterIds = new Set(XENO_TRIALS_FIGHTERS_V96.map(f => f.id));
 const factionIds = new Set(XENO_TRIALS_FACTIONS_V96.map(f => f.id));
@@ -19,7 +22,8 @@ export function createXenoTrialsProgressV96() {
 }
 
 export function normalizeXenoTrialsConfigV96(value = {}) {
-  const horde = value.activityV119?.branch === 'horde' && getXenoTrialsHordeProtocolV180(value.activityV119.id);
+  const operation = value.activityV119?.branch === 'operations' && getXenoTrialsOperationV188(value.activityV119.id);
+  const horde = getXenoTrialsHordeProtocolV180(operation ? operation.hordeProtocolId : value.activityV119?.branch === 'horde' ? value.activityV119.id : null);
   return {
     playerId: fighterIds.has(value.playerId) ? value.playerId : 'warrior',
     opponentId: fighterIds.has(value.opponentId) ? value.opponentId : 'runner',
@@ -28,10 +32,11 @@ export function normalizeXenoTrialsConfigV96(value = {}) {
     factionId: factionIds.has(value.factionId) ? value.factionId : 'containment',
     stageId: stageIds.has(value.stageId) ? value.stageId : 'containment-deck',
     difficulty: ['easy', 'normal', 'hard'].includes(value.difficulty) ? value.difficulty : 'normal',
-    roundsToWin: horde ? 1 : 2, roundSeconds: horde ? horde.roundSeconds : [30, 60, 75, 99, 120].includes(Number(value.roundSeconds)) ? Number(value.roundSeconds) : 99,
+    roundsToWin: horde ? 1 : 2, roundSeconds: operation?.roundSeconds || (horde ? horde.roundSeconds : [30, 60, 75, 99, 120].includes(Number(value.roundSeconds)) ? Number(value.roundSeconds) : 99),
     ...(horde ? { hordeV180: { protocolId: horde.id } } : {}),
+    ...(operation ? { operationV188: { id: operation.id } } : {}),
     ...(record(value.activityV119) ? { activityV119: {
-      branch: ['campaign', 'contracts', 'challenges', 'on-demand', 'horde'].includes(value.activityV119.branch) ? value.activityV119.branch : 'on-demand',
+      branch: ['campaign', 'contracts', 'challenges', 'on-demand', 'horde', 'operations'].includes(value.activityV119.branch) ? value.activityV119.branch : 'on-demand',
       id: typeof value.activityV119.id === 'string' ? value.activityV119.id.slice(0, 64) : 'on-demand',
       ...(value.activityV119.branch === 'on-demand' ? { rules: normalizeXenoTrialsRulesV119(value.activityV119.rules) } : {})
     }, rulesV119: normalizeXenoTrialsRulesV119(value.rulesV119) } : {})
@@ -92,7 +97,7 @@ export function normalizeXenoTrialsProgressV96(value) {
  * creates a ticket, grants a reward, changes economy or consumes a result. */
 export function checkpointXenoTrialsV186(value, snapshot) {
   const state = normalizeXenoTrialsProgressV96(value), ticket = state.pending;
-  if (!ticket || ticket.config.activityV119?.branch !== 'horde')
+  if (!ticket || !['horde', 'operations'].includes(ticket.config.activityV119?.branch))
     return { applied: false, state, reason: 'checkpoint-ticket-unavailable' };
   const checkpoint = createXenoTrialsHordeCheckpointV186(snapshot, ticket.config);
   if (!checkpoint) return { applied: false, state, reason: 'invalid-horde-checkpoint' };
@@ -204,6 +209,29 @@ function validHordeResultV180(config, result) {
   return ['horde-ko', 'horde-time'].includes(result.reason) && result.wins.player === 0 && result.wins.opponent === 1;
 }
 
+const equalJson = (a, b) => a === b || a !== null && b !== null && typeof a === 'object' && typeof b === 'object'
+  && Object.keys(a).length === Object.keys(b).length && Object.keys(a).every(key => Object.hasOwn(b, key) && equalJson(a[key], b[key]));
+function validOperationResultV188(config, result) {
+  const operation = getXenoTrialsOperationV188(config.activityV119?.id), receipt = result?.operationV188;
+  const protocol = getXenoTrialsHordeProtocolV180(operation?.hordeProtocolId), horde = result?.hordeV180;
+  if (!operation || !protocol || !record(receipt?.state) || !record(horde) || result.rounds !== 1
+    || !record(result.wins) || !['player', 'opponent'].includes(result.winner)
+    || result.durationTicks > (operation.roundSeconds + 5) * 120
+    || horde.protocolId !== protocol.id || horde.totalEnemies !== protocol.totalEnemies
+    || !Number.isInteger(horde.kills) || horde.kills < 0 || horde.kills > protocol.totalEnemies
+    || !Number.isInteger(horde.wavesCleared) || horde.wavesCleared < 0 || horde.wavesCleared > protocol.waves.length
+    || horde.kills < protocol.waves.slice(0, horde.wavesCleared).reduce((sum, wave) => sum + wave.total, 0)
+    || !validateXenoTrialsOperationSnapshotV188(receipt.state, config, { tick: result.durationTicks })
+    || !validateXenoTrialsStageHazardsV188(result.stageHazardsV188, { stageId: config.stageId, seed: config.seed, tick: result.durationTicks })) return false;
+  const { state, ...summary } = receipt;
+  if (!equalJson(getXenoTrialsOperationReceiptV188(state, config), summary)) return false;
+  if (result.winner === 'player') return result.reason === 'operation-complete' && state.status === 'completed'
+    && result.wins.player === 1 && result.wins.opponent === 0;
+  return ({ 'operation-failed': 'structure-destroyed', 'operation-time': 'time', 'operation-ko': 'player-ko' })[result.reason] === state.failureReason
+    && state.status === 'failed'
+    && result.wins.player === 0 && result.wins.opponent === 1;
+}
+
 /** Consume the saved ticket once, only for a finished matching engine result. */
 export function settleXenoTrialsV96(value, result) {
   const state = normalizeXenoTrialsProgressV96(value), ticket = state.pending;
@@ -211,9 +239,13 @@ export function settleXenoTrialsV96(value, result) {
   const checkpointMatches = !checkpoint || result && result.durationTicks >= checkpoint.tick
     && result.hordeV180?.kills >= checkpoint.hordeV180.totalKills
     && result.hordeV180?.wavesCleared >= checkpoint.hordeV180.wavesCleared
-    && Object.entries(checkpoint.fighters[0].stats).every(([key, amount]) => (result.playerStats?.[key] || 0) >= amount);
+    && Object.entries(checkpoint.fighters[0].stats).every(([key, amount]) => (result.playerStats?.[key] || 0) >= amount)
+    && (!checkpoint.operationV188 || isXenoTrialsOperationForwardV188(checkpoint.operationV188, result.operationV188?.state)
+      && isXenoTrialsStageHazardsForwardV188(checkpoint.stageHazardsV188, result.stageHazardsV188));
+  const operation = ticket?.config.activityV119?.branch === 'operations';
   const horde = ticket?.config.activityV119?.branch === 'horde';
-  const outcomeValid = horde ? result && validHordeResultV180(ticket.config, result)
+  const outcomeValid = operation ? result && validOperationResultV188(ticket.config, result)
+    : horde ? result && !result.operationV188 && !result.stageHazardsV188 && validHordeResultV180(ticket.config, result)
     : result && !result.hordeV180 && Number.isInteger(result.rounds) && result.rounds >= 2 && result.rounds <= 5
       && ['ko', 'double-ko', 'time'].includes(result.reason)
       && record(result.wins) && ['player', 'opponent'].every(k => Number.isInteger(result.wins[k]) && result.wins[k] >= 0 && result.wins[k] <= 2)

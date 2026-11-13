@@ -13,6 +13,10 @@ import { normalizeXenoTrialsRulesV119 } from './xeno-trials-modes-v119.js';
 import { XENO_TRIALS_HORDE_LIMITS_V180 as HORDE_LIMITS, getXenoTrialsHordeProtocolV180,
   createXenoTrialsHordeStateV180, advanceXenoTrialsHordeDirectorV180 } from './xeno-trials-horde-v180.js';
 import { getXenoTrialsHordeSlotV186, getXenoTrialsHordeBossViewV186 } from './xeno-trials-horde-bosses-v186.js';
+import { getXenoTrialsOperationV188, createXenoTrialsOperationStateV188,
+  stepXenoTrialsOperationV188, getXenoTrialsOperationReceiptV188 } from './xeno-trials-operations-v188.js';
+import { createXenoTrialsStageHazardsV188, stepXenoTrialsStageHazardsV188 } from './xeno-trials-stage-hazards-v188.js';
+import { createXenoTrialsHordeCheckpointV186 } from './xeno-trials-horde-checkpoint-v186.js';
 import { XENO_TRIALS_ATTACKS_V96 } from './xeno-trials-combat-contract-v186.js';
 export { XENO_TRIALS_ATTACKS_V96 } from './xeno-trials-combat-contract-v186.js';
 
@@ -23,7 +27,7 @@ const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const finite = (value, fallback) => Number.isFinite(Number(value)) ? Number(value) : fallback;
 const ACTIONS = ['left', 'right', 'jump', 'guard', 'light', 'heavy', 'special', 'super'];
 const emptyInput = () => Object.fromEntries(ACTIONS.map(key => [key, false]));
-const input = value => Object.fromEntries(ACTIONS.map(key => [key, value?.[key] === true]));
+const input = (value, operation = false) => Object.fromEntries((operation ? [...ACTIONS, 'interact'] : ACTIONS).map(key => [key, value?.[key] === true]));
 // Preserve both physically held and already masked inputs across scene gates.
 const releaseGate = fighter => Object.fromEntries(ACTIONS.map(key => [key,
   fighter.rearmControls?.[key] === true || fighter.previousInput?.[key] === true]));
@@ -42,8 +46,9 @@ function makeFighter(side, id, variant) {
 
 /** Pure local match state. No clock, DOM, randomness source or save side effects. */
 export function createXenoTrialsMatchV96(config = {}) {
-  const hordeProtocol = getXenoTrialsHordeProtocolV180(config.activityV119?.branch === 'horde'
-    ? config.activityV119.id : config.hordeV180?.protocolId);
+  const operation = getXenoTrialsOperationV188(config.activityV119?.branch === 'operations' ? config.activityV119.id : config.operationV188?.id);
+  const hordeProtocol = getXenoTrialsHordeProtocolV180(operation?.hordeProtocolId || (config.activityV119?.branch === 'horde'
+    ? config.activityV119.id : config.hordeV180?.protocolId));
   const playerId = getXenoTrialsFighterV96(config.playerId)?.id || 'warrior';
   const opponentId = hordeProtocol?.opponentIds[0] || getXenoTrialsFighterV96(config.opponentId)?.id || 'arachnoid';
   const seed = (Math.trunc(finite(config.seed, 1969)) >>> 0) || 1969;
@@ -55,10 +60,11 @@ export function createXenoTrialsMatchV96(config = {}) {
     factionId: XENO_TRIALS_FACTIONS_V96.find(entry => entry.id === config.factionId)?.id || 'hive',
     stageId: XENO_TRIALS_STAGES_V96.find(entry => entry.id === config.stageId)?.id || 'containment-deck',
     difficulty: ['easy', 'normal', 'hard'].includes(config.difficulty) ? config.difficulty : 'normal',
-    roundsToWin: hordeProtocol ? 1 : clamp(Math.trunc(finite(config.roundsToWin, 2)), 1, 3), roundSeconds: hordeProtocol?.roundSeconds || rulesV119.timeLimitSeconds || clamp(finite(config.roundSeconds, 99), 15, 180), seed,
+    roundsToWin: hordeProtocol ? 1 : clamp(Math.trunc(finite(config.roundsToWin, 2)), 1, 3), roundSeconds: operation?.roundSeconds || hordeProtocol?.roundSeconds || rulesV119.timeLimitSeconds || clamp(finite(config.roundSeconds, 99), 15, 180), seed,
     rulesV119,
     ...(hordeProtocol ? { hordeV180: { protocolId: hordeProtocol.id } } : {}),
-    ...(config.activityV119 && ['campaign', 'contracts', 'challenges', 'on-demand', 'horde'].includes(config.activityV119.branch)
+    ...(operation ? { operationV188: { id: operation.id } } : {}),
+    ...(config.activityV119 && ['campaign', 'contracts', 'challenges', 'on-demand', 'horde', 'operations'].includes(config.activityV119.branch)
       && typeof config.activityV119.id === 'string' ? { activityV119: { branch: config.activityV119.branch,
         id: config.activityV119.id.slice(0, 64), ...(config.activityV119.branch === 'on-demand' ? { rules: rulesV119 } : {}) } } : {}),
     introSeconds: clamp(finite(config.introSeconds, .8), 0, 5),
@@ -72,9 +78,15 @@ export function createXenoTrialsMatchV96(config = {}) {
     projectiles: [], events: [], serial: 0, ai: createXenoTrialsBrainV119() };
   if (rulesV119.initialHp === 1) match.fighters.forEach(fighter => { fighter.hp = 1; });
   if (hordeProtocol) {
-    match.config.stageId = hordeProtocol.stageId; match.config.difficulty = hordeProtocol.difficulty; match.config.factionId = hordeProtocol.factionId;
+    match.config.stageId = operation?.stageId || hordeProtocol.stageId;
+    match.config.difficulty = operation?.difficulty || hordeProtocol.difficulty;
+    match.config.factionId = operation?.factionId || hordeProtocol.factionId;
     match.hordeV180 = createXenoTrialsHordeStateV180(hordeProtocol.id);
-    match.fighters = [match.fighters[0]]; match.fighters[0].x = 500;
+    match.fighters = [match.fighters[0]]; match.fighters[0].x = operation?.startX ?? 500;
+    if (operation) {
+      match.operationV188 = createXenoTrialsOperationStateV188(operation.id, match.config);
+      match.stageHazardsV188 = createXenoTrialsStageHazardsV188(match.config.stageId, match.config.seed, match.tick);
+    }
     advanceXenoTrialsHordeDirectorV180(match, (id, wave, serial, slot) => makeHordeFighterV180(match, id, wave, serial, slot));
   } else resolveXenoTrialsBodiesV105(match.fighters[0], match.fighters[1], 1);
   return match;
@@ -388,6 +400,11 @@ function finishHordeV180(match, winner, reason) {
     playerStats: { ...player.stats }, opponentStats, durationTicks: match.tick,
     hordeV180: { protocolId: state.protocolId, wavesCleared: state.wavesCleared, kills: state.totalKills, totalEnemies: state.totalEnemies,
       ...(state.bossFinaleV186 ? { bossFinaleV186: { ...getXenoTrialsHordeBossViewV186(getXenoTrialsHordeProtocolV180(state.protocolId), state, match.fighters) } } : {}) } };
+  if (match.operationV188) {
+    match.result.operationV188 = { ...getXenoTrialsOperationReceiptV188(match.operationV188, match.config),
+      state: JSON.parse(JSON.stringify(match.operationV188)) };
+    match.result.stageHazardsV188 = JSON.parse(JSON.stringify(match.stageHazardsV188));
+  }
   event(match, 'match-end', { winner, hordeV180: true });
 }
 
@@ -496,15 +513,29 @@ function fixedHordeStepV180(match, playerControls, opponentControls, dt) {
   for (const impact of impacts) applyImpact(match, impact);
   stepXenoTrialsAcidV152(match, dt, getXenoTrialsBodyBoundsV105, XENO_TRIALS_ARENA_V96,
     impact => applyImpact(match, impact), (type, details) => event(match, type, details));
+  if (match.operationV188) stepXenoTrialsStageHazardsV188(match, getXenoTrialsBodyBoundsV105, XENO_TRIALS_ARENA_V96,
+    impact => {
+      if (!match.fighters.includes(impact.to) || impact.to.hp <= 0 || !Number.isFinite(impact.damage) || impact.damage <= 0) return;
+      const damage = Math.min(impact.to.hp, impact.damage);
+      impact.to.hp -= damage; impact.to.hitFlash = .13;
+    }, (type, details) => event(match, type, details));
   collectXenoTrialsDeathBurstsV151(match, livingAtStart, getXenoTrialsBodyBoundsV105,
     impact => applyImpact(match, impact), (type, details) => event(match, type, details));
   match.timeRemaining = Math.max(0, match.timeRemaining - dt);
   const cleared = advanceXenoTrialsHordeDirectorV180(match,
     (id, wave, serial, slot) => makeHordeFighterV180(match, id, wave, serial, slot),
     (type, details) => event(match, type, details));
-  if (player.hp <= 0) finishHordeV180(match, 'opponent', 'horde-ko');
-  else if (cleared) finishHordeV180(match, 'player', 'horde-cleared');
-  else if (match.timeRemaining <= 0) finishHordeV180(match, 'opponent', 'horde-time');
+  if (match.operationV188) {
+    stepXenoTrialsOperationV188(match.operationV188, match, dt, playerControls, (type, details) => event(match, type, details));
+    if (player.hp <= 0) finishHordeV180(match, 'opponent', 'operation-ko');
+    else if (match.operationV188.status === 'completed') finishHordeV180(match, 'player', 'operation-complete');
+    else if (match.timeRemaining <= 0 || match.operationV188.failureReason === 'time') finishHordeV180(match, 'opponent', 'operation-time');
+    else if (match.operationV188.status === 'failed') finishHordeV180(match, 'opponent', 'operation-failed');
+  } else {
+    if (player.hp <= 0) finishHordeV180(match, 'opponent', 'horde-ko');
+    else if (cleared) finishHordeV180(match, 'player', 'horde-cleared');
+    else if (match.timeRemaining <= 0) finishHordeV180(match, 'opponent', 'horde-time');
+  }
 }
 
 function fixedStep(match, playerControls, opponentControls, dt) {
@@ -586,7 +617,7 @@ export function stepXenoTrialsMatchV96(match, dt, playerInput = {}, opponentInpu
   }
   match.opponentInputSourceV163 = source;
   match.accumulator += Math.min(dt, .25);
-  const a = input(playerInput), b = opponentInput === null ? null : input(opponentInput);
+  const a = input(playerInput, Boolean(match.operationV188)), b = opponentInput === null ? null : input(opponentInput);
   while (match.accumulator + 1e-10 >= XENO_TRIALS_STEP_V96) {
     match.accumulator = Math.max(0, match.accumulator - XENO_TRIALS_STEP_V96);
     fixedStep(match, a, b, XENO_TRIALS_STEP_V96);
@@ -606,6 +637,9 @@ export function getXenoTrialsSnapshotV96(match) {
  * paused state leaves activation with its runtime owner; no result is replayed.
  * Save-owner and match-ticket authorization remain the progression layer's job. */
 export function restoreXenoTrialsHordeMatchV180(snapshot) {
+  if (snapshot?.config?.activityV119?.branch === 'operations') {
+    return createXenoTrialsHordeCheckpointV186(snapshot, snapshot.config)?.snapshot || null;
+  }
   let value;
   try { value = JSON.parse(JSON.stringify(snapshot)); } catch { return null; }
   const state = value?.hordeV180, protocol = getXenoTrialsHordeProtocolV180(state?.protocolId);

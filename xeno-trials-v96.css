@@ -160,3 +160,17 @@
 .xt-hud-meta-v186 .button{pointer-events:auto;min-height:44px}
 .xt-boss-hud-v186 progress{grid-column:1/3;width:100%;height:10px;accent-color:#c99263}
 @media(max-width:680px){.xt-program-tools-v186{align-items:stretch}.xt-program-tools-v186 nav{width:100%;justify-content:space-between}.xt-program-tools-v186 label{width:100%}.xt-boss-hud-v186{grid-template-columns:1fr auto}.xt-boss-hud-v186 strong{grid-column:1/3}.xt-boss-hud-v186 progress{grid-column:1}.xt-input-hint-v186{font-size:11px}}
+
+/* Physical operation telemetry belongs to the same visible HUD paint layer. */
+.xt-operation-hud-v188{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px 12px;border-top:1px solid #7a8864;padding-top:8px;font:11px/1.4 monospace;color:#c8d9b5;min-width:0}
+.xt-operation-hud-v188[hidden]{display:none}
+.xt-operation-hud-v188>div,.xt-operation-hud-v188>p{grid-column:1/-1;margin:0;min-width:0;overflow-wrap:anywhere}
+.xt-operation-hud-v188>div{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.xt-operation-hud-v188>div>span{color:#edc98b;font-size:9px}
+.xt-match-hud .xt-operation-hud-v188 progress{height:6px;min-height:6px;align-self:center;accent-color:#d7c17f}
+.xt-operation-hud-v188 [data-xt="operation-hint"]{font-size:9px;color:#9fac99}
+.xt-controls [data-xeno-action="interact"]{border-color:#c9af73;color:#f1da9b;grid-column:1/-1;grid-row:3}
+
+.xt-operation-hud-v188 [data-xt="operation-hazard"]{color:#e8c18b;border-left:2px solid #b19763;padding-left:8px;font-size:9px}
+.xt-operation-hud-v188 [data-xt="operation-hazard"]:empty{display:none}
+.xt-operation-hud-v188 [data-xt="operation-hazard"][data-active="true"]{color:#ffd2a5;border-color:#e89969}

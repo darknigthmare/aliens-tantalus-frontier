@@ -34,10 +34,15 @@ export function getXenoTrialsVisualEnvelopeV119(fighter) {
 const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
 /** Read-only, damped two-target camera. Height, jumps, tails and native frames
  * are included. It never mutates a fighter, hitbox, physics tick or save. */
-export function createXenoTrialsCameraV119(fighters, viewport = { width: 1000, height: 560 }) {
+export function createXenoTrialsCameraV119(fighters, viewport = { width: 1000, height: 560 }, options = {}) {
   const camera = { center: 500, zoom: 1, floor: viewport.height * .81, initialized: false, previousCenter: null };
   const update = (values, dt = 0) => {
-    const envelopes = values.map(getXenoTrialsVisualEnvelopeV119).filter(Boolean);
+    const envelopes = values.map(fighter => {
+      const base = getXenoTrialsVisualEnvelopeV119(fighter), extra = options.envelope?.(fighter);
+      if (!base || !extra || ![extra.left, extra.right, extra.top, extra.bottom].every(Number.isFinite)) return base;
+      return { left: Math.min(base.left, extra.left), right: Math.max(base.right, extra.right),
+        top: Math.max(base.top, extra.top), bottom: Math.min(base.bottom, extra.bottom) };
+    }).filter(Boolean);
     if (!envelopes.length) return { ...camera };
     const left = Math.min(...envelopes.map(e => e.left)) - 70, right = Math.max(...envelopes.map(e => e.right)) + 70;
     const highest = Math.max(...envelopes.map(e => e.top)) + 40;

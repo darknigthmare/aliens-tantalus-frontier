@@ -145,3 +145,51 @@ html.xt-fullscreen-v119 #xeno-trials-v96.active{
   .xt-fullscreen-v119 [data-xt-step="combat"] .xt-boss-hud-v186 progress{grid-column:1}
   .xt-fullscreen-v119 [data-xt-step="combat"] .xt-hud-meta-v186{font-size:7px}
 }
+
+.xt-fullscreen-v119 [data-xt-step="combat"] .xt-operation-hud-v188{font-size:10px;gap:4px 10px}
+.xt-fullscreen-v119 [data-xt-step="combat"][data-xt-operation="true"] .xt-controls [data-xeno-action="interact"]{min-height:44px;font-size:11px}
+.xt-fullscreen-v119 #xeno-trials-v96[data-xt-step="combat"][data-xt-operation="true"]>.section-intro{margin:0!important;padding:0!important;height:44px;min-height:44px;box-sizing:border-box;align-items:center}
+.xt-fullscreen-v119 #xeno-trials-v96[data-xt-step="combat"][data-xt-operation="true"]>.section-intro>.button{margin:0;min-height:44px}
+@media(max-width:760px){.xt-fullscreen-v119 [data-xt-step="combat"] .xt-operation-hud-v188{font-size:9px;padding-top:6px}.xt-fullscreen-v119 .xt-operation-hud-v188>div>strong{font-size:9px}.xt-fullscreen-v119 .xt-operation-hud-v188 [data-xt="operation-hint"]{font-size:8px}}
+@media(max-height:520px){.xt-fullscreen-v119 [data-xt-step="combat"] .xt-operation-hud-v188{font-size:8px;gap:2px 8px;padding-top:4px}.xt-fullscreen-v119 [data-xt-step="combat"] .xt-operation-hud-v188 [data-xt="operation-hint"]{display:none}.xt-fullscreen-v119 [data-xt-step="combat"][data-xt-operation="true"] .xt-controls{gap:4px;bottom:60px}}
+
+/* A short landscape operation has its own instrument rail. The world gets a
+   real, separate viewport; controls never cover a body or the contact line. */
+@media(orientation:landscape) and (max-height:520px){
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-step="combat"][data-xt-operation="true"]{--xt-operation-rail:min(38vw,320px);height:100dvh;min-height:0;max-height:100dvh}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] :is(.xt-layout,.xt-main,[data-xt="combat-panel"]){min-height:0;max-height:100%;height:100%}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-arena{inset:0 var(--xt-operation-rail) 0 0;width:calc(100% - var(--xt-operation-rail));height:100%;min-height:0;max-height:100%}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-arena canvas{width:100%!important;height:100%!important;min-height:0;max-width:100%;max-height:100%!important;object-fit:contain;aspect-ratio:auto;margin:0}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-match-hud[data-horde="true"]{left:auto;right:6px;top:6px;width:calc(var(--xt-operation-rail) - 12px);box-sizing:border-box;max-height:calc(100dvh - 204px);overflow:auto;overscroll-behavior:contain;pointer-events:auto;grid-template-columns:minmax(0,1fr) 48px;padding:6px;gap:4px 8px}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-vitals{grid-template-rows:auto auto 6px auto 3px;gap:2px}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-vitals>.xt-side{display:none}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-vitals>strong{font-size:10px;min-height:0;line-height:1.2}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-vital-value{font-size:9px;line-height:1.2}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-match-clock [data-xt="clock"]{font-size:23px}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-match-clock [data-xt="score"]{font-size:11px}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-horde-telemetry{grid-column:1/-1;grid-row:2;border:0;padding:0}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-operation-hud-v188{grid-row:3}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-hud-meta-v186{grid-row:4}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] :is(.xt-horde-link,.xt-horde-phase,.xt-horde-total,.xt-horde-progress){display:none}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-horde-counter-row{justify-content:space-between;gap:8px}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-horde-counter-row>div{display:flex;align-items:center;gap:6px}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-horde-counter-row strong{font-size:13px;line-height:1}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-horde-counter-row span{font-size:6px}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-operation-hud-v188>div{flex-wrap:nowrap;font-size:8px}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-operation-hud-v188>div>span{display:none}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-operation-hud-v188>div>strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-operation-hud-v188 [data-xt="operation-hazard"]{font-size:8px;line-height:1.25}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));left:auto;right:6px;width:calc(var(--xt-operation-rail) - 12px);bottom:60px;gap:4px}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls button{min-height:44px;min-width:0;padding:5px 2px;font-size:8px}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls [data-xeno-action="super"]{grid-column:3/span 2;grid-row:3}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls [data-xeno-action="interact"]{grid-column:1/span 2;grid-row:3;font-size:9px}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls:has([data-xeno-action="super"][hidden]) [data-xeno-action="interact"]{grid-column:1/-1}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-actions{left:auto;right:calc(var(--xt-operation-rail) - 64px);bottom:8px}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"]>.section-intro{right:6px;bottom:8px}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"]>.section-intro>.button{min-height:44px;max-width:calc(var(--xt-operation-rail) - 84px);font-size:8px}
+}
+@media(max-width:760px) and (orientation:portrait){
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls [data-xeno-action="super"]{grid-column:3/span 2;grid-row:3}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls [data-xeno-action="interact"]{grid-column:1/span 2;grid-row:3}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls:has([data-xeno-action="super"][hidden]) [data-xeno-action="interact"]{grid-column:1/-1}
+}

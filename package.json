@@ -79,7 +79,9 @@
     "test:npc:station-relays:v166": "node --test scripts/verify-npc-station-relays-v166.mjs scripts/verify-npc-relay-locked-bulkheads-v166.mjs",
     "test:human:ship:v167": "node --test scripts/verify-player-arm-phase-v167.mjs scripts/verify-allied-patrol-phase-v167.mjs scripts/verify-ship-placement-v167.mjs scripts/verify-range-crew-interaction-v167.mjs",
     "test:tantalus:batch100:v168": "node --test scripts/verify-tantalus-batch100-v168.mjs scripts/verify-dialogue-portraits-v168.mjs scripts/verify-hub-backgrounds-v168.mjs",
-    "test:open:v177": "node --test scripts/verify-weapon-conservation-v177.mjs scripts/verify-hub-armory-layering-v177.mjs scripts/verify-tantalus-enrichment-v177.mjs scripts/verify-capture-observation-v177.mjs scripts/verify-npc-lift-queue-v177.mjs scripts/verify-weapon-feed-admission-v193.mjs"
+    "test:open:v177": "node --test scripts/verify-weapon-conservation-v177.mjs scripts/verify-hub-armory-layering-v177.mjs scripts/verify-tantalus-enrichment-v177.mjs scripts/verify-capture-observation-v177.mjs scripts/verify-npc-lift-queue-v177.mjs scripts/verify-weapon-feed-admission-v193.mjs",
+    "test:trials:operations:v188": "node --test scripts/verify-xeno-stage-operations-audit-v188.mjs scripts/verify-xeno-trials-operations-v188.mjs scripts/verify-xeno-trials-stage-hazards-v188.mjs scripts/verify-xeno-trials-runtime-operations-v188.mjs scripts/verify-xeno-trials-sprite-atlas-v188.mjs scripts/verify-xeno-trials-operation-presentation-v188.mjs scripts/verify-xeno-trials-operation-i18n-v188.mjs scripts/verify-xeno-trials-operations-engine-v188.mjs",
+    "qa:trials:operations:v188": "python3 scripts/qa-xeno-trials-operations-v188.py"
   },
   "engines": {
     "node": ">=22"

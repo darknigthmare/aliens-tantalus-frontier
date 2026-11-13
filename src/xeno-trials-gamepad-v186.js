@@ -16,7 +16,7 @@ const compatible = pad => pad && pad.connected !== false && pad.mapping === 'sta
 export function createXenoTrialsGamepadV186() {
   let owner = null, needsNeutral = true, pauseArmed = false;
   function reset() { needsNeutral = true; pauseArmed = false; }
-  function sample(gamepads, { active = false, paused = false, focused = true } = {}) {
+  function sample(gamepads, { active = false, paused = false, focused = true, allowInteract = false } = {}) {
     const pads = Array.from(gamepads || []).filter(compatible);
     let pad = owner === null ? null : pads.find(pad => pad.index === owner);
     const disconnected = owner !== null && !pad;
@@ -35,7 +35,8 @@ export function createXenoTrialsGamepadV186() {
       jump: button(pad, 0) || button(pad, 12),
       guard: button(pad, 6, .55) || button(pad, 4) || button(pad, 13),
       light: button(pad, 2), heavy: button(pad, 3), special: button(pad, 1),
-      super: button(pad, 7, .55) || button(pad, 5)
+      super: button(pad, 7, .55) || button(pad, 5),
+      ...(allowInteract ? { interact: button(pad, 10) } : {})
     };
     const combatHeld = Object.values(input).some(Boolean);
     if (input.left && input.right) input.left = input.right = false;

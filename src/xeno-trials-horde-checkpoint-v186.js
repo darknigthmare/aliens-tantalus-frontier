@@ -6,18 +6,21 @@ import { getXenoTrialsSuperV148 } from './xeno-trials-supers-v148.js';
 import { XENO_TRIALS_AI_STATES_V119 } from './xeno-trials-ai-v119.js';
 import { XENO_TRIALS_ACID_POOL_V152 as ACID, hasXenoTrialsAcidPoolsV152 } from './xeno-trials-acid-pools-v152.js';
 import { XENO_TRIALS_ARENA_V105 as ARENA } from './xeno-trials-geometry-v105.js';
+import { getXenoTrialsOperationV188, validateXenoTrialsOperationSnapshotV188,
+  isXenoTrialsOperationForwardV188 } from './xeno-trials-operations-v188.js';
+import { validateXenoTrialsStageHazardsV188, isXenoTrialsStageHazardsForwardV188 } from './xeno-trials-stage-hazards-v188.js';
 
 export const XENO_TRIALS_CHECKPOINT_LIMITS_V186 = Object.freeze({ maxCharacters: 524288, maxNodes: 40000, maxDepth: 24 });
-const actions = ['left', 'right', 'jump', 'guard', 'light', 'heavy', 'special', 'super'];
+const actions = ['left', 'right', 'jump', 'guard', 'light', 'heavy', 'special', 'super', 'interact'];
 const statsKeys = ['hits', 'damage', 'blocks', 'specials', 'supersV148', 'grappleTicksV153', 'acidTicksV152'];
 const coreKeys = ['version', 'config', 'rng', 'accumulator', 'tick', 'round', 'opponentInputSourceV163', 'phase', 'phaseTime',
   'paused', 'timeRemaining', 'wins', 'roundWinner', 'roundReason', 'result', 'fighters', 'projectiles', 'events', 'serial', 'ai',
-  'hordeV180', 'synthEffectsV110', 'acidDropsV152', 'acidPoolsV152', 'acidNextHitV152'];
+  'hordeV180', 'synthEffectsV110', 'acidDropsV152', 'acidPoolsV152', 'acidNextHitV152', 'operationV188', 'stageHazardsV188'];
 const record = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const integer = (value, low = 0, high = 1000000) => Number.isSafeInteger(value) && value >= low && value <= high;
 const number = (value, low, high) => Number.isFinite(value) && value >= low && value <= high;
 const controls = value => record(value) && Object.keys(value).every(key => actions.includes(key))
-  && actions.every(key => typeof value[key] === 'boolean');
+  && actions.every(key => typeof value[key] === 'boolean' || key === 'interact' && value[key] === undefined);
 const same = (a, b) => {
   if (a === b) return true;
   if (!a || !b || typeof a !== 'object' || typeof b !== 'object' || Array.isArray(a) !== Array.isArray(b)) return false;
@@ -135,28 +138,41 @@ function validAcid(match, protocol) {
 }
 
 function admitSnapshot(snapshot, ticket) {
-  const raw = boundedClone(snapshot), protocol = getXenoTrialsHordeProtocolV180(ticket?.activityV119?.id);
-  if (!raw || !protocol || ticket.activityV119.branch !== 'horde' || raw.result !== null || raw.grappleV153
+  const raw = boundedClone(snapshot), operation = ticket?.activityV119?.branch === 'operations' && getXenoTrialsOperationV188(ticket.activityV119.id);
+  const protocol = getXenoTrialsHordeProtocolV180(operation ? operation.hordeProtocolId : ticket?.activityV119?.id);
+  const duration = operation?.roundSeconds || protocol?.roundSeconds;
+  if (!raw || !protocol || !['horde', 'operations'].includes(ticket.activityV119.branch)
+    || ticket.activityV119.branch === 'operations' && !operation || raw.result !== null || raw.grappleV153
     || typeof ticket.matchId !== 'string' || !/^[a-zA-Z0-9_-]{1,96}$/.test(ticket.matchId) || !integer(ticket.seed, 1, 0x7fffffff)
     || raw.version !== 96 || raw.round !== 1 || raw.roundWinner !== null || raw.roundReason !== null
     || !same(raw.wins, { player: 0, opponent: 0 }) || !['intro', 'active'].includes(raw.phase)
-    || !['cpu', 'direct'].includes(raw.opponentInputSourceV163) || !integer(raw.tick, 0, (protocol.roundSeconds + 5) * 120)
+    || !['cpu', 'direct'].includes(raw.opponentInputSourceV163) || !integer(raw.tick, 0, (duration + 5) * 120)
     || !integer(raw.rng, 1, 0xffffffff) || !integer(raw.serial, 0, 1000000)
     || !number(raw.accumulator, 0, 1 / 120) || !number(raw.phaseTime, -1 / 120, 5)
-    || typeof raw.paused !== 'boolean' || !number(raw.timeRemaining, .00000001, protocol.roundSeconds)) return null;
+    || typeof raw.paused !== 'boolean' || !number(raw.timeRemaining, .00000001, duration)) return null;
   const config = raw.config;
   if (!record(config) || !['matchId', 'seed', 'playerId', 'opponentId', 'factionId', 'stageId', 'difficulty'].every(key => config[key] === ticket[key])
-    || config.activityV119?.branch !== 'horde' || config.activityV119.id !== protocol.id
+    || config.activityV119?.branch !== ticket.activityV119.branch || config.activityV119.id !== ticket.activityV119.id
     || config.opponentId !== protocol.opponentIds[0]
-    || !same(config.hordeV180, { protocolId: protocol.id }) || config.roundsToWin !== 1 || config.roundSeconds !== protocol.roundSeconds
-    || config.stageId !== protocol.stageId || config.difficulty !== protocol.difficulty || config.factionId !== protocol.factionId
+    || !same(config.hordeV180, { protocolId: protocol.id }) || config.roundsToWin !== 1 || config.roundSeconds !== duration
+    || config.stageId !== (operation?.stageId || protocol.stageId) || config.difficulty !== (operation?.difficulty || protocol.difficulty)
+    || config.factionId !== (operation?.factionId || protocol.factionId)
     || !same(config.rulesV119, ticket.rulesV119) || !number(config.introSeconds, 0, 5) || typeof config.holdRoundTransition !== 'boolean') return null;
   for (const side of ['player', 'opponent']) if (config[`${side}Variant`] !== (ticket[`${side}Id`] === 'arachnoid' ? ticket[`${side}Variant`] : null)) return null;
   const elapsed = raw.tick / 120 - Math.min(raw.tick / 120, config.introSeconds);
-  if (Math.abs(protocol.roundSeconds - raw.timeRemaining - elapsed) > .02) return null;
+  if (Math.abs(duration - raw.timeRemaining - elapsed) > .02) return null;
+  if (operation) {
+    if (!same(config.operationV188, { id: operation.id }) || raw.operationV188?.status !== 'active'
+      || !validateXenoTrialsOperationSnapshotV188(raw.operationV188, ticket, raw)
+      || !validateXenoTrialsStageHazardsV188(raw.stageHazardsV188, { stageId: config.stageId, seed: config.seed, tick: raw.tick })
+      || raw.stageHazardsV188.startedTick !== 0
+      || raw.stageHazardsV188.nextHits.some(row => row.actorId !== 'player'
+        && Number(row.actorId.slice(6)) > raw.hordeV180?.serial)
+      || raw.operationV188.elapsedTicks > 0 && Math.abs(raw.operationV188.startedTick - config.introSeconds * 120) > 1.01) return null;
+  } else if (raw.operationV188 !== undefined || raw.stageHazardsV188 !== undefined || config.operationV188 !== undefined) return null;
   const horde = raw.hordeV180;
   if (!record(horde) || horde.schema !== 180 || horde.protocolId !== protocol.id
-    || !integer(horde.wave, 1, protocol.waves.length) || !['active', 'intermission'].includes(horde.phase)
+    || !integer(horde.wave, 1, protocol.waves.length) || !(operation ? ['active', 'intermission', 'complete'] : ['active', 'intermission']).includes(horde.phase)
     || horde.waveCount !== protocol.waves.length || horde.totalEnemies !== protocol.totalEnemies || horde.maxConcurrent !== LIMITS.maxConcurrent
     || !integer(horde.nextSpawnTick, 0, raw.tick + LIMITS.reinforcementTicks)
     || !integer(horde.nextWaveTick, 0, raw.tick + LIMITS.intermissionTicks)) return null;
@@ -168,7 +184,8 @@ function admitSnapshot(snapshot, ticket) {
     || horde.waveKills !== horde.waveSpawned - raw.fighters.length + 1 || horde.totalKills !== preceding + horde.waveKills
     || horde.totalRemaining !== protocol.totalEnemies - horde.totalKills || horde.alive !== raw.fighters.length - 1
     || horde.remaining !== wave.total - horde.waveSpawned || horde.concurrent !== wave.concurrent
-    || horde.wavesCleared !== (horde.phase === 'intermission' ? horde.wave : horde.wave - 1)
+    || horde.wavesCleared !== (['intermission', 'complete'].includes(horde.phase) ? horde.wave : horde.wave - 1)
+    || (horde.phase === 'complete' && (horde.wave !== horde.waveCount || horde.alive !== 0 || horde.remaining !== 0))
     || (horde.phase === 'intermission' && (horde.alive !== 0 || horde.waveKills !== wave.total
       || horde.wave === horde.waveCount || horde.nextWaveTick <= raw.tick))) return null;
   if (protocol.bossFinaleV186 ? !same(horde.bossFinaleV186, protocol.bossFinaleV186) : horde.bossFinaleV186 !== undefined) return null;
@@ -202,7 +219,7 @@ function admitSnapshot(snapshot, ticket) {
     || !Array.isArray(raw.events) || raw.events.length > 32 || raw.events.some(event => !integer(event.id, 1, raw.serial)
       || !integer(event.tick, 0, raw.tick) || typeof event.type !== 'string' || ['match-end', 'round-end'].includes(event.type))) return null;
   const receivedDamage = horde.opponentStats.damage + raw.fighters.slice(1).reduce((sum, enemy) => sum + enemy.stats.damage, 0);
-  if (receivedDamage !== playerDefinition.hp - raw.fighters[0].hp) return null;
+  if (receivedDamage + (operation ? raw.stageHazardsV188.playerDamage : 0) !== playerDefinition.hp - raw.fighters[0].hp) return null;
   if (raw.synthEffectsV110 !== undefined && (!Array.isArray(raw.synthEffectsV110) || raw.synthEffectsV110.length > LIMITS.maxEffects
     || raw.synthEffectsV110.some(effect => !number(effect.life, .00000001, 1) || !number(effect.x, ARENA.left - 500, ARENA.right + 500)
       || !number(effect.y, 0, 5000) || !number(effect.radius, 0, 1000)))) return null;
@@ -219,14 +236,18 @@ export function createXenoTrialsHordeCheckpointV186(snapshot, ticketConfig) {
     protocolId: admitted.hordeV180.protocolId, tick: admitted.tick, snapshot: admitted } : null;
 }
 export function normalizeXenoTrialsHordeCheckpointV186(value, ticketConfig) {
+  const operation = ticketConfig?.activityV119?.branch === 'operations' && getXenoTrialsOperationV188(ticketConfig.activityV119.id);
   if (!record(value) || value.schema !== 186 || value.matchId !== ticketConfig?.matchId || value.seed !== ticketConfig?.seed
-    || value.protocolId !== ticketConfig?.activityV119?.id || value.tick !== value.snapshot?.tick) return null;
+    || value.protocolId !== (operation ? operation.hordeProtocolId : ticketConfig?.activityV119?.id) || value.tick !== value.snapshot?.tick) return null;
   return createXenoTrialsHordeCheckpointV186(value.snapshot, ticketConfig);
 }
 
 export function isXenoTrialsCheckpointForwardV186(previous, next) {
   if (!previous) return true;
   const a = previous.snapshot, b = next.snapshot;
+  if (Boolean(a.operationV188) !== Boolean(b.operationV188)
+    || a.operationV188 && (!isXenoTrialsOperationForwardV188(a.operationV188, b.operationV188)
+      || !isXenoTrialsStageHazardsForwardV188(a.stageHazardsV188, b.stageHazardsV188))) return false;
   if (next.tick < previous.tick || b.hordeV180.wave < a.hordeV180.wave || b.hordeV180.totalKills < a.hordeV180.totalKills
     || b.hordeV180.serial < a.hordeV180.serial || b.fighters[0].hp > a.fighters[0].hp) return false;
   for (const key of statsKeys) if ((b.fighters[0].stats[key] || 0) < (a.fighters[0].stats[key] || 0)) return false;

@@ -1,0 +1,476 @@
+{
+  "schema": 188,
+  "date": "2026-11-13",
+  "scope": "four-identity-primary-claw-walk-reaction-and-ko-art",
+  "counts": {
+    "newImages": 4,
+    "newKeyPoses": 40,
+    "posesPerIdentity": 10,
+    "primaryFrameReferenceSets": 0,
+    "canon1to1Closures": 0
+  },
+  "generator": "OpenAI image_gen",
+  "method": "Four independent reference-image editing calls, one project plate per identity, transparent_background=true. Candidate PNGs were inspected before identical bytes were copied to the public paths. No Python drawing, alpha cleanup, repainting, resizing or pose synthesis was performed.",
+  "fidelity": {
+    "canonExact": false,
+    "primaryVisualReferenceRecovered": false,
+    "sourcePlateIdentityStatus": "fan-made-user-import",
+    "reviewScope": "Consistency with the four active project plates, recognizable color/anatomical signatures, ten distinct key poses and a genuinely prone final KO. This does not certify canonical anatomy, exact film/game motion, measured body ratios or original animation frame timing.",
+    "remaining": [
+      "Primary orthographic and animation references remain absent for these four sheets.",
+      "The old plates are project fan imports, not verified primary franchise frames.",
+      "Two walking contacts and three primary-claw phases do not provide new special, super, jump, capture or paired choreography sheets."
+    ]
+  },
+  "grid": {
+    "requestedColumns": 5,
+    "requestedRows": 2,
+    "observedWidth": 1983,
+    "observedHeight": 793,
+    "rectangles": "Measured separately for each row; not equal fractional column cuts. The atlas data module is the authoritative runtime rectangle/anchor contract.",
+    "scale": "One identity scale computed from idle reference height, held constant across all ten poses including the prone KO."
+  },
+  "alphaReview": {
+    "silhouetteThreshold": 16,
+    "maximumAcceptedCutAlpha": 1,
+    "groundContactThreshold": 128,
+    "technicalLimit": "Low-alpha particles exist in some gutters. Variable cuts preserve all body pixels; only alpha<=1 specks can be crossed. Original PNG pixels remain untouched. This is not a strict-zero-alpha gutter claim."
+  },
+  "sourceContext": [
+    {
+      "referenceId": "V159-REF-010",
+      "registry": "docs/forge/xeno-trials/references-v159.json",
+      "url": "https://www.20thcenturystudios.com/movies/aliens",
+      "kind": "film-studio-primary",
+      "scope": "Aliens film identity/cast and published-image metadata only; no new primary pose or animation frame was recovered for this sheet."
+    },
+    {
+      "referenceId": "V159-REF-002",
+      "registry": "docs/forge/xeno-trials/references-v159.json",
+      "url": "https://www.aliensfireteamelite.com/en/releasenotes/",
+      "kind": "game-official-primary",
+      "scope": "Qualitative Prowler grapple/capability context only; no complete animation cycle, frame timing or 2D pose geometry."
+    }
+  ],
+  "images": [
+    {
+      "fighterId": "warrior",
+      "profileId": "castes-film_warrior_aliens_1986",
+      "franchiseContext": "Aliens (1986)",
+      "sourcePose": {
+        "path": "assets/user/castes-v87/film_warrior_aliens_1986.png",
+        "sha256": "c791a14045116531425d270c3edd61384b063d82a0bddf4e23195e9397ecb65f",
+        "width": 1536,
+        "height": 1024,
+        "facing": 1,
+        "provenance": "fan-made-user-import",
+        "identityVerified": false,
+        "canonExact": false
+      },
+      "texture": {
+        "path": "assets/openai/sprites/xeno-trials-v188/warrior-combat-sheet.png",
+        "sha256": "2ef7903a864d621f42d4720cf61483b7445141519a5752c36e39fb6418148e91",
+        "width": 1983,
+        "height": 793,
+        "bytes": 1555753,
+        "alphaExtrema": [
+          0,
+          255
+        ]
+      },
+      "sourcePreserved": true,
+      "pixelTransformation": "none; exact copy of generated PNG",
+      "signatureReview": "Black/gunmetal ridged elongated skull, rib cage, curved dorsal pipes, long narrow segmented tail and bipedal digitigrade legs.",
+      "lowAlphaMassPercent": 0.44,
+      "exactPrompt": "Produce a NEW production sprite atlas from the supplied ONE character reference. EXACTLY TEN separate full-body poses of the SAME character, arranged in a precise regular grid of FIVE columns and TWO rows, read left-to-right then top-to-bottom. Wide transparent canvas approximately 2560 by 1024, 5:2 aspect ratio. No labels, numbers, panel outlines, background, vignette, cast shadow, glow, horizon, floor marks or checkerboard baked into pixels. Real transparent background with clean cutout alpha around each whole sprite. Ten isolated sprites only, ONE sprite in each equally sized cell with generous transparent padding on every side, at least 8% empty gutter. Do NOT let tails, claws or head cross a cell boundary. Keep the exact recognizable anatomy, proportions, palette and tightly shaded detailed retro sprite rendering of the provided reference, no redesign or photoreal restyle. All sprites are strict side-view or the same slight side angle as the source, ALL FACING RIGHT, head pointing right and tail behind to the left. Use ONE CONSTANT PIXEL SCALE for the organism in every cell: the head/skull length must stay equal across standing, walking, attacking and lying poses. Never enlarge a short KO pose to fill a cell. Feet or the lowest supported body point align to the SAME horizontal ground height near 90% of cell height in every cell; nothing extends beneath that support plane. Keep the entire long tail inside each frame by bending it naturally, not chopping it or shortening it. Preserve coherent bright edges and the original metallic detailed shading. The grid positions are:\nTOP ROW, columns 1–5:\n1 idle neutral alert stance;\n2 walk contact A, near leg or limb extended forward;\n3 walk contact B, opposite leg or limb forward, visibly distinct limb positions from cell 2;\n4 primary CLAW strike windup, forelimb pulled back and body braced;\n5 primary CLAW strike impact, ONE forelimb extended forward to the right with fingers open, natural reach, rest of body remains same size.\nBOTTOM ROW, columns 1–5:\n6 claw strike recovery, forelimb returning and weight settling; distinct from idle;\n7 guard braced, forelimbs held defensively in front of torso/head;\n8 hit recoil, spine bends back and forelimbs lifted slightly, still recognizable and supported;\n9 KO falling phase: knees/elbows buckling, head and chest descending towards the ground; low collapsed pose, not a standing character tilted;\n10 KO final: entire creature genuinely lying horizontally on its SIDE, torso, shoulder and long skull low on the same ground plane, limbs folded and tail resting low; unmistakably fully prone, not crouching or kneeling. No gore, severing or damage effects.\nThe attack is the ordinary physical claw strike ONLY, never an acid special, tail special or a super animation. Ten coherent new drawings with real changed joint poses. Do not repeat the same standing silhouette across the action cells.\n\nIDENTITY LOCK: the supplied black biomechanical Warrior. Tall BIPEDAL digitigrade stance, elongated ridged skull with ribbed crown and no eyes, silver/gunmetal edge highlights on black chitin, exposed rib cage, FOUR curved dorsal tubes, long thin segmented tail with small pointed end, two long arms with narrow claws. Maintain the source skull silhouette and rib/tube arrangement in all ten poses. The character must NOT become a smooth-domed runner, a red armored Prowler or a yellow-gland Spitter.",
+      "frameReview": [
+        {
+          "index": 0,
+          "id": "idle",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Neutral silhouette and characteristic skull, torso, limbs and tail remain recognizable.",
+          "canonExact": false
+        },
+        {
+          "index": 1,
+          "id": "walk-a",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "First forward locomotion contact is visibly distinct from idle.",
+          "canonExact": false
+        },
+        {
+          "index": 2,
+          "id": "walk-b",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Opposite limb contact differs from walk-a; no horizontal image flip is substituted.",
+          "canonExact": false
+        },
+        {
+          "index": 3,
+          "id": "attack-windup",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Primary forelimb strike anticipation, with braced support and retracted striking limb.",
+          "canonExact": false
+        },
+        {
+          "index": 4,
+          "id": "attack-impact",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Primary forelimb/claw reaches forward; no projectile, super effect or damage decal is drawn.",
+          "canonExact": false
+        },
+        {
+          "index": 5,
+          "id": "attack-recovery",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Forelimb and weight return from the strike in a pose distinct from idle and impact.",
+          "canonExact": false
+        },
+        {
+          "index": 6,
+          "id": "guard",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Defensive bracing brings forelimbs in front of the body without changing species identity.",
+          "canonExact": false
+        },
+        {
+          "index": 7,
+          "id": "hit-recoil",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Visible torso/head recoil differs from guard and attack; the actor remains supported.",
+          "canonExact": false
+        },
+        {
+          "index": 8,
+          "id": "ko-fall",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Lowered collapse is drawn through bent limbs and descending head/chest; not a rotated static plate.",
+          "canonExact": false
+        },
+        {
+          "index": 9,
+          "id": "ko-ground",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Final silhouette is genuinely horizontal and lying on its side, with low skull/torso and resting tail.",
+          "canonExact": false
+        }
+      ]
+    },
+    {
+      "fighterId": "runner",
+      "profileId": "castes-film_runner_alien3_1992",
+      "franchiseContext": "Alien 3 (1992)",
+      "sourcePose": {
+        "path": "assets/user/castes-v87/film_runner_alien3_1992.png",
+        "sha256": "f117c7ad0e6da9a02d3a4ce315066d75acfd67a909620f560ff6cd8c3d7b64b3",
+        "width": 1536,
+        "height": 1024,
+        "facing": 1,
+        "provenance": "fan-made-user-import",
+        "identityVerified": false,
+        "canonExact": false
+      },
+      "texture": {
+        "path": "assets/openai/sprites/xeno-trials-v188/runner-combat-sheet.png",
+        "sha256": "3df7c0df3b7c7d4109d888c46ac1a9f2beffbe89b6fd8cf065e63abdba14ea74",
+        "width": 1983,
+        "height": 793,
+        "bytes": 1162201,
+        "alphaExtrema": [
+          0,
+          255
+        ]
+      },
+      "sourcePreserved": true,
+      "pixelTransformation": "none; exact copy of generated PNG",
+      "signatureReview": "Copper-brown smooth skull, slender quadruped torso and long tapering segmented tail; no upright Warrior conversion.",
+      "lowAlphaMassPercent": 0.6,
+      "exactPrompt": "Produce a NEW production sprite atlas from the supplied ONE character reference. EXACTLY TEN separate full-body poses of the SAME character, arranged in a precise regular grid of FIVE columns and TWO rows, read left-to-right then top-to-bottom. Wide transparent canvas approximately 2560 by 1024, 5:2 aspect ratio. No labels, numbers, panel outlines, background, vignette, cast shadow, glow, horizon, floor marks or checkerboard baked into pixels. Real transparent background with clean cutout alpha around each whole sprite. Ten isolated sprites only, ONE sprite in each equally sized cell with generous transparent padding on every side, at least 8% empty gutter. Do NOT let tails, claws or head cross a cell boundary. Keep the exact recognizable anatomy, proportions, palette and tightly shaded detailed retro sprite rendering of the provided reference, no redesign or photoreal restyle. All sprites are strict side-view or the same slight side angle as the source, ALL FACING RIGHT, head pointing right and tail behind to the left. Use ONE CONSTANT PIXEL SCALE for the organism in every cell: the head/skull length must stay equal across standing, walking, attacking and lying poses. Never enlarge a short KO pose to fill a cell. Feet or the lowest supported body point align to the SAME horizontal ground height near 90% of cell height in every cell; nothing extends beneath that support plane. Keep the entire long tail inside each frame by bending it naturally, not chopping it or shortening it. Preserve coherent bright edges and the original metallic detailed shading. The grid positions are:\nTOP ROW, columns 1–5:\n1 idle neutral alert stance;\n2 walk contact A, near leg or limb extended forward;\n3 walk contact B, opposite leg or limb forward, visibly distinct limb positions from cell 2;\n4 primary CLAW strike windup, forelimb pulled back and body braced;\n5 primary CLAW strike impact, ONE forelimb extended forward to the right with fingers open, natural reach, rest of body remains same size.\nBOTTOM ROW, columns 1–5:\n6 claw strike recovery, forelimb returning and weight settling; distinct from idle;\n7 guard braced, forelimbs held defensively in front of torso/head;\n8 hit recoil, spine bends back and forelimbs lifted slightly, still recognizable and supported;\n9 KO falling phase: knees/elbows buckling, head and chest descending towards the ground; low collapsed pose, not a standing character tilted;\n10 KO final: entire creature genuinely lying horizontally on its SIDE, torso, shoulder and long skull low on the same ground plane, limbs folded and tail resting low; unmistakably fully prone, not crouching or kneeling. No gore, severing or damage effects.\nThe attack is the ordinary physical claw strike ONLY, never an acid special, tail special or a super animation. Ten coherent new drawings with real changed joint poses. Do not repeat the same standing silhouette across the action cells.\n\nIDENTITY LOCK: the supplied copper-brown / bronze QUADRUPEDAL Runner / Dog Alien. Low sloping animal-like posture with long slender hind legs and low forward forelimbs, long smooth curved dark brown skull with bright bronze rim, narrow rib cage and long thin tapering segmented tail. Preserve the exact slender proportions and brown metallic material of this source adaptation. Walking cells are quadruped gait contacts and the claw strike raises just one near forelimb while other limbs brace. Guard remains low on hind legs with forelimbs near head. NO upright Warrior body, NO four tall Warrior exhaust tubes, NO red armor, NO yellow glands, NO spiked crown. KO final is a bronze quadruped lying fully sideways with head resting at ground.",
+      "frameReview": [
+        {
+          "index": 0,
+          "id": "idle",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Neutral silhouette and characteristic skull, torso, limbs and tail remain recognizable.",
+          "canonExact": false
+        },
+        {
+          "index": 1,
+          "id": "walk-a",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "First forward locomotion contact is visibly distinct from idle.",
+          "canonExact": false
+        },
+        {
+          "index": 2,
+          "id": "walk-b",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Opposite limb contact differs from walk-a; no horizontal image flip is substituted.",
+          "canonExact": false
+        },
+        {
+          "index": 3,
+          "id": "attack-windup",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Primary forelimb strike anticipation, with braced support and retracted striking limb.",
+          "canonExact": false
+        },
+        {
+          "index": 4,
+          "id": "attack-impact",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Primary forelimb/claw reaches forward; no projectile, super effect or damage decal is drawn.",
+          "canonExact": false
+        },
+        {
+          "index": 5,
+          "id": "attack-recovery",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Forelimb and weight return from the strike in a pose distinct from idle and impact.",
+          "canonExact": false
+        },
+        {
+          "index": 6,
+          "id": "guard",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Defensive bracing brings forelimbs in front of the body without changing species identity.",
+          "canonExact": false
+        },
+        {
+          "index": 7,
+          "id": "hit-recoil",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Visible torso/head recoil differs from guard and attack; the actor remains supported.",
+          "canonExact": false
+        },
+        {
+          "index": 8,
+          "id": "ko-fall",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Lowered collapse is drawn through bent limbs and descending head/chest; not a rotated static plate.",
+          "canonExact": false
+        },
+        {
+          "index": 9,
+          "id": "ko-ground",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Final silhouette is genuinely horizontal and lying on its side, with low skull/torso and resting tail.",
+          "canonExact": false
+        }
+      ]
+    },
+    {
+      "fighterId": "prowler",
+      "profileId": "castes-game_afe_prowler",
+      "franchiseContext": "Aliens: Fireteam Elite (2021)",
+      "sourcePose": {
+        "path": "assets/user/castes-v87/game_afe_prowler.png",
+        "sha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+        "width": 1536,
+        "height": 1024,
+        "facing": 1,
+        "provenance": "fan-made-user-import",
+        "identityVerified": false,
+        "canonExact": false
+      },
+      "texture": {
+        "path": "assets/openai/sprites/xeno-trials-v188/prowler-combat-sheet.png",
+        "sha256": "602d78555ace3a5ed55a5ea35165fffa3689dba21fbd345d1956f53fc4b6bf35",
+        "width": 1983,
+        "height": 793,
+        "bytes": 1619698,
+        "alphaExtrema": [
+          0,
+          255
+        ]
+      },
+      "sourcePreserved": true,
+      "pixelTransformation": "none; exact copy of generated PNG",
+      "signatureReview": "Red/black angular head and armor plates, dark dorsal blades, low quadruped anatomy and hooked scorpion-like tail.",
+      "lowAlphaMassPercent": 0.45,
+      "exactPrompt": "Produce a NEW production sprite atlas from the supplied ONE character reference. EXACTLY TEN separate full-body poses of the SAME character, arranged in a precise regular grid of FIVE columns and TWO rows, read left-to-right then top-to-bottom. Wide transparent canvas approximately 2560 by 1024, 5:2 aspect ratio. No labels, numbers, panel outlines, background, vignette, cast shadow, glow, horizon, floor marks or checkerboard baked into pixels. Real transparent background with clean cutout alpha around each whole sprite. Ten isolated sprites only, ONE sprite in each equally sized cell with generous transparent padding on every side, at least 8% empty gutter. Do NOT let tails, claws or head cross a cell boundary. Keep the exact recognizable anatomy, proportions, palette and tightly shaded detailed retro sprite rendering of the provided reference, no redesign or photoreal restyle. All sprites are strict side-view or the same slight side angle as the source, ALL FACING RIGHT, head pointing right and tail behind to the left. Use ONE CONSTANT PIXEL SCALE for the organism in every cell: the head/skull length must stay equal across standing, walking, attacking and lying poses. Never enlarge a short KO pose to fill a cell. Feet or the lowest supported body point align to the SAME horizontal ground height near 90% of cell height in every cell; nothing extends beneath that support plane. Keep the entire long tail inside each frame by bending it naturally, not chopping it or shortening it. Preserve coherent bright edges and the original metallic detailed shading. The grid positions are:\nTOP ROW, columns 1–5:\n1 idle neutral alert stance;\n2 walk contact A, near leg or limb extended forward;\n3 walk contact B, opposite leg or limb forward, visibly distinct limb positions from cell 2;\n4 primary CLAW strike windup, forelimb pulled back and body braced;\n5 primary CLAW strike impact, ONE forelimb extended forward to the right with fingers open, natural reach, rest of body remains same size.\nBOTTOM ROW, columns 1–5:\n6 claw strike recovery, forelimb returning and weight settling; distinct from idle;\n7 guard braced, forelimbs held defensively in front of torso/head;\n8 hit recoil, spine bends back and forelimbs lifted slightly, still recognizable and supported;\n9 KO falling phase: knees/elbows buckling, head and chest descending towards the ground; low collapsed pose, not a standing character tilted;\n10 KO final: entire creature genuinely lying horizontally on its SIDE, torso, shoulder and long skull low on the same ground plane, limbs folded and tail resting low; unmistakably fully prone, not crouching or kneeling. No gore, severing or damage effects.\nThe attack is the ordinary physical claw strike ONLY, never an acid special, tail special or a super animation. Ten coherent new drawings with real changed joint poses. Do not repeat the same standing silhouette across the action cells.\n\nIDENTITY LOCK: the supplied crimson RED AND BLACK armored QUADRUPEDAL Prowler adaptation. Preserve its unmistakable broad angular elongated armored skull, red edged carapace plates, raised dark blade-like dorsal spines, red shoulder and thigh armor framing black exposed ribbed tissue, and heavy segmented SCORPION-LIKE TAIL with a large curved hooked tip. Retain exactly that red/black palette, sharp red plating and clawed quadruped anatomy in all ten cells; do not replace it with a black generic Warrior, brown Runner or yellow Spitter. Walking is a low four-limbed gait, claw attacks reach from a braced crouch. Tail may curl overhead in supported poses but all of it fits inside each cell. In the final KO the red armored torso and skull lie on the ground and the heavy tail curls low beside the body, not held upright.",
+      "frameReview": [
+        {
+          "index": 0,
+          "id": "idle",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Neutral silhouette and characteristic skull, torso, limbs and tail remain recognizable.",
+          "canonExact": false
+        },
+        {
+          "index": 1,
+          "id": "walk-a",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "First forward locomotion contact is visibly distinct from idle.",
+          "canonExact": false
+        },
+        {
+          "index": 2,
+          "id": "walk-b",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Opposite limb contact differs from walk-a; no horizontal image flip is substituted.",
+          "canonExact": false
+        },
+        {
+          "index": 3,
+          "id": "attack-windup",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Primary forelimb strike anticipation, with braced support and retracted striking limb.",
+          "canonExact": false
+        },
+        {
+          "index": 4,
+          "id": "attack-impact",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Primary forelimb/claw reaches forward; no projectile, super effect or damage decal is drawn.",
+          "canonExact": false
+        },
+        {
+          "index": 5,
+          "id": "attack-recovery",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Forelimb and weight return from the strike in a pose distinct from idle and impact.",
+          "canonExact": false
+        },
+        {
+          "index": 6,
+          "id": "guard",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Defensive bracing brings forelimbs in front of the body without changing species identity.",
+          "canonExact": false
+        },
+        {
+          "index": 7,
+          "id": "hit-recoil",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Visible torso/head recoil differs from guard and attack; the actor remains supported.",
+          "canonExact": false
+        },
+        {
+          "index": 8,
+          "id": "ko-fall",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Lowered collapse is drawn through bent limbs and descending head/chest; not a rotated static plate.",
+          "canonExact": false
+        },
+        {
+          "index": 9,
+          "id": "ko-ground",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Final silhouette is genuinely horizontal and lying on its side, with low skull/torso and resting tail.",
+          "canonExact": false
+        }
+      ]
+    },
+    {
+      "fighterId": "spitter",
+      "profileId": "castes-game_acm_spitter",
+      "franchiseContext": "Aliens: Colonial Marines (2013)",
+      "sourcePose": {
+        "path": "assets/user/castes-v87/game_acm_spitter.png",
+        "sha256": "c281ad7c020999e2796af1c904be45c028bd8643e45bfc45b93edaf5ba4642c7",
+        "width": 1536,
+        "height": 1024,
+        "facing": 1,
+        "provenance": "fan-made-user-import",
+        "identityVerified": false,
+        "canonExact": false
+      },
+      "texture": {
+        "path": "assets/openai/sprites/xeno-trials-v188/spitter-combat-sheet.png",
+        "sha256": "e59450c2680221e2080682bd77c2c83352dd9d72125aa2f6bca27c8277a6f2b5",
+        "width": 1983,
+        "height": 793,
+        "bytes": 1647523,
+        "alphaExtrema": [
+          0,
+          255
+        ]
+      },
+      "sourcePreserved": true,
+      "pixelTransformation": "none; exact copy of generated PNG",
+      "signatureReview": "Purple-black material, silver head edges, two yellow head sacs, backward spikes and twin-crescent tail tip.",
+      "lowAlphaMassPercent": 0.76,
+      "exactPrompt": "Produce a NEW production sprite atlas from the supplied ONE character reference. EXACTLY TEN separate full-body poses of the SAME character, arranged in a precise regular grid of FIVE columns and TWO rows, read left-to-right then top-to-bottom. Wide transparent canvas approximately 2560 by 1024, 5:2 aspect ratio. No labels, numbers, panel outlines, background, vignette, cast shadow, glow, horizon, floor marks or checkerboard baked into pixels. Real transparent background with clean cutout alpha around each whole sprite. Ten isolated sprites only, ONE sprite in each equally sized cell with generous transparent padding on every side, at least 8% empty gutter. Do NOT let tails, claws or head cross a cell boundary. Keep the exact recognizable anatomy, proportions, palette and tightly shaded detailed retro sprite rendering of the provided reference, no redesign or photoreal restyle. All sprites are strict side-view or the same slight side angle as the source, ALL FACING RIGHT, head pointing right and tail behind to the left. Use ONE CONSTANT PIXEL SCALE for the organism in every cell: the head/skull length must stay equal across standing, walking, attacking and lying poses. Never enlarge a short KO pose to fill a cell. Feet or the lowest supported body point align to the SAME horizontal ground height near 90% of cell height in every cell; nothing extends beneath that support plane. Keep the entire long tail inside each frame by bending it naturally, not chopping it or shortening it. Preserve coherent bright edges and the original metallic detailed shading. The grid positions are:\nTOP ROW, columns 1–5:\n1 idle neutral alert stance;\n2 walk contact A, near leg or limb extended forward;\n3 walk contact B, opposite leg or limb forward, visibly distinct limb positions from cell 2;\n4 primary CLAW strike windup, forelimb pulled back and body braced;\n5 primary CLAW strike impact, ONE forelimb extended forward to the right with fingers open, natural reach, rest of body remains same size.\nBOTTOM ROW, columns 1–5:\n6 claw strike recovery, forelimb returning and weight settling; distinct from idle;\n7 guard braced, forelimbs held defensively in front of torso/head;\n8 hit recoil, spine bends back and forelimbs lifted slightly, still recognizable and supported;\n9 KO falling phase: knees/elbows buckling, head and chest descending towards the ground; low collapsed pose, not a standing character tilted;\n10 KO final: entire creature genuinely lying horizontally on its SIDE, torso, shoulder and long skull low on the same ground plane, limbs folded and tail resting low; unmistakably fully prone, not crouching or kneeling. No gore, severing or damage effects.\nThe attack is the ordinary physical claw strike ONLY, never an acid special, tail special or a super animation. Ten coherent new drawings with real changed joint poses. Do not repeat the same standing silhouette across the action cells.\n\nIDENTITY LOCK: the supplied black-purple Spitter adaptation with TWO VERY VISIBLE YELLOW glowing-looking biological sacs recessed along the underside/sides of the elongated head, silver-white hard edges around the skull, crown of backward-pointing spines, ribbed dark torso, long bipedal clawed limbs, and long segmented tail terminating in a DISTINCTIVE DOUBLE-CRESCENT / TWO-PRONG BLADE. Keep these two yellow sacs anatomical and contained in the silhouette, without a surrounding glow. Preserve this head silhouette, purple-black material and twin-pronged tail tip in every one of the ten poses. This sheet depicts only a primary forelimb claw strike, not acid spit, projectile effects or a spell. No red armor, no generic smooth Warrior skull or brown Runner coloration. KO final retains the yellow head sacs and the forked tail in a completely sideways lying body.",
+      "frameReview": [
+        {
+          "index": 0,
+          "id": "idle",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Neutral silhouette and characteristic skull, torso, limbs and tail remain recognizable.",
+          "canonExact": false
+        },
+        {
+          "index": 1,
+          "id": "walk-a",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "First forward locomotion contact is visibly distinct from idle.",
+          "canonExact": false
+        },
+        {
+          "index": 2,
+          "id": "walk-b",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Opposite limb contact differs from walk-a; no horizontal image flip is substituted.",
+          "canonExact": false
+        },
+        {
+          "index": 3,
+          "id": "attack-windup",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Primary forelimb strike anticipation, with braced support and retracted striking limb.",
+          "canonExact": false
+        },
+        {
+          "index": 4,
+          "id": "attack-impact",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Primary forelimb/claw reaches forward; no projectile, super effect or damage decal is drawn.",
+          "canonExact": false
+        },
+        {
+          "index": 5,
+          "id": "attack-recovery",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Forelimb and weight return from the strike in a pose distinct from idle and impact.",
+          "canonExact": false
+        },
+        {
+          "index": 6,
+          "id": "guard",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Defensive bracing brings forelimbs in front of the body without changing species identity.",
+          "canonExact": false
+        },
+        {
+          "index": 7,
+          "id": "hit-recoil",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Visible torso/head recoil differs from guard and attack; the actor remains supported.",
+          "canonExact": false
+        },
+        {
+          "index": 8,
+          "id": "ko-fall",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Lowered collapse is drawn through bent limbs and descending head/chest; not a rotated static plate.",
+          "canonExact": false
+        },
+        {
+          "index": 9,
+          "id": "ko-ground",
+          "visualReview": "reviewed-consistent-with-project-plate",
+          "observation": "Final silhouette is genuinely horizontal and lying on its side, with low skull/torso and resting tail.",
+          "canonExact": false
+        }
+      ]
+    }
+  ],
+  "runtimeContract": {
+    "renderer": "src/xeno-trials-sprite-atlas-v188.js",
+    "data": "src/xeno-trials-sprite-atlas-data-v188.js",
+    "measuredReceiptSha256": "41003f9f37b929f3081c587914d1dbd68b4f1c69318afc8d48ff4abceb50caa7",
+    "boundsReview": "All forty variable rectangles, silhouette alpha bounds and support anchors were measured from the actual generated PNGs. Root pivots were reviewed visually under the pelvis, including the four sideways KO poses; the pivot does not follow the tail bounding-box center. Runtime data remains the authoritative contract.",
+    "identityVerifiedMeaning": "Any positive identity review in the atlas contract refers only to consistency with the named project plate; it does not verify a primary franchise identity or certify canon 1:1."
+  }
+}
