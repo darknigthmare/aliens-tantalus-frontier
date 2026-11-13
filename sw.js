@@ -185,6 +185,7 @@ const SHELL = Object.freeze([
   '/src/intro-sequence-v188.js',
   '/src/intro-boot-v188.js',
   '/src/title-vfx-v188.js',
+  '/src/ingame-staging-v188.js',
   '/src/audio-cues-v188.js',
   '/src/caste-behaviors-v188.js',
   '/src/combat-feel-v188.js',

@@ -325,6 +325,7 @@ const FORGE_TOOLING_V140 = new Set([
   'scripts/verify-colony-reconstruction-v188.mjs',
   'scripts/verify-intro-v188.mjs',
   'scripts/verify-title-vfx-v188.mjs',
+  'scripts/verify-ingame-staging-v188.mjs',
   'docs/development/PRIORITIES_P0_P1_V188.md',
   // Source-only narrative design bible; never shipped in a built distribution.
   'docs/narrative',

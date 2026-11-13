@@ -536,6 +536,8 @@ Réservé à `origin-20`. Quatre fragments, un par lieu, sans combat propre :
 
 Le poste de cryostase attend la confirmation ; DAVID-8R accueille la Relève Echo-9. Création du personnage. Tamsin Velez rappelle la règle : avant une sortie, on identifie l'objectif et la voie de retour.
 
+**Mise en scène en jeu [EXISTANT] (V188) · [PROPOSÉ]** — avant la reprise du contrôle, dans la baie cryo réelle : l'image passe du noir à un flou froid puis se précise. Le terminal affiche `MU/TH/UR · RELÈVE ECHO-9 · CAPSULE 03 · RÉVEIL D'URGENCE`. Le sous-titre sonore dit « [La capsule siffle. Le givre fond sur la verrière.] ». Le journal de bord : « Relève Echo-9 sortie d'hypersommeil. Fonctions vitales stables. Confirmez votre réveil au poste de cryostase. »
+
 **Ajout [EXISTANT] (V188)** — DAVID-8R, pendant le réveil : « Vous remplacez l'équipe Echo-8. Elle a abordé la station Asphodèle il y a trente et une heures. Le contact a été perdu à la sixième. Je n'ai pas d'autre information. » **CIN-01 « Le casier vide »** (20 s) : le casier `ECHO-8`, vidé et scellé. Elle est jouée juste après la confirmation du réveil, une seule fois par partie.
 
 *Ancrage Alien : réveil d'hypersommeil, relève d'une équipe perdue, synthétique de bord.*
@@ -545,6 +547,12 @@ Le poste de cryostase attend la confirmation ; DAVID-8R accueille la Relève Ech
 `hub-opening-exercise-v89.js` : échelle, pas de tir, cibles, rétablissement de la liaison prioritaire.
 
 **[EXISTANT] (V188, séquence `cin-p2`)** La liaison prioritaire, rétablie à la fin de l'exercice, laisse passer un paquet de messages de Port-Méridien vieux de plusieurs jours, d'un coup. Le dernier date de quatre heures. Mara Vega coupe l'exercice.
+
+**Mise en scène en jeu [EXISTANT] (V188) · [PROPOSÉ]** — quand le signal prioritaire interrompt la qualification, une alerte ambre passe sur le pas de tir.
+
+> **Rook** (radio) — Velez, un signal prioritaire force la liaison. Il demande la console du pas de tir.
+>
+> **Tamsin Velez** — Echo-9, arme au repos. Rejoignez la console.
 
 *Ancrage Alien : communications retardées, colonie isolée.*
 
@@ -581,6 +589,16 @@ Dernier plan : les lumières du port sous la pluie, le processeur atmosphérique
 `port-meridien-v90.js` (reçu existant `port-meridien:quai-des-vivants:v90`) : porter un lot au triage, assister un blessé, réalimenter le sas, rassembler trois habitants et les guider vers le sas éclairé.
 
 **[EXISTANT] (V188, séquences `cin-p3-wren` à l'arrivée et `cin-p3-ferro` après le triage)** C'est aussi l'intro du front colonie (§6). Premier choix « vivants ou matériel » : lot médical ou batterie de sas. Tomas Wren, en passant : « Les conteneurs scellés partent avant nous depuis trois semaines. » Lucia Ferro montre un blessé dont la poitrine est bandée : « Il est tombé malade après une nuit au quai nord. Il ne se souvient pas de la nuit. » Le joueur ne voit rien de plus. Noor Okafor, à la radio : « Ramenez-le en quarantaine. Pas au triage. »
+
+**Mise en scène en jeu [EXISTANT] (V188) · [PROPOSÉ]** — à la descente de la rampe, sous la pluie et avant la réplique de Wren : « [Les vérins de la rampe. La pluie sur la tôle.] »
+
+> **Tamsin Velez** (radio) — Rampe au sol. Echo-9, le quai est à vous. Trouvez qui tient encore ce port.
+
+Au constat :
+
+> **Rook** (radio) — La balise automatique du port annonce toujours « aucun survivant ». Elle se trompe de trois.
+>
+> **Tamsin Velez** (radio) — Notez-le. Tout ce qui ment ici finira dans le rapport.
 
 *Ancrage Alien : premier signe du cycle biologique (hôte qui ne se souvient pas), évacuation de colons.*
 
@@ -4459,3 +4477,15 @@ La table du §6.3 est jouable dans la vue Commandement. Les sept chantiers, leur
   - quartiers : lampe de bureau ;
   - soute du dropship : lumière rouge, harnais, hublots sous la pluie, secousses.
 - **Nouvelle séquence** : CIN-03 *Descente sur Port-Méridien*, présentée au §4. Ses répliques sont **[PROPOSÉ]**.
+
+**Mise en scène en jeu (`ingame-staging-v188.js`)** :
+
+- Des moments courts se jouent par-dessus le niveau vivant, sans changer d'écran : bandes cinémascope, étalonnage de l'image, sous-titres, puis retour du contrôle.
+- Le monde continue de tourner ; seules les entrées du joueur sont retenues. Entrée passe à la suite, Échap passe la scène.
+- L'habillage du niveau (boutons, bandeau d'objectif) s'efface pendant la scène.
+- Étalonnages : hypersommeil (noir, flou froid, puis net), pluie (rideau animé) et alerte (pulsation ambre).
+- Chaque moment se joue une fois par campagne : la sauvegarde ajoute `storyCampaignV188.beatsSeen`. Aucune récompense.
+- Moments : réveil (P-1), interruption de la qualification (P-2), arrivée sur le quai et constat (P-3). Les textes sont au §4, **[PROPOSÉ]**.
+- **Mouvement réduit** : pas d'animation de bandes, de pluie ni de transition de flou.
+
+**Toujours à faire** : voix, plans de caméra déplacée dans le niveau (le hub suit le joueur), art définitif.

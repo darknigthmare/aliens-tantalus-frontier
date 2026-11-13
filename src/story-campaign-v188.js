@@ -28,7 +28,7 @@ const TEXT = Object.freeze({
   }
 });
 
-export function createStoryCampaignV188() { return { schema: 188, debriefSeen: [], cinematicsSeen: [], m577Manifest: null, interlude: null }; }
+export function createStoryCampaignV188() { return { schema: 188, debriefSeen: [], cinematicsSeen: [], beatsSeen: [], m577Manifest: null, interlude: null }; }
 
 export function normalizeStoryCampaignV188(raw) {
   const base = createStoryCampaignV188();
@@ -37,6 +37,8 @@ export function normalizeStoryCampaignV188(raw) {
   base.debriefSeen = [...new Set(seen.filter(id => typeof id === 'string' && /^[a-z0-9-]{1,80}$/.test(id)))].slice(0, MAX_SEEN);
   const cinematics = Array.isArray(raw.cinematicsSeen) ? raw.cinematicsSeen : [];
   base.cinematicsSeen = [...new Set(cinematics.filter(id => typeof id === 'string' && /^cin-[a-z0-9-]{1,40}$/.test(id)))].slice(0, MAX_SEEN);
+  const beats = Array.isArray(raw.beatsSeen) ? raw.beatsSeen : [];
+  base.beatsSeen = [...new Set(beats.filter(id => typeof id === 'string' && /^beat-[a-z0-9-]{1,40}$/.test(id)))].slice(0, MAX_SEEN);
   base.m577Manifest = normalizeM577ManifestV188(raw.m577Manifest);
   base.interlude = normalizeInterludeV188(raw.interlude);
   return base;
@@ -48,6 +50,15 @@ export function markStoryCinematicSeenV188(save, cinematicId) {
   const state = normalizeStoryCampaignV188(save.storyCampaignV188);
   if (state.cinematicsSeen.includes(cinematicId)) { save.storyCampaignV188 = state; return false; }
   state.cinematicsSeen = [...state.cinematicsSeen, cinematicId].slice(-MAX_SEEN);
+  save.storyCampaignV188 = state; return true;
+}
+
+/** In-game staged beats (ingame-staging-v188.js). Mutates the candidate save; true when it changed. */
+export function markStoryBeatSeenV188(save, beatId) {
+  if (!save || typeof beatId !== 'string' || !/^beat-[a-z0-9-]{1,40}$/.test(beatId)) return false;
+  const state = normalizeStoryCampaignV188(save.storyCampaignV188);
+  if (state.beatsSeen.includes(beatId)) { save.storyCampaignV188 = state; return false; }
+  state.beatsSeen = [...state.beatsSeen, beatId].slice(-MAX_SEEN);
   save.storyCampaignV188 = state; return true;
 }
 

@@ -5,7 +5,8 @@ import { detectReactiveTriggersV188, selectReactiveLinesV188 } from './reactive-
 import { applyAccessibilityV188, installKeyRemapV188, mountKeyBindingsUiV188, normalizeKeyBindingsV188, soundCaptionV188 } from './accessibility-v188.js';
 import { spareCrewMemberV188, normalizeCrewPermadeathV188, normalizeCustomDifficultyV188, normalizeOriginV188, CUSTOM_DIFFICULTY_BOUNDS_V188 } from './run-options-v188.js';
 import { cueForGameEventV188, casteCueV188 } from './audio-cues-v188.js';
-import { deriveStoryCampaignV188, markStoryDebriefSeenV188, markStoryCinematicSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, storyEndingReachedV188, resolveM577ManifestV188, normalizeStoryCampaignV188, startInterludeV188, interludeCrisisClearedV188, resolveInterludeV188, rescueJunParkV188, interludeChoicePendingV188 } from './story-campaign-v188.js';
+import { deriveStoryCampaignV188, markStoryDebriefSeenV188, markStoryCinematicSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, storyEndingReachedV188, resolveM577ManifestV188, normalizeStoryCampaignV188, startInterludeV188, interludeCrisisClearedV188, resolveInterludeV188, rescueJunParkV188, interludeChoicePendingV188, markStoryBeatSeenV188 } from './story-campaign-v188.js';
+import { InGameStagingV188, STAGED_BEATS_V188 } from './ingame-staging-v188.js';
 import { openStoryChoiceDialogV188 } from './story-choice-ui-v188.js';
 import { CinematicPlayerV188, CINEMATICS_V188 } from './story-cinematics-v188.js';
 import { openM577ManifestDialogV188 } from './m577-manifest-ui-v188.js';
@@ -828,6 +829,8 @@ function showView(name) {
   activeView = name;
   // V188: the QZ-18 debrief counts as read only when the player opens the briefing table.
   if (['operations', 'command'].includes(name)) queueMicrotask(markStoryDebriefOnViewV188);
+  // P-1 (bible §56.11): out of hypersleep, staged over the live cryo bay before control is given.
+  if (name === 'hub') queueMicrotask(() => { if (activeView === 'hub' && saveSystem.data.onboardingV84?.phase === 'wake') void playStagedBeatV188('beat-wake'); });
   // A pending interlude decision (reload during the choice) is asked again aboard.
   if (name === 'hub') queueMicrotask(() => { if (activeView === 'hub' && normalizeStoryCampaignV188(saveSystem.data.storyCampaignV188).interlude?.phase === 'choice'
     && !document.querySelector('.story-choice-v188')) chooseInterludeOutcomeV188(); });
@@ -1023,6 +1026,19 @@ function markStoryDebriefOnViewV188() {
 }
 // V188 prologue cinematics (bible §4, §10): skippable, replayable, never rewarded.
 const cinematicPlayerV188 = new CinematicPlayerV188();
+// In-game staging (V188): bars, grade and subtitles over the live level; the world keeps running, input is held.
+const inGameStagingV188 = new InGameStagingV188();
+function playStagedBeatV188(id) {
+  const seen = normalizeStoryCampaignV188(saveSystem.data.storyCampaignV188).beatsSeen;
+  const host = document.querySelector('[data-panel="hub"] .hub-level-shell');
+  if (!STAGED_BEATS_V188[id] || seen.includes(id) || activeView !== 'hub' || !host || inGameStagingV188.playing) return Promise.resolve('already-seen');
+  return inGameStagingV188.play(id, { host, language: document.documentElement.lang,
+    reducedMotion: Boolean(saveSystem.data.settings?.reducedMotion || globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches),
+    onHold: () => { hubEngine.keys?.clear?.(); if (hubEngine.player) hubEngine.player.vx = 0; } }).then(result => {
+    try { const candidate = clone(saveSystem.data); if (markStoryBeatSeenV188(candidate, id)) saveSystem.commit(candidate); } catch (error) { toast(error.message); }
+    return result;
+  });
+}
 function playStoryCinematicV188(id, { once = true, record = true, context = {} } = {}) {
   const seen = saveSystem.data?.storyCampaignV188?.cinematicsSeen || [];
   if (!CINEMATICS_V188[id] || once && seen.includes(id)) return Promise.resolve('already-seen');
@@ -1143,6 +1159,7 @@ function handleOpeningExerciseV89(interaction, owner = hubOwnerV84) {
     hubEngine.setOpeningExerciseV89(saveSystem.data.openingExerciseV89);
     renderHubStatus();
     // P-2: the restored priority link releases days of Port-Méridien messages; Vega cuts the exercise.
+    if (event === 'interrupt') void playStagedBeatV188('beat-exercise-interrupt');
     if (event === 'repair') void playStoryCinematicV188('cin-p2');
     if (event !== 'restart') toast(event === 'interrupt' ? 'EXERCICE INTERROMPU · Signal prioritaire. Cibles et chrono suspendus : rejoignez la console.'
       : event === 'repair' ? 'Liaison prioritaire rétablie. Rejoignez le pas de tir pour terminer la qualification.' : 'Qualification reprise : terminez les cibles restantes.');
@@ -1235,7 +1252,7 @@ function boardPortMeridienV90() {
     saveSystem.commit(candidate);
     hubEngine.stop(false); showView('hub');
     toast('Port-Méridien · le quai est encore habité. Le fret est à la rampe.');
-    void playStoryCinematicV188('cin-p3-wren'); return true;
+    void playStagedBeatV188('beat-port-arrival').then(() => playStoryCinematicV188('cin-p3-wren')); return true;
   } catch (error) { toast(`Débarquement non enregistré : ${error.message}`); return false; }
 }
 
@@ -1264,7 +1281,7 @@ function handlePortMeridienV90(interaction, owner = hubOwnerV84) {
     // One transaction owns position, task phase, group progress and the unique receipt. No repeatable reward.
     saveSystem.commit({ portMeridienV90: result.state });
     if (action !== 'checkpoint') hubEngine.setPortMeridienV90(saveSystem.data.portMeridienV90);
-    if (action === 'report') toast('Constat transmis : trois habitants secourus, balise automatique contradictoire.');
+    if (action === 'report') { toast('Constat transmis : trois habitants secourus, balise automatique contradictoire.'); void playStagedBeatV188('beat-port-report'); }
     if (action === 'triage') void playStoryCinematicV188('cin-p3-ferro');
     return true;
   } catch (error) {

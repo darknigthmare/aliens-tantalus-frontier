@@ -44,7 +44,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
     "previousSha256": "95287e9c3f9be2b88db9e391a9a143c4c69be8956b6763e4113645974b9e878d",
-    "currentSha256": "b706f45981204ea5d28c524d4ff1b0086d296d62d50c885b9a78c29587ac808b"
+    "currentSha256": "a40b3dfa9035ecc8f3c3bdaecf864f9310ef127a76a4c69070ec04a5f242be41"
   },
   "hub-level.css": {
     "previousSha256": "13e29b3719e1246d595dadca4c786cbeb5a471dece902104b0ccd29a1de9908d",
@@ -56,7 +56,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "package.json": {
     "previousSha256": "ff133a405bfc1ef2afa7085fcb2a6cde27a9f52c4af0de5172a058b47082eb48",
-    "currentSha256": "720862a4363af0a36686268ce5728c49745603b9141a9f92a3a16075bbc72e2e"
+    "currentSha256": "0983ee66493d50432511f1fc7540c29e03813d13a183d58f7e2bbb9489dfd2d5"
   },
   "player-onboarding-v84.css": {
     "previousSha256": "ae49e974d70f1a46dbd28da6d5515fac0124c992591cf0c1c50ad3e7e3d1cfbf",
@@ -88,11 +88,11 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "328c764b2bf467d0bc21ae86abf415a7722bd0a88cba486eb2167c22fa8f0b84",
-    "currentSha256": "1b4ea50ee9e34a9bff78ba087591ec1a570387c184f2f17eadf20e322e8040a7"
+    "currentSha256": "f95d7a30b34d4959972d102f915b99602eeda09c97369a867a2f9d62f08e59e9"
   },
   "src/app.js": {
     "previousSha256": "482835e65677c536085a1344cf61c3ffa5e09e2af1b8029b949e000a533038ae",
-    "currentSha256": "4e8883555d82b976280c3ec88cb58ace59e8a6babefe79c2be0cca0e606841a5"
+    "currentSha256": "7ca4eb1568ea43f1f43a4fd4fe6e40db3015cd6f0557f2793615b5741d937b6e"
   },
   "src/archive-relay-presentation-v160.js": {
     "previousSha256": "e628ccee6aa0a2ee40eea1fdd3b66b11800c3185c39bbd91c18d662c05749a30",
@@ -168,11 +168,11 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "styles.css": {
     "previousSha256": "5d7f49517ea4377aaf2847e7ef5f5dd5f6e4b015301e1280072d41fd9edab36c",
-    "currentSha256": "4e908faaf6298ee20a8b9ccee6ca2d10360d81493316ecc2f3148a76a1c4f431"
+    "currentSha256": "8e9e071f2c76bcae6706c7562ed9ea5bcbab908e8daead8c1792d6fbaa67248d"
   },
   "sw.js": {
     "previousSha256": "ff86bba365c3875c8ebaeb0abe13b2a6185ccd5f1a030b4ee5b15ac0e4a12f9b",
-    "currentSha256": "eb4d96ea6406d289cc806f9f78d39ead356ffa3e95aa0f722f0ebe87407eb54c"
+    "currentSha256": "8192090adb6866a86b80584ab6110d7b4de81d4b25b350720c22912b02ea78ee"
   },
   "title-screen-v61.css": {
     "previousSha256": "3a748b04d5e6c9a7e04c189b2c1910c3163a0840968be6bcbb6352e10e16369f",

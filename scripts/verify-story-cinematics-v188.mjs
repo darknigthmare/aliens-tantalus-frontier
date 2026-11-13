@@ -94,7 +94,7 @@ test('seen cinematics persist additively and app hooks follow the prologue order
   assert.match(app, /if \(event === 'repair'\) void playStoryCinematicV188\('cin-p2'\)/);
   assert.match(app, /void playStoryCinematicV188\('cin-02'\)\.then\(\(\) => playStoryCinematicV188\('cin-03'\)\)\.then\(\(\) => boardPortMeridienV90\(\)\)/);
   assert.match(app, /if \(!seenV188\.includes\('cin-03'\)\) \{ void playStoryCinematicV188\('cin-03'\)\.then\(\(\) => boardPortMeridienV90\(\)\); return true; \}/);
-  assert.match(app, /void playStoryCinematicV188\('cin-p3-wren'\)/); assert.match(app, /if \(action === 'triage'\) void playStoryCinematicV188\('cin-p3-ferro'\)/);
+  assert.match(app, /void playStagedBeatV188\('beat-port-arrival'\)\.then\(\(\) => playStoryCinematicV188\('cin-p3-wren'\)\)/); assert.match(app, /if \(action === 'triage'\) void playStoryCinematicV188\('cin-p3-ferro'\)/);
   assert.match(app, /void playStoryCinematicV188\('cin-20'\)\.then\(\(\) => playStoryCinematicV188\('cin-20-rook'\)\);/);
   assert.match(app, /if \(\['operations', 'command'\]\.includes\(name\)\) queueMicrotask\(markStoryDebriefOnViewV188\);/);
   assert.match(app, /event\.type === 'special-operation-started' && event\.campaignId === 'special-narrative-qz17'\) void playStoryCinematicV188\('cin-10'\)/);
