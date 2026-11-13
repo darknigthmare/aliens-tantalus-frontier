@@ -120,5 +120,5 @@ test('the ECHO-8 locker reveals what the campaign has established, in both langu
   hub.onboardingActiveV84 = () => true; hub.onboardingV84 = { phase: 'wake' }; hub.player.x = ECHO8_LOCKER_V188.x;
   assert.equal(hub.interact(), 'base', 'no locker contact before the wake-up');
   const app = read('src/app.js');
-  assert.match(app, /const HubGame = withHubEcho8LockerV188\(/); assert.match(app, /interaction\.action === 'story:echo8-locker'/);
+  assert.match(app, /withHubEcho8LockerV188\(NativeHubGame\)/); assert.match(app, /interaction\.action === 'story:echo8-locker'/);
 });
