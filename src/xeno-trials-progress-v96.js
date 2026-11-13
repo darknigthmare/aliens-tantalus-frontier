@@ -7,6 +7,7 @@ import { createXenoTrialsHordeCheckpointV186, normalizeXenoTrialsHordeCheckpoint
 import { getXenoTrialsOperationV188, validateXenoTrialsOperationSnapshotV188,
   getXenoTrialsOperationReceiptV188, isXenoTrialsOperationForwardV188 } from './xeno-trials-operations-v188.js';
 import { validateXenoTrialsStageHazardsV188, isXenoTrialsStageHazardsForwardV188 } from './xeno-trials-stage-hazards-v188.js';
+import { getArbiterProgramV191, getArbiterArchiveAccessV191 } from './xeno-arbiter-protocols-v191.js';
 
 const fighterIds = new Set(XENO_TRIALS_FIGHTERS_V96.map(f => f.id));
 const factionIds = new Set(XENO_TRIALS_FACTIONS_V96.map(f => f.id));
@@ -138,10 +139,15 @@ export function unlockXenoTrialsFighterV96(value, id) {
   return { applied: true, state };
 }
 
-export function beginXenoTrialsV96(value, configuration) {
+export function beginXenoTrialsV96(value, configuration, { arbiterProgressV190 } = {}) {
   const state = normalizeXenoTrialsProgressV96(value);
   if (state.pending) return { applied: false, state, reason: 'pending-duel' };
   const config = normalizeXenoTrialsConfigV96(configuration);
+  const archive = getArbiterProgramV191(config.activityV119?.id);
+  if (archive && archive.branch !== config.activityV119.branch)
+    return { applied: false, state, reason: 'activity-unavailable' };
+  if (archive && !getArbiterArchiveAccessV191(arbiterProgressV190).available)
+    return { applied: false, state, reason: 'arbiter-archives-locked' };
   if (!state.unlocked.includes(config.playerId)) return { applied: false, state, reason: 'fighter-locked' };
   if (state.modesV119.challengeRun && !config.activityV119) return { applied: false, state, reason: 'activity-unavailable' };
   if (config.activityV119) {

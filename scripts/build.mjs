@@ -1,4 +1,5 @@
 import { verifyArbiterImageAdmissionsV190 } from './public-xeno-arbiter-admissions-v190.mjs';
+import { verifyXenoSpriteAdmissionsV191 } from './public-xeno-sprite-admissions-v191.mjs';
 import { verifyXenoSpriteAdmissionsV189 } from './public-xeno-sprite-admissions-v189.mjs';
 import { verifyXenoSpriteAdmissionsV188 } from './public-xeno-sprite-admissions-v188.mjs';
 import { verifyPublicAdmissionsV163 } from './public-release-admissions-v163.mjs';
@@ -19,6 +20,7 @@ await verifyPublicAdmissionsV163(root);
 await verifyXenoSpriteAdmissionsV188(root);
 await verifyXenoSpriteAdmissionsV189(root);
 await verifyArbiterImageAdmissionsV190(root);
+await verifyXenoSpriteAdmissionsV191(root);
 await verifyPublicAdmissionsV119(root);
 await verifyPublicAdmissionsV120(root);
 await verifyPublicAdmissionsV121(root);
@@ -86,3 +88,4 @@ await verifyXenoSpriteAdmissionsV188(output);
 await verifyXenoSpriteAdmissionsV189(output);
 
 await verifyArbiterImageAdmissionsV190(output);
+await verifyXenoSpriteAdmissionsV191(output);

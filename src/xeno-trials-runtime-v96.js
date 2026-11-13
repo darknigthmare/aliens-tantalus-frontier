@@ -33,6 +33,7 @@ import { drawXenoTrialsOperationV188, getXenoTrialsOperationHudV188 } from './xe
 import { drawXenoTrialsStageHazardsV188 } from './xeno-trials-stage-hazards-render-v188.js';
 import { createXenoTrialsAudioV189 } from './xeno-trials-audio-v189.js';
 import { getXenoTrialsSpriteAtlasV189, drawXenoTrialsSpriteAtlasV189, requestXenoTrialsSpriteAtlasV189, getXenoTrialsSpriteEnvelopeV189 } from './xeno-trials-sprite-atlas-v189.js';
+import { getXenoTrialsSpriteAtlasV191, drawXenoTrialsSpriteAtlasV191, requestXenoTrialsSpriteAtlasV191, getXenoTrialsSpriteEnvelopeV191 } from './xeno-trials-sprite-atlas-v191.js';
 import { drawXenoTrialsSpriteAtlasV188, requestXenoTrialsSpriteAtlasV188, getXenoTrialsSpriteEnvelopeV188 } from './xeno-trials-sprite-atlas-v188.js';
 import { getXenoTrialsStageHazardViewV188 } from './xeno-trials-stage-hazards-v188.js';
 
@@ -68,7 +69,8 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   const hordeProtocol = getXenoTrialsHordeProtocolV180(match.config.hordeV180?.protocolId);
   const swarmMotion = createXenoTrialsSwarmMotionV180();
   const reactions = createXenoTrialsReactionObserverV186({ canObserve: fighter => {
-    const atlas = getXenoTrialsSpriteAtlasV189(fighter, getXenoTrialsArtV96(fighter?.id, fighter?.variant));
+    const art = getXenoTrialsArtV96(fighter?.id, fighter?.variant);
+    const atlas = getXenoTrialsSpriteAtlasV191(fighter, art) || getXenoTrialsSpriteAtlasV189(fighter, art);
     return atlas?.kind === 'combat' && images.has(atlas.texture.path);
   } });
   const gamepad = createXenoTrialsGamepadV186();
@@ -81,7 +83,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   let checkpointStatus = { saved: Boolean(restored), tick: restored?.tick || null, reason: restored ? 'restored' : null }, checkpointing = false;
   const displayScale = getXenoTrialsDisplayScaleV110(match.fighters);
   const camera = createXenoTrialsCameraV119(match.fighters, { width: 1000, height: 560 }, {
-    envelope: fighter => (getXenoTrialsSpriteEnvelopeV189(fighter, getXenoTrialsArtV96(fighter.id, fighter.variant),
+    envelope: fighter => (getXenoTrialsSpriteEnvelopeV191(fighter, getXenoTrialsArtV96(fighter.id, fighter.variant),
       getXenoTrialsRenderMetricsV110(fighter.id, fighter.variant, displayScale)) || getXenoTrialsSpriteEnvelopeV188(fighter, getXenoTrialsArtV96(fighter.id, fighter.variant),
       getXenoTrialsRenderMetricsV110(fighter.id, fighter.variant, displayScale))) });
   let cameraView = camera.getState(), frameDelta = 0;
@@ -313,27 +315,31 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     const reactionCue = preparedReaction || (hordeProtocol && match.result && fighter.hp <= 0 ? { state: 'ko', progress: 1 } : null) || reactions(match, fighter, {
       blocked: reactionBlocked,
       spec: fighter.attack && getXenoTrialsAttackV147(definition, fighter.attack.kind, XENO_TRIALS_ATTACKS_V96[fighter.attack.kind]) });
-    const drawnSpriteV189 = !reactionBlocked && drawXenoTrialsSpriteAtlasV189(context, fighter, art, images,
+    const drawnSpriteV191 = !reactionBlocked && drawXenoTrialsSpriteAtlasV191(context, fighter, art, images,
+      { tick: match.tick, cue: reactionCue, moving, distance: swarmView?.distance || 0, timeSeconds,
+        spec: fighter.attack && getXenoTrialsAttackV147(definition, fighter.attack.kind, XENO_TRIALS_ATTACKS_V96[fighter.attack.kind]),
+        metrics: { width, height, pivotX, bottom, sourceFacing }, x: drawX, y: ground, facing: drawFacing, reducedMotion });
+    const drawnSpriteV189 = !drawnSpriteV191 && !reactionBlocked && drawXenoTrialsSpriteAtlasV189(context, fighter, art, images,
       { cue: reactionCue, moving, distance: swarmView?.distance || 0, timeSeconds,
         spec: fighter.attack && getXenoTrialsAttackV147(definition, fighter.attack.kind, XENO_TRIALS_ATTACKS_V96[fighter.attack.kind]),
         metrics: { width, height, pivotX, bottom, sourceFacing }, x: drawX, y: ground, facing: drawFacing, reducedMotion });
-    const drawnSpriteV188 = !drawnSpriteV189 && !reactionBlocked && drawXenoTrialsSpriteAtlasV188(context, fighter, art, images,
+    const drawnSpriteV188 = !drawnSpriteV191 && !drawnSpriteV189 && !reactionBlocked && drawXenoTrialsSpriteAtlasV188(context, fighter, art, images,
       { cue: reactionCue, moving, distance: swarmView?.distance || 0, timeSeconds,
         spec: fighter.attack && getXenoTrialsAttackV147(definition, fighter.attack.kind, XENO_TRIALS_ATTACKS_V96[fighter.attack.kind]),
         metrics: { width, height, pivotX, bottom, sourceFacing }, x: drawX, y: ground, facing: drawFacing, reducedMotion });
-    const reactionDrawn = !drawnSpriteV189 && !drawnSpriteV188 && !reactionBlocked && drawXenoTrialsReactionV186(context, fighter, art, image,
+    const reactionDrawn = !drawnSpriteV191 && !drawnSpriteV189 && !drawnSpriteV188 && !reactionBlocked && drawXenoTrialsReactionV186(context, fighter, art, image,
       { cue: reactionCue, metrics: { width, height, pivotX, bottom, sourceFacing }, x: drawX, y: ground, facing: drawFacing, reducedMotion });
-    const swarmDrawn = !drawnSpriteV189 && !drawnSpriteV188 && !reactionDrawn && !atlasDrawn && !exitView && !sequenceCue && !captureViewV163
+    const swarmDrawn = !drawnSpriteV191 && !drawnSpriteV189 && !drawnSpriteV188 && !reactionDrawn && !atlasDrawn && !exitView && !sequenceCue && !captureViewV163
       && drawXenoTrialsSwarmSpriteV180(context, fighter, art, image, { ...swarmView,
         metrics: { width, height, pivotX, bottom, sourceFacing },
         spec: fighter.attack && getXenoTrialsAttackV147(definition, fighter.attack.kind, XENO_TRIALS_ATTACKS_V96[fighter.attack.kind]),
         x: drawX, y: ground, facing: drawFacing, reducedMotion,
         blocked: presentationView().blocksSimulation || match.phase !== 'active' });
-    const rigDrawn=atlasDrawn||drawnSpriteV189||drawnSpriteV188||reactionDrawn||swarmDrawn||pose && drawXenoTrialsRigV154(context,rig,image,pose,{width,height,pivotX,bottom},drawX,ground,drawFacing);
+    const rigDrawn=atlasDrawn||drawnSpriteV191||drawnSpriteV189||drawnSpriteV188||reactionDrawn||swarmDrawn||pose && drawXenoTrialsRigV154(context,rig,image,pose,{width,height,pivotX,bottom},drawX,ground,drawFacing);
     context.restore();
     if(rigDrawn) rigDrawsV154.set(fighter.instanceIdV180 || fighter.side,{...rigDrawn,
       ...(captureViewV163?.attacker===fighter&&(captureViewV163.record.phase==='capture'||captureViewV163.captorRecovery)?{captureV163:getXenoTrialsCaptureReceiptV163(captureViewV163,'captor')}:{}),
-      ...(pose?.preparationV163?{preparationV163:{...pose.preparationV163}}:{}),
+      ...(!drawnSpriteV191&&pose?.preparationV163?{preparationV163:{...pose.preparationV163}}:{}),
       ...(exitView?{exitV157:{...exitView,stepped:rigDrawn?.clip==='spatial-exit-v157',pose:pose?.exitPoseV157||null}}:{}),
       ...(pose?.sequenceIdV155 ? {sequenceIdV155:pose.sequenceIdV155,beatV155:pose.beatV155,animation:pose.animation,...(pose.sequenceIdV156?{sequenceIdV156:pose.sequenceIdV156}:{})} : {})});
     const attackDrawn = !rigDrawn && canShowAttack && drawEnemyImportAttackV109(context, art, images, {
@@ -723,6 +729,8 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       await Promise.allSettled(preloadFighters.map(fighter => requestXenoTrialsSpriteAtlasV188(images, fighter,
         getXenoTrialsArtV96(fighter.id, fighter.variant), loadImage, () => !stopped)));
       await Promise.allSettled(preloadFighters.map(fighter => requestXenoTrialsSpriteAtlasV189(images, fighter,
+        getXenoTrialsArtV96(fighter.id, fighter.variant), loadImage, () => !stopped)));
+      await Promise.allSettled(preloadFighters.map(fighter => requestXenoTrialsSpriteAtlasV191(images, fighter,
         getXenoTrialsArtV96(fighter.id, fighter.variant), loadImage, () => !stopped)));
       if (stopped) return false;
       loaded = true; assetFailure = results.slice(0, paths.length).some(r => r.status === 'rejected');

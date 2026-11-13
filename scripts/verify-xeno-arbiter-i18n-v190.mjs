@@ -14,6 +14,7 @@ import { XENO_TRIALS_CORPORATE_STAGES_V190 as stages } from '../src/xeno-trials-
 import { CAMPAIGN_ART_ASSETS_V190 as paintings } from '../src/campaign-art-v190.js';
 
 const review = JSON.parse(readFileSync(new URL('../docs/forge/xeno-trials/i18n-arbiter-review-v190.json', import.meta.url), 'utf8'));
+const protocolsReview = JSON.parse(readFileSync(new URL('../docs/forge/xeno-trials/i18n-arbiter-protocols-review-v191.json', import.meta.url), 'utf8'));
 const hash = object => createHash('sha256').update(JSON.stringify(Object.fromEntries(Object.entries(object)
   .sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0)))).digest('hex');
 function english(callback) {
@@ -28,13 +29,13 @@ test('V190 only appends reviewed strings to all 6343 exact translations and 494 
     patterns: [494, 'd30a70a267740e9669837bf26ccdba105ee3979a2921e958f3ae4ee7ebc8f2a4']
   };
   for (const [kind, catalog] of Object.entries({ exact: C, patterns: P })) {
-    const added = new Set(review[kind].map(entry => entry.fr));
+    const added = new Set([...review[kind], ...protocolsReview[kind]].map(entry => entry.fr));
     base[kind] = Object.fromEntries(Object.entries(catalog).filter(([fr]) => !added.has(fr)));
     assert.equal(Object.keys(base[kind]).length, expected[kind][0]);
     assert.equal(hash(base[kind]), expected[kind][1]);
     assert.ok(review[kind].every(entry => !Object.hasOwn(entry, 'previous')));
   }
-  const rebuilt = mergeReviewV186(base, review);
+  const rebuilt = mergeReviewV186(mergeReviewV186(base, review), protocolsReview);
   assert.equal(hash(rebuilt.exact), hash(C)); assert.equal(hash(rebuilt.patterns), hash(P));
   assert.equal(validateCatalogV186(rebuilt).omittedPatternSlots, 1);
 });

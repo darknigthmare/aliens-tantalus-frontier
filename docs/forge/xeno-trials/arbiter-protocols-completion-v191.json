@@ -1,0 +1,115 @@
+{
+  "lot": "XENO-ARBITER-PROTOCOLS-ANIMATION-V191",
+  "baseCommit": "07f9525c18c9b55cf21ae93fe758209f64ed8ff4",
+  "state": "VERIFIED_SOURCE_FROZEN",
+  "counts": {
+    "roster": 189,
+    "preservedHordePrograms": 80,
+    "preservedOperations": 40,
+    "preservedHazardProfiles": 40,
+    "newHordePrograms": 20,
+    "newOperations": 20,
+    "newPhysicalHazardProfiles": 4,
+    "newMajorFinales": 4,
+    "archivePrograms": 40,
+    "reusedCorporateArenas": 4,
+    "newStageImages": 0,
+    "newSpriteSheets": 8,
+    "newCombatPoses": 40,
+    "newSpecialPoses": 40,
+    "newSpriteBytes": 11618259,
+    "trackedDrawnProfiles": 21,
+    "trackedDrawnGroundKoProfiles": 12,
+    "trackedDrawnSpecialProfiles": 4,
+    "totalTrialsDrawnPoses": 200,
+    "totalTrackedAdmittedDrawnPoses": 240,
+    "fullyAnimatedProfiles": 0,
+    "canonExactProfiles": 0
+  },
+  "access": {
+    "requiresOrderedCampaignReturns": 6,
+    "legacyProgramsPreserved": true,
+    "directoryBranch": "arbiter-archives",
+    "persistedBranches": [
+      "horde",
+      "operations"
+    ],
+    "programPageSize": 12,
+    "pages": 4,
+    "entryFeeAdded": false,
+    "firstClearProgramBonusUnique": true,
+    "mainSaveSchema": 52,
+    "ticketSchema": 96
+  },
+  "limits": [
+    "Forty new programs reuse four existing illustrated arenas; they are not forty new maps",
+    "Ordinary contacts have 15–35 HP; the four announced major finales have separately displayed HP",
+    "Eighty new keyposes are partial combat and special sequences, not eight complete movesets",
+    "Only Prowler has the native airborne leap among these four special sequences",
+    "Twenty-seven V163 capture poses are outside the ten-action coverage count",
+    "Complete roster animation, air attacks, supers and measured franchise 1:1 fidelity remain open"
+  ],
+  "validation": {
+    "state": "PASSED",
+    "uniqueNodeTestFiles": 268,
+    "node": {
+      "tests": 5552,
+      "pass": 5551,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 1,
+      "todo": 0
+    },
+    "nativeAssertions": 78,
+    "nativeCaptures": 40,
+    "nativePageScreenshots": 16,
+    "nativeCanvasPhaseExports": 24,
+    "admittedV191Poses": 80,
+    "observedV191Poses": 77,
+    "observedCombatPoses": 37,
+    "observedSpecialPoses": 40,
+    "unobservedPoseKeys": [
+      "chrysalis:combat:walk-b",
+      "defender:combat:walk-b",
+      "user-brute:combat:walk-b"
+    ],
+    "nativeWins": {
+      "horde": 1,
+      "operations": 2
+    },
+    "operationHostDoubles": {
+      "wins": 17,
+      "naturalKoLosses": 3
+    },
+    "sourceFreezeFiles": 54,
+    "browserSourceFiles": 611,
+    "sharedFrozenPathsMatched": 24,
+    "newPngHttpBodies": 8,
+    "javascriptErrors": 0,
+    "httpErrors": 0,
+    "requestFailures": 0,
+    "sourceAudit": {
+      "successors": 27,
+      "newInputs": 26,
+      "preservedPlates": 12,
+      "historicalResultsTransferred": false,
+      "independentReadback": "PASSED"
+    },
+    "sourceAdmission": {
+      "files": 2636,
+      "assets": 1455,
+      "privateDocuments": 0
+    },
+    "buildFiles": 2056,
+    "buildShell": 664,
+    "evidenceDirectory": "/workspace/tantalus-inventory/reprise-v191",
+    "externalValidation": "validation-final.json"
+  },
+  "publication": {
+    "state": "COMMIT_AND_DEPLOYMENT_STATUS_TRACKED_EXTERNALLY",
+    "externalReceipt": "/workspace/tantalus-inventory/reprise-v191/publication-final.json",
+    "priorQuotaResource": "api-deployments-free-per-day",
+    "retryAfterSeconds": 86400,
+    "settingsChanged": false
+  }
+}

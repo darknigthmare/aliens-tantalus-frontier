@@ -45,7 +45,7 @@ test('V186 rejects changed reviewed bytes and arbitrary predecessor endpoints', 
   const relay = read('scripts/audit-native-qa-resources-v187.mjs').toString();
   assert.match(relay, /from '\.\/audit-xeno-trials-completion-v186\.mjs'/);
   assert.match(read('scripts/audit-xeno-trials-completion-v186.mjs').toString(), /from '\.\/audit-xeno-stage-operations-v188\.mjs'/);
-  const terminal = read('scripts/audit-xeno-arbiter-campaign-v190.mjs').toString();
+  const terminal = read('scripts/audit-xeno-arbiter-protocols-v191.mjs').toString();
   assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(terminal), false, 'The terminal audit must not import another audit.');
 });
 

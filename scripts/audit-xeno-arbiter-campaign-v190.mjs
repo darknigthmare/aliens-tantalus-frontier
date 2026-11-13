@@ -1,10 +1,13 @@
 /** Exact 3a6c141 V189 -> V190 ARBITER campaign/stage continuation.
  * Historical receipts remain immutable. This audit admits only named source
  * bytes; QA results, publication and canonical fidelity are never inherited.
+ * V191 continues the unchanged receipt declarations through an exact relay.
  */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedArbiterProtocolsDigestV191, arbiterProtocolsRuntimeSourcesV191,
+  verifyArbiterProtocolsV191 } from './audit-xeno-arbiter-protocols-v191.mjs';
 
 const freeze = value => { if (value && typeof value === 'object') { Object.values(value).forEach(freeze); Object.freeze(value); } return value; };
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -326,24 +329,25 @@ export const ARBITER_CAMPAIGN_PRESERVED_PLATES_V190 = freeze({
 /** Strict predecessor transition: current or observed digests are never proofs. */
 export function reviewedArbiterCampaignDigestV190(path, endpointV189) {
   const receipt = ARBITER_CAMPAIGN_SUCCESSORS_V190[path];
-  if (!receipt) return endpointV189;
+  if (!receipt) return reviewedArbiterProtocolsDigestV191(path, endpointV189);
   assert.equal(endpointV189, receipt.previousSha256, 'Incorrect V189 endpoint for V190: ' + path);
   assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256), 'Invalid V190 successor digest: ' + path);
   assert.notEqual(receipt.previousSha256, receipt.currentSha256, 'Unchanged V190 successor: ' + path);
-  return receipt.currentSha256;
+  return reviewedArbiterProtocolsDigestV191(path, receipt.currentSha256);
 }
 
 /** Called after physical verification; retains the historical caller's object. */
 export function arbiterCampaignRuntimeSourcesV190(historical) {
   const result = { ...historical };
   for (const [path, receipt] of Object.entries(ARBITER_CAMPAIGN_SUCCESSORS_V190)) if (receipt.kind === 'runtime') {
-    if (result[path] !== undefined && result[path] !== receipt.currentSha256)
-      assert.equal(result[path], receipt.previousSha256, 'Incorrect V190 runtime view predecessor: ' + path);
-    result[path] = receipt.currentSha256;
+    const current = reviewedArbiterProtocolsDigestV191(path, receipt.currentSha256);
+    if (result[path] !== undefined)
+      assert.ok([receipt.previousSha256, receipt.currentSha256, current].includes(result[path]), 'Incorrect V190 runtime view predecessor: ' + path);
+    result[path] = current;
   }
   for (const [path, receipt] of Object.entries(ARBITER_CAMPAIGN_NEW_INPUTS_V190))
-    if (receipt.kind === 'runtime') result[path] = receipt.sha256;
-  return Object.freeze(result);
+    if (receipt.kind === 'runtime') result[path] = reviewedArbiterProtocolsDigestV191(path, receipt.sha256);
+  return arbiterProtocolsRuntimeSourcesV191(result);
 }
 
 export function verifyArbiterCampaignV190(readSource = readRepository) {
@@ -360,7 +364,7 @@ export function verifyArbiterCampaignV190(readSource = readRepository) {
     assert.ok(safe(path), 'Unsafe V190 added-input path: ' + path);
     assert.deepEqual(Object.keys(receipt).sort(), ['kind', 'sha256']);
     assert.ok(kinds.includes(receipt.kind) && validHash(receipt.sha256)); paths.push(path);
-    assert.equal(sha(readSource(path)), receipt.sha256, 'Unreviewed V190 added-input bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedArbiterProtocolsDigestV191(path, receipt.sha256), 'Unreviewed V190 added-input bytes: ' + path);
   }
   for (const [path, digest] of Object.entries(ARBITER_CAMPAIGN_PRESERVED_PLATES_V190)) {
     assert.ok(safe(path) && validHash(digest)); paths.push(path);
@@ -373,6 +377,7 @@ export function verifyArbiterCampaignV190(readSource = readRepository) {
     assert.ok(start >= 0 && end > start, 'Missing historical declaration anchors: ' + path);
     assert.equal(sha(text.slice(start, end)), receipt.sha256, 'Historical receipt declarations changed: ' + path);
   }
+  verifyArbiterProtocolsV191(readSource);
   return Object.freeze({ baselineCommit: ARBITER_CAMPAIGN_BASELINE_V190,
     successors: Object.keys(ARBITER_CAMPAIGN_SUCCESSORS_V190).length,
     addedInputs: Object.keys(ARBITER_CAMPAIGN_NEW_INPUTS_V190).length,

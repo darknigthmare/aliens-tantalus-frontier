@@ -1,4 +1,5 @@
 import { XENO_TRIALS_BOSS_STAGES_V179 } from './xeno-trials-boss-stages-v179.js';
+import { ARBITER_STAGE_HAZARDS_V191 } from './xeno-arbiter-protocols-v191.js';
 
 /** Original physical machinery for the forty Tantalus operation settings.
  * The old duels and eighty horde protocols never enable this system. All times
@@ -51,7 +52,7 @@ export const XENO_TRIALS_STAGE_HAZARDS_V188 = freeze(XENO_TRIALS_BOSS_STAGES_V17
     hitIntervalTicks: limits.hitIntervalTicks, affectsCombat: true,
     canonExact: false, canonStatus: 'original-tantalus-simulation' };
 }));
-const definitions = new Map(XENO_TRIALS_STAGE_HAZARDS_V188.map(value => [value.stageId, value]));
+const definitions = new Map([...XENO_TRIALS_STAGE_HAZARDS_V188, ...ARBITER_STAGE_HAZARDS_V191].map(value => [value.stageId, value]));
 export function getXenoTrialsStageHazardV188(stageId) { return definitions.get(stageId) || null; }
 const integer = (value, min = 0, max = limits.maximumTick) => Number.isSafeInteger(value) && value >= min && value <= max;
 const record = value => value !== null && typeof value === 'object' && !Array.isArray(value);

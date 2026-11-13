@@ -1,6 +1,12 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-xeno-arbiter-campaign-v190';
+const CACHE = 'atf-v143-xeno-arbiter-protocols-animation-v191';
 const SHELL = Object.freeze([
+  '/src/xeno-arbiter-protocols-v191.js',
+  '/src/xeno-trials-sprite-atlas-v191.js',
+  '/src/xeno-trials-sprite-combat-data-v191.js',
+  '/src/xeno-trials-sprite-special-data-v191.js',
+  '/src/xeno-trials-animation-coverage-v191.js',
+
   '/xeno-arbiter-v190.css',
   '/src/xeno-arbiter-campaign-v190.js',
   '/src/xeno-arbiter-runtime-v190.js',

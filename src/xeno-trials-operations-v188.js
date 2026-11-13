@@ -1,5 +1,6 @@
 import {XENO_TRIALS_BOSS_STAGES_V179 as STAGES} from './xeno-trials-boss-stages-v179.js';
 import {getXenoTrialsBodyBoundsV105} from './xeno-trials-geometry-v105.js';
+import {getArbiterOperationV191} from './xeno-arbiter-protocols-v191.js';
 
 // Original Tantalus objective simulations. The existing horde supplies pressure;
 // physical objectives decide the outcome independently of the remaining kills.
@@ -37,7 +38,7 @@ export const XENO_TRIALS_OPERATIONS_V188=freeze(kinds.flatMap((kind,family)=>Arr
   objectives,canonStatus:'original-tantalus-simulation',canonExact:false,revision:188};
 })));
 const catalogue=new Map(XENO_TRIALS_OPERATIONS_V188.map(entry=>[entry.id,entry]));
-export const getXenoTrialsOperationV188=id=>catalogue.get(id)||null;
+export const getXenoTrialsOperationV188=id=>catalogue.get(id)||getArbiterOperationV191(id);
 export const XENO_TRIALS_OPERATION_LIMITS_V188=freeze({schema:188,maxObjectives:3,ticksPerSecond:120,maxIntegrity:100,cargoPressureTicks:120,purgePressureTicks:240});
 const stateKeys=['schema','operationId','matchId','seed','status','failureReason','elapsedTicks','startedTick','lastTick','completedTick','progress','completed','integrity','cargoTravelTicks','cargoX','carrying','delivered','depotTicks','exitTicks'];
 const integer=(value,min,max)=>Number.isSafeInteger(value)&&value>=min&&value<=max;

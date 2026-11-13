@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { XenoTrialsUiV96 } from '../src/xeno-trials-ui-v96.js';
 import { XENO_TRIALS_FIGHTERS_V96 as fighters, getXenoTrialsArtV96 } from '../src/xeno-trials-data-v96.js';
 import { createXenoTrialsProgressV96 } from '../src/xeno-trials-progress-v96.js';
-import { getXenoTrialsAnimationCoverageV189 } from '../src/xeno-trials-animation-coverage-v189.js';
+import { getXenoTrialsAnimationCoverageV191 } from '../src/xeno-trials-animation-coverage-v191.js';
 import { publicXenoSpritePathAdmissionV189, verifyXenoSpriteAdmissionsV189 } from './public-xeno-sprite-admissions-v189.mjs';
 import { getXenoTrialsSpriteAtlasV189 } from '../src/xeno-trials-sprite-atlas-v189.js';
 import { createXenoTrialsReactionObserverV186, getXenoTrialsReactionProfileV186 } from '../src/xeno-trials-reactions-v186.js';
@@ -28,11 +28,11 @@ function terminal() {
 
 test('the animation filter uses admitted gestures, clamps an old page and preserves the selected specimen and economy', () => {
   const h = terminal(), before = JSON.stringify(h.progress);
-  const selected = fighters.find(fighter => !getXenoTrialsAnimationCoverageV189(fighter.id).hasDrawnGestures).id;
+  const selected = fighters.find(fighter => !getXenoTrialsAnimationCoverageV191(fighter.id).hasDrawnGestures).id;
   h.ui.selected = h.ui.rosterSelectionV179 = selected; h.ui.rosterPageV179 = 4;
   h.el('animation').value = 'drawn'; h.ui.render();
   const ids = [...h.el('roster').innerHTML.matchAll(/data-xt-fighter="([^"]+)"/g)].map(match => match[1]);
-  const admitted = fighters.filter(fighter => getXenoTrialsAnimationCoverageV189(fighter.id).hasDrawnGestures).map(fighter => fighter.id);
+  const admitted = fighters.filter(fighter => getXenoTrialsAnimationCoverageV191(fighter.id).hasDrawnGestures).map(fighter => fighter.id);
   assert.deepEqual(ids, admitted); assert.equal(h.ui.rosterPageV179, 0);
   assert.equal(h.ui.selected, selected); assert.ok(!ids.includes(selected));
   assert.equal(JSON.stringify(h.progress), before);

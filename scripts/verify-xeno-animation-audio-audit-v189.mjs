@@ -62,7 +62,7 @@ test('the complete legacy chain retains its archival default and exposes four ex
 });
 
 test('V189 relays to V190 while pinning its changed V188 relay and keeps new tools and review inputs source-only with exact neighbours refused', () => {
-  const terminal = 'scripts/audit-xeno-arbiter-campaign-v190.mjs', relay = 'scripts/audit-xeno-stage-operations-v188.mjs';
+  const terminal = 'scripts/audit-xeno-arbiter-protocols-v191.mjs', relay = 'scripts/audit-xeno-stage-operations-v188.mjs';
   assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(read(terminal).toString()), false);
   assert.equal(Object.hasOwn(successors, terminal) || Object.hasOwn(inputs, terminal), false);
   assert.ok(successors[relay]); assert.match(read(relay).toString(), /from '\.\/audit-xeno-animation-audio-v189\.mjs'/);

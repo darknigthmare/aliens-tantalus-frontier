@@ -1,4 +1,5 @@
 import { renderArbiterTerminalDossierV190 } from './xeno-arbiter-ui-v190.js';
+import { ARBITER_PROGRAMS_V191, ARBITER_HORDE_PROTOCOLS_V191, getArbiterProgramV191, getArbiterArchiveAccessV191 } from './xeno-arbiter-protocols-v191.js';
 import { getXenoTrialsRigV154 } from './xeno-trials-rig-v154.js';
 import { getXenoTrialsSequenceV155 } from './xeno-trials-sequences-v155.js';
 import { hasXenoTrialsGrappleV153 } from './xeno-trials-grapple-v153.js';
@@ -18,7 +19,7 @@ import { XENO_TRIALS_BRANCHES_V119 as BRANCHES, XENO_TRIALS_CAMPAIGN_V119 as CAM
 import { renderEnemyImportPreviewV103 } from './enemy-import-admissions-v103.js';
 import { getEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
 import { getEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
-import { getXenoTrialsAnimationCoverageV189 } from './xeno-trials-animation-coverage-v189.js';
+import { getXenoTrialsAnimationCoverageV191 } from './xeno-trials-animation-coverage-v191.js';
 import { getXenoTrialsRosterPageV179, getXenoTrialsRosterProfileV179 } from './xeno-trials-roster-v179.js';
 import { XENO_TRIALS_HORDE_PROTOCOLS_V186 as HORDE_PROTOCOLS } from './xeno-trials-horde-v180.js';
 import { XENO_TRIALS_OPERATIONS_V188 as OPERATIONS } from './xeno-trials-operations-v188.js';
@@ -46,6 +47,10 @@ const hordeStatsV180 = view => view ? `<dl class="xt-horde-briefing-grid"><div><
 const combatBriefingV188 = activity => getXenoTrialsOperationBriefingV188(activity) || getXenoTrialsHordeBriefingV180(activity);
 const activityBranchV179 = branch => branch === 'events' ? 'challenges' : branch;
 const challengeBranchV179 = id => CHALLENGES.find(entry => entry.id === id)?.eventV179 ? 'events' : 'challenges';
+const ARCHIVE_BRANCH_V191 = 'arbiter-archives';
+const TERMINAL_BRANCHES_V191 = Object.freeze([...BRANCHES, Object.freeze({ id: ARCHIVE_BRANCH_V191, label: 'ARCHIVES ARBITER',
+  description: '20 hordes et 20 opérations issues de la copie isolée AB-40. Les six retours de l’enquête ouvrent ces dossiers.' })]);
+const activityBranchV191 = (branch, id) => branch === ARCHIVE_BRANCH_V191 ? getArbiterProgramV191(id)?.branch : activityBranchV179(branch);
 
 /** UI owns no campaign money and never writes outside its current save owner. */
 export class XenoTrialsUiV96 {
@@ -61,7 +66,7 @@ export class XenoTrialsUiV96 {
       <p class="xt-notice">Simulation MIRE. Sélectionnez un programme, préparez votre spécimen puis engagez l’évaluation.</p>
       <div class="xt-dashboard" data-xt="progress"></div>
       <nav class="xt-steps" aria-label="Préparation du duel" data-xt="steps"></nav>
-      <section class="xt-home-v119" data-xt="home"><details class="xt-arbiter-dossier-v190"><summary>DOSSIER ARBITER / AB-40</summary><div data-xt="arbiter-dossier"></div></details><div class="xt-terminal-hero"><div class="xt-terminal-intro"><p class="eyebrow">SYSTÈME MIRE / PROGRAMME D’ÉVALUATION</p><h1>XENO<br><span>TRIALS</span><small>ÉTUDE COMPARATIVE DES ESPÈCES</small></h1><p>Observez. Engagez. Survivez.<br>Chaque contact enrichit le dossier.</p><dl class="xt-terminal-spec"><div><dt>SPÉCIMENS ADMIS</dt><dd>${FIGHTERS.length}</dd></div><div><dt>ENVIRONNEMENTS</dt><dd>${STAGES.length}</dd></div><div><dt>PROTOCOLES HORDE</dt><dd>${HORDE_PROTOCOLS.length}</dd></div></dl></div><div class="xt-containment-monitor"><div class="xt-monitor-heading"><span>OBSERVATION / 001</span><span>CONFINEMENT MIRE</span></div><div class="xt-monitor-specimen">${renderEnemyImportPreviewV103(getXenoTrialsArtV96('warrior'), 'Warrior — observation MIRE', 'clamp(210px, 34vh, 360px)') || `<img src="${getXenoTrialsArtV96('warrior').path}" alt="Warrior — observation MIRE">`}<span class="xt-monitor-reticle" aria-hidden="true"></span></div><div class="xt-monitor-caption"><span>WARRIOR<br><strong>XX121 / SUJET D’ÉTUDE</strong></span><span>OBSERVATION<br><strong>CONTACT VISUEL</strong></span></div></div></div><div data-xt="series-resume" class="xt-series-recovery" hidden><button type="button" class="button primary" data-xt="resume-series">POURSUIVRE LA SÉRIE EN COURS</button><button type="button" class="button danger-outline" data-xt="abandon-series">ABANDONNER LA SÉRIE · SANS PRIME</button></div><div class="xt-program-heading"><span>RÉPERTOIRE DES PROGRAMMES</span><span>SÉLECTIONNEZ UNE LIGNE POUR CONTINUER</span></div><div class="xt-branches-v119" data-xt="branches"></div><div class="xt-terminal-foot"><span>MIRE / INTERFACE D’ÉVALUATION</span><span>WEYLAND-YUTANI · BUILDING BETTER WORLDS</span></div></section>
+      <section class="xt-home-v119" data-xt="home"><details class="xt-arbiter-dossier-v190"><summary>DOSSIER ARBITER / AB-40</summary><div data-xt="arbiter-dossier"></div></details><div class="xt-terminal-hero"><div class="xt-terminal-intro"><p class="eyebrow">SYSTÈME MIRE / PROGRAMME D’ÉVALUATION</p><h1>XENO<br><span>TRIALS</span><small>ÉTUDE COMPARATIVE DES ESPÈCES</small></h1><p>Observez. Engagez. Survivez.<br>Chaque contact enrichit le dossier.</p><dl class="xt-terminal-spec"><div><dt>SPÉCIMENS ADMIS</dt><dd>${FIGHTERS.length}</dd></div><div><dt>ENVIRONNEMENTS</dt><dd>${STAGES.length}</dd></div><div><dt>PROTOCOLES HORDE</dt><dd>${HORDE_PROTOCOLS.length + ARBITER_HORDE_PROTOCOLS_V191.length}</dd></div></dl></div><div class="xt-containment-monitor"><div class="xt-monitor-heading"><span>OBSERVATION / 001</span><span>CONFINEMENT MIRE</span></div><div class="xt-monitor-specimen">${renderEnemyImportPreviewV103(getXenoTrialsArtV96('warrior'), 'Warrior — observation MIRE', 'clamp(210px, 34vh, 360px)') || `<img src="${getXenoTrialsArtV96('warrior').path}" alt="Warrior — observation MIRE">`}<span class="xt-monitor-reticle" aria-hidden="true"></span></div><div class="xt-monitor-caption"><span>WARRIOR<br><strong>XX121 / SUJET D’ÉTUDE</strong></span><span>OBSERVATION<br><strong>CONTACT VISUEL</strong></span></div></div></div><div data-xt="series-resume" class="xt-series-recovery" hidden><button type="button" class="button primary" data-xt="resume-series">POURSUIVRE LA SÉRIE EN COURS</button><button type="button" class="button danger-outline" data-xt="abandon-series">ABANDONNER LA SÉRIE · SANS PRIME</button></div><div class="xt-program-heading"><span>RÉPERTOIRE DES PROGRAMMES</span><span>SÉLECTIONNEZ UNE LIGNE POUR CONTINUER</span></div><div class="xt-branches-v119" data-xt="branches"></div><div class="xt-terminal-foot"><span>MIRE / INTERFACE D’ÉVALUATION</span><span>WEYLAND-YUTANI · BUILDING BETTER WORLDS</span></div></section>
       <section data-xt="activities" class="xt-activities-v119" hidden><div class="xt-activity-heading"><button type="button" class="button" data-xt="home-return">← PROGRAMME</button><h2><span data-xt="branch-title"></span></h2><button type="button" class="button" data-xt="renew-contracts" hidden>RENOUVELER LES CONTRATS</button></div><div class="xt-program-tools-v186"><label data-xt="program-filter-label">Type de protocole<select data-xt="program-filter"><option value="all">Tous les protocoles</option><option value="standard">Vagues standards</option><option value="boss">Finales avec boss</option></select></label><nav aria-label="Pages des programmes"><button type="button" class="button" data-xt="program-previous">← PAGE PRÉCÉDENTE</button><span data-xt="program-page" role="status" aria-live="polite"></span><button type="button" class="button" data-xt="program-next">PAGE SUIVANTE →</button></nav></div><p class="xt-activity-index" data-xt="activity-count" role="status"></p><div data-xt="activity-board" class="xt-activity-board-v119"></div></section>
       <section data-xt="briefing" class="xt-briefing-v119" hidden></section>
       <div class="xt-layout" data-xt="layout"><aside class="xt-roster" data-xt="stable"><h3>RÉSERVE BIOLOGIQUE</h3>
@@ -259,7 +264,7 @@ export class XenoTrialsUiV96 {
     // Saved duels retain their historical timer/palette; previews describe that ticket.
     const config = this.state().pending?.config;
     if (!config) return;
-    this.activityV119 = config.activityV119 || null; this.branchV119 = config.activityV119?.branch === 'challenges' ? challengeBranchV179(config.activityV119.id) : config.activityV119?.branch || 'on-demand';
+    this.activityV119 = config.activityV119 || null; this.branchV119 = getArbiterProgramV191(config.activityV119?.id) ? ARCHIVE_BRANCH_V191 : config.activityV119?.branch === 'challenges' ? challengeBranchV179(config.activityV119.id) : config.activityV119?.branch || 'on-demand';
     if (FIGHTERS.some(f => f.id === config.playerId)) this.selected = config.playerId;
     if (FACTIONS.some(f => f.id === config.factionId)) this.form.elements.factionId.value = config.factionId;
     this.updateOpponents();
@@ -281,7 +286,7 @@ export class XenoTrialsUiV96 {
     this.closeRuntime(); this.selectionStep = 'home'; this.branchV119 = null; this.activityV119 = null; this.render(); return true;
   }
   chooseBranchV119(id) {
-    if (!this.active || this.isRunning() || this.state().pending || this.unsavedResult || !BRANCHES.some(b => b.id === id)) return false;
+    if (!this.active || this.isRunning() || this.state().pending || this.unsavedResult || !TERMINAL_BRANCHES_V191.some(b => b.id === id)) return false;
     if (this.state().modesV119.challengeRun && id !== challengeBranchV179(this.state().modesV119.challengeRun.id)) { this.message('Une série est en cours. Poursuivez-la ou abandonnez-la depuis le programme.'); return false; }
     this.closeRuntime(); this.programPageV186 = 0; this.el('program-filter').value = 'all'; this.branchV119 = id; this.activityV119 = id === 'on-demand' ? { branch: id, id, rules: requestedRulesV119(this.form.elements.requestedRules.value) } : null;
     this.selectionStep = id === 'on-demand' ? 'target' : 'activities'; this.render(); return true;
@@ -289,9 +294,12 @@ export class XenoTrialsUiV96 {
   chooseActivityV119(id) {
     if (!this.active || this.isRunning() || this.state().pending || this.unsavedResult) return false;
     if (this.state().modesV119.challengeRun && id !== this.state().modesV119.challengeRun.id) return false;
-    const activity = resolveXenoTrialsActivityV119({ branch: activityBranchV179(this.branchV119), id }, this.state().modesV119);
+    const archive = getArbiterProgramV191(id), access = getArbiterArchiveAccessV191(this.getCampaignProgress?.());
+    if (archive && !access.available) { this.message(access.notice); return false; }
+    const branch = activityBranchV191(this.branchV119, id);
+    const activity = resolveXenoTrialsActivityV119({ branch, id }, this.state().modesV119);
     if (!activity) return false;
-    this.activityV119 = { branch: activityBranchV179(this.branchV119), id };
+    this.activityV119 = { branch, id };
     if (activity.forcedPlayerId) this.selected = activity.forcedPlayerId;
     if (this.state().modesV119.challengeRun?.id === id) this.selected = this.state().modesV119.challengeRun.playerId;
     if (activity.requiredFamily) this.el('family').value = activity.requiredFamily;
@@ -303,11 +311,12 @@ export class XenoTrialsUiV96 {
     this.selectionStep = 'fighters'; this.render(); return true;
   }
   renderActivitiesV119(state) {
-    this.el('branches').innerHTML = BRANCHES.map((branch, index) => `<button type="button" data-xt-branch="${branch.id}" class="xt-branch-v119${branch.id === 'horde' ? ' xt-branch-horde' : ''}"><span class="xt-branch-code">MIRE / ${String(index + 1).padStart(2, '0')}<i aria-hidden="true">${branch.id === 'horde' ? 'CONFINEMENT' : 'ÉVALUATION'}</i></span><strong>${escapeHtml(branch.label)}</strong><p>${escapeHtml(branch.description)}</p><span class="xt-branch-open">OUVRIR LE PROGRAMME <b aria-hidden="true">↗</b></span></button>`).join('');
-    this.el('branch-title').textContent = BRANCHES.find(branch => branch.id === this.branchV119)?.label || '';
+    const archiveAccess = getArbiterArchiveAccessV191(this.getCampaignProgress?.());
+    this.el('branches').innerHTML = TERMINAL_BRANCHES_V191.map((branch, index) => `<button type="button" data-xt-branch="${branch.id}" class="xt-branch-v119${branch.id === 'horde' ? ' xt-branch-horde' : ''}"><span class="xt-branch-code">MIRE / ${String(index + 1).padStart(2, '0')}<i aria-hidden="true">${branch.id === 'horde' ? 'CONFINEMENT' : 'ÉVALUATION'}</i></span><strong>${escapeHtml(branch.label)}</strong><p>${escapeHtml(branch.description)}</p>${branch.id === ARCHIVE_BRANCH_V191 ? `<p>${escapeHtml(archiveAccess.notice)}</p>` : ''}<span class="xt-branch-open">OUVRIR LE PROGRAMME <b aria-hidden="true">↗</b></span></button>`).join('');
+    this.el('branch-title').textContent = TERMINAL_BRANCHES_V191.find(branch => branch.id === this.branchV119)?.label || '';
     this.el('renew-contracts').hidden = this.branchV119 !== 'contracts';
-    const entries = this.branchV119 === 'operations' ? OPERATIONS : this.branchV119 === 'horde' ? HORDE_PROTOCOLS : this.branchV119 === 'campaign' ? CAMPAIGN : this.branchV119 === 'contracts' ? getXenoTrialsContractsV119(state.modesV119.contractCycle) : ['challenges', 'events'].includes(this.branchV119) ? CHALLENGES.filter(entry => Boolean(entry.eventV179) === (this.branchV119 === 'events')) : [];
-    this.el('activity-count').textContent = this.branchV119 === 'operations' ? `${entries.length} OPÉRATIONS / OBJECTIFS PHYSIQUES / DANGERS DE TERRAIN` : this.branchV119 === 'horde' ? `${entries.length} PROTOCOLES / CONTACTS SIMULTANÉS / SURVIE CONTINUE` : `${entries.length} DOSSIERS / ${this.branchV119 === 'events' ? 'DUELS SUCCESSIFS' : 'ÉVALUATION COMPARATIVE'}`;
+    const entries = this.branchV119 === ARCHIVE_BRANCH_V191 ? ARBITER_PROGRAMS_V191 : this.branchV119 === 'operations' ? OPERATIONS : this.branchV119 === 'horde' ? HORDE_PROTOCOLS : this.branchV119 === 'campaign' ? CAMPAIGN : this.branchV119 === 'contracts' ? getXenoTrialsContractsV119(state.modesV119.contractCycle) : ['challenges', 'events'].includes(this.branchV119) ? CHALLENGES.filter(entry => Boolean(entry.eventV179) === (this.branchV119 === 'events')) : [];
+    this.el('activity-count').textContent = this.branchV119 === ARCHIVE_BRANCH_V191 ? `40 DOSSIERS / 20 HORDES / 20 OPÉRATIONS · ${archiveAccess.notice}` : this.branchV119 === 'operations' ? `${entries.length} OPÉRATIONS / OBJECTIFS PHYSIQUES / DANGERS DE TERRAIN` : this.branchV119 === 'horde' ? `${entries.length} PROTOCOLES / CONTACTS SIMULTANÉS / SURVIE CONTINUE` : `${entries.length} DOSSIERS / ${this.branchV119 === 'events' ? 'DUELS SUCCESSIFS' : 'ÉVALUATION COMPARATIVE'}`;
     const page = getXenoTrialsProgramPageV186(entries, { page: this.programPageV186, kind: this.branchV119 === 'horde' ? this.el('program-filter').value : 'all' });
     this.programPageV186 = page.page;
     this.el('program-filter-label').hidden = this.branchV119 !== 'horde';
@@ -315,15 +324,17 @@ export class XenoTrialsUiV96 {
     this.el('program-previous').disabled = !page.hasPrevious;
     this.el('program-next').disabled = !page.hasNext;
     this.el('activity-board').innerHTML = page.entries.map((entry, index) => {
-      const activity = resolveXenoTrialsActivityV119({ branch: activityBranchV179(this.branchV119), id: entry.id }, state.modesV119);
+      const entryBranch = activityBranchV191(this.branchV119, entry.id);
+      const archiveLocked = Boolean(getArbiterProgramV191(entry.id)) && !archiveAccess.available;
+      const activity = resolveXenoTrialsActivityV119({ branch: entryBranch, id: entry.id }, state.modesV119);
       const horde = combatBriefingV188(activity);
-      const cleared = this.branchV119 === 'operations' ? state.modesV119.operationsCleared?.includes(entry.id) : this.branchV119 === 'horde' ? state.modesV119.hordeCleared?.includes(entry.id) : this.branchV119 === 'campaign' ? state.modesV119.campaignCleared.includes(entry.id) : this.branchV119 === 'contracts' ? state.modesV119.claimedContracts.includes(entry.id) : state.modesV119.challengesCleared.includes(entry.id);
+      const cleared = entryBranch === 'operations' ? state.modesV119.operationsCleared?.includes(entry.id) : entryBranch === 'horde' ? state.modesV119.hordeCleared?.includes(entry.id) : this.branchV119 === 'campaign' ? state.modesV119.campaignCleared.includes(entry.id) : this.branchV119 === 'contracts' ? state.modesV119.claimedContracts.includes(entry.id) : state.modesV119.challengesCleared.includes(entry.id);
       const opponentId = activity?.opponentId || entry.opponentId || entry.opponentIds?.[0], fighter = FIGHTERS.find(fighter => fighter.id === opponentId);
-      const locked = this.branchV119 === 'campaign' && !isXenoTrialsMissionOpenV119(entry.id, state.modesV119) || this.branchV119 === 'contracts' && cleared
+      const locked = archiveLocked || this.branchV119 === 'campaign' && !isXenoTrialsMissionOpenV119(entry.id, state.modesV119) || this.branchV119 === 'contracts' && cleared
         || ['challenges', 'events'].includes(this.branchV119) && state.modesV119.challengeRun && state.modesV119.challengeRun.id !== entry.id;
       const passage = !horde && entry.opponentIds?.length > 1 ? ` · Passage ${(activity?.bout || 0) + 1}/${entry.opponentIds.length}` : '';
       const stage = STAGES.find(stage => stage.id === activity?.stageId);
-      return `<article class="xt-activity-v119 ${cleared ? 'validated' : ''}${horde ? ' xt-horde-protocol' : ''}"${entry.operationV188 || this.branchV119 === 'operations' ? ' data-xt-operation="true"' : ''}${entry.eventV179 ? ' data-xt-event="true"' : ''}${horde ? ' data-xt-horde="true"' : ''}>${horde && stage?.backdrop ? `<div class="xt-activity-image"><img src="${stage.backdrop}" alt="" loading="lazy"><span>PROTOCOLE ${String(entries.indexOf(entry) + 1).padStart(2, '0')} / ${escapeHtml(stage.label)}</span></div>` : ''}<p class="eyebrow">${escapeHtml(horde?.operation ? 'MIRE / OPÉRATION DE TERRAIN' : horde ? 'ALERTE MIRE / HORDE SIMULTANÉE' : entry.act || (entry.eventV179 ? 'ALERTE MIRE / DUELS SUCCESSIFS' : this.branchV119 === 'contracts' ? 'CIBLE ASSIGNÉE' : 'ÉPREUVE FIXE'))}</p><h3>${escapeHtml(entry.title || entry.label)}</h3><strong>${escapeHtml(horde ? horde.pressureLabel : fighter?.label || 'Cible à définir')}${passage}</strong><p>${escapeHtml(entry.briefing || entry.description)}</p>${entry.bossFinaleV186 ? `<p class="xt-boss-order-v186">FINALE · ${escapeHtml(FIGHTERS.find(fighter => fighter.id === entry.bossFinaleV186.fighterId)?.label || 'Contact majeur')} · ${entry.bossFinaleV186.hp} PV</p>` : ''}${hordeStatsV180(horde)}${!horde && activity?.waveLabel ? `<p>${escapeHtml(activity.waveLabel)}</p>` : ''}${!horde ? `<p>${escapeHtml(getXenoTrialsRuleTextV119(activity?.rules || entry.rules))}</p>` : ''}${stage && !horde ? `<p>${escapeHtml(stage.label)}</p>` : ''}<span class="xt-activity-reward">${cleared ? 'VALIDÉ · Récompense déjà accordée' : `PRIME DE VALIDATION · ${activity?.reward ?? entry.reward ?? 0} crédits Trials`}</span><button type="button" class="button ${locked ? '' : 'primary'}" data-xt-activity="${entry.id}" ${locked ? 'disabled' : ''}>${locked ? cleared ? 'CONTRAT TERMINÉ' : state.modesV119.challengeRun ? 'SÉRIE EN COURS' : 'ACCRÉDITATION REQUISE' : cleared ? 'REJOUER' : activity?.bout > 0 ? 'POURSUIVRE LA SÉRIE' : horde ? 'OUVRIR LE PROTOCOLE →' : 'BRIEFING · CHOISIR MON SPÉCIMEN'}</button></article>`;
+      return `<article class="xt-activity-v119 ${cleared ? 'validated' : ''}${horde ? ' xt-horde-protocol' : ''}"${entry.operationV188 || entryBranch === 'operations' ? ' data-xt-operation="true"' : ''}${entry.eventV179 ? ' data-xt-event="true"' : ''}${horde ? ' data-xt-horde="true"' : ''}>${horde && stage?.backdrop ? `<div class="xt-activity-image${stage.stageRevision === 190 ? ' xt-atlas-preview-v190' : ''}"><img src="${stage.backdrop}" alt="" loading="lazy"><span>PROTOCOLE ${String(entries.indexOf(entry) + 1).padStart(2, '0')} / ${escapeHtml(stage.label)}</span></div>` : ''}<p class="eyebrow">${escapeHtml(horde?.operation ? 'MIRE / OPÉRATION DE TERRAIN' : horde ? 'ALERTE MIRE / HORDE SIMULTANÉE' : entry.act || (entry.eventV179 ? 'ALERTE MIRE / DUELS SUCCESSIFS' : this.branchV119 === 'contracts' ? 'CIBLE ASSIGNÉE' : 'ÉPREUVE FIXE'))}</p><h3>${escapeHtml(entry.title || entry.label)}</h3><strong>${escapeHtml(horde ? horde.pressureLabel : fighter?.label || 'Cible à définir')}${passage}</strong><p>${escapeHtml(entry.briefing || entry.description)}</p>${entry.bossFinaleV186 ? `<p class="xt-boss-order-v186">FINALE · ${escapeHtml(FIGHTERS.find(fighter => fighter.id === entry.bossFinaleV186.fighterId)?.label || 'Contact majeur')} · ${entry.bossFinaleV186.hp} PV</p>` : ''}${hordeStatsV180(horde)}${!horde && activity?.waveLabel ? `<p>${escapeHtml(activity.waveLabel)}</p>` : ''}${!horde ? `<p>${escapeHtml(getXenoTrialsRuleTextV119(activity?.rules || entry.rules))}</p>` : ''}${stage && !horde ? `<p>${escapeHtml(stage.label)}</p>` : ''}<span class="xt-activity-reward">${cleared ? 'VALIDÉ · Récompense déjà accordée' : `PRIME DE VALIDATION · ${activity?.reward ?? entry.reward ?? 0} crédits Trials`}</span><button type="button" class="button ${locked ? '' : 'primary'}" data-xt-activity="${entry.id}" ${locked ? 'disabled' : ''}>${locked ? archiveLocked ? 'SCELLÉS · TERMINER L’ENQUÊTE ARBITER' : cleared ? 'CONTRAT TERMINÉ' : state.modesV119.challengeRun ? 'SÉRIE EN COURS' : 'ACCRÉDITATION REQUISE' : cleared ? 'REJOUER' : activity?.bout > 0 ? 'POURSUIVRE LA SÉRIE' : horde ? 'OUVRIR LE PROTOCOLE →' : 'BRIEFING · CHOISIR MON SPÉCIMEN'}</button></article>`;
     }).join('');
     const activity = this.activityV119 && resolveXenoTrialsActivityV119(this.activityV119, state.modesV119);
     const horde = combatBriefingV188(activity);
@@ -371,7 +382,7 @@ export class XenoTrialsUiV96 {
       const attack = getEnemyImportAttackV109(art);
       const signature = getXenoTrialsSignatureV147(f);
       const rig=getXenoTrialsRigV154(f,art);
-      const coverage = getXenoTrialsAnimationCoverageV189(f.id);
+      const coverage = getXenoTrialsAnimationCoverageV191(f.id);
       const motionLabel = coverage?.playerLabel || (rig ? (rig.id.startsWith('rig-v154-') ? 'Présentations, défi et réactions disponibles.' : 'Présentations et réactions disponibles.') : attack ? `Marche : 4 poses adaptées · ${attack.label}` : walk?.label);
       const desiredFacing = i ? -1 : 1;
       const sourceFacing = art?.sourceFacing === 1 ? 1 : -1;
@@ -401,7 +412,8 @@ export class XenoTrialsUiV96 {
       config.activityV119 = { ...this.activityV119 };
       if (this.branchV119 === 'on-demand') config.activityV119.rules = requestedRulesV119(this.form.elements.requestedRules.value);
     }
-    const transaction = beginXenoTrialsV96(this.getProgress(), config);
+    const transaction = beginXenoTrialsV96(this.getProgress(), config, { arbiterProgressV190: this.getCampaignProgress?.() });
+    if (!transaction.applied && transaction.reason === 'arbiter-archives-locked') this.message(getArbiterArchiveAccessV191(this.getCampaignProgress?.()).notice);
     if (this.commit(transaction)) { this.el('result').textContent = ''; void this.launch(transaction.config, gesture); }
   }
   async launch(config, gesture = null) {
@@ -607,7 +619,7 @@ export class XenoTrialsUiV96 {
     this.el('progress').textContent = `DIVISION ${Math.floor(state.xp / 300) + 1} · ${state.xp} XP · ${state.credits} crédits de simulation · ${state.wins} V / ${state.losses} D / ${state.draws} N · ${state.unlocked.length}/${FIGHTERS.length} spécimens`;
     let filtered = filterXenoTrialsRosterV97(FIGHTERS, { family: this.el('family').value || 'all', role: this.el('role').value || 'all', ownership: this.el('ownership').value || 'all', sort: this.el('sort').value || 'catalog', query: this.el('search').value, unlocked: state.unlocked,
       factionRoster: FACTIONS.find(f => f.id === this.el('faction-filter').value)?.roster || null });
-    if (this.el('animation').value === 'drawn') filtered = filtered.filter(fighter => getXenoTrialsAnimationCoverageV189(fighter.id)?.hasDrawnGestures);
+    if (this.el('animation').value === 'drawn') filtered = filtered.filter(fighter => getXenoTrialsAnimationCoverageV191(fighter.id)?.hasDrawnGestures);
     const page = getXenoTrialsRosterPageV179(filtered, { page: this.rosterPageV179, selectedId: this.selected, revealSelected: this.rosterSelectionV179 !== this.selected });
     this.rosterPageV179 = page.page; this.rosterSelectionV179 = this.selected;
     this.el('count').textContent = `${filtered.length} / ${FIGHTERS.length} spécimens · Sélection : ${FIGHTERS.find(f => f.id === this.selected).label}`;
@@ -618,7 +630,7 @@ export class XenoTrialsUiV96 {
     this.el('roster').innerHTML = page.fighters.map(f => {
       const unlocked = state.unlocked.includes(f.id), art = getXenoTrialsArtV96(f.id, f.id === 'arachnoid' ? this.form.elements.playerVariant.value : null), cost = getXenoTrialsUnlockCostV96(f.id);
       const portrait = renderEnemyImportPreviewV103(art, f.label, 'clamp(70px, 9vw, 95px)') || `<img src="${art.path}" alt="${f.label}" loading="lazy">`;
-      return `<article class="xt-fighter ${this.selected === f.id ? 'selected' : ''}"><button type="button" data-xt-fighter="${f.id}" aria-pressed="${this.selected === f.id}" ${running || state.pending ? 'disabled' : ''}>${portrait}<strong>${f.label}</strong><small>${roleLabel[f.role]} · ${f.hp} PV</small><small>${getXenoTrialsFighterSpecialLabelV147(f)}</small><small class="xt-motion-status-v189">${escapeHtml(getXenoTrialsAnimationCoverageV189(f.id)?.playerLabel || '')}</small>${getXenoTrialsSuperV148(f) ? `<small>Super : ${getXenoTrialsSuperV148(f).label}</small>` : ''}</button>${unlocked ? '<span class="xt-owned">ACQUIS</span>' : `<button type="button" class="xt-unlock" data-xt-unlock="${f.id}" ${this.unsavedResult || state.pending || state.credits < cost ? 'disabled' : ''}>DÉBLOQUER · ${cost}</button>`}</article>`;
+      return `<article class="xt-fighter ${this.selected === f.id ? 'selected' : ''}"><button type="button" data-xt-fighter="${f.id}" aria-pressed="${this.selected === f.id}" ${running || state.pending ? 'disabled' : ''}>${portrait}<strong>${f.label}</strong><small>${roleLabel[f.role]} · ${f.hp} PV</small><small>${getXenoTrialsFighterSpecialLabelV147(f)}</small><small class="xt-motion-status-v189">${escapeHtml(getXenoTrialsAnimationCoverageV191(f.id)?.playerLabel || '')}</small>${getXenoTrialsSuperV148(f) ? `<small>Super : ${getXenoTrialsSuperV148(f).label}</small>` : ''}</button>${unlocked ? '<span class="xt-owned">ACQUIS</span>' : `<button type="button" class="xt-unlock" data-xt-unlock="${f.id}" ${this.unsavedResult || state.pending || state.credits < cost ? 'disabled' : ''}>DÉBLOQUER · ${cost}</button>`}</article>`;
     }).join('') || '<p class="xt-help">Aucun spécimen ne correspond à ces filtres. Votre sélection est conservée.</p>';
     const activity = this.activityV119 && resolveXenoTrialsActivityV119(this.activityV119, state.modesV119);
     const horde = combatBriefingV188(activity);

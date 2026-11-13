@@ -1,3 +1,4 @@
+import { publicXenoSpritePathAdmissionV191, verifyXenoSpriteAdmissionsV191 } from './public-xeno-sprite-admissions-v191.mjs';
 import { publicArbiterPathAdmissionV190, verifyArbiterImageAdmissionsV190 } from './public-xeno-arbiter-admissions-v190.mjs';
 import { publicReleasePathAdmissionV163, verifyPublicAdmissionsV163 } from './public-release-admissions-v163.mjs';
 import assert from 'node:assert/strict';
@@ -285,6 +286,18 @@ SCRIPT_FILES.add('verify-hub-armory-v169.mjs');
 SCRIPT_FILES.add('verify-i18n-v185.mjs');
 // Exact V179 tooling stays source-only, independently of older script policy.
 const V179_SOURCE_ONLY_SCRIPTS = new Set(["scripts/sync-alien-base-v1.mjs", "scripts/export-alien-base-tantalus-v1.mjs", "scripts/alien-base-pr7-proposal-v1.mjs", "scripts/verify-alien-base-bridge-v1.mjs", "scripts/verify-alien-base-import-contract-v179.mjs", "scripts/verify-alien-base-pr7-proposal-v1.mjs", "scripts/verify-hub-door-bay-v178.mjs"]);
+const XENO_ARBITER_SOURCE_ONLY_V191 = new Set([
+  'scripts/audit-xeno-arbiter-protocols-v191.mjs',
+  'scripts/verify-xeno-arbiter-protocols-audit-v191.mjs',
+  'scripts/public-xeno-sprite-admissions-v191.mjs',
+  'scripts/qa-xeno-arbiter-protocols-v191.py',
+  'scripts/verify-xeno-arbiter-integration-v191.mjs',
+  'scripts/verify-xeno-arbiter-protocols-v191.mjs',
+  'scripts/verify-xeno-trials-sprite-atlas-v191.mjs',
+  'scripts/verify-xeno-trials-animation-coverage-v191.mjs',
+  'scripts/verify-xeno-trials-runtime-animation-v191.mjs',
+  'scripts/verify-xeno-arbiter-protocols-i18n-v191.mjs',
+]);
 const XENO_ARBITER_SOURCE_ONLY_V190 = new Set([
   'scripts/public-xeno-arbiter-admissions-v190.mjs',
   'scripts/audit-xeno-arbiter-campaign-v190.mjs',
@@ -433,6 +446,12 @@ const FORGE_TOOLING_V140 = new Set([
   'docs/forge/xeno-trials/sprite-production-v188.json',
   'docs/forge/xeno-trials/V188-STAGE-OPERATIONS.md',
   'docs/forge/xeno-trials/operations-completion-v188.json',
+  'docs/forge/xeno-trials/V191-ARBITER-PROTOCOLS-ANIMATION.md',
+  'docs/forge/xeno-trials/arbiter-protocols-completion-v191.json',
+  'docs/forge/xeno-trials/sprite-combat-production-v191.json',
+  'docs/forge/xeno-trials/sprite-special-production-v191.json',
+  'docs/forge/xeno-trials/animation-coverage-v191.json',
+  'docs/forge/xeno-trials/i18n-arbiter-protocols-review-v191.json',
   'docs/forge/xeno-trials/V190-ARBITER-CAMPAIGN.md',
   'docs/forge/xeno-trials/arbiter-campaign-completion-v190.json',
   'docs/forge/xeno-trials/stage-art-production-v190.json',
@@ -672,12 +691,15 @@ export function isPublicDistributionPathV86(path, { directory = false, built = f
   if (V179_SOURCE_ONLY_SCRIPTS.has(path)) return !built;
   if (XENO_COMPLETION_SOURCE_ONLY_V186.has(path)) return !built;
   if (XENO_OPERATIONS_SOURCE_ONLY_V188.has(path)) return !built;
+  if (XENO_ARBITER_SOURCE_ONLY_V191.has(path)) return !built;
   if (XENO_ARBITER_SOURCE_ONLY_V190.has(path)) return !built;
   if (XENO_ANIMATION_SOURCE_ONLY_V189.has(path)) return !built;
   if (!built && FORGE_TOOLING_V140.has(path)) return true;
   if (FORGE_STYLES_V140.has(path)) return true;
   const segments = path.split('/');
   if (segments.some(part => !part || part === '.' || part === '..' || PRIVATE_SEGMENT.test(part))) return false;
+  const spriteAdmissionV191 = publicXenoSpritePathAdmissionV191(path, { directory });
+  if (spriteAdmissionV191 !== null) return spriteAdmissionV191;
   const arbiterAdmissionV190 = publicArbiterPathAdmissionV190(path, { directory });
   if (arbiterAdmissionV190 !== null) return arbiterAdmissionV190;
   const costumeAdmissionV165 = publicCostumePathAdmissionV165(path, { directory });
@@ -760,6 +782,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   await verifyXenoSpriteAdmissionsV188(root);
   await verifyXenoSpriteAdmissionsV189(root);
   await verifyArbiterImageAdmissionsV190(root);
+  await verifyXenoSpriteAdmissionsV191(root);
   return { ok: true, version: RELEASE.version, files, assets, privateDocuments: 0 };
 }
 

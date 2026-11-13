@@ -15,6 +15,7 @@ import {getXenoTrialsBodyBoundsV105 as bounds} from '../src/xeno-trials-geometry
 const review=JSON.parse(readFileSync(new URL('../docs/forge/xeno-trials/i18n-operations-review-v188.json',import.meta.url),'utf8'));
 const animationAudioReview=JSON.parse(readFileSync(new URL('../docs/forge/xeno-trials/i18n-animation-audio-review-v189.json',import.meta.url),'utf8'));
 const arbiterReview=JSON.parse(readFileSync(new URL('../docs/forge/xeno-trials/i18n-arbiter-review-v190.json',import.meta.url),'utf8'));
+const protocolsReview=JSON.parse(readFileSync(new URL('../docs/forge/xeno-trials/i18n-arbiter-protocols-review-v191.json',import.meta.url),'utf8'));
 const hash=object=>createHash('sha256').update(JSON.stringify(Object.fromEntries(Object.entries(object).sort(([a],[b])=>a<b?-1:a>b?1:0)))).digest('hex');
 function english(callback){useCatalogV185({EN_CATALOG_V185:C,EN_PATTERNS_V185:P});setLanguageV185('en',{document:null,persist:false});try{callback();}finally{setLanguageV185('fr',{document:null,persist:false});}}
 const titleNames={escort:'CONTAINMENT CONVOY',relay:'EMERGENCY RELAYS',purge:'DUCT PURGE',beacon:'SYNCHRONIZED BEACONS',extraction:'CRATE RECOVERY'};
@@ -26,10 +27,10 @@ function fixture(entry){const config={matchId:'i18n-operation',seed:188,stageId:
 test('V188 review adds translations while preserving all 6189 exact entries and 457 patterns from the delivered V186 catalogue',()=>{
  const base={},expected={exact:[6189,'34d0dab8e796a56a7827ba4d0b3845e891d8e4b720b652ba0dd504dc602d4076'],patterns:[457,'52cec80bf24498b70c9de65416e44df9057abae42e6f661109c573a20e45f326']};
  for(const[kind,catalogue]of Object.entries({exact:C,patterns:P})){
-  const additions=new Set([...review[kind],...animationAudioReview[kind],...arbiterReview[kind]].map(entry=>entry.fr));base[kind]=Object.fromEntries(Object.entries(catalogue).filter(([fr])=>!additions.has(fr)));
+  const additions=new Set([...review[kind],...animationAudioReview[kind],...arbiterReview[kind],...protocolsReview[kind]].map(entry=>entry.fr));base[kind]=Object.fromEntries(Object.entries(catalogue).filter(([fr])=>!additions.has(fr)));
   assert.equal(Object.keys(base[kind]).length,expected[kind][0]);assert.equal(hash(base[kind]),expected[kind][1]);
  }
- const rebuilt=mergeReviewV186(mergeReviewV186(mergeReviewV186(base,review),animationAudioReview),arbiterReview);assert.equal(hash(rebuilt.exact),hash(C));assert.equal(hash(rebuilt.patterns),hash(P));
+ const rebuilt=mergeReviewV186(mergeReviewV186(mergeReviewV186(mergeReviewV186(base,review),animationAudioReview),arbiterReview),protocolsReview);assert.equal(hash(rebuilt.exact),hash(C));assert.equal(hash(rebuilt.patterns),hash(P));
  assert.equal(validateCatalogV186(rebuilt).omittedPatternSlots,1);
 });
 
