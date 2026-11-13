@@ -3,7 +3,8 @@ import { detectReactiveTriggersV188, selectReactiveLinesV188 } from './reactive-
 import { applyAccessibilityV188, installKeyRemapV188, mountKeyBindingsUiV188, normalizeKeyBindingsV188, soundCaptionV188 } from './accessibility-v188.js';
 import { spareCrewMemberV188, normalizeCrewPermadeathV188, normalizeCustomDifficultyV188, normalizeOriginV188, CUSTOM_DIFFICULTY_BOUNDS_V188 } from './run-options-v188.js';
 import { cueForGameEventV188, casteCueV188 } from './audio-cues-v188.js';
-import { deriveStoryCampaignV188, markStoryDebriefSeenV188, markStoryCinematicSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, storyEndingReachedV188, resolveM577ManifestV188, normalizeStoryCampaignV188 } from './story-campaign-v188.js';
+import { deriveStoryCampaignV188, markStoryDebriefSeenV188, markStoryCinematicSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, storyEndingReachedV188, resolveM577ManifestV188, normalizeStoryCampaignV188, startInterludeV188, interludeCrisisClearedV188, resolveInterludeV188 } from './story-campaign-v188.js';
+import { openStoryChoiceDialogV188 } from './story-choice-ui-v188.js';
 import { CinematicPlayerV188, CINEMATICS_V188 } from './story-cinematics-v188.js';
 import { openM577ManifestDialogV188 } from './m577-manifest-ui-v188.js';
 import {
@@ -53,6 +54,7 @@ import {
   applyProvingGroundQualificationV81
 } from './hub-annex-services-v71.js';
 import { advanceGalaxy, resolveHubCrisisEvent } from './world-crisis.js';
+import { createHubCrisis as createForcedHubCrisisV188 } from './world-crisis-core.js';
 import { applyCampaignConsequence } from './campaign-consequences.js';
 import { hasCampaignStoryV160, preserveCampaignStoryReturnV160, recordCampaignStoryReviewV160 } from './campaign-story-v160.js';
 import { mountCampaignDebriefV160 } from './campaign-story-ui-v160.js';
@@ -822,6 +824,9 @@ function showView(name) {
   activeView = name;
   // V188: the QZ-18 debrief counts as read only when the player opens the briefing table.
   if (['operations', 'command'].includes(name)) queueMicrotask(markStoryDebriefOnViewV188);
+  // A pending interlude decision (reload during the choice) is asked again aboard.
+  if (name === 'hub') queueMicrotask(() => { if (activeView === 'hub' && normalizeStoryCampaignV188(saveSystem.data.storyCampaignV188).interlude?.phase === 'choice'
+    && !document.querySelector('.story-choice-v188')) chooseInterludeOutcomeV188(); });
   audio.setScene(['operations', 'command'].includes(name) && storyEndingReachedV188(saveSystem.data) ? 'ending' : resolveViewAudioSceneV77(name));
   all('.view').forEach((view) => view.classList.toggle('active', view.dataset.panel === name));
   all('.nav-button').forEach((button) => button.classList.toggle('active', button.dataset.view === name));
@@ -947,6 +952,25 @@ const playerCreatorUiV84 = new PlayerCreatorUiV84({
   },
   onCancel: () => { creatorOwnerV84 = null; titleScreen.show(); titleScreen.openMenu(); }
 });
+// Interlude (bible §5.4): CIN-40, then a forced xenomorph crisis in the deck-2 quarantine room.
+function startInterludeFlowV188() {
+  try {
+    const candidate = clone(saveSystem.data), crisis = startInterludeV188(candidate, createForcedHubCrisisV188);
+    if (!crisis) return;
+    saveSystem.commit(candidate); renderAll();
+    void playStoryCinematicV188('cin-40').then(() => toast(deriveStoryCampaignV188(saveSystem.data).objective || ''));
+  } catch (error) { toast(error.message); }
+}
+function chooseInterludeOutcomeV188() {
+  const en = document.documentElement.lang === 'en';
+  openStoryChoiceDialogV188({ title: en ? 'Quarantine' : 'Quarantaine',
+    intro: en ? 'The creature is contained. Inez and BISHOP-9 ask to study it.' : 'La créature est maîtrisée. Inez et BISHOP-9 demandent à l’étudier.',
+    options: [{ id: 'destroyed', label: en ? 'DESTROY IT' : 'LA DÉTRUIRE' }, { id: 'captured', label: en ? 'CAPTURE IT' : 'LA CAPTURER' }],
+    onChoose: (outcome) => {
+      try { const candidate = clone(saveSystem.data); if (resolveInterludeV188(candidate, outcome)) { saveSystem.commit(candidate); renderAll(); void playStoryCinematicV188('cin-41'); } }
+      catch (error) { toast(error.message); }
+    } });
+}
 function markStoryDebriefOnViewV188() {
   if (!['operations', 'command'].includes(activeView) || saveSystem.data.strategy.currentOperation) return;
   const doneV188 = saveSystem.data.galaxy.completedCampaignIds, seenV188 = saveSystem.data.storyCampaignV188?.debriefSeen || [];
@@ -955,7 +979,10 @@ function markStoryDebriefOnViewV188() {
   if (doneV188.includes('special-c12-horde') && manifestV188 && !manifestV188.resolved) {
     try {
       const candidate = clone(saveSystem.data), c12 = CAMPAIGNS.find(entry => entry.id === 'special-c12-horde');
-      if (resolveM577ManifestV188(candidate, c12?.worldId)) { saveSystem.commit(candidate); void playStoryCinematicV188('cin-31', { context: { m577: manifestV188 } }); }
+      if (resolveM577ManifestV188(candidate, c12?.worldId)) {
+        saveSystem.commit(candidate);
+        void playStoryCinematicV188('cin-31', { context: { m577: manifestV188 } }).then(startInterludeFlowV188);
+      }
     } catch (error) { toast(error.message); }
     return;
   }
@@ -3581,6 +3608,7 @@ function handleHubAction(interaction) {
       saveSystem.commit();
       renderAll();
       toast(result.outcome === 'resolved' ? 'Crise neutralisée dans le niveau.' : 'Extraction médicale : dégâts persistants appliqués.');
+      if (result.outcome === 'resolved' && interludeCrisisClearedV188(saveSystem.data, interaction.crisisId)) { saveSystem.commit(); chooseInterludeOutcomeV188(); }
     }
     return;
   }

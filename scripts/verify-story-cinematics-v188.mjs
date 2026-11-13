@@ -16,7 +16,8 @@ function recorder() {
 }
 
 test('durations follow bible §10 and every shot is bilingual', () => {
-  assert.deepEqual(CINEMATIC_IDS_V188, ['cin-00', 'cin-01', 'cin-p2', 'cin-02', 'cin-p3-wren', 'cin-p3-ferro', 'cin-20', 'cin-10', 'cin-11', 'cin-qz17-retour', 'cin-doyenne', 'cin-31', 'cin-50', 'cin-51', 'cin-20-rook']);
+  assert.deepEqual(CINEMATIC_IDS_V188, ['cin-00', 'cin-01', 'cin-p2', 'cin-02', 'cin-p3-wren', 'cin-p3-ferro', 'cin-20', 'cin-10', 'cin-11', 'cin-qz17-retour', 'cin-doyenne', 'cin-31', 'cin-50', 'cin-51', 'cin-40', 'cin-41', 'cin-20-rook']);
+  assert.equal(cinematicDurationV188('cin-40'), 30); assert.equal(cinematicDurationV188('cin-41'), 45);
   assert.equal(cinematicDurationV188('cin-31'), 30); assert.equal(cinematicDurationV188('cin-50'), 35); assert.equal(cinematicDurationV188('cin-51'), 25);
   const d = cinematicDurationV188; assert.ok(d('cin-00') >= 60 && d('cin-00') <= 75); assert.equal(d('cin-01'), 20);
   assert.ok(Math.abs(d('cin-02') - 45) <= 5); assert.equal(d('cin-20'), 40); assert.equal(d('cin-10'), 30); assert.equal(d('cin-11'), 25);
@@ -149,4 +150,34 @@ test('Act III manifest: each container removes two of six seats; colonists join 
   assert.match(app, /void playStoryCinematicV188\('cin-31', \{ context: \{ m577: manifestV188 \} \}\)/);
   assert.match(app, /event\.campaignId === 'special-black-cocoon'\) void playStoryCinematicV188\('cin-50'\)/);
   assert.match(app, /void playStoryCinematicV188\('cin-51'\)/);
+});
+
+import { interludeDueV188, startInterludeV188, interludeCrisisClearedV188, resolveInterludeV188, INTERLUDE_CRISIS_V188, deriveStoryCampaignV188 } from '../src/story-campaign-v188.js';
+import { resolveHubCrisisEvent } from '../src/world-crisis.js';
+import { createHubCrisis } from '../src/world-crisis-core.js';
+
+test('interlude: a real forced quarantine crisis, cleared by the real crisis resolver, then the choice and BISHOP-9 trust', () => {
+  const save = createDefaultSave(); save.needsPlayerCreationV84 = false;
+  assert.equal(interludeDueV188(save), false, 'not before Act III');
+  save.storyCampaignV188.m577Manifest = { containers: 1, colonists: 4, resolved: true };
+  assert.equal(interludeDueV188(save), true);
+  const crisis = startInterludeV188(save, createHubCrisis);
+  assert.equal(crisis.kind, 'xenomorph'); assert.equal(save.hub.activeCrisis.roomId, INTERLUDE_CRISIS_V188.roomId); assert.equal(save.hub.activeCrisis.deck, 2);
+  assert.equal(deriveStoryCampaignV188(save, { language: 'fr' }).step, 'interlude');
+  assert.match(deriveStoryCampaignV188(save, { language: 'en' }).objective, /Jun Park is not answering/);
+  assert.equal(startInterludeV188(save, createHubCrisis), null, 'started once');
+  const result = resolveHubCrisisEvent(save, { action: 'crisis:resolved', crisisId: crisis.id, kind: crisis.kind });
+  assert.equal(result.handled, true); assert.equal(result.outcome, 'resolved');
+  assert.equal(interludeCrisisClearedV188(save, 'other-crisis'), false);
+  assert.equal(interludeCrisisClearedV188(save, crisis.id), true);
+  const bishop = save.crew.find(member => member.id === 'crew-05-bishop-9'), before = bishop.loyalty;
+  assert.equal(resolveInterludeV188(save, 'eaten'), false);
+  assert.equal(resolveInterludeV188(save, 'captured'), true);
+  assert.equal(bishop.loyalty, Math.max(0, before - 20)); assert.equal(save.storyCampaignV188.interlude.outcome, 'captured');
+  assert.equal(resolveInterludeV188(save, 'destroyed'), false, 'decided once');
+  assert.deepEqual(migrateSave(JSON.parse(JSON.stringify(save))).storyCampaignV188.interlude, { phase: 'resolved', crisisId: crisis.id, outcome: 'captured' });
+  const app = read('src/app.js');
+  assert.match(app, /void playStoryCinematicV188\('cin-31', \{ context: \{ m577: manifestV188 \} \}\)\.then\(startInterludeFlowV188\)/);
+  assert.match(app, /interludeCrisisClearedV188\(saveSystem\.data, interaction\.crisisId\)\) \{ saveSystem\.commit\(\); chooseInterludeOutcomeV188\(\); \}/);
+  assert.match(app, /void playStoryCinematicV188\('cin-41'\)/); assert.match(app, /startInterludeV188\(candidate, createForcedHubCrisisV188\)/);
 });

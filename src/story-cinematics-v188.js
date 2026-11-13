@@ -133,6 +133,24 @@ export const CINEMATICS_V188 = Object.freeze({
     shot(12, 'dialogue', { scene: 'lab', line: line('NOOR OKAFOR', 'crew-04-noor-okafor',
       'Bon retour. Cette fois, je l’écris.', 'Welcome back. This time, I’m writing it down.') })
   ]) }),
+  // Interlude (bible §5.4). Lines and journal times are [PROPOSÉ] (§56.7).
+  'cin-40': Object.freeze({ id: 'cin-40', title: t('Jun Park ne répond plus', 'Jun Park isn’t answering'), music: 'alert', shots: Object.freeze([
+    shot(12, 'alarm-deck', { caption: t('TANTALUS · PONT 2 · ALERTE QUARANTAINE', 'TANTALUS · DECK 2 · QUARANTINE ALERT') }),
+    shot(10, 'dialogue', { scene: 'alarm', radio: true, line: line('TAMSIN VELEZ · RADIO', 'crew-02-tamsin-velez',
+      'Jun, répondez. Support-vie, ici Velez. Jun ?', 'Jun, respond. Life support, this is Velez. Jun?') }),
+    shot(8, 'alarm-deck', { caption: t('SUPPORT-VIE · AUCUNE RÉPONSE', 'LIFE SUPPORT · NO RESPONSE') })
+  ]) }),
+  'cin-41': Object.freeze({ id: 'cin-41', title: t('Ce que BISHOP-9 savait', 'What BISHOP-9 knew'), music: null, shots: Object.freeze([
+    shot(16, 'terminal', { clock: '02:31', lines: Object.freeze([
+      t('02:14 · INCINÉRATION DEMANDÉE · QUARANTAINE', '02:14 · INCINERATION REQUESTED · QUARANTINE'),
+      t('02:15 · BISHOP-9 · DIRECTIVE DE PRÉSERVATION', '02:15 · BISHOP-9 · PRESERVATION DIRECTIVE'),
+      t('02:15 · PROCÉDURE RALENTIE', '02:15 · PROCEDURE SLOWED')]), status: t('JOURNAL NON CONSULTÉ', 'LOG NEVER READ') }),
+    shot(15, 'dialogue', { scene: 'lab', line: line('BISHOP-9', 'crew-05-bishop-9',
+      'J’ai appliqué la directive de préservation. Je ne l’ai pas cachée. Personne ne m’a interrogé.',
+      'I applied the preservation directive. I did not hide it. Nobody asked me.') }),
+    shot(14, 'dialogue', { scene: 'lab', line: line('INEZ HARLOW', 'crew-09-inez-harlow',
+      'Maintenant, on t’interroge.', 'We’re asking now.') })
+  ]) }),
   // Bible §5.2 weaving: Rook identifies the remote signature (line [PROPOSÉ], §56.7).
   'cin-20-rook': Object.freeze({ id: 'cin-20-rook', title: t('La signature', 'The signature'), music: null, shots: Object.freeze([
     shot(10, 'dialogue', { scene: 'quarters', line: line('ROOK', 'crew-06-rook',
@@ -197,7 +215,7 @@ function background(ctx, images, scene, time, reducedMotion) {
     ctx.font = '13px monospace'; ctx.fillStyle = '#9fe7cf'; ctx.fillText('COCYTE', 600, 110); ctx.fillStyle = '#e15b4f'; ctx.fillText('ASPHODÈLE · QZ ROUGE', sx + 12, sy - 10);
     return;
   }
-  const palette = { cryo: ['#0b1418', '#14262c'], range: ['#151510', '#24231a'], quay: ['#101317', '#1d232b'], triage: ['#121517', '#232a2e'], quarters: ['#120f0c', '#1f1a15'], dropship: ['#0c0f0e', '#1a1e1c'], cradle: ['#0b1113', '#162024'], lab: ['#0d1214', '#1b2428'] }[scene] || ['#0b0f10', '#151b1d'];
+  const palette = { cryo: ['#0b1418', '#14262c'], range: ['#151510', '#24231a'], quay: ['#101317', '#1d232b'], triage: ['#121517', '#232a2e'], quarters: ['#120f0c', '#1f1a15'], dropship: ['#0c0f0e', '#1a1e1c'], cradle: ['#0b1113', '#162024'], lab: ['#0d1214', '#1b2428'], alarm: ['#140606', '#2a0e0c'] }[scene] || ['#0b0f10', '#151b1d'];
   const g = ctx.createLinearGradient?.(0, 0, 0, H);
   if (g) { g.addColorStop(0, palette[1]); g.addColorStop(1, palette[0]); ctx.fillStyle = g; } else ctx.fillStyle = palette[0];
   ctx.fillRect(0, 0, W, H);
@@ -245,8 +263,9 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       ctx.fillStyle = '#071009'; ctx.fillRect(200, 120, 880, 420); ctx.strokeStyle = '#2f6d45'; ctx.strokeRect(200.5, 120.5, 880, 420);
       ctx.font = '22px monospace'; ctx.fillStyle = '#8df0b0';
       ctx.fillText(`QZ-18 · FILE DE DÉTRESSE · ${current.clock}`, 240, 180);
-      const typed = current.lines.map(entry => entry[lang]).join(' ');
-      ctx.fillText(typed.slice(0, Math.ceil(typed.length * Math.min(1, progress * 2.2))), 240, 260);
+      const rows = current.lines.map(entry => entry[lang]), total = rows.join('').length;
+      let budget = Math.ceil(total * Math.min(1, progress * 2.2));
+      rows.forEach((row, index) => { const visible = row.slice(0, Math.max(0, budget)); budget -= row.length; if (visible) ctx.fillText(visible, 240, 250 + index * 34); });
       if (progress > .5) { ctx.fillStyle = (Math.floor(local * 2) % 2) ? '#e9d07a' : '#7c6c38'; ctx.font = '700 34px monospace'; ctx.fillText(current.status[lang], 240, 380); }
       caption(ctx, current.caption?.[lang]); break;
     }
@@ -345,6 +364,13 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H); const seed = Math.floor(local * 30);
       if (progress < .2) { ctx.fillStyle = 'rgba(220,230,225,.5)'; for (let i = 0; i < 900; i++) ctx.fillRect(((i * 7919 + seed * 104729) % W), ((i * 6271 + seed * 1299709) % H), 3, 3); }
       caption(ctx, current.caption?.[lang], 380); break;
+    }
+    case 'alarm-deck': {
+      const pulse = reducedMotion ? .5 : .5 + .5 * Math.sin(local * 5);
+      ctx.fillStyle = '#0c0707'; ctx.fillRect(0, 0, W, H); ctx.fillStyle = `rgba(200,40,30,${.12 + pulse * .22})`; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#1d1414'; ctx.fillRect(0, 520, W, 200); for (let x = 60; x < W; x += 220) { ctx.fillStyle = '#2a1d1d'; ctx.fillRect(x, 200, 140, 320); }
+      ctx.fillStyle = `rgba(255,80,60,${.4 + pulse * .6})`; for (let x = 120; x < W; x += 300) ctx.fillRect(x, 140, 40, 14);
+      caption(ctx, current.caption?.[lang]); break;
     }
     case 'title': {
       ctx.textAlign = 'center'; ctx.font = '700 54px sans-serif'; ctx.fillStyle = '#e6efe6';

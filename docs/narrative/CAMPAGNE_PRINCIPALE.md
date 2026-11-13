@@ -640,7 +640,9 @@ Contenu existant : briefing « Le message arrivé trop tard » ; protocoles *Aud
 
 **Conséquence :** `story-m577-manifest` = colons (0-6) et conteneurs (0-3). Les colons ramenés rejoignent la population de Port-Méridien. **[EXISTANT] (V188)** : la population du monde de C-12 est augmentée une seule fois. Les conteneurs restent consignés pour l'Interlude (§5.4), qui n'est pas encore jouable.
 
-### 5.4 Interlude — « Quarantaine » (à bord du Tantalus) — [PROPOSÉ]
+### 5.4 Interlude — « Quarantaine » (à bord du Tantalus) — [PARTIEL] V188
+
+**Raccordé (V188)** : après CIN-31, CIN-40 se joue, puis une crise xénomorphe forcée s'ouvre dans la salle de quarantaine du pont 2. Elle utilise le système de crise du hub existant. Une fois la crise résolue dans le niveau, le choix détruire ou capturer s'affiche ; il ne peut pas être esquivé et revient s'il a été interrompu. CIN-41 suit, et la loyauté de BISHOP-9 baisse de 20, soit un niveau de confiance. Un objectif dédié s'affiche au hub. **Pas encore raccordé** : le sauvetage de Jun Park dans les conduits et la routine `alert` des PNJ pendant la crise.
 
 Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-missions-v131.js`) et des crises à bord par route de salles (`world-crisis-core.js`, type `xenomorph`).
 
@@ -1114,8 +1116,8 @@ Les chapitres Mire Archive 001, Protocole Z-110, Jeri, Éloïse, A.T.A.X.-Q, Le 
 | CIN-20 | Treize minutes | Acte II | 40 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-21 | Le quai nord | `story-quai-nord` | 25 s | [PROPOSÉ] |
 | CIN-31 | Le sas refermé | Acte III | 30 s | [EXISTANT] V188 (placeholder Canvas) |
-| CIN-40 | Jun Park ne répond plus | Interlude | 30 s | [PROPOSÉ] |
-| CIN-41 | Ce que BISHOP-9 savait | Interlude | 45 s | [PROPOSÉ] |
+| CIN-40 | Jun Park ne répond plus | Interlude | 30 s | [EXISTANT] V188 (placeholder Canvas) |
+| CIN-41 | Ce que BISHOP-9 savait | Interlude | 45 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-50 | Les dernières images | Acte IV | 35 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-51 | Contrôle biologique | Acte IV | 25 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-59 | L'atterrissage | `story-recuperation` | 20 s | [PROPOSÉ] |
@@ -4350,6 +4352,7 @@ Les ajouts **[PROPOSÉ]** du §4, CIN-20 et la réponse de Halloran (§5.2) sont
 | Acte III, départ du convoi | Manifeste du M577 (0 à 3 conteneurs, 6 places moins 2 par conteneur) | Lancement de `special-apc-convoy` sans manifeste signé |
 | Acte III, C-12 | Coups dans le conteneur et « Notez l'heure. » | 13 s de défense, s'il y a au moins un conteneur |
 | Retour de C-12 | CIN-31 *Le sas refermé*, d'après le manifeste ; colons ajoutés une fois | Première table tactique après C-12 |
+| Interlude | CIN-40, puis une crise xénomorphe forcée (pont 2, quarantaine) ; une fois résolue, le choix détruire ou capturer, puis CIN-41 | Après CIN-31 |
 | Acte IV, réveil | CIN-50 *Les dernières images* | Début du cocon noir |
 | Retour de l'Acte IV | CIN-51 *Contrôle biologique* (NÉGATIF, Noor) | Première table tactique après le cocon noir |
 | Acte I, prise de contrôle | CIN-10 *Les quais déserts* (peinture existante du dropship, pluie), puis Rook | Fin de l'insertion de QZ-17 |
@@ -4363,6 +4366,7 @@ Après QZ-18, la table tactique recommande l'Acte I (★) tant qu'il n'est pas t
 - La réplique de Mara Vega qui coupe l'exercice : « Velez, on coupe l'exercice. Echo-9, rendez l'arme au pas de tir et montez en salle de briefing. » La règle de l'exercice V89 (retour au pas de tir) reste inchangée.
 - Le nombre de messages retardés : 37 sur six jours, le dernier datant de 4 h.
 - Les noms du personnel du quai nord dans CIN-20 : E. Okonjo, P. Lindqvist, S. Arenas, D. Haddad, K. Brandt. Ce sont aussi les noms à la craie de `story-quai-nord`.
+- Les répliques de l'Interlude : Velez à la radio (CIN-40) ; le journal 02:14-02:31, BISHOP-9 et Inez (CIN-41).
 - La réplique d'Asha qui présente Adèle : « Echo-9, voici Adèle Sarrazin. C'est elle qui tient le port ensemble. » La visite libre de la doyenne est adaptée en visite guidée, faute de hub Port-Méridien.
 - La réplique de Rook sur la signature d'Asphodèle (tissage du §5.2) : « Le profil « priorité cargaison » n'a pas été activé au relais. Il a été autorisé à distance. La signature vient de la station Asphodèle. »
 - Toutes les versions anglaises des répliques du prologue.

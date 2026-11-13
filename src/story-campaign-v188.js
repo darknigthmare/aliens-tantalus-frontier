@@ -28,7 +28,7 @@ const TEXT = Object.freeze({
   }
 });
 
-export function createStoryCampaignV188() { return { schema: 188, debriefSeen: [], cinematicsSeen: [], m577Manifest: null }; }
+export function createStoryCampaignV188() { return { schema: 188, debriefSeen: [], cinematicsSeen: [], m577Manifest: null, interlude: null }; }
 
 export function normalizeStoryCampaignV188(raw) {
   const base = createStoryCampaignV188();
@@ -38,6 +38,7 @@ export function normalizeStoryCampaignV188(raw) {
   const cinematics = Array.isArray(raw.cinematicsSeen) ? raw.cinematicsSeen : [];
   base.cinematicsSeen = [...new Set(cinematics.filter(id => typeof id === 'string' && /^cin-[a-z0-9-]{1,40}$/.test(id)))].slice(0, MAX_SEEN);
   base.m577Manifest = normalizeM577ManifestV188(raw.m577Manifest);
+  base.interlude = normalizeInterludeV188(raw.interlude);
   return base;
 }
 
@@ -66,6 +67,13 @@ export function deriveStoryCampaignV188(save, { language = null } = {}) {
   const lang = language || (() => { try { return currentLanguageV185(); } catch { return 'fr'; } })();
   const pick = key => TEXT[key][lang === 'en' ? 'en' : 'fr'];
   const story = normalizeStoryCampaignV188(save?.storyCampaignV188);
+  if (story.interlude?.phase === 'alert' || story.interlude?.phase === 'choice') {
+    const text = story.interlude.phase === 'alert'
+      ? { fr: 'QUARANTAINE À BORD · Pont 2, salle de quarantaine : neutralisez la menace. Jun Park ne répond plus.', en: 'QUARANTINE ABOARD · Deck 2, quarantine room: neutralise the threat. Jun Park is not answering.' }
+      : { fr: 'QUARANTAINE · Décidez du sort de la créature : la détruire ou la capturer pour Inez et BISHOP-9.', en: 'QUARANTINE · Decide the creature’s fate: destroy it or capture it for Inez and BISHOP-9.' };
+    return Object.freeze({ step: 'interlude', objective: text[lang === 'en' ? 'en' : 'fr'], recommendedCampaignId: null, index: STORY_SLICE_STEPS_V188.length,
+      relayComplete: (Array.isArray(save?.galaxy?.completedCampaignIds) ? save.galaxy.completedCampaignIds : []).includes(STORY_RELAY_CAMPAIGN_ID_V188) });
+  }
   const completed = Array.isArray(save?.galaxy?.completedCampaignIds) ? save.galaxy.completedCampaignIds : [];
   const current = save?.strategy?.currentOperation || null;
   const result = (step, objective = null, recommendedCampaignId = null) => Object.freeze({ step, objective, recommendedCampaignId,
@@ -114,4 +122,43 @@ export function resolveM577ManifestV188(save, worldId) {
   const world = save?.galaxy?.worldState?.[worldId];
   if (world && Number.isFinite(world.population)) world.population += manifest.colonists;
   story.m577Manifest = { ...manifest, resolved: true }; save.storyCampaignV188 = story; return true;
+}
+
+// —— Interlude « Quarantaine » (bible §5.4) on the existing hub crisis system ——
+export const INTERLUDE_PHASES_V188 = Object.freeze(['alert', 'choice', 'resolved']);
+export const INTERLUDE_OUTCOMES_V188 = Object.freeze(['destroyed', 'captured']);
+export const INTERLUDE_CRISIS_V188 = Object.freeze({ kind: 'xenomorph', deck: 2, roomId: 'quarantine' });
+export const BISHOP_TRUST_DROP_V188 = 20; // about one NPC_TRUST_LEVELS_V62 band
+export function normalizeInterludeV188(raw) {
+  if (!raw || typeof raw !== 'object' || !INTERLUDE_PHASES_V188.includes(raw.phase)) return null;
+  const crisisId = typeof raw.crisisId === 'string' && /^[a-z0-9-]{1,80}$/.test(raw.crisisId) ? raw.crisisId : null;
+  const outcome = INTERLUDE_OUTCOMES_V188.includes(raw.outcome) ? raw.outcome : null;
+  return { phase: raw.phase === 'resolved' && !outcome ? 'choice' : raw.phase, crisisId, outcome };
+}
+/** Starts after Act III's manifest is resolved: a container (or the quay patient) opened in quarantine. */
+export function interludeDueV188(save) {
+  const story = normalizeStoryCampaignV188(save?.storyCampaignV188);
+  return Boolean(story.m577Manifest?.resolved && !story.interlude);
+}
+export function startInterludeV188(save, createCrisis) {
+  if (!interludeDueV188(save) || typeof createCrisis !== 'function') return null;
+  const crisis = createCrisis(save, { ...INTERLUDE_CRISIS_V188, force: true });
+  if (!crisis?.id) return null;
+  const story = normalizeStoryCampaignV188(save.storyCampaignV188);
+  story.interlude = { phase: 'alert', crisisId: crisis.id, outcome: null }; save.storyCampaignV188 = story;
+  return crisis;
+}
+export function interludeCrisisClearedV188(save, crisisId) {
+  const story = normalizeStoryCampaignV188(save?.storyCampaignV188);
+  if (story.interlude?.phase !== 'alert' || story.interlude.crisisId !== crisisId) return false;
+  story.interlude = { ...story.interlude, phase: 'choice' }; save.storyCampaignV188 = story; return true;
+}
+/** Records the choice; BISHOP-9's trust drops one level once (CIN-41). */
+export function resolveInterludeV188(save, outcome) {
+  const story = normalizeStoryCampaignV188(save?.storyCampaignV188);
+  if (story.interlude?.phase !== 'choice' || !INTERLUDE_OUTCOMES_V188.includes(outcome)) return false;
+  story.interlude = { ...story.interlude, phase: 'resolved', outcome }; save.storyCampaignV188 = story;
+  const bishop = save.crew?.find?.(member => member.id === 'crew-05-bishop-9');
+  if (bishop && Number.isFinite(bishop.loyalty)) bishop.loyalty = Math.max(0, bishop.loyalty - BISHOP_TRUST_DROP_V188);
+  return true;
 }
