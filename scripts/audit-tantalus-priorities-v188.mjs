@@ -44,7 +44,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
     "previousSha256": "95287e9c3f9be2b88db9e391a9a143c4c69be8956b6763e4113645974b9e878d",
-    "currentSha256": "9e555c708231fcc709a820af122e82b49283d05fab651a280b485b5df437297d"
+    "currentSha256": "feb2ec4aac41b8da571c0d30acf79efbace32c24600c9f595a5c749b10fb9af0"
   },
   "hub-level.css": {
     "previousSha256": "13e29b3719e1246d595dadca4c786cbeb5a471dece902104b0ccd29a1de9908d",

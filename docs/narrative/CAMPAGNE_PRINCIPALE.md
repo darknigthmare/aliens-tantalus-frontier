@@ -4510,5 +4510,6 @@ Décision du propriétaire : certaines salles passent en **profondeur** (2,5D, d
   - le sas fermé barre tout le quai, du mur jusqu'à l'avant ;
   - pendant l'escorte, les trois habitants suivent Echo-9 en profondeur, en file, un pas derrière ; ils contournent un objet plutôt que d'y entrer ;
   - une pluie fine tombe sur le quai, comme dans CIN-03 ; la sauvegarde du quai garde la profondeur (`portMeridienV90.z`, additif).
-- **Limites** : un PNJ placé devant le joueur ne le masque pas encore ; Frontier Forge n'édite pas les salles en profondeur. Prochaine candidate : les cales de QZ-17, avec combat (règle de tir déjà consignée).
+- **Ordre entre personnages** : un PNJ placé devant Echo-9 le masque, puisque le joueur est alors dessiné avant l'équipage.
+- **Limites** : Frontier Forge n'édite pas les salles en profondeur. Prochaine candidate : les cales de QZ-17, avec combat (règle de tir déjà consignée).
 

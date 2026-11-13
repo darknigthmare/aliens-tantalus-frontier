@@ -17,7 +17,7 @@
 - **Decision (révisée à l'implémentation)**: le dropship (retiré du décor arrière) et les caisses sont dessinés juste après le sol, sous les personnages, dont l'ordre de dessin existant est conservé. Pour chaque objet ayant un personnage derrière lui, l'objet est redessiné sur un calque hors écran, limité aux boîtes de ces personnages moins celles des personnages placés devant, puis composé par-dessus. Le joueur masqué garde un contour en pointillé.
 - **Rationale**: les surcharges existantes de `drawPlayer` et le dessin des PNJ (code en ligne de `drawWorld`) restent intacts. Le surcoût n'existe que lorsqu'un personnage est derrière un objet.
 - **Alternatives considered**: passe triée qui redessine les PNJ (rejetée : dessin en ligne non réutilisable) ; décalage seul de `y` (rejeté : mauvaise occultation).
-- **Limite**: entre personnages, l'ordre reste PNJ puis joueur ; un PNJ placé devant le joueur ne le masque pas encore.
+- **Ordre entre personnages (ajouté)**: quand un PNJ est devant le joueur et le chevauche, le joueur est dessiné juste après le sol, avant l'équipage ; l'appel habituel est alors ignoré.
 
 ## R4 — Le dropship devient un obstacle en profondeur
 

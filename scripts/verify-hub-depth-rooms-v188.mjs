@@ -138,3 +138,10 @@ test('quay depth runtime: posts answer from the wall only, the ramp crate collid
   assert.match(draw, /for \(const item of items\.sort\(\(a, b\) => b\.z - a\.z\)\) item\.draw\(\);/, 'depth-ordered quay pass');
   assert.match(draw, /if \(gateClosed\(state\)\) \{ \/\/ the closed airlock bars the whole quay/);
 });
+
+test('depth runtime: a crew member in front of the marine covers him (the marine is drawn first)', () => {
+  const source = readFileSync(new URL('../src/hub-depth-runtime-v188.js', import.meta.url), 'utf8');
+  assert.match(source, /some\(npc => \(Number\(npc\.depthZ\) \|\| 0\) < playerZ - 4 && overlaps\(spriteBox\(npc\), spriteBox\(player\)\)\)/);
+  assert.match(source, /if \(depth\.playerFirst && !depth\.playerDrawn\) \{/);
+  assert.match(source, /if \(depth\?\.playerFirst && depth\.playerDrawn && !this\.depthDrawingPlayerV188\) return undefined;/);
+});

@@ -240,11 +240,21 @@ export function withHubDepthRoomsV188(Base) {
       const actors = [this.player, ...(this.npcs || [])].filter(actor => actor && (Number(actor.depthZ) || 0) !== 0);
       const offsets = actors.map(actor => depthToScreenOffsetV188(actor.depthZ));
       actors.forEach((actor, index) => { actor.y += offsets[index]; });
-      this.depthDrawV188 = { room, actors };
+      // A crew member standing between the camera and the marine must cover him: the marine is then
+      // drawn first, right after the floor, and the base pass skips him.
+      const player = this.player, playerZ = Number(player?.depthZ) || 0;
+      const playerFirst = Boolean(player && hubDepthRoomAtV188(this.state.deck, player.x + player.w / 2) === room
+        && (this.npcs || []).some(npc => (Number(npc.depthZ) || 0) < playerZ - 4 && overlaps(spriteBox(npc), spriteBox(player))));
+      this.depthDrawV188 = { room, actors, playerFirst, playerDrawn: false };
       try { return super.draw(); } finally {
         actors.forEach((actor, index) => { actor.y -= offsets[index]; });
         this.depthDrawV188 = null;
       }
+    }
+    drawPlayer(ctx) {
+      const depth = this.depthDrawV188;
+      if (depth?.playerFirst && depth.playerDrawn && !this.depthDrawingPlayerV188) return undefined; // already drawn under the crew
+      return super.drawPlayer(ctx);
     }
     // The UD-4L leaves the wall plane: it is drawn with the floor props, after the floor.
     ensureHubLifeAssetsV136() {
@@ -277,6 +287,10 @@ export function withHubDepthRoomsV188(Base) {
       ctx.fillStyle = 'rgba(214,176,92,.22)';
       for (const z of [-20, -40, -60]) for (let x = x0 + 24; x < x1 - 24; x += 64) ctx.fillRect(x, HUB_FLOOR_Y_V188 - z, 34, 2);
       for (const occluder of [...this.depthOccludersV188(depth.room, hubRoom)].sort((a, b) => b.z - a.z)) this.drawDepthOccluderV188(ctx, occluder);
+      if (depth.playerFirst && !depth.playerDrawn) {
+        this.depthDrawingPlayerV188 = true;
+        try { this.drawPlayer(ctx); } finally { this.depthDrawingPlayerV188 = false; depth.playerDrawn = true; }
+      }
       return result;
     }
 
