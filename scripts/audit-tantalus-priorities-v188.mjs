@@ -44,7 +44,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
     "previousSha256": "95287e9c3f9be2b88db9e391a9a143c4c69be8956b6763e4113645974b9e878d",
-    "currentSha256": "08ca1da2f63ca4b3544b026d240cd2c88d1659d0316837d022c2cd2962720f07"
+    "currentSha256": "9e555c708231fcc709a820af122e82b49283d05fab651a280b485b5df437297d"
   },
   "hub-level.css": {
     "previousSha256": "13e29b3719e1246d595dadca4c786cbeb5a471dece902104b0ccd29a1de9908d",
@@ -138,6 +138,10 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
     "previousSha256": "a8b53d01cc99acea92544bc50ef34360b03a47e80015158a60761ae9513b1314",
     "currentSha256": "d618f3d2d059a369caae3730fc47fa027f2cff9d3d1f2eb699fd82753fc6d68f"
   },
+  "src/hub-port-meridien-v90.js": {
+    "previousSha256": "9f3f75b8e8a9fbe77deb5afa428a5ba158db05b98ebe2e7af08b844af248eb93",
+    "currentSha256": "afdf35fa9b4d4c9abbc632318bd47a62fd1c2e43af35e7118c375b122807f037"
+  },
   "src/hub-room-projection-v139.js": {
     "previousSha256": "2306aca239279dfc799902e4be4e973ca75a3e68170d455ab74df14e395b95ac",
     "currentSha256": "db89bf0d3434028f9e715a2c29670326d2d91d85041e330bf8cc8b5fc4ee847f"
@@ -165,6 +169,10 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   "src/player-creator-ui-v84.js": {
     "previousSha256": "0b5174e5ff3948b5ec987bc2fdee1aca277d64d4eb668ef369461df272bb566f",
     "currentSha256": "6421d5cb7b3fa9039082cab23fc1e0bd658c928918a7b8c599c034abd859b221"
+  },
+  "src/port-meridien-v90.js": {
+    "previousSha256": "85b74e81e8ba87b66cedaf7fd36a12ebf8d7c1bd40c4a25ab7e5f9d91fc86778",
+    "currentSha256": "deb2e60468b95e51fb348e59a9f3f28ac5e24767a03c8934541ca6630bb4eda2"
   },
   "src/refuge-v87.css": {
     "previousSha256": "fce1e18a977737d258969dac8bed077c9a65b58857e3e916248bd5c835e01751",

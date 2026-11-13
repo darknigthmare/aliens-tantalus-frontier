@@ -35,6 +35,39 @@ export const HUB_DEPTH_ROOMS_V188 = Object.freeze({
 });
 export const HUB_DEPTH_ROOM_IDS_V188 = Object.freeze(Object.keys(HUB_DEPTH_ROOMS_V188));
 
+// The quay of Port-Méridien (P-3, its own ground location, not a hub deck): second depth room.
+// Posts, consoles, the ladder and the airlock gate stay against the back wall (z = 0).
+// The freight crate of the ramp leaves the wall: it can be walked around in front.
+export const PORT_DEPTH_ROOM_V188 = Object.freeze({
+  roomId: 'port-meridien-quay', deck: null, x0: 0, x1: 2560,
+  zMin: -80, zMax: 0, doorBand: 20, interactBand: 24, speed: 150,
+  // The ramp's freight crate keeps its rail collider (jumpable) only while the marine is close to the wall.
+  railCrate: Object.freeze({ x: 420, w: 100, depth: -34 }),
+  dropship: null,
+  props: Object.freeze([
+    prop('port-rail-crate', 'rail-crate', 420, 100, 50, -2, -34, 1),
+    prop('port-containers', 'crate', 980, 96, 78, -62, -90, -46), // reaches past the front edge
+    prop('port-drums', 'drum', 1520, 70, 52, -56, -70, -42),
+    prop('port-pallet', 'crate', 2060, 72, 44, -30, -40, -20)
+  ]),
+  npcLane: Object.freeze({ x0: 0, x1: 0, z: 0 }), npcDepths: Object.freeze({})
+});
+/** Nearest free depth when an actor driven along x ends up inside a footprint (civilians, crew). */
+export function freeDepthV188(room, x, z, halfWidth = 0) {
+  for (const entry of depthFootprintsV188(room)) {
+    if (!(x + halfWidth > entry.x0 && x - halfWidth < entry.x1 && z > entry.z0 && z < entry.z1)) continue;
+    const towardWall = entry.z1 <= room.zMax ? entry.z1 : null, towardCamera = entry.z0 >= room.zMin ? entry.z0 : null;
+    if (towardWall === null) return towardCamera ?? z;
+    if (towardCamera === null) return towardWall;
+    return Math.abs(z - towardWall) <= Math.abs(z - towardCamera) ? towardWall : towardCamera;
+  }
+  return z;
+}
+/** Civilians follow the escorting marine in depth, a step behind, each in their own file. */
+export function civilianDepthTargetV188(playerZ, index) {
+  return Math.max(-80, Math.min(0, (Number(playerZ) || 0) + 6 + index * 5));
+}
+
 export function hubDepthRoomAtV188(deck, x) {
   for (const room of Object.values(HUB_DEPTH_ROOMS_V188)) if (room.deck === deck && x >= room.x0 && x < room.x1) return room;
   return null;
@@ -51,7 +84,7 @@ export function depthShadeV188(room, z) {
 }
 
 export function depthFootprintsV188(room) {
-  return room ? [room.dropship.footprint, ...room.props.map(entry => entry.footprint)] : [];
+  return room ? [room.dropship?.footprint, ...room.props.map(entry => entry.footprint)].filter(Boolean) : [];
 }
 
 /** True when an actor centred at x (half width halfWidth) and at depth z overlaps a footprint. */
@@ -95,7 +128,7 @@ export function stepNpcDepthV188(room, npc, target, dt) {
 
 export function normalizeHubDepthV188(raw) {
   if (!raw || typeof raw !== 'object') return null;
-  const room = HUB_DEPTH_ROOMS_V188[raw.roomId];
+  const room = HUB_DEPTH_ROOMS_V188[raw.roomId] || (raw.roomId === PORT_DEPTH_ROOM_V188.roomId ? PORT_DEPTH_ROOM_V188 : null);
   if (!room || !Number.isFinite(Number(raw.z))) return null;
   return { roomId: room.roomId, z: Math.round(clampZ(room, Number(raw.z)) * 10) / 10 };
 }

@@ -175,6 +175,14 @@ Les effets de planète sont dessinés sur un canvas inséré dans la scène, ent
     - profondeur −60 sauvegardée puis restaurée après rechargement ; aucune erreur.
 - Performance : même page, 6 alternances de blocs de 300 images, mixin actif puis inerte (injection de mesure), joueur derrière le dropship (pire cas, calque d'occultation à chaque image) : 28,8 ms contre 27,6 ms (+4,6 %), dans Chromium sans affichage, en rendu logiciel. Sur trois exécutions séparées, la mesure variait trop (26–31 ms) pour conclure ; seule la comparaison dans la même page est retenue.
 
+### Extension : quai de Port-Méridien en profondeur
+
+- Le quai (P-3) devient la deuxième salle en profondeur. Le rendu trié est fait dans le dessin propre au quai : objets du sol, trois habitants, Echo-9. Le sas fermé barre tout le quai ; la pluie est fine ; l'invite remonte en haut quand le joueur marche devant.
+- Les postes restent au mur : depuis l'avant, `portContactV90` refuse. La caisse de la rampe ne garde son collisionneur que près du mur. Un pas en profondeur annule une tâche immobile.
+- Vérifications :
+  - `scripts/verify-hub-depth-rooms-v188.mjs` (10 tests) et les suites liées au port (169 tests) passent ;
+  - Chromium, escorte en cours : conteneurs bloquants, y compris au premier rang ; habitants en file derrière Echo-9 ; profondeur −80 sauvegardée dans l'état du quai ; aucune erreur.
+
 ## Limites et travail restant
 
 

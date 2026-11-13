@@ -9,7 +9,7 @@ import { getHubVehiclePlacementV136 } from './hub-prop-placements-v136.js';
 import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { HUB_DEPTH_ROOMS_V188, HUB_FLOOR_Y_V188, hubDepthRoomAtV188, depthToScreenOffsetV188, depthShadeV188, stepDepthMoveV188,
   canLeaveDepthRoomV188, depthInteractionAllowedV188, npcDepthTargetV188, stepNpcDepthV188, normalizeHubDepthV188,
-  depthAnnouncementV188 } from './hub-depth-rooms-v188.js';
+  depthAnnouncementV188, PORT_DEPTH_ROOM_V188, civilianDepthTargetV188, blockedByFootprintV188, freeDepthV188 } from './hub-depth-rooms-v188.js';
 
 const VERTICAL_CODES = new Set(['KeyW', 'KeyS', 'ArrowUp', 'ArrowDown']);
 const ready = image => Boolean(image?.complete && image.naturalWidth > 0);
@@ -25,6 +25,7 @@ export function withHubDepthRoomsV188(Base) {
 
     /** The depth room the player stands in, or null (Forge, annexes, ducts, Port-Méridien stay 2D). */
     depthRoomV188() {
+      if (this.player && !this.editorPlaytest && this.isPortMeridienV90?.()) return PORT_DEPTH_ROOM_V188; // the quay (P-3)
       if (!this.player || !this.state || this.editorPlaytest || this.forgeSessionV141 || this.currentAnnexV71?.()
         || this.isVentActiveV62?.() || this.isPortMeridienV90?.() || this.hubTrainingV132?.active) return null;
       return hubDepthRoomAtV188(this.state.deck, this.player.x + this.player.w / 2);
@@ -58,6 +59,7 @@ export function withHubDepthRoomsV188(Base) {
         this.player.depthZ = step.z;
         if (step.x !== this.player.x + this.player.w / 2) { this.player.x = step.x - this.player.w / 2; this.player.vx = 0; }
         this.player.depthMovingV188 = dz !== 0 && step.z !== z0;
+        if (this.portTaskV90 && !this.portTaskV90.complete && step.z !== z0) this.portTaskV90 = null; // moving cancels an immobile task
       } else if (!canLeaveDepthRoomV188(room, z0)) {
         // The bulkhead is on the rail: far from it, the room's edge holds the player back.
         this.player.x = Math.max(room.x0 + 4, Math.min(room.x1 - this.player.w - 4, this.player.x)); this.player.vx = 0;
@@ -68,6 +70,7 @@ export function withHubDepthRoomsV188(Base) {
     }
 
     updateNpcDepthsV188(delta) {
+      if (this.isPortMeridienV90?.()) return this.updateCivilianDepthsV188(delta);
       for (const npc of this.npcs || []) {
         const room = this.state && !this.currentAnnexV71?.() ? hubDepthRoomAtV188(this.state.deck, npc.x + (npc.w || 44) / 2) : null;
         if (!room) { npc.depthZ = 0; continue; }
@@ -76,6 +79,33 @@ export function withHubDepthRoomsV188(Base) {
       }
     }
 
+    /** The three quay civilians: at the wall while they wait, a step behind the marine while escorted. */
+    updateCivilianDepthsV188(delta) {
+      const state = this.portStateV90; if (!state) return;
+      const room = PORT_DEPTH_ROOM_V188, dt = Math.min(.1, delta || 0);
+      this.portCiviliansZV188 ||= [-6, -10, -14];
+      this.portCiviliansZV188 = this.portCiviliansZV188.map((current, index) => {
+        const target = state.following ? civilianDepthTargetV188(this.player.depthZ, index) : -6 - index * 4;
+        const next = current + (target - current) * (1 - Math.exp(-4 * dt)), x = state.civiliansX[index];
+        if (blockedByFootprintV188(room, x, current, 18)) return freeDepthV188(room, x, current, 18); // walked into an object: step around it
+        return blockedByFootprintV188(room, x, next, 18) ? current : next;
+      });
+    }
+    /** Port posts stand against the wall; the rail crate collider applies only near the wall. */
+    portContactV90() { const contact = super.portContactV90?.(); return contact && !this.awayFromRailV188() ? contact : false; }
+    portArmoryShopContactV169() { return this.awayFromRailV188() ? null : super.portArmoryShopContactV169?.() ?? null; }
+    currentAnnexV71() {
+      const annex = super.currentAnnexV71?.();
+      if (!annex || !this.isPortMeridienV90?.() || !this.player) return annex;
+      const crate = PORT_DEPTH_ROOM_V188.railCrate;
+      if ((Number(this.player.depthZ) || 0) > crate.depth) return annex;
+      return { ...annex, colliders: (annex.colliders || []).filter(entry => entry.x !== crate.x) };
+    }
+    capturePortMeridienV90() {
+      const state = super.capturePortMeridienV90?.();
+      if (state && this.player) state.z = this.player.climbing ? 0 : Math.round((Number(this.player.depthZ) || 0) * 10) / 10;
+      return state;
+    }
     useLift(direction, wrap = false) {
       // W/S never call a lift in a depth room (owner decision 2).
       if (this.depthRoomV188() && !this.depthLiftAllowedV188) return false;
@@ -92,7 +122,7 @@ export function withHubDepthRoomsV188(Base) {
 
     // —— Interactions ——
     interactionDepthV188(room, interaction) {
-      if (interaction?.id === room.dropship.actorId) return room.dropship.interactZ;
+      if (room.dropship && interaction?.id === room.dropship.actorId) return room.dropship.interactZ;
       const crewId = interaction?.crewId || interaction?.npc?.crewId;
       const npc = crewId ? (this.npcs || []).find(entry => entry.crewId === crewId) : null;
       return npc ? Number(npc.depthZ) || 0 : 0; // wall stations, doors and ladders stand on the rail
@@ -112,6 +142,11 @@ export function withHubDepthRoomsV188(Base) {
     getCompanionInteractionV87() { return this.awayFromRailV188() ? null : super.getCompanionInteractionV87?.() ?? null; }
     nearestVent() { return this.awayFromRailV188() ? null : super.nearestVent?.() ?? null; }
     nearestLift() { return this.awayFromRailV188() ? null : super.nearestLift?.() ?? null; }
+    depthLadderV188() {
+      if (!this.isPortMeridienV90?.()) return this.nearestTraversalLadder?.() ?? null;
+      const x = this.player.x + this.player.w / 2;
+      return (super.currentAnnexV71?.()?.ladders || []).find(entry => x >= entry.x - 6 && x <= entry.x + entry.w + 6) || null;
+    }
     nearestTraversalLadder() {
       const room = this.depthRoomV188();
       if (room && !this.player.climbing && Math.abs(Number(this.player.depthZ) || 0) > 6) return null; // ladders stand against the wall
@@ -125,7 +160,7 @@ export function withHubDepthRoomsV188(Base) {
     interact() {
       const room = this.depthRoomV188();
       if (room && this.onDepthFloorV188() && !this.nearestInteraction() && !this.nearestHubNpc?.()) {
-        const ladder = this.nearestTraversalLadder?.();
+        const ladder = this.depthLadderV188();
         if (ladder && Math.abs(Number(this.player.depthZ) || 0) <= 6) {
           // E at the foot of a ladder grabs it; W/S then climb.
           this.player.depthZ = 0; this.player.vx = 0; this.depthLadderGrabV188 = .6; this.player.climbing = true;
@@ -148,7 +183,12 @@ export function withHubDepthRoomsV188(Base) {
       if (room) {
         if (this.player.climbing) return inherited;
         if (this.awayFromRailV188() && /PUPITRE D’AMARRAGE CIVIL|ENTRER DANS/.test(inherited || '')) return '';
-        const ladder = this.nearestTraversalLadder?.();
+        if (this.isPortMeridienV90?.() && /W\/S échelle/.test(inherited || '')) {
+          const ladder = this.depthLadderV188();
+          if (ladder && Math.abs(Number(this.player.depthZ) || 0) <= 6) return lang === 'en' ? 'E — GRAB THE LADDER' : 'E — S’ACCROCHER À L’ÉCHELLE';
+          return lang === 'en' ? 'A/D walk · W/S step forward/back · SPACE vault · E use' : 'A/D marcher · W/S avancer / reculer · ESPACE franchir · E utiliser';
+        }
+        const ladder = this.depthLadderV188();
         if (ladder && !this.nearestInteraction() && !this.nearestHubNpc?.() && Math.abs(Number(this.player.depthZ) || 0) <= 6) return lang === 'en' ? 'E — GRAB THE LADDER' : 'E — S’ACCROCHER À L’ÉCHELLE';
         // The room announces itself for a few seconds after the entrance, then only real prompts remain.
         if (this.depthEnteredRoomV188 !== room.roomId) { this.depthEnteredRoomV188 = room.roomId; this.depthEnteredAtV188 = this.animationTime || 0; }
@@ -183,7 +223,9 @@ export function withHubDepthRoomsV188(Base) {
     start(hubState = {}, ...rest) {
       const result = super.start(hubState, ...rest);
       const saved = normalizeHubDepthV188(hubState?.depthV188), room = this.depthRoomV188();
-      if (this.player) this.player.depthZ = saved && room && saved.roomId === room.roomId ? saved.z : 0;
+      if (this.player) this.player.depthZ = this.isPortMeridienV90?.() ? Number(this.portStateV90?.z) || 0
+        : saved && room && saved.roomId === room.roomId ? saved.z : 0;
+      this.portCiviliansZV188 = null;
       return result;
     }
 
@@ -301,6 +343,13 @@ export function drawDepthPropV188(ctx, prop, box) {
   const { x, y, w, h } = box;
   ctx.save();
   ctx.fillStyle = 'rgba(0,0,0,.35)'; ctx.beginPath(); ctx.ellipse(x + w / 2, y + h + 2, w * .55, 6, 0, 0, Math.PI * 2); ctx.fill(); // contact shadow
+  if (prop.kind === 'drum') { // three fuel drums
+    for (let i = 0; i < 3; i++) { const dx = x + i * (w / 3), dw = w / 3 - 4;
+      ctx.fillStyle = i % 2 ? '#5a3a2a' : '#4b3326'; ctx.fillRect(dx, y + 6, dw, h - 6);
+      ctx.fillStyle = 'rgba(255,255,255,.08)'; ctx.fillRect(dx, y + 6, dw, 3); ctx.fillStyle = '#2a1d16'; ctx.fillRect(dx, y + h * .45, dw, 3);
+      ctx.fillStyle = '#d9b44a'; ctx.fillRect(dx + 3, y + h * .6, dw - 6, 6); }
+    ctx.restore(); return;
+  }
   if (prop.kind === 'cart') {
     ctx.fillStyle = '#2d3536'; ctx.fillRect(x, y + h - 18, w, 10); // bed
     ctx.fillStyle = '#5b6466'; ctx.fillRect(x + 4, y + h - 46, w * .45, 28); ctx.fillStyle = '#c9a54a'; ctx.fillRect(x + 4, y + h - 40, w * .45, 4); // canister

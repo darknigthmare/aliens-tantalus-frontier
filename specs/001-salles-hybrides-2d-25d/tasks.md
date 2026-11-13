@@ -117,6 +117,19 @@ description: "Task list — salles hybrides 2D / 2,5D, prototype du hangar"
 - [x] T026 [P] Mettre à jour `docs/development/PRIORITIES_P0_P1_V188.md` et la bible (`docs/narrative/CAMPAGNE_PRINCIPALE.md`, §56.12) : salles profondeur, commandes, règle de tir future, limites.
 - [x] T027 Enregistrer le test dans `package.json` (`test:priorities:v188`), régénérer les reçus d'audit, lancer `npm run check`, les suites ciblées, puis `npm run test:all`, `build` et `check:built`.
 
+## Phase 9: Extension — quai de Port-Méridien (demande « continue », 2026-11-13)
+
+- [x] T028 [P] Ajouter `PORT_DEPTH_ROOM_V188` (postes au mur, caisse de rampe contournable, conteneurs, fûts, palette) et `civilianDepthTargetV188` / `freeDepthV188` dans `src/hub-depth-rooms-v188.js`.
+- [x] T029 Dans `src/hub-depth-runtime-v188.js` :
+  - raccorder le mode quai ;
+  - refuser les contacts de poste loin du mur ;
+  - retirer le collisionneur de la caisse loin du mur ;
+  - faire suivre les habitants en profondeur ; annuler une tâche immobile par un pas en profondeur ;
+  - saisir `z` dans l'état du quai.
+- [x] T030 Dans `src/hub-port-meridien-v90.js` : passe triée par profondeur, barrière du sas fermé, pluie fine, invite remontée.
+- [x] T031 Dans `src/port-meridien-v90.js` : champ additif `z` de l'état du quai, borné, nul sur l'échelle.
+- [x] T032 Tests (`scripts/verify-hub-depth-rooms-v188.mjs`), parcours Chromium et documentation.
+
 ## Dependencies & Execution Order
 
 - Setup (T001–T002) → Foundational (T003–T007) → US1 (T008–T012, MVP) → US2 → US3 / US4 (indépendants entre eux) → US5 → Polish.

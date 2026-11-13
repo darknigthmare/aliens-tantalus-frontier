@@ -94,3 +94,47 @@ test('depth runtime: composed under the armory, shipped offline, documented as t
   for (const file of ['src/hub-depth-presentation-v116.js', 'src/hub-room-projection-v139.js', 'src/hub-support-planes-v139.js'])
     assert.match(read(file), /hub-depth-rooms-v188/, `${file} names the depth-room exception`);
 });
+
+import { PORT_DEPTH_ROOM_V188, civilianDepthTargetV188, freeDepthV188 } from '../src/hub-depth-rooms-v188.js';
+import { createPortMeridienV90, normalizePortMeridienV90 } from '../src/port-meridien-v90.js';
+
+test('quay depth: posts and the airlock stay on the wall, the ramp crate can be walked around in front', () => {
+  const quay = PORT_DEPTH_ROOM_V188;
+  assert.equal(quay.roomId, 'port-meridien-quay'); assert.equal(quay.zMax, 0); assert.equal(quay.zMin, -80); assert.equal(quay.dropship, null);
+  assert.equal(blockedByFootprintV188(quay, 470, -10), true, 'the ramp crate near the wall');
+  assert.equal(blockedByFootprintV188(quay, 470, -50), false, 'walk around it in front');
+  assert.equal(blockedByFootprintV188(quay, 1020, -80), true, 'containers reach the front edge');
+  assert.equal(freeDepthV188(quay, 1020, -60), -46, 'an actor pushed into the containers steps out towards the wall');
+  assert.equal(freeDepthV188(quay, 300, -60), -60, 'free floor is unchanged');
+  assert.deepEqual([0, 1, 2].map(i => civilianDepthTargetV188(-60, i)), [-54, -49, -44], 'civilians follow a step behind, in file');
+  assert.equal(civilianDepthTargetV188(0, 2), 0, 'never past the wall');
+  assert.deepEqual(normalizeHubDepthV188({ roomId: 'port-meridien-quay', z: -20 }), { roomId: 'port-meridien-quay', z: -20 });
+});
+
+test('quay depth: the quay save carries the marine depth additively', () => {
+  assert.equal(createPortMeridienV90().z, 0);
+  const base = { schema: 90, phase: 'escort', freight: 'medical', civiliansX: [810, 865, 920], following: true };
+  assert.equal(normalizePortMeridienV90({ ...base, z: -42 }).z, -42);
+  assert.equal(normalizePortMeridienV90(base).z, 0, 'older quay saves stand at the wall');
+  assert.equal(normalizePortMeridienV90({ ...base, z: -500 }).z, -80);
+  assert.equal(normalizePortMeridienV90({ ...base, z: -42, climbing: true }).z, 0, 'on the ladder the marine is at the wall');
+});
+
+test('quay depth runtime: posts answer from the wall only, the ramp crate collider drops away from it', () => {
+  class FakePort extends FakeHub {
+    isPortMeridienV90() { return true; }
+    portContactV90() { return true; }
+    currentAnnexV71() { return { colliders: [{ x: 420, y: 574, w: 100, h: 50 }, { x: 1824, y: 356, w: 82, h: 268 }], ladders: [{ x: 1210, w: 44 }] }; }
+    capturePortMeridienV90() { return { schema: 90, phase: 'escort' }; }
+  }
+  const Port = withHubDepthRoomsV188(FakePort), port = new Port();
+  port.player.depthZ = -10; assert.equal(port.portContactV90(), true);
+  assert.equal(port.currentAnnexV71().colliders.length, 2, 'near the wall the crate is jumped as before');
+  port.player.depthZ = -50; assert.equal(port.portContactV90(), false, 'a wall post is out of reach from the front');
+  assert.deepEqual(port.currentAnnexV71().colliders.map(entry => entry.x), [1824], 'only the airlock still bars the quay');
+  assert.equal(port.capturePortMeridienV90().z, -50);
+  assert.equal(port.useLift(-1), false);
+  const read = path => readFileSync(new URL('../' + path, import.meta.url), 'utf8'), draw = read('src/hub-port-meridien-v90.js');
+  assert.match(draw, /for \(const item of items\.sort\(\(a, b\) => b\.z - a\.z\)\) item\.draw\(\);/, 'depth-ordered quay pass');
+  assert.match(draw, /if \(gateClosed\(state\)\) \{ \/\/ the closed airlock bars the whole quay/);
+});

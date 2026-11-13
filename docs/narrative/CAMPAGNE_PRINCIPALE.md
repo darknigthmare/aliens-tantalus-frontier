@@ -4503,5 +4503,12 @@ Décision du propriétaire : certaines salles passent en **profondeur** (2,5D, d
 - **Portes** : annonce à l'approche (« SALLE EN PROFONDEUR · W/S : AVANCER / RECULER »). La cloison du réacteur ne se franchit que près du mur.
 - **Sauvegarde** : `hub.depthV188` (profondeur dans la salle, champ additif) ; une ancienne sauvegarde revient au mur.
 - **Tir futur** (non branché tant qu'il n'y a pas de combat en profondeur) : tir horizontal qui touche une cible dans une bande de ±22 ; le tireur se recale de 30 % vers elle.
-- **Limites** : un PNJ placé devant le joueur ne le masque pas encore ; Frontier Forge n'édite pas les salles en profondeur. Prochaines candidates : le quai de Port-Méridien, puis les cales de QZ-17 (avec combat).
+- **Quai de Port-Méridien (P-3)** — deuxième salle en profondeur :
+  - les postes de mission (lot de secours, triage, relais du sas, constat) restent contre le mur ;
+  - la caisse de la rampe reste franchissable d'un saut près du mur, et se contourne par l'avant ;
+  - des conteneurs, des fûts et une palette (placeholders en primitives) occupent le sol ;
+  - le sas fermé barre tout le quai, du mur jusqu'à l'avant ;
+  - pendant l'escorte, les trois habitants suivent Echo-9 en profondeur, en file, un pas derrière ; ils contournent un objet plutôt que d'y entrer ;
+  - une pluie fine tombe sur le quai, comme dans CIN-03 ; la sauvegarde du quai garde la profondeur (`portMeridienV90.z`, additif).
+- **Limites** : un PNJ placé devant le joueur ne le masque pas encore ; Frontier Forge n'édite pas les salles en profondeur. Prochaine candidate : les cales de QZ-17, avec combat (règle de tir déjà consignée).
 

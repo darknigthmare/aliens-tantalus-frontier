@@ -4,6 +4,8 @@ import { HubGame as PlayerRenderer } from './hub-game.js';
 import { CARGO_BRUTAL_SURVIVORS_SHEET_V67 } from './cargo-brutal-visuals-v67.js';
 import { PORT_WORLD_V90, PORT_POSTS_V90, normalizePortMeridienV90, portPhysicalContactV90, portTaskSecondsV90, getPortMeridienObjectiveV90 } from './port-meridien-v90.js';
 import { hubPlayerAppearanceSnapshotV126 } from './player-appearance-hub-v126.js';
+import { PORT_DEPTH_ROOM_V188, depthToScreenOffsetV188 } from './hub-depth-rooms-v188.js';
+import { drawDepthPropV188 } from './hub-depth-runtime-v188.js';
 import { ARMORY_STOREFRONT_SOURCE_V169, getArmoryStorefrontPlanV169,
   drawArmoryStorefrontV169, getArmoryStoreContactV169, isArmoryArtAdmittedV171,
   isArmoryStorefrontImageReadyV172 } from './hub-armory-storefront-v169.js';
@@ -204,7 +206,10 @@ export function withPortMeridienV90(Base) {
         ctx.drawImage(ladder, 100, 4, 9, 168, 1248, 432, 6, 192);
         for (let y = 439; y < 624; y += 24) ctx.drawImage(ladder, 62, 36, 38, 4, 1216, y, 32, 4);
       }
-      bitmap('crate', 420, 574, 100, 50);
+      // V188 depth floor (specs/001-salles-hybrides-2d-25d): darker near the wall, lane marks towards the camera.
+      const shade = ctx.createLinearGradient(0, 624, 0, 704);
+      shade.addColorStop(0, 'rgba(0,0,0,.22)'); shade.addColorStop(1, 'rgba(0,0,0,0)'); ctx.fillStyle = shade; ctx.fillRect(0, 624, 2560, 80);
+      ctx.fillStyle = 'rgba(214,176,92,.2)'; for (const lane of [644, 664, 684]) for (let x = 24; x < 2536; x += 64) ctx.fillRect(x, lane, 34, 2);
       if (state.phase === 'unload') bitmap('crate', 190, 576, 60, 48);
       bitmap('medical', 705, 539, 125, 85);
       bitmap('console', 1360, 347, 80, 85);
@@ -221,6 +226,10 @@ export function withPortMeridienV90(Base) {
         }
       }
       ctx.fillStyle = gateClosed(state) ? '#d7a060' : '#87e6be'; ctx.fillRect(1818, 336, 92, 8);
+      if (gateClosed(state)) { // the closed airlock bars the whole quay, front to wall
+        ctx.fillStyle = '#1a1f22'; ctx.fillRect(1818, 624, 92, 80);
+        ctx.fillStyle = '#d7a060'; for (let y = 632; y < 704; y += 16) ctx.fillRect(1818, y, 92, 6);
+      }
       // Colony supplier is visual-only, beyond the existing real mission gate.
       // No replacement of the actual report terminal, actors or colliders.
       const shopPlan = getArmoryStorefrontPlanV169('port-meridien-quay');
@@ -228,14 +237,24 @@ export function withPortMeridienV90(Base) {
         drawArmoryStorefrontV169(ctx, this.portArmoryImageV169, shopPlan, { phase: 'back' });
         drawArmoryStorefrontV169(ctx, this.portArmoryImageV169, shopPlan, { phase: 'front' });
       }
-      const civilians = this.portImagesV90?.get('civilians');
-      if (ready(civilians)) state.civiliansX.forEach((x, row) => {
+      // Depth-ordered pass: floor objects, the three civilians and the marine, far (wall) first.
+      const civilians = this.portImagesV90?.get('civilians'), civiliansZ = this.portCiviliansZV188 || [-6, -10, -14];
+      const items = PORT_DEPTH_ROOM_V188.props.map(prop => ({ z: prop.z, draw: () => prop.kind === 'rail-crate'
+        ? bitmap('crate', prop.x, 574, prop.w, prop.h)
+        : drawDepthPropV188(ctx, prop, { x: prop.x, y: 624 + depthToScreenOffsetV188(prop.z) - prop.h, w: prop.w, h: prop.h }) }));
+      if (ready(civilians)) state.civiliansX.forEach((x, row) => items.push({ z: civiliansZ[row] ?? 0, draw: () => {
         const column = row === 0 && ['unload', 'carry', 'triage'].includes(state.phase) ? 2
           : state.following && this.player.grounded && this.player.x - x > 40 && this.player.x - x < 390 ? 1 : 0;
-        this.drawSheetCell(ctx, civilians, column, row, x - 55, 515, 116, 116, false, 4, 3);
-      });
-      PlayerRenderer.prototype.drawPlayer.call(this, ctx);
-      if (state.phase === 'carry') bitmap('crate', this.player.x + (this.player.facing > 0 ? 22 : -20), this.player.y + 36, 40, 32);
+        this.drawSheetCell(ctx, civilians, column, row, x - 55, 515 + depthToScreenOffsetV188(civiliansZ[row] ?? 0), 116, 116, false, 4, 3);
+      } }));
+      items.push({ z: Number(this.player.depthZ) || 0, draw: () => {
+        const offset = depthToScreenOffsetV188(this.player.depthZ); this.player.y += offset;
+        try {
+          PlayerRenderer.prototype.drawPlayer.call(this, ctx);
+          if (state.phase === 'carry') bitmap('crate', this.player.x + (this.player.facing > 0 ? 22 : -20), this.player.y + 36, 40, 32);
+        } finally { this.player.y -= offset; }
+      } });
+      for (const item of items.sort((a, b) => b.z - a.z)) item.draw();
       const label = (text, x, y, color = '#aac6c5') => { ctx.fillStyle = '#071015'; ctx.fillRect(x - 8, y - 17, ctx.measureText(text).width + 16, 24); ctx.fillStyle = color; ctx.fillText(text, x, y); };
       ctx.font = '700 12px ui-monospace, monospace';
       label('RAMPE · FRET', 85, 500); label('TRIAGE · HABITANTS', 675, 493);
@@ -245,6 +264,10 @@ export function withPortMeridienV90(Base) {
         ctx.strokeStyle = '#f3d995'; ctx.lineWidth = 2; ctx.strokeRect(target.x - 44, target.y - 114, 88, 116);
       }
       ctx.restore();
+      // Light rain over the open quay (as in CIN-03); still under reduced motion.
+      ctx.strokeStyle = 'rgba(170,200,215,.22)'; ctx.lineWidth = 1; const fall = this.reducedMotion ? 0 : (this.animationTime || 0) * 620;
+      for (let i = 0; i < 90; i++) { const rx = (i * 97 + camera * .6) % 1280, ry = ((i * 53) + fall + i * 17) % 760 - 40;
+        ctx.beginPath(); ctx.moveTo(rx, ry); ctx.lineTo(rx - 5, ry + 22); ctx.stroke(); }
       ctx.fillStyle = 'rgba(2,9,12,.94)'; ctx.fillRect(18, 18, 1244, 89);
       ctx.font = '700 18px ui-monospace, monospace'; ctx.fillStyle = '#dce9dd'; ctx.fillText('PORT-MÉRIDIEN // LE QUAI DES VIVANTS', 34, 45);
       ctx.font = '600 13px ui-monospace, monospace'; ctx.fillStyle = '#edcf92';
@@ -252,7 +275,11 @@ export function withPortMeridienV90(Base) {
       const words = objective.split(' '); let line = '', y = 69;
       for (const word of words) { if (ctx.measureText(`${line} ${word}`).width > 1190) { ctx.fillText(line, 34, y); line = word; y += 19; } else line += `${line ? ' ' : ''}${word}`; }
       ctx.fillText(line, 34, y);
+      // The prompt plate rises to the top while the marine walks the front lane it would cover.
+      const feet = this.player.y + this.player.h + depthToScreenOffsetV188(this.player.depthZ);
+      ctx.save(); if (feet >= 650) ctx.translate(0, 126 - 662);
       PhysicalHub.prototype.drawSinglePromptV71.call(this, ctx, this.statusPrompt());
+      ctx.restore();
       ctx.restore();
     }
   };

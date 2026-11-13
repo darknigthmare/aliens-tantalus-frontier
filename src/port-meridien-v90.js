@@ -15,7 +15,7 @@ export const PORT_POSTS_V90 = Object.freeze({
 const finite = (n, min, max, fallback) => Number.isFinite(n) ? Math.max(min, Math.min(max, n)) : fallback;
 export function createPortMeridienV90() {
   return { schema: 90, phase: 'pending', revision: 0, freight: null, x: 112, y: 532,
-    facing: 1, climbing: false, civiliansX: [810, 865, 920], following: false, receipt: null };
+    facing: 1, climbing: false, z: 0, civiliansX: [810, 865, 920], following: false, receipt: null };
 }
 export function normalizePortMeridienV90(raw) {
   if (!raw || raw.schema !== 90 || !PORT_PHASES_V90.includes(raw.phase)) return null;
@@ -28,6 +28,8 @@ export function normalizePortMeridienV90(raw) {
   state.y = Math.round(finite(raw.y, 0, 532, 532));
   state.facing = raw.facing === -1 ? -1 : 1;
   state.climbing = raw.climbing === true;
+  // V188: depth on the quay floor (0 = against the back wall), additive.
+  state.z = state.climbing ? 0 : Math.round(finite(Number(raw.z), -80, 0, 0) * 10) / 10;
   if (['escort', 'report', 'complete'].includes(state.phase)) {
     state.civiliansX = [0, 1, 2].map(i => Math.round(finite(raw.civiliansX?.[i], 810 + i * 55, 2160 + i * 55, 810 + i * 55)));
     state.following = state.phase === 'escort' && raw.following === true;
