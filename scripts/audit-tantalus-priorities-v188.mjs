@@ -52,11 +52,11 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "index.html": {
     "previousSha256": "337a0b230d0b075bf70e5122240f1ce8e0d2deaebbbd563a15496ea92b5f4d66",
-    "currentSha256": "8c2952618b455a9c626591e2bda966c5654e744aed65cf436b5863480c562438"
+    "currentSha256": "c8cf0bbaa80d8b33b69b10ca49f7b8fb631ef0c3f9320f1705857686d0f6e646"
   },
   "package.json": {
     "previousSha256": "ff133a405bfc1ef2afa7085fcb2a6cde27a9f52c4af0de5172a058b47082eb48",
-    "currentSha256": "4b8979c3c8fa22eefc9caa6138ec2b9e56077696dc763106528667c16a1d928a"
+    "currentSha256": "720862a4363af0a36686268ce5728c49745603b9141a9f92a3a16075bbc72e2e"
   },
   "player-onboarding-v84.css": {
     "previousSha256": "ae49e974d70f1a46dbd28da6d5515fac0124c992591cf0c1c50ad3e7e3d1cfbf",
@@ -88,11 +88,11 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "328c764b2bf467d0bc21ae86abf415a7722bd0a88cba486eb2167c22fa8f0b84",
-    "currentSha256": "b9fa3c0f4358219cb62e87384281edf27940ef7353ebd6104ae13608f1784bdb"
+    "currentSha256": "1b4ea50ee9e34a9bff78ba087591ec1a570387c184f2f17eadf20e322e8040a7"
   },
   "src/app.js": {
     "previousSha256": "482835e65677c536085a1344cf61c3ffa5e09e2af1b8029b949e000a533038ae",
-    "currentSha256": "634617cf7826b393298a497f7527d00d5080eff1c53c61f2fc9a47967b61e906"
+    "currentSha256": "22945abd72c4a2138f26311bfc21c5e35bfa679e9a68e364ee1fda8b73effe1c"
   },
   "src/archive-relay-presentation-v160.js": {
     "previousSha256": "e628ccee6aa0a2ee40eea1fdd3b66b11800c3185c39bbd91c18d662c05749a30",
@@ -168,11 +168,11 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "styles.css": {
     "previousSha256": "5d7f49517ea4377aaf2847e7ef5f5dd5f6e4b015301e1280072d41fd9edab36c",
-    "currentSha256": "cbb372a3cc87171e6ae25100faae0252ffc2d3229afd83d959e0a911016f2932"
+    "currentSha256": "4e908faaf6298ee20a8b9ccee6ca2d10360d81493316ecc2f3148a76a1c4f431"
   },
   "sw.js": {
     "previousSha256": "ff86bba365c3875c8ebaeb0abe13b2a6185ccd5f1a030b4ee5b15ac0e4a12f9b",
-    "currentSha256": "4f224c87cf3dcff2a0e6e4071cd14806ce15619e7fa641728c3af5e253f04829"
+    "currentSha256": "eb4d96ea6406d289cc806f9f78d39ead356ffa3e95aa0f722f0ebe87407eb54c"
   },
   "title-screen-v61.css": {
     "previousSha256": "3a748b04d5e6c9a7e04c189b2c1910c3163a0840968be6bcbb6352e10e16369f",

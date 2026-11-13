@@ -1088,3 +1088,13 @@ html[data-intro-v188="short"] .intro-v188__credit, .intro-v188[data-mode="short"
 @keyframes intro-v188-text-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 @keyframes intro-v188-failsafe { to { opacity: 0; visibility: hidden; pointer-events: none; } }
 
+/* V188 title VFX (src/title-vfx-v188.js): procedural light over the scene, below the menu copy.
+   The CRT layer is static (vignette, faint scanlines) and stays under reduced motion. */
+.title-vfx-v188, .title-crt-v188 { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; pointer-events: none; }
+.title-vfx-v188 { mix-blend-mode: screen; }
+.title-scene-v79 > .title-vfx-v188--planet { z-index: 42; }
+.title-crt-v188 { background:
+  radial-gradient(ellipse at 50% 46%, transparent 52%, rgba(0, 2, 2, .42) 100%),
+  repeating-linear-gradient(0deg, rgba(0, 0, 0, .09) 0 1px, transparent 1px 3px); }
+.title-screen[data-title-scene-v79='fallback'] .title-vfx-v188 { display: none; }
+

@@ -56,6 +56,7 @@ import {
   applyProvingGroundQualificationV81
 } from './hub-annex-services-v71.js';
 import { advanceGalaxy, resolveHubCrisisEvent } from './world-crisis.js';
+import { TitleVfxV188 } from './title-vfx-v188.js';
 import { playIntroV188 } from './intro-sequence-v188.js';
 import { createHubCrisis as createForcedHubCrisisV188 } from './world-crisis-core.js';
 import { applyCampaignConsequence } from './campaign-consequences.js';
@@ -913,6 +914,9 @@ const titleScreen = new TitleScreenController({
     showView('settings');
   }
 });
+// Title VFX (V188): runs only while the title screen is shown.
+const titleVfxV188 = new TitleVfxV188({ screen: byId('title-screen'), scene: byId('title-scene-v79'), canvas: byId('title-vfx-v188'),
+  getQuality: () => saveSystem.data?.settings?.quality || 'high' });
 
 function currentOwnerV84() { return { profile: saveSystem.profile, epoch: profileEpochV78, timeline: saveSystem.data.createdAt }; }
 function ownsTimelineV84(owner) { return owner && owner.profile === saveSystem.profile && owner.epoch === profileEpochV78 && owner.timeline === saveSystem.data.createdAt; }
@@ -4501,6 +4505,7 @@ async function boot() {
   globalThis.__ATF_AUDIO_V77__ = audio;
   globalThis.__ATF_GAME__ = engine;
   globalThis.__ATF_HUB__ = hubEngine;
+  globalThis.__ATF_TITLE_VFX_V188__ = titleVfxV188;
   globalThis.__ATF_XENO_TRIALS_V96__ = {
     open: () => showView('xenotrials'),
     snapshot: () => ({ progress: clone(saveSystem.data.xenoTrialsV96), match: xenoTrialsUiV96?.runtime?.getState() || null })

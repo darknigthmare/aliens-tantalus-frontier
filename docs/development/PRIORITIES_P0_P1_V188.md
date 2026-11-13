@@ -141,9 +141,29 @@ Non vérifiés dans le navigateur : CIN-02, `cin-p2` et les répliques du quai. 
 - Le titre est préparé sous le voile ; ses neuf images sont décodées pendant le crédit (attente plafonnée à 8 s). Le voile est opaque dès le premier affichage. Les étoiles n'apparaissent qu'une fois décodées. Aucun élément ne surgit.
 - Crédit complet à la première ouverture d'une session de navigateur. Un rechargement dans la même session ne montre qu'un court fondu étoilé, fixé avant le premier affichage par `src/intro-boot-v188.js`. Une touche, un clic ou un toucher passe au fondu, sans atteindre le menu en dessous.
 - Vérifications : `scripts/verify-intro-v188.mjs` (4 tests) ; Chromium : images du titre 9/9 décodées avant le fondu ; captures du crédit et du fondu ; rechargement en mode court sans texte ; Entrée pendant le crédit laisse le titre à l'état `idle` ; aucune erreur de page.
-- Le pied de l'écran titre écrit toujours « DARKNIGHTMARE » : orthographe à harmoniser par le propriétaire.
+- Le pied de l'écran titre suit la même orthographe, celle du pseudo du propriétaire : « DARKNIGTHMARE ».
+
+## VFX du menu principal (demande du propriétaire, 2026-11-13)
+
+`src/title-vfx-v188.js` ajoute des effets procéduraux, sans nouveau bitmap, et lit la scène déjà affichée :
+
+- **Éclairs d'orage** : uniquement si la planète porte une couche d'orage. Ce sont des salves de 2 à 4 flashs tous les 4,5 à 11 s, dans le banc de nuages, découpés au disque.
+- **Débris en entrée atmosphérique** : une traînée tous les 9 à 19 s, le long du bord éclairé.
+- **Poussière en parallaxe** : 46 particules, 22 en qualité basse.
+- **Grain analogique** : rafraîchi 12 fois par seconde, désactivé en qualité basse.
+- **Couche statique** : vignettage et lignes de balayage.
+
+Les effets de planète sont dessinés sur un canvas inséré dans la scène, entre les nuages (z 39) et le vaisseau (z 47). Le vaisseau reste donc toujours devant. Le canvas est réinséré si la scène recompose ses couches.
+
+- **Mouvement réduit** : ni éclair ni traînée ; poussière et grain immobiles.
+- **Pause** : quand l'écran titre est masqué ou l'onglet en arrière-plan.
+- **Vérifications** :
+  - `scripts/verify-title-vfx-v188.mjs` (4 tests).
+  - Chromium : orage et traînée forcés par `__ATF_TITLE_VFX_V188__` puis photographiés ; mouvement réduit émulé, 0 pixel allumé malgré un orage forcé ; boucle arrêtée après la sortie du titre ; aucune erreur.
+  - Coût mesuré dans Chromium headless : environ 1,4 ms par image, sans mesure sur matériel cible.
 
 ## Limites et travail restant
+
 
 
 
