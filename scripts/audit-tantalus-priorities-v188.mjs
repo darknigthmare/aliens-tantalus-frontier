@@ -152,7 +152,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/player-creator-ui-v84.js": {
     "previousSha256": "0b5174e5ff3948b5ec987bc2fdee1aca277d64d4eb668ef369461df272bb566f",
-    "currentSha256": "c3550bbe7b521b9585f5f9260d7ed1d747de660bdbdc0d0b156645e90a5daeba"
+    "currentSha256": "6421d5cb7b3fa9039082cab23fc1e0bd658c928918a7b8c599c034abd859b221"
   },
   "src/refuge-v87.css": {
     "previousSha256": "fce1e18a977737d258969dac8bed077c9a65b58857e3e916248bd5c835e01751",
