@@ -16,7 +16,7 @@ function recorder() {
 }
 
 test('durations follow bible §10 and every shot is bilingual', () => {
-  assert.deepEqual(CINEMATIC_IDS_V188, ['cin-00', 'cin-01', 'cin-p2', 'cin-02', 'cin-p3-wren', 'cin-p3-ferro', 'cin-20', 'cin-10', 'cin-11', 'cin-qz17-retour', 'cin-doyenne', 'cin-31', 'cin-50', 'cin-51', 'cin-40', 'cin-41', 'cin-20-rook']);
+  assert.deepEqual(CINEMATIC_IDS_V188, ['cin-00', 'cin-01', 'cin-p2', 'cin-02', 'cin-03', 'cin-p3-wren', 'cin-p3-ferro', 'cin-20', 'cin-10', 'cin-11', 'cin-qz17-retour', 'cin-doyenne', 'cin-31', 'cin-50', 'cin-51', 'cin-40', 'cin-41', 'cin-20-rook']);
   assert.equal(cinematicDurationV188('cin-40'), 30); assert.equal(cinematicDurationV188('cin-41'), 45);
   assert.equal(cinematicDurationV188('cin-31'), 30); assert.equal(cinematicDurationV188('cin-50'), 35); assert.equal(cinematicDurationV188('cin-51'), 25);
   const d = cinematicDurationV188; assert.ok(d('cin-00') >= 60 && d('cin-00') <= 75); assert.equal(d('cin-01'), 20);
@@ -92,7 +92,8 @@ test('seen cinematics persist additively and app hooks follow the prologue order
   assert.match(app, /playStoryCinematicV188\('cin-00', \{ once: false, record: false \}\)\.then\(\(\) => \{ if \(creatorOwnerV84\) playerCreatorUiV84\.open\(profile\); \}\)/);
   assert.match(app, /=== 'wake-confirmed'\) void playStoryCinematicV188\('cin-01'\)/);
   assert.match(app, /if \(event === 'repair'\) void playStoryCinematicV188\('cin-p2'\)/);
-  assert.match(app, /void playStoryCinematicV188\('cin-02'\)\.then\(\(\) => boardPortMeridienV90\(\)\)/);
+  assert.match(app, /void playStoryCinematicV188\('cin-02'\)\.then\(\(\) => playStoryCinematicV188\('cin-03'\)\)\.then\(\(\) => boardPortMeridienV90\(\)\)/);
+  assert.match(app, /if \(!seenV188\.includes\('cin-03'\)\) \{ void playStoryCinematicV188\('cin-03'\)\.then\(\(\) => boardPortMeridienV90\(\)\); return true; \}/);
   assert.match(app, /void playStoryCinematicV188\('cin-p3-wren'\)/); assert.match(app, /if \(action === 'triage'\) void playStoryCinematicV188\('cin-p3-ferro'\)/);
   assert.match(app, /void playStoryCinematicV188\('cin-20'\)\.then\(\(\) => playStoryCinematicV188\('cin-20-rook'\)\);/);
   assert.match(app, /if \(\['operations', 'command'\]\.includes\(name\)\) queueMicrotask\(markStoryDebriefOnViewV188\);/);

@@ -1196,11 +1196,13 @@ function handleOpeningActionV88(interaction) {
   try {
     if (['opening:signal', 'opening:manifest'].includes(interaction.action)) return openOpeningDialogueV88();
     if (interaction.action === 'opening:ready') {
-      // CIN-02 plays once before the first boarding (bible §4).
+      // CIN-02 then CIN-03 (the descent) play once before the first boarding (bible §4, §56.11).
       if (saveSystem.data.portMeridienV90?.phase === 'pending') {
-        if (!(saveSystem.data.storyCampaignV188?.cinematicsSeen || []).includes('cin-02')) {
-          void playStoryCinematicV188('cin-02').then(() => boardPortMeridienV90()); return true;
+        const seenV188 = saveSystem.data.storyCampaignV188?.cinematicsSeen || [];
+        if (!seenV188.includes('cin-02')) {
+          void playStoryCinematicV188('cin-02').then(() => playStoryCinematicV188('cin-03')).then(() => boardPortMeridienV90()); return true;
         }
+        if (!seenV188.includes('cin-03')) { void playStoryCinematicV188('cin-03').then(() => boardPortMeridienV90()); return true; }
         return boardPortMeridienV90();
       }
       return openHubDialogue({ ...interaction, action: 'navigate:operations' });

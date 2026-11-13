@@ -60,6 +60,17 @@ export const CINEMATICS_V188 = Object.freeze({
       'Echo-8 est monté voir. On n’a plus de nouvelles. Port-Méridien appelle encore. On commence par ceux qui répondent.',
       'Echo-8 went up to look. We’ve heard nothing since. Port-Méridien is still calling. We start with the ones who answer.') })
   ]) }),
+  // [PROPOSÉ] bible §56.11: the descent between the briefing and the quay.
+  'cin-03': Object.freeze({ id: 'cin-03', title: t('Descente sur Port-Méridien', 'Descent to Port-Méridien'), music: 'mission', shots: Object.freeze([
+    shot(8, 'dropship-rain', { caption: t('COCYTE · DESCENTE VERS PORT-MÉRIDIEN', 'COCYTE · DESCENT TO PORT-MÉRIDIEN'), camera: Object.freeze({ from: [1.02, 0, -18], to: [1.12, 0, 10] }) }),
+    shot(8, 'dialogue', { scene: 'dropship', line: line('MAKSIM ORLOV', 'crew-08-maksim-orlov',
+      'Turbulences jusqu’à deux mille mètres. Le port n’émet plus de balise : je pose à vue.',
+      'Turbulence down to two thousand metres. The port has no beacon left: I’m landing visual.') }),
+    shot(8, 'dialogue', { scene: 'dropship', line: line('TAMSIN VELEZ', 'crew-02-tamsin-velez',
+      'Quand la rampe touche, Echo-9 sort en premier. Les vivants d’abord. Le matériel ensuite.',
+      'When the ramp touches down, Echo-9 goes out first. The living first. The cargo after.') }),
+    shot(9, 'port-approach', { caption: t('PORT-MÉRIDIEN · QUAI SUD', 'PORT-MÉRIDIEN · SOUTH QUAY') })
+  ]) }),
   'cin-p3-wren': Object.freeze({ id: 'cin-p3-wren', title: t('Le quai des vivants', 'The quay of the living'), music: null, shots: Object.freeze([
     shot(7, 'dialogue', { scene: 'quay', line: line('TOMAS WREN', null,
       'Les conteneurs scellés partent avant nous depuis trois semaines.',
@@ -187,13 +198,54 @@ function wrap(ctx, text, width) {
   }
   if (current) lines.push(current); return lines;
 }
-function fade(ctx, progress) {
-  const alpha = progress < .08 ? 1 - progress / .08 : progress > .92 ? (progress - .92) / .08 : 0;
+function fade(ctx, progress, { fadeIn = true, fadeOut = true } = {}) {
+  const alpha = fadeIn && progress < .08 ? 1 - progress / .08 : fadeOut && progress > .92 ? (progress - .92) / .08 : 0;
   if (alpha > 0) { ctx.fillStyle = `rgba(0,0,0,${Math.min(1, alpha)})`; ctx.fillRect(0, 0, W, H); }
 }
+// Cinemascope frame (2.39:1): the picture sits between two black bars; captions
+// and subtitles live in the bars, outside the camera move.
+export const LETTERBOX_V188 = Math.round((H - W / 2.39) / 2);
+let pendingCaptions = [];
 function caption(ctx, text, y = 640) {
-  if (!text) return;
-  ctx.textAlign = 'center'; ctx.font = '600 28px monospace'; ctx.fillStyle = '#d8e6d8'; ctx.fillText(text, W / 2, y); ctx.textAlign = 'left';
+  if (text) pendingCaptions.push({ text, top: y < 200 });
+}
+function drawCaptions(ctx) {
+  ctx.textAlign = 'center'; ctx.font = '600 24px monospace'; ctx.fillStyle = '#d8e6d8';
+  for (const entry of pendingCaptions) ctx.fillText(entry.text, W / 2, entry.top ? LETTERBOX_V188 / 2 + 9 : H - LETTERBOX_V188 / 2 + 9);
+  ctx.textAlign = 'left'; pendingCaptions = [];
+}
+const ease = value => value < .5 ? 2 * value * value : 1 - Math.pow(-2 * value + 2, 2) / 2;
+const SLOW_KINDS = new Set(['telemetry', 'terminal', 'message-burst', 'name-list', 'title', 'bio-screen', 'signal-lost']);
+/** Camera for a shot: explicit `camera: { from: [zoom, x, y], to: [...] }`, else a slow push-in. */
+export function cinematicCameraV188(entry, progress, reducedMotion = false) {
+  if (reducedMotion) return { zoom: 1, x: 0, y: 0 };
+  const fallback = SLOW_KINDS.has(entry.kind) ? { from: [1, 0, 0], to: [1.025, 0, 0] } : entry.kind === 'dialogue' ? { from: [1.02, 12, 0], to: [1.07, -12, -6] } : { from: [1.03, -14, 0], to: [1.09, 14, -6] };
+  const camera = entry.camera || fallback, k = ease(Math.max(0, Math.min(1, progress)));
+  const mix = index => camera.from[index] + (camera.to[index] - camera.from[index]) * k;
+  return { zoom: mix(0), x: mix(1), y: mix(2) };
+}
+/** A scene key: consecutive shots with the same key cut without a black fade. */
+const sceneKey = (entry, index) => entry?.kind === 'dialogue' ? `dialogue:${entry.scene}` : `${entry?.kind}:${index}`;
+function shake(local, amount, reducedMotion) {
+  return reducedMotion ? [0, 0] : [Math.sin(local * 37) * amount + Math.sin(local * 13) * amount * .6, Math.cos(local * 29) * amount * .7];
+}
+function light(ctx, x, y, radius, color) {
+  const g = ctx.createRadialGradient?.(x, y, 0, x, y, radius); if (!g) return;
+  g.addColorStop(0, color); g.addColorStop(1, 'rgba(0,0,0,0)'); ctx.fillStyle = g; ctx.fillRect(x - radius, y - radius, radius * 2, radius * 2);
+}
+function cone(ctx, x, top, width, bottom, color) {
+  const g = ctx.createLinearGradient?.(0, top, 0, bottom); if (g) { g.addColorStop(0, color); g.addColorStop(1, 'rgba(0,0,0,0)'); ctx.fillStyle = g; } else ctx.fillStyle = color;
+  ctx.beginPath(); ctx.moveTo(x - 10, top); ctx.lineTo(x + 10, top); ctx.lineTo(x + width / 2, bottom); ctx.lineTo(x - width / 2, bottom); ctx.closePath(); ctx.fill();
+}
+function mist(ctx, time, reducedMotion, color = 'rgba(190,220,230,.05)', y = 520) {
+  ctx.fillStyle = color;
+  for (let i = 0; i < 9; i++) { const drift = reducedMotion ? 0 : time * (8 + i * 2); ctx.beginPath(); ctx.ellipse(((i * 173 + drift) % (W + 300)) - 150, y + (i % 3) * 14, 320, 16, 0, 0, Math.PI * 2); ctx.fill(); }
+}
+function grain(ctx, time, reducedMotion) {
+  const seed = reducedMotion ? 7 : Math.floor(time * 24); ctx.fillStyle = 'rgba(220,230,225,.045)';
+  for (let i = 0; i < 420; i++) ctx.fillRect((i * 7919 + seed * 104729) % W, (i * 6271 + seed * 1299709) % H, 2, 2);
+  const v = ctx.createRadialGradient?.(W / 2, H / 2, H * .35, W / 2, H / 2, H * .95);
+  if (v) { v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,.55)'); ctx.fillStyle = v; ctx.fillRect(0, 0, W, H); }
 }
 function rain(ctx, time, reducedMotion, color = 'rgba(160,190,200,.35)') {
   ctx.strokeStyle = color; ctx.lineWidth = 1;
@@ -204,29 +256,84 @@ function rain(ctx, time, reducedMotion, color = 'rgba(160,190,200,.35)') {
 }
 function background(ctx, images, scene, time, reducedMotion) {
   if (scene === 'hologram') {
-    ctx.fillStyle = '#05100e'; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#030907'; ctx.fillRect(0, 0, W, H);
+    cone(ctx, 640, 560, 760, 140, 'rgba(70,190,160,.16)'); // the table projects upwards
     ctx.strokeStyle = 'rgba(95,210,180,.55)'; ctx.lineWidth = 2;
-    const spin = reducedMotion ? 0 : time * .25;
+    const spin = reducedMotion ? 0 : time * .25, flicker = reducedMotion ? 1 : .85 + .15 * Math.sin(time * 23);
+    ctx.globalAlpha = flicker;
     ctx.beginPath(); ctx.ellipse(640, 300, 170, 170, 0, 0, Math.PI * 2); ctx.stroke(); // Cocyte
     for (let i = 0; i < 7; i++) { ctx.beginPath(); ctx.ellipse(640, 300, 170, 170 * Math.abs(Math.cos(spin + i * .45)), 0, 0, Math.PI * 2); ctx.stroke(); }
     ctx.beginPath(); ctx.ellipse(640, 300, 290, 70, -.25, 0, Math.PI * 2); ctx.stroke(); // orbit
     const sx = 640 + Math.cos(spin * 1.6) * 290, sy = 300 + Math.sin(spin * 1.6) * 70 * .9;
     ctx.fillStyle = '#e15b4f'; ctx.fillRect(sx - 7, sy - 7, 14, 14); // Asphodèle, red quarantine light
     ctx.font = '13px monospace'; ctx.fillStyle = '#9fe7cf'; ctx.fillText('COCYTE', 600, 110); ctx.fillStyle = '#e15b4f'; ctx.fillText('ASPHODÈLE · QZ ROUGE', sx + 12, sy - 10);
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = 'rgba(150,240,210,.05)'; for (let y = 110; y < 520; y += 6) ctx.fillRect(420, y, 440, 1); // projection scanlines
+    ctx.fillStyle = '#0c1a16'; ctx.fillRect(330, 560, 620, 30); // table edge
+    ctx.fillStyle = '#020504'; // crew around the table, backlit
+    for (const [x, w] of [[180, 150], [400, 120], [880, 130], [1100, 160]]) { ctx.beginPath(); ctx.ellipse(x, 470, w * .28, w * .34, 0, 0, Math.PI * 2); ctx.fill(); ctx.fillRect(x - w / 2, 520, w, 200); }
     return;
   }
-  const palette = { cryo: ['#0b1418', '#14262c'], range: ['#151510', '#24231a'], quay: ['#101317', '#1d232b'], triage: ['#121517', '#232a2e'], quarters: ['#120f0c', '#1f1a15'], dropship: ['#0c0f0e', '#1a1e1c'], cradle: ['#0b1113', '#162024'], lab: ['#0d1214', '#1b2428'], alarm: ['#140606', '#2a0e0c'] }[scene] || ['#0b0f10', '#151b1d'];
+  const palette = { cryo: ['#061014', '#10232a'], range: ['#100f0a', '#22200f'], quay: ['#070a0d', '#141b22'], triage: ['#0d1112', '#1e2629'], quarters: ['#0d0a08', '#1d1712'], dropship: ['#0a0606', '#1c0f0d'], cradle: ['#0b1113', '#162024'], lab: ['#0d1214', '#1b2428'], alarm: ['#140606', '#2a0e0c'] }[scene] || ['#0b0f10', '#151b1d'];
   const g = ctx.createLinearGradient?.(0, 0, 0, H);
   if (g) { g.addColorStop(0, palette[1]); g.addColorStop(1, palette[0]); ctx.fillStyle = g; } else ctx.fillStyle = palette[0];
   ctx.fillRect(0, 0, W, H);
-  ctx.fillStyle = 'rgba(255,255,255,.03)'; for (let x = 0; x < W; x += 160) ctx.fillRect(x, 0, 2, H);
-  if (scene === 'cryo') { ctx.strokeStyle = 'rgba(170,220,235,.4)'; ctx.strokeRect(120, 150, 220, 380); ctx.strokeRect(940, 150, 220, 380); }
-  if (scene === 'quay' || scene === 'dropship') rain(ctx, time, reducedMotion, 'rgba(160,190,200,.18)');
-  if (scene === 'triage') { // stretcher and a patient with a bandaged chest (primitives)
+  ctx.fillStyle = 'rgba(255,255,255,.025)'; for (let x = 0; x < W; x += 160) ctx.fillRect(x, 0, 2, H);
+  if (scene === 'cryo') { // hypersleep capsules under cold strip lights, one open
+    for (const x of [200, 640, 1080]) { ctx.fillStyle = 'rgba(200,235,245,.55)'; ctx.fillRect(x - 70, 100, 140, 6); cone(ctx, x, 106, 360, 560, 'rgba(150,210,230,.10)'); }
+    ctx.fillStyle = '#0b161b'; ctx.fillRect(0, 500, W, 220); // deck
+    for (let i = 0; i < 4; i++) { // horizontal hypersleep capsules: metal body, glass canopy, cold inner light
+      const x = 70 + i * 300, open = i === 2;
+      ctx.fillStyle = '#1b2a31'; ctx.fillRect(x, 430, 250, 56); ctx.fillStyle = 'rgba(160,215,235,.25)'; ctx.fillRect(x, 430, 250, 3); // body and rim light
+      ctx.fillStyle = '#121d22'; ctx.fillRect(x + 20, 486, 30, 20); ctx.fillRect(x + 200, 486, 30, 20); // feet
+      light(ctx, x + 125, 430, 140, open ? 'rgba(120,200,230,.12)' : 'rgba(120,200,230,.22)');
+      ctx.save(); ctx.translate(x + 10, 432); if (open) ctx.rotate(-.42); // the open canopy is raised
+      const glass = ctx.createLinearGradient?.(0, -60, 0, 0);
+      if (glass) { glass.addColorStop(0, 'rgba(190,230,245,.30)'); glass.addColorStop(1, 'rgba(90,140,160,.12)'); ctx.fillStyle = glass; } else ctx.fillStyle = 'rgba(160,210,230,.2)';
+      ctx.beginPath(); ctx.ellipse(115, 0, 118, 52, 0, Math.PI, 0); ctx.fill();
+      ctx.strokeStyle = 'rgba(200,235,245,.35)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.ellipse(115, 0, 118, 52, 0, Math.PI, 0); ctx.stroke();
+      if (!open) { ctx.fillStyle = 'rgba(230,248,252,.28)'; for (let f = 0; f < 14; f++) ctx.fillRect(20 + (f * 41) % 190, -40 + (f * 17) % 34, 4, 3); } // frost
+      ctx.restore();
+      ctx.fillStyle = open ? '#e9d07a' : '#9fe7cf'; ctx.font = '12px monospace'; ctx.fillText(`CAPSULE 0${i + 1}${open ? ' · OUVERTE' : ''}`, x + 70, 524);
+    }
+    mist(ctx, time, reducedMotion, 'rgba(190,225,235,.025)', 490);
+  }
+  if (scene === 'range') { // firing lanes, man-shaped boards, sodium work lights
+    for (const x of [320, 960]) { ctx.fillStyle = 'rgba(255,200,110,.7)'; ctx.fillRect(x - 40, 96, 80, 5); cone(ctx, x, 101, 420, 600, 'rgba(255,190,100,.09)'); }
+    ctx.fillStyle = '#1b1a12'; ctx.fillRect(0, 540, W, 180);
+    for (let i = 0; i < 5; i++) { const x = 180 + i * 230; ctx.fillStyle = '#2a281c'; ctx.fillRect(x, 300, 6, 240); // lane divider
+      ctx.fillStyle = '#4c4a3a'; ctx.beginPath(); ctx.arc(x + 110, 330, 18, 0, Math.PI * 2); ctx.fill(); ctx.fillRect(x + 88, 350, 44, 80); }
+  }
+  if (scene === 'quay' || scene === 'dropship') {
+    if (scene === 'quay') { // cranes and container stacks against floodlights
+      ctx.fillStyle = '#05080a'; ctx.fillRect(140, 150, 20, 400); ctx.fillRect(140, 150, 300, 16); ctx.fillRect(980, 190, 18, 360); ctx.fillRect(820, 190, 260, 14);
+      for (let i = 0; i < 7; i++) { ctx.fillStyle = i % 2 ? '#141a1f' : '#191714'; ctx.fillRect(60 + i * 170, 430 - (i % 3) * 40, 150, 140 + (i % 3) * 40); }
+      for (const x of [300, 900]) { light(ctx, x, 140, 60, 'rgba(255,236,190,.6)'); cone(ctx, x, 140, 520, 640, 'rgba(255,230,180,.08)'); }
+      ctx.fillStyle = 'rgba(255,230,180,.06)'; for (let i = 0; i < 12; i++) ctx.fillRect(240 + (i * 97) % 760, 580 + (i % 4) * 8, 60, 2); // wet reflections
+      rain(ctx, time, reducedMotion, 'rgba(170,200,210,.22)');
+    } else { // dropship troop bay: red cabin light, seats, straps; the hull shakes
+      const [dx, dy] = shake(time, 2.4, reducedMotion); ctx.save(); ctx.translate(dx, dy);
+      light(ctx, 640, 120, 520, 'rgba(200,40,30,.22)');
+      for (const x of [300, 980]) { ctx.fillStyle = '#081013'; ctx.beginPath(); ctx.arc(x, 180, 34, 0, Math.PI * 2); ctx.fill(); // portholes, rain outside
+        ctx.save(); ctx.beginPath(); ctx.arc(x, 180, 30, 0, Math.PI * 2); ctx.clip(); rain(ctx, time, reducedMotion, 'rgba(170,200,210,.5)'); ctx.restore();
+        ctx.strokeStyle = '#3a2a24'; ctx.lineWidth = 5; ctx.beginPath(); ctx.arc(x, 180, 34, 0, Math.PI * 2); ctx.stroke(); }
+      for (let i = 0; i < 6; i++) { const x = 90 + i * 190; ctx.fillStyle = '#1e1110'; ctx.fillRect(x, 300, 120, 200); ctx.fillStyle = '#2c1a17'; ctx.fillRect(x + 10, 250, 100, 60);
+        ctx.strokeStyle = '#4a2f26'; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(x + 30, 260); ctx.lineTo(x + 60, 420); ctx.moveTo(x + 90, 260); ctx.lineTo(x + 60, 420); ctx.stroke(); }
+      ctx.fillStyle = (Math.floor(time * 1.4) % 2) ? '#e15b4f' : '#5a1f1b'; ctx.fillRect(620, 112, 40, 10); ctx.restore();
+    }
+  }
+  if (scene === 'triage') { // curtains, surgical lamp, stretcher and a patient with a bandaged chest (primitives)
+    ctx.fillStyle = 'rgba(190,200,190,.08)'; for (let x = 80; x < 640; x += 36) ctx.fillRect(x, 130, 20, 380);
+    light(ctx, 940, 150, 70, 'rgba(240,250,255,.55)'); cone(ctx, 940, 150, 420, 520, 'rgba(230,240,245,.10)');
     ctx.fillStyle = '#3a4448'; ctx.fillRect(760, 360, 360, 22); ctx.fillRect(780, 382, 10, 60); ctx.fillRect(1090, 382, 10, 60);
     ctx.fillStyle = '#6b5a4c'; ctx.fillRect(800, 330, 240, 32); ctx.fillStyle = '#e8e2d0'; ctx.fillRect(880, 326, 90, 38);
     ctx.fillStyle = '#6b5a4c'; ctx.beginPath(); ctx.arc(1060, 338, 18, 0, Math.PI * 2); ctx.fill();
-    const breath = reducedMotion ? 0 : Math.sin(time * 2.2) * 2; ctx.fillStyle = 'rgba(232,226,208,.5)'; ctx.fillRect(880, 322 - breath, 90, 4); }
+    const breath = reducedMotion ? 0 : Math.sin(time * 2.2) * 2; ctx.fillStyle = 'rgba(232,226,208,.5)'; ctx.fillRect(880, 322 - breath, 90, 4);
+  }
+  if (scene === 'quarters') { // one desk lamp, a terminal, the rest in shadow
+    light(ctx, 860, 300, 340, 'rgba(255,190,110,.16)'); ctx.fillStyle = '#1a140f'; ctx.fillRect(620, 420, 520, 26); ctx.fillStyle = '#0d1611'; ctx.fillRect(760, 300, 200, 120);
+    ctx.fillStyle = 'rgba(120,230,170,.35)'; for (let y = 316; y < 404; y += 12) ctx.fillRect(776, y, 120 + (y % 5) * 10, 3);
+  }
 }
 function portrait(ctx, images, crewId, name, x, y, size) {
   ctx.fillStyle = '#0a1210'; ctx.fillRect(x, y, size, size);
@@ -243,9 +350,12 @@ function portrait(ctx, images, crewId, name, x, y, size) {
 
 export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 'fr', reducedMotion = false, context = {} } = {}) {
   const at = cinematicShotAtV188(id, time); if (!ctx || !at) return null;
-  const { shot: current, local, progress } = at, lang = language === 'en' ? 'en' : 'fr';
+  const { shot: current, local, progress, index } = at, lang = language === 'en' ? 'en' : 'fr';
+  pendingCaptions = []; let subtitle = null;
   ctx.save(); ctx.textAlign = 'left';
   ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
+  const camera = cinematicCameraV188(current, progress, reducedMotion);
+  ctx.save(); ctx.translate(W / 2 + camera.x, H / 2 + camera.y); ctx.scale(camera.zoom, camera.zoom); ctx.translate(-W / 2, -H / 2);
   switch (current.kind) {
     case 'telemetry': {
       ctx.strokeStyle = '#59d27f'; ctx.lineWidth = 2; ctx.beginPath();
@@ -398,22 +508,49 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       NORTH_QUAY_NAMES_V188.forEach((name, index) => { if (progress > index / (NORTH_QUAY_NAMES_V188.length + 1)) ctx.fillText(name, W / 2, 240 + index * 64); });
       ctx.textAlign = 'left'; break;
     }
+    case 'port-approach': { // night descent: ridge, the port's lights, the pad beacons, heavy rain
+      const sky = ctx.createLinearGradient?.(0, 0, 0, H); if (sky) { sky.addColorStop(0, '#0d1a1f'); sky.addColorStop(1, '#05080a'); ctx.fillStyle = sky; } else ctx.fillStyle = '#081014';
+      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#04070a'; ctx.beginPath(); ctx.moveTo(0, 380); for (let x = 0; x <= W; x += 80) ctx.lineTo(x, 330 + Math.sin(x * .013) * 40 + Math.cos(x * .031) * 18); ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.fill();
+      ctx.fillStyle = '#0a0f12'; ctx.fillRect(760, 250, 70, 200); ctx.fillRect(560, 360, 520, 120); ctx.beginPath(); ctx.ellipse(470, 420, 110, 60, 0, Math.PI, 0); ctx.fill(); // processor, blocks, dome
+      light(ctx, 795, 250, 80, 'rgba(233,160,90,.35)'); ctx.fillStyle = 'rgba(180,190,200,.12)';
+      for (let i = 0; i < 6; i++) { const y = 240 - ((reducedMotion ? 0 : local * 18) + i * 22) % 120; ctx.beginPath(); ctx.arc(795 + Math.sin(i) * 20, y, 26, 0, Math.PI * 2); ctx.fill(); }
+      ctx.fillStyle = 'rgba(255,214,150,.75)'; for (let i = 0; i < 40; i++) ctx.fillRect(570 + (i * 53) % 500, 372 + (i * 29) % 90, 4, 3); // windows
+      ctx.strokeStyle = 'rgba(140,220,200,.5)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.ellipse(380, 560, 210, 40, 0, 0, Math.PI * 2); ctx.stroke(); // landing pad
+      for (let i = 0; i < 8; i++) { const on = reducedMotion ? true : (Math.floor(local * 3) + i) % 2 === 0; const a = i / 8 * Math.PI * 2;
+        ctx.fillStyle = on ? '#e15b4f' : '#4a1612'; ctx.fillRect(380 + Math.cos(a) * 210 - 3, 560 + Math.sin(a) * 40 - 3, 6, 6); }
+      rain(ctx, local, reducedMotion, 'rgba(170,200,210,.3)'); caption(ctx, current.caption?.[lang]); break;
+    }
     case 'dialogue': {
       background(ctx, images, current.scene, local, reducedMotion);
-      const speaker = current.line, frameY = 470;
-      ctx.fillStyle = 'rgba(3,8,7,.88)'; ctx.fillRect(60, frameY, W - 120, 200); ctx.strokeStyle = 'rgba(131,213,161,.5)'; ctx.strokeRect(60.5, frameY + .5, W - 120, 200);
-      portrait(ctx, images, speaker.crewId, speaker.speaker, 84, frameY + 24, 152);
-      ctx.fillStyle = current.radio ? '#e9d07a' : '#83d5a1'; ctx.font = '700 18px monospace'; ctx.fillText(speaker.speaker, 266, frameY + 46);
-      ctx.fillStyle = '#e6efe6'; ctx.font = '21px sans-serif';
-      const text = speaker.text[lang], visible = text.slice(0, Math.ceil(text.length * Math.min(1, progress * 1.6)));
-      wrap(ctx, visible, W - 380).slice(0, 5).forEach((row, index) => ctx.fillText(row, 266, frameY + 84 + index * 28));
-      break;
+      subtitle = current; break;
     }
     default: break;
   }
-  fade(ctx, progress);
+  ctx.restore();
+  if (current.kind !== 'title') grain(ctx, local, reducedMotion);
+  ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, LETTERBOX_V188); ctx.fillRect(0, H - LETTERBOX_V188, W, LETTERBOX_V188);
+  if (subtitle) drawSubtitleV188(ctx, images, subtitle, progress, lang, local, reducedMotion);
+  drawCaptions(ctx);
+  // Fade to black only where the scene changes; lines of one conversation cut directly.
+  const shots = CINEMATICS_V188[id].shots;
+  fade(ctx, progress, { fadeIn: !(index > 0 && sceneKey(shots[index - 1], index - 1) === sceneKey(current, index)),
+    fadeOut: !(index < shots.length - 1 && sceneKey(shots[index + 1], index + 1) === sceneKey(current, index)) });
   ctx.restore();
   return at;
+}
+
+/** Lower-third subtitle: small portrait, speaker, typewritten line flowing into the bottom bar. */
+function drawSubtitleV188(ctx, images, entry, progress, lang, local, reducedMotion) {
+  const speaker = entry.line, top = H - LETTERBOX_V188 - 96;
+  const band = ctx.createLinearGradient?.(0, top - 40, 0, H - LETTERBOX_V188);
+  if (band) { band.addColorStop(0, 'rgba(0,0,0,0)'); band.addColorStop(1, 'rgba(0,0,0,.78)'); ctx.fillStyle = band; ctx.fillRect(0, top - 40, W, H - LETTERBOX_V188 - top + 40); }
+  portrait(ctx, images, speaker.crewId, speaker.speaker, 70, top + 4, 88);
+  if (entry.radio) { const seed = reducedMotion ? 3 : Math.floor(local * 18); ctx.fillStyle = 'rgba(233,208,122,.18)'; for (let i = 0; i < 60; i++) ctx.fillRect(74 + (i * 37 + seed * 11) % 80, top + 8 + (i * 53 + seed * 7) % 80, 2, 2); }
+  ctx.fillStyle = entry.radio ? '#e9d07a' : '#83d5a1'; ctx.font = '700 16px monospace'; ctx.fillText(speaker.speaker, 180, top + 22);
+  ctx.fillStyle = '#eef4ee'; ctx.font = '21px sans-serif';
+  const text = speaker.text[lang], visible = text.slice(0, Math.ceil(text.length * Math.min(1, progress * 1.6)));
+  wrap(ctx, visible, W - 260).slice(0, 5).forEach((row, row_) => ctx.fillText(row, 180, top + 54 + row_ * 27));
 }
 
 /** DOM player: one fullscreen canvas overlay; Escape or the button skips,

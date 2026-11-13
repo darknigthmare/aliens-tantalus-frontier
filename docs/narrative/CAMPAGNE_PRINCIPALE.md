@@ -564,6 +564,18 @@ Salle de briefing. Mara Vega projette Cocyte et la station.
 
 *Ancrage Alien : réquisition des Marines, consigne de la compagnie, quarantaine.*
 
+### CIN-03 · Descente sur Port-Méridien — [EXISTANT] (V188) · [PROPOSÉ]
+
+Jouée une fois, entre CIN-02 et le débarquement (33 s). Le dropship d'Orlov descend sous la pluie ; la soute est éclairée en rouge et les hublots ruissellent.
+
+> **Maksim Orlov** — Turbulences jusqu'à deux mille mètres. Le port n'émet plus de balise : je pose à vue.
+>
+> **Tamsin Velez** — Quand la rampe touche, Echo-9 sort en premier. Les vivants d'abord. Le matériel ensuite.
+
+Dernier plan : les lumières du port sous la pluie, le processeur atmosphérique qui fume, les balises rouges de l'aire de pose. `PORT-MÉRIDIEN · QUAI SUD`.
+
+*Ancrage Alien : descente en dropship, colonie sans balise, Marines qui passent en premier.*
+
 ### P-3 · Intro — Le quai des vivants (Port-Méridien) — [EXISTANT]
 
 `port-meridien-v90.js` (reçu existant `port-meridien:quai-des-vivants:v90`) : porter un lot au triage, assister un blessé, réalimenter le sas, rassembler trois habitants et les guider vers le sas éclairé.
@@ -1129,6 +1141,7 @@ Les chapitres Mire Archive 001, Protocole Z-110, Jeri, Éloïse, A.T.A.X.-Q, Le 
 | CIN-00 | Ouverture | Titre | 60-75 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-01 | Le casier vide | Prologue | 20 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-02 | Le briefing | Prologue | 45 s | [EXISTANT] V188 (placeholder Canvas) |
+| CIN-03 | Descente sur Port-Méridien | Prologue | 33 s | [EXISTANT] V188 (placeholder Canvas) ; [PROPOSÉ] §56.11 |
 | CIN-10 | Les quais déserts | Acte I | 30 s | [EXISTANT] V188 |
 | CIN-11 | Ouvert de l'intérieur | Acte I | 25 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-20 | Treize minutes | Acte II | 40 s | [EXISTANT] V188 (placeholder Canvas) |
@@ -4427,3 +4440,22 @@ La table du §6.3 est jouable dans la vue Commandement. Les sept chantiers, leur
 - **Palette** : `src/colorblind-palette-v188.js`. Les signaux d'état dessinés sur le canvas passent par une palette Okabe–Ito : portes verrouillée, ouverte et fermée des missions, du hub, des cloisons, du Bioforge et du relais, ainsi que le guide de déplacement bloqué ou libre. Ces couleurs diffèrent aussi en luminosité. Mode désactivé : couleurs d'origine, octet pour octet.
 - **Mesure** : sous les trois simulations, l'écart minimal entre états passe d'environ 0,12–0,29 à au moins 0,4 (test `verify-accessibility-v188`).
 - **Reste à faire** : les signaux d'interface HTML (panneaux) et les autres codes couleur du canvas, à recenser.
+
+### 56.11 Prologue cinématographique (V188, 2026-11-13)
+
+**Cinématiques (toutes, `story-cinematics-v188.js`)** :
+
+- **Cadre** : format 2,39:1 entre deux bandes noires. Les légendes s'affichent dans les bandes, hors du mouvement de caméra.
+- **Caméra** : chaque plan a sa caméra, soit un mouvement lent par défaut, soit un `camera` explicite. Le mode « mouvement réduit » fige la caméra.
+- **Raccords** : les répliques d'une même conversation s'enchaînent sans fondu ; le noir n'intervient qu'aux changements de scène.
+- **Sous-titres** : bas d'écran avec petit portrait, nom et réplique tapée. Une voix radio s'affiche en ambre, avec de la neige sur le portrait.
+- **Image** : grain et vignettage.
+- **Décors** en primitives, toujours des placeholders :
+  - baie cryo : capsules horizontales à verrière givrée, la n° 3 ouverte, celle d'Echo-9 ;
+  - pas de tir : couloirs, silhouettes de cible, lampes au sodium ;
+  - salle holographique : projection qui scintille, équipage en contre-jour ;
+  - quai : grues, conteneurs, projecteurs dans la pluie, reflets ;
+  - triage : rideaux, scialytique ;
+  - quartiers : lampe de bureau ;
+  - soute du dropship : lumière rouge, harnais, hublots sous la pluie, secousses.
+- **Nouvelle séquence** : CIN-03 *Descente sur Port-Méridien*, présentée au §4. Ses répliques sont **[PROPOSÉ]**.
