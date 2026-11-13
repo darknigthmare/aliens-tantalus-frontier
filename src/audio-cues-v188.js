@@ -53,7 +53,9 @@ export const AUDIO_CUES_V188 = Object.freeze([
   cue('weapon-smartgun', 'weapon', .45, 18875, { f: 120, rounds: 4 }),
   cue('weapon-flamethrower', 'weapon', .8, 18876, { roar: 1 }),
   cue('weapon-reload', 'weapon', .5, 18877, { clack: 2 }),
-  cue('weapon-dry-fire', 'weapon', .12, 18878, { clack: 1 })
+  cue('weapon-dry-fire', 'weapon', .12, 18878, { clack: 1 }),
+  // Act III (bible §5.3): a sealed container knocking from inside.
+  cue('container-knock', 'door', 1.3, 18881, { f: 70, knock: 1 })
 ]);
 
 export const AUDIO_CUE_IDS_V188 = Object.freeze(AUDIO_CUES_V188.map(entry => entry.id));
@@ -88,6 +90,10 @@ export function renderAudioCueV188(id, sampleRate = 22050) {
         break;
       }
       case 'door': {
+        if (score.knock) { // three heavy knocks, muffled by the container wall
+          for (const start of [0, .38, .62]) { const a = t - start; if (a >= 0) v += .8 * Math.sin(tau * f * a) * Math.exp(-a * 18) + .25 * low * Math.exp(-a * 30); }
+          break;
+        }
         const sweep = score.rise > 0 ? t / d : 1 - t / d;
         v = .3 * low * (.6 + .4 * Math.sin(tau * 31 * t)) * env(t, d, .05)
           + .22 * Math.sin(tau * (f + 60 * sweep) * t) * env(t, d, .05)

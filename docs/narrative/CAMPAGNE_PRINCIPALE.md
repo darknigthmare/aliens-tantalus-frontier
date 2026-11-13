@@ -632,13 +632,13 @@ Contenu existant : briefing « Le message arrivé trop tard » ; protocoles *Aud
 
 **Tissage [PROPOSÉ] :**
 
-- **Le manifeste du M577 est le choix moral de l'acte.** La consigne de la compagnie exige de ramener trois conteneurs scellés du complexe ; Asha demande des places pour les ouvriers retranchés à C-12. Chaque conteneur retire deux places.
-- Pendant les 45 secondes de C-12, si un conteneur est à bord, il **frappe de l'intérieur** (son seul). Inez : « Notez l'heure. »
-- **CIN-31 « Le sas refermé »** : les rescapés descendent à Port-Méridien, ou les conteneurs partent sous scellés vers le Tantalus, sur ordre. Écran de quarantaine du Tantalus : `CONTRÔLE BIOLOGIQUE · 1 ANOMALIE`.
+- **[EXISTANT] (V188)** **Le manifeste du M577 est le choix moral de l'acte.** Une boîte de dialogue s'ouvre avant le départ du convoi ; le choix est enregistré dans `storyCampaignV188.m577Manifest`. La consigne de la compagnie exige de ramener trois conteneurs scellés du complexe ; Asha demande des places pour les ouvriers retranchés à C-12. Chaque conteneur retire deux places.
+- **[EXISTANT] (V188)** Pendant les 45 secondes de C-12, si un conteneur est à bord, il **frappe de l'intérieur** (son seul, son original `container-knock`). Inez : « Notez l'heure. »
+- **CIN-31 « Le sas refermé »** — **[EXISTANT] (V188)**, au premier passage à la table tactique après C-12, dessinée d'après le manifeste : les rescapés descendent à Port-Méridien, ou les conteneurs partent sous scellés vers le Tantalus, sur ordre. Écran de quarantaine du Tantalus : `CONTRÔLE BIOLOGIQUE · 1 ANOMALIE`.
 
 *Ancrage Alien : APC, horde, Reine, choix entre fret et vivants.*
 
-**Conséquence :** `story-m577-manifest` = colons (0-6) et conteneurs (0-3). Les colons ramenés rejoignent la population de Port-Méridien.
+**Conséquence :** `story-m577-manifest` = colons (0-6) et conteneurs (0-3). Les colons ramenés rejoignent la population de Port-Méridien. **[EXISTANT] (V188)** : la population du monde de C-12 est augmentée une seule fois. Les conteneurs restent consignés pour l'Interlude (§5.4), qui n'est pas encore jouable.
 
 ### 5.4 Interlude — « Quarantaine » (à bord du Tantalus) — [PROPOSÉ]
 
@@ -661,10 +661,10 @@ Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-m
 
 **Tissage [PROPOSÉ] :**
 
-- **CIN-50 « Les dernières images »** (35 s) : caméra casque dégradée. Echo-9 suit la destination absente du bon de QZ-17 jusqu'au **dépôt**. Silhouette au plafond. Coupure. La capture n'est pas jouée : elle reste « sans témoin exploitable », comme dans le code.
+- **CIN-50 « Les dernières images »** (35 s) — **[EXISTANT] (V188)**, au réveil dans le cocon : caméra casque dégradée. Echo-9 suit la destination absente du bon de QZ-17 jusqu'au **dépôt**. Silhouette au plafond. Coupure. La capture n'est pas jouée : elle reste « sans témoin exploitable », comme dans le code.
 - Dans la galerie basse : des **berceaux réfrigérés de la série QZ17**, vides, et des cocons humains (le libellé « COCON HUMAIN » existe déjà dans `hive-missions-v131.js`) portant des badges de Port-Méridien et de QZ-18. **Révélation :** le dépôt n'expédiait pas des organismes, il les **élevait**. Les conteneurs amenaient des œufs ; les disparus de la colonie servaient d'hôtes. La priorité de fret gardait ces départs et ces disparitions hors des registres.
 - Un enregistreur fixé aux berceaux porte la signature de la station Asphodèle : les ordres de livraison venaient de là (lien avec S2-S3).
-- **CIN-51 « Contrôle biologique »** : scanner, Noor Okafor attend. `NÉGATIF`. « Bon retour. Cette fois, je l'écris. »
+- **CIN-51 « Contrôle biologique »** — **[EXISTANT] (V188)**, au premier passage à la table tactique après l'Acte IV : scanner, Noor Okafor attend. `NÉGATIF`. « Bon retour. Cette fois, je l'écris. »
 
 *Ancrage Alien : cocons, hôtes humains, ruche nourrie par la compagnie, contrôle biologique.*
 
@@ -1113,11 +1113,11 @@ Les chapitres Mire Archive 001, Protocole Z-110, Jeri, Éloïse, A.T.A.X.-Q, Le 
 | CIN-11 | Ouvert de l'intérieur | Acte I | 25 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-20 | Treize minutes | Acte II | 40 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-21 | Le quai nord | `story-quai-nord` | 25 s | [PROPOSÉ] |
-| CIN-31 | Le sas refermé | Acte III | 30 s | [PROPOSÉ] |
+| CIN-31 | Le sas refermé | Acte III | 30 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-40 | Jun Park ne répond plus | Interlude | 30 s | [PROPOSÉ] |
 | CIN-41 | Ce que BISHOP-9 savait | Interlude | 45 s | [PROPOSÉ] |
-| CIN-50 | Les dernières images | Acte IV | 35 s | [PROPOSÉ] |
-| CIN-51 | Contrôle biologique | Acte IV | 25 s | [PROPOSÉ] |
+| CIN-50 | Les dernières images | Acte IV | 35 s | [EXISTANT] V188 (placeholder Canvas) |
+| CIN-51 | Contrôle biologique | Acte IV | 25 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-59 | L'atterrissage | `story-recuperation` | 20 s | [PROPOSÉ] |
 | CIN-60 | Dernier départ | Acte V | 30 s | [PROPOSÉ] |
 | CIN-61 | Les portes du port | Acte V | 45 s | [PROPOSÉ] |
@@ -4347,6 +4347,11 @@ Les ajouts **[PROPOSÉ]** du §4, CIN-20 et la réponse de Halloran (§5.2) sont
 | P-3 | `cin-p3-wren` puis `cin-p3-ferro` (Lucia Ferro, Noor Okafor à la radio) | Arrivée au quai, puis fin du triage |
 | Retour de QZ-18 | CIN-20 *Treize minutes*, puis Halloran ; ensuite `cin-20-rook` *La signature* | Premier compte rendu de QZ-18 lu |
 | Fin du quai des vivants | `cin-doyenne` *La doyenne* : Asha présente Adèle Sarrazin, puis les quais, l'infirmerie, le processeur et le mur nord, et enfin la réplique d'Adèle sur la dette | Rapport final du quai, avant les Opérations |
+| Acte III, départ du convoi | Manifeste du M577 (0 à 3 conteneurs, 6 places moins 2 par conteneur) | Lancement de `special-apc-convoy` sans manifeste signé |
+| Acte III, C-12 | Coups dans le conteneur et « Notez l'heure. » | 13 s de défense, s'il y a au moins un conteneur |
+| Retour de C-12 | CIN-31 *Le sas refermé*, d'après le manifeste ; colons ajoutés une fois | Première table tactique après C-12 |
+| Acte IV, réveil | CIN-50 *Les dernières images* | Début du cocon noir |
+| Retour de l'Acte IV | CIN-51 *Contrôle biologique* (NÉGATIF, Noor) | Première table tactique après le cocon noir |
 | Acte I, prise de contrôle | CIN-10 *Les quais déserts* (peinture existante du dropship, pluie), puis Rook | Fin de l'insertion de QZ-17 |
 | Acte I, route de maintenance | CIN-11 *Ouvert de l'intérieur* (berceau givré, fixations arrachées), puis Inez à la radio | Choix « Suivre la trace par la maintenance » |
 | Retour de QZ-17 | `cin-qz17-retour` : les trois conclusions d'Inez | Première ouverture de la table tactique après QZ-17 |

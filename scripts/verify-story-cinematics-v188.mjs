@@ -16,7 +16,8 @@ function recorder() {
 }
 
 test('durations follow bible §10 and every shot is bilingual', () => {
-  assert.deepEqual(CINEMATIC_IDS_V188, ['cin-00', 'cin-01', 'cin-p2', 'cin-02', 'cin-p3-wren', 'cin-p3-ferro', 'cin-20', 'cin-10', 'cin-11', 'cin-qz17-retour', 'cin-doyenne', 'cin-20-rook']);
+  assert.deepEqual(CINEMATIC_IDS_V188, ['cin-00', 'cin-01', 'cin-p2', 'cin-02', 'cin-p3-wren', 'cin-p3-ferro', 'cin-20', 'cin-10', 'cin-11', 'cin-qz17-retour', 'cin-doyenne', 'cin-31', 'cin-50', 'cin-51', 'cin-20-rook']);
+  assert.equal(cinematicDurationV188('cin-31'), 30); assert.equal(cinematicDurationV188('cin-50'), 35); assert.equal(cinematicDurationV188('cin-51'), 25);
   const d = cinematicDurationV188; assert.ok(d('cin-00') >= 60 && d('cin-00') <= 75); assert.equal(d('cin-01'), 20);
   assert.ok(Math.abs(d('cin-02') - 45) <= 5); assert.equal(d('cin-20'), 40); assert.equal(d('cin-10'), 30); assert.equal(d('cin-11'), 25);
   for (const cinematic of Object.values(CINEMATICS_V188)) {
@@ -41,7 +42,7 @@ test('bible texts are carried verbatim', () => {
     'Les conteneurs scellés partent avant nous depuis trois semaines.', 'Ramenez-le en quarantaine. Pas au triage.',
     'Priorité cargaison maintenue, conformément à la clause d’acheminement.',
     'Quatre accès. Aucun ne répond. Le détecteur est calme. Trop calme.', 'Ne concluez pas. Rapportez.',
-    'S’ils nous déclarent non viables, ils reprennent tout, nous compris.'];
+    'S’ils nous déclarent non viables, ils reprennent tout, nous compris.', 'Bon retour. Cette fois, je l’écris.'];
   const all = JSON.stringify(CINEMATICS_V188);
   for (const text of quoted) { assert.ok(bible.includes(text), `bible: ${text}`); assert.ok(all.includes(text), `cinematic: ${text}`); }
 });
@@ -121,4 +122,31 @@ test('the ECHO-8 locker reveals what the campaign has established, in both langu
   assert.equal(hub.interact(), 'base', 'no locker contact before the wake-up');
   const app = read('src/app.js');
   assert.match(app, /withHubEcho8LockerV188\(NativeHubGame\)/); assert.match(app, /interaction\.action === 'story:echo8-locker'/);
+});
+
+import { M577_MANIFEST_V188, m577ManifestFromContainersV188, resolveM577ManifestV188 } from '../src/story-campaign-v188.js';
+
+test('Act III manifest: each container removes two of six seats; colonists join the port once', () => {
+  assert.deepEqual([0, 1, 2, 3].map(n => m577ManifestFromContainersV188(n).colonists), [6, 4, 2, 0]);
+  assert.equal(m577ManifestFromContainersV188(9).containers, 3); assert.equal(M577_MANIFEST_V188.seats, 6);
+  const save = createDefaultSave(); const world = Object.keys(save.galaxy.worldState)[0];
+  assert.equal(resolveM577ManifestV188(save, world), false, 'no manifest, no consequence');
+  save.storyCampaignV188.m577Manifest = m577ManifestFromContainersV188(1); const before = save.galaxy.worldState[world].population;
+  assert.equal(resolveM577ManifestV188(save, world), true); assert.equal(save.galaxy.worldState[world].population, before + 4);
+  assert.equal(resolveM577ManifestV188(save, world), false, 'applied once'); assert.equal(save.galaxy.worldState[world].population, before + 4);
+  assert.deepEqual(migrateSave({ schema: 52, storyCampaignV188: { m577Manifest: { containers: 2, resolved: true } } }).storyCampaignV188.m577Manifest,
+    { containers: 2, colonists: 2, resolved: true });
+  for (const containers of [0, 3]) for (const kind of ['ramp', 'sealed-crates']) {
+    const { ctx, calls } = recorder(); const at = CINEMATICS_V188['cin-31'].shots.findIndex(entry => entry.kind === kind);
+    const start = CINEMATICS_V188['cin-31'].shots.slice(0, at).reduce((sum, entry) => sum + entry.seconds, 0);
+    drawCinematicFrameV188(ctx, 'cin-31', start + 5, { context: { m577: m577ManifestFromContainersV188(containers) } });
+    const expected = kind === 'ramp' ? (containers === 3 ? 'AUCUNE PLACE DONNÉE' : '6 / 6') : (containers === 0 ? 'AUCUN CONTENEUR À BORD' : '3 / 3');
+    assert.ok(calls.text.includes(expected), `${kind} with ${containers}: ${calls.text.join('|')}`);
+  }
+  const app = read('src/app.js');
+  assert.match(app, /campaign\.id === 'special-apc-convoy' && !normalizeStoryCampaignV188\(saveSystem\.data\.storyCampaignV188\)\.m577Manifest/);
+  assert.match(app, /event\.type === 'c12-horde-radio' && event\.id === 'swarm-breach'/); assert.match(app, /audio\.cue\('container-knock'\)/);
+  assert.match(app, /void playStoryCinematicV188\('cin-31', \{ context: \{ m577: manifestV188 \} \}\)/);
+  assert.match(app, /event\.campaignId === 'special-black-cocoon'\) void playStoryCinematicV188\('cin-50'\)/);
+  assert.match(app, /void playStoryCinematicV188\('cin-51'\)/);
 });

@@ -189,7 +189,8 @@ export class AudioDirector {
       alarm: () => this.tone(id === 'alarm-countdown' ? 880 : 380, 0.25, 'sawtooth', 0.06, 40),
       ambience: () => false,
       cry: () => this.tone(id === 'cry-queen' ? 210 : 520, 0.3, 'sawtooth', 0.05, -160),
-      weapon: () => this.tone(id === 'weapon-reload' || id === 'weapon-dry-fire' ? 1800 : 120, 0.05, 'square', 0.06, -30)
+      weapon: () => this.tone(id === 'weapon-reload' || id === 'weapon-dry-fire' ? 1800 : 120, 0.05, 'square', 0.06, -30),
+      container: () => this.tone(70, 0.18, 'triangle', 0.09, -20)
     }[family];
     return this.playEffect(id, fallback);
   }

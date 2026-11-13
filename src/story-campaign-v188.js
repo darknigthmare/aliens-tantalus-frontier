@@ -28,7 +28,7 @@ const TEXT = Object.freeze({
   }
 });
 
-export function createStoryCampaignV188() { return { schema: 188, debriefSeen: [], cinematicsSeen: [] }; }
+export function createStoryCampaignV188() { return { schema: 188, debriefSeen: [], cinematicsSeen: [], m577Manifest: null }; }
 
 export function normalizeStoryCampaignV188(raw) {
   const base = createStoryCampaignV188();
@@ -37,6 +37,7 @@ export function normalizeStoryCampaignV188(raw) {
   base.debriefSeen = [...new Set(seen.filter(id => typeof id === 'string' && /^[a-z0-9-]{1,80}$/.test(id)))].slice(0, MAX_SEEN);
   const cinematics = Array.isArray(raw.cinematicsSeen) ? raw.cinematicsSeen : [];
   base.cinematicsSeen = [...new Set(cinematics.filter(id => typeof id === 'string' && /^cin-[a-z0-9-]{1,40}$/.test(id)))].slice(0, MAX_SEEN);
+  base.m577Manifest = normalizeM577ManifestV188(raw.m577Manifest);
   return base;
 }
 
@@ -91,4 +92,26 @@ export const STORY_ENDING_CHAPTERS_V188 = Object.freeze(['special-archive-relay'
 export function storyEndingReachedV188(save) {
   const completed = Array.isArray(save?.galaxy?.completedCampaignIds) ? save.galaxy.completedCampaignIds : [];
   return STORY_ENDING_CHAPTERS_V188.every(id => completed.includes(id));
+}
+
+// —— Act III: the M577 manifest (bible §5.3) ——
+// The company order requires three sealed containers; Asha asks for seats for
+// the C-12 workers. Six places in all; each container removes two.
+export const M577_MANIFEST_V188 = Object.freeze({ seats: 6, maxContainers: 3, seatsPerContainer: 2 });
+export function m577ManifestFromContainersV188(containers) {
+  const count = Math.max(0, Math.min(M577_MANIFEST_V188.maxContainers, Math.floor(Number(containers) || 0)));
+  return { containers: count, colonists: M577_MANIFEST_V188.seats - count * M577_MANIFEST_V188.seatsPerContainer, resolved: false };
+}
+export function normalizeM577ManifestV188(raw) {
+  if (!raw || typeof raw !== 'object' || !Number.isInteger(raw.containers)) return null;
+  return { ...m577ManifestFromContainersV188(raw.containers), resolved: raw.resolved === true };
+}
+/** Mutates the candidate save. Consequence (bible §5.3): the colonists brought
+ * back join Port-Méridien's population once, when C-12 is completed. */
+export function resolveM577ManifestV188(save, worldId) {
+  const story = normalizeStoryCampaignV188(save?.storyCampaignV188), manifest = story.m577Manifest;
+  if (!manifest || manifest.resolved) return false;
+  const world = save?.galaxy?.worldState?.[worldId];
+  if (world && Number.isFinite(world.population)) world.population += manifest.colonists;
+  story.m577Manifest = { ...manifest, resolved: true }; save.storyCampaignV188 = story; return true;
 }

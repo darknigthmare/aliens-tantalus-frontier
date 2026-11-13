@@ -117,6 +117,22 @@ export const CINEMATICS_V188 = Object.freeze({
       'S’ils nous déclarent non viables, ils reprennent tout, nous compris.',
       'If they declare us non-viable, they take everything back, us included.') })
   ]) }),
+  // Act III (bible §5.3): the closed airlock, drawn from the saved M577 manifest.
+  'cin-31': Object.freeze({ id: 'cin-31', title: t('Le sas refermé', 'The closed airlock'), music: null, shots: Object.freeze([
+    shot(10, 'ramp', { caption: t('PORT-MÉRIDIEN · RESCAPÉS DE C-12', 'PORT-MÉRIDIEN · C-12 SURVIVORS') }),
+    shot(10, 'sealed-crates', { caption: t('SOUS SCELLÉS · VERS LE TANTALUS, SUR ORDRE', 'UNDER SEAL · TO THE TANTALUS, ON ORDERS') }),
+    shot(10, 'bio-screen', { status: t('CONTRÔLE BIOLOGIQUE · 1 ANOMALIE', 'BIOLOGICAL SCREENING · 1 ANOMALY'), tone: 'alarm' })
+  ]) }),
+  // Act IV (bible §5.5): the last images before the capture, and the bio check on return.
+  'cin-50': Object.freeze({ id: 'cin-50', title: t('Les dernières images', 'The last images'), music: null, shots: Object.freeze([
+    shot(22, 'helmet-cam', { caption: t('CAMÉRA CASQUE · ECHO-9 · VERS LE DÉPÔT', 'HELMET CAM · ECHO-9 · TO THE DEPOT') }),
+    shot(13, 'signal-lost', { caption: t('SIGNAL PERDU · AUCUN TÉMOIN EXPLOITABLE', 'SIGNAL LOST · NO USABLE WITNESS') })
+  ]) }),
+  'cin-51': Object.freeze({ id: 'cin-51', title: t('Contrôle biologique', 'Biological screening'), music: null, shots: Object.freeze([
+    shot(13, 'bio-screen', { status: t('NÉGATIF', 'NEGATIVE'), tone: 'clear' }),
+    shot(12, 'dialogue', { scene: 'lab', line: line('NOOR OKAFOR', 'crew-04-noor-okafor',
+      'Bon retour. Cette fois, je l’écris.', 'Welcome back. This time, I’m writing it down.') })
+  ]) }),
   // Bible §5.2 weaving: Rook identifies the remote signature (line [PROPOSÉ], §56.7).
   'cin-20-rook': Object.freeze({ id: 'cin-20-rook', title: t('La signature', 'The signature'), music: null, shots: Object.freeze([
     shot(10, 'dialogue', { scene: 'quarters', line: line('ROOK', 'crew-06-rook',
@@ -207,7 +223,7 @@ function portrait(ctx, images, crewId, name, x, y, size) {
   ctx.fillText(initials, x + size / 2, y + size / 2 + size / 9); ctx.textAlign = 'left'; return false;
 }
 
-export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 'fr', reducedMotion = false } = {}) {
+export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 'fr', reducedMotion = false, context = {} } = {}) {
   const at = cinematicShotAtV188(id, time); if (!ctx || !at) return null;
   const { shot: current, local, progress } = at, lang = language === 'en' ? 'en' : 'fr';
   ctx.save(); ctx.textAlign = 'left';
@@ -290,6 +306,46 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
         ctx.fillStyle = '#e9d07a'; for (let x = 40; x < W; x += 300) ctx.fillRect(x - pan, 340, 18, 18); rain(ctx, local, reducedMotion, 'rgba(160,190,200,.15)'); }
       caption(ctx, current.caption?.[lang]); break;
     }
+    case 'ramp': {
+      ctx.fillStyle = '#0d1114'; ctx.fillRect(0, 0, W, H); ctx.fillStyle = '#2a3036'; ctx.beginPath(); ctx.moveTo(300, 560); ctx.lineTo(980, 560); ctx.lineTo(820, 380); ctx.lineTo(460, 380); ctx.fill(); // M577 ramp
+      const count = Math.max(0, Math.min(6, Number(context?.m577?.colonists) || 0));
+      for (let i = 0; i < count; i++) { const walk = reducedMotion ? .5 : Math.min(1, progress * 1.3 - i * .08), x = 520 + i * 40, y = 400 + walk * 170;
+        ctx.fillStyle = '#b8b0a0'; ctx.fillRect(x, y - 46, 16, 46); ctx.beginPath(); ctx.arc(x + 8, y - 54, 8, 0, Math.PI * 2); ctx.fill(); }
+      ctx.fillStyle = '#d8e6d8'; ctx.font = '600 22px monospace'; ctx.textAlign = 'center';
+      ctx.fillText(count ? `${count} / 6` : (lang === 'en' ? 'NO SEAT GIVEN' : 'AUCUNE PLACE DONNÉE'), W / 2, 640); ctx.textAlign = 'left';
+      caption(ctx, current.caption?.[lang], 90); break;
+    }
+    case 'sealed-crates': {
+      ctx.fillStyle = '#0b0f12'; ctx.fillRect(0, 0, W, H);
+      const count = Math.max(0, Math.min(3, Number(context?.m577?.containers) || 0));
+      for (let i = 0; i < count; i++) { const x = 360 + i * 200; ctx.fillStyle = '#3a3226'; ctx.fillRect(x, 380, 160, 120); ctx.strokeStyle = '#e9d07a'; ctx.lineWidth = 3; ctx.strokeRect(x + 6, 386, 148, 108);
+        ctx.fillStyle = '#e9d07a'; ctx.font = '700 14px monospace'; ctx.fillText('QZ17', x + 56, 448); }
+      ctx.fillStyle = '#d8e6d8'; ctx.font = '600 22px monospace'; ctx.textAlign = 'center';
+      ctx.fillText(count ? `${count} / 3` : (lang === 'en' ? 'NO CONTAINER ABOARD' : 'AUCUN CONTENEUR À BORD'), W / 2, 640); ctx.textAlign = 'left';
+      caption(ctx, current.caption?.[lang], 90); break;
+    }
+    case 'bio-screen': {
+      ctx.fillStyle = '#060a09'; ctx.fillRect(0, 0, W, H); ctx.strokeStyle = '#2f6d45'; ctx.strokeRect(220.5, 160.5, 840, 400);
+      ctx.strokeStyle = 'rgba(141,240,176,.4)'; for (let y = 200; y < 540; y += 22) { ctx.beginPath(); ctx.moveTo(240, y); ctx.lineTo(1040, y); ctx.stroke(); }
+      const scan = 240 + ((reducedMotion ? .5 : progress) * 800) % 800; ctx.fillStyle = 'rgba(141,240,176,.25)'; ctx.fillRect(scan, 170, 8, 380);
+      if (progress > .45) { ctx.font = '700 40px monospace'; ctx.textAlign = 'center'; ctx.fillStyle = current.tone === 'alarm' ? ((Math.floor(local * 2) % 2) ? '#e15b4f' : '#8a2a24') : '#8df0b0';
+        ctx.fillText(current.status[lang], W / 2, 380); ctx.textAlign = 'left'; }
+      break;
+    }
+    case 'helmet-cam': {
+      ctx.fillStyle = '#070a08'; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#121a16'; ctx.beginPath(); ctx.moveTo(0, H); ctx.lineTo(560, 300); ctx.lineTo(720, 300); ctx.lineTo(W, H); ctx.fill(); // corridor
+      if (progress > .55) { ctx.fillStyle = '#020302'; ctx.beginPath(); ctx.ellipse(700, 110, 120, 34, 0, 0, Math.PI * 2); ctx.fill(); ctx.fillRect(640, 60, 10, 90); ctx.fillRect(760, 70, 8, 80); } // silhouette on the ceiling
+      const seed = Math.floor(local * 20); ctx.fillStyle = 'rgba(200,220,210,.08)';
+      for (let i = 0; i < (reducedMotion ? 40 : 260); i++) ctx.fillRect(((i * 7919 + seed * 104729) % W), ((i * 6271 + seed * 1299709) % H), 2, 2); // degraded feed
+      ctx.fillStyle = 'rgba(0,0,0,.25)'; for (let y = 0; y < H; y += 4) ctx.fillRect(0, y, W, 1);
+      ctx.fillStyle = '#e15b4f'; ctx.font = '14px monospace'; ctx.fillText('● REC', 40, 50); caption(ctx, current.caption?.[lang]); break;
+    }
+    case 'signal-lost': {
+      ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H); const seed = Math.floor(local * 30);
+      if (progress < .2) { ctx.fillStyle = 'rgba(220,230,225,.5)'; for (let i = 0; i < 900; i++) ctx.fillRect(((i * 7919 + seed * 104729) % W), ((i * 6271 + seed * 1299709) % H), 3, 3); }
+      caption(ctx, current.caption?.[lang], 380); break;
+    }
     case 'title': {
       ctx.textAlign = 'center'; ctx.font = '700 54px sans-serif'; ctx.fillStyle = '#e6efe6';
       ctx.fillText(current.caption[lang], W / 2, H / 2); ctx.textAlign = 'left'; break;
@@ -348,7 +404,7 @@ export class CinematicPlayerV188 {
     }
     for (const source of sources) if (!this.images[source] && this.ImageCtor) { const image = new this.ImageCtor(); image.src = source; this.images[source] = image; }
   }
-  play(id, { language = 'fr', reducedMotion = false } = {}) {
+  play(id, { language = 'fr', reducedMotion = false, context = {} } = {}) {
     if (!CINEMATICS_V188[id] || !this.document?.body) return Promise.resolve('unavailable');
     this.stop('replaced'); this.preload(id);
     const overlay = this.document.createElement('div'); overlay.className = 'cinematic-v188'; overlay.setAttribute('role', 'dialog');
@@ -374,7 +430,7 @@ export class CinematicPlayerV188 {
         if (state.done) return;
         const time = elapsed();
         if (time >= duration) return finish('complete');
-        drawCinematicFrameV188(ctx, id, time, { images: this.images, language, reducedMotion });
+        drawCinematicFrameV188(ctx, id, time, { images: this.images, language, reducedMotion, context });
         this.requestFrame?.(frame);
       };
       frame();

@@ -3,8 +3,9 @@ import { detectReactiveTriggersV188, selectReactiveLinesV188 } from './reactive-
 import { applyAccessibilityV188, installKeyRemapV188, mountKeyBindingsUiV188, normalizeKeyBindingsV188, soundCaptionV188 } from './accessibility-v188.js';
 import { spareCrewMemberV188, normalizeCrewPermadeathV188, normalizeCustomDifficultyV188, normalizeOriginV188, CUSTOM_DIFFICULTY_BOUNDS_V188 } from './run-options-v188.js';
 import { cueForGameEventV188, casteCueV188 } from './audio-cues-v188.js';
-import { deriveStoryCampaignV188, markStoryDebriefSeenV188, markStoryCinematicSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, storyEndingReachedV188 } from './story-campaign-v188.js';
+import { deriveStoryCampaignV188, markStoryDebriefSeenV188, markStoryCinematicSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, storyEndingReachedV188, resolveM577ManifestV188, normalizeStoryCampaignV188 } from './story-campaign-v188.js';
 import { CinematicPlayerV188, CINEMATICS_V188 } from './story-cinematics-v188.js';
+import { openM577ManifestDialogV188 } from './m577-manifest-ui-v188.js';
 import {
   RELEASE, CONTENT_COUNTS, WORLDS, CAMPAIGNS, WEAPONS, EQUIPMENT, ENEMIES, VEHICLES,
   CREW, COSTUMES, LEVEL_SEEDS, SHIP_MODULES, APEX_DOSSIERS, NEURO_XENO_PROFILES,
@@ -948,6 +949,22 @@ const playerCreatorUiV84 = new PlayerCreatorUiV84({
 });
 function markStoryDebriefOnViewV188() {
   if (!['operations', 'command'].includes(activeView) || saveSystem.data.strategy.currentOperation) return;
+  const doneV188 = saveSystem.data.galaxy.completedCampaignIds, seenV188 = saveSystem.data.storyCampaignV188?.debriefSeen || [];
+  // Act III (bible §5.3): CIN-31 and the manifest consequence, once C-12 is completed.
+  const manifestV188 = normalizeStoryCampaignV188(saveSystem.data.storyCampaignV188).m577Manifest;
+  if (doneV188.includes('special-c12-horde') && manifestV188 && !manifestV188.resolved) {
+    try {
+      const candidate = clone(saveSystem.data), c12 = CAMPAIGNS.find(entry => entry.id === 'special-c12-horde');
+      if (resolveM577ManifestV188(candidate, c12?.worldId)) { saveSystem.commit(candidate); void playStoryCinematicV188('cin-31', { context: { m577: manifestV188 } }); }
+    } catch (error) { toast(error.message); }
+    return;
+  }
+  // Act IV (bible §5.5): CIN-51 biological check, once, after the black cocoon.
+  if (doneV188.includes('special-black-cocoon') && !seenV188.includes('special-black-cocoon')) {
+    try { const candidate = clone(saveSystem.data); if (markStoryDebriefSeenV188(candidate, 'special-black-cocoon')) { saveSystem.commit(candidate); void playStoryCinematicV188('cin-51'); } }
+    catch (error) { toast(error.message); }
+    return;
+  }
   // Act I return with Inez (bible §5.1), once, after QZ-17 is completed.
   const qz17V188 = 'special-narrative-qz17';
   if (saveSystem.data.galaxy.completedCampaignIds.includes(qz17V188)
@@ -967,7 +984,7 @@ function markStoryDebriefOnViewV188() {
 }
 // V188 prologue cinematics (bible §4, §10): skippable, replayable, never rewarded.
 const cinematicPlayerV188 = new CinematicPlayerV188();
-function playStoryCinematicV188(id, { once = true, record = true } = {}) {
+function playStoryCinematicV188(id, { once = true, record = true, context = {} } = {}) {
   const seen = saveSystem.data?.storyCampaignV188?.cinematicsSeen || [];
   if (!CINEMATICS_V188[id] || once && seen.includes(id)) return Promise.resolve('already-seen');
   const resumeHub = activeView === 'hub' && hubEngine.running;
@@ -977,7 +994,7 @@ function playStoryCinematicV188(id, { once = true, record = true } = {}) {
   if (resumeMission) engine.togglePause();
   const music = CINEMATICS_V188[id].music;
   if (music) audio.setMusicMoodV188(music); else audio.stopMusic?.(0.6);
-  return cinematicPlayerV188.play(id, { language: document.documentElement.lang,
+  return cinematicPlayerV188.play(id, { language: document.documentElement.lang, context,
     reducedMotion: Boolean(saveSystem.data?.settings?.reducedMotion) }).then(result => {
     if (record && !creatorOwnerV84) {
       try { const candidate = clone(saveSystem.data); if (markStoryCinematicSeenV188(candidate, id)) saveSystem.commit(candidate); } catch (error) { toast(error.message); }
@@ -2792,6 +2809,14 @@ function launchCampaign(campaign = null) {
     : null;
   campaign = resumedCampaign || campaign || CAMPAIGNS.find((entry) => entry.id === saveSystem.data.strategy.plannedCampaignId);
   if (!campaign) return false;
+  // Act III moral choice (bible §5.3): the M577 manifest is signed before the convoy leaves.
+  if (!activeOperation && campaign.id === 'special-apc-convoy' && !normalizeStoryCampaignV188(saveSystem.data.storyCampaignV188).m577Manifest) {
+    openM577ManifestDialogV188({ language: document.documentElement.lang, onConfirm: (manifest) => {
+      try { const candidate = clone(saveSystem.data); candidate.storyCampaignV188 = { ...normalizeStoryCampaignV188(candidate.storyCampaignV188), m577Manifest: manifest };
+        saveSystem.commit(candidate); launchCampaign(campaign); } catch (error) { toast(error.message); }
+    } });
+    return false;
+  }
   const worldId = activeOperation?.worldId || campaign.worldId;
   const world = WORLDS.find((entry) => entry.id === worldId) || WORLDS[0];
   const worldState = saveSystem.data.galaxy.worldState[world.id];
@@ -3078,6 +3103,13 @@ function handleGameEvent(event) {
   // Act I cinematics (bible §5.1): approach at insertion, the opened cradle on the maintenance route.
   if (event.type === 'special-operation-started' && event.campaignId === 'special-narrative-qz17') void playStoryCinematicV188('cin-10');
   if (event.type === 'narrative-route-unlocked' && event.choiceId === 'follow-maintenance-trace') void playStoryCinematicV188('cin-11');
+  if (event.type === 'special-operation-started' && event.campaignId === 'special-black-cocoon') void playStoryCinematicV188('cin-50');
+  // Act III: a sealed container aboard knocks from inside during the C-12 defence; Inez notes the time.
+  if (event.type === 'c12-horde-radio' && event.id === 'swarm-breach'
+    && (normalizeStoryCampaignV188(saveSystem.data.storyCampaignV188).m577Manifest?.containers || 0) > 0) {
+    audio.cue('container-knock');
+    engine.pushCaption?.('mission', document.documentElement.lang === 'en' ? 'Inez: “Note the time.”' : 'Inez : « Notez l’heure. »');
+  }
   if (event.type === 'terminal-save-v188') {
     try { commitCurrentRuntimeV78({ includeSessionTime: true }); sessionStart = Date.now(); renderClock(); toast('Terminal : sauvegarde confirmée.'); }
     catch (error) { toast(error.message); }

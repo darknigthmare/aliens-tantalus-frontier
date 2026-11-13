@@ -13,9 +13,10 @@ const read = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 
 test('the 40 cues follow the bible §56.4 families and extend the V184 slots', () => {
-  assert.equal(AUDIO_CUES_V188.length, 40); assert.equal(new Set(AUDIO_CUE_IDS_V188).size, 40);
+  assert.equal(AUDIO_CUES_V188.length, 41); assert.equal(new Set(AUDIO_CUE_IDS_V188).size, 41);
+  assert.equal(AUDIO_CUE_IDS_V188.at(-1), 'container-knock', 'Act III extra cue (bible §5.3)');
   const families = {}; for (const cue of AUDIO_CUES_V188) families[cue.family] = (families[cue.family] || 0) + 1;
-  assert.deepEqual(families, { tracker: 4, step: 5, door: 4, airlock: 2, lift: 2, alarm: 3, ambience: 4, cry: 8, weapon: 8 });
+  assert.deepEqual(families, { tracker: 4, step: 5, door: 5, airlock: 2, lift: 2, alarm: 3, ambience: 4, cry: 8, weapon: 8 });
   assert.deepEqual(AUDIO_SLOTS_V77.sfx.slice(0, 10), ['shot', 'tracker', 'hit', 'ui', 'alarm', 'checkpoint', 'locked', 'kill', 'pickup', 'victory']);
   assert.deepEqual(AUDIO_SLOTS_V77.sfx.slice(10), AUDIO_CUE_IDS_V188);
   assert.deepEqual(AUDIO_SLOTS_V77.music, ['menu', 'hub', 'mission', 'travel', 'briefing', 'archives', 'alert', 'boss', 'ending', 'calm']);
@@ -68,7 +69,7 @@ test('AudioDirector plays a known cue (file or synth) and changes mood without s
   assert.equal(audio.cue('not-a-cue'), false);
   let fallbacks = 0; audio.playEffect = (id, fallback) => { fallbacks += typeof fallback === 'function' ? 1 : 0; return id; };
   for (const id of AUDIO_CUE_IDS_V188) assert.equal(audio.cue(id), id);
-  assert.equal(fallbacks, 40);
+  assert.equal(fallbacks, 41);
   let stoppedEffects = 0; audio.stopEffects = () => { stoppedEffects++; }; audio.stopMusic = () => {}; audio.playScene = async () => true;
   assert.equal(audio.setMusicMoodV188('alert'), true); assert.equal(audio.scene, 'alert');
   assert.equal(audio.setMusicMoodV188('alert'), false); assert.equal(audio.setMusicMoodV188('nope'), false);

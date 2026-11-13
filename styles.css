@@ -1051,3 +1051,7 @@ html[data-colorblind-v188="tritanopia"] canvas, html[data-colorblind-v188="trita
 .cinematic-v188 canvas { width: min(100vw, calc(100vh * 16 / 9)); height: auto; max-height: 100vh; aspect-ratio: 16 / 9; display: block; cursor: pointer; }
 .cinematic-skip-v188 { position: absolute; right: 16px; bottom: 16px; }
 .cinematic-replay-v188 { display: grid; gap: 6px; }
+/* V188 Act III manifest dialog (bible §5.3). */
+.m577-manifest-v188 { max-width: 560px; border: 1px solid rgba(131, 213, 161, .5); background: #071009; color: #d8e6d8; padding: 20px; }
+.m577-manifest-v188 input[type="range"] { width: 100%; }
+.m577-manifest-v188 footer { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }

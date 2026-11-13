@@ -516,6 +516,17 @@
           }
         ],
         "fallback": "synth"
+      },
+      "container-knock": {
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/container-knock.wav",
+            "mime": "audio/wav",
+            "bytes": 57374,
+            "sha256": "61c1251b7d785e7217fbc6b7ab958adabff9609c01f9fe9320950f7fa352d717"
+          }
+        ],
+        "fallback": "synth"
       }
     },
     "music": {
