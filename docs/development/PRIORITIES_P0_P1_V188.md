@@ -105,6 +105,18 @@ QA Chromium de la passe 2, à partir d'une sauvegarde injectée « Port-Méridie
 - `plannedCampaignId` enregistré ;
 - aucune erreur de console.
 
+## Prologue (2026-11-13)
+
+Le §4 et le retour de QZ-18 (§5.2) sont joués par `src/story-cinematics-v188.js`. C'est un lecteur Canvas 2D aux plans scriptés, avec les portraits relus de l'équipage, passable et revisible depuis Système → Cinématiques. Les décors sont des placeholders en primitives ; aucune image n'a été générée. Les déclencheurs sont détaillés au §56.7 de la bible.
+
+| Vérification | Résultat |
+| --- | --- |
+| `scripts/verify-story-cinematics-v188.mjs` | Durées conformes au §10. Textes FR et EN. Textes de la bible repris à l'identique. Chaque plan est dessiné dans les deux langues, avec et sans réduction des mouvements. Le lecteur est testé : Échap passe, Espace avance, la fin arrive au temps prévu. Les séquences vues sont enregistrées de façon additive, et l'ordre des déclencheurs est vérifié. |
+| Chromium, nouvelle partie | CIN-00 → Échap → créateur → réveil → CIN-01, avec le portrait de DAVID-8R, enregistrée dans la sauvegarde. 19 images clés relues visuellement. |
+| Chromium, retour de QZ-18 | L'objectif du hub demande le compte rendu. CIN-20, puis « La signature », se jouent seulement à l'ouverture du Commandement. Cette passe a corrigé un défaut : la séquence démarrait sur l'écran titre. |
+
+Non vérifiés dans le navigateur : CIN-02, `cin-p2` et les répliques du quai. Ils exigent un parcours physique dans le hub ; leurs déclencheurs sont couverts par les tests Node.
+
 ## Limites et travail restant
 
 - **Musiques** : les quatre ambiances jouent la musique existante tant que les morceaux Flow du propriétaire manquent (§53.2).
