@@ -4268,7 +4268,7 @@ Les lots 2 à 6 modifient la sauvegarde : chacun demande la levée de protection
 | P1-2 | Mort définitive de l'équipage optionnelle, choisie à la création de la partie | §55.5 | Fait (V188) |
 | P1-3 | Origines d'Echo-9 : choix au créateur et capacités bornées | §2.4, §55.6 | Fait (V188) : 19 capacités raccordées, dont 03, 11 et 16 selon les propositions du §56.6 ; fil caviardé lié à Asphodèle |
 | P1-4 | Difficulté à la carte (`custom`) | §55.4 | Fait (V188) |
-| P1-5 | Accessibilité : mode daltonien, taille du texte, sous-titres des sons importants, remappage des commandes | §53.8 | Fait (V188) ; palette Canvas dédiée non faite (correction globale active) |
+| P1-5 | Accessibilité : mode daltonien, taille du texte, sous-titres des sons importants, remappage des commandes | §53.8 | Fait (V188) ; palette Canvas dédiée pour les signaux d'état (§56.10) |
 | P1-6 | Répliques réactives : mission ratée, colon mort, retour blessé | §53.6 | Fait (V188) : notification au retour et reprise au mess pendant 3 jours |
 
 Les tâches suivantes ne font partie ni du P0 ni du P1 : coop étendue (§55.2), nouvelle partie + (§55.8), présentation publique (§53.10) et production d'images (§53.4, faite par le propriétaire).
@@ -4420,3 +4420,10 @@ La table du §6.3 est jouable dans la vue Commandement. Les sept chantiers, leur
 - **Sauvetage** : Jun Park est dans le nœud de conduit `hub-life-support`. L'atteindre pendant l'alerte le ramène. Le choix détruire ou capturer attend les deux conditions ; l'objectif du hub indique celle qui manque. Les deux conditions sont sauvegardées pendant l'alerte.
 - **Réplique [PROPOSÉ]** : « J'ai cru qu'elle était dans le conduit avec moi. » (EN : “I thought it was in the duct with me.”) Jun rampe ensuite vers l'infirmerie.
 - **Adaptation [PROPOSÉ]** : Jun n'est pas dessiné dans le conduit ; le message et le journal stratégique marquent le sauvetage.
+
+### 56.10 Mode daltonien : palette dédiée (V188, 2026-11-13)
+
+- **Correction** : la première version appliquait au canvas et aux panneaux des matrices de *simulation* du daltonisme. Elles montraient au joueur ce qu'il voit déjà, sans rendre de contraste. Ce filtre global est retiré.
+- **Palette** : `src/colorblind-palette-v188.js`. Les signaux d'état dessinés sur le canvas passent par une palette Okabe–Ito : portes verrouillée, ouverte et fermée des missions, du hub, des cloisons, du Bioforge et du relais, ainsi que le guide de déplacement bloqué ou libre. Ces couleurs diffèrent aussi en luminosité. Mode désactivé : couleurs d'origine, octet pour octet.
+- **Mesure** : sous les trois simulations, l'écart minimal entre états passe d'environ 0,12–0,29 à au moins 0,4 (test `verify-accessibility-v188`).
+- **Reste à faire** : les signaux d'interface HTML (panneaux) et les autres codes couleur du canvas, à recenser.

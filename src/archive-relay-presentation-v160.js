@@ -5,6 +5,7 @@ import { HUB_ANNEX_STATION_ATLAS_V139 } from './hub-annex-station-atlas-v139.js'
 import { HUB_FURNITURE_ATLAS_V139 } from './hub-furniture-atlas-v139.js';
 import { HUB_PROP_ATLAS_V136 } from './hub-prop-atlas-v136.js';
 import { HUB_SURFACE_DETAILS_ATLAS_V139 } from './hub-surface-details-atlas-v139.js';
+import { signalColorV188 } from './colorblind-palette-v188.js';
 
 const ART = Object.freeze({ wall: HUB_INTERIOR_WALL_ATLAS_V138, station: HUB_ANNEX_STATION_ATLAS_V139,
   furniture: HUB_FURNITURE_ATLAS_V139, prop: HUB_PROP_ATLAS_V136, detail: HUB_SURFACE_DETAILS_ATLAS_V139 });
@@ -163,7 +164,7 @@ export function drawArchiveRelayGateV160(ctx, door) {
       ctx.strokeRect(x + 2, y, Math.max(0, leafWidth - 4), Math.min(62, door.y + door.h - y));
     }
   }
-  ctx.fillStyle = door.open ? '#b9d5a5' : '#d1a358'; ctx.fillRect(door.x - 11, door.y + door.h - 156, 5, 28);
+  ctx.fillStyle = signalColorV188(door.open ? 'relay-door-open' : 'relay-door-closed'); ctx.fillRect(door.x - 11, door.y + door.h - 156, 5, 28);
   ctx.restore();
   return { x: door.x, y: door.y, w: door.w, h: door.h, progress };
 }

@@ -3,8 +3,10 @@
 // complete keyboard remapping layer for the J1 gameplay actions.
 
 export const COLORBLIND_MODES_V188 = Object.freeze(['off', 'protanopia', 'deuteranopia', 'tritanopia']);
-// Daltonization-style correction matrices (shift lost contrast into channels
-// the viewer still separates). Applied by CSS to the game canvases and UI.
+// Colour-vision deficiency *simulation* matrices (sRGB approximation). They are
+// not applied to the screen: a simulation filter shows players what they
+// already see. Tests use them to check the dedicated signal palette
+// (src/colorblind-palette-v188.js), which is what the colour-blind modes change.
 export const COLORBLIND_MATRICES_V188 = Object.freeze({
   protanopia: '0.5667 0.4333 0 0 0  0.5583 0.4417 0 0 0  0 0.2417 0.7583 0 0  0 0 0 1 0',
   deuteranopia: '0.625 0.375 0 0 0  0.7 0.3 0 0 0  0 0.3 0.7 0 0  0 0 0 1 0',
@@ -30,7 +32,6 @@ export function installColorblindFiltersV188(document = globalThis.document) {
 
 export function applyAccessibilityV188(settings = {}, document = globalThis.document) {
   const root = document?.documentElement; if (!root) return;
-  installColorblindFiltersV188(document);
   root.dataset.colorblindV188 = normalizeColorblindV188(settings.colorblindV188);
   root.style.setProperty('--atf-text-scale-v188', String(normalizeTextScaleV188(settings.textScaleV188)));
   root.dataset.textScaleV188 = String(normalizeTextScaleV188(settings.textScaleV188));

@@ -58,8 +58,31 @@ test('important sounds have captions in both languages', () => {
 test('settings, CSS and app wire every option', () => {
   const html = read('index.html'), css = read('styles.css'), app = read('src/app.js');
   for (const id of ['setting-colorblind-v188', 'setting-text-scale-v188', 'setting-key-bindings-v188']) assert.match(html, new RegExp(`id="${id}"`));
-  for (const mode of ['protanopia', 'deuteranopia', 'tritanopia']) assert.match(css, new RegExp(`url\\(#atf-cb-${mode}-v188\\)`));
+  assert.doesNotMatch(css, /url\(#atf-cb-/, 'no simulation filter on screen');
   assert.match(css, /--atf-text-scale-v188/);
   assert.match(app, /installKeyRemapV188\(globalThis/); assert.match(app, /applyAccessibilityV188\(settings\)/);
   assert.match(app, /soundCaptionV188\(cueV188/);
+});
+
+import { SIGNAL_PALETTE_V188, SIGNAL_GROUPS_V188, signalColorV188 } from '../src/colorblind-palette-v188.js';
+const rgb = hex => [1, 3, 5].map(index => parseInt(hex.slice(index, index + 2), 16) / 255);
+const simulate = (matrix, color) => { const m = matrix.trim().split(/\s+/).map(Number); return [0, 1, 2].map(row => m[row * 5] * color[0] + m[row * 5 + 1] * color[1] + m[row * 5 + 2] * color[2]); };
+const distance = (a, b) => Math.hypot(...a.map((value, index) => value - b[index]));
+
+test('colour-blind palette: off keeps the original colours, every mode keeps state signals apart', () => {
+  const doc = mode => ({ documentElement: { dataset: { colorblindV188: mode } } });
+  assert.equal(signalColorV188('door-locked', doc('off')), '#d04f47');
+  assert.equal(signalColorV188('door-locked', doc('deuteranopia')), '#d55e00');
+  assert.throws(() => signalColorV188('nope', doc('off')));
+  for (const group of SIGNAL_GROUPS_V188) for (const mode of COLORBLIND_MODES_V188.slice(1)) {
+    const pairs = group.flatMap((a, index) => group.slice(index + 1).map(b => [a, b]));
+    for (const [a, b] of pairs) {
+      const safe = distance(simulate(COLORBLIND_MATRICES_V188[mode], rgb(SIGNAL_PALETTE_V188[a][1])), simulate(COLORBLIND_MATRICES_V188[mode], rgb(SIGNAL_PALETTE_V188[b][1])));
+      const before = distance(simulate(COLORBLIND_MATRICES_V188[mode], rgb(SIGNAL_PALETTE_V188[a][0])), simulate(COLORBLIND_MATRICES_V188[mode], rgb(SIGNAL_PALETTE_V188[b][0])));
+      assert.ok(safe >= 0.4 && safe > before, `${mode} ${a}/${b}: ${safe.toFixed(3)} vs ${before.toFixed(3)}`);
+    }
+  }
+  for (const [file, token] of [['src/game-v51-runtime.js', 'door-locked'], ['src/game.js', 'door-open'], ['src/hub-v51-runtime.js', 'hub-door-open'],
+    ['src/hub-bulkhead-depth-v134.js', 'bulkhead-locked'], ['src/bioforge-runtime-v80.js', 'bioforge-door-locked'],
+    ['src/archive-relay-presentation-v160.js', 'relay-door-closed'], ['src/player-control-v124.js', 'guide-blocked']]) assert.match(read(file), new RegExp(`signalColorV188\\(.*'${token}'`), file);
 });

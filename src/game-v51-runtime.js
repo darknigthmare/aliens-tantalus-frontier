@@ -50,6 +50,7 @@ import { drawNativeWeaponV112 } from './weapon-native-visuals-v112.js';
 import { getEcho9StandingMuzzleOptionsV124 } from './player-visual-contract-v81.js';
 import { WeaponImageCacheV125 } from './weapon-image-cache-v125.js';
 import { isHumanPoseV133, resolveHumanAtlasGeometryV133 } from './human-visual-contract-v133.js';
+import { signalColorV188 } from './colorblind-palette-v188.js';
 
 export const MISSION_TOOL_PICKUP_VISUAL_V56 = resolveEquipmentVisualProfileV56({
   id: 'equipment-004-cutting-torch',
@@ -2231,7 +2232,7 @@ export class GameEngine {
     if (ready(image)) ctx.drawImage(resolveSpriteDrawableV134(image), source.x, source.y, source.w, source.h, x, y, width, height);
     else { ctx.fillStyle = '#353c38'; ctx.fillRect(x, y, width, height); }
     ctx.globalAlpha = 1;
-    ctx.fillStyle = this.doorRequirement(door) ? '#d04f47' : door.open ? '#83d99e' : '#d6ac59';
+    ctx.fillStyle = signalColorV188(this.doorRequirement(door) ? 'door-locked' : door.open ? 'door-open' : 'door-closed');
     ctx.fillRect(x + width + 8, y + 30, 7, 13);
   }
 

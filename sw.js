@@ -181,6 +181,7 @@ const SHELL = Object.freeze([
   '/src/i18n-auto-v185.js',
   '/src/i18n-en-catalog-v185.js',
   '/src/accessibility-v188.js',
+  '/src/colorblind-palette-v188.js',
   '/src/audio-cues-v188.js',
   '/src/caste-behaviors-v188.js',
   '/src/combat-feel-v188.js',

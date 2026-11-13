@@ -147,7 +147,7 @@ Non vérifiés dans le navigateur : CIN-02, `cin-p2` et les répliques du quai. 
   - 14 : conduit fermé au chalumeau, faute de casiers ;
   - 19 : « couloir étroit » mesuré comme un plafond à moins de 140 px au-dessus de la tête.
 - **Castes** : les mouvements ajoutés restent bornés au sol courant.
-- **Mode daltonien** : correction de couleur globale (canvas et panneaux). Une palette Canvas dédiée n'est pas faite.
+- **Mode daltonien** : palette Canvas dédiée aux signaux d'état des portes et du guide (§56.10). Le filtre global, qui simulait le daltonisme au lieu de le compenser, est retiré. Les codes couleur des panneaux HTML ne sont pas encore recensés.
 - **Répliques** : le texte est repris en français dans la réponse du mess. La réponse complète est dynamique et ne passe donc pas par le catalogue anglais.
 - **Frontier Forge** : les tailles de texte de l'outil d'édition ne suivent pas le réglage, car leurs octets sont épinglés.
 - **Non mesuré** : le test de la tranche par 3 à 5 joueurs (§53.11), le ressenti du tir, la peur et la durée de la première heure.
