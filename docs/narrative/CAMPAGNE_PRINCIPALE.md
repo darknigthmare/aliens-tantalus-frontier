@@ -4489,3 +4489,19 @@ La table du §6.3 est jouable dans la vue Commandement. Les sept chantiers, leur
 - **Mouvement réduit** : pas d'animation de bandes, de pluie ni de transition de flou.
 
 **Toujours à faire** : voix, plans de caméra déplacée dans le niveau (le hub suit le joueur), art définitif.
+
+### 56.12 Salles hybrides 2D / 2,5D (V188, 2026-11-13)
+
+Décision du propriétaire : certaines salles passent en **profondeur** (2,5D, déplacement au sol vers la caméra), les autres restent **de profil** (2D, hauteur, échelles, coursives, conduits). Cadrage Spec Kit : `specs/001-salles-hybrides-2d-25d/` (spec, plan, recherche, tâches).
+
+- **Prototype** : le hangar du dropship, sans combat. Le rail actuel, le long du mur (portes, échelles, pupitres), est la limite du fond. W/S avancent vers la caméra ou reculent vers le mur, jusqu'à 80 unités.
+- **Le UD-4L** quitte le mur : on le contourne par une allée étroite derrière lui, le long du mur, ou par l'avant. On peut passer sous la queue et sous le nez. Deux piles de caisses et un chariot (placeholders en primitives) créent les passages.
+- **Lecture de la profondeur** : sprites jamais mis à l'échelle (décision du propriétaire). Décalage vertical, ombre au sol, sol plus sombre près du mur, repères au sol. Le dropship et les caisses masquent qui passe derrière eux ; le joueur masqué garde un contour en pointillé.
+- **Interactions** : celles du mur (portes, annexes, pupitre d'amarrage, échelles) se font depuis le mur. L'embarquement se fait devant le UD-4L. Un PNJ répond dans sa bande de profondeur.
+- **Échelles** : E s'accroche au pied d'une échelle, puis W/S montent. Les coursives restent en 2D.
+- **Équipage** : Maksim Orlov tient son poste devant le nez du UD-4L. Les PNJ marchent dans l'allée avant le long du vaisseau et sur le rail ailleurs.
+- **Portes** : annonce à l'approche (« SALLE EN PROFONDEUR · W/S : AVANCER / RECULER »). La cloison du réacteur ne se franchit que près du mur.
+- **Sauvegarde** : `hub.depthV188` (profondeur dans la salle, champ additif) ; une ancienne sauvegarde revient au mur.
+- **Tir futur** (non branché tant qu'il n'y a pas de combat en profondeur) : tir horizontal qui touche une cible dans une bande de ±22 ; le tireur se recale de 30 % vers elle.
+- **Limites** : un PNJ placé devant le joueur ne le masque pas encore ; Frontier Forge n'édite pas les salles en profondeur. Prochaines candidates : le quai de Port-Méridien, puis les cales de QZ-17 (avec combat).
+

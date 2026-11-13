@@ -1,4 +1,5 @@
 import { createColonyV188, normalizeColonyV188 } from './colony-reconstruction-v188.js';
+import { normalizeHubDepthV188 } from './hub-depth-rooms-v188.js';
 import { createReactiveLinesV188, normalizeReactiveLinesV188 } from './reactive-lines-v188.js';
 import { normalizeColorblindV188, normalizeTextScaleV188, normalizeKeyBindingsV188, defaultKeyBindingsV188 } from './accessibility-v188.js';
 import { spareCrewMemberV188, normalizeOriginV188, normalizeCustomDifficultyV188, DEFAULT_CUSTOM_DIFFICULTY_V188 } from './run-options-v188.js';
@@ -313,6 +314,7 @@ export function createDefaultSave(profile = 1) {
     hub: {
       deck: 0,
       positionX: 180,
+      depthV188: null,
       positionY: null,
       facing: 1,
       roomId: 'bridge',
@@ -2151,6 +2153,7 @@ export function migrateSave(input, profile = 1) {
   migrated.hub.positionX = numberBetween(v50HubPosition, base.hub.positionX, 40, 5030);
   migrated.hub.positionY = Number.isFinite(hub.positionY) && hub.positionY >= 0 && hub.positionY <= 532 ? hub.positionY : null;
   migrated.hub.facing = normalizePlayerFacingV81(hub.facing);
+  migrated.hub.depthV188 = normalizeHubDepthV188(hub.depthV188); // V188: depth inside a 2.5D room, additive
   migrated.hub.roomId = typeof hub.roomId === 'string' && /^[a-z0-9-]{1,40}$/.test(hub.roomId) ? hub.roomId : base.hub.roomId;
   migrated.hub.systems = mergeNumbers(base.hub.systems, hub.systems, 0, 100);
   migrated.hub.services = Object.fromEntries(Object.entries(isRecord(hub.services) ? hub.services : {})

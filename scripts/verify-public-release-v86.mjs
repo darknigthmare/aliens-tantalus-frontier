@@ -326,6 +326,22 @@ const FORGE_TOOLING_V140 = new Set([
   'scripts/verify-intro-v188.mjs',
   'scripts/verify-title-vfx-v188.mjs',
   'scripts/verify-ingame-staging-v188.mjs',
+  'scripts/verify-hub-depth-rooms-v188.mjs',
+  // Spec Kit pointer to the active feature (source-only, never built).
+  '.specify/feature.json',
+  // Spec Kit feature folders (source-only design documents).
+  'specs',
+  'specs/001-salles-hybrides-2d-25d',
+  'specs/001-salles-hybrides-2d-25d/contracts',
+  'specs/001-salles-hybrides-2d-25d/checklists',
+  'specs/001-salles-hybrides-2d-25d/spec.md',
+  'specs/001-salles-hybrides-2d-25d/plan.md',
+  'specs/001-salles-hybrides-2d-25d/research.md',
+  'specs/001-salles-hybrides-2d-25d/data-model.md',
+  'specs/001-salles-hybrides-2d-25d/quickstart.md',
+  'specs/001-salles-hybrides-2d-25d/tasks.md',
+  'specs/001-salles-hybrides-2d-25d/contracts/hub-depth-room.md',
+  'specs/001-salles-hybrides-2d-25d/checklists/requirements.md',
   'docs/development/PRIORITIES_P0_P1_V188.md',
   // Source-only narrative design bible; never shipped in a built distribution.
   'docs/narrative',

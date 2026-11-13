@@ -2,6 +2,9 @@
  * actor feet, obstacle bounds and interaction radii are deliberately unchanged.
  * Only non-colliding distant art parallax and the floor below the walk rail gain
  * perspective. This is not free movement in a third gameplay axis.
+ * V188 exception (src/hub-depth-rooms-v188.js, specs/001-salles-hybrides-2d-25d): rooms declared
+ * there as depth rooms add a floor depth coordinate to actors standing on their floor; every
+ * other room keeps this visual-only contract unchanged.
  */
 import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
 const clamp = (value, min, max) => Math.max(min, Math.min(max, Number.isFinite(value) ? value : 0));

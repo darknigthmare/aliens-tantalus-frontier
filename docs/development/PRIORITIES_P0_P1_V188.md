@@ -162,7 +162,21 @@ Les effets de planète sont dessinés sur un canvas inséré dans la scène, ent
   - Chromium : orage et traînée forcés par `__ATF_TITLE_VFX_V188__` puis photographiés ; mouvement réduit émulé, 0 pixel allumé malgré un orage forcé ; boucle arrêtée après la sortie du titre ; aucune erreur.
   - Coût mesuré dans Chromium headless : environ 1,4 ms par image, sans mesure sur matériel cible.
 
+## Salles hybrides 2D / 2,5D : prototype du hangar (bible §56.12)
+
+- Cadrage : `specs/001-salles-hybrides-2d-25d/` (spec, plan, recherche, modèle de données, contrat, quickstart, 27 tâches).
+- Code : `src/hub-depth-rooms-v188.js` (règles pures) et `src/hub-depth-runtime-v188.js` (mixin sous l'armurerie). La physique du rail reste intacte ; la profondeur `z` sert aux emprises au sol, aux interactions et au rendu trié avec occultation.
+- Vérifications :
+  - `scripts/verify-hub-depth-rooms-v188.mjs` (7 tests) ; les 64 suites `verify-hub-*` (405 tests) passent.
+  - Chromium sur une sauvegarde au hangar :
+    - profondeur bornée ; dropship et caisses bloquants, sans traversée même sur un long pas de temps ;
+    - passage entre les caisses et le dropship ; invite d'embarquement à la bonne profondeur ; dialogue d'Orlov ouvert avec E ;
+    - annonce avant la cloison ; réacteur resté en 2D ; sortie bloquée loin du mur et permise près de lui ;
+    - profondeur −60 sauvegardée puis restaurée après rechargement ; aucune erreur.
+- Performance : même page, 6 alternances de blocs de 300 images, mixin actif puis inerte (injection de mesure), joueur derrière le dropship (pire cas, calque d'occultation à chaque image) : 28,8 ms contre 27,6 ms (+4,6 %), dans Chromium sans affichage, en rendu logiciel. Sur trois exécutions séparées, la mesure variait trop (26–31 ms) pour conclure ; seule la comparaison dans la même page est retenue.
+
 ## Limites et travail restant
+
 
 
 

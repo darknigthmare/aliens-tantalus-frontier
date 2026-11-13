@@ -57,6 +57,7 @@ import {
   applyProvingGroundQualificationV81
 } from './hub-annex-services-v71.js';
 import { advanceGalaxy, resolveHubCrisisEvent } from './world-crisis.js';
+import { withHubDepthRoomsV188 } from './hub-depth-runtime-v188.js';
 import { TitleVfxV188 } from './title-vfx-v188.js';
 import { playIntroV188 } from './intro-sequence-v188.js';
 import { createHubCrisis as createForcedHubCrisisV188 } from './world-crisis-core.js';
@@ -302,7 +303,7 @@ const NativeHubGame = [
   withHubCirculationV137, withHubRoomIdentityV137,
   withHubDestinationSignsV138, withHubNpcInterdeckRoutesV165, withHubNpcInterdeckPassageV165, withHubNpcStationRelaysV166, withHubLiftTransitV163
 ].reduce((Game, decorate) => decorate(Game), HubGameV88);
-const HubGame = withHubArmoryStorefrontV169(withHubMotionTrackerV160(withForgeDecorationV141(withForgeShipRuntimeV141(withHubEcho8LockerV188(NativeHubGame)))));
+const HubGame = withHubArmoryStorefrontV169(withHubDepthRoomsV188(withHubMotionTrackerV160(withForgeDecorationV141(withForgeShipRuntimeV141(withHubEcho8LockerV188(NativeHubGame))))));
 const hubEngine = new HubGame(byId('hub-canvas'), {
   audio,
   onAction: handleHubAction,
