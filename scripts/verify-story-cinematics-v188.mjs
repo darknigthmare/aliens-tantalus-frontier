@@ -152,7 +152,9 @@ test('Act III manifest: each container removes two of six seats; colonists join 
   assert.match(app, /void playStoryCinematicV188\('cin-51'\)/);
 });
 
-import { interludeDueV188, startInterludeV188, interludeCrisisClearedV188, resolveInterludeV188, INTERLUDE_CRISIS_V188, deriveStoryCampaignV188 } from '../src/story-campaign-v188.js';
+import { interludeDueV188, startInterludeV188, interludeCrisisClearedV188, resolveInterludeV188, INTERLUDE_CRISIS_V188, deriveStoryCampaignV188, rescueJunParkV188, interludeChoicePendingV188, INTERLUDE_JUN_VENT_NODE_V188 } from '../src/story-campaign-v188.js';
+import { resolveNpcRoutineV62, NPC_IDENTITIES_V62 } from '../src/npc-dialogue-v62.js';
+import { HUB_VENT_NETWORK_V62 } from '../src/vent-network-v62.js';
 import { resolveHubCrisisEvent } from '../src/world-crisis.js';
 import { createHubCrisis } from '../src/world-crisis-core.js';
 
@@ -170,6 +172,13 @@ test('interlude: a real forced quarantine crisis, cleared by the real crisis res
   assert.equal(result.handled, true); assert.equal(result.outcome, 'resolved');
   assert.equal(interludeCrisisClearedV188(save, 'other-crisis'), false);
   assert.equal(interludeCrisisClearedV188(save, crisis.id), true);
+  assert.equal(interludeCrisisClearedV188(save, crisis.id), false, 'cleared once');
+  assert.equal(interludeChoicePendingV188(save), false, 'no choice while Jun Park is missing');
+  assert.match(deriveStoryCampaignV188(save, { language: 'fr' }).objective, /support-vie, pont 3/);
+  assert.equal(rescueJunParkV188(save, 'hub-mess'), false, 'only his duct');
+  assert.equal(rescueJunParkV188(save, INTERLUDE_JUN_VENT_NODE_V188), true);
+  assert.equal(interludeChoicePendingV188(save), true);
+  assert.equal(rescueJunParkV188(save, INTERLUDE_JUN_VENT_NODE_V188), false, 'rescued once');
   const bishop = save.crew.find(member => member.id === 'crew-05-bishop-9'), before = bishop.loyalty;
   assert.equal(resolveInterludeV188(save, 'eaten'), false);
   assert.equal(resolveInterludeV188(save, 'captured'), true);
@@ -178,6 +187,25 @@ test('interlude: a real forced quarantine crisis, cleared by the real crisis res
   assert.deepEqual(migrateSave(JSON.parse(JSON.stringify(save))).storyCampaignV188.interlude, { phase: 'resolved', crisisId: crisis.id, outcome: 'captured' });
   const app = read('src/app.js');
   assert.match(app, /void playStoryCinematicV188\('cin-31', \{ context: \{ m577: manifestV188 \} \}\)\.then\(startInterludeFlowV188\)/);
-  assert.match(app, /interludeCrisisClearedV188\(saveSystem\.data, interaction\.crisisId\)\) \{ saveSystem\.commit\(\); chooseInterludeOutcomeV188\(\); \}/);
+  assert.match(app, /interludeCrisisClearedV188\(saveSystem\.data, interaction\.crisisId\)\) \{ saveSystem\.commit\(\); continueInterludeV188\(\); \}/);
+  assert.match(app, /interaction\.action === 'hub:vent-node' && rescueJunParkV188\(saveSystem\.data, interaction\.nodeId\)/);
+  assert.match(app, /if \(interludeChoicePendingV188\(saveSystem\.data\)\) chooseInterludeOutcomeV188\(\);/);
   assert.match(app, /void playStoryCinematicV188\('cin-41'\)/); assert.match(app, /startInterludeV188\(candidate, createForcedHubCrisisV188\)/);
+});
+
+test('interlude: Jun Park first, then the crisis; the crew follows the alert routine while the crisis is active', () => {
+  const save = createDefaultSave(); save.needsPlayerCreationV84 = false;
+  save.storyCampaignV188.m577Manifest = { containers: 0, colonists: 6, resolved: true };
+  const crisis = startInterludeV188(save, createHubCrisis);
+  assert.ok(HUB_VENT_NETWORK_V62.nodes.some(node => node.id === INTERLUDE_JUN_VENT_NODE_V188 && node.roomId === 'life-support'), 'a real duct node');
+  const routines = NPC_IDENTITIES_V62.map(identity => resolveNpcRoutineV62(identity.crewId, { save, hub: save.hub, crisis: save.hub.activeCrisis, clock: save.clock }));
+  assert.ok(routines.length > 0 && routines.every(routine => routine.phase === 'alert' && routine.reason === 'active-crisis'));
+  assert.equal(rescueJunParkV188(save, INTERLUDE_JUN_VENT_NODE_V188), true);
+  assert.match(deriveStoryCampaignV188(save, { language: 'en' }).objective, /Jun Park is safe/);
+  const reloaded = migrateSave(JSON.parse(JSON.stringify(save))).storyCampaignV188.interlude;
+  assert.deepEqual(reloaded, { phase: 'alert', crisisId: crisis.id, outcome: null, crisisCleared: false, junRescued: true }, 'survives a reload');
+  resolveHubCrisisEvent(save, { action: 'crisis:resolved', crisisId: crisis.id, kind: crisis.kind });
+  assert.equal(interludeCrisisClearedV188(save, crisis.id), true); assert.equal(interludeChoicePendingV188(save), true);
+  const calm = NPC_IDENTITIES_V62.map(identity => resolveNpcRoutineV62(identity.crewId, { save, hub: save.hub, crisis: save.hub.activeCrisis, clock: save.clock }));
+  assert.ok(calm.every(routine => routine.reason !== 'active-crisis'), 'the alert ends with the crisis');
 });

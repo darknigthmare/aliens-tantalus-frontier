@@ -129,7 +129,14 @@ Non vérifiés dans le navigateur : CIN-02, `cin-p2` et les répliques du quai. 
 - Sauvegarde additive `colonyV188`.
 - Vérifications : `scripts/verify-colony-reconstruction-v188.mjs` (5 tests) ; parcours Chromium sur une sauvegarde après QZ-17 : un chantier lancé débite 400 crédits et 20 alliage, avance l'horloge de 6 h et passe « EN ATTENTE », sans erreur de page.
 
+## Interlude : Jun Park et alerte (§5.4, §56.9)
+
+- Pendant la crise de quarantaine, les seize PNJ suivent la routine `alert` ; une crise résolue y met fin (correction dans `src/npc-dialogue-v62.js`).
+- Jun Park est retrouvé dans le conduit du support-vie ; le choix attend la créature neutralisée et Jun ramené.
+- Vérifications : `scripts/verify-story-cinematics-v188.mjs` (9 tests) et les 20 suites PNJ/crises (334 tests) ; Chromium sur une sauvegarde après C-12 : 16 routines `alert`, puis l'événement de nœud du hub `hub-life-support`, injecté par `__ATF_HUB__.onAction`, enregistre `junRescued`. Le message s'affiche, sans erreur de page.
+
 ## Limites et travail restant
+
 
 
 - **Musiques** : les quatre ambiances jouent la musique existante tant que les morceaux Flow du propriétaire manquent (§53.2).

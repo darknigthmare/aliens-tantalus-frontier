@@ -642,7 +642,7 @@ Contenu existant : briefing « Le message arrivé trop tard » ; protocoles *Aud
 
 ### 5.4 Interlude — « Quarantaine » (à bord du Tantalus) — [PARTIEL] V188
 
-**Raccordé (V188)** : après CIN-31, CIN-40 se joue, puis une crise xénomorphe forcée s'ouvre dans la salle de quarantaine du pont 2. Elle utilise le système de crise du hub existant. Une fois la crise résolue dans le niveau, le choix détruire ou capturer s'affiche ; il ne peut pas être esquivé et revient s'il a été interrompu. CIN-41 suit, et la loyauté de BISHOP-9 baisse de 20, soit un niveau de confiance. Un objectif dédié s'affiche au hub. **Pas encore raccordé** : le sauvetage de Jun Park dans les conduits et la routine `alert` des PNJ pendant la crise.
+**Raccordé (V188)** : après CIN-31, CIN-40 se joue, puis une crise xénomorphe forcée s'ouvre dans la salle de quarantaine du pont 2. Elle utilise le système de crise du hub existant. Une fois la crise résolue dans le niveau, le choix détruire ou capturer s'affiche ; il ne peut pas être esquivé et revient s'il a été interrompu. CIN-41 suit, et la loyauté de BISHOP-9 baisse de 20, soit un niveau de confiance. Un objectif dédié s'affiche au hub. Pendant la crise, tout l'équipage suit la routine `alert`, qui prend fin quand la crise est résolue. Jun Park est coincé dans le conduit du support-vie (pont 3) : le joueur doit l'y rejoindre par le réseau de conduits. Le choix ne s'ouvre qu'une fois la créature neutralisée et Jun ramené, dans n'importe quel ordre (§56.9). **Pas encore fait** : Jun Park visible dans le conduit et blessé à l'infirmerie (pose à créer).
 
 Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-missions-v131.js`) et des crises à bord par route de salles (`world-crisis-core.js`, type `xenomorph`).
 
@@ -4413,3 +4413,10 @@ La table du §6.3 est jouable dans la vue Commandement. Les sept chantiers, leur
 **Coûts [PROPOSÉ] :** niveau 1 : 400 crédits, 20 alliage, 6 h ; niveau 2 : 900 crédits, 45 alliage, 5 recherche, 12 h ; niveau 3 : 1 600 crédits, 80 alliage, 12 recherche, 24 h.
 
 **Toujours à faire :** les missions locales C1–C5 et les annexes, le recrutement de Nadia Bensaïd (palier Rétablie), la console physique dans la salle commune ou les quartiers, l'épilogue du palier Libre.
+
+### 56.9 Interlude : Jun Park et routine d'alerte (V188, 2026-11-13)
+
+- **Routine `alert`** : la crise forcée de l'Interlude met les seize PNJ en routine `alert` (`resolveNpcRoutineV62`). Correction : une crise marquée résolue ne maintient plus l'équipage en alerte.
+- **Sauvetage** : Jun Park est dans le nœud de conduit `hub-life-support`. L'atteindre pendant l'alerte le ramène. Le choix détruire ou capturer attend les deux conditions ; l'objectif du hub indique celle qui manque. Les deux conditions sont sauvegardées pendant l'alerte.
+- **Réplique [PROPOSÉ]** : « J'ai cru qu'elle était dans le conduit avec moi. » (EN : “I thought it was in the duct with me.”) Jun rampe ensuite vers l'infirmerie.
+- **Adaptation [PROPOSÉ]** : Jun n'est pas dessiné dans le conduit ; le message et le journal stratégique marquent le sauvetage.

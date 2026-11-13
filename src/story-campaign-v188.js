@@ -68,9 +68,14 @@ export function deriveStoryCampaignV188(save, { language = null } = {}) {
   const pick = key => TEXT[key][lang === 'en' ? 'en' : 'fr'];
   const story = normalizeStoryCampaignV188(save?.storyCampaignV188);
   if (story.interlude?.phase === 'alert' || story.interlude?.phase === 'choice') {
-    const text = story.interlude.phase === 'alert'
-      ? { fr: 'QUARANTAINE À BORD · Pont 2, salle de quarantaine : neutralisez la menace. Jun Park ne répond plus.', en: 'QUARANTINE ABOARD · Deck 2, quarantine room: neutralise the threat. Jun Park is not answering.' }
-      : { fr: 'QUARANTAINE · Décidez du sort de la créature : la détruire ou la capturer pour Inez et BISHOP-9.', en: 'QUARANTINE · Decide the creature’s fate: destroy it or capture it for Inez and BISHOP-9.' };
+    const { crisisCleared, junRescued } = story.interlude;
+    const text = story.interlude.phase === 'choice'
+      ? { fr: 'QUARANTAINE · Décidez du sort de la créature : la détruire ou la capturer pour Inez et BISHOP-9.', en: 'QUARANTINE · Decide the creature’s fate: destroy it or capture it for Inez and BISHOP-9.' }
+      : crisisCleared
+        ? { fr: 'QUARANTAINE À BORD · La menace est neutralisée. Jun Park ne répond toujours pas : conduits du support-vie, pont 3.', en: 'QUARANTINE ABOARD · The threat is neutralised. Jun Park is still not answering: life-support ducts, deck 3.' }
+        : junRescued
+          ? { fr: 'QUARANTAINE À BORD · Jun Park est à l’abri. Pont 2, salle de quarantaine : neutralisez la menace.', en: 'QUARANTINE ABOARD · Jun Park is safe. Deck 2, quarantine room: neutralise the threat.' }
+          : { fr: 'QUARANTAINE À BORD · Pont 2, salle de quarantaine : neutralisez la menace. Jun Park ne répond plus : cherchez-le dans les conduits du support-vie, pont 3.', en: 'QUARANTINE ABOARD · Deck 2, quarantine room: neutralise the threat. Jun Park is not answering: search the life-support ducts, deck 3.' };
     return Object.freeze({ step: 'interlude', objective: text[lang === 'en' ? 'en' : 'fr'], recommendedCampaignId: null, index: STORY_SLICE_STEPS_V188.length,
       relayComplete: (Array.isArray(save?.galaxy?.completedCampaignIds) ? save.galaxy.completedCampaignIds : []).includes(STORY_RELAY_CAMPAIGN_ID_V188) });
   }
@@ -133,8 +138,17 @@ export function normalizeInterludeV188(raw) {
   if (!raw || typeof raw !== 'object' || !INTERLUDE_PHASES_V188.includes(raw.phase)) return null;
   const crisisId = typeof raw.crisisId === 'string' && /^[a-z0-9-]{1,80}$/.test(raw.crisisId) ? raw.crisisId : null;
   const outcome = INTERLUDE_OUTCOMES_V188.includes(raw.outcome) ? raw.outcome : null;
-  return { phase: raw.phase === 'resolved' && !outcome ? 'choice' : raw.phase, crisisId, outcome };
+  const phase = raw.phase === 'resolved' && !outcome ? 'choice' : raw.phase;
+  // While the alert lasts, both conditions of the choice are recorded; afterwards they are implied.
+  return phase === 'alert' ? { phase, crisisId, outcome, crisisCleared: raw.crisisCleared === true, junRescued: raw.junRescued === true } : { phase, crisisId, outcome };
 }
+// Jun Park is stuck in the life-support duct (deck 3), where he works (bible §5.4, step 4).
+export const INTERLUDE_JUN_VENT_NODE_V188 = 'hub-life-support';
+const advanceInterlude = (save, story, patch) => {
+  const next = { ...story.interlude, ...patch };
+  story.interlude = next.crisisCleared && next.junRescued ? { phase: 'choice', crisisId: next.crisisId, outcome: null } : next;
+  save.storyCampaignV188 = story; return true;
+};
 /** Starts after Act III's manifest is resolved: a container (or the quay patient) opened in quarantine. */
 export function interludeDueV188(save) {
   const story = normalizeStoryCampaignV188(save?.storyCampaignV188);
@@ -150,9 +164,16 @@ export function startInterludeV188(save, createCrisis) {
 }
 export function interludeCrisisClearedV188(save, crisisId) {
   const story = normalizeStoryCampaignV188(save?.storyCampaignV188);
-  if (story.interlude?.phase !== 'alert' || story.interlude.crisisId !== crisisId) return false;
-  story.interlude = { ...story.interlude, phase: 'choice' }; save.storyCampaignV188 = story; return true;
+  if (story.interlude?.phase !== 'alert' || story.interlude.crisisId !== crisisId || story.interlude.crisisCleared) return false;
+  return advanceInterlude(save, story, { crisisCleared: true });
 }
+/** Reaching Jun Park's duct node during the alert brings him back. */
+export function rescueJunParkV188(save, nodeId) {
+  const story = normalizeStoryCampaignV188(save?.storyCampaignV188);
+  if (story.interlude?.phase !== 'alert' || story.interlude.junRescued || nodeId !== INTERLUDE_JUN_VENT_NODE_V188) return false;
+  return advanceInterlude(save, story, { junRescued: true });
+}
+export function interludeChoicePendingV188(save) { return normalizeStoryCampaignV188(save?.storyCampaignV188).interlude?.phase === 'choice'; }
 /** Records the choice; BISHOP-9's trust drops one level once (CIN-41). */
 export function resolveInterludeV188(save, outcome) {
   const story = normalizeStoryCampaignV188(save?.storyCampaignV188);

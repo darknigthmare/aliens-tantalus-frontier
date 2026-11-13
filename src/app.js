@@ -5,7 +5,7 @@ import { detectReactiveTriggersV188, selectReactiveLinesV188 } from './reactive-
 import { applyAccessibilityV188, installKeyRemapV188, mountKeyBindingsUiV188, normalizeKeyBindingsV188, soundCaptionV188 } from './accessibility-v188.js';
 import { spareCrewMemberV188, normalizeCrewPermadeathV188, normalizeCustomDifficultyV188, normalizeOriginV188, CUSTOM_DIFFICULTY_BOUNDS_V188 } from './run-options-v188.js';
 import { cueForGameEventV188, casteCueV188 } from './audio-cues-v188.js';
-import { deriveStoryCampaignV188, markStoryDebriefSeenV188, markStoryCinematicSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, storyEndingReachedV188, resolveM577ManifestV188, normalizeStoryCampaignV188, startInterludeV188, interludeCrisisClearedV188, resolveInterludeV188 } from './story-campaign-v188.js';
+import { deriveStoryCampaignV188, markStoryDebriefSeenV188, markStoryCinematicSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, storyEndingReachedV188, resolveM577ManifestV188, normalizeStoryCampaignV188, startInterludeV188, interludeCrisisClearedV188, resolveInterludeV188, rescueJunParkV188, interludeChoicePendingV188 } from './story-campaign-v188.js';
 import { openStoryChoiceDialogV188 } from './story-choice-ui-v188.js';
 import { CinematicPlayerV188, CINEMATICS_V188 } from './story-cinematics-v188.js';
 import { openM577ManifestDialogV188 } from './m577-manifest-ui-v188.js';
@@ -962,6 +962,11 @@ function startInterludeFlowV188() {
     saveSystem.commit(candidate); renderAll();
     void playStoryCinematicV188('cin-40').then(() => toast(deriveStoryCampaignV188(saveSystem.data).objective || ''));
   } catch (error) { toast(error.message); }
+}
+// Both conditions met (creature neutralised, Jun Park rescued): the choice; otherwise the remaining objective.
+function continueInterludeV188() {
+  if (interludeChoicePendingV188(saveSystem.data)) chooseInterludeOutcomeV188();
+  else toast(deriveStoryCampaignV188(saveSystem.data).objective || '');
 }
 function chooseInterludeOutcomeV188() {
   const en = document.documentElement.lang === 'en';
@@ -3654,6 +3659,14 @@ function handleHubAction(interaction) {
     }
     return resolveAnnexStationV71(interaction);
   }
+  if (interaction.action === 'hub:vent-node' && rescueJunParkV188(saveSystem.data, interaction.nodeId)) {
+    const en = document.documentElement.lang === 'en';
+    strategyLog('QUARANTAINE', en ? 'Jun Park found in the life-support duct.' : 'Jun Park retrouvé dans le conduit du support-vie.', 'crisis', 100, false);
+    saveSystem.commit(); renderAll();
+    // [PROPOSÉ] Jun Park's line (bible §56.9).
+    toast(en ? 'JUN PARK · “I thought it was in the duct with me.” Jun crawls back towards medical.' : 'JUN PARK · « J’ai cru qu’elle était dans le conduit avec moi. » Jun rampe vers l’infirmerie.');
+    continueInterludeV188();
+  }
   if (interaction.action.startsWith('hub:vent-')) {
     const status = byId('hub-status');
     if (status) status.textContent = interaction.action === 'hub:vent-contact'
@@ -3668,7 +3681,7 @@ function handleHubAction(interaction) {
       saveSystem.commit();
       renderAll();
       toast(result.outcome === 'resolved' ? 'Crise neutralisée dans le niveau.' : 'Extraction médicale : dégâts persistants appliqués.');
-      if (result.outcome === 'resolved' && interludeCrisisClearedV188(saveSystem.data, interaction.crisisId)) { saveSystem.commit(); chooseInterludeOutcomeV188(); }
+      if (result.outcome === 'resolved' && interludeCrisisClearedV188(saveSystem.data, interaction.crisisId)) { saveSystem.commit(); continueInterludeV188(); }
     }
     return;
   }
