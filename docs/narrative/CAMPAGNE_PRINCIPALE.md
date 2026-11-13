@@ -879,7 +879,7 @@ C'est ce qui relie la reconstruction à l'intrigue : **chaque chantier terminé 
 | ID | Titre | Statut | Résumé | Ancrage Alien |
 | --- | --- | --- | --- | --- |
 | `colony-intro-quai` (ID proposé) | **Le quai des vivants** | Séquence **[EXISTANT]** / raccordement **[PROPOSÉ]** | Triage, blessé, sas, trois civils (`port-meridien-v90.js`). Rencontre de Tomas Wren et Lucia Ferro. | Évacuation de colons, premier hôte. |
-| `colony-intro-doyenne` | **La doyenne** | **[PROPOSÉ]** | Asha présente Echo-9 à Adèle Sarrazin. Visite du port : quais, infirmerie, processeur atmosphérique, mur nord. Adèle montre la dette de la colonie envers la compagnie : « S'ils nous déclarent non viables, ils reprennent tout, nous compris. » | Colonie endettée envers la compagnie. |
+| `colony-intro-doyenne` | **La doyenne** | **[EXISTANT] V188 en visite guidée** (séquence `cin-doyenne` à la fin du quai ; la visite libre attend un hub Port-Méridien, §43) | Asha présente Echo-9 à Adèle Sarrazin. Visite du port : quais, infirmerie, processeur atmosphérique, mur nord. Adèle montre la dette de la colonie envers la compagnie : « S'ils nous déclarent non viables, ils reprennent tout, nous compris. » | Colonie endettée envers la compagnie. |
 
 **Principales**
 
@@ -4346,6 +4346,7 @@ Les ajouts **[PROPOSÉ]** du §4, CIN-20 et la réponse de Halloran (§5.2) sont
 | Avant P-3 | CIN-02 *Le briefing* (Vega, Vega, Harlow, Velez) | Premier embarquement depuis la salle de briefing |
 | P-3 | `cin-p3-wren` puis `cin-p3-ferro` (Lucia Ferro, Noor Okafor à la radio) | Arrivée au quai, puis fin du triage |
 | Retour de QZ-18 | CIN-20 *Treize minutes*, puis Halloran ; ensuite `cin-20-rook` *La signature* | Premier compte rendu de QZ-18 lu |
+| Fin du quai des vivants | `cin-doyenne` *La doyenne* : Asha présente Adèle Sarrazin, puis les quais, l'infirmerie, le processeur et le mur nord, et enfin la réplique d'Adèle sur la dette | Rapport final du quai, avant les Opérations |
 | Acte I, prise de contrôle | CIN-10 *Les quais déserts* (peinture existante du dropship, pluie), puis Rook | Fin de l'insertion de QZ-17 |
 | Acte I, route de maintenance | CIN-11 *Ouvert de l'intérieur* (berceau givré, fixations arrachées), puis Inez à la radio | Choix « Suivre la trace par la maintenance » |
 | Retour de QZ-17 | `cin-qz17-retour` : les trois conclusions d'Inez | Première ouverture de la table tactique après QZ-17 |
@@ -4357,6 +4358,7 @@ Après QZ-18, la table tactique recommande l'Acte I (★) tant qu'il n'est pas t
 - La réplique de Mara Vega qui coupe l'exercice : « Velez, on coupe l'exercice. Echo-9, rendez l'arme au pas de tir et montez en salle de briefing. » La règle de l'exercice V89 (retour au pas de tir) reste inchangée.
 - Le nombre de messages retardés : 37 sur six jours, le dernier datant de 4 h.
 - Les noms du personnel du quai nord dans CIN-20 : E. Okonjo, P. Lindqvist, S. Arenas, D. Haddad, K. Brandt. Ce sont aussi les noms à la craie de `story-quai-nord`.
+- La réplique d'Asha qui présente Adèle : « Echo-9, voici Adèle Sarrazin. C'est elle qui tient le port ensemble. » La visite libre de la doyenne est adaptée en visite guidée, faute de hub Port-Méridien.
 - La réplique de Rook sur la signature d'Asphodèle (tissage du §5.2) : « Le profil « priorité cargaison » n'a pas été activé au relais. Il a été autorisé à distance. La signature vient de la station Asphodèle. »
 - Toutes les versions anglaises des répliques du prologue.
 

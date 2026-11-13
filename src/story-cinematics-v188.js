@@ -104,6 +104,19 @@ export const CINEMATICS_V188 = Object.freeze({
       'Ce qu’on transportait : non établi. Pas sans prélèvement.',
       'What was being carried: not established. Not without a sample.') })
   ]) }),
+  // colony-intro-doyenne (bible §6.2): guided visit, calm, no combat ([PROPOSÉ] adaptation, §56.7).
+  'cin-doyenne': Object.freeze({ id: 'cin-doyenne', title: t('La doyenne', 'The elder'), music: 'calm', shots: Object.freeze([
+    shot(8, 'dialogue', { scene: 'quay', line: line('ASHA MBAYE', 'crew-12-asha-mbaye',
+      'Echo-9, voici Adèle Sarrazin. C’est elle qui tient le port ensemble.',
+      'Echo-9, this is Adèle Sarrazin. She’s the one holding the port together.') }),
+    shot(6, 'port-tour', { place: 'docks', caption: t('PORT-MÉRIDIEN · QUAIS', 'PORT-MÉRIDIEN · DOCKS') }),
+    shot(6, 'port-tour', { place: 'infirmary', caption: t('INFIRMERIE DE LUCIA FERRO', 'LUCIA FERRO’S INFIRMARY') }),
+    shot(6, 'port-tour', { place: 'processor', caption: t('PROCESSEUR ATMOSPHÉRIQUE', 'ATMOSPHERE PROCESSOR') }),
+    shot(6, 'port-tour', { place: 'wall', caption: t('MUR NORD', 'NORTH WALL') }),
+    shot(11, 'dialogue', { scene: 'quay', line: line('ADÈLE SARRAZIN', null,
+      'S’ils nous déclarent non viables, ils reprennent tout, nous compris.',
+      'If they declare us non-viable, they take everything back, us included.') })
+  ]) }),
   // Bible §5.2 weaving: Rook identifies the remote signature (line [PROPOSÉ], §56.7).
   'cin-20-rook': Object.freeze({ id: 'cin-20-rook', title: t('La signature', 'The signature'), music: null, shots: Object.freeze([
     shot(10, 'dialogue', { scene: 'quarters', line: line('ROOK', 'crew-06-rook',
@@ -263,6 +276,18 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       ctx.strokeStyle = '#8b8f86'; ctx.lineWidth = 6; // restraints made to hold something alive
       for (const y of [260, 340, 420]) { ctx.beginPath(); ctx.moveTo(460, y); ctx.lineTo(820, y); ctx.stroke(); }
       ctx.strokeStyle = '#c4c08a'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(880, 300); ctx.lineTo(960, 250); ctx.moveTo(880, 360); ctx.lineTo(970, 380); ctx.stroke(); // torn from inside
+      caption(ctx, current.caption?.[lang]); break;
+    }
+    case 'port-tour': {
+      ctx.fillStyle = '#0d1114'; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#1a2026'; ctx.fillRect(0, 520, W, 200); // ground
+      const pan = reducedMotion ? 0 : progress * 60;
+      if (current.place === 'docks') { for (let i = 0; i < 6; i++) { ctx.fillStyle = i % 2 ? '#3a3226' : '#2c3640'; ctx.fillRect(120 + i * 180 - pan, 420, 150, 100); } ctx.fillStyle = '#4a4f55'; ctx.fillRect(0, 300 - pan * .2, W, 10); }
+      if (current.place === 'infirmary') { ctx.fillStyle = '#e8e2d0'; for (let i = 0; i < 4; i++) { ctx.fillRect(180 + i * 240 - pan, 450, 160, 20); ctx.fillStyle = '#3a4448'; ctx.fillRect(190 + i * 240 - pan, 470, 8, 50); ctx.fillStyle = '#e8e2d0'; } ctx.fillStyle = '#c94a42'; ctx.fillRect(600, 200, 80, 20); ctx.fillRect(630, 170, 20, 80); }
+      if (current.place === 'processor') { ctx.fillStyle = '#26303a'; ctx.fillRect(430 - pan, 120, 420, 400); ctx.fillStyle = 'rgba(233,160,90,.35)'; ctx.fillRect(470 - pan, 160, 340, 30); ctx.fillStyle = 'rgba(180,190,200,.25)';
+        for (let i = 0; i < 8; i++) { const y = 110 - ((reducedMotion ? 0 : local * 30) + i * 25) % 110; ctx.beginPath(); ctx.arc(640 - pan + Math.sin(i) * 60, y, 30, 0, Math.PI * 2); ctx.fill(); } }
+      if (current.place === 'wall') { ctx.fillStyle = '#2a2f33'; ctx.fillRect(0, 300, W, 220); ctx.fillStyle = '#3c4247'; for (let x = 0; x < W; x += 90) ctx.fillRect(x - pan % 90, 290, 60, 20);
+        ctx.fillStyle = '#e9d07a'; for (let x = 40; x < W; x += 300) ctx.fillRect(x - pan, 340, 18, 18); rain(ctx, local, reducedMotion, 'rgba(160,190,200,.15)'); }
       caption(ctx, current.caption?.[lang]); break;
     }
     case 'title': {

@@ -1191,7 +1191,8 @@ function handlePortMeridienV90(interaction, owner = hubOwnerV84) {
   const action = interaction.action.slice(5);
   if (action === 'complete') {
     if (!hubEngine.running || !hubEngine.portContactV90()) return false;
-    showView('operations'); return true;
+    // colony-intro-doyenne (bible §6.2): Asha introduces Adèle Sarrazin, guided visit of the port, once.
+    void playStoryCinematicV188('cin-doyenne').then(() => showView('operations')); return true;
   }
   if (action !== 'checkpoint' && !hubEngine.running) return false;
   const result = action === 'checkpoint' ? { ok: true, state: runtime } : advancePortMeridienV90(current, action, {

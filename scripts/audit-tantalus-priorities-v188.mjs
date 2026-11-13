@@ -44,7 +44,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
     "previousSha256": "95287e9c3f9be2b88db9e391a9a143c4c69be8956b6763e4113645974b9e878d",
-    "currentSha256": "f922da8c2f6a83f5d630df75d32bde37a2b1afc4a7a8eaa19ccfe9dbab030466"
+    "currentSha256": "4afcf21b7a4e61b726778a51c3d7674bae1f10b172654f0e9ecbe0ee6bf9a0cc"
   },
   "hub-level.css": {
     "previousSha256": "13e29b3719e1246d595dadca4c786cbeb5a471dece902104b0ccd29a1de9908d",
@@ -92,7 +92,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/app.js": {
     "previousSha256": "482835e65677c536085a1344cf61c3ffa5e09e2af1b8029b949e000a533038ae",
-    "currentSha256": "aef0baf12a78aa675db6f4595caba9ffa4980c441996808a1ac12df6f4b5bef6"
+    "currentSha256": "dac80735d10d5879f5bd8e59c5903955faffe0473a76ae976a32be0d3eef2f41"
   },
   "src/audio-assets-v77.js": {
     "previousSha256": "bbbc868dbf7e0715be6d717d1c5ff142246a95a52ba3ff2e97f4ad11c9f34ce2",

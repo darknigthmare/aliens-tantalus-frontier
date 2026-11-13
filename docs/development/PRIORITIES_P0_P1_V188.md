@@ -115,6 +115,11 @@ Le §4 et le retour de QZ-18 (§5.2) sont joués par `src/story-cinematics-v188.
 | Chromium, nouvelle partie | CIN-00 → Échap → créateur → réveil → CIN-01, avec le portrait de DAVID-8R, enregistrée dans la sauvegarde. 19 images clés relues visuellement. |
 | Chromium, retour de QZ-18 | L'objectif du hub demande le compte rendu. CIN-20, puis « La signature », se jouent seulement à l'ouverture du Commandement. Cette passe a corrigé un défaut : la séquence démarrait sur l'écran titre. |
 
+Suite de la refonte (même journée) :
+- Acte I : CIN-10 à la prise de contrôle de QZ-17 (vérifiée dans Chromium à travers les cinq phases d'insertion), CIN-11 sur la route de maintenance, et retour avec Inez.
+- Casier ECHO-8 dans la baie cryo : vérifié dans Chromium. Les suites du hub restent vertes.
+- *La doyenne* jouée en visite guidée à la fin du quai.
+
 Non vérifiés dans le navigateur : CIN-02, `cin-p2` et les répliques du quai. Ils exigent un parcours physique dans le hub ; leurs déclencheurs sont couverts par les tests Node.
 
 ## Limites et travail restant
