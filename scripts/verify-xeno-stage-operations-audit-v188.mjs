@@ -10,6 +10,7 @@ import { STAGE_OPERATIONS_BASELINE_V188 as baseline, STAGE_OPERATIONS_SUCCESSORS
 import { COMPLETION_SOURCES_V186, reviewedCompletionDigestV186, verifyCompletionV186 } from './audit-xeno-trials-completion-v186.mjs';
 import { loadAuditSuccessionV163, resolveAuditSourcesV163 } from './audit-succession-v163.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { reviewedAnimationAudioDigestV189 as later } from './audit-xeno-animation-audio-v189.mjs';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = value => createHash('sha256').update(value).digest('hex');
@@ -24,8 +25,8 @@ test('V188 explicitly continues the last V186 completion commit and preserves it
   for (const [path, receipt] of Object.entries(successors)) {
     assert.ok(Object.isFrozen(receipt)); assert.notEqual(receipt.previousSha256, receipt.currentSha256);
     if (COMPLETION_SOURCES_V186[path]) assert.equal(receipt.previousSha256, COMPLETION_SOURCES_V186[path].currentSha256, path);
-    assert.equal(advance(path, receipt.previousSha256), receipt.currentSha256, path);
-    assert.equal(sha(read(path)), receipt.currentSha256, path);
+    assert.equal(advance(path, receipt.previousSha256), later(path, receipt.currentSha256), path);
+    assert.equal(sha(read(path)), later(path, receipt.currentSha256), path);
   }
 });
 
@@ -50,9 +51,9 @@ test('full V163/Main/Trials/language/QA chain resolves the exact current runtime
   const { previous, current } = loadAuditSuccessionV163(read);
   assert.deepEqual(resolveAuditSourcesV163(previous, read), current.runtimeSourceSha256);
   const effective = resolveAuditSourcesV163(previous, read, { effective: true });
-  for (const [path, receipt] of Object.entries(successors).filter(([, r]) => r.kind === 'runtime')) assert.equal(effective[path], receipt.currentSha256, path);
+  for (const [path, receipt] of Object.entries(successors).filter(([, r]) => r.kind === 'runtime')) assert.equal(effective[path], later(path, receipt.currentSha256), path);
   const newRuntime = Object.entries(inputs).filter(([, r]) => r.kind === 'runtime'); assert.equal(newRuntime.length, 6);
-  for (const [path, receipt] of newRuntime) assert.equal(effective[path], receipt.sha256, path);
+  for (const [path, receipt] of newRuntime) assert.equal(effective[path], later(path, receipt.sha256), path);
   const frozen = Object.freeze({ untouched: 'historic' }), first = runtime(frozen);
   assert.deepEqual(frozen, { untouched: 'historic' }); assert.deepEqual(runtime(first), first);
   const one = Object.entries(successors).find(([, r]) => r.kind === 'runtime');
@@ -61,11 +62,12 @@ test('full V163/Main/Trials/language/QA chain resolves the exact current runtime
     assert.equal(reviewedCompletionDigestV186(path, old), advance(path, receipt.currentSha256), path);
 });
 
-test('V188 is the sole terminal, pins its V186 relay and tests, and keeps tooling and review inputs out of the build', () => {
-  const terminal = 'scripts/audit-xeno-stage-operations-v188.mjs', relay = 'scripts/audit-xeno-trials-completion-v186.mjs';
+test('V188 relays to terminal V189, preserves its V186 admissions and keeps tooling and review inputs out of the build', () => {
+  const terminal = 'scripts/audit-xeno-animation-audio-v189.mjs', relay = 'scripts/audit-xeno-trials-completion-v186.mjs';
   assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(read(terminal).toString()), false);
   assert.equal(Object.hasOwn(successors, terminal) || Object.hasOwn(inputs, terminal), false);
   assert.match(read(relay).toString(), /from '\.\/audit-xeno-stage-operations-v188\.mjs'/);
+  assert.match(read('scripts/audit-xeno-stage-operations-v188.mjs').toString(), /from '\.\/audit-xeno-animation-audio-v189\.mjs'/);
   for (const path of [relay, 'scripts/verify-xeno-trials-completion-audit-v186.mjs', 'scripts/verify-i18n-audit-v186.mjs', 'scripts/verify-native-qa-resources-v187.mjs']) assert.ok(successors[path]);
   for (const path of [terminal, ...Object.keys(inputs)]) {
     assert.equal(isPublicDistributionPathV86(path), true, path);

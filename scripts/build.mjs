@@ -1,3 +1,4 @@
+import { verifyXenoSpriteAdmissionsV189 } from './public-xeno-sprite-admissions-v189.mjs';
 import { verifyXenoSpriteAdmissionsV188 } from './public-xeno-sprite-admissions-v188.mjs';
 import { verifyPublicAdmissionsV163 } from './public-release-admissions-v163.mjs';
 import { access, cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
@@ -15,6 +16,7 @@ import { verifyPublicAdmissionsV123 } from './public-release-admissions-v123.mjs
 const root = process.cwd();
 await verifyPublicAdmissionsV163(root);
 await verifyXenoSpriteAdmissionsV188(root);
+await verifyXenoSpriteAdmissionsV189(root);
 await verifyPublicAdmissionsV119(root);
 await verifyPublicAdmissionsV120(root);
 await verifyPublicAdmissionsV121(root);
@@ -77,3 +79,5 @@ await verifyPublicAdmissionsV122(output, { strict: true });
 console.log(`Built ${RELEASE.name} ${RELEASE.version} with ${Object.values(validation.counts).reduce((a, b) => a + b, 0)} catalog entries.`);
 
 await verifyXenoSpriteAdmissionsV188(output);
+
+await verifyXenoSpriteAdmissionsV189(output);

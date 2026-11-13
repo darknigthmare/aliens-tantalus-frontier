@@ -774,7 +774,7 @@ function chooseNpcDialogueV62(choiceId) {
 
 function setupXenoTrialsUiV96() {
   xenoTrialsUiV96 = new XenoTrialsUiV96({
-    root: byId('xeno-trials-v96'),
+    root: byId('xeno-trials-v96'), audioDirector: audio,
     getProgress: () => saveSystem.data.xenoTrialsV96,
     canCommit: () => ownsTimelineV84(xenoTrialsOwnerV96) && activeView === 'xenotrials' && !creatorOwnerV84,
     onCommit: state => { saveSystem.commit({ xenoTrialsV96: state }); renderClock(); },

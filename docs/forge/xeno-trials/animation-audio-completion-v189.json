@@ -1,0 +1,295 @@
+{
+  "lot": "XENO-ANIMATION-AUDIO-V189",
+  "baseCommit": "e1d53588f3b56d89ab593f36c3b9cc337c5eadc1",
+  "state": "VERIFIED_FROZEN_SOURCE",
+  "counts": {
+    "roster": 189,
+    "preservedHordes": 80,
+    "preservedOperations": 40,
+    "newSheets": 8,
+    "newDrawnPoses": 80,
+    "newPngBytes": 11379512,
+    "existingDrawnTrialsPoses": 40,
+    "totalDrawnTrialsPoses": 120,
+    "newExactTranslations": 9,
+    "newTranslationPatterns": 0
+  },
+  "sprites": [
+    {
+      "fighterId": "warrior",
+      "kind": "motion",
+      "path": "/assets/openai/sprites/xeno-trials-v189/warrior-motion-sheet.png",
+      "sha256": "94427ecc53b8e4388b5af3a3ade4c41e017ff2b071e4f47623ee3f7888e6faf8",
+      "frames": 10,
+      "movementCoverage": "eight-step-loop-two-air-poses",
+      "fullProne": false,
+      "fullLocomotion": false,
+      "canonExact": false
+    },
+    {
+      "fighterId": "runner",
+      "kind": "motion",
+      "path": "/assets/openai/sprites/xeno-trials-v189/runner-motion-sheet.png",
+      "sha256": "d065e3fa0dd3ba01b38e03c9a1c46cbb43472a58442988502c7cb0ffcb4038ef",
+      "frames": 10,
+      "movementCoverage": "eight-step-loop-two-air-poses",
+      "fullProne": false,
+      "fullLocomotion": false,
+      "canonExact": false
+    },
+    {
+      "fighterId": "prowler",
+      "kind": "motion",
+      "path": "/assets/openai/sprites/xeno-trials-v189/prowler-motion-sheet.png",
+      "sha256": "18a82319135b052a164606ce76699cd612deb7b78323a67c2bb10bfcb1b8c29e",
+      "frames": 10,
+      "movementCoverage": "eight-step-loop-two-air-poses",
+      "fullProne": false,
+      "fullLocomotion": false,
+      "canonExact": false
+    },
+    {
+      "fighterId": "spitter",
+      "kind": "motion",
+      "path": "/assets/openai/sprites/xeno-trials-v189/spitter-motion-sheet.png",
+      "sha256": "f65d382f75147dc754a56bd207ff72026d88924af225b88dc7788de566213885",
+      "frames": 10,
+      "movementCoverage": "eight-step-loop-two-air-poses",
+      "fullProne": false,
+      "fullLocomotion": false,
+      "canonExact": false
+    },
+    {
+      "fighterId": "queen",
+      "kind": "combat",
+      "path": "/assets/openai/sprites/xeno-trials-v189/queen-combat-sheet.png",
+      "sha256": "9a5713bec8891e44a80f9613a5be9dbb28c643dfe6490cfe5da6af3558521892",
+      "frames": 10,
+      "movementCoverage": "two-step-combat-keys",
+      "fullProne": true,
+      "fullLocomotion": false,
+      "canonExact": false
+    },
+    {
+      "fighterId": "crusher-acm",
+      "kind": "combat",
+      "path": "/assets/openai/sprites/xeno-trials-v189/crusher-acm-combat-sheet.png",
+      "sha256": "ee54a9038466e6a8a9969c8b7f437ea628f94625d37b183b0c31b9ca0fcd3850",
+      "frames": 10,
+      "movementCoverage": "two-step-combat-keys",
+      "fullProne": true,
+      "fullLocomotion": false,
+      "canonExact": false
+    },
+    {
+      "fighterId": "ravager",
+      "kind": "combat",
+      "path": "/assets/openai/sprites/xeno-trials-v189/ravager-combat-sheet.png",
+      "sha256": "adf1653945d6896211049ddff6f8bfd43780cf27c4ec22eba6cd44dc9fc27ab5",
+      "frames": 10,
+      "movementCoverage": "two-step-combat-keys",
+      "fullProne": true,
+      "fullLocomotion": false,
+      "canonExact": false
+    },
+    {
+      "fighterId": "burster",
+      "kind": "combat",
+      "path": "/assets/openai/sprites/xeno-trials-v189/burster-combat-sheet.png",
+      "sha256": "7227ce060096ee89b004df1afc4825fc56d7074d940455d400a289f5b0a3ec46",
+      "frames": 10,
+      "movementCoverage": "two-step-combat-keys",
+      "fullProne": true,
+      "fullLocomotion": false,
+      "canonExact": false
+    }
+  ],
+  "coverage": {
+    "schema": 189,
+    "roster": 189,
+    "drawnProfiles": 17,
+    "articulatedProfiles": 189,
+    "fullProneProfiles": 8,
+    "activeArticulatedProfiles": 5,
+    "uniqueAdmittedDrawnFrames": 160,
+    "trialsDrawnFrames": 120,
+    "byAction": {
+      "idle": {
+        "drawn": 8,
+        "mesh": 0,
+        "static": 181,
+        "supported": 189
+      },
+      "walk": {
+        "drawn": 17,
+        "mesh": 0,
+        "static": 172,
+        "supported": 189
+      },
+      "air": {
+        "drawn": 4,
+        "mesh": 0,
+        "static": 185,
+        "supported": 189
+      },
+      "light": {
+        "drawn": 9,
+        "mesh": 0,
+        "static": 180,
+        "supported": 189
+      },
+      "heavy": {
+        "drawn": 8,
+        "mesh": 0,
+        "static": 181,
+        "supported": 189
+      },
+      "guard": {
+        "drawn": 8,
+        "mesh": 0,
+        "static": 181,
+        "supported": 189
+      },
+      "hurt": {
+        "drawn": 8,
+        "mesh": 0,
+        "static": 181,
+        "supported": 189
+      },
+      "ko": {
+        "drawn": 8,
+        "mesh": 0,
+        "static": 181,
+        "supported": 189
+      },
+      "special": {
+        "drawn": 0,
+        "mesh": 5,
+        "static": 184,
+        "supported": 189
+      },
+      "presentation": {
+        "drawn": 0,
+        "mesh": 189,
+        "static": 0,
+        "supported": 189
+      }
+    },
+    "canonExact": 0,
+    "fullyAnimated": 0,
+    "scope": "ten tracked actions; excludes 27 V163 capture poses"
+  },
+  "audio": {
+    "implementation": "original-procedural-MIRE-cues",
+    "sharedDirector": true,
+    "externalAudioAssets": 0,
+    "maxOwnVoices": 8,
+    "maxCuesPerObservation": 3,
+    "maxCuesPerSecond": 10,
+    "checkpointReplay": false,
+    "changesGameplay": false
+  },
+  "remaining": [
+    "Complete drawn movesets for all 189 characters",
+    "Primary-source measured 1:1 fidelity and exact motion references",
+    "Air attacks and special/super choreography",
+    "Further identities outside these eight drawn Trials subjects"
+  ],
+  "validation": {
+    "state": "PASSED",
+    "evidenceDirectory": "/workspace/tantalus-inventory/reprise-v189",
+    "nativeBrowser": {
+      "state": "PASSED",
+      "assertions": 80,
+      "captures": 14,
+      "pageErrors": 0,
+      "httpErrors": 0,
+      "requestFailures": 0,
+      "sourceFilesUnchanged": 595,
+      "httpBodiesMatching": 17,
+      "pngBodiesMatching": 8,
+      "harnessSha256": "e4ae1f33911e00318d5f7032bea2f5335ad79210423c8c133924c02d29af43df",
+      "testedAudioSha256": "d1de5ff5d208c1ec22c18a7b72fed2a58bc887e39a4211a9075d299e7ddfd5fc",
+      "observedUniqueFrames": 100,
+      "newV189FramesObserved": 78,
+      "priorV188FramesObserved": 22,
+      "newFramesAdmittedAndPixelTested": 80,
+      "partialCombatRuns": 4,
+      "completeHordeMatches": 1,
+      "completeHordeKills": 12,
+      "audio": {
+        "sharedContext": true,
+        "nativeGraphEvents": 356,
+        "connectedOscillatorPeak": 4,
+        "connectedOscillatorsAfterExit": 0,
+        "victoryCues": 1,
+        "observedEffectiveGains": [
+          0.182,
+          0,
+          0.091
+        ],
+        "sharedContextScope": "one per page load; two creations across the verified reload"
+      },
+      "limits": [
+        "Four new fighter checks are first-round KOs then abandonment, not four match victories",
+        "Native graph diagnostics do not prove physical speaker/headphone listening quality",
+        "Two new walk-b poses remain pixel/Canvas verified but unobserved in this native run",
+        "Standard gamepad API input and initial credit/settings provision are declared fixtures"
+      ],
+      "evidence": "native-final/summary.json"
+    },
+    "sourceAdmission": {
+      "state": "PASSED",
+      "files": 2578,
+      "assets": 1442,
+      "privateDocuments": 0
+    },
+    "build": {
+      "state": "PASSED_AT_FROZEN_SOURCE",
+      "files": 2030,
+      "shell": 651,
+      "finalCommitMetadata": "RECORDED_AFTER_COMMIT"
+    },
+    "sourceSuccession": {
+      "state": "PASSED_INDEPENDENT_READBACK",
+      "baseline": "e1d53588f3b56d89ab593f36c3b9cc337c5eadc1",
+      "successors": 17,
+      "newInputs": 25,
+      "preservedPlates": 4,
+      "historicalResultsTransferred": false,
+      "physicalPins": 46,
+      "preservedV186Declarations": 71,
+      "preservedV188Declarations": 48,
+      "historicalEndpoints": 284
+    },
+    "audioCancellation": {
+      "state": "PASSED",
+      "unitTests": 12,
+      "runtimeIntegrationTests": 6,
+      "globalContextOwnership": "preserved"
+    },
+    "node": {
+      "tests": 5104,
+      "pass": 5103,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 1,
+      "todo": 0,
+      "uniqueTestFiles": 254,
+      "concurrency": 4,
+      "evidence": "test-all-final.log"
+    },
+    "sourceFreeze": {
+      "state": "UNCHANGED",
+      "files": 43,
+      "excludedMutableReports": 2
+    }
+  },
+  "publication": {
+    "state": "COMMIT_AND_DEPLOYMENT_STATUS_TRACKED_EXTERNALLY",
+    "priorQuotaResource": "api-deployments-free-per-day",
+    "retryAfterSeconds": 86400,
+    "settingsChanged": false,
+    "externalReceipt": "/workspace/tantalus-inventory/reprise-v189/publication-final.json"
+  }
+}

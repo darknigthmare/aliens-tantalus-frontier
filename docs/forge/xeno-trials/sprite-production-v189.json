@@ -1,0 +1,584 @@
+{
+  "schema": 189,
+  "date": "2026-11-13",
+  "batch": "A-new-identity-combat",
+  "scope": "four-additional-identities-contact-walk-reaction-and-ko-art",
+  "counts": {
+    "acceptedImages": 4,
+    "newKeyPoses": 40,
+    "posesPerIdentity": 10,
+    "initialImageGenerations": 4,
+    "matteCleanupGenerations": 6,
+    "rejectedInitialCandidates": 2,
+    "primaryFrameReferenceSetsRecovered": 0,
+    "canon1to1Closures": 0,
+    "rejectedRevisionCandidates": 4
+  },
+  "generator": "OpenAI image_gen",
+  "method": "Four reference-bound ten-pose sheets were generated. Queen required two image_gen revisions (matte, then uniform in-cell reduction for wider gutters); Ravager required four (matte, uniform in-cell reduction, matte, then crisp opaque contour re-render). Rejected candidates remain outside the repository. PNGs remain unmodified outside image_gen: no procedural cleanup, drawing, recoloring, resizing or pose synthesis. Read-only measurements and diagnostic previews do not alter the admitted files.",
+  "historicalAssets": "No V188 atlas or original project plate was changed.",
+  "fidelity": {
+    "canonExact": false,
+    "sourcePlateProvenance": "fan-made-user-import",
+    "primaryVisualReferenceRecovered": false,
+    "verifiedScope": "Visual consistency with four active fan-made project plates, ten key poses per identity, anatomy-specific primary contact attacks and prone final KOs. Measured alpha boundaries, supports and fixed per-identity scale are separately verified by the atlas contract. These drawings do not verify canonical body measurements, original frame timing or complete motion choreography.",
+    "open": [
+      "Primary orthographic and animation frame references remain unavailable for these four new sheets.",
+      "Queen thoracic arms naturally overlap in the lateral view; the fan plate is not a primary reference.",
+      "These contact phases are not reused for ram, acid, pounce or super specials.",
+      "The two short step contacts do not constitute complete locomotion/air coverage for these four new identities.",
+      "Ravager's final clean-cut revision has brighter highlights and sharper painted edges than its source plate; its blue-green armor, pale scythes, head horns and crescent tail remain recognizable. This is a project art adaptation."
+    ]
+  },
+  "relatedBatches": [
+    {
+      "scope": "V189 batch B locomotion/air for four V188 identities",
+      "sourceDocument": "docs/forge/xeno-trials/sprite-motion-production-v189.json",
+      "includedInTheseCounts": false
+    }
+  ],
+  "grid": {
+    "requestedColumns": 5,
+    "requestedRows": 2,
+    "rectanglePolicy": "Measure variable transparent gutters and full-body bounds from each actual sheet; do not cut at assumed equal column fractions.",
+    "scalePolicy": "One factor per identity from idle reference height, held constant across all ten poses, including prone KO."
+  },
+  "alphaContract": {
+    "silhouetteThreshold": 16,
+    "maximumCutAlpha": 1,
+    "supportThreshold": 128,
+    "maximumLowAlphaMassFraction": 0.008,
+    "strictZeroBackgroundClaim": false
+  },
+  "contextSources": [
+    {
+      "referenceId": "V159-REF-010",
+      "registry": "docs/forge/xeno-trials/references-v159.json",
+      "url": "https://www.20thcenturystudios.com/movies/aliens",
+      "kind": "film-studio-primary",
+      "scope": "Film identity/cast and published-image metadata only. No Queen pose frame or measured crown geometry was recovered."
+    },
+    {
+      "referenceId": "V159-REF-001",
+      "registry": "docs/forge/xeno-trials/references-v159.json",
+      "url": "https://www.aliensfireteamelite.com/en/",
+      "kind": "game-official-primary",
+      "scope": "Game identity and high-level design context only; not a Burster pose/animation source."
+    }
+  ],
+  "images": [
+    {
+      "fighterId": "queen",
+      "profileId": "castes-film_queen_aliens_1986",
+      "franchiseContext": "Aliens (1986)",
+      "sourcePose": {
+        "path": "assets/user/castes-v87/film_queen_aliens_1986.png",
+        "sha256": "985abf27db63400d8a6a68101bfaa7dde3335da0e8986ea85c409ab30da5e991",
+        "width": 1536,
+        "height": 1024,
+        "facing": 1,
+        "provenance": "fan-made-user-import",
+        "identityVerified": false,
+        "canonExact": false
+      },
+      "texture": {
+        "path": "assets/openai/sprites/xeno-trials-v189/queen-combat-sheet.png",
+        "sha256": "9a5713bec8891e44a80f9613a5be9dbb28c643dfe6490cfe5da6af3558521892",
+        "width": 1983,
+        "height": 793,
+        "bytes": 1143893,
+        "alphaExtrema": [
+          0,
+          255
+        ]
+      },
+      "primaryAttack": "foreclaw",
+      "signatureReview": "Blue-black body, tall swept-back royal crest, dorsal spines, two long main arms plus two small thoracic arms, tall digitigrade legs and complete segmented tail. Small thoracic arms overlap the main limbs in profile; no claim that all four are independently legible in every pose.",
+      "lowAlphaMassFraction": 0.0032826938875390524,
+      "exactInitialPrompt": "Create a NEW production-ready game sprite atlas, using the ONE supplied character plate as the strict identity reference. Produce EXACTLY TEN FULL-BODY DRAWINGS of THAT SAME organism, in a regular FIVE-COLUMN by TWO-ROW layout, read left to right, then top to bottom. Use a wide transparent canvas around 2560x1024 (5:2 aspect ratio). Every cell has exactly ONE whole organism, generous empty transparent gutters (at least 8–12% on all sides), no overlapping neighboring sprites and absolutely NO clipped head crests, tail tips, horns, blades, hands, claws or feet. True transparent RGBA background. No solid backdrop, checkerboard baked into the picture, vignette, floor, cast shadows, text, numbers, labels, cell borders, colored particle noise, aura, splash, projectile or effects. Preserve the exact distinctive anatomy, proportions, color palette and retro detailed painted-sprite shading of this source plate. Do not redesign into a generic xenomorph and do not change the rendering style. Every pose is side-view or the same shallow side angle as the reference and FACES RIGHT.\nONE CONSTANT ORGANISM SCALE ACROSS ALL TEN CELLS: keep the skull, armor and limb lengths the same in pixel size. Never stretch, enlarge or miniaturize short/crouching/prone poses to fill a cell. Bend the tail naturally within the empty gutter if needed, never shorten or crop it. All supported lowest body points align on the same invisible support baseline near 90% of cell height. Leave empty pixels beneath and around them, without ground marks.\nThe specified anatomy-appropriate PRIMARY CONTACT ATTACK is defined below; these drawings MUST NOT depict its projectile/special/super.\nTEN POSES, EXACT ORDER:\nTOP ROW 1 idle neutral alert stance; 2 walk contact A with near legs/feet placed forward; 3 walk contact B with opposite limbs forward, genuinely distinct contact from pose2; 4 primary contact attack anticipation, body braced and attacking part pulled back; 5 primary contact attack impact, attacking anatomy extended to the RIGHT, controlled support, same skull/body scale as idle.\nBOTTOM ROW 6 primary attack recovery, attacking anatomy returning and weight settling, visibly distinct from idle; 7 defensive guard/bracing anatomically appropriate to this organism; 8 hit recoil with torso/head reacting backward and joints bending while retaining the exact identity; 9 KO falling/collapse, body visibly lowering through folding legs and/or elbows and lowered head, NOT a standing sprite simply rotated; 10 KO final, COMPLETE SIDEWAYS LYING POSE: torso/shoulder/hip and skull resting horizontally low along the invisible support line, limbs naturally folded, long tail resting low. Preserve all anatomy intact and recognizable, no explosion, dismemberment, gore or extra body parts. In the last cell the organism is genuinely fully prone, not kneeling/crouching/standing. Ten real changed poses, not copies or mirrored duplicates.\n\nIDENTITY LOCK: the mobile Alien QUEEN in the supplied plate. Very tall imposing BLUE-BLACK biomechanical royal body, HUGE elongated swept-back fan/crown HEAD CREST with the same pointed rays and ridges as this source, angular toothed face, tall digitigrade hind legs, TWO LONG MAIN ARMS ending in large fine claws AND a DISTINCT SEPARATE PAIR OF SMALL THORACIC ARMS below the rib cage. Keep ALL FOUR ARMS present in every cell, including folded on the prone body. Preserve the long thick segmented tail with its pointed blade tip, and the dorsal spines. Do not turn her into a two-armed Warrior, quadrupedal Crusher, scorpion, red Prowler or ovipositor-bound queen. The PRIMARY ATTACK is a reach and slash by one of the LONG MAIN FORECLAWS (not the tail): windup draws that forearm back, impact reaches right, recovery returns. The small arms stay visibly tucked near the chest. Guard braces the long claws in front of the lower torso. For KO final, the entire huge crest is sideways near the ground, body and all four arms fold naturally and the full tail coils low, all inside the cell. Keep the royal crest and body exactly the same pixel scale across poses.",
+      "rejectedCandidate": {
+        "sha256": "a093206537a2525e5b128c8c0034154353d230ee117f76c1d57ff74779d7a005",
+        "reason": "Low-alpha mass exceeded the existing 0.8% limit and continuous cut gutters were insufficient.",
+        "retainedOutsideRepository": true
+      },
+      "frameReview": [
+        {
+          "index": 0,
+          "id": "idle",
+          "observation": "Recognizable idle silhouette preserves the source adaptation's anatomy and distinctive palette.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 1,
+          "id": "walk-a",
+          "observation": "First short forward locomotion contact differs from idle.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 2,
+          "id": "walk-b",
+          "observation": "Opposite limb contact differs from walk-a; no horizontal flip substitutes for the second drawing.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 3,
+          "id": "attack-windup",
+          "observation": "One long forearm drawn back with the other limbs supported.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 4,
+          "id": "attack-impact",
+          "observation": "Long foreclaw extends to the right; small thoracic arms overlap the rib/main-arm region in this side view.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 5,
+          "id": "attack-recovery",
+          "observation": "Main forearm returns and weight settles while the crest and body retain their scale.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 6,
+          "id": "guard",
+          "observation": "Defensive bracing follows the specific anatomy, without adding humanoid hands or changing the body.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 7,
+          "id": "hit-recoil",
+          "observation": "Torso/head recoil changes joints and body attitude while retaining all characteristic anatomy.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 8,
+          "id": "ko-fall",
+          "observation": "The falling pose lowers torso and head through folding limbs rather than rotating an unchanged standing plate.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 9,
+          "id": "ko-ground",
+          "observation": "The final drawing lies horizontally on its side, skull and torso low with folded limbs and the full tail resting; intact body, no death explosion.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        }
+      ],
+      "revisionHistory": [
+        {
+          "order": 1,
+          "tool": "image_gen",
+          "inputSha256": "a093206537a2525e5b128c8c0034154353d230ee117f76c1d57ff74779d7a005",
+          "outputSha256": "122928c1ab203aa1d4ff78f9e68f2bffa09e33e6d10db218db499a721a4d4972",
+          "exactPrompt": "EDIT THIS EXISTING TEN-POSE SPRITE ATLAS ONLY TO CLEAN ITS TRANSPARENT MATTE. Preserve all ten character drawings, their exact pose order, location, scale, distinctive anatomy and colors. Do not redesign, change the number of poses, generate a background, or crop tails/heads/limbs.\nThere is unwanted very faint colored background haze/dust and fringe noise in the empty gutters and around the outlines. REMOVE ALL of that background residue completely. Every empty area between the ten sprites and every outer border must be ABSOLUTELY FULLY TRANSPARENT, alpha exactly ZERO, with wide continuous empty vertical gutters between each of the five sprites on both rows. Keep the ten actual detailed painted bodies sharp and intact, with fully opaque interior pixels and only a tight 1-pixel normal antialiasing transition at the true silhouette. No broad semi-transparent glow, no fog, no blue/green/red dots in transparent space, no checkerboard, floor, shadow or labels.\nMaintain FIVE columns TWO rows, each whole creature isolated within its cell with transparent margins; preserve the original pixel scale within all poses, including the sideways lying KO. Keep the detailed ribbing/armor/blades/pods and the original right-facing direction. This is matte cleanup of the supplied atlas, not a different creature or new pose sheet. Output a true transparent RGBA sprite atlas.\nPreserve the blue-black royal crown/head crest, TWO main forearms plus TWO small thoracic arms, long digitigrade legs and complete tail in all ten poses.",
+          "result": "rejected",
+          "lowAlphaMassFraction": 0.005941950495462839,
+          "reason": "Low-alpha mass passed, but best row0 cuts at x399,783,1551 still crossed alpha2 rather than the required alpha<=1."
+        },
+        {
+          "order": 2,
+          "tool": "image_gen",
+          "inputSha256": "122928c1ab203aa1d4ff78f9e68f2bffa09e33e6d10db218db499a721a4d4972",
+          "outputSha256": "9a5713bec8891e44a80f9613a5be9dbb28c643dfe6490cfe5da6af3558521892",
+          "exactPrompt": "Edit this exact transparent sprite atlas for production gutter spacing and alpha cleanliness. Keep all TEN existing distinct key poses in exactly the existing 5-column, 2-row reading order, and retain the identity, anatomy, palette and shading. Preserve the complete crown/head, arms, feet and tail of every figure. Uniformly reduce EACH OF THE TEN FIGURES to 80 percent of its current drawn size, using the SAME reduction for every pose; do not independently enlarge any pose, and especially do not enlarge the horizontal KO. Keep figures centered within their own cells, with feet/body support at a consistent row baseline. This intentional uniform reduction makes safe transparent margins around every full figure: at least 24 completely empty pixels between the outermost ends of neighboring silhouettes. All of those inter-sprite gutters and the large horizontal separation between rows must be truly alpha-zero empty transparent background, with no faint translucent pixels, fog, colored specks, halos, blur, shadows, dust, particles, checker pattern or opaque backing. Preserve clean hard readable silhouette edges with only tight edge antialiasing. Do not crop or erase anatomy to create gaps. Do not change the ten poses or add poses, no text or labels. Final deliverable is a transparent PNG sprite atlas, same 5x2 layout, all ten whole figures, consistent skull/body scale, with visibly generous fully empty gutters. Queen identity: preserve huge swept-back crown, dorsal spines, main claw arms AND the pair of small thoracic arms visible as naturally overlapped in side profile, digitigrade legs and full long tail. Ten poses: idle, two short walking contacts, foreclaw windup, foreclaw contact, recovery, guard, hit recoil, buckled fall, whole side-lying KO.",
+          "result": "accepted",
+          "reason": "Uniformly smaller full figures create measured cut gutters without changing the ten-pose order; exact rectangles and supports measured anew."
+        }
+      ]
+    },
+    {
+      "fighterId": "crusher-acm",
+      "profileId": "castes-game_acm_crusher",
+      "franchiseContext": "Aliens: Colonial Marines (2013)",
+      "sourcePose": {
+        "path": "assets/user/castes-v87/game_acm_crusher.png",
+        "sha256": "eca7855c29455b87bf9fc4e26afe2ab07adbd3ff4afa2c5ffb36dc6b4ebc2baa",
+        "width": 1536,
+        "height": 1024,
+        "facing": 1,
+        "provenance": "fan-made-user-import",
+        "identityVerified": false,
+        "canonExact": false
+      },
+      "texture": {
+        "path": "assets/openai/sprites/xeno-trials-v189/crusher-acm-combat-sheet.png",
+        "sha256": "ee54a9038466e6a8a9969c8b7f437ea628f94625d37b183b0c31b9ca0fcd3850",
+        "width": 1983,
+        "height": 793,
+        "bytes": 1498883,
+        "alphaExtrema": [
+          0,
+          255
+        ]
+      },
+      "primaryAttack": "armored-head-contact",
+      "signatureReview": "Gray-gunmetal quadruped, massive armored head collar, backward horns, four stocky clawed legs and thorny tail.",
+      "lowAlphaMassFraction": 0.007986974282888332,
+      "exactInitialPrompt": "Create a NEW production-ready game sprite atlas, using the ONE supplied character plate as the strict identity reference. Produce EXACTLY TEN FULL-BODY DRAWINGS of THAT SAME organism, in a regular FIVE-COLUMN by TWO-ROW layout, read left to right, then top to bottom. Use a wide transparent canvas around 2560x1024 (5:2 aspect ratio). Every cell has exactly ONE whole organism, generous empty transparent gutters (at least 8–12% on all sides), no overlapping neighboring sprites and absolutely NO clipped head crests, tail tips, horns, blades, hands, claws or feet. True transparent RGBA background. No solid backdrop, checkerboard baked into the picture, vignette, floor, cast shadows, text, numbers, labels, cell borders, colored particle noise, aura, splash, projectile or effects. Preserve the exact distinctive anatomy, proportions, color palette and retro detailed painted-sprite shading of this source plate. Do not redesign into a generic xenomorph and do not change the rendering style. Every pose is side-view or the same shallow side angle as the reference and FACES RIGHT.\nONE CONSTANT ORGANISM SCALE ACROSS ALL TEN CELLS: keep the skull, armor and limb lengths the same in pixel size. Never stretch, enlarge or miniaturize short/crouching/prone poses to fill a cell. Bend the tail naturally within the empty gutter if needed, never shorten or crop it. All supported lowest body points align on the same invisible support baseline near 90% of cell height. Leave empty pixels beneath and around them, without ground marks.\nThe specified anatomy-appropriate PRIMARY CONTACT ATTACK is defined below; these drawings MUST NOT depict its projectile/special/super.\nTEN POSES, EXACT ORDER:\nTOP ROW 1 idle neutral alert stance; 2 walk contact A with near legs/feet placed forward; 3 walk contact B with opposite limbs forward, genuinely distinct contact from pose2; 4 primary contact attack anticipation, body braced and attacking part pulled back; 5 primary contact attack impact, attacking anatomy extended to the RIGHT, controlled support, same skull/body scale as idle.\nBOTTOM ROW 6 primary attack recovery, attacking anatomy returning and weight settling, visibly distinct from idle; 7 defensive guard/bracing anatomically appropriate to this organism; 8 hit recoil with torso/head reacting backward and joints bending while retaining the exact identity; 9 KO falling/collapse, body visibly lowering through folding legs and/or elbows and lowered head, NOT a standing sprite simply rotated; 10 KO final, COMPLETE SIDEWAYS LYING POSE: torso/shoulder/hip and skull resting horizontally low along the invisible support line, limbs naturally folded, long tail resting low. Preserve all anatomy intact and recognizable, no explosion, dismemberment, gore or extra body parts. In the last cell the organism is genuinely fully prone, not kneeling/crouching/standing. Ten real changed poses, not copies or mirrored duplicates.\n\nIDENTITY LOCK: the supplied massive armored GRAY-GUNMETAL QUADRUPEDAL Crusher adaptation. Preserve the enormous broad ridged armored HEAD COLLAR / SHIELD with heavy angular cheek armor, the sharp long BACKWARD horns/spines, thick ribbed neck and torso, four stocky clawed animal legs with heavy joints, armored thigh plates and broad thorny segmented tail. The distinctive wide head shield is the primary silhouette. NO humanoid upright body, no ordinary Warrior smooth head, no queen crown or extra arms. The PRIMARY CONTACT ATTACK uses the ARMORED HEAD/COLLAR in a SHORT SUPPORTED NECK/BODY SHOVE to the right: windup lowers and slightly retracts head with all four legs braced, impact pushes the plated head forward at close range, recovery settles the shoulders and head back. It is NOT a full special charge, no running streaks, no blast and no human punching arm. Guard crouches and shields behind the armored head. KO final has the heavy armored head and entire thick body lying on their side, four legs folded, horns and full thorny tail all intact inside the cell, constant scale.",
+      "frameReview": [
+        {
+          "index": 0,
+          "id": "idle",
+          "observation": "Recognizable idle silhouette preserves the source adaptation's anatomy and distinctive palette.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 1,
+          "id": "walk-a",
+          "observation": "First short forward locomotion contact differs from idle.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 2,
+          "id": "walk-b",
+          "observation": "Opposite limb contact differs from walk-a; no horizontal flip substitutes for the second drawing.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 3,
+          "id": "attack-windup",
+          "observation": "Armored head lowers and retracts slightly as four legs brace.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 4,
+          "id": "attack-impact",
+          "observation": "Supported head/collar contact reaches right, without a human punching limb.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 5,
+          "id": "attack-recovery",
+          "observation": "Shoulders and head settle back after the short physical shove.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 6,
+          "id": "guard",
+          "observation": "Defensive bracing follows the specific anatomy, without adding humanoid hands or changing the body.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 7,
+          "id": "hit-recoil",
+          "observation": "Torso/head recoil changes joints and body attitude while retaining all characteristic anatomy.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 8,
+          "id": "ko-fall",
+          "observation": "The falling pose lowers torso and head through folding limbs rather than rotating an unchanged standing plate.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 9,
+          "id": "ko-ground",
+          "observation": "The final drawing lies horizontally on its side, skull and torso low with folded limbs and the full tail resting; intact body, no death explosion.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        }
+      ]
+    },
+    {
+      "fighterId": "ravager",
+      "profileId": "castes-game_avp_extinction_ravager",
+      "franchiseContext": "Aliens vs. Predator: Extinction (2003)",
+      "sourcePose": {
+        "path": "assets/user/castes-v87/game_avp_extinction_ravager.png",
+        "sha256": "7e2d1e236ef7de411c5458aee40520951c2c6dec2dc932a21164eea087738cbe",
+        "width": 1536,
+        "height": 1024,
+        "facing": 1,
+        "provenance": "fan-made-user-import",
+        "identityVerified": false,
+        "canonExact": false
+      },
+      "texture": {
+        "path": "assets/openai/sprites/xeno-trials-v189/ravager-combat-sheet.png",
+        "sha256": "adf1653945d6896211049ddff6f8bfd43780cf27c4ec22eba6cd44dc9fc27ab5",
+        "width": 1983,
+        "height": 793,
+        "bytes": 1185748,
+        "alphaExtrema": [
+          0,
+          255
+        ]
+      },
+      "primaryAttack": "forearm-blade",
+      "signatureReview": "Blue/green armored biped, swept-back horns, two large pale forearm scythes, digitigrade legs and broad crescent tail blade. Final revision uses stronger highlight contrast and clean inked contours; that style deviation from the plate is explicit.",
+      "lowAlphaMassFraction": 0.0062370525154027264,
+      "exactInitialPrompt": "Create a NEW production-ready game sprite atlas, using the ONE supplied character plate as the strict identity reference. Produce EXACTLY TEN FULL-BODY DRAWINGS of THAT SAME organism, in a regular FIVE-COLUMN by TWO-ROW layout, read left to right, then top to bottom. Use a wide transparent canvas around 2560x1024 (5:2 aspect ratio). Every cell has exactly ONE whole organism, generous empty transparent gutters (at least 8–12% on all sides), no overlapping neighboring sprites and absolutely NO clipped head crests, tail tips, horns, blades, hands, claws or feet. True transparent RGBA background. No solid backdrop, checkerboard baked into the picture, vignette, floor, cast shadows, text, numbers, labels, cell borders, colored particle noise, aura, splash, projectile or effects. Preserve the exact distinctive anatomy, proportions, color palette and retro detailed painted-sprite shading of this source plate. Do not redesign into a generic xenomorph and do not change the rendering style. Every pose is side-view or the same shallow side angle as the reference and FACES RIGHT.\nONE CONSTANT ORGANISM SCALE ACROSS ALL TEN CELLS: keep the skull, armor and limb lengths the same in pixel size. Never stretch, enlarge or miniaturize short/crouching/prone poses to fill a cell. Bend the tail naturally within the empty gutter if needed, never shorten or crop it. All supported lowest body points align on the same invisible support baseline near 90% of cell height. Leave empty pixels beneath and around them, without ground marks.\nThe specified anatomy-appropriate PRIMARY CONTACT ATTACK is defined below; these drawings MUST NOT depict its projectile/special/super.\nTEN POSES, EXACT ORDER:\nTOP ROW 1 idle neutral alert stance; 2 walk contact A with near legs/feet placed forward; 3 walk contact B with opposite limbs forward, genuinely distinct contact from pose2; 4 primary contact attack anticipation, body braced and attacking part pulled back; 5 primary contact attack impact, attacking anatomy extended to the RIGHT, controlled support, same skull/body scale as idle.\nBOTTOM ROW 6 primary attack recovery, attacking anatomy returning and weight settling, visibly distinct from idle; 7 defensive guard/bracing anatomically appropriate to this organism; 8 hit recoil with torso/head reacting backward and joints bending while retaining the exact identity; 9 KO falling/collapse, body visibly lowering through folding legs and/or elbows and lowered head, NOT a standing sprite simply rotated; 10 KO final, COMPLETE SIDEWAYS LYING POSE: torso/shoulder/hip and skull resting horizontally low along the invisible support line, limbs naturally folded, long tail resting low. Preserve all anatomy intact and recognizable, no explosion, dismemberment, gore or extra body parts. In the last cell the organism is genuinely fully prone, not kneeling/crouching/standing. Ten real changed poses, not copies or mirrored duplicates.\n\nIDENTITY LOCK: the supplied BLUE-TEAL and GREEN armored BIPEDAL Ravager adaptation. Preserve its angular narrow helmet/head with sweeping backward blade-like horns, blue/green iridescent plates on dark body, pointed shoulder/thigh armor, two strong digitigrade legs, long horizontally banded segmented tail ending in a broad silver crescent blade. Most important: each forearm ends in a HUGE CURVED IVORY / SILVER SCYTHE BLADE, NOT a human hand or ordinary fingered claw. Preserve BOTH great scythes in all ten poses, including the prone pose. The PRIMARY CONTACT ATTACK is a slash with ONE FOREARM SCYTHE: draw blade back for windup, sweep/extend it right for contact, then recover; no projectile, special dash or effects. Guard braces and crosses the blades safely in front of the body. The blue-green palette and pale scythes must remain exact to the source adaptation, no black generic Warrior or red Prowler. KO final puts the complete blue-green body sideways on ground, both large scythes folded low, original skull and full crescent tail visible inside the cell, unchanged scale.",
+      "rejectedCandidate": {
+        "sha256": "aeaa9393e2fd4fe2b1c294b631b9e0525e8bf4c6d462d2226d7d73e73ed029d1",
+        "reason": "Low-alpha mass exceeded the existing 0.8% limit and continuous cut gutters were insufficient.",
+        "retainedOutsideRepository": true
+      },
+      "frameReview": [
+        {
+          "index": 0,
+          "id": "idle",
+          "observation": "Recognizable idle silhouette preserves the source adaptation's anatomy and distinctive palette.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 1,
+          "id": "walk-a",
+          "observation": "First short forward locomotion contact differs from idle.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 2,
+          "id": "walk-b",
+          "observation": "Opposite limb contact differs from walk-a; no horizontal flip substitutes for the second drawing.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 3,
+          "id": "attack-windup",
+          "observation": "One pale scythe forearm is raised/retracted for a slash.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 4,
+          "id": "attack-impact",
+          "observation": "Scythe extends right at contact; the other pale blade remains attached.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 5,
+          "id": "attack-recovery",
+          "observation": "Blade returns toward the braced stance without a projectile or new special attack.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 6,
+          "id": "guard",
+          "observation": "Defensive bracing follows the specific anatomy, without adding humanoid hands or changing the body.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 7,
+          "id": "hit-recoil",
+          "observation": "Torso/head recoil changes joints and body attitude while retaining all characteristic anatomy.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 8,
+          "id": "ko-fall",
+          "observation": "The falling pose lowers torso and head through folding limbs rather than rotating an unchanged standing plate.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 9,
+          "id": "ko-ground",
+          "observation": "The final drawing lies horizontally on its side, skull and torso low with folded limbs and the full tail resting; intact body, no death explosion.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        }
+      ],
+      "revisionHistory": [
+        {
+          "order": 1,
+          "tool": "image_gen",
+          "inputSha256": "aeaa9393e2fd4fe2b1c294b631b9e0525e8bf4c6d462d2226d7d73e73ed029d1",
+          "outputSha256": "d28e0990621ffdf3dae169879c8793b528009be2e21d154b37d68cd990b2dcb0",
+          "exactPrompt": "EDIT THIS EXISTING TEN-POSE SPRITE ATLAS ONLY TO CLEAN ITS TRANSPARENT MATTE. Preserve all ten character drawings, their exact pose order, location, scale, distinctive anatomy and colors. Do not redesign, change the number of poses, generate a background, or crop tails/heads/limbs.\nThere is unwanted very faint colored background haze/dust and fringe noise in the empty gutters and around the outlines. REMOVE ALL of that background residue completely. Every empty area between the ten sprites and every outer border must be ABSOLUTELY FULLY TRANSPARENT, alpha exactly ZERO, with wide continuous empty vertical gutters between each of the five sprites on both rows. Keep the ten actual detailed painted bodies sharp and intact, with fully opaque interior pixels and only a tight 1-pixel normal antialiasing transition at the true silhouette. No broad semi-transparent glow, no fog, no blue/green/red dots in transparent space, no checkerboard, floor, shadow or labels.\nMaintain FIVE columns TWO rows, each whole creature isolated within its cell with transparent margins; preserve the original pixel scale within all poses, including the sideways lying KO. Keep the detailed ribbing/armor/blades/pods and the original right-facing direction. This is matte cleanup of the supplied atlas, not a different creature or new pose sheet. Output a true transparent RGBA sprite atlas.\nPreserve the exact blue/green armored body, TWO enormous pale scythe forearms, swept-back horns, digitigrade feet and complete bladed tail in all ten poses.",
+          "result": "rejected",
+          "lowAlphaMassFraction": 0.007448998663967923,
+          "reason": "Low-alpha mass passed, but best row0x403 and row1x1554 cuts still crossed alpha2 rather than the required alpha<=1."
+        },
+        {
+          "order": 2,
+          "tool": "image_gen",
+          "inputSha256": "d28e0990621ffdf3dae169879c8793b528009be2e21d154b37d68cd990b2dcb0",
+          "outputSha256": "555b62585bb5362ce28c23020532c8d92ed67b4c4930a80dc5b5148b832a983d",
+          "exactPrompt": "Edit this exact transparent sprite atlas for production gutter spacing and alpha cleanliness. Keep all TEN existing distinct key poses in exactly the existing 5-column, 2-row reading order, and retain the identity, anatomy, palette and shading. Preserve the complete crown/head, arms, feet and tail of every figure. Uniformly reduce EACH OF THE TEN FIGURES to 80 percent of its current drawn size, using the SAME reduction for every pose; do not independently enlarge any pose, and especially do not enlarge the horizontal KO. Keep figures centered within their own cells, with feet/body support at a consistent row baseline. This intentional uniform reduction makes safe transparent margins around every full figure: at least 24 completely empty pixels between the outermost ends of neighboring silhouettes. All of those inter-sprite gutters and the large horizontal separation between rows must be truly alpha-zero empty transparent background, with no faint translucent pixels, fog, colored specks, halos, blur, shadows, dust, particles, checker pattern or opaque backing. Preserve clean hard readable silhouette edges with only tight edge antialiasing. Do not crop or erase anatomy to create gaps. Do not change the ten poses or add poses, no text or labels. Final deliverable is a transparent PNG sprite atlas, same 5x2 layout, all ten whole figures, consistent skull/body scale, with visibly generous fully empty gutters. Ravager identity: preserve blue green armored biped, swept-back head horns, two huge pale scythe forearms (not hands), digitigrade legs, entire banded tail and silver crescent tail blade. Ten poses: idle, two short walking contacts, forearm scythe windup, scythe contact, recovery, guard, hit recoil, buckled fall, whole side-lying KO.",
+          "result": "rejected",
+          "lowAlphaMassFraction": 0.010975251717379845,
+          "reason": "Wide gutters created, but low-alpha mass exceeded 0.8%."
+        },
+        {
+          "order": 3,
+          "tool": "image_gen",
+          "inputSha256": "555b62585bb5362ce28c23020532c8d92ed67b4c4930a80dc5b5148b832a983d",
+          "outputSha256": "80ba9c40f78f17dcb4d9a5a83be8e84fc7aa7cd7118053124e2ba14ad7416b1c",
+          "exactPrompt": "Production sprite atlas MATTE REPAIR ONLY. Keep all ten existing Ravager drawings, their exact 5x2 placement, wide empty gutters, sizes, poses, anatomy, colors and detail. This reference has scattered barely visible alpha dust and a fuzzy translucent fringe. Replace that fringe and dust with fully empty alpha-zero transparency. Render each figure as a clean opaque cutout with a crisp hard silhouette edge: all solid anatomy and tiny horns/tail-blades stay opaque and intact, no washed out translucent body. Only at most a ONE-pixel thin antialias transition may exist immediately adjacent to the actual body edge. Do not use any broad translucent fringe or glow. The gaps between limbs, inside curled tails and between the ten sprites must be truly empty transparent background with no gray specks, particles, shadow or haze. This is not a style redesign: preserve the shiny blue-green armor, two huge pale forearm scythes, head horns, banded long tail and complete silver crescent tail blade, right-facing profile. Do not relocate, resize, clip, change order or add new poses. Keep all ten poses: idle; walk A; walk B; forearm blade windup; forward blade contact; recovery; guard; backward hit recoil; buckled fall; complete intact horizontal side-lying KO. No labels/text/ground/backdrop. Deliver clean transparent PNG with sharp opaque figures and empty gutters.",
+          "result": "rejected",
+          "lowAlphaMassFraction": 0.010532761905630935,
+          "reason": "Low-alpha mass still exceeded 0.8%; limits preserved."
+        },
+        {
+          "order": 4,
+          "tool": "image_gen",
+          "inputSha256": "80ba9c40f78f17dcb4d9a5a83be8e84fc7aa7cd7118053124e2ba14ad7416b1c",
+          "outputSha256": "adf1653945d6896211049ddff6f8bfd43780cf27c4ec22eba6cd44dc9fc27ab5",
+          "exactPrompt": "Create a production-ready transparent sprite atlas by re-rendering these TEN referenced Ravager key drawings as CRISP OPAQUE GAME SPRITES. Keep the exact right-facing ten poses and full anatomy, 5 columns x 2 rows, with the same spacious layout and same scale across all poses. All painted body pixels are solid opaque: clean inked contours, detailed glossy blue-green armor, pale silver scythe forearms, head horns, banded tail with silver crescent blade. Draw a precise solid outline all around the body and limbs, with no feathering, fuzzy texture, smoky edge, glow, particle or semi-transparent shading outside the outline. The background is perfectly empty transparency. The entire area beyond the precise contour and all holes between limbs and inside curled tails is empty alpha-zero, and gutters between figures are at least30px wide and entirely empty. Only a very thin one-pixel antialias at the outer contour is allowed. Keep each whole figure well clear of its cell boundaries, no body or tail clipping. Keep all TEN existing poses (row1 idle/walkA/walkB/primary forearm-blade windup/primary forearm-blade contact; row2 recovery/guard/backward hit recoil/buckled fall/horizontal side-lying intact KO). Preserve relative body proportions and a single shared skull size. No text, numbers, labels, grid, floor, shadow, checkerboard, backdrop or special-effect marks.",
+          "result": "accepted",
+          "lowAlphaMassFraction": 0.0062370525154027264,
+          "reason": "Crisp opaque contour revision preserves ten poses; higher highlight contrast is acknowledged rather than described as a pixel-exact match."
+        }
+      ]
+    },
+    {
+      "fighterId": "burster",
+      "profileId": "castes-game_afe_burster",
+      "franchiseContext": "Aliens: Fireteam Elite (2021)",
+      "sourcePose": {
+        "path": "assets/user/castes-v87/game_afe_burster.png",
+        "sha256": "b2db2418502099d9f2551434cf207ef72fe0a09dc68914fbc85e18705720ce13",
+        "width": 1536,
+        "height": 1024,
+        "facing": 1,
+        "provenance": "fan-made-user-import",
+        "identityVerified": false,
+        "canonExact": false
+      },
+      "texture": {
+        "path": "assets/openai/sprites/xeno-trials-v189/burster-combat-sheet.png",
+        "sha256": "7227ce060096ee89b004df1afc4825fc56d7074d940455d400a289f5b0a3ec46",
+        "width": 1983,
+        "height": 793,
+        "bytes": 1426882,
+        "alphaExtrema": [
+          0,
+          255
+        ]
+      },
+      "primaryAttack": "low-body-contact",
+      "signatureReview": "Gold/brown and black low quadruped, multiple lime sacs on the head and limbs, four long clawed legs and a bronze tail blade.",
+      "lowAlphaMassFraction": 0.007433763793424269,
+      "exactInitialPrompt": "Create a NEW production-ready game sprite atlas, using the ONE supplied character plate as the strict identity reference. Produce EXACTLY TEN FULL-BODY DRAWINGS of THAT SAME organism, in a regular FIVE-COLUMN by TWO-ROW layout, read left to right, then top to bottom. Use a wide transparent canvas around 2560x1024 (5:2 aspect ratio). Every cell has exactly ONE whole organism, generous empty transparent gutters (at least 8–12% on all sides), no overlapping neighboring sprites and absolutely NO clipped head crests, tail tips, horns, blades, hands, claws or feet. True transparent RGBA background. No solid backdrop, checkerboard baked into the picture, vignette, floor, cast shadows, text, numbers, labels, cell borders, colored particle noise, aura, splash, projectile or effects. Preserve the exact distinctive anatomy, proportions, color palette and retro detailed painted-sprite shading of this source plate. Do not redesign into a generic xenomorph and do not change the rendering style. Every pose is side-view or the same shallow side angle as the reference and FACES RIGHT.\nONE CONSTANT ORGANISM SCALE ACROSS ALL TEN CELLS: keep the skull, armor and limb lengths the same in pixel size. Never stretch, enlarge or miniaturize short/crouching/prone poses to fill a cell. Bend the tail naturally within the empty gutter if needed, never shorten or crop it. All supported lowest body points align on the same invisible support baseline near 90% of cell height. Leave empty pixels beneath and around them, without ground marks.\nThe specified anatomy-appropriate PRIMARY CONTACT ATTACK is defined below; these drawings MUST NOT depict its projectile/special/super.\nTEN POSES, EXACT ORDER:\nTOP ROW 1 idle neutral alert stance; 2 walk contact A with near legs/feet placed forward; 3 walk contact B with opposite limbs forward, genuinely distinct contact from pose2; 4 primary contact attack anticipation, body braced and attacking part pulled back; 5 primary contact attack impact, attacking anatomy extended to the RIGHT, controlled support, same skull/body scale as idle.\nBOTTOM ROW 6 primary attack recovery, attacking anatomy returning and weight settling, visibly distinct from idle; 7 defensive guard/bracing anatomically appropriate to this organism; 8 hit recoil with torso/head reacting backward and joints bending while retaining the exact identity; 9 KO falling/collapse, body visibly lowering through folding legs and/or elbows and lowered head, NOT a standing sprite simply rotated; 10 KO final, COMPLETE SIDEWAYS LYING POSE: torso/shoulder/hip and skull resting horizontally low along the invisible support line, limbs naturally folded, long tail resting low. Preserve all anatomy intact and recognizable, no explosion, dismemberment, gore or extra body parts. In the last cell the organism is genuinely fully prone, not kneeling/crouching/standing. Ten real changed poses, not copies or mirrored duplicates.\n\nIDENTITY LOCK: the supplied slim low QUADRUPEDAL Burster adaptation, dark black/brown and GOLD edged ribbed chitin with MANY BRIGHT LIME-GREEN BIOLOGICAL SACS. Preserve the exact long skull shape covered in multiple clearly separate raised GREEN OVAL PODS, and the GREEN SACS IN THE FORELIMBS AND HINDLIMBS, bronze/gold skeletal edges, four long clawed animal legs, very long thin segmented tail with a large curved bronze blade tip. Do not turn it into a Spitter with only two yellow head sacs, an inflated round monster, a brown Runner without green pods or a red Prowler. The PRIMARY CONTACT ATTACK is a LOW ANATOMICAL BODY/FOREQUARTER CONTACT: windup draws low torso and forequarters back while feet brace, impact extends the head/shoulder and near forelimb forward to the RIGHT without leaving the ground or breaking pods, recovery returns intact. Not an acid spit and NOT the death explosion: there are no green clouds, splashes, burst sacs or missing pieces in any frame. Guard lowers and braces body; hit recoil remains intact. KO final is the full low body lying SIDEWAYS with lime head/leg sacs intact and visible, skull low, folded four limbs and full bladed tail resting low, same pixel scale.",
+      "frameReview": [
+        {
+          "index": 0,
+          "id": "idle",
+          "observation": "Recognizable idle silhouette preserves the source adaptation's anatomy and distinctive palette.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 1,
+          "id": "walk-a",
+          "observation": "First short forward locomotion contact differs from idle.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 2,
+          "id": "walk-b",
+          "observation": "Opposite limb contact differs from walk-a; no horizontal flip substitutes for the second drawing.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 3,
+          "id": "attack-windup",
+          "observation": "Low torso and forequarters draw back while the limbs brace.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 4,
+          "id": "attack-impact",
+          "observation": "Near forequarters/limb reach right in an intact low contact; no explosion or acid effect.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 5,
+          "id": "attack-recovery",
+          "observation": "Limb and weight settle back with every green biological sac intact.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 6,
+          "id": "guard",
+          "observation": "Defensive bracing follows the specific anatomy, without adding humanoid hands or changing the body.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 7,
+          "id": "hit-recoil",
+          "observation": "Torso/head recoil changes joints and body attitude while retaining all characteristic anatomy.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 8,
+          "id": "ko-fall",
+          "observation": "The falling pose lowers torso and head through folding limbs rather than rotating an unchanged standing plate.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        },
+        {
+          "index": 9,
+          "id": "ko-ground",
+          "observation": "The final drawing lies horizontally on its side, skull and torso low with folded limbs and the full tail resting; intact body, no death explosion.",
+          "reviewStatus": "visually-consistent-with-project-plate",
+          "canonExact": false
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "status": "four-atlases-admitted-pixel-and-native-checks-separate",
+    "measuredDataModule": "src/xeno-trials-sprite-atlas-data-v189.js",
+    "contractModule": "src/xeno-trials-sprite-atlas-v189.js",
+    "pixelAndPhaseTest": "scripts/verify-xeno-trials-sprite-atlas-v189.mjs",
+    "scope": "Atlas measurements and asset byte integrity; native gameplay and published release checks belong to the release owner.",
+    "measurementReceipt": {
+      "filename": "combat-measured-partial.json",
+      "storedOutsideRepository": true,
+      "sha256": "42503f000324121308c733ae8e1a48edc0353be58778344ab5a84309e942e569",
+      "scope": "All four combat atlases: exact forty variable rectangles, silhouette bounds, opaque support samples and anatomy-based roots."
+    },
+    "visualReview": {
+      "wholeSheets": "All forty poses reviewed against the four fan-made project plates; intact primary anatomical signatures and side-lying KO intent checked.",
+      "ravagerFourBackgroundReview": {
+        "filename": "ravager-four-background-review-v189.png",
+        "storedOutsideRepository": true,
+        "backgrounds": [
+          "black",
+          "gray",
+          "white",
+          "checkerboard"
+        ],
+        "frames": [
+          "idle",
+          "attack-impact",
+          "ko-ground"
+        ],
+        "observation": "Opaque clean contours stay readable across all four backgrounds, with full scythes/tail and a prone KO at the same per-identity scale. No conspicuous diffuse halo at native size. The stronger highlight contrast remains acknowledged."
+      }
+    }
+  }
+}

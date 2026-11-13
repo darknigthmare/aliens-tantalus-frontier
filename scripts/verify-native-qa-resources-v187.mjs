@@ -85,7 +85,7 @@ test('V187 audit and documentation stay source-only and the new audit test enter
   const relay = read('scripts/audit-native-qa-resources-v187.mjs').toString();
   assert.match(relay, /from '\.\/audit-xeno-trials-completion-v186\.mjs'/);
   assert.match(read('scripts/audit-xeno-trials-completion-v186.mjs').toString(), /from '\.\/audit-xeno-stage-operations-v188\.mjs'/);
-  const terminal = read('scripts/audit-xeno-stage-operations-v188.mjs').toString();
+  const terminal = read('scripts/audit-xeno-animation-audio-v189.mjs').toString();
   assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(terminal), false);
   assert.equal(Object.hasOwn(NATIVE_QA_RESOURCES_SUCCESSORS_V187, 'scripts/audit-native-qa-resources-v187.mjs'), false);
   assert.equal(Object.keys(NATIVE_QA_RESOURCES_SUCCESSORS_V187).some(path => path.startsWith('src/')), false);

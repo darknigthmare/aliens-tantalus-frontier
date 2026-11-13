@@ -81,7 +81,9 @@
     "test:tantalus:batch100:v168": "node --test scripts/verify-tantalus-batch100-v168.mjs scripts/verify-dialogue-portraits-v168.mjs scripts/verify-hub-backgrounds-v168.mjs",
     "test:open:v177": "node --test scripts/verify-weapon-conservation-v177.mjs scripts/verify-hub-armory-layering-v177.mjs scripts/verify-tantalus-enrichment-v177.mjs scripts/verify-capture-observation-v177.mjs scripts/verify-npc-lift-queue-v177.mjs scripts/verify-weapon-feed-admission-v193.mjs",
     "test:trials:operations:v188": "node --test scripts/verify-xeno-stage-operations-audit-v188.mjs scripts/verify-xeno-trials-operations-v188.mjs scripts/verify-xeno-trials-stage-hazards-v188.mjs scripts/verify-xeno-trials-runtime-operations-v188.mjs scripts/verify-xeno-trials-sprite-atlas-v188.mjs scripts/verify-xeno-trials-operation-presentation-v188.mjs scripts/verify-xeno-trials-operation-i18n-v188.mjs scripts/verify-xeno-trials-operations-engine-v188.mjs",
-    "qa:trials:operations:v188": "python3 scripts/qa-xeno-trials-operations-v188.py"
+    "qa:trials:operations:v188": "python3 scripts/qa-xeno-trials-operations-v188.py",
+    "test:trials:animation:v189": "node --test scripts/verify-xeno-animation-audio-audit-v189.mjs scripts/verify-xeno-trials-sprite-atlas-v189.mjs scripts/verify-xeno-trials-audio-v189.mjs scripts/verify-xeno-trials-animation-coverage-v189.mjs scripts/verify-xeno-trials-animation-audio-i18n-v189.mjs scripts/verify-xeno-trials-runtime-animation-audio-v189.mjs scripts/verify-xeno-trials-animation-ui-v189.mjs",
+    "qa:trials:animation:v189": "python3 scripts/qa-xeno-trials-animation-audio-v189.py"
   },
   "engines": {
     "node": ">=22"

@@ -12,6 +12,7 @@ import { publicReleasePathAdmissionV121, verifyPublicAdmissionsV121 } from './pu
 import { publicReleasePathAdmissionV122, verifyPublicAdmissionsV122 } from './public-release-admissions-v122.mjs';
 import { publicReleasePathAdmissionV123, verifyPublicAdmissionsV123 } from './public-release-admissions-v123.mjs';
 import { publicCostumePathAdmissionV165, verifyPublicCostumeAdmissionsV165 } from './public-costume-admissions-v165.mjs';
+import { publicXenoSpritePathAdmissionV189, verifyXenoSpriteAdmissionsV189 } from './public-xeno-sprite-admissions-v189.mjs';
 import { publicXenoSpritePathAdmissionV188, verifyXenoSpriteAdmissionsV188 } from './public-xeno-sprite-admissions-v188.mjs';
 import { publicCampaignArtPathAdmissionV180, verifyCampaignArtAdmissionsV180 } from './public-campaign-art-admissions-v180.mjs';
 
@@ -27,6 +28,17 @@ const ROOT_FILES = new Set([
   'xeno-trials-v96.css', 'xeno-trials-fullscreen-v119.css', 'user-reference-library-v100.css', 'specimen-bench-v106.css'
 ]);
 const SCRIPT_FILES = new Set([
+  'public-xeno-sprite-admissions-v189.mjs',
+  'audit-xeno-animation-audio-v189.mjs',
+  'verify-xeno-animation-audio-audit-v189.mjs',
+  'verify-xeno-trials-sprite-atlas-v189.mjs',
+  'verify-xeno-trials-audio-v189.mjs',
+  'verify-xeno-trials-animation-coverage-v189.mjs',
+  'verify-xeno-trials-animation-audio-i18n-v189.mjs',
+  'verify-xeno-trials-runtime-animation-audio-v189.mjs',
+  'verify-xeno-trials-animation-ui-v189.mjs',
+  'qa-xeno-trials-animation-audio-v189.py',
+
   'public-xeno-sprite-admissions-v188.mjs',
   'audit-xeno-stage-operations-v188.mjs',
   'verify-xeno-stage-operations-audit-v188.mjs',
@@ -271,6 +283,18 @@ SCRIPT_FILES.add('verify-hub-armory-v169.mjs');
 SCRIPT_FILES.add('verify-i18n-v185.mjs');
 // Exact V179 tooling stays source-only, independently of older script policy.
 const V179_SOURCE_ONLY_SCRIPTS = new Set(["scripts/sync-alien-base-v1.mjs", "scripts/export-alien-base-tantalus-v1.mjs", "scripts/alien-base-pr7-proposal-v1.mjs", "scripts/verify-alien-base-bridge-v1.mjs", "scripts/verify-alien-base-import-contract-v179.mjs", "scripts/verify-alien-base-pr7-proposal-v1.mjs", "scripts/verify-hub-door-bay-v178.mjs"]);
+const XENO_ANIMATION_SOURCE_ONLY_V189 = new Set([
+  'scripts/public-xeno-sprite-admissions-v189.mjs',
+  'scripts/audit-xeno-animation-audio-v189.mjs',
+  'scripts/verify-xeno-animation-audio-audit-v189.mjs',
+  'scripts/verify-xeno-trials-sprite-atlas-v189.mjs',
+  'scripts/verify-xeno-trials-audio-v189.mjs',
+  'scripts/verify-xeno-trials-animation-coverage-v189.mjs',
+  'scripts/verify-xeno-trials-animation-audio-i18n-v189.mjs',
+  'scripts/verify-xeno-trials-runtime-animation-audio-v189.mjs',
+  'scripts/verify-xeno-trials-animation-ui-v189.mjs',
+  'scripts/qa-xeno-trials-animation-audio-v189.py',
+]);
 const XENO_OPERATIONS_SOURCE_ONLY_V188 = new Set([
   'scripts/public-xeno-sprite-admissions-v188.mjs',
   'scripts/audit-xeno-stage-operations-v188.mjs',
@@ -394,6 +418,12 @@ const FORGE_TOOLING_V140 = new Set([
   'docs/forge/xeno-trials/sprite-production-v188.json',
   'docs/forge/xeno-trials/V188-STAGE-OPERATIONS.md',
   'docs/forge/xeno-trials/operations-completion-v188.json',
+  'docs/forge/xeno-trials/V189-ANIMATION-AUDIO.md',
+  'docs/forge/xeno-trials/animation-audio-completion-v189.json',
+  'docs/forge/xeno-trials/i18n-animation-audio-review-v189.json',
+  'docs/forge/xeno-trials/animation-coverage-v189.json',
+  'docs/forge/xeno-trials/sprite-production-v189.json',
+  'docs/forge/xeno-trials/sprite-motion-production-v189.json',
   'docs/forge/xeno-trials/V186-XENO-COMPLETION.md',
   'docs/forge/xeno-trials/completion-v186.json',
   'docs/forge/xeno-trials/V179-XENO-TRIALS-BATCH40.md',
@@ -622,12 +652,15 @@ export function isPublicDistributionPathV86(path, { directory = false, built = f
   if (V179_SOURCE_ONLY_SCRIPTS.has(path)) return !built;
   if (XENO_COMPLETION_SOURCE_ONLY_V186.has(path)) return !built;
   if (XENO_OPERATIONS_SOURCE_ONLY_V188.has(path)) return !built;
+  if (XENO_ANIMATION_SOURCE_ONLY_V189.has(path)) return !built;
   if (!built && FORGE_TOOLING_V140.has(path)) return true;
   if (FORGE_STYLES_V140.has(path)) return true;
   const segments = path.split('/');
   if (segments.some(part => !part || part === '.' || part === '..' || PRIVATE_SEGMENT.test(part))) return false;
   const costumeAdmissionV165 = publicCostumePathAdmissionV165(path, { directory });
   if (costumeAdmissionV165 !== null) return costumeAdmissionV165;
+  const xenoSpriteAdmissionV189 = publicXenoSpritePathAdmissionV189(path, { directory });
+  if (xenoSpriteAdmissionV189 !== null) return xenoSpriteAdmissionV189;
   const xenoSpriteAdmissionV188 = publicXenoSpritePathAdmissionV188(path, { directory });
   if (xenoSpriteAdmissionV188 !== null) return xenoSpriteAdmissionV188;
   const campaignAdmissionV180 = publicCampaignArtPathAdmissionV180(path, { directory });
@@ -702,6 +735,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   await verifyPublicCostumeAdmissionsV165(root, { strict: true, built });
   await verifyCampaignArtAdmissionsV180(root);
   await verifyXenoSpriteAdmissionsV188(root);
+  await verifyXenoSpriteAdmissionsV189(root);
   return { ok: true, version: RELEASE.version, files, assets, privateDocuments: 0 };
 }
 

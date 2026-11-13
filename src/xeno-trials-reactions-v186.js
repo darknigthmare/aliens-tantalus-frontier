@@ -107,10 +107,14 @@ const visualCopy=fighter=>({id:fighter.id,variant:fighter.variant,x:fighter.x,y:
 
 /** All history/ghosts are presentation-only and disappear on a new match,
  * rewound tick, new round or clear(). Call refresh before drawing the frame. */
-export function createXenoTrialsReactionObserverV186(){
+export function createXenoTrialsReactionObserverV186({canObserve=null}={}){
   let owner=null,lastTick=-1,round=null,lastKills=0,actors=new WeakMap(),seen=new Map(),ghosts=[];
   const clear=()=>{owner=null;lastTick=-1;round=null;lastKills=0;actors=new WeakMap();seen.clear();ghosts=[];};
   const key=fighter=>fighter.instanceIdV180||fighter.side;
+  // A renderer may admit an additional, decoded drawn atlas. This extends
+  // presentation history only; it never admits a V186 mesh for that identity.
+  const admitted=fighter=>Boolean(getXenoTrialsReactionProfileV186(fighter?.id)
+    ||typeof canObserve==='function'&&canObserve(fighter));
   function refresh(match){
     if(!validTick(match)){clear();return;}
     if(owner!==match||round!==match.round||match.tick<lastTick){clear();owner=match;round=match.round;lastKills=match.hordeV180?.totalKills||0;}
@@ -121,7 +125,7 @@ export function createXenoTrialsReactionObserverV186(){
     if(match.hordeV180&&['active','match-over'].includes(match.phase)&&remaining>0){
       for(const[id,old]of seen){
         if(remaining<=0)break;
-        if(!current.has(id)&&old.side==='opponent'&&getXenoTrialsReactionProfileV186(old.id)){
+        if(!current.has(id)&&old.side==='opponent'&&admitted(old)){
           ghosts.push({fighter:visualCopy(old),bornTick:match.tick});remaining--;
         }
       }
@@ -132,7 +136,7 @@ export function createXenoTrialsReactionObserverV186(){
   }
   function observe(match,fighter,options={}){
     refresh(match);
-    if(!validTick(match)||!getXenoTrialsReactionProfileV186(fighter?.id)||options.blocked)return null;
+    if(!validTick(match)||!admitted(fighter)||options.blocked)return null;
     const tick=match.tick,old=actors.get(fighter),record=old||{hp:fighter.hp,guard:false,stun:0,koTick:null,hurtTick:null,breakTick:null,guardTick:tick};
     if(old?.tick===tick)return old.cue;
     if(fighter.guard&&!record.guard)record.guardTick=tick;
