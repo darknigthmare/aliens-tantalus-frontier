@@ -1,3 +1,4 @@
+import { withHubEcho8LockerV188, echo8LockerNotesV188 } from './hub-echo8-locker-v188.js';
 import { detectReactiveTriggersV188, selectReactiveLinesV188 } from './reactive-lines-v188.js';
 import { applyAccessibilityV188, installKeyRemapV188, mountKeyBindingsUiV188, normalizeKeyBindingsV188, soundCaptionV188 } from './accessibility-v188.js';
 import { spareCrewMemberV188, normalizeCrewPermadeathV188, normalizeCustomDifficultyV188, normalizeOriginV188, CUSTOM_DIFFICULTY_BOUNDS_V188 } from './run-options-v188.js';
@@ -293,7 +294,7 @@ const NativeHubGame = [
   withHubCirculationV137, withHubRoomIdentityV137,
   withHubDestinationSignsV138, withHubNpcInterdeckRoutesV165, withHubNpcInterdeckPassageV165, withHubNpcStationRelaysV166, withHubLiftTransitV163
 ].reduce((Game, decorate) => decorate(Game), HubGameV88);
-const HubGame = withHubArmoryStorefrontV169(withHubMotionTrackerV160(withForgeDecorationV141(withForgeShipRuntimeV141(NativeHubGame))));
+const HubGame = withHubEcho8LockerV188(withHubArmoryStorefrontV169(withHubMotionTrackerV160(withForgeDecorationV141(withForgeShipRuntimeV141(NativeHubGame)))));
 const hubEngine = new HubGame(byId('hub-canvas'), {
   audio,
   onAction: handleHubAction,
@@ -3459,6 +3460,12 @@ function handleShipAnimalRoomActionV87(interaction) {
 
 function handleHubAction(interaction) {
   if (!interaction?.action) return;
+  // V188 ship-cryo: the sealed ECHO-8 locker shows what the campaign has established.
+  if (interaction.action === 'story:echo8-locker') {
+    const notes = echo8LockerNotesV188(saveSystem.data, document.documentElement.lang);
+    toast(notes.map(note => note.text).join(' · '));
+    return true;
+  }
   if (interaction.action.startsWith('port:')) return handlePortMeridienV90(interaction);
   if (standaloneContext === 'forge-playtest') {
     const advanced = interaction.action === 'editor:project-complete' && forgeCampaignUIV161?.completeNative(hubEngine);

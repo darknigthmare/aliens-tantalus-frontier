@@ -99,3 +99,24 @@ test('seen cinematics persist additively and app hooks follow the prologue order
   assert.match(app, /if \(resumeMission\) engine\.togglePause\(\);/);
   assert.match(read('index.html'), /id="setting-cinematics-v188"/); assert.match(read('sw.js'), /'\/src\/story-cinematics-v188\.js'/);
 });
+
+import { ECHO8_LOCKER_V188, echo8LockerNotesV188, withHubEcho8LockerV188 } from '../src/hub-echo8-locker-v188.js';
+
+test('the ECHO-8 locker reveals what the campaign has established, in both languages, and only by contact', () => {
+  const save = createDefaultSave();
+  assert.deepEqual(echo8LockerNotesV188(save).map(note => note.id), ['sealed']);
+  save.storyCampaignV188.cinematicsSeen.push('cin-02', 'cin-20-rook');
+  assert.deepEqual(echo8LockerNotesV188(save, 'en').map(note => note.id), ['sealed', 'quarantine', 'signature']);
+  assert.match(echo8LockerNotesV188(save, 'en')[0].text, /thirty-one hours/);
+  assert.equal(ECHO8_LOCKER_V188.roomId, 'cryo-bay'); assert.ok(ECHO8_LOCKER_V188.x >= 3840 && ECHO8_LOCKER_V188.x + ECHO8_LOCKER_V188.w <= 5120, 'inside the cryo bay');
+  class Base { interact() { return 'base'; } drawInteractionProp() { return 'drawn'; } }
+  const Hub = withHubEcho8LockerV188(Base), hub = new Hub(); const actions = [];
+  Object.assign(hub, { running: true, onAction: a => actions.push(a), state: { deck: 0 }, currentRoom: () => ({ id: 'cryo-bay' }),
+    player: { alive: true, x: ECHO8_LOCKER_V188.x, w: 40 } });
+  hub.interact(); assert.deepEqual(actions, [{ action: 'story:echo8-locker', roomId: 'cryo-bay' }]);
+  hub.player.x += 400; assert.equal(hub.interact(), 'base', 'away from the locker, the normal interaction runs');
+  hub.onboardingActiveV84 = () => true; hub.onboardingV84 = { phase: 'wake' }; hub.player.x = ECHO8_LOCKER_V188.x;
+  assert.equal(hub.interact(), 'base', 'no locker contact before the wake-up');
+  const app = read('src/app.js');
+  assert.match(app, /const HubGame = withHubEcho8LockerV188\(/); assert.match(app, /interaction\.action === 'story:echo8-locker'/);
+});

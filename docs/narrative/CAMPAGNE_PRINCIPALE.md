@@ -4363,5 +4363,5 @@ Après QZ-18, la table tactique recommande l'Acte I (★) tant qu'il n'est pas t
 **Toujours à faire :**
 
 - L'art définitif des plans (§29.1). Les décors actuels sont des placeholders en primitives Canvas.
-- L'interaction physique avec le casier `ECHO-8` dans la baie cryo (quête `ship-cryo`).
+- ~~L'interaction physique avec le casier `ECHO-8` dans la baie cryo~~ : **fait (V188)**. Le casier scellé est dessiné en primitives dans la baie cryo ; E affiche les faits établis jusque-là. Ces trois notes sont **[PROPOSÉ]** : sceau et abordage, puis quarantaine (après CIN-02), puis signature d'Asphodèle (après « La signature »). Le reste du fil `ship-cryo` (effets de Kessler, étiquettes de l'épilogue) dépend de la station.
 - Une voix et un geste de pointage sur la carte (CIN-02).
