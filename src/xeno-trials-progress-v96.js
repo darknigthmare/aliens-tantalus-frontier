@@ -2,6 +2,8 @@ import { XENO_TRIALS_FIGHTERS_V96, XENO_TRIALS_FACTIONS_V96, XENO_TRIALS_STAGES_
 import { createXenoTrialsModesProgressV119, normalizeXenoTrialsModesProgressV119, normalizeXenoTrialsRulesV119,
   resolveXenoTrialsActivityV119, settleXenoTrialsActivityV119 } from './xeno-trials-modes-v119.js';
 import { getXenoTrialsHordeProtocolV180 } from './xeno-trials-horde-v180.js';
+import { createXenoTrialsHordeCheckpointV186, normalizeXenoTrialsHordeCheckpointV186,
+  isXenoTrialsCheckpointForwardV186 } from './xeno-trials-horde-checkpoint-v186.js';
 
 const fighterIds = new Set(XENO_TRIALS_FIGHTERS_V96.map(f => f.id));
 const factionIds = new Set(XENO_TRIALS_FACTIONS_V96.map(f => f.id));
@@ -78,8 +80,34 @@ export function normalizeXenoTrialsProgressV96(value) {
       base.pending.config.rulesV119 = normalizeXenoTrialsRulesV119(activity.rules);
       if (base.pending.config.rulesV119.timeLimitSeconds) base.pending.config.roundSeconds = base.pending.config.rulesV119.timeLimitSeconds;
     }
+    if (base.pending && ticket.checkpointV186) {
+      const checkpoint = normalizeXenoTrialsHordeCheckpointV186(ticket.checkpointV186, base.pending.config);
+      if (checkpoint) base.pending.checkpointV186 = checkpoint;
+    }
   }
   return base;
+}
+
+/** A save-owner guarded caller supplies a live snapshot. The transaction never
+ * creates a ticket, grants a reward, changes economy or consumes a result. */
+export function checkpointXenoTrialsV186(value, snapshot) {
+  const state = normalizeXenoTrialsProgressV96(value), ticket = state.pending;
+  if (!ticket || ticket.config.activityV119?.branch !== 'horde')
+    return { applied: false, state, reason: 'checkpoint-ticket-unavailable' };
+  const checkpoint = createXenoTrialsHordeCheckpointV186(snapshot, ticket.config);
+  if (!checkpoint) return { applied: false, state, reason: 'invalid-horde-checkpoint' };
+  if (!isXenoTrialsCheckpointForwardV186(ticket.checkpointV186, checkpoint))
+    return { applied: false, state, reason: 'stale-horde-checkpoint' };
+  ticket.checkpointV186 = checkpoint;
+  return { applied: true, state };
+}
+
+/** Explicit restart keeps the existing ticket/seed and gives no refund or gain. */
+export function clearXenoTrialsCheckpointV186(value) {
+  const state = normalizeXenoTrialsProgressV96(value);
+  if (!state.pending?.checkpointV186) return { applied: false, state, reason: 'checkpoint-unavailable' };
+  delete state.pending.checkpointV186;
+  return { applied: true, state };
 }
 
 export function getXenoTrialsUnlockCostV96(id) {
@@ -148,7 +176,28 @@ function validHordeResultV180(config, result) {
     || receipt.totalEnemies !== protocol.totalEnemies || result.rounds !== 1
     || !record(result.wins) || !['player', 'opponent'].includes(result.winner)
     || !Number.isInteger(receipt.wavesCleared) || receipt.wavesCleared < 0 || receipt.wavesCleared > protocol.waves.length
-    || !Number.isInteger(receipt.kills) || receipt.kills < 0 || receipt.kills > protocol.totalEnemies) return false;
+    || !Number.isInteger(receipt.kills) || receipt.kills < 0 || receipt.kills > protocol.totalEnemies
+    || result.durationTicks > (protocol.roundSeconds + 5) * 120) return false;
+  const boss = protocol.bossFinaleV186, bossReceipt = receipt.bossFinaleV186;
+  if (!boss && bossReceipt !== undefined) return false;
+  if (boss) {
+    if (!record(bossReceipt) || bossReceipt.fighterId !== boss.fighterId || bossReceipt.maxHp !== boss.hp
+      || bossReceipt.wave !== boss.wave || typeof bossReceipt.defeated !== 'boolean'
+      || !['pending', 'incoming', 'active', 'defeated'].includes(bossReceipt.phase)
+      || !Number.isInteger(bossReceipt.hp) || bossReceipt.hp < 0 || bossReceipt.hp > boss.hp) return false;
+    const beforeBoss = protocol.waves.slice(0, -1).reduce((sum, wave) => sum + wave.total, 0);
+    if (bossReceipt.defeated) {
+      if (bossReceipt.phase !== 'defeated' || bossReceipt.hp !== 0 || bossReceipt.instanceId !== null
+        || receipt.kills <= beforeBoss || receipt.wavesCleared < boss.wave - 1) return false;
+    } else if (bossReceipt.phase === 'defeated' || bossReceipt.hp <= 0) return false;
+    else if (['pending', 'incoming'].includes(bossReceipt.phase)) {
+      if (bossReceipt.hp !== boss.hp || bossReceipt.instanceId !== null || receipt.kills > beforeBoss
+        || receipt.wavesCleared >= boss.wave
+        || (bossReceipt.phase === 'pending' ? receipt.wavesCleared >= boss.wave - 1 : receipt.wavesCleared < boss.wave - 1)) return false;
+    } else if (bossReceipt.instanceId !== `horde-${beforeBoss + 1}` || receipt.wavesCleared !== boss.wave - 1
+      || receipt.kills < beforeBoss) return false;
+    if (result.winner === 'player' && (!bossReceipt.defeated || bossReceipt.phase !== 'defeated')) return false;
+  }
   if (result.winner === 'player') return result.reason === 'horde-cleared'
     && receipt.wavesCleared === protocol.waves.length && receipt.kills === protocol.totalEnemies
     && result.wins.player === 1 && result.wins.opponent === 0;
@@ -158,6 +207,11 @@ function validHordeResultV180(config, result) {
 /** Consume the saved ticket once, only for a finished matching engine result. */
 export function settleXenoTrialsV96(value, result) {
   const state = normalizeXenoTrialsProgressV96(value), ticket = state.pending;
+  const checkpoint = ticket?.checkpointV186?.snapshot;
+  const checkpointMatches = !checkpoint || result && result.durationTicks >= checkpoint.tick
+    && result.hordeV180?.kills >= checkpoint.hordeV180.totalKills
+    && result.hordeV180?.wavesCleared >= checkpoint.hordeV180.wavesCleared
+    && Object.entries(checkpoint.fighters[0].stats).every(([key, amount]) => (result.playerStats?.[key] || 0) >= amount);
   const horde = ticket?.config.activityV119?.branch === 'horde';
   const outcomeValid = horde ? result && validHordeResultV180(ticket.config, result)
     : result && !result.hordeV180 && Number.isInteger(result.rounds) && result.rounds >= 2 && result.rounds <= 5
@@ -172,7 +226,7 @@ export function settleXenoTrialsV96(value, result) {
     && record(result?.rulesV119) && JSON.stringify(normalizeXenoTrialsRulesV119(result.rulesV119)) === JSON.stringify(ticket.config.rulesV119)
     && record(result?.playerStats) && ['hits', 'damage', 'blocks', 'specials'].every(k => Number.isInteger(result.playerStats[k]) && result.playerStats[k] >= 0);
   if (!ticket || result?.completed !== true || result.matchId !== ticket.matchId
-    || !modeMatches
+    || !modeMatches || !checkpointMatches
     || !['player', 'opponent', 'draw'].includes(result.winner)
     || !['playerId', 'opponentId', 'factionId', 'stageId', 'difficulty', 'seed'].every(k => result[k] === ticket.config[k])
     || !['player', 'opponent'].every(side => result[`${side}Variant`] === (ticket.config[`${side}Id`] === 'arachnoid' ? ticket.config[`${side}Variant`] : null))

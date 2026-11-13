@@ -4,7 +4,7 @@ import { XenoTrialsUiV96 } from '../src/xeno-trials-ui-v96.js';
 import { createXenoTrialsMatchV96 } from '../src/xeno-trials-engine-v96.js';
 import { createXenoTrialsProgressV96 } from '../src/xeno-trials-progress-v96.js';
 import { resolveXenoTrialsActivityV119 } from '../src/xeno-trials-modes-v119.js';
-import { XENO_TRIALS_HORDE_PROTOCOLS_V180 as protocols } from '../src/xeno-trials-horde-v180.js';
+import { XENO_TRIALS_HORDE_PROTOCOLS_V180 as protocols, XENO_TRIALS_HORDE_PROTOCOLS_V186 as currentProtocols } from '../src/xeno-trials-horde-v180.js';
 import { getXenoTrialsHordeBriefingV180, getXenoTrialsHordeViewV180 } from '../src/xeno-trials-horde-ui-v180.js';
 
 // DOM doubles exercise the production UI methods. Snapshot fixtures below test
@@ -59,11 +59,13 @@ test('all forty horde dossiers expose their actual low health, population and co
   assert.equal(getXenoTrialsHordeBriefingV180({ branch: 'challenges', id: 'xte179-incoming-1' }), null);
 });
 
-test('the horde program opens a separate forty-entry board and keeps its native activity identity', () => {
+test('the horde program opens a bounded page of its eighty entries and keeps its native activity identity', () => {
   const h = host();
   assert.equal(h.ui.chooseBranchV119('horde'), true);
   h.ui.renderActivitiesV119(h.ui.state());
-  assert.equal((h.element('activity-board').innerHTML.match(/data-xt-horde="true"/g) || []).length, 40);
+  assert.equal(currentProtocols.length, 80);
+  assert.equal((h.element('activity-board').innerHTML.match(/data-xt-horde="true"/g) || []).length, 12);
+  assert.match(h.element('activity-count').textContent, /^80 PROTOCOLES/u);
   assert.equal((h.element('activity-board').innerHTML.match(/data-xt-event=/g) || []).length, 0);
   assert.ok(h.element('activity-count').textContent.includes('CONTACTS SIMULTANÉS'));
   assert.equal(h.ui.chooseActivityV119(protocols[0].id), true);

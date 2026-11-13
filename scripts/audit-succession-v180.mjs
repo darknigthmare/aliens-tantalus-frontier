@@ -3,6 +3,7 @@
  * Byte identity does not imply artistic fidelity, native QA, CI or publication.
  */
 import assert from 'node:assert/strict';
+import { reviewedCompletionDigestV186 } from './audit-xeno-trials-completion-v186.mjs';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 const freeze = value => { if (value && typeof value === 'object') { Object.values(value).forEach(freeze); Object.freeze(value); } return value; };
@@ -128,16 +129,16 @@ export function verifyFollowupV180(readSource = readRepository) {
   for (const map of successorMaps) for (const [path, receipt] of Object.entries(map)) {
     assert.ok(path === 'sw.js' || /^(?:src\/[a-zA-Z0-9._-]+\.(?:js|css)|[a-zA-Z0-9._-]+\.css|scripts\/[a-zA-Z0-9._-]+\.mjs)$/.test(path), 'Invalid V180 successor path: ' + path);
     allPaths.push(path);
-    assert.equal(sha(readSource(path)), reviewedDigestV180(path, receipt.previousSha256), 'Unreviewed V180 successor bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedCompletionDigestV186(path, reviewedDigestV180(path, receipt.previousSha256)), 'Unreviewed V180 successor bytes: ' + path);
   }
   for (const map of [V180_NEW_RUNTIME_SOURCES, V180_NEW_VERIFIERS]) for (const [path, digest] of Object.entries(map)) {
     assert.match(path, /^(?:src\/[a-zA-Z0-9._-]+\.js|scripts\/(?:verify-|public-campaign-art-admissions-)[a-zA-Z0-9._-]+\.mjs)$/);
     allPaths.push(path);
     assert.ok(validHash(digest), 'Invalid V180 added-source digest: ' + path);
-    assert.equal(sha(readSource(path)), digest, 'Unreviewed V180 added-source bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedCompletionDigestV186(path, digest), 'Unreviewed V180 added-source bytes: ' + path);
   }
   assert.equal(new Set(allPaths).size, allPaths.length, 'Duplicate V180 source admission');
-  assert.equal(sha(readSource('docs/forge/xeno-trials/progress-v163.json')), V180_PROGRESS_V163_SHA256, 'Historical V163/V179 progress changed');
+  assert.equal(sha(readSource('docs/forge/xeno-trials/progress-v163.json')), reviewedCompletionDigestV186('docs/forge/xeno-trials/progress-v163.json', V180_PROGRESS_V163_SHA256), 'Historical V163/V179 progress changed');
   return Object.freeze({ baselineCommit: V180_BASELINE_COMMIT,
     runtimeSuccessors: Object.keys(V180_RUNTIME_SUCCESSORS).length,
     verifierSuccessors: Object.keys(V180_VERIFIER_SUCCESSORS).length,

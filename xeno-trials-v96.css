@@ -141,3 +141,22 @@
   .xt-horde-link{font-size:7px}.xt-horde-phase,.xt-horde-total{font-size:8px}.xt-horde-telemetry{gap:3px}
 }
 @media(prefers-reduced-motion:reduce){#xeno-trials-v96 .xt-branch-v119{transition:none;transform:none}}
+
+/* V186 bounded program browser, readable device hints and durable horde return. */
+.xt-program-tools-v186{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:18px 0}
+.xt-program-tools-v186 label{display:grid;gap:6px;font-size:.85rem;color:#b9ccd0;min-width:190px}
+.xt-program-tools-v186 select{min-height:44px;background:#101b20;color:#e2eceb;border:1px solid #41595b;padding:8px}
+.xt-program-tools-v186 nav{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font:12px monospace;color:#d1e2df}
+.xt-program-tools-v186 .button{min-height:44px}
+.xt-input-hint-v186{font:12px/1.7 monospace;color:#d4e4de;border-left:2px solid #90b9aa;padding:10px 14px;background:#0b171c;margin:12px 0}
+.xt-checkpoint-v186:empty{display:none}
+.xt-checkpoint-v186{font:12px/1.6 monospace;color:#c9dcae;padding:10px 14px;border:1px solid #5f7149;background:#142019}
+.xt-boss-order-v186{color:#e2b694;border-left:2px solid #b98b65;padding-left:10px}
+.xt-boss-hud-v186{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px 16px;margin:8px 0;padding:12px 16px;border:1px solid #9d7659;background:#211b18;color:#f0d2b7;font:12px/1.5 monospace}
+.xt-boss-hud-v186[hidden]{display:none}
+.xt-boss-hud-v186,.xt-hud-meta-v186{grid-column:1/-1;min-width:0}
+.xt-hud-meta-v186{display:flex;align-items:center;justify-content:space-between;gap:6px 14px;flex-wrap:wrap;border-top:1px solid #4b5b43;padding-top:6px;font:9px/1.5 monospace;color:#bacbb1}
+.xt-hud-meta-v186 .xt-input-device-v186,.xt-hud-meta-v186 .xt-checkpoint-v186{margin:0;padding:0;border:0;background:none;font:inherit;color:inherit}
+.xt-hud-meta-v186 .button{pointer-events:auto;min-height:44px}
+.xt-boss-hud-v186 progress{grid-column:1/3;width:100%;height:10px;accent-color:#c99263}
+@media(max-width:680px){.xt-program-tools-v186{align-items:stretch}.xt-program-tools-v186 nav{width:100%;justify-content:space-between}.xt-program-tools-v186 label{width:100%}.xt-boss-hud-v186{grid-template-columns:1fr auto}.xt-boss-hud-v186 strong{grid-column:1/3}.xt-boss-hud-v186 progress{grid-column:1}.xt-input-hint-v186{font-size:11px}}

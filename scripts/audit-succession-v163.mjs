@@ -1,5 +1,6 @@
 /** Byte-anchored V162 -> V163 continuation; historical documents stay immutable. */
 import assert from 'node:assert/strict';
+import { completionRuntimeSourcesV186, reviewedCompletionDigestV186, verifyCompletionV186 } from './audit-xeno-trials-completion-v186.mjs';
 import { reviewedOriginalNamesDigestV183 } from './audit-original-names-v183.mjs';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
@@ -679,7 +680,7 @@ export function verifyFollowupV179(current, readSource = readRepository) {
 }
 
 export function reviewedCurrentDigestV180(path, endpointMainM) {
-  return reviewedDigestV180(path, reviewedCurrentDigestV179(path, endpointMainM));
+  return reviewedCompletionDigestV186(path, reviewedDigestV180(path, reviewedDigestV179(path, reviewedLiveDigestV178(path, endpointMainM))));
 }
 
 export function verifyFollowupV178(current, readSource = readRepository) {
@@ -739,12 +740,12 @@ export function verifyFollowupV178(current, readSource = readRepository) {
 
 function sourceDigestV177(path, previous) {
   const receipt = V177_SOURCE_SUCCESSORS[path];
-  if (!receipt) return reviewedCurrentDigestV180(path, previous);
+  if (!receipt) return reviewedCurrentDigestV179(path, previous);
   assert.deepEqual(keys(receipt), ['currentSha256', 'previousSha256']);
   assert.equal(receipt.previousSha256, previous, 'Broken V176-to-V177 source chain: ' + path);
   assert.ok(validHash(receipt.currentSha256), 'Invalid V177 source digest: ' + path);
   assert.notEqual(receipt.currentSha256, previous, 'A V177 source successor must identify changed bytes: ' + path);
-  return reviewedCurrentDigestV180(path, receipt.currentSha256);
+  return reviewedCurrentDigestV179(path, receipt.currentSha256);
 }
 
 /** One verifier resolver serves the cumulative guard and the source auditor.
@@ -765,7 +766,7 @@ export function verifyReviewedVerifierV177(path, original, readSource = readRepo
     assert.notEqual(receipt.currentSha256, expected, 'A verifier successor must identify changed bytes: ' + path);
     expected = receipt.currentSha256; version = id;
   }
-  const live = reviewedCurrentDigestV180(path, expected);
+  const live = reviewedCurrentDigestV179(path, expected);
   if (live !== expected) version = 'V178';
   assert.equal(sha(readSource(path)), live, 'Unreviewed ' + version + ' verifier successor: ' + path);
   return live;
@@ -807,7 +808,7 @@ export function verifyOpenWorkstreamsV177(current, readSource = readRepository) 
     assert.ok(stream.verifiers.length > 0);
     for (const verifier of stream.verifiers) {
       assert.match(verifier, /^scripts\/verify-[a-zA-Z0-9._-]+\.mjs$/);
-      assert.equal(sha(readSource(verifier)), reviewedCurrentDigestV180(verifier, followup.verifierHashes[verifier]), 'Unreviewed V177 behavioral verifier: ' + verifier);
+      assert.equal(sha(readSource(verifier)), reviewedCurrentDigestV179(verifier, followup.verifierHashes[verifier]), 'Unreviewed V177 behavioral verifier: ' + verifier);
     }
   }
   assert.deepEqual(followup.sourceChanges.map(row => row.path), Object.keys(V177_RUNTIME_PREDECESSORS).sort(),
@@ -817,7 +818,7 @@ export function verifyOpenWorkstreamsV177(current, readSource = readRepository) 
       'Unregistered V177 runtime source: ' + row.path);
     assert.equal(row.previousSha256, V177_RUNTIME_PREDECESSORS[row.path], 'Unreviewed V177 runtime predecessor: ' + row.path);
     assert.ok(validHash(row.currentSha256)); assert.notEqual(row.previousSha256, row.currentSha256);
-    assert.equal(sha(readSource(row.path)), reviewedCurrentDigestV180(row.path, row.currentSha256), 'Unreviewed V177 runtime bytes: ' + row.path);
+    assert.equal(sha(readSource(row.path)), reviewedCurrentDigestV179(row.path, row.currentSha256), 'Unreviewed V177 runtime bytes: ' + row.path);
     assert.ok(row.reason.length >= 60 && row.verifiers.length > 0);
   }
   const previousQaDrivers = {
@@ -833,10 +834,10 @@ export function verifyOpenWorkstreamsV177(current, readSource = readRepository) 
     assert.equal(row.state, 'PILOT_SOURCE_REVIEWED_NO_RUN_RESULT_INFERRED');
     assert.equal(row.previousSha256, previousQaDrivers[row.path], 'Unreviewed V177 QA predecessor: ' + row.path);
     assert.ok(validHash(row.currentSha256)); assert.notEqual(row.previousSha256, row.currentSha256);
-    assert.equal(sha(readSource(row.path)), reviewedCurrentDigestV180(row.path, row.currentSha256), 'Unreviewed V177 QA pilot bytes: ' + row.path);
+    assert.equal(sha(readSource(row.path)), reviewedCurrentDigestV179(row.path, row.currentSha256), 'Unreviewed V177 QA pilot bytes: ' + row.path);
     assert.ok(row.reason.length >= 60 && row.verifiers.length > 0);
     for (const verifier of row.verifiers)
-      assert.equal(sha(readSource(verifier)), reviewedCurrentDigestV180(verifier, followup.verifierHashes[verifier]), 'Unreviewed V177 QA behavioral verifier: ' + verifier);
+      assert.equal(sha(readSource(verifier)), reviewedCurrentDigestV179(verifier, followup.verifierHashes[verifier]), 'Unreviewed V177 QA behavioral verifier: ' + verifier);
   }
   const toolPredecessors = {
     'scripts/install-costume-art-v175.mjs': '9b6ef01e417485277aa83a6db17a37bb9a34609c1a97c27aa38d0338aaac4705',
@@ -852,7 +853,7 @@ export function verifyOpenWorkstreamsV177(current, readSource = readRepository) 
     assert.equal(sha(readSource(row.path)), receipt.currentSha256, 'Unreviewed V177 tool bytes: ' + row.path);
     assert.ok(row.reason.length >= 60 && row.verifiers.length > 0);
     for (const verifier of row.verifiers)
-      assert.equal(sha(readSource(verifier)), reviewedCurrentDigestV180(verifier, followup.verifierHashes[verifier]), 'Unreviewed V177 tool verifier: ' + verifier);
+      assert.equal(sha(readSource(verifier)), reviewedCurrentDigestV179(verifier, followup.verifierHashes[verifier]), 'Unreviewed V177 tool verifier: ' + verifier);
   }
   const arsenal = followup.arsenalTracking;
   assert.equal(arsenal?.jsonPath, 'docs/arsenal/progress-v177.json');
@@ -1105,7 +1106,7 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
               : armory ? 'Unreviewed V169 runtime successor: ' + path
                 : 'Unreviewed V167 runtime successor: ' + path);
     } else {
-      assert.equal(sha(readSource(path)), reviewedCurrentDigestV180(path,expected), 'Current V163 source changed: ' + path);
+      assert.equal(sha(readSource(path)), reviewedCurrentDigestV179(path,expected), 'Current V163 source changed: ' + path);
     }
   }
   // New V167 modules are not retroactively called historical V163 sources.
@@ -1191,6 +1192,7 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   verifyFollowupV178(current, readSource);
   verifyTrialsBatchV179(readSource);
   verifyFollowupV180(readSource);
+  verifyCompletionV186(readSource);
   return Object.freeze({ inherited: 87, changed: changed.length, unchanged: 87 - changed.length,
     added: added.length, current: keys(after).length });
 }
@@ -1208,7 +1210,7 @@ export function resolveAuditSourcesV163(previous, readSource = readRepository, {
   verifyAuditSuccessionV163(previous, current, readSource);
   // Never mutate V163 archival hashes. An explicit effective read exports the
   // exact, previously validated successor set to legacy audit callers.
-  return effective ? integratedRuntimeSourcesV182({ ...current.runtimeSourceSha256,
+  return effective ? completionRuntimeSourcesV186(integratedRuntimeSourcesV182({ ...current.runtimeSourceSha256,
     ...Object.fromEntries(Object.entries(ARSENAL_V167_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARMORY_V169_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARSENAL_V170_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
@@ -1223,11 +1225,7 @@ export function resolveAuditSourcesV163(previous, readSource = readRepository, {
       .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(V178_RUNTIME_SUCCESSORS).map(([path,receipt]) => [path,receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(V179_SOURCE_GROUPS.runtimeChanges).map(([path,receipt])=>[path,receipt.currentSha256])),
-    ...Object.fromEntries(Object.entries(V179_SOURCE_GROUPS.newRuntimeSources).map(([path,receipt])=>[path,receipt.currentSha256])),
-    ...Object.fromEntries(Object.entries(V179_RUNTIME_SUCCESSORS).map(([path,receipt]) => [path,receipt.currentSha256])),
-    ...V179_NEW_RUNTIME_SOURCES,
-    ...Object.fromEntries(Object.entries(V180_RUNTIME_SUCCESSORS).map(([path,receipt]) => [path,receipt.currentSha256])),
-    ...V180_NEW_RUNTIME_SOURCES })
+    ...Object.fromEntries(Object.entries(V179_SOURCE_GROUPS.newRuntimeSources).map(([path,receipt])=>[path,receipt.currentSha256])) }))
     : current.runtimeSourceSha256;
 }
 

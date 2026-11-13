@@ -1,6 +1,12 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-simultaneous-horde-v180';
+const CACHE = 'atf-v143-xeno-completion-v186';
 const SHELL = Object.freeze([
+  '/src/xeno-trials-combat-contract-v186.js',
+  '/src/xeno-trials-gamepad-v186.js',
+  '/src/xeno-trials-horde-bosses-v186.js',
+  '/src/xeno-trials-horde-checkpoint-v186.js',
+  '/src/xeno-trials-programs-v186.js',
+  '/src/xeno-trials-reactions-v186.js',
   '/src/alien-base-bridge-v1.js',
   '/src/alien-base-snapshot-v1.js',
   '/src/campaign-art-v180.js',

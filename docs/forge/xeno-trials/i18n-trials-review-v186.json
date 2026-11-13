@@ -1,0 +1,842 @@
+{
+  "format": "atf-i18n-review-v186",
+  "exact": [
+    {
+      "fr": "WEYLAND-YUTANI · DIVISION DES SYSTÈMES BIOLOGIQUES",
+      "en": "WEYLAND-YUTANI · BIOLOGICAL SYSTEMS DIVISION",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "QUITTER LE TERMINAL",
+      "en": "LEAVE TERMINAL",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "LIAISON TANTALUS ÉTABLIE",
+      "en": "TANTALUS LINK ESTABLISHED",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "ÉVALUATION COMPARATIVE / MIRE",
+      "en": "COMPARATIVE EVALUATION / MIRE",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "ACCÈS OPÉRATEUR",
+      "en": "OPERATOR ACCESS",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Simulation MIRE. Sélectionnez un programme, préparez votre spécimen puis engagez l’évaluation.",
+      "en": "MIRE simulation. Select a program, prepare your specimen, then begin the evaluation.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "SYSTÈME MIRE / PROGRAMME D’ÉVALUATION",
+      "en": "MIRE SYSTEM / EVALUATION PROGRAM",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "ÉTUDE COMPARATIVE DES ESPÈCES",
+      "en": "COMPARATIVE SPECIES STUDY",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Observez. Engagez. Survivez.",
+      "en": "Observe. Engage. Survive.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Chaque contact enrichit le dossier.",
+      "en": "Every contact adds to the dossier.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "SPÉCIMENS ADMIS",
+      "en": "ADMITTED SPECIMENS",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "ENVIRONNEMENTS",
+      "en": "ENVIRONMENTS",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "PROTOCOLES HORDE",
+      "en": "HORDE PROTOCOLS",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "OBSERVATION / 001",
+      "en": "OBSERVATION / 001",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "CONFINEMENT MIRE",
+      "en": "MIRE CONTAINMENT",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "XX121 / SUJET D’ÉTUDE",
+      "en": "XX121 / STUDY SUBJECT",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "CONTACT VISUEL",
+      "en": "VISUAL CONTACT",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "RÉPERTOIRE DES PROGRAMMES",
+      "en": "PROGRAM DIRECTORY",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "SÉLECTIONNEZ UNE LIGNE POUR CONTINUER",
+      "en": "SELECT AN ENTRY TO CONTINUE",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "MIRE / INTERFACE D’ÉVALUATION",
+      "en": "MIRE / EVALUATION INTERFACE",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "ÉVALUATION",
+      "en": "EVALUATION",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "OUVRIR LE PROGRAMME",
+      "en": "OPEN PROGRAM",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Type de protocole",
+      "en": "Protocol type",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Tous les protocoles",
+      "en": "All protocols",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Vagues standards",
+      "en": "Standard waves",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Finales avec boss",
+      "en": "Boss finales",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Pages des programmes",
+      "en": "Program pages",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "← PAGE PRÉCÉDENTE",
+      "en": "← PREVIOUS PAGE",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "PAGE SUIVANTE →",
+      "en": "NEXT PAGE →",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "RECOMMENCER DEPUIS LA PREMIÈRE VAGUE",
+      "en": "RESTART FROM THE FIRST WAVE",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "REPRISE CONSERVÉE",
+      "en": "CHECKPOINT SAVED",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Reprise non sauvegardée. Réessayez avant de quitter le terminal.",
+      "en": "Checkpoint not saved. Try again before leaving the terminal.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Reprise conservée. Retrouvez la vague et la santé enregistrées, puis reprenez depuis la pause.",
+      "en": "Checkpoint saved. Restore your recorded wave and health, then continue from pause.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "CONTACT MAJEUR",
+      "en": "MAJOR CONTACT",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Contact majeur",
+      "en": "Major contact",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "FINALE · CONTACT MAJEUR",
+      "en": "FINALE · MAJOR CONTACT",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "CONTACT MAJEUR EN APPROCHE",
+      "en": "MAJOR CONTACT INCOMING",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "CONTACT MAJEUR ACTIF",
+      "en": "MAJOR CONTACT ACTIVE",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "CONTACT MAJEUR NEUTRALISÉ",
+      "en": "MAJOR CONTACT NEUTRALIZED",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Santé du contact majeur",
+      "en": "Major contact health",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "CLAVIER / TACTILE / MANETTE STANDARD · Stick ou croix : déplacement · A : saut · LT : garde · X/Y/B : attaques · RT : super · Start/Back : pause. Relâchez les commandes après une reprise.",
+      "en": "KEYBOARD / TOUCH / STANDARD GAMEPAD · Stick or D-pad: movement · A: jump · LT: guard · X/Y/B: attacks · RT: super · Start/Back: pause. Release the controls after resuming.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "VAGUES",
+      "en": "WAVES",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "POPULATION",
+      "en": "POPULATION",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "PV PAR CONTACT",
+      "en": "HP PER CONTACT",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "SIMULTANÉS MAX.",
+      "en": "MAX. SIMULTANEOUS",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "CONTACTS ACTIFS",
+      "en": "ACTIVE CONTACTS",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "RENFORTS EN ATTENTE",
+      "en": "PENDING REINFORCEMENTS",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "MIRE / TÉLÉMÉTRIE TACTIQUE",
+      "en": "MIRE / TACTICAL TELEMETRY",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Contacts neutralisés sur la population totale",
+      "en": "Neutralized contacts out of total population",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "SECTEUR SÉCURISÉ",
+      "en": "SECTOR SECURED",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "CONTACT PERDU",
+      "en": "CONTACT LOST",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "VAGUE NEUTRALISÉE · RENFORTS EN APPROCHE",
+      "en": "WAVE CLEARED · REINFORCEMENTS INCOMING",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "CONTACTS HOSTILES",
+      "en": "HOSTILE CONTACTS",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "RENFORTS EN APPROCHE",
+      "en": "REINFORCEMENTS INCOMING",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "VAGUES MULTIPLES",
+      "en": "MULTIPLE WAVES",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "RENFORTS MULTIPLES",
+      "en": "MULTIPLE REINFORCEMENTS",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "FAIBLE RÉSISTANCE",
+      "en": "LOW RESISTANCE",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "ATTAQUES SIMULTANÉES",
+      "en": "SIMULTANEOUS ATTACKS",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "DUELS SUCCESSIFS",
+      "en": "SUCCESSIVE DUELS",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "ÉVALUATION COMPARATIVE",
+      "en": "COMPARATIVE EVALUATION",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "ALERTE MIRE / HORDE SIMULTANÉE",
+      "en": "MIRE ALERT / SIMULTANEOUS HORDE",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "ALERTE MIRE / DUELS SUCCESSIFS",
+      "en": "MIRE ALERT / SUCCESSIVE DUELS",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "PRIME DE VALIDATION",
+      "en": "COMPLETION BONUS",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "OUVRIR LE PROTOCOLE →",
+      "en": "OPEN PROTOCOL →",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "MIRE / ORDRES D’ÉVALUATION",
+      "en": "MIRE / EVALUATION ORDERS",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "HORDE / CONFINEMENT CONTINU",
+      "en": "HORDE / CONTINUOUS CONTAINMENT",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "DOSSIER / ÉVALUATION COMPARATIVE",
+      "en": "DOSSIER / COMPARATIVE EVALUATION",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Éliminez tous les contacts de chaque vague. Les renforts entrent pendant le combat ; gardez une voie de repli et surveillez vos deux flancs.",
+      "en": "Eliminate every contact in each wave. Reinforcements arrive during combat; keep a retreat route open and watch both flanks.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Éliminez tous les contacts de chaque vague. Les renforts entrent pendant le combat ; gardez une voie de repli et surveillez vos deux flancs. Une seule évaluation ; votre santé est conservée entre les vagues.",
+      "en": "Eliminate every contact in each wave. Reinforcements arrive during combat; keep a retreat route open and watch both flanks. One continuous evaluation; your health carries over between waves.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "CONFIRMER · VÉRIFIER LE SECTEUR →",
+      "en": "CONFIRM · CHECK SECTOR →",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "ENGAGER LE PROTOCOLE HORDE",
+      "en": "ENGAGE HORDE PROTOCOL",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "RECOMMENCER LE PROTOCOLE SAUVEGARDÉ",
+      "en": "RESTART SAVED PROTOCOL",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "SECTEUR RÉPERTORIÉ",
+      "en": "REGISTERED SECTOR",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "SECTEUR MIRE",
+      "en": "MIRE SECTOR",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "MIRE / PRÉPARATION DU SECTEUR ET DES CONTACTS…",
+      "en": "MIRE / PREPARING SECTOR AND CONTACTS…",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "MIRE / PRÉPARATION DES DEUX SPÉCIMENS…",
+      "en": "MIRE / PREPARING BOTH SPECIMENS…",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Protocole sauvegardé en attente. Recommencez depuis la première vague ou annulez sans gain.",
+      "en": "Saved protocol pending. Restart from the first wave or cancel without a reward.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "HORDE EN APPROCHE",
+      "en": "HORDE INCOMING",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "RUPTURE DE QUARANTAINE",
+      "en": "QUARANTINE BREACH",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "COULOIR D’EXTRACTION",
+      "en": "EXTRACTION CORRIDOR",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "MEUTE EN CHASSE",
+      "en": "HUNTING PACK",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "ESSAIM SYNTHÉTIQUE",
+      "en": "SYNTHETIC SWARM",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "SATURATION CORROSIVE",
+      "en": "CORROSIVE SATURATION",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "CONTACTS FRAGILES",
+      "en": "FRAGILE CONTACTS",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "CORDON DE LA RUCHE",
+      "en": "HIVE CORDON",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Secteur sécurisé. Toutes les vagues neutralisées.",
+      "en": "Sector secured. All waves neutralized.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Confinement perdu. Évaluation interrompue.",
+      "en": "Containment lost. Evaluation interrupted.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Renforts en approche",
+      "en": "Reinforcements incoming",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Contacts actifs",
+      "en": "Active contacts",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "SÉLECTION DE PROTOCOLE",
+      "en": "PROTOCOL SELECTION",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Reprise de la vague conservée. Reprenez avec P, Start ou le bouton Reprendre.",
+      "en": "Wave checkpoint restored. Continue with P, Start or the Resume button.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "MANETTE CONNECTÉE",
+      "en": "GAMEPAD CONNECTED",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "CLAVIER / TACTILE",
+      "en": "KEYBOARD / TOUCH",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Relâchez les commandes pour reprendre.",
+      "en": "Release the controls to resume.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Coursive habitée / Simulation",
+      "en": "Habitation corridor / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Sas d’extraction / Simulation",
+      "en": "Extraction airlock / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Passage des machines / Simulation",
+      "en": "Engineering passage / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Amarrage extérieur / Simulation",
+      "en": "External docking / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Plaine balayée / Simulation",
+      "en": "Windswept plain / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Ruines du plateau / Simulation",
+      "en": "Plateau ruins / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Crête rocheuse / Simulation",
+      "en": "Rocky ridge / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Périmètre d’évacuation / Simulation",
+      "en": "Evacuation perimeter / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Cavernes profondes / Simulation",
+      "en": "Deep caverns / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Approche des falaises / Simulation",
+      "en": "Cliff approach / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Conduits de la colonie / Simulation",
+      "en": "Colony ducts / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Poste de sécurité / Simulation",
+      "en": "Security post / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Aire d’atterrissage / Simulation",
+      "en": "Landing area / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Habitat abandonné / Simulation",
+      "en": "Abandoned habitat / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Centre de la colonie / Simulation",
+      "en": "Colony center / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Route de la colonie / Simulation",
+      "en": "Colony road / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Atelier industriel / Simulation",
+      "en": "Industrial workshop / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Baie des véhicules / Simulation",
+      "en": "Vehicle bay / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Cellule de quarantaine / Simulation",
+      "en": "Quarantine cell / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Réserve d’armement / Simulation",
+      "en": "Weapons storage / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Quartiers isolés / Simulation",
+      "en": "Isolated quarters / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Réfectoire évacué / Simulation",
+      "en": "Evacuated mess hall / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Bloc médical / Simulation",
+      "en": "Medical block / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Laboratoire sous scellés / Simulation",
+      "en": "Sealed laboratory / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Salle des capteurs / Simulation",
+      "en": "Sensor room / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Cœur des machines / Simulation",
+      "en": "Engineering core / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Circuits de survie / Simulation",
+      "en": "Life-support circuits / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Hangar de maintenance / Simulation",
+      "en": "Maintenance hangar / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Chambre cryogénique / Simulation",
+      "en": "Cryogenic chamber / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Centre des opérations / Simulation",
+      "en": "Operations center / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Salle de préparation / Simulation",
+      "en": "Preparation room / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Poste de commandement / Simulation",
+      "en": "Command post / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Baie des synthétiques / Simulation",
+      "en": "Synthetic bay / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Champ d’évaluation / Simulation",
+      "en": "Evaluation grounds / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Morgue sous confinement / Simulation",
+      "en": "Contained morgue / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Archives MIRE / Simulation",
+      "en": "MIRE archives / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Annexe logistique / Simulation",
+      "en": "Logistics annex / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Baie des capsules / Simulation",
+      "en": "Pod bay / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Sas d’arrivée / Simulation",
+      "en": "Arrival airlock / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Anneau Bioforge / Simulation",
+      "en": "Bioforge ring / Simulation",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "RÉESSAYER LA SAUVEGARDE DE REPRISE",
+      "en": "RETRY CHECKPOINT SAVE",
+      "source": "src/xeno-trials-ui-v96.js : retry-checkpoint button"
+    },
+    {
+      "fr": "RÉSERVE BIOLOGIQUE",
+      "en": "BIOLOGICAL RESERVE",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-modes-v119.js : visible help, roster and branch hints"
+    },
+    {
+      "fr": "← LOT PRÉCÉDENT",
+      "en": "← PREVIOUS BATCH",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-modes-v119.js : visible help, roster and branch hints"
+    },
+    {
+      "fr": "LOT SUIVANT →",
+      "en": "NEXT BATCH →",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-modes-v119.js : visible help, roster and branch hints"
+    },
+    {
+      "fr": "RETROUVER MA SÉLECTION",
+      "en": "FIND MY SELECTION",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-modes-v119.js : visible help, roster and branch hints"
+    },
+    {
+      "fr": "Lots de 40 spécimens",
+      "en": "Batches of 40 specimens",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-modes-v119.js : visible help, roster and branch hints"
+    },
+    {
+      "fr": "La simulation et le chrono sont arrêtés. Reprenez l’évaluation ou abandonnez-la sans gain.",
+      "en": "The simulation and timer are stopped. Resume the evaluation or abandon it without a reward.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-modes-v119.js : visible help, roster and branch hints"
+    },
+    {
+      "fr": "Déplacement : Q/D ou flèches · Saut : Z/↑/Espace · Garde : S/↓ · Attaques : J/K/L · Super : I, pour les spécimens compatibles. Jauge gagnée sur les contacts effectifs, conservée entre manches et consommée au départ. Défi : T lorsque disponible ; annulé par déplacement, attaque, garde ou impact. La simulation continue. Pause : P ou Échap. Lors d’une saisie, maintenir GARDE permet le dégagement sans marteler une touche. La garde ordinaire consomme de l’endurance. Coups lourds pour briser une garde épuisée.",
+      "en": "Movement: Q/D or arrows · Jump: Z/↑/Space · Guard: S/↓ · Attacks: J/K/L · Super: I, for compatible specimens. Meter builds from actual contacts, carries over between rounds and is consumed on activation. Taunt: T when available; canceled by movement, attack, guard or impact. The simulation continues. Pause: P or Escape. During a grapple, hold GUARD to escape without repeatedly tapping a button. Ordinary guard consumes stamina. Use heavy attacks to break an exhausted guard.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-modes-v119.js : visible help, roster and branch hints"
+    },
+    {
+      "fr": "Saisie rapprochée sur Commando WY, Guardian et Cultiste Darwin Era. Maintenir GARDE pour se dégager. Contre les autres spécimens, le bond reste une attaque de contact.",
+      "en": "Close grapple against WY Commando, Guardian and Darwin Era Cultist. Hold GUARD to escape. Against other specimens, the pounce remains a contact attack.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-modes-v119.js : visible help, roster and branch hints"
+    },
+    {
+      "fr": "Contacts simultanés à faibles PV. Repousser toutes les vagues sans récupération entre les contacts.",
+      "en": "Simultaneous low-HP contacts. Repel every wave without recovery between contacts.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-modes-v119.js : visible help, roster and branch hints"
+    },
+    {
+      "fr": "ABANDONNER · SANS GAIN",
+      "en": "ABANDON · NO REWARD",
+      "source": "src/xeno-trials-ui-v96.js : native-third mobile boss board and restored pause captures"
+    },
+    {
+      "fr": "J · RAPIDE",
+      "en": "J · LIGHT",
+      "source": "src/xeno-trials-ui-v96.js : native-third mobile boss board and restored pause captures"
+    },
+    {
+      "fr": "K · LOURD",
+      "en": "K · HEAVY",
+      "source": "src/xeno-trials-ui-v96.js : native-third mobile boss board and restored pause captures"
+    }
+  ],
+  "patterns": [
+    {
+      "fr": "{0} PROTOCOLES / CONTACTS SIMULTANÉS / SURVIE CONTINUE",
+      "en": "{0} PROTOCOLS / SIMULTANEOUS CONTACTS / CONTINUOUS SURVIVAL",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "{0} DOSSIERS / {1}",
+      "en": "{0} DOSSIERS / {1}",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "{0} vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "en": "{0} waves of simultaneous contacts. Between 3 and 8 active opponents, with 15 to 35 HP per contact. Neutralize every wave with the same specimen; no automatic recovery between waves.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "{0} vagues de troupes à 15–35 PV, puis un contact majeur à {1} PV et {2} gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "en": "{0} waves of troops with 15–35 HP, followed by a major contact with {1} HP and {2} guards. Each specimen retains its scale and attacks. No recovery between waves.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "{0} VAGUES",
+      "en": "{0} WAVES",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "{0} CONTACTS",
+      "en": "{0} CONTACTS",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "{0} CONTACTS SIMULTANÉS MAX.",
+      "en": "{0} MAX. SIMULTANEOUS CONTACTS",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "VAGUE {0} / {1}",
+      "en": "WAVE {0} / {1}",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "Vague {0} sur {1}.",
+      "en": "Wave {0} of {1}.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "{0}. Vague {1} sur {2}.",
+      "en": "{0}. Wave {1} of {2}.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "{0}. Vague {1} sur {2}. {3}.",
+      "en": "{0}. Wave {1} of {2}. {3}.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "{0} · Vague {1}/{2} · {3} contacts actifs · {4} renforts · {5}/{6} neutralisés",
+      "en": "{0} · Wave {1}/{2} · {3} active contacts · {4} reinforcements · {5}/{6} neutralized",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "{0} / {1} NEUTRALISÉS",
+      "en": "{0} / {1} NEUTRALIZED",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "REPRENDRE LA VAGUE {0}",
+      "en": "RESUME WAVE {0}",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "PRESSION {0}",
+      "en": "PRESSURE {0}",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "{0} · Vague {1}/{2} · {3} contacts actifs · {4}/{5} neutralisés · {6} PV.",
+      "en": "{0} · Wave {1}/{2} · {3} active contacts · {4}/{5} neutralized · {6} HP.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-horde-ui-v180.js; src/xeno-trials-horde-v180.js; src/xeno-trials-horde-bosses-v186.js; src/xeno-trials-boss-stages-v179.js"
+    },
+    {
+      "fr": "LOT {0} / {1} · {2}–{3}",
+      "en": "BATCH {0} / {1} · {2}–{3}",
+      "source": "src/xeno-trials-ui-v96.js : roster pagination"
+    },
+    {
+      "fr": "FINALE · {0} · {1} PV",
+      "en": "FINALE · {0} · {1} HP",
+      "source": "src/xeno-trials-ui-v96.js : native-third mobile boss board and restored pause captures"
+    },
+    {
+      "fr": "{0} / {1} PV",
+      "en": "{0} / {1} HP",
+      "source": "src/xeno-trials-ui-v96.js : native-third mobile boss board and restored pause captures"
+    },
+    {
+      "fr": "{0}–{1} PV",
+      "en": "{0}–{1} HP",
+      "source": "src/xeno-trials-ui-v96.js : native-third mobile boss board and restored pause captures"
+    }
+  ]
+}

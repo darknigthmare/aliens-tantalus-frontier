@@ -1,9 +1,10 @@
 import { XENO_TRIALS_EVENTS_V179 } from './xeno-trials-events-v179.js';
 import { XENO_TRIALS_BOSS_STAGES_V179 } from './xeno-trials-boss-stages-v179.js';
+import { createXenoTrialsBossProtocolsV186, getXenoTrialsHordeSlotV186 } from './xeno-trials-horde-bosses-v186.js';
 
 /** Original simulation tuning, not canonical biology or animation evidence.
  * The director shares the native fighter, attacks and CPU with ordinary duels.
- * Only eight ordinary-size enemies can be alive; records contain no DOM state. */
+ * Only eight enemies can be alive; their native geometry is unchanged. */
 export const XENO_TRIALS_HORDE_LIMITS_V180 = Object.freeze({ maxConcurrent: 8, minConcurrent: 3,
   minimumHp: 15, maximumHp: 35, maxProjectiles: 64, maxEffects: 32, spawnGraceTicks: 60,
   reinforcementTicks: 72, intermissionTicks: 120, playerContactCooldownTicks: 24 });
@@ -44,8 +45,13 @@ export const XENO_TRIALS_HORDE_PROTOCOLS_V180 = freeze(XENO_TRIALS_EVENTS_V179.m
     totalEnemies, reward: 350 + level * 100, canonExact: false, canonStatus: 'original-tantalus-simulation' };
 }));
 
+export const XENO_TRIALS_HORDE_BOSS_PROTOCOLS_V186 = createXenoTrialsBossProtocolsV186(XENO_TRIALS_HORDE_PROTOCOLS_V180);
+export const XENO_TRIALS_HORDE_PROTOCOLS_V186 = Object.freeze([
+  ...XENO_TRIALS_HORDE_PROTOCOLS_V180, ...XENO_TRIALS_HORDE_BOSS_PROTOCOLS_V186
+]);
+
 export function getXenoTrialsHordeProtocolV180(id) {
-  return XENO_TRIALS_HORDE_PROTOCOLS_V180.find(protocol => protocol.id === id) || null;
+  return XENO_TRIALS_HORDE_PROTOCOLS_V186.find(protocol => protocol.id === id) || null;
 }
 
 export function createXenoTrialsHordeStateV180(id) {
@@ -56,12 +62,13 @@ export function createXenoTrialsHordeStateV180(id) {
     totalEnemies: protocol.totalEnemies, totalRemaining: protocol.totalEnemies,
     alive: 0, remaining: protocol.waves[0].total, concurrent: protocol.waves[0].concurrent,
     maxConcurrent: XENO_TRIALS_HORDE_LIMITS_V180.maxConcurrent, serial: 0, nextSpawnTick: 0,
-    nextWaveTick: 0, opponentStats: { hits: 0, damage: 0, blocks: 0, specials: 0 } };
+    nextWaveTick: 0, opponentStats: { hits: 0, damage: 0, blocks: 0, specials: 0 },
+    ...(protocol.bossFinaleV186 ? { bossFinaleV186: { ...protocol.bossFinaleV186 } } : {}) };
 }
 
 /** Called once per fixed simulation tick and once at construction. The engine
  * supplies native fighters and owns damage, collision, time and final verdict. */
-export function advanceXenoTrialsHordeDirectorV180(match, spawn) {
+export function advanceXenoTrialsHordeDirectorV180(match, spawn, notify = () => {}) {
   const state = match.hordeV180, protocol = getXenoTrialsHordeProtocolV180(state?.protocolId);
   if (!protocol || state.phase === 'complete') return false;
   const living = [];
@@ -85,8 +92,9 @@ export function advanceXenoTrialsHordeDirectorV180(match, spawn) {
   if (initial || match.tick >= state.nextSpawnTick) {
     const count = Math.min(wave.concurrent - living.length, wave.total - state.waveSpawned, initial ? wave.concurrent : 1);
     for (let index = 0; index < count; index++) {
-      const serial = ++state.serial, id = wave.opponentIds[(state.waveSpawned + state.wave - 1) % wave.opponentIds.length];
-      const fighter = spawn(id, wave, serial);
+      const serial = ++state.serial, slotIndex = state.waveSpawned, slot = getXenoTrialsHordeSlotV186(wave, slotIndex);
+      const id = slot?.fighterId || wave.opponentIds[(state.waveSpawned + state.wave - 1) % wave.opponentIds.length];
+      const fighter = spawn(id, wave, serial, slotIndex);
       match.fighters.push(fighter); state.waveSpawned++;
     }
     if (count > 0) state.nextSpawnTick = match.tick + XENO_TRIALS_HORDE_LIMITS_V180.reinforcementTicks;
@@ -98,6 +106,8 @@ export function advanceXenoTrialsHordeDirectorV180(match, spawn) {
     state.wavesCleared++;
     if (state.wave >= state.waveCount) { state.phase = 'complete'; return true; }
     state.phase = 'intermission'; state.nextWaveTick = match.tick + XENO_TRIALS_HORDE_LIMITS_V180.intermissionTicks;
+    if (protocol.bossFinaleV186?.wave === state.wave + 1)
+      notify('horde-boss-incoming-v186', { ...protocol.bossFinaleV186, arrivalTick: state.nextWaveTick });
   }
   return false;
 }

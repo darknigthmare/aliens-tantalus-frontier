@@ -12,15 +12,13 @@ import { createXenoTrialsBrainV119, stepXenoTrialsBrainV119 } from './xeno-trial
 import { normalizeXenoTrialsRulesV119 } from './xeno-trials-modes-v119.js';
 import { XENO_TRIALS_HORDE_LIMITS_V180 as HORDE_LIMITS, getXenoTrialsHordeProtocolV180,
   createXenoTrialsHordeStateV180, advanceXenoTrialsHordeDirectorV180 } from './xeno-trials-horde-v180.js';
+import { getXenoTrialsHordeSlotV186, getXenoTrialsHordeBossViewV186 } from './xeno-trials-horde-bosses-v186.js';
+import { XENO_TRIALS_ATTACKS_V96 } from './xeno-trials-combat-contract-v186.js';
+export { XENO_TRIALS_ATTACKS_V96 } from './xeno-trials-combat-contract-v186.js';
 
 export const XENO_TRIALS_STEP_V96 = 1 / 120;
 // Margins reserve the full native silhouettes (including tails) in either facing.
 export const XENO_TRIALS_ARENA_V96 = XENO_TRIALS_ARENA_V105;
-export const XENO_TRIALS_ATTACKS_V96 = Object.freeze({
-  light: Object.freeze({ cost: 12, damage: 14, reach: 60, startup: .09, active: .08, recovery: .2, stun: .13, push: 15 }),
-  heavy: Object.freeze({ cost: 25, damage: 28, reach: 86, startup: .23, active: .1, recovery: .39, stun: .3, push: 38 }),
-  special: Object.freeze({ cost: 38, damage: 35, reach: 124, startup: .29, active: .12, recovery: .55, stun: .36, push: 48 })
-});
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const finite = (value, fallback) => Number.isFinite(Number(value)) ? Number(value) : fallback;
 const ACTIONS = ['left', 'right', 'jump', 'guard', 'light', 'heavy', 'special', 'super'];
@@ -77,7 +75,7 @@ export function createXenoTrialsMatchV96(config = {}) {
     match.config.stageId = hordeProtocol.stageId; match.config.difficulty = hordeProtocol.difficulty; match.config.factionId = hordeProtocol.factionId;
     match.hordeV180 = createXenoTrialsHordeStateV180(hordeProtocol.id);
     match.fighters = [match.fighters[0]]; match.fighters[0].x = 500;
-    advanceXenoTrialsHordeDirectorV180(match, (id, wave, serial) => makeHordeFighterV180(match, id, wave, serial));
+    advanceXenoTrialsHordeDirectorV180(match, (id, wave, serial, slot) => makeHordeFighterV180(match, id, wave, serial, slot));
   } else resolveXenoTrialsBodiesV105(match.fighters[0], match.fighters[1], 1);
   return match;
 }
@@ -340,7 +338,7 @@ function applyImpact(match, impact) {
     ...(match.hordeV180 ? { targetInstanceV180: to.instanceIdV180 || 'player', attackerInstanceV180: from.instanceIdV180 || 'player' } : {}) });
 }
 
-function makeHordeFighterV180(match, id, wave, serial) {
+function makeHordeFighterV180(match, id, wave, serial, slotIndex) {
   const fighter = makeFighter('opponent', id);
   const player = match.fighters[0], direction = serial % 2 ? 1 : -1;
   const distance = 260 + rng(match) * 380;
@@ -350,10 +348,25 @@ function makeHordeFighterV180(match, id, wave, serial) {
   if (Math.abs(fighter.x - player.x) < 200)
     fighter.x = clamp(player.x - direction * distance, XENO_TRIALS_ARENA_V96.left + 80, XENO_TRIALS_ARENA_V96.right - 80);
   fighter.facing = player.x >= fighter.x ? 1 : -1;
-  fighter.hp = wave.hp; fighter.maxHpV180 = wave.hp; fighter.instanceIdV180 = `horde-${serial}`;
-  fighter.spawnTickV180 = match.tick; fighter.damageScaleV180 = wave.damageScale;
+  const slot = getXenoTrialsHordeSlotV186(wave, slotIndex);
+  fighter.hp = slot?.hp ?? wave.hp; fighter.maxHpV180 = fighter.hp; fighter.instanceIdV180 = `horde-${serial}`;
+  fighter.spawnTickV180 = match.tick; fighter.damageScaleV180 = slot?.damageScale ?? wave.damageScale;
+  if (slot) {
+    fighter.spawnSlotV186 = slotIndex; fighter.enemyRankV186 = slot.rank;
+    fighter.bossIdV186 = slot.rank === 'boss' ? id : null;
+    if (slot.rank === 'boss') {
+      // Reserve a real approach lane for the native large body. No scaling or
+      // collider override is introduced to make the boss fit in a troop slot.
+      const own = getXenoTrialsBodyBoundsV105(fighter), target = getXenoTrialsBodyBoundsV105(player);
+      const right = fighter.x >= player.x;
+      const gap = right ? own.left - target.right : target.left - own.right;
+      if (gap < 180) fighter.x = clamp(fighter.x + (right ? 180 - gap : gap - 180), XENO_TRIALS_ARENA_V96.left, XENO_TRIALS_ARENA_V96.right);
+    }
+  }
   fighter.aiV180 = createXenoTrialsBrainV119();
   event(match, 'horde-spawn-v180', { instanceId: fighter.instanceIdV180, fighterId: id, x: fighter.x, hp: fighter.hp });
+  if (slot?.rank === 'boss') event(match, 'horde-boss-spawn-v186', {
+    instanceId: fighter.instanceIdV180, fighterId: id, hp: fighter.hp, wave: match.hordeV180.wave });
   return fighter;
 }
 
@@ -373,7 +386,8 @@ function finishHordeV180(match, winner, reason) {
     stageId: match.config.stageId, difficulty: match.config.difficulty, rulesV119: { ...match.config.rulesV119 },
     ...(match.config.activityV119 ? { activityV119: { ...match.config.activityV119 } } : {}),
     playerStats: { ...player.stats }, opponentStats, durationTicks: match.tick,
-    hordeV180: { protocolId: state.protocolId, wavesCleared: state.wavesCleared, kills: state.totalKills, totalEnemies: state.totalEnemies } };
+    hordeV180: { protocolId: state.protocolId, wavesCleared: state.wavesCleared, kills: state.totalKills, totalEnemies: state.totalEnemies,
+      ...(state.bossFinaleV186 ? { bossFinaleV186: { ...getXenoTrialsHordeBossViewV186(getXenoTrialsHordeProtocolV180(state.protocolId), state, match.fighters) } } : {}) } };
   event(match, 'match-end', { winner, hordeV180: true });
 }
 
@@ -438,7 +452,9 @@ function fixedHordeStepV180(match, playerControls, opponentControls, dt) {
   const player = match.fighters[0];
   const enemies = match.fighters.slice(1).filter(enemy => enemy.hp > 0);
   const sorted = [...enemies].sort((a, b) => Math.abs(a.x - player.x) - Math.abs(b.x - player.x));
-  const engaged = [...sorted.filter(enemy => enemy.attack), ...sorted.filter(enemy => !enemy.attack)].slice(0, 2);
+  const engaged = [...sorted.filter(enemy => enemy.attack),
+    ...sorted.filter(enemy => !enemy.attack && enemy.enemyRankV186 === 'boss'),
+    ...sorted.filter(enemy => !enemy.attack && enemy.enemyRankV186 !== 'boss')].slice(0, 2);
   const orders = new Map(engaged.map(enemy => [enemy, player.x <= enemy.x ? 1 : -1]));
   const nearest = sorted[0] || { ...player, x: player.x + player.facing * 1000 };
   fighterStep(match, player, nearest, playerControls, dt);
@@ -451,7 +467,13 @@ function fixedHordeStepV180(match, playerControls, opponentControls, dt) {
     }
     if (!engaged.includes(enemy) || match.tick < enemy.spawnTickV180 + HORDE_LIMITS.spawnGraceTicks)
       controls = { ...controls, light: false, heavy: false, special: false, super: false };
+    const previousAttackId = enemy.attack?.id;
     fighterStep(match, enemy, player, controls, dt);
+    if (enemy.enemyRankV186 === 'boss' && enemy.attack && enemy.attack.id !== previousAttackId) {
+      const definition = getXenoTrialsFighterV96(enemy.id), spec = getXenoTrialsAttackV147(definition, enemy.attack.kind, XENO_TRIALS_ATTACKS_V96[enemy.attack.kind]);
+      event(match, 'horde-boss-telegraph-v186', { fighterId: enemy.id, instanceId: enemy.instanceIdV180,
+        attackId: enemy.attack.id, kind: enemy.attack.kind, style: getXenoTrialsSpecialStyleV147(definition), startupSeconds: spec.startup });
+    }
   }
   // Soft separation among the crowd avoids a perfectly stacked sprite column.
   // Only engaged bodies push the player, so the whole wave cannot sweep them.
@@ -477,7 +499,9 @@ function fixedHordeStepV180(match, playerControls, opponentControls, dt) {
   collectXenoTrialsDeathBurstsV151(match, livingAtStart, getXenoTrialsBodyBoundsV105,
     impact => applyImpact(match, impact), (type, details) => event(match, type, details));
   match.timeRemaining = Math.max(0, match.timeRemaining - dt);
-  const cleared = advanceXenoTrialsHordeDirectorV180(match, (id, wave, serial) => makeHordeFighterV180(match, id, wave, serial));
+  const cleared = advanceXenoTrialsHordeDirectorV180(match,
+    (id, wave, serial, slot) => makeHordeFighterV180(match, id, wave, serial, slot),
+    (type, details) => event(match, type, details));
   if (player.hp <= 0) finishHordeV180(match, 'opponent', 'horde-ko');
   else if (cleared) finishHordeV180(match, 'player', 'horde-cleared');
   else if (match.timeRemaining <= 0) finishHordeV180(match, 'opponent', 'horde-time');
@@ -605,25 +629,40 @@ export function restoreXenoTrialsHordeMatchV180(snapshot) {
     || state.waveKills !== state.waveSpawned - enemies.length || state.totalKills !== preceding + state.waveKills
     || state.totalRemaining !== protocol.totalEnemies - state.totalKills || state.alive !== enemies.length
     || state.remaining !== wave.total - state.waveSpawned || state.concurrent !== wave.concurrent
+    || state.serial !== preceding + state.waveSpawned || state.maxConcurrent !== HORDE_LIMITS.maxConcurrent
+    || state.wavesCleared !== state.wave - (state.phase === 'intermission' ? 0 : 1)
     || enemies.length > wave.concurrent || new Set(enemies.map(enemy => enemy.instanceIdV180)).size !== enemies.length
     || (state.phase === 'intermission' && (enemies.length !== 0 || state.waveKills !== wave.total))) return null;
+  const bossMetadata = protocol.bossFinaleV186;
+  if (bossMetadata ? Object.keys(bossMetadata).some(key => state.bossFinaleV186?.[key] !== bossMetadata[key])
+    : state.bossFinaleV186 != null) return null;
   for (const [index, fighter] of value.fighters.entries()) {
+    const serial = index > 0 ? Number(/^horde-(\d+)$/.exec(fighter.instanceIdV180 || '')?.[1]) : 0;
+    const slotIndex = serial - preceding - 1;
+    const slot = index > 0 ? getXenoTrialsHordeSlotV186(wave, slotIndex) : null;
+    const maxHp = index === 0 ? getXenoTrialsFighterV96(fighter.id)?.hp : slot?.hp ?? wave.hp;
     if (!getXenoTrialsFighterV96(fighter.id) || fighter.side !== (index === 0 ? 'player' : 'opponent')
       || !Number.isFinite(fighter.hp) || fighter.hp <= 0
-      || fighter.hp > (index === 0 ? getXenoTrialsFighterV96(fighter.id).hp : wave.hp)
+      || fighter.hp > maxHp
       || ![fighter.x, fighter.y, fighter.vy, fighter.stamina, fighter.stun, fighter.specialCooldown].every(Number.isFinite)
       || fighter.x < XENO_TRIALS_ARENA_V96.left || fighter.x > XENO_TRIALS_ARENA_V96.right
       || fighter.y < 0 || fighter.stamina < 0 || fighter.stamina > getXenoTrialsFighterV96(fighter.id).stamina
       || !fighter.previousInput || !fighter.rearmControls || !fighter.stats) return null;
-    if (index > 0 && (!wave.opponentIds.includes(fighter.id) || fighter.maxHpV180 !== wave.hp
-      || !/^horde-\d+$/.test(fighter.instanceIdV180) || !Number.isInteger(fighter.spawnTickV180)
-      || fighter.spawnTickV180 < 0 || fighter.spawnTickV180 > value.tick || fighter.damageScaleV180 !== wave.damageScale)) return null;
+    if (index > 0 && (!Number.isInteger(serial) || serial <= preceding || serial > state.serial
+      || fighter.id !== (slot?.fighterId || wave.opponentIds[(slotIndex + state.wave - 1) % wave.opponentIds.length])
+      || fighter.maxHpV180 !== maxHp || !Number.isInteger(fighter.spawnTickV180)
+      || fighter.spawnTickV180 < 0 || fighter.spawnTickV180 > value.tick
+      || fighter.damageScaleV180 !== (slot?.damageScale ?? wave.damageScale))) return null;
+    if (slot ? fighter.spawnSlotV186 !== slotIndex || fighter.enemyRankV186 !== slot.rank
+      || fighter.bossIdV186 !== (slot.rank === 'boss' ? slot.fighterId : null)
+      : fighter.spawnSlotV186 !== undefined || fighter.enemyRankV186 !== undefined || fighter.bossIdV186 !== undefined) return null;
   }
   const owners = new Set(['player', ...enemies.map(enemy => enemy.instanceIdV180)]);
   if (value.projectiles.some(projectile => !owners.has(projectile.ownerInstanceV180)
     || ![projectile.x, projectile.y, projectile.life, projectile.power].every(Number.isFinite) || projectile.life <= 0
     || !Number.isFinite(projectile.spec?.damage))) return null;
   value.paused = true; value.accumulator = 0;
+  if (bossMetadata) state.bossFinaleV186 = { ...bossMetadata };
   value.config = canonical.config;
   return value;
 }

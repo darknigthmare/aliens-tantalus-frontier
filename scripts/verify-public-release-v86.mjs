@@ -26,6 +26,16 @@ const ROOT_FILES = new Set([
   'xeno-trials-v96.css', 'xeno-trials-fullscreen-v119.css', 'user-reference-library-v100.css', 'specimen-bench-v106.css'
 ]);
 const SCRIPT_FILES = new Set([
+  'qa-xeno-trials-completion-v186.py',
+  'audit-xeno-trials-completion-v186.mjs',
+  'verify-xeno-trials-completion-audit-v186.mjs',
+  'verify-xeno-trials-horde-checkpoint-v186.mjs',
+  'verify-xeno-trials-horde-bosses-v186.mjs',
+  'verify-xeno-trials-gamepad-v186.mjs',
+  'verify-xeno-trials-reactions-v186.mjs',
+  'verify-xeno-trials-ui-v186.mjs',
+  'verify-xeno-trials-i18n-v186.mjs',
+  'verify-xeno-trials-runtime-completion-v186.mjs',
   'public-campaign-art-admissions-v180.mjs',
   'audit-succession-v180.mjs',
   'verify-campaign-art-v180.mjs',
@@ -248,6 +258,18 @@ SCRIPT_FILES.add('verify-hub-armory-v169.mjs');
 SCRIPT_FILES.add('verify-i18n-v185.mjs');
 // Exact V179 tooling stays source-only, independently of older script policy.
 const V179_SOURCE_ONLY_SCRIPTS = new Set(["scripts/sync-alien-base-v1.mjs", "scripts/export-alien-base-tantalus-v1.mjs", "scripts/alien-base-pr7-proposal-v1.mjs", "scripts/verify-alien-base-bridge-v1.mjs", "scripts/verify-alien-base-import-contract-v179.mjs", "scripts/verify-alien-base-pr7-proposal-v1.mjs", "scripts/verify-hub-door-bay-v178.mjs"]);
+const XENO_COMPLETION_SOURCE_ONLY_V186 = new Set([
+  'scripts/qa-xeno-trials-completion-v186.py',
+  'scripts/audit-xeno-trials-completion-v186.mjs',
+  'scripts/verify-xeno-trials-completion-audit-v186.mjs',
+  'scripts/verify-xeno-trials-horde-checkpoint-v186.mjs',
+  'scripts/verify-xeno-trials-horde-bosses-v186.mjs',
+  'scripts/verify-xeno-trials-gamepad-v186.mjs',
+  'scripts/verify-xeno-trials-reactions-v186.mjs',
+  'scripts/verify-xeno-trials-ui-v186.mjs',
+  'scripts/verify-xeno-trials-i18n-v186.mjs',
+  'scripts/verify-xeno-trials-runtime-completion-v186.mjs'
+]);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 for (const file of [
   'audit-succession-v162.mjs', 'generate-audit-continuation-v162.py',
@@ -341,6 +363,9 @@ const FORGE_TOOLING_V140 = new Set([
   'docs/forge/xeno-trials/campaign-art-v180.json',
   'docs/forge/xeno-trials/V180-SIMULTANEOUS-HORDE.md',
   'docs/forge/xeno-trials/batch40-v180.json',
+  'docs/forge/xeno-trials/i18n-trials-review-v186.json',
+  'docs/forge/xeno-trials/V186-XENO-COMPLETION.md',
+  'docs/forge/xeno-trials/completion-v186.json',
   'docs/forge/xeno-trials/V179-XENO-TRIALS-BATCH40.md',
   'docs/forge/xeno-trials/V167-HUMAN-MOVEMENT-AND-DOOR-SIGNS.md',
   'docs/forge/xeno-trials/V166-STATION-RELAYS.md',
@@ -565,6 +590,7 @@ const PRIVATE_TEXT = [
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
   if (V179_SOURCE_ONLY_SCRIPTS.has(path)) return !built;
+  if (XENO_COMPLETION_SOURCE_ONLY_V186.has(path)) return !built;
   if (!built && FORGE_TOOLING_V140.has(path)) return true;
   if (FORGE_STYLES_V140.has(path)) return true;
   const segments = path.split('/');

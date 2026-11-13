@@ -129,3 +129,19 @@ html.xt-fullscreen-v119 #xeno-trials-v96.active{
 @media(prefers-reduced-motion:reduce){
   #xeno-trials-v96 *,#xeno-trials-v96 *:before,#xeno-trials-v96 *:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
 }
+
+/* V186: the boss and save/device indicators share the HUD's existing paint
+   layer. The arena is absolute; ordinary flow siblings would sit behind it. */
+.xt-fullscreen-v119 [data-xt-step="combat"] .xt-boss-hud-v186{grid-column:1/-1;margin:0;padding:8px 0 0;border:0;border-top:1px solid #876b4a;background:transparent;gap:4px 12px;font-size:10px;line-height:1.35}
+.xt-fullscreen-v119 [data-xt-step="combat"] .xt-boss-hud-v186>strong{min-width:0;overflow-wrap:anywhere}
+.xt-fullscreen-v119 [data-xt-step="combat"] .xt-boss-hud-v186 progress{height:8px;min-height:8px;align-self:center}
+.xt-fullscreen-v119 [data-xt-step="combat"] .xt-hud-meta-v186{grid-column:1/-1;gap:4px 12px;font-size:8px;line-height:1.4}
+.xt-fullscreen-v119 [data-xt-step="combat"] .xt-hud-meta-v186 .button{font-size:9px;padding:8px}
+.xt-fullscreen-v119 .xt-pause-overlay-v119 .xt-input-hint-v186{max-width:640px;padding:10px 14px;margin:0;font-size:11px;line-height:1.6;text-align:left;border:1px solid #4b5b43;background:#101b12}
+@media(max-width:760px),(max-height:520px){
+  .xt-fullscreen-v119 [data-xt-step="combat"] .xt-boss-hud-v186{grid-template-columns:minmax(0,1fr) auto;font-size:9px;gap:4px 8px;padding-top:6px}
+  .xt-fullscreen-v119 [data-xt-step="combat"] .xt-boss-hud-v186>strong{grid-column:auto;font-size:11px;text-align:right}
+  .xt-fullscreen-v119 [data-xt-step="combat"] [data-xt="boss-phase"]{grid-column:1/-1}
+  .xt-fullscreen-v119 [data-xt-step="combat"] .xt-boss-hud-v186 progress{grid-column:1}
+  .xt-fullscreen-v119 [data-xt-step="combat"] .xt-hud-meta-v186{font-size:7px}
+}

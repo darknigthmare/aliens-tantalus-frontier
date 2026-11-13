@@ -42,7 +42,9 @@ test('V186 rejects changed reviewed bytes and arbitrary predecessor endpoints', 
   assert.equal(Object.hasOwn(I18N_MAINTENANCE_SUCCESSORS_V186, 'scripts/audit-i18n-maintenance-v186.mjs'), false);
   assert.equal(Object.hasOwn(I18N_MAINTENANCE_SUCCESSORS_V186, 'src/save.js'), false);
   assert.equal(Object.hasOwn(NATIVE_QA_RESOURCES_SUCCESSORS_V187, 'scripts/audit-native-qa-resources-v187.mjs'), false);
-  const terminal = read('scripts/audit-native-qa-resources-v187.mjs').toString();
+  const relay = read('scripts/audit-native-qa-resources-v187.mjs').toString();
+  assert.match(relay, /from '\.\/audit-xeno-trials-completion-v186\.mjs'/);
+  const terminal = read('scripts/audit-xeno-trials-completion-v186.mjs').toString();
   assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(terminal), false, 'The terminal audit must not import another audit.');
 });
 
