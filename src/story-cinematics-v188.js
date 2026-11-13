@@ -14,7 +14,8 @@ export const CINEMATIC_IMAGES_V188 = Object.freeze({
   space: '/assets/openai/ui/title/v79/space/space-01-deep-frontier.png',
   stars: '/assets/openai/ui/title/v79/stars/stars-01-distant-field.png',
   planet: '/assets/openai/ui/title/v79/planet/planet-02-ceto-basin.png',
-  tantalus: '/assets/openai/ui/title/v79/orbitals/orbitals-01-tantalus-transport.png'
+  tantalus: '/assets/openai/ui/title/v79/orbitals/orbitals-01-tantalus-transport.png',
+  dropship: '/assets/openai/mission/insertion/tantalus-dropship-approach-v62.png'
 });
 
 // Names of the north-quay staff in CIN-20: [PROPOSÉ] in bible §56.7.
@@ -80,6 +81,29 @@ export const CINEMATICS_V188 = Object.freeze({
       'Priorité cargaison maintenue, conformément à la clause d’acheminement. Toute ouverture de scellé engage la responsabilité de l’unité.',
       'Cargo priority maintained, in accordance with the routing clause. Any opening of a seal engages the unit’s liability.') })
   ]) }),
+  // Act I (bible §5.1): approach, the cradle opened from inside, and the return with Inez.
+  'cin-10': Object.freeze({ id: 'cin-10', title: t('Les quais déserts', 'The empty docks'), music: null, shots: Object.freeze([
+    shot(14, 'dropship-rain', { caption: t('COCYTE · QUAIS QZ-17', 'COCYTE · QZ-17 DOCKS') }),
+    shot(16, 'dialogue', { scene: 'dropship', line: line('ROOK', 'crew-06-rook',
+      'Quatre accès. Aucun ne répond. Le détecteur est calme. Trop calme.',
+      'Four accesses. None answering. The tracker is quiet. Too quiet.') })
+  ]) }),
+  'cin-11': Object.freeze({ id: 'cin-11', title: t('Ouvert de l’intérieur', 'Opened from inside'), music: null, shots: Object.freeze([
+    shot(15, 'cradle', { caption: t('BERCEAU DE TRANSPORT RÉFRIGÉRÉ · OUVERT DE L’INTÉRIEUR', 'REFRIGERATED TRANSPORT CRADLE · OPENED FROM INSIDE') }),
+    shot(10, 'dialogue', { scene: 'cradle', radio: true, line: line('INEZ HARLOW · RADIO', 'crew-09-inez-harlow',
+      'Ne concluez pas. Rapportez.', 'Don’t conclude. Report.') })
+  ]) }),
+  'cin-qz17-retour': Object.freeze({ id: 'cin-qz17-retour', title: t('Retour de QZ-17', 'Back from QZ-17'), music: null, shots: Object.freeze([
+    shot(9, 'dialogue', { scene: 'lab', line: line('INEZ HARLOW', 'crew-09-inez-harlow',
+      'Ce qui a bougé : une charge vivante, réfrigérée, non déclarée.',
+      'What moved: a live, refrigerated, undeclared load.') }),
+    shot(11, 'dialogue', { scene: 'lab', line: line('INEZ HARLOW', 'crew-09-inez-harlow',
+      'Qui ment : le PDA et le courriel ne peuvent pas être vrais ensemble. La boîte noire soutient le PDA.',
+      'Who is lying: the PDA and the email cannot both be true. The black box supports the PDA.') }),
+    shot(9, 'dialogue', { scene: 'lab', line: line('INEZ HARLOW', 'crew-09-inez-harlow',
+      'Ce qu’on transportait : non établi. Pas sans prélèvement.',
+      'What was being carried: not established. Not without a sample.') })
+  ]) }),
   // Bible §5.2 weaving: Rook identifies the remote signature (line [PROPOSÉ], §56.7).
   'cin-20-rook': Object.freeze({ id: 'cin-20-rook', title: t('La signature', 'The signature'), music: null, shots: Object.freeze([
     shot(10, 'dialogue', { scene: 'quarters', line: line('ROOK', 'crew-06-rook',
@@ -144,13 +168,13 @@ function background(ctx, images, scene, time, reducedMotion) {
     ctx.font = '13px monospace'; ctx.fillStyle = '#9fe7cf'; ctx.fillText('COCYTE', 600, 110); ctx.fillStyle = '#e15b4f'; ctx.fillText('ASPHODÈLE · QZ ROUGE', sx + 12, sy - 10);
     return;
   }
-  const palette = { cryo: ['#0b1418', '#14262c'], range: ['#151510', '#24231a'], quay: ['#101317', '#1d232b'], triage: ['#121517', '#232a2e'], quarters: ['#120f0c', '#1f1a15'] }[scene] || ['#0b0f10', '#151b1d'];
+  const palette = { cryo: ['#0b1418', '#14262c'], range: ['#151510', '#24231a'], quay: ['#101317', '#1d232b'], triage: ['#121517', '#232a2e'], quarters: ['#120f0c', '#1f1a15'], dropship: ['#0c0f0e', '#1a1e1c'], cradle: ['#0b1113', '#162024'], lab: ['#0d1214', '#1b2428'] }[scene] || ['#0b0f10', '#151b1d'];
   const g = ctx.createLinearGradient?.(0, 0, 0, H);
   if (g) { g.addColorStop(0, palette[1]); g.addColorStop(1, palette[0]); ctx.fillStyle = g; } else ctx.fillStyle = palette[0];
   ctx.fillRect(0, 0, W, H);
   ctx.fillStyle = 'rgba(255,255,255,.03)'; for (let x = 0; x < W; x += 160) ctx.fillRect(x, 0, 2, H);
   if (scene === 'cryo') { ctx.strokeStyle = 'rgba(170,220,235,.4)'; ctx.strokeRect(120, 150, 220, 380); ctx.strokeRect(940, 150, 220, 380); }
-  if (scene === 'quay') rain(ctx, time, reducedMotion, 'rgba(160,190,200,.18)');
+  if (scene === 'quay' || scene === 'dropship') rain(ctx, time, reducedMotion, 'rgba(160,190,200,.18)');
   if (scene === 'triage') { // stretcher and a patient with a bandaged chest (primitives)
     ctx.fillStyle = '#3a4448'; ctx.fillRect(760, 360, 360, 22); ctx.fillRect(780, 382, 10, 60); ctx.fillRect(1090, 382, 10, 60);
     ctx.fillStyle = '#6b5a4c'; ctx.fillRect(800, 330, 240, 32); ctx.fillStyle = '#e8e2d0'; ctx.fillRect(880, 326, 90, 38);
@@ -219,6 +243,27 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       if (ready(ship)) { const width = 620, height = width * ship.naturalHeight / ship.naturalWidth, x = -width + (reducedMotion ? 1 : progress) * (W * .62);
         ctx.drawImage(ship, x, 220, width, height); }
       break;
+    }
+    case 'dropship-rain': {
+      ctx.fillStyle = '#0a0f13'; ctx.fillRect(0, 0, W, H);
+      const ship = images[CINEMATIC_IMAGES_V188.dropship];
+      if (ready(ship)) { // existing full painting, slow push-in (cover crop)
+        const zoom = 1.04 + (reducedMotion ? 0 : progress * .08), scale = Math.max(W / ship.naturalWidth, H / ship.naturalHeight) * zoom;
+        const width = ship.naturalWidth * scale, height = ship.naturalHeight * scale;
+        ctx.drawImage(ship, (W - width) / 2, (H - height) / 2, width, height);
+        ctx.fillStyle = 'rgba(4,8,10,.35)'; ctx.fillRect(0, 0, W, H);
+      } else { ctx.fillStyle = '#141b20'; for (let i = 0; i < 4; i++) ctx.fillRect(80 + i * 300, 470, 220, 250); }
+      rain(ctx, local, reducedMotion); caption(ctx, current.caption?.[lang]); break;
+    }
+    case 'cradle': {
+      ctx.fillStyle = '#0b1113'; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#26323a'; ctx.fillRect(400, 160, 480, 380); // cradle shell
+      ctx.fillStyle = '#0e1517'; ctx.fillRect(440, 200, 400, 300); // open cavity
+      ctx.fillStyle = 'rgba(200,230,240,.25)'; for (let i = 0; i < 26; i++) ctx.fillRect(445 + (i * 37) % 390, 205 + (i * 61) % 290, 6, 6); // frost
+      ctx.strokeStyle = '#8b8f86'; ctx.lineWidth = 6; // restraints made to hold something alive
+      for (const y of [260, 340, 420]) { ctx.beginPath(); ctx.moveTo(460, y); ctx.lineTo(820, y); ctx.stroke(); }
+      ctx.strokeStyle = '#c4c08a'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(880, 300); ctx.lineTo(960, 250); ctx.moveTo(880, 360); ctx.lineTo(970, 380); ctx.stroke(); // torn from inside
+      caption(ctx, current.caption?.[lang]); break;
     }
     case 'title': {
       ctx.textAlign = 'center'; ctx.font = '700 54px sans-serif'; ctx.fillStyle = '#e6efe6';

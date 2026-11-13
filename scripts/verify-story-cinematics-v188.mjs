@@ -16,9 +16,9 @@ function recorder() {
 }
 
 test('durations follow bible §10 and every shot is bilingual', () => {
-  assert.deepEqual(CINEMATIC_IDS_V188, ['cin-00', 'cin-01', 'cin-p2', 'cin-02', 'cin-p3-wren', 'cin-p3-ferro', 'cin-20', 'cin-20-rook']);
+  assert.deepEqual(CINEMATIC_IDS_V188, ['cin-00', 'cin-01', 'cin-p2', 'cin-02', 'cin-p3-wren', 'cin-p3-ferro', 'cin-20', 'cin-10', 'cin-11', 'cin-qz17-retour', 'cin-20-rook']);
   const d = cinematicDurationV188; assert.ok(d('cin-00') >= 60 && d('cin-00') <= 75); assert.equal(d('cin-01'), 20);
-  assert.ok(Math.abs(d('cin-02') - 45) <= 5); assert.equal(d('cin-20'), 40);
+  assert.ok(Math.abs(d('cin-02') - 45) <= 5); assert.equal(d('cin-20'), 40); assert.equal(d('cin-10'), 30); assert.equal(d('cin-11'), 25);
   for (const cinematic of Object.values(CINEMATICS_V188)) {
     assert.ok(cinematic.title.fr && cinematic.title.en);
     for (const entry of cinematic.shots) {
@@ -39,7 +39,8 @@ test('bible texts are carried verbatim', () => {
   const bible = read('docs/narrative/CAMPAGNE_PRINCIPALE.md').replaceAll("'", '’');
   const quoted = ['Vous remplacez l’équipe Echo-8.', 'Personne ne déclenche une quarantaine rouge pour une panne de relais.',
     'Les conteneurs scellés partent avant nous depuis trois semaines.', 'Ramenez-le en quarantaine. Pas au triage.',
-    'Priorité cargaison maintenue, conformément à la clause d’acheminement.'];
+    'Priorité cargaison maintenue, conformément à la clause d’acheminement.',
+    'Quatre accès. Aucun ne répond. Le détecteur est calme. Trop calme.', 'Ne concluez pas. Rapportez.'];
   const all = JSON.stringify(CINEMATICS_V188);
   for (const text of quoted) { assert.ok(bible.includes(text), `bible: ${text}`); assert.ok(all.includes(text), `cinematic: ${text}`); }
 });
@@ -92,5 +93,9 @@ test('seen cinematics persist additively and app hooks follow the prologue order
   assert.match(app, /void playStoryCinematicV188\('cin-p3-wren'\)/); assert.match(app, /if \(action === 'triage'\) void playStoryCinematicV188\('cin-p3-ferro'\)/);
   assert.match(app, /void playStoryCinematicV188\('cin-20'\)\.then\(\(\) => playStoryCinematicV188\('cin-20-rook'\)\);/);
   assert.match(app, /if \(\['operations', 'command'\]\.includes\(name\)\) queueMicrotask\(markStoryDebriefOnViewV188\);/);
+  assert.match(app, /event\.type === 'special-operation-started' && event\.campaignId === 'special-narrative-qz17'\) void playStoryCinematicV188\('cin-10'\)/);
+  assert.match(app, /event\.choiceId === 'follow-maintenance-trace'\) void playStoryCinematicV188\('cin-11'\)/);
+  assert.match(app, /void playStoryCinematicV188\('cin-qz17-retour'\)/);
+  assert.match(app, /if \(resumeMission\) engine\.togglePause\(\);/);
   assert.match(read('index.html'), /id="setting-cinematics-v188"/); assert.match(read('sw.js'), /'\/src\/story-cinematics-v188\.js'/);
 });

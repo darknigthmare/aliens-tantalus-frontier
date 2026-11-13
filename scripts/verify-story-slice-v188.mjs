@@ -41,6 +41,9 @@ test('the slice walks creation → wake → ship → port → briefing → qz18 
   assert.equal(markStoryDebriefSeenV188(save, STORY_RELAY_CAMPAIGN_ID_V188), true);
   assert.equal(markStoryDebriefSeenV188(save, STORY_RELAY_CAMPAIGN_ID_V188), false);
   assert.equal(deriveStoryCampaignV188(save).step, 'next');
+  assert.equal(deriveStoryCampaignV188(save).recommendedCampaignId, 'special-narrative-qz17', 'Act I is recommended after QZ-18');
+  save.galaxy.completedCampaignIds.push('special-narrative-qz17');
+  assert.equal(deriveStoryCampaignV188(save).recommendedCampaignId, null);
   assert.deepEqual(STORY_SLICE_STEPS_V188, ['creation', 'wake', 'ship', 'port', 'briefing', 'qz18', 'debrief', 'next']);
 });
 

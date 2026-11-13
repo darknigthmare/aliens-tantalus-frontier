@@ -23,8 +23,8 @@ const TEXT = Object.freeze({
     en: 'DEBRIEF · Briefing room, tactical table: read the QZ-18 case file and the recommended next step.'
   },
   next: {
-    fr: 'COCYTE · Salle de briefing, table tactique : poursuivez la campagne avec le chapitre recommandé.',
-    en: 'COCYTE · Briefing room, tactical table: continue the campaign with the recommended chapter.'
+    fr: 'COCYTE · Salle de briefing, table tactique : poursuivez la campagne avec le chapitre recommandé (★).',
+    en: 'COCYTE · Briefing room, tactical table: continue the campaign with the recommended chapter (★).'
   }
 });
 
@@ -80,7 +80,9 @@ export function deriveStoryCampaignV188(save, { language = null } = {}) {
     return result('briefing', current ? null : pick('briefing'), STORY_RELAY_CAMPAIGN_ID_V188);
   }
   if (!story.debriefSeen.includes(STORY_RELAY_CAMPAIGN_ID_V188)) return result('debrief', current ? null : pick('debrief'), STORY_RELAY_CAMPAIGN_ID_V188);
-  return result('next', current ? null : pick('next'), null);
+  // After QZ-18, the chronological Act I (QZ-17) is recommended until it is done.
+  const actOne = 'special-narrative-qz17';
+  return result('next', current ? null : pick('next'), completed.includes(actOne) ? null : actOne);
 }
 
 // The four playable Cocyte chapters (bible §5, Lethe continuity V163). Until a

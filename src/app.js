@@ -946,8 +946,16 @@ const playerCreatorUiV84 = new PlayerCreatorUiV84({
   onCancel: () => { creatorOwnerV84 = null; titleScreen.show(); titleScreen.openMenu(); }
 });
 function markStoryDebriefOnViewV188() {
-  if (!['operations', 'command'].includes(activeView) || saveSystem.data.strategy.currentOperation
-    || deriveStoryCampaignV188(saveSystem.data).step !== 'debrief') return;
+  if (!['operations', 'command'].includes(activeView) || saveSystem.data.strategy.currentOperation) return;
+  // Act I return with Inez (bible §5.1), once, after QZ-17 is completed.
+  const qz17V188 = 'special-narrative-qz17';
+  if (saveSystem.data.galaxy.completedCampaignIds.includes(qz17V188)
+    && !(saveSystem.data.storyCampaignV188?.debriefSeen || []).includes(qz17V188)) {
+    try { const candidate = clone(saveSystem.data); if (markStoryDebriefSeenV188(candidate, qz17V188)) { saveSystem.commit(candidate); void playStoryCinematicV188('cin-qz17-retour'); } }
+    catch (error) { toast(error.message); }
+    return;
+  }
+  if (deriveStoryCampaignV188(saveSystem.data).step !== 'debrief') return;
   try {
     const candidate = clone(saveSystem.data);
     if (markStoryDebriefSeenV188(candidate, STORY_RELAY_CAMPAIGN_ID_V188)) {
@@ -963,6 +971,9 @@ function playStoryCinematicV188(id, { once = true, record = true } = {}) {
   if (!CINEMATICS_V188[id] || once && seen.includes(id)) return Promise.resolve('already-seen');
   const resumeHub = activeView === 'hub' && hubEngine.running;
   if (resumeHub) hubEngine.pause();
+  // In mission, the cinematic uses the engine's own pause so no damage or timer advances.
+  const resumeMission = activeView === 'play' && engine.running && !engine.paused;
+  if (resumeMission) engine.togglePause();
   const music = CINEMATICS_V188[id].music;
   if (music) audio.setMusicMoodV188(music); else audio.stopMusic?.(0.6);
   return cinematicPlayerV188.play(id, { language: document.documentElement.lang,
@@ -971,6 +982,7 @@ function playStoryCinematicV188(id, { once = true, record = true } = {}) {
       try { const candidate = clone(saveSystem.data); if (markStoryCinematicSeenV188(candidate, id)) saveSystem.commit(candidate); } catch (error) { toast(error.message); }
     }
     if (resumeHub && activeView === 'hub') hubEngine.resume();
+    if (resumeMission && activeView === 'play' && engine.running && engine.paused) engine.togglePause();
     audio.setScene(resolveViewAudioSceneV77(activeView));
     return result;
   });
@@ -3061,6 +3073,9 @@ function handleGameEvent(event) {
     : event.phase === 'relax' || event.register === 'horror' ? 'calm' : 'mission');
   if (enemyV188?.isBoss || event.type === 'mecha-boss-warning-v131') audio.setMusicMoodV188('boss');
   if (event.type === 'boss-defeated' || event.type === 'mecha-boss-defeated-v131') audio.setMusicMoodV188('mission');
+  // Act I cinematics (bible §5.1): approach at insertion, the opened cradle on the maintenance route.
+  if (event.type === 'special-operation-started' && event.campaignId === 'special-narrative-qz17') void playStoryCinematicV188('cin-10');
+  if (event.type === 'narrative-route-unlocked' && event.choiceId === 'follow-maintenance-trace') void playStoryCinematicV188('cin-11');
   if (event.type === 'terminal-save-v188') {
     try { commitCurrentRuntimeV78({ includeSessionTime: true }); sessionStart = Date.now(); renderClock(); toast('Terminal : sauvegarde confirmée.'); }
     catch (error) { toast(error.message); }

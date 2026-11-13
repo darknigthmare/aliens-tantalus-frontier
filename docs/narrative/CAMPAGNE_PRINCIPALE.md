@@ -595,14 +595,14 @@ Preuve secondaire du code (`narrative-evidence-v132.js`) : *la colonie reçoit u
 
 **Déroulé [PROPOSÉ] :**
 
-1. **CIN-10 « Les quais déserts »** (30 s) : dropship d'Orlov, approche sous la pluie. Rook : « Quatre accès. Aucun ne répond. Le détecteur est calme. Trop calme. »
+1. **CIN-10 « Les quais déserts »** (30 s) — **[EXISTANT] (V188)**, à la prise de contrôle de QZ-17 : dropship d'Orlov, approche sous la pluie. Rook : « Quatre accès. Aucun ne répond. Le détecteur est calme. Trop calme. »
 2. Exploration verticale, peu de combats, beaucoup de signes : un conteneur réfrigéré marqué « échantillons géologiques », du givre à l'intérieur alors que le froid est coupé, des traces d'acide dans un conduit.
 3. **Choix existant** : *suivre la trace par la maintenance* ou *sécuriser la preuve en quarantaine*.
    - Maintenance → l'alcôve : un berceau de transport réfrigéré, ouvert de l'intérieur. Contact avec un parasite (facehugger, déjà au catalogue).
    - Quarantaine → le fragment de sceau revient intact ; Inez peut l'analyser (annexe *Le sceau*).
-4. **CIN-11 « Ouvert de l'intérieur »** (25 s) : sur la paroi du berceau, des fixations faites pour retenir quelque chose de vivant. Inez : « Ne concluez pas. Rapportez. »
+4. **CIN-11 « Ouvert de l'intérieur »** (25 s) — **[EXISTANT] (V188)**, au déverrouillage de la route de maintenance : sur la paroi du berceau, des fixations faites pour retenir quelque chose de vivant. Inez : « Ne concluez pas. Rapportez. »
 
-**Retour** avec Inez : *qu'est-ce qui a bougé* (une charge vivante, réfrigérée, non déclarée), *qui ment* (le PDA et le courriel ne peuvent pas être vrais ensemble ; la boîte noire soutient le PDA), *que transportait-on* (**non établi** sans prélèvement).
+**Retour** avec Inez — **[EXISTANT] (V188, séquence `cin-qz17-retour` à la table tactique)** : *qu'est-ce qui a bougé* (une charge vivante, réfrigérée, non déclarée), *qui ment* (le PDA et le courriel ne peuvent pas être vrais ensemble ; la boîte noire soutient le PDA), *que transportait-on* (**non établi** sans prélèvement).
 
 *Ancrage Alien : cargaison biologique déguisée en fret, parasite, la compagnie qui ment par procédure.*
 
@@ -1109,8 +1109,8 @@ Les chapitres Mire Archive 001, Protocole Z-110, Jeri, Éloïse, A.T.A.X.-Q, Le 
 | CIN-00 | Ouverture | Titre | 60-75 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-01 | Le casier vide | Prologue | 20 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-02 | Le briefing | Prologue | 45 s | [EXISTANT] V188 (placeholder Canvas) |
-| CIN-10 | Les quais déserts | Acte I | 30 s | [PROPOSÉ] |
-| CIN-11 | Ouvert de l'intérieur | Acte I | 25 s | [PROPOSÉ] |
+| CIN-10 | Les quais déserts | Acte I | 30 s | [EXISTANT] V188 |
+| CIN-11 | Ouvert de l'intérieur | Acte I | 25 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-20 | Treize minutes | Acte II | 40 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-21 | Le quai nord | `story-quai-nord` | 25 s | [PROPOSÉ] |
 | CIN-31 | Le sas refermé | Acte III | 30 s | [PROPOSÉ] |
@@ -4346,6 +4346,11 @@ Les ajouts **[PROPOSÉ]** du §4, CIN-20 et la réponse de Halloran (§5.2) sont
 | Avant P-3 | CIN-02 *Le briefing* (Vega, Vega, Harlow, Velez) | Premier embarquement depuis la salle de briefing |
 | P-3 | `cin-p3-wren` puis `cin-p3-ferro` (Lucia Ferro, Noor Okafor à la radio) | Arrivée au quai, puis fin du triage |
 | Retour de QZ-18 | CIN-20 *Treize minutes*, puis Halloran ; ensuite `cin-20-rook` *La signature* | Premier compte rendu de QZ-18 lu |
+| Acte I, prise de contrôle | CIN-10 *Les quais déserts* (peinture existante du dropship, pluie), puis Rook | Fin de l'insertion de QZ-17 |
+| Acte I, route de maintenance | CIN-11 *Ouvert de l'intérieur* (berceau givré, fixations arrachées), puis Inez à la radio | Choix « Suivre la trace par la maintenance » |
+| Retour de QZ-17 | `cin-qz17-retour` : les trois conclusions d'Inez | Première ouverture de la table tactique après QZ-17 |
+
+Après QZ-18, la table tactique recommande l'Acte I (★) tant qu'il n'est pas terminé, conformément à la chronologie du §3.
 
 **Textes écrits pour combler la bible — [PROPOSÉ] :**
 
