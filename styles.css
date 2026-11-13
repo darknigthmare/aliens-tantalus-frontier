@@ -1060,3 +1060,31 @@ html { font-size: calc(100% * var(--atf-text-scale-v188, 1)); }
 .story-dossier-v188 li[data-held="false"] { opacity: .6; }
 
 .colony-reconstruction-v188 li { display: grid; gap: 4px; margin-bottom: 6px; }
+
+/* V188 opening credit (src/intro-sequence-v188.js): opaque from the first paint,
+   the title scene's own star bitmaps (preloaded by src/intro-boot-v188.js, faded in once
+   decoded), removed by a cross-fade onto the title. */
+.intro-v188 { position: fixed; inset: 0; z-index: 2147483000; overflow: hidden; background: #010304; opacity: 1;
+  transition: opacity 1.1s ease; animation: intro-v188-failsafe 1s ease 14s forwards; }
+.intro-v188__space { position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 74% 18%, rgba(42, 82, 79, .2), transparent 40%),
+    radial-gradient(ellipse at 18% 76%, rgba(47, 57, 62, .14), transparent 38%),
+    linear-gradient(145deg, #010304 0%, #04090a 52%, #07100f 100%); }
+.intro-v188__stars { position: absolute; inset: 0; opacity: 0; background: url("/assets/openai/ui/title/v79/stars/stars-01-distant-field.png") center / cover no-repeat;
+  transition: opacity 1.6s ease .1s; animation: title-image-drift-v79 55s linear infinite alternate; }
+.intro-v188__stars--near { background-image: url("/assets/openai/ui/title/v79/stars/stars-02-near-sparks.png"); transition-delay: .4s;
+  animation-direction: alternate-reverse; }
+html[data-intro-stars-v188="ready"] .intro-v188__stars { opacity: 1; }
+.intro-v188__credit { position: absolute; inset: 0; margin: 0; display: grid; place-content: center; gap: 14px; text-align: center;
+  font-family: var(--mono, "IBM Plex Mono", Consolas, monospace); color: #d8e2d8; transition: opacity .7s ease; }
+.intro-v188__by, .intro-v188__name { display: block; opacity: 0; text-transform: uppercase; }
+.intro-v188__by { font-size: clamp(.72rem, 1.6vw, .95rem); letter-spacing: .42em; color: #87988d; animation: intro-v188-text-in 1.4s ease .9s forwards; }
+.intro-v188__name { font-size: clamp(1.5rem, 5vw, 3.1rem); letter-spacing: .22em; font-weight: 600; color: #e3eee6;
+  text-shadow: 0 0 18px rgba(143, 213, 162, .22); animation: intro-v188-text-in 1.6s ease 1.5s forwards; }
+html[data-intro-v188="short"] .intro-v188__credit, .intro-v188[data-mode="short"] .intro-v188__credit, .intro-v188[data-phase="text-out"] .intro-v188__credit, .intro-v188[data-phase="fade"] .intro-v188__credit { opacity: 0; }
+.intro-v188[data-phase="fade"] { opacity: 0; pointer-events: none; }
+.intro-v188[data-reduced-motion="true"] .intro-v188__stars { animation: none; }
+@media (prefers-reduced-motion: reduce) { .intro-v188__stars { animation: none; } }
+@keyframes intro-v188-text-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes intro-v188-failsafe { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+

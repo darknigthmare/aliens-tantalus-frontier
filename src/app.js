@@ -56,6 +56,7 @@ import {
   applyProvingGroundQualificationV81
 } from './hub-annex-services-v71.js';
 import { advanceGalaxy, resolveHubCrisisEvent } from './world-crisis.js';
+import { playIntroV188 } from './intro-sequence-v188.js';
 import { createHubCrisis as createForcedHubCrisisV188 } from './world-crisis-core.js';
 import { applyCampaignConsequence } from './campaign-consequences.js';
 import { hasCampaignStoryV160, preserveCampaignStoryReturnV160, recordCampaignStoryReviewV160 } from './campaign-story-v160.js';
@@ -4542,14 +4543,15 @@ async function boot() {
     openArchives: (entryId = '') => document.dispatchEvent(createOpenArchivesEventV68(entryId)),
     get investigation() { return getNarrativeInvestigationV68(saveSystem.data); }
   };
-  setTimeout(() => {
-    byId('boot').remove();
-    showTitleScreen();
-  }, 500);
+  // Opening credit (V188): the title is prepared underneath, its images decoded, then revealed by a fade.
+  void playIntroV188({ overlay: byId('intro-v188'), titleRoot: titleScreen.root,
+    reducedMotion: Boolean(saveSystem.data.settings?.reducedMotion || globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches),
+    prepareTitle: () => { byId('boot').remove(); showTitleScreen(); } });
 }
 
 boot().catch((error) => {
   console.error(error);
+  byId('intro-v188')?.remove();
   byId('boot').innerHTML = `<div class="boot-mark">ERR</div><p>${escapeHtml(error.message)}</p>`;
 });
 

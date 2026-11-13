@@ -135,7 +135,16 @@ Non vérifiés dans le navigateur : CIN-02, `cin-p2` et les répliques du quai. 
 - Jun Park est retrouvé dans le conduit du support-vie ; le choix attend la créature neutralisée et Jun ramené.
 - Vérifications : `scripts/verify-story-cinematics-v188.mjs` (9 tests) et les 20 suites PNJ/crises (334 tests) ; Chromium sur une sauvegarde après C-12 : 16 routines `alert`, puis l'événement de nœud du hub `hub-life-support`, injecté par `__ATF_HUB__.onAction`, enregistre `junRescued`. Le message s'affiche, sans erreur de page.
 
+## Crédit d'ouverture (demande du propriétaire, 2026-11-13)
+
+- Avant l'écran titre : « A fan game by Darknigthmare » sur les bitmaps d'étoiles du menu (`stars-01-distant-field`, `stars-02-near-sparks`), puis un fondu enchaîné vers le titre.
+- Le titre est préparé sous le voile ; ses neuf images sont décodées pendant le crédit (attente plafonnée à 8 s). Le voile est opaque dès le premier affichage. Les étoiles n'apparaissent qu'une fois décodées. Aucun élément ne surgit.
+- Crédit complet à la première ouverture d'une session de navigateur. Un rechargement dans la même session ne montre qu'un court fondu étoilé, fixé avant le premier affichage par `src/intro-boot-v188.js`. Une touche, un clic ou un toucher passe au fondu, sans atteindre le menu en dessous.
+- Vérifications : `scripts/verify-intro-v188.mjs` (4 tests) ; Chromium : images du titre 9/9 décodées avant le fondu ; captures du crédit et du fondu ; rechargement en mode court sans texte ; Entrée pendant le crédit laisse le titre à l'état `idle` ; aucune erreur de page.
+- Le pied de l'écran titre écrit toujours « DARKNIGHTMARE » : orthographe à harmoniser par le propriétaire.
+
 ## Limites et travail restant
+
 
 
 
