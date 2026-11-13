@@ -22,6 +22,8 @@ import { preserveConvoyReturnHistoryV162 } from '../src/campaign-convoy-history-
 import { mountConvoyReturnHistoryV162 } from '../src/campaign-convoy-history-ui-v162.js';
 import { preserveLetheContinuityV163, recordLetheContinuityReviewV163 } from '../src/campaign-lethe-continuity-v163.js';
 import { mountLetheContinuityV163 } from '../src/campaign-lethe-continuity-ui-v163.js';
+import { getArbiterMissionV190 } from '../src/xeno-arbiter-campaign-v190.js';
+import { mountArbiterDossierV190 } from '../src/xeno-arbiter-ui-v190.js';
 import { hostV136 } from './forge-native-host-v136.mjs';
 import { HUB_NPC_ANNEX_WORKPOST_ROUTE_DEFINITIONS_V165 } from '../src/npc-annex-workpost-routes-v165.js';
 
@@ -507,6 +509,11 @@ test('PR15: the actual app review callback restores focus to the replaced topic 
   const dependencies = { saveSystem: system, clone, preserveCampaignStoryReturnV160,
     preserveConvoyReturnHistoryV162, mountConvoyReturnHistoryV162,
     preserveLetheContinuityV163, mountLetheContinuityV163, recordLetheContinuityReviewV163,
+    getArbiterMissionV190, mountArbiterDossierV190,
+    // The production dossier mounts alongside this legacy report. Its separate
+    // navigation is outside this focus scenario and must never be exercised.
+    planArbiterMissionV190() { assert.fail('Legacy QZ-18 reading cannot plan an ARBITER mission.'); },
+    showView() { assert.fail('Legacy QZ-18 reading cannot open the Trials terminal.'); },
     CAMPAIGNS: [campaign], WORLDS: [world], WEAPONS: [], EQUIPMENT: [], VEHICLES: [], CREW: [],
     getOperationBrief: () => ({ crewIds: [], ready: true, risk: 0, hours: 0 }),
     resolveCrewDefinitionV85: member => member, getSpecialOperationByCampaignIdV67: () => null,

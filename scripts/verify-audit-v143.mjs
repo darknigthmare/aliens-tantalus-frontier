@@ -10,6 +10,12 @@ import { APP_RELEASE_V143 } from '../src/release-info-v143.js';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
 import { resolveSourceCommitV143, stampReleaseHtmlV143 } from './build-release-v143.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { buildCampaignsWithSpecialOperationsV67 } from '../src/special-operations-v67.js';
+import { BLACK_COCOON_CAMPAIGN_V121 } from '../src/black-cocoon-state-v121.js';
+import { APC_CONVOY_CAMPAIGN_V121 } from '../src/apc-convoy-state-v121.js';
+import { C12_HORDE_CAMPAIGN_V121 } from '../src/c12-horde-state-v121.js';
+import { ARCHIVE_RELAY_CAMPAIGN_V122 } from '../src/archive-relay-state-v122.js';
+import { NEW_SPECIAL_CAMPAIGNS_V131 } from '../src/special-operations-v131.js';
 
 const worker = await readFile(new URL('../sw.js', import.meta.url), 'utf8');
 const ORIGIN = 'https://tantalus.test';
@@ -62,8 +68,13 @@ test('MIRE keeps every stable ID and leaves original Frontier operations untouch
   assert.deepEqual(mapped.map(c => c.id), BEFORE.map(c => c.id));
   for (let i = 0; i < BEFORE.length; i++) if (BEFORE[i].mode !== 'MIRE') assert.equal(mapped[i], BEFORE[i]);
   assert.equal(validateContent().ok, true);
-  assert.equal(CAMPAIGNS.length, 455);
-  assert.equal(new Set(CAMPAIGNS.map(c => c.id)).size, 455);
+  const historical = [...buildCampaignsWithSpecialOperationsV67(mapped), BLACK_COCOON_CAMPAIGN_V121,
+    APC_CONVOY_CAMPAIGN_V121, C12_HORDE_CAMPAIGN_V121, ARCHIVE_RELAY_CAMPAIGN_V122, ...NEW_SPECIAL_CAMPAIGNS_V131];
+  assert.equal(historical.length, 455);
+  assert.deepEqual(CAMPAIGNS.slice(0, 455), historical);
+  assert.deepEqual(CAMPAIGNS.slice(455).map(c => c.id), ['special-arbiter-01-freight', 'special-arbiter-02-gallery',
+    'special-arbiter-03-custody', 'special-arbiter-04-arbitration', 'special-arbiter-05-isolation', 'special-arbiter-06-local']);
+  assert.equal(new Set(CAMPAIGNS.map(c => c.id)).size, 461);
 });
 for (const source of MIRE_SETTINGS_V143) test(`MIRE setting: ${source.source}`, () => {
   const entries = CAMPAIGNS.filter(c => c.mode === 'MIRE' && c.source === source.source);

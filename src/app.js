@@ -53,6 +53,10 @@ import { mountCampaignDebriefV161 } from './campaign-convoy-story-ui-v161.js';
 import { preserveConvoyReturnHistoryV162 } from './campaign-convoy-history-v162.js';
 import { mountConvoyReturnHistoryV162 } from './campaign-convoy-history-ui-v162.js';
 import { hasCampaignStoryV163 } from './campaign-lethe-story-v163.js';
+import { getArbiterMissionV190, arbiterCampaignAccessV190 } from './xeno-arbiter-campaign-v190.js';
+import { buildArbiterMissionV190 } from './xeno-arbiter-runtime-v190.js';
+import { mountArbiterDossierV190 } from './xeno-arbiter-ui-v190.js';
+import { resolveCampaignArtV190 } from './campaign-art-v190.js';
 import { preserveLetheContinuityV163, recordLetheContinuityReviewV163 } from './campaign-lethe-continuity-v163.js';
 import { mountLetheContinuityV163 } from './campaign-lethe-continuity-ui-v163.js';
 import { withHubMotionTrackerV160 } from './motion-tracker-v160.js';
@@ -775,6 +779,12 @@ function chooseNpcDialogueV62(choiceId) {
 function setupXenoTrialsUiV96() {
   xenoTrialsUiV96 = new XenoTrialsUiV96({
     root: byId('xeno-trials-v96'), audioDirector: audio,
+    getCampaignProgress: () => saveSystem.data.xenoArbiterV190,
+    onOpenArbiterDossier: () => {
+      showView('command');
+      const dossier = byId('operation-plan').querySelector('[data-arbiter-dossier]');
+      if (dossier) { dossier.open = true; dossier.querySelector('summary')?.focus({ preventScroll: true }); dossier.scrollIntoView?.({ block: 'nearest' }); }
+    },
     getProgress: () => saveSystem.data.xenoTrialsV96,
     canCommit: () => ownsTimelineV84(xenoTrialsOwnerV96) && activeView === 'xenotrials' && !creatorOwnerV84,
     onCommit: state => { saveSystem.commit({ xenoTrialsV96: state }); renderClock(); },
@@ -1346,13 +1356,26 @@ function startGalaxyJumpSchedulerV116() {
   galaxyJumpTimerV116 = setInterval(tickGalaxyJumpV116, 250);
 }
 
+function planArbiterMissionV190(campaignId) {
+  const campaign = CAMPAIGNS.find(entry => entry.id === campaignId);
+  if (!campaign || !getArbiterMissionV190(campaignId) || !saveSystem.data.galaxy.unlockedWorldIds.includes(campaign.worldId)
+    || !arbiterCampaignAccessV190(saveSystem.data.xenoArbiterV190, campaignId).available
+    || saveSystem.data.strategy.currentOperation && saveSystem.data.strategy.currentOperation.campaignId !== campaignId) return false;
+  try {
+    const candidate = clone(saveSystem.data); candidate.strategy.plannedCampaignId = campaignId;
+    saveSystem.commit(candidate); renderCampaigns(); renderCommandMissionsV110();
+    byId('operation-launch')?.focus({ preventScroll: true }); return true;
+  } catch (error) { toast(error.message); return false; }
+}
+
 function renderCampaigns() {
   const mode = byId('campaign-mode').value;
   const term = byId('campaign-search').value.trim().toLowerCase();
   const campaigns = CAMPAIGNS.filter((campaign) => (mode === 'all' || campaign.mode === mode) && JSON.stringify(campaign).toLowerCase().includes(term));
   byId('campaign-list').innerHTML = campaigns.map((campaign, index) => {
     const world = WORLDS.find((entry) => entry.id === campaign.worldId);
-    const unlocked = saveSystem.data.galaxy.unlockedWorldIds.includes(campaign.worldId);
+    const unlocked = saveSystem.data.galaxy.unlockedWorldIds.includes(campaign.worldId)
+      && (!getArbiterMissionV190(campaign.id) || arbiterCampaignAccessV190(saveSystem.data.xenoArbiterV190, campaign.id).available);
     const planned = saveSystem.data.strategy.plannedCampaignId === campaign.id;
     const completed = saveSystem.data.galaxy.completedCampaignIds.includes(campaign.id);
     return `<article class="catalog-card ${planned ? 'selected' : ''}" data-index="${index + 1}"><span class="eyebrow">${escapeHtml(campaign.mode)} · ${escapeHtml(campaign.source)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaign.summary)}</p><div class="mini-tags"><span>${escapeHtml(world?.name || 'Frontier')}</span><span>${escapeHtml(campaign.objective)}</span><span>${campaign.routes} routes</span><span>${completed ? 'ACCOMPLIE' : unlocked ? 'OUVERTE' : 'VERROUILLÉE'}</span></div><footer><span>${escapeHtml(campaign.canon)}</span><button class="button compact" data-plan-campaign="${campaign.id}" ${unlocked ? '' : 'disabled'}>${planned ? 'PLANIFIÉE' : 'PLANIFIER'}</button></footer></article>`;
@@ -1442,7 +1465,8 @@ function renderOperationPlan() {
   const weapon = WEAPONS.find((entry) => entry.id === saveSystem.data.player.weaponIds.at(-1));
   const equipment = saveSystem.data.player.equipmentIds.map((id) => EQUIPMENT.find((entry) => entry.id === id)?.name || id);
   const specialOperation = getSpecialOperationByCampaignIdV67(campaign.id);
-  const soloOperationV121 = isSoloSpecialOperationV131(campaign.id);
+  const arbiterMissionV190 = getArbiterMissionV190(campaign.id);
+  const soloOperationV121 = isSoloSpecialOperationV131(campaign.id) || Boolean(arbiterMissionV190);
   const convoyOperationV121 = campaign.id === APC_CONVOY_CAMPAIGN_V121.id;
   const issuedVehicle = convoyOperationV121 ? VEHICLES.find(entry => entry.id === 'vehicle-001-m577-armored-personnel-carrier') : specialOperation?.issuedVehicleId
     ? VEHICLES.find((entry) => entry.id === specialOperation.issuedVehicleId)
@@ -1469,13 +1493,17 @@ function renderOperationPlan() {
           ? 'Six systèmes physiques · énergie limitée, CCTV active, pression par salle, soudure temporisée, acide persistant et double autorisation d’autodestruction.'
           : escapeHtml(campaign.description || campaign.summary || '');
   const soloNoticeV121 = soloOperationV121
-    ? `<div class="special-operation-notice"><span>INSERTION SOLO</span><b>${convoyOperationV121 ? 'M577 FOURNI · CONVOI À UN OPÉRATEUR' : 'INSERTION À PIED · AUCUN VÉHICULE'}</b><p>${campaign.id === BLACK_COCOON_CAMPAIGN_V121.id ? 'Captivité, récupération du matériel, sortie du complexe puis confinement à bord.' : convoyOperationV121 ? 'Conduite et tourelle du M577 imposé. La sélection générale de véhicule ne remplace pas le convoi.' : campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? 'Enquête originale du Tantalus : PDA, relais électrique, six documents départementaux et confrontation. Aucune identité personnelle ne peut être déduite du badge seul.' : 'Survivre au sas C-12, tenir la défense puis rejoindre l’extraction.'} Aucun binôme physique déployé. Les bonus dépendent du bilan réel.</p></div>`
+    ? `<div class="special-operation-notice"><span>INSERTION SOLO</span><b>${convoyOperationV121 ? 'M577 FOURNI · CONVOI À UN OPÉRATEUR' : 'INSERTION À PIED · AUCUN VÉHICULE'}</b><p>${arbiterMissionV190 ? 'ARBITER : relevez les preuves locales dans l’ordre, puis confirmez l’extraction au sas. Tout module AB-40 retrouvé doit rester sous scellés.' : campaign.id === BLACK_COCOON_CAMPAIGN_V121.id ? 'Captivité, récupération du matériel, sortie du complexe puis confinement à bord.' : convoyOperationV121 ? 'Conduite et tourelle du M577 imposé. La sélection générale de véhicule ne remplace pas le convoi.' : campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? 'Enquête originale du Tantalus : PDA, relais électrique, six documents départementaux et confrontation. Aucune identité personnelle ne peut être déduite du badge seul.' : 'Survivre au sas C-12, tenir la défense puis rejoindre l’extraction.'} Aucun binôme physique déployé. Les bonus dépendent du bilan réel.</p></div>`
     : '';
   const specialNotice = specialOperation
     ? `<div class="special-operation-notice"><span>ORDRE PRIORITAIRE</span><b>${escapeHtml(specialOperation.promisedTitle)}</b><p>${specialNoticeCopy}</p></div>`
     : soloNoticeV121;
   byId('operation-plan').innerHTML = `<span class="eyebrow">PLAN OPÉRATIONNEL · ${escapeHtml(campaign.mode)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaign.objective)} · ${escapeHtml(world.name)}</p>${specialNotice}${recoveryNotice}<div class="operation-risk"><b>${brief.risk}%</b><span>RISQUE</span></div><div class="data-list"><span>TRANSIT</span><b>${brief.hours} h</b><span>COÛT</span><b>${formatCost(brief.cost)}</b><span>RÉCOMPENSE</span><b>${formatCost(brief.reward)}</b><span>ESCOUADE</span><b>${soloOperationV121 ? 'UN OPÉRATEUR · SOLO' : escapeHtml(crewNames.join(', ') || 'AUCUNE')}</b><span>ARME</span><b>${escapeHtml(weapon?.name || 'AUCUNE')}</b><span>ÉQUIPEMENT</span><b>${escapeHtml(equipment.join(', ') || 'AUCUN')}</b><span>VÉHICULE</span><b>${escapeHtml(vehicle?.name || 'AUCUN')}${issuedVehicle ? ' · FOURNI SUR ZONE' : ''}</b></div><div class="button-row"><button id="operation-launch" class="button primary wide" ${launchDisabled ? 'disabled' : ''}>${launchLabel}</button>${recoveryAction}</div>`;
   byId('operation-launch').onclick = () => launchCampaign(campaign);
+  mountArbiterDossierV190(byId('operation-plan'), { progress: saveSystem.data.xenoArbiterV190,
+    selectedCampaignId: campaign.id, activeOperation: operation,
+    worldAvailable: saveSystem.data.galaxy.unlockedWorldIds.includes('world-05-lethe'),
+    onPlan: planArbiterMissionV190, onOpenTrials: () => showView('xenotrials') });
   const abandonButton = byId('operation-abandon-v69');
   if (abandonButton) abandonButton.onclick = abandonBlockedOperationV69;
   mountCampaignDebriefV160(byId('operation-plan'), {
@@ -2251,6 +2279,7 @@ function openArchiveRelayReaderV122(event) {
 
 function buildCampaignMissionLevelV122(options) {
   const id = options.campaign?.id;
+  if (getArbiterMissionV190(id)) return buildArbiterMissionV190(options);
   if (HIVE_CAMPAIGNS_V131.some(c=>c.id===id)) return buildHiveMissionV131(options);
   if (MECHA_CAMPAIGNS_V131.some(c=>c.id===id)) return buildMechaMissionV131(options);
   if (ECOSYSTEM_CAMPAIGNS_V131.some(c=>c.id===id)) return buildEcosystemMissionV131(options);
@@ -2507,8 +2536,10 @@ function startMissionRuntimeV62(context) {
   missionOwnerV78 = { epoch: profileEpochV78, profile: saveSystem.profile, timeline: saveSystem.data.createdAt, operationId: saveSystem.data.strategy.currentOperation?.id };
   engine.start({
     userCasteCampaignV88: !getSpecialOperationByCampaignIdV67(campaign.id)
+      && !getArbiterMissionV190(campaign.id)
       && ![BLACK_COCOON_CAMPAIGN_V121.id, APC_CONVOY_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id].includes(campaign.id),
     operationId: deployment.operation.id,
+    arbiterProgressV190: saveSystem.data.xenoArbiterV190,
     seed: levelSeed.seed,
     world: { ...world, ...worldState },
     campaign,
@@ -2579,7 +2610,7 @@ function campaignObjectiveLabel(campaignId) {
 function startMissionInsertionV62(context) {
   const operation = saveSystem.data.strategy.currentOperation;
   const authoredStory = hasCampaignStoryV160(context.campaign?.id) || hasCampaignStoryV161(context.campaign?.id)
-    || hasCampaignStoryV163(context.campaign?.id);
+    || hasCampaignStoryV163(context.campaign?.id) || Boolean(getArbiterMissionV190(context.campaign?.id));
   // Preserve mid-mission saves from before this authored opening existed.
   // An insertion paused before deployment still has its own durable phase.
   const legacyStoryResume = authoredStory && context.deployment?.resumed
@@ -2626,7 +2657,7 @@ function startMissionInsertionV62(context) {
     root,
     state,
     mediaRegistry: MISSION_INSERTION_MEDIA_V62,
-    resolveMedia: ({ state, phase }) => resolveCampaignArtV179({ state, phase })
+    resolveMedia: ({ state, phase }) => resolveCampaignArtV190({ state, phase }) || resolveCampaignArtV179({ state, phase })
       || resolveMissionInsertionMediaV62({ state, phase, mediaRegistry: MISSION_INSERTION_MEDIA_V62 }),
     returnContext: 'command',
     reducedMotion: Boolean(saveSystem.data.settings.reducedMotion),
@@ -2706,7 +2737,7 @@ function launchCampaign(campaign = null) {
   const weapon = operationLoadout.weapon || WEAPONS[0];
   const equipment = operationLoadout.equipment;
   const specialOperation = getSpecialOperationByCampaignIdV67(campaign.id);
-  const vehicle = [BLACK_COCOON_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id, ...NEW_SPECIAL_CAMPAIGNS_V131.map(c=>c.id)].includes(campaign.id) ? null
+  const vehicle = getArbiterMissionV190(campaign.id) || [BLACK_COCOON_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id, ...NEW_SPECIAL_CAMPAIGNS_V131.map(c=>c.id)].includes(campaign.id) ? null
     : campaign.id === APC_CONVOY_CAMPAIGN_V121.id ? VEHICLES.find(entry => entry.id === 'vehicle-001-m577-armored-personnel-carrier')
     : specialOperation?.issuedVehicleId
     ? VEHICLES.find((entry) => entry.id === specialOperation.issuedVehicleId) || operationLoadout.vehicle
@@ -2773,7 +2804,7 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
 // readable over routine combat/checkpoint captions, but never over fatal alerts.
 function writeMissionRadioV121(event, log) {
   if (!['black-cocoon-radio', 'apc-convoy-radio', 'c12-horde-radio', 'archive-relay-radio',
-    'hive-radio-v131', 'ecosystem-radio-v131', 'legacy-operation-radio'].includes(event?.type)) return false;
+    'hive-radio-v131', 'ecosystem-radio-v131', 'legacy-operation-radio', 'arbiter-radio-v190'].includes(event?.type)) return false;
   const text = String(event.text || '').trim();
   if (!text) return false;
   log.dataset.radioUntilV121 = String(Date.now() + Math.max(6000, captionReadingMillisecondsV84(text)));
@@ -3791,6 +3822,7 @@ function bindDelegatedActions() {
       try { cancelPhysicalModuleActionV71(target.dataset.moduleCancel); } catch (error) { toast(error.message); renderModules(); }
     }
     if (target.dataset.planCampaign) {
+      if (getArbiterMissionV190(target.dataset.planCampaign)) { planArbiterMissionV190(target.dataset.planCampaign); return; }
       saveSystem.data.strategy.plannedCampaignId = target.dataset.planCampaign;
       saveSystem.commit(); renderCampaigns(); renderCommandMissionsV110(); toast('Campagne ajoutée au plan opérationnel.');
     }

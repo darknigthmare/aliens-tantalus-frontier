@@ -1,11 +1,14 @@
 /** Exact e1d5358 V188 -> V189 animation/audio continuation.
  * This terminal audit preserves all 71 V186 and 48 V188 receipts. It admits
  * only named byte-pinned successors and new inputs; it neither records nor
- * transfers runtime QA, publication or artistic fidelity outcomes.
+ * transfers runtime QA, publication or artistic fidelity outcomes. V190 now
+ * succeeds these unchanged declarations through an exact source relay.
  */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedArbiterCampaignDigestV190, arbiterCampaignRuntimeSourcesV190,
+  verifyArbiterCampaignV190 } from './audit-xeno-arbiter-campaign-v190.mjs';
 const freeze = value => { if (value && typeof value === 'object') { Object.values(value).forEach(freeze); Object.freeze(value); } return value; };
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const readRepository = path => readFileSync(new URL('../' + path, import.meta.url));
@@ -213,11 +216,11 @@ export const ANIMATION_AUDIO_PRESERVED_PLATES_V189 = freeze({
  * retain their earlier endpoint; they gain no new source admission. */
 export function reviewedAnimationAudioDigestV189(path, endpointV188) {
   const receipt = ANIMATION_AUDIO_SUCCESSORS_V189[path];
-  if (!receipt) return endpointV188;
+  if (!receipt) return reviewedArbiterCampaignDigestV190(path, endpointV188);
   assert.equal(endpointV188, receipt.previousSha256, 'Incorrect V188 endpoint for V189: ' + path);
   assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256), 'Invalid V189 successor digest: ' + path);
   assert.notEqual(receipt.previousSha256, receipt.currentSha256, 'Unchanged V189 successor: ' + path);
-  return receipt.currentSha256;
+  return reviewedArbiterCampaignDigestV190(path, receipt.currentSha256);
 }
 /** Used only after the complete chain has verified all physical source bytes.
  * Some historical integration paths already export the final reviewed endpoint;
@@ -225,13 +228,14 @@ export function reviewedAnimationAudioDigestV189(path, endpointV188) {
 export function animationAudioRuntimeSourcesV189(historical) {
   const result = { ...historical };
   for (const [path, receipt] of Object.entries(ANIMATION_AUDIO_SUCCESSORS_V189)) if (receipt.kind === 'runtime') {
-    if (result[path] !== undefined && result[path] !== receipt.currentSha256)
-      assert.equal(result[path], receipt.previousSha256, 'Incorrect V189 runtime view predecessor: ' + path);
-    result[path] = receipt.currentSha256;
+    const current = reviewedArbiterCampaignDigestV190(path, receipt.currentSha256);
+    if (result[path] !== undefined)
+      assert.ok([receipt.previousSha256, receipt.currentSha256, current].includes(result[path]), 'Incorrect V189 runtime view predecessor: ' + path);
+    result[path] = current;
   }
   for (const [path, receipt] of Object.entries(ANIMATION_AUDIO_NEW_INPUTS_V189))
-    if (receipt.kind === 'runtime') result[path] = receipt.sha256;
-  return Object.freeze(result);
+    if (receipt.kind === 'runtime') result[path] = reviewedArbiterCampaignDigestV190(path, receipt.sha256);
+  return arbiterCampaignRuntimeSourcesV190(result);
 }
 export function verifyAnimationAudioV189(readSource = readRepository) {
   const paths = [], kinds = ['runtime', 'verifier', 'asset', 'configuration', 'document-input'];
@@ -245,7 +249,7 @@ export function verifyAnimationAudioV189(readSource = readRepository) {
     assert.ok(safe(path), 'Unsafe V189 added-input path: ' + path);
     assert.deepEqual(Object.keys(receipt).sort(), ['kind', 'sha256']);
     assert.ok(kinds.includes(receipt.kind) && validHash(receipt.sha256)); paths.push(path);
-    assert.equal(sha(readSource(path)), receipt.sha256, 'Unreviewed V189 added-input bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedArbiterCampaignDigestV190(path, receipt.sha256), 'Unreviewed V189 added-input bytes: ' + path);
   }
   for (const [path, digest] of Object.entries(ANIMATION_AUDIO_PRESERVED_PLATES_V189)) {
     assert.ok(safe(path) && validHash(digest)); paths.push(path);
@@ -261,6 +265,7 @@ export function verifyAnimationAudioV189(readSource = readRepository) {
   const start = completion.indexOf('export const COMPLETION_BASELINES_V186'), end = completion.indexOf('\nexport function reviewedCompletionDigestV186');
   assert.ok(start >= 0 && end > start);
   assert.equal(sha(completion.slice(start, end)), ANIMATION_AUDIO_COMPLETION_RECEIPTS_SHA256_V189, 'Historical V186 receipt declarations changed');
+  verifyArbiterCampaignV190(readSource);
   return Object.freeze({ baselineCommit: ANIMATION_AUDIO_BASELINE_V189,
     successors: Object.keys(ANIMATION_AUDIO_SUCCESSORS_V189).length,
     addedInputs: Object.keys(ANIMATION_AUDIO_NEW_INPUTS_V189).length,

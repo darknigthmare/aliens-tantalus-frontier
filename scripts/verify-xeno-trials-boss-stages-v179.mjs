@@ -15,9 +15,14 @@ const file = path => readFileSync(new URL(`..${path}`, import.meta.url));
 
 test('forty appended settings preserve all six historical stages and use distinct real image bytes', () => {
   assert.deepEqual(stages.slice(0, 6).map(stage => stage.id), oldIds);
-  assert.equal(additions.length, 40); assert.equal(stages.length, 46);
-  assert.deepEqual(stages.slice(6), additions);
-  assert.equal(new Set(stages.map(stage => stage.id)).size, 46);
+  assert.equal(additions.length, 40);
+  // V190 appends corporate settings; this historical contract still owns the
+  // exact first forty-six entries and every V179 image/physics assertion below.
+  assert.deepEqual(stages.slice(6, 46), additions);
+  assert.equal(new Set(stages.slice(0, 46).map(stage => stage.id)).size, 46);
+  assert.deepEqual(stages.slice(46).map(stage => stage.id), [
+    'xt190-adjudication-vault', 'xt190-specimen-transfer', 'xt190-executive-gallery', 'xt190-evidence-stack'
+  ]);
   assert.equal(new Set(additions.map(stage => stage.backdrop)).size, 40);
   const hashes = new Set();
   for (const stage of additions) {

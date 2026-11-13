@@ -1,4 +1,6 @@
 import { COSTUMES, CREW, RELEASE, VEHICLES, WORLDS, CAMPAIGNS, WEAPONS, EQUIPMENT } from './content.js';
+import { createArbiterCampaignProgressV190, normalizeArbiterCampaignProgressV190, getArbiterMissionV190,
+  arbiterCampaignAccessV190, validateArbiterCompletionV190, recordArbiterCampaignReturnV190 } from './xeno-arbiter-campaign-v190.js';
 import { normalizeCrewConversationMemoryV135 } from './crew-conversation-memory-v135.js';
 import { normalizePlayerWardrobeV135 } from './player-wardrobe-v135.js';
 import { applyCostumeOutfitV165 } from './player-costume-outfits-v165.js';
@@ -366,6 +368,7 @@ export function createDefaultSave(profile = 1) {
     alienSurvivalSystems: createAlienSurvivalSystemsV70(),
     bioforgeV80: createBioforgeV80(),
     xenoTrialsV96: createXenoTrialsProgressV96(),
+    xenoArbiterV190: createArbiterCampaignProgressV190(),
     premiumPersonnelV119: createPremiumPersonnelV119(),
     enemyDiscoveryV88: sanitizeEnemyDiscoveryV88(),
     shipAnimalsV1: migrateShipAnimalStateV87(),
@@ -1445,12 +1448,15 @@ export function applyCostume(save, costumeId) {
 
 export function getOperationBrief(save, campaign, world) {
   const strategy = ensureStrategy(save);
-  const deployableVehicleId = isSoloSpecialOperationV131(campaign.id) ? null
+  const arbiterMission = getArbiterMissionV190(campaign.id);
+  const solo = isSoloSpecialOperationV131(campaign.id) || Boolean(arbiterMission);
+  const arbiterAccess = !arbiterMission || arbiterCampaignAccessV190(save.xenoArbiterV190, campaign.id).available;
+  const deployableVehicleId = solo ? null
     : resolveReadyVehicleIdV60(strategy.selectedVehicleId, strategy.inventory.vehicleIds, VEHICLES);
   const availableCrew = save.crew.filter((member) => strategy.selectedCrewIds.includes(member.id) && member.status === 'active');
   // Solo operations freeze one operator; absent members keep their health,
   // fatigue, resources and service history in the Tantalus.
-  const selectedCrew = isSoloSpecialOperationV131(campaign.id) ? availableCrew.slice(0, 1) : availableCrew;
+  const selectedCrew = solo ? availableCrew.slice(0, 1) : availableCrew;
   const state = save.galaxy.worldState[world.id] || world;
   const averageStress = selectedCrew.reduce((sum, member) => sum + member.stress, 0) / Math.max(1, selectedCrew.length);
   const averageFatigue = selectedCrew.reduce((sum, member) => sum + member.fatigue, 0) / Math.max(1, selectedCrew.length);
@@ -1480,7 +1486,8 @@ export function getOperationBrief(save, campaign, world) {
     crewIds: selectedCrew.map((member) => member.id),
     minimumCrew,
     crewReady,
-    ready: save.galaxy.unlockedWorldIds.includes(world.id) && crewReady && canAfford(save, cost),
+    ready: save.galaxy.unlockedWorldIds.includes(world.id) && crewReady && canAfford(save, cost) && arbiterAccess,
+    arbiterAccessV190: arbiterAccess,
     worldUnlocked: save.galaxy.unlockedWorldIds.includes(world.id),
     annexSupportV71,
     openingSupportV88
@@ -1488,6 +1495,8 @@ export function getOperationBrief(save, campaign, world) {
 }
 
 export function beginOperation(save, campaign, world) {
+  if (getArbiterMissionV190(campaign.id) && !arbiterCampaignAccessV190(save.xenoArbiterV190, campaign.id).available)
+    throw new Error('Le retour précédent de l’enquête ARBITER doit être archivé avant ce départ.');
   if (isJumpChargingV116(save)) throw new Error('Préparation hyperspatiale active : départ en opération suspendu.');
   if (save.portMeridienV90 && save.openingV88?.phase === 'ready' && normalizePortMeridienV90(save.portMeridienV90)?.phase !== 'complete') throw new Error('Terminez le débarquement au quai des vivants avant la première opération.');
   if (save.onboardingV84 && save.onboardingV84.phase !== 'complete') throw new Error('Terminez le réveil et le briefing dans le Tantalus avant un déploiement.');
@@ -1502,7 +1511,7 @@ export function beginOperation(save, campaign, world) {
       const activeCrewCount = save.crew.filter((member) => operationCrewIds.has(member.id) && member.status === 'active').length;
       if (activeCrewCount < minimumCrew) throw new Error(`Escouade incomplete : ${minimumCrew} operateurs actifs requis.`);
     }
-    operation.vehicleId = campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? null
+    operation.vehicleId = campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id || getArbiterMissionV190(campaign.id) ? null
       : resolveReadyVehicleIdV60(operation.vehicleId, strategy.inventory.vehicleIds, VEHICLES);
     operation.costumeId ??= save.player.costumeId || null;
     // Legacy active operations retain their original standard dotation. A new
@@ -1510,7 +1519,7 @@ export function beginOperation(save, campaign, world) {
     operation.userEquipmentV95 = normalizeUserEquipmentV95(operation.userEquipmentV95);
     operation.playerAppearanceV126 = normalizePlayerAppearanceV126(operation.playerAppearanceV126);
     operation.coopAppearanceV126 = normalizePlayerAppearanceV126(operation.coopAppearanceV126);
-    if (campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id) {
+    if (campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id || getArbiterMissionV190(campaign.id)) {
       operation.neuroProfileId = null; operation.apexDossierId = null;
     } else {
       operation.neuroProfileId ??= strategy.selectedNeuroProfileId || null;
@@ -1552,13 +1561,13 @@ export function beginOperation(save, campaign, world) {
     playerIdentityV84: save.onboardingV84?.identity ? structuredClone(save.onboardingV84.identity) : null,
     weaponIds: [...save.player.weaponIds],
     equipmentIds: [...save.player.equipmentIds],
-    vehicleId: campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? null : strategy.selectedVehicleId,
+    vehicleId: campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id || getArbiterMissionV190(campaign.id) ? null : strategy.selectedVehicleId,
     costumeId: save.player.costumeId || null,
     userEquipmentV95: normalizeUserEquipmentV95(save.player.userEquipmentV95),
     playerAppearanceV126: normalizePlayerAppearanceV126(save.player.appearanceV126),
     coopAppearanceV126: normalizePlayerAppearanceV126(save.player.coopAppearanceV126),
-    neuroProfileId: campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? null : strategy.selectedNeuroProfileId || null,
-    apexDossierId: campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? null : strategy.selectedApexDossierId || null,
+    neuroProfileId: campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id || getArbiterMissionV190(campaign.id) ? null : strategy.selectedNeuroProfileId || null,
+    apexDossierId: campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id || getArbiterMissionV190(campaign.id) ? null : strategy.selectedApexDossierId || null,
     difficulty: save.settings?.difficulty || save.difficulty || 'standard',
     resumeState: null,
     insertionState: null,
@@ -1901,6 +1910,19 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
   const strategy = ensureStrategy(save);
   const operation = strategy.currentOperation;
   if (!operation) return { ok: false, reason: 'no-operation' };
+  const arbiterMission = getArbiterMissionV190(operation.campaignId);
+  let arbiterReturn = null;
+  const arbiterStateV190 = operation.resumeState?.arbiterMissionV190?.state;
+  if (arbiterMission && success) {
+    const checked = validateArbiterCompletionV190({ campaignId: operation.campaignId, operationId: operation.id,
+      success: true, arbiterV190: arbiterStateV190, resumeState: operation.resumeState, rewards });
+    if (!checked.valid) return { ok: false, reason: checked.reason };
+    arbiterReturn = recordArbiterCampaignReturnV190(save.xenoArbiterV190, {
+      campaignId: operation.campaignId, operationId: operation.id, success: true,
+      arbiterV190: arbiterStateV190, resumeState: operation.resumeState, rewards });
+    if (!arbiterReturn.applied && arbiterReturn.reason !== 'already-recorded')
+      return { ok: false, reason: arbiterReturn.reason };
+  }
   const specialDefinitionV121 = specialOperationRewardDefinitionV121(operation.campaignId);
   const chapterV131 = operationCampaignV131(operation.campaignId);
   const completionV131 = chapterV131 && success ? validateOperationCompletionV131(operation,rewards) : null;
@@ -1969,7 +1991,7 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
     if (previousResourcesV121) paidStrategicRewardV121 = Object.fromEntries(Object.keys(strategicReward)
       .map(key => [key, Math.round((save.galaxy.resources[key] - previousResourcesV121[key]) * 100) / 100]));
     for (const [key, value] of Object.entries(specialOperationBonus)) changeStrategicValue(save, key, value);
-    const documentationOnlyV122 = operation.campaignId === ARCHIVE_RELAY_CAMPAIGN_V122.id;
+    const documentationOnlyV122 = operation.campaignId === ARCHIVE_RELAY_CAMPAIGN_V122.id || Boolean(arbiterMission);
     // A recovered text dossier is not a biological specimen or an extermination.
     if (!documentationOnlyV122) changeStrategicValue(save, 'pathogen', Math.max(1, Math.ceil((specialRewardV121?.kills ?? kills) / 5)));
     worldState.stability = clamp(worldState.stability + 8);
@@ -1977,6 +1999,7 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
     worldState.quarantine = clamp(worldState.quarantine + (containment ? 8 : 4));
     if (worldState.stability >= 70 && worldState.infestation <= 35) worldState.colonyLevel = Math.min(100, worldState.colonyLevel + 1);
     if (!save.galaxy.completedCampaignIds.includes(operation.campaignId)) save.galaxy.completedCampaignIds.push(operation.campaignId);
+    if (arbiterReturn) save.xenoArbiterV190 = arbiterReturn.state;
     const crew = save.crew.filter((member) => operation.crewIds.includes(member.id));
     crew.forEach((member) => {
       // Mission totals do not identify an individual shooter. Do not invent a
@@ -2047,6 +2070,7 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
     specialOperationBonus: structuredClone(specialOperationBonus),
     ...(alphaBravoDoctrineRun ? { alphaBravoDoctrineRun: structuredClone(alphaBravoDoctrineRun) } : {}),
     ...(alienSurvivalRun ? { alienSurvivalRun: structuredClone(alienSurvivalRun) } : {}),
+    ...(arbiterMission && resolvedSuccess ? { arbiterV190: structuredClone(arbiterStateV190) } : {}),
     completedDay: save.clock.day,
     completedHour: save.clock.hour
   };
@@ -2358,6 +2382,15 @@ export function migrateSave(input, profile = 1) {
   migrated.alienSurvivalSystems = normalizeAlienSurvivalSystemsV70(source.alienSurvivalSystems);
   migrated.bioforgeV80 = sanitizeBioforgeV80(source.bioforgeV80);
   migrated.xenoTrialsV96 = normalizeXenoTrialsProgressV96(source.xenoTrialsV96);
+  migrated.xenoArbiterV190 = normalizeArbiterCampaignProgressV190(source.xenoArbiterV190);
+  const arbiterReturnOperationV190 = migrated.strategy.lastOperation;
+  if (arbiterReturnOperationV190?.success && getArbiterMissionV190(arbiterReturnOperationV190.campaignId)) {
+    const state = arbiterReturnOperationV190.resumeState?.arbiterMissionV190?.state;
+    const checked = validateArbiterCompletionV190({ campaignId: arbiterReturnOperationV190.campaignId,
+      operationId: arbiterReturnOperationV190.id, success: true, arbiterV190: state,
+      resumeState: arbiterReturnOperationV190.resumeState, rewards: arbiterReturnOperationV190.resumeState?.mission?.rewards });
+    if (checked.valid) arbiterReturnOperationV190.arbiterV190 = structuredClone(checked.state);
+  }
   migrated.premiumPersonnelV119 = sanitizePremiumPersonnelV119(source.premiumPersonnelV119, migrated);
   migrated.enemyDiscoveryV88 = sanitizeEnemyDiscoveryV88(source.enemyDiscoveryV88);
   migrated.shipAnimalsV1 = migrateShipAnimalStateV87(source.shipAnimalsV1);

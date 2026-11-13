@@ -1,0 +1,368 @@
+{
+  "schema": 190,
+  "lot": "XENO-TRIALS-CORPORATE-STAGE-ART-V190",
+  "baseCommit": "3a6c1410f606b83a7be881f93b6e87f8d0008a98",
+  "provenance": "Original project adaptation for the clandestine corporate campaign tie-in. This art does not claim to reconstruct an existing franchise location.",
+  "generator": {
+    "provider": "OpenAI ImageGen",
+    "transparentBackground": true,
+    "newGenerationCalls": 4,
+    "editCalls": 1,
+    "postGenerationPixelEditing": false,
+    "publishedFilesCopiedByteIdentically": true
+  },
+  "counts": {
+    "atlases": 4,
+    "imagePlanes": 12,
+    "pngBytes": 6305765,
+    "newFranchiseExactLocations": 0
+  },
+  "contract": {
+    "layout": "Three equal horizontal strips, no headers or margins; sourceRect clipping happens only in Canvas at render time.",
+    "requestedCanvas": [
+      1536,
+      1536
+    ],
+    "actualGeneratedCanvas": [
+      1254,
+      1254
+    ],
+    "actualPlanSize": [
+      1254,
+      418
+    ],
+    "camera": "Side-on panorama, no raster crop or resize on disk.",
+    "farAlpha": "Near opaque rather than alpha255 everywhere; all far rows have no alpha-zero holes and over99.8percent of pixels above240. Composite over opaque stage background.",
+    "middleAlpha": "Each row has real alpha0 openings; observed alpha<16 fractions range61.90–76.49percent.",
+    "foregroundAlpha": "Observed alpha<16 fractions range84.91–89.91percent. These low fixtures must be clipped below the physical fighter baseline.",
+    "noPhysics": "The atlas adds no collision surface, attack, AI, damage, timer or mission progress."
+  },
+  "references": [
+    {
+      "path": "assets/openai/hub/layers/command-briefing-far.png",
+      "sha256": "64779f32201b567e357471b957b57c0682f020e0e3e21fc59acf8658fadfb8c9",
+      "role": "Visually inspected existing project art for industrial material, lighting and alpha-separated architecture; not a primary franchise measurement."
+    },
+    {
+      "path": "assets/openai/hub/layers/command-briefing-mid.png",
+      "sha256": "b17633acc263fc013f1135cf18eec7be6be614a342d66c13385fbbbc0735a4c8",
+      "role": "Visually inspected existing project art for industrial material, lighting and alpha-separated architecture; not a primary franchise measurement."
+    }
+  ],
+  "sharedPromptSummary": "Original gritty retrofuturistic industrial starship scenery inspired by the visual language of Alien: somber charcoal and olive battered metal, pipes, cable trays, recessed amber CRTs and muted cyan lamps. One square atlas, exactly three equal panoramic rows: near-opaque far room, alpha middle structure with open center, low alpha foreground fittings. No readable text, logo, people, creatures, weapons or game UI.",
+  "rejectedCandidates": [
+    {
+      "subject": "containment-rail",
+      "candidate": 1,
+      "sha256": "437faba8911254b01b45756945384825a18b950b6e8fd98540b100b9ff7b0164",
+      "reason": "Diffuse gray-white haze remained across the lower two rows. Both had zero alpha0 pixels, so the candidate was rejected before public admission.",
+      "resolution": "A referenced ImageGen edit removed the haze while preserving the scene and three equal bands. Final lower strips contain real alpha0 openings. No local bitmap cleanup was used.",
+      "retention": "Rejected original and numerical measurements retained only in external production evidence."
+    }
+  ],
+  "images": [
+    {
+      "stageId": "xt190-executive-gallery",
+      "name": "Galerie exécutive",
+      "path": "/assets/openai/stages/xeno-trials-v190/arbitration-gallery-atlas.png",
+      "sha256": "675a800f85be1829d9b7f0dcd5616d249a04df224339322064017e7d51112dc5",
+      "bytes": 1642463,
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG/RGBA8",
+      "layers": [
+        {
+          "id": "far",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 1254,
+            "height": 418
+          },
+          "alpha": {
+            "alpha0": 0.0,
+            "alphaUnder16": 0.0,
+            "alphaAbove240": 0.9999980922292683,
+            "mean": 252.08482330227483
+          }
+        },
+        {
+          "id": "middle",
+          "sourceRect": {
+            "x": 0,
+            "y": 418,
+            "width": 1254,
+            "height": 418
+          },
+          "alpha": {
+            "alpha0": 0.37297299359752145,
+            "alphaUnder16": 0.6190429858901276,
+            "alphaAbove240": 0.3138950573475882,
+            "mean": 89.18153392397915
+          }
+        },
+        {
+          "id": "foreground",
+          "sourceRect": {
+            "x": 0,
+            "y": 836,
+            "width": 1254,
+            "height": 418
+          },
+          "alpha": {
+            "alpha0": 0.6275993376220019,
+            "alphaUnder16": 0.8990579428126645,
+            "alphaAbove240": 0.09494974931892584,
+            "mean": 25.033584395961633
+          }
+        }
+      ],
+      "promptSummary": "Private arbitration observation booths behind armored glass; upper bridge and lateral pillars; low cable threshold.",
+      "visualReview": {
+        "reviewer": "assistant visual inspection of complete generated atlas",
+        "status": "CANVAS_COMPOSITION_REVIEWED",
+        "far": "Near-opaque original industrial architecture, no painted combatants or UI.",
+        "middle": "Real alpha-zero openings, upper fixtures and side structure; source row crop preserves the plane.",
+        "foreground": "Low sill, cables or clamps; renderer must keep this plane below fighter contact line."
+      },
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt190-specimen-transfer",
+      "name": "Transfert des spécimens",
+      "path": "/assets/openai/stages/xeno-trials-v190/containment-rail-atlas.png",
+      "sha256": "c582de5de305c399d0aa50ab3a62efd8b265487542bee634fdcf947ea52e222d",
+      "bytes": 1381394,
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG/RGBA8",
+      "layers": [
+        {
+          "id": "far",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 1254,
+            "height": 418
+          },
+          "alpha": {
+            "alpha0": 0.0,
+            "alphaUnder16": 0.0,
+            "alphaAbove240": 0.998685545965828,
+            "mean": 252.93565661653045
+          }
+        },
+        {
+          "id": "middle",
+          "sourceRect": {
+            "x": 0,
+            "y": 418,
+            "width": 1254,
+            "height": 418
+          },
+          "alpha": {
+            "alpha0": 0.6880088978426928,
+            "alphaUnder16": 0.7649473836832185,
+            "alphaAbove240": 0.21056256343337684,
+            "mean": 56.09612493608968
+          }
+        },
+        {
+          "id": "foreground",
+          "sourceRect": {
+            "x": 0,
+            "y": 836,
+            "width": 1254,
+            "height": 418
+          },
+          "alpha": {
+            "alpha0": 0.8228024388941034,
+            "alphaUnder16": 0.8660039071144586,
+            "alphaAbove240": 0.12630205352441565,
+            "mean": 32.83931037903589
+          }
+        }
+      ],
+      "promptSummary": "Quarantined transport doors, ceiling gantry and empty specimen cage cradle; overhead pipe and side stanchions; low hose mounts.",
+      "visualReview": {
+        "reviewer": "assistant visual inspection of complete generated atlas",
+        "status": "CANVAS_COMPOSITION_REVIEWED",
+        "far": "Near-opaque original industrial architecture, no painted combatants or UI.",
+        "middle": "Real alpha-zero openings, upper fixtures and side structure; source row crop preserves the plane.",
+        "foreground": "Low sill, cables or clamps; renderer must keep this plane below fighter contact line."
+      },
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt190-adjudication-vault",
+      "name": "Soute d’arbitrage",
+      "path": "/assets/openai/stages/xeno-trials-v190/secured-cargo-atlas.png",
+      "sha256": "45a35d8614bbeb52a9890bf2513cc5a0e3b28da4fc5317309d722b9616755f22",
+      "bytes": 1529137,
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG/RGBA8",
+      "layers": [
+        {
+          "id": "far",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 1254,
+            "height": 418
+          },
+          "alpha": {
+            "alpha0": 0.0,
+            "alphaUnder16": 0.0,
+            "alphaAbove240": 0.9999980922292683,
+            "mean": 252.63619575253924
+          }
+        },
+        {
+          "id": "middle",
+          "sourceRect": {
+            "x": 0,
+            "y": 418,
+            "width": 1254,
+            "height": 418
+          },
+          "alpha": {
+            "alpha0": 0.6212540921682196,
+            "alphaUnder16": 0.6975038727745855,
+            "alphaAbove240": 0.2735399830589959,
+            "mean": 73.30660164984013
+          }
+        },
+        {
+          "id": "foreground",
+          "sourceRect": {
+            "x": 0,
+            "y": 836,
+            "width": 1254,
+            "height": 418
+          },
+          "alpha": {
+            "alpha0": 0.8433796540067001,
+            "alphaUnder16": 0.8848584052562899,
+            "alphaAbove240": 0.10965675388994452,
+            "mean": 28.252695680043956
+          }
+        }
+      ],
+      "promptSummary": "Sealed cargo hold adapted to covert corporate adjudication, wheeled cargo cages beyond armored glazing and restricted control cubicles.",
+      "visualReview": {
+        "reviewer": "assistant visual inspection of complete generated atlas",
+        "status": "CANVAS_COMPOSITION_REVIEWED",
+        "far": "Near-opaque original industrial architecture, no painted combatants or UI.",
+        "middle": "Real alpha-zero openings, upper fixtures and side structure; source row crop preserves the plane.",
+        "foreground": "Low sill, cables or clamps; renderer must keep this plane below fighter contact line."
+      },
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt190-evidence-stack",
+      "name": "Archives du conseil",
+      "path": "/assets/openai/stages/xeno-trials-v190/council-server-atlas.png",
+      "sha256": "9d2938344b1bd67d10e39710cefb0da5e97ddf26900917ee1251a565218bf04f",
+      "bytes": 1752771,
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG/RGBA8",
+      "layers": [
+        {
+          "id": "far",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 1254,
+            "height": 418
+          },
+          "alpha": {
+            "alpha0": 0.0,
+            "alphaUnder16": 0.0,
+            "alphaAbove240": 0.9983249772975283,
+            "mean": 252.2018326045649
+          }
+        },
+        {
+          "id": "middle",
+          "sourceRect": {
+            "x": 0,
+            "y": 418,
+            "width": 1254,
+            "height": 418
+          },
+          "alpha": {
+            "alpha0": 0.35701449142647834,
+            "alphaUnder16": 0.7354131849850812,
+            "alphaAbove240": 0.21613706951153439,
+            "mean": 61.62562479491465
+          }
+        },
+        {
+          "id": "foreground",
+          "sourceRect": {
+            "x": 0,
+            "y": 836,
+            "width": 1254,
+            "height": 418
+          },
+          "alpha": {
+            "alpha0": 0.6309799073586533,
+            "alphaUnder16": 0.8490724418702258,
+            "alphaAbove240": 0.14517181383210093,
+            "mean": 37.55719687430843
+          }
+        }
+      ],
+      "promptSummary": "Sealed evidence drawers, retro reel storage and amber data readers, boardroom archives behind armored hatch.",
+      "visualReview": {
+        "reviewer": "assistant visual inspection of complete generated atlas",
+        "status": "CANVAS_COMPOSITION_REVIEWED",
+        "far": "Near-opaque original industrial architecture, no painted combatants or UI.",
+        "middle": "Real alpha-zero openings, upper fixtures and side structure; source row crop preserves the plane.",
+        "foreground": "Low sill, cables or clamps; renderer must keep this plane below fighter contact line."
+      },
+      "canonExact": false,
+      "affectsCombat": false
+    }
+  ],
+  "verification": {
+    "fileMeasurements": "Read PNG files, dimensions, SHA256 and per-plane alpha histogram with Pillow; no bitmap edit or re-encoding.",
+    "visualInspection": "All four complete final atlases inspected during generation; the failed containment original was explicitly viewed before editing.",
+    "runtimeIntegration": "Owned by the V190 stage renderer and application; this production receipt alone does not certify a played match or a completed mission.",
+    "physicalAudioOrCanonCertification": false,
+    "canvasComposition": {
+      "state": "PASSED_IMAGE_COMPOSITION_RENDER",
+      "frames": 8,
+      "locations": 4,
+      "cameras": [
+        500,
+        680
+      ],
+      "tick": 420,
+      "sourceFilesUnchanged": true,
+      "rendererSources": {
+        "src/xeno-trials-stage-scenes-v190.js": "4c73eb6861fe0a9d5335188170c477f4d9f2f046c4ca5ba0b5556ac8a82bc664",
+        "src/xeno-trials-stage-scenes-render-v190.js": "74b0ba84138ce86105356c92ed5c3b282ce183de65698da6e959de0a4c776be6",
+        "src/xeno-trials-boss-stages-v179.js": "3c4e7f8bf5289fe302e4a008307c842bb93c1ac49b0af9e83c1e073147e91247"
+      },
+      "pageErrors": 0,
+      "nativeDecodedImages": 4,
+      "imagePlaneDrawsPerFrame": 3,
+      "visualReview": "Eight composites visually inspected. No white-gray transparency veil in the corrected containment atlas; each scene keeps distinct architecture, middle openings and a low foreground sill. Camera changes produce separate depths.",
+      "fixture": "Standalone HTML shell renders actual stage rear/front functions, with real decoded published PNGs, without actors or game simulation. Not a played match.",
+      "evidence": "native-render-contact.png and native-render-receipt.json in external stage-art production evidence.",
+      "playedMatch": false
+    }
+  },
+  "limits": [
+    "These are four new original location atlases with twelve image planes, not forty new independently illustrated maps.",
+    "The additional forty existing stage profiles receive separate procedural presentation work, not new art claimed by this receipt.",
+    "No primary-source architectural or1:1 fidelity certification; fan-game continuity and locations are authored project fiction.",
+    "Final page/native screenshots and match checks belong to the release QA, not these production measurements."
+  ]
+}

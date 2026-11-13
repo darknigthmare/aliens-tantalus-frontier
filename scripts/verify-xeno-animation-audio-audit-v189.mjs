@@ -11,6 +11,7 @@ import { STAGE_OPERATIONS_SUCCESSORS_V188 as oldSuccessors, STAGE_OPERATIONS_NEW
 import { COMPLETION_SOURCES_V186, verifyCompletionV186 } from './audit-xeno-trials-completion-v186.mjs';
 import { loadAuditSuccessionV163, resolveAuditSourcesV163 } from './audit-succession-v163.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { reviewedArbiterCampaignDigestV190 as later } from './audit-xeno-arbiter-campaign-v190.mjs';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -26,7 +27,7 @@ test('V189 exactly succeeds e1d5358 without rewriting any of the 48 V188 or 71 V
   assert.equal(verify().historicalResultsTransferred, false); assert.equal(verifyStageOperationsV188().successors, 22); assert.equal(verifyCompletionV186().sources, 71);
   for (const [path, receipt] of Object.entries(successors)) {
     assert.ok(Object.isFrozen(receipt)); if (historic[path]) assert.equal(receipt.previousSha256, historic[path], path);
-    assert.equal(advance(path, receipt.previousSha256), receipt.currentSha256, path); assert.equal(sha(read(path)), receipt.currentSha256, path);
+    assert.equal(advance(path, receipt.previousSha256), later(path, receipt.currentSha256), path); assert.equal(sha(read(path)), later(path, receipt.currentSha256), path);
   }
   const stage = read('scripts/audit-xeno-stage-operations-v188.mjs').toString();
   assert.equal(sha(stage.slice(stage.indexOf('export const STAGE_OPERATIONS_BASELINE_V188'), stage.indexOf('\nexport function reviewedStageOperationsDigestV188'))),
@@ -52,19 +53,20 @@ test('the complete legacy chain retains its archival default and exposes four ex
   const { previous, current } = loadAuditSuccessionV163(read);
   assert.deepEqual(resolveAuditSourcesV163(previous, read), current.runtimeSourceSha256);
   const effective = resolveAuditSourcesV163(previous, read, { effective: true });
-  for (const [path, receipt] of Object.entries(successors).filter(([, r]) => r.kind === 'runtime')) assert.equal(effective[path], receipt.currentSha256, path);
+  for (const [path, receipt] of Object.entries(successors).filter(([, r]) => r.kind === 'runtime')) assert.equal(effective[path], later(path, receipt.currentSha256), path);
   const added = Object.entries(inputs).filter(([, r]) => r.kind === 'runtime'); assert.equal(added.length, 4);
-  for (const [path, receipt] of added) assert.equal(effective[path], receipt.sha256, path);
+  for (const [path, receipt] of added) assert.equal(effective[path], later(path, receipt.sha256), path);
   const frozen = Object.freeze({ original: 'historic' }), view = runtime(frozen); assert.deepEqual(frozen, { original: 'historic' }); assert.deepEqual(runtime(view), view);
   const first = Object.entries(successors).find(([, r]) => r.kind === 'runtime');
   assert.throws(() => runtime({ [first[0]]: '0'.repeat(64) }), /Incorrect V189 runtime view predecessor/);
 });
 
-test('terminal V189 pins its changed V188 relay and keeps new tools and review inputs source-only with exact neighbours refused', () => {
-  const terminal = 'scripts/audit-xeno-animation-audio-v189.mjs', relay = 'scripts/audit-xeno-stage-operations-v188.mjs';
+test('V189 relays to V190 while pinning its changed V188 relay and keeps new tools and review inputs source-only with exact neighbours refused', () => {
+  const terminal = 'scripts/audit-xeno-arbiter-campaign-v190.mjs', relay = 'scripts/audit-xeno-stage-operations-v188.mjs';
   assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(read(terminal).toString()), false);
   assert.equal(Object.hasOwn(successors, terminal) || Object.hasOwn(inputs, terminal), false);
   assert.ok(successors[relay]); assert.match(read(relay).toString(), /from '\.\/audit-xeno-animation-audio-v189\.mjs'/);
+  assert.match(read('scripts/audit-xeno-animation-audio-v189.mjs').toString(), /from '\.\/audit-xeno-arbiter-campaign-v190\.mjs'/);
   for (const path of [terminal, ...Object.keys(inputs)]) {
     assert.equal(isPublicDistributionPathV86(path), true, path);
     if (path.startsWith('scripts/') || path.startsWith('docs/')) assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);

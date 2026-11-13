@@ -61,13 +61,16 @@ test('V187 continues the exact V180 dependency guard instead of removing its imm
   assert.ok(Object.isFrozen(NATIVE_QA_DEPENDENCY_GUARD_SUCCESSOR_V187));
 });
 
-test('V187 workflow changes only the explicit crew-lifts resource selection and keeps the 55 minute job', () => {
+test('V187 resource selection and 55 minute job survive the exact V190 complete-history checkout addition', () => {
   const path = '.github/workflows/non-forge-regression-v163.yml';
   const workflow = read(path).toString();
   const option = ' --dependency-resource-profile ci-slow4';
   assert.equal(workflow.split(option).length - 1, 1);
-  assert.equal(sha(workflow.replace(option, '')), NATIVE_QA_RESOURCES_SUCCESSORS_V187[path].previousSha256,
-    'This receipt covers precisely one CLI selection, with no other workflow changes.');
+  const sourceHistoryOption = '          fetch-depth: 0\n';
+  assert.equal(workflow.split(sourceHistoryOption).length - 1, 1, 'V190 admits exactly one complete-history checkout option.');
+  const historicalWorkflow = workflow.replace(sourceHistoryOption, '');
+  assert.equal(sha(historicalWorkflow.replace(option, '')), NATIVE_QA_RESOURCES_SUCCESSORS_V187[path].previousSha256,
+    'The V187 historical receipt still covers precisely one CLI selection; V190 separately admits only the complete-history checkout option.');
   assert.match(workflow.match(/crew-lifts\)[\s\S]*?;;/)[0], /--dependency-resource-profile ci-slow4/);
   assert.match(workflow, /^    timeout-minutes: 55$/m);
 });
@@ -85,7 +88,7 @@ test('V187 audit and documentation stay source-only and the new audit test enter
   const relay = read('scripts/audit-native-qa-resources-v187.mjs').toString();
   assert.match(relay, /from '\.\/audit-xeno-trials-completion-v186\.mjs'/);
   assert.match(read('scripts/audit-xeno-trials-completion-v186.mjs').toString(), /from '\.\/audit-xeno-stage-operations-v188\.mjs'/);
-  const terminal = read('scripts/audit-xeno-animation-audio-v189.mjs').toString();
+  const terminal = read('scripts/audit-xeno-arbiter-campaign-v190.mjs').toString();
   assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(terminal), false);
   assert.equal(Object.hasOwn(NATIVE_QA_RESOURCES_SUCCESSORS_V187, 'scripts/audit-native-qa-resources-v187.mjs'), false);
   assert.equal(Object.keys(NATIVE_QA_RESOURCES_SUCCESSORS_V187).some(path => path.startsWith('src/')), false);

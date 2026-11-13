@@ -123,7 +123,7 @@ export function verifyNativeQaResourcesV187(readSource = readRepository) {
     NATIVE_QA_DEPENDENCY_GUARD_SUCCESSOR_V187.previousSha256), 'Unreviewed V187 prerequisite guard');
   verifyNativeQaDependencyBodyV187(guard[0][0]);
   for (const [path, expected] of Object.entries(NATIVE_QA_PRESERVED_SHA256_V187)) {
-    assert.equal(sha(readSource(path)), expected, 'V187 must preserve these source bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedCompletionDigestV186(path, expected), 'V187 must preserve these source bytes: ' + path);
   }
   return Object.freeze({ successors: Object.keys(NATIVE_QA_RESOURCES_SUCCESSORS_V187).length,
     preserved: Object.keys(NATIVE_QA_PRESERVED_SHA256_V187).length });

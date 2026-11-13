@@ -13,6 +13,15 @@ import { XENO_TRIALS_SIGNATURES_V147 as profiles, XENO_TRIALS_SIGNATURE_SOURCES_
   createXenoTrialsSignatureProjectilesV147 as emit, xenoTrialsSegmentContactV147 as contact } from '../src/xeno-trials-signatures-v147.js';
 import { drawXenoTrialsStageMotionV147 as drawStage, getXenoTrialsStageMotionV147 as stageState } from '../src/xeno-trials-stage-motion-v147.js';
 import { getXenoTrialsFighterSpecialLabelV147 as label } from '../src/xeno-trials-ui-v96.js';
+import { XENO_TRIALS_BOSS_STAGES_V179 } from '../src/xeno-trials-boss-stages-v179.js';
+import { XENO_TRIALS_CORPORATE_STAGES_V190, getXenoTrialsStageSceneV190 } from '../src/xeno-trials-stage-scenes-v190.js';
+import { drawXenoTrialsStageRearV190 } from '../src/xeno-trials-stage-scenes-render-v190.js';
+
+// Preserve all six original and forty V179 motion fixtures. The four V190
+// corporate atlases have their own renderer and deliberately no V147 family.
+const historicalStageIds = ['containment-deck', 'reactor-ring', 'hive-vault',
+  'tantalus-bridge', 'tantalus-cargo', 'planet-surface', ...XENO_TRIALS_BOSS_STAGES_V179.map(stage => stage.id)];
+const historicalStages = stages.filter(stage => historicalStageIds.includes(stage.id));
 
 const ids = Object.fromEntries(profiles.map(p => [p.style, p.fighterId]));
 const tick = (m, seconds, a = {}, b = {}) => { for (let i = 0; i < Math.round(seconds * 120); i++) step(m, 1 / 120, a, b); return m; };
@@ -168,7 +177,7 @@ function context() {
     { get: (object,key) => object[key] ?? ((...args) => calls.push([key,...args])) });
   return ctx;
 }
-for (const stage of stages) test(`${stage.id}: deterministic distinct scenery, frozen with reduced motion, no state mutation`, () => {
+for (const stage of historicalStages) test(`${stage.id}: deterministic distinct scenery, frozen with reduced motion, no state mutation`, () => {
   const camera = { floor:450, center:500 }, original=JSON.stringify([stage,camera]);
   const a=context(),b=context(),c=context(),d=context();
   drawStage(a,stage,camera,120); drawStage(b,stage,camera,240);
@@ -177,8 +186,27 @@ for (const stage of stages) test(`${stage.id}: deterministic distinct scenery, f
   assert.equal(JSON.stringify([stage,camera]),original); assert.equal(stageState(stage.id,120).affectsCombat,false);
 });
 test('unknown scenery and invalid clocks do not invent arena content', () => {
-  assert.equal(stageState('constructor',100).kind,null); assert.equal(stageState(stages[0].id,NaN).time,0);
-  assert.equal(new Set(stages.map(s=>stageState(s.id).kind)).size,6);
+  assert.equal(stageState('constructor',100).kind,null); assert.equal(stageState(historicalStages[0].id,NaN).time,0);
+  assert.equal(new Set(historicalStages.map(s=>stageState(s.id).kind)).size,6);
+});
+test('the exact forty-six V147 motion identities remain covered; four new corporate settings use the V190 atlas owner', () => {
+  assert.equal(historicalStageIds.length,46);
+  assert.deepEqual(historicalStages.map(stage=>stage.id),historicalStageIds);
+  assert.deepEqual(stages.slice(0,46).map(stage=>stage.id),historicalStageIds);
+  assert.deepEqual(stages.slice(46),XENO_TRIALS_CORPORATE_STAGES_V190);
+  assert.equal(XENO_TRIALS_CORPORATE_STAGES_V190.length,4);
+  for(const stage of XENO_TRIALS_CORPORATE_STAGES_V190){
+    const legacy=context(); assert.equal(stageState(stage.id,120).kind,null);
+    assert.equal(drawStage(legacy,stage,{floor:450,center:500},120).kind,null);
+    assert.deepEqual(legacy.calls,[]); assert.equal(stage.motionBaseStageId,undefined);
+    const owner=getXenoTrialsStageSceneV190(stage.id); assert.equal(owner.stageId,stage.id); assert.equal(owner.replacesArena,true);
+    // Canvas and image objects are declared host doubles, not native decoding.
+    const ctx=context(),images=new Map([[stage.backdrop,{naturalWidth:1254,naturalHeight:1254}]]);
+    const rendered=drawXenoTrialsStageRearV190(ctx,stage,images,{floor:450,center:500},120);
+    assert.equal(rendered.replacesArena,true); assert.equal(rendered.proceduralFallback,false);
+    assert.deepEqual(rendered.drawnPlanes.map(plane=>plane.id),['far','middle']);
+    assert.ok(ctx.calls.some(call=>call[0]==='drawImage'));
+  }
 });
 
 function target(extra={}) {

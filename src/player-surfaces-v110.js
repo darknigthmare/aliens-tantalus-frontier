@@ -1,3 +1,5 @@
+import { getArbiterMissionV190, arbiterCampaignAccessV190 } from './xeno-arbiter-campaign-v190.js';
+
 // Developer visibility is session-only convenience, never an authentication boundary.
 export function isLocalDeveloperEnvironmentV119(hostname = '') {
   return ['localhost', '127.0.0.1', '[::1]', '::1'].includes(String(hostname).toLowerCase());
@@ -39,6 +41,7 @@ export function getCommandMissionsV110(save, campaigns, worldId = '') {
   const unlocked = new Set(save?.galaxy?.unlockedWorldIds || []);
   const activeId = save?.strategy?.currentOperation?.campaignId;
   return campaigns.filter(campaign => (campaign.id === activeId || unlocked.has(campaign.worldId))
+    && (campaign.id === activeId || !getArbiterMissionV190(campaign.id) || arbiterCampaignAccessV190(save?.xenoArbiterV190, campaign.id).available)
     && (!worldId || campaign.worldId === worldId || campaign.id === activeId));
 }
 

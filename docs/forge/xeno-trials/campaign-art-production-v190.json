@@ -1,0 +1,78 @@
+{
+  "schema": 190,
+  "lot": "XENO-ARBITER-CAMPAIGN-ART-V190",
+  "baseCommit": "3a6c1410f606b83a7be881f93b6e87f8d0008a98",
+  "newImages": 1,
+  "insertionBindings": 2,
+  "arcAssociations": 6,
+  "reusedImageBindingsAreNotNewImages": true,
+  "assets": [
+    {
+      "id": "arbiter-recovery",
+      "path": "/assets/openai/campaign/xeno-arbiter-v190/arbiter-recovery.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 2266447,
+      "sha256": "7a166494b72948ea997fc0fb20e951b4ab2154046e4656e277e794c3ce9ec431",
+      "generator": "OpenAI ImageGen",
+      "transparentBackground": false,
+      "pixelEditingAfterGeneration": false,
+      "copiedWithoutTransformation": true,
+      "kind": "original-project-campaign-illustration",
+      "canonExact": false,
+      "sourceClassification": "fan-project interpretation; no reproduced film frame or measured canon certification",
+      "narrative": "Echo-9 recovers a physical corporate authorization and simulation archive console from an already deceased executive; no killing by the protagonist is depicted. Its device authenticates rights and records, without controlling real alien biology."
+    }
+  ],
+  "visuallyInspectedProjectReferences": [
+    {
+      "path": "/assets/openai/sprites/player/echo9-marine-interaction-sheet.png",
+      "sha256": "469d2c7b961ec1952ba498bed2ce193b2f1b31ec9809ea2d628ab169f3278fe1",
+      "role": "Existing Echo-9 olive armour, helmet, gloves, utility equipment and cautious interaction posture, visually inspected."
+    },
+    {
+      "path": "/assets/openai/hub/layers/command-briefing-far.png",
+      "sha256": "64779f32201b567e357471b957b57c0682f020e0e3e21fc59acf8658fadfb8c9",
+      "role": "Existing project industrial wall padding, steel bulkheads and amber practical illumination, visually inspected."
+    },
+    {
+      "path": "/assets/openai/campaign/v180/sevastopol-transit.webp",
+      "sha256": "02dad0a86ad3992e1253f567bb2e8b11018d7a280ea16df71cc51a070a6d50f3",
+      "role": "Existing project campaign illustration treatment, worn retroindustrial casings and practical CRT lighting, visually inspected."
+    }
+  ],
+  "generationBrief": {
+    "composition": "Wide single coherent landscape scene without overlays or titles: an olive-armoured helmeted Echo-9 examining a chunky amber CRT handheld in both gloved hands at an executive desk. Corporate badge and evidence pouch lie on the desk. An executive lies deceased without gore in a chair in shadow; through armoured glass, closed containment gates and cage transfer rails are visible. No combat or visible creature.",
+    "visualDirection": "Restrained late-1970s/1980s retroindustrial space horror: cream worn equipment casings, browns, charcoal steel, green/amber CRT screens, padded walls, conduits, riveted bulkheads, practical lamp and low emergency lighting.",
+    "deviceConstraints": "Mundane portable black/tan machinery with mechanical switches, removable authorization cartridges and a data connector; no floating holograms, neural controls or control beams.",
+    "paintingScope": "Original scene using inspected project references as descriptive guidance; no source image was pixel-edited or passed as a target edit."
+  },
+  "review": {
+    "accepted": true,
+    "observations": [
+      "Gloved hands and tangible handheld CRT form the foreground focal point.",
+      "Marine equipment, helmet and colour family follow the existing project design at illustration scale.",
+      "Closed cage rails and observation gallery communicate the corporate containment setting.",
+      "The executive is in shadow, deceased without gore; the image does not depict the protagonist killing him.",
+      "The tabletop includes badge and evidence pouch; no large title or corporate logo replaces the scene.",
+      "Upper dark architectural area supports responsive presentation, though the host must check actual UI crop."
+    ],
+    "limitations": [
+      "One painting, two exact insertion bindings for custody approach/deployment; six arc metadata associations do not mean six scene illustrations.",
+      "This image is a fictional project interpretation, not measured franchise-exact artwork.",
+      "Image review and registry tests do not certify a completed gameplay mission or host UI crop."
+    ]
+  },
+  "integrationContract": {
+    "registry": "src/campaign-art-v190.js",
+    "exports": [
+      "CAMPAIGN_ART_ASSETS_V190",
+      "CAMPAIGN_ART_V190",
+      "getXenoArbiterCampaignArtV190",
+      "resolveCampaignArtV190"
+    ],
+    "resolverScope": "Read-only exact world, campaign and active phase binding. Host resolver must call this export explicitly.",
+    "sourceOnlyDocument": true,
+    "tests": "scripts/verify-xeno-arbiter-campaign-art-v190.mjs"
+  }
+}

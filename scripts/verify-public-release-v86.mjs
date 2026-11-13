@@ -1,3 +1,4 @@
+import { publicArbiterPathAdmissionV190, verifyArbiterImageAdmissionsV190 } from './public-xeno-arbiter-admissions-v190.mjs';
 import { publicReleasePathAdmissionV163, verifyPublicAdmissionsV163 } from './public-release-admissions-v163.mjs';
 import assert from 'node:assert/strict';
 import { readdir, readFile, lstat } from 'node:fs/promises';
@@ -17,6 +18,7 @@ import { publicXenoSpritePathAdmissionV188, verifyXenoSpriteAdmissionsV188 } fro
 import { publicCampaignArtPathAdmissionV180, verifyCampaignArtAdmissionsV180 } from './public-campaign-art-admissions-v180.mjs';
 
 const ROOT_FILES = new Set([
+  'xeno-arbiter-v190.css',
   'campaign-lethe-continuity-v163.css',
   'campaign-convoy-history-v162.css',
   'command-v110.css', 'echo9-v110.css', 'player-appearance-v126.css',
@@ -283,6 +285,19 @@ SCRIPT_FILES.add('verify-hub-armory-v169.mjs');
 SCRIPT_FILES.add('verify-i18n-v185.mjs');
 // Exact V179 tooling stays source-only, independently of older script policy.
 const V179_SOURCE_ONLY_SCRIPTS = new Set(["scripts/sync-alien-base-v1.mjs", "scripts/export-alien-base-tantalus-v1.mjs", "scripts/alien-base-pr7-proposal-v1.mjs", "scripts/verify-alien-base-bridge-v1.mjs", "scripts/verify-alien-base-import-contract-v179.mjs", "scripts/verify-alien-base-pr7-proposal-v1.mjs", "scripts/verify-hub-door-bay-v178.mjs"]);
+const XENO_ARBITER_SOURCE_ONLY_V190 = new Set([
+  'scripts/public-xeno-arbiter-admissions-v190.mjs',
+  'scripts/audit-xeno-arbiter-campaign-v190.mjs',
+  'scripts/verify-xeno-arbiter-campaign-audit-v190.mjs',
+  'scripts/verify-xeno-arbiter-campaign-v190.mjs',
+  'scripts/verify-xeno-arbiter-scenery-v190.mjs',
+  'scripts/xeno-arbiter-test-helpers-v190.mjs',
+  'scripts/verify-xeno-arbiter-save-ui-v190.mjs',
+  'scripts/verify-xeno-trials-stage-scenes-v190.mjs',
+  'scripts/verify-xeno-arbiter-campaign-art-v190.mjs',
+  'scripts/verify-xeno-arbiter-i18n-v190.mjs',
+  'scripts/qa-xeno-arbiter-stages-v190.py',
+]);
 const XENO_ANIMATION_SOURCE_ONLY_V189 = new Set([
   'scripts/public-xeno-sprite-admissions-v189.mjs',
   'scripts/audit-xeno-animation-audio-v189.mjs',
@@ -418,6 +433,11 @@ const FORGE_TOOLING_V140 = new Set([
   'docs/forge/xeno-trials/sprite-production-v188.json',
   'docs/forge/xeno-trials/V188-STAGE-OPERATIONS.md',
   'docs/forge/xeno-trials/operations-completion-v188.json',
+  'docs/forge/xeno-trials/V190-ARBITER-CAMPAIGN.md',
+  'docs/forge/xeno-trials/arbiter-campaign-completion-v190.json',
+  'docs/forge/xeno-trials/stage-art-production-v190.json',
+  'docs/forge/xeno-trials/campaign-art-production-v190.json',
+  'docs/forge/xeno-trials/i18n-arbiter-review-v190.json',
   'docs/forge/xeno-trials/V189-ANIMATION-AUDIO.md',
   'docs/forge/xeno-trials/animation-audio-completion-v189.json',
   'docs/forge/xeno-trials/i18n-animation-audio-review-v189.json',
@@ -652,11 +672,14 @@ export function isPublicDistributionPathV86(path, { directory = false, built = f
   if (V179_SOURCE_ONLY_SCRIPTS.has(path)) return !built;
   if (XENO_COMPLETION_SOURCE_ONLY_V186.has(path)) return !built;
   if (XENO_OPERATIONS_SOURCE_ONLY_V188.has(path)) return !built;
+  if (XENO_ARBITER_SOURCE_ONLY_V190.has(path)) return !built;
   if (XENO_ANIMATION_SOURCE_ONLY_V189.has(path)) return !built;
   if (!built && FORGE_TOOLING_V140.has(path)) return true;
   if (FORGE_STYLES_V140.has(path)) return true;
   const segments = path.split('/');
   if (segments.some(part => !part || part === '.' || part === '..' || PRIVATE_SEGMENT.test(part))) return false;
+  const arbiterAdmissionV190 = publicArbiterPathAdmissionV190(path, { directory });
+  if (arbiterAdmissionV190 !== null) return arbiterAdmissionV190;
   const costumeAdmissionV165 = publicCostumePathAdmissionV165(path, { directory });
   if (costumeAdmissionV165 !== null) return costumeAdmissionV165;
   const xenoSpriteAdmissionV189 = publicXenoSpritePathAdmissionV189(path, { directory });
@@ -736,6 +759,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   await verifyCampaignArtAdmissionsV180(root);
   await verifyXenoSpriteAdmissionsV188(root);
   await verifyXenoSpriteAdmissionsV189(root);
+  await verifyArbiterImageAdmissionsV190(root);
   return { ok: true, version: RELEASE.version, files, assets, privateDocuments: 0 };
 }
 

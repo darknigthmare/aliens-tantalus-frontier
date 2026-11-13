@@ -1,0 +1,18 @@
+.arbiter-dossier-v190 { margin-block: 1rem; padding: 1rem; border: 1px solid #66715d; background: #0a1515; }
+.arbiter-dossier-v190 > summary { cursor: pointer; color: #c7d5ad; font-weight: 700; line-height: 1.5; }
+.arbiter-dossier-v190 > p { max-width: 76ch; line-height: 1.6; }
+.arbiter-dossier-v190 figure { margin: 1rem 0; }
+.arbiter-dossier-v190 figure img { display: block; width: 100%; height: auto; max-height: 310px; object-fit: cover; }
+.arbiter-dossier-v190 figcaption { margin-top: .4rem; font-size: .8rem; color: #9ba99c; }
+.arbiter-chapters-v190 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; padding-left: 1.5rem; }
+.arbiter-chapters-v190 > li { padding: .7rem; border: 1px solid #30453d; }
+.arbiter-chapters-v190 h4 { margin: 0 0 .5rem; }
+.arbiter-chapters-v190 p { line-height: 1.5; }
+.arbiter-chapters-v190 .button { max-width: 100%; white-space: normal; }
+.xt-arbiter-dossier-v190 { padding: .8rem 1rem; border-top: 1px solid #435742; }
+.xt-arbiter-dossier-v190 p { max-width: 82ch; line-height: 1.5; }
+.xt-arbiter-dossier-v190 h3 { font-size: .85rem; color: #c7d5ad; letter-spacing: .05em; }
+@media (max-width: 680px) { .arbiter-chapters-v190 { grid-template-columns: 1fr; } }
+
+.xt-atlas-preview-v190 { position: relative; overflow: hidden; }
+.xt-atlas-preview-v190 > img { position: absolute; top: 0; left: 0; bottom: auto; width: 100%; height: 300%; max-height: none; object-fit: cover; object-position: center top; }

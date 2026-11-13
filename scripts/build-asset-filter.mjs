@@ -1,4 +1,5 @@
 import { publicReleasePathAdmissionV163 } from './public-release-admissions-v163.mjs';
+import { publicArbiterPathAdmissionV190 } from './public-xeno-arbiter-admissions-v190.mjs';
 import { PUBLIC_COSTUME_ASSET_PATHS_V165, publicCostumePathAdmissionV165 } from './public-costume-admissions-v165.mjs';
 import { relative } from 'node:path';
 import { publicCampaignArtPathAdmissionV180 } from './public-campaign-art-admissions-v180.mjs';
@@ -238,6 +239,9 @@ export function createBuildAssetFilter(projectRoot, {
     // fs.cp also visits the source root (relative path ''). This is a container,
     // not a distributable filename; descend before applying file-path rules.
     if (sourcePath === '') return true;
+    const arbiterAdmissionV190 = publicArbiterPathAdmissionV190(sourcePath, { directory:
+      ['assets/openai/stages/xeno-trials-v190', 'assets/openai/campaign/xeno-arbiter-v190'].includes(sourcePath) });
+    if (arbiterAdmissionV190 !== null) return arbiterAdmissionV190;
     const campaignAdmissionV180 = publicCampaignArtPathAdmissionV180(sourcePath,
       { directory: ['assets/openai/campaign', 'assets/openai/campaign/v180'].includes(sourcePath) });
     if (campaignAdmissionV180 !== null) return campaignAdmissionV180;

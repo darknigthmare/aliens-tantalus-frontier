@@ -8,7 +8,17 @@ import { getXenoTrialsBodyBoundsV105 as bounds } from '../src/xeno-trials-geomet
 import { getXenoTrialsStageCueV149 as cue, drawXenoTrialsStageCueV149 as drawCue,
   drawXenoTrialsStageMotionV147 as drawMotion, XENO_TRIALS_STAGE_CUES_V149 as kinds } from '../src/xeno-trials-stage-motion-v147.js';
 import { XENO_TRIALS_STAGES_V96 as stages } from '../src/xeno-trials-data-v96.js';
+import { XENO_TRIALS_BOSS_STAGES_V179 } from '../src/xeno-trials-boss-stages-v179.js';
+import { XENO_TRIALS_CORPORATE_STAGES_V190, getXenoTrialsStageSceneV190 } from '../src/xeno-trials-stage-scenes-v190.js';
+import { drawXenoTrialsStageRearV190 } from '../src/xeno-trials-stage-scenes-render-v190.js';
 import { createXenoTrialsRuntimeV96 } from '../src/xeno-trials-runtime-v96.js';
+
+// V147/V149 own these exact historical identities. Corporate atlases use the
+// V190 scene renderer; adding them to a V149-only Canvas fixture is not an
+// integration test of their actual runtime owner.
+const historicalStageIds = ['containment-deck', 'reactor-ring', 'hive-vault',
+  'tantalus-bridge', 'tantalus-cargo', 'planet-surface', ...XENO_TRIALS_BOSS_STAGES_V179.map(stage => stage.id)];
+const historicalStages = stages.filter(stage => historicalStageIds.includes(stage.id));
 
 // Engine boundary fixtures, not authored animation or a manual playthrough.
 function trajectory() {
@@ -84,13 +94,34 @@ function canvasContext(){
  const operations=[];const ctx=new Proxy({operations},{get(o,k){return o[k]??((...args)=>operations.push([k,...args]));},set(o,k,v){o[k]=v;return true;}});
  return ctx;
 }
-for(const stage of stages)test(`${stage.id}: phase fixtures paint behind the floor and leave the match untouched`,()=>{
+for(const stage of historicalStages)test(`${stage.id}: phase fixtures paint behind the floor and leave the match untouched`,()=>{
  const m=create({stageId:stage.id}),before=snapshot(m),ctx=canvasContext();m.phase='round-over';m.phaseTime=.9;m.roundWinner='player';
  const expected=snapshot(m);drawMotion(ctx,stage,{floor:450,center:500},m.tick,false,m);
  assert.deepEqual(snapshot(m),expected);assert.equal(before.config.stageId,stage.id);
  assert.equal(ctx.operations.filter(x=>x[0]==='save').length,ctx.operations.filter(x=>x[0]==='restore').length);
  assert.ok(ctx.operations.some(x=>x[0]==='rect'&&x[1]===0&&x[2]===0&&x[3]===1000&&x[4]===450));
  const empty=canvasContext();drawCue(empty,stage,{floor:450},{phase:'active'});assert.equal(empty.operations.length,0);
+});
+test('the exact forty-six historical phase fixtures remain covered; four corporate atlases belong to the V190 renderer',()=>{
+ assert.equal(historicalStageIds.length,46);
+ assert.deepEqual(historicalStages.map(stage=>stage.id),historicalStageIds);
+ assert.deepEqual(stages.slice(0,46).map(stage=>stage.id),historicalStageIds);
+ assert.deepEqual(stages.slice(46),XENO_TRIALS_CORPORATE_STAGES_V190);
+ assert.equal(XENO_TRIALS_CORPORATE_STAGES_V190.length,4);
+ for(const stage of XENO_TRIALS_CORPORATE_STAGES_V190){
+  const legacy=canvasContext();
+  assert.equal(cue(stage.id,{phase:'round-over',phaseTime:.9,roundWinner:'player'}).kind,null);
+  drawCue(legacy,stage,{floor:450},{phase:'round-over',phaseTime:.9,roundWinner:'player'});
+  assert.equal(drawMotion(legacy,stage,{floor:450,center:500},120).kind,null);
+  assert.deepEqual(legacy.operations,[]);assert.equal(stage.motionBaseStageId,undefined);
+  const owner=getXenoTrialsStageSceneV190(stage.id);assert.equal(owner.stageId,stage.id);assert.equal(owner.replacesArena,true);
+  // Declared Canvas/Image doubles exercise the actual V190 render owner.
+  const ctx=canvasContext(),images=new Map([[stage.backdrop,{naturalWidth:1254,naturalHeight:1254}]]);
+  const rendered=drawXenoTrialsStageRearV190(ctx,stage,images,{floor:450,center:500},120);
+  assert.equal(rendered.replacesArena,true);assert.equal(rendered.proceduralFallback,false);
+  assert.deepEqual(rendered.drawnPlanes.map(plane=>plane.id),['far','middle']);
+  assert.ok(ctx.operations.some(operation=>operation[0]==='drawImage'));
+ }
 });
 // Deterministic DOM/RAF host: same production presentation and match engine.
 function host(){

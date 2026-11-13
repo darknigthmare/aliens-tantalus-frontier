@@ -1,3 +1,4 @@
+import { verifyArbiterImageAdmissionsV190 } from './public-xeno-arbiter-admissions-v190.mjs';
 import { verifyXenoSpriteAdmissionsV189 } from './public-xeno-sprite-admissions-v189.mjs';
 import { verifyXenoSpriteAdmissionsV188 } from './public-xeno-sprite-admissions-v188.mjs';
 import { verifyPublicAdmissionsV163 } from './public-release-admissions-v163.mjs';
@@ -17,6 +18,7 @@ const root = process.cwd();
 await verifyPublicAdmissionsV163(root);
 await verifyXenoSpriteAdmissionsV188(root);
 await verifyXenoSpriteAdmissionsV189(root);
+await verifyArbiterImageAdmissionsV190(root);
 await verifyPublicAdmissionsV119(root);
 await verifyPublicAdmissionsV120(root);
 await verifyPublicAdmissionsV121(root);
@@ -42,6 +44,7 @@ await cp(join(root, 'specimen-bench-v106.css'), join(output, 'specimen-bench-v10
 await cp(join(root, 'command-v110.css'), join(output, 'command-v110.css'));
 await cp(join(root, 'campaign-convoy-history-v162.css'), join(output, 'campaign-convoy-history-v162.css'));
 await cp(join(root, 'campaign-lethe-continuity-v163.css'), join(output, 'campaign-lethe-continuity-v163.css'));
+await cp(join(root, 'xeno-arbiter-v190.css'), join(output, 'xeno-arbiter-v190.css'));
 await cp(join(root, 'echo9-v110.css'), join(output, 'echo9-v110.css'));
 await cp(join(root, 'player-appearance-v126.css'), join(output, 'player-appearance-v126.css'));
 await cp(join(root, 'xeno-trials-fullscreen-v119.css'), join(output, 'xeno-trials-fullscreen-v119.css'));
@@ -81,3 +84,5 @@ console.log(`Built ${RELEASE.name} ${RELEASE.version} with ${Object.values(valid
 await verifyXenoSpriteAdmissionsV188(output);
 
 await verifyXenoSpriteAdmissionsV189(output);
+
+await verifyArbiterImageAdmissionsV190(output);
