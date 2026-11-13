@@ -4,6 +4,7 @@ import { STAGE_OPERATIONS_SUCCESSORS_V188, STAGE_OPERATIONS_NEW_INPUTS_V188 } fr
 import { ANIMATION_AUDIO_SUCCESSORS_V189, ANIMATION_AUDIO_NEW_INPUTS_V189 } from './audit-xeno-animation-audio-v189.mjs';
 import { ARBITER_CAMPAIGN_SUCCESSORS_V190, ARBITER_CAMPAIGN_NEW_INPUTS_V190 } from './audit-xeno-arbiter-campaign-v190.mjs';
 import { ARBITER_PROTOCOLS_SUCCESSORS_V191, ARBITER_PROTOCOLS_NEW_INPUTS_V191 } from './audit-xeno-arbiter-protocols-v191.mjs';
+import { FRANCHISE_STAGES_SUCCESSORS_V192, FRANCHISE_STAGES_NEW_INPUTS_V192 } from './audit-xeno-franchise-stages-v192.mjs';
 import { reviewedOriginalNamesDigestV183 } from './audit-original-names-v183.mjs';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -679,7 +680,7 @@ test('V178 resolves only exact MainM successors while every V177 witness stays h
   assert.deepEqual(Object.keys(effective).filter(path=>Object.hasOwn(current.runtimeSourceSha256,path)).sort(),
     Object.keys(current.runtimeSourceSha256).sort());
   assert.deepEqual(Object.keys(effective).filter(path=>!Object.hasOwn(current.runtimeSourceSha256,path)).sort(),
-    [...new Set(['src/tactical-reload-v77.js','src/weapon-actions-v130.js',...Object.keys(V179_SOURCE_GROUPS.runtimeChanges),...Object.keys(V179_SOURCE_GROUPS.newRuntimeSources),...Object.entries(INTEGRATION_SOURCES_V182).filter(([,r])=>r.kind==='runtime').map(([path])=>path),...Object.entries(COMPLETION_SOURCES_V186).filter(([,r])=>r.kind==='runtime').map(([path])=>path),...Object.entries({...STAGE_OPERATIONS_SUCCESSORS_V188,...STAGE_OPERATIONS_NEW_INPUTS_V188,...ANIMATION_AUDIO_SUCCESSORS_V189,...ANIMATION_AUDIO_NEW_INPUTS_V189,...ARBITER_CAMPAIGN_SUCCESSORS_V190,...ARBITER_CAMPAIGN_NEW_INPUTS_V190,...ARBITER_PROTOCOLS_SUCCESSORS_V191,...ARBITER_PROTOCOLS_NEW_INPUTS_V191}).filter(([,r])=>r.kind==='runtime').map(([path])=>path)].filter(path=>!Object.hasOwn(current.runtimeSourceSha256,path)))].sort(), 'Only explicitly reviewed successor runtimes and two historic compatibility exports extend the147witness');
+    [...new Set(['src/tactical-reload-v77.js','src/weapon-actions-v130.js',...Object.keys(V179_SOURCE_GROUPS.runtimeChanges),...Object.keys(V179_SOURCE_GROUPS.newRuntimeSources),...Object.entries(INTEGRATION_SOURCES_V182).filter(([,r])=>r.kind==='runtime').map(([path])=>path),...Object.entries(COMPLETION_SOURCES_V186).filter(([,r])=>r.kind==='runtime').map(([path])=>path),...Object.entries({...STAGE_OPERATIONS_SUCCESSORS_V188,...STAGE_OPERATIONS_NEW_INPUTS_V188,...ANIMATION_AUDIO_SUCCESSORS_V189,...ANIMATION_AUDIO_NEW_INPUTS_V189,...ARBITER_CAMPAIGN_SUCCESSORS_V190,...ARBITER_CAMPAIGN_NEW_INPUTS_V190,...ARBITER_PROTOCOLS_SUCCESSORS_V191,...ARBITER_PROTOCOLS_NEW_INPUTS_V191,...FRANCHISE_STAGES_SUCCESSORS_V192,...FRANCHISE_STAGES_NEW_INPUTS_V192}).filter(([,r])=>r.kind==='runtime').map(([path])=>path)].filter(path=>!Object.hasOwn(current.runtimeSourceSha256,path)))].sort(), 'Only explicitly reviewed successor runtimes and two historic compatibility exports extend the147witness');
   assert.equal(current.runtimeSourceSha256['src/npc-interdeck-routes-v165.js'],
     '5330095a1f6d277e71e473c6b741c671fe02c4d4fc44133b3f5a37ccfebb103a');
   assert.equal(effective['src/npc-interdeck-routes-v165.js'],V178_RUNTIME_SUCCESSORS['src/npc-interdeck-routes-v165.js'].currentSha256);

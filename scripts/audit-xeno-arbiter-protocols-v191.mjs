@@ -1,10 +1,13 @@
 /** Exact 07f9525 V190 -> V191 ARBITER protocols/animation continuation.
  * Historical receipts remain immutable. This audit admits only named source
  * bytes; QA results, publication and canonical fidelity are never inherited.
+ * V192 continues the immutable declarations through an exact source relay.
  */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedFranchiseStagesDigestV192, franchiseStagesRuntimeSourcesV192,
+  verifyFranchiseStagesV192 } from './audit-xeno-franchise-stages-v192.mjs';
 
 const freeze = value => { if (value && typeof value === 'object') { Object.values(value).forEach(freeze); Object.freeze(value); } return value; };
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -303,24 +306,25 @@ export const ARBITER_PROTOCOLS_PRESERVED_PLATES_V191 = freeze({
 /** Strict predecessor transition: current or observed digests are never proofs. */
 export function reviewedArbiterProtocolsDigestV191(path, endpointV190) {
   const receipt = ARBITER_PROTOCOLS_SUCCESSORS_V191[path];
-  if (!receipt) return endpointV190;
+  if (!receipt) return reviewedFranchiseStagesDigestV192(path, endpointV190);
   assert.equal(endpointV190, receipt.previousSha256, 'Incorrect V190 endpoint for V191: ' + path);
   assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256), 'Invalid V191 successor digest: ' + path);
   assert.notEqual(receipt.previousSha256, receipt.currentSha256, 'Unchanged V191 successor: ' + path);
-  return receipt.currentSha256;
+  return reviewedFranchiseStagesDigestV192(path, receipt.currentSha256);
 }
 
 /** Called after physical verification; retains the historical caller's object. */
 export function arbiterProtocolsRuntimeSourcesV191(historical) {
   const result = { ...historical };
   for (const [path, receipt] of Object.entries(ARBITER_PROTOCOLS_SUCCESSORS_V191)) if (receipt.kind === 'runtime') {
-    if (result[path] !== undefined && result[path] !== receipt.currentSha256)
-      assert.equal(result[path], receipt.previousSha256, 'Incorrect V191 runtime view predecessor: ' + path);
-    result[path] = receipt.currentSha256;
+    const current = reviewedFranchiseStagesDigestV192(path, receipt.currentSha256);
+    if (result[path] !== undefined)
+      assert.ok([receipt.previousSha256, receipt.currentSha256, current].includes(result[path]), 'Incorrect V191 runtime view predecessor: ' + path);
+    result[path] = current;
   }
   for (const [path, receipt] of Object.entries(ARBITER_PROTOCOLS_NEW_INPUTS_V191))
-    if (receipt.kind === 'runtime') result[path] = receipt.sha256;
-  return Object.freeze(result);
+    if (receipt.kind === 'runtime') result[path] = reviewedFranchiseStagesDigestV192(path, receipt.sha256);
+  return franchiseStagesRuntimeSourcesV192(result);
 }
 
 export function verifyArbiterProtocolsV191(readSource = readRepository) {
@@ -337,7 +341,7 @@ export function verifyArbiterProtocolsV191(readSource = readRepository) {
     assert.ok(safe(path), 'Unsafe V191 added-input path: ' + path);
     assert.deepEqual(Object.keys(receipt).sort(), ['kind', 'sha256']);
     assert.ok(kinds.includes(receipt.kind) && validHash(receipt.sha256)); paths.push(path);
-    assert.equal(sha(readSource(path)), receipt.sha256, 'Unreviewed V191 added-input bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedFranchiseStagesDigestV192(path, receipt.sha256), 'Unreviewed V191 added-input bytes: ' + path);
   }
   for (const [path, digest] of Object.entries(ARBITER_PROTOCOLS_PRESERVED_PLATES_V191)) {
     assert.ok(safe(path) && validHash(digest)); paths.push(path);
@@ -350,6 +354,7 @@ export function verifyArbiterProtocolsV191(readSource = readRepository) {
     assert.ok(start >= 0 && end > start, 'Missing historical declaration anchors: ' + path);
     assert.equal(sha(text.slice(start, end)), receipt.sha256, 'Historical receipt declarations changed: ' + path);
   }
+  verifyFranchiseStagesV192(readSource);
   return Object.freeze({ baselineCommit: ARBITER_PROTOCOLS_BASELINE_V191,
     successors: Object.keys(ARBITER_PROTOCOLS_SUCCESSORS_V191).length,
     addedInputs: Object.keys(ARBITER_PROTOCOLS_NEW_INPUTS_V191).length,

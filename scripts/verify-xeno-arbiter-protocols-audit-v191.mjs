@@ -19,6 +19,7 @@ import { COMPLETION_SOURCES_V186, verifyCompletionV186 } from './audit-xeno-tria
 import { loadAuditSuccessionV163, resolveAuditSourcesV163 } from './audit-succession-v163.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
+import { reviewedFranchiseStagesDigestV192 as later } from './audit-xeno-franchise-stages-v192.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
@@ -34,11 +35,11 @@ test('V191 succeeds the physical 07f9525 tree: each predecessor exists there and
   for (const [path, receipt] of Object.entries(successors)) {
     assert.ok(previousPaths.has(path), 'A successor must exist in the real baseline: ' + path);
     assert.equal(sha(readBaseline(path)), receipt.previousSha256, path);
-    assert.equal(sha(read(path)), receipt.currentSha256, path);
+    assert.equal(sha(read(path)), later(path, receipt.currentSha256), path);
   }
   for (const [path, receipt] of Object.entries(inputs)) {
     assert.equal(previousPaths.has(path), false, 'An added input must not exist in the real baseline: ' + path);
-    assert.equal(sha(read(path)), receipt.sha256, path);
+    assert.equal(sha(read(path)), later(path, receipt.sha256), path);
   }
   for (const [path, digest] of Object.entries(plates)) {
     assert.equal(sha(readBaseline(path)), digest, path);
@@ -72,7 +73,7 @@ test('complete-history CI and credential isolation remain byte-identical to the 
 
 test('strict V191 transitions refuse invented, missing and already advanced predecessors; unknown paths gain no admission', () => {
   for (const [path, receipt] of Object.entries(successors)) {
-    assert.ok(Object.isFrozen(receipt)); assert.equal(advance(path, receipt.previousSha256), receipt.currentSha256, path);
+    assert.ok(Object.isFrozen(receipt)); assert.equal(advance(path, receipt.previousSha256), later(path, receipt.currentSha256), path);
     for (const bad of ['0'.repeat(64), null, undefined, receipt.currentSha256])
       assert.throws(() => advance(path, bad), /Incorrect V190 endpoint for V191/, path);
   }
@@ -94,21 +95,22 @@ test('the complete source chain keeps archival defaults and admits only the exac
   const { previous, current } = loadAuditSuccessionV163(read);
   assert.deepEqual(resolveAuditSourcesV163(previous, read), current.runtimeSourceSha256);
   const effective = resolveAuditSourcesV163(previous, read, { effective: true });
-  for (const [path, receipt] of Object.entries(successors).filter(([, r]) => r.kind === 'runtime')) assert.equal(effective[path], receipt.currentSha256, path);
+  for (const [path, receipt] of Object.entries(successors).filter(([, r]) => r.kind === 'runtime')) assert.equal(effective[path], later(path, receipt.currentSha256), path);
   const addedRuntime = Object.entries(inputs).filter(([, r]) => r.kind === 'runtime');
   assert.ok(addedRuntime.length >= 4, 'Protocol, atlas and coverage runtime modules must be explicit inputs.');
-  for (const [path, receipt] of addedRuntime) assert.equal(effective[path], receipt.sha256, path);
+  for (const [path, receipt] of addedRuntime) assert.equal(effective[path], later(path, receipt.sha256), path);
   const frozen = Object.freeze({ original: 'historic' }), view = runtime(frozen);
   assert.deepEqual(frozen, { original: 'historic' }); assert.ok(Object.isFrozen(view)); assert.deepEqual(runtime(view), view);
   const first = Object.entries(successors).find(([, r]) => r.kind === 'runtime'); assert.ok(first);
   assert.throws(() => runtime({ [first[0]]: '0'.repeat(64) }), /Incorrect V191 runtime view predecessor/);
 });
 
-test('V191 is the exact terminal, pins its V190 relay and keeps tools, production records and mutable outcomes out of the game build', () => {
-  const terminal = 'scripts/audit-xeno-arbiter-protocols-v191.mjs', relay = 'scripts/audit-xeno-arbiter-campaign-v190.mjs';
+test('V191 relays to terminal V192, pins its V190 relay and keeps tools, production records and mutable outcomes out of the game build', () => {
+  const terminal = 'scripts/audit-xeno-franchise-stages-v192.mjs', relay = 'scripts/audit-xeno-arbiter-campaign-v190.mjs';
   assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(read(terminal).toString()), false);
   assert.equal(Object.hasOwn(successors, terminal) || Object.hasOwn(inputs, terminal), false);
   assert.ok(successors[relay]); assert.match(read(relay).toString(), /from '\.\/audit-xeno-arbiter-protocols-v191\.mjs'/);
+  assert.match(read('scripts/audit-xeno-arbiter-protocols-v191.mjs').toString(), /from '\.\/audit-xeno-franchise-stages-v192\.mjs'/);
   for (const path of [terminal, ...Object.keys(inputs)]) {
     assert.equal(isPublicDistributionPathV86(path), true, path);
     if (path.startsWith('scripts/') || path.startsWith('docs/')) assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);

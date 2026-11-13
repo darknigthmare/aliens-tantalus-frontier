@@ -24,6 +24,8 @@ import { getXenoTrialsHordeProtocolV180 } from './xeno-trials-horde-v180.js';
 import { getXenoTrialsStageAssetsV180, getXenoTrialsStageDepthViewV180 } from './xeno-trials-stage-depth-v180.js';
 import { getXenoTrialsStageSceneV190, getXenoTrialsStageAssetsV190 } from './xeno-trials-stage-scenes-v190.js';
 import { drawXenoTrialsStageRearV190, drawXenoTrialsStageFrontV190 } from './xeno-trials-stage-scenes-render-v190.js';
+import { getXenoTrialsFranchiseStageSceneV192 } from './xeno-trials-franchise-stage-scenes-v192.js';
+import { drawXenoTrialsFranchiseStageRearV192, drawXenoTrialsFranchiseStageFrontV192 } from './xeno-trials-franchise-stage-render-v192.js';
 import { createXenoTrialsSwarmMotionV180, drawXenoTrialsSwarmSpriteV180 } from './xeno-trials-swarm-sprites-v180.js';
 import { createXenoTrialsGamepadV186 } from './xeno-trials-gamepad-v186.js';
 import { createXenoTrialsHordeCheckpointV186 } from './xeno-trials-horde-checkpoint-v186.js';
@@ -96,9 +98,11 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   const rigDrawsV154 = new Map();
   let captureViewV163 = null;
   let stageSceneRearV190 = null, stageSceneFrontV190 = null;
+  let stageSceneRearV192 = null, stageSceneFrontV192 = null;
   const snapshot = () => ({ ...getXenoTrialsSnapshotV96(match), presentation: presentationView(),
     audioV189: sound.getState(),
     stageSceneV190: { rear: stageSceneRearV190, front: stageSceneFrontV190 },
+    stageSceneV192: { rear: stageSceneRearV192, front: stageSceneFrontV192 },
     operationViewV188: getXenoTrialsOperationHudV188(match), stageHazardViewV188: getXenoTrialsStageHazardViewV188(match),
     resumedV186: Boolean(restored), checkpointV186: { ...checkpointStatus },
     gamepadV186: gamepadView ? { connected: gamepadView.connected, index: gamepadView.index, needsNeutral: gamepadView.needsNeutral } : null,
@@ -253,12 +257,14 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     context.strokeStyle = '#53606a'; context.strokeRect(x, y, width, 15);
   }
   function drawArena() {
-    if (!getXenoTrialsStageSceneV190(stage.id)?.replacesArena) {
+    if (!getXenoTrialsFranchiseStageSceneV192(stage.id) && !getXenoTrialsStageSceneV190(stage.id)?.replacesArena) {
       drawXenoTrialsArenaLayersV119(context, stage, images, cameraView, match.tick,
         { reducedMotion: reduceMotion(), phase: match.phase, phaseTime: match.phaseTime, roundWinner: match.roundWinner });
       drawXenoTrialsStageMotionV147(context, stage, cameraView, match.tick, reduceMotion(), { ...match, presentation: presentationView() });
     }
     stageSceneRearV190 = drawXenoTrialsStageRearV190(context, stage, images, cameraView, match.tick,
+      { reducedMotion: reduceMotion(), phase: match.phase, phaseTime: match.phaseTime });
+    stageSceneRearV192 = drawXenoTrialsFranchiseStageRearV192(context, stage, images, cameraView, match.tick,
       { reducedMotion: reduceMotion(), phase: match.phase, phaseTime: match.phaseTime });
   }
   function drawFighter(fighter, preparedReaction = null) {
@@ -444,9 +450,11 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     drawXenoTrialsOperationV188(context, match, XENO_TRIALS_ARENA_V96, { plane: 'front' });
     drawXenoTrialsStageHazardsV188(context, match, XENO_TRIALS_ARENA_V96, { plane: 'front', reducedMotion: reduceMotion() });
     context.restore();
-    if (!getXenoTrialsStageSceneV190(stage.id)?.replacesArena) drawXenoTrialsArenaOverlayV119(context, stage, cameraView, reduceMotion() ? 0 : match.tick,
+    if (!getXenoTrialsFranchiseStageSceneV192(stage.id) && !getXenoTrialsStageSceneV190(stage.id)?.replacesArena) drawXenoTrialsArenaOverlayV119(context, stage, cameraView, reduceMotion() ? 0 : match.tick,
       { images, reducedMotion: reduceMotion(), phase: match.phase, phaseTime: match.phaseTime, roundWinner: match.roundWinner });
     stageSceneFrontV190 = drawXenoTrialsStageFrontV190(context, stage, images, cameraView, match.tick,
+      { reducedMotion: reduceMotion(), phase: match.phase, phaseTime: match.phaseTime });
+    stageSceneFrontV192 = drawXenoTrialsFranchiseStageFrontV192(context, stage, images, cameraView, match.tick,
       { reducedMotion: reduceMotion(), phase: match.phase, phaseTime: match.phaseTime });
     if (hordeProtocol && options.htmlHud !== true) {
       const player = match.fighters[0], def = getXenoTrialsFighterV96(player.id), horde = match.hordeV180;
@@ -584,10 +592,10 @@ export function createXenoTrialsRuntimeV96(options = {}) {
         for (const key of heldKeys) blockedKeys.add(key);
         clearInputs();
       }
-      // Accessible combat buttons are gameplay inputs. Pause/resume buttons
-      // own their explicit click; focusing one must not toggle it twice.
+      // Accessible combat buttons and native round transitions own their
+      // explicit activation. Their focus must not insert a competing pause.
       if (target === canvas || returning || control && options.controlsRoot?.contains(control)
-        || target?.closest?.('[data-xt="pause"], [data-xt="resume-overlay"], [data-xt="skip-sequence"], [data-xt="taunt"]')) return;
+        || target?.closest?.('[data-xt="pause"], [data-xt="resume-overlay"], [data-xt="skip-sequence"], [data-xt="taunt"], [data-xt="next"]')) return;
       pause();
     });
     listen(canvas, 'pointerdown', event => { void sound.unlock(event); canvas.focus?.({ preventScroll: true }); });

@@ -1,0 +1,317 @@
+{
+  "format": "atf-i18n-review-v186",
+  "exact": [
+    {
+      "fr": "Tous les supports",
+      "en": "All media",
+      "source": "src/xeno-trials-ui-v96.js"
+    },
+    {
+      "fr": "Films",
+      "en": "Films",
+      "source": "src/xeno-trials-ui-v96.js"
+    },
+    {
+      "fr": "Jeux vidéo",
+      "en": "Video games",
+      "source": "src/xeno-trials-ui-v96.js"
+    },
+    {
+      "fr": "Comics",
+      "en": "Comics",
+      "source": "src/xeno-trials-ui-v96.js"
+    },
+    {
+      "fr": "Romans",
+      "en": "Novels",
+      "source": "src/xeno-trials-ui-v96.js"
+    },
+    {
+      "fr": "Simulations Tantalus",
+      "en": "Tantalus simulations",
+      "source": "src/xeno-trials-ui-v96.js"
+    },
+    {
+      "fr": "Archives d’environnement",
+      "en": "Environment archives",
+      "source": "src/xeno-trials-ui-v96.js"
+    },
+    {
+      "fr": "RETROUVER L’ARÈNE SÉLECTIONNÉE",
+      "en": "FIND SELECTED ARENA",
+      "source": "src/xeno-trials-ui-v96.js"
+    },
+    {
+      "fr": "Pages des arènes",
+      "en": "Arena pages",
+      "source": "src/xeno-trials-ui-v96.js"
+    },
+    {
+      "fr": "Aucune arène pour ce support. Votre sélection est conservée.",
+      "en": "No arenas for this medium. Your selection is kept.",
+      "source": "src/xeno-trials-ui-v96.js"
+    },
+    {
+      "fr": "Nostromo / Réfectoire",
+      "en": "Nostromo / Galley",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Nostromo / Salle des chaînes",
+      "en": "Nostromo / Chain Room",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "LV-426 / Chambre du pilote",
+      "en": "LV-426 / Pilot Chamber",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Hadley’s Hope / Rue de la colonie",
+      "en": "Hadley’s Hope / Colony Street",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "LV-426 / Ruche du processeur",
+      "en": "LV-426 / Processor Hive",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Sulaco / Hangar des dropships",
+      "en": "Sulaco / Dropship Hangar",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Fiorina 161 / Fonderie",
+      "en": "Fiorina 161 / Leadworks",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Auriga / Laboratoire des clones",
+      "en": "Auriga / Clone Laboratory",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Auriga / Réfectoire inondé",
+      "en": "Auriga / Flooded Galley",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "LV-223 / Salle de navigation",
+      "en": "LV-223 / Orrery",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "LV-223 / Chambre des urnes",
+      "en": "LV-223 / Ampule Chamber",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Planète 4 / Nécropole",
+      "en": "Planet 4 / Necropolis",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Planète 4 / Champ de blé",
+      "en": "Planet 4 / Wheat Field",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Renaissance / Baie cryogénique",
+      "en": "Renaissance / Cryogenic Bay",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Jackson’s Star / Rue minière",
+      "en": "Jackson’s Star / Mining Street",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Maginot / Soute des spécimens",
+      "en": "Maginot / Specimen Hold",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Maginot / Passerelle",
+      "en": "Maginot / Bridge",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "New Siam / Site du crash",
+      "en": "New Siam / Crash Site",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Neverland / Laboratoire",
+      "en": "Neverland / Laboratory",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Neverland / Lisière tropicale",
+      "en": "Neverland / Jungle Edge",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Sevastopol / Lorenz Systech",
+      "en": "Sevastopol / Lorenz Systech",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Sevastopol / San Cristobal",
+      "en": "Sevastopol / San Cristobal",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Sevastopol / Nid du réacteur",
+      "en": "Sevastopol / Reactor Nest",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "LV-1201 / Complexe avancé",
+      "en": "LV-1201 / Forward Facility",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "LV-1201 / Ruines anciennes",
+      "en": "LV-1201 / Ancient Ruins",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "BG-386 / Freya’s Prospect",
+      "en": "BG-386 / Freya’s Prospect",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "BG-386 / Pyramide",
+      "en": "BG-386 / Pyramid",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Katanga / Raffinerie",
+      "en": "Katanga / Refinery",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Endeavor / Hangar",
+      "en": "Endeavor / Hangar",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "LV-895 / Ruines des Ingénieurs",
+      "en": "LV-895 / Engineer Ruins",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Lethe / Dead Hills",
+      "en": "Lethe / Dead Hills",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Lethe / Quais de Berkley",
+      "en": "Lethe / Berkley’s Docks",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Lethe / Pioneer Station",
+      "en": "Lethe / Pioneer Station",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Otago / Pont d’envol",
+      "en": "Otago / Flight Deck",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Purdan / Colonie Zeta",
+      "en": "Purdan / Zeta Colony",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Ryushi / Prosperity Wells",
+      "en": "Ryushi / Prosperity Wells",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Charon / Complexe Rogue",
+      "en": "Charon / Rogue Complex",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Innominata / Labyrinthe",
+      "en": "Innominata / Labyrinth",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Sphacteria / Orbite morte",
+      "en": "Sphacteria / Dead Orbit",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Genocide / Monde des ruches",
+      "en": "Genocide / Hive World",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Station Epsilon / Quarantaine",
+      "en": "Epsilon Station / Quarantine",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Tobler-9 / Usine gelée",
+      "en": "Tobler-9 / Frozen Factory",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Terre / Ville infestée",
+      "en": "Earth / Infested City",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "LV-178 / Mine de trimonite",
+      "en": "LV-178 / Trimonite Mine",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Marion / Salle des machines",
+      "en": "Marion / Engineering",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Cold Forge / Confinement",
+      "en": "Cold Forge / Containment",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Charybdis / Terminal industriel",
+      "en": "Charybdis / Industrial Terminal",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Ataegina / Refuge de montagne",
+      "en": "Ataegina / Mountain Hold",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Jericho 3 / Laboratoire",
+      "en": "Jericho 3 / Laboratory",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    },
+    {
+      "fr": "Euryale / Forêt humide",
+      "en": "Euryale / Rainforest",
+      "source": "src/xeno-trials-franchise-stages-v192.js"
+    }
+  ],
+  "patterns": [
+    {
+      "fr": "ARÈNES · PAGE {0}/{1} · {2}–{3}/{4}",
+      "en": "ARENAS · PAGE {0}/{1} · {2}–{3}/{4}",
+      "source": "src/xeno-trials-ui-v96.js"
+    },
+    {
+      "fr": "{0} arènes répertoriées · Sélection : {1}",
+      "en": "{0} arenas cataloged · Selected: {1}",
+      "source": "src/xeno-trials-ui-v96.js"
+    }
+  ]
+}

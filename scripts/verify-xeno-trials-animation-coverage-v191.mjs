@@ -2,22 +2,43 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { XENO_TRIALS_FIGHTERS_V96 as fighters, getXenoTrialsArtV96 } from '../src/xeno-trials-data-v96.js';
 import { getXenoTrialsAnimationCoverageV189 as oldCoverage, getXenoTrialsAnimationCoverageSummaryV189 as oldSummary } from '../src/xeno-trials-animation-coverage-v189.js';
 import { XENO_TRIALS_ANIMATION_ACTIONS_V191 as actions, getXenoTrialsAnimationCoverageV191 as coverage,
   getXenoTrialsAnimationCoverageListV191 as list, getXenoTrialsAnimationCoverageSummaryV191 as summary } from '../src/xeno-trials-animation-coverage-v191.js';
 import { XENO_TRIALS_SPRITE_ATLASES_V191 as atlases, getXenoTrialsSpriteAtlasV191 as atlasFor } from '../src/xeno-trials-sprite-atlas-v191.js';
+import { FRANCHISE_STAGES_BASELINE_V192 as publicationBaseline, FRANCHISE_STAGES_SUCCESSORS_V192 as successors,
+  reviewedFranchiseStagesDigestV192 } from './audit-xeno-franchise-stages-v192.mjs';
 
-const report = JSON.parse(readFileSync(new URL('../docs/forge/xeno-trials/animation-coverage-v191.json', import.meta.url)));
+const reportPath = 'docs/forge/xeno-trials/animation-coverage-v191.json';
+const reportBytes = readFileSync(new URL('../' + reportPath, import.meta.url));
+const report = JSON.parse(reportBytes);
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
+const readPublicationBaseline = path => execFileSync('git', ['show', publicationBaseline + ':' + path], {
+  cwd: new URL('../', import.meta.url), maxBuffer: 32 * 1024 * 1024 });
 const combat = ['defender', 'chrysalis', 'smasher', 'user-brute'], special = ['warrior', 'runner', 'prowler', 'spitter'];
 const combatStates = ['idle', 'walk', 'light', 'heavy', 'guard', 'hurt', 'ko'];
 
 test('the new ledger is source-bound, reproducible and keeps its V189 predecessor report byte-identical', () => {
   assert.equal(report.schema, 191); assert.equal(report.baseCommit, '07f9525c18c9b55cf21ae93fe758209f64ed8ff4');
+  assert.equal(publicationBaseline, '0e9843808823a9ce9da73e5b2effeefa1ee51f26');
+  assert.equal(sha(reportBytes), sha(readPublicationBaseline(reportPath)), 'The published V191 ledger remains historical exact bytes.');
   assert.deepEqual(report.summary, summary()); assert.deepEqual(report.entries, list());
-  for (const [path, expected] of Object.entries(report.sourceSha256))
-    assert.equal(sha(readFileSync(new URL('../' + path, import.meta.url))), expected, path);
+  const reviewedPaths = [];
+  for (const [path, expected] of Object.entries(report.sourceSha256)) {
+    const current = sha(readFileSync(new URL('../' + path, import.meta.url)));
+    if (path === 'src/xeno-trials-runtime-v96.js') {
+      // The fifty-stage continuation changes this renderer, not the V191
+      // animation ledger. Bind its old digest to the physical published tree
+      // before advancing that one source through the reviewed V192 receipt.
+      assert.equal(sha(readPublicationBaseline(path)), expected, 'The V191 runtime digest must match its real publication baseline.');
+      assert.equal(successors[path]?.previousSha256, expected, path);
+      assert.equal(current, reviewedFranchiseStagesDigestV192(path, expected), path);
+      reviewedPaths.push(path);
+    } else assert.equal(current, expected, path);
+  }
+  assert.deepEqual(reviewedPaths, ['src/xeno-trials-runtime-v96.js']);
   assert.ok(report.scope.includes('capture drawings remain outside'));
   const historical = oldSummary(); assert.equal(historical.schema, 189); assert.equal(historical.uniqueAdmittedDrawnFrames, 160);
   assert.equal(historical.trialsDrawnFrames, 120); assert.equal(historical.byAction.special.drawn, 0);

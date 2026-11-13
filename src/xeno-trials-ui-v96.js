@@ -31,6 +31,48 @@ const options = entries => entries.map(e => `<option value="${e.id}">${e.label}<
 const requestedRulesV119 = value => ({ 'no-special': { noSpecial: true }, 'one-hp': { initialHp: 1 },
   'thirty-seconds': { timeLimitSeconds: 30 } }[value] || {});
 const roleLabel = { balanced: 'Polyvalent', agile: 'Mobile', tank: 'Défensif', ranged: 'Distance' };
+export const XENO_TRIALS_STAGE_MEDIA_V192 = Object.freeze([
+  ['all', 'Tous les supports'], ['film', 'Films'], ['series', 'Série'], ['game', 'Jeux vidéo'],
+  ['comic', 'Comics'], ['novel', 'Romans'], ['simulation', 'Simulations Tantalus']
+].map(([id, label]) => Object.freeze({ id, label })));
+
+/** The filter and page are transient presentation state; neither selects an
+ * arena nor rewrites a saved or activity-owned configuration. */
+export function getXenoTrialsStagePageV192(stages, { media = 'all', page = 0, selectedId = null,
+  revealSelected = false, assignedStageId = null } = {}) {
+  const assigned = assignedStageId && stages.find(stage => stage.id === assignedStageId);
+  const entries = assigned ? [assigned] : stages.filter(stage => media === 'all'
+    || (stage.media || 'simulation') === media);
+  const pageSize = 12, pages = Math.max(1, Math.ceil(entries.length / pageSize));
+  let current = Math.max(0, Math.min(pages - 1, Number.isFinite(page) ? Math.floor(page) : 0));
+  const selectedIndex = entries.findIndex(stage => stage.id === selectedId);
+  if (revealSelected && selectedIndex >= 0) current = Math.floor(selectedIndex / pageSize);
+  return Object.freeze({ media, page: current, pages, pageSize, total: entries.length,
+    start: entries.length ? current * pageSize + 1 : 0, end: Math.min(entries.length, (current + 1) * pageSize),
+    selectedVisible: selectedIndex >= current * pageSize && selectedIndex < (current + 1) * pageSize,
+    stages: Object.freeze(entries.slice(current * pageSize, (current + 1) * pageSize)) });
+}
+
+/** A viewport, not an edited thumbnail: only the first admitted image plane
+ * is visible, including atlases whose three bands have unequal integer heights. */
+export function getXenoTrialsStagePreviewCropV192(stage) {
+  const atlas = stage?.stageRevision === 192 && stage.atlasV192;
+  if (!atlas || !Number.isInteger(atlas.width) || !Number.isInteger(atlas.height)
+    || atlas.width <= 0 || atlas.height < 3) return null;
+  const crop = atlas.sourceRects?.[0] || [0, 0, atlas.width, Math.floor(atlas.height / 3)];
+  if (!Array.isArray(crop) || crop.length !== 4 || !crop.every(Number.isInteger)
+    || crop[0] < 0 || crop[1] < 0 || crop[2] <= 0 || crop[3] <= 0
+    || crop[0] + crop[2] > atlas.width || crop[1] + crop[3] > atlas.height) return null;
+  return Object.freeze([...crop]);
+}
+
+const stageMediaLabelV192 = stage => XENO_TRIALS_STAGE_MEDIA_V192.find(entry => entry.id === (stage?.media || 'simulation'))?.label || 'Simulations Tantalus';
+const stagePreviewImageV192 = (stage, alt = '') => {
+  if (!stage.backdrop) return '<i></i><i></i><i></i>';
+  const crop = getXenoTrialsStagePreviewCropV192(stage);
+  if (!crop) return `<img src="${escapeHtml(stage.backdrop)}" alt="${escapeHtml(alt)}" loading="lazy">`;
+  return `<svg class="xt-stage-image-v192" viewBox="${crop.join(' ')}" preserveAspectRatio="xMidYMid slice" focusable="false" ${alt ? `role="img" aria-label="${escapeHtml(alt)}"` : 'aria-hidden="true"'}><image href="${escapeHtml(stage.backdrop)}" width="${stage.atlasV192.width}" height="${stage.atlasV192.height}"/></svg>`;
+};
 export const XENO_TRIALS_SPECIAL_LABELS_V96 = Object.freeze({
   tail: 'Fouet caudal', pounce: 'Bond', ram: 'Charge', slash: 'Lacération', acid: 'Salve acide',
   pulse: 'Impulsion', baton: 'Frappe de matraque', flame: 'Lance-flammes',
@@ -61,6 +103,7 @@ export class XenoTrialsUiV96 {
     this.selectionStep = 'home'; this.branchV119 = null; this.activityV119 = null;
     this.rosterPageV179 = 0; this.rosterSelectionV179 = null;
     this.programPageV186 = 0;
+    this.stagePageV192 = 0; this.stageSelectionV192 = null;
     root.innerHTML = `<div class="section-intro xt-terminal-header"><div class="xt-terminal-brand"><span class="xt-terminal-mark" aria-hidden="true">W<span>Y</span></span><div><p class="eyebrow">WEYLAND-YUTANI · DIVISION DES SYSTÈMES BIOLOGIQUES</p><h2>MIRE <span>/ XENO TRIALS</span></h2></div></div><button class="button" data-xt="return">QUITTER LE TERMINAL</button></div>
       <div class="xt-terminal-link"><span><i aria-hidden="true"></i> LIAISON TANTALUS ÉTABLIE</span><span>ÉVALUATION COMPARATIVE / MIRE</span><span>ACCÈS OPÉRATEUR</span></div>
       <p class="xt-notice">Simulation MIRE. Sélectionnez un programme, préparez votre spécimen puis engagez l’évaluation.</p>
@@ -95,6 +138,7 @@ export class XenoTrialsUiV96 {
         <p class="xt-doctrine" data-xt="arena-matchup"></p>
         <label>Environnement<select name="stageId">${options(STAGES)}</select></label>
         <label>Durée d’une manche<select name="roundSeconds"><option value="30">30 secondes</option><option value="60">60 secondes</option><option value="75">75 secondes</option><option value="99" selected>99 secondes · The Pit</option><option value="120">120 secondes</option></select></label>
+        <div class="xt-stage-tools-v192"><label>Archives d’environnement<select data-xt="stage-media">${options(XENO_TRIALS_STAGE_MEDIA_V192)}</select></label><button type="button" class="button" data-xt="arena-selection">RETROUVER L’ARÈNE SÉLECTIONNÉE</button><nav aria-label="Pages des arènes"><button type="button" class="button" data-xt="stage-previous">← PAGE PRÉCÉDENTE</button><span data-xt="stage-page" role="status" aria-live="polite"></span><button type="button" class="button" data-xt="stage-next">PAGE SUIVANTE →</button></nav><p data-xt="stage-count"></p></div>
         <div data-xt="arena-cards" class="xt-arena-cards" role="group" aria-label="Arènes disponibles"></div>
         <div data-xt="stage-preview" class="xt-stage-preview"></div>
         <p class="xt-doctrine" data-xt="arena-rules">Deux manches gagnantes. Présentation des deux spécimens, puis décompte 3–2–1. Le chrono ne démarre qu’au signal de combat.</p>
@@ -134,7 +178,23 @@ export class XenoTrialsUiV96 {
     this.form.elements.opponentFamily.addEventListener('change', () => this.updateOpponents());
     this.form.elements.opponentId.addEventListener('change', () => { this.updateVariants(); this.renderPreviews(); });
     this.form.elements.opponentVariant.addEventListener('change', () => this.renderPreviews());
-    this.form.elements.stageId.addEventListener('change', () => this.renderPreviews());
+    this.form.elements.stageId.addEventListener('change', () => {
+      this.el('stage-media').value = 'all'; this.stageSelectionV192 = null; this.renderPreviews();
+    });
+    this.el('stage-media').addEventListener('change', () => {
+      if (!this.active || this.selectionStep !== 'arena' || this.isRunning() || this.state().pending || this.unsavedResult) return;
+      this.stagePageV192 = 0; this.renderPreviews();
+    });
+    for (const [key, delta] of [['stage-previous', -1], ['stage-next', 1]]) this.el(key).onclick = () => {
+      if (!this.active || this.selectionStep !== 'arena' || this.isRunning() || this.state().pending || this.unsavedResult || this.el(key).disabled) return;
+      this.stagePageV192 += delta; this.renderPreviews();
+      this.el(this.el(key).disabled ? delta > 0 ? 'stage-previous' : 'stage-next' : key).focus({ preventScroll: true });
+    };
+    this.el('arena-selection').onclick = () => {
+      if (!this.active || this.selectionStep !== 'arena' || this.isRunning() || this.state().pending || this.unsavedResult) return;
+      this.el('stage-media').value = 'all'; this.stageSelectionV192 = null; this.renderPreviews();
+      this.root.querySelector(`[data-xt-arena="${this.form.elements.stageId.value}"]`)?.focus({ preventScroll: true });
+    };
     this.form.elements.playerVariant.addEventListener('change', () => { if (!this.isRunning()) this.render(); });
     this.form.elements.requestedRules.addEventListener('change', () => this.updateRequestedRulesV119());
     root.addEventListener('click', event => {
@@ -275,6 +335,7 @@ export class XenoTrialsUiV96 {
       this.form.elements.opponentId.value = opponent.id;
     }
     if (STAGES.some(stage => stage.id === config.stageId)) this.form.elements.stageId.value = config.stageId;
+    this.el('stage-media').value = 'all'; this.stageSelectionV192 = null;
     for (const key of ['difficulty', 'playerVariant', 'opponentVariant', 'roundSeconds']) this.form.elements[key].value = String(config[key]);
   }
   open() {
@@ -395,8 +456,18 @@ export class XenoTrialsUiV96 {
     this.el('arena-matchup').textContent = horde ? `${FIGHTERS.find(f => f.id === this.selected)?.label} · ${horde.waveLabel} · ${horde.populationLabel} · ${horde.healthLabel}` : `${matchup} · Deux manches gagnantes`;
     this.el('arena-rules').textContent = horde?.operation ? horde.orders : horde ? `${horde.orders} Une seule évaluation ; votre santé est conservée entre les vagues.` : 'Deux manches gagnantes. Présentation des deux spécimens, puis décompte 3–2–1. Le chrono ne démarre qu’au signal de combat.';
     const locked = !this.active || this.selectionStep !== 'arena' || this.isRunning() || this.state().pending || this.unsavedResult;
-    this.el('arena-cards').innerHTML = (horde ? [stage] : STAGES).map(s => `<button type="button" class="xt-arena-card" data-xt-arena="${s.id}" aria-pressed="${s.id === stage.id}" ${locked || activity?.stageId && activity.stageId !== s.id ? 'disabled' : ''} style="--xt-back:${s.background};--xt-floor:${s.floor};--xt-accent:${s.accent}"><span class="xt-arena-thumbnail${s.stageRevision === 190 ? ' xt-atlas-preview-v190' : ''}">${s.backdrop ? `<img src="${s.backdrop}" alt="" loading="lazy">` : '<i></i><i></i><i></i>'}</span><strong>${s.label}</strong><small>${activity?.stageId ? 'Environnement assigné à l’évaluation' : s.backdrop ? 'SECTEUR RÉPERTORIÉ' : 'SECTEUR MIRE'} · 2D</small></button>`).join('');
-    this.el('stage-preview').innerHTML = `<div class="xt-stage-scene${stage.stageRevision === 190 ? ' xt-atlas-preview-v190' : ''}" style="--xt-back:${stage.background};--xt-floor:${stage.floor};--xt-accent:${stage.accent}">${stage.backdrop ? `<img src="${stage.backdrop}" alt="Aperçu du décor sélectionné">` : '<i></i><i></i><i></i><i></i><i></i>'}<span>${stage.label}</span></div><p>${horde ? `${horde.pressureLabel} · ${horde.waveLabel} · ${horde.healthLabel}` : matchup} · ${escapeHtml(stage.label)}</p>`;
+    const media = XENO_TRIALS_STAGE_MEDIA_V192.some(entry => entry.id === this.el('stage-media').value) ? this.el('stage-media').value : 'all';
+    const page = getXenoTrialsStagePageV192(STAGES, { media, page: this.stagePageV192, selectedId: stage.id,
+      revealSelected: this.stageSelectionV192 !== stage.id, assignedStageId: activity?.stageId });
+    this.stagePageV192 = page.page; this.stageSelectionV192 = stage.id;
+    this.el('stage-media').disabled = Boolean(locked || activity?.stageId);
+    this.el('arena-selection').disabled = locked;
+    this.el('stage-previous').disabled = locked || page.page === 0;
+    this.el('stage-next').disabled = locked || page.page + 1 >= page.pages;
+    this.el('stage-page').textContent = `ARÈNES · PAGE ${page.page + 1}/${page.pages} · ${page.start}–${page.end}/${page.total}`;
+    this.el('stage-count').textContent = `${page.total} arènes répertoriées · Sélection : ${stage.label}`;
+    this.el('arena-cards').innerHTML = page.stages.map(s => `<button type="button" class="xt-arena-card" data-xt-arena="${s.id}" aria-pressed="${s.id === stage.id}" ${locked || activity?.stageId && activity.stageId !== s.id ? 'disabled' : ''} style="--xt-back:${s.background};--xt-floor:${s.floor};--xt-accent:${s.accent}"><span class="xt-arena-thumbnail${s.stageRevision === 190 ? ' xt-atlas-preview-v190' : ''}">${stagePreviewImageV192(s)}</span><strong>${escapeHtml(s.label)}</strong><small>${activity?.stageId ? 'Environnement assigné à l’évaluation' : s.backdrop ? 'SECTEUR RÉPERTORIÉ' : 'SECTEUR MIRE'} · 2D</small>${s.media ? `<small>${escapeHtml(stageMediaLabelV192(s))} · ${escapeHtml(s.sourceWork || '')}</small>` : ''}</button>`).join('') || '<p class="xt-help">Aucune arène pour ce support. Votre sélection est conservée.</p>';
+    this.el('stage-preview').innerHTML = `<div class="xt-stage-scene${stage.stageRevision === 190 ? ' xt-atlas-preview-v190' : ''}" style="--xt-back:${stage.background};--xt-floor:${stage.floor};--xt-accent:${stage.accent}">${stagePreviewImageV192(stage, 'Aperçu du décor sélectionné')}<span>${escapeHtml(stage.label)}</span></div><p>${horde ? `${horde.pressureLabel} · ${horde.waveLabel} · ${horde.healthLabel}` : matchup} · ${escapeHtml(stage.label)}</p>`;
   }
   closeRuntime() { this.runtime?.stop(); this.root.removeAttribute('data-xt-outro'); this.el('skip-sequence').hidden = true; this.el('taunt').hidden=true; this.el('taunt').disabled=true; this.generation++; this.runtime = null; this.loading = false; this.lastStatus = null; this.lastResumedTickV186 = null; this.lastGamepadHintV186 = null; }
   close() {

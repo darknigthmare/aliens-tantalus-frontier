@@ -1,3 +1,4 @@
+import { verifyXenoFranchiseStageAdmissionsV192 } from './public-xeno-franchise-stage-admissions-v192.mjs';
 import { verifyArbiterImageAdmissionsV190 } from './public-xeno-arbiter-admissions-v190.mjs';
 import { verifyXenoSpriteAdmissionsV191 } from './public-xeno-sprite-admissions-v191.mjs';
 import { verifyXenoSpriteAdmissionsV189 } from './public-xeno-sprite-admissions-v189.mjs';
@@ -21,6 +22,7 @@ await verifyXenoSpriteAdmissionsV188(root);
 await verifyXenoSpriteAdmissionsV189(root);
 await verifyArbiterImageAdmissionsV190(root);
 await verifyXenoSpriteAdmissionsV191(root);
+await verifyXenoFranchiseStageAdmissionsV192(root);
 await verifyPublicAdmissionsV119(root);
 await verifyPublicAdmissionsV120(root);
 await verifyPublicAdmissionsV121(root);
@@ -89,3 +91,4 @@ await verifyXenoSpriteAdmissionsV189(output);
 
 await verifyArbiterImageAdmissionsV190(output);
 await verifyXenoSpriteAdmissionsV191(output);
+await verifyXenoFranchiseStageAdmissionsV192(output);

@@ -24,10 +24,10 @@ const image = { naturalWidth: 1254, naturalHeight: 1254 };
 const all = [...historical, ...corporate];
 
 test('forty existing settings keep exact order/data; four corporate settings append without replacing IDs', () => {
-  assert.equal(enriched.length, 40); assert.equal(corporate.length, 4); assert.equal(stages.length, 50);
-  assert.deepEqual(stages.slice(6, 46), historical); assert.deepEqual(stages.slice(46), corporate);
+  assert.equal(enriched.length, 40); assert.equal(corporate.length, 4); assert.equal(stages.slice(0, 50).length, 50);
+  assert.deepEqual(stages.slice(6, 46), historical); assert.deepEqual(stages.slice(46, 50), corporate);
   assert.deepEqual(enriched.map(entry => entry.stageId), historical.map(stage => stage.id));
-  assert.equal(new Set(stages.map(stage => stage.id)).size, 50);
+  assert.equal(new Set(stages.slice(0, 50).map(stage => stage.id)).size, 50);
   assert.equal(new Set(enriched.map(entry => entry.architecture)).size, 40);
   assert.equal(new Set(corporate.map(stage => stage.backdrop)).size, 4);
   for (const stage of corporate) {

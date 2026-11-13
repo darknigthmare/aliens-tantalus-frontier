@@ -15,6 +15,7 @@ import { getXenoTrialsOperationBriefingV188 as briefing, getXenoTrialsOperationH
 import { createXenoTrialsMatchV96 as create } from '../src/xeno-trials-engine-v96.js';
 
 const review = JSON.parse(readFileSync(new URL('../docs/forge/xeno-trials/i18n-arbiter-protocols-review-v191.json', import.meta.url), 'utf8'));
+const franchiseReview = JSON.parse(readFileSync(new URL('../docs/forge/xeno-trials/i18n-franchise-stages-review-v192.json', import.meta.url), 'utf8'));
 const hash = object => createHash('sha256').update(JSON.stringify(Object.fromEntries(Object.entries(object)
   .sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0)))).digest('hex');
 function english(callback) {
@@ -29,12 +30,12 @@ test('V191 appends exactly fifty-one reviewed keys and three patterns while all 
     patterns: [500, '9654e93f75f635400cb73b0adaf6c818823976c1f0cb9c3690d2fc57b02beeb9']
   };
   for (const [kind, catalog] of Object.entries({ exact: C, patterns: P })) {
-    const added = new Set(review[kind].map(entry => entry.fr));
+    const added = new Set([...review[kind], ...franchiseReview[kind]].map(entry => entry.fr));
     base[kind] = Object.fromEntries(Object.entries(catalog).filter(([fr]) => !added.has(fr)));
     assert.equal(Object.keys(base[kind]).length, expected[kind][0]); assert.equal(hash(base[kind]), expected[kind][1]);
     assert.ok(review[kind].every(entry => !Object.hasOwn(entry, 'previous')));
   }
-  const regenerated = mergeReviewV186(base, review);
+  const regenerated = mergeReviewV186(mergeReviewV186(base, review), franchiseReview);
   assert.equal(hash(regenerated.exact), hash(C)); assert.equal(hash(regenerated.patterns), hash(P));
   assert.equal(validateCatalogV186(regenerated).omittedPatternSlots, 1);
 });

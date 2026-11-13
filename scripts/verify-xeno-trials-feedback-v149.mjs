@@ -106,7 +106,7 @@ test('the exact forty-six historical phase fixtures remain covered; four corpora
  assert.equal(historicalStageIds.length,46);
  assert.deepEqual(historicalStages.map(stage=>stage.id),historicalStageIds);
  assert.deepEqual(stages.slice(0,46).map(stage=>stage.id),historicalStageIds);
- assert.deepEqual(stages.slice(46),XENO_TRIALS_CORPORATE_STAGES_V190);
+ assert.deepEqual(stages.slice(46,50),XENO_TRIALS_CORPORATE_STAGES_V190);
  assert.equal(XENO_TRIALS_CORPORATE_STAGES_V190.length,4);
  for(const stage of XENO_TRIALS_CORPORATE_STAGES_V190){
   const legacy=canvasContext();

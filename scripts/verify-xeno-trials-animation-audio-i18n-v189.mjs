@@ -11,17 +11,18 @@ import {getXenoTrialsAnimationCoverageListV189 as list} from '../src/xeno-trials
 const review=JSON.parse(readFileSync(new URL('../docs/forge/xeno-trials/i18n-animation-audio-review-v189.json',import.meta.url),'utf8'));
 const arbiterReview=JSON.parse(readFileSync(new URL('../docs/forge/xeno-trials/i18n-arbiter-review-v190.json',import.meta.url),'utf8'));
 const protocolsReview=JSON.parse(readFileSync(new URL('../docs/forge/xeno-trials/i18n-arbiter-protocols-review-v191.json',import.meta.url),'utf8'));
+const franchiseReview=JSON.parse(readFileSync(new URL('../docs/forge/xeno-trials/i18n-franchise-stages-review-v192.json',import.meta.url),'utf8'));
 const hash=object=>createHash('sha256').update(JSON.stringify(Object.fromEntries(Object.entries(object).sort(([a],[b])=>a<b?-1:a>b?1:0)))).digest('hex');
 function english(callback){useCatalogV185({EN_CATALOG_V185:C,EN_PATTERNS_V185:P});setLanguageV185('en',{document:null,persist:false});try{callback();}finally{setLanguageV185('fr',{document:null,persist:false});}}
 
 test('V189 is an append-only successor to all 6334 exact V188 translations and 494 patterns',()=>{
  const base={},expected={exact:[6334,'d01acba313a5a4640c717bb11d7bb0d85a8359849baabe7eb2eff8e984768b2e'],patterns:[494,'d30a70a267740e9669837bf26ccdba105ee3979a2921e958f3ae4ee7ebc8f2a4']};
  for(const[kind,catalog]of Object.entries({exact:C,patterns:P})){
-  const added=new Set([...review[kind],...arbiterReview[kind],...protocolsReview[kind]].map(entry=>entry.fr));base[kind]=Object.fromEntries(Object.entries(catalog).filter(([fr])=>!added.has(fr)));
+  const added=new Set([...review[kind],...arbiterReview[kind],...protocolsReview[kind],...franchiseReview[kind]].map(entry=>entry.fr));base[kind]=Object.fromEntries(Object.entries(catalog).filter(([fr])=>!added.has(fr)));
   assert.equal(Object.keys(base[kind]).length,expected[kind][0]);assert.equal(hash(base[kind]),expected[kind][1]);
   assert.ok(review[kind].every(entry=>!Object.hasOwn(entry,'previous')),'No historical translation is revised');
  }
- const regenerated=mergeReviewV186(mergeReviewV186(mergeReviewV186(base,review),arbiterReview),protocolsReview);assert.equal(hash(regenerated.exact),hash(C));assert.equal(hash(regenerated.patterns),hash(P));
+ const regenerated=mergeReviewV186(mergeReviewV186(mergeReviewV186(mergeReviewV186(base,review),arbiterReview),protocolsReview),franchiseReview);assert.equal(hash(regenerated.exact),hash(C));assert.equal(hash(regenerated.patterns),hash(P));
  assert.equal(validateCatalogV186(regenerated).omittedPatternSlots,1);
 });
 
