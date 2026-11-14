@@ -1,4 +1,5 @@
 import { withMissionDepthRoomsV188 } from './mission-depth-v188.js';
+import { withQz17LevelDressingV188 } from './qz17-level-dressing-v188.js';
 import {
   GameEngine as ProductionCoreEngine,
   buildEnemyEncounterEligibility as buildCoreEnemyEncounterEligibility
@@ -91,7 +92,7 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   });
 }
 
-export class GameEngine extends withMissionDepthRoomsV188(withCasteBehaviorsV188(withRunOptionsRuntimeV188(withCombatFeelV188(withFootstepCuesV188(withMissionObjectivePanelV188(withTensionDirectorV188(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(V158ProductionEngine)))))))))))) {
+export class GameEngine extends withMissionDepthRoomsV188(withQz17LevelDressingV188(withCasteBehaviorsV188(withRunOptionsRuntimeV188(withCombatFeelV188(withFootstepCuesV188(withMissionObjectivePanelV188(withTensionDirectorV188(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(V158ProductionEngine))))))))))))) {
   start(options = {}) {
     options = isolateForgeMissionOptionsV136(options);
     this.expectedMissionSignatureV130 = options.missionLevel?.signature || null;

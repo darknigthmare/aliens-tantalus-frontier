@@ -6,14 +6,15 @@
 // nearby depth band and settle the shooter, sprites are never scaled.
 import { blockedByFootprintV188, stepDepthMoveV188, freeDepthV188, depthShotHitsV188, depthShotSettleV188,
   depthToScreenOffsetV188, depthAnnouncementV188, DEPTH_SHOT_BAND_V188 } from './hub-depth-rooms-v188.js';
-import { drawDepthPropV188 } from './depth-props-v188.js';
+import { drawDepthPropV188, drawDepthHoldFloorV188 } from './depth-props-v188.js';
+import { qz17HoldLayoutV188 } from './qz17-level-dressing-v188.js';
 
 export const QZ17_CAMPAIGN_ID_V188 = 'special-narrative-qz17';
 export const MISSION_ATTACK_BAND_V188 = 24;
 const P1_DEPTH_KEYS = { back: ['KeyW', 'ArrowUp'], front: ['KeyS', 'ArrowDown'] };
 const P2_DEPTH_KEYS = { back: ['KeyI'], front: ['KeyK'] };
 const footprint = (id, x0, x1, z0, z1) => Object.freeze({ id, x0, x1, z0, z1 });
-const prop = (id, kind, x, w, h, z, z0, z1) => Object.freeze({ id, kind, x, w, h, z, footprint: footprint(id, x, x + w, z0, z1) });
+const prop = (id, kind, x, w, h, z, z0, z1, extra = {}) => Object.freeze({ id, kind, x, w, h, z, ...extra, footprint: footprint(id, x, x + w, z0, z1) });
 
 /** The section, measured on the generated level: between the two cargo airlocks, on the lowest cargo deck. */
 export function buildCargoHoldSectionV188(engine) {
@@ -22,18 +23,17 @@ export function buildCargoHoldSectionV188(engine) {
   if (!dock || !cargo || !decks.length) return null;
   const floorY = Math.max(...decks.map(entry => entry.y)), x0 = dock.x + dock.w, x1 = cargo.x;
   if (!(x1 - x0 > 300)) return null;
-  const at = fraction => Math.round(x0 + (x1 - x0) * fraction);
-  // Sealed containers marked QZ17 (CIN-31), in primitives; three rows leave a lane along the wall
-  // and two lanes towards the camera. The existing crates cover stays a wall-side object.
-  const props = [
-    prop('qz17-row-a', 'container', at(.12), 82, 84, -66, -90, -46),
-    prop('qz17-row-b', 'container', at(.40), 96, 70, -28, -42, -14),
-    prop('qz17-row-c', 'container', at(.70), 84, 84, -66, -90, -46)
-  ];
+  // The QZ17 series at 10-ft ISO scale (qz17-level-dressing-v188.js): a sealed container by the cargo
+  // bulkhead, a pallet of crates in the middle band by the dock bulkhead, the empty bay of QZ17-04 in
+  // front of the duct and the doorway. A lane stays free along the wall.
+  const layout = qz17HoldLayoutV188(x0, x1);
+  const props = layout.blocking.map(entry => prop(entry.id, entry.kind, entry.x, entry.w, entry.h, entry.z, entry.z0, entry.z1,
+    entry.labels ? { stack: entry.stack, labels: entry.labels } : {}));
+  // A rail crates cover left in the hold (QZ-17 dressing removes it) stays a wall-side object.
   const covers = (engine.covers || []).filter(cover => cover.zoneId === 'ship-cargo' && cover.x >= x0 && cover.x + cover.w <= x1)
     .map(cover => prop(`cover:${cover.id}`, 'cover', cover.x, cover.w, cover.h, -2, -34, 1));
   return Object.freeze({ id: 'qz17-cargo-hold', roomId: 'qz17-cargo-hold', zoneId: 'ship-cargo', x0, x1, floorY,
-    zMin: -80, zMax: 0, doorBand: 20, interactBand: 24, speed: 150, dropship: null,
+    zMin: -80, zMax: 0, doorBand: 20, interactBand: 24, speed: 150, dropship: null, bay: layout.bay,
     props: Object.freeze([...props, ...covers]), containers: Object.freeze(props), coverIds: Object.freeze(covers.map(entry => entry.id.slice(6))) });
 }
 
@@ -61,6 +61,7 @@ export function withMissionDepthRoomsV188(Base) {
     start(options = {}) {
       const result = super.start(options);
       this.missionDepthSectionV188 = (options.campaign?.id || this.campaign?.id) === QZ17_CAMPAIGN_ID_V188 ? buildCargoHoldSectionV188(this) : null;
+      this.placeQz17HoldSleepersV188?.(this.missionDepthSectionV188);
       for (const actor of [this.player, this.coop]) if (actor) actor.depthZ = 0;
       this.missionDepthEnteredAtV188 = null;
       return result;
@@ -127,6 +128,13 @@ export function withMissionDepthRoomsV188(Base) {
       const section = this.missionDepthSectionV188;
       if (section && inDepthSectionV188(section, actor) && Math.abs(Number(actor.depthZ) || 0) > section.interactBand) return false;
       return super.interact(actor);
+    }
+
+    // The same rule for the prompt: no "E" offered for what the front lanes cannot reach.
+    getInteractionPrompt(actor = this.player) {
+      const section = this.missionDepthSectionV188;
+      if (section && actor?.alive !== false && inDepthSectionV188(section, actor) && Math.abs(Number(actor.depthZ) || 0) > section.interactBand) return '';
+      return super.getInteractionPrompt(actor);
     }
 
     // An attack lands only inside the attack band (FR-006, FR-007).
@@ -202,7 +210,7 @@ export function withMissionDepthRoomsV188(Base) {
       const frame = this.depthFrameV188; if (!frame || frame.propsDrawn) return; frame.propsDrawn = true;
       const { section } = frame, shade = ctx.createLinearGradient?.(0, section.floorY, 0, section.floorY + 80);
       if (shade) { shade.addColorStop(0, 'rgba(0,0,0,.22)'); shade.addColorStop(1, 'rgba(0,0,0,0)'); ctx.fillStyle = shade; ctx.fillRect(section.x0, section.floorY, section.x1 - section.x0, 80); }
-      ctx.fillStyle = 'rgba(214,176,92,.2)'; for (const lane of [20, 40, 60]) for (let x = section.x0 + 18; x < section.x1 - 18; x += 64) ctx.fillRect(x, section.floorY + lane, 34, 2);
+      drawDepthHoldFloorV188(ctx, section);
       for (const entry of [...section.containers].sort((a, b) => b.z - a.z)) drawDepthPropV188(ctx, entry, this.depthBoxV188(entry));
     }
     depthBoxV188(entry) { const section = this.depthFrameV188.section; return { x: entry.x, y: section.floorY + depthToScreenOffsetV188(entry.z) - entry.h, w: entry.w, h: entry.h }; }
