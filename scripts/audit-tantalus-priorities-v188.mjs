@@ -56,7 +56,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "package.json": {
     "previousSha256": "ff133a405bfc1ef2afa7085fcb2a6cde27a9f52c4af0de5172a058b47082eb48",
-    "currentSha256": "00d2a650d4ccde588968ccccfc48ed092616a02cefdc33c09a34eb1e6bc0f135"
+    "currentSha256": "973340d329955c863b952244f37f3881abec483c39a268062fd5b5376bf29026"
   },
   "player-onboarding-v84.css": {
     "previousSha256": "ae49e974d70f1a46dbd28da6d5515fac0124c992591cf0c1c50ad3e7e3d1cfbf",
@@ -88,7 +88,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "328c764b2bf467d0bc21ae86abf415a7722bd0a88cba486eb2167c22fa8f0b84",
-    "currentSha256": "e0c306e37b43e09a8358f11d611e7c5982701ca780995396819e919fcd75a746"
+    "currentSha256": "b999bdf207b6a02d65b64e817ee57d488154169bf2f7c53ae9524f5e0c3eeeba"
   },
   "src/app.js": {
     "previousSha256": "482835e65677c536085a1344cf61c3ffa5e09e2af1b8029b949e000a533038ae",
@@ -100,7 +100,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/archive-relay-runtime-v122.js": {
     "previousSha256": "e77a3eeccb624e501e61d5c883e357a9e5ddfc0ce97a881e1a7ce488319666b2",
-    "currentSha256": "3ead1c0f3d01fbd1baddb19f6fcfd933483fd4586f2e0759a8d896ebe9e980c8"
+    "currentSha256": "0234fe37a68b2895755de98d48b1f36a1d677c421df92a09959a357914ea3c12"
   },
   "src/audio-assets-v77.js": {
     "previousSha256": "bbbc868dbf7e0715be6d717d1c5ff142246a95a52ba3ff2e97f4ad11c9f34ce2",
@@ -118,9 +118,13 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
     "previousSha256": "f50ab347b6b209dedf954a0e5dcde236b16cf62360df502a1bea38a67edf453a",
     "currentSha256": "ca538c46b5134d1b9f2ff7d8f6d1e0392a5c729f73456051de3ad682aff01835"
   },
+  "src/forge-mission-runtime-v141.js": {
+    "previousSha256": "1335114f76ffd164a88bf6e2a8e7ef86d86d37ad36be726a8055cfc10a642cb0",
+    "currentSha256": "84381eab709f8b75bd7b41a9c5fe40c5d3d05405051fefe18372a8ad9ff0b2ac"
+  },
   "src/game-final-runtime.js": {
     "previousSha256": "fb94b1028dc182ccc97313064f2f47ad958733db47268ae7b308dc0085d4aba6",
-    "currentSha256": "f9fb9fa6edb676e8e2c61261c817a7aedeb50c439eab501e0374ed2556fa74b9"
+    "currentSha256": "b2f0817d43bee94f4d40430e696277ac9272d7f97ad891ac77baf4cb083915fa"
   },
   "src/game-production-resume.js": {
     "previousSha256": "dbb0f31045e4da9a0acfa15e3ff334b3bf96da489a1c54db43e0d944664d2929",
@@ -136,11 +140,11 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/game-v51-runtime.js": {
     "previousSha256": "50551b2f20e6fabd825ab6c6865244f2a47e77aecd337fc0d79386fdd5d4f017",
-    "currentSha256": "1a2b5999cd6757036157b0675e113f437f5ca09be4cbbbcbbe5d23a5eb43c288"
+    "currentSha256": "ddeaad7a61d699faa355f8605d442aff1edf6ea93e46b45501665b7a7ac2f876"
   },
   "src/game-v52-level-runtime.js": {
     "previousSha256": "f394cdc77d4684846cbfb5552ec950f4ba9948d75a09091177627ae7763112c4",
-    "currentSha256": "7e115f47a5b02716135179f0c3851e1a3a613f0840cc544ad6d596cba68fb861"
+    "currentSha256": "177033fa9a35913bb7e866160126ff540dbda3b6d2970cdd9655ff62799f592d"
   },
   "src/game.js": {
     "previousSha256": "092e72bcffdbe66b1801c180c79b2f854d1ebbdc85d53ded138a88881c7404bd",
@@ -174,6 +178,10 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
     "previousSha256": "1cc35c82a83910dc154305f952118194162cde11382388734529bb5a73a54a4e",
     "currentSha256": "4ef079604de7e2d5a18057ddcd401219c786242484a59b5f77dd902f695d2588"
   },
+  "src/hub-v52-runtime.js": {
+    "previousSha256": "7b67eb2cb7c5281e3ae0acd69adfb252db555a00f879194a553012b8d53efb4c",
+    "currentSha256": "013d80f0fac643ec67ea00947b936c49be856ead9fd453a4a0e8376c1d803c93"
+  },
   "src/hub-v71-runtime.js": {
     "previousSha256": "0013ef68e3db38888a83e97b88ab5615b8a3b4ebe9f229c7d659a5381433956a",
     "currentSha256": "bddf73a89222aa36e8863deac625d3cf5a3d6b058778afbd838291a52cceca24"
@@ -184,11 +192,15 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/i18n-en-catalog-v185.js": {
     "previousSha256": "ac3632c302294c3e2869d673ad6d8cd861e1b0f62641d2d16335387746a6218a",
-    "currentSha256": "9406a641f3e27235cd19831dbc1b9b9257596f219facc353d32be878099f9d21"
+    "currentSha256": "6415f5cd18f45fe0ddc406a823d95cdb3bb4058a2108720699eb143dc21b8aba"
   },
   "src/narrative-collectables-runtime-v68.js": {
     "previousSha256": "a95591168a10032265fccb51333f5a2886f4f647f878005c8a84676b95eed809",
-    "currentSha256": "d98759e644477a46efae3f818250851082cf9776884d359938bad98b26e4c85e"
+    "currentSha256": "6b3d6129a603011456e4e309098a59e396b4853f72f14623979072c03fad0a3c"
+  },
+  "src/narrative-evidence-v132.js": {
+    "previousSha256": "cbc87304d7fa4169a1432564a9d83681a0e1d020e656a191bd44756da32a9b32",
+    "currentSha256": "61ec802599eaa817d762a0a91b437b0414c7979ea4628a6142956c22ba2146c3"
   },
   "src/npc-cal-logistics-route-v165.js": {
     "previousSha256": "e8206918faeede321fac0b43275da1a62a80e9591c7ff97b86ec8cf9ed7f5acc",
@@ -221,6 +233,18 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   "src/ship-port-v87.css": {
     "previousSha256": "280b758be54bcb9433fb8353dc73b6bb047b79ce9f1210c47e5bde05ec9f29b9",
     "currentSha256": "45bf14ef6d7ef549d4b88b732d199f85c05f2524dc34ae67e7617c88361971fa"
+  },
+  "src/vertical-world-v130.js": {
+    "previousSha256": "9ba42f3fe1658abd5487eb6702744211faccbeec2ad6f1a8a65029cacb5ce641",
+    "currentSha256": "613fda47d3edf9cc42770671542f6755511dcc77efac7e8bdcdd0efa2e317222"
+  },
+  "src/weapon-actions-v131.js": {
+    "previousSha256": "4ff367efb3c919ba51fcb5595f119d54f462a3453dbd95ca1d6c40110f44172a",
+    "currentSha256": "a6d08a042c3f7e220623db3bdbccca91b74ca87deb00def008eebd2f3e1757a2"
+  },
+  "src/weapon-magazine-recovery-runtime-v168.js": {
+    "previousSha256": "73eb796bf6d9159239e8a8c499bc8b73db9975a69016df5b7d9ef2d2d4eccf13",
+    "currentSha256": "8fb77f86e0f5a3f02ec756ad659fe86347927bb8c2de1d54798e04f71453dcdd"
   },
   "styles.css": {
     "previousSha256": "5d7f49517ea4377aaf2847e7ef5f5dd5f6e4b015301e1280072d41fd9edab36c",
