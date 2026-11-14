@@ -21,6 +21,7 @@ import { playerCatalogStatsV110, playerCatalogNameV110 } from './player-surfaces
 import { getVehicleShowroomV119 } from './vehicle-showroom-v119.js';
 import { resolveAlienBaseDossierV1, resolveAlienBaseIdentityProposalV1, resolveAlienBaseMasterEntityV1, resolveAlienBaseWeaponReferenceV1 } from './alien-base-bridge-v1.js';
 import { resolveWeaponReferenceCoverageV122 as resolveWeaponReferenceCoverageV120 } from './weapon-reference-coverage-v122.js';
+import { groupLabelV188 } from './group-glossary-v188.js';
 
 const importWalkV107 = id => {
   const art = getEnemyStaticPoseV96(id), walk = getEnemyImportAnimationV107(art), attack = getEnemyImportAttackV109(art);
@@ -308,11 +309,13 @@ function appendDefinitionRows(documentRef, target, values, options = {}) {
   }
 }
 
-function renderTaxonomyPath(documentRef, record, technical = false) {
+function renderTaxonomyPath(documentRef, record, technical = false, developer = false) {
   const list = createElement(documentRef, 'ol', 'catalog-v62__breadcrumb');
   for (const segment of record.hierarchySegments) {
+    // V188: group ids (acid, stalker, vehicle…) read through the bilingual glossary.
+    const group = developer ? null : groupLabelV188(segment.label, { catalog: record.catalog, kind: segment.kind });
     const item = createElement(documentRef, 'li', segment.label === CATALOG_UNKNOWN_V62 ? 'is-unknown' : '',
-      formatCatalogValueV62(technical ? segment.label : playerCatalogNameV110(segment.label)));
+      group || formatCatalogValueV62(technical ? segment.label : playerCatalogNameV110(segment.label)));
     item.dataset.kind = segment.kind;
     list.append(item);
   }
@@ -701,7 +704,9 @@ export class CatalogWorkbenchV62 {
     if (this.state.selectedEntryId && nodeContainsEntry(node, this.state.selectedEntryId)) row.classList.add('is-in-path');
     const chevron = createElement(this.document, 'span', 'catalog-v62__tree-chevron', node.children.length ? (expanded ? '−' : '+') : '·');
     chevron.setAttribute('aria-hidden', 'true');
-    const text = createElement(this.document, 'span', 'catalog-v62__tree-name', formatCatalogValueV62(this.developerModeV110 ? node.label : playerCatalogNameV110(node.label)));
+    const group = this.developerModeV110 ? null : groupLabelV188(node.label, node);
+    const text = createElement(this.document, 'span', 'catalog-v62__tree-name', group || formatCatalogValueV62(this.developerModeV110 ? node.label : playerCatalogNameV110(node.label)));
+    if (group) text.dataset.groupId = node.label;
     if (node.label === CATALOG_UNKNOWN_V62) text.classList.add('catalog-v62__unknown');
     const count = createElement(this.document, 'span', 'catalog-v62__tree-count', String(visibleCount));
     row.append(chevron, text, count);
@@ -868,7 +873,7 @@ export class CatalogWorkbenchV62 {
     if (animationControls.children.length) this.detail.append(animationControls);
     if (technical && record.catalogPolicyV105?.note) this.detail.append(createElement(this.document, 'p', 'catalog-v62__fact-note', record.catalogPolicyV105.note));
     if (record.catalog === 'enemies' && !record.documentaryReferenceV105) this.renderGameplayScaleV72(record);
-    this.detail.append(renderTaxonomyPath(this.document, record, technical));
+    this.detail.append(renderTaxonomyPath(this.document, record, technical, Boolean(this.developerModeV110)));
     if (record.catalogPolicyV105?.personnel) {
       const classification = this.renderSection(['synthetic', 'automaton'].includes(record.taxonomy.family)
         ? 'IDENTIFICATION DE L’UNITÉ' : record.taxonomy.family === 'human' ? 'IDENTIFICATION DU PERSONNEL' : 'IDENTIFICATION DE L’ORGANISME', 'classification');
