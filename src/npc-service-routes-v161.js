@@ -277,6 +277,9 @@ function advanceNpcAnnexCirculationV161(previous, actor, delta, {
     && yieldGoalX >= mainLeft + 24 && yieldGoalX <= mainRight - 68;
   const goal = yielding ? yieldGoalX : serviceGoal ? s.targetRoomId === ANNEX ? s.dutyX : corridor ? s.targetPostX : s.homeX
     : socketX(s.roomId === ANNEX ? ANNEX : PARENT);
+  // V188: a body left off its post (an older post moved out of a doorway, a
+  // rehydrated pose) walks back to it instead of idling in the doorway.
+  if (s.stage === 'service' && !yielding && serviceGoal && Math.abs(s.x - goal) > .25) s.stage = 'walking';
   if (s.stage === 'service' && !yielding) {
     s.doorProgress = Math.max(0, s.doorProgress - dt / (reducedMotion ? .12 : .65));
     return { ...s, velocity: 0 };

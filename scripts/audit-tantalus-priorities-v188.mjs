@@ -228,7 +228,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/npc-service-routes-v161.js": {
     "previousSha256": "a915ff8b546cc1066881e0ebf1b0e7a86b9fdf1af2748af5aa39e8ee396b9d4c",
-    "currentSha256": "96b2b8a7579f9c9ab6376f774ba0ca29f409e5de7b84de8a2be1c19217570ecd"
+    "currentSha256": "5146353fd196383f3289e0579cd85bd8f07c56db77fe32f41dd852e6b8dfb784"
   },
   "src/player-control-v124.js": {
     "previousSha256": "d024e6da1ad1f5f766c441e5be2e786553909bd9d921516d196b090bae4f446e",

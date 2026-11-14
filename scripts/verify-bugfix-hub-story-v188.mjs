@@ -210,3 +210,8 @@ test('doorways: the shared rule never leaves an idle post in a parent doorway or
     }
   }
 });
+
+test('a route owner left off its post walks back to it instead of idling in a doorway (animal-care exit)', () => {
+  const source = readFileSync(new URL('../src/npc-service-routes-v161.js', import.meta.url), 'utf8');
+  assert.match(source, /if \(s\.stage === 'service' && !yielding && serviceGoal && Math\.abs\(s\.x - goal\) > \.25\) s\.stage = 'walking';/);
+});
