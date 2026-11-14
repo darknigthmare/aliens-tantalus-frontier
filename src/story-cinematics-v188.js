@@ -72,7 +72,7 @@ export const CINEMATICS_V188 = Object.freeze({
     shot(9, 'port-approach', { caption: t('PORT-MÉRIDIEN · QUAI SUD', 'PORT-MÉRIDIEN · SOUTH QUAY') })
   ]) }),
   'cin-p3-wren': Object.freeze({ id: 'cin-p3-wren', title: t('Le quai des vivants', 'The quay of the living'), music: null, shots: Object.freeze([
-    shot(7, 'dialogue', { scene: 'quay', line: line('TOMAS WREN', null,
+    shot(7, 'dialogue', { scene: 'quay', cast: 'arrival', line: line('TOMAS WREN', null,
       'Les conteneurs scellés partent avant nous depuis trois semaines.',
       'Sealed containers have been leaving before us for three weeks.') })
   ]) }),
@@ -95,7 +95,7 @@ export const CINEMATICS_V188 = Object.freeze({
   // Act I (bible §5.1): approach, the cradle opened from inside, and the return with Inez.
   'cin-10': Object.freeze({ id: 'cin-10', title: t('Les quais déserts', 'The empty docks'), music: null, shots: Object.freeze([
     shot(14, 'dropship-rain', { caption: t('COCYTE · QUAIS QZ-17', 'COCYTE · QZ-17 DOCKS') }),
-    shot(16, 'dialogue', { scene: 'dropship', line: line('ROOK', 'crew-06-rook',
+    shot(16, 'dialogue', { scene: 'dropship', radio: true, line: line('ROOK · RADIO', 'crew-06-rook',
       'Quatre accès. Aucun ne répond. Le détecteur est calme. Trop calme.',
       'Four accesses. None answering. The tracker is quiet. Too quiet.') })
   ]) }),
@@ -117,14 +117,14 @@ export const CINEMATICS_V188 = Object.freeze({
   ]) }),
   // colony-intro-doyenne (bible §6.2): guided visit, calm, no combat ([PROPOSÉ] adaptation, §56.7).
   'cin-doyenne': Object.freeze({ id: 'cin-doyenne', title: t('La doyenne', 'The elder'), music: 'calm', shots: Object.freeze([
-    shot(8, 'dialogue', { scene: 'quay', line: line('ASHA MBAYE', 'crew-12-asha-mbaye',
+    shot(8, 'dialogue', { scene: 'quay', cast: 'elder', line: line('ASHA MBAYE', 'crew-12-asha-mbaye',
       'Echo-9, voici Adèle Sarrazin. C’est elle qui tient le port ensemble.',
       'Echo-9, this is Adèle Sarrazin. She’s the one holding the port together.') }),
     shot(6, 'port-tour', { place: 'docks', caption: t('PORT-MÉRIDIEN · QUAIS', 'PORT-MÉRIDIEN · DOCKS') }),
     shot(6, 'port-tour', { place: 'infirmary', caption: t('INFIRMERIE DE LUCIA FERRO', 'LUCIA FERRO’S INFIRMARY') }),
     shot(6, 'port-tour', { place: 'processor', caption: t('PROCESSEUR ATMOSPHÉRIQUE', 'ATMOSPHERE PROCESSOR') }),
     shot(6, 'port-tour', { place: 'wall', caption: t('MUR NORD', 'NORTH WALL') }),
-    shot(11, 'dialogue', { scene: 'quay', line: line('ADÈLE SARRAZIN', null,
+    shot(11, 'dialogue', { scene: 'quay', cast: 'elder', line: line('ADÈLE SARRAZIN', null,
       'S’ils nous déclarent non viables, ils reprennent tout, nous compris.',
       'If they declare us non-viable, they take everything back, us included.') })
   ]) }),
@@ -254,7 +254,170 @@ function rain(ctx, time, reducedMotion, color = 'rgba(160,190,200,.35)') {
     ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x - 6, y + 26); ctx.stroke();
   }
 }
-function background(ctx, images, scene, time, reducedMotion) {
+// —— Staged sets: what each shot shows, sized in metres ——
+// Adaptation du projet: every set has one scale (px per metre inside that shot)
+// so a person (1.8 m), a hypersleep capsule (2.3 × 1.1 m), a stretcher (2 m), a
+// door (2.6 m) or a 10-ft container (2.99 × 2.59 m) keep plausible proportions.
+// The arrangements follow the in-game rooms: the hub cryo bay shows the ECHO-8
+// locker to the west, the CAPSULES bay door, DAVID-8R "à gauche de la capsule",
+// then the single horizontal capsule where Echo-9 wakes (capsule 03); the
+// briefing table gathers the three named officers and Echo-9; the quay of
+// Port-Méridien holds Tomas Wren and the three residents to escort.
+const PERSON_M = 1.8;
+const item = (kind, x, w, h, extra = {}) => Object.freeze({ kind, x, w, h, ...extra });
+const SETS_V188 = Object.freeze({
+  cryo: Object.freeze({ scale: 140, floor: 510, items: Object.freeze([
+    item('locker', 120, .9, 2.2, { label: 'ECHO-8', sealed: true }),
+    item('bay-door', 310, 1.6, 2.6, { label: 'CAPSULES' }),
+    item('person', 640, .5, PERSON_M, { who: 'DAVID-8R', crewId: 'crew-10-david-8r', android: true }),
+    item('capsule', 770, 2.3, 1.1, { number: '03', open: true })
+  ]) }),
+  locker: Object.freeze({ scale: 190, floor: 610, items: Object.freeze([
+    item('shelf', 250, .9, .8, { mount: 1.3 }),
+    item('locker', 555, .9, 2.2, { label: 'ECHO-8', sealed: true }),
+    item('trolley', 820, .8, .9)
+  ]) }),
+  hologram: Object.freeze({ scale: 220, floor: 700, items: Object.freeze([
+    item('table', 299, 3.1, .9),
+    item('person', 140, .5, PERSON_M, { who: 'INEZ HARLOW', crewId: 'crew-09-inez-harlow' }),
+    item('person', 320, .5, PERSON_M, { who: 'LT. MARA VEGA', crewId: 'crew-01-mara-vega' }),
+    item('person', 960, .5, PERSON_M, { who: 'TAMSIN VELEZ', crewId: 'crew-02-tamsin-velez' }),
+    item('person', 1140, .5, PERSON_M, { who: 'ECHO-9' })
+  ]) }),
+  triage: Object.freeze({ scale: 180, floor: 560, items: Object.freeze([
+    item('person', 640, .5, 1.7, { who: 'LUCIA FERRO' }),
+    item('stretcher', 760, 2, .85),
+    item('patient', 785, 1.75, .25, { bandaged: true })
+  ]) }),
+  quay: Object.freeze({ scale: 80, floor: 520, items: Object.freeze([
+    item('container', 20, 2.99, 2.59, { stack: 2, label: 'QZ17' }), item('container', 270, 2.99, 2.59, { stack: 1 }),
+    item('container', 940, 2.99, 2.59, { stack: 1, label: 'QZ17' }), item('container', 1180, 2.99, 2.59, { stack: 2 }),
+    item('airlock', 600, 2.4, 2.6, { lit: true })
+  ]) }),
+  cradle: Object.freeze({ scale: 200, floor: 560, items: Object.freeze([
+    item('person', 170, .5, PERSON_M, { who: 'ECHO-9', torch: true }),
+    item('cradle', 470, 2.4, 1, { label: 'QZ17', restraints: 3, torn: true })
+  ]) })
+});
+// Who stands on the quay, per shot (`cast` on the shot).
+const QUAY_CASTS_V188 = Object.freeze({
+  arrival: Object.freeze([item('person', 470, .5, PERSON_M, { who: 'TOMAS WREN' }),
+    item('resident', 820, .45, 1.75, { who: 'HABITANT 1' }), item('resident', 868, .45, 1.6, { who: 'HABITANT 2' }), item('resident', 906, .4, 1.3, { who: 'HABITANT 3' })]),
+  elder: Object.freeze([item('person', 480, .5, 1.75, { who: 'ASHA MBAYE', crewId: 'crew-12-asha-mbaye' }), item('person', 860, .5, 1.62, { who: 'ADÈLE SARRAZIN', elder: true })])
+});
+/** Pure: the set of a scene, in pixels, with the metres it was built from. */
+export function cinematicSetLayoutV188(scene, { cast = null } = {}) {
+  const set = SETS_V188[scene]; if (!set) return null;
+  const items = [...set.items, ...(scene === 'quay' && QUAY_CASTS_V188[cast] ? QUAY_CASTS_V188[cast] : [])];
+  return { scene, scale: set.scale, floor: set.floor, items: items.map(entry => ({ ...entry, metres: [entry.w, entry.h],
+    px: { x: entry.x, w: Math.round(entry.w * set.scale), h: Math.round(entry.h * set.scale) } })) };
+}
+export const CINEMATIC_SET_SCENES_V188 = Object.freeze(Object.keys(SETS_V188));
+export const QUAY_CAST_IDS_V188 = Object.freeze(Object.keys(QUAY_CASTS_V188));
+
+/** Standing human silhouette: feet on `floor`, height in px (head ≈ 1/7.5 of the body). */
+function figure(ctx, x, floor, height, color = '#020504', { rim = null, elder = false, android = false } = {}) {
+  const head = height / 7.5, shoulders = height * .26, top = floor - height;
+  ctx.fillStyle = color;
+  ctx.save(); if (elder) { ctx.translate(x, floor); ctx.rotate(.05); ctx.translate(-x, -floor); } // a slight stoop
+  ctx.beginPath(); ctx.ellipse(x, top + head / 2, head * .4, head / 2, 0, 0, Math.PI * 2); ctx.fill(); // head
+  ctx.fillRect(x - head * .16, top + head * .9, head * .32, head * .4); // neck
+  ctx.beginPath(); ctx.moveTo(x - shoulders / 2, top + head * 1.25); ctx.lineTo(x + shoulders / 2, top + head * 1.25); // torso
+  ctx.lineTo(x + shoulders * .38, floor - height * .47); ctx.lineTo(x - shoulders * .38, floor - height * .47); ctx.closePath(); ctx.fill();
+  ctx.fillRect(x - shoulders * .36, floor - height * .48, shoulders * .32, height * .48); ctx.fillRect(x + shoulders * .04, floor - height * .48, shoulders * .32, height * .48); // legs
+  ctx.fillRect(x - shoulders * .62, top + head * 1.3, shoulders * .14, height * .36); ctx.fillRect(x + shoulders * .48, top + head * 1.3, shoulders * .14, height * .36); // arms
+  if (android) { ctx.fillStyle = 'rgba(235,240,235,.35)'; ctx.fillRect(x - head * .3, top + head * .4, head * .6, 2); } // DAVID's even pale eyeline
+  if (rim) { ctx.strokeStyle = rim; ctx.lineWidth = 2; ctx.beginPath(); ctx.ellipse(x, top + head / 2, head * .4, head / 2, 0, -Math.PI * .9, -Math.PI * .1); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x - shoulders / 2, top + head * 1.25); ctx.lineTo(x + shoulders / 2, top + head * 1.25); ctx.stroke(); }
+  ctx.restore();
+}
+function drawSet(ctx, scene, { cast = null, time = 0, reducedMotion = false, speakerId = null } = {}) {
+  const layout = cinematicSetLayoutV188(scene, { cast }); if (!layout) return null;
+  const { floor, scale } = layout;
+  for (const entry of layout.items) {
+    const { x, w, h } = entry.px, top = floor - h;
+    switch (entry.kind) {
+      case 'locker': { // standalone steel locker, label plate, seal tape across the door
+        ctx.fillStyle = '#1d2a2e'; ctx.fillRect(x, top, w, h); ctx.strokeStyle = 'rgba(160,200,205,.25)'; ctx.lineWidth = 2; ctx.strokeRect(x + .5, top + .5, w - 1, h - 1);
+        ctx.fillStyle = '#0d1517'; ctx.fillRect(x + w * .12, top + h * .13, w * .76, h * .82);
+        ctx.fillStyle = 'rgba(180,210,210,.18)'; for (let i = 0; i < 4; i++) ctx.fillRect(x + w * .25, top + h * (.2 + i * .03), w * .5, 2); // vents
+        ctx.fillStyle = '#d8e6d8'; ctx.font = `700 ${Math.max(12, Math.round(w * .16))}px monospace`; ctx.textAlign = 'center'; ctx.fillText(entry.label, x + w / 2, top + h * .09); ctx.textAlign = 'left';
+        if (entry.sealed) { ctx.strokeStyle = '#e9d07a'; ctx.lineWidth = Math.max(4, w * .05); ctx.beginPath();
+          ctx.moveTo(x + w * .16, top + h * .45); ctx.lineTo(x + w * .84, top + h * .78); ctx.moveTo(x + w * .84, top + h * .45); ctx.lineTo(x + w * .16, top + h * .78); ctx.stroke(); }
+        break;
+      }
+      case 'bay-door': { // the CAPSULES bay door, two upright stasis windows behind it (as in the room)
+        ctx.fillStyle = '#2a2a20'; ctx.fillRect(x, top, w, h); ctx.fillStyle = '#14191a'; ctx.fillRect(x + w * .1, top + h * .08, w * .8, h * .9);
+        for (const side of [.16, .54]) { ctx.fillStyle = 'rgba(120,200,210,.22)'; ctx.fillRect(x + w * side, top + h * .18, w * .3, h * .55);
+          ctx.fillStyle = 'rgba(10,20,22,.8)'; ctx.beginPath(); ctx.ellipse(x + w * (side + .15), top + h * .3, w * .05, h * .04, 0, 0, Math.PI * 2); ctx.fill(); ctx.fillRect(x + w * (side + .1), top + h * .34, w * .1, h * .3); }
+        ctx.fillStyle = '#9fe7cf'; ctx.font = '700 14px monospace'; ctx.fillText(entry.label, x + w * .22, top - 12); break;
+      }
+      case 'capsule': { // horizontal hypersleep capsule: body, raised canopy when open, frost, number plate
+        const body = h * .55, canopy = h - body;
+        ctx.fillStyle = '#1b2a31'; ctx.fillRect(x, floor - body, w, body - h * .12); ctx.fillStyle = 'rgba(160,215,235,.25)'; ctx.fillRect(x, floor - body, w, 3);
+        ctx.fillStyle = '#121d22'; ctx.fillRect(x + w * .08, floor - h * .12, w * .1, h * .12); ctx.fillRect(x + w * .82, floor - h * .12, w * .1, h * .12); // feet
+        ctx.fillStyle = '#26363d'; ctx.fillRect(x + w * .86, floor - body - canopy * .4, w * .14, body * .9 + canopy * .4); // head-end machinery
+        light(ctx, x + w / 2, floor - body, w * .5, entry.open ? 'rgba(120,200,230,.14)' : 'rgba(120,200,230,.24)');
+        ctx.save(); ctx.translate(x + w * .03, floor - body); if (entry.open) ctx.rotate(-.38);
+        ctx.fillStyle = 'rgba(160,215,235,.22)'; ctx.beginPath(); ctx.ellipse(w * .42, 0, w * .42, canopy, 0, Math.PI, 0); ctx.fill();
+        ctx.strokeStyle = 'rgba(200,235,245,.4)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.ellipse(w * .42, 0, w * .42, canopy, 0, Math.PI, 0); ctx.stroke();
+        const melt = entry.open ? 6 : 16; ctx.fillStyle = 'rgba(230,248,252,.3)'; for (let f = 0; f < melt; f++) ctx.fillRect(w * .08 + (f * 41) % (w * .68), -canopy * .8 + (f * 17) % (canopy * .7), 4, 3);
+        ctx.restore();
+        if (entry.open) mist(ctx, time, reducedMotion, 'rgba(200,230,240,.05)', floor - body - 6);
+        ctx.fillStyle = '#0c1416'; ctx.fillRect(x + w * .2, floor - body * .62, w * .5, 20); ctx.fillStyle = entry.open ? '#e9d07a' : '#9fe7cf'; ctx.font = '700 13px monospace';
+        ctx.fillText(`CAPSULE ${entry.number}${entry.open ? ' · OUVERTE' : ''}`, x + w * .22, floor - body * .62 + 15); break;
+      }
+      case 'shelf': { const y = floor - entry.mount * scale - h; ctx.fillStyle = '#2b281f'; ctx.fillRect(x, y, w, h); ctx.fillStyle = '#d8d2bd';
+        for (let i = 0; i < 6; i++) ctx.fillRect(x + 10 + (i % 3) * (w / 3.2), y + 12 + Math.floor(i / 3) * (h / 2), w / 5, h / 3.2); break; }
+      case 'trolley': { ctx.fillStyle = '#2a2f2c'; ctx.fillRect(x, top, w, 8); ctx.fillRect(x, top + h * .5, w, 8); ctx.fillRect(x + 4, top, 6, h); ctx.fillRect(x + w - 10, top, 6, h); break; }
+      case 'table': { ctx.fillStyle = '#0c1a16'; ctx.fillRect(x, top, w, 30); ctx.fillStyle = '#071210'; ctx.fillRect(x + 20, top + 30, w - 40, h - 30); break; }
+      case 'stretcher': { // 2 m wheeled stretcher
+        ctx.fillStyle = '#3a4448'; ctx.fillRect(x, top, w, 20); ctx.fillRect(x + w * .06, top + 20, 10, h - 34); ctx.fillRect(x + w * .9, top + 20, 10, h - 34);
+        ctx.fillRect(x + w * .06, floor - 26, w * .86, 6); for (const wx of [.08, .92]) { ctx.beginPath(); ctx.arc(x + w * wx, floor - 8, 8, 0, Math.PI * 2); ctx.fill(); } break;
+      }
+      case 'patient': { // lying adult on the stretcher, bandaged chest, breathing
+        const deck = layout.items.find(other => other.kind === 'stretcher'), y = floor - (deck ? deck.px.h : 0) - h, head = PERSON_M / 7.5 * scale;
+        ctx.fillStyle = '#6b5a4c'; ctx.fillRect(x, y, w - head, h); ctx.beginPath(); ctx.ellipse(x + w - head / 2, y + h * .4, head / 2, head * .42, 0, 0, Math.PI * 2); ctx.fill();
+        const breath = reducedMotion ? 0 : Math.sin(time * 2.2) * 2; ctx.fillStyle = '#e8e2d0'; ctx.fillRect(x + w * .52, y - 3 - breath, w * .22, h + 6);
+        ctx.fillStyle = 'rgba(160,40,30,.45)'; ctx.fillRect(x + w * .6, y + h * .3 - breath, w * .05, h * .3); break;
+      }
+      case 'container': { // 10-ft containers, stacked; QZ17 marks the sealed ones
+        for (let level = 0; level < entry.stack; level++) { const y = floor - h * (level + 1);
+          ctx.fillStyle = (Math.round(x / 60) + level) % 2 ? '#222b33' : '#2d261d'; ctx.fillRect(x, y, w, h - 2);
+          ctx.fillStyle = 'rgba(255,255,255,.04)'; for (let r = 8; r < w - 4; r += 12) ctx.fillRect(x + r, y + 6, 2, h - 14);
+          if (entry.label && level === 0) { ctx.strokeStyle = '#e9d07a'; ctx.lineWidth = 2; ctx.strokeRect(x + w * .28, y + h * .35, w * .44, h * .22);
+            ctx.fillStyle = '#e9d07a'; ctx.font = '700 13px monospace'; ctx.fillText(entry.label, x + w * .34, y + h * .51); } }
+        break;
+      }
+      case 'airlock': { ctx.fillStyle = '#1d2328'; ctx.fillRect(x - 10, top - 10, w + 20, h + 10); ctx.fillStyle = '#0b1013'; ctx.fillRect(x, top, w, h);
+        if (entry.lit) { light(ctx, x + w / 2, top - 14, 70, 'rgba(240,200,120,.5)'); ctx.fillStyle = '#e9d07a'; ctx.fillRect(x + w * .3, top - 18, w * .4, 6); } break; }
+      case 'resident': figure(ctx, x, floor, h, '#2a2c2e', { rim: 'rgba(240,200,120,.6)' }); break;
+      case 'person': {
+        const speaking = speakerId && entry.crewId === speakerId;
+        figure(ctx, x, floor, h, '#020504', { rim: speaking ? 'rgba(120,230,190,.7)' : 'rgba(120,190,170,.22)', elder: entry.elder, android: entry.android });
+        if (entry.torch) cone(ctx, x + 20, floor - h * .7, 300, floor + 40, 'rgba(230,240,210,.08)');
+        break;
+      }
+      case 'cradle': { // refrigerated transport cradle, human-sized cavity, lid forced outward, restraints snapped
+        ctx.fillStyle = '#26323a'; ctx.fillRect(x, top, w, h); ctx.fillStyle = '#0e1517'; ctx.fillRect(x + w * .05, top + h * .15, w * .9, h * .75); // cavity
+        ctx.fillStyle = 'rgba(200,230,240,.3)'; for (let i = 0; i < 30; i++) ctx.fillRect(x + w * .06 + (i * 37) % (w * .88), top + h * .17 + (i * 23) % (h * .7), 5, 5); // frost
+        ctx.save(); ctx.translate(x + w, top); ctx.rotate(-.55); ctx.fillStyle = '#2f3c44'; ctx.fillRect(0, -14, w * .5, 14); ctx.restore(); // lid bent outward, upward
+        for (let i = 0; i < entry.restraints; i++) { const sx = x + w * (.22 + i * .26); // anchored low, snapped mid-span
+          ctx.strokeStyle = '#8b8f86'; ctx.lineWidth = 7;
+          ctx.beginPath(); ctx.moveTo(sx, top + h * .88); ctx.lineTo(sx + 8, top + h * .55); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(sx + w * .12, top + h * .17); ctx.lineTo(sx + w * .1, top + h * .36 + i * 6); ctx.stroke();
+          if (entry.torn) { ctx.strokeStyle = '#c4c08a'; ctx.lineWidth = 2; ctx.beginPath(); // frayed ends
+            ctx.moveTo(sx + 8, top + h * .55); ctx.lineTo(sx + 1, top + h * .48); ctx.moveTo(sx + 8, top + h * .55); ctx.lineTo(sx + 16, top + h * .49); ctx.stroke(); } }
+        ctx.fillStyle = '#e9d07a'; ctx.font = '700 16px monospace'; ctx.fillText(entry.label, x + 12, top + h * .11 + 2);
+        break;
+      }
+      default: break;
+    }
+  }
+  return layout;
+}
+function background(ctx, images, scene, time, reducedMotion, { cast = null, speakerId = null } = {}) {
+  const set = { cast, time, reducedMotion, speakerId };
   if (scene === 'hologram') {
     ctx.fillStyle = '#030907'; ctx.fillRect(0, 0, W, H);
     cone(ctx, 640, 560, 760, 140, 'rgba(70,190,160,.16)'); // the table projects upwards
@@ -269,9 +432,7 @@ function background(ctx, images, scene, time, reducedMotion) {
     ctx.font = '13px monospace'; ctx.fillStyle = '#9fe7cf'; ctx.fillText('COCYTE', 600, 110); ctx.fillStyle = '#e15b4f'; ctx.fillText('ASPHODÈLE · QZ ROUGE', sx + 12, sy - 10);
     ctx.globalAlpha = 1;
     ctx.fillStyle = 'rgba(150,240,210,.05)'; for (let y = 110; y < 520; y += 6) ctx.fillRect(420, y, 440, 1); // projection scanlines
-    ctx.fillStyle = '#0c1a16'; ctx.fillRect(330, 560, 620, 30); // table edge
-    ctx.fillStyle = '#020504'; // crew around the table, backlit
-    for (const [x, w] of [[180, 150], [400, 120], [880, 130], [1100, 160]]) { ctx.beginPath(); ctx.ellipse(x, 470, w * .28, w * .34, 0, 0, Math.PI * 2); ctx.fill(); ctx.fillRect(x - w / 2, 520, w, 200); }
+    drawSet(ctx, 'hologram', set); // the table and, backlit around it, Harlow, Vega, Velez and Echo-9
     return;
   }
   const palette = { cryo: ['#061014', '#10232a'], range: ['#100f0a', '#22200f'], quay: ['#070a0d', '#141b22'], triage: ['#0d1112', '#1e2629'], quarters: ['#0d0a08', '#1d1712'], dropship: ['#0a0606', '#1c0f0d'], cradle: ['#0b1113', '#162024'], lab: ['#0d1214', '#1b2428'], alarm: ['#140606', '#2a0e0c'] }[scene] || ['#0b0f10', '#151b1d'];
@@ -279,23 +440,10 @@ function background(ctx, images, scene, time, reducedMotion) {
   if (g) { g.addColorStop(0, palette[1]); g.addColorStop(1, palette[0]); ctx.fillStyle = g; } else ctx.fillStyle = palette[0];
   ctx.fillRect(0, 0, W, H);
   ctx.fillStyle = 'rgba(255,255,255,.025)'; for (let x = 0; x < W; x += 160) ctx.fillRect(x, 0, 2, H);
-  if (scene === 'cryo') { // hypersleep capsules under cold strip lights, one open
-    for (const x of [200, 640, 1080]) { ctx.fillStyle = 'rgba(200,235,245,.55)'; ctx.fillRect(x - 70, 100, 140, 6); cone(ctx, x, 106, 360, 560, 'rgba(150,210,230,.10)'); }
-    ctx.fillStyle = '#0b161b'; ctx.fillRect(0, 500, W, 220); // deck
-    for (let i = 0; i < 4; i++) { // horizontal hypersleep capsules: metal body, glass canopy, cold inner light
-      const x = 70 + i * 300, open = i === 2;
-      ctx.fillStyle = '#1b2a31'; ctx.fillRect(x, 430, 250, 56); ctx.fillStyle = 'rgba(160,215,235,.25)'; ctx.fillRect(x, 430, 250, 3); // body and rim light
-      ctx.fillStyle = '#121d22'; ctx.fillRect(x + 20, 486, 30, 20); ctx.fillRect(x + 200, 486, 30, 20); // feet
-      light(ctx, x + 125, 430, 140, open ? 'rgba(120,200,230,.12)' : 'rgba(120,200,230,.22)');
-      ctx.save(); ctx.translate(x + 10, 432); if (open) ctx.rotate(-.42); // the open canopy is raised
-      const glass = ctx.createLinearGradient?.(0, -60, 0, 0);
-      if (glass) { glass.addColorStop(0, 'rgba(190,230,245,.30)'); glass.addColorStop(1, 'rgba(90,140,160,.12)'); ctx.fillStyle = glass; } else ctx.fillStyle = 'rgba(160,210,230,.2)';
-      ctx.beginPath(); ctx.ellipse(115, 0, 118, 52, 0, Math.PI, 0); ctx.fill();
-      ctx.strokeStyle = 'rgba(200,235,245,.35)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.ellipse(115, 0, 118, 52, 0, Math.PI, 0); ctx.stroke();
-      if (!open) { ctx.fillStyle = 'rgba(230,248,252,.28)'; for (let f = 0; f < 14; f++) ctx.fillRect(20 + (f * 41) % 190, -40 + (f * 17) % 34, 4, 3); } // frost
-      ctx.restore();
-      ctx.fillStyle = open ? '#e9d07a' : '#9fe7cf'; ctx.font = '12px monospace'; ctx.fillText(`CAPSULE 0${i + 1}${open ? ' · OUVERTE' : ''}`, x + 70, 524);
-    }
+  if (scene === 'cryo') { // the hub cryo bay as played: ECHO-8 locker, CAPSULES bay door, DAVID-8R, capsule 03 open
+    for (const x of [260, 700, 1000]) { ctx.fillStyle = 'rgba(200,235,245,.55)'; ctx.fillRect(x - 70, 110, 140, 6); cone(ctx, x, 116, 360, 510, 'rgba(150,210,230,.09)'); }
+    ctx.fillStyle = '#0b161b'; ctx.fillRect(0, 510, W, 210); // deck
+    drawSet(ctx, 'cryo', set);
     mist(ctx, time, reducedMotion, 'rgba(190,225,235,.025)', 490);
   }
   if (scene === 'range') { // firing lanes, man-shaped boards, sodium work lights
@@ -307,7 +455,8 @@ function background(ctx, images, scene, time, reducedMotion) {
   if (scene === 'quay' || scene === 'dropship') {
     if (scene === 'quay') { // cranes and container stacks against floodlights
       ctx.fillStyle = '#05080a'; ctx.fillRect(140, 150, 20, 400); ctx.fillRect(140, 150, 300, 16); ctx.fillRect(980, 190, 18, 360); ctx.fillRect(820, 190, 260, 14);
-      for (let i = 0; i < 7; i++) { ctx.fillStyle = i % 2 ? '#141a1f' : '#191714'; ctx.fillRect(60 + i * 170, 430 - (i % 3) * 40, 150, 140 + (i % 3) * 40); }
+      ctx.fillStyle = '#0d1216'; ctx.fillRect(0, 520, W, 200); // quay slab
+      drawSet(ctx, 'quay', set); // 10-ft containers (two marked QZ17), the lit airlock, and who stands on the quay
       for (const x of [300, 900]) { light(ctx, x, 140, 60, 'rgba(255,236,190,.6)'); cone(ctx, x, 140, 520, 640, 'rgba(255,230,180,.08)'); }
       ctx.fillStyle = 'rgba(255,230,180,.06)'; for (let i = 0; i < 12; i++) ctx.fillRect(240 + (i * 97) % 760, 580 + (i % 4) * 8, 60, 2); // wet reflections
       rain(ctx, time, reducedMotion, 'rgba(170,200,210,.22)');
@@ -325,10 +474,14 @@ function background(ctx, images, scene, time, reducedMotion) {
   if (scene === 'triage') { // curtains, surgical lamp, stretcher and a patient with a bandaged chest (primitives)
     ctx.fillStyle = 'rgba(190,200,190,.08)'; for (let x = 80; x < 640; x += 36) ctx.fillRect(x, 130, 20, 380);
     light(ctx, 940, 150, 70, 'rgba(240,250,255,.55)'); cone(ctx, 940, 150, 420, 520, 'rgba(230,240,245,.10)');
-    ctx.fillStyle = '#3a4448'; ctx.fillRect(760, 360, 360, 22); ctx.fillRect(780, 382, 10, 60); ctx.fillRect(1090, 382, 10, 60);
-    ctx.fillStyle = '#6b5a4c'; ctx.fillRect(800, 330, 240, 32); ctx.fillStyle = '#e8e2d0'; ctx.fillRect(880, 326, 90, 38);
-    ctx.fillStyle = '#6b5a4c'; ctx.beginPath(); ctx.arc(1060, 338, 18, 0, Math.PI * 2); ctx.fill();
-    const breath = reducedMotion ? 0 : Math.sin(time * 2.2) * 2; ctx.fillStyle = 'rgba(232,226,208,.5)'; ctx.fillRect(880, 322 - breath, 90, 4);
+    ctx.fillStyle = '#151b1d'; ctx.fillRect(0, 560, W, 160); // floor
+    drawSet(ctx, 'triage', set); // Lucia Ferro beside the 2 m stretcher, the patient's chest bandaged
+  }
+  if (scene === 'cradle') { ctx.fillStyle = '#0a1012'; ctx.fillRect(0, 560, W, 160); drawSet(ctx, 'cradle', set); } // the maintenance alcove
+  if (scene === 'lab') { // Inez's bench: lamp, sample rack, screen
+    light(ctx, 900, 220, 300, 'rgba(200,230,240,.12)'); ctx.fillStyle = '#1a2226'; ctx.fillRect(560, 430, 640, 24); ctx.fillRect(590, 454, 14, 140); ctx.fillRect(1160, 454, 14, 140);
+    ctx.fillStyle = '#0d1611'; ctx.fillRect(980, 300, 170, 120); ctx.fillStyle = 'rgba(120,230,170,.3)'; for (let y = 316; y < 404; y += 12) ctx.fillRect(994, y, 90 + (y % 5) * 10, 3);
+    for (let i = 0; i < 6; i++) { ctx.fillStyle = i === 3 ? 'rgba(233,208,122,.6)' : 'rgba(160,220,230,.35)'; ctx.fillRect(640 + i * 26, 396, 10, 34); }
   }
   if (scene === 'quarters') { // one desk lamp, a terminal, the rest in shadow
     light(ctx, 860, 300, 340, 'rgba(255,190,110,.16)'); ctx.fillStyle = '#1a140f'; ctx.fillRect(620, 420, 520, 26); ctx.fillStyle = '#0d1611'; ctx.fillRect(760, 300, 200, 120);
@@ -414,13 +567,8 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       rain(ctx, local, reducedMotion); caption(ctx, current.caption?.[lang]); break;
     }
     case 'cradle': {
-      ctx.fillStyle = '#0b1113'; ctx.fillRect(0, 0, W, H);
-      ctx.fillStyle = '#26323a'; ctx.fillRect(400, 160, 480, 380); // cradle shell
-      ctx.fillStyle = '#0e1517'; ctx.fillRect(440, 200, 400, 300); // open cavity
-      ctx.fillStyle = 'rgba(200,230,240,.25)'; for (let i = 0; i < 26; i++) ctx.fillRect(445 + (i * 37) % 390, 205 + (i * 61) % 290, 6, 6); // frost
-      ctx.strokeStyle = '#8b8f86'; ctx.lineWidth = 6; // restraints made to hold something alive
-      for (const y of [260, 340, 420]) { ctx.beginPath(); ctx.moveTo(460, y); ctx.lineTo(820, y); ctx.stroke(); }
-      ctx.strokeStyle = '#c4c08a'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(880, 300); ctx.lineTo(960, 250); ctx.moveTo(880, 360); ctx.lineTo(970, 380); ctx.stroke(); // torn from inside
+      ctx.fillStyle = '#0b1113'; ctx.fillRect(0, 0, W, H); ctx.fillStyle = '#0a1012'; ctx.fillRect(0, 560, W, 160);
+      drawSet(ctx, 'cradle', { time: local, reducedMotion }); // a cradle sized for a lying adult, restraints torn from inside
       caption(ctx, current.caption?.[lang]); break;
     }
     case 'port-tour': {
@@ -441,7 +589,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       for (let i = 0; i < count; i++) { const walk = reducedMotion ? .5 : Math.min(1, progress * 1.3 - i * .08), x = 520 + i * 40, y = 400 + walk * 170;
         ctx.fillStyle = '#b8b0a0'; ctx.fillRect(x, y - 46, 16, 46); ctx.beginPath(); ctx.arc(x + 8, y - 54, 8, 0, Math.PI * 2); ctx.fill(); }
       ctx.fillStyle = '#d8e6d8'; ctx.font = '600 22px monospace'; ctx.textAlign = 'center';
-      ctx.fillText(count ? `${count} / 6` : (lang === 'en' ? 'NO SEAT GIVEN' : 'AUCUNE PLACE DONNÉE'), W / 2, 640); ctx.textAlign = 'left';
+      ctx.fillText(count ? `${count} / 6` : (lang === 'en' ? 'NO SEAT GIVEN' : 'AUCUNE PLACE DONNÉE'), W / 2, 596); ctx.textAlign = 'left';
       caption(ctx, current.caption?.[lang], 90); break;
     }
     case 'sealed-crates': {
@@ -450,7 +598,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       for (let i = 0; i < count; i++) { const x = 360 + i * 200; ctx.fillStyle = '#3a3226'; ctx.fillRect(x, 380, 160, 120); ctx.strokeStyle = '#e9d07a'; ctx.lineWidth = 3; ctx.strokeRect(x + 6, 386, 148, 108);
         ctx.fillStyle = '#e9d07a'; ctx.font = '700 14px monospace'; ctx.fillText('QZ17', x + 56, 448); }
       ctx.fillStyle = '#d8e6d8'; ctx.font = '600 22px monospace'; ctx.textAlign = 'center';
-      ctx.fillText(count ? `${count} / 3` : (lang === 'en' ? 'NO CONTAINER ABOARD' : 'AUCUN CONTENEUR À BORD'), W / 2, 640); ctx.textAlign = 'left';
+      ctx.fillText(count ? `${count} / 3` : (lang === 'en' ? 'NO CONTAINER ABOARD' : 'AUCUN CONTENEUR À BORD'), W / 2, 596); ctx.textAlign = 'left';
       caption(ctx, current.caption?.[lang], 90); break;
     }
     case 'bio-screen': {
@@ -486,11 +634,10 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       ctx.textAlign = 'center'; ctx.font = '700 54px sans-serif'; ctx.fillStyle = '#e6efe6';
       ctx.fillText(current.caption[lang], W / 2, H / 2); ctx.textAlign = 'left'; break;
     }
-    case 'locker': {
-      ctx.fillStyle = '#0d1517'; ctx.fillRect(0, 0, W, H);
-      for (let i = 0; i < 5; i++) { ctx.fillStyle = i === 2 ? '#2b3a3e' : '#1a2427'; ctx.fillRect(240 + i * 170, 140, 150, 440); }
-      ctx.strokeStyle = '#e9d07a'; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(590, 300); ctx.lineTo(730, 420); ctx.moveTo(730, 300); ctx.lineTo(590, 420); ctx.stroke(); // seal tape
-      ctx.fillStyle = '#d8e6d8'; ctx.font = '700 22px monospace'; ctx.fillText('ECHO-8', 618, 190);
+    case 'locker': { // the ECHO-8 locker as it stands in the cryo bay: alone, emptied, sealed
+      ctx.fillStyle = '#0d1517'; ctx.fillRect(0, 0, W, H); ctx.fillStyle = 'rgba(255,255,255,.03)'; for (let x = 0; x < W; x += 120) ctx.fillRect(x, 0, 2, 610);
+      ctx.fillStyle = '#0a1113'; ctx.fillRect(0, 610, W, 110);
+      drawSet(ctx, 'locker', { time: local, reducedMotion });
       caption(ctx, current.caption?.[lang]); break;
     }
     case 'message-burst': {
@@ -522,7 +669,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       rain(ctx, local, reducedMotion, 'rgba(170,200,210,.3)'); caption(ctx, current.caption?.[lang]); break;
     }
     case 'dialogue': {
-      background(ctx, images, current.scene, local, reducedMotion);
+      background(ctx, images, current.scene, local, reducedMotion, { cast: current.cast, speakerId: current.line?.crewId });
       subtitle = current; break;
     }
     default: break;

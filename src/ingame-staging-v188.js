@@ -9,27 +9,31 @@ const t = (fr, en) => Object.freeze({ fr, en });
 const say = (speaker, crewId, fr, en, { radio = false, seconds = 5.5 } = {}) => Object.freeze({ speaker, crewId, text: t(fr, en), radio, seconds });
 const sound = (fr, en, seconds = 3.2) => Object.freeze({ speaker: null, crewId: null, text: t(fr, en), sound: true, seconds });
 
+// `place` ties each beat to where it plays in the game (descriptive, read by the
+// coherence test): the capsule Echo-9 confirms in the hub cryo bay
+// (hub-onboarding-v84 wake contact), the proving-ground console, and the
+// Port-Méridien quay posts (port-meridien-v90 PORT_POSTS_V90).
 export const STAGED_BEATS_V188 = Object.freeze({
   // P-1: out of hypersleep in capsule 03, before control is given (texts [PROPOSÉ] §56.11).
-  'beat-wake': Object.freeze({ id: 'beat-wake', grade: 'hypersleep', terminal: t('MU/TH/UR · RELÈVE ECHO-9 · CAPSULE 03 · RÉVEIL D’URGENCE', 'MU/TH/UR · ECHO-9 RELIEF · CAPSULE 03 · EMERGENCY WAKE'), lines: Object.freeze([
+  'beat-wake': Object.freeze({ id: 'beat-wake', grade: 'hypersleep', place: Object.freeze({ scene: 'hub', roomId: 'cryo-bay', prop: 'capsule-03', x: 4736 }), terminal: t('MU/TH/UR · RELÈVE ECHO-9 · CAPSULE 03 · RÉVEIL D’URGENCE', 'MU/TH/UR · ECHO-9 RELIEF · CAPSULE 03 · EMERGENCY WAKE'), lines: Object.freeze([
     sound('[La capsule siffle. Le givre fond sur la verrière.]', '[The capsule hisses. Frost melts on the canopy.]', 3.6),
     say('TANTALUS · JOURNAL DE BORD', null, 'Relève Echo-9 sortie d’hypersommeil. Fonctions vitales stables. Confirmez votre réveil au poste de cryostase.',
       'Echo-9 relief out of hypersleep. Vital signs stable. Confirm your wake at the cryostasis station.', { seconds: 6.5 })
   ]) }),
   // P-2: the priority signal forces the link in the middle of the qualification.
-  'beat-exercise-interrupt': Object.freeze({ id: 'beat-exercise-interrupt', grade: 'alert', lines: Object.freeze([
+  'beat-exercise-interrupt': Object.freeze({ id: 'beat-exercise-interrupt', grade: 'alert', place: Object.freeze({ scene: 'hub', annexId: 'proving-ground', prop: 'range-console' }), lines: Object.freeze([
     say('ROOK · PASSERELLE', 'crew-06-rook', 'Velez, un signal prioritaire force la liaison. Il demande la console du pas de tir.',
       'Velez, a priority signal is forcing the link. It wants the firing-range console.', { radio: true }),
     say('TAMSIN VELEZ', 'crew-02-tamsin-velez', 'Echo-9, arme au repos. Rejoignez la console.', 'Echo-9, weapon down. Get to the console.', { seconds: 4 })
   ]) }),
   // P-3: the ramp touches down on the south quay, in the rain.
-  'beat-port-arrival': Object.freeze({ id: 'beat-port-arrival', grade: 'rain', lines: Object.freeze([
+  'beat-port-arrival': Object.freeze({ id: 'beat-port-arrival', grade: 'rain', place: Object.freeze({ scene: 'port-meridien', post: 'unload', prop: 'quay-ramp', x: 220 }), lines: Object.freeze([
     sound('[Les vérins de la rampe. La pluie sur la tôle.]', '[The ramp actuators. Rain on the plating.]', 3.2),
     say('TAMSIN VELEZ', 'crew-02-tamsin-velez', 'Rampe au sol. Echo-9, le quai est à vous. Trouvez qui tient encore ce port.',
       'Ramp down. Echo-9, the quay is yours. Find out who is still holding this port.', { radio: true })
   ]) }),
   // P-3: the report contradicts the port's automatic beacon.
-  'beat-port-report': Object.freeze({ id: 'beat-port-report', grade: 'rain', lines: Object.freeze([
+  'beat-port-report': Object.freeze({ id: 'beat-port-report', grade: 'rain', place: Object.freeze({ scene: 'port-meridien', post: 'report', prop: 'port-report', x: 2310 }), lines: Object.freeze([
     say('ROOK · PASSERELLE', 'crew-06-rook', 'La balise automatique du port annonce toujours « aucun survivant ». Elle se trompe de trois.',
       'The port’s automatic beacon still reports “no survivors”. It is wrong by three.', { radio: true }),
     say('TAMSIN VELEZ', 'crew-02-tamsin-velez', 'Notez-le. Tout ce qui ment ici finira dans le rapport.', 'Log it. Everything that lies here ends up in the report.', { radio: true, seconds: 4.5 })
