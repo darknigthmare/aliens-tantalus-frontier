@@ -6,7 +6,7 @@ import { detectReactiveTriggersV188, selectReactiveLinesV188 } from './reactive-
 import { applyAccessibilityV188, installKeyRemapV188, mountKeyBindingsUiV188, normalizeKeyBindingsV188, soundCaptionV188 } from './accessibility-v188.js';
 import { spareCrewMemberV188, normalizeCrewPermadeathV188, normalizeCustomDifficultyV188, normalizeOriginV188, CUSTOM_DIFFICULTY_BOUNDS_V188 } from './run-options-v188.js';
 import { cueForGameEventV188, casteCueV188 } from './audio-cues-v188.js';
-import { deriveStoryCampaignV188, markStoryDebriefSeenV188, markStoryCinematicSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, storyEndingReachedV188, resolveM577ManifestV188, normalizeStoryCampaignV188, startInterludeV188, interludeCrisisClearedV188, resolveInterludeV188, rescueJunParkV188, interludeChoicePendingV188, interludeDueV188, markStoryBeatSeenV188 } from './story-campaign-v188.js';
+import { deriveStoryCampaignV188, markStoryDebriefSeenV188, markStoryCinematicSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, storyEndingReachedV188, resolveM577ManifestV188, normalizeStoryCampaignV188, startInterludeV188, interludeCrisisClearedV188, resolveInterludeV188, rescueJunParkV188, interludeChoicePendingV188, interludeDueV188, markStoryBeatSeenV188, reconcileInterludeCrisisV188 } from './story-campaign-v188.js';
 import { InGameStagingV188, STAGED_BEATS_V188 } from './ingame-staging-v188.js';
 import { openStoryChoiceDialogV188 } from './story-choice-ui-v188.js';
 import { CinematicPlayerV188, CINEMATICS_V188 } from './story-cinematics-v188.js';
@@ -862,6 +862,11 @@ function showView(name) {
     hubEngine.playerCostumeIdV119 = saveSystem.data.player.costumeId;
     hubEngine.playerAppearanceV126 = normalizePlayerAppearanceV126(saveSystem.data.player.appearanceV126);
     if (!(standaloneContext === 'forge-playtest' && forgePlaytest?.kind === 'ship' && hubEngine.forgeSessionV141)) {
+      // Interlude alert: the saved crisis must be the deck-2 quarantine one before the hub spawns it.
+      if (!standaloneContext && ownsTimelineV84(hubOwnerV84)) {
+        try { const candidate = clone(saveSystem.data); if (reconcileInterludeCrisisV188(candidate, createForcedHubCrisisV188)) saveSystem.commit(candidate); }
+        catch (error) { console.warn('[interlude] reconcile', error); }
+      }
       hubEngine.start(saveSystem.data.hub, { routineContextV62: getHubRoutineContextV62(), onboardingV84: saveSystem.data.onboardingV84, openingV88: saveSystem.data.openingV88, openingExerciseV89: saveSystem.data.openingExerciseV89, portMeridienV90: saveSystem.data.portMeridienV90,
         trainingOperatorIdV132: getHubTrainingOperatorIdV132(saveSystem.data) });
     }
@@ -980,7 +985,12 @@ function startInterludeFlowV188() {
   try {
     const candidate = clone(saveSystem.data), crisis = startInterludeV188(candidate, createForcedHubCrisisV188);
     if (!crisis) return;
-    saveSystem.commit(candidate); renderAll();
+    saveSystem.commit(candidate);
+    if (crisis.replacedCrisisIdV188) {
+      const en = document.documentElement.lang === 'en';
+      strategyLog('QUARANTAINE', en ? 'Ordinary incident called off without penalty: the deck 2 quarantine takes priority.' : 'Incident ordinaire suspendu sans pénalité : la quarantaine du pont 2 est prioritaire.', 'crisis', 100, false);
+    }
+    renderAll();
     void playStoryCinematicV188('cin-40').then(() => toast(deriveStoryCampaignV188(saveSystem.data).objective || ''));
   } catch (error) { toast(error.message); }
 }

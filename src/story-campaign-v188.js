@@ -166,13 +166,52 @@ export function interludeDueV188(save) {
   const story = normalizeStoryCampaignV188(save?.storyCampaignV188);
   return Boolean(story.m577Manifest?.resolved && !story.interlude);
 }
+/** True when a hub crisis is the Interlude's own deck-2 quarantine xenomorph. */
+export function interludeCrisisShapeV188(crisis) {
+  return Boolean(crisis && typeof crisis === 'object' && crisis.kind === INTERLUDE_CRISIS_V188.kind
+    && Number(crisis.deck) === INTERLUDE_CRISIS_V188.deck && crisis.roomId === INTERLUDE_CRISIS_V188.roomId);
+}
+// Owner decision "replace the crisis": an ordinary crisis still active when the Interlude begins is
+// cancelled without penalty (no resolution rule, no casualty, no module damage) so the quarantine
+// crisis always carries its own kind, deck and room. Returns the cancelled crisis id or null.
+function cancelOrdinaryCrisisV188(save) {
+  const active = save?.hub?.activeCrisis;
+  if (!active || typeof active !== 'object' || active.resolved === true || interludeCrisisShapeV188(active)) return null;
+  save.hub.activeCrisis = null;
+  return typeof active.id === 'string' ? active.id : 'crisis';
+}
 export function startInterludeV188(save, createCrisis) {
   if (!interludeDueV188(save) || typeof createCrisis !== 'function') return null;
+  const replaced = cancelOrdinaryCrisisV188(save);
   const crisis = createCrisis(save, { ...INTERLUDE_CRISIS_V188, force: true });
   if (!crisis?.id) return null;
   const story = normalizeStoryCampaignV188(save.storyCampaignV188);
   story.interlude = { phase: 'alert', crisisId: crisis.id, outcome: null }; save.storyCampaignV188 = story;
-  return crisis;
+  return replaced ? Object.defineProperty(crisis, 'replacedCrisisIdV188', { value: replaced, enumerable: false }) : crisis;
+}
+/**
+ * Keeps a saved alert coherent with its crisis (hub open, reload). Repairs saves where the
+ * Interlude adopted an ordinary crisis, an ordinary crisis replaced it, or the marine went down
+ * (the crisis is closed but the creature is still loose): the quarantine crisis is armed again
+ * so the alert can always be completed. A crisis resolved before the flag was saved is cleared.
+ * Returns 'cleared', 'rearmed' or null (nothing to do).
+ */
+export function reconcileInterludeCrisisV188(save, createCrisis) {
+  const story = normalizeStoryCampaignV188(save?.storyCampaignV188);
+  const interlude = story.interlude;
+  if (interlude?.phase !== 'alert' || interlude.crisisCleared || !save?.hub || typeof createCrisis !== 'function') return null;
+  const active = save.hub.activeCrisis && typeof save.hub.activeCrisis === 'object' ? save.hub.activeCrisis : null;
+  if (active && active.id === interlude.crisisId) {
+    if (active.resolved !== true && interludeCrisisShapeV188(active)) return null;
+    // The hub records a cleared crisis in the marine's room, so a resolved one is matched by id only.
+    const alerts = Array.isArray(save.galaxy?.alerts) ? save.galaxy.alerts : [];
+    if (active.resolved === true && alerts.some(alert => alert?.id === `alert-${active.id}-resolved`)) return advanceInterlude(save, story, { crisisCleared: true }) ? 'cleared' : null;
+  }
+  if (active && active.resolved !== true) save.hub.activeCrisis = null;
+  const crisis = createCrisis(save, { ...INTERLUDE_CRISIS_V188, force: true });
+  if (!crisis?.id) return null;
+  story.interlude = { ...interlude, crisisId: crisis.id }; save.storyCampaignV188 = story;
+  return 'rearmed';
 }
 export function interludeCrisisClearedV188(save, crisisId) {
   const story = normalizeStoryCampaignV188(save?.storyCampaignV188);
