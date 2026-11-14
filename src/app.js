@@ -1082,16 +1082,22 @@ function playStagedBeatV188(id) {
     return result;
   });
 }
+// What the outermost cinematic paused and the mood it interrupted: a cinematic that replaces
+// another one (CinematicPlayerV188 resolves the first as 'replaced') inherits this return.
+let cinematicReturnV188 = null;
 function playStoryCinematicV188(id, { once = true, record = true, context = {} } = {}) {
   const seen = saveSystem.data?.storyCampaignV188?.cinematicsSeen || [];
   if (!CINEMATICS_V188[id] || once && seen.includes(id)) return Promise.resolve('already-seen');
   const resumeHub = activeView === 'hub' && hubEngine.running;
-  // The live mood (mission tension, alert, boss) is restored once the cinematic ends.
-  const viewBefore = activeView, sceneBefore = audio.scene;
   if (resumeHub) hubEngine.pause();
   // In mission, the cinematic uses the engine's own pause so no damage or timer advances.
   const resumeMission = activeView === 'play' && engine.running && !engine.paused;
   if (resumeMission) engine.togglePause();
+  // The live mood (mission tension, alert, boss) is restored once the cinematic ends.
+  const outer = cinematicPlayerV188.active && cinematicReturnV188;
+  const restore = cinematicReturnV188 = outer
+    ? { ...outer, resumeHub: outer.resumeHub || resumeHub, resumeMission: outer.resumeMission || resumeMission }
+    : { viewBefore: activeView, sceneBefore: audio.scene, resumeHub, resumeMission };
   const music = CINEMATICS_V188[id].music;
   if (music) audio.setMusicMoodV188(music); else audio.stopMusic?.(0.6);
   return cinematicPlayerV188.play(id, { language: document.documentElement.lang, context,
@@ -1099,9 +1105,12 @@ function playStoryCinematicV188(id, { once = true, record = true, context = {} }
     if (record && !creatorOwnerV84) {
       try { const candidate = clone(saveSystem.data); if (markStoryCinematicSeenV188(candidate, id)) saveSystem.commit(candidate); } catch (error) { toast(error.message); }
     }
-    if (resumeHub && activeView === 'hub') hubEngine.resume();
-    if (resumeMission && activeView === 'play' && engine.running && engine.paused) engine.togglePause();
-    audio.restoreMoodV188(cinematicReturnSceneV188({ viewBefore, viewAfter: activeView, sceneBefore, viewScene: viewAudioSceneV188(activeView) }));
+    if (result === 'replaced') return result;
+    if (cinematicReturnV188 === restore) cinematicReturnV188 = null;
+    if (restore.resumeHub && activeView === 'hub') hubEngine.resume();
+    if (restore.resumeMission && activeView === 'play' && engine.running && engine.paused) engine.togglePause();
+    audio.restoreMoodV188(cinematicReturnSceneV188({ viewBefore: restore.viewBefore, viewAfter: activeView,
+      sceneBefore: restore.sceneBefore, viewScene: viewAudioSceneV188(activeView) }));
     return result;
   });
 }

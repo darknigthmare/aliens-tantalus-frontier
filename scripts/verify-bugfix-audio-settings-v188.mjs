@@ -52,8 +52,11 @@ test('cinematic audio: restoring the mood does not cut the effects that are stil
 test('cinematic audio: playStoryCinematicV188 captures the scene before and restores it through the mood path', () => {
   const body = functionBody(appSource, 'playStoryCinematicV188');
   assert.doesNotMatch(body, /audio\.setScene\(viewAudioSceneV188\(activeView\)\)/, 'no blind reset to the plain mission scene');
-  assert.match(body, /sceneBefore = audio\.scene/);
+  assert.match(body, /sceneBefore: audio\.scene/);
   assert.match(body, /audio\.restoreMoodV188\(cinematicReturnSceneV188\(/);
+  // A cinematic replaced by another one leaves the return (resume, mood) to the replacing one.
+  assert.match(body, /if \(result === 'replaced'\) return result;/);
+  assert.match(body, /cinematicPlayerV188\.active && cinematicReturnV188/);
 });
 
 // —— 2. Settings validation in migrateSave ——
