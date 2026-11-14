@@ -344,6 +344,7 @@ const FORGE_TOOLING_V140 = new Set([
   'scripts/verify-mission-depth-v188.mjs',
   'scripts/verify-cinematic-coherence-v188.mjs',
   'scripts/verify-qz17-coherence-v188.mjs',
+  'scripts/verify-quay-coherence-v188.mjs',
   'specs/001-salles-hybrides-2d-25d/spec.md',
   'specs/001-salles-hybrides-2d-25d/plan.md',
   'specs/001-salles-hybrides-2d-25d/research.md',

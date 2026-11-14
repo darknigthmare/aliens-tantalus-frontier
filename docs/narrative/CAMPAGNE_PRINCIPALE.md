@@ -4519,6 +4519,15 @@ Décision du propriétaire : certaines salles passent en **profondeur** (2,5D, d
   - le sas fermé barre tout le quai, du mur jusqu'à l'avant ;
   - pendant l'escorte, les trois habitants suivent Echo-9 en profondeur, en file, un pas derrière ; ils contournent un objet plutôt que d'y entrer ;
   - une pluie fine tombe sur le quai, comme dans CIN-03 ; la sauvegarde du quai garde la profondeur (`portMeridienV90.z`, additif).
+  - **Passe de cohérence (2026-11-14)**, valeurs **[PROPOSÉ]** :
+    - **Arrivée** : l'arrière du UD-4L est dessiné, rampe baissée sous deux projecteurs.
+    - **Personnages** : Tomas Wren (gilet haute visibilité, tablette), Lucia Ferro (brassard à croix) et le blessé du quai nord, allongé sur la civière, la poitrine bandée. Les trois habitants attendent à côté du triage.
+    - **Lot de secours** : il porte la croix rouge (médical) ou l'éclair (énergie), selon le choix.
+    - **Sas** : la porte fait 2,6 m dans une cloison qui monte jusqu'au collisionneur, avec un gyrophare (ambre fermé, vert ouvert).
+    - **Tailles** : conteneur ISO de 10 pieds, fûts de 0,9 m, palette de 1,2 m.
+    - **Allées** : 20 de profondeur au minimum ; la palette ne barre plus l'escorte.
+    - **Escorte** : les habitants s'arrêtent devant le terminal du constat sans le masquer ; les anciennes sauvegardes sont ramenées à ces places, jamais refusées.
+    - **Panneaux** : chacun a sa version FR et EN (RAMPE · FRET / RAMP · FREIGHT, TRIAGE · HABITANTS / TRIAGE · RESIDENTS, RELAIS DU SAS / AIRLOCK RELAY, SECTEUR NORMAL ? / NORMAL SECTOR?).
 - **Ordre entre personnages** : un PNJ placé devant Echo-9 le masque, puisque le joueur est alors dessiné avant l'équipage.
 - **Cales de QZ-17 (Acte I), avec combat** — spec `specs/002-cales-qz17-profondeur-combat/` :
   - le pont bas des soutes dépressurisées, entre les deux sas, est la première section de mission en profondeur ;
