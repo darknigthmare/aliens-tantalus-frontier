@@ -12,10 +12,16 @@ export const PORT_POSTS_V90 = Object.freeze({
   report: { x: 2310, y: 624, label: 'TRANSMETTRE LE CONSTAT' },
   complete: { x: 2310, y: 624, label: 'PRÉPARER LA SUITE DES OPÉRATIONS' }
 });
+// V188 coherence pass: the three residents wait beside the triage stretcher (712–824), not on it.
+// Saved escort positions keep their historical lower bound (810 + 55 i), so older saves stay valid.
+export const PORT_CIVILIANS_WAIT_V188 = Object.freeze([860, 915, 970]);
+// Safe beyond the lit airlock (gate 1810–1918), clear of the report terminal (2270–2350) and its post.
+// Lowered from 2160 + 55 i: escort saves above it are clamped back to it, never rejected.
+export const PORT_CIVILIANS_SAFE_V188 = Object.freeze([2100, 2155, 2210]);
 const finite = (n, min, max, fallback) => Number.isFinite(n) ? Math.max(min, Math.min(max, n)) : fallback;
 export function createPortMeridienV90() {
   return { schema: 90, phase: 'pending', revision: 0, freight: null, x: 112, y: 532,
-    facing: 1, climbing: false, z: 0, civiliansX: [810, 865, 920], following: false, receipt: null };
+    facing: 1, climbing: false, z: 0, civiliansX: [...PORT_CIVILIANS_WAIT_V188], following: false, receipt: null };
 }
 export function normalizePortMeridienV90(raw) {
   if (!raw || raw.schema !== 90 || !PORT_PHASES_V90.includes(raw.phase)) return null;
@@ -31,10 +37,10 @@ export function normalizePortMeridienV90(raw) {
   // V188: depth on the quay floor (0 = against the back wall), additive.
   state.z = state.climbing ? 0 : Math.round(finite(Number(raw.z), -80, 0, 0) * 10) / 10;
   if (['escort', 'report', 'complete'].includes(state.phase)) {
-    state.civiliansX = [0, 1, 2].map(i => Math.round(finite(raw.civiliansX?.[i], 810 + i * 55, 2160 + i * 55, 810 + i * 55)));
+    state.civiliansX = [0, 1, 2].map(i => Math.round(finite(raw.civiliansX?.[i], 810 + i * 55, PORT_CIVILIANS_SAFE_V188[i], PORT_CIVILIANS_WAIT_V188[i])));
     state.following = state.phase === 'escort' && raw.following === true;
   }
-  if (['report', 'complete'].includes(state.phase)) state.civiliansX = [2160, 2215, 2270];
+  if (['report', 'complete'].includes(state.phase)) state.civiliansX = [...PORT_CIVILIANS_SAFE_V188];
   if (state.phase === 'complete') {
     if (raw.receipt !== PORT_RECEIPT_V90) return null;
     state.receipt = PORT_RECEIPT_V90;
@@ -65,8 +71,8 @@ export function advancePortMeridienV90(raw, action, proof = {}) {
     if (action !== state.phase || state.phase === 'complete') return fail('phase-order');
     if (action === 'escort' && state.following) {
       if (!Array.isArray(proof.civiliansX) || proof.civiliansX.length !== 3 || !proof.actor?.alive
-        || !proof.civiliansX.every((x, i) => Number.isFinite(x) && x >= 2160 + i * 55)) return fail('civilians-not-safe');
-      state.phase = 'report'; state.civiliansX = [2160, 2215, 2270]; state.following = false;
+        || !proof.civiliansX.every((x, i) => Number.isFinite(x) && x >= PORT_CIVILIANS_SAFE_V188[i])) return fail('civilians-not-safe');
+      state.phase = 'report'; state.civiliansX = [...PORT_CIVILIANS_SAFE_V188]; state.following = false;
     } else {
       if (!portPhysicalContactV90(state, proof.actor)) return fail('physical-contact');
       if (['triage', 'power'].includes(action) && (!Number.isFinite(proof.taskSeconds) || proof.taskSeconds < portTaskSecondsV90(state))) return fail('task-incomplete');

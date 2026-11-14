@@ -44,11 +44,14 @@ export const PORT_DEPTH_ROOM_V188 = Object.freeze({
   // The ramp's freight crate keeps its rail collider (jumpable) only while the marine is close to the wall.
   railCrate: Object.freeze({ x: 420, w: 100, depth: -34 }),
   dropship: null,
+  // Sizes at 1 m ≈ 51 px (coherence pass): a 10 ft ISO container 2.99 × 2.59 m, three 0.9 m drums
+  // (0.55 m wide each), one 1.2 m pallet. Every prop leaves a lane of at least 20 depth units
+  // (the hangar's own lane width) behind it, along the wall, where the escort walks.
   props: Object.freeze([
     prop('port-rail-crate', 'rail-crate', 420, 100, 50, -2, -34, 1),
-    prop('port-containers', 'crate', 980, 96, 78, -62, -90, -46), // reaches past the front edge
-    prop('port-drums', 'drum', 1520, 70, 52, -56, -70, -42),
-    prop('port-pallet', 'crate', 2060, 72, 44, -30, -40, -20)
+    prop('port-containers', 'iso-container', 1010, 153, 132, -62, -90, -46), // reaches past the front edge
+    prop('port-drums', 'drum', 1520, 96, 52, -50, -60, -40), // lanes of 20 in front, 40 behind
+    prop('port-pallet', 'crate', 2400, 61, 44, -30, -40, -20) // past the report post, off the escort's path
   ]),
   npcLane: Object.freeze({ x0: 0, x1: 0, z: 0 }), npcDepths: Object.freeze({})
 });
