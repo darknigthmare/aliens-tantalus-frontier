@@ -1611,7 +1611,7 @@ export function beginOperation(save, campaign, world) {
   }
   consumeHubAnnexDeploymentSupportV71(save);
   strategy.plannedCampaignId = campaign.id;
-  addStrategyLog(save, { type: 'operation', title: campaign.name, risk: brief.risk, incident: false, result: 'Deploiement lance vers ' + world.name + '.' });
+  addStrategyLog(save, { type: 'operation', title: campaign.name, risk: brief.risk, incident: false, result: 'Déploiement lancé vers ' + world.name + '.' });
   return { ok: true, resumed: false, brief, operation: strategy.currentOperation };
 }
 
@@ -2026,7 +2026,7 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
     const cappedRewardV121 = paidStrategicRewardV121 && Object.keys(strategicReward).some(key => paidStrategicRewardV121[key] < strategicReward[key]);
     const nativeRewardLabel = specialRewardV121 ? ` Bilan vérifié : +${paidStrategicRewardV121.credits} crédits, +${paidStrategicRewardV121.alloy} alliage, +${paidStrategicRewardV121.research} recherche.`
       + (cappedRewardV121 ? ' Plafond de stockage atteint ; bilan natif conservé.' : '') : '';
-    result = 'Objectif accompli : stabilite +8, infestation -' + (documentationOnlyV122 ? 0 : containment ? 11 : 7) + ', recompenses transferees.' + bonusLabel + nativeRewardLabel;
+    result = 'Objectif accompli : stabilité +8, infestation -' + (documentationOnlyV122 ? 0 : containment ? 11 : 7) + ', récompenses transférées.' + bonusLabel + nativeRewardLabel;
     if (documentationOnlyV122) save.archiveRelayArchivesV122 = {
       schema: 122, case: { id: 'qz18-last-relay', operationId: operation.id, verdict: 'delayed-distress',
         documentIds: [...ARCHIVE_RELAY_DOCUMENT_IDS_V122], completedDay: save.clock.day, completedHour: save.clock.hour }
@@ -2050,12 +2050,12 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
       for (const member of save.crew.filter((entry) => operation.crewIds.includes(entry.id) && entry !== lead)) member.stress = clamp(member.stress + 9);
     }
     if (resolvedReason === 'retreat') save.statistics.retreats += 1;
-    result = resolvedReason === 'retreat' ? 'Retraite : stabilite -2, infestation +2.'
+    result = resolvedReason === 'retreat' ? 'Retraite : stabilité -2, infestation +2.'
       : resolvedReason === 'doctrine-certification'
         ? 'Echec Doctrine Alpha / Bravo : certificat, tâches ou score de cohésion invalides.'
         : resolvedReason === 'survival-validation'
           ? 'Echec Systèmes de survie : état persisté ou preuves de mission invalides.'
-        : 'Echec : stabilite -6, infestation +7 et un operateur blesse.';
+        : 'Échec : stabilité -6, infestation +7 et un opérateur blessé.';
   }
   if (isAlphaBravo) applyAlphaBravoCrewResultsV69(save, operation, alphaBravoCertification);
   const alphaBravoDoctrineRun = isAlphaBravo
