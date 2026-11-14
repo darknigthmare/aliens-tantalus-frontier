@@ -120,3 +120,62 @@ test('Jeri (hive): the squad stays deployed and the mission log says what is tru
   assert.match(missionDeploymentLogV188(generic.engine, 2), /^ESCOUADE DÉPLOYÉE · 2 alliés IA physiques/);
   assert.match(readFileSync(new URL('../src/app.js', import.meta.url), 'utf8'), /textContent = missionDeploymentLogV188\(engine, activeAlliesV85\.length\)/);
 });
+
+// ---------------------------------------------------------------- item 3
+// Browser cause (Chromium, instrumented keydown): the second E arrived while a
+// creature sheet was streaming in (enemyAtlasLoadingPausedV65 raised for a few
+// frames); the keydown handler returned before interact() and the press was lost.
+test('survival V70: a real keyboard E pressed during a creature-sheet loading gate still reroutes power', async () => {
+  const { engine } = await fixture({ campaign: campaign('special-alien-survival-systems'), seed: 7 });
+  engine.supplies = []; engine.drops = [];
+  const station = engine.alienSurvivalStationsV70.find(entry => entry.type === 'power'), p = engine.player;
+  p.x = station.x + station.w / 2 - p.w / 2; p.y = station.y + station.h - p.h; p.vx = p.vy = 0;
+  const power = engine.alienSurvivalV70.power;
+  const key = (type, code) => { const event = new Event(type); Object.assign(event, { code, key: code.slice(3).toLowerCase(), repeat: false }); globalThis.dispatchEvent(event); };
+  key('keydown', 'KeyE'); key('keyup', 'KeyE');
+  assert.equal(power.rerouteCount, 1, 'first press');
+  // Injection: the loading gate as the browser raised it; the frame loop's own
+  // refresh is replaced so the gate lifts when the test says so.
+  const refresh = engine.refreshEnemyAtlasAvailabilityV65; let loading = true;
+  engine.refreshEnemyAtlasAvailabilityV65 = () => { engine.enemyAtlasLoadingPausedV65 = loading; };
+  engine.enemyAtlasLoadingPausedV65 = true;
+  key('keydown', 'KeyE'); key('keyup', 'KeyE');
+  assert.equal(power.rerouteCount, 1, 'nothing runs while the gate is up');
+  engine.loop(engine.last + 16);
+  assert.equal(power.rerouteCount, 1);
+  loading = false; engine.loop(engine.last + 16);
+  assert.equal(power.rerouteCount, 2, 'the kept press reroutes power once the sheet is ready');
+  engine.loop(engine.last + 16); assert.equal(power.rerouteCount, 2, 'replayed once');
+  // A user pause is not a loading gate: a press then is not kept.
+  engine.paused = true; key('keydown', 'KeyE'); key('keyup', 'KeyE'); engine.paused = false;
+  engine.loop(engine.last + 16); assert.equal(power.rerouteCount, 2);
+  engine.refreshEnemyAtlasAvailabilityV65 = refresh;
+});
+
+// ---------------------------------------------------------------- item 4
+test('V62 vent network entry: an action of the shared E selection (prompt = E), first among the actions', async () => {
+  const { engine } = await fixture({ campaign: CAMPAIGNS[0], seed: 7 });
+  engine.supplies = []; engine.drops = []; engine.objectiveNodes = []; engine.powerNode = null; engine.archiveTerminal = null; engine.objective = null;
+  if (engine.weaponPickup) engine.weaponPickup.taken = true;
+  if (engine.toolPickup) engine.toolPickup.taken = true;
+  assert.ok(engine.missionVentNetworkV62, 'the ship template carries a V62 network');
+  const portal = engine.vents.find(entry => entry.portalRole === 'entrance'), p = engine.player;
+  // Injection: the marine 30 px from the portal centre, on its floor; the cutter in hand.
+  engine.inventory.cutter = true;
+  p.x = portal.x + portal.w / 2 + 30 - p.w / 2; p.y = portal.y + portal.h - p.h; p.vx = p.vy = 0; p.grounded = true;
+  assert.equal(engine.selectInteractionTargetV188(p)?.kind, 'mission-vent-v62');
+  assert.equal(engine.getInteractionPrompt(p), 'E  OUVRIR / EMPRUNTER LE CONDUIT');
+  // Injection: a crate at the marine's centre, strictly nearer than the portal.
+  const crate = { id: 'qa-ammo', type: 'ammo', amount: 12, used: false, x: p.x + p.w / 2 - 28, y: p.y + p.h / 2 - 21, w: 56, h: 42 };
+  engine.supplies = [crate];
+  assert.equal(engine.getInteractionPrompt(p), 'E  RÉCUPÉRER DES MUNITIONS');
+  assert.equal(engine.interact(p), true);
+  assert.equal(crate.used, true, 'E takes the crate the prompt names');
+  assert.equal(p.ventTransit ?? null, null, 'the marine did not enter the vent behind the crate prompt');
+  // Injection: a door within reach; the entry keeps its rank as an action.
+  engine.doors = [{ id: 'qa-door', x: p.x + p.w / 2 - 10, y: p.y - 40, w: 20, h: p.h + 40, open: false, progress: 0 }];
+  assert.equal(engine.selectInteractionTargetV188(p)?.kind, 'mission-vent-v62');
+  engine.doors = [];
+  assert.equal(engine.interact(p), true);
+  assert.ok(p.ventTransit, 'E enters the vent the prompt names');
+});

@@ -1675,6 +1675,29 @@ export function withV52LevelRuntime(BaseEngine) {
       return { action, changed: false, eventId: event.id };
     }
 
+    // V188: the nearest V62 vent entrance within reach, as an action of the
+    // shared selection. It stays first among the actions (it used to pre-empt
+    // them all); a pickup still wins only when strictly nearer.
+    missionVentCandidateV188(actor = this.player) {
+      const network = this.missionVentNetworkV62;
+      if (!network || !actor?.alive || actor.downed || actor.ventTransit || actor.inVehicle) return null;
+      const entrance = [...network.entrances]
+        .sort((left, right) => missionVentDistanceV62(actor, left) - missionVentDistanceV62(actor, right))
+        .find((candidate) => missionVentDistanceV62(actor, candidate) <= 135);
+      if (!entrance) return null;
+      const portal = asList(this.vents).find((entry) => entry.portalId === entrance.id) || null;
+      return { kind: 'mission-vent-v62', category: 'action', target: portal || entrance, entranceId: entrance.id,
+        // Same centre-to-centre rank as the other candidates, on the drawn portal.
+        distance: portal ? this.interactionRankDistanceV188(actor, portal) : missionVentDistanceV62(actor, entrance),
+        prompt: portal?.requiresTool && !this.inventory?.cutter ? 'CHALUMEAU REQUIS' : 'E  OUVRIR / EMPRUNTER LE CONDUIT' };
+    }
+
+    interactionCandidatesV188(actor = this.player) {
+      const list = super.interactionCandidatesV188(actor), vent = this.missionVentCandidateV188(actor);
+      if (vent) list.unshift(vent);
+      return list;
+    }
+
     interact(actor = this.player) {
       if (actor?.ventTransit && this.missionVentNetworkV62
         && actor.ventTransit.networkId === this.missionVentNetworkV62.id) {
@@ -1682,8 +1705,13 @@ export function withV52LevelRuntime(BaseEngine) {
       }
       const anchors = this.missionLevelRuntime?.anchors || {};
       const nearAnchor = Object.entries(anchors).find(([, anchor]) => entityDistance(actor, { x: anchor.x - 20, y: anchor.y - 60, w: 40, h: 60 }) < 150);
-      const ventTransit = this.enterMissionVentV62(actor);
-      if (ventTransit) return true;
+      // V188: the vent entry is one action of the shared E selection (it used to
+      // run before it and took E from a strictly nearer pickup the prompt named).
+      const shared = typeof this.selectInteractionTargetV188 === 'function';
+      if (!shared || this.selectInteractionTargetV188(actor)?.kind === 'mission-vent-v62') {
+        const ventTransit = this.enterMissionVentV62(actor);
+        if (ventTransit) return true;
+      }
       // The inherited V51 interaction treats every entry in this.vents as an
       // instant shortcut. V62 portals are already handled above and must stay
       // out of that legacy branch so nearby relays, doors and terminals remain

@@ -228,6 +228,9 @@ const HAZARD_LAYOUT = Object.freeze([
   { x: 5118, y: FLOOR_Y - 20, w: 132, h: 20, damage: 18 }
 ]);
 
+// V188: discrete action keys kept through a creature-sheet loading gate, and how long.
+const DEFERRED_ACTION_KEYS_V188 = new Set(['KeyQ', 'KeyV', 'KeyE', 'KeyR', 'KeyH', 'KeyY', 'KeyT', 'KeyG']);
+const DEFERRED_ACTION_KEY_WINDOW_MS_V188 = 1000;
 const SUPPLY_LAYOUT = Object.freeze([
   { id: 'med-01', type: 'medkit', x: 1480, y: FLOOR_Y - 52, w: 58, h: 52, amount: 1 },
   { id: 'armor-01', type: 'armor', x: 2725, y: FLOOR_Y - 52, w: 58, h: 52, amount: 35 },
@@ -351,20 +354,23 @@ export class GameEngine {
         this.restartFromCheckpoint();
         return;
       }
+      // V188: a creature sheet streaming in raises a loading gate for a few frames
+      // (a sheet leaving and re-entering the view). A discrete press made then was
+      // lost: one E of two at the V70 power station did nothing. It is kept and
+      // replayed when the gate lifts (bounded, never across a user pause).
+      if (!event.repeat && !this.paused && this.mission?.state === 'active' && (this.enemyAtlasLoadingPausedV65 || this.userCasteLoadingV88)
+        && DEFERRED_ACTION_KEYS_V188.has(event.code)) {
+        this.deferredActionKeyV188 = { code: event.code, at: globalThis.performance?.now?.() ?? Date.now() };
+        return;
+      }
       if (this.paused || this.enemyAtlasLoadingPausedV65 || this.userCasteLoadingV88 || this.mission?.state !== 'active') return;
       // After a pause/focus transfer, an OS repeat is not a new press.
       if (event.repeat && !this.keys.has(event.code)) return;
       if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space'].includes(event.code)) event.preventDefault();
       this.setHeldGameplayKeyV77(event.code, true, 'keyboard');
       if (event.repeat) return;
-      if (event.code === 'KeyQ') this.activateTracker(this.player);
-      if (event.code === 'KeyV') this.toggleVehicle(this.player);
-      if (event.code === 'KeyE') this.interact(this.player);
-      if (event.code === 'KeyR') this.reload(this.player);
-      if (event.code === 'KeyH') this.useMedkit(this.player);
-      if (event.code === 'KeyY') this.interact(this.coop);
-      if (event.code === 'KeyT') this.reload(this.coop);
-      if (event.code === 'KeyG') this.useMedkit(this.coop);
+      this.deferredActionKeyV188 = null;
+      this.dispatchActionKeyV188(event.code);
     });
     globalThis.addEventListener('keyup', (event) => this.setHeldGameplayKeyV77(event.code, false, 'keyboard'));
     globalThis.addEventListener('blur', () => this.suspendForFocusLoss());
@@ -385,6 +391,27 @@ export class GameEngine {
     this.canvas.addEventListener('auxclick', (event) => { if (event.button === 1 && this.running) event.preventDefault?.(); });
   }
 
+  dispatchActionKeyV188(code) {
+    if (code === 'KeyQ') this.activateTracker(this.player);
+    if (code === 'KeyV') this.toggleVehicle(this.player);
+    if (code === 'KeyE') this.interact(this.player);
+    if (code === 'KeyR') this.reload(this.player);
+    if (code === 'KeyH') this.useMedkit(this.player);
+    if (code === 'KeyY') this.interact(this.coop);
+    if (code === 'KeyT') this.reload(this.coop);
+    if (code === 'KeyG') this.useMedkit(this.coop);
+  }
+
+  // Replays the press kept during a loading gate, once the simulation runs again.
+  flushDeferredActionKeyV188(now = globalThis.performance?.now?.() ?? Date.now()) {
+    const pending = this.deferredActionKeyV188;
+    if (!pending || this.enemyAtlasLoadingPausedV65 || this.userCasteLoadingV88) return false;
+    this.deferredActionKeyV188 = null;
+    if (this.paused || this.mission?.state !== 'active' || !(now - pending.at <= DEFERRED_ACTION_KEY_WINDOW_MS_V188)) return false;
+    this.dispatchActionKeyV188(pending.code);
+    return true;
+  }
+
   canRouteGameplayKey(event) {
     if (event.ctrlKey || event.metaKey || event.altKey || event.isComposing) return false;
     const path = typeof event.composedPath === 'function' ? event.composedPath() : [event.target];
@@ -392,6 +419,7 @@ export class GameEngine {
   }
 
   clearGameplayInput() {
+    this.deferredActionKeyV188 = null;
     this.keys?.clear?.();
     this.heldGameplayKeysV77?.clear();
     this.gamepadInputV77?.reset();
@@ -741,6 +769,7 @@ export class GameEngine {
     this.last = time;
     this.gamepadInputV77?.poll();
     this.refreshEnemyAtlasAvailabilityV65();
+    this.flushDeferredActionKeyV188();
     if (!this.paused && !this.enemyAtlasLoadingPausedV65) this.update(delta);
     this.draw();
     if (this.running && generation === this.loopGeneration) requestAnimationFrame((next) => this.loop(next, generation));
