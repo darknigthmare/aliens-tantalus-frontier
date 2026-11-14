@@ -6487,6 +6487,7 @@ export const EN_CATALOG_V185 = Object.freeze({
 "Véhicule affecté": "Vehicle assigned",
 "Référence documentaire disponible ·": "Documentary reference available ·",
 "Référence visuelle à documenter ·": "Visual reference to be documented ·",
+"tire.": "fires.",
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 // V188 systems bug hunt (merged via i18n-catalog-maintenance-v186 review).
