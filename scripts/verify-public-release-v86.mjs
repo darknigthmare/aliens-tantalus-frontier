@@ -354,6 +354,7 @@ const FORGE_TOOLING_V140 = new Set([
   'scripts/verify-bugfix-mobile-ui-v188.mjs',
   'scripts/verify-bugfix-hub-story-v188.mjs',
   'scripts/verify-bugfix-i18n-v188.mjs',
+  'scripts/verify-bugfix-systems-v188.mjs',
   'specs/001-salles-hybrides-2d-25d/spec.md',
   'specs/001-salles-hybrides-2d-25d/plan.md',
   'specs/001-salles-hybrides-2d-25d/research.md',

@@ -56,7 +56,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "package.json": {
     "previousSha256": "ff133a405bfc1ef2afa7085fcb2a6cde27a9f52c4af0de5172a058b47082eb48",
-    "currentSha256": "6372509e44600773d7d149a75e85b5c701ece78493bf6ec659a113eddd9bb10e"
+    "currentSha256": "a073be94f8080594c4d910170bef1be61a58e902e7e9d6176a71e5dcd69ec28a"
   },
   "player-onboarding-v84.css": {
     "previousSha256": "ae49e974d70f1a46dbd28da6d5515fac0124c992591cf0c1c50ad3e7e3d1cfbf",
@@ -100,11 +100,11 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "328c764b2bf467d0bc21ae86abf415a7722bd0a88cba486eb2167c22fa8f0b84",
-    "currentSha256": "4d758cddd9f6580b25e51a61f60aa694969a32233898cd2b8818c89ba2016ea8"
+    "currentSha256": "175f7ce21c7ecd4bedb967c12342d068b44815d1cd64aef00f9b6440b733fb4a"
   },
   "src/app.js": {
     "previousSha256": "482835e65677c536085a1344cf61c3ffa5e09e2af1b8029b949e000a533038ae",
-    "currentSha256": "481c7dcff5ba8f8ae2a470bada1b1118343917494f3c90498af6ef108926c16b"
+    "currentSha256": "273c8405434d7d3b2285d7d7736a9008b0fad11183899563cdb602d3b9c6c92d"
   },
   "src/archive-relay-presentation-v160.js": {
     "previousSha256": "e628ccee6aa0a2ee40eea1fdd3b66b11800c3185c39bbd91c18d662c05749a30",
@@ -208,7 +208,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/i18n-en-catalog-v185.js": {
     "previousSha256": "ac3632c302294c3e2869d673ad6d8cd861e1b0f62641d2d16335387746a6218a",
-    "currentSha256": "ba016c44c79fe1c06199e88581fa7b5dfeacf53ef514f364552d3ad688b01222"
+    "currentSha256": "6c3ea8888fc92b40780fa062d374c646ed1ec520418aaff551cd0c3c64d51828"
   },
   "src/i18n-v185.js": {
     "previousSha256": "592b025ceca9008e73bff267be72a2a3b614767fc220f82cbf2a3ef792060e7e",
@@ -264,7 +264,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/save.js": {
     "previousSha256": "afd5b289887c3a6be5d704ad9b501d9cd7bfeae4514fdfb4eaf21095e6d42304",
-    "currentSha256": "248d95f22207c3ae87336556dfc6b5d47f9ae663c911a012e88badaf35e37e5a"
+    "currentSha256": "f9190bd893e8445f41a5f25b8b430d8d57a093e884539c3e2628558a264dcfb9"
   },
   "src/ship-port-v87.css": {
     "previousSha256": "280b758be54bcb9433fb8353dc73b6bb047b79ce9f1210c47e5bde05ec9f29b9",
