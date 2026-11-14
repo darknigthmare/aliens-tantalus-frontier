@@ -769,7 +769,7 @@ export class CatalogWorkbenchV62 {
     if (!preview) this.renderMissingMedia(media, record);
     const body = createElement(this.document, 'span', 'catalog-v62__card-body');
     body.append(
-      createElement(this.document, 'span', 'catalog-v62__eyebrow', `${CATALOG_LABELS_V62[record.catalog]} · ${formatCatalogValueV62(record.taxonomy.family)}`),
+      createElement(this.document, 'span', 'catalog-v62__eyebrow', `${CATALOG_LABELS_V62[record.catalog]} · ${(!this.developerModeV110 && groupLabelV188(record.taxonomy.family, { catalog: record.catalog, kind: 'family' })) || formatCatalogValueV62(record.taxonomy.family)}`),
       createElement(this.document, 'strong', 'catalog-v62__card-title', this.developerModeV110 ? record.name : playerCatalogNameV110(record.name)),
       createElement(this.document, 'span', 'catalog-v62__card-type', record.taxonomy.type === CATALOG_UNKNOWN_V62 ? UNKNOWN_LABEL : this.developerModeV110 ? record.taxonomy.type : playerCatalogNameV110(record.taxonomy.type))
     );

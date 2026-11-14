@@ -225,3 +225,21 @@ test('Owner: DAVID-8R action reads "Recover the synthetic\'s intel" in English',
   assert.equal(STRINGS_V185.fr['npc.action.david-8r'], 'Extraire le renseignement synthétique');
   assert.equal(inEnglish(() => autoTranslateV185('Extraire le renseignement synthétique')), 'Recover the synthetic\'s intel');
 });
+
+test('P1: the insertion briefing shows the objective label, the state keeps its key', async () => {
+  const { createMissionInsertionV62 } = await import('../src/mission-insertion-v62.js');
+  const { WORLDS } = await import('../src/content.js');
+  const campaign = CAMPAIGNS.find(entry => entry.id === 'pair-001-mire');
+  const world = WORLDS.find(entry => entry.id === campaign.worldId);
+  const state = createMissionInsertionV62({ operation: { id: 'op-1', campaignId: campaign.id, worldId: world.id }, campaign, world });
+  assert.equal(state.phases[0].payload.objectiveRef, campaign.objective, 'persisted state unchanged');
+  assert.match(read('src/mission-insertion-ui-v62.js'), /campaignObjectiveLabelV188\(phase\.payload\.objectiveRef\)/u);
+  assert.equal(campaignObjectiveLabelV188(campaign.objective), 'Secourir les survivants');
+});
+
+test('P2: catalog result cards name the family through the glossary', () => {
+  for (const record of CATALOG_RECORDS_V62) {
+    assert.ok(groupLabelV188(record.taxonomy.family, { catalog: record.catalog, kind: 'family' }), `${record.catalog}/${record.taxonomy.family}`);
+  }
+  assert.match(read('src/catalog-ui-v62.js'), /groupLabelV188\(record\.taxonomy\.family, \{ catalog: record\.catalog, kind: 'family' \}\)/u);
+});

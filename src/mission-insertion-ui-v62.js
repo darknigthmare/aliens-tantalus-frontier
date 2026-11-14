@@ -13,6 +13,7 @@ import { campaignInsertionStoryV160, chooseCampaignStoryProtocolV160 } from './c
 import { campaignInsertionStoryV161, chooseConvoyStoryProtocolV161, hasCampaignStoryV161 } from './campaign-convoy-story-v161.js';
 import { campaignInsertionStoryV163, chooseLetheStoryProtocolV163, hasCampaignStoryV163 } from './campaign-lethe-story-v163.js';
 import { drawArchiveRelayInsertionShotV160, loadArchiveRelayArtV160 } from './archive-relay-presentation-v160.js';
+import { campaignObjectiveLabelV188 } from './mission-objective-panel-v188.js';
 
 export const MISSION_INSERTION_UI_SCHEMA_V62 = 62;
 
@@ -167,7 +168,8 @@ function setProgress(element, value) {
 }
 
 function approachDescription(state, phase) {
-  if (phase.kind === 'briefing') return phase.payload.objectiveRef || 'Confirmer l’ordre de mission avant le départ';
+  // V188: the persisted objectiveRef is a content key; the player reads its label.
+  if (phase.kind === 'briefing') return campaignObjectiveLabelV188(phase.payload.objectiveRef) || 'Confirmer l’ordre de mission avant le départ';
   if (phase.kind === 'preparation') {
     const crew = phase.payload.crewIds?.length || 0;
     const transport = phase.payload.vehicleId ? ' · transport affecté' : '';
