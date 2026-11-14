@@ -175,6 +175,7 @@ import { createUserReferenceEffectsGalleryV95 } from './user-reference-effects-v
 import { createUserReferenceLibraryV100 } from './user-reference-library-v100.js';
 import { createUserSpecimenBenchV106 } from './user-specimen-bench-v106.js';
 import { installAutoTranslationV185 } from './i18n-auto-v185.js';
+import { GALAXY_PHONE_QUERY_V188, snapWorldsToPhoneGridV188, worldShortCodeV188 } from './galaxy-map-mobile-v188.js';
 import { tV185, tFromFrenchV185, tKeepFrenchV185, translateHubPromptV185, initLanguageV185, setLanguageV185, currentLanguageV185, STRINGS_V185, LANGUAGE_EVENT_V185 } from './i18n-v185.js';
 
 const byId = (id) => document.getElementById(id);
@@ -231,6 +232,7 @@ const forgeCheckpointStoreV157 = new ForgePlaytestCheckpointStoreV157(persistent
 const audio = new AudioDirector();
 let editor = null;
 let activeView = 'command';
+let worldSheetOpenV188 = false; // V188 phone bottom sheet of the galaxy map
 const hubControlBindingsV133 = [];
 let standaloneContext = null;
 // A rejected terminal balance never becomes a false victory or a paid retreat.
@@ -815,6 +817,7 @@ function showView(name) {
   name = resolvePlayerViewV110(name, developerModeV110);
   if (!VIEW_META[name]) return;
   hubControlBindingsV133.forEach(binding => binding.clear());
+  if (name !== 'galaxy') closeWorldSheetV188({ restoreFocus: false });
   if (name !== 'settings') titleSceneV79.clearPlacementPreservationV87();
   if (name !== 'settings') titleScreen.clearMenuReturnV89();
   refugeControllerV87.close();
@@ -1519,20 +1522,57 @@ function renderWorldDetail(world) {
   const diplomacyStatus = remainingHours > 0
     ? `<p class="detail-copy">Relève diplomatique : ${Math.ceil(remainingHours)} h restantes.</p>`
     : '';
-  byId('world-detail').innerHTML = `<p class="eyebrow">${escapeHtml(world.sector)} · DANGER ${world.danger}</p><h3>${escapeHtml(world.name)}</h3><p>${escapeHtml(world.description)}</p><div class="mini-tags">${world.biomes.map((biome) => `<span>${escapeHtml(biome)}</span>`).join('')}</div><div class="data-list"><span>INFESTATION</span><b>${Math.round(state.infestation)}%</b><span>STABILITÉ</span><b>${Math.round(state.stability)}%</b><span>QUARANTAINE</span><b>${Math.round(state.quarantine)}%</b><span>POPULATION</span><b>${number(state.population)}</b></div>${diplomacyStatus}<div class="button-row"><button class="button compact" data-diplomacy="aid" data-world-id="${world.id}" ${diplomacyDisabled}${diplomacyTitle}>AIDE</button><button class="button compact" data-diplomacy="quarantine" data-world-id="${world.id}" ${diplomacyDisabled}${diplomacyTitle}>QUARANTAINE</button><button class="button compact" data-diplomacy="trade" data-world-id="${world.id}" ${diplomacyDisabled}${diplomacyTitle}>COMMERCE</button></div><button class="button primary wide" data-world-operations="${world.id}" ${unlocked ? '' : 'disabled'}>${unlocked ? 'PLANIFIER SUR CE MONDE' : 'ROUTE VERROUILLÉE'}</button>`;
+  // V188: the close control only shows when the detail is a phone bottom sheet.
+  byId('world-detail').innerHTML = `<button type="button" class="button compact world-sheet-close-v188" data-world-sheet-close-v188 aria-label="Fermer le détail du monde">FERMER</button><p class="eyebrow">${escapeHtml(world.sector)} · DANGER ${world.danger}</p><h3 id="world-detail-title-v188" tabindex="-1">${escapeHtml(world.name)}</h3><p>${escapeHtml(world.description)}</p><div class="mini-tags">${world.biomes.map((biome) => `<span>${escapeHtml(biome)}</span>`).join('')}</div><div class="data-list"><span>INFESTATION</span><b>${Math.round(state.infestation)}%</b><span>STABILITÉ</span><b>${Math.round(state.stability)}%</b><span>QUARANTAINE</span><b>${Math.round(state.quarantine)}%</b><span>POPULATION</span><b>${number(state.population)}</b></div>${diplomacyStatus}<div class="button-row"><button class="button compact" data-diplomacy="aid" data-world-id="${world.id}" ${diplomacyDisabled}${diplomacyTitle}>AIDE</button><button class="button compact" data-diplomacy="quarantine" data-world-id="${world.id}" ${diplomacyDisabled}${diplomacyTitle}>QUARANTAINE</button><button class="button compact" data-diplomacy="trade" data-world-id="${world.id}" ${diplomacyDisabled}${diplomacyTitle}>COMMERCE</button></div><button class="button primary wide" data-world-operations="${world.id}" ${unlocked ? '' : 'disabled'}>${unlocked ? 'PLANIFIER SUR CE MONDE' : 'ROUTE VERROUILLÉE'}</button>`;
 }
 
 function renderGalaxy() {
   const term = byId('world-search').value.trim().toLowerCase();
   const worlds = WORLDS.filter((world) => JSON.stringify(world).toLowerCase().includes(term));
-  byId('star-map').innerHTML = worlds.map((world) => {
+  // V188: desktop keeps the spiral (left/top); a phone reads --cell-col/--cell-row
+  // and the short code. The full name stays in the button for screen readers.
+  const phoneGrid = snapWorldsToPhoneGridV188(worlds.map(world => ({ id: world.id, ...worldPosition(WORLDS.indexOf(world)) })));
+  const map = byId('star-map');
+  map.style.setProperty('--cell-columns', phoneGrid.columns);
+  map.style.setProperty('--cell-rows', phoneGrid.rows);
+  map.innerHTML = worlds.map((world) => {
     const point = worldPosition(WORLDS.indexOf(world));
+    const cell = phoneGrid.cells.get(world.id) || { col: 0, row: 0 };
     const unlocked = saveSystem.data.galaxy.unlockedWorldIds.includes(world.id);
     const inOrbit = world.id === getShipWorldIdV116(saveSystem.data);
-    return `<button class="world-node ${world.id === activeWorld.id ? 'active' : ''} ${unlocked ? '' : 'locked'}" data-world-id="${world.id}" aria-current="${inOrbit ? 'location' : 'false'}" title="${inOrbit ? 'Tantalus en orbite' : 'Sélectionner une destination'}" style="left:${point.left}%;top:${point.top}%">${escapeHtml(world.name)}${inOrbit ? ' · TANTALUS' : ''}</button>`;
+    return `<button class="world-node ${world.id === activeWorld.id ? 'active' : ''} ${unlocked ? '' : 'locked'} ${inOrbit ? 'in-orbit' : ''}" data-world-id="${world.id}" aria-controls="world-detail" aria-current="${inOrbit ? 'location' : 'false'}" title="${inOrbit ? 'Tantalus en orbite' : 'Sélectionner une destination'}" style="left:${point.left}%;top:${point.top}%;--cell-col:${cell.col};--cell-row:${cell.row}"><span class="world-node-code-v188" aria-hidden="true">${escapeHtml(worldShortCodeV188(world.name))}</span><span class="world-node-name-v188">${escapeHtml(world.name)}${inOrbit ? ' · TANTALUS' : ''}</span></button>`;
   }).join('');
   renderWorldDetail(activeWorld);
+  syncWorldSheetV188();
   renderGalaxyJumpV116();
+}
+
+// V188 phone bottom sheet for the world detail. Desktop never opens it.
+const isGalaxyPhoneV188 = () => Boolean(globalThis.matchMedia?.(GALAXY_PHONE_QUERY_V188).matches);
+function syncWorldSheetV188() {
+  const layout = document.querySelector('.galaxy-layout');
+  const detail = byId('world-detail');
+  if (!layout || !detail) return;
+  const open = worldSheetOpenV188 && isGalaxyPhoneV188();
+  layout.classList.toggle('world-sheet-open-v188', open);
+  if (open) {
+    detail.setAttribute('role', 'dialog');
+    detail.setAttribute('aria-modal', 'false');
+    detail.setAttribute('aria-labelledby', 'world-detail-title-v188');
+  } else ['role', 'aria-modal', 'aria-labelledby'].forEach(name => detail.removeAttribute(name));
+  for (const node of all('.world-node')) node.setAttribute('aria-expanded', String(open && node.dataset.worldId === activeWorld.id));
+}
+function openWorldSheetV188() {
+  if (!isGalaxyPhoneV188()) return;
+  worldSheetOpenV188 = true;
+  syncWorldSheetV188();
+  byId('world-detail-title-v188')?.focus({ preventScroll: true });
+}
+function closeWorldSheetV188({ restoreFocus = true } = {}) {
+  if (!worldSheetOpenV188) return;
+  worldSheetOpenV188 = false;
+  syncWorldSheetV188();
+  if (restoreFocus) document.querySelector(`.world-node[data-world-id="${activeWorld.id}"]`)?.focus({ preventScroll: true });
 }
 
 let galaxyJumpTimerV116 = null;
@@ -4157,7 +4197,9 @@ function bindDelegatedActions() {
     if (target.dataset.worldId && target.classList.contains('world-node')) {
       activeWorld = WORLDS.find((world) => world.id === target.dataset.worldId) || activeWorld;
       renderGalaxy();
+      openWorldSheetV188();
     }
+    if (target.hasAttribute('data-world-sheet-close-v188')) closeWorldSheetV188();
     if (target.dataset.confirmJumpV115) {
       const destination = WORLDS.find(world => world.id === target.dataset.confirmJumpV115);
       failedJumpOwnerV116 = null;
@@ -4211,6 +4253,12 @@ function bind() {
     try { saveSystem.data.strategy.plannedCampaignId = campaign.id; saveSystem.commit(); renderCampaigns(); renderCommandMissionsV110(); }
     catch (error) { saveSystem.data.strategy.plannedCampaignId = previous; renderCommandMissionsV110(); toast(error.message); }
   };
+  globalThis.addEventListener('keydown', event => {
+    if (event.key !== 'Escape' || !worldSheetOpenV188 || activeView !== 'galaxy') return;
+    event.preventDefault();
+    closeWorldSheetV188();
+  });
+  globalThis.matchMedia?.(GALAXY_PHONE_QUERY_V188).addEventListener?.('change', () => { if (!isGalaxyPhoneV188()) worldSheetOpenV188 = false; syncWorldSheetV188(); });
   globalThis.addEventListener('keydown', event => {
     if (!isLocalDeveloperEnvironmentV119(globalThis.location?.hostname) || !isDeveloperShortcutV110(event) || byId('app').hidden || standaloneContext) return;
     event.preventDefault();

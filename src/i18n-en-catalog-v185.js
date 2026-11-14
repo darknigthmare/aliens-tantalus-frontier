@@ -2084,6 +2084,7 @@ export const EN_CATALOG_V185 = Object.freeze({
 "Fermer": "Close",
 "Fermer la photo": "Close photo",
 "Fermer le comptoir et revenir au jeu": "Close the counter and return to the game",
+"Fermer le détail du monde": "Close the world details",
 "Fermer · Échap": "Close · Esc",
 "Fermeture des sas": "Airlock closure",
 "Fermez les anciens onglets du jeu pour ouvrir la galerie locale.": "Close old game tabs to open the local gallery.",
