@@ -385,9 +385,21 @@ export function withNarrativeEvidenceV132(Base) {
       return true;
     }
 
+    // V188 shared E selection: evidence is a pickup, chosen only when nearest.
+    interactionCandidatesV188(actor = this.player) {
+      const list = super.interactionCandidatesV188(actor);
+      const item = this.nearestNarrativeEvidenceV132(actor);
+      if (item) list.push({ kind: 'narrative-evidence-v132', category: 'pickup', target: item,
+        distance: this.interactionRankDistanceV188(actor, item),
+        prompt: item.requiresAction && available(this, actor) && !this.evidenceScannerV132(actor) ? `SCANNER CHARGÉ REQUIS · ${item.label}`
+          : `E · ${item.requiresAction ? 'ANALYSER AU SCANNER' : 'RÉCUPÉRER'} · ${item.label}` });
+      return list;
+    }
+
     interact(actor = this.player) {
       if (available(this, actor)) {
-        const item = this.nearestNarrativeEvidenceV132(actor);
+        const choice = this.selectInteractionTargetV188(actor);
+        const item = choice?.kind === 'narrative-evidence-v132' ? choice.target : null;
         if (item) {
           if (item.requiresAction) return this.startNarrativeEvidenceScanV132(actor, item);
           return this.collectNarrativeEvidenceV132(actor, item.id);
@@ -481,9 +493,8 @@ export function withNarrativeEvidenceV132(Base) {
         y: item.y + item.h, kind: item.requiresAction ? 'scan' : 'evidence', optional: true }));
     }
     getInteractionPrompt(actor = this.player) {
-      const item = this.nearestNarrativeEvidenceV132(actor);
-      if (item?.requiresAction && available(this, actor) && !this.evidenceScannerV132(actor)) return `SCANNER CHARGÉ REQUIS · ${item.label}`;
-      return item ? `E · ${item.requiresAction ? 'ANALYSER AU SCANNER' : 'RÉCUPÉRER'} · ${item.label}` : super.getInteractionPrompt(actor);
+      // V188: the evidence prompt comes from the shared selection in the base layer.
+      return super.getInteractionPrompt(actor);
     }
     missionNavigationMapV121() {
       const model = super.missionNavigationMapV121();

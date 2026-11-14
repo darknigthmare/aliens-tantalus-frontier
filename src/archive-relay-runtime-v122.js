@@ -109,6 +109,20 @@ export function withArchiveRelayRuntimeV122(BaseEngine) {
       if (discovered.length) this.archiveRelayMilestoneV122(terminal === 'pda' ? 'badge' : terminal, 'Mémoire locale récupérée ; lire les documents avant de conclure.');
       return discovered;
     }
+    // V188 shared E selection: the QZ-18 posts are actions of the mission, so a
+    // dropped magazine or arrow beside a terminal never takes E before it.
+    archiveRelayPropAtV122(actor = this.player) {
+      const props = ARCHIVE_RELAY_PROPS_V122;
+      return ['relay', 'extraction', 'pda', 'engineering', 'security', 'freight', 'analysis'].find(key => near(actor, props[key])) || null;
+    }
+    interactionCandidatesV188(actor = this.player) {
+      const list = super.interactionCandidatesV188(actor);
+      if (!this.isArchiveRelayV122() || !actor?.alive) return list;
+      const key = this.archiveRelayPropAtV122(actor), prop = key && ARCHIVE_RELAY_PROPS_V122[key];
+      if (prop) list.unshift({ kind: 'archive-relay-v122', category: 'action', target: key,
+        distance: Math.hypot(actor.x + actor.w / 2 - prop.x, actor.y + actor.h - prop.groundY), prompt: '' });
+      return list;
+    }
     interact(actor = this.player) {
       if (!this.isArchiveRelayV122()) return super.interact(actor);
       if (!this.canArchiveRelayActV122(actor)) return false;
@@ -274,6 +288,9 @@ export function withArchiveRelayRuntimeV122(BaseEngine) {
     objectiveProgressText() { return this.isArchiveRelayV122() ? archiveRelayDossierV122(this.archiveRelayV122).instruction : super.objectiveProgressText(); }
     getInteractionPrompt() {
       if (!this.isArchiveRelayV122()) return super.getInteractionPrompt();
+      // Only the shared selection may put a pickup prompt before the posts.
+      const choice = this.selectInteractionTargetV188?.(this.player);
+      if (choice?.category === 'pickup' && choice.prompt) return choice.prompt;
       const state = this.archiveRelayV122, props = ARCHIVE_RELAY_PROPS_V122;
       if (near(this.player, props.relay)) return state.power ? 'RELAIS LOCAL EN SERVICE' : state.badge ? `MAINTENIR E · RELAIS · ${state.relayProgress.toFixed(1)}/3 S` : 'BADGE DU PDA REQUIS';
       if (near(this.player, props.extraction)) return state.verdict ? 'MAINTENIR E · RETOUR · 2 S' : 'VERDICT REQUIS';

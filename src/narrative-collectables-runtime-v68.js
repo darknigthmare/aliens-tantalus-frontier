@@ -485,9 +485,19 @@ export function withNarrativeCollectablesRuntimeV68(BaseEngine) {
       return super.enterMissionVentV62(actor);
     }
 
-    interact(actor = this.player) {
+    // V188 "the prompt is always right": an evidence piece is a pickup in the
+    // shared E selection; it wins only when it is the nearest valid target.
+    interactionCandidatesV188(actor = this.player) {
+      const list = super.interactionCandidatesV188(actor);
       const collectable = this.nearestNarrativeCollectableV68(actor);
-      if (collectable && this.collectNarrativeCollectableV68(actor, collectable)) return true;
+      if (collectable) list.push({ kind: 'narrative-collectable-v68', category: 'pickup', target: collectable,
+        distance: this.interactionRankDistanceV188(actor, collectable), prompt: `E  RÉCUPÉRER — ${collectable.label}` });
+      return list;
+    }
+
+    interact(actor = this.player) {
+      const choice = this.selectInteractionTargetV188(actor);
+      if (choice?.kind === 'narrative-collectable-v68') return this.collectNarrativeCollectableV68(actor, choice.target);
       const ventEntrance = this.nearestNarrativeVentEntranceV68(actor);
       const ventRequirement = this.narrativeVentRequirementV68(ventEntrance);
       // The route verdict is taken in the archives. Once the overlay of the last piece is
@@ -535,8 +545,7 @@ export function withNarrativeCollectablesRuntimeV68(BaseEngine) {
     }
 
     getInteractionPrompt(actor = this.player) {
-      const collectable = this.nearestNarrativeCollectableV68(actor);
-      if (collectable) return `E  RÉCUPÉRER — ${collectable.label}`;
+      if (this.selectInteractionTargetV188(actor)?.kind === 'narrative-collectable-v68') return super.getInteractionPrompt(actor);
       const ventEntrance = this.nearestNarrativeVentEntranceV68(actor);
       const ventRequirement = this.narrativeVentRequirementV68(ventEntrance);
       if (ventRequirement) return `E  VERROUILLÉ — ${ventRequirement}`;

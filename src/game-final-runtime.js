@@ -825,8 +825,12 @@ export class GameEngine extends CompleteGameEngine {
   }
 
   getInteractionPrompt(actor = this.player) {
+    // V188 "the prompt is always right": the V vehicle hint never hides the
+    // target that E acts on (door, terminal, pickup, objective node).
+    const inherited = super.getInteractionPrompt(actor);
+    if (/^E\s/.test(inherited || '') && !actor?.inVehicle) return inherited;
     if (this.vehicle?.active && !this.vehicle.destroyed && entityDistance(actor, this.vehicle) < 210) return actor.inVehicle ? `V  QUITTER ${this.selectedVehicleRuntime.name}` : `V  PILOTER ${this.selectedVehicleRuntime.name} · ${this.vehicleHandling.locomotion.toUpperCase()}`;
-    return super.getInteractionPrompt(actor);
+    return inherited;
   }
 
   getGameplayReport() {

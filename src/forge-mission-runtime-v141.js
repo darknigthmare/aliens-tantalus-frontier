@@ -287,7 +287,8 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       // Match the V51 native revive/key reaches; the inherited interaction owns
       // the rescue, inventory, checkpoint and event effects in both cases.
       if (this.coopEnabled && actor?.alive && ally?.downed && interactionDistance(actor, ally) <= 86) return 'revive';
-      if (list(this.drops).some(drop => !drop.taken && drop.type === 'security-key' && near(actor, drop, 100))) return 'security-key';
+      // V188: the badge is a pickup; it takes E only when it is the nearest target.
+      if (this.forgeNativePickupV188(actor)?.kind === 'security-key') return 'security-key';
       // Recovery is an inherited fallback: preserve actionable Forge validation
       // and do not let V51 extract through a partition while reaching a pickup.
       const objectiveBlocksRecovery = near(actor, this.objective);
@@ -297,6 +298,21 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       if (!objectiveBlocksRecovery && !doorBlocksRecovery && !this.forgePendingTerminalV156(actor)
         && this.recoverableWeaponIndexV131?.(actor) >= 0) return 'recoverable-weapon';
       return null;
+    }
+
+    // V188 "the prompt is always right": a native pickup (badge, supply, weapon,
+    // magazine…) is chosen only when it is nearer than the Forge door and the
+    // preferred Forge use. The same rank distance as the native selection is used.
+    forgeNativePickupV188(actor = this.player) {
+      const native = this.selectInteractionTargetV188?.(actor);
+      if (native?.category !== 'pickup') return null;
+      const rank = target => this.interactionRankDistanceV188(actor, target);
+      const linked = this.forgeLinkedDoorV141(actor);
+      if (linked && rank(this.getDoorRenderState?.(linked.door, { open: false }) || linked.door) <= native.distance) return null;
+      const preferred = this.forgePreferredUseV156(actor);
+      if (preferred?.target && rank(preferred.target) <= native.distance) return null;
+      if (near(actor, this.objective) && rank(this.objective) <= native.distance) return null;
+      return native;
     }
 
     forgeBlockedNarrativeArchiveV156(actor = this.player) {
@@ -340,7 +356,7 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       if (urgent === 'revive' || urgent === 'security-key') return super.interact(actor);
       const linked = this.forgeLinkedDoorV141(actor);
       if (linked) return this.travelForgeMissionV141(linked.link, actor);
-      if (urgent === 'recoverable-weapon') return super.interact(actor);
+      if (urgent === 'recoverable-weapon' || this.forgeNativePickupV188(actor)) return super.interact(actor);
       const preferred = this.forgePreferredUseV156(actor);
       if (preferred?.kind === 'native-terminal') return super.interact(actor);
       if (preferred?.kind === 'npc') {
@@ -414,6 +430,8 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       if (linked) return this.forgeInteractionClearV141(actor, linked.door)
         ? `E  SAS → ${session.project.rooms.find(room => room.id === linked.link.to.roomId)?.name || 'SALLE'}` : 'E  SAS BLOQUÉ PAR UNE CLOISON';
       if (urgent === 'recoverable-weapon') return super.getInteractionPrompt(actor);
+      const pickup = this.forgeNativePickupV188(actor);
+      if (pickup?.prompt) return pickup.prompt;
       const preferred = this.forgePreferredUseV156(actor);
       if (preferred?.kind === 'npc') return `E  PARLER À ${preferred.target.name.toUpperCase()}`;
       if (preferred?.kind === 'narrative') return 'E  LIRE LE RÉCIT DU TERMINAL';

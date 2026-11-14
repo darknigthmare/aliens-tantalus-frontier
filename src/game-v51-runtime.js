@@ -1651,102 +1651,164 @@ export class GameEngine {
     else if (kind === 'vacuum') player.vx *= 1.35;
   }
 
+  // V188 owner decision "the prompt is always right": E acts on exactly the
+  // target the prompt names. Both interact() and getInteractionPrompt() read
+  // this one selection. Actions keep the historical prompt order (door, power,
+  // archive, vent, extraction); a pickup wins only when it is strictly the
+  // nearest valid target, or the only one. Layers add candidates by
+  // overriding interactionCandidatesV188() and handle their own kinds.
+  interactionRankDistanceV188(actor, rect) {
+    if (!actor || !rect) return Infinity;
+    const cx = actor.x + actor.w / 2, cy = actor.y + actor.h / 2;
+    const w = Number(rect.w) || 0, h = Number(rect.h) || 0;
+    const dx = Math.max(rect.x - cx, 0, cx - (rect.x + w)), dy = Math.max(rect.y - cy, 0, cy - (rect.y + h));
+    return Math.hypot(dx, dy);
+  }
+
+  interactionCandidatesV188(actor = this.player) {
+    if (!actor?.alive || actor.downed) return [];
+    const list = [], rank = (rect) => this.interactionRankDistanceV188(actor, rect);
+    const actorCenter = actor.x + actor.w / 2;
+    for (const door of this.doors || []) {
+      if (Math.abs(actorCenter - (door.x + door.w / 2)) >= this.doorInteractionReachV188(door, actor) || Math.abs(actor.y - door.y) >= door.h + 60) continue;
+      const requirement = this.doorRequirement(door);
+      list.push({ kind: 'door', category: 'action', target: door, distance: rank(this.getDoorRenderState?.(door, { open: false }) || door),
+        prompt: requirement ? `E  VERROUILLÉ — ${requirement}` : 'E  ACTIONNER LA PORTE' });
+      break;
+    }
+    if (this.powerNode && !this.powerNode.active && distanceBetween(actor, this.powerNode) < 130
+      && this.admitNativeTerminalInteractionV156?.(actor, this.powerNode) !== false) {
+      list.push({ kind: 'power', category: 'action', target: this.powerNode, distance: rank(this.powerNode), prompt: 'E  RÉTABLIR LE CIRCUIT AUXILIAIRE' });
+    }
+    if (this.archiveTerminal && !this.archiveTerminal.recovered && distanceBetween(actor, this.archiveTerminal) < 130
+      && this.admitNativeTerminalInteractionV156?.(actor, this.archiveTerminal) !== false) {
+      list.push({ kind: 'archive', category: 'action', target: this.archiveTerminal, distance: rank(this.archiveTerminal), prompt: 'E  EXTRAIRE LES ARCHIVES' });
+    }
+    // V62 portal networks are entered by their own layer before this dispatcher (see V52 interact).
+    const vent = this.missionVentNetworkV62 ? null : (this.vents || []).find((candidate) => distanceBetween(actor, candidate) < 125);
+    if (vent) list.push({ kind: 'vent', category: 'action', target: vent, distance: rank(vent),
+      prompt: vent.requiresTool && !this.inventory.cutter ? 'CHALUMEAU REQUIS' : 'E  OUVRIR / EMPRUNTER LE CONDUIT' });
+    if (this.objective && distanceBetween(actor, this.objective) < 125) {
+      const missing = this.missingExtractionRequirement();
+      list.push({ kind: 'objective', category: 'action', target: this.objective, distance: rank(this.objective),
+        prompt: missing ? `E  EXTRACTION BLOQUÉE — ${missing}` : 'E  CONFIRMER L’EXTRACTION' });
+    }
+    const keyDrop = (this.drops || []).find((drop) => !drop.taken && drop.type === 'security-key' && distanceBetween(actor, drop) < 100);
+    if (keyDrop) list.push({ kind: 'security-key', category: 'pickup', target: keyDrop, distance: rank(keyDrop), prompt: 'E  RÉCUPÉRER LE BADGE DE SÉCURITÉ' });
+    const supply = (this.supplies || []).find((candidate) => !candidate.used && distanceBetween(actor, candidate) < 105);
+    if (supply) list.push({ kind: 'supply', category: 'pickup', target: supply, distance: rank(supply),
+      prompt: supply.type === 'medkit' ? 'E  RÉCUPÉRER UN MÉDIKIT' : supply.type === 'armor' ? 'E  RÉCUPÉRER UNE PLAQUE DE BLINDAGE' : 'E  RÉCUPÉRER DES MUNITIONS' });
+    // This legacy field pickup supplies the global M41A loadout. Personal V85
+    // inventories cannot be replaced or refilled by that unmanifested object.
+    if (!actor.crewV85?.personalEquipment && this.weaponPickup && !this.weaponPickup.taken && distanceBetween(actor, this.weaponPickup) < 118) {
+      list.push({ kind: 'weapon-pickup', category: 'pickup', target: this.weaponPickup, distance: rank(this.weaponPickup), prompt: 'E  RÉCUPÉRER LE FUSIL M41A' });
+    }
+    if (this.toolPickup && !this.toolPickup.taken && distanceBetween(actor, this.toolPickup) < 105) {
+      list.push({ kind: 'tool-pickup', category: 'pickup', target: this.toolPickup, distance: rank(this.toolPickup), prompt: 'E  RÉCUPÉRER LE CHALUMEAU' });
+    }
+    return list;
+  }
+
+  selectInteractionTargetV188(actor = this.player) {
+    const candidates = this.interactionCandidatesV188(actor).filter((entry) => entry && Number.isFinite(entry.distance));
+    const actions = candidates.filter((entry) => entry.category !== 'pickup');
+    const pickup = candidates.filter((entry) => entry.category === 'pickup').sort((a, b) => a.distance - b.distance)[0] || null;
+    const nearestAction = Math.min(...actions.map((entry) => entry.distance));
+    if (pickup && (!actions.length || pickup.distance < nearestAction)) return pickup;
+    return actions[0] || null;
+  }
+
   interact(actor = this.player) {
     if (!actor || (actor.coop && !this.coopEnabled) || this.mission?.state !== 'active') return false;
     const ally = actor === this.player ? this.coop : this.player;
     if (this.coopEnabled && this.revive(actor, ally)) return true;
-    const playerCenter = actor.x + actor.w / 2;
-    const keyDrop = this.drops.find((drop) => !drop.taken && drop.type === 'security-key' && distanceBetween(actor, drop) < 100);
-    if (keyDrop) {
-      keyDrop.taken = true;
-      this.inventory.securityKeys += 1;
-      this.mission.objectives.route = true;
-      this.setCheckpoint('security', actor.x, actor.y);
-      this.onEvent({ type: 'resource', resource: 'security-key', amount: 1 });
-      this.audio?.ui();
-      this.setInteractionAnimation(actor, 'ground-interact', 0.55);
-      return true;
-    }
-    const supply = this.supplies.find((candidate) => !candidate.used && distanceBetween(actor, candidate) < 105);
-    if (supply) return this.collectSupply(actor, supply);
-    // This legacy field pickup supplies the global M41A loadout. Personal V85
-    // inventories cannot be replaced or refilled by that unmanifested object.
-    if (!actor.crewV85?.personalEquipment && !this.weaponPickup.taken && distanceBetween(actor, this.weaponPickup) < 118) {
-      cancelTacticalReloadV77(actor, 'weapon-changed');
-      this.weaponPickup.taken = true;
-      actor.weaponMode = 'rifle';
-      actor.magazineSize = MAGAZINE_SIZE;
-      actor.ammo = MAGAZINE_SIZE;
-      actor.ammoReserve += 60;
-      this.setInteractionAnimation(actor, 'ground-interact', 0.65);
-      this.onEvent({ type: 'supply', item: 'M41A', amount: 60 });
-      this.audio?.ui();
-      return true;
-    }
-    if (!this.toolPickup.taken && distanceBetween(actor, this.toolPickup) < 105) {
-      this.toolPickup.taken = true;
-      this.inventory.cutter = true;
-      this.setInteractionAnimation(actor, 'ground-interact', 0.65);
-      this.onEvent({ type: 'supply', item: 'CHALUMEAU', amount: 1 });
-      this.audio?.ui();
-      return true;
-    }
-    // Optional room admission preserves native effects and default campaign behavior.
-    if (this.powerNode && !this.powerNode.active && distanceBetween(actor, this.powerNode) < 130
-      && this.admitNativeTerminalInteractionV156?.(actor, this.powerNode) !== false) {
-      this.powerNode.active = true;
-      this.mission.objectives.power = true;
-      this.setCheckpoint('power', actor.x, actor.y);
-      this.setInteractionAnimation(actor, 'control-use', 0.8);
-      this.onEvent({ type: 'power-restored' });
-      this.audio?.ui();
-      return true;
-    }
-    if (this.archiveTerminal && !this.archiveTerminal.recovered && distanceBetween(actor, this.archiveTerminal) < 130
-      && this.admitNativeTerminalInteractionV156?.(actor, this.archiveTerminal) !== false) {
-      if (!this.mission.objectives.boss) return this.locked('NEUTRALISER LA MENACE ALPHA');
-      this.archiveTerminal.recovered = true;
-      this.mission.objectives.archive = true;
-      this.inventory.intel += 3;
-      this.setCheckpoint('archive', actor.x, actor.y);
-      this.setInteractionAnimation(actor, 'control-use', 0.85);
-      this.onEvent({ type: 'archive-recovered', intel: 3 });
-      this.audio?.ui();
-      return true;
-    }
-    const vent = this.vents.find((candidate) => distanceBetween(actor, candidate) < 125);
-    if (vent) {
-      if (vent.requiresTool && !this.inventory.cutter) return this.locked('CHALUMEAU DE MAINTENANCE REQUIS');
-      this.setToolAnimation(actor, 'cutting-torch', 0.95);
-      vent.open = true;
-      actor.x = vent.targetX;
-      actor.y = vent.targetY;
-      this.mission.objectives.route = true;
-      this.setCheckpoint('vent', actor.x, actor.y);
-      this.onEvent({ type: 'shortcut' });
-      this.audio?.ui();
-      return true;
-    }
-    const door = this.doors.find((candidate) => Math.abs(playerCenter - (candidate.x + candidate.w / 2)) < this.doorInteractionReachV188(candidate, actor) && Math.abs(actor.y - candidate.y) < candidate.h + 60);
-    if (door) {
-      const requirement = this.doorRequirement(door);
-      if (requirement) return this.locked(requirement);
-      door.open = !door.open;
-      if (door.lockedBy) this.setToolAnimation(actor, 'access-tuner', 0.7);
-      else this.setInteractionAnimation(actor, 'force-interact', 0.7);
-      this.onEvent({ type: 'door', doorId: door.id, open: door.open });
-      this.audio?.ui();
-      return true;
-    }
-    if (this.objective && distanceBetween(actor, this.objective) < 125) {
-      const missing = this.missingExtractionRequirement();
-      if (missing) return this.locked(missing);
-      this.setInteractionAnimation(actor, 'control-use', 0.7);
-      this.completeMission(actor);
-      return true;
-    }
+    const choice = this.selectInteractionTargetV188(actor);
+    if (choice) return this.performInteractionV188(actor, choice);
     if (this.vehicle?.active && distanceBetween(actor, this.vehicle) < 210) return this.toggleVehicle(actor);
     return false;
+  }
+
+  performInteractionV188(actor, choice) {
+    const target = choice.target;
+    switch (choice.kind) {
+      case 'security-key':
+        target.taken = true;
+        this.inventory.securityKeys += 1;
+        this.mission.objectives.route = true;
+        this.setCheckpoint('security', actor.x, actor.y);
+        this.onEvent({ type: 'resource', resource: 'security-key', amount: 1 });
+        this.audio?.ui();
+        this.setInteractionAnimation(actor, 'ground-interact', 0.55);
+        return true;
+      case 'supply': return this.collectSupply(actor, target);
+      case 'weapon-pickup':
+        cancelTacticalReloadV77(actor, 'weapon-changed');
+        target.taken = true;
+        actor.weaponMode = 'rifle';
+        actor.magazineSize = MAGAZINE_SIZE;
+        actor.ammo = MAGAZINE_SIZE;
+        actor.ammoReserve += 60;
+        this.setInteractionAnimation(actor, 'ground-interact', 0.65);
+        this.onEvent({ type: 'supply', item: 'M41A', amount: 60 });
+        this.audio?.ui();
+        return true;
+      case 'tool-pickup':
+        target.taken = true;
+        this.inventory.cutter = true;
+        this.setInteractionAnimation(actor, 'ground-interact', 0.65);
+        this.onEvent({ type: 'supply', item: 'CHALUMEAU', amount: 1 });
+        this.audio?.ui();
+        return true;
+      case 'power':
+        target.active = true;
+        this.mission.objectives.power = true;
+        this.setCheckpoint('power', actor.x, actor.y);
+        this.setInteractionAnimation(actor, 'control-use', 0.8);
+        this.onEvent({ type: 'power-restored' });
+        this.audio?.ui();
+        return true;
+      case 'archive':
+        if (!this.mission.objectives.boss) return this.locked('NEUTRALISER LA MENACE ALPHA');
+        target.recovered = true;
+        this.mission.objectives.archive = true;
+        this.inventory.intel += 3;
+        this.setCheckpoint('archive', actor.x, actor.y);
+        this.setInteractionAnimation(actor, 'control-use', 0.85);
+        this.onEvent({ type: 'archive-recovered', intel: 3 });
+        this.audio?.ui();
+        return true;
+      case 'vent':
+        if (target.requiresTool && !this.inventory.cutter) return this.locked('CHALUMEAU DE MAINTENANCE REQUIS');
+        this.setToolAnimation(actor, 'cutting-torch', 0.95);
+        target.open = true;
+        actor.x = target.targetX;
+        actor.y = target.targetY;
+        this.mission.objectives.route = true;
+        this.setCheckpoint('vent', actor.x, actor.y);
+        this.onEvent({ type: 'shortcut' });
+        this.audio?.ui();
+        return true;
+      case 'door': {
+        const requirement = this.doorRequirement(target);
+        if (requirement) return this.locked(requirement);
+        target.open = !target.open;
+        if (target.lockedBy) this.setToolAnimation(actor, 'access-tuner', 0.7);
+        else this.setInteractionAnimation(actor, 'force-interact', 0.7);
+        this.onEvent({ type: 'door', doorId: target.id, open: target.open });
+        this.audio?.ui();
+        return true;
+      }
+      case 'objective': {
+        const missing = this.missingExtractionRequirement();
+        if (missing) return this.locked(missing);
+        this.setInteractionAnimation(actor, 'control-use', 0.7);
+        this.completeMission(actor);
+        return true;
+      }
+      default:
+        // A kind added by an upper layer is handled there; never act on another target instead.
+        return false;
+    }
   }
 
   locked(requirement) {
@@ -2504,15 +2566,8 @@ export class GameEngine {
     if (!actor?.alive) return this.mission?.state === 'failed' ? 'ENTRÉE  REPRENDRE AU CHECKPOINT' : '';
     const ally = actor === this.player ? this.coop : this.player;
     if (this.coopEnabled && ally?.downed && distanceBetween(actor, ally) < REVIVE_RANGE) return 'E  RÉANIMER LE COÉQUIPIER';
-    const actorCenter = actor.x + actor.w / 2;
-    const door = this.doors.find((candidate) => Math.abs(actorCenter - (candidate.x + candidate.w / 2)) < this.doorInteractionReachV188(candidate, actor));
-    if (door) return this.doorRequirement(door) ? `E  VERROUILLÉ — ${this.doorRequirement(door)}` : 'E  ACTIONNER LA PORTE';
-    if (this.powerNode && !this.powerNode.active && distanceBetween(actor, this.powerNode) < 130
-      && this.admitNativeTerminalInteractionV156?.(actor, this.powerNode) !== false) return 'E  RÉTABLIR LE CIRCUIT AUXILIAIRE';
-    if (this.archiveTerminal && !this.archiveTerminal.recovered && distanceBetween(actor, this.archiveTerminal) < 130
-      && this.admitNativeTerminalInteractionV156?.(actor, this.archiveTerminal) !== false) return 'E  EXTRAIRE LES ARCHIVES';
-    if (this.vents.some((vent) => distanceBetween(actor, vent) < 125)) return this.inventory.cutter || this.vents.every((vent) => !vent.requiresTool) ? 'E  OUVRIR / EMPRUNTER LE CONDUIT' : 'CHALUMEAU REQUIS';
-    if (this.objective && distanceBetween(actor, this.objective) < 125) return this.missingExtractionRequirement() ? `E  EXTRACTION BLOQUÉE — ${this.missingExtractionRequirement()}` : 'E  CONFIRMER L’EXTRACTION';
+    const choice = this.selectInteractionTargetV188(actor);
+    if (choice?.prompt) return choice.prompt;
     if (this.vehicle?.active && distanceBetween(actor, this.vehicle) < 210) return actor.inVehicle ? `V  QUITTER ${this.vehicle.name || 'LE VÉHICULE'}` : `V  PILOTER ${this.vehicle.name || 'LE VÉHICULE'}`;
     if (this.findCover(actor)) return 'S  COUVERTURE · F  TIR · R  RECHARGER';
     if (this.nearestLadder(actor)) return 'W / S  GRIMPER · ESPACE  SAUTER';
