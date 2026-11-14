@@ -277,6 +277,7 @@ test('real melee and a telegraphed alien strike damage the barrier; rear-plane e
 test('a fast actual production enemy crossing between frames triggers one mine, while a preceding thin wall protects it', () => {
   for (const blocked of [false, true]) {
     const { engine, actor, emitted } = fixture({ names: ['Electroshock Trap'] }); actor.x = 360;
+    engine.insertionGraceV188 = null; // V188: the crossing is measured after the insertion grace.
     const trap = deploy(engine, 'Electroshock Trap'); actor.x = 160;
     const target = enemy(engine, 600), health = target.health;
     target.speed = 25000; target.facing = -1; target.alert = true;

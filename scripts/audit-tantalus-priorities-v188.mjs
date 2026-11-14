@@ -90,6 +90,14 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
     "previousSha256": "a8f09d16a1e137b36b95c1473910d228289c2515b26bd3704584a2f13cfabcf8",
     "currentSha256": "980774628d9d0065c92f7b1105a9f91c2dda37bb38f610300ace5894693c1faf"
   },
+  "scripts/verify-ecosystem-missions-v131.mjs": {
+    "previousSha256": "c716b405a36ef91816d72e8f97a1fd431717e31ac5c98c37e6e02d20e5a26fb4",
+    "currentSha256": "7da0642a470de3748caa4dfc7ed24dc008457d57a6d0d5d5b657694227712641"
+  },
+  "scripts/verify-enemy-tactics-v130.mjs": {
+    "previousSha256": "8fa1f8de291e353563d45d741d3563d71fdb1434101e8cc776123f5c2229c17a",
+    "currentSha256": "e5bb1021d7e5b5dd62c98823d7eba1cb5e4b0de6a1101f9e28d3d8c6c2474cff"
+  },
   "scripts/verify-hub-lift-transit-v163.mjs": {
     "previousSha256": "91c11a74e3ebdd63beb3147a959bee1e5f2b679de87ea811b3516d515f7a0f0a",
     "currentSha256": "75c66348aced19ffd5c9c95a5c2dd2224f27c9cbfcd238dd9737d8f774fc8553"
@@ -105,6 +113,10 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   "scripts/verify-native-qa-resources-v187.mjs": {
     "previousSha256": "763a500bddbdbac72145b64fe88419280a9d6377b80cfb7f2333140f95bc7b14",
     "currentSha256": "0b67859c912f521a2d674140dd78ea3f2ba69736ac6d6be5f4d8b8ee3a6b1f50"
+  },
+  "scripts/verify-placeables-extension-v132.mjs": {
+    "previousSha256": "961f003da975a98262df42df0c0801e27b0cd24ac37062b97676049afb12fc2a",
+    "currentSha256": "ea484d509c56907a786a39bdd59dfc56144c77fe3f91c0c95b722e698387c6ac"
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "328c764b2bf467d0bc21ae86abf415a7722bd0a88cba486eb2167c22fa8f0b84",

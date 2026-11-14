@@ -182,6 +182,7 @@ test('original creature controllers respect sight blockers and warn before conta
 });
 test('Sauria charge, leap, burrow, swimming bounds and frontal plates change real combat outcomes', async () => {
   const { engine } = await fixture('pangaea-second-extinction');
+  engine.insertionGraceV188 = null; // V188: these behaviours are measured after the insertion grace.
   const casteActor = id => engine.enemies.find(actor => actor.ecosystemActorV131.caste === id && actor.ecosystemActorV131.role === 'sauria');
   const charger = casteActor('charger'); locate(engine, centerX(charger) - 200);
   charger.attackClock = 0; const start = charger.x;

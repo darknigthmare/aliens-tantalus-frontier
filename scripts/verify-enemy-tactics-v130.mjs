@@ -303,6 +303,7 @@ test('the real mission navigator retains an occupied APC as a perceived target w
   engine.start({ ...options, missionLevel: plan, verticalWorldV130: false });
   for (let n = 0; n < 6; n++) await Promise.resolve();
   engine.enemyAtlasLoadingPausedV65 = false; engine.userCasteLoadingV88 = false;
+  engine.insertionGraceV188 = null; // V188: pursuit is measured after the insertion grace.
   const support = engine.platforms.find(platform => platform.id === 'node-platform-ship-cargo');
   assert.ok(support);
   engine.enemies = []; engine.walls = []; engine.covers = []; engine.doors = [];
