@@ -135,12 +135,18 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       return temporary.captureForgeMissionRoomV141();
     }
 
+    // V188: Forge doors use the native reach rule (max(118, half closed frame + half marine + 12)),
+    // so a wide pressure frame stays operable from where it stops the marine.
+    forgeDoorReachV188(door, actor) {
+      return this.doorInteractionReachV188?.(door, actor) ?? 118;
+    }
+
     forgeLinkedDoorV141(actor = this.player) {
       const session = this.forgeSessionV141;
       if (!session || !actor) return null;
       const choices = outgoingForgeLinksV141(session.project, session.currentRoomId).flatMap(link => {
         const door = this.doors.find(entry => entry.forgeCellIdV141 === link.from.cellId);
-        if (!door || Math.abs(actor.x + actor.w / 2 - door.x - door.w / 2) >= 118
+        if (!door || Math.abs(actor.x + actor.w / 2 - door.x - door.w / 2) >= this.forgeDoorReachV188(door, actor)
           || actor.y + actor.h <= door.y || actor.y >= door.y + door.h) return [];
         return [{ link, door, distance: Math.abs(actor.x + actor.w / 2 - door.x - door.w / 2) }];
       });
@@ -285,7 +291,7 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       // Recovery is an inherited fallback: preserve actionable Forge validation
       // and do not let V51 extract through a partition while reaching a pickup.
       const objectiveBlocksRecovery = near(actor, this.objective);
-      const door = list(this.doors).find(candidate => Math.abs(actor.x + actor.w / 2 - candidate.x - candidate.w / 2) < 118
+      const door = list(this.doors).find(candidate => Math.abs(actor.x + actor.w / 2 - candidate.x - candidate.w / 2) < this.forgeDoorReachV188(candidate, actor)
         && Math.abs(actor.y - candidate.y) < candidate.h + 60);
       const doorBlocksRecovery = door && !this.forgeInteractionClearV141(actor, door);
       if (!objectiveBlocksRecovery && !doorBlocksRecovery && !this.forgePendingTerminalV156(actor)
@@ -375,7 +381,7 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       if (terminal && !this.forgeInteractionClearV141(actor, terminal)) return this.locked('TERMINAL INACCESSIBLE DERRIÈRE UNE CLOISON');
       if ((terminal === this.archiveTerminal && terminal && !this.mission.objectives.boss)
         || (!terminal && this.forgeBlockedNarrativeArchiveV156(actor))) return this.locked('NEUTRALISER LA MENACE ALPHA');
-      const door = list(this.doors).find(candidate => Math.abs(actor.x + actor.w / 2 - candidate.x - candidate.w / 2) < 118
+      const door = list(this.doors).find(candidate => Math.abs(actor.x + actor.w / 2 - candidate.x - candidate.w / 2) < this.forgeDoorReachV188(candidate, actor)
         && Math.abs(actor.y - candidate.y) < candidate.h + 60);
       if (door && !this.forgeInteractionClearV141(actor, door)) return this.locked('SAS INACCESSIBLE DERRIÈRE UNE CLOISON');
       return super.interact(actor);
@@ -425,7 +431,7 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       if (terminal && !this.forgeInteractionClearV141(actor, terminal)) return 'E  TERMINAL BLOQUÉ PAR UNE CLOISON';
       if ((terminal === this.archiveTerminal && terminal && !this.mission.objectives.boss)
         || (!terminal && this.forgeBlockedNarrativeArchiveV156(actor))) return 'E  NEUTRALISER LA MENACE ALPHA';
-      const door = list(this.doors).find(candidate => Math.abs(actor.x + actor.w / 2 - candidate.x - candidate.w / 2) < 118
+      const door = list(this.doors).find(candidate => Math.abs(actor.x + actor.w / 2 - candidate.x - candidate.w / 2) < this.forgeDoorReachV188(candidate, actor)
         && Math.abs(actor.y - candidate.y) < candidate.h + 60);
       if (door && !this.forgeInteractionClearV141(actor, door)) return 'E  SAS BLOQUÉ PAR UNE CLOISON';
       return super.getInteractionPrompt(actor);
