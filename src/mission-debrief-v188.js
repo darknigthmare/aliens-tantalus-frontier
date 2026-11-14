@@ -18,8 +18,8 @@ export function paidRewardsLineV188(paid, language = 'fr') {
   if (!paid) return '';
   const value = key => round(paid[key]);
   return language === 'en'
-    ? `Paid to the Tantalus: +${value('credits')} CR · +${value('alloy')} alloy · +${value('research')} R&D · +${value('pathogen')} pathogen`
-    : `Versé au Tantalus : +${value('credits')} CR · +${value('alloy')} alliage · +${value('research')} R&D · +${value('pathogen')} pathogène`;
+    ? `Paid to the Tantalus: +${value('credits')} CR, +${value('alloy')} alloy, +${value('research')} R&D, +${value('pathogen')} pathogen`
+    : `Versé au Tantalus : +${value('credits')} CR, +${value('alloy')} alliage, +${value('research')} R&D, +${value('pathogen')} pathogène`;
 }
 
 /** The command journal logs an operation result under its campaign id; show the campaign name. */

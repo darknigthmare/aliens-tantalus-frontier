@@ -6408,6 +6408,8 @@ export const EN_CATALOG_V185 = Object.freeze({
 "tir de suppression": "suppressive fire",
 "tourelle du véhicule": "vehicle gunnery",
 "vide spatial": "vacuum",
+// V188 playthrough bug hunt (reviewed through i18n-catalog-maintenance-v186).
+"Échec : stabilité -6, infestation +7 et un opérateur blessé.": "Failure: stability -6, infestation +7 and one operator wounded.",
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 // V188 systems bug hunt (merged via i18n-catalog-maintenance-v186 review).
@@ -6900,4 +6902,12 @@ export const EN_PATTERNS_V185 = Object.freeze({
 "{0} : tir à énergie.": "{0}: energy fire.",
 "{0} : tir électrique.": "{0}: electric fire.",
 "{0} : tir.": "{0}: fire.",
+// V188 playthrough bug hunt (reviewed through i18n-catalog-maintenance-v186).
+"Objectif accompli : stabilité +{0}, infestation -{1}, récompenses transférées.": "Objective complete: stability +{0}, infestation -{1}, rewards transferred.",
+"Objectif accompli : stabilite +{0}, infestation -{1}, recompenses transferees.": "Objective complete: stability +{0}, infestation -{1}, rewards transferred.",
+"Retraite : stabilité -{0}, infestation +{1}.": "Retreat: stability -{0}, infestation +{1}.",
+"Retraite : stabilite -{0}, infestation +{1}.": "Retreat: stability -{0}, infestation +{1}.",
+"Déploiement lancé vers {0}.": "Deployment launched to {0}.",
+"Deploiement lance vers {0}.": "Deployment launched to {0}.",
+"Versé au Tantalus : +{0} CR, +{1} alliage, +{2} R&D, +{3} pathogène": "Paid to the Tantalus: +{0} CR, +{1} alloy, +{2} R&D, +{3} pathogen",
 });
