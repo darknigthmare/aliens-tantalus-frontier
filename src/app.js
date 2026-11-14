@@ -1036,7 +1036,9 @@ function markStoryDebriefOnViewV188() {
   try {
     const candidate = clone(saveSystem.data);
     if (markStoryDebriefSeenV188(candidate, STORY_RELAY_CAMPAIGN_ID_V188)) {
-      saveSystem.commit(candidate); renderHubStatus?.();
+      // The finished QZ-18 plan no longer hides the recommended next chapter (★) on the briefing table.
+      if (candidate.strategy.plannedCampaignId === STORY_RELAY_CAMPAIGN_ID_V188) candidate.strategy.plannedCampaignId = null;
+      saveSystem.commit(candidate); renderHubStatus?.(); renderCampaigns();
       void playStoryCinematicV188('cin-20').then(() => playStoryCinematicV188('cin-20-rook'));
     }
   } catch (error) { toast(error.message); }

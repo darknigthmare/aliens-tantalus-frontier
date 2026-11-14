@@ -159,6 +159,15 @@ export function withQz17LevelDressingV188(Base) {
       return sleepers;
     }
 
+    // M / pause panel: the campaign record keeps its English objective key; the player reads the chapter goal.
+    objectivePanelContentV188(language = 'fr') {
+      const inherited = super.objectivePanelContentV188?.(language) || null;
+      if (!this.qz17DressingActiveV188) return inherited;
+      return { ...(inherited || {}), campaignObjective: language === 'en'
+        ? 'Investigate the ghost cargo: four pieces of evidence, a route verdict, then extraction.'
+        : 'Enquêter sur la cargaison fantôme : quatre preuves, un verdict d’itinéraire, puis l’extraction.' };
+    }
+
     qz17MaintenanceRouteOpenV188() {
       const route = this.narrativeCollectablesV68?.route;
       return Boolean(route?.applied && route.choiceId === 'follow-maintenance-trace');

@@ -616,6 +616,10 @@ export class GameEngine extends CompleteGameEngine {
 
   applyHazards(player) {
     if (!player?.alive || player.hazardClock > 0) return;
+    // After an electrical stun the marine gets a short window to step off the live strip;
+    // otherwise the next shock lands the frame the stun ends and a strip can never be crossed.
+    const now = Number(this.animationTime) || 0, rearmAt = Number(player.hazardRearmAtV188);
+    if (rearmAt > now && rearmAt < now + 3) return;
     const target = player.inVehicle && this.vehicle?.active ? this.vehicle : { x: player.x + 6, y: player.y + player.h - 14, w: player.w - 12, h: 14 };
     const hazard = this.hazards.find((candidate) => candidate.active && overlaps(target, candidate));
     if (!hazard) return;
@@ -645,6 +649,7 @@ export class GameEngine extends CompleteGameEngine {
     if (contract.kind === 'electrical' && !player.inVehicle) {
       player.vx = 0;
       player.actionClock = Math.max(player.actionClock || 0, Number(contract.stun) || 0);
+      player.hazardRearmAtV188 = now + Math.max(0.72, Number(contract.stun) || 0) + 0.5;
     }
     this.environmentStatus.lastHazard = contract.kind;
     player.hazardKind = contract.kind;

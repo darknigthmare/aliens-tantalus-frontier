@@ -19,10 +19,12 @@ const ORDER = ['power', 'route', 'boss', 'archive', 'extract'];
 
 /** Pure: the lines shown by the panel. A step already true at start (absent
  * from this map) is not listed, so the player only sees real tasks. */
-export function buildObjectivePanelV188({ campaignObjective = '', objectives = null, initial = null, register = 'tension', language = 'fr' } = {}) {
+export function buildObjectivePanelV188({ campaignObjective = '', objectives = null, initial = null, register = 'tension', language = 'fr', steps: authored = null } = {}) {
   const text = LABELS[language === 'en' ? 'en' : 'fr'], profile = missionRegisterProfileV188(register);
-  const steps = ORDER.filter(key => objectives && key in objectives && (key === 'extract' || initial?.[key] === false))
-    .map(key => Object.freeze({ key, label: text[key], done: Boolean(objectives[key]) }));
+  // A mission with its own steps (QZ-18 investigation) lists them in its order and words.
+  const steps = Array.isArray(authored) ? authored.map(step => Object.freeze({ key: String(step.key), label: String(step.label), done: Boolean(step.done) }))
+    : ORDER.filter(key => objectives && key in objectives && (key === 'extract' || initial?.[key] === false))
+      .map(key => Object.freeze({ key, label: text[key], done: Boolean(objectives[key]) }));
   const saveMode = profile.save.free ? 'free' : profile.save.terminal ? 'terminal' : 'checkpoint';
   const registerLabel = language === 'en' ? REGISTER_EN[profile.id] : profile.label;
   return Object.freeze({ title: text.title, campaignObjective: String(campaignObjective || ''), steps: Object.freeze(steps),
@@ -77,8 +79,9 @@ export function withMissionObjectivePanelV188(Base) {
     showObjectivesV188(seconds = OBJECTIVE_PANEL_V188.peekSeconds) { this.objectivePeekV188 = seconds; return true; }
     objectivePanelModelV188() {
       let language = 'fr'; try { language = currentLanguageV185(); } catch {}
-      return buildObjectivePanelV188({ campaignObjective: this.missionPlan?.campaign?.objective || this.campaign?.objective || '',
-        objectives: this.mission?.objectives, initial: this.initialObjectivesV188, register: this.missionRegisterV188, language });
+      const authored = this.objectivePanelContentV188?.(language) || null;
+      return buildObjectivePanelV188({ campaignObjective: authored?.campaignObjective || this.missionPlan?.campaign?.objective || this.campaign?.objective || '',
+        objectives: this.mission?.objectives, initial: this.initialObjectivesV188, register: this.missionRegisterV188, language, steps: authored?.steps || null });
     }
     update(delta) {
       if (this.objectivePeekV188 > 0 && Number.isFinite(delta)) this.objectivePeekV188 = Math.max(0, this.objectivePeekV188 - delta);
