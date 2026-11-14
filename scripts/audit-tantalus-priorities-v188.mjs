@@ -40,7 +40,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "command-v110.css": {
     "previousSha256": "4c22914bedd2d9de880126cd29dd5e458d37e85d56603fae15600b4621b94c42",
-    "currentSha256": "1dcf80ad24a380b68a268e0e9dba2029ea6cf05ff5acb7b550ce33de6ba97703"
+    "currentSha256": "fcd7c6d52cc691fbd22841a2488808f4024ac8a2b55a6bbad36977217b24aa21"
   },
   "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
     "previousSha256": "95287e9c3f9be2b88db9e391a9a143c4c69be8956b6763e4113645974b9e878d",
@@ -56,11 +56,11 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "package.json": {
     "previousSha256": "ff133a405bfc1ef2afa7085fcb2a6cde27a9f52c4af0de5172a058b47082eb48",
-    "currentSha256": "b288c568d1adc2164ab96d90a68ab6a154e66fca50b064efbbf640759822d469"
+    "currentSha256": "00d2a650d4ccde588968ccccfc48ed092616a02cefdc33c09a34eb1e6bc0f135"
   },
   "player-onboarding-v84.css": {
     "previousSha256": "ae49e974d70f1a46dbd28da6d5515fac0124c992591cf0c1c50ad3e7e3d1cfbf",
-    "currentSha256": "c81483070f6a421a3a72206b0191ea3e0da30999341e2306886006d91349f9db"
+    "currentSha256": "6777002acd6f07dc583388b59aecf11a03e7e254aca7dab3c93c3b21d49522a4"
   },
   "runtime-level.css": {
     "previousSha256": "28f938a757c83c1ca286d8520afd164fe1b6f8bc1524bfd9d3fb8e7e0f36f4f8",
@@ -88,11 +88,11 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "328c764b2bf467d0bc21ae86abf415a7722bd0a88cba486eb2167c22fa8f0b84",
-    "currentSha256": "33738fff7f9b03fad8b07e0a1beeabdbf80bc24093d42ce3f7749f74ea38a6c3"
+    "currentSha256": "e0c306e37b43e09a8358f11d611e7c5982701ca780995396819e919fcd75a746"
   },
   "src/app.js": {
     "previousSha256": "482835e65677c536085a1344cf61c3ffa5e09e2af1b8029b949e000a533038ae",
-    "currentSha256": "ff45f7b75d69261867a2725f5791efef590cf8d5def05d0774cc61b4b7980cb2"
+    "currentSha256": "7a84259fe7e8c6b1e5c78f9f57e3cb025ee73b35cbc6696c8aa7a91e3c0d1685"
   },
   "src/archive-relay-presentation-v160.js": {
     "previousSha256": "e628ccee6aa0a2ee40eea1fdd3b66b11800c3185c39bbd91c18d662c05749a30",
@@ -174,17 +174,25 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
     "previousSha256": "1cc35c82a83910dc154305f952118194162cde11382388734529bb5a73a54a4e",
     "currentSha256": "4ef079604de7e2d5a18057ddcd401219c786242484a59b5f77dd902f695d2588"
   },
+  "src/hub-v71-runtime.js": {
+    "previousSha256": "0013ef68e3db38888a83e97b88ab5615b8a3b4ebe9f229c7d659a5381433956a",
+    "currentSha256": "bddf73a89222aa36e8863deac625d3cf5a3d6b058778afbd838291a52cceca24"
+  },
   "src/hub-v81-runtime.js": {
     "previousSha256": "26a75cc4fe0e7280146b370c9183cd89a52dabddd865f408289439fe824e4067",
     "currentSha256": "875c011f60f0bf69b5142007ac65f104a483ed76e93a15b55ddba207b315068b"
   },
   "src/i18n-en-catalog-v185.js": {
     "previousSha256": "ac3632c302294c3e2869d673ad6d8cd861e1b0f62641d2d16335387746a6218a",
-    "currentSha256": "653d105ae5ac8f9358d0b20ff163ee7c5f65fb73008af784fae3f4fcd3775a3c"
+    "currentSha256": "9406a641f3e27235cd19831dbc1b9b9257596f219facc353d32be878099f9d21"
   },
   "src/narrative-collectables-runtime-v68.js": {
     "previousSha256": "a95591168a10032265fccb51333f5a2886f4f647f878005c8a84676b95eed809",
     "currentSha256": "d98759e644477a46efae3f818250851082cf9776884d359938bad98b26e4c85e"
+  },
+  "src/npc-cal-logistics-route-v165.js": {
+    "previousSha256": "e8206918faeede321fac0b43275da1a62a80e9591c7ff97b86ec8cf9ed7f5acc",
+    "currentSha256": "6f287422336468f2bd47f30043801efbac95d641b4c6e53c12abc9cac3438202"
   },
   "src/npc-dialogue-v62.js": {
     "previousSha256": "806cfb582c5506cf62d09fc1addbf9a2461839c8d38e0e8a24221ef8ec73ac21",
@@ -216,7 +224,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "styles.css": {
     "previousSha256": "5d7f49517ea4377aaf2847e7ef5f5dd5f6e4b015301e1280072d41fd9edab36c",
-    "currentSha256": "8e9e071f2c76bcae6706c7562ed9ea5bcbab908e8daead8c1792d6fbaa67248d"
+    "currentSha256": "34e82f53ba2f34e2de8bf53c3382093b03c40f4206f60385fc8591f59972f94b"
   },
   "sw.js": {
     "previousSha256": "ff86bba365c3875c8ebaeb0abe13b2a6185ccd5f1a030b4ee5b15ac0e4a12f9b",

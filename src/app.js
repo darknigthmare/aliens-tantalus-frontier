@@ -383,8 +383,15 @@ function toast(message) {
   setTimeout(() => item.remove(), 3600);
 }
 
+// V188: in English the labels are written directly; a joined "4 CARBURANT · 6 RAVIT." line
+// cannot be matched by the automatic catalog.
+const COST_LABELS_EN_V188 = Object.freeze({
+  credits: 'CR', alloy: 'ALLOY', fuel: 'FUEL', medical: 'MEDICAL', research: 'R&D',
+  pathogen: 'PATHOGEN', power: 'POWER', supplies: 'SUPPLY'
+});
 function formatCost(cost = {}) {
-  return Object.entries(cost).map(([key, value]) => `${number(value)} ${COST_LABELS[key] || key.toUpperCase()}`).join(' · ') || 'AUCUN COÛT';
+  const labels = globalThis.document?.documentElement?.lang === 'en' ? COST_LABELS_EN_V188 : COST_LABELS;
+  return Object.entries(cost).map(([key, value]) => `${number(value)} ${labels[key] || key.toUpperCase()}`).join(' · ') || 'AUCUN COÛT';
 }
 
 function meter(label, value, invert = false) {
@@ -1395,10 +1402,13 @@ function renderColonyReconstructionV188() {
     const item = document.createElement('li'), label = document.createElement('span');
     label.textContent = `${entry.criterion} · ${'■'.repeat(entry.validated)}${'▣'.repeat(entry.invested - entry.validated)}${'□'.repeat(3 - entry.invested)} ${entry.current || ''}`;
     item.append(label);
-    if (entry.next) {
+    if (entry.next || entry.pending) {
+      // Player-facing resource names, never the save keys (credits, alloy…).
+      const cost = entry.next ? formatCost(entry.next.cost) : '';
+      // A pending site names the level already paid for, not the following one.
       const button = Object.assign(document.createElement('button'), { type: 'button', className: 'button compact',
         textContent: entry.pending ? `${en ? 'AWAITING' : 'EN ATTENTE'} · ${entry.pendingLabel}`
-          : `${en ? 'BUILD' : 'LANCER'} · ${entry.next.label} (${formatCost(entry.next.cost)} · ${entry.next.hours} h)` });
+          : `${en ? 'BUILD' : 'LANCER'} · ${entry.next.label} (${cost} · ${entry.next.hours} h)` });
       button.disabled = entry.pending;
       button.onclick = () => {
         try {
@@ -4359,7 +4369,7 @@ function bind() {
   // V188 complete J1 key remapping (§53.8): capture-phase translation layer.
   installKeyRemapV188(globalThis, () => saveSystem.data?.settings?.keyBindingsV188);
   keyBindingsUiV188 = mountKeyBindingsUiV188(byId('setting-key-bindings-v188'), {
-    getBindings: () => saveSystem.data.settings.keyBindingsV188, language: document.documentElement.lang,
+    getBindings: () => saveSystem.data.settings.keyBindingsV188, language: () => document.documentElement.lang,
     onChange: (bindings) => {
       try { saveSystem.commit({ settings: { ...saveSystem.data.settings, keyBindingsV188: normalizeKeyBindingsV188(bindings) } }); }
       catch (error) { toast(error.message); }
@@ -4506,6 +4516,9 @@ function setupLanguageV185() {
     retranslateStandardLabelV185(byId('return-title'), 'top.menu', 'MENU PRINCIPAL');
     renderProfiles();
     try { renderClock(); } catch { /* the clock appears with the first render */ }
+    // V188 bilingual blocks (QZ17 dossier, Port-Méridien table) are written in the
+    // chosen language at render time: the auto-translation layer cannot switch them.
+    try { renderCommand(); renderStrategy(); renderOperationPlan(); } catch { /* not booted yet */ }
     if (lastHubStatus) renderHubStatus(lastHubStatus);
   });
 }

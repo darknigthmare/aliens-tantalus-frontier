@@ -30,6 +30,8 @@
 .command-maintenance-v110 { margin-top:24px; border:1px solid #354f58; padding:16px; }
 .command-maintenance-v110>summary { cursor:pointer; color:#c8dbdd; letter-spacing:.08em; padding:8px; }
 .command-maintenance-v110 .catalog-grid { margin-top:14px; }
+/* Long neuro/apex option labels must not widen the selects past a phone screen. */
+.command-maintenance-v110 select { display:block; width:100%; max-width:100%; min-width:0; }
 [data-panel="operations"][hidden], [data-developer-only-v110][hidden] { display:none!important; }
 @media(max-width:1050px) { [data-panel="command"] .dashboard-grid { grid-template-columns:1fr; } .command-card-art-v110 { height:130px; } }
 @media(max-width:700px) { .command-brief-v110 { grid-template-columns:1fr; } .command-hero-v110 .hero-copy { padding:22px; } .command-links-v110 { grid-template-columns:repeat(2,minmax(0,1fr)); } .command-section-v110 { gap:12px; flex-wrap:wrap; } .command-section-v110 img { width:92px; height:64px; } [data-panel="command"] .metric-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }

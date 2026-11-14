@@ -82,6 +82,8 @@ export function colonySnapshotV188(save, language = 'fr') {
         current: state.validated ? definition.levels[state.validated - 1][lang] : null,
         // The level paid for and awaiting validation (shown instead of the next, unpaid one).
         pendingLabel: state.invested > state.validated ? definition.levels[state.invested - 1][lang] : null,
+        // The level already paid for and waiting for a Cocyte operation (not the next one).
+        building: state.invested > state.validated ? definition.levels[state.invested - 1][lang] : null,
         next: next ? Object.freeze({ label: definition.levels[state.invested][lang], cost: next.cost, hours: next.hours }) : null });
     })
   });
