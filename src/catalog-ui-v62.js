@@ -799,7 +799,8 @@ export class CatalogWorkbenchV62 {
       createElement(this.document, 'strong', 'catalog-v62__card-title', this.developerModeV110 ? record.name : playerCatalogNameV110(record.name)),
       createElement(this.document, 'span', 'catalog-v62__card-type', record.taxonomy.type === CATALOG_UNKNOWN_V62 ? UNKNOWN_LABEL : this.developerModeV110 ? record.taxonomy.type : playerCatalogNameV110(record.taxonomy.type))
     );
-    if (this.developerModeV110 || record.catalog !== 'enemies') body.append(createElement(this.document, 'span', 'catalog-v62__card-id', record.id));
+    // V188: content ids stay in developer mode; players read the name above.
+    if (this.developerModeV110) body.append(createElement(this.document, 'span', 'catalog-v62__card-id', record.id));
     select.append(media, body);
     if (record.catalogPolicyV105?.archived) body.append(createElement(this.document, 'span', 'catalog-v62__card-type', 'ARCHIVE HISTORIQUE'));
     if (record.documentaryReferenceV105) body.append(createElement(this.document, 'span', 'catalog-v62__card-type', 'ORIGINAL DOCUMENTAIRE · HORS COMBAT'));

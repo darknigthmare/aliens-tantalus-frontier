@@ -1222,7 +1222,7 @@ export function selectStrategicVehicle(save, vehicleId) {
   const gate = getVehicleDeploymentGateV60(vehicle);
   if (!gate.ready) throw new Error(`Châssis indisponible : ${gate.reason}`);
   strategy.selectedVehicleId = vehicleId;
-  addStrategyLog(save, { type: 'loadout', title: 'Vehicule affecte', risk: 0, incident: false, result: vehicleId + ' prepare pour la prochaine operation.' });
+  addStrategyLog(save, { type: 'loadout', title: 'Véhicule affecté', risk: 0, incident: false, result: (vehicle.name || 'Véhicule') + ' préparé pour la prochaine opération.' });
   return vehicleId;
 }
 
@@ -1466,7 +1466,7 @@ export function treatCrewMember(save, crewId) {
   if (['injured', 'recovering'].includes(member.status) && member.health >= 70) member.status = 'active';
   strategy.serial += 1;
   advanceStrategicClock(save, 1);
-  addStrategyLog(save, { type: 'medical', title: 'Traitement individuel', risk: 0, incident: false, result: crewId + ' stabilise : sante +' + healing + '.' });
+  addStrategyLog(save, { type: 'medical', title: 'Traitement individuel', risk: 0, incident: false, result: crewId + ' stabilisé : santé +' + healing + '.' });
   return member;
 }
 

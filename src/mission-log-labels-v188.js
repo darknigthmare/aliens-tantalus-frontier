@@ -114,6 +114,28 @@ export function routeUnlockLabelV188(event = {}, consequences = {}) {
   return nameOrFallbackV188(match?.label, 'route d’accès');
 }
 
+// "OBJECTIF · …" used to print the objective action id (PHASE-COMPLETE,
+// HOLD-STARTED…). Ids come from game-complete-core and cargo-brutal-runtime-v67;
+// the wording is [PROPOSÉ].
+export const OBJECTIVE_ACTION_LABELS_V188 = Object.freeze({
+  'apex-trace': 'trace apex relevée', 'hold-started': 'tenir la position', 'hold-complete': 'position tenue',
+  'specimen-captured': 'spécimen capturé', 'charge-armed': 'charge armée', 'relay-destroyed': 'relais détruit',
+  'target-secured': 'cible sécurisée', 'purge-complete': 'purge terminée', 'boarding-route-open': 'route d’abordage ouverte',
+  'vent-route-mapped': 'conduits cartographiés', 'phase-complete': 'étape terminée', 'cargo-complete': 'opération cargo terminée',
+  'cargo-failed': 'opération cargo compromise', 'cargo-door-opened': 'porte de soute ouverte', 'cargo-obstacle-struck': 'obstacle touché',
+  'cargo-obstacle-cleared': 'obstacle dégagé', 'convoy-started': 'escorte lancée', 'convoy-secured': 'convoi sécurisé',
+  'convoy-casualty': 'perte dans le convoi', 'matriarch-phase': 'la matriarche change de phase'
+});
+export function objectiveActionLabelV188(action) {
+  const id = String(action ?? '').trim();
+  return Object.hasOwn(OBJECTIVE_ACTION_LABELS_V188, id) ? OBJECTIVE_ACTION_LABELS_V188[id] : nameOrFallbackV188(id, 'progression');
+}
+/** Insertion phase for "INSERTION · …": the insertion UI labels, never the phase id. */
+export function insertionPhaseLabelV188(phase, labels = {}) {
+  const id = String(phase ?? '').trim();
+  return Object.hasOwn(labels || {}, id) ? labels[id] : nameOrFallbackV188(id, 'insertion');
+}
+
 /** French mission-log line for a level event, or null when the event is not one of them. */
 export function missionLevelLogLineV188(event = {}, { collectables = [], routes = {} } = {}) {
   const up = text => String(text).toUpperCase();
