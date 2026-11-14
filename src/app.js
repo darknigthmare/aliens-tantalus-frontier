@@ -4580,6 +4580,9 @@ function setupLanguageV185() {
     // V188 bilingual blocks (QZ17 dossier, Port-Méridien table) are written in the
     // chosen language at render time: the auto-translation layer cannot switch them.
     try { renderCommand(); renderStrategy(); renderOperationPlan(); } catch { /* not booted yet */ }
+    // V188: archive stamps (J/D day) are written in the chosen language at render
+    // time; render() keeps the selection, filters, focus and media replay.
+    try { narrativeArchivesUiV68?.render(); missionNarrativeArchivesUiV68?.render(); } catch { /* not booted yet */ }
     if (lastHubStatus) renderHubStatus(lastHubStatus);
   });
 }

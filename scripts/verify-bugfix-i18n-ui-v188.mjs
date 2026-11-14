@@ -153,3 +153,32 @@ test('P2: Armurerie, Véhicules and Xénobiologie dossiers show labels, develope
   assert.equal(formatCatalogValueV62(['common', 'rare'], { key: 'rarity' }), 'Courante · Rare');
   assert.equal(Object.keys(playerCatalogStatsV110({ rarity: 'common' })).length, 0, 'player stat filter unchanged');
 });
+
+// —— P2: developer-only special-operation card ——
+test('P2: the special-operation cards (REGISTRE TANTALUS, LOT JOUABLE) stay behind developer mode', async () => {
+  const { resolvePlayerViewV110, isLocalDeveloperEnvironmentV119 } = await import('../src/player-surfaces-v110.js');
+  assert.equal(resolvePlayerViewV110('operations', false), 'command', 'a player is sent to Commandement');
+  assert.equal(resolvePlayerViewV110('operations', true), 'operations');
+  assert.equal(isLocalDeveloperEnvironmentV119('example.org'), false, 'never on a public host');
+  const html = read('index.html');
+  const panel = html.match(/<section class="view" data-panel="operations"[^>]*>/u)?.[0] || '';
+  assert.match(panel, /data-developer-only-v110 hidden/u);
+  // The only list of cards is inside that panel.
+  const start = html.indexOf(panel), end = html.indexOf('</section>', start);
+  const list = html.indexOf('id="special-operation-list"');
+  assert.ok(list > start && list < end);
+  assert.equal(html.split('id="special-operation-list"').length, 2);
+  const app = read('src/app.js');
+  assert.match(app, /function showView\(name\) \{\n  name = resolvePlayerViewV110\(name, developerModeV110\);/u);
+  assert.match(app, /if \(!isLocalDeveloperEnvironmentV119\(globalThis\.location\?\.hostname\) \|\| !isDeveloperShortcutV110\(event\)/u);
+});
+
+// —— P2: archive list on a live language switch ——
+test('P2: the archive list re-renders on the language event, like the other views', async () => {
+  const app = read('src/app.js');
+  const listener = app.slice(app.indexOf('document.addEventListener(LANGUAGE_EVENT_V185'), app.indexOf('async function boot()'));
+  assert.match(listener, /narrativeArchivesUiV68\?\.render\(\); missionNarrativeArchivesUiV68\?\.render\(\);/u);
+  const { formatArchiveStampV188 } = await import('../src/narrative-archives-ui-v68.js');
+  const stamp = '2026-02-03T04:05:00Z';
+  assert.notEqual(formatArchiveStampV188(stamp, 'fr'), formatArchiveStampV188(stamp, 'en'), 'the stamp depends on the language');
+});
