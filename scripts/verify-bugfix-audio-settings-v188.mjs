@@ -120,3 +120,20 @@ test('language: the save field follows the chosen language; localStorage stays t
   const handler = appSource.slice(appSource.indexOf("byId('language-select-v185')"), appSource.indexOf('LANGUAGE_EVENT_V185, () =>'));
   assert.match(handler, /syncSaveLanguageV188\(saveSystem, language\)/, 'the language select mirrors its choice into the save');
 });
+
+// —— 4. Responsive sweep (390x844 touch, 1280x720): CSS-only fixes, measured by the browser sweep ——
+test('responsive: the phone mission toolbar and photo button no longer cover the equipment dock', () => {
+  const css = read('runtime-level.css');
+  const start = css.indexOf('/* V188 responsive sweep');
+  assert.ok(start > 0, 'responsive sweep block present');
+  const block = css.slice(start);
+  assert.match(block, /@media \(max-width: 720px\)/);
+  // html.* outranks the placeables-v86.css padding rule, which loads later with the same selector.
+  assert.match(block, /html\.mission-mode \.play-view:has\(> #mission-runtime-v62:not\(\[hidden\]\)\) > #mission-equipment-controls \{\s*padding-top: calc\(var\(--runtime-safe\) \+ 104px\);/);
+});
+
+test('responsive: appearance choices, archive source links and armory references reach 44 px on touch', () => {
+  assert.match(read('player-appearance-v126.css'), /@media \(pointer: coarse\), \(max-width: 600px\) \{ \.appearance-choices-v126 \.button \{ min-height: 44px; \} \}/);
+  assert.match(read('crew-v85.css'), /\.costume-archive-reference-v119 a \{ display: inline-flex; align-items: center; min-height: 44px; \}/);
+  assert.match(read('styles.css'), /#armory-fidelity-v170 a\[href\], #armory-research-v171 a\[href\] \{[^}]*min-height: 44px;/);
+});
