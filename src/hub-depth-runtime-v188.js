@@ -56,7 +56,12 @@ export function withHubDepthRoomsV188(Base) {
       if (stillInRoom && this.player.climbing) this.player.depthZ = 0;
       else if (stillInRoom) {
         const dz = this.onDepthFloorV188() ? (back ? 1 : 0) - (front ? 1 : 0) : 0;
-        const step = stepDepthMoveV188(room, { x: x0, z: z0 }, { x: this.player.x + this.player.w / 2 }, { dz, dt: delta, halfWidth: this.player.w / 2 - 6 });
+        // Near the wall the ramp crate keeps its rail collider: that collider (jump, top, sides) owns it.
+        // Its floor footprint must not also freeze a marine vaulting it or standing on top of it.
+        const crate = PORT_DEPTH_ROOM_V188.railCrate;
+        const stepRoom = room === PORT_DEPTH_ROOM_V188 && !this.onDepthFloorV188() && z0 > crate.depth
+          ? { ...room, props: room.props.filter(entry => entry.kind !== 'rail-crate') } : room;
+        const step = stepDepthMoveV188(stepRoom, { x: x0, z: z0 }, { x: this.player.x + this.player.w / 2 }, { dz, dt: delta, halfWidth: this.player.w / 2 - 6 });
         this.player.depthZ = step.z;
         if (step.x !== this.player.x + this.player.w / 2) { this.player.x = step.x - this.player.w / 2; this.player.vx = 0; }
         this.player.depthMovingV188 = dz !== 0 && step.z !== z0;

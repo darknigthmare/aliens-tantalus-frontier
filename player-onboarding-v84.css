@@ -8,6 +8,9 @@
 #player-creator-v84 figcaption, #player-creator-v84 .creator-note-v84 { color: #9eaea5; font-size: calc(12px * var(--atf-text-scale-v188, 1)); }
 #player-creator-v84 label { display: block; margin: 14px 0 7px; }
 #player-creator-v84 input { display: block; box-sizing: border-box; width: 100%; min-height: 44px; padding: 10px; background: #0f2119; color: #e9f8ef; border: 1px solid #658b75; font: inherit; }
+/* The permadeath tick box sits beside its label; the text-field rule above must not stretch it. */
+#player-creator-v84 .creator-check-v188 { display: flex; align-items: flex-start; gap: 10px; }
+#player-creator-v84 .creator-check-v188 input { flex: none; width: 20px; height: 20px; min-width: 0; min-height: 0; margin: 3px 0 0; padding: 0; }
 #player-creator-v84 [role="alert"] { color: #ffd190; min-height: 1.4em; }
 #player-creator-v84 footer { display: flex; gap: 12px; justify-content: flex-end; flex-wrap: wrap; }
 #player-creator-v84 button { min-height: 44px; padding: 10px 16px; font: inherit; color: #d9efdf; border: 1px solid #769985; background: #132a20; cursor: pointer; }
