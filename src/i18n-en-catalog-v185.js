@@ -6679,5 +6679,9 @@ export const EN_PATTERNS_V185 = Object.freeze({
 "LIAISON · {0} % · RESTEZ IMMOBILE": "LINK · {0} % · HOLD STILL",
 "E — SORTIR VERS {0}": "E — EXIT TO {0}",
 "E — RELAIS · {0} % · IMMOBILE": "E — RELAY · {0} % · HOLD STILL",
-"{0} · {1} · {2} · adaptation du projet, fidélité canonique non certifiée.": "{0} · {1} · {2} · project adaptation, canonical fidelity not certified."
+"{0} · {1} · {2} · adaptation du projet, fidélité canonique non certifiée.": "{0} · {1} · {2} · project adaptation, canonical fidelity not certified.",
+"Œuvre : {0}": "Work: {0}",
+"Consulter la référence — {0}": "View reference — {0}",
+"Concept de production — {0}": "Production concept — {0}",
+"Conception de production — {0}": "Production design — {0}"
 });

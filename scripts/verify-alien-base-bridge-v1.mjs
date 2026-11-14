@@ -119,11 +119,7 @@ test('Outbound AFE2 roster preserves every source work and unresolved provenance
 test('In-game catalogue displays reference without inventing a canon or a playable item', () => {
   const rendered = [];
   const doc = { createElement(tag) {
-    // Like the DOM, text split into child spans is read back through textContent.
-    let text = '';
-    return { tagName:tag, className:'', dataset:{}, children:[],
-      get textContent() { return this.children.length ? this.children.map(x=>x.textContent).join('') : text; },
-      set textContent(value) { text = String(value); this.children = []; },
+    return { tagName:tag, className:'', textContent:'', dataset:{}, children:[],
       append(...items) { this.children.push(...items); } };
   } };
   const context = { document:doc, detail:{append(x){rendered.push(x);}},

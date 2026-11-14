@@ -157,20 +157,26 @@ test('P2: armory provenance notes and source credits read in English', () => {
     }
     assert.equal(autoTranslateV185('Pose fixe native · animations manquantes · comportement de campagne simplifié · adaptation du projet, fidélité canonique non certifiée.'),
       'Native fixed pose · animations missing · simplified campaign behavior · project adaptation, canonical fidelity not certified.');
-    for (const prefix of ['Œuvre : ', 'Consulter la référence — ', 'Concept de production — ', 'Conception de production — ']) {
-      assert.doesNotMatch(autoTranslateV185(prefix), FRENCH, prefix);
-    }
+    assert.equal(autoTranslateV185('Œuvre : Aliens (1986)'), 'Work: Aliens (1986)');
+    assert.equal(autoTranslateV185('Consulter la référence — www.imfdb.org'), 'View reference — www.imfdb.org');
+    assert.equal(autoTranslateV185('Concept de production — Aliens (1986)'), 'Production concept — Aliens (1986)');
+    assert.equal(autoTranslateV185('Conception de production — www.example.org'), 'Production design — www.example.org');
   });
 });
 
-test('P2: label and provenance are separate text parts, so each is translated', () => {
-  const rendered = [];
-  const context = { document: fakeDocument, detail: { append: item => rendered.push(item) }, renderSection: CatalogWorkbenchV62.prototype.renderSection };
-  CatalogWorkbenchV62.prototype.renderAlienBaseReferenceV1.call(context, { id: 'weapon-001-m41a-pulse-rifle', catalog: 'weapons' });
-  const parts = rendered.flatMap(section => section.all()).filter(node => node.tagName === 'span').map(node => node.textContent);
-  assert.ok(parts.includes('Œuvre : '), parts.join(' | '));
-  assert.ok(parts.includes('Consulter la référence — '), parts.join(' | '));
-  assert.match(read('src/catalog-ui-v62.js'), /appendTextPartsV188\(this\.document, caption, /u);
+test('P2: the dossier caption keeps name and provenance in separate parts, so the note is translated', () => {
+  const record = CATALOG_RECORDS_V62.find(entry => entry.id === 'weapon-002-m41a2-pulse-rifle');
+  const caption = new FakeNode('p');
+  const parts = [record.visual.visualLabel, record.visual.illustrationNote].filter(Boolean);
+  assert.equal(parts.length, 2);
+  assert.match(read('src/catalog-ui-v62.js'), /appendTextPartsV188\(this\.document, caption, parts\.flatMap\(\(part, index\) => index \? \[' — ', part\] : \[part\]\)\)/u);
+  for (const [index, part] of parts.entries()) { if (index) caption.append(Object.assign(new FakeNode('span'), { textContent: ' — ' })); caption.append(Object.assign(new FakeNode('span'), { textContent: part })); }
+  assert.equal(caption.textContent, parts.join(' — '), 'textContent unchanged');
+  // The joined string is not a catalog key, its note part is.
+  inEnglish(() => {
+    assert.match(autoTranslateV185(parts.join(' — ')), /préservées/u);
+    assert.doesNotMatch(autoTranslateV185(parts[1]), FRENCH);
+  });
 });
 
 // —— P2: technical labels on player screens ——
