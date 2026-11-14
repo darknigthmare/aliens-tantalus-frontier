@@ -37,6 +37,21 @@ const parentDoorBays = room => [...getHubDoorDestinationDescriptorsV138(room)
 const clearsDoorBays = (actor, x, bays) => bays.every(box => !blockedVertically(actor, box)
   || x + actor.w + NPC_STANDING_GAP <= box.x || x >= box.x + box.w + NPC_STANDING_GAP);
 
+/** V188: one rule for every annex doorway and lift landing (generalises clearParentDoorwayV188).
+ * An idle post (a route owner's home in `service`) overlapping a bay, its 12 px standing gap
+ * included, moves to the nearest free x inside [room.xStart + 96, room.xEnd - 140]. */
+export function hubRoomIdleBaysV188(room) { return room ? parentDoorBays(room) : []; }
+export function clearRoomDoorwayPostV188(room, x, width = 44) {
+  if (!room || !Number.isFinite(x)) return x;
+  const bays = parentDoorBays(room), low = room.xStart + 96, high = room.xEnd - 140;
+  const blocked = value => bays.some(box => value < box.x + box.w + NPC_STANDING_GAP && value + width > box.x - NPC_STANDING_GAP);
+  if (!blocked(x)) return x;
+  const candidates = bays.flatMap(box => [box.x - NPC_STANDING_GAP - width - 1, box.x + box.w + NPC_STANDING_GAP + 1])
+    .filter(value => value >= low && value <= high && !blocked(value))
+    .sort((a, b) => Math.abs(a - x) - Math.abs(b - x));
+  return candidates[0] ?? x;
+}
+
 function standingPeers(actor, peers) {
   const identity = actor.crewId || actor.id;
   return peers.filter(peer => peer && peer !== actor && (!identity || (peer.crewId || peer.id) !== identity)

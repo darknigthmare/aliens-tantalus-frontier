@@ -14,6 +14,12 @@ import { spreadNpcStationSpawnsV136 } from '../src/npc-life-v136.js';
 import * as port from '../src/port-meridien-v90.js';
 import { HubGame as RangeHubV81 } from '../src/hub-v81-runtime.js';
 import { withHubLiftTransitV163 } from '../src/hub-lift-transit-v163.js';
+import * as npcLife from '../src/npc-life-v136.js';
+import { HUB_NPC_SERVICE_ROUTES_V161 } from '../src/npc-service-routes-v161.js';
+import { HUB_NPC_ANNEX_SERVICE_ROUTES_V163 } from '../src/npc-annex-service-routes-v163.js';
+import { HUB_NPC_ANNEX_LEASE_DEFINITIONS_V163, getNpcAnnexLeaseRouteV163 } from '../src/npc-annex-leases-v163.js';
+import { createAnnexNpcsV141 } from '../src/hub-annex-npc-life-v141.js';
+import { getHubDoorDestinationDescriptorsV138 } from '../src/hub-destination-signage-v138.js';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url), 'utf8');
 const interludeSave = () => {
@@ -147,4 +153,60 @@ test('readout: #hub-prompt follows the visible lift panel during a trip and is c
   hub.liftStateV163 = () => ({ schema: 163, serial: 1, trip: null });
   assert.equal(hub.statusPrompt(), 'W / S — choisir un pont · E — pont suivant', 'back to the native prompt after the trip');
   assert.match(read('src/app.js'), /if \(name !== 'hub' && byId\('hub-prompt'\)\) \{ byId\('hub-prompt'\)\.textContent = '';/);
+});
+
+// —— 6. No crew post inside any annex doorway (generalises clearParentDoorwayV188) ——
+const bayHit = (room, x) => getHubDoorDestinationDescriptorsV138(room).filter(door => door.face === 'parent')
+  .map(door => door.socket).find(box => x < box.x + box.w + 12 && x + 44 > box.x - 12);
+
+test('doorways: a route owner whose native body stands in any doorway of its home room gets a post beside it', () => {
+  assert.equal(typeof npcLife.clearRoomDoorwayPostV188, 'function');
+  const routes = [...HUB_NPC_SERVICE_ROUTES_V161, ...HUB_NPC_ANNEX_SERVICE_ROUTES_V163,
+    ...HUB_NPC_ANNEX_LEASE_DEFINITIONS_V163.flatMap(d => d.originRoomIds.map(origin => getNpcAnnexLeaseRouteV163(d.id, origin)))];
+  let checked = 0;
+  for (const route of routes) {
+    const d = route.definition, homeId = d.homeRoomId || d.parentRoomId;
+    const home = HUB_DECKS[d.deck].rooms.find(room => room.id === homeId);
+    const duty = createAnnexNpcsV141([{ ...d, roomId: d.annexRoomId }], new Map())[0];
+    if (!home || !duty) continue;
+    for (const door of getHubDoorDestinationDescriptorsV138(home).filter(entry => entry.face === 'parent')) {
+      const x = Math.max(home.xStart + 96, Math.min(home.xEnd - 140, door.socket.x + door.socket.w / 2 - 22));
+      const state = route.create({ crewId: d.crewId, roomId: homeId, x, y: 532, facing: 1 }, duty);
+      if (!state) continue;
+      checked += 1;
+      assert.equal(bayHit(home, state.homeX), undefined, `${d.id}: home post ${state.homeX} inside the ${door.destinationId} doorway`);
+      assert.equal(state.x, state.homeX, `${d.id}: the idle body stands at its post`);
+    }
+  }
+  assert.ok(checked >= 4, `checked ${checked} posts`);
+  // Older saves whose home post already sits in another doorway of the room still load, with the post moved aside.
+  let repaired = 0;
+  for (const route of routes) {
+    const d = route.definition, homeId = d.homeRoomId || d.parentRoomId;
+    const home = HUB_DECKS[d.deck].rooms.find(room => room.id === homeId);
+    const duty = createAnnexNpcsV141([{ ...d, roomId: d.annexRoomId }], new Map())[0];
+    const base = home && duty && route.create({ crewId: d.crewId, roomId: homeId, x: home.xStart + 300, y: 532, facing: 1 }, duty);
+    if (!base) continue;
+    for (const door of getHubDoorDestinationDescriptorsV138(home).filter(entry => entry.face === 'parent' && entry.destinationId !== d.annexRoomId)) {
+      const x = door.socket.x + 10;
+      if (x < home.xStart + 96 || x > home.xEnd - 140) continue;
+      const legacy = route.normalize({ schema: route.definition.schema, actor: { ...base, x, homeX: x }, nativeHandoff: null }).actor;
+      if (!legacy) continue;
+      repaired += 1;
+      assert.equal(bayHit(home, legacy.homeX), undefined, `${d.id}: saved post left in the ${door.destinationId} doorway`);
+    }
+  }
+  assert.ok(repaired >= 1, `repaired ${repaired} legacy posts`);
+});
+
+test('doorways: the shared rule never leaves an idle post in a parent doorway or on a lift landing, in any room', () => {
+  assert.equal(typeof npcLife.clearRoomDoorwayPostV188, 'function');
+  for (const deck of HUB_DECKS) for (const room of deck.rooms) {
+    const bays = npcLife.hubRoomIdleBaysV188(room);
+    for (let x = room.xStart + 96; x <= room.xEnd - 140; x += 7) {
+      const post = npcLife.clearRoomDoorwayPostV188(room, x);
+      assert.ok(post >= room.xStart + 96 && post <= room.xEnd - 140);
+      assert.ok(bays.every(box => post + 44 + 12 <= box.x || post >= box.x + box.w + 12), `${room.id}: ${x} -> ${post}`);
+    }
+  }
 });
