@@ -1,4 +1,5 @@
 import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
+import { squadActionLabelV188 } from './mission-log-labels-v188.js';
 import { resolveCombatMuzzleV83, buildCombatShotVectorsV83 } from './combat-aim-v83.js';
 import { drawPlayerAimGuideV124 } from './player-control-v124.js';
 import { resolveHumanAtlasGeometryV133 } from './human-visual-contract-v133.js';
@@ -2378,7 +2379,7 @@ export function withV52MissionRuntime(BaseEngine) {
       for (const [index, member] of active.entries()) {
         const rowY = y + 31 + index * 24;
         ctx.fillStyle = member.alive ? '#c9d9ce' : '#c66d64';
-        ctx.fillText(`${member.name.slice(0, 15)} · ${member.action}`, x + 10, rowY);
+        ctx.fillText(`${member.name.slice(0, 15)} · ${squadActionLabelV188(member.action)}`, x + 10, rowY);
         ctx.fillStyle = '#26372e'; ctx.fillRect(x + 10, rowY + 5, 216, 3);
         ctx.fillStyle = member.alive ? '#79c995' : '#6c3434'; ctx.fillRect(x + 10, rowY + 5, 216 * clamp(member.health / member.maxHealth, 0, 1), 3);
       }

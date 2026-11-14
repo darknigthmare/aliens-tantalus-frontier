@@ -80,3 +80,21 @@ test('ecosystem operations: a marine at the right wall of the arena (by the extr
     assert.equal(resumed.player.x, p.x);
   }
 });
+
+test('squad HUD and mission log name the support action, the zone biome and the crew member, never their ids', async () => {
+  const { engine, text } = await launch(campaign('pair-001-mire'));
+  // Declared injection: one AI ally with the engineering support action, as resolveOperationDeployment issues it.
+  const ally = { ...engine.player, name: 'Idris Kwan', action: 'field-repair', alive: true, health: 80, maxHealth: 100 };
+  engine.activeSquadActors = () => [ally];
+  text.length = 0; engine.drawHud(engine.ctx);
+  assert.ok(text.includes('Idris Kwan · réparation'), 'the HUD row reads the action in French');
+  assert.ok(!text.some(line => /field-repair/.test(line)));
+  const { squadActionLabelV188, biomeLabelV188 } = await import('../src/mission-log-labels-v188.js');
+  assert.equal(squadActionLabelV188('suppressive-fire'), 'tir de suppression');
+  assert.equal(squadActionLabelV188('unknown-v999'), 'soutien');
+  assert.equal(biomeLabelV188('ruins'), 'ruines'); assert.equal(biomeLabelV188('vacuum'), 'vide spatial');
+  const app = read('src/app.js');
+  assert.match(app, /RÉANIMATION · \$\{crewDisplayNameV188\(event\.crewId\)\} a stabilisé \$\{crewDisplayNameV188\(event\.targetId\)\}/);
+  assert.match(app, /ZONE · .* · \$\{biomeLabelV188\(event\.biome\)\.toUpperCase\(\)\}/);
+  assert.doesNotMatch(app, /ALLIÉ À TERRE · \$\{event\.crewId\}/);
+});

@@ -41,6 +41,7 @@ import { projectRefugeHubSaveV87 } from './refuge-save-v87.js';
 import { validateShipPortDepartureV87 } from './ship-port-state-v87.js';
 import { PlaceablesDockV86 } from './placeables-ui-v86.js';
 import { resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
+import { squadActionLabelV188, biomeLabelV188 } from './mission-log-labels-v188.js';
 import { commitCrewTransactionV85 } from './crew-transactions-v85.js';
 import { rememberCrewConversationTopicV135 } from './crew-conversation-memory-v135.js';
 import { createFieldMediaRepositoryV135 } from './field-media-v135.js';
@@ -3077,6 +3078,13 @@ function launchCampaign(campaign = null) {
   return true;
 }
 
+// Mission log: a crew id (crew-04-noor-okafor) is shown by the member's name.
+function crewDisplayNameV188(id) {
+  if (!id) return 'allié';
+  return resolveCrewDefinitionV85(saveSystem.data.crew.find((member) => member.id === id) || { id }, CREW)?.name
+    || CREW.find((entry) => entry.id === id)?.name || 'allié';
+}
+
 function finalizeOperation(success, event = {}, reason = success ? 'objective' : 'retreat') {
   const operation = saveSystem.data.strategy.currentOperation;
   if (!operation) return null;
@@ -3220,7 +3228,7 @@ function handleGameEvent(event) {
     log.textContent = `NIVEAU ${String(event.templateId || '').toUpperCase()} · ${event.routes} routes · ${event.zones} zones · ${event.events} événements`;
   }
   if (event.type === 'mission-zone') {
-    log.textContent = `ZONE · ${String(event.name || event.zoneId || '').toUpperCase()} · ${String(event.biome || 'inconnu').toUpperCase()}`;
+    log.textContent = `ZONE · ${String(event.name || event.zoneId || '').toUpperCase()} · ${biomeLabelV188(event.biome).toUpperCase()}`;
   }
   if (event.type === 'narrative-collectable-discovered') {
     log.textContent = `ARCHIVE RÉCUPÉRÉE · ${String(event.collectableId || '').toUpperCase()} · preuve persistée`;
@@ -3245,15 +3253,15 @@ function handleGameEvent(event) {
   }
   if (event.type === 'squad-action') {
     if (Number(log.dataset.captionUntil || 0) > Date.now()) return;
-    log.textContent = `ESCOUADE · ${String(event.action || 'support').toUpperCase()} · ${event.crewId || 'allié'}`;
+    log.textContent = `ESCOUADE · ${squadActionLabelV188(event.action).toUpperCase()} · ${event.crewId ? crewDisplayNameV188(event.crewId) : 'allié'}`;
   }
   if (event.type === 'squad-down') {
     recordOperationFlag(saveSystem.data, `squad-down-${event.crewId}`);
-    log.textContent = `ALLIÉ À TERRE · ${event.crewId} · ${event.revivable ? 'réanimation possible' : 'aucun médecin disponible'}`;
+    log.textContent = `ALLIÉ À TERRE · ${crewDisplayNameV188(event.crewId)} · ${event.revivable ? 'réanimation possible' : 'aucun médecin disponible'}`;
   }
   if (event.type === 'squad-revived') {
     recordOperationFlag(saveSystem.data, `squad-revived-${event.targetId}`);
-    log.textContent = `RÉANIMATION · ${event.crewId} a stabilisé ${event.targetId}`;
+    log.textContent = `RÉANIMATION · ${crewDisplayNameV188(event.crewId)} a stabilisé ${crewDisplayNameV188(event.targetId)}`;
   }
   if (event.type === 'squad-lost') {
     const casualtyOperation = saveSystem.data.strategy.currentOperation;
@@ -3277,8 +3285,8 @@ function handleGameEvent(event) {
       saveSystem.data.statistics.deaths += 1;
     }
     recordOperationFlag(saveSystem.data, `squad-lost-${event.crewId}`);
-    log.textContent = sparedV188 ? `BLESSÉ GRAVE · ${event.name || event.crewId} évacué · convalescence`
-      : `PERTE CONFIRMÉE · ${event.name || event.crewId} rejoint le mémorial`;
+    log.textContent = sparedV188 ? `BLESSÉ GRAVE · ${event.name || crewDisplayNameV188(event.crewId)} évacué · convalescence`
+      : `PERTE CONFIRMÉE · ${event.name || crewDisplayNameV188(event.crewId)} rejoint le mémorial`;
   }
   if (event.type === 'shot') saveSystem.data.statistics.shots += 1;
   if (event.type === 'kill') {
