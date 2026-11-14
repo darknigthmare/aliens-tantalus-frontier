@@ -92,6 +92,37 @@ test('neuro jamming relay: a named FR/EN prompt, in the shared selection', async
   assert.ok(events.some(event => event.type === 'neuro-disruption-neutralized'));
 });
 
+// ---------------------------------------------------------------- item 1: mode layers
+// Puts the marine on the centre of `target` (feet on its floor line).
+function standOn(engine, target, feet = target.y + target.h) { return place(engine, target.x + target.w / 2, feet); }
+// Injection: a dropped magazine of the marine `dx` px from his centre. Only the
+// read-only V168 lookup is replaced; the pickup itself is never performed here.
+function magazine(engine, dx) {
+  const p = engine.player, drop = { id: `qa-mag-${dx}`, ownerId: 'qa', rounds: 0, x: p.x + p.w / 2 + dx, y: p.y + p.h - 3 };
+  engine.nearestMagazineV168 = () => drop; return drop;
+}
+
+test('cargo-brutal: the cargo step is an action of the shared selection (prompt = E)', async () => {
+  const { engine } = await fixture({ campaign: campaign('special-cargo-brutal'), seed: 7 });
+  const state = engine.cargoBrutalV67; assert.equal(state.phase, 'restore-power');
+  engine.supplies = []; engine.drops = [];
+  const p = standOn(engine, engine.powerNode);
+  // Crate strictly nearer than the power node: the pickup is named and taken.
+  const near = crate(engine, 0);
+  agree(engine, 'E  RÉCUPÉRER DES MUNITIONS');
+  assert.equal(engine.interact(p), true);
+  assert.equal(near.used, true); assert.equal(state.powerRestored, false);
+  // Crate farther: the cargo action keeps its priority.
+  engine.supplies = []; place(engine, engine.powerNode.x + engine.powerNode.w / 2 + 20, p.y + p.h); const far = crate(engine, 60);
+  agree(engine, 'E  RÉTABLIR LA PUISSANCE DE SOUTE');
+  assert.equal(engine.interact(p), true);
+  assert.equal(state.powerRestored, true); assert.equal(far.used, false);
+  // On foot beside an obstacle E cannot move it: no "E / TIR" promise.
+  state.phase = 'clear-route'; const obstacle = state.obstacles.find(entry => !entry.cleared);
+  place(engine, obstacle.x + (obstacle.w || 0) / 2, p.y + p.h); engine.supplies = [];
+  assert.doesNotMatch(engine.getInteractionPrompt(), /DÉPLACER/);
+});
+
 // ---------------------------------------------------------------- item 4
 test('V131 bow / harpoon hint names E only when an arrow or harpoon can really be recovered', async () => {
   const { WEAPONS } = await import('../src/content-core-v50.js');
