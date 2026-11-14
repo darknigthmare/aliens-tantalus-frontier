@@ -4530,5 +4530,15 @@ Décision du propriétaire : certaines salles passent en **profondeur** (2,5D, d
   - **preuves, ravitaillement et sas** : accessibles depuis l'allée du mur ;
   - la reprise de mission garde la profondeur d'Echo-9, du marine coop et des xénomorphes.
   - Dans la cale, W/S ne servent plus à viser vers le haut ou le bas : le tir y est horizontal, décision (3).
+  - **Passe de cohérence (2026-11-14)**, `src/qz17-level-dressing-v188.js`, valeurs **[PROPOSÉ]** :
+    - **Conteneurs** : ils passent à la taille ISO 10 pieds (150 × 132 px, à 51 px par mètre). La soute n'en contient plus qu'**un**, QZ17-01, à l'avant. QZ17-02 et QZ17-03 sont empilés contre le mur du pont de service.
+    - **La cargaison fantôme** : l'emplacement **QZ17-04** est vide, avec ses saisines coupées sous une grue dont l'élingue tranchée pend encore. Trois conteneurs scellés, comme la commande de l'Acte III, et un quatrième manquant.
+    - **Sol** : rails d'arrimage et une palette basse comme couverture ; la couverture de caisses du rail est retirée. L'allée du mur fait 36 de profondeur, et deux obstacles sont toujours séparés d'au moins 1 m.
+    - **Preuves et ravitaillement** : le courriel de logistique et les munitions sont déplacés hors de l'embrasure du mur arrière.
+    - **Vide** : la bande de vide s'arrête au sas de la soute.
+    - **Rôdeurs** : ils dorment derrière QZ17-01, dans l'emplacement vide et dans la bouche du conduit. Les castes inadaptées (Reine, Crusher, trop larges) sont reportées au pont de service.
+    - **Berceau de CIN-11** : il est désormais physique, dans une alcôve de maintenance près de la sortie du conduit. Berceau QZ17-04 givré, couvercle forcé de l'intérieur, sangles arrachées. L'alcôve est scellée si l'on n'a pas pris la route de maintenance.
+    - **« Quatre accès »** : un tableau dans le tube d'amarrage liste les quatre accès réels : sas principal, échelle de service, ascenseur de coque, conduit de maintenance.
+    - **Limites** : l'ascenseur de service « B » (preuve du fragment de sceau) n'est pas placé ; le nombre de rôdeurs peut dépasser trois.
 - **Limites** : Frontier Forge n'édite pas les salles en profondeur. Prochaines candidates : d'autres soutes ou cales de mission, après évaluation de QZ-17.
 
