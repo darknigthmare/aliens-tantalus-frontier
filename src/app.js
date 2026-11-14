@@ -78,6 +78,7 @@ import { GameEngine } from './game-production-runtime.js';
 import { bindTacticalReloadButtonV77 } from './mission-input-v77.js';
 import { resolveViewAudioSceneV77 } from './audio-assets-v77.js';
 import { buildMissionLevelV52 } from './mission-levels-v52.js';
+import { missionDeploymentLogV188 } from './mission-deployment-log-v188.js';
 import { BLACK_COCOON_CAMPAIGN_V121, buildBlackCocoonLevelV121 } from './black-cocoon-runtime-v121.js';
 import { APC_CONVOY_CAMPAIGN_V121, buildApcConvoyLevelV121 } from './apc-convoy-runtime-v121.js';
 import { C12_HORDE_CAMPAIGN_V121, buildC12HordeLevelV121 } from './c12-horde-runtime-v121.js';
@@ -2880,7 +2881,7 @@ function startMissionRuntimeV62(context) {
   engine.setCoop(Boolean(saveSystem.data.settings.coop));
   setupAlphaBravoCommandDockV69().refresh();
   const activeAlliesV85 = engine.activeSquadActors?.();
-  if (Array.isArray(activeAlliesV85) && !engine.isArchiveRelayV122?.()) byId('mission-log').textContent = `ESCOUADE DÉPLOYÉE · ${activeAlliesV85.length} alliés IA physiques · ${engine.spriteRuntime?.report?.sheets || 0} plaques animées`;
+  if (Array.isArray(activeAlliesV85) && !engine.isArchiveRelayV122?.()) byId('mission-log').textContent = missionDeploymentLogV188(engine, activeAlliesV85.length);
   setupAlienSurvivalDockV70().refresh();
   renderMissionEquipment();
   byId('game-canvas').focus({ preventScroll: true });
