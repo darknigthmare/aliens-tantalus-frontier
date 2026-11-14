@@ -755,6 +755,14 @@ export function withAlienSurvivalRuntimeV70(BaseEngine) {
       return [...new Set([this.player, this.coopEnabled ? this.coop : null, ...asList(this.squadActors)].filter((actor) => actor?.alive))];
     }
 
+    // V188: the cargo pressure belongs to the survival room model (configured
+    // without the template vacuum). The template's decompression event must not
+    // re-open it under the weld site, where any damage cancels the weld.
+    admitMissionLevelHazardChangeV188(hazard, kind) {
+      if (this.isAlienSurvivalMissionV70() && this.alienSurvivalV70 && hazard?.kind === 'vacuum' && hazard.zoneId === 'ship-cargo') return false;
+      return super.admitMissionLevelHazardChangeV188?.(hazard, kind) ?? true;
+    }
+
     alienSurvivalActorPressureProtectedV70(actor) {
       const profile = `${actor?.equipment?.suit || ''} ${actor?.suit || ''} ${actor?.armorType || ''} ${actor?.toolId || ''}`;
       return Boolean(actor?.pressureSuit || actor?.vacuumProtected || /pressure|vacuum|eva/i.test(profile));

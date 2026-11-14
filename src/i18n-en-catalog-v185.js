@@ -6491,6 +6491,7 @@ export const EN_CATALOG_V185 = Object.freeze({
 "Référence documentaire disponible ·": "Documentary reference available ·",
 "Référence visuelle à documenter ·": "Visual reference to be documented ·",
 "tire.": "fires.",
+// V188 playthrough bug hunt (reviewed through i18n-catalog-maintenance-v186).
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 // V188 systems bug hunt (merged via i18n-catalog-maintenance-v186 review).
@@ -7018,4 +7019,15 @@ export const EN_PATTERNS_V185 = Object.freeze({
 "{0} stabilisé : santé +{1}.": "{0} stabilized: health +{1}.",
 "{0} préparé pour la prochaine opération.": "{0} prepared for the next operation.",
 "{0}/{1} références de tenues · {2} tenues équipables, dont {3} modulaires · {4} combinaisons historiques séparées": "{0}/{1} outfit references · {2} equippable outfits, {3} of them modular · {4} separate historical suits",
+// V188 playthrough bug hunt (reviewed through i18n-catalog-maintenance-v186).
+"Objectif accompli : stabilité +{0}, infestation -{1}, récompenses transférées.": "Objective complete: stability +{0}, infestation -{1}, rewards transferred.",
+"Objectif accompli : stabilite +{0}, infestation -{1}, recompenses transferees.": "Objective complete: stability +{0}, infestation -{1}, rewards transferred.",
+"Retraite : stabilité -{0}, infestation +{1}.": "Retreat: stability -{0}, infestation +{1}.",
+"Retraite : stabilite -{0}, infestation +{1}.": "Retreat: stability -{0}, infestation +{1}.",
+"Deploiement lance vers {0}.": "Deployment launched to {0}.",
+"Versé au Tantalus : +{0} CR, +{1} alliage, +{2} R&D, +{3} pathogène": "Paid to the Tantalus: +{0} CR, +{1} alloy, +{2} R&D, +{3} pathogen",
+"Bonus Cargo Brutal : +{0} crédits, +{1} alliage.": "Cargo Brutal bonus: +{0} credits, +{1} alloy.",
+"Bonus Cargo Brutal : +{0} credits, +{1} alliage.": "Cargo Brutal bonus: +{0} credits, +{1} alloy.",
+"Bonus Doctrine Alpha / Bravo : +{0} recherche, +{1} morale.": "Alpha / Bravo Doctrine bonus: +{0} research, +{1} morale.",
+"Bonus Survie Alien : +{0} recherche, +{1} morale, +{2} alliage.": "Alien Survival bonus: +{0} research, +{1} morale, +{2} alloy.",
 });

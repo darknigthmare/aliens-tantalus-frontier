@@ -944,7 +944,7 @@ function resolveSpecialOperationBonusV70(operation, rewards, alphaBravoCertifica
 function describeSpecialOperationBonusV70(operation, bonus) {
   if (!Object.keys(bonus).length) return '';
   if (operation?.campaignId === CARGO_BRUTAL_CAMPAIGN_ID_V67) {
-    return ` Bonus Cargo Brutal : +${bonus.credits} credits, +${bonus.alloy} alliage.`;
+    return ` Bonus Cargo Brutal : +${bonus.credits} crédits, +${bonus.alloy} alliage.`;
   }
   if (operation?.campaignId === NARRATIVE_OPERATION_V68.campaignId) {
     return ` Bonus QZ-17 : +${bonus.research} recherche issue des archives.`;

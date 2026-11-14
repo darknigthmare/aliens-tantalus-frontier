@@ -147,7 +147,7 @@ test('numbers in the dossier tables follow the chosen language', () => {
 test('ids stay off player screens: catalog cards and the command log', () => {
   assert.match(read('src/catalog-ui-v62.js'), /if \(this\.developerModeV110\) body\.append\(createElement\(this\.document, 'span', 'catalog-v62__card-id', record\.id\)\)/);
   const app = read('src/app.js');
-  assert.match(app, /escapeHtml\(strategyLogTextV188\(entry\.title\)\)/);
+  assert.match(app, /escapeHtml\(strategyLogTextV188\((?:entry\.title|strategyLogTitleV188\(entry, CAMPAIGNS\))\)\)/);
   assert.match(app, /function strategyLogTextV188\(text\)/);
   assert.ok(!read('src/save.js').includes("vehicleId + ' prepare"));
 });

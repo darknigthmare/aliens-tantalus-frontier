@@ -463,6 +463,9 @@ export class AlienSurvivalDockV70 {
     }
     this.announce(invocation.result?.message || `${actionState.label} · commande transmise.`);
     this.refresh();
+    // V188: closing the CCTV ends a mode. The clicked button (now disabled) would
+    // keep the focus and swallow every gameplay key; hand the keyboard back.
+    if (action.id === 'cctv-close') this.engine.canvas?.focus?.({ preventScroll: true });
     return true;
   }
 }

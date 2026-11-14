@@ -43,6 +43,7 @@ import { PlaceablesDockV86 } from './placeables-ui-v86.js';
 import { resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
 import { squadActionLabelV188, biomeLabelV188, missionFailureLabelV188, checkpointLabelV188, missionLevelLogLineV188,
   objectiveActionLabelV188, insertionPhaseLabelV188 } from './mission-log-labels-v188.js';
+import { paidRewardsV188, paidRewardsLineV188, strategyLogTitleV188 } from './mission-debrief-v188.js';
 import { commitCrewTransactionV85 } from './crew-transactions-v85.js';
 import { rememberCrewConversationTopicV135 } from './crew-conversation-memory-v135.js';
 import { createFieldMediaRepositoryV135 } from './field-media-v135.js';
@@ -1501,7 +1502,8 @@ function renderStrategy() {
     const complete = saveSystem.data.strategy.unlockedResearchIds.includes(project.id);
     return `<article class="strategy-card ${complete ? 'completed' : ''}"><div><span class="eyebrow">R&D · ${project.hours}H</span><h4>${escapeHtml(project.name)}</h4><p>${escapeHtml(project.description)}</p></div><footer><span>${complete ? 'ACTIF' : formatCost(project.cost)}</span><button class="button compact" data-research-id="${project.id}" ${!locked && !complete && canAfford(saveSystem.data, project.cost) ? '' : 'disabled'}>${complete ? 'TERMINÉ' : 'RECHERCHER'}</button></footer></article>`;
   }).join('');
-  byId('strategy-log').innerHTML = saveSystem.data.strategy.log.slice(0, 10).map((entry) => `<article class="strategy-log-entry ${entry.incident ? 'danger' : ''}"><span>${currentLanguageV185() === 'en' ? 'D' : 'J'}${entry.day} · ${entry.risk || 0}%</span><strong>${escapeHtml(strategyLogTextV188(entry.title))}</strong><p>${escapeHtml(strategyLogTextV188(entry.result))}</p></article>`).join('') || '<p class="detail-copy">Le journal attend votre première décision.</p>';
+  // V188: an operation result is logged under its campaign id; the journal shows the campaign name.
+  byId('strategy-log').innerHTML = saveSystem.data.strategy.log.slice(0, 10).map((entry) => `<article class="strategy-log-entry ${entry.incident ? 'danger' : ''}"><span>${currentLanguageV185() === 'en' ? 'D' : 'J'}${entry.day} · ${entry.risk || 0}%</span><strong>${escapeHtml(strategyLogTextV188(strategyLogTitleV188(entry, CAMPAIGNS)))}</strong><p>${escapeHtml(strategyLogTextV188(entry.result))}</p></article>`).join('') || '<p class="detail-copy">Le journal attend votre première décision.</p>';
 }
 
 function renderModules() {
@@ -3116,6 +3118,7 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   // Resolve off the live timeline. Failed storage cannot consume the active
   // operation or pay its rewards in memory before the durable write succeeds.
   const candidate = clone(saveSystem.data);
+  const resourcesBeforeV188 = clone(candidate.galaxy.resources);
   const outcome = resolveOperation(candidate, {
     success,
     kills: event.kills || 0,
@@ -3127,6 +3130,8 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   if (campaign && world) applyCampaignConsequence(candidate, campaign, world, { success: resolvedSuccess });
   // V188 reconstruction (bible §6.3): an operation on Cocyte validates or damages a site.
   const colonyChangeV188 = applyColonyOperationResultV188(candidate, { success: resolvedSuccess, worldId: operation.worldId || campaign?.worldId });
+  // V188 debrief: the amounts the hub actually receives (before the transit clock runs).
+  outcome.paidV188 = paidRewardsV188(resourcesBeforeV188, candidate.galaxy.resources);
   // V188 reactive lines (bible §53.6): failure, colonist loss, injured return.
   const reactiveLinesV188 = selectReactiveLinesV188(candidate,
     detectReactiveTriggersV188(saveSystem.data, candidate, operation, { success: resolvedSuccess }), {
@@ -3383,7 +3388,9 @@ function handleGameEvent(event) {
     }
     pendingResolutionV121 = null;
     byId('retreat-mission').textContent = 'RETOUR À BORD';
-    log.textContent = outcome.result;
+    // V188: the extraction screen and the log name what was paid, not the native mission tally.
+    if (outcome.success && engine.mission) engine.mission.paidRewardsV188 = clone(outcome.paidV188);
+    log.textContent = outcome.success ? `${outcome.result} ${paidRewardsLineV188(outcome.paidV188)}` : outcome.result;
     toast(outcome?.success
       ? 'Victoire persistée : monde, équipage, économie et continuité mis à jour.'
       : outcome?.result || 'Résolution enregistrée : les conditions de victoire ne sont pas remplies.');

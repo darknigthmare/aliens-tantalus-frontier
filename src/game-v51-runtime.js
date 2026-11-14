@@ -1,3 +1,4 @@
+import { paidRewardsLineV188 } from './mission-debrief-v188.js';
 import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { advanceEnemyDistanceGaitV141, isEnemyDistanceGaitV141, canEnemyDistanceGaitMoveV141,
   enemyDistanceGaitFrameV141 } from './enemy-distance-gait-v141.js';
@@ -2659,7 +2660,8 @@ export class GameEngine {
     ctx.font = '18px monospace'; ctx.fillStyle = '#83d5a1';
     const subtitle = this.enemyAtlasLoadingPausedV65
       ? this.paused ? 'PAUSE UTILISATEUR ACTIVE · chargement en cours' : 'Simulation suspendue · reprise après chargement du sprite'
-      : this.paused ? 'P / ÉCHAP pour reprendre' : this.mission?.state === 'failed' ? `ENTRÉE · reprendre au checkpoint ${this.checkpoint.id}` : `${this.mission.rewards?.credits || 0} CR · ${this.mission.rewards?.salvage || 0} récupération · ${this.mission.rewards?.intel || 0} données`;
+      : this.paused ? 'P / ÉCHAP pour reprendre' : this.mission?.state === 'failed' ? `ENTRÉE · reprendre au checkpoint ${this.checkpoint.id}`
+        : this.mission?.paidRewardsV188 ? paidRewardsLineV188(this.mission.paidRewardsV188) : `${this.mission.rewards?.credits || 0} CR · ${this.mission.rewards?.salvage || 0} récupération · ${this.mission.rewards?.intel || 0} données`;
     ctx.fillText(subtitle, LOGICAL_WIDTH / 2, 365); ctx.textAlign = 'left';
   }
 
