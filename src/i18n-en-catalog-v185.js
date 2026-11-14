@@ -6079,7 +6079,21 @@ export const EN_CATALOG_V185 = Object.freeze({
 "Œuvre à documenter": "Work to be documented",
 "— adaptation du design projet": "— project design adaptation",
 "← MODIFIER LES COMBATTANTS": "← CHANGE FIGHTERS",
-"← ÉVALUATIONS": "← EVALUATIONS"
+"← ÉVALUATIONS": "← EVALUATIONS",
+"ARMÉE": "ARMED",
+"EN ATTENTE": "STANDBY",
+"ÉCHOUÉE": "FAILED",
+"ABANDONNÉE": "ABORTED",
+"HORIZONTALE": "LEVEL",
+"HAUTE": "HIGH",
+"BASSE": "LOW",
+"LIGNE M41A": "M41A LINE",
+"H — P-5000 HUMAIN": "H — HUMAN P-5000",
+"F — TIRER · W/S — VISER HAUT/BAS · R — RECHARGER": "F — FIRE · W/S — AIM HIGH/LOW · R — RELOAD",
+"E — SORTIR VERS L’ARMURERIE": "E — EXIT TO THE ARMORY",
+"ASPHODÈLE · QZ ROUGE": "ASPHODÈLE · RED QZ",
+"E · ASSISTER LE BLESSÉ · RESTER IMMOBILE": "E · ASSIST THE WOUNDED · HOLD STILL",
+"E · RÉALIMENTER LE SAS · RESTER IMMOBILE": "E · RE-POWER AIRLOCK · HOLD STILL"
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 ": 'Relève disponible'} · {0}": ": 'Relief available'} · {0}",
@@ -6356,7 +6370,7 @@ export const EN_PATTERNS_V185 = Object.freeze({
 "Supprimer « {0} » et ses liaisons ? Cette action reste annulable.": "Delete “{0}” and its links? This action can be undone.",
 "SÉLECTIONNEZ LE BINÔME {0}": "SELECT FIRETEAM {0}",
 "Sélection : {0}": "Selection: {0}",
-"TEMPS {0} S · VISÉE {1}": "TIME {0} S · ACCURACY {1}",
+"TEMPS {0} S · VISÉE {1}": "TIME {0} S · AIM {1}",
 "TENIR LA BALISE · {0} S": "HOLD THE BEACON · {0} S",
 "TENIR LA ZONE · {0} S": "HOLD THE AREA · {0} S",
 "TOTAL {0}/{1} · MAX SIMULTANÉ {2}/12 · BUDGET ACTIF 12{3}": "TOTAL {0}/{1} · MAX SIMULTANEOUS {2}/12 · ACTIVE BUDGET 12{3}",
@@ -6522,5 +6536,13 @@ export const EN_PATTERNS_V185 = Object.freeze({
 "Écho filtré : {0}.": "Filtered echo: {0}.",
 "Équipe extraite par capsule pendant l'incident {0} sur le pont {1} ; pertes amorties.": "Team extracted by pod during incident {0} on deck {1}; losses mitigated.",
 "Équipe à terre pendant l'incident {0} sur le pont {1}.": "Team down during incident {0} on deck {1}.",
-"État visuel fixe de {0}": "Fixed visual state of {0}"
+"État visuel fixe de {0}": "Fixed visual state of {0}",
+"{0} ↔ {1}": "{0} ↔ {1}",
+"{0} · H — P-5000 HUMAIN": "{0} · H — HUMAN P-5000",
+"{0} · CIBLES {1}/9 · SCORE {2}": "{0} · TARGETS {1}/9 · SCORE {2}",
+"IMMOBILE · {0} % · bouger annule": "HOLD STILL · {0} % · moving cancels",
+"RELAIS · {0} % · IMMOBILE": "RELAY · {0} % · HOLD STILL",
+"LIAISON · {0} % · RESTEZ IMMOBILE": "LINK · {0} % · HOLD STILL",
+"E — SORTIR VERS {0}": "E — EXIT TO {0}",
+"E — RELAIS · {0} % · IMMOBILE": "E — RELAY · {0} % · HOLD STILL"
 });

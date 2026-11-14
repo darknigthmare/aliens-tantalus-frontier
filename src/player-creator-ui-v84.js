@@ -27,6 +27,8 @@ export class PlayerCreatorUiV84 {
     this.renderOriginsV188();
     this.dialog.addEventListener('cancel', (event) => { event.preventDefault(); this.cancel(); });
     this.dialog.querySelector('[data-creator-cancel-v84]').addEventListener('click', () => this.cancel());
+    // A correction clears the previous refusal instead of leaving it beside the new field.
+    this.dialog.querySelector('form').addEventListener('input', () => this.error(''));
     this.dialog.querySelector('form').addEventListener('submit', (event) => {
       event.preventDefault();
       if (this.submitting || !this.dialog.open) return;

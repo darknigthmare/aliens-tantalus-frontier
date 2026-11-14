@@ -1335,7 +1335,8 @@ function renderClock() {
   const { day, hour } = saveSystem.data.clock;
   const hours = Math.floor(hour);
   const minutes = Math.floor((hour % 1) * 60);
-  byId('clock').textContent = `J${String(day).padStart(2, '0')} ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+  // Day prefix follows the language (title screen: "J01" / "D01").
+  byId('clock').textContent = `${currentLanguageV185() === 'en' ? 'D' : 'J'}${String(day).padStart(2, '0')} ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
   byId('save-state').textContent = `Profil ${saveSystem.profile} · ${RELEASE.version} · ${number(saveSystem.data.statistics.campaigns)} opérations · ${cloudUiV119?.sync ? (cloudUiV119.sync.state(saveSystem.profile) === 'local' ? 'LOCAL' : cloudUiV119.sync.state(saveSystem.profile) === 'synced' ? 'SYNC OK' : cloudUiV119.sync.state(saveSystem.profile) === 'offline' ? 'HORS LIGNE' : cloudUiV119.sync.state(saveSystem.profile) === 'conflict' ? 'CONFLIT' : 'CLOUD À VÉRIFIER') : 'LOCAL'}`;
 }
 
@@ -4486,6 +4487,7 @@ function setupLanguageV185() {
     if (VIEW_META[activeView]) retranslateStandardLabelV185(byId('view-title'), `view.${activeView}`, VIEW_META[activeView][1]);
     retranslateStandardLabelV185(byId('return-title'), 'top.menu', 'MENU PRINCIPAL');
     renderProfiles();
+    try { renderClock(); } catch { /* the clock appears with the first render */ }
     if (lastHubStatus) renderHubStatus(lastHubStatus);
   });
 }
