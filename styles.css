@@ -596,6 +596,12 @@ button:disabled {
   background: #06100d;
 }
 
+/* The global `input,select{min-width:220px}` would push the last column off-screen. */
+.archive-control-v68 input,
+.archive-control-v68 select,
+.archive-unread-toggle-v68 input { min-width: 0; }
+.archive-unread-toggle-v68 input { width: auto; }
+
 .archive-unread-toggle-v68 {
   grid-template-columns: auto 1fr;
   align-items: center;

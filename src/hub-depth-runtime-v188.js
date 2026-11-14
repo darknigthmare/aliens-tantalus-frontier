@@ -44,7 +44,11 @@ export function withHubDepthRoomsV188(Base) {
       const held = this.keys, back = held.has('KeyW') || held.has('ArrowUp'), front = held.has('KeyS') || held.has('ArrowDown');
       this.depthLadderGrabV188 = Math.max(0, (this.depthLadderGrabV188 || 0) - delta);
       // W/S drive the depth; they reach the ladder physics only while climbing (E grabs the ladder).
-      const passVertical = this.player.climbing || this.depthLadderGrabV188 > 0;
+      // At the wall (z = 0) W has no depth left to take: at a ladder foot it climbs, as in every
+      // other room. Both hangar ladders share their foot with an annex door, which owns E there.
+      // Off the floor (catwalk, ladder top) there is no depth either: W/S keep their ladder role.
+      const passVertical = this.player.climbing || this.depthLadderGrabV188 > 0 || !this.onDepthFloorV188()
+        || (back && !front && z0 >= room.zMax - .5 && Boolean(this.depthLadderV188()));
       const filtered = passVertical ? held : new Set([...held].filter(code => !VERTICAL_CODES.has(code)));
       this.keys = filtered;
       let result;
@@ -191,6 +195,7 @@ export function withHubDepthRoomsV188(Base) {
         }
         const ladder = this.depthLadderV188();
         if (ladder && !this.nearestInteraction() && !this.nearestHubNpc?.() && Math.abs(Number(this.player.depthZ) || 0) <= 6) return lang === 'en' ? 'E — GRAB THE LADDER' : 'E — S’ACCROCHER À L’ÉCHELLE';
+        if (ladder && inherited && this.onDepthFloorV188() && Math.abs(Number(this.player.depthZ) || 0) <= .5) return `${inherited} · ${lang === 'en' ? 'W — CLIMB' : 'W — GRIMPER'}`;
         // The room announces itself for a few seconds after the entrance, then only real prompts remain.
         if (this.depthEnteredRoomV188 !== room.roomId) { this.depthEnteredRoomV188 = room.roomId; this.depthEnteredAtV188 = this.animationTime || 0; }
         return inherited || ((this.animationTime || 0) - (this.depthEnteredAtV188 || 0) < 5 ? depthAnnouncementV188(lang) : '');

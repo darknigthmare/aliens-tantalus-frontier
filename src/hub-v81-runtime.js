@@ -215,7 +215,7 @@ export class HubGame extends HubGameV71 {
     if (this.nearestAnnexExitV71()) {
       return ['armed', 'active'].includes(state.phase)
         ? 'E — ABANDONNER LA QUALIFICATION ET SORTIR'
-        : 'E — SORTIR VERS ARMORY';
+        : 'E — SORTIR VERS ARMURERIE';
     }
     if (state.phase === 'armed') return 'REJOIGNEZ LA LIGNE DE TIR SUR LA PASSERELLE';
     if (state.phase === 'active') {

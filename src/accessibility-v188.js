@@ -96,6 +96,9 @@ export function buildKeyTranslationV188(bindings) {
 }
 
 const typing = target => Boolean(target && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName || '')));
+// While the settings UI waits for a key, the physical key must reach it untranslated
+// (a freed default key would otherwise be swallowed and the capture never end).
+let bindingCaptureV188 = null;
 
 /** Capture-phase translation: gameplay listeners keep reading event.code. */
 export function installKeyRemapV188(target = globalThis, getBindings = () => null, { KeyboardEventCtor = globalThis.KeyboardEvent } = {}) {
@@ -103,7 +106,7 @@ export function installKeyRemapV188(target = globalThis, getBindings = () => nul
   target.keyRemapInstalledV188 = true;
   let translation = buildKeyTranslationV188(getBindings()), source = JSON.stringify(getBindings() || null);
   const handler = event => {
-    if (event.remappedV188 || typing(event.target)) return;
+    if (event.remappedV188 || typing(event.target) || bindingCaptureV188) return;
     const current = JSON.stringify(getBindings() || null);
     if (current !== source) { source = current; translation = buildKeyTranslationV188(getBindings()); }
     if (!translation.has(event.code)) return;
@@ -121,24 +124,35 @@ export function installKeyRemapV188(target = globalThis, getBindings = () => nul
 /** Minimal settings UI: one button per action, press a key to assign. */
 export function mountKeyBindingsUiV188(container, { getBindings, onChange, language = 'fr', document = globalThis.document } = {}) {
   if (!container || !document) return null;
+  // `language` may be a getter, so a later FR/EN switch re-renders in the new language.
+  const english = () => (typeof language === 'function' ? language() : language) === 'en';
   const render = () => {
-    const bindings = normalizeKeyBindingsV188(getBindings?.());
+    const bindings = normalizeKeyBindingsV188(getBindings?.()), en = english();
     container.replaceChildren(...KEY_ACTIONS_V188.map(action => {
       const button = document.createElement('button');
       button.type = 'button'; button.className = 'button key-binding-v188'; button.dataset.actionV188 = action.id;
-      button.textContent = `${language === 'en' ? action.en : action.fr} · ${bindings[action.id] || '—'}`;
+      button.textContent = `${en ? action.en : action.fr} · ${bindings[action.id] || '—'}`;
       button.onclick = () => {
-        button.textContent = `${language === 'en' ? action.en : action.fr} · …`;
+        if (bindingCaptureV188) document.removeEventListener('keydown', bindingCaptureV188, true);
+        button.textContent = `${en ? action.en : action.fr} · …`;
         const capture = event => {
           event.preventDefault(); event.stopImmediatePropagation();
           document.removeEventListener('keydown', capture, true);
-          if (event.code !== 'Escape') onChange?.(normalizeKeyBindingsV188({ ...bindings, [action.id]: event.code }));
+          if (bindingCaptureV188 === capture) bindingCaptureV188 = null;
+          if (event.code !== 'Escape') {
+            // A key already used by another action swaps with this action's
+            // previous key, so a press is never silently refused or unbinds one.
+            const next = { ...bindings, [action.id]: event.code };
+            for (const other of KEY_ACTIONS_V188) if (other.id !== action.id && bindings[other.id] === event.code) next[other.id] = bindings[action.id] ?? null;
+            onChange?.(normalizeKeyBindingsV188(next));
+          }
           render();
         };
+        bindingCaptureV188 = capture;
         document.addEventListener('keydown', capture, true);
       };
       return button;
-    }), Object.assign(document.createElement('button'), { type: 'button', className: 'button', textContent: language === 'en' ? 'Reset controls' : 'Commandes par défaut',
+    }), Object.assign(document.createElement('button'), { type: 'button', className: 'button', textContent: en ? 'Reset controls' : 'Commandes par défaut',
       onclick: () => { onChange?.(defaultKeyBindingsV188()); render(); } }));
   };
   render(); return { render };
