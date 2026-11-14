@@ -25,6 +25,7 @@ import { preserveLetheContinuityV163, recordLetheContinuityReviewV163 } from '..
 import { mountLetheContinuityV163 } from '../src/campaign-lethe-continuity-ui-v163.js';
 import { hostV136 } from './forge-native-host-v136.mjs';
 import { HUB_NPC_ANNEX_WORKPOST_ROUTE_DEFINITIONS_V165 } from '../src/npc-annex-workpost-routes-v165.js';
+import { campaignObjectiveLabelV188 } from '../src/mission-objective-panel-v188.js';
 
 const world = WORLDS.find(entry => entry.id === campaign.worldId);
 const clone = value => structuredClone(value);
@@ -505,7 +506,7 @@ test('PR15: the actual app review callback restores focus to the replaced topic 
     root.replaceChildren(); resets.push(document.activeElement);
     launch = document.createElement('button'); root.append(launch);
   } });
-  const dependencies = { saveSystem: system, deriveStoryCampaignV188, markStoryDebriefSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, clone, preserveCampaignStoryReturnV160,
+  const dependencies = { saveSystem: system, deriveStoryCampaignV188, markStoryDebriefSeenV188, campaignObjectiveLabelV188, STORY_RELAY_CAMPAIGN_ID_V188, clone, preserveCampaignStoryReturnV160,
     preserveConvoyReturnHistoryV162, mountConvoyReturnHistoryV162,
     preserveLetheContinuityV163, mountLetheContinuityV163, recordLetheContinuityReviewV163,
     CAMPAIGNS: [campaign], WORLDS: [world], WEAPONS: [], EQUIPMENT: [], VEHICLES: [], CREW: [],
@@ -550,7 +551,8 @@ test('PR15: ordinary insertions retain their actual phase hooks while authored d
   const { root } = storyDocument();
   const ordinary = insertion(); ordinary.campaignId = 'pair-001-mire';
   const ui = new MissionInsertionUiV62({ root, state: ordinary, autoProgress: false });
-  assert.match(root.textContent, /LIAISONS OPÉRATIONNELLES/u);
+  assert.match(root.textContent, /CANAUX TACTIQUES/u);
+  assert.doesNotMatch(root.textContent, /mission-insertion-phase-enter|LIAISONS OPÉRATIONNELLES/u, 'V188: no technical hook names on the player screen');
   assert.equal(root.querySelectorAll('[data-hook-channel]').length, ui.state.phases[0].hooks.length);
   const authored = storyDocument(); new MissionInsertionUiV62({ root: authored.root, state: insertion(), autoProgress: false });
   assert.match(authored.root.textContent, /Ramenez les relevés/u);
