@@ -41,7 +41,8 @@ import { projectRefugeHubSaveV87 } from './refuge-save-v87.js';
 import { validateShipPortDepartureV87 } from './ship-port-state-v87.js';
 import { PlaceablesDockV86 } from './placeables-ui-v86.js';
 import { resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
-import { squadActionLabelV188, biomeLabelV188, missionFailureLabelV188, checkpointLabelV188 } from './mission-log-labels-v188.js';
+import { squadActionLabelV188, biomeLabelV188, missionFailureLabelV188, checkpointLabelV188, missionLevelLogLineV188,
+  objectiveActionLabelV188, insertionPhaseLabelV188 } from './mission-log-labels-v188.js';
 import { commitCrewTransactionV85 } from './crew-transactions-v85.js';
 import { rememberCrewConversationTopicV135 } from './crew-conversation-memory-v135.js';
 import { createFieldMediaRepositoryV135 } from './field-media-v135.js';
@@ -143,7 +144,7 @@ import { getEnemyDiscoveryV88, recordEnemyDiscoveryV88 } from './enemy-discovery
 import { beginNpcConversationV62, applyNpcDialogueChoiceV62 } from './npc-dialogue-v62.js';
 import { HubDialogueUiV76 } from './hub-dialogue-ui-v76.js';
 import { createMissionInsertionV62, restoreMissionInsertionV62 } from './mission-insertion-v62.js';
-import { MissionInsertionUiV62 } from './mission-insertion-ui-v62.js';
+import { MissionInsertionUiV62, MISSION_INSERTION_PHASE_LABELS_V62 } from './mission-insertion-ui-v62.js';
 import { campaignObjectiveLabelV188 } from './mission-objective-panel-v188.js';
 import {
   SPECIAL_OPERATIONS_V131 as SPECIAL_OPERATIONS_V67, SPECIAL_OPERATION_COUNTS_V131 as SPECIAL_OPERATION_COUNTS_V67,
@@ -157,7 +158,8 @@ import { HiveCommandDockV131 } from './hive-command-ui-v131.js';
 import { SquadCommandDockV132 } from './squad-command-ui-v132.js';
 import { getNarrativeEvidenceModelV132, markNarrativeEvidenceReadV132,
   recordNarrativeEvidenceDecisionV132, markNarrativeMediaPlayedV132 } from './narrative-evidence-v132.js';
-import { getNarrativeInvestigationV68 } from './narrative-collectables-v68.js';
+import { getNarrativeInvestigationV68, NARRATIVE_COLLECTABLES_V68 } from './narrative-collectables-v68.js';
+import { QZ17_ROUTE_CONSEQUENCES_V68 } from './narrative-collectables-runtime-v68.js';
 import { MissionArchiveOverlayV68, NarrativeArchivesUiV68, createOpenArchivesEventV68 } from './narrative-archives-ui-v68.js';
 import { AlphaBravoCommandDockV69 } from './alpha-bravo-ui-v69.js';
 import { AlienSurvivalDockV70 } from './alien-survival-ui-v70.js';
@@ -185,7 +187,7 @@ const byId = (id) => document.getElementById(id);
 const all = (selector, root = document) => [...root.querySelectorAll(selector)];
 const clone = (value) => structuredClone(value);
 const clamp = (value, minimum = 0, maximum = 100) => Math.max(minimum, Math.min(maximum, Number(value) || 0));
-const number = (value) => new Intl.NumberFormat('fr-FR').format(Math.round(Number(value) || 0));
+const number = (value) => new Intl.NumberFormat(currentLanguageV185() === 'en' ? 'en-GB' : 'fr-FR').format(Math.round(Number(value) || 0));
 const absoluteHours = (clock) => (Math.max(1, Number(clock?.day) || 1) - 1) * 24 + (Number(clock?.hour) || 0);
 const title = (value = '') => String(value).replace(/(^|[- ])\w/g, (letter) => letter.toUpperCase());
 const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
@@ -1499,7 +1501,7 @@ function renderStrategy() {
     const complete = saveSystem.data.strategy.unlockedResearchIds.includes(project.id);
     return `<article class="strategy-card ${complete ? 'completed' : ''}"><div><span class="eyebrow">R&D · ${project.hours}H</span><h4>${escapeHtml(project.name)}</h4><p>${escapeHtml(project.description)}</p></div><footer><span>${complete ? 'ACTIF' : formatCost(project.cost)}</span><button class="button compact" data-research-id="${project.id}" ${!locked && !complete && canAfford(saveSystem.data, project.cost) ? '' : 'disabled'}>${complete ? 'TERMINÉ' : 'RECHERCHER'}</button></footer></article>`;
   }).join('');
-  byId('strategy-log').innerHTML = saveSystem.data.strategy.log.slice(0, 10).map((entry) => `<article class="strategy-log-entry ${entry.incident ? 'danger' : ''}"><span>J${entry.day} · ${entry.risk || 0}%</span><strong>${escapeHtml(entry.title)}</strong><p>${escapeHtml(entry.result)}</p></article>`).join('') || '<p class="detail-copy">Le journal attend votre première décision.</p>';
+  byId('strategy-log').innerHTML = saveSystem.data.strategy.log.slice(0, 10).map((entry) => `<article class="strategy-log-entry ${entry.incident ? 'danger' : ''}"><span>${currentLanguageV185() === 'en' ? 'D' : 'J'}${entry.day} · ${entry.risk || 0}%</span><strong>${escapeHtml(strategyLogTextV188(entry.title))}</strong><p>${escapeHtml(strategyLogTextV188(entry.result))}</p></article>`).join('') || '<p class="detail-copy">Le journal attend votre première décision.</p>';
 }
 
 function renderModules() {
@@ -2906,7 +2908,7 @@ function handleMissionInsertionHooksV62(hooks) {
     recordOperationFlag(saveSystem.data, `insertion-${hook.channel}-${phase}`);
     if (hook.channel === 'audio') audio.ui();
     if (hook.channel === 'camera') byId('mission-insertion-v62').dataset.cameraHook = String(hook.event || phase);
-    if (hook.channel === 'objective') byId('mission-log').textContent = `INSERTION · ${phase.toUpperCase()} · ${campaignObjectiveLabel(operation.campaignId)}`;
+    if (hook.channel === 'objective') byId('mission-log').textContent = `INSERTION · ${insertionPhaseLabelV188(phase, MISSION_INSERTION_PHASE_LABELS_V62).toUpperCase()} · ${campaignObjectiveLabel(operation.campaignId)}`;
   }
   saveSystem.commit();
 }
@@ -3090,6 +3092,15 @@ function launchCampaign(campaign = null) {
   return true;
 }
 
+// Command log: entries written by older saves carry campaign, vehicle or crew
+// ids (operation results, loadout, medical). The stored text is kept; only the
+// display swaps a known id for its name.
+function strategyLogTextV188(text) {
+  return String(text ?? '').replace(/[a-z0-9]+(?:-[a-z0-9]+)+/gu, (token) => CAMPAIGNS.find((entry) => entry.id === token)?.name
+    || VEHICLES.find((entry) => entry.id === token)?.name
+    || (CREW.some((entry) => entry.id === token) || saveSystem.data.crew.some((member) => member.id === token) ? crewDisplayNameV188(token) : token));
+}
+
 // Mission log: a crew id (crew-04-noor-okafor) is shown by the member's name.
 function crewDisplayNameV188(id) {
   if (!id) return 'allié';
@@ -3239,30 +3250,15 @@ function handleGameEvent(event) {
     }
     return;
   }
-  if (event.type === 'mission-level-ready') {
-    log.textContent = `NIVEAU ${String(event.templateId || '').toUpperCase()} · ${event.routes} routes · ${event.zones} zones · ${event.events} événements`;
-  }
   if (event.type === 'mission-zone') {
     log.textContent = `ZONE · ${String(event.name || event.zoneId || '').toUpperCase()} · ${biomeLabelV188(event.biome).toUpperCase()}`;
   }
-  if (event.type === 'narrative-collectable-discovered') {
-    log.textContent = `ARCHIVE RÉCUPÉRÉE · ${String(event.collectableId || '').toUpperCase()} · preuve persistée`;
-  }
-  if (event.type === 'narrative-route-unlocked') {
-    log.textContent = `ROUTE DÉBLOQUÉE · ${String(event.flag || event.doorId || '').toUpperCase()} · porte physique confirmée`;
-  }
-  if (event.type === 'mission-level-event') {
-    recordOperationFlag(saveSystem.data, `level-event-${event.eventId}`);
-    log.textContent = `ÉVÉNEMENT TERRAIN · ${String(event.eventId || '').toUpperCase()}`;
-  }
-  if (event.type === 'mission-timer-started') {
-    recordOperationFlag(saveSystem.data, `timer-${event.timerId}-started`);
-    log.textContent = `HOLDOUT · ${String(event.timerId || 'extraction').toUpperCase()} · ${Math.ceil(Number(event.duration) || 0)} S`;
-  }
-  if (event.type === 'mission-timer-complete') {
-    recordOperationFlag(saveSystem.data, `timer-${event.timerId}-complete`);
-    log.textContent = `HOLDOUT TERMINÉ · ${String(event.timerId || 'extraction').toUpperCase()} DÉVERROUILLÉE`;
-  }
+  // Level content is named for the player; the ids stay in the operation flags.
+  if (event.type === 'mission-level-event') recordOperationFlag(saveSystem.data, `level-event-${event.eventId}`);
+  if (event.type === 'mission-timer-started') recordOperationFlag(saveSystem.data, `timer-${event.timerId}-started`);
+  if (event.type === 'mission-timer-complete') recordOperationFlag(saveSystem.data, `timer-${event.timerId}-complete`);
+  const levelLogLineV188 = missionLevelLogLineV188(event, { collectables: NARRATIVE_COLLECTABLES_V68, routes: QZ17_ROUTE_CONSEQUENCES_V68 });
+  if (levelLogLineV188) log.textContent = levelLogLineV188;
   if (event.type === 'squad-ready') {
     log.textContent = `ESCOUADE DÉPLOYÉE · ${event.members?.length || 0} alliés IA physiques · ${event.animationSheets || 0} plaques animées`;
   }
@@ -3361,7 +3357,7 @@ function handleGameEvent(event) {
     if (event.message || event.reason) log.textContent = `MATÉRIEL · ${event.message || event.reason}`;
     renderMissionEquipment();
   }
-  if (event.type === 'objective-action') log.textContent = `OBJECTIF · ${String(event.action || 'progression').toUpperCase()}`;
+  if (event.type === 'objective-action') log.textContent = `OBJECTIF · ${objectiveActionLabelV188(event.action).toUpperCase()}`;
   if (event.type === 'mission-complete') {
     // Repeated terminal events after durable resolution cannot even rewrite the
     // profile timestamp, let alone manufacture a second result or payment.

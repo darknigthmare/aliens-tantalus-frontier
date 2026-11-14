@@ -1,7 +1,10 @@
 import { FIELD_MEDIA_LIMITS_V135, normalizeFieldMediaOwnerV135 } from './field-media-v135.js';
+import { currentLanguageV185 } from './i18n-v185.js';
 
-const formatBytes = bytes => `${(bytes / 1048576).toLocaleString('fr-FR', { maximumFractionDigits: 1 })} Mio`;
-const formatDate = timestamp => new Date(timestamp).toLocaleString('fr-FR');
+// V188: numbers and dates follow the chosen language.
+const localeV188 = () => currentLanguageV185() === 'en' ? 'en-GB' : 'fr-FR';
+const formatBytes = bytes => `${(bytes / 1048576).toLocaleString(localeV188(), { maximumFractionDigits: 1 })} ${currentLanguageV185() === 'en' ? 'MiB' : 'Mio'}`;
+const formatDate = timestamp => new Date(timestamp).toLocaleString(localeV188());
 const SCENE_LABELS = Object.freeze({ hub: 'Tantalus', mission: 'Terrain', cctv: 'Caméra de surveillance' });
 function node(documentRef, tag, text, attributes = {}) {
   const element = documentRef.createElement(tag);

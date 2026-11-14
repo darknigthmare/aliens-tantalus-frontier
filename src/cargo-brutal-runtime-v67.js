@@ -44,6 +44,17 @@ const DEFAULT_OBSTACLES = Object.freeze([
   Object.freeze({ id: 'cargo-block-charlie', x: 2140, y: DEFAULT_MAIN_DECK_Y - 168, w: 252, h: 168, hits: 0, requiredHits: 3, cleared: false })
 ]);
 
+// V188 text bug hunt: the prompt named the obstacle by its id (CARGO-BLOCK-ALPHA).
+// [PROPOSÉ] player names; the ids stay in the state and the events.
+export const CARGO_OBSTACLE_LABELS_V188 = Object.freeze({
+  'cargo-block-alpha': 'le conteneur Alpha',
+  'cargo-block-bravo': 'le conteneur Bravo',
+  'cargo-block-charlie': 'le conteneur Charlie'
+});
+export function cargoObstacleLabelV188(id) {
+  return Object.hasOwn(CARGO_OBSTACLE_LABELS_V188, String(id)) ? CARGO_OBSTACLE_LABELS_V188[String(id)] : 'le chargement';
+}
+
 const clamp = (value, min, max) => Math.max(min, Math.min(max, Number(value) || 0));
 const isRecord = (value) => Boolean(value && typeof value === 'object' && !Array.isArray(value));
 const center = (entity = {}) => ({ x: (Number(entity.x) || 0) + (Number(entity.w) || 0) / 2, y: (Number(entity.y) || 0) + (Number(entity.h) || 0) / 2 });
@@ -718,7 +729,7 @@ export function withCargoBrutalRuntimeV67(BaseEngine) {
       if (state.phase === 'restore-power' && this.powerNode && distance(actor, this.powerNode) <= 155) return entry('restore-power', this.powerNode, 'E  RÉTABLIR LA PUISSANCE DE SOUTE', actor);
       if (state.phase === 'mount-loader' && this.vehicle && distance(actor, this.vehicle) <= 220) return entry('mount-loader', this.vehicle, 'V / E  MONTER DANS LE P-5000', actor);
       const obstacle = state.phase === 'clear-route' && driver ? state.obstacles.find((candidate) => !candidate.cleared && distance(this.vehicle, candidate) <= 270) : null;
-      if (obstacle) return entry('clear-route', obstacle, `E / TIR  DÉPLACER ${obstacle.id.toUpperCase()} · ${obstacle.hits}/${obstacle.requiredHits}`);
+      if (obstacle) return entry('clear-route', obstacle, `E / TIR  DÉPLACER ${cargoObstacleLabelV188(obstacle.id).toUpperCase()} · ${obstacle.hits}/${obstacle.requiredHits}`);
       const cargoDoor = this.cargoBrutalDoorNearLoaderV67(actor);
       if (cargoDoor) return entry('door', cargoDoor, cargoDoor.open ? 'E  ATTENDRE L’OUVERTURE DU SAS CARGO' : 'E  ACTIONNER LA PORTE DE SOUTE');
       if (state.phase === 'escort-convoy' && distance(surface, state.convoy) <= 270 && !(driver && state.convoy.active)) {

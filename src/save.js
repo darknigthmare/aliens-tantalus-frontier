@@ -854,7 +854,7 @@ export function getStrategicValue(save, key) {
 function changeStrategicValue(save, key, delta) {
   const target = Object.hasOwn(save.galaxy.resources, key) ? save.galaxy.resources
     : Object.hasOwn(save.hub.systems, key) ? save.hub.systems : null;
-  if (!target) throw new Error('Ressource strategique inconnue : ' + key);
+  if (!target) throw new Error('Ressource stratégique inconnue : ' + key);
   const maximum = target === save.hub.systems ? 100 : 999999999;
   target[key] = Math.round(clamp(target[key] + delta, 0, maximum) * 100) / 100;
   return target[key];
@@ -1093,9 +1093,9 @@ function hasResearch(save, id) {
 
 export function executeStrategicAction(save, actionId) {
   const action = COMMAND_ACTIONS.find((entry) => entry.id === actionId);
-  if (!action) throw new Error('Action strategique inconnue.');
+  if (!action) throw new Error('Action stratégique inconnue.');
   const strategy = ensureStrategy(save);
-  if (strategy.currentOperation) throw new Error('Une operation est deja en cours.');
+  if (strategy.currentOperation) throw new Error('Une opération est déjà en cours.');
   payStrategicCost(save, action.cost);
   strategy.serial += 1;
   const roll = deterministicRoll(save, action.id);
@@ -1108,11 +1108,11 @@ export function executeStrategicAction(save, actionId) {
     save.hub.systems.research = clamp(save.hub.systems.research + (incident ? 3 : 7));
     if (nextWorld && !incident) {
       save.galaxy.unlockedWorldIds.push(nextWorld.id);
-      result = nextWorld.name + ' ajoute au reseau ; 9 points de recherche acquis.';
+      result = nextWorld.name + ' ajouté au réseau ; 9 points de recherche acquis.';
     } else if (nextWorld) {
       save.hub.systems.security = clamp(save.hub.systems.security - 3);
-      result = 'Interferences hostiles : route non stabilisee, 4 points de recherche recuperes.';
-    } else result = 'Reseau complet ; ' + research + ' points de recherche consolides.';
+      result = 'Interférences hostiles : route non stabilisée, 4 points de recherche récupérés.';
+    } else result = 'Réseau complet ; ' + research + ' points de recherche consolidés.';
   }
   if (action.id === 'salvage-run') {
     const credits = incident ? 180 : 620;
@@ -1123,16 +1123,16 @@ export function executeStrategicAction(save, actionId) {
     changeStrategicValue(save, 'fuel', fuel);
     if (incident) save.hub.systems.hull = clamp(save.hub.systems.hull - 4);
     result = incident
-      ? 'Collision pendant extraction : +' + credits + ' credits, +' + alloy + ' alliage, +' + fuel + ' carburant, coque -4%.'
-      : 'Epave securisee : +' + credits + ' credits, +' + alloy + ' alliage et +' + fuel + ' carburant.';
+      ? 'Collision pendant l’extraction : +' + credits + ' crédits, +' + alloy + ' alliage, +' + fuel + ' carburant, coque -4%.'
+      : 'Épave sécurisée : +' + credits + ' crédits, +' + alloy + ' alliage et +' + fuel + ' carburant.';
   }
   if (action.id === 'research-cycle') {
     const research = incident ? 6 : 13;
     changeStrategicValue(save, 'research', research);
     save.hub.systems.research = clamp(save.hub.systems.research + (incident ? 4 : 9));
     if (incident) save.hub.systems.quarantine = clamp(save.hub.systems.quarantine - 2);
-    result = incident ? 'Echantillon instable : +' + research + ' recherche, quarantaine -2%.'
-      : 'Cycle MIRE valide : +' + research + ' recherche et laboratoire +9%.';
+    result = incident ? 'Échantillon instable : +' + research + ' recherche, quarantaine -2%.'
+      : 'Cycle MIRE validé : +' + research + ' recherche et laboratoire +9%.';
   }
   if (action.id === 'colony-relief') {
     const worldState = save.galaxy.worldState[save.worldId] || save.galaxy.worldState[WORLDS[0].id];
@@ -1140,7 +1140,7 @@ export function executeStrategicAction(save, actionId) {
     worldState.infestation = clamp(worldState.infestation - (incident ? 1 : 5));
     worldState.quarantine = clamp(worldState.quarantine + (incident ? 2 : 8));
     if (incident) for (const member of save.crew.filter((entry) => strategy.selectedCrewIds.includes(entry.id))) member.stress = clamp(member.stress + 4);
-    result = incident ? 'Convoi attaque : stabilite +2, infestation -1.' : 'Soutien livre : stabilite +9, infestation -5, quarantaine +8.';
+    result = incident ? 'Convoi attaqué : stabilité +2, infestation -1.' : 'Soutien livré : stabilité +9, infestation -5, quarantaine +8.';
   }
   if (action.id === 'crew-rotation') {
     const healing = hasResearch(save, 'trauma-protocol') ? 28 : 20;
@@ -1151,7 +1151,7 @@ export function executeStrategicAction(save, actionId) {
       if (['injured', 'recovering'].includes(member.status) && member.health >= 70) member.status = 'active';
     }
     save.hub.systems.morale = clamp(save.hub.systems.morale + (incident ? 3 : 7));
-    result = 'Rotation terminee : sante +' + healing + ', stress -24, fatigue -30.';
+    result = 'Rotation terminée : santé +' + healing + ', stress -24, fatigue -30.';
   }
   advanceStrategicClock(save, action.hours);
   save.statistics.strategicActions += 1;
@@ -1163,8 +1163,8 @@ export function completeResearchProject(save, projectId) {
   const project = RESEARCH_PROJECTS.find((entry) => entry.id === projectId);
   if (!project) throw new Error('Projet de recherche inconnu.');
   const strategy = ensureStrategy(save);
-  if (strategy.currentOperation) throw new Error('Recherche indisponible pendant une operation.');
-  if (strategy.unlockedResearchIds.includes(project.id)) throw new Error('Projet deja termine.');
+  if (strategy.currentOperation) throw new Error('Recherche indisponible pendant une opération.');
+  if (strategy.unlockedResearchIds.includes(project.id)) throw new Error('Projet déjà terminé.');
   payStrategicCost(save, project.cost);
   strategy.serial += 1;
   strategy.unlockedResearchIds.push(project.id);
@@ -1173,13 +1173,13 @@ export function completeResearchProject(save, projectId) {
   save.hub.systems.research = clamp(save.hub.systems.research + 12);
   if (project.id === 'xeno-containment') save.hub.systems.quarantine = clamp(save.hub.systems.quarantine + 10);
   if (project.id === 'ship-logistics') save.hub.systems.supplies = clamp(save.hub.systems.supplies + 8);
-  const result = project.name + ' termine et applique au runtime strategique.';
+  const result = project.name + ' terminé et appliqué aux opérations stratégiques.';
   addStrategyLog(save, { type: 'research', title: project.name, risk: 0, incident: false, result });
   return { ok: true, project, result };
 }
 
 export function getProcurementQuote(save, kind, item) {
-  if (!item?.id) throw new Error('Entree de catalogue invalide.');
+  if (!item?.id) throw new Error('Entrée de catalogue invalide.');
   const discount = hasResearch(save, 'ship-logistics') ? 0.85 : 1;
   const factor = rarityFactor(item.rarity);
   if (kind === 'weapon') return { credits: Math.ceil(((140 + item.damage * 8 + item.magazine * 2 + item.penetration * 3) * factor * discount) / 10) * 10 };
@@ -1188,30 +1188,30 @@ export function getProcurementQuote(save, kind, item) {
     credits: Math.ceil(((900 + item.hull * 10 + item.speed * 5 + item.seats.length * 100) * discount) / 10) * 10,
     alloy: Math.max(4, Math.ceil(((item.hull + item.armor) / 20) * discount))
   };
-  throw new Error('Type acquisition inconnu.');
+  throw new Error('Type d’acquisition inconnu.');
 }
 
 export function procureCatalogItem(save, kind, item) {
   const strategy = ensureStrategy(save);
-  if (strategy.currentOperation) throw new Error('Acquisition indisponible pendant une operation.');
+  if (strategy.currentOperation) throw new Error('Acquisition indisponible pendant une opération.');
   const inventoryKey = kind + 'Ids';
   if (!Array.isArray(strategy.inventory[inventoryKey])) throw new Error('Inventaire inconnu.');
-  if (strategy.inventory[inventoryKey].includes(item.id)) throw new Error('Materiel deja acquis.');
+  if (strategy.inventory[inventoryKey].includes(item.id)) throw new Error('Matériel déjà acquis.');
   const quote = getProcurementQuote(save, kind, item);
   payStrategicCost(save, quote);
   strategy.inventory[inventoryKey].push(item.id);
   strategy.serial += 1;
   advanceStrategicClock(save, kind === 'vehicle' ? 2 : 0.5);
   save.statistics.procurements += 1;
-  addStrategyLog(save, { type: 'procurement', title: item.name, risk: 0, incident: false, result: item.name + ' ajoute a inventaire.' });
+  addStrategyLog(save, { type: 'procurement', title: item.name, risk: 0, incident: false, result: item.name + ' ajouté à l’inventaire.' });
   return { ok: true, item, quote };
 }
 
 export function equipCatalogItem(save, kind, itemId) {
   const strategy = ensureStrategy(save);
-  if (strategy.currentOperation) throw new Error('Dotation verrouillee pendant une operation.');
+  if (strategy.currentOperation) throw new Error('Dotation verrouillée pendant une opération.');
   const inventoryKey = kind + 'Ids';
-  if (!strategy.inventory[inventoryKey]?.includes(itemId)) throw new Error('Materiel non acquis.');
+  if (!strategy.inventory[inventoryKey]?.includes(itemId)) throw new Error('Matériel non acquis.');
   const loadoutKey = kind === 'weapon' ? 'weaponIds' : kind === 'equipment' ? 'equipmentIds' : null;
   if (!loadoutKey) throw new Error('Type de dotation inconnu.');
   const current = save.player[loadoutKey].filter((id) => strategy.inventory[inventoryKey].includes(id) && id !== itemId);
@@ -1222,20 +1222,20 @@ export function equipCatalogItem(save, kind, itemId) {
 
 export function selectStrategicVehicle(save, vehicleId) {
   const strategy = ensureStrategy(save);
-  if (strategy.currentOperation) throw new Error('Vehicule verrouille pendant une operation.');
-  if (!strategy.inventory.vehicleIds.includes(vehicleId)) throw new Error('Vehicule non acquis.');
+  if (strategy.currentOperation) throw new Error('Véhicule verrouillé pendant une opération.');
+  if (!strategy.inventory.vehicleIds.includes(vehicleId)) throw new Error('Véhicule non acquis.');
   const vehicle = VEHICLES.find((entry) => entry.id === vehicleId);
-  if (!vehicle) throw new Error('Vehicule inconnu.');
+  if (!vehicle) throw new Error('Véhicule inconnu.');
   const gate = getVehicleDeploymentGateV60(vehicle);
-  if (!gate.ready) throw new Error(`Chassis indisponible : ${gate.reason}`);
+  if (!gate.ready) throw new Error(`Châssis indisponible : ${gate.reason}`);
   strategy.selectedVehicleId = vehicleId;
-  addStrategyLog(save, { type: 'loadout', title: 'Vehicule affecte', risk: 0, incident: false, result: vehicleId + ' prepare pour la prochaine operation.' });
+  addStrategyLog(save, { type: 'loadout', title: 'Véhicule affecté', risk: 0, incident: false, result: (vehicle.name || 'Véhicule') + ' préparé pour la prochaine opération.' });
   return vehicleId;
 }
 
 export function assignCrewMember(save, crewId) {
   const strategy = ensureStrategy(save);
-  if (strategy.currentOperation) throw new Error('Escouade verrouillee pendant une operation.');
+  if (strategy.currentOperation) throw new Error('Escouade verrouillée pendant une opération.');
   const member = save.crew.find((entry) => entry.id === crewId);
   if (!member) throw new Error('Membre Echo-9 inconnu.');
   if (strategy.selectedCrewIds.includes(crewId)) {
@@ -1243,8 +1243,8 @@ export function assignCrewMember(save, crewId) {
     strategy.selectedCrewIds = strategy.selectedCrewIds.filter((id) => id !== crewId);
     return { assigned: false, crewId };
   }
-  if (member.status !== 'active') throw new Error('Membre inapte au deploiement.');
-  if (strategy.selectedCrewIds.length >= MAX_SQUAD_SIZE) throw new Error('Escouade limitee a ' + MAX_SQUAD_SIZE + ' membres.');
+  if (member.status !== 'active') throw new Error('Membre inapte au déploiement.');
+  if (strategy.selectedCrewIds.length >= MAX_SQUAD_SIZE) throw new Error('Escouade limitée à ' + MAX_SQUAD_SIZE + ' membres.');
   strategy.selectedCrewIds.push(crewId);
   return { assigned: true, crewId };
 }
@@ -1462,7 +1462,7 @@ function recordCrewMissionV85(save, operation, success, reason) {
 
 export function treatCrewMember(save, crewId) {
   const strategy = ensureStrategy(save);
-  if (strategy.currentOperation) throw new Error('Soins indisponibles pendant une operation.');
+  if (strategy.currentOperation) throw new Error('Soins indisponibles pendant une opération.');
   const member = save.crew.find((entry) => entry.id === crewId);
   if (!member || member.status === 'deceased') throw new Error('Membre non traitable.');
   payStrategicCost(save, { medical: 1 });
@@ -1473,7 +1473,7 @@ export function treatCrewMember(save, crewId) {
   if (['injured', 'recovering'].includes(member.status) && member.health >= 70) member.status = 'active';
   strategy.serial += 1;
   advanceStrategicClock(save, 1);
-  addStrategyLog(save, { type: 'medical', title: 'Traitement individuel', risk: 0, incident: false, result: crewId + ' stabilise : sante +' + healing + '.' });
+  addStrategyLog(save, { type: 'medical', title: 'Traitement individuel', risk: 0, incident: false, result: crewId + ' stabilisé : santé +' + healing + '.' });
   return member;
 }
 
@@ -1543,7 +1543,7 @@ export function beginOperation(save, campaign, world) {
       const minimumCrew = Math.max(1, Math.min(MAX_SQUAD_SIZE, Math.floor(Number(campaign.minimumCrew) || 1)));
       const operationCrewIds = new Set(stringList(operation.crewIds));
       const activeCrewCount = save.crew.filter((member) => operationCrewIds.has(member.id) && member.status === 'active').length;
-      if (activeCrewCount < minimumCrew) throw new Error(`Escouade incomplete : ${minimumCrew} operateurs actifs requis.`);
+      if (activeCrewCount < minimumCrew) throw new Error(`Escouade incomplète : ${minimumCrew} opérateurs actifs requis.`);
     }
     operation.vehicleId = campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? null
       : resolveReadyVehicleIdV60(operation.vehicleId, strategy.inventory.vehicleIds, VEHICLES);
@@ -1565,14 +1565,14 @@ export function beginOperation(save, campaign, world) {
     if (campaign.specialOperationId) operation.specialOperationId ??= campaign.specialOperationId;
     return { ok: true, resumed: true, operation };
   }
-  if (strategy.currentOperation) throw new Error('Une autre operation est deja en cours.');
+  if (strategy.currentOperation) throw new Error('Une autre opération est déjà en cours.');
   preserveConvoyReturnHistoryV162(save);
   preserveLetheContinuityV163(save);
   strategy.selectedVehicleId = resolveReadyVehicleIdV60(strategy.selectedVehicleId, strategy.inventory.vehicleIds, VEHICLES);
   const brief = getOperationBrief(save, campaign, world);
-  if (!brief.worldUnlocked) throw new Error('Route verrouillee : effectuez une reconnaissance.');
-  if (!brief.crewIds.length) throw new Error('Aucun membre actif dans escouade.');
-  if (!brief.crewReady) throw new Error(`Escouade incomplete : ${brief.minimumCrew} operateurs actifs requis.`);
+  if (!brief.worldUnlocked) throw new Error('Route verrouillée : effectuez une reconnaissance.');
+  if (!brief.crewIds.length) throw new Error('Aucun membre actif dans l’escouade.');
+  if (!brief.crewReady) throw new Error(`Escouade incomplète : ${brief.minimumCrew} opérateurs actifs requis.`);
   payStrategicCost(save, brief.cost);
   strategy.serial += 1;
   advanceStrategicClock(save, brief.hours);
@@ -1618,7 +1618,7 @@ export function beginOperation(save, campaign, world) {
   }
   consumeHubAnnexDeploymentSupportV71(save);
   strategy.plannedCampaignId = campaign.id;
-  addStrategyLog(save, { type: 'operation', title: campaign.name, risk: brief.risk, incident: false, result: 'Deploiement lance vers ' + world.name + '.' });
+  addStrategyLog(save, { type: 'operation', title: campaign.name, risk: brief.risk, incident: false, result: 'Déploiement lancé vers ' + world.name + '.' });
   return { ok: true, resumed: false, brief, operation: strategy.currentOperation };
 }
 
@@ -1923,7 +1923,7 @@ export function abandonBlockedAlphaBravoOperationV69(save) {
       certified: false
     }, { success: false, reason: 'strategic-abandonment', bonusApplied: false });
   }
-  const result = 'Abandon strategique : operation irrecuperable archivee, pertes conservees, aucune recompense.';
+  const result = 'Abandon stratégique : opération irrécupérable archivée, pertes conservées, aucune récompense.';
   strategy.lastOperation = {
     ...structuredClone(operation),
     success: false,
@@ -2033,7 +2033,7 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
     const cappedRewardV121 = paidStrategicRewardV121 && Object.keys(strategicReward).some(key => paidStrategicRewardV121[key] < strategicReward[key]);
     const nativeRewardLabel = specialRewardV121 ? ` Bilan vérifié : +${paidStrategicRewardV121.credits} crédits, +${paidStrategicRewardV121.alloy} alliage, +${paidStrategicRewardV121.research} recherche.`
       + (cappedRewardV121 ? ' Plafond de stockage atteint ; bilan natif conservé.' : '') : '';
-    result = 'Objectif accompli : stabilite +8, infestation -' + (documentationOnlyV122 ? 0 : containment ? 11 : 7) + ', recompenses transferees.' + bonusLabel + nativeRewardLabel;
+    result = 'Objectif accompli : stabilité +8, infestation -' + (documentationOnlyV122 ? 0 : containment ? 11 : 7) + ', récompenses transférées.' + bonusLabel + nativeRewardLabel;
     if (documentationOnlyV122) save.archiveRelayArchivesV122 = {
       schema: 122, case: { id: 'qz18-last-relay', operationId: operation.id, verdict: 'delayed-distress',
         documentIds: [...ARCHIVE_RELAY_DOCUMENT_IDS_V122], completedDay: save.clock.day, completedHour: save.clock.hour }
@@ -2057,12 +2057,12 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
       for (const member of save.crew.filter((entry) => operation.crewIds.includes(entry.id) && entry !== lead)) member.stress = clamp(member.stress + 9);
     }
     if (resolvedReason === 'retreat') save.statistics.retreats += 1;
-    result = resolvedReason === 'retreat' ? 'Retraite : stabilite -2, infestation +2.'
+    result = resolvedReason === 'retreat' ? 'Retraite : stabilité -2, infestation +2.'
       : resolvedReason === 'doctrine-certification'
-        ? 'Echec Doctrine Alpha / Bravo : certificat, tâches ou score de cohésion invalides.'
+        ? 'Échec Doctrine Alpha / Bravo : certificat, tâches ou score de cohésion invalides.'
         : resolvedReason === 'survival-validation'
-          ? 'Echec Systèmes de survie : état persisté ou preuves de mission invalides.'
-        : 'Echec : stabilite -6, infestation +7 et un operateur blesse.';
+          ? 'Échec Systèmes de survie : état persisté ou preuves de mission invalides.'
+        : 'Échec : stabilité -6, infestation +7 et un opérateur blessé.';
   }
   if (isAlphaBravo) applyAlphaBravoCrewResultsV69(save, operation, alphaBravoCertification);
   const alphaBravoDoctrineRun = isAlphaBravo

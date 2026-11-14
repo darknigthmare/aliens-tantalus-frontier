@@ -22,6 +22,7 @@ import { getVehicleShowroomV119 } from './vehicle-showroom-v119.js';
 import { resolveAlienBaseDossierV1, resolveAlienBaseIdentityProposalV1, resolveAlienBaseMasterEntityV1, resolveAlienBaseWeaponReferenceV1 } from './alien-base-bridge-v1.js';
 import { resolveWeaponReferenceCoverageV122 as resolveWeaponReferenceCoverageV120 } from './weapon-reference-coverage-v122.js';
 import { groupLabelV188, catalogValueLabelV188 } from './group-glossary-v188.js';
+import { currentLanguageV185 } from './i18n-v185.js';
 
 const importWalkV107 = id => {
   const art = getEnemyStaticPoseV96(id), walk = getEnemyImportAnimationV107(art), attack = getEnemyImportAttackV109(art);
@@ -177,7 +178,8 @@ export function formatCatalogValueV62(value, context = {}) {
       ? value.map((entry) => formatCatalogValueV62(entry, context)).filter(Boolean).join(' · ')
       : null;
   }
-  if (typeof value === 'number') return new Intl.NumberFormat('fr-FR', {
+  // V188: numbers follow the chosen language (7,7 in French, 7.7 in English).
+  if (typeof value === 'number') return new Intl.NumberFormat(currentLanguageV185() === 'en' ? 'en-GB' : 'fr-FR', {
     maximumFractionDigits: 2
   }).format(value);
   if (typeof value === 'object' && value) return visibleEntries(value)
@@ -797,7 +799,8 @@ export class CatalogWorkbenchV62 {
       createElement(this.document, 'strong', 'catalog-v62__card-title', this.developerModeV110 ? record.name : playerCatalogNameV110(record.name)),
       createElement(this.document, 'span', 'catalog-v62__card-type', record.taxonomy.type === CATALOG_UNKNOWN_V62 ? UNKNOWN_LABEL : this.developerModeV110 ? record.taxonomy.type : playerCatalogNameV110(record.taxonomy.type))
     );
-    if (this.developerModeV110 || record.catalog !== 'enemies') body.append(createElement(this.document, 'span', 'catalog-v62__card-id', record.id));
+    // V188: content ids stay in developer mode; players read the name above.
+    if (this.developerModeV110) body.append(createElement(this.document, 'span', 'catalog-v62__card-id', record.id));
     select.append(media, body);
     if (record.catalogPolicyV105?.archived) body.append(createElement(this.document, 'span', 'catalog-v62__card-type', 'ARCHIVE HISTORIQUE'));
     if (record.documentaryReferenceV105) body.append(createElement(this.document, 'span', 'catalog-v62__card-type', 'ORIGINAL DOCUMENTAIRE · HORS COMBAT'));
