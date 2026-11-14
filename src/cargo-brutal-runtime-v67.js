@@ -707,6 +707,36 @@ export function withCargoBrutalRuntimeV67(BaseEngine) {
       return true;
     }
 
+    // V188 "the prompt is always right": the cargo step E would perform, in the
+    // same order as cargoBrutalInteractV67, as one action of the shared selection.
+    cargoBrutalInteractionV188(actor = this.player) {
+      const state = this.cargoBrutalV67;
+      if (!this.isCargoBrutalV67() || !state || !actor?.alive || actor.downed || this.mission?.state !== 'active') return null;
+      const surface = actor.inVehicle && this.vehicle ? this.vehicle : actor, driver = Boolean(actor.inVehicle && this.vehicle?.driver === actor);
+      const entry = (step, target, prompt, from = surface) => ({ kind: 'cargo-brutal-v67', category: 'action', step, target, prompt,
+        distance: this.interactionRankDistanceV188(from, target) });
+      if (state.phase === 'restore-power' && this.powerNode && distance(actor, this.powerNode) <= 155) return entry('restore-power', this.powerNode, 'E  RÉTABLIR LA PUISSANCE DE SOUTE', actor);
+      if (state.phase === 'mount-loader' && this.vehicle && distance(actor, this.vehicle) <= 220) return entry('mount-loader', this.vehicle, 'V / E  MONTER DANS LE P-5000', actor);
+      const obstacle = state.phase === 'clear-route' && driver ? state.obstacles.find((candidate) => !candidate.cleared && distance(this.vehicle, candidate) <= 270) : null;
+      if (obstacle) return entry('clear-route', obstacle, `E / TIR  DÉPLACER ${obstacle.id.toUpperCase()} · ${obstacle.hits}/${obstacle.requiredHits}`);
+      const cargoDoor = this.cargoBrutalDoorNearLoaderV67(actor);
+      if (cargoDoor) return entry('door', cargoDoor, cargoDoor.open ? 'E  ATTENDRE L’OUVERTURE DU SAS CARGO' : 'E  ACTIONNER LA PORTE DE SOUTE');
+      if (state.phase === 'escort-convoy' && distance(surface, state.convoy) <= 270 && !(driver && state.convoy.active)) {
+        return entry('escort-convoy', state.convoy, driver ? 'E  LANCER L’ESCORTE DES SURVIVANTS' : 'P-5000 REQUIS POUR L’ESCORTE');
+      }
+      if (state.phase === 'retrieve-core' && distance(surface, state.core) <= 250) return entry('retrieve-core', state.core, driver ? 'E  SAISIR LE NOYAU AVEC LES GRIFFES' : 'GRIFFES DU P-5000 REQUISES');
+      if (state.phase === 'carry-core' && driver && state.core.carried && distance(surface, state.installNode) <= 270) return entry('carry-core', state.installNode, 'E  COUPLER LE NOYAU');
+      if (state.phase === 'extract' && this.objective && distance(surface, this.objective) <= 180) return entry('extract', this.objective, this.missingCargoBrutalRequirementV67() || 'E  CONFIRMER L’EXTRACTION CARGO');
+      return null;
+    }
+
+    interactionCandidatesV188(actor = this.player) {
+      const list = super.interactionCandidatesV188(actor);
+      const entry = this.cargoBrutalInteractionV188(actor);
+      if (entry) list.unshift(entry);
+      return list;
+    }
+
     cargoBrutalInteractV67(actor = this.player) {
       const state = this.cargoBrutalV67;
       if (!this.isCargoBrutalV67() || !state || !actor?.alive || this.mission?.state !== 'active') return false;
@@ -789,7 +819,7 @@ export function withCargoBrutalRuntimeV67(BaseEngine) {
 
     interact(actor = this.player) {
       if (!this.isCargoBrutalV67()) return super.interact(actor);
-      if (this.cargoBrutalInteractV67(actor)) return true;
+      if (this.selectInteractionTargetV188(actor)?.kind === 'cargo-brutal-v67') return this.cargoBrutalInteractV67(actor);
       return super.interact(actor);
     }
 
@@ -1189,18 +1219,9 @@ export function withCargoBrutalRuntimeV67(BaseEngine) {
 
     getInteractionPrompt(actor = this.player) {
       if (!this.isCargoBrutalV67() || !this.cargoBrutalV67 || !actor) return super.getInteractionPrompt(actor);
-      const state = this.cargoBrutalV67;
-      const surface = actor.inVehicle && this.vehicle ? this.vehicle : actor;
-      if (state.phase === 'restore-power' && distance(actor, this.powerNode) <= 155) return 'E  RÉTABLIR LA PUISSANCE DE SOUTE';
-      if (state.phase === 'mount-loader' && distance(actor, this.vehicle) <= 220) return 'V / E  MONTER DANS LE P-5000';
-      const obstacle = state.obstacles.find((candidate) => !candidate.cleared && distance(surface, candidate) <= 270);
-      if (state.phase === 'clear-route' && obstacle) return `E / TIR  DÉPLACER ${obstacle.id.toUpperCase()} · ${obstacle.hits}/${obstacle.requiredHits}`;
-      const cargoDoor = this.cargoBrutalDoorNearLoaderV67(actor);
-      if (cargoDoor) return cargoDoor.open ? 'E  ATTENDRE L’OUVERTURE DU SAS CARGO' : 'E  ACTIONNER LA PORTE DE SOUTE';
-      if (state.phase === 'escort-convoy' && distance(surface, state.convoy) <= 270 && !state.convoy.active) return 'E  LANCER L’ESCORTE DES SURVIVANTS';
-      if (state.phase === 'retrieve-core' && distance(surface, state.core) <= 250) return 'E  SAISIR LE NOYAU AVEC LES GRIFFES';
-      if (state.phase === 'carry-core' && distance(surface, state.installNode) <= 270) return 'E  COUPLER LE NOYAU';
-      if (state.phase === 'extract' && distance(surface, this.objective) <= 180) return this.missingCargoBrutalRequirementV67() || 'E  CONFIRMER L’EXTRACTION CARGO';
+      // V188: the cargo prompt is the shared choice, the same one interact() performs.
+      const choice = actor.alive ? this.selectInteractionTargetV188(actor) : null;
+      if (choice?.kind === 'cargo-brutal-v67') return choice.prompt;
       return super.getInteractionPrompt(actor);
     }
 

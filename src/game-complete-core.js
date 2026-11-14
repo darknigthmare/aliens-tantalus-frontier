@@ -212,25 +212,52 @@ export class GameEngine extends CatalogGameEngine {
     this.onEvent({ type: 'objective-wave', objectiveId: this.objectiveRuntime.id, wave: tag, count });
   }
 
+  // V188 "the prompt is always right": objective nodes, the live capture and
+  // the start of a hold are actions of the shared E selection. They keep their
+  // historical priority (ahead of doors, terminals and extraction); a pickup
+  // takes E only when it is strictly nearer.
+  objectiveInteractionV188(actor = this.player) {
+    if (!actor?.alive || actor.downed) return null;
+    const rank = (target) => this.interactionRankDistanceV188(actor, target);
+    const node = (this.objectiveNodes || []).find((candidate) => !candidate.active && near(actor, candidate, 115));
+    if (node) return { kind: 'objective-node-v188', category: 'action', target: node, distance: rank(node),
+      prompt: node.kind === 'seal' ? 'E  ARMER LA CHARGE DE SCELLAGE' : node.kind === 'destroy-relay' ? 'E  SABOTER LE RELAIS NEURO-LINK' : 'E  SÉCURISER LA CIBLE' };
+    if (this.objectiveRuntime?.action === 'capture') {
+      const boss = (this.enemies || []).find((enemy) => enemy.isBoss && enemy.alive);
+      if (boss && near(actor, boss, 135)) return { kind: 'objective-capture-v188', category: 'action', target: boss, distance: rank(boss),
+        prompt: boss.health <= boss.maxHealth * 0.25 ? 'E  CAPTURER LE SPÉCIMEN VIVANT' : 'AFFAIBLIR LE SPÉCIMEN SOUS 25%' };
+    }
+    if ((this.objectiveRuntime?.action === 'hold' || this.objectiveRuntime?.action === 'defend') && this.objective
+      && near(actor, this.objective, 150) && !this.objectiveState?.started) {
+      return { kind: 'objective-hold-v188', category: 'action', target: this.objective, distance: rank(this.objective), prompt: 'E  COMMENCER LA TENUE DE ZONE' };
+    }
+    return null;
+  }
+
+  interactionCandidatesV188(actor = this.player) {
+    const list = super.interactionCandidatesV188(actor);
+    const entry = this.objectiveInteractionV188(actor);
+    if (entry) list.unshift(entry);
+    return list;
+  }
+
   interact(actor = this.player) {
     if (!actor?.alive || this.mission?.state !== 'active') return false;
-    const node = this.objectiveNodes.find((candidate) => !candidate.active && near(actor, candidate, 115));
-    if (node) return this.activateObjectiveNode(actor, node);
-    if (this.objectiveRuntime.action === 'capture') {
-      const boss = this.enemies.find((enemy) => enemy.isBoss && enemy.alive);
-      if (boss && near(actor, boss, 135)) {
-        if (boss.health > boss.maxHealth * 0.25) return this.locked('AFFAIBLIR LE SPÉCIMEN SOUS 25%');
-        boss.alive = false;
-        boss.captured = true;
-        boss.deathClock = 0;
-        this.objectiveState.captured = true;
-        this.objectiveState.complete = true;
-        this.mission.objectives.boss = true;
-        this.onEvent({ type: 'objective-action', objectiveId: this.objectiveRuntime.id, action: 'specimen-captured', enemyId: boss.id });
-        return true;
-      }
+    const choice = this.selectInteractionTargetV188(actor);
+    if (choice?.kind === 'objective-node-v188') return this.activateObjectiveNode(actor, choice.target);
+    if (choice?.kind === 'objective-capture-v188') {
+      const boss = choice.target;
+      if (boss.health > boss.maxHealth * 0.25) return this.locked('AFFAIBLIR LE SPÉCIMEN SOUS 25%');
+      boss.alive = false;
+      boss.captured = true;
+      boss.deathClock = 0;
+      this.objectiveState.captured = true;
+      this.objectiveState.complete = true;
+      this.mission.objectives.boss = true;
+      this.onEvent({ type: 'objective-action', objectiveId: this.objectiveRuntime.id, action: 'specimen-captured', enemyId: boss.id });
+      return true;
     }
-    if ((this.objectiveRuntime.action === 'hold' || this.objectiveRuntime.action === 'defend') && near(actor, this.objective, 150) && !this.objectiveState.started) {
+    if (choice?.kind === 'objective-hold-v188') {
       const missing = this.missingObjectiveRequirement({ ignoreAction: true });
       if (missing) return this.locked(missing);
       this.objectiveState.started = true;
@@ -366,13 +393,8 @@ export class GameEngine extends CatalogGameEngine {
   }
 
   getInteractionPrompt(actor = this.player) {
-    const node = this.objectiveNodes?.find((candidate) => !candidate.active && near(actor, candidate, 115));
-    if (node) return node.kind === 'seal' ? 'E  ARMER LA CHARGE DE SCELLAGE' : node.kind === 'destroy-relay' ? 'E  SABOTER LE RELAIS NEURO-LINK' : 'E  SÉCURISER LA CIBLE';
-    if (this.objectiveRuntime?.action === 'capture') {
-      const boss = this.enemies.find((enemy) => enemy.isBoss && enemy.alive);
-      if (boss && near(actor, boss, 135)) return boss.health <= boss.maxHealth * 0.25 ? 'E  CAPTURER LE SPÉCIMEN VIVANT' : 'AFFAIBLIR LE SPÉCIMEN SOUS 25%';
-    }
-    if ((this.objectiveRuntime?.action === 'hold' || this.objectiveRuntime?.action === 'defend') && near(actor, this.objective, 150) && !this.objectiveState.started) return 'E  COMMENCER LA TENUE DE ZONE';
+    const choice = actor?.alive ? this.selectInteractionTargetV188(actor) : null;
+    if (/^objective-(node|capture|hold)-v188$/.test(choice?.kind || '')) return choice.prompt;
     return super.getInteractionPrompt(actor);
   }
 

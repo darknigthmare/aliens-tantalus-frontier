@@ -252,10 +252,22 @@ export function withBlackCocoonRuntimeV121(BaseEngine) {
       return null;
     }
 
+    // V188 "the prompt is always right": the cocoon owns its scene; its one E
+    // target is an action of the shared selection, ranked by distance to its prop.
+    interactionCandidatesV188(actor = this.player) {
+      if (!this.isBlackCocoonV121()) return super.interactionCandidatesV188(actor);
+      const target = actor?.alive && !actor.downed ? this.blackCocoonInteractionV121(actor) : null;
+      const prop = target && this.blackCocoonPropsV121?.[target.prop];
+      if (!target) return [];
+      return [{ kind: 'black-cocoon-v121', category: 'action', target, prompt: target.prompt,
+        distance: target.action === 'cut' || !prop ? 0 : Math.hypot(centerX(actor) - prop.x, footY(actor) - prop.groundY) }];
+    }
+
     interact(actor = this.player) {
       if (!this.isBlackCocoonV121()) return super.interact(actor);
       if (!this.canBlackCocoonActV121(actor)) return false;
-      const target = this.blackCocoonInteractionV121(actor);
+      const choice = this.selectInteractionTargetV188(actor);
+      const target = choice?.kind === 'black-cocoon-v121' ? choice.target : null;
       if (!target) return false;
       const state = this.blackCocoonV121;
       if (['cut', 'industrial', 'cooling', 'beacon1', 'beacon2', 'scan'].includes(target.action)) return this.beginBlackCocoonActionV121(target.action, target.prop);
@@ -543,7 +555,8 @@ export function withBlackCocoonRuntimeV121(BaseEngine) {
     getInteractionPrompt() {
       if (!this.isBlackCocoonV121()) return super.getInteractionPrompt();
       if (!this.player?.alive) return '';
-      return this.blackCocoonInteractionV121()?.prompt || (this.blackCocoonV121.phase === 'hold' && !near(this.player, this.blackCocoonPropsV121.beacon2, 610) ? 'REVENIR À KAPPA · APPROCHE EN ATTENTE' : '');
+      const choice = this.selectInteractionTargetV188(this.player);
+      return choice?.prompt || (this.blackCocoonV121.phase === 'hold' && !near(this.player, this.blackCocoonPropsV121.beacon2, 610) ? 'REVENIR À KAPPA · APPROCHE EN ATTENTE' : '');
     }
     getBlackCocoonSnapshotV121() {
       if (!this.isBlackCocoonV121()) return { blackCocoonV121: null };

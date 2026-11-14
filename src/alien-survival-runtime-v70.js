@@ -1023,59 +1023,77 @@ export function withAlienSurvivalRuntimeV70(BaseEngine) {
       return result;
     }
 
+    // V188 "the prompt is always right": the survival step E would perform is
+    // one entry of the shared selection (the welding kit is a pickup, stations,
+    // the weldable bulkhead and the outer airlock are actions). The prompt and
+    // interact() read that same choice.
+    alienSurvivalInteractionV188(actor = this.player) {
+      const state = this.alienSurvivalV70;
+      if (!this.isAlienSurvivalMissionV70() || !state || !actor?.alive || actor.downed) return null;
+      const entry = (step, target, prompt, category = 'action') => ({ kind: 'alien-survival-v70', category, step, target, prompt,
+        distance: target ? this.interactionRankDistanceV188(actor, target) : 0 });
+      if (this.alienSurvivalWorldActionV70) return entry('welding', null, `SOUDURE ${Math.round(this.alienSurvivalWorldActionV70.progress * 100)}% · DÉPLACEZ-VOUS POUR ANNULER`);
+      if (state.cctv.active && actor === this.alienSurvivalCctvActorV70) return entry('cctv-cycle', null, 'E  FLUX CCTV SUIVANT · COMMANDES DU PANNEAU POUR FERMER');
+      const station = this.alienSurvivalNearestStationV70(actor);
+      if (station?.type === 'power') return entry('power', station, `E  REROUTER LA PUISSANCE · ${ALIEN_SURVIVAL_POWER_CIRCUIT_IDS_V70.filter((id) => state.power.routes[id]).join(' + ') || 'AUCUN'}`);
+      if (station?.type === 'cctv') return entry('cctv', station, state.power.routes.cctv ? 'E  OUVRIR LA CCTV · LE MONDE RESTE ACTIF' : 'ALIMENTATION CCTV REQUISE');
+      if (station?.type === 'pressure') return entry('pressure', station, state.power.routes.security ? 'E  ACTIONNER LA VANNE D’ÉGALISATION' : 'ALIMENTATION SÉCURITÉ REQUISE');
+      if (station?.type === 'self-destruct') {
+        const auth = state.selfDestruct.authorizations;
+        if (station.id === 'survival-command-auth' && auth[station.authorizationId] && auth.engineering && auth.command && !state.selfDestruct.armed) {
+          return entry('arm', station, 'E  ARMER L’AUTO-DESTRUCTION');
+        }
+        return entry('authorize', station, auth[station.authorizationId] ? `${station.label} · AUTORISÉE` : `E  AUTORISER · ${station.label}`);
+      }
+      // One rule for the bulkheads: the nearest door within reach (prompt and E used to differ).
+      const door = asList(this.doors).map((candidate) => ({ candidate, distance: centerDistance(actor, candidate) }))
+        .filter((item) => item.distance <= WELD_RANGE).sort((left, right) => left.distance - right.distance)[0]?.candidate;
+      if (door?.id === ALIEN_SURVIVAL_WELDABLE_DOOR_ID_V70 && state.cctv.scanComplete) {
+        const stateDoor = this.alienSurvivalStateDoorV70(door.id);
+        return entry('weld', door, stateDoor?.welded ? `CLOISON SOUDÉE · INTÉGRITÉ ${Math.ceil(stateDoor.weldIntegrity)}%`
+          : !this.inventory?.cutter ? 'KIT DE SOUDURE REQUIS' : 'E  SOUDER LA CLOISON CARGO');
+      }
+      if (door?.id === 'outer-airlock') return entry('outer-airlock', door, 'UTILISER LA VANNE D’ÉGALISATION');
+      return null;
+    }
+
+    alienSurvivalKitCandidateV188(actor = this.player) {
+      const kit = this.alienSurvivalWeldingKitV70;
+      if (!this.isAlienSurvivalMissionV70() || !this.alienSurvivalV70 || !actor?.alive || actor.downed || !kit || kit.taken || centerDistance(actor, kit) > 120) return null;
+      return { kind: 'alien-survival-kit-v70', category: 'pickup', target: kit, distance: this.interactionRankDistanceV188(actor, kit), prompt: 'E  RÉCUPÉRER LE KIT DE SOUDURE' };
+    }
+
+    interactionCandidatesV188(actor = this.player) {
+      const entry = this.alienSurvivalInteractionV188(actor), kit = this.alienSurvivalKitCandidateV188(actor);
+      // The kit is the mission's toolPickup: one candidate, the survival one (it also emits the kit event).
+      const list = super.interactionCandidatesV188(actor).filter((item) => !(kit && item.kind === 'tool-pickup' && item.target === kit.target));
+      if (entry) list.unshift(entry);
+      if (kit) list.push(kit);
+      return list;
+    }
+
     interact(actor = this.player) {
       if (!this.isAlienSurvivalMissionV70() || !this.alienSurvivalV70) return super.interact(actor);
-      if (this.alienSurvivalV70.cctv.active && actor === this.alienSurvivalCctvActorV70) return this.cycleAlienSurvivalCctvV70(1).ok;
-      if (this.collectAlienSurvivalWeldingKitV70(actor).ok) return true;
-      const station = this.alienSurvivalNearestStationV70(actor);
-      if (station?.type === 'power') return this.cycleAlienSurvivalPowerPresetV70(actor).ok;
-      if (station?.type === 'cctv') return this.openAlienSurvivalCctvV70(actor).ok;
-      if (station?.type === 'pressure') return this.cycleAlienSurvivalAirlockV70(actor).ok;
-      if (station?.type === 'self-destruct') {
-        const authorizationId = station.authorizationId;
-        const authorized = this.alienSurvivalV70.selfDestruct.authorizations[authorizationId];
-        if (station.id === 'survival-command-auth' && authorized
-          && this.alienSurvivalV70.selfDestruct.authorizations.engineering
-          && this.alienSurvivalV70.selfDestruct.authorizations.command
-          && !this.alienSurvivalV70.selfDestruct.armed) return this.armAlienSurvivalSelfDestructV70(actor).ok;
-        return this.authorizeAlienSurvivalSelfDestructV70(station.id, actor).ok;
+      const choice = this.selectInteractionTargetV188(actor);
+      if (choice?.kind === 'alien-survival-kit-v70') return this.collectAlienSurvivalWeldingKitV70(actor).ok;
+      if (choice?.kind !== 'alien-survival-v70') return super.interact(actor);
+      switch (choice.step) {
+        case 'cctv-cycle': return this.cycleAlienSurvivalCctvV70(1).ok;
+        case 'power': return this.cycleAlienSurvivalPowerPresetV70(actor).ok;
+        case 'cctv': return this.openAlienSurvivalCctvV70(actor).ok;
+        case 'pressure': return this.cycleAlienSurvivalAirlockV70(actor).ok;
+        case 'arm': return this.armAlienSurvivalSelfDestructV70(actor).ok;
+        case 'authorize': return this.authorizeAlienSurvivalSelfDestructV70(choice.target.id, actor).ok;
+        case 'weld': return this.beginAlienSurvivalWeldV70(choice.target.id, actor).ok;
+        default: return false; // 'welding' in progress, 'outer-airlock': the prompt names no E action.
       }
-      const nearbyDoor = asList(this.doors)
-        .map((door) => ({ door, distance: centerDistance(actor, door) }))
-        .filter((entry) => entry.distance <= WELD_RANGE)
-        .sort((left, right) => left.distance - right.distance)[0]?.door;
-      if (nearbyDoor?.id === ALIEN_SURVIVAL_WELDABLE_DOOR_ID_V70 && this.alienSurvivalV70.cctv.scanComplete) return this.beginAlienSurvivalWeldV70(nearbyDoor.id, actor).ok;
-      if (nearbyDoor?.id === 'outer-airlock') return false;
-      return super.interact(actor);
     }
 
     getInteractionPrompt(actor = this.player) {
-      if (!this.isAlienSurvivalMissionV70() || !this.alienSurvivalV70) return super.getInteractionPrompt(actor);
-      if (this.alienSurvivalWorldActionV70) return `SOUDURE ${Math.round(this.alienSurvivalWorldActionV70.progress * 100)}% · DÉPLACEZ-VOUS POUR ANNULER`;
-      if (this.alienSurvivalV70.cctv.active && actor === this.alienSurvivalCctvActorV70) return 'E  FLUX CCTV SUIVANT · COMMANDES DU PANNEAU POUR FERMER';
-      const kit = this.alienSurvivalWeldingKitV70;
-      if (kit && !kit.taken && centerDistance(actor, kit) <= 120) return 'E  RÉCUPÉRER LE KIT DE SOUDURE';
-      const station = this.alienSurvivalNearestStationV70(actor);
-      if (station?.type === 'power') return `E  REROUTER LA PUISSANCE · ${ALIEN_SURVIVAL_POWER_CIRCUIT_IDS_V70.filter((id) => this.alienSurvivalV70.power.routes[id]).join(' + ') || 'AUCUN'}`;
-      if (station?.type === 'cctv') return this.alienSurvivalV70.power.routes.cctv ? 'E  OUVRIR LA CCTV · LE MONDE RESTE ACTIF' : 'ALIMENTATION CCTV REQUISE';
-      if (station?.type === 'pressure') return this.alienSurvivalV70.power.routes.security ? 'E  ACTIONNER LA VANNE D’ÉGALISATION' : 'ALIMENTATION SÉCURITÉ REQUISE';
-      if (station?.type === 'self-destruct') {
-        const authorizationId = station.authorizationId;
-        if (station.id === 'survival-command-auth'
-          && this.alienSurvivalV70.selfDestruct.authorizations.engineering
-          && this.alienSurvivalV70.selfDestruct.authorizations.command
-          && !this.alienSurvivalV70.selfDestruct.armed) return 'E  ARMER L’AUTO-DESTRUCTION';
-        return this.alienSurvivalV70.selfDestruct.authorizations[authorizationId] ? `${station.label} · AUTORISÉE` : `E  AUTORISER · ${station.label}`;
+      if (this.isAlienSurvivalMissionV70() && this.alienSurvivalV70 && actor?.alive) {
+        const choice = this.selectInteractionTargetV188(actor);
+        if (choice?.kind === 'alien-survival-v70' || choice?.kind === 'alien-survival-kit-v70') return choice.prompt;
       }
-      const door = asList(this.doors).find((candidate) => centerDistance(actor, candidate) <= WELD_RANGE);
-      if (door?.id === ALIEN_SURVIVAL_WELDABLE_DOOR_ID_V70) {
-        const stateDoor = this.alienSurvivalStateDoorV70(door.id);
-        if (stateDoor?.welded) return `CLOISON SOUDÉE · INTÉGRITÉ ${Math.ceil(stateDoor.weldIntegrity)}%`;
-        if (!this.inventory?.cutter) return 'KIT DE SOUDURE REQUIS';
-        if (!this.alienSurvivalV70.cctv.scanComplete) return 'SCAN CCTV REQUIS AVANT SOUDURE';
-        return 'E  SOUDER LA CLOISON CARGO';
-      }
-      if (door?.id === 'outer-airlock') return 'UTILISER LA VANNE D’ÉGALISATION';
       return super.getInteractionPrompt(actor);
     }
 

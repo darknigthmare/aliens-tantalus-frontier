@@ -202,13 +202,27 @@ export function withLegacyMissionsV131(BaseEngine) {
       return this.isLegacyMissionV131() && door?.lockedBy === 'legacy-script'
         ? { ...render, x: door.x, y: door.y, w: door.w, h: door.h } : render;
     }
+    // V188 "the prompt is always right": the chapter owns its scene; its E
+    // entries (current station, Manta hatch) are actions of the shared selection.
+    interactionCandidatesV188(actor = this.player) {
+      if (!this.isLegacyMissionV131()) return super.interactionCandidatesV188(actor);
+      if (actor !== this.player || !actor?.alive || actor.downed) return [];
+      const state = this.legacyMissionV131, station = LEGACY_STATIONS_V131[state.kind][state.stage], body = state.aboard ? this.vehicle : actor;
+      if (near(body, station)) return [{ kind: 'legacy-v131', category: 'action', step: 'station', target: station,
+        distance: Math.hypot(center(body).x - station.x, center(body).y - station.y),
+        prompt: station.seconds ? `MAINTENIR E · ${station.label} · ${state.hold.toFixed(1)}/${station.seconds} S` : station.label }];
+      if (state.kind === 'abyss' && (state.aboard || near(actor, center(this.vehicle), 135))) return [{ kind: 'legacy-v131', category: 'action', step: 'manta',
+        target: this.vehicle, distance: state.aboard ? 0 : Math.hypot(center(actor).x - center(this.vehicle).x, center(actor).y - center(this.vehicle).y),
+        prompt: 'E / V · MANTA · EMBARQUER / SORTIR' }];
+      return [];
+    }
     interact(actor = this.player) {
       if (!this.isLegacyMissionV131()) return super.interact(actor);
       if (!this.canLegacyActV131(actor, true)) return false;
-      const state = this.legacyMissionV131, station = LEGACY_STATIONS_V131[state.kind][state.stage], body = state.aboard ? this.vehicle : actor;
-      if (near(body, station)) return station.seconds > 0;
-      if (state.kind === 'abyss') return this.toggleVehicle(actor);
-      return false;
+      const choice = this.selectInteractionTargetV188(actor);
+      if (choice?.kind !== 'legacy-v131') return false;
+      if (choice.step === 'station') return choice.target.seconds > 0;
+      return this.toggleVehicle(actor);
     }
     toggleVehicle(actor = this.player) {
       if (!this.isLegacyMissionV131()) return super.toggleVehicle(actor);
@@ -381,7 +395,7 @@ export function withLegacyMissionsV131(BaseEngine) {
         const station = LEGACY_STATIONS_V131[state.kind][state.stage], body = state.aboard ? this.vehicle : this.player;
         const blocked = state.kind === 'nostromo' && state.stage === 3 && this.enemies.some(enemy => enemy.legacyRoleV131 === 'hunt' && enemy.alive)
           || state.kind === 'abyss' && state.stage === 3 && (state.aboard || state.hadalMode === 'neutral');
-        if (station.seconds > 0 && near(body, station) && this.keys.has('KeyE') && this.canLegacyActV131(this.player, true) && !blocked) {
+        if (station.seconds > 0 && near(body, station) && this.keys.has('KeyE') && this.selectInteractionTargetV188(this.player)?.kind === 'legacy-v131' && this.canLegacyActV131(this.player, true) && !blocked) {
           state.hold = Math.min(station.seconds, state.hold + dt);
           if (state.hold >= station.seconds) {
             if (state.stage === LEGACY_STATIONS_V131[state.kind].length - 1) this.completeMission();
@@ -503,9 +517,7 @@ export function withLegacyMissionsV131(BaseEngine) {
     objectiveProgressText() { return this.isLegacyMissionV131() ? this.getLegacyMissionDossierV131().instruction : super.objectiveProgressText(); }
     getInteractionPrompt() {
       if (!this.isLegacyMissionV131()) return super.getInteractionPrompt();
-      const state = this.legacyMissionV131, station = LEGACY_STATIONS_V131[state.kind][state.stage], body = state.aboard ? this.vehicle : this.player;
-      if (near(body, station)) return station.seconds ? `MAINTENIR E · ${station.label} · ${state.hold.toFixed(1)}/${station.seconds} S` : station.label;
-      return state.kind === 'abyss' && (state.aboard || near(this.player, center(this.vehicle), 135)) ? 'E / V · MANTA · EMBARQUER / SORTIR' : '';
+      return this.selectInteractionTargetV188(this.player)?.prompt || '';
     }
     missionNavigationMapV121() {
       if (!this.isLegacyMissionV131()) return super.missionNavigationMapV121();

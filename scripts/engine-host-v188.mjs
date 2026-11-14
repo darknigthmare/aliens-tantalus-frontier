@@ -57,7 +57,7 @@ export function tick(engine, seconds, rate = 60) {
 export async function fixture({ campaign = CAMPAIGNS[0], seed = 1321, options: extra = {}, keepEnemies = false } = {}) {
   const browser = host(), events = [];
   const options = { world: WORLDS[0], campaign, weapon: WEAPONS[0], enemyCatalog: ENEMIES, equipment: [], crew: [], seed, ...extra };
-  options.missionLevel = buildMissionLevelV52({ ...options, templateId: 'ship-interior-vertical', levelSeeds: LEVEL_SEEDS });
+  options.missionLevel ||= buildMissionLevelV52({ ...options, templateId: 'ship-interior-vertical', levelSeeds: LEVEL_SEEDS });
   const engine = new GameEngine(browser.canvas, { onEvent: event => events.push(event) }); engine.start(options); await prepare(engine);
   engine.spawnedEnemiesV188 = engine.enemies; engine.enemies = keepEnemies ? engine.enemies : []; engine.squadActors = []; engine.hazards = []; engine.coopEnabled = false;
   return { ...browser, engine, events };

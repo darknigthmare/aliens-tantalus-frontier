@@ -78,9 +78,14 @@ export function beginMechaCoolingV131(state) {
     || (state.heat <= 0 && state.corrosion <= 0 && state.gel <= 0)) return false;
   state.coolant--; state.coolingClock = 1.4; return true;
 }
+// Read-only admission of beginMechaRepairV131 (V188: E names the repair only when it applies).
+export function canBeginMechaRepairV131(state) {
+  return !(!mechaReadyV131(state) || state.repairClock > 0 || state.coolingClock > 0 || state.repairKits <= 0
+    || (state.hull === state.maxHull && MECHA_SUBSYSTEMS_V131.every(id => state.systems[id] === 100)));
+}
+
 export function beginMechaRepairV131(state) {
-  if (!mechaReadyV131(state) || state.repairClock > 0 || state.coolingClock > 0 || state.repairKits <= 0
-    || (state.hull === state.maxHull && MECHA_SUBSYSTEMS_V131.every(id => state.systems[id] === 100))) return false;
+  if (!canBeginMechaRepairV131(state)) return false;
   state.repairKits--; state.repairClock = 2.4; return true;
 }
 

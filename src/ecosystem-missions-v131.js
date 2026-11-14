@@ -228,9 +228,27 @@ export function withEcosystemMissionsV131(BaseEngine) {
       if (state.bossDefeated && near(actor, exit, 115)) return { id: 'extract', text: 'MAINTENIR E 2 S · SAS D’EXTRACTION' };
       return null;
     }
+    // V188 "the prompt is always right": the ecosystem owns its scene; its E
+    // entry is one action of the shared selection, ranked by distance to its prop.
+    ecosystemChoiceV188(actor = this.player) {
+      const choice = this.selectInteractionTargetV188(actor);
+      return choice?.kind === 'ecosystem-v131' ? choice.target : null;
+    }
+    interactionCandidatesV188(actor = this.player) {
+      if (!this.isEcosystemV131()) return super.interactionCandidatesV188(actor);
+      const interaction = this.ecosystemInteractionV131(actor);
+      if (!interaction) return [];
+      const state = this.ecosystemV131, prop = interaction.id === 'supply' ? props.supply : interaction.id === 'focus' ? props.focus
+        : interaction.id.startsWith('nursery-') ? props.nursery[Number(interaction.id.at(-1))]
+          : interaction.id.startsWith('beacon-') ? props.beacons[Number(interaction.id.at(-1))]
+            : interaction.id === 'extract' ? (state.operationId === 'hive-world' ? props.insertion : props.extraction) : null;
+      const point = prop ? { x: prop.x, y: prop.floorY } : center(this.ecosystemActorV131(interaction.id) || actor);
+      return [{ kind: 'ecosystem-v131', category: 'action', target: interaction, prompt: interaction.text,
+        distance: Math.hypot(center(actor).x - point.x, center(actor).y - point.y) }];
+    }
     interact(actor = this.player) {
       if (!this.isEcosystemV131()) return super.interact(actor);
-      const interaction = this.ecosystemInteractionV131(actor);
+      const interaction = this.ecosystemCanActV131(actor) ? this.ecosystemChoiceV188(actor) : null;
       if (!interaction) return false;
       const state = this.ecosystemV131;
       if (interaction.id === 'supply') {
@@ -252,7 +270,7 @@ export function withEcosystemMissionsV131(BaseEngine) {
       if (!this.player?.alive && !(this.coopEnabled && this.coop?.alive)) { this.failMission('L’équipe ne peut plus rejoindre le sas.'); return; }
       if (!Number.isFinite(delta) || delta <= 0) return;
       const dt = Math.min(delta, .1), state = this.ecosystemV131;
-      const active = this.ecosystemCanActV131(this.player), interaction = active && this.keys.has('KeyE') ? this.ecosystemInteractionV131(this.player) : null;
+      const active = this.ecosystemCanActV131(this.player), interaction = active && this.keys.has('KeyE') ? this.ecosystemChoiceV188(this.player) : null;
       if (interaction && ['supply', 'focus'].includes(interaction.id) || interaction?.id.startsWith('beacon-')) this.interact();
       if (interaction && (interaction.id === 'extract' || interaction.id.startsWith('nursery-') || interaction.id.startsWith('eco131-population-'))) {
         if (state.interactionTarget !== interaction.id) { state.interactionTarget = interaction.id; state.interactionProgress = 0; }
@@ -587,7 +605,7 @@ export function withEcosystemMissionsV131(BaseEngine) {
     }
     phaseLabel() { return this.isEcosystemV131() ? ecosystemDossierV131(this.ecosystemV131).title : super.phaseLabel(); }
     objectiveProgressText() { return this.isEcosystemV131() ? ecosystemDossierV131(this.ecosystemV131).instruction : super.objectiveProgressText(); }
-    getInteractionPrompt() { return this.isEcosystemV131() ? this.ecosystemInteractionV131()?.text || '' : super.getInteractionPrompt(); }
+    getInteractionPrompt() { return this.isEcosystemV131() ? this.selectInteractionTargetV188(this.player)?.prompt || '' : super.getInteractionPrompt(); }
     getSnapshot() { return { ...super.getSnapshot(), ...(this.isEcosystemV131() ? { ecosystemV131: this.ecosystemSnapshotV131() } : {}) }; }
     getGameplayReport() { return { ...super.getGameplayReport(), ...(this.isEcosystemV131() ? { ecosystemV131: this.ecosystemSnapshotV131() } : {}) }; }
     getVisibleEnemyAtlasSheetsV65(enemies = this.getVisibleEnemiesV65()) {

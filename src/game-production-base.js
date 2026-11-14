@@ -325,10 +325,27 @@ export class GameEngine extends FinalGameEngine {
     return true;
   }
 
-  interact(actor = this.player) {
+  // V188 "the prompt is always right": the jamming relay is an action of the
+  // shared E selection, ahead of the native ones as before, and it is named.
+  interactionCandidatesV188(actor = this.player) {
+    const list = super.interactionCandidatesV188(actor);
     const relay = this.neuroCounterplay?.relay;
-    if (relay?.active && actor?.alive && distance(actor, relay) < 125) return this.neutralizeNeuroDisruption('relay-disabled');
+    if (relay?.active && actor?.alive && !actor.downed && distance(actor, relay) < 125) {
+      list.unshift({ kind: 'neuro-relay-v188', category: 'action', target: relay,
+        distance: this.interactionRankDistanceV188(actor, relay), prompt: 'E  NEUTRALISER LE RELAIS DE BROUILLAGE' });
+    }
+    return list;
+  }
+
+  interact(actor = this.player) {
+    if (this.selectInteractionTargetV188(actor)?.kind === 'neuro-relay-v188') return this.neutralizeNeuroDisruption('relay-disabled');
     return super.interact(actor);
+  }
+
+  getInteractionPrompt(actor = this.player) {
+    const choice = actor?.alive ? this.selectInteractionTargetV188(actor) : null;
+    if (choice?.kind === 'neuro-relay-v188') return choice.prompt;
+    return super.getInteractionPrompt(actor);
   }
 
   activateTracker(player) {
