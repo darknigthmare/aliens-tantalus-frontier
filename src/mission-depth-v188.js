@@ -59,11 +59,14 @@ export function withMissionDepthRoomsV188(Base) {
     static missionDepthRoomsV188 = true;
 
     start(options = {}) {
+      this.missionDepthSectionV188 = null; // never the previous mission's section while the base starts
       const result = super.start(options);
       this.missionDepthSectionV188 = (options.campaign?.id || this.campaign?.id) === QZ17_CAMPAIGN_ID_V188 ? buildCargoHoldSectionV188(this) : null;
       this.placeQz17HoldSleepersV188?.(this.missionDepthSectionV188);
       for (const actor of [this.player, this.coop]) if (actor) actor.depthZ = 0;
       this.missionDepthEnteredAtV188 = null;
+      // The base applies options.resumeState before the section exists: the saved depths are restored here.
+      if (this.missionDepthSectionV188 && this.lastResumeResult?.applied) this.restoreMissionDepthV188(options.resumeState?.depthV188);
       return result;
     }
 
@@ -115,7 +118,9 @@ export function withMissionDepthRoomsV188(Base) {
       if (inDepthSectionV188(section, this.player) && this.missionDepthEnteredAtV188 === null) this.missionDepthEnteredAtV188 = this.mission?.elapsed || 0;
       if (!inDepthSectionV188(section, this.player)) this.missionDepthEnteredAtV188 = null;
       for (const enemy of this.enemies || []) {
-        if (!inDepthSectionV188(section, enemy) || enemy.dormant) { if (!inDepthSectionV188(section, enemy)) enemy.depthZ = 0; continue; }
+        // A dormant sleeper (alive: false until it wakes) keeps the depth it waits at, behind its row.
+        if (enemy.dormant) continue;
+        if (!inDepthSectionV188(section, enemy)) { enemy.depthZ = 0; continue; }
         const marines = [this.player, this.coopEnabled ? this.coop : null].filter(actor => actor?.alive !== false && inDepthSectionV188(section, actor));
         const target = marines.sort((a, b) => Math.abs(a.x - enemy.x) - Math.abs(b.x - enemy.x))[0];
         enemy.depthZ = stepEnemyDepthV188(section, enemy, target ? Number(target.depthZ) || 0 : Number(enemy.depthZ) || 0, dt);
@@ -291,14 +296,19 @@ export function withMissionDepthRoomsV188(Base) {
       return state;
     }
     applyResumeState(rawState) {
-      const result = super.applyResumeState(rawState), section = this.missionDepthSectionV188, saved = rawState?.depthV188;
-      if (!section || !saved || saved.section !== section.id) return result;
+      const result = super.applyResumeState(rawState);
+      if (result?.applied !== false) this.restoreMissionDepthV188(rawState?.depthV188);
+      return result;
+    }
+    restoreMissionDepthV188(saved) {
+      const section = this.missionDepthSectionV188;
+      if (!section || !saved || saved.section !== section.id) return false;
       const clampZ = value => Math.max(section.zMin, Math.min(section.zMax, Number(value) || 0));
       if (this.player) this.player.depthZ = clampZ(saved.player);
       if (this.coop) this.coop.depthZ = clampZ(saved.coop);
       const byId = new Map((Array.isArray(saved.enemies) ? saved.enemies : []).map(entry => [String(entry.id), clampZ(entry.z)]));
       for (const enemy of this.enemies || []) if (byId.has(String(enemy.id))) enemy.depthZ = byId.get(String(enemy.id));
-      return result;
+      return true;
     }
   };
 }

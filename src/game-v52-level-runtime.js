@@ -613,12 +613,14 @@ export function withV52LevelRuntime(BaseEngine) {
       }
       let cursor = 0;
       for (const spawn of this.missionLevelSpawns.values()) {
-        const nodes = nodesByZone.get(spawn.zoneId) || [];
+        // Never on the player's insertion node: an awake patrol there attacks during the landing.
+        const nodes = nodesByZone.get(spawn.zoneId) || [], awayFromInsertion = nodes.filter((node) => node.anchor !== 'spawn');
         const zone = zones.get(spawn.zoneId);
         const count = Math.min(spawn.count || spawn.baseCount || 1, activeEnemies.length - cursor);
         for (let index = 0; index < count; index += 1) {
           const enemy = activeEnemies[cursor++];
-          const node = nodes[index % Math.max(1, nodes.length)] || { x: (zone?.x || 600) + 120 + index * 90, y: fallbackGroundY };
+          let node = nodes[index % Math.max(1, nodes.length)] || { x: (zone?.x || 600) + 120 + index * 90, y: fallbackGroundY };
+          if (node.anchor === 'spawn' && awayFromInsertion.length) node = awayFromInsertion[index % awayFromInsertion.length];
           enemy.x = clamp(node.x + (index % 3 - 1) * 76, 0, this.missionLevelBounds.width - enemy.w);
           enemy.y = node.y - enemy.h;
           enemy.groundY = node.y;
@@ -1560,6 +1562,11 @@ export function withV52LevelRuntime(BaseEngine) {
       this.missionLevelVisualState.eventFlash = 1;
       const consequences = [];
       for (const action of asList(event.actions)) consequences.push(this.applyMissionLevelAction(action, event));
+      // A spawn declared with this event as its trigger wakes with it, even when the
+      // event's action list does not repeat it (ship decompression, colony generator).
+      for (const spawn of this.missionLevelSpawns?.values?.() || []) {
+        if (spawn.triggerEventId === eventId && !spawn.active) consequences.push(this.applyMissionLevelAction(`spawn:${spawn.id}`, event));
+      }
       this.onEvent({ type: 'mission-level-event', eventId, source, actions: [...event.actions], consequences });
       return true;
     }

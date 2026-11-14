@@ -106,8 +106,9 @@ export function deriveStoryCampaignV188(save, { language = null } = {}) {
   }
   if (!story.debriefSeen.includes(STORY_RELAY_CAMPAIGN_ID_V188)) return result('debrief', current ? null : pick('debrief'), STORY_RELAY_CAMPAIGN_ID_V188);
   // After QZ-18, the chronological Act I (QZ-17) is recommended until it is done.
-  const actOne = 'special-narrative-qz17';
-  return result('next', current ? null : pick('next'), completed.includes(actOne) ? null : actOne);
+  const actOne = 'special-narrative-qz17', recommended = completed.includes(actOne) ? null : actOne;
+  // The text points at a ★ chapter: without one, no story objective is shown.
+  return result('next', current || !recommended ? null : pick('next'), recommended);
 }
 
 // The four playable Cocyte chapters (bible §5, Lethe continuity V163). Until a

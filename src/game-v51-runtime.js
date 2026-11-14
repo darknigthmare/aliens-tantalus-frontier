@@ -1269,6 +1269,13 @@ export class GameEngine {
     };
   }
 
+  // A closed door blocks at its drawn frame (closedDoorColliders). A wide frame (pressure
+  // airlock, colony gate) must stay operable from where that frame stops the marine.
+  doorInteractionReachV188(door, actor) {
+    const collider = this.getDoorRenderState(door, { open: false });
+    return Math.max(118, (Number(collider?.w) || 0) / 2 + (Number(actor?.w) || 0) / 2 + 12);
+  }
+
   closedDoorColliders() {
     return this.doors
       .filter((door) => door.progress < 0.82)
@@ -1720,7 +1727,7 @@ export class GameEngine {
       this.audio?.ui();
       return true;
     }
-    const door = this.doors.find((candidate) => Math.abs(playerCenter - (candidate.x + candidate.w / 2)) < 118 && Math.abs(actor.y - candidate.y) < candidate.h + 60);
+    const door = this.doors.find((candidate) => Math.abs(playerCenter - (candidate.x + candidate.w / 2)) < this.doorInteractionReachV188(candidate, actor) && Math.abs(actor.y - candidate.y) < candidate.h + 60);
     if (door) {
       const requirement = this.doorRequirement(door);
       if (requirement) return this.locked(requirement);
@@ -2498,7 +2505,7 @@ export class GameEngine {
     const ally = actor === this.player ? this.coop : this.player;
     if (this.coopEnabled && ally?.downed && distanceBetween(actor, ally) < REVIVE_RANGE) return 'E  RÉANIMER LE COÉQUIPIER';
     const actorCenter = actor.x + actor.w / 2;
-    const door = this.doors.find((candidate) => Math.abs(actorCenter - (candidate.x + candidate.w / 2)) < 118);
+    const door = this.doors.find((candidate) => Math.abs(actorCenter - (candidate.x + candidate.w / 2)) < this.doorInteractionReachV188(candidate, actor));
     if (door) return this.doorRequirement(door) ? `E  VERROUILLÉ — ${this.doorRequirement(door)}` : 'E  ACTIONNER LA PORTE';
     if (this.powerNode && !this.powerNode.active && distanceBetween(actor, this.powerNode) < 130
       && this.admitNativeTerminalInteractionV156?.(actor, this.powerNode) !== false) return 'E  RÉTABLIR LE CIRCUIT AUXILIAIRE';

@@ -258,6 +258,18 @@ export function withArchiveRelayRuntimeV122(BaseEngine) {
       const result = this.applyResumeState(raw); if (!result.applied) return false;
       this.clearGameplayInput?.(); this.onEvent({ type: 'mission-restarted', operationId: ARCHIVE_RELAY_OPERATION_V122 }); return true;
     }
+    // M / pause panel: the investigation steps, not the generic power/route/archive labels.
+    objectivePanelContentV188(language = 'fr') {
+      if (!this.isArchiveRelayV122()) return super.objectivePanelContentV188?.(language) || null;
+      const state = this.archiveRelayV122, en = language === 'en';
+      return { steps: [
+        { key: 'badge', label: en ? 'Recover the badge from the PDA' : 'Récupérer le badge du PDA', done: state.badge },
+        { key: 'power', label: en ? 'Power the relay' : 'Alimenter le relais', done: state.power },
+        { key: 'archive', label: `${en ? 'Read the local records' : 'Lire les archives locales'} ${state.readIds.length}/6`, done: state.readIds.length === 6 },
+        { key: 'route', label: en ? 'Record the verdict at the analysis desk' : 'Enregistrer le verdict au poste de confrontation', done: Boolean(state.verdict) },
+        { key: 'extract', label: en ? 'Reach the return beacon' : 'Rejoindre la balise de retour', done: state.complete }
+      ] };
+    }
     phaseLabel() { return this.isArchiveRelayV122() ? archiveRelayDossierV122(this.archiveRelayV122).title : super.phaseLabel(); }
     objectiveProgressText() { return this.isArchiveRelayV122() ? archiveRelayDossierV122(this.archiveRelayV122).instruction : super.objectiveProgressText(); }
     getInteractionPrompt() {

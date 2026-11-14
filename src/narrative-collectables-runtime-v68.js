@@ -490,8 +490,25 @@ export function withNarrativeCollectablesRuntimeV68(BaseEngine) {
       if (collectable && this.collectNarrativeCollectableV68(actor, collectable)) return true;
       const ventEntrance = this.nearestNarrativeVentEntranceV68(actor);
       const ventRequirement = this.narrativeVentRequirementV68(ventEntrance);
+      // The route verdict is taken in the archives. Once the overlay of the last piece is
+      // closed, the gate and the duct that ask for it reopen the archives instead of a dead end.
+      if (this.narrativeVerdictPendingV68() && actor === this.player
+        && (ventEntrance && ventRequirement || this.nearNarrativeEvidenceDoorV68(actor))) {
+        this.onEvent({ type: 'archive-reader-open', operationId: QZ17_OPERATION_ID_V68, collectableId: null });
+        return true;
+      }
       if (ventRequirement) return this.locked(ventRequirement);
       return super.interact(actor);
+    }
+
+    narrativeVerdictPendingV68() {
+      return Boolean(this.isNarrativeCollectablesV68() && this.mission?.state === 'active'
+        && this.narrativeEvidenceAnalyzedV68() && !this.narrativeEvidenceCompleteV68());
+    }
+
+    nearNarrativeEvidenceDoorV68(actor = this.player) {
+      const door = this.narrativeEvidenceDoorV68();
+      return Boolean(door && actor && Math.abs(actor.x + actor.w / 2 - (door.x + door.w / 2)) < (this.doorInteractionReachV188?.(door, actor) ?? 118) && Math.abs(actor.y - door.y) < door.h + 60);
     }
 
     doorRequirement(door) {
