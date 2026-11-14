@@ -930,10 +930,22 @@ export function withAlphaBravoCoopRuntimeV69(BaseEngine) {
         .sort((left, right) => left.distance - right.distance)[0] || null;
     }
 
+    // V188 "the prompt is always right": the nearest fireteam station is an
+    // action of the shared E selection, ahead of the native ones as before.
+    interactionCandidatesV188(actor = this.player) {
+      const list = super.interactionCandidatesV188(actor);
+      if (!this.isAlphaBravoMissionV69() || !this.alphaBravoV69 || !actor?.alive || actor.downed) return list;
+      const nearby = this.alphaBravoNearestStationV69(actor);
+      if (nearby) list.unshift({ kind: 'alpha-bravo-v69', category: 'action', target: nearby,
+        distance: this.interactionRankDistanceV188(actor, nearby.station), prompt: this.alphaBravoStationPromptV69(actor, nearby) });
+      return list;
+    }
+
     interact(actor = this.player) {
       if (!this.isAlphaBravoMissionV69() || !this.alphaBravoV69) return super.interact(actor);
-      const nearby = this.alphaBravoNearestStationV69(actor);
-      if (!nearby) return super.interact(actor);
+      const choice = this.selectInteractionTargetV188(actor);
+      if (choice?.kind !== 'alpha-bravo-v69') return super.interact(actor);
+      const nearby = choice.target;
       if (this.isIndependentAlphaBravoCommanderV84(actor)) {
         if (!this.running || this.paused || !actor.alive || actor.downed) return false;
         const teams = this.alphaBravoCommandTeamsForTaskV84(nearby.task);
@@ -978,9 +990,14 @@ export function withAlphaBravoCoopRuntimeV69(BaseEngine) {
     }
 
     getInteractionPrompt(actor = this.player) {
-      if (!this.isAlphaBravoMissionV69() || !this.alphaBravoV69) return super.getInteractionPrompt(actor);
-      const nearby = this.alphaBravoNearestStationV69(actor);
-      if (!nearby) return super.getInteractionPrompt(actor);
+      if (this.isAlphaBravoMissionV69() && this.alphaBravoV69 && actor?.alive) {
+        const choice = this.selectInteractionTargetV188(actor);
+        if (choice?.kind === 'alpha-bravo-v69') return choice.prompt;
+      }
+      return super.getInteractionPrompt(actor);
+    }
+
+    alphaBravoStationPromptV69(actor, nearby) {
       if (this.isIndependentAlphaBravoCommanderV84(actor)) {
         const { task } = nearby;
         const teams = this.alphaBravoCommandTeamsForTaskV84(task);

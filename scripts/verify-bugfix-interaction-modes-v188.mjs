@@ -123,6 +123,23 @@ test('cargo-brutal: the cargo step is an action of the shared selection (prompt 
   assert.doesNotMatch(engine.getInteractionPrompt(), /DÉPLACER/);
 });
 
+test('alpha-bravo V69: the fireteam station is an action of the shared selection (prompt = E)', async () => {
+  const { engine } = await fixture({ campaign: campaign('special-alpha-bravo-doctrine'), seed: 7 });
+  isolate(engine);
+  const station = engine.alphaBravoStationActorsV69.find(entry => engine.alphaBravoTaskStateV69(entry.taskId)?.available);
+  assert.ok(station);
+  const p = standOn(engine, station);
+  const near = crate(engine, 0);
+  agree(engine, 'E  RÉCUPÉRER DES MUNITIONS');
+  assert.equal(engine.interact(p), true); assert.equal(near.used, true);
+  engine.supplies = []; place(engine, station.x + station.w / 2 + 20, p.y + p.h); const far = crate(engine, 80);
+  const prompt = engine.getInteractionPrompt();
+  assert.equal(engine.selectInteractionTargetV188(p).kind, 'alpha-bravo-v69');
+  assert.equal(prompt, engine.selectInteractionTargetV188(p).prompt);
+  assert.doesNotMatch(prompt, /MUNITIONS/);
+  engine.interact(p); assert.equal(far.used, false, 'E never takes the farther crate behind the station prompt');
+});
+
 // ---------------------------------------------------------------- item 4
 test('V131 bow / harpoon hint names E only when an arrow or harpoon can really be recovered', async () => {
   const { WEAPONS } = await import('../src/content-core-v50.js');
