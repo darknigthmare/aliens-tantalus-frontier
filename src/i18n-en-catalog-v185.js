@@ -6485,6 +6485,8 @@ export const EN_CATALOG_V185 = Object.freeze({
 "Copier la tenue préparée de J2 vers J1": "Copy P2’s prepared outfit to P1",
 "Copier la tenue préparée de J1 vers J2": "Copy P1’s prepared outfit to P2",
 "Véhicule affecté": "Vehicle assigned",
+"Référence documentaire disponible ·": "Documentary reference available ·",
+"Référence visuelle à documenter ·": "Visual reference to be documented ·",
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 // V188 systems bug hunt (merged via i18n-catalog-maintenance-v186 review).
@@ -7009,4 +7011,5 @@ export const EN_PATTERNS_V185 = Object.freeze({
 "S  COUVERTURE · {0}": "S  COVER · {0}",
 "{0} stabilisé : santé +{1}.": "{0} stabilized: health +{1}.",
 "{0} préparé pour la prochaine opération.": "{0} prepared for the next operation.",
+"{0}/{1} références de tenues · {2} tenues équipables, dont {3} modulaires · {4} combinaisons historiques séparées": "{0}/{1} outfit references · {2} equippable outfits, {3} of them modular · {4} separate historical suits",
 });
