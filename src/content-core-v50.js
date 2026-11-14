@@ -58,7 +58,9 @@ const worldSeeds = [
   ['Fiorina 161', 'Neroidia', 'fonderie carcérale et tunnels', 'screen-canon'],
   ['Sevastopol', 'KG-348', 'station commerciale en désintégration', 'licensed-continuity'],
   ['Cocyte', 'Tantalus Reach', 'Port-Méridien, relais QZ, complexe C-12 et galeries du dépôt', 'project-canon', 'Lethe'],
-  ['LV-895', 'Outer Veil', 'colonies, ruines et installations Pala', 'licensed-continuity'],
+  // V188 [PROPOSÉ]: the description stopped at "installations Pala"; completed
+  // from CAMPAGNE_PRINCIPALE §22.10 (surface site contested by W-Y and Hyperdyne).
+  ['LV-895', 'Outer Veil', 'colonies, ruines et installations disputées par Weyland-Yutani et Hyperdyne', 'licensed-continuity'],
   ['Katanga', 'Frontier Line', 'raffinerie orbitale infestée', 'licensed-continuity'],
   ['Station Orphée', 'Tantalus Reach', 'station de recherche et réseau de défense', 'project-canon', 'Pioneer Station'],
   ['Purdan', 'Far Spinward', 'monde colonial et ruines xénobiologiques', 'licensed-continuity'],

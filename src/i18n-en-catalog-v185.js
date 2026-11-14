@@ -6318,7 +6318,8 @@ export const EN_CATALOG_V185 = Object.freeze({
 "Sonique": "Sonic",
 "Outil": "Tool",
 "Bioforge uniquement": "Bioforge only",
-"Comportement synthétique du projet": "Project synthetic behavior"
+"Comportement synthétique du projet": "Project synthetic behavior",
+"colonies, ruines et installations disputées par Weyland-Yutani et Hyperdyne": "colonies, ruins and installations contested by Weyland-Yutani and Hyperdyne"
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 ": 'Relève disponible'} · {0}": ": 'Relief available'} · {0}",

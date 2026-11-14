@@ -173,6 +173,20 @@ test('P2: the special-operation cards (REGISTRE TANTALUS, LOT JOUABLE) stay behi
   assert.match(app, /if \(!isLocalDeveloperEnvironmentV119\(globalThis\.location\?\.hostname\) \|\| !isDeveloperShortcutV110\(event\)/u);
 });
 
+// —— P2, content: truncated world description ——
+test('P2: the LV-895 description is a complete phrase in FR and EN; ids unchanged', async () => {
+  const { WORLDS } = await import('../src/content.js');
+  const lv895 = WORLDS.filter(world => world.id.startsWith('world-') && world.id.includes('lv-895'));
+  assert.ok(lv895.some(world => world.id === 'world-06-lv-895'), 'identifier kept');
+  for (const world of lv895) {
+    assert.doesNotMatch(world.description, /installations Pala$/u, world.id);
+    assert.equal(world.description, 'colonies, ruines et installations disputées par Weyland-Yutani et Hyperdyne');
+    inEnglish(() => assert.equal(autoTranslateV185(world.description), 'colonies, ruins and installations contested by Weyland-Yutani and Hyperdyne'));
+  }
+  // No other world description stops on a dangling short word.
+  for (const world of WORLDS) assert.doesNotMatch(world.description, /\b(?:et|de|des|du|la|le|les)$/u, world.id);
+});
+
 // —— P2: archive list on a live language switch ——
 test('P2: the archive list re-renders on the language event, like the other views', async () => {
   const app = read('src/app.js');
