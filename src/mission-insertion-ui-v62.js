@@ -40,6 +40,16 @@ const PHASE_ACTION_LABELS = Object.freeze({
   'player-control': 'PRENDRE LE CONTRÔLE'
 });
 
+// [PROPOSÉ] In-universe channel lines shown during an ordinary insertion,
+// written for the project in a terse tactical register.
+const HOOK_HEADING_V188 = 'CANAUX TACTIQUES';
+const HOOK_LINES_V188 = Object.freeze({
+  audio: Object.freeze({ label: 'COMMS', text: 'Canal de l’escouade ouvert' }),
+  camera: Object.freeze({ label: 'OPTIQUE', text: 'Caméra casque en ligne' }),
+  objective: Object.freeze({ label: 'MU/TH/UR', text: 'Ordres de mission transmis' }),
+  default: Object.freeze({ label: 'TRANSMISSION', text: 'Signal reçu' })
+});
+
 const STATUS_LABELS = Object.freeze({
   active: 'EN COURS',
   complete: 'TERMINÉE',
@@ -467,17 +477,20 @@ export class MissionInsertionUiV62 {
 
   renderHooks(container, phase) {
     if (!phase.hooks.length) return;
-    container.append(createElement(this.document, 'h3', '', 'LIAISONS OPÉRATIONNELLES'));
+    // V188: the player reads terse in-universe channel lines; event names and
+    // operation ids stay in data attributes for tools and tests.
+    container.append(createElement(this.document, 'h3', '', HOOK_HEADING_V188));
     const list = createElement(this.document, 'ul', 'mission-insertion-v62__hooks');
     for (const hook of phase.hooks) {
       const channel = nonEmptyString(hook.channel, 40) || 'système';
-      const event = nonEmptyString(hook.event, 180) || 'phase-enter';
-      const detail = hook.objectiveRef || hook.approach || hook.operationId || '';
+      const line = HOOK_LINES_V188[channel] || HOOK_LINES_V188.default;
+      const approach = MISSION_INSERTION_APPROACH_LABELS_V62[hook.approach];
       const item = createElement(this.document, 'li');
       item.dataset.hookChannel = channel;
+      item.dataset.hookEvent = nonEmptyString(hook.event, 180) || 'phase-enter';
       item.append(
-        createElement(this.document, 'strong', '', channel.toUpperCase()),
-        createElement(this.document, 'span', '', `${event}${detail ? ` · ${detail}` : ''}`)
+        createElement(this.document, 'strong', '', line.label),
+        createElement(this.document, 'span', '', channel === 'camera' && approach ? `${line.text} · ${approach}` : line.text)
       );
       list.append(item);
     }

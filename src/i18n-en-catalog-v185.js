@@ -6219,7 +6219,13 @@ export const EN_CATALOG_V185 = Object.freeze({
 "Frontier Revolver : grand barillet, grip arrondi, marteau incliné et long carter avant ventilé préservés.": "Frontier Revolver: large cylinder, rounded grip, angled hammer and long vented front casing preserved.",
 "Modèle distinct du revolver .357 historique.": "Model distinct from the historical .357 revolver.",
 "Référence officielle complète de la saison 4 inspectée.": "Complete official season 4 reference inspected.",
-"Vue officielle complète de la saison 2 inspectée.": "Complete official season 2 view inspected."
+"Vue officielle complète de la saison 2 inspectée.": "Complete official season 2 view inspected.",
+"CANAUX TACTIQUES": "TACTICAL CHANNELS",
+"OPTIQUE": "OPTICS",
+"Canal de l’escouade ouvert": "Squad channel open",
+"Caméra casque en ligne": "Helmet camera online",
+"Ordres de mission transmis": "Mission orders transmitted",
+"Signal reçu": "Signal received"
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 ": 'Relève disponible'} · {0}": ": 'Relief available'} · {0}",
