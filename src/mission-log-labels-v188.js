@@ -28,3 +28,17 @@ export function biomeLabelV188(biome) {
   if (Object.hasOwn(BIOME_LABELS_V188, raw.toLowerCase())) return BIOME_LABELS_V188[raw.toLowerCase()];
   return !raw || ID_SHAPE_V188.test(raw) ? 'secteur' : raw;
 }
+
+// Failure reasons: some runtimes pass an authored French sentence, others an id
+// (failMission('escouade-neutralisee')). The id stays in the save and the
+// operation flags; only the displayed reason is replaced.
+export const FAILURE_REASON_LABELS_V188 = Object.freeze({
+  'escouade-neutralisee': 'escouade neutralisée', 'marine-a-terre': 'marine à terre',
+  'quarantine-time-expired': 'délai de quarantaine écoulé', 'capture-target-killed': 'spécimen à capturer abattu',
+  'time-expired': 'délai écoulé', 'specimen-killed': 'spécimen abattu'
+});
+export function missionFailureLabelV188(reason) {
+  const raw = String(reason ?? '').trim();
+  if (Object.hasOwn(FAILURE_REASON_LABELS_V188, raw)) return FAILURE_REASON_LABELS_V188[raw];
+  return !raw || ID_SHAPE_V188.test(raw) ? 'échec' : raw;
+}

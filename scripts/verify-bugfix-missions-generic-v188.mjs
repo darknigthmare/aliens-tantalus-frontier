@@ -98,3 +98,20 @@ test('squad HUD and mission log name the support action, the zone biome and the 
   assert.match(app, /ZONE · .* · \$\{biomeLabelV188\(event\.biome\)\.toUpperCase\(\)\}/);
   assert.doesNotMatch(app, /ALLIÉ À TERRE · \$\{event\.crewId\}/);
 });
+
+test('a generic death reads "marine à terre", not the failure id, in the log and the survival dock', async () => {
+  const { missionFailureLabelV188 } = await import('../src/mission-log-labels-v188.js');
+  const { engine, events } = await launch(campaign('pair-001-mire'));
+  engine.enemies = []; engine.hazards = [];
+  // Declared injection: the marine takes lethal damage (no coop, no squad).
+  engine.squadActors = []; engine.coopEnabled = false;
+  engine.damagePlayer(engine.player, 1e6, { bypassCover: true, source: 'fall' }); tick(engine, 0.5);
+  const failed = events.find(event => event.type === 'mission-failed');
+  assert.ok(failed, 'the mission fails');
+  assert.equal(failed.reason, 'marine-a-terre', 'the saved id is unchanged');
+  assert.equal(missionFailureLabelV188(failed.reason), 'marine à terre');
+  assert.equal(missionFailureLabelV188('escouade-neutralisee'), 'escouade neutralisée');
+  assert.equal(missionFailureLabelV188('Le sas a été englouti par l’effondrement planétaire.'), 'Le sas a été englouti par l’effondrement planétaire.');
+  assert.match(read('src/app.js'), /OPÉRATION COMPROMISE · \$\{missionFailureLabelV188\(event\.reason \|\| event\.failureMode\)\}/);
+  assert.match(read('src/alien-survival-runtime-v70.js'), /missionFailureLabelV188\(this\.mission\.failureReason\)/);
+});
