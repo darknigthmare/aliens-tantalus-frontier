@@ -90,6 +90,24 @@ test('operation results read in proper French and translate to English (debrief,
   } finally { setLanguageV185('fr', { storage: null, document: null, persist: false }); }
 });
 
+test('survival systems: closing the CCTV from the panel hands the keyboard back to the game (E, movement)', async () => {
+  const { AlienSurvivalDockV70 } = await import('../src/alien-survival-ui-v70.js');
+  const { engine, canvas } = await launch(campaign('special-alien-survival-systems'));
+  const station = type => engine.alienSurvivalStationsV70.find(candidate => candidate.type === type);
+  placeNear(engine, station('power'), 0); engine.interact(engine.player);
+  assert.equal(engine.alienSurvivalV70.power.routes.cctv, true, 'E at the breaker routes the CCTV');
+  placeNear(engine, station('cctv'), 0); engine.interact(engine.player);
+  assert.equal(engine.alienSurvivalV70.cctv.active, true, 'E opens the CCTV');
+  // The panel button keeps the focus after a mouse click; the dock must give it back.
+  let focused = null;
+  canvas.focus = () => { focused = 'canvas'; };
+  const dock = Object.create(AlienSurvivalDockV70.prototype);
+  Object.assign(dock, { engine, root: { querySelector: () => null }, document: globalThis.document, announce() {}, refresh() {} });
+  assert.equal(dock.activate('cctv-close'), true);
+  assert.equal(engine.alienSurvivalV70.cctv.active, false);
+  assert.equal(focused, 'canvas', 'closing the CCTV returns focus to the game canvas');
+});
+
 test('command journal titles an operation result with the campaign name, not its id', async () => {
   const { strategyLogTitleV188 } = await import('../src/mission-debrief-v188.js');
   assert.equal(strategyLogTitleV188({ title: 'signature-01' }, CAMPAIGNS), campaign('signature-01').name);
