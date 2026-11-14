@@ -856,6 +856,8 @@ function showView(name) {
   byId('breadcrumb').textContent = VIEW_META[name][0];
   byId('view-title').textContent = tV185(`view.${name}`, VIEW_META[name][1]);
   document.querySelector('.rail').classList.remove('open');
+  // V188: the hidden aria-live #hub-prompt must not keep announcing a hub (lift) prompt once the level is gone.
+  if (name !== 'hub' && byId('hub-prompt')) { byId('hub-prompt').textContent = ''; lastHubStatus = lastHubStatus ? { ...lastHubStatus, prompt: '' } : lastHubStatus; }
   if (name === 'hub') {
     hubEngine.setReducedMotion(saveSystem.data.settings.reducedMotion);
     hubOwnerV84 = currentOwnerV84();
