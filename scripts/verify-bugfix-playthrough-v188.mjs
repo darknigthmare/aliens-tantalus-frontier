@@ -12,14 +12,14 @@ const campaign = id => CAMPAIGNS.find(entry => entry.id === id);
 const worldOf = entry => WORLDS.find(world => world.id === entry.worldId) || WORLDS[0];
 
 // Starts the production engine like the app's generic launch (startMissionRuntimeV62).
-async function launch(entry, { options = {} } = {}) {
+async function launch(entry, { options = {}, keepHazards = false } = {}) {
   const browser = host(), events = [], world = worldOf(entry);
   const missionLevel = buildMissionLevelV52({ campaign: entry, world, levelSeeds: LEVEL_SEEDS, variant: 0 });
   const engine = new GameEngine(browser.canvas, { onEvent: event => events.push(event) });
   engine.start({ userCasteCampaignV88: true, world, campaign: entry, weapon: WEAPONS[0], enemyCatalog: ENEMIES, equipment: [], crew: [],
     seed: missionLevel.levelSeed.seed, levelSeed: missionLevel.levelSeed, missionLevel, ...options });
   await prepare(engine);
-  engine.enemies = []; engine.squadActors = []; engine.hazards = [];
+  engine.enemies = []; engine.squadActors = []; if (!keepHazards) engine.hazards = [];
   return { ...browser, engine, events, missionLevel };
 }
 // Declared injection: the marine is placed next to a target (teleport), then acts with E (interact()).
@@ -106,6 +106,26 @@ test('survival systems: closing the CCTV from the panel hands the keyboard back 
   assert.equal(dock.activate('cctv-close'), true);
   assert.equal(engine.alienSurvivalV70.cctv.active, false);
   assert.equal(focused, 'canvas', 'closing the CCTV returns focus to the game canvas');
+});
+
+test('survival systems: the ship decompression event cannot re-open the cargo vacuum the pressure model replaced (weld stays possible)', async () => {
+  const { engine, events } = await launch(campaign('special-alien-survival-systems'), { keepHazards: true });
+  const vacuum = engine.hazards.find(hazard => hazard.kind === 'vacuum' && hazard.zoneId === 'ship-cargo');
+  assert.ok(vacuum && vacuum.active === false, 'survival configures the cargo without the level vacuum');
+  // The template's zone events (entering the cargo) try to activate it.
+  for (const event of engine.missionLevelEvents.values()) if (event.actions?.some(action => action.endsWith(`:${vacuum.id}`))) engine.triggerMissionLevelEvent(event.id, 'qa');
+  engine.applyMissionLevelAction(`activate:${vacuum.id}`, {});
+  assert.equal(vacuum.active, false, 'the level event leaves the survival cargo pressurised');
+  // Weld the cargo bulkhead with E: the work completes (no damage interruption).
+  engine.inventory.cutter = true; engine.alienSurvivalWeldingKitV70.taken = true;
+  engine.alienSurvivalV70.cctv.scanComplete = true; engine.alienSurvivalV70.power.routes = { 'life-support': true, security: true, cctv: false };
+  const door = engine.doors.find(candidate => candidate.id === 'cargo-bulkhead');
+  placeNear(engine, door, -70);
+  assert.match(engine.getInteractionPrompt(engine.player), /SOUDER LA CLOISON CARGO/);
+  engine.interact(engine.player);
+  for (let n = 0; n < 150 && engine.alienSurvivalWorldActionV70; n++) engine.update(1 / 60);
+  assert.ok(!events.some(event => event.type === 'alien-survival-weld-cancelled'), JSON.stringify(events.filter(event => event.type === 'alien-survival-weld-cancelled')));
+  assert.equal(engine.alienSurvivalV70.doors.find(entry => entry.id === 'cargo-bulkhead').welded, true);
 });
 
 test('command journal titles an operation result with the campaign name, not its id', async () => {

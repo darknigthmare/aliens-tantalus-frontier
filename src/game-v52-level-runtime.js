@@ -1612,6 +1612,9 @@ export function withV52LevelRuntime(BaseEngine) {
       }
       if (kind === 'activate' || kind === 'toggle') {
         const hazard = this.hazards.find((candidate) => candidate.id === value);
+        // V188: a mission layer that replaced a template hazard with its own
+        // system (survival pressure) can refuse the level event's change.
+        if (hazard && this.admitMissionLevelHazardChangeV188?.(hazard, kind) === false) return { action, changed: false, refused: true };
         if (hazard) {
           hazard.active = kind === 'toggle' ? !hazard.active : true;
           this.missionLevelTelemetry.hazardChanges += 1;
