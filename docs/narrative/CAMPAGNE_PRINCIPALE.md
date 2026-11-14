@@ -4477,6 +4477,15 @@ La table du §6.3 est jouable dans la vue Commandement. Les sept chantiers, leur
   - quartiers : lampe de bureau ;
   - soute du dropship : lumière rouge, harnais, hublots sous la pluie, secousses.
 - **Nouvelle séquence** : CIN-03 *Descente sur Port-Méridien*, présentée au §4. Ses répliques sont **[PROPOSÉ]**.
+- **Passe de cohérence des décors (2026-11-14)** : chaque décor a une échelle unique (personnes de 1,2 à 1,95 m), les quantités suivent le jeu et le canon, et le test `verify-cinematic-coherence-v188` les vérifie.
+  - **Baie cryo (CIN-01)** : comme dans la baie du jeu, le plan montre le casier ECHO-8, la porte des capsules, DAVID-8R et **une seule** capsule, la 03, ouverte. La mention « capsules … la n° 3 ouverte » devient « la capsule 03, ouverte ».
+  - **Casier** : un seul casier ECHO-8 scellé, aux proportions du jeu.
+  - **Briefing (CIN-02)** : Harlow, Vega, Velez et Echo-9 autour d'une table de 3,1 m **[PROPOSÉ]**.
+  - **Quai** : conteneurs de 10 pieds, Wren et trois habitants à l'arrivée, Asha et Adèle Sarrazin pour la visite.
+  - **Triage** : le blessé allongé, Lucia Ferro à côté.
+  - **CIN-11** : berceau QZ17 de 2,4 × 1,0 m **[PROPOSÉ]**, couvercle forcé vers l'extérieur, trois sangles arrachées, Echo-9 à la torche pour l'échelle.
+  - **CIN-10** : Rook parle par radio, conformément au tableau de l'équipage.
+  - **CIN-31** : les comptes du manifeste ne sont plus cachés par la bande du bas.
 
 **Mise en scène en jeu (`ingame-staging-v188.js`)** :
 
