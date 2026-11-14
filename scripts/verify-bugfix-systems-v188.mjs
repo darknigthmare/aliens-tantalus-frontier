@@ -71,8 +71,7 @@ test('i18n: save recovery, profile switch and armory resupply texts are translat
         'Ammunition lots for the next operation · historical reserve management. Physical magazines remain specific to weapons in the mission.',
       'ARCHIVES ARMEMENT · 19 références à authentifier': 'WEAPON ARCHIVES · 19 references to authenticate',
       'ACCESSOIRES DOCUMENTÉS · 13 modules à authentifier': 'DOCUMENTED ACCESSORIES · 13 modules to authenticate',
-      'ARMES À AUTHENTIFIER · 129 dossiers': 'WEAPONS TO AUTHENTICATE · 129 files',
-      'Retraite non enregistrée : save-write-failed.': 'Retreat not saved: storage refused the save. The operation is kept.'
+      'ARMES À AUTHENTIFIER · 129 dossiers': 'WEAPONS TO AUTHENTICATE · 129 files'
     };
     for (const [fr, en] of Object.entries(cases)) assert.equal(autoTranslateV185(fr), en);
   } finally { setLanguageV185(previous, { document: null, storage: null, persist: false }); }

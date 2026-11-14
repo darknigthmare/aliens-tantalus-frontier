@@ -6,7 +6,6 @@ export const EN_CATALOG_V185 = Object.freeze({
 "fichier illisible": "unreadable file",
 "stockage inaccessible": "storage unavailable",
 "Lots de munitions pour la prochaine opération · gestion de réserve historique. Les chargeurs physiques restent propres aux armes en mission.": "Ammunition lots for the next operation · historical reserve management. Physical magazines remain specific to weapons in the mission.",
-"Retraite non enregistrée : save-write-failed.": "Retreat not saved: storage refused the save. The operation is kept.",
 "\" target=\"_blank\" rel=\"noopener noreferrer\">Référence": "\" target=\"_blank\" rel=\"noopener noreferrer\">Reference",
 "(seul état visuel disponible)": "(only visual state available)",
 "+15 % AUX PROCHAINS TIRS · X / □ RECHARGER": "+15% ON NEXT SHOTS · X / □ RELOAD",
