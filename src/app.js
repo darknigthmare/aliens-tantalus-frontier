@@ -3104,7 +3104,10 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
     });
   advanceGalaxy(candidate, { hours: resolvedSuccess ? 4 : 8, generateCrisis: true });
   candidate.scene = 'hub';
-  saveSystem.commit(candidate);
+  // V188: a refused write (quota, private mode) leaves the operation active and
+  // reports it; callers show the refusal instead of throwing from a click.
+  try { saveSystem.commit(candidate); }
+  catch { return { ok: false, reason: 'save-write-failed' }; }
   renderAll();
   const colonySiteV188 = id => colonySnapshotV188(candidate, document.documentElement.lang).sites.find(entry => entry.id === id)?.criterion || id;
   if (colonyChangeV188?.validated) toast(document.documentElement.lang === 'en' ? `Port-Méridien: site level validated (${colonySiteV188(colonyChangeV188.validated)} ${colonyChangeV188.level}).` : `Port-Méridien : niveau de chantier validé (${colonySiteV188(colonyChangeV188.validated)} ${colonyChangeV188.level}).`);
