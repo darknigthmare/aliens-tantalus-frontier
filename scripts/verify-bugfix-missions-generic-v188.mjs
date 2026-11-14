@@ -75,6 +75,10 @@ test('damage and insertion captions never show internal ids or English keys; Eng
     assert.equal(autoTranslateV185('Insertion : Secourir les survivants'), 'Insertion: Rescue the survivors');
     assert.equal(autoTranslateV185('M4A3 Service Pistol : tir balistique.'), 'M4A3 Service Pistol: ballistic fire.');
     assert.equal(autoTranslateV185('Danger : vide.'), 'Danger: vacuum.');
+    // Composed lock feedback of the colony gate (log and E prompt), seen untranslated in an EN run.
+    assert.equal(autoTranslateV185('ACCÈS REFUSÉ · PORTE PRINCIPALE SANS ALIMENTATION — PASSER PAR LES TOITS OU LES GALERIES ET RELANCER LE GÉNÉRATEUR'),
+      'ACCESS DENIED · MAIN DOOR UNPOWERED — GO VIA THE ROOFTOPS OR THE TUNNELS AND RESTART THE GENERATOR');
+    assert.equal(autoTranslateV185('PLAN LOCAL · INDICES FACULTATIFS'), 'LOCAL MAP · OPTIONAL CLUES');
   } finally { setLanguageV185('fr', { storage: null, document: null, persist: false }); }
 });
 
