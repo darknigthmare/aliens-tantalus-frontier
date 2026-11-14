@@ -294,6 +294,13 @@ function createElement(documentRef, tagName, className = '', text = null) {
   return element;
 }
 
+// V188: a label and its provenance text joined by ' — ' are kept in separate
+// spans, so the English layer translates each known part. textContent is unchanged.
+function appendTextPartsV188(documentRef, element, parts) {
+  for (const part of parts) if (part) element.append(createElement(documentRef, 'span', '', part));
+  return element;
+}
+
 function appendDefinitionRows(documentRef, target, values, options = {}) {
   for (const [key, rawValue] of visibleEntries(values)) {
     if (key === 'encounterWorldIds' && values.habitats?.length) continue;
@@ -850,7 +857,8 @@ export class CatalogWorkbenchV62 {
     if (record.visual?.illustrationNote) {
       const caption = createElement(this.document, 'p', 'catalog-v62__fact-note');
       caption.dataset.illustrationCaption = record.id;
-      caption.textContent = [record.visual.visualLabel, record.visual.illustrationNote].filter(Boolean).join(' — ');
+      const parts = [record.visual.visualLabel, record.visual.illustrationNote].filter(Boolean);
+      appendTextPartsV188(this.document, caption, parts.flatMap((part, index) => index ? [' — ', part] : [part]));
       this.detail.append(caption);
     }
     if (record.catalog === 'weapons') this.renderWeaponReferenceV120(record);
@@ -928,9 +936,9 @@ export class CatalogWorkbenchV62 {
     const technical = Boolean(this.developerModeV110);
     const section = this.renderSection(technical ? 'RÉFÉRENCES PARTAGÉES — APERÇU DOCUMENTAIRE' : 'RÉFÉRENCES', 'shared-alien-base-v1');
     if (technical) section.dataset.sharedIdentity = master?.id || dossier?.id || weapon?.id || '';
-    section.append(createElement(this.document,'p','catalog-v62__fact-note',
-      dossier?.sourceWork ? 'Œuvre : ' + dossier.sourceWork
-        : weapon?.work ? 'Œuvre : ' + weapon.work : 'Œuvre à documenter'));
+    const work = dossier?.sourceWork || weapon?.work;
+    section.append(work ? appendTextPartsV188(this.document, createElement(this.document,'p','catalog-v62__fact-note'), ['Œuvre : ', work])
+      : createElement(this.document,'p','catalog-v62__fact-note','Œuvre à documenter'));
     if (technical && proposal) {
       section.dataset.identityLinkStatus = proposal.status;
       section.append(createElement(this.document,'p','catalog-v62__fact-note',
@@ -947,7 +955,7 @@ export class CatalogWorkbenchV62 {
       let url;
       try { url = new URL(raw); } catch { continue; }
       if (url.protocol !== 'https:' || url.username || url.password || url.search || url.hash) continue;
-      const link = createElement(this.document,'a','catalog-v62__reference-link','Consulter la référence — ' + url.hostname);
+      const link = appendTextPartsV188(this.document, createElement(this.document,'a','catalog-v62__reference-link'), ['Consulter la référence — ', url.hostname]);
       link.href = url.href; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.referrerPolicy = 'no-referrer';
       section.append(link);
     }
@@ -982,7 +990,7 @@ export class CatalogWorkbenchV62 {
     // official crew/performance. Keep these limits beside the player portrait.
     const section = this.renderSection('RÉFÉRENCE DE PRODUCTION', 'vehicle-reference-v122');
     section.dataset.vehicleReference = reference.chassisId;
-    section.append(createElement(this.document, 'p', 'catalog-v62__fact-note', `Concept de production — ${reference.sourceWork}`),
+    section.append(appendTextPartsV188(this.document, createElement(this.document, 'p', 'catalog-v62__fact-note'), ['Concept de production — ', reference.sourceWork]),
       createElement(this.document, 'p', 'catalog-v62__fact-note', reference.note),
       createElement(this.document, 'p', 'catalog-v62__fact-note',
         'Paramètres de simulation : postes, coque, vitesse, blindage et capacité sont des réglages Tantalus, pas des mesures officielles.'),
@@ -992,7 +1000,7 @@ export class CatalogWorkbenchV62 {
       let url;
       try { url = new URL(source.url); } catch { continue; }
       if (url.protocol !== 'https:' || url.username || url.password) continue;
-      const link = createElement(this.document, 'a', 'catalog-v62__reference-link', `Conception de production — ${url.hostname}`);
+      const link = appendTextPartsV188(this.document, createElement(this.document, 'a', 'catalog-v62__reference-link'), ['Conception de production — ', url.hostname]);
       link.href = url.href; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.referrerPolicy = 'no-referrer';
       section.append(link);
     }

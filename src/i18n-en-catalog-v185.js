@@ -6202,7 +6202,24 @@ export const EN_CATALOG_V185 = Object.freeze({
 "Terrestre": "Ground",
 "Ferroviaire": "Rail",
 "Spatial": "Space",
-"Engins": "Craft"
+"Engins": "Craft",
+"Concept de production —": "Production concept —",
+"Conception de production —": "Production design —",
+"Pose fixe native": "Native fixed pose",
+"animations manquantes": "animations missing",
+"Pose fixe native · animations manquantes": "Native fixed pose · animations missing",
+"Propstore, lot 32 / stock 149307 — VP70M de tournage": "Propstore, lot 32 / stock 149307 — screen-used VP70M",
+"Propstore Collection — Sentry Gun de tournage": "Propstore Collection — screen-used Sentry Gun",
+"Compteur arrière, canon court fileté, évents, molette et long chargeur conservés.": "Rear counter, short threaded barrel, vents, thumbwheel and long magazine kept.",
+"Fichier primaire intitulé Mark 7 ; cartouche de travail de l’image : Handgun MachinePistol Armat B.": "Primary file titled Mark 7; working label of the image: Handgun MachinePistol Armat B.",
+"P.649 HEL : carter long, cœur cylindrique, levier incliné, pivots et braces inférieurs préservés.": "P.649 HEL: long casing, cylindrical core, angled lever, pivots and lower braces preserved.",
+"DKT-59 Misha : silhouette du handgun, poignée ajourée, longues ouvertures triangulaires et bobine avant préservées.": "DKT-59 Misha: handgun silhouette, skeletonized grip, long triangular openings and front coil preserved.",
+"EVI-87 Zvezda : crosse profonde, poignée inclinée et cœur énergétique cyan/violet sous braces triangulaires préservés.": "EVI-87 Zvezda: deep stock, angled grip and cyan/violet energy core under triangular braces preserved.",
+"PPZ-49 Vol : crosse triangulée, longue poignée avant, grip incliné, chargeur prolongé et mécanismes sous carter ajouré préservés.": "PPZ-49 Vol: triangulated stock, long foregrip, angled grip, extended magazine and mechanisms under a skeletonized casing preserved.",
+"Frontier Revolver : grand barillet, grip arrondi, marteau incliné et long carter avant ventilé préservés.": "Frontier Revolver: large cylinder, rounded grip, angled hammer and long vented front casing preserved.",
+"Modèle distinct du revolver .357 historique.": "Model distinct from the historical .357 revolver.",
+"Référence officielle complète de la saison 4 inspectée.": "Complete official season 4 reference inspected.",
+"Vue officielle complète de la saison 2 inspectée.": "Complete official season 2 view inspected."
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 ": 'Relève disponible'} · {0}": ": 'Relief available'} · {0}",
@@ -6655,5 +6672,6 @@ export const EN_PATTERNS_V185 = Object.freeze({
 "RELAIS · {0} % · IMMOBILE": "RELAY · {0} % · HOLD STILL",
 "LIAISON · {0} % · RESTEZ IMMOBILE": "LINK · {0} % · HOLD STILL",
 "E — SORTIR VERS {0}": "E — EXIT TO {0}",
-"E — RELAIS · {0} % · IMMOBILE": "E — RELAY · {0} % · HOLD STILL"
+"E — RELAIS · {0} % · IMMOBILE": "E — RELAY · {0} % · HOLD STILL",
+"{0} · {1} · {2} · adaptation du projet, fidélité canonique non certifiée.": "{0} · {1} · {2} · project adaptation, canonical fidelity not certified."
 });
