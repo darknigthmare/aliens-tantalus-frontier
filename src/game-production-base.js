@@ -2,6 +2,8 @@ import { GameEngine as FinalGameEngine } from './game-final-runtime.js';
 import { firstProjectileObstacleV83 } from './projectile-collision-v83.js';
 import { collectProjectileCollisionsV83 } from './projectile-collision-v83.js';
 import { CombatCaptionDirectorV84 } from './combat-captions-v84.js';
+import { impactCaptionV188, hazardCaptionV188, weaponShotCaptionV188 } from './impact-caption-v188.js';
+import { campaignObjectiveLabelV188 } from './mission-objective-panel-v188.js';
 import { resolveWeaponMechanicsV122, FIREBALL_MECHANICS_V122 } from './weapon-mechanics-weapons-v122.js';
 
 export * from './game-final-runtime.js';
@@ -200,7 +202,7 @@ export class GameEngine extends FinalGameEngine {
     const snapshot = super.start({ ...options, enemyCatalog: [...this.encounterSelection.selected] });
     this.weaponBallistics = buildWeaponBallisticsRuntime(this.weaponRuntime);
     this.configureNeuroCounterplay();
-    this.pushCaption('mission', `Insertion: ${this.missionPlan.campaign.objective}`);
+    this.pushCaption('mission', `Insertion : ${campaignObjectiveLabelV188(this.missionPlan.campaign.objective)}`);
     return { ...snapshot, ...this.getProductionSnapshot() };
   }
 
@@ -388,7 +390,7 @@ export class GameEngine extends FinalGameEngine {
     this.penetrationTelemetry.shots += 1;
     this.penetrationTelemetry.familyEffects[ballistics.family] = (this.penetrationTelemetry.familyEffects[ballistics.family] || 0) + 1;
     if (this.stealthRuntime) this.stealthRuntime.noiseBurstUntil = this.animationTime + 0.85 * ballistics.noise;
-    this.pushCaption('weapon', `${this.weaponRuntime.name}: tir ${ballistics.family}.`);
+    this.pushCaption('weapon', weaponShotCaptionV188(this.weaponRuntime.name, ballistics.family));
     return true;
   }
 
@@ -531,7 +533,7 @@ export class GameEngine extends FinalGameEngine {
     const result = super.damagePlayer(player, amount, options);
     if (player && player.health < before) {
       this.cameraShake = Math.max(this.cameraShake, this.accessibilityRuntime.screenShake * clamp(amount / 24, 0.2, 1));
-      this.pushCaption('danger', `Impact: ${String(options.source || 'menace')}.`);
+      this.pushCaption('danger', impactCaptionV188(options.source));
     }
     return result;
   }
@@ -539,7 +541,7 @@ export class GameEngine extends FinalGameEngine {
   applyHazards(player) {
     const previous = this.environmentStatus?.lastHazard;
     super.applyHazards(player);
-    if (this.environmentStatus?.lastHazard && this.environmentStatus.lastHazard !== previous) this.pushCaption('environment', `Danger: ${this.environmentStatus.lastHazard}.`);
+    if (this.environmentStatus?.lastHazard && this.environmentStatus.lastHazard !== previous) this.pushCaption('environment', hazardCaptionV188(this.environmentStatus.lastHazard));
   }
 
   pushCaption(channel, text) {

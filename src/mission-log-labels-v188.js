@@ -1,0 +1,59 @@
+// V188 — player-facing words for mission-log and squad HUD values that the
+// runtime carries as identifiers (squad support actions, zone biomes). French
+// labels; English comes from the reviewed V185 catalog through the live
+// canvas/DOM translation layer. Unknown identifiers never reach the screen raw.
+export const SQUAD_ACTION_LABELS_V188 = Object.freeze({
+  'cohesion-aura': 'cohésion', 'combat-medicine': 'soins de combat', 'command-aura': 'commandement',
+  'demolition-round': 'charge de démolition', 'field-repair': 'réparation', 'hazard-guard': 'protection environnementale',
+  'recon-pulse': 'impulsion de reconnaissance', 'signal-disruption': 'brouillage', 'smartgun-burst': 'rafale smartgun',
+  'suppressive-fire': 'tir de suppression', 'threat-analysis': 'analyse de menace', 'vehicle-gunnery': 'tourelle du véhicule',
+  'vehicle-repair': 'réparation du véhicule', support: 'soutien'
+});
+export const BIOME_LABELS_V188 = Object.freeze({
+  industrial: 'industriel', industriel: 'industriel', ruins: 'ruines', jungle: 'jungle', foundry: 'fonderie', caverns: 'cavernes',
+  orbital: 'orbital', oceanic: 'océanique', mines: 'mines', colony: 'colonie', shipyard: 'chantier naval', habitation: 'habitat',
+  cryogenic: 'cryogénie', reactor: 'réacteur', laboratory: 'laboratoire', badlands: 'terres arides', hive: 'ruche', ruche: 'ruche',
+  vacuum: 'vide spatial', quarantaine: 'quarantaine'
+});
+const ID_SHAPE_V188 = /^[a-z0-9]+([-_][a-z0-9]+)*$/u;
+
+export function squadActionLabelV188(action) {
+  const raw = String(action ?? '').trim();
+  if (Object.hasOwn(SQUAD_ACTION_LABELS_V188, raw)) return SQUAD_ACTION_LABELS_V188[raw];
+  return !raw || ID_SHAPE_V188.test(raw) ? 'soutien' : raw;
+}
+
+export function biomeLabelV188(biome) {
+  const raw = String(biome ?? '').trim();
+  if (Object.hasOwn(BIOME_LABELS_V188, raw.toLowerCase())) return BIOME_LABELS_V188[raw.toLowerCase()];
+  return !raw || ID_SHAPE_V188.test(raw) ? 'secteur' : raw;
+}
+
+// Failure reasons: some runtimes pass an authored French sentence, others an id
+// (failMission('escouade-neutralisee')). The id stays in the save and the
+// operation flags; only the displayed reason is replaced.
+export const FAILURE_REASON_LABELS_V188 = Object.freeze({
+  'escouade-neutralisee': 'escouade neutralisée', 'marine-a-terre': 'marine à terre',
+  'quarantine-time-expired': 'délai de quarantaine écoulé', 'capture-target-killed': 'spécimen à capturer abattu',
+  'time-expired': 'délai écoulé', 'specimen-killed': 'spécimen abattu'
+});
+export function missionFailureLabelV188(reason) {
+  const raw = String(reason ?? '').trim();
+  if (Object.hasOwn(FAILURE_REASON_LABELS_V188, raw)) return FAILURE_REASON_LABELS_V188[raw];
+  return !raw || ID_SHAPE_V188.test(raw) ? 'échec' : raw;
+}
+
+// Checkpoint ids (insertion, power, apc-convoy-queen-cleared, mecha-mounted…)
+// stay in the flags; the log names the generic ones and calls the others
+// "d’opération".
+export const CHECKPOINT_LABELS_V188 = Object.freeze({
+  insertion: 'd’insertion', power: 'énergie', archive: 'archives', security: 'sécurité', vent: 'conduit',
+  containment: 'confinement', extract: 'extraction', extraction: 'extraction'
+});
+export function checkpointLabelV188(id) {
+  const raw = String(id ?? '').trim();
+  if (Object.hasOwn(CHECKPOINT_LABELS_V188, raw)) return CHECKPOINT_LABELS_V188[raw];
+  const beacon = /^beacon-(\d+)$/u.exec(raw);
+  if (beacon) return `balise ${beacon[1]}`;
+  return 'd’opération';
+}

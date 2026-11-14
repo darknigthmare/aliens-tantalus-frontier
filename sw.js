@@ -187,6 +187,8 @@ const SHELL = Object.freeze([
   '/src/title-vfx-v188.js',
   '/src/ingame-staging-v188.js',
   '/src/galaxy-map-mobile-v188.js',
+  '/src/mission-log-labels-v188.js',
+  '/src/impact-caption-v188.js',
   '/src/hub-depth-rooms-v188.js',
   '/src/hub-depth-runtime-v188.js',
   '/src/depth-props-v188.js',

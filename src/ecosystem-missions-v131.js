@@ -516,6 +516,8 @@ export function withEcosystemMissionsV131(BaseEngine) {
       if (!checked.valid) return checked;
       const state = checked.state, expected = this.resumeIdentity || {}, identity = raw?.identity || {};
       const boss = raw.enemies?.find(actor => actor.id === 'eco131-boss');
+      // Any position inside the 5200 px arena is legal; the former 5150 cap rejected a marine at the right wall.
+      const maxX = Math.max(5150, Number(this.missionLevelBounds?.width) || 5200);
       const phases = state.operationId === 'queen-mother-song' ? 4 : 3, bossHealth = state.operationId === 'queen-mother-song' ? 600 : 540;
       const authored = list(this.ecosystemAuthoredActorsV131);
       const expectedKeys = ['id', 'role', 'x', 'floorY', 'targetIndex', 'caste'];
@@ -537,7 +539,7 @@ export function withEcosystemMissionsV131(BaseEngine) {
         || !Array.isArray(raw.enemies) || raw.enemies.length !== state.actors.length
         || new Set(raw.enemies.map(actor => actor.id)).size !== state.actors.length
         || raw.enemies.some(actor => !state.actors.some(descriptor => descriptor.id === actor.id)
-          || !Number.isFinite(actor.x) || actor.x < 0 || actor.x > 5150 || !Number.isFinite(actor.y) || actor.y < 0 || actor.y > 570
+          || !Number.isFinite(actor.x) || actor.x < 0 || actor.x > maxX || !Number.isFinite(actor.y) || actor.y < 0 || actor.y > 570
           || !Number.isFinite(actor.health) || actor.health < 0 || actor.health > 600 || typeof actor.alive !== 'boolean'
           || actor.alive !== (actor.health > 0))
         || state.targets.some((done, index) => done !== (raw.enemies.find(actor => actor.id === `eco131-target-${index}`)?.alive === false))
@@ -546,7 +548,7 @@ export function withEcosystemMissionsV131(BaseEngine) {
           || boss.health <= bossHealth * (1 - state.bossPhase / phases) - .001)
         || state.bossDefeated && state.bossPhase !== phases
         || state.population.some(member => ['dead', 'rescued'].includes(member.status) !== (raw.enemies.find(actor => actor.id === member.id)?.alive === false))
-        || !Number.isFinite(raw.player?.x) || raw.player.x < 0 || raw.player.x > 5150 || !Number.isFinite(raw.player.y) || raw.player.y < 0 || raw.player.y > 570)
+        || !Number.isFinite(raw.player?.x) || raw.player.x < 0 || raw.player.x > maxX || !Number.isFinite(raw.player.y) || raw.player.y < 0 || raw.player.y > 570)
         return { valid: false, reason: 'ecosystem-identity-mismatch' };
       return checked;
     }

@@ -1,3 +1,4 @@
+import { missionFailureLabelV188 } from './mission-log-labels-v188.js';
 import {
   ALIEN_SURVIVAL_CAMPAIGN_ID_V70,
   ALIEN_SURVIVAL_DOOR_DEFINITIONS_V70,
@@ -1367,7 +1368,7 @@ export function withAlienSurvivalRuntimeV70(BaseEngine) {
         acid: { activePoolCount: state.acidPools.filter((pool) => pool.active).length, totalPoolCount: state.acidPools.length },
         worldAction: this.alienSurvivalWorldActionV70 ? clone(this.alienSurvivalWorldActionV70) : null,
         interactionPrompt: this.getInteractionPrompt(actor) || 'Déplacez-vous jusqu’à un système physique pour agir.',
-        status: this.mission?.failureReason || this.missingAlienSurvivalRequirementV70() || 'Tous les systèmes de survie sont opérationnels.'
+        status: (this.mission?.failureReason ? missionFailureLabelV188(this.mission.failureReason) : '') || this.missingAlienSurvivalRequirementV70() || 'Tous les systèmes de survie sont opérationnels.'
       };
     }
 
