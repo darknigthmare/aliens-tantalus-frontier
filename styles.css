@@ -621,8 +621,10 @@ button:disabled {
 }
 
 .archives-list-v68 {
-  display: grid;
-  align-content: start;
+  /* V188: a column, not a grid. In the scrolling grid every row collapsed to the
+     entries' 116 px min-height, so two-line titles spilled over the next entry. */
+  display: flex;
+  flex-direction: column;
   gap: 1px;
   max-height: min(68vh, 720px);
   overflow: auto;
@@ -635,8 +637,11 @@ button:disabled {
   position: relative;
   display: grid;
   gap: 5px;
+  flex: none;
+  align-content: start;
   min-height: 116px;
   padding: 15px 42px 15px 16px;
+  overflow-wrap: anywhere;
   border: 0;
   color: rgba(218, 234, 223, .72);
   background: #06100d;
