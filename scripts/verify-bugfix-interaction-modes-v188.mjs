@@ -91,3 +91,25 @@ test('neuro jamming relay: a named FR/EN prompt, in the shared selection', async
   assert.equal(engine.neuroCounterplay.relay.active, false);
   assert.ok(events.some(event => event.type === 'neuro-disruption-neutralized'));
 });
+
+// ---------------------------------------------------------------- item 4
+test('V131 bow / harpoon hint names E only when an arrow or harpoon can really be recovered', async () => {
+  const { WEAPONS } = await import('../src/content-core-v50.js');
+  for (const [name, bare, recover] of [['Compound Bow', 'F  BANDER ET TIRER', 'E  RÉCUPÉRER UNE FLÈCHE'], ['Harpoon Gun', 'F  TIRER', 'E  RÉCUPÉRER UN HARPON']]) {
+    const weapon = WEAPONS.find(entry => entry.name === name); assert.ok(weapon, name);
+    const { engine } = await fixture({ campaign: SHIP, seed: 7, options: { weapon } });
+    isolate(engine); engine.covers = []; engine.ladders = [];
+    const p = place(engine, 2000, 776);
+    const profile = engine.weaponActionProfileV131(p); assert.ok(profile, name);
+    const empty = engine.getInteractionPrompt();
+    assert.doesNotMatch(empty, /RÉCUPÉRER/, `${name}: no arrow on the floor, no E promise (${empty})`);
+    assert.ok(empty.endsWith(bare), empty);
+    assert.equal(engine.interact(p), false);
+    assert.ok(EN_CATALOG_V185[bare], bare);
+    // Injection: one projectile of the equipped weapon, owned by the marine, beside him.
+    engine.recoverableWeaponsV131 = [{ id: 'qa-arrow', weaponId: profile.weaponId, owner: p, x: p.x + p.w / 2 + 6, y: p.y + p.h / 2 }];
+    agree(engine, recover);
+    const reserve = p.ammoReserve;
+    assert.equal(engine.interact(p), true); assert.equal(p.ammoReserve, reserve + 1);
+  }
+});

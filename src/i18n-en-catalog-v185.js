@@ -2035,6 +2035,8 @@ export const EN_CATALOG_V185 = Object.freeze({
 "Extrémité physique de liaison Forge introuvable.": "Physical end of Forge link not found.",
 "Extérieur planétaire": "Planetary exterior",
 "F  BANDER ET TIRER · E  RÉCUPÉRER UNE FLÈCHE": "F  DRAW AND FIRE · E  RECOVER ARROW",
+"F  BANDER ET TIRER": "F  DRAW AND FIRE",
+"F  TIRER": "F  FIRE",
 "F  CHALUMEAU À PORTÉE · R  CHANGER LE RÉSERVOIR": "F  TORCH IN RANGE · R  SWAP TANK",
 "F  CHARGER ET TIRER · R  RECHARGER": "F  CHARGE AND FIRE · R  RELOAD",
 "F  DÉCOUPER LE CONDUIT": "F  CUT THE VENT",

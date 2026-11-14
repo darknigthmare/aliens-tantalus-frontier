@@ -460,9 +460,11 @@ export function withWeaponActionsV131(Base) {
     getInteractionPrompt(actor = this.player) {
       const prompt = super.getInteractionPrompt(actor), profile = this.weaponActionProfileV131(actor);
       if (!profile || prompt && prompt !== 'S  COUVERTURE · F  TIR · R  RECHARGER') return prompt;
+      // V188: "E  RÉCUPÉRER" is named only when E would really recover an arrow or harpoon.
+      const recoverable = this.selectInteractionTargetV188(actor)?.kind === 'recoverable-weapon-v131';
       const action = profile.kind === 'stream' ? 'F  PROJETER LA FLAMME · R  CHANGER LE RÉSERVOIR'
-        : profile.resource === 'arrows' ? 'F  BANDER ET TIRER · E  RÉCUPÉRER UNE FLÈCHE'
-          : profile.resource === 'harpoons' ? 'F  TIRER · E  RÉCUPÉRER UN HARPON'
+        : profile.resource === 'arrows' ? recoverable ? 'F  BANDER ET TIRER · E  RÉCUPÉRER UNE FLÈCHE' : 'F  BANDER ET TIRER'
+          : profile.resource === 'harpoons' ? recoverable ? 'F  TIRER · E  RÉCUPÉRER UN HARPON' : 'F  TIRER'
             : profile.charge ? 'F  CHARGER ET TIRER · R  RECHARGER' : 'F  TIRER · R  RECHARGER';
       return prompt ? `S  COUVERTURE · ${action}` : action;
     }
