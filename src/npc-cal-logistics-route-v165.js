@@ -5,7 +5,7 @@ import { HUB_ANNEX_BY_ID_V137 } from './hub-annex-registry-v137.js';
 import { getHubAnnexRuntimeGeometryV139 } from './hub-annex-runtime-geometry-v139.js';
 import { annexNpcDutiesV141, createAnnexNpcsV141, getAnnexNpcPlacementV141 } from './hub-annex-npc-life-v141.js';
 import { createServiceRouteV161 } from './npc-service-routes-v161.js';
-import { moveNpcAgainstGeometryV136, advanceNpcLifeV136, spreadNpcStationSpawnsV136 } from './npc-life-v136.js';
+import { moveNpcAgainstGeometryV136, advanceNpcLifeV136, spreadNpcStationSpawnsV136, clearRoomDoorwayPostV188 } from './npc-life-v136.js';
 import { drawHumanAtlasV133 } from './human-visual-contract-v133.js';
 import { CAL_CLIMB_ASSET_V165, CAL_CLIMB_BODY_V165, resolveCalClimbRigV165,
   calClimbImageReadyV165, drawCalClimbRigV165 } from './npc-cal-climb-rig-v165.js';
@@ -102,8 +102,9 @@ export function createNpcCalLogisticsStateV165(actor) {
 export function clearParentDoorwayV188(state) {
   if(!state||state.roomId!==HOME||state.stage!=='service'||state.y!==532)return state;
   const opening=portal.faces.parent.opening,left=opening.x-12-44-1,right=opening.x+opening.w+12+1;
-  if(state.x<=left||state.x>=right)return state;
-  const x=state.x-left<=right-state.x?left:right;
+  // Same rule for the other bays of the vehicle bay (aft lift landing): see clearRoomDoorwayPostV188.
+  const x=state.x<=left||state.x>=right?clearRoomDoorwayPostV188(parent,state.x):state.x-left<=right-state.x?left:right;
+  if(x===state.x)return state;
   return normalizeNpcCalLogisticsRouteV165({schema:165,actor:{...state,x,homeX:x}}).actor||state;
 }
 function interruption(resolution,actor) {

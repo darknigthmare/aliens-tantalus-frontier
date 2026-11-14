@@ -271,10 +271,21 @@ export function withHubLiftTransitV163(Base) {
       return super.setControl(control, active);
     }
 
+    /** The prompt published to the hidden #hub-prompt aria-live readout. V188: it follows the
+     * visible cabin panel during a trip (it kept the stale "W / S — choisir un pont" lift prompt),
+     * and a refused arrival is forgotten once the marine leaves that lift. */
+    liftTripPromptV163(trip) {
+      const labels = { boarding: 'EMBARQUEMENT', closing: 'FERMETURE', travel: 'TRAJET', opening: 'ARRIVÉE', returning: 'RETOUR AU PONT DE DÉPART' };
+      return (this.liftBlockedV163 ? 'PASSAGE OCCUPÉ · CABINE EN ATTENTE' : labels[trip.phase])
+        + (trip.phase === 'boarding' ? ' · E POUR ANNULER' : trip.phase === 'travel' ? ' · E POUR REVENIR' : '');
+    }
     statusPrompt() {
+      const trip = this.liftStateV163().trip;
+      if (trip) return this.liftTripPromptV163(trip);
       const blocked = this.liftDepartureBlockedV163;
-      if (blocked && !this.liftStateV163().trip && this.nearestLift()?.shaftId === blocked.shaftId)
+      if (blocked && this.nearestLift()?.shaftId === blocked.shaftId)
         return HUB_DECKS[blocked.toDeck].name + ' · ARRIVÉE OCCUPÉE';
+      if (blocked) this.liftDepartureBlockedV163 = null;
       return super.statusPrompt?.();
     }
 
@@ -293,12 +304,10 @@ export function withHubLiftTransitV163(Base) {
     drawHud(ctx) {
       const result = super.drawHud(ctx), trip = this.liftStateV163().trip;
       if (!trip) return result;
-      const labels = { boarding: 'EMBARQUEMENT', closing: 'FERMETURE', travel: 'TRAJET', opening: 'ARRIVÉE', returning: 'RETOUR AU PONT DE DÉPART' };
       ctx.save(); ctx.fillStyle = '#07120f'; ctx.fillRect(324, 642, 632, 54);
       ctx.strokeStyle = '#86ac94'; ctx.strokeRect(324.5, 642.5, 631, 53);
       ctx.textAlign = 'center'; ctx.font = '700 14px ui-monospace, monospace'; ctx.fillStyle = '#c2ddc8';
-      ctx.fillText((this.liftBlockedV163 ? 'PASSAGE OCCUPÉ · CABINE EN ATTENTE' : labels[trip.phase])
-        + (trip.phase === 'boarding' ? ' · E POUR ANNULER' : trip.phase === 'travel' ? ' · E POUR REVENIR' : ''), 640, 664);
+      ctx.fillText(this.liftTripPromptV163(trip), 640, 664);
       ctx.font = '12px ui-monospace, monospace';
       ctx.fillText(trip.phase === 'returning' ? HUB_DECKS[trip.fromDeck].name
         : HUB_DECKS[trip.fromDeck].name + ' → ' + HUB_DECKS[trip.toDeck].name, 640, 684);
