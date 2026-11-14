@@ -93,9 +93,10 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   });
 }
 
-// The insertion safe zone wraps the whole chain (outermost): its grace sees every
-// enemy update and every damage path; the inner order is unchanged.
-export class GameEngine extends withInsertionSafeZoneV188(withMissionDepthRoomsV188(withQz17LevelDressingV188(withCasteBehaviorsV188(withRunOptionsRuntimeV188(withCombatFeelV188(withFootstepCuesV188(withMissionObjectivePanelV188(withTensionDirectorV188(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(V158ProductionEngine)))))))))))))) {
+// The insertion safe zone sits right under the caste behaviours: their dash and
+// lunge scale the step it holds, and every outer damage path reaches it. The
+// order of the existing layers is unchanged.
+export class GameEngine extends withMissionDepthRoomsV188(withQz17LevelDressingV188(withCasteBehaviorsV188(withInsertionSafeZoneV188(withRunOptionsRuntimeV188(withCombatFeelV188(withFootstepCuesV188(withMissionObjectivePanelV188(withTensionDirectorV188(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(V158ProductionEngine)))))))))))))) {
   start(options = {}) {
     options = isolateForgeMissionOptionsV136(options);
     this.expectedMissionSignatureV130 = options.missionLevel?.signature || null;

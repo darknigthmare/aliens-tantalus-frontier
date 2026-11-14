@@ -9,8 +9,10 @@
 //   (compileMissionLevelActors in game-v52-level-runtime.js reads
 //   this.insertionSafeZoneV188 while it places them);
 // - grace: for `graceSeconds` of simulated mission time after control is given,
-//   no enemy attack reaches the marine and no enemy closes the distance; a horde
-//   warning due in that window waits for its end.
+//   no enemy attack reaches the marine and no enemy closes the distance. The horde
+//   director (horde-director-v132.js) never warns before 45 s and the tension
+//   director (tension-director-v188.js) only gates existing spawners: neither can
+//   place a wave inside the window, and an enemy they release is held all the same.
 // Values recorded in docs/narrative/CAMPAGNE_PRINCIPALE.md §56.4.
 import { STORY_ENDING_CHAPTERS_V188 } from './story-campaign-v188.js';
 
@@ -80,11 +82,6 @@ export function withInsertionSafeZoneV188(Base) {
     damagePlayer(actor, amount, options = {}) {
       if (this.insertionGraceActiveV188() && this.insertionGraceEnemyV188) { this.insertionGraceHeldV188++; return 0; }
       return super.damagePlayer(actor, amount, options);
-    }
-    beginHordeWarningV132() {
-      const state = this.hordeDirectorV132;
-      if (this.insertionGraceActiveV188() && state) { state.nextWave = state.elapsed + this.insertionGraceV188.remaining; return false; }
-      return super.beginHordeWarningV132();
     }
     getSnapshot() {
       return { ...super.getSnapshot(), insertionGraceV188: this.insertionGraceV188 ? { ...this.insertionGraceV188 } : null };
