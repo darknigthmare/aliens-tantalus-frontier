@@ -130,7 +130,9 @@ function normalizeNpcAnnexCirculationV161(value) {
       reason: rawHandoff.reason, observedTravel: false, owner: annexTarget ? 'native-v141-annex-watch' : 'native-v62-routine' } : null;
   const empty = { schema: SCHEMA, actor: null, nativeHandoff }, saved = value?.schema === SCHEMA && value.actor;
   // V188: an older save may hold the home post inside another doorway of the home room; move it aside.
-  const a = saved && finite(saved.homeX) && clearRoomDoorwayPostV188(home, saved.homeX) !== saved.homeX
+  // Only a post that was otherwise valid is repaired; an out-of-room post is still rejected.
+  const a = saved && finite(saved.homeX) && saved.homeX >= home.xStart + 96 && saved.homeX <= home.xEnd - 140
+    && clearRoomDoorwayPostV188(home, saved.homeX) !== saved.homeX
     ? { ...saved, homeX: clearRoomDoorwayPostV188(home, saved.homeX),
       x: saved.stage === 'service' && saved.roomId === HOME && saved.x === saved.homeX ? clearRoomDoorwayPostV188(home, saved.homeX) : saved.x }
     : saved;

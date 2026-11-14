@@ -135,18 +135,12 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       return temporary.captureForgeMissionRoomV141();
     }
 
-    // V188: Forge doors use the native reach rule (max(118, half closed frame + half marine + 12)),
-    // so a wide pressure frame stays operable from where it stops the marine.
-    forgeDoorReachV188(door, actor) {
-      return this.doorInteractionReachV188?.(door, actor) ?? 118;
-    }
-
     forgeLinkedDoorV141(actor = this.player) {
       const session = this.forgeSessionV141;
       if (!session || !actor) return null;
       const choices = outgoingForgeLinksV141(session.project, session.currentRoomId).flatMap(link => {
         const door = this.doors.find(entry => entry.forgeCellIdV141 === link.from.cellId);
-        if (!door || Math.abs(actor.x + actor.w / 2 - door.x - door.w / 2) >= this.forgeDoorReachV188(door, actor)
+        if (!door || Math.abs(actor.x + actor.w / 2 - door.x - door.w / 2) >= 118
           || actor.y + actor.h <= door.y || actor.y >= door.y + door.h) return [];
         return [{ link, door, distance: Math.abs(actor.x + actor.w / 2 - door.x - door.w / 2) }];
       });
@@ -287,37 +281,16 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       // Match the V51 native revive/key reaches; the inherited interaction owns
       // the rescue, inventory, checkpoint and event effects in both cases.
       if (this.coopEnabled && actor?.alive && ally?.downed && interactionDistance(actor, ally) <= 86) return 'revive';
-      // V188: the badge is a pickup; it takes E only when it is the nearest target.
-      if (this.forgeNativePickupV188?.(actor)?.kind === 'security-key') return 'security-key';
+      if (list(this.drops).some(drop => !drop.taken && drop.type === 'security-key' && near(actor, drop, 100))) return 'security-key';
       // Recovery is an inherited fallback: preserve actionable Forge validation
       // and do not let V51 extract through a partition while reaching a pickup.
       const objectiveBlocksRecovery = near(actor, this.objective);
-      const door = list(this.doors).find(candidate => Math.abs(actor.x + actor.w / 2 - candidate.x - candidate.w / 2) < this.forgeDoorReachV188(candidate, actor)
+      const door = list(this.doors).find(candidate => Math.abs(actor.x + actor.w / 2 - candidate.x - candidate.w / 2) < 118
         && Math.abs(actor.y - candidate.y) < candidate.h + 60);
       const doorBlocksRecovery = door && !this.forgeInteractionClearV141(actor, door);
       if (!objectiveBlocksRecovery && !doorBlocksRecovery && !this.forgePendingTerminalV156(actor)
         && this.recoverableWeaponIndexV131?.(actor) >= 0) return 'recoverable-weapon';
       return null;
-    }
-
-    // V188 "the prompt is always right": a native pickup (badge, supply, weapon,
-    // magazine…) is chosen only when it is nearer than the Forge door and the
-    // preferred Forge use. The same rank distance as the native selection is used.
-    forgeNativePickupV188(actor = this.player) {
-      const native = this.selectInteractionTargetV188?.(actor);
-      // Arrows/harpoons keep their own Forge recovery boundary (forgeUrgentNativeUseV156).
-      if (native?.category !== 'pickup' || native.kind === 'recoverable-weapon-v131') return null;
-      const rank = target => this.interactionRankDistanceV188(actor, target);
-      const linked = this.forgeLinkedDoorV141(actor);
-      if (linked && this.interactionRankDistanceV188(actor, linked.door, { horizontal: true }) <= native.distance) return null;
-      const preferred = this.forgePreferredUseV156(actor);
-      if (preferred?.target && rank(preferred.target) <= native.distance) return null;
-      if (near(actor, this.objective) && rank(this.objective) <= native.distance) return null;
-      // A door sealed by a partition keeps its refusal prompt (historical Forge boundary).
-      const door = list(this.doors).find(candidate => Math.abs(actor.x + actor.w / 2 - candidate.x - candidate.w / 2) < this.forgeDoorReachV188(candidate, actor)
-        && Math.abs(actor.y - candidate.y) < candidate.h + 60);
-      if (door && !this.forgeInteractionClearV141(actor, door)) return null;
-      return native;
     }
 
     forgeBlockedNarrativeArchiveV156(actor = this.player) {
@@ -361,7 +334,7 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       if (urgent === 'revive' || urgent === 'security-key') return super.interact(actor);
       const linked = this.forgeLinkedDoorV141(actor);
       if (linked) return this.travelForgeMissionV141(linked.link, actor);
-      if (urgent === 'recoverable-weapon' || this.forgeNativePickupV188(actor)) return super.interact(actor);
+      if (urgent === 'recoverable-weapon') return super.interact(actor);
       const preferred = this.forgePreferredUseV156(actor);
       if (preferred?.kind === 'native-terminal') return super.interact(actor);
       if (preferred?.kind === 'npc') {
@@ -402,7 +375,7 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       if (terminal && !this.forgeInteractionClearV141(actor, terminal)) return this.locked('TERMINAL INACCESSIBLE DERRIÈRE UNE CLOISON');
       if ((terminal === this.archiveTerminal && terminal && !this.mission.objectives.boss)
         || (!terminal && this.forgeBlockedNarrativeArchiveV156(actor))) return this.locked('NEUTRALISER LA MENACE ALPHA');
-      const door = list(this.doors).find(candidate => Math.abs(actor.x + actor.w / 2 - candidate.x - candidate.w / 2) < this.forgeDoorReachV188(candidate, actor)
+      const door = list(this.doors).find(candidate => Math.abs(actor.x + actor.w / 2 - candidate.x - candidate.w / 2) < 118
         && Math.abs(actor.y - candidate.y) < candidate.h + 60);
       if (door && !this.forgeInteractionClearV141(actor, door)) return this.locked('SAS INACCESSIBLE DERRIÈRE UNE CLOISON');
       return super.interact(actor);
@@ -435,14 +408,11 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       if (linked) return this.forgeInteractionClearV141(actor, linked.door)
         ? `E  SAS → ${session.project.rooms.find(room => room.id === linked.link.to.roomId)?.name || 'SALLE'}` : 'E  SAS BLOQUÉ PAR UNE CLOISON';
       if (urgent === 'recoverable-weapon') return super.getInteractionPrompt(actor);
-      const pickup = this.forgeNativePickupV188(actor);
-      if (pickup?.prompt) return pickup.prompt;
       const preferred = this.forgePreferredUseV156(actor);
       if (preferred?.kind === 'npc') return `E  PARLER À ${preferred.target.name.toUpperCase()}`;
       if (preferred?.kind === 'narrative') return 'E  LIRE LE RÉCIT DU TERMINAL';
-      // V188: the native dispatcher owns this use, so its shared selection names it
-      // (same texts as before; a strictly nearer native pickup is named instead).
-      if (preferred?.kind === 'native-terminal') return super.getInteractionPrompt(actor);
+      if (preferred?.kind === 'native-terminal') return preferred.target === this.powerNode
+        ? 'E  RÉTABLIR LE CIRCUIT AUXILIAIRE' : 'E  EXTRAIRE LES ARCHIVES';
       if (near(actor, this.objective)) {
         if (!this.forgeInteractionClearV141(actor, this.objective)) return 'E  OBJECTIF BLOQUÉ PAR UNE CLOISON';
         const physicalRequirement = super.missingExtractionRequirement();
@@ -455,7 +425,7 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       if (terminal && !this.forgeInteractionClearV141(actor, terminal)) return 'E  TERMINAL BLOQUÉ PAR UNE CLOISON';
       if ((terminal === this.archiveTerminal && terminal && !this.mission.objectives.boss)
         || (!terminal && this.forgeBlockedNarrativeArchiveV156(actor))) return 'E  NEUTRALISER LA MENACE ALPHA';
-      const door = list(this.doors).find(candidate => Math.abs(actor.x + actor.w / 2 - candidate.x - candidate.w / 2) < this.forgeDoorReachV188(candidate, actor)
+      const door = list(this.doors).find(candidate => Math.abs(actor.x + actor.w / 2 - candidate.x - candidate.w / 2) < 118
         && Math.abs(actor.y - candidate.y) < candidate.h + 60);
       if (door && !this.forgeInteractionClearV141(actor, door)) return 'E  SAS BLOQUÉ PAR UNE CLOISON';
       return super.getInteractionPrompt(actor);

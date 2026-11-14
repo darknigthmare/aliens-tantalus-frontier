@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 // Regression tests, bug hunt "interaction priority" (2026-11-14).
 // Owner decision: "the prompt is always right": E acts exactly on the target
 // the visible prompt names; a pickup wins only when nearest or alone.
@@ -87,7 +88,7 @@ test('prompt and interact read one shared selection (no second priority list)', 
   assert.match(interact, /selectInteractionTargetV188\(actor\)/); assert.match(prompt, /selectInteractionTargetV188\(actor\)/);
   assert.doesNotMatch(interact, /security-key/, 'no pickup is tested before the selection');
   for (const file of ['src/narrative-collectables-runtime-v68.js', 'src/narrative-evidence-v132.js', 'src/weapon-actions-v131.js',
-    'src/weapon-magazine-recovery-runtime-v168.js', 'src/archive-relay-runtime-v122.js', 'src/forge-mission-runtime-v141.js']) {
+    'src/weapon-magazine-recovery-runtime-v168.js', 'src/archive-relay-runtime-v122.js']) {
     assert.match(read(file), /selectInteractionTargetV188|interactionCandidatesV188/, file);
   }
 });
@@ -119,14 +120,10 @@ test('ship template: no M577 on the command deck, no APC prompt inside the ship'
   assert.equal(resumed.vehicle.active, false);
 });
 
-test('Forge doors use the native reach rule max(118, half closed frame + half marine + 12)', async () => {
-  const { engine } = await fixture({ campaign: SHIP, seed: 7 });
-  const wide = engine.doors.find(entry => entry.id === 'outer-airlock');
-  const reach = engine.doorInteractionReachV188(wide, engine.player);
-  assert.ok(reach > 118);
-  assert.equal(engine.forgeDoorReachV188(wide, engine.player), reach);
-  const src = read('src/forge-mission-runtime-v141.js');
-  assert.doesNotMatch(src, /candidate\.w \/ 2\) < 118|door\.w \/ 2\) >= 118/, 'no fixed 118 px door reach remains');
+test('Forge stays deferred by the owner: its mission module keeps its pinned bytes', () => {
+  // The Forge is DEFERRED_BY_USER in the audit chain; the shared E rule does not reach into it.
+  const sha = createHash('sha256').update(readFileSync(new URL('../src/forge-mission-runtime-v141.js', import.meta.url))).digest('hex');
+  assert.equal(sha, '1335114f76ffd164a88bf6e2a8e7ef86d86d37ad36be726a8055cfc10a642cb0');
 });
 
 test('hub hangar: standing at Maksim Orlov and facing him talks to him; the UD-4L stays reachable', () => {
