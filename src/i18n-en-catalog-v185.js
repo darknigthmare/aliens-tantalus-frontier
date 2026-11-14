@@ -6910,4 +6910,8 @@ export const EN_PATTERNS_V185 = Object.freeze({
 "Déploiement lancé vers {0}.": "Deployment launched to {0}.",
 "Deploiement lance vers {0}.": "Deployment launched to {0}.",
 "Versé au Tantalus : +{0} CR, +{1} alliage, +{2} R&D, +{3} pathogène": "Paid to the Tantalus: +{0} CR, +{1} alloy, +{2} R&D, +{3} pathogen",
+"Bonus Cargo Brutal : +{0} crédits, +{1} alliage.": "Cargo Brutal bonus: +{0} credits, +{1} alloy.",
+"Bonus Cargo Brutal : +{0} credits, +{1} alliage.": "Cargo Brutal bonus: +{0} credits, +{1} alloy.",
+"Bonus Doctrine Alpha / Bravo : +{0} recherche, +{1} morale.": "Alpha / Bravo Doctrine bonus: +{0} research, +{1} morale.",
+"Bonus Survie Alien : +{0} recherche, +{1} morale, +{2} alliage.": "Alien Survival bonus: +{0} research, +{1} morale, +{2} alloy.",
 });

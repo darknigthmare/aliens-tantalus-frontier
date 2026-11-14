@@ -87,6 +87,11 @@ test('operation results read in proper French and translate to English (debrief,
     assert.equal(autoTranslateV185('Objectif accompli : stabilite +8, infestation -7, recompenses transferees.'), 'Objective complete: stability +8, infestation -7, rewards transferred.');
     assert.equal(autoTranslateV185('Deploiement lance vers Sevastopol.'), 'Deployment launched to Sevastopol.');
     assert.equal(autoTranslateV185('Échec : stabilité -6, infestation +7 et un opérateur blessé.'), 'Failure: stability -6, infestation +7 and one operator wounded.');
+    // Special-operation bonuses appended to the debrief (survival run, played in EN).
+    assert.equal(autoTranslateV185('Objectif accompli : stabilité +8, infestation -7, récompenses transférées. Bonus Survie Alien : +10 recherche, +8 morale, +12 alliage. Versé au Tantalus : +1000 CR, +19 alliage, +17 R&D, +2 pathogène'),
+      'Objective complete: stability +8, infestation -7, rewards transferred. Alien Survival bonus: +10 research, +8 morale, +12 alloy. Paid to the Tantalus: +1000 CR, +19 alloy, +17 R&D, +2 pathogen');
+    assert.equal(autoTranslateV185('Bonus Cargo Brutal : +300 crédits, +12 alliage.'), 'Cargo Brutal bonus: +300 credits, +12 alloy.');
+    assert.equal(autoTranslateV185('Bonus Doctrine Alpha / Bravo : +8 recherche, +6 morale.'), 'Alpha / Bravo Doctrine bonus: +8 research, +6 morale.');
   } finally { setLanguageV185('fr', { storage: null, document: null, persist: false }); }
 });
 
