@@ -18,6 +18,24 @@ export const PORT_CIVILIANS_WAIT_V188 = Object.freeze([860, 915, 970]);
 // Safe beyond the lit airlock (gate 1810–1918), clear of the report terminal (2270–2350) and its post.
 // Lowered from 2160 + 55 i: escort saves above it are clamped back to it, never rejected.
 export const PORT_CIVILIANS_SAFE_V188 = Object.freeze([2100, 2155, 2210]);
+// V188 bug fix: escorted residents walk in file instead of stacking on one spot. The front resident
+// (row 2) keeps the historical 40 px from the marine; each row behind keeps one more file gap.
+// The design rule stays: a resident more than 390 px behind the marine waits where they are.
+export const PORT_CIVILIANS_FILE_V188 = Object.freeze({ frontGap: 40, fileGap: 55, waitBeyond: 390 });
+export function portCivilianFollowGapV188(index) {
+  const rank = PORT_CIVILIANS_SAFE_V188.length - 1 - (Number.isInteger(index) ? index : 0);
+  return PORT_CIVILIANS_FILE_V188.frontGap + Math.max(0, rank) * PORT_CIVILIANS_FILE_V188.fileGap;
+}
+/** True while the resident walks behind a grounded marine (also drives the walk cell). */
+export function portCivilianWalkingV188(x, index, playerX, grounded) {
+  const distance = playerX - x;
+  return Boolean(grounded) && distance > portCivilianFollowGapV188(index) && distance < PORT_CIVILIANS_FILE_V188.waitBeyond;
+}
+export function stepPortCivilianV188(x, index, playerX, grounded, elapsed) {
+  if (!portCivilianWalkingV188(x, index, playerX, grounded)) return x;
+  const speed = index === 0 ? 95 : 110;
+  return Math.min(PORT_CIVILIANS_SAFE_V188[index], playerX - portCivilianFollowGapV188(index), x + elapsed * speed);
+}
 const finite = (n, min, max, fallback) => Number.isFinite(n) ? Math.max(min, Math.min(max, n)) : fallback;
 export function createPortMeridienV90() {
   return { schema: 90, phase: 'pending', revision: 0, freight: null, x: 112, y: 532,

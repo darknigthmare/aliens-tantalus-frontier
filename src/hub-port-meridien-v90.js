@@ -2,7 +2,7 @@ import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { HubGame as PhysicalHub } from './hub-v71-runtime.js';
 import { HubGame as PlayerRenderer } from './hub-game.js';
 import { CARGO_BRUTAL_SURVIVORS_SHEET_V67 } from './cargo-brutal-visuals-v67.js';
-import { PORT_WORLD_V90, PORT_POSTS_V90, PORT_CIVILIANS_SAFE_V188, normalizePortMeridienV90, portPhysicalContactV90, portTaskSecondsV90, getPortMeridienObjectiveV90 } from './port-meridien-v90.js';
+import { PORT_WORLD_V90, PORT_POSTS_V90, PORT_CIVILIANS_SAFE_V188, stepPortCivilianV188, portCivilianWalkingV188, normalizePortMeridienV90, portPhysicalContactV90, portTaskSecondsV90, getPortMeridienObjectiveV90 } from './port-meridien-v90.js';
 import { hubPlayerAppearanceSnapshotV126 } from './player-appearance-hub-v126.js';
 import { currentLanguageV185 } from './i18n-v185.js';
 import { PORT_DEPTH_ROOM_V188, depthToScreenOffsetV188 } from './hub-depth-rooms-v188.js';
@@ -328,11 +328,8 @@ export function withPortMeridienV90(Base) {
       }
       if (state.phase === 'escort' && state.following) {
         // A civilian advances only within sight of the grounded player. They never teleport to the exit.
-        state.civiliansX = state.civiliansX.map((x, i) => {
-          const distance = this.player.x - x;
-          return this.player.grounded && distance > 40 && distance < 390
-            ? Math.min(PORT_CIVILIANS_SAFE_V188[i], x + elapsed * (i === 0 ? 95 : 110)) : x;
-        });
+        // In file: each resident keeps its own gap behind the marine (no stacking).
+        state.civiliansX = state.civiliansX.map((x, i) => stepPortCivilianV188(x, i, this.player.x, this.player.grounded, elapsed));
         if (state.civiliansX.every((x, i) => x >= PORT_CIVILIANS_SAFE_V188[i])) this.submitPortV90('escort');
       }
       this.portPersistClockV90 += elapsed;
@@ -431,7 +428,7 @@ export function withPortMeridienV90(Base) {
       for (const person of scene.people) items.push({ z: person.z, draw: () => drawPersonV188(ctx, person, 624 + depthToScreenOffsetV188(person.z)) });
       if (ready(civilians)) state.civiliansX.forEach((x, row) => items.push({ z: civiliansZ[row] ?? 0, draw: () => {
         const column = row === 0 && ['unload', 'carry', 'triage'].includes(state.phase) ? 2
-          : state.following && this.player.grounded && this.player.x - x > 40 && this.player.x - x < 390 ? 1 : 0;
+          : state.following && portCivilianWalkingV188(x, row, this.player.x, this.player.grounded) ? 1 : 0;
         this.drawSheetCell(ctx, civilians, column, row, x - 55, 515 + depthToScreenOffsetV188(civiliansZ[row] ?? 0), 116, 116, false, 4, 3);
       } }));
       items.push({ z: Number(this.player.depthZ) || 0, draw: () => {

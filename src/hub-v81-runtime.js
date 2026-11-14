@@ -748,11 +748,19 @@ export class HubGame extends HubGameV71 {
     }
   }
 
+  ingameStageActiveV188() {
+    const html = this.canvas?.ownerDocument?.documentElement || globalThis.document?.documentElement;
+    return Boolean(html?.dataset?.ingameStageV188);
+  }
+
   drawAnnexHudV71(ctx) {
     if (!this.isProvingGroundActiveV81()) {
       super.drawAnnexHudV71(ctx);
       return;
     }
+    // V188: an in-game staged beat (e.g. 'beat-exercise-interrupt') hides the level's HUD chrome;
+    // the canvas range box steps aside too instead of showing under the cinemascope bars.
+    if (this.ingameStageActiveV188()) return;
     const state = this.provingGroundStateV81;
     ctx.fillStyle = 'rgba(2, 8, 7, .92)';
     ctx.fillRect(18, 18, 760, 96);
