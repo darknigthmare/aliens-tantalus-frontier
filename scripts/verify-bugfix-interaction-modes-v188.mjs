@@ -140,6 +140,27 @@ test('alpha-bravo V69: the fireteam station is an action of the shared selection
   engine.interact(p); assert.equal(far.used, false, 'E never takes the farther crate behind the station prompt');
 });
 
+test('alien survival V70: stations are actions, the welding kit is a pickup, prompt = E', async () => {
+  const { engine, events } = await fixture({ campaign: campaign('special-alien-survival-systems'), seed: 7 });
+  isolate(engine);
+  const station = engine.alienSurvivalStationsV70.find(entry => entry.type === 'power'); assert.ok(station);
+  const p = standOn(engine, station);
+  const near = crate(engine, 0);
+  agree(engine, 'E  RÉCUPÉRER DES MUNITIONS');
+  assert.equal(engine.interact(p), true); assert.equal(near.used, true);
+  engine.supplies = []; place(engine, station.x + station.w / 2 + 15, p.y + p.h); const far = crate(engine, 70);
+  const prompt = engine.getInteractionPrompt();
+  assert.match(prompt, /^E  REROUTER LA PUISSANCE/);
+  engine.interact(p); assert.equal(far.used, false);
+  // Injection: the welding kit set 50 px from the station, the marine beside the kit.
+  const kit = engine.alienSurvivalWeldingKitV70; assert.ok(kit);
+  Object.assign(kit, { taken: false, x: station.x + station.w / 2 + 60 - (kit.w || 0) / 2, y: p.y + p.h - (kit.h || 20) });
+  place(engine, station.x + station.w / 2 + 60, p.y + p.h);
+  agree(engine, 'E  RÉCUPÉRER LE KIT DE SOUDURE');
+  assert.equal(engine.interact(p), true); assert.equal(kit.taken, true);
+  assert.ok(events.some(event => event.type === 'alien-survival-welding-kit'));
+});
+
 // ---------------------------------------------------------------- item 4
 test('V131 bow / harpoon hint names E only when an arrow or harpoon can really be recovered', async () => {
   const { WEAPONS } = await import('../src/content-core-v50.js');
