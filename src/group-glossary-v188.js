@@ -159,3 +159,220 @@ export function groupGlossaryRowsV188() {
   return Object.entries(GROUP_GLOSSARY_V188).flatMap(([catalog, levels]) => Object.entries(levels)
     .flatMap(([kind, table]) => Object.entries(table).map(([id, label]) => [catalog, kind, id, label.fr, label.en])));
 }
+
+// V188 — player labels of the catalog value enums shown in the dossier tables
+// (FAITS DE RÉFÉRENCE, STATISTIQUES DE GAMEPLAY, developer source rows). The
+// values stay the content ids; only the displayed text changes. Families,
+// biology, castes, stages, grades and utilities reuse the group glossary above.
+// Most wording is project wording [PROPOSÉ], not franchise terminology.
+export const CATALOG_VALUE_GLOSSARY_V188 = Object.freeze({
+  provenance: Object.freeze({
+    'fan-made-user-import': entry('Création de fan importée', 'Imported fan creation'),
+    'frontier-adaptation': entry('Adaptation Frontier', 'Frontier adaptation'),
+    'frontier-fit': entry('Configuration Frontier', 'Frontier configuration'),
+    'gameplay-variant': entry('Variante de jeu', 'Gameplay variant'),
+    'licensed-concept-adaptation': entry('Adaptation d’un concept sous licence', 'Licensed concept adaptation'),
+    'licensed-reference': entry('Référence sous licence', 'Licensed reference'),
+    'licensed-reference-project-adaptation': entry('Référence sous licence adaptée au projet', 'Licensed reference adapted for the project'),
+    'openai-integrated-reference-guided': entry('Générateur OpenAI intégré, références visuelles contrôlées', 'Integrated OpenAI generator, controlled visual references'),
+    'production-design-reference': entry('Référence de conception de production', 'Production design reference'),
+    'project-original': entry('Création Tantalus', 'Tantalus original'),
+    'reference-openai-integrated': entry('Illustration générée sur référence', 'Illustration generated from a reference'),
+    'systemic-variant': entry('Variante systémique', 'Systemic variant'),
+    'user-provided-imported-native-cutout': entry('Détourage fourni, importé tel quel', 'Supplied cutout, imported as is'),
+    'user-provided-reference-openai-integrated': entry('Référence fournie, illustration générée', 'Supplied reference, generated illustration')
+  }),
+  referenceStatus: Object.freeze({
+    CANON_REFERENCE: entry('Référence canon', 'Canon reference'),
+    CANON_REFERENCE_ADAPTATION: entry('Adaptation d’une référence canon', 'Canon reference adaptation'),
+    CANON_REFERENCE_LICENSED_MULTIANGLE: entry('Référence canon, plusieurs angles sous licence', 'Canon reference, licensed multiple angles'),
+    CANON_REFERENCE_VISIBLE_ANGLES: entry('Référence canon, angles visibles', 'Canon reference, visible angles'),
+    FILMING_MINIATURE_REFERENCE_RECONSTRUCTION: entry('Reconstitution d’après la maquette de tournage', 'Reconstruction from the filming miniature'),
+    IN_GAME_VISUAL_REFERENCE_RECONSTRUCTION: entry('Reconstitution d’après un visuel de jeu', 'Reconstruction from an in-game visual'),
+    LICENSED_A2_SIDE_PROFILE_ADAPTATION: entry('Adaptation du profil latéral A2 sous licence', 'Licensed A2 side profile adaptation'),
+    LICENSED_CD_FAMILY_PROFILE_ADAPTATION: entry('Adaptation du profil de famille CD sous licence', 'Licensed CD family profile adaptation'),
+    LICENSED_FAMILY_REFERENCE: entry('Référence de famille sous licence', 'Licensed family reference'),
+    LICENSED_FAMILY_REPRESENTATIVE: entry('Représentant d’une famille sous licence', 'Licensed family representative'),
+    LICENSED_MODEL_REFERENCE: entry('Référence de modèle sous licence', 'Licensed model reference'),
+    LICENSED_MODEL_REFERENCE_ADAPTATION: entry('Adaptation d’un modèle sous licence', 'Licensed model adaptation'),
+    LICENSED_REFERENCE_RECONSTRUCTION: entry('Reconstitution d’après une référence sous licence', 'Reconstruction from a licensed reference'),
+    LICENSED_REPLICA_REFERENCE_RECONSTRUCTION: entry('Reconstitution d’après une réplique sous licence', 'Reconstruction from a licensed replica'),
+    PRIMARY_GAME_RENDER_ADAPTATION: entry('Adaptation d’un rendu de jeu', 'Adaptation of a game render'),
+    PRIMARY_REFERENCE_RECONSTRUCTION: entry('Reconstitution d’après la source principale', 'Reconstruction from the primary source'),
+    PRODUCTION_DESIGN_REFERENCE: entry('Référence de conception de production', 'Production design reference'),
+    PRODUCTION_FAMILY_REFERENCE_RECONSTRUCTION: entry('Reconstitution d’après une famille de production', 'Reconstruction from a production family'),
+    PRODUCTION_REFERENCE_RECONSTRUCTION: entry('Reconstitution d’après une référence de production', 'Reconstruction from a production reference'),
+    PRODUCTION_SPECIMEN_ADAPTATION: entry('Adaptation d’un accessoire de production', 'Adaptation of a production prop'),
+    PROJECT_ADAPTATION: entry('Adaptation du projet', 'Project adaptation'),
+    PROJECT_DESIGN_ADAPTATION: entry('Adaptation de design du projet', 'Project design adaptation'),
+    PROJECT_ORIGINAL: entry('Création Tantalus', 'Tantalus original'),
+    PROJECT_ORIGINAL_ADAPTATION: entry('Adaptation d’une création Tantalus', 'Adaptation of a Tantalus original'),
+    'native-alpha-reviewed': entry('Transparence native relue', 'Native transparency reviewed'),
+    'sha256-dimensions-alpha-verified': entry('Fichier, dimensions et transparence vérifiés ; fidélité canonique non certifiée', 'File, dimensions and transparency verified; canonical fidelity not certified')
+  }),
+  rarity: Object.freeze({
+    common: entry('Courante', 'Common'),
+    epic: entry('Épique', 'Epic'),
+    legendary: entry('Légendaire', 'Legendary'),
+    prototype: entry('Prototype', 'Prototype'),
+    rare: entry('Rare', 'Rare'),
+    uncommon: entry('Peu courante', 'Uncommon'),
+    unique: entry('Unique', 'Unique')
+  }),
+  frequency: Object.freeze({
+    apex: entry('Alpha', 'Apex'),
+    common: entry('Fréquente', 'Frequent'),
+    contextual: entry('Contextuelle', 'Contextual'),
+    rare: entry('Rare', 'Rare'),
+    scripted: entry('Scénarisée', 'Scripted'),
+    uncommon: entry('Occasionnelle', 'Occasional')
+  }),
+  behavior: Object.freeze({
+    aquatic: entry('Aquatique', 'Aquatic'),
+    boss: entry('Chef de meute', 'Pack leader'),
+    bruiser: entry('Cogneur', 'Bruiser'),
+    charger: entry('Fonceur', 'Charger'),
+    control: entry('Contrôle à distance', 'Remote control'),
+    egg: entry('Œuf', 'Egg'),
+    exploder: entry('Kamikaze', 'Exploder'),
+    grappler: entry('Agrippeur', 'Grappler'),
+    guard: entry('Garde', 'Guard'),
+    hunter: entry('Chasseur', 'Hunter'),
+    'hybrid-boss': entry('Chef hybride', 'Hybrid leader'),
+    pouncer: entry('Bondisseur', 'Leaper'),
+    'reach-hunter': entry('Chasseur à allonge', 'Long-reach hunter'),
+    shooter: entry('Tireur', 'Gunner'),
+    spitter: entry('Cracheur', 'Spitter'),
+    stalk: entry('Traque', 'Stalking'),
+    stalker: entry('Rôdeur', 'Stalker')
+  }),
+  fit: Object.freeze({
+    Apex: entry('Alpha', 'Apex'),
+    Assault: entry('Assaut', 'Assault'),
+    Colonial: entry('Coloniale', 'Colonial'),
+    Frontier: entry('Frontière', 'Frontier'),
+    Prototype: entry('Prototype', 'Prototype'),
+    Recon: entry('Reconnaissance', 'Recon'),
+    Rescue: entry('Sauvetage', 'Rescue'),
+    Standard: entry('Standard', 'Standard')
+  }),
+  seatRole: Object.freeze({
+    commander: entry('Commandant', 'Commander'),
+    driver: entry('Pilote / conducteur', 'Pilot / driver'),
+    gunner: entry('Tireur', 'Gunner'),
+    operator: entry('Opérateur de chantier', 'Site operator'),
+    passenger: entry('Passager', 'Passenger')
+  }),
+  actions: Object.freeze({
+    aim: entry('Viser', 'Aim'),
+    boost: entry('Accélérer', 'Accelerate'),
+    brake: entry('Freiner', 'Brake'),
+    disembark: entry('Débarquer', 'Disembark'),
+    drive: entry('Conduire', 'Drive'),
+    fire: entry('Tirer', 'Fire'),
+    observe: entry('Observer', 'Observe'),
+    reload: entry('Recharger', 'Reload'),
+    'remote-drive': entry('Piloter à distance', 'Drive remotely'),
+    scan: entry('Balayer', 'Scan'),
+    support: entry('Soutenir', 'Support'),
+    survey: entry('Relever le terrain', 'Survey')
+  }),
+  tags: Object.freeze({
+    acid: entry('Acide', 'Acid'),
+    'acid-safe': entry('Résiste à l’acide', 'Acid-safe'),
+    autocannon: entry('Canon automatique', 'Autocannon'),
+    automatic: entry('Automatique', 'Automatic'),
+    ballistic: entry('Balistique', 'Ballistic'),
+    breaching: entry('Ouverture de brèche', 'Breaching'),
+    burst: entry('Rafales', 'Burst fire'),
+    charged: entry('Tir chargé', 'Charged shot'),
+    chemical: entry('Chimique', 'Chemical'),
+    cqw: entry('Combat en espace clos', 'Close quarters'),
+    cryo: entry('Cryogénique', 'Cryogenic'),
+    electric: entry('Électrique', 'Electric'),
+    energy: entry('Énergie', 'Energy'),
+    explosive: entry('Explosif', 'Explosive'),
+    field: entry('Terrain', 'Field'),
+    flame: entry('Incendiaire', 'Incendiary'),
+    'flame-projectile': entry('Projectile incendiaire', 'Incendiary projectile'),
+    flamethrower: entry('Projection de flammes', 'Flame projection'),
+    flechette: entry('Fléchettes', 'Flechettes'),
+    'fuel-canister': entry('Bidon de carburant', 'Fuel canister'),
+    handgun: entry('Arme de poing', 'Sidearm'),
+    heavy: entry('Arme lourde', 'Heavy weapon'),
+    laser: entry('Laser', 'Laser'),
+    launcher: entry('Lanceur', 'Launcher'),
+    melee: entry('Mêlée', 'Melee'),
+    plasma: entry('Plasma', 'Plasma'),
+    portable: entry('Portable', 'Portable'),
+    precision: entry('Tir de précision', 'Precision fire'),
+    revolver: entry('Revolver', 'Revolver'),
+    rifle: entry('Fusil', 'Rifle'),
+    rotary: entry('Canons rotatifs', 'Rotary barrels'),
+    scattershot: entry('Tir dispersé', 'Scattershot'),
+    sentry: entry('Tourelle', 'Sentry gun'),
+    shotgun: entry('Fusil à pompe', 'Shotgun'),
+    sidearm: entry('Arme de poing', 'Sidearm'),
+    silent: entry('Silencieuse', 'Silent'),
+    smart: entry('Arme intelligente', 'Smart weapon'),
+    smg: entry('Pistolet-mitrailleur', 'Submachine gun'),
+    sonic: entry('Sonique', 'Sonic'),
+    tool: entry('Outil', 'Tool')
+  }),
+  animationStatus: Object.freeze({ missing: entry('Manquantes', 'Missing') }),
+  missionAtlasStatus: Object.freeze({ 'not-created': entry('Aucun atlas d’action créé', 'No action atlas created') }),
+  visualMode: Object.freeze({ 'static-pose': entry('Pose fixe', 'Static pose') }),
+  encounterStatus: Object.freeze({
+    'bioforge-only': entry('Bioforge uniquement', 'Bioforge only'),
+    'documentary-only': entry('Référence documentaire, hors combat', 'Documentary reference, non-combat'),
+    'project-adaptation': entry('Adaptation du projet', 'Project adaptation')
+  }),
+  specializedBehaviorStatus: Object.freeze({
+    'project-synth-behavior-v110': entry('Comportement synthétique du projet', 'Project synthetic behavior'),
+    'simplified-campaign-behavior': entry('Comportement simplifié', 'Simplified behavior'),
+    'source-grounded-partial-v89': entry('Documentée, adaptation partielle', 'Documented, partial adaptation'),
+    'source-grounded-partial-v90': entry('Documentée, adaptation partielle', 'Documented, partial adaptation'),
+    'source-grounded-partial-v95': entry('Documentée, adaptation partielle', 'Documented, partial adaptation')
+  }),
+  statsPolicy: Object.freeze({
+    'v121-original-project-tuning-not-source-statistics': entry('Réglages Tantalus ; performances officielles non attestées', 'Tantalus settings; official performance not attested'),
+    'v122-original-project-tuning-not-source-statistics': entry('Réglages Tantalus ; performances officielles non attestées', 'Tantalus settings; official performance not attested')
+  }),
+  seatPolicy: Object.freeze({
+    'uncrewed-remote-operation-no-human-seats': entry('Téléopération ; aucun siège humain', 'Teleoperation; no human seat'),
+    'v121-simulation-crew-stations-not-source-certified-crew-count': entry('Postes de simulation ; équipage officiel non attesté', 'Simulation stations; official crew not attested'),
+    'v122-simulation-stations-not-source-certified-crew-count': entry('Postes de simulation ; équipage officiel non attesté', 'Simulation stations; official crew not attested')
+  }),
+  controlMode: Object.freeze({
+    'piloted-industrial-vehicle': entry('Véhicule de chantier piloté', 'Crewed construction vehicle'),
+    'teleoperated-uncrewed-rover': entry('Rover téléopéré, sans pilote à bord', 'Teleoperated rover, no pilot aboard')
+  })
+});
+
+// Field keys whose values are group ids of the glossary above: [catalog|null, level].
+// null keeps the record's own catalog (a weapon family is not a vehicle family).
+const VALUE_GROUP_LEVELS_V188 = Object.freeze({
+  family: [null, 'family'], biology: ['enemies', 'family'], caste: ['enemies', 'caste'],
+  stage: ['enemies', 'stage'], role: ['enemies', 'role'], grade: ['equipment', 'type'],
+  utility: ['equipment', 'category']
+});
+
+/** Player label of one dossier value, or null when the value is not a known
+ * enum id (free text, names, numbers): the caller then keeps the value. */
+export function catalogValueLabelV188(key, value, { catalog, language = 'fr' } = {}) {
+  if (typeof value !== 'string') return null;
+  if (Object.hasOwn(VALUE_GROUP_LEVELS_V188, key)) {
+    const [fixed, kind] = VALUE_GROUP_LEVELS_V188[key];
+    const label = groupLabelV188(value, { catalog: fixed || catalog, kind, language });
+    if (label) return label;
+  }
+  const table = Object.hasOwn(CATALOG_VALUE_GLOSSARY_V188, key) ? CATALOG_VALUE_GLOSSARY_V188[key] : null;
+  const found = table && Object.hasOwn(table, value) ? table[value] : null;
+  return found ? found[language === 'en' ? 'en' : 'fr'] : null;
+}
+
+/** Every [key, id, fr, en] row of the value glossary (tests and catalog maintenance). */
+export function catalogValueGlossaryRowsV188() {
+  return Object.entries(CATALOG_VALUE_GLOSSARY_V188).flatMap(([key, table]) => Object.entries(table)
+    .map(([id, label]) => [key, id, label.fr, label.en]));
+}
