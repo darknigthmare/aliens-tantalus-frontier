@@ -42,3 +42,27 @@ test('generic campaign: the creature loading pause lifts once the bitmaps arrive
   engine.keys.delete('KeyD');
   assert.ok(engine.player.x > x + 20, 'the marine walks: the simulation runs');
 });
+
+test('damage and insertion captions never show internal ids or English keys; English reads them from the catalog', async () => {
+  const { engine, events } = await launch(campaign('pair-001-mire'), { options: { accessibility: { subtitles: true } } });
+  engine.enemies = []; engine.hazards = [];
+  const captions = () => events.filter(event => event.type === 'caption').map(event => event.text);
+  assert.ok(captions().includes('Insertion : Secourir les survivants'), `insertion caption: ${captions()}`);
+  const p = engine.player;
+  for (const source of ['vacuum', 'c12-horde-contact', 'ecosystem-contact-v131', 'cluster-acid', 'Armored Warrior:detonation', 'Armored Warrior']) {
+    p.health = p.maxHealth; engine.captionDirectorV84 = null; engine.mission.elapsed += 10;
+    engine.damagePlayer(p, 5, { source, bypassCover: true });
+  }
+  const impacts = captions().filter(text => text.startsWith('Impact'));
+  assert.deepEqual(impacts, ['Impact : vide.', 'Impact : contact de la horde.', 'Impact : contact.', 'Impact : acide.',
+    'Impact : Armored Warrior (détonation).', 'Impact : Armored Warrior.']);
+  const { setLanguageV185 } = await import('../src/i18n-v185.js');
+  const { autoTranslateV185, useCatalogV185 } = await import('../src/i18n-auto-v185.js');
+  useCatalogV185(await import('../src/i18n-en-catalog-v185.js'));
+  setLanguageV185('en', { storage: null, document: null, persist: false });
+  try {
+    assert.equal(autoTranslateV185('Impact : vide.'), 'Impact: vacuum.');
+    assert.equal(autoTranslateV185('Impact : Armored Warrior.'), 'Impact: Armored Warrior.');
+    assert.equal(autoTranslateV185('Insertion : Secourir les survivants'), 'Insertion: Rescue the survivors');
+  } finally { setLanguageV185('fr', { storage: null, document: null, persist: false }); }
+});
