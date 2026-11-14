@@ -1779,6 +1779,7 @@ export const EN_CATALOG_V185 = Object.freeze({
 "Déverrouillez les blocs sélectionnés.": "Unlock the selected blocks.",
 "Déverrouillés": "Unlocked",
 "E  ACTIONNER LA PORTE": "E  OPERATE THE DOOR",
+"E  APPELER LE MONTE-CHARGE": "E  CALL THE LIFT",
 "E  ACTIONNER LA PORTE DE SOUTE": "E  OPERATE THE CARGO HOLD DOOR",
 "E  ACTIONNER LA VANNE D’ÉGALISATION": "E  OPERATE THE EQUALIZATION VALVE",
 "E  ARMER LA CHARGE DE SCELLAGE": "E  ARM THE SEALING CHARGE",

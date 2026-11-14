@@ -147,5 +147,5 @@ test('hub hangar: standing at Maksim Orlov and facing him talks to him; the UD-4
 test('new pickup prompts have reviewed English', () => {
   for (const key of ['E  RÉCUPÉRER UN MÉDIKIT', 'E  RÉCUPÉRER UNE PLAQUE DE BLINDAGE', 'E  RÉCUPÉRER DES MUNITIONS',
     'E  RÉCUPÉRER LE FUSIL M41A', 'E  RÉCUPÉRER LE CHALUMEAU', 'E  RÉCUPÉRER UNE FLÈCHE', 'E  RÉCUPÉRER UN HARPON',
-    'E  RÉCUPÉRER LE BADGE DE SÉCURITÉ']) assert.ok(EN_CATALOG_V185[key], key);
+    'E  RÉCUPÉRER LE BADGE DE SÉCURITÉ', 'E  APPELER LE MONTE-CHARGE']) assert.ok(EN_CATALOG_V185[key], key);
 });
