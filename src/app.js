@@ -41,7 +41,7 @@ import { projectRefugeHubSaveV87 } from './refuge-save-v87.js';
 import { validateShipPortDepartureV87 } from './ship-port-state-v87.js';
 import { PlaceablesDockV86 } from './placeables-ui-v86.js';
 import { resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
-import { squadActionLabelV188, biomeLabelV188, missionFailureLabelV188 } from './mission-log-labels-v188.js';
+import { squadActionLabelV188, biomeLabelV188, missionFailureLabelV188, checkpointLabelV188 } from './mission-log-labels-v188.js';
 import { commitCrewTransactionV85 } from './crew-transactions-v85.js';
 import { rememberCrewConversationTopicV135 } from './crew-conversation-memory-v135.js';
 import { createFieldMediaRepositoryV135 } from './field-media-v135.js';
@@ -3322,7 +3322,7 @@ function handleGameEvent(event) {
     try { commitCurrentRuntimeV78({ includeSessionTime: true }); sessionStart = Date.now(); renderClock(); toast('Terminal : sauvegarde confirmée.'); }
     catch (error) { toast(error.message); }
   }
-  if (event.type === 'checkpoint') { audio.checkpoint(); recordOperationFlag(saveSystem.data, `checkpoint-${event.checkpoint}`); log.textContent = `CHECKPOINT ${event.checkpoint} SÉCURISÉ.`; }
+  if (event.type === 'checkpoint') { audio.checkpoint(); recordOperationFlag(saveSystem.data, `checkpoint-${event.checkpoint}`); log.textContent = `CHECKPOINT ${checkpointLabelV188(event.checkpoint).toUpperCase()} SÉCURISÉ.`; }
   if (event.type === 'power-restored' || event.type === 'shortcut' || event.type === 'archive-recovered') recordOperationFlag(saveSystem.data, event.type);
   if (event.type === 'supply') {
     audio.pickup();
@@ -3340,7 +3340,7 @@ function handleGameEvent(event) {
     recordOperationFlag(saveSystem.data, `failure-${event.reason || event.failureMode || 'unknown'}`);
     log.textContent = `OPÉRATION COMPROMISE · ${missionFailureLabelV188(event.reason || event.failureMode)} · reprenez au checkpoint ou battez en retraite.`;
   }
-  if (event.type === 'mission-restarted') log.textContent = `REPRISE CHECKPOINT ${event.checkpoint} · pénalité de récupération appliquée.`;
+  if (event.type === 'mission-restarted') log.textContent = `REPRISE CHECKPOINT ${checkpointLabelV188(event.checkpoint).toUpperCase()} · pénalité de récupération appliquée.`;
   if (event.type === 'equipment-used') { log.textContent = `ÉQUIPEMENT · ${event.name || event.action || 'support terrain'}`; renderMissionEquipment(); }
   if (event.type?.startsWith('placeable-')) {
     if (event.message || event.reason) log.textContent = `MATÉRIEL · ${event.message || event.reason}`;

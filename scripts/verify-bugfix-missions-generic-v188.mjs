@@ -125,4 +125,10 @@ test('a generic death reads "marine à terre", not the failure id, in the log an
   assert.equal(missionFailureLabelV188('Le sas a été englouti par l’effondrement planétaire.'), 'Le sas a été englouti par l’effondrement planétaire.');
   assert.match(read('src/app.js'), /OPÉRATION COMPROMISE · \$\{missionFailureLabelV188\(event\.reason \|\| event\.failureMode\)\}/);
   assert.match(read('src/alien-survival-runtime-v70.js'), /missionFailureLabelV188\(this\.mission\.failureReason\)/);
+  // Checkpoint log lines: "CHECKPOINT mecha-mounted SÉCURISÉ." was shown in play.
+  const { checkpointLabelV188 } = await import('../src/mission-log-labels-v188.js');
+  assert.equal(checkpointLabelV188('mecha-mounted'), 'd’opération');
+  assert.equal(checkpointLabelV188('insertion'), 'd’insertion'); assert.equal(checkpointLabelV188('beacon-2'), 'balise 2');
+  assert.match(read('src/app.js'), /CHECKPOINT \$\{checkpointLabelV188\(event\.checkpoint\)\.toUpperCase\(\)\} SÉCURISÉ\./);
+  assert.match(read('src/app.js'), /REPRISE CHECKPOINT \$\{checkpointLabelV188\(event\.checkpoint\)\.toUpperCase\(\)\} · /);
 });

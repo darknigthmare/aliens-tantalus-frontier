@@ -42,3 +42,18 @@ export function missionFailureLabelV188(reason) {
   if (Object.hasOwn(FAILURE_REASON_LABELS_V188, raw)) return FAILURE_REASON_LABELS_V188[raw];
   return !raw || ID_SHAPE_V188.test(raw) ? 'échec' : raw;
 }
+
+// Checkpoint ids (insertion, power, apc-convoy-queen-cleared, mecha-mounted…)
+// stay in the flags; the log names the generic ones and calls the others
+// "d’opération".
+export const CHECKPOINT_LABELS_V188 = Object.freeze({
+  insertion: 'd’insertion', power: 'énergie', archive: 'archives', security: 'sécurité', vent: 'conduit',
+  containment: 'confinement', extract: 'extraction', extraction: 'extraction'
+});
+export function checkpointLabelV188(id) {
+  const raw = String(id ?? '').trim();
+  if (Object.hasOwn(CHECKPOINT_LABELS_V188, raw)) return CHECKPOINT_LABELS_V188[raw];
+  const beacon = /^beacon-(\d+)$/u.exec(raw);
+  if (beacon) return `balise ${beacon[1]}`;
+  return 'd’opération';
+}
