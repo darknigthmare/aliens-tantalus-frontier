@@ -180,8 +180,9 @@ export function withHubDepthRoomsV188(Base) {
       }
       if (room && this.awayFromRailV188()) {
         // Out on the floor only the crew within reach and the UD-4L answer E.
-        const npc = this.nearestHubNpc?.();
-        if (npc && typeof this.interactWithNpc === 'function') return this.interactWithNpc(npc);
+        // V188: the same crew/station choice as the prompt (nearest or faced wins).
+        const choice = this.hubInteractionChoiceV188?.() ?? (this.nearestHubNpc?.() ? { kind: 'npc', target: this.nearestHubNpc() } : null);
+        if (choice?.kind === 'npc' && typeof this.interactWithNpc === 'function') return this.interactWithNpc(choice.target);
         return this.nearestInteraction() ? super.interact() : null;
       }
       return super.interact();

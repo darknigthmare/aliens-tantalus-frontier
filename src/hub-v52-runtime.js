@@ -300,6 +300,26 @@ export class HubGame extends HubGameV51 {
     return event;
   }
 
+  // V188 "the prompt is always right" (hub): one choice between a crew member
+  // and a priority station (UD-4L, flight control…), read by both interact()
+  // and statusPrompt(). The crew member wins when nearer than the station's
+  // own centre, or when the marine stands at him and faces him.
+  hubInteractionChoiceV188() {
+    if (!this.player) return null;
+    const physical = this.nearestInteraction();
+    const npc = this.nearestHubNpc();
+    const strong = Number(physical?.interactionPriority || 0) >= 100;
+    if (!npc) return strong ? { kind: 'physical', target: physical } : null;
+    if (!strong) return { kind: 'npc', target: npc };
+    const center = this.player.x + this.player.w / 2;
+    const npcOffset = npc.x + npc.w / 2 - center, npcDistance = Math.abs(npcOffset);
+    const bounds = physical.interactionBounds;
+    const physicalDistance = bounds ? Math.abs(bounds.x + bounds.w / 2 - center) : Infinity;
+    const facing = Number(this.player.facing) || 1;
+    const faced = npcDistance <= 72 && (npcDistance < 6 || Math.sign(npcOffset) === Math.sign(facing));
+    return npcDistance < physicalDistance || faced ? { kind: 'npc', target: npc } : { kind: 'physical', target: physical };
+  }
+
   interact() {
     if (!this.running) return;
     const center = this.player.x + this.player.w / 2;
@@ -307,13 +327,8 @@ export class HubGame extends HubGameV51 {
     const terminal = this.v51Terminals.find((entry) => Math.abs(center - (entry.x + entry.w / 2)) < 130 && Math.abs(this.player.y - entry.y) < 130);
     const threats = this.enemies.filter((enemy) => enemy.alive).length;
     if (!door && !terminal && !threats) {
-      const physicalInteraction = this.nearestInteraction();
-      if (Number(physicalInteraction?.interactionPriority || 0) >= 100) {
-        super.interact();
-        return;
-      }
-      const npc = this.nearestHubNpc();
-      if (npc) { this.interactWithNpc(npc); return; }
+      const choice = this.hubInteractionChoiceV188();
+      if (choice?.kind === 'npc') { this.interactWithNpc(choice.target); return; }
     }
     super.interact();
   }
@@ -361,12 +376,10 @@ export class HubGame extends HubGameV51 {
   statusPrompt() {
     const inherited = super.statusPrompt();
     if (!this.player?.alive || this.enemies.some((enemy) => enemy.alive)) return inherited;
-    const physicalInteraction = this.nearestInteraction();
-    if (Number(physicalInteraction?.interactionPriority || 0) >= 100) {
-      return inherited || `E — ${physicalInteraction.description}`;
-    }
-    const npc = this.nearestHubNpc();
-    return npc ? `E — ${npc.interaction.label} · ${npc.name}` : inherited;
+    const choice = this.hubInteractionChoiceV188();
+    if (choice?.kind === 'npc') return `E — ${choice.target.interaction.label} · ${choice.target.name}`;
+    if (choice?.kind === 'physical') return inherited || `E — ${choice.target.description}`;
+    return inherited;
   }
 
   persist() {
