@@ -381,6 +381,74 @@
   filter: grayscale(1);
 }
 
+/* V188 galaxy map: desktop shows the full name; phones show a short code on a
+   snapped chart grid (44 px targets) and the detail opens as a bottom sheet. */
+.world-node-code-v188,
+.world-sheet-close-v188 { display: none; }
+
+@media (max-width: 760px) {
+  .star-map { min-height: 520px; }
+  .world-node {
+    left: calc((var(--cell-col, 0) + .5) * 100% / var(--cell-columns, 7)) !important;
+    top: calc((var(--cell-row, 0) + .5) * 100% / var(--cell-rows, 10)) !important;
+    width: calc(100% / var(--cell-columns, 7) - 2px);
+    min-width: 44px;
+    min-height: 44px;
+    padding: 2px 0;
+    gap: 3px;
+    align-content: center;
+  }
+  .world-node-code-v188 {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    font: 700 .5rem/1 var(--mono, ui-monospace, monospace);
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+  /* Full name stays in the accessibility tree, out of sight. */
+  .world-node-name-v188 {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .world-node.in-orbit { outline: 1px dashed currentColor; outline-offset: -3px; }
+  .world-node:focus-visible { outline: 2px solid #e3c66f; outline-offset: -2px; }
+
+  .galaxy-layout.world-sheet-open-v188 #world-detail {
+    position: fixed;
+    z-index: 60;
+    inset: auto 0 0 0;
+    max-height: min(62vh, 560px);
+    overflow: auto;
+    overscroll-behavior: contain;
+    margin: 0;
+    padding: 14px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+    border-width: 1px 0 0;
+    background: #07100d;
+    box-shadow: 0 -18px 50px rgba(0, 0, 0, .7);
+    animation: world-sheet-v188 .2s ease-out;
+  }
+  .galaxy-layout.world-sheet-open-v188 .world-sheet-close-v188 {
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    margin-left: auto;
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .galaxy-layout.world-sheet-open-v188 #world-detail .button { min-height: 44px; }
+  /* Keep the last map row reachable above the sheet. */
+  .galaxy-layout.world-sheet-open-v188 { padding-bottom: 40vh; }
+}
+
+@keyframes world-sheet-v188 { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .galaxy-layout.world-sheet-open-v188 #world-detail { animation: none; } }
+
 .editor-validation {
   display: flex;
   align-items: center;
@@ -621,8 +689,10 @@ button:disabled {
 }
 
 .archives-list-v68 {
-  display: grid;
-  align-content: start;
+  /* V188: a column, not a grid. In the scrolling grid every row collapsed to the
+     entries' 116 px min-height, so two-line titles spilled over the next entry. */
+  display: flex;
+  flex-direction: column;
   gap: 1px;
   max-height: min(68vh, 720px);
   overflow: auto;
@@ -635,8 +705,11 @@ button:disabled {
   position: relative;
   display: grid;
   gap: 5px;
+  flex: none;
+  align-content: start;
   min-height: 116px;
   padding: 15px 42px 15px 16px;
+  overflow-wrap: anywhere;
   border: 0;
   color: rgba(218, 234, 223, .72);
   background: #06100d;
