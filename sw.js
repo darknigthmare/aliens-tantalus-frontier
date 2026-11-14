@@ -212,6 +212,8 @@ const SHELL = Object.freeze([
   '/src/story-dossier-v188.js',
   '/src/colony-reconstruction-v188.js',
   '/src/tension-director-v188.js',
+  '/src/insertion-safe-zone-v188.js',
+  '/src/mission-deployment-log-v188.js',
   '/src/audio-score-v132.js',
   '/src/audio.js',
   '/src/automaton-combat-v113.js',

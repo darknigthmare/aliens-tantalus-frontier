@@ -30,6 +30,8 @@ const WORLD_WIDTH = 6200;
 const WORLD_HEIGHT = 1080;
 const LOGICAL_WIDTH = 1280;
 const LOGICAL_HEIGHT = 720;
+// [PROPOSÉ] V188: nodes kept this far past the insertion safe radius (patrol spread ±76 px + body).
+const INSERTION_SAFE_MARGIN_V188 = 100;
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const asList = (value) => Array.isArray(value) ? value : [];
 const entityDistance = (a, b) => Math.hypot((a.x + (a.w || 0) / 2) - (b.x + (b.w || 0) / 2), (a.y + (a.h || 0) / 2) - (b.y + (b.h || 0) / 2));
@@ -627,6 +629,21 @@ export function withV52LevelRuntime(BaseEngine) {
         nodesByZone.get(node.zoneId).push(node);
       }
       let cursor = 0;
+      // V188 safe zone at insertion (owner decision, [PROPOSÉ] radius, see
+      // insertion-safe-zone-v188.js): set by the outer layer for generic and
+      // mode missions only (null for story chapters, Forge playtests and the hub).
+      const safeRadius = Number(this.insertionSafeZoneV188?.radius) || 0, insertion = plan.anchors?.spawn;
+      const graphNodes = asList(plan.graph?.nodes);
+      const fromInsertion = (node) => insertion ? Math.hypot(node.x - insertion.x, node.y - insertion.y) : Infinity;
+      // Node spread (±76 px) and body offsets stay inside the margin.
+      const safeNodeFor = (node) => {
+        if (!safeRadius || !insertion || fromInsertion(node) >= safeRadius + INSERTION_SAFE_MARGIN_V188) return node;
+        const clear = graphNodes.filter((candidate) => candidate.anchor !== 'spawn' && fromInsertion(candidate) >= safeRadius + INSERTION_SAFE_MARGIN_V188);
+        if (!clear.length) return node;
+        // Nearest clear node, the same zone first: the patrol keeps its sector.
+        const by = (list) => list.sort((a, b) => Math.hypot(a.x - node.x, a.y - node.y) - Math.hypot(b.x - node.x, b.y - node.y))[0];
+        return by(clear.filter((candidate) => candidate.zoneId === node.zoneId)) || by(clear);
+      };
       for (const spawn of this.missionLevelSpawns.values()) {
         // Never on the player's insertion node: an awake patrol there attacks during the landing.
         const nodes = nodesByZone.get(spawn.zoneId) || [], awayFromInsertion = nodes.filter((node) => node.anchor !== 'spawn');
@@ -636,12 +653,15 @@ export function withV52LevelRuntime(BaseEngine) {
           const enemy = activeEnemies[cursor++];
           let node = nodes[index % Math.max(1, nodes.length)] || { x: (zone?.x || 600) + 120 + index * 90, y: fallbackGroundY };
           if (node.anchor === 'spawn' && awayFromInsertion.length) node = awayFromInsertion[index % awayFromInsertion.length];
+          // Awake patrols only: delayed waves stay where their event wakes them.
+          const safeNode = spawn.active ? safeNodeFor(node) : node;
+          if (safeNode !== node) { enemy.insertionSafeZoneMovedV188 = { from: node.id || null, to: safeNode.id || null }; node = safeNode; }
           enemy.x = clamp(node.x + (index % 3 - 1) * 76, 0, this.missionLevelBounds.width - enemy.w);
           enemy.y = node.y - enemy.h;
           enemy.groundY = node.y;
           enemy.spawnX = enemy.x;
           enemy.levelSpawnId = spawn.id;
-          enemy.levelZoneId = spawn.zoneId;
+          enemy.levelZoneId = node.zoneId || spawn.zoneId;
           enemy.dormant = !spawn.active;
           enemy.alive = spawn.active;
           enemy.deathClock = 0;
@@ -1655,6 +1675,29 @@ export function withV52LevelRuntime(BaseEngine) {
       return { action, changed: false, eventId: event.id };
     }
 
+    // V188: the nearest V62 vent entrance within reach, as an action of the
+    // shared selection. It stays first among the actions (it used to pre-empt
+    // them all); a pickup still wins only when strictly nearer.
+    missionVentCandidateV188(actor = this.player) {
+      const network = this.missionVentNetworkV62;
+      if (!network || !actor?.alive || actor.downed || actor.ventTransit || actor.inVehicle) return null;
+      const entrance = [...network.entrances]
+        .sort((left, right) => missionVentDistanceV62(actor, left) - missionVentDistanceV62(actor, right))
+        .find((candidate) => missionVentDistanceV62(actor, candidate) <= 135);
+      if (!entrance) return null;
+      const portal = asList(this.vents).find((entry) => entry.portalId === entrance.id) || null;
+      return { kind: 'mission-vent-v62', category: 'action', target: portal || entrance, entranceId: entrance.id,
+        // Same centre-to-centre rank as the other candidates, on the drawn portal.
+        distance: portal ? this.interactionRankDistanceV188(actor, portal) : missionVentDistanceV62(actor, entrance),
+        prompt: portal?.requiresTool && !this.inventory?.cutter ? 'CHALUMEAU REQUIS' : 'E  OUVRIR / EMPRUNTER LE CONDUIT' };
+    }
+
+    interactionCandidatesV188(actor = this.player) {
+      const list = super.interactionCandidatesV188(actor), vent = this.missionVentCandidateV188(actor);
+      if (vent) list.unshift(vent);
+      return list;
+    }
+
     interact(actor = this.player) {
       if (actor?.ventTransit && this.missionVentNetworkV62
         && actor.ventTransit.networkId === this.missionVentNetworkV62.id) {
@@ -1662,8 +1705,13 @@ export function withV52LevelRuntime(BaseEngine) {
       }
       const anchors = this.missionLevelRuntime?.anchors || {};
       const nearAnchor = Object.entries(anchors).find(([, anchor]) => entityDistance(actor, { x: anchor.x - 20, y: anchor.y - 60, w: 40, h: 60 }) < 150);
-      const ventTransit = this.enterMissionVentV62(actor);
-      if (ventTransit) return true;
+      // V188: the vent entry is one action of the shared E selection (it used to
+      // run before it and took E from a strictly nearer pickup the prompt named).
+      const shared = typeof this.selectInteractionTargetV188 === 'function';
+      if (!shared || this.selectInteractionTargetV188(actor)?.kind === 'mission-vent-v62') {
+        const ventTransit = this.enterMissionVentV62(actor);
+        if (ventTransit) return true;
+      }
       // The inherited V51 interaction treats every entry in this.vents as an
       // instant shortcut. V62 portals are already handled above and must stay
       // out of that legacy branch so nearby relays, doors and terminals remain

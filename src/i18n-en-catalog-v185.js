@@ -6408,6 +6408,9 @@ export const EN_CATALOG_V185 = Object.freeze({
 "tir de suppression": "suppressive fire",
 "tourelle du véhicule": "vehicle gunnery",
 "vide spatial": "vacuum",
+// V188 insertion bug hunt (reviewed through i18n-catalog-maintenance-v186).
+"JERI EN INFILTRATION · 1 marine IA en appui": "JERI INFILTRATING · 1 AI marine in support",
+"JERI EN INFILTRATION · aucun marine en appui": "JERI INFILTRATING · no marine in support",
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 // V188 systems bug hunt (merged via i18n-catalog-maintenance-v186 review).
@@ -6900,4 +6903,6 @@ export const EN_PATTERNS_V185 = Object.freeze({
 "{0} : tir à énergie.": "{0}: energy fire.",
 "{0} : tir électrique.": "{0}: electric fire.",
 "{0} : tir.": "{0}: fire.",
+// V188 insertion bug hunt (reviewed through i18n-catalog-maintenance-v186).
+"JERI EN INFILTRATION · {0} marines IA en appui": "JERI INFILTRATING · {0} AI marines in support",
 });

@@ -4367,6 +4367,16 @@ Le directeur passe par trois phases :
 | Cris par caste (8) | drone, guerrier, rôdeur, cracheur, Crusher, reine, facehugger, chestburster |
 | Armes principales (8) | rafale du M41A, grenade du M41A, pistolet, fusil à pompe, smartgun, lance-flammes, rechargement, cliquetis à vide |
 
+**Zone sûre à l'insertion (décision du propriétaire, 2026-11-14).** Un marine immobile à l'insertion mourait en 5 à 10 s sur `pair-001-mire`, `pair-001-frontier`, `special-cargo-brutal` et `special-alpha-bravo-doctrine` : les patrouilles éveillées partaient à 380-420 px. Valeurs retenues :
+
+- les patrouilles éveillées partent à au moins **900 px** du point d'insertion (environ 17,6 m à 51 px/m) ; le nœud de départ est conservé au-delà de 900 + **100 px** de marge pour l'écart de patrouille. Les vagues différées restent sur leur nœud ;
+- pendant les **4 s** de mission qui suivent la prise de contrôle, aucun ennemi n'attaque ni ne réduit la distance. Le directeur de horde ne prévient jamais avant 45 s : aucune vague ne tombe dans cet intervalle ;
+- portée : missions génériques et missions de mode. Les chapitres d'histoire (QZ-17, QZ-18, convoi APC, C-12, Cocon noir), les essais de la Forge et les missions reprises gardent leurs rencontres et positions écrites.
+
+Code : `src/insertion-safe-zone-v188.js` et `compileMissionLevelActors` (`src/game-v52-level-runtime.js`). Test : `scripts/verify-bugfix-insertion-v188.mjs`.
+
+**Escouade du « Faux fils » (vérification, 2026-11-14).** §15.7 (ligne 3.2) fait jouer Jeri, synthétique en infiltration chimique, sans parler d'escouade ni la déclarer solo. L'escouade sélectionnée reste donc déployée en appui ; le journal de mission annonce désormais « JERI EN INFILTRATION · N marines IA en appui » au lieu de « ESCOUADE DÉPLOYÉE ». À trancher si le chapitre doit devenir solo.
+
 **Répliques réactives (§53.6).** Les déclencheurs sont une mission ratée, un colon mort et un retour blessé. Il y a une réplique par déclencheur et par profil (humain et synthétique), en français et en anglais. La même réplique ne se répète pas pendant 3 jours de jeu.
 
 ### 56.5 Suivi du lot V188
