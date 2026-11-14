@@ -2,7 +2,7 @@ import { GameEngine as FinalGameEngine } from './game-final-runtime.js';
 import { firstProjectileObstacleV83 } from './projectile-collision-v83.js';
 import { collectProjectileCollisionsV83 } from './projectile-collision-v83.js';
 import { CombatCaptionDirectorV84 } from './combat-captions-v84.js';
-import { impactCaptionV188 } from './impact-caption-v188.js';
+import { impactCaptionV188, hazardCaptionV188, weaponShotCaptionV188 } from './impact-caption-v188.js';
 import { campaignObjectiveLabelV188 } from './mission-objective-panel-v188.js';
 import { resolveWeaponMechanicsV122, FIREBALL_MECHANICS_V122 } from './weapon-mechanics-weapons-v122.js';
 
@@ -390,7 +390,7 @@ export class GameEngine extends FinalGameEngine {
     this.penetrationTelemetry.shots += 1;
     this.penetrationTelemetry.familyEffects[ballistics.family] = (this.penetrationTelemetry.familyEffects[ballistics.family] || 0) + 1;
     if (this.stealthRuntime) this.stealthRuntime.noiseBurstUntil = this.animationTime + 0.85 * ballistics.noise;
-    this.pushCaption('weapon', `${this.weaponRuntime.name}: tir ${ballistics.family}.`);
+    this.pushCaption('weapon', weaponShotCaptionV188(this.weaponRuntime.name, ballistics.family));
     return true;
   }
 
@@ -541,7 +541,7 @@ export class GameEngine extends FinalGameEngine {
   applyHazards(player) {
     const previous = this.environmentStatus?.lastHazard;
     super.applyHazards(player);
-    if (this.environmentStatus?.lastHazard && this.environmentStatus.lastHazard !== previous) this.pushCaption('environment', `Danger: ${this.environmentStatus.lastHazard}.`);
+    if (this.environmentStatus?.lastHazard && this.environmentStatus.lastHazard !== previous) this.pushCaption('environment', hazardCaptionV188(this.environmentStatus.lastHazard));
   }
 
   pushCaption(channel, text) {

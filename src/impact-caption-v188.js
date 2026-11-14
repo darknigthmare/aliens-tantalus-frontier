@@ -28,3 +28,19 @@ export function impactSourceLabelV188(source) {
 export function impactCaptionV188(source) {
   return `Impact : ${impactSourceLabelV188(source)}.`;
 }
+
+// Hazard entered ("Danger : …"): same labels as the damage source.
+export function hazardCaptionV188(kind) {
+  return `Danger : ${impactSourceLabelV188(kind)}.`;
+}
+
+// Weapon discharge caption: the ballistic family is an id (FAMILY_RULES keys).
+export const SHOT_FAMILY_LABELS_V188 = Object.freeze({
+  ballistic: 'tir balistique', smart: 'tir guidé', flame: 'tir incendiaire', explosive: 'tir explosif', electric: 'tir électrique',
+  silent: 'tir silencieux', energy: 'tir à énergie', melee: 'frappe de mêlée', tool: 'outil en action', sonic: 'tir sonique',
+  acid: 'tir acide', cryo: 'tir cryogénique', chemical: 'tir chimique', sentry: 'tir de tourelle'
+});
+export function weaponShotCaptionV188(name, family) {
+  const label = Object.hasOwn(SHOT_FAMILY_LABELS_V188, family) ? SHOT_FAMILY_LABELS_V188[family] : 'tir';
+  return `${String(name || 'Arme')} : ${label}.`;
+}

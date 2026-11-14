@@ -56,6 +56,15 @@ test('damage and insertion captions never show internal ids or English keys; Eng
   const impacts = captions().filter(text => text.startsWith('Impact'));
   assert.deepEqual(impacts, ['Impact : vide.', 'Impact : contact de la horde.', 'Impact : contact.', 'Impact : acide.',
     'Impact : Armored Warrior (détonation).', 'Impact : Armored Warrior.']);
+  // A real shot and a real hazard entry go through the production fire()/applyHazards().
+  engine.captionDirectorV84 = null; engine.mission.elapsed += 10;
+  p.ammo = Math.max(p.ammo, 10); p.fireCooldown = 0; p.reloading = false; engine.fire(p);
+  const shot = captions().at(-1);
+  assert.match(shot, / : tir balistique\.$/, `shot caption: ${shot}`);
+  engine.captionDirectorV84 = null; engine.mission.elapsed += 10; p.hazardClock = 0; p.health = p.maxHealth;
+  engine.hazards = [{ id: 'qa-vacuum', kind: 'vacuum', x: p.x - 10, y: p.y + p.h - 20, w: p.w + 20, h: 30, active: true, damage: 1 }];
+  engine.applyHazards(p);
+  assert.ok(captions().includes('Danger : vide.'), `hazard caption: ${captions().slice(-3)}`);
   const { setLanguageV185 } = await import('../src/i18n-v185.js');
   const { autoTranslateV185, useCatalogV185 } = await import('../src/i18n-auto-v185.js');
   useCatalogV185(await import('../src/i18n-en-catalog-v185.js'));
@@ -64,6 +73,8 @@ test('damage and insertion captions never show internal ids or English keys; Eng
     assert.equal(autoTranslateV185('Impact : vide.'), 'Impact: vacuum.');
     assert.equal(autoTranslateV185('Impact : Armored Warrior.'), 'Impact: Armored Warrior.');
     assert.equal(autoTranslateV185('Insertion : Secourir les survivants'), 'Insertion: Rescue the survivors');
+    assert.equal(autoTranslateV185('M4A3 Service Pistol : tir balistique.'), 'M4A3 Service Pistol: ballistic fire.');
+    assert.equal(autoTranslateV185('Danger : vide.'), 'Danger: vacuum.');
   } finally { setLanguageV185('fr', { storage: null, document: null, persist: false }); }
 });
 
