@@ -66,3 +66,17 @@ test('damage and insertion captions never show internal ids or English keys; Eng
     assert.equal(autoTranslateV185('Insertion : Secourir les survivants'), 'Insertion: Rescue the survivors');
   } finally { setLanguageV185('fr', { storage: null, document: null, persist: false }); }
 });
+
+test('ecosystem operations: a marine at the right wall of the arena (by the extraction) resumes instead of restarting', async () => {
+  const { buildEcosystemMissionV131 } = await import('../src/ecosystem-missions-v131.js');
+  for (const id of ['special-queen-mother-v131', 'special-hive-world-v131', 'special-pangaea-v131']) {
+    const entry = campaign(id), options = { userCasteCampaignV88: false };
+    const { engine } = await launch(entry, { builder: buildEcosystemMissionV131, options });
+    // Declared injection: teleport to the right wall, where the arena clamps the marine (5200 - width).
+    const p = engine.player; p.x = engine.missionLevelBounds.width - p.w; p.vx = 0;
+    const state = structuredClone(engine.captureResumeState());
+    const resumed = (await launch(entry, { builder: buildEcosystemMissionV131, options: { ...options, resumeState: state } })).engine;
+    assert.equal(resumed.lastResumeResult?.applied, true, `${id}: ${resumed.lastResumeResult?.reason}`);
+    assert.equal(resumed.player.x, p.x);
+  }
+});
