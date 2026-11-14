@@ -309,14 +309,50 @@ export function withHiveMissionsV131(BaseEngine) {
       this.hiveV131.channel = action; this.hiveChannelActorV131 = this.player; return true;
     }
 
+    // V188 "the prompt is always right": one hive entry in the shared selection,
+    // in the order interact() always used (surface hold, possession, capsule,
+    // console, recruit, station). Native targets stay reachable once the
+    // interface is commissioned, as before; prompt and E read the same choice.
+    hiveStationAtV188(actor = this.player) {
+      const state = this.hiveV131;
+      return this.hiveManifestV131.stations.filter(candidate => near(actor, candidate)
+        && !(candidate.charge && state.spentCapsules.includes(candidate.id)))
+        .sort((a, b) => Math.abs(center(actor) - a.x) - Math.abs(center(actor) - b.x))[0] || null;
+    }
+    hiveInteractionV188(actor = this.player) {
+      if (!this.isHiveMissionV131() || actor !== this.player || !ACTIVE(actor)) return null;
+      const state = this.hiveV131, entry = (step, prompt, target = null, distance = 0) => ({ kind: 'hive-v131', category: 'action', step, prompt, target, distance });
+      if (this.isJeriSurfaceAttachedV135()) return entry('attached', `${this.jeriSurfaceV135.face === 'underside' ? 'A/D · PLAFOND' : 'W/S · MUR'} / V OU SAUT · DÉTACHER / E APRÈS DÉTACHEMENT`);
+      if (state.possession) return entry('possession', 'E / B · REVENIR AU CORPS D’ORIGINE / F · GRIFFE');
+      const station = this.hiveStationAtV188(actor), stationDistance = station ? Math.hypot(center(actor) - station.x, feet(actor) - station.floorY) : 0;
+      const label = station ? `E · ${station.label}${station.duration ? ` · ${state.channelProgress.toFixed(1)}/${station.duration} S` : ''}` : '';
+      if (station?.charge) return entry('station', label, station, stationDistance);
+      if (!state.commissioned) return station ? entry('station', station.id === 'commission' ? label : 'INITIALISER L’INTERFACE AU PUPITRE', station, stationDistance) : null;
+      const recruit = this.hiveActorsV131.filter(candidate => !candidate.hiveRecruitedV131 && !candidate.hiveLostV131 && ACTIVE(candidate))
+        .find(candidate => Math.hypot(center(candidate) - center(actor), feet(candidate) - feet(actor)) <= 110);
+      if (recruit) return entry('recruit', 'E · RECRUTER · 12 CHARGE', recruit, Math.hypot(center(recruit) - center(actor), feet(recruit) - feet(actor)));
+      return station ? entry('station', label, station, stationDistance) : null;
+    }
+    interactionCandidatesV188(actor = this.player) {
+      if (!this.isHiveMissionV131()) return super.interactionCandidatesV188(actor);
+      const entry = this.hiveInteractionV188(actor);
+      // Before commissioning, E never reached the native targets: they stay out of the choice.
+      const list = this.hiveV131.commissioned && !this.hiveV131.possession && !this.isJeriSurfaceAttachedV135() ? super.interactionCandidatesV188(actor) : [];
+      if (entry) list.unshift(entry);
+      return list;
+    }
     interact(actor = this.player) {
       if (!this.isHiveMissionV131()) return super.interact(actor);
       if (!this.hiveCanActV131(actor)) return false;
-      if (this.isJeriSurfaceAttachedV135()) return this.locked('V OU SAUT : SE DÉTACHER AVANT UNE INTERACTION');
-      if (this.hiveV131.possession) return this.releaseHivePossessionV131('operator');
-      const state = this.hiveV131, station = this.hiveManifestV131.stations.filter(candidate => near(actor, candidate)
-        && !(candidate.charge && state.spentCapsules.includes(candidate.id)))
-        .sort((a, b) => Math.abs(center(actor) - a.x) - Math.abs(center(actor) - b.x))[0];
+      const choice = this.selectInteractionTargetV188(actor);
+      if (choice?.kind !== 'hive-v131') {
+        if (choice) return super.interact(actor);
+        return this.hiveV131.commissioned ? super.interact(actor) : this.locked('INITIALISER L’INTERFACE AU PUPITRE');
+      }
+      if (choice.step === 'attached') return this.locked('V OU SAUT : SE DÉTACHER AVANT UNE INTERACTION');
+      if (choice.step === 'possession') return this.releaseHivePossessionV131('operator');
+      if (choice.step === 'recruit') return this.recruitHiveActorV131(choice.target.id).applied;
+      const state = this.hiveV131, station = choice.target;
       if (station?.charge) {
         if (state.spentCapsules.includes(station.id)) return this.locked('CAPSULE DÉJÀ CONSOMMÉE');
         state.spentCapsules.push(station.id);
@@ -326,10 +362,6 @@ export function withHiveMissionsV131(BaseEngine) {
         this.hiveMilestoneV131(station.id, 'Charge scellée consommée ; elle ne réapparaît pas à la reprise.'); return true;
       }
       if (!state.commissioned) return station?.id === 'commission' ? this.beginHiveChannelV131(station) : this.locked('INITIALISER L’INTERFACE AU PUPITRE');
-      const recruit = this.hiveActorsV131.filter(candidate => !candidate.hiveRecruitedV131 && !candidate.hiveLostV131 && ACTIVE(candidate))
-        .find(candidate => Math.hypot(center(candidate) - center(actor), feet(candidate) - feet(actor)) <= 110);
-      if (recruit) return this.recruitHiveActorV131(recruit.id).applied;
-      if (!station) return super.interact(actor);
       if (station.profile) {
         if (station.id === 'inspection-queen' && (!state.rescued || !state.bossDefeated)) return this.locked('SAUVETAGE ET SAINT REQUIS');
         const result = inspectHiveProfileV131(state, station);
@@ -924,13 +956,9 @@ export function withHiveMissionsV131(BaseEngine) {
     objectiveProgressText() { return this.isHiveMissionV131() ? hiveDossierV131(this.hiveV131).instruction : super.objectiveProgressText(); }
     getInteractionPrompt() {
       if (!this.isHiveMissionV131()) return super.getInteractionPrompt();
-      if (this.isJeriSurfaceAttachedV135()) return `${this.jeriSurfaceV135.face === 'underside' ? 'A/D · PLAFOND' : 'W/S · MUR'} / V OU SAUT · DÉTACHER / E APRÈS DÉTACHEMENT`;
-      const station = this.hiveManifestV131.stations.find(candidate => near(this.player, candidate)
-        && !(candidate.charge && this.hiveV131.spentCapsules.includes(candidate.id)));
-      if (this.hiveV131.possession) return 'B · REVENIR AU CORPS D’ORIGINE / F · GRIFFE';
-      if (station) return `E · ${station.label}${station.duration ? ` · ${this.hiveV131.channelProgress.toFixed(1)}/${station.duration} S` : ''}`;
-      const recruit = this.hiveActorsV131.find(actor => !actor.hiveRecruitedV131 && ACTIVE(actor) && Math.hypot(center(actor) - center(this.player), feet(actor) - feet(this.player)) < 110);
-      return recruit ? 'E · RECRUTER · 12 CHARGE' : this.hiveV131.operationId === 'jeri-false-son'
+      const choice = this.selectInteractionTargetV188(this.player);
+      if (choice?.prompt) return choice.prompt;
+      return this.hiveV131.operationId === 'jeri-false-son'
         ? `V · ${findJeriSurfaceV135(this.player, this.jeriSurfaceSceneV135()) ? 'S’ACCROCHER' : 'MUR / DESSOUS DE PASSERELLE À PROXIMITÉ'} / C · PROFILS` : 'C · INTERFACE RUCHE / N · RECRUE / B · CONTRÔLE';
     }
     getSnapshot() {
