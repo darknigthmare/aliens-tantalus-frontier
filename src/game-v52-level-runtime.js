@@ -30,6 +30,8 @@ const WORLD_WIDTH = 6200;
 const WORLD_HEIGHT = 1080;
 const LOGICAL_WIDTH = 1280;
 const LOGICAL_HEIGHT = 720;
+// [PROPOSÉ] V188: nodes kept this far past the insertion safe radius (patrol spread ±76 px + body).
+const INSERTION_SAFE_MARGIN_V188 = 100;
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const asList = (value) => Array.isArray(value) ? value : [];
 const entityDistance = (a, b) => Math.hypot((a.x + (a.w || 0) / 2) - (b.x + (b.w || 0) / 2), (a.y + (a.h || 0) / 2) - (b.y + (b.h || 0) / 2));
@@ -627,6 +629,21 @@ export function withV52LevelRuntime(BaseEngine) {
         nodesByZone.get(node.zoneId).push(node);
       }
       let cursor = 0;
+      // V188 safe zone at insertion (owner decision, [PROPOSÉ] radius, see
+      // insertion-safe-zone-v188.js): set by the outer layer for generic and
+      // mode missions only (null for story chapters, Forge playtests and the hub).
+      const safeRadius = Number(this.insertionSafeZoneV188?.radius) || 0, insertion = plan.anchors?.spawn;
+      const graphNodes = asList(plan.graph?.nodes);
+      const fromInsertion = (node) => insertion ? Math.hypot(node.x - insertion.x, node.y - insertion.y) : Infinity;
+      // Node spread (±76 px) and body offsets stay inside the margin.
+      const safeNodeFor = (node) => {
+        if (!safeRadius || !insertion || fromInsertion(node) >= safeRadius + INSERTION_SAFE_MARGIN_V188) return node;
+        const clear = graphNodes.filter((candidate) => candidate.anchor !== 'spawn' && fromInsertion(candidate) >= safeRadius + INSERTION_SAFE_MARGIN_V188);
+        if (!clear.length) return node;
+        // Nearest clear node, the same zone first: the patrol keeps its sector.
+        const by = (list) => list.sort((a, b) => Math.hypot(a.x - node.x, a.y - node.y) - Math.hypot(b.x - node.x, b.y - node.y))[0];
+        return by(clear.filter((candidate) => candidate.zoneId === node.zoneId)) || by(clear);
+      };
       for (const spawn of this.missionLevelSpawns.values()) {
         // Never on the player's insertion node: an awake patrol there attacks during the landing.
         const nodes = nodesByZone.get(spawn.zoneId) || [], awayFromInsertion = nodes.filter((node) => node.anchor !== 'spawn');
@@ -636,12 +653,15 @@ export function withV52LevelRuntime(BaseEngine) {
           const enemy = activeEnemies[cursor++];
           let node = nodes[index % Math.max(1, nodes.length)] || { x: (zone?.x || 600) + 120 + index * 90, y: fallbackGroundY };
           if (node.anchor === 'spawn' && awayFromInsertion.length) node = awayFromInsertion[index % awayFromInsertion.length];
+          // Awake patrols only: delayed waves stay where their event wakes them.
+          const safeNode = spawn.active ? safeNodeFor(node) : node;
+          if (safeNode !== node) { enemy.insertionSafeZoneMovedV188 = { from: node.id || null, to: safeNode.id || null }; node = safeNode; }
           enemy.x = clamp(node.x + (index % 3 - 1) * 76, 0, this.missionLevelBounds.width - enemy.w);
           enemy.y = node.y - enemy.h;
           enemy.groundY = node.y;
           enemy.spawnX = enemy.x;
           enemy.levelSpawnId = spawn.id;
-          enemy.levelZoneId = spawn.zoneId;
+          enemy.levelZoneId = node.zoneId || spawn.zoneId;
           enemy.dormant = !spawn.active;
           enemy.alive = spawn.active;
           enemy.deathClock = 0;
