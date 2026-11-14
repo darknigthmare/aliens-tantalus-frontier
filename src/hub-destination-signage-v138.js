@@ -22,7 +22,7 @@ const category = {
 export const HUB_DESTINATION_LABELS_V138 = freeze({
   'arrival-airlock': 'SAS ARRIVÉE', logistics: 'LOGISTIQUE', 'mire-archives': 'ARCHIVES MIRE',
   'synthetic-bay': 'SYNTHÉTIQUES', cctv: 'SURVEILLANCE', 'proving-ground': 'TERRAIN D’ESSAI',
-  morgue: 'MORGUE', 'escape-pods': 'CAPSULES', durandal: 'DURANDAL', bioforge: 'BIOFORGE',
+  morgue: 'MORGUE', 'escape-pods': 'CAPSULES DE SAUVETAGE', durandal: 'DURANDAL', bioforge: 'BIOFORGE',
   'animal-care': 'SOINS ANIMAUX', 'frontier-civil-counter': 'RELAIS CIVIL', 'personal-refuge': 'REFUGE',
   'flight-control-cockpit': 'COCKPIT', 'galley-service': 'CUISINE', 'sanitary-bay': 'SANITAIRES',
   'engine-room': 'MACHINES', 'water-recycling': 'RECYCLAGE EAU', 'maintenance-spine': 'MAINTENANCE',

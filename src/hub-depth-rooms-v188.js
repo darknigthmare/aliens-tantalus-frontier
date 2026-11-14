@@ -23,10 +23,12 @@ export const HUB_DEPTH_ROOMS_V188 = Object.freeze({
     // The UD-4L stands 30 px in front of the wall: a narrow lane behind it along the wall, the open floor in front.
     // Its footprint covers the skids and the low hull; tail (x < 300) and nose (x > 780) can be walked under.
     dropship: Object.freeze({ actorId: 'dropship-hangar-ud4l', z: -30, footprint: footprint('dropship-hangar-ud4l', 300, 780, -40, -20), interactZ: -50 }),
+    // Sizes at 1 m ≈ 51 px (src/hub-prologue-rooms-v188.js): a cargo crate is at most 1.2 m (61 px),
+    // the fuel/ordnance cart 1.5 × 0.8 m. Nothing stands in the rail band (z > −20) nor in front of a door.
     props: Object.freeze([
-      prop('crates-west', 'crate', 232, 72, 64, -72, -90, -62), // its footprint reaches past the front edge: no squeezing in front of it
-      prop('cart-east', 'cart', 900, 76, 40, -28, -36, -20),
-      prop('crates-east', 'crate', 1064, 84, 78, -60, -70, -50)
+      prop('crates-west', 'crate', 236, 61, 58, -72, -90, -62), // its footprint reaches past the front edge: no squeezing in front of it
+      prop('cart-east', 'cart', 852, 76, 40, -28, -36, -20), // by the UD-4L nose and its fuel line, clear of the arrival airlock
+      prop('crates-east', 'crate', 1160, 61, 58, -60, -70, -50) // between the airlock and the bulkhead
     ]),
     // Crew lanes: in front of the UD-4L while beside it, back on the rail elsewhere.
     npcLane: Object.freeze({ x0: 150, x1: 880, z: -52 }),
