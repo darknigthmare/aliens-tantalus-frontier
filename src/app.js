@@ -142,6 +142,7 @@ import { beginNpcConversationV62, applyNpcDialogueChoiceV62 } from './npc-dialog
 import { HubDialogueUiV76 } from './hub-dialogue-ui-v76.js';
 import { createMissionInsertionV62, restoreMissionInsertionV62 } from './mission-insertion-v62.js';
 import { MissionInsertionUiV62 } from './mission-insertion-ui-v62.js';
+import { campaignObjectiveLabelV188 } from './mission-objective-panel-v188.js';
 import {
   SPECIAL_OPERATIONS_V131 as SPECIAL_OPERATIONS_V67, SPECIAL_OPERATION_COUNTS_V131 as SPECIAL_OPERATION_COUNTS_V67,
   getSpecialOperationByCampaignIdV131 as getSpecialOperationByCampaignIdV67, NEW_SPECIAL_CAMPAIGNS_V131, isSoloSpecialOperationV131
@@ -1589,7 +1590,7 @@ function renderCampaigns() {
     const unlocked = saveSystem.data.galaxy.unlockedWorldIds.includes(campaign.worldId);
     const planned = saveSystem.data.strategy.plannedCampaignId === campaign.id;
     const completed = saveSystem.data.galaxy.completedCampaignIds.includes(campaign.id);
-    return `<article class="catalog-card ${planned ? 'selected' : ''}" data-index="${index + 1}"><span class="eyebrow">${escapeHtml(campaign.mode)} · ${escapeHtml(campaign.source)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaign.summary)}</p><div class="mini-tags"><span>${escapeHtml(world?.name || 'Frontier')}</span><span>${escapeHtml(campaign.objective)}</span><span>${campaign.routes} routes</span><span>${completed ? 'ACCOMPLIE' : unlocked ? 'OUVERTE' : 'VERROUILLÉE'}</span></div><footer><span>${escapeHtml(campaign.canon)}</span><button class="button compact" data-plan-campaign="${campaign.id}" ${unlocked ? '' : 'disabled'}>${planned ? 'PLANIFIÉE' : 'PLANIFIER'}</button></footer></article>`;
+    return `<article class="catalog-card ${planned ? 'selected' : ''}" data-index="${index + 1}"><span class="eyebrow">${escapeHtml(campaign.mode)} · ${escapeHtml(campaign.source)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaign.summary)}</p><div class="mini-tags"><span>${escapeHtml(world?.name || 'Frontier')}</span><span>${escapeHtml(campaignObjectiveLabelV188(campaign.objective))}</span><span>${campaign.routes} routes</span><span>${completed ? 'ACCOMPLIE' : unlocked ? 'OUVERTE' : 'VERROUILLÉE'}</span></div><footer><span>${escapeHtml(campaign.canon)}</span><button class="button compact" data-plan-campaign="${campaign.id}" ${unlocked ? '' : 'disabled'}>${planned ? 'PLANIFIÉE' : 'PLANIFIER'}</button></footer></article>`;
   }).join('');
   renderSpecialOperationsV67(term);
   renderOperationPlan();
@@ -1710,7 +1711,7 @@ function renderOperationPlan() {
   const specialNotice = specialOperation
     ? `<div class="special-operation-notice"><span>ORDRE PRIORITAIRE</span><b>${escapeHtml(specialOperation.promisedTitle)}</b><p>${specialNoticeCopy}</p></div>`
     : soloNoticeV121;
-  byId('operation-plan').innerHTML = `<span class="eyebrow">PLAN OPÉRATIONNEL · ${escapeHtml(campaign.mode)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaign.objective)} · ${escapeHtml(world.name)}</p>${specialNotice}${recoveryNotice}<div class="operation-risk"><b>${brief.risk}%</b><span>RISQUE</span></div><div class="data-list"><span>TRANSIT</span><b>${brief.hours} h</b><span>COÛT</span><b>${formatCost(brief.cost)}</b><span>RÉCOMPENSE</span><b>${formatCost(brief.reward)}</b><span>ESCOUADE</span><b>${soloOperationV121 ? 'UN OPÉRATEUR · SOLO' : escapeHtml(crewNames.join(', ') || 'AUCUNE')}</b><span>ARME</span><b>${escapeHtml(weapon?.name || 'AUCUNE')}</b><span>ÉQUIPEMENT</span><b>${escapeHtml(equipment.join(', ') || 'AUCUN')}</b><span>VÉHICULE</span><b>${escapeHtml(vehicle?.name || 'AUCUN')}${issuedVehicle ? ' · FOURNI SUR ZONE' : ''}</b></div><div class="button-row"><button id="operation-launch" class="button primary wide" ${launchDisabled ? 'disabled' : ''}>${launchLabel}</button>${recoveryAction}</div>`;
+  byId('operation-plan').innerHTML = `<span class="eyebrow">PLAN OPÉRATIONNEL · ${escapeHtml(campaign.mode)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaignObjectiveLabelV188(campaign.objective))} · ${escapeHtml(world.name)}</p>${specialNotice}${recoveryNotice}<div class="operation-risk"><b>${brief.risk}%</b><span>RISQUE</span></div><div class="data-list"><span>TRANSIT</span><b>${brief.hours} h</b><span>COÛT</span><b>${formatCost(brief.cost)}</b><span>RÉCOMPENSE</span><b>${formatCost(brief.reward)}</b><span>ESCOUADE</span><b>${soloOperationV121 ? 'UN OPÉRATEUR · SOLO' : escapeHtml(crewNames.join(', ') || 'AUCUNE')}</b><span>ARME</span><b>${escapeHtml(weapon?.name || 'AUCUNE')}</b><span>ÉQUIPEMENT</span><b>${escapeHtml(equipment.join(', ') || 'AUCUN')}</b><span>VÉHICULE</span><b>${escapeHtml(vehicle?.name || 'AUCUN')}${issuedVehicle ? ' · FOURNI SUR ZONE' : ''}</b></div><div class="button-row"><button id="operation-launch" class="button primary wide" ${launchDisabled ? 'disabled' : ''}>${launchLabel}</button>${recoveryAction}</div>`;
   byId('operation-launch').onclick = () => launchCampaign(campaign);
   const abandonButton = byId('operation-abandon-v69');
   if (abandonButton) abandonButton.onclick = abandonBlockedOperationV69;
@@ -2846,7 +2847,7 @@ function handleMissionInsertionHooksV62(hooks) {
 }
 
 function campaignObjectiveLabel(campaignId) {
-  return CAMPAIGNS.find((entry) => entry.id === campaignId)?.objective || campaignId;
+  return campaignObjectiveLabelV188(CAMPAIGNS.find((entry) => entry.id === campaignId)?.objective || 'secure the frontier');
 }
 
 function startMissionInsertionV62(context) {
@@ -3015,7 +3016,7 @@ function launchCampaign(campaign = null) {
   pendingResolutionV121 = null;
   byId('retreat-mission').textContent = 'BATTRE EN RETRAITE';
   delete byId('mission-log').dataset.radioUntilV121;
-  byId('mission-log').textContent = `MU/TH/UR · ${campaign.objective.toUpperCase()} · ${world.name} · ${missionLevel.templateLabel.toUpperCase()} · RISQUE ${deployment.operation.risk}%`;
+  byId('mission-log').textContent = `MU/TH/UR · ${campaignObjectiveLabelV188(campaign.objective).toUpperCase()} · ${world.name} · ${missionLevel.templateLabel.toUpperCase()} · RISQUE ${deployment.operation.risk}%`;
   showView('play');
   startMissionInsertionV62({
     campaign, world, worldState, levelSeed, missionLevel,
