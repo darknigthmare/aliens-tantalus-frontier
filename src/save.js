@@ -1,3 +1,9 @@
+import { createColonyV188, normalizeColonyV188 } from './colony-reconstruction-v188.js';
+import { normalizeHubDepthV188 } from './hub-depth-rooms-v188.js';
+import { createReactiveLinesV188, normalizeReactiveLinesV188 } from './reactive-lines-v188.js';
+import { normalizeColorblindV188, normalizeTextScaleV188, normalizeKeyBindingsV188, defaultKeyBindingsV188 } from './accessibility-v188.js';
+import { spareCrewMemberV188, normalizeOriginV188, normalizeCustomDifficultyV188, DEFAULT_CUSTOM_DIFFICULTY_V188 } from './run-options-v188.js';
+import { createStoryCampaignV188, normalizeStoryCampaignV188 } from './story-campaign-v188.js';
 import { COSTUMES, CREW, RELEASE, VEHICLES, WORLDS, CAMPAIGNS, WEAPONS, EQUIPMENT } from './content.js';
 import { normalizeCrewConversationMemoryV135 } from './crew-conversation-memory-v135.js';
 import { normalizePlayerWardrobeV135 } from './player-wardrobe-v135.js';
@@ -288,6 +294,7 @@ export function createDefaultSave(profile = 1) {
       weaponIds: ['weapon-001-m41a-pulse-rifle', 'weapon-003-m4a3-service-pistol'],
       equipmentIds: ['equipment-001-motion-tracker', 'equipment-006-medkit'],
       costumeId: 'costume-001',
+      originV188: 'origin-20',
       userEquipmentV95: normalizeUserEquipmentV95(),
       appearanceV126: normalizePlayerAppearanceV126(),
       coopAppearanceV126: normalizePlayerAppearanceV126(),
@@ -307,6 +314,7 @@ export function createDefaultSave(profile = 1) {
     hub: {
       deck: 0,
       positionX: 180,
+      depthV188: null,
       positionY: null,
       facing: 1,
       roomId: 'bridge',
@@ -362,6 +370,9 @@ export function createDefaultSave(profile = 1) {
     archiveRelayArchivesV122: createArchiveRelayArchiveV122(),
     convoyReturnHistoryV162: createConvoyReturnHistoryV162(),
     letheContinuityV163: createLetheContinuityV163(),
+    storyCampaignV188: createStoryCampaignV188(),
+    reactiveLinesV188: createReactiveLinesV188(),
+    colonyV188: createColonyV188(),
     alphaBravoDoctrine: createAlphaBravoDoctrineV69(),
     alienSurvivalSystems: createAlienSurvivalSystemsV70(),
     bioforgeV80: createBioforgeV80(),
@@ -383,7 +394,12 @@ export function createDefaultSave(profile = 1) {
       aimAssist: 'standard',
       music: 0.45,
       effects: 0.7,
-      coop: false
+      coop: false,
+      crewPermadeathV188: true,
+      colorblindV188: 'off',
+      textScaleV188: 1,
+      keyBindingsV188: defaultKeyBindingsV188(),
+      customDifficultyV188: { ...DEFAULT_CUSTOM_DIFFICULTY_V188 }
     },
     statistics: { playSeconds: 0, kills: 0, shots: 0, hits: 0, deaths: 0, rescues: 0, rooms: 0, campaigns: 0, strategicActions: 0, research: 0, procurements: 0, retreats: 0 }
   };
@@ -949,7 +965,8 @@ function applyAlphaBravoCrewResultsV69(save, operation, certification) {
       operationId: operation.id
     }));
     member.injuries = [...member.injuries, ...newInjuries].slice(-64);
-    if (entry.health <= 0) {
+    if (entry.health <= 0 && spareCrewMemberV188(save, member, { operationId: operation.id })) { /* V188: permadeath off */ }
+    else if (entry.health <= 0) {
       member.status = 'deceased';
       if (!save.memorial.some((record) => record.crewId === member.id
         && record.campaignId === operation.campaignId
@@ -1019,10 +1036,29 @@ export function missingStrategicCosts(save, cost = {}) {
     .map(([key, value]) => ({ key, required: value, available: getStrategicValue(save, key) }));
 }
 
+export const STRATEGIC_COST_LABELS_FR_V188 = Object.freeze({
+  credits: 'CR', alloy: 'ALLIAGE', fuel: 'CARBURANT', medical: 'MÉDICAL', research: 'R&D',
+  pathogen: 'PATHOGÈNE', power: 'ÉNERGIE', supplies: 'RAVIT.'
+});
+export const STRATEGIC_COST_LABELS_EN_V188 = Object.freeze({
+  credits: 'CR', alloy: 'ALLOY', fuel: 'FUEL', medical: 'MEDICAL', research: 'R&D',
+  pathogen: 'PATHOGEN', power: 'POWER', supplies: 'SUPPLY'
+});
+/** Player-facing refusal for a STRATEGIC_COST_MISSING error, in FR or EN. */
+export function strategicCostRefusalV188(error, language = 'fr') {
+  if (!Array.isArray(error?.missingCosts)) return error?.message ?? '';
+  const en = language === 'en', labels = en ? STRATEGIC_COST_LABELS_EN_V188 : STRATEGIC_COST_LABELS_FR_V188;
+  const list = error.missingCosts.map(({ key, required, available }) => `${available}/${required} ${labels[key] || String(key).toUpperCase()}`).join(' · ');
+  return (en ? 'Insufficient resources: ' : 'Ressources insuffisantes : ') + list;
+}
+
 function payStrategicCost(save, cost = {}) {
   if (!canAfford(save, cost)) {
-    const missing = missingStrategicCosts(save, cost).map(({ key, required, available }) => key + ' ' + available + '/' + required).join(', ');
-    throw new Error('Ressources insuffisantes : ' + missing);
+    // V188: named resources, never raw save keys; the structured list lets the
+    // interface show the refusal in the chosen language.
+    const missingCosts = missingStrategicCosts(save, cost);
+    const missing = missingCosts.map(({ key, required, available }) => available + '/' + required + ' ' + (STRATEGIC_COST_LABELS_FR_V188[key] || key.toUpperCase())).join(' · ');
+    throw Object.assign(new Error('Ressources insuffisantes : ' + missing), { code: 'STRATEGIC_COST_MISSING', missingCosts });
   }
   for (const [key, value] of Object.entries(cost)) changeStrategicValue(save, key, -value);
 }
@@ -1972,6 +2008,8 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
     const documentationOnlyV122 = operation.campaignId === ARCHIVE_RELAY_CAMPAIGN_V122.id;
     // A recovered text dossier is not a biological specimen or an extermination.
     if (!documentationOnlyV122) changeStrategicValue(save, 'pathogen', Math.max(1, Math.ceil((specialRewardV121?.kills ?? kills) / 5)));
+    // V188 origin-16 Échantillons [PROPOSÉ]: one contamination-free sample per successful mission.
+    if (!documentationOnlyV122 && save.player?.originV188 === 'origin-16') changeStrategicValue(save, 'pathogen', 1);
     worldState.stability = clamp(worldState.stability + 8);
     worldState.infestation = clamp(worldState.infestation - (documentationOnlyV122 ? 0 : containment ? 11 : 7));
     worldState.quarantine = clamp(worldState.quarantine + (containment ? 8 : 4));
@@ -2003,7 +2041,8 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
         lead.health = clamp(lead.health - damage);
         lead.stress = clamp(lead.stress + 18);
         lead.injuries.push({ type: resolvedReason === 'retreat' ? 'combat-stress' : 'mission-trauma', day: save.clock.day, severity: damage });
-        if (lead.health <= 0) {
+        if (lead.health <= 0 && spareCrewMemberV188(save, lead, { operationId: operation.id })) { /* V188: permadeath off */ }
+        else if (lead.health <= 0) {
           lead.status = 'deceased';
           save.memorial.push({ crewId: lead.id, day: save.clock.day, campaignId: operation.campaignId, reason: resolvedReason });
         } else lead.status = 'injured';
@@ -2133,6 +2172,7 @@ export function migrateSave(input, profile = 1) {
   migrated.hub.positionX = numberBetween(v50HubPosition, base.hub.positionX, 40, 5030);
   migrated.hub.positionY = Number.isFinite(hub.positionY) && hub.positionY >= 0 && hub.positionY <= 532 ? hub.positionY : null;
   migrated.hub.facing = normalizePlayerFacingV81(hub.facing);
+  migrated.hub.depthV188 = normalizeHubDepthV188(hub.depthV188); // V188: depth inside a 2.5D room, additive
   migrated.hub.roomId = typeof hub.roomId === 'string' && /^[a-z0-9-]{1,40}$/.test(hub.roomId) ? hub.roomId : base.hub.roomId;
   migrated.hub.systems = mergeNumbers(base.hub.systems, hub.systems, 0, 100);
   migrated.hub.services = Object.fromEntries(Object.entries(isRecord(hub.services) ? hub.services : {})
@@ -2285,7 +2325,7 @@ export function migrateSave(input, profile = 1) {
       ...(typeof candidate.issuedVehicleId === 'string' && candidate.issuedVehicleId.trim()
         ? { issuedVehicleId: candidate.issuedVehicleId.trim().slice(0, 120) }
         : {}),
-      difficulty: ['story', 'standard', 'nightmare'].includes(candidate.difficulty) ? candidate.difficulty : 'standard',
+      difficulty: ['story', 'standard', 'nightmare', 'custom'].includes(candidate.difficulty) ? candidate.difficulty : 'standard',
       resumeState: null,
       insertionState: sanitizeMissionInsertionStateV62(candidate.insertionState),
       flags: isRecord(candidate.flags) ? Object.fromEntries(Object.entries(candidate.flags).slice(0, 32).map(([key, value]) => [key.slice(0, 60), Boolean(value)])) : {}
@@ -2373,11 +2413,22 @@ export function migrateSave(input, profile = 1) {
 
   const editor = isRecord(source.editor) ? source.editor : {};
   migrated.editor = { ...base.editor, ...editor, projects: Array.isArray(editor.projects) ? editor.projects.filter(isRecord).slice(0, 128) : base.editor.projects };
+  // V188 additive field: an older save simply has no debrief read yet.
+  migrated.storyCampaignV188 = normalizeStoryCampaignV188(source.storyCampaignV188);
+  migrated.reactiveLinesV188 = normalizeReactiveLinesV188(source.reactiveLinesV188);
+  migrated.colonyV188 = normalizeColonyV188(source.colonyV188);
   migrated.memorial = Array.isArray(source.memorial) ? source.memorial.filter(isRecord).slice(0, 512) : base.memorial;
   const settings = isRecord(source.settings) ? source.settings : {};
   migrated.settings = { ...base.settings, ...settings };
   for (const key of ['subtitles', 'reducedMotion', 'coop']) migrated.settings[key] = typeof settings[key] === 'boolean' ? settings[key] : base.settings[key];
   migrated.settings.screenShake = numberBetween(settings.screenShake, base.settings.screenShake, 0, 1);
+  // V188 additive run options: older saves keep permadeath and standard values.
+  migrated.settings.crewPermadeathV188 = settings.crewPermadeathV188 !== false;
+  migrated.settings.colorblindV188 = normalizeColorblindV188(settings.colorblindV188);
+  migrated.settings.textScaleV188 = normalizeTextScaleV188(settings.textScaleV188);
+  migrated.settings.keyBindingsV188 = normalizeKeyBindingsV188(settings.keyBindingsV188);
+  migrated.settings.customDifficultyV188 = { ...normalizeCustomDifficultyV188(settings.customDifficultyV188) };
+  migrated.player.originV188 = normalizeOriginV188(player.originV188);
   const aimAssist = settings.aimAssist;
   migrated.settings.aimAssist = ['off', 'standard', 'high'].includes(aimAssist)
     ? aimAssist

@@ -297,6 +297,12 @@ export const MISSION_LEVEL_ZONE_LAYER_FILES_V58 = Object.freeze({
   })
 });
 
+/** V188: templates where an M577 ground vehicle can physically be deployed. */
+export const APC_MISSION_TEMPLATE_IDS_V188 = Object.freeze(['colony-multiroute', 'planet-exterior']);
+export function missionTemplateCarriesApcV188(templateId) {
+  return !templateId || APC_MISSION_TEMPLATE_IDS_V188.includes(templateId);
+}
+
 export function resolveMissionLevelLayerFilesV56(templateId, zoneId) {
   const fallback = MISSION_LEVEL_LAYER_FILES_V52[templateId] || null;
   if (!fallback) return null;
@@ -563,6 +569,15 @@ export function withV52LevelRuntime(BaseEngine) {
         destroyed: false,
         zoneId: node.zoneId
       }));
+      // V188: no ground APC exists inside a ship. The first lower node past x 3000
+      // of the ship template is the command deck: an M577 there offered
+      // "V PILOTER" on the bridge. Ship templates keep the vehicle stowed; a
+      // mode that issues its own machine (cargo P-5000) re-enables it itself.
+      if (this.vehicle?.active && !missionTemplateCarriesApcV188(plan.templateId)) {
+        this.vehicle.active = false; this.vehicle.occupied = false; this.vehicle.driver = null; this.vehicle.passengers = [];
+        this.vehicle.deploymentStatus = 'not-in-template';
+        for (const actor of [this.player, this.coop]) if (actor) actor.inVehicle = false;
+      }
       if (this.vehicle?.active) {
         const vehicleNode = nodes.find((node) => node.x > 3000 && node.y >= 380) || nodes.at(-3);
         if (vehicleNode) {
@@ -613,12 +628,14 @@ export function withV52LevelRuntime(BaseEngine) {
       }
       let cursor = 0;
       for (const spawn of this.missionLevelSpawns.values()) {
-        const nodes = nodesByZone.get(spawn.zoneId) || [];
+        // Never on the player's insertion node: an awake patrol there attacks during the landing.
+        const nodes = nodesByZone.get(spawn.zoneId) || [], awayFromInsertion = nodes.filter((node) => node.anchor !== 'spawn');
         const zone = zones.get(spawn.zoneId);
         const count = Math.min(spawn.count || spawn.baseCount || 1, activeEnemies.length - cursor);
         for (let index = 0; index < count; index += 1) {
           const enemy = activeEnemies[cursor++];
-          const node = nodes[index % Math.max(1, nodes.length)] || { x: (zone?.x || 600) + 120 + index * 90, y: fallbackGroundY };
+          let node = nodes[index % Math.max(1, nodes.length)] || { x: (zone?.x || 600) + 120 + index * 90, y: fallbackGroundY };
+          if (node.anchor === 'spawn' && awayFromInsertion.length) node = awayFromInsertion[index % awayFromInsertion.length];
           enemy.x = clamp(node.x + (index % 3 - 1) * 76, 0, this.missionLevelBounds.width - enemy.w);
           enemy.y = node.y - enemy.h;
           enemy.groundY = node.y;
@@ -1560,6 +1577,11 @@ export function withV52LevelRuntime(BaseEngine) {
       this.missionLevelVisualState.eventFlash = 1;
       const consequences = [];
       for (const action of asList(event.actions)) consequences.push(this.applyMissionLevelAction(action, event));
+      // A spawn declared with this event as its trigger wakes with it, even when the
+      // event's action list does not repeat it (ship decompression, colony generator).
+      for (const spawn of this.missionLevelSpawns?.values?.() || []) {
+        if (spawn.triggerEventId === eventId && !spawn.active) consequences.push(this.applyMissionLevelAction(`spawn:${spawn.id}`, event));
+      }
       this.onEvent({ type: 'mission-level-event', eventId, source, actions: [...event.actions], consequences });
       return true;
     }

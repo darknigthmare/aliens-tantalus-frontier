@@ -1,3 +1,16 @@
+import { colonySnapshotV188, investColonySiteV188, applyColonyOperationResultV188, COLONY_TIERS_V188 } from './colony-reconstruction-v188.js';
+import { storyDossierV188 } from './story-dossier-v188.js';
+import { withHubEcho8LockerV188, echo8LockerNotesV188 } from './hub-echo8-locker-v188.js';
+import { withHubPrologueRoomsV188 } from './hub-prologue-rooms-v188.js';
+import { detectReactiveTriggersV188, selectReactiveLinesV188 } from './reactive-lines-v188.js';
+import { applyAccessibilityV188, installKeyRemapV188, mountKeyBindingsUiV188, normalizeKeyBindingsV188, soundCaptionV188 } from './accessibility-v188.js';
+import { spareCrewMemberV188, normalizeCrewPermadeathV188, normalizeCustomDifficultyV188, normalizeOriginV188, CUSTOM_DIFFICULTY_BOUNDS_V188 } from './run-options-v188.js';
+import { cueForGameEventV188, casteCueV188 } from './audio-cues-v188.js';
+import { deriveStoryCampaignV188, markStoryDebriefSeenV188, markStoryCinematicSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, storyEndingReachedV188, resolveM577ManifestV188, normalizeStoryCampaignV188, startInterludeV188, interludeCrisisClearedV188, resolveInterludeV188, rescueJunParkV188, interludeChoicePendingV188, interludeDueV188, markStoryBeatSeenV188, reconcileInterludeCrisisV188 } from './story-campaign-v188.js';
+import { InGameStagingV188, STAGED_BEATS_V188 } from './ingame-staging-v188.js';
+import { openStoryChoiceDialogV188 } from './story-choice-ui-v188.js';
+import { CinematicPlayerV188, CINEMATICS_V188 } from './story-cinematics-v188.js';
+import { openM577ManifestDialogV188 } from './m577-manifest-ui-v188.js';
 import {
   RELEASE, CONTENT_COUNTS, WORLDS, CAMPAIGNS, WEAPONS, EQUIPMENT, ENEMIES, VEHICLES,
   CREW, COSTUMES, LEVEL_SEEDS, SHIP_MODULES, APEX_DOSSIERS, NEURO_XENO_PROFILES,
@@ -5,7 +18,7 @@ import {
 } from './content.js';
 import {
   SaveSystem, COMMAND_ACTIONS, RESEARCH_PROJECTS, MAX_SQUAD_SIZE, canAfford,
-  executeStrategicAction, completeResearchProject, getProcurementQuote, procureCatalogItem,
+  executeStrategicAction, completeResearchProject, getProcurementQuote, procureCatalogItem, strategicCostRefusalV188,
   equipCatalogItem, selectStrategicVehicle, assignCrewMember, treatCrewMember, applyCostume,
   getOperationBrief, beginOperation, resolveOperationDeployment, recordOperationFlag, recordOperationResumeState, resolveOperation,
   getAlphaBravoStrategicRecoveryV69, abandonBlockedAlphaBravoOperationV69,
@@ -45,6 +58,10 @@ import {
   applyProvingGroundQualificationV81
 } from './hub-annex-services-v71.js';
 import { advanceGalaxy, resolveHubCrisisEvent } from './world-crisis.js';
+import { withHubDepthRoomsV188 } from './hub-depth-runtime-v188.js';
+import { TitleVfxV188 } from './title-vfx-v188.js';
+import { playIntroV188 } from './intro-sequence-v188.js';
+import { createHubCrisis as createForcedHubCrisisV188 } from './world-crisis-core.js';
 import { applyCampaignConsequence } from './campaign-consequences.js';
 import { hasCampaignStoryV160, preserveCampaignStoryReturnV160, recordCampaignStoryReviewV160 } from './campaign-story-v160.js';
 import { mountCampaignDebriefV160 } from './campaign-story-ui-v160.js';
@@ -125,6 +142,7 @@ import { beginNpcConversationV62, applyNpcDialogueChoiceV62 } from './npc-dialog
 import { HubDialogueUiV76 } from './hub-dialogue-ui-v76.js';
 import { createMissionInsertionV62, restoreMissionInsertionV62 } from './mission-insertion-v62.js';
 import { MissionInsertionUiV62 } from './mission-insertion-ui-v62.js';
+import { campaignObjectiveLabelV188 } from './mission-objective-panel-v188.js';
 import {
   SPECIAL_OPERATIONS_V131 as SPECIAL_OPERATIONS_V67, SPECIAL_OPERATION_COUNTS_V131 as SPECIAL_OPERATION_COUNTS_V67,
   getSpecialOperationByCampaignIdV131 as getSpecialOperationByCampaignIdV67, NEW_SPECIAL_CAMPAIGNS_V131, isSoloSpecialOperationV131
@@ -158,6 +176,7 @@ import { createUserReferenceEffectsGalleryV95 } from './user-reference-effects-v
 import { createUserReferenceLibraryV100 } from './user-reference-library-v100.js';
 import { createUserSpecimenBenchV106 } from './user-specimen-bench-v106.js';
 import { installAutoTranslationV185 } from './i18n-auto-v185.js';
+import { GALAXY_PHONE_QUERY_V188, snapWorldsToPhoneGridV188, worldShortCodeV188 } from './galaxy-map-mobile-v188.js';
 import { tV185, tFromFrenchV185, tKeepFrenchV185, translateHubPromptV185, initLanguageV185, setLanguageV185, currentLanguageV185, STRINGS_V185, LANGUAGE_EVENT_V185 } from './i18n-v185.js';
 
 const byId = (id) => document.getElementById(id);
@@ -214,6 +233,7 @@ const forgeCheckpointStoreV157 = new ForgePlaytestCheckpointStoreV157(persistent
 const audio = new AudioDirector();
 let editor = null;
 let activeView = 'command';
+let worldSheetOpenV188 = false; // V188 phone bottom sheet of the galaxy map
 const hubControlBindingsV133 = [];
 let standaloneContext = null;
 // A rejected terminal balance never becomes a false victory or a paid retreat.
@@ -287,7 +307,7 @@ const NativeHubGame = [
   withHubCirculationV137, withHubRoomIdentityV137,
   withHubDestinationSignsV138, withHubNpcInterdeckRoutesV165, withHubNpcInterdeckPassageV165, withHubNpcStationRelaysV166, withHubLiftTransitV163
 ].reduce((Game, decorate) => decorate(Game), HubGameV88);
-const HubGame = withHubArmoryStorefrontV169(withHubMotionTrackerV160(withForgeDecorationV141(withForgeShipRuntimeV141(NativeHubGame))));
+const HubGame = withHubArmoryStorefrontV169(withHubDepthRoomsV188(withHubMotionTrackerV160(withForgeDecorationV141(withForgeShipRuntimeV141(withHubPrologueRoomsV188(withHubEcho8LockerV188(NativeHubGame)))))));
 const hubEngine = new HubGame(byId('hub-canvas'), {
   audio,
   onAction: handleHubAction,
@@ -366,8 +386,15 @@ function toast(message) {
   setTimeout(() => item.remove(), 3600);
 }
 
+// V188: in English the labels are written directly; a joined "4 CARBURANT · 6 RAVIT." line
+// cannot be matched by the automatic catalog.
+const COST_LABELS_EN_V188 = Object.freeze({
+  credits: 'CR', alloy: 'ALLOY', fuel: 'FUEL', medical: 'MEDICAL', research: 'R&D',
+  pathogen: 'PATHOGEN', power: 'POWER', supplies: 'SUPPLY'
+});
 function formatCost(cost = {}) {
-  return Object.entries(cost).map(([key, value]) => `${number(value)} ${COST_LABELS[key] || key.toUpperCase()}`).join(' · ') || 'AUCUN COÛT';
+  const labels = globalThis.document?.documentElement?.lang === 'en' ? COST_LABELS_EN_V188 : COST_LABELS;
+  return Object.entries(cost).map(([key, value]) => `${number(value)} ${labels[key] || key.toUpperCase()}`).join(' · ') || 'AUCUN COÛT';
 }
 
 function meter(label, value, invert = false) {
@@ -447,7 +474,7 @@ function runTimedMutation(mutation, successMessage, { duringTransitV116 = false 
     saveSystem.commit();
   } catch (error) {
     saveSystem.data = previous;
-    try { toast(error.message); renderAll(); } catch { /* L'action reste refusée même si l'interface échoue. */ }
+    try { toast(strategicCostRefusalV188(error, document.documentElement.lang)); renderAll(); } catch { /* L'action reste refusée même si l'interface échoue. */ }
     return null;
   }
   // Le stockage est confirmé : une erreur visuelle ne doit jamais rejouer la transaction.
@@ -460,6 +487,7 @@ function runTimedMutation(mutation, successMessage, { duringTransitV116 = false 
   return result;
 }
 
+let keyBindingsUiV188 = null;
 function applyRuntimeSettings() {
   const settings = saveSystem.data.settings;
   document.documentElement.classList.toggle('reduced-motion', Boolean(settings.reducedMotion));
@@ -469,6 +497,7 @@ function applyRuntimeSettings() {
   hubEngine.setReducedMotion(Boolean(settings.reducedMotion));
   engine.setCoop(Boolean(settings.coop));
   audio.setVolumes({ effects: settings.effects ?? 0.7, music: settings.music ?? 0.45 });
+  applyAccessibilityV188(settings);
 }
 
 const BIOFORGE_EVENT_MESSAGES_V80 = Object.freeze({
@@ -781,10 +810,15 @@ function setupXenoTrialsUiV96() {
   });
 }
 
+// Once the story ending is reached, the briefing table plays the ending theme (also after a cinematic).
+function viewAudioSceneV188(name) {
+  return ['operations', 'command'].includes(name) && storyEndingReachedV188(saveSystem.data) ? 'ending' : resolveViewAudioSceneV77(name);
+}
 function showView(name) {
   name = resolvePlayerViewV110(name, developerModeV110);
   if (!VIEW_META[name]) return;
   hubControlBindingsV133.forEach(binding => binding.clear());
+  if (name !== 'galaxy') closeWorldSheetV188({ restoreFocus: false });
   if (name !== 'settings') titleSceneV79.clearPlacementPreservationV87();
   if (name !== 'settings') titleScreen.clearMenuReturnV89();
   refugeControllerV87.close();
@@ -810,7 +844,14 @@ function showView(name) {
   }
   if (activeView === 'xenotrials' && name !== 'xenotrials' && typeof xenoTrialsUiV96 !== 'undefined') xenoTrialsUiV96?.close();
   activeView = name;
-  audio.setScene(resolveViewAudioSceneV77(name));
+  // V188: the QZ-18 debrief counts as read only when the player opens the briefing table.
+  if (['operations', 'command'].includes(name)) queueMicrotask(markStoryDebriefOnViewV188);
+  // P-1 (bible §56.11): out of hypersleep, staged over the live cryo bay before control is given.
+  if (name === 'hub') queueMicrotask(() => { if (activeView === 'hub' && saveSystem.data.onboardingV84?.phase === 'wake') void playStagedBeatV188('beat-wake'); });
+  // A pending interlude decision (reload during the choice) is asked again aboard.
+  if (name === 'hub') queueMicrotask(() => { if (activeView === 'hub' && normalizeStoryCampaignV188(saveSystem.data.storyCampaignV188).interlude?.phase === 'choice'
+    && !document.querySelector('.story-choice-v188')) chooseInterludeOutcomeV188(); });
+  audio.setScene(viewAudioSceneV188(name));
   all('.view').forEach((view) => view.classList.toggle('active', view.dataset.panel === name));
   all('.nav-button').forEach((button) => button.classList.toggle('active', button.dataset.view === name));
   document.documentElement.classList.toggle('hub-mode', name === 'hub');
@@ -819,12 +860,19 @@ function showView(name) {
   byId('breadcrumb').textContent = VIEW_META[name][0];
   byId('view-title').textContent = tV185(`view.${name}`, VIEW_META[name][1]);
   document.querySelector('.rail').classList.remove('open');
+  // V188: the hidden aria-live #hub-prompt must not keep announcing a hub (lift) prompt once the level is gone.
+  if (name !== 'hub' && byId('hub-prompt')) { byId('hub-prompt').textContent = ''; lastHubStatus = lastHubStatus ? { ...lastHubStatus, prompt: '' } : lastHubStatus; }
   if (name === 'hub') {
     hubEngine.setReducedMotion(saveSystem.data.settings.reducedMotion);
     hubOwnerV84 = currentOwnerV84();
     hubEngine.playerCostumeIdV119 = saveSystem.data.player.costumeId;
     hubEngine.playerAppearanceV126 = normalizePlayerAppearanceV126(saveSystem.data.player.appearanceV126);
     if (!(standaloneContext === 'forge-playtest' && forgePlaytest?.kind === 'ship' && hubEngine.forgeSessionV141)) {
+      // Interlude alert: the saved crisis must be the deck-2 quarantine one before the hub spawns it.
+      if (!standaloneContext && ownsTimelineV84(hubOwnerV84)) {
+        try { const candidate = clone(saveSystem.data); if (reconcileInterludeCrisisV188(candidate, createForcedHubCrisisV188)) saveSystem.commit(candidate); }
+        catch (error) { console.warn('[interlude] reconcile', error); }
+      }
       hubEngine.start(saveSystem.data.hub, { routineContextV62: getHubRoutineContextV62(), onboardingV84: saveSystem.data.onboardingV84, openingV88: saveSystem.data.openingV88, openingExerciseV89: saveSystem.data.openingExerciseV89, portMeridienV90: saveSystem.data.portMeridienV90,
         trainingOperatorIdV132: getHubTrainingOperatorIdV132(saveSystem.data) });
     }
@@ -893,6 +941,9 @@ const titleScreen = new TitleScreenController({
     showView('settings');
   }
 });
+// Title VFX (V188): runs only while the title screen is shown.
+const titleVfxV188 = new TitleVfxV188({ screen: byId('title-screen'), scene: byId('title-scene-v79'), canvas: byId('title-vfx-v188'),
+  getQuality: () => saveSystem.data?.settings?.quality || 'high' });
 
 function currentOwnerV84() { return { profile: saveSystem.profile, epoch: profileEpochV78, timeline: saveSystem.data.createdAt }; }
 function ownsTimelineV84(owner) { return owner && owner.profile === saveSystem.profile && owner.epoch === profileEpochV78 && owner.timeline === saveSystem.data.createdAt; }
@@ -914,11 +965,16 @@ function captureHubPoseV84() {
     visited: [...new Set(hubEngine.state.visited)] };
 }
 const playerCreatorUiV84 = new PlayerCreatorUiV84({
-  onSubmit: (identity) => {
+  onSubmit: (identity, choices = {}) => {
     const owner = creatorOwnerV84;
     if (!ownsTimelineV84(owner)) throw new Error('Le profil a changé. Annulez puis rouvrez le dossier.');
     if (saveSystem.storage.getItem(saveSystem.key(owner.target)) !== owner.original) throw new Error('Ce profil a changé dans un autre onglet. Annulez pour le recharger sans l’écraser.');
     saveSystem.newPlayerTimelineV84(identity, owner.target);
+    // V188 new-game choices (§55.5, §55.6): origin and optional crew permadeath.
+    const candidate = clone(saveSystem.data);
+    candidate.player.originV188 = normalizeOriginV188(choices.originV188);
+    candidate.settings.crewPermadeathV188 = choices.crewPermadeathV188 !== false;
+    saveSystem.commit(candidate);
   },
   onComplete: () => {
     creatorOwnerV84 = null;
@@ -930,6 +986,122 @@ const playerCreatorUiV84 = new PlayerCreatorUiV84({
   },
   onCancel: () => { creatorOwnerV84 = null; titleScreen.show(); titleScreen.openMenu(); }
 });
+// Interlude (bible §5.4): CIN-40, then a forced xenomorph crisis in the deck-2 quarantine room.
+function startInterludeFlowV188() {
+  try {
+    const candidate = clone(saveSystem.data), crisis = startInterludeV188(candidate, createForcedHubCrisisV188);
+    if (!crisis) return;
+    saveSystem.commit(candidate);
+    if (crisis.replacedCrisisIdV188) {
+      const en = document.documentElement.lang === 'en';
+      strategyLog('QUARANTAINE', en ? 'Ordinary incident called off without penalty: the deck 2 quarantine takes priority.' : 'Incident ordinaire suspendu sans pénalité : la quarantaine du pont 2 est prioritaire.', 'crisis', 100, false);
+    }
+    renderAll();
+    void playStoryCinematicV188('cin-40').then(() => toast(deriveStoryCampaignV188(saveSystem.data).objective || ''));
+  } catch (error) { toast(error.message); }
+}
+// Both conditions met (creature neutralised, Jun Park rescued): the choice; otherwise the remaining objective.
+function continueInterludeV188() {
+  if (interludeChoicePendingV188(saveSystem.data)) chooseInterludeOutcomeV188();
+  else toast(deriveStoryCampaignV188(saveSystem.data).objective || '');
+}
+function chooseInterludeOutcomeV188() {
+  const en = document.documentElement.lang === 'en';
+  openStoryChoiceDialogV188({ title: en ? 'Quarantine' : 'Quarantaine',
+    intro: en ? 'The creature is contained. Inez and BISHOP-9 ask to study it.' : 'La créature est maîtrisée. Inez et BISHOP-9 demandent à l’étudier.',
+    options: [{ id: 'destroyed', label: en ? 'DESTROY IT' : 'LA DÉTRUIRE' }, { id: 'captured', label: en ? 'CAPTURE IT' : 'LA CAPTURER' }],
+    onChoose: (outcome) => {
+      try { const candidate = clone(saveSystem.data); if (resolveInterludeV188(candidate, outcome)) { saveSystem.commit(candidate); renderAll(); void playStoryCinematicV188('cin-41'); } }
+      catch (error) { toast(error.message); }
+    } });
+}
+let interludeResumePendingV188 = false;
+function markStoryDebriefOnViewV188() {
+  if (!['operations', 'command'].includes(activeView) || saveSystem.data.strategy.currentOperation) return;
+  const doneV188 = saveSystem.data.galaxy.completedCampaignIds, seenV188 = saveSystem.data.storyCampaignV188?.debriefSeen || [];
+  // Act III (bible §5.3): CIN-31 and the manifest consequence, once C-12 is completed.
+  const manifestV188 = normalizeStoryCampaignV188(saveSystem.data.storyCampaignV188).m577Manifest;
+  if (doneV188.includes('special-c12-horde') && manifestV188 && !manifestV188.resolved) {
+    try {
+      const candidate = clone(saveSystem.data), c12 = CAMPAIGNS.find(entry => entry.id === 'special-c12-horde');
+      if (resolveM577ManifestV188(candidate, c12?.worldId)) {
+        saveSystem.commit(candidate); interludeResumePendingV188 = true;
+        void playStoryCinematicV188('cin-31', { context: { m577: manifestV188 } }).then(startInterludeFlowV188)
+          .finally(() => { interludeResumePendingV188 = false; });
+      }
+    } catch (error) { toast(error.message); }
+    return;
+  }
+  // The manifest is resolved but the interlude never started (tab closed during CIN-31): resume both.
+  if (interludeDueV188(saveSystem.data)) {
+    if (!interludeResumePendingV188) {
+      interludeResumePendingV188 = true;
+      void playStoryCinematicV188('cin-31', { context: { m577: manifestV188 } })
+        .then(startInterludeFlowV188).finally(() => { interludeResumePendingV188 = false; });
+    }
+    return;
+  }
+  // Act IV (bible §5.5): CIN-51 biological check, once, after the black cocoon.
+  if (doneV188.includes('special-black-cocoon') && !seenV188.includes('special-black-cocoon')) {
+    try { const candidate = clone(saveSystem.data); if (markStoryDebriefSeenV188(candidate, 'special-black-cocoon')) { saveSystem.commit(candidate); void playStoryCinematicV188('cin-51'); } }
+    catch (error) { toast(error.message); }
+    return;
+  }
+  // Act I return with Inez (bible §5.1), once, after QZ-17 is completed.
+  const qz17V188 = 'special-narrative-qz17';
+  if (saveSystem.data.galaxy.completedCampaignIds.includes(qz17V188)
+    && !(saveSystem.data.storyCampaignV188?.debriefSeen || []).includes(qz17V188)) {
+    try { const candidate = clone(saveSystem.data); if (markStoryDebriefSeenV188(candidate, qz17V188)) { saveSystem.commit(candidate); void playStoryCinematicV188('cin-qz17-retour'); } }
+    catch (error) { toast(error.message); }
+    return;
+  }
+  if (deriveStoryCampaignV188(saveSystem.data).step !== 'debrief') return;
+  try {
+    const candidate = clone(saveSystem.data);
+    if (markStoryDebriefSeenV188(candidate, STORY_RELAY_CAMPAIGN_ID_V188)) {
+      // The finished QZ-18 plan no longer hides the recommended next chapter (★) on the briefing table.
+      if (candidate.strategy.plannedCampaignId === STORY_RELAY_CAMPAIGN_ID_V188) candidate.strategy.plannedCampaignId = null;
+      saveSystem.commit(candidate); renderHubStatus?.(); renderCampaigns();
+      void playStoryCinematicV188('cin-20').then(() => playStoryCinematicV188('cin-20-rook'));
+    }
+  } catch (error) { toast(error.message); }
+}
+// V188 prologue cinematics (bible §4, §10): skippable, replayable, never rewarded.
+const cinematicPlayerV188 = new CinematicPlayerV188();
+// In-game staging (V188): bars, grade and subtitles over the live level; the world keeps running, input is held.
+const inGameStagingV188 = new InGameStagingV188();
+function playStagedBeatV188(id) {
+  const seen = normalizeStoryCampaignV188(saveSystem.data.storyCampaignV188).beatsSeen;
+  const host = document.querySelector('[data-panel="hub"] .hub-level-shell');
+  if (!STAGED_BEATS_V188[id] || seen.includes(id) || activeView !== 'hub' || !host || inGameStagingV188.playing) return Promise.resolve('already-seen');
+  return inGameStagingV188.play(id, { host, language: document.documentElement.lang,
+    reducedMotion: Boolean(saveSystem.data.settings?.reducedMotion || globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches),
+    onHold: () => { hubEngine.keys?.clear?.(); if (hubEngine.player) hubEngine.player.vx = 0; } }).then(result => {
+    try { const candidate = clone(saveSystem.data); if (markStoryBeatSeenV188(candidate, id)) saveSystem.commit(candidate); } catch (error) { toast(error.message); }
+    return result;
+  });
+}
+function playStoryCinematicV188(id, { once = true, record = true, context = {} } = {}) {
+  const seen = saveSystem.data?.storyCampaignV188?.cinematicsSeen || [];
+  if (!CINEMATICS_V188[id] || once && seen.includes(id)) return Promise.resolve('already-seen');
+  const resumeHub = activeView === 'hub' && hubEngine.running;
+  if (resumeHub) hubEngine.pause();
+  // In mission, the cinematic uses the engine's own pause so no damage or timer advances.
+  const resumeMission = activeView === 'play' && engine.running && !engine.paused;
+  if (resumeMission) engine.togglePause();
+  const music = CINEMATICS_V188[id].music;
+  if (music) audio.setMusicMoodV188(music); else audio.stopMusic?.(0.6);
+  return cinematicPlayerV188.play(id, { language: document.documentElement.lang, context,
+    reducedMotion: Boolean(saveSystem.data?.settings?.reducedMotion) }).then(result => {
+    if (record && !creatorOwnerV84) {
+      try { const candidate = clone(saveSystem.data); if (markStoryCinematicSeenV188(candidate, id)) saveSystem.commit(candidate); } catch (error) { toast(error.message); }
+    }
+    if (resumeHub && activeView === 'hub') hubEngine.resume();
+    if (resumeMission && activeView === 'play' && engine.running && engine.paused) engine.togglePause();
+    audio.setScene(viewAudioSceneV188(activeView));
+    return result;
+  });
+}
 function openPlayerCreatorV84(profile) {
   refugeControllerV87.close();
   if (creatorOwnerV84) return false;
@@ -937,7 +1109,8 @@ function openPlayerCreatorV84(profile) {
   hubEngine.stop(false); engine.stop(); bioforgeRuntimeV80.stop({ reason: 'player-creation' });
   if (typeof xenoTrialsUiV96 !== 'undefined') xenoTrialsUiV96?.close();
   titleScreen.hide();
-  playerCreatorUiV84.open(profile);
+  // CIN-00 opens every new game; skipping it goes straight to the creator.
+  playStoryCinematicV188('cin-00', { once: false, record: false }).then(() => { if (creatorOwnerV84) playerCreatorUiV84.open(profile); });
   return false;
 }
 function commitOnboardingEventV84(event, owner = hubOwnerV84) {
@@ -950,6 +1123,8 @@ function commitOnboardingEventV84(event, owner = hubOwnerV84) {
   saveSystem.commit(candidate);
   hubEngine.setOnboardingV84(saveSystem.data.onboardingV84);
   renderHubStatus();
+  // P-1 / CIN-01: DAVID-8R's line about Echo-8, then the sealed locker.
+  if ((typeof event === 'string' ? event : event?.type) === 'wake-confirmed') void playStoryCinematicV188('cin-01');
   return result.state;
 }
 function openOnboardingDialogueV84(interaction) {
@@ -1025,6 +1200,9 @@ function handleOpeningExerciseV89(interaction, owner = hubOwnerV84) {
     saveSystem.commit(candidate);
     hubEngine.setOpeningExerciseV89(saveSystem.data.openingExerciseV89);
     renderHubStatus();
+    // P-2: the restored priority link releases days of Port-Méridien messages; Vega cuts the exercise.
+    if (event === 'interrupt') void playStagedBeatV188('beat-exercise-interrupt');
+    if (event === 'repair') void playStoryCinematicV188('cin-p2');
     if (event !== 'restart') toast(event === 'interrupt' ? 'EXERCICE INTERROMPU · Signal prioritaire. Cibles et chrono suspendus : rejoignez la console.'
       : event === 'repair' ? 'Liaison prioritaire rétablie. Rejoignez le pas de tir pour terminer la qualification.' : 'Qualification reprise : terminez les cibles restantes.');
     return true;
@@ -1077,7 +1255,15 @@ function handleOpeningActionV88(interaction) {
   try {
     if (['opening:signal', 'opening:manifest'].includes(interaction.action)) return openOpeningDialogueV88();
     if (interaction.action === 'opening:ready') {
-      if (saveSystem.data.portMeridienV90?.phase === 'pending') return boardPortMeridienV90();
+      // CIN-02 then CIN-03 (the descent) play once before the first boarding (bible §4, §56.11).
+      if (saveSystem.data.portMeridienV90?.phase === 'pending') {
+        const seenV188 = saveSystem.data.storyCampaignV188?.cinematicsSeen || [];
+        if (!seenV188.includes('cin-02')) {
+          void playStoryCinematicV188('cin-02').then(() => playStoryCinematicV188('cin-03')).then(() => boardPortMeridienV90()); return true;
+        }
+        if (!seenV188.includes('cin-03')) { void playStoryCinematicV188('cin-03').then(() => boardPortMeridienV90()); return true; }
+        return boardPortMeridienV90();
+      }
       return openHubDialogue({ ...interaction, action: 'navigate:operations' });
     }
     commitOpeningEventV88(interaction.phase);
@@ -1107,7 +1293,8 @@ function boardPortMeridienV90() {
     Object.assign(candidate.hub, captureHubPoseV84());
     saveSystem.commit(candidate);
     hubEngine.stop(false); showView('hub');
-    toast('Port-Méridien · le quai est encore habité. Le fret est à la rampe.'); return true;
+    toast('Port-Méridien · le quai est encore habité. Le fret est à la rampe.');
+    void playStagedBeatV188('beat-port-arrival').then(() => playStoryCinematicV188('cin-p3-wren')); return true;
   } catch (error) { toast(`Débarquement non enregistré : ${error.message}`); return false; }
 }
 
@@ -1121,7 +1308,8 @@ function handlePortMeridienV90(interaction, owner = hubOwnerV84) {
   const action = interaction.action.slice(5);
   if (action === 'complete') {
     if (!hubEngine.running || !hubEngine.portContactV90()) return false;
-    showView('operations'); return true;
+    // colony-intro-doyenne (bible §6.2): Asha introduces Adèle Sarrazin, guided visit of the port, once.
+    void playStoryCinematicV188('cin-doyenne').then(() => showView('operations')); return true;
   }
   if (action !== 'checkpoint' && !hubEngine.running) return false;
   const result = action === 'checkpoint' ? { ok: true, state: runtime } : advancePortMeridienV90(current, action, {
@@ -1135,7 +1323,8 @@ function handlePortMeridienV90(interaction, owner = hubOwnerV84) {
     // One transaction owns position, task phase, group progress and the unique receipt. No repeatable reward.
     saveSystem.commit({ portMeridienV90: result.state });
     if (action !== 'checkpoint') hubEngine.setPortMeridienV90(saveSystem.data.portMeridienV90);
-    if (action === 'report') toast('Constat transmis : trois habitants secourus, balise automatique contradictoire.');
+    if (action === 'report') { toast('Constat transmis : trois habitants secourus, balise automatique contradictoire.'); void playStagedBeatV188('beat-port-report'); }
+    if (action === 'triage') void playStoryCinematicV188('cin-p3-ferro');
     return true;
   } catch (error) {
     toast(`Quai non enregistré : ${error.message} · E pour réessayer.`);
@@ -1186,7 +1375,8 @@ function renderClock() {
   const { day, hour } = saveSystem.data.clock;
   const hours = Math.floor(hour);
   const minutes = Math.floor((hour % 1) * 60);
-  byId('clock').textContent = `J${String(day).padStart(2, '0')} ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+  // Day prefix follows the language (title screen: "J01" / "D01").
+  byId('clock').textContent = `${currentLanguageV185() === 'en' ? 'D' : 'J'}${String(day).padStart(2, '0')} ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
   byId('save-state').textContent = `Profil ${saveSystem.profile} · ${RELEASE.version} · ${number(saveSystem.data.statistics.campaigns)} opérations · ${cloudUiV119?.sync ? (cloudUiV119.sync.state(saveSystem.profile) === 'local' ? 'LOCAL' : cloudUiV119.sync.state(saveSystem.profile) === 'synced' ? 'SYNC OK' : cloudUiV119.sync.state(saveSystem.profile) === 'offline' ? 'HORS LIGNE' : cloudUiV119.sync.state(saveSystem.profile) === 'conflict' ? 'CONFLIT' : 'CLOUD À VÉRIFIER') : 'LOCAL'}`;
 }
 
@@ -1208,22 +1398,83 @@ function renderCommand() {
   renderCommandMissionsV110();
 }
 
+const COLONY_REASONS_V188 = {
+  fr: { locked: 'Ouvre après l’Acte II.', 'operation-active': 'Pas pendant une mission.', 'awaiting-validation': 'Attend une opération réussie sur Cocyte.',
+    'population-limit': 'Trop de chantiers actifs pour la population ramenée.', resources: 'Ressources insuffisantes.', complete: 'Terminé.' },
+  en: { locked: 'Opens after Act II.', 'operation-active': 'Not during a mission.', 'awaiting-validation': 'Awaits a successful operation on Cocyte.',
+    'population-limit': 'Too many active sites for the people brought back.', resources: 'Not enough resources.', complete: 'Complete.' }
+};
+// V188 (bible §6.3): Port-Méridien reconstruction table at the briefing table.
+function renderColonyReconstructionV188() {
+  const host = byId('colony-reconstruction-v188'); if (!host) return;
+  const en = document.documentElement.lang === 'en', lang = en ? 'en' : 'fr', snapshot = colonySnapshotV188(saveSystem.data, lang);
+  const title = document.createElement('h4');
+  title.textContent = `${en ? 'PORT-MÉRIDIEN RECONSTRUCTION' : 'RECONSTRUCTION DE PORT-MÉRIDIEN'} · ${COLONY_TIERS_V188.find(tier => tier.id === snapshot.tier).label[lang].toUpperCase()}`;
+  if (!snapshot.open) { const hint = document.createElement('p'); hint.className = 'hint'; hint.textContent = COLONY_REASONS_V188[lang].locked; host.replaceChildren(title, hint); return; }
+  const info = document.createElement('p'); info.className = 'hint';
+  info.textContent = en ? `Active sites ${snapshot.active}/${snapshot.activeLimit} · people brought back: ${snapshot.rescued}` : `Chantiers actifs ${snapshot.active}/${snapshot.activeLimit} · personnes ramenées : ${snapshot.rescued}`;
+  const list = document.createElement('ul');
+  for (const entry of snapshot.sites) {
+    const item = document.createElement('li'), label = document.createElement('span');
+    label.textContent = `${entry.criterion} · ${'■'.repeat(entry.validated)}${'▣'.repeat(entry.invested - entry.validated)}${'□'.repeat(3 - entry.invested)} ${entry.current || ''}`;
+    item.append(label);
+    if (entry.next || entry.pending) {
+      // Player-facing resource names, never the save keys (credits, alloy…).
+      const cost = entry.next ? formatCost(entry.next.cost) : '';
+      // A pending site names the level already paid for, not the following one.
+      const button = Object.assign(document.createElement('button'), { type: 'button', className: 'button compact',
+        textContent: entry.pending ? `${en ? 'AWAITING' : 'EN ATTENTE'} · ${entry.pendingLabel}`
+          : `${en ? 'BUILD' : 'LANCER'} · ${entry.next.label} (${cost} · ${entry.next.hours} h)` });
+      button.disabled = entry.pending;
+      button.onclick = () => {
+        try {
+          const candidate = clone(saveSystem.data), result = investColonySiteV188(candidate, entry.id);
+          if (!result.ok) { toast(COLONY_REASONS_V188[lang][result.reason] || result.reason); return; }
+          saveSystem.commit(candidate); renderAll(); toast(en ? 'Site work started; an operation on Cocyte will validate it.' : 'Chantier lancé ; une opération réussie sur Cocyte le validera.');
+        } catch (error) { toast(error.message); }
+      };
+      item.append(button);
+    }
+    list.append(item);
+  }
+  host.replaceChildren(title, info, list);
+}
 function renderCommandMissionsV110() {
   const destination = byId('command-world-v110'), select = byId('command-mission-v110');
   const active = saveSystem.data.strategy.currentOperation;
   const eligible = getCommandMissionsV110(saveSystem.data, CAMPAIGNS);
-  const selected = CAMPAIGNS.find(c => c.id === (active?.campaignId || saveSystem.data.strategy.plannedCampaignId));
+  const selected = CAMPAIGNS.find(c => c.id === (active?.campaignId || saveSystem.data.strategy.plannedCampaignId
+    || deriveStoryCampaignV188(saveSystem.data).recommendedCampaignId));
   const worldIds = new Set(eligible.map(c => c.worldId));
   const preferredWorld = active?.worldId || destination.value;
   const worldId = worldIds.has(preferredWorld) ? preferredWorld : '';
   destination.innerHTML = '<option value="">Toutes les routes ouvertes</option>' + WORLDS.filter(w => worldIds.has(w.id))
     .map(w => `<option value="${escapeHtml(w.id)}">${escapeHtml(w.name)}</option>`).join('');
   destination.value = worldId; destination.disabled = Boolean(active);
-  const missions = getCommandMissionsV110(saveSystem.data, CAMPAIGNS, worldId);
-  select.innerHTML = missions.map(c => `<option value="${escapeHtml(c.id)}">${escapeHtml(c.name)}</option>`).join('');
+  // V188 (bible §53.1): the story recommendation comes first and is preselected.
+  const recommendedV188 = deriveStoryCampaignV188(saveSystem.data).recommendedCampaignId;
+  const missions = getCommandMissionsV110(saveSystem.data, CAMPAIGNS, worldId)
+    .sort((a, b) => (b.id === recommendedV188) - (a.id === recommendedV188));
+  select.innerHTML = missions.map(c => `<option value="${escapeHtml(c.id)}">${c.id === recommendedV188 ? '★ ' : ''}${escapeHtml(c.name)}</option>`).join('');
   // Selecting a destination is a filter, never an implicit campaign/save mutation.
   select.value = missions.some(c => c.id === selected?.id) ? selected.id : '';
   select.disabled = Boolean(active) || !missions.length;
+  // V188 (bible §5.7): the QZ17 dossier, read from recorded state only.
+  const dossierHostV188 = byId('story-dossier-v188');
+  if (dossierHostV188) {
+    const en = document.documentElement.lang === 'en', dossier = storyDossierV188(saveSystem.data, en ? 'en' : 'fr');
+    const title = document.createElement('h4'); title.textContent = `${en ? 'QZ17 FILE' : 'DOSSIER QZ17'} · ${dossier.count}/${dossier.total}`;
+    const list = document.createElement('ul');
+    for (const piece of dossier.pieces) {
+      const item = document.createElement('li'); item.dataset.held = String(piece.held);
+      item.textContent = `${piece.held ? '■' : '□'} ${piece.label}${piece.unavailable ? (en ? ' (not playable yet)' : ' (pas encore jouable)') : ''}`;
+      list.append(item);
+    }
+    const signer = document.createElement('p'); signer.className = 'hint';
+    signer.textContent = dossier.signerEstablished ? (en ? 'Badge signer: established.' : 'Signataire du badge : établi.') : (en ? 'Badge signer: not established (6 pieces needed).' : 'Signataire du badge : non établi (6 pièces nécessaires).');
+    dossierHostV188.replaceChildren(title, list, signer);
+  }
+  renderColonyReconstructionV188();
   byId('command-mission-status-v110').textContent = active ? 'MISSION ACTIVE · manifeste verrouillé'
     : `${missions.length} ordres reçus. Sélectionnez une affectation pour consulter son manifeste.`;
 }
@@ -1284,20 +1535,57 @@ function renderWorldDetail(world) {
   const diplomacyStatus = remainingHours > 0
     ? `<p class="detail-copy">Relève diplomatique : ${Math.ceil(remainingHours)} h restantes.</p>`
     : '';
-  byId('world-detail').innerHTML = `<p class="eyebrow">${escapeHtml(world.sector)} · DANGER ${world.danger}</p><h3>${escapeHtml(world.name)}</h3><p>${escapeHtml(world.description)}</p><div class="mini-tags">${world.biomes.map((biome) => `<span>${escapeHtml(biome)}</span>`).join('')}</div><div class="data-list"><span>INFESTATION</span><b>${Math.round(state.infestation)}%</b><span>STABILITÉ</span><b>${Math.round(state.stability)}%</b><span>QUARANTAINE</span><b>${Math.round(state.quarantine)}%</b><span>POPULATION</span><b>${number(state.population)}</b></div>${diplomacyStatus}<div class="button-row"><button class="button compact" data-diplomacy="aid" data-world-id="${world.id}" ${diplomacyDisabled}${diplomacyTitle}>AIDE</button><button class="button compact" data-diplomacy="quarantine" data-world-id="${world.id}" ${diplomacyDisabled}${diplomacyTitle}>QUARANTAINE</button><button class="button compact" data-diplomacy="trade" data-world-id="${world.id}" ${diplomacyDisabled}${diplomacyTitle}>COMMERCE</button></div><button class="button primary wide" data-world-operations="${world.id}" ${unlocked ? '' : 'disabled'}>${unlocked ? 'PLANIFIER SUR CE MONDE' : 'ROUTE VERROUILLÉE'}</button>`;
+  // V188: the close control only shows when the detail is a phone bottom sheet.
+  byId('world-detail').innerHTML = `<button type="button" class="button compact world-sheet-close-v188" data-world-sheet-close-v188 aria-label="Fermer le détail du monde">FERMER</button><p class="eyebrow">${escapeHtml(world.sector)} · DANGER ${world.danger}</p><h3 id="world-detail-title-v188" tabindex="-1">${escapeHtml(world.name)}</h3><p>${escapeHtml(world.description)}</p><div class="mini-tags">${world.biomes.map((biome) => `<span>${escapeHtml(biome)}</span>`).join('')}</div><div class="data-list"><span>INFESTATION</span><b>${Math.round(state.infestation)}%</b><span>STABILITÉ</span><b>${Math.round(state.stability)}%</b><span>QUARANTAINE</span><b>${Math.round(state.quarantine)}%</b><span>POPULATION</span><b>${number(state.population)}</b></div>${diplomacyStatus}<div class="button-row"><button class="button compact" data-diplomacy="aid" data-world-id="${world.id}" ${diplomacyDisabled}${diplomacyTitle}>AIDE</button><button class="button compact" data-diplomacy="quarantine" data-world-id="${world.id}" ${diplomacyDisabled}${diplomacyTitle}>QUARANTAINE</button><button class="button compact" data-diplomacy="trade" data-world-id="${world.id}" ${diplomacyDisabled}${diplomacyTitle}>COMMERCE</button></div><button class="button primary wide" data-world-operations="${world.id}" ${unlocked ? '' : 'disabled'}>${unlocked ? 'PLANIFIER SUR CE MONDE' : 'ROUTE VERROUILLÉE'}</button>`;
 }
 
 function renderGalaxy() {
   const term = byId('world-search').value.trim().toLowerCase();
   const worlds = WORLDS.filter((world) => JSON.stringify(world).toLowerCase().includes(term));
-  byId('star-map').innerHTML = worlds.map((world) => {
+  // V188: desktop keeps the spiral (left/top); a phone reads --cell-col/--cell-row
+  // and the short code. The full name stays in the button for screen readers.
+  const phoneGrid = snapWorldsToPhoneGridV188(worlds.map(world => ({ id: world.id, ...worldPosition(WORLDS.indexOf(world)) })));
+  const map = byId('star-map');
+  map.style.setProperty('--cell-columns', phoneGrid.columns);
+  map.style.setProperty('--cell-rows', phoneGrid.rows);
+  map.innerHTML = worlds.map((world) => {
     const point = worldPosition(WORLDS.indexOf(world));
+    const cell = phoneGrid.cells.get(world.id) || { col: 0, row: 0 };
     const unlocked = saveSystem.data.galaxy.unlockedWorldIds.includes(world.id);
     const inOrbit = world.id === getShipWorldIdV116(saveSystem.data);
-    return `<button class="world-node ${world.id === activeWorld.id ? 'active' : ''} ${unlocked ? '' : 'locked'}" data-world-id="${world.id}" aria-current="${inOrbit ? 'location' : 'false'}" title="${inOrbit ? 'Tantalus en orbite' : 'Sélectionner une destination'}" style="left:${point.left}%;top:${point.top}%">${escapeHtml(world.name)}${inOrbit ? ' · TANTALUS' : ''}</button>`;
+    return `<button class="world-node ${world.id === activeWorld.id ? 'active' : ''} ${unlocked ? '' : 'locked'} ${inOrbit ? 'in-orbit' : ''}" data-world-id="${world.id}" aria-controls="world-detail" aria-current="${inOrbit ? 'location' : 'false'}" title="${inOrbit ? 'Tantalus en orbite' : 'Sélectionner une destination'}" style="left:${point.left}%;top:${point.top}%;--cell-col:${cell.col};--cell-row:${cell.row}"><span class="world-node-code-v188" aria-hidden="true">${escapeHtml(worldShortCodeV188(world.name))}</span><span class="world-node-name-v188">${escapeHtml(world.name)}${inOrbit ? ' · TANTALUS' : ''}</span></button>`;
   }).join('');
   renderWorldDetail(activeWorld);
+  syncWorldSheetV188();
   renderGalaxyJumpV116();
+}
+
+// V188 phone bottom sheet for the world detail. Desktop never opens it.
+const isGalaxyPhoneV188 = () => Boolean(globalThis.matchMedia?.(GALAXY_PHONE_QUERY_V188).matches);
+function syncWorldSheetV188() {
+  const layout = document.querySelector('.galaxy-layout');
+  const detail = byId('world-detail');
+  if (!layout || !detail) return;
+  const open = worldSheetOpenV188 && isGalaxyPhoneV188();
+  layout.classList.toggle('world-sheet-open-v188', open);
+  if (open) {
+    detail.setAttribute('role', 'dialog');
+    detail.setAttribute('aria-modal', 'false');
+    detail.setAttribute('aria-labelledby', 'world-detail-title-v188');
+  } else ['role', 'aria-modal', 'aria-labelledby'].forEach(name => detail.removeAttribute(name));
+  for (const node of all('.world-node')) node.setAttribute('aria-expanded', String(open && node.dataset.worldId === activeWorld.id));
+}
+function openWorldSheetV188() {
+  if (!isGalaxyPhoneV188()) return;
+  worldSheetOpenV188 = true;
+  syncWorldSheetV188();
+  byId('world-detail-title-v188')?.focus({ preventScroll: true });
+}
+function closeWorldSheetV188({ restoreFocus = true } = {}) {
+  if (!worldSheetOpenV188) return;
+  worldSheetOpenV188 = false;
+  syncWorldSheetV188();
+  if (restoreFocus) document.querySelector(`.world-node[data-world-id="${activeWorld.id}"]`)?.focus({ preventScroll: true });
 }
 
 let galaxyJumpTimerV116 = null;
@@ -1354,7 +1642,7 @@ function renderCampaigns() {
     const unlocked = saveSystem.data.galaxy.unlockedWorldIds.includes(campaign.worldId);
     const planned = saveSystem.data.strategy.plannedCampaignId === campaign.id;
     const completed = saveSystem.data.galaxy.completedCampaignIds.includes(campaign.id);
-    return `<article class="catalog-card ${planned ? 'selected' : ''}" data-index="${index + 1}"><span class="eyebrow">${escapeHtml(campaign.mode)} · ${escapeHtml(campaign.source)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaign.summary)}</p><div class="mini-tags"><span>${escapeHtml(world?.name || 'Frontier')}</span><span>${escapeHtml(campaign.objective)}</span><span>${campaign.routes} routes</span><span>${completed ? 'ACCOMPLIE' : unlocked ? 'OUVERTE' : 'VERROUILLÉE'}</span></div><footer><span>${escapeHtml(campaign.canon)}</span><button class="button compact" data-plan-campaign="${campaign.id}" ${unlocked ? '' : 'disabled'}>${planned ? 'PLANIFIÉE' : 'PLANIFIER'}</button></footer></article>`;
+    return `<article class="catalog-card ${planned ? 'selected' : ''}" data-index="${index + 1}"><span class="eyebrow">${escapeHtml(campaign.mode)} · ${escapeHtml(campaign.source)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaign.summary)}</p><div class="mini-tags"><span>${escapeHtml(world?.name || 'Frontier')}</span><span>${escapeHtml(campaignObjectiveLabelV188(campaign.objective))}</span><span>${campaign.routes} routes</span><span>${completed ? 'ACCOMPLIE' : unlocked ? 'OUVERTE' : 'VERROUILLÉE'}</span></div><footer><span>${escapeHtml(campaign.canon)}</span><button class="button compact" data-plan-campaign="${campaign.id}" ${unlocked ? '' : 'disabled'}>${planned ? 'PLANIFIÉE' : 'PLANIFIER'}</button></footer></article>`;
   }).join('');
   renderSpecialOperationsV67(term);
   renderOperationPlan();
@@ -1431,6 +1719,8 @@ function renderOperationPlan() {
   } catch (error) { toast(error.message); }
   let campaign = CAMPAIGNS.find((entry) => entry.id === saveSystem.data.strategy.currentOperation?.campaignId)
     || CAMPAIGNS.find((entry) => entry.id === saveSystem.data.strategy.plannedCampaignId)
+    // V188: the first-hour slice routes the briefing to QZ-18 (bible §53.1).
+    || CAMPAIGNS.find((entry) => entry.id === deriveStoryCampaignV188(saveSystem.data).recommendedCampaignId)
     || CAMPAIGNS.find((entry) => saveSystem.data.galaxy.unlockedWorldIds.includes(entry.worldId));
   if (!campaign) return;
   saveSystem.data.strategy.plannedCampaignId = campaign.id;
@@ -1473,7 +1763,7 @@ function renderOperationPlan() {
   const specialNotice = specialOperation
     ? `<div class="special-operation-notice"><span>ORDRE PRIORITAIRE</span><b>${escapeHtml(specialOperation.promisedTitle)}</b><p>${specialNoticeCopy}</p></div>`
     : soloNoticeV121;
-  byId('operation-plan').innerHTML = `<span class="eyebrow">PLAN OPÉRATIONNEL · ${escapeHtml(campaign.mode)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaign.objective)} · ${escapeHtml(world.name)}</p>${specialNotice}${recoveryNotice}<div class="operation-risk"><b>${brief.risk}%</b><span>RISQUE</span></div><div class="data-list"><span>TRANSIT</span><b>${brief.hours} h</b><span>COÛT</span><b>${formatCost(brief.cost)}</b><span>RÉCOMPENSE</span><b>${formatCost(brief.reward)}</b><span>ESCOUADE</span><b>${soloOperationV121 ? 'UN OPÉRATEUR · SOLO' : escapeHtml(crewNames.join(', ') || 'AUCUNE')}</b><span>ARME</span><b>${escapeHtml(weapon?.name || 'AUCUNE')}</b><span>ÉQUIPEMENT</span><b>${escapeHtml(equipment.join(', ') || 'AUCUN')}</b><span>VÉHICULE</span><b>${escapeHtml(vehicle?.name || 'AUCUN')}${issuedVehicle ? ' · FOURNI SUR ZONE' : ''}</b></div><div class="button-row"><button id="operation-launch" class="button primary wide" ${launchDisabled ? 'disabled' : ''}>${launchLabel}</button>${recoveryAction}</div>`;
+  byId('operation-plan').innerHTML = `<span class="eyebrow">PLAN OPÉRATIONNEL · ${escapeHtml(campaign.mode)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaignObjectiveLabelV188(campaign.objective))} · ${escapeHtml(world.name)}</p>${specialNotice}${recoveryNotice}<div class="operation-risk"><b>${brief.risk}%</b><span>RISQUE</span></div><div class="data-list"><span>TRANSIT</span><b>${brief.hours} h</b><span>COÛT</span><b>${formatCost(brief.cost)}</b><span>RÉCOMPENSE</span><b>${formatCost(brief.reward)}</b><span>ESCOUADE</span><b>${soloOperationV121 ? 'UN OPÉRATEUR · SOLO' : escapeHtml(crewNames.join(', ') || 'AUCUNE')}</b><span>ARME</span><b>${escapeHtml(weapon?.name || 'AUCUNE')}</b><span>ÉQUIPEMENT</span><b>${escapeHtml(equipment.join(', ') || 'AUCUN')}</b><span>VÉHICULE</span><b>${escapeHtml(vehicle?.name || 'AUCUN')}${issuedVehicle ? ' · FOURNI SUR ZONE' : ''}</b></div><div class="button-row"><button id="operation-launch" class="button primary wide" ${launchDisabled ? 'disabled' : ''}>${launchLabel}</button>${recoveryAction}</div>`;
   byId('operation-launch').onclick = () => launchCampaign(campaign);
   const abandonButton = byId('operation-abandon-v69');
   if (abandonButton) abandonButton.onclick = abandonBlockedOperationV69;
@@ -1963,6 +2253,10 @@ function renderHubStatus(status = lastHubStatus) {
     if (exerciseObjectiveV89) byId('hub-onboarding-objective-v84').textContent = translateObjectiveV185('exercise', exerciseObjectiveV89);
     const portObjectiveV90 = getPortMeridienObjectiveV90(saveSystem.data.portMeridienV90, saveSystem.data.openingV88, saveSystem.data.onboardingV84);
     if (portObjectiveV90) byId('hub-onboarding-objective-v84').textContent = translateObjectiveV185('port', portObjectiveV90);
+    const storyV188 = deriveStoryCampaignV188(saveSystem.data);
+    if (!portObjectiveV90 && !exerciseObjectiveV89 && !(objectiveV84 && !objectiveV84.completed) && storyV188.objective) {
+      byId('hub-onboarding-objective-v84').textContent = storyV188.objective;
+    }
     byId('hub-onboarding-objective-v84').hidden = Boolean(hubEngine.isPortMeridienV90?.());
   }
   byId('exit-hub').textContent = standaloneContext === 'forge-playtest' ? tV185('hub.exitForge', 'RETOUR FRONTIER FORGE')
@@ -2035,6 +2329,26 @@ function renderProfiles() {
   byId('quick-save').disabled = Boolean(recovery);
   byId('save-export').textContent = recovery ? 'EXPORTER LE FICHIER ORIGINAL' : tV185('settings.export', 'EXPORTER LA SAUVEGARDE');
   byId('setting-difficulty').value = saveSystem.data.settings.difficulty;
+  if (byId('setting-colorblind-v188')) byId('setting-colorblind-v188').value = saveSystem.data.settings.colorblindV188 || 'off';
+  if (byId('setting-text-scale-v188')) byId('setting-text-scale-v188').value = String(saveSystem.data.settings.textScaleV188 || 1);
+  keyBindingsUiV188?.render();
+  const replayV188 = byId('setting-cinematics-v188');
+  if (replayV188) {
+    const seen = new Set(['cin-00', ...(saveSystem.data.storyCampaignV188?.cinematicsSeen || [])]);
+    const lang = document.documentElement.lang === 'en' ? 'en' : 'fr';
+    replayV188.replaceChildren(...Object.values(CINEMATICS_V188).filter(entry => seen.has(entry.id)).map(entry => Object.assign(document.createElement('button'), {
+      type: 'button', className: 'button wide', textContent: `${entry.id.toUpperCase()} · ${entry.title[lang]}`,
+      onclick: () => void playStoryCinematicV188(entry.id, { once: false, record: false }) })));
+  }
+  if (byId('setting-permadeath-v188')) {
+    byId('setting-permadeath-v188').checked = saveSystem.data.settings.crewPermadeathV188 !== false;
+    byId('setting-permadeath-v188').disabled = saveSystem.data.settings.crewPermadeathV188 === false;
+  }
+  for (const key of Object.keys(CUSTOM_DIFFICULTY_BOUNDS_V188)) {
+    const element = byId(`setting-custom-${key}-v188`);
+    if (element) element.value = saveSystem.data.settings.customDifficultyV188?.[key] ?? 1;
+  }
+  if (byId('setting-custom-v188')) byId('setting-custom-v188').hidden = saveSystem.data.settings.difficulty !== 'custom';
   byId('setting-coop').checked = saveSystem.data.settings.coop;
   byId('setting-motion').checked = saveSystem.data.settings.reducedMotion;
   byId('setting-subtitles').checked = saveSystem.data.settings.subtitles;
@@ -2373,6 +2687,17 @@ function handleQuickSaveV86() {
     if (!saveSystem.recoveryNeeded && engine.running && engine.mission && !captureMissionResumeState()) {
       throw new Error('Mission non enregistrée : cette session ne correspond plus au profil actif.');
     }
+    // V188: the mission register decides between free save and terminals (§55.3).
+    if (!saveSystem.recoveryNeeded && engine.running && engine.mission?.state === 'active' && engine.missionSavePolicyV188) {
+      const policy = engine.missionSavePolicyV188();
+      if (!policy.allowed) {
+        if (policy.mode === 'terminal') {
+          const terminal = engine.beginTerminalSaveV188();
+          toast(terminal.allowed ? 'Terminal : sauvegarde en cours, restez à couvert 3 secondes.' : terminal.message);
+        } else toast(policy.message);
+        return false;
+      }
+    }
     commitCurrentRuntimeV78({ includeSessionTime: true });
     sessionStart = Date.now(); renderClock(); toast('Sauvegarde locale confirmée.');
     return true;
@@ -2525,6 +2850,8 @@ function startMissionRuntimeV62(context) {
     apexDossier: operationLoadout.apexDossier,
     neuroProfile: operationLoadout.neuroProfile,
     difficulty: operationLoadout.difficulty,
+    customDifficultyV188: saveSystem.data.settings.customDifficultyV188,
+    originV188: saveSystem.data.player.originV188,
     accessibility: {
       reducedMotion: Boolean(saveSystem.data.settings.reducedMotion),
       subtitles: Boolean(saveSystem.data.settings.subtitles),
@@ -2572,7 +2899,7 @@ function handleMissionInsertionHooksV62(hooks) {
 }
 
 function campaignObjectiveLabel(campaignId) {
-  return CAMPAIGNS.find((entry) => entry.id === campaignId)?.objective || campaignId;
+  return campaignObjectiveLabelV188(CAMPAIGNS.find((entry) => entry.id === campaignId)?.objective || 'secure the frontier');
 }
 
 function startMissionInsertionV62(context) {
@@ -2677,6 +3004,14 @@ function launchCampaign(campaign = null) {
     : null;
   campaign = resumedCampaign || campaign || CAMPAIGNS.find((entry) => entry.id === saveSystem.data.strategy.plannedCampaignId);
   if (!campaign) return false;
+  // Act III moral choice (bible §5.3): the M577 manifest is signed before the convoy leaves.
+  if (!activeOperation && campaign.id === 'special-apc-convoy' && !normalizeStoryCampaignV188(saveSystem.data.storyCampaignV188).m577Manifest) {
+    openM577ManifestDialogV188({ language: document.documentElement.lang, onConfirm: (manifest) => {
+      try { const candidate = clone(saveSystem.data); candidate.storyCampaignV188 = { ...normalizeStoryCampaignV188(candidate.storyCampaignV188), m577Manifest: manifest };
+        saveSystem.commit(candidate); launchCampaign(campaign); } catch (error) { toast(error.message); }
+    } });
+    return false;
+  }
   const worldId = activeOperation?.worldId || campaign.worldId;
   const world = WORLDS.find((entry) => entry.id === worldId) || WORLDS[0];
   const worldState = saveSystem.data.galaxy.worldState[world.id];
@@ -2733,7 +3068,7 @@ function launchCampaign(campaign = null) {
   pendingResolutionV121 = null;
   byId('retreat-mission').textContent = 'BATTRE EN RETRAITE';
   delete byId('mission-log').dataset.radioUntilV121;
-  byId('mission-log').textContent = `MU/TH/UR · ${campaign.objective.toUpperCase()} · ${world.name} · ${missionLevel.templateLabel.toUpperCase()} · RISQUE ${deployment.operation.risk}%`;
+  byId('mission-log').textContent = `MU/TH/UR · ${campaignObjectiveLabelV188(campaign.objective).toUpperCase()} · ${world.name} · ${missionLevel.templateLabel.toUpperCase()} · RISQUE ${deployment.operation.risk}%`;
   showView('play');
   startMissionInsertionV62({
     campaign, world, worldState, levelSeed, missionLevel,
@@ -2759,10 +3094,28 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   const resolvedSuccess = outcome?.ok ? outcome.success !== false : false;
   if (!outcome?.ok) return outcome;
   if (campaign && world) applyCampaignConsequence(candidate, campaign, world, { success: resolvedSuccess });
+  // V188 reconstruction (bible §6.3): an operation on Cocyte validates or damages a site.
+  const colonyChangeV188 = applyColonyOperationResultV188(candidate, { success: resolvedSuccess, worldId: operation.worldId || campaign?.worldId });
+  // V188 reactive lines (bible §53.6): failure, colonist loss, injured return.
+  const reactiveLinesV188 = selectReactiveLinesV188(candidate,
+    detectReactiveTriggersV188(saveSystem.data, candidate, operation, { success: resolvedSuccess }), {
+      operation, language: document.documentElement.lang,
+      isSynthetic: (member) => (resolveCrewDefinitionV85(member, CREW)?.species || CREW.find((entry) => entry.id === member.id)?.species) === 'synthetic'
+    });
   advanceGalaxy(candidate, { hours: resolvedSuccess ? 4 : 8, generateCrisis: true });
   candidate.scene = 'hub';
-  saveSystem.commit(candidate);
+  // V188: a refused write (quota, private mode) leaves the operation active and
+  // reports it; callers show the refusal instead of throwing from a click.
+  try { saveSystem.commit(candidate); }
+  catch { return { ok: false, reason: 'save-write-failed' }; }
   renderAll();
+  const colonySiteV188 = id => colonySnapshotV188(candidate, document.documentElement.lang).sites.find(entry => entry.id === id)?.criterion || id;
+  if (colonyChangeV188?.validated) toast(document.documentElement.lang === 'en' ? `Port-Méridien: site level validated (${colonySiteV188(colonyChangeV188.validated)} ${colonyChangeV188.level}).` : `Port-Méridien : niveau de chantier validé (${colonySiteV188(colonyChangeV188.validated)} ${colonyChangeV188.level}).`);
+  if (colonyChangeV188?.damaged) toast(document.documentElement.lang === 'en' ? `Port-Méridien: a site lost one functioning level (${colonySiteV188(colonyChangeV188.damaged)}).` : `Port-Méridien : un chantier perd un niveau de fonctionnement (${colonySiteV188(colonyChangeV188.damaged)}).`);
+  for (const line of reactiveLinesV188) {
+    const name = resolveCrewDefinitionV85(saveSystem.data.crew.find((member) => member.id === line.crewId) || { id: line.crewId }, CREW)?.name || line.crewId;
+    toast(`${name} : « ${line.text} »`);
+  }
   return outcome;
 }
 
@@ -2908,7 +3261,9 @@ function handleGameEvent(event) {
   if (event.type === 'squad-lost') {
     const casualtyOperation = saveSystem.data.strategy.currentOperation;
     const lost = saveSystem.data.crew.find((member) => member.id === event.crewId);
-    if (lost && lost.status !== 'deceased') {
+    const sparedV188 = Boolean(lost && lost.status !== 'deceased'
+      && spareCrewMemberV188(saveSystem.data, lost, { operationId: casualtyOperation?.id || null }));
+    if (lost && lost.status !== 'deceased' && !sparedV188) {
       lost.health = 0;
       lost.status = 'deceased';
       lost.injuries = Array.isArray(lost.injuries) ? lost.injuries : [];
@@ -2925,7 +3280,8 @@ function handleGameEvent(event) {
       saveSystem.data.statistics.deaths += 1;
     }
     recordOperationFlag(saveSystem.data, `squad-lost-${event.crewId}`);
-    log.textContent = `PERTE CONFIRMÉE · ${event.name || event.crewId} rejoint le mémorial`;
+    log.textContent = sparedV188 ? `BLESSÉ GRAVE · ${event.name || event.crewId} évacué · convalescence`
+      : `PERTE CONFIRMÉE · ${event.name || event.crewId} rejoint le mémorial`;
   }
   if (event.type === 'shot') saveSystem.data.statistics.shots += 1;
   if (event.type === 'kill') {
@@ -2935,6 +3291,32 @@ function handleGameEvent(event) {
   }
   if (event.type === 'vehicle') log.textContent = event.occupied ? 'POSTE DE CONDUITE OCCUPÉ · rôles et armement actifs.' : 'PROGRESSION À PIED.';
   if (event.type === 'locked') { audio.locked(); log.textContent = `ACCÈS REFUSÉ · ${event.requirement}`; }
+  // V188 priority cues and in-mission music moods (bible §53.2, §55.7).
+  const enemyV188 = event.type === 'spotted' ? engine.enemies?.find?.((entry) => entry.id === event.enemyId) : null;
+  const cueV188 = enemyV188 ? casteCueV188(enemyV188) : cueForGameEventV188(event);
+  if (cueV188) {
+    audio.cue(cueV188);
+    const captionV188 = saveSystem.data.settings.subtitles ? soundCaptionV188(cueV188, document.documentElement.lang) : null;
+    if (captionV188) engine.pushCaption?.('sound', captionV188);
+  }
+  if (event.type === 'tension-phase-v188') audio.setMusicMoodV188(event.phase === 'peak' ? 'alert'
+    : event.phase === 'relax' || event.register === 'horror' ? 'calm' : 'mission');
+  if (enemyV188?.isBoss || event.type === 'mecha-boss-warning-v131') audio.setMusicMoodV188('boss');
+  if (event.type === 'boss-defeated' || event.type === 'mecha-boss-defeated-v131') audio.setMusicMoodV188('mission');
+  // Act I cinematics (bible §5.1): approach at insertion, the opened cradle on the maintenance route.
+  if (event.type === 'special-operation-started' && event.campaignId === 'special-narrative-qz17') void playStoryCinematicV188('cin-10');
+  if (event.type === 'narrative-route-unlocked' && event.choiceId === 'follow-maintenance-trace') void playStoryCinematicV188('cin-11');
+  if (event.type === 'special-operation-started' && event.campaignId === 'special-black-cocoon') void playStoryCinematicV188('cin-50');
+  // Act III: a sealed container aboard knocks from inside during the C-12 defence; Inez notes the time.
+  if (event.type === 'c12-horde-radio' && event.id === 'swarm-breach'
+    && (normalizeStoryCampaignV188(saveSystem.data.storyCampaignV188).m577Manifest?.containers || 0) > 0) {
+    audio.cue('container-knock');
+    engine.pushCaption?.('mission', document.documentElement.lang === 'en' ? 'Inez: “Note the time.”' : 'Inez : « Notez l’heure. »');
+  }
+  if (event.type === 'terminal-save-v188') {
+    try { commitCurrentRuntimeV78({ includeSessionTime: true }); sessionStart = Date.now(); renderClock(); toast('Terminal : sauvegarde confirmée.'); }
+    catch (error) { toast(error.message); }
+  }
   if (event.type === 'checkpoint') { audio.checkpoint(); recordOperationFlag(saveSystem.data, `checkpoint-${event.checkpoint}`); log.textContent = `CHECKPOINT ${event.checkpoint} SÉCURISÉ.`; }
   if (event.type === 'power-restored' || event.type === 'shortcut' || event.type === 'archive-recovered') recordOperationFlag(saveSystem.data, event.type);
   if (event.type === 'supply') {
@@ -3314,6 +3696,12 @@ function handleShipAnimalRoomActionV87(interaction) {
 
 function handleHubAction(interaction) {
   if (!interaction?.action) return;
+  // V188 ship-cryo: the sealed ECHO-8 locker shows what the campaign has established.
+  if (interaction.action === 'story:echo8-locker') {
+    const notes = echo8LockerNotesV188(saveSystem.data, document.documentElement.lang);
+    toast(notes.map(note => note.text).join(' · '));
+    return true;
+  }
   if (interaction.action.startsWith('port:')) return handlePortMeridienV90(interaction);
   if (standaloneContext === 'forge-playtest') {
     const advanced = interaction.action === 'editor:project-complete' && forgeCampaignUIV161?.completeNative(hubEngine);
@@ -3382,6 +3770,14 @@ function handleHubAction(interaction) {
     }
     return resolveAnnexStationV71(interaction);
   }
+  if (interaction.action === 'hub:vent-node' && rescueJunParkV188(saveSystem.data, interaction.nodeId)) {
+    const en = document.documentElement.lang === 'en';
+    strategyLog('QUARANTAINE', en ? 'Jun Park found in the life-support duct.' : 'Jun Park retrouvé dans le conduit du support-vie.', 'crisis', 100, false);
+    saveSystem.commit(); renderAll();
+    // [PROPOSÉ] Jun Park's line (bible §56.9).
+    toast(en ? 'JUN PARK · “I thought it was in the duct with me.” Jun crawls back towards medical.' : 'JUN PARK · « J’ai cru qu’elle était dans le conduit avec moi. » Jun rampe vers l’infirmerie.');
+    continueInterludeV188();
+  }
   if (interaction.action.startsWith('hub:vent-')) {
     const status = byId('hub-status');
     if (status) status.textContent = interaction.action === 'hub:vent-contact'
@@ -3396,6 +3792,7 @@ function handleHubAction(interaction) {
       saveSystem.commit();
       renderAll();
       toast(result.outcome === 'resolved' ? 'Crise neutralisée dans le niveau.' : 'Extraction médicale : dégâts persistants appliqués.');
+      if (result.outcome === 'resolved' && interludeCrisisClearedV188(saveSystem.data, interaction.crisisId)) { saveSystem.commit(); continueInterludeV188(); }
     }
     return;
   }
@@ -3555,6 +3952,8 @@ function launchForgeMissionPlaytest(project, { reveal = true } = {}) {
     apexDossier: operationLoadout.apexDossier,
     neuroProfile: operationLoadout.neuroProfile,
     difficulty: operationLoadout.difficulty,
+    customDifficultyV188: saveSystem.data.settings.customDifficultyV188,
+    originV188: saveSystem.data.player.originV188,
     accessibility: clone(sandbox.settings),
     editorProject: project,
     forgeJourneyV141: true,
@@ -3814,7 +4213,9 @@ function bindDelegatedActions() {
     if (target.dataset.worldId && target.classList.contains('world-node')) {
       activeWorld = WORLDS.find((world) => world.id === target.dataset.worldId) || activeWorld;
       renderGalaxy();
+      openWorldSheetV188();
     }
+    if (target.hasAttribute('data-world-sheet-close-v188')) closeWorldSheetV188();
     if (target.dataset.confirmJumpV115) {
       const destination = WORLDS.find(world => world.id === target.dataset.confirmJumpV115);
       failedJumpOwnerV116 = null;
@@ -3868,6 +4269,12 @@ function bind() {
     try { saveSystem.data.strategy.plannedCampaignId = campaign.id; saveSystem.commit(); renderCampaigns(); renderCommandMissionsV110(); }
     catch (error) { saveSystem.data.strategy.plannedCampaignId = previous; renderCommandMissionsV110(); toast(error.message); }
   };
+  globalThis.addEventListener('keydown', event => {
+    if (event.key !== 'Escape' || !worldSheetOpenV188 || activeView !== 'galaxy') return;
+    event.preventDefault();
+    closeWorldSheetV188();
+  });
+  globalThis.matchMedia?.(GALAXY_PHONE_QUERY_V188).addEventListener?.('change', () => { if (!isGalaxyPhoneV188()) worldSheetOpenV188 = false; syncWorldSheetV188(); });
   globalThis.addEventListener('keydown', event => {
     if (!isLocalDeveloperEnvironmentV119(globalThis.location?.hostname) || !isDeveloperShortcutV110(event) || byId('app').hidden || standaloneContext) return;
     event.preventDefault();
@@ -4018,11 +4425,41 @@ function bind() {
     'setting-motion': ['reducedMotion', (element) => element.checked],
     'setting-subtitles': ['subtitles', (element) => element.checked],
     'setting-effects': ['effects', (element) => Number(element.value)],
-    'setting-music': ['music', (element) => Number(element.value)]
+    'setting-music': ['music', (element) => Number(element.value)],
+    'setting-permadeath-v188': ['crewPermadeathV188', (element) => normalizeCrewPermadeathV188(saveSystem.data.settings.crewPermadeathV188, element.checked)],
+    'setting-colorblind-v188': ['colorblindV188', (element) => element.value],
+    'setting-text-scale-v188': ['textScaleV188', (element) => Number(element.value)]
   };
+  // V188 complete J1 key remapping (§53.8): capture-phase translation layer.
+  installKeyRemapV188(globalThis, () => saveSystem.data?.settings?.keyBindingsV188);
+  keyBindingsUiV188 = mountKeyBindingsUiV188(byId('setting-key-bindings-v188'), {
+    getBindings: () => saveSystem.data.settings.keyBindingsV188, language: () => document.documentElement.lang,
+    onChange: (bindings) => {
+      try { saveSystem.commit({ settings: { ...saveSystem.data.settings, keyBindingsV188: normalizeKeyBindingsV188(bindings) } }); }
+      catch (error) { toast(error.message); }
+    }
+  });
+  for (const key of Object.keys(CUSTOM_DIFFICULTY_BOUNDS_V188)) {
+    const element = byId(`setting-custom-${key}-v188`); if (!element) continue;
+    element.onchange = () => {
+      try {
+        const customDifficultyV188 = normalizeCustomDifficultyV188({ ...saveSystem.data.settings.customDifficultyV188, [key]: Number(element.value) });
+        saveSystem.commit({ settings: { ...saveSystem.data.settings, customDifficultyV188: { ...customDifficultyV188 } } }); renderProfiles();
+      } catch (error) { renderProfiles(); toast(error.message); }
+    };
+  }
   for (const [id, [key, read]] of Object.entries(settingBindings)) byId(id).onchange = (event) => {
-    try { saveSystem.commit({ settings: { ...saveSystem.data.settings, [key]: read(event.target) } }); applyRuntimeSettings(); }
+    try {
+      saveSystem.commit({ settings: { ...saveSystem.data.settings, [key]: read(event.target) } }); applyRuntimeSettings();
+      if (byId('setting-custom-v188')) byId('setting-custom-v188').hidden = saveSystem.data.settings.difficulty !== 'custom';
+      if (byId('setting-permadeath-v188')) Object.assign(byId('setting-permadeath-v188'), {
+        checked: saveSystem.data.settings.crewPermadeathV188 !== false, disabled: saveSystem.data.settings.crewPermadeathV188 === false });
+    }
     catch (error) { renderProfiles(); toast(error.message); }
+  };
+  // V188: volume sliders are heard while dragging; the value is saved on release (change).
+  for (const [id, key] of [['setting-effects', 'effects'], ['setting-music', 'music']]) byId(id).oninput = (event) => {
+    if (!saveSystem.recoveryNeeded) audio.setVolumes({ [key]: Number(event.target.value) });
   };
   const updateTitleShipV87 = () => {
     try {
@@ -4146,6 +4583,10 @@ function setupLanguageV185() {
     if (VIEW_META[activeView]) retranslateStandardLabelV185(byId('view-title'), `view.${activeView}`, VIEW_META[activeView][1]);
     retranslateStandardLabelV185(byId('return-title'), 'top.menu', 'MENU PRINCIPAL');
     renderProfiles();
+    try { renderClock(); } catch { /* the clock appears with the first render */ }
+    // V188 bilingual blocks (QZ17 dossier, Port-Méridien table) are written in the
+    // chosen language at render time: the auto-translation layer cannot switch them.
+    try { renderCommand(); renderStrategy(); renderOperationPlan(); } catch { /* not booted yet */ }
     if (lastHubStatus) renderHubStatus(lastHubStatus);
   });
 }
@@ -4186,6 +4627,7 @@ async function boot() {
   globalThis.__ATF_AUDIO_V77__ = audio;
   globalThis.__ATF_GAME__ = engine;
   globalThis.__ATF_HUB__ = hubEngine;
+  globalThis.__ATF_TITLE_VFX_V188__ = titleVfxV188;
   globalThis.__ATF_XENO_TRIALS_V96__ = {
     open: () => showView('xenotrials'),
     snapshot: () => ({ progress: clone(saveSystem.data.xenoTrialsV96), match: xenoTrialsUiV96?.runtime?.getState() || null })
@@ -4228,14 +4670,15 @@ async function boot() {
     openArchives: (entryId = '') => document.dispatchEvent(createOpenArchivesEventV68(entryId)),
     get investigation() { return getNarrativeInvestigationV68(saveSystem.data); }
   };
-  setTimeout(() => {
-    byId('boot').remove();
-    showTitleScreen();
-  }, 500);
+  // Opening credit (V188): the title is prepared underneath, its images decoded, then revealed by a fade.
+  void playIntroV188({ overlay: byId('intro-v188'), titleRoot: titleScreen.root,
+    reducedMotion: Boolean(saveSystem.data.settings?.reducedMotion || globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches),
+    prepareTitle: () => { byId('boot').remove(); showTitleScreen(); } });
 }
 
 boot().catch((error) => {
   console.error(error);
+  byId('intro-v188')?.remove();
   byId('boot').innerHTML = `<div class="boot-mark">ERR</div><p>${escapeHtml(error.message)}</p>`;
 });
 

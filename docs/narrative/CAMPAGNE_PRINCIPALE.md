@@ -15,7 +15,7 @@
 - **Partie VII — Vues et organisation des hubs** : §40 trois vues (latérale, couloir de profondeur, plan au sol à 35°) · §41 Tantalus pièce par pièce · §42 Asphodèle · §43 Port-Méridien · §44 liste complète de ce qui reste à faire et à générer
 - **Décisions validées** : §45, cadrage des deuxième et troisième séries §45.1-45.2 · registres des missions §0.3 · origines d'Echo-9 §2.4
 - **Partie VIII — Musique : prompts pour Google Flow Music** : §46 méthode et palette · §47 hub et voyage · §48 campagne principale · §49 campagnes annexes · §50 archives et missions spéciales · §51 récapitulatif
-- **Partie IX — Feuille de route pour rendre le jeu attractif** : §52 principes, état et renommage · §53 feuille de route détaillée · §54 ordre de travail · §55 conception technique des décisions de cadrage
+- **Partie IX — Feuille de route pour rendre le jeu attractif** : §52 principes, état et renommage · §53 feuille de route détaillée · §54 ordre de travail · §55 conception technique des décisions de cadrage · §56 priorités P0 et P1 (validées le 2026-11-12)
 
 # PARTIE I — Campagne principale : Cocyte
 
@@ -517,9 +517,9 @@ Réservé à `origin-20`. Quatre fragments, un par lieu, sans combat propre :
 
 **But :** apprendre les commandes, comprendre pourquoi le Tantalus est là, rencontrer l'équipage et poser la question centrale (le fret contre les vivants) avant le premier contact.
 
-### CIN-00 · Ouverture — [PROPOSÉ]
+### CIN-00 · Ouverture — [EXISTANT] (V188, `story-cinematics-v188.js`)
 
-60 à 75 s, passable.
+60 à 75 s, passable. Jouée à chaque nouvelle partie avant le créateur (65 s). Plans dessinés en primitives Canvas ; l'espace, la planète et le Tantalus reprennent les couches existantes de l'écran titre.
 
 | Plan | Image | Son / texte |
 | --- | --- | --- |
@@ -536,7 +536,9 @@ Réservé à `origin-20`. Quatre fragments, un par lieu, sans combat propre :
 
 Le poste de cryostase attend la confirmation ; DAVID-8R accueille la Relève Echo-9. Création du personnage. Tamsin Velez rappelle la règle : avant une sortie, on identifie l'objectif et la voie de retour.
 
-**Ajout [PROPOSÉ]** — DAVID-8R, pendant le réveil : « Vous remplacez l'équipe Echo-8. Elle a abordé la station Asphodèle il y a trente et une heures. Le contact a été perdu à la sixième. Je n'ai pas d'autre information. » **CIN-01 « Le casier vide »** (20 s) : le casier `ECHO-8`, vidé et scellé.
+**Mise en scène en jeu [EXISTANT] (V188) · [PROPOSÉ]** — avant la reprise du contrôle, dans la baie cryo réelle : l'image passe du noir à un flou froid puis se précise. Le terminal affiche `MU/TH/UR · RELÈVE ECHO-9 · CAPSULE 03 · RÉVEIL D'URGENCE`. Le sous-titre sonore dit « [La capsule siffle. Le givre fond sur la verrière.] ». Le journal de bord : « Relève Echo-9 sortie d'hypersommeil. Fonctions vitales stables. Confirmez votre réveil au poste de cryostase. »
+
+**Ajout [EXISTANT] (V188)** — DAVID-8R, pendant le réveil : « Vous remplacez l'équipe Echo-8. Elle a abordé la station Asphodèle il y a trente et une heures. Le contact a été perdu à la sixième. Je n'ai pas d'autre information. » **CIN-01 « Le casier vide »** (20 s) : le casier `ECHO-8`, vidé et scellé. Elle est jouée juste après la confirmation du réveil, une seule fois par partie.
 
 *Ancrage Alien : réveil d'hypersommeil, relève d'une équipe perdue, synthétique de bord.*
 
@@ -544,11 +546,19 @@ Le poste de cryostase attend la confirmation ; DAVID-8R accueille la Relève Ech
 
 `hub-opening-exercise-v89.js` : échelle, pas de tir, cibles, rétablissement de la liaison prioritaire.
 
-**[PROPOSÉ]** La liaison prioritaire, rétablie à la fin de l'exercice, laisse passer un paquet de messages de Port-Méridien vieux de plusieurs jours, d'un coup. Le dernier date de quatre heures. Mara Vega coupe l'exercice.
+**[EXISTANT] (V188, séquence `cin-p2`)** La liaison prioritaire, rétablie à la fin de l'exercice, laisse passer un paquet de messages de Port-Méridien vieux de plusieurs jours, d'un coup. Le dernier date de quatre heures. Mara Vega coupe l'exercice.
+
+**Mise en scène en jeu [EXISTANT] (V188) · [PROPOSÉ]** — quand le signal prioritaire interrompt la qualification, une alerte ambre passe sur le pas de tir.
+
+> **Rook** (radio) — Velez, un signal prioritaire force la liaison. Il demande la console du pas de tir.
+>
+> **Tamsin Velez** — Echo-9, arme au repos. Rejoignez la console.
 
 *Ancrage Alien : communications retardées, colonie isolée.*
 
-### CIN-02 · Le briefing — [PROPOSÉ]
+### CIN-02 · Le briefing — [EXISTANT] (V188)
+
+Jouée une fois, avant le premier embarquement vers Port-Méridien (42 s), sur une carte holographique de Cocyte et d'Asphodèle dessinée en primitives.
 
 Salle de briefing. Mara Vega projette Cocyte et la station.
 
@@ -562,11 +572,33 @@ Salle de briefing. Mara Vega projette Cocyte et la station.
 
 *Ancrage Alien : réquisition des Marines, consigne de la compagnie, quarantaine.*
 
+### CIN-03 · Descente sur Port-Méridien — [EXISTANT] (V188) · [PROPOSÉ]
+
+Jouée une fois, entre CIN-02 et le débarquement (33 s). Le dropship d'Orlov descend sous la pluie ; la soute est éclairée en rouge et les hublots ruissellent.
+
+> **Maksim Orlov** — Turbulences jusqu'à deux mille mètres. Le port n'émet plus de balise : je pose à vue.
+>
+> **Tamsin Velez** — Quand la rampe touche, Echo-9 sort en premier. Les vivants d'abord. Le matériel ensuite.
+
+Dernier plan : les lumières du port sous la pluie, le processeur atmosphérique qui fume, les balises rouges de l'aire de pose. `PORT-MÉRIDIEN · QUAI SUD`.
+
+*Ancrage Alien : descente en dropship, colonie sans balise, Marines qui passent en premier.*
+
 ### P-3 · Intro — Le quai des vivants (Port-Méridien) — [EXISTANT]
 
 `port-meridien-v90.js` (reçu existant `port-meridien:quai-des-vivants:v90`) : porter un lot au triage, assister un blessé, réalimenter le sas, rassembler trois habitants et les guider vers le sas éclairé.
 
-**[PROPOSÉ]** C'est aussi l'intro du front colonie (§6). Premier choix « vivants ou matériel » : lot médical ou batterie de sas. Tomas Wren, en passant : « Les conteneurs scellés partent avant nous depuis trois semaines. » Lucia Ferro montre un blessé dont la poitrine est bandée : « Il est tombé malade après une nuit au quai nord. Il ne se souvient pas de la nuit. » Le joueur ne voit rien de plus. Noor Okafor, à la radio : « Ramenez-le en quarantaine. Pas au triage. »
+**[EXISTANT] (V188, séquences `cin-p3-wren` à l'arrivée et `cin-p3-ferro` après le triage)** C'est aussi l'intro du front colonie (§6). Premier choix « vivants ou matériel » : lot médical ou batterie de sas. Tomas Wren, en passant : « Les conteneurs scellés partent avant nous depuis trois semaines. » Lucia Ferro montre un blessé dont la poitrine est bandée : « Il est tombé malade après une nuit au quai nord. Il ne se souvient pas de la nuit. » Le joueur ne voit rien de plus. Noor Okafor, à la radio : « Ramenez-le en quarantaine. Pas au triage. »
+
+**Mise en scène en jeu [EXISTANT] (V188) · [PROPOSÉ]** — à la descente de la rampe, sous la pluie et avant la réplique de Wren : « [Les vérins de la rampe. La pluie sur la tôle.] »
+
+> **Tamsin Velez** (radio) — Rampe au sol. Echo-9, le quai est à vous. Trouvez qui tient encore ce port.
+
+Au constat :
+
+> **Rook** (radio) — La balise automatique du port annonce toujours « aucun survivant ». Elle se trompe de trois.
+>
+> **Tamsin Velez** (radio) — Notez-le. Tout ce qui ment ici finira dans le rapport.
 
 *Ancrage Alien : premier signe du cycle biologique (hôte qui ne se souvient pas), évacuation de colons.*
 
@@ -593,14 +625,14 @@ Preuve secondaire du code (`narrative-evidence-v132.js`) : *la colonie reçoit u
 
 **Déroulé [PROPOSÉ] :**
 
-1. **CIN-10 « Les quais déserts »** (30 s) : dropship d'Orlov, approche sous la pluie. Rook : « Quatre accès. Aucun ne répond. Le détecteur est calme. Trop calme. »
+1. **CIN-10 « Les quais déserts »** (30 s) — **[EXISTANT] (V188)**, à la prise de contrôle de QZ-17 : dropship d'Orlov, approche sous la pluie. Rook : « Quatre accès. Aucun ne répond. Le détecteur est calme. Trop calme. »
 2. Exploration verticale, peu de combats, beaucoup de signes : un conteneur réfrigéré marqué « échantillons géologiques », du givre à l'intérieur alors que le froid est coupé, des traces d'acide dans un conduit.
 3. **Choix existant** : *suivre la trace par la maintenance* ou *sécuriser la preuve en quarantaine*.
    - Maintenance → l'alcôve : un berceau de transport réfrigéré, ouvert de l'intérieur. Contact avec un parasite (facehugger, déjà au catalogue).
    - Quarantaine → le fragment de sceau revient intact ; Inez peut l'analyser (annexe *Le sceau*).
-4. **CIN-11 « Ouvert de l'intérieur »** (25 s) : sur la paroi du berceau, des fixations faites pour retenir quelque chose de vivant. Inez : « Ne concluez pas. Rapportez. »
+4. **CIN-11 « Ouvert de l'intérieur »** (25 s) — **[EXISTANT] (V188)**, au déverrouillage de la route de maintenance : sur la paroi du berceau, des fixations faites pour retenir quelque chose de vivant. Inez : « Ne concluez pas. Rapportez. »
 
-**Retour** avec Inez : *qu'est-ce qui a bougé* (une charge vivante, réfrigérée, non déclarée), *qui ment* (le PDA et le courriel ne peuvent pas être vrais ensemble ; la boîte noire soutient le PDA), *que transportait-on* (**non établi** sans prélèvement).
+**Retour** avec Inez — **[EXISTANT] (V188, séquence `cin-qz17-retour` à la table tactique)** : *qu'est-ce qui a bougé* (une charge vivante, réfrigérée, non déclarée), *qui ment* (le PDA et le courriel ne peuvent pas être vrais ensemble ; la boîte noire soutient le PDA), *que transportait-on* (**non établi** sans prélèvement).
 
 *Ancrage Alien : cargaison biologique déguisée en fret, parasite, la compagnie qui ment par procédure.*
 
@@ -617,7 +649,7 @@ Contenu existant : briefing « Le message arrivé trop tard » ; protocoles *Aud
 - Le message retenu (« Secours immédiat, personnel coincé au quai nord ») venait du quai nord de QZ-18, où partaient les navettes vers Port-Méridien. Les treize minutes ont laissé une navette partir avec un conteneur QZ17 et sans les blessés.
 - Quatrième question optionnelle au retour, si l'Acte I est terminé : *« Quel fret avait la priorité ? »* — la série de scellés QZ17.
 - Le profil « priorité cargaison » ne s'active pas au relais : il est **autorisé à distance par la station Asphodèle**. Rook identifie la signature. Cela débloque l'intro du front station.
-- **CIN-20 « Treize minutes »** (40 s) : Asha Mbaye lit le message libéré à 18:54. Les noms du personnel du quai nord défilent. Pas de musique.
+- **CIN-20 « Treize minutes »** (40 s) — **[EXISTANT] (V188)**, avec la réponse de Halloran en dernier plan, au premier compte rendu de QZ-18 : Asha Mbaye lit le message libéré à 18:54. Les noms du personnel du quai nord défilent. Pas de musique.
 - Mara Vega transmet le dossier par le seul canal disponible, le réseau QZ. Réponse différée de la Directrice Halloran : « Priorité cargaison maintenue, conformément à la clause d'acheminement. Toute ouverture de scellé engage la responsabilité de l'unité. »
 
 *Ancrage Alien : la compagnie contrôle les communications ; la vie humaine passe après le contrat.*
@@ -630,15 +662,17 @@ Contenu existant : briefing « Le message arrivé trop tard » ; protocoles *Aud
 
 **Tissage [PROPOSÉ] :**
 
-- **Le manifeste du M577 est le choix moral de l'acte.** La consigne de la compagnie exige de ramener trois conteneurs scellés du complexe ; Asha demande des places pour les ouvriers retranchés à C-12. Chaque conteneur retire deux places.
-- Pendant les 45 secondes de C-12, si un conteneur est à bord, il **frappe de l'intérieur** (son seul). Inez : « Notez l'heure. »
-- **CIN-31 « Le sas refermé »** : les rescapés descendent à Port-Méridien, ou les conteneurs partent sous scellés vers le Tantalus, sur ordre. Écran de quarantaine du Tantalus : `CONTRÔLE BIOLOGIQUE · 1 ANOMALIE`.
+- **[EXISTANT] (V188)** **Le manifeste du M577 est le choix moral de l'acte.** Une boîte de dialogue s'ouvre avant le départ du convoi ; le choix est enregistré dans `storyCampaignV188.m577Manifest`. La consigne de la compagnie exige de ramener trois conteneurs scellés du complexe ; Asha demande des places pour les ouvriers retranchés à C-12. Chaque conteneur retire deux places.
+- **[EXISTANT] (V188)** Pendant les 45 secondes de C-12, si un conteneur est à bord, il **frappe de l'intérieur** (son seul, son original `container-knock`). Inez : « Notez l'heure. »
+- **CIN-31 « Le sas refermé »** — **[EXISTANT] (V188)**, au premier passage à la table tactique après C-12, dessinée d'après le manifeste : les rescapés descendent à Port-Méridien, ou les conteneurs partent sous scellés vers le Tantalus, sur ordre. Écran de quarantaine du Tantalus : `CONTRÔLE BIOLOGIQUE · 1 ANOMALIE`.
 
 *Ancrage Alien : APC, horde, Reine, choix entre fret et vivants.*
 
-**Conséquence :** `story-m577-manifest` = colons (0-6) et conteneurs (0-3). Les colons ramenés rejoignent la population de Port-Méridien.
+**Conséquence :** `story-m577-manifest` = colons (0-6) et conteneurs (0-3). Les colons ramenés rejoignent la population de Port-Méridien. **[EXISTANT] (V188)** : la population du monde de C-12 est augmentée une seule fois. Les conteneurs restent consignés pour l'Interlude (§5.4), qui n'est pas encore jouable.
 
-### 5.4 Interlude — « Quarantaine » (à bord du Tantalus) — [PROPOSÉ]
+### 5.4 Interlude — « Quarantaine » (à bord du Tantalus) — [PARTIEL] V188
+
+**Raccordé (V188)** : après CIN-31, CIN-40 se joue, puis une crise xénomorphe forcée s'ouvre dans la salle de quarantaine du pont 2. Elle utilise le système de crise du hub existant. Une fois la crise résolue dans le niveau, le choix détruire ou capturer s'affiche ; il ne peut pas être esquivé et revient s'il a été interrompu. CIN-41 suit, et la loyauté de BISHOP-9 baisse de 20, soit un niveau de confiance. Un objectif dédié s'affiche au hub. Pendant la crise, tout l'équipage suit la routine `alert`, qui prend fin quand la crise est résolue. Jun Park est coincé dans le conduit du support-vie (pont 3) : le joueur doit l'y rejoindre par le réseau de conduits. Le choix ne s'ouvre qu'une fois la créature neutralisée et Jun ramené, dans n'importe quel ordre (§56.9). **Pas encore fait** : Jun Park visible dans le conduit et blessé à l'infirmerie (pose à créer).
 
 Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-missions-v131.js`) et des crises à bord par route de salles (`world-crisis-core.js`, type `xenomorph`).
 
@@ -659,10 +693,10 @@ Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-m
 
 **Tissage [PROPOSÉ] :**
 
-- **CIN-50 « Les dernières images »** (35 s) : caméra casque dégradée. Echo-9 suit la destination absente du bon de QZ-17 jusqu'au **dépôt**. Silhouette au plafond. Coupure. La capture n'est pas jouée : elle reste « sans témoin exploitable », comme dans le code.
+- **CIN-50 « Les dernières images »** (35 s) — **[EXISTANT] (V188)**, au réveil dans le cocon : caméra casque dégradée. Echo-9 suit la destination absente du bon de QZ-17 jusqu'au **dépôt**. Silhouette au plafond. Coupure. La capture n'est pas jouée : elle reste « sans témoin exploitable », comme dans le code.
 - Dans la galerie basse : des **berceaux réfrigérés de la série QZ17**, vides, et des cocons humains (le libellé « COCON HUMAIN » existe déjà dans `hive-missions-v131.js`) portant des badges de Port-Méridien et de QZ-18. **Révélation :** le dépôt n'expédiait pas des organismes, il les **élevait**. Les conteneurs amenaient des œufs ; les disparus de la colonie servaient d'hôtes. La priorité de fret gardait ces départs et ces disparitions hors des registres.
 - Un enregistreur fixé aux berceaux porte la signature de la station Asphodèle : les ordres de livraison venaient de là (lien avec S2-S3).
-- **CIN-51 « Contrôle biologique »** : scanner, Noor Okafor attend. `NÉGATIF`. « Bon retour. Cette fois, je l'écris. »
+- **CIN-51 « Contrôle biologique »** — **[EXISTANT] (V188)**, au premier passage à la table tactique après l'Acte IV : scanner, Noor Okafor attend. `NÉGATIF`. « Bon retour. Cette fois, je l'écris. »
 
 *Ancrage Alien : cocons, hôtes humains, ruche nourrie par la compagnie, contrôle biologique.*
 
@@ -699,6 +733,14 @@ Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-m
 | Ordres de livraison archivés par CASSIUS | Station S2 |
 | Témoignage de Tomas Wren | Colonie, annexe *Ce que le quai a vu* |
 
+**[EXISTANT] V188 (`story-dossier-v188.js`)** : le dossier est calculé uniquement depuis l'état enregistré, et affiché au Commandement (« DOSSIER QZ17 · n/7 »). Pièces lisibles aujourd'hui :
+- les deux pièces de l'Acte I : la contradiction PDA / courriel découverte, puis la piste choisie ;
+- le verdict de QZ-18, avec la signature de Rook ;
+- l'issue de l'Interlude ;
+- l'Acte IV terminé.
+
+Les pièces de CASSIUS (S2) et de Wren (annexe colonie) sont affichées « pas encore jouables ».
+
 **Validé (2026-11-05) :** l'identité du signataire du badge est établie seulement si le joueur réunit 6 pièces sur 7. Le texte de retour rappelle alors ce qui reste non prouvé. Avec moins de pièces, elle reste « non établie ».
 
 **Fins [PROPOSÉ] :**
@@ -710,6 +752,14 @@ Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-m
 | **« Les vivants, sans preuve »** | Option *Tenir la colonie* choisie | La colonie tient cette nuit-là, mais la clause s'applique. Vega est relevée à l'arrivée. |
 
 #### 5.7.1 Choix final : options ouvertes par les choix cumulés — validé le 2026-11-06
+
+**Logique [EXISTANT] V188** (`finalChoiceOptionsV188`, `resolveFinalChoiceV188`, testée) :
+- *Transmettre* n'est ouvert que si Asphodèle est reprise et sa salle des relais ouverte ; ce n'est pas encore jouable.
+- Les modificateurs sont appliqués : *restitution* avec 2 conteneurs ou plus, tentative de récupération à bord si la créature a été capturée.
+- Vega suit la recommandation si la loyauté de Mara Vega est d'au moins 55 (niveau *operationnel*).
+- Sinon, avec 5 pièces mais sans canal sûr, Vega tient la colonie (**[PROPOSÉ]**, cas non écrit).
+
+Le conseil de guerre et les fins attendent l'Acte V jouable.
 
 | Option recommandée par Echo-9 | Toujours proposée ? | Condition pour qu'elle apparaisse | Fin |
 | --- | --- | --- | --- |
@@ -877,7 +927,7 @@ C'est ce qui relie la reconstruction à l'intrigue : **chaque chantier terminé 
 | ID | Titre | Statut | Résumé | Ancrage Alien |
 | --- | --- | --- | --- | --- |
 | `colony-intro-quai` (ID proposé) | **Le quai des vivants** | Séquence **[EXISTANT]** / raccordement **[PROPOSÉ]** | Triage, blessé, sas, trois civils (`port-meridien-v90.js`). Rencontre de Tomas Wren et Lucia Ferro. | Évacuation de colons, premier hôte. |
-| `colony-intro-doyenne` | **La doyenne** | **[PROPOSÉ]** | Asha présente Echo-9 à Adèle Sarrazin. Visite du port : quais, infirmerie, processeur atmosphérique, mur nord. Adèle montre la dette de la colonie envers la compagnie : « S'ils nous déclarent non viables, ils reprennent tout, nous compris. » | Colonie endettée envers la compagnie. |
+| `colony-intro-doyenne` | **La doyenne** | **[EXISTANT] V188 en visite guidée** (séquence `cin-doyenne` à la fin du quai ; la visite libre attend un hub Port-Méridien, §43) | Asha présente Echo-9 à Adèle Sarrazin. Visite du port : quais, infirmerie, processeur atmosphérique, mur nord. Adèle montre la dette de la colonie envers la compagnie : « S'ils nous déclarent non viables, ils reprennent tout, nous compris. » | Colonie endettée envers la compagnie. |
 
 **Principales**
 
@@ -914,7 +964,9 @@ C'est ce qui relie la reconstruction à l'intrigue : **chaque chantier terminé 
 | Chargeur bloqué | `secure the power loader` | Vitesse des chantiers + |
 | Sceller une ouverture | `seal the hive` | Infestation − |
 
-### 6.3 Reconstruction — [PROPOSÉ]
+### 6.3 Reconstruction — [PARTIEL] V188
+
+> **État V188.** La table existe dans la vue Commandement (« RECONSTRUCTION DE PORT-MÉRIDIEN », `src/colony-reconstruction-v188.js`, sauvegarde `colonyV188`). Les adaptations et valeurs retenues sont au §56.8.
 
 Après C2, Asha ouvre la **table de reconstruction** (salle commune de Port-Méridien, ou console des quartiers du Tantalus). Chaque chantier a trois niveaux et correspond à un **critère de viabilité** de la charte.
 
@@ -1104,18 +1156,19 @@ Les chapitres Mire Archive 001, Protocole Z-110, Jeri, Éloïse, A.T.A.X.-Q, Le 
 
 | ID | Titre | Partie | Durée | Statut |
 | --- | --- | --- | --- | --- |
-| CIN-00 | Ouverture | Titre | 60-75 s | [PROPOSÉ] |
-| CIN-01 | Le casier vide | Prologue | 20 s | [PROPOSÉ] |
-| CIN-02 | Le briefing | Prologue | 45 s | [PROPOSÉ] |
-| CIN-10 | Les quais déserts | Acte I | 30 s | [PROPOSÉ] |
-| CIN-11 | Ouvert de l'intérieur | Acte I | 25 s | [PROPOSÉ] |
-| CIN-20 | Treize minutes | Acte II | 40 s | [PROPOSÉ] |
+| CIN-00 | Ouverture | Titre | 60-75 s | [EXISTANT] V188 (placeholder Canvas) |
+| CIN-01 | Le casier vide | Prologue | 20 s | [EXISTANT] V188 (placeholder Canvas) |
+| CIN-02 | Le briefing | Prologue | 45 s | [EXISTANT] V188 (placeholder Canvas) |
+| CIN-03 | Descente sur Port-Méridien | Prologue | 33 s | [EXISTANT] V188 (placeholder Canvas) ; [PROPOSÉ] §56.11 |
+| CIN-10 | Les quais déserts | Acte I | 30 s | [EXISTANT] V188 |
+| CIN-11 | Ouvert de l'intérieur | Acte I | 25 s | [EXISTANT] V188 (placeholder Canvas) |
+| CIN-20 | Treize minutes | Acte II | 40 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-21 | Le quai nord | `story-quai-nord` | 25 s | [PROPOSÉ] |
-| CIN-31 | Le sas refermé | Acte III | 30 s | [PROPOSÉ] |
-| CIN-40 | Jun Park ne répond plus | Interlude | 30 s | [PROPOSÉ] |
-| CIN-41 | Ce que BISHOP-9 savait | Interlude | 45 s | [PROPOSÉ] |
-| CIN-50 | Les dernières images | Acte IV | 35 s | [PROPOSÉ] |
-| CIN-51 | Contrôle biologique | Acte IV | 25 s | [PROPOSÉ] |
+| CIN-31 | Le sas refermé | Acte III | 30 s | [EXISTANT] V188 (placeholder Canvas) |
+| CIN-40 | Jun Park ne répond plus | Interlude | 30 s | [EXISTANT] V188 (placeholder Canvas) |
+| CIN-41 | Ce que BISHOP-9 savait | Interlude | 45 s | [EXISTANT] V188 (placeholder Canvas) |
+| CIN-50 | Les dernières images | Acte IV | 35 s | [EXISTANT] V188 (placeholder Canvas) |
+| CIN-51 | Contrôle biologique | Acte IV | 25 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-59 | L'atterrissage | `story-recuperation` | 20 s | [PROPOSÉ] |
 | CIN-60 | Dernier départ | Acte V | 30 s | [PROPOSÉ] |
 | CIN-61 | Les portes du port | Acte V | 45 s | [PROPOSÉ] |
@@ -4211,3 +4264,308 @@ Le registre devient un champ de la fiche de mission. Il est lu par :
 | 6 | Continuer et nouvelle partie + (§55.8) | Après la fin de la campagne principale |
 
 Les lots 2 à 6 modifient la sauvegarde : chacun demande la levée de protection décrite en tête de section.
+
+---
+
+## 56. Priorités P0 et P1 — validées le 2026-11-12
+
+**Décision du propriétaire (2026-11-12) :** la bible ne classait pas ses tâches par priorité. Le classement ci-dessous est validé. Il reprend l'ordre des §54 et §55.9 : la tranche verticale passe d'abord, puis les choix de création de partie et les options.
+
+### 56.1 Cadre du lot V188
+
+- **Levée de protection accordée** pour `src/save.js` et les autres `protectedGameplayBytes` touchés par ces priorités (§52.3, §55). Chaque octet modifié reçoit un reçu exact dans `scripts/audit-tantalus-priorities-v188.mjs`, qui prolonge la chaîne V183 → V187 sans réécrire les reçus existants.
+- Les migrations restent **additives**. Une sauvegarde sans le nouveau champ reçoit une valeur par défaut et ne perd rien. Les identifiants existants sont conservés.
+- Les valeurs chiffrées ci-dessous sont **[PROPOSÉ]** : elles ont été choisies prudentes et réglables, et elles restent à confirmer par les tests de jeu (§53.11). Une valeur peut être réglée sans nouvelle décision. Changer une règle demande une décision.
+- **Outils de développement :** Spec Kit et Claude Code Game Studios ont été adoptés aux révisions de `.ai-tools/sources.json`. Leurs fichiers sont listés avec leur empreinte dans `.ai-tools/adopted-v188.json`. Ils restent source uniquement et sont refusés dans un build.
+
+### 56.2 P0 — tranche verticale de la première heure
+
+| # | Tâche | Source | Statut |
+| --- | --- | --- | --- |
+| P0-1 | Enchaînement prologue → Port-Méridien → briefing → Acte II (QZ-18) → retour, suivi par un état de campagne `storyCampaign` | §53.1, §11 | Fait (V188) : QZ-18 en tête et présélectionné au Commandement, compte rendu suivi ; test joueurs à faire |
+| P0-2 | Environ 40 bruitages prioritaires synthétisés hors ligne, et provenance audio mise à jour | §53.2 | Fait (V188) : 40 sons originaux branchés ; provenance dans `LICENSE_NOTICE.md` |
+| P0-3 | Emplacements musicaux alerte, boss, fins et retour au calme, avec leurs points d'accroche | §53.2, §55.7 | Fait (V188) : emplacements et accroches, `ending` compris ; morceaux Flow attendus du propriétaire |
+| P0-4 | Écran d'objectif toujours accessible, en mission comme au hub | §53.9 | Fait (V188) : pause et touche M, FR/EN |
+| P0-5 | Réglage du tir (recul, impact, réaction, son), mesuré avant et après sur une même scène | §53.3 | Fait (V188), mesuré avant/après ; ressenti à confirmer en test de jeu |
+| P0-6 | Directeur de tension piloté par le registre | §53.3, §55.7 | Fait (V188) |
+| P0-7 | Fausses alertes du détecteur de mouvement | §53.3, §14.5, §7.2 | Fait (V188) |
+| P0-8 | Registre de mission (champ de la fiche) et sauvegarde en mission selon le registre : terminaux et sauvegarde libre hors combat | §0.3, §55.3, §55.7 | Fait (V188) : terminal placeholder dessiné au checkpoint sécurisé ; art définitif à produire |
+
+### 56.3 P1 — après la tranche
+
+| # | Tâche | Source | Statut |
+| --- | --- | --- | --- |
+| P1-1 | Comportements propres à chaque caste : plafond, contournement, fuite de la lumière, embuscade | §53.3 | Fait (V188) : drone (recul, plafond), rôdeur, embusqué |
+| P1-2 | Mort définitive de l'équipage optionnelle, choisie à la création de la partie | §55.5 | Fait (V188) |
+| P1-3 | Origines d'Echo-9 : choix au créateur et capacités bornées | §2.4, §55.6 | Fait (V188) : 19 capacités raccordées, dont 03, 11 et 16 selon les propositions du §56.6 ; fil caviardé lié à Asphodèle |
+| P1-4 | Difficulté à la carte (`custom`) | §55.4 | Fait (V188) |
+| P1-5 | Accessibilité : mode daltonien, taille du texte, sous-titres des sons importants, remappage des commandes | §53.8 | Fait (V188) ; palette Canvas dédiée pour les signaux d'état (§56.10) |
+| P1-6 | Répliques réactives : mission ratée, colon mort, retour blessé | §53.6 | Fait (V188) : notification au retour et reprise au mess pendant 3 jours |
+
+Les tâches suivantes ne font partie ni du P0 ni du P1 : coop étendue (§55.2), nouvelle partie + (§55.8), présentation publique (§53.10) et production d'images (§53.4, faite par le propriétaire).
+
+### 56.4 Valeurs proposées — [PROPOSÉ]
+
+**Sauvegarde libre « hors combat » (§55.3).** Le bouton est accepté seulement si les trois conditions suivantes sont réunies :
+
+- aucun ennemi n'est en état d'alerte ou de poursuite ;
+- aucun ennemi vivant ne se trouve à moins de **640 px** du joueur, soit environ un écran de large ;
+- le joueur n'a reçu aucun dégât depuis **8 s**.
+
+Sinon, le refus s'affiche en jeu : « Impossible de sauvegarder : menace à proximité. » Le terminal physique demande **3 s** d'interaction exposée. Il est refusé pour la même menace proche, mais il reste accepté si le joueur a reçu un dégât récent.
+
+**Directeur de tension (§53.3).** L'intensité va de 0 à 100. Elle monte avec les dégâts reçus (+1 par point de vie perdu), les ennemis visibles à moins de 640 px (+4 par ennemi et par seconde, plafonnés à +12 par seconde) et le manque de munitions (+5 sous 20 % du chargeur et de la réserve). Hors contact, elle baisse de 6 par seconde.
+
+Le directeur passe par trois phases :
+
+1. **Montée** : les apparitions suivent le registre.
+2. **Pic** : il s'enclenche quand l'intensité atteint 85 ou plus. Aucune nouvelle apparition.
+3. **Relâche** : elle commence quand l'intensité redescend sous 30. Aucune apparition pendant une durée garantie de **30 s en Horreur, 20 s en Tension et 10 s en Action**. Le registre Calme n'a pas d'apparitions.
+
+| Registre | Multiplicateur d'apparition en montée |
+| --- | --- |
+| Horreur | 0,5 |
+| Tension | 0,8 |
+| Action | 1,2 |
+
+**Fausses alertes du détecteur (§53.3).** Elles se produisent en Horreur et en Tension seulement, toutes les **45 à 90 s** tirées au hasard, à condition qu'aucun contact réel n'ait eu lieu depuis 15 s. L'écho dure **1,2 s**. Il est placé à 300-600 px, dans la direction d'une source plausible : ventilation, porte ou machine. En se rapprochant, le joueur voit la cause sous forme d'un sous-titre : « Écho : ventilation ».
+
+**Capacités des origines (§2.4).** Toutes les capacités restent modestes : de **10 à 15 %** quand elles sont chiffrées, une seule fois par mission quand elles sont ponctuelles. `origin-20` n'a pas de capacité.
+
+| Origine | Valeur proposée |
+| --- | --- |
+| 01 | −15 % de dispersion en alerte |
+| 02 | Panique des civils escortés −25 % |
+| 03 | Première pièce lue : un indice de recoupement (§56.6) |
+| 04 | Chargeur P-5000 : vitesse +10 % |
+| 05 | Réparation des systèmes atmosphériques +20 % |
+| 06 | Abris et sas sûrs signalés sur la carte |
+| 07 | Vitesse en conduit +15 % |
+| 08 | Soin d'un équipier +20 % |
+| 09 | Fenêtre d'extraction +10 s |
+| 10 | Une porte de la compagnie par mission ouverte sans piratage |
+| 11 | +10 % de dégâts avec une arme UPP (§56.6) |
+| 12 | Matériaux par caisse +10 % |
+| 13 | Échos du détecteur : faux échos identifiés, rayon −30 % |
+| 14 | Casiers ouverts sans outil |
+| 15 | Réparation du M577 et des tourelles +20 % |
+| 16 | +1 échantillon biologique par mission réussie (§56.6) |
+| 17 | Ordres d'escouade exécutés 15 % plus vite |
+| 18 | Dégâts subis par le véhicule escorté −10 % |
+| 19 | Dégâts en couloir étroit +10 % |
+
+**Bruitages prioritaires (§53.2), 40 sons synthétisés.** Ils sont générés hors ligne par `scripts/generate-audio-v132.mjs`, sans échantillon externe.
+
+| Famille | Sons |
+| --- | --- |
+| Détecteur (4) | impulsion, contact proche, contact lointain, écho faux |
+| Pas (5) | métal, grille, béton, eau, résine |
+| Portes et sas (6) | porte qui s'ouvre, porte qui se ferme, porte verrouillée, sas qui se pressurise, sas qui se dépressurise, porte forcée |
+| Ascenseurs (2) | départ, arrivée |
+| Alarmes (3) | alerte générale, quarantaine, compte à rebours |
+| Ambiance (4) | pluie extérieure, pluie sur tôle, ventilation, bourdonnement de relais |
+| Cris par caste (8) | drone, guerrier, rôdeur, cracheur, Crusher, reine, facehugger, chestburster |
+| Armes principales (8) | rafale du M41A, grenade du M41A, pistolet, fusil à pompe, smartgun, lance-flammes, rechargement, cliquetis à vide |
+
+**Répliques réactives (§53.6).** Les déclencheurs sont une mission ratée, un colon mort et un retour blessé. Il y a une réplique par déclencheur et par profil (humain et synthétique), en français et en anglais. La même réplique ne se répète pas pendant 3 jours de jeu.
+
+### 56.5 Suivi du lot V188
+
+Réalisation, mesures, vérifications et limites : [rapport V188](../development/PRIORITIES_P0_P1_V188.md). Les statuts « Fait » ci-dessus désignent un raccordement au jeu vérifié par des tests Node sur le moteur réel et des contrôles Chromium. Ils ne remplacent pas le test de la tranche par 3 à 5 joueurs (§53.11), qui reste à faire.
+
+### 56.6 Origines 03, 11 et 16 — [PROPOSÉ], implémenté le 2026-11-12
+
+Le propriétaire a demandé une solution pour chaque question. Les trois propositions sont raccordées au jeu ; elles restent révisables.
+
+| # | Origine | Problème | Solution proposée et implémentée |
+| --- | --- | --- | --- |
+| 1 | `origin-03` *Procès-verbal* | La capacité ne peut pas inventer des faits d'enquête | La **première pièce lue** dans la mission affiche un indice de recoupement. Chaque indice relie seulement des faits déjà écrits dans d'autres pièces du même dossier : heures 18:39 à 18:54, accès local du badge, télémétrie sans défaut, série QZ17. Il y a un indice par pièce de QZ-18 et des pièces de terrain, en FR et EN. |
+| 2 | `origin-16` *Échantillons* | Le jeu n'a aucun système de prélèvement | La capacité est réinterprétée en **+1 échantillon biologique** (ressource `pathogen`) après chaque mission réussie. La règle actuelle reste respectée : un dossier documentaire comme QZ-18 n'en donne pas. Un vrai système de prélèvement pourra la remplacer plus tard. |
+| 3 | `origin-11` *Matériel de l'Union* | Aucune pénalité n'existe pour les armes UPP | Je n'ajoute **pas de pénalité** aux 19 autres origines, car cela changerait l'équilibrage de tout le jeu. La capacité devient **+10 % de dégâts** avec une arme principale de fabrication UPP (Type 88, AK-4047…). |
+
+**Reste à faire pour les origines :** le fil du dossier caviardé (`origin-20`, §2.4.3). Ses quatre fragments sont placés dans des lieux qui n'existent pas encore dans le jeu : la quête de DAVID-8R, CASSIUS en S2, la salle des relais d'Asphodèle et l'épilogue. **Proposition :** l'intégrer avec le second hub Asphodèle (§42). Le placer ailleurs déplacerait des scènes de la bible.
+
+### 56.7 Refonte du prologue (V188, 2026-11-13)
+
+Les ajouts **[PROPOSÉ]** du §4, CIN-20 et la réponse de Halloran (§5.2) sont désormais jouables. Ils reposent sur un lecteur de cinématiques Canvas 2D conforme au §10 : plans scriptés, cadres de dialogue avec les portraits relus de l'équipage, passables avec Échap, plan suivant avec Espace ou un clic. Les cinématiques sont revisibles dans Système → Cinématiques et ne donnent aucune récompense.
+
+| Moment | Séquence | Déclencheur |
+| --- | --- | --- |
+| Nouvelle partie | CIN-00 *Ouverture* (8 plans, 65 s) | Avant le créateur de personnage, à chaque nouvelle partie |
+| P-1 | CIN-01 *Le casier vide* (réplique de DAVID-8R, puis le casier scellé) | Confirmation du réveil |
+| P-2 | `cin-p2` *La liaison prioritaire* (paquet de messages, puis Mara Vega) | Liaison rétablie à la console de l'exercice |
+| Avant P-3 | CIN-02 *Le briefing* (Vega, Vega, Harlow, Velez) | Premier embarquement depuis la salle de briefing |
+| P-3 | `cin-p3-wren` puis `cin-p3-ferro` (Lucia Ferro, Noor Okafor à la radio) | Arrivée au quai, puis fin du triage |
+| Retour de QZ-18 | CIN-20 *Treize minutes*, puis Halloran ; ensuite `cin-20-rook` *La signature* | Premier compte rendu de QZ-18 lu |
+| Fin du quai des vivants | `cin-doyenne` *La doyenne* : Asha présente Adèle Sarrazin, puis les quais, l'infirmerie, le processeur et le mur nord, et enfin la réplique d'Adèle sur la dette | Rapport final du quai, avant les Opérations |
+| Acte III, départ du convoi | Manifeste du M577 (0 à 3 conteneurs, 6 places moins 2 par conteneur) | Lancement de `special-apc-convoy` sans manifeste signé |
+| Acte III, C-12 | Coups dans le conteneur et « Notez l'heure. » | 13 s de défense, s'il y a au moins un conteneur |
+| Retour de C-12 | CIN-31 *Le sas refermé*, d'après le manifeste ; colons ajoutés une fois | Première table tactique après C-12 |
+| Interlude | CIN-40, puis une crise xénomorphe forcée (pont 2, quarantaine) ; une fois résolue, le choix détruire ou capturer, puis CIN-41 | Après CIN-31 |
+| Acte IV, réveil | CIN-50 *Les dernières images* | Début du cocon noir |
+| Retour de l'Acte IV | CIN-51 *Contrôle biologique* (NÉGATIF, Noor) | Première table tactique après le cocon noir |
+| Acte I, prise de contrôle | CIN-10 *Les quais déserts* (peinture existante du dropship, pluie), puis Rook | Fin de l'insertion de QZ-17 |
+| Acte I, route de maintenance | CIN-11 *Ouvert de l'intérieur* (berceau givré, fixations arrachées), puis Inez à la radio | Choix « Suivre la trace par la maintenance » |
+| Retour de QZ-17 | `cin-qz17-retour` : les trois conclusions d'Inez | Première ouverture de la table tactique après QZ-17 |
+
+Après QZ-18, la table tactique recommande l'Acte I (★) tant qu'il n'est pas terminé, conformément à la chronologie du §3.
+
+**Textes écrits pour combler la bible — [PROPOSÉ] :**
+
+- La réplique de Mara Vega qui coupe l'exercice : « Velez, on coupe l'exercice. Echo-9, rendez l'arme au pas de tir et montez en salle de briefing. » La règle de l'exercice V89 (retour au pas de tir) reste inchangée.
+- Le nombre de messages retardés : 37 sur six jours, le dernier datant de 4 h.
+- Les noms du personnel du quai nord dans CIN-20 : E. Okonjo, P. Lindqvist, S. Arenas, D. Haddad, K. Brandt. Ce sont aussi les noms à la craie de `story-quai-nord`.
+- Les répliques de l'Interlude : Velez à la radio (CIN-40) ; le journal 02:14-02:31, BISHOP-9 et Inez (CIN-41).
+- La réplique d'Asha qui présente Adèle : « Echo-9, voici Adèle Sarrazin. C'est elle qui tient le port ensemble. » La visite libre de la doyenne est adaptée en visite guidée, faute de hub Port-Méridien.
+- La réplique de Rook sur la signature d'Asphodèle (tissage du §5.2) : « Le profil « priorité cargaison » n'a pas été activé au relais. Il a été autorisé à distance. La signature vient de la station Asphodèle. »
+- Toutes les versions anglaises des répliques du prologue.
+
+**Toujours à faire :**
+
+- L'art définitif des plans (§29.1). Les décors actuels sont des placeholders en primitives Canvas.
+- ~~L'interaction physique avec le casier `ECHO-8` dans la baie cryo~~ : **fait (V188)**. Le casier scellé est dessiné en primitives dans la baie cryo ; E affiche les faits établis jusque-là. Ces trois notes sont **[PROPOSÉ]** : sceau et abordage, puis quarantaine (après CIN-02), puis signature d'Asphodèle (après « La signature »). Le reste du fil `ship-cryo` (effets de Kessler, étiquettes de l'épilogue) dépend de la station.
+- Une voix et un geste de pointage sur la carte (CIN-02).
+
+### 56.8 Reconstruction de Port-Méridien (V188, 2026-11-13)
+
+La table du §6.3 est jouable dans la vue Commandement. Les sept chantiers, leurs trois niveaux, leurs critères et leurs référents reprennent le tableau du §6.3. La sauvegarde ajoute `colonyV188` (niveaux investis et validés par chantier) ; les anciennes sauvegardes reçoivent une table vide.
+
+| Règle du §6.3 | Mise en œuvre V188 | Statut |
+| --- | --- | --- |
+| Ouverture après C2 | Ouverture après QZ-18 (Acte II), C2 n'étant pas jouable | [PROPOSÉ] |
+| Ressources et temps stratégique ; rien pendant une mission | Coût payé en ressources existantes, horloge avancée ; refus si une opération est en cours | [EXISTANT] V188 |
+| Validation par une mission locale | Validation du plus ancien niveau en attente après une opération réussie sur Cocyte (`world-05-lethe`), en attendant les missions C1–C5 | [PROPOSÉ] |
+| Échec : perte d'un niveau de fonctionnement | Opération ratée sur Cocyte : le chantier le plus avancé perd un niveau validé ; l'investissement reste | [EXISTANT] V188 |
+| Population et chantiers actifs | 1 chantier en attente + 1 par tranche de deux personnes ramenées (3 civils du quai, colons du manifeste M577) | [PROPOSÉ] |
+| Stabilité | +3 de stabilité de Cocyte par niveau validé | [PROPOSÉ] |
+| Paliers | Survie, Rétablie (3 chantiers niveau 1), Autonome (5 chantiers niveau 2) ; Libre attend la fin « Le relais parle » | [PARTIEL] |
+| Ressources régulières (Autonome) | +150 crédits et +10 alliage à chaque opération réussie sur Cocyte | [PROPOSÉ] |
+
+**Coûts [PROPOSÉ] :** niveau 1 : 400 crédits, 20 alliage, 6 h ; niveau 2 : 900 crédits, 45 alliage, 5 recherche, 12 h ; niveau 3 : 1 600 crédits, 80 alliage, 12 recherche, 24 h.
+
+**Toujours à faire :** les missions locales C1–C5 et les annexes, le recrutement de Nadia Bensaïd (palier Rétablie), la console physique dans la salle commune ou les quartiers, l'épilogue du palier Libre.
+
+### 56.9 Interlude : Jun Park et routine d'alerte (V188, 2026-11-13)
+
+- **Routine `alert`** : la crise forcée de l'Interlude met les seize PNJ en routine `alert` (`resolveNpcRoutineV62`). Correction : une crise marquée résolue ne maintient plus l'équipage en alerte.
+- **Sauvetage** : Jun Park est dans le nœud de conduit `hub-life-support`. L'atteindre pendant l'alerte le ramène. Le choix détruire ou capturer attend les deux conditions ; l'objectif du hub indique celle qui manque. Les deux conditions sont sauvegardées pendant l'alerte.
+- **Réplique [PROPOSÉ]** : « J'ai cru qu'elle était dans le conduit avec moi. » (EN : “I thought it was in the duct with me.”) Jun rampe ensuite vers l'infirmerie.
+- **Adaptation [PROPOSÉ]** : Jun n'est pas dessiné dans le conduit ; le message et le journal stratégique marquent le sauvetage.
+
+### 56.10 Mode daltonien : palette dédiée (V188, 2026-11-13)
+
+- **Correction** : la première version appliquait au canvas et aux panneaux des matrices de *simulation* du daltonisme. Elles montraient au joueur ce qu'il voit déjà, sans rendre de contraste. Ce filtre global est retiré.
+- **Palette** : `src/colorblind-palette-v188.js`. Les signaux d'état dessinés sur le canvas passent par une palette Okabe–Ito : portes verrouillée, ouverte et fermée des missions, du hub, des cloisons, du Bioforge et du relais, ainsi que le guide de déplacement bloqué ou libre. Ces couleurs diffèrent aussi en luminosité. Mode désactivé : couleurs d'origine, octet pour octet.
+- **Mesure** : sous les trois simulations, l'écart minimal entre états passe d'environ 0,12–0,29 à au moins 0,4 (test `verify-accessibility-v188`).
+- **Reste à faire** : les signaux d'interface HTML (panneaux) et les autres codes couleur du canvas, à recenser.
+
+### 56.11 Prologue cinématographique (V188, 2026-11-13)
+
+**Cinématiques (toutes, `story-cinematics-v188.js`)** :
+
+- **Cadre** : format 2,39:1 entre deux bandes noires. Les légendes s'affichent dans les bandes, hors du mouvement de caméra.
+- **Caméra** : chaque plan a sa caméra, soit un mouvement lent par défaut, soit un `camera` explicite. Le mode « mouvement réduit » fige la caméra.
+- **Raccords** : les répliques d'une même conversation s'enchaînent sans fondu ; le noir n'intervient qu'aux changements de scène.
+- **Sous-titres** : bas d'écran avec petit portrait, nom et réplique tapée. Une voix radio s'affiche en ambre, avec de la neige sur le portrait.
+- **Image** : grain et vignettage.
+- **Décors** en primitives, toujours des placeholders :
+  - baie cryo : capsules horizontales à verrière givrée, la n° 3 ouverte, celle d'Echo-9 ;
+  - pas de tir : couloirs, silhouettes de cible, lampes au sodium ;
+  - salle holographique : projection qui scintille, équipage en contre-jour ;
+  - quai : grues, conteneurs, projecteurs dans la pluie, reflets ;
+  - triage : rideaux, scialytique ;
+  - quartiers : lampe de bureau ;
+  - soute du dropship : lumière rouge, harnais, hublots sous la pluie, secousses.
+- **Nouvelle séquence** : CIN-03 *Descente sur Port-Méridien*, présentée au §4. Ses répliques sont **[PROPOSÉ]**.
+- **Passe de cohérence des décors (2026-11-14)** : chaque décor a une échelle unique (personnes de 1,2 à 1,95 m), les quantités suivent le jeu et le canon, et le test `verify-cinematic-coherence-v188` les vérifie.
+  - **Baie cryo (CIN-01 et salle du jeu)** : le plan et la salle montrent la même disposition : le casier ECHO-8, la porte des capsules de sauvetage, DAVID-8R, la capsule 03 ouverte contre le mur et les capsules 01, 02 et 04 au premier plan. La salle ajoute un poste de cryostase en tête de la capsule 03 **[PROPOSÉ]**.
+  - **Casier** : un seul casier ECHO-8 scellé, aux proportions du jeu.
+  - **Briefing (CIN-02)** : Harlow, Vega, Velez et Echo-9 autour d'une table de 3,1 m **[PROPOSÉ]**.
+  - **Quai** : conteneurs de 10 pieds, Wren et trois habitants à l'arrivée, Asha et Adèle Sarrazin pour la visite.
+  - **Triage** : le blessé allongé, Lucia Ferro à côté.
+  - **CIN-11** : berceau QZ17 de 2,4 × 1,0 m **[PROPOSÉ]**, couvercle forcé vers l'extérieur, trois sangles arrachées, Echo-9 à la torche pour l'échelle.
+  - **CIN-10** : Rook parle par radio, conformément au tableau de l'équipage.
+  - **CIN-31** : les comptes du manifeste ne sont plus cachés par la bande du bas.
+
+**Mise en scène en jeu (`ingame-staging-v188.js`)** :
+
+- Des moments courts se jouent par-dessus le niveau vivant, sans changer d'écran : bandes cinémascope, étalonnage de l'image, sous-titres, puis retour du contrôle.
+- Le monde continue de tourner ; seules les entrées du joueur sont retenues. Entrée passe à la suite, Échap passe la scène.
+- L'habillage du niveau (boutons, bandeau d'objectif) s'efface pendant la scène.
+- Étalonnages : hypersommeil (noir, flou froid, puis net), pluie (rideau animé) et alerte (pulsation ambre).
+- Chaque moment se joue une fois par campagne : la sauvegarde ajoute `storyCampaignV188.beatsSeen`. Aucune récompense.
+- Moments : réveil (P-1), interruption de la qualification (P-2), arrivée sur le quai et constat (P-3). Les textes sont au §4, **[PROPOSÉ]**.
+- **Mouvement réduit** : pas d'animation de bandes, de pluie ni de transition de flou.
+
+**Toujours à faire** : voix, plans de caméra déplacée dans le niveau (le hub suit le joueur), art définitif.
+
+### 56.12 Salles hybrides 2D / 2,5D (V188, 2026-11-13)
+
+Décision du propriétaire : certaines salles passent en **profondeur** (2,5D, déplacement au sol vers la caméra), les autres restent **de profil** (2D, hauteur, échelles, coursives, conduits). Cadrage Spec Kit : `specs/001-salles-hybrides-2d-25d/` (spec, plan, recherche, tâches).
+
+- **Prototype** : le hangar du dropship, sans combat. Le rail actuel, le long du mur (portes, échelles, pupitres), est la limite du fond. W/S avancent vers la caméra ou reculent vers le mur, jusqu'à 80 unités.
+- **Le UD-4L** quitte le mur : on le contourne par une allée étroite derrière lui, le long du mur, ou par l'avant. On peut passer sous la queue et sous le nez. Deux piles de caisses et un chariot (placeholders en primitives) créent les passages.
+- **Lecture de la profondeur** : sprites jamais mis à l'échelle (décision du propriétaire). Décalage vertical, ombre au sol, sol plus sombre près du mur, repères au sol. Le dropship et les caisses masquent qui passe derrière eux ; le joueur masqué garde un contour en pointillé.
+- **Interactions** : celles du mur (portes, annexes, pupitre d'amarrage, échelles) se font depuis le mur. L'embarquement se fait devant le UD-4L. Un PNJ répond dans sa bande de profondeur.
+- **Échelles** : E s'accroche au pied d'une échelle, puis W/S montent. Les coursives restent en 2D.
+- **Équipage** : Maksim Orlov tient son poste devant le nez du UD-4L. Les PNJ marchent dans l'allée avant le long du vaisseau et sur le rail ailleurs.
+- **Portes** : annonce à l'approche (« SALLE EN PROFONDEUR · W/S : AVANCER / RECULER »). La cloison du réacteur ne se franchit que près du mur.
+- **Sauvegarde** : `hub.depthV188` (profondeur dans la salle, champ additif) ; une ancienne sauvegarde revient au mur.
+- **Tir futur** (non branché tant qu'il n'y a pas de combat en profondeur) : tir horizontal qui touche une cible dans une bande de ±22 ; le tireur se recale de 30 % vers elle.
+- **Quai de Port-Méridien (P-3)** — deuxième salle en profondeur :
+  - les postes de mission (lot de secours, triage, relais du sas, constat) restent contre le mur ;
+  - la caisse de la rampe reste franchissable d'un saut près du mur, et se contourne par l'avant ;
+  - des conteneurs, des fûts et une palette (placeholders en primitives) occupent le sol ;
+  - le sas fermé barre tout le quai, du mur jusqu'à l'avant ;
+  - pendant l'escorte, les trois habitants suivent Echo-9 en profondeur, en file, un pas derrière ; ils contournent un objet plutôt que d'y entrer ;
+  - une pluie fine tombe sur le quai, comme dans CIN-03 ; la sauvegarde du quai garde la profondeur (`portMeridienV90.z`, additif).
+  - **Passe de cohérence (2026-11-14)**, valeurs **[PROPOSÉ]** :
+    - **Arrivée** : l'arrière du UD-4L est dessiné, rampe baissée sous deux projecteurs.
+    - **Personnages** : Tomas Wren (gilet haute visibilité, tablette), Lucia Ferro (brassard à croix) et le blessé du quai nord, allongé sur la civière, la poitrine bandée. Les trois habitants attendent à côté du triage.
+    - **Lot de secours** : il porte la croix rouge (médical) ou l'éclair (énergie), selon le choix.
+    - **Sas** : la porte fait 2,6 m dans une cloison qui monte jusqu'au collisionneur, avec un gyrophare (ambre fermé, vert ouvert).
+    - **Tailles** : conteneur ISO de 10 pieds, fûts de 0,9 m, palette de 1,2 m.
+    - **Allées** : 20 de profondeur au minimum ; la palette ne barre plus l'escorte.
+    - **Escorte** : les habitants s'arrêtent devant le terminal du constat sans le masquer ; les anciennes sauvegardes sont ramenées à ces places, jamais refusées.
+    - **Panneaux** : chacun a sa version FR et EN (RAMPE · FRET / RAMP · FREIGHT, TRIAGE · HABITANTS / TRIAGE · RESIDENTS, RELAIS DU SAS / AIRLOCK RELAY, SECTEUR NORMAL ? / NORMAL SECTOR?).
+- **Ordre entre personnages** : un PNJ placé devant Echo-9 le masque, puisque le joueur est alors dessiné avant l'équipage.
+- **Pièces du prologue à bord (passe de cohérence 2026-11-14, `src/hub-prologue-rooms-v188.js`)**, valeurs **[PROPOSÉ]** :
+  - **Baie cryo** :
+    - la capsule de la salle devient la **capsule 03**, vidée, verrière levée ;
+    - les capsules 01, 02 et 04 sont au premier plan ;
+    - un poste de cryostase se trouve en tête de la capsule 03 : ambre pendant le réveil, vert ensuite ;
+    - DAVID-8R se tient à portée de voix ;
+    - la porte des capsules de sauvetage s'appelle désormais ainsi, pour ne pas être confondue avec les capsules d'hypersommeil ;
+    - l'invite du bas nomme l'étape que sert E.
+  - **Briefing** :
+    - une projection de Cocyte et d'Asphodèle, avec le voyant QZ rouge, flotte au-dessus de la table ;
+    - Velez donne ses consignes à la table, et non plus dans l'embrasure des archives ;
+    - Vega, Harlow et Velez attendent à la table tant que CIN-02 n'a pas été jouée.
+  - **Pas de tir** : il était déjà cohérent (9 cibles de 1,88 m, de 5,9 à 16,1 m) ; il n'a pas été modifié.
+  - **Hangar** :
+    - caisses de 1,2 m, sur une seule rangée ;
+    - chariot près du nez du UD-4L ;
+    - plus rien devant le sas ;
+    - au sol : ancrages des patins, vanne de carburant avec son tuyau, zone « EMBARQUEMENT UD-4L ».
+- **Cales de QZ-17 (Acte I), avec combat** — spec `specs/002-cales-qz17-profondeur-combat/` :
+  - le pont bas des soutes dépressurisées, entre les deux sas, est la première section de mission en profondeur ;
+  - trois rangées de conteneurs scellés marqués QZ17 (placeholders en primitives, cohérents avec CIN-31) laissent une allée le long du mur et deux allées vers la caméra ;
+  - la couverture de caisses existante se franchit près du mur et se contourne par l'avant ;
+  - **tir** : une salve horizontale touche un xénomorphe à ±22 de profondeur, Echo-9 se recale de 30 % vers lui, et un conteneur sur la ligne arrête la salve ; l'aide à la visée et le corps à corps suivent la même bande ;
+  - **ennemis** : les rôdeurs de la dépressurisation rejoignent la profondeur d'Echo-9 en contournant les conteneurs ; une attaque, ou un projectile, ne porte qu'à ±24 ;
+  - **détecteur** : il compte la profondeur dans la distance ;
+  - **preuves, ravitaillement et sas** : accessibles depuis l'allée du mur ;
+  - la reprise de mission garde la profondeur d'Echo-9, du marine coop et des xénomorphes.
+  - Dans la cale, W/S ne servent plus à viser vers le haut ou le bas : le tir y est horizontal, décision (3).
+  - **Passe de cohérence (2026-11-14)**, `src/qz17-level-dressing-v188.js`, valeurs **[PROPOSÉ]** :
+    - **Conteneurs** : ils passent à la taille ISO 10 pieds (150 × 132 px, à 51 px par mètre). La soute n'en contient plus qu'**un**, QZ17-01, à l'avant. QZ17-02 et QZ17-03 sont empilés contre le mur du pont de service.
+    - **La cargaison fantôme** : l'emplacement **QZ17-04** est vide, avec ses saisines coupées sous une grue dont l'élingue tranchée pend encore. Trois conteneurs scellés, comme la commande de l'Acte III, et un quatrième manquant.
+    - **Sol** : rails d'arrimage et une palette basse comme couverture ; la couverture de caisses du rail est retirée. L'allée du mur fait 36 de profondeur, et deux obstacles sont toujours séparés d'au moins 1 m.
+    - **Preuves et ravitaillement** : le courriel de logistique et les munitions sont déplacés hors de l'embrasure du mur arrière.
+    - **Vide** : la bande de vide s'arrête au sas de la soute.
+    - **Rôdeurs** : ils dorment derrière QZ17-01, dans l'emplacement vide et dans la bouche du conduit. Les castes inadaptées (Reine, Crusher, trop larges) sont reportées au pont de service.
+    - **Berceau de CIN-11** : il est désormais physique, dans une alcôve de maintenance près de la sortie du conduit. Berceau QZ17-04 givré, couvercle forcé de l'intérieur, sangles arrachées. L'alcôve est scellée si l'on n'a pas pris la route de maintenance.
+    - **« Quatre accès »** : un tableau dans le tube d'amarrage liste les quatre accès réels : sas principal, échelle de service, ascenseur de coque, conduit de maintenance.
+    - **Limites** : l'ascenseur de service « B » (preuve du fragment de sceau) n'est pas placé ; le nombre de rôdeurs peut dépasser trois.
+- **Limites** : Frontier Forge n'édite pas les salles en profondeur. Prochaines candidates : d'autres soutes ou cales de mission, après évaluation de QZ-17.
+

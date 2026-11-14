@@ -16,6 +16,7 @@ import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 import { resolveHubServiceProfileV139 } from './hub-service-geometry-v139.js';
 import { constrainEditorRectV136 } from './editor-spatial-v136.js';
 import { normalizeEditorProjectV135 } from './editor-authoring-v135.js';
+import { signalColorV188 } from './colorblind-palette-v188.js';
 
 export const HUB_TRAVERSAL_ART_FILES = Object.freeze({
   catwalk: '/assets/openai/metroidvania/props/overhead-catwalk.png',
@@ -1087,7 +1088,7 @@ export class HubGame extends HubGameV50 {
     const visibleHeight = door.h * (1 - door.progress * 0.86);
     ctx.fillStyle = '#27342f';
     ctx.fillRect(door.x, door.y, door.w, visibleHeight);
-    ctx.strokeStyle = door.open ? '#7ed49a' : '#d2a957';
+    ctx.strokeStyle = signalColorV188(door.open ? 'hub-door-open' : 'hub-door-closed');
     ctx.strokeRect(door.x + 0.5, door.y + 0.5, door.w - 1, Math.max(2, visibleHeight - 1));
   }
 

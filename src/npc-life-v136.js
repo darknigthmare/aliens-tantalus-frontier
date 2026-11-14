@@ -1,4 +1,5 @@
-import { HUB_DECKS, buildHubObstacleGeometryV87 } from './hub-game.js';
+import { HUB_DECKS, HUB_WORLD, buildHubObstacleGeometryV87 } from './hub-game.js';
+import { buildHubDoorNetworkV58 } from './topology-coherence-v58.js';
 import { getHubBulkheadColliderV134 } from './hub-bulkhead-depth-v134.js';
 import { resolveSpriteSheet } from './sprite-animation-runtime.js';
 import { resolveHumanAtlasGeometryV133, drawHumanAtlasV133 } from './human-visual-contract-v133.js';
@@ -21,10 +22,35 @@ const NPC_STANDING_GAP = 12;
 // Rear-wall passages are walking bays, not idle work stations. Reserve their
 // real sockets when a cohort is built; moving crew may still cross them using
 // the ordinary physical controller and the door still checks live occupancy.
-const parentDoorBays = room => getHubDoorDestinationDescriptorsV138(room)
-  .filter(door => door.face === 'parent').map(door => door.socket);
+// V188: a lift landing is a walking bay too. An idle crew member spread onto
+// the cabin floor (crowded room) held "ARRIVÉE OCCUPÉE" for a whole routine
+// phase, since the lift admits an arrival only when its cabin pose is free.
+export function hubLiftLandingBaysV188(room) {
+  const deck = HUB_DECKS.findIndex(entry => entry.rooms.some(candidate => candidate.id === room?.id));
+  if (deck < 0) return [];
+  return buildHubDoorNetworkV58(HUB_DECKS, HUB_WORLD, deck)
+    .filter(door => door.lift && door.roomId === room.id && Number.isFinite(door.x))
+    .map(door => ({ x: door.x - 22, y: HUB_WORLD.floorY - 92, w: 44, h: 92, liftLandingV188: door.shaftId }));
+}
+const parentDoorBays = room => [...getHubDoorDestinationDescriptorsV138(room)
+  .filter(door => door.face === 'parent').map(door => door.socket), ...hubLiftLandingBaysV188(room)];
 const clearsDoorBays = (actor, x, bays) => bays.every(box => !blockedVertically(actor, box)
   || x + actor.w + NPC_STANDING_GAP <= box.x || x >= box.x + box.w + NPC_STANDING_GAP);
+
+/** V188: one rule for every annex doorway and lift landing (generalises clearParentDoorwayV188).
+ * An idle post (a route owner's home in `service`) overlapping a bay, its 12 px standing gap
+ * included, moves to the nearest free x inside [room.xStart + 96, room.xEnd - 140]. */
+export function hubRoomIdleBaysV188(room) { return room ? parentDoorBays(room) : []; }
+export function clearRoomDoorwayPostV188(room, x, width = 44) {
+  if (!room || !Number.isFinite(x)) return x;
+  const bays = parentDoorBays(room), low = room.xStart + 96, high = room.xEnd - 140;
+  const blocked = value => bays.some(box => value < box.x + box.w + NPC_STANDING_GAP && value + width > box.x - NPC_STANDING_GAP);
+  if (!blocked(x)) return x;
+  const candidates = bays.flatMap(box => [box.x - NPC_STANDING_GAP - width - 1, box.x + box.w + NPC_STANDING_GAP + 1])
+    .filter(value => value >= low && value <= high && !blocked(value))
+    .sort((a, b) => Math.abs(a - x) - Math.abs(b - x));
+  return candidates[0] ?? x;
+}
 
 function standingPeers(actor, peers) {
   const identity = actor.crewId || actor.id;

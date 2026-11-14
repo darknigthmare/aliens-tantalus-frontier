@@ -253,7 +253,8 @@ export class GameEngine extends ProductionBaseEngine {
     if (isRecord(rawState.coop) && typeof rawState.coop.enabled === 'boolean') this.coopEnabled = rawState.coop.enabled;
 
     if (isRecord(rawState.checkpoint)) {
-      const checkpointIds = new Set(['insertion', 'vent', 'security', 'containment', this.checkpoint?.id].filter(Boolean));
+      // Every checkpoint the base mission sets (power and archive included) survives a resume.
+      const checkpointIds = new Set(['insertion', 'vent', 'security', 'containment', 'power', 'archive', this.checkpoint?.id].filter(Boolean));
       const checkpointId = safeId(rawState.checkpoint.id);
       if (checkpointIds.has(checkpointId)) {
         this.checkpoint = {

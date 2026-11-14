@@ -16,7 +16,7 @@
     gap: 8px 12px;
   }
   .topbar > div { min-width: 0; }
-  .topbar h1 { font-size: 14px; line-height: 1.35; overflow-wrap: anywhere; }
+  .topbar h1 { font-size: calc(14px * var(--atf-text-scale-v188, 1)); line-height: 1.35; overflow-wrap: anywhere; }
   .topbar .icon-button { width: 44px; min-height: 44px; }
   .topbar .top-metrics {
     grid-column: 1 / -1;
@@ -31,7 +31,7 @@
     min-width: 0;
     min-height: 44px;
     padding: 8px;
-    font-size: 10px;
+    font-size: calc(10px * var(--atf-text-scale-v188, 1));
     overflow-wrap: anywhere;
   }
 }
@@ -357,7 +357,7 @@ html.mission-mode body {
 @media (pointer: coarse), (max-width: 900px) {
   .mission-mode .mission-touch-controls [data-mission-key="KeyZ"] {
     padding-inline: 2px;
-    font-size: 12px;
+    font-size: calc(12px * var(--atf-text-scale-v188, 1));
     line-height: 1.2;
     overflow-wrap: anywhere;
   }
@@ -391,7 +391,7 @@ html.mission-mode body {
     height: 28px;
     padding: 4px 10px;
     overflow: hidden;
-    font-size: 11px;
+    font-size: calc(11px * var(--atf-text-scale-v188, 1));
   }
 }
 

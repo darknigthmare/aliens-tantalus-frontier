@@ -21,6 +21,7 @@ import { playerCatalogStatsV110, playerCatalogNameV110 } from './player-surfaces
 import { getVehicleShowroomV119 } from './vehicle-showroom-v119.js';
 import { resolveAlienBaseDossierV1, resolveAlienBaseIdentityProposalV1, resolveAlienBaseMasterEntityV1, resolveAlienBaseWeaponReferenceV1 } from './alien-base-bridge-v1.js';
 import { resolveWeaponReferenceCoverageV122 as resolveWeaponReferenceCoverageV120 } from './weapon-reference-coverage-v122.js';
+import { groupLabelV188 } from './group-glossary-v188.js';
 
 const importWalkV107 = id => {
   const art = getEnemyStaticPoseV96(id), walk = getEnemyImportAnimationV107(art), attack = getEnemyImportAttackV109(art);
@@ -293,6 +294,13 @@ function createElement(documentRef, tagName, className = '', text = null) {
   return element;
 }
 
+// V188: a label and its provenance text joined by ' — ' are kept in separate
+// spans, so the English layer translates each known part. textContent is unchanged.
+function appendTextPartsV188(documentRef, element, parts) {
+  for (const part of parts) if (part) element.append(createElement(documentRef, 'span', '', part));
+  return element;
+}
+
 function appendDefinitionRows(documentRef, target, values, options = {}) {
   for (const [key, rawValue] of visibleEntries(values)) {
     if (key === 'encounterWorldIds' && values.habitats?.length) continue;
@@ -308,11 +316,13 @@ function appendDefinitionRows(documentRef, target, values, options = {}) {
   }
 }
 
-function renderTaxonomyPath(documentRef, record, technical = false) {
+function renderTaxonomyPath(documentRef, record, technical = false, developer = false) {
   const list = createElement(documentRef, 'ol', 'catalog-v62__breadcrumb');
   for (const segment of record.hierarchySegments) {
+    // V188: group ids (acid, stalker, vehicle…) read through the bilingual glossary.
+    const group = developer ? null : groupLabelV188(segment.label, { catalog: record.catalog, kind: segment.kind });
     const item = createElement(documentRef, 'li', segment.label === CATALOG_UNKNOWN_V62 ? 'is-unknown' : '',
-      formatCatalogValueV62(technical ? segment.label : playerCatalogNameV110(segment.label)));
+      group || formatCatalogValueV62(technical ? segment.label : playerCatalogNameV110(segment.label)));
     item.dataset.kind = segment.kind;
     list.append(item);
   }
@@ -701,7 +711,9 @@ export class CatalogWorkbenchV62 {
     if (this.state.selectedEntryId && nodeContainsEntry(node, this.state.selectedEntryId)) row.classList.add('is-in-path');
     const chevron = createElement(this.document, 'span', 'catalog-v62__tree-chevron', node.children.length ? (expanded ? '−' : '+') : '·');
     chevron.setAttribute('aria-hidden', 'true');
-    const text = createElement(this.document, 'span', 'catalog-v62__tree-name', formatCatalogValueV62(this.developerModeV110 ? node.label : playerCatalogNameV110(node.label)));
+    const group = this.developerModeV110 ? null : groupLabelV188(node.label, node);
+    const text = createElement(this.document, 'span', 'catalog-v62__tree-name', group || formatCatalogValueV62(this.developerModeV110 ? node.label : playerCatalogNameV110(node.label)));
+    if (group) text.dataset.groupId = node.label;
     if (node.label === CATALOG_UNKNOWN_V62) text.classList.add('catalog-v62__unknown');
     const count = createElement(this.document, 'span', 'catalog-v62__tree-count', String(visibleCount));
     row.append(chevron, text, count);
@@ -757,7 +769,7 @@ export class CatalogWorkbenchV62 {
     if (!preview) this.renderMissingMedia(media, record);
     const body = createElement(this.document, 'span', 'catalog-v62__card-body');
     body.append(
-      createElement(this.document, 'span', 'catalog-v62__eyebrow', `${CATALOG_LABELS_V62[record.catalog]} · ${formatCatalogValueV62(record.taxonomy.family)}`),
+      createElement(this.document, 'span', 'catalog-v62__eyebrow', `${CATALOG_LABELS_V62[record.catalog]} · ${(!this.developerModeV110 && groupLabelV188(record.taxonomy.family, { catalog: record.catalog, kind: 'family' })) || formatCatalogValueV62(record.taxonomy.family)}`),
       createElement(this.document, 'strong', 'catalog-v62__card-title', this.developerModeV110 ? record.name : playerCatalogNameV110(record.name)),
       createElement(this.document, 'span', 'catalog-v62__card-type', record.taxonomy.type === CATALOG_UNKNOWN_V62 ? UNKNOWN_LABEL : this.developerModeV110 ? record.taxonomy.type : playerCatalogNameV110(record.taxonomy.type))
     );
@@ -845,7 +857,8 @@ export class CatalogWorkbenchV62 {
     if (record.visual?.illustrationNote) {
       const caption = createElement(this.document, 'p', 'catalog-v62__fact-note');
       caption.dataset.illustrationCaption = record.id;
-      caption.textContent = [record.visual.visualLabel, record.visual.illustrationNote].filter(Boolean).join(' — ');
+      const parts = [record.visual.visualLabel, record.visual.illustrationNote].filter(Boolean);
+      appendTextPartsV188(this.document, caption, parts.flatMap((part, index) => index ? [' — ', part] : [part]));
       this.detail.append(caption);
     }
     if (record.catalog === 'weapons') this.renderWeaponReferenceV120(record);
@@ -868,7 +881,7 @@ export class CatalogWorkbenchV62 {
     if (animationControls.children.length) this.detail.append(animationControls);
     if (technical && record.catalogPolicyV105?.note) this.detail.append(createElement(this.document, 'p', 'catalog-v62__fact-note', record.catalogPolicyV105.note));
     if (record.catalog === 'enemies' && !record.documentaryReferenceV105) this.renderGameplayScaleV72(record);
-    this.detail.append(renderTaxonomyPath(this.document, record, technical));
+    this.detail.append(renderTaxonomyPath(this.document, record, technical, Boolean(this.developerModeV110)));
     if (record.catalogPolicyV105?.personnel) {
       const classification = this.renderSection(['synthetic', 'automaton'].includes(record.taxonomy.family)
         ? 'IDENTIFICATION DE L’UNITÉ' : record.taxonomy.family === 'human' ? 'IDENTIFICATION DU PERSONNEL' : 'IDENTIFICATION DE L’ORGANISME', 'classification');

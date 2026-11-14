@@ -455,7 +455,9 @@ export class HubGame extends HubGameV62 {
     if (this.isAnnexActiveV71()) {
       const annex = this.currentAnnexV71();
       const exit = this.nearestAnnexExitV71();
-      if (exit) return `E — SORTIR VERS ${(exit.parentRoomName || exit.parentRoomId || annex.parentRoomId).toUpperCase()}`;
+      // The single-exit fallback carries only the room id: show its name, never "VEHICLE-BAY".
+      const parentId = exit?.parentRoomId || annex.parentRoomId;
+      if (exit) return `E — SORTIR VERS ${(exit.parentRoomName || HUB_DECKS.flatMap(deck => deck.rooms).find(room => room.id === parentId)?.name || parentId).toUpperCase()}`;
       const annexNpc = this.nearestAnnexNpcV141?.();
       if (annexNpc) return `E — ${annexNpc.interaction.label} · ${annexNpc.name}`;
       if (this.isRefugeActiveV87()) return this.refugeMovementLockedV87
@@ -1196,7 +1198,9 @@ export class HubGame extends HubGameV62 {
     }
     const deck = HUB_DECKS[this.state.deck];
     const room = this.currentRoom();
-    const prompt = this.statusPrompt();
+    // At a lift the desktop canvas showed nothing (the DOM readout carrying the
+    // lift hint is hidden there): reuse the emitStatus lift hint.
+    const prompt = this.statusPrompt() || (this.nearestLift?.() && !this.hubLiftTransitV163?.trip ? tV185('hub.prompt.lift', 'W / S — choisir un pont · E — pont suivant') : '');
     const threats = (this.enemies || []).filter((enemy) => enemy.alive).length;
     ctx.fillStyle = 'rgba(2, 8, 7, .88)';
     ctx.fillRect(18, 18, 700, 82);

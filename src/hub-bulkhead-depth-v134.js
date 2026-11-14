@@ -4,6 +4,7 @@
  * remain native. A closed leaf now collides at its actual 16 px walk-rail
  * cross-section rather than treating the former front-facing bitmap as a wall. */
 import { getHubDoorBounds } from './hub-profiles-v53.js';
+import { signalColorV188 } from './colorblind-palette-v188.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const clamp = value => Math.max(0, Math.min(1, finite(value)));
@@ -133,7 +134,7 @@ function drawOrthographicBulkheadV139(ctx, door, geometry, phase, playerCenterX)
     ctx.fillStyle = '#182d31'; ctx.fillRect(jamb.x, jamb.y, jamb.w, jamb.h);
     ctx.fillStyle = '#657c79'; ctx.fillRect(jamb.x, jamb.y, 1, jamb.h);
     ctx.fillStyle = '#354e51'; ctx.fillRect(left, near.topY - 12, width, 12);
-    ctx.fillStyle = geometry.progress >= .82 ? '#85c4a1' : door.locked ? '#b76853' : '#c7ad6b';
+    ctx.fillStyle = geometry.progress >= .82 ? signalColorV188('bulkhead-open') : signalColorV188(door.locked ? 'bulkhead-locked' : 'bulkhead-closed');
     ctx.fillRect(near.x - 2, near.topY + 14, 2, 8);
     drawDestinationLabelV139(ctx, door, geometry, playerCenterX);
   }
@@ -190,7 +191,7 @@ export function drawHubBulkheadDepthV134(ctx, door, { phase = 'front', playerCen
     ctx.fillStyle = '#657c79'; ctx.fillRect(near.x, near.topY - 8, 3, height + 20);
     ctx.fillStyle = '#3a5355'; ctx.fillRect(near.x + 9, near.topY - 12, 5, height + 24);
     polygon(ctx, geometry.headerPolygon, '#354e51', '#6d8682');
-    ctx.fillStyle = progress >= .82 ? '#85c4a1' : door.locked ? '#b76853' : '#c7ad6b';
+    ctx.fillStyle = progress >= .82 ? signalColorV188('bulkhead-open') : signalColorV188(door.locked ? 'bulkhead-locked' : 'bulkhead-closed');
     ctx.fillRect(near.x + 4, near.topY + 14, 5, 12);
     for (const y of [near.topY + 42, near.floorY - 26]) { ctx.fillStyle = '#7b8c7c'; ctx.fillRect(near.x + 5, y, 3, 3); }
     drawDestinationLabelV139(ctx, door, geometry, playerCenterX);

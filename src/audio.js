@@ -1,4 +1,4 @@
-import { AudioAssetBankV77, emptyAudioManifestV77, normalizeAudioManifestV77, AUDIO_MUSIC_FALLBACK_V184 } from './audio-assets-v77.js';
+import { AudioAssetBankV77, emptyAudioManifestV77, normalizeAudioManifestV77, AUDIO_MUSIC_FALLBACK_V184, AUDIO_SLOTS_V77 } from './audio-assets-v77.js';
 
 const level = (value, fallback = 1) => Number.isFinite(Number(value)) ? Math.max(0, Math.min(1, Number(value))) : fallback;
 export class AudioDirector {
@@ -147,7 +147,11 @@ export class AudioDirector {
       oscillator.start(now); oscillator.stop(now + duration); return true;
     } catch { return false; }
   }
-  shot() { return this.playEffect('shot', () => this.tone(92, 0.06, 'sawtooth', 0.18, -35)); }
+  shot() {
+    // V188: a weapon-specific single-shot cue when the engine named one.
+    const cue = this.nextShotCueV188; this.nextShotCueV188 = null;
+    return this.playEffect(cue && AUDIO_SLOTS_V77.sfx.includes(cue) ? cue : 'shot', () => this.tone(92, 0.06, 'sawtooth', 0.18, -35));
+  }
   tracker() { return this.playEffect('tracker', () => this.tone(880, 0.055, 'sine', 0.12, 120)); }
   hit() { return this.playEffect('hit', () => this.tone(55, 0.12, 'square', 0.12, -20)); }
   ui() { return this.playEffect('ui', () => this.tone(420, 0.035, 'square', 0.05, 40)); }
@@ -172,8 +176,32 @@ export class AudioDirector {
   kill() { return this.playEffect('kill', () => this.tone(68, 0.1, 'triangle', 0.08, -28)); }
   pickup() { return this.playEffect('pickup', () => this.tone(660, 0.07, 'triangle', 0.05, 90)); }
   victory() { return this.playEffect('victory', () => { this.tone(392, 0.22, 'sine', 0.06, 0); this.tone(587, 0.34, 'sine', 0.045, 0); }); }
+  // V188 priority cues (bible §56.4): file when generated, short synth otherwise.
+  cue(id) {
+    if (!AUDIO_SLOTS_V77.sfx.includes(id)) return false;
+    const family = id.split('-')[0];
+    const fallback = {
+      tracker: () => this.tone(id === 'tracker-near' ? 1180 : 760, 0.06, 'sine', 0.1, id === 'tracker-false-echo' ? -60 : 80),
+      step: () => this.tone(id === 'step-grating' ? 330 : 160, 0.04, 'triangle', 0.025, -40),
+      door: () => this.tone(id === 'door-locked' ? 180 : 120, 0.18, 'square', 0.05, id === 'door-close' ? -40 : 40),
+      airlock: () => this.tone(70, 0.5, 'sawtooth', 0.03, id.endsWith('depressurize') ? -30 : 30),
+      lift: () => this.tone(58, 0.4, 'triangle', 0.05, id === 'lift-arrive' ? -10 : 18),
+      alarm: () => this.tone(id === 'alarm-countdown' ? 880 : 380, 0.25, 'sawtooth', 0.06, 40),
+      ambience: () => false,
+      cry: () => this.tone(id === 'cry-queen' ? 210 : 520, 0.3, 'sawtooth', 0.05, -160),
+      weapon: () => this.tone(id === 'weapon-reload' || id === 'weapon-dry-fire' ? 1800 : 120, 0.05, 'square', 0.06, -30),
+      container: () => this.tone(70, 0.18, 'triangle', 0.09, -20)
+    }[family];
+    return this.playEffect(id, fallback);
+  }
+  // Mood changes inside a mission keep effects playing (unlike a view change).
+  setMusicMoodV188(scene) {
+    if (!AUDIO_SLOTS_V77.music.includes(scene) || this.scene === scene) return false;
+    this.scene = scene; this.sceneGeneration += 1; this.stopMusic(0.6);
+    void this.playScene(); return true;
+  }
   setScene(scene) {
-    const next = ['menu', 'hub', 'mission', 'travel', 'briefing', 'archives'].includes(scene) ? scene : null;
+    const next = AUDIO_SLOTS_V77.music.includes(scene) ? scene : null;
     if (this.scene === next) return this.playScene();
     this.scene = next; this.sceneGeneration += 1; this.stopEffects(); this.stopMusic(0.35);
     return this.playScene();

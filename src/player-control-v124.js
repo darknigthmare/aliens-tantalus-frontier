@@ -1,6 +1,7 @@
 import { firstProjectileObstacleV83, sweepProjectileAabbV83 } from './projectile-collision-v83.js';
 import { resolveCombatMuzzleV83 } from './combat-aim-v83.js';
 import { resolveWeaponMechanicsV122 } from './weapon-mechanics-weapons-v122.js';
+import { signalColorV188 } from './colorblind-palette-v188.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
@@ -164,7 +165,7 @@ export function drawPlayerAimGuideV124(engine, ctx, actor) {
   const guide = getPlayerAimGuideV124(engine, actor);
   if (!guide) return;
   ctx.save();
-  ctx.strokeStyle = guide.blocked ? '#edb279' : '#8fceaf';
+  ctx.strokeStyle = signalColorV188(guide.blocked ? 'guide-blocked' : 'guide-ok');
   ctx.lineWidth = 1.3; ctx.globalAlpha = 0.48;
   ctx.setLineDash?.([4, 9]);
   ctx.beginPath(); ctx.moveTo(guide.x, guide.y); ctx.lineTo(guide.endX, guide.endY); ctx.stroke();

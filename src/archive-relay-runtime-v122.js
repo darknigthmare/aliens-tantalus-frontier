@@ -109,6 +109,20 @@ export function withArchiveRelayRuntimeV122(BaseEngine) {
       if (discovered.length) this.archiveRelayMilestoneV122(terminal === 'pda' ? 'badge' : terminal, 'Mémoire locale récupérée ; lire les documents avant de conclure.');
       return discovered;
     }
+    // V188 shared E selection: the QZ-18 posts are actions of the mission, so a
+    // dropped magazine or arrow beside a terminal never takes E before it.
+    archiveRelayPropAtV122(actor = this.player) {
+      const props = ARCHIVE_RELAY_PROPS_V122;
+      return ['relay', 'extraction', 'pda', 'engineering', 'security', 'freight', 'analysis'].find(key => near(actor, props[key])) || null;
+    }
+    interactionCandidatesV188(actor = this.player) {
+      const list = super.interactionCandidatesV188(actor);
+      if (!this.isArchiveRelayV122() || !actor?.alive) return list;
+      const key = this.archiveRelayPropAtV122(actor), prop = key && ARCHIVE_RELAY_PROPS_V122[key];
+      if (prop) list.unshift({ kind: 'archive-relay-v122', category: 'action', target: key,
+        distance: Math.hypot(actor.x + actor.w / 2 - prop.x, actor.y + actor.h - prop.groundY), prompt: '' });
+      return list;
+    }
     interact(actor = this.player) {
       if (!this.isArchiveRelayV122()) return super.interact(actor);
       if (!this.canArchiveRelayActV122(actor)) return false;
@@ -258,10 +272,25 @@ export function withArchiveRelayRuntimeV122(BaseEngine) {
       const result = this.applyResumeState(raw); if (!result.applied) return false;
       this.clearGameplayInput?.(); this.onEvent({ type: 'mission-restarted', operationId: ARCHIVE_RELAY_OPERATION_V122 }); return true;
     }
+    // M / pause panel: the investigation steps, not the generic power/route/archive labels.
+    objectivePanelContentV188(language = 'fr') {
+      if (!this.isArchiveRelayV122()) return super.objectivePanelContentV188?.(language) || null;
+      const state = this.archiveRelayV122, en = language === 'en';
+      return { steps: [
+        { key: 'badge', label: en ? 'Recover the badge from the PDA' : 'Récupérer le badge du PDA', done: state.badge },
+        { key: 'power', label: en ? 'Power the relay' : 'Alimenter le relais', done: state.power },
+        { key: 'archive', label: `${en ? 'Read the local records' : 'Lire les archives locales'} ${state.readIds.length}/6`, done: state.readIds.length === 6 },
+        { key: 'route', label: en ? 'Record the verdict at the analysis desk' : 'Enregistrer le verdict au poste de confrontation', done: Boolean(state.verdict) },
+        { key: 'extract', label: en ? 'Reach the return beacon' : 'Rejoindre la balise de retour', done: state.complete }
+      ] };
+    }
     phaseLabel() { return this.isArchiveRelayV122() ? archiveRelayDossierV122(this.archiveRelayV122).title : super.phaseLabel(); }
     objectiveProgressText() { return this.isArchiveRelayV122() ? archiveRelayDossierV122(this.archiveRelayV122).instruction : super.objectiveProgressText(); }
     getInteractionPrompt() {
       if (!this.isArchiveRelayV122()) return super.getInteractionPrompt();
+      // Only the shared selection may put a pickup prompt before the posts.
+      const choice = this.selectInteractionTargetV188?.(this.player);
+      if (choice?.category === 'pickup' && choice.prompt) return choice.prompt;
       const state = this.archiveRelayV122, props = ARCHIVE_RELAY_PROPS_V122;
       if (near(this.player, props.relay)) return state.power ? 'RELAIS LOCAL EN SERVICE' : state.badge ? `MAINTENIR E · RELAIS · ${state.relayProgress.toFixed(1)}/3 S` : 'BADGE DU PDA REQUIS';
       if (near(this.player, props.extraction)) return state.verdict ? 'MAINTENIR E · RETOUR · 2 S' : 'VERDICT REQUIS';

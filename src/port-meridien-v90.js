@@ -12,10 +12,34 @@ export const PORT_POSTS_V90 = Object.freeze({
   report: { x: 2310, y: 624, label: 'TRANSMETTRE LE CONSTAT' },
   complete: { x: 2310, y: 624, label: 'PRÉPARER LA SUITE DES OPÉRATIONS' }
 });
+// V188 coherence pass: the three residents wait beside the triage stretcher (712–824), not on it.
+// Saved escort positions keep their historical lower bound (810 + 55 i), so older saves stay valid.
+export const PORT_CIVILIANS_WAIT_V188 = Object.freeze([860, 915, 970]);
+// Safe beyond the lit airlock (gate 1810–1918), clear of the report terminal (2270–2350) and its post.
+// Lowered from 2160 + 55 i: escort saves above it are clamped back to it, never rejected.
+export const PORT_CIVILIANS_SAFE_V188 = Object.freeze([2100, 2155, 2210]);
+// V188 bug fix: escorted residents walk in file instead of stacking on one spot. The front resident
+// (row 2) keeps the historical 40 px from the marine; each row behind keeps one more file gap.
+// The design rule stays: a resident more than 390 px behind the marine waits where they are.
+export const PORT_CIVILIANS_FILE_V188 = Object.freeze({ frontGap: 40, fileGap: 55, waitBeyond: 390 });
+export function portCivilianFollowGapV188(index) {
+  const rank = PORT_CIVILIANS_SAFE_V188.length - 1 - (Number.isInteger(index) ? index : 0);
+  return PORT_CIVILIANS_FILE_V188.frontGap + Math.max(0, rank) * PORT_CIVILIANS_FILE_V188.fileGap;
+}
+/** True while the resident walks behind a grounded marine (also drives the walk cell). */
+export function portCivilianWalkingV188(x, index, playerX, grounded) {
+  const distance = playerX - x;
+  return Boolean(grounded) && distance > portCivilianFollowGapV188(index) && distance < PORT_CIVILIANS_FILE_V188.waitBeyond;
+}
+export function stepPortCivilianV188(x, index, playerX, grounded, elapsed) {
+  if (!portCivilianWalkingV188(x, index, playerX, grounded)) return x;
+  const speed = index === 0 ? 95 : 110;
+  return Math.min(PORT_CIVILIANS_SAFE_V188[index], playerX - portCivilianFollowGapV188(index), x + elapsed * speed);
+}
 const finite = (n, min, max, fallback) => Number.isFinite(n) ? Math.max(min, Math.min(max, n)) : fallback;
 export function createPortMeridienV90() {
   return { schema: 90, phase: 'pending', revision: 0, freight: null, x: 112, y: 532,
-    facing: 1, climbing: false, civiliansX: [810, 865, 920], following: false, receipt: null };
+    facing: 1, climbing: false, z: 0, civiliansX: [...PORT_CIVILIANS_WAIT_V188], following: false, receipt: null };
 }
 export function normalizePortMeridienV90(raw) {
   if (!raw || raw.schema !== 90 || !PORT_PHASES_V90.includes(raw.phase)) return null;
@@ -28,11 +52,13 @@ export function normalizePortMeridienV90(raw) {
   state.y = Math.round(finite(raw.y, 0, 532, 532));
   state.facing = raw.facing === -1 ? -1 : 1;
   state.climbing = raw.climbing === true;
+  // V188: depth on the quay floor (0 = against the back wall), additive.
+  state.z = state.climbing ? 0 : Math.round(finite(Number(raw.z), -80, 0, 0) * 10) / 10;
   if (['escort', 'report', 'complete'].includes(state.phase)) {
-    state.civiliansX = [0, 1, 2].map(i => Math.round(finite(raw.civiliansX?.[i], 810 + i * 55, 2160 + i * 55, 810 + i * 55)));
+    state.civiliansX = [0, 1, 2].map(i => Math.round(finite(raw.civiliansX?.[i], 810 + i * 55, PORT_CIVILIANS_SAFE_V188[i], PORT_CIVILIANS_WAIT_V188[i])));
     state.following = state.phase === 'escort' && raw.following === true;
   }
-  if (['report', 'complete'].includes(state.phase)) state.civiliansX = [2160, 2215, 2270];
+  if (['report', 'complete'].includes(state.phase)) state.civiliansX = [...PORT_CIVILIANS_SAFE_V188];
   if (state.phase === 'complete') {
     if (raw.receipt !== PORT_RECEIPT_V90) return null;
     state.receipt = PORT_RECEIPT_V90;
@@ -63,8 +89,8 @@ export function advancePortMeridienV90(raw, action, proof = {}) {
     if (action !== state.phase || state.phase === 'complete') return fail('phase-order');
     if (action === 'escort' && state.following) {
       if (!Array.isArray(proof.civiliansX) || proof.civiliansX.length !== 3 || !proof.actor?.alive
-        || !proof.civiliansX.every((x, i) => Number.isFinite(x) && x >= 2160 + i * 55)) return fail('civilians-not-safe');
-      state.phase = 'report'; state.civiliansX = [2160, 2215, 2270]; state.following = false;
+        || !proof.civiliansX.every((x, i) => Number.isFinite(x) && x >= PORT_CIVILIANS_SAFE_V188[i])) return fail('civilians-not-safe');
+      state.phase = 'report'; state.civiliansX = [...PORT_CIVILIANS_SAFE_V188]; state.following = false;
     } else {
       if (!portPhysicalContactV90(state, proof.actor)) return fail('physical-contact');
       if (['triage', 'power'].includes(action) && (!Number.isFinite(proof.taskSeconds) || proof.taskSeconds < portTaskSecondsV90(state))) return fail('task-incomplete');

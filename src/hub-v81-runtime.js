@@ -55,6 +55,10 @@ const PROJECTILE_LIFETIME_V81 = 1.55;
 const FIRE_INTERVAL_V81 = 0.13;
 const CHECKPOINT_SECONDS_V81 = 1;
 const TARGET_VIEW_MARGIN_V81 = 36;
+// The range HUD is written in French like the rest of the game (the V185 layer translates it):
+// the session phase and aim ids are internal English words, not player text.
+const PROVING_PHASE_LABELS_V188 = Object.freeze({ idle: 'EN ATTENTE', armed: 'ARMÉE', active: 'EN COURS', completed: 'TERMINÉE', failed: 'ÉCHOUÉE', aborted: 'ABANDONNÉE' });
+const PROVING_AIM_LABELS_V188 = Object.freeze({ level: 'HORIZONTALE', high: 'HAUTE', low: 'BASSE' });
 const clone = (value) => value == null ? value : JSON.parse(JSON.stringify(value));
 const clamp = (value, minimum, maximum) => Math.max(minimum, Math.min(maximum, Number(value) || 0));
 const overlaps = (left, right) => Boolean(left && right
@@ -215,7 +219,7 @@ export class HubGame extends HubGameV71 {
     if (this.nearestAnnexExitV71()) {
       return ['armed', 'active'].includes(state.phase)
         ? 'E — ABANDONNER LA QUALIFICATION ET SORTIR'
-        : 'E — SORTIR VERS ARMORY';
+        : 'E — SORTIR VERS L’ARMURERIE';
     }
     if (state.phase === 'armed') return 'REJOIGNEZ LA LIGNE DE TIR SUR LA PASSERELLE';
     if (state.phase === 'active') {
@@ -744,11 +748,19 @@ export class HubGame extends HubGameV71 {
     }
   }
 
+  ingameStageActiveV188() {
+    const html = this.canvas?.ownerDocument?.documentElement || globalThis.document?.documentElement;
+    return Boolean(html?.dataset?.ingameStageV188);
+  }
+
   drawAnnexHudV71(ctx) {
     if (!this.isProvingGroundActiveV81()) {
       super.drawAnnexHudV71(ctx);
       return;
     }
+    // V188: an in-game staged beat (e.g. 'beat-exercise-interrupt') hides the level's HUD chrome;
+    // the canvas range box steps aside too instead of showing under the cinemascope bars.
+    if (this.ingameStageActiveV188()) return;
     const state = this.provingGroundStateV81;
     ctx.fillStyle = 'rgba(2, 8, 7, .92)';
     ctx.fillRect(18, 18, 760, 96);
@@ -759,12 +771,12 @@ export class HubGame extends HubGameV71 {
     ctx.fillText('USS TANTALUS // PROVING GROUND // QUALIFICATION M41A', 36, 41);
     ctx.fillStyle = '#e2eadf';
     ctx.font = '700 16px ui-monospace, monospace';
-    ctx.fillText(`${state.phase.toUpperCase()} · CIBLES ${state.hits}/9 · SCORE ${state.score}`, 36, 68);
+    ctx.fillText(`${PROVING_PHASE_LABELS_V188[state.phase] || state.phase.toUpperCase()} · CIBLES ${state.hits}/9 · SCORE ${state.score}`, 36, 68);
     ctx.fillStyle = state.ammo.magazine > 0 ? '#d4dba5' : '#e48b72';
     ctx.font = '700 13px ui-monospace, monospace';
     ctx.fillText(`M41A ${state.ammo.magazine}/${state.ammo.reserve}`, 526, 68);
     ctx.fillStyle = '#a9c9ae';
-    ctx.fillText(`TEMPS ${state.remainingSeconds.toFixed(1)} S · VISÉE ${this.currentProvingAimV81().toUpperCase()}`, 36, 94);
+    ctx.fillText(`TEMPS ${state.remainingSeconds.toFixed(1)} S · VISÉE ${PROVING_AIM_LABELS_V188[this.currentProvingAimV81()] || this.currentProvingAimV81().toUpperCase()}`, 36, 94);
     if (state.reload.active) {
       const progress = 1 - state.reload.remainingSeconds / state.reload.durationSeconds;
       ctx.fillStyle = '#253a2d';

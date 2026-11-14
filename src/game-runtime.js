@@ -1,3 +1,4 @@
+import { activeCustomDifficultyV188Value, setActiveCustomDifficultyV188 } from './run-options-v188.js';
 import { GameEngine as MissionEngine } from './game-v51-runtime.js';
 import { getVehicleDeploymentGateV60 } from './vehicle-deployment-gates-v60.js';
 import { validatePlayerIdentityV84 } from './player-onboarding-v84.js';
@@ -17,6 +18,8 @@ const DIFFICULTIES = Object.freeze({
   nightmare: Object.freeze({ id: 'nightmare', enemyHealth: 1.35, enemyDamage: 1.45, enemySpeed: 1.16, spawnMultiplier: 1.5, rewardMultiplier: 1.35 })
 });
 
+// V188: 'custom' resolves to the tuning set by the running mission (§55.4).
+const difficultyTuning = id => id === 'custom' ? activeCustomDifficultyV188Value() : DIFFICULTIES[id] || DIFFICULTIES.standard;
 const finite = (value, fallback, min = -Infinity, max = Infinity) => clamp(Number.isFinite(Number(value)) ? Number(value) : fallback, min, max);
 const list = (value) => Array.isArray(value) ? [...value] : [];
 const EXACT_ENEMY_RUNTIME_BEHAVIORS = Object.freeze({
@@ -51,7 +54,7 @@ export function buildWeaponRuntime(weapon = {}) {
 }
 
 export function buildEnemyRuntime(enemy = {}, difficulty = 'standard') {
-  const tuning = DIFFICULTIES[difficulty] || DIFFICULTIES.standard;
+  const tuning = difficultyTuning(difficulty);
   const behaviorProfileV119 = resolveEnemyBehaviorV119(enemy);
   const behavior = behaviorProfileV119.runtimeBehavior;
   const caste = String(enemy.caste || 'stalker');
@@ -168,7 +171,7 @@ export function buildNeuroRuntime(profile = null) {
 }
 
 export function buildMissionPlan({ campaign = {}, world = {}, levelSeed = {}, difficulty = 'standard', equipment = [], crew = [], vehicle = null, apexDossier = null, neuroProfile = null } = {}) {
-  const tuning = DIFFICULTIES[difficulty] || DIFFICULTIES.standard;
+  const tuning = difficultyTuning(difficulty);
   const danger = finite(world.danger, 5, 0, 20);
   const infestation = finite(world.infestation, 50, 0, 100);
   const routes = Math.round(finite(levelSeed.routes ?? campaign.routes, 3, 1, 12));
@@ -212,8 +215,9 @@ export class GameEngine extends MissionEngine {
     // rename an already running operation. Missing/invalid identities stay legacy.
     const identityResultV84 = validatePlayerIdentityV84(options.playerIdentityV84);
     this.playerIdentityV84 = identityResultV84.ok ? Object.freeze({ ...identityResultV84.identity }) : null;
-    const difficulty = DIFFICULTIES[options.difficulty] ? options.difficulty : 'standard';
-    this.difficultyRuntime = DIFFICULTIES[difficulty];
+    if (options.difficulty === 'custom') setActiveCustomDifficultyV188(options.customDifficultyV188);
+    const difficulty = DIFFICULTIES[options.difficulty] || options.difficulty === 'custom' ? options.difficulty : 'standard';
+    this.difficultyRuntime = difficultyTuning(difficulty);
     this.weaponRuntime = buildWeaponRuntime(options.weapon);
     this.selectedVehicleRuntime = buildVehicleRuntime(options.vehicle || {});
     this.neuroRuntime = buildNeuroRuntime(options.neuroProfile);
