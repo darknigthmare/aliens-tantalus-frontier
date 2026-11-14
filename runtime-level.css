@@ -504,3 +504,13 @@ html.mission-mode[data-subtitles='off'] .play-view > .mission-log { display: non
   max-width: calc(100% - 24px);
   background: #071712ed;
 }
+
+/* V188 responsive sweep: on a phone the save/retreat toolbar (top) and the photo
+   button (below it) are positioned over the equipment dock; its first row starts
+   below both so no equipment button is covered. */
+@media (max-width: 720px) {
+  html.mission-mode .play-view:has(> #mission-runtime-v62:not([hidden])) > #mission-equipment-controls {
+    padding-top: calc(var(--runtime-safe) + 104px);
+    max-height: min(calc(32svh + 116px), 366px);
+  }
+}

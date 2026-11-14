@@ -1229,3 +1229,5 @@ html[data-ingame-stage-v188] .hub-touch-controls { visibility: hidden; }
   :root .echo9-filters-v110 input, :root .echo9-filters-v110 select, :root .appearance-preview-animation-v127 select,
   :root .echo9-roster-v110 .button.compact { min-height: 44px; }
 }
+/* V188 responsive sweep: the armory reference links are 44 px touch targets on touch screens and phones. */
+@media (pointer: coarse), (max-width: 600px) { #armory-fidelity-v170 a[href] { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; } }
