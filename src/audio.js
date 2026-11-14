@@ -1,5 +1,10 @@
 import { AudioAssetBankV77, emptyAudioManifestV77, normalizeAudioManifestV77, AUDIO_MUSIC_FALLBACK_V184, AUDIO_SLOTS_V77 } from './audio-assets-v77.js';
 
+// V188: the scene to return to after a story cinematic. In a mission that did
+// not end meanwhile, the mood that was live before (tension, alert, boss) wins.
+export function cinematicReturnSceneV188({ viewBefore, viewAfter, sceneBefore, viewScene } = {}) {
+  return viewBefore === 'play' && viewAfter === 'play' && AUDIO_SLOTS_V77.music.includes(sceneBefore) ? sceneBefore : viewScene;
+}
 const level = (value, fallback = 1) => Number.isFinite(Number(value)) ? Math.max(0, Math.min(1, Number(value))) : fallback;
 export class AudioDirector {
   constructor({ manifestUrl = '/assets/audio/manifest.json', fetchImpl = globalThis.fetch?.bind(globalThis),
@@ -199,6 +204,13 @@ export class AudioDirector {
     if (!AUDIO_SLOTS_V77.music.includes(scene) || this.scene === scene) return false;
     this.scene = scene; this.sceneGeneration += 1; this.stopMusic(0.6);
     void this.playScene(); return true;
+  }
+  // V188: back from a cinematic. A music slot is resumed as a mood (effects of
+  // the live scene keep playing); anything else falls back to a scene change.
+  restoreMoodV188(scene) {
+    if (!AUDIO_SLOTS_V77.music.includes(scene)) return this.setScene(scene);
+    if (this.scene === scene) return this.playScene();
+    return this.setMusicMoodV188(scene);
   }
   setScene(scene) {
     const next = AUDIO_SLOTS_V77.music.includes(scene) ? scene : null;

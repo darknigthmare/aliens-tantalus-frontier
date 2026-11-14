@@ -405,6 +405,13 @@ export function createDefaultSave(profile = 1) {
   };
 }
 
+// V188: the values the settings screen can write (index.html selects).
+export const SETTINGS_CHOICES_V188 = Object.freeze({
+  language: Object.freeze(['fr', 'en']),
+  difficulty: Object.freeze(['story', 'standard', 'nightmare', 'custom']),
+  quality: Object.freeze(['low', 'high']),
+  contrast: Object.freeze(['standard', 'high'])
+});
 const isRecord = (value) => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 const CREW_STATUSES = new Set(['active', 'injured', 'recovering', 'missing', 'captured', 'deceased']);
 
@@ -2422,6 +2429,10 @@ export function migrateSave(input, profile = 1) {
   migrated.settings = { ...base.settings, ...settings };
   for (const key of ['subtitles', 'reducedMotion', 'coop']) migrated.settings[key] = typeof settings[key] === 'boolean' ? settings[key] : base.settings[key];
   migrated.settings.screenShake = numberBetween(settings.screenShake, base.settings.screenShake, 0, 1);
+  // V188: closed choices and volumes are checked; an unknown value falls back to its default.
+  for (const [key, allowed] of Object.entries(SETTINGS_CHOICES_V188)) migrated.settings[key] = allowed.includes(settings[key]) ? settings[key] : base.settings[key];
+  for (const key of ['music', 'effects']) migrated.settings[key] = typeof settings[key] === 'number' && Number.isFinite(settings[key])
+    ? Math.max(0, Math.min(1, settings[key])) : base.settings[key];
   // V188 additive run options: older saves keep permadeath and standard values.
   migrated.settings.crewPermadeathV188 = settings.crewPermadeathV188 !== false;
   migrated.settings.colorblindV188 = normalizeColorblindV188(settings.colorblindV188);
@@ -2449,6 +2460,15 @@ export function migrateSave(input, profile = 1) {
   const previousVersion = typeof source.release === 'string' ? source.release : typeof source.version === 'string' ? source.version : null;
   migrated.migratedFrom = previousVersion || `schema-${Number.isFinite(Number(source.schema)) ? source.schema : 'legacy'}`;
   return migrated;
+}
+
+// V188: localStorage (atf-language-v185) stays the source of truth for the language.
+// The profile field only mirrors the player's last choice so an exported save carries it.
+export function syncSaveLanguageV188(saveSystem, language) {
+  const settings = saveSystem?.data?.settings;
+  if (!SETTINGS_CHOICES_V188.language.includes(language) || !settings || saveSystem.recoveryNeeded || settings.language === language) return false;
+  saveSystem.commit({ settings: { ...settings, language } });
+  return true;
 }
 
 export class SaveSystem {

@@ -109,7 +109,7 @@ import { getHubShipStationReadoutV137 } from './hub-ship-layout-v137.js';
 import { withHubCirculationV137 } from './hub-circulation-v137.js';
 import { withHubRoomIdentityV137 } from './hub-room-identity-v137.js';
 import { withHubDestinationSignsV138 } from './hub-destination-signage-runtime-v138.js';
-import { getHubTrainingOperatorIdV132, recordHubLoaderQualificationV132 } from './save.js';
+import { getHubTrainingOperatorIdV132, recordHubLoaderQualificationV132, syncSaveLanguageV188 } from './save.js';
 import { PlayerCreatorUiV84 } from './player-creator-ui-v84.js';
 import { captionReadingMillisecondsV84 } from './combat-captions-v84.js';
 import { advancePlayerOnboardingV84, ONBOARDING_DIALOGUES_V84, getPlayerOnboardingObjectiveV84 } from './player-onboarding-v84.js';
@@ -125,7 +125,7 @@ import { ForgePlaytestCheckpointStoreV157, prepareForgePlaytestCheckpointV157,
   applyForgePlaytestCheckpointV157 } from './forge-playtest-checkpoint-v157.js';
 import { mountForgePlaytestCheckpointUIV157 } from './forge-playtest-checkpoint-ui-v157.js';
 import { mountForgeCampaignUIV161 } from './forge-campaign-ui-v161.js';
-import { AudioDirector } from './audio.js';
+import { AudioDirector, cinematicReturnSceneV188 } from './audio.js';
 import { resolveWeaponVisualProfileV63 } from './weapon-visual-runtime-v63.js';
 import { getVehicleDeploymentGateV60, VEHICLE_DEPLOYMENT_ATLAS_REQUIRED_V122 } from './vehicle-deployment-gates-v60.js';
 import { TitleScreenController } from './title-screen-v61.js';
@@ -1086,6 +1086,8 @@ function playStoryCinematicV188(id, { once = true, record = true, context = {} }
   const seen = saveSystem.data?.storyCampaignV188?.cinematicsSeen || [];
   if (!CINEMATICS_V188[id] || once && seen.includes(id)) return Promise.resolve('already-seen');
   const resumeHub = activeView === 'hub' && hubEngine.running;
+  // The live mood (mission tension, alert, boss) is restored once the cinematic ends.
+  const viewBefore = activeView, sceneBefore = audio.scene;
   if (resumeHub) hubEngine.pause();
   // In mission, the cinematic uses the engine's own pause so no damage or timer advances.
   const resumeMission = activeView === 'play' && engine.running && !engine.paused;
@@ -1099,7 +1101,7 @@ function playStoryCinematicV188(id, { once = true, record = true, context = {} }
     }
     if (resumeHub && activeView === 'hub') hubEngine.resume();
     if (resumeMission && activeView === 'play' && engine.running && engine.paused) engine.togglePause();
-    audio.setScene(viewAudioSceneV188(activeView));
+    audio.restoreMoodV188(cinematicReturnSceneV188({ viewBefore, viewAfter: activeView, sceneBefore, viewScene: viewAudioSceneV188(activeView) }));
     return result;
   });
 }
@@ -4584,7 +4586,10 @@ function setupLanguageV185() {
   const select = byId('language-select-v185');
   if (select) {
     select.value = currentLanguageV185();
-    select.addEventListener('change', () => setLanguageV185(select.value));
+    select.addEventListener('change', () => {
+      const language = setLanguageV185(select.value);
+      try { syncSaveLanguageV188(saveSystem, language); } catch (error) { toast(error.message); }
+    });
   }
   document.addEventListener(LANGUAGE_EVENT_V185, () => {
     if (select) select.value = currentLanguageV185();

@@ -35,7 +35,8 @@ test('Act III: a tab closed during CIN-31 leaves the interlude due; the briefing
 
 test('Ending reached: the ending theme survives the cinematic that closes on the briefing table', () => {
   assert.match(app, /function viewAudioSceneV188\(name\) \{\s*return \['operations', 'command'\]\.includes\(name\) && storyEndingReachedV188\(saveSystem\.data\) \? 'ending'/);
-  assert.match(functionBody('playStoryCinematicV188'), /audio\.setScene\(viewAudioSceneV188\(activeView\)\)/);
+  // P2 audio fix: the view scene still decides outside a mission, now through the mood path (verify-bugfix-audio-settings-v188).
+  assert.match(functionBody('playStoryCinematicV188'), /viewScene: viewAudioSceneV188\(activeView\)/);
   assert.doesNotMatch(functionBody('playStoryCinematicV188'), /resolveViewAudioSceneV77\(activeView\)/);
 });
 
