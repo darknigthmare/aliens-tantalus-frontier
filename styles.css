@@ -1215,3 +1215,17 @@ html[data-ingame-stage-v188] .hub-touch-controls { visibility: hidden; }
 .ingame-stage-v188[data-reduced-motion="true"]::before { animation: none; }
 .ingame-stage-v188[data-reduced-motion="true"] .ingame-stage-v188__bar { transition: none; }
 .reduced-motion [data-stage-grade-v188] #hub-canvas { transition: none; }
+
+/* V188 touch sweep (390x844): every control of the management views offers a
+   44 px touch target on a coarse pointer. A checkbox is reached through its label. */
+@media (pointer: coarse) {
+  button, .button, select, summary, a.catalog-v62__reference-link,
+  input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]) { min-height: 44px; }
+  .button.compact, button.compact { min-width: 44px; }
+  label:has(> input[type="checkbox"]), label:has(> input[type="radio"]) { min-height: 44px; display: flex; align-items: center; gap: .6em; }
+  input[type="checkbox"], input[type="radio"] { width: 24px; height: 24px; flex: none; }
+  a.catalog-v62__reference-link { display: inline-flex; align-items: center; }
+  /* These stylesheets load after this one; :root keeps the touch size ahead of them. */
+  :root .echo9-filters-v110 input, :root .echo9-filters-v110 select, :root .appearance-preview-animation-v127 select,
+  :root .echo9-roster-v110 .button.compact { min-height: 44px; }
+}

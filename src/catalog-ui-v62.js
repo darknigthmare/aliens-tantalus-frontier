@@ -873,7 +873,8 @@ export class CatalogWorkbenchV62 {
       createElement(this.document, 'span', 'catalog-v62__eyebrow', CATALOG_LABELS_V62[record.catalog]),
       createElement(this.document, 'h3', '', technical ? record.name : playerCatalogNameV110(record.name))
     );
-    if (technical) heading.append(createElement(this.document, 'code', '', record.id));
+    // V188: the record id is developer evidence, also for weapon, equipment and vehicle dossiers.
+    if (this.developerModeV110) heading.append(createElement(this.document, 'code', '', record.id));
     header.append(heading);
     this.detail.append(header);
     // Player-facing illustration limits belong beside the image, not in the
@@ -943,7 +944,8 @@ export class CatalogWorkbenchV62 {
     this.renderCombatBehaviorV89(record);
     this.renderBehaviorProfileV119(record);
 
-    if (technical) this.renderMediaSection(record);
+    // V188: sheet ids, clip ids and identity statuses stay developer evidence.
+    if (this.developerModeV110) this.renderMediaSection(record);
     else if (record.visualReferenceV106?.sourceCredit) this.detail.append(createElement(this.document, 'p', 'catalog-v62__fact-note', `Référence visuelle : ${record.visualReferenceV106.sourceCredit}`));
     this.renderBiologySection(record);
     this.renderSizeSection(record);

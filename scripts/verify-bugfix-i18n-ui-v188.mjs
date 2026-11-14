@@ -115,7 +115,9 @@ const renderDetail = (record, developer) => {
   workbench.renderVehicleShowroomV119 = () => null;
   workbench.renderDetail(record);
   const rows = detail.all().filter(node => node.className === 'catalog-v62__data-row');
-  return rows.map(row => ({ term: row.children[0].textContent, value: row.children[1].textContent, node: row.children[1] }));
+  const result = rows.map(row => ({ term: row.children[0].textContent, value: row.children[1].textContent, node: row.children[1] }));
+  result.detail = detail;
+  return result;
 };
 
 test('P2: Armurerie, Véhicules and Xénobiologie dossiers show labels, developer mode adds the ids', () => {
@@ -130,6 +132,10 @@ test('P2: Armurerie, Véhicules and Xénobiologie dossiers show labels, develope
   assert.ok(player.some(row => row.term === 'Famille' && row.value === 'Balistique'), values);
   assert.ok(player.some(row => row.term === 'Provenance' && row.value === 'Référence sous licence'), values);
   assert.ok(player.every(row => !row.node.all().some(node => node.tagName === 'CODE')), 'no id element for the player');
+  // Sheet ids, identity statuses and the record id are developer evidence.
+  assert.ok(!player.detail.all().some(node => node.tagName === 'CODE'), 'no record id under the player heading');
+  assert.ok(!player.detail.all().some(node => node.dataset.sectionKind === 'media'), 'no media evidence section for the player');
+  assert.ok(renderDetail(weapon, true).detail.all().some(node => node.dataset.sectionKind === 'media'), 'developer keeps the media section');
   const developer = renderDetail(weapon, true);
   const family = developer.find(row => row.term === 'Famille');
   assert.equal(family.node.children.find(node => node.tagName === 'CODE')?.textContent.trim(), 'ballistic', 'developer keeps the id');
@@ -195,4 +201,22 @@ test('P2: the archive list re-renders on the language event, like the other view
   const { formatArchiveStampV188 } = await import('../src/narrative-archives-ui-v68.js');
   const stamp = '2026-02-03T04:05:00Z';
   assert.notEqual(formatArchiveStampV188(stamp, 'fr'), formatArchiveStampV188(stamp, 'en'), 'the stamp depends on the language');
+});
+
+// —— P2: responsive sweep (390×844 touch, 1280×720) ——
+test('P2: the showroom floor stays inside its scenery; phone controls keep 44 px touch targets', () => {
+  const catalog = read('catalog-v62.css');
+  // The perspective floor projected 3 px past the desktop vehicle view (8 px on phone).
+  assert.match(catalog, /\.catalog-v119__showroom-scenery \{[^}]*overflow: hidden;/u);
+  assert.match(catalog, /\.catalog-v119__showroom-ground \{[^}]*perspective\(280px\) rotateX\(28deg\)/u, 'floor look unchanged');
+  // Sprite-sheet crops are intentional: the sheet moves inside an overflow-hidden frame.
+  assert.match(catalog, /\.catalog-v62__sprite \{[^}]*overflow: hidden;[^}]*contain: paint;/u);
+  const styles = read('styles.css');
+  const block = styles.slice(styles.indexOf('/* V188 touch sweep'));
+  assert.match(block, /@media \(pointer: coarse\) \{/u);
+  assert.match(block, /button, \.button, select, summary, a\.catalog-v62__reference-link,\n  input:not\(\[type="checkbox"\]\):not\(\[type="radio"\]\):not\(\[type="hidden"\]\) \{ min-height: 44px; \}/u);
+  assert.match(block, /\.button\.compact, button\.compact \{ min-width: 44px; \}/u);
+  assert.match(block, /label:has\(> input\[type="checkbox"\]\), label:has\(> input\[type="radio"\]\) \{ min-height: 44px;/u);
+  // Later stylesheets set 40–42 px on these controls; the override must outrank them.
+  for (const selector of [':root .echo9-filters-v110 select', ':root .appearance-preview-animation-v127 select', ':root .echo9-roster-v110 .button.compact']) assert.ok(block.includes(selector), selector);
 });
