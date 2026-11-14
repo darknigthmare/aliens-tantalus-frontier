@@ -296,7 +296,9 @@ export function withMissionDepthRoomsV188(Base) {
       const clampZ = value => Math.max(section.zMin, Math.min(section.zMax, Number(value) || 0));
       if (this.player) this.player.depthZ = clampZ(saved.player);
       if (this.coop) this.coop.depthZ = clampZ(saved.coop);
-      const byId = new Map((Array.isArray(saved.enemies) ? saved.enemies : []).map(entry => [String(entry.id), clampZ(entry.z)]));
+      // A damaged resume record may hold non-object entries: they are ignored, never read.
+      const byId = new Map((Array.isArray(saved.enemies) ? saved.enemies : []).filter(entry => entry && typeof entry === 'object')
+        .map(entry => [String(entry.id), clampZ(entry.z)]));
       for (const enemy of this.enemies || []) if (byId.has(String(enemy.id))) enemy.depthZ = byId.get(String(enemy.id));
       return result;
     }

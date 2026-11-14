@@ -6,7 +6,7 @@ import { detectReactiveTriggersV188, selectReactiveLinesV188 } from './reactive-
 import { applyAccessibilityV188, installKeyRemapV188, mountKeyBindingsUiV188, normalizeKeyBindingsV188, soundCaptionV188 } from './accessibility-v188.js';
 import { spareCrewMemberV188, normalizeCrewPermadeathV188, normalizeCustomDifficultyV188, normalizeOriginV188, CUSTOM_DIFFICULTY_BOUNDS_V188 } from './run-options-v188.js';
 import { cueForGameEventV188, casteCueV188 } from './audio-cues-v188.js';
-import { deriveStoryCampaignV188, markStoryDebriefSeenV188, markStoryCinematicSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, storyEndingReachedV188, resolveM577ManifestV188, normalizeStoryCampaignV188, startInterludeV188, interludeCrisisClearedV188, resolveInterludeV188, rescueJunParkV188, interludeChoicePendingV188, markStoryBeatSeenV188 } from './story-campaign-v188.js';
+import { deriveStoryCampaignV188, markStoryDebriefSeenV188, markStoryCinematicSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, storyEndingReachedV188, resolveM577ManifestV188, normalizeStoryCampaignV188, startInterludeV188, interludeCrisisClearedV188, resolveInterludeV188, rescueJunParkV188, interludeChoicePendingV188, interludeDueV188, markStoryBeatSeenV188 } from './story-campaign-v188.js';
 import { InGameStagingV188, STAGED_BEATS_V188 } from './ingame-staging-v188.js';
 import { openStoryChoiceDialogV188 } from './story-choice-ui-v188.js';
 import { CinematicPlayerV188, CINEMATICS_V188 } from './story-cinematics-v188.js';
@@ -800,6 +800,10 @@ function setupXenoTrialsUiV96() {
   });
 }
 
+// Once the story ending is reached, the briefing table plays the ending theme (also after a cinematic).
+function viewAudioSceneV188(name) {
+  return ['operations', 'command'].includes(name) && storyEndingReachedV188(saveSystem.data) ? 'ending' : resolveViewAudioSceneV77(name);
+}
 function showView(name) {
   name = resolvePlayerViewV110(name, developerModeV110);
   if (!VIEW_META[name]) return;
@@ -836,7 +840,7 @@ function showView(name) {
   // A pending interlude decision (reload during the choice) is asked again aboard.
   if (name === 'hub') queueMicrotask(() => { if (activeView === 'hub' && normalizeStoryCampaignV188(saveSystem.data.storyCampaignV188).interlude?.phase === 'choice'
     && !document.querySelector('.story-choice-v188')) chooseInterludeOutcomeV188(); });
-  audio.setScene(['operations', 'command'].includes(name) && storyEndingReachedV188(saveSystem.data) ? 'ending' : resolveViewAudioSceneV77(name));
+  audio.setScene(viewAudioSceneV188(name));
   all('.view').forEach((view) => view.classList.toggle('active', view.dataset.panel === name));
   all('.nav-button').forEach((button) => button.classList.toggle('active', button.dataset.view === name));
   document.documentElement.classList.toggle('hub-mode', name === 'hub');
@@ -988,6 +992,7 @@ function chooseInterludeOutcomeV188() {
       catch (error) { toast(error.message); }
     } });
 }
+let interludeResumePendingV188 = false;
 function markStoryDebriefOnViewV188() {
   if (!['operations', 'command'].includes(activeView) || saveSystem.data.strategy.currentOperation) return;
   const doneV188 = saveSystem.data.galaxy.completedCampaignIds, seenV188 = saveSystem.data.storyCampaignV188?.debriefSeen || [];
@@ -997,10 +1002,20 @@ function markStoryDebriefOnViewV188() {
     try {
       const candidate = clone(saveSystem.data), c12 = CAMPAIGNS.find(entry => entry.id === 'special-c12-horde');
       if (resolveM577ManifestV188(candidate, c12?.worldId)) {
-        saveSystem.commit(candidate);
-        void playStoryCinematicV188('cin-31', { context: { m577: manifestV188 } }).then(startInterludeFlowV188);
+        saveSystem.commit(candidate); interludeResumePendingV188 = true;
+        void playStoryCinematicV188('cin-31', { context: { m577: manifestV188 } }).then(startInterludeFlowV188)
+          .finally(() => { interludeResumePendingV188 = false; });
       }
     } catch (error) { toast(error.message); }
+    return;
+  }
+  // The manifest is resolved but the interlude never started (tab closed during CIN-31): resume both.
+  if (interludeDueV188(saveSystem.data)) {
+    if (!interludeResumePendingV188) {
+      interludeResumePendingV188 = true;
+      void playStoryCinematicV188('cin-31', { context: { m577: manifestV188 } })
+        .then(startInterludeFlowV188).finally(() => { interludeResumePendingV188 = false; });
+    }
     return;
   }
   // Act IV (bible §5.5): CIN-51 biological check, once, after the black cocoon.
@@ -1058,7 +1073,7 @@ function playStoryCinematicV188(id, { once = true, record = true, context = {} }
     }
     if (resumeHub && activeView === 'hub') hubEngine.resume();
     if (resumeMission && activeView === 'play' && engine.running && engine.paused) engine.togglePause();
-    audio.setScene(resolveViewAudioSceneV77(activeView));
+    audio.setScene(viewAudioSceneV188(activeView));
     return result;
   });
 }
@@ -1378,9 +1393,9 @@ function renderColonyReconstructionV188() {
     label.textContent = `${entry.criterion} · ${'■'.repeat(entry.validated)}${'▣'.repeat(entry.invested - entry.validated)}${'□'.repeat(3 - entry.invested)} ${entry.current || ''}`;
     item.append(label);
     if (entry.next) {
-      const cost = Object.entries(entry.next.cost).map(([key, value]) => `${value} ${key}`).join(' · ');
       const button = Object.assign(document.createElement('button'), { type: 'button', className: 'button compact',
-        textContent: `${entry.pending ? (en ? 'AWAITING' : 'EN ATTENTE') : (en ? 'BUILD' : 'LANCER')} · ${entry.next.label} (${cost} · ${entry.next.hours} h)` });
+        textContent: entry.pending ? `${en ? 'AWAITING' : 'EN ATTENTE'} · ${entry.pendingLabel}`
+          : `${en ? 'BUILD' : 'LANCER'} · ${entry.next.label} (${formatCost(entry.next.cost)} · ${entry.next.hours} h)` });
       button.disabled = entry.pending;
       button.onclick = () => {
         try {
@@ -3025,8 +3040,9 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   candidate.scene = 'hub';
   saveSystem.commit(candidate);
   renderAll();
-  if (colonyChangeV188?.validated) toast(document.documentElement.lang === 'en' ? `Port-Méridien: site level validated (${colonyChangeV188.validated} ${colonyChangeV188.level}).` : `Port-Méridien : niveau de chantier validé (${colonyChangeV188.validated} ${colonyChangeV188.level}).`);
-  if (colonyChangeV188?.damaged) toast(document.documentElement.lang === 'en' ? `Port-Méridien: a site lost one functioning level (${colonyChangeV188.damaged}).` : `Port-Méridien : un chantier perd un niveau de fonctionnement (${colonyChangeV188.damaged}).`);
+  const colonySiteV188 = id => colonySnapshotV188(candidate, document.documentElement.lang).sites.find(entry => entry.id === id)?.criterion || id;
+  if (colonyChangeV188?.validated) toast(document.documentElement.lang === 'en' ? `Port-Méridien: site level validated (${colonySiteV188(colonyChangeV188.validated)} ${colonyChangeV188.level}).` : `Port-Méridien : niveau de chantier validé (${colonySiteV188(colonyChangeV188.validated)} ${colonyChangeV188.level}).`);
+  if (colonyChangeV188?.damaged) toast(document.documentElement.lang === 'en' ? `Port-Méridien: a site lost one functioning level (${colonySiteV188(colonyChangeV188.damaged)}).` : `Port-Méridien : un chantier perd un niveau de fonctionnement (${colonySiteV188(colonyChangeV188.damaged)}).`);
   for (const line of reactiveLinesV188) {
     const name = resolveCrewDefinitionV85(saveSystem.data.crew.find((member) => member.id === line.crewId) || { id: line.crewId }, CREW)?.name || line.crewId;
     toast(`${name} : « ${line.text} »`);
