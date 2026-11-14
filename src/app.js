@@ -18,7 +18,7 @@ import {
 } from './content.js';
 import {
   SaveSystem, COMMAND_ACTIONS, RESEARCH_PROJECTS, MAX_SQUAD_SIZE, canAfford,
-  executeStrategicAction, completeResearchProject, getProcurementQuote, procureCatalogItem,
+  executeStrategicAction, completeResearchProject, getProcurementQuote, procureCatalogItem, strategicCostRefusalV188,
   equipCatalogItem, selectStrategicVehicle, assignCrewMember, treatCrewMember, applyCostume,
   getOperationBrief, beginOperation, resolveOperationDeployment, recordOperationFlag, recordOperationResumeState, resolveOperation,
   getAlphaBravoStrategicRecoveryV69, abandonBlockedAlphaBravoOperationV69,
@@ -474,7 +474,7 @@ function runTimedMutation(mutation, successMessage, { duringTransitV116 = false 
     saveSystem.commit();
   } catch (error) {
     saveSystem.data = previous;
-    try { toast(error.message); renderAll(); } catch { /* L'action reste refusée même si l'interface échoue. */ }
+    try { toast(strategicCostRefusalV188(error, document.documentElement.lang)); renderAll(); } catch { /* L'action reste refusée même si l'interface échoue. */ }
     return null;
   }
   // Le stockage est confirmé : une erreur visuelle ne doit jamais rejouer la transaction.
@@ -4456,6 +4456,10 @@ function bind() {
         checked: saveSystem.data.settings.crewPermadeathV188 !== false, disabled: saveSystem.data.settings.crewPermadeathV188 === false });
     }
     catch (error) { renderProfiles(); toast(error.message); }
+  };
+  // V188: volume sliders are heard while dragging; the value is saved on release (change).
+  for (const [id, key] of [['setting-effects', 'effects'], ['setting-music', 'music']]) byId(id).oninput = (event) => {
+    if (!saveSystem.recoveryNeeded) audio.setVolumes({ [key]: Number(event.target.value) });
   };
   const updateTitleShipV87 = () => {
     try {

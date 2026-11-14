@@ -1036,10 +1036,29 @@ export function missingStrategicCosts(save, cost = {}) {
     .map(([key, value]) => ({ key, required: value, available: getStrategicValue(save, key) }));
 }
 
+export const STRATEGIC_COST_LABELS_FR_V188 = Object.freeze({
+  credits: 'CR', alloy: 'ALLIAGE', fuel: 'CARBURANT', medical: 'MÉDICAL', research: 'R&D',
+  pathogen: 'PATHOGÈNE', power: 'ÉNERGIE', supplies: 'RAVIT.'
+});
+export const STRATEGIC_COST_LABELS_EN_V188 = Object.freeze({
+  credits: 'CR', alloy: 'ALLOY', fuel: 'FUEL', medical: 'MEDICAL', research: 'R&D',
+  pathogen: 'PATHOGEN', power: 'POWER', supplies: 'SUPPLY'
+});
+/** Player-facing refusal for a STRATEGIC_COST_MISSING error, in FR or EN. */
+export function strategicCostRefusalV188(error, language = 'fr') {
+  if (!Array.isArray(error?.missingCosts)) return error?.message ?? '';
+  const en = language === 'en', labels = en ? STRATEGIC_COST_LABELS_EN_V188 : STRATEGIC_COST_LABELS_FR_V188;
+  const list = error.missingCosts.map(({ key, required, available }) => `${available}/${required} ${labels[key] || String(key).toUpperCase()}`).join(' · ');
+  return (en ? 'Insufficient resources: ' : 'Ressources insuffisantes : ') + list;
+}
+
 function payStrategicCost(save, cost = {}) {
   if (!canAfford(save, cost)) {
-    const missing = missingStrategicCosts(save, cost).map(({ key, required, available }) => key + ' ' + available + '/' + required).join(', ');
-    throw new Error('Ressources insuffisantes : ' + missing);
+    // V188: named resources, never raw save keys; the structured list lets the
+    // interface show the refusal in the chosen language.
+    const missingCosts = missingStrategicCosts(save, cost);
+    const missing = missingCosts.map(({ key, required, available }) => available + '/' + required + ' ' + (STRATEGIC_COST_LABELS_FR_V188[key] || key.toUpperCase())).join(' · ');
+    throw Object.assign(new Error('Ressources insuffisantes : ' + missing), { code: 'STRATEGIC_COST_MISSING', missingCosts });
   }
   for (const [key, value] of Object.entries(cost)) changeStrategicValue(save, key, -value);
 }
