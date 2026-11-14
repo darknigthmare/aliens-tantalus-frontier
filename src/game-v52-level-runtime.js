@@ -397,6 +397,7 @@ export function withV52LevelRuntime(BaseEngine) {
       this.onEvent({
         type: 'mission-level-ready',
         templateId: plan.templateId,
+        templateLabel: plan.templateLabel,
         signature: plan.signature,
         routes: plan.graph.routes.length,
         zones: plan.biomeZones.length,

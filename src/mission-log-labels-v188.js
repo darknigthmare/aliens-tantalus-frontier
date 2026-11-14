@@ -57,3 +57,82 @@ export function checkpointLabelV188(id) {
   if (beacon) return `balise ${beacon[1]}`;
   return 'd’opération';
 }
+
+// Mission-log names for level content (text bug hunt, 2026-11-14). The log used
+// to print template, event, archive, route and timer ids. Content names come
+// first (template label, archive title, route label); the field events have no
+// authored name, so their wording below is [PROPOSÉ]. Fallbacks are generic words.
+export const LEVEL_TEMPLATE_LABELS_V188 = Object.freeze({
+  'ship-interior-vertical': 'Intérieur de vaisseau vertical',
+  'colony-multiroute': 'Colonie à routes multiples',
+  'planet-exterior': 'Extérieur planétaire'
+});
+// [PROPOSÉ] names for the authored mission-level events of mission-levels-v52.
+export const LEVEL_EVENT_LABELS_V188 = Object.freeze({
+  'ship-decompression': 'décompression de la soute',
+  'ship-power-cascade': 'surtension en cascade',
+  'ship-bridge-ambush': 'embuscade au poste de commandement',
+  'colony-blackout': 'panne de courant de la colonie',
+  'colony-generator-online': 'générateur de la colonie relancé',
+  'colony-plaza-attack': 'attaque de l’habitat',
+  'planet-storm-front': 'front de tempête',
+  'planet-cave-ambush': 'embuscade dans les grottes',
+  'planet-beacon-defense': 'défense de la balise'
+});
+export const LEVEL_TIMER_LABELS_V188 = Object.freeze({ extraction: 'extraction' });
+
+const nameOrFallbackV188 = (value, fallback) => {
+  const raw = String(value ?? '').trim();
+  return !raw || ID_SHAPE_V188.test(raw) ? fallback : raw;
+};
+
+/** Level name for "mission-level-ready": the plan's templateLabel, then the map. */
+export function levelTemplateLabelV188(event = {}) {
+  const authored = nameOrFallbackV188(event?.templateLabel, '');
+  if (authored) return authored;
+  const id = String(event?.templateId ?? '').trim();
+  return Object.hasOwn(LEVEL_TEMPLATE_LABELS_V188, id) ? LEVEL_TEMPLATE_LABELS_V188[id] : 'terrain d’opération';
+}
+export function levelEventLabelV188(eventId) {
+  const id = String(eventId ?? '').trim();
+  return Object.hasOwn(LEVEL_EVENT_LABELS_V188, id) ? LEVEL_EVENT_LABELS_V188[id] : nameOrFallbackV188(id, 'alerte terrain');
+}
+export function levelTimerLabelV188(timerId) {
+  const id = String(timerId ?? '').trim();
+  return Object.hasOwn(LEVEL_TIMER_LABELS_V188, id) ? LEVEL_TIMER_LABELS_V188[id] : nameOrFallbackV188(id, 'extraction');
+}
+/** Archive title from the collectable catalog ({id, title} records). */
+export function collectableLabelV188(collectableId, records = []) {
+  const id = String(collectableId ?? '').trim();
+  const record = (Array.isArray(records) ? records : []).find(entry => entry?.id === id);
+  return nameOrFallbackV188(record?.title, 'archive de terrain');
+}
+/** Route name from the route consequences ({flag, routeId, label} records). */
+export function routeUnlockLabelV188(event = {}, consequences = {}) {
+  const flag = String(event?.flag ?? '').trim();
+  const match = Object.values(consequences || {}).find(entry => entry?.flag === flag || (event?.routeId && entry?.routeId === event.routeId));
+  return nameOrFallbackV188(match?.label, 'route d’accès');
+}
+
+/** French mission-log line for a level event, or null when the event is not one of them. */
+export function missionLevelLogLineV188(event = {}, { collectables = [], routes = {} } = {}) {
+  const up = text => String(text).toUpperCase();
+  const seconds = Math.ceil(Number(event?.duration) || 0);
+  switch (event?.type) {
+    case 'mission-level-ready':
+      return `NIVEAU ${up(levelTemplateLabelV188(event))} · ${event.routes} routes · ${event.zones} zones · ${event.events} événements`;
+    case 'narrative-collectable-discovered':
+      return `ARCHIVE RÉCUPÉRÉE · ${up(collectableLabelV188(event.collectableId, collectables))} · preuve persistée`;
+    case 'narrative-route-unlocked':
+      return event.accessKind === 'vent' || event.physicalVentOpen
+        ? `ROUTE DÉBLOQUÉE · ${up(routeUnlockLabelV188(event, routes))} · conduit physique ouvert`
+        : `ROUTE DÉBLOQUÉE · ${up(routeUnlockLabelV188(event, routes))} · porte physique confirmée`;
+    case 'mission-level-event':
+      return `ÉVÉNEMENT TERRAIN · ${up(levelEventLabelV188(event.eventId))}`;
+    case 'mission-timer-started':
+      return `HOLDOUT · ${up(levelTimerLabelV188(event.timerId))} · ${seconds} S`;
+    case 'mission-timer-complete':
+      return `HOLDOUT TERMINÉ · ${up(levelTimerLabelV188(event.timerId))} DÉVERROUILLÉE`;
+    default: return null;
+  }
+}

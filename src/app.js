@@ -41,7 +41,7 @@ import { projectRefugeHubSaveV87 } from './refuge-save-v87.js';
 import { validateShipPortDepartureV87 } from './ship-port-state-v87.js';
 import { PlaceablesDockV86 } from './placeables-ui-v86.js';
 import { resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
-import { squadActionLabelV188, biomeLabelV188, missionFailureLabelV188, checkpointLabelV188 } from './mission-log-labels-v188.js';
+import { squadActionLabelV188, biomeLabelV188, missionFailureLabelV188, checkpointLabelV188, missionLevelLogLineV188 } from './mission-log-labels-v188.js';
 import { commitCrewTransactionV85 } from './crew-transactions-v85.js';
 import { rememberCrewConversationTopicV135 } from './crew-conversation-memory-v135.js';
 import { createFieldMediaRepositoryV135 } from './field-media-v135.js';
@@ -156,7 +156,8 @@ import { HiveCommandDockV131 } from './hive-command-ui-v131.js';
 import { SquadCommandDockV132 } from './squad-command-ui-v132.js';
 import { getNarrativeEvidenceModelV132, markNarrativeEvidenceReadV132,
   recordNarrativeEvidenceDecisionV132, markNarrativeMediaPlayedV132 } from './narrative-evidence-v132.js';
-import { getNarrativeInvestigationV68 } from './narrative-collectables-v68.js';
+import { getNarrativeInvestigationV68, NARRATIVE_COLLECTABLES_V68 } from './narrative-collectables-v68.js';
+import { QZ17_ROUTE_CONSEQUENCES_V68 } from './narrative-collectables-runtime-v68.js';
 import { MissionArchiveOverlayV68, NarrativeArchivesUiV68, createOpenArchivesEventV68 } from './narrative-archives-ui-v68.js';
 import { AlphaBravoCommandDockV69 } from './alpha-bravo-ui-v69.js';
 import { AlienSurvivalDockV70 } from './alien-survival-ui-v70.js';
@@ -3227,30 +3228,15 @@ function handleGameEvent(event) {
     }
     return;
   }
-  if (event.type === 'mission-level-ready') {
-    log.textContent = `NIVEAU ${String(event.templateId || '').toUpperCase()} · ${event.routes} routes · ${event.zones} zones · ${event.events} événements`;
-  }
   if (event.type === 'mission-zone') {
     log.textContent = `ZONE · ${String(event.name || event.zoneId || '').toUpperCase()} · ${biomeLabelV188(event.biome).toUpperCase()}`;
   }
-  if (event.type === 'narrative-collectable-discovered') {
-    log.textContent = `ARCHIVE RÉCUPÉRÉE · ${String(event.collectableId || '').toUpperCase()} · preuve persistée`;
-  }
-  if (event.type === 'narrative-route-unlocked') {
-    log.textContent = `ROUTE DÉBLOQUÉE · ${String(event.flag || event.doorId || '').toUpperCase()} · porte physique confirmée`;
-  }
-  if (event.type === 'mission-level-event') {
-    recordOperationFlag(saveSystem.data, `level-event-${event.eventId}`);
-    log.textContent = `ÉVÉNEMENT TERRAIN · ${String(event.eventId || '').toUpperCase()}`;
-  }
-  if (event.type === 'mission-timer-started') {
-    recordOperationFlag(saveSystem.data, `timer-${event.timerId}-started`);
-    log.textContent = `HOLDOUT · ${String(event.timerId || 'extraction').toUpperCase()} · ${Math.ceil(Number(event.duration) || 0)} S`;
-  }
-  if (event.type === 'mission-timer-complete') {
-    recordOperationFlag(saveSystem.data, `timer-${event.timerId}-complete`);
-    log.textContent = `HOLDOUT TERMINÉ · ${String(event.timerId || 'extraction').toUpperCase()} DÉVERROUILLÉE`;
-  }
+  // Level content is named for the player; the ids stay in the operation flags.
+  if (event.type === 'mission-level-event') recordOperationFlag(saveSystem.data, `level-event-${event.eventId}`);
+  if (event.type === 'mission-timer-started') recordOperationFlag(saveSystem.data, `timer-${event.timerId}-started`);
+  if (event.type === 'mission-timer-complete') recordOperationFlag(saveSystem.data, `timer-${event.timerId}-complete`);
+  const levelLogLineV188 = missionLevelLogLineV188(event, { collectables: NARRATIVE_COLLECTABLES_V68, routes: QZ17_ROUTE_CONSEQUENCES_V68 });
+  if (levelLogLineV188) log.textContent = levelLogLineV188;
   if (event.type === 'squad-ready') {
     log.textContent = `ESCOUADE DÉPLOYÉE · ${event.members?.length || 0} alliés IA physiques · ${event.animationSheets || 0} plaques animées`;
   }
