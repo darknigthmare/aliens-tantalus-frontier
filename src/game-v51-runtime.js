@@ -1657,12 +1657,13 @@ export class GameEngine {
   // archive, vent, extraction); a pickup wins only when it is strictly the
   // nearest valid target, or the only one. Layers add candidates by
   // overriding interactionCandidatesV188() and handle their own kinds.
-  interactionRankDistanceV188(actor, rect) {
+  // Centre-to-centre, like the native reaches. Doors are tall: only the
+  // horizontal offset counts, the same axis as doorInteractionReachV188.
+  interactionRankDistanceV188(actor, rect, { horizontal = false } = {}) {
     if (!actor || !rect) return Infinity;
-    const cx = actor.x + actor.w / 2, cy = actor.y + actor.h / 2;
-    const w = Number(rect.w) || 0, h = Number(rect.h) || 0;
-    const dx = Math.max(rect.x - cx, 0, cx - (rect.x + w)), dy = Math.max(rect.y - cy, 0, cy - (rect.y + h));
-    return Math.hypot(dx, dy);
+    const dx = actor.x + actor.w / 2 - (Number(rect.x) + (Number(rect.w) || 0) / 2);
+    const dy = actor.y + actor.h / 2 - (Number(rect.y) + (Number(rect.h) || 0) / 2);
+    return horizontal ? Math.abs(dx) : Math.hypot(dx, dy);
   }
 
   interactionCandidatesV188(actor = this.player) {
@@ -1672,7 +1673,7 @@ export class GameEngine {
     for (const door of this.doors || []) {
       if (Math.abs(actorCenter - (door.x + door.w / 2)) >= this.doorInteractionReachV188(door, actor) || Math.abs(actor.y - door.y) >= door.h + 60) continue;
       const requirement = this.doorRequirement(door);
-      list.push({ kind: 'door', category: 'action', target: door, distance: rank(this.getDoorRenderState?.(door, { open: false }) || door),
+      list.push({ kind: 'door', category: 'action', target: door, distance: this.interactionRankDistanceV188(actor, door, { horizontal: true }),
         prompt: requirement ? `E  VERROUILLÉ — ${requirement}` : 'E  ACTIONNER LA PORTE' });
       break;
     }

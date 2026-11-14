@@ -288,7 +288,7 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       // the rescue, inventory, checkpoint and event effects in both cases.
       if (this.coopEnabled && actor?.alive && ally?.downed && interactionDistance(actor, ally) <= 86) return 'revive';
       // V188: the badge is a pickup; it takes E only when it is the nearest target.
-      if (this.forgeNativePickupV188(actor)?.kind === 'security-key') return 'security-key';
+      if (this.forgeNativePickupV188?.(actor)?.kind === 'security-key') return 'security-key';
       // Recovery is an inherited fallback: preserve actionable Forge validation
       // and do not let V51 extract through a partition while reaching a pickup.
       const objectiveBlocksRecovery = near(actor, this.objective);
@@ -305,13 +305,18 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
     // preferred Forge use. The same rank distance as the native selection is used.
     forgeNativePickupV188(actor = this.player) {
       const native = this.selectInteractionTargetV188?.(actor);
-      if (native?.category !== 'pickup') return null;
+      // Arrows/harpoons keep their own Forge recovery boundary (forgeUrgentNativeUseV156).
+      if (native?.category !== 'pickup' || native.kind === 'recoverable-weapon-v131') return null;
       const rank = target => this.interactionRankDistanceV188(actor, target);
       const linked = this.forgeLinkedDoorV141(actor);
-      if (linked && rank(this.getDoorRenderState?.(linked.door, { open: false }) || linked.door) <= native.distance) return null;
+      if (linked && this.interactionRankDistanceV188(actor, linked.door, { horizontal: true }) <= native.distance) return null;
       const preferred = this.forgePreferredUseV156(actor);
       if (preferred?.target && rank(preferred.target) <= native.distance) return null;
       if (near(actor, this.objective) && rank(this.objective) <= native.distance) return null;
+      // A door sealed by a partition keeps its refusal prompt (historical Forge boundary).
+      const door = list(this.doors).find(candidate => Math.abs(actor.x + actor.w / 2 - candidate.x - candidate.w / 2) < this.forgeDoorReachV188(candidate, actor)
+        && Math.abs(actor.y - candidate.y) < candidate.h + 60);
+      if (door && !this.forgeInteractionClearV141(actor, door)) return null;
       return native;
     }
 
@@ -435,8 +440,9 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       const preferred = this.forgePreferredUseV156(actor);
       if (preferred?.kind === 'npc') return `E  PARLER À ${preferred.target.name.toUpperCase()}`;
       if (preferred?.kind === 'narrative') return 'E  LIRE LE RÉCIT DU TERMINAL';
-      if (preferred?.kind === 'native-terminal') return preferred.target === this.powerNode
-        ? 'E  RÉTABLIR LE CIRCUIT AUXILIAIRE' : 'E  EXTRAIRE LES ARCHIVES';
+      // V188: the native dispatcher owns this use, so its shared selection names it
+      // (same texts as before; a strictly nearer native pickup is named instead).
+      if (preferred?.kind === 'native-terminal') return super.getInteractionPrompt(actor);
       if (near(actor, this.objective)) {
         if (!this.forgeInteractionClearV141(actor, this.objective)) return 'E  OBJECTIF BLOQUÉ PAR UNE CLOISON';
         const physicalRequirement = super.missingExtractionRequirement();
