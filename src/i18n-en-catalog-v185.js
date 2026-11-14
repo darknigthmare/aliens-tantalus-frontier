@@ -2,6 +2,11 @@
 // Keys are the exact French strings; patterns use {0}, {1}… for inserted values.
 // Exact French keys and numbered pattern slots are preserved.
 export const EN_CATALOG_V185 = Object.freeze({
+// V188 systems bug hunt (merged via i18n-catalog-maintenance-v186 review).
+"fichier illisible": "unreadable file",
+"stockage inaccessible": "storage unavailable",
+"Lots de munitions pour la prochaine opération · gestion de réserve historique. Les chargeurs physiques restent propres aux armes en mission.": "Ammunition lots for the next operation · historical reserve management. Physical magazines remain specific to weapons in the mission.",
+"Retraite non enregistrée : save-write-failed.": "Retreat not saved: storage refused the save. The operation is kept.",
 "\" target=\"_blank\" rel=\"noopener noreferrer\">Référence": "\" target=\"_blank\" rel=\"noopener noreferrer\">Reference",
 "(seul état visuel disponible)": "(only visual state available)",
 "+15 % AUX PROCHAINS TIRS · X / □ RECHARGER": "+15% ON NEXT SHOTS · X / □ RELOAD",
@@ -6237,6 +6242,12 @@ export const EN_CATALOG_V185 = Object.freeze({
 "Signal reçu": "Signal received"
 });
 export const EN_PATTERNS_V185 = Object.freeze({
+// V188 systems bug hunt (merged via i18n-catalog-maintenance-v186 review).
+"Profil {0} actif.": "Profile {0} active.",
+"+{0} · en réserve : {1}": "+{0} · in reserve: {1}",
+"ARCHIVES ARMEMENT · {0} références à authentifier": "WEAPON ARCHIVES · {0} references to authenticate",
+"ACCESSOIRES DOCUMENTÉS · {0} modules à authentifier": "DOCUMENTED ACCESSORIES · {0} modules to authenticate",
+"ARMES À AUTHENTIFIER · {0} dossiers": "WEAPONS TO AUTHENTICATE · {0} files",
 ": 'Relève disponible'} · {0}": ": 'Relief available'} · {0}",
 "ACCÈS REFUSÉ · {0}": "ACCESS DENIED · {0}",
 "ACCÈS · Échelle du quai, puis pupitre sur la passerelle : rétablissez le sas ({0} s).": "ACCESS · Quay ladder, then console on the catwalk: restore the airlock ({0} s).",
