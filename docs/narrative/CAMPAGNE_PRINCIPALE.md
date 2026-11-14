@@ -4511,5 +4511,15 @@ Décision du propriétaire : certaines salles passent en **profondeur** (2,5D, d
   - pendant l'escorte, les trois habitants suivent Echo-9 en profondeur, en file, un pas derrière ; ils contournent un objet plutôt que d'y entrer ;
   - une pluie fine tombe sur le quai, comme dans CIN-03 ; la sauvegarde du quai garde la profondeur (`portMeridienV90.z`, additif).
 - **Ordre entre personnages** : un PNJ placé devant Echo-9 le masque, puisque le joueur est alors dessiné avant l'équipage.
-- **Limites** : Frontier Forge n'édite pas les salles en profondeur. Prochaine candidate : les cales de QZ-17, avec combat (règle de tir déjà consignée).
+- **Cales de QZ-17 (Acte I), avec combat** — spec `specs/002-cales-qz17-profondeur-combat/` :
+  - le pont bas des soutes dépressurisées, entre les deux sas, est la première section de mission en profondeur ;
+  - trois rangées de conteneurs scellés marqués QZ17 (placeholders en primitives, cohérents avec CIN-31) laissent une allée le long du mur et deux allées vers la caméra ;
+  - la couverture de caisses existante se franchit près du mur et se contourne par l'avant ;
+  - **tir** : une salve horizontale touche un xénomorphe à ±22 de profondeur, Echo-9 se recale de 30 % vers lui, et un conteneur sur la ligne arrête la salve ; l'aide à la visée et le corps à corps suivent la même bande ;
+  - **ennemis** : les rôdeurs de la dépressurisation rejoignent la profondeur d'Echo-9 en contournant les conteneurs ; une attaque, ou un projectile, ne porte qu'à ±24 ;
+  - **détecteur** : il compte la profondeur dans la distance ;
+  - **preuves, ravitaillement et sas** : accessibles depuis l'allée du mur ;
+  - la reprise de mission garde la profondeur d'Echo-9, du marine coop et des xénomorphes.
+  - Dans la cale, W/S ne servent plus à viser vers le haut ou le bas : le tir y est horizontal, décision (3).
+- **Limites** : Frontier Forge n'édite pas les salles en profondeur. Prochaines candidates : d'autres soutes ou cales de mission, après évaluation de QZ-17.
 

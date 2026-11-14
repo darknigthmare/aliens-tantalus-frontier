@@ -185,6 +185,15 @@ Les effets de planète sont dessinés sur un canvas inséré dans la scène, ent
   - `scripts/verify-hub-depth-rooms-v188.mjs` (10 tests) et les suites liées au port (169 tests) passent ;
   - Chromium, escorte en cours : conteneurs bloquants, y compris au premier rang ; habitants en file derrière Echo-9 ; profondeur −80 sauvegardée dans l'état du quai ; aucune erreur.
 
+## Cales de QZ-17 en profondeur, avec combat (spec 002, bible §56.12)
+
+- `src/mission-depth-v188.js` : section mesurée sur le niveau généré (pont bas de `ship-cargo`, y 868, entre `dock-bulkhead` et `cargo-bulkhead`) et mixin `withMissionDepthRoomsV188`, le plus à l'extérieur de `GameEngine`. `src/depth-props-v188.js` regroupe les objets du sol partagés (conteneur QZ17).
+- Vérifications :
+  - `scripts/verify-mission-depth-v188.mjs` (6 tests sur le moteur réel) : déplacement ; tir dans la bande, hors bande et arrêté par un conteneur ; attaque hors bande ; détecteur ; reprise ; invariance hors de QZ-17.
+  - Suites du moteur de mission : 303 tests passent.
+  - Chromium : QZ-17 lancée par `launchCampaign`, Echo-9 et un rôdeur placés par injection. Conteneurs, annonce, occultation et dépressurisation visibles ; aucune erreur.
+- Performance, même page, ordre alterné : un premier essai par décalage de `actor.y` coûtait +25 %. La pose de l'arme du moteur de mission se calcule à partir de `y`. Le dessin passe désormais par une translation du canvas : +0,4 % à +8 % selon l'essai (17,2–17,4 ms contre 16,1 ms), dans Chromium sans affichage.
+
 ## Limites et travail restant
 
 

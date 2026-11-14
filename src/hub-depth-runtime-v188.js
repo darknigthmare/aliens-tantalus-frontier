@@ -7,6 +7,7 @@ import { DROPSHIP_HANGAR_ART_V55 } from './hub-art-runtime-v55.js';
 import { HUB_DECKS } from './hub-game.js';
 import { getHubVehiclePlacementV136 } from './hub-prop-placements-v136.js';
 import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
+import { drawDepthPropV188 } from './depth-props-v188.js';
 import { HUB_DEPTH_ROOMS_V188, HUB_FLOOR_Y_V188, hubDepthRoomAtV188, depthToScreenOffsetV188, depthShadeV188, stepDepthMoveV188,
   canLeaveDepthRoomV188, depthInteractionAllowedV188, npcDepthTargetV188, stepNpcDepthV188, normalizeHubDepthV188,
   depthAnnouncementV188, PORT_DEPTH_ROOM_V188, civilianDepthTargetV188, blockedByFootprintV188, freeDepthV188 } from './hub-depth-rooms-v188.js';
@@ -352,33 +353,4 @@ export function withHubDepthRoomsV188(Base) {
   };
 }
 
-/** Crates and a cart drawn in primitives (placeholders, no generated image). */
-export function drawDepthPropV188(ctx, prop, box) {
-  const { x, y, w, h } = box;
-  ctx.save();
-  ctx.fillStyle = 'rgba(0,0,0,.35)'; ctx.beginPath(); ctx.ellipse(x + w / 2, y + h + 2, w * .55, 6, 0, 0, Math.PI * 2); ctx.fill(); // contact shadow
-  if (prop.kind === 'drum') { // three fuel drums
-    for (let i = 0; i < 3; i++) { const dx = x + i * (w / 3), dw = w / 3 - 4;
-      ctx.fillStyle = i % 2 ? '#5a3a2a' : '#4b3326'; ctx.fillRect(dx, y + 6, dw, h - 6);
-      ctx.fillStyle = 'rgba(255,255,255,.08)'; ctx.fillRect(dx, y + 6, dw, 3); ctx.fillStyle = '#2a1d16'; ctx.fillRect(dx, y + h * .45, dw, 3);
-      ctx.fillStyle = '#d9b44a'; ctx.fillRect(dx + 3, y + h * .6, dw - 6, 6); }
-    ctx.restore(); return;
-  }
-  if (prop.kind === 'cart') {
-    ctx.fillStyle = '#2d3536'; ctx.fillRect(x, y + h - 18, w, 10); // bed
-    ctx.fillStyle = '#5b6466'; ctx.fillRect(x + 4, y + h - 46, w * .45, 28); ctx.fillStyle = '#c9a54a'; ctx.fillRect(x + 4, y + h - 40, w * .45, 4); // canister
-    ctx.fillStyle = '#121617'; for (const wx of [x + 10, x + w - 16]) { ctx.beginPath(); ctx.arc(wx, y + h - 4, 6, 0, Math.PI * 2); ctx.fill(); }
-    ctx.fillStyle = '#3a4344'; ctx.fillRect(x + w - 6, y + h - 40, 4, 26); // handle
-  } else {
-    const rows = h > 70 ? 2 : 1, rowH = h / rows;
-    for (let r = 0; r < rows; r++) {
-      const ry = y + h - (r + 1) * rowH, inset = r * 6;
-      ctx.fillStyle = r ? '#4a4434' : '#3f3a2c'; ctx.fillRect(x + inset, ry, w - inset * 2, rowH - 2);
-      ctx.fillStyle = 'rgba(255,255,255,.07)'; ctx.fillRect(x + inset, ry, w - inset * 2, 4); // top edge light
-      ctx.strokeStyle = '#1e1b14'; ctx.lineWidth = 2; ctx.strokeRect(x + inset + 3, ry + 3, w - inset * 2 - 6, rowH - 8);
-      ctx.beginPath(); ctx.moveTo(x + inset + 3, ry + 3); ctx.lineTo(x + w - inset - 3, ry + rowH - 5); ctx.stroke(); // brace
-      ctx.fillStyle = '#c9a54a'; ctx.font = '700 9px monospace'; ctx.fillText(r ? 'QZ' : `CARGO ${prop.id.endsWith('west') ? '07' : '12'}`, x + inset + 8, ry + rowH / 2 + 3);
-    }
-  }
-  ctx.restore();
-}
+export { drawDepthPropV188 } from './depth-props-v188.js';
