@@ -1718,8 +1718,9 @@ export function withV52LevelRuntime(BaseEngine) {
       const actorCenter = this.player.x + this.player.w / 2;
       if (Math.abs(actorCenter - (door.x + door.w / 2)) > 520) return;
       const zones = new Map(asList(this.missionLevelRuntime.biomeZones).map((zone) => [zone.id, zone.label]));
-      const from = zones.get(door.fromZoneId) || door.fromZoneId || '';
-      const to = zones.get(door.toZoneId) || door.toZoneId || '';
+      // Zone ids never reach the plate; the catalog translates labels and "{0} ↔ {1}".
+      const from = zones.get(door.fromZoneId) || 'secteur';
+      const to = zones.get(door.toZoneId) || 'secteur';
       const role = door.visualRole === 'colony-gate' ? 'PORTAIL COLONIAL'
         : door.visualRole === 'security-shutter' ? 'VOLET DE SÉCURITÉ'
           : door.visualRole === 'pressure-airlock' ? 'SAS PRESSURISÉ' : 'CLOISON ÉTANCHE';

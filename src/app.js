@@ -185,7 +185,7 @@ const byId = (id) => document.getElementById(id);
 const all = (selector, root = document) => [...root.querySelectorAll(selector)];
 const clone = (value) => structuredClone(value);
 const clamp = (value, minimum = 0, maximum = 100) => Math.max(minimum, Math.min(maximum, Number(value) || 0));
-const number = (value) => new Intl.NumberFormat('fr-FR').format(Math.round(Number(value) || 0));
+const number = (value) => new Intl.NumberFormat(currentLanguageV185() === 'en' ? 'en-GB' : 'fr-FR').format(Math.round(Number(value) || 0));
 const absoluteHours = (clock) => (Math.max(1, Number(clock?.day) || 1) - 1) * 24 + (Number(clock?.hour) || 0);
 const title = (value = '') => String(value).replace(/(^|[- ])\w/g, (letter) => letter.toUpperCase());
 const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
