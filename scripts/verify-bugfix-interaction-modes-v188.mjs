@@ -98,8 +98,18 @@ function standOn(engine, target, feet = target.y + target.h) { return place(engi
 // Injection: a dropped magazine of the marine `dx` px from his centre. Only the
 // read-only V168 lookup is replaced; the pickup itself is never performed here.
 function magazine(engine, dx) {
-  const p = engine.player, drop = { id: `qa-mag-${dx}`, ownerId: 'qa', rounds: 0, x: p.x + p.w / 2 + dx, y: p.y + p.h - 3 };
+  const p = engine.player, drop = { id: `qa-mag-${dx}`, ownerId: 'qa', rounds: 0, x: p.x + p.w / 2 + dx, y: p.y + p.h / 2 };
   engine.nearestMagazineV168 = () => drop; return drop;
+}
+const MAG = 'E  RÉCUPÉRER CHARGEUR VIDE';
+// The authored mode levels (each mode refuses the generic ship level).
+async function modeFixture(id, build) {
+  const { WORLDS, WEAPONS, ENEMIES, LEVEL_SEEDS } = await import('../src/content-core-v50.js');
+  const c = campaign(id);
+  const missionLevel = build({ campaign: c, world: WORLDS[0], weapon: WEAPONS[0], enemyCatalog: ENEMIES, levelSeeds: LEVEL_SEEDS, seed: 7 });
+  const result = await fixture({ campaign: c, seed: 7, options: { missionLevel, levelSeeds: LEVEL_SEEDS } });
+  Object.assign(result.engine, { running: true, paused: false, enemyAtlasLoadingPausedV65: false, userCasteLoadingV88: false });
+  return result;
 }
 
 test('cargo-brutal: the cargo step is an action of the shared selection (prompt = E)', async () => {
@@ -159,6 +169,89 @@ test('alien survival V70: stations are actions, the welding kit is a pickup, pro
   agree(engine, 'E  RÉCUPÉRER LE KIT DE SOUDURE');
   assert.equal(engine.interact(p), true); assert.equal(kit.taken, true);
   assert.ok(events.some(event => event.type === 'alien-survival-welding-kit'));
+});
+
+// Scene-owning modes: before V188 their prompt ignored the shared selection,
+// so a dropped magazine (V168, above them in the chain) took E and the prompt
+// even when the mode's own target was nearer. Injection: magazine() above.
+test('C-12: lift / reserve / crate are actions of the shared selection', async () => {
+  const { buildC12HordeLevelV121 } = await import('../src/c12-horde-runtime-v121.js');
+  const { engine, events } = await modeFixture('special-c12-horde', buildC12HordeLevelV121);
+  const p = place(engine, 760, 570), state = engine.c12HordeV121;
+  magazine(engine, 40);
+  agree(engine, 'E · RÉSERVE DE MUNITIONS · 160');
+  assert.equal(engine.interact(p), true); assert.equal(state.ammoTaken, true);
+  assert.ok(events.some(event => event.type === 'c12-ammunition'));
+  place(engine, 400 + 50, 355); magazine(engine, -45);
+  agree(engine, MAG); engine.interact(p);
+  assert.equal(state.cargoTaken, false, 'the strictly nearer magazine is named, the crate is left');
+});
+
+test('black cocoon: the cocoon action keeps E against a magazine at the marine’s feet', async () => {
+  const { buildBlackCocoonLevelV121 } = await import('../src/black-cocoon-runtime-v121.js');
+  const { engine } = await modeFixture('special-black-cocoon', buildBlackCocoonLevelV121);
+  assert.equal(engine.blackCocoonV121.phase, 'cocoon');
+  magazine(engine, 0);
+  agree(engine, 'MAINTENIR E · COUPER LA RÉSINE / F · FORCER BRUYAMMENT');
+  assert.equal(engine.selectInteractionTargetV188(engine.player).kind, 'black-cocoon-v121');
+});
+
+test('APC convoy: engaging the convoy is the shared choice, not a magazine', async () => {
+  const { buildApcConvoyLevelV121 } = await import('../src/apc-convoy-runtime-v121.js');
+  const { engine } = await modeFixture('special-apc-convoy', buildApcConvoyLevelV121);
+  assert.equal(engine.apcConvoyV121.phase, 'briefing');
+  magazine(engine, 0);
+  agree(engine, 'E · ENGAGER LE CONVOI');
+  assert.equal(engine.interact(engine.player), true); assert.equal(engine.apcConvoyV121.briefed, true);
+});
+
+test('ecosystem: the supply depot is an action; a strictly nearer magazine wins both', async () => {
+  const { buildEcosystemMissionV131 } = await import('../src/ecosystem-missions-v131.js');
+  const { engine } = await modeFixture('special-queen-mother-v131', buildEcosystemMissionV131);
+  const p = place(engine, 350 + 60, 570), state = engine.ecosystemV131;
+  magazine(engine, 20);
+  agree(engine, MAG); engine.interact(p); assert.equal(state.supplyTaken, false);
+  magazine(engine, 90);
+  agree(engine, 'E · DÉPÔT : MUNITIONS ET VACCINS');
+  assert.equal(engine.interact(p), true); assert.equal(state.supplyTaken, true);
+});
+
+test('mecha: the hangar step is the shared choice; repair is named only when it applies', async () => {
+  const { buildMechaMissionV131 } = await import('../src/mecha-missions-v131.js');
+  const { engine } = await modeFixture('special-titan-v131', buildMechaMissionV131);
+  const state = engine.mechaMissionV131; assert.equal(state.phase, 'hangar');
+  magazine(engine, 0);
+  agree(engine, engine.objectiveProgressText());
+  assert.equal(engine.selectInteractionTargetV188(engine.player).kind, 'mecha-v131');
+  for (const text of ['E  ENTRER DANS LE PROTOTYPE', 'E  RESTAURER LES RÉSERVES DE MAINTENANCE', 'E  RÉPARER LE PROTOTYPE']) assert.ok(EN_CATALOG_V185[text], text);
+});
+
+test('legacy: the chapter station is an action; a strictly nearer magazine wins both', async () => {
+  const { buildLegacyMissionV131 } = await import('../src/legacy-operations-v131.js');
+  const { LEGACY_STATIONS_V131 } = await import('../src/legacy-operation-state-v131.js');
+  const { engine } = await modeFixture('special-nostromo-v131', buildLegacyMissionV131);
+  const state = engine.legacyMissionV131, station = LEGACY_STATIONS_V131[state.kind][state.stage];
+  const p = engine.player; p.x = station.x - p.w / 2 + 40; p.y = station.y - p.h / 2;
+  magazine(engine, 60);
+  const prompt = engine.getInteractionPrompt();
+  assert.equal(engine.selectInteractionTargetV188(p).kind, 'legacy-v131'); assert.notEqual(prompt, MAG);
+  magazine(engine, 10);
+  agree(engine, MAG);
+});
+
+test('hive: before commissioning a non-console station says so, and the console beats a farther magazine', async () => {
+  const { buildHiveMissionV131 } = await import('../src/hive-missions-v131.js');
+  const { engine } = await modeFixture('special-atax-v131', buildHiveMissionV131);
+  assert.equal(engine.hiveV131.commissioned, false);
+  const stations = engine.hiveManifestV131.stations, console_ = stations.find(entry => entry.id === 'commission');
+  const other = stations.find(entry => entry.id !== 'commission' && !entry.charge);
+  place(engine, other.x, other.floorY); magazine(engine, 70);
+  agree(engine, 'INITIALISER L’INTERFACE AU PUPITRE');
+  place(engine, console_.x, console_.floorY); magazine(engine, 70);
+  const prompt = agree(engine, engine.selectInteractionTargetV188(engine.player).prompt);
+  assert.match(prompt, /^E · /);
+  assert.equal(engine.selectInteractionTargetV188(engine.player).kind, 'hive-v131');
+  assert.ok(EN_CATALOG_V185['E / B · REVENIR AU CORPS D’ORIGINE / F · GRIFFE']);
 });
 
 // ---------------------------------------------------------------- item 4
