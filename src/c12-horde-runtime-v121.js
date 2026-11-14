@@ -73,22 +73,41 @@ export function withC12HordeRuntimeV121(BaseEngine) {
       return this.c12HordeV121?.defenceElapsed >= 45 && this.c12HordeV121.evacuationProgress >= 2
         && near(this.player, 1150, 570) ? '' : 'ASCENSEUR NON CONFIRMÉ';
     }
+    // V188 "the prompt is always right": the C-12 owns its scene, so its only
+    // E entries are its own (lift, ammunition reserve, optional crate), in the
+    // shared selection; upper-layer pickups compete by distance.
+    c12InteractionV188(actor = this.player) {
+      if (!this.isC12HordeV121() || actor !== this.player || !actor?.alive || actor.downed) return null;
+      const state = this.c12HordeV121;
+      const entry = (step, x, y, prompt) => ({ kind: 'c12-horde-v121', category: 'action', step, prompt, distance: distance(actor, x, y) });
+      if (state.phase === 'evacuate' && near(actor, 1150, 570)) return entry('evacuate', 1150, 570, 'MAINTENIR E · ASCENSEUR · 2 S');
+      if (!state.activated && near(actor, 845, 570, 55)
+        && (state.ammoTaken || distance(actor, 845, 570) <= distance(actor, 760, 570))) return entry('activate', 845, 570, 'E · RÉTABLIR L’ASCENSEUR');
+      if (!state.ammoTaken && near(actor, 760, 570, 55)) return entry('ammo', 760, 570, 'E · RÉSERVE DE MUNITIONS · 160');
+      if (!state.cargoTaken && near(actor, 400, 355, 65)) return entry('cargo', 400, 355, 'E · CAISSE FACULTATIVE');
+      return null;
+    }
+    interactionCandidatesV188(actor = this.player) {
+      if (!this.isC12HordeV121()) return super.interactionCandidatesV188(actor);
+      const entry = this.c12InteractionV188(actor);
+      return entry ? [entry] : [];
+    }
     interact(actor = this.player) {
       if (!this.isC12HordeV121()) return super.interact(actor);
       if (!this.canC12HordeActV121(actor)) return false;
-      const state = this.c12HordeV121;
-      if (!state.activated && near(actor, 845, 570, 55)
-        && (state.ammoTaken || distance(actor, 845, 570) <= distance(actor, 760, 570))) {
+      const state = this.c12HordeV121, choice = this.selectInteractionTargetV188(actor);
+      if (choice?.kind !== 'c12-horde-v121') return false;
+      if (choice.step === 'activate') {
         state.activated = true; this.syncC12HordeWorldV121(); this.c12HordeMilestoneV121('activated', 'Ascenseur en rétablissement. Bruits derrière la grille gauche.'); return true;
       }
-      if (!state.ammoTaken && near(actor, 760, 570, 55)) {
+      if (choice.step === 'ammo') {
         state.ammoTaken = true; actor.ammoReserve += C12_HORDE_LIMITS_V121.ammoCrate;
         this.onEvent({ type: 'c12-ammunition', amount: C12_HORDE_LIMITS_V121.ammoCrate }); return true;
       }
-      if (!state.cargoTaken && near(actor, 400, 355, 65)) {
+      if (choice.step === 'cargo') {
         state.cargoTaken = true; this.inventory.salvage += 20; this.onEvent({ type: 'c12-cargo', amount: 20 }); return true;
       }
-      return state.phase === 'evacuate' && near(actor, 1150, 570);
+      return choice.step === 'evacuate';
     }
     update(delta) {
       if (!this.isC12HordeV121()) return super.update(delta);
@@ -107,7 +126,7 @@ export function withC12HordeRuntimeV121(BaseEngine) {
       }
       const before = state.phase; this.syncC12HordeWorldV121();
       if (before !== 'evacuate' && state.phase === 'evacuate') this.c12HordeMilestoneV121('lift-ready', 'Ascenseur disponible : repli autorisé, contacts restants non bloquants.');
-      if (state.phase === 'evacuate' && this.keys.has('KeyE') && near(this.player, 1150, 570)) {
+      if (state.phase === 'evacuate' && this.keys.has('KeyE') && near(this.player, 1150, 570) && this.selectInteractionTargetV188(this.player)?.step === 'evacuate') {
         state.evacuationProgress = Math.min(2, state.evacuationProgress + dt);
         if (state.evacuationProgress >= 2) this.completeMission();
       } else if (!state.complete) state.evacuationProgress = 0;
@@ -260,13 +279,7 @@ export function withC12HordeRuntimeV121(BaseEngine) {
     objectiveProgressText() { return this.isC12HordeV121() ? c12HordeDossierV121(this.c12HordeV121).instruction : super.objectiveProgressText(); }
     getInteractionPrompt() {
       if (!this.isC12HordeV121()) return super.getInteractionPrompt();
-      const state = this.c12HordeV121;
-      if (state.phase === 'evacuate' && near(this.player, 1150, 570)) return 'MAINTENIR E · ASCENSEUR · 2 S';
-      if (!state.activated && near(this.player, 845, 570, 55)
-        && (state.ammoTaken || distance(this.player, 845, 570) <= distance(this.player, 760, 570))) return 'E · RÉTABLIR L’ASCENSEUR';
-      if (!state.ammoTaken && near(this.player, 760, 570, 55)) return 'E · RÉSERVE DE MUNITIONS · 160';
-      if (!state.cargoTaken && near(this.player, 400, 355, 65)) return 'E · CAISSE FACULTATIVE';
-      return '';
+      return this.selectInteractionTargetV188(this.player)?.prompt || '';
     }
     getSnapshot() { return { ...super.getSnapshot(), ...(this.isC12HordeV121() ? { c12HordeV121: {
       ...sanitizeC12HordeStateV121(this.c12HordeV121), dossier: c12HordeDossierV121(this.c12HordeV121) } } : {}) }; }
