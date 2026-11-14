@@ -1114,6 +1114,10 @@ export function withV52LevelRuntime(BaseEngine) {
       return actor.ventTransit;
     }
 
+    // V188: portals hidden from the legacy V51 vent branch during interact()
+    // still count for the vent objective, so extraction E cannot refuse.
+    objectiveVentsV188() { return this.interactionHiddenVentsV188 || super.objectiveVentsV188?.() || this.vents || []; }
+
     enterMissionVentV62(actor = this.player) {
       const network = this.missionVentNetworkV62;
       if (!network || !actor || actor.ventTransit || actor.inVehicle || actor.alive === false) return null;
@@ -1669,12 +1673,13 @@ export function withV52LevelRuntime(BaseEngine) {
       // out of that legacy branch so nearby relays, doors and terminals remain
       // interactable without reintroducing teleportation.
       const authoredVents = this.vents;
-      if (this.missionVentNetworkV62) this.vents = [];
+      if (this.missionVentNetworkV62) { this.vents = []; this.interactionHiddenVentsV188 = authoredVents; }
       let result;
       try {
         result = super.interact(actor);
       } finally {
         this.vents = authoredVents;
+        this.interactionHiddenVentsV188 = null;
       }
       if (nearAnchor) {
         const [anchorId] = nearAnchor;

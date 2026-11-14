@@ -150,11 +150,15 @@ export class GameEngine extends CatalogGameEngine {
     if (this.mission?.state === 'active') this.updateObjectiveRuntime(delta);
   }
 
+  // V188: the vents an objective counts. A layer that hides its portals from
+  // this.vents during interact() (V52/V62 networks) keeps them counted here.
+  objectiveVentsV188() { return this.vents || []; }
+
   updateObjectiveRuntime(delta) {
     const state = this.objectiveState;
     const runtime = this.objectiveRuntime;
     if (runtime.requirements.includes('power') && this.powerNode?.active) this.mission.objectives.power = true;
-    if (runtime.requirements.includes('route') && (this.inventory.securityKeys > 0 || this.vents.some((vent) => vent.open))) this.mission.objectives.route = true;
+    if (runtime.requirements.includes('route') && (this.inventory.securityKeys > 0 || this.objectiveVentsV188().some((vent) => vent.open))) this.mission.objectives.route = true;
     if (runtime.requirements.includes('boss') && !this.enemies.some((enemy) => enemy.isBoss && enemy.alive)) this.mission.objectives.boss = true;
     if (runtime.requirements.includes('archive') && this.archiveTerminal?.recovered) this.mission.objectives.archive = true;
     if (runtime.action === 'purge') {
@@ -167,7 +171,7 @@ export class GameEngine extends CatalogGameEngine {
     }
     if (runtime.action === 'track') state.trackerPulses = this.tracker.pulses;
     if (runtime.action === 'navigate') {
-      const opened = this.vents.filter((vent) => vent.open).length;
+      const opened = this.objectiveVentsV188().filter((vent) => vent.open).length;
       if (opened >= runtime.ventTarget && !state.complete) this.markObjectiveAction('vent-route-mapped', { opened });
     }
     if ((runtime.action === 'hold' || runtime.action === 'defend') && state.started && !state.complete) this.updateHoldObjective(delta);
@@ -328,7 +332,8 @@ export class GameEngine extends CatalogGameEngine {
     if (requirements.has('doors') && this.doors.filter((door) => door.open).length < runtime.doorTarget) return `SAS OUVERTS ${this.doors.filter((door) => door.open).length}/${runtime.doorTarget}`;
     if (requirements.has('tracker') && this.tracker.pulses < runtime.trackerPulses) return `TRACES APEX ${this.tracker.pulses}/${runtime.trackerPulses}`;
     if (requirements.has('capture') && !state.captured) return 'SPÉCIMEN VIVANT NON CAPTURÉ';
-    if (requirements.has('vent') && this.vents.filter((vent) => vent.open).length < runtime.ventTarget) return `CONDUITS CARTOGRAPHIÉS ${this.vents.filter((vent) => vent.open).length}/${runtime.ventTarget}`;
+    const ventsOpenV188 = requirements.has('vent') ? this.objectiveVentsV188().filter((vent) => vent.open).length : 0;
+    if (requirements.has('vent') && ventsOpenV188 < runtime.ventTarget) return `CONDUITS CARTOGRAPHIÉS ${ventsOpenV188}/${runtime.ventTarget}`;
     if (requirements.has('vehicle')) {
       const recovered = this.vehicle?.active && !this.vehicle.destroyed && Math.abs(this.vehicle.x - this.objective.x) < 520;
       if (!recovered) return runtime.action === 'escort' ? 'CONVOI HORS DE LA ZONE' : 'VÉHICULE NON SÉCURISÉ';
@@ -442,7 +447,7 @@ export class GameEngine extends CatalogGameEngine {
     if (runtime.action === 'track') return `PULSES TRACKER ${this.tracker.pulses}/${runtime.trackerPulses}`;
     if (runtime.nodeCount) return `ACTIONS ${state.nodesActivated}/${runtime.nodeCount}`;
     if (runtime.action === 'board') return `SAS ${this.doors.filter((door) => door.open).length}/${runtime.doorTarget}`;
-    if (runtime.action === 'navigate') return `CONDUITS ${this.vents.filter((vent) => vent.open).length}/${runtime.ventTarget}`;
+    if (runtime.action === 'navigate') return `CONDUITS ${this.objectiveVentsV188().filter((vent) => vent.open).length}/${runtime.ventTarget}`;
     if (runtime.action === 'escape') return `QUARANTAINE ${Math.max(0, Math.ceil(runtime.timeLimit - this.mission.elapsed))}s`;
     return this.missingObjectiveRequirement() || 'EXTRACTION DISPONIBLE';
   }
