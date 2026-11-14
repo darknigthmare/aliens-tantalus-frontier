@@ -259,8 +259,9 @@ function rain(ctx, time, reducedMotion, color = 'rgba(160,190,200,.35)') {
 // so a person (1.8 m), a hypersleep capsule (2.3 × 1.1 m), a stretcher (2 m), a
 // door (2.6 m) or a 10-ft container (2.99 × 2.59 m) keep plausible proportions.
 // The arrangements follow the in-game rooms: the hub cryo bay shows the ECHO-8
-// locker to the west, the CAPSULES bay door, DAVID-8R "à gauche de la capsule",
-// then the single horizontal capsule where Echo-9 wakes (capsule 03); the
+// locker to the west, the escape-pod bay door, DAVID-8R "à gauche de la capsule",
+// capsule 03 open against the wall where Echo-9 wakes, and capsules 01, 02 and 04
+// on the near floor (hub-prologue-rooms-v188.js); the
 // briefing table gathers the three named officers and Echo-9; the quay of
 // Port-Méridien holds Tomas Wren and the three residents to escort.
 const PERSON_M = 1.8;
@@ -268,9 +269,13 @@ const item = (kind, x, w, h, extra = {}) => Object.freeze({ kind, x, w, h, ...ex
 const SETS_V188 = Object.freeze({
   cryo: Object.freeze({ scale: 140, floor: 510, items: Object.freeze([
     item('locker', 120, .9, 2.2, { label: 'ECHO-8', sealed: true }),
-    item('bay-door', 310, 1.6, 2.6, { label: 'CAPSULES' }),
+    item('bay-door', 310, 1.6, 2.6, { label: 'CAPSULES DE SAUVETAGE' }),
     item('person', 640, .5, PERSON_M, { who: 'DAVID-8R', crewId: 'crew-10-david-8r', android: true }),
-    item('capsule', 770, 2.3, 1.1, { number: '03', open: true })
+    item('capsule', 770, 2.3, 1.1, { number: '03', open: true }),
+    // Near floor, as in the room: drawn lower (towards the camera), after the back row.
+    item('capsule', -70, 2.3, 1.1, { number: '01', open: false, drop: .65 }),
+    item('capsule', 300, 2.3, 1.1, { number: '02', open: false, drop: .65 }),
+    item('capsule', 1040, 2.3, 1.1, { number: '04', open: false, drop: .65 })
   ]) }),
   locker: Object.freeze({ scale: 190, floor: 610, items: Object.freeze([
     item('shelf', 250, .9, .8, { mount: 1.3 }),
@@ -310,7 +315,7 @@ export function cinematicSetLayoutV188(scene, { cast = null } = {}) {
   const set = SETS_V188[scene]; if (!set) return null;
   const items = [...set.items, ...(scene === 'quay' && QUAY_CASTS_V188[cast] ? QUAY_CASTS_V188[cast] : [])];
   return { scene, scale: set.scale, floor: set.floor, items: items.map(entry => ({ ...entry, metres: [entry.w, entry.h],
-    px: { x: entry.x, w: Math.round(entry.w * set.scale), h: Math.round(entry.h * set.scale) } })) };
+    px: { x: entry.x, w: Math.round(entry.w * set.scale), h: Math.round(entry.h * set.scale), drop: Math.round((entry.drop || 0) * set.scale) } })) };
 }
 export const CINEMATIC_SET_SCENES_V188 = Object.freeze(Object.keys(SETS_V188));
 export const QUAY_CAST_IDS_V188 = Object.freeze(Object.keys(QUAY_CASTS_V188));
@@ -353,6 +358,7 @@ function drawSet(ctx, scene, { cast = null, time = 0, reducedMotion = false, spe
         ctx.fillStyle = '#9fe7cf'; ctx.font = '700 14px monospace'; ctx.fillText(entry.label, x + w * .22, top - 12); break;
       }
       case 'capsule': { // horizontal hypersleep capsule: body, raised canopy when open, frost, number plate
+        const floor = layout.floor + (entry.px.drop || 0); // near-floor capsules stand lower, towards the camera
         const body = h * .55, canopy = h - body;
         ctx.fillStyle = '#1b2a31'; ctx.fillRect(x, floor - body, w, body - h * .12); ctx.fillStyle = 'rgba(160,215,235,.25)'; ctx.fillRect(x, floor - body, w, 3);
         ctx.fillStyle = '#121d22'; ctx.fillRect(x + w * .08, floor - h * .12, w * .1, h * .12); ctx.fillRect(x + w * .82, floor - h * .12, w * .1, h * .12); // feet
@@ -440,7 +446,7 @@ function background(ctx, images, scene, time, reducedMotion, { cast = null, spea
   if (g) { g.addColorStop(0, palette[1]); g.addColorStop(1, palette[0]); ctx.fillStyle = g; } else ctx.fillStyle = palette[0];
   ctx.fillRect(0, 0, W, H);
   ctx.fillStyle = 'rgba(255,255,255,.025)'; for (let x = 0; x < W; x += 160) ctx.fillRect(x, 0, 2, H);
-  if (scene === 'cryo') { // the hub cryo bay as played: ECHO-8 locker, CAPSULES bay door, DAVID-8R, capsule 03 open
+  if (scene === 'cryo') { // the hub cryo bay as played: ECHO-8 locker, escape-pod door, DAVID-8R, capsule 03 open, 01/02/04 near
     for (const x of [260, 700, 1000]) { ctx.fillStyle = 'rgba(200,235,245,.55)'; ctx.fillRect(x - 70, 110, 140, 6); cone(ctx, x, 116, 360, 510, 'rgba(150,210,230,.09)'); }
     ctx.fillStyle = '#0b161b'; ctx.fillRect(0, 510, W, 210); // deck
     drawSet(ctx, 'cryo', set);

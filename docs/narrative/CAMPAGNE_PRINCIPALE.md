@@ -4478,7 +4478,7 @@ La table du §6.3 est jouable dans la vue Commandement. Les sept chantiers, leur
   - soute du dropship : lumière rouge, harnais, hublots sous la pluie, secousses.
 - **Nouvelle séquence** : CIN-03 *Descente sur Port-Méridien*, présentée au §4. Ses répliques sont **[PROPOSÉ]**.
 - **Passe de cohérence des décors (2026-11-14)** : chaque décor a une échelle unique (personnes de 1,2 à 1,95 m), les quantités suivent le jeu et le canon, et le test `verify-cinematic-coherence-v188` les vérifie.
-  - **Baie cryo (CIN-01)** : comme dans la baie du jeu, le plan montre le casier ECHO-8, la porte des capsules, DAVID-8R et **une seule** capsule, la 03, ouverte. La mention « capsules … la n° 3 ouverte » devient « la capsule 03, ouverte ».
+  - **Baie cryo (CIN-01 et salle du jeu)** : le plan et la salle montrent la même disposition : le casier ECHO-8, la porte des capsules de sauvetage, DAVID-8R, la capsule 03 ouverte contre le mur et les capsules 01, 02 et 04 au premier plan. La salle ajoute un poste de cryostase en tête de la capsule 03 **[PROPOSÉ]**.
   - **Casier** : un seul casier ECHO-8 scellé, aux proportions du jeu.
   - **Briefing (CIN-02)** : Harlow, Vega, Velez et Echo-9 autour d'une table de 3,1 m **[PROPOSÉ]**.
   - **Quai** : conteneurs de 10 pieds, Wren et trois habitants à l'arrivée, Asha et Adèle Sarrazin pour la visite.
@@ -4529,6 +4529,24 @@ Décision du propriétaire : certaines salles passent en **profondeur** (2,5D, d
     - **Escorte** : les habitants s'arrêtent devant le terminal du constat sans le masquer ; les anciennes sauvegardes sont ramenées à ces places, jamais refusées.
     - **Panneaux** : chacun a sa version FR et EN (RAMPE · FRET / RAMP · FREIGHT, TRIAGE · HABITANTS / TRIAGE · RESIDENTS, RELAIS DU SAS / AIRLOCK RELAY, SECTEUR NORMAL ? / NORMAL SECTOR?).
 - **Ordre entre personnages** : un PNJ placé devant Echo-9 le masque, puisque le joueur est alors dessiné avant l'équipage.
+- **Pièces du prologue à bord (passe de cohérence 2026-11-14, `src/hub-prologue-rooms-v188.js`)**, valeurs **[PROPOSÉ]** :
+  - **Baie cryo** :
+    - la capsule de la salle devient la **capsule 03**, vidée, verrière levée ;
+    - les capsules 01, 02 et 04 sont au premier plan ;
+    - un poste de cryostase se trouve en tête de la capsule 03 : ambre pendant le réveil, vert ensuite ;
+    - DAVID-8R se tient à portée de voix ;
+    - la porte des capsules de sauvetage s'appelle désormais ainsi, pour ne pas être confondue avec les capsules d'hypersommeil ;
+    - l'invite du bas nomme l'étape que sert E.
+  - **Briefing** :
+    - une projection de Cocyte et d'Asphodèle, avec le voyant QZ rouge, flotte au-dessus de la table ;
+    - Velez donne ses consignes à la table, et non plus dans l'embrasure des archives ;
+    - Vega, Harlow et Velez attendent à la table tant que CIN-02 n'a pas été jouée.
+  - **Pas de tir** : il était déjà cohérent (9 cibles de 1,88 m, de 5,9 à 16,1 m) ; il n'a pas été modifié.
+  - **Hangar** :
+    - caisses de 1,2 m, sur une seule rangée ;
+    - chariot près du nez du UD-4L ;
+    - plus rien devant le sas ;
+    - au sol : ancrages des patins, vanne de carburant avec son tuyau, zone « EMBARQUEMENT UD-4L ».
 - **Cales de QZ-17 (Acte I), avec combat** — spec `specs/002-cales-qz17-profondeur-combat/` :
   - le pont bas des soutes dépressurisées, entre les deux sas, est la première section de mission en profondeur ;
   - trois rangées de conteneurs scellés marqués QZ17 (placeholders en primitives, cohérents avec CIN-31) laissent une allée le long du mur et deux allées vers la caméra ;

@@ -39,11 +39,13 @@ test('every set keeps one scale and plausible human proportions', () => {
   }
 });
 
-test('CIN-01 matches the hub cryo bay: ECHO-8 locker, DAVID-8R left of the single open capsule 03', () => {
+test('CIN-01 matches the hub cryo bay: ECHO-8 locker, DAVID-8R left of capsule 03 open, capsules 01/02/04 on the near floor', () => {
   const cryo = cinematicSetLayoutV188('cryo');
-  const capsules = kinds(cryo, 'capsule'); assert.equal(capsules.length, 1, 'the cryo bay shows one hypersleep capsule');
-  assert.equal(capsules[0].number, '03'); assert.equal(capsules[0].open, true);
-  assert.deepEqual(capsules[0].metres, [2.3, 1.1], 'capsule ≈ 2.3 × 1.1 m');
+  const all = kinds(cryo, 'capsule'); assert.deepEqual(all.map(entry => entry.number).sort(), ['01', '02', '03', '04'], 'four capsules, as in the room');
+  assert.deepEqual(all.filter(entry => entry.open).map(entry => entry.number), ['03'], 'only Echo-9’s capsule is open');
+  assert.ok(all.filter(entry => entry.number !== '03').every(entry => entry.px.drop > 0), 'the others stand on the near floor');
+  const capsules = all.filter(entry => entry.number === '03');
+  for (const entry of all) assert.deepEqual(entry.metres, [2.3, 1.1], 'capsule ≈ 2.3 × 1.1 m');
   const [david] = kinds(cryo, 'person'); assert.equal(david.who, 'DAVID-8R'); assert.equal(david.h, 1.8);
   assert.ok(david.px.x < capsules[0].px.x, 'DAVID-8R waits to the left of the capsule (toast after the wake)');
   assert.ok(capsules[0].px.w > david.px.h, 'a capsule is longer than a standing person');
@@ -56,7 +58,8 @@ test('CIN-01 matches the hub cryo bay: ECHO-8 locker, DAVID-8R left of the singl
   // The game locker is 46 × 112 px at 51 px/m ≈ 0.9 × 2.2 m; the close-up keeps that ratio.
   const close = kinds(cinematicSetLayoutV188('locker'), 'locker'); assert.equal(close.length, 1);
   near(close[0].metres[1] / close[0].metres[0], ECHO8_LOCKER_V188.h / ECHO8_LOCKER_V188.w, .05, 'locker ratio');
-  const drawn = textsAt('cin-01', 0); assert.ok(drawn.includes('CAPSULE 03 · OUVERTE')); assert.ok(!drawn.some(text => /CAPSULE 0[124]/.test(text)));
+  const drawn = textsAt('cin-01', 0); assert.ok(drawn.includes('CAPSULE 03 · OUVERTE'));
+  for (const number of ['01', '02', '04']) assert.ok(drawn.includes(`CAPSULE ${number}`), `capsule ${number} is labelled, closed`);
   assert.ok(textsAt('cin-01', 1).includes('ECHO-8'));
 });
 
