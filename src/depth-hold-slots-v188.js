@@ -45,9 +45,23 @@ export function drawDepthHoldSlotV188(ctx, prop, box, { present = DEPTH_HOLD_SLO
   try {
     ctx.fillStyle = 'rgba(0,0,0,.35)'; ctx.beginPath(); ctx.ellipse(box.x + box.w / 2, box.y + box.h + 2, box.w * .55, 6, 0, 0, Math.PI * 2); ctx.fill();
     if (image) { ctx.drawImage(image, box.x, box.y, box.w, box.h); return 'image'; }
-    FALLBACKS[prop.slot](ctx, box, prop);
+    // The primitive drawing is rendered once per object into an offscreen canvas, then blitted (frame cost).
+    const cached = fallbackCanvas(prop, box);
+    if (cached) ctx.drawImage(cached, 0, 0, cached.width, cached.height, box.x - PAD, box.y - PAD, cached.width, cached.height);
+    else FALLBACKS[prop.slot](ctx, box, prop);
     return 'primitive';
   } finally { ctx.restore(); }
+}
+
+const PAD = 4, rendered = new Map();
+function fallbackCanvas(prop, box) {
+  const key = `${prop.slot}|${(prop.labels || []).join(',')}|${box.w}x${box.h}`;
+  if (rendered.has(key)) return rendered.get(key);
+  const canvas = globalThis.document?.createElement?.('canvas'), g = canvas?.getContext?.('2d');
+  if (!g) return null; // no offscreen canvas (Node host): drawn directly
+  canvas.width = Math.ceil(box.w + PAD * 2); canvas.height = Math.ceil(box.h + PAD * 2);
+  FALLBACKS[prop.slot](g, { x: PAD, y: PAD, w: box.w, h: box.h }, prop);
+  rendered.set(key, canvas); return canvas;
 }
 
 const strap = (ctx, x, y, w) => { ctx.fillStyle = '#d06b2a'; ctx.fillRect(x, y, w, 3); };

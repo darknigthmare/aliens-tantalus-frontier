@@ -153,14 +153,14 @@ export function withMissionDepthRoomsV188(Base) {
     /** Evidence, supplies and the airlocks stand against the wall: reached from the wall lane only. */
     interact(actor = this.player) {
       const section = this.missionDepthSectionV188;
-      if (section && inDepthSectionV188(section, actor) && Math.abs(Number(actor.depthZ) || 0) > section.interactBand) return false;
+      if (section && overDepthSectionV188(section, actor) && Math.abs(Number(actor.depthZ) || 0) > section.interactBand) return false;
       return super.interact(actor);
     }
 
     // The same rule for the prompt: no "E" offered for what the front lanes cannot reach.
     getInteractionPrompt(actor = this.player) {
       const section = this.missionDepthSectionV188;
-      if (section && actor?.alive !== false && inDepthSectionV188(section, actor) && Math.abs(Number(actor.depthZ) || 0) > section.interactBand) return '';
+      if (section && actor?.alive !== false && overDepthSectionV188(section, actor) && Math.abs(Number(actor.depthZ) || 0) > section.interactBand) return '';
       return super.getInteractionPrompt(actor);
     }
 

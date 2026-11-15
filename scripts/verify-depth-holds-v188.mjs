@@ -161,6 +161,7 @@ test('holds: a jump keeps the depth (drawing, shots and blows); sleepers wait at
   tick(engine, 1 / 60);
   assert.equal(p.depthZ, -70, 'the depth is kept in the air'); assert.ok(engine.depthActorsV188().includes(p), 'drawn at its depth');
   assert.equal(engine.depthOfShooterV188(p), -70, 'its salvo carries its depth');
+  assert.equal(engine.getInteractionPrompt(p), '', 'no wall prompt mid-jump from a front lane'); assert.equal(engine.interact(p), false);
   const dormant = engine.spawnedEnemiesV188.filter(enemy => enemy.levelSpawnId === 'ship-cargo-stalkers' && enemy.dormant && Math.abs(enemy.y + enemy.h - section.floorY) < 2
     && enemy.x + enemy.w / 2 >= section.x0 && enemy.x + enemy.w / 2 <= section.x1 && fit(enemy));
   for (const enemy of dormant) assert.ok(Number.isFinite(enemy.depthZ) && !blockedByFootprintV188(section, enemy.x + enemy.w / 2, enemy.depthZ, 0), `${enemy.id} waits on free floor`);
