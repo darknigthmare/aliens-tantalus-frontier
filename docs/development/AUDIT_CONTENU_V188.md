@@ -90,8 +90,8 @@ Les statuts « À faire » du §53 (tir, tension, caste, accessibilité, répliq
 | `station-intro-silence` (Calme, à bord) | Manquant | Débloqué par la quête de Rook (§8.1) |
 | S1 L'arrimage, S2 La voix de CASSIUS, S3 Les ponts scellés, S4 Le hub Asphodèle | Manquant | Q6 : produire S1-S4 comme missions avant le hub ; Q103 : feature Spec Kit |
 | Choix CASSIUS (réécrire / brider / effacer) | Manquant | Q7 : choix définitif |
-| Annexes (7) et contrats locaux (6) | Manquant | Dont *Relais en dérive* ×3, condition de la salle des relais |
-| Hub Asphodèle : 7 modules (§7.3, §42) | Manquant | Q22 et Q23 : modules dans le moteur du hub, anneau en couloirs V2 |
+| Annexes (7) et contrats locaux (6) | Partiel (spec 007) | Les 13 sont lançables après S4, verrous [PROPOSÉ] ; contrats comptés ; seul *Relais en dérive* a un effet ; décor générique d'intérieur de vaisseau |
+| Hub Asphodèle : 7 modules (§7.3, §42) | Partiel (spec 007) | 8 modules sur 12 de §42.2 atteignables à pied (Q22 A, Q23 A) ; quartiers, infirmerie, ponts inférieurs, hangar de réparation scellés ; commerce absent |
 | Décor de station, CASSIUS, récupérateurs, dropship d'Echo-8 (§29.4) | Bloqué (art) | Primitives Canvas possibles (Q79) |
 
 ## 5. Quêtes du Tantalus (§8)
@@ -173,7 +173,7 @@ Aucun n'est produit ici. Chaque élément jouable utilise des primitives Canvas 
 - Quartiers de Port-Méridien en V2, habitants nommés (portraits de Wren, Ferro, Sarrazin en primitives selon Q78).
 - Poses de dialogue de l'équipage, objets de quête (§29.5), planches des recrues.
 - Art en dette des chapitres V131 et de Cargo brutal (`limitations` de `special-operations-v131.js`).
-- Cinématiques CIN-70 à CIN-72 et suivantes.
+- Cinématiques CIN-70 à CIN-72 (jouables en placeholders Canvas depuis la spec 007) et suivantes.
 - Ennemis originaux de l'Hôte Parfait (Q47).
 
 ## 12. Choix pour ce lot
@@ -201,3 +201,15 @@ La section « Résultat du lot » ci-dessous dit ce qui a réellement été fait
 | Temps de voyage | Partiel | Partiel | 14 jours par saut affichés et appliqués ; messages en retard absents |
 
 Vérifications : `node --test scripts/verify-content-gaps-v188.mjs` (13 tests) ; parcours Chromium sur fixture importée (13 contrôles). Rien n'est déclaré terminé.
+
+## Résultat du lot (spec 007)
+
+| Élément | Avant | Après | Preuve |
+| --- | --- | --- | --- |
+| Hub Asphodèle | Manquant | Partiel | Navette depuis le hangar du Tantalus ; 9 pièces (8 modules de §42.2) parcourues au clavier, portes à retour, reprise ; art en primitives |
+| Annexes et contrats | Manquant | Partiel | 7 annexes et 6 contrats au catalogue (472 campagnes) ; salle des relais à trois *Relais en dérive* |
+| *Transmettre* | Bloqué (salle des relais absente) | Condition jouable | `asphodeleRelayReadyV188(save)` ; le choix final reste à l'Acte V (spec 006) |
+| CIN-70 à CIN-72 | Manquant | Partiel | Jouées une fois aux moments de §7.2 ; placeholders Canvas |
+| Plaque de Kessler au casier d'Echo-8 | Manquant | Fait (geste et notes), art provisoire | Casier du Tantalus après S3 |
+
+Vérifications : `node --test scripts/verify-asphodele-hub-v188.mjs` ; parcours Chromium au clavier `scripts/qa-asphodele-hub-v188.mjs` (fixtures déclarées). Quatre modules, le commerce, les effets des autres contrats et l'art restent à faire.

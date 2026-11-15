@@ -2,6 +2,7 @@ import { normalizeSeenWorldIdsV188 } from './insertion-cinematic-v188.js';
 import { createColonyV188, normalizeColonyV188 } from './colony-reconstruction-v188.js';
 import { createStationV188, normalizeStationV188 } from './station-asphodele-v188.js';
 import { createCrewQuestsV188, normalizeCrewQuestsV188 } from './crew-quests-v188.js';
+import { createAsphodeleHubV188, normalizeAsphodeleHubV188 } from './asphodele-hub-v188.js';
 import { normalizeHubDepthV188 } from './hub-depth-rooms-v188.js';
 import { createReactiveLinesV188, normalizeReactiveLinesV188 } from './reactive-lines-v188.js';
 import { normalizeColorblindV188, normalizeTextScaleV188, normalizeKeyBindingsV188, defaultKeyBindingsV188 } from './accessibility-v188.js';
@@ -381,6 +382,7 @@ export function createDefaultSave(profile = 1) {
     colonyV188: createColonyV188(),
     stationV188: createStationV188(),
     crewQuestsV188: createCrewQuestsV188(),
+    asphodeleHubV188: createAsphodeleHubV188(),
     alphaBravoDoctrine: createAlphaBravoDoctrineV69(),
     alienSurvivalSystems: createAlienSurvivalSystemsV70(),
     bioforgeV80: createBioforgeV80(),
@@ -2440,6 +2442,8 @@ export function migrateSave(input, profile = 1) {
   // V188 content gaps (spec 005): additive; an older save has not heard the station intro nor taken a quest.
   migrated.stationV188 = normalizeStationV188(source.stationV188);
   migrated.crewQuestsV188 = normalizeCrewQuestsV188(source.crewQuestsV188);
+  // V188 spec 007: additive; an older save is aboard the Tantalus, with no contract done.
+  migrated.asphodeleHubV188 = normalizeAsphodeleHubV188(source.asphodeleHubV188);
   migrated.memorial = Array.isArray(source.memorial) ? source.memorial.filter(isRecord).slice(0, 512) : base.memorial;
   const settings = isRecord(source.settings) ? source.settings : {};
   migrated.settings = { ...base.settings, ...settings };

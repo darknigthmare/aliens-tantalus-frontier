@@ -23,7 +23,7 @@ export function openContentSceneDialogV188({ document = globalThis.document, loa
   canvas.setAttribute('aria-hidden', 'true');
   const paragraph = document.createElement('p'); paragraph.setAttribute('aria-live', 'polite');
   const feedback = document.createElement('p'); feedback.className = 'hint'; feedback.hidden = true;
-  const footer = document.createElement('footer');
+  const footer = document.createElement('footer'); footer.style.flexWrap = 'wrap'; // V188 spec 007: longer option lists wrap instead of overflowing
   let closed = false;
   const close = () => { if (closed) return; closed = true; dialog.close?.(); dialog.remove(); onClose?.(); };
   const render = ({ title: nextTitle = title, text: nextText = '', options: nextOptions = [], feedback: note = null, slot: nextSlot = slot } = {}) => {

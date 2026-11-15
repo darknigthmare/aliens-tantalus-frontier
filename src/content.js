@@ -15,12 +15,13 @@ import { C12_HORDE_CAMPAIGN_V121 } from './c12-horde-state-v121.js';
 import { ARCHIVE_RELAY_CAMPAIGN_V122 } from './archive-relay-state-v122.js';
 import { NEW_SPECIAL_CAMPAIGNS_V131, validateSpecialOperationsV131 } from './special-operations-v131.js';
 import { STATION_CAMPAIGNS_V188 } from './station-asphodele-v188.js';
+import { ASPHODELE_CAMPAIGNS_V188 } from './asphodele-missions-v188.js';
 
 export * from './content-core-v50.js';
 
-export const CAMPAIGNS = Object.freeze([...buildCampaignsWithSpecialOperationsV67(buildMireCampaignsV143(CORE_CAMPAIGNS, WORLDS)), BLACK_COCOON_CAMPAIGN_V121, APC_CONVOY_CAMPAIGN_V121, C12_HORDE_CAMPAIGN_V121, ARCHIVE_RELAY_CAMPAIGN_V122, ...NEW_SPECIAL_CAMPAIGNS_V131, ...STATION_CAMPAIGNS_V188]);
+export const CAMPAIGNS = Object.freeze([...buildCampaignsWithSpecialOperationsV67(buildMireCampaignsV143(CORE_CAMPAIGNS, WORLDS)), BLACK_COCOON_CAMPAIGN_V121, APC_CONVOY_CAMPAIGN_V121, C12_HORDE_CAMPAIGN_V121, ARCHIVE_RELAY_CAMPAIGN_V122, ...NEW_SPECIAL_CAMPAIGNS_V131, ...STATION_CAMPAIGNS_V188, ...ASPHODELE_CAMPAIGNS_V188]);
 export const CONTENT_COUNTS = Object.freeze({ ...CORE_CONTENT_COUNTS, campaigns: CAMPAIGNS.length });
-export const CONTENT_TARGETS = Object.freeze({ ...CORE_CONTENT_TARGETS, campaigns: 459 }); // V188: + the four Asphodèle station missions (spec 005)
+export const CONTENT_TARGETS = Object.freeze({ ...CORE_CONTENT_TARGETS, campaigns: 472 }); // V188: + the four Asphodèle station missions (spec 005), + 7 station side missions and 6 contracts (spec 007)
 
 export function validateContent() {
   const core = validateCoreContent();

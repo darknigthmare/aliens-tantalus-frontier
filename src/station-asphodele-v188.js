@@ -6,6 +6,8 @@
 // the CASSIUS decision and the return scenes already shown.
 // Values marked [PROPOSÉ] are recorded in bible §7.5.
 
+import { isAsphodeleCampaignV188, asphodeleMissionLockReasonV188, asphodeleMissionLockTextV188 } from './asphodele-missions-v188.js';
+
 const t = (fr, en) => Object.freeze({ fr, en });
 const has = (list, id) => Array.isArray(list) && list.includes(id);
 
@@ -69,6 +71,8 @@ export function stationIntroAvailableV188(save) { return has(completed(save), ST
 
 /** Why a station mission cannot be launched yet, or null when it can. */
 export function stationLockReasonV188(save, campaignId) {
+  // V188 spec 007: the station side missions and contracts carry their own locks.
+  if (isAsphodeleCampaignV188(campaignId)) return asphodeleMissionLockReasonV188(save, campaignId);
   const index = ORDER.indexOf(campaignId);
   if (index < 0) return null;
   const station = normalizeStationV188(save?.stationV188), done = completed(save);
@@ -80,7 +84,7 @@ export function stationLockReasonV188(save, campaignId) {
 }
 export function stationCampaignUnlockedV188(save, campaign) {
   const id = typeof campaign === 'string' ? campaign : campaign?.id;
-  return !isStationCampaignV188(id) || stationLockReasonV188(save, id) === null;
+  return (!isStationCampaignV188(id) && !isAsphodeleCampaignV188(id)) || stationLockReasonV188(save, id) === null;
 }
 /** Filter for every player list of campaigns: a locked station mission is not offered. */
 export function filterUnlockedCampaignsV188(save, campaigns) {
@@ -137,7 +141,7 @@ const REASONS = Object.freeze({
   previous: t('Terminez d’abord la mission précédente de la station.', 'Finish the previous station mission first.'),
   cassius: t('Décidez d’abord du sort de CASSIUS.', 'Decide CASSIUS’s fate first.')
 });
-export function stationLockTextV188(reason, language = 'fr') { return REASONS[reason]?.[language === 'en' ? 'en' : 'fr'] || ''; }
+export function stationLockTextV188(reason, language = 'fr') { return REASONS[reason]?.[language === 'en' ? 'en' : 'fr'] || asphodeleMissionLockTextV188(reason, language); }
 
 const CASSIUS_LABELS = Object.freeze({
   rewrite: t('Priorités réécrites : « les vivants d’abord »', 'Priorities rewritten: "the living first"'),

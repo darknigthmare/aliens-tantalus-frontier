@@ -14,7 +14,14 @@ const NOTES = Object.freeze([
     en: 'The red quarantine code comes from Asphodèle. Echo-8 went up to look.' }),
   Object.freeze({ id: 'signature', when: save => (save?.storyCampaignV188?.cinematicsSeen || []).includes('cin-20-rook'),
     fr: 'La priorité cargaison de QZ-18 a été autorisée depuis Asphodèle, la station où Echo-8 a disparu.',
-    en: 'The QZ-18 cargo priority was authorised from Asphodèle, the station where Echo-8 vanished.' })
+    en: 'The QZ-18 cargo priority was authorised from Asphodèle, the station where Echo-8 vanished.' }),
+  // V188 spec 007 (bible §7.4): Kessler's tag, brought back from S3 and placed here; [PROPOSÉ] texts (§7.6).
+  Object.freeze({ id: 'kessler-tag', when: save => save?.asphodeleHubV188?.kesslerTag === 'locker',
+    fr: 'La plaque du sergent Dario Kessler pend au crochet du casier. Echo-8 a tenu six heures et a barricadé les survivants avant de sortir.',
+    en: 'Sergeant Dario Kessler’s tag hangs from the locker hook. Echo-8 held for six hours and barricaded the survivors before going out.' }),
+  Object.freeze({ id: 'last-round', when: save => (save?.galaxy?.completedCampaignIds || []).includes('station-a-echo8'),
+    fr: 'Dernière ronde d’Echo-8 suivie jusqu’au bout : l’enregistrement complet est au dossier de l’équipe.',
+    en: 'Echo-8’s last round followed to the end: the full recording is in the team file.' })
 ]);
 
 /** Pure: the notes the player can read now, oldest first ([PROPOSÉ] texts, bible §56.7). */
@@ -51,6 +58,10 @@ export function withHubEcho8LockerV188(Base) {
       ctx.fillStyle = '#d8e6d8'; ctx.font = '700 9px monospace'; ctx.textAlign = 'center'; ctx.fillText('ECHO-8', x + w / 2, top + 13);
       ctx.strokeStyle = '#e9d07a'; ctx.lineWidth = 3; ctx.beginPath();
       ctx.moveTo(x + 4, top + 50); ctx.lineTo(x + w - 4, top + 94); ctx.moveTo(x + w - 4, top + 50); ctx.lineTo(x + 4, top + 94); ctx.stroke();
+      if (this.kesslerTagInLockerV188) { // V188 spec 007: the tag on its chain, hung from the locker's label plate
+        ctx.strokeStyle = '#c9ccc4'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x + w / 2, top + 16); ctx.lineTo(x + w / 2 - 4, top + 34); ctx.lineTo(x + w / 2 + 4, top + 34); ctx.closePath(); ctx.stroke();
+        ctx.fillStyle = '#dfe3da'; ctx.fillRect(x + w / 2 - 7, top + 34, 14, 9); ctx.fillStyle = '#5a5f58'; ctx.fillRect(x + w / 2 - 5, top + 37, 10, 1); ctx.fillRect(x + w / 2 - 5, top + 40, 7, 1);
+      }
       if (this.echo8LockerContactV188()) { ctx.fillStyle = '#8df0b0'; ctx.font = '11px monospace'; ctx.fillText('E · CASIER ECHO-8', x + w / 2, top - 10); }
       ctx.restore();
       return result;

@@ -3,6 +3,12 @@ import { filterUnlockedCampaignsV188, stationLockReasonV188, stationLockTextV188
 import { crewQuestActionsV188, acceptCrewQuestV188, crewQuestStepV188, answerCrewQuestStepV188, turnInCrewQuestV188, applyCrewQuestOperationResultV188, crewQuestsSnapshotV188, getCrewQuestV188, davidMemoryRestoredV188 } from './crew-quests-v188.js';
 import { jumpRouteTextV188, applyJumpTravelTimeV188, jumpArrivalTextV188 } from './galaxy-travel-v188.js';
 import { openContentSceneDialogV188 } from './content-gap-ui-v188.js';
+import { withHubAsphodeleV188 } from './hub-asphodele-v188.js';
+import { asphodeleSaveViewV188, asphodeleShuttleStatusV188, boardAsphodeleV188, returnToTantalusV188, leaveAsphodeleForOperationV188, normalizeAsphodeleHubV188,
+  asphodeleLockTextV188, asphodeleTextV188, bringRelayOnlineV188, relayRoomOpenV188, asphodeleRelayReadyV188, gruePactPendingV188, chooseGruePactV188, kesslerTagPendingV188,
+  kesslerTagInLockerV188, depositKesslerTagV188, cassiusCoreLineV188, memorialTextV188, asphodeleHubSummaryV188, stationCinematicDueV188 } from './asphodele-hub-v188.js';
+import { ASPHODELE_SIDE_MISSIONS_V188, ASPHODELE_CONTRACTS_V188, ASPHODELE_SIDE_NAMES_EN_V188, ASPHODELE_CONTRACT_NAMES_EN_V188, asphodeleMissionLockReasonV188,
+  asphodeleMissionLockTextV188, applyAsphodeleOperationResultV188, contractCountV188, RELAY_DRIFT_KEY_V188 } from './asphodele-missions-v188.js';
 import { storyDossierV188 } from './story-dossier-v188.js';
 import { withHubEcho8LockerV188, echo8LockerNotesV188 } from './hub-echo8-locker-v188.js';
 import { withHubPrologueRoomsV188 } from './hub-prologue-rooms-v188.js';
@@ -319,7 +325,9 @@ const NativeHubGame = [
   withHubDestinationSignsV138, withHubNpcInterdeckRoutesV165, withHubNpcInterdeckPassageV165, withHubNpcStationRelaysV166, withHubLiftTransitV163
 ].reduce((Game, decorate) => decorate(Game), HubGameV88);
 const HubGame = withHubArmoryStorefrontV169(withHubDepthRoomsV188(withHubMotionTrackerV160(withForgeDecorationV141(withForgeShipRuntimeV141(withHubPrologueRoomsV188(withHubEcho8LockerV188(NativeHubGame)))))));
-const hubEngine = new HubGame(byId('hub-canvas'), {
+// V188 spec 007: the Asphodèle second hub owns the location while the marine is aboard the station (outermost, like a ground location).
+const StationHubGameV188 = withHubAsphodeleV188(HubGame);
+const hubEngine = new StationHubGameV188(byId('hub-canvas'), {
   audio,
   onAction: handleHubAction,
   onPersist: persistHub,
@@ -886,10 +894,12 @@ function showView(name) {
         try { const candidate = clone(saveSystem.data); if (reconcileInterludeCrisisV188(candidate, createForcedHubCrisisV188)) saveSystem.commit(candidate); }
         catch (error) { console.warn('[interlude] reconcile', error); }
       }
+      hubEngine.kesslerTagInLockerV188 = kesslerTagInLockerV188(saveSystem.data);
       hubEngine.start(saveSystem.data.hub, { routineContextV62: getHubRoutineContextV62(), onboardingV84: saveSystem.data.onboardingV84, openingV88: saveSystem.data.openingV88, openingExerciseV89: saveSystem.data.openingExerciseV89, portMeridienV90: saveSystem.data.portMeridienV90,
-        trainingOperatorIdV132: getHubTrainingOperatorIdV132(saveSystem.data) });
+        trainingOperatorIdV132: getHubTrainingOperatorIdV132(saveSystem.data), asphodeleSaveViewV188: standaloneContext ? null : asphodeleSaveViewV188(saveSystem.data) });
     }
     if (hubEngine.isPortMeridienV90()) { byId('breadcrumb').textContent = 'PALISADE // PORT-MÉRIDIEN'; byId('view-title').textContent = 'Le quai des vivants'; }
+    if (hubEngine.isAsphodeleV188?.()) { const langV188 = document.documentElement.lang === 'en' ? 'en' : 'fr'; byId('breadcrumb').textContent = asphodeleTextV188('breadcrumb', langV188); byId('view-title').textContent = langV188 === 'en' ? 'Asphodèle station' : 'Station Asphodèle'; }
   }
   if (name === 'bioforge') prepareBioforgeViewV80();
   if (name === 'armory') renderPlayerAppearanceV126();
@@ -963,6 +973,7 @@ function ownsTimelineV84(owner) { return owner && owner.profile === saveSystem.p
 function captureHubPoseV84() {
   if (!ownsTimelineV84(hubOwnerV84) || activeView !== 'hub' || !hubEngine.player || standaloneContext) return {};
   if (hubEngine.isPortMeridienV90?.()) return {}; // Ground coordinates must never overwrite the ship return pose.
+  if (hubEngine.isAsphodeleV188?.()) return {}; // V188 spec 007: nor do the station's coordinates.
   const annex = hubEngine.currentAnnexV71();
   if (annex) return projectRefugeHubSaveV87({
     deck: hubEngine.state.deck, roomId: hubEngine.hubCommercialStateV71.returnContext?.roomId || annex.parentRoomId,
@@ -1481,6 +1492,8 @@ function renderStationFrontV188() {
   }
   const parts = [title, list];
   if (snapshot.cassiusLabel) { const line = document.createElement('p'); line.className = 'hint'; line.textContent = `CASSIUS · ${snapshot.cassiusLabel}`; parts.push(line); }
+  const hubLineV188 = asphodeleHubSummaryV188(saveSystem.data, en ? 'en' : 'fr');
+  if (hubLineV188) { const line = document.createElement('p'); line.className = 'hint'; line.dataset.asphodeleHubV188 = 'true'; line.textContent = hubLineV188; parts.push(line); }
   if (snapshot.hint) { const line = document.createElement('p'); line.className = 'hint'; line.textContent = snapshot.hint; parts.push(line); }
   host.replaceChildren(...parts);
 }
@@ -1508,6 +1521,7 @@ function commitCandidateV188(mutate) {
 let stationSceneOpenV188 = false;
 function stationReturnOnViewV188() {
   if (stationSceneOpenV188 || document.querySelector('.content-scene-v188')) return true;
+  if (playStationCinematicDueV188()) return true; // V188 spec 007: CIN-70 to CIN-72 come before the scene or the decision
   const lang = document.documentElement.lang === 'en' ? 'en' : 'fr';
   if (cassiusChoicePendingV188(saveSystem.data)) {
     stationSceneOpenV188 = true;
@@ -1529,6 +1543,133 @@ function stationReturnOnViewV188() {
   openContentSceneDialogV188({ language: lang, slot: scene.slot, title: scene.title[lang], text: scene.text[lang],
     options: [{ id: 'continue', label: lang === 'en' ? 'CONTINUE' : 'CONTINUER' }], onChoose: () => null,
     onClose: () => { stationSceneOpenV188 = false; } });
+  return true;
+}
+// —— V188 spec 007: the Asphodèle second hub (bible §7.3, §42) ——
+const stationCinematicsPlayedV188 = new Set();
+function playStationCinematicDueV188() {
+  const id = stationCinematicDueV188(saveSystem.data);
+  if (!id || stationCinematicsPlayedV188.has(id) || stationSceneOpenV188) return false;
+  stationCinematicsPlayedV188.add(id); stationSceneOpenV188 = true;
+  void playStoryCinematicV188(id).then(() => { stationSceneOpenV188 = false; if (activeView === 'command') stationReturnOnViewV188(); });
+  return true;
+}
+const asphodeleLangV188 = () => document.documentElement.lang === 'en' ? 'en' : 'fr';
+const SHUTTLE_STATUS_TEXT_V188 = Object.freeze({ away: 'shuttleAway', jumping: 'shuttleJumping', operation: 'shuttleOperation' });
+function appendAsphodeleShuttleChoiceV188() {
+  const status = asphodeleShuttleStatusV188(saveSystem.data); if (status === 'hub-closed') return;
+  const lang = asphodeleLangV188();
+  const button = Object.assign(document.createElement('button'), { type: 'button', className: 'hub-dialogue-choice asphodele-shuttle-v188', textContent: asphodeleTextV188('shuttle', lang) });
+  button.dataset.asphodeleShuttleV188 = status;
+  if (status !== 'ready') { button.disabled = true; button.title = asphodeleTextV188(SHUTTLE_STATUS_TEXT_V188[status], lang); }
+  byId('hub-dialogue-choices').append(button);
+}
+function travelToAsphodeleV188() {
+  const lang = asphodeleLangV188();
+  if (!ownsTimelineV84(hubOwnerV84) || activeView !== 'hub' || standaloneContext || creatorOwnerV84 || saveSystem.recoveryNeeded
+    || hubEngine.isPortMeridienV90?.() || hubEngine.isAsphodeleV188?.() || hubEngine.currentRoom?.()?.id !== 'dropship-hangar') return false;
+  const status = asphodeleShuttleStatusV188(saveSystem.data);
+  if (status !== 'ready') { toast(asphodeleTextV188(SHUTTLE_STATUS_TEXT_V188[status] || 'shuttleAway', lang)); return false; }
+  try {
+    const candidate = clone(saveSystem.data);
+    Object.assign(candidate.hub, captureHubPoseV84()); // the hangar pose the shuttle returns to
+    if (!boardAsphodeleV188(candidate)) return false;
+    saveSystem.commit(candidate);
+  } catch (error) { toast(error.message); return false; }
+  closeHubDialogue({ resume: false, restoreFocus: false });
+  hubEngine.stop(false); showView('hub');
+  toast(asphodeleTextV188('arrived', lang)); return true;
+}
+function returnFromAsphodeleV188() {
+  if (!hubEngine.isAsphodeleV188?.() || !hubEngine.running) return false;
+  if (!commitCandidateV188(candidate => returnToTantalusV188(candidate))) return false;
+  hubEngine.stop(false); showView('hub');
+  toast(asphodeleTextV188('returned', asphodeleLangV188())); return true;
+}
+function refreshAsphodeleViewV188() { hubEngine.setAsphodeleViewV188?.(asphodeleSaveViewV188(saveSystem.data)); }
+function openAsphodeleDialogV188({ title, text, slot = null, options = null, onChoose = null }) {
+  const lang = asphodeleLangV188();
+  hubEngine.pause();
+  openContentSceneDialogV188({ language: lang, slot, title, text, options: options || [{ id: 'close', label: asphodeleTextV188('close', lang) }],
+    onChoose: onChoose || (() => null), onClose: () => { refreshAsphodeleViewV188(); if (activeView === 'hub' && !activeHubStation) hubEngine.resume(); } });
+  return true;
+}
+function openAsphodeleBoardV188() {
+  const lang = asphodeleLangV188(), en = lang === 'en', done = saveSystem.data.galaxy.completedCampaignIds;
+  const nameOf = entry => en ? (ASPHODELE_SIDE_NAMES_EN_V188[entry.id] || ASPHODELE_CONTRACT_NAMES_EN_V188[entry.id]) : entry.name;
+  const relay = asphodeleTextV188('relayCount', lang, { n: Math.min(3, contractCountV188(saveSystem.data, RELAY_DRIFT_KEY_V188)) });
+  const close = { id: 'close', label: asphodeleTextV188('close', lang) };
+  // Two short lists (station missions, then contracts) keep every button on screen.
+  const listView = entries => {
+    const rows = entries.map(entry => ({ entry, lock: asphodeleMissionLockReasonV188(saveSystem.data, entry.id), done: done.includes(entry.id) }));
+    const lines = rows.filter(row => row.lock).map(row => `${nameOf(row.entry)} : ${asphodeleMissionLockTextV188(row.lock, lang)}`);
+    const doneLines = rows.filter(row => row.done && !row.entry.replayableV188).map(row => `${nameOf(row.entry)} : ${asphodeleTextV188('boardDone', lang)}`);
+    const options = rows.filter(row => !row.lock && !(row.done && !row.entry.replayableV188))
+      .map(row => ({ id: row.entry.id, label: nameOf(row.entry).replace(/^(ASPHODÈLE|CONTRAT|CONTRACT) · /, '') }));
+    return { text: [relay, ...doneLines, ...lines].join(' · '), options: [...options, { id: 'back', label: en ? 'BACK' : 'RETOUR' }] };
+  };
+  const home = { text: relay, options: [{ id: 'side', label: en ? 'STATION MISSIONS' : 'MISSIONS DE LA STATION' }, { id: 'contracts', label: en ? 'LOCAL CONTRACTS' : 'CONTRATS LOCAUX' }, close] };
+  return openAsphodeleDialogV188({ title: asphodeleTextV188('boardTitle', lang), ...home,
+    onChoose: (id) => {
+      if (id === 'close') return null;
+      if (id === 'back') return home;
+      if (id === 'side') return listView(ASPHODELE_SIDE_MISSIONS_V188);
+      if (id === 'contracts') return listView(ASPHODELE_CONTRACTS_V188);
+      if (!commitCandidateV188(candidate => { if (asphodeleMissionLockReasonV188(candidate, id)) return false; candidate.strategy.plannedCampaignId = id; return true; })) return null;
+      return { text: asphodeleTextV188('boardPlanned', lang), options: [{ id: 'close', label: asphodeleTextV188('close', lang) }] };
+    } });
+}
+function handleAsphodeleActionV188(interaction) {
+  if (!ownsTimelineV84(hubOwnerV84) || activeView !== 'hub' || standaloneContext || creatorOwnerV84 || !hubEngine.isAsphodeleV188?.()) return false;
+  const lang = asphodeleLangV188(), en = lang === 'en', action = interaction.action.slice('asphodele:'.length);
+  if (action === 'checkpoint') {
+    const runtime = hubEngine.captureAsphodeleV188(); if (!runtime) return false;
+    try {
+      const saved = normalizeAsphodeleHubV188(saveSystem.data.asphodeleHubV188);
+      saveSystem.commit({ asphodeleHubV188: { ...saved, location: 'station', roomId: runtime.roomId, x: runtime.x, z: runtime.z, facing: runtime.facing,
+        visited: [...new Set([...saved.visited, ...runtime.visited, runtime.roomId])] } });
+      return true;
+    } catch (error) { console.warn('[asphodele] checkpoint', error); return false; }
+  }
+  if (action === 'return') return returnFromAsphodeleV188();
+  if (action === 'locked') { toast(asphodeleLockTextV188(interaction.reason, lang)); return true; }
+  if (action === 'board') return openAsphodeleBoardV188();
+  if (action === 'cassius') return openAsphodeleDialogV188({ title: 'CASSIUS', text: cassiusCoreLineV188(saveSystem.data, lang), slot: 'cassius-core' });
+  if (action === 'relay') {
+    const title = en ? 'Relay room' : 'Salle des relais';
+    if (relayRoomOpenV188(saveSystem.data) && !asphodeleRelayReadyV188(saveSystem.data)) {
+      if (!commitCandidateV188(candidate => bringRelayOnlineV188(candidate))) return false;
+      return openAsphodeleDialogV188({ title, text: asphodeleTextV188('relayOnline', lang) });
+    }
+    return openAsphodeleDialogV188({ title, text: asphodeleTextV188(asphodeleRelayReadyV188(saveSystem.data) ? 'relayAlready' : 'relayClosed', lang) });
+  }
+  if (action === 'memorial') return openAsphodeleDialogV188({ title: asphodeleTextV188('memorialTitle', lang), text: memorialTextV188(saveSystem.data, lang) });
+  if (['archives', 'greenhouse', 'market', 'plan'].includes(action)) return openAsphodeleDialogV188({ title: 'Asphodèle', text: asphodeleTextV188(action, lang), slot: action === 'plan' ? 'asphodele-exterior' : null });
+  if (action === 'grue') {
+    const hub = normalizeAsphodeleHubV188(saveSystem.data.asphodeleHubV188);
+    if (gruePactPendingV188(saveSystem.data)) return openAsphodeleDialogV188({ title: 'GRUE', text: asphodeleTextV188('grueAsk', lang),
+      options: [{ id: 'accept', label: asphodeleTextV188('grueAccept', lang) }, { id: 'expel', label: asphodeleTextV188('grueExpel', lang) }],
+      onChoose: (choice) => {
+        if (choice === 'close') return null;
+        if (!commitCandidateV188(candidate => chooseGruePactV188(candidate, choice))) return null;
+        return { text: asphodeleTextV188(choice === 'accept' ? 'grueAccepted' : 'grueExpelled', lang), options: [{ id: 'close', label: asphodeleTextV188('close', lang) }] };
+      } });
+    return openAsphodeleDialogV188({ title: 'GRUE', text: asphodeleTextV188(hub.grue === 'accept' ? 'grueAfter' : 'grueNone', lang) });
+  }
+  return false;
+}
+function openKesslerTagDialogV188(notes) {
+  const lang = asphodeleLangV188();
+  hubEngine.pause();
+  openContentSceneDialogV188({ language: lang, slot: 'echo8-recording', title: 'ECHO-8', text: notes.map(note => note.text).join(' '),
+    options: [{ id: 'deposit', label: asphodeleTextV188('tagDeposit', lang) }, { id: 'close', label: asphodeleTextV188('close', lang) }],
+    onChoose: (id) => {
+      if (id !== 'deposit') return null;
+      if (!commitCandidateV188(candidate => depositKesslerTagV188(candidate))) return null;
+      hubEngine.kesslerTagInLockerV188 = true;
+      return { text: asphodeleTextV188('tagDeposited', lang), options: [{ id: 'close', label: asphodeleTextV188('close', lang) }] };
+    },
+    onClose: () => { if (activeView === 'hub' && !activeHubStation) hubEngine.resume(); } });
   return true;
 }
 // Opened from the hub conversation; the hub stays paused until the quest dialog closes.
@@ -1570,7 +1711,7 @@ function openCrewQuestV188(questId) {
       if (outcome.done) return { text: `${outcome.explain} ${outcome.completion}`, options: [{ id: 'close', label: en ? 'CLOSE' : 'FERMER' }] };
       return stepView(outcome.explain);
     },
-    onClose: resumeHub });
+    onClose: () => { resumeHub(); if (questId === 'ship-rook') playStationCinematicDueV188(); } });
   return true;
 }
 function renderCommandMissionsV110() {
@@ -3220,6 +3361,8 @@ function launchCampaign(campaign = null) {
   let deployment;
   try {
     deployment = beginOperation(saveSystem.data, campaign, world);
+    // V188 spec 007 [PROPOSÉ]: operations leave from the Tantalus drop bay; the UD-4L leaves the station first.
+    leaveAsphodeleForOperationV188(saveSystem.data);
   } catch (error) {
     toast(error.message);
     renderOperationPlan();
@@ -3331,6 +3474,8 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   const colonyChangeV188 = applyColonyOperationResultV188(candidate, { success: resolvedSuccess, worldId: operation.worldId || campaign?.worldId });
   // V188 crew quests (bible §8.1): DAVID-8R's relay components come back from successful operations on Cocyte.
   const questChangeV188 = applyCrewQuestOperationResultV188(candidate, { success: resolvedSuccess, worldId: operation.worldId || campaign?.worldId });
+  // V188 spec 007: a successful station contract adds one to its counter (« Relais en dérive » ×3 opens the relay room).
+  applyAsphodeleOperationResultV188(candidate, { success: resolvedSuccess, campaignId: operation.campaignId });
   // V188 debrief: the amounts the hub actually receives (before the transit clock runs).
   outcome.paidV188 = paidRewardsV188(resourcesBeforeV188, candidate.galaxy.resources);
   // V188 reactive lines (bible §53.6): failure, colonist loss, injured return.
@@ -3730,6 +3875,7 @@ function handleHubTrainingEventV132(event) {
 function persistHub(patch) {
   if (hubEngine.restoringHubPoseV88) return;
   if (hubEngine.isPortMeridienV90?.()) return;
+  if (hubEngine.isAsphodeleV188?.()) return; // V188 spec 007: the station pose lives in asphodeleHubV188
   if (standaloneContext === 'forge-playtest' && forgePlaytest) {
     forgePlaytest.hubState = { ...(forgePlaytest.hubState || {}), ...clone(patch) };
     return;
@@ -3980,9 +4126,14 @@ function handleHubAction(interaction) {
   // V188 ship-cryo: the sealed ECHO-8 locker shows what the campaign has established.
   if (interaction.action === 'story:echo8-locker') {
     const notes = echo8LockerNotesV188(saveSystem.data, document.documentElement.lang);
+    // V188 spec 007 (bible §7.4): once S3 brought Kessler's tag back, it can be placed in the locker.
+    if (kesslerTagPendingV188(saveSystem.data) && !standaloneContext && !creatorOwnerV84 && ownsTimelineV84(hubOwnerV84)) return openKesslerTagDialogV188(notes);
     toast(notes.map(note => note.text).join(' · '));
     return true;
   }
+  if (interaction.action.startsWith('asphodele:')) return handleAsphodeleActionV188(interaction);
+  if (interaction.action === 'navigate:operations' && (interaction.roomId || interaction.id) === 'dropship-hangar' && !standaloneContext
+    && (!saveSystem.data.onboardingV84 || saveSystem.data.onboardingV84.phase === 'complete') && openHubDialogue(interaction)) { appendAsphodeleShuttleChoiceV188(); return; }
   if (interaction.action.startsWith('port:')) return handlePortMeridienV90(interaction);
   if (standaloneContext === 'forge-playtest') {
     const advanced = interaction.action === 'editor:project-complete' && forgeCampaignUIV161?.completeNative(hubEngine);
@@ -4605,6 +4756,7 @@ function bind() {
     }
   });
   byId('hub-dialogue-choices').onclick = (event) => {
+    if (event.target.closest('[data-asphodele-shuttle-v188]')) { travelToAsphodeleV188(); return; }
     const questIdV188 = event.target.closest('[data-crew-quest-v188]')?.dataset.crewQuestV188;
     if (questIdV188) { openCrewQuestV188(questIdV188); return; }
     const choiceId = event.target.closest('[data-npc-dialogue-choice]')?.dataset.npcDialogueChoice;
