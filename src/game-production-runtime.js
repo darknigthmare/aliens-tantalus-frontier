@@ -1,5 +1,6 @@
 import { withMissionDepthRoomsV188 } from './mission-depth-v188.js';
 import { withInsertionSafeZoneV188 } from './insertion-safe-zone-v188.js';
+import { withMissionDropshipHandoverV188 } from './mission-dropship-handover-v188.js';
 import { withQz17LevelDressingV188 } from './qz17-level-dressing-v188.js';
 import {
   GameEngine as ProductionCoreEngine,
@@ -96,7 +97,11 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
 // The insertion safe zone sits right under the caste behaviours: their dash and
 // lunge scale the step it holds, and every outer damage path reaches it. The
 // order of the existing layers is unchanged.
-export class GameEngine extends withMissionDepthRoomsV188(withQz17LevelDressingV188(withCasteBehaviorsV188(withInsertionSafeZoneV188(withRunOptionsRuntimeV188(withCombatFeelV188(withFootstepCuesV188(withMissionObjectivePanelV188(withTensionDirectorV188(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(V158ProductionEngine)))))))))))))) {
+// The in-level dropship handover (V188) wraps every mission layer: while it
+// withholds control nothing below it runs, so mission time (and with it the
+// insertion grace) only starts when control is given, and it can hold the
+// mission-complete event of any mode until the boarding is over.
+export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepthRoomsV188(withQz17LevelDressingV188(withCasteBehaviorsV188(withInsertionSafeZoneV188(withRunOptionsRuntimeV188(withCombatFeelV188(withFootstepCuesV188(withMissionObjectivePanelV188(withTensionDirectorV188(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(V158ProductionEngine))))))))))))))) {
   start(options = {}) {
     options = isolateForgeMissionOptionsV136(options);
     this.expectedMissionSignatureV130 = options.missionLevel?.signature || null;
@@ -173,7 +178,8 @@ export class GameEngine extends withMissionDepthRoomsV188(withQz17LevelDressingV
       && this.mission?.state === 'active' && actor?.alive && !actor.downed && (allowVent || !actor.ventTransit)
       && !(actor.hazardKind === 'electrical' && actor.hazardClock > 0)
       && (actor !== this.coop || this.coopEnabled) && !this.isPlaceableBusyV86(actor) && !this.isFieldActionBusyV124(actor)
-      && (allowSquadTask || !this.isSquadActionLockedV132?.(actor)));
+      && (allowSquadTask || !this.isSquadActionLockedV132?.(actor))
+      && !this.dropshipHandoverBlocksV188?.()); // V188: no action while the dropship handover withholds control
   }
 
   // Guard the outermost runtime so keyboard, touch/UI and internal dispatch share the same contract.
