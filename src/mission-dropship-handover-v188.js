@@ -214,9 +214,14 @@ export function withMissionDropshipHandoverV188(Base) {
           entry.path = [{ x: rear, y: groundY }, { x: centreX(entry.actor), y: feetY(entry.actor) }];
         }
       } else {
-        // Ramp foot 60 px behind the insertion point; the hull (870 px, true
-        // scale) extends behind it and may leave the view or the level edge.
-        seq.ship = { tailX: spawn - 60 + UD4L_RAMP_FOOT_V188, groundY, dir: 1, lift: 0, gear: 1 };
+        // Ramp foot 60 px behind the insertion point, the hull (870 px, true
+        // scale, never scaled down) behind it. Near the level start there is no
+        // room behind the marines: the ship then lands ahead of them, ramp
+        // towards them, and the marines step down backwards into their lane.
+        // Where neither side has 870 px the hull runs past the level edge.
+        const behind = spawn - 60 + UD4L_RAMP_FOOT_V188 - UD4L_FRAME_V188.length, ahead = spawn + 60 - UD4L_RAMP_FOOT_V188 + UD4L_FRAME_V188.length;
+        seq.dir = behind >= 0 || ahead > bounds.w ? 1 : -1;
+        seq.ship = { tailX: spawn - seq.dir * 60 + seq.dir * UD4L_RAMP_FOOT_V188, groundY, dir: seq.dir, lift: 0, gear: 1 };
         const hinge = ud4lToWorldV188(seq.ship, UD4L_FRAME_V188.hinge), foot = ud4lToWorldV188(seq.ship, { x: UD4L_RAMP_FOOT_V188, y: 0 });
         for (const entry of seq.actors) entry.path = [hinge, foot, { x: centreX(entry.actor), y: feetY(entry.actor) }];
       }
@@ -399,13 +404,16 @@ export function withMissionDropshipHandoverV188(Base) {
       seq.tracers = seq.tracers.filter(entry => (entry.life -= dt) > 0);
       if (seq.fireClock > 0) return;
       seq.fireClock = .16;
-      const gun = ud4lToWorldV188(seq.ship, UD4L_FRAME_V188.chinGun);
-      const target = (this.enemies || []).filter(enemy => enemy.alive && !enemy.dormant && Math.abs(centreX(enemy) - gun.x) < 900)
-        .sort((a, b) => Math.abs(centreX(a) - gun.x) - Math.abs(centreX(b) - gun.x))[0];
+      const chin = ud4lToWorldV188(seq.ship, UD4L_FRAME_V188.chinGun), bay = ud4lToWorldV188(seq.ship, { x: UD4L_FRAME_V188.hinge.x, y: UD4L_FRAME_V188.hinge.y - 40 });
+      // Ahead of the nose the chin turret fires; behind the ship, a marine in the bay covers the ramp.
+      const gun = chin;
+      const reach = enemy => Math.min(Math.abs(centreX(enemy) - chin.x), Math.abs(centreX(enemy) - bay.x));
+      const target = (this.enemies || []).filter(enemy => enemy.alive && !enemy.dormant && reach(enemy) < 900).sort((a, b) => reach(a) - reach(b))[0];
       // Without a visible contact the gunner sweeps the approach in front of the ramp.
       const to = target ? { x: centreX(target), y: target.y + target.h * .45 }
         : { x: gun.x - seq.ship.dir * (380 + Math.sin(seq.t * 3) * 120), y: seq.groundY - 30 };
-      seq.tracers.push({ from: gun, to, life: .14, max: .14 });
+      const from = Math.abs(to.x - bay.x) < Math.abs(to.x - chin.x) ? bay : chin;
+      seq.tracers.push({ from, to, life: .14, max: .14 });
       for (let i = 0; i < 3; i++) this.pushHandoverParticleV188({ kind: 'spark', x: to.x, y: to.y, vx: (Math.random() - .5) * 220, vy: -Math.random() * 160, life: .3, max: .3, r: 2 });
       if (!seq.cues.has(`fire-${Math.floor(seq.t / .7)}`)) { seq.cues.add(`fire-${Math.floor(seq.t / .7)}`); this.audio?.cue?.('weapon-smartgun'); }
     }
@@ -486,14 +494,14 @@ export function withMissionDropshipHandoverV188(Base) {
       }
       const ship = seq.ship;
       if (!ship) return;
-      if (seq.apc) {
+      drawUd4lRampV188(ctx, ship, ship.ramp || 0);
+      drawUd4lHullV188(ctx, ship, { image: hullImage() });
+      if (seq.apc) { // in front of the hull: it hangs under the belly bay
         const bellyWorld = ud4lToWorldV188(ship, UD4L_FRAME_V188.belly), h = LEVEL_DROPSHIP_SCALE_V188.m577.h;
         const footY = seq.groundY + (bellyWorld.y + h - 10 - seq.groundY) * (1 - seq.apc.drop);
         if (seq.apc.drop < 1 && phaseStart(seq, 'disembark') <= time) drawHoistV188(ctx, bellyWorld, { x: seq.apc.x + seq.apc.w / 2, y: footY - h });
         if (!seq.apc.own && phaseStart(seq, 'disembark') <= time) drawM577TransportV188(ctx, seq.apc.x, footY, seq.apc.facing, { wheelTurn: seq.apc.wheel });
       }
-      drawUd4lRampV188(ctx, ship, ship.ramp || 0);
-      drawUd4lHullV188(ctx, ship, { image: hullImage() });
     }
     draw() {
       const seq = this.handoverV188, shake = this.handoverShakeV188 > 0 && this.handoverMotionV188?.shake;

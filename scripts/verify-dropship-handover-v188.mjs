@@ -86,11 +86,11 @@ test('foot insertion: descend, settle, ramp, marines walk down, control at the e
   let seenOnRamp = false;
   while (engine.handoverV188?.blocking) {
     tick(engine, .1); phases.add(engine.getSnapshot().dropshipHandoverV188?.phase);
-    if (!engine.handoverHiddenV188(p) && engine.handoverV188?.blocking && p.x < final.x - 20) seenOnRamp = true;
+    if (!engine.handoverHiddenV188(p) && engine.handoverV188?.blocking && Math.abs(p.x - final.x) > 20) seenOnRamp = true;
     if (engine.handoverV188?.blocking) assert.equal(engine.mission.elapsed, 0, 'mission time stands still during the landing');
   }
   for (const id of ['descend', 'settle', 'ramp', 'disembark']) assert.ok(phases.has(id), id);
-  assert.ok(seenOnRamp, 'the marine is seen walking down the ramp from behind the insertion point');
+  assert.ok(seenOnRamp, 'the marine is seen walking down the ramp before reaching the insertion point');
   assert.deepEqual(pose(p), final, 'control is given exactly at the insertion point');
   assert.ok(Math.abs(seq.t - seq.controlAt) < .11, `control at ${seq.t}`);
   assert.equal(engine.canPerformGameplayAction(p), true);
