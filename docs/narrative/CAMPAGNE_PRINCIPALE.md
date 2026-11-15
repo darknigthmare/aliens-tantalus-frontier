@@ -712,7 +712,7 @@ Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-m
 
 ### 5.6 Acte V — « Non viable »
 
-**Statut :** **[PARTIEL]** comme base — le registre `special-operations-v131.js` rattache `last-course-tantalus` au chapitre `special-apc-convoy`, déjà utilisé à l'Acte III. Un Acte V distinct, sa course et la poursuite de Reine restent **[PROPOSÉ]**.
+**Statut :** **[PARTIEL] V188** (spec 006, 2026-11-15) — conseil de guerre, choix final, trois missions finales sur des gabarits existants, face-à-face au quai, CIN-60, CIN-61 et les trois fins sont jouables ; détail et valeurs au §5.11. La course APC dédiée (remorques, pont physique, poursuite de la Reine sur le moteur de `special-apc-convoy`) reste **[PROPOSÉ]** ; le registre `special-operations-v131.js` rattache toujours `last-course-tantalus` au chapitre de l'Acte III.
 
 **Situation [PROPOSÉ] :** Halloran déclare Port-Méridien **non viable** au titre de la charte, avec effet à l'arrivée d'une équipe de récupération de la compagnie. L'équipe (commandos Weyland-Yutani, déjà au catalogue) vient « sécuriser les actifs » du dépôt et de la colonie. Pendant ce temps, la ruche du dépôt, privée de livraisons, sort vers la surface et coupe la route du complexe au port.
 
@@ -764,12 +764,12 @@ Les pièces de CASSIUS (S2) et de Wren (annexe colonie) sont affichées « pas e
 #### 5.7.1 Choix final : options ouvertes par les choix cumulés — validé le 2026-11-06
 
 **Logique [EXISTANT] V188** (`finalChoiceOptionsV188`, `resolveFinalChoiceV188`, testée) :
-- *Transmettre* n'est ouvert que si Asphodèle est reprise et sa salle des relais ouverte ; ce n'est pas encore jouable.
+- *Transmettre* n'est ouvert que si Asphodèle est reprise et sa salle des relais ouverte ; **V188 (spec 006)** : la salle s'ouvre après trois missions *Relais en dérive* réussies après S4 (§5.11).
 - Les modificateurs sont appliqués : *restitution* avec 2 conteneurs ou plus, tentative de récupération à bord si la créature a été capturée.
 - Vega suit la recommandation si la loyauté de Mara Vega est d'au moins 55 (niveau *operationnel*).
 - Sinon, avec 5 pièces mais sans canal sûr, Vega tient la colonie (**[PROPOSÉ]**, cas non écrit).
 
-Le conseil de guerre et les fins attendent l'Acte V jouable.
+Le conseil de guerre et les fins sont jouables depuis V188 (spec 006) : §5.11.
 
 | Option recommandée par Echo-9 | Toujours proposée ? | Condition pour qu'elle apparaisse | Fin |
 | --- | --- | --- | --- |
@@ -790,7 +790,7 @@ Le conseil de guerre et les fins attendent l'Acte V jouable.
 
 La fin affichée et le nombre de colons arrivés (CIN-61) viennent toujours de l'état réel de la sauvegarde ; aucune option n'est accordée par une cinématique.
 
-### 5.8 Épilogue — « Ce que le retour devra raconter » — [PROPOSÉ]
+### 5.8 Épilogue — « Ce que le retour devra raconter » — [PARTIEL] V188 (§5.11)
 
 Jouable, sans combat. Visite du Tantalus, de Port-Méridien et, si elle est reprise, d'Asphodèle. Chaque personnage a une réplique finale selon la fin. Le Tantalus se prépare à repartir : la baie cryo rouvre ses caissons. Sur le casier de l'Echo-8 : `RETOUR CONFIRMÉ` ou `POSTE LIBÉRÉ` (§7.4).
 
@@ -917,6 +917,43 @@ Statuts de production : **[PRÉSENT]** dans le dépôt, **[À CRÉER]**, comme a
 | `station-a-sas` | Un sas extérieur se cycle seul la nuit. Trouver ce qui l'actionne : un câble rongé, puis un nid dans la gaine (`navigate the vent network`). | Sécurité de la station + | Sas extérieur [À CRÉER], gaine technique [À CRÉER] |
 
 **Cinématiques ajoutées :** CIN-21, CIN-59, CIN-73 (CIN-49 n'est pas nécessaire : `story-route-depot` enchaîne sur CIN-50). Elles suivent les contraintes du §10.
+
+### 5.11 Acte V jouable, fins et épilogue — [PARTIEL] V188 (spec 006, 2026-11-15)
+
+Décisions par défaut appliquées (questionnaire `QUESTIONS_PROPRIETAIRE_V188.md`, option recommandée faute de réponse) : Q1 A adaptée, Q2 A, Q3 A, Q4 A, Q5 A, Q12 A, Q79 A. Feature : `specs/006-acte-v-fins/`. Code : `src/story-act5-v188.js`, `src/story-act5-state-v188.js`, `src/act5-slots-v188.js`, `src/story-cinematics-v188.js` ; sauvegarde additive `storyCampaignV188.act5` (absente des anciennes sauvegardes). Tests : `scripts/verify-act5-endings-v188.mjs`.
+
+**Enchaînement.**
+
+1. **Seuil** : Actes II, III et IV terminés (`special-archive-relay`, `special-apc-convoy`, `special-c12-horde`, `special-black-cocoon`), retour de l'Acte IV lu (CIN-51), aucune étape de l'Interlude en attente.
+2. **Conseil de guerre** (table tactique, non refermable) : ordre de Halloran ; avantages des membres en confiance *solide* ; réplique de CASSIUS s'il est conservé ou mention de son effacement ; réplique d'Echo-9 pour `origin-03` et `origin-10` ; dossier n/7 ; options et raisons d'une option fermée.
+3. **Décision** : Echo-9 recommande ; `resolveFinalChoiceV188` décide (Vega suit à 55). Q3 A validée par défaut : avec 5 pièces sans canal sûr, Vega tient la colonie. CIN-60 suit.
+4. **Missions finales**, dans l'ordre : `act5-last-run` *Dernier départ* (`escort a colony convoy`, extérieur) → `act5-depot-queen` *La Reine du dépôt* (`track an apex specimen`, boss) → `act5-port-walls` *Les portes du port* (`defend the colony`) pour *Transmettre* et *Tenir*, ou `act5-evacuation` *L'évacuation* (`hold the extraction zone`) pour *Céder*. Registre Action.
+5. **Pont** (Q2 A) : au premier checkpoint de *Dernier départ*, choix sans pause entre le fret et les colons en retard.
+6. **Quai** (Q4 A) : *Transmettre* → ICC saisie, retrait ; *Tenir* avec 5 pièces → retrait des commandos ; *Tenir* en dessous → siège jusqu'à l'aube, sans tir. *Céder* : pas de face-à-face.
+7. **CIN-61** : appel des arrivés = civils du quai (P-3) + colons du M577 + colons en retard arrivés.
+8. **Fin** (CIN-90) : texte de la fin du §5.7 ; avec « Le relais parle », clause levée au palier *Autonome*, charte suspendue en dessous (§5.7.1).
+9. **Épilogue** (Q5 A) : au Tantalus, « ÉPILOGUE · Dernier mot » dans la conversation de huit membres de l'équipage ; le casier d'Echo-8 porte `RETOUR CONFIRMÉ` (plaque de Kessler ramenée de S3) ou `POSTE LIBÉRÉ`. Le lire joue CIN-92 : Port-Méridien, Asphodèle (éclairée si reprise), la baie cryo, puis les faits de la partie (colonie, appel, CASSIUS, dossier et ce qui reste non prouvé, confiance de l'équipage, créature de l'Interlude, réplique « Retour » de l'origine d'Echo-9, §2.4.2).
+10. **Générique** dans le style du crédit d'ouverture (« A fan game by Darknigthmare »), puis **partie libre** sur la même sauvegarde (§45.2) : missions, colonie et station restent ouvertes ; les missions finales se rejouent sans effet d'histoire.
+
+**Reprise** : chaque phase (`council`, `final`, `ending`, `epilogue`, `credits`, `complete`) est enregistrée avant la cinématique qui la suit ; un rechargement rejoue l'étape en cours. Le pont n'est jamais redemandé.
+
+**Valeurs et textes [PROPOSÉ]** (réglables sans nouvelle décision, §56.1) :
+
+| Élément | Valeur |
+| --- | --- |
+| Confiance *solide* d'un conseiller | loyauté ≥ 75 (bande `NPC_TRUST_LEVELS_V62`) |
+| Sanaa Doyle · tourelles | +120 munitions au départ de chaque mission finale |
+| Cal Mercer · blindage | blindage porté à 100 au départ |
+| Maksim Orlov · fenêtre | +6 s au pont |
+| Leila Sørensen · route | 2 colons en retard sur 4 rejoignent le port si leur remorque est lâchée |
+| Pont | 15 s ; sans réponse, le fret cède ; 4 colons dans la remorque en retard |
+| *Céder* sans restitution | stress +10 pour chaque membre de l'équipage |
+| Salle des relais | 3 missions *Relais en dérive* (`act5-drift-relay`) réussies après S4 |
+| Textes | ordre de Halloran, répliques des conseillers, de CASSIUS et d'Echo-9 au conseil, textes du pont et du quai, répliques de Cal (CIN-60) et de Rook (CIN-61), 24 derniers mots (Vega, Harlow, Rook, DAVID-8R, BISHOP-9, Okafor, Orlov, Mbaye × 3 fins), faits de l'épilogue |
+
+**Fidélité** : aucune fidélité « 1:1 ». Repères documentés cités dans la spec 006 : cofinancement de la colonie avec l'Administration coloniale et audience de l'ICC (*Aliens*, 1986) ; Marshals coloniaux (*Alien: Isolation*, 2014) ; équipe de la compagnie venue récupérer l'« actif » (*Alien 3*, 1992, dernière scène) ; « Special Order 937 » (*Alien*, 1979) ; M577 sous la pluie, Reine et retour en hypersommeil (*Aliens*, 1986). Adaptations du projet : charte et clause, conseil, pont, appel, casier d'Echo-8. À définir : course APC dédiée, sprite de la Reine, art des 15 emplacements (`src/act5-slots-v188.js`).
+
+**Reste à faire** : course APC dédiée (Q1 A au sens strict), Reine dédiée, hub Asphodèle et salle des relais visitable, palier *Libre* après « Le relais parle », effets durables de la relève de Vega et de la démission d'Inez en partie libre, nouvelle partie +, art.
 
 ---
 
@@ -1099,7 +1136,7 @@ Décisions par défaut appliquées : Q6 (S1-S4 comme missions avant le hub), Q7 
 
 - **Accès** : Acte II terminé → quête de Rook « Six heures », dont la fin joue *Six heures de silence* (§8.4) → S1 → S2 → décision CASSIUS → S3 → S4. Les missions verrouillées ne sont pas proposées ; le lancement est refusé avec la raison. Une mission en cours reste reprise.
 - **Missions** : `station-s1` à `station-s4` sur Cocyte (`world-05-lethe`), gabarit intérieur de vaisseau, objectifs et registres de §7.2 et §0.3 (Horreur, Tension, Horreur, Action). Le décor est l'intérieur de vaisseau générique : la station n'a pas encore son art (§29.4).
-- **Dossier** : S2 donne la pièce *Ordres de livraison archivés par CASSIUS*, même si CASSIUS est effacé ensuite (§5.7.1). S4 rend la condition « Asphodèle reprise » vraie ; *Transmettre* attend encore la salle des relais.
+- **Dossier** : S2 donne la pièce *Ordres de livraison archivés par CASSIUS*, même si CASSIUS est effacé ensuite (§5.7.1). S4 rend la condition « Asphodèle reprise » vraie ; la salle des relais s'ouvre avec trois *Relais en dérive* (spec 006, §5.11).
 - **Effets CASSIUS [PROPOSÉ]** : réécrit, quarantaine de Cocyte −6 et stabilité +3 ; bridé, quarantaine −3 ; effacé, aucun effet. Les annexes fermées par le bridage n'existent pas encore.
 - **Scènes de retour** (S1, S3, S4) et décision CASSIUS : au Commandement, une seule fois, image d'emplacement en primitives Canvas (`src/content-gap-slots-v188.js`).
 - **[PROPOSÉ]** : la consigne qui ferme le sas 3 à 6:00:05 est appliquée par CASSIUS (indice de la quête de Rook) ; les journaux des survivants s'arrêtent au quatrième jour.
@@ -1206,14 +1243,16 @@ Les chapitres Mire Archive 001, Protocole Z-110, Jeri, Éloïse, A.T.A.X.-Q, Le 
 | CIN-50 | Les dernières images | Acte IV | 35 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-51 | Contrôle biologique | Acte IV | 25 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-59 | L'atterrissage | `story-recuperation` | 20 s | [PROPOSÉ] |
-| CIN-60 | Dernier départ | Acte V | 30 s | [PROPOSÉ] |
-| CIN-61 | Les portes du port | Acte V | 45 s | [PROPOSÉ] |
+| CIN-60 | Dernier départ | Acte V | 30 s | [EXISTANT] V188 (placeholder Canvas, §5.11) |
+| CIN-61 | Les portes du port | Acte V | 45 s | [EXISTANT] V188 (placeholder Canvas, §5.11) |
 | CIN-70 | Six heures de silence | Station | 40 s | [PROPOSÉ] |
 | CIN-71 | La voix de CASSIUS | Station S2 | 40 s | [PROPOSÉ] |
 | CIN-72 | Le dernier enregistrement d'Echo-8 | Station S3 | 30 s | [PROPOSÉ] |
 | CIN-73 | Le moyeu | `story-moyeu` | 20 s | [PROPOSÉ] |
 | CIN-80 | Premières lumières | Colonie, palier *Rétablie* | 30 s | [PROPOSÉ] |
-| CIN-90 | Fins (×3) | Épilogue | 60 s | [PROPOSÉ] |
+| CIN-90 | Fins (×3) | Épilogue | 60 s | [EXISTANT] V188 (`cin-90-relay`, `cin-90-freight`, `cin-90-living`, placeholder Canvas) |
+| CIN-92 | Ce que le retour devra raconter | Épilogue | 49 s | [EXISTANT] V188 (placeholder Canvas) ; identifiant [PROPOSÉ] |
+| Générique | A fan game by Darknigthmare | Fin | 24 s | [EXISTANT] V188 (`cin-99-credits`) ; identifiant [PROPOSÉ] |
 
 **Contraintes :** séquences scriptées dans le moteur Canvas 2D (plans fixes, parallaxe, panoramiques, cadres de dialogue avec portraits `npc-dialogue-portraits-v168.js`), pas de vidéos précalculées. Toutes passables et relisibles ; aucune récompense liée à leur affichage. Musique et sons originaux uniquement.
 
@@ -4647,3 +4686,7 @@ Décision du propriétaire : certaines salles passent en **profondeur** (2,5D, d
 ### 56.13 Manques de contenu (V188, 2026-11-15)
 
 Audit bible contre code : [`AUDIT_CONTENU_V188.md`](../development/AUDIT_CONTENU_V188.md) (66 lignes au commit `250d81a` : 14 faites, 18 partielles, 32 manquantes, 2 bloquées par l'art). Comblés en partie dans ce lot, sans être terminés : front station Asphodèle S1-S4 et choix CASSIUS (§7.5), quatre quêtes de l'équipage (§8.4), temps de voyage (§13.6). Feature : `specs/005-front-asphodele-quetes/`. Tests : `scripts/verify-content-gaps-v188.mjs` ; contrôle Chromium sur fixture importée (déclaré dans la spec). Aucun de ces éléments n'a son art final.
+
+### 56.14 Acte V, fins et épilogue (V188, 2026-11-15)
+
+Manque n° 3 de l'audit comblé en partie : conseil de guerre, choix final, missions finales, face-à-face, trois fins, épilogue au Tantalus, générique et partie libre (§5.11). Feature : `specs/006-acte-v-fins/`. Tests : `scripts/verify-act5-endings-v188.mjs` (dans `test:priorities:v188`) ; contrôle Chromium de la fin « Le relais parle » sur fixture importée, avec deux injections déclarées (checkpoint, fin de mission). Statut : **Partiel** — la course APC dédiée, la Reine dédiée et l'art restent à faire ; rien n'est déclaré terminé.
