@@ -601,9 +601,16 @@ export class MissionInsertionUiV62 {
     if (!active || typeof active.scrollIntoView !== 'function' || typeof rail.getBoundingClientRect !== 'function') return false;
     const box = rail.getBoundingClientRect(), item = active.getBoundingClientRect();
     if (!(box.width > 0) || (item.left >= box.left - 1 && item.right <= box.right + 1)) return false;
-    // Never pull the page back up (block: 'nearest') while the reader is below the rail.
+    // While the reader is below the rail (they just pressed the button under the
+    // panel), block: 'nearest' would pull the page back up: the strip alone is
+    // scrolled, so the active phase is in view when they look up.
     const viewHeight = Number(this.document?.defaultView?.innerHeight ?? globalThis.innerHeight) || 0;
-    if (viewHeight && (box.bottom <= 0 || box.top >= viewHeight)) return false;
+    if (viewHeight && (box.bottom <= 0 || box.top >= viewHeight)) {
+      const gutter = 16;
+      rail.scrollLeft = Math.max(0, (Number(rail.scrollLeft) || 0)
+        + (item.right > box.right ? item.right - box.right + gutter : item.left - box.left - gutter));
+      return true;
+    }
     active.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'auto' });
     return true;
   }

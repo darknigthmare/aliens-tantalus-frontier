@@ -410,6 +410,9 @@ test('insertion phase rail (phone): the active phase is scrolled into view when 
   assert.equal(reveal.call(ui, make(40, 200), 0), false, 'already visible: nothing moves');
   const kept = make(40, 200); reveal.call(ui, kept, 180);
   assert.equal(kept.scrollLeft, 180, 'the reader scroll survives the per-frame rebuild');
-  assert.equal(reveal.call(ui, make(560, 720, -300), 0), false, 'rail above the viewport: the page is not pulled up');
+  const above = make(560, 720, -300), before = calls.length;
+  assert.equal(reveal.call(ui, above, 0), true);
+  assert.equal(calls.length, before, 'rail above the viewport: the page is not pulled up (no scrollIntoView)');
+  assert.equal(above.scrollLeft, 720 - 376 + 16, 'the strip alone scrolls the active phase in');
   assert.match(source('src/mission-insertion-ui-v62.js'), /this\.root\.append\(header, phaseRail, body, live\);\n\s*this\.revealActivePhaseV188\(phaseRail, previousRailScrollV188\);/);
 });
