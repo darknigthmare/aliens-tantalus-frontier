@@ -26,3 +26,16 @@ export function paidRewardsLineV188(paid, language = 'fr') {
 export function strategyLogTitleV188(entry, campaigns = []) {
   return campaigns.find(campaign => campaign.id === entry?.title)?.name || entry?.title || '';
 }
+
+/**
+ * Launch binds its deployment record after the strategic clock ran. The galaxy
+ * simulation rebuilds the save root in place (every nested record is a fresh
+ * copy), so the operation beginOperation returned may no longer be the one the
+ * save holds. Returns the deployment bound to the live operation record; the
+ * level seed and signature written on it are what the debrief validates.
+ */
+export function rebindDeploymentOperationV188(deployment, save) {
+  const live = save?.strategy?.currentOperation;
+  if (!deployment?.operation || !live || live === deployment.operation || live.id !== deployment.operation.id) return deployment;
+  return { ...deployment, operation: live };
+}
