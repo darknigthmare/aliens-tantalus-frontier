@@ -1716,7 +1716,9 @@ export function sanitizeOperationResumeState(candidate, options = {}) {
   }));
   const vents = sanitizeRuntimeList(candidate.vents, 64, (entry, index) => ({
     id: typeof entry.id === 'string' ? entry.id.slice(0, 120) : 'vent-' + index,
-    open: Boolean(entry.open)
+    open: Boolean(entry.open),
+    // V188 additive field: absent in older saves (their open portals keep counting).
+    ...(typeof entry.playerTraversedV188 === 'boolean' ? { playerTraversedV188: entry.playerTraversedV188 } : {})
   }));
   const equipment = sanitizeRuntimeList(candidate.equipment, 32, (entry, index) => ({
     id: typeof entry.id === 'string' ? entry.id.slice(0, 120) : 'equipment-' + index,

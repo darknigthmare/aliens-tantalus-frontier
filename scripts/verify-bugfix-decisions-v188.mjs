@@ -112,3 +112,69 @@ test('Jeri (hive): no hive objective needs an ally (objectives are the hive stat
   assert.deepEqual(Object.keys(engine.mission.objectives).sort(), ['archive', 'boss', 'extract', 'power', 'route']);
   assert.doesNotMatch(source('src/hive-control-v131.js'), /squad|ally|allié/i);
 });
+
+// ---------------------------------------------------------------- item 3
+// pair-030-mire: objective "navigate the vent network" (V62 network, ventTarget 1).
+async function ventMission() {
+  const { engine, events } = await launch('pair-030-mire', { keepEnemies: false, extra: { userCasteCampaignV88: true } });
+  assert.equal(engine.objectiveRuntime.action, 'navigate');
+  assert.ok(engine.missionVentNetworkV62, 'V62 network');
+  engine.supplies = []; engine.drops = [];
+  return { engine, events };
+}
+for (const kind of ['ally', 'enemy']) test(`vent objective: an ${kind} crawling through a portal keeps it open for AI but does not map the route`, async () => {
+  const { engine } = await ventMission();
+  const entrance = engine.missionVentNetworkV62.entrances[0];
+  const portal = engine.vents.find(vent => vent.portalId === entrance.id);
+  // Injection: a minimal AI actor beside the entrance, sent through it by the V62 traversal.
+  const at = entrance.worldPosition;
+  const actor = { id: `qa-${kind}`, x: at.x - 20, y: at.y - 60, depth: at.depth || 0, w: 40, h: 60, alive: true,
+    ...(kind === 'ally' ? { squadMember: true, isAlly: true } : { isEnemy: true }) };
+  if (kind === 'enemy') engine.enemies.push(actor); else engine.squadActors.push(actor);
+  assert.ok(engine.beginMissionVentTraversalV62(actor, { entranceId: entrance.id, actorKind: kind, maximumDistance: 400 }), `${kind} entered`);
+  assert.equal(portal.open, true, 'the portal stays physically open for AI movement');
+  assert.notEqual(portal.playerTraversedV188, true);
+  engine.updateObjectiveRuntime(1 / 60);
+  assert.equal(engine.objectiveState.complete, false, 'the objective is not completed by an AI crawler');
+  assert.match(engine.missingObjectiveRequirement(), /^CONDUITS CARTOGRAPHIÉS 0\/1/);
+  // Then the controlled marine goes through a vent: the route is mapped.
+  // Injection: the marine on the other entrance, cutter in hand.
+  const other = engine.missionVentNetworkV62.entrances[1], p = engine.player, spot = other.worldPosition;
+  engine.inventory.cutter = true;
+  p.x = spot.x - p.w / 2; p.y = spot.y - p.h; p.depth = spot.depth || 0; p.vx = p.vy = 0; p.grounded = true;
+  assert.ok(engine.enterMissionVentV62(p), 'the marine entered');
+  engine.updateObjectiveRuntime(1 / 60);
+  assert.equal(engine.objectiveState.complete, true, 'completed by the controlled marine');
+  assert.equal(engine.missingObjectiveRequirement(), '');
+});
+
+test('vent objective saves: new saves keep the player flag; older saves load and keep their progress', async () => {
+  const { sanitizeOperationResumeState } = await import('../src/save.js');
+  const { engine } = await ventMission();
+  const entrance = engine.missionVentNetworkV62.entrances[0];
+  const portal = engine.vents.find(vent => vent.portalId === entrance.id);
+  // Injection: the portal opened by an AI crawler only.
+  portal.open = true; portal.playerTraversedV188 = false;
+  const state = engine.captureResumeState();
+  assert.equal(state.vents.find(vent => vent.id === portal.id).playerTraversedV188, false);
+  const stored = sanitizeOperationResumeState(structuredClone(state));
+  assert.equal(stored.vents.find(vent => vent.id === portal.id).playerTraversedV188, false, 'the profile sanitizer keeps the field');
+  const again = await ventMission();
+  assert.equal(again.engine.applyResumeState(stored).applied, true);
+  again.engine.updateObjectiveRuntime(1 / 60);
+  assert.equal(again.engine.objectiveState.complete, false, 'an AI-opened portal does not count after a resume');
+  // Older save: no playerTraversedV188 field; its open portal keeps counting.
+  const legacy = structuredClone(state);
+  for (const vent of legacy.vents) delete vent.playerTraversedV188;
+  const old = await ventMission();
+  assert.equal(old.engine.applyResumeState(sanitizeOperationResumeState(legacy)).applied, true);
+  old.engine.updateObjectiveRuntime(1 / 60);
+  assert.equal(old.engine.objectiveState.complete, true, 'older progress is not lost');
+  // An objective already completed is never un-completed.
+  const done = structuredClone(state); done.objectiveState.complete = true;
+  const fresh = await ventMission();
+  assert.equal(fresh.engine.applyResumeState(done).applied, true);
+  fresh.engine.updateObjectiveRuntime(1 / 60);
+  assert.equal(fresh.engine.objectiveState.complete, true);
+  assert.equal(fresh.engine.missingObjectiveRequirement(), '', 'extraction stays available');
+});

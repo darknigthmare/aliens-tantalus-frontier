@@ -2670,7 +2670,7 @@ function captureMissionResumeState({ forRecovery = false } = {}) {
     objectives: { ...engine.mission.objectives },
     inventory: { ...engine.inventory },
     doors: engine.doors.map((door) => ({ id: door.id, open: door.open, progress: door.progress })),
-    vents: engine.vents.map((vent) => ({ id: vent.id, open: vent.open })),
+    vents: engine.vents.map((vent) => ({ id: vent.id, open: vent.open, playerTraversedV188: vent.playerTraversedV188 === true })),
     equipment: (snapshot.equipmentRuntime || []).map((item) => ({ id: item.id, remaining: item.remaining, uses: item.uses })),
     pickups: {
       weaponTaken: Boolean(engine.weaponPickup?.taken),
@@ -2736,7 +2736,7 @@ function applyMissionResumeState(state) {
   }
   for (const saved of state.vents || []) {
     const vent = engine.vents.find((entry) => entry.id === saved.id);
-    if (vent) vent.open = saved.open;
+    if (vent) { vent.open = saved.open; vent.playerTraversedV188 = typeof saved.playerTraversedV188 === 'boolean' ? saved.playerTraversedV188 : Boolean(saved.open); }
   }
   for (const saved of state.equipment || []) {
     const equipment = engine.equipmentActions?.get(saved.id);

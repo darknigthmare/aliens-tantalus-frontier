@@ -1122,7 +1122,9 @@ export function withV52LevelRuntime(BaseEngine) {
       if (actorKind === 'ally') this.missionVentTelemetryV62.allyPlans += 1;
       if (actorKind === 'enemy') this.missionVentTelemetryV62.enemyPlans += 1;
       const portal = this.vents.find((entry) => entry.portalId === entranceId);
-      if (portal) portal.open = true;
+      // The portal opens for every crawler (AI movement keeps using it); only the
+      // controlled marine's own traversal maps it for the vent objective (V188).
+      if (portal) { portal.open = true; if (actorKind === 'player' && actor === this.player) portal.playerTraversedV188 = true; }
       this.onEvent({
         type: 'mission-vent-enter',
         networkId: network.id,
