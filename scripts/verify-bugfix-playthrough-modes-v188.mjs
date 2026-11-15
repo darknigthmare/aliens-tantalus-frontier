@@ -71,3 +71,30 @@ test('ecosystem HUD: the headline names the phase and reads in English', async (
     assert.equal(headline(), 'TR-0 · THE HIVE WORLD · PLANETARY ALERT 0% · NUCLEUS · PHASE 1');
   } finally { setLanguageV185('fr', { document: null, storage: null, persist: false }); }
 });
+
+// P1 (Doctrine Alpha / Bravo): ordered to their stations (N · FOCUS), both pairs
+// stayed glued behind the marine at the insertion. The squad anti-stacking pass
+// pushed each member away from the player on the side it already stood, so a
+// pair spawned behind him could never pass, and the split tasks never started.
+test('alpha-bravo: a pair ordered to its station walks past the marine standing at the insertion', async () => {
+  const { host, prepare, tick } = await import('./engine-host-v188.mjs');
+  const { GameEngine } = await import('../src/game-production-runtime.js');
+  const { ENEMIES, WEAPONS, LEVEL_SEEDS, CREW } = await import('../src/content.js');
+  const { buildMissionLevelV52 } = await import('../src/mission-levels-v52.js');
+  const entry = campaign('special-alpha-bravo-doctrine'), world = worldOf(entry), browser = host();
+  const missionLevel = buildMissionLevelV52({ campaign: entry, world, levelSeeds: LEVEL_SEEDS, variant: 0 });
+  const crew = CREW.slice(0, 4).map(member => ({ ...structuredClone(member), status: 'active', health: 100, fatigue: 0, stress: 0 }));
+  const engine = new GameEngine(browser.canvas, { onEvent: () => {} });
+  engine.start({ world, campaign: entry, weapon: WEAPONS[0], enemyCatalog: ENEMIES, equipment: [], crew,
+    seed: missionLevel.levelSeed.seed, levelSeed: missionLevel.levelSeed, missionLevel });
+  await prepare(engine);
+  engine.enemies = []; engine.hazards = [];
+  const routed = engine.squadActors.filter(actor => actor !== engine.player && engine.alphaBravoTeamForActorV69(actor));
+  assert.ok(routed.length >= 3, 'AI marines of both pairs deployed behind the marine');
+  assert.ok(routed.every(actor => actor.x < engine.player.x), 'they start behind him');
+  const playerX = engine.player.x;
+  for (const team of ['alpha', 'bravo']) { engine.selectAlphaBravoFireteamV69(team); assert.equal(engine.issueAlphaBravoOrderV69('focus'), true); }
+  tick(engine, 6);
+  assert.ok(Math.abs(engine.player.x - playerX) < 1, 'the marine did not move (declared: no input)');
+  for (const member of routed) assert.ok(member.x > playerX + 150, `${engine.alphaBravoTeamForActorV69(member)} member walked past the marine (x=${Math.round(member.x)})`);
+});
