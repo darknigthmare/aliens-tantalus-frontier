@@ -35,7 +35,9 @@ export function biomeLabelV188(biome) {
 export const FAILURE_REASON_LABELS_V188 = Object.freeze({
   'escouade-neutralisee': 'escouade neutralisée', 'marine-a-terre': 'marine à terre',
   'quarantine-time-expired': 'délai de quarantaine écoulé', 'capture-target-killed': 'spécimen à capturer abattu',
-  'time-expired': 'délai écoulé', 'specimen-killed': 'spécimen abattu'
+  'time-expired': 'délai écoulé', 'specimen-killed': 'spécimen abattu',
+  // Cargo brutal (P2 text pass, 2026-11-15): the overlay showed the id, or « échec ».
+  'p-5000-loader-détruit': 'P-5000 détruit', 'convoi-survivants-perdu': 'convoi de survivants perdu'
 });
 export function missionFailureLabelV188(reason) {
   const raw = String(reason ?? '').trim();
@@ -160,4 +162,58 @@ export function missionLevelLogLineV188(event = {}, { collectables = [], routes 
       return `HOLDOUT TERMINÉ · ${up(levelTimerLabelV188(event.timerId))} DÉVERROUILLÉE`;
     default: return null;
   }
+}
+
+// Survival V70 mission log (P2 text pass, 2026-11-15). The line used to print
+// the event type or a room, door, circuit or reason id (POWER-ROUTED,
+// SHIP-EXTRACTION, ACID-PERSISTED, OUTER-AIRLOCK, CHECKPOINT-RESTART). Ids stay
+// in the events and the operation flags; the wording below is [PROPOSÉ].
+export const SURVIVAL_ROOM_LABELS_V188 = Object.freeze({
+  'ship-docking': 'quai d’amarrage', 'ship-cargo': 'soute', 'ship-engineering': 'salle des machines',
+  'ship-habitation': 'habitat', 'ship-command': 'passerelle', 'ship-extraction': 'sas d’extraction', 'ship-exterior': 'extérieur'
+});
+export const SURVIVAL_DOOR_LABELS_V188 = Object.freeze({
+  'dock-bulkhead': 'cloison du quai', 'cargo-bulkhead': 'cloison de la soute', 'aft-bulkhead': 'cloison arrière', 'outer-airlock': 'sas extérieur'
+});
+export const SURVIVAL_CIRCUIT_LABELS_V188 = Object.freeze({ 'life-support': 'survie', security: 'sécurité', cctv: 'CCTV' });
+export const SURVIVAL_REASON_LABELS_V188 = Object.freeze({
+  'checkpoint-restart': 'reprise au checkpoint', 'user-cancelled': 'annulée', 'actor-unavailable': 'opérateur indisponible',
+  'out-of-range': 'hors de portée', 'damage-interrupted': 'dégâts reçus', 'movement-interrupted': 'déplacement',
+  'self-destruct-expired': 'autodestruction écoulée'
+});
+const pickV188 = (table, id, fallback) => Object.hasOwn(table, String(id ?? '')) ? table[String(id)] : fallback;
+export function alienSurvivalLogLineV188(event = {}) {
+  const up = text => String(text).toUpperCase();
+  const room = id => up(pickV188(SURVIVAL_ROOM_LABELS_V188, id, 'compartiment'));
+  const door = id => up(pickV188(SURVIVAL_DOOR_LABELS_V188, id, 'porte'));
+  const remaining = Number(event.remainingSeconds ?? event.remaining);
+  const countdown = Number.isFinite(remaining) ? ` · T−${Math.max(0, Math.ceil(remaining))} S` : '';
+  const type = String(event.type || '').replace(/^alien-survival-/, '');
+  const line = (() => {
+    switch (type) {
+      case 'started': return 'SYSTÈMES DE SURVIE EN LIGNE';
+      case 'insertion-secured': return 'INSERTION SÉCURISÉE';
+      case 'welding-kit': return 'KIT DE SOUDURE RÉCUPÉRÉ';
+      case 'power-routed': return event.circuitId
+        ? `CIRCUIT ${up(pickV188(SURVIVAL_CIRCUIT_LABELS_V188, event.circuitId, 'auxiliaire'))} ${event.enabled === false ? 'COUPÉ' : 'ALIMENTÉ'}`
+        : 'PUISSANCE RÉPARTIE';
+      case 'cctv-opened': return event.feedId ? `CCTV OUVERTE · ${room(event.feedId)}` : 'CCTV OUVERTE';
+      case 'cctv-feed-visited': return `CAMÉRA CONSULTÉE · ${room(event.feedId)}`;
+      case 'cctv-closed': return 'CCTV FERMÉE';
+      case 'weld-started': return `SOUDURE ENGAGÉE · ${door(event.doorId)}`;
+      case 'weld-cancelled': return `SOUDURE INTERROMPUE · ${up(pickV188(SURVIVAL_REASON_LABELS_V188, event.reason, 'interruption'))}`;
+      case 'door-welded': return `PORTE SOUDÉE · ${door(event.doorId)}`;
+      case 'pressure-equalized': return `PRESSION ÉGALISÉE · ${door(event.doorId)}`;
+      case 'airlock-cycled': return `CYCLE DU SAS · ${door(event.doorId)}`;
+      case 'acid-created': return `ACIDE AU SOL · ${room(event.roomId)}`;
+      case 'acid-persisted': return 'L’ACIDE RONGE TOUJOURS LE PONT';
+      case 'weld-corroded': return `SOUDURE RONGÉE · ${door(event.doorId)}`;
+      case 'self-destruct-authorized': return 'AUTORISATION D’AUTODESTRUCTION ACCORDÉE';
+      case 'self-destruct-armed': return 'AUTODESTRUCTION ARMÉE';
+      case 'self-destruct-tick': return 'AUTODESTRUCTION';
+      case 'self-destruct-expired': return 'AUTODESTRUCTION ÉCOULÉE';
+      default: return 'SYSTÈMES ACTUALISÉS';
+    }
+  })();
+  return `SURVIE · ${line}${countdown}`;
 }

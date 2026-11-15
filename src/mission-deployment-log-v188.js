@@ -13,5 +13,6 @@ export function missionDeploymentLogV188(engine, allies) {
   const count = Math.max(0, Number(allies) || 0);
   // Owner decision (2026-11-15): the chapter is solo; no AI squad is deployed.
   if (engine?.isHiveMissionV131?.() && engine.hiveV131?.operationId === 'jeri-false-son') return 'JERI EN INFILTRATION SOLO · aucun marine IA déployé';
-  return `ESCOUADE DÉPLOYÉE · ${count} alliés IA physiques · ${engine?.spriteRuntime?.report?.sheets || 0} plaques animées`;
+  // P2 text pass (2026-11-15): the line no longer prints the sprite-sheet count.
+  return count === 0 ? 'ESCOUADE DÉPLOYÉE · aucun allié IA physique' : count === 1 ? 'ESCOUADE DÉPLOYÉE · 1 allié IA physique' : `ESCOUADE DÉPLOYÉE · ${count} alliés IA physiques`;
 }

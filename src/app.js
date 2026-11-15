@@ -41,7 +41,7 @@ import { projectRefugeHubSaveV87 } from './refuge-save-v87.js';
 import { validateShipPortDepartureV87 } from './ship-port-state-v87.js';
 import { PlaceablesDockV86 } from './placeables-ui-v86.js';
 import { resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
-import { squadActionLabelV188, biomeLabelV188, missionFailureLabelV188, checkpointLabelV188, missionLevelLogLineV188,
+import { squadActionLabelV188, biomeLabelV188, missionFailureLabelV188, checkpointLabelV188, missionLevelLogLineV188, alienSurvivalLogLineV188,
   objectiveActionLabelV188, insertionPhaseLabelV188 } from './mission-log-labels-v188.js';
 import { paidRewardsV188, paidRewardsLineV188, strategyLogTitleV188 } from './mission-debrief-v188.js';
 import { commitCrewTransactionV85 } from './crew-transactions-v85.js';
@@ -215,13 +215,8 @@ const ALIEN_SURVIVAL_PERSISTENT_EVENTS_V70 = new Set([
 ]);
 const isAlienSurvivalRuntimeEventV70 = (event) => typeof event?.type === 'string'
   && event.type.startsWith('alien-survival-');
-const alienSurvivalEventLabelV70 = (event) => {
-  const detail = event.message || event.reason || event.circuitId || event.feedId
-    || event.doorId || event.stationId || event.type.replace('alien-survival-', '');
-  const remaining = Number(event.remainingSeconds ?? event.remaining);
-  const countdown = Number.isFinite(remaining) ? ` · T−${Math.max(0, Math.ceil(remaining))} S` : '';
-  return `SURVIE · ${String(detail || 'SYSTÈMES ACTUALISÉS').toUpperCase()}${countdown}`;
-};
+// V188: player words only (mission-log-labels-v188.js); ids stay in the flags.
+const alienSurvivalEventLabelV70 = (event) => alienSurvivalLogLineV188(event);
 const persistentStorageV78 = (() => {
   try { if (globalThis.localStorage) return globalThis.localStorage; } catch { /* Present a recovery screen, never claim volatile memory is a saved profile. */ }
   const unavailable = () => { throw new Error('Stockage local inaccessible.'); };

@@ -328,3 +328,65 @@ test('Q38: pair-030-mire pays the research its brief announces (+8), not +15; co
   const frontier = await settle('pair-030-frontier', { completed: ['pair-030-mire'] });
   assert.equal(frontier.paid.research, frontier.brief.reward.research);
 });
+
+// ---------------------------------------------------------------- item 5
+async function english() {
+  const catalog = await import('../src/i18n-en-catalog-v185.js');
+  const { autoTranslateV185, useCatalogV185 } = await import('../src/i18n-auto-v185.js');
+  const { setLanguageV185 } = await import('../src/i18n-v185.js');
+  useCatalogV185(catalog);
+  setLanguageV185('en', { document: null, storage: null, persist: false });
+  return text => autoTranslateV185(text);
+}
+const RAW_IDS = /POWER-ROUTED|SHIP-EXTRACTION|ACID-PERSISTED|OUTER-AIRLOCK|CHECKPOINT-RESTART|[A-Z]+-[A-Z]+-[A-Z]+/;
+test('survival log: no raw ids; French and English lines', async () => {
+  const { alienSurvivalLogLineV188 } = await import('../src/mission-log-labels-v188.js');
+  const en = await english();
+  const cases = [
+    [{ type: 'alien-survival-power-routed', circuitId: 'life-support', enabled: true }, 'SURVIE · CIRCUIT SURVIE ALIMENTÉ', 'SURVIVAL · LIFE SUPPORT CIRCUIT POWERED'],
+    [{ type: 'alien-survival-power-routed', preset: ['security'] }, 'SURVIE · PUISSANCE RÉPARTIE', 'SURVIVAL · POWER DISTRIBUTED'],
+    [{ type: 'alien-survival-cctv-feed-visited', feedId: 'ship-extraction' }, 'SURVIE · CAMÉRA CONSULTÉE · SAS D’EXTRACTION', 'SURVIVAL · CAMERA CHECKED · EXTRACTION AIRLOCK'],
+    [{ type: 'alien-survival-acid-persisted', poolId: 'acid-3' }, 'SURVIE · L’ACIDE RONGE TOUJOURS LE PONT', 'SURVIVAL · THE ACID IS STILL EATING THE DECK'],
+    [{ type: 'alien-survival-airlock-cycled', doorId: 'outer-airlock' }, 'SURVIE · CYCLE DU SAS · SAS EXTÉRIEUR', 'SURVIVAL · AIRLOCK CYCLE · OUTER AIRLOCK'],
+    [{ type: 'alien-survival-weld-cancelled', doorId: 'aft-bulkhead', reason: 'checkpoint-restart' }, 'SURVIE · SOUDURE INTERROMPUE · REPRISE AU CHECKPOINT', 'SURVIVAL · WELD INTERRUPTED · CHECKPOINT RESTART'],
+    [{ type: 'alien-survival-self-destruct-tick', remainingSeconds: 41.2 }, 'SURVIE · AUTODESTRUCTION · T−42 S', 'SURVIVAL · SELF-DESTRUCT · T−42 S'],
+    [{ type: 'alien-survival-unknown-v999', message: 'X-Y-Z' }, 'SURVIE · SYSTÈMES ACTUALISÉS', 'SURVIVAL · SYSTEMS UPDATED']
+  ];
+  for (const [event, fr, english] of cases) {
+    const line = alienSurvivalLogLineV188(event);
+    assert.equal(line, fr); assert.doesNotMatch(line, RAW_IDS);
+    assert.equal(en(line), english);
+  }
+  assert.match(source('src/app.js'), /const alienSurvivalEventLabelV70 = \(event\) => alienSurvivalLogLineV188\(event\);/);
+});
+
+test('failure labels and the failure overlay name things, not ids (FR/EN)', async () => {
+  const { missionFailureLabelV188 } = await import('../src/mission-log-labels-v188.js');
+  const en = await english();
+  assert.equal(missionFailureLabelV188('p-5000-loader-détruit'), 'P-5000 détruit');
+  assert.equal(missionFailureLabelV188('convoi-survivants-perdu'), 'convoi de survivants perdu');
+  assert.equal(en('OPÉRATION COMPROMISE · convoi de survivants perdu · reprenez au checkpoint ou battez en retraite.'),
+    'OPERATION COMPROMISED · survivor convoy lost · resume from the checkpoint or retreat.');
+  const { engine, text } = await launch('pair-001-mire', { keepEnemies: false });
+  engine.failMission('escouade-neutralisee');
+  text.length = 0; engine.drawStateOverlay(engine.ctx || engine.canvas.getContext('2d'));
+  const line = text.find(entry => entry.startsWith('ENTRÉE'));
+  assert.equal(line, 'ENTRÉE · reprendre au checkpoint d’insertion');
+  assert.equal(en(line), 'ENTER · resume at checkpoint insertion');
+});
+
+test('English leftovers: waves, leaving the P-5000, the generic squad line without a sprite count', async () => {
+  const { missionDeploymentLogV188 } = await import('../src/mission-deployment-log-v188.js');
+  const en = await english();
+  assert.equal(en('ZONE 12s · VAGUES 2/2'), 'ZONE 12s · WAVES 2/2');
+  assert.equal(en('V  QUITTER P-5000'), 'V  LEAVE P-5000');
+  const { engine } = await launch('pair-001-mire', { keepEnemies: false });
+  for (const [count, fr, english] of [[0, 'ESCOUADE DÉPLOYÉE · aucun allié IA physique', 'SQUAD DEPLOYED · no physical AI ally'],
+    [1, 'ESCOUADE DÉPLOYÉE · 1 allié IA physique', 'SQUAD DEPLOYED · 1 physical AI ally'],
+    [3, 'ESCOUADE DÉPLOYÉE · 3 alliés IA physiques', 'SQUAD DEPLOYED · 3 physical AI allies']]) {
+    const line = missionDeploymentLogV188(engine, count);
+    assert.equal(line, fr); assert.doesNotMatch(line, /plaques/); assert.equal(en(line), english);
+  }
+  assert.equal(en('CHECKPOINT CHARGEUR P-5000 SÉCURISÉ.'), 'CHECKPOINT P-5000 LOADER SECURED.');
+  assert.equal(en('REPRISE CHECKPOINT PASSERELLE D’EXTRACTION · pénalité de récupération appliquée.'), 'CHECKPOINT EXTRACTION WALKWAY RESUME · recovery penalty applied.');
+});
