@@ -4371,9 +4371,10 @@ Le directeur passe par trois phases :
 
 - les patrouilles éveillées partent à au moins **900 px** du point d'insertion (environ 17,6 m à 51 px/m) ; le nœud de départ est conservé au-delà de 900 + **100 px** de marge pour l'écart de patrouille. Les vagues différées restent sur leur nœud ;
 - pendant les **4 s** de mission qui suivent la prise de contrôle, aucun ennemi n'attaque ni ne réduit la distance. Le directeur de horde ne prévient jamais avant 45 s : aucune vague ne tombe dans cet intervalle ;
-- portée : missions génériques et missions de mode. Les chapitres d'histoire (QZ-17, QZ-18, convoi APC, C-12, Cocon noir), les essais de la Forge et les missions reprises gardent leurs rencontres et positions écrites.
+- portée : missions génériques et missions de mode. Les chapitres d'histoire (QZ-17, QZ-18, convoi APC, C-12, Cocon noir), les essais de la Forge et les missions reprises gardent leurs rencontres et positions écrites ;
+- **QZ-17 : délai de grâce seul, sans déplacement (décision du propriétaire, 2026-11-15).** Les patrouilles de `special-narrative-qz17` gardent leurs positions écrites (pas de placement à 900 px), mais les 4 s de grâce s'appliquent : aucun ennemi n'attaque ni ne réduit la distance, et un tir lancé pendant ces 4 s est retenu. Mesure d'un marine immobile, moteur de production en Node, niveaux 0/1/2 : premier dégât à 1,02 / 3,62 / 2,88 s avant, 5,43 / 7,48 / 6,75 s après. QZ-18, convoi APC, C-12 et Cocon noir restent entièrement exclus (ni placement ni grâce).
 
-Code : `src/insertion-safe-zone-v188.js` et `compileMissionLevelActors` (`src/game-v52-level-runtime.js`). Test : `scripts/verify-bugfix-insertion-v188.mjs`.
+Code : `src/insertion-safe-zone-v188.js` (gardes `insertionSafeZoneAppliesV188` pour le placement et `insertionGraceAppliesV188` pour la grâce) et `compileMissionLevelActors` (`src/game-v52-level-runtime.js`). Tests : `scripts/verify-bugfix-insertion-v188.mjs`, `scripts/verify-bugfix-decisions-v188.mjs`.
 
 **Escouade du « Faux fils » (vérification, 2026-11-14).** §15.7 (ligne 3.2) fait jouer Jeri, synthétique en infiltration chimique, sans parler d'escouade ni la déclarer solo. L'escouade sélectionnée reste donc déployée en appui ; le journal de mission annonce désormais « JERI EN INFILTRATION · N marines IA en appui » au lieu de « ESCOUADE DÉPLOYÉE ». À trancher si le chapitre doit devenir solo.
 

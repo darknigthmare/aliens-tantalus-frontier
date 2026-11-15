@@ -82,7 +82,9 @@ test('story chapters and resumed missions keep their authored encounters (QZ-17,
   for (const id of ['special-narrative-qz17', 'special-archive-relay', 'special-apc-convoy', 'special-c12-horde', 'special-black-cocoon'])
     assert.ok(INSERTION_SAFE_ZONE_EXCLUDED_V188.includes(id), id);
   const { engine } = await launch('special-narrative-qz17');
-  assert.equal(engine.insertionSafeZoneV188, null); assert.equal(engine.insertionGraceV188, null);
+  // Owner decision 2026-11-15: QZ-17 keeps its positions but receives the grace
+  // (scripts/verify-bugfix-decisions-v188.mjs item 1).
+  assert.equal(engine.insertionSafeZoneV188, null); assert.ok(engine.insertionGraceV188);
   assert.ok(awake(engine).some(enemy => distance(enemy, engine.player) < INSERTION_SAFE_ZONE_V188.radius),
     'the QZ-17 hold keeps its authored patrol positions');
   // A resume restores the saved positions and pressure: no grace is added.
