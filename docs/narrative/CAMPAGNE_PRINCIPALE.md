@@ -1497,6 +1497,8 @@ Lieu : monde forestier pâle, presque sans vent. Une base Hyperdyne / W-Y a reli
 | 3.3 | Principale | **HUSH-6** | Récupérer la mémoire locale HUSH-6 : l'enregistrement de la mise en service d'Éloïse et l'ordre qui l'a reliée à la ruche. | `recover black-box data` | Mémoire synthétique. | **Éloïse** (station HUSH-6) | 25 min |
 | 3.4 | Finale | **La reine sans couronne** | Résoudre les trois pylônes (Mémoire, Douleur, Chœur), affronter le Chasseur de Mères, puis choisir la conclusion. | `seal the hive` | Synthétique-ruche, choix moral. | **Éloïse · la reine sans couronne** (pylônes, Chœur, carte mutable, quatre fins existantes) | 60 min |
 
+**« Le faux fils » est solo (décision du propriétaire, 2026-11-15).** Jeri infiltre seul la ruche : aucun marine IA n'est déployé et le reste de l'escouade attend au Tantalus sans fatigue ni blessure. Les objectifs (pupitre, inspections Ouvrier/Nourrice, sauvetage du captif, SAINT, inspection royale, extraction) reposent tous sur les actions de Jeri et ne supposaient aucun allié. Code : `isSoloSpecialOperationV131` (`src/special-operations-v131.js`) et `configureMissionSquad` (`src/hive-missions-v131.js`). Voir §56.4.
+
 **Annexes de l'arc 3**
 
 | ID | Titre | Donneur | Résumé | Ancrage Alien |
@@ -4376,7 +4378,7 @@ Le directeur passe par trois phases :
 
 Code : `src/insertion-safe-zone-v188.js` (gardes `insertionSafeZoneAppliesV188` pour le placement et `insertionGraceAppliesV188` pour la grâce) et `compileMissionLevelActors` (`src/game-v52-level-runtime.js`). Tests : `scripts/verify-bugfix-insertion-v188.mjs`, `scripts/verify-bugfix-decisions-v188.mjs`.
 
-**Escouade du « Faux fils » (vérification, 2026-11-14).** §15.7 (ligne 3.2) fait jouer Jeri, synthétique en infiltration chimique, sans parler d'escouade ni la déclarer solo. L'escouade sélectionnée reste donc déployée en appui ; le journal de mission annonce désormais « JERI EN INFILTRATION · N marines IA en appui » au lieu de « ESCOUADE DÉPLOYÉE ». À trancher si le chapitre doit devenir solo.
+**Escouade du « Faux fils » (décision du propriétaire, 2026-11-15).** §15.7 (ligne 3.2) fait jouer Jeri, synthétique en infiltration chimique. Le chapitre est désormais **solo** : aucun marine IA n'est déployé, la sélection d'escouade est gelée à un opérateur comme pour les autres opérations solo, le plan opérationnel affiche « Infiltration solo » et le journal de mission annonce « JERI EN INFILTRATION SOLO · aucun marine IA déployé ». Aucun objectif de la ruche ne supposait d'allié. Les autres chapitres de ruche (A.T.A.X.-Q, Éloïse) gardent l'escouade sélectionnée. Équilibrage de SAINT sans appui : à confirmer en test de jeu.
 
 **Répliques réactives (§53.6).** Les déclencheurs sont une mission ratée, un colon mort et un retour blessé. Il y a une réplique par déclencheur et par profil (humain et synthétique), en français et en anglais. La même réplique ne se répète pas pendant 3 jours de jeu.
 

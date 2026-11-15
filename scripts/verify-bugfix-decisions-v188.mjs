@@ -61,3 +61,54 @@ test('QZ-18, APC, C-12 and black cocoon stay fully excluded (no move, no grace)'
   assert.equal(insertionGraceAppliesV188({ missionLevel, campaign: { id: 'special-narrative-qz17' }, forgePlaytest: true }), false);
   assert.match(source('docs/narrative/CAMPAGNE_PRINCIPALE.md'), /QZ-17[^\n]*délai de grâce[^\n]*sans déplacement/);
 });
+
+// ---------------------------------------------------------------- item 2
+async function hive(id, crewSize = 4) {
+  const { HIVE_CAMPAIGNS_V131, buildHiveMissionV131 } = await import('../src/hive-missions-v131.js');
+  const { createDefaultSave } = await import('../src/save.js');
+  const entry = HIVE_CAMPAIGNS_V131.find(c => c.id === id), world = worldOf(entry);
+  // Fixture: the default save's first crew members, active (fixture() drops the squad;
+  // configureMissionSquad() rebuilds it as start() builds it).
+  const crew = createDefaultSave(1).crew.slice(0, crewSize).map(member => ({ ...member, status: 'active' }));
+  const result = await fixture({ campaign: entry, seed: 7, keepEnemies: true,
+    options: { world, crew, levelSeeds: LEVEL_SEEDS, missionLevel: buildHiveMissionV131({ campaign: entry, world, levelSeeds: LEVEL_SEEDS, variant: 0 }) } });
+  result.engine.configureMissionSquad();
+  return { ...result, entry, world };
+}
+test('Jeri (hive): solo operation, no AI squad deployed even with a four-marine crew; other hive chapters keep theirs', async () => {
+  const { isSoloSpecialOperationV131 } = await import('../src/special-operations-v131.js');
+  const { missionDeploymentLogV188 } = await import('../src/mission-deployment-log-v188.js');
+  assert.equal(isSoloSpecialOperationV131('special-jeri-v131'), true);
+  assert.equal(isSoloSpecialOperationV131('special-atax-v131'), false);
+  const jeri = await hive('special-jeri-v131');
+  assert.equal(jeri.engine.activeSquadActors().length, 0, 'Jeri infiltrates alone');
+  assert.equal(jeri.engine.squadTelemetry.configured, 0);
+  assert.equal(missionDeploymentLogV188(jeri.engine, 0), 'JERI EN INFILTRATION SOLO · aucun marine IA déployé');
+  const atax = await hive('special-atax-v131');
+  assert.ok(atax.engine.activeSquadActors().length > 0, 'A.T.A.X.-Q keeps the selected squad');
+});
+
+test('Jeri (hive): the operation brief freezes one operator; briefing and log say solo (FR/EN)', async () => {
+  const { createDefaultSave, getOperationBrief } = await import('../src/save.js');
+  const { JERI_SOLO_BRIEFING_V188 } = await import('../src/mission-deployment-log-v188.js');
+  const { EN_CATALOG_V185 } = await import('../src/i18n-en-catalog-v185.js');
+  const { HIVE_CAMPAIGNS_V131 } = await import('../src/hive-missions-v131.js');
+  const save = createDefaultSave(1), entry = HIVE_CAMPAIGNS_V131.find(c => c.id === 'special-jeri-v131');
+  save.strategy.selectedCrewIds = save.crew.slice(0, 4).map(member => member.id);
+  for (const member of save.crew.slice(0, 4)) member.status = 'active';
+  const brief = getOperationBrief(save, entry, worldOf(entry));
+  assert.equal(brief.crewIds.length, 1, 'one operator, the others stay aboard the Tantalus');
+  assert.match(JERI_SOLO_BRIEFING_V188, /Infiltration solo/);
+  assert.match(source('src/app.js'), /specialOperation\?\.id === 'jeri-false-son'\s*\?\s*escapeHtml\(JERI_SOLO_BRIEFING_V188\)/);
+  assert.ok(EN_CATALOG_V185[JERI_SOLO_BRIEFING_V188], 'briefing EN');
+  assert.ok(EN_CATALOG_V185['JERI EN INFILTRATION SOLO · aucun marine IA déployé'], 'log EN');
+  const bible = source('docs/narrative/CAMPAGNE_PRINCIPALE.md');
+  assert.match(bible, /« Le faux fils » est solo \(décision du propriétaire, 2026-11-15\)/);
+  assert.match(bible, /Escouade du « Faux fils » \(décision du propriétaire, 2026-11-15\)/);
+});
+
+test('Jeri (hive): no hive objective needs an ally (objectives are the hive state, set by Jeri alone)', async () => {
+  const { engine } = await hive('special-jeri-v131');
+  assert.deepEqual(Object.keys(engine.mission.objectives).sort(), ['archive', 'boss', 'extract', 'power', 'route']);
+  assert.doesNotMatch(source('src/hive-control-v131.js'), /squad|ally|allié/i);
+});

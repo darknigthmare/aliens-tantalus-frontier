@@ -95,11 +95,13 @@ test('story chapters and resumed missions keep their authored encounters (QZ-17,
 });
 
 // ---------------------------------------------------------------- item 2
-test('Jeri (hive): the squad stays deployed and the mission log says what is true for that mission (FR/EN)', async () => {
+// Owner decision 2026-11-15 reversed the « squad in support » reading: the chapter
+// is solo (full checks in scripts/verify-bugfix-decisions-v188.mjs item 2).
+test('Jeri (hive): solo, no AI squad, and the mission log says so (FR/EN)', async () => {
   const { missionDeploymentLogV188 } = await import('../src/mission-deployment-log-v188.js');
   const { HIVE_CAMPAIGNS_V131, buildHiveMissionV131 } = await import('../src/hive-missions-v131.js');
   const { createDefaultSave } = await import('../src/save.js');
-  const { EN_CATALOG_V185, EN_PATTERNS_V185 } = await import('../src/i18n-en-catalog-v185.js');
+  const { EN_CATALOG_V185 } = await import('../src/i18n-en-catalog-v185.js');
   const { readFileSync } = await import('node:fs');
   const entry = HIVE_CAMPAIGNS_V131.find(c => c.id === 'special-jeri-v131'), world = worldOf(entry);
   // Fixture: the default save's first four crew members, active (fixture() drops the squad; it is rebuilt as start() builds it).
@@ -108,15 +110,11 @@ test('Jeri (hive): the squad stays deployed and the mission log says what is tru
     options: { world, crew, levelSeeds: LEVEL_SEEDS, missionLevel: buildHiveMissionV131({ campaign: entry, world, levelSeeds: LEVEL_SEEDS, variant: 0 }) } });
   engine.configureMissionSquad();
   const allies = engine.activeSquadActors();
-  assert.equal(allies.length, 3, 'the selected marines are deployed with Jeri');
-  assert.ok(allies.every(ally => ally.alive && Math.abs(ally.x - engine.player.x) < 200), 'beside the insertion point');
+  assert.equal(allies.length, 0, 'Jeri infiltrates alone');
   const line = missionDeploymentLogV188(engine, allies.length);
-  assert.equal(line, 'JERI EN INFILTRATION · 3 marines IA en appui');
+  assert.equal(line, 'JERI EN INFILTRATION SOLO · aucun marine IA déployé');
   assert.doesNotMatch(line, /ESCOUADE DÉPLOYÉE|plaques/);
-  assert.equal(missionDeploymentLogV188(engine, 1), 'JERI EN INFILTRATION · 1 marine IA en appui');
-  assert.equal(missionDeploymentLogV188(engine, 0), 'JERI EN INFILTRATION · aucun marine en appui');
-  assert.equal(EN_PATTERNS_V185['JERI EN INFILTRATION · {0} marines IA en appui'], 'JERI INFILTRATING · {0} AI marines in support');
-  assert.ok(EN_CATALOG_V185['JERI EN INFILTRATION · 1 marine IA en appui'] && EN_CATALOG_V185['JERI EN INFILTRATION · aucun marine en appui']);
+  assert.ok(EN_CATALOG_V185[line]);
   // Other missions keep their line; the app writes the line through this function.
   const generic = await launch('pair-001-mire');
   assert.match(missionDeploymentLogV188(generic.engine, 2), /^ESCOUADE DÉPLOYÉE · 2 alliés IA physiques/);
