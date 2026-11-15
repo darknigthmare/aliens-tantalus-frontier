@@ -120,7 +120,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "328c764b2bf467d0bc21ae86abf415a7722bd0a88cba486eb2167c22fa8f0b84",
-    "currentSha256": "20b011ea2c11d8272e034290b8c6439cbeb5f2d93bd69b1f1b1bfad5119934cd"
+    "currentSha256": "d42810c09891ded50213fb441f9a9db6a5a430cfe691448531fdc27c06f561f7"
   },
   "src/alien-survival-runtime-v70.js": {
     "previousSha256": "65d5c0c4ca446021b6ff58ed6be61fc622c0908ede9d9d74b730fa0efef2fd93",
