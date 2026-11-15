@@ -46,7 +46,7 @@ import { PlaceablesDockV86 } from './placeables-ui-v86.js';
 import { resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
 import { squadActionLabelV188, biomeLabelV188, missionFailureLabelV188, checkpointLabelV188, missionLevelLogLineV188, alienSurvivalLogLineV188,
   objectiveActionLabelV188, insertionPhaseLabelV188 } from './mission-log-labels-v188.js';
-import { paidRewardsV188, paidRewardsLineV188, strategyLogTitleV188 } from './mission-debrief-v188.js';
+import { paidRewardsV188, paidRewardsLineV188, strategyLogTitleV188, rebindDeploymentOperationV188 } from './mission-debrief-v188.js';
 import { commitCrewTransactionV85 } from './crew-transactions-v85.js';
 import { rememberCrewConversationTopicV135 } from './crew-conversation-memory-v135.js';
 import { createFieldMediaRepositoryV135 } from './field-media-v135.js';
@@ -3099,6 +3099,11 @@ function launchCampaign(campaign = null) {
     return false;
   }
   simulateElapsed(before);
+  // V188: advanceGalaxy rebuilds the save root in place, so the operation
+  // returned by beginOperation is detached once deployment time elapses. Bind
+  // the live record: the level seed, template and signature written below are
+  // what resume and the V131 completion receipt read back.
+  deployment = rebindDeploymentOperationV188(deployment, saveSystem.data);
   const operationLoadout = resolveOperationDeployment(saveSystem.data, {
     crewCatalog: CREW,
     weaponCatalog: WEAPONS,
