@@ -43,3 +43,31 @@ test('launch: the level signature is written on the live operation after deploym
   const assign = body.indexOf('Object.assign(deployment.operation');
   assert.ok(elapsed >= 0 && rebind > elapsed && assign > rebind, 'launchCampaign rebinds between the clock step and the signature write');
 });
+
+// P1 (Ruche-Monde, Reine-Mère, Pangaea): the HUD headline drew the internal phase
+// id (« ORGANS », « NUCLEUS-1 ») in both languages, and in English the whole
+// line stayed French because the joined text had no catalog entry.
+test('ecosystem HUD: the headline names the phase and reads in English', async () => {
+  const { host, prepare } = await import('./engine-host-v188.mjs');
+  const { GameEngine } = await import('../src/game-production-runtime.js');
+  const { ENEMIES, WEAPONS, LEVEL_SEEDS } = await import('../src/content.js');
+  const { buildEcosystemMissionV131 } = await import('../src/ecosystem-missions-v131.js');
+  const { setLanguageV185 } = await import('../src/i18n-v185.js');
+  await (await import('../src/i18n-auto-v185.js')).loadCatalogV185();
+  const entry = campaign('special-hive-world-v131'), world = worldOf(entry), browser = host();
+  const missionLevel = buildEcosystemMissionV131({ campaign: entry, world, levelSeeds: LEVEL_SEEDS, variant: 0 });
+  const engine = new GameEngine(browser.canvas, { onEvent: () => {} });
+  engine.start({ world, campaign: entry, weapon: WEAPONS[0], enemyCatalog: ENEMIES, equipment: [], crew: [],
+    seed: missionLevel.levelSeed.seed, levelSeed: missionLevel.levelSeed, missionLevel });
+  await prepare(engine);
+  const headline = () => { browser.text.length = 0; engine.drawHud(browser.ctx); return browser.text.find(line => line.startsWith('TR-0') && line.includes('%')); };
+  try {
+    setLanguageV185('fr', { document: null, storage: null, persist: false });
+    assert.equal(engine.ecosystemV131.phase, 'organs');
+    assert.match(headline(), /· ORGANES$/, 'French names the phase');
+    engine.ecosystemV131.targets.fill(true); engine.syncEcosystemV131();
+    assert.match(headline(), /· NOYAU · PHASE 1$/);
+    setLanguageV185('en', { document: null, storage: null, persist: false });
+    assert.equal(headline(), 'TR-0 · THE HIVE WORLD · PLANETARY ALERT 0% · NUCLEUS · PHASE 1');
+  } finally { setLanguageV185('fr', { document: null, storage: null, persist: false }); }
+});

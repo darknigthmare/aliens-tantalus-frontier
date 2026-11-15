@@ -4,7 +4,8 @@ import { sweepProjectileAabbV83 } from './projectile-collision-v83.js';
 import { updateEnemySupportStatusesV72 } from './gameplay-support-v72.js';
 import { ECOSYSTEM_OPERATIONS_V131, SAURIA_CASTES_V131, createEcosystemStateV131,
   validateEcosystemStateV131, advancePopulationV131, biosphereIntegrityV131,
-  ecosystemPhaseV131, ecosystemDossierV131 } from './ecosystem-systems-v131.js';
+  ecosystemPhaseV131, ecosystemDossierV131, ecosystemPhaseLabelV188 } from './ecosystem-systems-v131.js';
+import { autoTranslateV185 } from './i18n-auto-v185.js';
 
 const clone = value => structuredClone(value);
 const list = value => Array.isArray(value) ? value : [];
@@ -680,7 +681,10 @@ export function withEcosystemMissionsV131(BaseEngine) {
       super.drawHud(ctx); if (!this.isEcosystemV131()) return;
       const state = this.ecosystemV131, dossier = ecosystemDossierV131(state);
       ctx.save(); ctx.fillStyle = '#091819ed'; ctx.fillRect(18, 113, 1235, 87); ctx.fillStyle = '#d0dfd4'; ctx.font = '700 13px monospace';
-      ctx.fillText(`${dossier.title} · ${dossier.pressureLabel} ${Math.round(dossier.pressure)}% · ${state.phase.toUpperCase()}`, 30, 134);
+      // V188: each part is translated on its own (the joined line has no catalog
+      // entry) and the phase is named, not drawn as its internal id.
+      const tr = autoTranslateV185;
+      ctx.fillText(`${tr(dossier.title)} · ${tr(dossier.pressureLabel)} ${Math.round(dossier.pressure)}% · ${tr(ecosystemPhaseLabelV188(state.phase))}`, 30, 134);
       ctx.font = '11px monospace'; ctx.fillText(dossier.instruction, 30, 155);
       const extra = state.operationId === 'hive-world' ? `SAS ORBITAL : ${Math.ceil(state.collapseRemaining)} S · L’ALERTE ≥70 FERME L’ARTÈRE BASSE ; ROUTE HAUTE ACCESSIBLE`
         : state.operationId === 'queen-mother-song' ? `NURSERIE ${state.nursery.filter(Boolean).length}/3 · BALISES ${state.beacons.filter(Boolean).length}/2 · DÉFENSE ${Math.floor(state.defenceElapsed)}/22 S`

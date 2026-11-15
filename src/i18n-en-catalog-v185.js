@@ -6492,6 +6492,13 @@ export const EN_CATALOG_V185 = Object.freeze({
 "Référence visuelle à documenter ·": "Visual reference to be documented ·",
 "tire.": "fires.",
 // V188 playthrough bug hunt (reviewed through i18n-catalog-maintenance-v186).
+// V188 special-mode playthroughs (reviewed through i18n-catalog-maintenance-v186 merge).
+"CHŒURS": "CHOIRS",
+"BALISES": "BEACONS",
+"ORGANES": "ORGANS",
+"NOYAU": "NUCLEUS",
+"EFFONDREMENT": "COLLAPSE",
+"COLOSSE": "COLOSSUS",
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 // V188 systems bug hunt (merged via i18n-catalog-maintenance-v186 review).
