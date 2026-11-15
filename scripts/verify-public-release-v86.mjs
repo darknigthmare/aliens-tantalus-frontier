@@ -371,6 +371,8 @@ const FORGE_TOOLING_V140 = new Set([
   'specs/001-salles-hybrides-2d-25d/contracts/hub-depth-room.md',
   'specs/001-salles-hybrides-2d-25d/checklists/requirements.md',
   'docs/development/PRIORITIES_P0_P1_V188.md',
+  // V188 owner decision questionnaire, source-only exact path.
+  'docs/development/QUESTIONS_PROPRIETAIRE_V188.md',
   // Source-only narrative design bible; never shipped in a built distribution.
   'docs/narrative',
   'docs/narrative/CAMPAGNE_PRINCIPALE.md',
