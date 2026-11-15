@@ -197,6 +197,7 @@ const SHELL = Object.freeze([
   '/src/depth-hold-slots-v188.js',
   '/src/depth-hold-deck-v188.js',
   '/src/world-label-layout-v188.js',
+  '/src/enemy-mission-stature-v188.js',
   '/src/qz17-level-dressing-v188.js',
   '/src/hub-prologue-rooms-v188.js',
   '/src/audio-cues-v188.js',

@@ -25,11 +25,14 @@ export function getEnemyDedicatedPoseV99(source) {
   return typeof id === 'string' ? byId.get(id.split(':')[0]) || null : null;
 }
 export const isEnemyDedicatedPoseReadyV99 = isEnemyDedicatedPoseReadyV98;
-export function drawEnemyDedicatedPoseV99(ctx, actor, image) {
+export function drawEnemyDedicatedPoseV99(ctx, actor, image, { statureScale = 1 } = {}) {
   const pose = getEnemyDedicatedPoseV99(actor);
   if (!actor?.alive || !isEnemyDedicatedPoseReadyV99(image, pose)) return false;
   const human = resolveHumanPoseGeometryV133({ actor, definition: pose });
-  const { renderWidth, renderHeight, pivot } = human || pose;
+  // V188: a creature pose authored oversize is drawn at its caste's project stature (enemy-mission-stature-v188.js).
+  const k = !human && Number.isFinite(statureScale) && statureScale > 0 ? statureScale : 1;
+  const { renderWidth: baseWidth, renderHeight: baseHeight, pivot } = human || pose;
+  const renderWidth = baseWidth * k, renderHeight = baseHeight * k;
   actor.humanVisualV133 = human;
   ctx.save(); ctx.translate(actor.x + actor.w / 2, actor.y + actor.h);
   ctx.scale((actor.facing === -1 ? -1 : 1) * pose.sourceFacing, 1);
