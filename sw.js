@@ -220,6 +220,7 @@ const SHELL = Object.freeze([
   '/src/insertion-safe-zone-v188.js',
   '/src/mission-dropship-handover-v188.js',
   '/src/franchise-fidelity-v188.js',
+  '/src/gameplay-gaps-v188.js',
   '/src/level-dropship-slots-v188.js',
   '/src/mission-deployment-log-v188.js',
   '/src/mission-debrief-v188.js',

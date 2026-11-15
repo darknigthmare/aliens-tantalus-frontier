@@ -34,6 +34,8 @@ export function biomeLabelV188(biome) {
 // operation flags; only the displayed reason is replaced.
 export const FAILURE_REASON_LABELS_V188 = Object.freeze({
   'escouade-neutralisee': 'escouade neutralisée', 'marine-a-terre': 'marine à terre',
+  // V188 gameplay gaps: Alpha/Bravo, a pair can no longer complete its task even with the player standing in.
+  'paire-alpha-bravo-perdue': 'binôme Alpha/Bravo perdu, tâche impossible',
   'quarantine-time-expired': 'délai de quarantaine écoulé', 'capture-target-killed': 'spécimen à capturer abattu',
   'time-expired': 'délai écoulé', 'specimen-killed': 'spécimen abattu',
   // Cargo brutal (P2 text pass, 2026-11-15): the overlay showed the id, or « échec ».
