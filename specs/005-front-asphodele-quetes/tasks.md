@@ -30,6 +30,6 @@
 - [x] T017 QA Chromium : panneaux, quête de Rook, lancement de S1, décision CASSIUS (fixture déclarée).
 
 ## Reporté
-- Hub Asphodèle (modules, Q22-Q23), annexes et contrats de la station, salle des relais.
+- Hub Asphodèle (modules, Q22-Q23), annexes et contrats de la station, salle des relais : première version dans `specs/007-hub-asphodele/` (partielle).
 - Les 12 autres quêtes de l'équipage, vie à bord, recrues.
 - Messages en retard pendant le voyage (§13.2).

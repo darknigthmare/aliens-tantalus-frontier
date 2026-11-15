@@ -37,7 +37,7 @@ const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromi
 const context = await browser.newContext({ serviceWorkers: 'block', viewport: { width: 1440, height: 900 } });
 const page = await context.newPage(); page.setDefaultTimeout(30000);
 page.on('pageerror', error => report.pageErrors.push(error.message));
-const snap = () => page.evaluate(() => { const h = globalThis.__ATF_HUB__; const s = h.getSnapshot(); return { ...s, asph: h.isAsphodeleV188?.() || false, room: h.currentRoom?.()?.id, running: h.running, interaction: h.nearestInteraction?.()?.action || null }; });
+const snap = () => page.evaluate(() => { const h = globalThis.__ATF_HUB__; const s = h.getSnapshot(); return { ...s, asph: h.isAsphodeleV188?.() || false, room: h.currentRoom?.()?.id, running: h.running, interaction: h.echo8LockerContactV188?.()?.action || h.nearestInteraction?.()?.action || null }; });
 const stored = () => page.evaluate(() => JSON.parse(localStorage.getItem('atf-v47-profile-1')));
 const shot = async name => { const file = join(out, `${name}.png`); await page.locator('#hub-canvas').screenshot({ path: file }); report.shots.push(file); };
 async function navigate(view) {
@@ -96,7 +96,11 @@ try {
   await measure('tantalus-hangar');
   // Reach the UD-4L boarding contact (the depth hangar: step towards the camera in front of the dropship).
   // The UD-4L stands off the wall (spec 001): go round its tail, step forward, then walk in front of it.
-  s = await walkTo(250); s = await holdKey('KeyS', 380); s = await walkTo(470);
+  s = await walkTo(250);
+  await page.keyboard.down('KeyS');
+  await page.waitForFunction(() => (globalThis.__ATF_HUB__.player.depthZ || 0) <= -50, null, { timeout: 10000, polling: 'raf' }).catch(() => {});
+  await page.keyboard.up('KeyS'); await page.waitForTimeout(150);
+  s = await walkTo(470);
   check('UD-4L boarding contact reached', s.interaction === 'navigate:operations', s);
   await pressE();
   await page.locator('#hub-dialogue').waitFor({ state: 'visible' });
@@ -221,8 +225,9 @@ try {
   // —— Fixture C: Kessler's tag in Echo-8's locker (cryo bay, deck 0) ——
   await importProfile(fixture({ deck: 0, roomId: 'cryo-bay', positionX: 3920 }), 'asphodele-c.json');
   s = await snap();
-  check('cryo locker contact', s.interaction === 'story:echo8-locker' || true, s.interaction);
-  await page.evaluate(() => globalThis.__ATF_HUB__.interact()); await page.waitForTimeout(400);
+  if (s.interaction !== 'story:echo8-locker') s = await walkTo(3943); // the locker's centre (ECHO8_LOCKER_V188)
+  check('cryo locker contact', s.interaction === 'story:echo8-locker', s.interaction);
+  await page.locator('#hub-canvas').focus(); await page.keyboard.press('KeyE'); await page.waitForTimeout(500);
   const deposit = page.locator('[data-content-choice-v188="deposit"]');
   check('locker offers to place the tag', await deposit.count() === 1);
   await page.screenshot({ path: join(out, '13-locker-tag.png') }); report.shots.push(join(out, '13-locker-tag.png'));
