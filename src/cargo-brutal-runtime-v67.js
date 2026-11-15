@@ -21,6 +21,15 @@ export const CARGO_BRUTAL_STRATEGIC_BONUS_V67 = Object.freeze({ credits: 300, al
 export const CARGO_PHASE_CHECKPOINTS_V188 = Object.freeze({
   'mount-loader': 'cargo-loader', 'escort-convoy': 'cargo-escort', matriarch: 'cargo-matriarch'
 });
+// V188 owner decision Q39 (2026-11-15): softer loader phases through enemy
+// pressure only; the P-5000 itself (shared with other chapters) is unchanged.
+// [PROPOSÉ] values: while the marine works with the loader, enemy attacks come
+// `attackCadence` times slower and each convoy wave brings `waveReduction` fewer
+// creatures (at least one).
+export const CARGO_LOADER_PRESSURE_V188 = Object.freeze({
+  phases: Object.freeze(['clear-route', 'escort-convoy', 'retrieve-core', 'carry-core']),
+  attackCadence: 1.6, waveReduction: 1
+});
 /** [PROPOSÉ] Minimum P-5000 hull restored by a retry (share of the maximum). */
 export const CARGO_RETRY_MIN_HULL_V188 = 0.45;
 
@@ -938,6 +947,7 @@ export function withCargoBrutalRuntimeV67(BaseEngine) {
 
     spawnCargoWaveV67(count, tag) {
       if (!this.cargoBrutalV67 || typeof this.createEnemy !== 'function') return 0;
+      if (this.cargoLoaderPressurePhaseV188() && /^convoy-/.test(String(tag))) count = Math.max(1, count - CARGO_LOADER_PRESSURE_V188.waveReduction);
       const catalog = this.cargoBrutalEnemyCatalogV67.filter((entry) => (
         CARGO_WAVE_BIOLOGIES_V67.has(String(entry?.biology || '').toLowerCase())
         && entry?.caste !== 'royal'
@@ -1124,9 +1134,19 @@ export function withCargoBrutalRuntimeV67(BaseEngine) {
       return super.applyEnemyDamage(enemy, amount, source);
     }
 
+    cargoLoaderPressurePhaseV188() {
+      return Boolean(this.isCargoBrutalV67() && this.cargoBrutalV67 && CARGO_LOADER_PRESSURE_V188.phases.includes(this.cargoBrutalV67.phase));
+    }
+
     updateEnemy(enemy, delta) {
       if (this.isCargoBrutalV67() && enemy === this.cargoMatriarchV67 && !this.cargoBrutalV67?.matriarch.active) return;
-      return super.updateEnemy(enemy, delta);
+      if (!this.cargoLoaderPressurePhaseV188() || !enemy || enemy.isBoss) return super.updateEnemy(enemy, delta);
+      // An attack resets attackClock to its cooldown: that cooldown is stretched.
+      const before = Number(enemy.attackClock) || 0;
+      const result = super.updateEnemy(enemy, delta);
+      const after = Number(enemy.attackClock) || 0;
+      if (after > before + 1e-6 && after > 0) enemy.attackClock = after * CARGO_LOADER_PRESSURE_V188.attackCadence;
+      return result;
     }
 
     drawEnemy(ctx, enemy) {

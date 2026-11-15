@@ -260,3 +260,38 @@ test('planet-exterior: the beacon platform before the extraction walkway sets a 
   tick(engine, 1 / 60);
   assert.ok(Math.abs(p.x - engine.checkpoint.x) < 2 && p.x > 4000, `back at the walkway checkpoint (x ${Math.round(p.x)}), not at insertion`);
 });
+
+// ---------------------------------------------------------------- Q39
+// Same scripted input as the measurement: power restored, the marine seated in
+// the P-5000 at its start position, no further input; the level patrols are kept.
+async function loaderRun(variant, phase) {
+  const { engine, events } = await launch('special-cargo-brutal', { variant, keepEnemies: true });
+  engine.insertionGraceV188 = null; // Injection: the insertion grace is cleared (the phase starts later in play).
+  const state = engine.cargoBrutalV67, v = engine.vehicle;
+  state.powerRestored = true; state.loaderMounted = true; engine.powerNode.active = true;
+  state.phase = phase; engine.mission.phase = phase;
+  if (phase === 'escort-convoy') { v.x = state.convoy.x - 200; state.obstacles.forEach(entry => { entry.cleared = true; }); }
+  seat(engine);
+  if (phase === 'escort-convoy') engine.cargoBrutalInteractV67(engine.player);
+  let t = 0; while (t < 30 && !v.destroyed && engine.mission.state === 'active') { engine.update(1 / 60); t += 1 / 60; }
+  return { engine, events, t, v };
+}
+test('cargo-brutal Q39: slower enemy attacks during the loader phases; the loader lasts longer under the same input', async () => {
+  const { CARGO_LOADER_PRESSURE_V188 } = await import('../src/cargo-brutal-runtime-v67.js');
+  assert.ok(CARGO_LOADER_PRESSURE_V188.attackCadence > 1);
+  // Before: destroyed at 6.4 s (variant 1). After: 9.3 s.
+  const run = await loaderRun(1, 'clear-route');
+  assert.ok(run.t > 8.5, `loader survives past 8.5 s (${run.t.toFixed(1)} s)`);
+});
+
+test('cargo-brutal Q39: convoy waves bring one creature fewer; the P-5000 vehicle and the matriarch waves are unchanged', async () => {
+  const { events, engine } = await loaderRun(0, 'escort-convoy');
+  const start = events.find(event => event.type === 'objective-wave' && event.wave === 'convoy-start');
+  assert.equal(start?.count, 1, 'convoy-start: 2 -> 1');
+  assert.equal(engine.vehicle.maxHull, 340, 'P-5000 hull as before Q39 (vehicle untouched)');
+  engine.cargoBrutalV67.phase = 'matriarch';
+  const before = engine.enemies.length;
+  assert.equal(engine.spawnCargoWaveV67(2, 'matriarch-awakening'), 2, 'matriarch waves keep their count');
+  assert.equal(engine.enemies.length, before + 2);
+  assert.match(source('docs/narrative/CAMPAGNE_PRINCIPALE.md'), /Phases du P-5000 adoucies[^\n]*\[PROPOSÉ\]/);
+});
