@@ -11,6 +11,7 @@ import { MISSION_STRUCTURE_CROPS_V87, drawTiledMissionCropV87, drawMissionLadder
 import { getMissionStructureLayoutV87 } from './mission-structure-layout-v87.js';
 import { SPRITE_SHEETS, SPRITE_HITBOXES, SpriteAnimationController, resolveEnemyAnimation, resolveSpriteSheet, resolveVehicleAnimation, shouldFlipSprite } from './sprite-animation-runtime.js';
 import { resolveEnemyVisualProfile, resolveLegacyEnemyCell } from './enemy-visual-runtime-v53.js';
+import { missionPoseStatureScaleV188 } from './enemy-mission-stature-v188.js';
 import { getEnemyDedicatedPoseV99 as getEnemyDedicatedPoseV96, drawEnemyDedicatedPoseV99 as drawEnemyDedicatedPoseV96, isEnemyDedicatedPoseReadyV99 as isEnemyDedicatedPoseReadyV96 } from './enemy-dedicated-poses-v99.js';
 import {
   advanceEnemyMeleeAttackV64,
@@ -2411,7 +2412,7 @@ export class GameEngine {
   drawEnemy(ctx, enemy) {
     const dedicatedPose = getEnemyDedicatedPoseV96(enemy);
     if (dedicatedPose) {
-      const drawn = drawEnemyDedicatedPoseV96(ctx, enemy, this.images.get(dedicatedPose.imageKey));
+      const drawn = drawEnemyDedicatedPoseV96(ctx, enemy, this.images.get(dedicatedPose.imageKey), { statureScale: missionPoseStatureScaleV188(dedicatedPose) });
       if (drawn && (enemy.alert || enemy.isBoss)) {
         ctx.fillStyle = '#2b1616'; ctx.fillRect(enemy.x, enemy.y - 10, enemy.w, 4);
         ctx.fillStyle = enemy.isBoss ? '#d27662' : '#be5551';

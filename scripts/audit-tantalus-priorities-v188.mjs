@@ -60,7 +60,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "package.json": {
     "previousSha256": "ff133a405bfc1ef2afa7085fcb2a6cde27a9f52c4af0de5172a058b47082eb48",
-    "currentSha256": "5875993691fed306dacaceb412ce72f873829260f16bfc6aaa8ddb1333d19bd5"
+    "currentSha256": "8987be34982364a04d49f0d155328678dbb6b1d7a38209261ee137209e99b584"
   },
   "player-appearance-v126.css": {
     "previousSha256": "da7045c7fd7d41da99eecf48d316150b2d16fac276fe635bb881034bd68c9320",
@@ -124,7 +124,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "328c764b2bf467d0bc21ae86abf415a7722bd0a88cba486eb2167c22fa8f0b84",
-    "currentSha256": "f202cff75e3cfecfb10f8644bedf7d6170ad49c43731b3d824cd575bbefe97e8"
+    "currentSha256": "baa950b739177e7baac881c77b2c8fef75f944f99c5b88f053ef317d184392ed"
   },
   "src/alien-survival-runtime-v70.js": {
     "previousSha256": "65d5c0c4ca446021b6ff58ed6be61fc622c0908ede9d9d74b730fa0efef2fd93",
@@ -210,6 +210,10 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
     "previousSha256": "8ee1253920709a8d00ded0306b8937de490941a46abc718b9f0e2f89c34bb7a3",
     "currentSha256": "4e240a73054c5fefe872200f8b34a7055feff373d8f6c43b27e81d0c5ed621a3"
   },
+  "src/enemy-dedicated-poses-v99.js": {
+    "previousSha256": "2c8e366bb38b8a0e54e5376572f4fc6543ef9fd01e5ba9e0a6137a76a66e8ec5",
+    "currentSha256": "200a21a8d6939cabdca388ad23449a88e97f14589470fc3e52e1e114939d33ec"
+  },
   "src/enemy-user-campaign-runtime-v88.js": {
     "previousSha256": "3bb9a8086aba8e66f655d112a189580d541e5f287c03d9f1077c3d78d241384f",
     "currentSha256": "5732766c2b0e23ba2edd535f8c2bce9b4856cb4f8e7817da9cb686840aaf4436"
@@ -236,7 +240,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/game-production-runtime.js": {
     "previousSha256": "f0c9ff64ce004cc0dd8d028e3a62a717364fa0c1425eafb16b2ae8f808715419",
-    "currentSha256": "1936d4fcd4d723239a095fc44b388023125d466a8e8624d59946c6fc0af5dfa8"
+    "currentSha256": "381513ba02bd0364be165c53e27f94b009951b742ca315e0a87b42a6bda3c4ff"
   },
   "src/game-runtime.js": {
     "previousSha256": "9005aae32379ade306e187ea6c3d156f1a3083178bc0c0808d9963cdd6b8f379",
@@ -244,11 +248,11 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/game-v51-runtime.js": {
     "previousSha256": "50551b2f20e6fabd825ab6c6865244f2a47e77aecd337fc0d79386fdd5d4f017",
-    "currentSha256": "090d79311dfd61c77f862f452022eb3113ea28cde2edfbd92ae0d7de62b7be50"
+    "currentSha256": "8adb6bf47a43266b87227bf9539130b8dff2b8aaf09a3af59ae19cf69f188c19"
   },
   "src/game-v52-level-runtime.js": {
     "previousSha256": "f394cdc77d4684846cbfb5552ec950f4ba9948d75a09091177627ae7763112c4",
-    "currentSha256": "59743a2793745e7bf8d7ba4e53499ed29099fc9e1f1ec59d42e2eb16f3a35dfd"
+    "currentSha256": "ec3e2ecf4bdf90d9cdeaf6c432343123785376a2aedcc9be08517592fff10cf7"
   },
   "src/game-v52-runtime.js": {
     "previousSha256": "ac0049ef9ba4a732b126d2de85984e78e74a9fbef2ca36b428d0fbcf23fa821f",
@@ -265,6 +269,10 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   "src/hub-bulkhead-depth-v134.js": {
     "previousSha256": "b330fdbf92aa34f8cfb49b58a9229bdedbf4a17ec11663d9ae6e2146a1eec41b",
     "currentSha256": "7ad9e27e4623dde938aeea29272adc5a58362cdd3b5d996863430619ae8d7ff3"
+  },
+  "src/hub-circulation-v137.js": {
+    "previousSha256": "e4aecbda986750a67926449a7fd392f2845ca913383690759ad7a5e5f25ebdb9",
+    "currentSha256": "39997d5bcd4a93d9a2d23cabcf252fb6e448ca4f967f731e6073b35e0def07a1"
   },
   "src/hub-depth-presentation-v116.js": {
     "previousSha256": "a8b53d01cc99acea92544bc50ef34360b03a47e80015158a60761ae9513b1314",
@@ -382,6 +390,10 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
     "previousSha256": "afd5b289887c3a6be5d704ad9b501d9cd7bfeae4514fdfb4eaf21095e6d42304",
     "currentSha256": "534b523fde806c7ae0864ed46eb0223c4aa781b6d389a172d545e50f7563957e"
   },
+  "src/ship-port-room-v87.js": {
+    "previousSha256": "43b45bcd8e73446e7544651ba4f2e5850e0d1b5158d544438df93dd637db504c",
+    "currentSha256": "b9c82f5582f2223cb9836b2835f8eb8cbb5e0c506227d05b057174da53d945b0"
+  },
   "src/ship-port-v87.css": {
     "previousSha256": "280b758be54bcb9433fb8353dc73b6bb047b79ce9f1210c47e5bde05ec9f29b9",
     "currentSha256": "45bf14ef6d7ef549d4b88b732d199f85c05f2524dc34ae67e7617c88361971fa"
@@ -412,7 +424,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "sw.js": {
     "previousSha256": "ff86bba365c3875c8ebaeb0abe13b2a6185ccd5f1a030b4ee5b15ac0e4a12f9b",
-    "currentSha256": "89b14942cbce1e4408ab244782d7b9f84d4259bfa8b91c0409f65a26d23ec841"
+    "currentSha256": "3f611ff11b2432a56ec8e64b645af1dfc874c4f00892434b71a315ed3f349426"
   },
   "title-screen-v61.css": {
     "previousSha256": "3a748b04d5e6c9a7e04c189b2c1910c3163a0840968be6bcbb6352e10e16369f",

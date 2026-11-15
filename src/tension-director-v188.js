@@ -13,6 +13,7 @@ export const TENSION_DIRECTOR_V188 = Object.freeze({
 });
 
 const clamp = (n, low, high) => Math.max(low, Math.min(high, n));
+import { placeWorldLabelV188 } from './world-label-layout-v188.js';
 const finite = (n, fallback = 0) => Number.isFinite(n) ? n : fallback;
 
 export function createTensionStateV188(register = 'tension') {
@@ -198,8 +199,17 @@ export function withTensionDirectorV188(Base) {
       const pulse = .55 + .45 * Math.sin(finite(this.animationTime) * (saving ? 9 : 3));
       ctx.fillStyle = saving ? `rgba(233,208,122,${pulse})` : `rgba(141,240,176,${pulse})`; ctx.fillRect(x - 10, foot - 50, 20, 14);
       ctx.fillStyle = '#0a110e'; ctx.fillRect(x - 8, foot - 30, 16, 3); ctx.fillRect(x - 8, foot - 24, 16, 3);
-      if (inReach) { ctx.font = '11px monospace'; ctx.textAlign = 'center'; ctx.fillStyle = '#8df0b0';
-        ctx.fillText(saving ? 'SAUVEGARDE…' : 'TERMINAL · SAUVEGARDER', x, foot - 70); }
+      if (inReach) {
+        // The prompt never covers a marine (at spawn the squad stands on the terminal): raised above the sprites, on a plate.
+        const text = saving ? 'SAUVEGARDE…' : 'TERMINAL · SAUVEGARDER';
+        ctx.font = '11px monospace'; ctx.textAlign = 'center';
+        const label = placeWorldLabelV188({ x, preferredBaseline: foot - 70, textWidth: ctx.measureText(text).width, fontSize: 11,
+          actors: [this.player, this.coopEnabled ? this.coop : null, ...(this.squadActors || [])] });
+        ctx.fillStyle = 'rgba(4,10,8,.82)'; ctx.fillRect(label.plate.x, label.plate.y, label.plate.w, label.plate.h);
+        ctx.strokeStyle = 'rgba(141,240,176,.45)'; ctx.lineWidth = 1; ctx.strokeRect(label.plate.x + .5, label.plate.y + .5, label.plate.w - 1, label.plate.h - 1);
+        ctx.fillStyle = '#8df0b0'; ctx.fillText(text, x, label.baseline);
+        this.saveTerminalPromptV188 = label;
+      }
       ctx.restore();
     }
     drawHud(ctx) {

@@ -10,6 +10,7 @@ import { drawDepthPropV188, drawDepthHoldFloorV188 } from './depth-props-v188.js
 import { buildDepthHoldSectionV188, resolveDepthHoldDefinitionV188, depthHoldDefinitionV188, spansHoldDepthV188, holdSleeperSlotsV188 } from './depth-hold-sections-v188.js';
 import { drawDepthHoldSlotV188 } from './depth-hold-slots-v188.js';
 import { sweepProjectileAabbV83, firstProjectileObstacleV83 } from './projectile-collision-v83.js';
+import { drawDepthHoldDeckV188, drawFootprintShadowV188, isHoldFloorPlatformV188 } from './depth-hold-deck-v188.js';
 
 export const QZ17_CAMPAIGN_ID_V188 = 'special-narrative-qz17';
 export const MISSION_ATTACK_BAND_V188 = 24;
@@ -440,10 +441,22 @@ export function withMissionDepthRoomsV188(Base) {
     depthBoxOfV188(actor) { const box = spriteBox(actor); box.y += this.depthOffsetOfV188(actor); return box; }
     drawDepthPropsV188(ctx) {
       const frame = this.depthFrameV188; if (!frame || frame.propsDrawn) return; frame.propsDrawn = true;
-      const { section } = frame, shade = ctx.createLinearGradient?.(0, section.floorY, 0, section.floorY + 80);
-      if (shade) { shade.addColorStop(0, 'rgba(0,0,0,.22)'); shade.addColorStop(1, 'rgba(0,0,0,0)'); ctx.fillStyle = shade; ctx.fillRect(section.x0, section.floorY, section.x1 - section.x0, 80); }
+      const { section } = frame;
+      // The deck itself is drawn with the hold floor platform (drawPlatform); a frame without it still gets one here.
+      if (!frame.deckDrawn) { frame.deckDrawn = true; drawDepthHoldDeckV188(ctx, section); }
       drawDepthHoldFloorV188(ctx, section);
+      // Contact shadows on the deck, over each object's whole footprint depth.
+      for (const entry of section.containers) drawFootprintShadowV188(ctx, section, entry);
       for (const entry of [...section.containers].sort((a, b) => b.z - a.z)) drawHoldPropV188(ctx, entry, this.depthBoxV188(entry));
+    }
+    // The hold floor is a deck in depth: drawn right after its platform, under hazards, objects and actors.
+    drawPlatform(ctx, platform) {
+      const result = super.drawPlatform(ctx, platform), frame = this.depthFrameV188;
+      if (frame && isHoldFloorPlatformV188(frame.section, platform)) {
+        frame.deckDrawn = true;
+        drawDepthHoldDeckV188(ctx, frame.section, { clipX0: platform.x, clipX1: platform.x + platform.w });
+      }
+      return result;
     }
     depthBoxV188(entry) { const section = this.depthFrameV188.section; return { x: entry.x, y: section.floorY + depthToScreenOffsetV188(entry.z) - entry.h, w: entry.w, h: entry.h }; }
     drawActor(ctx, actor) {

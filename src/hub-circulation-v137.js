@@ -262,16 +262,29 @@ export function drawHubCirculationV137(ctx, platform, options = {}) {
   }
   // Paint names a destination that actually exists. No decorative hatch,
   // suggested action key or extra navigation node is invented by this pass.
-  if (drawRear) for (const destination of plan.destinations) {
-    ctx.fillStyle = '#14272d'; ctx.fillRect(destination.x - 64, destination.y - 9, 128, 14);
-    ctx.fillStyle = '#b2b7a0'; ctx.font = '8px ui-monospace, monospace'; ctx.textAlign = 'center';
-    ctx.fillText(destination.label, destination.x, destination.y + 1, 120);
-  }
+  // V188: a caller may defer the labels until the ladders are drawn (options.labels === false).
+  if (drawRear && options.labels !== false) paintCirculationLabels(ctx, plan);
   if (drawFront) for (const opening of plan.openings) {
     ctx.fillStyle = '#a99f6c';
     for (const edge of [opening.left - 8, opening.right]) ctx.fillRect(Math.max(x, Math.min(x + w - 8, edge)) + plan.depthDx, y + plan.depthY + 4, 8, 3);
   }
   ctx.restore(); return plan;
+}
+
+function paintCirculationLabels(ctx, plan) {
+  for (const destination of plan.destinations) {
+    ctx.fillStyle = '#14272d'; ctx.fillRect(destination.x - 64, destination.y - 9, 128, 14);
+    ctx.fillStyle = '#b2b7a0'; ctx.font = '8px ui-monospace, monospace'; ctx.textAlign = 'center';
+    ctx.fillText(destination.label, destination.x, destination.y + 1, 120);
+  }
+}
+/** V188 (graphics audit item 17): destination labels drawn after the ladders, so rails never cross them. */
+export function drawHubCirculationLabelsV188(ctx, plan) {
+  if (!ctx || !plan?.destinations?.length) return 0;
+  ctx.save();
+  if (plan.roomBounds) { ctx.beginPath(); ctx.rect(plan.roomBounds.x, 0, plan.roomBounds.w, 720); ctx.clip(); }
+  paintCirculationLabels(ctx, plan);
+  ctx.restore(); return plan.destinations.length;
 }
 
 export function withHubCirculationV137(Base) {
@@ -281,10 +294,21 @@ export function withHubCirculationV137(Base) {
     drawTraversalPlatform(ctx, platform) {
       if (this.editorPlaytest) return super.drawTraversalPlatform(ctx, platform);
       const room = HUB_DECKS[this.state?.deck || 0].rooms.find(candidate => candidate.id === platform.roomId);
-      return drawHubCirculationV137(ctx, platform, {
+      const deferred = Array.isArray(this.hubCirculationLabelsV188) ? this.hubCirculationLabelsV188 : null;
+      const plan = drawHubCirculationV137(ctx, platform, {
         room, ladders: this.v51Ladders || [], vents: this.v51Vents || [], platforms: this.v51Platforms || [],
-        depthEnabled: this.depthPresentationV116 !== false, phase: 'back'
+        depthEnabled: this.depthPresentationV116 !== false, phase: 'back', labels: !deferred
       });
+      if (deferred && plan) deferred.push(plan);
+      return plan;
+    }
+    drawTraversal(ctx) {
+      if (this.editorPlaytest) return super.drawTraversal(ctx);
+      this.hubCirculationLabelsV188 = [];
+      try { return super.drawTraversal(ctx); } finally {
+        const plans = this.hubCirculationLabelsV188; this.hubCirculationLabelsV188 = null;
+        for (const plan of plans) drawHubCirculationLabelsV188(ctx, plan);
+      }
     }
     drawAnnexSteelPlatformV133(ctx, platform, annex) {
       if (this.editorPlaytest) return super.drawAnnexSteelPlatformV133?.(ctx, platform, annex);

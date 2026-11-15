@@ -35,6 +35,19 @@ const INSERTION_SAFE_MARGIN_V188 = 100;
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const asList = (value) => Array.isArray(value) ? value : [];
 const entityDistance = (a, b) => Math.hypot((a.x + (a.w || 0) / 2) - (b.x + (b.w || 0) / 2), (a.y + (a.h || 0) / 2) - (b.y + (b.h || 0) / 2));
+// A soft elliptical wisp: one unit radial gradient drawn through a scale, so it has no edge.
+const fogWispGradientsV188 = new WeakMap();
+function drawFogWispV188(ctx, cx, cy, rx, ry) {
+  let gradient = fogWispGradientsV188.get(ctx);
+  if (!gradient && ctx.createRadialGradient) {
+    gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, 1);
+    gradient.addColorStop(0, 'rgba(184,200,191,1)'); gradient.addColorStop(.55, 'rgba(184,200,191,.55)'); gradient.addColorStop(1, 'rgba(184,200,191,0)');
+    fogWispGradientsV188.set(ctx, gradient);
+  }
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(rx, ry);
+  ctx.fillStyle = gradient || 'rgba(184,200,191,.5)'; ctx.fillRect(-1, -1, 2, 2);
+  ctx.restore();
+}
 const imageReady = (image) => Boolean(image?.complete && (image.naturalWidth || image.width) > 0);
 const MISSION_VENT_RUNTIME_SCHEMA_V62 = 62;
 const MISSION_VENT_PLAYER_SPEED_V62 = 620;
@@ -1904,9 +1917,9 @@ export function withV52LevelRuntime(BaseEngine) {
           ctx.fillStyle = zone.visual?.tint || plan.palette?.haze || '#243b36';
           ctx.fillRect(zone.x, 110, zone.w, 820);
           if (zone.visual?.fog) {
+            // V188 (graphics audit item 16): feathered fog wisps, no hard-edged translucent bands on the wall.
             ctx.globalAlpha = zone.visual.fog * 0.18;
-            ctx.fillStyle = '#b8c8bf';
-            for (let x = zone.x; x < zone.x + zone.w; x += 190) ctx.fillRect(x, 300 + (x % 170), 120, 14);
+            for (let x = zone.x; x < zone.x + zone.w; x += 190) drawFogWispV188(ctx, x + 60, 300 + (x % 170) + 7, 72, 11);
           }
         }
         ctx.restore();
