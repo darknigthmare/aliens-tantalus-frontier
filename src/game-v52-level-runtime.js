@@ -1122,7 +1122,9 @@ export function withV52LevelRuntime(BaseEngine) {
       if (actorKind === 'ally') this.missionVentTelemetryV62.allyPlans += 1;
       if (actorKind === 'enemy') this.missionVentTelemetryV62.enemyPlans += 1;
       const portal = this.vents.find((entry) => entry.portalId === entranceId);
-      if (portal) portal.open = true;
+      // The portal opens for every crawler (AI movement keeps using it); only the
+      // controlled marine's own traversal maps it for the vent objective (V188).
+      if (portal) { portal.open = true; if (actorKind === 'player' && actor === this.player) portal.playerTraversedV188 = true; }
       this.onEvent({
         type: 'mission-vent-enter',
         networkId: network.id,
@@ -1346,9 +1348,23 @@ export function withV52LevelRuntime(BaseEngine) {
       this.missionLevelVisualState.eventFlash = Math.max(0, this.missionLevelVisualState.eventFlash - delta * 1.8);
       this.updateMissionLevelTimers(delta);
       this.refreshMissionLevelZone(false);
+      this.updateExtractionWalkwayCheckpointV188();
       if (this.mission?.objectives?.extract) {
         for (const event of this.missionLevelEvents.values()) if (event.trigger?.type === 'objective-complete') this.triggerMissionLevelEvent(event.id, 'objective-complete');
       }
+    }
+
+    // V188 owner decision (2026-11-15): on planet-exterior a fall into the pit
+    // under the extraction walkway sent the marine back to the insertion. The
+    // beacon platform, just before the walkway, now sets a checkpoint once.
+    updateExtractionWalkwayCheckpointV188() {
+      if (this.missionLevelRuntime?.templateId !== 'planet-exterior' || this.checkpoint?.id === 'extraction-walkway') return false;
+      const actor = this.player, pad = asList(this.platforms).find((entry) => entry.id === 'node-platform-planet-beacon');
+      if (!pad || !actor?.alive || actor.downed || actor.inVehicle || actor.ventTransit || !actor.grounded) return false;
+      const centre = actor.x + actor.w / 2;
+      if (centre < pad.x + 24 || centre > pad.x + pad.w - 24 || Math.abs(actor.y + actor.h - pad.y) > 8) return false;
+      this.setCheckpoint?.('extraction-walkway', actor.x, pad.y - actor.h);
+      return true;
     }
 
     updateEnemy(enemy, delta) {

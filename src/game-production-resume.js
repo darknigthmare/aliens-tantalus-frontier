@@ -176,7 +176,7 @@ export class GameEngine extends ProductionBaseEngine {
         contacts: trackerContacts
       } : null,
       doors: asList(this.doors).map((door) => ({ id: safeId(door.id), open: Boolean(door.open), progress: bounded(door.progress, 0, 0, 1) })),
-      vents: asList(this.vents).map((vent) => ({ id: safeId(vent.id), open: Boolean(vent.open) })),
+      vents: asList(this.vents).map((vent) => ({ id: safeId(vent.id), open: Boolean(vent.open), playerTraversedV188: vent.playerTraversedV188 === true })),
       supplies,
       weaponPickup,
       toolPickup,
@@ -254,7 +254,9 @@ export class GameEngine extends ProductionBaseEngine {
 
     if (isRecord(rawState.checkpoint)) {
       // Every checkpoint the base mission sets (power and archive included) survives a resume.
-      const checkpointIds = new Set(['insertion', 'vent', 'security', 'containment', 'power', 'archive', this.checkpoint?.id].filter(Boolean));
+      // V188: cargo-brutal phase checkpoints and the planet-exterior extraction walkway.
+      const checkpointIds = new Set(['insertion', 'vent', 'security', 'containment', 'power', 'archive',
+        'cargo-loader', 'cargo-escort', 'cargo-matriarch', 'extraction-walkway', this.checkpoint?.id].filter(Boolean));
       const checkpointId = safeId(rawState.checkpoint.id);
       if (checkpointIds.has(checkpointId)) {
         this.checkpoint = {
@@ -355,7 +357,12 @@ export class GameEngine extends ProductionBaseEngine {
       door.open = Boolean(source.open);
       door.progress = bounded(source.progress, door.open ? 1 : 0, 0, 1);
     });
-    restoreMatched(this.vents, rawState.vents, (vent, source) => { vent.open = Boolean(source.open); });
+    // V188: a save written before the player-only vent count has no
+    // playerTraversedV188; its open portals keep counting as before.
+    restoreMatched(this.vents, rawState.vents, (vent, source) => {
+      vent.open = Boolean(source.open);
+      vent.playerTraversedV188 = typeof source.playerTraversedV188 === 'boolean' ? source.playerTraversedV188 : vent.open;
+    });
     this.ventShortcut = this.vents?.[0] || this.ventShortcut;
 
     const pickups = isRecord(rawState.pickups) ? rawState.pickups : {};

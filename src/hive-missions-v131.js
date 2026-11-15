@@ -162,6 +162,16 @@ export function withHiveMissionsV131(BaseEngine) {
     }
 
     isHiveMissionV131() { return Boolean(this.hiveActiveV131 && this.hiveV131); }
+    // V188 owner decision (2026-11-15): Jeri infiltrates alone. No AI squad is
+    // deployed, whatever crew the operation carries (older saves included).
+    configureMissionSquad() {
+      const result = super.configureMissionSquad();
+      if (this.isHiveMissionV131() && this.hiveV131.operationId === 'jeri-false-son') {
+        this.squadActors = []; this.coopEnabled = false;
+        if (this.squadTelemetry) this.squadTelemetry = { ...this.squadTelemetry, configured: 0, spawned: 0 };
+      }
+      return result;
+    }
     hiveCanActV131(actor = this.player) {
       return Boolean(this.isHiveMissionV131() && this.running && !this.paused && !this.enemyAtlasLoadingPausedV65 && !this.userCasteLoadingV88
         && this.mission?.state === 'active' && ACTIVE(actor) && actor === this.player

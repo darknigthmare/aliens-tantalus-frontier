@@ -41,7 +41,7 @@ import { projectRefugeHubSaveV87 } from './refuge-save-v87.js';
 import { validateShipPortDepartureV87 } from './ship-port-state-v87.js';
 import { PlaceablesDockV86 } from './placeables-ui-v86.js';
 import { resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
-import { squadActionLabelV188, biomeLabelV188, missionFailureLabelV188, checkpointLabelV188, missionLevelLogLineV188,
+import { squadActionLabelV188, biomeLabelV188, missionFailureLabelV188, checkpointLabelV188, missionLevelLogLineV188, alienSurvivalLogLineV188,
   objectiveActionLabelV188, insertionPhaseLabelV188 } from './mission-log-labels-v188.js';
 import { paidRewardsV188, paidRewardsLineV188, strategyLogTitleV188 } from './mission-debrief-v188.js';
 import { commitCrewTransactionV85 } from './crew-transactions-v85.js';
@@ -80,7 +80,7 @@ import { GameEngine } from './game-production-runtime.js';
 import { bindTacticalReloadButtonV77 } from './mission-input-v77.js';
 import { resolveViewAudioSceneV77 } from './audio-assets-v77.js';
 import { buildMissionLevelV52 } from './mission-levels-v52.js';
-import { missionDeploymentLogV188 } from './mission-deployment-log-v188.js';
+import { missionDeploymentLogV188, JERI_SOLO_BRIEFING_V188 } from './mission-deployment-log-v188.js';
 import { BLACK_COCOON_CAMPAIGN_V121, buildBlackCocoonLevelV121 } from './black-cocoon-runtime-v121.js';
 import { APC_CONVOY_CAMPAIGN_V121, buildApcConvoyLevelV121 } from './apc-convoy-runtime-v121.js';
 import { C12_HORDE_CAMPAIGN_V121, buildC12HordeLevelV121 } from './c12-horde-runtime-v121.js';
@@ -215,13 +215,8 @@ const ALIEN_SURVIVAL_PERSISTENT_EVENTS_V70 = new Set([
 ]);
 const isAlienSurvivalRuntimeEventV70 = (event) => typeof event?.type === 'string'
   && event.type.startsWith('alien-survival-');
-const alienSurvivalEventLabelV70 = (event) => {
-  const detail = event.message || event.reason || event.circuitId || event.feedId
-    || event.doorId || event.stationId || event.type.replace('alien-survival-', '');
-  const remaining = Number(event.remainingSeconds ?? event.remaining);
-  const countdown = Number.isFinite(remaining) ? ` · T−${Math.max(0, Math.ceil(remaining))} S` : '';
-  return `SURVIE · ${String(detail || 'SYSTÈMES ACTUALISÉS').toUpperCase()}${countdown}`;
-};
+// V188: player words only (mission-log-labels-v188.js); ids stay in the flags.
+const alienSurvivalEventLabelV70 = (event) => alienSurvivalLogLineV188(event);
 const persistentStorageV78 = (() => {
   try { if (globalThis.localStorage) return globalThis.localStorage; } catch { /* Present a recovery screen, never claim volatile memory is a saved profile. */ }
   const unavailable = () => { throw new Error('Stockage local inaccessible.'); };
@@ -1771,6 +1766,8 @@ function renderOperationPlan() {
       ? 'Enquête QZ-17 · quatre preuves physiques à récupérer · confronter les sources pour ouvrir une vraie route.'
       : specialOperation?.id === 'alpha-bravo-coop'
         ? 'Quatre opérateurs · deux binômes physiques · ordres, pings, tâches réservées, stress et cohésion dynamiques.'
+        : specialOperation?.id === 'jeri-false-son'
+          ? escapeHtml(JERI_SOLO_BRIEFING_V188)
         : specialOperation?.id === 'alien-survival-systems'
           ? 'Six systèmes physiques · énergie limitée, CCTV active, pression par salle, soudure temporisée, acide persistant et double autorisation d’autodestruction.'
           : escapeHtml(campaign.description || campaign.summary || '');
@@ -2668,7 +2665,7 @@ function captureMissionResumeState({ forRecovery = false } = {}) {
     objectives: { ...engine.mission.objectives },
     inventory: { ...engine.inventory },
     doors: engine.doors.map((door) => ({ id: door.id, open: door.open, progress: door.progress })),
-    vents: engine.vents.map((vent) => ({ id: vent.id, open: vent.open })),
+    vents: engine.vents.map((vent) => ({ id: vent.id, open: vent.open, playerTraversedV188: vent.playerTraversedV188 === true })),
     equipment: (snapshot.equipmentRuntime || []).map((item) => ({ id: item.id, remaining: item.remaining, uses: item.uses })),
     pickups: {
       weaponTaken: Boolean(engine.weaponPickup?.taken),
@@ -2734,7 +2731,7 @@ function applyMissionResumeState(state) {
   }
   for (const saved of state.vents || []) {
     const vent = engine.vents.find((entry) => entry.id === saved.id);
-    if (vent) vent.open = saved.open;
+    if (vent) { vent.open = saved.open; vent.playerTraversedV188 = typeof saved.playerTraversedV188 === 'boolean' ? saved.playerTraversedV188 : Boolean(saved.open); }
   }
   for (const saved of state.equipment || []) {
     const equipment = engine.equipmentActions?.get(saved.id);

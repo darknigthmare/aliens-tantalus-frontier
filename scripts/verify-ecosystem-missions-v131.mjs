@@ -166,6 +166,7 @@ test('Pangaea vaccination needs a healthy physical host and limited charges; los
 function centerX(actor) { return actor.x + actor.w / 2; }
 test('original creature controllers respect sight blockers and warn before contact, acid and charge attacks', async () => {
   const { engine } = await fixture('pangaea-second-extinction');
+  engine.insertionGraceV188 = null; // V188: a shot launched inside the insertion grace is now held too; measured after it.
   const hunter = engine.enemies.find(actor => actor.ecosystemActorV131.caste === 'hunter' && actor.ecosystemActorV131.role === 'sauria');
   locate(engine, centerX(hunter) - 100); engine.walls = [{ id: 'test-cover', x: engine.player.x + 60, y: 450, w: 8, h: 120 }];
   const health = engine.player.health, x = hunter.x; for (let index = 0; index < 120; index++) engine.updateEnemy(hunter, 1 / 60);
