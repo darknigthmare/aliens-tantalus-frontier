@@ -3321,7 +3321,8 @@ function handleGameEvent(event) {
   }
   // V188: the in-level landing and boarding events carry no state of their own (rewards
   // stay with mission-complete): they are not persisted.
-  if (/^insertion-handover-(started|complete)-v188$/.test(event?.type || '') || event?.type === 'extraction-boarding-complete-v188') return true;
+  if (/^insertion-handover-(started|complete)-v188$/.test(event?.type || '') || event?.type === 'extraction-boarding-complete-v188'
+    || ['dropship-covering-hit-v188', 'depth-projectile-blocked-v188', 'acid-blood-splash-v188', 'smartgun-track-v188'].includes(event?.type)) return true; // presentation hooks (gameplay gaps V188)
   if (event?.type === 'enemy-discovered-v88' || event?.type === 'enemy-defeated-v88') {
     if (event.scope !== 'campaign' || standaloneContext || !ownsTimelineV84(missionOwnerV78) || missionOwnerV78.operationId !== saveSystem.data.strategy.currentOperation?.id
       || event.operationId !== missionOwnerV78.operationId) return null;
