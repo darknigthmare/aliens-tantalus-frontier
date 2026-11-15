@@ -7,6 +7,7 @@
 import { getNpcDialoguePortraitV168, drawNpcDialoguePortraitV168 } from './npc-dialogue-portraits-v168.js';
 import { getPlaceholderPortraitV188, drawPlaceholderPortraitV188 } from './placeholder-portraits-v188.js';
 import { colorblindPaletteActiveV188 } from './colorblind-palette-v188.js';
+import { Act5AssetLoaderV188 } from './act5-slots-v188.js';
 
 const t = (fr, en) => Object.freeze({ fr, en });
 const shot = (seconds, kind, data = {}) => Object.freeze({ seconds, kind, ...data });
@@ -164,6 +165,41 @@ export const CINEMATICS_V188 = Object.freeze({
     shot(14, 'dialogue', { scene: 'lab', line: line('INEZ HARLOW', 'crew-09-inez-harlow',
       'Maintenant, on t’interroge.', 'We’re asking now.') })
   ]) }),
+  // Act V « Non viable » (bible §5.6, §5.7, §5.8; spec 006). Plates are PLACEHOLDER primitives routed
+  // through act5-slots-v188.js; counts and labels come from the save (context.act5). Lines [PROPOSÉ], §5.11.
+  'cin-60': Object.freeze({ id: 'cin-60', title: t('Dernier départ', 'Last departure'), music: 'mission', shots: Object.freeze([
+    shot(12, 'act5-slot', { slot: 'm577-rain-departure', caption: t('COCYTE · COMPLEXE INDUSTRIEL · DERNIER DÉPART', 'COCYTE · INDUSTRIAL COMPLEX · LAST DEPARTURE') }),
+    shot(9, 'dialogue', { scene: 'alarm', radio: true, line: line('CAL MERCER · RADIO', 'crew-16-cal-mercer',
+      'Tout le monde est monté ? On ne revient pas les chercher.', 'Everyone aboard? We are not coming back for them.') }),
+    shot(9, 'act5-slot', { slot: 'm577-rain-departure', caption: t('ROUTE DU PORT · LA RUCHE DU DÉPÔT EST SORTIE', 'PORT ROAD · THE DEPOT HIVE IS OUT') })
+  ]) }),
+  'cin-61': Object.freeze({ id: 'cin-61', title: t('Les portes du port', 'The port gates'), music: 'calm', shots: Object.freeze([
+    shot(20, 'act5-slot', { slot: 'port-gates-rollcall', caption: t('PORT-MÉRIDIEN · APPEL DES ARRIVÉS', 'PORT-MÉRIDIEN · ROLL CALL OF ARRIVALS') }),
+    shot(10, 'dialogue', { scene: 'quarters', line: line('ROOK', 'crew-06-rook',
+      'Appel terminé. Je l’ai fait deux fois. Le compte est juste.', 'Roll call done. I did it twice. The count is right.') }),
+    shot(15, 'act5-slot', { slot: 'port-gates-rollcall', caption: t('LES PORTES SE REFERMENT', 'THE GATES CLOSE') })
+  ]) }),
+  'cin-90-relay': Object.freeze({ id: 'cin-90-relay', title: t('Fin · Le relais parle', 'Ending · The relay speaks'), music: 'ending', shots: Object.freeze([
+    shot(22, 'act5-slot', { slot: 'ending-relay-transmit', caption: t('ASPHODÈLE · SALLE DES RELAIS · ICC / MARSHALS COLONIAUX', 'ASPHODÈLE · RELAY ROOM · ICC / COLONIAL MARSHALS') }),
+    shot(38, 'act5-lines', { lines: 'endingLines', heading: 'endingTitle' })
+  ]) }),
+  'cin-90-freight': Object.freeze({ id: 'cin-90-freight', title: t('Fin · Le fret d’abord', 'Ending · Freight first'), music: 'ending', shots: Object.freeze([
+    shot(22, 'act5-slot', { slot: 'ending-freight-handover', caption: t('PORT-MÉRIDIEN · ADMINISTRATION DE LA COMPAGNIE', 'PORT-MÉRIDIEN · COMPANY ADMINISTRATION') }),
+    shot(38, 'act5-lines', { lines: 'endingLines', heading: 'endingTitle' })
+  ]) }),
+  'cin-90-living': Object.freeze({ id: 'cin-90-living', title: t('Fin · Les vivants, sans preuve', 'Ending · The living, without proof'), music: 'ending', shots: Object.freeze([
+    shot(22, 'act5-slot', { slot: 'ending-living-dawn', caption: t('PORT-MÉRIDIEN · L’AUBE', 'PORT-MÉRIDIEN · DAWN') }),
+    shot(38, 'act5-lines', { lines: 'endingLines', heading: 'endingTitle' })
+  ]) }),
+  'cin-92': Object.freeze({ id: 'cin-92', title: t('Ce que le retour devra raconter', 'What the return will have to tell'), music: 'calm', shots: Object.freeze([
+    shot(9, 'act5-slot', { slot: 'port-meridien-epilogue', caption: t('PORT-MÉRIDIEN', 'PORT-MÉRIDIEN') }),
+    shot(9, 'act5-slot', { slot: 'asphodele-epilogue', caption: t('STATION ASPHODÈLE', 'ASPHODÈLE STATION') }),
+    shot(9, 'act5-slot', { slot: 'echo8-locker-epilogue', caption: t('TANTALUS · BAIE CRYO', 'TANTALUS · CRYO BAY') }),
+    shot(22, 'act5-lines', { lines: 'epilogue', heading: 'endingTitle' })
+  ]) }),
+  'cin-99-credits': Object.freeze({ id: 'cin-99-credits', title: t('Générique', 'Credits'), music: 'ending', shots: Object.freeze([
+    shot(24, 'credits')
+  ]) }),
   // Bible §5.2 weaving: Rook identifies the remote signature (line [PROPOSÉ], §56.7).
   'cin-20-rook': Object.freeze({ id: 'cin-20-rook', title: t('La signature', 'The signature'), music: null, shots: Object.freeze([
     shot(10, 'dialogue', { scene: 'quarters', line: line('ROOK', 'crew-06-rook',
@@ -207,6 +243,10 @@ function fade(ctx, progress, { fadeIn = true, fadeOut = true } = {}) {
 // Cinemascope frame (2.39:1): the picture sits between two black bars; captions
 // and subtitles live in the bars, outside the camera move.
 export const LETTERBOX_V188 = Math.round((H - W / 2.39) / 2);
+// Act V plates (spec 006): PLACEHOLDER primitives until art is committed for a slot.
+const act5LoaderV188 = new Act5AssetLoaderV188();
+const spaced = (text, gap) => text.split('').join('\u200a'.repeat(Math.max(1, Math.round(gap / 3))));
+
 let pendingCaptions = [];
 function caption(ctx, text, y = 640) {
   if (text) pendingCaptions.push({ text, top: y < 200 });
@@ -685,6 +725,30 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
         ctx.fillStyle = on ? '#e15b4f' : '#4a1612'; ctx.fillRect(380 + Math.cos(a) * 210 - 3, 560 + Math.sin(a) * 40 - 3, 6, 6); }
       rain(ctx, local, reducedMotion, 'rgba(170,200,210,.3)'); caption(ctx, current.caption?.[lang]); break;
     }
+    case 'act5-slot': {
+      act5LoaderV188.draw(ctx, current.slot, W, H, { language: lang, context: context?.act5 || {}, time: local, progress, reducedMotion });
+      caption(ctx, current.caption?.[lang]); break; // the roll-call count is drawn by the plate itself
+    }
+    case 'act5-lines': { // ending and epilogue facts, typed line by line (from the save, never granted here)
+      ctx.fillStyle = '#05080a'; ctx.fillRect(0, 0, W, H);
+      const act5 = context?.act5 || {}, rows = Array.isArray(act5[current.lines]) ? act5[current.lines] : [];
+      ctx.textAlign = 'center'; ctx.fillStyle = '#e6efe6'; ctx.font = '700 30px sans-serif'; ctx.fillText(String(act5[current.heading] || ''), W / 2, LETTERBOX_V188 + 64);
+      ctx.textAlign = 'left'; ctx.font = '19px sans-serif';
+      const shown = reducedMotion ? rows.length : Math.ceil(rows.length * Math.min(1, progress * 1.6 + .05));
+      let y = LETTERBOX_V188 + 112;
+      for (const row of rows.slice(0, shown)) { ctx.fillStyle = '#c8d8cc'; for (const part of wrap(ctx, row, W - 260).slice(0, 3)) { ctx.fillText(part, 130, y); y += 25; } y += 6; if (y > H - LETTERBOX_V188 - 20) break; }
+      break;
+    }
+    case 'credits': { // same palette and letter-spacing as the opening credit (intro-sequence-v188.js)
+      act5LoaderV188.draw(ctx, 'credits-starfield', W, H, { language: lang, time: local, progress, reducedMotion });
+      const entries = Array.isArray(context?.act5?.credits) && context.act5.credits.length ? context.act5.credits : [{ by: 'A fan game by', name: 'Darknigthmare' }];
+      const span = 1 / entries.length, index_ = Math.min(entries.length - 1, Math.floor(progress / span)), inner = (progress - index_ * span) / span;
+      const alpha = reducedMotion ? 1 : Math.max(0, Math.min(1, inner < .2 ? inner / .2 : inner > .85 ? (1 - inner) / .15 : 1));
+      const entry = entries[index_]; ctx.textAlign = 'center'; ctx.globalAlpha = alpha;
+      ctx.fillStyle = '#87988d'; ctx.font = '15px sans-serif'; ctx.fillText(spaced(String(entry.by).toUpperCase(), 6), W / 2, H / 2 - 22);
+      ctx.fillStyle = '#e3eee6'; ctx.font = '600 44px sans-serif'; ctx.shadowColor = 'rgba(143,213,162,.22)'; ctx.shadowBlur = 18;
+      ctx.fillText(spaced(String(entry.name).toUpperCase(), 3), W / 2, H / 2 + 34); ctx.shadowBlur = 0; ctx.globalAlpha = 1; ctx.textAlign = 'left'; break;
+    }
     case 'dialogue': {
       background(ctx, images, current.scene, local, reducedMotion, { cast: current.cast, speakerId: current.line?.crewId });
       subtitle = current; break;
@@ -692,7 +756,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
     default: break;
   }
   ctx.restore();
-  if (current.kind !== 'title') grain(ctx, local, reducedMotion);
+  if (current.kind !== 'title' && current.kind !== 'credits') grain(ctx, local, reducedMotion);
   ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, LETTERBOX_V188); ctx.fillRect(0, H - LETTERBOX_V188, W, LETTERBOX_V188);
   if (subtitle) drawSubtitleV188(ctx, images, subtitle, progress, lang, local, reducedMotion);
   drawCaptions(ctx);
@@ -730,6 +794,7 @@ export class CinematicPlayerV188 {
       const profile = entry.line?.crewId ? getNpcDialoguePortraitV168(entry.line.crewId) : null; if (profile) sources.add(profile.source);
     }
     for (const source of sources) if (!this.images[source] && this.ImageCtor) { const image = new this.ImageCtor(); image.src = source; this.images[source] = image; }
+    act5LoaderV188.preload(); // requests only the Act V slots whose file is committed
   }
   play(id, { language = 'fr', reducedMotion = false, context = {} } = {}) {
     if (!CINEMATICS_V188[id] || !this.document?.body) return Promise.resolve('unavailable');
