@@ -589,8 +589,28 @@ export class MissionInsertionUiV62 {
     return target;
   }
 
+  // V188 phone fix: the rail (horizontal scroll strip below 860 px) is rebuilt
+  // on every render and hid the active phase from phase 3 on. Keep the reader's
+  // scroll, then bring the active phase into view only when it is clipped. The
+  // scroll is instant: the strip is rebuilt every frame (a smooth scroll would be
+  // cut off), which also honours reduced motion.
+  revealActivePhaseV188(rail, previousScrollLeft = 0) {
+    if (!rail) return false;
+    if (Number(previousScrollLeft) > 0) rail.scrollLeft = Number(previousScrollLeft);
+    const active = rail.querySelector?.('[aria-current="step"]');
+    if (!active || typeof active.scrollIntoView !== 'function' || typeof rail.getBoundingClientRect !== 'function') return false;
+    const box = rail.getBoundingClientRect(), item = active.getBoundingClientRect();
+    if (!(box.width > 0) || (item.left >= box.left - 1 && item.right <= box.right + 1)) return false;
+    // Never pull the page back up (block: 'nearest') while the reader is below the rail.
+    const viewHeight = Number(this.document?.defaultView?.innerHeight ?? globalThis.innerHeight) || 0;
+    if (viewHeight && (box.bottom <= 0 || box.top >= viewHeight)) return false;
+    active.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'auto' });
+    return true;
+  }
+
   render() {
     const restoreFocus = this.root.contains?.(this.document.activeElement) === true;
+    const previousRailScrollV188 = Number(this.root.querySelector?.('.mission-insertion-v62__rail')?.scrollLeft) || 0;
     const model = getMissionInsertionUiModelV62(this.state, {
       mediaRegistry: this.mediaRegistry,
       resolveMedia: this.resolveMedia
@@ -651,6 +671,7 @@ export class MissionInsertionUiV62 {
     live.setAttribute('role', 'status');
     live.setAttribute('aria-live', 'polite');
     this.root.append(header, phaseRail, body, live);
+    this.revealActivePhaseV188(phaseRail, previousRailScrollV188);
     if (restoreFocus) this.focusPrimary();
     return this.getSnapshot();
   }

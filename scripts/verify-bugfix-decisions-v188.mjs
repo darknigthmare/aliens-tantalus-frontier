@@ -390,3 +390,26 @@ test('English leftovers: waves, leaving the P-5000, the generic squad line witho
   assert.equal(en('CHECKPOINT CHARGEUR P-5000 SÉCURISÉ.'), 'CHECKPOINT P-5000 LOADER SECURED.');
   assert.equal(en('REPRISE CHECKPOINT PASSERELLE D’EXTRACTION · pénalité de récupération appliquée.'), 'CHECKPOINT EXTRACTION WALKWAY RESUME · recovery penalty applied.');
 });
+
+// ---------------------------------------------------------------- item 7
+// Unit check of the insertion rail on a phone (the browser QA checks the real page).
+// Fixture: a rail 360 px wide and its active phase at 560-720 px (phase 4 of 6).
+test('insertion phase rail (phone): the active phase is scrolled into view when clipped, instantly, without moving the page', async () => {
+  const { MissionInsertionUiV62 } = await import('../src/mission-insertion-ui-v62.js');
+  const reveal = MissionInsertionUiV62.prototype.revealActivePhaseV188;
+  assert.equal(typeof reveal, 'function');
+  const calls = [];
+  const make = (left, right, top = 120) => {
+    const active = { getBoundingClientRect: () => ({ left, right }), scrollIntoView: options => calls.push(options) };
+    return { scrollLeft: 0, getBoundingClientRect: () => ({ left: 16, right: 376, width: 360, top, bottom: top + 64 }),
+      querySelector: selector => selector === '[aria-current="step"]' ? active : null };
+  };
+  const ui = { document: { defaultView: { innerHeight: 740 } } };
+  assert.equal(reveal.call(ui, make(560, 720), 0), true);
+  assert.deepEqual(calls.at(-1), { inline: 'nearest', block: 'nearest', behavior: 'auto' });
+  assert.equal(reveal.call(ui, make(40, 200), 0), false, 'already visible: nothing moves');
+  const kept = make(40, 200); reveal.call(ui, kept, 180);
+  assert.equal(kept.scrollLeft, 180, 'the reader scroll survives the per-frame rebuild');
+  assert.equal(reveal.call(ui, make(560, 720, -300), 0), false, 'rail above the viewport: the page is not pulled up');
+  assert.match(source('src/mission-insertion-ui-v62.js'), /this\.root\.append\(header, phaseRail, body, live\);\n\s*this\.revealActivePhaseV188\(phaseRail, previousRailScrollV188\);/);
+});
