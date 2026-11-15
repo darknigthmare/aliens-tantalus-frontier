@@ -7037,4 +7037,6 @@ export const EN_PATTERNS_V185 = Object.freeze({
 "Bonus Cargo Brutal : +{0} credits, +{1} alliage.": "Cargo Brutal bonus: +{0} credits, +{1} alloy.",
 "Bonus Doctrine Alpha / Bravo : +{0} recherche, +{1} morale.": "Alpha / Bravo Doctrine bonus: +{0} research, +{1} morale.",
 "Bonus Survie Alien : +{0} recherche, +{1} morale, +{2} alliage.": "Alien Survival bonus: +{0} research, +{1} morale, +{2} alloy.",
+// V188 special-mode playthroughs (reviewed through i18n-catalog-maintenance-v186 merge).
+"COQUE {0}/{1} · ÉNERGIE {2} · CHALEUR {3} · CORROSION {4} · GEL {5} · RÉPARATIONS {6}": "HULL {0}/{1} · POWER {2} · HEAT {3} · CORROSION {4} · GEL {5} · REPAIRS {6}",
 });

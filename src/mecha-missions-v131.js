@@ -4,6 +4,7 @@ import { validateMissionTopologyV58 } from './topology-coherence-v58.js';
 import { firstProjectileObstacleV83, sweepProjectileAabbV83 } from './projectile-collision-v83.js';
 import { resolveCombatAimV83 } from './combat-aim-v83.js';
 import { cancelTacticalReloadV77 } from './tactical-reload-v77.js';
+import { autoTranslateV185 } from './i18n-auto-v185.js';
 import { MECHA_LOADOUTS_V131, MECHA_SUBSYSTEMS_V131, createMechaSystemsV131, mechaReadyV131, mechaMobilityV131,
   spendMechaActionV131, resolveMechaHitRegionV131, damageMechaSystemsV131, beginMechaCoolingV131,
   beginMechaRepairV131, canBeginMechaRepairV131, advanceMechaSystemsV131, validateMechaSystemsV131, drawMechaPrototypeV131 } from './mecha-systems-v131.js';
@@ -947,7 +948,10 @@ export function withMechaMissionsV131(Base) {
       ctx.fillText(`${this.campaign.name} · ${phaseTitles[state.phase]} · ${MECHA_LOADOUTS_V131[state.loadoutId].name.toUpperCase()}`, 32, 132);
       ctx.font = '12px monospace'; ctx.fillText(this.objectiveProgressText(), 32, 153);
       ctx.fillStyle = systems.overheated ? '#f4a875' : '#a9cec4';
-      ctx.fillText(`COQUE ${Math.ceil(systems.hull)}/${systems.maxHull} · ÉNERGIE ${Math.floor(systems.energy)} · CHALEUR ${Math.floor(systems.heat)}${systems.overheated ? ' SURCHAUFFE' : ''} · CORROSION ${Math.floor(systems.corrosion)} · GEL ${systems.coolant} · RÉPARATIONS ${systems.repairKits}`, 32, 174);
+      // V188: the overheat marker lives inside the heat value, so the catalog
+      // template always has a non-empty slot (an empty slot left the line French).
+      const heat = `${Math.floor(systems.heat)}${systems.overheated ? ` ${autoTranslateV185('SURCHAUFFE')}` : ''}`;
+      ctx.fillText(`COQUE ${Math.ceil(systems.hull)}/${systems.maxHull} · ÉNERGIE ${Math.floor(systems.energy)} · CHALEUR ${heat} · CORROSION ${Math.floor(systems.corrosion)} · GEL ${systems.coolant} · RÉPARATIONS ${systems.repairKits}`, 32, 174);
       ctx.fillStyle = '#c3c9ac'; ctx.fillText(`COCKPIT ${Math.ceil(systems.systems.cockpit)} · RÉACTEUR ${Math.ceil(systems.systems.reactor)} · HYDRAULIQUE ${Math.ceil(systems.systems.hydraulics)} · BRAS G/D ${Math.ceil(systems.systems.leftArm)}/${Math.ceil(systems.systems.rightArm)} · ART ORIGINAL DE PROTOTYPE`, 32, 195);
       const boss = this.enemies.find(enemy => enemy.mechaBossV131 && enemy.alive);
       if (boss) {

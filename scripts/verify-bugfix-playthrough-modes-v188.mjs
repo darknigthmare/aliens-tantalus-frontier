@@ -98,3 +98,32 @@ test('alpha-bravo: a pair ordered to its station walks past the marine standing 
   assert.ok(Math.abs(engine.player.x - playerX) < 1, 'the marine did not move (declared: no input)');
   for (const member of routed) assert.ok(member.x > playerX + 150, `${engine.alphaBravoTeamForActorV69(member)} member walked past the marine (x=${Math.round(member.x)})`);
 });
+
+// P1 (Talos contre le Titan, Z-110): in English the prototype systems line
+// stayed French. Its catalog template had two adjacent slots ({3}{4}) and the
+// overheat slot is empty unless the frame overheats; an empty slot never matches.
+test('mecha HUD: the systems line reads in English, overheated or not', async () => {
+  const { host, prepare } = await import('./engine-host-v188.mjs');
+  const { GameEngine } = await import('../src/game-production-runtime.js');
+  const { ENEMIES, WEAPONS, LEVEL_SEEDS } = await import('../src/content.js');
+  const { buildMechaMissionV131 } = await import('../src/mecha-missions-v131.js');
+  const { setLanguageV185 } = await import('../src/i18n-v185.js');
+  const { loadCatalogV185, autoTranslateV185 } = await import('../src/i18n-auto-v185.js');
+  await loadCatalogV185();
+  const entry = campaign('special-titan-v131'), world = worldOf(entry), browser = host();
+  const missionLevel = buildMechaMissionV131({ campaign: entry, world, levelSeeds: LEVEL_SEEDS, variant: 0 });
+  const engine = new GameEngine(browser.canvas, { onEvent: () => {} });
+  engine.start({ world, campaign: entry, weapon: WEAPONS[0], enemyCatalog: ENEMIES, equipment: [], crew: [],
+    seed: missionLevel.levelSeed.seed, levelSeed: missionLevel.levelSeed, missionLevel });
+  await prepare(engine);
+  // The host canvas is a stub: apply the production canvas translation (fillText wrapper) by hand.
+  const systemsLine = () => { browser.text.length = 0; engine.drawHud(browser.ctx); return autoTranslateV185(browser.text.find(line => /^COQUE /.test(line))); };
+  try {
+    setLanguageV185('en', { document: null, storage: null, persist: false });
+    assert.match(systemsLine(), /^HULL 806\/806 · POWER 100 · HEAT 0 · CORROSION 0 · GEL 4 · REPAIRS 2$/);
+    Object.assign(engine.mechaMissionV131.systems, { heat: 100, overheated: true });
+    assert.match(systemsLine(), /· HEAT 100 OVERHEAT ·/);
+    setLanguageV185('fr', { document: null, storage: null, persist: false });
+    assert.match(systemsLine(), /^COQUE 806\/806 · ÉNERGIE 100 · CHALEUR 100 SURCHAUFFE · /);
+  } finally { setLanguageV185('fr', { document: null, storage: null, persist: false }); }
+});
