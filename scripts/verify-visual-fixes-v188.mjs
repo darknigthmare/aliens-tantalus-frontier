@@ -208,7 +208,7 @@ test('15: the planet mid and foreground layers are replaced by a matted copy; th
   assert.equal(new Matte('planet-exterior').missionLevelLayerImage('foreground'), copy);
   assert.equal(new Matte('planet-exterior').missionLevelLayerImage('far'), image, 'the opaque sky layer is left alone');
   assert.equal(new Matte('colony-multiroute').missionLevelLayerImage('foreground'), image, 'other templates unchanged');
-  assert.match(read('src/game-production-runtime.js'), /withMissionLayerMatteV188\(withMissionDepthRoomsV188\(/);
+  assert.match(read('src/game-production-runtime.js'), /withForgeMissionRuntimeV141\(withMissionLayerMatteV188\(V158ProductionEngine\)/);
 });
 
 // —— 16. Colony upper-wall seam ——
