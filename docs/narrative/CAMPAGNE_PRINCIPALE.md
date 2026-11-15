@@ -1093,6 +1093,19 @@ Révélé par morceaux dans S1-S3 et les annexes :
 
 Echo-9 retrouve la plaque du sergent Kessler et le dernier enregistrement de l'équipe. Si la plaque est ramenée au Tantalus, elle est déposée dans le casier vide.
 
+### 7.5 Première version jouable — [PARTIEL] V188 (spec 005, 2026-11-15)
+
+Décisions par défaut appliquées : Q6 (S1-S4 comme missions avant le hub), Q7 (choix CASSIUS définitif), Q103 (feature Spec Kit `specs/005-front-asphodele-quetes/`). Code : `src/station-asphodele-v188.js`, raccordé à `content.js`, `save.js` (`stationV188`), `story-dossier-v188.js` et au Commandement.
+
+- **Accès** : Acte II terminé → quête de Rook « Six heures », dont la fin joue *Six heures de silence* (§8.4) → S1 → S2 → décision CASSIUS → S3 → S4. Les missions verrouillées ne sont pas proposées ; le lancement est refusé avec la raison. Une mission en cours reste reprise.
+- **Missions** : `station-s1` à `station-s4` sur Cocyte (`world-05-lethe`), gabarit intérieur de vaisseau, objectifs et registres de §7.2 et §0.3 (Horreur, Tension, Horreur, Action). Le décor est l'intérieur de vaisseau générique : la station n'a pas encore son art (§29.4).
+- **Dossier** : S2 donne la pièce *Ordres de livraison archivés par CASSIUS*, même si CASSIUS est effacé ensuite (§5.7.1). S4 rend la condition « Asphodèle reprise » vraie ; *Transmettre* attend encore la salle des relais.
+- **Effets CASSIUS [PROPOSÉ]** : réécrit, quarantaine de Cocyte −6 et stabilité +3 ; bridé, quarantaine −3 ; effacé, aucun effet. Les annexes fermées par le bridage n'existent pas encore.
+- **Scènes de retour** (S1, S3, S4) et décision CASSIUS : au Commandement, une seule fois, image d'emplacement en primitives Canvas (`src/content-gap-slots-v188.js`).
+- **[PROPOSÉ]** : la consigne qui ferme le sas 3 à 6:00:05 est appliquée par CASSIUS (indice de la quête de Rook) ; les journaux des survivants s'arrêtent au quatrième jour.
+- **Fidélité** : aucune fidélité « 1:1 ». Apparence documentée citée dans la spec 005 (détecteur trompé par l'air en mouvement et caméras de casque, *Aliens*, 1986 ; Seegson et son IA qui applique ses consignes, *Alien: Isolation*, 2014). CASSIUS, Asphodèle, Echo-8 et Kessler sont des créations du projet. À définir : décor, interface vocale de CASSIUS, visage de Kessler.
+- **Reste à faire** : hub Asphodèle (§7.3, §42, Q22-Q23), annexes, contrats locaux dont *Relais en dérive* ×3, CIN-70 à CIN-72, dépôt de la plaque dans le casier d'Echo-8.
+
 ---
 
 ## 8. Quêtes du Tantalus — [PROPOSÉ]
@@ -1139,6 +1152,19 @@ Elles utilisent le système de rapport existant (`npc-dialogue-v62.js`) : confia
 | **Nadia Bensaïd « SUTURE »** | **Pas de blessé sans extraction** | Colonie | Venue d'une colonie isolée ; rejoint l'équipage quand Port-Méridien atteint *Rétablie*. |
 | **Jonas Reed « BASTION »** | **Sécurité embarquée** | Enquête | Ancien agent de sécurité de cargos ; il a convoyé des scellés QZ17 sans savoir ce qu'ils contenaient. Témoignage au dossier. |
 | **Jun Seo « BALISE »** | **Itinéraires terrestres** | Colonie | Connaît les routes de convoi ; le recruter avant l'Acte III facilite le corridor. |
+
+### 8.4 Premières quêtes jouables — [PARTIEL] V188 (spec 005, 2026-11-15)
+
+Décision par défaut Q9 : DAVID-8R, Harlow, Rook et Vega. Code : `src/crew-quests-v188.js`, sauvegarde `crewQuestsV188`. Le personnage propose sa quête dans la conversation du hub, après les six choix de rapport qui ne changent pas ; le Commandement liste les quêtes et où trouver chaque donneur. Une mauvaise lecture ne coûte rien et ne paie rien.
+
+| Quête | Ouverture | Preuve | Effet [PROPOSÉ] |
+| --- | --- | --- | --- |
+| `ship-rook` Six heures | Acte II | Trois passages de l'enregistrement lus correctement (ventilation, sas 3 côté laboratoire, sas fermé par la station) | Loyauté +5 ; joue *Six heures de silence* et ouvre S1 |
+| `ship-vega` La ligne de commandement | Acte II | Deux contradictions relevées, puis la ligne choisie | Loyauté +10 (Administration) ou +4 (compagnie) ; sert le seuil 55 de l'Acte V |
+| `ship-harlow` Le sceau | Acte I et preuve de la piste (sceau ou berceau) | Joint ouvert de l'intérieur ; tampon « Asphodèle · transit vérifié » | Loyauté +5, recherche +6 |
+| `ship-david` Mémoire récupérée | Acte I | Trois composants, un par opération réussie sur Cocyte | Loyauté +5 ; note « poste de relais QZ-9 » jointe au dossier, hors décompte des 7 pièces |
+
+Fidélité : la quête de Vega reprend un thème documenté, la consigne de la compagnie qui passe avant l'équipage (« Special Order 937 », *Alien*, 1979, scène de MU/TH/UR) ; les deux ordres sont des textes du projet. Reste : les 12 autres quêtes, la vie à bord (§8.2) et les recrues (§8.3).
 
 ---
 
@@ -1300,6 +1326,10 @@ Les lieux Nacre-7, Echo Basin, Sable Meridian, Pallas Rift, MIRE-9, Palimpste et
 | 2 · Directive zéro | Après 1 campagne annexe | Élevé |
 | 3 · Les Bâtisseurs | Après 2 campagnes annexes, dont la 4 | Élevé |
 | 5 · Le banc d'essai | Après 3 campagnes annexes | Maximal ; conclut le fil QZ17 |
+
+### 13.6 Temps de voyage — [PARTIEL] V188 (2026-11-15)
+
+Décision par défaut Q21 : coût fixe par saut. Le carburant garde la règle existante (`2 + ⌈danger/3⌉`, `galaxy-jump-v115.js`) ; chaque saut ajoute **14 jours [PROPOSÉ]** d'hypersommeil, affichés avant le départ (« … unités de carburant · 14 jours en hypersommeil ») et ajoutés à l'arrivée (`src/galaxy-travel-v188.js`). La simulation existante fait évoluer les mondes pendant ces jours. Reste : messages reçus en retard, vieillissement de l'équipage pendant le voyage.
 
 ---
 
@@ -4613,3 +4643,7 @@ Décision du propriétaire : certaines salles passent en **profondeur** (2,5D, d
     - **Limites** : l'ascenseur de service « B » (preuve du fragment de sceau) n'est pas placé ; le nombre de rôdeurs peut dépasser trois.
 - **Limites** : Frontier Forge n'édite pas les salles en profondeur. Prochaines candidates : d'autres soutes ou cales de mission, après évaluation de QZ-17.
 
+
+### 56.13 Manques de contenu (V188, 2026-11-15)
+
+Audit bible contre code : [`AUDIT_CONTENU_V188.md`](../development/AUDIT_CONTENU_V188.md) (66 lignes au commit `250d81a` : 14 faites, 18 partielles, 32 manquantes, 2 bloquées par l'art). Comblés en partie dans ce lot, sans être terminés : front station Asphodèle S1-S4 et choix CASSIUS (§7.5), quatre quêtes de l'équipage (§8.4), temps de voyage (§13.6). Feature : `specs/005-front-asphodele-quetes/`. Tests : `scripts/verify-content-gaps-v188.mjs` ; contrôle Chromium sur fixture importée (déclaré dans la spec). Aucun de ces éléments n'a son art final.
