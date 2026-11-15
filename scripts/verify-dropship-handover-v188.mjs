@@ -14,7 +14,7 @@ import { buildMissionLevelV52 } from '../src/mission-levels-v52.js';
 import { buildApcConvoyLevelV121 } from '../src/apc-convoy-runtime-v121.js';
 import { INSERTION_SAFE_ZONE_V188 } from '../src/insertion-safe-zone-v188.js';
 import { dropshipHandoverPolicyV188, buildHandoverPlanV188, DROPSHIP_HANDOVER_SKIPS_V188, apcHandoverAdmissibleV188 } from '../src/mission-dropship-handover-v188.js';
-import { LEVEL_DROPSHIP_SLOTS_V188, LEVEL_DROPSHIP_SCALE_V188, UD4L_FRAME_V188 } from '../src/level-dropship-slots-v188.js';
+import { LEVEL_DROPSHIP_SLOTS_V188, LEVEL_DROPSHIP_SCALE_V188, UD4L_FRAME_V188, ud4lToWorldV188 } from '../src/level-dropship-slots-v188.js';
 
 const campaign = id => { const found = CAMPAIGNS.find(entry => entry.id === id); assert.ok(found, id); return found; };
 const worldOf = entry => WORLDS.find(world => world.id === entry.worldId) || WORLDS[0];
@@ -228,6 +228,36 @@ test('extraction: the boarding holds mission-complete, emits the boarding event 
   const paid = events.find(event => event.type === 'mission-complete');
   assert.deepEqual(paid.rewards, reference.rewards); assert.equal(paid.kills, reference.kills);
   assert.equal(engine.completeMission(engine.player), false, 'no second completion');
+});
+
+// V188 gameplay gaps: the boarding is a defended moment (DEFENDED_BOARDING_V188, [PROPOSÉ]).
+test('defended boarding: enemies keep moving and hitting, the chin gun hits them, marines are hurt but never die; paid once, resumable', async () => {
+  const { engine, events } = await completedRewards({ insertionHandoverV188: handover('foot') });
+  const p = engine.player;
+  tick(engine, .1); // the boarding resolves its ship and actors
+  // Injection: one awake patrol on the landing zone, 300 px in front of the dropship's nose (the marines'
+  // path to the ramp), ready to attack; the marine at 40 health.
+  const seq = engine.handoverV188, nose = ud4lToWorldV188(seq.ship, UD4L_FRAME_V188.chinGun);
+  const enemy = engine.spawnedEnemiesV188.find(entry => entry.behavior !== 'spitter' && entry.behavior !== 'shooter' && entry.h >= 70);
+  Object.assign(enemy, { alive: true, dormant: false, x: nose.x - seq.ship.dir * 300 - enemy.w / 2, y: seq.groundY - enemy.h, vx: 0, vy: 0, health: 4000, maxHealth: 4000, alert: true, attackClock: 0, rearEntryV130: null });
+  enemy.spawnX = enemy.x; engine.initializeEnemyMissionNavigation(enemy); engine.enemies = [enemy];
+  p.health = 40;
+  const x = enemy.x, lowest = { health: p.health };
+  while (engine.handoverV188) { tick(engine, 1 / 30); lowest.health = Math.min(lowest.health, p.health); }
+  assert.notEqual(enemy.x, x, 'the patrol moved during the boarding');
+  assert.ok(enemy.health < 4000, 'the chin turret / covering fire hit it');
+  assert.ok(events.some(event => event.type === 'dropship-covering-hit-v188'), 'presentation hook emitted');
+  assert.ok(lowest.health >= 1 && p.alive !== false, `the marine never died (lowest ${lowest.health})`);
+  assert.equal(events.filter(event => event.type === 'mission-complete').length, 1, 'paid once');
+  assert.ok(!events.some(event => event.type === 'mission-failed' || event.type === 'player-down'), 'no casualty event during the boarding');
+  // Resume mid-boarding still pays once (the hostile simulation does not replay the completion).
+  const second = await completedRewards({ insertionHandoverV188: handover('foot') });
+  tick(second.engine, 4);
+  const state = JSON.parse(JSON.stringify(second.engine.captureResumeState()));
+  const setup = launchOptions('pair-001-frontier', { insertionHandoverV188: handover('foot') });
+  const resumed = await fixture({ ...setup, keepEnemies: true, options: { ...setup.options, resumeState: state } });
+  tick(resumed.engine, 12);
+  assert.equal(resumed.events.filter(event => event.type === 'mission-complete').length, 1);
 });
 
 test('extraction in space: the docking airlock instead of the ship', async () => {

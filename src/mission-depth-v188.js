@@ -263,7 +263,8 @@ export function withMissionDepthRoomsV188(Base) {
       const section = this.missionDepthSectionV188;
       if (!section || !overDepthSectionV188(section, member)) return super.updateSquadCombat(member);
       const z = Number(member.depthZ) || 0, count = this.bullets?.length || 0;
-      const result = this.depthTargetsV188(z, () => super.updateSquadCombat(member));
+      // The hold's wall-side covers block its line of fire only in their own lane, as for Echo-9.
+      const result = this.withActorCoversV188(member, () => this.depthTargetsV188(z, () => super.updateSquadCombat(member)));
       for (const bullet of (this.bullets || []).slice(count)) bullet.depthZ = z;
       return result;
     }

@@ -381,6 +381,8 @@ export function withMissionDropshipHandoverV188(Base) {
       // Terminal and casualty events cannot come out of this window; the held mission-complete stays the only one.
       this.onEvent = event => SILENT_DURING_BOARDING.has(event?.type) ? undefined : route.call(this, event);
       for (const actor of aboard) actor.alive = false; // boarded: out of reach
+      // The insertion grace belongs to the landing: it never shields the enemies' fight at extraction.
+      const grace = this.insertionGraceV188; this.insertionGraceV188 = null;
       mission.state = 'active'; this.defendedBoardingV188 = seq;
       try {
         for (const enemy of this.enemies || []) if (enemy.alive && !enemy.dormant) this.updateEnemy(enemy, dt);
@@ -388,7 +390,7 @@ export function withMissionDropshipHandoverV188(Base) {
         this.updateBullets?.(dt);
         if (seq.pendingHitsV188?.length) for (const hit of seq.pendingHitsV188.splice(0)) if (hit.enemy.alive) this.applyEnemyDamage(hit.enemy, hit.damage, { owner: this.player, kind: hit.kind });
       } finally {
-        mission.state = 'complete'; this.defendedBoardingV188 = null;
+        mission.state = 'complete'; this.defendedBoardingV188 = null; this.insertionGraceV188 = grace;
         for (const actor of aboard) actor.alive = true;
         this.onEvent = route;
       }

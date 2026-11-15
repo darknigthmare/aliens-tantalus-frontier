@@ -384,6 +384,7 @@ const FORGE_TOOLING_V140 = new Set([
   'scripts/verify-bugfix-playthrough-v188.mjs',
   'scripts/verify-bugfix-decisions-v188.mjs',
   'scripts/verify-bugfix-playthrough-modes-v188.mjs',
+  'scripts/verify-gameplay-gaps-v188.mjs',
   'specs/001-salles-hybrides-2d-25d/spec.md',
   'specs/001-salles-hybrides-2d-25d/plan.md',
   'specs/001-salles-hybrides-2d-25d/research.md',
