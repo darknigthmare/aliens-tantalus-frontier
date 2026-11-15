@@ -2,6 +2,7 @@
 // (§5.7.1). Pure: every piece is read from state the game already records;
 // nothing is granted by a cinematic or a dialogue.
 import { normalizeStoryCampaignV188 } from './story-campaign-v188.js';
+import { cassiusOrdersRecoveredV188, asphodeleRetakenV188 } from './station-asphodele-v188.js';
 
 const t = (fr, en) => Object.freeze({ fr, en });
 const has = (list, id) => Array.isArray(list) && list.includes(id);
@@ -17,8 +18,9 @@ export const DOSSIER_PIECES_V188 = Object.freeze([
     held: save => normalizeStoryCampaignV188(save?.storyCampaignV188).interlude?.phase === 'resolved' }),
   Object.freeze({ id: 'depot-cradles', source: 'act-4', label: t('Berceaux et cocons du dépôt', 'Depot cradles and cocoons'),
     held: save => has(save?.galaxy?.completedCampaignIds, 'special-black-cocoon') }),
-  // Not playable yet: Asphodèle station (S2) and the colony annex "Ce que le quai a vu".
-  Object.freeze({ id: 'cassius-orders', source: 'station-s2', label: t('Ordres de livraison archivés par CASSIUS', 'Delivery orders archived by CASSIUS'), held: () => false, unavailable: true }),
+  // V188 spec 005: S2 copies the archived orders, whatever is later done to CASSIUS (§5.7.1).
+  Object.freeze({ id: 'cassius-orders', source: 'station-s2', label: t('Ordres de livraison archivés par CASSIUS', 'Delivery orders archived by CASSIUS'), held: save => cassiusOrdersRecoveredV188(save) }),
+  // Not playable yet: the colony annex "Ce que le quai a vu".
   Object.freeze({ id: 'wren-testimony', source: 'colony-a-quai', label: t('Témoignage de Tomas Wren', 'Tomas Wren’s testimony'), held: () => false, unavailable: true })
 ]);
 
@@ -43,8 +45,8 @@ export const ENDINGS_V188 = Object.freeze({
   'living-without-proof': t('Les vivants, sans preuve', 'The living, without proof')
 });
 
-/** Options open at the war council. Asphodèle (S4) and its relay room do not exist yet. */
-export function finalChoiceOptionsV188(save, { asphodeleRetaken = false, relayRoomOpen = false } = {}) {
+/** Options open at the war council. Asphodèle is retaken by S4 (spec 005); its relay room does not exist yet. */
+export function finalChoiceOptionsV188(save, { asphodeleRetaken = asphodeleRetakenV188(save), relayRoomOpen = false } = {}) {
   const dossier = storyDossierV188(save), story = normalizeStoryCampaignV188(save?.storyCampaignV188);
   const options = [];
   if (asphodeleRetaken && relayRoomOpen && dossier.count >= 5) options.push({ ...FINAL_OPTIONS_V188.transmit });

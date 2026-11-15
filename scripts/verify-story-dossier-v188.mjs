@@ -17,12 +17,12 @@ function fullSave() {
   return save;
 }
 
-test('the seven bible pieces, read only from recorded state; two are not playable yet', () => {
+test('the seven bible pieces, read only from recorded state; one is not playable yet (CASSIUS playable since spec 005)', () => {
   assert.deepEqual(DOSSIER_PIECES_V188.map(piece => piece.id), ['pda-email', 'seal-or-cradle', 'priority-1843', 'bishop-directive', 'depot-cradles', 'cassius-orders', 'wren-testimony']);
   assert.equal(storyDossierV188(createDefaultSave()).count, 0);
   const full = storyDossierV188(fullSave(), 'en');
   assert.equal(full.count, 5); assert.equal(full.total, 7); assert.equal(full.signerEstablished, false, '6 of 7 required (validated 2026-11-05)');
-  assert.deepEqual(full.pieces.filter(piece => piece.unavailable).map(piece => piece.id), ['cassius-orders', 'wren-testimony']);
+  assert.deepEqual(full.pieces.filter(piece => piece.unavailable).map(piece => piece.id), ['wren-testimony']);
   const partial = fullSave(); partial.storyCampaignV188.cinematicsSeen = [];
   assert.equal(storyDossierV188(partial).pieces.find(piece => piece.id === 'priority-1843').held, false, 'the 18:43 piece needs Rook’s signature');
 });
