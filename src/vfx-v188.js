@@ -42,14 +42,14 @@ export const VFX_KINDS_V188 = Object.freeze({
   steam: kind('steam-puff', -55, 1.4, .26),
   dust: kind('footstep-dust', -6, 2.5, .42),
   splash: kind('footstep-splash', 0, 0, .8),
-  ping: kind('tracker-ping', 0, 0, .55)
+  ping: kind('tracker-ping', 0, 0, .55, false, true)
 });
 
 /** Bounded pool: `cap` particle objects are allocated once and recycled (swap-remove). */
 export function createVfxPoolV188({ cap = VFX_V188.particleCap, decalCap = VFX_V188.decalCap } = {}) {
   const items = Array.from({ length: cap }, () => ({ kind: 'spark', x: 0, y: 0, vx: 0, vy: 0, age: 0, life: 0, size: 0, angle: 0, floorY: null, seed: 0 }));
   return { cap, items, count: 0, decals: [], decalCap, freeze: 0, serial: 0,
-    stats: { spawned: 0, dropped: 0, landed: 0, decals: 0, decalsMerged: 0, decalsEvicted: 0, drawn: 0, culled: 0 } };
+    stats: { spawned: 0, dropped: 0, landed: 0, decals: 0, decalsMerged: 0, decalsEvicted: 0, drawn: 0, culled: 0, tracers: 0, byKind: {} } };
 }
 
 export function spawnVfxParticleV188(pool, type, x, y, vx = 0, vy = 0, life = .3, size = 4, { angle = null, floorY = null, limit = pool?.cap } = {}) {
@@ -58,7 +58,7 @@ export function spawnVfxParticleV188(pool, type, x, y, vx = 0, vy = 0, life = .3
   const p = pool.items[pool.count++];
   p.kind = type; p.x = x; p.y = y; p.vx = finite(vx); p.vy = finite(vy); p.age = 0; p.life = life; p.size = size;
   p.angle = angle ?? Math.atan2(p.vy, p.vx); p.floorY = Number.isFinite(floorY) ? floorY : null; p.seed = ++pool.serial;
-  pool.stats.spawned++; return p;
+  pool.stats.spawned++; pool.stats.byKind[type] = (pool.stats.byKind[type] || 0) + 1; return p;
 }
 
 export function addVfxDecalV188(pool, x, y, width = 18) {
@@ -129,6 +129,10 @@ export function drawVfxDecalsV188(ctx, pool, view, options = {}) {
     drawVfxSlotV188(ctx, 'acid-burn', t, d.w, d, options); ctx.restore(); drawn++;
   }
   return drawn;
+}
+
+export function isSmartgunRoundV188(bullet) {
+  return Boolean(bullet) && (bullet.family === 'smart' || /smart|m56/i.test(String(bullet.weaponId || '')));
 }
 
 const scatter = seed => { let s = (seed * 2654435761) >>> 0 || 1; return () => { s ^= s << 13; s ^= s >>> 17; s ^= s << 5; return (s >>> 0) / 4294967296; }; };
@@ -267,7 +271,8 @@ export function withVfxV188(Base) {
       const accepted = super.activateTracker(actor);
       if (accepted && this.vfxV188Enabled && actor) {
         const reduced = this.vfxReducedV188();
-        spawnVfxParticleV188(this.vfxV188, 'ping', actor.x + actor.w / 2, actor.y + actor.h * .4, 0, 0, reduced ? .6 : 1.1, reduced ? 260 : 520, { limit: this.vfxLimitV188() });
+        spawnVfxParticleV188(this.vfxV188, 'ping', actor.x + actor.w / 2, actor.y + actor.h * .4, 0, 0, reduced ? .6 : 1.1, reduced ? 260 : 520,
+          { limit: this.vfxLimitV188(), angle: finite(actor.facing, 1) < 0 ? Math.PI : 0 });
       }
       return accepted;
     }
@@ -328,8 +333,24 @@ export function withVfxV188(Base) {
     }
     drawWorld(ctx) {
       const result = super.drawWorld(ctx);
-      if (this.vfxV188Enabled && this.vfxV188?.count) drawVfxParticlesV188(ctx, this.vfxV188, this.vfxViewV188());
+      if (this.vfxV188Enabled) {
+        const view = this.vfxViewV188();
+        this.drawSmartgunTracersV188(ctx, view);
+        if (this.vfxV188?.count) drawVfxParticlesV188(ctx, this.vfxV188, view);
+      }
       return result;
+    }
+    /** M56 smartgun rounds carry a tracer streak (the bullet sprite itself is unchanged). */
+    drawSmartgunTracersV188(ctx, view) {
+      const length = this.vfxReducedV188() ? 28 : 48;
+      for (const bullet of this.bullets || []) {
+        if (bullet.hit || !isSmartgunRoundV188(bullet)) continue;
+        const x = finite(bullet.x) + finite(bullet.w) / 2, y = finite(bullet.y) + finite(bullet.h) / 2;
+        if (!inView(x, y, length + VFX_V188.viewportMargin, view)) continue;
+        ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.translate(x, y); ctx.rotate(Math.atan2(finite(bullet.vy), finite(bullet.vx) || 1));
+        drawVfxSlotV188(ctx, 'smartgun-tracer', 0, length); ctx.restore();
+        if (this.vfxV188) this.vfxV188.stats.tracers++;
+      }
     }
     drawHud(ctx) {
       if (this.vfxV188Enabled && this.vfxScreenV188 && ctx && this.mission?.state === 'active') this.drawVfxScreenV188(ctx);
@@ -344,16 +365,17 @@ export function withVfxV188(Base) {
         drawVfxSlotV188(ctx, 'damage-vignette', 1 - t, screen.vignetteStrength, size); ctx.restore();
       }
       if (this.tensionV188?.phase === 'peak') {
-        ctx.save();
-        if (reduced) { ctx.globalAlpha = .14; ctx.fillStyle = '#ff961e'; ctx.fillRect(0, 0, size.width, 6); }
-        else { ctx.globalAlpha = .22; drawVfxSlotV188(ctx, 'alarm-strobe', screen.strobe * .55, 1, size); }
+        // Sodium emergency wash; the rotating beacon sweep is left out with reduced motion.
+        ctx.save(); ctx.globalAlpha = reduced ? .07 : .09 + .03 * Math.sin(screen.strobe * 2.2);
+        drawVfxSlotV188(ctx, 'sodium-wash', 0, 1, size);
+        if (!reduced) { ctx.globalAlpha = .22; drawVfxSlotV188(ctx, 'alarm-strobe', screen.strobe * .55, 1, size); }
         ctx.restore();
       }
     }
     getVfxSnapshotV188() {
       const pool = this.vfxV188;
       return pool ? { enabled: this.vfxV188Enabled, particles: pool.count, cap: pool.cap, limit: this.vfxLimitV188(), decals: pool.decals.length,
-        frozen: pool.freeze > 0, vignette: this.vfxScreenV188?.vignette || 0, stats: { ...pool.stats },
+        frozen: pool.freeze > 0, vignette: this.vfxScreenV188?.vignette || 0, stats: { ...pool.stats, byKind: { ...pool.stats.byKind } },
         kinds: pool.items.slice(0, pool.count).reduce((map, p) => (map[p.kind] = (map[p.kind] || 0) + 1, map), {}) } : null;
     }
   };

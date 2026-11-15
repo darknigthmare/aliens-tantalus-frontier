@@ -18,7 +18,7 @@ const slot = (id, layer, width, height, purpose, brief) => Object.freeze({
 });
 
 export const VFX_SLOTS_V188 = Object.freeze([
-  slot('muzzle-star', 'world-fx', 34, 22, 'Rifle / SMG / sentry muzzle flash, two frames per accepted shot.',
+  slot('muzzle-star', 'world-fx', 34, 22, 'Rifle / SMG / sentry muzzle flash; two alternating frames (A: long prong and short cross, B: squat X star), one per accepted shot.',
     'Four-pronged star-shaped muzzle flash as seen on the M41A pulse rifle in Aliens (1986): bright white-yellow core, long forward prong, short side prongs; additive on black; side view, muzzle at the left edge.'),
   slot('muzzle-flame', 'world-fx', 60, 26, 'Flamethrower / incinerator tongue at the nozzle.',
     'Short rolling tongue of orange-yellow flame leaving a nozzle, darker red edges and soot at the tip, side view; transparent background.'),
@@ -57,6 +57,10 @@ export const VFX_SLOTS_V188 = Object.freeze([
     'Thin expanding ring in pale cyan-green, echoing the M314 motion tracker display of Aliens (1986); additive, transparent background.'),
   slot('damage-vignette', 'overlay', 1280, 720, 'Screen edge tint when the marine is hurt.',
     'Dark red vignette around the screen edges, transparent centre; no text.'),
+  slot('smartgun-tracer', 'world-fx', 48, 4, 'Tracer streak behind each M56 smartgun round.',
+    'Thin hot-yellow tracer streak with an orange tail, additive on black; horizontal, head at the right edge.'),
+  slot('sodium-wash', 'overlay', 1280, 720, 'Low sodium-orange emergency light wash over the scene at peak tension.',
+    'Flat warm sodium-vapour orange light wash with darker corners, very low contrast; no text.'),
   slot('alarm-strobe', 'overlay', 1280, 720, 'Rotating amber emergency beacon sweep at peak tension.',
     'Amber rotating-beacon light sweep across the top edge of the screen, soft; transparent centre; no text.')
 ]);
@@ -78,12 +82,22 @@ const TAU = Math.PI * 2;
 // Primitive fallbacks. Each draws one effect instance centred on (0, 0) after the caller
 // translated (and rotated for oriented effects); `t` is the normalised age 0 → 1, `s` the size.
 export const VFX_FALLBACKS_V188 = Object.freeze({
-  'muzzle-star'(ctx, t, s) {
-    const k = 1 - t * .5;
+  'muzzle-star'(ctx, t, s, p) {
+    // Two alternating frames give the flicker of sustained fire: frame A is the long
+    // forward prong crossed by a short vertical bar, frame B a squat X-shaped star.
+    const k = 1 - t * .5, frameB = Boolean((p?.seed || 0) % 2);
     ctx.fillStyle = '#fff4c9'; ctx.beginPath();
-    ctx.moveTo(-2, 0); ctx.lineTo(s * .22, -s * .1); ctx.lineTo(s * 1.05 * k, 0); ctx.lineTo(s * .22, s * .1); ctx.closePath(); ctx.fill();
-    ctx.beginPath(); ctx.moveTo(s * .16, 0); ctx.lineTo(s * .26, -s * .48 * k); ctx.lineTo(s * .36, 0); ctx.lineTo(s * .26, s * .48 * k); ctx.closePath(); ctx.fill();
+    const forward = s * (frameB ? .7 : 1.05) * k;
+    ctx.moveTo(-2, 0); ctx.lineTo(s * .22, -s * .1); ctx.lineTo(forward, 0); ctx.lineTo(s * .22, s * .1); ctx.closePath(); ctx.fill();
+    ctx.beginPath();
+    if (frameB) for (const a of [-.8, .8, -2.2, 2.2]) { const c = s * .2; ctx.moveTo(c, 0); ctx.lineTo(c + Math.cos(a) * s * .42 * k, Math.sin(a) * s * .42 * k); ctx.lineTo(c + Math.cos(a + .25) * s * .1, Math.sin(a + .25) * s * .1); }
+    else { ctx.moveTo(s * .16, 0); ctx.lineTo(s * .26, -s * .48 * k); ctx.lineTo(s * .36, 0); ctx.lineTo(s * .26, s * .48 * k); ctx.closePath(); }
+    ctx.fill();
     ctx.fillStyle = '#ffd36b'; ctx.beginPath(); ctx.arc(s * .14, 0, s * .16, 0, TAU); ctx.fill();
+  },
+  'smartgun-tracer'(ctx, t, s) {
+    ctx.strokeStyle = '#ffe9a8'; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(-s, 0); ctx.stroke();
+    ctx.strokeStyle = 'rgba(255,170,60,.55)'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(-s * .25, 0); ctx.lineTo(-s, 0); ctx.stroke();
   },
   'muzzle-flame'(ctx, t, s) {
     ctx.fillStyle = '#ff9a2e'; ctx.beginPath(); ctx.moveTo(0, -s * .12); ctx.quadraticCurveTo(s * .6, -s * .34, s * (1 - t * .3), 0);
@@ -129,7 +143,16 @@ export const VFX_FALLBACKS_V188 = Object.freeze({
     for (const d of [-1, -.4, .4, 1]) { ctx.moveTo(d * 3, 0); ctx.lineTo(d * s * (.3 + t * .4), -s * (.6 - t * .4)); }
     ctx.stroke();
   },
-  'tracker-ping'(ctx, t, s) { ctx.strokeStyle = '#8fe3c2'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(0, 0, Math.max(1, s * t), 0, TAU); ctx.stroke(); },
+  'tracker-ping'(ctx, t, s) {
+    // A faint full ring plus a brighter forward wedge of two arcs: the fan-shaped sweep of the
+    // handheld tracker display, carried into the world (drawn rotated to the operator's facing).
+    const r = Math.max(1, s * t);
+    ctx.strokeStyle = '#8fe3c2'; ctx.lineWidth = 1; ctx.globalAlpha *= .45; ctx.beginPath(); ctx.arc(0, 0, r, 0, TAU); ctx.stroke(); ctx.globalAlpha /= .45;
+    ctx.lineWidth = 2.2; ctx.beginPath(); ctx.arc(0, 0, r, -.62, .62); ctx.stroke();
+    if (r > 30) { ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(0, 0, r - 18, -.5, .5); ctx.stroke(); }
+    ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(Math.cos(-.62) * r, Math.sin(-.62) * r); ctx.moveTo(0, 0); ctx.lineTo(Math.cos(.62) * r, Math.sin(.62) * r); ctx.stroke();
+  },
+  'sodium-wash'(ctx, t, s, p) { const { width = 1280, height = 720 } = p || {}; ctx.fillStyle = '#ff8a1c'; ctx.fillRect(0, 0, width, height); },
   'damage-vignette'(ctx, t, s, p) {
     const { width = 1280, height = 720 } = p || {};
     const edge = 46 + 30 * s;
