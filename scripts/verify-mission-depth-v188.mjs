@@ -102,7 +102,9 @@ test('QZ-17 cargo hold: the tracker counts depth, the resume keeps it', async ()
 });
 
 test('QZ-17 cargo hold: composed outermost, shipped offline, no generated image', () => {
-  assert.match(read('src/game-production-runtime.js'), /export class GameEngine extends withMissionDepthRoomsV188\(withQz17LevelDressingV188\(withCasteBehaviorsV188\(/);
+  // The depth section stays the outermost gameplay layer; only the V188 dropship handover,
+  // which withholds control around the whole mission, wraps it.
+  assert.match(read('src/game-production-runtime.js'), /export class GameEngine extends withMissionDropshipHandoverV188\(withMissionDepthRoomsV188\(withQz17LevelDressingV188\(withCasteBehaviorsV188\(/);
   const sw = read('sw.js'); for (const file of ['/src/mission-depth-v188.js', '/src/depth-props-v188.js', '/src/qz17-level-dressing-v188.js']) assert.ok(sw.includes(`'${file}'`), file);
   assert.match(read('src/depth-props-v188.js'), /fillText\('QZ17'/);
 });
