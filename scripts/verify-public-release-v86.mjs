@@ -396,6 +396,9 @@ const FORGE_TOOLING_V140 = new Set([
   // V188 mission VFX pass (slots + sourcing table), source-only exact paths.
   'scripts/verify-vfx-v188.mjs',
   'docs/development/VFX_V188.md',
+  // V188 graphics audit fixes (items 12–17), source-only exact paths.
+  'scripts/verify-visual-fixes-v188.mjs',
+  'docs/development/VISUAL_FIXES_V188.md',
   'specs/001-salles-hybrides-2d-25d/spec.md',
   'specs/001-salles-hybrides-2d-25d/plan.md',
   'specs/001-salles-hybrides-2d-25d/research.md',

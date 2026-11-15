@@ -40,10 +40,13 @@ export function deckSeamTopXV188(geometry, xFront) {
 /** Screen y of a depth z on the deck. */
 export const deckRowYV188 = (section, z) => section.floorY - z;
 
-/** The platform of the hold floor, whose truss the deck replaces inside the hold. */
+/**
+ * A drawn deck of the hold floor, whose truss the deck replaces inside the hold. The structure
+ * layout merges the floor platforms of neighbouring zones into one drawn deck, so the test is the
+ * floor height and the x overlap, not the zone.
+ */
 export function isHoldFloorPlatformV188(section, platform) {
   return Boolean(section && platform && Math.abs(Number(platform.y) - section.floorY) < 1
-    && (!section.zoneId || !platform.zoneId || platform.zoneId === section.zoneId)
     && platform.x < section.x1 && platform.x + platform.w > section.x0);
 }
 
