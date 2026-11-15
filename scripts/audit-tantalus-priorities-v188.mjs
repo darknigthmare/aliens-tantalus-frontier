@@ -60,7 +60,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "package.json": {
     "previousSha256": "ff133a405bfc1ef2afa7085fcb2a6cde27a9f52c4af0de5172a058b47082eb48",
-    "currentSha256": "d55f6167243dea79a975f282e885c59bcaff1e004d967b1f0259ee4df9f7cdd5"
+    "currentSha256": "d3723234a048f2130c809e3dfa3ac836c5598e8a3a7e3f99229ccd5b3b0114a1"
   },
   "player-appearance-v126.css": {
     "previousSha256": "da7045c7fd7d41da99eecf48d316150b2d16fac276fe635bb881034bd68c9320",
@@ -124,7 +124,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "328c764b2bf467d0bc21ae86abf415a7722bd0a88cba486eb2167c22fa8f0b84",
-    "currentSha256": "659e811c03d9848eefb4c5102cb0938fdc5e98c3fde62df8e47b34cf73f6fe07"
+    "currentSha256": "1104561714ccbac71ea3382b865f63955ba3f29b60ba70430e7b015fd7d0d3c7"
   },
   "src/alien-survival-runtime-v70.js": {
     "previousSha256": "65d5c0c4ca446021b6ff58ed6be61fc622c0908ede9d9d74b730fa0efef2fd93",
@@ -236,7 +236,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/game-production-runtime.js": {
     "previousSha256": "f0c9ff64ce004cc0dd8d028e3a62a717364fa0c1425eafb16b2ae8f808715419",
-    "currentSha256": "dea29754c93c7d21e4f587dfcf422105aca51e64a776b499dd1224ec6583ff2b"
+    "currentSha256": "3032a9e4533feae5c1d31963eb146c92242b643c3cdc90aec38ad7b7d3ad5927"
   },
   "src/game-runtime.js": {
     "previousSha256": "9005aae32379ade306e187ea6c3d156f1a3083178bc0c0808d9963cdd6b8f379",
@@ -412,7 +412,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "sw.js": {
     "previousSha256": "ff86bba365c3875c8ebaeb0abe13b2a6185ccd5f1a030b4ee5b15ac0e4a12f9b",
-    "currentSha256": "68a8e6d070b566d6b977e45dabac1bb6ba7e360b87471a231f91d0317e20bd2d"
+    "currentSha256": "52f0dbe8c011eb2457dade836fac6e490e9f6c99491908fe4665d4b1571d77ea"
   },
   "title-screen-v61.css": {
     "previousSha256": "3a748b04d5e6c9a7e04c189b2c1910c3163a0840968be6bcbb6352e10e16369f",
