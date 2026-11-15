@@ -9,11 +9,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fixture, tick } from './engine-host-v188.mjs';
-import { CAMPAIGNS, WORLDS, LEVEL_SEEDS } from '../src/content.js';
+import { CAMPAIGNS, WORLDS, LEVEL_SEEDS, VEHICLES } from '../src/content.js';
 import { buildMissionLevelV52 } from '../src/mission-levels-v52.js';
 import { buildApcConvoyLevelV121 } from '../src/apc-convoy-runtime-v121.js';
 import { INSERTION_SAFE_ZONE_V188 } from '../src/insertion-safe-zone-v188.js';
-import { dropshipHandoverPolicyV188, buildHandoverPlanV188, DROPSHIP_HANDOVER_SKIPS_V188 } from '../src/mission-dropship-handover-v188.js';
+import { dropshipHandoverPolicyV188, buildHandoverPlanV188, DROPSHIP_HANDOVER_SKIPS_V188, apcHandoverAdmissibleV188 } from '../src/mission-dropship-handover-v188.js';
 import { LEVEL_DROPSHIP_SLOTS_V188, LEVEL_DROPSHIP_SCALE_V188, UD4L_FRAME_V188 } from '../src/level-dropship-slots-v188.js';
 
 const campaign = id => { const found = CAMPAIGNS.find(entry => entry.id === id); assert.ok(found, id); return found; };
@@ -129,7 +129,9 @@ test('enemies cannot move or hit during the landing', async () => {
 });
 
 test('APC insertion (generic): the M577 is lowered from the belly and drives out; the mission vehicle is untouched', async () => {
-  const { engine } = await launch('pair-005-frontier', { insertionHandoverV188: handover('apc') });
+  // The deployment carries M577 vehicle 001 (as app.js passes options.vehicle) on a planet-exterior level.
+  const { engine } = await launch('pair-006-frontier', { vehicle: VEHICLES[0], insertionHandoverV188: handover('apc') });
+  assert.equal(engine.handoverConfigV188.mode, 'apc');
   const vehicle = engine.vehicle && { ...engine.vehicle }, p = engine.player, final = pose(p);
   tick(engine, .1);
   const seq = engine.handoverV188;
@@ -359,4 +361,27 @@ for (const [id, mode, placeType] of KINDS) test(`${id} (${mode}, ${placeType}): 
   for (let n = 0; n < 6 && engine.handoverV188; n++) { tick(engine, 1); engine.draw(); }
   assert.deepEqual(types(events).filter(type => /mission-complete|boarding/.test(type)),
     policy.extraction ? ['extraction-boarding-complete-v188', 'mission-complete'] : ['mission-complete']);
+});
+
+test('APC rule: carried only for vehicle 001/002 on colony-multiroute or planet-exterior, never in space; otherwise on foot', async () => {
+  assert.equal(apcHandoverAdmissibleV188({ placeType: 'atmosphere', templateId: 'planet-exterior', vehicleId: 'vehicle-002-m577-command-apc' }), true);
+  assert.equal(apcHandoverAdmissibleV188({ placeType: 'space', templateId: 'colony-multiroute', vehicleId: VEHICLES[0].id }), false);
+  assert.equal(apcHandoverAdmissibleV188({ placeType: 'atmosphere', templateId: 'ship-interior-vertical', vehicleId: VEHICLES[0].id }), false);
+  assert.equal(apcHandoverAdmissibleV188({ placeType: 'atmosphere', templateId: 'colony-multiroute', vehicleId: 'vehicle-003-m570-armored-personnel-carrier' }), false);
+  const noVehicle = await launch('pair-006-frontier', { insertionHandoverV188: handover('apc') });
+  assert.equal(noVehicle.engine.handoverConfigV188.mode, 'foot'); assert.equal(noVehicle.engine.handoverConfigV188.requestedMode, 'apc');
+  tick(noVehicle.engine, .1); assert.equal(noVehicle.engine.handoverV188.apc, undefined, 'no M577 in the belly');
+  const space = await launch('pair-006-frontier', { vehicle: VEHICLES[0], insertionHandoverV188: handover('apc', 'space') });
+  assert.equal(space.engine.handoverConfigV188.mode, 'foot'); assert.equal(space.engine.handoverV188.style, 'dock');
+});
+
+test('render suspend hook: draw() is skipped while the app shows its own cinematic', async () => {
+  const { engine, text, draws } = await launch('pair-001-frontier', { insertionHandoverV188: handover('foot') });
+  tick(engine, 1);
+  engine.setRenderSuspendedV188(true);
+  const before = text.length + draws.length;
+  engine.draw();
+  assert.equal(text.length + draws.length, before, 'nothing drawn');
+  engine.setRenderSuspendedV188(false); engine.draw();
+  assert.ok(text.length + draws.length > before);
 });

@@ -69,6 +69,12 @@ export function dropshipHandoverPolicyV188(options = {}) {
   return Object.freeze({ ...option, campaignId: id,
     insertion: !DROPSHIP_HANDOVER_SKIPS_V188.insertion[id], extraction: !DROPSHIP_HANDOVER_SKIPS_V188.extraction[id] });
 }
+/** App rule (V188 cinematic contract): the M577 rides only for vehicle 001/002, on a
+ *  colony-multiroute or planet-exterior template, never in 'space'. Otherwise 'foot'. */
+export const APC_HANDOVER_TEMPLATES_V188 = Object.freeze(['colony-multiroute', 'planet-exterior']);
+export function apcHandoverAdmissibleV188({ placeType, templateId, vehicleId } = {}) {
+  return placeType !== 'space' && APC_HANDOVER_TEMPLATES_V188.includes(templateId) && /^vehicle-00[12]-/.test(String(vehicleId || ''));
+}
 export function buildHandoverPlanV188(name, short = false) {
   const plan = DROPSHIP_HANDOVER_PLANS_V188[name], scale = short ? plan.short : 1;
   let at = 0;
@@ -122,10 +128,15 @@ export function withMissionDropshipHandoverV188(Base) {
     start(options = {}) {
       this.handoverV188 = null; this.handoverDepartedV188 = false; this.handoverExtractedV188 = false;
       this.handoverParticlesV188 = []; this.handoverShakeV188 = 0;
-      const policy = dropshipHandoverPolicyV188(options);
+      let policy = dropshipHandoverPolicyV188(options);
       this.handoverConfigV188 = policy;
       this.installHandoverRoutesV188();
       const result = super.start(options);
+      if (policy?.mode === 'apc' && !apcHandoverAdmissibleV188({ placeType: policy.placeType, templateId: options.missionLevel?.templateId,
+        vehicleId: options.vehicle?.id || (this.apcConvoyActiveV121 ? this.vehicle?.id : '') })) {
+        policy = Object.freeze({ ...policy, mode: 'foot', requestedMode: 'apc' }); // mismatch with the carried-M577 rule: on foot
+        this.handoverConfigV188 = policy;
+      }
       const access = options.accessibility || {};
       this.handoverMotionV188 = { reduced: Boolean(access.reducedMotion || this.accessibilityRuntime?.reducedMotion),
         shake: !access.reducedMotion && access.screenShake !== false && access.screenShake !== 0 && access.screenShake !== 'off' };
@@ -503,7 +514,11 @@ export function withMissionDropshipHandoverV188(Base) {
         if (!seq.apc.own && phaseStart(seq, 'disembark') <= time) drawM577TransportV188(ctx, seq.apc.x, footY, seq.apc.facing, { wheelTurn: seq.apc.wheel });
       }
     }
+    /** Render suspend (app hook): while the app shows its own full-screen cinematic over the
+     *  mission, the engine skips its frame entirely instead of having draw() replaced. */
+    setRenderSuspendedV188(suspended) { this.renderSuspendedV188 = Boolean(suspended); return this.renderSuspendedV188; }
     draw() {
+      if (this.renderSuspendedV188) return undefined;
       const seq = this.handoverV188, shake = this.handoverShakeV188 > 0 && this.handoverMotionV188?.shake;
       const camera = this.camera, saved = shake ? { x: camera.x, y: camera.y } : null;
       if (saved) { camera.x += (Math.random() - .5) * 6; camera.y += (Math.random() - .5) * 4; }
