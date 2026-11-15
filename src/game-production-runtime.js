@@ -1,4 +1,6 @@
 import { withMissionDepthRoomsV188 } from './mission-depth-v188.js';
+import { withFranchiseFidelityV188 } from './franchise-fidelity-v188.js';
+import { withGameplayGapsV188 } from './gameplay-gaps-v188.js';
 import { withInsertionSafeZoneV188 } from './insertion-safe-zone-v188.js';
 import { withMissionDropshipHandoverV188 } from './mission-dropship-handover-v188.js';
 import { withQz17LevelDressingV188 } from './qz17-level-dressing-v188.js';
@@ -102,7 +104,7 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
 // withholds control nothing below it runs, so mission time (and with it the
 // insertion grace) only starts when control is given, and it can hold the
 // mission-complete event of any mode until the boarding is over.
-export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepthRoomsV188(withQz17LevelDressingV188(withCasteBehaviorsV188(withInsertionSafeZoneV188(withRunOptionsRuntimeV188(withVfxV188(withCombatFeelV188(withFootstepCuesV188(withMissionObjectivePanelV188(withTensionDirectorV188(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(V158ProductionEngine)))))))))))))))) {
+export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepthRoomsV188(withQz17LevelDressingV188(withCasteBehaviorsV188(withInsertionSafeZoneV188(withRunOptionsRuntimeV188(withVfxV188(withFranchiseFidelityV188(withGameplayGapsV188(withCombatFeelV188(withFootstepCuesV188(withMissionObjectivePanelV188(withTensionDirectorV188(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(V158ProductionEngine)))))))))))))))))) {
   start(options = {}) {
     options = isolateForgeMissionOptionsV136(options);
     this.expectedMissionSignatureV130 = options.missionLevel?.signature || null;

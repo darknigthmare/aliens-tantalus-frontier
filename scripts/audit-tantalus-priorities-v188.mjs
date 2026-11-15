@@ -48,7 +48,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
     "previousSha256": "95287e9c3f9be2b88db9e391a9a143c4c69be8956b6763e4113645974b9e878d",
-    "currentSha256": "bcca6376bcddefac597a645a20e02c1517b9539ddfc32fe817c10f1d8d184922"
+    "currentSha256": "1b390457fd5a0cf9f727dab1e0c656c6b42e3e235cb95b3adfede54f899438a1"
   },
   "hub-level.css": {
     "previousSha256": "13e29b3719e1246d595dadca4c786cbeb5a471dece902104b0ccd29a1de9908d",
@@ -60,7 +60,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "package.json": {
     "previousSha256": "ff133a405bfc1ef2afa7085fcb2a6cde27a9f52c4af0de5172a058b47082eb48",
-    "currentSha256": "d3723234a048f2130c809e3dfa3ac836c5598e8a3a7e3f99229ccd5b3b0114a1"
+    "currentSha256": "340181f941bc4a103fd173e87532e3102c137a0c53340dcf06b41ed2ab6ba4d5"
   },
   "player-appearance-v126.css": {
     "previousSha256": "da7045c7fd7d41da99eecf48d316150b2d16fac276fe635bb881034bd68c9320",
@@ -124,7 +124,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "328c764b2bf467d0bc21ae86abf415a7722bd0a88cba486eb2167c22fa8f0b84",
-    "currentSha256": "1104561714ccbac71ea3382b865f63955ba3f29b60ba70430e7b015fd7d0d3c7"
+    "currentSha256": "26892893ee81123ff7825c30e977ab4cc565f68b79b42e29f18878cbd7e53ab1"
   },
   "src/alien-survival-runtime-v70.js": {
     "previousSha256": "65d5c0c4ca446021b6ff58ed6be61fc622c0908ede9d9d74b730fa0efef2fd93",
@@ -136,7 +136,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/alpha-bravo-coop-runtime-v69.js": {
     "previousSha256": "85a9ca41d593a723bf0cc55c13bc1f40e5afae05e5b3085bf51423813b08aed1",
-    "currentSha256": "1478772183078528fa0708ab0aa1c0cf5a24419ab078302d921dce1f48ec9fd6"
+    "currentSha256": "2da4a5c7fafec2675ed92df47078ef47f30b776e83adf290210eb8483fe2dda9"
   },
   "src/apc-convoy-runtime-v121.js": {
     "previousSha256": "b1fa0c689763ca94ddb37b99020acedcd176d057b5d26f16ef24f9171c39a4a9",
@@ -144,7 +144,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/app.js": {
     "previousSha256": "482835e65677c536085a1344cf61c3ffa5e09e2af1b8029b949e000a533038ae",
-    "currentSha256": "75b9c46a9e8f543a6e10e84c5acd277de8bf0590eb96f505a8b5bef5d4b48c3c"
+    "currentSha256": "65eb8a8d995c089b6005767f38a2d8bdb16b001644a7195a0b7790f99ecc004c"
   },
   "src/archive-relay-presentation-v160.js": {
     "previousSha256": "e628ccee6aa0a2ee40eea1fdd3b66b11800c3185c39bbd91c18d662c05749a30",
@@ -236,7 +236,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/game-production-runtime.js": {
     "previousSha256": "f0c9ff64ce004cc0dd8d028e3a62a717364fa0c1425eafb16b2ae8f808715419",
-    "currentSha256": "3032a9e4533feae5c1d31963eb146c92242b643c3cdc90aec38ad7b7d3ad5927"
+    "currentSha256": "1936d4fcd4d723239a095fc44b388023125d466a8e8624d59946c6fc0af5dfa8"
   },
   "src/game-runtime.js": {
     "previousSha256": "9005aae32379ade306e187ea6c3d156f1a3083178bc0c0808d9963cdd6b8f379",
@@ -308,7 +308,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/i18n-en-catalog-v185.js": {
     "previousSha256": "ac3632c302294c3e2869d673ad6d8cd861e1b0f62641d2d16335387746a6218a",
-    "currentSha256": "a2e39407079d9a1cb54697c5456a806ad7f4254e984ad8427a11ef73aeed1a94"
+    "currentSha256": "77dad4ef9f1b4d96af88bfbe5044817c9f8aafa17c1f73870b6b3f2497ac3c6c"
   },
   "src/i18n-v185.js": {
     "previousSha256": "592b025ceca9008e73bff267be72a2a3b614767fc220f82cbf2a3ef792060e7e",
@@ -412,7 +412,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "sw.js": {
     "previousSha256": "ff86bba365c3875c8ebaeb0abe13b2a6185ccd5f1a030b4ee5b15ac0e4a12f9b",
-    "currentSha256": "52f0dbe8c011eb2457dade836fac6e490e9f6c99491908fe4665d4b1571d77ea"
+    "currentSha256": "f37e34af7bedb554f79fb9527183362eb2ce888841dfa48e0b1883a8db644f7f"
   },
   "title-screen-v61.css": {
     "previousSha256": "3a748b04d5e6c9a7e04c189b2c1910c3163a0840968be6bcbb6352e10e16369f",

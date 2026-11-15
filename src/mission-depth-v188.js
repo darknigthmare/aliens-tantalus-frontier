@@ -9,11 +9,26 @@ import { blockedByFootprintV188, stepDepthMoveV188, freeDepthV188, depthShotHits
 import { drawDepthPropV188, drawDepthHoldFloorV188 } from './depth-props-v188.js';
 import { buildDepthHoldSectionV188, resolveDepthHoldDefinitionV188, depthHoldDefinitionV188, spansHoldDepthV188, holdSleeperSlotsV188 } from './depth-hold-sections-v188.js';
 import { drawDepthHoldSlotV188 } from './depth-hold-slots-v188.js';
+import { sweepProjectileAabbV83, firstProjectileObstacleV83 } from './projectile-collision-v83.js';
 
 export const QZ17_CAMPAIGN_ID_V188 = 'special-narrative-qz17';
 export const MISSION_ATTACK_BAND_V188 = 24;
 const P1_DEPTH_KEYS = { back: ['KeyW', 'ArrowUp'], front: ['KeyS', 'ArrowDown'] };
 const P2_DEPTH_KEYS = { back: ['KeyI'], front: ['KeyK'] };
+/** [PROPOSÉ] Squad marines in a hold: their lane around the leader's, by squad index (gameplay gaps V188). */
+export const SQUAD_DEPTH_LANES_V188 = Object.freeze([-14, 14, -26, 26]);
+/**
+ * [PROPOSÉ] Enemy lanes in a hold (gameplay gaps V188): the enemies chasing one marine are ranked by distance;
+ * each takes a small lane offset around the marine's lane (all inside the attack band of 24), and only
+ * `engaged` of them close in to melee at once; the others hold `holdDistance` px away, in their flanking
+ * lane, until a place frees up (a closer one dies or is staggered, or they become closer by `hysteresis`).
+ * Ranged castes, bosses, castes filling the depth and the caste behaviours with their own timing
+ * (ambusher, runner) are never held.
+ */
+export const ENEMY_DEPTH_SPREAD_V188 = Object.freeze({ offsets: Object.freeze([0, 10, -10, 16, -16]), engaged: 1, holdDistance: 150, hysteresis: 40 });
+const rangedCaste = enemy => Boolean(enemy?.isBoss || ['spitter', 'shooter'].includes(enemy?.behavior));
+const ownTiming = enemy => ['ambusher', 'runner'].includes(enemy?.behaviorProfileV119?.id);
+const centreOf = actor => actor.x + (actor.w || 0) / 2;
 
 /**
  * The QZ-17 section, measured on the generated level: between the two cargo airlocks, on the lowest cargo
@@ -66,6 +81,7 @@ export function withMissionDepthRoomsV188(Base) {
       this.tagInitialDepthAcidV188();
       for (const actor of [this.player, this.coop]) if (actor) actor.depthZ = 0;
       this.missionDepthEnteredAtV188 = null;
+      if (this.depthControlsShownV188) { this.depthControlsShownV188 = false; this.onEvent?.({ type: 'depth-section-controls-v188', active: false, sectionId: null }); }
       // The base applies options.resumeState before the section exists: the saved depths are restored here.
       if (this.missionDepthSectionV188 && this.lastResumeResult?.applied) this.restoreMissionDepthV188(options.resumeState?.depthV188);
       return result;
@@ -74,7 +90,25 @@ export function withMissionDepthRoomsV188(Base) {
     depthActorsV188() {
       const section = this.missionDepthSectionV188;
       if (!section) return [];
-      return [this.player, this.coopEnabled ? this.coop : null, ...(this.enemies || [])].filter(actor => overDepthSectionV188(section, actor));
+      return [this.player, this.coopEnabled ? this.coop : null, ...this.depthSquadV188(), ...(this.enemies || [])].filter(actor => overDepthSectionV188(section, actor));
+    }
+    /** Squad marines (AI) over the hold floor. */
+    depthSquadV188() {
+      const section = this.missionDepthSectionV188, squad = typeof this.activeSquadActors === 'function' ? this.activeSquadActors() : [];
+      return section && Array.isArray(squad) ? squad.filter(member => member && overDepthSectionV188(section, member)) : [];
+    }
+    /** The hold's wall-side crates covers stop an actor only in their own lane (the rule Echo-9 already had). */
+    coversForDepthV188(covers, z) {
+      const section = this.missionDepthSectionV188;
+      if (!section?.coverIds?.length) return covers;
+      const lanes = new Map(section.props.filter(entry => entry.kind === 'cover').map(entry => [entry.id.slice(6), entry.footprint]));
+      return (covers || []).filter(cover => !lanes.has(cover.id) || (z > lanes.get(cover.id).z0 && z < lanes.get(cover.id).z1));
+    }
+    withActorCoversV188(actor, run) {
+      const section = this.missionDepthSectionV188, covers = this.depthAllCoversV188 || this.covers;
+      if (!section || !overDepthSectionV188(section, actor) || this.spansDepthV188(actor)) return run();
+      const kept = this.covers; this.covers = this.coversForDepthV188(covers, Number(actor.depthZ) || 0);
+      try { return run(); } finally { this.covers = kept; }
     }
     /** An enemy too big to steer between the objects fills the whole depth of the hold (spec 004, FR-008). */
     spansDepthV188(enemy) { return spansHoldDepthV188(this.missionDepthDefinitionV188, enemy); }
@@ -110,7 +144,8 @@ export function withMissionDepthRoomsV188(Base) {
       const filtered = strip.size ? new Set([...held].filter(code => !strip.has(code))) : held;
       const before = [this.player, this.coop].map(actor => actor ? { x: actor.x + actor.w / 2, z: Number(actor.depthZ) || 0 } : null);
       // The wall-side crates cover is jumped near the wall only; further out it is walked around.
-      const covers = this.covers;
+      const covers = this.covers; this.depthAllCoversV188 = covers;
+      const squadBefore = new Map(this.depthSquadV188().map(member => [member, { x: member.x + member.w / 2, z: Number(member.depthZ) || 0 }]));
       if (p1 && (Number(this.player.depthZ) || 0) < -34) this.covers = (covers || []).filter(cover => !section.coverIds.includes(cover.id));
       // The motion tracker (V160) already counts actor.depth: lend it the depth of the hold's actors.
       const lent = this.depthActorsV188().map(actor => ({ actor, depth: actor.depth, lent: Number(actor.depthZ) || 0 }));
@@ -119,7 +154,7 @@ export function withMissionDepthRoomsV188(Base) {
       let result;
       try { result = super.update(delta); } finally {
         if (filtered !== held) for (const code of [...held]) if (!strip.has(code) && !filtered.has(code)) held.delete(code);
-        this.keys = held; this.covers = covers;
+        this.keys = held; this.covers = covers; this.depthAllCoversV188 = null;
         for (const entry of lent) if (entry.actor.depth === entry.lent) entry.actor.depth = entry.depth;
       }
       const dt = Math.min(.1, Math.max(0, Number(delta) || 0));
@@ -136,8 +171,16 @@ export function withMissionDepthRoomsV188(Base) {
         actor.depthZ = step.z;
         if (step.x !== actor.x + actor.w / 2) { actor.x = step.x - actor.w / 2; actor.vx = 0; }
       });
+      // The page's control help follows the hold: W/S step in depth there, they do not aim (app.js swaps the text).
+      const controls = Boolean(overDepthSectionV188(section, this.player) && this.mission?.state === 'active');
+      if (controls !== Boolean(this.depthControlsShownV188)) {
+        this.depthControlsShownV188 = controls;
+        this.onEvent?.({ type: 'depth-section-controls-v188', active: controls, sectionId: section.id });
+      }
       if (inDepthSectionV188(section, this.player) && this.missionDepthEnteredAtV188 === null) this.missionDepthEnteredAtV188 = this.mission?.elapsed || 0;
       if (!inDepthSectionV188(section, this.player)) this.missionDepthEnteredAtV188 = null;
+      this.stepSquadDepthV188(section, squadBefore, dt);
+      this.assignEnemyDepthSpreadV188(section);
       for (const enemy of this.enemies || []) {
         // A dormant sleeper (alive: false until it wakes) keeps the depth it waits at, behind its row.
         if (enemy.dormant) continue;
@@ -145,9 +188,94 @@ export function withMissionDepthRoomsV188(Base) {
         if (!inDepthSectionV188(section, enemy)) { if (!overDepthSectionV188(section, enemy)) enemy.depthZ = 0; continue; }
         const marines = [this.player, this.coopEnabled ? this.coop : null].filter(actor => actor?.alive !== false && inDepthSectionV188(section, actor));
         const target = marines.sort((a, b) => Math.abs(a.x - enemy.x) - Math.abs(b.x - enemy.x))[0];
-        enemy.depthZ = stepEnemyDepthV188(section, enemy, target ? Number(target.depthZ) || 0 : Number(enemy.depthZ) || 0, dt);
+        const offset = target && enemy.depthSpreadV188?.target === target ? enemy.depthSpreadV188.offset : 0;
+        const lane = target ? Math.max(section.zMin, Math.min(section.zMax, (Number(target.depthZ) || 0) + offset)) : Number(enemy.depthZ) || 0;
+        enemy.depthZ = stepEnemyDepthV188(section, enemy, lane, dt);
       }
       return result;
+    }
+
+    /** Ranks the enemies chasing each marine of the hold: lane offset and melee place (ENEMY_DEPTH_SPREAD_V188). */
+    assignEnemyDepthSpreadV188(section) {
+      const rules = ENEMY_DEPTH_SPREAD_V188;
+      const marines = [this.player, this.coopEnabled ? this.coop : null].filter(actor => actor?.alive !== false && inDepthSectionV188(section, actor));
+      const groups = new Map(marines.map(marine => [marine, []]));
+      for (const enemy of this.enemies || []) {
+        if (!marines.length || !enemy.alive || enemy.dormant || this.spansDepthV188(enemy) || !inDepthSectionV188(section, enemy)) { enemy.depthSpreadV188 = null; continue; }
+        const target = [...marines].sort((a, b) => Math.abs(centreOf(a) - centreOf(enemy)) - Math.abs(centreOf(b) - centreOf(enemy)))[0];
+        groups.get(target).push(enemy);
+      }
+      for (const [marine, list] of groups) {
+        // Hysteresis: an engaged enemy keeps its place unless another is clearly closer.
+        const key = enemy => Math.abs(centreOf(enemy) - centreOf(marine)) - (enemy.depthSpreadV188?.engaged ? rules.hysteresis : 0);
+        list.sort((a, b) => key(a) - key(b) || String(a.id).localeCompare(String(b.id)));
+        let engaged = 0;
+        list.forEach((enemy, rank) => {
+          const free = rangedCaste(enemy) || ownTiming(enemy) || enemy.staggerClock > 0;
+          const engage = free || engaged < rules.engaged;
+          if (engage && !free) engaged++;
+          enemy.depthSpreadV188 = { target: marine, rank, offset: rules.offsets[rank % rules.offsets.length], engaged: engage, hold: !engage };
+        });
+      }
+    }
+    /** A waiting enemy may turn and snarl but does not close in under the hold distance. */
+    holdEnemyDepthSpreadV188(enemy, beforeX) {
+      const spread = enemy?.depthSpreadV188, section = this.missionDepthSectionV188;
+      if (!spread?.hold || !enemy.alive || !section || !Number.isFinite(beforeX) || !inDepthSectionV188(section, enemy)) return;
+      const gapBefore = Math.abs(beforeX + enemy.w / 2 - centreOf(spread.target)), gapAfter = Math.abs(centreOf(enemy) - centreOf(spread.target));
+      if (gapAfter < ENEMY_DEPTH_SPREAD_V188.holdDistance && gapAfter < gapBefore) { enemy.x = beforeX; enemy.vx = 0; }
+    }
+
+    /** Squad marines in a hold: formation lane around the leader, the lane of the enemy they engage, never inside an object. */
+    squadDepthLaneV188(section, member, index) {
+      const z = Number(member.depthZ) || 0, range = Number(member.profile?.range) || 620;
+      const enemies = (this.enemies || []).filter(enemy => enemy.alive && !enemy.dormant && inDepthSectionV188(section, enemy) && Math.abs(centreOf(enemy) - centreOf(member)) <= range);
+      if (enemies.some(enemy => this.spansDepthV188(enemy) || depthShotHitsV188(z, Number(enemy.depthZ) || 0))) return z; // a target in its band: hold the lane and fire
+      const nearest = enemies.sort((a, b) => Math.abs(centreOf(a) - centreOf(member)) - Math.abs(centreOf(b) - centreOf(member)))[0];
+      if (nearest) return Number(nearest.depthZ) || 0;
+      const leader = this.player, leaderZ = inDepthSectionV188(section, leader) ? Number(leader.depthZ) || 0 : 0;
+      let lane = leaderZ + SQUAD_DEPTH_LANES_V188[index % SQUAD_DEPTH_LANES_V188.length];
+      if (Math.abs(leaderZ) <= section.doorBand) lane = Math.max(-section.doorBand + 2, lane); // leader on the rail: ready for the airlocks
+      return Math.max(section.zMin, Math.min(section.zMax, lane));
+    }
+    stepSquadDepthV188(section, before, dt) {
+      [...before.keys()].forEach((member, index) => {
+        const from = before.get(member);
+        if (!member.alive || member.inVehicle) return;
+        if (!inDepthSectionV188(section, member)) {
+          if (overDepthSectionV188(section, member)) return; // airborne: keeps its depth
+          if (Math.abs(from.z) > section.doorBand && from.x >= section.x0 && from.x <= section.x1) { member.x = Math.max(section.x0 + 2, Math.min(section.x1 - member.w - 2, member.x)); member.vx = 0; }
+          else if (!member.climbing) member.depthZ = 0;
+          return;
+        }
+        const half = member.w / 2 - 4, lane = member.downed ? from.z : this.squadDepthLaneV188(section, member, index);
+        const rate = section.speed * dt, next = Math.max(section.zMin, Math.min(section.zMax, from.z + Math.max(-rate, Math.min(rate, lane - from.z))));
+        let z = from.z;
+        if (!blockedByFootprintV188(section, from.x, next, half)) z = next;
+        else if (blockedByFootprintV188(section, from.x, from.z, half)) z = freeDepthV188(section, from.x, from.z, half);
+        member.depthZ = z;
+        if (blockedByFootprintV188(section, member.x + member.w / 2, z, half)) { member.x = from.x - member.w / 2; member.vx = 0; }
+      });
+    }
+    updateSquadMovement(member, index, leader, delta) { return this.withActorCoversV188(member, () => super.updateSquadMovement(member, index, leader, delta)); }
+    /** Squad fire in a hold: the player's rules (shot band, containers, settle). */
+    updateSquadCombat(member) {
+      const section = this.missionDepthSectionV188;
+      if (!section || !overDepthSectionV188(section, member)) return super.updateSquadCombat(member);
+      const z = Number(member.depthZ) || 0, count = this.bullets?.length || 0;
+      // The hold's wall-side covers block its line of fire only in their own lane, as for Echo-9.
+      const result = this.withActorCoversV188(member, () => this.depthTargetsV188(z, () => super.updateSquadCombat(member)));
+      for (const bullet of (this.bullets || []).slice(count)) bullet.depthZ = z;
+      return result;
+    }
+    damageSquadMember(member, amount, options = {}) {
+      const section = this.missionDepthSectionV188, attacker = this.depthAttackerV188;
+      if (section && !this.depthProjectileHitV188 && overDepthSectionV188(section, member) && overDepthSectionV188(section, attacker) && !this.spansDepthV188(attacker)
+        && Math.abs((Number(attacker.depthZ) || 0) - (Number(member.depthZ) || 0)) > MISSION_ATTACK_BAND_V188) return 0;
+      return super.damageSquadMember(member, amount, options);
+    }
+    drawSquadActor(ctx, member) {
+      return this.depthFrameV188 ? this.drawShiftedV188(ctx, member, () => super.drawSquadActor?.(ctx, member)) : super.drawSquadActor?.(ctx, member);
     }
 
     /** Evidence, supplies and the airlocks stand against the wall: reached from the wall lane only. */
@@ -166,21 +294,81 @@ export function withMissionDepthRoomsV188(Base) {
 
     // An attack lands only inside the attack band (FR-006, FR-007).
     updateEnemy(enemy, delta) {
-      const previous = this.depthAttackerV188; this.depthAttackerV188 = enemy;
-      try { return super.updateEnemy(enemy, delta); } finally { this.depthAttackerV188 = previous; }
+      const previous = this.depthAttackerV188, beforeX = enemy?.x; this.depthAttackerV188 = enemy;
+      try { return this.withActorCoversV188(enemy, () => super.updateEnemy(enemy, delta)); } finally {
+        this.depthAttackerV188 = previous;
+        this.holdEnemyDepthSpreadV188(enemy, beforeX);
+      }
     }
     spawnEnemyProjectile(enemy, target) {
       const count = this.hostileProjectiles?.length || 0, result = super.spawnEnemyProjectile(enemy, target);
       for (const projectile of (this.hostileProjectiles || []).slice(count)) projectile.depthZ = Number(enemy?.depthZ) || 0;
       return result;
     }
+    /**
+     * Enemy projectiles inside a hold travel in the lane they were spat in: the hold's objects (floor objects
+     * and wall-side covers) stop them in that lane, as they stop the marines' salvos, and they reach a marine
+     * (player, co-op, squad) or a placeable only inside the attack band. They are resolved here, swept; the
+     * other projectiles go through the base unchanged. Presentation hook (no rule depends on it):
+     * onEvent({ type: 'depth-projectile-blocked-v188', propId, x, y, acid }).
+     */
     updateHostileProjectiles(delta) {
+      const section = this.missionDepthSectionV188, all = this.hostileProjectiles || [];
+      const held = this.paused || this.mission?.state !== 'active' || this.enemyAtlasLoadingPausedV65 || this.userCasteLoadingV88;
+      const mine = section && !held ? all.filter(projectile => !projectile.hit && projectile.life > 0 && Number.isFinite(projectile.depthZ) && this.projectileInHoldV188(projectile)) : [];
+      if (mine.length) { this.hostileProjectiles = all.filter(projectile => !mine.includes(projectile)); this.stepDepthProjectilesV188(section, mine, delta); }
       this.depthProjectilePhaseV188 = true;
-      try { return super.updateHostileProjectiles(delta); } finally { this.depthProjectilePhaseV188 = false; }
+      try { return super.updateHostileProjectiles(delta); } finally {
+        this.depthProjectilePhaseV188 = false;
+        if (mine.length) this.hostileProjectiles = [...(this.hostileProjectiles || []), ...mine.filter(projectile => !projectile.hit && projectile.life > 0)];
+      }
+    }
+    projectileInHoldV188(projectile) {
+      const section = this.missionDepthSectionV188, x = projectile.x + (projectile.w || 0) / 2;
+      return x >= section.x0 && x <= section.x1 && projectile.y < section.floorY && projectile.y > section.floorY - DEPTH_HOLD_HEADROOM_V188;
+    }
+    depthPropBoxesV188(section, z) {
+      return section.props.filter(entry => entry.footprint.z0 < z && entry.footprint.z1 > z).map(entry => {
+        const cover = entry.kind === 'cover' ? (this.depthAllCoversV188 || this.covers || []).find(item => `cover:${item.id}` === entry.id) : null;
+        if (entry.kind === 'cover' && (!cover || cover.destroyed)) return null;
+        return cover ? { id: entry.id, x: cover.x, y: cover.y, w: cover.w, h: cover.h } : { id: entry.id, x: entry.x, y: section.floorY - 150, w: entry.w, h: 150 };
+      }).filter(Boolean);
+    }
+    stepDepthProjectilesV188(section, projectiles, delta) {
+      const depthOf = actor => overDepthSectionV188(section, actor) ? Number(actor.depthZ) || 0 : 0;
+      const marines = [this.player, this.coopEnabled ? this.coop : null, ...(typeof this.activeSquadActors === 'function' ? this.activeSquadActors() : [])]
+        .filter(actor => actor?.alive && !actor.inVehicle && !actor.downed);
+      const placeables = (this.placeablesV86?.instances || []).filter(item => item.onGround && item.health > 0 && ['deployed', 'spent'].includes(item.status));
+      for (const projectile of projectiles) {
+        projectile.sourceX = Number.isFinite(projectile.sourceX) ? projectile.sourceX : projectile.x;
+        projectile.sourceY = Number.isFinite(projectile.sourceY) ? projectile.sourceY : projectile.y;
+        const z = projectile.depthZ, dt = Math.min(Math.max(0, Number(delta) || 0), projectile.life);
+        const displacement = { x: (Number(projectile.vx) || 0) * dt, y: (Number(projectile.vy) || 0) * dt };
+        const props = this.depthPropBoxesV188(section, z);
+        const terrain = firstProjectileObstacleV83(projectile, displacement, { walls: [...(this.walls || []), ...props], doors: this.doors, platforms: this.platforms, bounds: this.missionLevelBounds });
+        const impacts = [
+          ...(terrain ? [{ kind: 'terrain', contact: terrain, prop: props.find(entry => entry === terrain.target) }] : []),
+          ...marines.filter(actor => Math.abs(depthOf(actor) - z) <= MISSION_ATTACK_BAND_V188).map(actor => ({ kind: 'actor', target: actor, contact: sweepProjectileAabbV83(projectile, displacement, actor) })),
+          ...(Math.abs(z) <= MISSION_ATTACK_BAND_V188 ? placeables.map(item => ({ kind: 'placeable', target: item, contact: sweepProjectileAabbV83(projectile, displacement, item) })) : [])
+        ].filter(entry => entry.contact).sort((a, b) => a.contact.t - b.contact.t || Number(a.kind !== 'terrain') - Number(b.kind !== 'terrain'));
+        const first = impacts[0];
+        if (!first) { projectile.x += displacement.x; projectile.y += displacement.y; projectile.life -= delta; continue; }
+        projectile.hit = true; projectile.x = first.contact.x; projectile.y = first.contact.y;
+        if (first.kind === 'actor') {
+          this.depthProjectileHitV188 = projectile;
+          try {
+            if (first.target === this.player || first.target === this.coop) this.damagePlayer(first.target, projectile.damage, { source: projectile.acid ? 'acid' : 'projectile', attackKind: 'projectile',
+              sourceX: projectile.sourceX, sourceY: projectile.sourceY, projectileV124: { vx: projectile.vx, vy: Number(projectile.vy) || 0 } });
+            else this.damageSquadMember(first.target, projectile.damage, { source: projectile.acid ? 'acid-projectile' : 'projectile' });
+          } finally { this.depthProjectileHitV188 = null; }
+        } else if (first.kind === 'placeable') this.damagePlaceableV86?.(first.target.instanceId, projectile.damage, projectile);
+        else if (first.prop) this.onEvent?.({ type: 'depth-projectile-blocked-v188', propId: first.prop.id, x: projectile.x, y: projectile.y, acid: Boolean(projectile.acid) });
+        this.spawnImpact?.(projectile.x, projectile.y, projectile.acid ? '#a7c742' : '#e3b86c');
+      }
     }
     damagePlayer(player, amount, options = {}) {
       const section = this.missionDepthSectionV188;
-      if (section && overDepthSectionV188(section, player)) {
+      if (section && overDepthSectionV188(section, player) && !this.depthProjectileHitV188) {
         const z = Number(player.depthZ) || 0;
         const attacker = this.depthProjectilePhaseV188
           ? (this.hostileProjectiles || []).filter(entry => Number.isFinite(entry.depthZ))
@@ -228,12 +416,13 @@ export function withMissionDepthRoomsV188(Base) {
       // Containers whose footprint covers the salvo's lane stop it like a wall.
       this.walls = [...(walls || []), ...section.containers.filter(entry => entry.footprint.z0 < z && entry.footprint.z1 > z)
         .map(entry => ({ id: `depth:${entry.id}`, x: entry.x, y: section.floorY - 150, w: entry.w, h: 150, art: 'depth-container' }))];
-      const health = new Map((this.enemies || []).map(enemy => [enemy, enemy.health]));
+      const health = new Map((this.enemies || []).map(enemy => [enemy, enemy.health])), covers = this.covers;
+      this.covers = this.coversForDepthV188(covers, z); // a wall-side cover stops a salvo in its own lane only
       try { return this.depthTargetsV188(z, () => super.updateBullets(delta)); } finally {
-        this.walls = walls;
+        this.walls = walls; this.covers = covers;
         const hit = (this.enemies || []).find(enemy => inDepthSectionV188(section, enemy) && health.has(enemy) && enemy.health < health.get(enemy));
         // The shooter settles towards the band it hit (the marine whose salvo it was; Echo-9 when the owner is unknown).
-        const shooters = [this.player, this.coop].filter(actor => actor && (owners.has(actor) || (!owners.size && actor === this.player)));
+        const shooters = [this.player, this.coop, ...this.depthSquadV188()].filter(actor => actor && (owners.has(actor) || (!owners.size && actor === this.player)));
         if (hit) for (const actor of shooters) if (inDepthSectionV188(section, actor)) actor.depthZ = depthShotSettleV188(Number(actor.depthZ) || 0, Number(hit.depthZ) || 0);
       }
     }
@@ -365,8 +554,16 @@ export function withMissionDepthRoomsV188(Base) {
       if (!Number.isFinite(z) || !band) return actors;
       return actors.filter(actor => !overDepthSectionV188(this.missionDepthSectionV188, actor) || Math.abs((Number(actor.depthZ) || 0) - z) <= band);
     }
+    /** A hazard laid at a depth (acid blood of a xenomorph killed in the hold) burns within the attack band only. */
+    applyHazards(player) {
+      const section = this.missionDepthSectionV188, hazards = this.hazards;
+      if (!section || !overDepthSectionV188(section, player) || !(hazards || []).some(hazard => Number.isFinite(hazard.depthZ))) return super.applyHazards(player);
+      const z = Number(player.depthZ) || 0;
+      this.hazards = hazards.filter(hazard => !Number.isFinite(hazard.depthZ) || Math.abs(hazard.depthZ - z) <= MISSION_ATTACK_BAND_V188);
+      try { return super.applyHazards(player); } finally { this.hazards = hazards; }
+    }
     drawHazard(ctx, hazard) {
-      const z = hazard?.kind === 'acid' && this.depthFrameV188 ? this.depthAcidV188?.get(hazard.id) : undefined;
+      const z = hazard?.kind === 'acid' && this.depthFrameV188 ? (Number.isFinite(hazard.depthZ) ? hazard.depthZ : this.depthAcidV188?.get(hazard.id)) : undefined;
       if (!Number.isFinite(z) || !z) return super.drawHazard(ctx, hazard);
       ctx.save(); ctx.translate(0, depthToScreenOffsetV188(z));
       try { return super.drawHazard(ctx, hazard); } finally { ctx.restore(); }
@@ -379,6 +576,9 @@ export function withMissionDepthRoomsV188(Base) {
         coop: Math.round((Number(this.coop?.depthZ) || 0) * 10) / 10,
         enemies: (this.enemies || []).filter(enemy => Number(enemy.depthZ)).map(enemy => ({ id: String(enemy.id), z: Math.round(enemy.depthZ * 10) / 10 })) };
       // Additive (spec 004): the depth of the acid pools of the quarantine hold.
+      // Additive (gameplay gaps V188): the lanes of the squad marines.
+      if (state?.depthV188) { const squad = this.depthSquadV188().filter(member => Number(member.depthZ) && member.crewId);
+        if (squad.length) state.depthV188.squad = squad.map(member => ({ id: String(member.crewId), z: Math.round(member.depthZ * 10) / 10 })); }
       if (state?.depthV188 && this.depthAcidV188?.size) state.depthV188.acid = [...this.depthAcidV188].map(([id, z]) => ({ id, z: Math.round(z * 10) / 10 }));
       return state;
     }
@@ -397,6 +597,8 @@ export function withMissionDepthRoomsV188(Base) {
       const byId = new Map((Array.isArray(saved.enemies) ? saved.enemies : []).filter(entry => entry && typeof entry === 'object')
         .map(entry => [String(entry.id), clampZ(entry.z)]));
       for (const enemy of this.enemies || []) if (byId.has(String(enemy.id))) enemy.depthZ = byId.get(String(enemy.id));
+      const squad = new Map((Array.isArray(saved.squad) ? saved.squad : []).filter(entry => entry && typeof entry === 'object').map(entry => [String(entry.id), clampZ(entry.z)]));
+      for (const member of (typeof this.activeSquadActors === 'function' ? this.activeSquadActors() : []) || []) if (squad.has(String(member.crewId))) member.depthZ = squad.get(String(member.crewId));
       if (Array.isArray(saved.acid) && this.missionDepthDefinitionV188?.acidBand) {
         for (const entry of saved.acid) if (entry && typeof entry === 'object' && typeof entry.id === 'string' && Number.isFinite(Number(entry.z))) this.depthAcidV188.set(entry.id, clampZ(entry.z));
       }

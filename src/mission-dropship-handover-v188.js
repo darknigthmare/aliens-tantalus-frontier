@@ -55,6 +55,15 @@ export const DROPSHIP_HANDOVER_PLANS_V188 = Object.freeze({
   undocking: Object.freeze({ short: .45, block: [['seal', 2], ['hatch', 1.4], ['board', 3], ['close', 1.2], ['undock', 1]], after: [] })
 });
 const SKIP_KEYS = new Set(['KeyE', 'Escape', 'Enter']);
+/**
+ * [PROPOSÉ] Defended boarding (gameplay gaps V188): during the extraction boarding the enemies keep moving
+ * and attacking, the chin turret and the marine covering from the bay really hit (damage per tracer, reach
+ * from the gun), and the marines take damage but never fall below `floorHealth` while they board: the
+ * extraction already succeeded (mission-complete is held, its rewards fixed), so a death here could not be
+ * honoured without contradicting it. Boarded marines are out of reach.
+ */
+export const DEFENDED_BOARDING_V188 = Object.freeze({ tracerDamage: 14, reach: 900, floorHealth: 1 });
+const SILENT_DURING_BOARDING = new Set(['mission-complete', 'mission-failed', 'objective-failed', 'player-down', 'squad-down', 'squad-lost']);
 
 export function normalizeHandoverOptionV188(raw) {
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
@@ -352,6 +361,7 @@ export function withMissionDropshipHandoverV188(Base) {
         // Nothing under this layer runs: mission time, enemies, directors and the grace stand still.
         this.animationTime = (this.animationTime || 0) + dt;
         this.advanceHandoverV188(seq, dt);
+        if (seq.kind === 'extraction' && seq.resolved) this.simulateDefendedBoardingV188(seq, dt);
         if (seq.kind === 'insertion' && seq.t >= seq.controlAt) this.giveControlV188(seq, false);
         else if (seq.kind === 'extraction' && seq.t >= seq.total) this.finishBoardingV188(seq, false);
         return undefined;
@@ -362,6 +372,28 @@ export function withMissionDropshipHandoverV188(Base) {
         if (seq.t >= seq.total) { this.handoverV188 = null; this.handoverParticlesV188 = []; }
       }
       return result;
+    }
+    /** The fight goes on around the boarding: enemies, their projectiles and the salvos in flight (DEFENDED_BOARDING_V188). */
+    simulateDefendedBoardingV188(seq, dt) {
+      const mission = this.mission;
+      if (!mission || mission.state !== 'complete' || this.handoverV188 !== seq) return;
+      const route = this.onEvent, aboard = [...(seq.hidden || [])].filter(actor => actor.alive !== false);
+      // Terminal and casualty events cannot come out of this window; the held mission-complete stays the only one.
+      this.onEvent = event => SILENT_DURING_BOARDING.has(event?.type) ? undefined : route.call(this, event);
+      for (const actor of aboard) actor.alive = false; // boarded: out of reach
+      // The insertion grace belongs to the landing: it never shields the enemies' fight at extraction.
+      const grace = this.insertionGraceV188; this.insertionGraceV188 = null;
+      mission.state = 'active'; this.defendedBoardingV188 = seq;
+      try {
+        for (const enemy of this.enemies || []) if (enemy.alive && !enemy.dormant) this.updateEnemy(enemy, dt);
+        this.updateHostileProjectiles(dt);
+        this.updateBullets?.(dt);
+        if (seq.pendingHitsV188?.length) for (const hit of seq.pendingHitsV188.splice(0)) if (hit.enemy.alive) this.applyEnemyDamage(hit.enemy, hit.damage, { owner: this.player, kind: hit.kind });
+      } finally {
+        mission.state = 'complete'; this.defendedBoardingV188 = null; this.insertionGraceV188 = grace;
+        for (const actor of aboard) actor.alive = true;
+        this.onEvent = route;
+      }
     }
     advanceHandoverV188(seq, dt) {
       if (seq.kind === 'insertion') this.resolveInsertionV188(seq); else this.resolveExtractionV188(seq);
@@ -425,6 +457,11 @@ export function withMissionDropshipHandoverV188(Base) {
         : { x: gun.x - seq.ship.dir * (380 + Math.sin(seq.t * 3) * 120), y: seq.groundY - 30 };
       const from = Math.abs(to.x - bay.x) < Math.abs(to.x - chin.x) ? bay : chin;
       seq.tracers.push({ from, to, life: .14, max: .14 });
+      // The tracer is a real hit (applied inside the boarding fight window, with the marines' owner).
+      if (target && reach(target) < DEFENDED_BOARDING_V188.reach) {
+        (seq.pendingHitsV188 ||= []).push({ enemy: target, damage: DEFENDED_BOARDING_V188.tracerDamage, kind: from === chin ? 'dropship-chin-gun' : 'dropship-covering-fire' });
+        this.onEvent?.({ type: 'dropship-covering-hit-v188', enemyId: target.id, gun: from === chin ? 'chin' : 'bay', x: to.x, y: to.y });
+      }
       for (let i = 0; i < 3; i++) this.pushHandoverParticleV188({ kind: 'spark', x: to.x, y: to.y, vx: (Math.random() - .5) * 220, vy: -Math.random() * 160, life: .3, max: .3, r: 2 });
       if (!seq.cues.has(`fire-${Math.floor(seq.t / .7)}`)) { seq.cues.add(`fire-${Math.floor(seq.t / .7)}`); this.audio?.cue?.('weapon-smartgun'); }
     }
@@ -472,7 +509,24 @@ export function withMissionDropshipHandoverV188(Base) {
     }
 
     // —— Guards ——
-    damagePlayer(actor, amount, options = {}) { return this.handoverV188?.blocking ? 0 : super.damagePlayer(actor, amount, options); }
+    damagePlayer(actor, amount, options = {}) {
+      const seq = this.handoverV188;
+      if (seq?.blocking && !this.defendedBoardingV188) return 0;
+      if (!this.defendedBoardingV188 || !actor) return super.damagePlayer(actor, amount, options);
+      // Defended boarding: hurt, never killed (DEFENDED_BOARDING_V188.floorHealth).
+      const floor = DEFENDED_BOARDING_V188.floorHealth, capped = Math.max(0, Math.min(Number(amount) || 0, (Number(actor.health) || 0) - floor));
+      const result = super.damagePlayer(actor, capped, options);
+      if (actor.alive === false || !(actor.health >= floor)) Object.assign(actor, { alive: true, health: floor, downed: false });
+      return result;
+    }
+    damageSquadMember(member, amount, options = {}) {
+      if (!this.defendedBoardingV188 || !member) return super.damageSquadMember(member, amount, options);
+      const floor = DEFENDED_BOARDING_V188.floorHealth, capped = Math.max(0, Math.min(Number(amount) || 0, (Number(member.health) || 0) - floor));
+      const result = super.damageSquadMember(member, capped, options);
+      if (member.alive === false || member.downed || !(member.health >= floor)) Object.assign(member, { alive: true, health: Math.max(floor, Number(member.health) || 0), downed: false });
+      return result;
+    }
+    failMission(reason) { return this.handoverV188?.kind === 'extraction' && this.handoverV188.blocking ? false : super.failMission(reason); }
     togglePause() {
       // Escape during the held shot skips it (the base binds Escape to pause).
       if (!this.paused && this.running && this.handoverV188?.blocking) return this.skipDropshipHandoverV188();
