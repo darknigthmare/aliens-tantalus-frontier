@@ -6570,6 +6570,21 @@ export const EN_CATALOG_V185 = Object.freeze({
 "EFFONDREMENT": "COLLAPSE",
 "COLOSSE": "COLOSSUS",
 "CORRIDOR DE FEU": "CORRIDOR OF FIRE",
+// V188 content gaps (Asphodèle, crew quests, travel).
+"ASPHODÈLE · L’ARRIMAGE": "ASPHODÈLE · DOCKING",
+"Abordage de la station par le sas où le dropship d’Echo-8 est resté amarré.": "Boarding the station through the airlock where Echo-8’s dropship stayed docked.",
+"La station tourne feux éteints. Entrer par le sas d’Echo-8, franchir les barricades de l’équipe perdue et atteindre le pont de contrôle. Les ventilateurs saturent le détecteur.": "The station turns with its lights out. Enter through Echo-8’s airlock, cross the lost team’s barricades and reach the control deck. The fans saturate the motion tracker.",
+"ASPHODÈLE · LA VOIX DE CASSIUS": "ASPHODÈLE · THE VOICE OF CASSIUS",
+"Rétablir l’énergie et l’air avec Idris Kwan à la radio, puis interroger CASSIUS.": "Restore power and air with Idris Kwan on the radio, then question CASSIUS.",
+"Relancer le traitement atmosphérique secteur par secteur. CASSIUS répond quand le pont de contrôle revient : il cite ses consignes et garde les ordres de livraison QZ17.": "Restart atmospheric processing sector by sector. CASSIUS answers when the control deck comes back: it quotes its directives and keeps the QZ17 delivery orders.",
+"ASPHODÈLE · LES PONTS SCELLÉS": "ASPHODÈLE · THE SEALED DECKS",
+"Descendre dans les ponts inférieurs scellés : laboratoire de transit, berceaux ouverts, traces d’Echo-8.": "Go down into the sealed lower decks: transit laboratory, open cradles, Echo-8’s traces.",
+"Derrière les cloisons scellées : le laboratoire de transit, des berceaux QZ17 ouverts et la dernière position d’Echo-8. Sortir avant que la quarantaine ne se referme.": "Behind the sealed bulkheads: the transit laboratory, open QZ17 cradles and Echo-8’s last position. Get out before the quarantine closes again.",
+"ASPHODÈLE · LE HUB ASPHODÈLE": "ASPHODÈLE · THE ASPHODÈLE HUB",
+"Dernière purge et remise en pression, jusqu’à l’arrivée des premiers occupants.": "Last purge and repressurisation, until the first occupants arrive.",
+"Purger le dernier nid, remettre la station en pression et tenir le quai jusqu’à l’arrivée de l’équipe technique du Tantalus.": "Purge the last nest, repressurise the station and hold the dock until the Tantalus technical team arrives.",
+"Station Asphodèle": "Asphodèle station",
+"Quêtes de l’équipage": "Crew quests",
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 // V188 systems bug hunt (merged via i18n-catalog-maintenance-v186 review).

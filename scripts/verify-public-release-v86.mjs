@@ -357,6 +357,15 @@ const FORGE_TOOLING_V140 = new Set([
   'specs/004-cales-profondeur-suite/research.md',
   'specs/004-cales-profondeur-suite/tasks.md',
   'scripts/verify-depth-holds-v188.mjs',
+  // V188 content gaps (spec 005), source-only exact paths.
+  'specs/005-front-asphodele-quetes',
+  'specs/005-front-asphodele-quetes/checklists',
+  'specs/005-front-asphodele-quetes/spec.md',
+  'specs/005-front-asphodele-quetes/checklists/requirements.md',
+  'specs/005-front-asphodele-quetes/plan.md',
+  'specs/005-front-asphodele-quetes/research.md',
+  'specs/005-front-asphodele-quetes/tasks.md',
+  'scripts/verify-content-gaps-v188.mjs',
   'docs/development/INSERTION_ART_SLOTS_V188.md',
   'scripts/verify-insertion-cinematic-v188.mjs',
   'scripts/verify-mission-depth-v188.mjs',
@@ -395,6 +404,8 @@ const FORGE_TOOLING_V140 = new Set([
   'docs/development/PRIORITIES_P0_P1_V188.md',
   // V188 owner decision questionnaire, source-only exact path.
   'docs/development/QUESTIONS_PROPRIETAIRE_V188.md',
+  // V188 content audit (bible against code), source-only exact path.
+  'docs/development/AUDIT_CONTENU_V188.md',
   // Source-only narrative design bible; never shipped in a built distribution.
   'docs/narrative',
   'docs/narrative/CAMPAGNE_PRINCIPALE.md',

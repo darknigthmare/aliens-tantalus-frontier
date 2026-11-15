@@ -1,5 +1,7 @@
 import { normalizeSeenWorldIdsV188 } from './insertion-cinematic-v188.js';
 import { createColonyV188, normalizeColonyV188 } from './colony-reconstruction-v188.js';
+import { createStationV188, normalizeStationV188 } from './station-asphodele-v188.js';
+import { createCrewQuestsV188, normalizeCrewQuestsV188 } from './crew-quests-v188.js';
 import { normalizeHubDepthV188 } from './hub-depth-rooms-v188.js';
 import { createReactiveLinesV188, normalizeReactiveLinesV188 } from './reactive-lines-v188.js';
 import { normalizeColorblindV188, normalizeTextScaleV188, normalizeKeyBindingsV188, defaultKeyBindingsV188 } from './accessibility-v188.js';
@@ -377,6 +379,8 @@ export function createDefaultSave(profile = 1) {
     storyCampaignV188: createStoryCampaignV188(),
     reactiveLinesV188: createReactiveLinesV188(),
     colonyV188: createColonyV188(),
+    stationV188: createStationV188(),
+    crewQuestsV188: createCrewQuestsV188(),
     alphaBravoDoctrine: createAlphaBravoDoctrineV69(),
     alienSurvivalSystems: createAlienSurvivalSystemsV70(),
     bioforgeV80: createBioforgeV80(),
@@ -2433,6 +2437,9 @@ export function migrateSave(input, profile = 1) {
   migrated.storyCampaignV188 = normalizeStoryCampaignV188(source.storyCampaignV188);
   migrated.reactiveLinesV188 = normalizeReactiveLinesV188(source.reactiveLinesV188);
   migrated.colonyV188 = normalizeColonyV188(source.colonyV188);
+  // V188 content gaps (spec 005): additive; an older save has not heard the station intro nor taken a quest.
+  migrated.stationV188 = normalizeStationV188(source.stationV188);
+  migrated.crewQuestsV188 = normalizeCrewQuestsV188(source.crewQuestsV188);
   migrated.memorial = Array.isArray(source.memorial) ? source.memorial.filter(isRecord).slice(0, 512) : base.memorial;
   const settings = isRecord(source.settings) ? source.settings : {};
   migrated.settings = { ...base.settings, ...settings };

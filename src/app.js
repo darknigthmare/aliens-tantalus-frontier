@@ -1,4 +1,8 @@
 import { colonySnapshotV188, investColonySiteV188, applyColonyOperationResultV188, COLONY_TIERS_V188 } from './colony-reconstruction-v188.js';
+import { filterUnlockedCampaignsV188, stationLockReasonV188, stationLockTextV188, stationSnapshotV188, cassiusChoicePendingV188, chooseCassiusV188, CASSIUS_CHOICES_V188, CASSIUS_DIALOG_V188, stationReturnSceneDueV188, markStationSceneSeenV188, STATION_SCENES_V188 } from './station-asphodele-v188.js';
+import { crewQuestActionsV188, acceptCrewQuestV188, crewQuestStepV188, answerCrewQuestStepV188, turnInCrewQuestV188, applyCrewQuestOperationResultV188, crewQuestsSnapshotV188, getCrewQuestV188, davidMemoryRestoredV188 } from './crew-quests-v188.js';
+import { jumpRouteTextV188, applyJumpTravelTimeV188, jumpArrivalTextV188 } from './galaxy-travel-v188.js';
+import { openContentSceneDialogV188 } from './content-gap-ui-v188.js';
 import { storyDossierV188 } from './story-dossier-v188.js';
 import { withHubEcho8LockerV188, echo8LockerNotesV188 } from './hub-echo8-locker-v188.js';
 import { withHubPrologueRoomsV188 } from './hub-prologue-rooms-v188.js';
@@ -775,6 +779,8 @@ function openNpcDialogueV62(interaction) {
   });
   const choices = byId('hub-dialogue-choices');
   choices.innerHTML = conversation.choices.map((choice) => `<button class="hub-dialogue-choice" type="button" data-npc-dialogue-choice="${escapeHtml(choice.id)}" ${choice.available ? '' : `disabled title="${escapeHtml(choice.blockedReason)}"`}>${escapeHtml(choice.label)}</button>`).join('');
+  // V188 crew quests (bible §8.1, Q9): appended by a listener so this function keeps its own scope (native QA evaluates it alone).
+  choices.dispatchEvent(new CustomEvent('npc-dialogue-choices-v188', { detail: { crewId: conversation.crewId } }));
   byId('hub-dialogue-continue').hidden = true;
   hubDialogueUiV76.open({
     initialFocus: choices.querySelector('button:not(:disabled)') || byId('hub-dialogue-cancel')
@@ -1062,6 +1068,8 @@ function markStoryDebriefOnViewV188() {
     catch (error) { toast(error.message); }
     return;
   }
+  // V188 spec 005: the CASSIUS decision after S2, then the station return scenes, once each.
+  if (stationReturnOnViewV188()) return;
   if (deriveStoryCampaignV188(saveSystem.data).step !== 'debrief') return;
   try {
     const candidate = clone(saveSystem.data);
@@ -1457,10 +1465,118 @@ function renderColonyReconstructionV188() {
   }
   host.replaceChildren(title, info, list);
 }
+// V188 spec 005 (bible §7.2): Asphodèle station front at the briefing table.
+function renderStationFrontV188() {
+  const host = byId('station-front-v188'); if (!host) return;
+  const en = document.documentElement.lang === 'en', snapshot = stationSnapshotV188(saveSystem.data, en ? 'en' : 'fr');
+  const title = document.createElement('h4');
+  title.textContent = `${en ? 'ASPHODÈLE STATION' : 'STATION ASPHODÈLE'} · ${snapshot.retaken ? (en ? 'RETAKEN' : 'REPRISE') : snapshot.open ? (en ? 'SILENT' : 'SILENCIEUSE') : (en ? 'OUT OF REACH' : 'HORS D’ATTEINTE')}`;
+  if (!snapshot.open) { const hint = document.createElement('p'); hint.className = 'hint'; hint.textContent = stationLockTextV188('act-two', en ? 'en' : 'fr'); host.replaceChildren(title, hint); return; }
+  const list = document.createElement('ul');
+  const intro = document.createElement('li'); intro.dataset.held = String(snapshot.introHeard);
+  intro.textContent = `${snapshot.introHeard ? '■' : '□'} ${en ? 'Six hours of silence (with Rook)' : 'Six heures de silence (avec Rook)'}`; list.append(intro);
+  for (const step of snapshot.steps) {
+    const item = document.createElement('li'); item.dataset.held = String(step.done);
+    item.textContent = `${step.done ? '■' : step.id === snapshot.nextId ? '▣' : '□'} ${step.name}`; list.append(item);
+  }
+  const parts = [title, list];
+  if (snapshot.cassiusLabel) { const line = document.createElement('p'); line.className = 'hint'; line.textContent = `CASSIUS · ${snapshot.cassiusLabel}`; parts.push(line); }
+  if (snapshot.hint) { const line = document.createElement('p'); line.className = 'hint'; line.textContent = snapshot.hint; parts.push(line); }
+  host.replaceChildren(...parts);
+}
+// V188 crew quests (bible §8.1, Q9): where to find each giver and how far the quest is.
+function renderCrewQuestsPanelV188() {
+  const host = byId('crew-quests-v188'); if (!host) return;
+  const en = document.documentElement.lang === 'en', quests = crewQuestsSnapshotV188(saveSystem.data, en ? 'en' : 'fr');
+  const title = document.createElement('h4'); title.textContent = en ? 'CREW QUESTS' : 'QUÊTES DE L’ÉQUIPAGE';
+  const list = document.createElement('ul');
+  const labels = en ? { done: 'done', active: 'in progress', offered: 'on offer', locked: 'later' } : { done: 'terminée', active: 'en cours', offered: 'proposée', locked: 'plus tard' };
+  for (const quest of quests) {
+    const item = document.createElement('li'); item.dataset.held = String(quest.status === 'done'); item.dataset.questStatusV188 = quest.status;
+    item.textContent = `${quest.status === 'done' ? '■' : quest.status === 'active' ? '▣' : '□'} ${quest.giver} · ${quest.title} — ${labels[quest.status]}${quest.progress ? ` (${quest.progress})` : ''}${quest.status === 'offered' || quest.status === 'active' ? ` · ${quest.where}` : quest.status === 'locked' ? ` · ${quest.after}` : ''}`;
+    list.append(item);
+  }
+  const parts = [title, list];
+  if (davidMemoryRestoredV188(saveSystem.data)) { const note = document.createElement('p'); note.className = 'hint'; note.textContent = en ? 'QZ17 file annex: DAVID-8R served at relay post QZ-9 (outside the count).' : 'Annexe au dossier QZ17 : DAVID-8R a servi au poste de relais QZ-9 (hors décompte).'; parts.push(note); }
+  host.replaceChildren(...parts);
+}
+// Commits a candidate save; returns false (with a toast) when the write is refused.
+function commitCandidateV188(mutate) {
+  try { const candidate = clone(saveSystem.data); const result = mutate(candidate); if (result === false) return false; saveSystem.commit(candidate); renderAll(); return result ?? true; }
+  catch (error) { toast(error.message); return false; }
+}
+let stationSceneOpenV188 = false;
+function stationReturnOnViewV188() {
+  if (stationSceneOpenV188 || document.querySelector('.content-scene-v188')) return true;
+  const lang = document.documentElement.lang === 'en' ? 'en' : 'fr';
+  if (cassiusChoicePendingV188(saveSystem.data)) {
+    stationSceneOpenV188 = true;
+    openContentSceneDialogV188({ language: lang, slot: CASSIUS_DIALOG_V188.slot, title: CASSIUS_DIALOG_V188.title[lang], text: CASSIUS_DIALOG_V188.text[lang],
+      options: CASSIUS_CHOICES_V188.map(id => ({ id, label: CASSIUS_DIALOG_V188.options[id][lang] })),
+      onChoose: (choice) => {
+        if (choice === 'continue') return null;
+        const effect = commitCandidateV188(candidate => chooseCassiusV188(candidate, choice) ? true : false);
+        return effect ? { text: CASSIUS_DIALOG_V188.results[choice][lang], options: [{ id: 'continue', label: lang === 'en' ? 'CONTINUE' : 'CONTINUER' }] } : null;
+      },
+      onClose: () => { stationSceneOpenV188 = false; queueMicrotask(markStoryDebriefOnViewV188); } });
+    return true;
+  }
+  const sceneId = stationReturnSceneDueV188(saveSystem.data);
+  if (!sceneId) return false;
+  if (!commitCandidateV188(candidate => markStationSceneSeenV188(candidate, sceneId))) return true;
+  const scene = STATION_SCENES_V188[sceneId];
+  stationSceneOpenV188 = true;
+  openContentSceneDialogV188({ language: lang, slot: scene.slot, title: scene.title[lang], text: scene.text[lang],
+    options: [{ id: 'continue', label: lang === 'en' ? 'CONTINUE' : 'CONTINUER' }], onChoose: () => null,
+    onClose: () => { stationSceneOpenV188 = false; } });
+  return true;
+}
+// Opened from the hub conversation; the hub stays paused until the quest dialog closes.
+function openCrewQuestV188(questId) {
+  const quest = getCrewQuestV188(questId); if (!quest) return false;
+  const lang = document.documentElement.lang === 'en' ? 'en' : 'fr', en = lang === 'en';
+  closeHubDialogue({ resume: false, restoreFocus: false }); hubEngine.pause();
+  const action = crewQuestActionsV188(saveSystem.data, quest.crewId, lang).find(entry => entry.id === questId);
+  const resumeHub = () => { if (activeView === 'hub' && !activeHubStation) hubEngine.resume(); };
+  if (!action) { resumeHub(); return false; }
+  const stepView = (feedback = null) => {
+    const current = crewQuestStepV188(saveSystem.data, questId, lang);
+    return current ? { text: `${current.index + 1}/${current.total} · ${current.prompt}`, options: current.options, feedback } : null;
+  };
+  const leave = { id: 'leave', label: en ? 'LATER' : 'PLUS TARD' };
+  let first;
+  if (action.action === 'accept') first = { text: quest.offer[lang], options: [{ id: 'accept', label: en ? 'ACCEPT' : 'ACCEPTER' }, leave] };
+  else if (action.action === 'turn-in') first = { text: en ? 'The three relay components are here.' : 'Les trois composants de relais sont là.', options: [{ id: 'turn-in', label: en ? 'HAND THEM OVER' : 'LES REMETTRE' }, leave] };
+  else if (action.action === 'wait') first = { text: en ? `Components brought back: ${action.label.match(/\((\d+\/\d+)\)/)?.[1] || ''}. A successful operation on Cocyte brings one back.` : `Composants ramenés : ${action.label.match(/\((\d+\/\d+)\)/)?.[1] || ''}. Une opération réussie sur Cocyte en ramène un.`, options: [leave] };
+  else first = stepView();
+  if (!first) { resumeHub(); return false; }
+  openContentSceneDialogV188({ language: lang, slot: quest.slot, title: `${quest.giver} · ${quest.title[lang]}`, ...first,
+    onChoose: (id) => {
+      if (id === 'leave' || id === 'close') return null;
+      if (id === 'accept') {
+        if (!commitCandidateV188(candidate => acceptCrewQuestV188(candidate, questId))) return null;
+        return quest.kind === 'analysis' ? stepView() : { text: en ? 'Quest accepted. Bring back three relay components from operations on Cocyte.' : 'Quête acceptée. Ramenez trois composants de relais d’opérations sur Cocyte.', options: [{ id: 'close', label: en ? 'CLOSE' : 'FERMER' }] };
+      }
+      if (id === 'turn-in') {
+        let outcome = null;
+        if (!commitCandidateV188(candidate => { outcome = turnInCrewQuestV188(candidate, questId, lang); return outcome.ok; })) return null;
+        return { text: outcome.completion, options: [{ id: 'close', label: en ? 'CLOSE' : 'FERMER' }] };
+      }
+      let outcome = null;
+      const committed = commitCandidateV188(candidate => { outcome = answerCrewQuestStepV188(candidate, questId, id, lang); return outcome.ok && outcome.correct ? true : false; });
+      if (!outcome?.ok) return null;
+      if (!outcome.correct) return stepView(outcome.explain);
+      if (!committed) return null;
+      if (outcome.done) return { text: `${outcome.explain} ${outcome.completion}`, options: [{ id: 'close', label: en ? 'CLOSE' : 'FERMER' }] };
+      return stepView(outcome.explain);
+    },
+    onClose: resumeHub });
+  return true;
+}
 function renderCommandMissionsV110() {
   const destination = byId('command-world-v110'), select = byId('command-mission-v110');
   const active = saveSystem.data.strategy.currentOperation;
-  const eligible = getCommandMissionsV110(saveSystem.data, CAMPAIGNS);
+  const eligible = getCommandMissionsV110(saveSystem.data, filterUnlockedCampaignsV188(saveSystem.data, CAMPAIGNS));
   const selected = CAMPAIGNS.find(c => c.id === (active?.campaignId || saveSystem.data.strategy.plannedCampaignId
     || deriveStoryCampaignV188(saveSystem.data).recommendedCampaignId));
   const worldIds = new Set(eligible.map(c => c.worldId));
@@ -1471,7 +1587,7 @@ function renderCommandMissionsV110() {
   destination.value = worldId; destination.disabled = Boolean(active);
   // V188 (bible §53.1): the story recommendation comes first and is preselected.
   const recommendedV188 = deriveStoryCampaignV188(saveSystem.data).recommendedCampaignId;
-  const missions = getCommandMissionsV110(saveSystem.data, CAMPAIGNS, worldId)
+  const missions = getCommandMissionsV110(saveSystem.data, filterUnlockedCampaignsV188(saveSystem.data, CAMPAIGNS), worldId)
     .sort((a, b) => (b.id === recommendedV188) - (a.id === recommendedV188));
   select.innerHTML = missions.map(c => `<option value="${escapeHtml(c.id)}">${c.id === recommendedV188 ? '★ ' : ''}${escapeHtml(c.name)}</option>`).join('');
   // Selecting a destination is a filter, never an implicit campaign/save mutation.
@@ -1493,6 +1609,8 @@ function renderCommandMissionsV110() {
     dossierHostV188.replaceChildren(title, list, signer);
   }
   renderColonyReconstructionV188();
+  renderStationFrontV188();
+  renderCrewQuestsPanelV188();
   byId('command-mission-status-v110').textContent = active ? 'MISSION ACTIVE · manifeste verrouillé'
     : `${missions.length} ordres reçus. Sélectionnez une affectation pour consulter son manifeste.`;
 }
@@ -1617,7 +1735,7 @@ function renderGalaxyJumpV116() {
   const failed = failedJumpOwnerV116 && ownsTimelineV84(failedJumpOwnerV116);
   const orbitalWorld = WORLDS.find(world => world.id === getShipWorldIdV116(saveSystem.data));
   const preparation = underway ? `<p>DESTINATION · ${escapeHtml(destination?.name || '')}</p><p role="status" aria-live="polite" data-jump-countdown-v116>${state.phase === 'blocked' ? `Transit suspendu · ${escapeHtml(state.reason)} · carburant conservé` : failed ? 'Enregistrement refusé · arrivée non confirmée · réessayez ou annulez' : `Stabilisation du champ · T−${Math.ceil(state.remainingMs / 1000)} s`}</p><progress data-jump-progress-v116 max="1" value="${state.progress}" aria-label="Préparation hyperspatiale" style="width:100%;height:14px"></progress><div class="button-row"><button class="button compact" data-cancel-jump-v116>ANNULER SANS DÉBIT</button>${failed ? '<button class="button compact" data-retry-jump-v116>RÉESSAYER L’ARRIVÉE</button>' : ''}</div>` : '';
-  const content = `<section id="galaxy-jump-panel-v116" class="galaxy-jump-v115"><p class="eyebrow">TANTALUS · PRÉPARATION HYPERSPATIALE</p><p>ORBITE · ${escapeHtml(orbitalWorld?.name || 'Position indéterminée')}</p>${preparation}<p>${jump.ready ? `Route calculée · ${jump.fuel} unités de carburant · séquence de 8 secondes · annulation possible` : escapeHtml(jump.reasons.join(' · '))}</p><button class="button primary wide" data-confirm-jump-v115="${activeWorld.id}" ${jump.ready ? '' : 'disabled'}>PRÉPARER LE TRANSIT</button></section>`;
+  const content = `<section id="galaxy-jump-panel-v116" class="galaxy-jump-v115"><p class="eyebrow">TANTALUS · PRÉPARATION HYPERSPATIALE</p><p>ORBITE · ${escapeHtml(orbitalWorld?.name || 'Position indéterminée')}</p>${preparation}<p>${jump.ready ? escapeHtml(jumpRouteTextV188(jump, document.documentElement.lang)) : escapeHtml(jump.reasons.join(' · '))}</p><button class="button primary wide" data-confirm-jump-v115="${activeWorld.id}" ${jump.ready ? '' : 'disabled'}>PRÉPARER LE TRANSIT</button></section>`;
   const panel = byId('galaxy-jump-panel-v116');
   if (panel) panel.outerHTML = content;
   else byId('world-detail').insertAdjacentHTML('beforeend', content);
@@ -1634,7 +1752,12 @@ function tickGalaxyJumpV116() {
   if (!state.remainingMs) {
     const owner = currentOwnerV84();
     const destination = WORLDS.find(world => world.id === state.destinationId);
-    const result = runTimedMutation(() => confirmJumpV115(saveSystem.data, destination, WORLDS), undefined, { duringTransitV116: true });
+    // V188 (bible §13.2, Q21): the jump also spends its days in hypersleep; simulateElapsed lets the worlds evolve.
+    const result = runTimedMutation(() => {
+      const settlement = confirmJumpV115(saveSystem.data, destination, WORLDS);
+      if (applyJumpTravelTimeV188(saveSystem.data, settlement)) settlement.result = `${settlement.result} ${jumpArrivalTextV188(document.documentElement.lang)}`;
+      return settlement;
+    }, undefined, { duringTransitV116: true });
     if (!result && ownsTimelineV84(owner)) { failedJumpOwnerV116 = owner; renderGalaxyJumpV116(); }
     return;
   }
@@ -1655,7 +1778,8 @@ function startGalaxyJumpSchedulerV116() {
 function renderCampaigns() {
   const mode = byId('campaign-mode').value;
   const term = byId('campaign-search').value.trim().toLowerCase();
-  const campaigns = CAMPAIGNS.filter((campaign) => (mode === 'all' || campaign.mode === mode) && JSON.stringify(campaign).toLowerCase().includes(term));
+  // V188 spec 005: a locked station mission is not offered.
+  const campaigns = filterUnlockedCampaignsV188(saveSystem.data, CAMPAIGNS).filter((campaign) => (mode === 'all' || campaign.mode === mode) && JSON.stringify(campaign).toLowerCase().includes(term));
   byId('campaign-list').innerHTML = campaigns.map((campaign, index) => {
     const world = WORLDS.find((entry) => entry.id === campaign.worldId);
     const unlocked = saveSystem.data.galaxy.unlockedWorldIds.includes(campaign.worldId);
@@ -3078,6 +3202,9 @@ function launchCampaign(campaign = null) {
     : null;
   campaign = resumedCampaign || campaign || CAMPAIGNS.find((entry) => entry.id === saveSystem.data.strategy.plannedCampaignId);
   if (!campaign) return false;
+  // V188 spec 005: the station missions follow their order (intro, S1 → S4, CASSIUS after S2).
+  const stationLockV188 = activeOperation ? null : stationLockReasonV188(saveSystem.data, campaign.id);
+  if (stationLockV188) { toast(stationLockTextV188(stationLockV188, document.documentElement.lang)); return false; }
   // Act III moral choice (bible §5.3): the M577 manifest is signed before the convoy leaves.
   if (!activeOperation && campaign.id === 'special-apc-convoy' && !normalizeStoryCampaignV188(saveSystem.data.storyCampaignV188).m577Manifest) {
     openM577ManifestDialogV188({ language: document.documentElement.lang, onConfirm: (manifest) => {
@@ -3202,6 +3329,8 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   if (campaign && world) applyCampaignConsequence(candidate, campaign, world, { success: resolvedSuccess });
   // V188 reconstruction (bible §6.3): an operation on Cocyte validates or damages a site.
   const colonyChangeV188 = applyColonyOperationResultV188(candidate, { success: resolvedSuccess, worldId: operation.worldId || campaign?.worldId });
+  // V188 crew quests (bible §8.1): DAVID-8R's relay components come back from successful operations on Cocyte.
+  const questChangeV188 = applyCrewQuestOperationResultV188(candidate, { success: resolvedSuccess, worldId: operation.worldId || campaign?.worldId });
   // V188 debrief: the amounts the hub actually receives (before the transit clock runs).
   outcome.paidV188 = paidRewardsV188(resourcesBeforeV188, candidate.galaxy.resources);
   // V188 reactive lines (bible §53.6): failure, colonist loss, injured return.
@@ -3220,6 +3349,8 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   const colonySiteV188 = id => colonySnapshotV188(candidate, document.documentElement.lang).sites.find(entry => entry.id === id)?.criterion || id;
   if (colonyChangeV188?.validated) toast(document.documentElement.lang === 'en' ? `Port-Méridien: site level validated (${colonySiteV188(colonyChangeV188.validated)} ${colonyChangeV188.level}).` : `Port-Méridien : niveau de chantier validé (${colonySiteV188(colonyChangeV188.validated)} ${colonyChangeV188.level}).`);
   if (colonyChangeV188?.damaged) toast(document.documentElement.lang === 'en' ? `Port-Méridien: a site lost one functioning level (${colonySiteV188(colonyChangeV188.damaged)}).` : `Port-Méridien : un chantier perd un niveau de fonctionnement (${colonySiteV188(colonyChangeV188.damaged)}).`);
+  for (const change of questChangeV188 || []) toast(document.documentElement.lang === 'en'
+    ? `DAVID-8R: relay component recovered (${change.components}/${change.needed}).` : `DAVID-8R : composant de relais récupéré (${change.components}/${change.needed}).`);
   for (const line of reactiveLinesV188) {
     const name = resolveCrewDefinitionV85(saveSystem.data.crew.find((member) => member.id === line.crewId) || { id: line.crewId }, CREW)?.name || line.crewId;
     toast(`${name} : « ${line.text} »`);
@@ -4393,7 +4524,7 @@ function bind() {
   byId('command-world-v110').onchange = renderCommandMissionsV110;
   byId('command-mission-v110').onchange = event => {
     if (saveSystem.data.strategy.currentOperation) return;
-    const campaign = getCommandMissionsV110(saveSystem.data, CAMPAIGNS).find(c => c.id === event.target.value);
+    const campaign = getCommandMissionsV110(saveSystem.data, filterUnlockedCampaignsV188(saveSystem.data, CAMPAIGNS)).find(c => c.id === event.target.value);
     if (!campaign) return;
     const previous = saveSystem.data.strategy.plannedCampaignId;
     try { saveSystem.data.strategy.plannedCampaignId = campaign.id; saveSystem.commit(); renderCampaigns(); renderCommandMissionsV110(); }
@@ -4447,7 +4578,15 @@ function bind() {
     closeHubDialogue({ resume: false, restoreFocus: false });
     if (!openHubStation(view)) hubEngine.resume();
   };
+  byId('hub-dialogue-choices').addEventListener('npc-dialogue-choices-v188', (event) => {
+    for (const quest of crewQuestActionsV188(saveSystem.data, event.detail?.crewId, document.documentElement.lang)) {
+      const button = Object.assign(document.createElement('button'), { type: 'button', className: 'hub-dialogue-choice crew-quest-choice-v188', textContent: quest.label });
+      button.dataset.crewQuestV188 = quest.id; event.currentTarget.append(button);
+    }
+  });
   byId('hub-dialogue-choices').onclick = (event) => {
+    const questIdV188 = event.target.closest('[data-crew-quest-v188]')?.dataset.crewQuestV188;
+    if (questIdV188) { openCrewQuestV188(questIdV188); return; }
     const choiceId = event.target.closest('[data-npc-dialogue-choice]')?.dataset.npcDialogueChoice;
     if (choiceId) {
       try { chooseNpcDialogueV62(choiceId); }

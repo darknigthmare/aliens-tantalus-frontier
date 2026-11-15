@@ -231,3 +231,13 @@ Les effets de planète sont dessinés sur un canvas inséré dans la scène, ent
 - **Répliques** : le texte est repris en français dans la réponse du mess. La réponse complète est dynamique et ne passe donc pas par le catalogue anglais.
 - **Frontier Forge** : les tailles de texte de l'outil d'édition ne suivent pas le réglage, car leurs octets sont épinglés.
 - **Non mesuré** : le test de la tranche par 3 à 5 joueurs (§53.11), le ressenti du tir, la peur et la durée de la première heure.
+
+## Manques de contenu (spec 005, 2026-11-15)
+
+Hors P0/P1. Audit : `docs/development/AUDIT_CONTENU_V188.md`. Statut **Partiel** pour les trois éléments : jouables et raccordés, sans art final ni contenu complet.
+
+| Élément | Statut | Vérification |
+| --- | --- | --- |
+| Front station Asphodèle : S1-S4, choix CASSIUS, pièce du dossier (bible §7.5) | Partiel : hub, annexes et cinématiques absents | `verify-content-gaps-v188.mjs` ; Chromium : panneau, verrou, lancement de S1 (mission en cours, gabarit intérieur), décision CASSIUS FR/EN |
+| Quêtes Rook, Vega, Harlow, DAVID-8R (bible §8.4) | Partiel : 12 quêtes restent | Node ; Chromium : quête de Rook jusqu'à l'ouverture de S1, rechargement |
+| Temps de voyage galactique (bible §13.6) | Partiel : messages en retard absents | Node ; non joué en navigateur |
