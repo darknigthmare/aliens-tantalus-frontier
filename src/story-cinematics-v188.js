@@ -734,7 +734,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       const act5 = context?.act5 || {}, rows = Array.isArray(act5[current.lines]) ? act5[current.lines] : [];
       ctx.textAlign = 'center'; ctx.fillStyle = '#e6efe6'; ctx.font = '700 30px sans-serif'; ctx.fillText(String(act5[current.heading] || ''), W / 2, LETTERBOX_V188 + 64);
       ctx.textAlign = 'left'; ctx.font = '19px sans-serif';
-      const shown = reducedMotion ? rows.length : Math.ceil(rows.length * Math.min(1, progress * 1.6 + .05));
+      const shown = reducedMotion ? rows.length : Math.ceil(rows.length * Math.min(1, progress * 3 + .05));
       let y = LETTERBOX_V188 + 112;
       for (const row of rows.slice(0, shown)) { ctx.fillStyle = '#c8d8cc'; for (const part of wrap(ctx, row, W - 260).slice(0, 3)) { ctx.fillText(part, 130, y); y += 25; } y += 6; if (y > H - LETTERBOX_V188 - 20) break; }
       break;

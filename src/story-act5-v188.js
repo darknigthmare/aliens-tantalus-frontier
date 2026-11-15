@@ -481,7 +481,7 @@ export const act5CompleteV188 = save => act5StateV188(save).phase === 'complete'
 // —— Credits (same style as the opening credit, intro-sequence-v188.js) ——
 export const ACT5_CREDITS_V188 = Object.freeze([
   Object.freeze({ by: t('A fan game by', 'A fan game by'), name: 'Darknigthmare' }),
-  Object.freeze({ by: t('Univers', 'Universe'), name: 'Alien · Aliens (20th Century Studios)' }),
+  Object.freeze({ by: t('D’après', 'Based on'), name: 'Alien (1979) · Aliens (1986)' }),
   Object.freeze({ by: t('Projet non officiel, sans affiliation', 'Unofficial project, no affiliation'), name: 'ALIENS: TANTALUS FRONTIER' })
 ]);
 

@@ -3454,7 +3454,10 @@ function launchCampaign(campaign = null) {
   // V188 spec 006: the war council's advantages, once per launch of a final mission (not on a resume).
   const act5AdvantagesV188 = deployment.resumed ? [] : applyAct5LaunchAdvantagesV188(saveSystem.data, campaign.id);
   saveSystem.commit();
-  if (act5AdvantagesV188.length) toast(document.documentElement.lang === 'en' ? 'War council: Sanaa’s and Cal’s advantages are aboard.' : 'Conseil de guerre : les avantages de Sanaa et de Cal sont à bord.');
+  if (act5AdvantagesV188.length) {
+    const en = document.documentElement.lang === 'en', labels = { turrets: en ? 'Sanaa’s turret belts (+120 ammunition)' : 'bandes des tourelles de Sanaa (+120 munitions)', armour: en ? 'Cal’s plates (armour 100)' : 'plaques de Cal (blindage 100)' };
+    toast(`${en ? 'War council' : 'Conseil de guerre'} : ${act5AdvantagesV188.map(id => labels[id]).join(', ')}.`);
+  }
   byId('mission-title').textContent = campaign.name;
   pendingResolutionV121 = null;
   byId('retreat-mission').textContent = 'BATTRE EN RETRAITE';
