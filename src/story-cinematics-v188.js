@@ -7,6 +7,7 @@
 import { getNpcDialoguePortraitV168, drawNpcDialoguePortraitV168 } from './npc-dialogue-portraits-v168.js';
 import { getPlaceholderPortraitV188, drawPlaceholderPortraitV188 } from './placeholder-portraits-v188.js';
 import { colorblindPaletteActiveV188 } from './colorblind-palette-v188.js';
+import { STATION_CINEMATICS_V188, STATION_CINEMATIC_SETS_V188, STATION_CINEMATIC_PALETTES_V188, drawStationSetItemV188, drawStationShotV188 } from './station-cinematics-v188.js';
 
 const t = (fr, en) => Object.freeze({ fr, en });
 const shot = (seconds, kind, data = {}) => Object.freeze({ seconds, kind, ...data });
@@ -169,7 +170,9 @@ export const CINEMATICS_V188 = Object.freeze({
     shot(10, 'dialogue', { scene: 'quarters', line: line('ROOK', 'crew-06-rook',
       'Le profil « priorité cargaison » n’a pas été activé au relais. Il a été autorisé à distance. La signature vient de la station Asphodèle.',
       'The “cargo priority” profile wasn’t activated at the relay. It was authorised remotely. The signature comes from Asphodèle station.') })
-  ]) })
+  ]) }),
+  // V188 spec 007: CIN-70 to CIN-72, the Asphodèle station front (station-cinematics-v188.js).
+  ...STATION_CINEMATICS_V188
 });
 export const CINEMATIC_IDS_V188 = Object.freeze(Object.keys(CINEMATICS_V188));
 
@@ -304,7 +307,8 @@ const SETS_V188 = Object.freeze({
   cradle: Object.freeze({ scale: 200, floor: 560, items: Object.freeze([
     item('person', 170, .5, PERSON_M, { who: 'ECHO-9', torch: true }),
     item('cradle', 470, 2.4, 1, { label: 'QZ17', restraints: 3, torn: true })
-  ]) })
+  ]) }),
+  ...STATION_CINEMATIC_SETS_V188 // V188 spec 007: the control deck and Echo-8's lower-deck barricade
 });
 // Who stands on the quay, per shot (`cast` on the shot).
 const QUAY_CASTS_V188 = Object.freeze({
@@ -419,7 +423,7 @@ function drawSet(ctx, scene, { cast = null, time = 0, reducedMotion = false, spe
         ctx.fillStyle = '#e9d07a'; ctx.font = '700 16px monospace'; ctx.fillText(entry.label, x + 12, top + h * .11 + 2);
         break;
       }
-      default: break;
+      default: drawStationSetItemV188(ctx, entry, { x, w, h, top, floor, scale, time, reducedMotion }); break;
     }
   }
   return layout;
@@ -443,7 +447,7 @@ function background(ctx, images, scene, time, reducedMotion, { cast = null, spea
     drawSet(ctx, 'hologram', set); // the table and, backlit around it, Harlow, Vega, Velez and Echo-9
     return;
   }
-  const palette = { cryo: ['#061014', '#10232a'], range: ['#100f0a', '#22200f'], quay: ['#070a0d', '#141b22'], triage: ['#0d1112', '#1e2629'], quarters: ['#0d0a08', '#1d1712'], dropship: ['#0a0606', '#1c0f0d'], cradle: ['#0b1113', '#162024'], lab: ['#0d1214', '#1b2428'], alarm: ['#140606', '#2a0e0c'] }[scene] || ['#0b0f10', '#151b1d'];
+  const palette = STATION_CINEMATIC_PALETTES_V188[scene] || { cryo: ['#061014', '#10232a'], range: ['#100f0a', '#22200f'], quay: ['#070a0d', '#141b22'], triage: ['#0d1112', '#1e2629'], quarters: ['#0d0a08', '#1d1712'], dropship: ['#0a0606', '#1c0f0d'], cradle: ['#0b1113', '#162024'], lab: ['#0d1214', '#1b2428'], alarm: ['#140606', '#2a0e0c'] }[scene] || ['#0b0f10', '#151b1d'];
   const g = ctx.createLinearGradient?.(0, 0, 0, H);
   if (g) { g.addColorStop(0, palette[1]); g.addColorStop(1, palette[0]); ctx.fillStyle = g; } else ctx.fillStyle = palette[0];
   ctx.fillRect(0, 0, W, H);
@@ -485,6 +489,7 @@ function background(ctx, images, scene, time, reducedMotion, { cast = null, spea
     ctx.fillStyle = '#151b1d'; ctx.fillRect(0, 560, W, 160); // floor
     drawSet(ctx, 'triage', set); // Lucia Ferro beside the 2 m stretcher, the patient's chest bandaged
   }
+  if (STATION_CINEMATIC_SETS_V188[scene]) { ctx.fillStyle = '#0a0f0c'; ctx.fillRect(0, 560, W, 160); drawSet(ctx, scene, set); } // V188 spec 007
   if (scene === 'cradle') { ctx.fillStyle = '#0a1012'; ctx.fillRect(0, 560, W, 160); drawSet(ctx, 'cradle', set); } // the maintenance alcove
   if (scene === 'lab') { // Inez's bench: lamp, sample rack, screen
     light(ctx, 900, 220, 300, 'rgba(200,230,240,.12)'); ctx.fillStyle = '#1a2226'; ctx.fillRect(560, 430, 640, 24); ctx.fillRect(590, 454, 14, 140); ctx.fillRect(1160, 454, 14, 140);
@@ -689,7 +694,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       background(ctx, images, current.scene, local, reducedMotion, { cast: current.cast, speakerId: current.line?.crewId });
       subtitle = current; break;
     }
-    default: break;
+    default: drawStationShotV188(ctx, current, { local, progress, lang, reducedMotion, caption: (text, y) => caption(ctx, text, y), W, H }); break;
   }
   ctx.restore();
   if (current.kind !== 'title') grain(ctx, local, reducedMotion);

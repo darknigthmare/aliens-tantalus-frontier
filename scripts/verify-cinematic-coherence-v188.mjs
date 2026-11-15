@@ -26,7 +26,7 @@ function textsAt(id, index, language = 'fr') {
 }
 
 test('every set keeps one scale and plausible human proportions', () => {
-  assert.deepEqual([...CINEMATIC_SET_SCENES_V188].sort(), ['cradle', 'cryo', 'hologram', 'locker', 'quay', 'triage']);
+  assert.deepEqual([...CINEMATIC_SET_SCENES_V188].sort(), ['control', 'cradle', 'cryo', 'hologram', 'locker', 'lowerdeck', 'quay', 'triage']); // V188 spec 007: + control, lowerdeck
   for (const scene of CINEMATIC_SET_SCENES_V188) for (const cast of [null, ...QUAY_CAST_IDS_V188]) {
     const layout = cinematicSetLayoutV188(scene, { cast });
     for (const entry of layout.items) {

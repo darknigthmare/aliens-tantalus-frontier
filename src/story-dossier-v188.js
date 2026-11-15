@@ -3,6 +3,7 @@
 // nothing is granted by a cinematic or a dialogue.
 import { normalizeStoryCampaignV188 } from './story-campaign-v188.js';
 import { cassiusOrdersRecoveredV188, asphodeleRetakenV188 } from './station-asphodele-v188.js';
+import { asphodeleRelayReadyV188 } from './asphodele-hub-v188.js';
 
 const t = (fr, en) => Object.freeze({ fr, en });
 const has = (list, id) => Array.isArray(list) && list.includes(id);
@@ -45,8 +46,8 @@ export const ENDINGS_V188 = Object.freeze({
   'living-without-proof': t('Les vivants, sans preuve', 'The living, without proof')
 });
 
-/** Options open at the war council. Asphodèle is retaken by S4 (spec 005); its relay room does not exist yet. */
-export function finalChoiceOptionsV188(save, { asphodeleRetaken = asphodeleRetakenV188(save), relayRoomOpen = false } = {}) {
+/** Options open at the war council. Asphodèle is retaken by S4 (spec 005); its relay room is brought online in the hub (spec 007). */
+export function finalChoiceOptionsV188(save, { asphodeleRetaken = asphodeleRetakenV188(save), relayRoomOpen = asphodeleRelayReadyV188(save) } = {}) {
   const dossier = storyDossierV188(save), story = normalizeStoryCampaignV188(save?.storyCampaignV188);
   const options = [];
   if (asphodeleRetaken && relayRoomOpen && dossier.count >= 5) options.push({ ...FINAL_OPTIONS_V188.transmit });
