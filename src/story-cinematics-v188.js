@@ -5,6 +5,8 @@
 // the Tantalus reuse the existing title-scene layers. Every cinematic can be
 // skipped and replayed, and none grants a reward.
 import { getNpcDialoguePortraitV168, drawNpcDialoguePortraitV168 } from './npc-dialogue-portraits-v168.js';
+import { getPlaceholderPortraitV188, drawPlaceholderPortraitV188 } from './placeholder-portraits-v188.js';
+import { colorblindPaletteActiveV188 } from './colorblind-palette-v188.js';
 
 const t = (fr, en) => Object.freeze({ fr, en });
 const shot = (seconds, kind, data = {}) => Object.freeze({ seconds, kind, ...data });
@@ -494,6 +496,12 @@ function background(ctx, images, scene, time, reducedMotion, { cast = null, spea
     ctx.fillStyle = 'rgba(120,230,170,.35)'; for (let y = 316; y < 404; y += 12) ctx.fillRect(776, y, 120 + (y % 5) * 10, 3);
   }
 }
+/** What the lower-third frame shows for a speaker: the reviewed crew crop, a
+ * PLACEHOLDER primitive portrait (Wren, Ferro, Sarrazin) or, otherwise, initials. */
+export function cinematicSpeakerPortraitKindV188(line) {
+  if (line?.crewId && getNpcDialoguePortraitV168(line.crewId)) return 'crew-crop';
+  return !line?.crewId && getPlaceholderPortraitV188(line?.speaker) ? 'placeholder-portrait' : 'initials';
+}
 function portrait(ctx, images, crewId, name, x, y, size) {
   ctx.fillStyle = '#0a1210'; ctx.fillRect(x, y, size, size);
   ctx.strokeStyle = 'rgba(131,213,161,.6)'; ctx.strokeRect(x + .5, y + .5, size - 1, size - 1);
@@ -502,6 +510,9 @@ function portrait(ctx, images, crewId, name, x, y, size) {
     const crop = profile.crop; ctx.imageSmoothingEnabled = false;
     ctx.drawImage(image, crop.x, crop.y, crop.w, crop.h, x + 4, y + 4, size - 8, size - 8); return true;
   }
+  // Wren, Ferro, Sarrazin (Q78): PLACEHOLDER primitive portraits, not franchise likenesses.
+  const placeholder = crewId ? null : getPlaceholderPortraitV188(name);
+  if (placeholder) { drawPlaceholderPortraitV188(ctx, placeholder, { x: x + 4, y: y + 4, size: size - 8, colorblind: colorblindPaletteActiveV188() }); return true; }
   const initials = String(name).split(/[\s·.]+/).filter(Boolean).slice(0, 2).map(part => part[0]).join('').toUpperCase();
   ctx.fillStyle = '#83d5a1'; ctx.font = `700 ${Math.round(size / 3)}px monospace`; ctx.textAlign = 'center';
   ctx.fillText(initials, x + size / 2, y + size / 2 + size / 9); ctx.textAlign = 'left'; return false;

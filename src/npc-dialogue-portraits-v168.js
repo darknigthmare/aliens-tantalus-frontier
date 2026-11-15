@@ -1,4 +1,6 @@
 import { setNpcPortraitSourceV164, resolveHumanSpriteDrawableV164 } from './npc-matte-apertures-v164.js';
+import { getPlaceholderPortraitV188, drawPlaceholderPortraitV188 } from './placeholder-portraits-v188.js';
+import { colorblindPaletteActiveV188 } from './colorblind-palette-v188.js';
 
 const freeze = value => {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
@@ -67,6 +69,8 @@ export function setDialogueSpeakerPortraitV168(image, { crewId = null, name = ''
   if (!image || !container?.dataset) return null;
   active.get(image)?.cleanup();
   const profile = getNpcDialoguePortraitV168(crewId), source = profile?.source || paintedSource;
+  // V188 (Q78): Wren, Ferro and Sarrazin get a PLACEHOLDER primitive portrait instead of initials.
+  const placeholder = !profile && !source && !crewId ? getPlaceholderPortraitV188(name) : null;
   const document = image.ownerDocument || globalThis.document;
   let canvas = container.querySelector?.('canvas[data-dialogue-avatar-v168]');
   if (!canvas && document?.createElement) {
@@ -79,7 +83,8 @@ export function setDialogueSpeakerPortraitV168(image, { crewId = null, name = ''
   container.setAttribute('role', 'img'); container.setAttribute('aria-label', `Portrait de ${name || 'l’interlocuteur'}`);
   container.dataset.dialoguePortraitCrewV168 = profile?.crewId || '';
   container.dataset.dialoguePortraitInitialsV168 = initials(name);
-  container.dataset.dialoguePortraitKindV168 = profile ? profile.framing : source ? 'painted-portrait' : 'initials';
+  container.dataset.dialoguePortraitKindV168 = profile ? profile.framing : source ? 'painted-portrait'
+    : placeholder ? 'placeholder-portrait' : 'initials';
   container.dataset.dialoguePortraitStateV168 = source ? 'loading' : 'fallback';
   image.classList.remove('is-sprite-cell-v62'); image.hidden = true;
   image.alt = `Portrait de ${name || 'l’interlocuteur'}`; image.setAttribute('aria-hidden', 'true');
@@ -113,7 +118,15 @@ export function setDialogueSpeakerPortraitV168(image, { crewId = null, name = ''
   if (!source) {
     // Also invalidate the previous V164 image/mask callback. A late source
     // must not put another crew member into an unknown speaker's frame.
-    setNpcPortraitSourceV164(image, ''); return { kind: 'initials', crewId, name };
+    setNpcPortraitSourceV164(image, '');
+    const drawn = placeholder && canvas ? drawPlaceholderPortraitV188(canvas.getContext?.('2d'), placeholder,
+      { size: Math.min(canvas.width, canvas.height), colorblind: colorblindPaletteActiveV188(document) }) : null;
+    if (drawn) {
+      canvas.hidden = false; container.dataset.dialoguePortraitStateV168 = 'ready';
+      return { kind: 'placeholder-portrait', crewId: null, name, placeholderId: placeholder.id, sign: placeholder.sign };
+    }
+    container.dataset.dialoguePortraitKindV168 = 'initials';
+    return { kind: 'initials', crewId, name };
   }
   image.addEventListener?.('load', onLoad); image.addEventListener?.('error', onError);
   setNpcPortraitSourceV164(image, source); onLoad();

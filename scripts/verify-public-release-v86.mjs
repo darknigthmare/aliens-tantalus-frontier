@@ -343,6 +343,7 @@ const FORGE_TOOLING_V140 = new Set([
   'specs/002-cales-qz17-profondeur-combat/tasks.md',
   'scripts/verify-mission-depth-v188.mjs',
   'scripts/verify-cinematic-coherence-v188.mjs',
+  'scripts/verify-placeholder-portraits-v188.mjs',
   'scripts/verify-qz17-coherence-v188.mjs',
   'scripts/verify-quay-coherence-v188.mjs',
   'scripts/verify-prologue-rooms-v188.mjs',
