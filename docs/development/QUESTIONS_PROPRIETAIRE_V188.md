@@ -4,6 +4,21 @@ Questionnaire de décision établi le 2026-11-15 sur le commit `b45e9eb`. Il ras
 
 Ce document est un fichier source de développement. Il est exclu du build public (`scripts/verify-public-release-v86.mjs`).
 
+## Réponses reçues (2026-11-15)
+
+| # | Réponse |
+| --- | --- |
+| 31 | A — d'autres soutes ou cales de mission, après évaluation de la cale QZ-17 |
+| 38 | A — ramener `pair-030-mire` au barème des missions comparables |
+| 39 | A — réduire la pression ennemie pendant la phase P-5000, sans toucher au véhicule |
+| 63 | A — défilement automatique du rail jusqu'à la phase active (appliqué par défaut) |
+| 78 | B — portraits en primitives Canvas avec un signe distinctif |
+| 79 | A — primitives Canvas pour tout nouvel élément |
+| 80 | Garder la ligne du §45.1 telle quelle (l'exclusion vaut pour la session de travail) |
+| 86 | A — noms propres gardés tels quels, avec accents |
+
+Décisions prises hors questionnaire le même jour : grâce de 4 s seule pour QZ-17 ; mission de Jeri en solo ; l'objectif des conduits ne compte que le joueur ; un checkpoint par phase dans `special-cargo-brutal` (et avant la passerelle d'extraction en extérieur).
+
 ## Comment répondre
 
 - Répondre par numéro et lettre, par exemple : `12: B`, `40: A`, `71: C`.
