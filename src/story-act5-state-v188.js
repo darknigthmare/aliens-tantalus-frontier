@@ -10,7 +10,6 @@ export const ACT5_ENDING_IDS_V188 = Object.freeze(['relay-speaks', 'freight-firs
 export const ACT5_ADVANTAGE_IDS_V188 = Object.freeze(['turrets', 'armour', 'window', 'route']);
 export const ACT5_BRIDGE_IDS_V188 = Object.freeze(['freight', 'colonists']);
 export const ACT5_STANDOFF_IDS_V188 = Object.freeze(['transmitted', 'withdrawn', 'held']);
-export const ACT5_DRIFT_RELAYS_NEEDED_V188 = 3; // bible §5.7.1: « Relais en dérive » ×3
 const CREW_ID = /^crew-\d{2}-[a-z0-9-]{1,40}$/;
 const MAX_TALKED = 16;
 
@@ -19,7 +18,7 @@ const count = (value, max) => Math.max(0, Math.min(max, Math.floor(Number(value)
 
 export function createAct5V188() {
   return { schema: 188, phase: null, recommended: null, decision: null, advantages: [], bridge: null, bridgeTimedOut: false,
-    standoff: null, driftRelays: 0, epilogueTalked: [], lockerRead: false };
+    standoff: null, epilogueTalked: [], lockerRead: false };
 }
 
 function normalizeDecision(raw) {
@@ -44,9 +43,8 @@ export function normalizeAct5V188(raw) {
   state.bridge = pick(ACT5_BRIDGE_IDS_V188, raw.bridge);
   state.bridgeTimedOut = Boolean(state.bridge && raw.bridgeTimedOut === true);
   state.standoff = pick(ACT5_STANDOFF_IDS_V188, raw.standoff);
-  state.driftRelays = count(raw.driftRelays, ACT5_DRIFT_RELAYS_NEEDED_V188);
   state.epilogueTalked = Array.isArray(raw.epilogueTalked) ? [...new Set(raw.epilogueTalked.filter(id => typeof id === 'string' && CREW_ID.test(id)))].slice(0, MAX_TALKED) : [];
   state.lockerRead = raw.lockerRead === true;
-  if (!state.phase && !state.driftRelays) return null;
+  if (!state.phase) return null;
   return state;
 }

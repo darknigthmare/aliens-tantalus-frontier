@@ -764,7 +764,7 @@ Les pièces de CASSIUS (S2) et de Wren (annexe colonie) sont affichées « pas e
 #### 5.7.1 Choix final : options ouvertes par les choix cumulés — validé le 2026-11-06
 
 **Logique [EXISTANT] V188** (`finalChoiceOptionsV188`, `resolveFinalChoiceV188`, testée) :
-- *Transmettre* n'est ouvert que si Asphodèle est reprise et sa salle des relais ouverte ; **V188 (spec 006)** : la salle s'ouvre après trois missions *Relais en dérive* réussies après S4 (§5.11).
+- *Transmettre* n'est ouvert que si Asphodèle est reprise et sa salle des relais ouverte ; **V188** : la salle est fournie par le hub Asphodèle (`asphodeleRelayReadyV188`) et lue par défaut par `finalChoiceOptionsV188` ; l'Acte V (§5.11) s'appuie dessus.
 - Les modificateurs sont appliqués : *restitution* avec 2 conteneurs ou plus, tentative de récupération à bord si la créature a été capturée.
 - Vega suit la recommandation si la loyauté de Mara Vega est d'au moins 55 (niveau *operationnel*).
 - Sinon, avec 5 pièces mais sans canal sûr, Vega tient la colonie (**[PROPOSÉ]**, cas non écrit).
@@ -948,12 +948,13 @@ Décisions par défaut appliquées (questionnaire `QUESTIONS_PROPRIETAIRE_V188.m
 | Leila Sørensen · route | 2 colons en retard sur 4 rejoignent le port si leur remorque est lâchée |
 | Pont | 15 s ; sans réponse, le fret cède ; 4 colons dans la remorque en retard |
 | *Céder* sans restitution | stress +10 pour chaque membre de l'équipage |
-| Salle des relais | 3 missions *Relais en dérive* (`act5-drift-relay`) réussies après S4 |
 | Textes | ordre de Halloran, répliques des conseillers, de CASSIUS et d'Echo-9 au conseil, textes du pont et du quai, répliques de Cal (CIN-60) et de Rook (CIN-61), 24 derniers mots (Vega, Harlow, Rook, DAVID-8R, BISHOP-9, Okafor, Orlov, Mbaye × 3 fins), faits de l'épilogue |
 
 **Fidélité** : aucune fidélité « 1:1 ». Repères documentés cités dans la spec 006 : cofinancement de la colonie avec l'Administration coloniale et audience de l'ICC (*Aliens*, 1986) ; Marshals coloniaux (*Alien: Isolation*, 2014) ; équipe de la compagnie venue récupérer l'« actif » (*Alien 3*, 1992, dernière scène) ; « Special Order 937 » (*Alien*, 1979) ; M577 sous la pluie, Reine et retour en hypersommeil (*Aliens*, 1986). Adaptations du projet : charte et clause, conseil, pont, appel, casier d'Echo-8. À définir : course APC dédiée, sprite de la Reine, art des 15 emplacements (`src/act5-slots-v188.js`).
 
-**Reste à faire** : course APC dédiée (Q1 A au sens strict), Reine dédiée, hub Asphodèle et salle des relais visitable, palier *Libre* après « Le relais parle », effets durables de la relève de Vega et de la démission d'Inez en partie libre, nouvelle partie +, art.
+**Salle des relais** : condition de *Transmettre* fournie par le hub Asphodèle (`asphodeleRelayReadyV188`), lue par défaut par `finalChoiceOptionsV188` ; l'Acte V ne la reconstruit pas.
+
+**Reste à faire** : course APC dédiée (Q1 A au sens strict), Reine dédiée, palier *Libre* après « Le relais parle », effets durables de la relève de Vega et de la démission d'Inez en partie libre, nouvelle partie +, art.
 
 ---
 
@@ -1136,7 +1137,7 @@ Décisions par défaut appliquées : Q6 (S1-S4 comme missions avant le hub), Q7 
 
 - **Accès** : Acte II terminé → quête de Rook « Six heures », dont la fin joue *Six heures de silence* (§8.4) → S1 → S2 → décision CASSIUS → S3 → S4. Les missions verrouillées ne sont pas proposées ; le lancement est refusé avec la raison. Une mission en cours reste reprise.
 - **Missions** : `station-s1` à `station-s4` sur Cocyte (`world-05-lethe`), gabarit intérieur de vaisseau, objectifs et registres de §7.2 et §0.3 (Horreur, Tension, Horreur, Action). Le décor est l'intérieur de vaisseau générique : la station n'a pas encore son art (§29.4).
-- **Dossier** : S2 donne la pièce *Ordres de livraison archivés par CASSIUS*, même si CASSIUS est effacé ensuite (§5.7.1). S4 rend la condition « Asphodèle reprise » vraie ; la salle des relais s'ouvre avec trois *Relais en dérive* (spec 006, §5.11).
+- **Dossier** : S2 donne la pièce *Ordres de livraison archivés par CASSIUS*, même si CASSIUS est effacé ensuite (§5.7.1). S4 rend la condition « Asphodèle reprise » vraie ; la salle des relais vient du hub Asphodèle (`asphodeleRelayReadyV188`), condition lue par l'Acte V (§5.11).
 - **Effets CASSIUS [PROPOSÉ]** : réécrit, quarantaine de Cocyte −6 et stabilité +3 ; bridé, quarantaine −3 ; effacé, aucun effet. Les annexes fermées par le bridage n'existent pas encore.
 - **Scènes de retour** (S1, S3, S4) et décision CASSIUS : au Commandement, une seule fois, image d'emplacement en primitives Canvas (`src/content-gap-slots-v188.js`).
 - **[PROPOSÉ]** : la consigne qui ferme le sas 3 à 6:00:05 est appliquée par CASSIUS (indice de la quête de Rook) ; les journaux des survivants s'arrêtent au quatrième jour.
@@ -4689,4 +4690,4 @@ Audit bible contre code : [`AUDIT_CONTENU_V188.md`](../development/AUDIT_CONTENU
 
 ### 56.14 Acte V, fins et épilogue (V188, 2026-11-15)
 
-Manque n° 3 de l'audit comblé en partie : conseil de guerre, choix final, missions finales, face-à-face, trois fins, épilogue au Tantalus, générique et partie libre (§5.11). Feature : `specs/006-acte-v-fins/`. Tests : `scripts/verify-act5-endings-v188.mjs` (dans `test:priorities:v188`) ; contrôle Chromium de la fin « Le relais parle » sur fixture importée, avec deux injections déclarées (checkpoint, fin de mission). Statut : **Partiel** — la course APC dédiée, la Reine dédiée et l'art restent à faire ; rien n'est déclaré terminé.
+Manque n° 3 de l'audit comblé en partie : conseil de guerre, choix final, missions finales, face-à-face, trois fins, épilogue au Tantalus, générique et partie libre (§5.11). Feature : `specs/006-acte-v-fins/`. Tests : `scripts/verify-act5-endings-v188.mjs` (dans `test:priorities:v188`) ; contrôle Chromium de la fin « Les vivants, sans preuve » sur fixture importée (FR et EN), avec deux injections déclarées (checkpoint, fin de mission). Statut : **Partiel** — la course APC dédiée, la Reine dédiée et l'art restent à faire ; rien n'est déclaré terminé.

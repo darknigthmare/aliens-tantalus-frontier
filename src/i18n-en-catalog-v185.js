@@ -6586,9 +6586,6 @@ export const EN_CATALOG_V185 = Object.freeze({
 "Station Asphodèle": "Asphodèle station",
 "Quêtes de l’équipage": "Crew quests",
 // V188 Act V « Non viable », spec 006 (reviewed through i18n-catalog-maintenance-v186 merge).
-"ASPHODÈLE · RELAIS EN DÉRIVE": "ASPHODÈLE · DRIFTING RELAY",
-"Récupérer la boîte noire d’un relais du réseau QZ qui dérive près d’Asphodèle. Trois relais rouvrent la salle des relais.": "Recover the black box of a QZ-network relay drifting near Asphodèle. Three relays reopen the relay room.",
-"Un relais du réseau QZ dérive feux éteints autour d’Asphodèle. Rétablir son énergie et copier sa boîte noire : chaque relais récupéré rend une liaison à la salle des relais de la station.": "A QZ-network relay drifts lights out around Asphodèle. Restore its power and copy its black box: each relay recovered gives the station’s relay room one link back.",
 "NON VIABLE · DERNIER DÉPART": "NON-VIABLE · LAST DEPARTURE",
 "Le M577 quitte le complexe sous la pluie avec les derniers ouvriers. La ruche du dépôt coupe la route du port.": "The M577 leaves the complex in the rain with the last workers. The depot hive cuts the road to the port.",
 "Escorter le convoi du complexe vers Port-Méridien. À mi-parcours, un pont cède : il faudra lâcher une remorque, celle du fret ou celle des colons en retard.": "Escort the convoy from the complex to Port-Méridien. Halfway, a bridge gives way: one trailer has to be dropped, the freight or the late colonists.",

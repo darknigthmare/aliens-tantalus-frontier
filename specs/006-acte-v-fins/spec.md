@@ -21,7 +21,7 @@ Après l'Acte IV et le contrôle biologique (CIN-51), la table tactique ouvre le
 **Acceptance Scenarios**:
 
 1. **Given** les quatre chapitres de Cocyte et le retour de l'Acte IV, **When** j'ouvre le Commandement, **Then** le conseil s'ouvre et ne peut pas être fermé sans décision.
-2. **Given** Asphodèle reprise, la salle des relais ouverte (3 relais en dérive) et 5 pièces, **Then** *Transmettre* est proposé ; sinon le conseil dit pourquoi il ne l'est pas.
+2. **Given** Asphodèle reprise, la salle des relais prête (hub Asphodèle) et 5 pièces, **Then** *Transmettre* est proposé ; sinon le conseil dit pourquoi il ne l'est pas.
 3. **Given** le conseil ouvert, **When** je recharge, **Then** il se rouvre et aucune décision n'est enregistrée.
 4. **Given** Vega sous 55, **When** je recommande une option, **Then** Vega décide : tenir avec 5 pièces sans canal sûr, transmettre avec le canal, céder sous 5 pièces.
 
@@ -54,9 +54,9 @@ Après la dernière mission, la table tactique montre le face-à-face au quai (s
 
 ## Requirements *(mandatory)*
 
-- **FR-001**: Cinq missions sur Cocyte (`act5-drift-relay`, `act5-last-run`, `act5-depot-queen`, `act5-port-walls`, `act5-evacuation`) construites sur des gabarits existants, avec registre et objectif connus.
+- **FR-001**: Quatre missions sur Cocyte (`act5-last-run`, `act5-depot-queen`, `act5-port-walls`, `act5-evacuation`) construites sur des gabarits existants, avec registre et objectif connus.
 - **FR-002**: L'Acte V s'ouvre après `special-archive-relay`, `special-apc-convoy`, `special-c12-horde`, `special-black-cocoon` et le retour de l'Acte IV, jamais pendant l'Interlude.
-- **FR-003**: Les options finales viennent de `finalChoiceOptionsV188` (§5.7.1) ; la salle des relais s'ouvre avec 3 relais en dérive réussis après S4 [PROPOSÉ, adaptation du contrat local].
+- **FR-003**: Les options finales viennent de `finalChoiceOptionsV188` (§5.7.1)  ; la salle des relais vient du hub Asphodèle (`asphodeleRelayReadyV188`, `src/asphodele-hub-v188.js`), lue par défaut par `finalChoiceOptionsV188` ; l'Acte V ne la reconstruit pas.
 - **FR-004**: La décision est unique, prise par `resolveFinalChoiceV188` ; elle est enregistrée avec le nombre de pièces, la restitution et la tentative de récupération.
 - **FR-005**: Avantages des conseillers en confiance solide (loyauté ≥ 75) [PROPOSÉ] : munitions +120 (Sanaa), blindage 100 (Cal), +6 s au pont (Orlov), deux colons sur quatre sauvés par la route de Leila.
 - **FR-006**: Pont : 15 s sans pause ; faute de choix, le fret cède [PROPOSÉ].
@@ -86,6 +86,6 @@ Aucune fidélité « 1:1 » ni certifiée n'est revendiquée. Trois catégories 
 
 ## Success Criteria *(mandatory)*
 
-- **SC-001**: Depuis une sauvegarde au seuil, chaque fin est atteinte en suivant les textes du jeu (tests Node) ; la fin *Transmettre* est jouée de bout en bout dans Chromium.
+- **SC-001**: Depuis une sauvegarde au seuil, chaque fin est atteinte en suivant les textes du jeu (tests Node) ; la fin *Tenir* (« Les vivants, sans preuve ») est jouée de bout en bout dans Chromium ; *Transmettre* l'a été avec la première version du relais, retirée depuis.
 - **SC-002**: Un rechargement à chaque étape reprend au bon endroit.
 - **SC-003**: `scripts/verify-act5-endings-v188.mjs` passe (accès, fins, épilogue, sauvegarde, reprise, anciennes sauvegardes, i18n).

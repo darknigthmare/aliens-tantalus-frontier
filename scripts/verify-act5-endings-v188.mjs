@@ -14,7 +14,7 @@ import { storyDossierV188 } from '../src/story-dossier-v188.js';
 import { CINEMATICS_V188, cinematicDurationV188, drawCinematicFrameV188 } from '../src/story-cinematics-v188.js';
 import { ACT5_SLOTS_V188, ACT5_SLOT_IDS_V188, ACT5_FILES_PRESENT_V188, Act5AssetLoaderV188 } from '../src/act5-slots-v188.js';
 import {
-  ACT5_CAMPAIGNS_V188, ACT5_CAMPAIGN_IDS_V188, ACT5_NAMES_EN_V188, act5OpenV188, act5StateV188, relayRoomOpenV188, act5LockReasonV188, act5LockTextV188,
+  ACT5_CAMPAIGNS_V188, ACT5_CAMPAIGN_IDS_V188, ACT5_NAMES_EN_V188, act5OpenV188, act5StateV188, act5LockReasonV188, act5LockTextV188,
   filterAct5CampaignsV188, act5MissionPathV188, startAct5CouncilV188, act5CouncilV188, decideAct5V188, applyAct5LaunchAdvantagesV188,
   act5BridgeDueV188, act5BridgeSecondsV188, chooseAct5BridgeV188, act5LateColonistsSavedV188, applyAct5OperationResultV188, act5TableActionV188,
   advanceAct5ToEndingV188, act5EndingSummaryV188, finishAct5EndingV188, act5RollCallV188, act5EpilogueV188, act5CrewEpilogueLineV188,
@@ -29,6 +29,12 @@ const complete = (save, id) => { if (!save.galaxy.completedCampaignIds.includes(
 const loyalty = (save, id, value) => { save.crew.find(member => member.id === id).loyalty = value; };
 const FOUR = ['special-archive-relay', 'special-apc-convoy', 'special-c12-horde', 'special-black-cocoon'];
 const STATION = ['station-s1', 'station-s2', 'station-s3', 'station-s4'];
+// The relay room belongs to the Asphodèle hub (asphodeleRelayReadyV188, merged separately): finalChoiceOptionsV188
+// reads it by default. These tests pass it through the `context` override, as the council and decision allow.
+const RELAY_READY = new WeakSet();
+const ctxOf = save => RELAY_READY.has(save) ? { relayRoomOpen: true } : {};
+const decide = (save, recommended, language = 'fr') => decideAct5V188(save, recommended, language, ctxOf(save));
+const council = (save, language = 'fr') => act5CouncilV188(save, language, ctxOf(save));
 
 /** A save at the Act V threshold (4 dossier pieces: Interlude, Act IV, CASSIUS + Act I's lead with `five`; Act II with `six`). */
 function threshold({ station = true, cassius = 'rewrite', relays = 0, outcome = 'captured', containers = 1, vega = 60, five = false, six = false } = {}) {
@@ -39,7 +45,6 @@ function threshold({ station = true, cassius = 'rewrite', relays = 0, outcome = 
   story.debriefSeen.push('special-black-cocoon');
   story.m577Manifest = { containers, colonists: 6 - containers * 2, resolved: true };
   story.interlude = { phase: 'resolved', crisisId: 'crisis-test', outcome };
-  if (relays) story.act5 = { driftRelays: relays };
   save.storyCampaignV188 = story;
   if (station) save.stationV188 = { schema: 188, introHeard: true, cassius, scenesSeen: ['s1', 's3', 's4'] };
   if (five) save.narrativeArchives = { ...save.narrativeArchives,
@@ -48,6 +53,7 @@ function threshold({ station = true, cassius = 'rewrite', relays = 0, outcome = 
   // six: also Act II's verdict with Rook's signature (the 18:43 priority piece); read before any migration.
   if (six) { save.archiveRelayArchivesV122 = { case: { verdict: 'delayed-distress' } }; save.storyCampaignV188.cinematicsSeen.push('cin-20-rook'); }
   loyalty(save, 'crew-01-mara-vega', vega);
+  if (relays) RELAY_READY.add(save);
   return save;
 }
 /** Plays the final missions of the decided line (success each time, resolution like finalizeOperation). */
@@ -61,7 +67,7 @@ function playFinal(save, { bridge = 'freight' } = {}) {
 }
 function toEnding(save, recommended, options) {
   assert.equal(startAct5CouncilV188(save), true);
-  const decision = decideAct5V188(save, recommended);
+  const decision = decide(save, recommended);
   assert.ok(decision, `decision for ${recommended}`);
   playFinal(save, options);
   assert.ok(['standoff', 'to-ending'].includes(act5TableActionV188(save)));
@@ -71,9 +77,9 @@ function toEnding(save, recommended, options) {
 
 // —— Content, loading and art slots ——
 test('content: five Act V missions on Cocyte from existing templates, registers, ids unchanged elsewhere', () => {
-  assert.deepEqual(ACT5_CAMPAIGN_IDS_V188, ['act5-drift-relay', 'act5-last-run', 'act5-depot-queen', 'act5-port-walls', 'act5-evacuation']);
+  assert.deepEqual(ACT5_CAMPAIGN_IDS_V188, ['act5-last-run', 'act5-depot-queen', 'act5-port-walls', 'act5-evacuation']);
   assert.equal(validateContent().ok, true);
-  assert.equal(CAMPAIGNS.length, 464);
+  assert.equal(CAMPAIGNS.length, 463);
   for (const campaign of ACT5_CAMPAIGNS_V188) {
     assert.ok(CAMPAIGNS.some(entry => entry.id === campaign.id), campaign.id);
     assert.equal(selectMissionTemplateV52({ campaign }), campaign.templateId, campaign.id);
@@ -131,9 +137,9 @@ test('access: Act V opens after the four Cocyte chapters and Act IV’s return, 
 
 test('access: final missions are locked until the council, then follow the decided line in order', () => {
   const save = threshold();
-  for (const id of ACT5_CAMPAIGN_IDS_V188.slice(1)) assert.equal(act5LockReasonV188(save, id), 'council', id);
-  assert.equal(filterAct5CampaignsV188(save, ACT5_CAMPAIGNS_V188).map(entry => entry.id).join(), 'act5-drift-relay');
-  startAct5CouncilV188(save); decideAct5V188(save, 'hold');
+  for (const id of ACT5_CAMPAIGN_IDS_V188) assert.equal(act5LockReasonV188(save, id), 'council', id);
+  assert.equal(filterAct5CampaignsV188(save, ACT5_CAMPAIGNS_V188).length, 0);
+  startAct5CouncilV188(save); decide(save, 'hold');
   assert.equal(act5LockReasonV188(save, 'act5-last-run'), null);
   assert.equal(act5LockReasonV188(save, 'act5-depot-queen'), 'previous');
   assert.equal(act5LockReasonV188(save, 'act5-evacuation'), 'path');
@@ -142,25 +148,25 @@ test('access: final missions are locked until the council, then follow the decid
   // A running final mission stays listed so that it can be resumed.
   save.strategy.currentOperation = { campaignId: 'act5-depot-queen' };
   assert.ok(filterAct5CampaignsV188(save, ACT5_CAMPAIGNS_V188).some(entry => entry.id === 'act5-depot-queen'));
-  for (const reason of ['station', 'council', 'path', 'previous']) assert.notEqual(act5LockTextV188(reason, 'en'), act5LockTextV188(reason, 'fr'));
+  for (const reason of ['council', 'path', 'previous']) assert.notEqual(act5LockTextV188(reason, 'en'), act5LockTextV188(reason, 'fr'));
 });
 
-test('access: « Transmettre » needs Asphodèle retaken, the relay room (3 drift relays) and 5 pieces', () => {
-  const noStation = threshold({ station: false, five: true });
-  assert.equal(act5LockReasonV188(noStation, 'act5-drift-relay'), 'station');
-  assert.equal(applyAct5OperationResultV188(noStation, { success: true, campaignId: 'act5-drift-relay' }), null);
+test('access: « Transmettre » needs Asphodèle retaken, the relay room (Asphodèle hub) and 5 pieces', () => {
+  const noStation = threshold({ station: false, five: true, relays: 3 });
+  assert.equal(council(noStation).options.some(option => option.id === 'transmit'), false);
+  assert.match(council(noStation, 'en').transmitClosed, /not retaken/);
   const save = threshold({ five: true });
   assert.equal(storyDossierV188(save).count, 5);
-  assert.deepEqual(act5CouncilV188(save).options.map(option => option.id), ['hold', 'cede']);
-  assert.match(act5CouncilV188(save, 'en').transmitClosed, /relay room closed \(0\/3\)/);
-  for (let i = 1; i <= 3; i += 1) assert.equal(applyAct5OperationResultV188(save, { success: true, campaignId: 'act5-drift-relay' }).relays, i);
-  assert.equal(applyAct5OperationResultV188(save, { success: true, campaignId: 'act5-drift-relay' }), null, 'capped at 3');
-  assert.equal(applyAct5OperationResultV188(save, { success: false, campaignId: 'act5-drift-relay' }), null);
-  assert.equal(relayRoomOpenV188(save), true);
-  assert.deepEqual(act5CouncilV188(save).options.map(option => option.id), ['transmit', 'hold', 'cede']);
+  assert.deepEqual(council(save).options.map(option => option.id), ['hold', 'cede'], 'relay room not ready (default of finalChoiceOptionsV188 in this base)');
+  assert.match(council(save, 'en').transmitClosed, /relay room closed/);
+  RELAY_READY.add(save);
+  assert.deepEqual(council(save).options.map(option => option.id), ['transmit', 'hold', 'cede']);
+  assert.equal(council(save, 'en').transmitClosed, null);
   const short = threshold({ relays: 3 }); // 4 pieces only
   assert.equal(storyDossierV188(short).count, 3);
-  assert.equal(act5CouncilV188(short).options.some(option => option.id === 'transmit'), false);
+  assert.equal(council(short).options.some(option => option.id === 'transmit'), false);
+  // The Act does not decide the relay room itself: no Act V mission or save field opens it.
+  assert.equal(read('src/story-act5-v188.js').includes('relayRoomOpen:'), false);
 });
 
 // —— Council and the three endings ——
@@ -168,13 +174,13 @@ test('council: solid-trust advisors offer their advantage; CASSIUS and origin li
   const save = threshold({ cassius: 'rewrite' });
   save.player.originV188 = 'origin-03';
   loyalty(save, 'crew-07-sanaa-doyle', 80); loyalty(save, 'crew-16-cal-mercer', 74);
-  const council = act5CouncilV188(save, 'fr');
-  assert.deepEqual(council.advisors.filter(entry => entry.offered).map(entry => entry.advantage), ['turrets']);
-  assert.ok(council.extra.some(line => /CASSIUS/.test(line))); assert.ok(council.extra.some(line => /Marshals/.test(line)));
+  const view = council(save, 'fr');
+  assert.deepEqual(view.advisors.filter(entry => entry.offered).map(entry => entry.advantage), ['turrets']);
+  assert.ok(view.extra.some(line => /CASSIUS/.test(line))); assert.ok(view.extra.some(line => /Marshals/.test(line)));
   assert.equal(act5StateV188(save).phase, null, 'reading the council writes nothing');
   assert.equal(ACT5_ADVISORS_V188.length, 4);
   const erased = threshold({ cassius: 'erase' });
-  assert.match(act5CouncilV188(erased, 'en').extra.join(' '), /erased/);
+  assert.match(council(erased, 'en').extra.join(' '), /erased/);
 });
 
 test('ending « Le relais parle »: Transmit followed by Vega, ICC referral at the quay', () => {
@@ -208,43 +214,43 @@ test('ending « Le fret d’abord »: Cede; restitution with 2+ containers, othe
   assert.deepEqual(act5MissionPathV188('cede'), ['act5-last-run', 'act5-depot-queen', 'act5-evacuation']);
   const plain = threshold({ containers: 1 });
   const before = plain.crew.map(member => member.stress);
-  startAct5CouncilV188(plain); decideAct5V188(plain, 'cede');
+  startAct5CouncilV188(plain); decide(plain, 'cede');
   assert.ok(plain.crew.every((member, index) => member.stress === Math.min(100, before[index] + 10)));
 });
 
 test('Vega decides below 55 loyalty: 5+ pieces without a safe channel → hold; below 5 → cede (freight first)', () => {
   const withFile = threshold({ vega: 40, five: true });
   startAct5CouncilV188(withFile);
-  const a = decideAct5V188(withFile, 'cede');
+  const a = decide(withFile, 'cede');
   assert.equal(a.decidedBy, 'vega'); assert.equal(a.option, 'hold'); assert.equal(a.ending, 'living-without-proof');
   const withChannel = threshold({ vega: 40, five: true, relays: 3 });
-  startAct5CouncilV188(withChannel); assert.equal(decideAct5V188(withChannel, 'hold').option, 'transmit');
+  startAct5CouncilV188(withChannel); assert.equal(decide(withChannel, 'hold').option, 'transmit');
   const thin = threshold({ vega: 40 });
-  startAct5CouncilV188(thin); const b = decideAct5V188(thin, 'hold');
+  startAct5CouncilV188(thin); const b = decide(thin, 'hold');
   assert.equal(b.option, 'cede'); assert.equal(b.ending, 'freight-first');
-  assert.equal(decideAct5V188(thin, 'hold'), null, 'decided once');
+  assert.equal(decide(thin, 'hold'), null, 'decided once');
 });
 
 // —— Final missions ——
 test('final missions: advisors’ effects at launch, the timed bridge (+6 s with Orlov), default on timeout, late colonists', () => {
   const save = threshold();
   loyalty(save, 'crew-07-sanaa-doyle', 90); loyalty(save, 'crew-16-cal-mercer', 90); loyalty(save, 'crew-08-maksim-orlov', 90); loyalty(save, 'crew-15-leila-s-rensen', 90);
-  startAct5CouncilV188(save); decideAct5V188(save, 'hold');
+  startAct5CouncilV188(save); decide(save, 'hold');
   assert.deepEqual(act5StateV188(save).advantages, ['turrets', 'armour', 'window', 'route']);
   save.player.ammo.primary = 10; save.player.armor = 20;
   assert.deepEqual(applyAct5LaunchAdvantagesV188(save, 'act5-last-run'), ['turrets', 'armour']);
   assert.equal(save.player.ammo.primary, 130); assert.equal(save.player.armor, 100);
-  assert.deepEqual(applyAct5LaunchAdvantagesV188(save, 'act5-drift-relay'), []);
+  assert.deepEqual(applyAct5LaunchAdvantagesV188(save, 'special-apc-convoy'), []);
   assert.equal(act5BridgeSecondsV188(save), 21);
   assert.equal(act5BridgeDueV188(save, 'act5-last-run'), true);
   assert.equal(chooseAct5BridgeV188(save, 'colonists'), true);
   assert.equal(chooseAct5BridgeV188(save, 'freight'), false, 'asked once');
   assert.equal(act5LateColonistsSavedV188(save), 2, 'Leila’s route');
-  const timeout = threshold(); startAct5CouncilV188(timeout); decideAct5V188(timeout, 'hold');
+  const timeout = threshold(); startAct5CouncilV188(timeout); decide(timeout, 'hold');
   assert.equal(act5BridgeSecondsV188(timeout), 15);
   assert.equal(chooseAct5BridgeV188(timeout, null, { timedOut: true }), true);
   assert.equal(act5StateV188(timeout).bridge, 'freight'); assert.equal(act5StateV188(timeout).bridgeTimedOut, true);
-  const skipped = threshold(); startAct5CouncilV188(skipped); decideAct5V188(skipped, 'hold');
+  const skipped = threshold(); startAct5CouncilV188(skipped); decide(skipped, 'hold');
   assert.equal(applyAct5OperationResultV188(skipped, { success: true, campaignId: 'act5-last-run' }).kind, 'bridge-default');
   assert.equal(act5StateV188(skipped).bridge, 'freight');
 });
@@ -293,14 +299,14 @@ test('after the campaign: epilogue → credits → complete; free play continues
 
 // —— Save round trip, resume, old saves ——
 test('save round trip: act5 is additive under storyCampaignV188 and survives migrateSave; bad values are sanitised', () => {
-  const save = threshold({ relays: 2 });
-  startAct5CouncilV188(save); decideAct5V188(save, 'hold'); chooseAct5BridgeV188(save, 'colonists');
+  const save = threshold();
+  startAct5CouncilV188(save); decide(save, 'hold'); chooseAct5BridgeV188(save, 'colonists');
   const after = roundTrip(save);
   assert.deepEqual(after.storyCampaignV188.act5, act5StateV188(save));
   assert.equal(after.storyCampaignV188.schema, 188); assert.ok(Array.isArray(after.storyCampaignV188.debriefSeen));
-  const forged = normalizeAct5V188({ phase: 'ending', decision: { option: 'nope' }, advantages: ['turrets', 'laser'], bridge: 'both', driftRelays: 99, epilogueTalked: ['crew-06-rook', 'x'] });
+  const forged = normalizeAct5V188({ phase: 'ending', decision: { option: 'nope' }, advantages: ['turrets', 'laser'], bridge: 'both', epilogueTalked: ['crew-06-rook', 'x'] });
   assert.equal(forged.phase, 'council', 'a phase past the council needs its decision');
-  assert.deepEqual(forged.advantages, ['turrets']); assert.equal(forged.bridge, null); assert.equal(forged.driftRelays, 3); assert.deepEqual(forged.epilogueTalked, ['crew-06-rook']);
+  assert.deepEqual(forged.advantages, ['turrets']); assert.equal(forged.bridge, null); assert.deepEqual(forged.epilogueTalked, ['crew-06-rook']);
   assert.equal(normalizeAct5V188({}), null); assert.equal(normalizeAct5V188('x'), null);
 });
 
@@ -308,7 +314,7 @@ test('resume at each step: council, final missions, quay, ending, epilogue and c
   const save = threshold({ relays: 3, five: true });
   startAct5CouncilV188(save);
   assert.equal(act5TableActionV188(roundTrip(save)), 'council', 'reload during the council re-opens it, no decision kept');
-  decideAct5V188(save, 'transmit');
+  decide(save, 'transmit');
   let resumed = roundTrip(save);
   assert.equal(act5NextMissionV188(resumed), 'act5-last-run'); assert.equal(act5BridgeDueV188(resumed, 'act5-last-run'), true);
   chooseAct5BridgeV188(save, 'freight');
@@ -365,10 +371,10 @@ test('i18n: every Act V text exists in FR and EN; campaign texts are in the EN c
   for (const id of ['cin-60', 'cin-61', 'cin-90-relay', 'cin-90-freight', 'cin-90-living', 'cin-92', 'cin-99-credits']) both(CINEMATICS_V188[id].title);
   const save = threshold({ relays: 3, five: true });
   for (const language of ['fr', 'en']) {
-    const council = act5CouncilV188(save, language);
-    assert.ok(council.situation && council.recommend && council.options.every(option => option.label && option.description && option.ending));
+    const view = council(save, language);
+    assert.ok(view.situation && view.recommend && view.options.every(option => option.label && option.description && option.ending));
   }
-  assert.notEqual(act5CouncilV188(save, 'en').situation, act5CouncilV188(save, 'fr').situation);
+  assert.notEqual(council(save, 'en').situation, council(save, 'fr').situation);
   toEnding(save, 'transmit'); finishAct5EndingV188(save);
   const fr = act5EpilogueV188(save, 'fr').map(fact => fact.text), en = act5EpilogueV188(save, 'en').map(fact => fact.text);
   assert.equal(fr.length, en.length); assert.ok(fr.every((text, index) => text !== en[index] || /^ECHO/.test(text) === false));

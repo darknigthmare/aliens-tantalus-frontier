@@ -1558,6 +1558,8 @@ function act5SceneV188({ slot, title, text, options, onChoose = () => null, onCl
 /** Briefing table: council, quay, ending and credits; true when Act V took the view. */
 function act5OnViewV188() {
   if (act5FlowOpenV188 || document.querySelector('[data-act5-scene-v188]')) return true;
+  // An extraction or story cinematic still on screen: the table waits for the next visit.
+  if (document.querySelector('.cinematic-v188')) return true;
   const action = act5TableActionV188(saveSystem.data);
   if (!action) return false;
   if (action === 'start-council') { if (commitCandidateV188(candidate => startAct5CouncilV188(candidate))) openAct5CouncilV188(); return true; }
@@ -1693,7 +1695,7 @@ function renderAct5PanelV188() {
   const title = document.createElement('h4');
   title.textContent = `${en ? 'ACT V · NON-VIABLE' : 'ACTE V · NON VIABLE'} · ${snapshot.phase ? phases[snapshot.phase] : snapshot.open ? (en ? 'DUE' : 'À OUVRIR') : (en ? 'AFTER ACT IV' : 'APRÈS L’ACTE IV')}`;
   const parts = [title], hint = value => { const line = document.createElement('p'); line.className = 'hint'; line.textContent = value; parts.push(line); };
-  hint(`${en ? 'Asphodèle relay room' : 'Salle des relais d’Asphodèle'} : ${snapshot.driftRelays}/${snapshot.relaysNeeded}${snapshot.relayRoomOpen ? (en ? ' · open' : ' · ouverte') : ''}`);
+  hint(`${en ? '« Transmit »' : '« Transmettre »'} : ${snapshot.transmitOpen ? (en ? 'open (Asphodèle retaken, relay room ready, 5+ pieces)' : 'ouvert (Asphodèle reprise, salle des relais prête, 5 pièces ou plus)') : (en ? 'closed' : 'fermé')}`);
   if (snapshot.decision) {
     hint(`${en ? 'Line' : 'Ligne'} : ${snapshot.decision.label} → ${snapshot.decision.endingTitle} (${snapshot.decision.decidedBy === 'echo-9' ? (en ? 'Vega follows Echo-9' : 'Vega suit Echo-9') : (en ? 'Vega decided' : 'Vega a décidé')})`);
     const list = document.createElement('ul');
@@ -3519,7 +3521,7 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   const colonyChangeV188 = applyColonyOperationResultV188(candidate, { success: resolvedSuccess, worldId: operation.worldId || campaign?.worldId });
   // V188 crew quests (bible §8.1): DAVID-8R's relay components come back from successful operations on Cocyte.
   const questChangeV188 = applyCrewQuestOperationResultV188(candidate, { success: resolvedSuccess, worldId: operation.worldId || campaign?.worldId });
-  // V188 spec 006: drift relays for Asphodèle's relay room; the bridge default if the choice never showed.
+  // V188 spec 006: the bridge default if the choice never showed.
   const act5ChangeV188 = applyAct5OperationResultV188(candidate, { success: resolvedSuccess, campaignId: operation.campaignId });
   // V188 debrief: the amounts the hub actually receives (before the transit clock runs).
   outcome.paidV188 = paidRewardsV188(resourcesBeforeV188, candidate.galaxy.resources);
@@ -3539,9 +3541,6 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   const colonySiteV188 = id => colonySnapshotV188(candidate, document.documentElement.lang).sites.find(entry => entry.id === id)?.criterion || id;
   if (colonyChangeV188?.validated) toast(document.documentElement.lang === 'en' ? `Port-Méridien: site level validated (${colonySiteV188(colonyChangeV188.validated)} ${colonyChangeV188.level}).` : `Port-Méridien : niveau de chantier validé (${colonySiteV188(colonyChangeV188.validated)} ${colonyChangeV188.level}).`);
   if (colonyChangeV188?.damaged) toast(document.documentElement.lang === 'en' ? `Port-Méridien: a site lost one functioning level (${colonySiteV188(colonyChangeV188.damaged)}).` : `Port-Méridien : un chantier perd un niveau de fonctionnement (${colonySiteV188(colonyChangeV188.damaged)}).`);
-  if (act5ChangeV188?.kind === 'drift-relay') toast(document.documentElement.lang === 'en'
-    ? `Asphodèle relay room: ${act5ChangeV188.relays}/${act5ChangeV188.needed} links restored${act5ChangeV188.relayRoomOpen ? ' · the room is open.' : '.'}`
-    : `Salle des relais d’Asphodèle : ${act5ChangeV188.relays}/${act5ChangeV188.needed} liaisons rétablies${act5ChangeV188.relayRoomOpen ? ' · la salle est ouverte.' : '.'}`);
   if (act5ChangeV188?.kind === 'bridge-default') toast(ACT5_BRIDGE_TEXT_V188.results.timeout[document.documentElement.lang === 'en' ? 'en' : 'fr']);
   for (const change of questChangeV188 || []) toast(document.documentElement.lang === 'en'
     ? `DAVID-8R: relay component recovered (${change.components}/${change.needed}).` : `DAVID-8R : composant de relais récupéré (${change.components}/${change.needed}).`);

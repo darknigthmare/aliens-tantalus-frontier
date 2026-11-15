@@ -14,13 +14,13 @@
 
 ## R3 — La salle des relais
 
-- **Decision**: contrat local *Relais en dérive* (§7.2) porté par la mission répétable `act5-drift-relay` (`recover black-box data`, intérieur de vaisseau), ouverte après S4 ; trois réussites ouvrent la salle [PROPOSÉ].
-- **Rationale**: *Transmettre* exige la salle (§5.7.1) ; aucune mission de Cocyte n'avait cet objectif.
-- **Coordination**: le chantier du hub Asphodèle peut reprendre ce contrat dans ses contrats locaux ; le compteur vit dans `storyCampaignV188.act5.driftRelays`.
+- **Decision**: l'Acte V ne construit pas la salle des relais. `finalChoiceOptionsV188` lit par défaut `asphodeleRelayReadyV188` (`src/asphodele-hub-v188.js`, chantier du hub Asphodèle, commit `ed5290a`) ; le conseil et la décision passent leur `context` sans le remplacer. Les tests forcent la salle par ce `context`.
+- **Rationale**: une seule source de vérité pour la condition de *Transmettre* (§5.7.1) ; consigne du lead.
+- **Note**: une première version portait un contrat *Relais en dérive* (`act5-drift-relay`) ; il a été retiré avant livraison.
 
 ## R4 — Où vit l'état
 
-- **Decision**: `storyCampaignV188.act5` (phase, recommandation, décision, avantages, pont, quai, relais, répliques entendues, casier lu), normalisé par un module pur sans import.
+- **Decision**: `storyCampaignV188.act5` (phase, recommandation, décision, avantages, pont, quai, répliques entendues, casier lu), normalisé par un module pur sans import.
 - **Rationale**: `src/save.js` reste inchangé ; `normalizeStoryCampaignV188` est déjà appelé par la migration ; une ancienne sauvegarde n'a pas la clé.
 - **Phases**: `council` → `final` → `ending` → `epilogue` → `credits` → `complete`. Chaque passage est enregistré avant la cinématique qui suit, et la table rejoue l'étape en cours après un rechargement.
 
@@ -35,4 +35,4 @@
 
 ## R7 — Valeurs [PROPOSÉ]
 
-Seuil de confiance solide 75 (bande `NPC_TRUST_LEVELS_V62`), quatre colons en retard, 15 s au pont, +6 s avec Orlov, deux colons par la route de Leila, +120 munitions, blindage 100, stress +10 si l'on cède sans restitution, trois relais en dérive. Elles sont réglables sans nouvelle décision (§56.1) et recensées au §5.11 de la bible.
+Seuil de confiance solide 75 (bande `NPC_TRUST_LEVELS_V62`), quatre colons en retard, 15 s au pont, +6 s avec Orlov, deux colons par la route de Leila, +120 munitions, blindage 100, stress +10 si l'on cède sans restitution. Elles sont réglables sans nouvelle décision (§56.1) et recensées au §5.11 de la bible.

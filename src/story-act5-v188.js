@@ -10,7 +10,7 @@ import { normalizeStoryCampaignV188, storyEndingReachedV188, deriveStoryCampaign
 import { storyDossierV188, finalChoiceOptionsV188, resolveFinalChoiceV188, FINAL_OPTIONS_V188, ENDINGS_V188 } from './story-dossier-v188.js';
 import { asphodeleRetakenV188, normalizeStationV188, kesslerTagRecoveredV188 } from './station-asphodele-v188.js';
 import { colonyRescuedV188, colonyTierV188 } from './colony-reconstruction-v188.js';
-import { createAct5V188, normalizeAct5V188, ACT5_DRIFT_RELAYS_NEEDED_V188, ACT5_OPTION_IDS_V188 } from './story-act5-state-v188.js';
+import { createAct5V188, normalizeAct5V188, ACT5_OPTION_IDS_V188 } from './story-act5-state-v188.js';
 
 export * from './story-act5-state-v188.js';
 
@@ -36,10 +36,6 @@ const mission = (id, name, objective, templateId, registerV188, summary, descrip
   year: 2204, canon: 'project-continuity', routes: 2, templateId, registerV188, act5V188: true, summary, description
 });
 export const ACT5_CAMPAIGNS_V188 = Object.freeze([
-  // The station's local contract « Relais en dérive » (§7.2), the condition of the relay room (§5.7.1).
-  mission('act5-drift-relay', 'ASPHODÈLE · RELAIS EN DÉRIVE', 'recover black-box data', 'ship-interior-vertical', 'tension',
-    'Récupérer la boîte noire d’un relais du réseau QZ qui dérive près d’Asphodèle. Trois relais rouvrent la salle des relais.',
-    'Un relais du réseau QZ dérive feux éteints autour d’Asphodèle. Rétablir son énergie et copier sa boîte noire : chaque relais récupéré rend une liaison à la salle des relais de la station.'),
   mission('act5-last-run', 'NON VIABLE · DERNIER DÉPART', 'escort a colony convoy', 'planet-exterior', 'action',
     'Le M577 quitte le complexe sous la pluie avec les derniers ouvriers. La ruche du dépôt coupe la route du port.',
     'Escorter le convoi du complexe vers Port-Méridien. À mi-parcours, un pont cède : il faudra lâcher une remorque, celle du fret ou celle des colons en retard.'),
@@ -53,10 +49,9 @@ export const ACT5_CAMPAIGNS_V188 = Object.freeze([
     'Le dépôt est cédé : tenir la zone d’embarquement pendant que la compagnie prend le contrôle.',
     'Tenir la zone d’embarquement de Port-Méridien jusqu’au dernier départ négocié avec la compagnie.')
 ]);
-export const ACT5_NAMES_EN_V188 = Object.freeze({ 'act5-drift-relay': 'ASPHODÈLE · DRIFTING RELAY', 'act5-last-run': 'NON-VIABLE · LAST DEPARTURE',
+export const ACT5_NAMES_EN_V188 = Object.freeze({ 'act5-last-run': 'NON-VIABLE · LAST DEPARTURE',
   'act5-depot-queen': 'NON-VIABLE · THE DEPOT QUEEN', 'act5-port-walls': 'NON-VIABLE · THE PORT GATES', 'act5-evacuation': 'NON-VIABLE · THE EVACUATION' });
 export const ACT5_CAMPAIGN_IDS_V188 = Object.freeze(ACT5_CAMPAIGNS_V188.map(entry => entry.id));
-export const ACT5_DRIFT_RELAY_ID_V188 = 'act5-drift-relay';
 export const isAct5CampaignV188 = campaign => ACT5_CAMPAIGN_IDS_V188.includes(typeof campaign === 'string' ? campaign : campaign?.id);
 
 /** The final missions, in order, for a decided option. */
@@ -82,14 +77,13 @@ export function act5OpenV188(save) {
   return storyEndingReachedV188(save) && story.debriefSeen.includes('special-black-cocoon')
     && !['alert', 'choice'].includes(story.interlude?.phase);
 }
-export function relayRoomOpenV188(save) { return asphodeleRetakenV188(save) && act5StateV188(save).driftRelays >= ACT5_DRIFT_RELAYS_NEEDED_V188; }
-/** The options of the war council, with the relay room read from the drift relays. */
-export const act5FinalOptionsV188 = save => finalChoiceOptionsV188(save, { asphodeleRetaken: asphodeleRetakenV188(save), relayRoomOpen: relayRoomOpenV188(save) });
+/** The options of the war council. The relay room is NOT decided here: `finalChoiceOptionsV188` reads it by
+ * default (the Asphodèle hub's `asphodeleRelayReadyV188`, merged separately). `context` only overrides it in tests. */
+export const act5FinalOptionsV188 = (save, context = {}) => finalChoiceOptionsV188(save, context);
 
 /** Why an Act V mission cannot be launched yet, or null. */
 export function act5LockReasonV188(save, campaignId) {
   if (!isAct5CampaignV188(campaignId)) return null;
-  if (campaignId === ACT5_DRIFT_RELAY_ID_V188) return asphodeleRetakenV188(save) ? null : 'station';
   const state = act5StateV188(save), done = completed(save);
   if (!state.decision) return 'council';
   const path = act5MissionPathV188(state.decision.option), index = path.indexOf(campaignId);
@@ -104,7 +98,6 @@ export function filterAct5CampaignsV188(save, campaigns) {
   return campaigns.filter(campaign => campaign.id === active || !isAct5CampaignV188(campaign) || act5LockReasonV188(save, campaign.id) === null);
 }
 const LOCKS = Object.freeze({
-  station: t('Reprenez d’abord la station Asphodèle (S4).', 'First retake Asphodèle station (S4).'),
   council: t('Tenez d’abord le conseil de guerre à la table tactique.', 'First hold the war council at the tactical table.'),
   path: t('Cette mission ne fait pas partie de la ligne décidée au conseil.', 'This mission is not part of the line decided at the council.'),
   previous: t('Terminez d’abord la mission précédente de l’Acte V.', 'First finish the previous Act V mission.')
@@ -163,8 +156,8 @@ const OPTION_TEXT = Object.freeze({
 });
 
 /** Everything the council dialog shows, read from the current save. */
-export function act5CouncilV188(save, language = 'fr') {
-  const lang = L(language), state = act5StateV188(save), { dossier, options } = act5FinalOptionsV188(save);
+export function act5CouncilV188(save, language = 'fr', context = {}) {
+  const lang = L(language), { dossier, options } = act5FinalOptionsV188(save, context);
   const advisors = ACT5_ADVISORS_V188.map(entry => {
     const present = Boolean(crewMember(save, entry.crewId)) && crewMember(save, entry.crewId).status !== 'dead';
     const solid = present && loyaltyOf(save, entry.crewId) >= ACT5_SOLID_TRUST_V188;
@@ -179,7 +172,7 @@ export function act5CouncilV188(save, language = 'fr') {
   const closed = [];
   if (!options.some(option => option.id === 'transmit')) {
     if (!asphodeleRetakenV188(save)) closed.push(OPTION_TEXT.needRetake[lang]);
-    if (!relayRoomOpenV188(save)) closed.push(`${OPTION_TEXT.needRelays[lang]} (${state.driftRelays}/${ACT5_DRIFT_RELAYS_NEEDED_V188})`);
+    else if (dossier.count >= 5) closed.push(OPTION_TEXT.needRelays[lang]); // retaken, 5 pieces: only the relay room is missing
     if (dossier.count < 5) closed.push(`${OPTION_TEXT.needPieces[lang]} (${dossier.count}/${dossier.total})`);
   }
   const list = options.map(option => {
@@ -210,14 +203,14 @@ const DECISION_TEXT = Object.freeze({
   next: t('Prochaine mission : « Dernier départ ».', 'Next mission: "Last departure".')
 });
 /** Records the decision once (§5.7.1). Mutates the candidate save; returns the frozen decision or null. */
-export function decideAct5V188(save, recommended, language = 'fr') {
+export function decideAct5V188(save, recommended, language = 'fr', context = {}) {
   const lang = L(language), state = act5StateV188(save);
   if (state.phase !== 'council' || !ACT5_OPTION_IDS_V188.includes(recommended)) return null;
-  const { dossier, options } = act5FinalOptionsV188(save);
+  const { dossier, options } = act5FinalOptionsV188(save, context);
   if (!options.some(option => option.id === recommended)) return null;
-  const resolved = resolveFinalChoiceV188(save, recommended, { asphodeleRetaken: asphodeleRetakenV188(save), relayRoomOpen: relayRoomOpenV188(save) });
+  const resolved = resolveFinalChoiceV188(save, recommended, context);
   const chosen = options.find(option => option.id === resolved.option) || {};
-  const council = act5CouncilV188(save, lang);
+  const council = act5CouncilV188(save, lang, context);
   const decision = { option: resolved.option, ending: resolved.ending, decidedBy: resolved.decidedBy, dossierCount: dossier.count,
     signerEstablished: dossier.signerEstablished, restitution: chosen.restitution === true, recoveryAttempt: chosen.recoveryAttemptAboard === true };
   writeAct5(save, next => {
@@ -277,12 +270,6 @@ export function act5LateColonistsSavedV188(save) {
 /** In the operation resolution (finalizeOperation candidate). Returns what changed, or null. */
 export function applyAct5OperationResultV188(save, { success, campaignId } = {}) {
   if (!success || !isAct5CampaignV188(campaignId)) return null;
-  if (campaignId === ACT5_DRIFT_RELAY_ID_V188) {
-    if (!asphodeleRetakenV188(save) || act5StateV188(save).driftRelays >= ACT5_DRIFT_RELAYS_NEEDED_V188) return null;
-    writeAct5(save, state => { state.driftRelays += 1; });
-    const relays = act5StateV188(save).driftRelays;
-    return Object.freeze({ kind: 'drift-relay', relays, needed: ACT5_DRIFT_RELAYS_NEEDED_V188, relayRoomOpen: relays >= ACT5_DRIFT_RELAYS_NEEDED_V188 });
-  }
   // The convoy reached the port without the choice being shown (no checkpoint reached): the default applies.
   if (campaignId === 'act5-last-run' && act5BridgeDueV188(save, campaignId)) { chooseAct5BridgeV188(save, null, { timedOut: true }); return Object.freeze({ kind: 'bridge-default' }); }
   return null;
@@ -532,7 +519,7 @@ export function act5SnapshotV188(save, language = 'fr') {
   const lang = L(language), state = act5StateV188(save), open = act5OpenV188(save) || Boolean(state.phase);
   const path = state.decision ? act5MissionPathV188(state.decision.option) : [];
   const name = id => lang === 'en' ? ACT5_NAMES_EN_V188[id] : ACT5_CAMPAIGNS_V188.find(entry => entry.id === id)?.name;
-  return Object.freeze({ open, phase: state.phase, driftRelays: state.driftRelays, relaysNeeded: ACT5_DRIFT_RELAYS_NEEDED_V188, relayRoomOpen: relayRoomOpenV188(save),
+  return Object.freeze({ open, phase: state.phase, transmitOpen: act5FinalOptionsV188(save).options.some(option => option.id === 'transmit'),
     decision: state.decision ? Object.freeze({ ...state.decision, label: FINAL_OPTIONS_V188[state.decision.option].label[lang], endingTitle: ENDINGS_V188[state.decision.ending][lang] }) : null,
     steps: Object.freeze(path.map(id => Object.freeze({ id, name: name(id), done: completed(save).includes(id) }))),
     bridge: state.bridge, standoff: state.standoff, complete: state.phase === 'complete' });

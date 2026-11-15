@@ -19,11 +19,12 @@
 
 ## Raccordements
 
+- Salle des relais : la salle des relais vient du hub Asphodèle (`asphodeleRelayReadyV188`, `src/asphodele-hub-v188.js`), lue par défaut par `finalChoiceOptionsV188` ; l'Acte V ne la reconstruit pas (consigne du lead, commit `ed5290a`).
 - `src/story-campaign-v188.js` : `normalizeStoryCampaignV188` garde `act5` s'il existe (aucune clé ajoutée aux anciennes sauvegardes).
-- `src/content.js` : `ACT5_CAMPAIGNS_V188` (459 → 464) ; `scripts/verify-audit-v143.mjs` suit le compte.
+- `src/content.js` : `ACT5_CAMPAIGNS_V188` (459 → 463) ; `scripts/verify-audit-v143.mjs` suit le compte.
 - `src/app.js` :
   - listes de missions par `unlockedCampaignsV188` ; verrou et avantages au lancement ;
-  - relais en dérive et défaut du pont dans `finalizeOperation` ;
+  - défaut du pont dans `finalizeOperation` ;
   - `act5OnViewV188` dans `markStoryDebriefOnViewV188`, après les scènes de la station : conseil, quai, fin, générique ;
   - pont chronométré au premier `checkpoint` ;
   - bouton « ÉPILOGUE · Dernier mot » dans la conversation du hub ; casier d'Echo-8 ;

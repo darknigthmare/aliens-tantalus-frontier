@@ -5,7 +5,7 @@
 - [x] T002 `src/story-campaign-v188.js` : `act5` conservé par la normalisation, absent des anciennes sauvegardes.
 - [x] T003 `src/story-act5-v188.js` : missions, verrous, conseil, décision, avantages, pont, quai, fins, épilogue, objectif.
 - [x] T004 `src/act5-slots-v188.js` : 15 emplacements d'art en primitives.
-- [x] T005 `src/content.js` : cinq missions (464 campagnes).
+- [x] T005 `src/content.js` : quatre missions (463 campagnes).
 
 ## Phase 2: US1 — Conseil et choix final (P1)
 - [x] T006 Conseil à la table tactique : ordre de Halloran, conseillers, CASSIUS, origines, dossier, options, décision de Vega.
@@ -14,7 +14,7 @@
 ## Phase 3: US2 — Missions finales (P1)
 - [x] T008 Filtre des listes, verrou au lancement, avantages au départ.
 - [x] T009 Pont chronométré au premier checkpoint ; défaut à la résolution.
-- [x] T010 Relais en dérive comptés dans `finalizeOperation`.
+- [x] T010 Salle des relais : lue par défaut dans `finalChoiceOptionsV188` (hub Asphodèle, chantier parallèle) ; aucun relais reconstruit par l'Acte V.
 
 ## Phase 4: US3 — Fins, épilogue, suite (P1)
 - [x] T011 Face-à-face au quai, CIN-61, CIN-90 (trois fins).
@@ -26,7 +26,7 @@
 - [x] T015 `scripts/verify-act5-endings-v188.mjs` dans `test:priorities:v188`, admis (source uniquement).
 - [x] T016 `sw.js` : trois modules ; `index.html` : panneau « Acte V ».
 - [x] T017 Bible §5.6-§5.8, §5.11, §10, §56.14 ; suivi `PRIORITIES_P0_P1_V188.md` ; audit.
-- [x] T018 QA Chromium sur fixture importée (fin *Transmettre* de bout en bout, reprises).
+- [x] T018 QA Chromium sur fixture importée (fin *Tenir* de bout en bout, reprises ; FR et EN).
 
 ## Reporté
 - Course APC dédiée (remorques, pont physique, poursuite de la Reine) sur le moteur de `apc-convoy-runtime-v121.js` (Q1 A au sens strict).
