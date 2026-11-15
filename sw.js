@@ -206,6 +206,7 @@ const SHELL = Object.freeze([
   '/src/run-options-v188.js',
   '/src/story-campaign-v188.js',
   '/src/story-cinematics-v188.js',
+  '/src/placeholder-portraits-v188.js',
   '/src/hub-echo8-locker-v188.js',
   '/src/m577-manifest-ui-v188.js',
   '/src/story-choice-ui-v188.js',
