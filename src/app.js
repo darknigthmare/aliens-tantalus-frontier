@@ -778,9 +778,9 @@ function openNpcDialogueV62(interaction) {
     crewId: conversation.crewId, name: conversation.identity.name
   });
   const choices = byId('hub-dialogue-choices');
-  choices.innerHTML = conversation.choices.map((choice) => `<button class="hub-dialogue-choice" type="button" data-npc-dialogue-choice="${escapeHtml(choice.id)}" ${choice.available ? '' : `disabled title="${escapeHtml(choice.blockedReason)}"`}>${escapeHtml(choice.label)}</button>`).join('')
-    // V188 crew quests (bible §8.1, Q9): offered in the same conversation, after the rapport choices.
-    + crewQuestActionsV188(saveSystem.data, conversation.crewId, document.documentElement.lang).map((quest) => `<button class="hub-dialogue-choice crew-quest-choice-v188" type="button" data-crew-quest-v188="${escapeHtml(quest.id)}">${escapeHtml(quest.label)}</button>`).join('');
+  choices.innerHTML = conversation.choices.map((choice) => `<button class="hub-dialogue-choice" type="button" data-npc-dialogue-choice="${escapeHtml(choice.id)}" ${choice.available ? '' : `disabled title="${escapeHtml(choice.blockedReason)}"`}>${escapeHtml(choice.label)}</button>`).join('');
+  // V188 crew quests (bible §8.1, Q9): appended by a listener so this function keeps its own scope (native QA evaluates it alone).
+  choices.dispatchEvent(new CustomEvent('npc-dialogue-choices-v188', { detail: { crewId: conversation.crewId } }));
   byId('hub-dialogue-continue').hidden = true;
   hubDialogueUiV76.open({
     initialFocus: choices.querySelector('button:not(:disabled)') || byId('hub-dialogue-cancel')
@@ -4573,6 +4573,12 @@ function bind() {
     closeHubDialogue({ resume: false, restoreFocus: false });
     if (!openHubStation(view)) hubEngine.resume();
   };
+  byId('hub-dialogue-choices').addEventListener('npc-dialogue-choices-v188', (event) => {
+    for (const quest of crewQuestActionsV188(saveSystem.data, event.detail?.crewId, document.documentElement.lang)) {
+      const button = Object.assign(document.createElement('button'), { type: 'button', className: 'hub-dialogue-choice crew-quest-choice-v188', textContent: quest.label });
+      button.dataset.crewQuestV188 = quest.id; event.currentTarget.append(button);
+    }
+  });
   byId('hub-dialogue-choices').onclick = (event) => {
     const questIdV188 = event.target.closest('[data-crew-quest-v188]')?.dataset.crewQuestV188;
     if (questIdV188) { openCrewQuestV188(questIdV188); return; }
