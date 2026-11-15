@@ -6499,6 +6499,7 @@ export const EN_CATALOG_V185 = Object.freeze({
 "NOYAU": "NUCLEUS",
 "EFFONDREMENT": "COLLAPSE",
 "COLOSSE": "COLOSSUS",
+"CORRIDOR DE FEU": "CORRIDOR OF FIRE",
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 // V188 systems bug hunt (merged via i18n-catalog-maintenance-v186 review).

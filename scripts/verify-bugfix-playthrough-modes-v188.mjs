@@ -127,3 +127,20 @@ test('mecha HUD: the systems line reads in English, overheated or not', async ()
     assert.match(systemsLine(), /^COQUE 806\/806 · ÉNERGIE 100 · CHALEUR 100 SURCHAUFFE · /);
   } finally { setLanguageV185('fr', { document: null, storage: null, persist: false }); }
 });
+
+// P1 (APC · Corridor de feu): in English the convoy HUD headline and the
+// mission title kept « CORRIDOR DE FEU » (the name had no catalog entry).
+test('APC convoy: the operation name reads in English on the HUD headline and the title', async () => {
+  const { setLanguageV185 } = await import('../src/i18n-v185.js');
+  const { loadCatalogV185, autoTranslateV185 } = await import('../src/i18n-auto-v185.js');
+  const { createApcConvoyStateV121, apcConvoyDossierV121 } = await import('../src/apc-convoy-state-v121.js');
+  await loadCatalogV185();
+  try {
+    setLanguageV185('en', { document: null, storage: null, persist: false });
+    // Same text the convoy HUD draws (apc-convoy-runtime-v121.js drawHud), through the canvas translation.
+    const headline = autoTranslateV185(`CORRIDOR DE FEU · ${apcConvoyDossierV121(createApcConvoyStateV121()).title}`);
+    assert.match(headline, /^CORRIDOR OF FIRE · /);
+    assert.doesNotMatch(headline, /CORRIDOR DE FEU/);
+    assert.equal(autoTranslateV185(campaign('special-apc-convoy').name), 'APC · CORRIDOR OF FIRE');
+  } finally { setLanguageV185('fr', { document: null, storage: null, persist: false }); }
+});
