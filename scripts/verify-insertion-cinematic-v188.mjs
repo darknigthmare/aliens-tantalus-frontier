@@ -39,7 +39,7 @@ test('place type derives for every world from its data, with the [PROPOSÉ] over
     else assert.equal(place, entry.atmosphere === 'vacuum' ? 'airless' : 'atmosphere', entry.id);
     const profile = insertionWorldProfileV188(entry);
     assert.equal(profile.placeType, place); assert.equal(profile.name, entry.name);
-    assert.match(profile.coordinates, /^\d+°\d\d′[NS] \d+°\d\d′[EW]$/); assert.match(profile.localTime, /^\d\d:\d\d$/);
+    assert.match(profile.coordinates, /^\d+°\d\d′[NS] \d+°\d\d′[EW]$/); assert.match(profile.localTime, /^[0-9]{2}:[0-9]{2}$/);
     if (place !== 'atmosphere') assert.equal(profile.weather, 'none', `${entry.id}: no weather without air`);
     else assert.notEqual(profile.weather, 'none', entry.id);
   }
