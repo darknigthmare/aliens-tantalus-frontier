@@ -295,3 +295,36 @@ test('cargo-brutal Q39: convoy waves bring one creature fewer; the P-5000 vehicl
   assert.equal(engine.enemies.length, before + 2);
   assert.match(source('docs/narrative/CAMPAGNE_PRINCIPALE.md'), /Phases du P-5000 adoucies[^\n]*\[PROPOSÉ\]/);
 });
+
+// ---------------------------------------------------------------- item 6 (Q38)
+// The app's finalizeOperation order: resolveOperation, then applyCampaignConsequence;
+// the debrief shows paidRewardsV188(before, after).
+async function settle(id, { success = true, completed = [] } = {}) {
+  const { createDefaultSave, beginOperation, resolveOperation, getOperationBrief } = await import('../src/save.js');
+  const { applyCampaignConsequence } = await import('../src/campaign-consequences.js');
+  const { paidRewardsV188 } = await import('../src/mission-debrief-v188.js');
+  const save = createDefaultSave(1), entry = campaign(id), world = worldOf(entry);
+  // Fixture: the campaign world unlocked, two active marines, the default stock.
+  if (!save.galaxy.unlockedWorldIds.includes(world.id)) save.galaxy.unlockedWorldIds.push(world.id);
+  save.galaxy.completedCampaignIds.push(...completed);
+  save.strategy.selectedCrewIds = save.crew.slice(0, 2).map(member => member.id);
+  for (const member of save.crew.slice(0, 2)) member.status = 'active';
+  const brief = getOperationBrief(save, entry, world);
+  beginOperation(save, entry, world);
+  const before = structuredClone(save.galaxy.resources);
+  assert.equal(resolveOperation(save, { success, kills: 0 }).ok, true);
+  applyCampaignConsequence(save, entry, world, { success });
+  return { brief, paid: paidRewardsV188(before, save.galaxy.resources), save };
+}
+test('Q38: pair-030-mire pays the research its brief announces (+8), not +15; comparable missions pay theirs', async () => {
+  const mire = await settle('pair-030-mire');
+  assert.equal(mire.brief.reward.research, 8);
+  assert.equal(mire.paid.research, mire.brief.reward.research, `paid +${mire.paid.research} R&D`);
+  for (const id of ['pair-046-mire', 'pair-030-frontier', 'pair-001-mire']) {
+    const run = await settle(id);
+    assert.equal(run.paid.research, run.brief.reward.research, `${id}: paid +${run.paid.research}, announced +${run.brief.reward.research}`);
+  }
+  // A FRONTIER whose MIRE archive was recovered keeps its world effect, not an extra research grant.
+  const frontier = await settle('pair-030-frontier', { completed: ['pair-030-mire'] });
+  assert.equal(frontier.paid.research, frontier.brief.reward.research);
+});

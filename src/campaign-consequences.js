@@ -72,6 +72,12 @@ export function buildCampaignConsequence(campaign = {}, world = {}, { success = 
     worldDelta.infestation = (worldDelta.infestation || 0) - 2;
     resourceDelta.research = (resourceDelta.research || 0) + 2;
   }
+  // V188 owner decision Q38 (2026-11-15): a successful mission pays the research
+  // its brief announces (operation.reward, paid by resolveOperation). The
+  // consequence used to add the objective's research (route mapping +3, archive
+  // +6…), the MIRE +4 and the MIRE-archive +2 on top, unannounced: pair-030-mire
+  // paid +15 against +8. Hub research, world effects and the failure penalty stay.
+  if (success) delete resourceDelta.research;
   if (!success) {
     worldDelta.stability = (worldDelta.stability || 0) - 2;
     worldDelta.infestation = (worldDelta.infestation || 0) + 3;
