@@ -34,6 +34,9 @@ export const STATION_CAMPAIGNS_V188 = Object.freeze([
     'Dernière purge et remise en pression, jusqu’à l’arrivée des premiers occupants.',
     'Purger le dernier nid, remettre la station en pression et tenir le quai jusqu’à l’arrivée de l’équipe technique du Tantalus.')
 ]);
+// English titles for the panels built in JS (the DOM catalog carries the same pairs).
+export const STATION_NAMES_EN_V188 = Object.freeze({ 'station-s1': 'ASPHODÈLE · DOCKING', 'station-s2': 'ASPHODÈLE · THE VOICE OF CASSIUS',
+  'station-s3': 'ASPHODÈLE · THE SEALED DECKS', 'station-s4': 'ASPHODÈLE · THE ASPHODÈLE HUB' });
 export const STATION_CAMPAIGN_IDS_V188 = Object.freeze(STATION_CAMPAIGNS_V188.map(entry => entry.id));
 const ORDER = STATION_CAMPAIGN_IDS_V188;
 
@@ -146,7 +149,7 @@ export function cassiusLabelV188(choice, language = 'fr') { return CASSIUS_LABEL
 /** Player-facing summary for the briefing table. */
 export function stationSnapshotV188(save, language = 'fr') {
   const lang = language === 'en' ? 'en' : 'fr', station = normalizeStationV188(save?.stationV188), done = completed(save);
-  const steps = STATION_CAMPAIGNS_V188.map(entry => Object.freeze({ id: entry.id, name: entry.name, done: done.includes(entry.id),
+  const steps = STATION_CAMPAIGNS_V188.map(entry => Object.freeze({ id: entry.id, name: lang === 'en' ? STATION_NAMES_EN_V188[entry.id] : entry.name, done: done.includes(entry.id),
     lock: done.includes(entry.id) ? null : stationLockReasonV188(save, entry.id) }));
   const next = steps.find(step => !step.done && !step.lock) || null;
   const blocked = steps.find(step => !step.done && step.lock) || null;

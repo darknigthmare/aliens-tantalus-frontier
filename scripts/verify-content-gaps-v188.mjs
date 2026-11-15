@@ -101,6 +101,7 @@ test('station i18n: every scene, dialog, lock and snapshot text exists in FR and
   for (const reason of ['act-two', 'intro', 'previous', 'cassius']) assert.notEqual(stationLockTextV188(reason, 'en'), stationLockTextV188(reason, 'fr'));
   const snapshot = stationSnapshotV188(actTwo(), 'en');
   assert.match(snapshot.hint, /Rook/);
+  assert.equal(snapshot.steps[1].name, 'ASPHODÈLE · THE VOICE OF CASSIUS');
   const catalog = read('src/i18n-en-catalog-v185.js');
   for (const campaign of STATION_CAMPAIGNS_V188) for (const text of [campaign.name, campaign.summary, campaign.description]) assert.ok(catalog.includes(JSON.stringify(text)), text);
 });
