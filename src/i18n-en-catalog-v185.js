@@ -6562,6 +6562,14 @@ export const EN_CATALOG_V185 = Object.freeze({
 "Insertions : toujours la version complète": "Insertions: always the full version",
 // V188 dropship handover.
 "E · ÉCHAP · ENTRÉE  PASSER": "E · ESC · ENTER  SKIP",
+// V188 special-mode playthroughs.
+"CHŒURS": "CHOIRS",
+"BALISES": "BEACONS",
+"ORGANES": "ORGANS",
+"NOYAU": "NUCLEUS",
+"EFFONDREMENT": "COLLAPSE",
+"COLOSSE": "COLOSSUS",
+"CORRIDOR DE FEU": "CORRIDOR OF FIRE",
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 // V188 systems bug hunt (merged via i18n-catalog-maintenance-v186 review).
@@ -7107,4 +7115,6 @@ export const EN_PATTERNS_V185 = Object.freeze({
 "T−{0} S": "T−{0} S",
 // V188 Q38 research bonus in the operation plan.
 "+{0} R&D si succès ({1})": "+{0} R&D on success ({1})",
+// V188 special-mode playthroughs.
+"COQUE {0}/{1} · ÉNERGIE {2} · CHALEUR {3} · CORROSION {4} · GEL {5} · RÉPARATIONS {6}": "HULL {0}/{1} · POWER {2} · HEAT {3} · CORROSION {4} · GEL {5} · REPAIRS {6}",
 });

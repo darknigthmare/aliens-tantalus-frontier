@@ -693,6 +693,17 @@ export function withAlphaBravoCoopRuntimeV69(BaseEngine) {
       return true;
     }
 
+    // V188: a fireteam sent to its station (focus) or a ping (move) walks there.
+    // The anti-stacking pass pushes a member away from the marine on the side it
+    // already stands, so a pair spawned behind the player could never pass and
+    // the split tasks never started. Routed pairs keep their own slots (pair
+    // offsets); following members are still separated.
+    separateSquadFormation(members = this.activeSquadActors(), fixedActors = null) {
+      if (!this.isAlphaBravoMissionV69() || !this.alphaBravoV69) return super.separateSquadFormation(members, fixedActors);
+      const routed = (member) => ['focus', 'move'].includes(this.alphaBravoV69.teams[this.alphaBravoTeamForActorV69(member)]?.order);
+      return super.separateSquadFormation(asList(members).filter((member) => !routed(member)), fixedActors);
+    }
+
     updateSquadMovement(member, index, leader, delta) {
       if (!this.isAlphaBravoMissionV69() || !this.alphaBravoV69) return super.updateSquadMovement(member, index, leader, delta);
       if (member === this.player || member === this.coop) return false;
