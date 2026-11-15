@@ -3278,15 +3278,19 @@ function playExtractionCinematicV188(boarding) {
   if (resume) engine.togglePause();
   // The paused level stays under the overlay; hiding its canvas spares the compositor.
   const canvas = byId('game-canvas'); if (canvas) canvas.style.visibility = 'hidden';
-  // The paused engine keeps drawing every frame under the overlay; an instance-level
-  // no-op (removed afterwards, the prototype method returns) frees that frame budget.
-  const shadowDraw = !Object.hasOwn(engine, 'draw') && typeof engine.draw === 'function';
-  if (shadowDraw) engine.draw = () => {};
+  // The paused engine keeps drawing every frame under the overlay: its render-suspend
+  // hook (mission-dropship-handover-v188) frees that frame budget; older engines get an
+  // instance-level no-op, removed afterwards.
+  const suspendHook = typeof engine.setRenderSuspendedV188 === 'function';
+  const shadowDraw = !suspendHook && !Object.hasOwn(engine, 'draw') && typeof engine.draw === 'function';
+  if (suspendHook) engine.setRenderSuspendedV188(true);
+  else if (shadowDraw) engine.draw = () => {};
   const { short } = selectInsertionLengthV188({ worldId: mission.world.id, seenWorldIds: insertionSeenWorldIdsV188(saveSystem.data, 'extraction'),
     alwaysFull: saveSystem.data.settings.insertionAlwaysFullV188 === true });
   return playInsertionCinematicV188({ world: mission.world, campaign: mission.campaign, direction: 'extraction', placeType: boarding.placeType,
     handover: { ...mission.handover, mode: boarding.mode, short } }).then((result) => {
-    if (shadowDraw) delete engine.draw;
+    if (suspendHook) engine.setRenderSuspendedV188(false);
+    else if (shadowDraw) delete engine.draw;
     if (canvas) canvas.style.visibility = '';
     if (resume && activeView === 'play' && engine.running && engine.paused) engine.togglePause();
     return result;
@@ -3297,6 +3301,9 @@ function handleGameEvent(event) {
     const extraction = extractionFlowOnEventV188(extractionFlowV188, event);
     if (extraction.action === 'play-extraction') { void playExtractionCinematicV188(extraction.boarding); return true; }
   }
+  // V188: the in-level landing and boarding events carry no state of their own (rewards
+  // stay with mission-complete): they are not persisted.
+  if (/^insertion-handover-(started|complete)-v188$/.test(event?.type || '') || event?.type === 'extraction-boarding-complete-v188') return true;
   if (event?.type === 'enemy-discovered-v88' || event?.type === 'enemy-defeated-v88') {
     if (event.scope !== 'campaign' || standaloneContext || !ownsTimelineV84(missionOwnerV78) || missionOwnerV78.operationId !== saveSystem.data.strategy.currentOperation?.id
       || event.operationId !== missionOwnerV78.operationId) return null;

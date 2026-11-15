@@ -370,6 +370,7 @@ const FORGE_TOOLING_V140 = new Set([
   'scripts/verify-bugfix-interaction-modes-v188.mjs',
   'scripts/verify-bugfix-audio-settings-v188.mjs',
   'scripts/verify-bugfix-insertion-v188.mjs',
+  'scripts/verify-dropship-handover-v188.mjs',
   'scripts/verify-bugfix-texts-v188.mjs',
   'scripts/verify-bugfix-playthrough-v188.mjs',
   'scripts/verify-bugfix-decisions-v188.mjs',

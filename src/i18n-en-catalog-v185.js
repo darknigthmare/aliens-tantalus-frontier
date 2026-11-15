@@ -6560,6 +6560,8 @@ export const EN_CATALOG_V185 = Object.freeze({
 "archive MIRE": "MIRE archive",
 // V188 insertion / extraction cinematics option (reviewed through i18n-catalog-maintenance-v186 merge).
 "Insertions : toujours la version complète": "Insertions: always the full version",
+// V188 dropship handover.
+"E · ÉCHAP · ENTRÉE  PASSER": "E · ESC · ENTER  SKIP",
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 // V188 systems bug hunt (merged via i18n-catalog-maintenance-v186 review).
