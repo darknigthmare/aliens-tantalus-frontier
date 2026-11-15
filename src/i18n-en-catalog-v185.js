@@ -6554,6 +6554,10 @@ export const EN_CATALOG_V185 = Object.freeze({
 "DÉGÂTS REÇUS": "DAMAGE TAKEN",
 "DÉPLACEMENT": "MOVEMENT",
 "INTERRUPTION": "INTERRUPTION",
+// V188 Q38 research bonus in the operation plan.
+"BONUS R&D": "R&D BONUS",
+"objectif": "objective",
+"archive MIRE": "MIRE archive",
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 // V188 systems bug hunt (merged via i18n-catalog-maintenance-v186 review).
@@ -7097,4 +7101,6 @@ export const EN_PATTERNS_V185 = Object.freeze({
 "V  QUITTER {0}": "V  LEAVE {0}",
 "ESCOUADE DÉPLOYÉE · {0} alliés IA physiques": "SQUAD DEPLOYED · {0} physical AI allies",
 "T−{0} S": "T−{0} S",
+// V188 Q38 research bonus in the operation plan.
+"+{0} R&D si succès ({1})": "+{0} R&D on success ({1})",
 });

@@ -9,7 +9,7 @@ Ce document est un fichier source de développement. Il est exclu du build publi
 | # | Réponse |
 | --- | --- |
 | 31 | A — d'autres soutes ou cales de mission, après évaluation de la cale QZ-17 |
-| 38 | A — ramener `pair-030-mire` au barème des missions comparables |
+| 38 | Le surplus vient d'un bonus de conséquence présent sur toutes les missions de paire : **gardé et annoncé** dans le plan d'opération (confirmé) |
 | 39 | A — réduire la pression ennemie pendant la phase P-5000, sans toucher au véhicule |
 | 63 | A — défilement automatique du rail jusqu'à la phase active (appliqué par défaut) |
 | 78 | B — portraits en primitives Canvas avec un signe distinctif |

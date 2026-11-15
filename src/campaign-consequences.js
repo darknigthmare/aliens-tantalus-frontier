@@ -72,12 +72,9 @@ export function buildCampaignConsequence(campaign = {}, world = {}, { success = 
     worldDelta.infestation = (worldDelta.infestation || 0) - 2;
     resourceDelta.research = (resourceDelta.research || 0) + 2;
   }
-  // V188 owner decision Q38 (2026-11-15): a successful mission pays the research
-  // its brief announces (operation.reward, paid by resolveOperation). The
-  // consequence used to add the objective's research (route mapping +3, archive
-  // +6…), the MIRE +4 and the MIRE-archive +2 on top, unannounced: pair-030-mire
-  // paid +15 against +8. Hub research, world effects and the failure penalty stay.
-  if (success) delete resourceDelta.research;
+  // V188 owner decision Q38 (2026-11-15, confirmed): the success research of the
+  // consequence (objective, MIRE +4, MIRE archive +2) stays, and is announced:
+  // campaignResearchBonusV188 feeds the operation plan; the debrief shows what was paid.
   if (!success) {
     worldDelta.stability = (worldDelta.stability || 0) - 2;
     worldDelta.infestation = (worldDelta.infestation || 0) + 3;
@@ -140,3 +137,16 @@ export function applyCampaignConsequence(save, campaign, world, result = {}) {
 }
 
 export { OBJECTIVE_EFFECTS };
+
+/** V188 Q38: the research a successful operation adds on top of its brief reward, itemised for the plan. */
+export function campaignResearchBonusV188(campaign = {}, { completedCampaignIds = [] } = {}) {
+  const objective = String(campaign.objective || '').toLowerCase();
+  const base = OBJECTIVE_EFFECTS[objective] || {};
+  const pair = pairedCampaign(campaign);
+  const parts = [];
+  const objectiveResearch = Number(base.resources?.research) || 0;
+  if (objectiveResearch > 0) parts.push({ id: 'objective', amount: objectiveResearch });
+  if (campaign.mode === 'MIRE') parts.push({ id: 'mire', amount: 4 });
+  if (campaign.mode === 'FRONTIER' && pair?.id && completedCampaignIds.includes(pair.id)) parts.push({ id: 'mire-archive', amount: 2 });
+  return Object.freeze({ total: parts.reduce((sum, part) => sum + part.amount, 0), parts: Object.freeze(parts) });
+}

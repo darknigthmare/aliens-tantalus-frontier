@@ -506,7 +506,7 @@ test('PR15: the actual app review callback restores focus to the replaced topic 
     root.replaceChildren(); resets.push(document.activeElement);
     launch = document.createElement('button'); root.append(launch);
   } });
-  const dependencies = { saveSystem: system, deriveStoryCampaignV188, markStoryDebriefSeenV188, campaignObjectiveLabelV188, STORY_RELAY_CAMPAIGN_ID_V188, clone, preserveCampaignStoryReturnV160,
+  const dependencies = { saveSystem: system, deriveStoryCampaignV188, markStoryDebriefSeenV188, campaignObjectiveLabelV188, researchBonusRowV188: () => '', STORY_RELAY_CAMPAIGN_ID_V188, clone, preserveCampaignStoryReturnV160,
     preserveConvoyReturnHistoryV162, mountConvoyReturnHistoryV162,
     preserveLetheContinuityV163, mountLetheContinuityV163, recordLetheContinuityReviewV163,
     CAMPAIGNS: [campaign], WORLDS: [world], WEAPONS: [], EQUIPMENT: [], VEHICLES: [], CREW: [],

@@ -316,17 +316,22 @@ async function settle(id, { success = true, completed = [] } = {}) {
   applyCampaignConsequence(save, entry, world, { success });
   return { brief, paid: paidRewardsV188(before, save.galaxy.resources), save };
 }
-test('Q38: pair-030-mire pays the research its brief announces (+8), not +15; comparable missions pay theirs', async () => {
+test('Q38 (confirmed 2026-11-15): the success research bonus stays and is announced in the operation plan', async () => {
+  const { campaignResearchBonusV188 } = await import('../src/campaign-consequences.js');
   const mire = await settle('pair-030-mire');
-  assert.equal(mire.brief.reward.research, 8);
-  assert.equal(mire.paid.research, mire.brief.reward.research, `paid +${mire.paid.research} R&D`);
+  const bonus = campaignResearchBonusV188(campaign('pair-030-mire'));
+  assert.equal(bonus.total, 7); assert.deepEqual(bonus.parts.map(part => part.id), ['objective', 'mire']);
+  assert.equal(mire.paid.research, mire.brief.reward.research + bonus.total, `paid +${mire.paid.research} R&D`);
   for (const id of ['pair-046-mire', 'pair-030-frontier', 'pair-001-mire']) {
-    const run = await settle(id);
-    assert.equal(run.paid.research, run.brief.reward.research, `${id}: paid +${run.paid.research}, announced +${run.brief.reward.research}`);
+    const run = await settle(id), extra = campaignResearchBonusV188(campaign(id)).total;
+    assert.equal(run.paid.research, run.brief.reward.research + extra, `${id}: paid +${run.paid.research}`);
   }
-  // A FRONTIER whose MIRE archive was recovered keeps its world effect, not an extra research grant.
   const frontier = await settle('pair-030-frontier', { completed: ['pair-030-mire'] });
-  assert.equal(frontier.paid.research, frontier.brief.reward.research);
+  const archived = campaignResearchBonusV188(campaign('pair-030-frontier'), { completedCampaignIds: ['pair-030-mire'] });
+  assert.ok(archived.parts.some(part => part.id === 'mire-archive'));
+  assert.equal(frontier.paid.research, frontier.brief.reward.research + archived.total);
+  const app = readFileSync(new URL('../src/app.js', import.meta.url), 'utf8');
+  assert.match(app, /<span>RÉCOMPENSE<\/span><b>\$\{formatCost\(brief\.reward\)\}<\/b>\$\{researchBonusRowV188\(campaign\)\}/);
 });
 
 // ---------------------------------------------------------------- item 5

@@ -65,7 +65,7 @@ import { withHubDepthRoomsV188 } from './hub-depth-runtime-v188.js';
 import { TitleVfxV188 } from './title-vfx-v188.js';
 import { playIntroV188 } from './intro-sequence-v188.js';
 import { createHubCrisis as createForcedHubCrisisV188 } from './world-crisis-core.js';
-import { applyCampaignConsequence } from './campaign-consequences.js';
+import { applyCampaignConsequence, campaignResearchBonusV188 } from './campaign-consequences.js';
 import { hasCampaignStoryV160, preserveCampaignStoryReturnV160, recordCampaignStoryReviewV160 } from './campaign-story-v160.js';
 import { mountCampaignDebriefV160 } from './campaign-story-ui-v160.js';
 import { hasCampaignStoryV161, recordCampaignStoryReviewV161 } from './campaign-convoy-story-v161.js';
@@ -1777,7 +1777,7 @@ function renderOperationPlan() {
   const specialNotice = specialOperation
     ? `<div class="special-operation-notice"><span>ORDRE PRIORITAIRE</span><b>${escapeHtml(specialOperation.promisedTitle)}</b><p>${specialNoticeCopy}</p></div>`
     : soloNoticeV121;
-  byId('operation-plan').innerHTML = `<span class="eyebrow">PLAN OPÉRATIONNEL · ${escapeHtml(campaign.mode)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaignObjectiveLabelV188(campaign.objective))} · ${escapeHtml(world.name)}</p>${specialNotice}${recoveryNotice}<div class="operation-risk"><b>${brief.risk}%</b><span>RISQUE</span></div><div class="data-list"><span>TRANSIT</span><b>${brief.hours} h</b><span>COÛT</span><b>${formatCost(brief.cost)}</b><span>RÉCOMPENSE</span><b>${formatCost(brief.reward)}</b><span>ESCOUADE</span><b>${soloOperationV121 ? 'UN OPÉRATEUR · SOLO' : escapeHtml(crewNames.join(', ') || 'AUCUNE')}</b><span>ARME</span><b>${escapeHtml(weapon?.name || 'AUCUNE')}</b><span>ÉQUIPEMENT</span><b>${escapeHtml(equipment.join(', ') || 'AUCUN')}</b><span>VÉHICULE</span><b>${escapeHtml(vehicle?.name || 'AUCUN')}${issuedVehicle ? ' · FOURNI SUR ZONE' : ''}</b></div><div class="button-row"><button id="operation-launch" class="button primary wide" ${launchDisabled ? 'disabled' : ''}>${launchLabel}</button>${recoveryAction}</div>`;
+  byId('operation-plan').innerHTML = `<span class="eyebrow">PLAN OPÉRATIONNEL · ${escapeHtml(campaign.mode)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaignObjectiveLabelV188(campaign.objective))} · ${escapeHtml(world.name)}</p>${specialNotice}${recoveryNotice}<div class="operation-risk"><b>${brief.risk}%</b><span>RISQUE</span></div><div class="data-list"><span>TRANSIT</span><b>${brief.hours} h</b><span>COÛT</span><b>${formatCost(brief.cost)}</b><span>RÉCOMPENSE</span><b>${formatCost(brief.reward)}</b>${researchBonusRowV188(campaign)}<span>ESCOUADE</span><b>${soloOperationV121 ? 'UN OPÉRATEUR · SOLO' : escapeHtml(crewNames.join(', ') || 'AUCUNE')}</b><span>ARME</span><b>${escapeHtml(weapon?.name || 'AUCUNE')}</b><span>ÉQUIPEMENT</span><b>${escapeHtml(equipment.join(', ') || 'AUCUN')}</b><span>VÉHICULE</span><b>${escapeHtml(vehicle?.name || 'AUCUN')}${issuedVehicle ? ' · FOURNI SUR ZONE' : ''}</b></div><div class="button-row"><button id="operation-launch" class="button primary wide" ${launchDisabled ? 'disabled' : ''}>${launchLabel}</button>${recoveryAction}</div>`;
   byId('operation-launch').onclick = () => launchCampaign(campaign);
   const abandonButton = byId('operation-abandon-v69');
   if (abandonButton) abandonButton.onclick = abandonBlockedOperationV69;
@@ -3094,6 +3094,16 @@ function launchCampaign(campaign = null) {
 // Command log: entries written by older saves carry campaign, vehicle or crew
 // ids (operation results, loadout, medical). The stored text is kept; only the
 // display swaps a known id for its name.
+// V188 Q38: the consequence research a success adds on top of the brief reward is announced in the plan.
+const RESEARCH_BONUS_LABELS_V188 = Object.freeze({ fr: Object.freeze({ objective: 'objectif', mire: 'MIRE', 'mire-archive': 'archive MIRE' }),
+  en: Object.freeze({ objective: 'objective', mire: 'MIRE', 'mire-archive': 'MIRE archive' }) });
+function researchBonusRowV188(campaign) {
+  const bonus = campaignResearchBonusV188(campaign, { completedCampaignIds: saveSystem.data.galaxy?.completedCampaignIds || [] });
+  if (!bonus.total) return '';
+  const labels = RESEARCH_BONUS_LABELS_V188[currentLanguageV185() === 'en' ? 'en' : 'fr'];
+  const parts = bonus.parts.map(part => `${labels[part.id] || part.id} +${part.amount}`).join(', ');
+  return `<span>BONUS R&amp;D</span><b>+${bonus.total} R&amp;D si succès (${escapeHtml(parts)})</b>`;
+}
 function strategyLogTextV188(text) {
   return String(text ?? '').replace(/[a-z0-9]+(?:-[a-z0-9]+)+/gu, (token) => CAMPAIGNS.find((entry) => entry.id === token)?.name
     || VEHICLES.find((entry) => entry.id === token)?.name
