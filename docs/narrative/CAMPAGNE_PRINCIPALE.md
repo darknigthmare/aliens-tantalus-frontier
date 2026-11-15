@@ -1104,7 +1104,37 @@ Décisions par défaut appliquées : Q6 (S1-S4 comme missions avant le hub), Q7 
 - **Scènes de retour** (S1, S3, S4) et décision CASSIUS : au Commandement, une seule fois, image d'emplacement en primitives Canvas (`src/content-gap-slots-v188.js`).
 - **[PROPOSÉ]** : la consigne qui ferme le sas 3 à 6:00:05 est appliquée par CASSIUS (indice de la quête de Rook) ; les journaux des survivants s'arrêtent au quatrième jour.
 - **Fidélité** : aucune fidélité « 1:1 ». Apparence documentée citée dans la spec 005 (détecteur trompé par l'air en mouvement et caméras de casque, *Aliens*, 1986 ; Seegson et son IA qui applique ses consignes, *Alien: Isolation*, 2014). CASSIUS, Asphodèle, Echo-8 et Kessler sont des créations du projet. À définir : décor, interface vocale de CASSIUS, visage de Kessler.
-- **Reste à faire** : hub Asphodèle (§7.3, §42, Q22-Q23), annexes, contrats locaux dont *Relais en dérive* ×3, CIN-70 à CIN-72, dépôt de la plaque dans le casier d'Echo-8.
+- **Reste à faire** (mis à jour par §7.6) : ~~hub Asphodèle, annexes, contrats, CIN-70 à CIN-72, plaque de Kessler~~ → première version en §7.6 ; restent les points listés en §7.6.
+
+### 7.6 Hub Asphodèle, missions de la station, contrats — [PARTIEL] V188 (spec 007, 2026-11-15)
+
+Décisions par défaut appliquées : Q22 (A, modules construits dans le moteur du hub), Q23 (A, anneau et rayon en couloirs de profondeur V2, modules en V1, tout parcouru à pied). Feature : `specs/007-hub-asphodele/`. Code : `src/asphodele-hub-v188.js`, `src/asphodele-missions-v188.js`, `src/hub-asphodele-v188.js`, `src/asphodele-hub-slots-v188.js`, `src/station-cinematics-v188.js`.
+
+- **Accès** : après S4. Au hangar du Tantalus, le dialogue d'embarquement de l'UD-4L propose « NAVETTE · STATION ASPHODÈLE » si le Tantalus est en orbite de Cocyte, sans saut en charge ni opération en cours. Arrivée au sas 1 des quais ; retour par le même sas, à la pose d'avant le départ dans le hangar.
+- **Pourquoi pas le saut galactique** : la station est dans l'orbite de Cocyte ; un saut coûte 14 jours d'hypersommeil (§13.6). Les quais sont déjà, en §7.3 et §42.2, le lieu des navettes vers le Tantalus.
+- **Pièces construites (9)** : quais d'arrimage (V2), anneau extérieur (V2), rayon A (V2), pont de contrôle, salle des relais, laboratoire de transit, mémorial, serre, marché de l'anneau (V1). Les quais restent en profondeur : grand sol d'arrimage, sprites jamais mis à l'échelle.
+- **Portes scellées visibles, avec leur raison** : sas 2 (UD-4L d'Echo-8, laissé en place), sas 3 (navette Crucible de Grue), hangar de réparation, quartiers (colonie *Autonome*), infirmerie de station, ponts inférieurs (missions de nuit). Ces quatre modules de §42.2 ne sont **pas** construits.
+- **Ouverture des modules** : pont de contrôle et anneau à S4 ; laboratoire à S3 ; mémorial après *Les journaux de l'équipage* ; serre après *La serre* ; marché après *Le pacte de l'anneau* **et** le pacte accepté auprès de Grue aux quais (expulsés : marché fermé) ; salle des relais après trois *Relais en dérive*.
+- **Missions annexes (7)** : les identifiants de §7.2, sur Cocyte, gabarit d'intérieur de vaisseau, objectifs existants. **[PROPOSÉ]** : toutes après S4 ; *Ce que CASSIUS a vu* exige CASSIUS réécrit (bridé, ses archives font partie des annexes fermées) ; *Accès administrateur* exige CASSIUS conservé. Objectifs [PROPOSÉ] : `recover black-box data` (Echo-8, balise, caméras), `board a drifting vessel` (Grue), `navigate the vent network` (journaux), `restore atmospheric processing` (serre), `destroy a neuro-link relay` (BISHOP-9).
+- **Contrats locaux (6), rejouables** : `station-c-conduits`, `station-c-relais` (*Relais en dérive*, `recover black-box data`), `station-c-epave`, `station-c-pression`, `station-c-nid`, `station-c-synthetique`, objectifs de §7.2. Chaque opération réussie compte une fois. Seul *Relais en dérive* a un effet (salle des relais) ; les autres sont comptés sans effet.
+- **Carte du réseau QZ** (pont de contrôle) : liste missions et contrats, avec leurs verrous ; une mission ouverte se planifie et part du hangar du Tantalus. **[PROPOSÉ]** : lancer une opération depuis la station ramène d'abord l'UD-4L au Tantalus.
+- **Transmettre** : dans la salle des relais, E sur les baies de transmission les met en ligne. `asphodeleRelayReadyV188(save)` = station reprise ∧ trois *Relais en dérive* ∧ baies en ligne ; `finalChoiceOptionsV188` le lit par défaut. Le choix final et les fins appartiennent à l'Acte V (spec 006).
+- **Cinématiques** : CIN-70 (fin de la quête de Rook, avant S1), CIN-71 (après S2, avant la décision), CIN-72 (après S3, avant la scène de retour). Une sauvegarde qui a passé ces moments n'y est pas renvoyée. Lignes [PROPOSÉ].
+- **Plaque de Kessler** (§7.4) : après S3, le casier d'Echo-8 du Tantalus propose de la déposer ; elle y pend ensuite. §42.2 cite un « casier de Kessler » au mémorial : interprété comme son nom au mémorial, avec renvoi au casier du Tantalus **[PROPOSÉ, à confirmer]**.
+- **Valeurs [PROPOSÉ]** : navette sans coût ; noms du mémorial autres que Solène Ivarsson et Dario Kessler (R. Achterberg, M. Oyelaran, T. Vasquez-Brandt, H. Kowalczyk ; Cpl A. Nwosu, Pvt L. Sato, Pvt J. Merrow) ; répliques de Grue, de CASSIUS au noyau, de Kwan, d'Orlov, de Rook et de Kessler.
+- **Sauvegarde** : champ additif `asphodeleHubV188` (lieu, pièce, x, profondeur, pièces visitées, contrats, baies, plaque, pacte). Ancienne sauvegarde : à bord du Tantalus. Lieu « station » sans S4, ou dans un module scellé : ramené au Tantalus ou aux quais.
+- **Fidélité** : aucune fidélité « 1:1 ».
+
+| Élément | Apparence documentée (source citée) | Adaptation du projet | À définir |
+| --- | --- | --- | --- |
+| Quais, coursives, portes | Station Sevastopol, *Alien: Isolation* (2014) : tôles rivetées, bandes jaune-noir, CRT, portes massives | Asphodèle, station Seegson du réseau QZ (création du projet) ; anneau, rayon, moyeu | Décors, portes, props (emplacements `asph-*`) |
+| Pont de contrôle | Salle des opérations de Hadley's Hope, *Aliens* (1986) : moniteurs, carte murale | Carte du réseau QZ, noyau de CASSIUS | Interface, voix de CASSIUS |
+| CASSIUS | IA Seegson qui applique ses consignes, *Alien: Isolation* (2014) | Création du projet ; CRT verts et une onde, sans visage | Voix, typographie |
+| UD-4L | *Aliens* (1986) | Vu au hublot du sas 1 | Image |
+| Echo-8, Kessler, Grue, Crucible | — | Créations du projet, silhouettes en primitives | Visages, costumes |
+
+- **Art** : 20 emplacements nommés (`src/asphodele-hub-slots-v188.js`), placeholders en primitives Canvas, 1 m ≈ 51 px ; aucune image générée.
+- **Reste à faire** : quartiers, infirmerie, ponts inférieurs et hangar de réparation ; commerce du marché (Q30) ; effets des contrats autres que *Relais en dérive* ; décors de station pour les missions annexes et les contrats ; rotation visuelle de l'anneau en jeu ; art final ; plan V3 (Q23 B, non retenu).
 
 ---
 
@@ -1208,9 +1238,9 @@ Les chapitres Mire Archive 001, Protocole Z-110, Jeri, Éloïse, A.T.A.X.-Q, Le 
 | CIN-59 | L'atterrissage | `story-recuperation` | 20 s | [PROPOSÉ] |
 | CIN-60 | Dernier départ | Acte V | 30 s | [PROPOSÉ] |
 | CIN-61 | Les portes du port | Acte V | 45 s | [PROPOSÉ] |
-| CIN-70 | Six heures de silence | Station | 40 s | [PROPOSÉ] |
-| CIN-71 | La voix de CASSIUS | Station S2 | 40 s | [PROPOSÉ] |
-| CIN-72 | Le dernier enregistrement d'Echo-8 | Station S3 | 30 s | [PROPOSÉ] |
+| CIN-70 | Six heures de silence | Station | 40 s | [EXISTANT] V188 (placeholder Canvas, §7.6) |
+| CIN-71 | La voix de CASSIUS | Station S2 | 40 s | [EXISTANT] V188 (placeholder Canvas, §7.6) |
+| CIN-72 | Le dernier enregistrement d'Echo-8 | Station S3 | 30 s | [EXISTANT] V188 (placeholder Canvas, §7.6) |
 | CIN-73 | Le moyeu | `story-moyeu` | 20 s | [PROPOSÉ] |
 | CIN-80 | Premières lumières | Colonie, palier *Rétablie* | 30 s | [PROPOSÉ] |
 | CIN-90 | Fins (×3) | Épilogue | 60 s | [PROPOSÉ] |
@@ -3449,6 +3479,10 @@ La station tourne sur elle-même : son **anneau extérieur** (quais, marché) do
 | PNJ génériques | Dockers, marchands, techniciens, jardiniers, mécaniciens, médecin (6 silhouettes) |
 | Systèmes | Plan V3, commerce, relais, rotation de la station (visuelle) |
 
+### 42.4 Première version — [PARTIEL] V188 (spec 007, 2026-11-15)
+
+Construits : plan (anneau + rayon A, en V2, sans vue V3, Q23 A), quais (V2), pont de contrôle, salle des relais, laboratoire de transit, mémorial, serre, marché (V1) : 8 modules sur 12, en placeholders Canvas. Scellés, visibles avec leur raison : quartiers, infirmerie de station, ponts inférieurs, hangar de réparation. PNJ : Grue seule (silhouette) ; dockers, marchands, techniciens, jardiniers, mécaniciens et médecin restent à faire. Commerce (Q30) et rotation visuelle de l'anneau non faits. Détail en §7.6.
+
 ---
 
 ## 43. Port-Méridien — la colonie à gérer
@@ -4647,3 +4681,5 @@ Décision du propriétaire : certaines salles passent en **profondeur** (2,5D, d
 ### 56.13 Manques de contenu (V188, 2026-11-15)
 
 Audit bible contre code : [`AUDIT_CONTENU_V188.md`](../development/AUDIT_CONTENU_V188.md) (66 lignes au commit `250d81a` : 14 faites, 18 partielles, 32 manquantes, 2 bloquées par l'art). Comblés en partie dans ce lot, sans être terminés : front station Asphodèle S1-S4 et choix CASSIUS (§7.5), quatre quêtes de l'équipage (§8.4), temps de voyage (§13.6). Feature : `specs/005-front-asphodele-quetes/`. Tests : `scripts/verify-content-gaps-v188.mjs` ; contrôle Chromium sur fixture importée (déclaré dans la spec). Aucun de ces éléments n'a son art final.
+
+Suite (spec 007, `specs/007-hub-asphodele/`) : hub Asphodèle atteignable (8 modules sur 12 de §42.2), 7 missions annexes, 6 contrats dont *Relais en dérive*, prédicat de *Transmettre*, CIN-70 à CIN-72, plaque de Kessler au casier d'Echo-8 (§7.6, §42.4). Tests : `scripts/verify-asphodele-hub-v188.mjs` ; QA Chromium au clavier `scripts/qa-asphodele-hub-v188.mjs` (fixtures déclarées). Rien n'est déclaré terminé.

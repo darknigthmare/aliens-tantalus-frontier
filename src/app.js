@@ -324,9 +324,10 @@ const NativeHubGame = [
   withHubCirculationV137, withHubRoomIdentityV137,
   withHubDestinationSignsV138, withHubNpcInterdeckRoutesV165, withHubNpcInterdeckPassageV165, withHubNpcStationRelaysV166, withHubLiftTransitV163
 ].reduce((Game, decorate) => decorate(Game), HubGameV88);
+const HubGame = withHubArmoryStorefrontV169(withHubDepthRoomsV188(withHubMotionTrackerV160(withForgeDecorationV141(withForgeShipRuntimeV141(withHubPrologueRoomsV188(withHubEcho8LockerV188(NativeHubGame)))))));
 // V188 spec 007: the Asphodèle second hub owns the location while the marine is aboard the station (outermost, like a ground location).
-const HubGame = withHubAsphodeleV188(withHubArmoryStorefrontV169(withHubDepthRoomsV188(withHubMotionTrackerV160(withForgeDecorationV141(withForgeShipRuntimeV141(withHubPrologueRoomsV188(withHubEcho8LockerV188(NativeHubGame))))))));
-const hubEngine = new HubGame(byId('hub-canvas'), {
+const StationHubGameV188 = withHubAsphodeleV188(HubGame);
+const hubEngine = new StationHubGameV188(byId('hub-canvas'), {
   audio,
   onAction: handleHubAction,
   onPersist: persistHub,
@@ -1596,16 +1597,24 @@ function openAsphodeleDialogV188({ title, text, slot = null, options = null, onC
 function openAsphodeleBoardV188() {
   const lang = asphodeleLangV188(), en = lang === 'en', done = saveSystem.data.galaxy.completedCampaignIds;
   const nameOf = entry => en ? (ASPHODELE_SIDE_NAMES_EN_V188[entry.id] || ASPHODELE_CONTRACT_NAMES_EN_V188[entry.id]) : entry.name;
-  const rows = [...ASPHODELE_SIDE_MISSIONS_V188, ...ASPHODELE_CONTRACTS_V188].map(entry => ({ entry, lock: asphodeleMissionLockReasonV188(saveSystem.data, entry.id), done: done.includes(entry.id) }));
   const relay = asphodeleTextV188('relayCount', lang, { n: Math.min(3, contractCountV188(saveSystem.data, RELAY_DRIFT_KEY_V188)) });
-  const lines = rows.filter(row => row.lock).map(row => `${nameOf(row.entry)} : ${asphodeleMissionLockTextV188(row.lock, lang)}`);
-  const text = [relay, ...lines].join(' · ');
-  const options = rows.filter(row => !row.lock && !(row.done && !row.entry.replayableV188))
-    .map(row => ({ id: row.entry.id, label: `${asphodeleTextV188('boardOpen', lang)} · ${nameOf(row.entry)}` }));
-  return openAsphodeleDialogV188({ title: asphodeleTextV188('boardTitle', lang), text, slot: 'asphodele-exterior',
-    options: [...options, { id: 'close', label: asphodeleTextV188('close', lang) }],
+  const close = { id: 'close', label: asphodeleTextV188('close', lang) };
+  // Two short lists (station missions, then contracts) keep every button on screen.
+  const listView = entries => {
+    const rows = entries.map(entry => ({ entry, lock: asphodeleMissionLockReasonV188(saveSystem.data, entry.id), done: done.includes(entry.id) }));
+    const lines = rows.filter(row => row.lock).map(row => `${nameOf(row.entry)} : ${asphodeleMissionLockTextV188(row.lock, lang)}`);
+    const doneLines = rows.filter(row => row.done && !row.entry.replayableV188).map(row => `${nameOf(row.entry)} : ${asphodeleTextV188('boardDone', lang)}`);
+    const options = rows.filter(row => !row.lock && !(row.done && !row.entry.replayableV188))
+      .map(row => ({ id: row.entry.id, label: nameOf(row.entry).replace(/^(ASPHODÈLE|CONTRAT|CONTRACT) · /, '') }));
+    return { text: [relay, ...doneLines, ...lines].join(' · '), options: [...options, { id: 'back', label: en ? 'BACK' : 'RETOUR' }] };
+  };
+  const home = { text: relay, options: [{ id: 'side', label: en ? 'STATION MISSIONS' : 'MISSIONS DE LA STATION' }, { id: 'contracts', label: en ? 'LOCAL CONTRACTS' : 'CONTRATS LOCAUX' }, close] };
+  return openAsphodeleDialogV188({ title: asphodeleTextV188('boardTitle', lang), ...home,
     onChoose: (id) => {
       if (id === 'close') return null;
+      if (id === 'back') return home;
+      if (id === 'side') return listView(ASPHODELE_SIDE_MISSIONS_V188);
+      if (id === 'contracts') return listView(ASPHODELE_CONTRACTS_V188);
       if (!commitCandidateV188(candidate => { if (asphodeleMissionLockReasonV188(candidate, id)) return false; candidate.strategy.plannedCampaignId = id; return true; })) return null;
       return { text: asphodeleTextV188('boardPlanned', lang), options: [{ id: 'close', label: asphodeleTextV188('close', lang) }] };
     } });
