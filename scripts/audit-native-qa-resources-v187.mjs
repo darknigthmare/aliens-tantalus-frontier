@@ -18,6 +18,56 @@ const freeze = value => {
   return value;
 };
 
+// Obscura is a separate source admission after the published V187 endpoint.
+// The historical V187 maps below keep their original hashes and no execution
+// result is transferred. This terminal audit still imports no other audit.
+export const OBSCURA_BASELINE_20261115 = '803db26dbd7ed453d9534eee237806053438f300';
+export const OBSCURA_VERIFIER_SUCCESSOR_20261115 = freeze({
+  path: 'scripts/verify-public-release-v86.mjs',
+  previousSha256: '328c764b2bf467d0bc21ae86abf415a7722bd0a88cba486eb2167c22fa8f0b84',
+  currentSha256: 'a303c2a1d1ee26fb5fb0e9312efac2f6a093dc50d8c1c88a40ca99fefcd3f8e3'
+});
+export const OBSCURA_SOURCE_SHA256_20261115 = freeze({
+  ".agents/skills/obscura/LICENSE": "50e6751797c50dedd75ef1b8a0d9e42f5f8472e9fbce91f34718e9f97b0c780a",
+  ".agents/skills/obscura/SKILL.md": "2ab71d43ffa87c4d0fa0efcd895258a7319592f4949bf18a2294a9953ad9a065",
+  ".ai-tools/obscura/README.md": "c856d14393876f06b04d579a4ea7e34add28522f943ffcf8edca0c105314ed6d",
+  ".ai-tools/obscura/source.json": "272e03889f6bf42c5c77bb8718f49954d858d839266f7e4f6103d84d92e23368",
+  ".claude/skills/obscura/LICENSE": "50e6751797c50dedd75ef1b8a0d9e42f5f8472e9fbce91f34718e9f97b0c780a",
+  ".claude/skills/obscura/SKILL.md": "2ab71d43ffa87c4d0fa0efcd895258a7319592f4949bf18a2294a9953ad9a065"
+});
+export const OBSCURA_SOURCE_ONLY_PATHS_20261115 = Object.freeze([
+  ".agents",
+  ".agents/skills",
+  ".agents/skills/obscura",
+  ".agents/skills/obscura/SKILL.md",
+  ".agents/skills/obscura/LICENSE",
+  ".claude",
+  ".claude/skills",
+  ".claude/skills/obscura",
+  ".claude/skills/obscura/SKILL.md",
+  ".claude/skills/obscura/LICENSE",
+  ".ai-tools/obscura",
+  ".ai-tools/obscura/README.md",
+  ".ai-tools/obscura/source.json"
+]);
+
+export function reviewedObscuraDigest20261115(path, endpoint) {
+  const receipt = OBSCURA_VERIFIER_SUCCESSOR_20261115;
+  if (path !== receipt.path) return endpoint;
+  assert.equal(endpoint, receipt.previousSha256, 'Broken V187-to-Obscura source chain: ' + path);
+  assert.ok(validHash(receipt.currentSha256));
+  assert.notEqual(receipt.currentSha256, receipt.previousSha256);
+  return receipt.currentSha256;
+}
+
+export function verifyObscuraSources20261115(readSource = readRepository) {
+  for (const [path, expected] of Object.entries(OBSCURA_SOURCE_SHA256_20261115)) {
+    assert.equal(sha(readSource(path)), expected, 'Unreviewed Obscura source bytes: ' + path);
+  }
+  return Object.freeze({ sources: Object.keys(OBSCURA_SOURCE_SHA256_20261115).length,
+    runtimeChanged: false, historicalEvidenceTransferred: false });
+}
+
 export const NATIVE_QA_RESOURCES_BASELINE_V187 = '8219837892fc8c5ede58f2c500a934192fea1ae0';
 // BEGIN V187 SOURCE RECEIPTS
 export const NATIVE_QA_RESOURCES_SUCCESSORS_V187 = freeze({
@@ -86,11 +136,11 @@ export const NATIVE_QA_RESOURCES_SOURCE_ONLY_PATHS_V187 = Object.freeze([
 
 export function reviewedNativeQaResourcesDigestV187(path, endpoint) {
   const receipt = NATIVE_QA_RESOURCES_SUCCESSORS_V187[path];
-  if (!receipt) return endpoint;
+  if (!receipt) return reviewedObscuraDigest20261115(path, endpoint);
   assert.equal(endpoint, receipt.previousSha256, 'Broken V186-to-V187 source chain: ' + path);
   assert.ok(validHash(receipt.currentSha256), 'Invalid V187 source digest: ' + path);
   assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A V187 successor must identify changed bytes: ' + path);
-  return receipt.currentSha256;
+  return reviewedObscuraDigest20261115(path, receipt.currentSha256);
 }
 
 export function reviewedNativeQaDependencyGuardDigestV187(endpoint) {
@@ -124,6 +174,7 @@ export function verifyNativeQaResourcesV187(readSource = readRepository) {
   for (const [path, expected] of Object.entries(NATIVE_QA_PRESERVED_SHA256_V187)) {
     assert.equal(sha(readSource(path)), expected, 'V187 must preserve these source bytes: ' + path);
   }
+  verifyObscuraSources20261115(readSource);
   return Object.freeze({ successors: Object.keys(NATIVE_QA_RESOURCES_SUCCESSORS_V187).length,
     preserved: Object.keys(NATIVE_QA_PRESERVED_SHA256_V187).length });
 }
