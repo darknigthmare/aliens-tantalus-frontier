@@ -194,6 +194,24 @@ Les effets de planète sont dessinés sur un canvas inséré dans la scène, ent
   - Chromium : QZ-17 lancée par `launchCampaign`, Echo-9 et un rôdeur placés par injection. Conteneurs, annonce, occultation et dépressurisation visibles ; aucune erreur.
 - Performance, même page, ordre alterné : un premier essai par décalage de `actor.y` coûtait +25 %. La pose de l'arme du moteur de mission se calcule à partir de `y`. Le dessin passe désormais par une translation du canvas : +0,4 % à +8 % selon l'essai (17,2–17,4 ms contre 16,1 ms), dans Chromium sans affichage.
 
+## Autres cales en profondeur (spec 004, décision Q31)
+
+- Évaluation jouée de QZ-17 dans Chromium avec les touches réelles (`specs/004-cales-profondeur-suite/research.md`, R1). Corrigés :
+  - P1 : un saut dans une voie avant ramenait Echo-9 à la ligne du mur, et ses tirs ou les coups d'un ennemi en bond ignoraient la bande ;
+  - P2 : invite au mur en plein saut ;
+  - P2 : salves coop de deux profondeurs.
+- `src/depth-hold-sections-v188.js` : la section est construite par définition. QZ-17 est inchangée (test de référence).
+- Deux nouvelles cales :
+  - **cargos** : soute basse des missions procédurales de vaisseau, deux piles de caisses et un râtelier de fûts ;
+  - **quarantaine de Léthé** (Systèmes de survie) : deux caisses de quarantaine et un chariot renversé ; l'acide prend la profondeur de la créature tuée.
+- Cargo Brutal reste en 2D : le P-5000 et ses conteneurs Alpha, Bravo et Charlie occupent le couloir.
+- Art : 4 emplacements nommés (`src/depth-hold-slots-v188.js`), replis en primitives ; aucun fichier livré.
+- Vérifications :
+  - `scripts/verify-depth-holds-v188.mjs` (9 tests sur le moteur réel) ;
+  - `scripts/verify-mission-depth-v188.mjs` inchangé (6 tests) ;
+  - Chromium : chaque cale visitée depuis l'insertion avec les touches réelles.
+- Mesure A/B, même page, ordre alterné, 10 × 300 images : cargos +3,1 %, Léthé +6,3 %, QZ-17 +4,4 %. Le premier essai, sans cache du dessin des objets, donnait +10,5 % et +15,2 %.
+
 ## Limites et travail restant
 
 
