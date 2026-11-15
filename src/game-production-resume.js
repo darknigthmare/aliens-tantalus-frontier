@@ -254,7 +254,9 @@ export class GameEngine extends ProductionBaseEngine {
 
     if (isRecord(rawState.checkpoint)) {
       // Every checkpoint the base mission sets (power and archive included) survives a resume.
-      const checkpointIds = new Set(['insertion', 'vent', 'security', 'containment', 'power', 'archive', this.checkpoint?.id].filter(Boolean));
+      // V188: cargo-brutal phase checkpoints and the planet-exterior extraction walkway.
+      const checkpointIds = new Set(['insertion', 'vent', 'security', 'containment', 'power', 'archive',
+        'cargo-loader', 'cargo-escort', 'cargo-matriarch', 'extraction-walkway', this.checkpoint?.id].filter(Boolean));
       const checkpointId = safeId(rawState.checkpoint.id);
       if (checkpointIds.has(checkpointId)) {
         this.checkpoint = {

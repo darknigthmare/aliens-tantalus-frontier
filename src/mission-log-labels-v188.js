@@ -48,7 +48,10 @@ export function missionFailureLabelV188(reason) {
 // "d’opération".
 export const CHECKPOINT_LABELS_V188 = Object.freeze({
   insertion: 'd’insertion', power: 'énergie', archive: 'archives', security: 'sécurité', vent: 'conduit',
-  containment: 'confinement', extract: 'extraction', extraction: 'extraction'
+  containment: 'confinement', extract: 'extraction', extraction: 'extraction',
+  // V188 phase checkpoints (owner decision, 2026-11-15).
+  'cargo-loader': 'chargeur P-5000', 'cargo-escort': 'escorte du convoi', 'cargo-matriarch': 'matriarche',
+  'extraction-walkway': 'passerelle d’extraction'
 });
 export function checkpointLabelV188(id) {
   const raw = String(id ?? '').trim();

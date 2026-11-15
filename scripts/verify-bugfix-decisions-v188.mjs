@@ -178,3 +178,85 @@ test('vent objective saves: new saves keep the player flag; older saves load and
   assert.equal(fresh.engine.objectiveState.complete, true);
   assert.equal(fresh.engine.missingObjectiveRequirement(), '', 'extraction stays available');
 });
+
+// ---------------------------------------------------------------- item 4
+async function cargo() {
+  const result = await launch('special-cargo-brutal', { keepEnemies: false });
+  assert.ok(result.engine.cargoBrutalV67 && result.engine.vehicle, 'cargo-brutal runtime and P-5000');
+  return result;
+}
+// Injection used below: phases are advanced through the runtime's own
+// advanceCargoBrutalPhaseV67 after setting the previous phase; the marine is
+// seated with the vehicle fields toggleVehicle sets (driver, inVehicle).
+function seat(engine) {
+  const p = engine.player, v = engine.vehicle;
+  p.inVehicle = true; v.driver = p; v.occupied = true; p.x = v.x + v.w / 2 - p.w / 2; p.y = v.y + v.h - p.h;
+}
+test('cargo-brutal: a checkpoint at the start of the loading, escort and matriarch phases (power starts at insertion)', async () => {
+  const { engine, events } = await cargo();
+  const state = engine.cargoBrutalV67, p = engine.player;
+  assert.equal(state.phase, 'restore-power'); assert.equal(engine.checkpoint.id, 'insertion');
+  p.x = engine.powerNode.x; p.y = engine.powerNode.y + engine.powerNode.h - p.h;
+  assert.equal(engine.cargoBrutalInteractV67(p), true);
+  assert.equal(state.phase, 'mount-loader'); assert.equal(engine.checkpoint.id, 'cargo-loader');
+  state.phase = 'clear-route'; engine.vehicle.x = 2400; seat(engine);
+  assert.equal(engine.advanceCargoBrutalPhaseV67('escort-convoy'), true);
+  assert.equal(engine.checkpoint.id, 'cargo-escort');
+  assert.equal(engine.checkpoint.loaderV188.x, 2400); assert.equal(engine.checkpoint.loaderV188.mounted, true);
+  state.phase = 'carry-core'; engine.vehicle.x = 3300; seat(engine);
+  assert.equal(engine.advanceCargoBrutalPhaseV67('matriarch'), true);
+  assert.equal(engine.checkpoint.id, 'cargo-matriarch');
+  const ids = events.filter(event => event.type === 'checkpoint').map(event => event.checkpoint);
+  assert.deepEqual(ids, ['cargo-loader', 'cargo-escort', 'cargo-matriarch']);
+  const { checkpointLabelV188 } = await import('../src/mission-log-labels-v188.js');
+  assert.deepEqual(ids.map(checkpointLabelV188), ['chargeur P-5000', 'escorte du convoi', 'matriarche']);
+});
+
+test('cargo-brutal: a retry after the P-5000 is destroyed restores it where it stood at the phase checkpoint', async () => {
+  const { engine } = await cargo();
+  const state = engine.cargoBrutalV67, v = engine.vehicle, p = engine.player;
+  state.powerRestored = true; state.loaderMounted = true; state.phase = 'clear-route'; v.x = 2400; seat(engine);
+  engine.advanceCargoBrutalPhaseV67('escort-convoy');
+  const hull = v.hull;
+  // Injection: the loader is driven 900 px on and destroyed.
+  v.x = 3300; v.hull = 0; v.destroyed = true;
+  engine.update(1 / 60);
+  assert.equal(engine.mission.state, 'failed');
+  assert.equal(engine.restartFromCheckpoint(), true);
+  assert.equal(engine.mission.state, 'active');
+  assert.equal(state.phase, 'escort-convoy', 'the phase is kept');
+  assert.equal(v.x, 2400, 'the P-5000 is back at the checkpoint');
+  assert.equal(v.destroyed, false); assert.equal(state.loader.destroyed, false);
+  assert.equal(v.hull, hull, 'hull as it was at the checkpoint');
+  assert.equal(p.inVehicle, false);
+  assert.ok(Math.abs(p.x - (v.x + v.w)) < 220, 'the marine restarts within mounting reach');
+  assert.equal(p.y + p.h, v.y + v.h, 'on the loader floor');
+});
+
+test('cargo-brutal and planet-exterior: the new checkpoints survive a mission resume', async () => {
+  const { engine } = await cargo();
+  const state = engine.cargoBrutalV67;
+  state.powerRestored = true; state.phase = 'clear-route'; engine.vehicle.x = 2400; seat(engine);
+  engine.advanceCargoBrutalPhaseV67('escort-convoy');
+  const saved = engine.captureResumeState();
+  const again = await cargo();
+  assert.equal(again.engine.applyResumeState(saved).applied, true);
+  assert.equal(again.engine.checkpoint.id, 'cargo-escort');
+});
+
+test('planet-exterior: the beacon platform before the extraction walkway sets a checkpoint; a fall into the pit returns there', async () => {
+  const entry = campaign('pair-001-frontier'), world = worldOf(entry);
+  const missionLevel = buildMissionLevelV52({ campaign: entry, world, levelSeeds: LEVEL_SEEDS, variant: 0, templateId: 'planet-exterior' });
+  const { engine } = await fixture({ campaign: entry, seed: missionLevel.levelSeed.seed, options: { world, levelSeed: missionLevel.levelSeed, missionLevel } });
+  engine.supplies = []; engine.drops = [];
+  assert.equal(engine.checkpoint.id, 'insertion');
+  const pad = engine.platforms.find(entry => entry.id === 'node-platform-planet-beacon'), p = engine.player;
+  // Injection: the marine dropped onto the beacon platform.
+  p.x = pad.x + pad.w / 2 - p.w / 2; p.y = pad.y - p.h - 2; p.vx = p.vy = 0;
+  tick(engine, 0.5);
+  assert.equal(engine.checkpoint.id, 'extraction-walkway');
+  // Injection: the marine falls into the pit under the walkway.
+  p.x = 4560; p.y = engine.missionLevelBounds.voidY + 10; p.vy = 400; p.grounded = false;
+  tick(engine, 1 / 60);
+  assert.ok(Math.abs(p.x - engine.checkpoint.x) < 2 && p.x > 4000, `back at the walkway checkpoint (x ${Math.round(p.x)}), not at insertion`);
+});

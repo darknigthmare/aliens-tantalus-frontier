@@ -15,6 +15,14 @@ const MAX_CARGO_WAVE_ENEMIES = 48;
 const CARGO_WAVE_BIOLOGIES_V67 = new Set(['xenomorph', 'hybrid']);
 
 export const CARGO_BRUTAL_STRATEGIC_BONUS_V67 = Object.freeze({ credits: 300, alloy: 45 });
+// V188 owner decision (2026-11-15): one checkpoint at the start of each major
+// phase. Power starts at the insertion checkpoint; loading, escort and matriarch
+// get their own. A retry puts the P-5000 back where it stood at that checkpoint.
+export const CARGO_PHASE_CHECKPOINTS_V188 = Object.freeze({
+  'mount-loader': 'cargo-loader', 'escort-convoy': 'cargo-escort', matriarch: 'cargo-matriarch'
+});
+/** [PROPOSÉ] Minimum P-5000 hull restored by a retry (share of the maximum). */
+export const CARGO_RETRY_MIN_HULL_V188 = 0.45;
 
 export const CARGO_BRUTAL_PHASES_V67 = Object.freeze([
   'restore-power',
@@ -694,6 +702,45 @@ export function withCargoBrutalRuntimeV67(BaseEngine) {
       state.phase = resolved;
       if (this.mission) this.mission.phase = resolved;
       this.emitCargoObjectiveV67('phase-complete', { completedPhase: previous, nextPhase: resolved, ...detail });
+      if (CARGO_PHASE_CHECKPOINTS_V188[resolved]) this.setCargoPhaseCheckpointV188(CARGO_PHASE_CHECKPOINTS_V188[resolved]);
+      return true;
+    }
+
+    // The marine stands at the loader (or beside it when on foot); the P-5000
+    // position, hull and hydraulics at that moment are what a retry restores.
+    setCargoPhaseCheckpointV188(id) {
+      const actor = this.player, vehicle = this.vehicle, state = this.cargoBrutalV67;
+      if (!actor || typeof this.setCheckpoint !== 'function') return false;
+      const onLoader = Boolean(actor.inVehicle && vehicle);
+      const x = onLoader ? vehicle.x + vehicle.w / 2 - actor.w / 2 : actor.x;
+      const y = onLoader ? vehicle.y + vehicle.h - actor.h : actor.y;
+      this.setCheckpoint(id, x, y);
+      if (this.checkpoint && vehicle && !vehicle.destroyed) {
+        this.checkpoint.loaderV188 = { x: vehicle.x, y: vehicle.y, hull: Number(vehicle.hull) || 0,
+          hydraulics: Number(state?.loader?.hydraulics) || 0, mounted: onLoader };
+      }
+      return true;
+    }
+
+    restoreCargoLoaderAtCheckpointV188() {
+      const checkpoint = this.checkpoint, vehicle = this.vehicle, state = this.cargoBrutalV67;
+      if (!vehicle || !state || !Object.values(CARGO_PHASE_CHECKPOINTS_V188).includes(checkpoint?.id)) return false;
+      // A resumed save keeps the checkpoint id and position only: the loader goes back beside it.
+      const saved = checkpoint.loaderV188 || { x: checkpoint.x + this.player.w / 2 - vehicle.w / 2, y: vehicle.y,
+        hull: vehicle.hull, hydraulics: state.loader.hydraulics };
+      vehicle.x = clamp(saved.x, 0, WORLD_WIDTH - vehicle.w); vehicle.y = Number(saved.y) || vehicle.y;
+      if ('vx' in vehicle) vehicle.vx = 0;
+      if ('vy' in vehicle) vehicle.vy = 0;
+      vehicle.destroyed = false; vehicle.active = true;
+      vehicle.hull = Math.min(vehicle.maxHull, Math.max(Number(saved.hull) || 0, vehicle.maxHull * CARGO_RETRY_MIN_HULL_V188));
+      state.loader.destroyed = false; state.loader.heat = 0; state.loader.overheated = false;
+      state.loader.hydraulics = clamp(saved.hydraulics, state.loader.hydraulics, state.loader.maxHydraulics);
+      // The marine restarts on foot beside the loader, within mounting reach.
+      for (const [index, actor] of [this.player, this.coop].entries()) {
+        if (!actor) continue;
+        actor.x = clamp(vehicle.x + vehicle.w + 18 + index * 52, 0, WORLD_WIDTH - actor.w);
+        actor.y = vehicle.y + vehicle.h - actor.h;
+      }
       return true;
     }
 
@@ -1198,7 +1245,9 @@ export function withCargoBrutalRuntimeV67(BaseEngine) {
       if (!cargoFailure || !result || !this.cargoBrutalV67) return result;
       const state = this.cargoBrutalV67;
       state.failureReason = null;
-      if (state.loader.destroyed && this.vehicle) {
+      if (this.restoreCargoLoaderAtCheckpointV188()) {
+        if (this.vehicle) state.loader.destroyed = false;
+      } else if (state.loader.destroyed && this.vehicle) {
         state.loader.destroyed = false;
         this.vehicle.destroyed = false;
         this.vehicle.active = true;
