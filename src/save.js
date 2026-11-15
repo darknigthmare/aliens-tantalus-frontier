@@ -1,3 +1,4 @@
+import { normalizeSeenWorldIdsV188 } from './insertion-cinematic-v188.js';
 import { createColonyV188, normalizeColonyV188 } from './colony-reconstruction-v188.js';
 import { normalizeHubDepthV188 } from './hub-depth-rooms-v188.js';
 import { createReactiveLinesV188, normalizeReactiveLinesV188 } from './reactive-lines-v188.js';
@@ -259,6 +260,9 @@ function createStrategyState() {
     lastOperation: null,
     specialOperationResolutionSerialV121: 0,
     insertionReadReceipts: [],
+    // V188 additive: worlds whose full insertion / extraction cinematic was already shown.
+    insertionSeenWorldIdsV188: [],
+    extractionSeenWorldIdsV188: [],
     log: []
   };
 }
@@ -399,7 +403,8 @@ export function createDefaultSave(profile = 1) {
       colorblindV188: 'off',
       textScaleV188: 1,
       keyBindingsV188: defaultKeyBindingsV188(),
-      customDifficultyV188: { ...DEFAULT_CUSTOM_DIFFICULTY_V188 }
+      customDifficultyV188: { ...DEFAULT_CUSTOM_DIFFICULTY_V188 },
+      insertionAlwaysFullV188: false
     },
     statistics: { playSeconds: 0, kills: 0, shots: 0, hits: 0, deaths: 0, rescues: 0, rooms: 0, campaigns: 0, strategicActions: 0, research: 0, procurements: 0, retreats: 0 }
   };
@@ -2360,6 +2365,8 @@ export function migrateSave(input, profile = 1) {
     unlockedResearchIds: stringList(strategy.unlockedResearchIds).filter((id) => RESEARCH_PROJECTS.some((project) => project.id === id)),
     currentOperation: sanitizeOperation(strategy.currentOperation),
     insertionReadReceipts: sanitizeMissionInsertionReadReceiptsV62(strategy.insertionReadReceipts),
+    insertionSeenWorldIdsV188: normalizeSeenWorldIdsV188(strategy.insertionSeenWorldIdsV188),
+    extractionSeenWorldIdsV188: normalizeSeenWorldIdsV188(strategy.extractionSeenWorldIdsV188),
     lastOperation: isRecord(strategy.lastOperation) ? {
       ...sanitizeOperation(strategy.lastOperation),
       success: Boolean(strategy.lastOperation.success),
@@ -2437,6 +2444,8 @@ export function migrateSave(input, profile = 1) {
     ? Math.max(0, Math.min(1, settings[key])) : base.settings[key];
   // V188 additive run options: older saves keep permadeath and standard values.
   migrated.settings.crewPermadeathV188 = settings.crewPermadeathV188 !== false;
+  // V188 additive option: the full insertion cinematic every time (default: first visit only).
+  migrated.settings.insertionAlwaysFullV188 = settings.insertionAlwaysFullV188 === true;
   migrated.settings.colorblindV188 = normalizeColorblindV188(settings.colorblindV188);
   migrated.settings.textScaleV188 = normalizeTextScaleV188(settings.textScaleV188);
   migrated.settings.keyBindingsV188 = normalizeKeyBindingsV188(settings.keyBindingsV188);

@@ -199,6 +199,35 @@ export class AudioDirector {
     }[family];
     return this.playEffect(id, fallback);
   }
+  // V188 insertion / extraction cinematic cues (insertion-cinematic-v188.js). Procedural
+  // placeholders until recorded effects exist; muted and volume-scaled like every effect.
+  insertionCueV188(id) {
+    const cue = String(id || '');
+    const tones = {
+      'insertion-start': [[46, 1.6, 'sawtooth', 0.05, 8]],
+      'shot:bay': [[300, 0.35, 'square', 0.04, -120], [300, 0.35, 'square', 0.04, -120]],
+      'shot:bay-return': [[300, 0.35, 'square', 0.04, -120]],
+      'shot:release': [[90, 0.22, 'square', 0.09, -50], [54, 0.9, 'triangle', 0.06, -20]],
+      'shot:entry': [[38, 2.4, 'sawtooth', 0.07, 30]],
+      'shot:powered-descent': [[64, 2, 'sawtooth', 0.05, -10]],
+      'shot:approach': [[58, 2, 'sawtooth', 0.06, -8]],
+      'shot:liftoff': [[50, 2, 'sawtooth', 0.06, 40]],
+      'shot:climb': [[44, 2, 'sawtooth', 0.05, 30]],
+      'shot:ascent': [[60, 2, 'sawtooth', 0.05, 20]],
+      'shot:docking': [[120, 0.2, 'square', 0.07, -60], [70, 0.5, 'triangle', 0.06, -10]],
+      'shot:undock': [[110, 0.25, 'square', 0.06, -40]],
+      'insertion-radio': [[1400, 0.04, 'square', 0.03, -600]],
+      'insertion-warning': [[880, 0.12, 'square', 0.05, 0], [660, 0.12, 'square', 0.05, 0]]
+    }[cue];
+    if (!tones) return false;
+    const generation = this.sceneGeneration;
+    tones.forEach((args, index) => {
+      if (!index) { this.tone(...args); return; }
+      const timer = setTimeout(() => { this.timers.delete(timer); if (generation === this.sceneGeneration) this.tone(...args); }, index * 180);
+      this.timers.add(timer);
+    });
+    return true;
+  }
   // Mood changes inside a mission keep effects playing (unlike a view change).
   setMusicMoodV188(scene) {
     if (!AUDIO_SLOTS_V77.music.includes(scene) || this.scene === scene) return false;

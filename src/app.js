@@ -10,6 +10,9 @@ import { deriveStoryCampaignV188, markStoryDebriefSeenV188, markStoryCinematicSe
 import { InGameStagingV188, STAGED_BEATS_V188 } from './ingame-staging-v188.js';
 import { openStoryChoiceDialogV188 } from './story-choice-ui-v188.js';
 import { CinematicPlayerV188, CINEMATICS_V188 } from './story-cinematics-v188.js';
+import { InsertionCinematicPlayerV188, buildInsertionHandoverV188, buildInsertionSequenceV188, insertionWorldProfileV188, insertionSeenWorldIdsV188,
+  selectInsertionLengthV188, markInsertionWorldSeenV188, createExtractionFlowV188, extractionFlowOnEventV188 } from './insertion-cinematic-v188.js';
+import { colorblindPaletteActiveV188 } from './colorblind-palette-v188.js';
 import { openM577ManifestDialogV188 } from './m577-manifest-ui-v188.js';
 import {
   RELEASE, CONTENT_COUNTS, WORLDS, CAMPAIGNS, WEAPONS, EQUIPMENT, ENEMIES, VEHICLES,
@@ -257,6 +260,10 @@ let enemyCatalogV62 = null;
 let vehicleCatalogV62 = null;
 let missionInsertionUiV62 = null;
 let pendingMissionLaunchV62 = null;
+// V188 insertion / extraction cinematics (specs/003): the context of the running
+// campaign mission and the extraction hand-back state for the engine's boarding event.
+let insertionMissionV188 = null;
+let extractionFlowV188 = createExtractionFlowV188();
 let profileEpochV78 = 0;
 let profileImportRequestV78 = 0;
 let missionOwnerV78 = null;
@@ -2366,6 +2373,7 @@ function renderProfiles() {
   byId('setting-coop').checked = saveSystem.data.settings.coop;
   byId('setting-motion').checked = saveSystem.data.settings.reducedMotion;
   byId('setting-subtitles').checked = saveSystem.data.settings.subtitles;
+  if (byId('setting-insertion-full-v188')) byId('setting-insertion-full-v188').checked = saveSystem.data.settings.insertionAlwaysFullV188 === true;
   byId('setting-quality').value = saveSystem.data.settings.quality || 'high';
   byId('setting-contrast').value = saveSystem.data.settings.contrast || 'standard';
   byId('setting-aim-assist').value = saveSystem.data.settings.aimAssist || 'standard';
@@ -2834,9 +2842,59 @@ function discardProfileRuntimeV78() {
   destroyMissionInsertionUiV62();
 }
 
+// V188: what the insertion cinematic plays for this launch, or null. A mid-mission
+// resume goes straight back into the level, as before (no landing is replayed).
+function insertionCinematicPlanV188(context) {
+  if (!context?.world || context.operationLoadout?.resumeState || standaloneContext) return null;
+  const story = normalizeStoryCampaignV188(saveSystem.data.storyCampaignV188);
+  // QZ-17 opens on its own approach cinematic (CIN-10): the insertion stays short before it.
+  const storyApproach = context.campaign?.id === 'special-narrative-qz17' && !(story.cinematicsSeen || []).includes('cin-10');
+  const { short } = selectInsertionLengthV188({ worldId: context.world.id, seenWorldIds: insertionSeenWorldIdsV188(saveSystem.data, 'insertion'),
+    alwaysFull: saveSystem.data.settings.insertionAlwaysFullV188 === true });
+  const vehicle = getSpecialOperationByCampaignIdV67(context.campaign?.id)?.id === 'cargo-brutal' ? null : context.vehicle;
+  const handover = buildInsertionHandoverV188({ world: context.world, campaign: context.campaign, templateId: context.missionLevel?.templateId,
+    vehicle, short: short || storyApproach });
+  return { handover, world: context.world, campaign: context.campaign };
+}
+const insertionPlayerV188 = new InsertionCinematicPlayerV188();
+function insertionCinematicOptionsV188() {
+  const settings = saveSystem.data.settings || {};
+  return { language: document.documentElement.lang === 'en' ? 'en' : 'fr',
+    reducedMotion: Boolean(settings.reducedMotion || globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches),
+    colorblind: colorblindPaletteActiveV188(document), shake: Number.isFinite(settings.screenShake) ? settings.screenShake : .7,
+    onCue: (id) => audio.insertionCueV188?.(id) };
+}
+/** Plays one direction of the cinematic and records the world as seen for it. */
+function playInsertionCinematicV188({ world, campaign, handover, direction = 'insertion', placeType = null }) {
+  const base = insertionWorldProfileV188(world, { campaign });
+  const profile = placeType && placeType !== base.placeType ? { ...base, placeType } : base;
+  const sequence = buildInsertionSequenceV188({ direction, profile, mode: handover.mode, short: handover.short });
+  return insertionPlayerV188.play(sequence, insertionCinematicOptionsV188()).then((result) => {
+    if (result !== 'unavailable' && result !== 'replaced' && !creatorOwnerV84) {
+      try { if (markInsertionWorldSeenV188(saveSystem.data, world.id, direction)) saveSystem.commit(); } catch (error) { toast(error.message); }
+    }
+    if (globalThis.__ATF_INSERTION_V188__) globalThis.__ATF_INSERTION_V188__.last = { direction, result, stats: insertionPlayerV188.lastStats, handover: { ...handover } };
+    return result;
+  });
+}
 function startMissionRuntimeV62(context) {
+  const plan = insertionCinematicPlanV188(context);
+  if (!plan) return startMissionRuntimeNowV62(context, null);
+  destroyMissionInsertionUiV62();
+  pendingMissionLaunchV62 = context;
+  const epoch = profileEpochV78, operationId = saveSystem.data.strategy.currentOperation?.id;
+  void playInsertionCinematicV188(plan).then(() => {
+    // A profile change or a resolved operation meanwhile cancels the launch.
+    if (epoch !== profileEpochV78 || saveSystem.data.strategy.currentOperation?.id !== operationId || pendingMissionLaunchV62 !== context) return;
+    startMissionRuntimeNowV62(context, plan.handover);
+  });
+}
+function startMissionRuntimeNowV62(context, insertionHandoverV188 = null) {
   destroyMissionInsertionUiV62();
   pendingMissionLaunchV62 = null;
+  insertionMissionV188 = { world: context.world, campaign: context.campaign, handover: insertionHandoverV188
+    || buildInsertionHandoverV188({ world: context.world, campaign: context.campaign, templateId: context.missionLevel?.templateId, vehicle: context.vehicle }) };
+  extractionFlowV188 = createExtractionFlowV188();
   const {
     campaign, world, worldState, levelSeed, missionLevel,
     weapon, equipment, crew, vehicle, costume, deployment, operationLoadout
@@ -2873,6 +2931,8 @@ function startMissionRuntimeV62(context) {
       screenShake: saveSystem.data.settings.screenShake
     },
     editorProject: null,
+    // V188 contract with the engine: the in-level landing (dropship settles, ramp, marines or M577).
+    insertionHandoverV188,
     strategicBriefing: deployment.operation,
     playerIdentityV84: deployment.operation.playerIdentityV84 || null,
     resumeState: operationLoadout.resumeState,
@@ -3208,7 +3268,27 @@ function handleForgePlaytestEvent(event) {
   }
 }
 
+// V188: the engine closes the in-level boarding, then the ascent cinematic plays over
+// the mission (paused) before the debrief; without that event nothing changes.
+function playExtractionCinematicV188(boarding) {
+  const mission = insertionMissionV188;
+  if (!mission?.world || insertionPlayerV188.active) return Promise.resolve('unavailable');
+  extractionFlowV188.played = true;
+  const resume = activeView === 'play' && engine.running && !engine.paused;
+  if (resume) engine.togglePause();
+  const { short } = selectInsertionLengthV188({ worldId: mission.world.id, seenWorldIds: insertionSeenWorldIdsV188(saveSystem.data, 'extraction'),
+    alwaysFull: saveSystem.data.settings.insertionAlwaysFullV188 === true });
+  return playInsertionCinematicV188({ world: mission.world, campaign: mission.campaign, direction: 'extraction', placeType: boarding.placeType,
+    handover: { ...mission.handover, mode: boarding.mode, short } }).then((result) => {
+    if (resume && activeView === 'play' && engine.running && engine.paused) engine.togglePause();
+    return result;
+  });
+}
 function handleGameEvent(event) {
+  if (!standaloneContext) {
+    const extraction = extractionFlowOnEventV188(extractionFlowV188, event);
+    if (extraction.action === 'play-extraction') { void playExtractionCinematicV188(extraction.boarding); return true; }
+  }
   if (event?.type === 'enemy-discovered-v88' || event?.type === 'enemy-defeated-v88') {
     if (event.scope !== 'campaign' || standaloneContext || !ownsTimelineV84(missionOwnerV78) || missionOwnerV78.operationId !== saveSystem.data.strategy.currentOperation?.id
       || event.operationId !== missionOwnerV78.operationId) return null;
@@ -4458,6 +4538,7 @@ function bind() {
     'setting-music': ['music', (element) => Number(element.value)],
     'setting-permadeath-v188': ['crewPermadeathV188', (element) => normalizeCrewPermadeathV188(saveSystem.data.settings.crewPermadeathV188, element.checked)],
     'setting-colorblind-v188': ['colorblindV188', (element) => element.value],
+    'setting-insertion-full-v188': ['insertionAlwaysFullV188', (element) => element.checked],
     'setting-text-scale-v188': ['textScaleV188', (element) => Number(element.value)]
   };
   // V188 complete J1 key remapping (§53.8): capture-phase translation layer.
@@ -4662,6 +4743,8 @@ async function boot() {
   void audio.prepare();
   globalThis.__ATF_AUDIO_V77__ = audio;
   globalThis.__ATF_GAME__ = engine;
+  // V188 QA hook: the insertion player and the last sequence's frame-time summary.
+  globalThis.__ATF_INSERTION_V188__ = { player: insertionPlayerV188, last: null, get mission() { return insertionMissionV188 ? clone(insertionMissionV188.handover) : null; } };
   globalThis.__ATF_HUB__ = hubEngine;
   globalThis.__ATF_TITLE_VFX_V188__ = titleVfxV188;
   globalThis.__ATF_XENO_TRIALS_V96__ = {

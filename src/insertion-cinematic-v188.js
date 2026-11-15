@@ -495,8 +495,15 @@ function planetBody(ctx, assets, profile, cx, cy, r, { airless = false, time = 0
     ctx.fillStyle = body; ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill();
     ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.clip();
     if (airless) {
-      ctx.fillStyle = 'rgba(0,0,0,.28)';
-      for (let i = 0; i < 28; i++) { const h = hash(`crater:${profile.worldId}:${i}`); ctx.beginPath(); ctx.arc(cx - r + (h % 1000) / 1000 * r * 2, cy - r + ((h >>> 10) % 1000) / 1000 * r * .6, 6 + (h >>> 20) % 40, 0, Math.PI * 2); ctx.fill(); }
+      // craters seen at a grazing angle: flattened dark bowls with a lit rim
+      for (let i = 0; i < 34; i++) {
+        const h = hash(`crater:${profile.worldId}:${i}`), px = cx - r * .9 + (h % 1000) / 1000 * r * 1.8, py = cy - r + 20 + ((h >>> 10) % 1000) / 1000 * r * .5;
+        const rx = 5 + (h >>> 20) % 26, depth = clamp01((py - (cy - r)) / (r * .5));
+        ctx.fillStyle = 'rgba(0,0,0,.35)'; ctx.beginPath(); ctx.ellipse(px, py, rx * (.6 + depth), rx * (.18 + depth * .25), 0, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = 'rgba(255,255,255,.12)'; ctx.beginPath(); ctx.ellipse(px, py + 1, rx * (.6 + depth), rx * (.18 + depth * .25), 0, 0, Math.PI); ctx.stroke();
+      }
+      const terminator = ctx.createLinearGradient(cx - r, 0, cx + r * .4, 0); terminator.addColorStop(0, 'rgba(0,0,0,0)'); terminator.addColorStop(1, 'rgba(0,0,0,.55)');
+      ctx.fillStyle = terminator; ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
     } else {
       ctx.fillStyle = shade(sky[1], 1.4); ctx.globalAlpha = .35;
       for (let i = 0; i < 9; i++) { const bandY = cy - r + 30 + i * 38; ctx.fillRect(cx - r + ((time * 4 + i * 90) % 200) - 100, bandY, r * 2.2, 10 + (i % 3) * 6); }
@@ -566,12 +573,12 @@ function plasma(ctx, assets, cx, cy, heat, time, steady) {
   assets.draw(ctx, 'entry-plasma', 0, 0, W, H, () => {
     ctx.save(); ctx.globalCompositeOperation = 'lighter';
     for (let i = 0; i < 26; i++) {
-      const h = hash(`plasma:${i}`), angle = -Math.PI / 2 + ((h % 1000) / 1000 - .5) * 1.4;
-      const len = (260 + (h >>> 10) % 360) * heat, phase = steady ? .5 : ((time * 2.4 + i * .13) % 1);
-      const r0 = 60 + phase * 80;
+      const h = hash(`plasma:${i}`), angle = (i / 26) * Math.PI * 2 + ((h % 100) / 100 - .5) * .3;
+      const len = (220 + (h >>> 10) % 360) * heat, phase = steady ? .5 : ((time * 2.4 + i * .13) % 1);
+      const r0 = 90 + phase * 90;
       ctx.strokeStyle = `rgba(255,${150 + (h >>> 20) % 80},80,${.45 * heat * (1 - phase * .6)})`; ctx.lineWidth = 2 + (h >>> 24) % 4;
-      ctx.beginPath(); ctx.moveTo(cx + Math.cos(angle) * r0, cy - Math.sin(angle) * r0 * -1);
-      ctx.lineTo(cx + Math.cos(angle) * (r0 + len), cy + Math.sin(angle) * -(r0 + len) * -1); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx + Math.cos(angle) * r0, cy + Math.sin(angle) * r0 * .7);
+      ctx.lineTo(cx + Math.cos(angle) * (r0 + len), cy + Math.sin(angle) * (r0 + len) * .7); ctx.stroke();
     }
     const glow = ctx.createRadialGradient(cx, cy, 10, cx, cy, 260 * heat + 40);
     glow.addColorStop(0, `rgba(255,240,200,${.85 * heat})`); glow.addColorStop(.3, `rgba(255,140,50,${.5 * heat})`); glow.addColorStop(1, 'rgba(255,60,20,0)');
@@ -688,8 +695,8 @@ function commsBox(ctx, assets, x, y, w, h, line, language, time, steady) {
       ctx.globalAlpha = 1; ctx.fillStyle = '#020604'; ctx.fillRect(bx + 24, by + 22, 20, 8); ctx.fillStyle = AMBER;
     });
     const level = line && !steady ? .4 + .6 * Math.abs(Math.sin(time * 11)) : line ? .7 : .05;
-    for (let i = 0; i < 18; i++) { const bar = (Math.abs(Math.sin(i * 1.7 + time * (steady ? 0 : 9))) * .8 + .2) * level * (bh - 18); ctx.fillRect(bx + 72 + i * 7, by + bh - 10 - bar, 4, bar); }
-    ctx.font = '11px monospace'; ctx.fillText(line ? line.speaker[language === 'en' ? 'en' : 'fr'] : (language === 'en' ? 'CHANNEL OPEN' : 'CANAL OUVERT'), bx + 72, by + 12);
+    for (let i = 0; i < 18; i++) { const bar = (Math.abs(Math.sin(i * 1.7 + time * (steady ? 0 : 9))) * .8 + .2) * level * (bh - 18); ctx.fillRect(bx + 72 + i * 7, by + bh - 6 - bar * .8, 4, bar * .8); }
+    ctx.font = '11px monospace'; ctx.fillStyle = AMBER; ctx.fillText(line ? line.speaker[language === 'en' ? 'en' : 'fr'] : (language === 'en' ? 'CHANNEL OPEN' : 'CANAL OUVERT'), bx + 72, by + 12);
   });
 }
 
@@ -826,7 +833,7 @@ function drawShot(ctx, assets, sequence, at, state, time, options) {
     }
     case 'powered-descent': {
       ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H); stars(ctx, assets, time * 8);
-      const k = ease(progress); planetBody(ctx, assets, profile, 640, lerp(1500, 1050, k), lerp(1000, 1500, k), { airless: true, time });
+      const k = ease(progress); planetBody(ctx, assets, profile, 640, lerp(1500, 1250, k), lerp(900, 1000, k), { airless: true, time });
       dropship(ctx, assets, 640, 300, .45, { apc: state.apcAttached, engine: 1, time, tilt: -1.2 + k * .9, steady });
       break;
     }
@@ -840,8 +847,8 @@ function drawShot(ctx, assets, sequence, at, state, time, options) {
       // landing pad with lights
       ctx.fillStyle = '#141616'; ctx.fillRect(420, 600, 440, 18);
       for (let i = 0; i < 6; i++) { const on = steady || Math.floor(time * 4 + i) % 2 === 0; ctx.fillStyle = on ? AMBER : '#3a3420'; ctx.fillRect(430 + i * 84, 596, 10, 5); }
-      const groundY = 560, alt = landing ? lerp(-140, groundY, Math.min(1, k * 1.15)) : lerp(groundY, -180, Math.max(0, (progress - .25) / .75));
-      const x = landing ? lerp(1100, 640, Math.min(1, k * 1.2)) : lerp(640, 300, Math.max(0, (progress - .25) / .75));
+      const lift = Math.max(0, (progress - .25) / .75), groundY = 560, alt = landing ? lerp(-140, groundY, Math.min(1, k * 1.15)) : lerp(groundY, 120, lift * lift);
+      const x = landing ? lerp(160, 640, Math.min(1, k * 1.2)) : lerp(640, 1060, lift * lift); // nose first, never tail first
       // engine dust / spray near the ground
       const nearGround = clamp01(1 - Math.abs(alt - groundY) / 160);
       if (nearGround > 0) { ctx.fillStyle = sequence.placeType === 'airless' ? 'rgba(170,170,160,.35)' : 'rgba(180,170,150,.25)'; for (let i = 0; i < 12; i++) { ctx.beginPath(); ctx.ellipse(x + (i - 6) * 40 * (1 + nearGround), 610 - i % 3 * 6, 60 * nearGround, 18 * nearGround, 0, 0, Math.PI * 2); ctx.fill(); } }
