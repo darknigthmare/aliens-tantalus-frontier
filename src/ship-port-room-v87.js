@@ -191,8 +191,12 @@ export function drawShipPortTerminalV87(ctx, image, save) {
   drawPortPropV87(ctx, image, 'terminal', SHIP_PORT_TERMINAL_V87);
   const phase = save?.shipPortV1?.phase || 'undocked';
   const access = canAccessPortCounterV87(save);
-  ctx.save(); ctx.font = '10px ui-monospace, monospace'; ctx.textAlign = 'center'; ctx.fillStyle = '#b6d3bd';
-  ctx.fillText(access === true || access?.ok === true ? 'PASSERELLE DISPONIBLE' : phase.toUpperCase(), Math.max(128, SHIP_PORT_TERMINAL_V87.centerX), 418); ctx.restore();
+  const text = access === true || access?.ok === true ? 'PASSERELLE DISPONIBLE' : phase.toUpperCase(), x = Math.max(128, SHIP_PORT_TERMINAL_V87.centerX);
+  ctx.save(); ctx.font = '10px ui-monospace, monospace'; ctx.textAlign = 'center';
+  // V188 (graphics audit item 17): a backing plate keeps the status readable over the ladder behind it.
+  const width = Math.ceil((ctx.measureText?.(text)?.width || text.length * 6) + 12);
+  ctx.fillStyle = '#14272d'; ctx.fillRect(x - width / 2, 407, width, 15);
+  ctx.fillStyle = '#b6d3bd'; ctx.fillText(text, x, 418); ctx.restore();
 }
 
 export const SHIP_PORT_EXTRA_ART_V87 = PORT_ART_V87;
