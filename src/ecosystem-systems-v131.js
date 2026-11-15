@@ -124,3 +124,13 @@ export function ecosystemDossierV131(state) {
     pressure: queen || hive ? state.pressure : state.integrity,
     artworkStatus: 'original-vector-prototype', canonExact: false, implementationStatus: 'partial' };
 }
+
+// V188: the HUD names the phase, not its internal id (« ORGANS », « NUCLEUS-1 »
+// were drawn as raw ids). French source; the English catalog carries each label.
+const ECOSYSTEM_PHASE_LABELS_V188 = Object.freeze({ choirs: 'CHŒURS', beacons: 'BALISES', extract: 'EXTRACTION',
+  organs: 'ORGANES', collapse: 'EFFONDREMENT', containment: 'CONFINEMENT', rescue: 'SAUVETAGE', colossus: 'COLOSSE', complete: 'TERMINÉ' });
+export function ecosystemPhaseLabelV188(phase) {
+  const staged = /^(mother|nucleus)-(\d+)$/.exec(String(phase));
+  if (staged) return `${staged[1] === 'mother' ? 'REINE-MÈRE' : 'NOYAU'} · PHASE ${staged[2]}`;
+  return ECOSYSTEM_PHASE_LABELS_V188[phase] || 'OPÉRATION';
+}

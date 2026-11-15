@@ -57,8 +57,11 @@ export const SPECIAL_OPERATION_COUNTS_V131 = Object.freeze({ total: SPECIAL_OPER
   playable: SPECIAL_OPERATIONS_V131.filter(o=>o.playable).length });
 const byCampaign = new Map(SPECIAL_OPERATIONS_V131.filter(o=>o.campaignId).map(o=>[o.campaignId,o]));
 export function getSpecialOperationByCampaignIdV131(id) { return byCampaign.get(id) || null; }
+// V188 owner decision (2026-11-15): Jeri's hive mission (« Le faux fils ») is solo;
+// the other hive chapters keep the selected squad.
+const JERI_SOLO_CAMPAIGN_ID_V188 = HIVE_CAMPAIGNS_V131.find(c=>c.specialOperationId==='jeri-false-son')?.id;
 export function isSoloSpecialOperationV131(id) {
-  return [BLACK_COCOON_CAMPAIGN_V121.id, APC_CONVOY_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id,
+  return [BLACK_COCOON_CAMPAIGN_V121.id, JERI_SOLO_CAMPAIGN_ID_V188, APC_CONVOY_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id,
     ...MECHA_CAMPAIGNS_V131.map(c=>c.id), ...ECOSYSTEM_CAMPAIGNS_V131.map(c=>c.id), ...LEGACY_CAMPAIGNS_V131.map(c=>c.id)].includes(id);
 }
 export function validateSpecialOperationsV131(campaigns) {

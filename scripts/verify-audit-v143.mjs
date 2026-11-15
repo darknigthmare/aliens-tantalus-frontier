@@ -62,8 +62,8 @@ test('MIRE keeps every stable ID and leaves original Frontier operations untouch
   assert.deepEqual(mapped.map(c => c.id), BEFORE.map(c => c.id));
   for (let i = 0; i < BEFORE.length; i++) if (BEFORE[i].mode !== 'MIRE') assert.equal(mapped[i], BEFORE[i]);
   assert.equal(validateContent().ok, true);
-  assert.equal(CAMPAIGNS.length, 455);
-  assert.equal(new Set(CAMPAIGNS.map(c => c.id)).size, 455);
+  assert.equal(CAMPAIGNS.length, 476); // V188 spec 005: + 4 Asphodèle station missions; spec 007: + 7 side missions, 6 contracts; spec 006: + 4 Act V missions
+  assert.equal(new Set(CAMPAIGNS.map(c => c.id)).size, 476);
 });
 for (const source of MIRE_SETTINGS_V143) test(`MIRE setting: ${source.source}`, () => {
   const entries = CAMPAIGNS.filter(c => c.mode === 'MIRE' && c.source === source.source);

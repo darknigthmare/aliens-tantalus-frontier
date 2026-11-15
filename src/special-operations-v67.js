@@ -28,7 +28,8 @@ export const SPECIAL_OPERATIONS_V67 = Object.freeze([
   }),
   freezeOperation({
     id: 'narrative-collectables',
-    promisedTitle: 'ARCHIVES NARRATIVES ÉTENDUES', kind: 'system', implementationStatus: 'partial', playable: true, productionOrder: 2,
+    // Player-facing chapter name from the bible (CAMPAGNE_PRINCIPALE.md §5.1, Acte I), as in narrative-collectables-v68.
+    promisedTitle: 'QZ-17 — LA CARGAISON FANTÔME', kind: 'system', implementationStatus: 'partial', playable: true, productionOrder: 2,
     campaignId: 'special-narrative-qz17',
     campaign: Object.freeze({
       pairId: null, mode: 'FRONTIER', worldId: 'world-05-lethe', objective: 'investigate the ghost cargo',

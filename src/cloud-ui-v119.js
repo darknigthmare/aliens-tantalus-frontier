@@ -1,5 +1,6 @@
 import { createCloudClientV119, createSaveTransportV119 } from './cloud-auth-v119.js';
 import { CloudSyncV119 } from './cloud-sync-v119.js';
+import { currentLanguageV185 } from './i18n-v185.js';
 const statuses = { local: 'LOCAL', pending: 'SYNC EN COURS', synced: 'SYNC OK', empty: 'VIDE', 'cloud-ready': 'VERSION CLOUD DISPONIBLE', conflict: 'CONFLIT', offline: 'HORS LIGNE', error: 'ERREUR — LOCAL CONSERVÉ', corrupt: 'CLOUD ILLISIBLE — LOCAL CONSERVÉ' };
 export class CloudUiV119 {
   constructor(root, options) {
@@ -87,7 +88,7 @@ export class CloudUiV119 {
         const remote = this.sync.remote[slot];
         const summary = (label, payload, revision) => {
           const p = document.createElement('p'); p.className = 'cloud-summary-v119';
-          const at = Number(payload?.updatedAt); const date = Number.isFinite(at) && at > 0 ? new Date(at).toLocaleString('fr-FR') : 'date non renseignée';
+          const at = Number(payload?.updatedAt); const date = Number.isFinite(at) && at > 0 ? new Date(at).toLocaleString(currentLanguageV185() === 'en' ? 'en-GB' : 'fr-FR') : 'date non renseignée';
           p.textContent = `${label} · ${payload ? `J${payload.clock?.day || 1} · ${payload.statistics?.campaigns || 0} opérations · ${date}` : 'emplacement vide'}${revision ? ` · révision ${revision}` : ''}`;
           row.append(p);
         };

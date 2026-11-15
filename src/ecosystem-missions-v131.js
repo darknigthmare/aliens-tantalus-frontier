@@ -4,7 +4,8 @@ import { sweepProjectileAabbV83 } from './projectile-collision-v83.js';
 import { updateEnemySupportStatusesV72 } from './gameplay-support-v72.js';
 import { ECOSYSTEM_OPERATIONS_V131, SAURIA_CASTES_V131, createEcosystemStateV131,
   validateEcosystemStateV131, advancePopulationV131, biosphereIntegrityV131,
-  ecosystemPhaseV131, ecosystemDossierV131 } from './ecosystem-systems-v131.js';
+  ecosystemPhaseV131, ecosystemDossierV131, ecosystemPhaseLabelV188 } from './ecosystem-systems-v131.js';
+import { autoTranslateV185 } from './i18n-auto-v185.js';
 
 const clone = value => structuredClone(value);
 const list = value => Array.isArray(value) ? value : [];
@@ -228,9 +229,27 @@ export function withEcosystemMissionsV131(BaseEngine) {
       if (state.bossDefeated && near(actor, exit, 115)) return { id: 'extract', text: 'MAINTENIR E 2 S · SAS D’EXTRACTION' };
       return null;
     }
+    // V188 "the prompt is always right": the ecosystem owns its scene; its E
+    // entry is one action of the shared selection, ranked by distance to its prop.
+    ecosystemChoiceV188(actor = this.player) {
+      const choice = this.selectInteractionTargetV188(actor);
+      return choice?.kind === 'ecosystem-v131' ? choice.target : null;
+    }
+    interactionCandidatesV188(actor = this.player) {
+      if (!this.isEcosystemV131()) return super.interactionCandidatesV188(actor);
+      const interaction = this.ecosystemInteractionV131(actor);
+      if (!interaction) return [];
+      const state = this.ecosystemV131, prop = interaction.id === 'supply' ? props.supply : interaction.id === 'focus' ? props.focus
+        : interaction.id.startsWith('nursery-') ? props.nursery[Number(interaction.id.at(-1))]
+          : interaction.id.startsWith('beacon-') ? props.beacons[Number(interaction.id.at(-1))]
+            : interaction.id === 'extract' ? (state.operationId === 'hive-world' ? props.insertion : props.extraction) : null;
+      const point = prop ? { x: prop.x, y: prop.floorY } : center(this.ecosystemActorV131(interaction.id) || actor);
+      return [{ kind: 'ecosystem-v131', category: 'action', target: interaction, prompt: interaction.text,
+        distance: Math.hypot(center(actor).x - point.x, center(actor).y - point.y) }];
+    }
     interact(actor = this.player) {
       if (!this.isEcosystemV131()) return super.interact(actor);
-      const interaction = this.ecosystemInteractionV131(actor);
+      const interaction = this.ecosystemCanActV131(actor) ? this.ecosystemChoiceV188(actor) : null;
       if (!interaction) return false;
       const state = this.ecosystemV131;
       if (interaction.id === 'supply') {
@@ -252,7 +271,7 @@ export function withEcosystemMissionsV131(BaseEngine) {
       if (!this.player?.alive && !(this.coopEnabled && this.coop?.alive)) { this.failMission('L’équipe ne peut plus rejoindre le sas.'); return; }
       if (!Number.isFinite(delta) || delta <= 0) return;
       const dt = Math.min(delta, .1), state = this.ecosystemV131;
-      const active = this.ecosystemCanActV131(this.player), interaction = active && this.keys.has('KeyE') ? this.ecosystemInteractionV131(this.player) : null;
+      const active = this.ecosystemCanActV131(this.player), interaction = active && this.keys.has('KeyE') ? this.ecosystemChoiceV188(this.player) : null;
       if (interaction && ['supply', 'focus'].includes(interaction.id) || interaction?.id.startsWith('beacon-')) this.interact();
       if (interaction && (interaction.id === 'extract' || interaction.id.startsWith('nursery-') || interaction.id.startsWith('eco131-population-'))) {
         if (state.interactionTarget !== interaction.id) { state.interactionTarget = interaction.id; state.interactionProgress = 0; }
@@ -516,6 +535,8 @@ export function withEcosystemMissionsV131(BaseEngine) {
       if (!checked.valid) return checked;
       const state = checked.state, expected = this.resumeIdentity || {}, identity = raw?.identity || {};
       const boss = raw.enemies?.find(actor => actor.id === 'eco131-boss');
+      // Any position inside the 5200 px arena is legal; the former 5150 cap rejected a marine at the right wall.
+      const maxX = Math.max(5150, Number(this.missionLevelBounds?.width) || 5200);
       const phases = state.operationId === 'queen-mother-song' ? 4 : 3, bossHealth = state.operationId === 'queen-mother-song' ? 600 : 540;
       const authored = list(this.ecosystemAuthoredActorsV131);
       const expectedKeys = ['id', 'role', 'x', 'floorY', 'targetIndex', 'caste'];
@@ -537,7 +558,7 @@ export function withEcosystemMissionsV131(BaseEngine) {
         || !Array.isArray(raw.enemies) || raw.enemies.length !== state.actors.length
         || new Set(raw.enemies.map(actor => actor.id)).size !== state.actors.length
         || raw.enemies.some(actor => !state.actors.some(descriptor => descriptor.id === actor.id)
-          || !Number.isFinite(actor.x) || actor.x < 0 || actor.x > 5150 || !Number.isFinite(actor.y) || actor.y < 0 || actor.y > 570
+          || !Number.isFinite(actor.x) || actor.x < 0 || actor.x > maxX || !Number.isFinite(actor.y) || actor.y < 0 || actor.y > 570
           || !Number.isFinite(actor.health) || actor.health < 0 || actor.health > 600 || typeof actor.alive !== 'boolean'
           || actor.alive !== (actor.health > 0))
         || state.targets.some((done, index) => done !== (raw.enemies.find(actor => actor.id === `eco131-target-${index}`)?.alive === false))
@@ -546,7 +567,7 @@ export function withEcosystemMissionsV131(BaseEngine) {
           || boss.health <= bossHealth * (1 - state.bossPhase / phases) - .001)
         || state.bossDefeated && state.bossPhase !== phases
         || state.population.some(member => ['dead', 'rescued'].includes(member.status) !== (raw.enemies.find(actor => actor.id === member.id)?.alive === false))
-        || !Number.isFinite(raw.player?.x) || raw.player.x < 0 || raw.player.x > 5150 || !Number.isFinite(raw.player.y) || raw.player.y < 0 || raw.player.y > 570)
+        || !Number.isFinite(raw.player?.x) || raw.player.x < 0 || raw.player.x > maxX || !Number.isFinite(raw.player.y) || raw.player.y < 0 || raw.player.y > 570)
         return { valid: false, reason: 'ecosystem-identity-mismatch' };
       return checked;
     }
@@ -585,7 +606,7 @@ export function withEcosystemMissionsV131(BaseEngine) {
     }
     phaseLabel() { return this.isEcosystemV131() ? ecosystemDossierV131(this.ecosystemV131).title : super.phaseLabel(); }
     objectiveProgressText() { return this.isEcosystemV131() ? ecosystemDossierV131(this.ecosystemV131).instruction : super.objectiveProgressText(); }
-    getInteractionPrompt() { return this.isEcosystemV131() ? this.ecosystemInteractionV131()?.text || '' : super.getInteractionPrompt(); }
+    getInteractionPrompt() { return this.isEcosystemV131() ? this.selectInteractionTargetV188(this.player)?.prompt || '' : super.getInteractionPrompt(); }
     getSnapshot() { return { ...super.getSnapshot(), ...(this.isEcosystemV131() ? { ecosystemV131: this.ecosystemSnapshotV131() } : {}) }; }
     getGameplayReport() { return { ...super.getGameplayReport(), ...(this.isEcosystemV131() ? { ecosystemV131: this.ecosystemSnapshotV131() } : {}) }; }
     getVisibleEnemyAtlasSheetsV65(enemies = this.getVisibleEnemiesV65()) {
@@ -660,7 +681,10 @@ export function withEcosystemMissionsV131(BaseEngine) {
       super.drawHud(ctx); if (!this.isEcosystemV131()) return;
       const state = this.ecosystemV131, dossier = ecosystemDossierV131(state);
       ctx.save(); ctx.fillStyle = '#091819ed'; ctx.fillRect(18, 113, 1235, 87); ctx.fillStyle = '#d0dfd4'; ctx.font = '700 13px monospace';
-      ctx.fillText(`${dossier.title} · ${dossier.pressureLabel} ${Math.round(dossier.pressure)}% · ${state.phase.toUpperCase()}`, 30, 134);
+      // V188: each part is translated on its own (the joined line has no catalog
+      // entry) and the phase is named, not drawn as its internal id.
+      const tr = autoTranslateV185;
+      ctx.fillText(`${tr(dossier.title)} · ${tr(dossier.pressureLabel)} ${Math.round(dossier.pressure)}% · ${tr(ecosystemPhaseLabelV188(state.phase))}`, 30, 134);
       ctx.font = '11px monospace'; ctx.fillText(dossier.instruction, 30, 155);
       const extra = state.operationId === 'hive-world' ? `SAS ORBITAL : ${Math.ceil(state.collapseRemaining)} S · L’ALERTE ≥70 FERME L’ARTÈRE BASSE ; ROUTE HAUTE ACCESSIBLE`
         : state.operationId === 'queen-mother-song' ? `NURSERIE ${state.nursery.filter(Boolean).length}/3 · BALISES ${state.beacons.filter(Boolean).length}/2 · DÉFENSE ${Math.floor(state.defenceElapsed)}/22 S`

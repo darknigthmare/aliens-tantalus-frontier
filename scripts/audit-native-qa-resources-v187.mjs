@@ -3,12 +3,14 @@
  * Continues V186 and admits exact reviewed QA/tooling bytes, never gameplay.
  * The standard 900 s wall / 360 s native / 45 s stall contract stays the default.
  * ci-slow4 changes only the wall cap to 360 * 4 s. A native physical receipt
- * remains mandatory. This terminal module imports no audit and has no receipt
+ * remains mandatory. V188 continues this chain without rewriting any of
+ * these receipts; its terminal module imports no audit and has no receipt
  * for itself. Historical source/workbook admissions do not inherit a CI pass.
  */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedTantalusPrioritiesDigestV188 } from './audit-tantalus-priorities-v188.mjs';
 
 const readRepository = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -86,11 +88,11 @@ export const NATIVE_QA_RESOURCES_SOURCE_ONLY_PATHS_V187 = Object.freeze([
 
 export function reviewedNativeQaResourcesDigestV187(path, endpoint) {
   const receipt = NATIVE_QA_RESOURCES_SUCCESSORS_V187[path];
-  if (!receipt) return endpoint;
+  if (!receipt) return reviewedTantalusPrioritiesDigestV188(path, endpoint);
   assert.equal(endpoint, receipt.previousSha256, 'Broken V186-to-V187 source chain: ' + path);
   assert.ok(validHash(receipt.currentSha256), 'Invalid V187 source digest: ' + path);
   assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A V187 successor must identify changed bytes: ' + path);
-  return receipt.currentSha256;
+  return reviewedTantalusPrioritiesDigestV188(path, receipt.currentSha256);
 }
 
 export function reviewedNativeQaDependencyGuardDigestV187(endpoint) {
@@ -122,7 +124,7 @@ export function verifyNativeQaResourcesV187(readSource = readRepository) {
     NATIVE_QA_DEPENDENCY_GUARD_SUCCESSOR_V187.previousSha256), 'Unreviewed V187 prerequisite guard');
   verifyNativeQaDependencyBodyV187(guard[0][0]);
   for (const [path, expected] of Object.entries(NATIVE_QA_PRESERVED_SHA256_V187)) {
-    assert.equal(sha(readSource(path)), expected, 'V187 must preserve these source bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedTantalusPrioritiesDigestV188(path, expected), 'V187 must preserve these source bytes: ' + path);
   }
   return Object.freeze({ successors: Object.keys(NATIVE_QA_RESOURCES_SUCCESSORS_V187).length,
     preserved: Object.keys(NATIVE_QA_PRESERVED_SHA256_V187).length });

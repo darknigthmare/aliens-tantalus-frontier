@@ -150,11 +150,22 @@ export class GameEngine extends CatalogGameEngine {
     if (this.mission?.state === 'active') this.updateObjectiveRuntime(delta);
   }
 
+  // V188: the vents an objective counts. A layer that hides its portals from
+  // this.vents during interact() (V52/V62 networks) keeps them counted here.
+  objectiveVentsV188() { return this.vents || []; }
+  // V188 owner decision (2026-11-15): the vent objective counts the controlled
+  // marine only. A V62 network portal also opens for an ally or an enemy that
+  // crawls through it (beginMissionVentTraversalV62); it counts once the player
+  // went through it (playerTraversedV188). A legacy vent has no network and only
+  // the player opens it.
+  objectiveVentMappedV188(vent) { return Boolean(vent?.open) && (!vent.portalId || vent.playerTraversedV188 === true); }
+  objectiveVentsMappedCountV188() { return this.objectiveVentsV188().filter((vent) => this.objectiveVentMappedV188(vent)).length; }
+
   updateObjectiveRuntime(delta) {
     const state = this.objectiveState;
     const runtime = this.objectiveRuntime;
     if (runtime.requirements.includes('power') && this.powerNode?.active) this.mission.objectives.power = true;
-    if (runtime.requirements.includes('route') && (this.inventory.securityKeys > 0 || this.vents.some((vent) => vent.open))) this.mission.objectives.route = true;
+    if (runtime.requirements.includes('route') && (this.inventory.securityKeys > 0 || this.objectiveVentsV188().some((vent) => vent.open))) this.mission.objectives.route = true;
     if (runtime.requirements.includes('boss') && !this.enemies.some((enemy) => enemy.isBoss && enemy.alive)) this.mission.objectives.boss = true;
     if (runtime.requirements.includes('archive') && this.archiveTerminal?.recovered) this.mission.objectives.archive = true;
     if (runtime.action === 'purge') {
@@ -167,7 +178,7 @@ export class GameEngine extends CatalogGameEngine {
     }
     if (runtime.action === 'track') state.trackerPulses = this.tracker.pulses;
     if (runtime.action === 'navigate') {
-      const opened = this.vents.filter((vent) => vent.open).length;
+      const opened = this.objectiveVentsMappedCountV188();
       if (opened >= runtime.ventTarget && !state.complete) this.markObjectiveAction('vent-route-mapped', { opened });
     }
     if ((runtime.action === 'hold' || runtime.action === 'defend') && state.started && !state.complete) this.updateHoldObjective(delta);
@@ -212,25 +223,52 @@ export class GameEngine extends CatalogGameEngine {
     this.onEvent({ type: 'objective-wave', objectiveId: this.objectiveRuntime.id, wave: tag, count });
   }
 
+  // V188 "the prompt is always right": objective nodes, the live capture and
+  // the start of a hold are actions of the shared E selection. They keep their
+  // historical priority (ahead of doors, terminals and extraction); a pickup
+  // takes E only when it is strictly nearer.
+  objectiveInteractionV188(actor = this.player) {
+    if (!actor?.alive || actor.downed) return null;
+    const rank = (target) => this.interactionRankDistanceV188(actor, target);
+    const node = (this.objectiveNodes || []).find((candidate) => !candidate.active && near(actor, candidate, 115));
+    if (node) return { kind: 'objective-node-v188', category: 'action', target: node, distance: rank(node),
+      prompt: node.kind === 'seal' ? 'E  ARMER LA CHARGE DE SCELLAGE' : node.kind === 'destroy-relay' ? 'E  SABOTER LE RELAIS NEURO-LINK' : 'E  SÉCURISER LA CIBLE' };
+    if (this.objectiveRuntime?.action === 'capture') {
+      const boss = (this.enemies || []).find((enemy) => enemy.isBoss && enemy.alive);
+      if (boss && near(actor, boss, 135)) return { kind: 'objective-capture-v188', category: 'action', target: boss, distance: rank(boss),
+        prompt: boss.health <= boss.maxHealth * 0.25 ? 'E  CAPTURER LE SPÉCIMEN VIVANT' : 'AFFAIBLIR LE SPÉCIMEN SOUS 25%' };
+    }
+    if ((this.objectiveRuntime?.action === 'hold' || this.objectiveRuntime?.action === 'defend') && this.objective
+      && near(actor, this.objective, 150) && !this.objectiveState?.started) {
+      return { kind: 'objective-hold-v188', category: 'action', target: this.objective, distance: rank(this.objective), prompt: 'E  COMMENCER LA TENUE DE ZONE' };
+    }
+    return null;
+  }
+
+  interactionCandidatesV188(actor = this.player) {
+    const list = super.interactionCandidatesV188(actor);
+    const entry = this.objectiveInteractionV188(actor);
+    if (entry) list.unshift(entry);
+    return list;
+  }
+
   interact(actor = this.player) {
     if (!actor?.alive || this.mission?.state !== 'active') return false;
-    const node = this.objectiveNodes.find((candidate) => !candidate.active && near(actor, candidate, 115));
-    if (node) return this.activateObjectiveNode(actor, node);
-    if (this.objectiveRuntime.action === 'capture') {
-      const boss = this.enemies.find((enemy) => enemy.isBoss && enemy.alive);
-      if (boss && near(actor, boss, 135)) {
-        if (boss.health > boss.maxHealth * 0.25) return this.locked('AFFAIBLIR LE SPÉCIMEN SOUS 25%');
-        boss.alive = false;
-        boss.captured = true;
-        boss.deathClock = 0;
-        this.objectiveState.captured = true;
-        this.objectiveState.complete = true;
-        this.mission.objectives.boss = true;
-        this.onEvent({ type: 'objective-action', objectiveId: this.objectiveRuntime.id, action: 'specimen-captured', enemyId: boss.id });
-        return true;
-      }
+    const choice = this.selectInteractionTargetV188(actor);
+    if (choice?.kind === 'objective-node-v188') return this.activateObjectiveNode(actor, choice.target);
+    if (choice?.kind === 'objective-capture-v188') {
+      const boss = choice.target;
+      if (boss.health > boss.maxHealth * 0.25) return this.locked('AFFAIBLIR LE SPÉCIMEN SOUS 25%');
+      boss.alive = false;
+      boss.captured = true;
+      boss.deathClock = 0;
+      this.objectiveState.captured = true;
+      this.objectiveState.complete = true;
+      this.mission.objectives.boss = true;
+      this.onEvent({ type: 'objective-action', objectiveId: this.objectiveRuntime.id, action: 'specimen-captured', enemyId: boss.id });
+      return true;
     }
-    if ((this.objectiveRuntime.action === 'hold' || this.objectiveRuntime.action === 'defend') && near(actor, this.objective, 150) && !this.objectiveState.started) {
+    if (choice?.kind === 'objective-hold-v188') {
       const missing = this.missingObjectiveRequirement({ ignoreAction: true });
       if (missing) return this.locked(missing);
       this.objectiveState.started = true;
@@ -301,7 +339,9 @@ export class GameEngine extends CatalogGameEngine {
     if (requirements.has('doors') && this.doors.filter((door) => door.open).length < runtime.doorTarget) return `SAS OUVERTS ${this.doors.filter((door) => door.open).length}/${runtime.doorTarget}`;
     if (requirements.has('tracker') && this.tracker.pulses < runtime.trackerPulses) return `TRACES APEX ${this.tracker.pulses}/${runtime.trackerPulses}`;
     if (requirements.has('capture') && !state.captured) return 'SPÉCIMEN VIVANT NON CAPTURÉ';
-    if (requirements.has('vent') && this.vents.filter((vent) => vent.open).length < runtime.ventTarget) return `CONDUITS CARTOGRAPHIÉS ${this.vents.filter((vent) => vent.open).length}/${runtime.ventTarget}`;
+    const ventsOpenV188 = requirements.has('vent') ? this.objectiveVentsMappedCountV188() : 0;
+    // A mapped route already completed (an older save included) stays completed.
+    if (requirements.has('vent') && !(runtime.action === 'navigate' && state.complete) && ventsOpenV188 < runtime.ventTarget) return `CONDUITS CARTOGRAPHIÉS ${ventsOpenV188}/${runtime.ventTarget}`;
     if (requirements.has('vehicle')) {
       const recovered = this.vehicle?.active && !this.vehicle.destroyed && Math.abs(this.vehicle.x - this.objective.x) < 520;
       if (!recovered) return runtime.action === 'escort' ? 'CONVOI HORS DE LA ZONE' : 'VÉHICULE NON SÉCURISÉ';
@@ -366,13 +406,8 @@ export class GameEngine extends CatalogGameEngine {
   }
 
   getInteractionPrompt(actor = this.player) {
-    const node = this.objectiveNodes?.find((candidate) => !candidate.active && near(actor, candidate, 115));
-    if (node) return node.kind === 'seal' ? 'E  ARMER LA CHARGE DE SCELLAGE' : node.kind === 'destroy-relay' ? 'E  SABOTER LE RELAIS NEURO-LINK' : 'E  SÉCURISER LA CIBLE';
-    if (this.objectiveRuntime?.action === 'capture') {
-      const boss = this.enemies.find((enemy) => enemy.isBoss && enemy.alive);
-      if (boss && near(actor, boss, 135)) return boss.health <= boss.maxHealth * 0.25 ? 'E  CAPTURER LE SPÉCIMEN VIVANT' : 'AFFAIBLIR LE SPÉCIMEN SOUS 25%';
-    }
-    if ((this.objectiveRuntime?.action === 'hold' || this.objectiveRuntime?.action === 'defend') && near(actor, this.objective, 150) && !this.objectiveState.started) return 'E  COMMENCER LA TENUE DE ZONE';
+    const choice = actor?.alive ? this.selectInteractionTargetV188(actor) : null;
+    if (/^objective-(node|capture|hold)-v188$/.test(choice?.kind || '')) return choice.prompt;
     return super.getInteractionPrompt(actor);
   }
 
@@ -420,7 +455,7 @@ export class GameEngine extends CatalogGameEngine {
     if (runtime.action === 'track') return `PULSES TRACKER ${this.tracker.pulses}/${runtime.trackerPulses}`;
     if (runtime.nodeCount) return `ACTIONS ${state.nodesActivated}/${runtime.nodeCount}`;
     if (runtime.action === 'board') return `SAS ${this.doors.filter((door) => door.open).length}/${runtime.doorTarget}`;
-    if (runtime.action === 'navigate') return `CONDUITS ${this.vents.filter((vent) => vent.open).length}/${runtime.ventTarget}`;
+    if (runtime.action === 'navigate') return `CONDUITS ${state?.complete ? runtime.ventTarget : Math.min(runtime.ventTarget, this.objectiveVentsMappedCountV188())}/${runtime.ventTarget}`;
     if (runtime.action === 'escape') return `QUARANTAINE ${Math.max(0, Math.ceil(runtime.timeLimit - this.mission.elapsed))}s`;
     return this.missingObjectiveRequirement() || 'EXTRACTION DISPONIBLE';
   }

@@ -164,7 +164,7 @@ test('V185 crew interaction prompts translate the action and keep the crew name'
   assert.equal(actions.length, 16);
   for (const key of actions) assert.ok(roster.includes(`'${STRINGS_V185.fr[key]}')`), key);
   setLanguageV185('en', { storage: memoryStorage(), document: null });
-  assert.equal(translateHubPromptV185('E — Extraire le renseignement synthétique · DAVID-8R'), 'E — Extract the synthetic intelligence · DAVID-8R');
+  assert.equal(translateHubPromptV185('E — Extraire le renseignement synthétique · DAVID-8R'), 'E — Recover the synthetic\'s intel · DAVID-8R');
   assert.equal(translateHubPromptV185('E — Inconnu · Rook'), 'E — Inconnu · Rook');
   assert.equal(translateHubPromptV185('F / ENTRÉE — TIRER · 2 MENACES'), 'F / ENTER — FIRE · 2 THREATS');
   setLanguageV185('fr', { storage: memoryStorage(), document: null });

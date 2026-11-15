@@ -21,6 +21,8 @@ import { playerCatalogStatsV110, playerCatalogNameV110 } from './player-surfaces
 import { getVehicleShowroomV119 } from './vehicle-showroom-v119.js';
 import { resolveAlienBaseDossierV1, resolveAlienBaseIdentityProposalV1, resolveAlienBaseMasterEntityV1, resolveAlienBaseWeaponReferenceV1 } from './alien-base-bridge-v1.js';
 import { resolveWeaponReferenceCoverageV122 as resolveWeaponReferenceCoverageV120 } from './weapon-reference-coverage-v122.js';
+import { groupLabelV188, catalogValueLabelV188 } from './group-glossary-v188.js';
+import { currentLanguageV185 } from './i18n-v185.js';
 
 const importWalkV107 = id => {
   const art = getEnemyStaticPoseV96(id), walk = getEnemyImportAnimationV107(art), attack = getEnemyImportAttackV109(art);
@@ -163,20 +165,25 @@ export function formatCatalogLabelV62(key) {
     .replace(/^./u, (letter) => letter.toUpperCase());
 }
 
-export function formatCatalogValueV62(value) {
+// V188: an optional { key, catalog } context names the field, so an enum id
+// (provenance, rarity, family…) reads through the bilingual value glossary.
+export function formatCatalogValueV62(value, context = {}) {
   if (value === CATALOG_UNKNOWN_V62) return UNKNOWN_LABEL;
+  const glossary = context.key ? catalogValueLabelV188(context.key, value, { catalog: context.catalog }) : null;
+  if (glossary) return glossary;
   if (typeof value === 'string' && Object.hasOwn(DISPLAY_VALUES_V89, value)) return DISPLAY_VALUES_V89[value];
   if (typeof value === 'boolean') return value ? 'OUI' : 'NON';
   if (Array.isArray(value)) {
     return value.length
-      ? value.map((entry) => formatCatalogValueV62(entry)).filter(Boolean).join(' · ')
+      ? value.map((entry) => formatCatalogValueV62(entry, context)).filter(Boolean).join(' · ')
       : null;
   }
-  if (typeof value === 'number') return new Intl.NumberFormat('fr-FR', {
+  // V188: numbers follow the chosen language (7,7 in French, 7.7 in English).
+  if (typeof value === 'number') return new Intl.NumberFormat(currentLanguageV185() === 'en' ? 'en-GB' : 'fr-FR', {
     maximumFractionDigits: 2
   }).format(value);
   if (typeof value === 'object' && value) return visibleEntries(value)
-    .map(([key, entry]) => `${formatCatalogLabelV62(key)}: ${formatCatalogValueV62(entry)}`)
+    .map(([key, entry]) => `${formatCatalogLabelV62(key)}: ${formatCatalogValueV62(entry, { ...context, key })}`)
     .filter((entry) => !entry.endsWith(': null'))
     .join(' · ') || null;
   return isRenderableValue(value) ? String(value) : null;
@@ -293,14 +300,41 @@ function createElement(documentRef, tagName, className = '', text = null) {
   return element;
 }
 
+// V188: a label and its provenance text joined by ' — ' are kept in separate
+// spans, so the English layer translates each known part. textContent is unchanged.
+function appendTextPartsV188(documentRef, element, parts) {
+  for (const part of parts) if (part) element.append(createElement(documentRef, 'span', '', part));
+  return element;
+}
+
+// V188: player view of the vehicle seats: one count per station role, not the
+// raw seat ids and action ids (the stations section lists the actions).
+const seatSummaryPartsV188 = seats => {
+  const counts = new Map();
+  for (const seat of seats) counts.set(seat.role, (counts.get(seat.role) || 0) + 1);
+  return [...counts].flatMap(([role, count], index) => [...(index ? [' · '] : []),
+    catalogValueLabelV188('seatRole', role) || role, ` ×${count}`]);
+};
+
+// Enum ids shown beside their label in developer mode, never to the player.
+const rawEnumIdsV188 = (key, rawValue, catalog) => (Array.isArray(rawValue) ? rawValue : [rawValue])
+  .filter(entry => typeof entry === 'string' && catalogValueLabelV188(key, entry, { catalog }));
+
 function appendDefinitionRows(documentRef, target, values, options = {}) {
   for (const [key, rawValue] of visibleEntries(values)) {
     if (key === 'encounterWorldIds' && values.habitats?.length) continue;
-    const value = formatCatalogValueV62(rawValue);
+    const playerSeats = key === 'seats' && options.player && Array.isArray(rawValue) && rawValue.length;
+    const value = playerSeats ? seatSummaryPartsV188(rawValue).join('') : formatCatalogValueV62(rawValue, { key, catalog: options.catalog });
     if (value === null) continue;
     const row = createElement(documentRef, 'div', 'catalog-v62__data-row');
     const term = createElement(documentRef, 'dt', '', formatCatalogLabelV62(key));
-    const description = createElement(documentRef, 'dd', rawValue === CATALOG_UNKNOWN_V62 ? 'catalog-v62__unknown' : '', value);
+    const description = createElement(documentRef, 'dd', rawValue === CATALOG_UNKNOWN_V62 ? 'catalog-v62__unknown' : '', playerSeats ? null : value);
+    // Separate spans keep each label a known French text for the English layer.
+    if (playerSeats) appendTextPartsV188(documentRef, description, seatSummaryPartsV188(rawValue));
+    else if (options.technical) {
+      const ids = rawEnumIdsV188(key, rawValue, options.catalog);
+      if (ids.length) description.append(createElement(documentRef, 'code', 'catalog-v62__enum-id', ` ${ids.join(' · ')}`));
+    }
     if (options.status === 'canon') description.dataset.factStatus = 'canon';
     if (options.status === 'gameplay') description.dataset.factStatus = 'gameplay';
     row.append(term, description);
@@ -308,11 +342,13 @@ function appendDefinitionRows(documentRef, target, values, options = {}) {
   }
 }
 
-function renderTaxonomyPath(documentRef, record, technical = false) {
+function renderTaxonomyPath(documentRef, record, technical = false, developer = false) {
   const list = createElement(documentRef, 'ol', 'catalog-v62__breadcrumb');
   for (const segment of record.hierarchySegments) {
+    // V188: group ids (acid, stalker, vehicle…) read through the bilingual glossary.
+    const group = developer ? null : groupLabelV188(segment.label, { catalog: record.catalog, kind: segment.kind });
     const item = createElement(documentRef, 'li', segment.label === CATALOG_UNKNOWN_V62 ? 'is-unknown' : '',
-      formatCatalogValueV62(technical ? segment.label : playerCatalogNameV110(segment.label)));
+      group || formatCatalogValueV62(technical ? segment.label : playerCatalogNameV110(segment.label)));
     item.dataset.kind = segment.kind;
     list.append(item);
   }
@@ -701,7 +737,9 @@ export class CatalogWorkbenchV62 {
     if (this.state.selectedEntryId && nodeContainsEntry(node, this.state.selectedEntryId)) row.classList.add('is-in-path');
     const chevron = createElement(this.document, 'span', 'catalog-v62__tree-chevron', node.children.length ? (expanded ? '−' : '+') : '·');
     chevron.setAttribute('aria-hidden', 'true');
-    const text = createElement(this.document, 'span', 'catalog-v62__tree-name', formatCatalogValueV62(this.developerModeV110 ? node.label : playerCatalogNameV110(node.label)));
+    const group = this.developerModeV110 ? null : groupLabelV188(node.label, node);
+    const text = createElement(this.document, 'span', 'catalog-v62__tree-name', group || formatCatalogValueV62(this.developerModeV110 ? node.label : playerCatalogNameV110(node.label)));
+    if (group) text.dataset.groupId = node.label;
     if (node.label === CATALOG_UNKNOWN_V62) text.classList.add('catalog-v62__unknown');
     const count = createElement(this.document, 'span', 'catalog-v62__tree-count', String(visibleCount));
     row.append(chevron, text, count);
@@ -757,11 +795,12 @@ export class CatalogWorkbenchV62 {
     if (!preview) this.renderMissingMedia(media, record);
     const body = createElement(this.document, 'span', 'catalog-v62__card-body');
     body.append(
-      createElement(this.document, 'span', 'catalog-v62__eyebrow', `${CATALOG_LABELS_V62[record.catalog]} · ${formatCatalogValueV62(record.taxonomy.family)}`),
+      createElement(this.document, 'span', 'catalog-v62__eyebrow', `${CATALOG_LABELS_V62[record.catalog]} · ${(!this.developerModeV110 && groupLabelV188(record.taxonomy.family, { catalog: record.catalog, kind: 'family' })) || formatCatalogValueV62(record.taxonomy.family)}`),
       createElement(this.document, 'strong', 'catalog-v62__card-title', this.developerModeV110 ? record.name : playerCatalogNameV110(record.name)),
       createElement(this.document, 'span', 'catalog-v62__card-type', record.taxonomy.type === CATALOG_UNKNOWN_V62 ? UNKNOWN_LABEL : this.developerModeV110 ? record.taxonomy.type : playerCatalogNameV110(record.taxonomy.type))
     );
-    if (this.developerModeV110 || record.catalog !== 'enemies') body.append(createElement(this.document, 'span', 'catalog-v62__card-id', record.id));
+    // V188: content ids stay in developer mode; players read the name above.
+    if (this.developerModeV110) body.append(createElement(this.document, 'span', 'catalog-v62__card-id', record.id));
     select.append(media, body);
     if (record.catalogPolicyV105?.archived) body.append(createElement(this.document, 'span', 'catalog-v62__card-type', 'ARCHIVE HISTORIQUE'));
     if (record.documentaryReferenceV105) body.append(createElement(this.document, 'span', 'catalog-v62__card-type', 'ORIGINAL DOCUMENTAIRE · HORS COMBAT'));
@@ -837,7 +876,8 @@ export class CatalogWorkbenchV62 {
       createElement(this.document, 'span', 'catalog-v62__eyebrow', CATALOG_LABELS_V62[record.catalog]),
       createElement(this.document, 'h3', '', technical ? record.name : playerCatalogNameV110(record.name))
     );
-    if (technical) heading.append(createElement(this.document, 'code', '', record.id));
+    // V188: the record id is developer evidence, also for weapon, equipment and vehicle dossiers.
+    if (this.developerModeV110) heading.append(createElement(this.document, 'code', '', record.id));
     header.append(heading);
     this.detail.append(header);
     // Player-facing illustration limits belong beside the image, not in the
@@ -845,7 +885,8 @@ export class CatalogWorkbenchV62 {
     if (record.visual?.illustrationNote) {
       const caption = createElement(this.document, 'p', 'catalog-v62__fact-note');
       caption.dataset.illustrationCaption = record.id;
-      caption.textContent = [record.visual.visualLabel, record.visual.illustrationNote].filter(Boolean).join(' — ');
+      const parts = [record.visual.visualLabel, record.visual.illustrationNote].filter(Boolean);
+      appendTextPartsV188(this.document, caption, parts.flatMap((part, index) => index ? [' — ', part] : [part]));
       this.detail.append(caption);
     }
     if (record.catalog === 'weapons') this.renderWeaponReferenceV120(record);
@@ -868,13 +909,13 @@ export class CatalogWorkbenchV62 {
     if (animationControls.children.length) this.detail.append(animationControls);
     if (technical && record.catalogPolicyV105?.note) this.detail.append(createElement(this.document, 'p', 'catalog-v62__fact-note', record.catalogPolicyV105.note));
     if (record.catalog === 'enemies' && !record.documentaryReferenceV105) this.renderGameplayScaleV72(record);
-    this.detail.append(renderTaxonomyPath(this.document, record, technical));
+    this.detail.append(renderTaxonomyPath(this.document, record, technical, Boolean(this.developerModeV110)));
     if (record.catalogPolicyV105?.personnel) {
       const classification = this.renderSection(['synthetic', 'automaton'].includes(record.taxonomy.family)
         ? 'IDENTIFICATION DE L’UNITÉ' : record.taxonomy.family === 'human' ? 'IDENTIFICATION DU PERSONNEL' : 'IDENTIFICATION DE L’ORGANISME', 'classification');
       const data = createElement(this.document, 'dl', 'catalog-v62__data-list');
       appendDefinitionRows(this.document, data, { family: record.taxonomy.family, stage: record.taxonomy.stage,
-        role: record.taxonomy.role, faction: record.taxonomy.faction });
+        role: record.taxonomy.role, faction: record.taxonomy.faction }, { catalog: record.catalog, technical: Boolean(this.developerModeV110), player: !this.developerModeV110 });
       classification.append(data); this.detail.append(classification);
     }
 
@@ -886,8 +927,11 @@ export class CatalogWorkbenchV62 {
       this.detail.append(observations);
     }
     const canonData = createElement(this.document, 'dl', 'catalog-v62__data-list');
-    if (technical) appendDefinitionRows(this.document, canonData, record.canonFacts.source, { status: 'canon' });
-    appendDefinitionRows(this.document, canonData, record.canonFacts.claims, { status: 'canon' });
+    // Weapon, equipment and vehicle dossiers show their source rows to the player
+    // too (technical above); only developer mode adds the raw enum ids.
+    const valueOptions = { catalog: record.catalog, technical: Boolean(this.developerModeV110), player: !this.developerModeV110 };
+    if (technical) appendDefinitionRows(this.document, canonData, record.canonFacts.source, { status: 'canon', ...valueOptions });
+    appendDefinitionRows(this.document, canonData, record.canonFacts.claims, { status: 'canon', ...valueOptions });
     canonSection.append(canonData);
     if (technical || canonData.children.length) this.detail.append(canonSection);
 
@@ -897,13 +941,14 @@ export class CatalogWorkbenchV62 {
       const walk = importWalkV107(record.id);
       appendDefinitionRows(this.document, gameplayData, !technical ? playerCatalogStatsV110(record.gameplayStats) : walk
         ? { ...record.gameplayStats, animationStatus: walk.label, visualMode: 'Aperçu fixe du dossier ; marche animée adaptée en jeu' }
-        : record.gameplayStats, { status: 'gameplay' });
+        : record.gameplayStats, { status: 'gameplay', ...valueOptions });
       gameplaySection.append(gameplayData); this.detail.append(gameplaySection);
     }
     this.renderCombatBehaviorV89(record);
     this.renderBehaviorProfileV119(record);
 
-    if (technical) this.renderMediaSection(record);
+    // V188: sheet ids, clip ids and identity statuses stay developer evidence.
+    if (this.developerModeV110) this.renderMediaSection(record);
     else if (record.visualReferenceV106?.sourceCredit) this.detail.append(createElement(this.document, 'p', 'catalog-v62__fact-note', `Référence visuelle : ${record.visualReferenceV106.sourceCredit}`));
     this.renderBiologySection(record);
     this.renderSizeSection(record);

@@ -403,11 +403,21 @@ export function withWeaponActionsV131(Base) {
           y: item.y - actor.y - actor.h / 2 }, world(this)));
     }
 
+    // V188 shared E selection: an arrow or harpoon is a pickup, chosen only when nearest.
+    interactionCandidatesV188(actor = this.player) {
+      const list = super.interactionCandidatesV188(actor);
+      const item = this.recoverableWeaponsV131?.[this.recoverableWeaponIndexV131(actor)];
+      if (item) list.push({ kind: 'recoverable-weapon-v131', category: 'pickup', target: item,
+        distance: this.interactionRankDistanceV188(actor, { x: item.x, y: item.y, w: 0, h: 0 }),
+        prompt: this.weaponActionProfileV131(actor)?.resource === 'harpoons' ? 'E  RÉCUPÉRER UN HARPON' : 'E  RÉCUPÉRER UNE FLÈCHE' });
+      return list;
+    }
+
     interact(actor = this.player) {
-      const result = super.interact(actor);
-      if (result) return result;
+      // A locked door or a refused terminal must not fall through to a pickup.
+      if (this.selectInteractionTargetV188(actor)?.kind !== 'recoverable-weapon-v131') return super.interact(actor);
       const index = this.recoverableWeaponIndexV131(actor);
-      if (index < 0) return result;
+      if (index < 0) return false;
       const [item] = this.recoverableWeaponsV131.splice(index, 1);
       actor.ammoReserve = finite(actor.ammoReserve) + 1;
       this.setInteractionAnimation(actor, 'ground-interact', .4);
@@ -450,9 +460,11 @@ export function withWeaponActionsV131(Base) {
     getInteractionPrompt(actor = this.player) {
       const prompt = super.getInteractionPrompt(actor), profile = this.weaponActionProfileV131(actor);
       if (!profile || prompt && prompt !== 'S  COUVERTURE · F  TIR · R  RECHARGER') return prompt;
+      // V188: "E  RÉCUPÉRER" is named only when E would really recover an arrow or harpoon.
+      const recoverable = this.selectInteractionTargetV188(actor)?.kind === 'recoverable-weapon-v131';
       const action = profile.kind === 'stream' ? 'F  PROJETER LA FLAMME · R  CHANGER LE RÉSERVOIR'
-        : profile.resource === 'arrows' ? 'F  BANDER ET TIRER · E  RÉCUPÉRER UNE FLÈCHE'
-          : profile.resource === 'harpoons' ? 'F  TIRER · E  RÉCUPÉRER UN HARPON'
+        : profile.resource === 'arrows' ? recoverable ? 'F  BANDER ET TIRER · E  RÉCUPÉRER UNE FLÈCHE' : 'F  BANDER ET TIRER'
+          : profile.resource === 'harpoons' ? recoverable ? 'F  TIRER · E  RÉCUPÉRER UN HARPON' : 'F  TIRER'
             : profile.charge ? 'F  CHARGER ET TIRER · R  RECHARGER' : 'F  TIRER · R  RECHARGER';
       return prompt ? `S  COUVERTURE · ${action}` : action;
     }

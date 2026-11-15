@@ -138,10 +138,15 @@ test('the real12h30 native timetable cannot strand a deck3 traveller behind the 
   const hub = new NativeTransit(); hub.start({ deck: 3, roomId: 'reactor' });
   hub.npcRoutineResolutionsV62 = new Map(NPC_IDENTITIES_V62.map(identity => [identity.crewId,
     resolveNpcRoutineV62(identity.crewId, { clock: { day: 1, hour: 12.5 } })]));
-  const destination = liftAt(2), occupants = liftDestinationPeersV163(hub, 2)
+  const destination = liftAt(2), onLanding = () => liftDestinationPeersV163(hub, 2)
     .filter(p => p.roomId === destination.roomId && p.x < destination.x + 22 && p.x + p.w > destination.x - 22);
-  assert.deepEqual(occupants.map(p => p.crewId).sort(), ['crew-02-tamsin-velez']);
-  assert.ok(occupants.every(p => p.mobile === false && p.x === 2350));
+  // V188: the idle armory cohort used to spread Tamsin onto the landing (x 2350), holding
+  // "ARRIVÉE OCCUPÉE" for the whole routine phase. Idle posts now keep lift landings clear.
+  assert.deepEqual(onLanding(), [], 'no idle crew post on the lift landing');
+  // A stationary body that really stands in the cabin still refuses without stranding the traveller.
+  const peer = { crewId: 'crew-02-tamsin-velez', roomId: destination.roomId, x: 2350, y: 532, w: 44, h: 92, mobile: false, alive: true };
+  hub.getSnapshot = () => ({ npcServiceRoutesV161: { routes: { occupied: { actor: peer } } } });
+  assert.deepEqual(onLanding().map(p => p.crewId), ['crew-02-tamsin-velez']);
   const before = structuredClone(hub.player), resolutions = [...hub.npcRoutineResolutionsV62];
   assert.equal(hub.useLift(-1), false); tick(hub, 2400);
   assert.equal(hub.hubLiftTransitV163.trip, null); assert.equal(hub.state.deck, 3);

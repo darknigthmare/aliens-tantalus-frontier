@@ -36,27 +36,54 @@ function observation(){const h=globalThis.__ATF_HUB__;return h?{running:h.runnin
  lift:h.nearestLift?.()?.shaftId||null,doors:h.doorStates.map(d=>({id:d.id,progress:d.progress}))}:null;}
 const snapshot=()=>page.evaluate(observation);
 async function capture(name){await page.locator('#hub-canvas').screenshot({path:join(output,name)});return name;}
-async function walkTo(x){const before=await snapshot();if(Math.abs(before.player.x-x)<8)return;
- const direction=x>before.player.x?'KeyD':'KeyA',right=x>before.player.x;
+// V188 timing: the hub now owns lift journeys (V163 boarding → closing →
+// travel → opening) and bulkhead closing (V142). Input is cleared while any of
+// them runs, so each key is sent only once the runtime reports it ready,
+// instead of after a fixed delay.
+const hubReadyV188=()=>{const h=globalThis.__ATF_HUB__;return Boolean(h?.running&&!h.annexTransitionV71&&!h.hubDoorClosingV142
+ &&!h.hubDoorBlockedV142&&!h.hubLiftTransitV163?.trip);};
+async function waitHubReady(timeout=15000){await page.waitForFunction(hubReadyV188,null,{timeout,polling:'raf'});}
+// A bulkhead or lift refuses departure while a crew member occupies the far
+// side ("SAS · PASSAGE OCCUPÉ — PATIENTEZ", V142/V163). That is the game asking
+// to wait, so the key is pressed again once the runtime is ready, until the
+// transition really starts or the route stays blocked for the whole window.
+async function pressUntilStarted(key,started,arg=null,timeout=30000){const deadline=Date.now()+timeout;
+ for(let attempt=1;;attempt++){await waitHubReady(Math.max(1000,deadline-Date.now()));await page.keyboard.press(key);
+  try{await page.waitForFunction(started,arg,{timeout:1500,polling:'raf'});return attempt;}catch(error){
+   if(Date.now()>deadline)throw Error(`${key} refused for ${timeout} ms: ${(await snapshot())?.prompt}`,{cause:error});}}}
+// Movement contract (hub-v71-runtime): sprint 370 px/s, ground acceleration
+// 15/s, so the body coasts about 370/15 ≈ 25 px after release. Keys are released
+// that far ahead of the target; the tolerance adds up to 120 ms of input/frame
+// latency at full sprint (≈ 44 px) to that braking distance.
+const SPRINT_SPEED_V188=370,GROUND_ACCELERATION_V188=15,INPUT_LATENCY_S_V188=.12;
+const BRAKE_PX_V188=SPRINT_SPEED_V188/GROUND_ACCELERATION_V188;
+const WALK_TOLERANCE_PX_V188=Math.ceil(BRAKE_PX_V188+SPRINT_SPEED_V188*INPUT_LATENCY_S_V188);
+async function walkTo(x){await waitHubReady();const before=await snapshot();if(Math.abs(before.player.x-x)<8)return;
+ const direction=x>before.player.x?'KeyD':'KeyA',right=x>before.player.x,lead=Math.min(BRAKE_PX_V188,Math.abs(before.player.x-x)/2);
  await page.keyboard.down('ShiftLeft');await page.keyboard.down(direction);
- try{await page.waitForFunction(target=>{const h=globalThis.__ATF_HUB__,p=h?.player;return p&&(target.right?p.x>=target.x-6:p.x<=target.x+6);},
-  {x,right},{timeout:Math.max(12000,Math.abs(before.player.x-x)/190*1000+8000),polling:'raf'});
+ try{await page.waitForFunction(target=>{const h=globalThis.__ATF_HUB__,p=h?.player;return p&&(target.right?p.x>=target.x-target.lead:p.x<=target.x+target.lead);},
+  {x,right,lead},{timeout:Math.max(12000,Math.abs(before.player.x-x)/SPRINT_SPEED_V188*1000*2+8000),polling:'raf'});
  }catch(error){const after=await snapshot();await capture('blocked-route.png');throw Error(`Walking route blocked: x${before.player.x} to ${x}; now ${after.player.x}, ${after.prompt}`,{cause:error});
  }finally{await page.keyboard.up(direction);await page.keyboard.up('ShiftLeft');}
- await page.waitForTimeout(180);const after=await snapshot();assert.ok(Math.abs(after.player.x-x)<55,`Unexpected walking overshoot: ${after.player.x} vs ${x}`);
+ // Settled = the runtime zeroed the horizontal velocity, not a fixed pause.
+ await page.waitForFunction(()=>globalThis.__ATF_HUB__?.player?.vx===0,null,{timeout:5000,polling:'raf'});
+ const after=await snapshot();assert.ok(Math.abs(after.player.x-x)<WALK_TOLERANCE_PX_V188,`Unexpected walking overshoot: ${after.player.x} vs ${x} (tolerance ${WALK_TOLERANCE_PX_V188} px)`);
  assert.equal(after.player.health,100);assert.equal(after.player.shockHits,0);assert.equal(after.player.y,532);
 }
 async function visitAnnex(annex){const door=await page.evaluate(id=>{const door=globalThis.__ATF_HUB__.getParentAnnexDoorV71(id);return {bounds:{...door.bounds},id:door.annexId};},annex.id);
  await walkTo(door.bounds.x+door.bounds.w/2-22);assert.equal((await snapshot()).contact,annex.id);
- const entry=await capture(`${annex.id}-door.png`);await page.keyboard.press('KeyE');
- await page.waitForFunction(id=>globalThis.__ATF_HUB__.currentAnnexV71?.()?.id===id&&!globalThis.__ATF_HUB__.annexTransitionV71,annex.id,{timeout:12000});
+ const entry=await capture(`${annex.id}-door.png`);
+ await pressUntilStarted('KeyE',id=>{const h=globalThis.__ATF_HUB__;return Boolean(h.annexTransitionV71||h.currentAnnexV71?.()?.id===id);},annex.id);
+ await page.waitForFunction(id=>globalThis.__ATF_HUB__.currentAnnexV71?.()?.id===id&&!globalThis.__ATF_HUB__.annexTransitionV71,annex.id,{timeout:12000});await waitHubReady();
  const inside=await snapshot();await capture(`${annex.id}-inside.png`);
  const stationX=Math.max(100,Math.min(annex.world.width-100,annex.station.bounds.x+annex.station.bounds.w+10));
  await walkTo(stationX);const atStation=await snapshot();assert.equal(atStation.activeAnnex,annex.id);
  const station=await capture(`${annex.id}-station.png`);
  const exitX=annex.entranceLocalX+(annex.entranceSide==='west'?annex.entrance.w/2+16:-annex.entrance.w/2-60);
- await walkTo(exitX);await page.keyboard.press('KeyE');
- await page.waitForFunction(()=>!globalThis.__ATF_HUB__.currentAnnexV71?.()&&!globalThis.__ATF_HUB__.annexTransitionV71,{timeout:12000});
+ await walkTo(exitX);
+ await pressUntilStarted('KeyE',()=>{const h=globalThis.__ATF_HUB__;return Boolean(h.annexTransitionV71||!h.currentAnnexV71?.());});
+ // The options object was passed as the page argument, leaving the 30 s default.
+ await page.waitForFunction(()=>!globalThis.__ATF_HUB__.currentAnnexV71?.()&&!globalThis.__ATF_HUB__.annexTransitionV71,null,{timeout:12000});await waitHubReady();
  const returned=await snapshot();assert.equal(returned.roomId,annex.parentRoomId);assert.equal(returned.player.y,532);
  report.annexes.push({id:annex.id,entry,station,inside,atStation,returned});console.log(JSON.stringify({annex:annex.id,status:'walked-and-returned'}));
 }
@@ -68,17 +95,19 @@ async function main(){await fs.mkdir(output,{recursive:true});const module=await
  await page.locator('[data-view="settings"]').click();const idle=fixture();await fs.writeFile(join(output,'idle-profile-fixture.json'),JSON.stringify(idle,null,2));
  await page.locator('#save-import').setInputFiles({name:'hub-navigation-idle.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(idle))});
  await page.getByText('Sauvegarde importée et migrée.',{exact:true}).last().waitFor();await page.locator('[data-view="hub"]').click();
- await page.waitForFunction(()=>globalThis.__ATF_HUB__?.running);await page.locator('#hub-canvas').focus();
+ await page.waitForFunction(()=>globalThis.__ATF_HUB__?.running);await waitHubReady();await page.locator('#hub-canvas').focus();
  for(let deck=0;deck<4;deck++){
   assert.equal((await snapshot()).deck,deck);const order=deck%2===0?[0,1,2,3]:[3,2,1,0];
-  for(const index of order){const room=HUB_DECKS[deck].rooms[index];await walkTo(room.xStart+620);await page.waitForTimeout(180);
+  for(const index of order){const room=HUB_DECKS[deck].rooms[index];await walkTo(room.xStart+620);await waitHubReady();
    assert.equal((await snapshot()).roomId,room.id);const image=await capture(`${room.id}-after.png`);report.rooms.push({id:room.id,image,state:await snapshot()});
    console.log(JSON.stringify({room:room.id,status:'walked'}));
    const annexes=HUB_ANNEXES_V87.filter(a=>a.parentRoomId===room.id);
    for(const annex of annexes)await visitAnnex(annex);
   }
-  if(deck<3){const liftX=deck===1?2340:4914;await walkTo(liftX);const before=await snapshot();assert.ok(before.lift);await page.keyboard.press('KeyS');
-   await page.waitForFunction(d=>globalThis.__ATF_HUB__.state.deck===d,deck+1,{timeout:10000});const after=await snapshot();
+  if(deck<3){const liftX=deck===1?2340:4914;await walkTo(liftX);const before=await snapshot();assert.ok(before.lift);
+   await pressUntilStarted('KeyS',d=>{const h=globalThis.__ATF_HUB__;return Boolean(h.hubLiftTransitV163?.trip||h.state.deck===d);},deck+1);
+   // Lift-ready = destination deck reached and the V163 trip finished opening.
+   await page.waitForFunction(d=>{const h=globalThis.__ATF_HUB__;return h.state.deck===d&&!h.hubLiftTransitV163?.trip;},deck+1,{timeout:15000,polling:'raf'});const after=await snapshot();
    assert.equal(after.player.health,100);assert.equal(after.player.y,532);report.lifts.push({from:deck,to:deck+1,shaft:before.lift,before,after});
   }
  }

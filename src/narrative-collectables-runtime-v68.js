@@ -485,13 +485,40 @@ export function withNarrativeCollectablesRuntimeV68(BaseEngine) {
       return super.enterMissionVentV62(actor);
     }
 
-    interact(actor = this.player) {
+    // V188 "the prompt is always right": an evidence piece is a pickup in the
+    // shared E selection; it wins only when it is the nearest valid target.
+    interactionCandidatesV188(actor = this.player) {
+      const list = super.interactionCandidatesV188(actor);
       const collectable = this.nearestNarrativeCollectableV68(actor);
-      if (collectable && this.collectNarrativeCollectableV68(actor, collectable)) return true;
+      if (collectable) list.push({ kind: 'narrative-collectable-v68', category: 'pickup', target: collectable,
+        distance: this.interactionRankDistanceV188(actor, collectable), prompt: `E  RÉCUPÉRER — ${collectable.label}` });
+      return list;
+    }
+
+    interact(actor = this.player) {
+      const choice = this.selectInteractionTargetV188(actor);
+      if (choice?.kind === 'narrative-collectable-v68') return this.collectNarrativeCollectableV68(actor, choice.target);
       const ventEntrance = this.nearestNarrativeVentEntranceV68(actor);
       const ventRequirement = this.narrativeVentRequirementV68(ventEntrance);
+      // The route verdict is taken in the archives. Once the overlay of the last piece is
+      // closed, the gate and the duct that ask for it reopen the archives instead of a dead end.
+      if (this.narrativeVerdictPendingV68() && actor === this.player
+        && (ventEntrance && ventRequirement || this.nearNarrativeEvidenceDoorV68(actor))) {
+        this.onEvent({ type: 'archive-reader-open', operationId: QZ17_OPERATION_ID_V68, collectableId: null });
+        return true;
+      }
       if (ventRequirement) return this.locked(ventRequirement);
       return super.interact(actor);
+    }
+
+    narrativeVerdictPendingV68() {
+      return Boolean(this.isNarrativeCollectablesV68() && this.mission?.state === 'active'
+        && this.narrativeEvidenceAnalyzedV68() && !this.narrativeEvidenceCompleteV68());
+    }
+
+    nearNarrativeEvidenceDoorV68(actor = this.player) {
+      const door = this.narrativeEvidenceDoorV68();
+      return Boolean(door && actor && Math.abs(actor.x + actor.w / 2 - (door.x + door.w / 2)) < (this.doorInteractionReachV188?.(door, actor) ?? 118) && Math.abs(actor.y - door.y) < door.h + 60);
     }
 
     doorRequirement(door) {
@@ -518,8 +545,7 @@ export function withNarrativeCollectablesRuntimeV68(BaseEngine) {
     }
 
     getInteractionPrompt(actor = this.player) {
-      const collectable = this.nearestNarrativeCollectableV68(actor);
-      if (collectable) return `E  RÉCUPÉRER — ${collectable.label}`;
+      if (this.selectInteractionTargetV188(actor)?.kind === 'narrative-collectable-v68') return super.getInteractionPrompt(actor);
       const ventEntrance = this.nearestNarrativeVentEntranceV68(actor);
       const ventRequirement = this.narrativeVentRequirementV68(ventEntrance);
       if (ventRequirement) return `E  VERROUILLÉ — ${ventRequirement}`;

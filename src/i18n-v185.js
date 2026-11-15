@@ -544,7 +544,7 @@ export const STRINGS_V185 = freeze({
     'npc.action.mara-vega': 'Receive the command update',
     'npc.action.tamsin-velez': 'Review the assault kit',
     'npc.action.echo-a': 'Configure the tactical package',
-    'npc.action.david-8r': 'Extract the synthetic intelligence',
+    'npc.action.david-8r': 'Recover the synthetic\'s intel',
     'npc.action.asha-mbaye': 'Check the colonial relays',
     'npc.action.leila-sorensen': 'Prepare a survival route',
     'npc.action.noor-okafor': 'Receive field care',

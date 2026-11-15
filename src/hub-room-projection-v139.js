@@ -2,7 +2,11 @@
  * doors, service decks and furniture. A frontal furniture kit does not qualify
  * a room for oblique architecture. The maintenance spine uses an authored
  * procedural depth kit; the remaining rooms use complete frontal sections.
- * This is an art/layout contract, not movement along a third gameplay axis. */
+ * This is an art/layout contract, not movement along a third gameplay axis.
+ * V188 exception (src/hub-depth-rooms-v188.js, specs/001-salles-hybrides-2d-25d): rooms declared
+ * there as depth rooms add a floor depth coordinate to actors standing on their floor; every
+ * other room keeps this visual-only contract unchanged.
+ */
 const freeze = value => {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
     Object.values(value).forEach(freeze); Object.freeze(value);

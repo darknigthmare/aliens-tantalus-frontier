@@ -82,7 +82,7 @@ test('V187 audit and documentation stay source-only and the new audit test enter
     'docs/development/NATIVE_QA_UNREVIEWED_V187.md']) assert.equal(isPublicDistributionPathV86(path), false);
   const files = collectReleaseTestsV143(JSON.parse(read('package.json')).scripts);
   assert.equal(files.filter(path => path === 'scripts/verify-native-qa-resources-v187.mjs').length, 1);
-  const terminal = read('scripts/audit-native-qa-resources-v187.mjs').toString();
+  const terminal = read('scripts/audit-tantalus-priorities-v188.mjs').toString();
   assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(terminal), false);
   assert.equal(Object.hasOwn(NATIVE_QA_RESOURCES_SUCCESSORS_V187, 'scripts/audit-native-qa-resources-v187.mjs'), false);
   assert.equal(Object.keys(NATIVE_QA_RESOURCES_SUCCESSORS_V187).some(path => path.startsWith('src/')), false);

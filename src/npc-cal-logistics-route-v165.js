@@ -5,7 +5,7 @@ import { HUB_ANNEX_BY_ID_V137 } from './hub-annex-registry-v137.js';
 import { getHubAnnexRuntimeGeometryV139 } from './hub-annex-runtime-geometry-v139.js';
 import { annexNpcDutiesV141, createAnnexNpcsV141, getAnnexNpcPlacementV141 } from './hub-annex-npc-life-v141.js';
 import { createServiceRouteV161 } from './npc-service-routes-v161.js';
-import { moveNpcAgainstGeometryV136, advanceNpcLifeV136, spreadNpcStationSpawnsV136 } from './npc-life-v136.js';
+import { moveNpcAgainstGeometryV136, advanceNpcLifeV136, spreadNpcStationSpawnsV136, clearRoomDoorwayPostV188 } from './npc-life-v136.js';
 import { drawHumanAtlasV133 } from './human-visual-contract-v133.js';
 import { CAL_CLIMB_ASSET_V165, CAL_CLIMB_BODY_V165, resolveCalClimbRigV165,
   calClimbImageReadyV165, drawCalClimbRigV165 } from './npc-cal-climb-rig-v165.js';
@@ -94,6 +94,18 @@ export function createNpcCalLogisticsStateV165(actor) {
     targetRoomId:actor.roomId,stage:'service',velocity:0,verticalVelocity:0,phaseProgress:0,
     facing:actor.facing===-1?-1:1,doorProgress:0,time:0,distance:0,verticalDistance:0,
     crossings:0,arrivals:0,admittedRoomId:actor.roomId,reason:'daily-schedule'}}).actor;
+}
+/** V188: Cal's routine anchor in the vehicle bay can fall inside the logistics
+ * doorway. Standing there in `service`, he reserved the door for as long as the
+ * routine phase lasted and the player could never enter the annex. A home post
+ * inside the doorway (opening ±12 px) moves to the nearest free side. */
+export function clearParentDoorwayV188(state) {
+  if(!state||state.roomId!==HOME||state.stage!=='service'||state.y!==532)return state;
+  const opening=portal.faces.parent.opening,left=opening.x-12-44-1,right=opening.x+opening.w+12+1;
+  // Same rule for the other bays of the vehicle bay (aft lift landing): see clearRoomDoorwayPostV188.
+  const x=state.x<=left||state.x>=right?clearRoomDoorwayPostV188(parent,state.x):state.x-left<=right-state.x?left:right;
+  if(x===state.x)return state;
+  return normalizeNpcCalLogisticsRouteV165({schema:165,actor:{...state,x,homeX:x}}).actor||state;
 }
 function interruption(resolution,actor) {
   if(!resolution||actor.alive===false||actor.downed)return'unavailable';
@@ -252,7 +264,8 @@ export function withHubNpcCalLogisticsRouteV165(Base) {
           const template=source||RosterHubV52.prototype.createNpcs.call({},DECK).find(actor=>actor.crewId===ID);
           const actor={...template,...(saved?{x:saved.x,y:saved.y,roomId:saved.roomId,facing:saved.facing}:{}),
             w:44,h:92,vx:0,mobile:false};
-          const state=saved||createNpcCalLogisticsStateV165(actor);
+          const state=clearParentDoorwayV188(saved||createNpcCalLogisticsStateV165(actor));
+          if(state&&state.roomId===HOME)actor.x=state.x;
           if(state){this.calLogisticsActorV165=actor;this.calLogisticsStateV165=state;this.calLogisticsHandoffV165=null;this.refreshCalLogisticsV165();}
         }
       }

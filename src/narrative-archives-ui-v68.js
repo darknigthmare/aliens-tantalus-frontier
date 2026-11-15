@@ -1,5 +1,23 @@
 import { QZ17_COLLECTABLES_SHEET_V68, resolveQz17CollectableCellV68 } from './narrative-collectables-visuals-v68.js';
 import { resolveNarrativeMediaPlaybackV132 } from './narrative-evidence-v132.js';
+import { currentLanguageV185 } from './i18n-v185.js';
+
+// V188: archive stamps read like the ship clock (J01 02:31 / D01 02:31) instead
+// of ISO timestamps. [PROPOSÉ] shipboard log format: year, day of the year
+// prefixed J (French) or D (English), then hours:minutes. The record keeps its
+// original value; only the displayed text changes. Other text passes through.
+const ARCHIVE_STAMP_V188 = /^(\d{4})-(\d{2})-(\d{2})(?:T|\s+·\s+|\s+)(\d{2}):(\d{2})(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:?\d{2})?$/u;
+export function formatArchiveStampV188(value, language = 'fr') {
+  const text = String(value ?? '').trim();
+  const match = ARCHIVE_STAMP_V188.exec(text);
+  if (!match) return text;
+  const [, year, month, day, hours, minutes] = match;
+  const date = Date.UTC(Number(year), Number(month) - 1, Number(day));
+  if (!Number.isFinite(date) || new Date(date).getUTCDate() !== Number(day)) return text;
+  const dayOfYear = Math.round((date - Date.UTC(Number(year), 0, 1)) / 86400000) + 1;
+  return `${year} · ${language === 'en' ? 'D' : 'J'}${String(dayOfYear).padStart(3, '0')} ${hours}:${minutes}`;
+}
+const archiveStampV188 = value => { let language = 'fr'; try { language = currentLanguageV185(); } catch {} return formatArchiveStampV188(value, language); };
 
 const asArray = (value) => Array.isArray(value) ? value : [];
 const asText = (value, fallback = '') => {
@@ -452,7 +470,7 @@ export class NarrativeArchivesUiV68 {
         }
       });
       button.append(
-        element(this.document, 'span', { className: 'archive-entry-meta-v68', text: `${entry.typeLabel}${entry.timestamp ? ` · ${entry.timestamp}` : ''}` }),
+        element(this.document, 'span', { className: 'archive-entry-meta-v68', text: `${entry.typeLabel}${entry.timestamp ? ` · ${archiveStampV188(entry.timestamp)}` : ''}` }),
         element(this.document, 'strong', { text: entry.title }),
         element(this.document, 'span', { text: entry.source }),
         element(this.document, 'i', { text: entry.read ? 'LU' : 'NOUVEAU' })
@@ -464,7 +482,7 @@ export class NarrativeArchivesUiV68 {
     if (!selected) {
       detail.append(element(this.document, 'h3', { text: 'TERMINAL VIDE' }), element(this.document, 'p', { text: 'Les documents récupérés apparaîtront ici sans contenu simulé.' }));
     } else {
-      const meta = [selected.typeLabel, selected.source, selected.location, selected.timestamp].filter(Boolean).join(' · ');
+      const meta = [selected.typeLabel, selected.source, selected.location, selected.timestamp && archiveStampV188(selected.timestamp)].filter(Boolean).join(' · ');
       detail.append(element(this.document, 'p', { className: 'eyebrow', text: meta }), element(this.document, 'h3', { text: selected.title }));
       if (selected.provenance) detail.append(element(this.document, 'p', { className: 'archive-provenance-v132', text: 'Dossier original du Tantalus.' }));
       if (selected.atlasVisual) {

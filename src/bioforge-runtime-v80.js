@@ -52,6 +52,7 @@ import { sanitizeCostumeSelectionV119 } from './franchise-costumes-v119.js';
 import { normalizePlayerAppearanceV126 } from './player-appearance-v126.js';
 import { getBioforgeAdmissionV132, getBioforgeAdmissionForSheetV132, isBioforgeAdmissionImageReadyV132 } from './bioforge-admissions-v132.js';
 import { captureBioforgeTacticsV132, restoreBioforgeTacticsV132 } from './bioforge-tactics-state-v132.js';
+import { signalColorV188 } from './colorblind-palette-v188.js';
 
 export const BIOFORGE_SEAL_SECONDS_V80 = 0.72;
 export const BIOFORGE_PRINT_INTERVAL_SECONDS_V80 = 0.46;
@@ -1534,7 +1535,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       ctx.fillStyle = '#111a19';
       for (const platform of this.platforms) ctx.fillRect(platform.x, platform.y, platform.w, platform.h);
       for (const door of this.doors) {
-        ctx.fillStyle = door.open ? '#426c54' : '#733e3e';
+        ctx.fillStyle = signalColorV188(door.open ? 'bioforge-door-open' : 'bioforge-door-locked');
         ctx.fillRect(door.x, door.y, door.w, door.h);
       }
       ctx.fillStyle = '#d1a35f';

@@ -2,7 +2,11 @@ import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
 
 /** Shared architectural section. Native positions are the real foot/support
  * lines; depth only describes how a supported surface continues toward the
- * viewer. It never changes a collider, a saved position or an actor's feet. */
+ * viewer. It never changes a collider, a saved position or an actor's feet.
+ * V188 exception (src/hub-depth-rooms-v188.js, specs/001-salles-hybrides-2d-25d): rooms declared
+ * there as depth rooms add a floor depth coordinate to actors standing on their floor; every
+ * other room keeps this visual-only contract unchanged.
+ */
 export const HUB_SUPPORT_STANDARD_V139 = Object.freeze({
   walkY: 624, serviceDepth: 24, deckDepth: 8, dxPerY: 19 / 12,
   gameplayPlane: '2d', supportEdge: 'native-rear-edge', projection: 'parallel-oblique'

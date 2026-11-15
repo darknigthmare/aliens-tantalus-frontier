@@ -150,10 +150,19 @@ export function withApcConvoyRuntimeV121(BaseEngine) {
       this.camera.x = 0; this.camera.y = 0;
       this.syncApcConvoyWorldV121(); this.ensureApcConvoyStageBossV121();
     }
+    // V188 "the prompt is always right": the convoy owns its scene; engaging the
+    // convoy and the airlock confirmation are its only E entries, in the shared selection.
+    interactionCandidatesV188(actor = this.player) {
+      if (!this.isApcConvoyV121()) return super.interactionCandidatesV188(actor);
+      const phase = this.apcConvoyV121.phase;
+      if (actor !== this.player || !actor?.alive || actor.downed || (phase !== 'briefing' && phase !== 'evacuation')) return [];
+      return [{ kind: 'apc-convoy-v121', category: 'action', target: phase, distance: 0,
+        prompt: phase === 'briefing' ? 'E · ENGAGER LE CONVOI' : 'MAINTENIR E · CONFIRMER LE SAS · 3 S' }];
+    }
     interact(actor = this.player) {
       if (!this.isApcConvoyV121()) return super.interact(actor);
       if (!this.canApcConvoyActV121(actor)) return false;
-      if (this.apcConvoyV121.phase !== 'briefing' && this.apcConvoyV121.phase !== 'evacuation') return false;
+      if (this.selectInteractionTargetV188(actor)?.kind !== 'apc-convoy-v121') return false;
       if (!this.apcConvoyV121.briefed) { this.apcConvoyV121.briefed = true; this.syncApcConvoyWorldV121(); this.apcConvoyMilestoneV121('depart', 'M577 engagé. Contacts à gauche, garder la tourelle sur le corridor.'); }
       return true;
     }
@@ -349,7 +358,7 @@ export function withApcConvoyRuntimeV121(BaseEngine) {
     objectiveProgressText() { return this.isApcConvoyV121() ? apcConvoyDossierV121(this.apcConvoyV121).instruction : super.objectiveProgressText(); }
     getInteractionPrompt() {
       if (!this.isApcConvoyV121()) return super.getInteractionPrompt();
-      return this.apcConvoyV121.phase === 'briefing' ? 'E · ENGAGER LE CONVOI' : this.apcConvoyV121.phase === 'evacuation' ? 'MAINTENIR E · CONFIRMER LE SAS · 3 S' : '';
+      return this.selectInteractionTargetV188(this.player)?.prompt || '';
     }
     getSnapshot() {
       return { ...super.getSnapshot(), ...(this.isApcConvoyV121() ? { apcConvoyV121: {

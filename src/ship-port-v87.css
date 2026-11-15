@@ -23,8 +23,8 @@ dialog.ship-port-v87 * { box-sizing: border-box; }
 dialog.ship-port-v87 p { margin: 0 0 12px; }
 .ship-port-v87__header { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 14px; }
 .ship-port-v87__heading { margin: 0; color: #e2eedf; font-size: clamp(17px, 3vw, 23px); line-height: 1.25; letter-spacing: .03em; }
-.ship-port-v87__description { color: var(--port-muted); font-size: 12px; }
-.ship-port-v87__phase { padding-top: 14px; border-top: 1px solid var(--port-line); color: #bfe7d0; font-size: 12px; letter-spacing: .1em; }
+.ship-port-v87__description { color: var(--port-muted); font-size: calc(12px * var(--atf-text-scale-v188, 1)); }
+.ship-port-v87__phase { padding-top: 14px; border-top: 1px solid var(--port-line); color: #bfe7d0; font-size: calc(12px * var(--atf-text-scale-v188, 1)); letter-spacing: .1em; }
 .ship-port-v87__progress { display: block; width: 100%; height: 7px; margin: 0 0 12px; accent-color: #8fbba0; }
 .ship-port-v87__message { color: #c6d6cc; }
 .ship-port-v87__error { padding: 10px 12px; border-left: 3px solid #ec9c83; color: #ffd0bc; background: #321d1a; }
@@ -47,19 +47,19 @@ dialog.ship-port-v87 p { margin: 0 0 12px; }
 .ship-port-v87__button:disabled { color: #93a29c; border-color: #354741; background: #16221f; cursor: not-allowed; }
 .ship-port-v87__button[aria-selected="true"] { color: #091410; background: #c1d8c3; border-color: #deefda; }
 .ship-port-v87__button[data-port-action="buy"]:not(:disabled) { color: #101b13; background: #c5dba8; border-color: #dbe9c6; }
-.ship-port-v87__button[data-port-action="close"] { flex: 0 0 auto; font-size: 12px; }
+.ship-port-v87__button[data-port-action="close"] { flex: 0 0 auto; font-size: calc(12px * var(--atf-text-scale-v188, 1)); }
 .ship-port-v87__dossier { display: grid; grid-template-columns: minmax(180px, 280px) minmax(0, 1fr); gap: 24px; padding-top: 20px; }
 .ship-port-v87__visual { margin: 0; align-self: start; }
 .ship-port-v87__preview { display: block; width: 100%; height: auto; aspect-ratio: 320 / 144; border: 1px solid var(--port-line); background: #152426; image-rendering: pixelated; }
-.ship-port-v87__caption { margin-top: 8px; color: var(--port-muted); font-size: 11px; }
-.ship-port-v87__name { margin: 0 0 10px; color: #e2eedf; font-size: 21px; }
+.ship-port-v87__caption { margin-top: 8px; color: var(--port-muted); font-size: calc(11px * var(--atf-text-scale-v188, 1)); }
+.ship-port-v87__name { margin: 0 0 10px; color: #e2eedf; font-size: calc(21px * var(--atf-text-scale-v188, 1)); }
 .ship-port-v87__appearance { color: #c9d8d0; }
-.ship-port-v87__traits { color: #9bc6b8; font-size: 12px; }
+.ship-port-v87__traits { color: #9bc6b8; font-size: calc(12px * var(--atf-text-scale-v188, 1)); }
 .ship-port-v87__details { padding-top: 10px; border-top: 1px solid var(--port-line); }
 .ship-port-v87__biography { overflow-wrap: anywhere; }
-.ship-port-v87__habitat, .ship-port-v87__terms { font-size: 12px; color: var(--port-muted); }
+.ship-port-v87__habitat, .ship-port-v87__terms { font-size: calc(12px * var(--atf-text-scale-v188, 1)); color: var(--port-muted); }
 .ship-port-v87__price { font-weight: 700; color: #d9e7b1; }
-.ship-port-v87__conditions { margin: 14px 0; padding: 11px 11px 11px 27px; border: 1px solid #756744; color: #efdaad; background: #29251c; font-size: 12px; }
+.ship-port-v87__conditions { margin: 14px 0; padding: 11px 11px 11px 27px; border: 1px solid #756744; color: #efdaad; background: #29251c; font-size: calc(12px * var(--atf-text-scale-v188, 1)); }
 .ship-port-v87__conditions li + li { margin-top: 6px; }
 .ship-port-v87__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
 @media (max-width: 580px) {

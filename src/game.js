@@ -1,4 +1,5 @@
 import { shouldFlipSprite } from './sprite-animation-runtime.js';
+import { signalColorV188 } from './colorblind-palette-v188.js';
 
 const LOGICAL_WIDTH = 1280;
 const LOGICAL_HEIGHT = 720;
@@ -634,7 +635,7 @@ export class GameEngine {
     ctx.globalAlpha = door.progress >= 0.82 ? 0.82 : 1;
     ctx.drawImage(image, x, y, width, height);
     ctx.globalAlpha = 1;
-    ctx.fillStyle = door.lockedBy === 'power' && !this.powerNode.active ? '#d04f47' : door.open ? '#83d99e' : '#d6ac59';
+    ctx.fillStyle = signalColorV188(door.lockedBy === 'power' && !this.powerNode.active ? 'door-locked' : door.open ? 'door-open' : 'door-closed');
     ctx.fillRect(door.x + door.w + 8, y + 30, 7, 13);
   }
 
