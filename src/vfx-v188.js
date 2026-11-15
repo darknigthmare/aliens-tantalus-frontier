@@ -39,7 +39,7 @@ export const VFX_KINDS_V188 = Object.freeze({
   'explosion-smoke': kind('explosion-smoke', -26, 1.1, .5),
   debris: kind('debris-chunk', 900, .3, 1),
   ember: kind('ember', -70, .8, 1, true),
-  steam: kind('steam-puff', -55, 1.4, .26),
+  steam: kind('steam-puff', -55, 1.4, .16),
   dust: kind('footstep-dust', -6, 2.5, .42),
   splash: kind('footstep-splash', 0, 0, .8),
   ping: kind('tracker-ping', 0, 0, .55, false, true)
@@ -104,18 +104,28 @@ const inView = (x, y, r, view) => x + r >= view.x && x - r <= view.x + view.w &&
 export function drawVfxParticlesV188(ctx, pool, view, options = {}) {
   if (!ctx || !pool) return 0;
   let drawn = 0; const margin = VFX_V188.viewportMargin;
-  for (let i = 0; i < pool.count; i++) {
-    const p = pool.items[i], def = VFX_KINDS_V188[p.kind], t = Math.min(1, p.age / p.life);
-    const reach = p.kind === 'ping' ? p.size : p.size * 1.5;
-    if (!inView(p.x, p.y, reach + margin, view)) { pool.stats.culled++; continue; }
-    const fade = p.kind.startsWith('muzzle') ? 1 : p.kind === 'ping' ? 1 - t : 1 - t * t;
-    ctx.save();
-    ctx.globalAlpha = Math.max(0, Math.min(1, def.alpha * fade));
-    if (def.additive) ctx.globalCompositeOperation = 'lighter';
-    ctx.translate(p.x, p.y); if (def.oriented) ctx.rotate(p.angle);
-    drawVfxSlotV188(ctx, def.slot, t, p.size, p, options);
-    ctx.restore(); drawn++;
-  }
+  // One save for the batch; each particle resets the transform instead of save/restore,
+  // and the two blend passes (normal, then additive) switch the composite mode once.
+  const base = typeof ctx.getTransform === 'function' ? ctx.getTransform() : null;
+  ctx.save();
+  try {
+    for (const additive of [false, true]) {
+      ctx.globalCompositeOperation = additive ? 'lighter' : 'source-over';
+      for (let i = 0; i < pool.count; i++) {
+        const p = pool.items[i], def = VFX_KINDS_V188[p.kind];
+        if (def.additive !== additive) continue;
+        const t = Math.min(1, p.age / p.life), reach = p.kind === 'ping' ? p.size : p.size * 1.5;
+        if (!inView(p.x, p.y, reach + margin, view)) { pool.stats.culled++; continue; }
+        const fade = p.kind.startsWith('muzzle') ? 1 : p.kind === 'ping' ? 1 - t : 1 - t * t;
+        if (!base) ctx.save();
+        ctx.globalAlpha = Math.max(0, Math.min(1, def.alpha * fade));
+        ctx.translate(p.x, p.y); if (def.oriented) ctx.rotate(p.angle);
+        drawVfxSlotV188(ctx, def.slot, t, p.size, p, options);
+        if (base) ctx.setTransform(base); else ctx.restore();
+        drawn++;
+      }
+    }
+  } finally { ctx.restore(); }
   pool.stats.drawn += drawn; return drawn;
 }
 
@@ -320,7 +330,7 @@ export function withVfxV188(Base) {
       if (/ship|station|interior/.test(String(this.missionLevelRuntime?.templateId || ''))) {
         for (const vent of this.vents || []) {
           if (!inView(vent.x, vent.y, 80, view) || random() < .5) continue;
-          this.vfxEmitV188('steam', vent.x + vent.w / 2, vent.y + 4, { angle: -Math.PI / 2, spread: .7, speed: 30, life: 1.6, size: 12 });
+          this.vfxEmitV188('steam', vent.x + vent.w / 2, vent.y + 4, { angle: -Math.PI / 2, spread: .7, speed: 30, life: 1.4, size: 8 });
         }
       }
     }

@@ -55,4 +55,12 @@ Les scènes sont décrites de mémoire de visionnage ; elles servent de référe
 
 ## Mesures
 
-Voir le rapport de livraison V188 (A/B en alternance, même build, couche activée/désactivée, même scène et même configuration). Aucun gain n’est annoncé : la couche ajoute un coût de dessin mesuré.
+Chromium headless (rendu logiciel), 1280×720 à deviceScaleFactor 2, même build avec la couche activée (`on`) ou désactivée (`vfxV188Enabled = false`, `off`) après l’atterrissage, tir continu pendant 3 s ; ordre alterné off/on/on/off/on/off ; durée moyenne de `draw()` en ms (moyenne des trois exécutions, extrêmes entre crochets).
+
+| Scène | Série A (save/restore par particule) off → on | Série B (lot unique, deux passes de fusion) off → on |
+| --- | --- | --- |
+| QZ-17, soute en profondeur, xénomorphe au contact (~25 particules, 4–5 brûlures) | 18,71 [18,58–18,95] → 21,02 [18,78–23,33] | 19,36 [18,71–20,49] → 19,45 [18,44–21,08] |
+| Cargo Sevastopol (pair-004), soute du cargo, tir sur paroi (~10 particules) | 16,98 [14,56–19,96] → 15,21 [13,35–16,21] | 17,21 [15,74–18,65] → 16,57 [14,18–18,03] |
+| Colonie LV-426 (pair-001) | 16,80 [15,55–18,45] → 16,73 [16,47–16,89] | — |
+
+La série A montrait un surcoût d’environ 2,3 ms sur la scène QZ-17 ; après regroupement du dessin (série B), l’écart reste dans le bruit de mesure. Aucun gain n’est annoncé.
