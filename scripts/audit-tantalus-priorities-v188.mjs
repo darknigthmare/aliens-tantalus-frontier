@@ -48,7 +48,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
     "previousSha256": "95287e9c3f9be2b88db9e391a9a143c4c69be8956b6763e4113645974b9e878d",
-    "currentSha256": "aa005fd4e471f56946ec58343ac5627b70f3d490ffbb248d26d236cbd725f794"
+    "currentSha256": "7b675156dd1e9fae6d4df6c5914e5b9b184ce7f6e00fe7688bda13f6c7feb8fa"
   },
   "hub-level.css": {
     "previousSha256": "13e29b3719e1246d595dadca4c786cbeb5a471dece902104b0ccd29a1de9908d",
@@ -56,11 +56,11 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "index.html": {
     "previousSha256": "337a0b230d0b075bf70e5122240f1ce8e0d2deaebbbd563a15496ea92b5f4d66",
-    "currentSha256": "8e29ed045fdc3be3fb7cd9d05f8d2dd25a49015288724a17c84dbc4cf71ad9a4"
+    "currentSha256": "3ef0afc6493e26c7c483549ad2df64b59c96fcb5beaa8b1f2c35a99400fd35de"
   },
   "package.json": {
     "previousSha256": "ff133a405bfc1ef2afa7085fcb2a6cde27a9f52c4af0de5172a058b47082eb48",
-    "currentSha256": "8987be34982364a04d49f0d155328678dbb6b1d7a38209261ee137209e99b584"
+    "currentSha256": "a29763a62de67e8c0317fd56bf7a7e483571fedf17ed98db9ede294b61c8e6d7"
   },
   "player-appearance-v126.css": {
     "previousSha256": "da7045c7fd7d41da99eecf48d316150b2d16fac276fe635bb881034bd68c9320",
@@ -84,7 +84,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-audit-v143.mjs": {
     "previousSha256": "825a8672e074c335568669ce8e5c496ed2fb70af9e11f3d834169da1a8d5a1c2",
-    "currentSha256": "a6ba4f9b593f0e5317169cdbce31ef96d7990ea279410707b8efe7676894d5b3"
+    "currentSha256": "a92e2761e3f77fedae7874e788c6daf0cc44e10ad2ddb94ac0759d9284c00419"
   },
   "scripts/verify-campaign-lethe-v163.mjs": {
     "previousSha256": "cb3ac8826d4f15bbab86e0c42dcd225aeee341c9b10950046fb14af104473049",
@@ -124,7 +124,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "328c764b2bf467d0bc21ae86abf415a7722bd0a88cba486eb2167c22fa8f0b84",
-    "currentSha256": "baa950b739177e7baac881c77b2c8fef75f944f99c5b88f053ef317d184392ed"
+    "currentSha256": "55010b3710748f44cebef28456b2cec909cfc5ee38ca390c24e2632641d9875d"
   },
   "src/alien-survival-runtime-v70.js": {
     "previousSha256": "65d5c0c4ca446021b6ff58ed6be61fc622c0908ede9d9d74b730fa0efef2fd93",
@@ -144,7 +144,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/app.js": {
     "previousSha256": "482835e65677c536085a1344cf61c3ffa5e09e2af1b8029b949e000a533038ae",
-    "currentSha256": "df24462d6bf15fe39d986d3bc8a1e98cca1857a1cc598ee6f80312bc638a0dde"
+    "currentSha256": "bc09e6687dc11ad85d611b9118195953237348bb2585a92e604062f4ac96923b"
   },
   "src/archive-relay-presentation-v160.js": {
     "previousSha256": "e628ccee6aa0a2ee40eea1fdd3b66b11800c3185c39bbd91c18d662c05749a30",
@@ -196,7 +196,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/content.js": {
     "previousSha256": "916a3ee2c7c05a6a81e9de9eacb68e41ab9dd0aeac9be53e260c1024a369a701",
-    "currentSha256": "f447fe958ae8c3174588598cbe0465d16bdd538bdaedb3169b921c0e60ed9fac"
+    "currentSha256": "5d9bb1d4f74227bb9f3e2668b5a6b6ad3590b90d2fe8703ca87c2e786c410807"
   },
   "src/crew-ui-v85.js": {
     "previousSha256": "f50ab347b6b209dedf954a0e5dcde236b16cf62360df502a1bea38a67edf453a",
@@ -316,7 +316,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/i18n-en-catalog-v185.js": {
     "previousSha256": "ac3632c302294c3e2869d673ad6d8cd861e1b0f62641d2d16335387746a6218a",
-    "currentSha256": "abd981ab32ddd7c1d931085c8ff4fb184e3ac552080ad45c41ef09da327b0e87"
+    "currentSha256": "9985178debcbbb5c844d5eba0c2909c140fb4d59a59eacefe49db193adbec7db"
   },
   "src/i18n-v185.js": {
     "previousSha256": "592b025ceca9008e73bff267be72a2a3b614767fc220f82cbf2a3ef792060e7e",
@@ -424,7 +424,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "sw.js": {
     "previousSha256": "ff86bba365c3875c8ebaeb0abe13b2a6185ccd5f1a030b4ee5b15ac0e4a12f9b",
-    "currentSha256": "3f611ff11b2432a56ec8e64b645af1dfc874c4f00892434b71a315ed3f349426"
+    "currentSha256": "d73c1031051d5884dea488e0d4302218ba012636224b37e1ef33a76ac3577b59"
   },
   "title-screen-v61.css": {
     "previousSha256": "3a748b04d5e6c9a7e04c189b2c1910c3163a0840968be6bcbb6352e10e16369f",

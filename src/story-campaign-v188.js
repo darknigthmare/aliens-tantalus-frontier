@@ -4,6 +4,7 @@
 // This module derives the current step from them and persists only what no
 // other record holds: which story debriefs the player has opened.
 import { currentLanguageV185 } from './i18n-v185.js';
+import { normalizeAct5V188 } from './story-act5-state-v188.js';
 
 export const STORY_RELAY_CAMPAIGN_ID_V188 = 'special-archive-relay';
 export const STORY_SLICE_STEPS_V188 = Object.freeze(['creation', 'wake', 'ship', 'port', 'briefing', 'qz18', 'debrief', 'next']);
@@ -41,6 +42,9 @@ export function normalizeStoryCampaignV188(raw) {
   base.beatsSeen = [...new Set(beats.filter(id => typeof id === 'string' && /^beat-[a-z0-9-]{1,40}$/.test(id)))].slice(0, MAX_SEEN);
   base.m577Manifest = normalizeM577ManifestV188(raw.m577Manifest);
   base.interlude = normalizeInterludeV188(raw.interlude);
+  // Act V (spec 006): additive, present only once the save holds something for it.
+  const act5 = normalizeAct5V188(raw.act5);
+  if (act5) base.act5 = act5;
   return base;
 }
 
@@ -111,8 +115,9 @@ export function deriveStoryCampaignV188(save, { language = null } = {}) {
   return result('next', current || !recommended ? null : pick('next'), recommended);
 }
 
-// The four playable Cocyte chapters (bible §5, Lethe continuity V163). Until a
-// dedicated Act V exists, finishing all four is the current end of the story.
+// The four playable Cocyte chapters (bible §5, Lethe continuity V163). Finishing
+// all four opens Act V « Non viable » (story-act5-v188.js, spec 006); the
+// briefing table keeps the ending theme from that threshold on.
 export const STORY_ENDING_CHAPTERS_V188 = Object.freeze(['special-archive-relay', 'special-apc-convoy', 'special-c12-horde', 'special-black-cocoon']);
 export function storyEndingReachedV188(save) {
   const completed = Array.isArray(save?.galaxy?.completedCampaignIds) ? save.galaxy.completedCampaignIds : [];

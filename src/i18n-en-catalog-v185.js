@@ -6628,6 +6628,20 @@ export const EN_CATALOG_V185 = Object.freeze({
 "CONTRAT · RÉCUPÉRER UN SYNTHÉTIQUE": "CONTRACT · RECOVER A SYNTHETIC",
 "Récupérer un synthétique de maintenance. Main-d’œuvre du hub +.": "Recover a maintenance synthetic. Hub workforce +.",
 "Un synthétique de maintenance d’Asphodèle s’est arrêté dans un secteur isolé. Le ramener.": "An Asphodèle maintenance synthetic has stopped in an isolated sector. Bring it back.",
+// V188 Act V and endings.
+"NON VIABLE · DERNIER DÉPART": "NON-VIABLE · LAST DEPARTURE",
+"Le M577 quitte le complexe sous la pluie avec les derniers ouvriers. La ruche du dépôt coupe la route du port.": "The M577 leaves the complex in the rain with the last workers. The depot hive cuts the road to the port.",
+"Escorter le convoi du complexe vers Port-Méridien. À mi-parcours, un pont cède : il faudra lâcher une remorque, celle du fret ou celle des colons en retard.": "Escort the convoy from the complex to Port-Méridien. Halfway, a bridge gives way: one trailer has to be dropped, the freight or the late colonists.",
+"NON VIABLE · LA REINE DU DÉPÔT": "NON-VIABLE · THE DEPOT QUEEN",
+"La Reine du dépôt, nourrie par les livraisons QZ17, poursuit le convoi.": "The depot Queen, fed by the QZ17 deliveries, pursues the convoy.",
+"Suivre la Reine au détecteur de mouvement et l’arrêter avant qu’elle n’atteigne la route du port.": "Track the Queen on the motion tracker and stop her before she reaches the port road.",
+"NON VIABLE · LES PORTES DU PORT": "NON-VIABLE · THE PORT GATES",
+"Arrivée aux murs de Port-Méridien : tenir la nuit, puis faire face à l’équipe de récupération au quai.": "Arrival at the walls of Port-Méridien: hold the night, then face the recovery team at the quay.",
+"Le convoi débouche sous les murs du port. Tenir les portes jusqu’à l’aube ; l’équipe de récupération de la compagnie attend au quai.": "The convoy comes out under the port walls. Hold the gates until dawn; the company recovery team waits at the quay.",
+"NON VIABLE · L’ÉVACUATION": "NON-VIABLE · THE EVACUATION",
+"Le dépôt est cédé : tenir la zone d’embarquement pendant que la compagnie prend le contrôle.": "The depot is ceded: hold the boarding zone while the company takes control.",
+"Tenir la zone d’embarquement de Port-Méridien jusqu’au dernier départ négocié avec la compagnie.": "Hold the Port-Méridien boarding zone until the last departure negotiated with the company.",
+"Acte V · Non viable": "Act V · Non-viable",
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 // V188 systems bug hunt (merged via i18n-catalog-maintenance-v186 review).

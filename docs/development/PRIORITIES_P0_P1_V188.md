@@ -241,3 +241,17 @@ Hors P0/P1. Audit : `docs/development/AUDIT_CONTENU_V188.md`. Statut **Partiel**
 | Front station Asphodèle : S1-S4, choix CASSIUS, pièce du dossier (bible §7.5) | Partiel : hub, annexes et cinématiques absents | `verify-content-gaps-v188.mjs` ; Chromium : panneau, verrou, lancement de S1 (mission en cours, gabarit intérieur), décision CASSIUS FR/EN |
 | Quêtes Rook, Vega, Harlow, DAVID-8R (bible §8.4) | Partiel : 12 quêtes restent | Node ; Chromium : quête de Rook jusqu'à l'ouverture de S1, rechargement |
 | Temps de voyage galactique (bible §13.6) | Partiel : messages en retard absents | Node ; non joué en navigateur |
+
+## Acte V, fins et épilogue (spec 006, 2026-11-15)
+
+Hors P0/P1. Manque n° 3 de l'audit `docs/development/AUDIT_CONTENU_V188.md`. Statut **Partiel** : jouable et raccordé de bout en bout, sans art final ni course APC dédiée.
+
+| Élément | Statut | Vérification |
+| --- | --- | --- |
+| Conseil de guerre, choix final, décision de Vega (bible §5.6, §5.7.1, §5.11) | Partiel : textes [PROPOSÉ] à valider | `verify-act5-endings-v188.mjs` ; Chromium : conseil, rechargement pendant le conseil, *Tenir* avec 5 pièces |
+| Missions finales `act5-last-run`, `act5-depot-queen`, `act5-port-walls`, `act5-evacuation` ; pont chronométré | Partiel : gabarits existants, pas de course APC ni de Reine dédiées | Node ; Chromium : trois lancements, pont, rechargement en mission (fin de mission injectée, déclarée) |
+| Fins « Le relais parle », « Le fret d'abord », « Les vivants, sans preuve » ; CIN-60, CIN-61, CIN-90 | Partiel : plans en primitives (15 emplacements) | Node : les trois fins (*Transmettre* avec la salle des relais du hub forcée par `context`) ; Chromium : « Les vivants, sans preuve », rechargement pendant la fin |
+| Épilogue au Tantalus, CIN-92, générique, partie libre | Partiel : plans fixes hors Tantalus (Q5 A) | Node ; Chromium : épilogue, générique, rechargement après la fin |
+
+Limites : la mission finale est réussie dans le contrôle Chromium par l'événement terminal (`mission-complete`), pas en jouant le niveau ; les derniers mots de l'équipage dans la conversation du hub et la lecture du casier à pied ne sont vérifiés que par les tests Node et le bouton de repli du panneau.
+

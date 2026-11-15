@@ -9,6 +9,12 @@ import { asphodeleSaveViewV188, asphodeleShuttleStatusV188, boardAsphodeleV188, 
   kesslerTagInLockerV188, depositKesslerTagV188, cassiusCoreLineV188, memorialTextV188, asphodeleHubSummaryV188, stationCinematicDueV188 } from './asphodele-hub-v188.js';
 import { ASPHODELE_SIDE_MISSIONS_V188, ASPHODELE_CONTRACTS_V188, ASPHODELE_SIDE_NAMES_EN_V188, ASPHODELE_CONTRACT_NAMES_EN_V188, asphodeleMissionLockReasonV188,
   asphodeleMissionLockTextV188, applyAsphodeleOperationResultV188, contractCountV188, RELAY_DRIFT_KEY_V188 } from './asphodele-missions-v188.js';
+import { filterAct5CampaignsV188, act5LockReasonV188, act5LockTextV188, applyAct5LaunchAdvantagesV188, applyAct5OperationResultV188, act5TableActionV188,
+  startAct5CouncilV188, act5CouncilV188, decideAct5V188, advanceAct5ToEndingV188, act5EndingSummaryV188, finishAct5EndingV188, finishAct5EpilogueV188,
+  finishAct5CreditsV188, act5StateV188, act5BridgeDueV188, act5BridgeSecondsV188, chooseAct5BridgeV188, ACT5_BRIDGE_TEXT_V188, ACT5_STANDOFF_TEXT_V188,
+  act5CrewEpilogueLineV188, markAct5EpilogueTalkV188, act5LockerLabelV188, act5CinematicContextV188, deriveStoryWithAct5V188, act5SnapshotV188,
+  act5LateColonistsSavedV188 } from './story-act5-v188.js';
+import { Act5AssetLoaderV188 } from './act5-slots-v188.js';
 import { storyDossierV188 } from './story-dossier-v188.js';
 import { withHubEcho8LockerV188, echo8LockerNotesV188 } from './hub-echo8-locker-v188.js';
 import { withHubPrologueRoomsV188 } from './hub-prologue-rooms-v188.js';
@@ -1081,6 +1087,8 @@ function markStoryDebriefOnViewV188() {
   }
   // V188 spec 005: the CASSIUS decision after S2, then the station return scenes, once each.
   if (stationReturnOnViewV188()) return;
+  // V188 spec 006: Act V at the briefing table (council, quay, ending, credits).
+  if (act5OnViewV188()) return;
   if (deriveStoryCampaignV188(saveSystem.data).step !== 'debrief') return;
   try {
     const candidate = clone(saveSystem.data);
@@ -1113,6 +1121,8 @@ let cinematicReturnV188 = null;
 function playStoryCinematicV188(id, { once = true, record = true, context = {} } = {}) {
   const seen = saveSystem.data?.storyCampaignV188?.cinematicsSeen || [];
   if (!CINEMATICS_V188[id] || once && seen.includes(id)) return Promise.resolve('already-seen');
+  // Act V plates draw their counts and labels from the save (also when replayed from Settings).
+  if (/^cin-(6\d|9\d)/.test(id) && !context.act5) context = { ...context, act5: act5CinematicContextV188(saveSystem.data, document.documentElement.lang) };
   const resumeHub = activeView === 'hub' && hubEngine.running;
   if (resumeHub) hubEngine.pause();
   // In mission, the cinematic uses the engine's own pause so no damage or timer advances.
@@ -1672,6 +1682,174 @@ function openKesslerTagDialogV188(notes) {
     onClose: () => { if (activeView === 'hub' && !activeHubStation) hubEngine.resume(); } });
   return true;
 }
+// —— V188 spec 006 (bible §5.6-§5.8): Act V « Non viable » ——
+// Hoisted helpers: the briefing table and the mission lists read them during the first render.
+function unlockedCampaignsV188(list) { return filterAct5CampaignsV188(saveSystem.data, filterUnlockedCampaignsV188(saveSystem.data, list)); }
+function storyStateV188() { return deriveStoryWithAct5V188(saveSystem.data, { language: document.documentElement.lang === 'en' ? 'en' : 'fr' }); }
+function act5LangV188() { return document.documentElement.lang === 'en' ? 'en' : 'fr'; }
+let act5LoaderInstanceV188 = null;
+function act5LoaderV188() { return act5LoaderInstanceV188 ||= new Act5AssetLoaderV188(); }
+// One Act V flow at a time (dialog or cinematic chain); a view switch never starts a second one.
+let act5FlowOpenV188 = false;
+function act5SceneV188({ slot, title, text, options, onChoose = () => null, onClose = null }) {
+  const scene = openContentSceneDialogV188({ language: act5LangV188(), loader: act5LoaderV188(), slot, title, text, options, onChoose, onClose });
+  if (scene?.dialog) { scene.dialog.dataset.act5SceneV188 = slot; const paragraph = scene.dialog.querySelector('p'); if (paragraph) paragraph.style.whiteSpace = 'pre-line'; }
+  return scene;
+}
+/** Briefing table: council, quay, ending and credits; true when Act V took the view. */
+function act5OnViewV188() {
+  if (act5FlowOpenV188 || document.querySelector('[data-act5-scene-v188]')) return true;
+  // An extraction or story cinematic still on screen: the table waits for the next visit.
+  if (document.querySelector('.cinematic-v188')) return true;
+  const action = act5TableActionV188(saveSystem.data);
+  if (!action) return false;
+  if (action === 'start-council') { if (commitCandidateV188(candidate => startAct5CouncilV188(candidate))) openAct5CouncilV188(); return true; }
+  if (action === 'council') { openAct5CouncilV188(); return true; }
+  if (action === 'ending') { void playAct5EndingV188(); return true; }
+  if (action === 'credits') { void playAct5CreditsV188(); return true; }
+  let outcome = null;
+  if (!commitCandidateV188(candidate => { outcome = advanceAct5ToEndingV188(candidate); return outcome ? true : false; })) return true;
+  if (!outcome.standoff) { void playAct5EndingV188(); return true; }
+  const lang = act5LangV188(), decision = act5StateV188(saveSystem.data).decision;
+  const text = [ACT5_STANDOFF_TEXT_V188[outcome.standoff][lang], decision?.option === 'hold' && decision.recoveryAttempt ? ACT5_STANDOFF_TEXT_V188.recovery[lang] : null].filter(Boolean).join('\n');
+  act5FlowOpenV188 = true;
+  act5SceneV188({ slot: 'quay-standoff', title: ACT5_STANDOFF_TEXT_V188.title[lang], text, options: [{ id: 'continue', label: lang === 'en' ? 'CONTINUE' : 'CONTINUER' }],
+    onClose: () => { act5FlowOpenV188 = false; void playAct5EndingV188(); } });
+  return true;
+}
+function openAct5CouncilV188() {
+  if (document.querySelector('[data-act5-scene-v188]')) return;
+  const lang = act5LangV188(), en = lang === 'en', council = act5CouncilV188(saveSystem.data, lang);
+  const next = { id: 'continue', label: en ? 'CONTINUE' : 'CONTINUER' };
+  let page = 0;
+  act5FlowOpenV188 = true;
+  act5SceneV188({ slot: 'halloran-order', title: council.title, text: council.situation, options: [next],
+    onChoose: (id) => {
+      if (id === 'continue' && page === 0) { page = 1; return { slot: 'war-council-table', text: [...council.advisors.map(entry => entry.text), ...council.extra].join('\n'), options: [next] }; }
+      if (id === 'continue' && page === 1) {
+        page = 2; const live = act5CouncilV188(saveSystem.data, lang);
+        const header = `${en ? 'QZ17 FILE' : 'DOSSIER QZ17'} · ${live.dossier.count}/${live.dossier.total} · ${live.dossier.signerEstablished ? (en ? 'badge signer established' : 'signataire du badge établi') : (en ? 'badge signer not established' : 'signataire du badge non établi')}`;
+        const lines = live.options.map(option => `${option.label} — ${option.description} ${en ? `→ "${option.ending}"` : `→ « ${option.ending} »`}${option.notes.length ? ` ${option.notes.join(' ')}` : ''}`);
+        return { slot: 'war-council-table', text: [header, live.recommend, ...lines, live.transmitClosed].filter(Boolean).join('\n'),
+          options: live.options.map(option => ({ id: `option:${option.id}`, label: `${en ? 'RECOMMEND' : 'RECOMMANDER'} · ${option.label.toUpperCase()}` })) };
+      }
+      if (id.startsWith('option:')) {
+        let decision = null;
+        if (!commitCandidateV188(candidate => { decision = decideAct5V188(candidate, id.slice(7), lang); return decision ? true : false; })) return null;
+        page = 3; return { slot: 'war-council-table', text: decision.text, options: [{ id: 'close', label: en ? 'TO THE CONVOY' : 'VERS LE CONVOI' }] };
+      }
+      return null;
+    },
+    onClose: () => {
+      act5FlowOpenV188 = false;
+      if (act5StateV188(saveSystem.data).phase === 'final') void playStoryCinematicV188('cin-60').then(() => toast(storyStateV188().objective || ''));
+    } });
+}
+function playAct5EndingV188() {
+  if (act5FlowOpenV188) return Promise.resolve('busy');
+  const summary = act5EndingSummaryV188(saveSystem.data, act5LangV188());
+  if (!summary) return Promise.resolve('none');
+  act5FlowOpenV188 = true;
+  return playStoryCinematicV188('cin-61', { once: false }).then(() => playStoryCinematicV188(summary.cinematic, { once: false }))
+    .then(() => { if (commitCandidateV188(candidate => finishAct5EndingV188(candidate))) toast(storyStateV188().objective || ''); })
+    .finally(() => { act5FlowOpenV188 = false; });
+}
+function playAct5CreditsV188() {
+  if (act5FlowOpenV188) return Promise.resolve('busy');
+  act5FlowOpenV188 = true;
+  return playStoryCinematicV188('cin-99-credits', { once: false }).then(() => {
+    if (commitCandidateV188(candidate => finishAct5CreditsV188(candidate))) toast(act5LangV188() === 'en'
+      ? 'Campaign complete. Free play continues on this save: missions, colony and station stay open.'
+      : 'Campagne terminée. La partie continue sur cette sauvegarde : missions, colonie et station restent ouvertes.');
+  }).finally(() => { act5FlowOpenV188 = false; });
+}
+/** The ECHO-8 locker in the epilogue (§5.8): its label, then CIN-92 and the credits. True when handled. */
+function act5LockerOnReadV188() {
+  const phase = act5StateV188(saveSystem.data).phase, lang = act5LangV188();
+  if (phase === 'epilogue') {
+    if (act5FlowOpenV188 || !commitCandidateV188(candidate => finishAct5EpilogueV188(candidate))) return true;
+    toast(`ECHO-8 · ${act5LockerLabelV188(saveSystem.data, lang)}`);
+    act5FlowOpenV188 = true;
+    void playStoryCinematicV188('cin-92', { once: false }).finally(() => { act5FlowOpenV188 = false; void playAct5CreditsV188(); });
+    return true;
+  }
+  if (phase === 'credits') { void playAct5CreditsV188(); return true; }
+  if (phase === 'complete') { toast(`ECHO-8 · ${act5LockerLabelV188(saveSystem.data, lang)}`); return true; }
+  return false;
+}
+function openAct5EpilogueLineV188(crewId) {
+  const lang = act5LangV188(), text = act5CrewEpilogueLineV188(saveSystem.data, crewId, lang);
+  if (!text) return false;
+  closeHubDialogue({ resume: false, restoreFocus: false }); hubEngine.pause();
+  const name = resolveCrewDefinitionV85(saveSystem.data.crew.find(member => member.id === crewId) || { id: crewId }, CREW)?.name || crewId;
+  commitCandidateV188(candidate => markAct5EpilogueTalkV188(candidate, crewId));
+  act5SceneV188({ slot: 'tantalus-epilogue', title: `${name} · ${lang === 'en' ? 'Epilogue' : 'Épilogue'}`, text,
+    options: [{ id: 'close', label: lang === 'en' ? 'CLOSE' : 'FERMER' }], onClose: () => { if (activeView === 'hub' && !activeHubStation) hubEngine.resume(); } });
+  return true;
+}
+// The bridge (§5.6 step 5, Q2 A): a timed choice over the running mission, no pause. The clock
+// stops while the player pauses the game; leaving the mission closes it without choosing.
+let act5BridgeOverlayV188 = null;
+function maybeOpenAct5BridgeV188() {
+  const campaignId = saveSystem.data.strategy.currentOperation?.campaignId;
+  if (act5BridgeOverlayV188 || activeView !== 'play' || !act5BridgeDueV188(saveSystem.data, campaignId)) return false;
+  const lang = act5LangV188(), total = act5BridgeSecondsV188(saveSystem.data), text = ACT5_BRIDGE_TEXT_V188;
+  const overlay = document.createElement('div'); overlay.className = 'act5-bridge-v188'; overlay.setAttribute('role', 'alertdialog'); overlay.setAttribute('aria-live', 'assertive');
+  Object.assign(overlay.style, { position: 'fixed', left: '50%', top: '12%', transform: 'translateX(-50%)', zIndex: '60', width: 'min(92vw, 560px)',
+    background: 'rgba(5,10,8,.94)', border: '1px solid #7dff9a', borderRadius: '4px', padding: '12px 16px', color: '#e6efe6', font: '14px monospace' });
+  const canvas = Object.assign(document.createElement('canvas'), { width: 640, height: 280 }); Object.assign(canvas.style, { width: '100%', height: 'auto', display: 'block' });
+  const ctx = canvas.getContext?.('2d'); if (ctx) act5LoaderV188().draw(ctx, 'bridge-collapse', 640, 280, { language: lang });
+  const heading = Object.assign(document.createElement('h3'), { textContent: text.title[lang] }); heading.style.margin = '8px 0 4px';
+  const paragraph = Object.assign(document.createElement('p'), { textContent: text.text[lang] }); paragraph.style.margin = '0 0 8px';
+  const clock = Object.assign(document.createElement('p'), { className: 'act5-bridge-clock-v188', textContent: `${total} s` }); clock.style.cssText = 'margin:0 0 8px;color:#e9d07a;font-weight:700';
+  const footer = document.createElement('footer'); footer.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap';
+  let elapsed = 0, last = performance.now(), timer = null;
+  const close = () => { clearInterval(timer); overlay.remove(); act5BridgeOverlayV188 = null; };
+  const finish = (choice, timedOut = false) => {
+    close();
+    if (!chooseAct5BridgeV188(saveSystem.data, choice, { timedOut })) return;
+    try { saveSystem.commit(); } catch (error) { toast(error.message); return; }
+    const state = act5StateV188(saveSystem.data), parts = [timedOut ? text.results.timeout[lang] : text.results[state.bridge][lang]];
+    if (state.bridge === 'colonists' && act5LateColonistsSavedV188(saveSystem.data) > 0) parts.push(text.results.route[lang]);
+    const message = parts.join(' ');
+    engine.pushCaption?.('mission', message); const log = byId('mission-log'); if (log) log.textContent = `RADIO · ${message}`;
+  };
+  for (const id of ['freight', 'colonists']) {
+    const button = Object.assign(document.createElement('button'), { type: 'button', className: 'button', textContent: text.options[id][lang] });
+    button.dataset.act5BridgeV188 = id; button.addEventListener('click', () => finish(id)); footer.append(button);
+  }
+  overlay.append(canvas, heading, paragraph, clock, footer); document.body.append(overlay); act5BridgeOverlayV188 = overlay;
+  timer = setInterval(() => {
+    const now = performance.now(), step = (now - last) / 1000; last = now;
+    if (activeView !== 'play') return close();
+    if (!engine.paused) elapsed += step;
+    const left = Math.max(0, total - elapsed); clock.textContent = `${Math.ceil(left)} s`;
+    if (left <= 0) finish(null, true);
+  }, 200);
+  return true;
+}
+function renderAct5PanelV188() {
+  const host = byId('act5-panel-v188'); if (!host) return;
+  const lang = act5LangV188(), en = lang === 'en', snapshot = act5SnapshotV188(saveSystem.data, lang);
+  const phases = en ? { council: 'WAR COUNCIL', final: 'FINAL MISSIONS', ending: 'ENDING', epilogue: 'EPILOGUE', credits: 'CREDITS', complete: 'COMPLETE' }
+    : { council: 'CONSEIL DE GUERRE', final: 'MISSIONS FINALES', ending: 'FIN', epilogue: 'ÉPILOGUE', credits: 'GÉNÉRIQUE', complete: 'TERMINÉ' };
+  const title = document.createElement('h4');
+  title.textContent = `${en ? 'ACT V · NON-VIABLE' : 'ACTE V · NON VIABLE'} · ${snapshot.phase ? phases[snapshot.phase] : snapshot.open ? (en ? 'DUE' : 'À OUVRIR') : (en ? 'AFTER ACT IV' : 'APRÈS L’ACTE IV')}`;
+  const parts = [title], hint = value => { const line = document.createElement('p'); line.className = 'hint'; line.textContent = value; parts.push(line); };
+  hint(`${en ? '« Transmit »' : '« Transmettre »'} : ${snapshot.transmitOpen ? (en ? 'open (Asphodèle retaken, relay room ready, 5+ pieces)' : 'ouvert (Asphodèle reprise, salle des relais prête, 5 pièces ou plus)') : (en ? 'closed' : 'fermé')}`);
+  if (snapshot.decision) {
+    hint(`${en ? 'Line' : 'Ligne'} : ${snapshot.decision.label} → ${snapshot.decision.endingTitle} (${snapshot.decision.decidedBy === 'echo-9' ? (en ? 'Vega follows Echo-9' : 'Vega suit Echo-9') : (en ? 'Vega decided' : 'Vega a décidé')})`);
+    const list = document.createElement('ul');
+    for (const step of snapshot.steps) { const item = document.createElement('li'); item.dataset.held = String(step.done); item.textContent = `${step.done ? '■' : '□'} ${step.name}`; list.append(item); }
+    parts.push(list);
+  }
+  const button = (label, onclick) => { const entry = Object.assign(document.createElement('button'), { type: 'button', className: 'button compact', textContent: label, onclick }); entry.dataset.act5PanelV188 = 'true'; parts.push(entry); };
+  if (['council', 'ending', 'credits'].includes(snapshot.phase) || (!snapshot.phase && snapshot.open)) button(en ? 'OPEN' : 'OUVRIR', () => { if (!saveSystem.data.strategy.currentOperation) act5OnViewV188(); });
+  if (snapshot.phase === 'epilogue') { hint(en ? 'Epilogue: talk to the crew, then read the ECHO-8 locker in the cryo bay.' : 'Épilogue : parlez à l’équipage, puis lisez le casier ECHO-8 en baie cryo.');
+    button(en ? 'THE TANTALUS LEAVES' : 'LE TANTALUS REPART', () => act5LockerOnReadV188()); }
+  if (snapshot.complete) hint(en ? 'Campaign complete: free play continues.' : 'Campagne terminée : la partie continue.');
+  host.replaceChildren(...parts);
+}
 // Opened from the hub conversation; the hub stays paused until the quest dialog closes.
 function openCrewQuestV188(questId) {
   const quest = getCrewQuestV188(questId); if (!quest) return false;
@@ -1717,9 +1895,9 @@ function openCrewQuestV188(questId) {
 function renderCommandMissionsV110() {
   const destination = byId('command-world-v110'), select = byId('command-mission-v110');
   const active = saveSystem.data.strategy.currentOperation;
-  const eligible = getCommandMissionsV110(saveSystem.data, filterUnlockedCampaignsV188(saveSystem.data, CAMPAIGNS));
+  const eligible = getCommandMissionsV110(saveSystem.data, unlockedCampaignsV188(CAMPAIGNS));
   const selected = CAMPAIGNS.find(c => c.id === (active?.campaignId || saveSystem.data.strategy.plannedCampaignId
-    || deriveStoryCampaignV188(saveSystem.data).recommendedCampaignId));
+    || storyStateV188().recommendedCampaignId));
   const worldIds = new Set(eligible.map(c => c.worldId));
   const preferredWorld = active?.worldId || destination.value;
   const worldId = worldIds.has(preferredWorld) ? preferredWorld : '';
@@ -1727,8 +1905,8 @@ function renderCommandMissionsV110() {
     .map(w => `<option value="${escapeHtml(w.id)}">${escapeHtml(w.name)}</option>`).join('');
   destination.value = worldId; destination.disabled = Boolean(active);
   // V188 (bible §53.1): the story recommendation comes first and is preselected.
-  const recommendedV188 = deriveStoryCampaignV188(saveSystem.data).recommendedCampaignId;
-  const missions = getCommandMissionsV110(saveSystem.data, filterUnlockedCampaignsV188(saveSystem.data, CAMPAIGNS), worldId)
+  const recommendedV188 = storyStateV188().recommendedCampaignId;
+  const missions = getCommandMissionsV110(saveSystem.data, unlockedCampaignsV188(CAMPAIGNS), worldId)
     .sort((a, b) => (b.id === recommendedV188) - (a.id === recommendedV188));
   select.innerHTML = missions.map(c => `<option value="${escapeHtml(c.id)}">${c.id === recommendedV188 ? '★ ' : ''}${escapeHtml(c.name)}</option>`).join('');
   // Selecting a destination is a filter, never an implicit campaign/save mutation.
@@ -1752,6 +1930,7 @@ function renderCommandMissionsV110() {
   renderColonyReconstructionV188();
   renderStationFrontV188();
   renderCrewQuestsPanelV188();
+  renderAct5PanelV188();
   byId('command-mission-status-v110').textContent = active ? 'MISSION ACTIVE · manifeste verrouillé'
     : `${missions.length} ordres reçus. Sélectionnez une affectation pour consulter son manifeste.`;
 }
@@ -1920,7 +2099,7 @@ function renderCampaigns() {
   const mode = byId('campaign-mode').value;
   const term = byId('campaign-search').value.trim().toLowerCase();
   // V188 spec 005: a locked station mission is not offered.
-  const campaigns = filterUnlockedCampaignsV188(saveSystem.data, CAMPAIGNS).filter((campaign) => (mode === 'all' || campaign.mode === mode) && JSON.stringify(campaign).toLowerCase().includes(term));
+  const campaigns = unlockedCampaignsV188(CAMPAIGNS).filter((campaign) => (mode === 'all' || campaign.mode === mode) && JSON.stringify(campaign).toLowerCase().includes(term));
   byId('campaign-list').innerHTML = campaigns.map((campaign, index) => {
     const world = WORLDS.find((entry) => entry.id === campaign.worldId);
     const unlocked = saveSystem.data.galaxy.unlockedWorldIds.includes(campaign.worldId);
@@ -2004,6 +2183,8 @@ function renderOperationPlan() {
   let campaign = CAMPAIGNS.find((entry) => entry.id === saveSystem.data.strategy.currentOperation?.campaignId)
     || CAMPAIGNS.find((entry) => entry.id === saveSystem.data.strategy.plannedCampaignId)
     // V188: the first-hour slice routes the briefing to QZ-18 (bible §53.1).
+    // V188 spec 006: during Act V, its next final mission.
+    || CAMPAIGNS.find((entry) => entry.id === storyStateV188().recommendedCampaignId)
     || CAMPAIGNS.find((entry) => entry.id === deriveStoryCampaignV188(saveSystem.data).recommendedCampaignId)
     || CAMPAIGNS.find((entry) => saveSystem.data.galaxy.unlockedWorldIds.includes(entry.worldId));
   if (!campaign) return;
@@ -2539,7 +2720,7 @@ function renderHubStatus(status = lastHubStatus) {
     if (exerciseObjectiveV89) byId('hub-onboarding-objective-v84').textContent = translateObjectiveV185('exercise', exerciseObjectiveV89);
     const portObjectiveV90 = getPortMeridienObjectiveV90(saveSystem.data.portMeridienV90, saveSystem.data.openingV88, saveSystem.data.onboardingV84);
     if (portObjectiveV90) byId('hub-onboarding-objective-v84').textContent = translateObjectiveV185('port', portObjectiveV90);
-    const storyV188 = deriveStoryCampaignV188(saveSystem.data);
+    const storyV188 = storyStateV188();
     if (!portObjectiveV90 && !exerciseObjectiveV89 && !(objectiveV84 && !objectiveV84.completed) && storyV188.objective) {
       byId('hub-onboarding-objective-v84').textContent = storyV188.objective;
     }
@@ -3346,6 +3527,9 @@ function launchCampaign(campaign = null) {
   // V188 spec 005: the station missions follow their order (intro, S1 → S4, CASSIUS after S2).
   const stationLockV188 = activeOperation ? null : stationLockReasonV188(saveSystem.data, campaign.id);
   if (stationLockV188) { toast(stationLockTextV188(stationLockV188, document.documentElement.lang)); return false; }
+  // V188 spec 006: Act V missions follow the line decided at the war council.
+  const act5LockV188 = activeOperation ? null : act5LockReasonV188(saveSystem.data, campaign.id);
+  if (act5LockV188) { toast(act5LockTextV188(act5LockV188, document.documentElement.lang)); return false; }
   // Act III moral choice (bible §5.3): the M577 manifest is signed before the convoy leaves.
   if (!activeOperation && campaign.id === 'special-apc-convoy' && !normalizeStoryCampaignV188(saveSystem.data.storyCampaignV188).m577Manifest) {
     openM577ManifestDialogV188({ language: document.documentElement.lang, onConfirm: (manifest) => {
@@ -3412,7 +3596,13 @@ function launchCampaign(campaign = null) {
     issuedVehicleId: campaign.id === APC_CONVOY_CAMPAIGN_V121.id ? vehicle.id : specialOperation?.issuedVehicleId || null
   });
   Object.assign(saveSystem.data, { scene: 'mission', worldId: world.id, campaignId: campaign.id, levelSeedId: levelSeed.id });
+  // V188 spec 006: the war council's advantages, once per launch of a final mission (not on a resume).
+  const act5AdvantagesV188 = deployment.resumed ? [] : applyAct5LaunchAdvantagesV188(saveSystem.data, campaign.id);
   saveSystem.commit();
+  if (act5AdvantagesV188.length) {
+    const en = document.documentElement.lang === 'en', labels = { turrets: en ? 'Sanaa’s turret belts (+120 ammunition)' : 'bandes des tourelles de Sanaa (+120 munitions)', armour: en ? 'Cal’s plates (armour 100)' : 'plaques de Cal (blindage 100)' };
+    toast(`${en ? 'War council' : 'Conseil de guerre'} : ${act5AdvantagesV188.map(id => labels[id]).join(', ')}.`);
+  }
   byId('mission-title').textContent = campaign.name;
   pendingResolutionV121 = null;
   byId('retreat-mission').textContent = 'BATTRE EN RETRAITE';
@@ -3476,6 +3666,8 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   const questChangeV188 = applyCrewQuestOperationResultV188(candidate, { success: resolvedSuccess, worldId: operation.worldId || campaign?.worldId });
   // V188 spec 007: a successful station contract adds one to its counter (« Relais en dérive » ×3 opens the relay room).
   applyAsphodeleOperationResultV188(candidate, { success: resolvedSuccess, campaignId: operation.campaignId });
+  // V188 spec 006: the bridge default if the choice never showed.
+  const act5ChangeV188 = applyAct5OperationResultV188(candidate, { success: resolvedSuccess, campaignId: operation.campaignId });
   // V188 debrief: the amounts the hub actually receives (before the transit clock runs).
   outcome.paidV188 = paidRewardsV188(resourcesBeforeV188, candidate.galaxy.resources);
   // V188 reactive lines (bible §53.6): failure, colonist loss, injured return.
@@ -3494,6 +3686,7 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   const colonySiteV188 = id => colonySnapshotV188(candidate, document.documentElement.lang).sites.find(entry => entry.id === id)?.criterion || id;
   if (colonyChangeV188?.validated) toast(document.documentElement.lang === 'en' ? `Port-Méridien: site level validated (${colonySiteV188(colonyChangeV188.validated)} ${colonyChangeV188.level}).` : `Port-Méridien : niveau de chantier validé (${colonySiteV188(colonyChangeV188.validated)} ${colonyChangeV188.level}).`);
   if (colonyChangeV188?.damaged) toast(document.documentElement.lang === 'en' ? `Port-Méridien: a site lost one functioning level (${colonySiteV188(colonyChangeV188.damaged)}).` : `Port-Méridien : un chantier perd un niveau de fonctionnement (${colonySiteV188(colonyChangeV188.damaged)}).`);
+  if (act5ChangeV188?.kind === 'bridge-default') toast(ACT5_BRIDGE_TEXT_V188.results.timeout[document.documentElement.lang === 'en' ? 'en' : 'fr']);
   for (const change of questChangeV188 || []) toast(document.documentElement.lang === 'en'
     ? `DAVID-8R: relay component recovered (${change.components}/${change.needed}).` : `DAVID-8R : composant de relais récupéré (${change.components}/${change.needed}).`);
   for (const line of reactiveLinesV188) {
@@ -3741,6 +3934,8 @@ function handleGameEvent(event) {
     try { commitCurrentRuntimeV78({ includeSessionTime: true }); sessionStart = Date.now(); renderClock(); toast('Terminal : sauvegarde confirmée.'); }
     catch (error) { toast(error.message); }
   }
+  // V188 spec 006: the bridge of « Dernier départ » gives way at the first checkpoint.
+  if (event.type === 'checkpoint') queueMicrotask(maybeOpenAct5BridgeV188);
   if (event.type === 'checkpoint') { audio.checkpoint(); recordOperationFlag(saveSystem.data, `checkpoint-${event.checkpoint}`); log.textContent = `CHECKPOINT ${checkpointLabelV188(event.checkpoint).toUpperCase()} SÉCURISÉ.`; }
   if (event.type === 'power-restored' || event.type === 'shortcut' || event.type === 'archive-recovered') recordOperationFlag(saveSystem.data, event.type);
   if (event.type === 'supply') {
@@ -4125,6 +4320,8 @@ function handleHubAction(interaction) {
   if (!interaction?.action) return;
   // V188 ship-cryo: the sealed ECHO-8 locker shows what the campaign has established.
   if (interaction.action === 'story:echo8-locker') {
+    // V188 spec 006: in the epilogue the locker carries its last label and closes the campaign.
+    if (act5LockerOnReadV188()) return true;
     const notes = echo8LockerNotesV188(saveSystem.data, document.documentElement.lang);
     // V188 spec 007 (bible §7.4): once S3 brought Kessler's tag back, it can be placed in the locker.
     if (kesslerTagPendingV188(saveSystem.data) && !standaloneContext && !creatorOwnerV84 && ownsTimelineV84(hubOwnerV84)) return openKesslerTagDialogV188(notes);
@@ -4695,7 +4892,7 @@ function bind() {
   byId('command-world-v110').onchange = renderCommandMissionsV110;
   byId('command-mission-v110').onchange = event => {
     if (saveSystem.data.strategy.currentOperation) return;
-    const campaign = getCommandMissionsV110(saveSystem.data, filterUnlockedCampaignsV188(saveSystem.data, CAMPAIGNS)).find(c => c.id === event.target.value);
+    const campaign = getCommandMissionsV110(saveSystem.data, unlockedCampaignsV188(CAMPAIGNS)).find(c => c.id === event.target.value);
     if (!campaign) return;
     const previous = saveSystem.data.strategy.plannedCampaignId;
     try { saveSystem.data.strategy.plannedCampaignId = campaign.id; saveSystem.commit(); renderCampaigns(); renderCommandMissionsV110(); }
@@ -4754,11 +4951,19 @@ function bind() {
       const button = Object.assign(document.createElement('button'), { type: 'button', className: 'hub-dialogue-choice crew-quest-choice-v188', textContent: quest.label });
       button.dataset.crewQuestV188 = quest.id; event.currentTarget.append(button);
     }
+    // V188 spec 006: each crew member's last line in the epilogue.
+    if (act5CrewEpilogueLineV188(saveSystem.data, event.detail?.crewId, document.documentElement.lang)) {
+      const button = Object.assign(document.createElement('button'), { type: 'button', className: 'hub-dialogue-choice crew-quest-choice-v188',
+        textContent: document.documentElement.lang === 'en' ? 'EPILOGUE · Last word' : 'ÉPILOGUE · Dernier mot' });
+      button.dataset.act5EpilogueV188 = event.detail.crewId; event.currentTarget.append(button);
+    }
   });
   byId('hub-dialogue-choices').onclick = (event) => {
     if (event.target.closest('[data-asphodele-shuttle-v188]')) { travelToAsphodeleV188(); return; }
     const questIdV188 = event.target.closest('[data-crew-quest-v188]')?.dataset.crewQuestV188;
     if (questIdV188) { openCrewQuestV188(questIdV188); return; }
+    const epilogueCrewV188 = event.target.closest('[data-act5-epilogue-v188]')?.dataset.act5EpilogueV188;
+    if (epilogueCrewV188) { openAct5EpilogueLineV188(epilogueCrewV188); return; }
     const choiceId = event.target.closest('[data-npc-dialogue-choice]')?.dataset.npcDialogueChoice;
     if (choiceId) {
       try { chooseNpcDialogueV62(choiceId); }
