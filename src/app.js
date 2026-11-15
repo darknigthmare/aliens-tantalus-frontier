@@ -3296,6 +3296,24 @@ function playExtractionCinematicV188(boarding) {
     return result;
   });
 }
+// V188 gameplay gaps: in a depth hold W/S step forward/back instead of aiming up/down.
+// The page's control help (toolbar line and aim paragraph) follows the hold, FR or EN.
+const DEPTH_CONTROLS_TOOLBAR_FR_V188 = 'A/D · W/S : PROFONDEUR · ESPACE · MAJ + A/D : VISER · F : TIRER · E : INTERAGIR (CONTRE LA PAROI) · C : COMMANDES · P : PAUSE';
+const DEPTH_CONTROLS_HELP_FR_V188 = 'Cale en profondeur : W/S ou ↑/↓ avancent et reculent dans la profondeur (J2 : I/K) et ne visent plus. MAJ gauche + A/D vise à l’horizontale, la souris vise librement ; F tire dans votre couloir. Portes, échelles et objets s’atteignent contre la paroi.';
+const depthControlsSavedV188 = new Map();
+function showDepthControlsHintV188(active) {
+  const targets = [document.querySelector('.game-toolbar .controls'), byId('mission-aim-help-v83')].filter(Boolean);
+  for (const [index, element] of targets.entries()) {
+    if (active) {
+      if (!depthControlsSavedV188.has(element)) depthControlsSavedV188.set(element, element.innerHTML);
+      element.textContent = tFromFrenchV185(index === 0 ? DEPTH_CONTROLS_TOOLBAR_FR_V188 : DEPTH_CONTROLS_HELP_FR_V188);
+      element.dataset.depthControlsV188 = 'true';
+    } else if (depthControlsSavedV188.has(element)) {
+      element.innerHTML = depthControlsSavedV188.get(element); depthControlsSavedV188.delete(element);
+      delete element.dataset.depthControlsV188;
+    }
+  }
+}
 function handleGameEvent(event) {
   if (!standaloneContext) {
     const extraction = extractionFlowOnEventV188(extractionFlowV188, event);
@@ -3343,6 +3361,7 @@ function handleGameEvent(event) {
     recordOperationFlag(saveSystem.data, event.type);
     log.textContent = alienSurvivalEventLabelV70(event);
   }
+  if (event.type === 'depth-section-controls-v188') return showDepthControlsHintV188(Boolean(event.active));
   if (event.type === 'archive-reader-open') {
     persistMissionResumeState();
     saveSystem.commit();

@@ -6562,6 +6562,9 @@ export const EN_CATALOG_V185 = Object.freeze({
 "Insertions : toujours la version complète": "Insertions: always the full version",
 // V188 dropship handover.
 "E · ÉCHAP · ENTRÉE  PASSER": "E · ESC · ENTER  SKIP",
+// V188 gameplay gaps: depth-hold control help (reviewed through i18n-catalog-maintenance-v186 merge).
+"A/D · W/S : PROFONDEUR · ESPACE · MAJ + A/D : VISER · F : TIRER · E : INTERAGIR (CONTRE LA PAROI) · C : COMMANDES · P : PAUSE": "A/D · W/S: DEPTH · SPACE · SHIFT + A/D: AIM · F: FIRE · E: INTERACT (AT THE WALL) · C: COMMANDS · P: PAUSE",
+"Cale en profondeur : W/S ou ↑/↓ avancent et reculent dans la profondeur (J2 : I/K) et ne visent plus. MAJ gauche + A/D vise à l’horizontale, la souris vise librement ; F tire dans votre couloir. Portes, échelles et objets s’atteignent contre la paroi.": "Depth hold: W/S or ↑/↓ step forward and back in depth (P2: I/K) and no longer aim. Left SHIFT + A/D aims horizontally, the mouse aims freely; F fires along your lane. Doors, ladders and objects are reached at the wall.",
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 // V188 systems bug hunt (merged via i18n-catalog-maintenance-v186 review).
