@@ -48,7 +48,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
     "previousSha256": "95287e9c3f9be2b88db9e391a9a143c4c69be8956b6763e4113645974b9e878d",
-    "currentSha256": "96debc49f8c80a78394379c93e2d294175f8437bf3d51ef9346ff2620d2d1557"
+    "currentSha256": "d7f45e7fcf87baeb9d67e3cd10442c0cf3fa8686f120e90dca168eea1d964388"
   },
   "hub-level.css": {
     "previousSha256": "13e29b3719e1246d595dadca4c786cbeb5a471dece902104b0ccd29a1de9908d",
@@ -60,7 +60,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "package.json": {
     "previousSha256": "ff133a405bfc1ef2afa7085fcb2a6cde27a9f52c4af0de5172a058b47082eb48",
-    "currentSha256": "ee6ddf4d33a403baacec5b6199fb313342a3ec0faabc4f237d34a4096bfae786"
+    "currentSha256": "90571700dd24c907e95cad2e20b798b168a0f4f0a62584d6851fa66296db5d58"
   },
   "player-appearance-v126.css": {
     "previousSha256": "da7045c7fd7d41da99eecf48d316150b2d16fac276fe635bb881034bd68c9320",
@@ -120,7 +120,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "328c764b2bf467d0bc21ae86abf415a7722bd0a88cba486eb2167c22fa8f0b84",
-    "currentSha256": "d42810c09891ded50213fb441f9a9db6a5a430cfe691448531fdc27c06f561f7"
+    "currentSha256": "adf461f6dda32b9495968b6d54b9985c80e6b06cbc5e4d9e41f515c172c10c1f"
   },
   "src/alien-survival-runtime-v70.js": {
     "previousSha256": "65d5c0c4ca446021b6ff58ed6be61fc622c0908ede9d9d74b730fa0efef2fd93",
@@ -330,6 +330,10 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
     "previousSha256": "e8206918faeede321fac0b43275da1a62a80e9591c7ff97b86ec8cf9ed7f5acc",
     "currentSha256": "e946b9050d5346c3467e6af00821095a8e7929cc88025b1adad0fc8142ed640d"
   },
+  "src/npc-dialogue-portraits-v168.js": {
+    "previousSha256": "04a7f8db4f4bb7bd10b2da6d90b8a0e20f647c3c9d0b6123fee77fd65d1b56c7",
+    "currentSha256": "5d7cf32c8b49f454d703e708dd29c344c530aaa4a8f58382c4e6de2313a08f98"
+  },
   "src/npc-dialogue-v62.js": {
     "previousSha256": "806cfb582c5506cf62d09fc1addbf9a2461839c8d38e0e8a24221ef8ec73ac21",
     "currentSha256": "8a6ae1df0901c682f37cf59fe494a865fe1a6316efef8b1e726985440d742afc"
@@ -388,7 +392,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "sw.js": {
     "previousSha256": "ff86bba365c3875c8ebaeb0abe13b2a6185ccd5f1a030b4ee5b15ac0e4a12f9b",
-    "currentSha256": "c79b2426e2e9f92630bc6146fafbef3954635ea8aea81f26c9a0269e95cc93f7"
+    "currentSha256": "4f1b7bd4146e55e34d10de19de121c0569d75fc5a0653a6a1109226317e5ea8c"
   },
   "title-screen-v61.css": {
     "previousSha256": "3a748b04d5e6c9a7e04c189b2c1910c3163a0840968be6bcbb6352e10e16369f",
