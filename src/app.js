@@ -3276,10 +3276,13 @@ function playExtractionCinematicV188(boarding) {
   extractionFlowV188.played = true;
   const resume = activeView === 'play' && engine.running && !engine.paused;
   if (resume) engine.togglePause();
+  // The paused level stays under the overlay; hiding its canvas spares the compositor.
+  const canvas = byId('game-canvas'); if (canvas) canvas.style.visibility = 'hidden';
   const { short } = selectInsertionLengthV188({ worldId: mission.world.id, seenWorldIds: insertionSeenWorldIdsV188(saveSystem.data, 'extraction'),
     alwaysFull: saveSystem.data.settings.insertionAlwaysFullV188 === true });
   return playInsertionCinematicV188({ world: mission.world, campaign: mission.campaign, direction: 'extraction', placeType: boarding.placeType,
     handover: { ...mission.handover, mode: boarding.mode, short } }).then((result) => {
+    if (canvas) canvas.style.visibility = '';
     if (resume && activeView === 'play' && engine.running && engine.paused) engine.togglePause();
     return result;
   });

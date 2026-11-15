@@ -900,7 +900,7 @@ export function insertionCameraV188(kind, progress, state, { reducedMotion = fal
   const amount = reducedMotion ? .3 : 1;
   const zoom = 1 + (lerp(moves[0], moves[3], k) - 1) * amount, x = lerp(moves[1], moves[4], k) * amount, y = lerp(moves[2], moves[5], k) * amount;
   const interior = kind === 'troop-bay' || COCKPIT_KINDS.has(kind), magnitude = reducedMotion ? 0 : (state?.turbulence || 0) * (interior ? 5 : 7) * Math.max(0, Math.min(1, shake));
-  const shakeX = magnitude * (Math.sin(time * 37) + .6 * Math.sin(time * 13)), shakeY = magnitude * .7 * Math.cos(time * 29);
+  const shakeX = magnitude ? magnitude * (Math.sin(time * 37) + .6 * Math.sin(time * 13)) : 0, shakeY = magnitude ? magnitude * .7 * Math.cos(time * 29) : 0;
   return { zoom, x, y, shakeX, shakeY, magnitude };
 }
 

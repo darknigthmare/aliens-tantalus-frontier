@@ -1191,6 +1191,21 @@ Les chapitres Mire Archive 001, Protocole Z-110, Jeri, Éloïse, A.T.A.X.-Q, Le 
 
 **Contraintes :** séquences scriptées dans le moteur Canvas 2D (plans fixes, parallaxe, panoramiques, cadres de dialogue avec portraits `npc-dialogue-portraits-v168.js`), pas de vidéos précalculées. Toutes passables et relisibles ; aucune récompense liée à leur affichage. Musique et sons originaux uniquement.
 
+
+### 10.1 Insertion et extraction : tableau de fidélité (V188, 2026-11-15)
+
+Séquences d’insertion et d’extraction de mission (Tantalus ↔ UD-4L ↔ sol), spécification [specs/003](../../specs/003-insertion-extraction-cinematiques/spec.md). Version complète (45–60 s) la première fois sur un monde, version courte (12–15 s) ensuite, sauf option « toujours la version complète ». Rendu en primitives Canvas, comme placeholders ; emplacements d’art dans [INSERTION_ART_SLOTS_V188.md](../development/INSERTION_ART_SLOTS_V188.md). Le projet ne revendique pas de fidélité « 1:1 » : la colonne de gauche décrit ce que le film montre, les deux autres ce que le projet en fait.
+
+| Apparence documentée (*Aliens*, 1986) | Adaptation du projet | À définir |
+| --- | --- | --- |
+| Le largage : le dropship UD-4L Cheyenne descend de la soute du *Sulaco* en orbite, accroché à son bras, puis se détache et plonge vers LV-426. | Le vaisseau est l’USS Tantalus, pas le *Sulaco*. Sa « baie de largage 2 » reprend l’idée : rail, pince, portes ouvertes sur l’espace, compte à rebours de largage. Opérateur radio « TANTALUS · OPS » [PROPOSÉ]. | Plan de coupe et dimensions de la baie ; nom de l’opérateur. |
+| Silhouette de l’UD-4L dans les plans de vol : coque anguleuse, tourelle sous le nez, ailes courtes porte-armes, double dérive sur poutres de queue, rampe arrière. | Profil latéral simplifié en primitives (`ud4l-side`), mêmes repères. Couleur vert olive et marquages ambre repris du hangar du hub. Pilote : Maksim Orlov (CIN-03). | Image de référence produite et validée pour l’emplacement `ud4l-side`. |
+| Le M577 est transporté dans la soute ventrale du dropship et en sort au sol, sur Hadley’s Hope. | Si la mission déploie le M577 (véhicule `vehicle-001`/`vehicle-002`, gabarit `colony-multiroute` ou `planet-exterior`), il est dessiné sous le ventre, largué au contact, puis réembarqué à l’extraction. Sinon, les marines descendent par la rampe. | Proportions exactes M577/UD-4L ; séquence d’arrimage. |
+| La soute de troupe étroite : sièges face à face, arceaux de harnais abaissés, éclairage rouge, secousses pendant la descente. | Plan « soute de troupe » : six sièges (quatre avec le M577), harnais, éclairage rouge, petit écran d’état lié aux mêmes données de vol. Ligne de Tamsin Velez [PROPOSÉ]. | Nombre de sièges de référence. |
+| Les écrans du cockpit : moniteurs monochromes à vecteurs, terrain filaire, grille, lectures de télémétrie pendant l’approche dans la tempête. | Quatre écrans CRT animés par un seul état de vol : NAV (monde, coordonnées, cap, heure locale, météo), TERRAIN filaire défilant ou réticule d’amarrage, TÉLÉMÉTRIE (altitude, vitesse, assiette, température de coque), SYSTÈMES (alertes forme + couleur, compte à rebours). Coordonnées et heures sans donnée de monde : [PROPOSÉ]. | Contenu exact des écrans du film ; typographie. |
+| L’arrivée sur LV-426 se fait de nuit, par vent fort et pluie. | Acheron : tempête de nuit. Cocyte : pluie au crépuscule (CIN-00, CIN-03). Autres mondes : météo déduite de l’atmosphère et du biome ; heure locale [PROPOSÉ]. | Météo des mondes de projet non décrits. |
+| — (le film ne montre pas de descente sans atmosphère ni d’amarrage du dropship) | Lune ou astéroïde sans air : descente propulsée, sans plasma ni nuages. Vaisseau ou station : approche et amarrage par la rampe arrière. Les deux sont des inventions du projet [PROPOSÉ]. | Procédure d’amarrage de l’UD-4L. |
+
 ---
 
 ## 11. Raccordement technique — [PROPOSÉ]
