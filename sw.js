@@ -203,6 +203,7 @@ const SHELL = Object.freeze([
   '/src/hub-prologue-rooms-v188.js',
   '/src/audio-cues-v188.js',
   '/src/caste-behaviors-v188.js',
+  '/src/creature-scale-v188.js',
   '/src/combat-feel-v188.js',
   '/src/vfx-v188.js',
   '/src/vfx-slots-v188.js',

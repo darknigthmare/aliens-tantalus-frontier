@@ -19,6 +19,8 @@ Pas de génération d’image (décision du propriétaire, 2026-11-15). Le pont 
 
 Échelle projet : 1 m ≈ 51 px. Les statures de `ENEMY_DISPLAY_STATURES_V110` sont des unités de mise en scène du projet, non certifiées : le K-Series de base y vaut 156 px (≈ 3 m), au-dessus des 2,1–2,5 m d’un guerrier ; la reine de base vaut 298 px (≈ 5,8 m) et les variantes de reine 340 px. Ces valeurs de caste ne sont pas modifiées ici et restent à arbitrer. Aucune fidélité 1:1 à la franchise n’est revendiquée.
 
+Suite (décision du propriétaire du 2026-11-16) : l’arbitrage est fait dans [`src/creature-scale-v188.js`](../../src/creature-scale-v188.js) — guerrier 118 px (2,3 m), reine 245 px (4,8 m), autres castes au même rapport au guerrier, appliqué au dessin de mission, aux boîtes de collision et au catalogue. Tableau avant → après, fidélité et mesures : bible §56.4, « Échelle des créatures » [PROPOSÉ]. La table V110 et la règle de l’item 14 restent en place ; la nouvelle couche s’applique par-dessus.
+
 ## Limites
 
 - 25 poses de variantes systémiques sont réduites (coureurs, bombardiers, broyeurs, K-Series, ovomorphes, facehuggers, chestbursters) ; leurs hitbox restent celles des données : un facehugger ou un chestburster dessiné à 20–22 px garde une hitbox plus grande que le sprite.
