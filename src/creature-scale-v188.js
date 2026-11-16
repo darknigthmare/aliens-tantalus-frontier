@@ -206,20 +206,27 @@ export function withCreatureScaleV188(Base) {
       enemy.w = body.w / k; enemy.h = body.h / k; enemy.x = fx - enemy.w / 2; enemy.y = fy - enemy.h;
       try { return super.drawEnemy(ctx, enemy); } finally { Object.assign(enemy, body); ctx.restore?.(); }
     }
-    /** Scale profile of a visual: idle scale, per-state scales (never taller than idle) and body. */
-    creatureScaleProfileV188(enemy) {
+    /** Scale profile of a visual, measured on the legacy body: idle scale, per-state scales
+     * (never taller than idle) and the new body. Cached per visual until confirmed stable. */
+    creatureScaleProfileV188(enemy, body = enemy) {
       const cache = this.creatureScaleCacheV188 ||= new Map(), key = visualKey(enemy);
       if (cache.has(key)) return cache.get(key);
+      const profile = this.buildCreatureScaleProfileV188(enemy, body, key);
+      if (profile) cache.set(key, profile);
+      return profile;
+    }
+    buildCreatureScaleProfileV188(enemy, body, key = visualKey(enemy)) {
       const target = creatureTargetV188(enemy);
-      if (target.kind === 'human') { const profile = Object.freeze({ key, target, k: 1, states: null, exempt: true }); cache.set(key, profile); return profile; }
-      const legacy = this.measureCreatureDrawV188(enemy, 'idle', 1);
+      if (target.kind === 'human') return Object.freeze({ key, target, k: 1, states: null, exempt: true });
+      const base = { ...enemy, x: finite(body.x), y: finite(body.y), w: finite(body.w), h: finite(body.h) };
+      const legacy = this.measureCreatureDrawV188(base, 'idle', 1);
       if (!legacy) return null; // image not loaded yet: retried later
       const height = target.height ?? legacy.height * CREATURE_SCALE_V188.creatureFactor;
       let k = height / legacy.height;
       const caste = enemy.caste || enemiesById.get(profileOf(enemy))?.caste || null;
-      const hitbox = creatureHitboxV188({ height, drawnWidth: legacy.width * k, legacyW: finite(enemy.w), legacyH: finite(enemy.h), caste });
+      const hitbox = creatureHitboxV188({ height, drawnWidth: legacy.width * k, legacyW: base.w, legacyH: base.h, caste });
       // Re-measure on the new body (a renderer may size the sprite on the body).
-      const probe = { ...enemy, w: hitbox.w, h: hitbox.h, x: enemy.x + enemy.w / 2 - hitbox.w / 2, y: enemy.y + enemy.h - hitbox.h };
+      const probe = { ...base, w: hitbox.w, h: hitbox.h, x: base.x + base.w / 2 - hitbox.w / 2, y: base.y + base.h - hitbox.h };
       const check = this.measureCreatureDrawV188(probe, 'idle', k);
       if (check?.height > 0) k *= height / check.height;
       const states = { idle: k };
@@ -228,9 +235,18 @@ export function withCreatureScaleV188(Base) {
         const drawn = this.measureCreatureDrawV188(probe, state, k);
         states[state] = drawn?.height > height ? k * height / drawn.height : k;
       }
-      const profile = Object.freeze({ key, target, k, height, legacyHeight: legacy.height, legacyWidth: legacy.width,
+      return Object.freeze({ key, target, k, height, legacyHeight: legacy.height, legacyWidth: legacy.width, legacyPath: legacy.path,
         drawnWidth: legacy.width * k, hitbox: Object.freeze(hitbox), states: Object.freeze(states), exempt: false });
-      cache.set(key, profile); return profile;
+    }
+    /** Puts the profile's body on an enemy around its current feet and horizontal centre. */
+    applyCreatureBodyV188(enemy, profile, legacy) {
+      const { w, h } = profile.hitbox, cx = enemy.x + enemy.w / 2, feet = enemy.y + enemy.h, previousW = enemy.w;
+      enemy.w = w; enemy.h = h; enemy.x = cx - w / 2; enemy.y = feet - h;
+      if (Number.isFinite(enemy.spawnX)) enemy.spawnX += (previousW - w) / 2;
+      enemy.spriteHitbox = null;
+      enemy.creatureScaleV188 = Object.freeze({ schema: 188, exempt: false, key: profile.key, kind: profile.target.kind,
+        referenceId: profile.target.referenceId, target: profile.height, k: profile.k, legacyW: legacy.w, legacyH: legacy.h, w, h });
+      return enemy.creatureScaleV188;
     }
     /** Applies the V188 body once per enemy, keeping its feet and horizontal centre. */
     normalizeCreatureV188(enemy) {
@@ -240,13 +256,36 @@ export function withCreatureScaleV188(Base) {
       if (!profile) { enemy.creatureScaleRetryV188 = finite(this.animationTime) + .25; return null; }
       const legacy = { w: finite(enemy.w), h: finite(enemy.h) };
       if (profile.exempt) { enemy.creatureScaleV188 = Object.freeze({ schema: 188, exempt: true, legacyW: legacy.w, legacyH: legacy.h, k: 1 }); return enemy.creatureScaleV188; }
-      const { w, h } = profile.hitbox, cx = enemy.x + legacy.w / 2, feet = enemy.y + legacy.h;
-      enemy.w = w; enemy.h = h; enemy.x = cx - w / 2; enemy.y = feet - h;
-      if (Number.isFinite(enemy.spawnX)) enemy.spawnX += (legacy.w - w) / 2;
-      enemy.spriteHitbox = null;
-      enemy.creatureScaleV188 = Object.freeze({ schema: 188, exempt: false, key: profile.key, kind: profile.target.kind,
-        referenceId: profile.target.referenceId, target: profile.height, k: profile.k, legacyW: legacy.w, legacyH: legacy.h, w, h });
-      return enemy.creatureScaleV188;
+      return this.applyCreatureBodyV188(enemy, profile, legacy);
+    }
+    /** A first measurement can catch a fallback image while the real atlas loads: each profile is
+     * re-measured on the legacy body until two later measurements agree; a change rebuilds it. */
+    revalidateCreatureProfilesV188() {
+      const cache = this.creatureScaleCacheV188, checks = this.creatureScaleChecksV188 ||= new Map(), now = finite(this.animationTime), seen = new Set();
+      if (!cache?.size || !Array.isArray(this.enemies)) return 0;
+      let rebuilt = 0;
+      for (const enemy of this.enemies) {
+        const record = enemy?.creatureScaleV188, profile = record && !record.exempt && cache.get(record.key);
+        if (!profile || seen.has(record.key)) continue; seen.add(record.key);
+        const check = checks.get(record.key) || { count: 0, at: -Infinity };
+        if (check.count >= 2 || now - check.at < .2) continue;
+        const body = { w: record.legacyW, h: record.legacyH, x: enemy.x + enemy.w / 2 - record.legacyW / 2, y: enemy.y + enemy.h - record.legacyH };
+        const measured = this.measureCreatureDrawV188({ ...enemy, ...body }, 'idle', 1);
+        if (!measured) continue;
+        if (Math.abs(measured.height - profile.legacyHeight) <= .5 && measured.path === profile.legacyPath) { checks.set(record.key, { count: check.count + 1, at: now }); continue; }
+        const next = this.buildCreatureScaleProfileV188(enemy, body, record.key); if (!next) continue;
+        cache.set(record.key, next); checks.set(record.key, { count: 0, at: now }); rebuilt++;
+        for (const other of this.enemies) if (other?.creatureScaleV188?.key === record.key)
+          this.applyCreatureBodyV188(other, next, { w: other.creatureScaleV188.legacyW, h: other.creatureScaleV188.legacyH });
+      }
+      return rebuilt;
+    }
+    /** Confirms every profile now (tests, previews): repeated until stable or `rounds` exhausted. */
+    settleCreatureScaleV188(rounds = 4) {
+      for (let round = 0; round < rounds; round++) {
+        for (const value of (this.creatureScaleChecksV188 || new Map()).values()) value.at = -Infinity;
+        this.revalidateCreatureProfilesV188();
+      }
     }
     normalizeCreaturesV188(limit = 48) {
       if (!Array.isArray(this.enemies) || !this.creatureScaleEnabledV188()) return 0;
@@ -265,6 +304,7 @@ export function withCreatureScaleV188(Base) {
     }
     update(delta) {
       this.normalizeCreaturesV188();
+      this.revalidateCreatureProfilesV188();
       return super.update(delta);
     }
     refreshSpriteCollisionProfiles() {

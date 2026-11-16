@@ -2,7 +2,7 @@ import { resolveSpriteSheet, SPRITE_PIVOTS, SPRITE_CLIP_SETS } from './sprite-an
 import { getEnemyDisplayPoseV110 } from './enemy-display-scale-v110.js';
 import { ENEMY_DISPLAY_ALPHA_V110 } from './enemy-display-alpha-v110.js';
 // V188: the catalogue stages every creature on the franchise-documented scale (creature-scale-v188.js).
-import { CREATURE_SCALE_V188, getEnemyDisplayDimensionsV188, getEnemyDisplayStatureV188 } from './creature-scale-v188.js';
+import { CREATURE_SCALE_V188, creatureTargetV188, getEnemyDisplayDimensionsV188, getEnemyDisplayStatureV188 } from './creature-scale-v188.js';
 
 // A shared world-pixel scale, never a claim about canonical physical metres.
 // Keep the renderer's rectangular dimensions and ground pivot; fitting each
@@ -25,6 +25,9 @@ export function getCatalogGameplayScaleV72(visual, pixelsPerWorldPixel = 0.5, pr
   if (stature && bounds && cellHeight > 0) {
     const ratio = stature.height / (height * (bounds[3] - bounds[1]) / cellHeight);
     width *= ratio; height *= ratio;
+  } else if (profileId && profileId !== 'marine-reference' && creatureTargetV188({ id: profileId }).kind === 'undeclared') {
+    // V188: a creature without a declared stature keeps its proportion to the warrior (as in missions).
+    width *= CREATURE_SCALE_V188.creatureFactor; height *= CREATURE_SCALE_V188.creatureFactor;
   }
   const pivotY = display?.bottom ?? (bounds ? bounds[3] / cellHeight : pivot ? pivot.y / sheet.cellHeight : 1);
   const visibleWidth = bounds ? width * (bounds[2] - bounds[0]) / cellWidth : width;
