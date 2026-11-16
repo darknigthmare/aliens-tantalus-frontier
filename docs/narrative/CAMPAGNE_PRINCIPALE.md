@@ -1154,7 +1154,7 @@ Décisions par défaut appliquées : Q22 (A, modules construits dans le moteur d
 - **Portes scellées visibles, avec leur raison** : sas 2 (UD-4L d'Echo-8, laissé en place), sas 3 (navette Crucible de Grue), hangar de réparation, quartiers (colonie *Autonome*), infirmerie de station, ponts inférieurs (missions de nuit). Ces quatre modules de §42.2 ne sont **pas** construits.
 - **Ouverture des modules** : pont de contrôle et anneau à S4 ; laboratoire à S3 ; mémorial après *Les journaux de l'équipage* ; serre après *La serre* ; marché après *Le pacte de l'anneau* **et** le pacte accepté auprès de Grue aux quais (expulsés : marché fermé) ; salle des relais après trois *Relais en dérive*.
 - **Missions annexes (7)** : les identifiants de §7.2, sur Cocyte, gabarit d'intérieur de vaisseau, objectifs existants. **[PROPOSÉ]** : toutes après S4 ; *Ce que CASSIUS a vu* exige CASSIUS réécrit (bridé, ses archives font partie des annexes fermées) ; *Accès administrateur* exige CASSIUS conservé. Objectifs [PROPOSÉ] : `recover black-box data` (Echo-8, balise, caméras), `board a drifting vessel` (Grue), `navigate the vent network` (journaux), `restore atmospheric processing` (serre), `destroy a neuro-link relay` (BISHOP-9).
-- **Contrats locaux (6), rejouables** : `station-c-conduits`, `station-c-relais` (*Relais en dérive*, `recover black-box data`), `station-c-epave`, `station-c-pression`, `station-c-nid`, `station-c-synthetique`, objectifs de §7.2. Chaque opération réussie compte une fois. Seul *Relais en dérive* a un effet (salle des relais) ; les autres sont comptés sans effet.
+- **Contrats locaux (6), rejouables** : `station-c-conduits`, `station-c-relais` (*Relais en dérive*, `recover black-box data`), `station-c-epave`, `station-c-pression`, `station-c-nid`, `station-c-synthetique`, objectifs de §7.2. Chaque opération réussie compte une fois. Effets : voir §7.7 (suite du 2026-11-16).
 - **Carte du réseau QZ** (pont de contrôle) : liste missions et contrats, avec leurs verrous ; une mission ouverte se planifie et part du hangar du Tantalus. **[PROPOSÉ]** : lancer une opération depuis la station ramène d'abord l'UD-4L au Tantalus.
 - **Transmettre** : dans la salle des relais, E sur les baies de transmission les met en ligne. `asphodeleRelayReadyV188(save)` = station reprise ∧ trois *Relais en dérive* ∧ baies en ligne ; `finalChoiceOptionsV188` le lit par défaut. Le choix final et les fins appartiennent à l'Acte V (spec 006).
 - **Cinématiques** : CIN-70 (fin de la quête de Rook, avant S1), CIN-71 (après S2, avant la décision), CIN-72 (après S3, avant la scène de retour). Une sauvegarde qui a passé ces moments n'y est pas renvoyée. Lignes [PROPOSÉ].
@@ -1172,7 +1172,36 @@ Décisions par défaut appliquées : Q22 (A, modules construits dans le moteur d
 | Echo-8, Kessler, Grue, Crucible | — | Créations du projet, silhouettes en primitives | Visages, costumes |
 
 - **Art** : 20 emplacements nommés (`src/asphodele-hub-slots-v188.js`), placeholders en primitives Canvas, 1 m ≈ 51 px ; aucune image générée.
-- **Reste à faire** : quartiers, infirmerie, ponts inférieurs et hangar de réparation ; commerce du marché (Q30) ; effets des contrats autres que *Relais en dérive* ; décors de station pour les missions annexes et les contrats ; rotation visuelle de l'anneau en jeu ; art final ; plan V3 (Q23 B, non retenu).
+- **Reste à faire** (mis à jour par §7.7) : ~~quartiers, infirmerie, ponts inférieurs et hangar de réparation ; commerce du marché (Q30) ; effets des contrats autres que *Relais en dérive* ; décors de station pour les missions annexes et les contrats~~ → §7.7 ; restent la rotation visuelle de l'anneau en jeu, l'art final et le plan V3 (Q23 B, non retenu).
+
+### 7.7 Modules rouverts, effets des contrats, marché, foules — [PARTIEL] V188 (suite de la spec 007, 2026-11-16)
+
+Décision par défaut appliquée : Q30 (A, économie existante et stock limité par cycle). Code : `src/asphodele-hub-v188.js` (quatre pièces), `src/asphodele-missions-v188.js` (effets, ronde de nuit), `src/asphodele-economy-v188.js` (marché, révision du Cheyenne, quartiers, infirmerie), `src/asphodele-crowd-v188.js` (foules), `src/asphodele-mission-dressing-v188.js` (habillage des missions).
+
+| Module | Vue | Ouverture | Interactions |
+| --- | --- | --- | --- |
+| **Quartiers** (anneau) | V1 | Port-Méridien au palier *Autonome* (§7.3) | Registre des cabines : équipage et colons ramenés ; installer les volontaires une fois, moral de l'équipage +4 **[PROPOSÉ]** |
+| **Infirmerie de station** (pont de contrôle) | V1 | S4 (§42.2) | Lits : le membre le plus blessé est soigné par la règle existante (1 MÉDICAL, 1 h, `treatCrewMember`) ; scanner de quarantaine : infestation de la station |
+| **Ponts inférieurs** (pont de contrôle) | V1 | S3 (§42.2), hub actif | Barricades d'Echo-8 (« E-8 05:52 », **[PROPOSÉ]**) ; ronde de nuit : planifie `orig-asphodele-2` *Inspection de nuit* (§39.2, type L, `navigate the vent network`, rejouable) |
+| **Hangar de réparation** (quais) | V2 | S4 et une *Remise en pression d'un module* **[PROPOSÉ]** (§7.2 : « ouvre un module du hub ») | Atelier du Cheyenne : révision 1 (600 CR, 30 alliage, −1 carburant par déploiement), révision 2 (1 000 CR, 60 alliage, 8 R&D, −2) **[PROPOSÉ]** |
+
+- **Effets des contrats [PROPOSÉ]**, additifs, appliqués une fois par opération réussie (garde : identifiant d'opération), affichés au compte rendu et sur la carte du réseau QZ : *Inspection des conduits* sécurité de la station +10 (plafond 60) ; *Inspection de nuit* +5 ; la sécurité réduit de 1 point par tranche de 10 le risque des opérations de la station ; *Purge d'un nid* infestation de la station −10 (départ 40) et de Cocyte −3 ; *Récupérer un synthétique* main-d'œuvre +1 (plafond 3), +1 au stock de chaque achat du marché ; *Épave à proximité* +12 alliage, +6 carburant ; *Remise en pression d'un module* ouvre le hangar de réparation.
+- **Marché Crucible (Q30 A) [PROPOSÉ]** : pièces de récupération (240 CR → 10 alliage, 3 par cycle), cellules de carburant (200 CR → 8, 3), trousses médicales (180 CR → 3, 2), revente d'alliage (10 → 120 CR, 2). Un cycle est un jour stratégique ; l'alliage se revend deux fois moins cher qu'il ne s'achète : aucune suite d'échanges ne rapporte. Refus nommés (stock épuisé, ressources manquantes au format des refus de `save.js`, opération en cours) ; aucune ressource négative. Armes : non vendues **[À DÉFINIR]**.
+- **Foules (§42.2)** : dockers aux quais (4), marchands Crucible et techniciens sur l'anneau (4), techniciens au rayon, au pont de contrôle et au hangar, marchands au marché. Vie des PNJ du hub (`advanceNpcLifeV136`) ; règle de `clearRoomDoorwayPostV188` appliquée aux portes, au sas de l'UD-4L et aux postes muraux. Silhouettes en primitives (1,75 m ≈ 89 px) ; les marchands partent si les récupérateurs sont expulsés. Effectifs **[PROPOSÉ]**.
+- **Habillage des missions de la station** : missions annexes, contrats et ronde de nuit gardent la géométrie du gabarit d'intérieur de vaisseau ; une couche de fond y pose des panneaux rivetés, boîtiers CRT, chemins de câbles et panneaux de secteur (« ASPHODÈLE · MOYEU »…) tous les 6 m, une bande de danger coupée à chaque passage, et un élément propre à la mission (enregistreurs, résine, récupération, manomètres, caméra de CASSIUS).
+- **Corrections** : l'objectif du Tantalus n'est plus affiché à bord de la station ; la bande de danger des quais s'arrête aux portes ; la passerelle du port affiche un libellé FR/EN au lieu de `UNDOCKED` ; les noms précédés de « ★ » sont traduits.
+- **Sauvegarde** : champs additifs de `asphodeleHubV188` (`quartersSettled`, `cheyenne`, `market`, `lastContractOpV188`, compteur `night`) ; une sauvegarde de la spec 007 se charge avec leurs valeurs par défaut.
+- **Fidélité** : aucune fidélité « 1:1 ».
+
+| Élément | Apparence documentée (source citée) | Adaptation du projet | À définir |
+| --- | --- | --- | --- |
+| Coursives des missions | Sevastopol, *Alien: Isolation* (2014) : tôles rivetées, bandes jaune-noir, boîtiers CRT | Station Seegson du réseau QZ, panneaux de secteur | Décors (`asph-msn-*`) |
+| Infirmerie | Laboratoires médicaux de Hadley's Hope, *Aliens* (1986) : moniteurs verts | Petite infirmerie de station, arche de scanner | Médecin, art |
+| Hangar de réparation | Hangar du *Sulaco*, *Aliens* (1986) : rails de grue, bandes de danger | Atelier du Cheyenne | Vaisseau en réparation, art |
+| Dockers, marchands, techniciens | Techniciens de Sevastopol, *Alien: Isolation* (2014) | Silhouettes en primitives | Costumes, visages |
+
+- **Art** : 22 emplacements ajoutés (42 au total), primitives Canvas, 1 m ≈ 51 px ; aucune image générée.
+- **Reste à faire** : art final ; commerce d'armes ; médecin, jardiniers et mécaniciens ; `orig-asphodele-1`, `-3` et `-4` (§39.2) ; rotation visuelle de l'anneau ; plan V3.
 
 ---
 
@@ -3527,6 +3556,8 @@ La station tourne sur elle-même : son **anneau extérieur** (quais, marché) do
 ### 42.4 Première version — [PARTIEL] V188 (spec 007, 2026-11-15)
 
 Construits : plan (anneau + rayon A, en V2, sans vue V3, Q23 A), quais (V2), pont de contrôle, salle des relais, laboratoire de transit, mémorial, serre, marché (V1) : 8 modules sur 12, en placeholders Canvas. Scellés, visibles avec leur raison : quartiers, infirmerie de station, ponts inférieurs, hangar de réparation. PNJ : Grue seule (silhouette) ; dockers, marchands, techniciens, jardiniers, mécaniciens et médecin restent à faire. Commerce (Q30) et rotation visuelle de l'anneau non faits. Détail en §7.6.
+
+**Suite du 2026-11-16 (§7.7)** : les 12 modules sont atteignables à pied — quartiers (*Autonome*), infirmerie (S4), ponts inférieurs (S3) et hangar de réparation (V2, après une remise en pression) rouverts avec leurs interactions. Commerce Crucible ouvert (Q30 A). PNJ : dockers, marchands et techniciens (foules, primitives) ; jardiniers, mécaniciens nommés et médecin restent à faire. Rotation visuelle de l'anneau et plan V3 non faits.
 
 ---
 

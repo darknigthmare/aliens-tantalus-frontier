@@ -27,10 +27,18 @@
 - [x] T014 QA Chromium au clavier (`scripts/qa-asphodele-hub-v188.mjs`, fixtures déclarées), mesures de trame.
 - [x] T015 Bible §7.5, §7.6, §10, §42.4, §56.13 ; audit `AUDIT_CONTENU_V188.md`.
 
+## Phase 7: Suite (2026-11-16)
+- [x] T016 Quatre modules rouverts, portes à retour, interactions : quartiers (palier *Autonome*, installation des volontaires, moral +4), infirmerie (S4, soins par `treatCrewMember`, scanner), ponts inférieurs (S3, barricades d'Echo-8, ronde de nuit `orig-asphodele-2` de §39.2), hangar de réparation (V2, ouvert par une *Remise en pression d'un module*, révision du Cheyenne : −1/−2 carburant par déploiement).
+- [x] T017 Effets des cinq autres contrats, additifs et visibles (toast de compte rendu, carte du réseau QZ) : sécurité de la station (conduits, rondes de nuit ; −1 risque des opérations de station par 10), infestation de la station et de Cocyte (nid), main-d'œuvre (synthétique ; stock du marché), alliage et carburant (épave), module remis en pression (hangar). Garde par identifiant d'opération.
+- [x] T018 Marché Crucible (Q30 A) : quatre offres sur les ressources existantes, stock par cycle (jour stratégique), refus au format de `strategicCostRefusalV188`, aucune boucle rentable, aucune ressource négative.
+- [x] T019 Habillage de station des missions annexes, contrats et ronde de nuit (`asphodele-mission-dressing-v188.js`), 9 emplacements `asph-msn-*`.
+- [x] T020 Foules de §42.2 (dockers, marchands, techniciens) sur `advanceNpcLifeV136`, portes et sas dégagés (règle de `clearRoomDoorwayPostV188`).
+- [x] T021 Corrections : objectif du Tantalus masqué à bord de la station, bande de danger arrêtée aux portes, libellé FR/EN de la passerelle, noms « ★ » traduits.
+- [x] T022 `scripts/verify-asphodele-hub-2-v188.mjs` et `scripts/qa-asphodele-hub-2-v188.mjs`, admis ; `sw.js` : trois modules ; bloc anglais revu.
+
 ## Reporté
-- Modules scellés : quartiers (colonie *Autonome*), infirmerie, ponts inférieurs (missions de nuit §39.2), hangar de réparation.
-- Commerce Crucible du marché (Q30).
-- Décors propres de la station pour les missions annexes et les contrats (gabarit d'intérieur de vaisseau).
-- Effets des contrats autres que « Relais en dérive » (sécurité, infestation, main-d'œuvre) : comptés, sans effet.
 - Choix final et fins (spec 006, autre chantier).
-- Art final de tous les emplacements `asph-*`.
+- Art final de tous les emplacements `asph-*` (42 emplacements, primitives Canvas).
+- Plan V3 de la station (Q23 B, non retenu) et rotation visuelle de l'anneau.
+- Commerce d'armes du marché (seules pièces et ressources sont échangées), médecin, jardiniers et mécaniciens nommés.
+- Autres lieux de §39.2 : `orig-asphodele-1`, `-3`, `-4`.

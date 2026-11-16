@@ -376,6 +376,9 @@ const FORGE_TOOLING_V140 = new Set([
   'specs/007-hub-asphodele/tasks.md',
   'scripts/verify-asphodele-hub-v188.mjs',
   'scripts/qa-asphodele-hub-v188.mjs',
+  // V188 Asphodèle follow-up (spec 007): second suite and browser QA, source-only exact paths.
+  'scripts/verify-asphodele-hub-2-v188.mjs',
+  'scripts/qa-asphodele-hub-2-v188.mjs',
   // V188 Act V, endings and epilogue (spec 006), source-only exact paths.
   'specs/006-acte-v-fins',
   'specs/006-acte-v-fins/checklists',

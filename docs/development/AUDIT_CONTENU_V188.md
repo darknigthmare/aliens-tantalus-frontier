@@ -91,7 +91,7 @@ Les statuts « À faire » du §53 (tir, tension, caste, accessibilité, répliq
 | S1 L'arrimage, S2 La voix de CASSIUS, S3 Les ponts scellés, S4 Le hub Asphodèle | Manquant | Q6 : produire S1-S4 comme missions avant le hub ; Q103 : feature Spec Kit |
 | Choix CASSIUS (réécrire / brider / effacer) | Manquant | Q7 : choix définitif |
 | Annexes (7) et contrats locaux (6) | Partiel (spec 007) | Les 13 sont lançables après S4, verrous [PROPOSÉ] ; contrats comptés ; seul *Relais en dérive* a un effet ; décor générique d'intérieur de vaisseau |
-| Hub Asphodèle : 7 modules (§7.3, §42) | Partiel (spec 007) | 8 modules sur 12 de §42.2 atteignables à pied (Q22 A, Q23 A) ; quartiers, infirmerie, ponts inférieurs, hangar de réparation scellés ; commerce absent |
+| Hub Asphodèle : 7 modules (§7.3, §42) | Partiel (spec 007 et suite) | 12 modules de §42.2 atteignables à pied (Q22 A, Q23 A) ; quartiers, infirmerie, ponts inférieurs et hangar de réparation rouverts (§7.7) ; commerce Crucible (Q30 A) ; effets des six contrats ; foules ; art en primitives, plan V3 non fait |
 | Décor de station, CASSIUS, récupérateurs, dropship d'Echo-8 (§29.4) | Bloqué (art) | Primitives Canvas possibles (Q79) |
 
 ## 5. Quêtes du Tantalus (§8)
@@ -206,7 +206,7 @@ Vérifications : `node --test scripts/verify-content-gaps-v188.mjs` (13 tests) ;
 
 | Élément | Avant | Après | Preuve |
 | --- | --- | --- | --- |
-| Hub Asphodèle | Manquant | Partiel | Navette depuis le hangar du Tantalus ; 9 pièces (8 modules de §42.2) parcourues au clavier, portes à retour, reprise ; art en primitives |
+| Hub Asphodèle | Manquant | Partiel | Navette depuis le hangar du Tantalus ; 13 pièces (les 12 modules de §42.2) parcourues au clavier, portes à retour, reprise ; marché, effets des contrats, foules (suite du 2026-11-16) ; art en primitives |
 | Annexes et contrats | Manquant | Partiel | 7 annexes et 6 contrats au catalogue (472 campagnes) ; salle des relais à trois *Relais en dérive* |
 | *Transmettre* | Bloqué (salle des relais absente) | Condition jouable | `asphodeleRelayReadyV188(save)` ; le choix final reste à l'Acte V (spec 006) |
 | CIN-70 à CIN-72 | Manquant | Partiel | Jouées une fois aux moments de §7.2 ; placeholders Canvas |
