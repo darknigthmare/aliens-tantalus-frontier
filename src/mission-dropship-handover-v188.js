@@ -136,6 +136,7 @@ export function withMissionDropshipHandoverV188(Base) {
 
     start(options = {}) {
       this.handoverV188 = null; this.handoverDepartedV188 = false; this.handoverExtractedV188 = false;
+      this.handoverTerminalPosesV188 = null;
       this.handoverParticlesV188 = []; this.handoverShakeV188 = 0;
       let policy = dropshipHandoverPolicyV188(options);
       this.handoverConfigV188 = policy;
@@ -157,6 +158,10 @@ export function withMissionDropshipHandoverV188(Base) {
       if (saved?.boarding && typeof saved.boarding === 'object' && this.mission?.state === 'complete' && saved.boarding.event) {
         // A resumed boarding is finished whatever the launch flow: its held event is still owed.
         this.beginExtractionV188(saved.boarding.event, normalizeHandoverOptionV188(saved.boarding) || policy, Number(saved.boarding.t) || 0);
+      } else if (saved?.schema === 188 && saved.extracted === true && saved.boarding === null && this.mission?.state === 'complete') {
+        // A terminal checkpoint already delivered its event. Keep the marines
+        // aboard without replaying boarding, rewards or the ascent cinematic.
+        this.handoverDepartedV188 = true; this.handoverExtractedV188 = true;
       } else if (policy?.insertion && !resumed && this.mission?.state === 'active' && !this.handoverLandedKeysV188.has(key) && this.player) {
         this.handoverLandedKeysV188.add(key); // a retry of the same deployment never lands twice
         this.beginInsertionV188(policy);
@@ -334,6 +339,13 @@ export function withMissionDropshipHandoverV188(Base) {
       }
     }
     finishBoardingV188(seq, skipped) {
+      // The app captures inside the terminal callback, after the staged sequence
+      // is gone. Keep only its native poses for capture; the live drawn poses and
+      // the paid event are not part of this bounded, per-mission record. An ordinary
+      // stop keeps the actors, so this record lasts until the next start as well.
+      this.handoverTerminalPosesV188 = { kind: 'extraction',
+        actors: (seq.actors || []).map(entry => ({ actor: entry.actor, final: { ...entry.final } })),
+        vehicleStart: seq.vehicleStart ? { ...seq.vehicleStart } : null };
       this.handoverV188 = null; this.handoverDepartedV188 = true; this.handoverExtractedV188 = true; this.handoverParticlesV188 = [];
       this.onEvent?.({ type: 'extraction-boarding-complete-v188', mode: seq.mode, placeType: seq.placeType,
         boardedBy: seq.boardedBy || 'foot', skipped: Boolean(skipped) });
@@ -633,11 +645,12 @@ export function withMissionDropshipHandoverV188(Base) {
     }
     captureResumeState() {
       const seq = this.handoverV188;
-      const state = seq?.blocking && seq.resolved ? this.withHandoverPosesV188(seq, () => super.captureResumeState()) : super.captureResumeState();
-      if (state && typeof state === 'object' && (this.handoverConfigV188 || seq)) {
+      const poses = seq?.blocking && seq.resolved ? seq : this.mission?.state === 'complete' ? this.handoverTerminalPosesV188 : null;
+      const state = poses ? this.withHandoverPosesV188(poses, () => super.captureResumeState()) : super.captureResumeState();
+      if (state && typeof state === 'object' && (this.handoverConfigV188 || seq || this.handoverExtractedV188)) {
         let event = null;
         if (seq?.kind === 'extraction') { try { event = structuredClone(seq.event); } catch { event = seq.event; } }
-        state.dropshipHandoverV188 = { schema: 188, landed: true,
+        state.dropshipHandoverV188 = { schema: 188, landed: true, extracted: this.handoverExtractedV188 === true,
           boarding: seq?.kind === 'extraction' ? { mode: seq.mode, placeType: seq.placeType, short: seq.short,
             t: Math.min(seq.t, phaseEnd(seq, seq.style === 'dock' ? 'seal' : 'arrive')), event } : null };
       }

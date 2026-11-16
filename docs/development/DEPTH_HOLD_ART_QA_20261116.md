@@ -14,7 +14,7 @@ Document source uniquement, exclu du build public. Voir [la provenance des cinq 
 | `quarantine-cart` | 1728 × 910 | 76 × 40 | Chariot renversé sur le côté, coffret fissuré |
 | `hold-deck-plating` | 1254 × 1254 | Bande de profondeur du niveau | Matière d’acier antidérapant vue de dessus, projetée par le moteur |
 
-Les tailles de collision, les empreintes au sol, les voies de circulation, les règles de combat et les sauvegardes restent inchangées. Les adaptations visuelles s’appuient sur les références déjà présentes dans le projet ; aucune fidélité franchise « 1:1 » n’est certifiée.
+Le raccordement graphique conserve les tailles de collision, les empreintes au sol, les voies de circulation et les règles de combat. Les adaptations visuelles s’appuient sur les références déjà présentes dans le projet ; aucune fidélité franchise « 1:1 » n’est certifiée. La correction de sauvegarde découverte pendant la vérification du retour de mission est décrite plus bas.
 
 ## Raccordement au moteur
 
@@ -30,14 +30,15 @@ Les images sont chargées par les emplacements existants. Des caches distincts p
 | --- | --- | --- |
 | PNG et provenance | **5/5** | Décodage, dimensions, alpha, références, empreintes et égalité avec les originaux |
 | Tests des cales et corrections visuelles | **24/24** | Registre, placement proportionnel, codes, fallback, projection, clips et géométrie |
-| Suite ciblée élargie | **121/121** | Inclut les 24 précédents, profondeur de mission, QZ-17, cinématiques, transfert de contrôle, archives et reçus source |
+| Suite ciblée élargie | **123/123** | Inclut les 24 précédents, profondeur de mission, QZ-17, cinématiques, transfert de contrôle, captures terminales du convoi et du Nostromo, archives et reçus source |
+| Embarquement et historique du convoi | **50/50** | Capture terminale admissible, reprise, sortie propre au Nostromo et unicité du paiement ; recoupe partiellement la suite ciblée |
 | Forge, contrats d’édition | **358/358** | Suite `test:forge` dans le checkout de travail |
 | Forge, contrats natifs | **277/277** | Suite `test:forge:native` dans une copie reproduisant les chemins du checkout partiel de CI corrigé |
 | Rendu natif | **12 vues, 0 exception** | Six vues de repli et six vues avec images ; les cinq PNG sont effectivement dessinés |
-| Syntaxe | **Réussie** | Deux modules JavaScript, AST du script Python de campagne et `git diff --check` |
+| Syntaxe | **Réussie** | Modules JavaScript, AST des six pilotes Python modifiés et `git diff --check` |
 | Sources et distribution | **Réussies** | `npm run check`, `npm run build`, `npm run check:built` |
 
-Les comptes des suites sont rapportés séparément : les 24 tests des cales sont inclus dans les 121 et ne doivent pas être ajoutés une deuxième fois. Aucun test ciblé n’est ignoré.
+Les comptes des suites sont rapportés séparément : les 24 tests des cales sont inclus dans les 123 et ne doivent pas être ajoutés une deuxième fois. Aucun test ciblé n’est ignoré.
 
 Les cinq PNG sont présents dans la distribution octet pour octet. Celle-ci compte **2 122 fichiers contrôlés et 719 entrées de cache**. Les archives historiques et les documents de développement en restent exclus.
 
@@ -63,6 +64,46 @@ La publication du lot d’insertion précédent a permis d’identifier deux cau
 La reproduction Forge a également exposé un problème d’ordre de validation introduit lors de l’admission des archives : le contrôle d’inventaire complet précédait la lecture d’une fixture partielle destinée à tester la confidentialité. Il s’exécute désormais juste après le parcours des chemins et textes. La vérification complète exige toujours toutes les archives et leurs empreintes exactes ; le contrôle de confidentialité peut de nouveau signaler son erreur propre. La suite native de 277 tests réussit avec ce comportement.
 
 Le correctif Python de campagne est vérifié syntaxiquement et relu contre les contrôles de l’interface. Sa validation par un nouveau parcours navigateur appartient au passage CI du commit publié ; aucun succès distant n’est présumé dans cette recette locale.
+
+### Suite des parcours automatisés
+
+Le passage distant sur `75c23afcc26b30162fd02c547b85f1aa99d03f40` confirme la réussite du workflow Forge. Les autres journaux ont permis de qualifier les attentes supplémentaires ci-dessous. Ces adaptations concernent les pilotes de contrôle ; elles conservent les règles du jeu, les ressources des profils et les assertions de résultat.
+
+| Parcours | Cause observée | Adaptation du pilote |
+| --- | --- | --- |
+| Broodstorm / Trials | L’attente de 45 secondes expirait pendant la cinématique de 56 secondes, avant le premier contrôle de bombe | Bouton public « Passer » conditionnel au lancement et à la reprise, dans le budget de 45 secondes existant |
+| Audio | L’instance observée avait 46 buffers valides ; le pilote attendait encore exactement cinq effets | Ensemble exact des effets et sources dérivé du manifeste publié : 46 effets et trois musiques ; égalité des identités, octets, empreintes et MIME, sans transferts absents, ajoutés ou dupliqués |
+| Premier convoi M577 | Le manifeste public était ouvert, sans opération créée | Lecture et signature du choix affiché : zéro conteneur et six places ; contrôle de sa persistance avant le briefing |
+| Lancements et retours du convoi | Le moteur peut démarrer avant la restitution des commandes ; l’embarquement précède l’enregistrement du retour et l’ascension masque le canevas | Attente du contrôle après le vrai bouton d’insertion ; embarquement, résolution du profil et bouton d’extraction dans les budgets déjà fixés de 30 et 210 secondes |
+| Harpon tiré à gauche | L’ancien emplacement de tir plaçait le projectile près du relais QZ-18 ; « E » désignait le poste de mission, puis le harpon expirait | Marche dans la zone libre entre les deux postes, choix de l’action et ID du projectile vérifiés avant « E » ; disparition et gain exact d’une munition exigés ensemble |
+| C12 / Léthé | La fin de mission peut précéder le reçu du profil pendant l’embarquement | Attente explicite de la phase d’extraction réelle, commandes de combat relâchées puis reçu du profil et fermeture de l’ascension ; budgets de lancement et de parcours conservés |
+| Combat C12 | Le pilote restait au sol face à la nuée, ignorait les 160 munitions disponibles et tirait au-dessus des petites créatures | Prise de la réserve, défense de la première brèche, montée par l’échelle prévue au dossier, visée des contacts du même niveau, rechargements et soin par les commandes publiques, puis sortie après les 45 secondes réelles |
+
+Les vérifications locales complémentaires comprennent **46/46 tests de continuation V162**, **18/18 contrôles Node adjacents audio et convoi**, **16 cas de contrôle audio exécutant les vrais blocs du pilote** avec des données observées et des cas invalides construits, ainsi que les contrôles de budget des helpers et l’analyse syntaxique des scripts Python. Ces groupes peuvent se recouper ; ils ne constituent pas un nouveau total de tests uniques. Les contrôles AST et les simulations locales ne sont pas présentés comme une nouvelle session navigateur.
+
+### Qualification du pilote C12
+
+La fonction `c12_controls` du fichier Python final est extraite par AST et décide des entrées sur le vrai `GameEngine`. Le profil initial est le déploiement par défaut non joué, à difficulté standard : seed `2203182776`, M4A3 sélectionné par la préparation native, 100 points de vie, 100 d’armure, 35 munitions chargées, 72 en réserve et sept trousses de soins. Après le démarrage, seuls des événements clavier et pointeur sont envoyés ; les points de vie, ennemis, ressources, chronomètres et états de victoire ne sont pas assignés. L’insertion et l’embarquement sont ceux de production.
+
+| Simulation locale | Résultat observé |
+| --- | --- |
+| Moteur à 60 Hz, décision toutes les 100 ms | Victoire ; 45 secondes de défense ; 72 ennemis émis ; santé finale 100 |
+| Moteur à 30 Hz, décision toutes les 500 ms | Victoire ; 45 secondes de défense ; 72 ennemis émis ; santé finale 91,495 |
+| Exposition volontaire aux contacts natifs, puis reprise par le même pilote | Un soin `H` achevé, trousses de 7 à 6 ; victoire ; santé finale 93,3475 |
+
+Les trois essais émettent chacun un seul événement d’embarquement terminé et un seul événement de mission terminée, avec une récompense de 650 crédits, aucune nouvelle tentative et aucune perte. La prise de la réserve de munitions est observée ; le cargo facultatif reste non pris. L’exposition aux contacts du troisième essai est un scénario déclaré de qualification du soin, pas la conduite du parcours navigateur. Le banc Node charge les dimensions des images et ne remplace pas la validation visuelle ou la session Chromium distante.
+
+L’ancien pilote peut lui aussi réussir dans une simulation à cadence idéale de 100 ms, alors que la session Chromium observée sur `75c23af` meurt après environ 35,7 secondes de défense. Les simulations qualifient donc la nouvelle route à deux cadences et le soin réel ; elles ne reproduisent pas exactement le calendrier du navigateur défaillant et ne démontrent pas un défaut du moteur de combat.
+
+### Sauvegarde après l’embarquement du M577
+
+Le parcours natif du convoi a révélé un défaut distinct dans `mission-dropship-handover-v188.js` : la séquence d’embarquement était effacée avant le callback de fin de mission. La capture perdait alors la projection des positions admissibles et conservait la position du M577 dans l’animation. Le véritable validateur rejetait le checkpoint avec `apc-identity-mismatch` : abscisse 945 au lieu de 955 ; l’ordonnée était déjà ramenée à 466 par la normalisation existante V131.
+
+La fin d’embarquement conserve maintenant uniquement les positions natives nécessaires à la capture, dans un relevé borné à la mission. Pendant la capture, ces positions sont projetées temporairement, puis les positions de dessin sont restaurées. Les ressources courantes, la santé, le carburant et les munitions sont conservés par la sérialisation native. La capture terminale ne retient aucun événement de récompense ni embarquement à rejouer. Le relevé reste utilisable après un arrêt ordinaire et est vidé au prochain lancement.
+
+Un marqueur explicite `extracted` distingue désormais un embarquement effectivement terminé d’une mission qui conserve sa propre sortie. Une reprise terminale marquée garde les marines à bord sans nouvelle animation, paiement ou événement ; une ancienne capture `landed: true, boarding: null` ne suffit pas à inventer un embarquement. Le test dédié au Nostromo couvre une mission sans extraction UD-4L, avec le nouveau champ faux et avec son absence dans une ancienne capture.
+
+Le test de régression du convoi parcourt la vraie mission par entrées de jeu, capture dans le callback terminal, vérifie l’admissibilité, l’enregistrement dans le profil, l’arrêt, la reprise sans option de handover et l’absence de second paiement. Le même test rejoué avec les octets du module précédent échoue sur l’abscisse inadmissible ; il ne s’appuie pas sur un validateur assoupli. Le cache du service worker est renouvelé pour distribuer ce correctif.
 
 ## Commandes exécutées
 

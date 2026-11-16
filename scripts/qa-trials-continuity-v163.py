@@ -69,6 +69,30 @@ def paused_brood(value):
     return {k: value[k] for k in ['paused', 'mission', 'legacy', 'bombs', 'vehicle', 'player']}
 
 
+def wait_brood_runtime(page, runtime_ready, timeout=45000):
+    # Fresh launches now play the V188 flight before engine.start. Use its
+    # visible public control; a checkpoint resume can already be in the game.
+    # Observation, click and the original readiness check share one budget.
+    deadline = time.monotonic() + timeout / 1000
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('Broodstorm runtime readiness exceeded its launch budget.')
+        return milliseconds
+
+    skip_selector = '.insertion-cinematic-v188[data-direction="insertion"] .insertion-skip-v188'
+    page.wait_for_function(f'''()=>{{
+      const skip = document.querySelector('{skip_selector}');
+      return ({runtime_ready})() || Boolean(skip && skip.getClientRects().length
+        && getComputedStyle(skip).visibility !== 'hidden');
+    }}''', timeout=remaining())
+    skip = page.locator(skip_selector)
+    if skip.is_visible():
+        skip.click(timeout=remaining())
+    page.wait_for_function(runtime_ready, timeout=remaining())
+
+
 def steer_brood(page, x, y):
     held = set()
     deadline = time.monotonic() + 45
@@ -169,7 +193,7 @@ def run_brood(page, args, out, report, check, capture):
     print('STEP Broodstorm: native launch, six finite drops, save final bomb in flight', flush=True)
     import_initial(page, args.base, raw, name)
     open_view(page, 'command'); page.locator('#operation-launch').click()
-    page.wait_for_function('()=>__ATF_GAME__?.running&&__ATF_GAME__.legacyMissionV131?.kind==="broodstorm"&&!__ATF_GAME__.enemyAtlasLoadingPausedV65', timeout=45000)
+    wait_brood_runtime(page, '()=>__ATF_GAME__?.running&&__ATF_GAME__.legacyMissionV131?.kind==="broodstorm"&&!__ATF_GAME__.enemyAtlasLoadingPausedV65', timeout=45000)
     page.locator('#game-canvas').focus()
     page.keyboard.down('KeyE')
     try:
@@ -208,7 +232,7 @@ def run_brood(page, args, out, report, check, capture):
     page.reload(wait_until='domcontentloaded')
     page.locator('#title-start').click(timeout=45000); page.locator('#title-continue').click()
     open_view(page, 'command'); page.locator('#operation-launch').click()
-    page.wait_for_function('()=>__ATF_GAME__?.running&&__ATF_GAME__.legacyMissionV131?.kind==="broodstorm"', timeout=45000)
+    wait_brood_runtime(page, '()=>__ATF_GAME__?.running&&__ATF_GAME__.legacyMissionV131?.kind==="broodstorm"', timeout=45000)
     page.locator('#game-canvas').focus()
     if not brood(page)['paused']:
         page.keyboard.press('KeyP')

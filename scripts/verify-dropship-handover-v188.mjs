@@ -8,10 +8,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { fixture, tick } from './engine-host-v188.mjs';
+import { fixture, prepare, tick } from './engine-host-v188.mjs';
 import { CAMPAIGNS, WORLDS, LEVEL_SEEDS, VEHICLES } from '../src/content.js';
 import { buildMissionLevelV52 } from '../src/mission-levels-v52.js';
 import { buildApcConvoyLevelV121 } from '../src/apc-convoy-runtime-v121.js';
+import { buildLegacyMissionV131 } from '../src/legacy-operations-v131.js';
+import { LEGACY_STATIONS_V131 } from '../src/legacy-operation-state-v131.js';
+import { createDefaultSave, beginOperation, recordOperationResumeState, resolveOperation } from '../src/save.js';
 import { INSERTION_SAFE_ZONE_V188 } from '../src/insertion-safe-zone-v188.js';
 import { dropshipHandoverPolicyV188, buildHandoverPlanV188, DROPSHIP_HANDOVER_SKIPS_V188, apcHandoverAdmissibleV188 } from '../src/mission-dropship-handover-v188.js';
 import { LEVEL_DROPSHIP_SLOTS_V188, LEVEL_DROPSHIP_SCALE_V188, UD4L_FRAME_V188, ud4lToWorldV188 } from '../src/level-dropship-slots-v188.js';
@@ -220,6 +223,11 @@ test('extraction: the boarding holds mission-complete, emits the boarding event 
   for (const id of ['arrive', 'ramp', 'board', 'close']) assert.ok(phases.has(id), id);
   assert.notDeepEqual(pose(marine), start, 'the marine walked to the ramp');
   assert.ok(engine.handoverHiddenV188(marine), 'aboard');
+  const drawnEnd = pose(marine), terminal = engine.captureResumeState();
+  assert.deepEqual(pose(terminal.player), start, 'the terminal checkpoint keeps the native pre-boarding pose');
+  assert.deepEqual(pose(marine), drawnEnd, 'capturing does not move the marine back into the rendered level');
+  assert.equal(terminal.dropshipHandoverV188.boarding, null, 'the paid event is not retained in a completed checkpoint');
+  assert.equal(terminal.dropshipHandoverV188.extracted, true);
   tick(engine, 5);
   const order = types(events).filter(type => /mission-complete|boarding/.test(type));
   assert.deepEqual(order, ['extraction-boarding-complete-v188', 'mission-complete']);
@@ -315,6 +323,135 @@ test('resume mid-boarding: the boarding finishes and pays once, with the held re
   const paid = resumed.events.filter(event => event.type === 'mission-complete');
   assert.equal(paid.length, 1); assert.deepEqual(paid[0].rewards, rewards);
   assert.equal(resumed.events.filter(event => event.type === 'extraction-boarding-complete-v188').length, 1);
+});
+
+test('terminal capture after native convoy boarding remains admissible and resumes without boarding or another payment', async t => {
+  const entry = campaign('special-apc-convoy'), save = createDefaultSave();
+  const operation = beginOperation(save, entry, worldOf(entry)).operation;
+  const setup = launchOptions(entry.id, { operationId: operation.id, seed: 131426, insertionHandoverV188: handover('foot') });
+  const { engine, events } = await fixture({ ...setup, keepEnemies: true });
+  t.after(() => engine.stop());
+  // The app captures synchronously when its held terminal event is delivered.
+  // This observer preserves the existing event sink and never changes gameplay.
+  let capturedOnCompletion;
+  const sink = engine.handoverSinkV188;
+  engine.handoverSinkV188 = event => {
+    if (event.type === 'mission-complete') capturedOnCompletion = engine.captureResumeState();
+    return sink(event);
+  };
+  tick(engine, 12);
+  engine.interact();
+  assert.equal(engine.apcConvoyV121.briefed, true);
+  // Semantic input fixture: the same finite native course as the convoy story
+  // regression. No actor, objective, terminal result or resource is assigned.
+  let cooling = false;
+  for (let frame = 0; frame < 180 * 60 && engine.mission.state === 'active'; frame++) {
+    const convoy = engine.apcConvoyV121, course = engine.apcCourseStateV131;
+    if (convoy.heat > 83 || convoy.overheated) cooling = true;
+    if (convoy.heat < 33 && !convoy.overheated) cooling = false;
+    const target = engine.enemies.find(enemy => enemy.alive && enemy.apcConvoyRoleV121 !== 'horde')
+      || engine.enemies.filter(enemy => enemy.alive).sort((a, b) => b.x - a.x)[0];
+    const next = new Set(convoy.phase === 'evacuation' ? ['KeyE'] : ['Space']);
+    if (target?.apcLaneV131 < course.lane) next.add('KeyW');
+    if (target?.apcLaneV131 > course.lane) next.add('KeyS');
+    if (target && !cooling && engine.vehicle.turretAmmo > 0) next.add('KeyF');
+    if (engine.vehicle.turretAmmo < 18 && engine.vehicle.turretReserve > 0) next.add('KeyR');
+    engine.keys = next; engine.update(1 / 60);
+  }
+  engine.keys.clear();
+  assert.equal(engine.mission.state, 'complete');
+  assert.equal(engine.handoverV188?.kind, 'extraction');
+  const nativeVehicle = pose(engine.vehicle), nativePlayer = pose(engine.player);
+  // V131 stores the hull on its canonical road baseline; its lane is separate.
+  // Compare against that existing native capture contract, not its drawn lane Y.
+  const nativeCapture = engine.captureResumeState();
+  assert.equal(engine.validateApcConvoyResumeV121(nativeCapture).valid, true);
+  tick(engine, 12);
+  const drawnVehicle = pose(engine.vehicle), drawnPlayer = pose(engine.player);
+  assert.notDeepEqual(drawnVehicle, nativeVehicle, 'the real M577 was hoisted into the departing ship');
+  assert.ok(capturedOnCompletion, 'capture occurred inside the native terminal callback');
+  const checked = engine.validateApcConvoyResumeV121(capturedOnCompletion);
+  assert.equal(checked.valid, true, JSON.stringify({ checked, capturedVehicle: pose(capturedOnCompletion.vehicle), nativeVehicle }));
+  assert.deepEqual(pose(capturedOnCompletion.vehicle), pose(nativeCapture.vehicle));
+  assert.deepEqual(pose(capturedOnCompletion.player), pose(nativeCapture.player));
+  assert.equal(capturedOnCompletion.dropshipHandoverV188.boarding, null);
+  assert.equal(capturedOnCompletion.dropshipHandoverV188.extracted, true);
+  const terminal = engine.captureResumeState();
+  assert.deepEqual(pose(terminal.vehicle), pose(nativeCapture.vehicle));
+  assert.deepEqual(pose(engine.vehicle), drawnVehicle, 'capture restores the final rendered vehicle pose');
+  assert.deepEqual(pose(engine.player), drawnPlayer, 'capture restores the final rendered marine pose');
+  const completion = events.filter(event => event.type === 'mission-complete');
+  assert.equal(completion.length, 1);
+  assert.equal(recordOperationResumeState(save, terminal), true);
+  assert.equal(resolveOperation(save, { success: true, rewards: completion[0].rewards }).ok, true);
+  const resources = structuredClone(save.galaxy.resources);
+  engine.stop();
+  assert.equal(engine.validateApcConvoyResumeV121(engine.captureResumeState()).valid, true, 'an ordinary stop does not discard the terminal capture pose');
+
+  const { insertionHandoverV188, ...oldFlow } = setup.options;
+  const state = JSON.parse(JSON.stringify(save.strategy.lastOperation.resumeState));
+  const resumed = await fixture({ ...setup, keepEnemies: true, options: { ...oldFlow, resumeState: state } });
+  t.after(() => resumed.engine.stop());
+  assert.equal(resumed.engine.lastResumeResult?.applied, true, 'the real convoy validator admits the completed checkpoint');
+  assert.deepEqual(pose(resumed.engine.vehicle), nativeVehicle, 'the lane extension restores its own native road position');
+  assert.deepEqual(pose(resumed.engine.player), nativePlayer);
+  assert.equal(resumed.engine.handoverV188, null);
+  assert.equal(resumed.engine.handoverHiddenV188(resumed.engine.player), true, 'already boarded marines remain out of the rendered level');
+  tick(resumed.engine, 12);
+  assert.deepEqual(types(resumed.events).filter(type => /mission-complete|boarding/.test(type)), []);
+  assert.equal(resumed.engine.completeMission(resumed.engine.player), false);
+  const recaptured = resumed.engine.captureResumeState();
+  assert.equal(recaptured.dropshipHandoverV188.boarding, null, 'the terminal receipt survives recapture under the old launch flow');
+  assert.equal(recaptured.dropshipHandoverV188.extracted, true);
+  assert.equal(resumed.engine.validateApcConvoyResumeV121(recaptured).valid, true);
+  assert.equal(resolveOperation(save, { success: true, rewards: completion[0].rewards }).ok, false);
+  assert.deepEqual(save.galaxy.resources, resources, 'resume and another completion attempt cannot pay again');
+});
+
+test('Nostromo skips dropship extraction and a completed resume keeps the operator visible with or without the new marker', async t => {
+  const entry = campaign('special-nostromo-v131'), world = worldOf(entry);
+  const missionLevel = buildLegacyMissionV131({ campaign: entry, world, levelSeeds: LEVEL_SEEDS });
+  const setup = { campaign: entry, seed: 131, keepEnemies: true,
+    options: { world, levelSeed: missionLevel.levelSeed, missionLevel, operationId: 'op-terminal-nostromo', insertionHandoverV188: handover('foot') } };
+  const { engine, events } = await fixture(setup);
+  t.after(() => engine.stop());
+  assert.equal(engine.handoverConfigV188.extraction, false);
+  assert.equal(engine.handoverV188, null);
+  // Proximity fixture, as in the legacy operation suite: place the operator at
+  // each admitted station, then use real held E and real combat. No progression,
+  // terminal result or resource is assigned to manufacture a completed save.
+  const useStation = () => {
+    const station = LEGACY_STATIONS_V131.nostromo[engine.legacyMissionV131.stage];
+    Object.assign(engine.player, { x: station.x - engine.player.w / 2, y: station.y - engine.player.h / 2 });
+    engine.keys.add('KeyE'); tick(engine, station.seconds + .04); engine.keys.delete('KeyE');
+  };
+  for (let index = 0; index < 3; index++) useStation();
+  await prepare(engine);
+  const hunter = engine.enemies[0];
+  Object.assign(engine.player, { x: hunter.x - 320, y: 570 - engine.player.h, pointerAimV83: { x: 1, y: 0 } });
+  engine.keys.add('KeyF'); tick(engine, 5); engine.keys.clear();
+  assert.equal(hunter.alive, false);
+  for (let index = 3; index < 7; index++) useStation();
+  assert.equal(engine.mission.state, 'complete');
+  assert.equal(events.filter(event => event.type === 'mission-complete').length, 1);
+  assert.ok(!types(events).includes('extraction-boarding-complete-v188'));
+  const raw = JSON.parse(JSON.stringify(engine.captureResumeState()));
+  assert.equal(engine.validateLegacyResumeV131(raw).valid, true);
+  assert.equal(raw.dropshipHandoverV188.boarding, null);
+  const previous = structuredClone(raw); delete previous.dropshipHandoverV188.extracted;
+  for (const state of [raw, previous]) {
+    const resumed = await fixture({ ...setup, options: { ...setup.options, resumeState: state } });
+    t.after(() => resumed.engine.stop());
+    assert.equal(resumed.engine.lastResumeResult?.applied, true);
+    assert.equal(resumed.engine.handoverV188, null);
+    assert.equal(resumed.engine.handoverHiddenV188(resumed.engine.player), false, 'an ignored extraction never counts as boarding');
+    const before = resumed.draws.length;
+    resumed.engine.drawActor(resumed.ctx, resumed.engine.player);
+    assert.ok(resumed.draws.length > before, 'the completed native operator is still rendered');
+    tick(resumed.engine, 1);
+    assert.deepEqual(types(resumed.events).filter(type => /mission-complete|boarding/.test(type)), []);
+  }
+  assert.equal(raw.dropshipHandoverV188.extracted, false);
 });
 
 test('mission kinds: covered or skipped with a reason', () => {

@@ -51,8 +51,14 @@ def manifest():
 def observed(page):
     return page.evaluate('''()=>{const s=__ATF_V51__.saveSystem.data,e=__ATF_GAME__;return {
       save:structuredClone(s),running:e.running,paused:e.paused,mission:e.mission?.state,
+      handover:e.handoverV188?{kind:e.handoverV188.kind,blocking:e.handoverV188.blocking}:null,
       player:e.player?{x:e.player.x,y:e.player.y,w:e.player.w,h:e.player.h,vx:e.player.vx,
-        health:e.player.health,armor:e.player.armor,ammo:e.player.ammo,alive:e.player.alive}:null,
+        health:e.player.health,armor:e.player.armor,ammo:e.player.ammo,ammoReserve:e.player.ammoReserve,
+        magazineSize:e.player.magazineSize,reloading:e.player.reloading,grounded:e.player.grounded,
+        climbing:e.player.climbing,fieldAction:e.player.fieldActionV124?{...e.player.fieldActionV124}:null,
+        alive:e.player.alive}:null,
+      medkits:e.inventory?.medkits||0,
+      contacts:(e.enemies||[]).filter(n=>n.alive).map(n=>({id:n.id,x:n.x,y:n.y,w:n.w,h:n.h})),
       camera:{...e.camera},c12:e.c12HordeV121?structuredClone(e.c12HordeV121):null,
       cocoon:e.blackCocoonV121?structuredClone(e.blackCocoonV121):null,
       target:e.enemies?.filter(n=>n.alive).sort((a,b)=>Math.abs(a.x-e.player.x)-Math.abs(b.x-e.player.x))
@@ -203,20 +209,29 @@ def start_runtime(page, campaign):
     page.locator('[data-insertion-action="advance"]').click()
     runtime_ready = '''id=>__ATF_GAME__?.running&&__ATF_GAME__.mission?.state==="active"
       &&__ATF_V51__.saveSystem.data.strategy.currentOperation?.campaignId===id
-      &&!document.querySelector('#mission-runtime-v62').hidden'''
+      &&!document.querySelector('#mission-runtime-v62').hidden
+      &&!__ATF_GAME__.dropshipHandoverBlocksV188?.()'''
     # The reading panel can complete before the V188 flight grants control.
     # Observe either its public skip button or an already active runtime, so
     # launches/resumes without a flight still follow their native path.
+    deadline = time.monotonic() + 30
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('Lethe runtime readiness exceeded its launch budget.')
+        return milliseconds
+
     skip_selector = '.insertion-cinematic-v188[data-direction="insertion"] .insertion-skip-v188'
     page.wait_for_function(f'''id=>{{
       const skip = document.querySelector('{skip_selector}');
       return ({runtime_ready})(id) || Boolean(skip && skip.getClientRects().length
         && getComputedStyle(skip).visibility !== 'hidden');
-    }}''', arg=campaign)
+    }}''', arg=campaign, timeout=remaining())
     skip = page.locator(skip_selector)
     if skip.is_visible():
-        skip.click()
-    page.wait_for_function(runtime_ready, arg=campaign)
+        skip.click(timeout=remaining())
+    page.wait_for_function(runtime_ready, arg=campaign, timeout=remaining())
     page.locator('#game-canvas').focus()
 
 
@@ -249,10 +264,75 @@ def hold_until(page, key, condition, timeout=30000):
         page.keyboard.up(key)
 
 
+def c12_controls(state):
+    """Choose native inputs from the authored C-12 geometry and current HUD state.
+
+    The low swarm cannot be shot reliably by a distant horizontal eight-way
+    aim. The dossier explicitly offers the ladder/walkway: defend the first
+    breach, climb on the swarm warning, then leave when the lift is ready.
+    """
+    c12, player = state['c12'], state['player']
+    center = player['x'] + player['w'] / 2
+    feet = player['y'] + player['h']
+    contacts = [n for n in state['contacts'] if abs(n['y'] + n['h'] - feet) < 70]
+    nearest = min(contacts, key=lambda n: abs(n['x'] + n['w'] / 2 - center), default=None)
+    target = {'x': nearest['x'] + nearest['w'] / 2, 'y': nearest['y'] + nearest['h'] / 2} if nearest else None
+    wanted = set()
+    if not c12['ammoTaken']:
+        stage = 'ammunition'
+        # Move onto the reserve before the relay; E selects the nearer action.
+        wanted.add('KeyA' if center > 780 else 'KeyD' if center < 740 else 'KeyE')
+    elif not c12['activated']:
+        stage = 'relay'
+        wanted.add('KeyD' if center < 825 else 'KeyA' if center > 865 else 'KeyE')
+    elif c12['defenceElapsed'] >= 45:
+        stage = 'evacuation'
+        wanted.add('KeyD' if center < 1130 else 'KeyA' if center > 1190 else 'KeyE')
+    elif 'swarm-breach' not in c12['journal'] and player['health'] > 60:
+        stage = 'ground-defence'
+        if center < 835:
+            wanted.add('KeyD')
+        elif center > 895:
+            wanted.add('KeyA')
+    elif feet > 357:
+        stage = 'ladder'
+        wanted.add('KeyD' if center < 835 else 'KeyA' if center > 895 else 'KeyW')
+    else:
+        stage = 'walkway-defence'
+
+    # H needs 2.2 seconds of stable ground and cancels on movement/impact.
+    # Use the upper refuge only with enough room; an interrupted treatment
+    # never turns a failed mission into an accepted return.
+    safe_to_treat = not nearest or abs(target['x'] - center) > 360
+    if player['fieldAction']:
+        return set(), None, 'medical'
+    if stage == 'walkway-defence' and player['grounded'] and player['health'] <= 60 \
+            and state['medkits'] > 0 and safe_to_treat:
+        return {'KeyH'}, None, 'medical'
+    if target and c12['activated']:
+        wanted.add('KeyF')
+    # A repeated R during the transaction is a mistimed tactical attempt.
+    # Reload once, between targets or when empty, and let its real clock run.
+    if c12['activated'] and not player['reloading'] and player['ammoReserve'] > 0 \
+            and (player['ammo'] == 0 or not target and player['ammo'] < player['magazineSize']):
+        wanted.add('KeyR')
+    return wanted, target, stage
+
+
 def complete_c12(page):
     held = set()
     checkpoints = []
+    stages = []
+    report['nativeC12Observations'] = checkpoints
+    report['nativeC12Route'] = stages
     start = time.monotonic()
+
+    def remaining():
+        milliseconds = int((start + 600 - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('Native C12 journey exceeded 600 wall seconds.')
+        return milliseconds
+
     page.locator('#game-canvas').focus()
     first = observed(page)
     box = page.locator('#game-canvas').bounding_box()
@@ -264,34 +344,38 @@ def complete_c12(page):
             state = observed(page)
             if state['save']['strategy']['currentOperation'] is None:
                 break
+            if state['mission'] == 'complete':
+                # Completion is held during the real boarding. Stop combat
+                # inputs and let that sequence commit its native result.
+                assert state['running'] and state['player']['alive'] and state['handover'] \
+                    and state['handover']['kind'] == 'extraction', 'A pending C12 return must own its actual extraction boarding.'
+                for key in held:
+                    page.keyboard.up(key)
+                held = set()
+                page.mouse.up(button='right')
+                page.wait_for_function('()=>__ATF_V51__.saveSystem.data.strategy.currentOperation===null', timeout=remaining())
+                break
             check_live = state['running'] and state['player']['alive'] and state['mission'] == 'active'
             assert check_live, 'Native C12 operator must remain alive in its active operation.'
             c12 = state['c12']
-            wanted = set()
-            if not c12['activated']:
-                wanted.add('KeyE')
-            else:
-                wanted.add('KeyF')
-                if state['player']['x'] < 1110:
-                    wanted.add('KeyD')
-                if c12['defenceElapsed'] >= 45:
-                    wanted.add('KeyE')
-                if state['player']['ammo'] == 0:
-                    page.keyboard.press('KeyR')
+            wanted, target, route_stage = c12_controls(state)
+            if target:
+                box = page.locator('#game-canvas').bounding_box()
+                page.mouse.move(box['x'] + (target['x'] - state['camera']['x']) * box['width'] / state['canvas']['width'],
+                                box['y'] + (target['y'] - state['camera']['y']) * box['height'] / state['canvas']['height'])
             for key in held - wanted:
                 page.keyboard.up(key)
             for key in wanted - held:
                 page.keyboard.down(key)
             held = wanted
-            target = state['target']
-            if target:
-                box = page.locator('#game-canvas').bounding_box()
-                page.mouse.move(box['x'] + (target['x'] - state['camera']['x']) * box['width'] / state['canvas']['width'],
-                                box['y'] + (target['y'] - state['camera']['y']) * box['height'] / state['canvas']['height'])
+            if not stages or stages[-1]['stage'] != route_stage:
+                stages.append({'stage': route_stage, 'defenceElapsed': c12['defenceElapsed'],
+                               'ammoTaken': c12['ammoTaken'], 'player': state['player'], 'medkits': state['medkits']})
             bucket = int(c12['defenceElapsed'] // 10)
             if not checkpoints or checkpoints[-1]['bucket'] != bucket:
                 checkpoints.append({'bucket': bucket, 'defenceElapsed': c12['defenceElapsed'], 'emitted': c12['emitted'],
-                                    'player': state['player'], 'elapsedWallSeconds': time.monotonic() - start})
+                                    'routeStage': route_stage, 'ammoTaken': c12['ammoTaken'], 'cargoTaken': c12['cargoTaken'],
+                                    'player': state['player'], 'medkits': state['medkits'], 'elapsedWallSeconds': time.monotonic() - start})
                 if bucket in [1, 3]:
                     capture(page, f'04-c12-native-defence-{bucket}.png')
             page.wait_for_timeout(100)
@@ -301,6 +385,11 @@ def complete_c12(page):
         for key in held:
             page.keyboard.up(key)
         page.mouse.up(button='right')
+    extraction_skip = page.locator('.insertion-cinematic-v188[data-direction="extraction"] .insertion-skip-v188')
+    if extraction_skip.is_visible():
+        extraction_skip.click(timeout=remaining())
+    page.wait_for_function('''()=>!document.querySelector('.insertion-cinematic-v188[data-direction="extraction"]')
+      &&__ATF_V51__.saveSystem.data.strategy.currentOperation===null''', timeout=remaining())
     report['nativeC12Observations'] = checkpoints
 
 

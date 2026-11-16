@@ -11,6 +11,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+import time
 from playwright.sync_api import sync_playwright
 
 parser = argparse.ArgumentParser()
@@ -95,6 +96,30 @@ def advance_to(page, target):
         page.locator('[data-insertion-action="advance"]').click()
         page.wait_for_function('previous=>document.querySelector("#mission-insertion-v62").dataset.insertionPhase!==previous', arg=phase)
     raise AssertionError('Insertion phase unavailable: ' + target)
+
+
+def wait_secondary_runtime(page, timeout=30000):
+    # The secondary operation also uses the public V188 insertion. Keep the
+    # original C12 readiness predicate and one shared launch budget.
+    runtime_ready = '()=>__ATF_GAME__.running&&__ATF_GAME__.isC12HordeV121?.()'
+    deadline = time.monotonic() + timeout / 1000
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('Secondary runtime readiness exceeded its launch budget.')
+        return milliseconds
+
+    skip_selector = '.insertion-cinematic-v188[data-direction="insertion"] .insertion-skip-v188'
+    page.wait_for_function(f'''()=>{{
+      const skip = document.querySelector('{skip_selector}');
+      return ({runtime_ready})() || Boolean(skip && skip.getClientRects().length
+        && getComputedStyle(skip).visibility !== 'hidden');
+    }}''', timeout=remaining())
+    skip = page.locator(skip_selector)
+    if skip.is_visible():
+        skip.click(timeout=remaining())
+    page.wait_for_function(f'()=>({runtime_ready})()&&!__ATF_GAME__.dropshipHandoverBlocksV188?.()', timeout=remaining())
 
 
 def capture(page, name, selector='#operation-plan'):
@@ -183,7 +208,7 @@ try:
     page.locator('#mission-insertion-v62[data-insertion-phase="briefing"]').wait_for(state='visible')
     advance_to(page, 'player-control')
     page.locator('[data-insertion-action="advance"]').click()
-    page.wait_for_function('()=>__ATF_GAME__.running&&__ATF_GAME__.isC12HordeV121?.()')
+    wait_secondary_runtime(page)
     second_operation = observe(page)['save']['strategy']['currentOperation']['id']
     check('a different native operation starts without altering the convoy archive',
           second_operation != native_id and observe(page)['save']['convoyReturnHistoryV162'] == expected_archive)

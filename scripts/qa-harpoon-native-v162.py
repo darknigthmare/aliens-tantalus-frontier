@@ -43,18 +43,20 @@ def check(label, passed):
 
 def fixture(number):
     code = """import{createDefaultSave,getProcurementQuote}from'./src/save.js';import{WEAPONS}from'./src/content.js';
+import{ARCHIVE_RELAY_PROPS_V122 as posts}from'./src/archive-relay-runtime-v122.js';
 const n=process.argv[1],s=createDefaultSave(),w=WEAPONS.find(w=>w.id.startsWith('weapon-'+n+'-'));
 if(!w)throw Error('Unknown Harpoon ID');s.needsPlayerCreationV84=false;s.player.name='QA Harpoon '+n+' V162';
 s.strategy.plannedCampaignId='special-archive-relay';s.worldId='world-05-lethe';s.scene='hub';s.settings.reducedMotion=true;
 s.galaxy.resources.credits=50000;s.strategy.inventory.weaponIds=s.strategy.inventory.weaponIds.filter(id=>!id.includes('harpoon-gun'));
 s.player.weaponIds=s.player.weaponIds.filter(id=>!id.includes('harpoon-gun'));s.player.ammo.primary=32;
-console.log(JSON.stringify({profile:s,weapon:w,quote:getProcurementQuote(s,'weapon',w)}));"""
+console.log(JSON.stringify({profile:s,weapon:w,quote:getProcurementQuote(s,'weapon',w),rangeCenter:(posts.relay.x+posts.freight.x)/2}));"""
     data = json.loads(subprocess.run(['node', '--input-type=module', '-e', code, number], cwd=repo, capture_output=True, text=True, check=True).stdout)
     raw = json.dumps(data['profile'], ensure_ascii=False, separators=(',', ':')).encode()
     path = output/f'initial-profile-{number}.json'
     path.write_bytes(raw)
     (output/f'initial-fixture-{number}.json').write_text(json.dumps({'weapon': data['weapon'], 'quote': data['quote'],
-            'profileSha256': hashlib.sha256(raw).hexdigest(), 'declaredChanges': ['needsPlayerCreationV84=false', 'named isolated profile',
+            'profileSha256': hashlib.sha256(raw).hexdigest(), 'rangeCenter': data['rangeCenter'],
+            'declaredChanges': ['needsPlayerCreationV84=false', 'named isolated profile',
             'unplayed QZ18 plan/Lethe', 'scene=hub', 'reduced motion', '50000 initial credits', 'Harpoons absent from owned/equipped inventory', '32 initial primary reserve']}, ensure_ascii=False, indent=2))
     return data, raw
 
@@ -66,7 +68,7 @@ if args.prepare_only:
 
 
 def observe(page):
-    return page.evaluate('''()=>{const e=__ATF_GAME__,s=__ATF_V51__.saveSystem.data,p=e.player;
+    return page.evaluate('''()=>{const e=__ATF_GAME__,s=__ATF_V51__.saveSystem.data,p=e.player,choice=p&&e.running?e.selectInteractionTargetV188?.(p):null;
       return {running:e.running,paused:e.paused,operation:s.strategy.currentOperation?.id,context:s.strategy.currentOperation?.context,
         kind:e.isArchiveRelayV122?.(),forge:!!e.forgeSessionV141,weaponId:e.weaponActionProfileV131?.()?.weaponId,
         player:p?{x:p.x,y:p.y,w:p.w,h:p.h,vx:p.vx,grounded:p.grounded,ammo:p.ammo,reserve:p.ammoReserve,shots:p.shots,facing:p.facing,
@@ -74,6 +76,7 @@ def observe(page):
         camera:{...e.camera},projectiles:(e.weaponProjectilesV131||[]).map(v=>({id:v.id,weaponId:v.weaponId,x:v.x,y:v.y,vx:v.vx,vy:v.vy,remaining:v.remaining,ownerIsPlayer:v.owner===p})),
         recoverable:(e.recoverableWeaponsV131||[]).map(v=>({id:v.id,weaponId:v.weaponId,x:v.x,y:v.y,remaining:v.remaining,ownerIsPlayer:v.owner===p})),
         recoveryIndex:e.recoverableWeaponIndexV131?.()??-1,
+        interaction:choice?{kind:choice.kind,category:choice.category,targetId:choice.target?.id??null,prompt:choice.prompt}:null,
         saved:s.strategy.currentOperation?.resumeState?structuredClone(s.strategy.currentOperation.resumeState):null,
         inventory:[...s.strategy.inventory.weaponIds],equipped:[...s.player.weaponIds],credits:s.galaxy.resources.credits};}''')
 
@@ -219,7 +222,10 @@ with sync_playwright() as pw:
             deploy(page)
             row['operationId'] = observe(page)['operation']
             check(number+': selected identity is actually held in the native non-Forge operation', observe(page)['weaponId'] == weapon_id and not observe(page)['forge'])
-            walk_to(page, 400)
+            # Keep both floor impacts in the open ground lane between the relay
+            # and freight posts. At the former 400px origin, the left impact was
+            # inside the relay's E range and correctly selected that action.
+            walk_to(page, data['rangeCenter'])
             for label, direction in [('right', 1), ('left', -1)]:
                 phase(number+': '+label+' aim, floor impact and native recovery')
                 player = observe(page)['player']
@@ -249,10 +255,14 @@ with sync_playwright() as pw:
                           and restored['player']['ammo']+restored['player']['reserve'] == landed_saved['player']['ammo']+landed_saved['player']['reserve'])
                     walk_to(page, restored['recoverable'][0]['x'])
                 before_recovery = observe(page)
+                choice = before_recovery['interaction'] or {}
+                check(f'{number} {label}: E actually selects the landed owned Harpoon',
+                      choice.get('kind') == 'recoverable-weapon-v131' and choice.get('targetId') == item['id'])
                 capture(page, f'{number}-{label}-landed.png')
                 page.locator('#game-canvas').focus()
                 page.keyboard.press('KeyE')
-                page.wait_for_function('()=>__ATF_GAME__.recoverableWeaponsV131.length===0')
+                page.wait_for_function('reserve=>__ATF_GAME__.recoverableWeaponsV131.length===0&&__ATF_GAME__.player.ammoReserve===reserve+1',
+                                       arg=before_recovery['player']['reserve'])
                 recovered = observe(page)
                 check(f'{number} {label}: E recovers one Harpoon once to the real owner reserve', recovered['player']['reserve'] == before_recovery['player']['reserve']+1)
                 page.keyboard.press('KeyE')

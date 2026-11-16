@@ -28,7 +28,7 @@ report = {'status': 'running', 'checks': [], 'captures': [], 'pageErrors': [], '
           'controlledHttpResponses': [], 'audioResponses': [],
           'method': 'Native title/navigation, Save file input, keyboard sliders, held fire, real reload, native tab/window switching. Read-only audio observations. One disclosed HTTP404 manifest scenario.',
           'limitations': ['Automated Chromium, not human listening or physical speaker/headphone validation.',
-                         'Five real AudioBuffers and three advancing original music loops prove decode/playback, not canonical franchise sound or recorded audible output.',
+                         'Every published effect buffer and the advancing original music loops prove decode/playback, not canonical franchise sound or recorded audible output.',
                          'No new audio asset, voice recording or artwork is introduced.',
                          'Background playback may continue or pause under browser policy; only an actually observed hidden state is counted as hidden-tab coverage.']}
 
@@ -42,6 +42,23 @@ def check(label, condition):
     assert condition, label
     report['checks'].append(label)
     print('PASS ' + label, flush=True)
+
+
+def published_banks(manifest):
+    return {kind: {slot_id: slot['sources'] for slot_id, slot in manifest['tracks'][kind].items()
+                   if slot['sources']} for kind in ['sfx', 'music']}
+
+
+manifest_path = repo / 'assets/audio/manifest.json'
+published_manifest = json.loads(manifest_path.read_text())
+expected_banks = published_banks(published_manifest)
+expected_effect_ids = sorted(expected_banks['sfx'])
+expected_sources = [source for slots in expected_banks.values() for sources in slots.values() for source in sources]
+expected_paths = [source['path'] for source in expected_sources]
+assert expected_effect_ids and len(expected_paths) == len(set(expected_paths)), 'Published audio sources must be nonempty and unique.'
+report['publishedBanks'] = {'manifestSha256': hashlib.sha256(manifest_path.read_bytes()).hexdigest(),
+                          'effectIds': expected_effect_ids, 'musicIds': sorted(expected_banks['music']),
+                          'sourcePaths': expected_paths}
 
 
 def capture(page, name):
@@ -186,7 +203,8 @@ raw_profile = subprocess.run(['node', '--input-type=module', '-e', script], cwd=
                              capture_output=True, text=True, check=True).stdout.encode()
 (output / 'disclosed-audio-profile-v162.json').write_bytes(raw_profile)
 report['fixtureSha256'] = hashlib.sha256(raw_profile).hexdigest()
-source_paths = sorted([*repo.glob('src/**/*.js'), *repo.glob('*.css'), repo / 'sw.js', repo / 'index.html', Path(__file__).resolve()])
+source_paths = sorted([*repo.glob('src/**/*.js'), *repo.glob('*.css'), repo / 'sw.js', repo / 'index.html',
+                       manifest_path, Path(__file__).resolve()])
 source_start = {str(p.relative_to(repo)): hashlib.sha256(p.read_bytes()).hexdigest() for p in source_paths}
 (output / 'profile-source-start.json').write_text(json.dumps(source_start, indent=2))
 
@@ -209,7 +227,9 @@ with sync_playwright() as pw:
         page.goto(args.base, wait_until='domcontentloaded')
         page.locator('#title-start').click(timeout=45000)
         page.locator('#title-options').click()
-        page.wait_for_function('()=>__ATF_AUDIO_V77__?.context?.state==="running"&&__ATF_AUDIO_V77__.effectBuffers.size===5')
+        # The menu transfer is deliberately held only until the native mute.
+        # Waiting for every effect here would spend its real network timeout.
+        page.wait_for_function('()=>__ATF_AUDIO_V77__?.context?.state==="running"&&__ATF_AUDIO_V77__.manifestStatus==="ready"')
         deadline = time.monotonic() + 20
         while not pending_menu and time.monotonic() < deadline:
             page.wait_for_timeout(50)
@@ -221,9 +241,14 @@ with sync_playwright() as pw:
         page.wait_for_function('()=>__ATF_AUDIO_V77__.volumes.music===0&&!__ATF_AUDIO_V77__.musicVoices.size&&__ATF_AUDIO_V77__.musicPendingGeneration===-1')
         check('Muting during the real pending music transfer leaves no late media voice', observed(page)['music'] == [])
         slider(page, '#setting-music', 1)
+        page.wait_for_function('''expected=>{const a=__ATF_AUDIO_V77__,ids=[...a.effectBuffers.keys()].sort();
+          return a.context?.state==='running'&&ids.length===expected.length&&ids.every((id,index)=>id===expected[index]);}''',
+                               arg=expected_effect_ids)
         menu = playing(page, 'menu')
-        check('Five shipped effects decode into bounded reusable native buffers',
-              {e['id'] for e in menu['effects']} == {'shot', 'tracker', 'hit', 'ui', 'alarm'}
+        check('The runtime accepts exactly the published effect and music sources',
+              published_banks(menu['manifest']) == expected_banks)
+        check('Every published effect decodes into a bounded reusable native buffer',
+              sorted(e['id'] for e in menu['effects']) == expected_effect_ids
               and all(e['length'] > 0 and e['channels'] == 1 and math.isfinite(e['duration']) and e['duration'] > 0 for e in menu['effects']))
         capture(page, '01-original-menu-banks.png')
 
@@ -276,16 +301,23 @@ with sync_playwright() as pw:
         # A real gesture owns any resume required by the browser's policy.
         page.locator('#game-canvas').click(position={'x': 420, 'y': 340})
         playing(page, 'mission')
-        manifest = observed(page)['manifest']
-        expected_sources = [source for kind in ['sfx', 'music'] for slot in manifest['tracks'][kind].values() for source in slot['sources']]
-        received = {entry['path']: entry for entry in report['audioResponses']}
-        report['bankTransferVerification'] = [verify_bank_transfer(source, received.get(source['path'])) for source in expected_sources]
+        received = {}
+        for entry in report['audioResponses']:
+            received.setdefault(entry['path'], []).append(entry)
+        report['bankTransferVerification'] = []
+        for source in expected_sources:
+            transfers = received.get(source['path'], [])
+            row = verify_bank_transfer(source, transfers[0] if len(transfers) == 1 else None)
+            report['bankTransferVerification'].append({**row, 'transferCount': len(transfers)})
+        report['unexpectedAudioPaths'] = sorted(set(received) - set(expected_paths))
+        report['duplicateAudioPaths'] = sorted(path for path, transfers in received.items() if len(transfers) != 1)
         report['httpMimePolicy'] = {'exactTypes': ['audio/wav', 'audio/ogg'],
                                    'explicitAliases': {'audio/x-wav': 'audio/wav'},
                                    'unknownTypesAccepted': False, 'bytesAndSha256MustMatchExactly': True}
-        check('All eight real WAV/OGG transfers match exact bytes/SHA256 and the declared MIME or explicit WAV alias',
-              len(expected_sources) == 8 and all(row['mimeAccepted'] and row['bytesAndSha256Exact']
-                                                for row in report['bankTransferVerification']))
+        check('Every published audio source transfers once with exact bytes/SHA256 and the declared MIME or explicit WAV alias',
+              set(received) == set(expected_paths) and not report['duplicateAudioPaths']
+              and all(row['transferCount'] == 1 and row['mimeAccepted'] and row['bytesAndSha256Exact']
+                      for row in report['bankTransferVerification']))
         report['decodedNativeBanks'] = observed(page)
 
         step('native mute settings and actual reload')
