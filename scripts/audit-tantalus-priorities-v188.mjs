@@ -48,7 +48,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
     "previousSha256": "95287e9c3f9be2b88db9e391a9a143c4c69be8956b6763e4113645974b9e878d",
-    "currentSha256": "0ac94af031d1411629186266e086ee40fbb591dbd2cdd5bc7a4b063901ad36b3"
+    "currentSha256": "64a13e855d68cda96d0541c78202b77bdcf0703eaf1c91a786fd93e21cc3a271"
   },
   "hub-level.css": {
     "previousSha256": "13e29b3719e1246d595dadca4c786cbeb5a471dece902104b0ccd29a1de9908d",
@@ -88,7 +88,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-audit-v143.mjs": {
     "previousSha256": "825a8672e074c335568669ce8e5c496ed2fb70af9e11f3d834169da1a8d5a1c2",
-    "currentSha256": "c14ce1f1754a8089e895eeb0c0897ebe9443dcee36a4edea8056014d63a3e14c"
+    "currentSha256": "1916805365d4b9f8d0791f621e761233402a2301ccdc491ba50a7dbea5c49b6e"
   },
   "scripts/verify-campaign-lethe-v163.mjs": {
     "previousSha256": "cb3ac8826d4f15bbab86e0c42dcd225aeee341c9b10950046fb14af104473049",
@@ -128,7 +128,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "328c764b2bf467d0bc21ae86abf415a7722bd0a88cba486eb2167c22fa8f0b84",
-    "currentSha256": "e0e47d4de6954b9175fdc2b01d62b9d2451cdc3d36fdfd4bc6b7a4d87590dbbd"
+    "currentSha256": "71f649a8cf95c1d8a5d79923c8e2b1279e81f7b610f54d4f799d54c173d48147"
   },
   "src/alien-survival-runtime-v70.js": {
     "previousSha256": "65d5c0c4ca446021b6ff58ed6be61fc622c0908ede9d9d74b730fa0efef2fd93",
@@ -432,7 +432,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "sw.js": {
     "previousSha256": "ff86bba365c3875c8ebaeb0abe13b2a6185ccd5f1a030b4ee5b15ac0e4a12f9b",
-    "currentSha256": "4a35128db39a3d51dcaef6a826c5f53046cd2b0441ce08e25759aaa24c88a3b7"
+    "currentSha256": "85e65128faa657fcf6e2b6f914aa699d67798e1c8a248d8dce0bdebdbc9b8ad8"
   },
   "title-screen-v61.css": {
     "previousSha256": "3a748b04d5e6c9a7e04c189b2c1910c3163a0840968be6bcbb6352e10e16369f",

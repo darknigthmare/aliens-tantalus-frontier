@@ -28,7 +28,7 @@ import {
 } from '../src/asphodele-economy-v188.js';
 import { createAsphodeleCrowdV188, stepAsphodeleCrowdV188, asphodeleCrowdClearsDoorwaysV188, asphodeleRoomBaysV188, clearStationDoorwayPostV188,
   ASPHODELE_CROWD_ROSTER_V188, ASPHODELE_WORKER_SIZE_V188 } from '../src/asphodele-crowd-v188.js';
-import { ASPHODELE_HUB_SLOT_IDS_V188, drawAsphodeleWallV188 } from '../src/asphodele-hub-slots-v188.js';
+import { ASPHODELE_HUB_SLOT_IDS_V188, ASPHODELE_HUB_FILES_PRESENT_V188, drawAsphodeleWallV188 } from '../src/asphodele-hub-slots-v188.js';
 import { asphodeleMissionLayoutV188, asphodeleMissionFeatureV188, ASPHODELE_MISSION_SLOT_IDS_V188, ASPHODELE_MISSION_SIZES_V188 } from '../src/asphodele-mission-dressing-v188.js';
 import { shipPortGangwayLabelV188 } from '../src/ship-port-room-v87.js';
 import { withHubAsphodeleV188 } from '../src/hub-asphodele-v188.js';
@@ -273,7 +273,7 @@ test('mission dressing: only Asphodèle campaigns, props clear of doors, ladders
   }
   for (const band of dressing.bands) for (const [x0, x1, top, bottom] of blockers) assert.ok(!(band.x < x1 && band.x + band.w > x0 && band.y < bottom && band.y + 5 > top), 'hazard band stops at passages');
   engine.camera.x = Math.max(0, dressing.feature.x - 400); engine.draw();
-  for (const id of new Set(['asph-msn-blackbox'])) assert.equal(engine.asphMissionLoaderV188.usage[id], 'primitive', id);
+  for (const id of new Set(['asph-msn-blackbox'])) assert.equal(engine.asphMissionLoaderV188.usage[id], ASPHODELE_HUB_FILES_PRESENT_V188.includes(id) ? 'image' : 'primitive', id);
   for (const id of ASPHODELE_MISSION_SLOT_IDS_V188) assert.ok(ASPHODELE_HUB_SLOT_IDS_V188.includes(id), id);
   assert.ok(Math.abs(ASPHODELE_MISSION_SIZES_V188.panel.w / 51 - 2.5) < .05 && Math.abs(ASPHODELE_MISSION_SIZES_V188.crt.w / 51 - 1) < .02);
   // Other missions keep the shared template untouched.

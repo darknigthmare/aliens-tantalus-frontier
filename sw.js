@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-asphodele-art-20261116';
+const CACHE = 'atf-v143-asphodele-mission-art-20261116';
 const SHELL = Object.freeze([
   '/src/alien-base-bridge-v1.js',
   '/src/alien-base-snapshot-v1.js',
@@ -722,8 +722,8 @@ const SHELL = Object.freeze([
   '/xeno-trials-v96.css',
 ]);
 const SHELL_PATHS = new Set(SHELL);
-// Reviewed scene cards join the bounded runtime cache only after being viewed.
-// Keep an exact allow-list: other content files do not become cacheable.
+// Reviewed scene cards and mission props join the bounded runtime cache on demand.
+// Keep exact allow-lists: other content and hub files do not become cacheable.
 const COLONY_CARD_PATHS_V188 = new Set([
   '/assets/content/v188/colony/colony-quay-warehouse.png',
   '/assets/content/v188/colony/colony-processor.png',
@@ -752,6 +752,17 @@ const ASPHODELE_CARD_PATHS_V188 = new Set([
   '/assets/content/v188/seal-fragment.png',
   '/assets/content/v188/david-memory.png'
 ]);
+const ASPHODELE_MISSION_PATHS_V188 = new Set([
+  '/assets/asphodele/v188/asph-msn-panel.png',
+  '/assets/asphodele/v188/asph-msn-crt.png',
+  '/assets/asphodele/v188/asph-msn-sign.png',
+  '/assets/asphodele/v188/asph-msn-conduit.png',
+  '/assets/asphodele/v188/asph-msn-blackbox.png',
+  '/assets/asphodele/v188/asph-msn-resin.png',
+  '/assets/asphodele/v188/asph-msn-salvage.png',
+  '/assets/asphodele/v188/asph-msn-gauge.png',
+  '/assets/asphodele/v188/asph-msn-camera.png'
+]);
 const MAX_RUNTIME_ENTRIES_V143 = 256;
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const PRIVATE_HEADERS_V143 = ['authorization', 'proxy-authorization', 'apikey', 'x-api-key', 'x-auth-token'];
@@ -768,6 +779,7 @@ function cacheableRequestV143(request) {
     if (SHELL_PATHS.has(path)) return true;
     if (COLONY_CARD_PATHS_V188.has(path)) return true;
     if (ASPHODELE_CARD_PATHS_V188.has(path)) return true;
+    if (ASPHODELE_MISSION_PATHS_V188.has(path)) return true;
     // No API, account, save, unknown document or third-party endpoint can enter
     // Cache Storage, even when it returns HTTP 200 or an image-like extension.
     return /^\/assets\/(?:openai|user|equipment)\/[a-z0-9/_.-]+\.(?:png|webp|jpg|jpeg)$/i.test(path)

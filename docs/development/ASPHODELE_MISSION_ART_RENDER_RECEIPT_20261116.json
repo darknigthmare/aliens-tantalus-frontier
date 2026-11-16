@@ -1,0 +1,734 @@
+{
+  "schema": "tantalus-asphodele-mission-art-render-receipt-v1",
+  "date": "2026-11-16",
+  "timeZone": "Europe/Paris",
+  "provisional": false,
+  "integration": {
+    "createdAt": "2026-11-16T21:42:38.889942+00:00",
+    "baselineCommit": "3be2a402aa2e8149b4fb3bc557d9ba67a75523d8",
+    "status": "four owned integration files frozen after final resin title adjustment",
+    "sourceHashesSHA256": {
+      "src/asphodele-hub-slots-v188.js": "f044d259d049bded32961cdfadca26406cb83ccb54acb12e0fffba8413ace401",
+      "src/asphodele-mission-dressing-v188.js": "ac2fd3091b08b376d06fb627b457d344d93a8de1403f8d46e29ebb33f11941fb",
+      "scripts/verify-asphodele-hub-v188.mjs": "e774edac21183f159c142259b48676865e4a0ff260b5c9211c4671b6e39c5769",
+      "scripts/verify-asphodele-hub-2-v188.mjs": "7ad4418aac65adc50159683c59a96ddce452823ab09ef938cfb82066898bd469"
+    },
+    "geometryIdenticalToBaseline": true,
+    "hubRendererIdenticalToBaseline": true,
+    "tests": {
+      "command": "node --test scripts/verify-asphodele-hub-v188.mjs scripts/verify-asphodele-hub-2-v188.mjs",
+      "exitCode": 0,
+      "tests": 35,
+      "pass": 35,
+      "fail": 0,
+      "skip": 0,
+      "node": "v24.22.1",
+      "durationMs": 1680.006814,
+      "productionCampaignsCovered": 14
+    },
+    "nativeQA": {
+      "command": "node mission-art-qa/render-native.mjs",
+      "exitCode": 0,
+      "report": "mission-art-qa/native-result/native-qa-report.json",
+      "reportSHA256": "d7e0dca3af1048c323c9b2f70154af26b79c1518c3ab07956a19041d60f906b2",
+      "spriteNative1xCaptures": 27,
+      "imageFR": 9,
+      "imageEN": 9,
+      "fallbackFR": 9,
+      "sheets3x": 3,
+      "productionFrames1280x720": 10,
+      "boundedSpriteChecks": 18,
+      "outsidePixels": 0,
+      "animatedChangedPixels": {
+        "asph-msn-crt-fr": {
+          "changedPixels": 58
+        },
+        "asph-msn-gauge-fr": {
+          "changedPixels": 132
+        },
+        "asph-msn-crt-en": {
+          "changedPixels": 58
+        },
+        "asph-msn-gauge-en": {
+          "changedPixels": 132
+        }
+      }
+    },
+    "visualReview": {
+      "reviewedSheets": [
+        "native-assets-fr.png",
+        "native-assets-en.png",
+        "native-assets-fallback.png"
+      ],
+      "reviewedProductionFrames": [
+        "station-c-relais-fr-1280x720.png",
+        "station-c-relais-en-1280x720.png",
+        "station-c-conduits-fr-1280x720.png",
+        "station-c-conduits-en-1280x720.png",
+        "station-a-grue-fr-1280x720.png",
+        "station-a-grue-en-1280x720.png",
+        "station-a-hydro-fr-1280x720.png",
+        "station-a-hydro-en-1280x720.png",
+        "station-a-cassius-fr-1280x720.png",
+        "station-a-cassius-en-1280x720.png"
+      ],
+      "findings": [
+        "All nine sprites inspected independently in FR and EN; fallback reviewed separately.",
+        "Three orange recorders, two salvage crates, three calibrated analogue dials.",
+        "Sign text stays inside its dark plate; resin title lifted two native pixels on image path.",
+        "Camera native lamp uses the measured inner lens rectangle; generated monitor glass stays intact.",
+        "Doorway and ladder access remains visible in the five production scene compositions."
+      ]
+    },
+    "limitations": [
+      "Native @napi-rs/canvas rendering with engine-host-v188 browser API fixtures; no browser capture or complete mission playthrough claimed.",
+      "Full engine captures switch the document language for mission dressing; the surrounding HUD may retain the French fixture campaign strings.",
+      "Production fixture seed 7 disables enemies, squad and hazards; camera is placed at the feature.",
+      "No commit, publication, registry or documentation edits by this integration agent."
+    ],
+    "finalFRSheet": "mission-art-qa/native-result/native-assets-fr.png",
+    "finalENSheet": "mission-art-qa/native-result/native-assets-en.png",
+    "fallbackSheet": "mission-art-qa/native-result/native-assets-fallback.png"
+  },
+  "nativeRaster": {
+    "renderer": "@napi-rs/canvas; actual source PNGs decoded by loadImage; no image rewrite; browser APIs from scripts/engine-host-v188.mjs",
+    "fixtures": "Production GameEngine fixture seed 7, enemies/squad/hazards disabled by the existing fixture. Camera is placed at the feature; full captures attest rendering, not a completed playthrough.",
+    "nativeBounds": [
+      {
+        "id": "asph-msn-panel",
+        "lang": "fr",
+        "outsidePixels": 0,
+        "width": 128,
+        "height": 112
+      },
+      {
+        "id": "asph-msn-crt",
+        "lang": "fr",
+        "outsidePixels": 0,
+        "width": 51,
+        "height": 41
+      },
+      {
+        "id": "asph-msn-sign",
+        "lang": "fr",
+        "outsidePixels": 0,
+        "width": 153,
+        "height": 26
+      },
+      {
+        "id": "asph-msn-conduit",
+        "lang": "fr",
+        "outsidePixels": 0,
+        "width": 306,
+        "height": 12
+      },
+      {
+        "id": "asph-msn-blackbox",
+        "lang": "fr",
+        "outsidePixels": 0,
+        "width": 153,
+        "height": 102
+      },
+      {
+        "id": "asph-msn-resin",
+        "lang": "fr",
+        "outsidePixels": 0,
+        "width": 153,
+        "height": 102
+      },
+      {
+        "id": "asph-msn-salvage",
+        "lang": "fr",
+        "outsidePixels": 0,
+        "width": 153,
+        "height": 102
+      },
+      {
+        "id": "asph-msn-gauge",
+        "lang": "fr",
+        "outsidePixels": 0,
+        "width": 153,
+        "height": 102
+      },
+      {
+        "id": "asph-msn-camera",
+        "lang": "fr",
+        "outsidePixels": 0,
+        "width": 153,
+        "height": 102
+      },
+      {
+        "id": "asph-msn-panel",
+        "lang": "en",
+        "outsidePixels": 0,
+        "width": 128,
+        "height": 112
+      },
+      {
+        "id": "asph-msn-crt",
+        "lang": "en",
+        "outsidePixels": 0,
+        "width": 51,
+        "height": 41
+      },
+      {
+        "id": "asph-msn-sign",
+        "lang": "en",
+        "outsidePixels": 0,
+        "width": 153,
+        "height": 26
+      },
+      {
+        "id": "asph-msn-conduit",
+        "lang": "en",
+        "outsidePixels": 0,
+        "width": 306,
+        "height": 12
+      },
+      {
+        "id": "asph-msn-blackbox",
+        "lang": "en",
+        "outsidePixels": 0,
+        "width": 153,
+        "height": 102
+      },
+      {
+        "id": "asph-msn-resin",
+        "lang": "en",
+        "outsidePixels": 0,
+        "width": 153,
+        "height": 102
+      },
+      {
+        "id": "asph-msn-salvage",
+        "lang": "en",
+        "outsidePixels": 0,
+        "width": 153,
+        "height": 102
+      },
+      {
+        "id": "asph-msn-gauge",
+        "lang": "en",
+        "outsidePixels": 0,
+        "width": 153,
+        "height": 102
+      },
+      {
+        "id": "asph-msn-camera",
+        "lang": "en",
+        "outsidePixels": 0,
+        "width": 153,
+        "height": 102
+      }
+    ],
+    "nativeAnimations": {
+      "asph-msn-crt-fr": {
+        "changedPixels": 58
+      },
+      "asph-msn-gauge-fr": {
+        "changedPixels": 132
+      },
+      "asph-msn-crt-en": {
+        "changedPixels": 58
+      },
+      "asph-msn-gauge-en": {
+        "changedPixels": 132
+      }
+    },
+    "fallbackSlots": [
+      {
+        "id": "asph-msn-panel",
+        "width": 128,
+        "height": 112,
+        "file": "asph-msn-panel-fallback-native.png"
+      },
+      {
+        "id": "asph-msn-crt",
+        "width": 51,
+        "height": 41,
+        "file": "asph-msn-crt-fallback-native.png"
+      },
+      {
+        "id": "asph-msn-sign",
+        "width": 153,
+        "height": 26,
+        "file": "asph-msn-sign-fallback-native.png"
+      },
+      {
+        "id": "asph-msn-conduit",
+        "width": 306,
+        "height": 12,
+        "file": "asph-msn-conduit-fallback-native.png"
+      },
+      {
+        "id": "asph-msn-blackbox",
+        "width": 153,
+        "height": 102,
+        "file": "asph-msn-blackbox-fallback-native.png"
+      },
+      {
+        "id": "asph-msn-resin",
+        "width": 153,
+        "height": 102,
+        "file": "asph-msn-resin-fallback-native.png"
+      },
+      {
+        "id": "asph-msn-salvage",
+        "width": 153,
+        "height": 102,
+        "file": "asph-msn-salvage-fallback-native.png"
+      },
+      {
+        "id": "asph-msn-gauge",
+        "width": 153,
+        "height": 102,
+        "file": "asph-msn-gauge-fallback-native.png"
+      },
+      {
+        "id": "asph-msn-camera",
+        "width": 153,
+        "height": 102,
+        "file": "asph-msn-camera-fallback-native.png"
+      }
+    ],
+    "screens": [
+      {
+        "campaignId": "station-c-relais",
+        "lang": "fr",
+        "file": "station-c-relais-fr-1280x720.png",
+        "feature": {
+          "id": "asph-msn-feature-blackbox",
+          "kind": "blackbox",
+          "x": 2838,
+          "y": 726,
+          "w": 153,
+          "h": 102
+        },
+        "cameraX": 2438,
+        "usage": {
+          "asph-msn-conduit": "image",
+          "asph-msn-panel": "image",
+          "asph-msn-crt": "image",
+          "asph-msn-sign": "image",
+          "asph-msn-blackbox": "image"
+        }
+      },
+      {
+        "campaignId": "station-c-relais",
+        "lang": "en",
+        "file": "station-c-relais-en-1280x720.png",
+        "feature": {
+          "id": "asph-msn-feature-blackbox",
+          "kind": "blackbox",
+          "x": 2838,
+          "y": 726,
+          "w": 153,
+          "h": 102
+        },
+        "cameraX": 2438,
+        "usage": {
+          "asph-msn-conduit": "image",
+          "asph-msn-panel": "image",
+          "asph-msn-crt": "image",
+          "asph-msn-sign": "image",
+          "asph-msn-blackbox": "image"
+        }
+      },
+      {
+        "campaignId": "station-c-conduits",
+        "lang": "fr",
+        "file": "station-c-conduits-fr-1280x720.png",
+        "feature": {
+          "id": "asph-msn-feature-resin",
+          "kind": "resin",
+          "x": 2844,
+          "y": 726,
+          "w": 153,
+          "h": 102
+        },
+        "cameraX": 2444,
+        "usage": {
+          "asph-msn-conduit": "image",
+          "asph-msn-panel": "image",
+          "asph-msn-crt": "image",
+          "asph-msn-sign": "image",
+          "asph-msn-resin": "image"
+        }
+      },
+      {
+        "campaignId": "station-c-conduits",
+        "lang": "en",
+        "file": "station-c-conduits-en-1280x720.png",
+        "feature": {
+          "id": "asph-msn-feature-resin",
+          "kind": "resin",
+          "x": 2844,
+          "y": 726,
+          "w": 153,
+          "h": 102
+        },
+        "cameraX": 2444,
+        "usage": {
+          "asph-msn-conduit": "image",
+          "asph-msn-panel": "image",
+          "asph-msn-crt": "image",
+          "asph-msn-sign": "image",
+          "asph-msn-resin": "image"
+        }
+      },
+      {
+        "campaignId": "station-a-grue",
+        "lang": "fr",
+        "file": "station-a-grue-fr-1280x720.png",
+        "feature": {
+          "id": "asph-msn-feature-salvage",
+          "kind": "salvage",
+          "x": 2836,
+          "y": 726,
+          "w": 153,
+          "h": 102
+        },
+        "cameraX": 2436,
+        "usage": {
+          "asph-msn-conduit": "image",
+          "asph-msn-panel": "image",
+          "asph-msn-crt": "image",
+          "asph-msn-sign": "image",
+          "asph-msn-salvage": "image"
+        }
+      },
+      {
+        "campaignId": "station-a-grue",
+        "lang": "en",
+        "file": "station-a-grue-en-1280x720.png",
+        "feature": {
+          "id": "asph-msn-feature-salvage",
+          "kind": "salvage",
+          "x": 2836,
+          "y": 726,
+          "w": 153,
+          "h": 102
+        },
+        "cameraX": 2436,
+        "usage": {
+          "asph-msn-conduit": "image",
+          "asph-msn-panel": "image",
+          "asph-msn-crt": "image",
+          "asph-msn-sign": "image",
+          "asph-msn-salvage": "image"
+        }
+      },
+      {
+        "campaignId": "station-a-hydro",
+        "lang": "fr",
+        "file": "station-a-hydro-fr-1280x720.png",
+        "feature": {
+          "id": "asph-msn-feature-gauge",
+          "kind": "gauge",
+          "x": 2848,
+          "y": 726,
+          "w": 153,
+          "h": 102
+        },
+        "cameraX": 2448,
+        "usage": {
+          "asph-msn-conduit": "image",
+          "asph-msn-panel": "image",
+          "asph-msn-crt": "image",
+          "asph-msn-sign": "image",
+          "asph-msn-gauge": "image"
+        }
+      },
+      {
+        "campaignId": "station-a-hydro",
+        "lang": "en",
+        "file": "station-a-hydro-en-1280x720.png",
+        "feature": {
+          "id": "asph-msn-feature-gauge",
+          "kind": "gauge",
+          "x": 2848,
+          "y": 726,
+          "w": 153,
+          "h": 102
+        },
+        "cameraX": 2448,
+        "usage": {
+          "asph-msn-conduit": "image",
+          "asph-msn-panel": "image",
+          "asph-msn-crt": "image",
+          "asph-msn-sign": "image",
+          "asph-msn-gauge": "image"
+        }
+      },
+      {
+        "campaignId": "station-a-cassius",
+        "lang": "fr",
+        "file": "station-a-cassius-fr-1280x720.png",
+        "feature": {
+          "id": "asph-msn-feature-camera",
+          "kind": "camera",
+          "x": 2844,
+          "y": 726,
+          "w": 153,
+          "h": 102
+        },
+        "cameraX": 2444,
+        "usage": {
+          "asph-msn-conduit": "image",
+          "asph-msn-panel": "image",
+          "asph-msn-crt": "image",
+          "asph-msn-sign": "image",
+          "asph-msn-camera": "image"
+        }
+      },
+      {
+        "campaignId": "station-a-cassius",
+        "lang": "en",
+        "file": "station-a-cassius-en-1280x720.png",
+        "feature": {
+          "id": "asph-msn-feature-camera",
+          "kind": "camera",
+          "x": 2844,
+          "y": 726,
+          "w": 153,
+          "h": 102
+        },
+        "cameraX": 2444,
+        "usage": {
+          "asph-msn-conduit": "image",
+          "asph-msn-panel": "image",
+          "asph-msn-crt": "image",
+          "asph-msn-sign": "image",
+          "asph-msn-camera": "image"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "id": "asph-msn-panel",
+        "width": 128,
+        "height": 112,
+        "sourceSize": [
+          1341,
+          1173
+        ],
+        "sourceRect": [
+          16,
+          24,
+          1309,
+          1131
+        ]
+      },
+      {
+        "id": "asph-msn-crt",
+        "width": 51,
+        "height": 41,
+        "sourceSize": [
+          1399,
+          1124
+        ],
+        "sourceRect": [
+          0,
+          6,
+          1396,
+          1115
+        ]
+      },
+      {
+        "id": "asph-msn-sign",
+        "width": 153,
+        "height": 26,
+        "sourceSize": [
+          2172,
+          724
+        ],
+        "sourceRect": [
+          20,
+          193,
+          2132,
+          335
+        ]
+      },
+      {
+        "id": "asph-msn-conduit",
+        "width": 306,
+        "height": 12,
+        "sourceSize": [
+          2002,
+          786
+        ],
+        "sourceRect": [
+          8,
+          359,
+          1991,
+          66
+        ]
+      },
+      {
+        "id": "asph-msn-blackbox",
+        "width": 153,
+        "height": 102,
+        "sourceSize": [
+          1536,
+          1024
+        ],
+        "sourceRect": [
+          12,
+          12,
+          1510,
+          999
+        ]
+      },
+      {
+        "id": "asph-msn-resin",
+        "width": 153,
+        "height": 102,
+        "sourceSize": [
+          1536,
+          1024
+        ],
+        "sourceRect": [
+          22,
+          12,
+          1495,
+          1002
+        ]
+      },
+      {
+        "id": "asph-msn-salvage",
+        "width": 153,
+        "height": 102,
+        "sourceSize": [
+          1536,
+          1024
+        ],
+        "sourceRect": [
+          29,
+          30,
+          1479,
+          967
+        ]
+      },
+      {
+        "id": "asph-msn-gauge",
+        "width": 153,
+        "height": 102,
+        "sourceSize": [
+          1536,
+          1024
+        ],
+        "sourceRect": [
+          27,
+          11,
+          1482,
+          1001
+        ]
+      },
+      {
+        "id": "asph-msn-camera",
+        "width": 153,
+        "height": 102,
+        "sourceSize": [
+          1536,
+          1024
+        ],
+        "sourceRect": [
+          32,
+          24,
+          1472,
+          978
+        ]
+      }
+    ],
+    "sourceHashes": {
+      "asph-msn-panel": "03418f78683662d6d9f740a3ffa7bc6cc80451ce527be2621495565ddef0aba2",
+      "asph-msn-crt": "d52455a1ed4ebe25d2f6affbbcfc4ccb4ddf8dcadde7918336d872d9225942e3",
+      "asph-msn-sign": "c412e401d623d57b17a3ad6cea320ca6bc0a3862f4dac85fd380f82ac10598ec",
+      "asph-msn-conduit": "25a96167fd756439c7d7987519d5e78b376a6bf5ec322de029f512cbf2f91a04",
+      "asph-msn-blackbox": "ce1d5994d95ae20d4d2bb254ec860a9cd9bffbfddf0d5ee87af60f732f20a1b2",
+      "asph-msn-resin": "4c3c59ee567159784b2b236c9c9529d86a577d214ea5081c93d65403dacbffc2",
+      "asph-msn-salvage": "81897aa68e5e19c89a089ac6f36c26858d488db13a77cc7e487e9a32891de9e6",
+      "asph-msn-gauge": "ca9307d98b3065a5c39ce3daaa84f8fc4e44cf3787b171afa9438e9667cf9622",
+      "asph-msn-camera": "8d51a720217e49831d08507a463f28b68075fa54dc160e1bea8539f8cede9857"
+    },
+    "nativeImagesUsed": [
+      "/assets/asphodele/v188/asph-msn-blackbox.png",
+      "/assets/asphodele/v188/asph-msn-camera.png",
+      "/assets/asphodele/v188/asph-msn-conduit.png",
+      "/assets/asphodele/v188/asph-msn-crt.png",
+      "/assets/asphodele/v188/asph-msn-gauge.png",
+      "/assets/asphodele/v188/asph-msn-panel.png",
+      "/assets/asphodele/v188/asph-msn-resin.png",
+      "/assets/asphodele/v188/asph-msn-salvage.png",
+      "/assets/asphodele/v188/asph-msn-sign.png",
+      "/assets/depth-holds/v188/freighter-crate-stack.png",
+      "/assets/depth-holds/v188/freighter-drum-rack.png",
+      "/assets/depth-holds/v188/hold-deck-plating.png",
+      "/assets/openai/equipment/v117-weapons/m41a-pulse-rifle-native-v117.png",
+      "/assets/openai/metroidvania/drops/ammo-drop-sheet.png",
+      "/assets/openai/metroidvania/drops/armor-drop-sheet.png",
+      "/assets/openai/metroidvania/drops/medkit-drop-sheet.png",
+      "/assets/openai/metroidvania/props/cargo-cover.png",
+      "/assets/openai/metroidvania/props/ceiling-cables.png",
+      "/assets/openai/metroidvania/props/foreground-pipes.png",
+      "/assets/openai/metroidvania/props/maintenance-pipe.png",
+      "/assets/openai/metroidvania/props/mission-door-states-v58.png",
+      "/assets/openai/metroidvania/props/overhead-catwalk.png",
+      "/assets/openai/metroidvania/props/supply-crates.png",
+      "/assets/openai/metroidvania/props/vent-entrance.png",
+      "/assets/openai/metroidvania/props/wall-ladder.png",
+      "/assets/openai/metroidvania/props/warning-lamp.png",
+      "/assets/openai/metroidvania/terminals/ship-command-archive-terminal-sheet.png",
+      "/assets/openai/metroidvania/zones/ship-docking-far.png",
+      "/assets/openai/metroidvania/zones/ship-docking-foreground.png",
+      "/assets/openai/metroidvania/zones/ship-docking-mid.png",
+      "/assets/openai/sprites/player/rig-v125/echo9-arm-parts-v125.png",
+      "/assets/openai/sprites/player/rig-v126/echo9-head-back-parts-v126.png",
+      "/assets/openai/sprites/player/rig-v126/echo9-upper-parts-v126.png",
+      "/assets/openai/sprites/player/rig-v128/echo9-leg-parts-v128.png"
+    ]
+  },
+  "captureSHA256": {
+    "asph-msn-blackbox-en-native.png": "97cbb98c5886f45666ed1239ed04962d2e73e57ead5359934b0036dd0a16375b",
+    "asph-msn-blackbox-fallback-native.png": "e5744fe7e32139bd721fb87a37a0390cc5a5030345f148dd02d33eea40198ef0",
+    "asph-msn-blackbox-fr-native.png": "8273889124d61da910d53e352a34684eaa24ff197a8a92e6c7deb7a443c0f12f",
+    "asph-msn-camera-en-native.png": "9df51037867127bed1ff5a66557a7c0a7f7bbcf6a89fae4faed82d18c285021c",
+    "asph-msn-camera-fallback-native.png": "63a13176ef1f2af448768e9f364fb9afd3df11ed893fbae472a01b21605ff312",
+    "asph-msn-camera-fr-native.png": "9df51037867127bed1ff5a66557a7c0a7f7bbcf6a89fae4faed82d18c285021c",
+    "asph-msn-conduit-en-native.png": "4ba3dbc3a3893c562af691fb5c775a631385dc022490b18485edd9d5b27c2449",
+    "asph-msn-conduit-fallback-native.png": "bd7b9f1192546419db26cd43b5550a7d0f1c78922e2fe5f613a4cef085e0b1b4",
+    "asph-msn-conduit-fr-native.png": "4ba3dbc3a3893c562af691fb5c775a631385dc022490b18485edd9d5b27c2449",
+    "asph-msn-crt-en-native.png": "e57a5bd3e4ea25059f35a1f16778cd6025af61b52357ab4661815700d9e7e9e0",
+    "asph-msn-crt-fallback-native.png": "b17b4482ea40d75376046c2724530b6bbbb22dd75144262a92acf2c8edb72c58",
+    "asph-msn-crt-fr-native.png": "e57a5bd3e4ea25059f35a1f16778cd6025af61b52357ab4661815700d9e7e9e0",
+    "asph-msn-gauge-en-native.png": "38c28958291c7776bb82b634dadb581b1cd56babe9980b2fcfcbae908f32da9e",
+    "asph-msn-gauge-fallback-native.png": "3c58273271eba02eb4e1cf53a640f4730e0a8fae29e4752bad70a70aef667a7e",
+    "asph-msn-gauge-fr-native.png": "c1480ffa839068a0651e97ce1bdd5f2a43446b8ae0ec2b753b6ad03c13875133",
+    "asph-msn-panel-en-native.png": "8521ce1038c3342bc12d6b5652ae1f5ea5447dad69a7f8894ccdf32e7d89cd57",
+    "asph-msn-panel-fallback-native.png": "32442fbf6f9c59e21f9c69dd707c7a0822eae09bf0e2b271d3b320340b886559",
+    "asph-msn-panel-fr-native.png": "8521ce1038c3342bc12d6b5652ae1f5ea5447dad69a7f8894ccdf32e7d89cd57",
+    "asph-msn-resin-en-native.png": "3cf2c3ea4d69d028a868cdec2b6258208a9810621336447892385900899ed2e8",
+    "asph-msn-resin-fallback-native.png": "3b11f573906721c7950c098d484739f84fb1c6c51693e831ac44c7eaa50b4813",
+    "asph-msn-resin-fr-native.png": "92c618dafe43e3207b9b227200a6e296401241060e1c40b09bc3e9860ebdacba",
+    "asph-msn-salvage-en-native.png": "9c52da886f20084a57778ce162783f386fa5a15b12aea19032fcaf10f0cc59b6",
+    "asph-msn-salvage-fallback-native.png": "7def3424125f6f05ccd0377abbb36fad28523a8e51e92d29403c3ead73a4abf0",
+    "asph-msn-salvage-fr-native.png": "6a88ff381db3cd7561f822072c6b1bc85788f4bff4f1043e8a30e00c2c79dd63",
+    "asph-msn-sign-en-native.png": "63690dcef90ec842b5beeff975a3a1305d295367b654cafcf65c23e3833da8e7",
+    "asph-msn-sign-fallback-native.png": "d979de09c513f6ef04c3758d0d43b72cf9c651de174b52399ba422f6c37ad852",
+    "asph-msn-sign-fr-native.png": "996a4ab6efca352ae044e29e3be493af57326a32e47cc3689c23db63c4a9cbb8",
+    "native-assets-en.png": "361e04501d761deb5cf19801bed97ca760803d3cd9c44df111afda5153f47abc",
+    "native-assets-fallback.png": "c67717d3046db6621f611123cdb05887c3733bb15a51087fcb52058fcad3f7bb",
+    "native-assets-fr.png": "af42737fdca207768bced10cbad361aff956b3a262274a0fa7d9ad3d6140c821",
+    "station-a-cassius-en-1280x720.png": "dd1f13c10daa318ab1ee68bcaaab5cdd77b02cfe40328dd9e77b62befaaf3982",
+    "station-a-cassius-fr-1280x720.png": "dd1f13c10daa318ab1ee68bcaaab5cdd77b02cfe40328dd9e77b62befaaf3982",
+    "station-a-grue-en-1280x720.png": "4700e583c7adfe6eaf584ab77096028d32bcc9cd41f0ff0a58f3c12bf3de8ef8",
+    "station-a-grue-fr-1280x720.png": "6edd3f97aaaf02e84d835a9110d8da36e995e5400895505ed938517db3203dab",
+    "station-a-hydro-en-1280x720.png": "ed12695ba010bf67d567d4a0ca8afe7ab7eb18d413302945a8c0a4fdc24a0997",
+    "station-a-hydro-fr-1280x720.png": "76785505ed842f85c32d0919e327521ade4f0c80236854c3a24ea34801b3ddec",
+    "station-c-conduits-en-1280x720.png": "31b004ebc66a7c5949814eb7be94b4868b95f8ae8edfb1e0d1844e163438a134",
+    "station-c-conduits-fr-1280x720.png": "534e93d70e5da05b28712fed73ac03ea30f3e32b13e1abf3b3320557071d7fff",
+    "station-c-relais-en-1280x720.png": "f8b6aed247f1e2d4438f3b5b9de15262d69a6f052dd1fe804ce9f9267dcad5cb",
+    "station-c-relais-fr-1280x720.png": "e453736847a807fe45076f5965fbd87d1568bf9b3f11f78e27550b1b7757302c"
+  },
+  "archiveScope": "The FR overview is kept in the source repository. Individual 1x/EN/fallback and production frames were inspected in the declared native QA host; their hashes are recorded here."
+}

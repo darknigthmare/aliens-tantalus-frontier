@@ -1232,7 +1232,7 @@ Décision par défaut appliquée : Q30 (A, économie existante et stock limité 
 | Hangar de réparation | Hangar du *Sulaco*, *Aliens* (1986) : rails de grue, bandes de danger | Atelier du Cheyenne | Vaisseau en réparation, art |
 | Dockers, marchands, techniciens | Techniciens de Sevastopol, *Alien: Isolation* (2014) | Silhouettes en primitives | Costumes, visages |
 
-- **Art du hub et des missions** : 22 emplacements ajoutés (42 au total), primitives Canvas, 1 m ≈ 51 px ; aucune image générée pour ces emplacements `asph-*`. Les illustrations de scène de §7.8 ne les remplacent pas.
+- **Art du hub et des missions** : 22 emplacements ajoutés (42 au total), 1 m ≈ 51 px. La continuation de §7.9 fournit les neuf images `asph-msn-*` de mission ; les 33 emplacements du hub restent en primitives Canvas. Les illustrations de scène de §7.8 constituent un lot distinct.
 - **Reste à faire** : art final ; commerce d'armes ; médecin, jardiniers et mécaniciens ; `orig-asphodele-1`, `-3` et `-4` (§39.2) ; rotation visuelle de l'anneau ; plan V3.
 
 ### 7.8 Illustrations de scène Asphodèle — [PARTIEL] V188 (continuation du 16 novembre 2026)
@@ -1250,9 +1250,31 @@ Décision par défaut appliquée : Q30 (A, économie existante et stock limité 
 
 **Références et fidélité.** Les matières et la mise en scène prolongent les cartes du lot colonie/équipage, l'UD-4L existant et l'atlas des collectables QZ17. Les références de franchise restent celles de §7.6 et §8.4 ; Asphodèle, CASSIUS, Echo-8, Kessler, Crucible, les deux ordres et les autres preuves sont des créations du projet. Ces illustrations ne certifient pas une reproduction canonique « 1:1 » et n'ajoutent aucun visage de Kessler ni portrait de DAVID-8R.
 
-**Limites conservées.** Les 42 emplacements `asph-*` des décors, props et acteurs jouables restent en primitives. La carte `cassius-core` ne remplace pas le prop `asph-cassius-core`. CIN-70 à CIN-72 continuent d'utiliser leurs plans Canvas dans `station-cinematics-v188.js` ; la rotation de l'anneau, les poses des personnages et l'art final des niveaux ne sont pas achevés par ce lot. La chronologie de l'enregistrement d'Echo-8 n'est pas modifiée.
+**Limites conservées.** Ce lot de cartes laissait les 42 emplacements `asph-*` des décors, props et acteurs jouables en primitives ; neuf sont ensuite complétés par §7.9. La carte `cassius-core` ne remplace pas le prop `asph-cassius-core`. CIN-70 à CIN-72 continuent d'utiliser leurs plans Canvas dans `station-cinematics-v188.js` ; la rotation de l'anneau, les poses des personnages et l'art final des niveaux ne sont pas achevés par ce lot. La chronologie de l'enregistrement d'Echo-8 n'est pas modifiée.
 
 Traçabilité : [prompts, références et empreintes des six PNG](../development/ASPHODELE_ART_PROVENANCE_20261116.json), [contrôles et limites](../development/ASPHODELE_ART_QA_20261116.md), [planche des illustrations](../development/ASPHODELE_ART_OVERVIEW_20261116.png), [primitive extérieure de référence](../development/ASPHODELE_ART_PRIMITIVE_REFERENCE_20261116.png).
+
+### 7.9 Objets de mission Asphodèle — [PARTIEL] V188 (continuation du 16 novembre 2026)
+
+La demande de continuation avec fidélité à la franchise produit les neuf PNG de `assets/asphodele/v188/asph-msn-*.png`. Ils remplacent les primitives d'habillage des sept missions annexes, six contrats et de l'inspection nocturne, dans leurs emplacements existants. Les 33 emplacements du hub restent à produire.
+
+| Emplacement | Composition contrôlée | Surface native conservée |
+| --- | --- | --- |
+| `asph-msn-panel` | Panneau frontal riveté, deux plaques d'accès, bande de danger | Cadre 128 × 112 px |
+| `asph-msn-crt` | Boîtier analogique, verre vert sombre, deux boutons | Trois lignes d'état animées ; 51 × 41 px |
+| `asph-msn-sign` | Plaque de secteur vide, encadrement ivoire et graphite | Secteur exact FR/EN dans le cadre 153 × 26 px |
+| `asph-msn-conduit` | Trois conduits parallèles, huit brides orange | Échelle de 306 × 12 px ; fin de travée rognée sans compression |
+| `asph-msn-blackbox` | Trois enregistreurs orange distincts dans leur rack | Libellé QZ exact FR/EN |
+| `asph-msn-resin` | Trappe fermée, résine sombre sur sa partie inférieure | Avertissement biologique exact FR/EN |
+| `asph-msn-salvage` | Deux caisses de récupération, hauteurs décalées | Libellé Crucible exact FR/EN |
+| `asph-msn-gauge` | Trois cadrans analogiques et un volant de vanne | Aiguilles animées alignées sur les pivots ; libellé FR/EN |
+| `asph-msn-camera` | Une caméra sans visage, un voyant et un écran vert sombre | Voyant rouge et titre CASSIUS natifs |
+
+Les cinq éléments propres à une mission restent dans un cadre de 153 × 102 px. Le rythme de 306 px, le plafond y = 110, les marges de 18 px autour des portes, échelles, ascenseurs et conduits, ainsi que l'unique élément de mission restent ceux du plan existant. Les images sont dessinées proportionnellement dans une fenêtre source déclarée ; aucun PNG original n'est redimensionné ou réencodé. Les primitives demeurent le repli pendant le chargement et en cas d'échec. Les missions demandent leurs neuf images ; une visite du hub ne les télécharge pas. Le cache runtime admet ces neuf chemins exacts après leur premier chargement public valide.
+
+**Références et portée de la fidélité.** Les images de couloir, de porte et la planche de direction artistique publiées par [Paul Abbott, Lead Environment Artist](https://www.pauldavidabbott.co.uk/alien-isolation), ainsi que les captures de terminal et de zone cargo présentées par [Gary Napper, lead designer](https://www.gamedeveloper.com/design/game-design-deep-dive-the-save-system-of-i-alien-isolation-i-), ont été inspectées et fournies au générateur. Elles fixent les matières et le vocabulaire de construction. Asphodèle, le rack QZ, les caisses Crucible, le module de pression et CASSIUS restent des assemblages du projet. Les images primaires des props précis de Tunde Glover, Liam Tart et Brad Wright n'ont pas été récupérées ; leurs pages textuelles ne certifient donc aucun contour exact. La résine est une adaptation du motif de ruche cité par la bible, sans référence rapprochée primaire inspectée dans cette passe. Ce lot ne revendique pas neuf répliques canoniques « 1:1 ».
+
+Traçabilité : [prompts, références, fenêtres et empreintes](../development/ASPHODELE_MISSION_ART_PROVENANCE_20261116.json), [validation et limites](../development/ASPHODELE_MISSION_ART_QA_20261116.md), [planche des objets intégrés](../development/ASPHODELE_MISSION_ART_OVERVIEW_20261116.png).
 
 ---
 

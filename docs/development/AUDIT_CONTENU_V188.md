@@ -92,7 +92,7 @@ Les statuts « À faire » du §53 (tir, tension, caste, accessibilité, répliq
 | Choix CASSIUS (réécrire / brider / effacer) | Manquant | Q7 : choix définitif |
 | Annexes (7) et contrats locaux (6) | Partiel (spec 007) | Les 13 sont lançables après S4, verrous [PROPOSÉ] ; contrats comptés ; seul *Relais en dérive* a un effet ; décor générique d'intérieur de vaisseau |
 | Hub Asphodèle : 7 modules (§7.3, §42) | Partiel (spec 007 et suite) | 12 modules de §42.2 atteignables à pied (Q22 A, Q23 A) ; quartiers, infirmerie, ponts inférieurs et hangar de réparation rouverts (§7.7) ; commerce Crucible (Q30 A) ; effets des six contrats ; foules ; art en primitives, plan V3 non fait |
-| Décor de station, CASSIUS, récupérateurs, dropship d'Echo-8 (§29.4) | Bloqué (art jouable) | Les décors, props et acteurs du hub et des missions restent en primitives. La continuation Asphodèle du 16 novembre 2026 ajoute six illustrations de scène distinctes, sans remplacer ces emplacements jouables |
+| Décor de station, CASSIUS, récupérateurs, dropship d'Echo-8 (§29.4) | Partiel (art jouable) | Neuf objets d'habillage `asph-msn-*` sont produits et intégrés dans les missions ; 33 emplacements du hub restent en primitives. Les six illustrations de scène Asphodèle sont distinctes de ces décors jouables |
 
 ## 5. Quêtes du Tantalus (§8)
 
@@ -167,9 +167,9 @@ Les fiches de référence `premium-personnel-v119.js` et `franchise-costumes-v11
 
 ## 11. Éléments qui demandent des images générées
 
-Cette liste décrit les manques constatés lors de l'audit initial. Les continuations du 16 novembre 2026 produisent les trois portraits de Port-Méridien, les dix-huit cartes de colonie et de quêtes, puis les six illustrations de scène Asphodèle détaillées ci-dessous ; les autres besoins restent ouverts.
+Cette liste décrit les manques constatés lors de l'audit initial. Les continuations du 16 novembre 2026 produisent les trois portraits de Port-Méridien, les dix-huit cartes de colonie et de quêtes, les six illustrations de scène Asphodèle et les neuf objets d'habillage de ses missions détaillés ci-dessous ; les autres besoins restent ouverts.
 
-- Décors jouables de station Asphodèle (anneau, pont de contrôle, laboratoire, serre, salle des relais, mémorial), prop du noyau de CASSIUS, récupérateurs de Grue et dropship d'Echo-8 (§29.4). Les nouvelles cartes d'extérieur et de CASSIUS illustrent les scènes de dialogue ; elles ne remplacent pas les emplacements `asph-*` du hub ni des missions.
+- Décors jouables du hub Asphodèle (anneau, pont de contrôle, laboratoire, serre, salle des relais, mémorial), prop du noyau de CASSIUS, récupérateurs de Grue et dropship d'Echo-8 (§29.4). Les cartes d'extérieur et de CASSIUS illustrent les scènes de dialogue. Les neuf emplacements `asph-msn-*` des missions disposent maintenant de leurs propres images ; les 33 emplacements du hub restent ouverts.
 - Quartiers de Port-Méridien en V2 et animations des habitants nommés. Les portraits de Wren, Ferro et Sarrazin sont désormais produits ; les primitives Q78 restent leur secours de chargement.
 - Poses de dialogue de l'équipage et planches des recrues. Aux onze cartes d'objets et de preuves du lot colonie/équipage s'ajoutent celles de Rook, Vega, Harlow et DAVID-8R ; les illustrations ne fournissent ni poses ni objets animés en jeu.
 - Art en dette des chapitres V131 et de Cargo brutal (`limitations` de `special-operations-v131.js`).
@@ -273,8 +273,20 @@ Base : `1abd0528515e5db460aea06c0e438ca3ceff8ee3`, après les 21 PNG du lot pré
 
 Les cinq cartes de preuve conservent leurs libellés, nombres et graphes dans Canvas, indépendamment des PNG. Les identifiants de quête, décisions, récompenses et sauvegardes ne sont pas modifiés par ces illustrations. La chronologie d'Echo-8 reste celle des sources existantes : ce lot ne réconcilie pas la fin à 06:00:05 de CIN-72 avec le verrouillage à 6:00:05 puis la coupure à 6:00:07 de la quête de Rook.
 
-**Périmètre restant ouvert :** les 42 emplacements `asph-*` du hub et de l'habillage des missions, les acteurs et leurs poses, la rotation visuelle de l'anneau et les plans de CIN-70 à CIN-72 restent des chantiers distincts. La carte `cassius-core` n'est pas le prop jouable `asph-cassius-core`. Les statuts des missions, du hub et des quêtes restent **Partiel** ; les totaux historiques de cet audit ne changent pas.
+**Périmètre restant ouvert à la fin du lot de cartes :** les 42 emplacements `asph-*` du hub et de l'habillage des missions. La continuation ci-dessous complète ensuite neuf emplacements de mission. Les acteurs et leurs poses, la rotation visuelle de l'anneau et les plans de CIN-70 à CIN-72 restent des chantiers distincts. La carte `cassius-core` n'est pas le prop jouable `asph-cassius-core`. Les statuts des missions, du hub et des quêtes restent **Partiel** ; les totaux historiques de cet audit ne changent pas.
 
 **Fidélité :** Asphodèle, CASSIUS, Echo-8, Kessler, Crucible et les preuves des quêtes sont des créations du projet. Les repères documentés restent ceux de la bible §7.6 et §8.4 : UD-4L, caméras de casque et moniteurs d'*Aliens* (1986), matériel Seegson d'*Alien: Isolation* (2014), priorité de la compagnie illustrée par « Special Order 937 » dans *Alien* (1979). Les PNG prolongent les références existantes du dépôt ; leur génération ne certifie pas une reproduction canonique « 1:1 ».
 
 Traçabilité du lot : [prompts, références et empreintes](ASPHODELE_ART_PROVENANCE_20261116.json), [contrôles réellement exécutés et limites](ASPHODELE_ART_QA_20261116.md), [planche des six illustrations](ASPHODELE_ART_OVERVIEW_20261116.png), [primitive extérieure employée comme référence de composition](ASPHODELE_ART_PRIMITIVE_REFERENCE_20261116.png). Une capture de composition des cartes n'est pas un parcours complet du hub ou des missions.
+
+## Résultat du lot objets de mission Asphodèle (continuation du 16 novembre 2026)
+
+Base : `3be2a402aa2e8149b4fb3bc557d9ba67a75523d8`. Les neuf PNG `assets/asphodele/v188/asph-msn-*.png` remplacent les primitives d'habillage des sept missions annexes, six contrats et de l'inspection de nuit. Panneau, CRT, plaque de secteur, conduits et cinq éléments propres aux missions sont produits ; les quantités de trois enregistreurs, deux caisses et trois manomètres sont contrôlées.
+
+Les textes FR/EN, lignes du CRT, aiguilles et voyant restent natifs. Les images sont proportionnées et découpées dans leurs cadres existants. Le calcul du plan et le renderer du hub sont inchangés ; les marges de 18 px autour des passages, le rythme de 306 px et les sauvegardes sont préservés. Les neuf images sont demandées en mission et admises au cache runtime après leur premier chargement public valide ; elles ne sont pas précachées lors de l'installation.
+
+**État de l'art Asphodèle : neuf emplacements jouables complétés sur 42 ; 33 emplacements du hub restent ouverts.** Les six cartes de scène constituent un lot distinct. Les références visuelles primaires inspectées proviennent de Paul Abbott et de l'article de Gary Napper sur *Alien: Isolation*. Les formes d'assemblage Asphodèle et les libellés restent des créations du projet ; aucune reproduction canonique « 1:1 » non démontrée n'est annoncée.
+
+Validation acquise : 35 contrôles Asphodèle, 132 contrôles audit/sauvegarde, 27 rendus natifs de sprites et dix compositions du moteur. Ces captures utilisent le host Canvas déclaré et ne constituent pas un parcours navigateur. Les échecs navigateur du commit précédent restent suivis séparément.
+
+Traçabilité : [provenance des neuf PNG](ASPHODELE_MISSION_ART_PROVENANCE_20261116.json), [contrôles et limites](ASPHODELE_MISSION_ART_QA_20261116.md), [planche du rendu intégré](ASPHODELE_MISSION_ART_OVERVIEW_20261116.png), [reçu de rendu](ASPHODELE_MISSION_ART_RENDER_RECEIPT_20261116.json).

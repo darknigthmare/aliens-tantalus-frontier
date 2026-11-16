@@ -1,8 +1,7 @@
 // V188 — named art slots for the Asphodèle second hub (spec 007). Same contract
-// as `insertion-asset-slots-v188.js`: image generation is deferred (owner
-// decision 2026-11-15); every visual of the hub is drawn with Canvas primitives
-// as a PLACEHOLDER and routed through one of these slots. When an image is
-// later produced for a slot, commit it at the slot's path AND add the slot id to
+// as `insertion-asset-slots-v188.js`: Canvas primitives remain the fallback for
+// every named slot. When an image is produced for a slot, commit it at the
+// slot's path AND add the slot id to
 // ASPHODELE_HUB_FILES_PRESENT_V188: only listed slots are ever requested.
 // Scale: 1 m ≈ 51 px; the marine is 44 × 92 px; floor at y = 624.
 // Briefs separate the documented franchise references (cited) from the
@@ -103,8 +102,15 @@ export const ASPHODELE_HUB_SLOTS_V188 = Object.freeze([
     'Project design (bible §7.1): CASSIUS camera with a red lamp, no face; CASSIUS is a project creation.')
 ]);
 export const ASPHODELE_HUB_SLOT_IDS_V188 = Object.freeze(ASPHODELE_HUB_SLOTS_V188.map(entry => entry.id));
-// Empty until the art is produced; a test checks that every listed file exists in the repository.
-export const ASPHODELE_HUB_FILES_PRESENT_V188 = Object.freeze([]);
+// A hub visit must not fetch the nine mission-only images. Missions pass their
+// own explicit list to preload; the hub's existing no-argument call stays local.
+const HUB_ROOM_SLOT_IDS_V188 = Object.freeze(ASPHODELE_HUB_SLOT_IDS_V188.filter(id => !id.startsWith('asph-msn-')));
+// Only inspected files present in the repository are admitted. Other slots
+// remain primitive-only; tests verify every admitted path exists.
+export const ASPHODELE_HUB_FILES_PRESENT_V188 = Object.freeze([
+  'asph-msn-panel', 'asph-msn-crt', 'asph-msn-sign', 'asph-msn-conduit',
+  'asph-msn-blackbox', 'asph-msn-resin', 'asph-msn-salvage', 'asph-msn-gauge', 'asph-msn-camera'
+]);
 export const getAsphodeleHubSlotV188 = id => ASPHODELE_HUB_SLOTS_V188.find(entry => entry.id === id) || null;
 
 /** Real image when one is committed for the slot, the primitive drawing otherwise. */
@@ -112,7 +118,7 @@ export class AsphodeleHubAssetLoaderV188 {
   constructor({ ImageCtor = globalThis.Image, present = ASPHODELE_HUB_FILES_PRESENT_V188 } = {}) {
     this.ImageCtor = ImageCtor; this.present = new Set(present); this.images = new Map(); this.requested = []; this.usage = Object.create(null);
   }
-  preload(ids = ASPHODELE_HUB_SLOT_IDS_V188) {
+  preload(ids = HUB_ROOM_SLOT_IDS_V188) {
     for (const id of ids) {
       const entry = getAsphodeleHubSlotV188(id);
       if (!entry || !this.present.has(id) || this.images.has(id) || !this.ImageCtor) continue;
@@ -121,11 +127,24 @@ export class AsphodeleHubAssetLoaderV188 {
     return this.requested.slice();
   }
   image(id) { const image = this.images.get(id); return image?.complete && image.naturalWidth > 0 ? image : null; }
-  /** Draws the slot into the box; returns 'image' or 'primitive'. */
-  draw(ctx, id, x, y, width, height, fallback) {
+  /** Returns 'image' or 'primitive'. Existing hub callers retain their sizing;
+   * mission cutouts opt into a proportional fit and an optional source window.
+   * A source window changes sampling only: the admitted PNG is never rewritten. */
+  draw(ctx, id, x, y, width, height, fallback, { fit = 'stretch', sourceRect = null } = {}) {
     if (!getAsphodeleHubSlotV188(id)) throw new Error(`Unknown Asphodèle hub art slot: ${id}`);
     const image = this.image(id); let source = 'primitive';
-    if (image) { ctx.drawImage(image, x, y, width, height); source = 'image'; } else fallback?.(ctx, x, y, width, height);
+    if (image && fit === 'contain') {
+      const rect = sourceRect || [0, 0, image.naturalWidth, image.naturalHeight];
+      const valid = Array.isArray(rect) && rect.length === 4 && rect.every(Number.isFinite)
+        && rect[0] >= 0 && rect[1] >= 0 && rect[2] > 0 && rect[3] > 0
+        && rect[0] + rect[2] <= image.naturalWidth && rect[1] + rect[3] <= image.naturalHeight
+        && Number.isFinite(width) && Number.isFinite(height) && width > 0 && height > 0;
+      if (valid) {
+        const [sx, sy, sw, sh] = rect, scale = Math.min(width / sw, height / sh), dw = sw * scale, dh = sh * scale;
+        ctx.drawImage(image, sx, sy, sw, sh, x + (width - dw) / 2, y + (height - dh) / 2, dw, dh); source = 'image';
+      }
+    } else if (image) { ctx.drawImage(image, x, y, width, height); source = 'image'; }
+    if (source === 'primitive') fallback?.(ctx, x, y, width, height);
     this.usage[id] = source; return source;
   }
 }
