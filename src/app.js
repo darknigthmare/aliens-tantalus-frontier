@@ -1,4 +1,4 @@
-import { colonySnapshotV188, investColonySiteV188, applyColonyOperationResultV188, COLONY_TIERS_V188 } from './colony-reconstruction-v188.js';
+import { colonySnapshotV188, investColonySiteV188, applyColonyOperationResultV188, COLONY_TIERS_V188, colonyRescuedV188 } from './colony-reconstruction-v188.js';
 import { filterUnlockedCampaignsV188, stationLockReasonV188, stationLockTextV188, stationSnapshotV188, cassiusChoicePendingV188, chooseCassiusV188, CASSIUS_CHOICES_V188, CASSIUS_DIALOG_V188, stationReturnSceneDueV188, markStationSceneSeenV188, STATION_SCENES_V188 } from './station-asphodele-v188.js';
 import { crewQuestActionsV188, acceptCrewQuestV188, crewQuestStepV188, answerCrewQuestStepV188, turnInCrewQuestV188, applyCrewQuestOperationResultV188, crewQuestsSnapshotV188, getCrewQuestV188, davidMemoryRestoredV188 } from './crew-quests-v188.js';
 import { jumpRouteTextV188, applyJumpTravelTimeV188, jumpArrivalTextV188 } from './galaxy-travel-v188.js';
@@ -6,9 +6,13 @@ import { openContentSceneDialogV188 } from './content-gap-ui-v188.js';
 import { withHubAsphodeleV188 } from './hub-asphodele-v188.js';
 import { asphodeleSaveViewV188, asphodeleShuttleStatusV188, boardAsphodeleV188, returnToTantalusV188, leaveAsphodeleForOperationV188, normalizeAsphodeleHubV188,
   asphodeleLockTextV188, asphodeleTextV188, bringRelayOnlineV188, relayRoomOpenV188, asphodeleRelayReadyV188, gruePactPendingV188, chooseGruePactV188, kesslerTagPendingV188,
-  kesslerTagInLockerV188, depositKesslerTagV188, cassiusCoreLineV188, memorialTextV188, asphodeleHubSummaryV188, stationCinematicDueV188 } from './asphodele-hub-v188.js';
+  kesslerTagInLockerV188, depositKesslerTagV188, cassiusCoreLineV188, memorialTextV188, asphodeleHubSummaryV188, stationCinematicDueV188, doorLockV188 } from './asphodele-hub-v188.js';
 import { ASPHODELE_SIDE_MISSIONS_V188, ASPHODELE_CONTRACTS_V188, ASPHODELE_SIDE_NAMES_EN_V188, ASPHODELE_CONTRACT_NAMES_EN_V188, asphodeleMissionLockReasonV188,
-  asphodeleMissionLockTextV188, applyAsphodeleOperationResultV188, contractCountV188, RELAY_DRIFT_KEY_V188 } from './asphodele-missions-v188.js';
+  asphodeleMissionLockTextV188, applyAsphodeleOperationResultV188, contractCountV188, RELAY_DRIFT_KEY_V188, ASPHODELE_NIGHT_MISSIONS_V188, ASPHODELE_NIGHT_NAMES_EN_V188,
+  asphodeleStationIndicesV188, asphodeleContractEffectTextV188 } from './asphodele-missions-v188.js';
+import { asphodeleMarketViewV188, tradeAsphodeleMarketV188, upgradeCheyenneV188, nextCheyenneUpgradeV188, cheyenneFuelSavingV188, settleQuartersV188, medbayPatientV188,
+  asphodeleServiceTextV188, asphodeleRefusalTextV188 } from './asphodele-economy-v188.js';
+import { autoTranslateV185 } from './i18n-auto-v185.js';
 import { filterAct5CampaignsV188, act5LockReasonV188, act5LockTextV188, applyAct5LaunchAdvantagesV188, applyAct5OperationResultV188, act5TableActionV188,
   startAct5CouncilV188, act5CouncilV188, decideAct5V188, advanceAct5ToEndingV188, act5EndingSummaryV188, finishAct5EndingV188, finishAct5EpilogueV188,
   finishAct5CreditsV188, act5StateV188, act5BridgeDueV188, act5BridgeSecondsV188, chooseAct5BridgeV188, ACT5_BRIDGE_TEXT_V188, ACT5_STANDOFF_TEXT_V188,
@@ -1524,6 +1528,11 @@ function renderCrewQuestsPanelV188() {
   host.replaceChildren(...parts);
 }
 // Commits a candidate save; returns false (with a toast) when the write is refused.
+/** A mission name in the chosen language (catalogue entry), before any prefix such as « ★ » is added. */
+function missionNameV188(campaign) {
+  const name = campaign?.name || '';
+  return document.documentElement.lang === 'en' ? autoTranslateV185(name) : name;
+}
 function commitCandidateV188(mutate) {
   try { const candidate = clone(saveSystem.data); const result = mutate(candidate); if (result === false) return false; saveSystem.commit(candidate); renderAll(); return result ?? true; }
   catch (error) { toast(error.message); return false; }
@@ -1607,7 +1616,8 @@ function openAsphodeleDialogV188({ title, text, slot = null, options = null, onC
 function openAsphodeleBoardV188() {
   const lang = asphodeleLangV188(), en = lang === 'en', done = saveSystem.data.galaxy.completedCampaignIds;
   const nameOf = entry => en ? (ASPHODELE_SIDE_NAMES_EN_V188[entry.id] || ASPHODELE_CONTRACT_NAMES_EN_V188[entry.id]) : entry.name;
-  const relay = asphodeleTextV188('relayCount', lang, { n: Math.min(3, contractCountV188(saveSystem.data, RELAY_DRIFT_KEY_V188)) });
+  // Spec 007 follow-up: the station indices moved by the contracts are read on the board.
+  const relay = `${asphodeleTextV188('relayCount', lang, { n: Math.min(3, contractCountV188(saveSystem.data, RELAY_DRIFT_KEY_V188)) })} · ${asphodeleServiceTextV188('stationStatus', lang, asphodeleStationIndicesV188(saveSystem.data))}`;
   const close = { id: 'close', label: asphodeleTextV188('close', lang) };
   // Two short lists (station missions, then contracts) keep every button on screen.
   const listView = entries => {
@@ -1654,7 +1664,8 @@ function handleAsphodeleActionV188(interaction) {
     return openAsphodeleDialogV188({ title, text: asphodeleTextV188(asphodeleRelayReadyV188(saveSystem.data) ? 'relayAlready' : 'relayClosed', lang) });
   }
   if (action === 'memorial') return openAsphodeleDialogV188({ title: asphodeleTextV188('memorialTitle', lang), text: memorialTextV188(saveSystem.data, lang) });
-  if (['archives', 'greenhouse', 'market', 'plan'].includes(action)) return openAsphodeleDialogV188({ title: 'Asphodèle', text: asphodeleTextV188(action, lang), slot: action === 'plan' ? 'asphodele-exterior' : null });
+  if (['market', 'quarters', 'medbay', 'scanner', 'barricade', 'night', 'repair'].includes(action)) return openAsphodeleServiceV188(action);
+  if (['archives', 'greenhouse', 'plan'].includes(action)) return openAsphodeleDialogV188({ title: 'Asphodèle', text: asphodeleTextV188(action, lang), slot: action === 'plan' ? 'asphodele-exterior' : null });
   if (action === 'grue') {
     const hub = normalizeAsphodeleHubV188(saveSystem.data.asphodeleHubV188);
     if (gruePactPendingV188(saveSystem.data)) return openAsphodeleDialogV188({ title: 'GRUE', text: asphodeleTextV188('grueAsk', lang),
@@ -1665,6 +1676,80 @@ function handleAsphodeleActionV188(interaction) {
         return { text: asphodeleTextV188(choice === 'accept' ? 'grueAccepted' : 'grueExpelled', lang), options: [{ id: 'close', label: asphodeleTextV188('close', lang) }] };
       } });
     return openAsphodeleDialogV188({ title: 'GRUE', text: asphodeleTextV188(hub.grue === 'accept' ? 'grueAfter' : 'grueNone', lang) });
+  }
+  return false;
+}
+// —— Spec 007 follow-up: services of the reopened modules and the Crucible market (Q30 A) ——
+const asphodeleMissingTextV188 = (missingCosts, lang) => strategicCostRefusalV188({ missingCosts }, lang);
+function asphodeleRoomOpenV188(roomId) { return doorLockV188(saveSystem.data, roomId, null) === null; }
+function openAsphodeleServiceV188(action) {
+  const lang = asphodeleLangV188(), en = lang === 'en', S = (key, values) => asphodeleServiceTextV188(key, lang, values);
+  const close = { id: 'close', label: asphodeleTextV188('close', lang) };
+  const done = text => ({ text, options: [close] });
+  if (action === 'market') {
+    const workforce = () => asphodeleStationIndicesV188(saveSystem.data).workforce;
+    const view = (lead = null) => {
+      const offers = asphodeleMarketViewV188(saveSystem.data, { workforce: workforce() });
+      return { text: [lead || S('marketIntro', { day: saveSystem.data.clock.day }), asphodeleTextV188('market', lang)].join(' '),
+        options: [...offers.map(entry => ({ id: entry.id, label: `${entry.label[lang]} · ${formatCost(entry.cost)} → ${formatCost(entry.gain)} · ${entry.remaining}/${entry.stock}` })), close] };
+    };
+    return openAsphodeleDialogV188({ title: S('marketTitle'), ...view(), onChoose: (id) => {
+      if (id === 'close') return null;
+      let result = null;
+      commitCandidateV188(candidate => { result = tradeAsphodeleMarketV188(candidate, id, { open: asphodeleRoomOpenV188('asph-market'), workforce: workforce() }); return result.ok ? true : false; });
+      if (!result?.ok) return view(asphodeleRefusalTextV188(result, lang, asphodeleMissingTextV188));
+      const entry = asphodeleMarketViewV188(saveSystem.data, { workforce: workforce() }).find(item => item.id === id);
+      return view(S('marketDone', { give: formatCost(entry.cost), get: formatCost(entry.gain), n: entry.remaining }));
+    } });
+  }
+  if (action === 'quarters') {
+    const crew = saveSystem.data.crew.filter(member => member.status !== 'deceased').length, rescued = colonyRescuedV188(saveSystem.data);
+    const settled = normalizeAsphodeleHubV188(saveSystem.data.asphodeleHubV188).quartersSettled;
+    return openAsphodeleDialogV188({ title: S('quartersTitle'), text: `${S('quartersText', { crew, rescued })}${settled ? ' ' + S('quartersAlready') : ''}`,
+      options: settled ? [close] : [{ id: 'settle', label: S('quartersSettle') }, close], onChoose: (id) => {
+        if (id !== 'settle') return null;
+        let result = null;
+        commitCandidateV188(candidate => { result = settleQuartersV188(candidate, { open: asphodeleRoomOpenV188('asph-quarters') }); return result.ok; });
+        return done(result?.ok ? S('quartersSettled', { n: result.morale }) : asphodeleRefusalTextV188(result, lang));
+      } });
+  }
+  if (action === 'medbay') {
+    const patient = medbayPatientV188(saveSystem.data);
+    if (!patient) return openAsphodeleDialogV188({ title: S('medbayTitle'), text: S('medbayNone') });
+    const name = resolveCrewDefinitionV85(patient, CREW)?.name || patient.id;
+    return openAsphodeleDialogV188({ title: S('medbayTitle'), text: S('medbayText', { name, health: Math.round(patient.health) }),
+      options: [{ id: 'treat', label: S('medbayTreat') }, close], onChoose: (id) => {
+        if (id !== 'treat') return null;
+        let refusal = null;
+        const ok = commitCandidateV188(candidate => { try { treatCrewMember(candidate, patient.id); return true; }
+          catch (error) { refusal = error?.code === 'STRATEGIC_COST_MISSING' ? strategicCostRefusalV188(error, lang) : S('operationActive'); return false; } });
+        const healed = saveSystem.data.crew.find(member => member.id === patient.id);
+        return done(ok ? S('medbayDone', { name, health: Math.round(healed?.health ?? patient.health) }) : refusal || S('operationActive'));
+      } });
+  }
+  if (action === 'scanner') return openAsphodeleDialogV188({ title: S('medbayTitle'), text: S('scanner', asphodeleStationIndicesV188(saveSystem.data)) });
+  if (action === 'barricade') return openAsphodeleDialogV188({ title: en ? 'Echo-8' : 'Echo-8', text: S('barricade') });
+  if (action === 'night') {
+    const indices = asphodeleStationIndicesV188(saveSystem.data), mission = ASPHODELE_NIGHT_MISSIONS_V188[0];
+    const lock = asphodeleMissionLockReasonV188(saveSystem.data, mission.id);
+    const name = en ? ASPHODELE_NIGHT_NAMES_EN_V188[mission.id] : mission.name;
+    return openAsphodeleDialogV188({ title: S('nightTitle'), text: `${S('nightText', { n: indices.nights, security: indices.security })} ${name}${lock ? ' : ' + asphodeleMissionLockTextV188(lock, lang) : ''}`,
+      options: lock ? [close] : [{ id: 'plan', label: S('nightPlan') }, close], onChoose: (id) => {
+        if (id !== 'plan') return null;
+        if (!commitCandidateV188(candidate => { if (asphodeleMissionLockReasonV188(candidate, mission.id)) return false; candidate.strategy.plannedCampaignId = mission.id; return true; })) return null;
+        return done(asphodeleTextV188('boardPlanned', lang));
+      } });
+  }
+  if (action === 'repair') {
+    const next = nextCheyenneUpgradeV188(saveSystem.data), saving = cheyenneFuelSavingV188(saveSystem.data);
+    if (!next) return openAsphodeleDialogV188({ title: S('repairTitle'), text: S('repairComplete', { saving }) });
+    return openAsphodeleDialogV188({ title: S('repairTitle'), text: S('repairText', { label: next.label[lang], cost: formatCost(next.cost), saving }),
+      options: [{ id: 'buy', label: S('repairBuy') }, close], onChoose: (id) => {
+        if (id !== 'buy') return null;
+        let result = null;
+        commitCandidateV188(candidate => { result = upgradeCheyenneV188(candidate, { open: asphodeleRoomOpenV188('asph-repair') }); return result.ok; });
+        return done(result?.ok ? S('repairDone', { level: result.level, saving: cheyenneFuelSavingV188(saveSystem.data) }) : asphodeleRefusalTextV188(result, lang, asphodeleMissingTextV188));
+      } });
   }
   return false;
 }
@@ -1908,7 +1993,8 @@ function renderCommandMissionsV110() {
   const recommendedV188 = storyStateV188().recommendedCampaignId;
   const missions = getCommandMissionsV110(saveSystem.data, unlockedCampaignsV188(CAMPAIGNS), worldId)
     .sort((a, b) => (b.id === recommendedV188) - (a.id === recommendedV188));
-  select.innerHTML = missions.map(c => `<option value="${escapeHtml(c.id)}">${c.id === recommendedV188 ? '★ ' : ''}${escapeHtml(c.name)}</option>`).join('');
+  // V188 spec 007 follow-up: the name is translated before the « ★ » prefix, which the catalogue lookup would not match.
+  select.innerHTML = missions.map(c => `<option value="${escapeHtml(c.id)}">${c.id === recommendedV188 ? '★ ' : ''}${escapeHtml(missionNameV188(c))}</option>`).join('');
   // Selecting a destination is a filter, never an implicit campaign/save mutation.
   select.value = missions.some(c => c.id === selected?.id) ? selected.id : '';
   select.disabled = Boolean(active) || !missions.length;
@@ -2724,7 +2810,8 @@ function renderHubStatus(status = lastHubStatus) {
     if (!portObjectiveV90 && !exerciseObjectiveV89 && !(objectiveV84 && !objectiveV84.completed) && storyV188.objective) {
       byId('hub-onboarding-objective-v84').textContent = storyV188.objective;
     }
-    byId('hub-onboarding-objective-v84').hidden = Boolean(hubEngine.isPortMeridienV90?.());
+    // V188 spec 007 follow-up: the Tantalus objective (« COCYTE · Salle de briefing… ») is not shown aboard the station or on the quay.
+    byId('hub-onboarding-objective-v84').hidden = Boolean(hubEngine.isPortMeridienV90?.() || hubEngine.isAsphodeleV188?.());
   }
   byId('exit-hub').textContent = standaloneContext === 'forge-playtest' ? tV185('hub.exitForge', 'RETOUR FRONTIER FORGE')
     : hubEngine.isPortMeridienV90?.() ? tV185('hub.exitPort', 'SUSPENDRE · TABLEAU DE BORD') : tV185('hub.exit', 'QUITTER VERS COMMANDEMENT');
@@ -3665,7 +3752,7 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   // V188 crew quests (bible §8.1): DAVID-8R's relay components come back from successful operations on Cocyte.
   const questChangeV188 = applyCrewQuestOperationResultV188(candidate, { success: resolvedSuccess, worldId: operation.worldId || campaign?.worldId });
   // V188 spec 007: a successful station contract adds one to its counter (« Relais en dérive » ×3 opens the relay room).
-  applyAsphodeleOperationResultV188(candidate, { success: resolvedSuccess, campaignId: operation.campaignId });
+  const asphodeleContractV188 = applyAsphodeleOperationResultV188(candidate, { success: resolvedSuccess, campaignId: operation.campaignId, operationId: operation.id });
   // V188 spec 006: the bridge default if the choice never showed.
   const act5ChangeV188 = applyAct5OperationResultV188(candidate, { success: resolvedSuccess, campaignId: operation.campaignId });
   // V188 debrief: the amounts the hub actually receives (before the transit clock runs).
@@ -3686,6 +3773,7 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   const colonySiteV188 = id => colonySnapshotV188(candidate, document.documentElement.lang).sites.find(entry => entry.id === id)?.criterion || id;
   if (colonyChangeV188?.validated) toast(document.documentElement.lang === 'en' ? `Port-Méridien: site level validated (${colonySiteV188(colonyChangeV188.validated)} ${colonyChangeV188.level}).` : `Port-Méridien : niveau de chantier validé (${colonySiteV188(colonyChangeV188.validated)} ${colonyChangeV188.level}).`);
   if (colonyChangeV188?.damaged) toast(document.documentElement.lang === 'en' ? `Port-Méridien: a site lost one functioning level (${colonySiteV188(colonyChangeV188.damaged)}).` : `Port-Méridien : un chantier perd un niveau de fonctionnement (${colonySiteV188(colonyChangeV188.damaged)}).`);
+  if (asphodeleContractV188) toast(asphodeleContractEffectTextV188(candidate, asphodeleContractV188, document.documentElement.lang === 'en' ? 'en' : 'fr'));
   if (act5ChangeV188?.kind === 'bridge-default') toast(ACT5_BRIDGE_TEXT_V188.results.timeout[document.documentElement.lang === 'en' ? 'en' : 'fr']);
   for (const change of questChangeV188 || []) toast(document.documentElement.lang === 'en'
     ? `DAVID-8R: relay component recovered (${change.components}/${change.needed}).` : `DAVID-8R : composant de relais récupéré (${change.components}/${change.needed}).`);

@@ -187,11 +187,26 @@ export function drawShipPortRoomV87(ctx, images, save, time = 0, reducedMotion =
   ctx.restore();
 }
 
+// V188 (spec 007 follow-up): the gangway status is a FR/EN label, never the raw phase id (« UNDOCKED »).
+const GANGWAY_LABELS_V188 = Object.freeze({
+  available: ['PASSERELLE DISPONIBLE', 'GANGWAY AVAILABLE'],
+  undocked: ['PASSERELLE · AUCUN PORT ARRIMÉ', 'GANGWAY · NO PORT DOCKED'],
+  approach: ['PASSERELLE · APPROCHE DU PORT', 'GANGWAY · APPROACHING THE PORT'],
+  docking: ['PASSERELLE · ARRIMAGE EN COURS', 'GANGWAY · DOCKING'],
+  docked: ['PASSERELLE · ACCÈS FERMÉ', 'GANGWAY · ACCESS CLOSED'],
+  undocking: ['PASSERELLE · DÉSARRIMAGE', 'GANGWAY · UNDOCKING'],
+  departed: ['PASSERELLE · PORT QUITTÉ', 'GANGWAY · PORT LEFT'],
+  unknown: ['PASSERELLE INDISPONIBLE', 'GANGWAY UNAVAILABLE']
+});
+export function shipPortGangwayLabelV188(save, language = globalThis.document?.documentElement?.lang) {
+  const access = canAccessPortCounterV87(save), phase = save?.shipPortV1?.phase || 'undocked';
+  const key = access === true || access?.ok === true ? 'available' : Object.hasOwn(GANGWAY_LABELS_V188, phase) ? phase : 'unknown';
+  return GANGWAY_LABELS_V188[key][language === 'en' ? 1 : 0];
+}
+
 export function drawShipPortTerminalV87(ctx, image, save) {
   drawPortPropV87(ctx, image, 'terminal', SHIP_PORT_TERMINAL_V87);
-  const phase = save?.shipPortV1?.phase || 'undocked';
-  const access = canAccessPortCounterV87(save);
-  const text = access === true || access?.ok === true ? 'PASSERELLE DISPONIBLE' : phase.toUpperCase(), x = Math.max(128, SHIP_PORT_TERMINAL_V87.centerX);
+  const text = shipPortGangwayLabelV188(save), x = Math.max(128, SHIP_PORT_TERMINAL_V87.centerX);
   ctx.save(); ctx.font = '10px ui-monospace, monospace'; ctx.textAlign = 'center';
   // V188 (graphics audit item 17): a backing plate keeps the status readable over the ladder behind it.
   const width = Math.ceil((ctx.measureText?.(text)?.width || text.length * 6) + 12);

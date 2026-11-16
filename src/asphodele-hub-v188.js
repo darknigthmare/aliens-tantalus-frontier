@@ -15,7 +15,9 @@
 // counters, relay room online, Kessler's tag, Grue's pact). Mission completion
 // is still read from `galaxy.completedCampaignIds`.
 import { asphodeleRetakenV188, kesslerTagRecoveredV188, normalizeStationV188 } from './station-asphodele-v188.js';
-import { normalizeContractCountsV188, contractCountV188, RELAY_DRIFT_KEY_V188, RELAY_DRIFT_REQUIRED_V188, ASPHODELE_WORLD_ID_V188 } from './asphodele-missions-v188.js';
+import { normalizeContractCountsV188, contractCountV188, RELAY_DRIFT_KEY_V188, RELAY_DRIFT_REQUIRED_V188, ASPHODELE_WORLD_ID_V188, ASPHODELE_CONTRACT_EFFECTS_V188 } from './asphodele-missions-v188.js';
+import { normalizeColonyV188, colonyTierV188 } from './colony-reconstruction-v188.js';
+import { normalizeAsphodeleMarketV188, normalizeCheyenneLevelV188 } from './asphodele-economy-v188.js';
 
 const t = (fr, en) => Object.freeze({ fr, en });
 const has = (list, id) => Array.isArray(list) && list.includes(id);
@@ -43,7 +45,7 @@ export const ASPHODELE_ROOMS_V188 = Object.freeze({
       door('docks-tantalus', 150, t('SAS 1 · UD-4L DU TANTALUS', 'AIRLOCK 1 · TANTALUS UD-4L'), null, { shuttle: true }),
       door('docks-echo8', 560, t('SAS 2 · UD-4L D’ECHO-8', 'AIRLOCK 2 · ECHO-8 UD-4L'), null, { lock: 'echo8-dropship' }),
       door('docks-grue', 980, t('SAS 3 · NAVETTE CRUCIBLE', 'AIRLOCK 3 · CRUCIBLE SHUTTLE'), null, { lock: 'grue-shuttle' }),
-      door('docks-repair', 1480, t('HANGAR DE RÉPARATION', 'REPAIR HANGAR'), null, { lock: 'deferred' }),
+      door('docks-repair', 1480, t('HANGAR DE RÉPARATION', 'REPAIR HANGAR'), Object.freeze({ room: 'asph-repair', door: 'repair-docks' }), { lock: 'repair-hangar' }),
       door('docks-ring', 1900, t('ANNEAU EXTÉRIEUR', 'OUTER RING'), Object.freeze({ room: 'asph-ring', door: 'ring-docks' }))
     ]),
     posts: Object.freeze([post('docks-grue-npc', 1200, 'asphodele:grue', t('PARLER À GRUE', 'TALK TO GRUE'), { z: -34, npc: 'grue' })]),
@@ -60,7 +62,7 @@ export const ASPHODELE_ROOMS_V188 = Object.freeze({
       door('ring-market', 560, t('MARCHÉ DE L’ANNEAU', 'RING MARKET'), Object.freeze({ room: 'asph-market', door: 'market-ring' }), { lock: 'market' }),
       door('ring-greenhouse', 1000, t('SERRE', 'GREENHOUSE'), Object.freeze({ room: 'asph-greenhouse', door: 'greenhouse-ring' }), { lock: 'greenhouse' }),
       door('ring-memorial', 1440, t('MÉMORIAL', 'MEMORIAL'), Object.freeze({ room: 'asph-memorial', door: 'memorial-ring' }), { lock: 'memorial' }),
-      door('ring-quarters', 1880, t('QUARTIERS', 'QUARTERS'), null, { lock: 'quarters' }),
+      door('ring-quarters', 1880, t('QUARTIERS', 'QUARTERS'), Object.freeze({ room: 'asph-quarters', door: 'quarters-ring' }), { lock: 'quarters' }),
       door('ring-spoke', 2380, t('RAYON A · MOYEU', 'SPOKE A · HUB'), Object.freeze({ room: 'asph-spoke', door: 'spoke-ring' }))
     ]),
     posts: Object.freeze([post('ring-plan', 1660, 'asphodele:plan', t('PLAN DE LA STATION', 'STATION PLAN'))]),
@@ -82,8 +84,8 @@ export const ASPHODELE_ROOMS_V188 = Object.freeze({
       door('control-spoke', 130, t('RAYON A', 'SPOKE A'), Object.freeze({ room: 'asph-spoke', door: 'spoke-hub' })),
       door('control-relay', 1160, t('SALLE DES RELAIS', 'RELAY ROOM'), Object.freeze({ room: 'asph-relay', door: 'relay-control' }), { lock: 'relay' }),
       door('control-lab', 1420, t('LABORATOIRE DE TRANSIT', 'TRANSIT LABORATORY'), Object.freeze({ room: 'asph-lab', door: 'lab-control' }), { lock: 'lab' }),
-      door('control-medbay', 1680, t('INFIRMERIE DE STATION', 'STATION MEDBAY'), null, { lock: 'deferred' }),
-      door('control-lower', 1920, t('PONTS INFÉRIEURS', 'LOWER DECKS'), null, { lock: 'lower-decks' })
+      door('control-medbay', 1680, t('INFIRMERIE DE STATION', 'STATION MEDBAY'), Object.freeze({ room: 'asph-medbay', door: 'medbay-control' }), { lock: 'medbay' }),
+      door('control-lower', 1920, t('PONTS INFÉRIEURS', 'LOWER DECKS'), Object.freeze({ room: 'asph-lower', door: 'lower-control' }), { lock: 'lower-decks' })
     ]),
     posts: Object.freeze([
       post('control-board', 420, 'asphodele:board', t('CARTE DU RÉSEAU QZ · CONTRATS', 'QZ NETWORK MAP · CONTRACTS')),
@@ -114,12 +116,45 @@ export const ASPHODELE_ROOMS_V188 = Object.freeze({
     name: t('Marché de l’anneau', 'Ring market'), unlock: 'station-a-grue+pact',
     doors: Object.freeze([door('market-ring', 130, t('ANNEAU EXTÉRIEUR', 'OUTER RING'), Object.freeze({ room: 'asph-ring', door: 'ring-market' }))]),
     posts: Object.freeze([post('market-counter', 700, 'asphodele:market', t('COMPTOIR CRUCIBLE', 'CRUCIBLE COUNTER'))]),
-    props: Object.freeze([]) })
+    props: Object.freeze([]) }),
+  // —— The four §42.2 modules reopened by the spec 007 follow-up (bible §7.6) ——
+  'asph-quarters': Object.freeze({ id: 'asph-quarters', kind: 'profile', width: 1280, module: 'quarters', view: 'V1',
+    name: t('Quartiers', 'Quarters'), unlock: 'colony-autonomous',
+    doors: Object.freeze([door('quarters-ring', 130, t('ANNEAU EXTÉRIEUR', 'OUTER RING'), Object.freeze({ room: 'asph-ring', door: 'ring-quarters' }))]),
+    posts: Object.freeze([post('quarters-register', 760, 'asphodele:quarters', t('REGISTRE DES CABINES', 'CABIN REGISTER'))]),
+    props: Object.freeze([]) }),
+  'asph-medbay': Object.freeze({ id: 'asph-medbay', kind: 'profile', width: 1280, module: 'medbay', view: 'V1',
+    name: t('Infirmerie de station', 'Station medbay'), unlock: 'S4',
+    doors: Object.freeze([door('medbay-control', 130, t('PONT DE CONTRÔLE', 'CONTROL DECK'), Object.freeze({ room: 'asph-control', door: 'control-medbay' }))]),
+    posts: Object.freeze([
+      post('medbay-beds', 600, 'asphodele:medbay', t('LITS · SOINS DE L’ÉQUIPE', 'BEDS · CREW CARE')),
+      post('medbay-scanner', 1000, 'asphodele:scanner', t('SCANNER DE QUARANTAINE', 'QUARANTINE SCANNER'))
+    ]),
+    props: Object.freeze([]) }),
+  'asph-lower': Object.freeze({ id: 'asph-lower', kind: 'profile', width: 1280, module: 'lower', view: 'V1',
+    name: t('Ponts inférieurs', 'Lower decks'), unlock: 'S3',
+    doors: Object.freeze([door('lower-control', 130, t('PONT DE CONTRÔLE', 'CONTROL DECK'), Object.freeze({ room: 'asph-control', door: 'control-lower' }))]),
+    posts: Object.freeze([
+      post('lower-barricade', 560, 'asphodele:barricade', t('BARRICADES D’ECHO-8', 'ECHO-8 BARRICADES')),
+      post('lower-night', 980, 'asphodele:night', t('RONDE DE NUIT', 'NIGHT ROUND'))
+    ]),
+    props: Object.freeze([]) }),
+  'asph-repair': Object.freeze({ id: 'asph-repair', kind: 'depth', width: 1536, module: 'repair', view: 'V2',
+    name: t('Hangar de réparation', 'Repair hangar'), unlock: 'S4+module',
+    doors: Object.freeze([door('repair-docks', 130, t('QUAIS D’ARRIMAGE', 'DOCKING QUAYS'), Object.freeze({ room: 'asph-docks', door: 'docks-repair' }))]),
+    posts: Object.freeze([post('repair-bench', 820, 'asphodele:repair', t('ATELIER DU CHEYENNE', 'CHEYENNE WORKSHOP'))]),
+    // ≈ 1.2 m spare-part crates and a drum rack, in the depth band, clear of the rail.
+    props: Object.freeze([
+      prop('repair-crates', 'crate', 440, 61, 58, -60, -70, -48),
+      prop('repair-drums', 'drum', 1180, 96, 52, -50, -60, -40)
+    ]) })
 });
 export const ASPHODELE_ROOM_IDS_V188 = Object.freeze(Object.keys(ASPHODELE_ROOMS_V188));
 export const ASPHODELE_ARRIVAL_V188 = Object.freeze({ room: 'asph-docks', door: 'docks-tantalus' });
-// The bible §42.2 modules not built in this version: each one is a sealed door, or not placed yet.
-export const ASPHODELE_DEFERRED_MODULES_V188 = Object.freeze(['quarters', 'medbay', 'lower-decks', 'repair-hangar']);
+// The bible §42.2 modules still not built: none since the spec 007 follow-up (the V3 plan stays Q23 A).
+export const ASPHODELE_DEFERRED_MODULES_V188 = Object.freeze([]);
+/** The four modules reopened by the follow-up, by lock id, with their room. */
+export const ASPHODELE_REOPENED_MODULES_V188 = Object.freeze({ quarters: 'asph-quarters', medbay: 'asph-medbay', 'lower-decks': 'asph-lower', 'repair-hangar': 'asph-repair' });
 
 export const getAsphodeleRoomV188 = id => ASPHODELE_ROOMS_V188[id] || null;
 export const getAsphodeleDoorV188 = (roomId, doorId) => getAsphodeleRoomV188(roomId)?.doors.find(entry => entry.id === doorId) || null;
@@ -135,7 +170,8 @@ export function asphodeleDepthRoomV188(roomId) {
 // —— Save field ——
 export function createAsphodeleHubV188() {
   return { schema: 188, location: 'tantalus', roomId: ASPHODELE_ARRIVAL_V188.room, x: arrivalX(ASPHODELE_ARRIVAL_V188), z: 0, facing: 1,
-    visited: [], relayOnline: false, kesslerTag: null, grue: null, contracts: normalizeContractCountsV188(null) };
+    visited: [], relayOnline: false, kesslerTag: null, grue: null, contracts: normalizeContractCountsV188(null),
+    quartersSettled: false, cheyenne: 0, market: normalizeAsphodeleMarketV188(null), lastContractOpV188: null };
 }
 function arrivalX({ room, door: doorId }) {
   const entry = getAsphodeleDoorV188(room, doorId);
@@ -158,6 +194,11 @@ export function normalizeAsphodeleHubV188(raw) {
   state.kesslerTag = raw.kesslerTag === 'locker' ? 'locker' : null;
   state.grue = ['accept', 'expel'].includes(raw.grue) ? raw.grue : null;
   state.contracts = normalizeContractCountsV188(raw.contracts);
+  // Spec 007 follow-up (additive): quarters settled, Cheyenne overhaul level, market cycle, last counted operation.
+  state.quartersSettled = raw.quartersSettled === true;
+  state.cheyenne = normalizeCheyenneLevelV188(raw.cheyenne);
+  state.market = normalizeAsphodeleMarketV188(raw.market);
+  state.lastContractOpV188 = typeof raw.lastContractOpV188 === 'string' && /^[\w-]{1,160}$/.test(raw.lastContractOpV188) ? raw.lastContractOpV188 : null;
   return state;
 }
 /** The station location is kept only while it is legitimately open (an edited or older save returns aboard the Tantalus). */
@@ -198,7 +239,8 @@ export function asphodeleRelayReadyV188(save) {
 export function doorLockV188(save, roomId, doorId) {
   const room = getAsphodeleRoomV188(roomId); if (!room) return 'unknown';
   if (doorId === null) {
-    const unlock = { 'asph-relay': 'relay', 'asph-lab': 'lab', 'asph-memorial': 'memorial', 'asph-greenhouse': 'greenhouse', 'asph-market': 'market' }[roomId];
+    const unlock = { 'asph-relay': 'relay', 'asph-lab': 'lab', 'asph-memorial': 'memorial', 'asph-greenhouse': 'greenhouse', 'asph-market': 'market',
+      'asph-quarters': 'quarters', 'asph-medbay': 'medbay', 'asph-lower': 'lower-decks', 'asph-repair': 'repair-hangar' }[roomId];
     return unlock && lockFor(save, unlock) ? 'room-locked' : null;
   }
   const entry = room.doors.find(item => item.id === doorId); if (!entry) return 'unknown';
@@ -212,7 +254,13 @@ function lockFor(save, lock) {
     case 'memorial': return has(done, 'station-a-journaux') ? null : 'memorial';
     case 'greenhouse': return has(done, 'station-a-hydro') ? null : 'greenhouse';
     case 'market': return has(done, 'station-a-grue') && hub.grue === 'accept' ? null : hub.grue === 'expel' ? 'market-expelled' : 'market';
-    default: return lock; // 'echo8-dropship', 'grue-shuttle', 'deferred', 'quarters', 'lower-decks': never open in this version
+    // Bible §7.3 / §42.2: the quarters with the colony tier « Autonome » (or beyond), the medbay with S4, the lower decks with S3.
+    case 'quarters': return ['autonomous', 'free'].includes(colonyTierV188(normalizeColonyV188(save?.colonyV188))) ? null : 'quarters';
+    case 'medbay': return asphodeleHubOpenV188(save) ? null : 'medbay';
+    case 'lower-decks': return has(done, 'station-s3') && asphodeleHubOpenV188(save) ? null : 'lower-decks';
+    // [PROPOSÉ] §42.2 gives S4; §7.2 « Remise en pression d'un module · Ouvre un module du hub » names the module: the hangar.
+    case 'repair-hangar': return asphodeleHubOpenV188(save) && hub.contracts.module >= ASPHODELE_CONTRACT_EFFECTS_V188.module.opensRepairHangarAt ? null : 'repair-hangar';
+    default: return lock; // 'echo8-dropship', 'grue-shuttle', 'deferred': never open
   }
 }
 const LOCKS = Object.freeze({
@@ -225,8 +273,10 @@ const LOCKS = Object.freeze({
   'echo8-dropship': t('Scellé : le dropship d’Echo-8 reste amarré tel qu’il a été trouvé.', 'Sealed: Echo-8’s dropship stays docked as it was found.'),
   'grue-shuttle': t('Navette Crucible : accès réservé à l’équipage de Grue.', 'Crucible shuttle: access reserved to Grue’s crew.'),
   deferred: t('Module scellé : il n’est pas encore rouvert.', 'Sealed module: not reopened yet.'),
-  quarters: t('Scellés : les quartiers rouvrent quand la colonie est autonome.', 'Sealed: the quarters reopen once the colony is self-sufficient.'),
-  'lower-decks': t('Scellés : les ponts inférieurs restent fermés la nuit.', 'Sealed: the lower decks stay closed at night.'),
+  quarters: t('Scellés : les quartiers rouvrent quand Port-Méridien atteint le palier « Autonome ».', 'Sealed: the quarters reopen once Port-Méridien reaches the "Autonomous" tier.'),
+  'lower-decks': t('Scellés : les ponts scellés (S3) ne sont pas franchis.', 'Sealed: the sealed decks (S3) are not cleared.'),
+  medbay: t('Fermée : la station n’est pas reprise (S4).', 'Closed: the station is not retaken (S4).'),
+  'repair-hangar': t('Hors pression : remettez un module en pression (contrat « Remise en pression d’un module »).', 'Unpressurised: repressurise a module (contract "Repressurise a module").'),
   'room-locked': t('Module fermé.', 'Module closed.'),
   unknown: t('Passage inconnu.', 'Unknown passage.')
 });
@@ -290,7 +340,7 @@ export function depositKesslerTagV188(save) {
 /** The minimal save view the runtime keeps to resolve locks without holding the live save. */
 export function asphodeleSaveViewV188(save) {
   return { galaxy: { completedCampaignIds: [...completed(save)] }, stationV188: normalizeStationV188(save?.stationV188),
-    asphodeleHubV188: normalizeAsphodeleHubV188(save?.asphodeleHubV188) };
+    asphodeleHubV188: normalizeAsphodeleHubV188(save?.asphodeleHubV188), colonyV188: normalizeColonyV188(save?.colonyV188) };
 }
 
 // —— Player-facing texts (FR/EN); [PROPOSÉ] lines are recorded in bible §7.6 ——
@@ -313,8 +363,8 @@ export const ASPHODELE_TEXT_V188 = Object.freeze({
   relayClosed: t('Les baies restent hors ligne.', 'The bays stay offline.'),
   archives: t('Archives des livraisons : chaque conteneur QZ17 passait ici pour contrôle avant de descendre au dépôt de Cocyte. Le dernier contrôle est daté de la nuit de la quarantaine ; la case « résultat » est vide.', 'Delivery archives: every QZ17 container came through here for inspection before going down to the Cocyte depot. The last inspection is dated the night of the quarantine; the "result" box is empty.'),
   greenhouse: t('Les baies hydroponiques sont en culture. Les premières caisses partiront pour Port-Méridien au prochain cycle.', 'The hydroponic bays are growing. The first crates will leave for Port-Méridien next cycle.'),
-  market: t('Comptoir Crucible : les récupérateurs de Grue tiennent l’étal. Le commerce de pièces et d’armes n’est pas encore ouvert (Q30).', 'Crucible counter: Grue’s salvagers keep the stall. Trade in parts and weapons is not open yet (Q30).'),
-  plan: t('Plan de la station : anneau extérieur (quais, marché, serre, mémorial, quartiers), rayon A, moyeu (pont de contrôle, salle des relais, laboratoire). L’anneau tourne lentement ; le moyeu ne tourne pas.', 'Station plan: outer ring (quays, market, greenhouse, memorial, quarters), spoke A, hub (control deck, relay room, laboratory). The ring turns slowly; the hub does not.'),
+  market: t('Comptoir Crucible : les récupérateurs de Grue tiennent l’étal.', 'Crucible counter: Grue’s salvagers keep the stall.'),
+  plan: t('Plan de la station : anneau extérieur (quais, hangar de réparation, marché, serre, mémorial, quartiers), rayon A, moyeu (pont de contrôle, salle des relais, laboratoire, infirmerie, ponts inférieurs). L’anneau tourne lentement ; le moyeu ne tourne pas.', 'Station plan: outer ring (quays, repair hangar, market, greenhouse, memorial, quarters), spoke A, hub (control deck, relay room, laboratory, medbay, lower decks). The ring turns slowly; the hub does not.'),
   grueNone: t('Grue surveille ses dockers. « L’anneau est à nous depuis trois semaines. On en reparlera quand tu viendras à bord. »', 'Grue watches her dockers. "The ring has been ours for three weeks. We’ll talk when you come aboard."'),
   grueAsk: t('Grue attend la réponse. « Tu nous laisses l’anneau, on fait tourner le marché. Tu nous fais partir, on part. »', 'Grue awaits the answer. "You leave us the ring, we run the market. You make us leave, we leave."'),
   grueAccept: t('ACCEPTER LE PACTE', 'ACCEPT THE PACT'), grueExpel: t('LES EXPULSER', 'EXPEL THEM'),

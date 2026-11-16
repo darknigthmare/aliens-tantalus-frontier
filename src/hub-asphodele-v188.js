@@ -15,7 +15,8 @@ import { stepDepthMoveV188, depthToScreenOffsetV188 } from './hub-depth-rooms-v1
 import { drawDepthPropV188 } from './depth-props-v188.js';
 import { getAsphodeleRoomV188, asphodeleDepthRoomV188, resolveAsphodeleHubV188, normalizeAsphodeleHubV188, asphodeleDoorTargetV188,
   doorLockV188, asphodeleLockTextV188, asphodeleTextV188, ASPHODELE_DOOR_REACH_V188, ASPHODELE_STATION_REACH_V188, ASPHODELE_FLOOR_Y_V188 } from './asphodele-hub-v188.js';
-import { AsphodeleHubAssetLoaderV188, drawAsphodeleWallV188, drawAsphodeleDoorV188, drawAsphodelePostV188, drawGrueV188, drawDockedVesselV188 } from './asphodele-hub-slots-v188.js';
+import { AsphodeleHubAssetLoaderV188, drawAsphodeleWallV188, drawAsphodeleDoorV188, drawAsphodelePostV188, drawGrueV188, drawDockedVesselV188, drawAsphodeleWorkerV188 } from './asphodele-hub-slots-v188.js';
+import { createAsphodeleCrowdV188, stepAsphodeleCrowdV188 } from './asphodele-crowd-v188.js';
 
 const VERTICAL = new Set(['KeyW', 'KeyS', 'ArrowUp', 'ArrowDown']);
 const TRANSITION_SECONDS = 0.42;
@@ -42,6 +43,7 @@ export function withHubAsphodeleV188(Base) {
       this.asphLoaderV188 ||= new AsphodeleHubAssetLoaderV188(); this.asphLoaderV188.preload();
       this.annexCameraV71 ||= { x: 0 };
       this.placeAsphodelePlayerV188(hub.x, hub.z, hub.facing);
+      this.asphCrowdV188 = createAsphodeleCrowdV188(hub.roomId, view); // bible §42.2 ambient workers (runtime only)
       this.keys.clear(); this.jumpQueued = 0; this.statusKey = ''; this.emitStatus(); this.draw();
     }
     isAsphodeleV188() { return this.asphActiveV188 === true; }
@@ -137,6 +139,7 @@ export function withHubAsphodeleV188(Base) {
         if (step.x !== this.player.x + this.player.w / 2) { this.player.x = step.x - this.player.w / 2; this.player.vx = 0; }
       } else if (!depth) this.player.depthZ = 0;
       Object.assign(this.asphStateV188, { x: Math.round(this.player.x), z: Math.round((Number(this.player.depthZ) || 0) * 10) / 10, facing: this.player.facing });
+      if (this.asphCrowdEnabledV188 !== false) stepAsphodeleCrowdV188(this.asphCrowdV188, dt, { reducedMotion: Boolean(this.reducedMotion) });
       this.asphPersistClockV188 += dt;
       if (this.asphPersistClockV188 >= 1) {
         this.asphPersistClockV188 = 0;
@@ -151,6 +154,7 @@ export function withHubAsphodeleV188(Base) {
         const { roomId, x, z } = transition.target;
         this.asphStateV188 = { ...this.asphStateV188, roomId, x, z, visited: [...new Set([...(this.asphStateV188.visited || []), roomId])] };
         this.placeAsphodelePlayerV188(x, z, this.player.facing);
+        this.asphCrowdV188 = createAsphodeleCrowdV188(roomId, this.asphViewV188);
         if (!this.submitAsphodeleV188('checkpoint', { doorId: transition.target.doorId })) this.asphCommitBlockedV188 = true;
       }
       if (transition.elapsed >= TRANSITION_SECONDS) this.asphTransitionV188 = null;
@@ -186,6 +190,7 @@ export function withHubAsphodeleV188(Base) {
       return { running: this.running, x: this.player.x, y: this.player.y, z: Number(this.player.depthZ) || 0, health: this.player.health,
         playerAppearanceV126: hubPlayerAppearanceSnapshotV126(this), roomId: room.id, roomKind: room.kind, prompt: this.statusPrompt(),
         transition: Boolean(this.asphTransitionV188), asphodeleHubV188: this.captureAsphodeleV188(), slotUsage: { ...(this.asphLoaderV188?.usage || {}) },
+        crowd: (this.asphCrowdV188 || []).map(actor => ({ id: actor.id, role: actor.role, x: Math.round(actor.x * 10) / 10, w: actor.w, z: actor.z, mobile: actor.mobile, mode: actor.lifeV136?.mode || 'idle' })),
         doors: room.doors.map(entry => ({ id: entry.id, x: entry.x, lock: entry.shuttle ? null : doorLockV188(this.asphViewV188, room.id, entry.id), shuttle: Boolean(entry.shuttle), to: entry.to })) };
     }
 
@@ -198,7 +203,8 @@ export function withHubAsphodeleV188(Base) {
       ctx.save(); ctx.clearRect(0, 0, 1280, 720); ctx.fillStyle = '#05080a'; ctx.fillRect(0, 0, 1280, 720);
       ctx.save(); ctx.translate(-camera, 0);
       const x0 = Math.max(0, Math.floor(camera / 128) * 128), x1 = Math.min(room.width, camera + 1280 + 128);
-      loader.draw(ctx, `asph-wall-${room.id.slice(5)}`, x0, 120, x1 - x0, 504, () => drawAsphodeleWallV188(ctx, room.module, x0, x1 - x0, time));
+      const frames = room.doors.map(entry => [entry.x - 58, entry.x + 58]); // door frames: the wall's hazard band stops there
+      loader.draw(ctx, `asph-wall-${room.id.slice(5)}`, x0, 120, x1 - x0, 504, () => drawAsphodeleWallV188(ctx, room.module, x0, x1 - x0, time, frames));
       // Floor: a deck plate in V1; in V2 the spec 001 depth band, darker near the wall, with lane marks.
       ctx.fillStyle = '#12171a'; ctx.fillRect(x0, FLOOR, x1 - x0, 96);
       if (room.kind === 'depth') {
@@ -217,8 +223,11 @@ export function withHubAsphodeleV188(Base) {
         this.drawAsphodeleSignV188(ctx, label(entry.label), entry.x, FLOOR - 166, state === 'locked' ? '#e8a090' : '#cfe0d6');
       }
       const postSlot = { 'control-board': 'asph-qz-map', 'control-cassius': 'asph-cassius-core', 'relay-bays': 'asph-relay-bays', 'lab-archives': 'asph-cradles',
-        'memorial-plaques': 'asph-memorial-plaques', 'greenhouse-bays': 'asph-hydro-bays', 'market-counter': 'asph-crucible-stall', 'ring-plan': 'asph-qz-map' };
-      const postState = { cassius: view?.stationV188?.cassius || null, relayOnline: Boolean(view?.asphodeleHubV188?.relayOnline) };
+        'memorial-plaques': 'asph-memorial-plaques', 'greenhouse-bays': 'asph-hydro-bays', 'market-counter': 'asph-crucible-stall', 'ring-plan': 'asph-qz-map',
+        'quarters-register': 'asph-bunks', 'medbay-beds': 'asph-medbay-beds', 'medbay-scanner': 'asph-medbay-scanner', 'lower-barricade': 'asph-echo8-barricade',
+        'lower-night': 'asph-night-board', 'repair-bench': 'asph-repair-cradle' };
+      const postState = { cassius: view?.stationV188?.cassius || null, relayOnline: Boolean(view?.asphodeleHubV188?.relayOnline),
+        nights: Number(view?.asphodeleHubV188?.contracts?.night) || 0, cheyenne: Number(view?.asphodeleHubV188?.cheyenne) || 0 };
       for (const entry of room.posts) {
         if (entry.npc) continue;
         loader.draw(ctx, postSlot[entry.id], entry.x - 180, 360, 360, 264, () => drawAsphodelePostV188(ctx, entry.id, entry.x, { time, still, state: postState }));
@@ -229,6 +238,12 @@ export function withHubAsphodeleV188(Base) {
       const items = room.props.map(entry => ({ z: entry.z, draw: () => drawDepthPropV188(ctx, entry, { x: entry.x, y: FLOOR + depthToScreenOffsetV188(entry.z) - entry.h, w: entry.w, h: entry.h }) }));
       for (const entry of room.posts.filter(item => item.npc === 'grue')) if (!(view?.asphodeleHubV188?.grue === 'expel'))
         items.push({ z: entry.z, draw: () => loader.draw(ctx, 'asph-grue', entry.x - 26, FLOOR + depthToScreenOffsetV188(entry.z) - 92, 52, 92, () => drawGrueV188(ctx, entry.x, FLOOR + depthToScreenOffsetV188(entry.z))) });
+      for (const actor of this.asphCrowdV188 || []) {
+        if (actor.x + actor.w < camera - 40 || actor.x > camera + 1320) continue;
+        const feet = FLOOR + depthToScreenOffsetV188(actor.z), life = actor.lifeV136;
+        items.push({ z: actor.z, draw: () => loader.draw(ctx, actor.slot, actor.x, feet - actor.h, actor.w, actor.h, () => drawAsphodeleWorkerV188(ctx, actor.role, actor.x + actor.w / 2, feet,
+          { facing: actor.facing || 1, phase: (life?.time || 0) * 7, moving: life?.mode === 'moving', still })) });
+      }
       items.push({ z: Number(this.player.depthZ) || 0, draw: () => {
         const offset = depthToScreenOffsetV188(this.player.depthZ); this.player.y += offset;
         try { PlayerRenderer.prototype.drawPlayer.call(this, ctx); } finally { this.player.y -= offset; }

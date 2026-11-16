@@ -79,7 +79,7 @@ function toEnding(save, recommended, options) {
 test('content: five Act V missions on Cocyte from existing templates, registers, ids unchanged elsewhere', () => {
   assert.deepEqual(ACT5_CAMPAIGN_IDS_V188, ['act5-last-run', 'act5-depot-queen', 'act5-port-walls', 'act5-evacuation']);
   assert.equal(validateContent().ok, true);
-  assert.equal(CAMPAIGNS.length, 476);
+  assert.equal(CAMPAIGNS.length, 477); // + orig-asphodele-2 (spec 007 follow-up)
   for (const campaign of ACT5_CAMPAIGNS_V188) {
     assert.ok(CAMPAIGNS.some(entry => entry.id === campaign.id), campaign.id);
     assert.equal(selectMissionTemplateV52({ campaign }), campaign.templateId, campaign.id);

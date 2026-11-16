@@ -22,7 +22,7 @@ export * from './content-core-v50.js';
 
 export const CAMPAIGNS = Object.freeze([...buildCampaignsWithSpecialOperationsV67(buildMireCampaignsV143(CORE_CAMPAIGNS, WORLDS)), BLACK_COCOON_CAMPAIGN_V121, APC_CONVOY_CAMPAIGN_V121, C12_HORDE_CAMPAIGN_V121, ARCHIVE_RELAY_CAMPAIGN_V122, ...NEW_SPECIAL_CAMPAIGNS_V131, ...STATION_CAMPAIGNS_V188, ...ASPHODELE_CAMPAIGNS_V188, ...ACT5_CAMPAIGNS_V188]);
 export const CONTENT_COUNTS = Object.freeze({ ...CORE_CONTENT_COUNTS, campaigns: CAMPAIGNS.length });
-export const CONTENT_TARGETS = Object.freeze({ ...CORE_CONTENT_TARGETS, campaigns: 476 }); // V188: + the four Asphodèle station missions (spec 005), + 7 station side missions and 6 contracts (spec 007), + the four Act V missions (spec 006)
+export const CONTENT_TARGETS = Object.freeze({ ...CORE_CONTENT_TARGETS, campaigns: 477 }); // V188: + the four Asphodèle station missions (spec 005), + 7 station side missions and 6 contracts (spec 007), + the four Act V missions (spec 006), + the lower-decks night mission orig-asphodele-2 (spec 007 follow-up)
 
 export function validateContent() {
   const core = validateCoreContent();

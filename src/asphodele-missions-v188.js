@@ -80,10 +80,26 @@ export const ASPHODELE_CONTRACT_NAMES_EN_V188 = Object.freeze({
 /** « Relais en dérive » ×3 opens the relay room (§7.3, §42.2). */
 export const RELAY_DRIFT_KEY_V188 = 'relay-drift';
 export const RELAY_DRIFT_REQUIRED_V188 = 3;
-export const ASPHODELE_CAMPAIGNS_V188 = Object.freeze([...ASPHODELE_SIDE_MISSIONS_V188, ...ASPHODELE_CONTRACTS_V188]);
+
+// —— Night missions of the lower decks (bible §39.2, §42.2 « Ponts inférieurs · Missions de nuit ») ——
+// `orig-asphodele-2` « Inspection de nuit » is the §39.2 local mission (type L, replayable); its
+// id, title, required state (« Hub actif ») and objective come from the bible. It is planned
+// from the lower decks' night board and counted under the additive key 'night'. The other
+// §39.2 entries (types A and D) are not built here.
+export const NIGHT_PATROL_KEY_V188 = 'night';
+export const ASPHODELE_NIGHT_MISSIONS_V188 = Object.freeze([
+  base('orig-asphodele-2', 'ASPHODÈLE · INSPECTION DE NUIT', 'navigate the vent network', 'horror',
+    'Ronde dans les conduits des ponts inférieurs pendant le cycle de nuit.',
+    'Seules les lampes de secours sont allumées. Parcourir les conduits des ponts inférieurs, derrière les barricades d’Echo-8, et relever ce qui s’y cache encore.',
+    { stationNightV188: true, stationContractV188: NIGHT_PATROL_KEY_V188, replayableV188: true })
+]);
+export const ASPHODELE_NIGHT_NAMES_EN_V188 = Object.freeze({ 'orig-asphodele-2': 'ASPHODÈLE · NIGHT INSPECTION' });
+const COUNTED = Object.freeze([...ASPHODELE_CONTRACTS_V188, ...ASPHODELE_NIGHT_MISSIONS_V188]);
+const COUNTED_KEYS = Object.freeze(COUNTED.map(entry => entry.stationContractV188));
+export const ASPHODELE_CAMPAIGNS_V188 = Object.freeze([...ASPHODELE_SIDE_MISSIONS_V188, ...ASPHODELE_CONTRACTS_V188, ...ASPHODELE_NIGHT_MISSIONS_V188]);
 export const ASPHODELE_CAMPAIGN_IDS_V188 = Object.freeze(ASPHODELE_CAMPAIGNS_V188.map(entry => entry.id));
 export const isAsphodeleCampaignV188 = campaign => ASPHODELE_CAMPAIGN_IDS_V188.includes(typeof campaign === 'string' ? campaign : campaign?.id);
-export const asphodeleContractKeyV188 = id => ASPHODELE_CONTRACTS_V188.find(entry => entry.id === id)?.stationContractV188 || null;
+export const asphodeleContractKeyV188 = id => COUNTED.find(entry => entry.id === id)?.stationContractV188 || null;
 
 /**
  * Why a side mission or contract cannot be launched yet, or null.
@@ -109,7 +125,7 @@ export const asphodeleMissionLockTextV188 = (reason, language = 'fr') => LOCK_TE
 const MAX_COUNT = 99;
 export function normalizeContractCountsV188(raw) {
   const counts = {};
-  for (const key of ASPHODELE_CONTRACT_KEYS_V188) {
+  for (const key of COUNTED_KEYS) {
     const value = Math.floor(Number(raw?.[key]));
     counts[key] = Number.isFinite(value) ? Math.max(0, Math.min(MAX_COUNT, value)) : 0;
   }
@@ -117,17 +133,77 @@ export function normalizeContractCountsV188(raw) {
 }
 export function contractCountV188(save, key) { return normalizeContractCountsV188(save?.asphodeleHubV188?.contracts)[key] || 0; }
 
+// —— Contract effects (bible §7.2 « Locales », column « Effet »); values [PROPOSÉ], bible §7.6 ——
+// Two kinds, both additive and applied exactly once per counted success:
+//  - derived from the counters (station security, station infestation, workforce, sections
+//    repressurised): recomputed from `contracts`, so reading them never adds again;
+//  - paid at resolution (wreck salvage, Cocyte infestation −) on the same candidate save as
+//    the counter, in the same commit; the operation id guards a replayed resolution.
+export const ASPHODELE_CONTRACT_EFFECTS_V188 = Object.freeze({
+  vents: Object.freeze({ securityPerContract: 10 }),
+  night: Object.freeze({ securityPerContract: 5 }),
+  nest: Object.freeze({ stationInfestationPerContract: -10, cocyteInfestation: -3 }),
+  synthetic: Object.freeze({ workforcePerContract: 1 }),
+  wreck: Object.freeze({ resources: Object.freeze({ alloy: 12, fuel: 6 }) }),
+  module: Object.freeze({ opensRepairHangarAt: 1 })
+});
+export const ASPHODELE_SECURITY_MAX_V188 = 60;
+export const ASPHODELE_STATION_INFESTATION_START_V188 = 40;
+export const ASPHODELE_WORKFORCE_MAX_V188 = 3;
+/** The station indices moved by the contracts, recomputed from the counters (never stored). */
+export function asphodeleStationIndicesV188(save) {
+  const counts = normalizeContractCountsV188(save?.asphodeleHubV188?.contracts), effects = ASPHODELE_CONTRACT_EFFECTS_V188;
+  return Object.freeze({
+    security: Math.min(ASPHODELE_SECURITY_MAX_V188, counts.vents * effects.vents.securityPerContract + counts.night * effects.night.securityPerContract),
+    infestation: Math.max(0, ASPHODELE_STATION_INFESTATION_START_V188 + counts.nest * effects.nest.stationInfestationPerContract),
+    workforce: Math.min(ASPHODELE_WORKFORCE_MAX_V188, counts.synthetic * effects.synthetic.workforcePerContract),
+    sections: counts.module, relays: counts[RELAY_DRIFT_KEY_V188], nights: counts.night, wrecks: counts.wreck
+  });
+}
+/** Station security lowers the risk of station operations: −1 point per 10 security [PROPOSÉ]. */
+export function asphodeleRiskReductionV188(save, campaignId) {
+  return isAsphodeleCampaignV188(campaignId) ? Math.floor(asphodeleStationIndicesV188(save).security / 10) : 0;
+}
+const EFFECT_TEXT = Object.freeze({
+  vents: t('Inspection des conduits : sécurité de la station +{n} ({v}/{max}).', 'Vent inspection: station security +{n} ({v}/{max}).'),
+  night: t('Inspection de nuit : sécurité de la station +{n} ({v}/{max}).', 'Night inspection: station security +{n} ({v}/{max}).'),
+  nest: t('Nid purgé : infestation de la station {v} %, infestation de Cocyte −{c}.', 'Nest purged: station infestation {v}%, Cocyte infestation −{c}.'),
+  synthetic: t('Synthétique récupéré : main-d’œuvre du hub {v}/{max}, stock du marché +{v} par offre.', 'Synthetic recovered: hub workforce {v}/{max}, market stock +{v} per offer.'),
+  wreck: t('Épave : +{alloy} alliage, +{fuel} carburant.', 'Wreck: +{alloy} alloy, +{fuel} fuel.'),
+  module: t('Module remis en pression ({v}) : le hangar de réparation est sous pression.', 'Module repressurised ({v}): the repair hangar is pressurised.'),
+  'relay-drift': t('Relais en dérive : {v}/3.', 'Drifting relays: {v}/3.')
+});
+/** The visible line of a counted contract (debrief toast, QZ board), in FR or EN. */
+export function asphodeleContractEffectTextV188(save, key, language = 'fr') {
+  const pair = EFFECT_TEXT[key]; if (!pair) return '';
+  const indices = asphodeleStationIndicesV188(save), effects = ASPHODELE_CONTRACT_EFFECTS_V188;
+  const values = { vents: { n: effects.vents.securityPerContract, v: indices.security, max: ASPHODELE_SECURITY_MAX_V188 },
+    night: { n: effects.night.securityPerContract, v: indices.security, max: ASPHODELE_SECURITY_MAX_V188 },
+    nest: { v: indices.infestation, c: -effects.nest.cocyteInfestation }, synthetic: { v: indices.workforce, max: ASPHODELE_WORKFORCE_MAX_V188 },
+    wreck: effects.wreck.resources, module: { v: indices.sections }, 'relay-drift': { v: Math.min(RELAY_DRIFT_REQUIRED_V188, indices.relays) } }[key] || {};
+  return pair[language === 'en' ? 'en' : 'fr'].replace(/\{(\w+)\}/g, (_, name) => String(values[name] ?? ''));
+}
+
 /**
  * Called once per resolved operation (finalizeOperation, on the candidate save).
- * A successful station contract adds one to its counter. Returns the key or null.
- * The candidate's `asphodeleHubV188` is only touched for a counted contract.
+ * A successful station contract adds one to its counter and applies its resolution
+ * effect. Returns the key or null. The candidate's `asphodeleHubV188` is only touched
+ * for a counted contract. With `operationId`, a second call for the same operation
+ * changes nothing (additive field `lastContractOpV188`).
  */
-export function applyAsphodeleOperationResultV188(save, { success = false, campaignId = null } = {}) {
+export function applyAsphodeleOperationResultV188(save, { success = false, campaignId = null, operationId = null } = {}) {
   const key = asphodeleContractKeyV188(campaignId);
   if (!success || !key || !save) return null;
   const hub = save.asphodeleHubV188 && typeof save.asphodeleHubV188 === 'object' ? save.asphodeleHubV188 : {};
+  const guarded = typeof operationId === 'string' && operationId.length > 0;
+  if (guarded && hub.lastContractOpV188 === operationId) return null;
   const counts = normalizeContractCountsV188(hub.contracts);
   counts[key] = Math.min(MAX_COUNT, counts[key] + 1);
-  save.asphodeleHubV188 = { ...hub, contracts: counts };
+  save.asphodeleHubV188 = { ...hub, contracts: counts, ...(guarded ? { lastContractOpV188: operationId } : {}) };
+  const effect = ASPHODELE_CONTRACT_EFFECTS_V188[key], resources = save.galaxy?.resources;
+  if (effect?.resources && resources && typeof resources === 'object')
+    for (const [name, value] of Object.entries(effect.resources)) resources[name] = Math.min(999999999, Math.max(0, (Number(resources[name]) || 0) + value));
+  const world = save.galaxy?.worldState?.[ASPHODELE_WORLD_ID_V188];
+  if (effect?.cocyteInfestation && world && Number.isFinite(world.infestation)) world.infestation = Math.max(0, Math.min(100, world.infestation + effect.cocyteInfestation));
   return key;
 }

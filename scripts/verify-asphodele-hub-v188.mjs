@@ -14,7 +14,7 @@ import { finalChoiceOptionsV188 } from '../src/story-dossier-v188.js';
 import { EN_CATALOG_V185 } from '../src/i18n-en-catalog-v185.js';
 import {
   ASPHODELE_SIDE_MISSIONS_V188, ASPHODELE_CONTRACTS_V188, ASPHODELE_CAMPAIGNS_V188, ASPHODELE_SIDE_NAMES_EN_V188, ASPHODELE_CONTRACT_NAMES_EN_V188,
-  asphodeleMissionLockReasonV188, asphodeleMissionLockTextV188, applyAsphodeleOperationResultV188, contractCountV188, RELAY_DRIFT_KEY_V188
+  asphodeleMissionLockReasonV188, asphodeleMissionLockTextV188, applyAsphodeleOperationResultV188, contractCountV188, RELAY_DRIFT_KEY_V188, ASPHODELE_NIGHT_NAMES_EN_V188
 } from '../src/asphodele-missions-v188.js';
 import {
   ASPHODELE_ROOMS_V188, ASPHODELE_ROOM_IDS_V188, ASPHODELE_ARRIVAL_V188, ASPHODELE_TEXT_V188, ASPHODELE_DOOR_V188, ASPHODELE_METRE_PX_V188,
@@ -39,7 +39,11 @@ const atCocyte = save => { save.worldId = 'world-05-lethe'; save.galaxy.shipWorl
 const retaken = () => { const save = atCocyte(createDefaultSave()); complete(save, 'special-archive-relay', 'station-s1', 'station-s2', 'station-s3', 'station-s4');
   save.stationV188 = { schema: 188, introHeard: true, cassius: 'rewrite', scenesSeen: ['s1', 's3', 's4'] }; return save; };
 const everything = () => { const save = complete(retaken(), 'station-a-journaux', 'station-a-hydro', 'station-a-grue');
-  save.asphodeleHubV188.contracts[RELAY_DRIFT_KEY_V188] = 3; save.asphodeleHubV188.grue = 'accept'; return save; };
+  save.asphodeleHubV188.contracts[RELAY_DRIFT_KEY_V188] = 3; save.asphodeleHubV188.grue = 'accept';
+  // Spec 007 follow-up: one repressurised module (repair hangar) and Port-Méridien at the « Autonome » tier (quarters).
+  save.asphodeleHubV188.contracts.module = 1;
+  save.colonyV188 = { schema: 188, sites: Object.fromEntries(['atmosphere', 'infirmary', 'walls', 'power', 'comms', 'docks', 'habitat'].map((id, index) => [id, index < 5 ? { invested: 2, validated: 2 } : { invested: 0, validated: 0 }])) };
+  return save; };
 const proxyCtx = () => new Proxy({ measureText: value => ({ width: String(value).length * 9 }), createLinearGradient: () => ({ addColorStop() {} }) },
   { get: (target, key) => key in target ? target[key] : () => {}, set: () => true });
 
@@ -113,7 +117,7 @@ test('graph: every module is reachable from the docks once unlocked; locks name 
   assert.deepEqual([...seen].sort(), [...ASPHODELE_ROOM_IDS_V188].sort());
   const fresh = retaken();
   const locked = { 'asph-ring/ring-market': 'market', 'asph-ring/ring-greenhouse': 'greenhouse', 'asph-ring/ring-memorial': 'memorial', 'asph-control/control-relay': 'relay',
-    'asph-ring/ring-quarters': 'quarters', 'asph-control/control-lower': 'lower-decks', 'asph-control/control-medbay': 'deferred', 'asph-docks/docks-echo8': 'echo8-dropship' };
+    'asph-ring/ring-quarters': 'quarters', 'asph-docks/docks-repair': 'repair-hangar', 'asph-docks/docks-echo8': 'echo8-dropship' };
   for (const [key, reason] of Object.entries(locked)) {
     const [room, id] = key.split('/'); assert.equal(doorLockV188(fresh, room, id), reason, key);
     assert.equal(asphodeleDoorTargetV188(fresh, room, id).ok, false);
@@ -215,7 +219,7 @@ test('side missions and contracts: bible ids on Cocyte, valid content, existing 
   save.stationV188.cassius = 'restrain'; assert.equal(stationLockReasonV188(save, 'station-a-cassius'), 'cassius-kept'); assert.equal(stationLockReasonV188(save, 'station-a-bishop'), null);
   save.stationV188.cassius = 'erase'; assert.equal(stationLockReasonV188(save, 'station-a-bishop'), 'cassius-erased');
   for (const reason of ['hub', 'cassius-kept', 'cassius-erased']) { assert.ok(asphodeleMissionLockTextV188(reason, 'en')); assert.equal(stationLockTextV188(reason, 'fr'), asphodeleMissionLockTextV188(reason, 'fr')); }
-  assert.equal(filterUnlockedCampaignsV188(save, CAMPAIGNS).filter(entry => ASPHODELE_CAMPAIGNS_V188.includes(entry)).length, 11, 'CASSIUS erased: two side missions closed');
+  assert.equal(filterUnlockedCampaignsV188(save, CAMPAIGNS).filter(entry => ASPHODELE_CAMPAIGNS_V188.includes(entry)).length, 12, 'CASSIUS erased: two side missions closed (13 + the night mission)');
 });
 test('contracts: counted once per successful operation, replayable; three drifting relays open the relay room', () => {
   const save = retaken();
@@ -228,7 +232,7 @@ test('contracts: counted once per successful operation, replayable; three drifti
   assert.equal(contractCountV188(save, RELAY_DRIFT_KEY_V188), 3); assert.equal(relayRoomOpenV188(save), true);
   assert.equal(doorLockV188(save, 'asph-control', 'control-relay'), null);
   applyAsphodeleOperationResultV188(save, { success: true, campaignId: 'station-c-nid' }); assert.equal(contractCountV188(save, 'nest'), 1);
-  assert.match(read('src/app.js'), /applyAsphodeleOperationResultV188\(candidate, \{ success: resolvedSuccess, campaignId: operation\.campaignId \}\);/);
+  assert.match(read('src/app.js'), /applyAsphodeleOperationResultV188\(candidate, \{ success: resolvedSuccess, campaignId: operation\.campaignId, operationId: operation\.id \}\);/);
   // Grue's pact after « Le pacte de l'anneau »: taken once.
   assert.equal(gruePactPendingV188(save), false); complete(save, 'station-a-grue'); assert.equal(gruePactPendingV188(save), true);
   assert.equal(chooseGruePactV188(save, 'maybe'), false); assert.equal(chooseGruePactV188(save, 'accept'), true); assert.equal(chooseGruePactV188(save, 'expel'), false);
@@ -355,9 +359,10 @@ test('i18n: every player-facing string of the hub, missions and contracts exists
     for (const entry of [...room.doors, ...room.posts]) assert.ok(entry.label.fr && entry.label.en, entry.id);
   }
   for (const campaign of ASPHODELE_CAMPAIGNS_V188) {
-    assert.ok(ASPHODELE_SIDE_NAMES_EN_V188[campaign.id] || ASPHODELE_CONTRACT_NAMES_EN_V188[campaign.id], `${campaign.id} English name`);
+    const englishName = ASPHODELE_SIDE_NAMES_EN_V188[campaign.id] || ASPHODELE_CONTRACT_NAMES_EN_V188[campaign.id] || ASPHODELE_NIGHT_NAMES_EN_V188[campaign.id];
+    assert.ok(englishName, `${campaign.id} English name`);
     for (const field of ['name', 'summary', 'description']) assert.ok(EN_CATALOG_V185[campaign[field]], `${campaign.id}.${field} in the EN catalog`);
-    assert.equal(EN_CATALOG_V185[campaign.name], ASPHODELE_SIDE_NAMES_EN_V188[campaign.id] || ASPHODELE_CONTRACT_NAMES_EN_V188[campaign.id]);
+    assert.equal(EN_CATALOG_V185[campaign.name], englishName);
   }
   for (const choice of ['rewrite', 'restrain', 'erase']) { const save = retaken(); save.stationV188.cassius = choice;
     assert.notEqual(cassiusCoreLineV188(save, 'fr'), cassiusCoreLineV188(save, 'en')); }

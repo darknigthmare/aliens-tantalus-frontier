@@ -3,6 +3,8 @@ import { createColonyV188, normalizeColonyV188 } from './colony-reconstruction-v
 import { createStationV188, normalizeStationV188 } from './station-asphodele-v188.js';
 import { createCrewQuestsV188, normalizeCrewQuestsV188 } from './crew-quests-v188.js';
 import { createAsphodeleHubV188, normalizeAsphodeleHubV188 } from './asphodele-hub-v188.js';
+import { asphodeleRiskReductionV188 } from './asphodele-missions-v188.js';
+import { cheyenneFuelSavingV188 } from './asphodele-economy-v188.js';
 import { normalizeHubDepthV188 } from './hub-depth-rooms-v188.js';
 import { createReactiveLinesV188, normalizeReactiveLinesV188 } from './reactive-lines-v188.js';
 import { normalizeColorblindV188, normalizeTextScaleV188, normalizeKeyBindingsV188, defaultKeyBindingsV188 } from './accessibility-v188.js';
@@ -1513,12 +1515,16 @@ export function getOperationBrief(save, campaign, world) {
   if (deployableVehicleId && hasResearch(save, 'vehicle-doctrine')) risk -= 7;
   const annexSupportV71 = getHubAnnexDeploymentSupportV71(save, deployableVehicleId);
   risk -= annexSupportV71.riskReduction;
+  // V188 spec 007 follow-up [PROPOSÉ]: station security (vent and night contracts) lowers the risk of station operations.
+  risk -= asphodeleRiskReductionV188(save, campaign.id);
   risk = Math.round(clamp(risk, 5, 95));
   let fuel = 2 + Math.ceil(world.danger / 3);
   if (deployableVehicleId && hasResearch(save, 'vehicle-doctrine')) fuel = Math.max(1, fuel - 1);
   fuel = Math.max(1, fuel - annexSupportV71.powerLoaderFuelReduction);
   const openingSupportV88 = getOpeningDeploymentSupportV88(save.openingV88);
   if (openingSupportV88.energy) fuel = Math.max(1, fuel - 2);
+  // V188 spec 007 follow-up [PROPOSÉ]: the Cheyenne overhauled in the Asphodèle repair hangar saves fuel (never below 1).
+  fuel = Math.max(1, fuel - cheyenneFuelSavingV188(save));
   const cost = { fuel, supplies: 3 + Math.ceil(world.danger / 2) };
   if (world.atmosphere !== 'breathable') cost.medical = 1;
   const specialRewardV121 = specialOperationRewardDefinitionV121(campaign.id);
