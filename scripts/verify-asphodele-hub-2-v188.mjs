@@ -281,7 +281,7 @@ test('mission dressing: only Asphodèle campaigns, props clear of doors, ladders
   assert.equal(s1.engine.asphMissionDressingV188, null);
   for (const campaign of [...ASPHODELE_CONTRACTS_V188, ...ASPHODELE_NIGHT_MISSIONS_V188]) assert.ok(asphodeleMissionFeatureV188(campaign.id), campaign.id);
   assert.equal(asphodeleMissionLayoutV188({}, 'station-a-echo8').feature, null, 'no geometry, nothing drawn');
-  assert.match(read('src/game-production-runtime.js'), /withCasteBehaviorsV188\(withAsphodeleMissionDressingV188\(withInsertionSafeZoneV188\(/);
+  assert.match(read('src/game-production-runtime.js'), /withCasteBehaviorsV188\(withInsertionSafeZoneV188\(withRunOptionsRuntimeV188\(withAsphodeleMissionDressingV188\(/);
 });
 
 // —— 5. Crowds ——

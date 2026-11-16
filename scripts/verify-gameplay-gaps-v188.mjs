@@ -250,7 +250,7 @@ test('colony gate: the closed gate stops the marine at the door he sees (x 934),
 
 test('admission: new modules composed under the run options, shipped offline, suite registered and admitted', () => {
   const runtime = read('src/game-production-runtime.js');
-  assert.match(runtime, /withRunOptionsRuntimeV188\((?:withVfxV188\()?withFranchiseFidelityV188\(withGameplayGapsV188\(withCombatFeelV188\(/);
+  assert.match(runtime, /withRunOptionsRuntimeV188\((?:withAsphodeleMissionDressingV188\()?(?:withVfxV188\()?withFranchiseFidelityV188\(withGameplayGapsV188\(withCombatFeelV188\(/);
   const sw = read('sw.js'); for (const file of ['/src/franchise-fidelity-v188.js', '/src/gameplay-gaps-v188.js']) assert.ok(sw.includes(`'${file}'`), file);
   const pkg = JSON.parse(read('package.json'));
   assert.ok(pkg.scripts['test:priorities:v188'].includes('scripts/verify-gameplay-gaps-v188.mjs'));
