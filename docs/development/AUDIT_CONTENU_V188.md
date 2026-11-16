@@ -92,14 +92,14 @@ Les statuts « À faire » du §53 (tir, tension, caste, accessibilité, répliq
 | Choix CASSIUS (réécrire / brider / effacer) | Manquant | Q7 : choix définitif |
 | Annexes (7) et contrats locaux (6) | Partiel (spec 007) | Les 13 sont lançables après S4, verrous [PROPOSÉ] ; contrats comptés ; seul *Relais en dérive* a un effet ; décor générique d'intérieur de vaisseau |
 | Hub Asphodèle : 7 modules (§7.3, §42) | Partiel (spec 007 et suite) | 12 modules de §42.2 atteignables à pied (Q22 A, Q23 A) ; quartiers, infirmerie, ponts inférieurs et hangar de réparation rouverts (§7.7) ; commerce Crucible (Q30 A) ; effets des six contrats ; foules ; art en primitives, plan V3 non fait |
-| Décor de station, CASSIUS, récupérateurs, dropship d'Echo-8 (§29.4) | Bloqué (art) | Primitives Canvas possibles (Q79) |
+| Décor de station, CASSIUS, récupérateurs, dropship d'Echo-8 (§29.4) | Bloqué (art jouable) | Les décors, props et acteurs du hub et des missions restent en primitives. La continuation Asphodèle du 16 novembre 2026 ajoute six illustrations de scène distinctes, sans remplacer ces emplacements jouables |
 
 ## 5. Quêtes du Tantalus (§8)
 
 | Élément | Statut | Constat |
 | --- | --- | --- |
 | Rapport et confiance de l'équipage (`npc-dialogue-v62.js`) | Partiel | Socle présent : 6 choix génériques, renouvellement 8 h ; aucune quête |
-| 16 quêtes de l'équipage (§8.1) | Partiel (lot colonie et équipage) | 16/16 jouables (spec 005 + `crew-quests-tantalus-v188.js`) ; poses de dialogue et objets en placeholders ; deux preuves adaptées (pas de tir, charges de brèche) |
+| 16 quêtes de l'équipage (§8.1) | Partiel (lot colonie et équipage) | 16/16 jouables (spec 005 + `crew-quests-tantalus-v188.js`) ; illustrations de onze quêtes produites par le lot colonie/équipage, puis quatre cartes pour Rook, Vega, Harlow et DAVID-8R par la continuation Asphodèle ; poses de dialogue et props jouables encore provisoires ; deux preuves adaptées (pas de tir, charges de brèche) |
 | Vie à bord (6, §8.2) | Manquant | Le casier vide d'Echo-8 existe comme objet (`hub-echo8-locker-v188.js`), pas comme fil de quête |
 | Recrutement (4, §8.3) | Manquant | Les quatre noms sont des candidats génériques de `crew-recruitment-v85.js`, sans quête ni condition de front |
 
@@ -167,13 +167,13 @@ Les fiches de référence `premium-personnel-v119.js` et `franchise-costumes-v11
 
 ## 11. Éléments qui demandent des images générées
 
-Cette liste décrit les manques constatés lors de l'audit initial. Le lot de continuation du 16 novembre 2026 produit les trois portraits de Port-Méridien et les dix-huit cartes de colonie et de quêtes détaillés ci-dessous ; les autres besoins restent ouverts.
+Cette liste décrit les manques constatés lors de l'audit initial. Les continuations du 16 novembre 2026 produisent les trois portraits de Port-Méridien, les dix-huit cartes de colonie et de quêtes, puis les six illustrations de scène Asphodèle détaillées ci-dessous ; les autres besoins restent ouverts.
 
-- Décor de station Asphodèle (anneau, pont de contrôle, laboratoire, serre, salle des relais, mémorial), noyau et interface de CASSIUS, récupérateurs de Grue, dropship d'Echo-8 (§29.4).
+- Décors jouables de station Asphodèle (anneau, pont de contrôle, laboratoire, serre, salle des relais, mémorial), prop du noyau de CASSIUS, récupérateurs de Grue et dropship d'Echo-8 (§29.4). Les nouvelles cartes d'extérieur et de CASSIUS illustrent les scènes de dialogue ; elles ne remplacent pas les emplacements `asph-*` du hub ni des missions.
 - Quartiers de Port-Méridien en V2 et animations des habitants nommés. Les portraits de Wren, Ferro et Sarrazin sont désormais produits ; les primitives Q78 restent leur secours de chargement.
-- Poses de dialogue de l'équipage et planches des recrues. Les onze cartes d'objets et de preuves du lot colonie/équipage sont désormais produites ; cela ne couvre pas les autres emplacements de quête.
+- Poses de dialogue de l'équipage et planches des recrues. Aux onze cartes d'objets et de preuves du lot colonie/équipage s'ajoutent celles de Rook, Vega, Harlow et DAVID-8R ; les illustrations ne fournissent ni poses ni objets animés en jeu.
 - Art en dette des chapitres V131 et de Cargo brutal (`limitations` de `special-operations-v131.js`).
-- Cinématiques CIN-70 à CIN-72 (jouables en placeholders Canvas depuis la spec 007) et suivantes.
+- Cinématiques CIN-70 à CIN-72 (jouables en primitives Canvas depuis la spec 007) et suivantes. Leurs plans sont dessinés par `station-cinematics-v188.js` ; les six cartes de `content-gap-slots-v188.js` ne remplacent pas ce rendu.
 - Ennemis originaux de l'Hôte Parfait (Q47).
 
 ## 12. Choix pour ce lot
@@ -250,10 +250,31 @@ Base : `f5ae9de64c36af1de6eda11f76902e8ba4e8412f`, PR #49. Le propriétaire dema
 | --- | --- | --- |
 | Wren, Ferro, Sarrazin | Trois portraits transparents, intégrés aux dialogues et cinématiques, proportions conservées, secours en primitives | Détails physiques [PROPOSÉ] ; animations de PNJ et expressions supplémentaires absentes |
 | Cartes de la colonie | Sept images aux emplacements existants, dont les deux carnets de Wren | Niveaux dédiés et quartiers visitables non ajoutés |
-| Cartes des quêtes de l'équipage | Onze images aux emplacements existants | Poses de dialogue supplémentaires et six cartes distinctes d'Asphodèle non ajoutées |
+| Cartes des quêtes de l'équipage | Onze images aux emplacements existants | Poses de dialogue supplémentaires absentes ; les six cartes distinctes d'Asphodèle appartiennent au lot suivant, décrit ci-dessous |
 | Chargement des scènes | Requête du seul emplacement courant, redessin après chargement, anciens callbacks annulés ; cache runtime limité aux dix-huit chemins exacts après consultation | Primitive conservée pendant le chargement et après une erreur ; pas de précache des dix-huit cartes |
 | Preuves narratives | Sept cartes composées avec les données exactes en Canvas, FR/EN | Aucun texte secret, nom d'Echo-8 ou horaire absent de la bible inventé |
 
 Contrôles du lot : 54 captures de cartes et 6 captures de cinématiques en Canvas natif, 54/54 tests colonie/contenu/fins et 28/28 tests portraits/cinématiques. Ces captures utilisent un hôte déclaré et ne sont pas présentées comme un parcours Chromium. Les résultats de la suite de priorités et du build final sont consignés dans [le reçu du lot](COLONY_ART_RENDER_RECEIPT_20261116.json).
 
 Traçabilité complète : [contrôle et périmètre](COLONY_ART_QA_20261116.md), [prompts et empreintes des 21 PNG](COLONY_ART_PROVENANCE_20261116.json), [planche des cartes](COLONY_ART_OVERVIEW_20261116.png), [planche des portraits](COLONY_PORTRAITS_OVERVIEW_20261116.png). Les totaux historiques des 66 lignes ne sont pas requalifiés en missions terminées par la seule présence de ces images.
+
+## Résultat du lot images Asphodèle (continuation du 16 novembre 2026)
+
+Base : `1abd0528515e5db460aea06c0e438ca3ceff8ee3`, après les 21 PNG du lot précédent. La demande de continuation du propriétaire couvre les **six illustrations de scène** de `src/content-gap-slots-v188.js`, sous `assets/content/v188/`. Le cadre logique reste de 640 × 280 px. Ce lot ne constitue ni un nouveau niveau ni l'achèvement du front Asphodèle.
+
+| Emplacement | Illustration ajoutée | Preuve ou invariant conservé |
+| --- | --- | --- |
+| `asphodele-exterior` | Station vue à l'approche | Anneau, rayons et moyeu sombre ; feux éteints ; navette Crucible sur l'anneau et dropship d'Echo-8 au sas |
+| `cassius-core` | Console de CASSIUS | CRT verts, une onde, aucun visage ; consignes présentées comme archives, sans imposer l'état actif après le choix de S2 |
+| `echo8-recording` | Écran de capteurs de Rook | Onde, coupure rouge et règle 05:58 / 05:59 / 06:00 composées par Canvas ; aucune nouvelle seconde de coupure inscrite dans le PNG |
+| `order-documents` | Deux ordres sous une lampe | Articles 2 et 5 de l'Administration, points 4 et 7 de la compagnie : citations exactes FR/EN, deux contradictions ; aucun logo ni signataire inventé |
+| `seal-fragment` | Sceau rompu sous la lentille du laboratoire | Résine sur la face interne, lot QZ17-04 et tampon Asphodèle natifs FR/EN ; continuité de matière avec l'atlas de collectables QZ17 |
+| `david-memory` | Carte mémoire et composants de relais | Grille native, un secteur cible et trois composants ; aucun résultat de restauration ni effacement des journaux affirmé avant la fin de la quête |
+
+Les cinq cartes de preuve conservent leurs libellés, nombres et graphes dans Canvas, indépendamment des PNG. Les identifiants de quête, décisions, récompenses et sauvegardes ne sont pas modifiés par ces illustrations. La chronologie d'Echo-8 reste celle des sources existantes : ce lot ne réconcilie pas la fin à 06:00:05 de CIN-72 avec le verrouillage à 6:00:05 puis la coupure à 6:00:07 de la quête de Rook.
+
+**Périmètre restant ouvert :** les 42 emplacements `asph-*` du hub et de l'habillage des missions, les acteurs et leurs poses, la rotation visuelle de l'anneau et les plans de CIN-70 à CIN-72 restent des chantiers distincts. La carte `cassius-core` n'est pas le prop jouable `asph-cassius-core`. Les statuts des missions, du hub et des quêtes restent **Partiel** ; les totaux historiques de cet audit ne changent pas.
+
+**Fidélité :** Asphodèle, CASSIUS, Echo-8, Kessler, Crucible et les preuves des quêtes sont des créations du projet. Les repères documentés restent ceux de la bible §7.6 et §8.4 : UD-4L, caméras de casque et moniteurs d'*Aliens* (1986), matériel Seegson d'*Alien: Isolation* (2014), priorité de la compagnie illustrée par « Special Order 937 » dans *Alien* (1979). Les PNG prolongent les références existantes du dépôt ; leur génération ne certifie pas une reproduction canonique « 1:1 ».
+
+Traçabilité du lot : [prompts, références et empreintes](ASPHODELE_ART_PROVENANCE_20261116.json), [contrôles réellement exécutés et limites](ASPHODELE_ART_QA_20261116.md), [planche des six illustrations](ASPHODELE_ART_OVERVIEW_20261116.png), [primitive extérieure employée comme référence de composition](ASPHODELE_ART_PRIMITIVE_REFERENCE_20261116.png). Une capture de composition des cartes n'est pas un parcours complet du hub ou des missions.

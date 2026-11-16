@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-colony-art-20261116';
+const CACHE = 'atf-v143-asphodele-art-20261116';
 const SHELL = Object.freeze([
   '/src/alien-base-bridge-v1.js',
   '/src/alien-base-snapshot-v1.js',
@@ -744,6 +744,14 @@ const COLONY_CARD_PATHS_V188 = new Set([
   '/assets/content/v188/colony/quest-reactor.png',
   '/assets/content/v188/colony/quest-vents.png'
 ]);
+const ASPHODELE_CARD_PATHS_V188 = new Set([
+  '/assets/content/v188/asphodele-exterior.png',
+  '/assets/content/v188/cassius-core.png',
+  '/assets/content/v188/echo8-recording.png',
+  '/assets/content/v188/order-documents.png',
+  '/assets/content/v188/seal-fragment.png',
+  '/assets/content/v188/david-memory.png'
+]);
 const MAX_RUNTIME_ENTRIES_V143 = 256;
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const PRIVATE_HEADERS_V143 = ['authorization', 'proxy-authorization', 'apikey', 'x-api-key', 'x-auth-token'];
@@ -759,6 +767,7 @@ function cacheableRequestV143(request) {
     if (/%|\\|\/\//.test(path)) return false;
     if (SHELL_PATHS.has(path)) return true;
     if (COLONY_CARD_PATHS_V188.has(path)) return true;
+    if (ASPHODELE_CARD_PATHS_V188.has(path)) return true;
     // No API, account, save, unknown document or third-party endpoint can enter
     // Cache Storage, even when it returns HTTP 200 or an image-like extension.
     return /^\/assets\/(?:openai|user|equipment)\/[a-z0-9/_.-]+\.(?:png|webp|jpg|jpeg)$/i.test(path)

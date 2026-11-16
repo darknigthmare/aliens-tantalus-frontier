@@ -13,6 +13,8 @@ import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { COLONY_CREW_SLOTS_V188, COLONY_CREW_FILES_PRESENT_V188 } from '../src/colony-crew-slots-v188.js';
 
 const worker = await readFile(new URL('../sw.js', import.meta.url), 'utf8');
+const ASPHODELE_CARDS_V188 = ['asphodele-exterior', 'cassius-core', 'echo8-recording', 'order-documents', 'seal-fragment', 'david-memory']
+  .map(id => `/assets/content/v188/${id}.png`);
 const ORIGIN = 'https://tantalus.test';
 const req = (path, options) => new Request(new URL(path, ORIGIN), options);
 function response(path, { private: secret = false, status = 200, mime, vary } = {}) {
@@ -201,6 +203,68 @@ test('colony cards: exact paths preserve origin, method and private-request excl
 });
 test('colony cards: invalid and newly private responses cannot leave a usable cached copy', async () => {
   const path = '/assets/content/v188/colony/wren-notebooks.png';
+  for (const config of [{ private: true }, { mime: 'text/html' }, { status: 206 }, { status: 404 }, { vary: 'Authorization' }, { vary: 'Cookie' }, { vary: '*' }]) {
+    const h = host(), request = req(path);
+    await h.dispatch('fetch', { request });
+    assert.ok(await (await h.caches.open(h.api.CACHE)).match(request));
+    h.network(async () => response(path, config));
+    await h.dispatch('fetch', { request });
+    assert.equal(await (await h.caches.open(h.api.CACHE)).match(request), undefined);
+    h.network(async () => { throw new Error('offline'); });
+    assert.equal((await h.dispatch('fetch', { request })).value.type, 'error');
+  }
+});
+test('Asphodele cards: all six PNGs stay lazy through installation and survive a later network interruption', async () => {
+  const h = host();
+  assert.equal(h.api.CACHE, 'atf-v143-asphodele-art-20261116');
+  await h.dispatch('install');
+  const cache = await h.caches.open(h.api.CACHE);
+  for (const path of ASPHODELE_CARDS_V188) {
+    assert.equal(h.api.SHELL.includes(path), false, 'scene art must not increase the mandatory precache');
+    assert.equal(h.calls.some(request => new URL(request.url).pathname === path), false, 'installation must not fetch the card');
+    assert.equal(await cache.match(req(path)), undefined);
+    assert.equal(h.api.cacheableRequestV143(req(path)), true, path);
+  }
+  for (const id of ['tomas-wren', 'lucia-ferro', 'adele-sarrazin']) {
+    const path = `/assets/colony/v188/${id}.png`;
+    assert.equal(h.api.SHELL.includes(path), true, 'existing portrait precache stays intact');
+    assert.ok(await cache.match(req(path)));
+  }
+  h.network(async () => { throw new Error('offline before first view'); });
+  for (const path of ASPHODELE_CARDS_V188) assert.equal((await h.dispatch('fetch', { request: req(path) })).value.type, 'error');
+  assert.equal((await cache.keys()).length, h.api.SHELL.length);
+  h.network(async request => new Response(`card:${new URL(request.url).pathname}`, { headers: { 'content-type': 'image/png' } }));
+  for (const path of ASPHODELE_CARDS_V188) {
+    const fetched = await h.dispatch('fetch', { request: req(path) });
+    assert.equal(fetched.intercepted, true);
+    assert.equal(await fetched.value.text(), `card:${path}`);
+  }
+  assert.equal((await cache.keys()).length, h.api.SHELL.length + 6);
+  h.network(async () => { throw new Error('offline after first view'); });
+  for (const path of ASPHODELE_CARDS_V188) assert.equal(await (await h.dispatch('fetch', { request: req(path) })).value.text(), `card:${path}`);
+});
+test('Asphodele cards: exact paths reject unreviewed neighbors and private requests', async () => {
+  const h = host(), path = '/assets/content/v188/cassius-core.png';
+  for (const [candidate, options] of [
+    ['/assets/content/v188/unreviewed.png', {}], ['/assets/content/v188/asphodele-exterior-extra.png', {}],
+    ['/assets/content/v188/nested/cassius-core.png', {}], [`${path}/extra.png`, {}],
+    ['/assets/content/v189/cassius-core.png', {}], ['/assets/content/v188/cassius-core.webp', {}],
+    ['/assets/content/v188/CASSIUS-CORE.png', {}], ['/assets/content/v188/%63assius-core.png', {}],
+    [`https://foreign.test${path}`, {}], [`${path}?version=1`, {}],
+    [path, { method: 'HEAD' }], [path, { method: 'POST', body: 'private' }],
+    [path, { cache: 'no-store' }], [path, { headers: { 'cache-control': 'private' } }],
+    [path, { headers: { authorization: 'Bearer account-A' } }], [path, { headers: { apikey: 'account-A' } }],
+    [path, { headers: { range: 'bytes=0-20' } }]
+  ]) {
+    const request = req(candidate, options);
+    assert.equal(h.api.cacheableRequestV143(request), false, candidate);
+    assert.equal((await h.dispatch('fetch', { request })).intercepted, false, candidate);
+  }
+  assert.equal(h.calls.length, 0);
+  assert.equal((await (await h.caches.open(h.api.CACHE)).keys()).length, 0);
+});
+test('Asphodele cards: invalid and newly private responses remove the older public cached copy', async () => {
+  const path = '/assets/content/v188/david-memory.png';
   for (const config of [{ private: true }, { mime: 'text/html' }, { status: 206 }, { status: 404 }, { vary: 'Authorization' }, { vary: 'Cookie' }, { vary: '*' }]) {
     const h = host(), request = req(path);
     await h.dispatch('fetch', { request });

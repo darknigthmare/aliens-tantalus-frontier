@@ -1168,10 +1168,10 @@ Echo-9 retrouve la plaque du sergent Kessler et le dernier enregistrement de l'�
 Décisions par défaut appliquées : Q6 (S1-S4 comme missions avant le hub), Q7 (choix CASSIUS définitif), Q103 (feature Spec Kit `specs/005-front-asphodele-quetes/`). Code : `src/station-asphodele-v188.js`, raccordé à `content.js`, `save.js` (`stationV188`), `story-dossier-v188.js` et au Commandement.
 
 - **Accès** : Acte II terminé → quête de Rook « Six heures », dont la fin joue *Six heures de silence* (§8.4) → S1 → S2 → décision CASSIUS → S3 → S4. Les missions verrouillées ne sont pas proposées ; le lancement est refusé avec la raison. Une mission en cours reste reprise.
-- **Missions** : `station-s1` à `station-s4` sur Cocyte (`world-05-lethe`), gabarit intérieur de vaisseau, objectifs et registres de §7.2 et §0.3 (Horreur, Tension, Horreur, Action). Le décor est l'intérieur de vaisseau générique : la station n'a pas encore son art (§29.4).
+- **Missions** : `station-s1` à `station-s4` sur Cocyte (`world-05-lethe`), gabarit intérieur de vaisseau, objectifs et registres de §7.2 et §0.3 (Horreur, Tension, Horreur, Action). Le décor est l'intérieur de vaisseau générique : les illustrations de scène de §7.8 ne remplacent pas l'art jouable encore à produire (§29.4).
 - **Dossier** : S2 donne la pièce *Ordres de livraison archivés par CASSIUS*, même si CASSIUS est effacé ensuite (§5.7.1). S4 rend la condition « Asphodèle reprise » vraie ; la salle des relais vient du hub Asphodèle (`asphodeleRelayReadyV188`), condition lue par l'Acte V (§5.11).
 - **Effets CASSIUS [PROPOSÉ]** : réécrit, quarantaine de Cocyte −6 et stabilité +3 ; bridé, quarantaine −3 ; effacé, aucun effet. Les annexes fermées par le bridage n'existent pas encore.
-- **Scènes de retour** (S1, S3, S4) et décision CASSIUS : au Commandement, une seule fois, image d'emplacement en primitives Canvas (`src/content-gap-slots-v188.js`).
+- **Scènes de retour** (S1, S3, S4) et décision CASSIUS : au Commandement, une seule fois, illustrations de `src/content-gap-slots-v188.js` depuis la continuation du 16 novembre 2026 (§7.8), avec repli en primitives Canvas.
 - **[PROPOSÉ]** : la consigne qui ferme le sas 3 à 6:00:05 est appliquée par CASSIUS (indice de la quête de Rook) ; les journaux des survivants s'arrêtent au quatrième jour.
 - **Fidélité** : aucune fidélité « 1:1 ». Apparence documentée citée dans la spec 005 (détecteur trompé par l'air en mouvement et caméras de casque, *Aliens*, 1986 ; Seegson et son IA qui applique ses consignes, *Alien: Isolation*, 2014). CASSIUS, Asphodèle, Echo-8 et Kessler sont des créations du projet. À définir : décor, interface vocale de CASSIUS, visage de Kessler.
 - **Reste à faire** (mis à jour par §7.6) : ~~hub Asphodèle, annexes, contrats, CIN-70 à CIN-72, plaque de Kessler~~ → première version en §7.6 ; restent les points listés en §7.6.
@@ -1203,7 +1203,7 @@ Décisions par défaut appliquées : Q22 (A, modules construits dans le moteur d
 | UD-4L | *Aliens* (1986) | Vu au hublot du sas 1 | Image |
 | Echo-8, Kessler, Grue, Crucible | — | Créations du projet, silhouettes en primitives | Visages, costumes |
 
-- **Art** : 20 emplacements nommés (`src/asphodele-hub-slots-v188.js`), placeholders en primitives Canvas, 1 m ≈ 51 px ; aucune image générée.
+- **Art du hub** : 20 emplacements nommés (`src/asphodele-hub-slots-v188.js`), placeholders en primitives Canvas, 1 m ≈ 51 px ; aucune image générée pour ces emplacements. Les illustrations de scène de §7.8 sont distinctes.
 - **Reste à faire** (mis à jour par §7.7) : ~~quartiers, infirmerie, ponts inférieurs et hangar de réparation ; commerce du marché (Q30) ; effets des contrats autres que *Relais en dérive* ; décors de station pour les missions annexes et les contrats~~ → §7.7 ; restent la rotation visuelle de l'anneau en jeu, l'art final et le plan V3 (Q23 B, non retenu).
 
 ### 7.7 Modules rouverts, effets des contrats, marché, foules — [PARTIEL] V188 (suite de la spec 007, 2026-11-16)
@@ -1232,8 +1232,27 @@ Décision par défaut appliquée : Q30 (A, économie existante et stock limité 
 | Hangar de réparation | Hangar du *Sulaco*, *Aliens* (1986) : rails de grue, bandes de danger | Atelier du Cheyenne | Vaisseau en réparation, art |
 | Dockers, marchands, techniciens | Techniciens de Sevastopol, *Alien: Isolation* (2014) | Silhouettes en primitives | Costumes, visages |
 
-- **Art** : 22 emplacements ajoutés (42 au total), primitives Canvas, 1 m ≈ 51 px ; aucune image générée.
+- **Art du hub et des missions** : 22 emplacements ajoutés (42 au total), primitives Canvas, 1 m ≈ 51 px ; aucune image générée pour ces emplacements `asph-*`. Les illustrations de scène de §7.8 ne les remplacent pas.
 - **Reste à faire** : art final ; commerce d'armes ; médecin, jardiniers et mécaniciens ; `orig-asphodele-1`, `-3` et `-4` (§39.2) ; rotation visuelle de l'anneau ; plan V3.
+
+### 7.8 Illustrations de scène Asphodèle — [PARTIEL] V188 (continuation du 16 novembre 2026)
+
+À la demande de continuation du propriétaire, six PNG complètent les six emplacements de `src/content-gap-slots-v188.js`, dans `assets/content/v188/`. Ils illustrent les dialogues et les preuves, dans un cadre logique de 640 × 280 px. Les cinq cartes de preuve réservent leurs surfaces au texte, aux nombres et aux graphes dessinés par Canvas en FR/EN ; les primitives restent le repli du chargement.
+
+| Emplacement | Composition du projet | Invariant narratif |
+| --- | --- | --- |
+| `asphodele-exterior` | Anneau sur rayons autour d'un moyeu sombre, espace noir, gris froid | Feux éteints ; navette Crucible sur l'anneau et dropship d'Echo-8 au sas |
+| `cassius-core` | CRT verts et une seule onde, sans visage ni avatar | Quarantaine, priorité cargaison, préservation des actifs ; les consignes sont présentées comme archives, sans imposer l'état de CASSIUS après S2 |
+| `echo8-recording` | Écran de capteurs de Rook et onde audio de caméra casque | Fenêtre 05:58 à 06:00, repère de coupure rouge ; les secondes des scènes et de la quête ne sont pas réécrites |
+| `order-documents` | Deux feuilles côte à côte sous une lampe, sans logo de compagnie | Articles 2 et 5 de l'Administration, points 4 et 7 de la compagnie ; les quatre citations de la quête (`crew-quests-v188.js`, §8.4) restent exactes en FR/EN |
+| `seal-fragment` | Sceau électronique rompu dans un plateau, lentille et lumière froide | Résine sur la face interne, QZ17-04, tampon « ASPHODÈLE · TRANSIT VÉRIFIÉ » ; référence de matière : atlas QZ17 existant |
+| `david-memory` | Grille mémoire sur CRT et trois composants de relais | Un secteur cible ; aucun « 3/3 », état de restauration terminé ou effacement des journaux imposé avant l'achèvement de la quête |
+
+**Références et fidélité.** Les matières et la mise en scène prolongent les cartes du lot colonie/équipage, l'UD-4L existant et l'atlas des collectables QZ17. Les références de franchise restent celles de §7.6 et §8.4 ; Asphodèle, CASSIUS, Echo-8, Kessler, Crucible, les deux ordres et les autres preuves sont des créations du projet. Ces illustrations ne certifient pas une reproduction canonique « 1:1 » et n'ajoutent aucun visage de Kessler ni portrait de DAVID-8R.
+
+**Limites conservées.** Les 42 emplacements `asph-*` des décors, props et acteurs jouables restent en primitives. La carte `cassius-core` ne remplace pas le prop `asph-cassius-core`. CIN-70 à CIN-72 continuent d'utiliser leurs plans Canvas dans `station-cinematics-v188.js` ; la rotation de l'anneau, les poses des personnages et l'art final des niveaux ne sont pas achevés par ce lot. La chronologie de l'enregistrement d'Echo-8 n'est pas modifiée.
+
+Traçabilité : [prompts, références et empreintes des six PNG](../development/ASPHODELE_ART_PROVENANCE_20261116.json), [contrôles et limites](../development/ASPHODELE_ART_QA_20261116.md), [planche des illustrations](../development/ASPHODELE_ART_OVERVIEW_20261116.png), [primitive extérieure de référence](../development/ASPHODELE_ART_PRIMITIVE_REFERENCE_20261116.png).
 
 ---
 
@@ -1296,6 +1315,8 @@ Décision par défaut Q9 : DAVID-8R, Harlow, Rook et Vega. Code : `src/crew-ques
 | `ship-david` Mémoire récupérée | Acte I | Trois composants, un par opération réussie sur Cocyte | Loyauté +5 ; note « poste de relais QZ-9 » jointe au dossier, hors décompte des 7 pièces |
 
 Fidélité : la quête de Vega reprend un thème documenté, la consigne de la compagnie qui passe avant l'équipage (« Special Order 937 », *Alien*, 1979, scène de MU/TH/UR) ; les deux ordres sont des textes du projet. Reste : la vie à bord (§8.2) et les recrues (§8.3) ; les 12 autres quêtes sont au §8.5.
+
+**Illustrations (continuation du 16 novembre 2026).** Les quatre cartes de Rook (`echo8-recording`), Vega (`order-documents`), Harlow (`seal-fragment`) et DAVID-8R (`david-memory`) sont produites dans le lot de six de §7.8. Les preuves et libellés exacts restent natifs FR/EN ; aucune nouvelle seconde de coupure, décision ni résultat de quête n'est figé dans les PNG. Les poses de dialogue, objets animés et décors jouables restent des besoins distincts.
 
 ### 8.5 Les douze autres quêtes — [PARTIEL] V188 (lot colonie et équipage, 2026-11-16)
 
@@ -2850,6 +2871,8 @@ Les fichiers de `assets/user/` sont des **références** fournies par le propri�
 
 **Socle de l'arc [À CRÉER] :** décor de station orbitale en trois couches (anneau extérieur, pont de contrôle, laboratoire de transit, ponts inférieurs, serre, salle des relais, mémorial) ; PNJ Grue, récupérateurs Crucible ; interface vocale de CASSIUS ; dropship d'Echo-8 amarré.
 
+**Mise à jour art de scène (16 novembre 2026, §7.8).** Les cartes d'extérieur, de CASSIUS et de l'enregistrement d'Echo-8 sont produites, ainsi que les trois autres cartes de preuve du lot. Elles servent les dialogues ; les besoins du tableau ci-dessous en décors jouables, props de hub, acteurs, animations et plans de CIN-70 à CIN-72 restent distincts. Le statut d'une illustration ne vaut pas achèvement d'une mission.
+
 | Mission | Props spécifiques | Personnages / ennemis | Animations | VFX | Actions |
 | --- | --- | --- | --- | --- | --- |
 | Six heures de silence | Enregistrement casque à l'écran **[À CRÉER]** | Rook **[PRÉSENT]** | — | Bruit radio **[À CRÉER]** | — |
@@ -2863,6 +2886,8 @@ Les fichiers de `assets/user/` sont des **références** fournies par le propri�
 ### 29.5 Quêtes du Tantalus (16 + 6 + 4)
 
 Elles se jouent surtout au hub, avec des PNJ **[PRÉSENT]**. Besoins **[À CRÉER]** : poses de dialogue assises ou au poste pour chaque membre (au moins une par personnage), objets de quête (composants de DAVID-8R, plaques de colons, fragment de sceau, tourelles sentinelles, enregistreurs de Kappa), écran de sélection des recrues (Voss, Bensaïd, Reed, Seo : planches de déplacement et de mission à créer pour chacun).
+
+**Illustrations disponibles (16 novembre 2026).** Les onze cartes de §8.5 et les quatre cartes des premières quêtes de §8.4 sont produites. Leur présence ne fournit pas les poses ni les props animés de la liste ci-dessus. La carte d'Echo-8 est aussi réutilisée par la quête d'ECHO-A.
 
 ---
 
@@ -4908,7 +4933,7 @@ Décision du propriétaire : certaines salles passent en **profondeur** (2,5D, d
 
 ### 56.13 Manques de contenu (V188, 2026-11-15)
 
-Audit bible contre code : [`AUDIT_CONTENU_V188.md`](../development/AUDIT_CONTENU_V188.md) (66 lignes au commit `250d81a` : 14 faites, 18 partielles, 32 manquantes, 2 bloquées par l'art). Comblés en partie dans ce lot, sans être terminés : front station Asphodèle S1-S4 et choix CASSIUS (§7.5), quatre quêtes de l'équipage (§8.4), temps de voyage (§13.6). Feature : `specs/005-front-asphodele-quetes/`. Tests : `scripts/verify-content-gaps-v188.mjs` ; contrôle Chromium sur fixture importée (déclaré dans la spec). Aucun de ces éléments n'a son art final.
+Audit bible contre code : [`AUDIT_CONTENU_V188.md`](../development/AUDIT_CONTENU_V188.md) (66 lignes au commit `250d81a` : 14 faites, 18 partielles, 32 manquantes, 2 bloquées par l'art). Comblés en partie dans ce lot, sans être terminés : front station Asphodèle S1-S4 et choix CASSIUS (§7.5), quatre quêtes de l'équipage (§8.4), temps de voyage (§13.6). Feature : `specs/005-front-asphodele-quetes/`. Tests : `scripts/verify-content-gaps-v188.mjs` ; contrôle Chromium sur fixture importée (déclaré dans la spec). À la fin de cette phase, aucun de ces éléments n'avait son art final. La continuation du 16 novembre 2026 ajoute les six illustrations de scène de §7.8 ; les décors, acteurs et animations jouables restent à produire.
 
 Suite (spec 007, `specs/007-hub-asphodele/`) : hub Asphodèle atteignable (8 modules sur 12 de §42.2), 7 missions annexes, 6 contrats dont *Relais en dérive*, prédicat de *Transmettre*, CIN-70 à CIN-72, plaque de Kessler au casier d'Echo-8 (§7.6, §42.4). Tests : `scripts/verify-asphodele-hub-v188.mjs` ; QA Chromium au clavier `scripts/qa-asphodele-hub-v188.mjs` (fixtures déclarées). Rien n'est déclaré terminé.
 ### 56.14 Acte V, fins et épilogue (V188, 2026-11-15)
