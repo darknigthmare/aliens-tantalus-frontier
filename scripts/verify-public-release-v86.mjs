@@ -386,6 +386,7 @@ const FORGE_TOOLING_V140 = new Set([
   'specs/006-acte-v-fins/tasks.md',
   'scripts/verify-act5-endings-v188.mjs',
   'scripts/verify-colony-crew-v188.mjs',
+  'scripts/qa-colony-crew-v188.mjs',
   'docs/development/INSERTION_ART_SLOTS_V188.md',
   'scripts/verify-insertion-cinematic-v188.mjs',
   'scripts/verify-mission-depth-v188.mjs',

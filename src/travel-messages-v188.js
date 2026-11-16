@@ -72,15 +72,15 @@ export function deliverTravelMessagesV188(save, settlement, { relayRoomReady = r
     added.push({ id: `${kind}-${jump.completedAt}`, kind, worldId, sentDay: sent, receivedDay: arrival, phase, values });
   };
   const cocyte = worldOf(save, COCYTE_WORLD_ID_V188);
-  // Port-Méridien keeps writing once the quay is held (P-3).
-  if (save?.portMeridienV90?.phase === 'complete' && destination !== COCYTE_WORLD_ID_V188) {
+  // Port-Méridien keeps writing once the quay is held (P-3) or the campaign has reached it (Act I, QZ-17).
+  if ((save?.portMeridienV90?.phase === 'complete' || has(done, 'special-narrative-qz17')) && destination !== COCYTE_WORLD_ID_V188) {
     const delay = relayRoomReady ? TRAVEL_DELAYS_V188.relay : Number(save?.colonyV188?.sites?.comms?.validated) >= 2 ? TRAVEL_DELAYS_V188.colonyRelay : TRAVEL_DELAYS_V188.qz;
     push('colony', COCYTE_WORLD_ID_V188, arrival - delay, 'during', { infestation: cocyte?.infestation, stability: cocyte?.stability, tier: colonyTier(save) });
   }
   // A retaken Asphodèle relays the sector's calls (§13.1, §13.2).
   if (has(done, 'station-s4')) push('asphodele', COCYTE_WORLD_ID_V188, arrival - TRAVEL_DELAYS_V188.relay, 'during', { calls: 2 + (relayRoomReady ? 3 : 0) });
   // The company's directives always arrive late and dated (§1.1).
-  push('company', null, departure + 1, 'during', {});
+  push('company', null, arrival - TRAVEL_DELAYS_V188.company, 'during', {});
   // The world left behind went on without the Tantalus.
   if (origin && origin !== destination) push('origin', origin, departure + TRAVEL_DELAYS_V188.origin, 'after', { infestation: worldOf(save, origin)?.infestation, stability: worldOf(save, origin)?.stability });
   // The call from the destination is already old: the situation at arrival is worse than the message.
