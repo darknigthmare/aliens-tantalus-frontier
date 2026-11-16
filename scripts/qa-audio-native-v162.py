@@ -119,6 +119,23 @@ def open_view(page, view):
     page.locator(f'#nav [data-view="{view}"]').click()
 
 
+def remaining_ui_budget(deadline):
+    milliseconds = int((deadline - time.monotonic()) * 1000)
+    if milliseconds <= 0:
+        raise TimeoutError('The native UI did not become ready within its existing time budget.')
+    return milliseconds
+
+
+def open_title_settings(page):
+    # During the intro fade, pointer events already reach the title while its
+    # capture listener still owns the keyboard. Wait for the actual handoff.
+    deadline = time.monotonic() + 45
+    page.locator('#intro-v188').wait_for(state='detached', timeout=remaining_ui_budget(deadline))
+    page.locator('#title-start').click(timeout=remaining_ui_budget(deadline))
+    page.locator('#title-options').click(timeout=remaining_ui_budget(deadline))
+    page.locator('.view[data-panel="settings"].active').wait_for(state='visible', timeout=remaining_ui_budget(deadline))
+
+
 def playing(page, scene):
     page.wait_for_function('''scene=>{const a=__ATF_AUDIO_V77__;return a.scene===scene&&a.musicStatus==='playing'
       &&[...a.musicVoices].some(v=>v.scene===scene&&!v.stopping&&!v.audio.paused
@@ -131,9 +148,23 @@ def playing(page, scene):
 
 
 def slider(page, selector, position):
+    deadline = time.monotonic() + 30
     target = page.locator(selector)
-    target.focus()
-    page.keyboard.press('Home' if position == 0 else 'End')
+    key = 'Home' if position == 0 else 'End'
+    journey = {'selector': selector, 'key': key, 'requestedValue': position}
+    report.setdefault('sliderInputs', []).append(journey)
+    target.wait_for(state='visible', timeout=remaining_ui_budget(deadline))
+    assert target.is_enabled(timeout=remaining_ui_budget(deadline)), selector + ': the native range is enabled'
+    target.focus(timeout=remaining_ui_budget(deadline))
+    read_control = '''element=>({value:element.value,focused:document.activeElement===element,
+      inert:!!element.closest('[inert]'),introPresent:!!document.querySelector('#intro-v188')})'''
+    journey['before'] = target.evaluate(read_control, timeout=remaining_ui_budget(deadline))
+    assert journey['before']['focused'] and not journey['before']['inert'] and not journey['before']['introPresent'], \
+        selector + ': the native range owns keyboard input after the intro'
+    target.press(key, timeout=remaining_ui_budget(deadline))
+    journey['after'] = target.evaluate(read_control, timeout=remaining_ui_budget(deadline))
+    assert journey['after']['focused'] and float(journey['after']['value']) == position, \
+        selector + ': the native range receives ' + key + ' and reaches the requested value'
 
 
 def verify_bank_transfer(source, actual):
@@ -225,8 +256,7 @@ with sync_playwright() as pw:
     try:
         step('native gesture unlock, real bank loading and mute during a disclosed pending music transfer')
         page.goto(args.base, wait_until='domcontentloaded')
-        page.locator('#title-start').click(timeout=45000)
-        page.locator('#title-options').click()
+        open_title_settings(page)
         # The menu transfer is deliberately held only until the native mute.
         # Waiting for every effect here would spend its real network timeout.
         page.wait_for_function('()=>__ATF_AUDIO_V77__?.context?.state==="running"&&__ATF_AUDIO_V77__.manifestStatus==="ready"')
@@ -326,8 +356,7 @@ with sync_playwright() as pw:
         slider(page, '#setting-music', 0); slider(page, '#setting-effects', 0)
         page.wait_for_function('()=>!__ATF_AUDIO_V77__.musicVoices.size&&!__ATF_AUDIO_V77__.effectVoices.size&&!__ATF_AUDIO_V77__.timers.size')
         page.reload(wait_until='domcontentloaded')
-        page.locator('#title-start').click(timeout=45000)
-        page.locator('#title-options').click()
+        open_title_settings(page)
         after_reload = observed(page)
         check('Native slider mute survives reload without reviving mission media or delayed effects',
               after_reload['volumes']['music'] == after_reload['volumes']['effects'] == 0
@@ -344,8 +373,7 @@ with sync_playwright() as pw:
         fallback = fallback_context.new_page(); fallback.set_default_timeout(30000); watch(fallback, 'missing-manifest-404')
         fallback.route('**/assets/audio/manifest.json', lambda route: route.fulfill(status=404, content_type='application/json', body='{}'))
         fallback.goto(args.base, wait_until='domcontentloaded')
-        fallback.locator('#title-start').click(timeout=45000)
-        fallback.locator('#title-options').click()
+        open_title_settings(fallback)
         fallback.wait_for_function('()=>__ATF_AUDIO_V77__.manifestStatus==="unavailable"&&__ATF_AUDIO_V77__.context?.state==="running"&&__ATF_AUDIO_V77__.musicStatus==="silent-missing"')
         state = observed(fallback)
         check('The controlled HTTP404 manifest leaves an unlocked context, no fake decoded bank and no music voice',

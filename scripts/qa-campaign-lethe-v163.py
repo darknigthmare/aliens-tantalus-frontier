@@ -256,10 +256,72 @@ def question_protected(save):
 
 
 def hold_until(page, key, condition, timeout=30000):
-    page.locator('#game-canvas').focus()
-    page.keyboard.down(key)
+    # A key pressed while an atlas loads is deferred as a discrete action,
+    # not registered as a held key. Observe admission and reacquire a lost
+    # hold with public key events, within one unchanged wall-time budget.
+    deadline = time.monotonic() + timeout / 1000
+    trace = []
+    receipt = {'key': key, 'timeoutMs': timeout, 'observations': trace}
+    report.setdefault('nativeHeldInputObservations', []).append(receipt)
+    read = '''({key})=>{const e=globalThis.__ATF_GAME__,canvas=document.querySelector('#game-canvas');
+      const choice=e?.selectInteractionTargetV188?.(e.player);
+      const visible=Boolean(canvas?.getClientRects().length&&getComputedStyle(canvas).visibility!=='hidden');
+      return {satisfied:Boolean((__HELD_CONDITION__)()),running:Boolean(e?.running),mission:e?.mission?.state,
+        alive:Boolean(e?.player?.alive),paused:Boolean(e?.paused),atlasLoading:Boolean(e?.enemyAtlasLoadingPausedV65),
+        casteLoading:Boolean(e?.userCasteLoadingV88),keyHeld:Boolean(e?.keys?.has(key)),
+        focused:document.activeElement===canvas&&document.hasFocus(),visible,hidden:document.hidden,
+        ready:visible&&!document.hidden&&Boolean(e?.canPerformGameplayAction?.(e.player,{allowVent:true,allowSquadTask:true})),
+        interaction:choice?{kind:choice.kind,action:choice.target?.action,prop:choice.target?.prop}:null,
+        cocoon:e?.blackCocoonV121?{phase:e.blackCocoonV121.phase,progress:e.blackCocoonV121.cocoonProgress,
+          action:e.blackCocoonV121.action?{...e.blackCocoonV121.action}:null,freed:e.blackCocoonV121.freed}:null};}'''.replace('__HELD_CONDITION__', condition)
+    sent = False
+    lost = False
+    previous_flags = None
+    state = None
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError(f'Native held input {key} exceeded its {timeout} ms budget.')
+        return milliseconds
+
+    def note(event):
+        trace.append({'event': event, 'elapsedWallSeconds': timeout / 1000 - (deadline - time.monotonic()),
+                      'state': state})
+
     try:
-        page.wait_for_function(condition, timeout=timeout)
+        while True:
+            remaining()
+            state = page.evaluate(read, {'key': key})
+            flags = tuple(state[k] for k in ['ready', 'focused', 'atlasLoading', 'casteLoading', 'keyHeld', 'paused'])
+            if flags != previous_flags:
+                note('observed')
+                previous_flags = flags
+            if state['satisfied']:
+                note('completed')
+                return
+            assert state['running'] and state['alive'] and state['mission'] == 'active', \
+                'A native held action requires its living operator and active mission.'
+            if sent and not state['keyHeld'] and not lost:
+                lost = True
+                note('hold-not-registered-or-lost')
+            if state['ready']:
+                if not state['focused']:
+                    page.locator('#game-canvas').focus(timeout=remaining())
+                elif not sent or lost and not state['keyHeld']:
+                    if sent:
+                        page.keyboard.up(key)
+                    page.keyboard.down(key)
+                    note('rearmed' if sent else 'pressed')
+                    sent = True
+                    lost = False
+            if state['keyHeld']:
+                lost = False
+            page.wait_for_timeout(min(100, remaining()))
+    except Exception as error:
+        receipt['error'] = str(error)
+        note('failed')
+        raise
     finally:
         page.keyboard.up(key)
 
