@@ -80,7 +80,7 @@ export const CREW_QUESTS_TANTALUS_V188 = Object.freeze([
   Object.freeze({
     id: 'ship-sorensen', crewId: 'crew-15-leila-s-rensen', giver: 'Leila Sørensen', slot: 'quest-route-map', kind: 'analysis',
     title: t('La route des fermes', 'The Farm Road'), after: t('Après « L’air du port » (C2)', 'After "The Port’s Air" (C2)'),
-    where: t('Leila Sørensen, à la salle de navigation ou sur sa ronde.', 'Leila Sørensen, at the navigation room or on her rounds.'),
+    where: t('Leila Sørensen, au mess ou sur sa ronde.', 'Leila Sørensen, in the mess or on her rounds.'),
     offer: t('« Si la route du dépôt est coupée un jour, il faudra rentrer à pied. J’ai les relevés des drones. Aide-moi à tracer une route de survie jusqu’aux fermes. »',
       '"If the depot road is ever cut, we’ll have to walk back. I have the drone surveys. Help me plot a survival route to the farms."'),
     available: done('colony-c2'),
@@ -104,12 +104,12 @@ export const CREW_QUESTS_TANTALUS_V188 = Object.freeze([
   Object.freeze({
     id: 'ship-velez', crewId: 'crew-02-tamsin-velez', giver: 'Tamsin Velez', slot: 'quest-range', kind: 'analysis',
     title: t('Ceux d’Echo-8', 'Echo-8’s People'), after: t('Après le prologue', 'After the prologue'),
-    where: t('La sergente Velez, au pas de tir ou sur sa ronde.', 'Sergeant Velez, at the firing range or on her rounds.'),
+    where: t('La sergente Velez, en salle de briefing ou sur sa ronde.', 'Sergeant Velez, in the briefing room or on her rounds.'),
     offer: t('« Echo-8 tenait les meilleurs temps du pas de tir. Bats-les, et je te parlerai d’eux. »', '"Echo-8 held the best times on the firing range. Beat them, and I’ll tell you about them."'),
     available: prologueDone,
     // Proof: a new M41A qualification run completed after the quest was accepted (receipt of `proving-ground-session-v81.js`).
     gate: Object.freeze({ mark: save => save?.hub?.provingGroundV81?.qualification?.lastReceiptId || null,
-      waitText: t('Velez : « Le pas de tir est au pont des opérations. Une qualification M41A complète, et on parle. »', 'Velez: "The range is on the operations deck. A full M41A qualification, and we talk."') }),
+      waitText: t('Velez : « Le pas de tir, à l’annexe d’entraînement. Une qualification M41A complète, et on parle. »', 'Velez: "The firing range, in the training annex. A full M41A qualification, and we talk."') }),
     steps: Object.freeze([
       step(t('Velez pose la feuille de tir d’Echo-8 à côté de la tienne. « Kessler marquait tout à la craie. Sur la station, il a tracé des traits sur les barricades. Tu sais ce qu’il comptait ? »',
         'Velez lays Echo-8’s range sheet beside yours. "Kessler marked everything in chalk. On the station, he drew strokes on the barricades. Do you know what he was counting?"'),
@@ -126,7 +126,7 @@ export const CREW_QUESTS_TANTALUS_V188 = Object.freeze([
   Object.freeze({
     id: 'ship-echo-a', crewId: 'crew-14-echo-a', giver: 'ECHO-A', slot: 'echo8-recording', kind: 'analysis',
     title: t('Deux relèves', 'Two Reliefs'), after: t('Après « Les ponts scellés » (S3)', 'After "The Sealed Decks" (S3)'),
-    where: t('ECHO-A, à son poste tactique ou sur sa ronde.', 'ECHO-A, at its tactical post or on its rounds.'),
+    where: t('ECHO-A, au poste d’information de combat ou sur sa ronde.', 'ECHO-A, at the combat information post or on its rounds.'),
     offer: t('« J’étais affecté à Echo-8. Je n’étais pas avec eux. Je voudrais comparer mes protocoles avec leur dernier enregistrement. »',
       '"I was assigned to Echo-8. I was not with them. I would like to compare my protocols with their last recording."'),
     available: done('station-s3'),
@@ -150,7 +150,7 @@ export const CREW_QUESTS_TANTALUS_V188 = Object.freeze([
   Object.freeze({
     id: 'ship-mbaye', crewId: 'crew-12-asha-mbaye', giver: 'Asha Mbaye', slot: 'quest-colonist-list', kind: 'analysis',
     title: t('Les noms de Port-Méridien', 'The Names of Port-Méridien'), after: t('Après l’Acte II', 'After Act II'),
-    where: t('Asha Mbaye, au poste de liaison coloniale ou sur sa ronde.', 'Asha Mbaye, at the colonial liaison post or on her rounds.'),
+    where: t('Asha Mbaye, aux quartiers de l’équipage ou sur sa ronde.', 'Asha Mbaye, in the crew quarters or on her rounds.'),
     offer: t('« La colonie tient une liste de disparus. Les registres de QZ-18 ont peut-être leurs appels. Aide-moi à la compléter. »',
       '"The colony keeps a list of the missing. The QZ-18 registers may have their calls. Help me complete it."'),
     available: done('special-archive-relay'),
@@ -208,7 +208,7 @@ export const CREW_QUESTS_TANTALUS_V188 = Object.freeze([
   Object.freeze({
     id: 'ship-reyes', crewId: 'crew-13-pablo-reyes', giver: 'Pablo Reyes', slot: 'quest-register', kind: 'analysis',
     title: t('La charge de trop', 'The Charge Too Many'), after: t('Après le convoi du M577 (Acte III)', 'After the M577 convoy (Act III)'),
-    where: t('Pablo Reyes, à l’armurerie ou sur sa ronde.', 'Pablo Reyes, at the armoury or on his rounds.'),
+    where: t('Pablo Reyes, à l’atelier ou sur sa ronde.', 'Pablo Reyes, at the workshop or on his rounds.'),
     offer: t('« Sur une évacuation, avant le Tantalus, j’ai fait sauter un accès trop tôt. Trois civils derrière. Le registre de l’opération existe. Je n’ai jamais osé le lire. »',
       '"On an evacuation, before the Tantalus, I blew an access too early. Three civilians behind it. The operation’s register exists. I never dared read it."'),
     available: done('special-apc-convoy'),
@@ -234,7 +234,7 @@ export const CREW_QUESTS_TANTALUS_V188 = Object.freeze([
     available: prologueDone,
     // Proof: the reactor service (`service:power`, salle du réacteur) used after the quest was accepted.
     gate: Object.freeze({ mark: save => save?.hub?.services?.['service:power'] ?? null,
-      waitText: t('Kwan : « Le pupitre du réacteur, pont technique. Réaffecte le carburant au réseau principal, puis reviens. »', 'Kwan: "The reactor console, engineering deck. Reassign fuel to the main grid, then come back."') }),
+      waitText: t('Kwan : « Le pupitre du réacteur, pont ingénierie. Réaffecte le carburant au réseau principal, puis reviens. »', 'Kwan: "The reactor console, engineering deck. Reassign fuel to the main grid, then come back."') }),
     steps: Object.freeze([
       step(t('Relevés après réparation : la consommation du pont 2 monte de 4 % chaque nuit, de 01:00 à 05:00. Le pont 2 abrite la quarantaine ; il est vide.',
         'Readings after the repair: deck 2 consumption rises 4% every night, from 01:00 to 05:00. Deck 2 houses the quarantine; it is empty.'),
@@ -253,7 +253,7 @@ export const CREW_QUESTS_TANTALUS_V188 = Object.freeze([
   Object.freeze({
     id: 'ship-park', crewId: 'crew-11-jun-park', giver: 'Jun Park', slot: 'quest-vents', kind: 'components',
     title: t('Après les conduits', 'After the Ducts'), after: t('Après l’Interlude', 'After the Interlude'),
-    where: t('Jun Park, à l’atelier technique ou sur sa ronde.', 'Jun Park, at the technical workshop or on his rounds.'),
+    where: t('Jun Park, au support vital ou sur sa ronde.', 'Jun Park, at life support or on his rounds.'),
     offer: t('« Depuis le pont 2, je n’entre plus dans un conduit. Il faut pourtant qu’on les sécurise. Viens avec moi sur une mission dans les conduits. »',
       '"Since deck 2, I don’t go into a duct anymore. We still have to secure them. Come with me on a mission in the ducts."'),
     available: interludeResolved, components: 1, collectWhen: ctx => ctx.objective === 'navigate the vent network',
