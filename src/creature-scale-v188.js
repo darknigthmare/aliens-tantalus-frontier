@@ -85,12 +85,14 @@ export function getEnemyDisplayDimensionsV188(pose) {
 }
 
 const profileOf = enemy => String(enemy?.profileId || enemy?.id || '').split(':')[0].split('#')[0];
-/** Target of a mission enemy: { kind: 'human'|'queen'|'declared'|'undeclared', height|null, referenceId }. */
+/** Target of a mission enemy: { kind: 'human'|'unlisted'|'queen'|'declared'|'undeclared', height|null, referenceId }. */
 export function creatureTargetV188(enemy) {
   const id = profileOf(enemy), source = enemiesById.get(id), caste = getEnemyUserCasteV87(id);
   const biology = String(enemy?.biology || source?.biology || caste?.biology || '');
   if (!CREATURE_BIOLOGIES.has(biology) || /human|synthetic|commando|working-joe/.test(id))
     return Object.freeze({ kind: 'human', height: null, referenceId: null, id });
+  // A scripted actor without a catalogue identity keeps the body its author gave it.
+  if (!source && !caste) return Object.freeze({ kind: 'unlisted', height: null, referenceId: null, id });
   const stature = getEnemyDisplayStatureV188({ id, profileId: id, legacyCounterpartId: caste?.legacyCounterpartId });
   if (!stature) return Object.freeze({ kind: 'undeclared', height: null, referenceId: null, id });
   if (isHumanStatureKeyV188(stature.referenceId)) return Object.freeze({ kind: 'human', height: null, referenceId: stature.referenceId, id });
@@ -192,7 +194,7 @@ export function withCreatureScaleV188(Base) {
 
     /** One dry draw of `enemy` in `state` with a virtual body (scale k), returned in world pixels. */
     measureCreatureDrawV188(enemy, state = 'idle', k = 1) {
-      const clone = { ...enemy, ...STATES_V188[state], alive: true, deathClock: 0, revealed: 0, id: `${enemy.id}#creature-scale-v188:${state}` };
+      const clone = { ...enemy, ...STATES_V188[state], alive: true, deathClock: 0, revealed: 0, casteV188: null, depthZ: 0, id: `${enemy.id}#creature-scale-v188:${state}` };
       const ctx = createDrawMeasureContextV188();
       try { this.drawCreatureScaledV188(ctx, clone, k); } catch { return null; }
       return measuredSpriteV188(ctx.draws);
@@ -217,7 +219,7 @@ export function withCreatureScaleV188(Base) {
     }
     buildCreatureScaleProfileV188(enemy, body, key = visualKey(enemy)) {
       const target = creatureTargetV188(enemy);
-      if (target.kind === 'human') return Object.freeze({ key, target, k: 1, states: null, exempt: true });
+      if (target.kind === 'human' || target.kind === 'unlisted') return Object.freeze({ key, target, k: 1, states: null, exempt: true });
       const base = { ...enemy, x: finite(body.x), y: finite(body.y), w: finite(body.w), h: finite(body.h) };
       const legacy = this.measureCreatureDrawV188(base, 'idle', 1);
       if (!legacy) return null; // image not loaded yet: retried later

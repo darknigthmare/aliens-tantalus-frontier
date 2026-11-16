@@ -61,7 +61,7 @@ test('the scale: 1 m ≈ 51 px, marine 92 px, warrior 118 px (2.3 m), queen 245 
 
 test('every enemy profile: drawn height and hitbox within ±4 px of the V188 target; humans and synthetics unchanged', { timeout: 600000 }, async () => {
   const { engine } = await fixture();
-  const misses = [], counts = { declared: 0, queen: 0, undeclared: 0, human: 0 };
+  const misses = [], counts = { declared: 0, queen: 0, undeclared: 0, human: 0, unlisted: 0 };
   for (const source of ENEMIES) {
     const { enemy, legacy, legacyBody, target } = await scaled(engine, source);
     counts[target.kind]++;
@@ -80,10 +80,10 @@ test('every enemy profile: drawn height and hitbox within ±4 px of the V188 tar
     if (enemy.spriteHitbox) misses.push(`${source.id}: a sprite-cell collision box survives`);
   }
   assert.deepEqual(misses, []);
-  assert.equal(counts.declared + counts.queen + counts.undeclared + counts.human, ENEMIES.length);
+  assert.equal(Object.values(counts).reduce((a, b) => a + b, 0), ENEMIES.length);
   // Inventory (bible §56.4): 20 queens (two queen lines × 10, juveniles excluded), 200 declared castes,
   // 263 undeclared organisms, 88 humans and synthetics.
-  assert.deepEqual(counts, { declared: 200, queen: 20, undeclared: 263, human: 88 });
+  assert.deepEqual(counts, { declared: 200, queen: 20, undeclared: 263, human: 88, unlisted: 0 });
 });
 
 test('queens versus warriors: 245 against 118 px (4.8 m / 2.3 m), taller than every other caste; the marine is shorter than a warrior', async () => {
@@ -230,9 +230,19 @@ test('dependants follow the body: acid pool width, tracker point (feet centre) a
   near(enemy.y + enemy.h, 868, 'feet kept', .5);
 });
 
-test('composition: the creature scale sits under the caste behaviours (ceiling flip, depth shift)', () => {
+test('composition: the creature scale wraps the caste behaviours (ceiling flip) under the QZ-17 dressing and depth holds', () => {
   const runtime = readFileSync(new URL('../src/game-production-runtime.js', import.meta.url), 'utf8');
-  assert.match(runtime, /withCasteBehaviorsV188\(withCreatureScaleV188\(withInsertionSafeZoneV188\(/);
+  assert.match(runtime, /withQz17LevelDressingV188\(withCreatureScaleV188\(withCasteBehaviorsV188\(withInsertionSafeZoneV188\(/);
   const source = readFileSync(new URL('../src/creature-scale-v188.js', import.meta.url), 'utf8');
   assert.doesNotMatch(source, /1:1 (fidelity|fidèle)|canonVerified: true/);
+});
+
+test('a ceiling drone (caste behaviours) hangs flipped inside its rescaled body', async () => {
+  const { engine } = await fixture();
+  const { enemy } = await scaled(engine, byId.get('enemy-004-drone-big-chap'));
+  const upright = drawn(engine, enemy);
+  enemy.casteV188 = { mode: 'ceiling', clock: 0, cooldown: 0, triggered: false, hangX: enemy.x, hangY: enemy.y };
+  const hanging = drawn(engine, enemy);
+  near(hanging.height, upright.height, 'same stature upside down', .5);
+  near(hanging.top, enemy.y, 'flipped sprite starts at the body top'); near(hanging.bottom, enemy.y + enemy.h, 'and ends at its feet line');
 });
