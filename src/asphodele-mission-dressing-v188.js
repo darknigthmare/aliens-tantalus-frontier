@@ -33,6 +33,7 @@ export const ASPHODELE_MISSION_SIZES_V188 = Object.freeze({
 });
 export const ASPHODELE_MISSION_RHYTHM_PX_V188 = 306; // a rib every 6 m, as in the hub walls
 const CLEARANCE = 18; // px kept free on each side of a door, ladder, lift or vent
+export const ASPHODELE_MISSION_CEILING_Y_V188 = 110; // nothing is drawn above the top of the level band
 
 /** Feature slot per mission (side missions by id, contracts by key). */
 const FEATURE_BY_CAMPAIGN = Object.freeze({
@@ -67,12 +68,23 @@ const overlaps = (spans, x0, x1, top, bottom) => spans.some(([s0, s1, st, sb]) =
  * exclusion, base hazard segments and one mission feature.
  */
 export function asphodeleMissionLayoutV188({ platforms = [], doors = [], ladders = [], lifts = [], vents = [] } = {}, campaignId = null) {
-  const spans = asphodeleMissionExclusionsV188({ doors, ladders, lifts, vents });
-  const decks = platforms.filter(entry => entry && entry.art !== 'drop' && entry.kind !== 'lift' && [entry.x, entry.y, entry.w].every(Number.isFinite) && entry.w >= 240);
+  const doorSpans = asphodeleMissionExclusionsV188({ doors, ladders, lifts, vents });
+  // Structural surfaces (lift cabins excluded); co-planar pieces (a node deck and its steps) merge into one floor run.
+  const surfaces = platforms.filter(entry => entry && entry.art !== 'drop' && entry.kind !== 'lift' && [entry.x, entry.y, entry.w].every(Number.isFinite) && entry.w > 0)
+    .sort((a, b) => a.y - b.y || a.x - b.x);
+  const runs = [];
+  for (const entry of surfaces) {
+    const run = runs.find(item => Math.abs(item.y - entry.y) <= 2 && entry.x <= item.x + item.w + 8 && entry.x + entry.w >= item.x - 8);
+    if (run) { const x1 = Math.max(run.x + run.w, entry.x + entry.w); run.x = Math.min(run.x, entry.x); run.w = x1 - run.x; }
+    else runs.push({ x: entry.x, y: entry.y, w: entry.w });
+  }
+  const decks = runs.filter(entry => entry.w >= 240);
   const props = [], bands = [], { panel, crt, sign, conduit, feature } = ASPHODELE_MISSION_SIZES_V188;
   let best = null;
   decks.forEach((deck, deckIndex) => {
-    const top = deck.y - 230, bottom = deck.y, x0 = deck.x + 24, x1 = deck.x + deck.w - 24;
+    const bottom = deck.y, x0 = deck.x + 24, x1 = deck.x + deck.w - 24;
+    // A surface above the deck is an exclusion too: a wall prop never shows through a deck over it.
+    const spans = [...doorSpans, ...surfaces.filter(entry => entry.y < deck.y - 2).map(entry => [entry.x, entry.x + entry.w, entry.y, entry.y + (Number(entry.h) || 22)])];
     // Hazard band segments at the wall base, cut by every exclusion that reaches the deck.
     let start = null;
     for (let x = x0; x <= x1; x += 8) {
@@ -86,7 +98,7 @@ export function asphodeleMissionLayoutV188({ platforms = [], doors = [], ladders
       const kind = ['panel', 'crt', 'sign', 'panel', 'conduit'][(index + deckIndex) % 5];
       const size = { panel, crt, sign, conduit }[kind], y = kind === 'panel' ? bottom - 40 - size.h : kind === 'crt' ? bottom - 120 : kind === 'sign' ? bottom - 196 : bottom - 214;
       const w = Math.min(size.w, x1 - x);
-      if (overlaps(spans, x, x + w, y, y + size.h)) continue;
+      if (y < ASPHODELE_MISSION_CEILING_Y_V188 || overlaps(spans, x, x + w, y, y + size.h)) continue;
       props.push(Object.freeze({ id: `asph-msn-${deckIndex}-${index}`, kind, x, y, w, h: size.h, deck: deckIndex }));
     }
     // Widest clear stretch of the deck for the feature.
@@ -94,7 +106,7 @@ export function asphodeleMissionLayoutV188({ platforms = [], doors = [], ladders
     for (let x = x0; x <= x1; x += 16) {
       const free = x + 16 <= x1 && !overlaps(spans, x, x + 16, bottom - feature.h - 40, bottom);
       if (free && runStart === null) runStart = x;
-      if (!free && runStart !== null) { if (!best || x - runStart > best.w) best = { x: runStart, w: x - runStart, bottom }; runStart = null; }
+      if (!free && runStart !== null) { if (bottom - 40 - feature.h >= ASPHODELE_MISSION_CEILING_Y_V188 && (!best || x - runStart > best.w)) best = { x: runStart, w: x - runStart, bottom }; runStart = null; }
     }
   });
   const kind = asphodeleMissionFeatureV188(campaignId);
@@ -102,7 +114,7 @@ export function asphodeleMissionLayoutV188({ platforms = [], doors = [], ladders
     ? Object.freeze({ id: `asph-msn-feature-${kind}`, kind, x: Math.round(best.x + (best.w - feature.w) / 2), y: best.bottom - 40 - feature.h, w: feature.w, h: feature.h }) : null;
   // The feature takes its stretch: a wall prop under it is dropped.
   const visible = featureBox ? props.filter(entry => entry.x + entry.w <= featureBox.x || entry.x >= featureBox.x + featureBox.w || entry.y + entry.h < featureBox.y || entry.y > featureBox.y + featureBox.h) : props;
-  return Object.freeze({ decks: decks.length, props: Object.freeze(visible), bands: Object.freeze(bands), feature: featureBox, sector: asphodeleMissionSectorV188(campaignId), exclusions: spans });
+  return Object.freeze({ decks: decks.length, props: Object.freeze(visible), bands: Object.freeze(bands), feature: featureBox, sector: asphodeleMissionSectorV188(campaignId), exclusions: doorSpans });
 }
 
 export function withAsphodeleMissionDressingV188(Base) {

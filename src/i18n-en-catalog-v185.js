@@ -6642,6 +6642,10 @@ export const EN_CATALOG_V185 = Object.freeze({
 "Le dépôt est cédé : tenir la zone d’embarquement pendant que la compagnie prend le contrôle.": "The depot is ceded: hold the boarding zone while the company takes control.",
 "Tenir la zone d’embarquement de Port-Méridien jusqu’au dernier départ négocié avec la compagnie.": "Hold the Port-Méridien boarding zone until the last departure negotiated with the company.",
 "Acte V · Non viable": "Act V · Non-viable",
+// V188 Asphodèle follow-up (spec 007): the lower-decks night mission orig-asphodele-2 (merged via i18n-catalog-maintenance-v186 review).
+"ASPHODÈLE · INSPECTION DE NUIT": "ASPHODÈLE · NIGHT INSPECTION",
+"Ronde dans les conduits des ponts inférieurs pendant le cycle de nuit.": "A round through the lower-deck ducts during the night cycle.",
+"Seules les lampes de secours sont allumées. Parcourir les conduits des ponts inférieurs, derrière les barricades d’Echo-8, et relever ce qui s’y cache encore.": "Only the emergency lamps are lit. Walk the lower-deck ducts, behind Echo-8’s barricades, and log what still hides there.",
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 // V188 systems bug hunt (merged via i18n-catalog-maintenance-v186 review).
@@ -7189,4 +7193,6 @@ export const EN_PATTERNS_V185 = Object.freeze({
 "+{0} R&D si succès ({1})": "+{0} R&D on success ({1})",
 // V188 special-mode playthroughs.
 "COQUE {0}/{1} · ÉNERGIE {2} · CHALEUR {3} · CORROSION {4} · GEL {5} · RÉPARATIONS {6}": "HULL {0}/{1} · POWER {2} · HEAT {3} · CORROSION {4} · GEL {5} · REPAIRS {6}",
+// V188 Asphodèle follow-up: a « ★ » recommended mission keeps its catalogue name (briefing dropdown; reviewed via i18n-catalog-maintenance-v186 merge).
+"★ {0}": "★ {0}",
 });
