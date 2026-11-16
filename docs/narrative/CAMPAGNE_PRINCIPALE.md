@@ -749,7 +749,7 @@ Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-m
 - l'issue de l'Interlude ;
 - l'Acte IV terminé.
 
-Les pièces de CASSIUS (S2) et de Wren (annexe colonie) sont affichées « pas encore jouables ».
+Les pièces de CASSIUS (S2) et de Wren (annexe colonie) étaient affichées « pas encore jouables ». *Mise à jour V188 : CASSIUS est jouable depuis la spec 005 ; le témoignage de Wren s'obtient avec `colony-a-quai` depuis le lot colonie et équipage (§6.4) : les 7 pièces sont jouables.*
 
 **Validé (2026-11-05) :** l'identité du signataire du badge est établie seulement si le joueur réunit 6 pièces sur 7. Le texte de retour rappelle alors ce qui reste non prouvé. Avec moins de pièces, elle reste « non établie ».
 
@@ -970,6 +970,8 @@ C'est ce qui relie la reconstruction à l'intrigue : **chaque chantier terminé 
 
 ### 6.2 Missions
 
+> **État V188 (lot colonie et équipage, 2026-11-16) — [PARTIEL].** C1-C4, les 7 annexes et les 8 contrats locaux sont jouables (`src/colony-missions-v188.js`) ; C5 se joue comme la mission de l'Acte V `act5-port-walls` (§5.6, étape 7). Accès, récompenses, décisions et valeurs au §6.4. `colony-intro-*` inchangés.
+
 **Intro**
 
 | ID | Titre | Statut | Résumé | Ancrage Alien |
@@ -1044,6 +1046,36 @@ Après C2, Asha ouvre la **table de reconstruction** (salle commune de Port-Mér
 | **Rétablie** | 3 chantiers niveau 1 | Annexes de la colonie ; recrutement de Nadia Bensaïd. |
 | **Autonome** | 5 chantiers niveau 2 | La colonie remplit les critères de viabilité ; condition de la fin « Le relais parle ». Ressources régulières. |
 | **Libre** | 7 chantiers niveau 3 + fin « Le relais parle » | Épilogue spécial : premier convoi civil hors réseau QZ. |
+
+### 6.4 Missions de la colonie jouables — [PARTIEL] V188 (lot colonie et équipage, 2026-11-16)
+
+Décision par défaut Q25 A : C1 puis C5 d'abord ; C2-C4, les annexes et les contrats suivent le même gabarit. Code : `src/colony-missions-v188.js` (données et règles), `src/colony-reconstruction-v188.js` (validation locale, volontaires), `src/colony-crew-slots-v188.js` (emplacements d'art) ; sauvegarde additive `colonyMissionsV188` (missions déjà payées, scènes vues, décisions C4 et Grue, compteurs de contrats, volontaires). Lancement depuis l'ordre de mission du Commandement, comme toute opération : départ du hangar, insertion, mission sur un gabarit existant, extraction, retour au hangar du Tantalus. Les missions verrouillées n'apparaissent pas dans les listes et le lancement les refuse.
+
+**Ce qui est joué et comment on y accède [PROPOSÉ pour les verrous]**
+
+| Mission | Ouverture | Gabarit · objectif existant | Chantier | Récompense unique [PROPOSÉ] |
+| --- | --- | --- | --- | --- |
+| `colony-c1` Tenir le port | Acte I (QZ-17) | `colony-multiroute` · `defend the colony` | Murs et sas | construit et valide le niveau suivant (sas soudés) ; infestation −4 ; **remplace la validation provisoire** |
+| `colony-c2` L'air du port | Acte II + C1 | `ship-interior-vertical` · `restore atmospheric processing` | Processeur | niveau suivant ; stabilité +2 |
+| `colony-c3` Le convoi des rescapés | convoi du M577 (Acte III) + C2 | `colony-multiroute` · `rescue survivors` | Infirmerie | niveau suivant ; quarantaine −3 |
+| `colony-c4` Le culte du port | Acte IV + C3 | `colony-multiroute` · `navigate the vent network` | Habitat | niveau suivant ; puis décision Marshals / exil / médiation |
+| C5 La nuit des murs = `act5-port-walls` | ligne *Transmettre* ou *Tenir* de l'Acte V | mission de l'Acte V, id conservé | Murs et sas | valide le niveau payé en attente ; stabilité +5 |
+| `colony-a-quai` Ce que le quai a vu | après C1 | `escort a colony convoy` | Quais | **témoignage de Wren, 7e pièce du dossier QZ17** |
+| `colony-a-ferro`, `-abri`, `-seegson`, `-balise`, `-crucible` | palier *Rétablie* | objectifs du §6.2 | Infirmerie, Habitat, Énergie, Contact, Quais | recherche +4 ; stabilité +4 ; alliage +30 ; 2 volontaires ; décision de Grue |
+| `colony-a-converti` Mon frère est parti | entre C3 et C4 | `navigate the vent network` | Habitat | 1 volontaire ; ouvre la **médiation** de C4 |
+| 8 contrats `colony-l-*` (rejouables) | défensifs (réservoir, ronde des murs, ouverture) en *Survie*, tous en *Rétablie* | objectifs du tableau « Locales » | voir ci-dessous | valident le niveau en attente de leur chantier, à chaque réussite |
+
+Contrats et chantiers [PROPOSÉ] : Purge du réservoir → Énergie (nid contre le réacteur, infestation −3) ; Escorte des moissonneurs → Habitat (+1 volontaire) ; Ronde des murs → Murs et sas ; Filtres du processeur → Processeur ; Récupération en périphérie → Communications (boîtes noires des relais, +120 crédits, +12 alliage) ; Recherche de disparus → Infirmerie (+1 volontaire) ; Chargeur bloqué → Quais ; Sceller une ouverture → Murs et sas (infestation −3). Le « chantier Eau » du tableau « Locales » n'existe pas au §6.3 : la purge du réservoir est rattachée à l'Énergie.
+
+**Règles appliquées.** Après C1, une opération ordinaire sur Cocyte ne valide plus de niveau ; seule une mission locale le fait (§6.3) ; une mission ratée endommage toujours un chantier. Chaque mission principale ou annexe ne paie qu'une fois (un rejouage ne change rien) ; les contrats se répètent. Les volontaires (annexes, contrats, quête d'Asha) relèvent la limite de chantiers actifs mais ne comptent pas dans l'appel de CIN-61. Au retour, une scène par mission s'ouvre une fois à la table tactique ; la décision de C4 et celle de Grue ne se referment pas avant d'être prises et ne se reprennent pas. La table de reconstruction liste les missions, leur chantier, les contrats ×n, les volontaires et le bonus de C5.
+
+**C5 [PROPOSÉ].** Le niveau validé des Murs et sas règle la défense au lancement de `act5-port-walls` (une fois par lancement, pas à la reprise) : sas soudés +40 munitions ; mur nord blindage 60 ; tourelles sentinelles +80 munitions.
+
+**Décisions [PROPOSÉ].** C4 : Marshals (stabilité +4, quarantaine +2), exil (stabilité +2, infestation +3), médiation d'Adèle si le frère a été ramené (stabilité +6, 2 volontaires). Grue : accepter (alliage +60, stabilité −2) ou refuser (stabilité +2).
+
+**Fidélité.** Aucune fidélité « 1:1 ». Repères documentés : portes soudées et tourelles sentinelles UA 571-C (*Aliens*, 1986, et son édition spéciale, 1991) ; processeur atmosphérique de Hadley's Hope (*Aliens*, 1986) ; embryon révélé par un scanner médical (*Alien 3*, 1992) ; Marshals coloniaux et matériel Seegson à bas coût, synthétiques bloqués sur une consigne (*Alien: Isolation*, 2014) ; chargeur P-5000 et M577 (*Aliens*, 1986). Adaptations du projet : charte et chantiers, carnets de Wren et ses deux bordereaux, culte des « Enfants de l'Hôte Parfait » (§1.5, art original à refaire, Q47), Grue. Textes des scènes et décisions [PROPOSÉ]. À définir : niveaux dédiés (les missions utilisent les gabarits génériques), art des 7 emplacements colonie (`colony-crew-slots-v188.js`, placeholders Canvas).
+
+**Reste à faire.** Niveaux dédiés de C1-C4 (soudure des sas, contrôle biologique sans panique, enquête de nuit) ; console du quai (Q26) ; quartiers V2 (Q24) ; palier *Libre* ; recrutement de Nadia Bensaïd à *Rétablie* (§8.3) ; vie de la colonie entre deux missions (Q29).
 
 ---
 
@@ -1178,6 +1210,8 @@ Décisions par défaut appliquées : Q22 (A, modules construits dans le moteur d
 
 ## 8. Quêtes du Tantalus — [PROPOSÉ]
 
+> **État V188 (lot colonie et équipage, 2026-11-16) — [PARTIEL].** Les 16 quêtes de l'équipage du §8.1 sont jouables (§8.4 et §8.5). La vie à bord (§8.2) et les recrues (§8.3) restent à faire.
+
 Elles utilisent le système de rapport existant (`npc-dialogue-v62.js`) : confiance `fragile → prudent → operationnel → solide`, choix de rapport `request-candid-assessment`, `acknowledge-welfare`, `review-mission`, `confirm-alert-role`, `request-infestation-evidence`, renouvellement après 8 heures de jeu. Aucune récompense avant la preuve de réalisation.
 
 ### 8.1 Quêtes de l'équipage
@@ -1232,7 +1266,32 @@ Décision par défaut Q9 : DAVID-8R, Harlow, Rook et Vega. Code : `src/crew-ques
 | `ship-harlow` Le sceau | Acte I et preuve de la piste (sceau ou berceau) | Joint ouvert de l'intérieur ; tampon « Asphodèle · transit vérifié » | Loyauté +5, recherche +6 |
 | `ship-david` Mémoire récupérée | Acte I | Trois composants, un par opération réussie sur Cocyte | Loyauté +5 ; note « poste de relais QZ-9 » jointe au dossier, hors décompte des 7 pièces |
 
-Fidélité : la quête de Vega reprend un thème documenté, la consigne de la compagnie qui passe avant l'équipage (« Special Order 937 », *Alien*, 1979, scène de MU/TH/UR) ; les deux ordres sont des textes du projet. Reste : les 12 autres quêtes, la vie à bord (§8.2) et les recrues (§8.3).
+Fidélité : la quête de Vega reprend un thème documenté, la consigne de la compagnie qui passe avant l'équipage (« Special Order 937 », *Alien*, 1979, scène de MU/TH/UR) ; les deux ordres sont des textes du projet. Reste : la vie à bord (§8.2) et les recrues (§8.3) ; les 12 autres quêtes sont au §8.5.
+
+### 8.5 Les douze autres quêtes — [PARTIEL] V188 (lot colonie et équipage, 2026-11-16)
+
+Code : `src/crew-quests-tantalus-v188.js` (données), lues par `src/crew-quests-v188.js` (mêmes règles et même sauvegarde `crewQuestsV188`, champ additif `mark` pour une preuve). Proposées dans la conversation du hub ; listées à la table tactique (16 quêtes). Conseillers de l'Acte V d'abord (Sanaa, Cal, Orlov, Leila : leur avantage au conseil demande une loyauté ≥ 75). Une mauvaise lecture ne coûte rien ; rien n'est payé avant la preuve ; chaque quête paie une fois. Preuves, lectures, répliques et valeurs [PROPOSÉ].
+
+| Quête | Ouverture | Preuve | Effet [PROPOSÉ] |
+| --- | --- | --- | --- |
+| `ship-doyle` Les sentinelles | après C1 | 2 tourelles, une par opération réussie sur Cocyte | loyauté +12 ; Murs et sas +1 niveau ; « Portable Sentry » à l'inventaire |
+| `ship-mercer` Remettre le M577 en état | convoi du M577 | 3 pièces, une par opération réussie sur Cocyte | loyauté +12 (blindage de l'Acte V à 75) |
+| `ship-orlov` Fenêtre de tir | Acte IV | enregistreurs du Kappa : créneau réservé au fret, même priorité QZ17 que QZ-18 | loyauté +12 (fenêtre de l'Acte V à 75) |
+| `ship-sorensen` La route des fermes | après C2 | relevés : baliser le sentier sous le pont, passer par la rivière | loyauté +12 (route de l'Acte V à 75) |
+| `ship-velez` Ceux d'Echo-8 | prologue | **nouvelle qualification M41A au pas de tir** après acceptation (reçu du pas de tir V81), puis les marques de Kessler | loyauté +8 ; dotation d'assaut : « Ammo Satchel » à l'inventaire |
+| `ship-echo-a` Deux relèves | S3 | protocole 4.2 contre le choix de Kessler (sas 3, survivants) | loyauté +8 ; **réplique d'épilogue** dans la conversation de l'épilogue de l'Acte V |
+| `ship-mbaye` Les noms de Port-Méridien | Acte II | appels de la ferme 12 retenus à QZ-18, position au hameau de la balise | loyauté +6 ; 2 volontaires pour la colonie |
+| `ship-okafor` Le registre des pertes | convoi du M577 | 3 plaques, une par opération réussie sur Cocyte | loyauté +6 ; Infirmerie +1 niveau |
+| `ship-bishop` Directive de préservation | Interlude résolu | question posée ; la réponse dépend de la confiance (≥ 55 : franche, sinon réservée) | loyauté +10 |
+| `ship-reyes` La charge de trop | convoi du M577 | registre : civils coupés à 13:58, ordre à 14:01, charge à 14:02 | loyauté +8 ; grenades « M40 HEDP » à l'inventaire (charges de brèche adaptées) |
+| `ship-kwan` Le réacteur ne ment pas | prologue | **service du réacteur** (`service:power`) utilisé après acceptation, puis les relevés du pont 2 | loyauté +6 ; recherche +4 ; indice de l'Interlude noté à la table |
+| `ship-park` Après les conduits | Interlude résolu | une mission réussie dans un réseau de conduits | loyauté +6 ; stress de l'équipage −8 ; oxygène du bord +10 |
+
+**Adaptations.** « Battre ses temps au pas de tir » devient : réussir une nouvelle qualification M41A après avoir accepté (le pas de tir ne garde pas de chronomètre par escouade). Les « charges de brèche » de Reyes sont des grenades M40 HEDP du catalogue (aucune charge de brèche n'y existe). Les composants de Mercer, Doyle et Okafor viennent d'opérations réussies sur Cocyte, comme ceux de DAVID-8R. La loyauté gagnée ne suffit pas seule pour Sanaa (56 + 12) : les choix de rapport du §8 complètent.
+
+**Fidélité.** Aucune fidélité « 1:1 ». Repères documentés : tourelles sentinelles UA 571-C (*Aliens*, édition spéciale, 1991) ; M577 et détecteur de mouvement (*Aliens*, 1986) ; lance-grenades U1 du M41A (*Aliens*, 1986 ; désignation M40 HEDP du *Colonial Marines Technical Manual*, 1995) ; directive d'un synthétique de la compagnie, thème de « Special Order 937 » (*Alien*, 1979). Adaptations du projet : Echo-8, Kessler, transport Kappa, ferme 12, registres, relevés du réacteur. À définir : art des 11 emplacements de quête (`colony-crew-slots-v188.js`, placeholders Canvas), poses de dialogue.
+
+**Reste à faire.** Vie à bord (§8.2, dont *Écoute de nuit* et *Le casier vide* comme fil de quête), recrues (§8.3, dont Nadia Bensaïd à *Rétablie*), effets sur la course APC dédiée de l'Acte V.
 
 ---
 
@@ -1360,7 +1419,7 @@ Chaque campagne annexe :
 | Règle | Effet en jeu |
 | --- | --- |
 | **Le voyage se fait en hypersommeil.** Un trajet entre systèmes prend des semaines. | Chaque départ fait passer du temps stratégique. Les colonies laissées derrière évoluent (chantiers, infestation). |
-| **Les messages suivent avec retard.** | Un appel reçu date déjà de plusieurs jours : la situation à l'arrivée est pire que le message. |
+| **Les messages suivent avec retard.** | Un appel reçu date déjà de plusieurs jours : la situation à l'arrivée est pire que le message. **[PARTIEL] V188, §13.7.** |
 | **Le carburant et les réserves sont comptés.** | Ressource `fuel` existante : choisir l'ordre des campagnes a un coût. |
 | **L'équipage vieillit avec les missions.** | Stress, fatigue et blessures (`CREW`, `content-core-v50.js`) persistent d'une campagne à l'autre. |
 | **Asphodèle et Port-Méridien restent des bases.** | Si la station est reprise, elle relaie les appels et ravitaille ; Port-Méridien fournit des volontaires selon son palier. |
@@ -1404,7 +1463,21 @@ Les lieux Nacre-7, Echo Basin, Sable Meridian, Pallas Rift, MIRE-9, Palimpste et
 
 ### 13.6 Temps de voyage — [PARTIEL] V188 (2026-11-15)
 
-Décision par défaut Q21 : coût fixe par saut. Le carburant garde la règle existante (`2 + ⌈danger/3⌉`, `galaxy-jump-v115.js`) ; chaque saut ajoute **14 jours [PROPOSÉ]** d'hypersommeil, affichés avant le départ (« … unités de carburant · 14 jours en hypersommeil ») et ajoutés à l'arrivée (`src/galaxy-travel-v188.js`). La simulation existante fait évoluer les mondes pendant ces jours. Reste : messages reçus en retard, vieillissement de l'équipage pendant le voyage.
+Décision par défaut Q21 : coût fixe par saut. Le carburant garde la règle existante (`2 + ⌈danger/3⌉`, `galaxy-jump-v115.js`) ; chaque saut ajoute **14 jours [PROPOSÉ]** d'hypersommeil, affichés avant le départ (« … unités de carburant · 14 jours en hypersommeil ») et ajoutés à l'arrivée (`src/galaxy-travel-v188.js`). La simulation existante fait évoluer les mondes pendant ces jours. Messages reçus en retard : §13.7. Reste : vieillissement de l'équipage pendant le voyage.
+
+### 13.7 Messages en retard — [PARTIEL] V188 (lot colonie et équipage, 2026-11-16)
+
+Code : `src/travel-messages-v188.js`, sauvegarde additive `travelMessagesV188` (30 messages au plus, reçu du saut). À l'arrivée d'un saut, dans la même transaction que les 14 jours d'hypersommeil, le Tantalus reçoit les messages qui l'ont suivi, une seule fois par saut (un rechargement ne les redonne pas). Ils s'affichent en tête du journal des alertes du Commandement (« Signaux prioritaires »), datés, en français ou en anglais selon la langue choisie, et un message de bord annonce leur nombre.
+
+| Message | Quand | Retard [PROPOSÉ] |
+| --- | --- | --- |
+| Port-Méridien · Adèle Sarrazin (palier, infestation autour du port) | pendant le saut, dès l'Acte I, si le Tantalus quitte Cocyte | 6 j par le réseau QZ ; 3 j avec le relais indépendant (Communications niveau 2) ; 2 j par la salle des relais d'Asphodèle |
+| Station Asphodèle · salle des relais (appels du secteur) | pendant le saut, après S4 | 2 j |
+| Weyland-Yutani · consigne (« préserver le matériel sous scellés ») | pendant le saut | 4 j (comme au §4, CIN-02) |
+| Monde laissé derrière (bulletin, puis valeur d'aujourd'hui) | à l'arrivée | envoyé 3 j après le départ |
+| Appel de la destination (valeur du message, puis valeur à l'arrivée) | à l'arrivée | 9 j |
+
+Les valeurs citées sont celles des mondes avant les 14 jours de simulation ; la table montre à côté la valeur du jour, souvent pire (« la situation à l'arrivée est pire que le message », §13.2). Fidélité : règle d'univers du projet (§1.3, §13.2) ; repère documenté, le silence de Hadley's Hope connu après coup et la traversée en hypersommeil du Sulaco (*Aliens*, 1986). Textes [PROPOSÉ]. Reste : vieillissement de l'équipage pendant le voyage, appels qui ouvrent les campagnes annexes (§13.3).
 
 ---
 
