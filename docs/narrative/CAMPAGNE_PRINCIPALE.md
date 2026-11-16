@@ -4542,6 +4542,65 @@ Code : `src/insertion-safe-zone-v188.js` (gardes `insertionSafeZoneAppliesV188` 
 
 Les numéros de scène et les dialogues exacts ne sont pas cités ; les films restent les sources de référence, les documents dérivés sont signalés comme tels.
 
+**Échelle des créatures (décision du propriétaire, 2026-11-16) — [PROPOSÉ].** Les tailles s'alignent sur les tailles documentées de la franchise, à l'échelle du projet : **1 m ≈ 51 px**, le marine mesure **92 px (1,8 m)**. Un guerrier (≈ 2,3 m) est dessiné à **118 px**, la reine (≈ 4,8 m) à **245 px**. Les autres castes gardent la proportion au guerrier déjà déclarée par `ENEMY_DISPLAY_STATURES_V110` (facteur 118 / 156) ; une créature sans stature déclarée garde sa hauteur actuelle multipliée par ce même facteur. Les humains et synthétiques ne changent pas en mission (contrat visuel humain V133) ; au catalogue ils suivent la référence du marine (126 → 92). Ce sont des adaptations : aucune ne prétend à une fidélité 1:1.
+
+Code : `src/creature-scale-v188.js` (`CREATURE_SCALE_V188`, `ENEMY_DISPLAY_STATURES_V188`, `withCreatureScaleV188`), composé dans `src/game-production-runtime.js` autour des comportements de caste ; catalogue : `src/catalog-scale-v72.js`. Les images ne sont pas modifiées : la mission les met à l'échelle au dessin, le catalogue par son unité de monde. Test : `scripts/verify-creature-scale-v188.mjs`.
+
+- **Dessin en mission** : une échelle mesurée par visuel, autour du point des pieds et du centre ; la pose de repos atteint la taille visée, une pose d'alerte, d'attaque ou de blessure ne la dépasse jamais. Un profil mesuré pendant le chargement d'un atlas est remesuré jusqu'à deux mesures concordantes.
+- **Boîte de collision** : hauteur = hauteur opaque dessinée ; largeur = moitié centrale de la largeur opaque dessinée (queue, crête et membres tendus exclus, comme l'ancienne boîte du guerrier), 90 % pour un œuf, au moins 0,3 × la hauteur pour une silhouette fine (sans dépasser l'ancienne largeur). Les pieds et le centre horizontal sont conservés ; la boîte de cellule de sprite (V52) est remplacée par cette boîte. Deux règles existantes gardent leur verdict : « plus de 120 px de large = grande caste » des cales en profondeur, et « grand acteur ≥ 300 × 200 » du placement V72 (la reine garde 300 px de large). Exception mesurée : les deux reines juvéniles, sans stature déclarée, passent à ≈ 151–153 px et ne sont plus des « grands acteurs » ; elles restent inaptes aux cales (règle par identifiant).
+- **Compensation de visée [PROPOSÉ]** : avec l'aide à la visée active, un tir qui aurait touché l'ancienne silhouette (mêmes pieds, même centre) mais passe à côté de la nouvelle est infléchi vers le haut du corps (30 % de la hauteur). Les dégâts ne changent pas ; aide désactivée, rien ne change.
+- **Sauvegardes** : identifiants et format inchangés. Une reprise écrite avant V188 (coin supérieur de l'ancien corps) est reposée sur son sol.
+
+| Profil (variantes du même nom) | Caste | Avant : dessin mission px (variantes) | Avant : boîte l×h | Après : dessin px [PROPOSÉ] (variantes) | Après : boîte l×h | Fidélité : apparence documentée / adaptation du projet / à définir |
+| --- | --- | --- | --- | --- | --- | --- |
+| `enemy-001-ovomorph` Ovomorph | egg | 55 (55–96) | 39×56 | 42 (42–72) | 27×42 | Documentée : œuf coriace à lobes, *Alien* (1979), *Aliens* (1986). Adaptation : 0,82 m (56 × 118/156). |
+| `enemy-002-facehugger` Facehugger | parasite | 15 (15–20) | 79×28 | 15 (15) | 45×15 | Documentée : parasite à huit pattes et longue queue, *Alien* (1979). Adaptation : 0,3 m de haut au repos. Boîte corrigée : 28 px de haut pour un dessin de 15. |
+| `enemy-003-chestburster` Chestburster | juvenile | 17 (17–23) | 35×20 | 17 (17) | 42×17 | Documentée : larve sortant de la poitrine de Kane, *Alien* (1979). Adaptation : 0,33 m. Boîte corrigée : 20 px pour un dessin de 17. |
+| `enemy-004-drone-big-chap` Drone / Big Chap | stalker | 144 (88–144) | 54×146 | 118 (67–118) | 62×118 | Documentée : silhouette du « Big Chap », *Alien* (1979). Adaptation : 2,3 m, comme le guerrier. |
+| `enemy-005-warrior` Warrior | assault | 135 (55–135) | 62×136 | 118 (41–118) | 56×118 | Documentée : guerrier à dôme lisse ou strié, *Aliens* (1986). Adaptation : **2,3 m = 118 px** (décision du propriétaire). Les variantes juvéniles (41 px) n'ont pas de stature déclarée. |
+| `enemy-006-runner` Runner | runner | 80 (32–82) | 78×82 | 62 (24–62) | 55×62 | Documentée : quadrupède né d'un animal, *Alien³* (1992). Adaptation : 1,2 m au garrot. |
+| `enemy-007-praetorian` Praetorian | guardian | 94 (94) | 52×74 | 159 (71–159) | 101×159 | Documentée : garde royale à grande crête, jeux *Aliens versus Predator*. Adaptation : 3,1 m ; elle était dessinée plus petite que le guerrier en mission. |
+| `enemy-008-queen` Queen | royal | 202 (202–340) | 336×268 | **245** (153–245) | 300×245 | Documentée : reine à couronne et sac ovigère, *Aliens* (1986). Adaptation : **4,8 m = 245 px** (décision du propriétaire), sans sac ovigère. Variantes juvéniles à 153 px. |
+| `enemy-009-crusher` Crusher | siege | 124 (68–152) | 116×100 | 115 (51–115) | 103×115 | Documentée : caste à bouclier frontal, jeux *Aliens: Colonial Marines* (2013) et *Aliens: Fireteam Elite* (2021). Adaptation : 2,25 m. |
+| `enemy-010-spitter` Spitter | ranged | 138 (59–138) | 60×132 | 109 (45–109) | 53×109 | Documentée : cracheur d'acide, *Aliens: Colonial Marines* (2013). Adaptation : 2,1 m. |
+| `enemy-011-lurker` Lurker | ambush | 32 (32–92) | 52×74 | 70 (24–70) | 116×70 | Documentée : chasseur bas, *Aliens: Colonial Marines* (2013). Adaptation : 1,4 m, silhouette longue (boîte large de 116 px). |
+| `enemy-012-carrier` Carrier | carrier | 88 (88) | 52×74 | 133 (66–133) | 108×133 | Documentée : porteur de facehuggers, *Aliens versus Predator: Extinction* (2003). Adaptation : 2,6 m. |
+| `enemy-013-ravager` Ravager | assault | 99 (99–158) | 52×74 | 147 (75–147) | 92×147 | Documentée : grande caste à faux, *Aliens versus Predator: Extinction* (2003). Adaptation : 2,9 m. |
+| `enemy-014-boiler` Boiler | explosive | 70 (70–110) | 52×74 | 100 (53–100) | 70×100 | Documentée : caste gonflée d'acide, *Aliens: Colonial Marines* (2013). Adaptation : 2 m. |
+| `enemy-015-prowler` Prowler | ambush | 116 (43–116) | 96×88 | 67 (32–67) | 38×67 | Documentée : rôdeur, *Aliens: Fireteam Elite* (2021). Adaptation : 1,3 m. |
+| `enemy-016-burster` Burster | explosive | 124 (40–124) | 88×88 | 67 (30–67) | 46×67 | Documentée : caste explosive, *Aliens: Fireteam Elite* (2021). Adaptation : 1,3 m. |
+| `enemy-017-monica-line` Monica Line | stalker | 88 (88–126) | 52×74 | 118 (66–118) | 78×118 | À définir : lignée du projet, taille du guerrier par défaut. |
+| `enemy-018-specimen-six-line` Specimen Six Line | adaptive | 64 (64–122) | 52×74 | 118 (49–118) | 83×118 | À définir : lignée du projet, taille du guerrier par défaut. |
+| `enemy-019-red-xenomorph` Red Xenomorph | rival-hive | 77 (77–104) | 52×74 | 118 (59–118) | 101×118 | À définir : ruche rivale rouge, référence à préciser ; taille du guerrier. |
+| `enemy-020-k-series-yellow-xenomorph` K-Series Yellow | rival-hive | 143 (77–156) | 62×136 | 118 (59–118) | 56×118 | À définir : lignée du projet ; était dessinée à 156 px (≈ 3 m), ramenée au guerrier. |
+| `enemy-021-neuro-xeno-drone` Neuro-Xeno Drone | controlled | 46 (46) | 52×74 | 34 (34) | 46×34 | Adaptation du projet, sans stature déclarée : × 118/156. |
+| `enemy-022-xenoborg` Xenoborg | cybernetic | 100 (100) | 52×74 | 126 (76–126) | 53×126 | Documentée : xénomorphe cybernétique, *Aliens versus Predator* (1999). Adaptation : 2,5 m. |
+| `enemy-023-atarax-ripper` ATARAX Ripper | armored | 60 (60–112) | 52×74 | 46 (46–85) | 37×46 | Adaptation du projet, sans stature déclarée. |
+| `enemy-024-ripper-queen` Ripper Queen | royal | 199 (199–340) | 336×268 | **245** (75–245) | 300×245 | Adaptation du projet : classe des reines, 4,8 m. Variante juvénile à 75 px. |
+| `enemy-025`…`enemy-034` concepts ACM et Crucible | concept-acm / concept-crucible | 29–101 (29–142) | 52×74 ou 82×112 | 22–76 (22–107) | 32–52 × 22–76 | Adaptation du projet (concepts originaux), sans stature déclarée : × 118/156. À définir : statures propres. |
+| `enemy-035`…`enemy-040` pathogènes et ingénieurs (Trilobite, Deacon, Neomorph, Protomorph, Abomination, Mimic) | apex / stalker / assault / brute / adaptive | 36–95 (36–136) | 42×88 | 27–72 (27–103) | 21–45 × 27–72 | Documentée : Trilobite et Deacon, *Prometheus* (2012) ; Neomorph et Protomorph, *Alien: Covenant* (2017). Adaptation : hauteur actuelle × 118/156. À définir : statures propres (le Neomorph à 53 px reste bas). |
+| `enemy-041`…`enemy-048` humains et synthétiques | security / assault / … | 96–112 | 42×88 | inchangé | inchangé | Hors périmètre en mission (contrat V133) ; catalogue × 92/126. |
+| `enemy-049`…`enemy-052` faune (sanglier hôte, Korari, Ceto, vermine) | host / predator / aquatic / swarm | 21–75 (19–384) | 42×88 à 156×100 | 16–57 (14–290) | 44–121 × 16–57 | Adaptation du projet, sans stature déclarée. À définir : certaines variantes (Korari 218 px, Ceto 290 px) restent hors d'échelle. |
+| `enemy-569-newborn`, `enemy-570-offspring` | apex | 160 / 165 | 58×118 / 52×124 | 121 / 125 | 36×121 / 38×125 | Documentée : le Newborn, *Alien, la résurrection* (1997). Adaptation : hauteur actuelle × 118/156. |
+| `enemy-571-predalien` Predalien | royal | 142 | 96×126 | 107 | 32×107 | Documentée : *Aliens vs. Predator: Requiem* (2007), jeu *Aliens versus Predator 2* (2001). Adaptation : hauteur actuelle × 118/156 ; la fiche de caste du catalogue (188 → 142) est plus haute. À définir : une stature unique. |
+
+Les castes du catalogue sans profil de mission suivent la même règle (`ENEMY_DISPLAY_STATURES_V188`, mêmes clés que V110) : Grid 118, Predalien 142, Abomination 159, Royal Guard 174, Pathogen Queen 245, reine titan 245, etc. La reine juvénile d'*Alien³* (28 px) n'est pas une reine.
+
+Mesures (Node, `scripts/verify-creature-scale-v188.mjs`, scène scriptée : tir horizontal debout, accroupi et à 12 hauteurs de saut de 0 à 140 px, 14 tirs par distance, cible immobile) :
+
+| Taux de touche | Aide désactivée, avant → après | Aide standard (0,62), avant → après (avec compensation) |
+| --- | --- | --- |
+| Guerrier à 200 px | 64 % → 50 % | 64 % → 64 % |
+| Guerrier à 400 px | 64 % → 50 % | 71 % → 64 % |
+| Guerrier à 600 px | 64 % → 50 % | 93 % → 93 % |
+| Reine à 200 / 400 / 600 px | 100 % → 100 % | 100 % → 100 % |
+
+Debout ou accroupi, chaque tir touche avant comme après ; les tirs perdus partent d'un saut, au-dessus de la tête plus basse du guerrier. Sans la compensation, l'aide standard donnait 50 % à 200 px.
+
+Dépendances vérifiées : cloisons de mission de 132 px (guerrier, drone, runner, spitter passent, la reine non) ; conduits de 84 × 64 px (facehugger, chestburster et runner y tiennent, un guerrier debout non) ; entrées arrière de 116 px (mêmes entrées admises qu'avant ; le guerrier de 118 px dépasse leur cadre de 2 px, dans la tolérance de 4 px) ; règle des grandes castes des cales et placement des grands acteurs (verdict inchangé sauf les deux reines juvéniles) ; portée de mêlée (constantes inchangées, mesurée depuis le bord gauche : décalage ≤ (ancienne largeur − nouvelle) / 2, 3 px pour le guerrier, 18 px pour la reine) ; flaque d'acide (`max(48, 0,8 × largeur)` : 50 → 48 px pour le guerrier, 269 → 240 px pour la reine) ; détecteur de mouvement (point des pieds au centre : inchangé) ; arènes de boss (une reine plus petite tient dans les mêmes placements) ; silhouettes des cinématiques (`story-cinematics-v188.js` : seule l'ombre au plafond de la caméra de casque, vue subjective sans référence d'échelle, inchangée ; `insertion-cinematic-v188.js` : aucune créature).
+
+Reste à définir : statures propres des créatures sans stature déclarée (concepts, pathogènes, faune, juvéniles) ; variantes faune hors d'échelle ; quatre profils sans hauteur dans la comparaison du catalogue (Red Xenomorph, Xenoborg, Deacon Line, Combat Synthetic : 0, déjà le cas avant V188) ; validation à l'œil par le propriétaire ; test de la tranche par des joueurs.
+
 ### 56.5 Suivi du lot V188
 
 Réalisation, mesures, vérifications et limites : [rapport V188](../development/PRIORITIES_P0_P1_V188.md). Les statuts « Fait » ci-dessus désignent un raccordement au jeu vérifié par des tests Node sur le moteur réel et des contrôles Chromium. Ils ne remplacent pas le test de la tranche par 3 à 5 joueurs (§53.11), qui reste à faire.
