@@ -248,8 +248,27 @@ export function withCreatureScaleV188(Base) {
       enemy.spriteHitbox = null;
       enemy.creatureScaleV188 = Object.freeze({ schema: 188, exempt: false, key: profile.key, kind: profile.target.kind,
         referenceId: profile.target.referenceId, target: profile.height, k: profile.k, legacyW: legacy.w, legacyH: legacy.h, w, h });
+      // The horde director (V132) validates its actors against one body per profile: keep it,
+      // and its template, on the rescaled body.
+      const id = enemy.profileId;
+      if (id && this.hordeBodiesV132?.[id]) {
+        this.hordeBodiesV132[id] = { w, h };
+        const template = this.hordeTemplatesV132?.[id];
+        if (template && template !== enemy && template.creatureScaleV188?.key !== profile.key) this.applyCreatureBodyV188(template, profile, { w: finite(template.w), h: finite(template.h) });
+      }
       return enemy.creatureScaleV188;
     }
+    /** A visual already measured gets its body at creation (no frame on the legacy body). */
+    createEnemy(...args) {
+      const enemy = super.createEnemy(...args);
+      if (!enemy || !this.creatureScaleEnabledV188()) return enemy;
+      const profile = this.creatureScaleCacheV188?.get(visualKey(enemy));
+      if (profile?.exempt) enemy.creatureScaleV188 = Object.freeze({ schema: 188, exempt: true, legacyW: finite(enemy.w), legacyH: finite(enemy.h), k: 1 });
+      else if (profile) this.applyCreatureBodyV188(enemy, profile, { w: finite(enemy.w), h: finite(enemy.h) });
+      return enemy;
+    }
+    /** Pause and atlas loading freeze the world: no body changes then. */
+    creatureScaleFrozenV188() { return Boolean(this.paused || this.enemyAtlasLoadingPausedV65 || this.userCasteLoadingV88); }
     /** Applies the V188 body once per enemy, keeping its feet and horizontal centre. */
     normalizeCreatureV188(enemy) {
       if (!enemy || enemy.creatureScaleV188 || !this.creatureScaleEnabledV188()) return enemy?.creatureScaleV188 || null;
@@ -305,8 +324,7 @@ export function withCreatureScaleV188(Base) {
       return result;
     }
     update(delta) {
-      this.normalizeCreaturesV188();
-      this.revalidateCreatureProfilesV188();
+      if (!this.creatureScaleFrozenV188()) { this.normalizeCreaturesV188(); this.revalidateCreatureProfilesV188(); }
       return super.update(delta);
     }
     refreshSpriteCollisionProfiles() {

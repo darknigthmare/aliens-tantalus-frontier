@@ -32,12 +32,11 @@ async function scaled(engine, source, { floor = 868, x = 900 } = {}) {
     legacy = engine.measureCreatureDrawV188(enemy, 'idle', 1);
     if (!legacy) { drawn(engine, enemy); if (attempt % 4 === 3) await prepare(engine); else await sleep(5); }
   }
-  const legacyBody = { w: enemy.w, h: enemy.h };
   for (let attempt = 0; attempt < 40 && !enemy.creatureScaleV188; attempt++) { enemy.creatureScaleRetryV188 = 0; engine.normalizeCreatureV188(enemy); if (!enemy.creatureScaleV188) await sleep(5); }
   assert.ok(legacy, `${source.id}: a measured legacy drawing`); assert.ok(enemy.creatureScaleV188, `${source.id}: scaled`);
   // Let every atlas finish loading, then confirm the profile (a first draw can use a fallback image).
   for (let round = 0; round < 3; round++) { await prepare(engine); engine.settleCreatureScaleV188(1); }
-  const s = enemy.creatureScaleV188;
+  const s = enemy.creatureScaleV188, legacyBody = { w: s.legacyW, h: s.legacyH };
   if (!s.exempt) legacy = engine.measureCreatureDrawV188({ ...enemy, w: s.legacyW, h: s.legacyH, x: enemy.x + enemy.w / 2 - s.legacyW / 2, y: enemy.y + enemy.h - s.legacyH }, 'idle', 1);
   return { enemy, legacy, legacyBody, target: creatureTargetV188(enemy) };
 }
@@ -230,9 +229,9 @@ test('dependants follow the body: acid pool width, tracker point (feet centre) a
   near(enemy.y + enemy.h, 868, 'feet kept', .5);
 });
 
-test('composition: the creature scale wraps the caste behaviours (ceiling flip) under the QZ-17 dressing and depth holds', () => {
+test('composition: the creature scale sits under the combat feel, below the caste behaviours, QZ-17 dressing and depth holds', () => {
   const runtime = readFileSync(new URL('../src/game-production-runtime.js', import.meta.url), 'utf8');
-  assert.match(runtime, /withQz17LevelDressingV188\(withCreatureScaleV188\(withCasteBehaviorsV188\(withInsertionSafeZoneV188\(/);
+  assert.match(runtime, /withCombatFeelV188\(withCreatureScaleV188\(withFootstepCuesV188\(/);
   const source = readFileSync(new URL('../src/creature-scale-v188.js', import.meta.url), 'utf8');
   assert.doesNotMatch(source, /1:1 (fidelity|fidèle)|canonVerified: true/);
 });
