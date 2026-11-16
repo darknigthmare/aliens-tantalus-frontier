@@ -57,15 +57,33 @@ async function saveObservedFrame(handle, name) {
   return frame.observation;
 }
 async function ready() {
+  const deadline = performance.now() + 45000;
+  const remaining = () => {
+    const milliseconds = Math.floor(deadline - performance.now());
+    if (milliseconds <= 0) throw new Error('Cocon runtime readiness exceeded its launch budget.');
+    return milliseconds;
+  };
+  const skipSelector = '.insertion-cinematic-v188[data-direction="insertion"] .insertion-skip-v188';
+  const skip = page.locator(skipSelector);
   for (let i = 0; i < 30; i++) {
-    if (await page.evaluate(() => !!globalThis.__ATF_GAME__?.running)) break;
+    if (await page.evaluate(() => !!globalThis.__ATF_GAME__?.running) || await skip.isVisible()) break;
     const advance = page.locator('[data-insertion-action="advance"]');
-    if (await advance.isVisible()) await advance.click();
-    await page.waitForTimeout(200);
+    if (await advance.isVisible()) await advance.click({ timeout: remaining() });
+    await page.waitForTimeout(Math.min(200, remaining()));
   }
-  await page.waitForFunction(() => { const e = globalThis.__ATF_GAME__; return e?.running && !e.paused
-    && !e.enemyAtlasLoadingPausedV65 && !e.userCasteLoadingV88 && e.blackCocoonV121?.operationId === 'black-cocoon'; }, null, { timeout: 45000 });
-  await page.locator('#game-canvas').focus();
+  const runtimeReady = () => { const e = globalThis.__ATF_GAME__; return e?.running && !e.paused
+    && !e.enemyAtlasLoadingPausedV65 && !e.userCasteLoadingV88 && !e.dropshipHandoverBlocksV188?.()
+    && e.blackCocoonV121?.operationId === 'black-cocoon'; };
+  // Use the visible native flight control, retaining launches/resumes without
+  // a cinematic and one deadline for the briefing, handover and asset readiness.
+  await page.waitForFunction(`selector => {
+    const skip = document.querySelector(selector);
+    return (${runtimeReady.toString()})() || Boolean(skip && skip.getClientRects().length
+      && getComputedStyle(skip).visibility !== 'hidden');
+  }`, skipSelector, { timeout: remaining() });
+  if (await skip.isVisible()) await skip.click({ timeout: remaining() });
+  await page.waitForFunction(runtimeReady, null, { timeout: remaining() });
+  await page.locator('#game-canvas').focus({ timeout: remaining() });
 }
 async function launch() {
   const context = await browser.newContext({ viewport: { width: 1600, height: 1000 }, serviceWorkers: 'block' });

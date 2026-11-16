@@ -72,6 +72,12 @@ def composition_matches(before, preset, mode):
             and {layer['id']: layer['role'] for layer in layers} == expected
             and set(scene['roles']) == set(expected.values())
             and len(before['images']) == sum(layer_id.startswith('bitmap-') for layer_id in expected)
+            # V188 appends its planet-effects canvas beside the catalogue
+            # layers. It is a separate renderer, with one exact DOM contract;
+            # every other child still participates in the strict layer count.
+            and before.get('planetEffects') == [{'tag': 'CANVAS',
+                'classes': ['title-vfx-v188', 'title-vfx-v188--planet'],
+                'ariaHidden': 'true', 'id': '', 'dataset': {}, 'childCount': 0}]
             and all(layer['renderer'] == ('image' if layer['id'].startswith('bitmap-') else 'procedural')
                     and (not layer['id'].startswith('bitmap-') or layer['assetId'] == layer['id'][7:])
                     for layer in layers))
@@ -161,7 +167,11 @@ report['identityBefore'] = identity()
 OBSERVE = """()=>{const t=__ATF_V61__.snapshot(),root=document.querySelector('#title-scene-v79');
  return {title:t,focus:document.activeElement?.id,sceneData:{...root.dataset},
  flight:{x:root.style.getPropertyValue('--title-flight-x-v88'),y:root.style.getPropertyValue('--title-flight-y-v88')},
- layers:[...root.children].map(n=>({id:n.dataset.layerId,role:n.dataset.role,renderer:n.dataset.renderer,assetId:n.dataset.assetId||null})),
+layers:[...root.children].filter(n=>!n.matches('canvas.title-vfx-v188.title-vfx-v188--planet'))
+ .map(n=>({id:n.dataset.layerId,role:n.dataset.role,renderer:n.dataset.renderer,assetId:n.dataset.assetId||null})),
+planetEffects:[...root.children].filter(n=>n.matches('canvas.title-vfx-v188.title-vfx-v188--planet'))
+ .map(n=>({tag:n.tagName,classes:[...n.classList].sort(),ariaHidden:n.getAttribute('aria-hidden'),
+ id:n.id,dataset:{...n.dataset},childCount:n.children.length})),
  images:[...root.querySelectorAll('[data-renderer="image"]')].map(n=>({id:n.dataset.assetId,status:n.dataset.assetStatus,
  hidden:n.hidden,angle:n.dataset.shipAngle,background:getComputedStyle(n).backgroundImage})),
  controls:[...document.querySelectorAll('#title-menu button')].filter(n=>!n.hidden).map(n=>{const r=n.getBoundingClientRect();
@@ -194,6 +204,7 @@ def open_settings(page):
 def ready(page):
     page.wait_for_function('''()=>{const t=__ATF_V61__?.snapshot(),r=document.querySelector('#title-scene-v79');
       return t?.visible&&t.scene?.active&&t.scene.status==='ready'&&t.scene.readyAssetCount>0
+        &&r.querySelector(':scope > canvas.title-vfx-v188.title-vfx-v188--planet')
         &&![...r.querySelectorAll('[data-renderer="image"]')].some(n=>n.dataset.assetStatus==='loading');}''', timeout=90000)
 
 

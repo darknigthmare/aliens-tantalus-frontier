@@ -13,7 +13,7 @@ Fichier source de développement, exclu du build public (`scripts/verify-public-
 | **Fait** | Jouable ou utilisé, raccordé au chargement, au jeu, à l'interface et à la sauvegarde. |
 | **Partiel** | Existe mais incomplet : dialogue, mission, nœud ou condition manquant, valeur provisoire, ou bouchon. |
 | **Manquant** | Aucun code ni donnée. |
-| **Bloqué (art)** | Demande des images ou animations à produire (aucune génération dans ce lot, décisions Q79 et Q80). Le code peut exister en primitives Canvas. |
+| **Bloqué (art)** | Demande des images ou animations à produire. La phase initiale de cet audit n'en générait pas (Q79 et Q80) ; les lots de continuation explicitement demandés sont consignés en fin de document. Le code peut exister en primitives Canvas. |
 
 ## Synthèse au commit `250d81a`
 
@@ -167,11 +167,11 @@ Les fiches de référence `premium-personnel-v119.js` et `franchise-costumes-v11
 
 ## 11. Éléments qui demandent des images générées
 
-Aucun n'est produit ici. Chaque élément jouable utilise des primitives Canvas ou attend son art.
+Cette liste décrit les manques constatés lors de l'audit initial. Le lot de continuation du 16 novembre 2026 produit les trois portraits de Port-Méridien et les dix-huit cartes de colonie et de quêtes détaillés ci-dessous ; les autres besoins restent ouverts.
 
 - Décor de station Asphodèle (anneau, pont de contrôle, laboratoire, serre, salle des relais, mémorial), noyau et interface de CASSIUS, récupérateurs de Grue, dropship d'Echo-8 (§29.4).
-- Quartiers de Port-Méridien en V2, habitants nommés (portraits de Wren, Ferro, Sarrazin en primitives selon Q78).
-- Poses de dialogue de l'équipage, objets de quête (§29.5), planches des recrues.
+- Quartiers de Port-Méridien en V2 et animations des habitants nommés. Les portraits de Wren, Ferro et Sarrazin sont désormais produits ; les primitives Q78 restent leur secours de chargement.
+- Poses de dialogue de l'équipage et planches des recrues. Les onze cartes d'objets et de preuves du lot colonie/équipage sont désormais produites ; cela ne couvre pas les autres emplacements de quête.
 - Art en dette des chapitres V131 et de Cargo brutal (`limitations` de `special-operations-v131.js`).
 - Cinématiques CIN-70 à CIN-72 (jouables en placeholders Canvas depuis la spec 007) et suivantes.
 - Ennemis originaux de l'Hôte Parfait (Q47).
@@ -241,3 +241,19 @@ Base : commit `891d3cd`. Décisions par défaut : Q9 A (étendue aux 12 autres q
 | Vie à bord (§8.2), recrues (§8.3) | Manquant | Manquant | Non traités dans ce lot |
 
 Vérifications : `node --test scripts/verify-colony-crew-v188.mjs` (18 tests) ; `npm run test:priorities:v188` (472 tests, 471 réussis ; l'échec restant est l'empreinte de `package.json` épinglée dans `scripts/audit-tantalus-priorities-v188.mjs`, modifié pour ajouter le test) ; parcours Chromium `scripts/qa-colony-crew-v188.mjs` (20 contrôles, fixture et deux injections déclarées : fin d'objectif par le moteur, événement de conversation du hub). Rien n'est déclaré terminé.
+
+## Résultat du lot images (continuation du 16 novembre 2026)
+
+Base : `f5ae9de64c36af1de6eda11f76902e8ba4e8412f`, PR #49. Le propriétaire demande de continuer et de générer les images manquantes ; ce lot prolonge la phase initiale Q78/Q79. Il ajoute **21 PNG de jeu**, après les 22 images d'insertion et de soutes déjà publiées.
+
+| Élément | Résultat actuel | Limite conservée |
+| --- | --- | --- |
+| Wren, Ferro, Sarrazin | Trois portraits transparents, intégrés aux dialogues et cinématiques, proportions conservées, secours en primitives | Détails physiques [PROPOSÉ] ; animations de PNJ et expressions supplémentaires absentes |
+| Cartes de la colonie | Sept images aux emplacements existants, dont les deux carnets de Wren | Niveaux dédiés et quartiers visitables non ajoutés |
+| Cartes des quêtes de l'équipage | Onze images aux emplacements existants | Poses de dialogue supplémentaires et six cartes distinctes d'Asphodèle non ajoutées |
+| Chargement des scènes | Requête du seul emplacement courant, redessin après chargement, anciens callbacks annulés ; cache runtime limité aux dix-huit chemins exacts après consultation | Primitive conservée pendant le chargement et après une erreur ; pas de précache des dix-huit cartes |
+| Preuves narratives | Sept cartes composées avec les données exactes en Canvas, FR/EN | Aucun texte secret, nom d'Echo-8 ou horaire absent de la bible inventé |
+
+Contrôles du lot : 54 captures de cartes et 6 captures de cinématiques en Canvas natif, 54/54 tests colonie/contenu/fins et 28/28 tests portraits/cinématiques. Ces captures utilisent un hôte déclaré et ne sont pas présentées comme un parcours Chromium. Les résultats de la suite de priorités et du build final sont consignés dans [le reçu du lot](COLONY_ART_RENDER_RECEIPT_20261116.json).
+
+Traçabilité complète : [contrôle et périmètre](COLONY_ART_QA_20261116.md), [prompts et empreintes des 21 PNG](COLONY_ART_PROVENANCE_20261116.json), [planche des cartes](COLONY_ART_OVERVIEW_20261116.png), [planche des portraits](COLONY_PORTRAITS_OVERVIEW_20261116.png). Les totaux historiques des 66 lignes ne sont pas requalifiés en missions terminées par la seule présence de ces images.

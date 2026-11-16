@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-depth-hold-return-20261116';
+const CACHE = 'atf-v143-colony-art-20261116';
 const SHELL = Object.freeze([
   '/src/alien-base-bridge-v1.js',
   '/src/alien-base-snapshot-v1.js',
@@ -241,6 +241,10 @@ const SHELL = Object.freeze([
   '/assets/depth-holds/v188/quarantine-cart.png',
   '/assets/depth-holds/v188/hold-deck-plating.png',
   '/src/placeholder-portraits-v188.js',
+  '/src/colony-portraits-v188.js',
+  '/assets/colony/v188/tomas-wren.png',
+  '/assets/colony/v188/lucia-ferro.png',
+  '/assets/colony/v188/adele-sarrazin.png',
   '/src/hub-echo8-locker-v188.js',
   '/src/m577-manifest-ui-v188.js',
   '/src/story-choice-ui-v188.js',
@@ -718,6 +722,28 @@ const SHELL = Object.freeze([
   '/xeno-trials-v96.css',
 ]);
 const SHELL_PATHS = new Set(SHELL);
+// Reviewed scene cards join the bounded runtime cache only after being viewed.
+// Keep an exact allow-list: other content files do not become cacheable.
+const COLONY_CARD_PATHS_V188 = new Set([
+  '/assets/content/v188/colony/colony-quay-warehouse.png',
+  '/assets/content/v188/colony/colony-processor.png',
+  '/assets/content/v188/colony/colony-screening.png',
+  '/assets/content/v188/colony/colony-cult.png',
+  '/assets/content/v188/colony/wren-notebooks.png',
+  '/assets/content/v188/colony/colony-beacon.png',
+  '/assets/content/v188/colony/colony-walls.png',
+  '/assets/content/v188/colony/quest-sentry.png',
+  '/assets/content/v188/colony/quest-apc.png',
+  '/assets/content/v188/colony/quest-flight-recorder.png',
+  '/assets/content/v188/colony/quest-route-map.png',
+  '/assets/content/v188/colony/quest-range.png',
+  '/assets/content/v188/colony/quest-colonist-list.png',
+  '/assets/content/v188/colony/quest-tags.png',
+  '/assets/content/v188/colony/quest-directive.png',
+  '/assets/content/v188/colony/quest-register.png',
+  '/assets/content/v188/colony/quest-reactor.png',
+  '/assets/content/v188/colony/quest-vents.png'
+]);
 const MAX_RUNTIME_ENTRIES_V143 = 256;
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const PRIVATE_HEADERS_V143 = ['authorization', 'proxy-authorization', 'apikey', 'x-api-key', 'x-auth-token'];
@@ -732,6 +758,7 @@ function cacheableRequestV143(request) {
     const path = url.pathname;
     if (/%|\\|\/\//.test(path)) return false;
     if (SHELL_PATHS.has(path)) return true;
+    if (COLONY_CARD_PATHS_V188.has(path)) return true;
     // No API, account, save, unknown document or third-party endpoint can enter
     // Cache Storage, even when it returns HTTP 200 or an image-like extension.
     return /^\/assets\/(?:openai|user|equipment)\/[a-z0-9/_.-]+\.(?:png|webp|jpg|jpeg)$/i.test(path)

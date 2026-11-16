@@ -1,11 +1,12 @@
 // V188 — prologue and first-hour cinematics (bible §4, §5.2, §10).
 // Scripted Canvas 2D sequences: fixed shots, slow pans, dialogue frames with the
 // reviewed crew portraits (npc-dialogue-portraits-v168.js). No pre-rendered
-// video, no generated image: decors are drawn with primitives; space, planet and
-// the Tantalus reuse the existing title-scene layers. Every cinematic can be
+// video: most decors are drawn with primitives; space, planet and the Tantalus
+// reuse title-scene layers, and colony speakers have authored portraits. Every cinematic can be
 // skipped and replayed, and none grants a reward.
 import { getNpcDialoguePortraitV168, drawNpcDialoguePortraitV168 } from './npc-dialogue-portraits-v168.js';
 import { getPlaceholderPortraitV188, drawPlaceholderPortraitV188 } from './placeholder-portraits-v188.js';
+import { getColonyPortraitV188, drawColonyPortraitV188 } from './colony-portraits-v188.js';
 import { colorblindPaletteActiveV188 } from './colorblind-palette-v188.js';
 import { STATION_CINEMATICS_V188, STATION_CINEMATIC_SETS_V188, STATION_CINEMATIC_PALETTES_V188, drawStationSetItemV188, drawStationShotV188 } from './station-cinematics-v188.js';
 import { Act5AssetLoaderV188 } from './act5-slots-v188.js';
@@ -541,11 +542,11 @@ function background(ctx, images, scene, time, reducedMotion, { cast = null, spea
     ctx.fillStyle = 'rgba(120,230,170,.35)'; for (let y = 316; y < 404; y += 12) ctx.fillRect(776, y, 120 + (y % 5) * 10, 3);
   }
 }
-/** What the lower-third frame shows for a speaker: the reviewed crew crop, a
- * PLACEHOLDER primitive portrait (Wren, Ferro, Sarrazin) or, otherwise, initials. */
+/** Preferred lower-third portrait. Colony images retain their primitive
+ * fallback until loaded; this classification does not claim load success. */
 export function cinematicSpeakerPortraitKindV188(line) {
   if (line?.crewId && getNpcDialoguePortraitV168(line.crewId)) return 'crew-crop';
-  return !line?.crewId && getPlaceholderPortraitV188(line?.speaker) ? 'placeholder-portrait' : 'initials';
+  return !line?.crewId && getColonyPortraitV188(line?.speaker) ? 'colony-portrait' : 'initials';
 }
 function portrait(ctx, images, crewId, name, x, y, size) {
   ctx.fillStyle = '#0a1210'; ctx.fillRect(x, y, size, size);
@@ -555,7 +556,10 @@ function portrait(ctx, images, crewId, name, x, y, size) {
     const crop = profile.crop; ctx.imageSmoothingEnabled = false;
     ctx.drawImage(image, crop.x, crop.y, crop.w, crop.h, x + 4, y + 4, size - 8, size - 8); return true;
   }
-  // Wren, Ferro, Sarrazin (Q78): PLACEHOLDER primitive portraits, not franchise likenesses.
+  const colony = crewId ? null : getColonyPortraitV188(name);
+  if (colony && drawColonyPortraitV188(ctx, images[colony.source], colony,
+    { x: x + 4, y: y + 4, width: size - 8 })) return true;
+  // Wren, Ferro, Sarrazin (Q78): keep a readable bust when the art is unavailable.
   const placeholder = crewId ? null : getPlaceholderPortraitV188(name);
   if (placeholder) { drawPlaceholderPortraitV188(ctx, placeholder, { x: x + 4, y: y + 4, size: size - 8, colorblind: colorblindPaletteActiveV188() }); return true; }
   const initials = String(name).split(/[\s·.]+/).filter(Boolean).slice(0, 2).map(part => part[0]).join('').toUpperCase();
@@ -797,6 +801,8 @@ export class CinematicPlayerV188 {
     const sources = new Set(Object.values(CINEMATIC_IMAGES_V188));
     for (const entry of CINEMATICS_V188[id]?.shots || []) {
       const profile = entry.line?.crewId ? getNpcDialoguePortraitV168(entry.line.crewId) : null; if (profile) sources.add(profile.source);
+      const colony = !entry.line?.crewId ? getColonyPortraitV188(entry.line?.speaker) : null;
+      if (colony) sources.add(colony.source);
     }
     for (const source of sources) if (!this.images[source] && this.ImageCtor) { const image = new this.ImageCtor(); image.src = source; this.images[source] = image; }
     act5LoaderV188.preload(); // requests only the Act V slots whose file is committed

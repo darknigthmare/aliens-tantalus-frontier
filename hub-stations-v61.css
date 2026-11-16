@@ -124,8 +124,12 @@ html.station-mode::after {
   image-rendering: pixelated;
 }
 
-.hub-dialogue-portrait.has-speaker-avatar-v168[data-dialogue-portrait-state-v168="loading"]::after,
-.hub-dialogue-portrait.has-speaker-avatar-v168[data-dialogue-portrait-state-v168="fallback"]::after {
+.hub-dialogue-portrait[data-dialogue-portrait-kind-v168="colony-portrait"] .hub-dialogue-avatar-v168 {
+  image-rendering: auto;
+}
+
+.hub-dialogue-portrait.has-speaker-avatar-v168[data-dialogue-portrait-state-v168="loading"]:not([data-dialogue-portrait-fallback-v188="placeholder-portrait"])::after,
+.hub-dialogue-portrait.has-speaker-avatar-v168[data-dialogue-portrait-state-v168="fallback"]:not([data-dialogue-portrait-fallback-v188="placeholder-portrait"])::after {
   content: attr(data-dialogue-portrait-initials-v168);
   position: absolute;
   inset: 0;

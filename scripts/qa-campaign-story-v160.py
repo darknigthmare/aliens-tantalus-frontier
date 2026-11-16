@@ -147,11 +147,37 @@ def read_station(page):
     page.locator('#game-canvas').focus()
 
 
+def await_runtime(page):
+    # The authored briefing can finish before the public V188 flight hands
+    # control to the player. Native resumes can also bypass that flight.
+    deadline = time.monotonic() + 30
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('QZ18 runtime readiness exceeded its launch budget.')
+        return milliseconds
+
+    runtime_ready = '''()=>__ATF_GAME__?.running&&__ATF_GAME__.isArchiveRelayV122?.()
+      &&__ATF_GAME__.mission?.state==="active"&&!document.querySelector('#mission-runtime-v62').hidden
+      &&!__ATF_GAME__.dropshipHandoverBlocksV188?.()'''
+    skip_selector = '.insertion-cinematic-v188[data-direction="insertion"] .insertion-skip-v188'
+    page.wait_for_function(f'''()=>{{
+      const skip = document.querySelector('{skip_selector}');
+      return ({runtime_ready})() || Boolean(skip && skip.getClientRects().length
+        && getComputedStyle(skip).visibility !== 'hidden');
+    }}''', timeout=remaining())
+    skip = page.locator(skip_selector)
+    if skip.is_visible():
+        skip.click(timeout=remaining())
+    page.wait_for_function(runtime_ready, timeout=remaining())
+    page.wait_for_function('()=>__ATF_GAME__.getSnapshot().archiveRelayPresentationV160?.ready===true', timeout=remaining())
+    page.locator('#game-canvas').focus(timeout=remaining())
+
+
 def start_runtime(page):
     page.locator('[data-insertion-action="advance"]').click()
-    page.wait_for_function('()=>__ATF_GAME__?.running&&__ATF_GAME__.isArchiveRelayV122?.()&&!document.querySelector("#mission-runtime-v62").hidden')
-    page.wait_for_function('()=>__ATF_GAME__.getSnapshot().archiveRelayPresentationV160?.ready===true')
-    page.locator('#game-canvas').focus()
+    await_runtime(page)
 
 
 def protected(save):
@@ -492,7 +518,7 @@ with sync_playwright() as pw:
         page.locator('[data-story-protocol="crew-prevention"]').click()
         check('the next operation can choose the other protocol with reduced motion', page.locator('#mission-insertion-v62').get_attribute('data-reduced-motion') == 'true')
         page.locator('[data-insertion-action="skip"]').click()
-        page.wait_for_function('()=>__ATF_GAME__.running&&__ATF_GAME__.mission.state==="active"&&!document.querySelector("#mission-runtime-v62").hidden')
+        await_runtime(page)
         check('replay skip transfers control without a second research payment', observed(page)['save']['galaxy']['resources']['research'] == victory['galaxy']['resources']['research'])
         walk_center(page, 240)
         mission_save = page.locator('#mission-save-v160')
@@ -511,7 +537,7 @@ with sync_playwright() as pw:
         report['legacyFixtureBasis'] = 'Actual native quick-save from this run; only player name and currentOperation.insertionState differ.'
         import_profile(page, legacy_raw, 'legacy-observed-qz18.json')
         open_plan(page); page.locator('#operation-launch').click()
-        page.wait_for_function('()=>__ATF_GAME__.running&&__ATF_GAME__.isArchiveRelayV122?.()&&!document.querySelector("#mission-runtime-v62").hidden')
+        await_runtime(page)
         resumed = observed(page)
         check('an old QZ18 resume enters its actual saved level without a retroactive briefing or protocol', not resumed['insertionVisible'] and resumed['save']['strategy']['currentOperation']['insertionState'] is None and abs(resumed['player']['x'] - mid['strategy']['currentOperation']['resumeState']['player']['x']) < 5)
         capture(page, '11-legacy-mid-level-resume.png')

@@ -10,6 +10,7 @@ import { APP_RELEASE_V143 } from '../src/release-info-v143.js';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
 import { resolveSourceCommitV143, stampReleaseHtmlV143 } from './build-release-v143.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { COLONY_CREW_SLOTS_V188, COLONY_CREW_FILES_PRESENT_V188 } from '../src/colony-crew-slots-v188.js';
 
 const worker = await readFile(new URL('../sw.js', import.meta.url), 'utf8');
 const ORIGIN = 'https://tantalus.test';
@@ -161,6 +162,55 @@ test('public image caches normally and survives a network interruption', async (
   assert.equal((await h.dispatch('fetch', { request })).value.status, 200);
   h.network(async () => { throw new Error('offline'); });
   assert.equal(await (await h.dispatch('fetch', { request })).value.text(), 'public static bytes');
+});
+test('colony cards: all eighteen admitted PNGs stay lazy and survive a later network interruption', async () => {
+  const h = host(), paths = COLONY_CREW_SLOTS_V188.filter(slot => COLONY_CREW_FILES_PRESENT_V188.includes(slot.id)).map(slot => slot.path);
+  assert.equal(paths.length, 18);
+  assert.equal(h.calls.length, 0);
+  assert.equal((await (await h.caches.open(h.api.CACHE)).keys()).length, 0);
+  for (const path of paths) {
+    assert.equal(h.api.SHELL.includes(path), false, 'scene art must not increase the mandatory precache');
+    assert.equal(h.api.cacheableRequestV143(req(path)), true, path);
+  }
+  h.network(async request => new Response(`card:${new URL(request.url).pathname}`, { headers: { 'content-type': 'image/png' } }));
+  for (const path of paths) {
+    const fetched = await h.dispatch('fetch', { request: req(path) });
+    assert.equal(fetched.intercepted, true);
+    assert.equal(await fetched.value.text(), `card:${path}`);
+  }
+  assert.equal((await (await h.caches.open(h.api.CACHE)).keys()).length, 18);
+  h.network(async () => { throw new Error('offline'); });
+  for (const path of paths) assert.equal(await (await h.dispatch('fetch', { request: req(path) })).value.text(), `card:${path}`);
+});
+test('colony cards: exact paths preserve origin, method and private-request exclusions', async () => {
+  const h = host(), path = '/assets/content/v188/colony/quest-apc.png';
+  for (const [candidate, options] of [
+    ['/assets/content/v188/colony/unreviewed.png', {}], ['/assets/content/v189/colony/quest-apc.png', {}],
+    ['/assets/content/v188/colony/quest-apc.webp', {}], ['/assets/content/v188/colony/QUEST-APC.png', {}],
+    ['/assets/content/v188/private.png', {}], [`https://foreign.test${path}`, {}], [`${path}?version=1`, {}],
+    [path, { method: 'HEAD' }], [path, { method: 'POST', body: 'private' }],
+    [path, { cache: 'no-store' }], [path, { headers: { 'cache-control': 'private' } }],
+    [path, { headers: { authorization: 'Bearer account-A' } }], [path, { headers: { apikey: 'account-A' } }],
+    [path, { headers: { range: 'bytes=0-20' } }]
+  ]) {
+    const request = req(candidate, options);
+    assert.equal(h.api.cacheableRequestV143(request), false, candidate);
+    assert.equal((await h.dispatch('fetch', { request })).intercepted, false, candidate);
+  }
+  assert.equal(h.calls.length, 0);
+});
+test('colony cards: invalid and newly private responses cannot leave a usable cached copy', async () => {
+  const path = '/assets/content/v188/colony/wren-notebooks.png';
+  for (const config of [{ private: true }, { mime: 'text/html' }, { status: 206 }, { status: 404 }, { vary: 'Authorization' }, { vary: 'Cookie' }, { vary: '*' }]) {
+    const h = host(), request = req(path);
+    await h.dispatch('fetch', { request });
+    assert.ok(await (await h.caches.open(h.api.CACHE)).match(request));
+    h.network(async () => response(path, config));
+    await h.dispatch('fetch', { request });
+    assert.equal(await (await h.caches.open(h.api.CACHE)).match(request), undefined);
+    h.network(async () => { throw new Error('offline'); });
+    assert.equal((await h.dispatch('fetch', { request })).value.type, 'error');
+  }
 });
 test('installed executable shell is pinned instead of mixing deployments', async () => {
   const h = host(), request = req('/src/app.js');

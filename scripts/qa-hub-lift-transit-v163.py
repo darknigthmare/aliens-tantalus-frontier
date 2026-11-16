@@ -89,7 +89,7 @@ console.log(JSON.stringify({profile:s,config:{shaftId:shaft,fromDeck:deck,toDeck
 
 def supplemental_fixture(kind):
     filename = {'cancel': 'initial-lift-cancel-midship-deck1.json',
-                'occupied': 'initial-lift-occupied-midship-deck3-1230.json'}[kind]
+                'midday': 'initial-lift-midship-deck3-1230.json'}[kind]
     saved_path = args.fixture_dir.resolve() / filename if args.fixture_dir else None
     if saved_path and saved_path.exists():
         raw = saved_path.read_bytes()
@@ -98,23 +98,23 @@ def supplemental_fixture(kind):
         code = """import{createDefaultSave}from'./src/save.js';import{HUB_DECKS,HUB_WORLD}from'./src/hub-game.js';
 import{buildHubDoorNetworkV58}from'./src/topology-coherence-v58.js';
 import{createPlayerOnboardingV84,normalizePlayerOnboardingV84}from'./src/player-onboarding-v84.js';
-const occupied=process.argv[1]==='occupied',deck=occupied?3:1,s=createDefaultSave();
+const midday=process.argv[1]==='midday',deck=midday?3:1,s=createDefaultSave();
 const lift=buildHubDoorNetworkV58(HUB_DECKS,HUB_WORLD,deck).find(d=>d.shaftId==='hub-midship-lift');
-s.needsPlayerCreationV84=false;s.player.name=occupied?'QA Lift occupied1230 V163':'QA Lift cancellation V163';s.scene='command';s.settings.reducedMotion=false;
+s.needsPlayerCreationV84=false;s.player.name=midday?'QA Lift midday1230 V163':'QA Lift cancellation V163';s.scene='command';s.settings.reducedMotion=false;
 s.onboardingV84=normalizePlayerOnboardingV84({...createPlayerOnboardingV84({name:s.player.name,callsign:'LIFT163'}),phase:'complete'});
-if(occupied)s.clock.hour=12.5;
-Object.assign(s.hub,{deck,roomId:lift.roomId,positionX:lift.x-22+(occupied?120:-60),positionY:HUB_WORLD.floorY-92,facing:1});
+if(midday)s.clock.hour=12.5;
+Object.assign(s.hub,{deck,roomId:lift.roomId,positionX:lift.x-22+(midday?0:-60),positionY:HUB_WORLD.floorY-92,facing:1});
 console.log(JSON.stringify(s));"""
         profile = json.loads(subprocess.run(['node', '--input-type=module', '-e', code, kind], cwd=repo,
             capture_output=True, text=True, check=True).stdout)
         raw = json.dumps(profile, ensure_ascii=False, separators=(',', ':')).encode()
-    config = {'shaftId': 'hub-midship-lift', 'fromDeck': 3 if kind == 'occupied' else 1,
-              'toDeck': 2 if kind == 'occupied' else 0, 'key': 'KeyW'}
+    config = {'shaftId': 'hub-midship-lift', 'fromDeck': 3 if kind == 'midday' else 1,
+              'toDeck': 2 if kind == 'midday' else 0, 'key': 'KeyW'}
     (output / filename).write_bytes(raw)
     changes = ['named isolated existing identity', 'completed onboarding initial condition', 'scene=command',
-               'reducedMotion=false', 'native midship room/deck and ' + ('lift.x-22+120px' if kind == 'occupied' else 'lift.x-22-60px'), 'native standing floor']
-    if kind == 'occupied':
-        changes.append('initial strategic clock=day1 12h30; existing NPC timetable supplies the occupied destination')
+               'reducedMotion=false', 'native midship room/deck and ' + ('lift.x-22 (inside the native cabin)' if kind == 'midday' else 'lift.x-22-60px'), 'native standing floor']
+    if kind == 'midday':
+        changes.append('initial strategic clock=day1 12h30; unchanged V188 idle posts keep the native landing clear')
     report['fixtures'].append({'file': filename, 'sha256': hashlib.sha256(raw).hexdigest(), 'config': config,
         'supplementalCase': kind, 'declaredChanges': changes,
         'unchanged': ['native resources/loadout', 'NPC roster/timetable/positions', 'native lift geometry', 'no imported trip or result']})
@@ -122,10 +122,10 @@ console.log(JSON.stringify(s));"""
 
 
 fixtures = {(shaft, deck): fixture(shaft, deck) for shaft in args.shafts for deck in args.decks}
-supplemental = {kind: supplemental_fixture(kind) for kind in ['cancel', 'occupied']} if args.comparison_stage == 'after' else {}
+supplemental = {kind: supplemental_fixture(kind) for kind in ['cancel', 'midday']} if args.comparison_stage == 'after' else {}
 if supplemental:
-    report['supplementalCases'] = ['native-E-cancel-returning-save-reload', 'native-touch-cancel-returning-save-reload', 'native12h30-occupied-arrival-refusal']
-    report['method'] += ' After the unchanged face matrix: actual E cancellation before handoff, durable returning/source reopening and restored walking controls; repeat the same cancellation fixture in a390x900 mobile touch context using a real tap on the visible interact button, with a window-pointerdown microtask observer after native target handlers; then a declared12h30 reactor profile whose unchanged native timetable occupies deck2/armory, real W/S refusal and retained held walking input.'
+    report['supplementalCases'] = ['native-E-cancel-returning-save-reload', 'native-touch-cancel-returning-save-reload', 'native12h30-clear-arrival-and-trip']
+    report['method'] += ' After the unchanged face matrix: actual E cancellation before handoff, durable returning/source reopening and restored walking controls; repeat the same cancellation fixture in a390x900 mobile touch context using a real tap on the visible interact button, with a window-pointerdown microtask observer after native target handlers; then a declared12h30 reactor profile inside the real cabin whose unchanged native timetable keeps deck2/armory clear, native out-of-range S refusal, complete W trip and restored walking input. True occupied-arrival refusal remains covered by the separate Node owner fixtures; this browser case does not inject an occupant.'
 if args.prepare_only:
     report['status'] = 'fixtures-prepared-no-browser'
     (output / 'report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2))
@@ -477,69 +477,66 @@ def cancellation_case(page, profile, config, input_mode='keyboard'):
         'chartChanges': 0, 'completionReason': remaining['reason']}
 
 
-def occupied_peers(page, config):
-    # Read the same explicitly read-only native destination admission helper.
-    # It builds a detached routine context and never transfers/moves NPC owners.
+def midday_arrival_peers(page, config):
+    # Observe the same read-only native admission helper on both charts. Keep
+    # every real armory body, including any unexpected occupant of the cabin.
     return page.evaluate('''async c=>{const{liftDestinationPeersV163}=await import('/src/hub-lift-transit-v163.js');
-      return liftDestinationPeersV163(__ATF_HUB__,c.toDeck)
-        .filter(n=>['crew-02-tamsin-velez','crew-13-pablo-reyes'].includes(n.crewId))
-        .map(n=>({crewId:n.crewId,roomId:n.roomId,x:n.x,y:n.y,w:n.w,h:n.h,alive:n.alive!==false}));}''', config)
+      return liftDestinationPeersV163(__ATF_HUB__,c.toDeck).filter(n=>n.roomId==='armory')
+        .map(n=>({crewId:n.crewId,roomId:n.roomId,x:n.x,y:n.y,w:n.w,h:n.h,alive:n.alive!==false}))
+        .sort((a,b)=>a.crewId.localeCompare(b.crewId));}''', config)
 
 
-def occupied_case(page, profile, config):
-    label = 'midship-occupied-arrival-1230'
-    phase(label + ': native12h30 timetable refuses boarding and retains walking input')
-    initial, peers = observed(page, config), occupied_peers(page, config)
+def midday_case(page, profile, config):
+    # V188 deliberately reserved idle standing space around lift landings. The
+    # former 12h30 fixture expected that repaired obstruction to remain. Start
+    # inside the real source cabin, with the unchanged native crew/timetable,
+    # and require a complete physical trip through the now-clear destination.
+    label = 'midship-clear-arrival-1230'
+    phase(label + ': native12h30 landing clearance, complete trip and restored walking input')
+    initial, peers = observed(page, config), midday_arrival_peers(page, config)
     source_peers = page.evaluate('''()=>__ATF_HUB__.npcs.map(n=>({crewId:n.crewId,roomId:n.roomId,
       x:n.x,y:n.y,w:n.w,h:n.h,alive:n.alive!==false}))''')
-    report['occupiedArrival'] = {'fixture': 'initial-lift-occupied-midship-deck3-1230.json', 'initial': initial,
+    report['middayArrival'] = {'fixture': 'initial-lift-midship-deck3-1230.json', 'initial': initial,
         'actualSourcePeersBefore': source_peers, 'nativeArrivalPeersBefore': peers, 'npcPlacementInjected': False}
-    check(label + ': declared12h30 reactor source has real native armory peers at the arrival socket',
+    landing = next(d for d in initial['lift']['destinations'] if d['deckIndex'] == config['toDeck'])
+    cabin_x = landing['destinationX']
+    known = {n['crewId']: n['x'] for n in peers if n['crewId'] in ['crew-02-tamsin-velez', 'crew-13-pablo-reyes']}
+    check(label + ': declared12h30 native idle crew preserve the real44px landing and its standing gap',
           initial['protected']['clock']['hour'] == 12.5 and initial['deck'] == 3 and initial['roomId'] == 'reactor'
-          and abs(initial['player']['x'] - initial['lift']['x'] + 22 - 120) < .001
+          and abs(initial['player']['x'] - initial['lift']['x'] + 22) < .001
           and initial['affordance']['liftShaftId'] == config['shaftId']
-          and {n['crewId']: n['x'] for n in peers} == {'crew-02-tamsin-velez': 2350, 'crew-13-pablo-reyes': 2408}
-          and all(n['roomId'] == 'armory' and n['y'] == 532 and n['alive'] for n in peers))
+          and known == {'crew-02-tamsin-velez': 2408, 'crew-13-pablo-reyes': 2292}
+          and all(n['roomId'] == 'armory' and n['y'] == 532 and n['w'] == 44 and n['h'] == 92
+                  and n['alive'] and (n['x'] + n['w'] + 12 <= cabin_x or n['x'] >= cabin_x + 44 + 12)
+                  for n in peers))
     capture(page, config, label + '-source.png')
-    page.keyboard.press('KeyW')
-    refused = observed(page, config)
-    report['occupiedArrival']['refusedW'] = refused
-    check(label + ': actual W refuses occupied deck2 without boarding, chart change or body displacement',
-          refused['trip'] is None and refused['serial'] == initial['serial'] and refused['deck'] == 3
-          and refused['roomId'] == 'reactor' and refused['player']['x'] == initial['player']['x']
-          and refused['player']['y'] == initial['player']['y']
-          and refused['departureBlocked'] == {'shaftId': config['shaftId'], 'toDeck': 2}
-          and 'ARRIVÉE OCCUPÉE' in refused['prompt'] and 'ARRIVÉE OCCUPÉE' in page.locator('#hub-prompt').inner_text())
-    capture(page, config, label + '-native-refusal.png')
-    # S at the engineering endpoint is separately out of bounds. It must also
-    # leave the source and input owner intact; it is not a second occupied route.
+    # S remains out of bounds on the engineering endpoint. It must not take
+    # input ownership or invent a trip before the admitted upward route.
     page.keyboard.press('KeyS')
     outward = observed(page, config)
-    check(label + ': native S at the last deck also refuses without capturing the source controls',
+    check(label + ': native S at the last deck refuses without changing the body, chart or input owner',
           outward['trip'] is None and outward['deck'] == 3 and outward['serial'] == initial['serial']
-          and outward['player']['x'] == initial['player']['x'] and outward['player']['y'] == initial['player']['y'])
-    page.keyboard.down('KeyA')
-    try:
-        page.wait_for_function('x=>__ATF_HUB__.player.x<=x-12', arg=initial['player']['x'], timeout=15000)
-        page.keyboard.press('KeyW')
-        held = observed(page, config)
-        check(label + ': refused departure preserves a genuinely held walking input',
-              'KeyA' in held['input'] and held['trip'] is None and held['deck'] == 3
-              and held['departureBlocked'] == {'shaftId': config['shaftId'], 'toDeck': 2})
-    finally:
-        page.keyboard.up('KeyA')
-    page.wait_for_function('()=>__ATF_HUB__.player.vx===0')
+          and outward['player']['x'] == initial['player']['x'] and outward['player']['y'] == initial['player']['y']
+          and outward['protected'] == initial['protected'])
+    install_observer(page, config)
+    page.keyboard.press('KeyW')
+    journey = collect(page, label, 'outbound')
     final = observed(page, config)
-    after_peers = occupied_peers(page, config)
-    check(label + ': refused W/S neither moves the arrival peers nor spends resources or strategic time',
-          after_peers == peers and final['protected'] == initial['protected']
-          and final['trip'] is None and final['deck'] == 3 and final['player']['x'] < initial['player']['x'] - 10)
-    capture(page, config, label + '-walking-input-retained.png')
-    report['occupiedArrival'] = {'fixture': 'initial-lift-occupied-midship-deck3-1230.json', 'initial': initial,
-        'actualSourcePeersBefore': source_peers,
-        'nativeArrivalPeersBefore': peers, 'refusedW': refused, 'outOfRangeS': outward,
-        'heldWalkingAfterRefusal': held, 'final': final, 'nativeArrivalPeersAfter': after_peers,
-        'npcPlacementInjected': False}
+    metrics = verify_journey(label, config, initial, journey['rows'], final)
+    check(label + ': the cleared arrival admits one complete native trip without a false occupied warning',
+          journey['reason'] == 'arrived' and final['trip'] is None
+          and final['serial'] == initial['serial'] + 1 and final['departureBlocked'] is None)
+    after_peers = midday_arrival_peers(page, config)
+    stationary_ids = {'crew-02-tamsin-velez', 'crew-13-pablo-reyes'}
+    check(label + ': the real trip preserves both idle armory posts and exact strategic resources',
+          [n for n in after_peers if n['crewId'] in stationary_ids]
+          == [n for n in peers if n['crewId'] in stationary_ids]
+          and final['protected'] == initial['protected'])
+    capture(page, config, label + '-arrival.png')
+    moved = prove_source_controls(page, {**config, 'fromDeck': config['toDeck']}, label + '-arrival', final)
+    report['middayArrival'].update({'outOfRangeS': outward, 'final': final,
+        'metrics': metrics, 'completionReason': journey['reason'], 'walkingControlsAfterArrival': moved,
+        'nativeArrivalPeersAfter': after_peers})
 
 
 with sync_playwright() as pw:
@@ -584,7 +581,7 @@ with sync_playwright() as pw:
             context.close()
         check('every requested native lift face was observed', len(report['faces']) == len(args.shafts) * len(args.decks))
         if args.comparison_stage == 'after':
-            for kind, run_case in [('cancel', cancellation_case), ('occupied', occupied_case)]:
+            for kind, run_case in [('cancel', cancellation_case), ('midday', midday_case)]:
                 profile, config, raw = supplemental[kind]
                 context, page = supplemental_page(browser, profile, config, raw, kind)
                 run_case(page, profile, config)

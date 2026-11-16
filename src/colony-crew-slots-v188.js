@@ -1,10 +1,9 @@
 // V188 — named art slots for the Port-Méridien colony missions and the twelve
 // other crew quests (colony and crew lot). Same contract as
-// `insertion-asset-slots-v188.js` and `content-gap-slots-v188.js`: image
-// generation is deferred (owner Q79), every picture is a Canvas PLACEHOLDER
-// routed through one of these slots. When an image is produced for a slot,
-// commit it at the slot's path AND add the slot id to
-// COLONY_CREW_FILES_PRESENT_V188; only listed slots are ever requested.
+// `insertion-asset-slots-v188.js` and `content-gap-slots-v188.js`: the original
+// Canvas drawings remain available while an admitted image loads or fails.
+// Only listed, committed files are requested. The scene dialog requests its
+// current slot lazily; exact narrative evidence remains native Canvas text.
 // Briefs describe the project's own designs (bible §6, §8, §43) and name the
 // documented franchise reference they lean on; none claims a 1:1 fidelity.
 
@@ -49,8 +48,9 @@ export const COLONY_CREW_SLOTS_V188 = Object.freeze([
   slot('quest-vents', 'vents', 'Jun Park’s ducts (« Après les conduits »).', 'A duct junction with new grilles bolted in, a work lamp.', t('CONDUITS DU PONT 2', 'DECK 2 DUCTS'))
 ]);
 export const COLONY_CREW_SLOT_IDS_V188 = Object.freeze(COLONY_CREW_SLOTS_V188.map(entry => entry.id));
-// Empty until art is produced; a test checks that every listed file exists.
-export const COLONY_CREW_FILES_PRESENT_V188 = Object.freeze([]);
+// The continuation art lot covers all eighteen scene cards. Tests check that
+// every entry is a real PNG; this is not an admission of new gameplay actors.
+export const COLONY_CREW_FILES_PRESENT_V188 = Object.freeze([...COLONY_CREW_SLOT_IDS_V188]);
 export const getColonyCrewSlotV188 = id => COLONY_CREW_SLOTS_V188.find(entry => entry.id === id) || null;
 
 const GREEN = '#7dff9a', DIM = 'rgba(125,255,154,.35)';
@@ -118,12 +118,7 @@ const MOTIFS = Object.freeze({
     ctx.fillStyle = '#111'; for (let i = 0; i < 3; i += 1) { ctx.beginPath(); ctx.arc(w * .28 + i * w * .2, h * .72, 24, 0, Math.PI * 2); ctx.fill(); }
     ctx.fillStyle = '#6b6f73'; ctx.fillRect(w * .86 + 10, h * .6, 34, 60);
   },
-  crt(ctx, w, h, label) {
-    crtFrame(ctx, w, h); ctx.strokeStyle = GREEN; ctx.lineWidth = 1.5; ctx.beginPath();
-    for (let x = 24; x <= w - 24; x += 4) { const k = (x - 24) / (w - 48), y = h * .6 - (k > .35 && k < .7 ? 50 : 10 * Math.sin(x * .05)); if (x === 24) ctx.moveTo(x, y); else ctx.lineTo(x, y); }
-    ctx.stroke(); ctx.fillStyle = GREEN; ctx.font = '13px monospace'; ctx.fillText(label, 24, 34);
-    return true;
-  },
+  crt(ctx, w, h) { crtFrame(ctx, w, h); },
   map(ctx, w, h) {
     ctx.fillStyle = '#0f1714'; ctx.fillRect(0, 0, w, h);
     ctx.strokeStyle = '#2e5f7a'; ctx.lineWidth = 8; ctx.beginPath(); ctx.moveTo(0, h * .7); ctx.bezierCurveTo(w * .3, h * .5, w * .6, h * .9, w, h * .6); ctx.stroke();
@@ -152,34 +147,196 @@ const MOTIFS = Object.freeze({
   }
 });
 
+// Facts come from the active colony return scenes and crew-quest steps. Keep
+// them as text/geometry so image generation cannot change a time, a quantity,
+// a route or the meaning of a redacted directive, and FR/EN stay available.
+export const COLONY_CREW_EVIDENCE_IDS_V188 = Object.freeze([
+  'wren-notebooks', 'quest-flight-recorder', 'quest-route-map',
+  'quest-colonist-list', 'quest-directive', 'quest-register', 'quest-reactor'
+]);
+const evidenceIds = new Set(COLONY_CREW_EVIDENCE_IDS_V188);
+const ink = (ctx, text, x, y, { colour = '#24251f', size = 14, bold = false, maxWidth = null } = {}) => {
+  ctx.fillStyle = colour; ctx.font = `${bold ? 'bold ' : ''}${size}px monospace`;
+  if (maxWidth > 0) ctx.fillText(text, x, y, maxWidth); else ctx.fillText(text, x, y);
+};
+const stroke = (ctx, points, colour, width = 2) => {
+  ctx.strokeStyle = colour; ctx.lineWidth = width; ctx.beginPath();
+  points.forEach(([x, y], index) => index ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); ctx.stroke();
+};
+function sheet(ctx, x, y, w, h, paintSurface = true) {
+  if (!paintSurface) return;
+  ctx.fillStyle = '#d8d2bc'; ctx.fillRect(x, y, w, h);
+  ctx.strokeStyle = '#a69c80'; ctx.lineWidth = 1; ctx.strokeRect(x + .5, y + .5, w - 1, h - 1);
+}
+function screen(ctx, paintSurface = true) {
+  if (!paintSurface) return;
+  ctx.fillStyle = '#07100d'; ctx.fillRect(64, 24, 512, 214);
+  ctx.strokeStyle = '#496457'; ctx.lineWidth = 1; ctx.strokeRect(64.5, 24.5, 511, 213);
+  ctx.fillStyle = 'rgba(125,255,154,.035)';
+  for (let y = 28; y < 236; y += 4) ctx.fillRect(66, y, 508, 1);
+}
+
+/** Fixed logical 640×280 evidence plate, independent of the generated pixels. */
+export function drawColonyCrewEvidenceV188(ctx, id, width, height, language = 'fr', { paintSurface = true } = {}) {
+  if (!ctx || !evidenceIds.has(id) || !(width > 0 && height > 0)) return false;
+  const en = language === 'en', text = (fr, english) => en ? english : fr;
+  ctx.save(); ctx.scale(width / 640, height / 280); ctx.globalAlpha = 1;
+  if (id === 'wren-notebooks') {
+    // Reviewed native composition: two open notebooks, four separate pages.
+    // Keep ink below the lamp and desk (y≈96) and clear of both book gutters.
+    sheet(ctx, 72, 96, 226, 140, paintSurface); sheet(ctx, 330, 96, 226, 140, paintSurface);
+    ink(ctx, 'QZ17', 86, 122, { bold: true, size: 20 });
+    ink(ctx, 'QZ17', 342, 122, { bold: true, size: 20 });
+    ink(ctx, text('BORDEREAU', 'QUAY'), 82, 151, { size: 12 });
+    ink(ctx, text('DU QUAI', 'WAYBILL'), 82, 168, { size: 12 });
+    ink(ctx, text('MATÉRIEL', 'DRILLING'), 204, 128, { bold: true, size: 13 });
+    ink(ctx, text('DE FORAGE', 'EQUIPMENT'), 204, 147, { bold: true, size: 13 });
+    ink(ctx, text('HEURES', 'TIMES'), 221, 184, { size: 11 });
+    ink(ctx, text('NOTÉES', 'RECORDED'), 213, 200, { size: 11 });
+    ctx.strokeStyle = '#a63e2d'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.ellipse(244, 188, 44, 24, 0, 0, Math.PI * 2); ctx.stroke();
+    ink(ctx, text('SECOND', 'SECOND'), 341, 151, { size: 12 });
+    ink(ctx, text('BORDEREAU', 'WAYBILL'), 341, 168, { size: 12 });
+    ink(ctx, text('SOUS SCELLÉ', 'UNDER SEAL'), 336, 203, { colour: '#923b2b', bold: true, size: 12 });
+    stroke(ctx, [[335, 209], [429, 209]], '#923b2b', 1.5);
+    ink(ctx, text('PRIORITÉ FRET', 'FREIGHT PRIORITY'), 452, 153, { size: 11, bold: true, maxWidth: 105 });
+  } else if (id === 'quest-colonist-list') {
+    // The clip occupies the top centre of the sheet; begin below it.
+    sheet(ctx, 96, 80, 432, 158, paintSurface);
+    ink(ctx, text('FAMILLE OKONJO · FERME 12', 'OKONJO FAMILY · FARM 12'), 107, 101, { bold: true, size: 15, maxWidth: 407 });
+    ink(ctx, text('3 PERSONNES', '3 PEOPLE'), 107, 124, { size: 13 });
+    ink(ctx, text('DISPARUS', 'MISSING'), 107, 150, { colour: '#55544b', size: 13 });
+    stroke(ctx, [[104, 145], [190, 145]], '#a63e2d');
+    ink(ctx, text('APPELS RETENUS', 'CALLS HELD'), 224, 150, { colour: '#923b2b', bold: true, size: 13 });
+    ink(ctx, text('QZ-18 : 3 appels retenus 6 jours', 'QZ-18: 3 calls held for 6 days'), 107, 181, { size: 13, maxWidth: 407 });
+    ink(ctx, text('derrière le fret, puis effacés.', 'behind freight, then erased.'), 107, 202, { size: 13, maxWidth: 407 });
+    ink(ctx, text('Hameau de la balise · nord du port', 'Beacon hamlet · north of the port'), 107, 229, { size: 12, maxWidth: 407 });
+  } else if (id === 'quest-register') {
+    // Keep the written column to the right of the binder rings.
+    sheet(ctx, 118, 47, 386, 184, paintSurface);
+    ink(ctx, text('REGISTRE D’ÉVACUATION', 'EVACUATION REGISTER'), 126, 72, { bold: true, size: 16, maxWidth: 369 });
+    const rows = [
+      ['13:58', text('3 signaux civils coupés du groupe', '3 civilian signals cut off')],
+      ['14:01', text('Ordre : « Fermez l’accès. »', 'Order: "Close the access."')],
+      ['14:02', text('Charge de Reyes', 'Reyes’s charge')]
+    ];
+    rows.forEach(([time, label], index) => {
+      const y = 111 + index * 46; ink(ctx, time, 126, y, { bold: true }); ink(ctx, label, 194, y, { size: 13, maxWidth: 304 });
+      stroke(ctx, [[125, y + 5], [173, y + 5]], '#a63e2d');
+    });
+  } else if (id === 'quest-route-map') {
+    // The photographic survey board starts lower than the CRT plates.
+    if (paintSurface) { ctx.fillStyle = '#07100d'; ctx.fillRect(90, 60, 464, 162); }
+    ink(ctx, text('PORT', 'PORT'), 94, 212, { colour: '#d5e4d4', bold: true, size: 12 });
+    ink(ctx, text('FERMES', 'FARMS'), 499, 212, { colour: '#d5e4d4', bold: true, size: 12, maxWidth: 49 });
+    stroke(ctx, [[100, 93], [140, 75], [192, 97], [246, 70], [297, 91], [349, 72], [405, 97], [460, 76], [532, 94]], '#686967', 3);
+    ink(ctx, text('CRÊTE · CONTACTS', 'RIDGE · CONTACTS'), 337, 117, { colour: '#e4b07d', size: 12, maxWidth: 207 });
+    for (const x of [370, 421, 472]) { ctx.strokeStyle = '#e4b07d'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(x, 88, 5, 0, Math.PI * 2); ctx.stroke(); }
+    const river = [[100, 154], [175, 139], [269, 158], [365, 150], [456, 167], [542, 151]];
+    stroke(ctx, river, '#315e79', 15);
+    stroke(ctx, [[284, 94], [298, 121], [327, 178]], '#a78b63', 10);
+    stroke(ctx, [[296, 127], [317, 169]], '#d2b98a', 17);
+    ink(ctx, text('PONT', 'BRIDGE'), 243, 113, { colour: '#d5e4d4', size: 12 });
+    ctx.setLineDash?.([6, 4]); stroke(ctx, river.map(([x, y]) => [x, y + 19]), GREEN, 2); ctx.setLineDash?.([]);
+    ink(ctx, text('Sentier de maintenance · rivière', 'Maintenance path · river'), 151, 212, { colour: GREEN, size: 12, maxWidth: 329 });
+  } else {
+    // Kappa's generated field recorder has a narrower inner screen. Apply a
+    // single scale to both lettering and graph, clear of its physical bezel.
+    if (id === 'quest-flight-recorder') { ctx.translate(96, 32); ctx.scale(.74, .74); }
+    else if (id === 'quest-directive') { ctx.translate(101, 35); ctx.scale(.68, .68); }
+    screen(ctx, paintSurface);
+    if (id === 'quest-flight-recorder') {
+      ink(ctx, 'KAPPA', 81, 49, { colour: GREEN, bold: true, size: 17 });
+      ink(ctx, text('CRÉNEAU RÉSERVÉ', 'SLOT RESERVED'), 327, 49, { colour: '#e7c684', bold: true, size: 14 });
+      stroke(ctx, [[133, 78], [133, 190], [541, 190]], '#52785e', 1);
+      ink(ctx, '900 m', 78, 110, { colour: GREEN, size: 13 });
+      stroke(ctx, [[144, 105], [529, 105]], GREEN, 3);
+      stroke(ctx, [[144, 99], [144, 111]], GREEN, 2); stroke(ctx, [[529, 99], [529, 111]], GREEN, 2);
+      ink(ctx, '22 min', 300, 150, { colour: GREEN, bold: true, size: 19 });
+      ink(ctx, '02:14', 133, 213, { colour: GREEN }); ink(ctx, '02:36', 488, 213, { colour: GREEN });
+    } else if (id === 'quest-reactor') {
+      // This low, wide CRT begins at y≈75; retain readable lettering instead
+      // of squeezing the graph over its gauges, bezel or reactor background.
+      ink(ctx, text('PONT 2 · QUARANTAINE', 'DECK 2 · QUARANTINE'), 112, 95, { colour: GREEN, bold: true, size: 16, maxWidth: 339 });
+      ink(ctx, '+4 %', 476, 95, { colour: '#e7c684', bold: true, size: 18, maxWidth: 52 });
+      ink(ctx, '104 %', 108, 135, { colour: GREEN, size: 12, maxWidth: 45 });
+      ink(ctx, '100 %', 108, 190, { colour: '#8caa92', size: 12, maxWidth: 45 });
+      stroke(ctx, [[162, 117], [162, 193], [530, 193]], '#52785e', 1);
+      ctx.setLineDash?.([3, 5]); stroke(ctx, [[170, 185], [525, 185]], '#52785e', 1); ctx.setLineDash?.([]);
+      stroke(ctx, [[170, 185], [202, 185], [202, 128], [481, 128], [481, 185], [525, 185]], GREEN, 2);
+      ink(ctx, '01:00', 183, 214, { colour: GREEN, size: 12 }); ink(ctx, '05:00', 460, 214, { colour: GREEN, size: 12 });
+      ink(ctx, text('Charge relative · chaque nuit', 'Relative load · every night'), 210, 114, { colour: '#8caa92', size: 10, maxWidth: 260 });
+    } else {
+      ink(ctx, 'BISHOP-9', 85, 54, { colour: GREEN, bold: true, size: 18 });
+      ink(ctx, text('DIRECTIVE DE PRÉSERVATION', 'PRESERVATION DIRECTIVE'), 85, 96, { colour: GREEN, size: 18 });
+      stroke(ctx, [[85, 113], [554, 113]], '#52785e', 1);
+      ctx.fillStyle = '#728a78'; ctx.fillRect(85, 140, 402, 24);
+      ctx.fillStyle = '#030705'; ctx.fillRect(87, 142, 398, 20);
+      ink(ctx, text('LIGNE MASQUÉE', 'REDACTED LINE'), 85, 206, { colour: '#8caa92', size: 13 });
+    }
+  }
+  ctx.restore(); return true;
+}
+
 /** Real image when one is committed for the slot, the primitive drawing otherwise. */
 export class ColonyCrewAssetLoaderV188 {
   constructor({ ImageCtor = globalThis.Image, present = COLONY_CREW_FILES_PRESENT_V188 } = {}) {
     this.ImageCtor = ImageCtor; this.present = new Set(present); this.images = new Map(); this.requested = []; this.usage = Object.create(null);
+    this.states = new Map(); this.listeners = new Map(); this.frames = Object.create(null);
   }
   preload(ids = COLONY_CREW_SLOT_IDS_V188) {
     for (const id of ids) {
       const entry = getColonyCrewSlotV188(id);
       if (!entry || !this.present.has(id) || this.images.has(id) || !this.ImageCtor) continue;
-      const image = new this.ImageCtor(); image.src = entry.path; this.images.set(id, image); this.requested.push(entry.path);
+      const image = new this.ImageCtor(); this.images.set(id, image); this.states.set(id, 'loading'); this.requested.push(entry.path);
+      const finish = state => {
+        if (this.images.get(id) !== image || this.states.get(id) !== 'loading') return;
+        this.states.set(id, state);
+        image.removeEventListener?.('load', ready); image.removeEventListener?.('error', failed);
+        if (!image.addEventListener) { image.onload = null; image.onerror = null; }
+        for (const notify of [...(this.listeners.get(id) || [])]) notify();
+      };
+      const ready = () => finish('ready'), failed = () => finish('error');
+      if (image.addEventListener) { image.addEventListener('load', ready); image.addEventListener('error', failed); }
+      else { image.onload = ready; image.onerror = failed; }
+      try { image.src = entry.path; } catch { failed(); }
+      if (image.complete && image.naturalWidth > 0 && image.naturalHeight > 0) ready();
     }
     return this.requested.slice();
   }
-  image(id) { const image = this.images.get(id); return image?.complete && image.naturalWidth > 0 ? image : null; }
+  subscribe(id, notify) {
+    if (!getColonyCrewSlotV188(id) || typeof notify !== 'function') return () => {};
+    let listeners = this.listeners.get(id); if (!listeners) { listeners = new Set(); this.listeners.set(id, listeners); }
+    listeners.add(notify);
+    return () => { listeners.delete(notify); if (!listeners.size) this.listeners.delete(id); };
+  }
+  image(id) {
+    const image = this.images.get(id);
+    return this.states.get(id) !== 'error' && image?.complete && Number.isFinite(image.naturalWidth) && image.naturalWidth > 0
+      && Number.isFinite(image.naturalHeight) && image.naturalHeight > 0 ? image : null;
+  }
   /** Draws the slot over the whole canvas context box; returns 'image' or 'primitive'. */
   draw(ctx, id, width, height, { language = 'fr' } = {}) {
     const entry = getColonyCrewSlotV188(id);
     if (!entry) throw new Error(`Unknown colony art slot: ${id}`);
     const image = this.image(id), lang = language === 'en' ? 'en' : 'fr';
-    let source = 'primitive';
-    if (image) { ctx.drawImage(image, 0, 0, width, height); source = 'image'; }
-    else {
-      ctx.save();
-      const labelled = MOTIFS[entry.motif](ctx, width, height, entry.label[lang]);
-      if (!labelled) caption(ctx, width, height, entry.label[lang]);
-      ctx.restore();
+    let source = 'primitive', crop = null;
+    ctx.save();
+    ctx.beginPath(); ctx.rect(0, 0, width, height); ctx.clip();
+    if (image) {
+      // Uniform cover crop: generated native sizes may differ from the brief.
+      // No aspect distortion, neighbouring atlas cells or out-of-bounds read.
+      const scale = Math.max(width / image.naturalWidth, height / image.naturalHeight);
+      const sw = width / scale, sh = height / scale;
+      crop = { x: (image.naturalWidth - sw) / 2, y: (image.naturalHeight - sh) / 2, w: sw, h: sh };
+      try { ctx.drawImage(image, crop.x, crop.y, crop.w, crop.h, 0, 0, width, height); source = 'image'; }
+      catch { crop = null; }
     }
+    if (source === 'primitive') MOTIFS[entry.motif](ctx, width, height, entry.label[lang]);
+    const evidence = drawColonyCrewEvidenceV188(ctx, id, width, height, lang, { paintSurface: source !== 'image' });
+    caption(ctx, width, height, entry.label[lang]);
+    ctx.restore();
     this.usage[id] = source;
+    this.frames[id] = { source, language: lang, crop, target: { x: 0, y: 0, w: width, h: height }, evidence };
     return source;
   }
 }

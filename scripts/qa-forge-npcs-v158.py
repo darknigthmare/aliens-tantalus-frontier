@@ -6,6 +6,7 @@ import importlib.metadata
 import json
 import os
 from pathlib import Path
+import time
 from playwright.sync_api import sync_playwright
 
 parser = argparse.ArgumentParser()
@@ -111,6 +112,51 @@ def checkpoint_panel(page, kind=None):
     if panel.locator('details').get_attribute('open') is None:
         panel.locator('summary').click()
     return panel
+
+
+def resume_interaction_state(page, kind):
+    return page.evaluate('''kind=>{const e=kind==='mission'?__ATF_GAME__:__ATF_HUB__;
+      const nearest=kind==='ship'?e.nearestForgeInteractionV141?.():null;
+      const npc=kind==='ship'?(nearest?.type==='npc'?nearest.entity:null):e.forgeNarrativeNpcV158?.();
+      const admitted=kind==='mission'?e.canPerformGameplayAction?.(e.player,{allowVent:true,allowSquadTask:true})
+        :e.running&&!e.paused&&!e.forgeShipStartingV141&&!e.forgeNarrativeOpenV156&&e.player?.alive;
+      return {running:e.running,paused:!!e.paused,room:e.forgeSessionV141?.currentRoomId,
+        admitted:!!admitted,npcCellId:npc?.cellId||null,dialog:e.forgeNarrativeOpenV156||null,
+        enemyLoading:!!e.enemyAtlasLoadingPausedV65,userLoading:!!e.userCasteLoadingV88,
+        shipStarting:!!e.forgeShipStartingV141,handover:!!e.dropshipHandoverBlocksV188?.(),
+        focus:document.activeElement?.id||null,documentFocused:document.hasFocus(),
+        keys:[...e.keys],deferred:e.deferredActionKeyV188?{...e.deferredActionKeyV188}:null};}''', kind)
+
+
+def reopen_resumed_dialogue(page, kind, game_canvas, dialog):
+    # A restored checkpoint and a drawn prompt do not certify input admission.
+    # Observe that same native gate before the single E press; do not retry it
+    # or move the actor whose exact restored position was just checked.
+    deadline = time.monotonic() + 30
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('Forge resumed dialogue exceeded its 30 second input budget.')
+        return milliseconds
+
+    trace = report.setdefault('resumeInteractions', {}).setdefault(kind, {})
+    try:
+        game_canvas.focus(timeout=remaining())
+        trace['before'] = resume_interaction_state(page, kind)
+        page.wait_for_function('''kind=>{const e=kind==='mission'?__ATF_GAME__:__ATF_HUB__;
+          const nearest=kind==='ship'?e.nearestForgeInteractionV141?.():null;
+          const npc=kind==='ship'?(nearest?.type==='npc'?nearest.entity:null):e.forgeNarrativeNpcV158?.();
+          const admitted=kind==='mission'?e.canPerformGameplayAction?.(e.player,{allowVent:true,allowSquadTask:true})
+            :e.running&&!e.paused&&!e.forgeShipStartingV141&&!e.forgeNarrativeOpenV156&&e.player?.alive;
+          return admitted&&npc?.cellId==='b-npc'&&e.forgeSessionV141?.currentRoomId==='b'
+            &&document.activeElement===e.canvas&&document.hasFocus();}''', arg=kind, timeout=remaining())
+        trace['ready'] = resume_interaction_state(page, kind)
+        remaining()
+        page.keyboard.press('KeyE')
+        dialog.wait_for(state='visible', timeout=remaining())
+    finally:
+        trace['after'] = resume_interaction_state(page, kind)
 
 
 with sync_playwright() as p:
@@ -297,7 +343,7 @@ with sync_playwright() as p:
             (output/f'{kind}-checkpoint-observations.json').write_text(json.dumps(checkpoint_observations,ensure_ascii=False,indent=2)+'\n')
             check(kind + ': JSON reload reconstructs the right physical PNJ and preserves wounds/ammunition, completed goals and history without replay',
                   restored['running'] and not restored['paused'] and not checkpoint_observations['mismatches'])
-            game_canvas.focus(); page.keyboard.press('KeyE'); dialog.wait_for(state='visible')
+            reopen_resumed_dialogue(page, kind, game_canvas, dialog)
             check(kind + ': resumed PNJ keeps its finished cursor and cannot repeat the exchange', dialog.locator('[data-story-choice]').count()==0 and observe(page,kind)['items']==[])
             capture(page,f'{kind}-04-reloaded-dialogue.png')
             page.keyboard.press('Escape'); dialog.wait_for(state='detached')
@@ -321,6 +367,8 @@ with sync_playwright() as p:
         observations=report.get('checkpointObservations',{}).get(kind,{}) if 'kind' in locals() else {}
         if observations:
             detail+=' | checkpoint='+json.dumps({key:observations.get(key) for key in ['durable','liveAfterSave','restored','mismatches']},ensure_ascii=False,separators=(',',':'))
+        if 'kind' in locals() and kind in report.get('resumeInteractions', {}):
+            detail+=' | resumeInteraction='+json.dumps(report['resumeInteractions'][kind],ensure_ascii=False,separators=(',',':'))
         print('::error title=Forge NPC::'+detail.replace('%','%25').replace('\r','%0D').replace('\n','%0A'),flush=True)
         try:
             report['failureContext']=page.evaluate('''()=>({focus:{tag:document.activeElement?.tagName,id:document.activeElement?.id,documentFocused:document.hasFocus()},views:[...document.querySelectorAll('.view.active')].map(n=>n.dataset.panel),messages:[...document.querySelectorAll('.forge-message-v130')].map(n=>n.textContent)})''')

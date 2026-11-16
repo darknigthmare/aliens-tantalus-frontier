@@ -35,14 +35,14 @@ function recorder() {
   return ctx;
 }
 
-test('the three residents resolve to a drawn placeholder portrait, never to initials', () => {
+test('the three residents retain their drawn placeholder fallback, never initials', () => {
   assert.equal(PLACEHOLDER_PORTRAITS_V188.length, 3);
   for (const name of NAMES) {
     const profile = getPlaceholderPortraitV188(name);
     assert.ok(profile, name); assert.equal(profile.placeholder, true); assert.equal(profile.sign, SIGNS[name]);
     assert.equal(getPlaceholderPortraitV188(name.toLowerCase()), profile, 'case and accents do not matter');
     assert.equal(getPlaceholderPortraitV188(profile.id), profile);
-    assert.equal(cinematicSpeakerPortraitKindV188({ speaker: name, crewId: null }), 'placeholder-portrait');
+    assert.equal(cinematicSpeakerPortraitKindV188({ speaker: name, crewId: null }), 'colony-portrait');
     const ctx = recorder(), result = drawPlaceholderPortraitV188(ctx, profile, { x: 74, y: 500, size: 80 });
     assert.equal(result.kind, 'placeholder-portrait'); assert.equal(result.placeholder, true);
     assert.ok(ctx.calls.filter(([key]) => key === 'fill' || key === 'fillRect').length > 24, `${name} is a drawing`);
@@ -54,11 +54,11 @@ test('the three residents resolve to a drawn placeholder portrait, never to init
   assert.equal(cinematicSpeakerPortraitKindV188({ speaker: 'CASSIUS', crewId: null }), 'initials');
 });
 
-test('every cinematic line spoken by the three uses the placeholder (CIN quay, triage, cin-doyenne)', () => {
+test('every resident cinematic retains its primitive when the authored image is unavailable', () => {
   const seen = new Set();
   for (const [id, cinematic] of Object.entries(CINEMATICS_V188)) for (const shot of cinematic.shots) {
     if (!shot.line || !getPlaceholderPortraitV188(shot.line.speaker)) continue;
-    seen.add(shot.line.speaker); assert.equal(cinematicSpeakerPortraitKindV188(shot.line), 'placeholder-portrait', id);
+    seen.add(shot.line.speaker); assert.equal(cinematicSpeakerPortraitKindV188(shot.line), 'colony-portrait', id);
   }
   assert.deepEqual([...seen].sort(), [...NAMES].sort());
   // Real frames: the subtitle portrait paints the bust, no initials text.
@@ -149,7 +149,7 @@ test('the distinctive sign is present, has a shape, and stays readable in colour
   }
 });
 
-test('hub dialogue frame: the three draw a placeholder on the transparent 384 canvas; others unchanged', () => {
+test('hub dialogue frame: pending colony art shows its transparent 384 primitive; others unchanged', () => {
   const dom = () => {
     const ctx = recorder(), canvas = { width: 0, height: 0, hidden: true, dataset: {}, setAttribute() {}, getContext: () => ctx };
     const container = { dataset: {}, classList: { add() {} }, setAttribute() {}, querySelector() { return this.child || null; }, appendChild(child) { this.child = child; } };
@@ -159,16 +159,17 @@ test('hub dialogue frame: the three draw a placeholder on the transparent 384 ca
   };
   for (const name of ['Tomas Wren', 'Lucia Ferro', 'Adèle Sarrazin']) {
     const d = dom(), result = setDialogueSpeakerPortraitV168(d.image, { name });
-    assert.equal(result.kind, 'placeholder-portrait'); assert.equal(d.canvas.width, 384); assert.equal(d.canvas.hidden, false);
-    assert.equal(d.container.dataset.dialoguePortraitKindV168, 'placeholder-portrait');
-    assert.equal(d.container.dataset.dialoguePortraitStateV168, 'ready');
+    assert.equal(result.kind, 'colony-portrait'); assert.equal(d.canvas.width, 384); assert.equal(d.canvas.hidden, false);
+    assert.equal(d.container.dataset.dialoguePortraitKindV168, 'colony-portrait');
+    assert.equal(d.container.dataset.dialoguePortraitStateV168, 'loading');
+    assert.equal(d.container.dataset.dialoguePortraitFallbackV188, 'placeholder-portrait');
     assert.ok(d.ctx.points.every(([x, y]) => x >= 0 && y >= 0 && x <= 384 && y <= 384));
   }
   const d = dom(); setDialogueSpeakerPortraitV168(d.image, { name: 'Contact inconnu' });
   assert.equal(d.container.dataset.dialoguePortraitKindV168, 'initials'); assert.equal(d.canvas.hidden, true);
 });
 
-test('integration contracts: offline shell, placeholder labelling, no generated asset', () => {
+test('the preserved primitive fallback remains offline, labelled and independent of images', () => {
   assert.ok(readFileSync(new URL('../sw.js', import.meta.url), 'utf8').includes("'/src/placeholder-portraits-v188.js'"));
   const source = readFileSync(new URL('../src/placeholder-portraits-v188.js', import.meta.url), 'utf8');
   assert.match(source, /PLACEHOLDER/); assert.match(source, /NOT\s+(\/\/\s*)?franchise-accurate/);
