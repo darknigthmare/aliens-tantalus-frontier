@@ -63,6 +63,7 @@ import { withCombatFeelV188 } from './combat-feel-v188.js';
 import { withVfxV188 } from './vfx-v188.js';
 import { withRunOptionsRuntimeV188 } from './run-options-runtime-v188.js';
 import { withCasteBehaviorsV188 } from './caste-behaviors-v188.js';
+import { withCreatureScaleV188 } from './creature-scale-v188.js';
 
 export * from './game-production-core.js';
 
@@ -101,11 +102,13 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
 // The insertion safe zone sits right under the caste behaviours: their dash and
 // lunge scale the step it holds, and every outer damage path reaches it. The
 // order of the existing layers is unchanged.
+// The creature scale (V188, creature-scale-v188.js) sits right under the caste behaviours:
+// their ceiling flip and the depth shift transform a creature already drawn at its stature.
 // The in-level dropship handover (V188) wraps every mission layer: while it
 // withholds control nothing below it runs, so mission time (and with it the
 // insertion grace) only starts when control is given, and it can hold the
 // mission-complete event of any mode until the boarding is over.
-export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepthRoomsV188(withQz17LevelDressingV188(withCasteBehaviorsV188(withInsertionSafeZoneV188(withRunOptionsRuntimeV188(withVfxV188(withFranchiseFidelityV188(withGameplayGapsV188(withCombatFeelV188(withFootstepCuesV188(withMissionObjectivePanelV188(withTensionDirectorV188(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(withMissionLayerMatteV188(V158ProductionEngine))))))))))))))))))) {
+export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepthRoomsV188(withQz17LevelDressingV188(withCasteBehaviorsV188(withCreatureScaleV188(withInsertionSafeZoneV188(withRunOptionsRuntimeV188(withVfxV188(withFranchiseFidelityV188(withGameplayGapsV188(withCombatFeelV188(withFootstepCuesV188(withMissionObjectivePanelV188(withTensionDirectorV188(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(withMissionLayerMatteV188(V158ProductionEngine)))))))))))))))))))) {
   start(options = {}) {
     options = isolateForgeMissionOptionsV136(options);
     this.expectedMissionSignatureV130 = options.missionLevel?.signature || null;
