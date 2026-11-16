@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-insertion-art-20261116';
+const CACHE = 'atf-v143-depth-hold-art-20261116';
 const SHELL = Object.freeze([
   '/src/alien-base-bridge-v1.js',
   '/src/alien-base-snapshot-v1.js',
@@ -235,6 +235,11 @@ const SHELL = Object.freeze([
   '/assets/insertion/v188/terrain-far.png',
   '/assets/insertion/v188/cloud-far.png',
   '/assets/insertion/v188/cloud-near.png',
+  '/assets/depth-holds/v188/freighter-crate-stack.png',
+  '/assets/depth-holds/v188/freighter-drum-rack.png',
+  '/assets/depth-holds/v188/quarantine-crate.png',
+  '/assets/depth-holds/v188/quarantine-cart.png',
+  '/assets/depth-holds/v188/hold-deck-plating.png',
   '/src/placeholder-portraits-v188.js',
   '/src/hub-echo8-locker-v188.js',
   '/src/m577-manifest-ui-v188.js',

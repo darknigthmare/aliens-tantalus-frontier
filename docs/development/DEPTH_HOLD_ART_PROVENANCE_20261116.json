@@ -1,0 +1,227 @@
+{
+  "schema": "tantalus-depth-hold-art-provenance-v1",
+  "date": "2026-11-16",
+  "authorization": "Owner request to continue with the same prompt and generate the missing images; continuation and publication explicitly approved.",
+  "scope": "Five physically absent files already used by the depth-hold runtime slots. Existing weapon plates, VFX atlases and deliberate portrait placeholders were not counted as missing images.",
+  "generatedPngCount": 5,
+  "totalBytes": 12297311,
+  "sourcePolicy": "Original generation PNG bytes copied unchanged. Source rectangles, resizing and projection happen in the game renderer; no source image post-processing.",
+  "assets": [
+    {
+      "id": "freighter-crate-stack",
+      "path": "assets/depth-holds/v188/freighter-crate-stack.png",
+      "metadata": {
+        "width": 1022,
+        "height": 1538,
+        "mode": "RGBA",
+        "bytes": 2314903,
+        "sha256": "ae0da3c844374e1d346001d7894a1e09c54d5936b88c9f01c4ba2fdf9b79a395",
+        "alpha": {
+          "min": 0,
+          "max": 255,
+          "transparentFraction": 0.2288642072073677,
+          "boundsAtLeast16": [
+            74,
+            32,
+            873,
+            1469
+          ]
+        }
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "prompt": "Create ONE finished 2D video-game prop PNG for Aliens: Tantalus Frontier, named freighter-crate-stack. Use the attached existing supply-crate sprite ONLY as the visual style and aged industrial material reference, not its triangular arrangement. The new silhouette is exactly TWO rectangular freight crates stacked vertically, one directly above the other, secured together on ONE short wooden cargo pallet. Tall composition: overall opaque silhouette width:height about 61:92, front-facing side-elevation orthographic camera, with at most a narrow visible top edge consistent with the reference sprite. Each crate is weathered dark brown timber paneling in a reinforced desaturated blue-grey steel corner frame, readable chunky edge bolts and slightly chipped paint. Two muted orange ratchet straps wrap the stack from top to pallet, functional metal buckles. Both crate fronts include a small flat EMPTY dark stencil panel where the game will add a variable cargo code; leave these panels truly blank. Detailed hand-painted pixel-textured survival-horror game sprite with crisp hard contours, tactile worn steel, restrained industrial colours, cool soft light from upper left, enough edge contrast to read on a dark ship interior. Physical size corresponds to 1.2 metres wide and 1.8 metres high including pallet. Do not reproduce any brand or film logo. No characters, backdrop, environment, ground plane, cast floor shadow, fog, glow, UI, border, watermark or text. Entire isolated stack and pallet fully visible, feet aligned along one flat bottom baseline. True transparent alpha around the object; clean cutout edges, no checkerboard baked in. Very small transparent margin, fill the tall canvas without clipping; preserve the required tall silhouette. One asset only, not a spritesheet or multiple variants.",
+        "transparentBackground": true,
+        "references": [
+          {
+            "path": "assets/openai/metroidvania/props/supply-crates.png",
+            "sha256": "c0682caf7e28a743ad56cab027478208cdfe5f30a9ad4ce9faf5dad8424a1da2",
+            "role": "Existing project crate sprite: worn materials, edge lighting and painterly pixel texture; new vertical two-crate pallet composition.",
+            "visuallyInspectedBeforeGeneration": true
+          }
+        ]
+      },
+      "originalGeneratedBytesPreserved": true,
+      "adaptation": "Original project adaptation from inspected existing assets; no canonical one-to-one franchise fidelity claim.",
+      "existingRuntimeBox": [
+        61,
+        92
+      ],
+      "variableMarkings": "Blank panels; runtime retains per-prop C-21/C-22 or C-34/C-35 labels."
+    },
+    {
+      "id": "freighter-drum-rack",
+      "path": "assets/depth-holds/v188/freighter-drum-rack.png",
+      "metadata": {
+        "width": 1705,
+        "height": 923,
+        "mode": "RGBA",
+        "bytes": 1899709,
+        "sha256": "d8e16985551f43e43885d9dfea4c735fc9133b29bd63f2972a39e8a189b1aa8b",
+        "alpha": {
+          "min": 0,
+          "max": 255,
+          "transparentFraction": 0.22505663350733773,
+          "boundsAtLeast16": [
+            50,
+            43,
+            1600,
+            850
+          ]
+        }
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "prompt": "Create ONE finished isolated 2D industrial game prop PNG named freighter-drum-rack for the Aliens: Tantalus Frontier cargo-hold scene. Use the attached crate sprite ONLY as the visual style reference: crisp dark outlines, detailed hand-painted pixel-textured worn industrial materials, restrained cool greys, subtle upper-left edge light, convincing readable small-game-sprite silhouette. Draw exactly THREE upright cylindrical 200-litre steel drums in a single horizontal row, all three equally visible side by side, on ONE shared very low sturdy metal rack with short flat feet. Orthographic front/side elevation, no converging perspective and no isometric view; a narrow shallow ellipse of the drum tops may be visible. Overall prop silhouette width:height about 96:52. First drum desaturated steel blue, second charcoal-grey, third dark blue-grey. Scuffed paint and worn steel ribs; thin faded ochre hazard bands, a few small blank inspection plates, modest surface rust, no text. Low rack contains all three drums and its bottom feet sit along one shared flat baseline. Do not stack drums, do not add a fourth barrel, no pipes or background machinery. Sprite for a dark science-fiction freighter; chunky forms, high legibility at runtime96by52 pixels while preserving rich source texture. No characters, floor plane, large cast ground shadow, environment, scenery, fog, glow, UI, logos, watermark or captions. True transparent alpha background, all object edges fully visible, tightly framed with only a small clean transparent margin. Landscape canvas with the full three-drum rack filling most of it. One asset, not a collage or spritesheet.",
+        "transparentBackground": true,
+        "references": [
+          {
+            "path": "assets/openai/metroidvania/props/supply-crates.png",
+            "sha256": "c0682caf7e28a743ad56cab027478208cdfe5f30a9ad4ce9faf5dad8424a1da2",
+            "role": "Existing project crate sprite: rendering style and industrial materials only; new three-drum rack silhouette.",
+            "visuallyInspectedBeforeGeneration": true
+          }
+        ]
+      },
+      "originalGeneratedBytesPreserved": true,
+      "adaptation": "Original project adaptation from inspected existing assets; no canonical one-to-one franchise fidelity claim.",
+      "existingRuntimeBox": [
+        96,
+        52
+      ]
+    },
+    {
+      "id": "hold-deck-plating",
+      "path": "assets/depth-holds/v188/hold-deck-plating.png",
+      "metadata": {
+        "width": 1254,
+        "height": 1254,
+        "mode": "RGB",
+        "bytes": 2987460,
+        "sha256": "b70a723e34baea129ff410d10e4a76d0f2436d48d88385daa3f9ce0e92f63415",
+        "alpha": {
+          "min": 255,
+          "max": 255,
+          "transparentFraction": 0.0,
+          "boundsAtLeast16": [
+            0,
+            0,
+            1254,
+            1254
+          ]
+        }
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "prompt": "Create ONE finished square SEAMLESS TILEABLE cargo-deck steel material texture PNG for the 2D game Aliens: Tantalus Frontier, asset hold-deck-plating. Use the attached existing engineering hangar ONLY as a reference for the restrained dark blue-grey steel palette and fine hand-painted worn industrial texture. THIS IMAGE MUST BE A STRICT ORTHOGRAPHIC TOP-DOWN SURFACE TEXTURE, camera perpendicular to the sheet metal, no perspective at all. The entire square is filled edge to edge with dark neutral gunmetal steel bearing a small-scale repeating diamond-tread / short alternating raised chevron pattern. Fine wear, lightly polished raised tips, restrained tiny scratches, occasional muted brown-grey grime in grooves. Moderate low contrast: readable mid-dark steel, no pure-black patches, no brightly lit areas. Consistent uniform diffuse illumination, no directional gradient, no shadows from external objects. The repeating relief and texture should continue seamlessly across BOTH left/right and top/bottom edges; avoid distinctive large stains that advertise repetition. Pattern small enough to repeat many times across the square. It is a reusable raw material layer: DO NOT draw a room, horizon, wall, railing, large panel borders, front lip, separate grating strip, bay floor perspective, diagonal convergence, actors, objects, lettering, safety stripes, labels, logo, frame or watermark. The game supplies structural seams, back grating, front lip, light and projected perspective itself. Fully opaque steel surface all the way to every edge, no transparent areas. Square 1024×1024 or1536×1536 composition, one texture only, not a preview showing a tiled room, not a texture sheet with several materials.",
+        "transparentBackground": false,
+        "references": [
+          {
+            "path": "assets/openai/hub/rooms/engineering-hangar.png",
+            "sha256": "3f8b1651feb5c432220fbc95a03dc3c6d81bf94eeb5a661acb11ac1c35e90919",
+            "role": "Existing project engineering hangar: dark neutral steel palette and worn surface treatment only; new orthographic material texture without room or perspective.",
+            "visuallyInspectedBeforeGeneration": true
+          }
+        ]
+      },
+      "originalGeneratedBytesPreserved": true,
+      "adaptation": "Original project adaptation from inspected existing assets; no canonical one-to-one franchise fidelity claim.",
+      "runtimeContract": "Square opaque top-down material. Projection, structural seams, rear grating, front lip and contact shadows remain runtime responsibilities."
+    },
+    {
+      "id": "quarantine-crate",
+      "path": "assets/depth-holds/v188/quarantine-crate.png",
+      "metadata": {
+        "width": 1536,
+        "height": 1024,
+        "mode": "RGBA",
+        "bytes": 3077285,
+        "sha256": "f1b9e3c447d3a3e4c89a5b5f62c57a6405775d97b799b1e7698f8e56ce2a34f9",
+        "alpha": {
+          "min": 0,
+          "max": 254,
+          "transparentFraction": 0.13251431783040366,
+          "boundsAtLeast16": [
+            15,
+            37,
+            1504,
+            950
+          ]
+        }
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "prompt": "Create ONE isolated finished 2D game prop for the Aliens Tantalus industrial science-fiction project: a sealed quarantine transport crate. This is a new project prop using the two attached references only for their established rendering style and materials, not as a scene or a collage.\n\nOUTPUT: a high-resolution landscape PNG with genuine transparent alpha, approximately 3:2 aspect ratio, ideally 1536 by 1024 pixels. One complete object only. The useful object silhouette should occupy 92–96 percent of the canvas width and height, with a clean 2–4 percent transparent safety margin. No background, no floor plane, no drop shadow or contact-shadow puddle outside the object, no display base, no added pallet, no surrounding objects.\n\nCAMERA AND SHAPE: orthographic broadside/front profile, with only a very slight top-face view, matching the camera of the reference supply crates. A single wide squat rectangular sealed case, approximately 1.8 metres wide by 1.2 metres high in its visible silhouette, intended to read clearly inside a 92 by 61 game-pixel box. Broad front face dominant, no strong foreshortening, no isometric diamond angle. Its short integral bottom rails or feet terminate at a single level near the bottom canvas margin. All details remain contained in the case silhouette.\n\nDESIGN: cold white and light grey armored panels with dark blue-grey reinforced corner posts, compression-seal lid, four robust latches, recessed carrying grips, inset mechanical panels, a little scraped paint and grime. Delicate visible frost trapped along the sealing seams and around the latches; no loose snow mound. Restrained dark teal recesses and steel edging, no luminous effects. The front has one clearly recognizable dark biohazard pictogram and exactly one small crisp identification plate bearing the exact readable text \"UN 3373\". Use precisely these letters, space, and digits. No other words, letters, serial numbers, invented markings, labels or annotations. No windows, tanks or upright human-sized containment chamber.\n\nRENDERING: match the attached project's detailed illustrated sprite assets: strong precise contours, hand-painted metal highlights, layered scuffed industrial panels, subtle ambient occlusion confined to internal joints, consistent soft light from upper left, tactile and slightly grimy. Preserve the readable large silhouette and structural details at very small gameplay size. More refined detail at native resolution but not a photoreal studio product shot, not pixel art, not cartoon, no depth of field. The supply-crates reference supplies the edge language and camera; the quarantine-unit reference supplies sealed medical-industrial material treatment. Do not replicate either reference's object arrangement or tall cabinet shape.",
+        "transparentBackground": true,
+        "references": [
+          {
+            "path": "assets/openai/metroidvania/props/supply-crates.png",
+            "sha256": "c0682caf7e28a743ad56cab027478208cdfe5f30a9ad4ce9faf5dad8424a1da2",
+            "role": "Project game-prop rendering, reinforced panel edges, slight top visibility. Do not copy the three-crate stack.",
+            "visuallyInspectedBeforeGeneration": true
+          },
+          {
+            "path": "assets/openai/hub/props/quarantine-unit.png",
+            "sha256": "e321b876943537ed8da17f6493a42a8a55ff6fb64f02ef8314ce667c1f7a7565",
+            "role": "Project sealed industrial medical materials and weathering only. Do not copy the tall chamber silhouette.",
+            "visuallyInspectedBeforeGeneration": true
+          }
+        ]
+      },
+      "originalGeneratedBytesPreserved": true,
+      "adaptation": "Original project adaptation from inspected existing assets; no canonical one-to-one franchise fidelity claim.",
+      "existingRuntimeBox": [
+        92,
+        61
+      ],
+      "fixedMarking": "UN 3373"
+    },
+    {
+      "id": "quarantine-cart",
+      "path": "assets/depth-holds/v188/quarantine-cart.png",
+      "metadata": {
+        "width": 1728,
+        "height": 910,
+        "mode": "RGBA",
+        "bytes": 2017954,
+        "sha256": "c073efc885fabf2abcf7cade539c12ab9e6fcaa8557d7253668077ef68ef8798",
+        "alpha": {
+          "min": 0,
+          "max": 255,
+          "transparentFraction": 0.37156720594220594,
+          "boundsAtLeast16": [
+            30,
+            18,
+            1684,
+            873
+          ]
+        }
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "prompt": "Create ONE isolated finished 2D game prop for the Aliens Tantalus industrial science-fiction project: a small laboratory sample trolley that has overturned onto its SIDE, with its cracked sealed sample case still visibly part of the fallen prop. Use the attached references solely for the established game's rendering style, grey industrial metal, mechanical rails and case materials.\n\nOUTPUT: a high-resolution wide landscape PNG with genuine transparent alpha, approximately 1.9:1 aspect ratio, ideally 1536 by 808 pixels. The entire fallen cart plus case form one compact, coherent wide silhouette intended to fit a 76 by 40 game-pixel box. Leave only 2–4 percent transparent margin around the useful silhouette. No background, floor plane, loose floor rubble, cast or contact shadow outside the object, added plinth or platform, characters or other scenery. Do not include a second cart.\n\nESSENTIAL POSE: unmistakably OVERTURNED, not upright and not merely tilted. The trolley has rolled roughly 90 degrees about its long axis and lies on a long side rail. Its formerly horizontal tray is nearly vertical, its underside and bent side frame are visible, and the small swivel caster assemblies now point sideways and upward in the air rather than supporting it from underneath. Its low side rail is the physical contact edge along the bottom of the composition. The original upright trolley was only about 1.5 metres long by 0.8 metres high, a low laboratory sample transport cart. The result is a low wide fallen object, not a tall cabinet or standing rack. Use an orthographic broadside camera with only a very slight top view, matching the existing project props. No dramatic perspective.\n\nDESIGN: thin but robust scuffed grey and blue-grey steel rectangular frame, dark recessed tray, a bent short push handle lying sideways, small industrial swivel casters. A single white-grey sealed sample transport case, about one third the cart's length, has slid into the lower side of the fallen frame and rests at a crooked angle against it; its hard outer shell is visibly cracked, with a dry dark fissure and an exposed broken edge. Keep the case inside the compact overall silhouette. It contains no visible biological material and nothing leaks: absolutely no blood, tissue, fluid, spill, gore, mist or liquid. Subtle faded yellow mechanical caution strips are acceptable, but no words, numbers, fake labels, diagrams or annotations. No mattress, bedding, reclining seat or backrest, monitor pole, IV stand, person or hospital bed form. The medical-bed reference is for metal and rendering only, not object structure.\n\nRENDERING: detailed illustrated game sprite matching the references, crisp contour, hand-painted restrained metal highlights, believable joints and bolts, scuffed industrial finish, subtly worn paint, soft upper-left illumination. Occlusion only inside the object's joints, no baked ground shadow. Strong large-scale silhouette readable at 76 by 40 pixels, detailed at native resolution; not pixel art, not cartoon, not a photoreal studio scene. Keep the overturned side-resting construction visually explicit.",
+        "transparentBackground": true,
+        "references": [
+          {
+            "path": "assets/openai/hub/props/medical-bed.png",
+            "sha256": "caed6f777665fae0df7d7c09004055d7d87b6a92e6b69f6c47539fbea48d125d",
+            "role": "Project rendering style, worn grey metal, thin mechanical rails and small industrial caster construction only. Not a bed silhouette.",
+            "visuallyInspectedBeforeGeneration": true
+          },
+          {
+            "path": "assets/openai/metroidvania/props/supply-crates.png",
+            "sha256": "c0682caf7e28a743ad56cab027478208cdfe5f30a9ad4ce9faf5dad8424a1da2",
+            "role": "Reinforced transport-case materials and edge highlights for the cracked sample case.",
+            "visuallyInspectedBeforeGeneration": true
+          }
+        ]
+      },
+      "originalGeneratedBytesPreserved": true,
+      "adaptation": "Original project adaptation from inspected existing assets; no canonical one-to-one franchise fidelity claim.",
+      "existingRuntimeBox": [
+        76,
+        40
+      ]
+    }
+  ]
+}

@@ -201,9 +201,22 @@ def advance_to(page, target):
 def start_runtime(page, campaign):
     advance_to(page, 'player-control')
     page.locator('[data-insertion-action="advance"]').click()
-    page.wait_for_function('''id=>__ATF_GAME__?.running&&__ATF_GAME__.mission?.state==="active"
+    runtime_ready = '''id=>__ATF_GAME__?.running&&__ATF_GAME__.mission?.state==="active"
       &&__ATF_V51__.saveSystem.data.strategy.currentOperation?.campaignId===id
-      &&!document.querySelector('#mission-runtime-v62').hidden''', arg=campaign)
+      &&!document.querySelector('#mission-runtime-v62').hidden'''
+    # The reading panel can complete before the V188 flight grants control.
+    # Observe either its public skip button or an already active runtime, so
+    # launches/resumes without a flight still follow their native path.
+    skip_selector = '.insertion-cinematic-v188[data-direction="insertion"] .insertion-skip-v188'
+    page.wait_for_function(f'''id=>{{
+      const skip = document.querySelector('{skip_selector}');
+      return ({runtime_ready})(id) || Boolean(skip && skip.getClientRects().length
+        && getComputedStyle(skip).visibility !== 'hidden');
+    }}''', arg=campaign)
+    skip = page.locator(skip_selector)
+    if skip.is_visible():
+        skip.click()
+    page.wait_for_function(runtime_ready, arg=campaign)
     page.locator('#game-canvas').focus()
 
 

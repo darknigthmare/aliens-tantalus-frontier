@@ -399,6 +399,10 @@ const FORGE_TOOLING_V140 = new Set([
   'docs/development/INSERTION_ART_SPACE_20261116.png',
   'docs/development/INSERTION_ART_INTERIORS_20261116.png',
   'docs/development/INSERTION_ART_RENDER_RECEIPT_20261116.json',
+  'docs/development/DEPTH_HOLD_ART_PROVENANCE_20261116.json',
+  'docs/development/DEPTH_HOLD_ART_QA_20261116.md',
+  'docs/development/DEPTH_HOLD_ART_OVERVIEW_20261116.png',
+  'docs/development/DEPTH_HOLD_ART_RENDER_RECEIPT_20261116.json',
   'scripts/verify-insertion-cinematic-v188.mjs',
   'scripts/verify-mission-depth-v188.mjs',
   'scripts/verify-cinematic-coherence-v188.mjs',
@@ -747,7 +751,6 @@ export function isPublicDistributionTextV86(text) {
 }
 
 export async function verifyPublicReleaseV86(root = process.cwd(), { built = basename(resolve(root)) === 'dist' } = {}) {
-  await verifyProjectRecoveryArchive20261116(root, { built });
   const validation = validateContent();
   assert.equal(validation.ok, true, `Gameplay registry invalid: ${validation.failures.join(', ')}`);
   assert.equal(RELEASE.releaseVersion, APP_RELEASE_V143.version);
@@ -778,6 +781,9 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
     }
   }
   await walk(resolve(root));
+  // Scan admitted paths and private text first, including partial adversarial
+  // fixtures. A complete source validation still requires the exact archives.
+  await verifyProjectRecoveryArchive20261116(root, { built });
   const { USER_REFERENCE_LIBRARY_V100 } = await import(pathToFileURL(join(resolve(root), 'src/user-reference-library-v100.js')).href);
   const registeredJpgs = USER_REFERENCE_LIBRARY_V100.map(entry => entry.path.replace(/^\//, '')).filter(path => path.endsWith('.jpg'));
   assert.deepEqual([...new Set(registeredJpgs)].sort(), [...USER_REFERENCE_JPG_PATHS_V100].sort(), 'Reference JPG allowlist differs from the runtime registry.');

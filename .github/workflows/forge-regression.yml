@@ -8,6 +8,7 @@ on:
       - 'assets/openai/hub/props/v139/**'
       - 'package.json'
       - 'sw.js'
+      - '.ai-tools/adopted-v188.json'
       - '.github/workflows/forge-regression.yml'
 permissions:
   contents: read
@@ -27,6 +28,7 @@ jobs:
           sparse-checkout: |
             src
             scripts
+            .ai-tools
             assets/openai/metroidvania/props
             assets/openai/hub/props/v139
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
@@ -69,6 +71,7 @@ jobs:
           path: |
             src
             scripts
+            .ai-tools/adopted-v188.json
             package.json
             *.html
             *.css

@@ -11,9 +11,13 @@ Document source uniquement, exclu du build public. Tests : [`scripts/verify-visu
 | 16 | Rectangle translucide sur le mur haut de la colonie | Bandes de brume de zone tracées en `fillRect` 120 × 14 | Volutes à dégradé radial sans bord (`game-v52-level-runtime.js`) |
 | 17 | Échelles par-dessus « GAINE DE SERVICE » et « PASSERELLE DISPONIBLE » | Étiquettes de circulation peintes avec la plateforme, avant les échelles ; statut de passerelle sans fond | Étiquettes différées après les échelles (`hub-circulation-v137.js`) ; plaque derrière le statut (`ship-port-room-v87.js`) |
 
-## Emplacement d’image
+## Images des cales — suite du 16 novembre 2026
 
-Pas de génération d’image (décision du propriétaire, 2026-11-15). Le pont est un **placeholder** en primitives Canvas derrière l’emplacement `hold-deck-plating` (`/assets/depth-holds/v188/hold-deck-plating.png`, couche `floor`). Pour livrer l’image : la déposer à ce chemin, ajouter l’`id` à `DEPTH_HOLD_DECK_FILES_PRESENT_V188`, l’ajouter au cache de `sw.js`, puis l’observer en jeu.
+La demande de reprise du propriétaire du 16 novembre autorise la production des images manquantes. Les cinq PNG sont désormais présents dans `assets/depth-holds/v188/`, admis dans les registres et ajoutés au cache de `sw.js` : le pont `hold-deck-plating`, les deux objets de fret et les deux objets de quarantaine. Leurs octets de génération sont conservés sans réencodage.
+
+Les quatre objets sont recadrés à leur silhouette utile puis dessinés proportionnellement, centrés et alignés au bas de leurs boîtes physiques existantes. Les codes des piles de caisses sont ajoutés selon leur instance. Le pont reçoit une matière orthographique répétée et projetée ; le caillebotis arrière, les joints, la lèvre et les ombres restent calculés par le moteur. Les primitives restent disponibles en cas d’image non chargée.
+
+La [recette du lot](DEPTH_HOLD_ART_QA_20261116.md), les [prompts et empreintes](DEPTH_HOLD_ART_PROVENANCE_20261116.json) et la [planche avant/après](DEPTH_HOLD_ART_OVERVIEW_20261116.png) distinguent les rendus natifs, les tests automatisés et la validation navigateur.
 
 ## Échelle et franchise
 
