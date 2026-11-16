@@ -57,8 +57,19 @@ export function colonyRescuedV188(save) {
   const manifest = save?.storyCampaignV188?.m577Manifest;
   return quay + (manifest?.resolved ? Math.max(0, Number(manifest.colonists) || 0) : 0);
 }
-/** Active sites (invested above validated) allowed: 1 + one per two rescued [PROPOSÉ]. */
-export function colonyActiveLimitV188(save) { return 1 + Math.floor(colonyRescuedV188(save) / 2); }
+/** People added by quests, annexes and contracts (`colonyMissionsV188.population`, colony-missions-v188.js).
+ * Read here without importing that module (it imports this one). They count for the active sites, not for the Act V roll call. */
+export function colonyPopulationBonusRawV188(save) {
+  const value = Math.floor(Number(save?.colonyMissionsV188?.population));
+  return Number.isFinite(value) ? Math.max(0, Math.min(12, value)) : 0;
+}
+/** Active sites (invested above validated) allowed: 1 + one per two rescued or added [PROPOSÉ]. */
+export function colonyActiveLimitV188(save) { return 1 + Math.floor((colonyRescuedV188(save) + colonyPopulationBonusRawV188(save)) / 2); }
+/** Q25 A (bible §6.3): once C1 « Tenir le port » is done, a level is validated only by a local mission
+ * (`applyColonyMissionResultV188`, colony-missions-v188.js); before it, the provisional rule below still applies. */
+export function colonyLocalValidationActiveV188(save) {
+  return Array.isArray(save?.galaxy?.completedCampaignIds) && save.galaxy.completedCampaignIds.includes('colony-c1');
+}
 
 export function colonyTierV188(colony) {
   const sites = Object.values(normalizeColonyV188(colony).sites);
@@ -108,7 +119,7 @@ export function investColonySiteV188(save, siteId) {
   return { ok: true, siteId, level: state.invested };
 }
 
-/** After an operation on Cocyte: a success validates the oldest pending level
+/** After an operation on Cocyte: a success validates the oldest pending level (only until C1, see above)
  * (stability +3); a failure damages the highest site by one functioning level,
  * investment kept (bible rule). Returns what changed. */
 export function applyColonyOperationResultV188(save, { success, worldId } = {}) {
@@ -118,7 +129,7 @@ export function applyColonyOperationResultV188(save, { success, worldId } = {}) 
     // "Autonome": regular resources [PROPOSÉ] +150 credits, +10 alloy per successful operation on Cocyte.
     const stipend = colonyTierV188(colony) === 'autonomous' ? COLONY_AUTONOMOUS_STIPEND_V188 : null;
     if (stipend) for (const [key, value] of Object.entries(stipend)) save.galaxy.resources[key] = (Number(save.galaxy.resources[key]) || 0) + value;
-    const pending = COLONY_SITE_IDS_V188.find(id => colony.sites[id].invested > colony.sites[id].validated);
+    const pending = colonyLocalValidationActiveV188(save) ? null : COLONY_SITE_IDS_V188.find(id => colony.sites[id].invested > colony.sites[id].validated);
     if (!pending) return stipend ? { stipend } : null;
     colony.sites[pending].validated += 1; save.colonyV188 = colony;
     const world = save.galaxy?.worldState?.[COLONY_WORLD_ID_V188];

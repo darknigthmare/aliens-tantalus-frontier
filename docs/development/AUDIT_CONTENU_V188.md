@@ -67,7 +67,7 @@ Les statuts « À faire » du §53 (tir, tension, caste, accessibilité, répliq
 | Missions ajoutées §5.10 (`story-quai-nord`, `story-route-depot`, `story-moyeu`, `story-recuperation`) | Manquant | Aucun identifiant dans `src/` |
 | Interlude « Quarantaine » | Partiel | Crise du pont 2, Jun Park, choix détruire/capturer ; scènes de BISHOP-9 complètes à écrire (§5.4) |
 | Acte IV Cocon noir | Partiel | `special-black-cocoon`, CIN-51 ; **art** du cocon en dette |
-| Dossier QZ17 (7 pièces) | Partiel | 5 pièces lisibles ; CASSIUS (S2) et Wren (`colony-a-quai`) affichées « pas encore jouables » |
+| Dossier QZ17 (7 pièces) | Partiel | 5 pièces lisibles ; CASSIUS (S2) et Wren (`colony-a-quai`) affichées « pas encore jouables ». *Lot colonie et équipage : les 7 pièces sont jouables ; reste Partiel tant que les pièces 1-5 n'ont pas leur art.* |
 | Choix final et fins (§5.7.1) | Partiel | Règles `finalChoiceOptionsV188`, `resolveFinalChoiceV188` testées, sans écran ni conseil de guerre. *Spec 006 : conseil et trois fins jouables (Partiel).* |
 | Acte V « Non viable », course APC, épilogue | Manquant | Q1, Q2, Q5. *Spec 006 : Partiel, course APC dédiée absente.* |
 
@@ -76,11 +76,11 @@ Les statuts « À faire » du §53 (tir, tension, caste, accessibilité, répliq
 | Élément | Statut | Constat |
 | --- | --- | --- |
 | `colony-intro-quai`, `colony-intro-doyenne` | Fait | Séquence du quai et visite guidée `cin-doyenne` |
-| Reconstruction : 7 chantiers, 3 niveaux, paliers (§6.3) | Partiel | `colony-reconstruction-v188.js` : règles, coûts [PROPOSÉ], table au Commandement. Manquent : la console du quai (Q26), le palier *Libre*, la validation par une mission **locale** du chantier (toute opération réussie sur Cocyte valide le plus ancien niveau), les effets des paliers (annexes, recrutement de Nadia Bensaïd) |
+| Reconstruction : 7 chantiers, 3 niveaux, paliers (§6.3) | Partiel | `colony-reconstruction-v188.js` : règles, coûts [PROPOSÉ], table au Commandement. *Lot colonie et équipage : validation par mission locale après C1, annexes ouvertes à « Rétablie », contrats défensifs seuls en « Survie », volontaires.* Manquent : la console du quai (Q26), le palier *Libre*, le recrutement de Nadia Bensaïd |
 | Gestion de la colonie : quartiers visitables V2 (§43, Q24) | Partiel | Seul le quai existe en salle ; les sept quartiers ne sont pas construits |
-| Missions principales C1-C5 | Manquant | Q25 : C1 puis C5 |
-| Annexes (7) dont `colony-a-quai` (pièce Wren) | Manquant | — |
-| Contrats locaux rejouables (8) | Manquant | Les objectifs génériques existent (`content-core-v50.js`) sans contrat dédié |
+| Missions principales C1-C5 | Partiel (lot colonie et équipage) | C1-C4 jouables sur des gabarits existants, récompense unique, chantier construit ; C5 = `act5-port-walls` avec bonus des murs ; niveaux dédiés absents |
+| Annexes (7) dont `colony-a-quai` (pièce Wren) | Partiel (lot colonie et équipage) | Les 7 jouables (gabarits génériques), effets uniques, décisions Grue et C4 ; pièce de Wren acquise ; art en placeholders |
+| Contrats locaux rejouables (8) | Partiel (lot colonie et équipage) | 8 contrats `colony-l-*` rejouables, chacun valide son chantier ; « chantier Eau » rattaché à l'Énergie |
 | Vie de la colonie : événements entre deux missions (Q29) | Manquant | — |
 
 ## 4. Front station — Asphodèle (§7, §42)
@@ -99,7 +99,7 @@ Les statuts « À faire » du §53 (tir, tension, caste, accessibilité, répliq
 | Élément | Statut | Constat |
 | --- | --- | --- |
 | Rapport et confiance de l'équipage (`npc-dialogue-v62.js`) | Partiel | Socle présent : 6 choix génériques, renouvellement 8 h ; aucune quête |
-| 16 quêtes de l'équipage (§8.1) | Manquant | Q9 : DAVID-8R, Harlow, Rook, Vega d'abord |
+| 16 quêtes de l'équipage (§8.1) | Partiel (lot colonie et équipage) | 16/16 jouables (spec 005 + `crew-quests-tantalus-v188.js`) ; poses de dialogue et objets en placeholders ; deux preuves adaptées (pas de tir, charges de brèche) |
 | Vie à bord (6, §8.2) | Manquant | Le casier vide d'Echo-8 existe comme objet (`hub-echo8-locker-v188.js`), pas comme fil de quête |
 | Recrutement (4, §8.3) | Manquant | Les quatre noms sont des candidats génériques de `crew-recruitment-v85.js`, sans quête ni condition de front |
 
@@ -116,7 +116,7 @@ Les statuts « À faire » du §53 (tir, tension, caste, accessibilité, répliq
 | Élément | Statut | Constat |
 | --- | --- | --- |
 | Carte galactique et saut (`navigate:galaxy`) | Partiel | `galaxy-jump-v115.js` : carburant `2 + ⌈danger/3⌉`, séquence de 8 s ; **aucun temps de voyage** (Q21) |
-| Messages en retard, colonies qui évoluent pendant le voyage (§13.2) | Manquant | — |
+| Messages en retard, colonies qui évoluent pendant le voyage (§13.2) | Partiel (lot colonie et équipage) | `travel-messages-v188.js` : 3 à 5 messages par saut, une fois, au journal des alertes, FR/EN ; les mondes évoluent déjà (simulation) ; vieillissement de l'équipage absent |
 | Chapitres V131 raccordés à leur campagne (§13.4) | Partiel | Jouables isolément, `worldId` `world-05-lethe` ; déplacement campagne par campagne (Q15) |
 | Campagne 1 *La Saison des Reines* (§14) | Partiel | Chapitres Abysse Noir, Broodstorm, Reine-Mère jouables ; **art** en dette ; TR-0 `missing` ; arcs, appels et quêtes absents |
 | Campagnes 2 à 5 (§15-§18) | Manquant | Chapitres V131 réutilisables ; aucun arc, appel, cinématique ni quête liée. Q13 : après l'Acte V |
@@ -225,3 +225,19 @@ Vérifications : `node --test scripts/verify-asphodele-hub-v188.mjs` ; parcours 
 
 Vérifications : `node --test scripts/verify-act5-endings-v188.mjs` (19 tests) ; parcours Chromium de la fin « Les vivants, sans preuve » (et, avant le retrait du relais provisoire, « Le relais parle ») sur fixture importée, avec deux injections déclarées (checkpoint du pont, événement de fin de mission). Rien n'est déclaré terminé.
 
+## Résultat du lot (colonie et équipage, 2026-11-16)
+
+Base : commit `891d3cd`. Décisions par défaut : Q9 A (étendue aux 12 autres quêtes), Q21 A, Q25 A, Q27 A, Q78 B, Q79 A. Détail et valeurs : bible §6.4, §8.5, §13.7.
+
+| Élément | Avant | Après | Preuve |
+| --- | --- | --- | --- |
+| C1-C5 (§6.2) | Manquant | Partiel | C1-C4 lancés depuis l'ordre de mission, verrous par acte, chantier construit une fois ; C5 joué comme `act5-port-walls` (§5.6 étape 7) avec bonus des murs ; niveaux dédiés absents |
+| Annexes de la colonie (7) | Manquant | Partiel | Jouables, effets uniques, décisions C4 et Grue ; gabarits génériques |
+| Contrats locaux (8) | Manquant | Partiel | Rejouables, validation du chantier ; « Eau » rattaché à l'Énergie |
+| Validation par mission locale (§6.3) | Partiel (toute opération) | Partiel | Après C1, seule une mission locale valide un niveau ; palier *Libre* et console du quai absents |
+| Dossier QZ17 | 6/7 possibles | 7/7 possibles | `colony-a-quai` donne le témoignage de Wren |
+| Quêtes de l'équipage | 4/16 | 16/16 jouables (Partiel) | Analyse, collecte et preuves de hub ; conseillers de l'Acte V à portée de 75 ; art et poses absents |
+| Messages en retard (§13.2) | Manquant | Partiel | Une fois par saut, journal des alertes FR/EN, valeurs d'avant le voyage et du jour |
+| Vie à bord (§8.2), recrues (§8.3) | Manquant | Manquant | Non traités dans ce lot |
+
+Vérifications : `node --test scripts/verify-colony-crew-v188.mjs` (18 tests) ; `npm run test:priorities:v188` (472 tests, 471 réussis ; l'échec restant est l'empreinte de `package.json` épinglée dans `scripts/audit-tantalus-priorities-v188.mjs`, modifié pour ajouter le test) ; parcours Chromium `scripts/qa-colony-crew-v188.mjs` (20 contrôles, fixture et deux injections déclarées : fin d'objectif par le moteur, événement de conversation du hub). Rien n'est déclaré terminé.

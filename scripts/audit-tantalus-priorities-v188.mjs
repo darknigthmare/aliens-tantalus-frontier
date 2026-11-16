@@ -48,7 +48,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
     "previousSha256": "95287e9c3f9be2b88db9e391a9a143c4c69be8956b6763e4113645974b9e878d",
-    "currentSha256": "8c85a1f76d076edb2c82f8a0a2892dd5253c76ea96f1600a79445654e3941b59"
+    "currentSha256": "c2da8bf71518dc324f36b36f00b41bab24f91018f34f7049b98fd20eb03a8700"
   },
   "hub-level.css": {
     "previousSha256": "13e29b3719e1246d595dadca4c786cbeb5a471dece902104b0ccd29a1de9908d",
@@ -60,7 +60,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "package.json": {
     "previousSha256": "ff133a405bfc1ef2afa7085fcb2a6cde27a9f52c4af0de5172a058b47082eb48",
-    "currentSha256": "a19bf509e333363dc6defc83481c5797ed2c932e64d5926c05adf4f89440a6e9"
+    "currentSha256": "e044d1717c55f29cf3bb9609893472dce2d8b3501b76b56b4b0f6bf057000730"
   },
   "player-appearance-v126.css": {
     "previousSha256": "da7045c7fd7d41da99eecf48d316150b2d16fac276fe635bb881034bd68c9320",
@@ -84,7 +84,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-audit-v143.mjs": {
     "previousSha256": "825a8672e074c335568669ce8e5c496ed2fb70af9e11f3d834169da1a8d5a1c2",
-    "currentSha256": "b4160a4ce13f159b5bf0da9604503193efe215a36c8b3e689f57a50cb674eaa5"
+    "currentSha256": "5fb943bf7878a2d6e8f39cc70fefb9ef64d8f2d95e9a916a111cee946d29cf25"
   },
   "scripts/verify-campaign-lethe-v163.mjs": {
     "previousSha256": "cb3ac8826d4f15bbab86e0c42dcd225aeee341c9b10950046fb14af104473049",
@@ -124,7 +124,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "328c764b2bf467d0bc21ae86abf415a7722bd0a88cba486eb2167c22fa8f0b84",
-    "currentSha256": "466f56cb9d613cabaf638ad8cc28ebe4139b461327c3ac749b6adf3ab0a08221"
+    "currentSha256": "bc15cef4edd698424d7c3c5e3bc9ccd2d9eef9d13a2f637e871120b5d6c93d7c"
   },
   "src/alien-survival-runtime-v70.js": {
     "previousSha256": "65d5c0c4ca446021b6ff58ed6be61fc622c0908ede9d9d74b730fa0efef2fd93",
@@ -144,7 +144,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/app.js": {
     "previousSha256": "482835e65677c536085a1344cf61c3ffa5e09e2af1b8029b949e000a533038ae",
-    "currentSha256": "1e54089e2b025fedab13bab8931182f4e7ddf7f48c67937bacab56f02a20ba34"
+    "currentSha256": "13d9db7b981496456d3f6f335f47ebc3c08e8e037f93c8016bdad4721e85f915"
   },
   "src/archive-relay-presentation-v160.js": {
     "previousSha256": "e628ccee6aa0a2ee40eea1fdd3b66b11800c3185c39bbd91c18d662c05749a30",
@@ -200,7 +200,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/content.js": {
     "previousSha256": "916a3ee2c7c05a6a81e9de9eacb68e41ab9dd0aeac9be53e260c1024a369a701",
-    "currentSha256": "1e126e7d0823cd32e577e966d0388227188fcc4a198adad53a902c2a050f8464"
+    "currentSha256": "fa090839aedabdc5fbbc56b7205258e47b38fa313198293a56e81f6566d43494"
   },
   "src/crew-ui-v85.js": {
     "previousSha256": "f50ab347b6b209dedf954a0e5dcde236b16cf62360df502a1bea38a67edf453a",
@@ -320,7 +320,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/i18n-en-catalog-v185.js": {
     "previousSha256": "ac3632c302294c3e2869d673ad6d8cd861e1b0f62641d2d16335387746a6218a",
-    "currentSha256": "d0755b1930e2b793965001f77f05a891ee2dcc2b4c44a35835ffe2e970697ede"
+    "currentSha256": "28d42706b8ee4a3713532837328f33bdb2b6fc7b0517cd2dc911ac9a9a601c38"
   },
   "src/i18n-v185.js": {
     "previousSha256": "592b025ceca9008e73bff267be72a2a3b614767fc220f82cbf2a3ef792060e7e",
@@ -392,7 +392,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/save.js": {
     "previousSha256": "afd5b289887c3a6be5d704ad9b501d9cd7bfeae4514fdfb4eaf21095e6d42304",
-    "currentSha256": "6d91c36db729fd2960136bebdc04e5a51840155951c01b02e6b521fe1da062dc"
+    "currentSha256": "6b8a71b39143f289775ad5b8a497fbdbcddacec774bb2387904d030274c1f125"
   },
   "src/ship-port-room-v87.js": {
     "previousSha256": "43b45bcd8e73446e7544651ba4f2e5850e0d1b5158d544438df93dd637db504c",
@@ -428,7 +428,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "sw.js": {
     "previousSha256": "ff86bba365c3875c8ebaeb0abe13b2a6185ccd5f1a030b4ee5b15ac0e4a12f9b",
-    "currentSha256": "c4439e63e5af26d5fe74baa03075df1139cd1e5117e5852e51fc9df377ed0dd4"
+    "currentSha256": "b96cff30448c09caa3abef4b868422f090363b4153b8fa8948ae3741dc068154"
   },
   "title-screen-v61.css": {
     "previousSha256": "3a748b04d5e6c9a7e04c189b2c1910c3163a0840968be6bcbb6352e10e16369f",

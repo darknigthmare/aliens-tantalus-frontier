@@ -1,7 +1,11 @@
 import { colonySnapshotV188, investColonySiteV188, applyColonyOperationResultV188, COLONY_TIERS_V188, colonyRescuedV188 } from './colony-reconstruction-v188.js';
 import { filterUnlockedCampaignsV188, stationLockReasonV188, stationLockTextV188, stationSnapshotV188, cassiusChoicePendingV188, chooseCassiusV188, CASSIUS_CHOICES_V188, CASSIUS_DIALOG_V188, stationReturnSceneDueV188, markStationSceneSeenV188, STATION_SCENES_V188 } from './station-asphodele-v188.js';
-import { crewQuestActionsV188, acceptCrewQuestV188, crewQuestStepV188, answerCrewQuestStepV188, turnInCrewQuestV188, applyCrewQuestOperationResultV188, crewQuestsSnapshotV188, getCrewQuestV188, davidMemoryRestoredV188 } from './crew-quests-v188.js';
+import { crewQuestActionsV188, acceptCrewQuestV188, crewQuestStepV188, answerCrewQuestStepV188, turnInCrewQuestV188, applyCrewQuestOperationResultV188, crewQuestsSnapshotV188, getCrewQuestV188, davidMemoryRestoredV188, crewQuestEpilogueLineV188, crewQuestNotesV188 } from './crew-quests-v188.js';
 import { jumpRouteTextV188, applyJumpTravelTimeV188, jumpArrivalTextV188 } from './galaxy-travel-v188.js';
+import { deliverTravelMessagesV188, travelMessagesListV188, travelArrivalNoticeV188, TRAVEL_MESSAGES_TEXT_V188 } from './travel-messages-v188.js';
+import { filterColonyCampaignsV188, colonyLockReasonV188, colonyLockTextV188, applyColonyMissionResultV188, applyColonyC5LaunchV188, colonyMissionsSnapshotV188,
+  colonyReturnSceneDueV188, markColonySceneSeenV188, COLONY_SCENES_V188, colonyC4DecisionPendingV188, colonyGrueDecisionPendingV188, colonyC4OptionsV188,
+  chooseColonyC4V188, chooseColonyGrueV188, COLONY_DECISION_TEXT_V188, COLONY_GRUE_CHOICES_V188, colonyCampaignNameV188 } from './colony-missions-v188.js';
 import { openContentSceneDialogV188 } from './content-gap-ui-v188.js';
 import { withHubAsphodeleV188 } from './hub-asphodele-v188.js';
 import { asphodeleSaveViewV188, asphodeleShuttleStatusV188, boardAsphodeleV188, returnToTantalusV188, leaveAsphodeleForOperationV188, normalizeAsphodeleHubV188,
@@ -1093,6 +1097,8 @@ function markStoryDebriefOnViewV188() {
   if (stationReturnOnViewV188()) return;
   // V188 spec 006: Act V at the briefing table (council, quay, ending, credits).
   if (act5OnViewV188()) return;
+  // V188 colony lot: Port-Méridien return scenes and decisions (C4, « Le prix de Grue »), once each.
+  if (colonyReturnOnViewV188()) return;
   if (deriveStoryCampaignV188(saveSystem.data).step !== 'debrief') return;
   try {
     const candidate = clone(saveSystem.data);
@@ -1445,14 +1451,18 @@ function renderCommand() {
   byId('crisis-summary').innerHTML = crisis && !crisis.resolved
     ? `<span class="chip danger">INCIDENT ${escapeHtml(crisis.kind).toUpperCase()}</span><h3>Pont ${crisis.deck + 1} · ${escapeHtml(crisis.roomId)}</h3><p>${crisis.count} menaces doivent être combattues dans le niveau du Tantalus.</p><button class="button primary" data-open-hub>INTERVENIR À PIED</button>`
     : '<span class="chip success">AUCUNE CRISE ACTIVE</span><p>La simulation continue à chaque action, trajet et récupération.</p>';
-  byId('frontier-alerts').innerHTML = (saveSystem.data.galaxy.alerts || []).slice(0, 6).map((alert) => `<article class="alert-item"><span>${escapeHtml(alert.severity || 'info')}</span><div><strong>${escapeHtml(alert.type || 'signal')}</strong><p>${escapeHtml(alert.message || '')}</p></div></article>`).join('') || '<p class="detail-copy">Aucune alerte stratégique.</p>';
+  // V188 (bible §13.2): messages received late during and after a jump, newest first, before the strategic alerts.
+  const langV188 = document.documentElement.lang === 'en' ? 'en' : 'fr';
+  const lateV188 = travelMessagesListV188(saveSystem.data, langV188, id => WORLDS.find(world => world.id === id)?.name || id, 4)
+    .map(message => `<article class="alert-item travel-message-v188" data-travel-message-v188="${escapeHtml(message.kind)}"><span>${escapeHtml(message.label)}</span><div><strong>${escapeHtml(message.from)}</strong><p>${escapeHtml(message.body)}</p></div></article>`).join('');
+  byId('frontier-alerts').innerHTML = lateV188 + (saveSystem.data.galaxy.alerts || []).slice(0, 6).map((alert) => `<article class="alert-item"><span>${escapeHtml(alert.severity || 'info')}</span><div><strong>${escapeHtml(alert.type || 'signal')}</strong><p>${escapeHtml(alert.message || '')}</p></div></article>`).join('') || '<p class="detail-copy">Aucune alerte stratégique.</p>';
   renderCommandMissionsV110();
 }
 
 const COLONY_REASONS_V188 = {
-  fr: { locked: 'Ouvre après l’Acte II.', 'operation-active': 'Pas pendant une mission.', 'awaiting-validation': 'Attend une opération réussie sur Cocyte.',
+  fr: { locked: 'Ouvre après l’Acte II.', 'operation-active': 'Pas pendant une mission.', 'awaiting-validation': 'Attend une opération réussie sur Cocyte.', 'awaiting-local': 'Attend une mission locale réussie à Port-Méridien.',
     'population-limit': 'Trop de chantiers actifs pour la population ramenée.', resources: 'Ressources insuffisantes.', complete: 'Terminé.' },
-  en: { locked: 'Opens after Act II.', 'operation-active': 'Not during a mission.', 'awaiting-validation': 'Awaits a successful operation on Cocyte.',
+  en: { locked: 'Opens after Act II.', 'operation-active': 'Not during a mission.', 'awaiting-validation': 'Awaits a successful operation on Cocyte.', 'awaiting-local': 'Awaits a successful local mission at Port-Méridien.',
     'population-limit': 'Too many active sites for the people brought back.', resources: 'Not enough resources.', complete: 'Complete.' }
 };
 // V188 (bible §6.3): Port-Méridien reconstruction table at the briefing table.
@@ -1461,7 +1471,8 @@ function renderColonyReconstructionV188() {
   const en = document.documentElement.lang === 'en', lang = en ? 'en' : 'fr', snapshot = colonySnapshotV188(saveSystem.data, lang);
   const title = document.createElement('h4');
   title.textContent = `${en ? 'PORT-MÉRIDIEN RECONSTRUCTION' : 'RECONSTRUCTION DE PORT-MÉRIDIEN'} · ${COLONY_TIERS_V188.find(tier => tier.id === snapshot.tier).label[lang].toUpperCase()}`;
-  if (!snapshot.open) { const hint = document.createElement('p'); hint.className = 'hint'; hint.textContent = COLONY_REASONS_V188[lang].locked; host.replaceChildren(title, hint); return; }
+  const missionsV188 = colonyMissionsPanelPartsV188(lang);
+  if (!snapshot.open) { const hint = document.createElement('p'); hint.className = 'hint'; hint.textContent = COLONY_REASONS_V188[lang].locked; host.replaceChildren(title, hint, ...missionsV188); return; }
   const info = document.createElement('p'); info.className = 'hint';
   info.textContent = en ? `Active sites ${snapshot.active}/${snapshot.activeLimit} · people brought back: ${snapshot.rescued}` : `Chantiers actifs ${snapshot.active}/${snapshot.activeLimit} · personnes ramenées : ${snapshot.rescued}`;
   const list = document.createElement('ul');
@@ -1477,18 +1488,50 @@ function renderColonyReconstructionV188() {
         textContent: entry.pending ? `${en ? 'AWAITING' : 'EN ATTENTE'} · ${entry.pendingLabel}`
           : `${en ? 'BUILD' : 'LANCER'} · ${entry.next.label} (${cost} · ${entry.next.hours} h)` });
       button.disabled = entry.pending;
+      if (entry.pending) button.title = COLONY_REASONS_V188[lang][colonyMissionsSnapshotV188(saveSystem.data, lang).localValidation ? 'awaiting-local' : 'awaiting-validation'];
       button.onclick = () => {
         try {
           const candidate = clone(saveSystem.data), result = investColonySiteV188(candidate, entry.id);
           if (!result.ok) { toast(COLONY_REASONS_V188[lang][result.reason] || result.reason); return; }
-          saveSystem.commit(candidate); renderAll(); toast(en ? 'Site work started; an operation on Cocyte will validate it.' : 'Chantier lancé ; une opération réussie sur Cocyte le validera.');
+          const localV188 = colonyMissionsSnapshotV188(candidate, lang).localValidation;
+          saveSystem.commit(candidate); renderAll(); toast(localV188 ? (en ? 'Site work started; a local mission at Port-Méridien will validate it.' : 'Chantier lancé ; une mission locale réussie à Port-Méridien le validera.')
+            : (en ? 'Site work started; an operation on Cocyte will validate it.' : 'Chantier lancé ; une opération réussie sur Cocyte le validera.'));
         } catch (error) { toast(error.message); }
       };
       item.append(button);
     }
     list.append(item);
   }
-  host.replaceChildren(title, info, list);
+  host.replaceChildren(title, info, list, ...missionsV188);
+}
+// V188 colony lot (bible §6.2): the colony missions, their effects and the decisions, on the same table.
+function colonyMissionsPanelPartsV188(lang) {
+  const en = lang === 'en', snapshot = colonyMissionsSnapshotV188(saveSystem.data, lang), parts = [];
+  const heading = (text) => { const node = document.createElement('h5'); node.textContent = text; parts.push(node); };
+  const siteName = id => colonySnapshotV188(saveSystem.data, lang).sites.find(entry => entry.id === id)?.criterion || id;
+  const list = (rows, extra = () => '') => {
+    const node = document.createElement('ul');
+    for (const row of rows) {
+      const item = document.createElement('li'); item.dataset.held = String(row.done); item.dataset.colonyMissionV188 = row.id;
+      item.textContent = `${row.done ? '■' : row.lock ? '□' : '▣'} ${row.name}${row.site ? ` · ${siteName(row.site)}` : ''}${extra(row)}${row.lockText ? ` — ${row.lockText}` : ''}`;
+      node.append(item);
+    }
+    parts.push(node);
+  };
+  heading(en ? 'PORT-MÉRIDIEN MISSIONS' : 'MISSIONS DE PORT-MÉRIDIEN');
+  list(snapshot.main, row => row.id === 'colony-c4' && snapshot.c4 ? ` · ${COLONY_DECISION_TEXT_V188.c4.options[snapshot.c4][lang]}` : '');
+  heading(en ? 'SIDE MISSIONS' : 'ANNEXES');
+  list(snapshot.sides, row => (row.giver ? ` · ${row.giver}` : '') + (row.id === 'colony-a-crucible' && snapshot.grue ? ` · ${COLONY_DECISION_TEXT_V188.grue.options[snapshot.grue][lang]}` : ''));
+  heading(en ? 'LOCAL CONTRACTS (REPEATABLE)' : 'CONTRATS LOCAUX (REJOUABLES)');
+  list(snapshot.contracts.map(row => ({ ...row, done: row.count > 0 })), row => ` · ×${row.count}`);
+  const hint = document.createElement('p'); hint.className = 'hint'; hint.dataset.colonyEffectsV188 = 'true';
+  const walls = snapshot.wallsBonus;
+  hint.textContent = `${snapshot.localValidation ? (en ? 'Site levels are validated by local missions.' : 'Les niveaux des chantiers sont validés par les missions locales.') : (en ? 'Until C1, any successful operation on Cocyte validates a level.' : 'Jusqu’à C1, toute opération réussie sur Cocyte valide un niveau.')}`
+    + ` ${en ? 'Volunteers from quests and missions' : 'Volontaires des quêtes et missions'} : +${snapshot.population}.`
+    + ` C5 : ${walls.level ? `${en ? 'walls level' : 'murs niveau'} ${walls.level}${walls.ammo ? `, +${walls.ammo} ${en ? 'ammunition' : 'munitions'}` : ''}${walls.armour ? `, ${en ? 'armour' : 'blindage'} ${walls.armour}` : ''}` : (en ? 'no rebuilt wall' : 'aucun mur reconstruit')}.`
+    + (snapshot.wren ? ` ${en ? 'Wren’s testimony is in the QZ17 file.' : 'Le témoignage de Wren est au dossier QZ17.'}` : '');
+  parts.push(hint);
+  return parts;
 }
 // V188 spec 005 (bible §7.2): Asphodèle station front at the briefing table.
 function renderStationFrontV188() {
@@ -1524,6 +1567,7 @@ function renderCrewQuestsPanelV188() {
     list.append(item);
   }
   const parts = [title, list];
+  for (const text of crewQuestNotesV188(saveSystem.data, en ? 'en' : 'fr')) { const note = document.createElement('p'); note.className = 'hint'; note.textContent = text; parts.push(note); }
   if (davidMemoryRestoredV188(saveSystem.data)) { const note = document.createElement('p'); note.className = 'hint'; note.textContent = en ? 'QZ17 file annex: DAVID-8R served at relay post QZ-9 (outside the count).' : 'Annexe au dossier QZ17 : DAVID-8R a servi au poste de relais QZ-9 (hors décompte).'; parts.push(note); }
   host.replaceChildren(...parts);
 }
@@ -1562,6 +1606,35 @@ function stationReturnOnViewV188() {
   openContentSceneDialogV188({ language: lang, slot: scene.slot, title: scene.title[lang], text: scene.text[lang],
     options: [{ id: 'continue', label: lang === 'en' ? 'CONTINUE' : 'CONTINUER' }], onChoose: () => null,
     onClose: () => { stationSceneOpenV188 = false; } });
+  return true;
+}
+// V188 colony lot (bible §6.2): the colony decisions come first (they cannot be dismissed), then each return scene once.
+let colonySceneOpenV188 = false;
+function colonyReturnOnViewV188() {
+  if (colonySceneOpenV188 || stationSceneOpenV188 || document.querySelector('.content-scene-v188')) return colonySceneOpenV188;
+  const lang = document.documentElement.lang === 'en' ? 'en' : 'fr';
+  const next = { id: 'continue', label: lang === 'en' ? 'CONTINUE' : 'CONTINUER' };
+  const decision = colonyC4DecisionPendingV188(saveSystem.data) ? 'c4' : colonyGrueDecisionPendingV188(saveSystem.data) ? 'grue' : null;
+  // The return scene of the decision's mission is read first; the decision follows in the same dialog.
+  const sceneId = colonyReturnSceneDueV188(saveSystem.data);
+  if (!decision && !sceneId) return false;
+  const decisionView = () => {
+    const text = COLONY_DECISION_TEXT_V188[decision];
+    const options = (decision === 'c4' ? colonyC4OptionsV188(saveSystem.data) : COLONY_GRUE_CHOICES_V188).map(id => ({ id, label: text.options[id][lang] }));
+    return { title: text.title[lang], text: text.text[lang], options };
+  };
+  let scene = sceneId ? COLONY_SCENES_V188[sceneId] : null;
+  if (sceneId && !commitCandidateV188(candidate => markColonySceneSeenV188(candidate, sceneId))) return true;
+  const first = scene ? { title: scene.title[lang], text: scene.text[lang], options: [next] } : decisionView();
+  colonySceneOpenV188 = true;
+  openContentSceneDialogV188({ language: lang, slot: scene?.slot || (decision === 'c4' ? 'colony-cult' : 'colony-quay-warehouse'), ...first,
+    onChoose: (id) => {
+      if (id === 'continue') return decision && (decision === 'c4' ? colonyC4DecisionPendingV188(saveSystem.data) : colonyGrueDecisionPendingV188(saveSystem.data)) ? decisionView() : null;
+      if (id === 'close') return null;
+      const effect = commitCandidateV188(candidate => (decision === 'c4' ? chooseColonyC4V188(candidate, id) : chooseColonyGrueV188(candidate, id)) ? true : false);
+      return effect ? { text: COLONY_DECISION_TEXT_V188[decision].results[id][lang], options: [{ id: 'close', label: lang === 'en' ? 'CLOSE' : 'FERMER' }] } : null;
+    },
+    onClose: () => { colonySceneOpenV188 = false; renderAll(); queueMicrotask(markStoryDebriefOnViewV188); } });
   return true;
 }
 // —— V188 spec 007: the Asphodèle second hub (bible §7.3, §42) ——
@@ -1769,7 +1842,7 @@ function openKesslerTagDialogV188(notes) {
 }
 // —— V188 spec 006 (bible §5.6-§5.8): Act V « Non viable » ——
 // Hoisted helpers: the briefing table and the mission lists read them during the first render.
-function unlockedCampaignsV188(list) { return filterAct5CampaignsV188(saveSystem.data, filterUnlockedCampaignsV188(saveSystem.data, list)); }
+function unlockedCampaignsV188(list) { return filterColonyCampaignsV188(saveSystem.data, filterAct5CampaignsV188(saveSystem.data, filterUnlockedCampaignsV188(saveSystem.data, list))); }
 function storyStateV188() { return deriveStoryWithAct5V188(saveSystem.data, { language: document.documentElement.lang === 'en' ? 'en' : 'fr' }); }
 function act5LangV188() { return document.documentElement.lang === 'en' ? 'en' : 'fr'; }
 let act5LoaderInstanceV188 = null;
@@ -1862,8 +1935,10 @@ function act5LockerOnReadV188() {
   if (phase === 'complete') { toast(`ECHO-8 · ${act5LockerLabelV188(saveSystem.data, lang)}`); return true; }
   return false;
 }
+// V188 colony and crew lot: a finished quest may add its own epilogue line (ECHO-A, §8.1).
+const crewEpilogueLineV188 = (crewId, lang) => act5CrewEpilogueLineV188(saveSystem.data, crewId, lang) || crewQuestEpilogueLineV188(saveSystem.data, crewId, lang, act5StateV188(saveSystem.data).phase);
 function openAct5EpilogueLineV188(crewId) {
-  const lang = act5LangV188(), text = act5CrewEpilogueLineV188(saveSystem.data, crewId, lang);
+  const lang = act5LangV188(), text = crewEpilogueLineV188(crewId, lang);
   if (!text) return false;
   closeHubDialogue({ resume: false, restoreFocus: false }); hubEngine.pause();
   const name = resolveCrewDefinitionV85(saveSystem.data.crew.find(member => member.id === crewId) || { id: crewId }, CREW)?.name || crewId;
@@ -1949,9 +2024,12 @@ function openCrewQuestV188(questId) {
   };
   const leave = { id: 'leave', label: en ? 'LATER' : 'PLUS TARD' };
   let first;
+  // V188 colony and crew lot: each collection or gated quest carries its own texts; DAVID-8R keeps the spec 005 wording.
+  const progressV188 = action.label.match(/\((\d+\/\d+)\)/)?.[1] || '';
   if (action.action === 'accept') first = { text: quest.offer[lang], options: [{ id: 'accept', label: en ? 'ACCEPT' : 'ACCEPTER' }, leave] };
-  else if (action.action === 'turn-in') first = { text: en ? 'The three relay components are here.' : 'Les trois composants de relais sont là.', options: [{ id: 'turn-in', label: en ? 'HAND THEM OVER' : 'LES REMETTRE' }, leave] };
-  else if (action.action === 'wait') first = { text: en ? `Components brought back: ${action.label.match(/\((\d+\/\d+)\)/)?.[1] || ''}. A successful operation on Cocyte brings one back.` : `Composants ramenés : ${action.label.match(/\((\d+\/\d+)\)/)?.[1] || ''}. Une opération réussie sur Cocyte en ramène un.`, options: [leave] };
+  else if (action.action === 'turn-in') first = { text: quest.turnInText?.[lang] || (en ? 'The three relay components are here.' : 'Les trois composants de relais sont là.'), options: [{ id: 'turn-in', label: quest.turnInLabel?.[lang] || (en ? 'HAND THEM OVER' : 'LES REMETTRE') }, leave] };
+  else if (action.action === 'wait' && quest.gate) first = { text: quest.gate.waitText[lang], options: [leave] };
+  else if (action.action === 'wait') first = { text: quest.progressText ? quest.progressText[lang].replace('{n}', progressV188) : en ? `Components brought back: ${progressV188}. A successful operation on Cocyte brings one back.` : `Composants ramenés : ${progressV188}. Une opération réussie sur Cocyte en ramène un.`, options: [leave] };
   else first = stepView();
   if (!first) { resumeHub(); return false; }
   openContentSceneDialogV188({ language: lang, slot: quest.slot, title: `${quest.giver} · ${quest.title[lang]}`, ...first,
@@ -1959,7 +2037,8 @@ function openCrewQuestV188(questId) {
       if (id === 'leave' || id === 'close') return null;
       if (id === 'accept') {
         if (!commitCandidateV188(candidate => acceptCrewQuestV188(candidate, questId))) return null;
-        return quest.kind === 'analysis' ? stepView() : { text: en ? 'Quest accepted. Bring back three relay components from operations on Cocyte.' : 'Quête acceptée. Ramenez trois composants de relais d’opérations sur Cocyte.', options: [{ id: 'close', label: en ? 'CLOSE' : 'FERMER' }] };
+        if (quest.gate && !stepView()) return { text: quest.gate.waitText[lang], options: [{ id: 'close', label: en ? 'CLOSE' : 'FERMER' }] };
+        return quest.kind === 'analysis' ? stepView() : { text: quest.acceptText?.[lang] || (en ? 'Quest accepted. Bring back three relay components from operations on Cocyte.' : 'Quête acceptée. Ramenez trois composants de relais d’opérations sur Cocyte.'), options: [{ id: 'close', label: en ? 'CLOSE' : 'FERMER' }] };
       }
       if (id === 'turn-in') {
         let outcome = null;
@@ -2162,6 +2241,9 @@ function tickGalaxyJumpV116() {
     const result = runTimedMutation(() => {
       const settlement = confirmJumpV115(saveSystem.data, destination, WORLDS);
       if (applyJumpTravelTimeV188(saveSystem.data, settlement)) settlement.result = `${settlement.result} ${jumpArrivalTextV188(document.documentElement.lang)}`;
+      // V188 colony and crew lot (bible §13.2): the messages that followed the Tantalus arrive late, once per jump.
+      const lateV188 = deliverTravelMessagesV188(saveSystem.data, settlement, { relayRoomReady: asphodeleRelayReadyV188(saveSystem.data) });
+      if (lateV188.length) settlement.result = `${settlement.result} ${travelArrivalNoticeV188(lateV188.length, document.documentElement.lang)}`;
       return settlement;
     }, undefined, { duringTransitV116: true });
     if (!result && ownsTimelineV84(owner)) { failedJumpOwnerV116 = owner; renderGalaxyJumpV116(); }
@@ -3617,6 +3699,9 @@ function launchCampaign(campaign = null) {
   // V188 spec 006: Act V missions follow the line decided at the war council.
   const act5LockV188 = activeOperation ? null : act5LockReasonV188(saveSystem.data, campaign.id);
   if (act5LockV188) { toast(act5LockTextV188(act5LockV188, document.documentElement.lang)); return false; }
+  // V188 colony lot: Port-Méridien missions follow the acts, C1 → C4 and the colony tiers (bible §6.2, §6.3).
+  const colonyLockV188 = activeOperation ? null : colonyLockReasonV188(saveSystem.data, campaign.id);
+  if (colonyLockV188) { toast(colonyLockTextV188(colonyLockV188, document.documentElement.lang)); return false; }
   // Act III moral choice (bible §5.3): the M577 manifest is signed before the convoy leaves.
   if (!activeOperation && campaign.id === 'special-apc-convoy' && !normalizeStoryCampaignV188(saveSystem.data.storyCampaignV188).m577Manifest) {
     openM577ManifestDialogV188({ language: document.documentElement.lang, onConfirm: (manifest) => {
@@ -3685,10 +3770,17 @@ function launchCampaign(campaign = null) {
   Object.assign(saveSystem.data, { scene: 'mission', worldId: world.id, campaignId: campaign.id, levelSeedId: levelSeed.id });
   // V188 spec 006: the war council's advantages, once per launch of a final mission (not on a resume).
   const act5AdvantagesV188 = deployment.resumed ? [] : applyAct5LaunchAdvantagesV188(saveSystem.data, campaign.id);
+  // V188 colony lot: C5 « La nuit des murs » (act5-port-walls) — the walls' level sets the defence, once per launch.
+  const colonyC5V188 = deployment.resumed ? null : applyColonyC5LaunchV188(saveSystem.data, campaign.id);
   saveSystem.commit();
   if (act5AdvantagesV188.length) {
     const en = document.documentElement.lang === 'en', labels = { turrets: en ? 'Sanaa’s turret belts (+120 ammunition)' : 'bandes des tourelles de Sanaa (+120 munitions)', armour: en ? 'Cal’s plates (armour 100)' : 'plaques de Cal (blindage 100)' };
     toast(`${en ? 'War council' : 'Conseil de guerre'} : ${act5AdvantagesV188.map(id => labels[id]).join(', ')}.`);
+  }
+  if (colonyC5V188) {
+    const en = document.documentElement.lang === 'en';
+    toast(colonyC5V188.level ? `${en ? 'C5 · Night of the walls: walls level' : 'C5 · La nuit des murs : murs niveau'} ${colonyC5V188.level}${colonyC5V188.ammo ? ` · +${colonyC5V188.ammo} ${en ? 'ammunition' : 'munitions'}` : ''}${colonyC5V188.armour ? ` · ${en ? 'armour' : 'blindage'} ${colonyC5V188.armour}` : ''}.`
+      : (en ? 'C5 · Night of the walls: no rebuilt wall, the port holds with what it has.' : 'C5 · La nuit des murs : aucun mur reconstruit, le port tient avec ce qu’il a.'));
   }
   byId('mission-title').textContent = campaign.name;
   pendingResolutionV121 = null;
@@ -3747,10 +3839,12 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   const resolvedSuccess = outcome?.ok ? outcome.success !== false : false;
   if (!outcome?.ok) return outcome;
   if (campaign && world) applyCampaignConsequence(candidate, campaign, world, { success: resolvedSuccess });
+  // V188 colony lot (bible §6.2): a colony mission pays its colony reward once; a contract validates its own site.
+  const colonyMissionV188 = applyColonyMissionResultV188(candidate, { success: resolvedSuccess, campaignId: operation.campaignId });
   // V188 reconstruction (bible §6.3): an operation on Cocyte validates or damages a site.
   const colonyChangeV188 = applyColonyOperationResultV188(candidate, { success: resolvedSuccess, worldId: operation.worldId || campaign?.worldId });
   // V188 crew quests (bible §8.1): DAVID-8R's relay components come back from successful operations on Cocyte.
-  const questChangeV188 = applyCrewQuestOperationResultV188(candidate, { success: resolvedSuccess, worldId: operation.worldId || campaign?.worldId });
+  const questChangeV188 = applyCrewQuestOperationResultV188(candidate, { success: resolvedSuccess, worldId: operation.worldId || campaign?.worldId, objective: campaign?.objective || null, campaignId: operation.campaignId });
   // V188 spec 007: a successful station contract adds one to its counter (« Relais en dérive » ×3 opens the relay room).
   const asphodeleContractV188 = applyAsphodeleOperationResultV188(candidate, { success: resolvedSuccess, campaignId: operation.campaignId, operationId: operation.id });
   // V188 spec 006: the bridge default if the choice never showed.
@@ -3772,11 +3866,16 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   renderAll();
   const colonySiteV188 = id => colonySnapshotV188(candidate, document.documentElement.lang).sites.find(entry => entry.id === id)?.criterion || id;
   if (colonyChangeV188?.validated) toast(document.documentElement.lang === 'en' ? `Port-Méridien: site level validated (${colonySiteV188(colonyChangeV188.validated)} ${colonyChangeV188.level}).` : `Port-Méridien : niveau de chantier validé (${colonySiteV188(colonyChangeV188.validated)} ${colonyChangeV188.level}).`);
+  if (colonyMissionV188?.site) toast(document.documentElement.lang === 'en' ? `Port-Méridien: ${colonySiteV188(colonyMissionV188.site.site)} level ${colonyMissionV188.site.level} validated by ${colonyCampaignNameV188(operation.campaignId, 'en')}.` : `Port-Méridien : ${colonySiteV188(colonyMissionV188.site.site)} niveau ${colonyMissionV188.site.level} validé par ${colonyCampaignNameV188(operation.campaignId, 'fr')}.`);
+  if (colonyMissionV188?.population) toast(document.documentElement.lang === 'en' ? `Port-Méridien: +${colonyMissionV188.population} people for the sites.` : `Port-Méridien : +${colonyMissionV188.population} personnes pour les chantiers.`);
   if (colonyChangeV188?.damaged) toast(document.documentElement.lang === 'en' ? `Port-Méridien: a site lost one functioning level (${colonySiteV188(colonyChangeV188.damaged)}).` : `Port-Méridien : un chantier perd un niveau de fonctionnement (${colonySiteV188(colonyChangeV188.damaged)}).`);
   if (asphodeleContractV188) toast(asphodeleContractEffectTextV188(candidate, asphodeleContractV188, document.documentElement.lang === 'en' ? 'en' : 'fr'));
   if (act5ChangeV188?.kind === 'bridge-default') toast(ACT5_BRIDGE_TEXT_V188.results.timeout[document.documentElement.lang === 'en' ? 'en' : 'fr']);
-  for (const change of questChangeV188 || []) toast(document.documentElement.lang === 'en'
-    ? `DAVID-8R: relay component recovered (${change.components}/${change.needed}).` : `DAVID-8R : composant de relais récupéré (${change.components}/${change.needed}).`);
+  for (const change of questChangeV188 || []) {
+    const questToastV188 = getCrewQuestV188(change.id)?.toastText?.[document.documentElement.lang === 'en' ? 'en' : 'fr'];
+    toast(questToastV188 ? questToastV188.replace('{n}', change.components).replace('{needed}', change.needed) : document.documentElement.lang === 'en'
+      ? `DAVID-8R: relay component recovered (${change.components}/${change.needed}).` : `DAVID-8R : composant de relais récupéré (${change.components}/${change.needed}).`);
+  }
   for (const line of reactiveLinesV188) {
     const name = resolveCrewDefinitionV85(saveSystem.data.crew.find((member) => member.id === line.crewId) || { id: line.crewId }, CREW)?.name || line.crewId;
     toast(`${name} : « ${line.text} »`);
@@ -5040,7 +5139,7 @@ function bind() {
       button.dataset.crewQuestV188 = quest.id; event.currentTarget.append(button);
     }
     // V188 spec 006: each crew member's last line in the epilogue.
-    if (act5CrewEpilogueLineV188(saveSystem.data, event.detail?.crewId, document.documentElement.lang)) {
+    if (crewEpilogueLineV188(event.detail?.crewId, document.documentElement.lang === 'en' ? 'en' : 'fr')) {
       const button = Object.assign(document.createElement('button'), { type: 'button', className: 'hub-dialogue-choice crew-quest-choice-v188',
         textContent: document.documentElement.lang === 'en' ? 'EPILOGUE · Last word' : 'ÉPILOGUE · Dernier mot' });
       button.dataset.act5EpilogueV188 = event.detail.crewId; event.currentTarget.append(button);
