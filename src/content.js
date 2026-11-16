@@ -17,12 +17,13 @@ import { NEW_SPECIAL_CAMPAIGNS_V131, validateSpecialOperationsV131 } from './spe
 import { STATION_CAMPAIGNS_V188 } from './station-asphodele-v188.js';
 import { ASPHODELE_CAMPAIGNS_V188 } from './asphodele-missions-v188.js';
 import { ACT5_CAMPAIGNS_V188 } from './story-act5-v188.js';
+import { COLONY_CAMPAIGNS_V188 } from './colony-missions-v188.js';
 
 export * from './content-core-v50.js';
 
-export const CAMPAIGNS = Object.freeze([...buildCampaignsWithSpecialOperationsV67(buildMireCampaignsV143(CORE_CAMPAIGNS, WORLDS)), BLACK_COCOON_CAMPAIGN_V121, APC_CONVOY_CAMPAIGN_V121, C12_HORDE_CAMPAIGN_V121, ARCHIVE_RELAY_CAMPAIGN_V122, ...NEW_SPECIAL_CAMPAIGNS_V131, ...STATION_CAMPAIGNS_V188, ...ASPHODELE_CAMPAIGNS_V188, ...ACT5_CAMPAIGNS_V188]);
+export const CAMPAIGNS = Object.freeze([...buildCampaignsWithSpecialOperationsV67(buildMireCampaignsV143(CORE_CAMPAIGNS, WORLDS)), BLACK_COCOON_CAMPAIGN_V121, APC_CONVOY_CAMPAIGN_V121, C12_HORDE_CAMPAIGN_V121, ARCHIVE_RELAY_CAMPAIGN_V122, ...NEW_SPECIAL_CAMPAIGNS_V131, ...STATION_CAMPAIGNS_V188, ...ASPHODELE_CAMPAIGNS_V188, ...ACT5_CAMPAIGNS_V188, ...COLONY_CAMPAIGNS_V188]);
 export const CONTENT_COUNTS = Object.freeze({ ...CORE_CONTENT_COUNTS, campaigns: CAMPAIGNS.length });
-export const CONTENT_TARGETS = Object.freeze({ ...CORE_CONTENT_TARGETS, campaigns: 476 }); // V188: + the four Asphodèle station missions (spec 005), + 7 station side missions and 6 contracts (spec 007), + the four Act V missions (spec 006)
+export const CONTENT_TARGETS = Object.freeze({ ...CORE_CONTENT_TARGETS, campaigns: 495 }); // V188: + the four Asphodèle station missions (spec 005), + 7 station side missions and 6 contracts (spec 007), + the four Act V missions (spec 006), + Port-Méridien C1-C4, 7 side missions and 8 contracts (colony and crew lot; C5 is act5-port-walls)
 
 export function validateContent() {
   const core = validateCoreContent();

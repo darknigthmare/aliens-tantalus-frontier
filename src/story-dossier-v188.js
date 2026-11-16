@@ -4,6 +4,7 @@
 import { normalizeStoryCampaignV188 } from './story-campaign-v188.js';
 import { cassiusOrdersRecoveredV188, asphodeleRetakenV188 } from './station-asphodele-v188.js';
 import { asphodeleRelayReadyV188 } from './asphodele-hub-v188.js';
+import { wrenTestimonyRecoveredV188 } from './colony-missions-v188.js';
 
 const t = (fr, en) => Object.freeze({ fr, en });
 const has = (list, id) => Array.isArray(list) && list.includes(id);
@@ -21,8 +22,8 @@ export const DOSSIER_PIECES_V188 = Object.freeze([
     held: save => has(save?.galaxy?.completedCampaignIds, 'special-black-cocoon') }),
   // V188 spec 005: S2 copies the archived orders, whatever is later done to CASSIUS (§5.7.1).
   Object.freeze({ id: 'cassius-orders', source: 'station-s2', label: t('Ordres de livraison archivés par CASSIUS', 'Delivery orders archived by CASSIUS'), held: save => cassiusOrdersRecoveredV188(save) }),
-  // Not playable yet: the colony annex "Ce que le quai a vu".
-  Object.freeze({ id: 'wren-testimony', source: 'colony-a-quai', label: t('Témoignage de Tomas Wren', 'Tomas Wren’s testimony'), held: () => false, unavailable: true })
+  // V188 colony lot: the colony annex « Ce que le quai a vu » (bible §6.2), opened after C1.
+  Object.freeze({ id: 'wren-testimony', source: 'colony-a-quai', label: t('Témoignage de Tomas Wren', 'Tomas Wren’s testimony'), held: save => wrenTestimonyRecoveredV188(save) })
 ]);
 
 export function storyDossierV188(save, language = 'fr') {

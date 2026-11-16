@@ -3,9 +3,11 @@
 // a Canvas picture drawn through a named art slot (content-gap-slots-v188.js).
 // No persistence here: callers commit a candidate save in `onChoose`.
 import { ContentGapAssetLoaderV188 } from './content-gap-slots-v188.js';
+import { ColonyCrewAssetLoaderV188, getColonyCrewSlotV188 } from './colony-crew-slots-v188.js';
 
-let sharedLoader = null;
-const loaderOf = loader => loader || (sharedLoader ||= new ContentGapAssetLoaderV188());
+let sharedLoader = null, sharedColonyLoader = null;
+// V188 colony and crew lot: the colony and crew-quest slots have their own loader (colony-crew-slots-v188.js).
+const loaderOf = (loader, slot) => loader || (getColonyCrewSlotV188(slot) ? (sharedColonyLoader ||= new ColonyCrewAssetLoaderV188()) : (sharedLoader ||= new ContentGapAssetLoaderV188()));
 
 /**
  * Opens the dialog. `onChoose(id)` may return { text, options, title } to show
@@ -31,7 +33,7 @@ export function openContentSceneDialogV188({ document = globalThis.document, loa
     feedback.hidden = !note; feedback.textContent = note || '';
     if (nextSlot) {
       const ctx = canvas.getContext?.('2d');
-      if (ctx) { loaderOf(loader).draw(ctx, nextSlot, canvas.width, canvas.height, { language }); dialog.dataset.contentSceneV188 = nextSlot; }
+      if (ctx) { loaderOf(loader, nextSlot).draw(ctx, nextSlot, canvas.width, canvas.height, { language }); dialog.dataset.contentSceneV188 = nextSlot; }
       canvas.hidden = false;
     } else canvas.hidden = true;
     footer.replaceChildren();
