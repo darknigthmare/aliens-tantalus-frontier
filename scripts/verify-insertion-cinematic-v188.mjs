@@ -12,7 +12,8 @@ import {
   INSERTION_BOARDING_EVENT_V188
 } from '../src/insertion-cinematic-v188.js';
 import { INSERTION_ASSET_SLOTS_V188, INSERTION_ASSET_SLOT_IDS_V188, INSERTION_ASSET_FILES_PRESENT_V188, INSERTION_ASSET_LAYERS_V188,
-  InsertionAssetLoaderV188, getInsertionAssetSlotV188 } from '../src/insertion-asset-slots-v188.js';
+  InsertionAssetLoaderV188, getInsertionAssetSlotV188, insertionTargetArtV188, INSERTION_TARGET_SHIPS_BY_WORLD_V188,
+  INSERTION_ORIGINAL_TARGET_WORLD_IDS_V188, INSERTION_ASSET_REUSED_V188 } from '../src/insertion-asset-slots-v188.js';
 import { APC_MISSION_TEMPLATE_IDS_V188 } from '../src/game-v52-level-runtime.js';
 import { createDefaultSave, migrateSave } from '../src/save.js';
 import { EN_CATALOG_V185 } from '../src/i18n-en-catalog-v185.js';
@@ -20,12 +21,24 @@ import { EN_CATALOG_V185 } from '../src/i18n-en-catalog-v185.js';
 const read = path => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
 const world = id => WORLDS.find(entry => entry.id === id);
 function recorder() {
-  const calls = { text: [], images: 0, fillRect: 0 };
+  const calls = { text: [], images: 0, imageDraws: [], fillRect: 0, fills: [], clips: [], events: [], radialGradients: [] }, stack = [];
   const gradient = () => ({ addColorStop() {} });
-  const ctx = new Proxy({ measureText: value => ({ width: String(value).length * 9 }), createLinearGradient: gradient, createRadialGradient: gradient,
-    fillText(value) { calls.text.push(String(value)); }, drawImage() { calls.images++; }, fillRect() { calls.fillRect++; } },
-  { get: (object, key) => key in object ? object[key] : () => {}, set: (object, key, value) => { object[key] = value; return true; } });
-  return { ctx, calls };
+  const stateKeys = ['globalAlpha', 'globalCompositeOperation', 'fillStyle', 'strokeStyle', 'lineWidth', 'font', 'textAlign', 'textBaseline'];
+  let path = [], outline = [], clips = [], clipPaths = [];
+  const state = { globalAlpha: 1, globalCompositeOperation: 'source-over',
+    measureText: value => ({ width: String(value).length * 9 }), createLinearGradient: gradient,
+    createRadialGradient(...args) { calls.radialGradients.push(args); return gradient(); },
+    save() { stack.push({ values: Object.fromEntries(stateKeys.map(key => [key, state[key]])), clips: [...clips], clipPaths: [...clipPaths] }); },
+    restore() { const saved = stack.pop(); assert.ok(saved, 'balanced canvas restore'); Object.assign(state, saved.values); clips = saved.clips; clipPaths = saved.clipPaths; },
+    beginPath() { path = []; outline = []; }, rect(...box) { path.push(box); outline.push(['rect', ...box]); },
+    moveTo(...point) { outline.push(['moveTo', ...point]); }, lineTo(...point) { outline.push(['lineTo', ...point]); }, closePath() { outline.push(['closePath']); },
+    clip(rule = 'nonzero') { clips.push(...path); calls.clips.push(...path); clipPaths.push({ rule, commands: [...outline] }); },
+    fillText(value) { calls.text.push(String(value)); calls.events.push({ type: 'text', text: String(value) }); },
+    drawImage(image, ...box) { const draw = { type: 'image', image, box, alpha: state.globalAlpha, composite: state.globalCompositeOperation, clips: [...clips], clipPaths: [...clipPaths] }; calls.images++; calls.imageDraws.push(draw); calls.events.push(draw); },
+    fillRect(...box) { const fill = { type: 'fill', box, alpha: state.globalAlpha, composite: state.globalCompositeOperation, colour: state.fillStyle }; calls.fillRect++; calls.fills.push(fill); calls.events.push(fill); }
+  };
+  const ctx = new Proxy(state, { get: (object, key) => key in object ? object[key] : () => {}, set: (object, key, value) => { object[key] = value; return true; } });
+  return { ctx, calls, stack };
 }
 const SAMPLE = { atmosphere: world('world-01-acheron-lv-426'), airless: world('world-11-freya-s-prospect'), space: world('world-15-uscss-nostromo') };
 
@@ -154,13 +167,22 @@ test('reduced motion removes the shake and softens the camera move', () => {
 
 test('every visual goes through a named art slot; a missing image falls back to primitives', () => {
   assert.equal(new Set(INSERTION_ASSET_SLOT_IDS_V188).size, INSERTION_ASSET_SLOTS_V188.length);
+  assert.deepEqual(Object.keys(INSERTION_ASSET_REUSED_V188).sort(), ['comms-pilot', 'ud4l-front'], 'only the two reviewed references override a slot path');
   for (const entry of INSERTION_ASSET_SLOTS_V188) {
     assert.ok(INSERTION_ASSET_LAYERS_V188.includes(entry.layer), entry.id);
     assert.ok(entry.width > 0 && entry.height > 0 && entry.purpose.length > 20 && entry.brief.length > 40, entry.id);
-    assert.equal(entry.path, `/assets/insertion/v188/${entry.id}.png`);
+    assert.equal(entry.path, INSERTION_ASSET_REUSED_V188[entry.id]?.path || `/assets/insertion/v188/${entry.id}.png`);
     assert.ok(!/1:1|certif(ied|ié)/i.test(entry.brief.replace(/would not certify/g, '')), `${entry.id}: no fidelity claim`);
   }
-  for (const id of INSERTION_ASSET_FILES_PRESENT_V188) assert.ok(existsSync(new URL(`..${getInsertionAssetSlotV188(id).path}`, import.meta.url)), `${id} file committed`);
+  const sw = read('sw.js');
+  for (const id of INSERTION_ASSET_FILES_PRESENT_V188) {
+    const path = getInsertionAssetSlotV188(id).path, file = new URL(`..${path}`, import.meta.url);
+    assert.ok(existsSync(file), `${id} file committed`);
+    const bytes = readFileSync(file);
+    assert.ok(bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])), `${id}: actual PNG`);
+    assert.ok(bytes.readUInt32BE(16) > 0 && bytes.readUInt32BE(20) > 0, `${id}: nonempty bitmap`);
+    assert.ok(sw.includes(`'${path}'`), `${id}: available offline`);
+  }
   // No committed file: nothing is requested, every draw uses the primitive fallback.
   class FakeImage { constructor() { this.complete = true; this.naturalWidth = 64; } }
   const empty = new InsertionAssetLoaderV188({ ImageCtor: FakeImage, present: [] });
@@ -181,6 +203,234 @@ test('every visual goes through a named art slot; a missing image falls back to 
   assert.throws(() => present.draw(ctx, 'not-a-slot', 0, 0, 1, 1), /Unknown insertion art slot/);
   const doc = read('docs/development/INSERTION_ART_SLOTS_V188.md');
   for (const id of INSERTION_ASSET_SLOT_IDS_V188) assert.ok(doc.includes(`\`${id}\``), `${id} documented`);
+});
+
+// These tests exercise loaded images in complete frames. Image decoding itself is
+// covered by the separate native Canvas pixel inspection; this fixture records the
+// destination geometry, compositing state and clipping sent to Canvas.
+class RasterImageFixture {
+  constructor() { this.complete = true; }
+  set src(path) {
+    this.path = path;
+    const entry = INSERTION_ASSET_SLOTS_V188.find(slot => slot.path === path);
+    const reused = INSERTION_ASSET_REUSED_V188[entry?.id];
+    this.naturalWidth = reused?.width || entry?.width || 1507; this.naturalHeight = reused?.height || entry?.height || 1044;
+  }
+  get src() { return this.path; }
+}
+function rasterAssets(ids, createCanvas = () => null) {
+  const assets = new InsertionAssetLoaderV188({ ImageCtor: RasterImageFixture, present: ids, createCanvas });
+  assets.preload(); return assets;
+}
+function slotDraws(calls, id) { return calls.imageDraws.filter(draw => draw.image.src === getInsertionAssetSlotV188(id)?.path); }
+
+test('loaded planet discs keep orbital position and radius instead of covering the full frame', () => {
+  for (const [place, id] of [['atmosphere', 'planet-limb'], ['airless', 'moon-limb']]) {
+    const assets = rasterAssets([id]), sequence = buildInsertionSequenceV188({ profile: insertionWorldProfileV188(SAMPLE[place]) });
+    const release = sequence.shots.find(shot => shot.kind === 'release');
+    const first = recorder(); drawInsertionFrameV188(first.ctx, sequence, release.start + release.seconds / 2, { assets });
+    assert.deepEqual(slotDraws(first.calls, id).map(draw => draw.box), [[-460, 600, 2200, 2200]], `${place}: release horizon follows r=1100, cy=1700`);
+    const orbit = sequence.shots.find(shot => shot.kind === 'orbit');
+    const second = recorder(); drawInsertionFrameV188(second.ctx, sequence, orbit.start + orbit.seconds / 2, { assets });
+    assert.deepEqual(slotDraws(second.calls, id).map(draw => draw.box), [[-220, 490, 1720, 1720]], `${place}: orbital radius changes with flight progress`);
+    assert.equal(first.stack.length + second.stack.length, 0, 'frame leaves no saved canvas state');
+  }
+});
+
+test('loaded cloud and terrain layers retain alpha, aspect ratio and different parallax speeds', () => {
+  const assets = rasterAssets(['cloud-far', 'terrain-far']), sequence = buildInsertionSequenceV188({ profile: insertionWorldProfileV188(SAMPLE.atmosphere) });
+  const approach = sequence.shots.find(shot => shot.kind === 'approach'), start = approach.start + 1;
+  const frames = [start, start + .1].map(time => { const frame = recorder(); drawInsertionFrameV188(frame.ctx, sequence, time, { assets }); return frame; });
+  const clouds = frames.map(frame => slotDraws(frame.calls, 'cloud-far')), terrain = frames.map(frame => slotDraws(frame.calls, 'terrain-far'));
+  for (const draws of clouds) {
+    assert.ok(draws.length >= 2, 'cloud strip repeats to cover the screen');
+    assert.ok(draws.every(draw => draw.alpha === .55), 'raster respects the cloud opacity');
+    assert.ok(draws.every(draw => draw.box[2] / draw.box[3] === 4), 'native cloud ratio');
+    assert.ok(draws[0].clips.some(box => box.join(',') === '0,50,1280,200'), 'repeating strip is clipped');
+    assert.ok(draws[0].box[0] <= 0 && draws.at(-1).box[0] + draws.at(-1).box[2] >= 1280, 'no gap across the viewport');
+  }
+  assert.ok(Math.abs((clouds[0][0].box[0] - clouds[1][0].box[0]) - 6) < 1e-8, 'far cloud moves 60 px/s');
+  assert.ok(Math.abs((terrain[0][0].box[0] - terrain[1][0].box[0]) - 3) < 1e-8, 'far terrain moves 30 px/s');
+  assert.ok(terrain.flat().every(draw => draw.alpha === 1 && Math.abs(draw.box[2] / draw.box[3] - 5.12) < 1e-8));
+  // Real Canvas can cache a blended cloud period and paint it without separate
+  // drawImage edges. This guards the visible fractional-boundary seam regression.
+  const surfaces = [], createCanvas = (width, height) => { const surface = { ...recorder(), width, height }; surface.getContext = () => surface.ctx; surfaces.push(surface); return surface; };
+  const blended = rasterAssets(['cloud-far'], createCanvas), destination = recorder();
+  destination.ctx.createPattern = (image, repeat) => ({ image, repeat }); destination.ctx.globalAlpha = .8;
+  for (const scroll of [17.25, 20.25]) blended.draw(destination.ctx, 'cloud-far', 0, 50, 800, 200, null, { alpha: .55, scroll, repeatWidth: 1280, seamlessRepeat: true });
+  assert.equal(surfaces.length, 2, 'one fade surface and one retained period, reused across frames');
+  assert.equal(surfaces[0].calls.fills[0].composite, 'destination-in', 'edge fades preserve source colour');
+  assert.ok(surfaces[1].width < blended.image('cloud-far').naturalWidth, 'neighbouring strips overlap');
+  assert.deepEqual(surfaces[1].calls.imageDraws.map(draw => draw.composite), ['lighter', 'lighter'], 'complementary alpha is added instead of darkened');
+  const bands = destination.calls.fills; assert.equal(bands.length, 2); assert.equal(destination.calls.images, 0, 'one continuous pattern fill per frame, no individual tile cracks');
+  assert.ok(bands.every(fill => fill.colour.image === surfaces[1] && fill.colour.repeat === 'repeat-x' && Math.abs(fill.alpha - .44) < 1e-8));
+  assert.ok(Math.abs((bands[1].box[0] - bands[0].box[0]) * 800 / 2048 - 3) < 1e-8, 'blending preserves world-space scroll speed');
+  assert.equal(destination.ctx.globalAlpha, .8); assert.equal(destination.ctx.globalCompositeOperation, 'source-over'); assert.equal(destination.stack.length, 0);
+  const previousPeriod = blended.repeating.get('cloud-far').canvas;
+  blended.draw(destination.ctx, 'cloud-far', 0, 50, 800, 200, null, { tint: '#7788aa', repeatWidth: 1280, seamlessRepeat: true });
+  assert.notEqual(blended.repeating.get('cloud-far').canvas, previousPeriod); assert.equal(blended.repeating.size, 1, 'a new world tint replaces the cached period');
+});
+
+test('bay art leaves the live aperture active for planets, moons and open space', () => {
+  for (const [place, id] of [['atmosphere', 'planet-limb'], ['airless', 'moon-limb'], ['space', null]]) {
+    const assets = rasterAssets(['tantalus-drop-bay', ...(id ? [id] : [])]);
+    const sequence = buildInsertionSequenceV188({ profile: insertionWorldProfileV188(SAMPLE[place]) }), frame = recorder();
+    drawInsertionFrameV188(frame.ctx, sequence, 1, { assets });
+    assert.equal(slotDraws(frame.calls, 'tantalus-drop-bay').length, 1, 'bay raster is used');
+    assert.ok(frame.calls.clips.some(box => box.join(',') === '160,520,960,200'), 'live view is clipped inside the physical aperture');
+    if (id) {
+      const body = slotDraws(frame.calls, id)[0];
+      assert.deepEqual(body.box, [-260, 600, 1800, 1800]);
+      assert.ok(body.clips.some(box => box.join(',') === '160,520,960,200'));
+      assert.ok(frame.calls.imageDraws.indexOf(body) > frame.calls.imageDraws.findIndex(draw => draw.image.src.endsWith('/tantalus-drop-bay.png')), 'planet view is drawn after the bay raster');
+    }
+  }
+});
+
+test('named franchise ships reuse their own art and original vessel art is restricted to original locations', () => {
+  const assets = rasterAssets(['target-vessel']), sw = read('sw.js');
+  for (const [worldId, shipId] of Object.entries(INSERTION_TARGET_SHIPS_BY_WORLD_V188)) {
+    const target = insertionTargetArtV188(worldId);
+    assert.equal(target.kind, 'reference'); assert.ok(target.path.endsWith(`/${shipId}-reference-v87.png`));
+    assert.ok(existsSync(new URL(`..${target.path}`, import.meta.url))); assert.ok(sw.includes(`'${target.path}'`));
+    assets.preloadWorld(worldId);
+    const sequence = buildInsertionSequenceV188({ profile: insertionWorldProfileV188(world(worldId)) });
+    const shot = sequence.shots.find(shot => shot.kind === 'transit'), frame = recorder();
+    drawInsertionFrameV188(frame.ctx, sequence, shot.start + shot.seconds / 2, { assets });
+    assert.ok(frame.calls.imageDraws.some(draw => draw.image.src === target.path), `${worldId}: own ship is drawn`);
+    assert.ok(!slotDraws(frame.calls, 'target-vessel').length, 'generic station does not replace a named ship');
+  }
+  assert.equal(assets.worldImages.size, 3, 'Nostromo and its depths share one loaded bitmap');
+  for (const id of INSERTION_ORIGINAL_TARGET_WORLD_IDS_V188) {
+    assert.ok(world(id)); assert.equal(insertionTargetArtV188(id).kind, 'original');
+    assert.equal(assets.image('target-vessel', id), assets.image('target-vessel'));
+  }
+  for (const id of ['world-04-sevastopol', 'world-07-katanga', 'world-13-renaissance-station', 'world-17-gateway-station', 'world-39-katanga-depths', 'unknown-world']) {
+    assert.equal(insertionTargetArtV188(id).kind, 'placeholder'); assert.equal(assets.image('target-vessel', id), null, `${id}: no invented attribution`);
+  }
+});
+
+test('ship raster fitting preserves its ratio and the centre anchor across native resolutions', () => {
+  const assets = rasterAssets(['tantalus-hull-exterior']), image = assets.image('tantalus-hull-exterior');
+  for (const [nativeWidth, nativeHeight] of [[2172, 724], [800, 200], [400, 400]]) {
+    image.naturalWidth = nativeWidth; image.naturalHeight = nativeHeight;
+    const frame = recorder(); assets.draw(frame.ctx, 'tantalus-hull-exterior', -800, -250, 1600, 500, null, { fit: 'contain' });
+    const [x, y, width, height] = frame.calls.imageDraws[0].box;
+    assert.equal(width / height, nativeWidth / nativeHeight, 'no silhouette stretching');
+    assert.equal(x + width / 2, 0); assert.equal(y + height / 2, 0, 'same local ship anchor');
+    assert.ok(width <= 1600 && height <= 500, 'contained within the camera envelope');
+  }
+});
+
+test('tint cache preserves source alpha, refreshes per world and does not alter the destination context', () => {
+  const surfaces = [], createCanvas = (width, height) => {
+    const surface = { ...recorder(), width, height }; surface.getContext = () => surface.ctx; surfaces.push(surface); return surface;
+  };
+  const assets = rasterAssets(['cloud-far'], createCanvas), destination = recorder();
+  destination.ctx.globalAlpha = .4; destination.ctx.globalCompositeOperation = 'lighter';
+  for (let i = 0; i < 2; i++) assets.draw(destination.ctx, 'cloud-far', 0, 0, 200, 50, null, { tint: '#7788aa', alpha: .5 });
+  assert.equal(surfaces.length, 1, 'same image and tint reuse one raster');
+  assert.deepEqual(surfaces[0].calls.imageDraws.map(draw => draw.composite), ['source-over', 'destination-in'], 'source mask restores semi-transparent edges after colour blending');
+  assert.equal(surfaces[0].calls.fills[0].composite, 'color');
+  assert.equal(destination.ctx.globalAlpha, .4); assert.equal(destination.ctx.globalCompositeOperation, 'lighter');
+  assert.ok(destination.calls.imageDraws.every(draw => draw.alpha === .2));
+  assets.draw(destination.ctx, 'cloud-far', 0, 0, 200, 50, null, { tint: '#aa8866' });
+  assert.equal(surfaces.length, 2); assert.equal(assets.tinted.size, 1, 'old world tint is replaced, not accumulated');
+  destination.ctx.drawImage = () => { throw new Error('draw failed'); };
+  assert.throws(() => assets.draw(destination.ctx, 'cloud-far', 0, 0, 200, 50, null, { alpha: .1 }), /draw failed/);
+  assert.equal(destination.ctx.globalAlpha, .4); assert.equal(destination.ctx.globalCompositeOperation, 'lighter'); assert.equal(destination.stack.length, 0);
+});
+
+test('loaded stars drift and fade above the sky while entry plasma follows heat with additive light', () => {
+  const assets = rasterAssets(['starfield-deep', 'entry-plasma', 'ud4l-front']);
+  const sequence = buildInsertionSequenceV188({ profile: insertionWorldProfileV188(SAMPLE.atmosphere) });
+  const shot = sequence.shots.find(entry => entry.kind === 'entry');
+  const frames = [.2, .5].map(progress => {
+    const frame = recorder(), time = shot.start + shot.seconds * progress;
+    frame.result = drawInsertionFrameV188(frame.ctx, sequence, time, { assets, reducedMotion: true }); return frame;
+  });
+  const starDraws = frames.map(frame => slotDraws(frame.calls, 'starfield-deep'));
+  assert.ok(starDraws.flat().every(draw => draw.composite === 'screen' && draw.alpha > 0 && draw.alpha < 1), 'black star pixels cannot erase the atmospheric sky');
+  assert.ok(starDraws[1][0].alpha < starDraws[0][0].alpha, 'stars disappear into the atmosphere');
+  assert.notEqual(starDraws[0][0].box[0], starDraws[1][0].box[0], 'loaded star layer scrolls');
+  for (const draws of starDraws) assert.ok(draws[0].box[0] <= 0 && draws.at(-1).box[0] + draws.at(-1).box[2] >= 1280, 'star tiles cover the view');
+  const plasmaDraws = frames.map(frame => slotDraws(frame.calls, 'entry-plasma')[0]);
+  assert.ok(plasmaDraws[1].alpha > plasmaDraws[0].alpha, 'hotter hull produces brighter plasma');
+  frames.forEach((frame, i) => {
+    const draw = plasmaDraws[i]; assert.equal(draw.composite, 'lighter'); assert.equal(draw.alpha, frame.result.state.heat);
+    assert.equal(draw.box[0] + draw.box[2] / 2, 640); assert.equal(draw.box[1] + draw.box[3] / 2, 330, 'plasma is centred on the entering ship');
+    assert.ok(slotDraws(frame.calls, 'ud4l-front').every(draw => draw.composite === 'source-over' && draw.alpha === 1), 'glow does not leak into the airframe');
+    assert.equal(frame.ctx.globalAlpha, 1); assert.equal(frame.ctx.globalCompositeOperation, 'source-over'); assert.equal(frame.stack.length, 0);
+  });
+});
+
+test('loaded vehicles retain native proportions and live actuators; close interior crews fit the seats', () => {
+  const ids = ['ud4l-side', 'm577-side', 'moon-limb', 'ud4l-front', 'ud4l-troop-bay', 'marine-seated'], assets = rasterAssets(ids);
+  for (const [id, w, h] of [['ud4l-side', 2172, 724], ['m577-side', 1942, 809], ['ud4l-front', 1490, 1055], ['marine-seated', 1024, 1536]]) {
+    Object.assign(assets.image(id), { naturalWidth: w, naturalHeight: h });
+  }
+  const sequence = buildInsertionSequenceV188({ profile: insertionWorldProfileV188(SAMPLE.airless), mode: 'apc' });
+  const render = (kind, progress) => { const shot = sequence.shots.find(entry => entry.kind === kind), frame = recorder(); drawInsertionFrameV188(frame.ctx, sequence, shot.start + shot.seconds * progress, { assets, reducedMotion: true }); return frame; };
+  const orbit = render('orbit', .5), contact = render('approach', .995);
+  assert.ok(orbit.calls.radialGradients.some(args => args[5] > 0), 'loaded dropship still has powered exhaust');
+  const gear = frame => frame.calls.fills.filter(fill => fill.colour === '#121411' && fill.box[2] === 6 && fill.box[3] === 32);
+  assert.equal(gear(orbit).length, 0); assert.equal(gear(contact).length, 2, 'landing struts deploy with flight state');
+  assert.ok(contact.calls.fills.some(fill => fill.box[2] === 90 && fill.box[3] === 8), 'open ramp is drawn with the raster');
+  for (const frame of [orbit, contact]) for (const id of ['ud4l-side', 'm577-side']) for (const draw of slotDraws(frame.calls, id)) {
+    const image = assets.image(id), box = draw.box.slice(-4);
+    assert.ok(Math.abs(box[2] / box[3] - image.naturalWidth / image.naturalHeight) < 1e-8, `${id}: contain preserves silhouette`);
+  }
+  const atmosphere = buildInsertionSequenceV188({ profile: insertionWorldProfileV188(SAMPLE.atmosphere) }), entry = atmosphere.shots.find(shot => shot.kind === 'entry'), front = recorder();
+  drawInsertionFrameV188(front.ctx, atmosphere, entry.start + entry.seconds / 2, { assets });
+  const frontBox = slotDraws(front.calls, 'ud4l-front')[0].box;
+  assert.ok(Math.abs(frontBox[2] / frontBox[3] - 1490 / 1055) < 1e-8);
+  for (const [mode, count] of [['apc', 4], ['foot', 6]]) {
+    const sequence = buildInsertionSequenceV188({ profile: insertionWorldProfileV188(SAMPLE.airless), mode }), shot = sequence.shots.find(entry => entry.kind === 'troop-bay'), frame = recorder();
+    drawInsertionFrameV188(frame.ctx, sequence, shot.start + shot.seconds / 2, { assets, reducedMotion: true });
+    const crew = slotDraws(frame.calls, 'marine-seated'); assert.equal(crew.length, count);
+    assert.ok(crew.every(draw => draw.box[3] > 200 && draw.box[2] / draw.box[3] === 2 / 3), 'close camera keeps the full seated silhouette in proportion');
+    assert.ok(crew.every(draw => draw.box[0] >= 0 && draw.box[0] + draw.box[2] <= 1280 && draw.box[1] + draw.box[3] < 560), 'crew stays above the belly bay');
+    assert.ok(frame.calls.text.includes('STATUS'), 'interior status remains live'); assert.equal(frame.stack.length, 0);
+  }
+});
+
+test('cockpit art keeps a protected canopy and is cached around live CRT rectangles', () => {
+  const surfaces = [], createCanvas = (width, height) => { const surface = { ...recorder(), width, height }; surface.getContext = () => surface.ctx; surfaces.push(surface); return surface; };
+  const assets = rasterAssets(['ud4l-cockpit', 'crt-bezel'], createCanvas);
+  const sequence = buildInsertionSequenceV188({ profile: insertionWorldProfileV188(SAMPLE.atmosphere) }), shot = sequence.shots.find(entry => entry.kind === 'cockpit-descent');
+  const frames = [1, 2].map(local => { const frame = recorder(); drawInsertionFrameV188(frame.ctx, sequence, shot.start + local, { assets }); return frame; });
+  assert.equal(surfaces.length, 1, 'authored frame projection is prepared once for this image');
+  assert.ok(slotDraws(surfaces[0].calls, 'ud4l-cockpit').length > 1, 'measured openings are projected into the live layout');
+  for (const frame of frames) {
+    const projected = frame.calls.imageDraws.find(draw => draw.image === surfaces[0]); assert.ok(projected);
+    const mask = projected.clipPaths.find(clip => clip.rule === 'evenodd'); assert.ok(mask, 'opaque exported pixels cannot overwrite the live canopy');
+    assert.ok(mask.commands.some(command => command[0] === 'moveTo') && mask.commands.filter(command => command[0] === 'rect').length === 2, 'mask retains the centre strut inside the opening');
+    const bezels = slotDraws(frame.calls, 'crt-bezel'); assert.equal(bezels.length, 5);
+    for (const bezel of bezels) {
+      const index = frame.calls.events.indexOf(bezel), [x, y, width, height] = bezel.box;
+      const screen = frame.calls.events[index + 1];
+      assert.equal(screen.type, 'fill'); assert.deepEqual(screen.box, [x + 8, y + 8, width - 16, height - 16], 'screen is cleared after its bezel');
+    }
+    for (const title of ['NAV', 'TERRAIN', 'TELEMETRY', 'SYSTEMS', 'COMMS']) assert.ok(frame.calls.text.includes(title), title);
+    assert.equal(frame.stack.length, 0);
+  }
+});
+
+test('the radio uses the reviewed Orlov atlas crop only while Orlov is speaking', () => {
+  const reference = INSERTION_ASSET_REUSED_V188['comms-pilot'];
+  assert.equal(reference.crewId, 'crew-08-maksim-orlov'); assert.deepEqual(reference.rect, [95, 9, 80, 82]);
+  const assets = rasterAssets(['comms-pilot']), sequence = buildInsertionSequenceV188({ profile: insertionWorldProfileV188(SAMPLE.atmosphere) });
+  const cockpit = sequence.shots.find(shot => shot.kind === 'cockpit-release'), time = cockpit.start + cockpit.seconds / 2;
+  const pilot = recorder(); drawInsertionFrameV188(pilot.ctx, sequence, time, { assets });
+  const portrait = slotDraws(pilot.calls, 'comms-pilot'); assert.equal(portrait.length, 1);
+  assert.deepEqual(portrait[0].box.slice(0, 4), reference.rect, 'one face crop, never the complete locomotion atlas');
+  const [, , width, height] = portrait[0].box.slice(-4); assert.ok(Math.abs(width / height - 80 / 82) < 1e-8); assert.ok(width <= 56 + 1e-8 && height <= 56 + 1e-8);
+  for (const line of [null, sequence.shots.find(shot => shot.kind === 'bay').line, sequence.shots.find(shot => shot.kind === 'troop-bay').line]) {
+    const variant = { ...sequence, shots: sequence.shots.map(shot => shot === cockpit ? { ...shot, line } : shot) }, frame = recorder();
+    drawInsertionFrameV188(frame.ctx, variant, time, { assets });
+    assert.equal(slotDraws(frame.calls, 'comms-pilot').length, 0, 'Ops, Tamsin and an idle channel do not show Orlov');
+    assert.ok(frame.calls.text.includes('COMMS'));
+  }
 });
 
 function fakeDocument() {

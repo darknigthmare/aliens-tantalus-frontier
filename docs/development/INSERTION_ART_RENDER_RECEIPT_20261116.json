@@ -1,0 +1,782 @@
+{
+  "renderer": "Native Canvas @napi-rs/canvas; actual production drawInsertionFrameV188; original PNG pixels decoded by Pillow to RGBA fixture because Skia rejected caBX PNG; no gameplay simulation",
+  "decode": {
+    "method": "Pillow exact RGBA decode; original PNG unchanged; raw bytes only for native Canvas QA",
+    "images": [
+      {
+        "id": "cloud-far",
+        "path": "/assets/insertion/v188/cloud-far.png",
+        "width": 2172,
+        "height": 724,
+        "sourceSha256": "1ac08746b19abad08a132f7825f6af593134891d9c7666b501227db932586a1f",
+        "pixelSha256": "f5ed061e3e152a4f7a6c0b8fe58b1616141b9d1930eca2d6209c96cf8f92d679"
+      },
+      {
+        "id": "cloud-near",
+        "path": "/assets/insertion/v188/cloud-near.png",
+        "width": 2172,
+        "height": 724,
+        "sourceSha256": "a7364977d3c5ab9d3d798b19772c622042a9f726b3fe553e9655b51e7aacdb80",
+        "pixelSha256": "cb4ef4f4d28e5d72c5f3e582a627d6826f59e443e5575bb6d9fae15b8c8a1506"
+      },
+      {
+        "id": "crt-bezel",
+        "path": "/assets/insertion/v188/crt-bezel.png",
+        "width": 1484,
+        "height": 1060,
+        "sourceSha256": "6c6b8af55ac7567e6fbd31c3c8b1ee89c4a9ac893d598d87b342f397df021796",
+        "pixelSha256": "5d3a22deb63e69e29afbced984f2bf3edcaebc8cbc49dacc0d2bbe27a3b483bc"
+      },
+      {
+        "id": "entry-plasma",
+        "path": "/assets/insertion/v188/entry-plasma.png",
+        "width": 1672,
+        "height": 941,
+        "sourceSha256": "05b092f23be6b870873d3d92a822bef65b70b37cd2b43a750df38c7e14cd7f0d",
+        "pixelSha256": "587265ac839e299d77f36602244b6e37074ede1a92d30550db52e8affcb914e6"
+      },
+      {
+        "id": "m577-side",
+        "path": "/assets/insertion/v188/m577-side.png",
+        "width": 1942,
+        "height": 809,
+        "sourceSha256": "097eb242998b926c433126462ca97a99cd26db5010759d4743b2fb20a37b25b4",
+        "pixelSha256": "c5669d611e3e4b3fbf0682322c92169f602315a9190a6f292608ed336bc42e71"
+      },
+      {
+        "id": "marine-seated",
+        "path": "/assets/insertion/v188/marine-seated.png",
+        "width": 1024,
+        "height": 1536,
+        "sourceSha256": "b7d722c2602c03080c7700274d2de5b5a741fe921174f07a950a077514d2137a",
+        "pixelSha256": "fed6bbf16b9619b15023b921a4505969685f721d8a21b7f17f0a8202eb2e5459"
+      },
+      {
+        "id": "moon-limb",
+        "path": "/assets/insertion/v188/moon-limb.png",
+        "width": 1254,
+        "height": 1254,
+        "sourceSha256": "55b7ad7d67af22d3b9d985d38abd01834a105d6316549063c5471cd20bed21e3",
+        "pixelSha256": "6f3be04e528fba3bb2d949641bfb02807ab41dc79f9c942095bbf48bfd618306"
+      },
+      {
+        "id": "planet-limb",
+        "path": "/assets/insertion/v188/planet-limb.png",
+        "width": 1254,
+        "height": 1254,
+        "sourceSha256": "382253806da653f165547ca24c6dd146926d4e574a95e8f5ff231fe4934fabc3",
+        "pixelSha256": "e2b1e11c53680a2fb9e70cbf11244d1cc4c73e07d8e64db2ca22627749ba0474"
+      },
+      {
+        "id": "starfield-deep",
+        "path": "/assets/insertion/v188/starfield-deep.png",
+        "width": 1774,
+        "height": 887,
+        "sourceSha256": "de296f7872af06b731346401f41595c4ab55d099615fb674b6a139600543108e",
+        "pixelSha256": "b9319ff12fd32292eb889c999f84273d890ae63ad31d2ceaa7481b09dbf39b3d"
+      },
+      {
+        "id": "tantalus-drop-bay",
+        "path": "/assets/insertion/v188/tantalus-drop-bay.png",
+        "width": 1672,
+        "height": 941,
+        "sourceSha256": "f331b33c284a8d91a11995616571e68cbddf5f2968b2109c9022a6f28f5ce287",
+        "pixelSha256": "546df2aac7f16b4590b505bd5b384cf56beaa0a07a7d8bc80ce92b64d4c48e28"
+      },
+      {
+        "id": "tantalus-hull-exterior",
+        "path": "/assets/insertion/v188/tantalus-hull-exterior.png",
+        "width": 2172,
+        "height": 724,
+        "sourceSha256": "f6ae3938c629fb156e55d74a1b073a39eef899841fb832b4852085e5793738a4",
+        "pixelSha256": "29e3ada9653521a8b8b8ab8a6d54b9b2ec7a48a3088ef1c99a114217e4d834b2"
+      },
+      {
+        "id": "target-vessel",
+        "path": "/assets/insertion/v188/target-vessel.png",
+        "width": 1897,
+        "height": 829,
+        "sourceSha256": "6d5775b4204898cf7a3fa2fb536cb722a9b477e1410589479c7c0bbadd7248e0",
+        "pixelSha256": "78ec84c1c08dd927bc2298e52c216eb690a1f954c7fc96bdeb90c345cc6c7f19"
+      },
+      {
+        "id": "terrain-far",
+        "path": "/assets/insertion/v188/terrain-far.png",
+        "width": 2172,
+        "height": 724,
+        "sourceSha256": "3a9cda470cbb634296bb880ca0467b9692bf73e293cd1070ba1fbdc339679d16",
+        "pixelSha256": "c03adfa2f0f29ce1bc5ee55ded03f8e527a233d8c986842779dc547a7444c0c6"
+      },
+      {
+        "id": "terrain-near",
+        "path": "/assets/insertion/v188/terrain-near.png",
+        "width": 2172,
+        "height": 724,
+        "sourceSha256": "d07b28b620cacd4a4815dceebe4e5cea63121e8a7111760a61b839a3797ed5a1",
+        "pixelSha256": "da6c6cd719d10fd34d153e34fb54ed76a987434a7dfefaddcee48fabffaf5b94"
+      },
+      {
+        "id": "ud4l-cockpit",
+        "path": "/assets/insertion/v188/ud4l-cockpit.png",
+        "width": 1672,
+        "height": 941,
+        "sourceSha256": "818b75f87140a2c7ba9e9efb4d80662417e6e6a528c8cf1088af482ac1e41de3",
+        "pixelSha256": "0c80ed0f06d944036fe32dabe13e9c88bd7673caae04933a8bda0a3327944807"
+      },
+      {
+        "id": "ud4l-side",
+        "path": "/assets/insertion/v188/ud4l-side.png",
+        "width": 2172,
+        "height": 724,
+        "sourceSha256": "3af34f1bc0ec995c3e4fc27139bc5c4acab644652bacd99c33f4c188de72611d",
+        "pixelSha256": "76db4d17b3196a6308367b52a62e6cf250a7c20632b2af75242cf9adec816c57"
+      },
+      {
+        "id": "ud4l-troop-bay",
+        "path": "/assets/insertion/v188/ud4l-troop-bay.png",
+        "width": 1672,
+        "height": 941,
+        "sourceSha256": "aa47a7b7ff6fbad208ec7b360a64c85c66f53a2136e8a38bc827eed0b25fd8df",
+        "pixelSha256": "1f8b05308f846ceab5c4a50b7ba08c7734e1c1a22feaca4200a8ad49d21f4ff2"
+      },
+      {
+        "id": "uscss-nostromo-reference-v87",
+        "path": "/assets/openai/ui/title/v87/orbitals/uscss-nostromo-reference-v87.png",
+        "width": 1507,
+        "height": 1044,
+        "sourceSha256": "ebdc19375284a7da72670df26553cf7da1cc30921ff362926505325b102cbc5d",
+        "pixelSha256": "a6b198d3e751c66efc63351e4d304f054bcca3b7eaa3bee6b52038fc397097b2"
+      },
+      {
+        "id": "uss-sulaco-reference-v87",
+        "path": "/assets/openai/ui/title/v87/orbitals/uss-sulaco-reference-v87.png",
+        "width": 2170,
+        "height": 725,
+        "sourceSha256": "f5cb2d7e9e237721432b7ed27ff03e33819feaa670c5cffc440e1f78e1b59c75",
+        "pixelSha256": "a61f418b27ba56e402412b363e59e412c0c4de33a2af892becebfb89dc00a929"
+      },
+      {
+        "id": "usm-auriga-reference-v87",
+        "path": "/assets/openai/ui/title/v87/orbitals/usm-auriga-reference-v87.png",
+        "width": 1709,
+        "height": 920,
+        "sourceSha256": "d5997cb025b20f5e30f36b3bf322bd1355787b2455976cbc2e7e7721802b1252",
+        "pixelSha256": "f749b45a2d2cce95b9353f4a81708c2b9c2884a08a7415a45d5d7327c9db9d94"
+      },
+      {
+        "id": "ud4l-cheyenne-reference-v87",
+        "path": "/assets/openai/ui/title/v87/orbitals/ud4l-cheyenne-reference-v87.png",
+        "width": 1490,
+        "height": 1055,
+        "sourceSha256": "1c3734596f13bef0117b4b3b718d09ab61333ccc417746f4c606f272e80b57e5",
+        "pixelSha256": "3ee1e3b6b5f3a67bed857467273fce4e43f8dac17e5762cc4db8b5876bd9c925"
+      },
+      {
+        "id": "maksim-orlov-locomotion-sheet",
+        "path": "/assets/openai/sprites/normalized/npcs/maksim-orlov-locomotion-sheet.png",
+        "width": 1024,
+        "height": 1024,
+        "sourceSha256": "cfde33f66024ff7962c6ab250e6962fec4ef9e157af2f20d748adf6c385c6f94",
+        "pixelSha256": "1a38936abbf137d8f66270deae043160025d78ad49f230e9518e1c81360e1538"
+      }
+    ]
+  },
+  "sourceFiles": {
+    "src/insertion-asset-slots-v188.js": "b69615b96a253bb9294936840758a33989371c59f742f9b3b2fa661276ea9a60",
+    "src/insertion-cinematic-v188.js": "1808278b0b2c97660933e75096741c818e1c04e54c1933326621f173f61dd1b2",
+    "scripts/verify-insertion-cinematic-v188.mjs": "b150ff21f8799a1192d63c25d471cf4647f9a3014880da2ca858e681ddb9fec4"
+  },
+  "assets": [
+    "starfield-deep",
+    "ud4l-side",
+    "ud4l-front",
+    "m577-side",
+    "ud4l-cockpit",
+    "crt-bezel",
+    "ud4l-troop-bay",
+    "marine-seated",
+    "entry-plasma",
+    "terrain-near",
+    "comms-pilot",
+    "tantalus-drop-bay",
+    "tantalus-hull-exterior",
+    "planet-limb",
+    "moon-limb",
+    "target-vessel",
+    "terrain-far",
+    "cloud-far",
+    "cloud-near"
+  ],
+  "frames": [
+    {
+      "file": "atmosphere-insertion-bay.png",
+      "place": "atmosphere",
+      "direction": "insertion",
+      "shot": "bay",
+      "time": 3.5
+    },
+    {
+      "file": "atmosphere-insertion-cockpit-release.png",
+      "place": "atmosphere",
+      "direction": "insertion",
+      "shot": "cockpit-release",
+      "time": 10
+    },
+    {
+      "file": "atmosphere-insertion-release.png",
+      "place": "atmosphere",
+      "direction": "insertion",
+      "shot": "release",
+      "time": 16
+    },
+    {
+      "file": "atmosphere-insertion-orbit.png",
+      "place": "atmosphere",
+      "direction": "insertion",
+      "shot": "orbit",
+      "time": 22
+    },
+    {
+      "file": "atmosphere-insertion-entry.png",
+      "place": "atmosphere",
+      "direction": "insertion",
+      "shot": "entry",
+      "time": 29.5
+    },
+    {
+      "file": "atmosphere-insertion-troop-bay.png",
+      "place": "atmosphere",
+      "direction": "insertion",
+      "shot": "troop-bay",
+      "time": 37.5
+    },
+    {
+      "file": "atmosphere-insertion-cockpit-descent.png",
+      "place": "atmosphere",
+      "direction": "insertion",
+      "shot": "cockpit-descent",
+      "time": 45
+    },
+    {
+      "file": "atmosphere-insertion-approach.png",
+      "place": "atmosphere",
+      "direction": "insertion",
+      "shot": "approach",
+      "time": 52.5
+    },
+    {
+      "file": "atmosphere-extraction-liftoff.png",
+      "place": "atmosphere",
+      "direction": "extraction",
+      "shot": "liftoff",
+      "time": 3.5
+    },
+    {
+      "file": "atmosphere-extraction-troop-bay.png",
+      "place": "atmosphere",
+      "direction": "extraction",
+      "shot": "troop-bay",
+      "time": 10
+    },
+    {
+      "file": "atmosphere-extraction-cockpit-climb.png",
+      "place": "atmosphere",
+      "direction": "extraction",
+      "shot": "cockpit-climb",
+      "time": 16.5
+    },
+    {
+      "file": "atmosphere-extraction-climb.png",
+      "place": "atmosphere",
+      "direction": "extraction",
+      "shot": "climb",
+      "time": 23.5
+    },
+    {
+      "file": "atmosphere-extraction-exit-atmosphere.png",
+      "place": "atmosphere",
+      "direction": "extraction",
+      "shot": "exit-atmosphere",
+      "time": 30
+    },
+    {
+      "file": "atmosphere-extraction-orbit-return.png",
+      "place": "atmosphere",
+      "direction": "extraction",
+      "shot": "orbit-return",
+      "time": 36.5
+    },
+    {
+      "file": "atmosphere-extraction-cockpit-rendezvous.png",
+      "place": "atmosphere",
+      "direction": "extraction",
+      "shot": "cockpit-rendezvous",
+      "time": 43
+    },
+    {
+      "file": "atmosphere-extraction-bay-return.png",
+      "place": "atmosphere",
+      "direction": "extraction",
+      "shot": "bay-return",
+      "time": 49.5
+    },
+    {
+      "file": "airless-insertion-bay.png",
+      "place": "airless",
+      "direction": "insertion",
+      "shot": "bay",
+      "time": 3.5
+    },
+    {
+      "file": "airless-insertion-cockpit-release.png",
+      "place": "airless",
+      "direction": "insertion",
+      "shot": "cockpit-release",
+      "time": 10
+    },
+    {
+      "file": "airless-insertion-release.png",
+      "place": "airless",
+      "direction": "insertion",
+      "shot": "release",
+      "time": 16
+    },
+    {
+      "file": "airless-insertion-orbit.png",
+      "place": "airless",
+      "direction": "insertion",
+      "shot": "orbit",
+      "time": 22
+    },
+    {
+      "file": "airless-insertion-powered-descent.png",
+      "place": "airless",
+      "direction": "insertion",
+      "shot": "powered-descent",
+      "time": 29
+    },
+    {
+      "file": "airless-insertion-troop-bay.png",
+      "place": "airless",
+      "direction": "insertion",
+      "shot": "troop-bay",
+      "time": 36
+    },
+    {
+      "file": "airless-insertion-cockpit-descent.png",
+      "place": "airless",
+      "direction": "insertion",
+      "shot": "cockpit-descent",
+      "time": 42.5
+    },
+    {
+      "file": "airless-insertion-approach.png",
+      "place": "airless",
+      "direction": "insertion",
+      "shot": "approach",
+      "time": 49
+    },
+    {
+      "file": "airless-extraction-liftoff.png",
+      "place": "airless",
+      "direction": "extraction",
+      "shot": "liftoff",
+      "time": 3.5
+    },
+    {
+      "file": "airless-extraction-troop-bay.png",
+      "place": "airless",
+      "direction": "extraction",
+      "shot": "troop-bay",
+      "time": 10
+    },
+    {
+      "file": "airless-extraction-cockpit-climb.png",
+      "place": "airless",
+      "direction": "extraction",
+      "shot": "cockpit-climb",
+      "time": 16.5
+    },
+    {
+      "file": "airless-extraction-ascent.png",
+      "place": "airless",
+      "direction": "extraction",
+      "shot": "ascent",
+      "time": 23.5
+    },
+    {
+      "file": "airless-extraction-orbit-return.png",
+      "place": "airless",
+      "direction": "extraction",
+      "shot": "orbit-return",
+      "time": 30.5
+    },
+    {
+      "file": "airless-extraction-cockpit-rendezvous.png",
+      "place": "airless",
+      "direction": "extraction",
+      "shot": "cockpit-rendezvous",
+      "time": 37
+    },
+    {
+      "file": "airless-extraction-bay-return.png",
+      "place": "airless",
+      "direction": "extraction",
+      "shot": "bay-return",
+      "time": 43.5
+    },
+    {
+      "file": "space-insertion-bay.png",
+      "place": "space",
+      "direction": "insertion",
+      "shot": "bay",
+      "time": 3.5
+    },
+    {
+      "file": "space-insertion-cockpit-release.png",
+      "place": "space",
+      "direction": "insertion",
+      "shot": "cockpit-release",
+      "time": 10
+    },
+    {
+      "file": "space-insertion-release.png",
+      "place": "space",
+      "direction": "insertion",
+      "shot": "release",
+      "time": 16
+    },
+    {
+      "file": "space-insertion-transit.png",
+      "place": "space",
+      "direction": "insertion",
+      "shot": "transit",
+      "time": 22.5
+    },
+    {
+      "file": "space-insertion-troop-bay.png",
+      "place": "space",
+      "direction": "insertion",
+      "shot": "troop-bay",
+      "time": 29
+    },
+    {
+      "file": "space-insertion-cockpit-dock.png",
+      "place": "space",
+      "direction": "insertion",
+      "shot": "cockpit-dock",
+      "time": 36
+    },
+    {
+      "file": "space-insertion-docking.png",
+      "place": "space",
+      "direction": "insertion",
+      "shot": "docking",
+      "time": 43.5
+    },
+    {
+      "file": "space-extraction-undock.png",
+      "place": "space",
+      "direction": "extraction",
+      "shot": "undock",
+      "time": 3.5
+    },
+    {
+      "file": "space-extraction-troop-bay.png",
+      "place": "space",
+      "direction": "extraction",
+      "shot": "troop-bay",
+      "time": 10
+    },
+    {
+      "file": "space-extraction-cockpit-undock.png",
+      "place": "space",
+      "direction": "extraction",
+      "shot": "cockpit-undock",
+      "time": 16
+    },
+    {
+      "file": "space-extraction-transit-return.png",
+      "place": "space",
+      "direction": "extraction",
+      "shot": "transit-return",
+      "time": 22.5
+    },
+    {
+      "file": "space-extraction-orbit-return.png",
+      "place": "space",
+      "direction": "extraction",
+      "shot": "orbit-return",
+      "time": 29.5
+    },
+    {
+      "file": "space-extraction-cockpit-rendezvous.png",
+      "place": "space",
+      "direction": "extraction",
+      "shot": "cockpit-rendezvous",
+      "time": 36
+    },
+    {
+      "file": "space-extraction-bay-return.png",
+      "place": "space",
+      "direction": "extraction",
+      "shot": "bay-return",
+      "time": 42.5
+    },
+    {
+      "file": "original-insertion-bay.png",
+      "place": "original",
+      "direction": "insertion",
+      "shot": "bay",
+      "time": 3.5
+    },
+    {
+      "file": "original-insertion-cockpit-release.png",
+      "place": "original",
+      "direction": "insertion",
+      "shot": "cockpit-release",
+      "time": 10
+    },
+    {
+      "file": "original-insertion-release.png",
+      "place": "original",
+      "direction": "insertion",
+      "shot": "release",
+      "time": 16
+    },
+    {
+      "file": "original-insertion-transit.png",
+      "place": "original",
+      "direction": "insertion",
+      "shot": "transit",
+      "time": 22.5
+    },
+    {
+      "file": "original-insertion-troop-bay.png",
+      "place": "original",
+      "direction": "insertion",
+      "shot": "troop-bay",
+      "time": 29
+    },
+    {
+      "file": "original-insertion-cockpit-dock.png",
+      "place": "original",
+      "direction": "insertion",
+      "shot": "cockpit-dock",
+      "time": 36
+    },
+    {
+      "file": "original-insertion-docking.png",
+      "place": "original",
+      "direction": "insertion",
+      "shot": "docking",
+      "time": 43.5
+    },
+    {
+      "file": "original-extraction-undock.png",
+      "place": "original",
+      "direction": "extraction",
+      "shot": "undock",
+      "time": 3.5
+    },
+    {
+      "file": "original-extraction-troop-bay.png",
+      "place": "original",
+      "direction": "extraction",
+      "shot": "troop-bay",
+      "time": 10
+    },
+    {
+      "file": "original-extraction-cockpit-undock.png",
+      "place": "original",
+      "direction": "extraction",
+      "shot": "cockpit-undock",
+      "time": 16
+    },
+    {
+      "file": "original-extraction-transit-return.png",
+      "place": "original",
+      "direction": "extraction",
+      "shot": "transit-return",
+      "time": 22.5
+    },
+    {
+      "file": "original-extraction-orbit-return.png",
+      "place": "original",
+      "direction": "extraction",
+      "shot": "orbit-return",
+      "time": 29.5
+    },
+    {
+      "file": "original-extraction-cockpit-rendezvous.png",
+      "place": "original",
+      "direction": "extraction",
+      "shot": "cockpit-rendezvous",
+      "time": 36
+    },
+    {
+      "file": "original-extraction-bay-return.png",
+      "place": "original",
+      "direction": "extraction",
+      "shot": "bay-return",
+      "time": 42.5
+    }
+  ],
+  "exceptions": [],
+  "usage": {
+    "tantalus-drop-bay": "image",
+    "starfield-deep": "image",
+    "planet-limb": "image",
+    "m577-side": "image",
+    "ud4l-side": "image",
+    "tantalus-hull-exterior": "image",
+    "ud4l-cockpit": "image",
+    "crt-bezel": "image",
+    "comms-pilot": "image",
+    "cloud-far": "image",
+    "entry-plasma": "image",
+    "ud4l-front": "image",
+    "ud4l-troop-bay": "image",
+    "marine-seated": "image",
+    "terrain-far": "image",
+    "cloud-near": "image",
+    "terrain-near": "image",
+    "moon-limb": "image",
+    "target-vessel": "image"
+  },
+  "supplementalFrames": [
+    {
+      "file": "atmosphere-apc-ground-contact.png",
+      "place": "atmosphere",
+      "mode": "apc",
+      "shot": "approach",
+      "time": 55.51,
+      "reducedMotion": true
+    },
+    {
+      "file": "atmosphere-foot-ground-contact.png",
+      "place": "atmosphere",
+      "mode": "foot",
+      "shot": "approach",
+      "time": 55.51,
+      "reducedMotion": true
+    },
+    {
+      "file": "airless-apc-ground-contact.png",
+      "place": "airless",
+      "mode": "apc",
+      "shot": "approach",
+      "time": 51.58,
+      "reducedMotion": true
+    },
+    {
+      "file": "airless-foot-ground-contact.png",
+      "place": "airless",
+      "mode": "foot",
+      "shot": "approach",
+      "time": 51.58,
+      "reducedMotion": true
+    },
+    {
+      "file": "atmosphere-apc-ground-boarding.png",
+      "place": "atmosphere",
+      "mode": "apc",
+      "shot": "liftoff",
+      "time": 0.4,
+      "reducedMotion": true
+    },
+    {
+      "file": "airless-apc-ground-boarding.png",
+      "place": "airless",
+      "mode": "apc",
+      "shot": "liftoff",
+      "time": 0.4,
+      "reducedMotion": true
+    },
+    {
+      "file": "atmosphere-entry-warm.png",
+      "place": "atmosphere",
+      "mode": "apc",
+      "shot": "entry",
+      "time": 26.8,
+      "reducedMotion": false
+    },
+    {
+      "file": "atmosphere-entry-hot.png",
+      "place": "atmosphere",
+      "mode": "apc",
+      "shot": "entry",
+      "time": 29.5,
+      "reducedMotion": false
+    },
+    {
+      "file": "atmosphere-cockpit-descent-moving.png",
+      "place": "atmosphere",
+      "mode": "apc",
+      "shot": "cockpit-descent",
+      "time": 45,
+      "reducedMotion": false
+    }
+  ],
+  "cloudRepeat": {
+    "cloud-far": {
+      "periodWidth": 1824,
+      "height": 724,
+      "sourcePremultipliedEdgeMean": 3.206853266168371,
+      "periodPremultipliedEdgeMean": 0.57288349041274,
+      "method": "16% complementary alpha fades, premultiplied additive overlap, one repeat-x CanvasPattern fill"
+    },
+    "cloud-near": {
+      "periodWidth": 1824,
+      "height": 724,
+      "sourcePremultipliedEdgeMean": 6.099618134546643,
+      "periodPremultipliedEdgeMean": 0.25801240385657037,
+      "method": "16% complementary alpha fades, premultiplied additive overlap, one repeat-x CanvasPattern fill"
+    }
+  },
+  "tintCacheSlots": [
+    "planet-limb",
+    "comms-pilot",
+    "cloud-far",
+    "marine-seated",
+    "terrain-far",
+    "cloud-near",
+    "terrain-near",
+    "moon-limb"
+  ],
+  "count": 59,
+  "pilotPreparation": {
+    "schema": 164,
+    "preparations": 1,
+    "cacheHits": 14,
+    "drawRequests": 15,
+    "correctedDrawRequests": 15,
+    "failures": 0,
+    "sourceMismatches": 0,
+    "evictions": 0,
+    "retainedBytes": 4194304,
+    "changedPixels": 396,
+    "domRequests": 0,
+    "domCorrections": 0,
+    "domFallbacks": 0,
+    "retainedEntries": 1,
+    "assets": [
+      {
+        "path": "/assets/openai/sprites/normalized/npcs/maksim-orlov-locomotion-sheet.png",
+        "width": 1024,
+        "height": 1024,
+        "bytes": 4194304,
+        "changedPixels": 396,
+        "sourceSignatureMatched": true,
+        "maskedFrames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "status": "corrected",
+        "correctedDrawable": true
+      }
+    ]
+  }
+}

@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-open-workstreams-v179';
+const CACHE = 'atf-v143-insertion-art-20261116';
 const SHELL = Object.freeze([
   '/src/alien-base-bridge-v1.js',
   '/src/alien-base-snapshot-v1.js',
@@ -217,6 +217,24 @@ const SHELL = Object.freeze([
   '/src/story-cinematics-v188.js',
   '/src/insertion-cinematic-v188.js',
   '/src/insertion-asset-slots-v188.js',
+  '/assets/insertion/v188/starfield-deep.png',
+  '/assets/insertion/v188/ud4l-side.png',
+  '/assets/insertion/v188/m577-side.png',
+  '/assets/insertion/v188/ud4l-cockpit.png',
+  '/assets/insertion/v188/crt-bezel.png',
+  '/assets/insertion/v188/ud4l-troop-bay.png',
+  '/assets/insertion/v188/marine-seated.png',
+  '/assets/insertion/v188/entry-plasma.png',
+  '/assets/insertion/v188/terrain-near.png',
+  '/assets/openai/sprites/normalized/npcs/maksim-orlov-locomotion-sheet.png',
+  '/assets/insertion/v188/tantalus-drop-bay.png',
+  '/assets/insertion/v188/tantalus-hull-exterior.png',
+  '/assets/insertion/v188/planet-limb.png',
+  '/assets/insertion/v188/moon-limb.png',
+  '/assets/insertion/v188/target-vessel.png',
+  '/assets/insertion/v188/terrain-far.png',
+  '/assets/insertion/v188/cloud-far.png',
+  '/assets/insertion/v188/cloud-near.png',
   '/src/placeholder-portraits-v188.js',
   '/src/hub-echo8-locker-v188.js',
   '/src/m577-manifest-ui-v188.js',

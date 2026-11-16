@@ -1,4 +1,5 @@
 import { publicReleasePathAdmissionV163, verifyPublicAdmissionsV163 } from './public-release-admissions-v163.mjs';
+import { projectRecoveryPathAdmission20261116, verifyProjectRecoveryArchive20261116 } from './project-recovery-admission-20261116.mjs';
 import assert from 'node:assert/strict';
 import { readdir, readFile, lstat } from 'node:fs/promises';
 import { basename, join, resolve } from 'node:path';
@@ -391,6 +392,13 @@ const FORGE_TOOLING_V140 = new Set([
   'scripts/verify-colony-crew-v188.mjs',
   'scripts/qa-colony-crew-v188.mjs',
   'docs/development/INSERTION_ART_SLOTS_V188.md',
+  'docs/development/INSERTION_ART_PROVENANCE_20261116.json',
+  'docs/development/INSERTION_ART_QA_20261116.md',
+  'docs/development/INSERTION_ART_ATMOSPHERE_20261116.png',
+  'docs/development/INSERTION_ART_AIRLESS_20261116.png',
+  'docs/development/INSERTION_ART_SPACE_20261116.png',
+  'docs/development/INSERTION_ART_INTERIORS_20261116.png',
+  'docs/development/INSERTION_ART_RENDER_RECEIPT_20261116.json',
   'scripts/verify-insertion-cinematic-v188.mjs',
   'scripts/verify-mission-depth-v188.mjs',
   'scripts/verify-cinematic-coherence-v188.mjs',
@@ -694,6 +702,8 @@ export const AI_TOOLS_SOURCE_ONLY_PATHS_V188 = AI_TOOLS_ADOPTED_V188;
 // Pure checks are exported so adversarial cases can be verified without placing
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
+  const recoveryAdmission = projectRecoveryPathAdmission20261116(path, { directory, built });
+  if (recoveryAdmission !== null) return recoveryAdmission;
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
   if (V179_SOURCE_ONLY_SCRIPTS.has(path)) return !built;
   if (!built && FORGE_TOOLING_V140.has(path)) return true;
@@ -737,6 +747,7 @@ export function isPublicDistributionTextV86(text) {
 }
 
 export async function verifyPublicReleaseV86(root = process.cwd(), { built = basename(resolve(root)) === 'dist' } = {}) {
+  await verifyProjectRecoveryArchive20261116(root, { built });
   const validation = validateContent();
   assert.equal(validation.ok, true, `Gameplay registry invalid: ${validation.failures.join(', ')}`);
   assert.equal(RELEASE.releaseVersion, APP_RELEASE_V143.version);
