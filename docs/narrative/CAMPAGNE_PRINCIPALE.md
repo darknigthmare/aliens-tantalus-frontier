@@ -1612,7 +1612,7 @@ Lieu : réseau de canyons rouges, tours relais perchées, station minière de **
 | 2.1 | Intro | **Relais Gorge-Seize** | Le dropship d'Orlov se pose sur une tour relais. Les mineurs parlent de « bruits dans la roche ». Le détecteur de mouvement s'affole à cause des échos : il faut apprendre à lire les faux signaux. | `defend the colony` | Détecteur de mouvement, menace invisible. | — | 25 min |
 | 2.2 | Principale | **Le sol qui s'ouvre** | Escorter un convoi de mineurs vers la ville troglodyte. La lignée fouisseuse attaque par-dessous : il faut surveiller les vibrations et rester sur les dalles renforcées. | `escort a colony convoy` | Attaque par les conduits et le sol. | — | 35 min |
 | 2.3 | Principale | **Les nids sous les surplombs** | Couvrir à bord du Cheyenne l'évacuation d'un avant-poste attaqué en piqué par la lignée aérienne. Escorte, appui, tir sur les nids des falaises. | `hold the extraction zone` | Dropship, appui aérien. | **Broodstorm** (Cheyenne, falaises, surplombs) | 40 min |
-| 2.4 | Principale | **La Reine volante** | Traquer la Reine aérienne jusqu'à son aire, au sommet d'une aiguille rocheuse. Combat en hauteur, vent, chutes. | `track an apex specimen` | Reine adaptée à son milieu. | **Broodstorm** (Flying Queen, art dédié encore manquant) | 40 min |
+| 2.4 | Principale | **La Reine volante** | Traquer la Reine aérienne jusqu'à son aire, au sommet d'une aiguille rocheuse. Combat en hauteur, vent, chutes. | `track an apex specimen` | Reine adaptée à son milieu. | **Broodstorm** (Reine ailée illustrée dans le chapitre local ; arc proposé à produire) | 40 min |
 | 2.5 | Principale | **La carte des lignées** | Inez croise les données de Nacre-7 et d'Echo Basin : les deux lignées ont été **déposées**, pas arrivées par hasard. Un registre de vol de la tour relais montre des cargos W-Y passés six mois plus tôt, venant d'un monde absent des cartes civiles : TR-0. | `recover black-box data` | La compagnie sème des œufs pour observer. | — | 25 min |
 
 **Annexes de l'arc 2**
@@ -2931,17 +2931,17 @@ Elles se jouent surtout au hub, avec des PNJ **[PRÉSENT]**. Besoins **[À CRÉE
 
 ### 30.2 Arc 2 · Echo Basin
 
-**Socle de l'arc :** canyons rouges, tour relais, ville troglodyte de Gorge-Seize, aiguille rocheuse **[À CRÉER]** (fond `planet-exterior` **[PRÉSENT]** comme base) ; mineurs **[À CRÉER]** ; lignée fouisseuse (base `xenomorph-crusher-action-sheet`, `xenomorph-burster-action-sheet-v56` **[PRÉSENT]**, variante **[À CRÉER]**) ; lignée aérienne et Reine volante **[DETTE]** (`dedicated-flying-queen-art`) ; Cheyenne **[PRÉSENT]** (`ud-4l-cheyenne-dropship-action-sheet`), version modulaire **[DETTE]** (`complete-modular-dropship-corpus`).
+**Socle de l'arc :** canyons rouges, tour relais, ville troglodyte de Gorge-Seize, aiguille rocheuse **[À CRÉER]** (fond `planet-exterior` **[PRÉSENT]** comme base) ; mineurs **[À CRÉER]** ; lignée fouisseuse (base `xenomorph-crusher-action-sheet`, `xenomorph-burster-action-sheet-v56` **[PRÉSENT]**, variante **[À CRÉER]**) ; lignée aérienne **[DETTE]** ; Reine ailée **[PRÉSENT]** dans le chapitre local Broodstorm (douze poses, voir §56.17), réemploi dans cet arc et atterrissage **[À CRÉER]** ; Cheyenne **[PRÉSENT]** (`ud-4l-cheyenne-dropship-action-sheet`), version modulaire **[DETTE]** (`complete-modular-dropship-corpus`).
 
 | Mission | Props | Personnages / ennemis | Animations | VFX | Actions |
 | --- | --- | --- | --- | --- | --- |
 | 2.1 Relais Gorge-Seize | Tour relais **[À CRÉER]** | Mineurs **[À CRÉER]** | — | Faux échos sur le détecteur (interface) **[À CRÉER]** | Lecture des faux signaux **[À CRÉER]** |
 | 2.2 Le sol qui s'ouvre | Dalles renforcées, galeries qui s'ouvrent **[À CRÉER]** | Fouisseurs **[À CRÉER]** | Sortie de sol **[À CRÉER]** | Fissures, poussière **[À CRÉER]** | Vibrations à surveiller **[À CRÉER]** |
 | 2.3 Nids sous les surplombs | Nids de falaise **[À CRÉER]** | Planeurs **[À CRÉER]** | Piqué **[À CRÉER]** | Tir aérien, explosions **[PRÉSENT]** (`combat-vfx-animation-sheet`) | Tir depuis l'appareil **[CODE]** (Broodstorm) |
-| 2.4 La Reine volante | Aire au sommet **[À CRÉER]** | Reine volante **[DETTE]** | Vol, atterrissage **[DETTE]** | Vent, chutes de pierres **[À CRÉER]** | Combat en hauteur **[À CRÉER]** |
+| 2.4 La Reine volante | Aire au sommet **[À CRÉER]** | Art local Broodstorm **[PRÉSENT]** ; rencontre de cet arc **[À CRÉER]** | Poursuite, réaction et mort en vol **[PRÉSENT]** dans Broodstorm ; atterrissage **[DETTE]** | Vent, chutes de pierres **[À CRÉER]** | Combat en hauteur de cet arc **[À CRÉER]** |
 | 2.5 Carte des lignées | Registre de vol **[À CRÉER]** | Inez **[PRÉSENT]** | — | — | Lecture **[CODE]** |
 | Annexes (4) | Puits 7, épave Crucible, capteurs sismiques, route des crêtes **[À CRÉER]** | Contremaître, Rask, Grue **[À CRÉER]** | Remontée de puits (ascenseur) **[À CRÉER]** | — | — |
-| CQ-03 | Coucher de soleil sur le canyon **[À CRÉER]** | Reine volante **[DETTE]** | — | — | — |
+| CQ-03 | Coucher de soleil sur le canyon **[À CRÉER]** | Référence Broodstorm **[PRÉSENT]** ; mise en scène CQ-03 **[À CRÉER]** | — | — | — |
 
 ### 30.3 Arc 3 · TR-0, la Ruche-monde
 
@@ -3137,7 +3137,7 @@ Ces missions réutilisent au maximum les décors de zone **[PRÉSENT]** (`ship-*
 | Créature | Statut |
 | --- | --- |
 | Reine récifale, lignée fouisseuse, lignée aérienne | [À CRÉER] (variantes de castes [PRÉSENT]) |
-| Reine volante | [DETTE] |
+| Reine volante | Art local Broodstorm [PRÉSENT] ; atterrissage et autres rencontres [À CRÉER] |
 | Reine-Mère, Chœurs, Ruche-monde | [DETTE] |
 | Jeri, SAINT, Éloïse, HUSH-6, Chasseur de Mères | [DETTE] |
 | Synthétique de maintenance industrielle (boss de Kéos) | [À CRÉER] |
@@ -3221,7 +3221,7 @@ Pour chaque élément à créer, un **lot de génération** type est indiqué :
 | Reine récifale | [À CRÉER] | `xenomorph-queen-*` |
 | Lignée fouisseuse | Variante [À CRÉER] | `xenomorph-crusher`, `xenomorph-burster` |
 | Lignée aérienne (planeurs) | [À CRÉER] | — |
-| Reine volante | [DETTE] | — |
+| Reine volante | Art local Broodstorm [PRÉSENT] ; autres rencontres [À CRÉER] | Trois planches de quatre poses ; §56.17 |
 | Reine-Mère, Chœurs, Ruche-monde | [DETTE] | — |
 | Jeri, SAINT, Éloïse, HUSH-6, Chasseur de Mères | [DETTE] | — |
 | Faune de Pangaea, castes Sauria, Porte-Ruche Colosse | [DETTE] | `wild-boar-host` (principe d'hôte animal) |
@@ -4981,3 +4981,18 @@ L'ancienne bande cyan de visière et le cadre provisoire sont omis seulement si 
 Un défaut de service révélé pendant cette intégration est corrigé : le déplacement Legacy court-circuitait l'avance des manipulations admises. Un appel à leur propriétaire natif permet maintenant au soin de se terminer en 2,2 secondes actives, avec un seul kit et 48 points de santé plafonnés. Pause, impacts, annulation et restauration conservent leurs règles. Aucune nouvelle règle d'annulation par intention clavier n'est ajoutée à Legacy.
 
 Les poses de support, suspension, montée, descente, visée, tir, recharge et service utilisent les animations natives. Aucun nouveau cycle de battement de nage, animation de trappe/propulsion du MANTA, bestiaire aquatique ou chapitre de l'arc Nacre-7 n'est livré par ce raccord. La dette combinée `dedicated-hadal-manta-art` reste ouverte, le registre reste à 19 chapitres partiels et deux effectifs, et `canonExact` reste faux. Les preuves et leurs limites sont dans [`HADAL_ART_QA_20261117.md`](../development/HADAL_ART_QA_20261117.md), la [planche intégrée](../development/HADAL_ART_OVERVIEW_20261117.png) et la [provenance](../development/HADAL_ART_PROVENANCE_20261117.json).
+
+
+### 56.17 Reine ailée de Broodstorm (V188, 2026-11-17)
+
+Le chapitre local Broodstorm reçoit trois planches de quatre poses pour sa Reine ailée : battements de poursuite, vol retenu/réaction et perte de tenue en suspension. Les douze images reprennent la référence 36 du corpus Tantalus (`ref-36-queen-xeno-winged-2.png`) : crête noire métallique, corps biomécanique sombre, membranes orangées et queue articulée. La référence 37, dont l'angle et l'identité diffèrent, n'est pas mélangée à cette série. Les trois PNG conservent leurs pixels de génération. Ce corpus porte sur le design original du projet ; la génération ne certifie pas une identité de franchise « 1:1 ».
+
+Le raccord est réservé au véritable acteur `legacy-queen-0` de Broodstorm, y compris après le passage natif de la phase de combat à l'extraction. Les images se chargent ensemble à l'entrée du chapitre. Une source absente, incomplète ou étrangère conserve le dessin natif entier. Les autres Reines, la Matriarche Cargo, les acteurs détachés et les autres missions restent exclus. Les battements et réactions ne modifient ni la boîte physique de 336 × 268,28125, ni la vitesse, les contacts, les dégâts, les ressources, les portes ou les sauvegardes.
+
+Les hanches sont recalées à partir de repères anatomiques documentés. Une échelle uniforme par famille compense la différence de taille des dessins source ; les ailes ne déterminent jamais la taille du corps. La variation volontaire de posture pendant la mort reste visible. Les ailes et la queue prolongent les seules bornes de visibilité. La barre de santé conserve ses valeurs et son style ; son nouveau plafond fixe dégage les membranes sans suivre chaque battement.
+
+Le contrôleur existant conserve les clips et leurs cadences : poursuite à 10 images par seconde, repos/réaction à 4 et mort à 7, avec la dernière pose maintenue jusqu'à la disparition native du corps. La réaction ordinaire de 0,24 seconde montre généralement la première pose du clip de repos ; disposer de quatre images ne signifie pas que chaque impact les joue toutes. Aucun nouvel événement d'attaque n'est associé aux images. Aucun atterrissage, chute physique ou nouveau comportement de boss n'est introduit.
+
+La dette locale `dedicated-flying-queen-art` est close. Broodstorm reste partiel : `complete-modular-dropship-corpus` demeure ouvert. L'aire d'Echo Basin, la rencontre 2.4, la cinématique CQ-03, l'atterrissage et les actes ultérieurs restent distincts de ce chapitre existant. Le registre conserve 21 opérations jouables, 19 partielles et deux effectives ; aucune autre dette ni valeur `canonExact` n'est promue. Les snapshots historiques restent inchangés.
+
+Les [mesures et la provenance](../development/BROODSTORM_QUEEN_ART_PROVENANCE_20261117.json), la [planche du rendu intégré](../development/BROODSTORM_QUEEN_ART_OVERVIEW_20261117.png) et le [rapport de vérification](../development/BROODSTORM_QUEEN_ART_QA_20261117.md) distinguent les dessins générés, les observations natives, les fixtures et les limites de validation.

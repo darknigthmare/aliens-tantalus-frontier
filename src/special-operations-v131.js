@@ -25,7 +25,7 @@ const limitations = {
   'protocol-z110': ['dedicated-z110-and-morrigan-art', 'complete-mecha-animation-corpus'],
   'black-abyss': ['dedicated-hadal-manta-art', 'complete-aquatic-bestiary'],
   'mire-archive-001': ['complete-nostromo-cast', 'complete-historical-campaign'],
-  broodstorm: ['dedicated-flying-queen-art', 'complete-modular-dropship-corpus'],
+  broodstorm: ['complete-modular-dropship-corpus'],
   'black-cocoon': ['dedicated-cocoon-bitmap-corpus', 'extended-survivor-campaign'],
   'last-course-tantalus': ['local-convoy-coop']
 };

@@ -769,6 +769,66 @@ export const TANTALUS_PRIORITIES_HADAL_V188 = freeze({
   }
 });
 
+// Broodstorm adds local winged-queen art without promoting the chapter or its
+// dropship corpus. The H source endpoints remain separate historical receipts.
+export const TANTALUS_PRIORITIES_BROODSTORM_V188 = freeze({
+  "baseline": "361e40670c393dd548b4faa081f12edb0e9b05c4",
+  "successors": {
+    "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
+      "previousSha256": "2438b8895b36a729434264e0488c4687cdf2e9a377160bdbf476a073a57e5c9c",
+      "currentSha256": "5460541da3d8b8f45e59ea584afb00e8be32378f19e82bcceb0fab688d527471"
+    },
+    "package.json": {
+      "previousSha256": "48c789b2740a9b1a2b2b128699051ef3df5ae4b20efa3c35b1b277771f3b7510",
+      "currentSha256": "de4535cf179efd3fe86b6a73622b979ef0f75892d1865aad18d407fa7700b3d2"
+    },
+    "scripts/verify-audit-continuation-v157.mjs": {
+      "previousSha256": "1c1987e69cc44577a44a49182f79522a886ef00fd5758d7d1538e9fc3f90dedb",
+      "currentSha256": "afb20cffa2a0214c7802b7c9b36f5dadcc7c8eef795452e1c08bf0bdd19c6697"
+    },
+    "scripts/verify-audit-continuation-v158.mjs": {
+      "previousSha256": "41393b57bbd863f90bec5af9c367193954bd0bba1048e87c8d0b48a8c9804525",
+      "currentSha256": "1bc844e8a063004fdd64141d8e3d908fd10163fb6c9e2ef39a8353581c172406"
+    },
+    "scripts/verify-audit-v143.mjs": {
+      "previousSha256": "e0830aced7f0172ac455b2caa1f01fab29a886a98323ef9dffac1942eadcd999",
+      "currentSha256": "50a8b5904d59e82b788c23738d8a9ec809f69fd20beb965d7328b70698ce217d"
+    },
+    "scripts/verify-black-cocoon-presentation-v158.mjs": {
+      "previousSha256": "112c504b77d81943596e21d13caef1df9d8ed4e47968e22443fea87687cefbf5",
+      "currentSha256": "fe489fab18e96fa26ba31cb3f39ea61e8f70ba4daa120613b4d564faa60eb0a5"
+    },
+    "scripts/verify-public-release-v86.mjs": {
+      "previousSha256": "43d082f94a0ee3fdba5b40c55c2d663220d9f92af615e0dfd0b6196f1734faef",
+      "currentSha256": "4c92d631018952c243a3c3ac49b64cdf18bf04f609daf322ec99c2c6ce333425"
+    },
+    "src/i18n-en-catalog-v185.js": {
+      "previousSha256": "3148d98764e42a05192d72ad7c64e565ca3648c6922704a9db7fba99b8d8ee2d",
+      "currentSha256": "73d71fb68c960c112c3bf1cd792e5a522279de76f4f7d634a0d33257303d63ae"
+    },
+    "src/legacy-operation-state-v131.js": {
+      "previousSha256": "68d888f3725d4fb06be41c30bee84e776cdc7dcad92e52f725e8511a8cb157ab",
+      "currentSha256": "bda3ae3681cf383b1a8100e9110ba931ab62ba4d4f0f94a02d4a98ed80add7da"
+    },
+    "src/legacy-operations-v131.js": {
+      "previousSha256": "e3233ae75f5e81436cf920e28b9cf7ea52e03b3a99860992dd3d74449eda8d29",
+      "currentSha256": "ebeb8393217142382d16f0319df409eea4f3775aba25e62867000dedadcc4aec"
+    },
+    "src/special-operations-v131.js": {
+      "previousSha256": "5c412f4c3adb8df674b25740ce7b2227a0ead01844c82d219a226a3497035243",
+      "currentSha256": "99a629ceba7042ca320e50d384fe9b9e734bdefa452bd5485899661adca5b45a"
+    },
+    "sw.js": {
+      "previousSha256": "024d58728b16a4485dcf618a822280003b7eeb966561df0eac3b1e17c44b4b19",
+      "currentSha256": "6bf7972ff27396e71d850cdb13d449d187d35ec170e2c217122dde630fa6cdd3"
+    }
+  },
+  "addedSources": {
+    "scripts/verify-broodstorm-queen-art-v188.mjs": "bd82cf599d623cf2e9ed9db608a5577a8e229aee411c6c3c00dcf3e2159b5a6f",
+    "src/broodstorm-queen-art-v188.js": "634572ca055f5a82900d77b7c03f0c6f6124246336d56bcbf761e15767f05702"
+  }
+});
+
 // V157/V158 remain immutable reports. This records only the reviewed registry
 // declaration after Cargo's dedicated art; clip/pixel evidence is verified
 // separately. Neither Cocon nor HADAL gains a completed scope or canon claim.
@@ -829,6 +889,51 @@ export function verifyCargoRegistryContinuationV188(operations, counts, readSour
     changedIds: [transition.operationId], unchangedOperations: rows.length - 1 });
 }
 
+// The H registry retains Cargo's reviewed transition. Broodstorm now removes
+// only its dedicated queen-art debt; its dropship scope and partial status stay
+// explicit. This declaration does not certify pixels, canon or a whole campaign.
+export const TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188 = freeze({
+  baseline: '361e40670c393dd548b4faa081f12edb0e9b05c4',
+  baselineRegistry: {
+    path: 'src/special-operations-v131.js',
+    sha256: '5c412f4c3adb8df674b25740ce7b2227a0ead01844c82d219a226a3497035243',
+    declarationsSha256: 'b9fb8c67c5cb0e06b2c8a75fb8bfc39765b8b78357e445acca702ec92ba32a14'
+  },
+  operationId: 'broodstorm',
+  removedDebt: 'dedicated-flying-queen-art',
+  previousRemainingMechanics: ['dedicated-flying-queen-art', 'complete-modular-dropship-corpus'],
+  currentRemainingMechanics: ['complete-modular-dropship-corpus'],
+  previousCounts: { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 },
+  currentCounts: { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 }
+});
+
+export function verifyBroodstormRegistryContinuationV188(operations, counts, readSource = readRepository) {
+  const transition = TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188;
+  const matches = operations.filter(operation => operation.id === transition.operationId);
+  assert.equal(matches.length, 1, 'Exactly one Broodstorm registry declaration is required');
+  const operation = matches[0];
+  assert.deepEqual(operation.remainingMechanics, transition.currentRemainingMechanics,
+    'Only the dedicated Broodstorm queen-art debt may be removed');
+  assert.equal(operation.implementationStatus, 'partial', 'Broodstorm remains a partial chapter');
+  assert.equal(operation.canonExact, false, 'Broodstorm remains an original adaptation');
+  assert.equal(operation.playable, true);
+  assert.deepEqual(counts, transition.currentCounts, 'Broodstorm art does not promote a whole operation');
+  const projected = operations.map(entry => entry === operation
+    ? { ...entry, remainingMechanics: [...transition.previousRemainingMechanics] } : entry);
+  // Pin every declaration field, including production order and required scope.
+  // The nested campaign object has separate source receipts (including notices);
+  // its route ID remains part of this exact H declaration projection.
+  const declarations = projected.map(entry => Object.keys(entry).filter(key => key !== 'campaign').sort()
+    .map(key => [key, entry[key]]));
+  assert.equal(sha(JSON.stringify(declarations)), transition.baselineRegistry.declarationsSha256,
+    'Only the reviewed Broodstorm debt may differ from the exact H registry declarations');
+  const historical = verifyCargoRegistryContinuationV188(projected, counts, readSource);
+  assert.deepEqual(historical.currentCounts, transition.previousCounts);
+  const changedIds = [...historical.changedIds, transition.operationId];
+  return freeze({ historicalCounts: historical.historicalCounts, currentCounts: transition.currentCounts,
+    changedIds, unchangedOperations: operations.length - changedIds.length });
+}
+
 export const TANTALUS_PRIORITIES_SOURCE_ONLY_PATHS_V188 = Object.freeze([
   'scripts/audit-tantalus-priorities-v188.mjs',
   'scripts/verify-tantalus-priorities-v188.mjs',
@@ -869,11 +974,18 @@ export function reviewedTantalusPrioritiesDigestV188(path, endpoint) {
     current = cargoAbyss.currentSha256;
   }
   const hadal = TANTALUS_PRIORITIES_HADAL_V188.successors[path];
-  if (!hadal) return current;
-  assert.equal(current, hadal.previousSha256, 'Broken a3634de7-to-hadal source chain: ' + path);
-  assert.ok(validHash(hadal.currentSha256), 'Invalid hadal source digest: ' + path);
-  assert.notEqual(hadal.currentSha256, hadal.previousSha256, 'A hadal successor must identify changed bytes: ' + path);
-  return hadal.currentSha256;
+  if (hadal) {
+    assert.equal(current, hadal.previousSha256, 'Broken a3634de7-to-hadal source chain: ' + path);
+    assert.ok(validHash(hadal.currentSha256), 'Invalid hadal source digest: ' + path);
+    assert.notEqual(hadal.currentSha256, hadal.previousSha256, 'A hadal successor must identify changed bytes: ' + path);
+    current = hadal.currentSha256;
+  }
+  const broodstorm = TANTALUS_PRIORITIES_BROODSTORM_V188.successors[path];
+  if (!broodstorm) return current;
+  assert.equal(current, broodstorm.previousSha256, 'Broken 361e4067-to-broodstorm source chain: ' + path);
+  assert.ok(validHash(broodstorm.currentSha256), 'Invalid broodstorm source digest: ' + path);
+  assert.notEqual(broodstorm.currentSha256, broodstorm.previousSha256, 'A broodstorm successor must identify changed bytes: ' + path);
+  return broodstorm.currentSha256;
 }
 
 export function verifyTantalusPrioritiesV188(readSource = readRepository) {
@@ -927,6 +1039,20 @@ export function verifyTantalusPrioritiesV188(readSource = readRepository) {
       'Broken historical-to-a3634de7 endpoint: ' + path);
     else successors.set(path, receipt);
   }
+  const broodstorm = TANTALUS_PRIORITIES_BROODSTORM_V188;
+  for (const [path, receipt] of Object.entries(broodstorm.successors)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
+    assert.equal(Object.hasOwn(continuation.addedSources, path) || Object.hasOwn(prologue.addedSources, path)
+      || Object.hasOwn(quay.addedSources, path) || Object.hasOwn(cargoAbyss.addedSources, path)
+      || Object.hasOwn(hadal.addedSources, path), false,
+    'A broodstorm successor cannot replace a separately added V188 source: ' + path);
+    const previous = hadal.successors[path] || cargoAbyss.successors[path] || quay.successors[path]
+      || prologue.successors[path] || successors.get(path);
+    if (previous) assert.equal(receipt.previousSha256, previous.currentSha256,
+      'Broken historical-to-361e4067 endpoint: ' + path);
+    else successors.set(path, receipt);
+  }
   for (const [path, receipt] of successors) {
     assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
     assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
@@ -935,7 +1061,8 @@ export function verifyTantalusPrioritiesV188(readSource = readRepository) {
   }
   const addedSources = new Set();
   for (const [path, digest] of [...Object.entries(continuation.addedSources), ...Object.entries(prologue.addedSources),
-    ...Object.entries(quay.addedSources), ...Object.entries(cargoAbyss.addedSources), ...Object.entries(hadal.addedSources)]) {
+    ...Object.entries(quay.addedSources), ...Object.entries(cargoAbyss.addedSources), ...Object.entries(hadal.addedSources),
+    ...Object.entries(broodstorm.addedSources)]) {
     assert.equal(successors.has(path) || addedSources.has(path), false, 'A new V188 source cannot replace a successor or added source: ' + path);
     addedSources.add(path);
     assert.ok(validHash(digest), 'Invalid new V188 source digest: ' + path);

@@ -1,0 +1,1789 @@
+{
+  "schema": "broodstorm-queen-art-provenance-v188",
+  "createdAtUtc": "2026-11-17T18:43:02.314971+00:00",
+  "baselineCommit": "361e40670c393dd548b4faa081f12edb0e9b05c4",
+  "scope": "Dedicated illustrated identity for the existing local Broodstorm queen, with unchanged native encounter behavior.",
+  "fidelity": {
+    "reference": "assets/openai/sprites/static-enemy-v95/ref-36-queen-xeno-winged-2.png",
+    "referenceCatalog": "src/enemy-user-creations-v95.js",
+    "referenceClassification": "User-provided project adaptation; catalog identityVerified=false and canonExact=false.",
+    "preservedIdentity": [
+      "dark metallic crown",
+      "black biomechanical body",
+      "orange wing membranes",
+      "articulated tail",
+      "right-facing side view"
+    ],
+    "excludedReference": "assets/openai/sprites/static-enemy-v95/ref-37-queen-xeno-winged.png",
+    "excludedReason": "Different angle and identity; not supplied as a frame or generation reference.",
+    "claim": "Visual continuity with the existing Tantalus reference, with documented anatomical measurements.",
+    "globalCanonicalOneToOneCertification": false,
+    "measuredRegistrationIsExactAnatomyCertification": false
+  },
+  "art": [
+    {
+      "family": "chase",
+      "path": "assets/broodstorm/v188/flying-queen-chase.png",
+      "imageKey": "broodstorm-queen-chase-v188",
+      "sha256": "3378038c5c052193b83b5fc9e0daa6b160f1f2d03deec1b7a6ad64ebe23c1cb7",
+      "bytes": 1468456,
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "mode": "built-in",
+        "transparentBackground": true,
+        "requestedDimensions": [
+          2048,
+          2048
+        ],
+        "actualDimensions": [
+          1254,
+          1254
+        ],
+        "actualMode": "RGBA",
+        "inputReferences": [
+          {
+            "path": "assets/openai/sprites/static-enemy-v95/ref-36-queen-xeno-winged-2.png",
+            "role": "original Tantalus character design, reference 36",
+            "sha256": "5d3a9946cfe04400bc17afb3dea11e1f94672fcded22b99374941c865f0442ce",
+            "dimensions": [
+              1552,
+              1013
+            ]
+          }
+        ],
+        "prompt": "Use case: identity-preserve.\nAsset type: transparent RGBA game sprite atlas for the Broodstorm flying Queen, four frames in a regular 2 by 2 grid.\nInput image: the attached PNG is the SOLE character identity reference. Preserve its design closely. It is a user-provided project adaptation, not a request to invent a different Queen.\n\nPrimary request: create one square, high-resolution sprite sheet containing exactly FOUR complete depictions of this same creature, ordered top-left, top-right, bottom-left, bottom-right. All four are consecutive phases of ONE airborne wingbeat cycle in a right-facing side view. Aim for a 2048 by 2048 canvas with four equal 1024 by 1024 cells; do not draw the cell boundaries.\n\nIdentity invariants: preserve the reference's distinctive tall layered Queen crown and long right-facing head, ribbed biomechanical torso, slender articulated limbs, folded airborne legs, claw anatomy, curved segmented spiked tail, and exactly one PAIR of attached batlike wings. Match the glossy oxidized-black shell, restrained cold metallic edge highlights, black wing struts, and richly textured glowing RED-ORANGE membranes of the reference. Preserve the proportions of the head, crown, torso, limbs and tail. Do not redesign the skull or add horns. Never blend in a blue-black/brown frontal Queen.\n\nCamera and alignment: strict right-facing lateral profile in every cell, same camera and lighting, same anatomical scale. Keep the head, crown, ribcage, hips and tucked feet at the SAME local position in all four cells, with no body rotation, vertical bob, zoom or viewpoint change. Keep the tail's broad leftward curl stable. Only the wings articulate through the cycle; slight natural membrane flex is appropriate. The far wing remains anatomically attached and partly occluded behind the near wing as required by the side view, rather than appearing as an unrelated duplicate.\n\nFour distinct ordered flight poses:\n1. Top-left: both wings at the TOP of the upstroke, tall swept-up membranes behind the crown, closest to the supplied reference.\n2. Top-right: DOWNSTROKE halfway through, wings rotating down and backward, membranes fully tensioned; tips lower than frame 1.\n3. Bottom-left: wings at the LOWEST point of the power stroke behind the torso, clearly lower than frame 2, with the forearms, folded feet and tail still readable.\n4. Bottom-right: RECOVERY upstroke halfway back upward, wing joints folding slightly and membranes relaxing, clearly a different wing articulation from frame 2, ready to loop into frame 1.\n\nComposition: each figure must be entirely contained within its own cell, with generous transparent safety margins for every wingtip, crown tip, claw and the entire tail. Maintain identical body scale even when the wings change extent; do not shrink a body to fit a wing. No pose may touch or overlap another cell. Do not crop anything. Four complete bodies, one per quadrant, no extra studies or detached parts.\n\nStyle: match the reference's sharply rendered detailed biomechanical creature and membranous wing texture. Clean readable game sprite silhouettes, consistent material and lighting across all four frames. Keep all creature detail, eliminate only the background.\n\nBackground and output: genuinely transparent RGBA canvas with clean alpha, no background image or opaque panel. No ground, scenery, floor, cast shadow, checkerboard pixels, haze, fire, trails, motion blur, text, numbers, labels, borders, watermark or logo. This is airborne flight only: no walk cycle, standing pose, landing, attack or death.\n",
+        "promptSha256": "78cbad3c491d1571143cd056dd55bc97d7dbfd0e4a02605e56ab155be971e41b"
+      },
+      "sourcePixelsUnchanged": true,
+      "sourceAlphaExtrema": [
+        0,
+        255
+      ],
+      "sourceFacing": "right",
+      "layout": {
+        "rows": 2,
+        "columns": 2,
+        "cellWidth": 627,
+        "cellHeight": 627,
+        "order": "row-major"
+      },
+      "nativeClip": {
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 10,
+        "loop": true
+      },
+      "measuredCells": [
+        {
+          "index": 0,
+          "origin": [
+            0,
+            0
+          ],
+          "size": [
+            627,
+            627
+          ],
+          "alpha_ge_1": {
+            "bbox": [
+              21,
+              0,
+              627,
+              627
+            ],
+            "margins_ltrb": [
+              21,
+              0,
+              0,
+              0
+            ]
+          },
+          "alpha_ge_8": {
+            "bbox": [
+              107,
+              12,
+              587,
+              562
+            ],
+            "margins_ltrb": [
+              107,
+              12,
+              40,
+              65
+            ]
+          },
+          "alpha_ge_32": {
+            "bbox": [
+              107,
+              12,
+              586,
+              561
+            ],
+            "margins_ltrb": [
+              107,
+              12,
+              41,
+              66
+            ]
+          },
+          "alpha_ge_128": {
+            "bbox": [
+              108,
+              13,
+              585,
+              561
+            ],
+            "margins_ltrb": [
+              108,
+              13,
+              42,
+              66
+            ]
+          }
+        },
+        {
+          "index": 1,
+          "origin": [
+            627,
+            0
+          ],
+          "size": [
+            627,
+            627
+          ],
+          "alpha_ge_1": {
+            "bbox": [
+              1,
+              9,
+              607,
+              627
+            ],
+            "margins_ltrb": [
+              1,
+              9,
+              20,
+              0
+            ]
+          },
+          "alpha_ge_8": {
+            "bbox": [
+              16,
+              151,
+              556,
+              562
+            ],
+            "margins_ltrb": [
+              16,
+              151,
+              71,
+              65
+            ]
+          },
+          "alpha_ge_32": {
+            "bbox": [
+              17,
+              151,
+              555,
+              561
+            ],
+            "margins_ltrb": [
+              17,
+              151,
+              72,
+              66
+            ]
+          },
+          "alpha_ge_128": {
+            "bbox": [
+              17,
+              152,
+              554,
+              560
+            ],
+            "margins_ltrb": [
+              17,
+              152,
+              73,
+              67
+            ]
+          }
+        },
+        {
+          "index": 2,
+          "origin": [
+            0,
+            627
+          ],
+          "size": [
+            627,
+            627
+          ],
+          "alpha_ge_1": {
+            "bbox": [
+              0,
+              0,
+              627,
+              627
+            ],
+            "margins_ltrb": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "alpha_ge_8": {
+            "bbox": [
+              74,
+              122,
+              587,
+              555
+            ],
+            "margins_ltrb": [
+              74,
+              122,
+              40,
+              72
+            ]
+          },
+          "alpha_ge_32": {
+            "bbox": [
+              75,
+              122,
+              587,
+              555
+            ],
+            "margins_ltrb": [
+              75,
+              122,
+              40,
+              72
+            ]
+          },
+          "alpha_ge_128": {
+            "bbox": [
+              75,
+              123,
+              586,
+              554
+            ],
+            "margins_ltrb": [
+              75,
+              123,
+              41,
+              73
+            ]
+          }
+        },
+        {
+          "index": 3,
+          "origin": [
+            627,
+            627
+          ],
+          "size": [
+            627,
+            627
+          ],
+          "alpha_ge_1": {
+            "bbox": [
+              7,
+              1,
+              615,
+              627
+            ],
+            "margins_ltrb": [
+              7,
+              1,
+              12,
+              0
+            ]
+          },
+          "alpha_ge_8": {
+            "bbox": [
+              48,
+              91,
+              561,
+              532
+            ],
+            "margins_ltrb": [
+              48,
+              91,
+              66,
+              95
+            ]
+          },
+          "alpha_ge_32": {
+            "bbox": [
+              50,
+              92,
+              561,
+              532
+            ],
+            "margins_ltrb": [
+              50,
+              92,
+              66,
+              95
+            ]
+          },
+          "alpha_ge_128": {
+            "bbox": [
+              50,
+              93,
+              560,
+              531
+            ],
+            "margins_ltrb": [
+              50,
+              93,
+              67,
+              96
+            ]
+          }
+        }
+      ],
+      "anatomicalFrames": [
+        {
+          "family": "chase",
+          "cell_index": 0,
+          "native_frame": 4,
+          "source_rect_xywh": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "source_hip_pivot_xy": [
+            410,
+            384
+          ],
+          "source_trunk_reference_xy": [
+            443,
+            334
+          ],
+          "proposed_factor_to_chase0": 1.0,
+          "hip_pivot_estimated_uncertainty_source_px": 4,
+          "hip_measurement_basis": "visual seed",
+          "hip_ncc": 1,
+          "trunk_ncc": 1,
+          "source_translation_to_family0_hip_px": [
+            0,
+            0
+          ],
+          "full_visual_alpha_ge32_bbox_ltrb_exclusive": [
+            107,
+            12,
+            586,
+            561
+          ],
+          "visual_envelope_relative_to_hip_in_chase_pixels_alpha32_ltrb": [
+            -303.0,
+            -372.0,
+            176.0,
+            177.0
+          ],
+          "body_height_head_top_to_near_foot_bottom_exclusive_px": 410
+        },
+        {
+          "family": "chase",
+          "cell_index": 1,
+          "native_frame": 5,
+          "source_rect_xywh": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "source_hip_pivot_xy": [
+            379,
+            384
+          ],
+          "source_trunk_reference_xy": [
+            411,
+            335
+          ],
+          "proposed_factor_to_chase0": 1.0,
+          "hip_pivot_estimated_uncertainty_source_px": 5,
+          "hip_measurement_basis": "local translation NCC from cell 0",
+          "hip_ncc": 0.9385,
+          "trunk_ncc": 0.9056,
+          "source_translation_to_family0_hip_px": [
+            31,
+            0
+          ],
+          "full_visual_alpha_ge32_bbox_ltrb_exclusive": [
+            17,
+            151,
+            555,
+            561
+          ],
+          "visual_envelope_relative_to_hip_in_chase_pixels_alpha32_ltrb": [
+            -362.0,
+            -233.0,
+            176.0,
+            177.0
+          ],
+          "body_height_head_top_to_near_foot_bottom_exclusive_px": 410
+        },
+        {
+          "family": "chase",
+          "cell_index": 2,
+          "native_frame": 6,
+          "source_rect_xywh": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "source_hip_pivot_xy": [
+            411,
+            356
+          ],
+          "source_trunk_reference_xy": [
+            444,
+            307
+          ],
+          "proposed_factor_to_chase0": 1.0,
+          "hip_pivot_estimated_uncertainty_source_px": 5,
+          "hip_measurement_basis": "local translation NCC from cell 0",
+          "hip_ncc": 0.9149,
+          "trunk_ncc": 0.9033,
+          "source_translation_to_family0_hip_px": [
+            -1,
+            28
+          ],
+          "full_visual_alpha_ge32_bbox_ltrb_exclusive": [
+            75,
+            122,
+            587,
+            555
+          ],
+          "visual_envelope_relative_to_hip_in_chase_pixels_alpha32_ltrb": [
+            -336.0,
+            -234.0,
+            176.0,
+            199.0
+          ],
+          "body_height_head_top_to_near_foot_bottom_exclusive_px": 410
+        },
+        {
+          "family": "chase",
+          "cell_index": 3,
+          "native_frame": 7,
+          "source_rect_xywh": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "source_hip_pivot_xy": [
+            382,
+            357
+          ],
+          "source_trunk_reference_xy": [
+            416,
+            307
+          ],
+          "proposed_factor_to_chase0": 1.0,
+          "hip_pivot_estimated_uncertainty_source_px": 5,
+          "hip_measurement_basis": "local translation NCC from cell 0",
+          "hip_ncc": 0.9033,
+          "trunk_ncc": 0.8635,
+          "source_translation_to_family0_hip_px": [
+            28,
+            27
+          ],
+          "full_visual_alpha_ge32_bbox_ltrb_exclusive": [
+            50,
+            92,
+            561,
+            532
+          ],
+          "visual_envelope_relative_to_hip_in_chase_pixels_alpha32_ltrb": [
+            -332.0,
+            -265.0,
+            179.0,
+            175.0
+          ],
+          "body_height_head_top_to_near_foot_bottom_exclusive_px": 412
+        }
+      ]
+    },
+    {
+      "family": "idle",
+      "path": "assets/broodstorm/v188/flying-queen-idle.png",
+      "imageKey": "broodstorm-queen-idle-v188",
+      "sha256": "9b52e84a350f6739f07338be766fddb7ca010c5f632d421aef934bf982884855",
+      "bytes": 1104459,
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "mode": "built-in",
+        "transparentBackground": true,
+        "requestedDimensions": [
+          2048,
+          2048
+        ],
+        "actualDimensions": [
+          1254,
+          1254
+        ],
+        "actualMode": "RGBA",
+        "inputReferences": [
+          {
+            "path": "assets/broodstorm/v188/flying-queen-chase.png",
+            "role": "approved chase identity and proportions",
+            "sha256": "3378038c5c052193b83b5fc9e0daa6b160f1f2d03deec1b7a6ad64ebe23c1cb7",
+            "dimensions": [
+              1254,
+              1254
+            ]
+          },
+          {
+            "path": "assets/openai/sprites/static-enemy-v95/ref-36-queen-xeno-winged-2.png",
+            "role": "original Tantalus character design, reference 36",
+            "sha256": "5d3a9946cfe04400bc17afb3dea11e1f94672fcded22b99374941c865f0442ce",
+            "dimensions": [
+              1552,
+              1013
+            ]
+          }
+        ],
+        "prompt": "Use case: identity-preserve.\nAsset type: complementary IDLE/HURT airborne-hold sprite atlas, four poses for one existing game character.\nPrimary request: generate FOUR subtle phases of sustained, tense, restrained hovering for this same flying Queen. This is a single held-flight cycle suitable for idle and brief hurt reaction, NOT four separate impacts or an attack sequence. The creature remains suspended, with legs tucked, in every frame.\n\nInput images:\nImage 1 is the approved four-frame CHASE atlas: use it to preserve the exact character identity, anatomical proportions, material rendering and right-facing side view across this complementary sheet. Do not copy its tight margins.\nImage 2 is the original sole character-design reference, number 36. Preserve its crown, head, ribbed body, wing attachments and orange membranes. No other character design is an input.\n\nIdentity invariants: the SAME flying Queen in every frame, with the distinctive layered tall Queen crown, elongated right-facing head, glossy oxidized-black biomechanical exoskeleton, cold metallic edge highlights, ribbed slender torso, articulated clawed limbs and long curved segmented spiked tail. Exactly one pair of attached batlike wings, black struts, richly textured red-orange membranes. The far wing is partly occluded naturally by the near wing in side view. Do not redesign the skull, crown, proportions or limb arrangement.\n\nLayout: exactly FOUR complete figures, one in each quadrant of a regular 2 by 2 grid, reading top-left, top-right, bottom-left, bottom-right. Square high-resolution canvas, aiming for 2048 by 2048 with four equal cells. No visible grid. Preserve the same anatomical torso scale in all cells. Center the same hip/torso reference point at the same relative position within each cell. All four are right-facing side views, identical camera, materials and lighting. Use the CHASE atlas's anatomical proportions; leave MORE transparent space around each full silhouette than in that sheet. Reserve at least 8 percent of each cell as visibly empty safety margin on every side, accounting for the longest wingtip and entire tail. Do not enlarge the figure to fill the cell. Every part of the crown, head, wings, claws and tail must be visible and inside its own cell. No figures may overlap cells.\n\nOutput: genuine transparent RGBA background with clean alpha. Detailed sharply rendered biomechanical game sprites matching the inputs. No background image or opaque panel, no scenery, ground, floor, shadows, checkerboard pixels, labels, numbering, captions, grid lines, border, watermark or logo. No extra studies or detached body parts, no extra limbs, no attack, fire, impact effects, blood splashes, particles, motion blur or trails.\n\nPose sequence:\n1. Top-left: tense held hover; wings held partly raised behind the crown, elbows and clawed hands braced near the ribcage; head remains directed right.\n2. Top-right: a small breath-like compression of the ribcage and slight inward wing flex, with the same hip, head and foot locations; membranes show restrained tension.\n3. Bottom-left: held tension at its deepest point, wings fractionally more flexed, claws subtly contracted; the body remains upright in the air with the same anatomical scale.\n4. Bottom-right: tension easing back toward pose 1, wings relaxing a few degrees and claws releasing slightly, completing a smooth restrained hover loop.\n\nKeep this movement subtle and visibly related: same crown/head silhouette, same torso gabarit, same tucked legs and broad tail curl. No body translation, bounce, camera rotation, scale change or dramatic recoil. The wings remain attached and airborne, and their articulation varies only slightly between these four hold poses. No walk cycle, standing, touchdown, landing, fallen body or death.\n",
+        "promptSha256": "105e60e420da0462d9919fcbe2dcd6eef81a31b88a2fb224dd99788c02722f44"
+      },
+      "sourcePixelsUnchanged": true,
+      "sourceAlphaExtrema": [
+        0,
+        255
+      ],
+      "sourceFacing": "right",
+      "layout": {
+        "rows": 2,
+        "columns": 2,
+        "cellWidth": 627,
+        "cellHeight": 627,
+        "order": "row-major"
+      },
+      "nativeClip": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 4,
+        "loop": true,
+        "hurtSeconds": 0.24,
+        "note": "A single hurt normally exposes only pose 0; not four impacts."
+      },
+      "measuredCells": [
+        {
+          "index": 0,
+          "origin": [
+            0,
+            0
+          ],
+          "size": [
+            627,
+            627
+          ],
+          "alpha_ge_1": {
+            "bbox": [
+              25,
+              21,
+              627,
+              627
+            ],
+            "margins_ltrb": [
+              25,
+              21,
+              0,
+              0
+            ]
+          },
+          "alpha_ge_8": {
+            "bbox": [
+              137,
+              53,
+              518,
+              513
+            ],
+            "margins_ltrb": [
+              137,
+              53,
+              109,
+              114
+            ]
+          },
+          "alpha_ge_32": {
+            "bbox": [
+              137,
+              55,
+              518,
+              513
+            ],
+            "margins_ltrb": [
+              137,
+              55,
+              109,
+              114
+            ]
+          },
+          "alpha_ge_128": {
+            "bbox": [
+              138,
+              56,
+              517,
+              512
+            ],
+            "margins_ltrb": [
+              138,
+              56,
+              110,
+              115
+            ]
+          }
+        },
+        {
+          "index": 1,
+          "origin": [
+            627,
+            0
+          ],
+          "size": [
+            627,
+            627
+          ],
+          "alpha_ge_1": {
+            "bbox": [
+              1,
+              31,
+              561,
+              627
+            ],
+            "margins_ltrb": [
+              1,
+              31,
+              66,
+              0
+            ]
+          },
+          "alpha_ge_8": {
+            "bbox": [
+              116,
+              97,
+              506,
+              514
+            ],
+            "margins_ltrb": [
+              116,
+              97,
+              121,
+              113
+            ]
+          },
+          "alpha_ge_32": {
+            "bbox": [
+              116,
+              97,
+              505,
+              514
+            ],
+            "margins_ltrb": [
+              116,
+              97,
+              122,
+              113
+            ]
+          },
+          "alpha_ge_128": {
+            "bbox": [
+              117,
+              98,
+              505,
+              513
+            ],
+            "margins_ltrb": [
+              117,
+              98,
+              122,
+              114
+            ]
+          }
+        },
+        {
+          "index": 2,
+          "origin": [
+            0,
+            627
+          ],
+          "size": [
+            627,
+            627
+          ],
+          "alpha_ge_1": {
+            "bbox": [
+              0,
+              5,
+              627,
+              601
+            ],
+            "margins_ltrb": [
+              0,
+              5,
+              0,
+              26
+            ]
+          },
+          "alpha_ge_8": {
+            "bbox": [
+              123,
+              116,
+              519,
+              509
+            ],
+            "margins_ltrb": [
+              123,
+              116,
+              108,
+              118
+            ]
+          },
+          "alpha_ge_32": {
+            "bbox": [
+              123,
+              117,
+              519,
+              509
+            ],
+            "margins_ltrb": [
+              123,
+              117,
+              108,
+              118
+            ]
+          },
+          "alpha_ge_128": {
+            "bbox": [
+              124,
+              117,
+              518,
+              508
+            ],
+            "margins_ltrb": [
+              124,
+              117,
+              109,
+              119
+            ]
+          }
+        },
+        {
+          "index": 3,
+          "origin": [
+            627,
+            627
+          ],
+          "size": [
+            627,
+            627
+          ],
+          "alpha_ge_1": {
+            "bbox": [
+              1,
+              3,
+              608,
+              595
+            ],
+            "margins_ltrb": [
+              1,
+              3,
+              19,
+              32
+            ]
+          },
+          "alpha_ge_8": {
+            "bbox": [
+              108,
+              92,
+              506,
+              508
+            ],
+            "margins_ltrb": [
+              108,
+              92,
+              121,
+              119
+            ]
+          },
+          "alpha_ge_32": {
+            "bbox": [
+              108,
+              93,
+              506,
+              508
+            ],
+            "margins_ltrb": [
+              108,
+              93,
+              121,
+              119
+            ]
+          },
+          "alpha_ge_128": {
+            "bbox": [
+              109,
+              93,
+              505,
+              507
+            ],
+            "margins_ltrb": [
+              109,
+              93,
+              122,
+              120
+            ]
+          }
+        }
+      ],
+      "anatomicalFrames": [
+        {
+          "family": "idle",
+          "cell_index": 0,
+          "native_frame": 0,
+          "source_rect_xywh": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "source_hip_pivot_xy": [
+            381,
+            352
+          ],
+          "source_trunk_reference_xy": [
+            400,
+            314
+          ],
+          "proposed_factor_to_chase0": 1.19047619,
+          "hip_pivot_estimated_uncertainty_source_px": 4,
+          "hip_measurement_basis": "CHASE0 hip patch match with scale about .84 and rotation -3 degrees",
+          "hip_ncc": 0.8877,
+          "trunk_ncc": 0.8278,
+          "source_translation_to_family0_hip_px": [
+            0,
+            0
+          ],
+          "full_visual_alpha_ge32_bbox_ltrb_exclusive": [
+            137,
+            55,
+            518,
+            513
+          ],
+          "visual_envelope_relative_to_hip_in_chase_pixels_alpha32_ltrb": [
+            -290.476,
+            -353.571,
+            163.095,
+            191.667
+          ]
+        },
+        {
+          "family": "idle",
+          "cell_index": 1,
+          "native_frame": 1,
+          "source_rect_xywh": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "source_hip_pivot_xy": [
+            368,
+            352
+          ],
+          "source_trunk_reference_xy": [
+            387,
+            317
+          ],
+          "proposed_factor_to_chase0": 1.19047619,
+          "hip_pivot_estimated_uncertainty_source_px": 5,
+          "hip_measurement_basis": "cell 0 hip seed transported by local translation NCC",
+          "hip_ncc": 0.9045,
+          "trunk_ncc": 0.7657,
+          "source_translation_to_family0_hip_px": [
+            13,
+            0
+          ],
+          "full_visual_alpha_ge32_bbox_ltrb_exclusive": [
+            116,
+            97,
+            505,
+            514
+          ],
+          "visual_envelope_relative_to_hip_in_chase_pixels_alpha32_ltrb": [
+            -300.0,
+            -303.571,
+            163.095,
+            192.857
+          ]
+        },
+        {
+          "family": "idle",
+          "cell_index": 2,
+          "native_frame": 2,
+          "source_rect_xywh": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "source_hip_pivot_xy": [
+            380,
+            349
+          ],
+          "source_trunk_reference_xy": [
+            400,
+            311
+          ],
+          "proposed_factor_to_chase0": 1.19047619,
+          "hip_pivot_estimated_uncertainty_source_px": 5,
+          "hip_measurement_basis": "cell 0 hip seed transported by local translation NCC",
+          "hip_ncc": 0.8419,
+          "trunk_ncc": 0.8176,
+          "source_translation_to_family0_hip_px": [
+            1,
+            3
+          ],
+          "full_visual_alpha_ge32_bbox_ltrb_exclusive": [
+            123,
+            117,
+            519,
+            509
+          ],
+          "visual_envelope_relative_to_hip_in_chase_pixels_alpha32_ltrb": [
+            -305.952,
+            -276.19,
+            165.476,
+            190.476
+          ]
+        },
+        {
+          "family": "idle",
+          "cell_index": 3,
+          "native_frame": 3,
+          "source_rect_xywh": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "source_hip_pivot_xy": [
+            369,
+            345
+          ],
+          "source_trunk_reference_xy": [
+            388,
+            308
+          ],
+          "proposed_factor_to_chase0": 1.19047619,
+          "hip_pivot_estimated_uncertainty_source_px": 6,
+          "hip_measurement_basis": "cell 0 hip seed transported by local translation NCC",
+          "hip_ncc": 0.8143,
+          "trunk_ncc": 0.8321,
+          "source_translation_to_family0_hip_px": [
+            12,
+            7
+          ],
+          "full_visual_alpha_ge32_bbox_ltrb_exclusive": [
+            108,
+            93,
+            506,
+            508
+          ],
+          "visual_envelope_relative_to_hip_in_chase_pixels_alpha32_ltrb": [
+            -310.714,
+            -300.0,
+            163.095,
+            194.048
+          ]
+        }
+      ]
+    },
+    {
+      "family": "death",
+      "path": "assets/broodstorm/v188/flying-queen-death.png",
+      "imageKey": "broodstorm-queen-death-v188",
+      "sha256": "660be861f23b3ad0a40c7c5a81cdcde7485f0752a98effda0e0055f77e51b350",
+      "bytes": 1223756,
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "mode": "built-in",
+        "transparentBackground": true,
+        "requestedDimensions": [
+          2048,
+          2048
+        ],
+        "actualDimensions": [
+          1254,
+          1254
+        ],
+        "actualMode": "RGBA",
+        "inputReferences": [
+          {
+            "path": "assets/broodstorm/v188/flying-queen-chase.png",
+            "role": "approved chase identity and proportions",
+            "sha256": "3378038c5c052193b83b5fc9e0daa6b160f1f2d03deec1b7a6ad64ebe23c1cb7",
+            "dimensions": [
+              1254,
+              1254
+            ]
+          },
+          {
+            "path": "assets/openai/sprites/static-enemy-v95/ref-36-queen-xeno-winged-2.png",
+            "role": "original Tantalus character design, reference 36",
+            "sha256": "5d3a9946cfe04400bc17afb3dea11e1f94672fcded22b99374941c865f0442ce",
+            "dimensions": [
+              1552,
+              1013
+            ]
+          }
+        ],
+        "prompt": "Use case: identity-preserve.\nAsset type: complementary DEATH sprite atlas, four poses for one existing airborne boss.\nPrimary request: generate FOUR ordered phases of this same flying Queen losing muscular support while remaining suspended at the same location in the air. The game keeps the actor in place and later fades it away; depict NO falling trajectory, landing or ground contact. The final frame is an inert suspended hold.\n\nInput images:\nImage 1 is the approved four-frame CHASE atlas: use it to preserve the exact character identity, anatomical proportions, material rendering and right-facing side view across this complementary sheet. Do not copy its tight margins.\nImage 2 is the original sole character-design reference, number 36. Preserve its crown, head, ribbed body, wing attachments and orange membranes. No other character design is an input.\n\nIdentity invariants: the SAME flying Queen in every frame, with the distinctive layered tall Queen crown, elongated right-facing head, glossy oxidized-black biomechanical exoskeleton, cold metallic edge highlights, ribbed slender torso, articulated clawed limbs and long curved segmented spiked tail. Exactly one pair of attached batlike wings, black struts, richly textured red-orange membranes. The far wing is partly occluded naturally by the near wing in side view. Do not redesign the skull, crown, proportions or limb arrangement.\n\nLayout: exactly FOUR complete figures, one in each quadrant of a regular 2 by 2 grid, reading top-left, top-right, bottom-left, bottom-right. Square high-resolution canvas, aiming for 2048 by 2048 with four equal cells. No visible grid. Preserve the same anatomical torso scale in all cells. Center the same hip/torso reference point at the same relative position within each cell. All four are right-facing side views, identical camera, materials and lighting. Use the CHASE atlas's anatomical proportions; leave MORE transparent space around each full silhouette than in that sheet. Reserve at least 8 percent of each cell as visibly empty safety margin on every side, accounting for the longest wingtip and entire tail. Do not enlarge the figure to fill the cell. Every part of the crown, head, wings, claws and tail must be visible and inside its own cell. No figures may overlap cells.\n\nOutput: genuine transparent RGBA background with clean alpha. Detailed sharply rendered biomechanical game sprites matching the inputs. No background image or opaque panel, no scenery, ground, floor, shadows, checkerboard pixels, labels, numbering, captions, grid lines, border, watermark or logo. No extra studies or detached body parts, no extra limbs, no attack, fire, impact effects, blood splashes, particles, motion blur or trails.\n\nPose sequence:\n1. Top-left: first loss of tension, head beginning to dip slightly, claws loosening; wings lose their power-stroke tension while still visibly attached.\n2. Top-right: head and upper chest sag modestly, forearms relax, wing joints bend and membranes slacken; the hips remain at the same anchor and the feet still hang clear of any ground.\n3. Bottom-left: further loss of support, both wings droop/fold behind the torso, neck slightly more relaxed, hands and feet less tense; preserve the entire recognisable crown, face, torso and tail.\n4. Bottom-right: final inert suspended posture to be held before fading: head lowered, limbs hanging slack, folded drooping wings with visible red-orange membranes, the long tail relaxed but fully contained and unbroken.\n\nThe body remains in a readable RIGHT-FACING SIDE VIEW throughout. Do not rotate it into a front view, a belly-up view or a horizontal ground corpse. Keep the hip position and torso scale consistent across all cells. Only believable loss of articulation/support changes; do not shrink, dissolve, dismember, deform or tear the creature. Keep anatomy intact, no wounds or gore. This is a short nonlooping loss-of-tension sequence ending in a stable held silhouette, not a new flight/landing mechanic.\n",
+        "promptSha256": "5edfe4440d89cc2c4d969fe91a75b558467689f2edb8b3234c0dcc249deaeff8"
+      },
+      "sourcePixelsUnchanged": true,
+      "sourceAlphaExtrema": [
+        0,
+        255
+      ],
+      "sourceFacing": "right",
+      "layout": {
+        "rows": 2,
+        "columns": 2,
+        "cellWidth": 627,
+        "cellHeight": 627,
+        "order": "row-major"
+      },
+      "nativeClip": {
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 7,
+        "loop": false,
+        "deathSeconds": 2.8,
+        "note": "Final pose held; no landing phase."
+      },
+      "measuredCells": [
+        {
+          "index": 0,
+          "origin": [
+            0,
+            0
+          ],
+          "size": [
+            627,
+            627
+          ],
+          "alpha_ge_1": {
+            "bbox": [
+              27,
+              26,
+              627,
+              627
+            ],
+            "margins_ltrb": [
+              27,
+              26,
+              0,
+              0
+            ]
+          },
+          "alpha_ge_8": {
+            "bbox": [
+              103,
+              48,
+              516,
+              559
+            ],
+            "margins_ltrb": [
+              103,
+              48,
+              111,
+              68
+            ]
+          },
+          "alpha_ge_32": {
+            "bbox": [
+              103,
+              48,
+              515,
+              558
+            ],
+            "margins_ltrb": [
+              103,
+              48,
+              112,
+              69
+            ]
+          },
+          "alpha_ge_128": {
+            "bbox": [
+              104,
+              48,
+              515,
+              557
+            ],
+            "margins_ltrb": [
+              104,
+              48,
+              112,
+              70
+            ]
+          }
+        },
+        {
+          "index": 1,
+          "origin": [
+            627,
+            0
+          ],
+          "size": [
+            627,
+            627
+          ],
+          "alpha_ge_1": {
+            "bbox": [
+              15,
+              19,
+              587,
+              627
+            ],
+            "margins_ltrb": [
+              15,
+              19,
+              40,
+              0
+            ]
+          },
+          "alpha_ge_8": {
+            "bbox": [
+              69,
+              122,
+              494,
+              574
+            ],
+            "margins_ltrb": [
+              69,
+              122,
+              133,
+              53
+            ]
+          },
+          "alpha_ge_32": {
+            "bbox": [
+              70,
+              122,
+              493,
+              574
+            ],
+            "margins_ltrb": [
+              70,
+              122,
+              134,
+              53
+            ]
+          },
+          "alpha_ge_128": {
+            "bbox": [
+              71,
+              123,
+              493,
+              572
+            ],
+            "margins_ltrb": [
+              71,
+              123,
+              134,
+              55
+            ]
+          }
+        },
+        {
+          "index": 2,
+          "origin": [
+            0,
+            627
+          ],
+          "size": [
+            627,
+            627
+          ],
+          "alpha_ge_1": {
+            "bbox": [
+              0,
+              0,
+              627,
+              627
+            ],
+            "margins_ltrb": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "alpha_ge_8": {
+            "bbox": [
+              115,
+              131,
+              510,
+              554
+            ],
+            "margins_ltrb": [
+              115,
+              131,
+              117,
+              73
+            ]
+          },
+          "alpha_ge_32": {
+            "bbox": [
+              115,
+              132,
+              510,
+              554
+            ],
+            "margins_ltrb": [
+              115,
+              132,
+              117,
+              73
+            ]
+          },
+          "alpha_ge_128": {
+            "bbox": [
+              116,
+              133,
+              509,
+              551
+            ],
+            "margins_ltrb": [
+              116,
+              133,
+              118,
+              76
+            ]
+          }
+        },
+        {
+          "index": 3,
+          "origin": [
+            627,
+            627
+          ],
+          "size": [
+            627,
+            627
+          ],
+          "alpha_ge_1": {
+            "bbox": [
+              17,
+              1,
+              591,
+              587
+            ],
+            "margins_ltrb": [
+              17,
+              1,
+              36,
+              40
+            ]
+          },
+          "alpha_ge_8": {
+            "bbox": [
+              87,
+              142,
+              487,
+              573
+            ],
+            "margins_ltrb": [
+              87,
+              142,
+              140,
+              54
+            ]
+          },
+          "alpha_ge_32": {
+            "bbox": [
+              88,
+              143,
+              486,
+              572
+            ],
+            "margins_ltrb": [
+              88,
+              143,
+              141,
+              55
+            ]
+          },
+          "alpha_ge_128": {
+            "bbox": [
+              88,
+              144,
+              486,
+              570
+            ],
+            "margins_ltrb": [
+              88,
+              144,
+              141,
+              57
+            ]
+          }
+        }
+      ],
+      "anatomicalFrames": [
+        {
+          "family": "death",
+          "cell_index": 0,
+          "native_frame": 12,
+          "source_rect_xywh": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "source_hip_pivot_xy": [
+            367,
+            376
+          ],
+          "source_trunk_reference_xy": [
+            390,
+            330
+          ],
+          "proposed_factor_to_chase0": 1.123595506,
+          "hip_pivot_estimated_uncertainty_source_px": 5,
+          "hip_measurement_basis": "Visually chosen hip-patch centre, 1 px from the independent CHASE-to-DEATH local hip match.",
+          "hip_ncc": 1,
+          "trunk_ncc": 1,
+          "source_translation_to_family0_hip_px": [
+            0,
+            0
+          ],
+          "full_visual_alpha_ge32_bbox_ltrb_exclusive": [
+            103,
+            48,
+            515,
+            558
+          ],
+          "visual_envelope_relative_to_hip_in_chase_pixels_alpha32_ltrb": [
+            -296.629,
+            -368.539,
+            166.292,
+            204.494
+          ]
+        },
+        {
+          "family": "death",
+          "cell_index": 1,
+          "native_frame": 13,
+          "source_rect_xywh": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "source_hip_pivot_xy": [
+            340,
+            377
+          ],
+          "source_trunk_reference_xy": [
+            361.5,
+            331.5
+          ],
+          "proposed_factor_to_chase0": 1.123595506,
+          "hip_pivot_estimated_uncertainty_source_px": 6,
+          "hip_measurement_basis": "local scale/rotation NCC around the visually located hip; no image transformation applied to any file",
+          "hip_ncc": 0.8092,
+          "trunk_ncc": 0.813,
+          "source_translation_to_family0_hip_px": [
+            27,
+            -1
+          ],
+          "full_visual_alpha_ge32_bbox_ltrb_exclusive": [
+            70,
+            122,
+            493,
+            574
+          ],
+          "visual_envelope_relative_to_hip_in_chase_pixels_alpha32_ltrb": [
+            -303.371,
+            -286.517,
+            171.91,
+            221.348
+          ]
+        },
+        {
+          "family": "death",
+          "cell_index": 2,
+          "native_frame": 14,
+          "source_rect_xywh": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "source_hip_pivot_xy": [
+            350.5,
+            341.5
+          ],
+          "source_trunk_reference_xy": [
+            378.5,
+            296.5
+          ],
+          "proposed_factor_to_chase0": 1.123595506,
+          "hip_pivot_estimated_uncertainty_source_px": 6,
+          "hip_measurement_basis": "local scale/rotation NCC around the visually located hip; no image transformation applied to any file",
+          "hip_ncc": 0.8126,
+          "trunk_ncc": 0.8555,
+          "source_translation_to_family0_hip_px": [
+            16.5,
+            34.5
+          ],
+          "full_visual_alpha_ge32_bbox_ltrb_exclusive": [
+            115,
+            132,
+            510,
+            554
+          ],
+          "visual_envelope_relative_to_hip_in_chase_pixels_alpha32_ltrb": [
+            -264.607,
+            -235.393,
+            179.213,
+            238.764
+          ]
+        },
+        {
+          "family": "death",
+          "cell_index": 3,
+          "native_frame": 15,
+          "source_rect_xywh": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "source_hip_pivot_xy": [
+            323.5,
+            347.5
+          ],
+          "source_trunk_reference_xy": [
+            349.5,
+            300.5
+          ],
+          "proposed_factor_to_chase0": 1.123595506,
+          "hip_pivot_estimated_uncertainty_source_px": 8,
+          "hip_measurement_basis": "local scale/rotation NCC around the visually located hip; no image transformation applied to any file",
+          "hip_ncc": 0.6556,
+          "trunk_ncc": 0.7842,
+          "source_translation_to_family0_hip_px": [
+            43.5,
+            28.5
+          ],
+          "full_visual_alpha_ge32_bbox_ltrb_exclusive": [
+            88,
+            143,
+            486,
+            572
+          ],
+          "visual_envelope_relative_to_hip_in_chase_pixels_alpha32_ltrb": [
+            -264.607,
+            -229.775,
+            182.584,
+            252.247
+          ],
+          "review_priority": "Highest uncertainty: hip local NCC 0.6556; validate this pivot visually during animation before treating it as final."
+        }
+      ]
+    }
+  ],
+  "newImageCount": 3,
+  "newImageBytes": 3796671,
+  "runtimeHashes": {
+    "src/broodstorm-queen-art-v188.js": "634572ca055f5a82900d77b7c03f0c6f6124246336d56bcbf761e15767f05702",
+    "src/legacy-operations-v131.js": "ebeb8393217142382d16f0319df409eea4f3775aba25e62867000dedadcc4aec",
+    "src/legacy-operation-state-v131.js": "bda3ae3681cf383b1a8100e9110ba931ab62ba4d4f0f94a02d4a98ed80add7da",
+    "src/i18n-en-catalog-v185.js": "73d71fb68c960c112c3bf1cd792e5a522279de76f4f7d634a0d33257303d63ae",
+    "src/special-operations-v131.js": "99a629ceba7042ca320e50d384fe9b9e734bdefa452bd5485899661adca5b45a"
+  },
+  "integration": {
+    "helper": "src/broodstorm-queen-art-v188.js",
+    "owner": "src/legacy-operations-v131.js",
+    "campaignId": "special-broodstorm-v131",
+    "actorId": "legacy-queen-0",
+    "nativeSheetId": "enemy.xenomorph-queen.action.v56",
+    "nativeImageKey": "xenoQueenV56",
+    "actorMembershipRequired": true,
+    "detachedAndStaleOwnersRejected": true,
+    "stageThreeOnlyGuard": false,
+    "corpseIdentityRetainedInStageFour": true,
+    "loading": "Three reviewed same-origin sources at chapter entry; complete native fallback if any source is missing or invalid.",
+    "physicalAabb": {
+      "width": 336,
+      "height": 268.28125
+    },
+    "nativeScaleExemptionPreserved": true,
+    "nativeContactCooldownSeconds": 1.3,
+    "nativeOrdinaryHurtSeconds": 0.24,
+    "nativeDeathLifetimeSeconds": 2.8,
+    "ordinaryHurtObservation": "A 0.24 second hurt normally exposes only the first 4 fps idle pose, not all four poses for every impact.",
+    "unusedNativeAttackFrames": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "unusedAttackScope": "Legacy never sets the attacking flag for this encounter. No new attack clip, frame event or damage rule is added.",
+    "saveSchema": 52,
+    "newSavedActorFields": [],
+    "newRafOrAnimationClock": false
+  },
+  "registration": {
+    "coordinateConvention": {
+      "xy": "local to each 627 x 627 cell; positive x right, positive y down",
+      "source_rect": "x,y,width,height in the original full atlas",
+      "alpha_bbox": "left,top,right exclusive,bottom exclusive",
+      "order": "row-major: top left, top right, bottom left, bottom right"
+    },
+    "familyMeasurements": {
+      "chase": {
+        "native_frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "source_anatomical_ratio_to_chase0": 1.0,
+        "proposed_factor_to_chase0": 1.0,
+        "source_ratio_estimated_uncertainty": 0.0,
+        "uncertainty_type": "Approximate engineering allowance, not a statistical confidence interval.",
+        "confidence": "baseline convention",
+        "trunk_reference_definition": "Visual thorax seed [443,334] transported by thorax translation; see original CHASE report.",
+        "local_pose_scale_fits_if_any": null
+      },
+      "idle": {
+        "native_frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "source_anatomical_ratio_to_chase0": 0.84,
+        "proposed_factor_to_chase0": 1.19047619,
+        "source_ratio_estimated_uncertainty": 0.025,
+        "uncertainty_type": "Approximate engineering allowance, not a statistical confidence interval.",
+        "confidence": "moderate-to-good; several anatomical regions agree around .83-.85",
+        "trunk_reference_definition": "Rib-patch centre from CHASE comparison, then transported by the IDLE thorax patch. This is a monitoring reference, not a second rigid anchor.",
+        "local_pose_scale_fits_if_any": null
+      },
+      "death": {
+        "native_frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "source_anatomical_ratio_to_chase0": 0.89,
+        "proposed_factor_to_chase0": 1.123595506,
+        "source_ratio_estimated_uncertainty": 0.035,
+        "uncertainty_type": "Approximate engineering allowance, not a statistical confidence interval.",
+        "confidence": "moderate; local hip ratio about .92, shoulder/ribs about .87; .89 is a uniform compromise, not an exact all-bones match",
+        "trunk_reference_definition": "Centre of a stable local rib patch, followed with local scale/rotation NCC. Ribs may compress during collapse; do not lock this point independently from the hip.",
+        "local_pose_scale_fits_if_any": {
+          "hip": [
+            {
+              "scale": 1,
+              "angle_deg": 0
+            },
+            {
+              "scale": 1,
+              "angle_deg": -12
+            },
+            {
+              "scale": 1.02,
+              "angle_deg": -18
+            },
+            {
+              "scale": 0.96,
+              "angle_deg": -21
+            }
+          ],
+          "ribs": [
+            {
+              "scale": 1,
+              "angle_deg": 0
+            },
+            {
+              "scale": 0.92,
+              "angle_deg": -6
+            },
+            {
+              "scale": 0.98,
+              "angle_deg": -3
+            },
+            {
+              "scale": 0.98,
+              "angle_deg": -9
+            }
+          ],
+          "shoulder": [
+            {
+              "scale": 1,
+              "angle_deg": 0
+            },
+            {
+              "scale": 1.02,
+              "angle_deg": -12
+            },
+            {
+              "scale": 1,
+              "angle_deg": -9
+            },
+            {
+              "scale": 1.04,
+              "angle_deg": -12
+            }
+          ],
+          "interpretation": "These are local analysis fits to articulated patches, not per-frame sprite resize/rotate instructions. Keep the same family draw scale in all four frames."
+        }
+      }
+    },
+    "referenceBodyHeight": 410,
+    "worldHip": {
+      "x": "enemy.x + enemy.w /2",
+      "y": "enemy.y + enemy.h *233/410"
+    },
+    "uniformFamilyScale": {
+      "chase": "enemy.h /410",
+      "idle": "enemy.h /(410*.84)",
+      "death": "enemy.h /(410*.89)"
+    },
+    "perFrameScaleFitting": false,
+    "wingEnvelopeDeterminesBodySize": false,
+    "anatomicalUncertainty": "Approximate engineering allowances, not statistical confidence intervals. Idle hip ±4–6 source pixels, death hip ±5–8; death family scale about 3–4%.",
+    "sourceAlpha32UnionRelativeToHipInChasePixels": [
+      -362,
+      -372,
+      182.584,
+      252.247
+    ],
+    "culling": "Conservative union of twelve whole source cells plus 16 world pixels, only for the owned ready queen. Physical collisions remain unchanged.",
+    "healthBar": {
+      "top": "worldHipY -372*(enemy.h/410) -10",
+      "fixedAcrossFrames": true,
+      "nativeWidthColorsFillAndGuardsPreserved": true,
+      "fallbackPositionUnchanged": true
+    },
+    "sourceMargins": "Complete 627 px cells retain all original low-alpha edge residue. Visible alpha≥8 margins reach 12 px in CHASE, 53 px in IDLE, 48 px in DEATH; no visible silhouette clipping accepted."
+  },
+  "reviewHistory": [
+    {
+      "stage": "source acceptance",
+      "result": "Three generated sheets accepted as candidate sources; anatomical calibration still required."
+    },
+    {
+      "stage": "first native composition",
+      "result": "Hip and family scale retained; native health bar crossed the new wing envelope."
+    },
+    {
+      "stage": "final integration",
+      "result": "Only the health-bar ceiling is raised to a constant position above the twelve-pose envelope. Source pixels and physical body remain intact."
+    },
+    {
+      "stage": "fixture corrections",
+      "result": "Pose-stage synchronization and explicit asynchronous native PNG decode were corrected before the final matrix. Initial observations are not counted as successful pixel evidence."
+    }
+  ],
+  "verification": {
+    "sourceVerifier": "scripts/verify-broodstorm-queen-art-v188.mjs",
+    "qaReport": "docs/development/BROODSTORM_QUEEN_ART_QA_20261117.md",
+    "nativeRenderReceipt": "docs/development/BROODSTORM_QUEEN_ART_RENDER_RECEIPT_20261117.json",
+    "overview": "docs/development/BROODSTORM_QUEEN_ART_OVERVIEW_20261117.png",
+    "localBrowserJourneyClaimed": false
+  },
+  "remainingScope": {
+    "closedLocalArtDebt": "dedicated-flying-queen-art",
+    "broodstormImplementationStatus": "partial",
+    "remainingBroodstormDebt": [
+      "complete-modular-dropship-corpus"
+    ],
+    "notProducedHere": [
+      "queen landing",
+      "new queen behavior or physical fall",
+      "unused attack animation",
+      "complete modular dropship art",
+      "Echo Basin proposed arc",
+      "CQ-03 staging",
+      "subsequent acts"
+    ],
+    "registryCounts": {
+      "total": 21,
+      "playable": 21,
+      "partial": 19,
+      "effective": 2,
+      "missing": 0
+    },
+    "canonExact": false
+  },
+  "postCaptureWordingFollowup": {
+    "schema": "broodstorm-dossier-wording-followup-v1",
+    "changedAtUtc": "2026-11-17T19:21:03.004767+00:00",
+    "previousCandidate": "e0b010f4459209fde299dee98fcc96f49a2916f9",
+    "previousCandidatePublished": false,
+    "parentRemains": "361e40670c393dd548b4faa081f12edb0e9b05c4",
+    "reason": "The inherited Legacy test requires the dossier to retain the explicit word adaptation; the first candidate notice had omitted it.",
+    "replacements": [
+      {
+        "old": "Reine ailée illustrée pour Broodstorm.",
+        "new": "Reine ailée illustrée pour Broodstorm (adaptation aérienne)."
+      },
+      {
+        "old": "Winged Queen illustrated for Broodstorm.",
+        "new": "Winged Queen illustrated for Broodstorm (aerial adaptation)."
+      }
+    ],
+    "runtimeSources": [
+      {
+        "path": "src/legacy-operation-state-v131.js",
+        "previousSha256": "5c0b9b4d6cec901c4fd3050b823afb58b2c3aedc3b533d2754121e187c6f28c3",
+        "currentSha256": "bda3ae3681cf383b1a8100e9110ba931ab62ba4d4f0f94a02d4a98ed80add7da"
+      },
+      {
+        "path": "src/i18n-en-catalog-v185.js",
+        "previousSha256": "036ab689b713d326ab5e3cdbfadfb15436031d04fb32d873a10f779f1d4614f4",
+        "currentSha256": "73d71fb68c960c112c3bf1cd792e5a522279de76f4f7d634a0d33257303d63ae"
+      }
+    ],
+    "renderingSourcesChanged": false,
+    "imageBytesChanged": false,
+    "firstFullGate": {
+      "tests": 4761,
+      "pass": 4759,
+      "fail": 1,
+      "skipped": 1,
+      "logSha256": "fcf3ffd43229df3397ae9f6d1dd2c4a335db6c8c1b52b03502b97e0324d27a80",
+      "failure": "scripts/verify-legacy-operations-v131.mjs:450, dossier /adaptation/i"
+    },
+    "originalNativeReceiptSha256": "0191d5b0b0e32b3b9e02465d7b5d8c84c0207881ecbe3977bf017a2d44f43cdc",
+    "existingNativeCapturesReusedWithoutClaimingNewCaptures": true
+  }
+}

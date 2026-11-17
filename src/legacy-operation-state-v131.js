@@ -13,9 +13,9 @@ export const LEGACY_CAMPAIGNS_V131 = Object.freeze([
     limitations: 'Scaphandre HADAL et coque MANTA-6 illustrés ; nage dédiée et animations aquatiques incomplètes. Boss adapté du Ceto Reef Predator existant ; arsenal, dix castes, second boss et actes ultérieurs non produits.' },
   { id: 'special-broodstorm-v131', kind: 'broodstorm', specialOperationId: 'broodstorm', name: 'BROODSTORM · CORRIDOR AÉRIEN',
     worldId: 'world-01-acheron-lv-426', year: 2204, mode: 'AÉRIEN', templateId: 'planet-exterior',
-    objective: 'Bombarder les nids, protéger le transport et vaincre la reine volante adaptée.',
+    objective: 'Bombarder les nids, protéger le transport et vaincre la Reine ailée.',
     summary: 'Vol libre de Cheyenne, aile alliée, escorte physique, bombes et directeur de vagues.',
-    limitations: 'Cheyenne existant réutilisé. FlyingQueen : adaptation de gameplay de la Queen existante, sans planche dédiée. Modularité complète et autres actes non produits.' }
+    limitations: 'Reine ailée illustrée pour Broodstorm (adaptation aérienne). Cheyenne existant réutilisé ; atterrissage de la Reine, modularité complète et autres actes non produits.' }
 ].map(campaign => Object.freeze({ ...campaign, source: 'Tantalus Special Operations', canon: 'project-adaptation',
   status: 'partial', playable: true, localPlayers: 1, routes: 1,
   description: `${campaign.summary} ${campaign.limitations}` })));
@@ -42,7 +42,7 @@ export const LEGACY_STATIONS_V131 = Object.freeze({
     { id: 'launch', label: 'CHEYENNE · LANCEMENT', x: 190, y: 260, seconds: 1.5 },
     { id: 'nests', label: 'BOMBARDER DEUX NIDS · B', x: 1100, y: 800, seconds: 0 },
     { id: 'escort', label: 'PROTÉGER LE TRANSPORT', x: 2110, y: 320, seconds: 0 },
-    { id: 'queen', label: 'FLYINGQUEEN · ADAPTATION', x: 2320, y: 350, seconds: 0 },
+    { id: 'queen', label: 'REINE AILÉE · BROODSTORM', x: 2320, y: 350, seconds: 0 },
     { id: 'extract', label: 'CORRIDOR · EXTRACTION', x: 2660, y: 240, seconds: 3 }
   ])
 });
