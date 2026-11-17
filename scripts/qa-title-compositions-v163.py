@@ -11,6 +11,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import time
 import urllib.request
 from playwright.sync_api import sync_playwright
 
@@ -208,6 +209,25 @@ def ready(page):
         &&![...r.querySelectorAll('[data-renderer="image"]')].some(n=>n.dataset.assetStatus==='loading');}''', timeout=90000)
 
 
+def open_preview_menu_after_intro(page, menu_key_trace, timeout=30000):
+    # Fade is mouse-transparent while its capture listener still owns keys.
+    # Detachment, the one Enter and menu admission share the existing 30 s.
+    deadline = time.monotonic() + timeout / 1000
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('Title preview entry exceeded its original budget.')
+        return milliseconds
+
+    page.locator('#intro-v188').wait_for(state='detached', timeout=remaining())
+    if page.evaluate('()=>__ATF_V61__.snapshot().state') == 'idle':
+        remaining()
+        menu_key_trace['keyRequested'] = True
+        page.keyboard.press('Enter')
+    page.wait_for_function('()=>__ATF_V61__.snapshot().state==="menu"', timeout=remaining())
+
+
 def start_title_menu_key_trace(page):
     # Passive, bounded observation of this one Enter transition. No key is
     # repeated and no title/runtime/profile field is assigned by the trace.
@@ -276,10 +296,7 @@ with sync_playwright() as pw:
                     report.setdefault('menuKeyTraces', {})[label] = menu_key_trace
                     try:
                         key_trace = start_title_menu_key_trace(page)
-                        if observed(page)['title']['state'] == 'idle':
-                            menu_key_trace['keyRequested'] = True
-                            page.keyboard.press('Enter')
-                        page.wait_for_function('()=>__ATF_V61__.snapshot().state==="menu"')
+                        open_preview_menu_after_intro(page, menu_key_trace)
                     finally:
                         if key_trace is not None:
                             try:

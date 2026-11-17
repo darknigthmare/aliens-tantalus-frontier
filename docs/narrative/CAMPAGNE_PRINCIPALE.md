@@ -1375,7 +1375,7 @@ Classement d'après le registre courant `special-operations-v131.js`, utilisé p
 
 | Opération | Statut | Place | Accroche [PROPOSÉ] | Ancrage Alien |
 | --- | --- | --- | --- | --- |
-| **Cargo Brutal** | Chapitre **[EXISTANT]** / promesse **[PARTIEL]** | Avant Acte I | Un cargo civil en route vers Port-Méridien transporte un conteneur QZ17 mal scellé. L'art dédié de la Matriarche manque encore. | Cargo infesté. |
+| **Cargo Brutal** | Chapitre **[EXISTANT]** / art Matriarche **[PRÉSENT]** | Avant Acte I | Un cargo civil en route vers Port-Méridien transporte un conteneur QZ17 mal scellé. Quatre planches dédiées et seize poses sont intégrées depuis la continuation V188 du 17 novembre 2026 ; design original du projet. | Cargo infesté. |
 | **Systèmes de survie Alien** | **[EXISTANT]** effective | Entre Actes I et II | Évasion d'un poste médical en quarantaine près du port ; mécaniques réutilisées dans l'interlude et S3. | Auto-destruction, soudure, acide. |
 | **Doctrine Alpha / Bravo** | **[PARTIEL]** | Avant C1 ou C5 | Défense de colonie à cinq routes, quatre membres minimum : tenir Port-Méridien. | Escouade de Marines. |
 
@@ -2924,7 +2924,7 @@ Elles se jouent surtout au hub, avec des PNJ **[PRÉSENT]**. Besoins **[À CRÉE
 | 1.1 Le quai noyé | Tables servies, pompes **[À CRÉER]** | Navarre **[À CRÉER]** | — | Pluie sur l'eau **[À CRÉER]** | — |
 | 1.2 Les bassins | Œufs fixés comme des coraux **[À CRÉER]** ; filets avec cocons **[DETTE]** | Drones récifaux | Bassin qui se vide (niveau d'eau) **[À CRÉER]** | Écoulement **[À CRÉER]** | Pompage **[À CRÉER]** |
 | 1.3 Plongée HADAL | Coque immergée, nid **[À CRÉER]** | Lurker récifal | Nage en scaphandre **[DETTE]** (`dedicated-hadal-manta-art`) | Bulles, particules, lampe **[À CRÉER]** | Nage **[CODE]** ; oxygène limité **[À CRÉER]** |
-| 1.4 Reine des récifs | Fossé, nid royal **[À CRÉER]** | Reine récifale **[À CRÉER]** | MANTA-6 **[DETTE]** ; Reine nageant **[À CRÉER]** | Torpilles, traînées, projecteurs **[À CRÉER]** | Pilotage sous-marin **[CODE]** (chapitre existant) |
+| 1.4 Reine des récifs | Fossé, nid royal **[À CRÉER]** | Reine récifale **[À CRÉER]** | Coque statique MANTA-6 **[PRÉSENT]** dans le chapitre local ; animations supplémentaires **[DETTE]** ; Reine nageant **[À CRÉER]** | Torpilles, traînées, projecteurs **[À CRÉER]** | Pilotage sous-marin **[CODE]** (chapitre existant) ; arc Nacre-7 proposé distinct |
 | 1.5 Ce que Rask voulait | Œuf royal en caisson **[À CRÉER]** | Rask, escouade W-Y | — | — | Choix laisser/saisir/détruire **[À CRÉER]** |
 | Annexes (3) | Laboratoire inondé, filets, phare **[À CRÉER]** | Pêcheur survivant **[À CRÉER]** | Canots qui approchent **[À CRÉER]** | Faisceau du phare **[À CRÉER]** | Hissage de filet **[À CRÉER]** |
 | Cinématiques CQ-01, CQ-02 | Trois coquilles d'œuf, fossé éclairé **[À CRÉER]** | Inez **[PRÉSENT]** | — | — | — |
@@ -3244,7 +3244,7 @@ Pour chaque élément à créer, un **lot de génération** type est indiqué :
 | --- | --- | --- |
 | M577 | Acte III, Acte V, missions | [PRÉSENT] |
 | Cheyenne | Insertion, Echo Basin, Broodstorm | [PRÉSENT] ; modulaire [DETTE] |
-| Scaphandre HADAL, sous-marin MANTA-6 | Nacre-7 | [DETTE] (`dedicated-hadal-manta-art`) |
+| Scaphandre HADAL, sous-marin MANTA-6 | Chapitre local Abysse Noir ; arc Nacre-7 proposé | Coque statique MANTA-6 [PRÉSENT] (V188, 17 novembre 2026) ; HADAL et animations supplémentaires [DETTE] (`dedicated-hadal-manta-art`) |
 | USS Tantalus, vue extérieure | Cinématiques, carte galactique | [À CRÉER] (aucun fichier trouvé ; `tantalus-command-skiff` est une navette) |
 | Station Asphodèle, vue extérieure et anneau | Cinématiques, hub | [À CRÉER] |
 | Vaisseau de Grue (Crucible) | Asphodèle, Tyndare | [À CRÉER] |
@@ -4961,3 +4961,11 @@ Suite (spec 007, `specs/007-hub-asphodele/`) : hub Asphodèle atteignable (8 mod
 ### 56.14 Acte V, fins et épilogue (V188, 2026-11-15)
 
 Manque n° 3 de l'audit comblé en partie : conseil de guerre, choix final, missions finales, face-à-face, trois fins, épilogue au Tantalus, générique et partie libre (§5.11). Feature : `specs/006-acte-v-fins/`. Tests : `scripts/verify-act5-endings-v188.mjs` (dans `test:priorities:v188`) ; contrôle Chromium de la fin « Les vivants, sans preuve » sur fixture importée (FR et EN), avec deux injections déclarées (checkpoint, fin de mission). Statut : **Partiel** — la course APC dédiée, la Reine dédiée et l'art restent à faire ; rien n'est déclaré terminé.
+
+### 56.15 Matriarche de Soute et coque MANTA-6 (V188, 2026-11-17)
+
+La continuation d'art produit quatre planches dédiées de la Matriarche de Soute : attente, marche, griffes/queue, rugissement/réaction, chacune de quatre poses. Le combat Cargo conserve les mêmes clips, événements, gabarit physique, phases, checkpoints et reprises. Les impacts visuels sont raccordés aux marqueurs natifs : griffes en frame 9, queue en frame 11. Seul l'acteur de cette rencontre prend la nouvelle identité ; les Reines du reste du jeu et le repli restent inchangés. Le statut local de Cargo redevient effectif dans le registre courant, avec `canonExact:false`.
+
+Le chapitre existant Abysse Noir reçoit une coque MANTA-6 originale, bleu pétrole usé, en profil latéral. Elle remplace le rectangle provisoire sans changer la boîte 180 × 86, l'accès, la visée ou le tir. C'est une coque statique : les poses HADAL, la nage dédiée, le bestiaire aquatique, les animations de trappe/propulsion/dégâts et l'arc Nacre-7 proposé ne sont pas produits par cette livraison. La dette combinée `dedicated-hadal-manta-art` reste donc ouverte.
+
+Les cinq PNG sont reliés à leurs prompts, empreintes et consommateurs dans [`CARGO_ABYSS_ART_PROVENANCE_20261117.json`](../development/CARGO_ABYSS_ART_PROVENANCE_20261117.json). La [planche de contrôle](../development/CARGO_ABYSS_ART_OVERVIEW_20261117.png) et le [rapport de revue](../development/CARGO_ABYSS_ART_QA_20261117.md) documentent les 16 poses et leurs limites. Il s'agit de designs originaux du projet à partir de ses références ; aucun modèle individuel de Matriarche ou de MANTA n'était fixé plus précisément dans la bible, et aucune certification canonique globale n'est ajoutée.

@@ -4,15 +4,78 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import {
   TANTALUS_PRIORITIES_BASELINE_V188, TANTALUS_PRIORITIES_SUCCESSORS_V188, TANTALUS_PRIORITIES_CONTINUATION_V188,
-  TANTALUS_PRIORITIES_PROLOGUE_V188, TANTALUS_PRIORITIES_QUAY_V188, TANTALUS_PRIORITIES_SOURCE_ONLY_PATHS_V188, reviewedTantalusPrioritiesDigestV188,
-  verifyTantalusPrioritiesV188
+  TANTALUS_PRIORITIES_PROLOGUE_V188, TANTALUS_PRIORITIES_QUAY_V188, TANTALUS_PRIORITIES_CARGO_ABYSS_V188,
+  TANTALUS_PRIORITIES_SOURCE_ONLY_PATHS_V188, reviewedTantalusPrioritiesDigestV188,
+  verifyTantalusPrioritiesV188, TANTALUS_PRIORITIES_CARGO_REGISTRY_V188, verifyCargoRegistryContinuationV188
 } from './audit-tantalus-priorities-v188.mjs';
 import { verifyNativeQaResourcesV187 } from './audit-native-qa-resources-v187.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
+import { SPECIAL_OPERATIONS_V131 as operations, SPECIAL_OPERATION_COUNTS_V131 as operationCounts } from '../src/special-operations-v131.js';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
+
+test('V188 registry continuation closes only the Cargo art debt and rejects neighboring promotions', () => {
+  const transition = TANTALUS_PRIORITIES_CARGO_REGISTRY_V188;
+  assert.deepEqual(transition, {
+    baseline: '232693f1e0ed24e404bb2fb0dbcd779611ccd2fc',
+    historicalSnapshot: { path: 'docs/forge/xeno-trials/progress-v158.json',
+      sha256: '4af5ae6469aa13ec1ea999eaa1fced2f616f23363a3df806cf2d34deb6c67ef7' },
+    operationId: 'cargo-brutal', removedDebt: 'dedicated-cargo-matriarch-art',
+    titlesAlreadyPublishedAtBaseline: {
+      'hive-world': 'TR-0 : LA RUCHE-MONDE',
+      'narrative-collectables': 'QZ-17 — LA CARGAISON FANTÔME'
+    },
+    previousCounts: { total: 21, effective: 1, partial: 20, missing: 0, playable: 21 },
+    currentCounts: { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 }
+  });
+  assert.deepEqual(verifyCargoRegistryContinuationV188(operations, operationCounts), {
+    historicalCounts: transition.previousCounts, currentCounts: transition.currentCounts,
+    changedIds: ['cargo-brutal'], unchangedOperations: 20
+  });
+  assert.equal(Object.isFrozen(transition), true); assert.equal(Object.isFrozen(transition.currentCounts), true);
+  const byId = (rows, id) => rows.find(row => row.id === id);
+  for (const [reason, mutate] of [
+    ['old Cargo debt retained', rows => { byId(rows, 'cargo-brutal').remainingMechanics = ['dedicated-cargo-matriarch-art']; }],
+    ['invented Cargo debt', rows => { byId(rows, 'cargo-brutal').remainingMechanics = ['unreviewed-new-debt']; }],
+    ['Cargo demoted', rows => { byId(rows, 'cargo-brutal').implementationStatus = 'partial'; }],
+    ['Cocon promoted instead of Cargo', rows => {
+      byId(rows, 'cargo-brutal').implementationStatus = 'partial';
+      byId(rows, 'black-cocoon').implementationStatus = 'effective';
+    }],
+    ['HADAL promoted instead of Cargo', rows => {
+      byId(rows, 'cargo-brutal').implementationStatus = 'partial';
+      byId(rows, 'black-abyss').implementationStatus = 'effective';
+    }],
+    ['Cocon debt removed without changing its count', rows => { byId(rows, 'black-cocoon').remainingMechanics.shift(); }],
+    ['HADAL debt removed without changing its count', rows => { byId(rows, 'black-abyss').remainingMechanics.shift(); }],
+    ['combined debt string hides a changed list', rows => {
+      const entry = byId(rows, 'black-abyss'); entry.remainingMechanics = [entry.remainingMechanics.join('; ')];
+    }],
+    ['canon claim', rows => { byId(rows, 'cargo-brutal').canonExact = true; }],
+    ['missing adaptation disclosure', rows => { delete byId(rows, 'black-cocoon').canonExact; }],
+    ['changed identity', rows => { byId(rows, 'cargo-brutal').id = 'other-cargo'; }],
+    ['changed route', rows => { byId(rows, 'cargo-brutal').campaignId = 'other-campaign'; }],
+    ['changed title', rows => { byId(rows, 'cargo-brutal').promisedTitle = 'Other title'; }],
+    ['published hive title reverted', rows => { byId(rows, 'hive-world').promisedTitle = 'LV-XENO : LA RUCHE-MONDE'; }],
+    ['unreviewed narrative title', rows => { byId(rows, 'narrative-collectables').promisedTitle = 'Other narrative'; }],
+    ['not playable', rows => { byId(rows, 'cargo-brutal').playable = false; }],
+    ['reordered identities', rows => rows.reverse()],
+    ['removed operation', rows => rows.pop()],
+    ['duplicate operation', rows => rows.push(rows[0])]
+  ]) {
+    const mutated = operations.map(operation => ({ ...operation, remainingMechanics: [...operation.remainingMechanics] }));
+    mutate(mutated);
+    assert.throws(() => verifyCargoRegistryContinuationV188(mutated, operationCounts), undefined, reason);
+  }
+  for (const badCounts of [transition.previousCounts, { ...operationCounts, playable: 20 },
+    { ...operationCounts, extra: 1 }]) {
+    assert.throws(() => verifyCargoRegistryContinuationV188(operations, badCounts), /Registry counters/);
+  }
+  assert.throws(() => verifyCargoRegistryContinuationV188(operations, operationCounts,
+    path => Buffer.concat([read(path), Buffer.from('\n')])), /Changed historical V158 operations snapshot/);
+});
 
 test('V188 verifies every reviewed successor and keeps the V187 chain intact', () => {
   assert.equal(TANTALUS_PRIORITIES_BASELINE_V188, '803db26dbd7ed453d9534eee237806053438f300');
@@ -81,9 +144,36 @@ test('V188 verifies every reviewed successor and keeps the V187 chain intact', (
   });
   assert.deepEqual(Object.keys(quay.addedSources), ['src/port-quay-art-v188.js']);
   assert.equal(Object.isFrozen(quay.successors), true); assert.equal(Object.isFrozen(quay.addedSources), true);
-  const unique = new Set([...Object.keys(TANTALUS_PRIORITIES_SUCCESSORS_V188), ...Object.keys(continuation.successors), ...Object.keys(prologue.successors), ...Object.keys(quay.successors)]);
-  assert.equal(result.successors, unique.size); assert.equal(result.successors, 124);
-  assert.equal(result.addedSources, 3);
+  assert.equal(sha(JSON.stringify(quay)), '3b23c8897b666f16352d3a62e34e75df9a3e4d0b59bd29f90eb04a749c0a0997',
+    'The complete ee565717 quay continuation remains historical.');
+  const cargoAbyss = TANTALUS_PRIORITIES_CARGO_ABYSS_V188;
+  assert.equal(cargoAbyss.baseline, '232693f1e0ed24e404bb2fb0dbcd779611ccd2fc');
+  assert.deepEqual(Object.fromEntries(Object.entries(cargoAbyss.successors).map(([path, receipt]) => [path, receipt.previousSha256])), {
+  "docs/narrative/CAMPAGNE_PRINCIPALE.md": "64a13e855d68cda96d0541c78202b77bdcf0703eaf1c91a786fd93e21cc3a271",
+  "package.json": "d10e191570b28fe0e2a6213c1ee1e0b75b49ad152f0024e81feb45fb4f9f760e",
+  "scripts/qa-title-compositions-v163.py": "2c854d3190619b506b45fe1e22d21014f8f12af56a6966598a327c3fbdc2554a",
+  "scripts/verify-audit-continuation-v157.mjs": "641676a21373c30747555d01f180a8c38f07819091860c6c1924bf6f5c08b5cf",
+  "scripts/verify-audit-continuation-v158.mjs": "86d8781274bc77362ad291d6a638c02c74c0521e8bcee5776c913b8fef06400e",
+  "scripts/verify-audit-v143.mjs": "9dc8947f8b6d3dfb568777307390e561874e213c41edd501b6b4835cb3531a7a",
+  "scripts/verify-black-cocoon-presentation-v158.mjs": "5b4a2e933b81654f746e8a94c7214523bd7dbb92cdb92dc3adef8dbd3031cedd",
+  "scripts/verify-intro-v188.mjs": "49a813bcfed5f5065c2e9bac02eb53e566eb17d22d53cb55257b940d8f8e37a9",
+  "scripts/verify-public-release-v86.mjs": "dac556b3f8fa6ce714732094dda492c4f7c6b25422b32901a72e219ca10fe67f",
+  "src/cargo-brutal-runtime-v67.js": "60f511f19a3359935a4317e359e66037330c77955834226732b14b1059696ab9",
+  "src/i18n-en-catalog-v185.js": "28d42706b8ee4a3713532837328f33bdb2b6fc7b0517cd2dc911ac9a9a601c38",
+  "src/legacy-operation-state-v131.js": "95c3759015297bd0c6e5120222758ded484675d41610db68c40faa7d75c7a0f1",
+  "src/legacy-operations-v131.js": "7c7de1da1e5c1bd43c89a5dc1ecdc86ca777fb872283f0cf2d4cd9857ae49cc5",
+  "src/special-operations-v131.js": "0e9805fce4ecddc8dc00f694b7646885e8a8292f8460928639c4eb9ffae48f83",
+  "sw.js": "50b6526783bce8a799d19123059dcee6dc535cf4b2ac45534e0b9bcea2726a41"
+});
+  assert.deepEqual(Object.keys(cargoAbyss.addedSources), [
+    'scripts/verify-cargo-matriarch-art-v188.mjs', 'scripts/verify-manta-art-v188.mjs',
+    'src/cargo-matriarch-art-v188.js', 'src/manta-art-v188.js'
+  ]);
+  assert.equal(Object.isFrozen(cargoAbyss.successors), true); assert.equal(Object.isFrozen(cargoAbyss.addedSources), true);
+  const unique = new Set([...Object.keys(TANTALUS_PRIORITIES_SUCCESSORS_V188), ...Object.keys(continuation.successors),
+    ...Object.keys(prologue.successors), ...Object.keys(quay.successors), ...Object.keys(cargoAbyss.successors)]);
+  assert.equal(result.successors, unique.size); assert.equal(result.successors, 127);
+  assert.equal(result.addedSources, 7);
   assert.deepEqual(verifyNativeQaResourcesV187(), { successors: 8, preserved: 7 });
 });
 
@@ -102,7 +192,8 @@ test('V188 rejects mutated bytes and arbitrary predecessor endpoints', () => {
   }
   for (const [path, receipt] of Object.entries(TANTALUS_PRIORITIES_PROLOGUE_V188.successors)) {
     const anchor = TANTALUS_PRIORITIES_SUCCESSORS_V188[path] || TANTALUS_PRIORITIES_CONTINUATION_V188.successors[path] || receipt;
-    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), TANTALUS_PRIORITIES_QUAY_V188.successors[path]?.currentSha256 || receipt.currentSha256,
+    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), TANTALUS_PRIORITIES_CARGO_ABYSS_V188.successors[path]?.currentSha256
+      || TANTALUS_PRIORITIES_QUAY_V188.successors[path]?.currentSha256 || receipt.currentSha256,
       'The original anchor must resolve through every exact published endpoint: ' + path);
     assert.throws(() => verifyTantalusPrioritiesV188(candidate => candidate === path
       ? Buffer.concat([read(candidate), Buffer.from('\n// unreviewed')]) : read(candidate)), /Unreviewed V188 source bytes/);
@@ -112,7 +203,7 @@ test('V188 rejects mutated bytes and arbitrary predecessor endpoints', () => {
   for (const [path, receipt] of Object.entries(TANTALUS_PRIORITIES_QUAY_V188.successors)) {
     const anchor = TANTALUS_PRIORITIES_SUCCESSORS_V188[path] || TANTALUS_PRIORITIES_CONTINUATION_V188.successors[path]
       || TANTALUS_PRIORITIES_PROLOGUE_V188.successors[path] || receipt;
-    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), receipt.currentSha256,
+    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), TANTALUS_PRIORITIES_CARGO_ABYSS_V188.successors[path]?.currentSha256 || receipt.currentSha256,
       'The original anchor must resolve through the exact published ee565717 endpoint: ' + path);
     assert.throws(() => verifyTantalusPrioritiesV188(candidate => candidate === path
       ? Buffer.concat([read(candidate), Buffer.from('\n// unreviewed')]) : read(candidate)), /Unreviewed V188 source bytes/);
@@ -120,13 +211,26 @@ test('V188 rejects mutated bytes and arbitrary predecessor endpoints', () => {
     assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, receipt.currentSha256), /Broken .* source chain/);
     if (anchor !== receipt) assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, receipt.previousSha256), /Broken .* source chain/);
   }
-  for (const path of [...Object.keys(TANTALUS_PRIORITIES_CONTINUATION_V188.addedSources), ...Object.keys(TANTALUS_PRIORITIES_PROLOGUE_V188.addedSources), ...Object.keys(TANTALUS_PRIORITIES_QUAY_V188.addedSources)]) {
+  for (const [path, receipt] of Object.entries(TANTALUS_PRIORITIES_CARGO_ABYSS_V188.successors)) {
+    const anchor = TANTALUS_PRIORITIES_SUCCESSORS_V188[path] || TANTALUS_PRIORITIES_CONTINUATION_V188.successors[path]
+      || TANTALUS_PRIORITIES_PROLOGUE_V188.successors[path] || TANTALUS_PRIORITIES_QUAY_V188.successors[path] || receipt;
+    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), receipt.currentSha256,
+      'The original anchor must resolve through the exact published 232693f1 endpoint: ' + path);
+    assert.throws(() => verifyTantalusPrioritiesV188(candidate => candidate === path
+      ? Buffer.concat([read(candidate), Buffer.from('\n// unreviewed')]) : read(candidate)), /Unreviewed V188 source bytes/);
+    assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, '0'.repeat(64)), /Broken .* source chain/);
+    assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, receipt.currentSha256), /Broken .* source chain/);
+    if (anchor !== receipt) assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, receipt.previousSha256), /Broken .* source chain/);
+  }
+  for (const path of [...Object.keys(TANTALUS_PRIORITIES_CONTINUATION_V188.addedSources), ...Object.keys(TANTALUS_PRIORITIES_PROLOGUE_V188.addedSources),
+    ...Object.keys(TANTALUS_PRIORITIES_QUAY_V188.addedSources), ...Object.keys(TANTALUS_PRIORITIES_CARGO_ABYSS_V188.addedSources)]) {
     assert.throws(() => verifyTantalusPrioritiesV188(candidate => candidate === path
       ? Buffer.concat([read(candidate), Buffer.from('\n// unreviewed')]) : read(candidate)), /Unreviewed V188 source bytes/);
   }
   for (const map of [TANTALUS_PRIORITIES_CONTINUATION_V188.successors, TANTALUS_PRIORITIES_CONTINUATION_V188.addedSources,
     TANTALUS_PRIORITIES_PROLOGUE_V188.successors, TANTALUS_PRIORITIES_PROLOGUE_V188.addedSources,
-    TANTALUS_PRIORITIES_QUAY_V188.successors, TANTALUS_PRIORITIES_QUAY_V188.addedSources]) {
+    TANTALUS_PRIORITIES_QUAY_V188.successors, TANTALUS_PRIORITIES_QUAY_V188.addedSources,
+    TANTALUS_PRIORITIES_CARGO_ABYSS_V188.successors, TANTALUS_PRIORITIES_CARGO_ABYSS_V188.addedSources]) {
     assert.equal(Object.hasOwn(map, 'scripts/audit-tantalus-priorities-v188.mjs'), false);
   }
   assert.equal(reviewedTantalusPrioritiesDigestV188('src/unreviewed.js', 'unchanged'), 'unchanged');

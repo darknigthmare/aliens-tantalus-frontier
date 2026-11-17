@@ -3,6 +3,7 @@ import { buildMissionLevelV52 } from './mission-levels-v52.js';
 import { sweepProjectileAabbV83 } from './projectile-collision-v83.js';
 import { resolveVehicleAnimation } from './sprite-animation-runtime.js';
 import { loadPlayerCostumeAssetsV119 } from './player-costume-skins-v119.js';
+import { preloadMantaArtV188, drawMantaArtV188 } from './manta-art-v188.js';
 import { LEGACY_CAMPAIGNS_V131, LEGACY_STATIONS_V131, LEGACY_BOUNDS_V131,
   createLegacyOperationStateV131, validateLegacyOperationStateV131, legacyOperationDossierV131 } from './legacy-operation-state-v131.js';
 export { LEGACY_CAMPAIGNS_V131 } from './legacy-operation-state-v131.js';
@@ -91,6 +92,7 @@ export function withLegacyMissionsV131(BaseEngine) {
       super.start({ ...options, resumeState: undefined, vehicle, crew: [], squad: [], neuroProfile: null,
         apexDossier: null, userCasteCampaignV88: false, verticalWorldV130: false, destructibleSceneryV130: false });
       this.configureLegacyWorldV131(); this.syncLegacyWorldV131();
+      if (campaign.kind === 'abyss') preloadMantaArtV188(this.images);
       if (options.resumeState) this.lastResumeResult = this.applyResumeState(options.resumeState);
       this.legacyCheckpointV131 ||= this.captureLegacyCheckpointV131();
       this.onEvent({ type: 'special-operation-started', campaignId: campaign.id, operationId: campaign.specialOperationId, localPlayers: 1, status: 'partial' });
@@ -531,6 +533,7 @@ export function withLegacyMissionsV131(BaseEngine) {
     drawVehicle(ctx) {
       if (!this.isLegacyMissionV131() || this.legacyMissionV131.kind !== 'abyss') return super.drawVehicle(ctx);
       const body = this.vehicle; if (!body.active) return;
+      if (drawMantaArtV188(ctx, this.images, body)) return;
       ctx.save(); ctx.fillStyle = '#236579'; ctx.fillRect(body.x, body.y, body.w, body.h); ctx.strokeStyle = '#92cbd9'; ctx.lineWidth = 3;
       ctx.strokeRect(body.x, body.y, body.w, body.h); ctx.fillStyle = '#b4e3dd'; ctx.fillRect(body.x + 28, body.y + 16, 72, 32);
       ctx.font = '11px monospace'; ctx.fillText('MANTA · PROTOTYPE', body.x, body.y - 12); ctx.restore();

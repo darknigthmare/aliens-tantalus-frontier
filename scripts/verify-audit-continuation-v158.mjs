@@ -8,6 +8,7 @@ import { tmpdir } from 'node:os';
 import { basename, join } from 'node:path';
 import { AUDIT_PREDECESSOR_DOCUMENTS_V158, verifyAuditSuccessionV158 } from './audit-succession-v158.mjs';
 import { verifyAuditSuccessionV157 } from './audit-succession-v157.mjs';
+import { verifyCargoRegistryContinuationV188 } from './audit-tantalus-priorities-v188.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { XENO_TRIALS_FIGHTERS_V96 as roster } from '../src/xeno-trials-data-v96.js';
 import { XENO_TRIALS_SEQUENCES_V156 as sequences } from '../src/xeno-trials-sequences-v155.js';
@@ -145,12 +146,15 @@ test('dedicated Cocon rendering is distinct from source-work certification and a
   assert.equal(contract.oldFreedSaveWithoutTimestamp, 'settled');
   assert.equal(contract.paintedResinClampedToSupport, true);
   assert.equal(contract.equipmentAcquiredThroughNativeBagOnly, true);
-  assert.deepEqual(current.runtimeContracts.operations.counts, operationCounts);
-  assert.deepEqual(operationCounts, previous.runtimeContracts.operations.counts);
+  const historicalCounts = current.runtimeContracts.operations.counts;
+  assert.deepEqual(historicalCounts, previous.runtimeContracts.operations.counts);
+  assert.deepEqual(historicalCounts, verifyCargoRegistryContinuationV188(operations, operationCounts).historicalCounts);
   assert.deepEqual(ids(current.tables['10_Operations']), operations.map(row => row.id));
   for (const row of current.tables['10_Operations'].rows) {
     const operation = operations.find(entry => entry.id === row[0]);
-    assert.equal(row[5], operation.remainingMechanics.join('; '));
+    // The report keeps its pre-Cargo-art state; every other operation is exact.
+    assert.equal(row[3], row[0] === 'cargo-brutal' ? 'partial' : operation.implementationStatus);
+    assert.equal(row[5], row[0] === 'cargo-brutal' ? 'dedicated-cargo-matriarch-art' : operation.remainingMechanics.join('; '));
     assert.equal(row[6], 0);
   }
 });

@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { tmpdir } from 'node:os';
 import { basename, join } from 'node:path';
 import { AUDIT_PREDECESSOR_DOCUMENTS_V157, verifyAuditSuccessionV157 } from './audit-succession-v157.mjs';
+import { verifyCargoRegistryContinuationV188 } from './audit-tantalus-priorities-v188.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { XENO_TRIALS_FIGHTERS_V96 as roster } from '../src/xeno-trials-data-v96.js';
 import { XENO_TRIALS_RIGS_V154 as rigs } from '../src/xeno-trials-rig-v154.js';
@@ -194,13 +195,14 @@ test('the succession bridge rejects changed runtime bytes and changed immutable 
   assert.throws(() => verifyAuditSuccessionV157(previous, bad));
 });
 
-test('the operations appendix uses the active V131 registry rather than the historical V67 backlog', () => {
-  assert.deepEqual(current.runtimeContracts.operations.counts, operationCounts);
-  assert.equal(operationCounts.total, 21);
-  assert.equal(operationCounts.playable, 21);
-  assert.equal(operationCounts.missing, 0);
-  assert.equal(operationCounts.partial, 20);
-  assert.equal(operationCounts.effective, 1);
+test('the operations appendix retains its V157 snapshot and the current registry has only the reviewed Cargo delta', () => {
+  const historicalCounts = current.runtimeContracts.operations.counts;
+  assert.deepEqual(historicalCounts, verifyCargoRegistryContinuationV188(operations, operationCounts).historicalCounts);
+  assert.equal(historicalCounts.total, 21);
+  assert.equal(historicalCounts.playable, 21);
+  assert.equal(historicalCounts.missing, 0);
+  assert.equal(historicalCounts.partial, 20);
+  assert.equal(historicalCounts.effective, 1);
   assert.deepEqual(ids(current.tables['10_Operations']), operations.map(row => row.id));
   assert.match(current.runtimeContracts.operations.scope, /19.*2/);
   assert.match(current.runtimeContracts.operations.limitations.join(' '), /partiel/i);

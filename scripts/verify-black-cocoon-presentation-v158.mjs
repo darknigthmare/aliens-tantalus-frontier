@@ -11,6 +11,7 @@ import { resolveBlackCocoonPresentationV158, resolveBlackCocoonPlayerRigV158, re
   blackCocoonResinGeometryV158, drawBlackCocoonResinV158, BLACK_COCOON_PRESENTATION_V158 } from '../src/black-cocoon-presentation-v158.js';
 import { SaveSystem, beginOperation, createDefaultSave, recordOperationResumeState, migrateSave } from '../src/save.js';
 import { SPECIAL_OPERATIONS_V131, SPECIAL_OPERATION_COUNTS_V131 } from '../src/special-operations-v131.js';
+import { verifyCargoRegistryContinuationV188 } from './audit-tantalus-priorities-v188.mjs';
 import { BIOLOGICAL_ART_V188, biologicalArtAnchorV188, drawHumanResinSupportV188 } from '../src/biological-art-v188.js';
 
 // Real production composition and shipped raster dimensions; only the browser
@@ -266,7 +267,9 @@ test('the registry records procedural binding separately from the unfinished bit
   assert.equal(BLACK_COCOON_PRESENTATION_V158.animationStatus, 'dedicated-procedural-animation');
   assert.equal(BLACK_COCOON_PRESENTATION_V158.canonExact, false);
   assert.equal(SPECIAL_OPERATION_COUNTS_V131.total, 21); assert.equal(SPECIAL_OPERATION_COUNTS_V131.playable, 21);
-  assert.equal(SPECIAL_OPERATION_COUNTS_V131.partial, 20); assert.equal(SPECIAL_OPERATION_COUNTS_V131.effective, 1);
+  assert.equal(SPECIAL_OPERATION_COUNTS_V131.partial, 19); assert.equal(SPECIAL_OPERATION_COUNTS_V131.effective, 2);
+  assert.deepEqual(verifyCargoRegistryContinuationV188(SPECIAL_OPERATIONS_V131, SPECIAL_OPERATION_COUNTS_V131).changedIds,
+    ['cargo-brutal'], 'Cargo art alone changes the global counts; Cocon and HADAL stay partial.');
 });
 
 test('actual Canvas paths, control points, round strokes and base fill never sink through the support while resin falls', () => {

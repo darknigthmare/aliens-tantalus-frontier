@@ -32,7 +32,11 @@ const BIOLOGICAL_RUNTIME_ART_V188 = ['qz17-cradle-breached', 'depot-resin-helmet
 const PROLOGUE_RUNTIME_ART_V188 = ['tomas-wren-standing', 'lucia-ferro-standing', 'adele-sarrazin-standing',
   'resident-child-standing', 'north-quay-patient', 'medical-stretcher', 'port-meridien-night-approach',
   'relay-access-badge', 'relay-reaching-hand', 'cryo-supply-shelf', 'cryo-service-trolley'].map(id => `/assets/prologue/v188/${id}.png`);
-const REVIEWED_RUNTIME_ART_V188 = [...ASPHODELE_RUNTIME_ART_V188, ...ACT5_RUNTIME_ART_V188, ...BIOLOGICAL_RUNTIME_ART_V188, ...PROLOGUE_RUNTIME_ART_V188];
+const CARGO_ABYSS_RUNTIME_ART_V188 = [
+  ...['idle', 'advance', 'claw-tail', 'roar-hurt'].map(clip => `/assets/cargo/v188/matriarch-${clip}.png`),
+  '/assets/abyss/v188/manta-6-hull.png'
+];
+const REVIEWED_RUNTIME_ART_V188 = [...ASPHODELE_RUNTIME_ART_V188, ...ACT5_RUNTIME_ART_V188, ...BIOLOGICAL_RUNTIME_ART_V188, ...PROLOGUE_RUNTIME_ART_V188, ...CARGO_ABYSS_RUNTIME_ART_V188];
 const ORIGIN = 'https://tantalus.test';
 const req = (path, options) => new Request(new URL(path, ORIGIN), options);
 function response(path, { private: secret = false, status = 200, mime, vary } = {}) {
@@ -232,9 +236,9 @@ test('colony cards: invalid and newly private responses cannot leave a usable ca
     assert.equal((await h.dispatch('fetch', { request })).value.type, 'error');
   }
 });
-test('Reviewed scene art: Asphodele, Act V, biological evidence and prologue stay lazy through installation and survive a later network interruption', async () => {
+test('Reviewed scene art: Asphodele, Act V, biological evidence, prologue, Matriarch and MANTA stay lazy through installation and survive a later network interruption', async () => {
   const h = host();
-  assert.equal(h.api.CACHE, 'atf-v143-port-quay-art-20261117');
+  assert.equal(h.api.CACHE, 'atf-v143-cargo-abyss-art-20261117');
   await h.dispatch('install');
   const cache = await h.caches.open(h.api.CACHE);
   assert.equal(h.api.SHELL.filter(path => path === '/src/biological-art-v188.js').length, 1,
@@ -246,6 +250,11 @@ test('Reviewed scene art: Asphodele, Act V, biological evidence and prologue sta
   assert.equal(h.api.SHELL.filter(path => path === '/src/port-quay-art-v188.js').length, 1,
     'the playable quay adapter is an explicit offline-shell dependency');
   assert.ok(await cache.match(req('/src/port-quay-art-v188.js')));
+  for (const path of ['/src/cargo-matriarch-art-v188.js', '/src/manta-art-v188.js']) {
+    assert.equal(h.api.SHELL.filter(entry => entry === path).length, 1,
+      'the dedicated creature and vehicle renderers are explicit offline-shell dependencies');
+    assert.ok(await cache.match(req(path)));
+  }
   for (const path of REVIEWED_RUNTIME_ART_V188) {
     assert.equal(h.api.SHELL.includes(path), false, 'scene, mission, hub and cinematic art must not increase the mandatory precache');
     assert.equal(h.calls.some(request => new URL(request.url).pathname === path), false, 'installation must not fetch the image');
@@ -301,6 +310,13 @@ test('Reviewed scene art: exact paths reject unreviewed neighbors, out-of-scope 
       [artPath.replace(/\.png$/, '-extra.png'), {}], [artPath.replace('/v188/', '/v188/nested/'), {}],
       [artPath.replace('/v188/', '/v189/'), {}], [artPath.replace(/\.png$/, '.webp'), {}],
       [artPath.replace('/prologue/', '/PROLOGUE/'), {}], [artPath.replace('/prologue/', '/%70rologue/'), {}]
+    ]),
+    ['/assets/cargo/v188/unreviewed.png', {}], ['/assets/abyss/v188/unreviewed.png', {}],
+    ...CARGO_ABYSS_RUNTIME_ART_V188.flatMap(artPath => [
+      [artPath.replace(/\.png$/, '-extra.png'), {}], [artPath.replace('/v188/', '/v188/nested/'), {}],
+      [artPath.replace('/v188/', '/v189/'), {}], [artPath.replace(/\.png$/, '.webp'), {}],
+      [artPath.replace('/cargo/', '/CARGO/').replace('/abyss/', '/ABYSS/'), {}],
+      [artPath.replace('/cargo/', '/%63argo/').replace('/abyss/', '/%61byss/'), {}]
     ]),
     ['/assets/asphodele/v188/asph-wall-unreviewed.png', {}], ['/assets/asphodele/v188/asph-msn-unreviewed.png', {}],
     ['/assets/asphodele/v188/asph-wall-docks-extra.png', {}], ['/assets/asphodele/v188/nested/asph-wall-docks.png', {}],
@@ -444,7 +460,12 @@ test('release workflow, reports and gamedev guidance are source tooling only', (
     'docs/development/PORT_QUAY_ART_PROVENANCE_20261117.json',
     'docs/development/PORT_QUAY_ART_QA_20261117.md',
     'docs/development/PORT_QUAY_ART_OVERVIEW_20261117.png',
-    'docs/development/PORT_QUAY_ART_RENDER_RECEIPT_20261117.json']) {
+    'docs/development/PORT_QUAY_ART_RENDER_RECEIPT_20261117.json',
+    'docs/development/CARGO_ABYSS_ART_PROVENANCE_20261117.json',
+    'docs/development/CARGO_ABYSS_ART_QA_20261117.md',
+    'docs/development/CARGO_ABYSS_ART_RENDER_RECEIPT_20261117.json',
+    'docs/development/CARGO_ABYSS_ART_OVERVIEW_20261117.png',
+    'scripts/verify-cargo-matriarch-art-v188.mjs', 'scripts/verify-manta-art-v188.mjs']) {
     assert.equal(isPublicDistributionPathV86(path), true); assert.equal(isPublicDistributionPathV86(path, { built: true }), false);
   }
 });
@@ -517,6 +538,7 @@ test('gamedev guidance admission stays exact and rejects unrelated documents', (
     'docs/development/BIOLOGICAL_ART_QA_20261117.md.bak', 'docs/development/BIOLOGICAL_ART_UNREVIEWED_20261117.png',
     'docs/development/PROLOGUE_ART_QA_20261117.md.bak', 'docs/development/PROLOGUE_ART_UNREVIEWED_20261117.png',
     'docs/development/PORT_QUAY_ART_QA_20261117.md.bak', 'docs/development/PORT_QUAY_ART_UNREVIEWED_20261117.png',
+    'docs/development/CARGO_ABYSS_ART_QA_20261117.md.bak', 'docs/development/CARGO_ABYSS_ART_UNREVIEWED_20261117.png',
     'AGENTS.md.bak', 'src/AGENTS.md', 'docs/development/../private.md']) {
     assert.equal(isPublicDistributionPathV86(path), false, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);

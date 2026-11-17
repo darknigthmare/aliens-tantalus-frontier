@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-port-quay-art-20261117';
+const CACHE = 'atf-v143-cargo-abyss-art-20261117';
 const SHELL = Object.freeze([
   '/src/alien-base-bridge-v1.js',
   '/src/alien-base-snapshot-v1.js',
@@ -67,6 +67,8 @@ const SHELL = Object.freeze([
   '/src/biological-art-v188.js',
   '/src/prologue-art-v188.js',
   '/src/port-quay-art-v188.js',
+  '/src/cargo-matriarch-art-v188.js',
+  '/src/manta-art-v188.js',
   '/src/npc-circulation-v158.js',
   '/src/npc-annex-circulation-v159.js',
   '/src/forge-npcs-v158.js',
@@ -840,6 +842,13 @@ const PROLOGUE_ART_PATHS_V188 = new Set([
   '/assets/prologue/v188/cryo-supply-shelf.png',
   '/assets/prologue/v188/cryo-service-trolley.png'
 ]);
+const CARGO_ABYSS_ART_PATHS_V188 = new Set([
+  '/assets/cargo/v188/matriarch-idle.png',
+  '/assets/cargo/v188/matriarch-advance.png',
+  '/assets/cargo/v188/matriarch-claw-tail.png',
+  '/assets/cargo/v188/matriarch-roar-hurt.png',
+  '/assets/abyss/v188/manta-6-hull.png'
+]);
 const MAX_RUNTIME_ENTRIES_V143 = 256;
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const PRIVATE_HEADERS_V143 = ['authorization', 'proxy-authorization', 'apikey', 'x-api-key', 'x-auth-token'];
@@ -863,6 +872,7 @@ function cacheableRequestV143(request) {
     if (ACT5_ART_PATHS_V188.has(path)) return true;
     if (BIOLOGICAL_ART_PATHS_V188.has(path)) return true;
     if (PROLOGUE_ART_PATHS_V188.has(path)) return true;
+    if (CARGO_ABYSS_ART_PATHS_V188.has(path)) return true;
     // No API, account, save, unknown document or third-party endpoint can enter
     // Cache Storage, even when it returns HTTP 200 or an image-like extension.
     return /^\/assets\/(?:openai|user|equipment)\/[a-z0-9/_.-]+\.(?:png|webp|jpg|jpeg)$/i.test(path)

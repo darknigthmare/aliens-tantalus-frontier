@@ -27,9 +27,10 @@ const limitations = {
   'mire-archive-001': ['complete-nostromo-cast', 'complete-historical-campaign'],
   broodstorm: ['dedicated-flying-queen-art', 'complete-modular-dropship-corpus'],
   'black-cocoon': ['dedicated-cocoon-bitmap-corpus', 'extended-survivor-campaign'],
-  'last-course-tantalus': ['local-convoy-coop'],
-  'cargo-brutal': ['dedicated-cargo-matriarch-art']
+  'last-course-tantalus': ['local-convoy-coop']
 };
+// V188: Cargo's four dedicated Matriarch clips are produced. Its V67 local
+// gameplay status applies again; canonExact remains false for this adaptation.
 const freeze = entry => Object.freeze({ ...entry, canonExact: false,
   requiredMechanics: Object.freeze([...entry.requiredMechanics]),
   remainingMechanics: Object.freeze([...(entry.remainingMechanics || [])]) });

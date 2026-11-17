@@ -42,7 +42,7 @@
 - [x] T025 Vérifier les contacts du triage, la main après 45 %, les huit balises, les quatre caissons et la baie de secours ; rendre les 37 messages et COCYTE visibles ; conserver le globe entier et proportionné dans les deux orbites. Les deux suites cinématiques passent **39/39** ; la revue Canvas et ses limites sont dans `docs/development/PROLOGUE_ART_QA_20261117.md`.
 - [x] T026 Raccorder le chargeur, les replis, le rejeu après erreur et la fermeture ; admettre onze chemins runtime exacts et un module de shell. Audit du cache et sauvegardes : **132/132**. Comparer les 17 CIN / 46 plans hors lot au rendu de la base.
 - [x] T027 Confirmer le retour APC dans la CI Chromium de `d54f13cc` : 21 victimes, 1 310 crédits, aucun second paiement. Adapter le pilote campagne au bouton public de la cinématique d’extraction ; les régressions du pilote, de pause Broodstorm et du terminal Cocon sont documentées dans la même QA (**68/68**, dont six nouvelles).
-- [ ] T028 Qualifier sur la nouvelle CI les trois pilotes corrigés et les deux traces clavier ajoutées pour les échecs Forge/menu mobile. Les anciens succès et les hôtes locaux ne remplacent pas cette exécution.
+- [ ] T028 Qualifier sur la nouvelle CI les pilotes corrigés et les traces clavier ajoutées pour les échecs Forge/menu mobile. Trials est confirmé sur R (`232693f1`) : 47 contrôles, 30 captures Chromium conservées et pause acquise avec un seul P avant/après reprise. Forge, campagne et titre gardent leur qualification distincte ; le correctif de titre T040 attend sa nouvelle CI. Les anciens succès et les hôtes locaux ne remplacent pas ces exécutions.
 
 ## Phase 8 : Continuité visuelle avec le quai jouable — 17 novembre 2026
 
@@ -55,3 +55,13 @@
 
 - [x] T033 Attendre le retrait réel de l’introduction avant l’entrée Forge et la reprise de son checkpoint, dans les 45 s existantes. Deux régressions avec l’introduction, le checkpoint et le dialogue natifs ; mutant sans attente en échec ; suite Forge NPC **31/31**, 22 vérifications existantes intactes.
 - [x] T034 Suivre CIN-20 puis CIN-20-rook et resélectionner QZ-18 par les contrôles publics avant sa consultation, avec un budget partagé de 30 s. Deux régressions, deux mutants causaux refusés, suite campagne **31/31** ; 21 fonctions et 28 contrôles existants inchangés. Les suites des trois pilotes totalisent **87/87**. Cocon et titre sont confirmés dans la CI P ; la qualification Chromium du candidat final reste dans T028.
+
+## Continuation — Cargo et Abysse Noir, art dédié
+
+- [x] T035 Produire quatre planches de Matriarche, 16 poses, les raccorder uniquement à l'acteur Cargo et conserver le contrôleur, les événements, la physique, les checkpoints et la reprise. Admission atomique 4/4 après mesure physique ; autres Reines et repli inchangés.
+- [x] T036 Produire et raccorder la coque MANTA-6 entière au gabarit 180 × 86, à échelle uniforme et avec miroir ; conserver tir, accès et repli. Préciser la notice FR/EN sans clôturer HADAL ni le bestiaire.
+- [x] T037 Vérifier les pixels avec le moteur natif et les vrais PNG : 264/264, 32 rendus des 16 poses, appuis géométriques à 0 px d'écart, cinq replis Cargo identiques à R et aucune différence hors art. Les captures et hôtes sont déclarés ; pas de parcours Chromium.
+- [x] T038 Corriger la planche d'attaque pour les impacts natifs 9/11 ; lier son SHA aux cellules revues et vérifier les événements réellement émis face au prélèvement du même instant. Suite corrigée 7/7 ; les 15/15 antérieurs ne sont pas réattribués.
+- [x] T039 Clôturer seulement la dette d'art Cargo dans le registre courant 19/2, en préservant les snapshots historiques 20/1 et les dettes Cocon/HADAL ; succession explicite et mutations négatives.
+- [x] T040 Attendre le retrait réel de l'introduction avant l'unique Entrée du menu après preview, dans le budget partagé de 30 s. La trace R et la régression causale montrent la capture pendant le fondu ; les deux nouveaux cas passent, le mutant sans attente échoue, la suite Intro passe 6/6. Les douze fonctions et neuf assertions existantes du pilote restent identiques. Hôtes DOM/RAF/transport déclarés ; qualification Chromium du nouveau titre dans T028.
+- [ ] T041 Produire le scaphandre HADAL modulaire et ses poses avec un contrat partagé entre tête, oxygène, bras et arme ; ne pas qualifier une simple illustration de cycle de nage achevé.
