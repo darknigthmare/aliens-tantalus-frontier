@@ -24,7 +24,8 @@ import {
   kesslerTagPendingV188, depositKesslerTagV188, kesslerTagInLockerV188, asphodeleSaveViewV188, stationCinematicDueV188, cassiusCoreLineV188,
   memorialTextV188, asphodeleHubSummaryV188
 } from '../src/asphodele-hub-v188.js';
-import { ASPHODELE_HUB_SLOTS_V188, ASPHODELE_HUB_SLOT_IDS_V188, ASPHODELE_HUB_FILES_PRESENT_V188, AsphodeleHubAssetLoaderV188, getAsphodeleHubSlotV188 } from '../src/asphodele-hub-slots-v188.js';
+import { ASPHODELE_HUB_SLOTS_V188, ASPHODELE_HUB_SLOT_IDS_V188, ASPHODELE_HUB_FILES_PRESENT_V188, AsphodeleHubAssetLoaderV188, getAsphodeleHubSlotV188,
+  drawAsphodeleWallV188, drawAsphodeleWallTrimV188 } from '../src/asphodele-hub-slots-v188.js';
 import { ASPHODELE_MISSION_SLOT_IDS_V188, ASPHODELE_MISSION_IMAGE_SOURCE_RECTS_V188, drawAsphodeleMissionSlotV188 } from '../src/asphodele-mission-dressing-v188.js';
 import { fixture } from './engine-host-v188.mjs';
 import { STATION_CINEMATICS_V188, STATION_CINEMATIC_IDS_V188 } from '../src/station-cinematics-v188.js';
@@ -392,6 +393,99 @@ const artTrace = () => {
 class MissionImageFixture {
   complete = true; naturalWidth = 8192; naturalHeight = 8192;
 }
+
+test('hub wall art: uniform scaling and world anchoring survive camera movement and different image proportions', () => {
+  // Explicit geometry fixtures, not a claim to have rendered bitmap pixels.
+  for (const [naturalWidth, naturalHeight] of [[1280, 504], [2560, 1008], [2304, 1024]]) {
+    const loader = new AsphodeleHubAssetLoaderV188({ ImageCtor: null, present: [] });
+    const image = { complete: true, naturalWidth, naturalHeight };
+    loader.images.set('asph-wall-ring', image);
+    const tileWidth = naturalWidth * 504 / naturalHeight;
+    const landmarks = new Map();
+    for (const camera of [0, 127, 128, 319, 767, 1279, 1280]) {
+      const x0 = Math.max(0, Math.floor(camera / 128) * 128), x1 = Math.min(2560, camera + 1408);
+      const trace = artTrace();
+      assert.equal(loader.drawWall(trace.ctx, 'asph-wall-ring', x0, 120, x1 - x0, 504, () => assert.fail('loaded wall fell back')), 'image');
+      assert.deepEqual(trace.calls.find(call => call.method === 'rect').args, [x0, 120, x1 - x0, 504]);
+      assert.ok(trace.calls.some(call => call.method === 'clip'), 'wall stays inside the visible room span');
+      const draws = trace.calls.filter(call => call.method === 'drawImage');
+      assert.ok(draws.length >= 1 && draws.length <= 3);
+      assert.ok(draws[0].args[1] <= x0 && draws.at(-1).args[1] + tileWidth >= x1, 'no hole at either clip edge');
+      for (let index = 0; index < draws.length; index++) {
+        const [bitmap, x, y, w, h] = draws[index].args;
+        assert.equal(bitmap, image); assert.equal(y, 120); assert.equal(h, 504);
+        assert.ok(Math.abs(w / naturalWidth - h / naturalHeight) < 1e-12, 'same scale on both axes');
+        assert.ok(Math.abs(x / tileWidth - Math.round(x / tileWidth)) < 1e-12, 'origin belongs to world, not camera');
+        if (index) assert.equal(x, draws[index - 1].args[1] + w, 'neighbouring panels share an exact boundary');
+        // An interior source landmark retains the same world position for a
+        // given tile, even when the camera expands or shortens the draw span.
+        const tile = Math.round(x / tileWidth), landmark = x + naturalWidth * .37 * w / naturalWidth;
+        if (landmarks.has(tile)) assert.ok(Math.abs(landmark - landmarks.get(tile)) < 1e-9, 'same landmark after scrolling');
+        else landmarks.set(tile, landmark);
+      }
+      assert.equal(trace.states.length, 0, 'canvas state restored');
+    }
+  }
+});
+
+test('hub wall art: missing, pending and malformed images retain the original primitive callback', () => {
+  const loader = new AsphodeleHubAssetLoaderV188({ ImageCtor: null, present: [] });
+  const fallbacks = [], trace = artTrace();
+  for (const image of [null, { complete: false, naturalWidth: 1280, naturalHeight: 504 },
+    { complete: true, naturalWidth: 1280, naturalHeight: 0 }, { complete: true, naturalWidth: Infinity, naturalHeight: 504 }]) {
+    loader.images.set('asph-wall-docks', image);
+    assert.equal(loader.drawWall(trace.ctx, 'asph-wall-docks', 256, 120, 1408, 504, (...args) => fallbacks.push(args)), 'primitive');
+    assert.equal(loader.usage['asph-wall-docks'], 'primitive');
+  }
+  assert.equal(fallbacks.length, 4);
+  assert.ok(fallbacks.every(args => args[0] === trace.ctx && args.slice(1).join(',') === '256,120,1408,504'));
+  assert.equal(trace.calls.filter(call => call.method === 'drawImage').length, 0);
+  assert.throws(() => loader.drawWall(trace.ctx, 'asph-door', 0, 120, 96, 132), /wall art slot/);
+  assert.throws(() => loader.drawWall(trace.ctx, 'unknown', 0, 120, 96, 132), /wall art slot/);
+});
+
+test('hub wall art: a continuous Canvas pattern avoids separate fractional edges and retains its world transform', () => {
+  const loader = new AsphodeleHubAssetLoaderV188({ ImageCtor: null, present: [] });
+  const image = { complete: true, naturalWidth: 1983, naturalHeight: 793 }, pattern = { fixture: 'repeat-x' };
+  const scale = 504 / 793, trace = artTrace(); let created = 0;
+  trace.ctx.createPattern = (bitmap, repeat) => { assert.equal(bitmap, image); assert.equal(repeat, 'repeat-x'); created++; return pattern; };
+  loader.images.set('asph-wall-ring', image);
+  for (const camera of [0, 127, 128, 767, 1280]) {
+    trace.calls.length = 0;
+    const x0 = Math.floor(camera / 128) * 128, x1 = Math.min(2560, camera + 1408);
+    assert.equal(loader.drawWall(trace.ctx, 'asph-wall-ring', x0, 120, x1 - x0, 504), 'image');
+    assert.deepEqual(trace.calls.find(call => call.method === 'translate').args, [0, 120]);
+    assert.deepEqual(trace.calls.find(call => call.method === 'scale').args, [scale, scale]);
+    const fills = trace.calls.filter(call => call.method === 'fillRect');
+    assert.equal(fills.length, 1, 'continuous surface rather than adjacent antialiased image rectangles');
+    assert.equal(fills[0].fillStyle, pattern);
+    const [x, y, w, h] = fills[0].args;
+    assert.ok(x * scale <= x0 && (x + w) * scale >= x1, 'surface covers the clipped viewport including fractional edge samples');
+    assert.equal(y, 0); assert.ok(Math.abs(h * scale - 504) < 1e-9);
+    assert.equal(trace.calls.filter(call => call.method === 'drawImage').length, 0);
+    assert.equal(trace.states.length, 0);
+  }
+  assert.equal(created, 1, 'unchanged source reuses its pattern on the same canvas');
+});
+
+test('hub wall art: native hazard paint respects the same door openings as the primitive in every camera span', () => {
+  for (const room of Object.values(ASPHODELE_ROOMS_V188)) {
+    const gaps = room.doors.map(entry => [entry.x - 58, entry.x + 58]);
+    for (const camera of [0, Math.max(0, room.width - 1280)]) {
+      const x0 = Math.max(0, Math.floor(camera / 128) * 128), x1 = Math.min(room.width, camera + 1408);
+      const primitive = artTrace(), imageTrim = artTrace();
+      drawAsphodeleWallV188(primitive.ctx, room.module, x0, x1 - x0, 0, gaps);
+      drawAsphodeleWallTrimV188(imageTrim.ctx, room.module, x0, x1 - x0, gaps);
+      const bands = trace => trace.calls.filter(call => call.method === 'fillRect' && call.args[1] === 600 && call.args[3] === 6)
+        .map(call => ({ args: call.args, color: call.fillStyle }));
+      assert.deepEqual(bands(imageTrim), bands(primitive), room.id + ' keeps native floor markings');
+      for (const { args: [x, , width] } of bands(imageTrim)) for (const [g0, g1] of gaps)
+        assert.ok(x + width <= g0 || x >= g1, room.id + ' paint never crosses a door frame');
+      assert.ok(imageTrim.calls.some(call => call.method === 'fillRect' && call.args.join(',') === [x0, 96, x1 - x0, 40].join(',')), 'native ceiling beam retained');
+    }
+  }
+});
+
 const slotTrace = (kind, { present = true, ...options } = {}) => {
   const id = `asph-msn-${kind}`, slot = getAsphodeleHubSlotV188(id), trace = artTrace();
   const loader = new AsphodeleHubAssetLoaderV188({ ImageCtor: MissionImageFixture, present: present ? [id] : [] }); loader.preload([id]);

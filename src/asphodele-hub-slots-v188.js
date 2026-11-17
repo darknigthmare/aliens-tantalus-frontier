@@ -109,7 +109,10 @@ const HUB_ROOM_SLOT_IDS_V188 = Object.freeze(ASPHODELE_HUB_SLOT_IDS_V188.filter(
 // remain primitive-only; tests verify every admitted path exists.
 export const ASPHODELE_HUB_FILES_PRESENT_V188 = Object.freeze([
   'asph-msn-panel', 'asph-msn-crt', 'asph-msn-sign', 'asph-msn-conduit',
-  'asph-msn-blackbox', 'asph-msn-resin', 'asph-msn-salvage', 'asph-msn-gauge', 'asph-msn-camera'
+  'asph-msn-blackbox', 'asph-msn-resin', 'asph-msn-salvage', 'asph-msn-gauge', 'asph-msn-camera',
+  'asph-wall-docks', 'asph-wall-ring', 'asph-wall-spoke', 'asph-wall-control',
+  'asph-wall-relay', 'asph-wall-lab', 'asph-wall-memorial', 'asph-wall-greenhouse',
+  'asph-wall-market', 'asph-wall-quarters', 'asph-wall-medbay', 'asph-wall-lower', 'asph-wall-repair'
 ]);
 export const getAsphodeleHubSlotV188 = id => ASPHODELE_HUB_SLOTS_V188.find(entry => entry.id === id) || null;
 
@@ -117,6 +120,7 @@ export const getAsphodeleHubSlotV188 = id => ASPHODELE_HUB_SLOTS_V188.find(entry
 export class AsphodeleHubAssetLoaderV188 {
   constructor({ ImageCtor = globalThis.Image, present = ASPHODELE_HUB_FILES_PRESENT_V188 } = {}) {
     this.ImageCtor = ImageCtor; this.present = new Set(present); this.images = new Map(); this.requested = []; this.usage = Object.create(null);
+    this.wallPatterns = new WeakMap();
   }
   preload(ids = HUB_ROOM_SLOT_IDS_V188) {
     for (const id of ids) {
@@ -127,6 +131,47 @@ export class AsphodeleHubAssetLoaderV188 {
     return this.requested.slice();
   }
   image(id) { const image = this.images.get(id); return image?.complete && image.naturalWidth > 0 ? image : null; }
+  /** Repeat a back wall at its own aspect ratio, fixed in world coordinates.
+   * The camera only changes the clip: it must never stretch or reposition the
+   * texture. All original pixels are sampled; the PNG itself stays unchanged. */
+  drawWall(ctx, id, x, y, width, height, fallback) {
+    const entry = getAsphodeleHubSlotV188(id);
+    if (!entry || !id.startsWith('asph-wall-')) throw new Error(`Unknown Asphodèle wall art slot: ${id}`);
+    const image = this.image(id);
+    const valid = image && [image.naturalWidth, image.naturalHeight, width, height].every(value => Number.isFinite(value) && value > 0)
+      && Number.isFinite(x) && Number.isFinite(y);
+    const tileWidth = valid ? image.naturalWidth * height / image.naturalHeight : 0;
+    let source = 'primitive';
+    if (Number.isFinite(tileWidth) && tileWidth >= 1) {
+      ctx.save();
+      try {
+        ctx.beginPath(); ctx.rect(x, y, width, height); ctx.clip();
+        let patterns = this.wallPatterns.get(ctx);
+        if (!patterns) { patterns = new Map(); this.wallPatterns.set(ctx, patterns); }
+        let cached = patterns.get(id);
+        if (cached?.image !== image) {
+          const pattern = ctx.createPattern?.(image, 'repeat-x');
+          cached = pattern ? { image, pattern } : null;
+          if (cached) patterns.set(id, cached);
+        }
+        if (cached) {
+          // One repeated surface has no separately antialiased tile edges.
+          // This closes fractional-width joins without stretching or cropping.
+          const scale = height / image.naturalHeight;
+          ctx.translate(0, y); ctx.scale(scale, scale); ctx.fillStyle = cached.pattern;
+          const left = Math.floor(x / scale) - 1, right = Math.ceil((x + width) / scale) + 1;
+          ctx.fillRect(left, 0, right - left, image.naturalHeight);
+        } else {
+          // Minimal non-browser hosts may not implement CanvasPattern.
+          for (let tileX = Math.floor(x / tileWidth) * tileWidth; tileX < x + width; tileX += tileWidth)
+            ctx.drawImage(image, tileX, y, tileWidth, height);
+        }
+        source = 'image';
+      } finally { ctx.restore(); }
+    }
+    if (source === 'primitive') fallback?.(ctx, x, y, width, height);
+    this.usage[id] = source; return source;
+  }
   /** Returns 'image' or 'primitive'. Existing hub callers retain their sizing;
    * mission cutouts opt into a proportional fit and an optional source window.
    * A source window changes sampling only: the admitted PNG is never rewritten. */
@@ -157,6 +202,19 @@ const PALETTE = Object.freeze({
   quarters: ['#1b1a1d', '#26242a', '#e8c88a'], medbay: ['#1e2528', '#2c373b', '#bfe8e0'], lower: ['#141212', '#1f1a19', '#e15b4f'],
   repair: ['#1a1e20', '#252b2e', '#e2b53a']
 });
+function drawAsphodeleWallHazardV188(ctx, module, x, width, gaps) {
+  if (module !== 'docks' && module !== 'plan' && module !== 'repair') return;
+  // World-anchored paint stops at actual door frames in either rendering path.
+  const clear = (px, w) => !gaps.some(([g0, g1]) => px < g1 && px + w > g0);
+  for (let px = x - (x % 24); px < x + width; px += 24) if (clear(px, 24)) {
+    ctx.fillStyle = Math.floor(px / 24) % 2 ? '#111' : '#c9a54a'; ctx.fillRect(px, 600, 24, 6);
+  }
+}
+/** Structural trim remains native, above a loaded wall and below its doors. */
+export function drawAsphodeleWallTrimV188(ctx, module, x, width, gaps = []) {
+  ctx.fillStyle = '#0b0f11'; ctx.fillRect(x, 96, width, 40);
+  drawAsphodeleWallHazardV188(ctx, module, x, width, gaps);
+}
 /**
  * Back wall of a module, drawn in world coordinates across [x, x + width].
  * `gaps` lists [x0, x1] spans (door frames) the floor hazard band must not cross.
@@ -170,11 +228,7 @@ export function drawAsphodeleWallV188(ctx, module, x, width, time = 0, gaps = []
   ctx.fillStyle = '#0b0f11'; ctx.fillRect(x, 96, width, 40); // ceiling beam
   ctx.fillStyle = 'rgba(0,0,0,.5)'; for (let px = x; px < x + width; px += 306) { ctx.fillRect(px, 96, 18, 528); } // ribs every 6 m
   ctx.fillStyle = accent; ctx.globalAlpha = .75; for (let px = x + 60; px < x + width; px += 256) ctx.fillRect(px, 140, 60, 4); ctx.globalAlpha = 1; // light strips
-  if (module === 'docks' || module === 'plan' || module === 'repair') {
-    // Hazard band at the wall base; it stops at each door frame instead of running behind the door.
-    const clear = (px, w) => !gaps.some(([g0, g1]) => px < g1 && px + w > g0);
-    for (let px = x - (x % 24); px < x + width; px += 24) if (clear(px, 24)) { ctx.fillStyle = Math.floor(px / 24) % 2 ? '#111' : '#c9a54a'; ctx.fillRect(px, 600, 24, 6); }
-  }
+  drawAsphodeleWallHazardV188(ctx, module, x, width, gaps);
   if (module === 'lower') { ctx.fillStyle = 'rgba(225,91,79,.10)'; ctx.fillRect(x, 140, width, 470); for (let px = x - (x % 306) + 150; px < x + width; px += 306) { ctx.fillStyle = '#e15b4f'; ctx.fillRect(px, 150, 18, 8); } }
   if (module === 'medbay') { ctx.fillStyle = 'rgba(191,232,224,.06)'; ctx.fillRect(x, 140, width, 470); }
   if (module === 'quarters') { ctx.fillStyle = 'rgba(232,200,138,.05)'; ctx.fillRect(x, 140, width, 470); }

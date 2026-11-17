@@ -17,7 +17,12 @@ const ASPHODELE_CARDS_V188 = ['asphodele-exterior', 'cassius-core', 'echo8-recor
   .map(id => `/assets/content/v188/${id}.png`);
 const ASPHODELE_MISSION_ART_V188 = ['panel', 'crt', 'sign', 'conduit', 'blackbox', 'resin', 'salvage', 'gauge', 'camera']
   .map(id => `/assets/asphodele/v188/asph-msn-${id}.png`);
-const ASPHODELE_RUNTIME_ART_V188 = [...ASPHODELE_CARDS_V188, ...ASPHODELE_MISSION_ART_V188];
+const ASPHODELE_HUB_WALL_ART_V188 = ['docks', 'ring', 'spoke', 'control', 'relay', 'lab', 'memorial', 'greenhouse', 'market', 'quarters', 'medbay', 'lower', 'repair']
+  .map(id => `/assets/asphodele/v188/asph-wall-${id}.png`);
+const ASPHODELE_ABSENT_HUB_ART_V188 = ['door', 'ud4l-docked', 'crucible-shuttle', 'cassius-core', 'qz-map', 'relay-bays', 'cradles', 'memorial-plaques',
+  'hydro-bays', 'crucible-stall', 'grue', 'bunks', 'medbay-beds', 'medbay-scanner', 'echo8-barricade', 'night-board', 'repair-cradle', 'npc-docker', 'npc-merchant', 'npc-technician']
+  .map(id => `/assets/asphodele/v188/asph-${id}.png`);
+const ASPHODELE_RUNTIME_ART_V188 = [...ASPHODELE_CARDS_V188, ...ASPHODELE_MISSION_ART_V188, ...ASPHODELE_HUB_WALL_ART_V188];
 const ORIGIN = 'https://tantalus.test';
 const req = (path, options) => new Request(new URL(path, ORIGIN), options);
 function response(path, { private: secret = false, status = 200, mime, vary } = {}) {
@@ -217,13 +222,13 @@ test('colony cards: invalid and newly private responses cannot leave a usable ca
     assert.equal((await h.dispatch('fetch', { request })).value.type, 'error');
   }
 });
-test('Asphodele art: six cards and nine mission PNGs stay lazy through installation and survive a later network interruption', async () => {
+test('Asphodele art: six cards, nine mission PNGs and thirteen hub walls stay lazy through installation and survive a later network interruption', async () => {
   const h = host();
-  assert.equal(h.api.CACHE, 'atf-v143-asphodele-mission-art-20261116');
+  assert.equal(h.api.CACHE, 'atf-v143-asphodele-wall-art-20261117');
   await h.dispatch('install');
   const cache = await h.caches.open(h.api.CACHE);
   for (const path of ASPHODELE_RUNTIME_ART_V188) {
-    assert.equal(h.api.SHELL.includes(path), false, 'scene and mission art must not increase the mandatory precache');
+    assert.equal(h.api.SHELL.includes(path), false, 'scene, mission and hub art must not increase the mandatory precache');
     assert.equal(h.calls.some(request => new URL(request.url).pathname === path), false, 'installation must not fetch the image');
     assert.equal(await cache.match(req(path)), undefined);
     assert.equal(h.api.cacheableRequestV143(req(path)), true, path);
@@ -242,7 +247,7 @@ test('Asphodele art: six cards and nine mission PNGs stay lazy through installat
     assert.equal(fetched.intercepted, true);
     assert.equal(await fetched.value.text(), `art:${path}`);
   }
-  assert.equal((await cache.keys()).length, h.api.SHELL.length + 15);
+  assert.equal((await cache.keys()).length, h.api.SHELL.length + ASPHODELE_RUNTIME_ART_V188.length);
   h.network(async () => { throw new Error('offline after first view'); });
   for (const path of ASPHODELE_RUNTIME_ART_V188) assert.equal(await (await h.dispatch('fetch', { request: req(path) })).value.text(), `art:${path}`);
 });
@@ -253,7 +258,11 @@ test('Asphodele art: exact paths reject unreviewed neighbors, absent hub art and
     ['/assets/content/v188/nested/cassius-core.png', {}], [`${path}/extra.png`, {}],
     ['/assets/content/v189/cassius-core.png', {}], ['/assets/content/v188/cassius-core.webp', {}],
     ['/assets/content/v188/CASSIUS-CORE.png', {}], ['/assets/content/v188/%63assius-core.png', {}],
-    ['/assets/asphodele/v188/asph-wall-docks.png', {}], ['/assets/asphodele/v188/asph-msn-unreviewed.png', {}],
+    ...ASPHODELE_ABSENT_HUB_ART_V188.map(artPath => [artPath, {}]),
+    ['/assets/asphodele/v188/asph-wall-unreviewed.png', {}], ['/assets/asphodele/v188/asph-msn-unreviewed.png', {}],
+    ['/assets/asphodele/v188/asph-wall-docks-extra.png', {}], ['/assets/asphodele/v188/nested/asph-wall-docks.png', {}],
+    ['/assets/asphodele/v189/asph-wall-docks.png', {}], ['/assets/asphodele/v188/asph-wall-docks.webp', {}],
+    ['/assets/asphodele/v188/ASPH-WALL-DOCKS.png', {}], ['/assets/asphodele/v188/%61sph-wall-docks.png', {}],
     ['/assets/asphodele/v188/asph-msn-panel-extra.png', {}], ['/assets/asphodele/v188/nested/asph-msn-panel.png', {}],
     ['/assets/asphodele/v189/asph-msn-panel.png', {}], ['/assets/asphodele/v188/asph-msn-panel.webp', {}],
     ['/assets/asphodele/v188/ASPH-MSN-PANEL.png', {}], ['/assets/asphodele/v188/%61sph-msn-panel.png', {}],
@@ -364,7 +373,11 @@ test('release commit identity uses the actual checkout, with a strict archive fa
 });
 test('release workflow, reports and gamedev guidance are source tooling only', () => {
   for (const path of ['.github/workflows/full-release-v143.yml', 'docs/forge/V143-AUDIT-FIXES.md',
-    'AGENTS.md', 'docs/development/GAMEDEV_GUIDANCE.md']) {
+    'AGENTS.md', 'docs/development/GAMEDEV_GUIDANCE.md',
+    'docs/development/ASPHODELE_HUB_WALL_ART_PROVENANCE_20261117.json',
+    'docs/development/ASPHODELE_HUB_WALL_ART_QA_20261117.md',
+    'docs/development/ASPHODELE_HUB_WALL_ART_OVERVIEW_20261117.png',
+    'docs/development/ASPHODELE_HUB_WALL_ART_RENDER_RECEIPT_20261117.json']) {
     assert.equal(isPublicDistributionPathV86(path), true); assert.equal(isPublicDistributionPathV86(path, { built: true }), false);
   }
 });
@@ -430,6 +443,7 @@ test('gamedev guidance admission stays exact and rejects unrelated documents', (
   assert.equal(isPublicDistributionPathV86('docs/development', { directory: true }), true);
   assert.equal(isPublicDistributionPathV86('docs/development', { directory: true, built: true }), false);
   for (const path of ['docs/development/unreviewed.md', 'docs/development/GAMEDEV_GUIDANCE.md.bak',
+    'docs/development/ASPHODELE_HUB_WALL_ART_QA_20261117.md.bak', 'docs/development/ASPHODELE_HUB_WALL_ART_UNREVIEWED_20261117.png',
     'AGENTS.md.bak', 'src/AGENTS.md', 'docs/development/../private.md']) {
     assert.equal(isPublicDistributionPathV86(path), false, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);

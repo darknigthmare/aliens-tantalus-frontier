@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-asphodele-mission-art-20261116';
+const CACHE = 'atf-v143-asphodele-wall-art-20261117';
 const SHELL = Object.freeze([
   '/src/alien-base-bridge-v1.js',
   '/src/alien-base-snapshot-v1.js',
@@ -763,6 +763,21 @@ const ASPHODELE_MISSION_PATHS_V188 = new Set([
   '/assets/asphodele/v188/asph-msn-gauge.png',
   '/assets/asphodele/v188/asph-msn-camera.png'
 ]);
+const ASPHODELE_HUB_WALL_PATHS_V188 = new Set([
+  '/assets/asphodele/v188/asph-wall-docks.png',
+  '/assets/asphodele/v188/asph-wall-ring.png',
+  '/assets/asphodele/v188/asph-wall-spoke.png',
+  '/assets/asphodele/v188/asph-wall-control.png',
+  '/assets/asphodele/v188/asph-wall-relay.png',
+  '/assets/asphodele/v188/asph-wall-lab.png',
+  '/assets/asphodele/v188/asph-wall-memorial.png',
+  '/assets/asphodele/v188/asph-wall-greenhouse.png',
+  '/assets/asphodele/v188/asph-wall-market.png',
+  '/assets/asphodele/v188/asph-wall-quarters.png',
+  '/assets/asphodele/v188/asph-wall-medbay.png',
+  '/assets/asphodele/v188/asph-wall-lower.png',
+  '/assets/asphodele/v188/asph-wall-repair.png'
+]);
 const MAX_RUNTIME_ENTRIES_V143 = 256;
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const PRIVATE_HEADERS_V143 = ['authorization', 'proxy-authorization', 'apikey', 'x-api-key', 'x-auth-token'];
@@ -780,6 +795,7 @@ function cacheableRequestV143(request) {
     if (COLONY_CARD_PATHS_V188.has(path)) return true;
     if (ASPHODELE_CARD_PATHS_V188.has(path)) return true;
     if (ASPHODELE_MISSION_PATHS_V188.has(path)) return true;
+    if (ASPHODELE_HUB_WALL_PATHS_V188.has(path)) return true;
     // No API, account, save, unknown document or third-party endpoint can enter
     // Cache Storage, even when it returns HTTP 200 or an image-like extension.
     return /^\/assets\/(?:openai|user|equipment)\/[a-z0-9/_.-]+\.(?:png|webp|jpg|jpeg)$/i.test(path)

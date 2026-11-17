@@ -36,9 +36,16 @@
 - [x] T021 Corrections : objectif du Tantalus masqué à bord de la station, bande de danger arrêtée aux portes, libellé FR/EN de la passerelle, noms « ★ » traduits.
 - [x] T022 `scripts/verify-asphodele-hub-2-v188.mjs` et `scripts/qa-asphodele-hub-2-v188.mjs`, admis ; `sw.js` : trois modules ; bloc anglais revu.
 
+## Phase 8: Images produites et intégrées (2026-11-16 et 2026-11-17)
+
+- [x] T023 Neuf objets `asph-msn-*` de mission, libellés FR/EN et animations natives ; provenance et QA du 16 novembre.
+- [x] T024 Treize parois `asph-wall-*`, indépendantes et opaques, dans les treize salles ; PNG générés conservés octet pour octet.
+- [x] T025 Proportions réelles, répétition ancrée au monde, découpage du fond et séparation des portes/bandes ; correction du filet de raccord fractionnel.
+- [x] T026 Cache runtime explicite, 39 tests Asphodèle et contrôle raster des treize salles ; QA/provenance du 17 novembre. Parcours Chromium non exécuté : lancement bloqué par l'environnement.
+
 ## Reporté
 - Choix final et fins (spec 006, autre chantier).
-- Art final de tous les emplacements `asph-*` (42 emplacements, primitives Canvas).
+- Art des vingt emplacements `asph-*` restants : treize accessoires, trois éléments intermédiaires et quatre acteurs. Vingt-deux des 42 emplacements disposent de PNG ; la fidélité canonique et les animations ne sont pas certifiées par cette seule génération.
 - Plan V3 de la station (Q23 B, non retenu) et rotation visuelle de l'anneau.
 - Commerce d'armes du marché (seules pièces et ressources sont échangées), médecin, jardiniers et mécaniciens nommés.
 - Autres lieux de §39.2 : `orig-asphodele-1`, `-3`, `-4`.

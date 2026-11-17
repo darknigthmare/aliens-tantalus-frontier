@@ -91,8 +91,8 @@ Les statuts « À faire » du §53 (tir, tension, caste, accessibilité, répliq
 | S1 L'arrimage, S2 La voix de CASSIUS, S3 Les ponts scellés, S4 Le hub Asphodèle | Manquant | Q6 : produire S1-S4 comme missions avant le hub ; Q103 : feature Spec Kit |
 | Choix CASSIUS (réécrire / brider / effacer) | Manquant | Q7 : choix définitif |
 | Annexes (7) et contrats locaux (6) | Partiel (spec 007) | Les 13 sont lançables après S4, verrous [PROPOSÉ] ; contrats comptés ; seul *Relais en dérive* a un effet ; décor générique d'intérieur de vaisseau |
-| Hub Asphodèle : 7 modules (§7.3, §42) | Partiel (spec 007 et suite) | 12 modules de §42.2 atteignables à pied (Q22 A, Q23 A) ; quartiers, infirmerie, ponts inférieurs et hangar de réparation rouverts (§7.7) ; commerce Crucible (Q30 A) ; effets des six contrats ; foules ; art en primitives, plan V3 non fait |
-| Décor de station, CASSIUS, récupérateurs, dropship d'Echo-8 (§29.4) | Partiel (art jouable) | Neuf objets d'habillage `asph-msn-*` sont produits et intégrés dans les missions ; 33 emplacements du hub restent en primitives. Les six illustrations de scène Asphodèle sont distinctes de ces décors jouables |
+| Hub Asphodèle : 7 modules (§7.3, §42) | Partiel (spec 007 et suite) | 12 modules de §42.2 atteignables à pied (Q22 A, Q23 A) ; quartiers, infirmerie, ponts inférieurs et hangar de réparation rouverts (§7.7) ; commerce Crucible (Q30 A) ; effets des six contrats ; foules ; treize parois PNG intégrées, vingt props/acteurs/vaisseaux encore en primitives, plan V3 non fait |
+| Décor de station, CASSIUS, récupérateurs, dropship d'Echo-8 (§29.4) | Partiel (art jouable) | Neuf objets d'habillage `asph-msn-*` et treize parois `asph-wall-*` sont produits et intégrés ; vingt emplacements du hub restent en primitives. Les six illustrations de scène Asphodèle sont distinctes de ces décors jouables |
 
 ## 5. Quêtes du Tantalus (§8)
 
@@ -167,9 +167,9 @@ Les fiches de référence `premium-personnel-v119.js` et `franchise-costumes-v11
 
 ## 11. Éléments qui demandent des images générées
 
-Cette liste décrit les manques constatés lors de l'audit initial. Les continuations du 16 novembre 2026 produisent les trois portraits de Port-Méridien, les dix-huit cartes de colonie et de quêtes, les six illustrations de scène Asphodèle et les neuf objets d'habillage de ses missions détaillés ci-dessous ; les autres besoins restent ouverts.
+Cette liste décrit les manques constatés lors de l'audit initial. Les continuations du 16 novembre 2026 produisent les trois portraits de Port-Méridien, les dix-huit cartes de colonie et de quêtes, les six illustrations de scène Asphodèle et les neuf objets d'habillage de ses missions détaillés ci-dessous. La continuation du 17 novembre produit les treize parois du hub ; les autres besoins restent ouverts.
 
-- Décors jouables du hub Asphodèle (anneau, pont de contrôle, laboratoire, serre, salle des relais, mémorial), prop du noyau de CASSIUS, récupérateurs de Grue et dropship d'Echo-8 (§29.4). Les cartes d'extérieur et de CASSIUS illustrent les scènes de dialogue. Les neuf emplacements `asph-msn-*` des missions disposent maintenant de leurs propres images ; les 33 emplacements du hub restent ouverts.
+- Décors jouables du hub Asphodèle (anneau, pont de contrôle, laboratoire, serre, salle des relais, mémorial), prop du noyau de CASSIUS, récupérateurs de Grue et dropship d'Echo-8 (§29.4). Les cartes d'extérieur et de CASSIUS illustrent les scènes de dialogue. Les neuf emplacements `asph-msn-*` des missions et les treize parois `asph-wall-*` disposent de leurs images ; les vingt autres emplacements du hub restent ouverts.
 - Quartiers de Port-Méridien en V2 et animations des habitants nommés. Les portraits de Wren, Ferro et Sarrazin sont désormais produits ; les primitives Q78 restent leur secours de chargement.
 - Poses de dialogue de l'équipage et planches des recrues. Aux onze cartes d'objets et de preuves du lot colonie/équipage s'ajoutent celles de Rook, Vega, Harlow et DAVID-8R ; les illustrations ne fournissent ni poses ni objets animés en jeu.
 - Art en dette des chapitres V131 et de Cargo brutal (`limitations` de `special-operations-v131.js`).
@@ -290,3 +290,15 @@ Les textes FR/EN, lignes du CRT, aiguilles et voyant restent natifs. Les images 
 Validation acquise : 35 contrôles Asphodèle, 132 contrôles audit/sauvegarde, 27 rendus natifs de sprites et dix compositions du moteur. Ces captures utilisent le host Canvas déclaré et ne constituent pas un parcours navigateur. Les échecs navigateur du commit précédent restent suivis séparément.
 
 Traçabilité : [provenance des neuf PNG](ASPHODELE_MISSION_ART_PROVENANCE_20261116.json), [contrôles et limites](ASPHODELE_MISSION_ART_QA_20261116.md), [planche du rendu intégré](ASPHODELE_MISSION_ART_OVERVIEW_20261116.png), [reçu de rendu](ASPHODELE_MISSION_ART_RENDER_RECEIPT_20261116.json).
+
+## Résultat du lot parois du hub Asphodèle (continuation du 17 novembre 2026)
+
+Base : `8fe5d58c33a6ddb9473eb0148019a5f46eaef8bf`. Les treize fonds `asph-wall-*` sont générés et intégrés dans les treize salles existantes : docks, anneau, rayon technique, contrôle, relais, laboratoire, mémorial, serre, marché, quartiers, infirmerie, ponts inférieurs et atelier. **22 des 42 emplacements ont maintenant un PNG ; vingt restent ouverts.** Les neuf objets de mission du lot précédent sont conservés.
+
+Le renderer préserve le rapport réel des PNG à une hauteur de 504 px, répète leur contenu depuis l'origine du monde et découpe au cadre visible. Cette composition corrige l'étirement dépendant de la caméra et le filet sous-pixel observé à une jonction. Les portes, postes, personnages, libellés FR/EN et bandes natives restent séparés ; les géométries de salle, collisions et sauvegardes sont conservées.
+
+Validation : **39 contrôles Asphodèle, 132 contrôles audit/sauvegarde, 40 contrôles de succession**, tous réussis. Le rendu natif inspecte treize fonds, 46 vues FR/EN, treize répétitions et treize replis : zéro débordement, zéro dérive caméra et 61 masques de portes/postes inchangés. Le lancement Chromium est bloqué avant l'ouverture de page par l'environnement ; aucun nouveau parcours navigateur n'est revendiqué.
+
+Les références primaires de Paul Abbott pour *Alien: Isolation* guident matériaux et construction. Asphodèle reste un lieu original du projet ; aucune réplique canonique « 1:1 » n'est certifiée. Les vingt éléments restants comprennent les treize accessoires, trois éléments intermédiaires et quatre acteurs ; les animations et cinématiques restent distinctes.
+
+Traçabilité : [prompts et empreintes des treize PNG](ASPHODELE_HUB_WALL_ART_PROVENANCE_20261117.json), [QA et limites](ASPHODELE_HUB_WALL_ART_QA_20261117.md), [treize salles dans le renderer](ASPHODELE_HUB_WALL_ART_OVERVIEW_20261117.png), [reçu de rendu](ASPHODELE_HUB_WALL_ART_RENDER_RECEIPT_20261117.json).

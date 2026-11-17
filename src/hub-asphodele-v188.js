@@ -15,7 +15,7 @@ import { stepDepthMoveV188, depthToScreenOffsetV188 } from './hub-depth-rooms-v1
 import { drawDepthPropV188 } from './depth-props-v188.js';
 import { getAsphodeleRoomV188, asphodeleDepthRoomV188, resolveAsphodeleHubV188, normalizeAsphodeleHubV188, asphodeleDoorTargetV188,
   doorLockV188, asphodeleLockTextV188, asphodeleTextV188, ASPHODELE_DOOR_REACH_V188, ASPHODELE_STATION_REACH_V188, ASPHODELE_FLOOR_Y_V188 } from './asphodele-hub-v188.js';
-import { AsphodeleHubAssetLoaderV188, drawAsphodeleWallV188, drawAsphodeleDoorV188, drawAsphodelePostV188, drawGrueV188, drawDockedVesselV188, drawAsphodeleWorkerV188 } from './asphodele-hub-slots-v188.js';
+import { AsphodeleHubAssetLoaderV188, drawAsphodeleWallV188, drawAsphodeleWallTrimV188, drawAsphodeleDoorV188, drawAsphodelePostV188, drawGrueV188, drawDockedVesselV188, drawAsphodeleWorkerV188 } from './asphodele-hub-slots-v188.js';
 import { createAsphodeleCrowdV188, stepAsphodeleCrowdV188 } from './asphodele-crowd-v188.js';
 
 const VERTICAL = new Set(['KeyW', 'KeyS', 'ArrowUp', 'ArrowDown']);
@@ -204,7 +204,8 @@ export function withHubAsphodeleV188(Base) {
       ctx.save(); ctx.translate(-camera, 0);
       const x0 = Math.max(0, Math.floor(camera / 128) * 128), x1 = Math.min(room.width, camera + 1280 + 128);
       const frames = room.doors.map(entry => [entry.x - 58, entry.x + 58]); // door frames: the wall's hazard band stops there
-      loader.draw(ctx, `asph-wall-${room.id.slice(5)}`, x0, 120, x1 - x0, 504, () => drawAsphodeleWallV188(ctx, room.module, x0, x1 - x0, time, frames));
+      const wallSource = loader.drawWall(ctx, `asph-wall-${room.id.slice(5)}`, x0, 120, x1 - x0, 504, () => drawAsphodeleWallV188(ctx, room.module, x0, x1 - x0, time, frames));
+      if (wallSource === 'image') drawAsphodeleWallTrimV188(ctx, room.module, x0, x1 - x0, frames);
       // Floor: a deck plate in V1; in V2 the spec 001 depth band, darker near the wall, with lane marks.
       ctx.fillStyle = '#12171a'; ctx.fillRect(x0, FLOOR, x1 - x0, 96);
       if (room.kind === 'depth') {
