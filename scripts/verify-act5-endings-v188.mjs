@@ -11,8 +11,12 @@ import { selectMissionTemplateV52 } from '../src/mission-levels-v52.js';
 import { resolveMissionRegisterV188 } from '../src/mission-register-v188.js';
 import { normalizeStoryCampaignV188 } from '../src/story-campaign-v188.js';
 import { storyDossierV188 } from '../src/story-dossier-v188.js';
-import { CINEMATICS_V188, cinematicDurationV188, drawCinematicFrameV188 } from '../src/story-cinematics-v188.js';
-import { ACT5_SLOTS_V188, ACT5_SLOT_IDS_V188, ACT5_FILES_PRESENT_V188, Act5AssetLoaderV188 } from '../src/act5-slots-v188.js';
+import { CINEMATICS_V188, cinematicDurationV188, drawCinematicFrameV188, CinematicPlayerV188, LETTERBOX_V188 } from '../src/story-cinematics-v188.js';
+import { ACT5_SLOTS_V188, ACT5_SLOT_IDS_V188, ACT5_FILES_PRESENT_V188, ACT5_ACTIVE_SLOT_IDS_V188, ACT5_NEW_ART_IDS_V188,
+  ACT5_ART_V188, ACT5_ART_BY_SLOT_V188, ACT5_ART_SOURCE_RECTS_V188, ACT5_ART_ANCHORS_V188, ACT5_CIVILIAN_ART_IDS_V188,
+  ACT5_CONVOY_PROFILES_V188, ACT5_TRAILER_PASSENGERS_V188, ACT5_CINEMATIC_SLOTS_V188, ACT5_GATE_V188,
+  act5ArtFitV188, act5ArtAnchorV188, act5CinematicSourcesV188, act5ConvoyLayoutV188, act5GateLayoutV188, act5CryopodLidV188,
+  Act5AssetLoaderV188, watchAct5PictureV188 } from '../src/act5-slots-v188.js';
 import {
   ACT5_CAMPAIGNS_V188, ACT5_CAMPAIGN_IDS_V188, ACT5_NAMES_EN_V188, act5OpenV188, act5StateV188, act5LockReasonV188, act5LockTextV188,
   filterAct5CampaignsV188, act5MissionPathV188, startAct5CouncilV188, act5CouncilV188, decideAct5V188, applyAct5LaunchAdvantagesV188,
@@ -92,17 +96,195 @@ test('content: five Act V missions on Cocyte from existing templates, registers,
   assert.match(read('index.html'), /id="act5-panel-v188"/);
 });
 
-test('art slots: every Act V slot has a brief, draws a primitive placeholder, requests nothing until committed', () => {
-  assert.equal(ACT5_SLOTS_V188.length, 15); assert.deepEqual(ACT5_FILES_PRESENT_V188, []);
+test('art slots: 14 active compositions reuse art; all 15 retain a request-free fallback when disabled', () => {
+  assert.equal(ACT5_SLOTS_V188.length, 15); assert.equal(ACT5_ACTIVE_SLOT_IDS_V188.length, 14);
+  assert.deepEqual(ACT5_FILES_PRESENT_V188, ACT5_ACTIVE_SLOT_IDS_V188);
+  assert.deepEqual(ACT5_ART_BY_SLOT_V188['relay-room'], [], 'inactive relay room neither creates nor requests an unused PNG');
+  assert.ok(!ACT5_ACTIVE_SLOT_IDS_V188.includes('relay-room')); assert.equal(ACT5_NEW_ART_IDS_V188.length, 9);
+  for (const id of ACT5_NEW_ART_IDS_V188) assert.ok(Object.values(ACT5_ART_BY_SLOT_V188).some(ids => ids.includes(id)), `${id} has a live consumer`);
   const ctx = new Proxy({ measureText: value => ({ width: String(value).length * 9 }), createLinearGradient: () => ({ addColorStop() {} }), createRadialGradient: () => ({ addColorStop() {} }) },
     { get: (object, key) => key in object ? object[key] : () => {} });
-  const loader = new Act5AssetLoaderV188({ ImageCtor: class { constructor() { throw new Error('no request expected'); } } });
+  const loader = new Act5AssetLoaderV188({ present: [], ImageCtor: class { constructor() { throw new Error('no request expected'); } } });
   assert.deepEqual(loader.preload(), []);
   for (const entry of ACT5_SLOTS_V188) {
     assert.ok(entry.brief.length > 40 && entry.purpose && entry.path.startsWith('/assets/act5/v188/'), entry.id);
     assert.equal(loader.draw(ctx, entry.id, entry.width, entry.height, { language: 'en', context: { rollCall: 7, lockerLabel: 'X' }, progress: .5 }), 'primitive');
   }
   assert.throws(() => loader.draw(ctx, 'nope', 10, 10), /Unknown Act V art slot/);
+});
+
+// The following fixtures record production Canvas calls, not substitute art.
+// Raster decoding/visibility are checked by the independent native-canvas QA.
+const artPath = id => ACT5_ART_V188[id].path;
+const png = path => {
+  const bytes = readFileSync(new URL('..' + path, import.meta.url));
+  assert.equal(bytes.subarray(1, 4).toString(), 'PNG', path);
+  return { src: path, complete: true, naturalWidth: bytes.readUInt32BE(16), naturalHeight: bytes.readUInt32BE(20), colorType: bytes[25] };
+};
+let imageFixture;
+const artImages = () => imageFixture ||= Object.fromEntries(Object.values(ACT5_ART_V188).map(({ path }) => [path, png(path)]));
+const near = (actual, expected, tolerance, name) => assert.ok(Math.abs(actual - expected) <= tolerance, `${name}: ${actual} vs ${expected}`);
+function artRecorder() {
+  const calls = { images: [], text: [], operations: [] }, stack = []; let matrix = [1, 0, 0, 1, 0, 0];
+  const gradient = () => ({ addColorStop() {} });
+  const ctx = new Proxy({
+    save() { stack.push([...matrix]); }, restore() { matrix = stack.pop() || [1, 0, 0, 1, 0, 0]; },
+    translate(x, y) { matrix[4] += matrix[0] * x + matrix[2] * y; matrix[5] += matrix[1] * x + matrix[3] * y; },
+    scale(x, y) { matrix[0] *= x; matrix[1] *= x; matrix[2] *= y; matrix[3] *= y; },
+    rotate(angle) { const [a, b, c, d] = matrix, co = Math.cos(angle), si = Math.sin(angle); matrix[0] = a * co + c * si; matrix[1] = b * co + d * si; matrix[2] = c * co - a * si; matrix[3] = d * co - b * si; },
+    measureText: value => ({ width: String(value).length * 9 }), createLinearGradient: gradient, createRadialGradient: gradient,
+    drawImage(image, ...args) { calls.images.push({ path: image.src, args, matrix: [...matrix] }); },
+    fillText(value, x, y, maxWidth) { calls.text.push({ value: String(value), x, y, maxWidth, font: ctx.font, matrix: [...matrix] }); }
+  }, { get: (object, key) => key in object ? object[key] : (...args) => calls.operations.push({ method: key, args, matrix: [...matrix] }) });
+  return { ctx, calls };
+}
+const slotFrame = (id, { images = artImages(), ...options } = {}) => {
+  const trace = artRecorder(), entry = ACT5_SLOTS_V188.find(slot => slot.id === id), loader = new Act5AssetLoaderV188({ ImageCtor: null });
+  trace.source = loader.draw(trace.ctx, id, entry.width, entry.height, { images, progress: .82, time: 4, language: 'fr', context: { rollCall: 7, lockerLabel: 'RETOUR CONFIRMÉ' }, ...options }); return trace;
+};
+const sourcePoint = (draw, [px, py]) => {
+  const [sx, sy, sw, sh, x, y, w, h] = draw.args, [a, b, c, d, e, f] = draw.matrix;
+  const dx = x + (px - sx) * w / sw, dy = y + (py - sy) * h / sh;
+  return [a * dx + c * dy + e, b * dx + d * dy + f];
+};
+
+test('art files: nine delivered PNGs, measured crops and anchors stay in bounds with proportional fits', () => {
+  const images = artImages(), expected = { 'm577-rain-departure': [1916, 821], 'bridge-collapse': [1939, 811], 'quay-standoff': [1935, 813],
+    'port-gates-rollcall': [1939, 811], 'port-meridien-epilogue': [1939, 811], 'freight-trailer': [2172, 724], 'colonist-trailer': [2172, 724],
+    'echo8-locker-epilogue': [802, 1960], 'm577-side-corrected': [2172, 724] };
+  for (const [id, size] of Object.entries(expected)) assert.deepEqual([images[artPath(id)].naturalWidth, images[artPath(id)].naturalHeight], size, id);
+  for (const id of ['freight-trailer', 'colonist-trailer', 'echo8-locker-epilogue', 'm577-side-corrected']) assert.equal(images[artPath(id)].colorType, 6, `${id} retains RGBA`);
+  for (const [id, { path }] of Object.entries(ACT5_ART_V188)) {
+    const image = images[path], rect = ACT5_ART_SOURCE_RECTS_V188[id] || [0, 0, image.naturalWidth, image.naturalHeight];
+    assert.ok(rect[0] >= 0 && rect[1] >= 0 && rect[2] > 0 && rect[3] > 0 && rect[0] + rect[2] <= image.naturalWidth && rect[1] + rect[3] <= image.naturalHeight, id);
+    for (const cover of [true, false]) { const fit = act5ArtFitV188(images, id, [17, 23, 640, 280], { cover }); near(fit.w / fit.sw, fit.h / fit.sh, 1e-12, `${id} uniform scale`); }
+    for (const [key, anchor] of Object.entries(ACT5_ART_ANCHORS_V188[id] || {})) assert.ok(anchor[0] >= rect[0] && anchor[1] >= rect[1] && anchor[0] + (anchor[2] || 0) <= rect[0] + rect[2] && anchor[1] + (anchor[3] || 0) <= rect[1] + rect[3], `${id} ${key}`);
+  }
+  const tyreCrop = ACT5_ART_SOURCE_RECTS_V188['m577-side-corrected']; assert.ok(tyreCrop[1] + tyreCrop[3] > 722, 'last opaque front-tyre row is retained');
+});
+
+test('art loading: exact slot requests, late repaint, retry and disposal do not mutate the picture context', () => {
+  const requests = [], images = artImages();
+  class DeferredImage {
+    constructor() { this.listeners = new Map(); this.complete = false; this.naturalWidth = this.naturalHeight = 0; }
+    addEventListener(type, fn) { this.listeners.set(type, fn); } removeEventListener(type) { this.listeners.delete(type); }
+    set src(value) { this.path = value; requests.push(this); }
+    finish(type) { this.complete = true; if (type === 'load') Object.assign(this, { naturalWidth: images[this.path].naturalWidth, naturalHeight: images[this.path].naturalHeight }); this.listeners.get(type)?.(); }
+  }
+  const loader = new Act5AssetLoaderV188({ ImageCtor: DeferredImage }); loader.preload(['relay-room']); assert.equal(requests.length, 0);
+  const context = Object.freeze({ rollCall: 53, lockerLabel: 'RETOUR CONFIRMÉ' }), before = JSON.stringify(context); let draws = 0;
+  const draw = loader.draw.bind(loader); loader.draw = (...args) => { draws++; return draw(...args); };
+  const release = watchAct5PictureV188(loader, artRecorder().ctx, 'bridge-collapse', 640, 280, { context });
+  assert.deepEqual(requests.map(image => image.path), ACT5_ART_BY_SLOT_V188['bridge-collapse'].map(artPath)); assert.equal(draws, 1);
+  loader.preload(['bridge-collapse']); assert.equal(requests.length, 7, 'in-flight requests are not duplicated');
+  requests[0].finish('load'); assert.equal(draws, 2, 'first late layer repaints the existing picture');
+  requests[1].finish('error'); assert.equal(draws, 3); loader.preload(['bridge-collapse']); assert.equal(requests.length, 8, 'only the failed APC retries');
+  requests[1].finish('load'); assert.equal(draws, 3, 'discarded image callbacks cannot revive an earlier request');
+  requests[7].finish('load'); assert.equal(draws, 4);
+  release(); for (const image of requests.slice(2, 7)) image.finish('load'); assert.equal(draws, 4, 'closed picture never redraws');
+  assert.equal(loader.listeners.size, 0); assert.equal(JSON.stringify(context), before);
+  let syncRedraws = 0;
+  class SynchronousImage { set src(value) { const image = images[value]; Object.assign(this, { complete: true, naturalWidth: image.naturalWidth, naturalHeight: image.naturalHeight }); this.onload?.(); } }
+  const sync = new Act5AssetLoaderV188({ ImageCtor: SynchronousImage }); sync.subscribe('halloran-order', () => syncRedraws++); sync.preload(['halloran-order']);
+  assert.equal(syncRedraws, 1, 'cached synchronous image has one completion'); assert.ok(sync.image('crt-bezel'));
+});
+
+test('cinematic art: the seven Act V sequences request only the layers actually drawn in their 17 plans', () => {
+  const expected = { 'cin-60': 6, 'cin-61': 6, 'cin-90-relay': 4, 'cin-90-freight': 7, 'cin-90-living': 5, 'cin-92': 7, 'cin-99-credits': 1 };
+  assert.deepEqual(Object.keys(ACT5_CINEMATIC_SLOTS_V188), Object.keys(expected)); let plans = 0;
+  for (const [id, count] of Object.entries(expected)) {
+    const requests = [], player = new CinematicPlayerV188({ document: null, ImageCtor: class { set src(path) { requests.push(path); } } }); player.preload(id); player.preload(id);
+    assert.equal(requests.length, count, id); assert.equal(new Set(requests).size, count); assert.ok(!requests.some(path => /relay-room|insertion\/v188\/m577-side/.test(path)));
+    const images = Object.fromEntries(requests.map(path => [path, png(path)])), drawn = new Set(); let start = 0;
+    for (const shot of CINEMATICS_V188[id].shots) {
+      plans++; for (const language of ['fr', 'en']) {
+        const trace = artRecorder(); drawCinematicFrameV188(trace.ctx, id, start + shot.seconds * .82, { images, language, reducedMotion: true, context: { act5: { rollCall: 7, lockerLabel: 'RETOUR CONFIRMÉ' } } });
+        for (const image of trace.calls.images) { assert.ok(requests.includes(image.path), `${id} drew an unrequested image: ${image.path}`); drawn.add(image.path); }
+      } start += shot.seconds;
+    }
+    for (const path of requests) assert.ok(drawn.has(path), `${id} requested an unused image: ${path}`);
+  }
+  assert.equal(plans, 17); assert.equal(act5CinematicSourcesV188('cin-00'), null); assert.equal(act5CinematicSourcesV188('cin-70'), null);
+  const opening = [], player = new CinematicPlayerV188({ document: null, ImageCtor: class { set src(path) { opening.push(path); } } }); player.preload('cin-00');
+  assert.ok(!opening.some(path => path.startsWith('/assets/act5/')), 'opening does not eagerly fetch any Act V PNG');
+});
+
+test('art overlays: Halloran, the real roll-call and both locker states survive FR/EN and missing layers', () => {
+  for (const images of [artImages(), {}]) for (const language of ['fr', 'en']) {
+    const halloran = slotFrame('halloran-order', { images, language }).calls.text.map(row => row.value);
+    assert.equal(halloran.length, 5); assert.ok(halloran.includes(language === 'fr' ? 'PORT-MÉRIDIEN · NON VIABLE' : 'PORT-MÉRIDIEN · NON-VIABLE'));
+    assert.ok(halloran.includes(language === 'fr' ? 'EFFET À L’ARRIVÉE DE L’ÉQUIPE DE RÉCUPÉRATION' : 'EFFECTIVE ON ARRIVAL OF THE RECOVERY TEAM'));
+    for (const total of [0, 7, 53]) for (const closing of [false, true]) {
+      const frame = slotFrame('port-gates-rollcall', { images, language, context: { rollCall: total }, progress: closing ? .15 : 1, closing });
+      assert.ok(frame.calls.text.some(row => row.value === String(total)), `${total} is neither capped at 40 nor recounted when doors close`);
+    }
+    for (const label of language === 'fr' ? ['RETOUR CONFIRMÉ', 'POSTE LIBÉRÉ'] : ['RETURN CONFIRMED', 'POST VACATED']) {
+      const context = Object.freeze({ lockerLabel: label }), frame = slotFrame('echo8-locker-epilogue', { images, language, context });
+      assert.ok(frame.calls.text.some(row => row.value === 'ECHO-8')); assert.ok(frame.calls.text.some(row => row.value === label)); assert.equal(context.lockerLabel, label);
+    }
+  }
+});
+
+test('bridge composition: corrected APC, four passengers, two real couplings and six tyre contacts on the road', () => {
+  const images = artImages(), layout = act5ConvoyLayoutV188(images, 640, 280), frame = slotFrame('bridge-collapse');
+  assert.deepEqual(layout.vehicles.map(vehicle => vehicle.id), ['m577-side-corrected', 'colonist-trailer', 'freight-trailer']);
+  const heightAt = x => { const i = layout.road.findIndex((p, i) => i && p[0] >= x), a = layout.road[i - 1], b = layout.road[i]; return a[1] + (b[1] - a[1]) * (x - a[0]) / (b[0] - a[0]); };
+  layout.vehicles.forEach((vehicle, index) => {
+    assert.ok(vehicle.front[0] < vehicle.rear[0], 'all three vehicles travel left'); const draw = frame.calls.images.find(draw => draw.path === artPath(vehicle.id)); assert.ok(draw);
+    const profile = ACT5_CONVOY_PROFILES_V188[vehicle.id]; assert.equal(profile.wheels.length, 2);
+    profile.wheels.forEach((contact, wheel) => {
+      const actual = sourcePoint(draw, contact); near(actual[0], vehicle.wheelContacts[wheel][0], 1e-8, 'drawn tyre x agrees with contact'); near(actual[1], heightAt(actual[0]), 2, 'drawn tyre rests on the upper deck');
+    });
+    if (index) { const coupling = layout.couplings[index - 1]; assert.deepEqual(coupling, [layout.vehicles[index - 1].rear, vehicle.front]); assert.ok(coupling[1][0] > coupling[0][0]); assert.ok(Math.abs(coupling[1][1] - coupling[0][1]) < 5); }
+  });
+  assert.deepEqual(ACT5_CONVOY_PROFILES_V188['m577-side-corrected'].rearMount, [44, 326], 'drop hitch starts on the rear bumper, away from the rear wheel');
+  assert.equal(ACT5_TRAILER_PASSENGERS_V188.length, 4);
+  assert.equal(frame.calls.images.filter(draw => ACT5_CIVILIAN_ART_IDS_V188.map(artPath).includes(draw.path)).length, 4, 'four runtime occupants are drawn inside the trailer');
+});
+
+test('port gates: two proportional painted leaves slide from the masked pockets and keep the cumulative count', () => {
+  const images = artImages(), early = slotFrame('port-gates-rollcall', { closing: true, progress: .1 }), late = slotFrame('port-gates-rollcall', { closing: true, progress: .9 });
+  const leaves = frame => frame.calls.images.filter(draw => draw.path === artPath('port-gates-rollcall')).slice(1);
+  assert.equal(leaves(early).length, 2); assert.equal(leaves(late).length, 2);
+  for (let side = 0; side < 2; side++) {
+    const a = leaves(early)[side], b = leaves(late)[side], source = ACT5_GATE_V188[side ? 'rightPocket' : 'leftPocket'];
+    assert.deepEqual(a.args.slice(0, 4), source); near(a.args[6] / a.args[2], a.args[7] / a.args[3], 1e-12, 'gate source remains proportional');
+    assert.ok(side ? b.args[4] < a.args[4] : b.args[4] > a.args[4], 'leaves move towards the centre');
+  }
+  for (const frame of [early, late]) assert.ok(frame.calls.text.some(row => row.value === '7'));
+  const layout = act5GateLayoutV188(images, 1280, 536); assert.ok(layout.aperture[0] > 540 && layout.aperture[0] < 555 && layout.aperture[1] > 260 && layout.aperture[1] < 270, 'gate is placed over the inspected aperture');
+});
+
+test('cryo epilogue: four glass lids open on a fixed hinge while the sealed locker label stays on its plate', () => {
+  const closed = slotFrame('echo8-locker-epilogue', { progress: 0 }), open = slotFrame('echo8-locker-epilogue', { progress: .8 });
+  const pods = frame => frame.calls.images.filter(draw => draw.path === artPath('cryopod'));
+  assert.equal(pods(closed).length, 8); assert.equal(pods(open).length, 8);
+  const bodies = pods(open).filter((_, i) => i % 2 === 0), back = bodies.slice(0, 2), front = bodies.slice(2);
+  assert.ok(front.every(draw => draw.args[6] >= 320 && draw.args[6] <= 350), 'near capsules remain adult-sized beside the tall locker');
+  assert.ok(back.every(draw => draw.args[6] < front[0].args[6] && draw.args[5] + draw.args[7] < front[0].args[5] + front[0].args[7]), 'smaller capsules stand further back on a higher floor line');
+  for (let i = 0; i < 8; i += 2) {
+    assert.deepEqual(pods(closed)[i], pods(open)[i], 'body remains planted'); assert.notDeepEqual(pods(closed)[i + 1].matrix, pods(open)[i + 1].matrix, 'hood rotates');
+    const a = sourcePoint(pods(closed)[i + 1], [174, 66]), b = sourcePoint(pods(open)[i + 1], [174, 66]); near(a[0], b[0], 1e-9, 'hinge x'); near(a[1], b[1], 1e-9, 'hinge y');
+  }
+  const fit = act5ArtFitV188(artImages(), 'echo8-locker-epilogue', [1280 * .7, 536 * .11, 1280 * .19, 536 * .82], { alignY: 1 }), plate = act5ArtAnchorV188(fit, 'label');
+  for (const line of open.calls.text) assert.ok(line.x >= plate[0] && line.x <= plate[0] + plate[2] && line.y >= plate[1] && line.y <= plate[1] + plate[3], 'locker ink lies inside the measured blank plate');
+  assert.equal(act5CryopodLidV188(0).open, 0); assert.equal(act5CryopodLidV188(.8).open, 1);
+});
+
+test('art motion and fallbacks: reduced motion freezes geometry and every missing layer retains a drawable picture', () => {
+  for (const [id, closing] of [['m577-rain-departure', false], ['port-gates-rollcall', true], ['ending-relay-transmit', false], ['echo8-locker-epilogue', false]]) {
+    const a = slotFrame(id, { progress: .1, time: 0, closing, reducedMotion: true }), b = slotFrame(id, { progress: .9, time: 14, closing, reducedMotion: true }); assert.deepEqual(a.calls, b.calls, id);
+  }
+  for (const id of ACT5_ACTIVE_SLOT_IDS_V188) for (const missing of ACT5_ART_BY_SLOT_V188[id]) {
+    const images = { ...artImages() }; delete images[artPath(missing)]; const frame = slotFrame(id, { images });
+    assert.ok(['image', 'primitive'].includes(frame.source)); assert.ok(!frame.calls.images.some(draw => draw.path === artPath(missing)), `${id} safely substitutes ${missing}`);
+  }
+  for (const progress of [.01, .99]) {
+    const trace = artRecorder(); drawCinematicFrameV188(trace.ctx, 'cin-90-living', CINEMATICS_V188['cin-90-living'].shots[0].seconds * progress, { images: artImages() });
+    const shuttle = trace.calls.images.find(draw => draw.path === artPath('company-shuttle')); assert.ok(shuttle);
+    const [sx, sy, sw, sh] = shuttle.args, top = sourcePoint(shuttle, [sx, sy]), bottom = sourcePoint(shuttle, [sx + sw, sy + sh]);
+    assert.ok(top[1] >= LETTERBOX_V188 && bottom[1] <= 720 - LETTERBOX_V188 && top[0] >= 0 && bottom[0] <= 1280, 'distant shuttle stays clear of both letterbox bars throughout the camera push');
+  }
 });
 
 test('cinematics: CIN-60 30 s, CIN-61 45 s, the three CIN-90 endings 60 s, epilogue and credits draw from the save', () => {

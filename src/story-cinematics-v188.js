@@ -10,7 +10,7 @@ import { getColonyPortraitV188, drawColonyPortraitV188 } from './colony-portrait
 import { colorblindPaletteActiveV188 } from './colorblind-palette-v188.js';
 import { STATION_CINEMATICS_V188, STATION_CINEMATIC_SETS_V188, STATION_CINEMATIC_PALETTES_V188, drawStationSetItemV188, drawStationSetArtV188,
   drawStationShotV188, drawStationBackgroundV188, drawStationTerminalV188, drawStationHelmetV188, drawStationHelmetHudV188, stationCinematicSourcesV188 } from './station-cinematics-v188.js';
-import { Act5AssetLoaderV188 } from './act5-slots-v188.js';
+import { Act5AssetLoaderV188, act5CinematicSourcesV188, drawAct5DialogueV188 } from './act5-slots-v188.js';
 
 const t = (fr, en) => Object.freeze({ fr, en });
 const shot = (seconds, kind, data = {}) => Object.freeze({ seconds, kind, ...data });
@@ -473,6 +473,7 @@ function drawSet(ctx, scene, { cast = null, time = 0, reducedMotion = false, spe
 }
 function background(ctx, images, scene, time, reducedMotion, { cast = null, speakerId = null, cinematicId = null } = {}) {
   const set = { cast, time, reducedMotion, speakerId };
+  if (drawAct5DialogueV188(ctx, cinematicId, scene, { images, time, reducedMotion })) return;
   if (drawStationBackgroundV188(ctx, images, cinematicId, scene, { time, reducedMotion, W, H })) {
     if (STATION_CINEMATIC_SETS_V188[scene]) drawSet(ctx, scene, { ...set, images });
     return;
@@ -743,7 +744,8 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       rain(ctx, local, reducedMotion, 'rgba(170,200,210,.3)'); caption(ctx, current.caption?.[lang]); break;
     }
     case 'act5-slot': {
-      act5LoaderV188.draw(ctx, current.slot, W, H, { language: lang, context: context?.act5 || {}, time: local, progress, reducedMotion });
+      act5LoaderV188.draw(ctx, current.slot, W, H, { images, language: lang, context: context?.act5 || {}, time: local, progress, reducedMotion,
+        closing: id === 'cin-61' && current === CINEMATICS_V188[id].shots[2] });
       caption(ctx, current.caption?.[lang]); break; // the roll-call count is drawn by the plate itself
     }
     case 'act5-lines': { // ending and epilogue facts, typed line by line (from the save, never granted here)
@@ -757,7 +759,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       break;
     }
     case 'credits': { // same palette and letter-spacing as the opening credit (intro-sequence-v188.js)
-      act5LoaderV188.draw(ctx, 'credits-starfield', W, H, { language: lang, time: local, progress, reducedMotion });
+      act5LoaderV188.draw(ctx, 'credits-starfield', W, H, { images, language: lang, time: local, progress, reducedMotion });
       const entries = Array.isArray(context?.act5?.credits) && context.act5.credits.length ? context.act5.credits : [{ by: 'A fan game by', name: 'Darknigthmare' }];
       const span = 1 / entries.length, index_ = Math.min(entries.length - 1, Math.floor(progress / span)), inner = (progress - index_ * span) / span;
       const alpha = reducedMotion ? 1 : Math.max(0, Math.min(1, inner < .2 ? inner / .2 : inner > .85 ? (1 - inner) / .15 : 1));
@@ -767,7 +769,8 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       ctx.fillText(spaced(String(entry.name).toUpperCase(), 3), W / 2, H / 2 + 34); ctx.shadowBlur = 0; ctx.globalAlpha = 1; ctx.textAlign = 'left'; break;
     }
     case 'dialogue': {
-      background(ctx, images, current.scene, local, reducedMotion, { cast: current.cast, speakerId: current.line?.crewId, cinematicId: id });
+      if (id === 'cin-60' && current.scene === 'alarm') act5LoaderV188.draw(ctx, 'm577-rain-departure', W, H, { images, language: lang, time: local, progress: .45, reducedMotion });
+      else background(ctx, images, current.scene, local, reducedMotion, { cast: current.cast, speakerId: current.line?.crewId, cinematicId: id });
       subtitle = current; break;
     }
     default: drawStationShotV188(ctx, current, { images, local, progress, lang, reducedMotion, caption: (text, y) => caption(ctx, text, y), W, H }); break;
@@ -808,14 +811,16 @@ export class CinematicPlayerV188 {
   }
   preload(id) {
     const stationSources = stationCinematicSourcesV188(id);
-    const sources = new Set(stationSources || Object.values(CINEMATIC_IMAGES_V188));
+    const act5Sources = act5CinematicSourcesV188(id);
+    const sources = new Set(stationSources || act5Sources || Object.values(CINEMATIC_IMAGES_V188));
     for (const entry of CINEMATICS_V188[id]?.shots || []) {
       const profile = entry.line?.crewId ? getNpcDialoguePortraitV168(entry.line.crewId) : null; if (profile) sources.add(profile.source);
       const colony = !entry.line?.crewId ? getColonyPortraitV188(entry.line?.speaker) : null;
       if (colony) sources.add(colony.source);
     }
-    for (const source of sources) if (!this.images[source] && this.ImageCtor) { const image = new this.ImageCtor(); image.src = source; this.images[source] = image; }
-    if (!stationSources) act5LoaderV188.preload(); // station sequences never request unrelated Act V plates
+    for (const source of sources) if ((!this.images[source] || (act5Sources && this.images[source].complete && !this.images[source].naturalWidth)) && this.ImageCtor) {
+      const image = new this.ImageCtor(); image.src = source; this.images[source] = image;
+    }
   }
   play(id, { language = 'fr', reducedMotion = false, context = {} } = {}) {
     if (!CINEMATICS_V188[id] || !this.document?.body) return Promise.resolve('unavailable');

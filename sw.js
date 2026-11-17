@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-asphodele-cinematic-art-20261117';
+const CACHE = 'atf-v143-act5-cinematic-art-20261117';
 const SHELL = Object.freeze([
   '/src/alien-base-bridge-v1.js',
   '/src/alien-base-snapshot-v1.js',
@@ -808,6 +808,17 @@ const ASPHODELE_CINEMATIC_PATHS_V188 = new Set([
   '/assets/asphodele/v188/cinematics/asph-cin-ceiling-drone.png',
   '/assets/asphodele/v188/cinematics/asph-cin-bent-door.png'
 ]);
+const ACT5_ART_PATHS_V188 = new Set([
+  '/assets/act5/v188/m577-side-corrected.png',
+  '/assets/act5/v188/m577-rain-departure.png',
+  '/assets/act5/v188/bridge-collapse.png',
+  '/assets/act5/v188/quay-standoff.png',
+  '/assets/act5/v188/port-gates-rollcall.png',
+  '/assets/act5/v188/port-meridien-epilogue.png',
+  '/assets/act5/v188/freight-trailer.png',
+  '/assets/act5/v188/colonist-trailer.png',
+  '/assets/act5/v188/echo8-locker-epilogue.png'
+]);
 const MAX_RUNTIME_ENTRIES_V143 = 256;
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const PRIVATE_HEADERS_V143 = ['authorization', 'proxy-authorization', 'apikey', 'x-api-key', 'x-auth-token'];
@@ -828,6 +839,7 @@ function cacheableRequestV143(request) {
     if (ASPHODELE_HUB_WALL_PATHS_V188.has(path)) return true;
     if (ASPHODELE_HUB_DETAIL_PATHS_V188.has(path)) return true;
     if (ASPHODELE_CINEMATIC_PATHS_V188.has(path)) return true;
+    if (ACT5_ART_PATHS_V188.has(path)) return true;
     // No API, account, save, unknown document or third-party endpoint can enter
     // Cache Storage, even when it returns HTTP 200 or an image-like extension.
     return /^\/assets\/(?:openai|user|equipment)\/[a-z0-9/_.-]+\.(?:png|webp|jpg|jpeg)$/i.test(path)

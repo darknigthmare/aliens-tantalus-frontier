@@ -25,6 +25,9 @@ const ASPHODELE_HUB_DETAIL_ART_V188 = ['door', 'ud4l-docked', 'crucible-shuttle'
 const ASPHODELE_CINEMATIC_ART_V188 = ['ring', 'hub', 'rook-quarters', 'helmet-corridor', 'ceiling-drone', 'bent-door']
   .map(id => `/assets/asphodele/v188/cinematics/asph-cin-${id}.png`);
 const ASPHODELE_RUNTIME_ART_V188 = [...ASPHODELE_CARDS_V188, ...ASPHODELE_MISSION_ART_V188, ...ASPHODELE_HUB_WALL_ART_V188, ...ASPHODELE_HUB_DETAIL_ART_V188, ...ASPHODELE_CINEMATIC_ART_V188];
+const ACT5_RUNTIME_ART_V188 = ['m577-side-corrected', 'm577-rain-departure', 'bridge-collapse', 'quay-standoff', 'port-gates-rollcall',
+  'port-meridien-epilogue', 'freight-trailer', 'colonist-trailer', 'echo8-locker-epilogue'].map(id => `/assets/act5/v188/${id}.png`);
+const REVIEWED_RUNTIME_ART_V188 = [...ASPHODELE_RUNTIME_ART_V188, ...ACT5_RUNTIME_ART_V188];
 const ORIGIN = 'https://tantalus.test';
 const req = (path, options) => new Request(new URL(path, ORIGIN), options);
 function response(path, { private: secret = false, status = 200, mime, vary } = {}) {
@@ -224,12 +227,12 @@ test('colony cards: invalid and newly private responses cannot leave a usable ca
     assert.equal((await h.dispatch('fetch', { request })).value.type, 'error');
   }
 });
-test('Asphodele art: cards, missions, hub and six cinematic layers stay lazy through installation and survive a later network interruption', async () => {
+test('Reviewed scene art: Asphodele and Act V stay lazy through installation and survive a later network interruption', async () => {
   const h = host();
-  assert.equal(h.api.CACHE, 'atf-v143-asphodele-cinematic-art-20261117');
+  assert.equal(h.api.CACHE, 'atf-v143-act5-cinematic-art-20261117');
   await h.dispatch('install');
   const cache = await h.caches.open(h.api.CACHE);
-  for (const path of ASPHODELE_RUNTIME_ART_V188) {
+  for (const path of REVIEWED_RUNTIME_ART_V188) {
     assert.equal(h.api.SHELL.includes(path), false, 'scene, mission, hub and cinematic art must not increase the mandatory precache');
     assert.equal(h.calls.some(request => new URL(request.url).pathname === path), false, 'installation must not fetch the image');
     assert.equal(await cache.match(req(path)), undefined);
@@ -241,19 +244,19 @@ test('Asphodele art: cards, missions, hub and six cinematic layers stay lazy thr
     assert.ok(await cache.match(req(path)));
   }
   h.network(async () => { throw new Error('offline before first view'); });
-  for (const path of ASPHODELE_RUNTIME_ART_V188) assert.equal((await h.dispatch('fetch', { request: req(path) })).value.type, 'error');
+  for (const path of REVIEWED_RUNTIME_ART_V188) assert.equal((await h.dispatch('fetch', { request: req(path) })).value.type, 'error');
   assert.equal((await cache.keys()).length, h.api.SHELL.length);
   h.network(async request => new Response(`art:${new URL(request.url).pathname}`, { headers: { 'content-type': 'image/png' } }));
-  for (const path of ASPHODELE_RUNTIME_ART_V188) {
+  for (const path of REVIEWED_RUNTIME_ART_V188) {
     const fetched = await h.dispatch('fetch', { request: req(path) });
     assert.equal(fetched.intercepted, true);
     assert.equal(await fetched.value.text(), `art:${path}`);
   }
-  assert.equal((await cache.keys()).length, h.api.SHELL.length + ASPHODELE_RUNTIME_ART_V188.length);
+  assert.equal((await cache.keys()).length, h.api.SHELL.length + REVIEWED_RUNTIME_ART_V188.length);
   h.network(async () => { throw new Error('offline after first view'); });
-  for (const path of ASPHODELE_RUNTIME_ART_V188) assert.equal(await (await h.dispatch('fetch', { request: req(path) })).value.text(), `art:${path}`);
+  for (const path of REVIEWED_RUNTIME_ART_V188) assert.equal(await (await h.dispatch('fetch', { request: req(path) })).value.text(), `art:${path}`);
 });
-test('Asphodele art: exact paths reject unreviewed neighbors, out-of-scope hub art and private requests', async () => {
+test('Reviewed scene art: exact paths reject unreviewed neighbors, out-of-scope hub art and private requests', async () => {
   const h = host(), path = '/assets/content/v188/cassius-core.png';
   for (const [candidate, options] of [
     ['/assets/content/v188/unreviewed.png', {}], ['/assets/content/v188/asphodele-exterior-extra.png', {}],
@@ -267,6 +270,12 @@ test('Asphodele art: exact paths reject unreviewed neighbors, out-of-scope hub a
       [artPath.replace('/v188/', '/v189/'), {}], [artPath.replace(/\.png$/, '.webp'), {}],
       [artPath.replace('/asph-', '/ASPH-'), {}], [artPath.replace('/asph-', '/%61sph-'), {}]
     ]),
+    ['/assets/act5/v188/relay-room.png', {}], ['/assets/act5/v188/unreviewed.png', {}],
+    ...ACT5_RUNTIME_ART_V188.flatMap(artPath => [
+      [artPath.replace(/\.png$/, '-extra.png'), {}], [artPath.replace('/v188/', '/v188/nested/'), {}],
+      [artPath.replace('/v188/', '/v189/'), {}], [artPath.replace(/\.png$/, '.webp'), {}],
+      [artPath.replace('/act5/', '/ACT5/'), {}], [artPath.replace('/act5/', '/%61ct5/'), {}]
+    ]),
     ['/assets/asphodele/v188/asph-wall-unreviewed.png', {}], ['/assets/asphodele/v188/asph-msn-unreviewed.png', {}],
     ['/assets/asphodele/v188/asph-wall-docks-extra.png', {}], ['/assets/asphodele/v188/nested/asph-wall-docks.png', {}],
     ['/assets/asphodele/v189/asph-wall-docks.png', {}], ['/assets/asphodele/v188/asph-wall-docks.webp', {}],
@@ -274,7 +283,7 @@ test('Asphodele art: exact paths reject unreviewed neighbors, out-of-scope hub a
     ['/assets/asphodele/v188/asph-msn-panel-extra.png', {}], ['/assets/asphodele/v188/nested/asph-msn-panel.png', {}],
     ['/assets/asphodele/v189/asph-msn-panel.png', {}], ['/assets/asphodele/v188/asph-msn-panel.webp', {}],
     ['/assets/asphodele/v188/ASPH-MSN-PANEL.png', {}], ['/assets/asphodele/v188/%61sph-msn-panel.png', {}],
-    ...ASPHODELE_RUNTIME_ART_V188.flatMap(artPath => [
+    ...REVIEWED_RUNTIME_ART_V188.flatMap(artPath => [
       [`https://foreign.test${artPath}`, {}], [`${artPath}?version=1`, {}],
       [artPath, { method: 'HEAD' }], [artPath, { method: 'POST', body: 'private' }],
       [artPath, { cache: 'no-store' }], [artPath, { headers: { 'cache-control': 'private' } }],
@@ -289,8 +298,8 @@ test('Asphodele art: exact paths reject unreviewed neighbors, out-of-scope hub a
   assert.equal(h.calls.length, 0);
   assert.equal((await (await h.caches.open(h.api.CACHE)).keys()).length, 0);
 });
-test('Asphodele art: invalid and newly private responses remove the older public cached copy', async () => {
-  for (const path of ASPHODELE_RUNTIME_ART_V188) {
+test('Reviewed scene art: invalid and newly private responses remove the older public cached copy', async () => {
+  for (const path of REVIEWED_RUNTIME_ART_V188) {
     for (const config of [{ private: true }, { mime: 'text/html' }, { status: 206 }, { status: 404 }, { vary: 'Authorization' }, { vary: 'Cookie' }, { vary: '*' }]) {
       const h = host(), request = req(path);
       await h.dispatch('fetch', { request });
@@ -393,7 +402,11 @@ test('release workflow, reports and gamedev guidance are source tooling only', (
     'docs/development/ASPHODELE_CINEMATIC_ART_PROVENANCE_20261117.json',
     'docs/development/ASPHODELE_CINEMATIC_ART_QA_20261117.md',
     'docs/development/ASPHODELE_CINEMATIC_ART_OVERVIEW_20261117.png',
-    'docs/development/ASPHODELE_CINEMATIC_ART_RENDER_RECEIPT_20261117.json']) {
+    'docs/development/ASPHODELE_CINEMATIC_ART_RENDER_RECEIPT_20261117.json',
+    'docs/development/ACT5_ART_PROVENANCE_20261117.json',
+    'docs/development/ACT5_ART_QA_20261117.md',
+    'docs/development/ACT5_ART_OVERVIEW_20261117.png',
+    'docs/development/ACT5_ART_RENDER_RECEIPT_20261117.json']) {
     assert.equal(isPublicDistributionPathV86(path), true); assert.equal(isPublicDistributionPathV86(path, { built: true }), false);
   }
 });
@@ -462,6 +475,7 @@ test('gamedev guidance admission stays exact and rejects unrelated documents', (
     'docs/development/ASPHODELE_HUB_WALL_ART_QA_20261117.md.bak', 'docs/development/ASPHODELE_HUB_WALL_ART_UNREVIEWED_20261117.png',
     'docs/development/ASPHODELE_HUB_DETAIL_ART_QA_20261117.md.bak', 'docs/development/ASPHODELE_HUB_DETAIL_ART_UNREVIEWED_20261117.png',
     'docs/development/ASPHODELE_CINEMATIC_ART_QA_20261117.md.bak', 'docs/development/ASPHODELE_CINEMATIC_ART_UNREVIEWED_20261117.png',
+    'docs/development/ACT5_ART_QA_20261117.md.bak', 'docs/development/ACT5_ART_UNREVIEWED_20261117.png',
     'AGENTS.md.bak', 'src/AGENTS.md', 'docs/development/../private.md']) {
     assert.equal(isPublicDistributionPathV86(path), false, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);
