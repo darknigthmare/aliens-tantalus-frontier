@@ -3,8 +3,9 @@
 // and the other missions built from it are left untouched.
 //
 // Scale (project adaptation, docs fact sheet): 1 m ≈ 51 px. A 10-ft ISO container seen from its
-// side is 2.99 × 2.59 m ≈ 150 × 132 px. Everything here is drawn in Canvas primitives
-// (placeholders): no generated image, no claim of 1:1 fidelity to the franchise.
+// side is 2.99 × 2.59 m ≈ 150 × 132 px. The revealed cradle shares inspected art
+// with CIN-11; other dressing retains its existing native rendering. These
+// project dimensions are not a claim of 1:1 fidelity to the franchise.
 //
 // What the overlay does, once the level is built:
 // - the lower cargo deck (depth section, mission-depth-v188.js) holds the QZ17 series: a sealed
@@ -21,6 +22,7 @@
 //   exist in the level (pressurised spine, service ladder, hull lift, maintenance duct).
 
 import { drawDepthPropV188 } from './depth-props-v188.js';
+import { prepareBiologicalArtV188, drawBiologicalCradleV188 } from './biological-art-v188.js';
 
 export const QZ17_CAMPAIGN_ID_DRESSING_V188 = 'special-narrative-qz17';
 export const QZ17_PX_PER_METRE_V188 = 51;
@@ -86,8 +88,22 @@ export function withQz17LevelDressingV188(Base) {
     start(options = {}) {
       // Set before the level is built: the evidence placement below runs inside super.start().
       this.qz17DressingActiveV188 = options.campaign?.id === QZ17_CAMPAIGN_ID_DRESSING_V188;
+      this.qz17DressingV188 = null; this.qz17CradleArtPreparedV188 = false;
       const result = super.start(options);
       this.qz17DressingV188 = this.qz17DressingActiveV188 ? this.applyQz17DressingV188() : null;
+      this.prepareQz17CradleArtV188();
+      return result;
+    }
+
+    prepareQz17CradleArtV188() {
+      if (!this.running || !this.qz17DressingV188?.cradle || !this.qz17MaintenanceRouteOpenV188() || this.qz17CradleArtPreparedV188) return;
+      this.qz17CradleArtPreparedV188 = true;
+      prepareBiologicalArtV188(this.images, 'qz17-cradle');
+    }
+
+    applyNarrativeRouteConsequenceV68(...args) {
+      const result = super.applyNarrativeRouteConsequenceV68(...args);
+      this.prepareQz17CradleArtV188();
       return result;
     }
 
@@ -183,7 +199,7 @@ export function withQz17LevelDressingV188(Base) {
           const box = dressing.layout.service;
           if (Number.isFinite(dressing.serviceDeckY)) drawDepthPropV188(ctx, box, { x: box.x, y: dressing.serviceDeckY - box.h, w: box.w, h: box.h });
           if (dressing.board) drawQz17AccessBoardV188(ctx, dressing.board, isEnglish());
-          if (dressing.cradle) drawQz17CradleAlcoveV188(ctx, dressing.cradle, this.qz17MaintenanceRouteOpenV188(), isEnglish());
+          if (dressing.cradle) drawQz17CradleAlcoveV188(ctx, dressing.cradle, this.qz17MaintenanceRouteOpenV188(), isEnglish(), { images: this.images });
         } finally { ctx.restore(); }
       }
       return super.drawWorld(ctx);
@@ -221,7 +237,7 @@ export function drawQz17AccessBoardV188(ctx, board, english = false) {
 }
 
 /** CIN-11: the maintenance alcove; the cradle is frosted, its lid forced from inside, restraints torn. */
-export function drawQz17CradleAlcoveV188(ctx, alcove, open, english = false) {
+export function drawQz17CradleAlcoveV188(ctx, alcove, open, english = false, { images = null } = {}) {
   const { x, w, h, floorY } = alcove, y = floorY - h;
   ctx.fillStyle = '#0d1416'; ctx.fillRect(x, y, w, h); // recess
   ctx.strokeStyle = '#3b4a4f'; ctx.lineWidth = 4; ctx.strokeRect(x + 2, y + 2, w - 4, h - 2);
@@ -235,6 +251,10 @@ export function drawQz17CradleAlcoveV188(ctx, alcove, open, english = false) {
   }
   const c = QZ17_SIZES_V188.cradle, cx = x + (w - c.w) / 2, cy = floorY - c.h;
   ctx.fillStyle = 'rgba(170,215,235,.10)'; ctx.fillRect(x + 6, y + 6, w - 12, h - 6); // cold light
+  if (drawBiologicalCradleV188(ctx, images, { x: cx, groundY: floorY, width: c.w, maxHeight: h - 26, label: QZ17_GHOST_CARGO_ID_V188 })) {
+    ctx.fillStyle = '#a7c4cf'; ctx.fillText(english ? 'COLD CHAIN · BROKEN' : 'CHAÎNE DU FROID · ROMPUE', x + w / 2, y + 14);
+    ctx.textAlign = 'left'; return;
+  }
   ctx.fillStyle = '#3c474c'; ctx.fillRect(cx, cy + 14, c.w, c.h - 14); // tub
   ctx.fillStyle = '#2a3236'; ctx.fillRect(cx + 4, floorY - 8, 10, 8); ctx.fillRect(cx + c.w - 14, floorY - 8, 10, 8); // skids
   ctx.fillStyle = '#cfe7f2'; for (let i = 0; i < 9; i++) ctx.fillRect(cx + 6 + i * 13, cy + 16 + (i % 3) * 4, 7, 2); // frost on the rim

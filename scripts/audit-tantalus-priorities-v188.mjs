@@ -1,7 +1,9 @@
 /** V188 — owner-approved P0/P1 priorities of the campaign bible (§56).
  *
  * Baseline: 803db26dbd7ed453d9534eee237806053438f300 (main after PR #46). The predecessor of
- * every receipt is the reviewed V187 endpoint of that file at this baseline.
+ * each original receipt is the reviewed V187 endpoint at this baseline. The
+ * continuation block separately anchors later changed sources to their exact
+ * bytes in the published Act V commit; historical predecessors stay intact.
  * The owner lifted the save/catalogue protection for this lot on 2026-11-12
  * (bible §56.1): each changed byte still needs an exact receipt here, and
  * migrations stay additive. This terminal module imports no audit and has no
@@ -88,7 +90,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-audit-v143.mjs": {
     "previousSha256": "825a8672e074c335568669ce8e5c496ed2fb70af9e11f3d834169da1a8d5a1c2",
-    "currentSha256": "e032db83c2b58d0d56b8f20c2f8c380db41477958fd6116123767dbbe25efd82"
+    "currentSha256": "9939371033f1654e51a73366a4d129c63f85d0871a40ca7014afe1f228a4fce0"
   },
   "scripts/verify-campaign-lethe-v163.mjs": {
     "previousSha256": "cb3ac8826d4f15bbab86e0c42dcd225aeee341c9b10950046fb14af104473049",
@@ -128,7 +130,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "328c764b2bf467d0bc21ae86abf415a7722bd0a88cba486eb2167c22fa8f0b84",
-    "currentSha256": "ee8372fb4cdf95fdc1dab01f538630caa1eadcc0113929ffd7999b63a578c119"
+    "currentSha256": "db03102b96ba14c20a265f83e39f1223657a6b2fc38b31f00983eb5fb80a16d5"
   },
   "src/alien-survival-runtime-v70.js": {
     "previousSha256": "65d5c0c4ca446021b6ff58ed6be61fc622c0908ede9d9d74b730fa0efef2fd93",
@@ -144,11 +146,11 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/apc-convoy-runtime-v121.js": {
     "previousSha256": "b1fa0c689763ca94ddb37b99020acedcd176d057b5d26f16ef24f9171c39a4a9",
-    "currentSha256": "159df2391dddc71d7df5c0cfd789b497bd232ecdbac72eb1daf5800d6f5feb8a"
+    "currentSha256": "afcdfd3f15db9ca405e40bee563a2d1ffff5d90bcaa2c6db377385e22a77b32b"
   },
   "src/app.js": {
     "previousSha256": "482835e65677c536085a1344cf61c3ffa5e09e2af1b8029b949e000a533038ae",
-    "currentSha256": "13d9db7b981496456d3f6f335f47ebc3c08e8e037f93c8016bdad4721e85f915"
+    "currentSha256": "2db6b8019a1e5fd30d96a43f89f09da34d1246c7127e2e89bd2d3cbab6735968"
   },
   "src/archive-relay-presentation-v160.js": {
     "previousSha256": "e628ccee6aa0a2ee40eea1fdd3b66b11800c3185c39bbd91c18d662c05749a30",
@@ -432,7 +434,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "sw.js": {
     "previousSha256": "ff86bba365c3875c8ebaeb0abe13b2a6185ccd5f1a030b4ee5b15ac0e4a12f9b",
-    "currentSha256": "f917c8ab1bb8517a5e82c8cf94e102bddeec9b1001424f1b4ab3c01bdc398396"
+    "currentSha256": "20f87df7565d64fc36ebef8a24ef94695cf41fabcc80a1ee9706fa854615f842"
   },
   "title-screen-v61.css": {
     "previousSha256": "3a748b04d5e6c9a7e04c189b2c1910c3163a0840968be6bcbb6352e10e16369f",
@@ -449,6 +451,57 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
 });
 // END V188 SOURCE RECEIPTS
 
+// Reviewed V188 continuation. These predecessors are the exact published
+// bytes at this commit, not replacements for any historical V187 witness.
+export const TANTALUS_PRIORITIES_CONTINUATION_V188 = freeze({
+  "baseline": "da8b29fa4b7688d18686b1e28be4065c3a821d3b",
+  "successors": {
+    "scripts/verify-audit-continuation-v158.mjs": {
+      "previousSha256": "87ca45b2c3c48d96e9ae02f4a57241b723372e3e12cd172ef4f978f34ba3eb98",
+      "currentSha256": "86d8781274bc77362ad291d6a638c02c74c0521e8bcee5776c913b8fef06400e"
+    },
+    "scripts/verify-black-cocoon-presentation-v158.mjs": {
+      "previousSha256": "96029dc66cb8781bd30bd91482dbfbc7466679020fd22420784e7baaac43bfa5",
+      "currentSha256": "635ee8e4463e32676dbd7be409a5f92cb9ed4d40b0ee59097251e90819645b99"
+    },
+    "scripts/verify-cinematic-coherence-v188.mjs": {
+      "previousSha256": "fd1f943ea6b50c339073a936eaed60dafa0618b472988353b93edd31d106d07f",
+      "currentSha256": "5f5bd9495aa0d7e7de6de16ee2f20b0064e4a9fc2ddb54f7f3f0c8ad7d6d72de"
+    },
+    "scripts/verify-dropship-handover-v188.mjs": {
+      "previousSha256": "3f644dcaf173647081d3f1dab2c8fd642fc82d6839a7d1b26de129e567a3ca05",
+      "currentSha256": "6fe5f58c1dba4b070a67aa2ed9db09163c8e1364f40f7f247f8790fdec387730"
+    },
+    "scripts/verify-qz17-coherence-v188.mjs": {
+      "previousSha256": "c06ba96c8b6e400f71da707ba18beed8c9f47afffb867d432c704bc8f2f92fcd",
+      "currentSha256": "9ff1d74e8f5b3f41bb043d4abe3ed7b65f656a254cc6ae639e4f6cfbd6b3b815"
+    },
+    "scripts/verify-story-cinematics-v188.mjs": {
+      "previousSha256": "4047f1f7607812751ea8314f81e0cfa5171fc5cf43abd3f3e6afd62f478aeaa6",
+      "currentSha256": "66dd489ef35c8ffcb53eee350e1234f34669cfd1f0abb75949a83a47651a295d"
+    },
+    "src/black-cocoon-presentation-v158.js": {
+      "previousSha256": "69169757f789461886aed3788b79e5ba9adcbd8bfa41b5cab81af85ff0be0767",
+      "currentSha256": "b82fd90a95873e4ae9a48ed27f1ed7f15c72dbd38a13bdb47bc17a6ef19fae0b"
+    },
+    "src/mission-dropship-handover-v188.js": {
+      "previousSha256": "ea7aba8f264a931fe71de296b444f2c7810c214f7b825f6f7e56c11865f17b95",
+      "currentSha256": "33105db7fba9625779121edbb5ccdb1cce6ba0f1f1dd93069e064750b30243c7"
+    },
+    "src/qz17-level-dressing-v188.js": {
+      "previousSha256": "2a5ad6d33e9ecabd0d26a7510b19d1ab396927516491d8a636ffc2aacd33806b",
+      "currentSha256": "3b435206e6ae12ae37d0d78469696e4bd2ffd7e5a9aee817d3bde521e90162af"
+    },
+    "src/story-cinematics-v188.js": {
+      "previousSha256": "1b0783003a58b4dca02193b6c9048750b068ac99c3023534479786f6009c6465",
+      "currentSha256": "921e3a8ae80b0000e1ee4eed5af38bc84312d7458109db879a33ebad1b1221cc"
+    }
+  },
+  "addedSources": {
+    "src/biological-art-v188.js": "5547ba7e1a2d924eb5ca4c9862c4b73003a6eca2ee0498893649d5d67b7a1afe"
+  }
+});
+
 export const TANTALUS_PRIORITIES_SOURCE_ONLY_PATHS_V188 = Object.freeze([
   'scripts/audit-tantalus-priorities-v188.mjs',
   'scripts/verify-tantalus-priorities-v188.mjs',
@@ -457,22 +510,35 @@ export const TANTALUS_PRIORITIES_SOURCE_ONLY_PATHS_V188 = Object.freeze([
 ]);
 
 export function reviewedTantalusPrioritiesDigestV188(path, endpoint) {
-  const receipt = TANTALUS_PRIORITIES_SUCCESSORS_V188[path];
+  const historical = TANTALUS_PRIORITIES_SUCCESSORS_V188[path];
+  const receipt = historical || TANTALUS_PRIORITIES_CONTINUATION_V188.successors[path];
   if (!receipt) return endpoint;
-  assert.equal(endpoint, receipt.previousSha256, 'Broken V187-to-V188 source chain: ' + path);
+  assert.equal(endpoint, receipt.previousSha256,
+    (historical ? 'Broken V187-to-V188 source chain: ' : 'Broken published-V188 source chain: ') + path);
   assert.ok(validHash(receipt.currentSha256), 'Invalid V188 source digest: ' + path);
   assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A V188 successor must identify changed bytes: ' + path);
   return receipt.currentSha256;
 }
 
 export function verifyTantalusPrioritiesV188(readSource = readRepository) {
-  for (const [path, receipt] of Object.entries(TANTALUS_PRIORITIES_SUCCESSORS_V188)) {
+  const continuation = TANTALUS_PRIORITIES_CONTINUATION_V188;
+  for (const path of Object.keys(continuation.successors)) {
+    assert.equal(Object.hasOwn(TANTALUS_PRIORITIES_SUCCESSORS_V188, path), false,
+      'A published-V188 receipt must not replace a historical receipt: ' + path);
+  }
+  const successors = [...Object.entries(TANTALUS_PRIORITIES_SUCCESSORS_V188), ...Object.entries(continuation.successors)];
+  for (const [path, receipt] of successors) {
     assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
     assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
     assert.equal(sha(readSource(path)), reviewedTantalusPrioritiesDigestV188(path, receipt.previousSha256),
       'Unreviewed V188 source bytes: ' + path);
   }
-  return Object.freeze({ successors: Object.keys(TANTALUS_PRIORITIES_SUCCESSORS_V188).length });
+  for (const [path, digest] of Object.entries(continuation.addedSources)) {
+    assert.equal(successors.some(([candidate]) => candidate === path), false, 'A new V188 source cannot replace a successor: ' + path);
+    assert.ok(validHash(digest), 'Invalid new V188 source digest: ' + path);
+    assert.equal(sha(readSource(path)), digest, 'Unreviewed V188 source bytes: ' + path);
+  }
+  return Object.freeze({ successors: successors.length, addedSources: Object.keys(continuation.addedSources).length });
 }
 
 if (process.argv[1] && new URL(import.meta.url).pathname === process.argv[1]) {

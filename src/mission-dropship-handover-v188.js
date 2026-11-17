@@ -21,8 +21,8 @@
 // docking airlock) comes to the extraction point, the marines or the APC board
 // under covering fire, the ship lifts, then
 //   onEvent({ type: 'extraction-boarding-complete-v188', mode, placeType })
-// and the held mission-complete event, unchanged, so rewards, debrief and
-// paidRewardsV188 run exactly as without the sequence, once.
+// and the held mission-complete event. A mode with deferred accounting settles
+// its canonical result after the fight; rewards and debrief are delivered once.
 //
 // Resume: a capture taken mid-landing records the post-landing poses (no
 // replay); a capture taken mid-boarding records the boarding and its held
@@ -59,7 +59,7 @@ const SKIP_KEYS = new Set(['KeyE', 'Escape', 'Enter']);
  * [PROPOSÉ] Defended boarding (gameplay gaps V188): during the extraction boarding the enemies keep moving
  * and attacking, the chin turret and the marine covering from the bay really hit (damage per tracer, reach
  * from the gun), and the marines take damage but never fall below `floorHealth` while they board: the
- * extraction already succeeded (mission-complete is held, its rewards fixed), so a death here could not be
+ * extraction already succeeded (mission-complete is held until boarding ends), so a death here could not be
  * honoured without contradicting it. Boarded marines are out of reach.
  */
 export const DEFENDED_BOARDING_V188 = Object.freeze({ tracerDamage: 14, reach: 900, floorHealth: 1 });
@@ -339,6 +339,10 @@ export function withMissionDropshipHandoverV188(Base) {
       }
     }
     finishBoardingV188(seq, skipped) {
+      if (!this.running || this.handoverV188 !== seq || seq?.kind !== 'extraction' || this.mission?.state !== 'complete') return false;
+      // Settle before either callback: the presentation callback can pause the
+      // engine, and the terminal callback captures the authoritative save.
+      seq.event = this.finalizeDeferredMissionCompletionV188?.(seq.event) ?? seq.event;
       // The app captures inside the terminal callback, after the staged sequence
       // is gone. Keep only its native poses for capture; the live drawn poses and
       // the paid event are not part of this bounded, per-mission record. An ordinary
@@ -349,9 +353,10 @@ export function withMissionDropshipHandoverV188(Base) {
       this.handoverV188 = null; this.handoverDepartedV188 = true; this.handoverExtractedV188 = true; this.handoverParticlesV188 = [];
       this.onEvent?.({ type: 'extraction-boarding-complete-v188', mode: seq.mode, placeType: seq.placeType,
         boardedBy: seq.boardedBy || 'foot', skipped: Boolean(skipped) });
-      // The held terminal event, unchanged: the app pays it once, as before.
+      // The held terminal event, finalized once: the app pays it once, as before.
       const sink = this.handoverSinkV188;
       if (typeof sink === 'function') sink(seq.event);
+      return true;
     }
 
     skipDropshipHandoverV188() {

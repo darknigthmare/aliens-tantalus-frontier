@@ -9,7 +9,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fixture, prepare, tick } from './engine-host-v188.mjs';
-import { CAMPAIGNS, WORLDS, LEVEL_SEEDS, VEHICLES } from '../src/content.js';
+import { CAMPAIGNS, WORLDS, LEVEL_SEEDS, VEHICLES, WEAPONS, ENEMIES } from '../src/content.js';
 import { buildMissionLevelV52 } from '../src/mission-levels-v52.js';
 import { buildApcConvoyLevelV121 } from '../src/apc-convoy-runtime-v121.js';
 import { buildLegacyMissionV131 } from '../src/legacy-operations-v131.js';
@@ -323,6 +323,146 @@ test('resume mid-boarding: the boarding finishes and pays once, with the held re
   const paid = resumed.events.filter(event => event.type === 'mission-complete');
   assert.equal(paid.length, 1); assert.deepEqual(paid[0].rewards, rewards);
   assert.equal(resumed.events.filter(event => event.type === 'extraction-boarding-complete-v188').length, 1);
+});
+
+// Controlled preterminal fixture, derived from the CI convoy checkpoint on
+// da8b29fa: 20 kills, intact hull, both Crushers/Queen cleared, one runner with
+// 79.116 HP at x678.069. Only that starting situation is assigned. E confirms
+// extraction, the real dropship damages/kills the native-spawned runner, and the
+// resulting terminal capture is submitted to the unmodified Save validator.
+async function convoyBoardingAccountingFixture(t, { survivor = true } = {}) {
+  const entry = campaign('special-apc-convoy'), save = createDefaultSave();
+  const operation = beginOperation(save, entry, worldOf(entry)).operation;
+  const setup = launchOptions(entry.id, { operationId: operation.id, seed: 2360543200, insertionHandoverV188: handover('foot') });
+  const subject = await fixture({ ...setup, keepEnemies: true }), engine = subject.engine;
+  t.after(() => engine.stop());
+  engine.skipDropshipHandoverV188(); engine.interact();
+  Object.assign(engine.apcConvoyV121, { distance: 3200, elapsed: 93.47940000000659,
+    crushersDefeated: [true, true], queenDefeated: true, stageBossId: null });
+  Object.assign(engine.apcCourseStateV131, { kills: 20, totalDistance: 3200, score: 5700 });
+  engine.player.kills = 20; engine.mission.elapsed = 93.47940000000659;
+  const runner = survivor ? engine.apcConvoySpawnV121('enemy-006-runner', 'horde') : null;
+  if (runner) Object.assign(runner, { x: 678.0690624999985, health: 79.116, dormant: false, alert: true });
+  engine.syncApcConvoyWorldV121();
+  engine.keys.add('KeyE'); tick(engine, 3.05); engine.keys.clear();
+  assert.equal(engine.mission.state, 'complete');
+  assert.equal(engine.handoverV188?.kind, 'extraction');
+  assert.equal(engine.player.kills, 20); assert.equal(engine.apcCourseStateV131.kills, 20);
+  assert.equal(engine.mission.rewards.credits, 1300); assert.equal(engine.vehicle.hull, 340);
+  if (runner) assert.equal(runner.alive, true);
+  assert.equal(subject.events.filter(event => event.type === 'mission-complete').length, 0);
+  return { ...subject, save, setup, runner, seq: engine.handoverV188 };
+}
+
+function finishNativeBoardingKill(subject) {
+  const { engine, runner } = subject;
+  for (let frame = 0; frame < 12 * 60 && runner.alive && engine.handoverV188; frame++) tick(engine, 1 / 60);
+  assert.equal(runner.alive, false, 'the production covering fire killed the remaining runner');
+  assert.equal(engine.player.kills, 21); assert.equal(engine.apcCourseStateV131.kills, 21);
+  assert.equal(engine.vehicle.hull, 340);
+  assert.equal(engine.handoverV188?.kind, 'extraction', 'the kill precedes the terminal callback');
+}
+
+function payRecordedConvoy(subject, event) {
+  const terminal = subject.engine.captureResumeState();
+  assert.equal(subject.engine.validateApcConvoyResumeV121(terminal).valid, true);
+  assert.equal(recordOperationResumeState(subject.save, terminal), true);
+  return resolveOperation(subject.save, { success: true, rewards: event.rewards });
+}
+
+test('APC boarding finalization: the real 20→21 kill pays 1300→1310 before the presentation callback pauses', async t => {
+  const subject = await convoyBoardingAccountingFixture(t), { engine, events, seq } = subject;
+  let outcome, presentation;
+  const sink = engine.handoverSinkV188;
+  engine.handoverSinkV188 = event => {
+    if (event.type === 'extraction-boarding-complete-v188') {
+      presentation = { mission: structuredClone(engine.mission.rewards), state: structuredClone(engine.apcConvoyV121.rewards),
+        event: structuredClone(seq.event), kills: engine.player.kills };
+      engine.paused = true; // The real app pauses here to play the ascent cinematic.
+    }
+    if (event.type === 'mission-complete') outcome = payRecordedConvoy(subject, event);
+    return sink(event);
+  };
+  tick(engine, 12);
+  assert.equal(subject.runner.alive, false);
+  assert.equal(engine.player.kills, 21); assert.equal(engine.apcCourseStateV131.kills, 21);
+  assert.equal(outcome?.ok, true, JSON.stringify({ outcome, presentation }));
+  assert.equal(presentation.kills, 21);
+  for (const rewards of [presentation.mission, presentation.state, presentation.event.rewards]) assert.equal(rewards.credits, 1310);
+  assert.equal(presentation.event.kills, 21);
+  assert.deepEqual(types(events).filter(type => /mission-complete|boarding/.test(type)),
+    ['extraction-boarding-complete-v188', 'mission-complete']);
+  assert.equal(subject.save.strategy.lastOperation.missionRewardsV121.credits, 1310);
+  assert.equal(subject.save.strategy.lastOperation.apcCourseResultV131.kills, 21);
+});
+
+test('APC boarding finalization: unchanged battle keeps the canonical reward and stale completion cannot emit twice', async t => {
+  const subject = await convoyBoardingAccountingFixture(t, { survivor: false }), { engine, events, seq } = subject;
+  const original = structuredClone(engine.mission.rewards);
+  tick(engine, 12);
+  const completion = events.find(event => event.type === 'mission-complete');
+  assert.equal(engine.player.kills, 20); assert.deepEqual(completion.rewards, original);
+  assert.equal(payRecordedConvoy(subject, completion).ok, true);
+  const paid = structuredClone(subject.save), count = events.length;
+  assert.equal(engine.finishBoardingV188(seq, false), false, 'a stale sequence is no longer owed');
+  assert.equal(events.length, count, 'neither presentation nor terminal event is repeated');
+  assert.equal(resolveOperation(subject.save, { success: true, rewards: completion.rewards }).ok, false);
+  assert.deepEqual(subject.save, paid);
+});
+
+test('APC boarding finalization: a real mid-boarding save resumes without the new launch option and pays current kills once', async t => {
+  const subject = await convoyBoardingAccountingFixture(t);
+  finishNativeBoardingKill(subject);
+  assert.equal(recordOperationResumeState(subject.save, subject.engine.captureResumeState()), true);
+  const state = JSON.parse(JSON.stringify(subject.save.strategy.currentOperation.resumeState));
+  assert.equal(state.player.kills, 21); assert.equal(state.apcCourseV131.kills, 21);
+  assert.equal(state.dropshipHandoverV188.boarding.event.rewards.credits, 1300, 'the pending event remains provisional until boarding ends');
+  subject.engine.stop();
+  const { insertionHandoverV188, ...oldFlow } = subject.setup.options;
+  const resumed = await fixture({ ...subject.setup, keepEnemies: true, options: { ...oldFlow, resumeState: state } });
+  t.after(() => resumed.engine.stop());
+  assert.equal(resumed.engine.lastResumeResult?.applied, true);
+  assert.equal(resumed.engine.handoverV188?.kind, 'extraction');
+  tick(resumed.engine, 12);
+  const completion = resumed.events.filter(event => event.type === 'mission-complete');
+  assert.equal(completion.length, 1); assert.equal(completion[0].kills, 21);
+  assert.equal(completion[0].rewards.credits, 1310);
+  assert.equal(payRecordedConvoy({ ...resumed, save: subject.save }, completion[0]).ok, true);
+  const terminal = resumed.engine.captureResumeState();
+  assert.equal(terminal.dropshipHandoverV188.boarding, null);
+  assert.equal(terminal.dropshipHandoverV188.extracted, true);
+  assert.equal(resumed.engine.completeMission(resumed.engine.player), false);
+});
+
+test('APC boarding finalization: skip accounts only the kills that really happened before it', async t => {
+  for (const afterKill of [false, true]) {
+    const subject = await convoyBoardingAccountingFixture(t), { engine, events } = subject;
+    if (afterKill) finishNativeBoardingKill(subject);
+    assert.equal(engine.skipDropshipHandoverV188(), true);
+    const completion = events.filter(event => event.type === 'mission-complete');
+    assert.equal(completion.length, 1);
+    assert.equal(completion[0].kills, afterKill ? 21 : 20);
+    assert.equal(completion[0].rewards.credits, afterKill ? 1310 : 1300);
+    assert.equal(subject.runner.alive, !afterKill);
+    assert.equal(payRecordedConvoy(subject, completion[0]).ok, true);
+  }
+});
+
+test('APC boarding finalization: stopping or replacing a pending extraction never delivers its stale victory', async t => {
+  const subject = await convoyBoardingAccountingFixture(t), { engine, events, seq } = subject;
+  assert.equal(recordOperationResumeState(subject.save, engine.captureResumeState()), true);
+  assert.equal(resolveOperation(subject.save, { success: false, reason: 'retreat' }).ok, true);
+  engine.stop();
+  assert.equal(engine.finishBoardingV188(seq, true), false);
+  assert.equal(events.filter(event => /mission-complete|boarding/.test(event.type)).length, 0);
+  const entry = campaign('special-apc-convoy'), next = beginOperation(subject.save, entry, worldOf(entry)).operation;
+  engine.start({ ...subject.setup.options, campaign: entry, operationId: next.id,
+    weapon: WEAPONS[0], enemyCatalog: ENEMIES, equipment: [], crew: [] });
+  await prepare(engine);
+  assert.equal(engine.finishBoardingV188(seq, false), false);
+  assert.equal(events.filter(event => /mission-complete|boarding/.test(event.type)).length, 0);
+  assert.equal(subject.save.strategy.lastOperation.success, false);
+  assert.equal(subject.save.strategy.currentOperation.id, next.id);
 });
 
 test('terminal capture after native convoy boarding remains admissible and resumes without boarding or another payment', async t => {

@@ -106,7 +106,7 @@ test('Act I: four accesses on Rook’s radio, a cradle for a human-sized occupan
   assert.ok(cradle.metres[0] >= 2 && cradle.metres[0] > marine.metres[1], 'longer than the marine is tall');
   assert.equal(cradle.label, 'QZ17'); assert.equal(cradle.torn, true); assert.ok(cradle.restraints >= 2);
   assert.ok(shotsOf('cin-11').every(entry => entry.kind === 'cradle' || entry.scene === 'cradle'), 'the radio line stays on the cradle');
-  assert.ok(textsAt('cin-11', 1).includes('QZ17'));
+  assert.ok(textsAt('cin-11', 1).includes('QZ17-04'), 'the same missing cradle as the physical maintenance alcove');
 });
 
 test('staged beats play where the game puts them', () => {

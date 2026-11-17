@@ -27,7 +27,9 @@ const ASPHODELE_CINEMATIC_ART_V188 = ['ring', 'hub', 'rook-quarters', 'helmet-co
 const ASPHODELE_RUNTIME_ART_V188 = [...ASPHODELE_CARDS_V188, ...ASPHODELE_MISSION_ART_V188, ...ASPHODELE_HUB_WALL_ART_V188, ...ASPHODELE_HUB_DETAIL_ART_V188, ...ASPHODELE_CINEMATIC_ART_V188];
 const ACT5_RUNTIME_ART_V188 = ['m577-side-corrected', 'm577-rain-departure', 'bridge-collapse', 'quay-standoff', 'port-gates-rollcall',
   'port-meridien-epilogue', 'freight-trailer', 'colonist-trailer', 'echo8-locker-epilogue'].map(id => `/assets/act5/v188/${id}.png`);
-const REVIEWED_RUNTIME_ART_V188 = [...ASPHODELE_RUNTIME_ART_V188, ...ACT5_RUNTIME_ART_V188];
+const BIOLOGICAL_RUNTIME_ART_V188 = ['qz17-cradle-breached', 'depot-resin-helmet-corridor', 'human-resin-support']
+  .map(id => `/assets/biological/v188/${id}.png`);
+const REVIEWED_RUNTIME_ART_V188 = [...ASPHODELE_RUNTIME_ART_V188, ...ACT5_RUNTIME_ART_V188, ...BIOLOGICAL_RUNTIME_ART_V188];
 const ORIGIN = 'https://tantalus.test';
 const req = (path, options) => new Request(new URL(path, ORIGIN), options);
 function response(path, { private: secret = false, status = 200, mime, vary } = {}) {
@@ -227,11 +229,14 @@ test('colony cards: invalid and newly private responses cannot leave a usable ca
     assert.equal((await h.dispatch('fetch', { request })).value.type, 'error');
   }
 });
-test('Reviewed scene art: Asphodele and Act V stay lazy through installation and survive a later network interruption', async () => {
+test('Reviewed scene art: Asphodele, Act V and biological evidence stay lazy through installation and survive a later network interruption', async () => {
   const h = host();
-  assert.equal(h.api.CACHE, 'atf-v143-act5-cinematic-art-20261117');
+  assert.equal(h.api.CACHE, 'atf-v143-biological-art-20261117');
   await h.dispatch('install');
   const cache = await h.caches.open(h.api.CACHE);
+  assert.equal(h.api.SHELL.filter(path => path === '/src/biological-art-v188.js').length, 1,
+    'the shared presentation module is an explicit offline-shell dependency');
+  assert.ok(await cache.match(req('/src/biological-art-v188.js')));
   for (const path of REVIEWED_RUNTIME_ART_V188) {
     assert.equal(h.api.SHELL.includes(path), false, 'scene, mission, hub and cinematic art must not increase the mandatory precache');
     assert.equal(h.calls.some(request => new URL(request.url).pathname === path), false, 'installation must not fetch the image');
@@ -275,6 +280,12 @@ test('Reviewed scene art: exact paths reject unreviewed neighbors, out-of-scope 
       [artPath.replace(/\.png$/, '-extra.png'), {}], [artPath.replace('/v188/', '/v188/nested/'), {}],
       [artPath.replace('/v188/', '/v189/'), {}], [artPath.replace(/\.png$/, '.webp'), {}],
       [artPath.replace('/act5/', '/ACT5/'), {}], [artPath.replace('/act5/', '/%61ct5/'), {}]
+    ]),
+    ['/assets/biological/v188/unreviewed.png', {}], ['/assets/biological/v188/human-resin-body.png', {}],
+    ...BIOLOGICAL_RUNTIME_ART_V188.flatMap(artPath => [
+      [artPath.replace(/\.png$/, '-extra.png'), {}], [artPath.replace('/v188/', '/v188/nested/'), {}],
+      [artPath.replace('/v188/', '/v189/'), {}], [artPath.replace(/\.png$/, '.webp'), {}],
+      [artPath.replace('/biological/', '/BIOLOGICAL/'), {}], [artPath.replace('/biological/', '/%62iological/'), {}]
     ]),
     ['/assets/asphodele/v188/asph-wall-unreviewed.png', {}], ['/assets/asphodele/v188/asph-msn-unreviewed.png', {}],
     ['/assets/asphodele/v188/asph-wall-docks-extra.png', {}], ['/assets/asphodele/v188/nested/asph-wall-docks.png', {}],
@@ -406,7 +417,11 @@ test('release workflow, reports and gamedev guidance are source tooling only', (
     'docs/development/ACT5_ART_PROVENANCE_20261117.json',
     'docs/development/ACT5_ART_QA_20261117.md',
     'docs/development/ACT5_ART_OVERVIEW_20261117.png',
-    'docs/development/ACT5_ART_RENDER_RECEIPT_20261117.json']) {
+    'docs/development/ACT5_ART_RENDER_RECEIPT_20261117.json',
+    'docs/development/BIOLOGICAL_ART_PROVENANCE_20261117.json',
+    'docs/development/BIOLOGICAL_ART_QA_20261117.md',
+    'docs/development/BIOLOGICAL_ART_OVERVIEW_20261117.png',
+    'docs/development/BIOLOGICAL_ART_RENDER_RECEIPT_20261117.json']) {
     assert.equal(isPublicDistributionPathV86(path), true); assert.equal(isPublicDistributionPathV86(path, { built: true }), false);
   }
 });
@@ -476,6 +491,7 @@ test('gamedev guidance admission stays exact and rejects unrelated documents', (
     'docs/development/ASPHODELE_HUB_DETAIL_ART_QA_20261117.md.bak', 'docs/development/ASPHODELE_HUB_DETAIL_ART_UNREVIEWED_20261117.png',
     'docs/development/ASPHODELE_CINEMATIC_ART_QA_20261117.md.bak', 'docs/development/ASPHODELE_CINEMATIC_ART_UNREVIEWED_20261117.png',
     'docs/development/ACT5_ART_QA_20261117.md.bak', 'docs/development/ACT5_ART_UNREVIEWED_20261117.png',
+    'docs/development/BIOLOGICAL_ART_QA_20261117.md.bak', 'docs/development/BIOLOGICAL_ART_UNREVIEWED_20261117.png',
     'AGENTS.md.bak', 'src/AGENTS.md', 'docs/development/../private.md']) {
     assert.equal(isPublicDistributionPathV86(path), false, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);

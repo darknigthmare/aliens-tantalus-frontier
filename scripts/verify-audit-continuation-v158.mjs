@@ -131,7 +131,11 @@ test('the physical ECHO-A circuit does not claim circulation among the annexes o
 
 test('dedicated Cocon rendering is distinct from source-work certification and an extended campaign', () => {
   const contract = current.runtimeContracts.operations.blackCocoonPresentation;
-  assert.deepEqual(contract.configuration, cocoon);
+  // The immutable V158 witness predates the empty raster support. Only the
+  // descriptive source changes; timing, bonds and all scope claims stay exact.
+  assert.equal(contract.configuration.source, 'original-procedural-human-resin-binding');
+  assert.equal(cocoon.source, 'original-resin-support-with-native-human-binding');
+  assert.deepEqual({ ...contract.configuration, source: cocoon.source }, cocoon);
   assert.equal(cocoon.canonExact, false);
   assert.equal(cocoon.operationId, 'black-cocoon');
   assert.equal(contract.newBitmapAtlas, false);

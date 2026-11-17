@@ -352,3 +352,27 @@ Le chargement demande seulement les couches du slot ou de la CIN courante. Les s
 Ces preuves portent sur le renderer de production sous **Canvas natif**, avec fixtures et doubles de chargement déclarés ; elles ne constituent pas un nouveau parcours navigateur. La course APC dédiée avec remorques physiques, l'effondrement jouable du pont et la poursuite de la Reine restent **[PROPOSÉ]**. Le sprite dédié de la Reine reste à produire. Les lieux, remorques et accessoires originaux du projet ne deviennent pas des répliques canoniques « 1:1 » par leur seule génération ; le statut global de l'Acte V reste **Partiel** et les totaux initiaux de l'audit ne sont pas réécrits.
 
 Traçabilité : [prompts, références et empreintes des neuf PNG](ACT5_ART_PROVENANCE_20261117.json), [QA et limites](ACT5_ART_QA_20261117.md), [planche des compositions intégrées](ACT5_ART_OVERVIEW_20261117.png), [reçu de rendu et revues indépendantes](ACT5_ART_RENDER_RECEIPT_20261117.json).
+
+## Résultat du lot preuves biologiques et résine (continuation du 17 novembre 2026)
+
+Base : `da8b29fa4b7688d18686b1e28be4065c3a821d3b`, qui publie le lot Acte V précédent. Ce nouveau lot ajoute **trois PNG bruts, soit 7 770 075 octets** : le berceau QZ17 ouvert de l'intérieur, la galerie du dépôt envahie de résine et le support vide de captivité humaine. Le catalogue de rendu contient **18 images, dont quinze réemplois à leur chemin existant**.
+
+| Consommateur | Résultat |
+| --- | --- |
+| CIN11 et alcôve QZ17 | Même berceau givré, trois sangles rompues, plaque native QZ17-04, corps mesuré à 480 pixels en cinématique et 122 pixels dans le niveau ; transformation uniforme et appui au sol |
+| CIN31 | Quai, M577, passagers, conteneurs et CRT existants ; compteurs issus du manifeste, dans les limites de six passagers et trois conteneurs |
+| CIN40, CIN41, CIN51 et retour QZ17 | Support vital, laboratoire et CRT réemployés ; textes, horodatages, statuts et personnages natifs |
+| CIN50 | Galerie contaminée, drone existant sur la poutre après 55 % du premier plan, REC visible hors de la transformation de caméra ; coupure du signal conservée |
+| Cocon noir V158 | Support vide derrière le véritable joueur, neuf liens natifs devant lui, tenue personnalisée et cycle de réveil/coupe/effort/libération préservés |
+
+Les sept cinématiques comprennent **18 plans**. Les 21 autres cinématiques, soit 63 plans et 252 variantes FR/EN avec mouvement normal/réduit, conservent leurs traces de dessin et leurs demandes d'images. Le volet fermé de QZ17 ne provoque aucune requête ; l'ouverture native de la route ou la reprise déjà ouverte prépare seulement le berceau. Le nouveau module partagé porte le shell à **724 entrées** ; les trois images restent chargées à la demande sur des chemins exacts.
+
+La revue des vrais pixels a corrigé le gabarit de captivité hérité : son enveloppe de 146 × 86 pixels plaçait plusieurs liens au-dessus du personnage. Le support et les liens sont maintenant proportionnés au rig natif debout, avec visage dégagé, palette charbon/ambre, racines au sol et résidu fixé au mur après le déplacement du joueur libéré. Les neuf seuils de coupe et les horloges restent inchangés. Les références de résine viennent des photographies de tournage publiées par Propstore et Stan Winston School ; QZ17 et Cocyte restent des lieux et objets originaux du projet.
+
+La QA finale comprend **54 PNG** — 53 captures et une planche —, **36 vues cinématiques FR/EN et 36 replis en mémoire**, **56 variantes de personnage**, **14 contrôles de progression des fibres**, huit alcôves, douze variantes de caméra casque et 29 comparaisons raster hors lot identiques. Les trois PNG ont une contribution visible mesurée ; aucun pixel de lien ne masque le cœur du visage. Les 52 tests d'intégration, les 132 tests d'audit/sauvegarde et les 24 contrôles indépendants de chargement passent. Les 139 contrôles de succession puis une première release complète de **4 688 cas, 4 687 réussis et un ignoré hérité**, passent sans échec sur le gel biologique.
+
+La lecture de la CI précédente a ensuite révélé un blocage distinct du retour APC : le tir de couverture abat un dernier ennemi après le calcul initial du bilan, donnant 21 victimes mais seulement 1 300 crédits au lieu des 1 310 exigés par la formule. Le bilan est désormais finalisé après ce combat et avant les callbacks, avec une seule émission. Le validateur `save.js` et la formule restent inchangés. Cinq régressions échouent avant correction puis réussissent ; le groupe embarquement/récit/historique passe **55/55**. Le registre final conserve ses 106 prédécesseurs historiques et atteste 116 successeurs exacts plus le nouveau module.
+
+Le build et la suite release finale sont attestés sur la révision exacte publiée dans la PR #49. Les observations de mission et les rendus sont exécutés sous l'hôte natif avec doublures déclarées ; ils ne constituent pas un nouveau parcours Chromium. Ce lot ne clôt pas la campagne prolongée du Cocon noir, les autres preuves/galeries du dépôt ou les identités de créatures restant à produire. Aucune certification globale de fidélité canonique « 1:1 » n'est ajoutée.
+
+Traçabilité : [prompts, références et empreintes](BIOLOGICAL_ART_PROVENANCE_20261117.json), [QA et correctifs de CI](BIOLOGICAL_ART_QA_20261117.md), [planche des compositions intégrées](BIOLOGICAL_ART_OVERVIEW_20261117.png), [reçu commun et revues indépendantes](BIOLOGICAL_ART_RENDER_RECEIPT_20261117.json).

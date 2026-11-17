@@ -30,3 +30,8 @@
 - [ ] T019 Production des images des emplacements, puis observation en jeu et mise à jour de `INSERTION_ASSET_FILES_PRESENT_V188`.
 - [ ] T020 Sons enregistrés pour remplacer les repères procéduraux.
 - [ ] T021 Validation par le propriétaire des valeurs [PROPOSÉ] (mondes sans indicateur, météo, heures, répliques).
+
+## Phase 6 : Bilan après l'embarquement défendu — 17 novembre 2026
+
+- [x] T022 Finaliser le bilan APC après les tirs de couverture et avant les callbacks, avec la formule existante, sans rejouer `completeMission` ni modifier `save.js`.
+- [x] T023 Reproduire le refus du bilan 20 → 21 victimes, vérifier pause, reprise sanitisée, saut, abandon et émission/paiement uniques : cinq régressions rouges puis vertes ; groupe embarquement, récit et historique **55/55**. Preuves et limites dans `docs/development/BIOLOGICAL_ART_QA_20261117.md` et son reçu commun. La release et la nouvelle CI sont attestées séparément sur le SHA publié dans la PR #49.

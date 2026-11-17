@@ -2,12 +2,16 @@
 // QZ-17 overlay (src/qz17-level-dressing-v188.js) over the shared ship template.
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { fixture, tick, host } from './engine-host-v188.mjs';
 import { CAMPAIGNS } from '../src/content.js';
 import { QZ17_PHYSICAL_COLLECTABLES_V68 } from '../src/narrative-collectables-runtime-v68.js';
 import { inDepthSectionV188 } from '../src/mission-depth-v188.js';
 import { QZ17_SIZES_V188, QZ17_PX_PER_METRE_V188, QZ17_HOLD_LANES_V188, QZ17_ACCESS_POINTS_V188, QZ17_SEALED_CONTAINERS_V188,
   QZ17_GHOST_CARGO_ID_V188, QZ17_CRADLE_EXIT_VENT_V188, unfitForHoldV188, drawQz17CradleAlcoveV188, drawQz17AccessBoardV188 } from '../src/qz17-level-dressing-v188.js';
+import { BIOLOGICAL_ART_V188, biologicalArtAnchorV188, drawBiologicalCradleV188 } from '../src/biological-art-v188.js';
+import { createNarrativeArchivesV68, discoverNarrativeCollectableV68, markNarrativeCollectableReadV68,
+  NARRATIVE_COLLECTABLES_V68, recordNarrativeDecisionV68 } from '../src/narrative-collectables-v68.js';
 
 const QZ17 = CAMPAIGNS.find(entry => entry.id === 'special-narrative-qz17');
 const overlapX = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x;
@@ -155,4 +159,46 @@ test('QZ-17 overlay: other missions on the ship template are untouched', async (
   assert.notEqual(other.x, qz.engine.supplies.find(entry => entry.id === other.id).x, 'supply moved only in QZ-17');
   const { text, ctx } = host(); engine.drawWorld?.(ctx);
   assert.ok(!text.some(line => /QZ17 ·|CHAÎNE DU FROID/.test(line)), 'no QZ-17 dressing drawn');
+});
+
+test('QZ17 art: the same proportional cradle sits on the alcove and cinematic floors, with its 2.4 m body preserved', () => {
+  const path = BIOLOGICAL_ART_V188['qz17-cradle-breached'].path, bytes = readFileSync(new URL(`..${path}`, import.meta.url));
+  const image = { src: path, complete: true, naturalWidth: bytes.readUInt32BE(16), naturalHeight: bytes.readUInt32BE(20) };
+  const images = new Map([[path, image]]), { ctx } = host();
+  for (const [width, groundY, maxHeight] of [[122, 848, 106], [480, 560, 410]]) {
+    const fit = drawBiologicalCradleV188(ctx, images, { x: 300, width, groundY, maxHeight }); assert.ok(fit);
+    assert.ok(Math.abs(fit.w / fit.h - fit.sw / fit.sh) < 1e-9);
+    assert.ok(Math.abs(biologicalArtAnchorV188(fit, 'ground')[1] - groundY) < 1e-9);
+    assert.ok(Math.abs(biologicalArtAnchorV188(fit, 'body')[2] - width) < 1e-9, 'body width is distinct from lid envelope');
+    const label = biologicalArtAnchorV188(fit, 'label');
+    assert.ok(label[0] >= fit.x && label[0] + label[2] <= fit.x + fit.w && label[1] >= fit.y && label[1] + label[3] <= groundY);
+  }
+});
+
+test('QZ17 art: a closed route reveals no image or cradle label; open and failed-image states preserve both languages', () => {
+  const path = BIOLOGICAL_ART_V188['qz17-cradle-breached'].path, bytes = readFileSync(new URL(`..${path}`, import.meta.url));
+  const ready = { src: path, complete: true, naturalWidth: bytes.readUInt32BE(16), naturalHeight: bytes.readUInt32BE(20) };
+  const alcove = { x: 300, floorY: 848, w: 160, h: 132 }, before = structuredClone(alcove);
+  for (const english of [false, true]) for (const open of [false, true]) for (const image of [ready, { complete: true, naturalWidth: 0, naturalHeight: 0 }]) {
+    const { ctx, text } = host(), calls = []; ctx.drawImage = (...args) => calls.push(args);
+    drawQz17CradleAlcoveV188(ctx, alcove, open, english, { images: { [path]: image } });
+    assert.equal(calls.length, open && image === ready ? 1 : 0);
+    assert.equal(text.includes(QZ17_GHOST_CARGO_ID_V188), open);
+    assert.ok(text.includes(open ? english ? 'COLD CHAIN · BROKEN' : 'CHAÎNE DU FROID · ROMPUE' : english ? 'MAINTENANCE · SEALED' : 'MAINTENANCE · SCELLÉ'));
+    assert.deepEqual(alcove, before, 'decorative image does not change the route or physical box');
+  }
+});
+
+test('QZ17 art: real route authorization loads the cradle once, a shut route loads nothing, and an open resume prepares it', async () => {
+  const path = BIOLOGICAL_ART_V188['qz17-cradle-breached'].path, subject = await hold(), e = subject.engine;
+  assert.equal(e.images.has(path), false); e.drawWorld(subject.ctx); assert.equal(e.images.has(path), false, 'drawing does not request a hidden prop');
+  const save = { narrativeArchives: createNarrativeArchivesV68() };
+  for (const entry of NARRATIVE_COLLECTABLES_V68) { discoverNarrativeCollectableV68(save, entry.id); markNarrativeCollectableReadV68(save, entry.id); }
+  assert.equal(recordNarrativeDecisionV68(save, 'follow-maintenance-trace').applied, true);
+  e.setNarrativeArchivesV68(save.narrativeArchives); assert.equal(e.qz17MaintenanceRouteOpenV188(), true);
+  const image = e.images.get(path); assert.ok(image?.naturalWidth > 0);
+  e.setNarrativeArchivesV68(save.narrativeArchives); e.drawWorld(subject.ctx); assert.equal(e.images.get(path), image);
+  const resumed = await hold({ options: { narrativeArchives: structuredClone(save.narrativeArchives) } });
+  assert.equal(resumed.engine.qz17MaintenanceRouteOpenV188(), true); assert.ok(resumed.engine.images.get(path)?.naturalWidth > 0);
+  e.stop(); resumed.engine.stop();
 });
