@@ -88,7 +88,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-audit-v143.mjs": {
     "previousSha256": "825a8672e074c335568669ce8e5c496ed2fb70af9e11f3d834169da1a8d5a1c2",
-    "currentSha256": "51fec4962172e232888c020edb26539cdc924b69fcf35e77633682acdd62300a"
+    "currentSha256": "214de25f8606ee022a1d5affc4490abda1ab4e990da108564266612cf6e70b7a"
   },
   "scripts/verify-campaign-lethe-v163.mjs": {
     "previousSha256": "cb3ac8826d4f15bbab86e0c42dcd225aeee341c9b10950046fb14af104473049",
@@ -128,7 +128,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "328c764b2bf467d0bc21ae86abf415a7722bd0a88cba486eb2167c22fa8f0b84",
-    "currentSha256": "74ba80f42082581a951806e24cb6f36c5c79af99b2d82e7bf0efdc8f61ffae16"
+    "currentSha256": "b9409c7de91fe23199a434752b45704fef36d4473d40d1bccb753ce7d80fd94a"
   },
   "src/alien-survival-runtime-v70.js": {
     "previousSha256": "65d5c0c4ca446021b6ff58ed6be61fc622c0908ede9d9d74b730fa0efef2fd93",
@@ -432,7 +432,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "sw.js": {
     "previousSha256": "ff86bba365c3875c8ebaeb0abe13b2a6185ccd5f1a030b4ee5b15ac0e4a12f9b",
-    "currentSha256": "132f4118aa832219833d676f84c95c62162ca5dd38490a7ac088d1e3acfb29ce"
+    "currentSha256": "328b4905ee6638c0322a93cbfb38f021ac1a74db5a34904f8610146011b62349"
   },
   "title-screen-v61.css": {
     "previousSha256": "3a748b04d5e6c9a7e04c189b2c1910c3163a0840968be6bcbb6352e10e16369f",

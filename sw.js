@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-asphodele-wall-art-20261117';
+const CACHE = 'atf-v143-asphodele-hub-art-20261117';
 const SHELL = Object.freeze([
   '/src/alien-base-bridge-v1.js',
   '/src/alien-base-snapshot-v1.js',
@@ -778,6 +778,28 @@ const ASPHODELE_HUB_WALL_PATHS_V188 = new Set([
   '/assets/asphodele/v188/asph-wall-lower.png',
   '/assets/asphodele/v188/asph-wall-repair.png'
 ]);
+const ASPHODELE_HUB_DETAIL_PATHS_V188 = new Set([
+  '/assets/asphodele/v188/asph-door.png',
+  '/assets/asphodele/v188/asph-ud4l-docked.png',
+  '/assets/asphodele/v188/asph-crucible-shuttle.png',
+  '/assets/asphodele/v188/asph-cassius-core.png',
+  '/assets/asphodele/v188/asph-qz-map.png',
+  '/assets/asphodele/v188/asph-relay-bays.png',
+  '/assets/asphodele/v188/asph-cradles.png',
+  '/assets/asphodele/v188/asph-memorial-plaques.png',
+  '/assets/asphodele/v188/asph-hydro-bays.png',
+  '/assets/asphodele/v188/asph-crucible-stall.png',
+  '/assets/asphodele/v188/asph-bunks.png',
+  '/assets/asphodele/v188/asph-medbay-beds.png',
+  '/assets/asphodele/v188/asph-medbay-scanner.png',
+  '/assets/asphodele/v188/asph-echo8-barricade.png',
+  '/assets/asphodele/v188/asph-night-board.png',
+  '/assets/asphodele/v188/asph-repair-cradle.png',
+  '/assets/asphodele/v188/asph-grue.png',
+  '/assets/asphodele/v188/asph-npc-docker.png',
+  '/assets/asphodele/v188/asph-npc-merchant.png',
+  '/assets/asphodele/v188/asph-npc-technician.png'
+]);
 const MAX_RUNTIME_ENTRIES_V143 = 256;
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const PRIVATE_HEADERS_V143 = ['authorization', 'proxy-authorization', 'apikey', 'x-api-key', 'x-auth-token'];
@@ -796,6 +818,7 @@ function cacheableRequestV143(request) {
     if (ASPHODELE_CARD_PATHS_V188.has(path)) return true;
     if (ASPHODELE_MISSION_PATHS_V188.has(path)) return true;
     if (ASPHODELE_HUB_WALL_PATHS_V188.has(path)) return true;
+    if (ASPHODELE_HUB_DETAIL_PATHS_V188.has(path)) return true;
     // No API, account, save, unknown document or third-party endpoint can enter
     // Cache Storage, even when it returns HTTP 200 or an image-like extension.
     return /^\/assets\/(?:openai|user|equipment)\/[a-z0-9/_.-]+\.(?:png|webp|jpg|jpeg)$/i.test(path)
