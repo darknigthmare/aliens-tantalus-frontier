@@ -2945,13 +2945,13 @@ Elles se jouent surtout au hub, avec des PNJ **[PRÉSENT]**. Besoins **[À CRÉE
 
 ### 30.3 Arc 3 · TR-0, la Ruche-monde
 
-**Socle de l'arc :** surface vivante, organes, noyau **[DETTE]** (`complete-organ-biomes`, `dedicated-planet-queen-art`) ; Base Ombelle sous la résine **[À CRÉER]** ; adulte Reine-Mère rouge **[PRÉSENT]** dans le chapitre local « Le chant de la Reine-Mère » (huit poses composées, §56.18), gardes locaux illustrés par réemploi adapté de l'atlas praetorian **[PRÉSENT]** (§56.19), réemploi dans l'arc étendu **[À CRÉER]** ; Chœurs et casting royal complet **[DETTE]** (`complete-royal-cast`) ; praetorian **[PRÉSENT]**.
+**Socle de l'arc :** surface vivante, organes, noyau **[DETTE]** (`complete-organ-biomes`, `dedicated-planet-queen-art`) ; Base Ombelle sous la résine **[À CRÉER]** ; adulte Reine-Mère rouge **[PRÉSENT]** dans le chapitre local « Le chant de la Reine-Mère » (huit poses composées, §56.18), gardes locaux illustrés par réemploi adapté de l'atlas praetorian **[PRÉSENT]** (§56.19), réemploi dans l'arc étendu **[À CRÉER]** ; trois Chœurs locaux illustrés par création originale **[PRÉSENT]** (§56.20) ; casting royal complet **[DETTE]** (`complete-royal-cast`) ; praetorian **[PRÉSENT]**.
 
 | Mission | Props | Personnages / ennemis | Animations | VFX | Actions |
 | --- | --- | --- | --- | --- | --- |
 | 3.1 Atterrissage | Croûte qui respire **[DETTE]** | — | Surface animée **[DETTE]** | Pulsations **[À CRÉER]** | Jauge de bruit **[CODE]** (alerte existante) |
 | 3.2 Base Ombelle | Laboratoire W-Y sous résine, registres d'expédition **[À CRÉER]** | — | — | — | Lecture **[CODE]** |
-| 3.3 Trois Chœurs | Nurserie, artère royale, balises **[CODE]** (chapitre existant) | Castes reliées **[DETTE]** | — | Ondes du Chœur **[À CRÉER]** | Rupture des Chœurs **[CODE]** |
+| 3.3 Trois Chœurs | Nurserie, artère royale, balises **[CODE]** (chapitre existant) | Trois cibles locales illustrées **[PRÉSENT]** ; castes reliées **[DETTE]** | Quatre états de présentation originaux **[PRÉSENT]** (§56.20) | Ondes du Chœur **[À CRÉER]** | Rupture des Chœurs **[CODE]** |
 | 3.4 La Reine-Mère | Salle royale **[CODE]** (chapitre existant) | Adulte rouge et gardes locaux illustrés **[PRÉSENT]** ; rencontre de l'arc étendu **[À CRÉER]** | Huit poses composées de l'adulte et seize cellules réemployées pour les gardes **[PRÉSENT]** ; quatre phases natives **[CODE]** | — | Boss local **[CODE]** |
 | 3.5 Le noyau | Organes, noyau, sas **[CODE]** | — | Effondrement **[À CRÉER]** | Effondrement, poussière organique **[À CRÉER]** | Fuite chronométrée **[CODE]** |
 | Annexes (2) | Chambre froide **[À CRÉER]** | Chercheur survivant **[À CRÉER]** ; praetorian capturé **[PRÉSENT]** | Créature entravée **[À CRÉER]** | — | Capture d'organisme **[À CRÉER]** |
@@ -3140,7 +3140,8 @@ Ces missions réutilisent au maximum les décors de zone **[PRÉSENT]** (`ship-*
 | Reine volante | Art local Broodstorm [PRÉSENT] ; atterrissage et autres rencontres [À CRÉER] |
 | Reine-Mère adulte | Art et huit poses du chapitre local [PRÉSENT] ; autres rencontres [À CRÉER] |
 | Gardes de la Reine-Mère | Présentation locale adaptée de l'atlas praetorian [PRÉSENT] ; aucune nouvelle attribution de caste |
-| Chœurs, casting royal complet et Ruche-monde | [DETTE] |
+| Chœurs locaux de la Reine-Mère | Présentation originale des trois cibles [PRÉSENT] ; aucune attribution de caste |
+| Casting royal complet et Ruche-monde | [DETTE] |
 | Jeri, SAINT, Éloïse, HUSH-6, Chasseur de Mères | [DETTE] |
 | Synthétique de maintenance industrielle (boss de Kéos) | [À CRÉER] |
 | Faune de Pangaea, castes Sauria, Porte-Ruche Colosse | [DETTE] |
@@ -3226,7 +3227,8 @@ Pour chaque élément à créer, un **lot de génération** type est indiqué :
 | Reine volante | Art local Broodstorm [PRÉSENT] ; autres rencontres [À CRÉER] | Trois planches de quatre poses ; §56.17 |
 | Reine-Mère adulte | Art local [PRÉSENT] ; autres rencontres [À CRÉER] | Deux planches de corps, quatre bras composés ; §56.18 |
 | Gardes de la Reine-Mère | Présentation locale adaptée [PRÉSENT] | Atlas praetorian existant, seize cellules, six gardes initiaux et douze renforts possibles ; §56.19 |
-| Chœurs, casting royal complet et Ruche-monde | [DETTE] | Les trois Chœurs du chapitre gardent leur présentation vectorielle provisoire ; l'illustration des gardes ne clôture pas le casting royal |
+| Chœurs locaux de la Reine-Mère | Présentation originale [PRÉSENT] | Une même arche costale pour les trois cibles, quatre états et appuis fixes ; §56.20 |
+| Casting royal complet et Ruche-monde | [DETTE] | Les trois objets locaux illustrés ne définissent pas les trois castes reliées ni le casting étendu de TR-0 |
 | Jeri, SAINT, Éloïse, HUSH-6, Chasseur de Mères | [DETTE] | — |
 | Faune de Pangaea, castes Sauria, Porte-Ruche Colosse | [DETTE] | `wild-boar-host` (principe d'hôte animal) |
 | Ingénieur (le Dormeur) | [À CRÉER] | — |
@@ -5026,3 +5028,19 @@ Les cellules 0–3 servent au repos, 4–7 au déplacement, 8 à l'anticipation,
 Le chargement appartient à l'entrée et à la reprise réussie du chapitre. Une source absente, incomplète ou étrangère conserve le corps vectoriel entier. La disponibilité de cet atlas est indépendante de celle des trois sources de l'adulte. Les anciens objets après reprise, les Chœurs, le boss adulte et les deux autres écosystèmes sont exclus de ce raccord. Les données sauvegardées ne reçoivent ni distance d'animation ni marqueur de contact. Le nom, la barre de santé et l'ellipse jaune d'anticipation restent dessinés par leur propriétaire natif ; les sept pointes de la Reine-Mère ne sont pas appliquées aux gardes.
 
 La mort lit les 1,2 seconde natives et conserve l'alpha 0,3. La dernière cellule est maintenue jusqu'à la disparition du corps. L'atlas ne possède pas de ligne de blessure distincte : les effets natifs restent responsables de ce retour visuel. Le mouvement réduit fixe les cycles ordinaires de repos et de marche sans supprimer l'anticipation, le contact ou la mort. Les bornes visuelles couvrent les cellules complètes et leurs miroirs, sans agrandir les collisions ni la portée d'attaque. Les [références et la provenance](../development/QUEEN_MOTHER_GUARD_ART_PROVENANCE_20261117.json), la [planche du rendu intégré](../development/QUEEN_MOTHER_GUARD_ART_OVERVIEW_20261117.png) et le [rapport de vérification](../development/QUEEN_MOTHER_GUARD_ART_QA_20261117.md) distinguent la calibration statique, les poses de contrôle et les événements réellement exécutés par le moteur.
+
+### 56.20 Chœurs du chapitre Reine-Mère (V188, 2026-11-17)
+
+Les trois cibles nommées CHŒUR 1, CHŒUR 2 et CHŒUR 3 du chapitre existant reçoivent une même présentation originale Tantalus. Une base basse à deux appuis fusionnés soutient une arche costale ouverte, étranglée en son milieu, avec une membrane bordeaux/mauve. Cette forme distingue les cibles de l'œuf, du garde et de la crête de l'adulte. Les références locales ont guidé les matières et le contraste ; elles n'établissent pas une anatomie de Chœur. Aucun nom de caste, lien à Genocide ou identité du Chœur d'Éloïse n'est attribué à cette création.
+
+La planche intacte `assets/queen-mother/v188/choirs-original.png` fournit quatre cellules complètes de 627 × 627 dans un PNG RGBA de 1254 × 1254, soit 920 091 octets. Les quatre fonctions sont présence A, présence B, contraction au coup reçu et neutralisé. Elles emploient une échelle unique de 90/525 et les appuis de la base centrale mesurés par pose. La vue est presque frontale ; le miroir inverse l'asymétrie des lames. Il ne transforme pas cette vue en profil latéral documenté.
+
+Le corps physique demeure 66 × 90, avec 110 points de santé, sans locomotion ni attaque propres au Chœur. Le recul générique produit par les dégâts natifs reste possible et inchangé. Le cycle discret A/B lit l'horloge existante à une cellule par seconde ; le mouvement réduit conserve A. La réaction lit le vrai `hurtClock`, sans marqueur privé, et la mort est prioritaire. La présence B est environ deux pixels plus basse, la réaction mesure 72 pixels et le neutralisé 37,2 pixels à l'échelle commune. Aucun agrandissement par pose ne masque ces proportions. Les franges rougeâtres et la quasi-opacité du corps source, majoritairement à alpha 253, restent conservées.
+
+Les trois objets courants sont admis par leur identité, leur ID, leur rôle et leur indice natifs. L'admission n'est pas limitée à la phase « choirs » : le dernier cadavre reste illustré après le passage à « mother-1 », jusqu'à l'expiration native. Un ancien objet après reprise, une copie détachée, un garde, l'adulte ou une cible homonyme des deux autres écosystèmes ne reçoit pas cette présentation. Le chargement du Chœur reste indépendant de celui de l'adulte et des gardes ; une source indisponible conserve le dessin vectoriel entier.
+
+Les effets de neutralisation restent ceux du chapitre : un seul indice est coché, la pression perd 16 avec plancher à zéro et le jalon existant est produit une fois. Le boss reste protégé tant qu'une cible subsiste ; la composante de pression liée à sa phase demeure après leur disparition. Les trois cibles ne deviennent ni des nurseries, ni des artères, ni des balises. La sauvegarde conserve les états déjà prévus ; une blessure passée n'est pas rejouée à la reprise et un cadavre conserve seulement son temps restant.
+
+Le nom et la barre restent dans leur passage natif. Un éventuel avertissement résiduel conserve l'ellipse target inclinée à +0,18 radian, sans pointes royales ; cet état de compatibilité n'ajoute aucune attaque. Le corps neutralisé garde l'alpha natif 0,3 et la durée de 1,2 seconde, avec sa faible hauteur et les occultations possibles du monde. Les bornes de visibilité sont conservatrices et ne modifient ni collision, ni portée, ni ordre des acteurs.
+
+L'adulte, les gardes et les trois cibles locales disposent ainsi d'un habillage illustré. Cela ne définit pas les « trois castes reliées » de l'arc proposé, ne produit ni les ondes, ni la vibration collective CQ-05, ni les lieux ou rencontres étendus de TR-0. `complete-royal-cast` demeure ouverte, avec 21 opérations jouables, 19 partielles et deux effectives ; aucune déclaration canonique n'est promue. Les [sources et choix de création](../development/QUEEN_MOTHER_CHOIR_ART_PROVENANCE_20261117.json), la [planche intégrée](../development/QUEEN_MOTHER_CHOIR_ART_OVERVIEW_20261117.png) et la [QA](../development/QUEEN_MOTHER_CHOIR_ART_QA_20261117.md) distinguent les prototypes de placement, les événements natifs, les rendus observés et leurs limites.

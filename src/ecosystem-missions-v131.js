@@ -12,6 +12,8 @@ import { preloadQueenMotherArtV188, queenMotherArtReadyV188, isQueenMotherArtOwn
 import { preloadQueenMotherGuardArtV188, queenMotherGuardArtReadyV188, isQueenMotherGuardArtOwnerV188,
   markQueenMotherGuardContactV188, advanceQueenMotherGuardContactV188, clearQueenMotherGuardPresentationV188,
   drawQueenMotherGuardArtV188, queenMotherGuardVisualBoundsV188 } from './queen-mother-guard-art-v188.js';
+import { preloadQueenMotherChoirArtV188, queenMotherChoirArtReadyV188, isQueenMotherChoirArtOwnerV188,
+  drawQueenMotherChoirArtV188, queenMotherChoirVisualBoundsV188 } from './queen-mother-choir-art-v188.js';
 
 const clone = value => structuredClone(value);
 const list = value => Array.isArray(value) ? value : [];
@@ -24,7 +26,7 @@ const campaign = (id, operationId, name, summary, objective) => Object.freeze({ 
   name, summary, objective, mode: 'STORY', worldId: 'world-05-lethe', year: 2204, canon: 'project-continuity',
   source: 'Tantalus Special Operations', routes: 2, templateId: 'planet-exterior',
   description: operationId === 'queen-mother-song'
-    ? 'Adaptation jouable originale : Reine-Mère rouge illustrée et animée ; gardes illustrés et animés, Chœurs vectoriels provisoires. Le casting royal complet et les actes étendus restent à produire.'
+    ? 'Adaptation jouable originale : Reine-Mère rouge, gardes et trois Chœurs locaux illustrés et animés. Le casting royal complet et les actes étendus restent à produire.'
     : 'Adaptation jouable originale : acteurs biologiques vectoriels provisoires. Les planches dédiées et le scénario complet restent à produire.',
   artworkStatus: ecosystemArtworkStatusV188(operationId), canonExact: false, implementationStatus: 'partial' });
 export const ECOSYSTEM_CAMPAIGNS_V131 = Object.freeze([
@@ -114,6 +116,7 @@ export function withEcosystemMissionsV131(BaseEngine) {
       this.configureEcosystemWorldV131();
       if (this.ecosystemV131.operationId === 'queen-mother-song') {
         preloadQueenMotherArtV188(this.images);preloadQueenMotherGuardArtV188(this.images);
+        preloadQueenMotherChoirArtV188(this.images);
       }
       if (options.resumeState) this.lastResumeResult = this.applyResumeState(options.resumeState);
       this.syncEcosystemV131();
@@ -601,6 +604,7 @@ export function withEcosystemMissionsV131(BaseEngine) {
       this.bullets = []; this.hostileProjectiles = [];
       if (this.ecosystemV131.operationId === 'queen-mother-song') {
         preloadQueenMotherArtV188(this.images);preloadQueenMotherGuardArtV188(this.images);
+        preloadQueenMotherChoirArtV188(this.images);
       }
       const checkpoint = raw.specialOperation.ecosystemCheckpointV131;
       if (checkpoint && this.validateEcosystemResumeV131(checkpoint).valid) {
@@ -637,14 +641,16 @@ export function withEcosystemMissionsV131(BaseEngine) {
       const visible = super.getVisibleEnemiesV65();
       if (!this.isEcosystemV131() || this.ecosystemV131.operationId !== 'queen-mother-song'
         || !this.camera) return visible;
-      const queenReady = queenMotherArtReadyV188(this.images), guardReady = queenMotherGuardArtReadyV188(this.images);
-      if (!queenReady && !guardReady) return visible;
+      const queenReady = queenMotherArtReadyV188(this.images), guardReady = queenMotherGuardArtReadyV188(this.images),
+        choirReady = queenMotherChoirArtReadyV188(this.images);
+      if (!queenReady && !guardReady && !choirReady) return visible;
       const admitted = new Set(visible);
       for (const actor of this.enemies) {
         if (admitted.has(actor) || actor.dormant
           || (!actor.alive && !(actor.deathClock > 0))) continue;
         const bounds = queenReady && isQueenMotherArtOwnerV188(this, actor) ? queenMotherVisualBoundsV188(actor)
-          : guardReady && isQueenMotherGuardArtOwnerV188(this, actor) ? queenMotherGuardVisualBoundsV188(actor) : null;
+          : guardReady && isQueenMotherGuardArtOwnerV188(this, actor) ? queenMotherGuardVisualBoundsV188(actor)
+          : choirReady && isQueenMotherChoirArtOwnerV188(this, actor) ? queenMotherChoirVisualBoundsV188(actor) : null;
         if (bounds && bounds.x + bounds.w >= this.camera.x - 64 && bounds.x <= this.camera.x + 1280 + 64
           && bounds.y + bounds.h >= this.camera.y - 64 && bounds.y <= this.camera.y + 720 + 64) admitted.add(actor);
       }
@@ -690,7 +696,8 @@ export function withEcosystemMissionsV131(BaseEngine) {
       const caste = SAURIA_CASTES_V131.find(caste => caste.id === (member?.caste || descriptor.caste));
       const healthy = member?.status === 'healthy', target = descriptor.role === 'target', boss = descriptor.role === 'boss';
       const illustrated = drawQueenMotherArtV188(ctx, this.images, this, actor)
-        || drawQueenMotherGuardArtV188(ctx, this.images, this, actor);
+        || drawQueenMotherGuardArtV188(ctx, this.images, this, actor)
+        || drawQueenMotherChoirArtV188(ctx, this.images, this, actor);
       if (!illustrated) {
         ctx.save(); ctx.globalAlpha = !actor.alive ? .3 : actor.actionPhase === 1 ? .35 : 1;
         ctx.translate(actor.x + actor.w / 2, actor.y + actor.h);
@@ -715,12 +722,13 @@ export function withEcosystemMissionsV131(BaseEngine) {
         ctx.restore();
       } else if (actor.windup > 0) {
         // Keep each role's native warning above its illustrated body. The
-        // guard has an ellipse only; the adult keeps its seven extra points.
+        // guard and Choir have their own ellipse; the adult keeps its seven
+        // extra points. A residual target windup is not a new Choir attack.
         ctx.save(); ctx.globalAlpha = !actor.alive ? .3 : actor.actionPhase === 1 ? .35 : 1;
         ctx.translate(actor.x + actor.w / 2, actor.y + actor.h); ctx.scale(actor.facing < 0 ? -1 : 1, 1);
         const w = actor.w, h = actor.h;
         ctx.strokeStyle = '#ffcb68'; ctx.lineWidth = 4;
-        ctx.beginPath(); ctx.ellipse(0, -h * .48, w * .47, h * .39, -.1, 0, Math.PI * 2); ctx.stroke();
+        ctx.beginPath(); ctx.ellipse(0, -h * .48, w * .47, h * .39, target ? .18 : -.1, 0, Math.PI * 2); ctx.stroke();
         if (boss) for (let index = 0; index < 7; index++) { const x = -w * .45 + index * w * .13;
           ctx.beginPath(); ctx.moveTo(x, -h * .78); ctx.lineTo(x + w * .08, -h * .98); ctx.lineTo(x + w * .13, -h * .72); ctx.stroke(); }
         ctx.restore();
@@ -745,7 +753,7 @@ export function withEcosystemMissionsV131(BaseEngine) {
           : `HÔTES SAUVÉS ${state.rescued}/3 · VACCINS ${state.vaccineCharges} · SEPT CASTES : TRAQUEUR / BÉLIER / CRACHEUR / BOND / FOUISSEUR / NAGEUR / SENTINELLE`;
       ctx.fillText(extra, 30, 174); ctx.fillStyle = '#a5b8b5';
       ctx.fillText(state.operationId === 'queen-mother-song'
-        ? 'ADAPTATION ORIGINALE · REINE-MÈRE ET GARDES ILLUSTRÉS · CHŒURS PROVISOIRES'
+        ? 'ADAPTATION ORIGINALE · REINE-MÈRE, GARDES ET CHŒURS ILLUSTRÉS'
         : 'ADAPTATION ORIGINALE · PERSONNAGES VECTORIELS PROVISOIRES · PLANCHES DÉDIÉES À PRODUIRE', 30, 191); ctx.restore();
     }
   };

@@ -1154,6 +1154,111 @@ export function verifyQueenMotherGuardRegistryContinuationV188(operations, count
   return historical;
 }
 
+// Queen Mother choir source continuation from exact R. The original presentation
+// does not close complete-royal-cast or change any registry declaration.
+export const TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188 = freeze({
+  "baseline": "ded6ef34dd35a659313e9361b407f6b94b62fb96",
+  "successors": {
+    "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
+      "previousSha256": "c1c14fc8e850a7bbfd4946196edd233db6324b7898c4878298554f2ad0bbd438",
+      "currentSha256": "d03dcc6e75b22a69890b389d5c0ef84311d5ea2e12d9dbe8233c2ff78bd419cb"
+    },
+    "package.json": {
+      "previousSha256": "3066253712f123ae2008fced03a1473b849f67a8d364bbc0864f30588f35d609",
+      "currentSha256": "b74e5e7d949a29976fb562f1a8215a01426a1b950301cc37b25939421e2becf1"
+    },
+    "scripts/verify-audit-continuation-v157.mjs": {
+      "previousSha256": "a3230677a0ea8bcafab21917da2823e49777bcc2c1e406bb9dc6b91e396c2155",
+      "currentSha256": "a92ffa1c385c12159293a1d18d36c881180f48291bc58947076ed2f7b67784d3"
+    },
+    "scripts/verify-audit-continuation-v158.mjs": {
+      "previousSha256": "80f296774fff4bbd1eaecca48fdd4c63cb1beaca03ed0c44a3d674ebfae87a28",
+      "currentSha256": "09977386675167a50d8e399532c948c344d753237ca50383d93bb5cda112fc68"
+    },
+    "scripts/verify-audit-v143.mjs": {
+      "previousSha256": "3a2ad226bf0ae4076e3fbd526f2d03fa3bd7459f8811f0d27d6a1a33a3626e85",
+      "currentSha256": "38cc0350f341d18a3536944e19391285e4756195e3c82af6e923d4072a615d08"
+    },
+    "scripts/verify-black-cocoon-presentation-v158.mjs": {
+      "previousSha256": "a35cab0472f11b1e656aec251a035dc1cd3a4b9df6e6803ab0f2da83ab313cb1",
+      "currentSha256": "cb52f555918b941d0eed87a3e4b10fcfdab8563536e47187b8b42dad3db6e930"
+    },
+    "scripts/verify-public-release-v86.mjs": {
+      "previousSha256": "0d663f627b878c05ecd067c417d2bd2895ffeede9de0b21e6ad3852134d10a7d",
+      "currentSha256": "d3e7ef7d42dc48cd69d6f0ffc7c577545b5682a82f0411ea753c1b44c248268a"
+    },
+    "src/ecosystem-missions-v131.js": {
+      "previousSha256": "34fc724a8b7c758153b42f7f1542512056a12aef6b6c119f6e8cea7ce9fa5c7d",
+      "currentSha256": "bced08c735be1c49f01afab83cc0e134960f2bdc90a480dca2d056eabc3e0be3"
+    },
+    "src/ecosystem-systems-v131.js": {
+      "previousSha256": "577e12210793abf2ea46df9afef38aeab26bbce12a960073379cf6a639993d5c",
+      "currentSha256": "b3719aaea2f23be2a031c15cb66d857386f11a3f410230d5885f6c9f21e16272"
+    },
+    "src/i18n-en-catalog-v185.js": {
+      "previousSha256": "4b3e6552f422a1a7d30b9940eebd81880e292bcbae5067cf1e2697284dbca917",
+      "currentSha256": "11a0ec21f4ac8a04b65af1a3532d190996eed9c806fdbede9a9334975dc8e5dd"
+    },
+    "sw.js": {
+      "previousSha256": "e31f82016ae97434c8805dd00d35279c6246bc9c52ddc32faa3c678996db8d22",
+      "currentSha256": "41c8c1094fd4ae3edd95abb3d3921de4342e6475aed0eada96f97f0c36321eb4"
+    }
+  },
+  "addedSourceSuccessors": {
+    "scripts/verify-queen-mother-art-v188.mjs": {
+      "previousSha256": "889d7e7a91eecb6fa9ba780982a164c458c394b8174d59514ce8baf5125f15b3",
+      "currentSha256": "2bfd94395adcd5ca0b6d6b6ae9ed8dd9bf9d550e3cb90b3dc52b903e63de2b24"
+    }
+  },
+  "addedSources": {
+    "scripts/verify-queen-mother-choir-art-v188.mjs": "c2d672e1d1e671042d799712f94bbcdac86a66a39ee2a358beaeab403f20c81d",
+    "src/queen-mother-choir-art-v188.js": "d5258e5b3c571f571a87ca4b1345d32c79504888c994fa0774adef68bdf85ed6"
+  }
+});
+
+export const TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_REGISTRY_V188 = freeze({
+  baseline: 'ded6ef34dd35a659313e9361b407f6b94b62fb96',
+  baselineRegistry: {
+    path: 'src/special-operations-v131.js',
+    sha256: '433ddc7b821c98b973c10fc9e3aa39bc66c77e8cf9364dd9f1a25d03b70b08af',
+    declarationsSha256: '46cdb671b6cc3cb1591c5fe4cd124d85335278d93b79a386cddbd9cc4995618a'
+  },
+  operationId: 'queen-mother-song',
+  projection: 'identity',
+  removedDebts: [],
+  newChangedIds: [],
+  historicalChangedIds: ['cargo-brutal', 'broodstorm', 'queen-mother-song'],
+  previousRemainingMechanics: ['complete-royal-cast'],
+  currentRemainingMechanics: ['complete-royal-cast'],
+  previousCounts: { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 },
+  currentCounts: { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 }
+});
+
+export function verifyQueenMotherChoirRegistryContinuationV188(operations, counts, readSource = readRepository) {
+  const continuation = TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_REGISTRY_V188;
+  assert.equal(sha(readSource(continuation.baselineRegistry.path)), continuation.baselineRegistry.sha256,
+    'Choir presentation must retain the exact R registry source bytes');
+  const matches = operations.filter(operation => operation.id === continuation.operationId);
+  assert.equal(matches.length, 1, 'Exactly one Queen Mother registry declaration is required');
+  const operation = matches[0];
+  assert.deepEqual(operation.remainingMechanics, continuation.currentRemainingMechanics,
+    'Choir presentation leaves the complete royal cast debt open');
+  assert.equal(operation.implementationStatus, 'partial', 'Choir presentation does not promote Queen Mother');
+  assert.equal(operation.canonExact, false, 'Choir presentation assigns no canonical identity');
+  assert.equal(operation.playable, true);
+  assert.deepEqual(counts, continuation.currentCounts, 'Choir presentation does not change registry counts');
+  const declarations = operations.map(entry => Object.keys(entry).filter(key => key !== 'campaign').sort()
+    .map(key => [key, entry[key]]));
+  assert.equal(sha(JSON.stringify(declarations)), continuation.baselineRegistry.declarationsSha256,
+    'Choir presentation must preserve every exact R registry declaration');
+  const historical = verifyQueenMotherGuardRegistryContinuationV188(operations, counts, readSource);
+  assert.deepEqual(historical.currentCounts, continuation.previousCounts);
+  assert.deepEqual(historical.changedIds, continuation.historicalChangedIds);
+  assert.equal(new Set(historical.changedIds).size, historical.changedIds.length);
+  assert.equal(historical.unchangedOperations, 18);
+  return historical;
+}
+
 export function reviewedTantalusPrioritiesDigestV188(path, endpoint) {
   const historical = TANTALUS_PRIORITIES_SUCCESSORS_V188[path];
   const receipt = historical || TANTALUS_PRIORITIES_CONTINUATION_V188.successors[path];
@@ -1209,11 +1314,19 @@ export function reviewedTantalusPrioritiesDigestV188(path, endpoint) {
   }
   const guards = TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188;
   const guard = guards.successors[path] || guards.addedSourceSuccessors[path];
-  if (!guard) return current;
-  assert.equal(current, guard.previousSha256, 'Broken c1d4c636-to-queen-mother-guard source chain: ' + path);
-  assert.ok(validHash(guard.currentSha256), 'Invalid queen-mother-guard source digest: ' + path);
-  assert.notEqual(guard.currentSha256, guard.previousSha256, 'A queen-mother-guard successor must identify changed bytes: ' + path);
-  return guard.currentSha256;
+  if (guard) {
+    assert.equal(current, guard.previousSha256, 'Broken c1d4c636-to-queen-mother-guard source chain: ' + path);
+    assert.ok(validHash(guard.currentSha256), 'Invalid queen-mother-guard source digest: ' + path);
+    assert.notEqual(guard.currentSha256, guard.previousSha256, 'A queen-mother-guard successor must identify changed bytes: ' + path);
+    current = guard.currentSha256;
+  }
+  const choirs = TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188;
+  const choir = choirs.successors[path] || choirs.addedSourceSuccessors[path];
+  if (!choir) return current;
+  assert.equal(current, choir.previousSha256, 'Broken ded6ef34-to-queen-mother-choir source chain: ' + path);
+  assert.ok(validHash(choir.currentSha256), 'Invalid queen-mother-choir source digest: ' + path);
+  assert.notEqual(choir.currentSha256, choir.previousSha256, 'A queen-mother-choir successor must identify changed bytes: ' + path);
+  return choir.currentSha256;
 }
 
 export function verifyTantalusPrioritiesV188(readSource = readRepository) {
@@ -1320,6 +1433,30 @@ export function verifyTantalusPrioritiesV188(readSource = readRepository) {
     assert.notEqual(receipt.currentSha256, receipt.previousSha256,
       'An added-source successor must identify changed bytes: ' + path);
   }
+  const choirs = TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188;
+  const priorAddedSources = new Map([...historicalAddedSources, ...Object.entries(guards.addedSources)]);
+  assert.deepEqual(Object.keys(choirs.addedSourceSuccessors), ['scripts/verify-queen-mother-art-v188.mjs'],
+    'The choir continuation may supersede only the explicitly reviewed Q notice test');
+  for (const [path, receipt] of Object.entries(choirs.successors)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
+    assert.equal(priorAddedSources.has(path), false,
+      'A choir successor cannot replace a separately added V188 source: ' + path);
+    const previous = guards.successors[path];
+    assert.ok(previous, 'A choir successor needs a reviewed R endpoint: ' + path);
+    assert.equal(receipt.previousSha256, previous.currentSha256, 'Broken historical-to-ded6ef34 endpoint: ' + path);
+  }
+  for (const [path, receipt] of Object.entries(choirs.addedSourceSuccessors)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
+    assert.equal(successors.has(path) || Object.hasOwn(choirs.successors, path) || Object.hasOwn(choirs.addedSources, path), false,
+      'A choir added-source successor cannot disguise or duplicate another source: ' + path);
+    assert.ok(Object.hasOwn(guards.addedSourceSuccessors, path), 'A choir added-source successor must preserve its R predecessor');
+    assert.equal(receipt.previousSha256, guards.addedSourceSuccessors[path].currentSha256,
+      'Broken R added-source predecessor; Unreviewed V188 source bytes: ' + path);
+    assert.notEqual(receipt.currentSha256, receipt.previousSha256,
+      'A choir added-source successor must identify changed bytes: ' + path);
+  }
   for (const [path, receipt] of successors) {
     assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
     assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
@@ -1329,11 +1466,12 @@ export function verifyTantalusPrioritiesV188(readSource = readRepository) {
   const addedSources = new Set();
   for (const [path, digest] of [...Object.entries(continuation.addedSources), ...Object.entries(prologue.addedSources),
     ...Object.entries(quay.addedSources), ...Object.entries(cargoAbyss.addedSources), ...Object.entries(hadal.addedSources),
-    ...Object.entries(broodstorm.addedSources), ...Object.entries(queenMother.addedSources), ...Object.entries(guards.addedSources)]) {
+    ...Object.entries(broodstorm.addedSources), ...Object.entries(queenMother.addedSources), ...Object.entries(guards.addedSources),
+    ...Object.entries(choirs.addedSources)]) {
     assert.equal(successors.has(path) || addedSources.has(path), false, 'A new V188 source cannot replace a successor or added source: ' + path);
     addedSources.add(path);
     assert.ok(validHash(digest), 'Invalid new V188 source digest: ' + path);
-    const endpoint = Object.hasOwn(guards.addedSourceSuccessors, path)
+    const endpoint = Object.hasOwn(guards.addedSourceSuccessors, path) || Object.hasOwn(choirs.addedSourceSuccessors, path)
       ? reviewedTantalusPrioritiesDigestV188(path, digest) : digest;
     assert.equal(sha(readSource(path)), endpoint, 'Unreviewed V188 source bytes: ' + path);
   }
