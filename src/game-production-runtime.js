@@ -65,6 +65,7 @@ import { withVfxV188 } from './vfx-v188.js';
 import { withRunOptionsRuntimeV188 } from './run-options-runtime-v188.js';
 import { withCasteBehaviorsV188 } from './caste-behaviors-v188.js';
 import { withCreatureScaleV188 } from './creature-scale-v188.js';
+import { beginQueenMotherGuardStepV188, finishQueenMotherGuardStepV188 } from './queen-mother-guard-art-v188.js';
 
 export * from './game-production-core.js';
 
@@ -111,6 +112,15 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
 // insertion grace) only starts when control is given, and it can hold the
 // mission-complete event of any mode until the boarding is over.
 export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepthRoomsV188(withQz17LevelDressingV188(withCasteBehaviorsV188(withInsertionSafeZoneV188(withRunOptionsRuntimeV188(withAsphodeleMissionDressingV188(withVfxV188(withFranchiseFidelityV188(withGameplayGapsV188(withCombatFeelV188(withCreatureScaleV188(withFootstepCuesV188(withMissionObjectivePanelV188(withTensionDirectorV188(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(withMissionLayerMatteV188(V158ProductionEngine))))))))))))))))))))) {
+  updateEnemy(actor, delta) {
+    // Observe final accepted displacement after every existing wrapper,
+    // including insertion grace and depth holds. Their order is unchanged.
+    const step = beginQueenMotherGuardStepV188(this, actor, delta);
+    const result = super.updateEnemy(actor, delta);
+    if (step) finishQueenMotherGuardStepV188(this, actor, step);
+    return result;
+  }
+
   start(options = {}) {
     options = isolateForgeMissionOptionsV136(options);
     this.expectedMissionSignatureV130 = options.missionLevel?.signature || null;

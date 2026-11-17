@@ -1,8 +1,8 @@
-// Original playable adaptations. Dedicated Queen Mother art does not certify
-// the remaining vector cast or the complete narrative campaign corpus.
+// Original playable adaptations. Queen Mother and adapted guard art do not
+// certify the remaining vector Choirs or the complete narrative campaign corpus.
 export const ECOSYSTEM_OPERATIONS_V131 = Object.freeze(['queen-mother-song', 'hive-world', 'pangaea-second-extinction']);
 export function ecosystemArtworkStatusV188(operationId) {
-  return operationId === 'queen-mother-song' ? 'queen-mother-art-and-vector-cast' : 'original-vector-prototype';
+  return operationId === 'queen-mother-song' ? 'queen-mother-and-guard-art-with-vector-choirs' : 'original-vector-prototype';
 }
 export const SAURIA_CASTES_V131 = Object.freeze([
   Object.freeze({ id: 'hunter', label: 'Traqueur', speed: 105, health: 110, damage: 12, shape: 'raptor', action: 'flank' }),

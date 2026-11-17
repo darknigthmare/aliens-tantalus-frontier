@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-queen-mother-art-20261117';
+const CACHE = 'atf-v143-queen-mother-guard-art-20261117';
 const SHELL = Object.freeze([
   '/src/alien-base-bridge-v1.js',
   '/src/alien-base-snapshot-v1.js',
@@ -72,6 +72,7 @@ const SHELL = Object.freeze([
   '/src/hadal-player-art-v188.js',
   '/src/broodstorm-queen-art-v188.js',
   '/src/queen-mother-art-v188.js',
+  '/src/queen-mother-guard-art-v188.js',
   '/src/npc-circulation-v158.js',
   '/src/npc-annex-circulation-v159.js',
   '/src/forge-npcs-v158.js',

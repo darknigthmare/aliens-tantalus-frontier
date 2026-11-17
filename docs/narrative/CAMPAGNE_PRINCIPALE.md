@@ -2945,14 +2945,14 @@ Elles se jouent surtout au hub, avec des PNJ **[PRÉSENT]**. Besoins **[À CRÉE
 
 ### 30.3 Arc 3 · TR-0, la Ruche-monde
 
-**Socle de l'arc :** surface vivante, organes, noyau **[DETTE]** (`complete-organ-biomes`, `dedicated-planet-queen-art`) ; Base Ombelle sous la résine **[À CRÉER]** ; adulte Reine-Mère rouge **[PRÉSENT]** dans le chapitre local « Le chant de la Reine-Mère » (huit poses composées, §56.18), réemploi dans l'arc étendu **[À CRÉER]** ; Chœurs et casting royal complet **[DETTE]** (`complete-royal-cast`) ; praetorian **[PRÉSENT]**.
+**Socle de l'arc :** surface vivante, organes, noyau **[DETTE]** (`complete-organ-biomes`, `dedicated-planet-queen-art`) ; Base Ombelle sous la résine **[À CRÉER]** ; adulte Reine-Mère rouge **[PRÉSENT]** dans le chapitre local « Le chant de la Reine-Mère » (huit poses composées, §56.18), gardes locaux illustrés par réemploi adapté de l'atlas praetorian **[PRÉSENT]** (§56.19), réemploi dans l'arc étendu **[À CRÉER]** ; Chœurs et casting royal complet **[DETTE]** (`complete-royal-cast`) ; praetorian **[PRÉSENT]**.
 
 | Mission | Props | Personnages / ennemis | Animations | VFX | Actions |
 | --- | --- | --- | --- | --- | --- |
 | 3.1 Atterrissage | Croûte qui respire **[DETTE]** | — | Surface animée **[DETTE]** | Pulsations **[À CRÉER]** | Jauge de bruit **[CODE]** (alerte existante) |
 | 3.2 Base Ombelle | Laboratoire W-Y sous résine, registres d'expédition **[À CRÉER]** | — | — | — | Lecture **[CODE]** |
 | 3.3 Trois Chœurs | Nurserie, artère royale, balises **[CODE]** (chapitre existant) | Castes reliées **[DETTE]** | — | Ondes du Chœur **[À CRÉER]** | Rupture des Chœurs **[CODE]** |
-| 3.4 La Reine-Mère | Salle royale **[CODE]** (chapitre existant) | Adulte rouge locale **[PRÉSENT]** ; rencontre de l'arc étendu **[À CRÉER]** | Huit poses composées **[PRÉSENT]** ; quatre phases natives **[CODE]** | — | Boss local **[CODE]** |
+| 3.4 La Reine-Mère | Salle royale **[CODE]** (chapitre existant) | Adulte rouge et gardes locaux illustrés **[PRÉSENT]** ; rencontre de l'arc étendu **[À CRÉER]** | Huit poses composées de l'adulte et seize cellules réemployées pour les gardes **[PRÉSENT]** ; quatre phases natives **[CODE]** | — | Boss local **[CODE]** |
 | 3.5 Le noyau | Organes, noyau, sas **[CODE]** | — | Effondrement **[À CRÉER]** | Effondrement, poussière organique **[À CRÉER]** | Fuite chronométrée **[CODE]** |
 | Annexes (2) | Chambre froide **[À CRÉER]** | Chercheur survivant **[À CRÉER]** ; praetorian capturé **[PRÉSENT]** | Créature entravée **[À CRÉER]** | — | Capture d'organisme **[À CRÉER]** |
 | CQ-04 à 06 | Vue orbitale de TR-0, décollage **[À CRÉER]** | — | — | — | — |
@@ -3139,6 +3139,7 @@ Ces missions réutilisent au maximum les décors de zone **[PRÉSENT]** (`ship-*
 | Reine récifale, lignée fouisseuse, lignée aérienne | [À CRÉER] (variantes de castes [PRÉSENT]) |
 | Reine volante | Art local Broodstorm [PRÉSENT] ; atterrissage et autres rencontres [À CRÉER] |
 | Reine-Mère adulte | Art et huit poses du chapitre local [PRÉSENT] ; autres rencontres [À CRÉER] |
+| Gardes de la Reine-Mère | Présentation locale adaptée de l'atlas praetorian [PRÉSENT] ; aucune nouvelle attribution de caste |
 | Chœurs, casting royal complet et Ruche-monde | [DETTE] |
 | Jeri, SAINT, Éloïse, HUSH-6, Chasseur de Mères | [DETTE] |
 | Synthétique de maintenance industrielle (boss de Kéos) | [À CRÉER] |
@@ -3224,7 +3225,8 @@ Pour chaque élément à créer, un **lot de génération** type est indiqué :
 | Lignée aérienne (planeurs) | [À CRÉER] | — |
 | Reine volante | Art local Broodstorm [PRÉSENT] ; autres rencontres [À CRÉER] | Trois planches de quatre poses ; §56.17 |
 | Reine-Mère adulte | Art local [PRÉSENT] ; autres rencontres [À CRÉER] | Deux planches de corps, quatre bras composés ; §56.18 |
-| Chœurs, casting royal complet et Ruche-monde | [DETTE] | Les Chœurs et gardes du chapitre gardent leur présentation vectorielle provisoire |
+| Gardes de la Reine-Mère | Présentation locale adaptée [PRÉSENT] | Atlas praetorian existant, seize cellules, six gardes initiaux et douze renforts possibles ; §56.19 |
+| Chœurs, casting royal complet et Ruche-monde | [DETTE] | Les trois Chœurs du chapitre gardent leur présentation vectorielle provisoire ; l'illustration des gardes ne clôture pas le casting royal |
 | Jeri, SAINT, Éloïse, HUSH-6, Chasseur de Mères | [DETTE] | — |
 | Faune de Pangaea, castes Sauria, Porte-Ruche Colosse | [DETTE] | `wild-boar-host` (principe d'hôte animal) |
 | Ingénieur (le Dormeur) | [À CRÉER] | — |
@@ -5012,3 +5014,15 @@ Le moteur garde son corps physique de 170 × 210, ses 600 points de santé, sa p
 Une même échelle anatomique lie les huit corps aux quatre membres. Les appuis des poses repliées sont recalés au sol sans redimensionner l'acteur. Le nom, la barre de santé et l'avertissement jaune d'anticipation restent dans le passage natif, au-dessus de la composition. La mort lit la durée native de 1,2 seconde et conserve l'alpha 0,3. Seules les bornes de visibilité tiennent compte de la crête, de la queue et des bras ; les collisions restent inchangées.
 
 La dette locale `dedicated-queen-mother-animation` est close par ce raccord. Le chapitre reste partiel : `complete-royal-cast` demeure ouvert, comme les lieux, cinématiques et rencontres proposés pour l'arc étendu de TR-0. Le registre conserve 21 opérations jouables, 19 partielles et deux effectives, avec ses snapshots historiques intacts. Les [sources et prompts](../development/QUEEN_MOTHER_ART_PROVENANCE_20261117.json), la [planche intégrée](../development/QUEEN_MOTHER_ART_OVERVIEW_20261117.png) et la [QA](../development/QUEEN_MOTHER_ART_QA_20261117.md) documentent les itérations rejetées, la composition, les contrôles exécutés et leurs limites.
+
+### 56.19 Gardes du chapitre Reine-Mère (V188, 2026-11-17)
+
+Les six gardes initiaux et les douze renforts possibles du chapitre existant reçoivent une présentation animée issue de l'atlas normalisé `xenomorph-praetorian-action-sheet.png`, déjà présent dans le projet. Le PNG de 1024 × 1024 et ses seize cellules de 256 × 256 sont réemployés intacts. Cette adaptation visuelle du rôle `guard` ne transforme pas les acteurs en une nouvelle caste : leurs descripteurs restent sans caste, sans profil de catalogue importé et sans changement de statut canonique. Les trois Chœurs restent vectoriels. Le registre garde `complete-royal-cast` ouvert et ses 21 opérations jouables, 19 partielles et deux effectives ; aucune dette supplémentaire n'est déclarée close.
+
+Une échelle commune de 70/161 conserve les proportions entre les seize poses. Chaque cellule est dessinée entière, dans les deux directions, avec son ancrage horizontal anatomique et la ligne d'appui source à Y = 240. Le bassin n'est pas immobilisé verticalement : les flexions et l'effondrement restent visibles. Cette calibration manuelle ne mesure pas une taille canonique ; elle ajuste la présentation au corps physique natif de 58 × 70. La santé de 105, la vitesse de 72 et les règles de contact restent celles du garde existant.
+
+Les cellules 0–3 servent au repos, 4–7 au déplacement, 8 à l'anticipation, 9 au contact accepté, 10–11 à sa récupération et 12–15 à la mort. Le déplacement est observé après le retour de toutes les couches natives du moteur, y compris celles qui retiennent l'acteur pendant la grâce d'insertion. Le cycle de marche dépend de la distance effectivement parcourue, à raison de 7,2 pixels par cellule. La vitesse déclarée, l'alerte ou une tentative de déplacement bloquée ne suffisent pas à l'avancer. L'événement de frappe du catalogue praetorian n'est pas importé : l'image de contact suit uniquement le retour positif de la vraie fonction de dommage native. Son marqueur privé dure 0,3 seconde et expire pendant la mise à jour, même hors champ.
+
+Le chargement appartient à l'entrée et à la reprise réussie du chapitre. Une source absente, incomplète ou étrangère conserve le corps vectoriel entier. La disponibilité de cet atlas est indépendante de celle des trois sources de l'adulte. Les anciens objets après reprise, les Chœurs, le boss adulte et les deux autres écosystèmes sont exclus de ce raccord. Les données sauvegardées ne reçoivent ni distance d'animation ni marqueur de contact. Le nom, la barre de santé et l'ellipse jaune d'anticipation restent dessinés par leur propriétaire natif ; les sept pointes de la Reine-Mère ne sont pas appliquées aux gardes.
+
+La mort lit les 1,2 seconde natives et conserve l'alpha 0,3. La dernière cellule est maintenue jusqu'à la disparition du corps. L'atlas ne possède pas de ligne de blessure distincte : les effets natifs restent responsables de ce retour visuel. Le mouvement réduit fixe les cycles ordinaires de repos et de marche sans supprimer l'anticipation, le contact ou la mort. Les bornes visuelles couvrent les cellules complètes et leurs miroirs, sans agrandir les collisions ni la portée d'attaque. Les [références et la provenance](../development/QUEEN_MOTHER_GUARD_ART_PROVENANCE_20261117.json), la [planche du rendu intégré](../development/QUEEN_MOTHER_GUARD_ART_OVERVIEW_20261117.png) et le [rapport de vérification](../development/QUEEN_MOTHER_GUARD_ART_QA_20261117.md) distinguent la calibration statique, les poses de contrôle et les événements réellement exécutés par le moteur.

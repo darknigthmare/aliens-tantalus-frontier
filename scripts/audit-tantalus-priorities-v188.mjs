@@ -1043,6 +1043,117 @@ export function verifyQueenMotherRegistryContinuationV188(operations, counts, re
 }
 
 
+// Queen Mother guard source continuation from exact Q. No registry debt is
+// closed by this presentation-only lot; the historical Q receipts stay intact.
+export const TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188 = freeze({
+  "baseline": "c1d4c636347275d2d3a6ecbc15ebfcfeadfb035c",
+  "successors": {
+    "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
+      "previousSha256": "f8f0b2d4d67183b09f9d8be7f989d8032ad3e4796295367e4a07fc11bf86ab7e",
+      "currentSha256": "c1c14fc8e850a7bbfd4946196edd233db6324b7898c4878298554f2ad0bbd438"
+    },
+    "package.json": {
+      "previousSha256": "2f1841faceabf92adbe9f829bac3e66ad81c7900064bdc1b382d0470e1717e4f",
+      "currentSha256": "3066253712f123ae2008fced03a1473b849f67a8d364bbc0864f30588f35d609"
+    },
+    "scripts/verify-audit-continuation-v157.mjs": {
+      "previousSha256": "6a88297b6d018c5086f2cdd92b88ff408eafc9fbf869be52365988edbb8a76c0",
+      "currentSha256": "a3230677a0ea8bcafab21917da2823e49777bcc2c1e406bb9dc6b91e396c2155"
+    },
+    "scripts/verify-audit-continuation-v158.mjs": {
+      "previousSha256": "4fbb9c96780e8d46143f87997963246b9c634e4503a692742bacec7c8dad7f24",
+      "currentSha256": "80f296774fff4bbd1eaecca48fdd4c63cb1beaca03ed0c44a3d674ebfae87a28"
+    },
+    "scripts/verify-audit-v143.mjs": {
+      "previousSha256": "32df0186eeb4bd76263a46c6517f1f2f92fcb0aa25fa47c41292d7e178bc0ca7",
+      "currentSha256": "3a2ad226bf0ae4076e3fbd526f2d03fa3bd7459f8811f0d27d6a1a33a3626e85"
+    },
+    "scripts/verify-black-cocoon-presentation-v158.mjs": {
+      "previousSha256": "488aa7cfe2b50a2f0c40a20793b50dcded23f5babe0634208c204d573444f175",
+      "currentSha256": "a35cab0472f11b1e656aec251a035dc1cd3a4b9df6e6803ab0f2da83ab313cb1"
+    },
+    "scripts/verify-public-release-v86.mjs": {
+      "previousSha256": "11fc3b2d559034519dcb66c678e70c489f0b9132a7797142513860e81d654647",
+      "currentSha256": "0d663f627b878c05ecd067c417d2bd2895ffeede9de0b21e6ad3852134d10a7d"
+    },
+    "src/ecosystem-missions-v131.js": {
+      "previousSha256": "3b90f5739b4ff282d29304f0dc2aa7ad12150efb80e4b7459d60071ad4f03ec7",
+      "currentSha256": "34fc724a8b7c758153b42f7f1542512056a12aef6b6c119f6e8cea7ce9fa5c7d"
+    },
+    "src/ecosystem-systems-v131.js": {
+      "previousSha256": "4fda558fd365aa872cc656c5565bef204dd967da9a2fb3b8f673d87678b8353f",
+      "currentSha256": "577e12210793abf2ea46df9afef38aeab26bbce12a960073379cf6a639993d5c"
+    },
+    "src/game-production-runtime.js": {
+      "previousSha256": "5cfd2d4a4e5ca6d01529332d67f9afa0564cfa05dbcfabd06657f90559a7e141",
+      "currentSha256": "48604c22ea4a37dc33270a190bc9e8b4a36a8edd35c9e0d2707d2d90866055bb"
+    },
+    "src/i18n-en-catalog-v185.js": {
+      "previousSha256": "4c75f584d9a2a4fc1d7328f0b85a38bd037f75f416131af9cca135012d1daee7",
+      "currentSha256": "4b3e6552f422a1a7d30b9940eebd81880e292bcbae5067cf1e2697284dbca917"
+    },
+    "sw.js": {
+      "previousSha256": "881f6a320f57315bdd5f8985a091cc967ba6d8090b02290997c43e9fd7eeeac5",
+      "currentSha256": "e31f82016ae97434c8805dd00d35279c6246bc9c52ddc32faa3c678996db8d22"
+    }
+  },
+  "addedSourceSuccessors": {
+    "scripts/verify-queen-mother-art-v188.mjs": {
+      "previousSha256": "cabf01a56b817a86ff16f026a51f4614e9ff78764a76c391bbdf86d64a121d80",
+      "currentSha256": "889d7e7a91eecb6fa9ba780982a164c458c394b8174d59514ce8baf5125f15b3"
+    }
+  },
+  "addedSources": {
+    "scripts/verify-queen-mother-guard-art-v188.mjs": "ec26cb25201477732fd747eda4a88a7bdaf88e88acd2e36e3cdef710b17f7d38",
+    "src/queen-mother-guard-art-v188.js": "fa5a6c5f123a826f97675e50c02a2f48cabc4010dbceafac82e16c42bf9bd540"
+  }
+});
+
+export const TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_REGISTRY_V188 = freeze({
+  baseline: 'c1d4c636347275d2d3a6ecbc15ebfcfeadfb035c',
+  baselineRegistry: {
+    path: 'src/special-operations-v131.js',
+    sha256: '433ddc7b821c98b973c10fc9e3aa39bc66c77e8cf9364dd9f1a25d03b70b08af',
+    declarationsSha256: '46cdb671b6cc3cb1591c5fe4cd124d85335278d93b79a386cddbd9cc4995618a'
+  },
+  operationId: 'queen-mother-song',
+  projection: 'identity',
+  removedDebts: [],
+  newChangedIds: [],
+  historicalChangedIds: ['cargo-brutal', 'broodstorm', 'queen-mother-song'],
+  previousRemainingMechanics: ['complete-royal-cast'],
+  currentRemainingMechanics: ['complete-royal-cast'],
+  previousCounts: { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 },
+  currentCounts: { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 }
+});
+
+export function verifyQueenMotherGuardRegistryContinuationV188(operations, counts, readSource = readRepository) {
+  const continuation = TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_REGISTRY_V188;
+  assert.equal(sha(readSource(continuation.baselineRegistry.path)), continuation.baselineRegistry.sha256,
+    'Guard presentation must retain the exact Q registry source bytes');
+  const matches = operations.filter(operation => operation.id === continuation.operationId);
+  assert.equal(matches.length, 1, 'Exactly one Queen Mother registry declaration is required');
+  const operation = matches[0];
+  assert.deepEqual(operation.remainingMechanics, continuation.currentRemainingMechanics,
+    'Guard presentation leaves the complete royal cast debt open');
+  assert.equal(operation.implementationStatus, 'partial', 'Guard presentation does not promote Queen Mother');
+  assert.equal(operation.canonExact, false, 'Guard presentation assigns no canonical identity');
+  assert.equal(operation.playable, true);
+  assert.deepEqual(counts, continuation.currentCounts, 'Guard presentation does not change registry counts');
+  const declarations = operations.map(entry => Object.keys(entry).filter(key => key !== 'campaign').sort()
+    .map(key => [key, entry[key]]));
+  assert.equal(sha(JSON.stringify(declarations)), continuation.baselineRegistry.declarationsSha256,
+    'Guard presentation must preserve every exact Q registry declaration');
+  // R projects identically to Q. In particular, do not append Queen Mother a
+  // second time to the historical set of operations whose registry changed.
+  const historical = verifyQueenMotherRegistryContinuationV188(operations, counts, readSource);
+  assert.deepEqual(historical.currentCounts, continuation.previousCounts);
+  assert.deepEqual(historical.changedIds, continuation.historicalChangedIds);
+  assert.equal(new Set(historical.changedIds).size, historical.changedIds.length);
+  assert.equal(historical.unchangedOperations, 18);
+  return historical;
+}
+
 export function reviewedTantalusPrioritiesDigestV188(path, endpoint) {
   const historical = TANTALUS_PRIORITIES_SUCCESSORS_V188[path];
   const receipt = historical || TANTALUS_PRIORITIES_CONTINUATION_V188.successors[path];
@@ -1090,11 +1201,19 @@ export function reviewedTantalusPrioritiesDigestV188(path, endpoint) {
     current = broodstorm.currentSha256;
   }
   const queenMother = TANTALUS_PRIORITIES_QUEEN_MOTHER_V188.successors[path];
-  if (!queenMother) return current;
-  assert.equal(current, queenMother.previousSha256, 'Broken b9aee06a-to-queen-mother source chain: ' + path);
-  assert.ok(validHash(queenMother.currentSha256), 'Invalid queen-mother source digest: ' + path);
-  assert.notEqual(queenMother.currentSha256, queenMother.previousSha256, 'A queen-mother successor must identify changed bytes: ' + path);
-  return queenMother.currentSha256;
+  if (queenMother) {
+    assert.equal(current, queenMother.previousSha256, 'Broken b9aee06a-to-queen-mother source chain: ' + path);
+    assert.ok(validHash(queenMother.currentSha256), 'Invalid queen-mother source digest: ' + path);
+    assert.notEqual(queenMother.currentSha256, queenMother.previousSha256, 'A queen-mother successor must identify changed bytes: ' + path);
+    current = queenMother.currentSha256;
+  }
+  const guards = TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188;
+  const guard = guards.successors[path] || guards.addedSourceSuccessors[path];
+  if (!guard) return current;
+  assert.equal(current, guard.previousSha256, 'Broken c1d4c636-to-queen-mother-guard source chain: ' + path);
+  assert.ok(validHash(guard.currentSha256), 'Invalid queen-mother-guard source digest: ' + path);
+  assert.notEqual(guard.currentSha256, guard.previousSha256, 'A queen-mother-guard successor must identify changed bytes: ' + path);
+  return guard.currentSha256;
 }
 
 export function verifyTantalusPrioritiesV188(readSource = readRepository) {
@@ -1176,6 +1295,31 @@ export function verifyTantalusPrioritiesV188(readSource = readRepository) {
       'Broken historical-to-b9aee06a endpoint: ' + path);
     else successors.set(path, receipt);
   }
+  const guards = TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188;
+  const historicalAddedSources = new Map([...Object.entries(continuation.addedSources), ...Object.entries(prologue.addedSources),
+    ...Object.entries(quay.addedSources), ...Object.entries(cargoAbyss.addedSources), ...Object.entries(hadal.addedSources),
+    ...Object.entries(broodstorm.addedSources), ...Object.entries(queenMother.addedSources)]);
+  assert.deepEqual(Object.keys(guards.addedSourceSuccessors), ['scripts/verify-queen-mother-art-v188.mjs'],
+    'The guard continuation may supersede only the explicitly reviewed Q notice test');
+  for (const [path, receipt] of Object.entries(guards.successors)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
+    assert.equal(historicalAddedSources.has(path), false,
+      'A guard successor cannot replace a separately added V188 source: ' + path);
+    const previous = queenMother.successors[path] || broodstorm.successors[path] || hadal.successors[path]
+      || cargoAbyss.successors[path] || quay.successors[path] || prologue.successors[path] || successors.get(path);
+    assert.ok(previous, 'A guard successor needs a reviewed historical endpoint: ' + path);
+    assert.equal(receipt.previousSha256, previous.currentSha256, 'Broken historical-to-c1d4c636 endpoint: ' + path);
+  }
+  for (const [path, receipt] of Object.entries(guards.addedSourceSuccessors)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
+    assert.equal(successors.has(path) || Object.hasOwn(guards.successors, path) || Object.hasOwn(guards.addedSources, path), false,
+      'An added-source successor cannot disguise or duplicate another source: ' + path);
+    assert.equal(receipt.previousSha256, queenMother.addedSources[path], 'Broken Q added-source predecessor: ' + path);
+    assert.notEqual(receipt.currentSha256, receipt.previousSha256,
+      'An added-source successor must identify changed bytes: ' + path);
+  }
   for (const [path, receipt] of successors) {
     assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
     assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
@@ -1185,11 +1329,13 @@ export function verifyTantalusPrioritiesV188(readSource = readRepository) {
   const addedSources = new Set();
   for (const [path, digest] of [...Object.entries(continuation.addedSources), ...Object.entries(prologue.addedSources),
     ...Object.entries(quay.addedSources), ...Object.entries(cargoAbyss.addedSources), ...Object.entries(hadal.addedSources),
-    ...Object.entries(broodstorm.addedSources), ...Object.entries(queenMother.addedSources)]) {
+    ...Object.entries(broodstorm.addedSources), ...Object.entries(queenMother.addedSources), ...Object.entries(guards.addedSources)]) {
     assert.equal(successors.has(path) || addedSources.has(path), false, 'A new V188 source cannot replace a successor or added source: ' + path);
     addedSources.add(path);
     assert.ok(validHash(digest), 'Invalid new V188 source digest: ' + path);
-    assert.equal(sha(readSource(path)), digest, 'Unreviewed V188 source bytes: ' + path);
+    const endpoint = Object.hasOwn(guards.addedSourceSuccessors, path)
+      ? reviewedTantalusPrioritiesDigestV188(path, digest) : digest;
+    assert.equal(sha(readSource(path)), endpoint, 'Unreviewed V188 source bytes: ' + path);
   }
   return Object.freeze({ successors: successors.size, addedSources: addedSources.size });
 }

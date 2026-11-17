@@ -18,7 +18,7 @@ import {QUEEN_MOTHER_ART_IDS_V188 as IDS,QUEEN_MOTHER_ART_V188 as ART,
 } from '../src/queen-mother-art-v188.js';
 
 const paths=new Set(IDS.map(id=>ART[id].path));
-const queenNotice='ADAPTATION ORIGINALE · REINE-MÈRE ILLUSTRÉE · CHŒURS ET GARDES PROVISOIRES';
+const queenNotice='ADAPTATION ORIGINALE · REINE-MÈRE ET GARDES ILLUSTRÉS · CHŒURS PROVISOIRES';
 const historicalNotice='ADAPTATION ORIGINALE · PERSONNAGES VECTORIELS PROVISOIRES · PLANCHES DÉDIÉES À PRODUIRE';
 const artCalls=calls=>calls.filter(call=>call.kind==='image' && paths.has(call.path));
 const close=(actual,expected,label='')=>assert.ok(Math.abs(actual-expected)<1e-7,`${label}: ${actual} != ${expected}`);
