@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import {
   TANTALUS_PRIORITIES_BASELINE_V188, TANTALUS_PRIORITIES_SUCCESSORS_V188, TANTALUS_PRIORITIES_CONTINUATION_V188,
-  TANTALUS_PRIORITIES_PROLOGUE_V188, TANTALUS_PRIORITIES_SOURCE_ONLY_PATHS_V188, reviewedTantalusPrioritiesDigestV188,
+  TANTALUS_PRIORITIES_PROLOGUE_V188, TANTALUS_PRIORITIES_QUAY_V188, TANTALUS_PRIORITIES_SOURCE_ONLY_PATHS_V188, reviewedTantalusPrioritiesDigestV188,
   verifyTantalusPrioritiesV188
 } from './audit-tantalus-priorities-v188.mjs';
 import { verifyNativeQaResourcesV187 } from './audit-native-qa-resources-v187.mjs';
@@ -62,9 +62,28 @@ test('V188 verifies every reviewed successor and keeps the V187 chain intact', (
   });
   assert.deepEqual(Object.keys(prologue.addedSources), ['src/prologue-art-v188.js']);
   assert.equal(Object.isFrozen(prologue.successors), true); assert.equal(Object.isFrozen(prologue.addedSources), true);
-  const unique = new Set([...Object.keys(TANTALUS_PRIORITIES_SUCCESSORS_V188), ...Object.keys(continuation.successors), ...Object.keys(prologue.successors)]);
-  assert.equal(result.successors, unique.size); assert.equal(result.successors, 122);
-  assert.equal(result.addedSources, 2);
+  assert.equal(sha(JSON.stringify(prologue)), 'fc40151c6f44c0f22e499a28eec01ce119367fee4feb8d58cd43b99b486d19ee',
+    'The complete d54f13cc prologue continuation remains historical.');
+  const quay = TANTALUS_PRIORITIES_QUAY_V188;
+  assert.equal(quay.baseline, 'ee565717bdc698594c41f76fe1e1c72c2a730656');
+  assert.deepEqual(Object.fromEntries(Object.entries(quay.successors).map(([path, receipt]) => [path, receipt.previousSha256])), {
+    "scripts/qa-campaign-story-v160.py": "0483f3b99b6d0b05cd7a7bbb984e2a662360a3828ad532d0c0fbbd201072e49f",
+    "scripts/qa-forge-npcs-v158.py": "0d6bcda73a5ee085eb9a886ca755e56ec1a2195a13e6f0fff9c4014e562193f1",
+    "scripts/qa-trials-continuity-v163.py": "a5a3ae0189e2ad47c5d2f2b12985f9e935e8f8c27bc9fe92001b5886deae4a0b",
+    "scripts/verify-audit-v143.mjs": "b2283b440d2be425eaadebc919dde1495656d875e31025ecd475e27428ad5efb",
+    "scripts/verify-campaign-story-v160.mjs": "63fd6e24dc57561e3d88f0d549906a8a1b891ace8767675cb4ca42699bbcbe1b",
+    "scripts/verify-forge-npcs-v158.mjs": "ae3813cbb02f125e450fcf08217c2ffa8512915d98bb983961d1a2810a9ec34d",
+    "scripts/verify-legacy-operations-v131.mjs": "c8823fea400d848cd1d90c65ff841a5a6f6833b84515ab799eb2bf41627706e5",
+    "scripts/verify-public-release-v86.mjs": "0376088c873ed60751b81d646cadd0e965476df5e61b88c0d83a40670d45dce5",
+    "scripts/verify-quay-coherence-v188.mjs": "d69f271f5db777ade2b32f4608f58675d405ed84b1015992a850c083bd4da929",
+    "src/hub-port-meridien-v90.js": "a81ed4df17c3b91edaf52c66bf24bd3981190c2b73db22366c3e4076de76cabb",
+    "sw.js": "082f8d2e6b94053c5e080256f359c1fbad4b787d6e3b6a052001724b8cd54f66"
+  });
+  assert.deepEqual(Object.keys(quay.addedSources), ['src/port-quay-art-v188.js']);
+  assert.equal(Object.isFrozen(quay.successors), true); assert.equal(Object.isFrozen(quay.addedSources), true);
+  const unique = new Set([...Object.keys(TANTALUS_PRIORITIES_SUCCESSORS_V188), ...Object.keys(continuation.successors), ...Object.keys(prologue.successors), ...Object.keys(quay.successors)]);
+  assert.equal(result.successors, unique.size); assert.equal(result.successors, 124);
+  assert.equal(result.addedSources, 3);
   assert.deepEqual(verifyNativeQaResourcesV187(), { successors: 8, preserved: 7 });
 });
 
@@ -83,19 +102,31 @@ test('V188 rejects mutated bytes and arbitrary predecessor endpoints', () => {
   }
   for (const [path, receipt] of Object.entries(TANTALUS_PRIORITIES_PROLOGUE_V188.successors)) {
     const anchor = TANTALUS_PRIORITIES_SUCCESSORS_V188[path] || TANTALUS_PRIORITIES_CONTINUATION_V188.successors[path] || receipt;
-    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), receipt.currentSha256,
-      'The original anchor must resolve through its exact published d54f13cc endpoint: ' + path);
+    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), TANTALUS_PRIORITIES_QUAY_V188.successors[path]?.currentSha256 || receipt.currentSha256,
+      'The original anchor must resolve through every exact published endpoint: ' + path);
     assert.throws(() => verifyTantalusPrioritiesV188(candidate => candidate === path
       ? Buffer.concat([read(candidate), Buffer.from('\n// unreviewed')]) : read(candidate)), /Unreviewed V188 source bytes/);
     assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, '0'.repeat(64)), /Broken .* source chain/);
     assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, receipt.currentSha256), /Broken .* source chain/);
   }
-  for (const path of [...Object.keys(TANTALUS_PRIORITIES_CONTINUATION_V188.addedSources), ...Object.keys(TANTALUS_PRIORITIES_PROLOGUE_V188.addedSources)]) {
+  for (const [path, receipt] of Object.entries(TANTALUS_PRIORITIES_QUAY_V188.successors)) {
+    const anchor = TANTALUS_PRIORITIES_SUCCESSORS_V188[path] || TANTALUS_PRIORITIES_CONTINUATION_V188.successors[path]
+      || TANTALUS_PRIORITIES_PROLOGUE_V188.successors[path] || receipt;
+    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), receipt.currentSha256,
+      'The original anchor must resolve through the exact published ee565717 endpoint: ' + path);
+    assert.throws(() => verifyTantalusPrioritiesV188(candidate => candidate === path
+      ? Buffer.concat([read(candidate), Buffer.from('\n// unreviewed')]) : read(candidate)), /Unreviewed V188 source bytes/);
+    assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, '0'.repeat(64)), /Broken .* source chain/);
+    assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, receipt.currentSha256), /Broken .* source chain/);
+    if (anchor !== receipt) assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, receipt.previousSha256), /Broken .* source chain/);
+  }
+  for (const path of [...Object.keys(TANTALUS_PRIORITIES_CONTINUATION_V188.addedSources), ...Object.keys(TANTALUS_PRIORITIES_PROLOGUE_V188.addedSources), ...Object.keys(TANTALUS_PRIORITIES_QUAY_V188.addedSources)]) {
     assert.throws(() => verifyTantalusPrioritiesV188(candidate => candidate === path
       ? Buffer.concat([read(candidate), Buffer.from('\n// unreviewed')]) : read(candidate)), /Unreviewed V188 source bytes/);
   }
   for (const map of [TANTALUS_PRIORITIES_CONTINUATION_V188.successors, TANTALUS_PRIORITIES_CONTINUATION_V188.addedSources,
-    TANTALUS_PRIORITIES_PROLOGUE_V188.successors, TANTALUS_PRIORITIES_PROLOGUE_V188.addedSources]) {
+    TANTALUS_PRIORITIES_PROLOGUE_V188.successors, TANTALUS_PRIORITIES_PROLOGUE_V188.addedSources,
+    TANTALUS_PRIORITIES_QUAY_V188.successors, TANTALUS_PRIORITIES_QUAY_V188.addedSources]) {
     assert.equal(Object.hasOwn(map, 'scripts/audit-tantalus-priorities-v188.mjs'), false);
   }
   assert.equal(reviewedTantalusPrioritiesDigestV188('src/unreviewed.js', 'unchanged'), 'unchanged');

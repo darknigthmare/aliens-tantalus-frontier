@@ -570,6 +570,61 @@ export const TANTALUS_PRIORITIES_PROLOGUE_V188 = freeze({
   }
 });
 
+// Port-Méridien quay art and native QA drivers continue the published endpoints.
+// Historical receipt blocks and separately added helpers remain unchanged.
+export const TANTALUS_PRIORITIES_QUAY_V188 = freeze({
+  "baseline": "ee565717bdc698594c41f76fe1e1c72c2a730656",
+  "successors": {
+    "scripts/qa-campaign-story-v160.py": {
+      "previousSha256": "0483f3b99b6d0b05cd7a7bbb984e2a662360a3828ad532d0c0fbbd201072e49f",
+      "currentSha256": "7d3ded62763a4db3f5fa1a2554c91d46656f87d0f18459896e2b804301ee3e71"
+    },
+    "scripts/qa-forge-npcs-v158.py": {
+      "previousSha256": "0d6bcda73a5ee085eb9a886ca755e56ec1a2195a13e6f0fff9c4014e562193f1",
+      "currentSha256": "a0adc5378c5a79df12fab12987e87970804e9e38c0d7895369629db3203bef82"
+    },
+    "scripts/qa-trials-continuity-v163.py": {
+      "previousSha256": "a5a3ae0189e2ad47c5d2f2b12985f9e935e8f8c27bc9fe92001b5886deae4a0b",
+      "currentSha256": "be26d35484c30516f1a6a243d4a74e993389c551bb57fddd1121caf0252d3e76"
+    },
+    "scripts/verify-audit-v143.mjs": {
+      "previousSha256": "b2283b440d2be425eaadebc919dde1495656d875e31025ecd475e27428ad5efb",
+      "currentSha256": "9dc8947f8b6d3dfb568777307390e561874e213c41edd501b6b4835cb3531a7a"
+    },
+    "scripts/verify-campaign-story-v160.mjs": {
+      "previousSha256": "63fd6e24dc57561e3d88f0d549906a8a1b891ace8767675cb4ca42699bbcbe1b",
+      "currentSha256": "147d29402ef405c00b52f8453f991373c7ab869651d6b36046b54ee1c6340863"
+    },
+    "scripts/verify-forge-npcs-v158.mjs": {
+      "previousSha256": "ae3813cbb02f125e450fcf08217c2ffa8512915d98bb983961d1a2810a9ec34d",
+      "currentSha256": "f4a31b5e47c01e150aaa0b26a819130f560a717b157a0e307d58e17dbc6f0dab"
+    },
+    "scripts/verify-legacy-operations-v131.mjs": {
+      "previousSha256": "c8823fea400d848cd1d90c65ff841a5a6f6833b84515ab799eb2bf41627706e5",
+      "currentSha256": "5f6d68c9ebf657650f7700d40d512fd939c7d1bc32b0968af8e457e6669cc2fe"
+    },
+    "scripts/verify-public-release-v86.mjs": {
+      "previousSha256": "0376088c873ed60751b81d646cadd0e965476df5e61b88c0d83a40670d45dce5",
+      "currentSha256": "dac556b3f8fa6ce714732094dda492c4f7c6b25422b32901a72e219ca10fe67f"
+    },
+    "scripts/verify-quay-coherence-v188.mjs": {
+      "previousSha256": "d69f271f5db777ade2b32f4608f58675d405ed84b1015992a850c083bd4da929",
+      "currentSha256": "a0c770e096a727bdb68718b6787f4ab02aeb0e4cc670b3eca5f4979a4d28bc97"
+    },
+    "src/hub-port-meridien-v90.js": {
+      "previousSha256": "a81ed4df17c3b91edaf52c66bf24bd3981190c2b73db22366c3e4076de76cabb",
+      "currentSha256": "c6b38c0fd78f8576cfc72769b6b3b0a8bda12764dfdffb2b35f20bbf23ff1fc9"
+    },
+    "sw.js": {
+      "previousSha256": "082f8d2e6b94053c5e080256f359c1fbad4b787d6e3b6a052001724b8cd54f66",
+      "currentSha256": "50b6526783bce8a799d19123059dcee6dc535cf4b2ac45534e0b9bcea2726a41"
+    }
+  },
+  "addedSources": {
+    "src/port-quay-art-v188.js": "dbae88f45d2b296994841c561f438b314c6c5556fdb79a26eebfac5d19e32997"
+  }
+});
+
 export const TANTALUS_PRIORITIES_SOURCE_ONLY_PATHS_V188 = Object.freeze([
   'scripts/audit-tantalus-priorities-v188.mjs',
   'scripts/verify-tantalus-priorities-v188.mjs',
@@ -589,11 +644,18 @@ export function reviewedTantalusPrioritiesDigestV188(path, endpoint) {
     current = receipt.currentSha256;
   }
   const prologue = TANTALUS_PRIORITIES_PROLOGUE_V188.successors[path];
-  if (!prologue) return current;
-  assert.equal(current, prologue.previousSha256, 'Broken d54f13cc-to-prologue source chain: ' + path);
-  assert.ok(validHash(prologue.currentSha256), 'Invalid prologue source digest: ' + path);
-  assert.notEqual(prologue.currentSha256, prologue.previousSha256, 'A prologue successor must identify changed bytes: ' + path);
-  return prologue.currentSha256;
+  if (prologue) {
+    assert.equal(current, prologue.previousSha256, 'Broken d54f13cc-to-prologue source chain: ' + path);
+    assert.ok(validHash(prologue.currentSha256), 'Invalid prologue source digest: ' + path);
+    assert.notEqual(prologue.currentSha256, prologue.previousSha256, 'A prologue successor must identify changed bytes: ' + path);
+    current = prologue.currentSha256;
+  }
+  const quay = TANTALUS_PRIORITIES_QUAY_V188.successors[path];
+  if (!quay) return current;
+  assert.equal(current, quay.previousSha256, 'Broken ee565717-to-quay source chain: ' + path);
+  assert.ok(validHash(quay.currentSha256), 'Invalid quay source digest: ' + path);
+  assert.notEqual(quay.currentSha256, quay.previousSha256, 'A quay successor must identify changed bytes: ' + path);
+  return quay.currentSha256;
 }
 
 export function verifyTantalusPrioritiesV188(readSource = readRepository) {
@@ -612,6 +674,17 @@ export function verifyTantalusPrioritiesV188(readSource = readRepository) {
       'Broken historical-to-d54f13cc endpoint: ' + path);
     else successors.set(path, receipt);
   }
+  const quay = TANTALUS_PRIORITIES_QUAY_V188;
+  for (const [path, receipt] of Object.entries(quay.successors)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
+    assert.equal(Object.hasOwn(continuation.addedSources, path) || Object.hasOwn(prologue.addedSources, path), false,
+      'A quay successor cannot replace a separately added V188 source: ' + path);
+    const previous = prologue.successors[path] || successors.get(path);
+    if (previous) assert.equal(receipt.previousSha256, previous.currentSha256,
+      'Broken historical-to-ee565717 endpoint: ' + path);
+    else successors.set(path, receipt);
+  }
   for (const [path, receipt] of successors) {
     assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
     assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
@@ -619,7 +692,7 @@ export function verifyTantalusPrioritiesV188(readSource = readRepository) {
       'Unreviewed V188 source bytes: ' + path);
   }
   const addedSources = new Set();
-  for (const [path, digest] of [...Object.entries(continuation.addedSources), ...Object.entries(prologue.addedSources)]) {
+  for (const [path, digest] of [...Object.entries(continuation.addedSources), ...Object.entries(prologue.addedSources), ...Object.entries(quay.addedSources)]) {
     assert.equal(successors.has(path) || addedSources.has(path), false, 'A new V188 source cannot replace a successor or added source: ' + path);
     addedSources.add(path);
     assert.ok(validHash(digest), 'Invalid new V188 source digest: ' + path);

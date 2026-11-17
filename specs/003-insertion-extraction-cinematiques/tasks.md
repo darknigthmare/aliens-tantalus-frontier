@@ -43,3 +43,15 @@
 - [x] T026 Raccorder le chargeur, les replis, le rejeu après erreur et la fermeture ; admettre onze chemins runtime exacts et un module de shell. Audit du cache et sauvegardes : **132/132**. Comparer les 17 CIN / 46 plans hors lot au rendu de la base.
 - [x] T027 Confirmer le retour APC dans la CI Chromium de `d54f13cc` : 21 victimes, 1 310 crédits, aucun second paiement. Adapter le pilote campagne au bouton public de la cinématique d’extraction ; les régressions du pilote, de pause Broodstorm et du terminal Cocon sont documentées dans la même QA (**68/68**, dont six nouvelles).
 - [ ] T028 Qualifier sur la nouvelle CI les trois pilotes corrigés et les deux traces clavier ajoutées pour les échecs Forge/menu mobile. Les anciens succès et les hôtes locaux ne remplacent pas cette exécution.
+
+## Phase 8 : Continuité visuelle avec le quai jouable — 17 novembre 2026
+
+- [x] T029 Réemployer dans le quai les quatre PNG Wren, Ferro, patient et brancard du prologue, sans nouvelle génération ; conserver leurs proportions, les appuis natifs, le miroir de Wren, la profondeur et les trois habitants animés.
+- [x] T030 Conserver la respiration positive de 0 à 1 px, le mouvement réduit, le chargement à l’entrée et les replis ; faire basculer ensemble patient et brancard. Les 14 contrats existants et cinq contrôles de production supplémentaires passent **19/19**.
+- [x] T031 Comparer les 12 conditions du quai à la référence publiée `ee565717` et fournir une vue générale : **66/66 contrôles**, zéro erreur, zéro pixel modifié hors art et repli complet identique. Ajouter le module au shell sans précache d’image, vérifier **132/132** contrôles audit/sauvegarde et documenter les limites dans `docs/development/PORT_QUAY_ART_QA_20261117.md`. Release et CI sont attestées séparément sur le SHA de publication dans la PR #49.
+- [x] T032 Attendre le détachement réel de l’introduction avant les trois entrées du titre du pilote Trials, dans le budget de 45 s existant et avant le lancement de mission. Deux régressions de production couvrent les trois sites et l’expiration ; mutant sans attente en échec, suite Legacy **25/25**. Aucun changement de pause, bombe ou sauvegarde ; la qualification Chromium reste dans T028.
+
+## Phase 9 : Parcours révélés par la CI du prologue — 17 novembre 2026
+
+- [x] T033 Attendre le retrait réel de l’introduction avant l’entrée Forge et la reprise de son checkpoint, dans les 45 s existantes. Deux régressions avec l’introduction, le checkpoint et le dialogue natifs ; mutant sans attente en échec ; suite Forge NPC **31/31**, 22 vérifications existantes intactes.
+- [x] T034 Suivre CIN-20 puis CIN-20-rook et resélectionner QZ-18 par les contrôles publics avant sa consultation, avec un budget partagé de 30 s. Deux régressions, deux mutants causaux refusés, suite campagne **31/31** ; 21 fonctions et 28 contrôles existants inchangés. Les suites des trois pilotes totalisent **87/87**. Cocon et titre sont confirmés dans la CI P ; la qualification Chromium du candidat final reste dans T028.

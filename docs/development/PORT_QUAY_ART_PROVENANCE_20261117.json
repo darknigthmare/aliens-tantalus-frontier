@@ -1,0 +1,632 @@
+{
+  "schema": "tantalus-port-quay-art-reuse-provenance-v1",
+  "date": "2026-11-17",
+  "timeZone": "Europe/Paris",
+  "documentedAtUtc": "2026-11-17T14:08:45.700043+00:00",
+  "baseCommit": "ee565717bdc698594c41f76fe1e1c72c2a730656",
+  "baseTree": "1b8abac2d1f3869b15ccaabf48e23c41fb564317",
+  "pullRequestTarget": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/49",
+  "scope": {
+    "room": "port-meridien-quay",
+    "opening": "colony-intro-quai",
+    "consumers": [
+      "tomas-wren",
+      "lucia-ferro",
+      "north-quay-patient",
+      "medical-stretcher"
+    ],
+    "generationOutputCount": 0,
+    "newImageFiles": 0,
+    "reusedImageFiles": 4,
+    "reusedImageBytes": 6316935
+  },
+  "previousGenerationProvenance": {
+    "path": "docs/development/PROLOGUE_ART_PROVENANCE_20261117.json",
+    "bytes": 80336,
+    "sha256": "2ab2912ea63265064b32b7b609c116ef797176421377efe2b4298a01b8d67a8e",
+    "unchangedFromBase": true
+  },
+  "reusedImages": [
+    {
+      "path": "assets/prologue/v188/tomas-wren-standing.png",
+      "bytes": 1834919,
+      "sha256": "813bbea119895af717ded84eefebc26f09c8fad10ebeec63378ad8c8476a6402",
+      "unchangedFromBase": true,
+      "id": "tomas-wren-standing",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "extrema": [
+          0,
+          254
+        ],
+        "transparentPixels": 1087254,
+        "nonzeroBounds": [
+          49,
+          0,
+          996,
+          1536
+        ],
+        "bounds32": [
+          245,
+          14,
+          738,
+          1525
+        ]
+      },
+      "sourceRect": [
+        243,
+        12,
+        497,
+        1515
+      ],
+      "anchors": {
+        "foot": [
+          493,
+          1524
+        ]
+      },
+      "rawGeneratorBytesPreserved": true,
+      "generatedInThisLot": false,
+      "previousProvenance": {
+        "path": "docs/development/PROLOGUE_ART_PROVENANCE_20261117.json",
+        "baseCommit": "ee565717bdc698594c41f76fe1e1c72c2a730656",
+        "outputId": "tomas-wren-standing"
+      }
+    },
+    {
+      "path": "assets/prologue/v188/lucia-ferro-standing.png",
+      "bytes": 1659079,
+      "sha256": "504bd8360ae90941b89171cb2b7d0d14b75432842b6d75e56548587b9dc49697",
+      "unchangedFromBase": true,
+      "id": "lucia-ferro-standing",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "extrema": [
+          0,
+          254
+        ],
+        "transparentPixels": 1141643,
+        "nonzeroBounds": [
+          39,
+          11,
+          1004,
+          1522
+        ],
+        "bounds32": [
+          291,
+          14,
+          736,
+          1520
+        ]
+      },
+      "sourceRect": [
+        289,
+        12,
+        449,
+        1510
+      ],
+      "anchors": {
+        "foot": [
+          514,
+          1519
+        ]
+      },
+      "rawGeneratorBytesPreserved": true,
+      "generatedInThisLot": false,
+      "previousProvenance": {
+        "path": "docs/development/PROLOGUE_ART_PROVENANCE_20261117.json",
+        "baseCommit": "ee565717bdc698594c41f76fe1e1c72c2a730656",
+        "outputId": "lucia-ferro-standing"
+      }
+    },
+    {
+      "path": "assets/prologue/v188/north-quay-patient.png",
+      "bytes": 1348393,
+      "sha256": "124a2b47efa6bd5e91677c6e22686ea89e4f2062a0dd030373f6ad678535bc26",
+      "unchangedFromBase": true,
+      "id": "north-quay-patient",
+      "size": [
+        2172,
+        724
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "extrema": [
+          0,
+          255
+        ],
+        "transparentPixels": 940564,
+        "nonzeroBounds": [
+          14,
+          7,
+          2160,
+          724
+        ],
+        "bounds32": [
+          18,
+          201,
+          2153,
+          585
+        ]
+      },
+      "sourceRect": [
+        16,
+        199,
+        2139,
+        388
+      ],
+      "anchors": {
+        "support": [
+          1110,
+          573
+        ],
+        "chest": [
+          1200,
+          199,
+          640,
+          388
+        ],
+        "head": [
+          2010,
+          395
+        ],
+        "heel": [
+          90,
+          576
+        ]
+      },
+      "rawGeneratorBytesPreserved": true,
+      "generatedInThisLot": false,
+      "previousProvenance": {
+        "path": "docs/development/PROLOGUE_ART_PROVENANCE_20261117.json",
+        "baseCommit": "ee565717bdc698594c41f76fe1e1c72c2a730656",
+        "outputId": "north-quay-patient"
+      }
+    },
+    {
+      "path": "assets/prologue/v188/medical-stretcher.png",
+      "bytes": 1474544,
+      "sha256": "25e0c95260270dc55bc40d407758844487ee7de13f85b947b00a95b139f0efba",
+      "unchangedFromBase": true,
+      "id": "medical-stretcher",
+      "size": [
+        1923,
+        818
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "extrema": [
+          0,
+          255
+        ],
+        "transparentPixels": 867263,
+        "nonzeroBounds": [
+          0,
+          19,
+          1923,
+          818
+        ],
+        "bounds32": [
+          12,
+          87,
+          1913,
+          813
+        ]
+      },
+      "sourceRect": [
+        10,
+        85,
+        1905,
+        730
+      ],
+      "anchors": {
+        "ground": [
+          961,
+          812
+        ],
+        "mattress": [
+          96,
+          87,
+          1733,
+          88
+        ],
+        "support": [
+          962,
+          170
+        ]
+      },
+      "rawGeneratorBytesPreserved": true,
+      "generatedInThisLot": false,
+      "previousProvenance": {
+        "path": "docs/development/PROLOGUE_ART_PROVENANCE_20261117.json",
+        "baseCommit": "ee565717bdc698594c41f76fe1e1c72c2a730656",
+        "outputId": "medical-stretcher"
+      }
+    }
+  ],
+  "runtime": {
+    "schema": "port-quay-runtime-art-layout-v1",
+    "baseCommit": "ee565717bdc698594c41f76fe1e1c72c2a730656",
+    "ids": [
+      "tomas-wren-standing",
+      "lucia-ferro-standing",
+      "north-quay-patient",
+      "medical-stretcher"
+    ],
+    "assets": {
+      "tomas-wren-standing": {
+        "path": "/assets/prologue/v188/tomas-wren-standing.png",
+        "width": 1024,
+        "height": 1536
+      },
+      "lucia-ferro-standing": {
+        "path": "/assets/prologue/v188/lucia-ferro-standing.png",
+        "width": 1024,
+        "height": 1536
+      },
+      "north-quay-patient": {
+        "path": "/assets/prologue/v188/north-quay-patient.png",
+        "width": 2172,
+        "height": 724
+      },
+      "medical-stretcher": {
+        "path": "/assets/prologue/v188/medical-stretcher.png",
+        "width": 1923,
+        "height": 818
+      }
+    },
+    "sourceRects": {
+      "tomas-wren-standing": [
+        243,
+        12,
+        497,
+        1515
+      ],
+      "lucia-ferro-standing": [
+        289,
+        12,
+        449,
+        1510
+      ],
+      "north-quay-patient": [
+        16,
+        199,
+        2139,
+        388
+      ],
+      "medical-stretcher": [
+        10,
+        85,
+        1905,
+        730
+      ]
+    },
+    "anchors": {
+      "tomas-wren-standing": {
+        "foot": [
+          493,
+          1524
+        ]
+      },
+      "lucia-ferro-standing": {
+        "foot": [
+          514,
+          1519
+        ]
+      },
+      "north-quay-patient": {
+        "support": [
+          1110,
+          573
+        ],
+        "chest": [
+          1200,
+          199,
+          640,
+          388
+        ],
+        "head": [
+          2010,
+          395
+        ],
+        "heel": [
+          90,
+          576
+        ]
+      },
+      "medical-stretcher": {
+        "ground": [
+          961,
+          812
+        ],
+        "mattress": [
+          96,
+          87,
+          1733,
+          88
+        ],
+        "support": [
+          962,
+          170
+        ]
+      }
+    },
+    "triageLayout": {
+      "mattressMetres": 2,
+      "patientMetres": 1.75,
+      "patientInsetMetres": 0.1388888888888889,
+      "chestLeft": 1200,
+      "chestRight": 1840,
+      "chestStep": 80,
+      "fixedLowerY": 448
+    },
+    "metrePx": 51,
+    "people": [
+      {
+        "person": {
+          "id": "tomas-wren",
+          "role": "quay-master",
+          "x": 330,
+          "z": -4,
+          "h": 91,
+          "facing": -1
+        },
+        "fit": {
+          "id": "tomas-wren-standing",
+          "sx": 243,
+          "sy": 12,
+          "sw": 497,
+          "sh": 1515,
+          "foot": [
+            493,
+            1524
+          ],
+          "x": 330,
+          "feetY": 628,
+          "scale": 0.06018518518518518,
+          "facing": -1
+        }
+      },
+      {
+        "person": {
+          "id": "lucia-ferro",
+          "role": "colony-doctor",
+          "x": 690,
+          "z": -2,
+          "h": 86,
+          "facing": 1
+        },
+        "fit": {
+          "id": "lucia-ferro-standing",
+          "sx": 289,
+          "sy": 12,
+          "sw": 449,
+          "sh": 1510,
+          "foot": [
+            514,
+            1519
+          ],
+          "x": 690,
+          "feetY": 626,
+          "scale": 0.05706702057067021,
+          "facing": 1
+        }
+      }
+    ],
+    "triage": {
+      "stretcher": {
+        "id": "medical-stretcher",
+        "sx": 10,
+        "sy": 85,
+        "sw": 1905,
+        "sh": 730,
+        "scale": 0.058857472590882864,
+        "x": 712.0265435660704,
+        "y": 581.2106174264281,
+        "w": 112.12348528563186,
+        "h": 42.96595499134449
+      },
+      "patient": {
+        "id": "north-quay-patient",
+        "sx": 16,
+        "sy": 199,
+        "sw": 2139,
+        "sh": 388,
+        "scale": 0.04172510518934081,
+        "x": 724.1716195422197,
+        "y": 570.6083132558397,
+        "w": 89.25,
+        "h": 16.189340813464234
+      },
+      "mattress": {
+        "x": 717.0882862088863,
+        "y": 581.3283323716099,
+        "w": 102,
+        "h": 5.1794575879976925
+      },
+      "ground": [
+        768,
+        624
+      ],
+      "supportY": 586.2135025966531
+    }
+  },
+  "sourceHashes": {
+    "src/port-quay-art-v188.js": "dbae88f45d2b296994841c561f438b314c6c5556fdb79a26eebfac5d19e32997",
+    "src/hub-port-meridien-v90.js": "c6b38c0fd78f8576cfc72769b6b3b0a8bda12764dfdffb2b35f20bbf23ff1fc9",
+    "scripts/verify-quay-coherence-v188.mjs": "a0c770e096a727bdb68718b6787f4ab02aeb0e4cc670b3eca5f4979a4d28bc97"
+  },
+  "protectedFiles": [
+    {
+      "path": "src/port-meridien-v90.js",
+      "bytes": 8483,
+      "sha256": "897e2d837cc512a24cb9093374a915cd1b0e6ab1d9f06336a9c5d7e7bd229c41",
+      "unchangedFromBase": true
+    },
+    {
+      "path": "src/prologue-art-v188.js",
+      "bytes": 25152,
+      "sha256": "df4ff4fc5a69c8f1834eae84a3687ab374e00591af0531be95b7bc19538986de",
+      "unchangedFromBase": true
+    },
+    {
+      "path": "src/story-cinematics-v188.js",
+      "bytes": 76275,
+      "sha256": "6f1715c07ce920fc375eeb2fb3668b6826ac437cf8b61daf854fdb753556e47f",
+      "unchangedFromBase": true
+    },
+    {
+      "path": "src/save.js",
+      "bytes": 159628,
+      "sha256": "6b8a71b39143f289775ad5b8a497fbdbcddacec774bb2387904d030274c1f125",
+      "unchangedFromBase": true
+    }
+  ],
+  "visualReplacement": {
+    "previousMedicalProp": "assets/openai/hub/props/medical-bed.png",
+    "previousPresentation": "Heavy medical bed with a monitor arm; historical 112 by 87 pixel box kept as fallback.",
+    "currentPresentation": "Empty rolling stretcher and patient as separate transparent images; uniform scale based on the 2 metre mattress.",
+    "monitorArm": "Absent from the new source; no interaction or narrative consumer was found for the old arm.",
+    "people": "Existing bodies derived from the project portraits; Wren mirrors toward the west ramp, Ferro faces the patient.",
+    "threeEscortedResidents": "The existing animated survivor sheet, positions and frame selection are retained."
+  },
+  "nativeMotion": {
+    "owner": "hub.animationTime",
+    "frequencyRadiansPerSecond": 2.2,
+    "thoraxLiftPixels": [
+      0,
+      1
+    ],
+    "function": "reducedMotion ? 0 : Math.max(0, Math.sin(time * 2.2))",
+    "fixedParts": [
+      "head",
+      "legs",
+      "hand",
+      "support strip",
+      "stretcher"
+    ],
+    "reducedMotionLift": 0
+  },
+  "loading": {
+    "owner": "withPortMeridienV90.start after active-quay admission",
+    "newRequestsPerColdQuayEntry": 4,
+    "requestsFromDraw": 0,
+    "pendingAndReadyRequestsShared": true,
+    "errorsRetriedAtLaterEntry": true,
+    "lateCallbacksRestartOrRepaintHub": false,
+    "fallback": "Wren and Ferro independently; patient and stretcher as an atomic pair.",
+    "inheritedFallbackLimit": "If the old medical-bed image also fails, its historical fallback has no painted support; the all-new-art fallback does not claim all-images-failed coverage."
+  },
+  "distribution": {
+    "newShellModule": "/src/port-quay-art-v188.js",
+    "shellEntries": 726,
+    "newImagePrecacheEntries": 0,
+    "runtimePngPaths": "The four existing exact prologue paths remain unchanged.",
+    "saveSchema": 52,
+    "developmentDocumentsSourceOnly": true
+  },
+  "qa": {
+    "independentRenderReceipt": {
+      "path": "docs/development/PORT_QUAY_ART_RENDER_RECEIPT_20261117.json",
+      "sha256": "719268607bbd3dc5dc8cc2347dc99b3eac235543368c1a5ea4677390bb9016ac"
+    },
+    "independentRenderSummary": {
+      "targetConditions": 12,
+      "baselineFrames": 12,
+      "currentFrames": 12,
+      "additionalPresentationFrames": 1,
+      "newPngsGenerated": 0,
+      "reusedNewArtPngs": 4,
+      "baselineTransformObservations": 480,
+      "currentTransformObservations": 479,
+      "inheritedTransformObservations": 471,
+      "nativeRespirationObservations": 8,
+      "errors": 0,
+      "checks": 66,
+      "checksPassed": 66,
+      "unchangedSourceFiles": 607,
+      "outsideArtChangedPixels": 0
+    },
+    "overview": {
+      "path": "docs/development/PORT_QUAY_ART_OVERVIEW_20261117.png",
+      "sha256": "1e3cb79e05a64449bf6654d17fb318173b979fca3078f4cce983376b8f650fcc"
+    },
+    "targetedTests": {
+      "command": "node --test --test-name-pattern='^quay' scripts/verify-quay-coherence-v188.mjs scripts/verify-hub-depth-rooms-v188.mjs scripts/verify-bugfix-hub-story-v188.mjs",
+      "tests": 19,
+      "pass": 19,
+      "fail": 0,
+      "logSha256": "1655c90ed59f216b028f801b30c73a6d4247ea61bfb9150611b242f42d735d57"
+    },
+    "cacheAndSaveTests": {
+      "command": "npm run test:audit",
+      "finishedAtUtc": "2026-11-17T13:55:41.212414+00:00",
+      "exitCode": 0,
+      "durationSeconds": 2.351830322004389,
+      "logSha256": "b2f19034be31bf0d093765756c14e37609dd7324c1b5eb69bee744e0ee1f014b",
+      "summary": {
+        "tests": "132",
+        "pass": "132",
+        "fail": "0",
+        "skipped": "0"
+      }
+    },
+    "staticContinuity": {
+      "schema": "port-quay-independent-static-continuity-v1",
+      "baseCommit": "ee565717bdc698594c41f76fe1e1c72c2a730656",
+      "checkedAtUtc": "2026-11-17T14:00:15.117Z",
+      "unchangedExports": [
+        "PORT_SCENE_V188",
+        "PORT_ASSETS_V90",
+        "PORT_METRE_PX_V188"
+      ],
+      "geometryPhases": [
+        "unload",
+        "carry",
+        "triage",
+        "power",
+        "escort",
+        "report",
+        "complete"
+      ],
+      "allGeometryEqual": true,
+      "protectedFiles": [
+        {
+          "path": "src/port-meridien-v90.js",
+          "sha256": "897e2d837cc512a24cb9093374a915cd1b0e6ab1d9f06336a9c5d7e7bd229c41",
+          "unchanged": true
+        },
+        {
+          "path": "src/prologue-art-v188.js",
+          "sha256": "df4ff4fc5a69c8f1834eae84a3687ab374e00591af0531be95b7bc19538986de",
+          "unchanged": true
+        },
+        {
+          "path": "src/story-cinematics-v188.js",
+          "sha256": "6f1715c07ce920fc375eeb2fb3668b6826ac437cf8b61daf854fdb753556e47f",
+          "unchanged": true
+        },
+        {
+          "path": "src/save.js",
+          "sha256": "6b8a71b39143f289775ad5b8a497fbdbcddacec774bb2387904d030274c1f125",
+          "unchanged": true
+        }
+      ]
+    },
+    "publicationChecks": "Full release, source, build and distribution checks are reported separately for the exact published commit.",
+    "actualLocalChromiumJourney": false
+  },
+  "fidelity": {
+    "status": "Measured integration of project-original people and props, using unchanged reviewed generator output bytes.",
+    "externalCanonicalOneToOneCertification": false,
+    "scopeLimit": "This lot does not replace the quay stern, containers, other native props, or the three animated residents; it does not close the campaign art backlog."
+  }
+}

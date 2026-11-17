@@ -47,9 +47,25 @@ def open_view(page, view):
     page.locator(f'#nav [data-view="{view}"]').click()
 
 
+def open_title_menu_after_intro(page, timeout=45000):
+    # The fading intro admits mouse clicks while still capturing keyboard
+    # input. Wait before entering the menu, hence before any restored flight
+    # can advance. Detachment and the existing click share its original budget.
+    deadline = time.monotonic() + timeout / 1000
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('Title entry exceeded its original intro and click budget.')
+        return milliseconds
+
+    page.locator('#intro-v188').wait_for(state='detached', timeout=remaining())
+    page.locator('#title-start').click(timeout=remaining())
+
+
 def import_initial(page, base, raw, name):
     page.goto(base, wait_until='domcontentloaded')
-    page.locator('#title-start').click(timeout=45000)
+    open_title_menu_after_intro(page)
     page.locator('#title-options').click()
     page.locator('#save-import').set_input_files({'name': name + '.json', 'mimeType': 'application/json', 'buffer': raw})
     page.wait_for_function('name=>__ATF_V51__?.saveSystem.data.player.name===name', arg=name)
@@ -413,7 +429,7 @@ def run_brood(page, args, out, report, check, capture):
     check('the visible save control stores the exact last projectile and exhausted payload', saved_bombs == frozen['bombs'] and operation['resumeState']['specialOperation']['legacyMissionV131']['bombs'] == 0)
     (out / 'observed-native-final-bomb-checkpoint.json').write_text(json.dumps(saved, ensure_ascii=False, indent=2))
     page.reload(wait_until='domcontentloaded')
-    page.locator('#title-start').click(timeout=45000); page.locator('#title-continue').click()
+    open_title_menu_after_intro(page); page.locator('#title-continue').click()
     open_view(page, 'command'); page.locator('#operation-launch').click()
     wait_brood_runtime(page, '()=>__ATF_GAME__?.running&&__ATF_GAME__.legacyMissionV131?.kind==="broodstorm"', timeout=45000)
     pause_brood_for_checkpoint(page, report, 'after-final-bomb-resume')
@@ -592,7 +608,7 @@ def run_exit(page, args, out, report, check, capture, player_id, index):
             (out / 'navigation-events-guardian-keyboard.json').write_text(json.dumps(details['keyboardNavigationEvents'], ensure_ascii=False, indent=2))
     # A real reload exercises the saved result rather than only a live module.
     page.reload(wait_until='domcontentloaded')
-    page.locator('#title-start').click(timeout=45000); page.locator('#title-continue').click()
+    open_title_menu_after_intro(page); page.locator('#title-continue').click()
     open_view(page, 'xenotrials')
     check(slug + ': native reload preserves the saved single receipt without reopening a completed duel', page.evaluate(READ_TRIALS)['match'] is None and page.evaluate(READ_TRIALS)['progress'] == settled)
     report['spatialExits'].append(details)

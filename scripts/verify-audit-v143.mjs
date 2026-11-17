@@ -234,7 +234,7 @@ test('colony cards: invalid and newly private responses cannot leave a usable ca
 });
 test('Reviewed scene art: Asphodele, Act V, biological evidence and prologue stay lazy through installation and survive a later network interruption', async () => {
   const h = host();
-  assert.equal(h.api.CACHE, 'atf-v143-prologue-art-20261117');
+  assert.equal(h.api.CACHE, 'atf-v143-port-quay-art-20261117');
   await h.dispatch('install');
   const cache = await h.caches.open(h.api.CACHE);
   assert.equal(h.api.SHELL.filter(path => path === '/src/biological-art-v188.js').length, 1,
@@ -243,6 +243,9 @@ test('Reviewed scene art: Asphodele, Act V, biological evidence and prologue sta
   assert.equal(h.api.SHELL.filter(path => path === '/src/prologue-art-v188.js').length, 1,
     'the prologue presentation module is an explicit offline-shell dependency');
   assert.ok(await cache.match(req('/src/prologue-art-v188.js')));
+  assert.equal(h.api.SHELL.filter(path => path === '/src/port-quay-art-v188.js').length, 1,
+    'the playable quay adapter is an explicit offline-shell dependency');
+  assert.ok(await cache.match(req('/src/port-quay-art-v188.js')));
   for (const path of REVIEWED_RUNTIME_ART_V188) {
     assert.equal(h.api.SHELL.includes(path), false, 'scene, mission, hub and cinematic art must not increase the mandatory precache');
     assert.equal(h.calls.some(request => new URL(request.url).pathname === path), false, 'installation must not fetch the image');
@@ -437,7 +440,11 @@ test('release workflow, reports and gamedev guidance are source tooling only', (
     'docs/development/PROLOGUE_ART_PROVENANCE_20261117.json',
     'docs/development/PROLOGUE_ART_QA_20261117.md',
     'docs/development/PROLOGUE_ART_OVERVIEW_20261117.png',
-    'docs/development/PROLOGUE_ART_RENDER_RECEIPT_20261117.json']) {
+    'docs/development/PROLOGUE_ART_RENDER_RECEIPT_20261117.json',
+    'docs/development/PORT_QUAY_ART_PROVENANCE_20261117.json',
+    'docs/development/PORT_QUAY_ART_QA_20261117.md',
+    'docs/development/PORT_QUAY_ART_OVERVIEW_20261117.png',
+    'docs/development/PORT_QUAY_ART_RENDER_RECEIPT_20261117.json']) {
     assert.equal(isPublicDistributionPathV86(path), true); assert.equal(isPublicDistributionPathV86(path, { built: true }), false);
   }
 });
@@ -509,6 +516,7 @@ test('gamedev guidance admission stays exact and rejects unrelated documents', (
     'docs/development/ACT5_ART_QA_20261117.md.bak', 'docs/development/ACT5_ART_UNREVIEWED_20261117.png',
     'docs/development/BIOLOGICAL_ART_QA_20261117.md.bak', 'docs/development/BIOLOGICAL_ART_UNREVIEWED_20261117.png',
     'docs/development/PROLOGUE_ART_QA_20261117.md.bak', 'docs/development/PROLOGUE_ART_UNREVIEWED_20261117.png',
+    'docs/development/PORT_QUAY_ART_QA_20261117.md.bak', 'docs/development/PORT_QUAY_ART_UNREVIEWED_20261117.png',
     'AGENTS.md.bak', 'src/AGENTS.md', 'docs/development/../private.md']) {
     assert.equal(isPublicDistributionPathV86(path), false, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);

@@ -86,12 +86,24 @@ def point(page, x, y):
       return {x:(m.x+(x+.5)*m.scale)/e.canvas.width*r.width,y:(m.y+(y+.5)*m.scale)/e.canvas.height*r.height};}''', {'x': x, 'y': y})
 
 
-def enter_forge(page):
-    page.locator('#title-start:visible, #title-forge:visible').first.wait_for(state='visible', timeout=45000)
+def enter_forge(page, timeout=45000):
+    # The intro's transparent fade admits mouse clicks before it releases
+    # keyboard capture. Finish it before any playtest can launch or resume.
+    # Detachment, title controls and editor readiness share the entry budget.
+    deadline = time.monotonic() + timeout / 1000
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('Forge entry exceeded its original intro and menu budget.')
+        return milliseconds
+
+    page.locator('#intro-v188').wait_for(state='detached', timeout=remaining())
+    page.locator('#title-start:visible, #title-forge:visible').first.wait_for(state='visible', timeout=remaining())
     if page.locator('#title-start').is_visible():
-        page.locator('#title-start').click()
-    page.locator('#title-forge').click()
-    page.locator('#editor-canvas').wait_for(state='visible')
+        page.locator('#title-start').click(timeout=remaining())
+    page.locator('#title-forge').click(timeout=remaining())
+    page.locator('#editor-canvas').wait_for(state='visible', timeout=remaining())
 
 
 def walk(page, kind, target, direction=1):

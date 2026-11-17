@@ -90,6 +90,46 @@ def open_plan(page):
     page.locator('[data-panel="command"].active #operation-launch').wait_for(state='visible')
 
 
+def select_qz18_return_after_cinematics(page, operation_id, timeout=30000):
+    # Opening Command acknowledges the story return and recommends QZ17.
+    # Finish both public films before explicitly consulting the QZ18 plan;
+    # their Promise chain can briefly have no overlay between its two parts.
+    deadline = time.monotonic() + timeout / 1000
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('QZ18 return consultation exceeded its original budget.')
+        return milliseconds
+
+    owned_return = '''id=>{const s=__ATF_V51__.saveSystem.data;
+      const last=s.strategy.lastOperation, archived=s.archiveRelayArchivesV122?.lastReturnV160;
+      return s.strategy.currentOperation===null&&last?.id===id&&last.success===true
+      &&last.campaignId==='special-archive-relay'&&archived?.operationId===id
+      &&archived.campaignId==='special-archive-relay'&&archived.success===true;}'''
+    assert page.evaluate(owned_return, operation_id), 'The successful QZ18 return owns this consultation.'
+    public_skips = []
+    for cinematic_id, title in [('cin-20', 'Treize minutes'), ('cin-20-rook', 'La signature')]:
+        seen = 'id=>(__ATF_V51__.saveSystem.data.storyCampaignV188?.cinematicsSeen||[]).includes(id)'
+        selector = f'.cinematic-v188[aria-label="{title}"] .cinematic-skip-v188'
+        page.wait_for_function(f'''id=>{{const skip=document.querySelector('{selector}');
+          return ({seen})(id)||Boolean(skip&&skip.getClientRects().length
+            &&getComputedStyle(skip).visibility!=='hidden');}}''', arg=cinematic_id, timeout=remaining())
+        if not page.evaluate(seen, cinematic_id):
+            page.locator(selector).click(timeout=remaining())
+            public_skips.append(cinematic_id)
+        page.wait_for_function(seen, arg=cinematic_id, timeout=remaining())
+    page.wait_for_function('()=>!document.querySelector(".cinematic-v188")', timeout=remaining())
+    page.locator('#command-world-v110').select_option('', timeout=remaining())
+    page.locator('#command-mission-v110').select_option('special-archive-relay', timeout=remaining())
+    page.wait_for_function(f'''id=>({owned_return})(id)
+      &&__ATF_V51__.saveSystem.data.strategy.plannedCampaignId==='special-archive-relay'
+      &&!document.querySelector('.cinematic-v188')''', arg=operation_id, timeout=remaining())
+    page.locator('[data-campaign-story-return]').wait_for(state='visible', timeout=remaining())
+    return {'operationId': operation_id, 'publicSkips': public_skips,
+            'selectedCampaignId': 'special-archive-relay', 'timeLimitSeconds': timeout / 1000}
+
+
 def continue_existing_profile(page):
     # The first title button opens the title menu; CONTINUER owns resumption.
     page.locator('#title-start').click(timeout=45000)
@@ -425,6 +465,7 @@ with sync_playwright() as pw:
         board_ledger = next(item for item in back_aboard['strategy']['lastOperation']['insertionState']['phases'] if item['kind'] == 'preparation')['payload']['campaignStoryReturnV160']
         check('the actual return aboard keeps the victory receipt and cannot repay it', back_aboard['strategy']['currentOperation'] is None and back_aboard['strategy']['lastOperation']['id'] == returned['id'] and back_aboard['strategy']['lastOperation']['success'] is True and back_aboard['galaxy']['resources'] == victory['galaxy']['resources'] and back_aboard['archiveRelayArchivesV122'] == victory['archiveRelayArchivesV122'] and board_ledger['receipt'] == ledger['receipt'])
         open_plan(page)
+        report['nativeReturnDebrief'] = select_qz18_return_after_cinematics(page, returned['id'])
         check('return dialogue distinguishes documented cause and unidentified author', 'l’identité de son auteur reste inconnue' in page.locator('[data-campaign-story-return]').inner_text())
         capture(page, '09-return-dialogue.png', '#operation-plan')
         # Native hub exit persists the actual hub pose before command becomes

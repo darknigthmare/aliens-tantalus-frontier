@@ -7,6 +7,7 @@ import { hubPlayerAppearanceSnapshotV126 } from './player-appearance-hub-v126.js
 import { currentLanguageV185 } from './i18n-v185.js';
 import { PORT_DEPTH_ROOM_V188, depthToScreenOffsetV188 } from './hub-depth-rooms-v188.js';
 import { drawDepthPropV188 } from './hub-depth-runtime-v188.js';
+import { preloadPortQuayArtV188, drawPortQuayPersonV188, drawPortQuayTriageV188 } from './port-quay-art-v188.js';
 import { ARMORY_STOREFRONT_SOURCE_V169, getArmoryStorefrontPlanV169,
   drawArmoryStorefrontV169, getArmoryStoreContactV169, isArmoryArtAdmittedV171,
   isArmoryStorefrontImageReadyV172 } from './hub-armory-storefront-v169.js';
@@ -27,8 +28,8 @@ const ready = image => Boolean(image?.complete && image.naturalWidth);
 const gateClosed = state => ['unload', 'carry', 'triage', 'power'].includes(state?.phase);
 
 // V188 coherence pass (bible §4 P-3, §56.12). Scale: the marine (92 px) is about 1.80 m, so 1 m ≈ 51 px.
-// Everything placed here is a project adaptation drawn in primitives or from existing props (no new image):
-// the people of §4 P-3 whose sprites are [À CRÉER] stand on the quay as placeholders.
+// Positions are the original project adaptation. Wren, Ferro and the patient
+// now reuse their reviewed prologue art; primitives remain the loading fallback.
 export const PORT_METRE_PX_V188 = 51;
 export const PORT_SCENE_V188 = Object.freeze({
   // The UD-4L stern at the west edge (its hull leaves the world); the lowered ramp ends where the marine starts.
@@ -238,6 +239,7 @@ export function withPortMeridienV90(Base) {
       for (const [key, path] of Object.entries(PORT_ASSETS_V90)) if (!this.portImagesV90.has(key)) {
         const image = new Image(); image.decoding = 'async'; image.src = path; this.portImagesV90.set(key, image);
       }
+      preloadPortQuayArtV188(this.portImagesV90);
       const pose = PhysicalHub.prototype.restoreAnnexPlayerPoseV71.call(this, this.currentAnnexV71(), {
         annexPositionX: this.portStateV90.x, annexPositionY: this.portStateV90.y, annexClimbing: this.portStateV90.climbing
       });
@@ -396,8 +398,10 @@ export function withPortMeridienV90(Base) {
       drawDropshipSternV188(ctx, scene.dropship, time, still);
       for (const light of scene.floodlights) drawFloodlightV188(ctx, light);
       if (state.phase === 'unload') lot(scene.unloadLot);
-      bitmap('medical', scene.bed.x, scene.bed.y, scene.bed.w, scene.bed.h);
-      drawPatientV188(ctx, scene.bed, time, still);
+      if (!drawPortQuayTriageV188(ctx, this.portImagesV90, scene.bed, { time, reducedMotion: still, metrePx: PORT_METRE_PX_V188 })) {
+        bitmap('medical', scene.bed.x, scene.bed.y, scene.bed.w, scene.bed.h);
+        drawPatientV188(ctx, scene.bed, time, still);
+      }
       if (!['unload', 'carry'].includes(state.phase)) lot(scene.deliveredLot);
       bitmap('console', scene.relayConsole.x, scene.relayConsole.y, scene.relayConsole.w, scene.relayConsole.h);
       drawRelayConduitV188(ctx, !gateClosed(state));
@@ -425,7 +429,10 @@ export function withPortMeridienV90(Base) {
           ? [0, 1].forEach(i => { bitmap('crate', prop.x + i * 50, 574, 50, 46); ctx.fillStyle = '#2b2419'; ctx.fillRect(prop.x, 620, prop.w, 4); })
           : prop.kind === 'iso-container' ? drawIsoContainerV188(ctx, box.x, box.y, box.w, box.h) : drawDepthPropV188(ctx, prop, box) };
       });
-      for (const person of scene.people) items.push({ z: person.z, draw: () => drawPersonV188(ctx, person, 624 + depthToScreenOffsetV188(person.z)) });
+      for (const person of scene.people) items.push({ z: person.z, draw: () => {
+        const feetY = 624 + depthToScreenOffsetV188(person.z);
+        if (!drawPortQuayPersonV188(ctx, this.portImagesV90, person, feetY)) drawPersonV188(ctx, person, feetY);
+      } });
       if (ready(civilians)) state.civiliansX.forEach((x, row) => items.push({ z: civiliansZ[row] ?? 0, draw: () => {
         const column = row === 0 && ['unload', 'carry', 'triage'].includes(state.phase) ? 2
           : state.following && portCivilianWalkingV188(x, row, this.player.x, this.player.grounded) ? 1 : 0;

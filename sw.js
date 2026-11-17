@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-prologue-art-20261117';
+const CACHE = 'atf-v143-port-quay-art-20261117';
 const SHELL = Object.freeze([
   '/src/alien-base-bridge-v1.js',
   '/src/alien-base-snapshot-v1.js',
@@ -66,6 +66,7 @@ const SHELL = Object.freeze([
   '/src/black-cocoon-presentation-v158.js',
   '/src/biological-art-v188.js',
   '/src/prologue-art-v188.js',
+  '/src/port-quay-art-v188.js',
   '/src/npc-circulation-v158.js',
   '/src/npc-annex-circulation-v159.js',
   '/src/forge-npcs-v158.js',
