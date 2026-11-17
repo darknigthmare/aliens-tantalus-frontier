@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-cargo-abyss-art-20261117';
+const CACHE = 'atf-v143-hadal-art-20261117';
 const SHELL = Object.freeze([
   '/src/alien-base-bridge-v1.js',
   '/src/alien-base-snapshot-v1.js',
@@ -69,6 +69,7 @@ const SHELL = Object.freeze([
   '/src/port-quay-art-v188.js',
   '/src/cargo-matriarch-art-v188.js',
   '/src/manta-art-v188.js',
+  '/src/hadal-player-art-v188.js',
   '/src/npc-circulation-v158.js',
   '/src/npc-annex-circulation-v159.js',
   '/src/forge-npcs-v158.js',
@@ -849,6 +850,11 @@ const CARGO_ABYSS_ART_PATHS_V188 = new Set([
   '/assets/cargo/v188/matriarch-roar-hurt.png',
   '/assets/abyss/v188/manta-6-hull.png'
 ]);
+const HADAL_ART_PATHS_V188 = new Set([
+  '/assets/abyss/v188/hadal-upper-parts.png',
+  '/assets/abyss/v188/hadal-leg-parts.png',
+  '/assets/abyss/v188/hadal-helmet.png'
+]);
 const MAX_RUNTIME_ENTRIES_V143 = 256;
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const PRIVATE_HEADERS_V143 = ['authorization', 'proxy-authorization', 'apikey', 'x-api-key', 'x-auth-token'];
@@ -873,6 +879,7 @@ function cacheableRequestV143(request) {
     if (BIOLOGICAL_ART_PATHS_V188.has(path)) return true;
     if (PROLOGUE_ART_PATHS_V188.has(path)) return true;
     if (CARGO_ABYSS_ART_PATHS_V188.has(path)) return true;
+    if (HADAL_ART_PATHS_V188.has(path)) return true;
     // No API, account, save, unknown document or third-party endpoint can enter
     // Cache Storage, even when it returns HTTP 200 or an image-like extension.
     return /^\/assets\/(?:openai|user|equipment)\/[a-z0-9/_.-]+\.(?:png|webp|jpg|jpeg)$/i.test(path)

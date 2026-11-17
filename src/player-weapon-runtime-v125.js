@@ -153,7 +153,8 @@ export function withPlayerWeaponRigV125(Base) {
       }
       const options = { actor: presentationActor, sample, surface: this.playerWeaponSurfaceV125(surface), images: this.images,
         timeSeconds: finite(this.animationTime), reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion || this.reducedMotion),
-        neuroActive: Boolean(this.neuro?.active && actor === this.player) };
+        neuroActive: Boolean(this.neuro?.active && actor === this.player),
+        presentationContextV188: this.playerBodyPresentationContextV188?.(actor, presentationActor, surface) || null };
       const eligibility = resolvePlayerBodyRigV125(options);
       if (!eligibility.eligible) return null;
       if (requireReady) this.preparePlayerWeaponAssetsV125();
@@ -162,7 +163,7 @@ export function withPlayerWeaponRigV125(Base) {
       // The same final pelvis/thorax registration must own the shot before a
       // draw. Applying the appearance composition only in the renderer left
       // accepted rounds and hand targets on the old, unshifted shoulders.
-      const bodyRig = this.decoratePlayerAppearanceBodyV129?.(presentationActor, rawBodyRig) || rawBodyRig;
+      const bodyRig = this.decoratePlayerAppearanceBodyV129?.(presentationActor, rawBodyRig, { ownerV188: actor }) || rawBodyRig;
       // Image readiness gates drawing only. The admitted body's measured
       // geometry still owns a shot while its PNGs are loading or unavailable.
       if (requireReady && (!bodyRig.ready || !weaponImageReadyV125(image, profile))) return null;

@@ -6,6 +6,7 @@ import { buildPlayerArticulatedLowerLayersV128 } from './player-transit-rig-v128
 import { HUMAN_LEG_DIMENSIONS_V136, HUMAN_PELVIS_HEIGHT_V136, humanFootSwingV136, humanFootTravelV136, humanMotionEnvelopeV136,
   smoothHumanStepV136 } from './human-motion-v136.js';
 import { PLAYER_HUMAN_PROPORTIONS_V160, getPlayerTorsoAxisV160 } from './player-human-proportions-v160.js';
+import { finalizeHadalPlayerBodyV188 } from './hadal-player-art-v188.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const clamp = (value, low = 0, high = 1) => Math.max(low, Math.min(high, finite(value, low)));
@@ -338,6 +339,11 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
   if (reason) return freeze({ schema: 129, eligible: false, ready: false, reason, bodyRig,
     legs: null, contacts: null, requiredAssets: [], missingAssets: [] });
   const s = bodyRig.scale, f = bodyRig.facing, floor = actor.y + actor.h;
+  // The admitted pressure stance registers the complete upper body on the
+  // unchanged oxygen probe. Its pelvis follows the real waist; the native
+  // gait, sole targets, bone lengths and collision continue to own support.
+  const hadalPelvis = bodyRig.hadalPresentationV188?.preserveContacts === false
+    && validPoint(bodyRig.hadalPresentationV188.pelvis) ? bodyRig.hadalPresentationV188.pelvis : null;
   const grounded = actor.grounded === true;
   const waist = transform(bodyRig.matrix, anatomical.waist);
   const crouching = Boolean(bodyRig.crouching || bodyRig.stance === 'working-kneel');
@@ -354,9 +360,9 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
     // Keep the articulated skeleton over its physical foot axis; the pelvis
     // panel still connects to the actual authored belt above it. Anatomical
     // support below can lower these hips only as far as real leg reach needs.
-    const center = actor.x + actor.w / 2;
+    const center = hadalPelvis?.x ?? actor.x + actor.w / 2;
     const height = crouching ? HUMAN_PELVIS_HEIGHT_V136.crouching : HUMAN_PELVIS_HEIGHT_V136.standing;
-    hips.near = point(center + f * hipOffset.near * s, floor - height * s + pelvisBob * s);
+    hips.near = point(center + f * hipOffset.near * s, (hadalPelvis?.y ?? floor - height * s) + pelvisBob * s);
     hips.far = point(center + f * hipOffset.far * s, hips.near.y);
   }
   const legs = {}, requestedFeet = {}, contacts = { floorY: grounded ? floor : null, feet: { near: null, far: null } };
@@ -431,8 +437,8 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
   // transfer now carries chest, neck, shoulders, arms and weapon together.
   // The original foot pivot, collision and actual leg contacts stay fixed.
   const weightTransfer = grounded && !staticAction ? point(
-    (hips.near.x + hips.far.x) / 2 - (actor.x + actor.w / 2),
-    hips.near.y - (floor - (crouching ? HUMAN_PELVIS_HEIGHT_V136.crouching : HUMAN_PELVIS_HEIGHT_V136.standing) * s)
+    (hips.near.x + hips.far.x) / 2 - (hadalPelvis?.x ?? actor.x + actor.w / 2),
+    hips.near.y - (hadalPelvis?.y ?? floor - (crouching ? HUMAN_PELVIS_HEIGHT_V136.crouching : HUMAN_PELVIS_HEIGHT_V136.standing) * s)
   ) : point(0, 0);
   const translated = p => point(p.x + weightTransfer.x, p.y + weightTransfer.y);
   const transfersWeight = Math.abs(weightTransfer.x) + Math.abs(weightTransfer.y) > 1e-9;
@@ -442,7 +448,8 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
     ? Object.fromEntries(Object.entries(bodyRig.shoulders).map(([side, p]) => [side, translated(p)])) : bodyRig.shoulders;
   const registeredWaist = translated(waist);
   const anatomicalBelt = grounded && !staticAction
-    ? point(registeredWaist.x, Math.min(registeredWaist.y, hips.near.y - 12 * s)) : waist;
+    ? hadalPelvis ? registeredWaist
+      : point(registeredWaist.x, Math.min(registeredWaist.y, hips.near.y - 12 * s)) : waist;
   const lower = buildPlayerArticulatedLowerLayersV128({ waist: anatomicalBelt, hips, legs, scale: s, facing: f,
     legDefinitions, pelvisBelt: grounded && !staticAction,
     projectedHipSpread: PLAYER_HUMAN_PROPORTIONS_V160.sourceHipSpreadRatio });
@@ -480,7 +487,7 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
     stopRecoveryV165: state.stopRecoveryV165 ? { ...state.stopRecoveryV165,
       duration: C.stopRecoveryDurationV165, progress: clamp((state.time - state.stopRecoveryV165.startedAt) / C.stopRecoveryDurationV165),
       owner: 'single-observed-simulation-stop', collisionMoved: false } : null, legs, contacts };
-  const decorated = { ...bodyRig, baseBodyRigV160: bodyRig, matrix: bodyMatrix,
+  const decorated = finalizeHadalPlayerBodyV188({ ...bodyRig, baseBodyRigV160: bodyRig, matrix: bodyMatrix,
     torsoAxisV160: bodyRig.torsoAxisV160 || getPlayerTorsoAxisV160(bodyMatrix, anatomical, f),
     shoulders: bodyShoulders, neutralGrip: transfersWeight ? translated(bodyRig.neutralGrip) : bodyRig.neutralGrip,
     pouch: servicePouch,
@@ -488,7 +495,7 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
       y: bodyRig.sprite.y + weightTransfer.y } : bodyRig.sprite,
     weightTransferV160: weightTransfer,
     ...(grounded && !staticAction ? { modularBeltV142: anatomicalBelt } : {}),
-    modularLowerLayersV128: lower, locomotionV129: detail };
+    modularLowerLayersV128: lower, locomotionV129: detail });
   const modular = resolvePlayerModularRigV126({ bodyRig: decorated, appearance, images });
   const requiredAssets = modular.requiredAssets || [];
   const missingAssets = requiredAssets.filter(asset => !playerBodyRigImageReadyV125(imageFrom(images, asset.imageKey), asset));

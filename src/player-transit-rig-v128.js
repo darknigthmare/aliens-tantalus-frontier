@@ -407,7 +407,8 @@ function buildGeometry(base,actor,state,ladder,reducedMotion,legDefinitions) {
 /** Complete render geometry, independently of image readiness. V125's weapon
  * admission is unchanged: these observations cannot fire, heal or revive. */
 export function resolvePlayerTransitRigV128({actor,appearance=actor?.appearanceV126,images=null,surface='mission',
-  timeSeconds=0,reducedMotion=false,sample=null,ladder=null,transitState=null,neuroActive=false,legDefinitions={}}={}) {
+  timeSeconds=0,reducedMotion=false,sample=null,ladder=null,transitState=null,neuroActive=false,legDefinitions={},
+  decorateBodyRigV188=null}={}) {
   let reason=identityRejection(actor,sample,surface,neuroActive);
   const current=activeKind(actor);
   const state=transitState?.schema===128 && (current===transitState.kind || !current && transitState.kind==='revive')
@@ -424,6 +425,9 @@ export function resolvePlayerTransitRigV128({actor,appearance=actor?.appearanceV
   const base=resolvePlayerBodyRigV125({actor:observed,surface,images,timeSeconds:Math.max(0,finite(timeSeconds)),reducedMotion:true});
   if(!base.eligible)return freeze({schema:128,eligible:false,ready:false,reason:base.reason,state,requiredAssets:[],missingAssets:[],firing:false});
   const geometry=buildGeometry(base,actor,state,ladder,reducedMotion,legDefinitions);
+  // A contextual suit may replace pixels on this already solved posture. Its
+  // callback must preserve the imposed skeleton and all hand/sole contacts.
+  if(typeof decorateBodyRigV188==='function')geometry.bodyRig=decorateBodyRigV188(geometry.bodyRig)||geometry.bodyRig;
   const selected=normalizePlayerAppearanceV126(appearance);
   const modular=resolvePlayerModularRigV126({bodyRig:geometry.bodyRig,appearance:selected,images});
   const requiredAssets=[...new Map([...base.requiredAssets,...modular.requiredAssets].map(a=>[a.imageKey,a])).values()];

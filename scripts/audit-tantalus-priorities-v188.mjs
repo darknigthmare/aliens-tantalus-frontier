@@ -700,6 +700,75 @@ export const TANTALUS_PRIORITIES_CARGO_ABYSS_V188 = freeze({
   }
 });
 
+// HADAL adds a contextual local Abyss presentation and the existing native
+// field-action advance. These exact C predecessors remain separate from the
+// published Cargo receipts; no registry promotion or new swim cycle is claimed.
+export const TANTALUS_PRIORITIES_HADAL_V188 = freeze({
+  "baseline": "a3634de7c294ae82554d899057fab96088ccf769",
+  "successors": {
+    "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
+      "previousSha256": "af84940ea813e6307086101b0a1439c1e02f84fd2cc6afee8f69b0527d79c812",
+      "currentSha256": "2438b8895b36a729434264e0488c4687cdf2e9a377160bdbf476a073a57e5c9c"
+    },
+    "package.json": {
+      "previousSha256": "386949dd02f996625f0ec7317fe4355f1316b3cadb000d7ee837a3ea4c0a570d",
+      "currentSha256": "48c789b2740a9b1a2b2b128699051ef3df5ae4b20efa3c35b1b277771f3b7510"
+    },
+    "scripts/verify-audit-v143.mjs": {
+      "previousSha256": "2eb58ef20c62f91c392827358da0062063efcbe793695d14d221e63de7768c87",
+      "currentSha256": "e0830aced7f0172ac455b2caa1f01fab29a886a98323ef9dffac1942eadcd999"
+    },
+    "scripts/verify-public-release-v86.mjs": {
+      "previousSha256": "71f4efa64f734ff6e378f378b90071f0159bbb54c817f7e2e42c176d08f8a5bc",
+      "currentSha256": "43d082f94a0ee3fdba5b40c55c2d663220d9f92af615e0dfd0b6196f1734faef"
+    },
+    "src/i18n-en-catalog-v185.js": {
+      "previousSha256": "c4d72221b1455a84c43112171a28cae38f74000baa2a2609f1d3f236f9944218",
+      "currentSha256": "3148d98764e42a05192d72ad7c64e565ca3648c6922704a9db7fba99b8d8ee2d"
+    },
+    "src/legacy-operation-state-v131.js": {
+      "previousSha256": "54cd1b9305cdeab348acb9b050f004a5278b8e295f3670ad23ff5d43de23e1ae",
+      "currentSha256": "68d888f3725d4fb06be41c30bee84e776cdc7dcad92e52f725e8511a8cb157ab"
+    },
+    "src/legacy-operations-v131.js": {
+      "previousSha256": "ae50089c68584ef983e7fd9ab70537eeb824ba4fb1b0a427fab9e2d9d2948bb4",
+      "currentSha256": "e3233ae75f5e81436cf920e28b9cf7ea52e03b3a99860992dd3d74449eda8d29"
+    },
+    "src/player-appearance-runtime-v126.js": {
+      "previousSha256": "cce67f9128241fcf6e8f6932a57ec73b080c7e875acf024e15259450dbd9188b",
+      "currentSha256": "8bb9769611a9c117fdebd039343d59a57e2e3c9c97a508224134c079cf1b5c11"
+    },
+    "src/player-body-rig-v125.js": {
+      "previousSha256": "401f81aaf0b2f1ab3b90353486782aa755fb54fd16084a5beda964c5d6c8a1df",
+      "currentSha256": "f281fa6f7ff16263b5b6dc5a249e5db0a76e994bd2d680af7b637deaf26e0f71"
+    },
+    "src/player-locomotion-rig-v129.js": {
+      "previousSha256": "4af0bb1aaca511418267e0e5fead565de6ec739263c35ffa84eeb85573416dda",
+      "currentSha256": "e3001bebca64500ccd12a0ba50fc3c16fe1700acbf89845a694f52e16f62bd06"
+    },
+    "src/player-modular-rig-v126.js": {
+      "previousSha256": "2fef117a684b16b6c426ed93f932ce91e660648682f50600c799f5cd6126c8f9",
+      "currentSha256": "a63248ee1295dd786ac030c3825e596fe4927f202c4cf7ccd82b5c9d9a4699c5"
+    },
+    "src/player-transit-rig-v128.js": {
+      "previousSha256": "5aceb439b4d5b5421073e4a9bd0fa0e5a7f8d2673fbbf3e88dbc69ebd98472fd",
+      "currentSha256": "9ac395f6122f45f1c96b70238f81129bf501eab61d11c0529415cf71115f6b08"
+    },
+    "src/player-weapon-runtime-v125.js": {
+      "previousSha256": "a2d11f762b1064be9b888e7d1e9502e161784be9f09012376b11426fe88b2032",
+      "currentSha256": "88ab2fb9c476a8d07b1cecd961c9b7844833283406ea74b9fa1915401d534ca6"
+    },
+    "sw.js": {
+      "previousSha256": "85c8f787966610c1cd17570f137717222334a01d337da30ed2898a1385610b24",
+      "currentSha256": "024d58728b16a4485dcf618a822280003b7eeb966561df0eac3b1e17c44b4b19"
+    }
+  },
+  "addedSources": {
+    "scripts/verify-hadal-player-art-v188.mjs": "e0b4bd68e153235ece159b282b77f8e7682f580598e8940b98bafd5d88ef72bd",
+    "src/hadal-player-art-v188.js": "7cc75eefd3b187c166368d037696865cc8072eefd827b8b0cd4da818ee33c5f3"
+  }
+});
+
 // V157/V158 remain immutable reports. This records only the reviewed registry
 // declaration after Cargo's dedicated art; clip/pixel evidence is verified
 // separately. Neither Cocon nor HADAL gains a completed scope or canon claim.
@@ -793,11 +862,18 @@ export function reviewedTantalusPrioritiesDigestV188(path, endpoint) {
     current = quay.currentSha256;
   }
   const cargoAbyss = TANTALUS_PRIORITIES_CARGO_ABYSS_V188.successors[path];
-  if (!cargoAbyss) return current;
-  assert.equal(current, cargoAbyss.previousSha256, 'Broken 232693f1-to-cargo-abyss source chain: ' + path);
-  assert.ok(validHash(cargoAbyss.currentSha256), 'Invalid cargo-abyss source digest: ' + path);
-  assert.notEqual(cargoAbyss.currentSha256, cargoAbyss.previousSha256, 'A cargo-abyss successor must identify changed bytes: ' + path);
-  return cargoAbyss.currentSha256;
+  if (cargoAbyss) {
+    assert.equal(current, cargoAbyss.previousSha256, 'Broken 232693f1-to-cargo-abyss source chain: ' + path);
+    assert.ok(validHash(cargoAbyss.currentSha256), 'Invalid cargo-abyss source digest: ' + path);
+    assert.notEqual(cargoAbyss.currentSha256, cargoAbyss.previousSha256, 'A cargo-abyss successor must identify changed bytes: ' + path);
+    current = cargoAbyss.currentSha256;
+  }
+  const hadal = TANTALUS_PRIORITIES_HADAL_V188.successors[path];
+  if (!hadal) return current;
+  assert.equal(current, hadal.previousSha256, 'Broken a3634de7-to-hadal source chain: ' + path);
+  assert.ok(validHash(hadal.currentSha256), 'Invalid hadal source digest: ' + path);
+  assert.notEqual(hadal.currentSha256, hadal.previousSha256, 'A hadal successor must identify changed bytes: ' + path);
+  return hadal.currentSha256;
 }
 
 export function verifyTantalusPrioritiesV188(readSource = readRepository) {
@@ -839,6 +915,18 @@ export function verifyTantalusPrioritiesV188(readSource = readRepository) {
       'Broken historical-to-232693f1 endpoint: ' + path);
     else successors.set(path, receipt);
   }
+  const hadal = TANTALUS_PRIORITIES_HADAL_V188;
+  for (const [path, receipt] of Object.entries(hadal.successors)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
+    assert.equal(Object.hasOwn(continuation.addedSources, path) || Object.hasOwn(prologue.addedSources, path)
+      || Object.hasOwn(quay.addedSources, path) || Object.hasOwn(cargoAbyss.addedSources, path), false,
+    'A hadal successor cannot replace a separately added V188 source: ' + path);
+    const previous = cargoAbyss.successors[path] || quay.successors[path] || prologue.successors[path] || successors.get(path);
+    if (previous) assert.equal(receipt.previousSha256, previous.currentSha256,
+      'Broken historical-to-a3634de7 endpoint: ' + path);
+    else successors.set(path, receipt);
+  }
   for (const [path, receipt] of successors) {
     assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
     assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
@@ -847,7 +935,7 @@ export function verifyTantalusPrioritiesV188(readSource = readRepository) {
   }
   const addedSources = new Set();
   for (const [path, digest] of [...Object.entries(continuation.addedSources), ...Object.entries(prologue.addedSources),
-    ...Object.entries(quay.addedSources), ...Object.entries(cargoAbyss.addedSources)]) {
+    ...Object.entries(quay.addedSources), ...Object.entries(cargoAbyss.addedSources), ...Object.entries(hadal.addedSources)]) {
     assert.equal(successors.has(path) || addedSources.has(path), false, 'A new V188 source cannot replace a successor or added source: ' + path);
     addedSources.add(path);
     assert.ok(validHash(digest), 'Invalid new V188 source digest: ' + path);

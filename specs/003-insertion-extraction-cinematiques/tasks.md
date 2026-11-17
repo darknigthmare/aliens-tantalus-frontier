@@ -27,7 +27,7 @@
 
 ## Phase 5: Restant (hors de ce lot)
 - [ ] T018 Atterrissage et embarquement dans le niveau (agent moteur) : dropship posé, rampe, marines ou APC, prise de contrôle ; émission de l'événement d'embarquement.
-- [ ] T019 Production des images des emplacements, puis observation en jeu et mise à jour de `INSERTION_ASSET_FILES_PRESENT_V188`.
+- [x] T019 Produire et raccorder les 19 emplacements d'insertion/extraction : 17 PNG et deux réemplois à leur chemin d'origine, catalogue et cache à jour. La livraison du 16 novembre passe 83 tests ciblés et observe 59 plans plus neuf vues complémentaires sous Canvas natif ; voir `docs/development/INSERTION_ART_SLOTS_V188.md` et sa QA. Ce bilan ne qualifie pas un parcours navigateur complet.
 - [ ] T020 Sons enregistrés pour remplacer les repères procéduraux.
 - [ ] T021 Validation par le propriétaire des valeurs [PROPOSÉ] (mondes sans indicateur, météo, heures, répliques).
 
@@ -42,7 +42,7 @@
 - [x] T025 Vérifier les contacts du triage, la main après 45 %, les huit balises, les quatre caissons et la baie de secours ; rendre les 37 messages et COCYTE visibles ; conserver le globe entier et proportionné dans les deux orbites. Les deux suites cinématiques passent **39/39** ; la revue Canvas et ses limites sont dans `docs/development/PROLOGUE_ART_QA_20261117.md`.
 - [x] T026 Raccorder le chargeur, les replis, le rejeu après erreur et la fermeture ; admettre onze chemins runtime exacts et un module de shell. Audit du cache et sauvegardes : **132/132**. Comparer les 17 CIN / 46 plans hors lot au rendu de la base.
 - [x] T027 Confirmer le retour APC dans la CI Chromium de `d54f13cc` : 21 victimes, 1 310 crédits, aucun second paiement. Adapter le pilote campagne au bouton public de la cinématique d’extraction ; les régressions du pilote, de pause Broodstorm et du terminal Cocon sont documentées dans la même QA (**68/68**, dont six nouvelles).
-- [ ] T028 Qualifier sur la nouvelle CI les pilotes corrigés et les traces clavier ajoutées pour les échecs Forge/menu mobile. Trials est confirmé sur R (`232693f1`) : 47 contrôles, 30 captures Chromium conservées et pause acquise avec un seul P avant/après reprise. Forge, campagne et titre gardent leur qualification distincte ; le correctif de titre T040 attend sa nouvelle CI. Les anciens succès et les hôtes locaux ne remplacent pas ces exécutions.
+- [x] T028 Qualifier les pilotes corrigés sur leurs exécutions Chromium réelles : R (`232693f1`) confirme Trials (47 contrôles, 30 captures conservées), Forge NPC (42/12), campagne (28/11) et Cocon (9/7). C (`a3634de7`) confirme le titre corrigé T040 : 128 contrôles, 18 configurations, 36 captures déclarées dans le rapport, aucune erreur de page/requête/HTTP. Le merge de test `f23c5a2a` a C pour parent et le même arbre. Les cinq workflows C sont réussis ; ces résultats ne sont pas attribués au candidat HADAL. Voir la continuation HADAL de l’audit pour les liens et empreintes.
 
 ## Phase 8 : Continuité visuelle avec le quai jouable — 17 novembre 2026
 
@@ -64,4 +64,7 @@
 - [x] T038 Corriger la planche d'attaque pour les impacts natifs 9/11 ; lier son SHA aux cellules revues et vérifier les événements réellement émis face au prélèvement du même instant. Suite corrigée 7/7 ; les 15/15 antérieurs ne sont pas réattribués.
 - [x] T039 Clôturer seulement la dette d'art Cargo dans le registre courant 19/2, en préservant les snapshots historiques 20/1 et les dettes Cocon/HADAL ; succession explicite et mutations négatives.
 - [x] T040 Attendre le retrait réel de l'introduction avant l'unique Entrée du menu après preview, dans le budget partagé de 30 s. La trace R et la régression causale montrent la capture pendant le fondu ; les deux nouveaux cas passent, le mutant sans attente échoue, la suite Intro passe 6/6. Les douze fonctions et neuf assertions existantes du pilote restent identiques. Hôtes DOM/RAF/transport déclarés ; qualification Chromium du nouveau titre dans T028.
-- [ ] T041 Produire le scaphandre HADAL modulaire et ses poses avec un contrat partagé entre tête, oxygène, bras et arme ; ne pas qualifier une simple illustration de cycle de nage achevé.
+- [x] T041 Produire le scaphandre HADAL modulaire et ses poses avec un contrat partagé entre tête, oxygène, bras et arme : trois PNG, 19 pièces, 15 composées par pose courante. La posture finale passe 151/151 tests ciblés et 1 069/1 069 contrôles Canvas sur 59 conditions. Les deux premiers raccords de stature sont rejetés et conservés dans l'historique. Aucun nouveau cycle de nage n'est déclaré ; voir `HADAL_ART_QA_20261117.md`.
+- [x] T042 Préserver le repli atomique HADAL, les six exclusions, le vrai propriétaire du tir, le budget de cache à 16 et le reçu de dessin frais pour la surcouche Legacy ; 77/77 contrôles de distribution/cache, sans précache d'image.
+- [x] T043 Faire avancer une seule fois le soin natif dans la branche Legacy : 2,2 secondes actives, +48 santé plafonnée, un kit, pause et interruptions contrôlées. Le propriétaire de l'action et `save.js` sont inchangés ; le mutant retirant le seul appel reproduit le blocage.
+- [ ] T044 Produire et vérifier le cycle de nage dédié et les animations aquatiques complémentaires ; la silhouette HADAL et la coque MANTA statique ne clôturent pas cette dette, le bestiaire ni les actes proposés.

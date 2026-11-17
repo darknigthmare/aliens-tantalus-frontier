@@ -4,6 +4,7 @@ import { sweepProjectileAabbV83 } from './projectile-collision-v83.js';
 import { resolveVehicleAnimation } from './sprite-animation-runtime.js';
 import { loadPlayerCostumeAssetsV119 } from './player-costume-skins-v119.js';
 import { preloadMantaArtV188, drawMantaArtV188 } from './manta-art-v188.js';
+import { hadalPlayerArtReadyV188 } from './hadal-player-art-v188.js';
 import { LEGACY_CAMPAIGNS_V131, LEGACY_STATIONS_V131, LEGACY_BOUNDS_V131,
   createLegacyOperationStateV131, validateLegacyOperationStateV131, legacyOperationDossierV131 } from './legacy-operation-state-v131.js';
 export { LEGACY_CAMPAIGNS_V131 } from './legacy-operation-state-v131.js';
@@ -282,6 +283,7 @@ export function withLegacyMissionsV131(BaseEngine) {
       actor.grounded = !state.aboard && this.platforms.some(platform => Math.abs(actor.y + actor.h - platform.y) < 1);
       actor.climbing = false; if (state.aboard) this.pinLegacyDriverV131();
       if (this.keys.has('KeyF') || this.keys.has('TouchFire')) this.fire(actor);
+      this.advanceFieldActionV124?.(actor, delta);
     }
     updateVehicleDriver(actor, delta, controls) { if (!this.isLegacyMissionV131()) return super.updateVehicleDriver(actor, delta, controls); }
     updateEnemy(enemy, delta) {
@@ -539,8 +541,14 @@ export function withLegacyMissionsV131(BaseEngine) {
       ctx.font = '11px monospace'; ctx.fillText('MANTA · PROTOTYPE', body.x, body.y - 12); ctx.restore();
     }
     drawActor(ctx, actor) {
+      const previousAppearance = actor?.playerAppearanceVisualV126;
       super.drawActor(ctx, actor);
       if (this.legacyMissionV131?.kind !== 'abyss' || actor !== this.player || actor.inVehicle || !actor.alive) return;
+      const appearance = actor.playerAppearanceVisualV126;
+      // Only a completed suit in THIS draw replaces the old pressure proxy.
+      // A stale receipt at the same animation time, or one lost PNG, cannot
+      // hide the native fallback overlay.
+      if (appearance !== previousAppearance && appearance?.hadal?.drawn && hadalPlayerArtReadyV188(this.images)) return;
       ctx.save(); ctx.strokeStyle = actor.magneticAttachedV131 ? '#efd18a' : '#a0e5e5'; ctx.lineWidth = 2;
       ctx.strokeRect(actor.x - 4, actor.y + 6, actor.w + 8, actor.h - 8);
       ctx.fillStyle = '#9edbdacc'; ctx.fillRect(actor.x + 3, actor.y + 14, actor.w - 6, 12); ctx.restore();

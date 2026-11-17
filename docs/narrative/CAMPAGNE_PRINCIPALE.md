@@ -2923,7 +2923,7 @@ Elles se jouent surtout au hub, avec des PNJ **[PRÉSENT]**. Besoins **[À CRÉE
 | --- | --- | --- | --- | --- | --- |
 | 1.1 Le quai noyé | Tables servies, pompes **[À CRÉER]** | Navarre **[À CRÉER]** | — | Pluie sur l'eau **[À CRÉER]** | — |
 | 1.2 Les bassins | Œufs fixés comme des coraux **[À CRÉER]** ; filets avec cocons **[DETTE]** | Drones récifaux | Bassin qui se vide (niveau d'eau) **[À CRÉER]** | Écoulement **[À CRÉER]** | Pompage **[À CRÉER]** |
-| 1.3 Plongée HADAL | Coque immergée, nid **[À CRÉER]** | Lurker récifal | Nage en scaphandre **[DETTE]** (`dedicated-hadal-manta-art`) | Bulles, particules, lampe **[À CRÉER]** | Nage **[CODE]** ; oxygène limité **[À CRÉER]** |
+| 1.3 Plongée HADAL | Coque immergée, nid **[À CRÉER]** | Lurker récifal | Tenue HADAL modulaire **[PRÉSENT]** dans le chapitre local ; cycle de nage dédié **[DETTE]** (`dedicated-hadal-manta-art`) | Bulles, particules, lampe **[À CRÉER]** | Nage **[CODE]** ; oxygène limité **[À CRÉER]** dans cet arc proposé |
 | 1.4 Reine des récifs | Fossé, nid royal **[À CRÉER]** | Reine récifale **[À CRÉER]** | Coque statique MANTA-6 **[PRÉSENT]** dans le chapitre local ; animations supplémentaires **[DETTE]** ; Reine nageant **[À CRÉER]** | Torpilles, traînées, projecteurs **[À CRÉER]** | Pilotage sous-marin **[CODE]** (chapitre existant) ; arc Nacre-7 proposé distinct |
 | 1.5 Ce que Rask voulait | Œuf royal en caisson **[À CRÉER]** | Rask, escouade W-Y | — | — | Choix laisser/saisir/détruire **[À CRÉER]** |
 | Annexes (3) | Laboratoire inondé, filets, phare **[À CRÉER]** | Pêcheur survivant **[À CRÉER]** | Canots qui approchent **[À CRÉER]** | Faisceau du phare **[À CRÉER]** | Hissage de filet **[À CRÉER]** |
@@ -3244,7 +3244,7 @@ Pour chaque élément à créer, un **lot de génération** type est indiqué :
 | --- | --- | --- |
 | M577 | Acte III, Acte V, missions | [PRÉSENT] |
 | Cheyenne | Insertion, Echo Basin, Broodstorm | [PRÉSENT] ; modulaire [DETTE] |
-| Scaphandre HADAL, sous-marin MANTA-6 | Chapitre local Abysse Noir ; arc Nacre-7 proposé | Coque statique MANTA-6 [PRÉSENT] (V188, 17 novembre 2026) ; HADAL et animations supplémentaires [DETTE] (`dedicated-hadal-manta-art`) |
+| Scaphandre HADAL, sous-marin MANTA-6 | Chapitre local Abysse Noir ; arc Nacre-7 proposé | Tenue HADAL modulaire et coque statique MANTA-6 [PRÉSENT] (V188, 17 novembre 2026) ; cycle de nage et animations supplémentaires [DETTE] (`dedicated-hadal-manta-art`) |
 | USS Tantalus, vue extérieure | Cinématiques, carte galactique | [À CRÉER] (aucun fichier trouvé ; `tantalus-command-skiff` est une navette) |
 | Station Asphodèle, vue extérieure et anneau | Cinématiques, hub | [À CRÉER] |
 | Vaisseau de Grue (Crucible) | Asphodèle, Tyndare | [À CRÉER] |
@@ -3292,7 +3292,7 @@ Pour chaque élément à créer, un **lot de génération** type est indiqué :
 | Tenue de colon d'Hadley's Hope (archive 004) | Akintola, colons | [À CRÉER] (adaptation originale, pas une copie) |
 | Tenue d'expédition W-Y | Viret, Rask | Base `weyland-yutani-commando` [PRÉSENT] ; variantes [À CRÉER] |
 | Tenue de récupérateur Crucible | Grue, récupérateurs | [À CRÉER] |
-| Scaphandre HADAL | Nacre-7 | [DETTE] |
+| Scaphandre HADAL | Nacre-7 | Art modulaire [PRÉSENT] dans le chapitre local Abysse Noir ; arc Nacre-7 proposé distinct |
 
 ### 38.8 Props — manques par famille
 
@@ -4969,3 +4969,15 @@ La continuation d'art produit quatre planches dédiées de la Matriarche de Sout
 Le chapitre existant Abysse Noir reçoit une coque MANTA-6 originale, bleu pétrole usé, en profil latéral. Elle remplace le rectangle provisoire sans changer la boîte 180 × 86, l'accès, la visée ou le tir. C'est une coque statique : les poses HADAL, la nage dédiée, le bestiaire aquatique, les animations de trappe/propulsion/dégâts et l'arc Nacre-7 proposé ne sont pas produits par cette livraison. La dette combinée `dedicated-hadal-manta-art` reste donc ouverte.
 
 Les cinq PNG sont reliés à leurs prompts, empreintes et consommateurs dans [`CARGO_ABYSS_ART_PROVENANCE_20261117.json`](../development/CARGO_ABYSS_ART_PROVENANCE_20261117.json). La [planche de contrôle](../development/CARGO_ABYSS_ART_OVERVIEW_20261117.png) et le [rapport de revue](../development/CARGO_ABYSS_ART_QA_20261117.md) documentent les 16 poses et leurs limites. Il s'agit de designs originaux du projet à partir de ses références ; aucun modèle individuel de Matriarche ou de MANTA n'était fixé plus précisément dans la bible, et aucune certification canonique globale n'est ajoutée.
+
+### 56.16 Scaphandre HADAL modulaire et posture immergée (V188, 2026-11-17)
+
+Le chapitre local Abysse Noir reçoit trois PNG dédiés au scaphandre : trois torses, huit pièces de bras et gants, un bassin, six pièces de jambes et bottes, et un casque fermé avec joint cervical. Les 19 pièces disponibles se composent sur le rig humain existant ; une pose courante en emploie 15. Les matières reprennent l'équipement pressurisé du projet : tissu anthracite, plaques olive usées, raccords en laiton terne et visière opaque. Les pixels des trois sources sont conservés. Il s'agit d'un design original de Tantalus, sans modèle canonique individuel de HADAL fixé dans la bible.
+
+Le raccord s'applique au véritable joueur admissible dans Abysse Noir, hors MANTA, sans modifier sa sélection persistante. Les trois sources basculent ensemble ; si l'une manque, les pièces natives sont conservées ensemble. La posture commune relie thorax, cou, bassin, bras et arme à la sonde d'oxygène existante, avec semelles et solveurs natifs. Le casque reste attaché au col ; il n'est pas déplacé seul. Cette posture vaut aussi pendant le repli. Le point de tir des anciennes poses aériennes peut donc changer, mais le projectile accepté, les mains et l'arme dessinée partagent le même point, indépendamment du chargement des images. Le gabarit physique de 42 × 92, les modes, les vitesses, la pression et les règles d'oxygène restent inchangés.
+
+L'ancienne bande cyan de visière et le cadre provisoire sont omis seulement si le kit a effectivement été dessiné pendant la passe courante ; un reçu ancien ne suffit pas. Les autres acteurs, les tenues incompatibles, le neuro et les transits à contacts imposés gardent leurs exclusions ou contraintes natives. Les sources sont gérées par le cache d'apparence existant, sans ajouter de boucle d'animation ni de costume sauvegardé.
+
+Un défaut de service révélé pendant cette intégration est corrigé : le déplacement Legacy court-circuitait l'avance des manipulations admises. Un appel à leur propriétaire natif permet maintenant au soin de se terminer en 2,2 secondes actives, avec un seul kit et 48 points de santé plafonnés. Pause, impacts, annulation et restauration conservent leurs règles. Aucune nouvelle règle d'annulation par intention clavier n'est ajoutée à Legacy.
+
+Les poses de support, suspension, montée, descente, visée, tir, recharge et service utilisent les animations natives. Aucun nouveau cycle de battement de nage, animation de trappe/propulsion du MANTA, bestiaire aquatique ou chapitre de l'arc Nacre-7 n'est livré par ce raccord. La dette combinée `dedicated-hadal-manta-art` reste ouverte, le registre reste à 19 chapitres partiels et deux effectifs, et `canonExact` reste faux. Les preuves et leurs limites sont dans [`HADAL_ART_QA_20261117.md`](../development/HADAL_ART_QA_20261117.md), la [planche intégrée](../development/HADAL_ART_OVERVIEW_20261117.png) et la [provenance](../development/HADAL_ART_PROVENANCE_20261117.json).

@@ -2242,6 +2242,7 @@ export const EN_CATALOG_V185 = Object.freeze({
 "HADAL : réserve d’oxygène épuisée.": "HADAL: oxygen reserve depleted.",
 "HADAL et MANTA-6 : prototypes de gameplay à présentation procédurale. Boss adapté du Ceto Reef Predator existant ; arsenal, dix castes, second boss et actes ultérieurs non produits.": "HADAL and MANTA-6: gameplay prototypes with procedural presentation. Boss adapted from the existing Ceto Reef Predator; arsenal, ten castes, second boss and later acts not produced.",
 "Coque MANTA-6 illustrée ; silhouette HADAL provisoire. Boss adapté du Ceto Reef Predator existant ; arsenal, dix castes, second boss et actes ultérieurs non produits.": "Illustrated MANTA-6 hull; provisional HADAL silhouette. Boss adapted from the existing Ceto Reef Predator; arsenal, ten castes, second boss and later acts not produced.",
+"Scaphandre HADAL et coque MANTA-6 illustrés ; nage dédiée et animations aquatiques incomplètes. Boss adapté du Ceto Reef Predator existant ; arsenal, dix castes, second boss et actes ultérieurs non produits.": "Illustrated HADAL suit and MANTA-6 hull; dedicated swimming and aquatic animations are incomplete. Boss adapted from the existing Ceto Reef Predator; arsenal, ten castes, second boss and later acts not produced.",
 "HANGAR AÉRIEN": "AIR HANGAR",
 "HARPONS": "HARPOONS",
 "HAUT": "UP",

@@ -10,7 +10,7 @@ export const LEGACY_CAMPAIGNS_V131 = Object.freeze([
     worldId: 'world-10-ceto', year: 2204, mode: 'SUBAQUATIQUE', templateId: 'planet-exterior',
     objective: 'Traverser le canyon, récupérer le noyau, stabiliser la ruche et revenir à la cloche.',
     summary: 'Nage libre, oxygène, pression, trois modes HADAL, MANTA et prédateur aquatique adapté.',
-    limitations: 'Coque MANTA-6 illustrée ; silhouette HADAL provisoire. Boss adapté du Ceto Reef Predator existant ; arsenal, dix castes, second boss et actes ultérieurs non produits.' },
+    limitations: 'Scaphandre HADAL et coque MANTA-6 illustrés ; nage dédiée et animations aquatiques incomplètes. Boss adapté du Ceto Reef Predator existant ; arsenal, dix castes, second boss et actes ultérieurs non produits.' },
   { id: 'special-broodstorm-v131', kind: 'broodstorm', specialOperationId: 'broodstorm', name: 'BROODSTORM · CORRIDOR AÉRIEN',
     worldId: 'world-01-acheron-lv-426', year: 2204, mode: 'AÉRIEN', templateId: 'planet-exterior',
     objective: 'Bombarder les nids, protéger le transport et vaincre la reine volante adaptée.',
