@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { tmpdir } from 'node:os';
 import { basename, join } from 'node:path';
 import { AUDIT_PREDECESSOR_DOCUMENTS_V157, verifyAuditSuccessionV157 } from './audit-succession-v157.mjs';
-import { verifyBroodstormRegistryContinuationV188 } from './audit-tantalus-priorities-v188.mjs';
+import { verifyQueenMotherRegistryContinuationV188 } from './audit-tantalus-priorities-v188.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { XENO_TRIALS_FIGHTERS_V96 as roster } from '../src/xeno-trials-data-v96.js';
 import { XENO_TRIALS_RIGS_V154 as rigs } from '../src/xeno-trials-rig-v154.js';
@@ -195,9 +195,9 @@ test('the succession bridge rejects changed runtime bytes and changed immutable 
   assert.throws(() => verifyAuditSuccessionV157(previous, bad));
 });
 
-test('the operations appendix retains its V157 snapshot and the current registry has only the reviewed Cargo and Broodstorm deltas', () => {
+test('the operations appendix retains its V157 snapshot and the registry has only the reviewed Cargo, Broodstorm and Queen Mother deltas', () => {
   const historicalCounts = current.runtimeContracts.operations.counts;
-  assert.deepEqual(historicalCounts, verifyBroodstormRegistryContinuationV188(operations, operationCounts).historicalCounts);
+  assert.deepEqual(historicalCounts, verifyQueenMotherRegistryContinuationV188(operations, operationCounts).historicalCounts);
   assert.equal(historicalCounts.total, 21);
   assert.equal(historicalCounts.playable, 21);
   assert.equal(historicalCounts.missing, 0);

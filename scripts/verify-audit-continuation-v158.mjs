@@ -8,7 +8,8 @@ import { tmpdir } from 'node:os';
 import { basename, join } from 'node:path';
 import { AUDIT_PREDECESSOR_DOCUMENTS_V158, verifyAuditSuccessionV158 } from './audit-succession-v158.mjs';
 import { verifyAuditSuccessionV157 } from './audit-succession-v157.mjs';
-import { TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188, verifyBroodstormRegistryContinuationV188 } from './audit-tantalus-priorities-v188.mjs';
+import { TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188, TANTALUS_PRIORITIES_QUEEN_MOTHER_REGISTRY_V188,
+  verifyQueenMotherRegistryContinuationV188 } from './audit-tantalus-priorities-v188.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { XENO_TRIALS_FIGHTERS_V96 as roster } from '../src/xeno-trials-data-v96.js';
 import { XENO_TRIALS_SEQUENCES_V156 as sequences } from '../src/xeno-trials-sequences-v155.js';
@@ -148,14 +149,16 @@ test('dedicated Cocon rendering is distinct from source-work certification and a
   assert.equal(contract.equipmentAcquiredThroughNativeBagOnly, true);
   const historicalCounts = current.runtimeContracts.operations.counts;
   assert.deepEqual(historicalCounts, previous.runtimeContracts.operations.counts);
-  assert.deepEqual(historicalCounts, verifyBroodstormRegistryContinuationV188(operations, operationCounts).historicalCounts);
+  assert.deepEqual(historicalCounts, verifyQueenMotherRegistryContinuationV188(operations, operationCounts).historicalCounts);
   assert.deepEqual(ids(current.tables['10_Operations']), operations.map(row => row.id));
   for (const row of current.tables['10_Operations'].rows) {
     const operation = operations.find(entry => entry.id === row[0]);
-    // The report keeps both original art debts; only Cargo changed status.
+    // The report keeps the original art debts; only Cargo changed status.
     assert.equal(row[3], row[0] === 'cargo-brutal' ? 'partial' : operation.implementationStatus);
     const remaining = row[0] === 'broodstorm'
-      ? TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188.previousRemainingMechanics : operation.remainingMechanics;
+      ? TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188.previousRemainingMechanics
+      : row[0] === 'queen-mother-song' ? TANTALUS_PRIORITIES_QUEEN_MOTHER_REGISTRY_V188.previousRemainingMechanics
+      : operation.remainingMechanics;
     assert.equal(row[5], row[0] === 'cargo-brutal' ? 'dedicated-cargo-matriarch-art' : remaining.join('; '));
     assert.equal(row[6], 0);
   }

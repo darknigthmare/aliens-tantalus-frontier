@@ -5,10 +5,11 @@ import { createHash } from 'node:crypto';
 import {
   TANTALUS_PRIORITIES_BASELINE_V188, TANTALUS_PRIORITIES_SUCCESSORS_V188, TANTALUS_PRIORITIES_CONTINUATION_V188,
   TANTALUS_PRIORITIES_PROLOGUE_V188, TANTALUS_PRIORITIES_QUAY_V188, TANTALUS_PRIORITIES_CARGO_ABYSS_V188,
-  TANTALUS_PRIORITIES_HADAL_V188, TANTALUS_PRIORITIES_BROODSTORM_V188,
+  TANTALUS_PRIORITIES_HADAL_V188, TANTALUS_PRIORITIES_BROODSTORM_V188, TANTALUS_PRIORITIES_QUEEN_MOTHER_V188,
   TANTALUS_PRIORITIES_SOURCE_ONLY_PATHS_V188, reviewedTantalusPrioritiesDigestV188,
   verifyTantalusPrioritiesV188, TANTALUS_PRIORITIES_CARGO_REGISTRY_V188, verifyCargoRegistryContinuationV188,
-  TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188, verifyBroodstormRegistryContinuationV188
+  TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188, verifyBroodstormRegistryContinuationV188,
+  TANTALUS_PRIORITIES_QUEEN_MOTHER_REGISTRY_V188, verifyQueenMotherRegistryContinuationV188
 } from './audit-tantalus-priorities-v188.mjs';
 import { verifyNativeQaResourcesV187 } from './audit-native-qa-resources-v187.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
@@ -18,10 +19,15 @@ import { SPECIAL_OPERATIONS_V131 as operations, SPECIAL_OPERATION_COUNTS_V131 as
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 
+// Historical verifiers keep their own inputs: restore Q to the exact B2
+// declarations first; only the Cargo test then restores Broodstorm to H.
+const bOperations = operations.map(operation => ({ ...operation, remainingMechanics: operation.id === 'queen-mother-song'
+  ? ['dedicated-queen-mother-animation', 'complete-royal-cast'] : [...operation.remainingMechanics] }));
+
 test('V188 registry continuation closes only the Cargo art debt and rejects neighboring promotions', () => {
-  // The Cargo transition remains tested on H, before Broodstorm's art debt was
-  // removed. Restore only that later delta; the historical verifier is intact.
-  const hOperations = operations.map(operation => ({ ...operation, remainingMechanics: operation.id === 'broodstorm'
+  // Cargo remains tested on H, after restoring the later Queen Mother and
+  // Broodstorm deltas. The historical verifier and its assertions stay intact.
+  const hOperations = bOperations.map(operation => ({ ...operation, remainingMechanics: operation.id === 'broodstorm'
     ? ['dedicated-flying-queen-art', 'complete-modular-dropship-corpus'] : [...operation.remainingMechanics] }));
   const transition = TANTALUS_PRIORITIES_CARGO_REGISTRY_V188;
   assert.deepEqual(transition, {
@@ -94,16 +100,16 @@ test('Broodstorm registry continuation removes only queen art, projects exact H 
   assert.deepEqual(transition.previousRemainingMechanics, ['dedicated-flying-queen-art', 'complete-modular-dropship-corpus']);
   assert.deepEqual(transition.currentRemainingMechanics, ['complete-modular-dropship-corpus']);
   assert.equal(Object.isFrozen(transition.baselineRegistry), true);
-  const before = JSON.stringify(operations);
-  const result = verifyBroodstormRegistryContinuationV188(operations, operationCounts);
+  const before = JSON.stringify(bOperations);
+  const result = verifyBroodstormRegistryContinuationV188(bOperations, operationCounts);
   assert.deepEqual(result, {
     historicalCounts: { total: 21, effective: 1, partial: 20, missing: 0, playable: 21 },
     currentCounts: { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 },
     changedIds: ['cargo-brutal', 'broodstorm'], unchangedOperations: 19
   });
-  assert.equal(JSON.stringify(operations), before, 'Projection must not rewrite live declarations or campaign objects.');
+  assert.equal(JSON.stringify(bOperations), before, 'Projection must not rewrite live declarations or campaign objects.');
   assert.equal(Object.isFrozen(result.changedIds), true);
-  assert.throws(() => verifyCargoRegistryContinuationV188(operations, operationCounts), /Only the Cargo art debt/,
+  assert.throws(() => verifyCargoRegistryContinuationV188(bOperations, operationCounts), /Only the Cargo art debt/,
     'The old verifier must not silently admit a second transition.');
   const byId = (rows, id = 'broodstorm') => rows.find(row => row.id === id);
   for (const [reason, mutate] of [
@@ -133,15 +139,88 @@ test('Broodstorm registry continuation removes only queen art, projects exact H 
     ['removed neighbor', rows => rows.pop()],
     ['duplicate identity', rows => rows.push({ ...byId(rows) })]
   ]) {
-    const mutated = operations.map(operation => ({ ...operation, remainingMechanics: [...operation.remainingMechanics] }));
+    const mutated = bOperations.map(operation => ({ ...operation, remainingMechanics: [...operation.remainingMechanics] }));
     mutate(mutated);
     assert.throws(() => verifyBroodstormRegistryContinuationV188(mutated, operationCounts), undefined, reason);
   }
-  assert.throws(() => verifyBroodstormRegistryContinuationV188(operations,
+  assert.throws(() => verifyBroodstormRegistryContinuationV188(bOperations,
     { ...operationCounts, partial: 18, effective: 3 }), /does not promote/);
-  assert.throws(() => verifyBroodstormRegistryContinuationV188(operations, operationCounts,
+  assert.throws(() => verifyBroodstormRegistryContinuationV188(bOperations, operationCounts,
     path => Buffer.concat([read(path), Buffer.from('\n')])), /Changed historical V158 operations snapshot/,
   'The new projection still verifies the immutable archive through the original Cargo verifier.');
+});
+
+test('Queen Mother registry continuation removes only animation, projects exact B2 and preserves Broodstorm and Cargo evidence', () => {
+  const transition = TANTALUS_PRIORITIES_QUEEN_MOTHER_REGISTRY_V188;
+  assert.deepEqual(transition, {
+    baseline: 'b9aee06a0783bc7c0cf7094268a08618364df781',
+    baselineRegistry: {
+      path: 'src/special-operations-v131.js',
+      sha256: '99a629ceba7042ca320e50d384fe9b9e734bdefa452bd5485899661adca5b45a',
+      declarationsSha256: 'bc90066e0fa20fc3222d5f252354622af72df66f5670f868ea29fb582ccbebec'
+    },
+    operationId: 'queen-mother-song', removedDebt: 'dedicated-queen-mother-animation',
+    previousRemainingMechanics: ['dedicated-queen-mother-animation', 'complete-royal-cast'],
+    currentRemainingMechanics: ['complete-royal-cast'],
+    previousCounts: { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 },
+    currentCounts: { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 }
+  });
+  assert.equal(Object.isFrozen(transition.baselineRegistry), true);
+  assert.equal(Object.isFrozen(transition.previousRemainingMechanics), true);
+  const before = JSON.stringify(operations);
+  const result = verifyQueenMotherRegistryContinuationV188(operations, operationCounts);
+  assert.deepEqual(result, {
+    historicalCounts: { total: 21, effective: 1, partial: 20, missing: 0, playable: 21 },
+    currentCounts: { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 },
+    changedIds: ['cargo-brutal', 'broodstorm', 'queen-mother-song'], unchangedOperations: 18
+  });
+  assert.equal(JSON.stringify(operations), before, 'Projection must not rewrite live declarations or campaign objects.');
+  assert.equal(Object.isFrozen(result.changedIds), true);
+  assert.throws(() => verifyBroodstormRegistryContinuationV188(operations, operationCounts), /exact H registry declarations/,
+    'The unchanged Broodstorm verifier must reject the third transition without projection.');
+  const byId = (rows, id = 'queen-mother-song') => rows.find(row => row.id === id);
+  for (const [reason, mutate] of [
+    ['old animation debt retained', rows => { byId(rows).remainingMechanics.unshift('dedicated-queen-mother-animation'); }],
+    ['royal cast debt removed', rows => { byId(rows).remainingMechanics = []; }],
+    ['royal cast debt replaced', rows => { byId(rows).remainingMechanics = ['unreviewed-royal-cast']; }],
+    ['extra debt', rows => { byId(rows).remainingMechanics.push('unreviewed-debt'); }],
+    ['duplicate debt', rows => { byId(rows).remainingMechanics.push('complete-royal-cast'); }],
+    ['missing debt array', rows => { byId(rows).remainingMechanics = 'complete-royal-cast'; }],
+    ['whole chapter promoted', rows => { byId(rows).implementationStatus = 'effective'; }],
+    ['canon claim', rows => { byId(rows).canonExact = true; }],
+    ['adaptation flag removed', rows => { delete byId(rows).canonExact; }],
+    ['not playable', rows => { byId(rows).playable = false; }],
+    ['changed identity', rows => { byId(rows).id = 'other-queen-mother'; }],
+    ['changed route', rows => { byId(rows).campaignId = 'other-campaign'; }],
+    ['changed title', rows => { byId(rows).promisedTitle = 'Other Queen Mother'; }],
+    ['changed summary', rows => { byId(rows).promiseSummary = 'Unreviewed scope'; }],
+    ['changed production order', rows => { byId(rows).productionOrder += 1; }],
+    ['required mechanics removed', rows => { byId(rows).requiredMechanics = ['queen-mother']; }],
+    ['new declaration field', rows => { byId(rows).unreviewed = undefined; }],
+    ['changed neighbor title', rows => { byId(rows, 'black-cocoon').promisedTitle = 'Other Cocon'; }],
+    ['Cocon promoted', rows => { byId(rows, 'black-cocoon').implementationStatus = 'effective'; }],
+    ['HADAL promoted', rows => { byId(rows, 'black-abyss').implementationStatus = 'effective'; }],
+    ['Cocon debt removed', rows => { byId(rows, 'black-cocoon').remainingMechanics.shift(); }],
+    ['HADAL debt removed', rows => { byId(rows, 'black-abyss').remainingMechanics.shift(); }],
+    ['Broodstorm debt reinstated', rows => { byId(rows, 'broodstorm').remainingMechanics.unshift('dedicated-flying-queen-art'); }],
+    ['Broodstorm dropship debt removed', rows => { byId(rows, 'broodstorm').remainingMechanics = []; }],
+    ['Cargo debt reinstated', rows => { byId(rows, 'cargo-brutal').remainingMechanics = ['dedicated-cargo-matriarch-art']; }],
+    ['reordered declarations', rows => rows.reverse()],
+    ['removed neighbor', rows => rows.pop()],
+    ['missing Queen Mother', rows => rows.splice(rows.findIndex(row => row.id === 'queen-mother-song'), 1)],
+    ['duplicate identity', rows => rows.push({ ...byId(rows) })]
+  ]) {
+    const mutated = operations.map(operation => ({ ...operation, remainingMechanics: [...operation.remainingMechanics] }));
+    mutate(mutated);
+    assert.throws(() => verifyQueenMotherRegistryContinuationV188(mutated, operationCounts), undefined, reason);
+  }
+  for (const badCounts of [{ ...operationCounts, partial: 18, effective: 3 },
+    { ...operationCounts, playable: 20 }, { ...operationCounts, extra: 1 }]) {
+    assert.throws(() => verifyQueenMotherRegistryContinuationV188(operations, badCounts), /does not promote/);
+  }
+  assert.throws(() => verifyQueenMotherRegistryContinuationV188(operations, operationCounts,
+    path => Buffer.concat([read(path), Buffer.from('\n')])), /Changed historical V158 operations snapshot/,
+  'Q-to-B2-to-H projection still verifies the immutable archive through the original Cargo verifier.');
 });
 
 test('V188 verifies every reviewed successor and keeps the V187 chain intact', () => {
@@ -282,11 +361,45 @@ test('V188 verifies every reviewed successor and keeps the V187 chain intact', (
   assert.equal(broodstorm.successors[TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188.baselineRegistry.path].previousSha256,
     TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188.baselineRegistry.sha256,
     'The registry declaration projection and terminal source chain share the exact H predecessor.');
+  const queenMother = TANTALUS_PRIORITIES_QUEEN_MOTHER_V188;
+  assert.equal(queenMother.baseline, 'b9aee06a0783bc7c0cf7094268a08618364df781');
+  assert.deepEqual(Object.fromEntries(Object.entries(queenMother.successors).map(([path, receipt]) => [path, receipt.previousSha256])), {
+  "docs/narrative/CAMPAGNE_PRINCIPALE.md": "5460541da3d8b8f45e59ea584afb00e8be32378f19e82bcceb0fab688d527471",
+  "package.json": "de4535cf179efd3fe86b6a73622b979ef0f75892d1865aad18d407fa7700b3d2",
+  "scripts/verify-audit-continuation-v157.mjs": "afb20cffa2a0214c7802b7c9b36f5dadcc7c8eef795452e1c08bf0bdd19c6697",
+  "scripts/verify-audit-continuation-v158.mjs": "1bc844e8a063004fdd64141d8e3d908fd10163fb6c9e2ef39a8353581c172406",
+  "scripts/verify-audit-v143.mjs": "50a8b5904d59e82b788c23738d8a9ec809f69fd20beb965d7328b70698ce217d",
+  "scripts/verify-black-cocoon-presentation-v158.mjs": "fe489fab18e96fa26ba31cb3f39ea61e8f70ba4daa120613b4d564faa60eb0a5",
+  "scripts/verify-public-release-v86.mjs": "4c92d631018952c243a3c3ac49b64cdf18bf04f609daf322ec99c2c6ce333425",
+  "src/ecosystem-missions-v131.js": "646012d4cd8465db13739b0df8a00407acf04cad8ffe5ee6f5035818b0c33ddc",
+  "src/ecosystem-systems-v131.js": "4e240a73054c5fefe872200f8b34a7055feff373d8f6c43b27e81d0c5ed621a3",
+  "src/i18n-en-catalog-v185.js": "73d71fb68c960c112c3bf1cd792e5a522279de76f4f7d634a0d33257303d63ae",
+  "src/special-operations-v131.js": "99a629ceba7042ca320e50d384fe9b9e734bdefa452bd5485899661adca5b45a",
+  "sw.js": "6bf7972ff27396e71d850cdb13d449d187d35ec170e2c217122dde630fa6cdd3"
+});
+  assert.deepEqual(Object.keys(queenMother.addedSources), ['scripts/verify-queen-mother-art-v188.mjs', 'src/queen-mother-art-v188.js']);
+  assert.equal(Object.isFrozen(queenMother.successors), true); assert.equal(Object.isFrozen(queenMother.addedSources), true);
+  assert.equal(queenMother.successors[TANTALUS_PRIORITIES_QUEEN_MOTHER_REGISTRY_V188.baselineRegistry.path].previousSha256,
+    TANTALUS_PRIORITIES_QUEEN_MOTHER_REGISTRY_V188.baselineRegistry.sha256,
+    'The Queen Mother projection and terminal source chain share the exact published B2 predecessor.');
+  const terminal = read('scripts/audit-tantalus-priorities-v188.mjs').toString();
+  for (const [startMarker, endMarker, digest] of [
+    ['export const TANTALUS_PRIORITIES_BROODSTORM_V188 = freeze(',
+      'export const TANTALUS_PRIORITIES_CARGO_REGISTRY_V188 = freeze(', 'e10a0158b99e4a4f7236edfc9e851229c6e6049a7b20d6a070876c5bbf75b774'],
+    ['export const TANTALUS_PRIORITIES_CARGO_REGISTRY_V188 = freeze(',
+      'export const TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188 = freeze(', '006ed72e9dc64b91d8f3085241b2f5afc9ec31943e89500020a869a06a75ed0c'],
+    ['export const TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188 = freeze(',
+      'export const TANTALUS_PRIORITIES_SOURCE_ONLY_PATHS_V188 = Object.freeze(', 'bd01aa5b2720a67f92c7f1d24775384b0199c4ab2f345171b9df648380632c54']
+  ]) {
+    const start = terminal.indexOf(startMarker), end = terminal.indexOf(endMarker, start + 1);
+    assert.ok(start >= 0 && end > start);
+    assert.equal(sha(terminal.slice(start, end)), digest, 'Historical Broodstorm/Cargo source bytes must remain intact: ' + startMarker);
+  }
   const unique = new Set([...Object.keys(TANTALUS_PRIORITIES_SUCCESSORS_V188), ...Object.keys(continuation.successors),
     ...Object.keys(prologue.successors), ...Object.keys(quay.successors), ...Object.keys(cargoAbyss.successors),
-    ...Object.keys(hadal.successors), ...Object.keys(broodstorm.successors)]);
+    ...Object.keys(hadal.successors), ...Object.keys(broodstorm.successors), ...Object.keys(queenMother.successors)]);
   assert.equal(result.successors, unique.size); assert.equal(result.successors, 133);
-  assert.equal(result.addedSources, 11);
+  assert.equal(result.addedSources, 13);
   assert.deepEqual(verifyNativeQaResourcesV187(), { successors: 8, preserved: 7 });
 });
 
@@ -305,7 +418,8 @@ test('V188 rejects mutated bytes and arbitrary predecessor endpoints', () => {
   }
   for (const [path, receipt] of Object.entries(TANTALUS_PRIORITIES_PROLOGUE_V188.successors)) {
     const anchor = TANTALUS_PRIORITIES_SUCCESSORS_V188[path] || TANTALUS_PRIORITIES_CONTINUATION_V188.successors[path] || receipt;
-    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), TANTALUS_PRIORITIES_BROODSTORM_V188.successors[path]?.currentSha256
+    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), TANTALUS_PRIORITIES_QUEEN_MOTHER_V188.successors[path]?.currentSha256
+      || TANTALUS_PRIORITIES_BROODSTORM_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_HADAL_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_CARGO_ABYSS_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_QUAY_V188.successors[path]?.currentSha256 || receipt.currentSha256,
@@ -318,7 +432,8 @@ test('V188 rejects mutated bytes and arbitrary predecessor endpoints', () => {
   for (const [path, receipt] of Object.entries(TANTALUS_PRIORITIES_QUAY_V188.successors)) {
     const anchor = TANTALUS_PRIORITIES_SUCCESSORS_V188[path] || TANTALUS_PRIORITIES_CONTINUATION_V188.successors[path]
       || TANTALUS_PRIORITIES_PROLOGUE_V188.successors[path] || receipt;
-    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), TANTALUS_PRIORITIES_BROODSTORM_V188.successors[path]?.currentSha256
+    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), TANTALUS_PRIORITIES_QUEEN_MOTHER_V188.successors[path]?.currentSha256
+      || TANTALUS_PRIORITIES_BROODSTORM_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_HADAL_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_CARGO_ABYSS_V188.successors[path]?.currentSha256 || receipt.currentSha256,
       'The original anchor must resolve through the exact published ee565717 endpoint: ' + path);
@@ -331,7 +446,8 @@ test('V188 rejects mutated bytes and arbitrary predecessor endpoints', () => {
   for (const [path, receipt] of Object.entries(TANTALUS_PRIORITIES_CARGO_ABYSS_V188.successors)) {
     const anchor = TANTALUS_PRIORITIES_SUCCESSORS_V188[path] || TANTALUS_PRIORITIES_CONTINUATION_V188.successors[path]
       || TANTALUS_PRIORITIES_PROLOGUE_V188.successors[path] || TANTALUS_PRIORITIES_QUAY_V188.successors[path] || receipt;
-    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), TANTALUS_PRIORITIES_BROODSTORM_V188.successors[path]?.currentSha256
+    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), TANTALUS_PRIORITIES_QUEEN_MOTHER_V188.successors[path]?.currentSha256
+      || TANTALUS_PRIORITIES_BROODSTORM_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_HADAL_V188.successors[path]?.currentSha256 || receipt.currentSha256,
       'The original anchor must resolve through the exact published 232693f1 endpoint: ' + path);
     assert.throws(() => verifyTantalusPrioritiesV188(candidate => candidate === path
@@ -344,7 +460,8 @@ test('V188 rejects mutated bytes and arbitrary predecessor endpoints', () => {
     const anchor = TANTALUS_PRIORITIES_SUCCESSORS_V188[path] || TANTALUS_PRIORITIES_CONTINUATION_V188.successors[path]
       || TANTALUS_PRIORITIES_PROLOGUE_V188.successors[path] || TANTALUS_PRIORITIES_QUAY_V188.successors[path]
       || TANTALUS_PRIORITIES_CARGO_ABYSS_V188.successors[path] || receipt;
-    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), TANTALUS_PRIORITIES_BROODSTORM_V188.successors[path]?.currentSha256 || receipt.currentSha256,
+    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), TANTALUS_PRIORITIES_QUEEN_MOTHER_V188.successors[path]?.currentSha256
+      || TANTALUS_PRIORITIES_BROODSTORM_V188.successors[path]?.currentSha256 || receipt.currentSha256,
       'The original anchor must resolve through the exact published a3634de7 endpoint: ' + path);
     assert.throws(() => verifyTantalusPrioritiesV188(candidate => candidate === path
       ? Buffer.concat([read(candidate), Buffer.from('\n// unreviewed')]) : read(candidate)), /Unreviewed V188 source bytes/);
@@ -356,8 +473,21 @@ test('V188 rejects mutated bytes and arbitrary predecessor endpoints', () => {
     const anchor = TANTALUS_PRIORITIES_SUCCESSORS_V188[path] || TANTALUS_PRIORITIES_CONTINUATION_V188.successors[path]
       || TANTALUS_PRIORITIES_PROLOGUE_V188.successors[path] || TANTALUS_PRIORITIES_QUAY_V188.successors[path]
       || TANTALUS_PRIORITIES_CARGO_ABYSS_V188.successors[path] || TANTALUS_PRIORITIES_HADAL_V188.successors[path] || receipt;
-    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), receipt.currentSha256,
+    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), TANTALUS_PRIORITIES_QUEEN_MOTHER_V188.successors[path]?.currentSha256 || receipt.currentSha256,
       'The original anchor must resolve through the exact published 361e4067 endpoint: ' + path);
+    assert.throws(() => verifyTantalusPrioritiesV188(candidate => candidate === path
+      ? Buffer.concat([read(candidate), Buffer.from('\n// unreviewed')]) : read(candidate)), /Unreviewed V188 source bytes/);
+    assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, '0'.repeat(64)), /Broken .* source chain/);
+    assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, receipt.currentSha256), /Broken .* source chain/);
+    if (anchor !== receipt) assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, receipt.previousSha256), /Broken .* source chain/);
+  }
+  for (const [path, receipt] of Object.entries(TANTALUS_PRIORITIES_QUEEN_MOTHER_V188.successors)) {
+    const anchor = TANTALUS_PRIORITIES_SUCCESSORS_V188[path] || TANTALUS_PRIORITIES_CONTINUATION_V188.successors[path]
+      || TANTALUS_PRIORITIES_PROLOGUE_V188.successors[path] || TANTALUS_PRIORITIES_QUAY_V188.successors[path]
+      || TANTALUS_PRIORITIES_CARGO_ABYSS_V188.successors[path] || TANTALUS_PRIORITIES_HADAL_V188.successors[path]
+      || TANTALUS_PRIORITIES_BROODSTORM_V188.successors[path] || receipt;
+    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), receipt.currentSha256,
+      'The original anchor must resolve through the exact published B2 endpoint: ' + path);
     assert.throws(() => verifyTantalusPrioritiesV188(candidate => candidate === path
       ? Buffer.concat([read(candidate), Buffer.from('\n// unreviewed')]) : read(candidate)), /Unreviewed V188 source bytes/);
     assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, '0'.repeat(64)), /Broken .* source chain/);
@@ -366,7 +496,8 @@ test('V188 rejects mutated bytes and arbitrary predecessor endpoints', () => {
   }
   for (const path of [...Object.keys(TANTALUS_PRIORITIES_CONTINUATION_V188.addedSources), ...Object.keys(TANTALUS_PRIORITIES_PROLOGUE_V188.addedSources),
     ...Object.keys(TANTALUS_PRIORITIES_QUAY_V188.addedSources), ...Object.keys(TANTALUS_PRIORITIES_CARGO_ABYSS_V188.addedSources),
-    ...Object.keys(TANTALUS_PRIORITIES_HADAL_V188.addedSources), ...Object.keys(TANTALUS_PRIORITIES_BROODSTORM_V188.addedSources)]) {
+    ...Object.keys(TANTALUS_PRIORITIES_HADAL_V188.addedSources), ...Object.keys(TANTALUS_PRIORITIES_BROODSTORM_V188.addedSources),
+    ...Object.keys(TANTALUS_PRIORITIES_QUEEN_MOTHER_V188.addedSources)]) {
     assert.throws(() => verifyTantalusPrioritiesV188(candidate => candidate === path
       ? Buffer.concat([read(candidate), Buffer.from('\n// unreviewed')]) : read(candidate)), /Unreviewed V188 source bytes/);
   }
@@ -375,7 +506,8 @@ test('V188 rejects mutated bytes and arbitrary predecessor endpoints', () => {
     TANTALUS_PRIORITIES_QUAY_V188.successors, TANTALUS_PRIORITIES_QUAY_V188.addedSources,
     TANTALUS_PRIORITIES_CARGO_ABYSS_V188.successors, TANTALUS_PRIORITIES_CARGO_ABYSS_V188.addedSources,
     TANTALUS_PRIORITIES_HADAL_V188.successors, TANTALUS_PRIORITIES_HADAL_V188.addedSources,
-    TANTALUS_PRIORITIES_BROODSTORM_V188.successors, TANTALUS_PRIORITIES_BROODSTORM_V188.addedSources]) {
+    TANTALUS_PRIORITIES_BROODSTORM_V188.successors, TANTALUS_PRIORITIES_BROODSTORM_V188.addedSources,
+    TANTALUS_PRIORITIES_QUEEN_MOTHER_V188.successors, TANTALUS_PRIORITIES_QUEEN_MOTHER_V188.addedSources]) {
     assert.equal(Object.hasOwn(map, 'scripts/audit-tantalus-priorities-v188.mjs'), false);
   }
   assert.equal(reviewedTantalusPrioritiesDigestV188('src/unreviewed.js', 'unchanged'), 'unchanged');
@@ -389,7 +521,10 @@ test('Broodstorm terminal rejects a false H receipt or an added-source disguise 
   const start = terminal.indexOf('export const TANTALUS_PRIORITIES_BROODSTORM_V188 = freeze(');
   const end = terminal.indexOf('\n});', start) + '\n});'.length;
   assert.ok(start >= 0 && end > start);
-  const path = 'src/special-operations-v131.js';
+  // Keep the historical B receipt mutations on a B successor untouched by Q.
+  // Q's own registry receipt is exercised separately below.
+  const path = 'src/legacy-operation-state-v131.js';
+  assert.equal(Object.hasOwn(TANTALUS_PRIORITIES_QUEEN_MOTHER_V188.successors, path), false);
   for (const [reason, mutate, error] of [
     ['false H predecessor', receipt => { receipt.successors[path].previousSha256 = '0'.repeat(64); }, /Broken historical-to-361e4067/],
     ['unreviewed terminal bytes', receipt => { receipt.successors[path].currentSha256 = '0'.repeat(64); }, /Unreviewed V188 source bytes/],
@@ -406,6 +541,32 @@ test('Broodstorm terminal rejects a false H receipt or an added-source disguise 
     // Execute the actual terminal implementation with only this receipt changed.
     // readSource supplies repository bytes; no temporary module or source edit.
     const source = terminal.slice(0, start) + 'export const TANTALUS_PRIORITIES_BROODSTORM_V188 = freeze('
+      + JSON.stringify(receipt) + ');' + terminal.slice(end);
+    const mutant = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
+    assert.throws(() => mutant.verifyTantalusPrioritiesV188(read), error, reason);
+  }
+});
+
+test('Queen Mother terminal rejects a false B2 receipt or an added-source disguise for a successor', async () => {
+  const terminal = read('scripts/audit-tantalus-priorities-v188.mjs').toString();
+  const start = terminal.indexOf('export const TANTALUS_PRIORITIES_QUEEN_MOTHER_V188 = freeze(');
+  const end = terminal.indexOf('\n});', start) + '\n});'.length;
+  assert.ok(start >= 0 && end > start);
+  const path = 'src/special-operations-v131.js';
+  for (const [reason, mutate, error] of [
+    ['false B2 predecessor', receipt => { receipt.successors[path].previousSha256 = '0'.repeat(64); }, /Broken historical-to-b9aee06a/],
+    ['unreviewed terminal bytes', receipt => { receipt.successors[path].currentSha256 = '0'.repeat(64); }, /Unreviewed V188 source bytes/],
+    ['duplicate successor as an added source', receipt => {
+      receipt.addedSources[path] = receipt.successors[path].currentSha256;
+    }, /A new V188 source cannot replace a successor/],
+    ['replace successor with added source', receipt => {
+      receipt.addedSources[path] = receipt.successors[path].currentSha256;
+      delete receipt.successors[path];
+    }, /Unreviewed V188 source bytes/]
+  ]) {
+    const receipt = structuredClone(TANTALUS_PRIORITIES_QUEEN_MOTHER_V188);
+    mutate(receipt);
+    const source = terminal.slice(0, start) + 'export const TANTALUS_PRIORITIES_QUEEN_MOTHER_V188 = freeze('
       + JSON.stringify(receipt) + ');' + terminal.slice(end);
     const mutant = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
     assert.throws(() => mutant.verifyTantalusPrioritiesV188(read), error, reason);

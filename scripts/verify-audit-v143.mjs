@@ -38,7 +38,8 @@ const CARGO_ABYSS_RUNTIME_ART_V188 = [
 ];
 const HADAL_RUNTIME_ART_V188 = ['upper-parts', 'leg-parts', 'helmet'].map(part => `/assets/abyss/v188/hadal-${part}.png`);
 const BROODSTORM_QUEEN_RUNTIME_ART_V188 = ['idle', 'chase', 'death'].map(clip => `/assets/broodstorm/v188/flying-queen-${clip}.png`);
-const REVIEWED_RUNTIME_ART_V188 = [...ASPHODELE_RUNTIME_ART_V188, ...ACT5_RUNTIME_ART_V188, ...BIOLOGICAL_RUNTIME_ART_V188, ...PROLOGUE_RUNTIME_ART_V188, ...CARGO_ABYSS_RUNTIME_ART_V188, ...HADAL_RUNTIME_ART_V188, ...BROODSTORM_QUEEN_RUNTIME_ART_V188];
+const QUEEN_MOTHER_RUNTIME_ART_V188 = ['rest-anticipation', 'action-death', 'arms'].map(part => `/assets/queen-mother/v188/adult-${part}.png`);
+const REVIEWED_RUNTIME_ART_V188 = [...ASPHODELE_RUNTIME_ART_V188, ...ACT5_RUNTIME_ART_V188, ...BIOLOGICAL_RUNTIME_ART_V188, ...PROLOGUE_RUNTIME_ART_V188, ...CARGO_ABYSS_RUNTIME_ART_V188, ...HADAL_RUNTIME_ART_V188, ...BROODSTORM_QUEEN_RUNTIME_ART_V188, ...QUEEN_MOTHER_RUNTIME_ART_V188];
 const ORIGIN = 'https://tantalus.test';
 const req = (path, options) => new Request(new URL(path, ORIGIN), options);
 function response(path, { private: secret = false, status = 200, mime, vary } = {}) {
@@ -238,9 +239,9 @@ test('colony cards: invalid and newly private responses cannot leave a usable ca
     assert.equal((await h.dispatch('fetch', { request })).value.type, 'error');
   }
 });
-test('Reviewed scene art: Asphodele, Act V, biological evidence, prologue, Matriarch, MANTA, HADAL and the Broodstorm Queen stay lazy through installation and survive a later network interruption', async () => {
+test('Reviewed scene art: Asphodele, Act V, biological evidence, prologue, Matriarch, MANTA, HADAL, Broodstorm and Queen Mother stay lazy through installation and survive a later network interruption', async () => {
   const h = host();
-  assert.equal(h.api.CACHE, 'atf-v143-broodstorm-queen-art-20261117');
+  assert.equal(h.api.CACHE, 'atf-v143-queen-mother-art-20261117');
   await h.dispatch('install');
   const cache = await h.caches.open(h.api.CACHE);
   assert.equal(h.api.SHELL.filter(path => path === '/src/biological-art-v188.js').length, 1,
@@ -263,6 +264,9 @@ test('Reviewed scene art: Asphodele, Act V, biological evidence, prologue, Matri
   assert.equal(h.api.SHELL.filter(path => path === '/src/broodstorm-queen-art-v188.js').length, 1,
     'the dedicated Broodstorm Queen renderer is an explicit offline-shell dependency');
   assert.ok(await cache.match(req('/src/broodstorm-queen-art-v188.js')));
+  assert.equal(h.api.SHELL.filter(path => path === '/src/queen-mother-art-v188.js').length, 1,
+    'the contextual Queen Mother renderer is an explicit offline-shell dependency');
+  assert.ok(await cache.match(req('/src/queen-mother-art-v188.js')));
   for (const path of REVIEWED_RUNTIME_ART_V188) {
     assert.equal(h.api.SHELL.includes(path), false, 'scene, mission, hub and cinematic art must not increase the mandatory precache');
     assert.equal(h.calls.some(request => new URL(request.url).pathname === path), false, 'installation must not fetch the image');
@@ -336,6 +340,12 @@ test('Reviewed scene art: exact paths reject unreviewed neighbors, out-of-scope 
       [artPath.replace(/\.png$/, '-extra.png'), {}], [artPath.replace('/v188/', '/v188/nested/'), {}],
       [artPath.replace('/v188/', '/v189/'), {}], [artPath.replace(/\.png$/, '.webp'), {}],
       [artPath.replace('/broodstorm/', '/BROODSTORM/'), {}], [artPath.replace('/broodstorm/', '/%62roodstorm/'), {}]
+    ]),
+    ['/assets/queen-mother/v188/unreviewed.png', {}],
+    ...QUEEN_MOTHER_RUNTIME_ART_V188.flatMap(artPath => [
+      [artPath.replace(/\.png$/, '-extra.png'), {}], [artPath.replace('/v188/', '/v188/nested/'), {}],
+      [artPath.replace('/v188/', '/v189/'), {}], [artPath.replace(/\.png$/, '.webp'), {}],
+      [artPath.replace('/queen-mother/', '/QUEEN-MOTHER/'), {}], [artPath.replace('/queen-mother/', '/%71ueen-mother/'), {}]
     ]),
     ['/assets/asphodele/v188/asph-wall-unreviewed.png', {}], ['/assets/asphodele/v188/asph-msn-unreviewed.png', {}],
     ['/assets/asphodele/v188/asph-wall-docks-extra.png', {}], ['/assets/asphodele/v188/nested/asph-wall-docks.png', {}],
@@ -492,7 +502,11 @@ test('release workflow, reports and gamedev guidance are source tooling only', (
     'docs/development/BROODSTORM_QUEEN_ART_QA_20261117.md',
     'docs/development/BROODSTORM_QUEEN_ART_RENDER_RECEIPT_20261117.json',
     'docs/development/BROODSTORM_QUEEN_ART_OVERVIEW_20261117.png',
-    'scripts/verify-cargo-matriarch-art-v188.mjs', 'scripts/verify-manta-art-v188.mjs', 'scripts/verify-hadal-player-art-v188.mjs', 'scripts/verify-broodstorm-queen-art-v188.mjs']) {
+    'docs/development/QUEEN_MOTHER_ART_PROVENANCE_20261117.json',
+    'docs/development/QUEEN_MOTHER_ART_QA_20261117.md',
+    'docs/development/QUEEN_MOTHER_ART_RENDER_RECEIPT_20261117.json',
+    'docs/development/QUEEN_MOTHER_ART_OVERVIEW_20261117.png',
+    'scripts/verify-cargo-matriarch-art-v188.mjs', 'scripts/verify-manta-art-v188.mjs', 'scripts/verify-hadal-player-art-v188.mjs', 'scripts/verify-broodstorm-queen-art-v188.mjs', 'scripts/verify-queen-mother-art-v188.mjs']) {
     assert.equal(isPublicDistributionPathV86(path), true); assert.equal(isPublicDistributionPathV86(path, { built: true }), false);
   }
 });
@@ -568,6 +582,7 @@ test('gamedev guidance admission stays exact and rejects unrelated documents', (
     'docs/development/CARGO_ABYSS_ART_QA_20261117.md.bak', 'docs/development/CARGO_ABYSS_ART_UNREVIEWED_20261117.png',
     'docs/development/HADAL_ART_QA_20261117.md.bak', 'docs/development/HADAL_ART_UNREVIEWED_20261117.png',
     'docs/development/BROODSTORM_QUEEN_ART_QA_20261117.md.bak', 'docs/development/BROODSTORM_QUEEN_ART_UNREVIEWED_20261117.png',
+    'docs/development/QUEEN_MOTHER_ART_QA_20261117.md.bak', 'docs/development/QUEEN_MOTHER_ART_UNREVIEWED_20261117.png',
     'AGENTS.md.bak', 'src/AGENTS.md', 'docs/development/../private.md']) {
     assert.equal(isPublicDistributionPathV86(path), false, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);

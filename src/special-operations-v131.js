@@ -15,7 +15,7 @@ const routes = new Map(NEW_SPECIAL_CAMPAIGNS_V131.map(c => [c.specialOperationId
 routes.set('black-cocoon', BLACK_COCOON_CAMPAIGN_V121);
 routes.set('last-course-tantalus', APC_CONVOY_CAMPAIGN_V121);
 const limitations = {
-  'queen-mother-song': ['dedicated-queen-mother-animation', 'complete-royal-cast'],
+  'queen-mother-song': ['complete-royal-cast'],
   'hive-world': ['dedicated-planet-queen-art', 'complete-organ-biomes'],
   'titan-equalizer': ['dedicated-talos-titan-art', 'canonical-mega-loader-corpus'],
   'eloise-uncrowned-queen': ['dedicated-eloise-animation', 'hush-six-and-mother-hunter-art'],

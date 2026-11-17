@@ -2945,14 +2945,14 @@ Elles se jouent surtout au hub, avec des PNJ **[PRÉSENT]**. Besoins **[À CRÉE
 
 ### 30.3 Arc 3 · TR-0, la Ruche-monde
 
-**Socle de l'arc :** surface vivante, organes, noyau **[DETTE]** (`complete-organ-biomes`, `dedicated-planet-queen-art`) ; Base Ombelle sous la résine **[À CRÉER]** ; Reine-Mère et Chœurs **[DETTE]** (`dedicated-queen-mother-animation`, `complete-royal-cast`) ; praetorian **[PRÉSENT]**.
+**Socle de l'arc :** surface vivante, organes, noyau **[DETTE]** (`complete-organ-biomes`, `dedicated-planet-queen-art`) ; Base Ombelle sous la résine **[À CRÉER]** ; adulte Reine-Mère rouge **[PRÉSENT]** dans le chapitre local « Le chant de la Reine-Mère » (huit poses composées, §56.18), réemploi dans l'arc étendu **[À CRÉER]** ; Chœurs et casting royal complet **[DETTE]** (`complete-royal-cast`) ; praetorian **[PRÉSENT]**.
 
 | Mission | Props | Personnages / ennemis | Animations | VFX | Actions |
 | --- | --- | --- | --- | --- | --- |
 | 3.1 Atterrissage | Croûte qui respire **[DETTE]** | — | Surface animée **[DETTE]** | Pulsations **[À CRÉER]** | Jauge de bruit **[CODE]** (alerte existante) |
 | 3.2 Base Ombelle | Laboratoire W-Y sous résine, registres d'expédition **[À CRÉER]** | — | — | — | Lecture **[CODE]** |
 | 3.3 Trois Chœurs | Nurserie, artère royale, balises **[CODE]** (chapitre existant) | Castes reliées **[DETTE]** | — | Ondes du Chœur **[À CRÉER]** | Rupture des Chœurs **[CODE]** |
-| 3.4 La Reine-Mère | Salle royale **[CODE]** | Reine-Mère **[DETTE]** | 4 phases **[DETTE]** | — | Boss **[CODE]** |
+| 3.4 La Reine-Mère | Salle royale **[CODE]** (chapitre existant) | Adulte rouge locale **[PRÉSENT]** ; rencontre de l'arc étendu **[À CRÉER]** | Huit poses composées **[PRÉSENT]** ; quatre phases natives **[CODE]** | — | Boss local **[CODE]** |
 | 3.5 Le noyau | Organes, noyau, sas **[CODE]** | — | Effondrement **[À CRÉER]** | Effondrement, poussière organique **[À CRÉER]** | Fuite chronométrée **[CODE]** |
 | Annexes (2) | Chambre froide **[À CRÉER]** | Chercheur survivant **[À CRÉER]** ; praetorian capturé **[PRÉSENT]** | Créature entravée **[À CRÉER]** | — | Capture d'organisme **[À CRÉER]** |
 | CQ-04 à 06 | Vue orbitale de TR-0, décollage **[À CRÉER]** | — | — | — | — |
@@ -3138,7 +3138,8 @@ Ces missions réutilisent au maximum les décors de zone **[PRÉSENT]** (`ship-*
 | --- | --- |
 | Reine récifale, lignée fouisseuse, lignée aérienne | [À CRÉER] (variantes de castes [PRÉSENT]) |
 | Reine volante | Art local Broodstorm [PRÉSENT] ; atterrissage et autres rencontres [À CRÉER] |
-| Reine-Mère, Chœurs, Ruche-monde | [DETTE] |
+| Reine-Mère adulte | Art et huit poses du chapitre local [PRÉSENT] ; autres rencontres [À CRÉER] |
+| Chœurs, casting royal complet et Ruche-monde | [DETTE] |
 | Jeri, SAINT, Éloïse, HUSH-6, Chasseur de Mères | [DETTE] |
 | Synthétique de maintenance industrielle (boss de Kéos) | [À CRÉER] |
 | Faune de Pangaea, castes Sauria, Porte-Ruche Colosse | [DETTE] |
@@ -3222,7 +3223,8 @@ Pour chaque élément à créer, un **lot de génération** type est indiqué :
 | Lignée fouisseuse | Variante [À CRÉER] | `xenomorph-crusher`, `xenomorph-burster` |
 | Lignée aérienne (planeurs) | [À CRÉER] | — |
 | Reine volante | Art local Broodstorm [PRÉSENT] ; autres rencontres [À CRÉER] | Trois planches de quatre poses ; §56.17 |
-| Reine-Mère, Chœurs, Ruche-monde | [DETTE] | — |
+| Reine-Mère adulte | Art local [PRÉSENT] ; autres rencontres [À CRÉER] | Deux planches de corps, quatre bras composés ; §56.18 |
+| Chœurs, casting royal complet et Ruche-monde | [DETTE] | Les Chœurs et gardes du chapitre gardent leur présentation vectorielle provisoire |
 | Jeri, SAINT, Éloïse, HUSH-6, Chasseur de Mères | [DETTE] | — |
 | Faune de Pangaea, castes Sauria, Porte-Ruche Colosse | [DETTE] | `wild-boar-host` (principe d'hôte animal) |
 | Ingénieur (le Dormeur) | [À CRÉER] | — |
@@ -4996,3 +4998,17 @@ Le contrôleur existant conserve les clips et leurs cadences : poursuite à 10 i
 La dette locale `dedicated-flying-queen-art` est close. Broodstorm reste partiel : `complete-modular-dropship-corpus` demeure ouvert. L'aire d'Echo Basin, la rencontre 2.4, la cinématique CQ-03, l'atterrissage et les actes ultérieurs restent distincts de ce chapitre existant. Le registre conserve 21 opérations jouables, 19 partielles et deux effectives ; aucune autre dette ni valeur `canonExact` n'est promue. Les snapshots historiques restent inchangés.
 
 Les [mesures et la provenance](../development/BROODSTORM_QUEEN_ART_PROVENANCE_20261117.json), la [planche du rendu intégré](../development/BROODSTORM_QUEEN_ART_OVERVIEW_20261117.png) et le [rapport de vérification](../development/BROODSTORM_QUEEN_ART_QA_20261117.md) distinguent les dessins générés, les observations natives, les fixtures et les limites de validation.
+
+### 56.18 Reine-Mère adulte rouge (V188, 2026-11-17)
+
+Le chapitre existant « Le chant de la Reine-Mère » reçoit trois PNG dédiés : quatre corps de repos/anticipation, quatre corps d'émission/réaction/effondrement et quatre bras séparés. Une pose assemble un corps et ses quatre bras ; les douze pièces dessinées ne sont donc pas douze frames d'animation. Les deux grands bras et les deux petits gardent leurs propres attaches. Les membres lointains passent derrière le corps, les proches devant, puis l'ensemble est inversé pour l'autre direction.
+
+L'identité vient du dossier `yhw:XEN-032` du corpus du projet et des photographies officielles de la Red Queen Mother de *Genocide* présentée par NECA : rouge cramoisi, crête allongée, cou côtelé, quatre bras, appendices ivoire et queue segmentée. Les vues en perspective d'une figurine ne définissent pas toutes les poses d'un adulte vivant en profil latéral. Le résultat est une adaptation documentée de cette référence ; `visual1to1:false` et `canonExact:false` restent inchangés. L'œuf Reine-Mère historique n'est pas utilisé comme anatomie adulte, et cette identité n'est pas assimilée à une Empress.
+
+Le raccord concerne uniquement l'objet boss courant de cette opération. Les Chœurs, les gardes et les deux autres écosystèmes qui réemploient son identifiant conservent leur présentation. Les trois sources se chargent à l'entrée ou après une reprise réussie et sont admises ensemble ; une source manquante, incorrecte ou étrangère conserve le corps vectoriel entier. Le rendu ne charge pas les images et ne fait avancer aucune horloge.
+
+Le moteur garde son corps physique de 170 × 210, ses 600 points de santé, sa protection par les trois Chœurs, ses quatre phases et ses vraies salves. La pose d'émission suit l'ajout effectif d'un projectile de l'acteur ; une transition de phase seule ne la déclenche pas. Son marqueur privé expire dans la mise à jour native, même sans dessin. Il n'est pas sauvegardé et ne se rejoue pas après un tour d'horloge ou une reprise réussie. L'origine physique du tir reste celle du combat existant ; elle n'est pas déplacée vers la bouche dessinée.
+
+Une même échelle anatomique lie les huit corps aux quatre membres. Les appuis des poses repliées sont recalés au sol sans redimensionner l'acteur. Le nom, la barre de santé et l'avertissement jaune d'anticipation restent dans le passage natif, au-dessus de la composition. La mort lit la durée native de 1,2 seconde et conserve l'alpha 0,3. Seules les bornes de visibilité tiennent compte de la crête, de la queue et des bras ; les collisions restent inchangées.
+
+La dette locale `dedicated-queen-mother-animation` est close par ce raccord. Le chapitre reste partiel : `complete-royal-cast` demeure ouvert, comme les lieux, cinématiques et rencontres proposés pour l'arc étendu de TR-0. Le registre conserve 21 opérations jouables, 19 partielles et deux effectives, avec ses snapshots historiques intacts. Les [sources et prompts](../development/QUEEN_MOTHER_ART_PROVENANCE_20261117.json), la [planche intégrée](../development/QUEEN_MOTHER_ART_OVERVIEW_20261117.png) et la [QA](../development/QUEEN_MOTHER_ART_QA_20261117.md) documentent les itérations rejetées, la composition, les contrôles exécutés et leurs limites.
