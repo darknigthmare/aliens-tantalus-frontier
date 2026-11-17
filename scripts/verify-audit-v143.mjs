@@ -22,7 +22,9 @@ const ASPHODELE_HUB_WALL_ART_V188 = ['docks', 'ring', 'spoke', 'control', 'relay
 const ASPHODELE_HUB_DETAIL_ART_V188 = ['door', 'ud4l-docked', 'crucible-shuttle', 'cassius-core', 'qz-map', 'relay-bays', 'cradles', 'memorial-plaques',
   'hydro-bays', 'crucible-stall', 'grue', 'bunks', 'medbay-beds', 'medbay-scanner', 'echo8-barricade', 'night-board', 'repair-cradle', 'npc-docker', 'npc-merchant', 'npc-technician']
   .map(id => `/assets/asphodele/v188/asph-${id}.png`);
-const ASPHODELE_RUNTIME_ART_V188 = [...ASPHODELE_CARDS_V188, ...ASPHODELE_MISSION_ART_V188, ...ASPHODELE_HUB_WALL_ART_V188, ...ASPHODELE_HUB_DETAIL_ART_V188];
+const ASPHODELE_CINEMATIC_ART_V188 = ['ring', 'hub', 'rook-quarters', 'helmet-corridor', 'ceiling-drone', 'bent-door']
+  .map(id => `/assets/asphodele/v188/cinematics/asph-cin-${id}.png`);
+const ASPHODELE_RUNTIME_ART_V188 = [...ASPHODELE_CARDS_V188, ...ASPHODELE_MISSION_ART_V188, ...ASPHODELE_HUB_WALL_ART_V188, ...ASPHODELE_HUB_DETAIL_ART_V188, ...ASPHODELE_CINEMATIC_ART_V188];
 const ORIGIN = 'https://tantalus.test';
 const req = (path, options) => new Request(new URL(path, ORIGIN), options);
 function response(path, { private: secret = false, status = 200, mime, vary } = {}) {
@@ -222,13 +224,13 @@ test('colony cards: invalid and newly private responses cannot leave a usable ca
     assert.equal((await h.dispatch('fetch', { request })).value.type, 'error');
   }
 });
-test('Asphodele art: six cards, nine mission PNGs, thirteen hub walls and twenty hub details stay lazy through installation and survive a later network interruption', async () => {
+test('Asphodele art: cards, missions, hub and six cinematic layers stay lazy through installation and survive a later network interruption', async () => {
   const h = host();
-  assert.equal(h.api.CACHE, 'atf-v143-asphodele-hub-art-20261117');
+  assert.equal(h.api.CACHE, 'atf-v143-asphodele-cinematic-art-20261117');
   await h.dispatch('install');
   const cache = await h.caches.open(h.api.CACHE);
   for (const path of ASPHODELE_RUNTIME_ART_V188) {
-    assert.equal(h.api.SHELL.includes(path), false, 'scene, mission and hub art must not increase the mandatory precache');
+    assert.equal(h.api.SHELL.includes(path), false, 'scene, mission, hub and cinematic art must not increase the mandatory precache');
     assert.equal(h.calls.some(request => new URL(request.url).pathname === path), false, 'installation must not fetch the image');
     assert.equal(await cache.match(req(path)), undefined);
     assert.equal(h.api.cacheableRequestV143(req(path)), true, path);
@@ -260,7 +262,7 @@ test('Asphodele art: exact paths reject unreviewed neighbors, out-of-scope hub a
     ['/assets/content/v188/CASSIUS-CORE.png', {}], ['/assets/content/v188/%63assius-core.png', {}],
     ['/assets/asphodele/v188/asph-unreviewed.png', {}], ['/assets/asphodele/v188/asph-npc-unreviewed.png', {}],
     ['/assets/asphodele/v188/asph-unreviewed-shuttle.png', {}],
-    ...ASPHODELE_HUB_DETAIL_ART_V188.flatMap(artPath => [
+    ...[...ASPHODELE_HUB_DETAIL_ART_V188, ...ASPHODELE_CINEMATIC_ART_V188].flatMap(artPath => [
       [artPath.replace(/\.png$/, '-extra.png'), {}], [artPath.replace('/v188/', '/v188/nested/'), {}],
       [artPath.replace('/v188/', '/v189/'), {}], [artPath.replace(/\.png$/, '.webp'), {}],
       [artPath.replace('/asph-', '/ASPH-'), {}], [artPath.replace('/asph-', '/%61sph-'), {}]
@@ -387,7 +389,11 @@ test('release workflow, reports and gamedev guidance are source tooling only', (
     'docs/development/ASPHODELE_HUB_DETAIL_ART_PROVENANCE_20261117.json',
     'docs/development/ASPHODELE_HUB_DETAIL_ART_QA_20261117.md',
     'docs/development/ASPHODELE_HUB_DETAIL_ART_OVERVIEW_20261117.png',
-    'docs/development/ASPHODELE_HUB_DETAIL_ART_RENDER_RECEIPT_20261117.json']) {
+    'docs/development/ASPHODELE_HUB_DETAIL_ART_RENDER_RECEIPT_20261117.json',
+    'docs/development/ASPHODELE_CINEMATIC_ART_PROVENANCE_20261117.json',
+    'docs/development/ASPHODELE_CINEMATIC_ART_QA_20261117.md',
+    'docs/development/ASPHODELE_CINEMATIC_ART_OVERVIEW_20261117.png',
+    'docs/development/ASPHODELE_CINEMATIC_ART_RENDER_RECEIPT_20261117.json']) {
     assert.equal(isPublicDistributionPathV86(path), true); assert.equal(isPublicDistributionPathV86(path, { built: true }), false);
   }
 });
@@ -455,6 +461,7 @@ test('gamedev guidance admission stays exact and rejects unrelated documents', (
   for (const path of ['docs/development/unreviewed.md', 'docs/development/GAMEDEV_GUIDANCE.md.bak',
     'docs/development/ASPHODELE_HUB_WALL_ART_QA_20261117.md.bak', 'docs/development/ASPHODELE_HUB_WALL_ART_UNREVIEWED_20261117.png',
     'docs/development/ASPHODELE_HUB_DETAIL_ART_QA_20261117.md.bak', 'docs/development/ASPHODELE_HUB_DETAIL_ART_UNREVIEWED_20261117.png',
+    'docs/development/ASPHODELE_CINEMATIC_ART_QA_20261117.md.bak', 'docs/development/ASPHODELE_CINEMATIC_ART_UNREVIEWED_20261117.png',
     'AGENTS.md.bak', 'src/AGENTS.md', 'docs/development/../private.md']) {
     assert.equal(isPublicDistributionPathV86(path), false, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);

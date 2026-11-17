@@ -2,9 +2,12 @@
 // canon (bible §4, §5.1, §56.11) and with the places as they are drawn in game.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { CINEMATICS_V188, NORTH_QUAY_NAMES_V188, cinematicSetLayoutV188, CINEMATIC_SET_SCENES_V188, QUAY_CAST_IDS_V188,
-  drawCinematicFrameV188 } from '../src/story-cinematics-v188.js';
+  drawCinematicFrameV188, CinematicPlayerV188, LETTERBOX_V188 } from '../src/story-cinematics-v188.js';
+import { STATION_CINEMATIC_ART_V188, STATION_CINEMATIC_NEW_ART_IDS_V188, STATION_CINEMATIC_ART_SOURCE_RECTS_V188,
+  STATION_CINEMATIC_ART_ANCHORS_V188, STATION_CINEMATIC_ORBIT_V188, STATION_CINEMATIC_HELMET_V188,
+  drawStationShotV188, drawStationTerminalV188, drawStationHelmetV188, stationCinematicSourcesV188, stationArtFitV188 } from '../src/station-cinematics-v188.js';
 import { STAGED_BEATS_V188 } from '../src/ingame-staging-v188.js';
 import { ECHO8_LOCKER_V188 } from '../src/hub-echo8-locker-v188.js';
 import { ONBOARDING_SPAWN_V84 } from '../src/hub-onboarding-v84.js';
@@ -116,4 +119,119 @@ test('staged beats play where the game puts them', () => {
   assert.match(STAGED_BEATS_V188['beat-port-arrival'].lines[0].text.fr, /rampe/); assert.match(STAGED_BEATS_V188['beat-port-report'].lines[0].text.fr, /de trois\./);
   assert.match(read('src/app.js'), /trois habitants secourus/);
   for (const beat of Object.values(STAGED_BEATS_V188)) for (const entry of beat.lines) assert.ok(entry.text.fr && entry.text.en);
+});
+
+// Explicit source-image fixtures and a small transform recorder let these tests
+// exercise production composition without pretending to be a browser journey.
+function stationImages() {
+  return Object.fromEntries(Object.values(STATION_CINEMATIC_ART_V188).map(({ path }) => {
+    const file = new URL('..' + path, import.meta.url); assert.ok(existsSync(file), path);
+    const bytes = readFileSync(file);
+    return [path, { src: path, complete: true, naturalWidth: bytes.readUInt32BE(16), naturalHeight: bytes.readUInt32BE(20) }];
+  }));
+}
+function stationRecorder() {
+  const calls = { images: [], text: [], fills: [] }, stack = []; let m = [1, 0, 0, 1, 0, 0];
+  const ctx = new Proxy({
+    save() { stack.push([...m]); }, restore() { m = stack.pop() || [1, 0, 0, 1, 0, 0]; },
+    translate(x, y) { m[4] += m[0] * x + m[2] * y; m[5] += m[1] * x + m[3] * y; },
+    scale(x, y) { m[0] *= x; m[1] *= x; m[2] *= y; m[3] *= y; },
+    rotate(angle) { const [a, b, c, d] = m, co = Math.cos(angle), si = Math.sin(angle); m[0] = a * co + c * si; m[1] = b * co + d * si; m[2] = c * co - a * si; m[3] = d * co - b * si; },
+    measureText: value => ({ width: String(value).length * 9 }), createLinearGradient: () => ({ addColorStop() {} }), createRadialGradient: () => ({ addColorStop() {} }),
+    drawImage(image, ...args) { calls.images.push({ path: image.src, args, matrix: [...m] }); },
+    fillText(value, x, y) { calls.text.push({ value: String(value), x, y, matrix: [...m] }); },
+    fillRect(...args) { calls.fills.push({ args, color: ctx.fillStyle, matrix: [...m] }); }
+  }, { get: (object, key) => key in object ? object[key] : () => {} });
+  return { ctx, calls };
+}
+const artPath = id => STATION_CINEMATIC_ART_V188[id].path;
+const sourcePoint = (call, [px, py]) => {
+  const [sx, sy, sw, sh, x, y, w, h] = call.args, [a, b, c, d, e, f] = call.matrix;
+  const dx = x + (px - sx) * w / sw, dy = y + (py - sy) * h / sh;
+  return [a * dx + c * dy + e, b * dx + d * dy + f];
+};
+
+test('station cinematic art: only the selected sequence is preloaded, once, with existing portrait identities', () => {
+  const requests = [], player = new CinematicPlayerV188({ document: null, ImageCtor: class { set src(value) { requests.push(value); } } });
+  player.preload('cin-70'); const count = requests.length;
+  assert.ok(requests.includes(artPath('asph-cin-ring')) && requests.includes(artPath('asph-cin-hub')) && requests.includes(artPath('ud4l-troop-bay')));
+  assert.ok(!requests.includes(artPath('asph-cin-helmet-corridor')) && !requests.includes(artPath('asph-cassius-core')));
+  assert.ok(!requests.some(path => /asph-msn-|act5\//.test(path)), 'neither mission objects nor Act V plates are requested');
+  player.preload('cin-70'); assert.equal(requests.length, count, 'same sequence never repeats a request');
+  player.preload('cin-71'); assert.ok(requests.includes(artPath('asph-cassius-core')) && requests.includes(artPath('echo9-idle')));
+  assert.ok(!requests.includes(artPath('asph-cin-ceiling-drone')));
+  player.preload('cin-72'); assert.ok(requests.includes(artPath('asph-cin-ceiling-drone')) && requests.includes(artPath('asph-cin-bent-door')));
+  assert.equal(new Set(requests).size, requests.length, 'shared bezel is not requested twice');
+  assert.equal(stationCinematicSourcesV188('cin-50'), null, 'other cinematics retain their existing policy');
+});
+
+test('station cinematic art: final files and measured windows are valid; fits preserve every source ratio', () => {
+  const images = stationImages(); assert.equal(STATION_CINEMATIC_NEW_ART_IDS_V188.length, 6);
+  for (const [id, entry] of Object.entries(STATION_CINEMATIC_ART_V188)) {
+    const image = images[entry.path], rect = STATION_CINEMATIC_ART_SOURCE_RECTS_V188[id] || [0, 0, image.naturalWidth, image.naturalHeight];
+    assert.ok(rect[0] >= 0 && rect[1] >= 0 && rect[2] > 0 && rect[3] > 0 && rect[0] + rect[2] <= image.naturalWidth && rect[1] + rect[3] <= image.naturalHeight, id);
+    const fit = stationArtFitV188(images, id, [20, 30, 420, 300]); assert.ok(fit, id);
+    near(fit.w / fit.sw, fit.h / fit.sh, 1e-12, `${id} uniform scale`);
+    for (const [key, anchor] of Object.entries(STATION_CINEMATIC_ART_ANCHORS_V188[id] || {})) {
+      assert.ok(anchor[0] >= rect[0] && anchor[1] >= rect[1] && anchor[0] + (anchor[2] || 0) <= rect[0] + rect[2] && anchor[1] + (anchor[3] || 0) <= rect[1] + rect[3], `${id} ${key}`);
+    }
+  }
+});
+
+test('station cinematic orbit: only ring and docked craft rotate; the hub, pivot and reduced-motion frame stay fixed', () => {
+  const images = stationImages(), entry = shotsOf('cin-70')[2], orbit = STATION_CINEMATIC_ORBIT_V188;
+  const at = (time, reducedMotion = false, selected = images) => { const trace = stationRecorder(); drawStationShotV188(trace.ctx, entry, { images: selected, local: time, progress: .5, reducedMotion }); return trace.calls; };
+  const first = at(0), second = at(8);
+  const find = (calls, id) => calls.images.find(call => call.path === artPath(id));
+  const ring0 = find(first, 'asph-cin-ring'), ring8 = find(second, 'asph-cin-ring'), hub0 = find(first, 'asph-cin-hub'), hub8 = find(second, 'asph-cin-hub');
+  assert.notDeepEqual(ring0.matrix, ring8.matrix); assert.deepEqual(hub0, hub8, 'hub is sampled outside the rotation');
+  for (const draw of [ring0, ring8, hub0, hub8]) {
+    const point = sourcePoint(draw, [627, 627]); near(point[0], orbit.center[0], 1e-9, 'common x pivot'); near(point[1], orbit.center[1], 1e-9, 'common y pivot');
+  }
+  assert.deepEqual(at(0, true), at(8, true), 'reduced motion freezes orbit and quarantine lamp');
+  for (const keep of ['asph-cin-ring', 'asph-cin-hub']) {
+    const calls = at(3, false, { [artPath(keep)]: images[artPath(keep)] });
+    assert.ok(find(calls, keep)); assert.equal(calls.images.length, 1, 'the absent layer uses its own primitive fallback');
+  }
+});
+
+test('station cinematic evidence: waveform and QZ17 orders stay native, translated and readable with or without bezel', () => {
+  const images = stationImages(), terminal = shotsOf('cin-71')[2], waveform = shotsOf('cin-70')[1];
+  for (const selected of [images, {}]) for (const lang of ['fr', 'en']) {
+    const term = stationRecorder(); drawStationTerminalV188(term.ctx, terminal, { images: selected, progress: .9, local: 6, lang, reducedMotion: true });
+    const text = term.calls.text.map(entry => entry.value).join(' ');
+    assert.ok(text.includes(lang === 'en' ? 'ASPHODÈLE · QZ17 ARCHIVES · S2' : 'ASPHODÈLE · ARCHIVES QZ17 · S2'));
+    assert.ok(!text.includes('QZ-18') && !text.includes('FILE DE DÉTRESSE'));
+    assert.ok(text.includes(terminal.lines[0][lang]) && text.includes(terminal.lines[1][lang]) && text.includes(terminal.status[lang]));
+    const wave = stationRecorder(); drawStationShotV188(wave.ctx, waveform, { images: selected, progress: .9, lang, reducedMotion: true });
+    assert.deepEqual(wave.calls.text.map(entry => entry.value), ['05:58', '06:00', lang === 'en' ? 'CUT' : 'COUPURE']);
+  }
+});
+
+test('station helmet camera: threat timing is preserved and REC stays outside the pushed camera and letterbox', () => {
+  const images = stationImages(), entry = shotsOf('cin-72')[0];
+  for (const progress of [.1, .55, .5501, .82]) {
+    const trace = stationRecorder(); drawStationHelmetV188(trace.ctx, entry, { images, progress, local: progress * 12 });
+    assert.equal(trace.calls.images.some(call => call.path === artPath('asph-cin-ceiling-drone')), progress > .55);
+    if (progress > .55) {
+      const corridor = trace.calls.images.find(call => call.path === artPath('asph-cin-helmet-corridor'));
+      const drone = trace.calls.images.find(call => call.path === artPath('asph-cin-ceiling-drone'));
+      const beam = STATION_CINEMATIC_ART_ANCHORS_V188['asph-cin-helmet-corridor'].ceilingBeam;
+      const beamBottom = sourcePoint(corridor, [beam[0], beam[1] + beam[3]])[1];
+      for (const contact of Object.values(STATION_CINEMATIC_ART_ANCHORS_V188['asph-cin-ceiling-drone'])) {
+        near(sourcePoint(drone, contact)[1], beamBottom, 8, 'hands and feet meet the underside of the measured ceiling beam');
+      }
+    }
+  }
+  for (const progress of [.1, .5, .82]) for (const reducedMotion of [false, true]) {
+    const trace = stationRecorder(); drawCinematicFrameV188(trace.ctx, 'cin-72', progress * 12, { images, reducedMotion });
+    const rec = trace.calls.text.find(entry => entry.value === '● REC'); assert.ok(rec);
+    assert.deepEqual(rec.matrix, [1, 0, 0, 1, 0, 0], 'REC is screen-space, not moved by the scene camera');
+    assert.deepEqual([rec.x, rec.y], STATION_CINEMATIC_HELMET_V188.rec);
+    assert.ok(rec.y - 16 > LETTERBOX_V188 && rec.y < 720 - LETTERBOX_V188);
+  }
+  const before = stationRecorder(), after = stationRecorder();
+  drawStationHelmetV188(before.ctx, entry, { images, progress: .7, local: 7, reducedMotion: true });
+  drawStationHelmetV188(after.ctx, entry, { images, progress: .8, local: 9, reducedMotion: true });
+  assert.deepEqual(before.calls, after.calls, 'reduced motion freezes the degraded feed once the same threat phase is reached');
 });
