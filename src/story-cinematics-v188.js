@@ -1,8 +1,8 @@
 // V188 — prologue and first-hour cinematics (bible §4, §5.2, §10).
 // Scripted Canvas 2D sequences: fixed shots, slow pans, dialogue frames with the
 // reviewed crew portraits (npc-dialogue-portraits-v168.js). No pre-rendered
-// video: most decors are drawn with primitives; space, planet and the Tantalus
-// reuse title-scene layers, and colony speakers have authored portraits. Every cinematic can be
+// video: reviewed scenery and separate actors accompany native projections,
+// evidence text and physical sets; colony speakers retain their portraits. Every cinematic can be
 // skipped and replayed, and none grants a reward.
 import { getNpcDialoguePortraitV168, drawNpcDialoguePortraitV168 } from './npc-dialogue-portraits-v168.js';
 import { getPlaceholderPortraitV188, drawPlaceholderPortraitV188 } from './placeholder-portraits-v188.js';
@@ -12,6 +12,7 @@ import { STATION_CINEMATICS_V188, STATION_CINEMATIC_SETS_V188, STATION_CINEMATIC
   drawStationShotV188, drawStationBackgroundV188, drawStationTerminalV188, drawStationHelmetV188, drawStationHelmetHudV188, stationCinematicSourcesV188 } from './station-cinematics-v188.js';
 import { Act5AssetLoaderV188, act5CinematicSourcesV188, drawAct5DialogueV188 } from './act5-slots-v188.js';
 import { biologicalCinematicSourcesV188, drawBiologicalBackgroundV188, drawBiologicalShotV188, drawBiologicalHelmetHudV188 } from './biological-art-v188.js';
+import { prologueCinematicSourcesV188, drawPrologueBackgroundV188, drawPrologueSetArtV188, drawPrologueShotV188 } from './prologue-art-v188.js';
 
 const t = (fr, en) => Object.freeze({ fr, en });
 const shot = (seconds, kind, data = {}) => Object.freeze({ seconds, kind, ...data });
@@ -385,12 +386,13 @@ function figure(ctx, x, floor, height, color = '#020504', { rim = null, elder = 
     ctx.beginPath(); ctx.moveTo(x - shoulders / 2, top + head * 1.25); ctx.lineTo(x + shoulders / 2, top + head * 1.25); ctx.stroke(); }
   ctx.restore();
 }
-function drawSet(ctx, scene, { cast = null, time = 0, reducedMotion = false, speakerId = null, images = null } = {}) {
+function drawSet(ctx, scene, { cast = null, time = 0, reducedMotion = false, speakerId = null, images = null, cinematicId = null } = {}) {
   const layout = cinematicSetLayoutV188(scene, { cast }); if (!layout) return null;
   const { floor, scale } = layout;
   for (const entry of layout.items) {
     const { x, w, h } = entry.px, top = floor - h;
     if (images && drawStationSetArtV188(ctx, entry, { images, x, w, h, top, floor, time, reducedMotion })) continue;
+    if (images && drawPrologueSetArtV188(ctx, entry, { images, cinematicId, scene, layout, time, reducedMotion })) continue;
     switch (entry.kind) {
       case 'locker': { // standalone steel locker, label plate, seal tape across the door
         ctx.fillStyle = '#1d2a2e'; ctx.fillRect(x, top, w, h); ctx.strokeStyle = 'rgba(160,200,205,.25)'; ctx.lineWidth = 2; ctx.strokeRect(x + .5, top + .5, w - 1, h - 1);
@@ -473,15 +475,17 @@ function drawSet(ctx, scene, { cast = null, time = 0, reducedMotion = false, spe
   return layout;
 }
 function background(ctx, images, scene, time, reducedMotion, { cast = null, speakerId = null, cinematicId = null } = {}) {
-  const set = { cast, time, reducedMotion, speakerId };
+  const set = { cast, time, reducedMotion, speakerId, cinematicId };
+  const prologue = () => drawPrologueBackgroundV188(ctx, images, cinematicId, scene, { time, reducedMotion });
   if (drawAct5DialogueV188(ctx, cinematicId, scene, { images, time, reducedMotion })) return;
   if (drawBiologicalBackgroundV188(ctx, images, cinematicId, scene, { time, reducedMotion, speakerId })) return;
   if (drawStationBackgroundV188(ctx, images, cinematicId, scene, { time, reducedMotion, W, H })) {
     if (STATION_CINEMATIC_SETS_V188[scene]) drawSet(ctx, scene, { ...set, images });
     return;
   }
+  if (['range', 'dropship', 'quarters'].includes(scene) && prologue()) return;
   if (scene === 'hologram') {
-    ctx.fillStyle = '#030907'; ctx.fillRect(0, 0, W, H);
+    if (!prologue()) { ctx.fillStyle = '#030907'; ctx.fillRect(0, 0, W, H); }
     cone(ctx, 640, 560, 760, 140, 'rgba(70,190,160,.16)'); // the table projects upwards
     ctx.strokeStyle = 'rgba(95,210,180,.55)'; ctx.lineWidth = 2;
     const spin = reducedMotion ? 0 : time * .25, flicker = reducedMotion ? 1 : .85 + .15 * Math.sin(time * 23);
@@ -491,10 +495,10 @@ function background(ctx, images, scene, time, reducedMotion, { cast = null, spea
     ctx.beginPath(); ctx.ellipse(640, 300, 290, 70, -.25, 0, Math.PI * 2); ctx.stroke(); // orbit
     const sx = 640 + Math.cos(spin * 1.6) * 290, sy = 300 + Math.sin(spin * 1.6) * 70 * .9;
     ctx.fillStyle = '#e15b4f'; ctx.fillRect(sx - 7, sy - 7, 14, 14); // Asphodèle, red quarantine light
-    ctx.font = '13px monospace'; ctx.fillStyle = '#9fe7cf'; ctx.fillText('COCYTE', 600, 110); ctx.fillStyle = '#e15b4f'; ctx.fillText('ASPHODÈLE · QZ ROUGE', sx + 12, sy - 10);
+    ctx.font = '13px monospace'; ctx.fillStyle = '#9fe7cf'; ctx.fillText('COCYTE', 600, 145); ctx.fillStyle = '#e15b4f'; ctx.fillText('ASPHODÈLE · QZ ROUGE', sx + 12, sy - 10);
     ctx.globalAlpha = 1;
     ctx.fillStyle = 'rgba(150,240,210,.05)'; for (let y = 110; y < 520; y += 6) ctx.fillRect(420, y, 440, 1); // projection scanlines
-    drawSet(ctx, 'hologram', set); // the table and, backlit around it, Harlow, Vega, Velez and Echo-9
+    drawSet(ctx, 'hologram', { ...set, images }); // the table and, backlit around it, Harlow, Vega, Velez and Echo-9
     return;
   }
   const palette = STATION_CINEMATIC_PALETTES_V188[scene] || { cryo: ['#061014', '#10232a'], range: ['#100f0a', '#22200f'], quay: ['#070a0d', '#141b22'], triage: ['#0d1112', '#1e2629'], quarters: ['#0d0a08', '#1d1712'], dropship: ['#0a0606', '#1c0f0d'], cradle: ['#0b1113', '#162024'], lab: ['#0d1214', '#1b2428'], alarm: ['#140606', '#2a0e0c'] }[scene] || ['#0b0f10', '#151b1d'];
@@ -503,9 +507,11 @@ function background(ctx, images, scene, time, reducedMotion, { cast = null, spea
   ctx.fillRect(0, 0, W, H);
   ctx.fillStyle = 'rgba(255,255,255,.025)'; for (let x = 0; x < W; x += 160) ctx.fillRect(x, 0, 2, H);
   if (scene === 'cryo') { // the hub cryo bay as played: ECHO-8 locker, escape-pod door, DAVID-8R, capsule 03 open, 01/02/04 near
-    for (const x of [260, 700, 1000]) { ctx.fillStyle = 'rgba(200,235,245,.55)'; ctx.fillRect(x - 70, 110, 140, 6); cone(ctx, x, 116, 360, 510, 'rgba(150,210,230,.09)'); }
-    ctx.fillStyle = '#0b161b'; ctx.fillRect(0, 510, W, 210); // deck
-    drawSet(ctx, 'cryo', set);
+    if (!prologue()) {
+      for (const x of [260, 700, 1000]) { ctx.fillStyle = 'rgba(200,235,245,.55)'; ctx.fillRect(x - 70, 110, 140, 6); cone(ctx, x, 116, 360, 510, 'rgba(150,210,230,.09)'); }
+      ctx.fillStyle = '#0b161b'; ctx.fillRect(0, 510, W, 210); // deck
+    }
+    drawSet(ctx, 'cryo', { ...set, images });
     mist(ctx, time, reducedMotion, 'rgba(190,225,235,.025)', 490);
   }
   if (scene === 'range') { // firing lanes, man-shaped boards, sodium work lights
@@ -516,9 +522,11 @@ function background(ctx, images, scene, time, reducedMotion, { cast = null, spea
   }
   if (scene === 'quay' || scene === 'dropship') {
     if (scene === 'quay') { // cranes and container stacks against floodlights
-      ctx.fillStyle = '#05080a'; ctx.fillRect(140, 150, 20, 400); ctx.fillRect(140, 150, 300, 16); ctx.fillRect(980, 190, 18, 360); ctx.fillRect(820, 190, 260, 14);
-      ctx.fillStyle = '#0d1216'; ctx.fillRect(0, 520, W, 200); // quay slab
-      drawSet(ctx, 'quay', set); // 10-ft containers (two marked QZ17), the lit airlock, and who stands on the quay
+      if (!prologue()) {
+        ctx.fillStyle = '#05080a'; ctx.fillRect(140, 150, 20, 400); ctx.fillRect(140, 150, 300, 16); ctx.fillRect(980, 190, 18, 360); ctx.fillRect(820, 190, 260, 14);
+        ctx.fillStyle = '#0d1216'; ctx.fillRect(0, 520, W, 200); // quay slab
+      }
+      drawSet(ctx, 'quay', { ...set, images }); // 10-ft containers (two marked QZ17), the lit airlock, and who stands on the quay
       for (const x of [300, 900]) { light(ctx, x, 140, 60, 'rgba(255,236,190,.6)'); cone(ctx, x, 140, 520, 640, 'rgba(255,230,180,.08)'); }
       ctx.fillStyle = 'rgba(255,230,180,.06)'; for (let i = 0; i < 12; i++) ctx.fillRect(240 + (i * 97) % 760, 580 + (i % 4) * 8, 60, 2); // wet reflections
       rain(ctx, time, reducedMotion, 'rgba(170,200,210,.22)');
@@ -533,11 +541,13 @@ function background(ctx, images, scene, time, reducedMotion, { cast = null, spea
       ctx.fillStyle = (Math.floor(time * 1.4) % 2) ? '#e15b4f' : '#5a1f1b'; ctx.fillRect(620, 112, 40, 10); ctx.restore();
     }
   }
-  if (scene === 'triage') { // curtains, surgical lamp, stretcher and a patient with a bandaged chest (primitives)
-    ctx.fillStyle = 'rgba(190,200,190,.08)'; for (let x = 80; x < 640; x += 36) ctx.fillRect(x, 130, 20, 380);
-    light(ctx, 940, 150, 70, 'rgba(240,250,255,.55)'); cone(ctx, 940, 150, 420, 520, 'rgba(230,240,245,.10)');
-    ctx.fillStyle = '#151b1d'; ctx.fillRect(0, 560, W, 160); // floor
-    drawSet(ctx, 'triage', set); // Lucia Ferro beside the 2 m stretcher, the patient's chest bandaged
+  if (scene === 'triage') { // the room has two empty fixed beds; the rolling stretcher is in front
+    if (!prologue()) {
+      ctx.fillStyle = 'rgba(190,200,190,.08)'; for (let x = 80; x < 640; x += 36) ctx.fillRect(x, 130, 20, 380);
+      light(ctx, 940, 150, 70, 'rgba(240,250,255,.55)'); cone(ctx, 940, 150, 420, 520, 'rgba(230,240,245,.10)');
+      ctx.fillStyle = '#151b1d'; ctx.fillRect(0, 560, W, 160); // floor
+    }
+    drawSet(ctx, 'triage', { ...set, images }); // Lucia Ferro beside the 2 m stretcher, the patient's chest bandaged
   }
   if (STATION_CINEMATIC_SETS_V188[scene]) { ctx.fillStyle = '#0a0f0c'; ctx.fillRect(0, 560, W, 160); drawSet(ctx, scene, set); } // V188 spec 007
   if (scene === 'cradle') { ctx.fillStyle = '#0a1012'; ctx.fillRect(0, 560, W, 160); drawSet(ctx, 'cradle', set); } // the maintenance alcove
@@ -585,6 +595,9 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
   const camera = cinematicCameraV188(current, progress, reducedMotion);
   ctx.save(); ctx.translate(W / 2 + camera.x, H / 2 + camera.y); ctx.scale(camera.zoom, camera.zoom); ctx.translate(-W / 2, -H / 2);
   const biological = () => drawBiologicalShotV188(ctx, id, current, { images, local, progress, lang, reducedMotion, context, caption: (text, y) => caption(ctx, text, y) });
+  const prologue = () => drawPrologueShotV188(ctx, id, current, { images, local, progress, lang, reducedMotion,
+    caption: (text, y) => caption(ctx, text, y), rain: (time, still, color) => rain(ctx, time, still, color),
+    drawSet: scene => drawSet(ctx, scene, { images, cinematicId: id, time: local, reducedMotion }) });
   switch (current.kind) {
     case 'telemetry': {
       ctx.strokeStyle = '#59d27f'; ctx.lineWidth = 2; ctx.beginPath();
@@ -592,6 +605,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       ctx.stroke(); break;
     }
     case 'relay-rain': {
+      if (prologue()) break;
       ctx.fillStyle = '#0b1014'; ctx.fillRect(0, 0, W, H);
       ctx.fillStyle = '#1b242b'; ctx.fillRect(520, 220, 240, 380); ctx.fillRect(610, 90, 60, 140); // relay mast and hut
       ctx.fillStyle = (Math.floor(local * 1.5) % 2) ? '#e15b4f' : '#5a1f1b'; ctx.fillRect(632, 80, 16, 10);
@@ -600,6 +614,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
     }
     case 'terminal': {
       if (biological()) break;
+      if (prologue()) break;
       if (id === 'cin-71') { drawStationTerminalV188(ctx, current, { images, local, progress, lang, reducedMotion }); caption(ctx, current.caption?.[lang]); break; }
       ctx.fillStyle = '#071009'; ctx.fillRect(200, 120, 880, 420); ctx.strokeStyle = '#2f6d45'; ctx.strokeRect(200.5, 120.5, 880, 420);
       ctx.font = '22px monospace'; ctx.fillStyle = '#8df0b0';
@@ -611,6 +626,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       caption(ctx, current.caption?.[lang]); break;
     }
     case 'badge': {
+      if (prologue()) break;
       ctx.fillStyle = '#121414'; ctx.fillRect(0, 380, W, 340); // console desk
       ctx.fillStyle = '#c8c3b2'; ctx.fillRect(560, 430, 160, 100); ctx.fillStyle = '#6f6a5d'; ctx.fillRect(580, 450, 50, 60);
       ctx.fillStyle = '#9a958a'; for (let i = 0; i < 3; i++) ctx.fillRect(645, 455 + i * 18, 60, 7); // illegible name
@@ -618,8 +634,10 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       break;
     }
     case 'orbit-station': {
+      if (prologue()) break;
       if (ready(images[CINEMATIC_IMAGES_V188.space])) ctx.drawImage(images[CINEMATIC_IMAGES_V188.space], 0, 0, W, H);
-      if (ready(images[CINEMATIC_IMAGES_V188.planet])) ctx.drawImage(images[CINEMATIC_IMAGES_V188.planet], 380, 300, 900, 520);
+      const planet = images[CINEMATIC_IMAGES_V188.planet];
+      if (ready(planet)) ctx.drawImage(planet, 0, 0, planet.naturalWidth, planet.naturalHeight, 380, 300, 900, 900 * planet.naturalHeight / planet.naturalWidth);
       const x = 380 - (reducedMotion ? 0 : local * 6); ctx.fillStyle = '#2b3236'; ctx.fillRect(x, 220, 260, 26); ctx.fillRect(x + 110, 160, 40, 150); // dark station
       ctx.fillStyle = (Math.floor(local * 1.2) % 2) ? '#e15b4f' : '#6a1d18'; ctx.fillRect(x + 124, 150, 12, 12);
       caption(ctx, current.caption?.[lang], 120); break;
@@ -627,7 +645,8 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
     case 'tantalus-orbit': {
       if (ready(images[CINEMATIC_IMAGES_V188.space])) ctx.drawImage(images[CINEMATIC_IMAGES_V188.space], 0, 0, W, H);
       if (ready(images[CINEMATIC_IMAGES_V188.stars])) ctx.drawImage(images[CINEMATIC_IMAGES_V188.stars], 0, 0, W, H);
-      if (ready(images[CINEMATIC_IMAGES_V188.planet])) ctx.drawImage(images[CINEMATIC_IMAGES_V188.planet], 520, 360, 900, 520);
+      const planet = images[CINEMATIC_IMAGES_V188.planet];
+      if (ready(planet)) ctx.drawImage(planet, 0, 0, planet.naturalWidth, planet.naturalHeight, 520, 360, 900, 900 * planet.naturalHeight / planet.naturalWidth);
       const ship = images[CINEMATIC_IMAGES_V188.tantalus];
       if (ready(ship)) { const width = 620, height = width * ship.naturalHeight / ship.naturalWidth, x = -width + (reducedMotion ? 1 : progress) * (W * .62);
         ctx.drawImage(ship, x, 220, width, height); }
@@ -651,6 +670,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       caption(ctx, current.caption?.[lang]); break;
     }
     case 'port-tour': {
+      if (prologue()) break;
       ctx.fillStyle = '#0d1114'; ctx.fillRect(0, 0, W, H);
       ctx.fillStyle = '#1a2026'; ctx.fillRect(0, 520, W, 200); // ground
       const pan = reducedMotion ? 0 : progress * 60;
@@ -720,6 +740,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       ctx.fillText(current.caption[lang], W / 2, H / 2); ctx.textAlign = 'left'; break;
     }
     case 'locker': { // the ECHO-8 locker as it stands in the cryo bay: alone, emptied, sealed
+      if (prologue()) break;
       ctx.fillStyle = '#0d1517'; ctx.fillRect(0, 0, W, H); ctx.fillStyle = 'rgba(255,255,255,.03)'; for (let x = 0; x < W; x += 120) ctx.fillRect(x, 0, 2, 610);
       ctx.fillStyle = '#0a1113'; ctx.fillRect(0, 610, W, 110);
       drawSet(ctx, 'locker', { time: local, reducedMotion });
@@ -730,7 +751,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       const count = Math.min(37, Math.floor(progress * 46));
       for (let i = 0; i < count; i++) { ctx.fillStyle = i === count - 1 ? '#e9d07a' : '#59d27f';
         const age = i === 36 ? '4 H' : `${lang === 'en' ? 'D' : 'J'}-${Math.max(1, 6 - Math.floor(i / 7))}`;
-        ctx.fillText(`PORT-MÉRIDIEN · ${age} · ${lang === 'en' ? 'DISTRESS RELAY' : 'RELAIS DE DÉTRESSE'} #${String(i + 1).padStart(2, '0')}`, i < 19 ? 90 : 680, 90 + (i % 19) * 26); }
+        ctx.fillText(`PORT-MÉRIDIEN · ${age} · ${lang === 'en' ? 'DISTRESS RELAY' : 'RELAIS DE DÉTRESSE'} #${String(i + 1).padStart(2, '0')}`, i < 19 ? 90 : 680, 116 + (i % 19) * 24); }
       caption(ctx, current.caption?.[lang], 650); break;
     }
     case 'name-list': {
@@ -741,6 +762,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       ctx.textAlign = 'left'; break;
     }
     case 'port-approach': { // night descent: ridge, the port's lights, the pad beacons, heavy rain
+      if (prologue()) break;
       const sky = ctx.createLinearGradient?.(0, 0, 0, H); if (sky) { sky.addColorStop(0, '#0d1a1f'); sky.addColorStop(1, '#05080a'); ctx.fillStyle = sky; } else ctx.fillStyle = '#081014';
       ctx.fillRect(0, 0, W, H);
       ctx.fillStyle = '#04070a'; ctx.beginPath(); ctx.moveTo(0, 380); for (let x = 0; x <= W; x += 80) ctx.lineTo(x, 330 + Math.sin(x * .013) * 40 + Math.cos(x * .031) * 18); ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.fill();
@@ -824,13 +846,14 @@ export class CinematicPlayerV188 {
     const stationSources = stationCinematicSourcesV188(id);
     const act5Sources = act5CinematicSourcesV188(id);
     const biologicalSources = biologicalCinematicSourcesV188(id);
-    const sources = new Set(stationSources || act5Sources || biologicalSources || Object.values(CINEMATIC_IMAGES_V188));
+    const prologueSources = prologueCinematicSourcesV188(id);
+    const sources = new Set(stationSources || act5Sources || biologicalSources || prologueSources || Object.values(CINEMATIC_IMAGES_V188));
     for (const entry of CINEMATICS_V188[id]?.shots || []) {
       const profile = entry.line?.crewId ? getNpcDialoguePortraitV168(entry.line.crewId) : null; if (profile) sources.add(profile.source);
       const colony = !entry.line?.crewId ? getColonyPortraitV188(entry.line?.speaker) : null;
       if (colony) sources.add(colony.source);
     }
-    for (const source of sources) if ((!this.images[source] || ((act5Sources || biologicalSources) && this.images[source].complete && !this.images[source].naturalWidth)) && this.ImageCtor) {
+    for (const source of sources) if ((!this.images[source] || ((act5Sources || biologicalSources || prologueSources) && this.images[source].complete && !this.images[source].naturalWidth)) && this.ImageCtor) {
       const image = new this.ImageCtor(); image.src = source; this.images[source] = image;
     }
   }

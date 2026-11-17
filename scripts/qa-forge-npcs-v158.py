@@ -128,6 +128,50 @@ def resume_interaction_state(page, kind):
         keys:[...e.keys],deferred:e.deferredActionKeyV188?{...e.deferredActionKeyV188}:null};}''', kind)
 
 
+def start_resume_key_trace(page, kind):
+    # Observe only the single resumed E interaction. Passive listeners never
+    # cancel input, alter the engine or repeat a key; collection is bounded.
+    return page.evaluate_handle('''kind=>{
+      const rows=[],listeners=[],timers=new Set(),maxRows=64;let dropped=0;
+      const identity=n=>n?{tag:n.tagName||n.nodeName||(n===window?'WINDOW':null),id:n.id||null,role:n.getAttribute?.('role')||null}:null;
+      const native=()=>{const e=kind==='mission'?__ATF_GAME__:__ATF_HUB__;
+        const nearest=kind==='ship'?e.nearestForgeInteractionV141?.():null;
+        const npc=kind==='ship'?(nearest?.type==='npc'?nearest.entity:null):e.forgeNarrativeNpcV158?.();
+        const admitted=kind==='mission'?e.canPerformGameplayAction?.(e.player,{allowVent:true,allowSquadTask:true})
+          :e.running&&!e.paused&&!e.forgeShipStartingV141&&!e.forgeNarrativeOpenV156&&e.player?.alive;
+        return {running:e.running,paused:!!e.paused,mission:e.mission?.state||null,
+          room:e.forgeSessionV141?.currentRoomId||null,dialog:e.forgeNarrativeOpenV156||null,
+          admitted:!!admitted,npcCellId:npc?.cellId||null,
+          enemyLoading:!!e.enemyAtlasLoadingPausedV65,userLoading:!!e.userCasteLoadingV88,
+          shipStarting:!!e.forgeShipStartingV141,handover:!!e.dropshipHandoverBlocksV188?.(),
+          keys:[...(e.keys||[])],deferred:e.deferredActionKeyV188?{...e.deferredActionKeyV188}:null};};
+      const record=value=>{if(rows.length>=maxRows){dropped++;return;}
+        rows.push({...value,atMs:performance.now(),focus:identity(document.activeElement),
+          documentFocused:document.hasFocus(),documentHidden:document.hidden,native:native()});};
+      for(const [host,label] of [[window,'window'],[document,'document']])for(const capture of [true,false]){
+        const listener=event=>{
+          if(rows.length>=maxRows){dropped++;return;}
+          const entry={type:event.type,listener:label,capture,eventPhase:event.eventPhase,
+            key:event.key||null,code:event.code||null,repeat:!!event.repeat,defaultPrevented:event.defaultPrevented,
+            ctrlKey:!!event.ctrlKey,altKey:!!event.altKey,metaKey:!!event.metaKey,shiftKey:!!event.shiftKey,isComposing:!!event.isComposing,
+            trusted:event.isTrusted,target:identity(event.target),relatedTarget:identity(event.relatedTarget),
+            path:event.composedPath().slice(0,8).map(identity)};
+          record(entry);
+          if(label==='window'&&capture&&['keydown','keyup'].includes(event.type)){
+            const timer=setTimeout(()=>{timers.delete(timer);record({...entry,listener:'next-task',capture:null,
+              eventPhase:null,defaultPrevented:event.defaultPrevented});},0);timers.add(timer);
+          }
+        };
+        for(const type of ['keydown','keyup','focusin','focusout']){
+          host.addEventListener(type,listener,{capture,passive:true});listeners.push([host,type,listener,capture]);
+        }
+      }
+      record({type:'armed',expectedCode:'KeyE'});
+      return {stop(){for(const [host,type,listener,capture] of listeners)host.removeEventListener(type,listener,capture);
+        for(const timer of timers)clearTimeout(timer);record({type:'collected'});return {maxRows,dropped,rows};}};
+    }''', kind)
+
+
 def reopen_resumed_dialogue(page, kind, game_canvas, dialog):
     # A restored checkpoint and a drawn prompt do not certify input admission.
     # Observe that same native gate before the single E press; do not retry it
@@ -141,6 +185,7 @@ def reopen_resumed_dialogue(page, kind, game_canvas, dialog):
         return milliseconds
 
     trace = report.setdefault('resumeInteractions', {}).setdefault(kind, {})
+    key_trace = None
     try:
         game_canvas.focus(timeout=remaining())
         trace['before'] = resume_interaction_state(page, kind)
@@ -152,10 +197,21 @@ def reopen_resumed_dialogue(page, kind, game_canvas, dialog):
           return admitted&&npc?.cellId==='b-npc'&&e.forgeSessionV141?.currentRoomId==='b'
             &&document.activeElement===e.canvas&&document.hasFocus();}''', arg=kind, timeout=remaining())
         trace['ready'] = resume_interaction_state(page, kind)
+        key_trace = start_resume_key_trace(page, kind)
         remaining()
         page.keyboard.press('KeyE')
         dialog.wait_for(state='visible', timeout=remaining())
     finally:
+        if key_trace is not None:
+            try:
+                trace['keyEvents'] = key_trace.evaluate('trace=>trace.stop()')
+            except Exception as error:
+                trace['keyEvents'] = {'collectionError': str(error)}
+            finally:
+                try:
+                    key_trace.dispose()
+                except Exception:
+                    pass
         trace['after'] = resume_interaction_state(page, kind)
 
 

@@ -2,7 +2,9 @@ import test from 'node:test';
 import { deriveStoryCampaignV188, markStoryDebriefSeenV188, STORY_RELAY_CAMPAIGN_ID_V188 } from '../src/story-campaign-v188.js';
 import assert from 'node:assert/strict';
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
+import { createInterface } from 'node:readline';
+import { createContext, runInContext } from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -26,6 +28,7 @@ import { mountLetheContinuityV163 } from '../src/campaign-lethe-continuity-ui-v1
 import { hostV136 } from './forge-native-host-v136.mjs';
 import { HUB_NPC_ANNEX_WORKPOST_ROUTE_DEFINITIONS_V165 } from '../src/npc-annex-workpost-routes-v165.js';
 import { campaignObjectiveLabelV188 } from '../src/mission-objective-panel-v188.js';
+import { InsertionCinematicPlayerV188, buildInsertionSequenceV188, insertionWorldProfileV188 } from '../src/insertion-cinematic-v188.js';
 
 const world = WORLDS.find(entry => entry.id === campaign.worldId);
 const clone = value => structuredClone(value);
@@ -661,6 +664,107 @@ Path(sys.argv[3]).write_text(json.dumps({'results': results, 'numerical': numeri
   }
 }
 const workpostActor = (save, id = 'rook-cctv') => save.hub.npcAnnexWorkpostRoutesV165.routes[id].actor;
+
+async function driveNativeExtractionReturn({ cinematic = true, lastId = 'operation-native-return', success = true } = {}) {
+  const { document } = storyDocument(), canvas = document.createElement('canvas'), button = document.createElement('button');
+  const modes = new Set(['mission-mode']), clicks = [], gradient = { addColorStop() {} };
+  const ctx = new Proxy({ measureText: text => ({ width: String(text).length * 7 }), createLinearGradient: () => gradient,
+    createRadialGradient: () => gradient }, { get: (object, key) => object[key] || (() => {}) });
+  const createElement = document.createElement;
+  document.createElement = tag => { const node = createElement(tag); node.getContext = () => ctx; return node; };
+  canvas.getClientRects = button.getClientRects = () => [{}];
+  document.body.append(canvas, button);
+  document.documentElement = { classList: { contains: value => modes.has(value) } };
+  const overlay = () => document.body.querySelector('.insertion-cinematic-v188');
+  const skip = () => overlay()?.querySelector('.insertion-skip-v188') || null;
+  document.querySelector = selector => selector === '#game-canvas' ? canvas : selector === '#retreat-mission' ? button
+    : selector.includes('.insertion-skip-v188') ? skip() : selector.includes('.insertion-cinematic-v188') ? overlay() : null;
+  const save = returnedFixture({ id: lastId, success }); save.strategy.currentOperation = null;
+  const before = JSON.stringify(save), engine = { running: true, mission: { state: 'complete' } };
+  const context = createContext({ document, __ATF_GAME__: engine, __ATF_V51__: { saveSystem: { data: save } },
+    getComputedStyle: () => ({ visibility: 'visible' }) });
+  let now = 0, completed = null;
+  const player = new InsertionCinematicPlayerV188({ document, now: () => now, requestFrame: () => {},
+    assets: { preload() {}, image: () => null, draw() {} } });
+  if (cinematic) {
+    const sequence = buildInsertionSequenceV188({ direction: 'extraction', profile: insertionWorldProfileV188(world) });
+    assert.ok(sequence.duration > 30, 'The full native extraction exceeds the old click budget.');
+    void player.play(sequence).then(reason => { completed = reason; });
+    skip().getClientRects = () => [{}];
+  }
+  const python = String.raw`
+import ast,json,sys
+from pathlib import Path
+tree=ast.parse(Path(sys.argv[1]).read_text());now=0
+def rpc(method,**data):
+ global now
+ print(json.dumps({'method':method,**data}),flush=True)
+ response=json.loads(sys.stdin.readline());now=response['now']
+ if response.get('error'):raise AssertionError(response['error'])
+ return response.get('value')
+class Clock:
+ def monotonic(self):return now/1000
+class Locator:
+ def __init__(self,selector):self.selector=selector
+ def is_visible(self):return rpc('visible',selector=self.selector)
+ def click(self,**kwargs):return rpc('click',selector=self.selector,**kwargs)
+class Page:
+ def locator(self,selector):return Locator(selector)
+ def evaluate(self,expression,arg=None):return rpc('evaluate',expression=expression,arg=arg)
+ def wait_for_function(self,expression,arg=None,**kwargs):return rpc('wait',expression=expression,arg=arg,**kwargs)
+helpers=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='return_after_native_extraction']
+assert len(helpers)==1
+scope={'time':Clock()};exec(compile(ast.Module(body=helpers,type_ignores=[]),sys.argv[1],'exec'),scope)
+try:result={'ok':True,'evidence':scope['return_after_native_extraction'](Page(),'operation-native-return')}
+except (AssertionError,TimeoutError) as error:result={'ok':False,'error':str(error)}
+print(json.dumps({'method':'complete','result':result}),flush=True)
+`;
+  const source = fileURLToPath(new URL('./qa-campaign-story-v160.py', import.meta.url));
+  const child = spawn('python3', ['-B', '-c', python, source], { stdio: ['pipe', 'pipe', 'pipe'] });
+  let stderr = '', result; child.stderr.on('data', chunk => { stderr += chunk; });
+  const done = new Promise(resolve => child.on('exit', code => resolve(code))), timer = setTimeout(() => child.kill('SIGKILL'), 10000);
+  try {
+    for await (const line of createInterface({ input: child.stdout })) {
+      const request = JSON.parse(line); let value = null, error;
+      if (request.method === 'complete') { result = request.result; continue; }
+      try {
+        if (request.method === 'evaluate' || request.method === 'wait') {
+          value = runInContext('(' + request.expression + ')', context)(request.arg);
+          if (request.method === 'wait' && !value) { now += request.timeout || 30000; throw Error('Native readiness was not satisfied within the existing budget.'); }
+        } else if (request.method === 'visible') value = Boolean(document.querySelector(request.selector));
+        else if (request.method === 'click') {
+          if (request.selector === '#retreat-mission' && overlay()) {
+            now += request.timeout || 30000; throw Error('Native extraction dialog intercepts the return click.');
+          }
+          const node = document.querySelector(request.selector); assert.ok(node, 'The public control exists.'); clicks.push(request.selector);
+          if (node === button) modes.delete('mission-mode'); else node.onclick();
+        } else throw Error('Unexpected driver operation: ' + request.method);
+      } catch (caught) { error = caught.message; }
+      child.stdin.write(JSON.stringify({ now, value, error }) + '\n');
+    }
+    assert.equal(await done, 0, stderr); assert.ok(result); assert.equal(JSON.stringify(save), before, 'UI return cannot mutate the receipt fixture.');
+    return { result, clicks, completed, exited: !modes.has('mission-mode'), now };
+  } finally { clearTimeout(timer); child.kill(); player.stop(); }
+}
+
+test('QA native extraction return uses the production skip before the visible return and preserves the receipt', async t => {
+  for (const cinematic of [true, false]) {
+    const observed = await driveNativeExtractionReturn({ cinematic });
+    assert.equal(observed.result.ok, true, JSON.stringify(observed)); assert.equal(observed.exited, true);
+    assert.deepEqual(observed.clicks, cinematic ? ['.insertion-cinematic-v188[data-direction="extraction"] .insertion-skip-v188', '#retreat-mission'] : ['#retreat-mission']);
+    assert.equal(observed.completed, cinematic ? 'skipped' : null);
+    assert.equal(observed.result.evidence.publicSkipUsed, cinematic);
+    assert.ok(observed.now < 30000);
+  }
+  t.diagnostic('Actual Python helper and production InsertionCinematicPlayerV188; declared DOM/Canvas/clock host and terminal save fixture, not a browser journey.');
+});
+
+test('QA native extraction return refuses a foreign operation or failed result without clicking', async () => {
+  for (const fixture of [{ lastId: 'operation-foreign' }, { success: false }]) {
+    const observed = await driveNativeExtractionReturn({ cinematic: false, ...fixture });
+    assert.equal(observed.result.ok, false); assert.deepEqual(observed.clicks, []); assert.equal(observed.exited, false);
+  }
+});
 
 test('gamedev QA reload: exact registered workpost clocks advance only within measured elapsed time', () => {
   assert.deepEqual(HUB_NPC_ANNEX_WORKPOST_ROUTE_DEFINITIONS_V165.map(d => [d.id, d.crewId]),

@@ -2,8 +2,8 @@
  *
  * Baseline: 803db26dbd7ed453d9534eee237806053438f300 (main after PR #46). The predecessor of
  * each original receipt is the reviewed V187 endpoint at this baseline. The
- * continuation block separately anchors later changed sources to their exact
- * bytes in the published Act V commit; historical predecessors stay intact.
+ * continuation blocks separately anchor later changed sources to their exact
+ * published bytes; historical predecessors and earlier endpoints stay intact.
  * The owner lifted the save/catalogue protection for this lot on 2026-11-12
  * (bible §56.1): each changed byte still needs an exact receipt here, and
  * migrations stay additive. This terminal module imports no audit and has no
@@ -502,6 +502,74 @@ export const TANTALUS_PRIORITIES_CONTINUATION_V188 = freeze({
   }
 });
 
+// Prologue art and native QA continuation from the published Chromium-tested
+// lot. Earlier receipt blocks remain byte-for-byte historical; this block
+// records only this lot's changed endpoints and its separately added helper.
+export const TANTALUS_PRIORITIES_PROLOGUE_V188 = freeze({
+  "baseline": "d54f13cc55983ddb5f55851071c9144198fe1155",
+  "successors": {
+    "scripts/qa-black-cocoon-browser-v158.mjs": {
+      "previousSha256": "ebb81a7deeab1c1a2d8ce47d1f14759889638b9af2f42859ef26119e2f459b0b",
+      "currentSha256": "fc5b73f2315d19766cf1a609066f3f4fa89b557caf64e6b4e4bf618e1702cef8"
+    },
+    "scripts/qa-campaign-story-v160.py": {
+      "previousSha256": "0a6cd23cdcc3bf32e8209258e4920e7897264883e10877401f787f010cde5a4e",
+      "currentSha256": "0483f3b99b6d0b05cd7a7bbb984e2a662360a3828ad532d0c0fbbd201072e49f"
+    },
+    "scripts/qa-forge-npcs-v158.py": {
+      "previousSha256": "5c0b24aed9faf3e0921cfdb698735329063f5d93e1bb2a6b49c5c74e9afc677b",
+      "currentSha256": "0d6bcda73a5ee085eb9a886ca755e56ec1a2195a13e6f0fff9c4014e562193f1"
+    },
+    "scripts/qa-title-compositions-v163.py": {
+      "previousSha256": "9444fe218aa06dfdef566bf996ebc43c6cd91a6b33a203ec2d3471f2af7b0b1a",
+      "currentSha256": "2c854d3190619b506b45fe1e22d21014f8f12af56a6966598a327c3fbdc2554a"
+    },
+    "scripts/qa-trials-continuity-v163.py": {
+      "previousSha256": "173f2e35f826970cee84ac967a44715f991efd7665f1dbf46f8c0db384b95e31",
+      "currentSha256": "a5a3ae0189e2ad47c5d2f2b12985f9e935e8f8c27bc9fe92001b5886deae4a0b"
+    },
+    "scripts/verify-audit-v143.mjs": {
+      "previousSha256": "9939371033f1654e51a73366a4d129c63f85d0871a40ca7014afe1f228a4fce0",
+      "currentSha256": "b2283b440d2be425eaadebc919dde1495656d875e31025ecd475e27428ad5efb"
+    },
+    "scripts/verify-black-cocoon-presentation-v158.mjs": {
+      "previousSha256": "635ee8e4463e32676dbd7be409a5f92cb9ed4d40b0ee59097251e90819645b99",
+      "currentSha256": "5b4a2e933b81654f746e8a94c7214523bd7dbb92cdb92dc3adef8dbd3031cedd"
+    },
+    "scripts/verify-campaign-story-v160.mjs": {
+      "previousSha256": "55b6b5ac7e045df047ccb6d867905e7cfec44a0f29e9dbda9a74778df9d39cad",
+      "currentSha256": "63fd6e24dc57561e3d88f0d549906a8a1b891ace8767675cb4ca42699bbcbe1b"
+    },
+    "scripts/verify-cinematic-coherence-v188.mjs": {
+      "previousSha256": "5f5bd9495aa0d7e7de6de16ee2f20b0064e4a9fc2ddb54f7f3f0c8ad7d6d72de",
+      "currentSha256": "947ff56e984fd27bf9781ecb4ba03bc1116cc4c6b9a30198dd5287785299b67c"
+    },
+    "scripts/verify-legacy-operations-v131.mjs": {
+      "previousSha256": "950fbaa2c7b92d1b062ac7b933862c52c7787ca00671e1922213686100ec3e28",
+      "currentSha256": "c8823fea400d848cd1d90c65ff841a5a6f6833b84515ab799eb2bf41627706e5"
+    },
+    "scripts/verify-public-release-v86.mjs": {
+      "previousSha256": "db03102b96ba14c20a265f83e39f1223657a6b2fc38b31f00983eb5fb80a16d5",
+      "currentSha256": "0376088c873ed60751b81d646cadd0e965476df5e61b88c0d83a40670d45dce5"
+    },
+    "scripts/verify-story-cinematics-v188.mjs": {
+      "previousSha256": "66dd489ef35c8ffcb53eee350e1234f34669cfd1f0abb75949a83a47651a295d",
+      "currentSha256": "1da532f57ba644b790a22e8ed9b64c0cee08cca6dd9ef60c435bf97e2b7d712a"
+    },
+    "src/story-cinematics-v188.js": {
+      "previousSha256": "921e3a8ae80b0000e1ee4eed5af38bc84312d7458109db879a33ebad1b1221cc",
+      "currentSha256": "6f1715c07ce920fc375eeb2fb3668b6826ac437cf8b61daf854fdb753556e47f"
+    },
+    "sw.js": {
+      "previousSha256": "20f87df7565d64fc36ebef8a24ef94695cf41fabcc80a1ee9706fa854615f842",
+      "currentSha256": "082f8d2e6b94053c5e080256f359c1fbad4b787d6e3b6a052001724b8cd54f66"
+    }
+  },
+  "addedSources": {
+    "src/prologue-art-v188.js": "df4ff4fc5a69c8f1834eae84a3687ab374e00591af0531be95b7bc19538986de"
+  }
+});
+
 export const TANTALUS_PRIORITIES_SOURCE_ONLY_PATHS_V188 = Object.freeze([
   'scripts/audit-tantalus-priorities-v188.mjs',
   'scripts/verify-tantalus-priorities-v188.mjs',
@@ -512,12 +580,20 @@ export const TANTALUS_PRIORITIES_SOURCE_ONLY_PATHS_V188 = Object.freeze([
 export function reviewedTantalusPrioritiesDigestV188(path, endpoint) {
   const historical = TANTALUS_PRIORITIES_SUCCESSORS_V188[path];
   const receipt = historical || TANTALUS_PRIORITIES_CONTINUATION_V188.successors[path];
-  if (!receipt) return endpoint;
-  assert.equal(endpoint, receipt.previousSha256,
-    (historical ? 'Broken V187-to-V188 source chain: ' : 'Broken published-V188 source chain: ') + path);
-  assert.ok(validHash(receipt.currentSha256), 'Invalid V188 source digest: ' + path);
-  assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A V188 successor must identify changed bytes: ' + path);
-  return receipt.currentSha256;
+  let current = endpoint;
+  if (receipt) {
+    assert.equal(current, receipt.previousSha256,
+      (historical ? 'Broken V187-to-V188 source chain: ' : 'Broken published-V188 source chain: ') + path);
+    assert.ok(validHash(receipt.currentSha256), 'Invalid V188 source digest: ' + path);
+    assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A V188 successor must identify changed bytes: ' + path);
+    current = receipt.currentSha256;
+  }
+  const prologue = TANTALUS_PRIORITIES_PROLOGUE_V188.successors[path];
+  if (!prologue) return current;
+  assert.equal(current, prologue.previousSha256, 'Broken d54f13cc-to-prologue source chain: ' + path);
+  assert.ok(validHash(prologue.currentSha256), 'Invalid prologue source digest: ' + path);
+  assert.notEqual(prologue.currentSha256, prologue.previousSha256, 'A prologue successor must identify changed bytes: ' + path);
+  return prologue.currentSha256;
 }
 
 export function verifyTantalusPrioritiesV188(readSource = readRepository) {
@@ -526,19 +602,30 @@ export function verifyTantalusPrioritiesV188(readSource = readRepository) {
     assert.equal(Object.hasOwn(TANTALUS_PRIORITIES_SUCCESSORS_V188, path), false,
       'A published-V188 receipt must not replace a historical receipt: ' + path);
   }
-  const successors = [...Object.entries(TANTALUS_PRIORITIES_SUCCESSORS_V188), ...Object.entries(continuation.successors)];
+  const successors = new Map([...Object.entries(TANTALUS_PRIORITIES_SUCCESSORS_V188), ...Object.entries(continuation.successors)]);
+  const prologue = TANTALUS_PRIORITIES_PROLOGUE_V188;
+  for (const [path, receipt] of Object.entries(prologue.successors)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
+    assert.equal(Object.hasOwn(continuation.addedSources, path), false, 'A prologue successor cannot replace a separately added V188 source: ' + path);
+    if (successors.has(path)) assert.equal(receipt.previousSha256, successors.get(path).currentSha256,
+      'Broken historical-to-d54f13cc endpoint: ' + path);
+    else successors.set(path, receipt);
+  }
   for (const [path, receipt] of successors) {
     assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
     assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
     assert.equal(sha(readSource(path)), reviewedTantalusPrioritiesDigestV188(path, receipt.previousSha256),
       'Unreviewed V188 source bytes: ' + path);
   }
-  for (const [path, digest] of Object.entries(continuation.addedSources)) {
-    assert.equal(successors.some(([candidate]) => candidate === path), false, 'A new V188 source cannot replace a successor: ' + path);
+  const addedSources = new Set();
+  for (const [path, digest] of [...Object.entries(continuation.addedSources), ...Object.entries(prologue.addedSources)]) {
+    assert.equal(successors.has(path) || addedSources.has(path), false, 'A new V188 source cannot replace a successor or added source: ' + path);
+    addedSources.add(path);
     assert.ok(validHash(digest), 'Invalid new V188 source digest: ' + path);
     assert.equal(sha(readSource(path)), digest, 'Unreviewed V188 source bytes: ' + path);
   }
-  return Object.freeze({ successors: successors.length, addedSources: Object.keys(continuation.addedSources).length });
+  return Object.freeze({ successors: successors.size, addedSources: addedSources.size });
 }
 
 if (process.argv[1] && new URL(import.meta.url).pathname === process.argv[1]) {

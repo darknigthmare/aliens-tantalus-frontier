@@ -208,6 +208,43 @@ def ready(page):
         &&![...r.querySelectorAll('[data-renderer="image"]')].some(n=>n.dataset.assetStatus==='loading');}''', timeout=90000)
 
 
+def start_title_menu_key_trace(page):
+    # Passive, bounded observation of this one Enter transition. No key is
+    # repeated and no title/runtime/profile field is assigned by the trace.
+    return page.evaluate_handle('''()=>{
+      const rows=[],listeners=[],timers=new Set(),maxRows=64;let dropped=0;
+      const identity=n=>n?{tag:n.tagName||n.nodeName||(n===window?'WINDOW':null),id:n.id||null,role:n.getAttribute?.('role')||null}:null;
+      const native=()=>{const t=__ATF_V61__.snapshot(),root=document.querySelector('#title-screen'),intro=document.querySelector('#intro-v188');
+        return {state:t.state,visible:t.visible,menuVisible:t.menuVisible,rootHidden:root?.hidden,
+          sceneStatus:t.scene?.status||null,sceneActive:t.scene?.active||false,
+          introPhase:intro?.dataset.phase||null,introHidden:intro?.hidden??null};};
+      const record=value=>{if(rows.length>=maxRows){dropped++;return;}
+        rows.push({...value,atMs:performance.now(),focus:identity(document.activeElement),
+          documentFocused:document.hasFocus(),documentHidden:document.hidden,native:native()});};
+      for(const [host,label] of [[window,'window'],[document,'document']])for(const capture of [true,false]){
+        const listener=event=>{
+          if(rows.length>=maxRows){dropped++;return;}
+          const entry={type:event.type,listener:label,capture,eventPhase:event.eventPhase,
+            key:event.key||null,code:event.code||null,repeat:!!event.repeat,defaultPrevented:event.defaultPrevented,
+            ctrlKey:!!event.ctrlKey,altKey:!!event.altKey,metaKey:!!event.metaKey,shiftKey:!!event.shiftKey,isComposing:!!event.isComposing,
+            trusted:event.isTrusted,target:identity(event.target),relatedTarget:identity(event.relatedTarget),
+            path:event.composedPath().slice(0,8).map(identity)};
+          record(entry);
+          if(label==='window'&&capture&&['keydown','keyup'].includes(event.type)){
+            const timer=setTimeout(()=>{timers.delete(timer);record({...entry,listener:'next-task',capture:null,
+              eventPhase:null,defaultPrevented:event.defaultPrevented});},0);timers.add(timer);
+          }
+        };
+        for(const type of ['keydown','keyup','focusin','focusout']){
+          host.addEventListener(type,listener,{capture,passive:true});listeners.push([host,type,listener,capture]);
+        }
+      }
+      record({type:'armed',expectedCode:'Enter'});
+      return {stop(){for(const [host,type,listener,capture] of listeners)host.removeEventListener(type,listener,capture);
+        for(const timer of timers)clearTimeout(timer);record({type:'collected'});return {maxRows,dropped,rows};}};
+    }''')
+
+
 with sync_playwright() as pw:
     browser = pw.chromium.launch(headless=True, **({'executable_path': os.environ['ATF_CHROMIUM_EXECUTABLE']} if os.environ.get('ATF_CHROMIUM_EXECUTABLE') else {}))
     report['tooling'] = {'playwright': importlib.metadata.version('playwright'), 'chromium': browser.version}
@@ -234,9 +271,26 @@ with sync_playwright() as pw:
                     open_settings(page)
                     page.locator('#setting-title-preview-v87').click()
                     ready(page)
-                    if observed(page)['title']['state'] == 'idle':
-                        page.keyboard.press('Enter')
-                    page.wait_for_function('()=>__ATF_V61__.snapshot().state==="menu"')
+                    key_trace = None
+                    menu_key_trace = {'keyRequested': False}
+                    report.setdefault('menuKeyTraces', {})[label] = menu_key_trace
+                    try:
+                        key_trace = start_title_menu_key_trace(page)
+                        if observed(page)['title']['state'] == 'idle':
+                            menu_key_trace['keyRequested'] = True
+                            page.keyboard.press('Enter')
+                        page.wait_for_function('()=>__ATF_V61__.snapshot().state==="menu"')
+                    finally:
+                        if key_trace is not None:
+                            try:
+                                menu_key_trace['keyEvents'] = key_trace.evaluate('trace=>trace.stop()')
+                            except Exception as error:
+                                menu_key_trace['keyEvents'] = {'collectionError': str(error)}
+                            finally:
+                                try:
+                                    key_trace.dispose()
+                                except Exception:
+                                    pass
                     before = observed(page)
                     report['activeCompositionContract'] = {'id': label, 'preset': preset, 'mode': mode,
                         'shipId': PRESET_LAYERS[preset]['shipId'],

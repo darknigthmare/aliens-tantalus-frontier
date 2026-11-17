@@ -180,6 +180,39 @@ def start_runtime(page):
     await_runtime(page)
 
 
+def return_after_native_extraction(page, operation_id, timeout=30000):
+    # The successful receipt can precede the full V188 extraction film. Its
+    # public skip owns that modal; the return button becomes usable afterward.
+    deadline = time.monotonic() + timeout / 1000
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('QZ18 extraction return exceeded its original budget.')
+        return milliseconds
+
+    owned_victory = '''id=>{const s=__ATF_V51__.saveSystem.data;
+      return __ATF_GAME__.mission?.state==='complete'&&s.strategy.lastOperation?.id===id
+      &&s.strategy.lastOperation.success===true&&s.strategy.currentOperation===null;}'''
+    assert page.evaluate(owned_victory, operation_id), 'The successful native operation owns this return.'
+    overlay_selector = '.insertion-cinematic-v188[data-direction="extraction"]'
+    skip_selector = overlay_selector + ' .insertion-skip-v188'
+    return_ready = f'''id=>{{const button=document.querySelector('#retreat-mission');
+      return ({owned_victory})(id)&&!document.querySelector('{overlay_selector}')
+      &&Boolean(button&&button.getClientRects().length&&getComputedStyle(button).visibility!=='hidden');}}'''
+    page.wait_for_function(f'''id=>{{const skip=document.querySelector('{skip_selector}');
+      return ({return_ready})(id)||(({owned_victory})(id)&&Boolean(skip&&skip.getClientRects().length
+      &&getComputedStyle(skip).visibility!=='hidden'));}}''', arg=operation_id, timeout=remaining())
+    skip = page.locator(skip_selector)
+    skipped = skip.is_visible()
+    if skipped:
+        skip.click(timeout=remaining())
+    page.wait_for_function(return_ready, arg=operation_id, timeout=remaining())
+    page.locator('#retreat-mission').click(timeout=remaining())
+    page.wait_for_function('()=>!document.documentElement.classList.contains("mission-mode")', timeout=remaining())
+    return {'operationId': operation_id, 'publicSkipUsed': skipped, 'timeLimitSeconds': timeout / 1000}
+
+
 def protected(save):
     result = {key: save[key] for key in ['clock', 'galaxy', 'hub', 'crew', 'statistics', 'archiveRelayArchivesV122']}
     result['archiveRelayArchivesV122'] = json.loads(json.dumps(result['archiveRelayArchivesV122']))
@@ -387,9 +420,7 @@ with sync_playwright() as pw:
         ledger = next(item for item in returned['insertionState']['phases'] if item['kind'] == 'preparation')['payload']['campaignStoryReturnV160']
         check('actual extraction transfers six records and pays only the selected technical protocol', len(victory['archiveRelayArchivesV122']['case']['documentIds']) == 6 and victory['archiveRelayArchivesV122']['case']['operationId'] == returned['id'] and ledger['receipt']['protocolId'] == 'technical-audit' and ledger['receipt']['amount'] == 2)
         check('a durable victory offers an explicit return aboard instead of retreat', page.locator('#retreat-mission').inner_text().strip() == 'RETOUR À BORD')
-        # Mission mode owns its visible exit; navigation is available afterward.
-        page.locator('#retreat-mission').click()
-        page.wait_for_function('()=>!document.documentElement.classList.contains("mission-mode")')
+        report['nativeExtraction'] = return_after_native_extraction(page, returned['id'])
         back_aboard = observed(page)['save']
         board_ledger = next(item for item in back_aboard['strategy']['lastOperation']['insertionState']['phases'] if item['kind'] == 'preparation')['payload']['campaignStoryReturnV160']
         check('the actual return aboard keeps the victory receipt and cannot repay it', back_aboard['strategy']['currentOperation'] is None and back_aboard['strategy']['lastOperation']['id'] == returned['id'] and back_aboard['strategy']['lastOperation']['success'] is True and back_aboard['galaxy']['resources'] == victory['galaxy']['resources'] and back_aboard['archiveRelayArchivesV122'] == victory['archiveRelayArchivesV122'] and board_ledger['receipt'] == ledger['receipt'])

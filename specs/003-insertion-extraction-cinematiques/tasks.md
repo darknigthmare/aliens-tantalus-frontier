@@ -35,3 +35,11 @@
 
 - [x] T022 Finaliser le bilan APC après les tirs de couverture et avant les callbacks, avec la formule existante, sans rejouer `completeMission` ni modifier `save.js`.
 - [x] T023 Reproduire le refus du bilan 20 → 21 victimes, vérifier pause, reprise sanitisée, saut, abandon et émission/paiement uniques : cinq régressions rouges puis vertes ; groupe embarquement, récit et historique **55/55**. Preuves et limites dans `docs/development/BIOLOGICAL_ART_QA_20261117.md` et son reçu commun. La release et la nouvelle CI sont attestées séparément sur le SHA publié dans la PR #49.
+
+## Phase 7 : Raccord des cinématiques du prologue — 17 novembre 2026
+
+- [x] T024 Produire et intégrer les onze PNG du prologue/Port-Méridien, réemployer les 32 images appropriées et conserver les portraits : onze CIN et 35 plans, quantités et dimensions natives, corps complets et accessoires séparés.
+- [x] T025 Vérifier les contacts du triage, la main après 45 %, les huit balises, les quatre caissons et la baie de secours ; rendre les 37 messages et COCYTE visibles ; conserver le globe entier et proportionné dans les deux orbites. Les deux suites cinématiques passent **39/39** ; la revue Canvas et ses limites sont dans `docs/development/PROLOGUE_ART_QA_20261117.md`.
+- [x] T026 Raccorder le chargeur, les replis, le rejeu après erreur et la fermeture ; admettre onze chemins runtime exacts et un module de shell. Audit du cache et sauvegardes : **132/132**. Comparer les 17 CIN / 46 plans hors lot au rendu de la base.
+- [x] T027 Confirmer le retour APC dans la CI Chromium de `d54f13cc` : 21 victimes, 1 310 crédits, aucun second paiement. Adapter le pilote campagne au bouton public de la cinématique d’extraction ; les régressions du pilote, de pause Broodstorm et du terminal Cocon sont documentées dans la même QA (**68/68**, dont six nouvelles).
+- [ ] T028 Qualifier sur la nouvelle CI les trois pilotes corrigés et les deux traces clavier ajoutées pour les échecs Forge/menu mobile. Les anciens succès et les hôtes locaux ne remplacent pas cette exécution.

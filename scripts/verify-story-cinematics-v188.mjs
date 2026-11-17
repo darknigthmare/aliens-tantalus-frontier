@@ -4,12 +4,14 @@ import { readFileSync, existsSync } from 'node:fs';
 import { CINEMATICS_V188, CINEMATIC_IDS_V188, CINEMATIC_IMAGES_V188, NORTH_QUAY_NAMES_V188, cinematicDurationV188,
   cinematicShotAtV188, drawCinematicFrameV188, CinematicPlayerV188 } from '../src/story-cinematics-v188.js';
 import { getNpcDialoguePortraitV168 } from '../src/npc-dialogue-portraits-v168.js';
+import { getColonyPortraitV188 } from '../src/colony-portraits-v188.js';
 import { createDefaultSave, migrateSave } from '../src/save.js';
 import { markStoryCinematicSeenV188, normalizeStoryCampaignV188 } from '../src/story-campaign-v188.js';
 import { BIOLOGICAL_ART_V188, BIOLOGICAL_NEW_ART_IDS_V188, BIOLOGICAL_CINEMATIC_ART_BY_ID_V188,
   BIOLOGICAL_ART_BY_CONSUMER_V188, BIOLOGICAL_HELMET_V188, biologicalCinematicSourcesV188,
   biologicalConsumerSourcesV188, prepareBiologicalArtV188, biologicalArtFitV188,
   biologicalManifestCountV188 } from '../src/biological-art-v188.js';
+import { PROLOGUE_ART_V188, PROLOGUE_CINEMATIC_ART_BY_ID_V188, prologueCinematicSourcesV188 } from '../src/prologue-art-v188.js';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url), 'utf8');
 function recorder() {
@@ -353,4 +355,94 @@ test('biological monitors: status thresholds, bilingual evidence and quarantine 
     assert.ok(!lines.some(value => value.includes('QZ-18')));
     for (const row of CINEMATICS_V188['cin-41'].shots[0].lines) assert.ok(lines.includes(row[language]));
   }
+});
+
+function prologueImages() {
+  return Object.fromEntries(Object.values(PROLOGUE_ART_V188).map(({ path }) => {
+    const bytes = readFileSync(new URL(`..${path}`, import.meta.url)); let naturalWidth, naturalHeight;
+    if (bytes.subarray(1, 4).toString() === 'PNG') { naturalWidth = bytes.readUInt32BE(16); naturalHeight = bytes.readUInt32BE(20); }
+    else { assert.equal(bytes.subarray(8, 16).toString(), 'WEBPVP8L', path); const bits = bytes.readUInt32LE(21);
+      naturalWidth = (bits & 0x3fff) + 1; naturalHeight = ((bits >>> 14) & 0x3fff) + 1; }
+    return [path, { src: path, complete: true, naturalWidth, naturalHeight }];
+  }));
+}
+
+test('opening art preload is scoped, includes the actual speaker portraits, and retries only failed entries on replay', () => {
+  for (const id of Object.keys(PROLOGUE_CINEMATIC_ART_BY_ID_V188)) {
+    const requests = [];
+    class ImageDouble { complete = false; naturalWidth = 0; set src(path) { this.path = path; requests.push(path); } }
+    const player = new CinematicPlayerV188({ ImageCtor: ImageDouble }); player.preload(id);
+    const expected = new Set(prologueCinematicSourcesV188(id));
+    for (const entry of CINEMATICS_V188[id].shots) {
+      const portrait = entry.line?.crewId ? getNpcDialoguePortraitV168(entry.line.crewId) : getColonyPortraitV188(entry.line?.speaker);
+      if (portrait) expected.add(portrait.source);
+    }
+    assert.deepEqual(new Set(requests), expected, id);
+    assert.ok(!requests.some(path => /biological|asph-cin-helmet|ceiling-drone/.test(path)), 'no later evidence or threat is requested');
+    player.preload(id); assert.equal(requests.length, expected.size, 'in-flight loads are shared');
+    const failed = requests[0]; player.images[failed].complete = true;
+    player.preload(id); assert.equal(requests.length, expected.size + 1); assert.equal(requests.at(-1), failed);
+    Object.assign(player.images[failed], { complete: true, naturalWidth: 100, naturalHeight: 100 });
+    player.preload(id); assert.equal(requests.length, expected.size + 1, 'successful replay reuses its image');
+  }
+  assert.equal(prologueCinematicSourcesV188('cin-31'), null);
+});
+
+test('opening art dependencies are drawn by their own 35 plans; drawing preserves context and makes no image requests', () => {
+  const images = prologueImages(), context = Object.freeze({ m577: Object.freeze({ colonists: 3, containers: 2 }), marker: 'unchanged' });
+  const before = JSON.stringify(context), previous = globalThis.Image; let plans = 0;
+  globalThis.Image = class { constructor() { throw new Error('draw must never request an image'); } };
+  try {
+    for (const id of Object.keys(PROLOGUE_CINEMATIC_ART_BY_ID_V188)) {
+      let start = 0; const used = new Set();
+      for (const entry of CINEMATICS_V188[id].shots) {
+        for (const language of ['fr', 'en']) for (const reducedMotion of [false, true]) {
+          const trace = biologicalRecorder(); drawCinematicFrameV188(trace.ctx, id, start + entry.seconds * .82, { images, language, reducedMotion, context });
+          trace.calls.filter(call => call.op === 'image').forEach(call => used.add(call.path));
+          if (entry.caption) assert.ok(trace.calls.some(call => call.op === 'text' && call.value === entry.caption[language]));
+          if (entry.line) assert.ok(trace.calls.some(call => call.op === 'text' && call.value === entry.line.speaker));
+        }
+        start += entry.seconds; plans++;
+      }
+      const expected = new Set(prologueCinematicSourcesV188(id));
+      for (const entry of CINEMATICS_V188[id].shots) {
+        const portrait = entry.line?.crewId ? getNpcDialoguePortraitV168(entry.line.crewId) : getColonyPortraitV188(entry.line?.speaker);
+        if (portrait && images[portrait.source]) expected.add(portrait.source);
+      }
+      assert.deepEqual([...used].sort(), [...expected].sort(), `${id}: declared art is actually used`);
+    }
+  } finally { if (previous === undefined) delete globalThis.Image; else globalThis.Image = previous; }
+  assert.equal(plans, 35); assert.equal(JSON.stringify(context), before);
+});
+
+test('late prologue art repaints at a fixed clock; skips, replacement and stale frames cannot revive a finished cinematic', async () => {
+  let now = 0; const frames = [], listeners = new Map(), overlays = [], requests = [], traces = [];
+  const document = {
+    body: { append(node) { overlays.push(node); } },
+    createElement(kind) { const trace = biologicalRecorder(); if (kind === 'canvas') traces.push(trace);
+      return { append(...children) { this.children = children; }, setAttribute() {}, remove() { this.removed = true; }, getContext() { return trace.ctx; } }; },
+    addEventListener(type, listener) { listeners.set(type, listener); }, removeEventListener(type, listener) { if (listeners.get(type) === listener) listeners.delete(type); }
+  };
+  class ImageDouble { complete = false; naturalWidth = 0; naturalHeight = 0;
+    set src(path) { this.path = path; requests.push(path); } get src() { return this.path; } }
+  const player = new CinematicPlayerV188({ document, now: () => now, requestFrame: frame => frames.push(frame), ImageCtor: ImageDouble });
+  const real = prologueImages(), path = PROLOGUE_ART_V188['north-quay-patient'].path;
+  const loaded = source => { const { naturalWidth, naturalHeight } = real[source]; Object.assign(player.images[source], { complete: true, naturalWidth, naturalHeight }); };
+  const key = code => listeners.get('keydown')({ code, preventDefault() {}, stopImmediatePropagation() {} });
+  const first = player.play('cin-p3-ferro', { reducedMotion: true }), state = player.active, requestCount = requests.length;
+  now = 2000; frames.shift()(); const beforeLate = traces[0].calls.length;
+  assert.ok(!traces[0].calls.some(call => call.op === 'image' && call.path === path));
+  loaded(path); frames.shift()();
+  assert.ok(traces[0].calls.slice(beforeLate).some(call => call.op === 'image' && call.path === path), 'a paused clock still accepts late art');
+  assert.equal(player.active, state); assert.equal(state.offset, 0); assert.equal(requests.length, requestCount);
+  key('Escape'); assert.equal(await first, 'skipped'); assert.ok(overlays[0].removed); assert.equal(listeners.size, 0);
+  const afterSkip = traces[0].calls.length; frames.shift()(); assert.equal(traces[0].calls.length, afterSkip, 'queued old frame does not draw');
+  loaded(PROLOGUE_ART_V188['medical-stretcher'].path); assert.equal(player.active, null); assert.equal(overlays.length, 1, 'late completion creates no overlay');
+
+  const replay = player.play('cin-p3-ferro'), oldFrame = frames.shift(), replacement = player.play('cin-01');
+  assert.equal(await replay, 'replaced'); assert.ok(overlays[1].removed); const newState = player.active;
+  oldFrame(); assert.equal(player.active, newState); assert.equal(newState.id, 'cin-01'); assert.equal(listeners.size, 1);
+  key('Enter'); frames.shift()(); assert.equal(cinematicShotAtV188('cin-01', newState.offset).shot.kind, 'locker');
+  now += 21000; frames.shift()(); assert.equal(await replacement, 'complete');
+  assert.equal(player.active, null); assert.equal(listeners.size, 0); assert.ok(overlays[2].removed);
 });

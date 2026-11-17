@@ -1,6 +1,10 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFileSync } from 'node:fs';
+import { spawn } from 'node:child_process';
+import { createInterface } from 'node:readline';
+import { fileURLToPath } from 'node:url';
+import { createContext, runInContext } from 'node:vm';
 import { GameEngine } from '../src/game-production-runtime.js';
 import { WORLDS, WEAPONS, ENEMIES, LEVEL_SEEDS } from '../src/content-core-v50.js';
 import { buildLegacyMissionV131, withLegacyMissionsV131, LEGACY_CAMPAIGNS_V131 } from '../src/legacy-operations-v131.js';
@@ -109,6 +113,114 @@ function steer(subject, point, seconds = 20) {
     `Input route blocked: ${JSON.stringify({ kind: e.legacyMissionV131.kind, target: point, body: { x: body.x, y: body.y }, reason: e.mission.failureReason })}`);
 }
 function keyboardHold(subject, seconds) { subject.key('keydown', 'KeyE'); tick(subject.engine, seconds + 0.04); subject.key('keyup', 'KeyE'); }
+
+async function driveNativeBroodPause({ stolenPresses = 0, alreadyPaused = false, kind = 'broodstorm' } = {}) {
+  const subject = await fixture(kind), e = subject.engine;
+  if (kind === 'broodstorm') {
+    keyboardHold(subject, 1.5); assert.equal(e.legacyMissionV131.stage, 1);
+    subject.key('keydown', 'KeyB'); tick(e, 1 / 60); subject.key('keyup', 'KeyB');
+    assert.equal(e.legacyBombsV131.length, 1, 'The native key/update created the finite projectile.');
+  }
+  const save = createDefaultSave(), before = JSON.stringify(save), bombBefore = structuredClone(e.legacyBombsV131);
+  const chapterBefore = structuredClone(e.legacyMissionV131);
+  const canvas = subject.canvas, document = globalThis.document;
+  Object.assign(canvas, { tagName: 'CANVAS', id: 'game-canvas', getClientRects: () => [{}], closest: () => null });
+  const button = { tagName: 'BUTTON', id: 'declared-focus-race', closest() { return this; } };
+  document.querySelector = selector => selector === '#game-canvas' ? canvas : null;
+  document.querySelectorAll = () => [];
+  canvas.focus();
+  if (alreadyPaused) { subject.key('keydown', 'KeyP'); subject.key('keyup', 'KeyP'); assert.equal(e.paused, true); }
+  let now = 0, presses = 0, focuses = 0;
+  const events = [], context = createContext({ document, structuredClone, __ATF_GAME__: e,
+    __ATF_V51__: { saveSystem: { data: save } }, performance: { now: () => now },
+    getComputedStyle: () => ({ visibility: 'visible', display: 'block' }) });
+  const python = String.raw`
+import ast,json,sys
+from pathlib import Path
+tree=ast.parse(Path(sys.argv[1]).read_text());now=0
+def rpc(method,**data):
+ global now
+ print(json.dumps({'method':method,**data}),flush=True)
+ response=json.loads(sys.stdin.readline());now=response['now']
+ if response.get('error'):raise AssertionError(response['error'])
+ return response.get('value')
+class Clock:
+ def monotonic(self):return now/1000
+class Keyboard:
+ def press(self,key):return rpc('key',key=key)
+class Locator:
+ def __init__(self,selector):self.selector=selector
+ def focus(self,**kwargs):return rpc('focus',selector=self.selector,**kwargs)
+class Page:
+ keyboard=Keyboard()
+ def locator(self,selector):return Locator(selector)
+ def evaluate(self,expression,arg=None):return rpc('evaluate',expression=expression,arg=arg)
+ def wait_for_function(self,expression,arg=None,**kwargs):return rpc('wait',expression=expression,arg=arg,**kwargs)
+helpers=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in ['brood','pause_brood_for_checkpoint']]
+assert len(helpers)==2
+scope={'time':Clock()};exec(compile(ast.Module(body=helpers,type_ignores=[]),sys.argv[1],'exec'),scope)
+report={}
+try:scope['pause_brood_for_checkpoint'](Page(),report,'declared-native-pause-regression');result={'ok':True}
+except (AssertionError,TimeoutError) as error:result={'ok':False,'error':str(error)}
+print(json.dumps({'method':'complete','result':result,'report':report}),flush=True)
+`;
+  const source = fileURLToPath(new URL('./qa-trials-continuity-v163.py', import.meta.url));
+  const child = spawn('python3', ['-B', '-c', python, source], { stdio: ['pipe', 'pipe', 'pipe'] });
+  let stderr = '', outcome; child.stderr.on('data', chunk => { stderr += chunk; });
+  const done = new Promise(resolve => child.on('exit', code => resolve(code))), timer = setTimeout(() => child.kill('SIGKILL'), 10000);
+  try {
+    for await (const line of createInterface({ input: child.stdout })) {
+      const request = JSON.parse(line); let value = null, error;
+      if (request.method === 'complete') { outcome = request; continue; }
+      try {
+        if (request.method === 'evaluate' || request.method === 'wait') {
+          value = runInContext('(' + request.expression + ')', context)(request.arg);
+          if (request.method === 'wait' && !value) { now += request.timeout || 30000; throw Error('The native engine did not acquire pause within the existing budget.'); }
+        } else if (request.method === 'focus') {
+          assert.equal(request.selector, '#game-canvas'); focuses++; canvas.focus();
+        } else if (request.method === 'key') {
+          assert.equal(request.key, 'KeyP'); presses++;
+          // Declared DOM-only race: focus moves after the driver's focus read.
+          // The actual production input guard decides whether KeyP is accepted.
+          if (presses <= stolenPresses) document.activeElement = button;
+          const target = document.activeElement, beforePause = e.paused;
+          for (const type of ['keydown', 'keyup']) {
+            const event = new Event(type, { cancelable: true });
+            Object.assign(event, { code: request.key, repeat: false, ctrlKey: false, metaKey: false, altKey: false, isComposing: false });
+            Object.defineProperty(event, 'composedPath', { value: () => [target] }); globalThis.dispatchEvent(event);
+          }
+          events.push({ target: target.id, beforePause, afterPause: e.paused });
+        } else throw Error('Unexpected driver operation: ' + request.method);
+      } catch (caught) { error = caught.message; }
+      child.stdin.write(JSON.stringify({ now, value, error }) + '\n');
+    }
+    assert.equal(await done, 0, stderr); assert.ok(outcome);
+    assert.equal(JSON.stringify(save), before); assert.deepEqual(e.legacyBombsV131, bombBefore);
+    assert.deepEqual(e.legacyMissionV131, chapterBefore, 'Pause acquisition cannot assign chapter progress or refund payload.');
+    return { ...outcome, events, presses, focuses, paused: e.paused, now };
+  } finally { clearTimeout(timer); child.kill(); }
+}
+
+test('QA Broodstorm pause observes native acceptance, reacquires declared lost focus and never toggles a paused engine', async t => {
+  for (const fixture of [{}, { stolenPresses: 1 }, { alreadyPaused: true }]) {
+    const observed = await driveNativeBroodPause(fixture);
+    assert.equal(observed.result.ok, true, JSON.stringify(observed)); assert.equal(observed.paused, true);
+    assert.equal(observed.presses, fixture.alreadyPaused ? 0 : fixture.stolenPresses ? 2 : 1);
+    assert.ok(observed.now < 30000);
+    if (fixture.stolenPresses) assert.deepEqual(observed.events, [
+      { target: 'declared-focus-race', beforePause: false, afterPause: false },
+      { target: 'game-canvas', beforePause: false, afterPause: true }
+    ]);
+  }
+  t.diagnostic('Actual Python helper and production Broodstorm/input guard; declared DOM focus race and frozen RAF host. This reproduces an ignored KeyP, not the unrecorded CI event target.');
+});
+
+test('QA Broodstorm pause fails closed for repeated rejected input and a foreign mission', async () => {
+  const rejected = await driveNativeBroodPause({ stolenPresses: 3 });
+  assert.equal(rejected.result.ok, false); assert.equal(rejected.presses, 3); assert.equal(rejected.paused, false);
+  const foreign = await driveNativeBroodPause({ kind: 'nostromo' });
+  assert.equal(foreign.result.ok, false); assert.equal(foreign.presses, 0); assert.equal(foreign.paused, false);
+});
 
 test('three admitted partial chapters build their own stations; wrong builders fail; mixin is idempotent', async () => {
   assert.equal(withLegacyMissionsV131(GameEngine), GameEngine);

@@ -96,6 +96,62 @@ def wait_brood_runtime(page, runtime_ready, timeout=45000):
     page.wait_for_function(runtime_ready, timeout=remaining())
 
 
+def pause_brood_for_checkpoint(page, report, phase, timeout=30000):
+    # A KeyP sent while another control owns focus can be rejected by the
+    # native input guard. Observe acceptance immediately; never blindly toggle
+    # again or spend the entire projectile lifetime waiting for a lost key.
+    started = time.monotonic()
+    deadline = started + timeout / 1000
+    evidence = {'phase': phase, 'timeLimitSeconds': timeout / 1000, 'attemptLimit': 3, 'attempts': []}
+    report.setdefault('nativePauseAcquisition', []).append(evidence)
+    probe = '''()=>{const e=__ATF_GAME__,canvas=document.querySelector('#game-canvas');
+      const visible=n=>Boolean(n&&!n.hidden&&n.getClientRects().length
+        &&getComputedStyle(n).visibility!=='hidden'&&getComputedStyle(n).display!=='none');
+      const active=document.activeElement;
+      return {running:e.running,paused:e.paused,mission:e.mission?.state,kind:e.legacyMissionV131?.kind,
+        canvasVisible:visible(canvas),canvasFocused:active===canvas,documentFocused:document.hasFocus(),
+        modalVisible:[...document.querySelectorAll('[role="dialog"],[aria-modal="true"]')].some(visible),
+        handoverBlocking:Boolean(e.dropshipHandoverBlocksV188?.()),
+        focusOwner:active?{tag:active.tagName,id:active.id||null}:null,
+        liveBombCount:(e.legacyBombsV131||[]).length,payload:e.legacyMissionV131?.bombs,
+        nests:e.legacyMissionV131?.nests?.slice(),observedAtMs:performance.now()};}'''
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('Broodstorm pause exceeded its original acquisition budget.')
+        return milliseconds
+
+    def admitted(state):
+        assert state['running'] and state['kind'] == 'broodstorm' and state['mission'] == 'active', 'Pause belongs to the active native Broodstorm mission.'
+        if state['paused']:
+            evidence['acquired'] = True
+            evidence['elapsedSeconds'] = time.monotonic() - started
+            return True
+        assert state['canvasVisible'] and not state['modalVisible'] and not state['handoverBlocking'], 'The visible native flight must own pause input.'
+        return False
+
+    for _ in range(evidence['attemptLimit']):
+        remaining()
+        attempt = {'before': page.evaluate(probe)}
+        evidence['attempts'].append(attempt)
+        if admitted(attempt['before']):
+            return
+        page.locator('#game-canvas').focus(timeout=remaining())
+        attempt['focused'] = page.evaluate(probe)
+        if admitted(attempt['focused']):
+            return
+        assert attempt['focused']['canvasFocused'] and attempt['focused']['documentFocused'], 'The native canvas must actually own keyboard focus.'
+        remaining()
+        page.keyboard.press('KeyP')
+        attempt['key'] = 'KeyP'
+        attempt['after'] = page.evaluate(probe)
+        remaining()
+        if admitted(attempt['after']):
+            return
+    raise AssertionError('Native KeyP was rejected after three observed focus acquisitions.')
+
+
 def steer_brood(page, x, y, deadline=None):
     held = set()
     deadline = time.monotonic() + 45 if deadline is None else deadline
@@ -340,8 +396,7 @@ def run_brood(page, args, out, report, check, capture):
     check('the third useful impact leaves exactly one charge and half of the second nest', brood(page)['legacy']['bombs'] == 1 and brood(page)['legacy']['nests'] == [0, 70])
     secure_brood_save(page, final_flight_deadline, report)
     drop_brood(page, 1, wait_impact=False)
-    page.keyboard.press('KeyP')
-    page.wait_for_function('()=>__ATF_GAME__.paused===true')
+    pause_brood_for_checkpoint(page, report, 'before-final-bomb-save')
     frozen = brood(page)
     check('native pause catches the last finite charge in flight, with zero charges refunded', frozen['legacy']['bombs'] == 0 and len(frozen['bombs']) == 1 and frozen['legacy']['nests'] == [0, 70] and frozen['mission']['state'] == 'active')
     check('the paused final charge has an admitted native save window after all six fighter waves',
@@ -361,10 +416,7 @@ def run_brood(page, args, out, report, check, capture):
     page.locator('#title-start').click(timeout=45000); page.locator('#title-continue').click()
     open_view(page, 'command'); page.locator('#operation-launch').click()
     wait_brood_runtime(page, '()=>__ATF_GAME__?.running&&__ATF_GAME__.legacyMissionV131?.kind==="broodstorm"', timeout=45000)
-    page.locator('#game-canvas').focus()
-    if not brood(page)['paused']:
-        page.keyboard.press('KeyP')
-    page.wait_for_function('()=>__ATF_GAME__.paused===true')
+    pause_brood_for_checkpoint(page, report, 'after-final-bomb-resume')
     restored = brood(page)
     check('real reload admits the same native checkpoint and operation with no refund or result', restored['resume']['applied'] is True and restored['save']['strategy']['currentOperation']['id'] == operation['id'] and restored['save']['strategy']['currentOperation']['resumeState']['specialOperation']['legacyBombsV157'] == saved_bombs and restored['legacy']['bombs'] == 0 and restored['legacy']['nests'] == [0, 70] and len(restored['bombs']) == 1 and restored['mission']['state'] == 'active')
     original, flying = saved_bombs[0], restored['bombs'][0]

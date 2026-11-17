@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFileSync } from 'node:fs';
+import { createContext, runInContext } from 'node:vm';
 import { GameEngine } from '../src/game-production-runtime.js';
 import { CAMPAIGNS, WORLDS, WEAPONS, ENEMIES, LEVEL_SEEDS } from '../src/content.js';
 import { buildBlackCocoonLevelV121 } from '../src/black-cocoon-runtime-v121.js';
@@ -8,7 +9,7 @@ import { buildMissionLevelV52 } from '../src/mission-levels-v52.js';
 import { createBlackCocoonStateV121, validateBlackCocoonStateV121 } from '../src/black-cocoon-state-v121.js';
 import { resolveBlackCocoonPresentationV158, resolveBlackCocoonPlayerRigV158, resolveBlackCocoonResinLayoutV158,
   blackCocoonResinGeometryV158, drawBlackCocoonResinV158, BLACK_COCOON_PRESENTATION_V158 } from '../src/black-cocoon-presentation-v158.js';
-import { beginOperation, createDefaultSave, recordOperationResumeState, migrateSave } from '../src/save.js';
+import { SaveSystem, beginOperation, createDefaultSave, recordOperationResumeState, migrateSave } from '../src/save.js';
 import { SPECIAL_OPERATIONS_V131, SPECIAL_OPERATION_COUNTS_V131 } from '../src/special-operations-v131.js';
 import { BIOLOGICAL_ART_V188, biologicalArtAnchorV188, drawHumanResinSupportV188 } from '../src/biological-art-v188.js';
 
@@ -56,8 +57,8 @@ function host() {
     Object.assign(event, { code, repeat: false, ctrlKey: false, metaKey: false, altKey: false }); bus.dispatchEvent(event); };
   return { canvas, ctx, key, drawings, paths, stack };
 }
-async function fixture(resumeState, campaignId = 'special-black-cocoon') {
-  const browser = host(), events = [], engine = new GameEngine(browser.canvas, { onEvent: event => events.push(event) });
+async function fixture(resumeState, campaignId = 'special-black-cocoon', onEvent = null) {
+  const browser = host(), events = [], engine = new GameEngine(browser.canvas, { onEvent: event => { events.push(event); onEvent?.(event, engine); } });
   const campaign = CAMPAIGNS.find(value => value.id === campaignId), world = WORLDS.find(value => value.id === campaign.worldId);
   const options = { campaign, world, weapon: WEAPONS[0], enemyCatalog: ENEMIES, equipment: [], crew: [], seed: 158121,
     missionLevel: (campaignId === 'special-black-cocoon' ? buildBlackCocoonLevelV121 : buildMissionLevelV52)(
@@ -76,6 +77,70 @@ function hold(subject, code, seconds) { subject.key('keydown', code); tick(subje
 const payload = engine => JSON.parse(JSON.stringify(engine.captureResumeState()));
 const native = engine => { const actor = engine.player; return { x: actor.x, y: actor.y, health: actor.health,
   ammo: actor.ammo, reserve: actor.ammoReserve, inventory: structuredClone(engine.inventory), coop: engine.coopEnabled }; };
+
+test('QA terminal save resumes native time without E, then pauses the exact committed partial cut', async t => {
+  const data = new Map(), storage = { getItem: key => data.get(key) ?? null, setItem: (key, value) => data.set(key, String(value)), removeItem: key => data.delete(key) };
+  const system = new SaveSystem(storage); system.newGame(1);
+  const subject = await fixture(undefined, 'special-black-cocoon', (event, engine) => {
+    if (event.type !== 'terminal-save-v188') return;
+    const candidate = structuredClone(system.data);
+    assert.equal(recordOperationResumeState(candidate, engine.captureResumeState()), true);
+    system.commit(candidate);
+  }), e = subject.engine;
+  system.data.galaxy.unlockedWorldIds.push(subject.options.world.id);
+  const operation = beginOperation(system.data, subject.options.campaign, subject.options.world).operation;
+  operation.missionLevelSignature = subject.options.missionLevel.signature; operation.levelSeedId = e.resumeIdentity.levelSeedId;
+  system.commit(system.data);
+  hold(subject, 'KeyE', 1.21); subject.key('keydown', 'KeyP'); subject.key('keyup', 'KeyP');
+  const before = native(e), partial = { native: { cut: e.blackCocoonV121.cocoonProgress, freed: false },
+    player: { health: e.player.health, ammo: e.player.ammo, reserve: e.player.ammoReserve, appearance: structuredClone(e.player.appearanceV126) } };
+  let now = 0; const keys = [], clicks = [];
+  const context = createContext({ assert, structuredClone, localStorage: storage, performance: { now: () => now },
+    __ATF_GAME__: e, __ATF_V51__: { saveSystem: system } });
+  const evaluate = (fn, arg) => runInContext('(' + fn.toString() + ')', context)(arg);
+  const page = {
+    evaluate: async (fn, arg) => structuredClone(evaluate(fn, arg)),
+    locator: selector => ({
+      click: async () => { assert.equal(selector, '#mission-save-v86'); clicks.push(selector);
+        assert.equal(e.missionSavePolicyV188().mode, 'terminal'); assert.equal(e.beginTerminalSaveV188().allowed, true); },
+      focus: async () => { assert.equal(selector, '#game-canvas'); subject.canvas.focus(); }
+    }),
+    keyboard: { press: async code => { keys.push(code); subject.key('keydown', code); subject.key('keyup', code); } },
+    waitForFunction: async (fn, arg, options = {}) => {
+      const deadline = now + (options.timeout || 45000);
+      while (!evaluate(fn, arg) && now < deadline) { tick(e, 1 / 60); now += 1000 / 60; }
+      assert.ok(evaluate(fn, arg), 'The actual terminal cannot commit while native time remains paused.');
+    }
+  };
+  const source = readFileSync(new URL('./qa-black-cocoon-browser-v158.mjs', import.meta.url), 'utf8');
+  const start = source.indexOf('async function savePartialCocoonAtTerminal(');
+  assert.ok(start >= 0);
+  const body = source.slice(start, source.indexOf('\nasync function main()', start));
+  const helper = runInContext('(' + body + ')', context);
+  try {
+    const receipt = await helper(page, partial);
+    assert.deepEqual(clicks, ['#mission-save-v86']); assert.deepEqual(keys, ['KeyP', 'KeyP']);
+    assert.equal(e.paused, true); assert.deepEqual(native(e), before);
+    assert.equal(e.blackCocoonV121.cocoonProgress, partial.native.cut); assert.equal(e.blackCocoonV121.freed, false);
+    const saved = new SaveSystem(storage).load(1).strategy.currentOperation;
+    assert.equal(saved.id, operation.id); assert.equal(saved.resumeState.specialOperation.blackCocoonV121.cocoonProgress, partial.native.cut);
+    assert.equal(subject.events.filter(event => event.type === 'terminal-save-v188').length, 1);
+    assert.equal(receipt.operationId, operation.id); assert.equal(receipt.started.total, 3);
+    assert.ok(now >= 3000 && now < 45000);
+    t.diagnostic('Actual JS QA helper, production Cocon runtime and SaveSystem. Declared DOM/Canvas/RAF/storage host; visible save click delegates to the observed native terminal branch, whose event commits the real captured checkpoint.');
+  } finally { e.stop(); }
+});
+
+test('native Cocon terminal countdown stays pending during pause and cannot fabricate a receipt', async () => {
+  const subject = await fixture(), e = subject.engine;
+  hold(subject, 'KeyE', 1.21); subject.key('keydown', 'KeyP'); subject.key('keyup', 'KeyP');
+  assert.equal(e.beginTerminalSaveV188().allowed, true);
+  const pending = structuredClone(e.terminalSaveV188), cut = e.blackCocoonV121.cocoonProgress;
+  tick(e, 45);
+  assert.deepEqual(e.terminalSaveV188, pending); assert.equal(pending.remaining, 3);
+  assert.equal(e.blackCocoonV121.cocoonProgress, cut);
+  assert.equal(subject.events.some(event => event.type === 'terminal-save-v188'), false); e.stop();
+});
 
 test('real captured insertion keeps identity/resources/physical body while native kit and resin animate', async () => {
   const subject = await fixture(), e = subject.engine;
