@@ -24,11 +24,14 @@ const arenaLabels = new Map([
 const trialLabels = new Map([
   ['Super dessiné', 'Drawn super'],
   ['Frappes aériennes dessinées', 'Drawn aerial attacks'],
+  ['Spéciale dessinée', 'Drawn special'],
   ['REPRENDRE LE DUEL CONSERVÉ', 'RESUME SAVED DUEL'],
   ['RECOMMENCER DEPUIS LA PREMIÈRE MANCHE', 'RESTART FROM ROUND ONE'],
   ['REPRISE CONSERVÉE · ÉTAT DU DUEL ENREGISTRÉ', 'CHECKPOINT SAVED · DUEL STATE RECORDED'],
   ['Duel restauré. Reprenez avec P, Start ou le bouton Reprendre.', 'Duel restored. Resume with P, Start or the Resume button.'],
-  ['Duel sauvegardé. Retrouvez la manche, la santé et le chrono enregistrés.', 'Duel saved. Resume with your saved round, health and timer.']
+  ['Duel sauvegardé. Retrouvez la manche, la santé et le chrono enregistrés.', 'Duel saved. Resume with your saved round, health and timer.'],
+  ['FENÊTRE VERTE', 'GREEN WINDOW'],
+  ['FENÊTRE FERMÉE', 'WINDOW CLOSED']
 ]);
 
 // The English catalog (~600 kB) is loaded only when English is chosen, so a
@@ -94,6 +97,11 @@ function translateWhole(text) {
 // Messages are often joined: "ERREUR · A. B." Translate each known piece,
 // split on " · " and between sentences; unknown pieces stay French.
 function translateCore(text, depth = 0) {
+  // Generic contact patterns would absorb the beacon's window label into an
+  // untranslated placeholder. Keep its independent telemetry fields separate.
+  if (depth < 2 && /(?:^| · )FENÊTRE (?:VERTE|FERMÉE) · /u.test(text)) {
+    return text.split(' · ').map(piece => translateCore(piece, depth + 1)).join(' · ');
+  }
   const whole = translateWhole(text);
   if (whole != null) return whole;
   if (depth > 1) return text;

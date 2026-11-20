@@ -42,6 +42,20 @@ function terminal() {
 }
 const cardIds = html => [...html.matchAll(/data-xt-arena="([^"]+)"/g)].map(match => match[1]);
 
+test('opponent and player previews label the admitted actions on the selected plates', () => {
+  const h = terminal();
+  h.ui.selected = 'import-game-afe2-warden';
+  h.ui.form.elements.opponentId.value = 'rhino';
+  h.ui.renderPreviews();
+  const [player, opponent] = h.el('portraits').innerHTML.match(/<figure>[\s\S]*?<\/figure>/g);
+  assert.match(player, /<small>Super dessiné<\/small><small>Frappes aériennes dessinées<\/small>/);
+  assert.match(opponent, /<small>Spéciale dessinée<\/small>/);
+  assert.doesNotMatch(opponent, /Frappes aériennes dessinées|Super dessiné/);
+  h.ui.selected = 'prowler';
+  h.ui.renderPreviews();
+  assert.match(h.el('portraits').innerHTML.match(/<figure>[\s\S]*?<\/figure>/)[0], /<small>Frappes aériennes dessinées<\/small>/);
+});
+
 test('one hundred declared stage entries remain reachable once each in nine bounded pages without changing selection', () => {
   const fixture = Object.freeze(Array.from({ length: 100 }, (_, index) => Object.freeze({
     id: 'declared-stage-' + index, media: index < 50 ? undefined : ['film', 'series', 'game', 'comic', 'novel'][index % 5]

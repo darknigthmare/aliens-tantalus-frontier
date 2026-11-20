@@ -98,7 +98,8 @@
     "test:trials:priorities:stages:v198": "node --test scripts/verify-xeno-priority-stages-v198.mjs scripts/verify-xeno-priority-stages-audit-v198.mjs",
     "test:trials:priorities:v199": "node --test scripts/verify-xeno-trials-actions-v199.mjs scripts/verify-xeno-trials-rig-v199.mjs scripts/verify-xeno-priorities-audit-v199.mjs",
     "test:trials:supers:v200": "node --test scripts/verify-xeno-trials-supers-v200.mjs scripts/verify-xeno-supers-audit-v200.mjs",
-    "test:trials:priorities:v201": "node --test scripts/verify-xeno-trials-priority-actions-v201.mjs scripts/verify-xeno-trials-reinforcements-v201.mjs scripts/verify-xeno-trials-rig-v201.mjs scripts/verify-xeno-priorities-audit-v201.mjs"
+    "test:trials:priorities:v201": "node --test scripts/verify-xeno-trials-priority-actions-v201.mjs scripts/verify-xeno-trials-reinforcements-v201.mjs scripts/verify-xeno-trials-rig-v201.mjs scripts/verify-xeno-priorities-audit-v201.mjs",
+    "test:trials:priorities:v202": "node --test scripts/verify-xeno-trials-priority-actions-v202.mjs scripts/verify-xeno-trials-beacon-windows-v202.mjs scripts/verify-xeno-trials-rig-v202.mjs scripts/verify-xeno-priorities-audit-v202.mjs"
   },
   "engines": {
     "node": ">=22"

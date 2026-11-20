@@ -62,7 +62,16 @@ function nearby(player,target){
 }
 function windowOpen(objective,ticks){
  const phase=ticks%objective.periodTicks;
+ return windowPhaseOpen(objective,phase);
+}
+function windowPhaseOpen(objective,phase){
  return phase>=objective.windowStartTicks&&phase<objective.windowStartTicks+objective.windowTicks;
+}
+function beaconWindow(objective,ticks){
+ const phase=ticks%objective.periodTicks,windowOpen=windowPhaseOpen(objective,phase);
+ const windowRemainingTicks=windowOpen?objective.windowStartTicks+objective.windowTicks-phase:
+  (objective.windowStartTicks-phase+objective.periodTicks)%objective.periodTicks;
+ return{windowOpen,windowRemainingTicks};
 }
 function finish(state,status,reason,emit){
  state.status=status;state.failureReason=reason;state.completedTick=state.lastTick;
@@ -196,8 +205,12 @@ export function isXenoTrialsOperationForwardV188(previous,next){
 export function getXenoTrialsOperationViewV188(match){
  const state=match?.operationV188,entry=getXenoTrialsOperationV188(state?.operationId);if(!entry)return null;
  let entities=entry.objectives.map((objective,index)=>({...objective,active:!state.completed[index]&&(entry.kind!=='relay'||index===state.completed.findIndex(done=>!done)),completed:state.completed[index],progress:state.progress[index],
-  ...(entry.kind==='beacon'?{windowOpen:windowOpen(objective,state.elapsedTicks)}:{})}));
+  ...(entry.kind==='beacon'?beaconWindow(objective,state.elapsedTicks):{})}));
  let target=entities.find(entity=>!entity.completed)||null;
+ if(entry.kind==='beacon'&&state.status==='active'){
+  const touching=entities.filter(entity=>!entity.completed&&nearby(match.fighters?.[0],entity));
+  target=touching.find(entity=>entity.windowOpen)||touching[0]||target;
+ }
  if(entry.kind==='escort'){entities=[{...entities[0],x:state.cargoX,destinationX:entry.cargoEndX,integrity:state.integrity}];target=entities[0];}
  if(entry.kind==='extraction'){
   entities=entities.map((entity,index)=>({...entity,active:!state.completed[index],delivered:state.delivered[index],carried:state.carrying===index}));
@@ -212,5 +225,6 @@ export function getXenoTrialsOperationViewV188(match){
    target?`${target.label} · maintenez E à proximité${target.windowOpen===false?' pendant la fenêtre verte':''}.`:'Rejoignez le sas.',
   progress:{done,total:entry.objectives.length,label:entry.kind==='extraction'?`${done}/${entry.objectives.length} caissons livrés`:`${done}/${entry.objectives.length} objectifs validés`},
   timeRemaining:Math.max(0,entry.roundSeconds-state.elapsedTicks/120),integrity:state.integrity,carrying:state.carrying,entities,
-  target:target?{x:target.x,radius:target.radius,label:target.label}:null};
+  target:target?{x:target.x,radius:target.radius,label:target.label,
+   ...(entry.kind==='beacon'?{id:target.id,windowOpen:target.windowOpen,windowRemainingTicks:target.windowRemainingTicks}:{})}:null};
 }

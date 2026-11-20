@@ -5,7 +5,7 @@ import { getXenoTrialsArtV96, getXenoTrialsFighterV96 } from './xeno-trials-data
 import { getXenoTrialsSpecialStyleV147 } from './xeno-trials-signatures-v147.js';
 import { XENO_TRIALS_SPRITE_REFERENCES_V188, XENO_TRIALS_SPRITE_FRAME_IDS_V188 } from './xeno-trials-sprite-atlas-v188.js';
 import { getXenoTrialsSpriteEnvelopeV189 } from './xeno-trials-sprite-atlas-v189.js';
-import { XENO_TRIALS_ACTION_ATLASES_V199, XENO_TRIALS_SUPER_ATLASES_V200, XENO_TRIALS_PRIORITY_ATLASES_V201,
+import { XENO_TRIALS_RUNTIME_ACTION_ATLASES,
   getXenoTrialsActionAtlasV199, getXenoTrialsActiveActionAtlas, getXenoTrialsRuntimeActionAtlases,
   sampleXenoTrialsActionFrameV199 } from './xeno-trials-action-atlas-v199.js';
 
@@ -48,7 +48,7 @@ export const XENO_TRIALS_SPRITE_REFERENCES_V191 = freeze({ ...XENO_TRIALS_SPRITE
     work: 'Lot AlienTentalus — adaptation de jeu non canonique' }
 });
 const constructed = new WeakMap();
-for (const atlas of [...XENO_TRIALS_ACTION_ATLASES_V199, ...XENO_TRIALS_SUPER_ATLASES_V200, ...XENO_TRIALS_PRIORITY_ATLASES_V201])
+for (const atlas of XENO_TRIALS_RUNTIME_ACTION_ATLASES)
   constructed.set(atlas, atlas.revision);
 const visibleHeight = (atlas, metrics) => metrics?.visibleHeight ?? metrics?.height
   * (atlas.sourcePose.alphaBounds[3] - atlas.sourcePose.alphaBounds[1]) / atlas.sourcePose.height;

@@ -1,3 +1,4 @@
+import { publicXenoPriorityPathAdmissionV202, verifyXenoPriorityAdmissionsV202 } from './public-xeno-priority-admissions-v202.mjs';
 import { publicXenoPriorityPathAdmissionV201, verifyXenoPriorityAdmissionsV201 } from './public-xeno-priority-admissions-v201.mjs';
 import { publicXenoSuperPathAdmissionV200, verifyXenoSuperAdmissionsV200 } from './public-xeno-super-admissions-v200.mjs';
 import { publicXenoActionPathAdmissionV199, verifyXenoActionAdmissionsV199 } from './public-xeno-action-admissions-v199.mjs';
@@ -706,6 +707,16 @@ const PRIVATE_TEXT = [
   /['"]V\d+_(?:BATCH_\d+|[A-Z_]*IMAGEGEN)/
 ];
 
+const XENO_PRIORITIES_SOURCE_ONLY_V202 = new Set([
+  'docs/forge/xeno-trials/V202-PRIORITIES.md',
+  'scripts/audit-xeno-priorities-v202.mjs',
+  'scripts/verify-xeno-priorities-audit-v202.mjs',
+  'scripts/verify-xeno-trials-priority-actions-v202.mjs',
+  'scripts/verify-xeno-trials-beacon-windows-v202.mjs',
+  'scripts/verify-xeno-trials-rig-v202.mjs',
+  'scripts/public-xeno-priority-admissions-v202.mjs'
+]);
+
 const XENO_PRIORITIES_SOURCE_ONLY_V201 = new Set([
   'docs/forge/xeno-trials/V201-PRIORITIES.md',
   'scripts/audit-xeno-priorities-v201.mjs',
@@ -786,6 +797,7 @@ const XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193 = new Set([
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
+  if (XENO_PRIORITIES_SOURCE_ONLY_V202.has(path)) return !built;
   if (XENO_PRIORITIES_SOURCE_ONLY_V201.has(path)) return !built;
   if (XENO_SUPERS_SOURCE_ONLY_V200.has(path)) return !built;
   if (XENO_PRIORITIES_SOURCE_ONLY_V199.has(path)) return !built;
@@ -805,6 +817,8 @@ export function isPublicDistributionPathV86(path, { directory = false, built = f
   if (FORGE_STYLES_V140.has(path)) return true;
   const segments = path.split('/');
   if (segments.some(part => !part || part === '.' || part === '..' || PRIVATE_SEGMENT.test(part))) return false;
+  const priorityAdmissionV202 = publicXenoPriorityPathAdmissionV202(path, { directory });
+  if (priorityAdmissionV202 !== null) return priorityAdmissionV202;
   const priorityAdmissionV201 = publicXenoPriorityPathAdmissionV201(path, { directory });
   if (priorityAdmissionV201 !== null) return priorityAdmissionV201;
   const superAdmissionV200 = publicXenoSuperPathAdmissionV200(path, { directory });
@@ -912,6 +926,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   await verifyXenoActionAdmissionsV199(root);
   await verifyXenoSuperAdmissionsV200(root);
   await verifyXenoPriorityAdmissionsV201(root);
+  await verifyXenoPriorityAdmissionsV202(root);
   await verifyXenoFranchiseStageAdmissionsV192(root);
   await verifyXenoOriginalArenaAdmissionsV193(root);
   await verifyXenoIconicStageAdmissionsV194(root);

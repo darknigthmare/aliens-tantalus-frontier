@@ -87,7 +87,8 @@ for (const atlas of atlases) {
 
 test('player coverage advertises V201 gestures by action and retains the Warden super', () => {
   const all = XENO_TRIALS_FIGHTERS_V96.map(fighter => getXenoTrialsRuntimeAnimationCoverage(fighter));
-  assert.equal(all.filter(entry => entry.hasDrawnGestures).length, 30);
+  assert.equal(all.filter(entry => entry.drawnStates.some(action => action !== 'idle'
+    && entry.states[action].sources.some(source => source.renderKind === 'drawn' && source.revision <= 201))).length, 30);
   assert.equal(all.filter(entry => entry.states.presentation.sources.some(source => source.revision === 201)).length, 20);
   assert.ok(all.every(entry => !entry.fullAnimation && !entry.canonExact));
   const warden = getXenoTrialsRuntimeAnimationCoverage('import-game-afe2-warden');

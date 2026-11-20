@@ -50,14 +50,21 @@ for(const entry of OPS)test(`${entry.id}: title, actual briefing, world labels, 
   assert.equal(translate(text.healthLabel),`${activity.enemyHpMin}–${activity.enemyHpMax} HP`);
   assert.equal(translate(text.pressureLabel),'GROUNDED INTERACTION · E / L3 / TOUCH');
   for(const entity of world.entities)assert.equal(translate(entity.label),label(entity));
-  const target=world.entities.find(entity=>entity.x===world.target.x&&entity.label===world.target.label),name=label(target),player=match.fighters[0];
-  player.x=world.target.x+1000;assert.equal(translate(hud(match).instruction),`← ${name}`);
-  player.x=world.target.x-1000;assert.equal(translate(hud(match).instruction),`${name} →`);
-  player.x=0;player.x=world.target.x-bounds(player).center;
-  const contact=hud(match);assert.equal(translate(contact.instruction),`${name} · HOLD INTERACT`);
-  assert.equal(translate(contact.hint),`${name} · hold E nearby${entry.kind==='beacon'?' during the green window':''}.`);
+  const isBeacon=entry.kind==='beacon',closed=isBeacon?'WINDOW CLOSED · ':'';
+  const target=isBeacon?world.entities.find(entity=>entity.active):world.entities.find(entity=>entity.x===world.target.x&&entity.label===world.target.label);
+  const name=label(target),player=match.fighters[0];
+  player.x=5000;assert.equal(translate(hud(match).instruction),`${closed}← ${name}`);
+  player.x=-5000;assert.equal(translate(hud(match).instruction),`${closed}${name} →`);
+  player.x=0;player.x=target.x-bounds(player).center;
+  const contact=hud(match);assert.equal(translate(contact.instruction),isBeacon?`${closed}${name}`:`${name} · HOLD INTERACT`);
+  assert.equal(translate(contact.hint),`${name} · hold E nearby${isBeacon?' during the green window':''}.`);
   const status=`${contact.phase} · ${contact.instruction} · ${contact.progress.label}`;
   assert.equal(translate(status),[translate(contact.phase),translate(contact.instruction),translate(contact.progress.label)].join(' · '));
+  if(isBeacon){
+   match.operationV188.elapsedTicks=target.windowStartTicks;
+   assert.equal(translate(hud(match).instruction),`GREEN WINDOW · ${name} · HOLD INTERACT`);
+   match.operationV188.elapsedTicks=0;
+  }
  });
  match.fighters[0].x=500;assert.equal(JSON.stringify(match),before,'Translation cannot change IDs, progress, position or objective state');
  assert.equal(translate(entry.title),entry.title);assert.equal(translate(text.orders),text.orders);

@@ -1,4 +1,4 @@
-import { getXenoTrialsOperationV188, getXenoTrialsOperationViewV188 } from './xeno-trials-operations-v188.js';
+import { getXenoTrialsOperationV188, getXenoTrialsOperationViewV188, XENO_TRIALS_OPERATION_LIMITS_V188 } from './xeno-trials-operations-v188.js';
 import { getXenoTrialsBodyBoundsV105 } from './xeno-trials-geometry-v105.js';
 
 const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
@@ -12,11 +12,21 @@ export function getXenoTrialsOperationHudV188(match) {
   const player = match.fighters?.[0], target = view.status === 'active' ? view.target : null;
   const body = player ? getXenoTrialsBodyBoundsV105(player) : null;
   let instruction = view.status === 'completed' ? 'Objectifs validés.' : view.status === 'failed' ? 'Évaluation interrompue.' : view.instruction;
+  let beaconWindow = null;
   if (target && body) {
     const contact = player.y === 0 && body.left <= target.x + target.radius && body.right >= target.x - target.radius;
-    instruction = contact ? `${target.label} · MAINTENEZ INTERAGIR` : target.x < body.center ? `← ${target.label}` : `${target.label} →`;
+    const label = contact ? target.label : target.x < body.center ? `← ${target.label}` : `${target.label} →`;
+    if (view.kind === 'beacon') {
+      const open = target.windowOpen;
+      const phase = open ? 'FENÊTRE VERTE' : 'FENÊTRE FERMÉE';
+      const seconds = Math.ceil(target.windowRemainingTicks / XENO_TRIALS_OPERATION_LIMITS_V188.ticksPerSecond);
+      instruction = `${phase} · ${label}${contact && open ? ' · MAINTENEZ INTERAGIR' : ''}`;
+      beaconWindow = { id: target.id, open, contact, remainingTicks: target.windowRemainingTicks, seconds };
+    } else {
+      instruction = contact ? `${label} · MAINTENEZ INTERAGIR` : label;
+    }
   }
-  return { ...view, phase, orders: view.instruction, instruction };
+  return { ...view, phase, orders: view.instruction, instruction, beaconWindow };
 }
 
 /** A briefing describes the authored physical objective. It never changes a
@@ -36,14 +46,14 @@ export function getXenoTrialsOperationBriefingV188(activity) {
 
 /** Objects share combat world coordinates. Rear props and floor-only front
  * markings cannot change hitboxes or conceal a standing combatant. */
-export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear' } = {}) {
+export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear', reducedMotion = false } = {}) {
   const view = getXenoTrialsOperationViewV188(match);
   if (!view) return null;
-  const floor = arena.floor;
+  const floor = arena.floor, beacons = [];
   ctx.save();
   for (const entity of view.entities) {
     if (!Number.isFinite(entity.x) || !Number.isFinite(entity.radius)) continue;
-    const color = entity.completed ? '#91bd8c' : entity.active ? '#ecd08c' : '#8a9d98';
+    const color = entity.kind === 'beacon' ? beaconColor(entity) : entity.completed ? '#91bd8c' : entity.active ? '#ecd08c' : '#8a9d98';
     const x = entity.x, width = entity.kind === 'cargo' ? 84 : entity.kind === 'depot' || entity.kind === 'exit' ? 100 : 42;
     ctx.strokeStyle = color; ctx.fillStyle = '#142124'; ctx.lineWidth = 2;
     if (plane === 'front') {
@@ -57,6 +67,7 @@ export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear' 
       }
       continue;
     }
+    if (entity.kind === 'beacon' && view.status === 'active') beacons.push(drawBeaconWindow(ctx, entity, floor, reducedMotion));
     ctx.globalAlpha = entity.completed ? .6 : 1;
     const height = entity.kind === 'terminal' || entity.kind === 'beacon' ? 62 : 32;
     ctx.fillRect(x - width / 2, floor - height, width, height - 2);
@@ -69,7 +80,7 @@ export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear' 
       for (let offset = -12; offset <= 12; offset += 8) ctx.fillRect(x + offset, floor - 25, 3, 18);
     } else {
       ctx.fillRect(x - width / 2 + 7, floor - height + 8, width - 14, 9);
-      ctx.fillStyle = entity.windowOpen === false ? '#bd7658' : '#a9d79b';
+      ctx.fillStyle = entity.windowOpen === false && !entity.completed ? '#bd7658' : '#a9d79b';
       ctx.fillRect(x - 4, floor - height + 27, 8, 8);
     }
     if (entity.requiredTicks > 0 && entity.progress > 0) {
@@ -79,5 +90,39 @@ export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear' 
     }
   }
   ctx.restore();
-  return { id: view.id, plane, entities: view.entities.length };
+  return { id: view.id, plane, entities: view.entities.length, ...(beacons.length ? { beacons } : {}) };
+}
+
+function beaconColor(entity) {
+  return entity.completed || entity.windowOpen ? '#99dcab' : '#e5aa73';
+}
+
+/** The shutter surrounds the receiver on the real objective anchor. Its beam
+ * occupies only the clipped rear plane, and completed receivers are steady.
+ */
+function drawBeaconWindow(ctx, entity, floor, reducedMotion) {
+  const x = entity.x, y = floor - 62;
+  const completed = entity.completed, open = entity.windowOpen && !completed;
+  const color = beaconColor(entity);
+  const phase = completed ? 'synchronized' : open ? 'open' : 'closed';
+  const transition = Math.min(entity.windowTicks - entity.windowRemainingTicks + 1, entity.windowRemainingTicks, 18) / 18;
+  let opening = .16;
+  if (completed) opening = .64;
+  else if (open) opening = reducedMotion ? .88 : .25 + transition * .63;
+  const clip = { x: x - 72, y: y - 78, width: 144, height: 78 };
+
+  ctx.save();
+  ctx.beginPath(); ctx.rect(clip.x, clip.y, clip.width, clip.height); ctx.clip();
+  if (open) {
+    ctx.globalAlpha = .18; ctx.fillStyle = color;
+    ctx.beginPath(); ctx.moveTo(x - 8, y - 16); ctx.lineTo(x - 56 * opening, y - 70);
+    ctx.lineTo(x + 56 * opening, y - 70); ctx.lineTo(x + 8, y - 16); ctx.closePath(); ctx.fill();
+    ctx.globalAlpha = .38; ctx.strokeStyle = color;
+    ctx.beginPath(); ctx.moveTo(x - 54 * opening, y - 62); ctx.lineTo(x + 54 * opening, y - 62); ctx.stroke();
+  }
+  ctx.globalAlpha = .98; ctx.fillStyle = '#132126'; ctx.strokeStyle = '#687a7b';
+  ctx.fillRect(x - 23, y - 20, 46, 20); ctx.strokeRect(x - 23, y - 20, 46, 20);
+  ctx.fillStyle = color; ctx.fillRect(x - 18 * opening, y - 15, 36 * opening, 10);
+  ctx.restore();
+  return { id: entity.id, x, phase, opening, remainingTicks: completed ? 0 : entity.windowRemainingTicks, clip, reducedMotion };
 }

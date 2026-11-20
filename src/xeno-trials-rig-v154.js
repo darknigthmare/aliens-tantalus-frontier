@@ -6,6 +6,7 @@ import { XENO_TRIALS_RIG_DATA_V165 } from './xeno-trials-rig-data-v165.js';
 import { XENO_TRIALS_RIG_DATA_V197 } from './xeno-trials-rig-data-v197.js';
 import { XENO_TRIALS_RIG_DATA_V199 } from './xeno-trials-rig-data-v199.js';
 import { XENO_TRIALS_RIG_DATA_V201 } from './xeno-trials-rig-data-v201.js';
+import { XENO_TRIALS_RIG_DATA_V202 } from './xeno-trials-rig-data-v202.js';
 import { XENO_TRIALS_GRAPPLE_V153 } from './xeno-trials-grapple-v153.js';
 import { XENO_TRIALS_CASTES_V151 } from './xeno-trials-castes-v151.js';
 import { XENO_TRIALS_SIGNATURES_V147, getXenoTrialsAttackV147 } from './xeno-trials-signatures-v147.js';
@@ -43,10 +44,17 @@ function admitArticulatedRigs(data, revision) {
 export const XENO_TRIALS_ARTICULATED_RIGS_V197 = admitArticulatedRigs(XENO_TRIALS_RIG_DATA_V197, 197);
 export const XENO_TRIALS_ARTICULATED_RIGS_V199 = admitArticulatedRigs(XENO_TRIALS_RIG_DATA_V199, 199);
 export const XENO_TRIALS_ARTICULATED_RIGS_V201 = admitArticulatedRigs(XENO_TRIALS_RIG_DATA_V201, 201);
+export const XENO_TRIALS_ARTICULATED_RIGS_V202 = admitArticulatedRigs(XENO_TRIALS_RIG_DATA_V202, 202);
 const articulatedRigByFighterV197 = new Map(XENO_TRIALS_ARTICULATED_RIGS_V197.map(rig => [rig.fighterId, rig]));
 const articulatedRigByFighterV199 = new Map(XENO_TRIALS_ARTICULATED_RIGS_V199.map(rig => [rig.fighterId, rig]));
 const articulatedRigByFighterV201 = new Map(XENO_TRIALS_ARTICULATED_RIGS_V201.map(rig => [rig.fighterId, rig]));
-const articulatedRigs = new Set([...XENO_TRIALS_ARTICULATED_RIGS_V197, ...XENO_TRIALS_ARTICULATED_RIGS_V199, ...XENO_TRIALS_ARTICULATED_RIGS_V201]);
+const articulatedRigByFighterV202 = new Map(XENO_TRIALS_ARTICULATED_RIGS_V202.map(rig => [rig.fighterId, rig]));
+const articulatedRigs = new Set([
+ ...XENO_TRIALS_ARTICULATED_RIGS_V197, ...XENO_TRIALS_ARTICULATED_RIGS_V199,
+ ...XENO_TRIALS_ARTICULATED_RIGS_V201, ...XENO_TRIALS_ARTICULATED_RIGS_V202
+]);
+const runtimeArticulatedRigByFighter = new Map([...articulatedRigs].map(rig => [rig.fighterId, rig]));
+if (runtimeArticulatedRigByFighter.size !== articulatedRigs.size) throw new Error('Duplicate articulated Trials fighter');
 const admittedRigs = new Set([...admittedRigsV163, ...articulatedRigs]);
 const pilotProfilesV197 = new Map(XENO_TRIALS_SIGNATURES_V147.map(entry => [entry.fighterId, entry.profileId]));
 export const XENO_TRIALS_RIG_TIMING_V154=Object.freeze({intro:XENO_PRESENTATION_V97.introMs/1000,round:1.8,release:XENO_TRIALS_GRAPPLE_V153.recovery,settle:.12});
@@ -70,6 +78,8 @@ function getArticulatedRig(rigs, definition, art) {
 export const getXenoTrialsRigV197 = (definition, art) => getArticulatedRig(articulatedRigByFighterV197, definition, art);
 export const getXenoTrialsRigV199 = (definition, art) => getArticulatedRig(articulatedRigByFighterV199, definition, art);
 export const getXenoTrialsRigV201 = (definition, art) => getArticulatedRig(articulatedRigByFighterV201, definition, art);
+export const getXenoTrialsRigV202 = (definition, art) => getArticulatedRig(articulatedRigByFighterV202, definition, art);
+export const getXenoTrialsRuntimeArticulatedRig = (definition, art) => getArticulatedRig(runtimeArticulatedRigByFighter, definition, art);
 const inside=(p,r)=>r&&p[0]>=r[0]&&p[0]<=r[2]&&p[1]>=r[1]&&p[1]<=r[3];
 const inPolygonV163=(p,polygon)=>{let hit=false;for(let i=0,j=polygon.length-1;i<polygon.length;j=i++){
  const a=polygon[i],b=polygon[j];if((a[1]>p[1])!==(b[1]>p[1])&&p[0]<(b[0]-a[0])*(p[1]-a[1])/(b[1]-a[1])+a[0])hit=!hit;

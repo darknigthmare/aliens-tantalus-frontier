@@ -30,7 +30,8 @@ const readPublished = path => git(['show', '005568f7f285ca5ec704e0e87498b2e5b682
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const prior = 'scripts/audit-xeno-priorities-v199.mjs';
 const relay = 'scripts/audit-xeno-supers-v200.mjs';
-const terminal = 'scripts/audit-xeno-priorities-v201.mjs';
+const successor = 'scripts/audit-xeno-priorities-v201.mjs';
+const terminal = 'scripts/audit-xeno-priorities-v202.mjs';
 const verifier = 'scripts/verify-xeno-supers-audit-v200.mjs';
 const report = 'docs/forge/xeno-trials/V200-SUPERS.md';
 const spritePrefix = 'assets/openai/sprites/xeno-trials-v200/';
@@ -117,12 +118,13 @@ test('V200 extends the effective runtime and retains strict predecessor checks',
 test('the V200 audit relays to V201 and its tooling and mutable report stay source-only', () => {
   assert.match(read(prior).toString(), /from '\.\/audit-xeno-supers-v200\.mjs'/);
   assert.match(read(relay).toString(), /from '\.\/audit-xeno-priorities-v201\.mjs'/);
+  assert.match(read(successor).toString(), /from '\.\/audit-xeno-priorities-v202\.mjs'/);
   assert.doesNotMatch(read(terminal).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
-  for (const path of [relay, terminal, verifier, report]) {
+  for (const path of [relay, successor, terminal, verifier, report]) {
     assert.equal(isPublicDistributionPathV86(path), true, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);
   }
-  for (const path of [relay, terminal, report])
+  for (const path of [relay, successor, terminal, report])
     assert.ok(!Object.hasOwn(inputs, path) && !Object.hasOwn(successors, path), path);
   for (const path of [spritePrefix + 'unreviewed-super-sheet.png', 'scripts/audit-xeno-supers-unreviewed-v200.mjs'])
     assert.equal(isPublicDistributionPathV86(path), false, path);

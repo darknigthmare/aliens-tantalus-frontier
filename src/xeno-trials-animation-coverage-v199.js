@@ -1,6 +1,6 @@
 import { getXenoTrialsAnimationCoverageV197 } from './xeno-trials-animation-coverage-v197.js';
 import { getXenoTrialsArtV96, getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
-import { getXenoTrialsRigV199, getXenoTrialsRigV201 } from './xeno-trials-rig-v154.js';
+import { getXenoTrialsRigV199, getXenoTrialsRuntimeArticulatedRig } from './xeno-trials-rig-v154.js';
 import { getXenoTrialsActionAtlasV199, getXenoTrialsRuntimeActionAtlases } from './xeno-trials-action-atlas-v199.js';
 
 const historicalCache = new Map(), runtimeCache = new Map();
@@ -19,7 +19,8 @@ function getCoverage(value, cache, runtime) {
   const fighter = getXenoTrialsFighterV96(base.id), art = getXenoTrialsArtV96(base.id);
   const atlases = runtime ? getXenoTrialsRuntimeActionAtlases(fighter, art)
     : [getXenoTrialsActionAtlasV199(fighter, art)].filter(Boolean);
-  const rig = (runtime && getXenoTrialsRigV201(fighter, art)) || getXenoTrialsRigV199(fighter, art);
+  const sourceRig = (runtime ? getXenoTrialsRuntimeArticulatedRig : getXenoTrialsRigV199)(fighter, art);
+  const rig = sourceRig?.presentationRevision >= 199 ? sourceRig : null;
   if (!atlases.length && !rig) return base;
   const states = { ...base.states };
 
@@ -54,10 +55,11 @@ function getCoverage(value, cache, runtime) {
   const drawnStates = Object.freeze(Object.keys(states).filter(action => states[action].renderKind === 'drawn'));
   const meshStates = Object.freeze(Object.keys(states).filter(action => states[action].renderKind === 'mesh'));
   const hasDrawnGestures = drawnStates.some(action => action !== 'idle');
+  const revision = Math.max(199, rig?.presentationRevision ?? 0,
+    ...atlases.filter(atlas => atlas.revision >= 201).map(atlas => atlas.revision));
   const result = Object.freeze({ ...base, states: Object.freeze(states), drawnStates, meshStates, hasDrawnGestures,
     playerLabel: hasDrawnGestures ? 'Gestes dessinés' : 'Gestes articulés',
-    coverageBasis: `identity-bound-native-attack-windows-v${rig?.presentationRevision === 201
-      || atlases.some(atlas => atlas.revision === 201) ? 201 : 199}` });
+    coverageBasis: `identity-bound-native-attack-windows-v${revision}` });
   cache.set(base.id, result);
   return result;
 }

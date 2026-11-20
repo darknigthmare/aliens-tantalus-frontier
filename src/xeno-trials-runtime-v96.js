@@ -1,7 +1,7 @@
 import { createXenoTrialsOutroV155, advanceXenoTrialsOutroV155, skipXenoTrialsOutroV155,
  getXenoTrialsSequenceCueV155, sampleXenoTrialsSequenceV155, skipXenoTrialsIntroV155,
  createXenoTrialsTerminalV156, createXenoTrialsTauntV156, advanceXenoTrialsTauntV156, getXenoTrialsSequenceCueV156, createXenoTrialsExitV157, getXenoTrialsExitViewV157, createXenoTrialsLandingV157, getXenoTrialsLandingViewV157 } from './xeno-trials-sequences-v155.js';
-import { getXenoTrialsRigV154, getXenoTrialsRigV197, getXenoTrialsRigV199, getXenoTrialsRigV201,
+import { getXenoTrialsRigV154, getXenoTrialsRuntimeArticulatedRig,
   getXenoTrialsRigCueV154, sampleXenoTrialsRigV154, drawXenoTrialsRigV154, sampleXenoTrialsExitPoseV157 } from './xeno-trials-rig-v154.js';
 import { createXenoTrialsPilotOutroV197, getXenoTrialsPilotSequenceV197 } from './xeno-trials-pilot-sequences-v197.js';
 import { getXenoTrialsGrappleViewV153, drawXenoTrialsGrappleV153 } from './xeno-trials-grapple-v153.js';
@@ -49,6 +49,7 @@ const KEY_ACTION = Object.freeze({ ArrowLeft: 'left', KeyQ: 'left', KeyA: 'left'
   ArrowUp: 'jump', KeyZ: 'jump', KeyW: 'jump', Space: 'jump', ArrowDown: 'guard', KeyS: 'guard', KeyJ: 'light', KeyK: 'heavy', KeyL: 'special', KeyI: 'super', KeyE: 'interact' });
 const ACTIONS = new Set(Object.values(KEY_ACTION));
 const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+const countCompleted = flags => flags.reduce((count, done) => count + Number(done), 0);
 
 /** Historical API now returns physical world-space metrics, never camera zoom. */
 export function getXenoTrialsRenderMetricsV96(id, variant = null) {
@@ -114,12 +115,14 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   let stageSceneRearV190 = null, stageSceneFrontV190 = null;
   let stageSceneRearV192 = null, stageSceneFrontV192 = null;
   let reinforcementV201 = null;
+  let operationSceneV202 = null;
   const snapshot = () => ({ ...getXenoTrialsSnapshotV96(match), presentation: presentationView(),
     audioV189: sound.getState(),
     stageSceneV190: { rear: stageSceneRearV190, front: stageSceneFrontV190 },
     stageSceneV192: { rear: stageSceneRearV192, front: stageSceneFrontV192 },
     ...(reinforcementV201 ? { reinforcementV201 } : {}),
     operationViewV188: getXenoTrialsOperationHudV188(match), stageHazardViewV188: getXenoTrialsStageHazardViewV188(match),
+    ...(operationSceneV202 ? { operationSceneV202 } : {}),
     resumedV186: Boolean(hordeCheckpoint), checkpointV186: { ...checkpointStatus },
     ...(duelCheckpoint ? { resumedV197: true } : {}),
     gamepadV186: gamepadView ? { connected: gamepadView.connected, index: gamepadView.index, needsNeutral: gamepadView.needsNeutral } : null,
@@ -332,7 +335,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     const pilotPose = !exitView && !captureViewV163 && !sequenceCue
       && getXenoTrialsPilotSequenceV197(historicalRig, match, fighter, presentationState, outroV155, reducedMotion);
     const authoredRig = !pilotPose && !sequenceCue && !exitView && !captureViewV163
-      && (getXenoTrialsRigV201(definition, art) || getXenoTrialsRigV199(definition, art) || getXenoTrialsRigV197(definition, art));
+      && getXenoTrialsRuntimeArticulatedRig(definition, art);
     const authoredCue = authoredRig && getXenoTrialsRigCueV154(authoredRig, match, fighter, presentationState);
     const rig = authoredCue ? authoredRig : historicalRig;
     const cue = sequenceCue || authoredCue || (rig && getXenoTrialsRigCueV154(rig, match, fighter, presentationState));
@@ -353,7 +356,9 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     }
     const atlasDrawn=captureViewV163?.target===fighter&&!exitView&&!sequenceCue
       &&drawXenoTrialsCaptureTargetV163(context,images.get(captureViewV163.atlas.path),captureViewV163);
-    const reactionBlocked = Boolean(atlasDrawn || exitView || sequenceCue || pilotPose || authoredCue || captureViewV163 || presentationState.blocksSimulation);
+    const spritesBlocked = Boolean(atlasDrawn || exitView || sequenceCue || pilotPose || captureViewV163
+      || presentationState.blocksSimulation || authoredCue && authoredCue.clip !== 'recovery');
+    const reactionBlocked = spritesBlocked || Boolean(authoredCue);
     const spec = fighter.attack && getXenoTrialsAttackV147(definition, fighter.attack.kind, XENO_TRIALS_ATTACKS_V96[fighter.attack.kind]);
     const reactionCue = preparedReaction || (hordeProtocol && match.result && fighter.hp <= 0 ? { state: 'ko', progress: 1 } : null) || reactions(match, fighter, {
       blocked: reactionBlocked, spec });
@@ -364,14 +369,14 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     // key. The mesh remains the fallback until the optional texture loads.
     const settledOnAtlas = pilotPose?.contactV197?.phase === 'settled' && outroV155?.phase === 'complete'
       && getXenoTrialsSpriteAtlasV197(fighter, art);
-    const drawnModernAtlas = (!reactionBlocked && match.phase === 'active'
+    const drawnModernAtlas = (!spritesBlocked && match.phase === 'active'
       && drawXenoTrialsRuntimeActionAtlas(context, fighter, art, images, spriteOptions))
-      || ((!reactionBlocked || settledOnAtlas) && drawXenoTrialsSpriteAtlasV191(context,
+      || ((!spritesBlocked || settledOnAtlas) && drawXenoTrialsSpriteAtlasV191(context,
         settledOnAtlas ? { ...fighter, y: 0 } : fighter, art, images, {
           ...spriteOptions, includeV197: true,
           ...(settledOnAtlas ? { cue: { state: 'ko', progress: 1 }, y: XENO_TRIALS_ARENA_V96.floor } : {})
         }));
-    const drawnAtlas = drawnModernAtlas || (!reactionBlocked && (
+    const drawnAtlas = drawnModernAtlas || (!spritesBlocked && (
       drawXenoTrialsSpriteAtlasV189(context, fighter, art, images, spriteOptions)
       || drawXenoTrialsSpriteAtlasV188(context, fighter, art, images, spriteOptions)));
     const reactionDrawn = !drawnAtlas && !reactionBlocked && drawXenoTrialsReactionV186(context, fighter, art, image,
@@ -443,7 +448,8 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     canvas.setAttribute?.('data-xeno-camera-zoom-v119', String(cameraView.zoom));
     drawArena();
     context.save(); context.translate(cameraView.translateX, cameraView.translateY); context.scale(cameraView.zoom, cameraView.zoom);
-    drawXenoTrialsOperationV188(context, match, XENO_TRIALS_ARENA_V96, { plane: 'rear' });
+    const operationRear = drawXenoTrialsOperationV188(context, match, XENO_TRIALS_ARENA_V96, { plane: 'rear', reducedMotion: reduceMotion() });
+    operationSceneV202 = operationRear?.beacons ? operationRear : null;
     drawXenoTrialsStageHazardsV188(context, match, XENO_TRIALS_ARENA_V96, { plane: 'rear', reducedMotion: reduceMotion() });
     drawXenoTrialsAcidV152(context, match, XENO_TRIALS_ARENA_V96, reduceMotion());
     if (hordeProtocol && !presentationView().blocksSimulation) for (const ghost of defeatedBodiesV186()) {
@@ -717,6 +723,9 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     } else {
       const wasBlocking = presentationView().blocksSimulation, beforeRound = match.round, beforePhase = match.phase;
       const beforeHordePhase = match.hordeV180?.phase;
+      const operation = match.operationV188;
+      const completedBefore = operation ? countCompleted(operation.completed) : 0;
+      const deliveredBefore = operation ? countCompleted(operation.delivered) : 0;
       presentation = advanceXenoPresentationV97(presentation,dt*1000,match.paused || doc?.hidden || !loaded);
       if (wasBlocking && !presentationView().blocksSimulation) clearInputs();
       if (!wasBlocking) stepXenoTrialsMatchV96(match,dt,controls());
@@ -734,6 +743,8 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       const roundEnded = beforePhase === 'active' && match.phase === 'round-over';
       const hordeChanged = match.hordeV180?.phase !== beforeHordePhase;
       if (hordeChanged) checkpointNow(beforeHordePhase === 'intermission' ? 'wave-start' : 'wave-clear');
+      else if (operation && countCompleted(operation.delivered) > deliveredBefore) checkpointNow('operation-delivery');
+      else if (operation && countCompleted(operation.completed) > completedBefore) checkpointNow('operation-objective');
       else checkpointNow(roundStarted ? 'round-start' : roundEnded ? 'round-end' : 'periodic');
       if (stopped) return;
       notifyElapsed += dt; render(); notify(match.phase === 'match-over' && !emittedResult);

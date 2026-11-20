@@ -22,6 +22,7 @@ import { renderEnemyImportPreviewV103 } from './enemy-import-admissions-v103.js'
 import { getEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
 import { getEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
 import { getXenoTrialsRuntimeAnimationCoverage } from './xeno-trials-animation-coverage-v199.js';
+import { getXenoTrialsRuntimeActionAtlases } from './xeno-trials-action-atlas-v199.js';
 import { getXenoTrialsRosterPageV179, getXenoTrialsRosterProfileV179 } from './xeno-trials-roster-v179.js';
 import { XENO_TRIALS_HORDE_PROTOCOLS_V186 as HORDE_PROTOCOLS } from './xeno-trials-horde-v180.js';
 import { XENO_TRIALS_OPERATIONS_V188 as OPERATIONS } from './xeno-trials-operations-v188.js';
@@ -33,6 +34,7 @@ const options = entries => entries.map(e => `<option value="${e.id}">${e.label}<
 const requestedRulesV119 = value => ({ 'no-special': { noSpecial: true }, 'one-hp': { initialHp: 1 },
   'thirty-seconds': { timeLimitSeconds: 30 } }[value] || {});
 const roleLabel = { balanced: 'Polyvalent', agile: 'Mobile', tank: 'Défensif', ranged: 'Distance' };
+const drawnActionLabels = { super: 'Super dessiné', 'air-combat': 'Frappes aériennes dessinées', 'ground-special': 'Spéciale dessinée' };
 export const XENO_TRIALS_STAGE_MEDIA_V192 = Object.freeze([
   ['all', 'Tous les supports'], ['film', 'Films'], ['series', 'Série'], ['game', 'Jeux vidéo'],
   ['comic', 'Comics'], ['novel', 'Romans'], ['simulation', 'Simulations Tantalus']
@@ -450,14 +452,15 @@ export class XenoTrialsUiV96 {
       const signature = getXenoTrialsSignatureV147(f);
       const rig=getXenoTrialsRigV154(f,art);
       const coverage = getXenoTrialsRuntimeAnimationCoverage(f.id);
-      const actionLabel = coverage?.states.super?.sources.some(source => source.revision >= 199) ? 'Super dessiné'
-        : coverage?.states.light.sources.some(source => source.revision === 199 && source.renderKind === 'drawn') ? 'Frappes aériennes dessinées' : '';
-      const motionLabel = actionLabel || coverage?.playerLabel || (rig ? (rig.id.startsWith('rig-v154-') ? 'Présentations, défi et réactions disponibles.' : 'Présentations et réactions disponibles.') : attack ? `Marche : 4 poses adaptées · ${attack.label}` : walk?.label);
+      const admittedActions = getXenoTrialsRuntimeActionAtlases(f, art).map(atlas => drawnActionLabels[atlas.kind]);
+      const motionLabel = coverage?.playerLabel || (rig ? (rig.id.startsWith('rig-v154-') ? 'Présentations, défi et réactions disponibles.' : 'Présentations et réactions disponibles.') : attack ? `Marche : 4 poses adaptées · ${attack.label}` : walk?.label);
+      const gestures = (admittedActions.length ? admittedActions : [motionLabel]).filter(Boolean)
+        .map(label => `<small>${escapeHtml(label)}</small>`).join('');
       const desiredFacing = i ? -1 : 1;
       const sourceFacing = art?.sourceFacing === 1 ? 1 : -1;
       const family = FAMILIES.find(entry => entry.id === getXenoTrialsSelectionFamilyV119(f))?.label || 'À DÉFINIR';
       const profile = getXenoTrialsRosterProfileV179(f);
-      return `<figure><figcaption>${i ? horde ? 'CONTACT TYPE' : 'ADVERSAIRE' : 'VOTRE SPÉCIMEN'}</figcaption><div class="xt-facing-preview" data-facing="${desiredFacing}" style="transform:scaleX(${desiredFacing * sourceFacing});width:100%">${portrait}</div><strong>${escapeHtml(f.label)}</strong><span>${family} · ${roleLabel[f.role]} · ${horde && i ? horde.healthLabel : `${f.hp} PV`} · ${f.speed} mobilité</span><small>${escapeHtml(getXenoTrialsFighterSpecialLabelV147(f))}</small>${profile ? `<p class="xt-help">${escapeHtml(profile.tactic)}</p>` : ''}${signature ? `<small data-xt-signature="${signature.id}">${escapeHtml(signature.description.replace('La prise au sol complète reste à produire.', '').trim())}</small>` : ''}${hasXenoTrialsGrappleV153(f) ? '<small>Saisie rapprochée sur Commando WY, Guardian et Cultiste Darwin Era. Maintenir GARDE pour se dégager. Contre les autres spécimens, le bond reste une attaque de contact.</small>' : ''}<small>DOSSIER : ${escapeHtml(art?.sourceWork || art?.sourceName || 'MIRE')}</small>${motionLabel ? `<small>${escapeHtml(motionLabel)}</small>` : ''}</figure>`;
+      return `<figure><figcaption>${i ? horde ? 'CONTACT TYPE' : 'ADVERSAIRE' : 'VOTRE SPÉCIMEN'}</figcaption><div class="xt-facing-preview" data-facing="${desiredFacing}" style="transform:scaleX(${desiredFacing * sourceFacing});width:100%">${portrait}</div><strong>${escapeHtml(f.label)}</strong><span>${family} · ${roleLabel[f.role]} · ${horde && i ? horde.healthLabel : `${f.hp} PV`} · ${f.speed} mobilité</span><small>${escapeHtml(getXenoTrialsFighterSpecialLabelV147(f))}</small>${profile ? `<p class="xt-help">${escapeHtml(profile.tactic)}</p>` : ''}${signature ? `<small data-xt-signature="${signature.id}">${escapeHtml(signature.description.replace('La prise au sol complète reste à produire.', '').trim())}</small>` : ''}${hasXenoTrialsGrappleV153(f) ? '<small>Saisie rapprochée sur Commando WY, Guardian et Cultiste Darwin Era. Maintenir GARDE pour se dégager. Contre les autres spécimens, le bond reste une attaque de contact.</small>' : ''}<small>DOSSIER : ${escapeHtml(art?.sourceWork || art?.sourceName || 'MIRE')}</small>${gestures}</figure>`;
     }).join(`<span class="xt-versus" aria-hidden="true">${horde ? '×' : 'VS'}</span>`);
     const stage = STAGES.find(s => s.id === this.form.elements.stageId.value) || STAGES[0];
     const matchup = ids.map(id => FIGHTERS.find(f => f.id === id)?.label || '').join(' contre ');
@@ -577,12 +580,16 @@ export class XenoTrialsUiV96 {
     if (operation) {
       this.el('operation-title').textContent = operation.title;
       this.el('operation-phase').textContent = snapshot.paused ? 'PAUSE' : operation.phase;
-      this.el('operation-instruction').textContent = operation.instruction;
+      const operationInstruction = this.el('operation-instruction'), beacon = operation.beaconWindow;
+      operationInstruction.textContent = beacon ? `${operation.instruction} · ${beacon.seconds} s` : operation.instruction;
+      operationInstruction.setAttribute('data-beacon-window', beacon ? beacon.open ? 'open' : 'closed' : '');
       this.el('operation-progress').max = Math.max(1, operation.progress.total);
       this.el('operation-progress').value = operation.progress.done;
       this.el('operation-progress-value').textContent = operation.progress.label;
       this.el('operation-integrity').textContent = operation.integrity === null || operation.integrity === undefined ? '' : `INTÉGRITÉ ${Math.ceil(operation.integrity)} / 100`;
-      this.el('operation-hint').textContent = operation.hint;
+      const operationHint = this.el('operation-hint');
+      operationHint.hidden = Boolean(beacon);
+      operationHint.textContent = operation.hint;
       const hazard = snapshot.stageHazardViewV188;
       this.el('operation-hazard').textContent = hazard && ['warning', 'active'].includes(hazard.phase) ? `${hazard.phase === 'warning' ? 'DANGER ANNONCÉ' : 'DANGER ACTIF'} · ${hazard.label} · ${hazard.hint || 'Quittez la zone balisée.'}` : '';
       this.el('operation-hazard').setAttribute('data-active', String(hazard?.phase === 'active'));
@@ -611,7 +618,7 @@ export class XenoTrialsUiV96 {
       this.el('horde-kills').textContent = `${horde.kills} / ${horde.total} NEUTRALISÉS`;
       this.el('horde-progress').max = Math.max(1, horde.total);
       this.el('horde-progress').value = horde.kills;
-      const announcement = operation ? `${snapshot.paused ? 'PAUSE' : operation.phase}. ${operation.instruction}` : horde.announcement;
+      const announcement = operation ? `${snapshot.paused ? 'PAUSE' : operation.phase}${operation.beaconWindow ? ' · ' : '. '}${operation.instruction}` : horde.announcement;
       if (this.hordeAnnouncementV180 !== announcement) {
         this.el('horde-announcement').textContent = announcement;
         this.hordeAnnouncementV180 = announcement;

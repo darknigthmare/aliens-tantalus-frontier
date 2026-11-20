@@ -2,6 +2,8 @@ import { XENO_TRIALS_ACTION_DATA_V199 } from './xeno-trials-action-data-v199.js'
 import { XENO_TRIALS_SUPER_DATA_V200 } from './xeno-trials-super-data-v200.js';
 import { XENO_TRIALS_PRIORITY_AIR_DATA_V201 } from './xeno-trials-priority-air-data-v201.js';
 import { XENO_TRIALS_PRIORITY_GROUND_DATA_V201 } from './xeno-trials-priority-ground-data-v201.js';
+import { XENO_TRIALS_PRIORITY_AIR_DATA_V202 } from './xeno-trials-priority-air-data-v202.js';
+import { XENO_TRIALS_PRIORITY_GROUND_DATA_V202 } from './xeno-trials-priority-ground-data-v202.js';
 import { getXenoTrialsArtV96, getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
 import { XENO_TRIALS_SPRITE_REFERENCES_V189 } from './xeno-trials-sprite-atlas-v189.js';
 import { getXenoTrialsSuperV148 } from './xeno-trials-supers-v148.js';
@@ -17,8 +19,8 @@ const positive = value => Number.isFinite(value) && value > 0;
 const tuple = (value, length) => Array.isArray(value) && value.length === length && value.every(Number.isFinite);
 const phaseKeys = ['windup', 'impact', 'recovery'];
 const superKeys = ['windup', 'active', 'recovery'];
-const airFightersByRevision = { 199: ['warrior', 'runner'], 201: ['queen', 'import-game-afe2-warden'] };
-const groundSpecialStyles = { mantis: 'slash', 'synth-sniper': 'pulse' };
+const airFightersByRevision = { 199: ['warrior', 'runner'], 201: ['queen', 'import-game-afe2-warden'], 202: ['prowler', 'ravager'] };
+const groundSpecialStyles = { 201: { mantis: 'slash', 'synth-sniper': 'pulse' }, 202: { rhino: 'ram', 'synth-heavy': 'pulse' } };
 const atlasKinds = new Map([['light', 'air-combat'], ['heavy', 'air-combat'], ['special', 'ground-special'], ['super', 'super']]);
 export const XENO_TRIALS_ACTION_FRAME_IDS_V199 = freeze({
   'air-combat': ['light', 'heavy'].flatMap(action => phaseKeys.map(key => `air-${action}-${key}`)),
@@ -39,9 +41,10 @@ function createAtlas(data, revision) {
   const fighter = getXenoTrialsFighterV96(fighterId), art = getXenoTrialsArtV96(fighterId);
   if (revision === 200 && (kind !== 'super' || !Object.hasOwn(extraSuperFrames, data.superId))) fail('V200 super plan');
   const isAir = kind === 'air-combat', isGroundSpecial = kind === 'ground-special', superSpec = getXenoTrialsSuperV148(fighter);
+  const groundStyle = groundSpecialStyles[revision]?.[fighterId];
   const admitsAction = isAir ? airFightersByRevision[revision]?.includes(fighterId) && data.superId === undefined
-    : isGroundSpecial ? revision === 201 && Object.hasOwn(groundSpecialStyles, fighterId)
-      && data.specialStyle === groundSpecialStyles[fighterId] && data.specialStyle === getXenoTrialsSpecialStyleV147(fighter)
+    : isGroundSpecial ? Boolean(groundStyle) && data.specialStyle === groundStyle
+      && data.specialStyle === getXenoTrialsSpecialStyleV147(fighter)
       && data.superId === undefined
     : kind === 'super' && revision < 201 && superSpec && data.superId === superSpec.id;
   const refs = XENO_TRIALS_SPRITE_REFERENCES_V189[fighterId];
@@ -95,9 +98,14 @@ export const XENO_TRIALS_ACTION_ATLASES_V199 = freeze(XENO_TRIALS_ACTION_DATA_V1
 export const XENO_TRIALS_SUPER_ATLASES_V200 = freeze(XENO_TRIALS_SUPER_DATA_V200.map(data => createAtlas(data, 200)));
 export const XENO_TRIALS_PRIORITY_ATLASES_V201 = freeze(
   [...XENO_TRIALS_PRIORITY_AIR_DATA_V201, ...XENO_TRIALS_PRIORITY_GROUND_DATA_V201].map(data => createAtlas(data, 201)));
-const registered = [...XENO_TRIALS_ACTION_ATLASES_V199, ...XENO_TRIALS_SUPER_ATLASES_V200, ...XENO_TRIALS_PRIORITY_ATLASES_V201];
+export const XENO_TRIALS_PRIORITY_ATLASES_V202 = freeze(
+  [...XENO_TRIALS_PRIORITY_AIR_DATA_V202, ...XENO_TRIALS_PRIORITY_GROUND_DATA_V202].map(data => createAtlas(data, 202)));
+export const XENO_TRIALS_RUNTIME_ACTION_ATLASES = Object.freeze([
+  ...XENO_TRIALS_ACTION_ATLASES_V199, ...XENO_TRIALS_SUPER_ATLASES_V200,
+  ...XENO_TRIALS_PRIORITY_ATLASES_V201, ...XENO_TRIALS_PRIORITY_ATLASES_V202
+]);
 const admitted = new Map(), noAtlases = Object.freeze([]);
-for (const atlas of registered) {
+for (const atlas of XENO_TRIALS_RUNTIME_ACTION_ATLASES) {
   const previous = admitted.get(atlas.fighterId) || noAtlases;
   if (previous.some(item => item.kind === atlas.kind)) throw new Error('Duplicate Trials action atlas kind for ' + atlas.fighterId);
   admitted.set(atlas.fighterId, Object.freeze([...previous, atlas]));

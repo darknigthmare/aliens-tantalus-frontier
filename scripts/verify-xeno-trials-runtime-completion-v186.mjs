@@ -9,6 +9,7 @@ import {createXenoTrialsHordeCheckpointV186} from '../src/xeno-trials-horde-chec
 import {getXenoTrialsBodyBoundsV105 as bounds} from '../src/xeno-trials-geometry-v105.js';
 import {getXenoTrialsArtV96} from '../src/xeno-trials-data-v96.js';
 import {getXenoTrialsSpriteAtlasV188} from '../src/xeno-trials-sprite-atlas-v188.js';
+import {ARBITER_MISSIONS_V190,createArbiterReceiptV190} from '../src/xeno-arbiter-campaign-v190.js';
 
 // Production engine/controller and the real UI checkpoint method. DOM, RAF,
 // image decoding and standard gamepads are declared deterministic host doubles.
@@ -26,6 +27,14 @@ function ticket(id='xth180-incoming-1',playerId='warrior'){
  const progress=createXenoTrialsProgressV96();
  if(!progress.unlocked.includes(playerId))progress.unlocked.push(playerId);
  const t=beginXenoTrialsV96(progress,{playerId,activityV119:{branch:'horde',id}});
+ assert.equal(t.applied,true);return t;
+}
+function archiveOperationTicket(kind){
+ // Declared strategic receipts authorize the archive, with no local game-state fixture.
+ const arbiterProgressV190={schema:190,completedCampaignIds:ARBITER_MISSIONS_V190.map(mission=>mission.campaignId),
+  returns:ARBITER_MISSIONS_V190.map((mission,index)=>({campaignId:mission.campaignId,
+   operationId:`operation-${index+1}-${mission.campaignId}`,receipt:createArbiterReceiptV190(mission)}))};
+ const t=beginXenoTrialsV96(createXenoTrialsProgressV96(),{playerId:'runner',activityV119:{branch:'operations',id:`xto191-arbiter-vault-${kind}`}},{arbiterProgressV190});
  assert.equal(t.applied,true);return t;
 }
 function ownerFor(initial){
@@ -62,6 +71,16 @@ function host(options={}){
 }
 const coreFrom=(state,reference)=>Object.fromEntries(Object.keys(reference).map(key=>[key,state[key]]));
 const controls=match=>{const player=match.fighters[0],enemy=match.fighters.slice(1).sort((a,b)=>Math.abs(a.x-player.x)-Math.abs(b.x-player.x))[0];return{left:enemy?.x<player.x,right:enemy?.x>player.x,heavy:match.tick%180===0,light:match.tick%180===90};};
+function workUntil(h,reached){
+ let state=h.state();
+ for(let frame=0;frame<550&&!state.result&&!reached(state.operationV188);frame++){
+  const x=state.fighters[0].x,target=state.operationViewV188.target.x;
+  h.runtime.setInput('left',x>target+15);h.runtime.setInput('right',x<target-15);h.runtime.setInput('interact',true);
+  h.frames(1,1000/120);state=h.state();
+ }
+ assert.ok(reached(state.operationV188),`tick ${state.tick}, objective progress ${state.operationV188.progress}`);
+ return state;
+}
 
 test('201 live raw snapshots pass the real UI checkpoint transaction without changing economy or ticket identity',async()=>{
  const t=ticket(),owner=ownerFor(t.state),h=host({config:t.config,owner});await h.start();
@@ -121,6 +140,38 @@ test('horde intermission and the arrival of reinforcements save their own native
  assert.equal(durable.pending.matchId,t.config.matchId);assert.equal(durable.credits,t.state.credits);
  assert.equal(durable.xp,t.state.xp);assert.deepEqual(durable.ledger,t.state.ledger);
  h.runtime.stop();r.runtime.stop();reloaded.runtime.stop();
+});
+
+test('Arbiter objective completions autosave immediately and an acquired caisson resumes before delivery',async()=>{
+ for(const kind of ['relay','extraction']){
+  const t=archiveOperationTicket(kind),owner=ownerFor(t.state),h=host({config:t.config,owner});await h.start();
+  const first=workUntil(h,operation=>operation.completed[0]);
+  assert.ok(first.tick<600);assert.equal(first.hordeV180.wave,1);
+  assert.equal(h.checkpoints.length,1);assert.equal(h.checkpoints[0].reason,'operation-objective');
+  const saved=normalizeXenoTrialsProgressV96(clone(owner.progress));const pickup=saved.pending.checkpointV186.snapshot;
+  assert.equal(pickup.tick,first.tick);assert.deepEqual(pickup.operationV188,first.operationV188);
+  assert.deepEqual(pickup.stageHazardsV188,first.stageHazardsV188);
+  const r=host({config:saved.pending.config,owner,resumeSnapshot:pickup});await r.start();
+  assert.equal(r.state().paused,true);assert.deepEqual(coreFrom(r.state(),pickup),pickup);
+  if(kind==='extraction'){
+   assert.equal(r.state().operationV188.carrying,0);assert.equal(r.state().operationV188.delivered[0],false);
+   assert.equal(r.runtime.resume(),true);
+   const commit=owner.ui.onCommit;owner.ui.onCommit=()=>{throw new Error('storage unavailable');};
+   const delivered=workUntil(r,operation=>operation.delivered[0]);owner.ui.onCommit=commit;
+   assert.ok(delivered.tick-pickup.tick<600);assert.equal(r.checkpoints.at(-1)?.reason,'operation-delivery');
+   assert.equal(delivered.operationV188.carrying,-1);assert.equal(delivered.checkpointV186.saved,false);
+   assert.equal(owner.progress.pending.checkpointV186.tick,pickup.tick);
+   assert.equal(r.runtime.saveCheckpoint(),true);
+   const durable=normalizeXenoTrialsProgressV96(clone(owner.progress));const deposit=durable.pending.checkpointV186.snapshot;
+   assert.equal(deposit.tick,delivered.tick);assert.deepEqual(deposit.operationV188,delivered.operationV188);
+   assert.deepEqual(deposit.stageHazardsV188,delivered.stageHazardsV188);
+   const reloaded=host({config:durable.pending.config,resumeSnapshot:deposit});await reloaded.start();
+   assert.equal(reloaded.state().paused,true);assert.deepEqual(coreFrom(reloaded.state(),deposit),deposit);reloaded.runtime.stop();
+  }
+  assert.equal(owner.progress.pending.matchId,t.config.matchId);assert.equal(owner.progress.credits,t.state.credits);
+  assert.equal(owner.progress.xp,t.state.xp);assert.deepEqual(owner.progress.ledger,t.state.ledger);
+  h.runtime.stop();r.runtime.stop();
+ }
 });
 
 test('manual and timed next rounds save the native score during the new countdown',async()=>{
