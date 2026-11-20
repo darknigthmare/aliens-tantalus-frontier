@@ -44,6 +44,9 @@ import { getXenoTrialsRuntimeSpriteAtlas, getXenoTrialsSpriteAtlasV197, drawXeno
   requestXenoTrialsRuntimeActionAtlas, getXenoTrialsActionEnvelope } from './xeno-trials-sprite-atlas-v191.js';
 import { drawXenoTrialsSpriteAtlasV188, requestXenoTrialsSpriteAtlasV188, getXenoTrialsSpriteEnvelopeV188 } from './xeno-trials-sprite-atlas-v188.js';
 import { getXenoTrialsStageHazardViewV188 } from './xeno-trials-stage-hazards-v188.js';
+import { createXenoTrialsOptionalImagesV205, drawXenoTrialsProjectileV205, drawXenoTrialsHazardImageV205,
+  drawXenoTrialsAcidPoolImagesV205, drawXenoTrialsAcidSplashV205, drawXenoTrialsAcidDropV205,
+  drawXenoTrialsDetonationV205, drawXenoTrialsFlameConeV205 } from './xeno-trials-visual-assets-v205.js';
 
 const KEY_ACTION = Object.freeze({ ArrowLeft: 'left', KeyQ: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'right',
   ArrowUp: 'jump', KeyZ: 'jump', KeyW: 'jump', Space: 'jump', ArrowDown: 'guard', KeyS: 'guard', KeyJ: 'light', KeyK: 'heavy', KeyL: 'special', KeyI: 'super', KeyE: 'interact' });
@@ -169,6 +172,8 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   const images = new Map(), buttonKeys = new Map(), heldKeys = new Set(), blockedKeys = new Set(), heldPointers = new Map(), pendingLoads = new Set(), virtual = {}, listeners = [];
   const observedMovement = createEnemyImportMotionTrackerV107();
   let running = false, stopped = false, loaded = false, loading = null, raf = null, previousTime = null, exited = false;
+  const optionalImageV205 = createXenoTrialsOptionalImagesV205(images, path => loadImage(path), () => !stopped,
+    () => { if (!stopped && loaded) { render(); notify(true); } });
   const pointerOwners = new Map();
   const windowAvailable = () => doc?.hidden !== true && doc?.hasFocus?.() !== false;
   const acceptsControls = () => running && loaded && !stopped && !assetFailure && !match.paused
@@ -479,7 +484,10 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     operationSceneV203 = operationRear?.extraction ?? null;
     operationSceneV204 = operationRear?.purge ?? null;
     drawXenoTrialsStageHazardsV188(context, match, XENO_TRIALS_ARENA_V96, { plane: 'rear', reducedMotion: reduceMotion() });
-    drawXenoTrialsAcidV152(context, match, XENO_TRIALS_ARENA_V96, reduceMotion());
+    drawXenoTrialsHazardImageV205(context, getXenoTrialsStageHazardViewV188(match), optionalImageV205, XENO_TRIALS_ARENA_V96.floor);
+    drawXenoTrialsAcidV152(context, match, XENO_TRIALS_ARENA_V96, reduceMotion(),
+      (ctx, drop, floor) => drawXenoTrialsAcidDropV205(ctx, drop, optionalImageV205, floor));
+    drawXenoTrialsAcidPoolImagesV205(context, match, optionalImageV205, XENO_TRIALS_ARENA_V96.floor);
     if (hordeProtocol && !presentationView().blocksSimulation) for (const ghost of defeatedBodiesV186()) {
       context.save(); context.globalAlpha *= ghost.opacity; drawFighter(ghost.fighter, ghost.cue); context.restore();
     }
@@ -501,8 +509,10 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       }
       if (!['flame', 'detonation'].includes(style)) continue;
       const body = getXenoTrialsBodyBoundsV105(fighter), spec = getXenoTrialsAttackV147(definition, attack.kind, XENO_TRIALS_ATTACKS_V96.special);
-      if (style === 'flame' && attack.age >= spec.startup && attack.age < spec.startup + spec.active)
-        drawSynthConeV110(context, attack.facing > 0 ? body.right : body.left, 450 - fighter.y - body.height * .55, attack.facing, spec.reach);
+      if (style === 'flame' && attack.age >= spec.startup && attack.age < spec.startup + spec.active) {
+        if (!drawXenoTrialsFlameConeV205(context, fighter, body, spec, optionalImageV205, XENO_TRIALS_ARENA_V96.floor))
+          drawSynthConeV110(context, attack.facing > 0 ? body.right : body.left, 450 - fighter.y - body.height * .55, attack.facing, spec.reach);
+      }
       if (style === 'detonation' && !attack.hit) {
         context.strokeStyle = '#ffb364'; context.lineWidth = 3;
         context.strokeRect(body.left - 5, 450 - body.top - 5, body.width + 10, body.height + 10);
@@ -510,11 +520,14 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       }
     }
     for (const effect of match.synthEffectsV110 || []) {
+      if (drawXenoTrialsAcidSplashV205(context, effect, optionalImageV205, XENO_TRIALS_ARENA_V96.floor)) continue;
+      drawXenoTrialsDetonationV205(context, effect, optionalImageV205, XENO_TRIALS_ARENA_V96.floor);
       context.fillStyle = effect.kind === 'acid-death-v151' ? '#c1f07833' : '#ffc56c55';
       context.strokeStyle = effect.kind === 'acid-death-v151' ? '#c1f078' : '#ffecc5'; context.lineWidth = 3; context.beginPath();
       context.arc(effect.x, 450 - effect.y, effect.radius * Math.max(effect.kind === 'acid-death-v151' ? .65 : 0, 1 - effect.life / .4), 0, Math.PI * 2); context.fill(); context.stroke();
     }
     for (const projectile of match.projectiles) {
+      if (drawXenoTrialsProjectileV205(context, projectile, optionalImageV205, XENO_TRIALS_ARENA_V96.floor)) continue;
       if (projectile.style === 'ground-wave') {
         context.strokeStyle = '#e4d397'; context.lineWidth = 3;
         context.beginPath(); context.moveTo(projectile.x - 7, 450);

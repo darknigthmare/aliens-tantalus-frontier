@@ -1,3 +1,5 @@
+import { publicXenoProductionPathAdmissionV206, verifyXenoProductionAdmissionsV206 } from './public-xeno-production-admissions-v206.mjs';
+import { publicXenoVisualPathAdmissionV205, verifyXenoVisualAdmissionsV205 } from './public-xeno-visual-admissions-v205.mjs';
 import { publicXenoPriorityPathAdmissionV204, verifyXenoPriorityAdmissionsV204 } from './public-xeno-priority-admissions-v204.mjs';
 import { publicXenoPriorityPathAdmissionV203, verifyXenoPriorityAdmissionsV203 } from './public-xeno-priority-admissions-v203.mjs';
 import { publicXenoPriorityPathAdmissionV202, verifyXenoPriorityAdmissionsV202 } from './public-xeno-priority-admissions-v202.mjs';
@@ -709,6 +711,23 @@ const PRIVATE_TEXT = [
   /['"]V\d+_(?:BATCH_\d+|[A-Z_]*IMAGEGEN)/
 ];
 
+const XENO_PRODUCTION_SOURCE_ONLY_V206 = new Set([
+  'scripts/audit-xeno-production-assets-v206.mjs',
+  'scripts/public-xeno-production-admissions-v206.mjs',
+  'scripts/verify-xeno-production-assets-v206.mjs',
+  'docs/forge/xeno-trials/ASSET_LOT_V206.json',
+  'docs/forge/xeno-trials/V206-ASSETS.md'
+]);
+
+const XENO_VISUAL_SOURCE_ONLY_V205 = new Set([
+  'scripts/audit-xeno-visual-assets-v205.mjs',
+  'scripts/public-xeno-visual-admissions-v205.mjs',
+  'scripts/verify-xeno-trials-visual-assets-v205.mjs',
+  'scripts/verify-xeno-visual-assets-audit-v205.mjs',
+  'docs/forge/xeno-trials/ASSET_LOT_V205.json',
+  'docs/forge/xeno-trials/V205-ASSETS.md'
+]);
+
 const XENO_PRIORITIES_SOURCE_ONLY_V204 = new Set([
   'docs/forge/xeno-trials/V204-PRIORITIES.md',
   'scripts/audit-xeno-priorities-v204.mjs',
@@ -819,6 +838,12 @@ const XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193 = new Set([
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
+  if (XENO_PRODUCTION_SOURCE_ONLY_V206.has(path)) return !built;
+  const productionAdmissionV206 = publicXenoProductionPathAdmissionV206(path, { directory, built });
+  if (productionAdmissionV206 !== null) return productionAdmissionV206;
+  if (XENO_VISUAL_SOURCE_ONLY_V205.has(path)) return !built;
+  const visualAdmissionV205 = publicXenoVisualPathAdmissionV205(path, { directory, built });
+  if (visualAdmissionV205 !== null) return visualAdmissionV205;
   if (XENO_PRIORITIES_SOURCE_ONLY_V204.has(path)) return !built;
   if (XENO_PRIORITIES_SOURCE_ONLY_V203.has(path)) return !built;
   if (XENO_PRIORITIES_SOURCE_ONLY_V202.has(path)) return !built;
@@ -957,6 +982,8 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   await verifyXenoPriorityAdmissionsV202(root);
   await verifyXenoPriorityAdmissionsV203(root);
   await verifyXenoPriorityAdmissionsV204(root);
+  await verifyXenoVisualAdmissionsV205(root);
+  if (!built) await verifyXenoProductionAdmissionsV206(root);
   await verifyXenoFranchiseStageAdmissionsV192(root);
   await verifyXenoOriginalArenaAdmissionsV193(root);
   await verifyXenoIconicStageAdmissionsV194(root);

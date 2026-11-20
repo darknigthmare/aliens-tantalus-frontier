@@ -1,3 +1,4 @@
+import { XENO_VISUAL_ASSETS_SUCCESSORS_V205, XENO_VISUAL_ASSETS_NEW_INPUTS_V205 } from './audit-xeno-visual-assets-v205.mjs';
 import test from 'node:test';
 import { COMPLETION_SOURCES_V186, completionRuntimeSourcesV186, reviewedCompletionDigestV186 } from './audit-xeno-trials-completion-v186.mjs';
 import { STAGE_OPERATIONS_SUCCESSORS_V188, STAGE_OPERATIONS_NEW_INPUTS_V188 } from './audit-xeno-stage-operations-v188.mjs';
@@ -708,7 +709,8 @@ test('V178 resolves only exact MainM successors while every V177 witness stays h
     ...XENO_PRIORITIES_SUCCESSORS_V201, ...XENO_PRIORITIES_NEW_INPUTS_V201,
     ...XENO_PRIORITIES_SUCCESSORS_V202, ...XENO_PRIORITIES_NEW_INPUTS_V202,
     ...XENO_PRIORITIES_SUCCESSORS_V203, ...XENO_PRIORITIES_NEW_INPUTS_V203,
-    ...XENO_PRIORITIES_SUCCESSORS_V204, ...XENO_PRIORITIES_NEW_INPUTS_V204
+    ...XENO_PRIORITIES_SUCCESSORS_V204, ...XENO_PRIORITIES_NEW_INPUTS_V204,
+    ...XENO_VISUAL_ASSETS_SUCCESSORS_V205, ...XENO_VISUAL_ASSETS_NEW_INPUTS_V205
   };
   const introducedRuntimePaths = [
     'src/tactical-reload-v77.js', 'src/weapon-actions-v130.js',

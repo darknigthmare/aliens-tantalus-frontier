@@ -26,7 +26,7 @@ const readPublished = path => git(['show', '56caa02c812915225554133f6eaa1625eb13
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const prior = 'scripts/audit-xeno-supers-v200.mjs';
 const relay = 'scripts/audit-xeno-priorities-v201.mjs';
-const terminal = 'scripts/audit-xeno-priorities-v204.mjs';
+const terminal = 'scripts/audit-xeno-production-assets-v206.mjs';
 const verifier = 'scripts/verify-xeno-priorities-audit-v201.mjs';
 const report = 'docs/forge/xeno-trials/V201-PRIORITIES.md';
 
