@@ -5,6 +5,8 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedOriginalArenasDigestV193, originalArenasRuntimeSourcesV193,
+  verifyOriginalArenasV193 } from './audit-xeno-original-arenas-v193.mjs';
 
 const freeze = value => { if (value && typeof value === 'object') { Object.values(value).forEach(freeze); Object.freeze(value); } return value; };
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -520,24 +522,25 @@ export const FRANCHISE_STAGES_PRESERVED_PLATES_V192 = freeze({
 /** Strict predecessor transition: current or observed digests are never proofs. */
 export function reviewedFranchiseStagesDigestV192(path, endpointV191) {
   const receipt = FRANCHISE_STAGES_SUCCESSORS_V192[path];
-  if (!receipt) return endpointV191;
+  if (!receipt) return reviewedOriginalArenasDigestV193(path, endpointV191);
   assert.equal(endpointV191, receipt.previousSha256, 'Incorrect V191 endpoint for V192: ' + path);
   assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256), 'Invalid V192 successor digest: ' + path);
   assert.notEqual(receipt.previousSha256, receipt.currentSha256, 'Unchanged V192 successor: ' + path);
-  return receipt.currentSha256;
+  return reviewedOriginalArenasDigestV193(path, receipt.currentSha256);
 }
 
 /** Called after physical verification; retains the historical caller's object. */
 export function franchiseStagesRuntimeSourcesV192(historical) {
   const result = { ...historical };
   for (const [path, receipt] of Object.entries(FRANCHISE_STAGES_SUCCESSORS_V192)) if (receipt.kind === 'runtime') {
-    if (result[path] !== undefined && result[path] !== receipt.currentSha256)
-      assert.equal(result[path], receipt.previousSha256, 'Incorrect V192 runtime view predecessor: ' + path);
-    result[path] = receipt.currentSha256;
+    const current = reviewedOriginalArenasDigestV193(path, receipt.currentSha256);
+    if (result[path] !== undefined)
+      assert.ok([receipt.previousSha256, receipt.currentSha256, current].includes(result[path]), 'Incorrect V192 runtime view predecessor: ' + path);
+    result[path] = current;
   }
   for (const [path, receipt] of Object.entries(FRANCHISE_STAGES_NEW_INPUTS_V192))
-    if (receipt.kind === 'runtime') result[path] = receipt.sha256;
-  return Object.freeze(result);
+    if (receipt.kind === 'runtime') result[path] = reviewedOriginalArenasDigestV193(path, receipt.sha256);
+  return originalArenasRuntimeSourcesV193(result);
 }
 
 export function verifyFranchiseStagesV192(readSource = readRepository) {
@@ -554,7 +557,7 @@ export function verifyFranchiseStagesV192(readSource = readRepository) {
     assert.ok(safe(path), 'Unsafe V192 added-input path: ' + path);
     assert.deepEqual(Object.keys(receipt).sort(), ['kind', 'sha256']);
     assert.ok(kinds.includes(receipt.kind) && validHash(receipt.sha256)); paths.push(path);
-    assert.equal(sha(readSource(path)), receipt.sha256, 'Unreviewed V192 added-input bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedOriginalArenasDigestV193(path, receipt.sha256), 'Unreviewed V192 added-input bytes: ' + path);
   }
   for (const [path, digest] of Object.entries(FRANCHISE_STAGES_PRESERVED_PLATES_V192)) {
     assert.ok(safe(path) && validHash(digest)); paths.push(path);
@@ -567,6 +570,7 @@ export function verifyFranchiseStagesV192(readSource = readRepository) {
     assert.ok(start >= 0 && end > start, 'Missing historical declaration anchors: ' + path);
     assert.equal(sha(text.slice(start, end)), receipt.sha256, 'Historical receipt declarations changed: ' + path);
   }
+  verifyOriginalArenasV193(readSource);
   return Object.freeze({ baselineCommit: FRANCHISE_STAGES_BASELINE_V192,
     successors: Object.keys(FRANCHISE_STAGES_SUCCESSORS_V192).length,
     addedInputs: Object.keys(FRANCHISE_STAGES_NEW_INPUTS_V192).length,

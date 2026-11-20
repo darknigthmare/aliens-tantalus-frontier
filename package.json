@@ -89,7 +89,8 @@
     "test:trials:arbiter:v191": "node --test scripts/verify-xeno-arbiter-protocols-audit-v191.mjs scripts/verify-xeno-arbiter-integration-v191.mjs scripts/verify-xeno-arbiter-protocols-v191.mjs scripts/verify-xeno-trials-sprite-atlas-v191.mjs scripts/verify-xeno-trials-animation-coverage-v191.mjs scripts/verify-xeno-trials-runtime-animation-v191.mjs scripts/verify-xeno-arbiter-protocols-i18n-v191.mjs",
     "qa:trials:arbiter:v191": "python3 scripts/qa-xeno-arbiter-protocols-v191.py",
     "test:trials:franchise:stages:v192": "node --test scripts/verify-xeno-franchise-stages-audit-v192.mjs scripts/verify-xeno-trials-franchise-stages-v192.mjs scripts/verify-xeno-trials-franchise-stage-render-v192.mjs scripts/verify-xeno-trials-franchise-stage-ui-v192.mjs",
-    "qa:trials:franchise:stages:v192": "python3 scripts/qa-xeno-trials-franchise-stages-v192.py"
+    "qa:trials:franchise:stages:v192": "python3 scripts/qa-xeno-trials-franchise-stages-v192.py",
+    "test:trials:original:arenas:v193": "node --test scripts/verify-xeno-original-arenas-v193.mjs scripts/verify-xeno-original-arenas-audit-v193.mjs"
   },
   "engines": {
     "node": ">=22"

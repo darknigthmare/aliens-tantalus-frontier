@@ -116,7 +116,7 @@ test('a real assigned operation exposes only its required arena and rejects othe
 
 test('all fifty registered franchise locations appear through their native media filters and crop only the admitted plane', () => {
   const additions = stages.filter(stage => stage.stageRevision === 192), h = terminal();
-  assert.equal(additions.length, 50); assert.equal(stages.length, 100);
+  assert.equal(additions.length, 50);
   const seen = [];
   for (const kind of ['film', 'series', 'game', 'comic', 'novel']) {
     h.el('stage-media').value = kind; h.ui.stagePageV192 = 0; h.ui.stageSelectionV192 = h.ui.form.elements.stageId.value;

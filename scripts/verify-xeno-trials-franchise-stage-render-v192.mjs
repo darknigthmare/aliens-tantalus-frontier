@@ -21,9 +21,12 @@ const scenesSource = readFileSync(new URL('../src/xeno-trials-franchise-stage-sc
 const rendererSource = readFileSync(new URL('../src/xeno-trials-franchise-stage-render-v192.js', import.meta.url), 'utf8');
 const moduleUrl = source => `data:text/javascript;base64,${Buffer.from(source).toString('base64')}`;
 async function fixtureModules(data = fixtures) {
-  const source = scenesSource.replace("import { XENO_TRIALS_FRANCHISE_STAGES_V192 } from './xeno-trials-franchise-stages-v192.js';",
-    `const XENO_TRIALS_FRANCHISE_STAGES_V192 = ${JSON.stringify(data)};`);
-  assert.notEqual(source, scenesSource, 'Only the declared leaf data import is replaced.');
+  const source = scenesSource
+    .replace("import { XENO_TRIALS_FRANCHISE_STAGES_V192 } from './xeno-trials-franchise-stages-v192.js';",
+      `const XENO_TRIALS_FRANCHISE_STAGES_V192 = ${JSON.stringify(data)};`)
+    .replace("import { XENO_TRIALS_ORIGINAL_ARENAS_V193 } from './xeno-trials-original-arenas-v193.js';",
+      'const XENO_TRIALS_ORIGINAL_ARENAS_V193 = [];');
+  assert.notEqual(source, scenesSource, 'Only the declared stage data imports are replaced.');
   const url = moduleUrl(source), scene = await import(url);
   const render = await import(moduleUrl(rendererSource.replace("'./xeno-trials-franchise-stage-scenes-v192.js'", JSON.stringify(url))));
   return { ...scene, ...render };

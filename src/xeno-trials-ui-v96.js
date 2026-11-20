@@ -56,7 +56,7 @@ export function getXenoTrialsStagePageV192(stages, { media = 'all', page = 0, se
 /** A viewport, not an edited thumbnail: only the first admitted image plane
  * is visible, including atlases whose three bands have unequal integer heights. */
 export function getXenoTrialsStagePreviewCropV192(stage) {
-  const atlas = stage?.stageRevision === 192 && stage.atlasV192;
+  const atlas = (stage?.stageRevision === 192 || stage?.stageRevision === 193) && stage.atlasV192;
   if (!atlas || !Number.isInteger(atlas.width) || !Number.isInteger(atlas.height)
     || atlas.width <= 0 || atlas.height < 3) return null;
   const crop = atlas.sourceRects?.[0] || [0, 0, atlas.width, Math.floor(atlas.height / 3)];

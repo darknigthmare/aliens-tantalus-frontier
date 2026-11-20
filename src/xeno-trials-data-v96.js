@@ -16,6 +16,7 @@ import { createXenoTrialsDriveImportsV123 } from './enemy-drive-imports-v123.js'
 import { XENO_TRIALS_BOSS_STAGES_V179 } from './xeno-trials-boss-stages-v179.js';
 import { XENO_TRIALS_CORPORATE_STAGES_V190 } from './xeno-trials-stage-scenes-v190.js';
 import { XENO_TRIALS_FRANCHISE_STAGES_V192 } from './xeno-trials-franchise-stages-v192.js';
+import { XENO_TRIALS_ORIGINAL_ARENAS_V193 } from './xeno-trials-original-arenas-v193.js';
 
 const ADAPTATIONS_V112 = Object.freeze([...XENO_TRIALS_AFE2_V112, ...XENO_TRIALS_AUTOMATONS_V112]);
 const ADAPTATIONS_V113 = Object.freeze([...XENO_TRIALS_AFE2_V113, ...XENO_TRIALS_RECONSTRUCTIONS_V113]);
@@ -290,7 +291,8 @@ export const XENO_TRIALS_STAGES_V96 = Object.freeze([
   Object.freeze({ id: 'planet-surface', label: 'Surface planétaire simulée', background: '#1b2425', accent: '#b3d39b', floor: '#2d3431', backdrop: '/assets/openai/metroidvania/planet-exterior-far.png' }),
   ...XENO_TRIALS_BOSS_STAGES_V179,
   ...XENO_TRIALS_CORPORATE_STAGES_V190,
-  ...XENO_TRIALS_FRANCHISE_STAGES_V192
+  ...XENO_TRIALS_FRANCHISE_STAGES_V192,
+  ...XENO_TRIALS_ORIGINAL_ARENAS_V193
 ]);
 export const XENO_TRIALS_CONTROLS_V96 = Object.freeze({
   left: '← / Q / A', right: '→ / D', jump: '↑ / Z / W / Espace',

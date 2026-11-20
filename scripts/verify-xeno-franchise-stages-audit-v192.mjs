@@ -11,6 +11,7 @@ import { FRANCHISE_STAGES_BASELINE_V192 as baseline, FRANCHISE_STAGES_SUCCESSORS
   FRANCHISE_STAGES_HISTORICAL_DECLARATIONS_V192 as declarations, FRANCHISE_STAGES_LEGACY_CATALOG_V192 as legacy,
   reviewedFranchiseStagesDigestV192 as advance, franchiseStagesRuntimeSourcesV192 as runtime,
   verifyFranchiseStagesV192 as verify } from './audit-xeno-franchise-stages-v192.mjs';
+import { reviewedOriginalArenasDigestV193 as later } from './audit-xeno-original-arenas-v193.mjs';
 import { ARBITER_PROTOCOLS_SUCCESSORS_V191 as protocolSuccessors, ARBITER_PROTOCOLS_NEW_INPUTS_V191 as protocolInputs,
   ARBITER_PROTOCOLS_PRESERVED_PLATES_V191 as protocolPlates, verifyArbiterProtocolsV191 } from './audit-xeno-arbiter-protocols-v191.mjs';
 import { ARBITER_CAMPAIGN_SUCCESSORS_V190 as priorSuccessors, ARBITER_CAMPAIGN_NEW_INPUTS_V190 as priorInputs,
@@ -55,11 +56,11 @@ test('V192 succeeds the physical 0e98438 tree: each predecessor exists there and
   for (const [path, receipt] of Object.entries(successors)) {
     assert.ok(previousPaths.has(path), 'A successor must exist in the real baseline: ' + path);
     assert.equal(sha(readBaseline(path)), receipt.previousSha256, path);
-    assert.equal(sha(read(path)), receipt.currentSha256, path);
+    assert.equal(sha(read(path)), later(path, receipt.currentSha256), path);
   }
   for (const [path, receipt] of Object.entries(inputs)) {
     assert.equal(previousPaths.has(path), false, 'An added input must not exist in the real baseline: ' + path);
-    assert.equal(sha(read(path)), receipt.sha256, path);
+    assert.equal(sha(read(path)), later(path, receipt.sha256), path);
   }
   for (const [path, digest] of Object.entries(plates)) {
     assert.equal(sha(readBaseline(path)), digest, path);
@@ -108,11 +109,12 @@ test('the complete fifty-stage historical prefix and its admitted backdrop bytes
   assert.equal(old.length, legacy.count); assert.equal(legacy.count, 50);
   assert.deepEqual(old.map(stage => stage.id), legacy.stageIds);
   assert.equal(sha(canonical(old)), legacy.canonicalSha256, 'The baseline data receipt cannot be replaced by current source bytes.');
-  assert.equal(catalog.length, 100); assert.equal(new Set(catalog.map(stage => stage.id)).size, 100);
+  const catalogV192 = catalog.slice(0, 100);
+  assert.equal(catalogV192.length, 100); assert.equal(new Set(catalogV192.map(stage => stage.id)).size, 100);
   const currentPrefix = JSON.parse(JSON.stringify(catalog.slice(0, legacy.count)));
   assert.deepEqual(currentPrefix, old, 'All fifty historical stage objects and their order remain exact.');
   assert.equal(sha(canonical(currentPrefix)), legacy.canonicalSha256);
-  const newIds = catalog.slice(legacy.count).map(stage => stage.id);
+  const newIds = catalogV192.slice(legacy.count).map(stage => stage.id);
   assert.equal(newIds.length, 50); assert.ok(newIds.every(id => id.startsWith('xt192-') && !legacy.stageIds.includes(id)));
   // The three procedural base arenas have no backdrop. This comparison covers
   // the actual files named by the other old stage objects, not fifty journeys.
@@ -123,7 +125,7 @@ test('the complete fifty-stage historical prefix and its admitted backdrop bytes
 
 test('strict V192 transitions refuse invented, missing and already advanced predecessors; unknown paths gain no admission', () => {
   for (const [path, receipt] of Object.entries(successors)) {
-    assert.ok(Object.isFrozen(receipt)); assert.equal(advance(path, receipt.previousSha256), receipt.currentSha256, path);
+    assert.ok(Object.isFrozen(receipt)); assert.equal(advance(path, receipt.previousSha256), later(path, receipt.currentSha256), path);
     for (const bad of ['0'.repeat(64), null, undefined, receipt.currentSha256])
       assert.throws(() => advance(path, bad), /Incorrect V191 endpoint for V192/, path);
   }
@@ -145,21 +147,22 @@ test('the complete source chain keeps archival defaults and admits only the exac
   const { previous, current } = loadAuditSuccessionV163(read);
   assert.deepEqual(resolveAuditSourcesV163(previous, read), current.runtimeSourceSha256);
   const effective = resolveAuditSourcesV163(previous, read, { effective: true });
-  for (const [path, receipt] of Object.entries(successors).filter(([, r]) => r.kind === 'runtime')) assert.equal(effective[path], receipt.currentSha256, path);
+  for (const [path, receipt] of Object.entries(successors).filter(([, r]) => r.kind === 'runtime')) assert.equal(effective[path], later(path, receipt.currentSha256), path);
   const addedRuntime = Object.entries(inputs).filter(([, r]) => r.kind === 'runtime');
   assert.ok(addedRuntime.length >= 3, 'Catalog, scene and renderer runtime modules must be explicit inputs.');
-  for (const [path, receipt] of addedRuntime) assert.equal(effective[path], receipt.sha256, path);
+  for (const [path, receipt] of addedRuntime) assert.equal(effective[path], later(path, receipt.sha256), path);
   const frozen = Object.freeze({ original: 'historic' }), view = runtime(frozen);
   assert.deepEqual(frozen, { original: 'historic' }); assert.ok(Object.isFrozen(view)); assert.deepEqual(runtime(view), view);
   const first = Object.entries(successors).find(([, r]) => r.kind === 'runtime'); assert.ok(first);
   assert.throws(() => runtime({ [first[0]]: '0'.repeat(64) }), /Incorrect V192 runtime view predecessor/);
 });
 
-test('V192 is the exact terminal, pins its V191 relay and keeps tools, production records and mutable outcomes out of the game build', () => {
-  const terminal = 'scripts/audit-xeno-franchise-stages-v192.mjs', relay = 'scripts/audit-xeno-arbiter-protocols-v191.mjs';
+test('V192 relays to terminal V193, pins its V191 relay and keeps tools, production records and mutable outcomes out of the game build', () => {
+  const terminal = 'scripts/audit-xeno-original-arenas-v193.mjs', relay = 'scripts/audit-xeno-arbiter-protocols-v191.mjs';
   assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(read(terminal).toString()), false);
   assert.equal(Object.hasOwn(successors, terminal) || Object.hasOwn(inputs, terminal), false);
   assert.ok(successors[relay]); assert.match(read(relay).toString(), /from '\.\/audit-xeno-franchise-stages-v192\.mjs'/);
+  assert.match(read('scripts/audit-xeno-franchise-stages-v192.mjs').toString(), /from '\.\/audit-xeno-original-arenas-v193\.mjs'/);
   for (const path of [terminal, ...Object.keys(inputs)]) {
     assert.equal(isPublicDistributionPathV86(path), true, path);
     if (path.startsWith('scripts/') || path.startsWith('docs/')) assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);

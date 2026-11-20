@@ -1,3 +1,4 @@
+import { publicXenoOriginalArenaPathAdmissionV193, verifyXenoOriginalArenaAdmissionsV193 } from './public-xeno-original-arena-admissions-v193.mjs';
 import { publicXenoFranchiseStagePathAdmissionV192, verifyXenoFranchiseStageAdmissionsV192 } from './public-xeno-franchise-stage-admissions-v192.mjs';
 import { publicXenoSpritePathAdmissionV191, verifyXenoSpriteAdmissionsV191 } from './public-xeno-sprite-admissions-v191.mjs';
 import { publicArbiterPathAdmissionV190, verifyArbiterImageAdmissionsV190 } from './public-xeno-arbiter-admissions-v190.mjs';
@@ -698,10 +699,19 @@ const PRIVATE_TEXT = [
   /['"]V\d+_(?:BATCH_\d+|[A-Z_]*IMAGEGEN)/
 ];
 
+const XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193 = new Set([
+  'docs/forge/xeno-trials/V193-ORIGINAL-ARENAS.md',
+  'scripts/public-xeno-original-arena-admissions-v193.mjs',
+  'scripts/audit-xeno-original-arenas-v193.mjs',
+  'scripts/verify-xeno-original-arenas-audit-v193.mjs',
+  'scripts/verify-xeno-original-arenas-v193.mjs'
+]);
+
 // Pure checks are exported so adversarial cases can be verified without placing
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
+  if (XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193.has(path)) return !built;
   if (V179_SOURCE_ONLY_SCRIPTS.has(path)) return !built;
   if (XENO_COMPLETION_SOURCE_ONLY_V186.has(path)) return !built;
   if (XENO_OPERATIONS_SOURCE_ONLY_V188.has(path)) return !built;
@@ -714,6 +724,8 @@ export function isPublicDistributionPathV86(path, { directory = false, built = f
   if (segments.some(part => !part || part === '.' || part === '..' || PRIVATE_SEGMENT.test(part))) return false;
   const spriteAdmissionV191 = publicXenoSpritePathAdmissionV191(path, { directory });
   if (spriteAdmissionV191 !== null) return spriteAdmissionV191;
+  const originalArenaAdmissionV193 = publicXenoOriginalArenaPathAdmissionV193(path, { directory });
+  if (originalArenaAdmissionV193 !== null) return originalArenaAdmissionV193;
   const franchiseAdmissionV192 = publicXenoFranchiseStagePathAdmissionV192(path, { directory });
   if (franchiseAdmissionV192 !== null) return franchiseAdmissionV192;
   const arbiterAdmissionV190 = publicArbiterPathAdmissionV190(path, { directory });
@@ -800,6 +812,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   await verifyArbiterImageAdmissionsV190(root);
   await verifyXenoSpriteAdmissionsV191(root);
   await verifyXenoFranchiseStageAdmissionsV192(root);
+  await verifyXenoOriginalArenaAdmissionsV193(root);
   return { ok: true, version: RELEASE.version, files, assets, privateDocuments: 0 };
 }
 

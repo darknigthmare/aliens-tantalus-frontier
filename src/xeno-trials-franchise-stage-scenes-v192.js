@@ -1,6 +1,7 @@
 import { XENO_TRIALS_FRANCHISE_STAGES_V192 } from './xeno-trials-franchise-stages-v192.js';
+import { XENO_TRIALS_ORIGINAL_ARENAS_V193 } from './xeno-trials-original-arenas-v193.js';
 
-// These schedules only describe the recovered MIRE scenery. Their tick is
+// These schedules describe MIRE scenery. Their tick is
 // supplied by the existing match; they own no simulation, clock or collider.
 const freeze = value => { if (value && typeof value === 'object') { Object.values(value).forEach(freeze); Object.freeze(value); } return value; };
 const finite = (value, fallback) => Number.isFinite(value) ? value : fallback;
@@ -14,14 +15,15 @@ export const XENO_TRIALS_FRANCHISE_STAGE_EVENT_KINDS_V192 = Object.freeze([
   'snow-drift', 'searchlight-sweep', 'rail-transit', 'water-drip'
 ]);
 const allowedKinds = new Set(XENO_TRIALS_FRANCHISE_STAGE_EVENT_KINDS_V192);
-const stages = new Map(XENO_TRIALS_FRANCHISE_STAGES_V192.map(stage => [stage.id, stage]));
-const profiles = new Map(XENO_TRIALS_FRANCHISE_STAGES_V192.map((stage, index) => {
+const layeredStages = [...XENO_TRIALS_FRANCHISE_STAGES_V192, ...XENO_TRIALS_ORIGINAL_ARENAS_V193];
+const stages = new Map(layeredStages.map(stage => [stage.id, stage]));
+const profiles = new Map(layeredStages.map((stage, index) => {
   const config = stage.sceneV192 || {}, seed = Number.isSafeInteger(config.seed) && config.seed > 0 ? config.seed : index + 1;
   const anchors = [0, 1].map(n => clamp(finite(config.anchors?.[n], n ? .82 : .18), .08, .92));
   const kinds = [0, 1].map(n => allowedKinds.has(config.eventKinds?.[n]) ? config.eventKinds[n] : n ? 'archive-scan' : 'coolant-plume');
-  const profile = freeze({ stageId: stage.id, revision: 192, replacesArena: true,
+  const profile = freeze({ stageId: stage.id, revision: stage.stageRevision ?? 192, replacesArena: true,
     architecture: typeof config.architecture === 'string' ? config.architecture : 'enclosed-bay',
-    source: 'fifty-franchise-stage-atlases-v192', seed, accent: stage.accent, anchors,
+    source: stage.stageRevision === 193 ? 'original-tantalus-stage-atlases-v193' : 'fifty-franchise-stage-atlases-v192', seed, accent: stage.accent, anchors,
     fixtureParallax: .48 + seed % 3 * .025, eventParallax: .13 + seed % 4 * .018,
     foregroundParallax: 1.15 + seed % 3 * .02,
     events: kinds.map((kind, n) => ({ id: `${stage.id}-rear-${n + 1}`, kind,
@@ -65,7 +67,7 @@ export function getXenoTrialsFranchiseStageViewV192(stageId, camera = {}, tick =
   const reducedMotion = options.reducedMotion === true, phase = options.phase || 'active';
   const renderTick = clamp(Math.floor(finite(tick, 0)), 0, Number.MAX_SAFE_INTEGER), motionTick = reducedMotion ? 0 : renderTick;
   const floor = clamp(finite(camera.floor, 450), 180, 530), offset = clamp(finite(camera.center, 500), -1e9, 1e9) - 500;
-  return freeze({ stageId, revision: 192, replacesArena: true, architecture: profile.architecture,
+  return freeze({ stageId, revision: profile.revision, replacesArena: true, architecture: profile.architecture,
     renderTick, motionTick, reducedMotion, floor, fixtureOffsetX: -offset * profile.fixtureParallax,
     foregroundOffsetX: -offset * profile.foregroundParallax,
     rearClip: { x: 0, y: 0, width: 1000, height: floor },

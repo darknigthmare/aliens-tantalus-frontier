@@ -4,10 +4,15 @@
 // and Canvas 2D text. Unknown text is left in French. Nothing here touches the
 // save, game rules or identifiers; it only changes what is displayed.
 import { currentLanguageV185, LANGUAGE_EVENT_V185 } from './i18n-v185.js';
+import { XENO_TRIALS_ORIGINAL_ARENAS_V193 } from './xeno-trials-original-arenas-v193.js';
 
 const ATTRIBUTES = Object.freeze(['placeholder', 'aria-label', 'title', 'alt']);
 const SKIP_TAGS = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'CODE', 'PRE', 'NOSCRIPT']);
 const CACHE_LIMIT = 4000;
+const arenaLabels = new Map(XENO_TRIALS_ORIGINAL_ARENAS_V193.flatMap(({ label, labelEn }) => [
+  [label, labelEn],
+  [label.toUpperCase(), labelEn.toUpperCase()]
+]));
 
 // The English catalog (~600 kB) is loaded only when English is chosen, so a
 // French session downloads and parses nothing more.
@@ -66,7 +71,7 @@ function fromPatterns(text) {
 function translateWhole(text) {
   if (exact.has(text)) return exact.get(text);
   if (upper.has(text)) return upper.get(text);
-  return fromPatterns(text);
+  return arenaLabels.get(text) ?? fromPatterns(text);
 }
 
 // Messages are often joined: "ERREUR · A. B." Translate each known piece,

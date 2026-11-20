@@ -56,7 +56,7 @@ test('all eighty native protocol titles/descriptions and forty scene labels have
     assert.ok(!/vagues|spécimen|contacts simultanés|récupération|gardes|puis un/u.test(description), description);
     assert.ok(description.includes(String(protocol.bossFinaleV186?.hp || 35)));
   }
-  for (const stage of stages.slice(-40)) assert.equal(autoTranslateV185(stage.label), EN_CATALOG_V185[stage.label]);
+  for (const stage of stages.slice(60, 100)) assert.equal(autoTranslateV185(stage.label), EN_CATALOG_V185[stage.label]);
   assert.equal(JSON.stringify(protocols), before);
 }));
 
