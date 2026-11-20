@@ -20,6 +20,7 @@ import {
   reviewedOriginalArenasDigestV193 as advanceFromV192,
   verifyOriginalArenasV193 as verifyPrevious
 } from './audit-xeno-original-arenas-v193.mjs';
+import { reviewedStageClassificationDigestV195 as later } from './audit-xeno-stage-classification-v195.mjs';
 import { reviewedFranchiseStagesDigestV192 as advanceFromV191 } from './audit-xeno-franchise-stages-v192.mjs';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
@@ -48,7 +49,7 @@ test('V194 keeps the published V193 receipts and binds its successors to Git sou
   for (const [path, receipt] of Object.entries(successors)) {
     assert.ok(published.has(path), path);
     assert.equal(sha(git(['show', baseline + ':' + path])), receipt.previousSha256, path);
-    assert.equal(advance(path, receipt.previousSha256), receipt.currentSha256, path);
+    assert.equal(advance(path, receipt.previousSha256), later(path, receipt.currentSha256), path);
     for (const forged of [receipt.currentSha256, 'a'.repeat(64), null])
       assert.throws(() => advance(path, forged), /Incorrect V193 endpoint for V194/, path);
   }
@@ -71,10 +72,10 @@ test('the historical runtime chain advances from its original digest through the
   assert.ok(Object.isFrozen(reviewed));
   assert.deepEqual(runtimeRelay(reviewed), reviewed);
   for (const [path, receipt] of Object.entries(successors)) {
-    if (receipt.kind === 'runtime') assert.equal(reviewed[path], receipt.currentSha256, path);
+    if (receipt.kind === 'runtime') assert.equal(reviewed[path], later(path, receipt.currentSha256), path);
   }
   for (const [path, receipt] of Object.entries(inputs)) {
-    if (receipt.kind === 'runtime') assert.equal(reviewed[path], receipt.sha256, path);
+    if (receipt.kind === 'runtime') assert.equal(reviewed[path], later(path, receipt.sha256), path);
   }
   assert.throws(() => runtimeSources({ [path]: '0'.repeat(64) }), /Incorrect V194 runtime view predecessor/);
 });
@@ -106,7 +107,8 @@ test('the V194 audit and report are source-only and unrelated candidates stay ex
   const verifier = 'scripts/verify-xeno-iconic-stages-audit-v194.mjs';
   const report = 'docs/forge/xeno-trials/V194-ICONIC-STAGES.md';
   assert.match(read('scripts/audit-xeno-original-arenas-v193.mjs').toString(), /from '\.\/audit-xeno-iconic-stages-v194\.mjs'/);
-  assert.doesNotMatch(read(terminal).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  assert.match(read(terminal).toString(), /from '\.\/audit-xeno-stage-classification-v195\.mjs'/);
+  assert.doesNotMatch(read('scripts/audit-xeno-stage-classification-v195.mjs').toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
   for (const path of [terminal, verifier, report]) {
     assert.equal(isPublicDistributionPathV86(path), true, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);

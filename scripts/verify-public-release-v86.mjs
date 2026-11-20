@@ -700,6 +700,12 @@ const PRIVATE_TEXT = [
   /['"]V\d+_(?:BATCH_\d+|[A-Z_]*IMAGEGEN)/
 ];
 
+const XENO_STAGE_CLASSIFICATION_SOURCE_ONLY_V195 = new Set([
+  'docs/forge/xeno-trials/V195-STAGE-CLASSIFICATION.md',
+  'scripts/audit-xeno-stage-classification-v195.mjs',
+  'scripts/verify-xeno-stage-classification-audit-v195.mjs'
+]);
+
 const XENO_ICONIC_STAGE_SOURCE_ONLY_V194 = new Set([
   'docs/forge/xeno-trials/V194-ICONIC-STAGES.md',
   'scripts/public-xeno-iconic-stage-admissions-v194.mjs',
@@ -720,6 +726,7 @@ const XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193 = new Set([
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
+  if (XENO_STAGE_CLASSIFICATION_SOURCE_ONLY_V195.has(path)) return !built;
   if (XENO_ICONIC_STAGE_SOURCE_ONLY_V194.has(path)) return !built;
   if (XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193.has(path)) return !built;
   if (V179_SOURCE_ONLY_SCRIPTS.has(path)) return !built;

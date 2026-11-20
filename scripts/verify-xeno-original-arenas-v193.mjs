@@ -33,7 +33,7 @@ test('the twelve IDs append once and remain available in the Tantalus filter and
     const page = getXenoTrialsStagePageV192(catalog, {
       media: 'simulation', selectedId: arena.id, revealSelected: true
     });
-    assert.equal(page.total, 62);
+    assert.equal(page.total, 70);
     assert.ok(page.stages.includes(arena));
     const ticket = beginXenoTrialsV96(createXenoTrialsProgressV96(), { stageId: arena.id });
     assert.equal(ticket.applied, true);

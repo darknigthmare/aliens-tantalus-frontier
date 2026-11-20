@@ -91,7 +91,8 @@
     "test:trials:franchise:stages:v192": "node --test scripts/verify-xeno-franchise-stages-audit-v192.mjs scripts/verify-xeno-trials-franchise-stages-v192.mjs scripts/verify-xeno-trials-franchise-stage-render-v192.mjs scripts/verify-xeno-trials-franchise-stage-ui-v192.mjs",
     "qa:trials:franchise:stages:v192": "python3 scripts/qa-xeno-trials-franchise-stages-v192.py",
     "test:trials:original:arenas:v193": "node --test scripts/verify-xeno-original-arenas-v193.mjs scripts/verify-xeno-original-arenas-audit-v193.mjs",
-    "test:trials:iconic:stages:v194": "node --test scripts/verify-xeno-iconic-stages-v194.mjs scripts/verify-xeno-iconic-stages-audit-v194.mjs"
+    "test:trials:iconic:stages:v194": "node --test scripts/verify-xeno-iconic-stages-v194.mjs scripts/verify-xeno-iconic-stages-audit-v194.mjs",
+    "test:trials:stage:classification:v195": "node --test scripts/verify-xeno-stage-classification-audit-v195.mjs"
   },
   "engines": {
     "node": ">=22"

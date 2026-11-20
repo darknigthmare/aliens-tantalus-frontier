@@ -10,17 +10,21 @@ import { setLanguageV185 } from '../src/i18n-v185.js';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { verifyXenoIconicStageAdmissionsV194 } from './public-xeno-iconic-stage-admissions-v194.mjs';
 
-test('the eight film stages are selectable with exact ticket identities and the catalog retains its previous prefix', () => {
+test('the eight original adaptations are classified as simulations and keep their exact ticket identities', () => {
   assert.equal(stages.length, 8);
   assert.equal(catalog.length, 120);
   assert.equal(new Set(catalog.map(stage => stage.id)).size, 120);
   assert.deepEqual(catalog.slice(112), stages);
+  const films = catalog.filter(stage => stage.media === 'film');
+  assert.equal(films.length, 15);
+  const filmIds = new Set(films.map(stage => stage.id));
   for (const stage of stages) {
-    assert.equal(stage.media, 'film', stage.id);
+    assert.ok(!filmIds.has(stage.id), stage.id);
+    assert.equal(stage.media, 'simulation', stage.id);
     assert.equal(stage.stageRevision, 194);
     assert.equal(stage.canonExact, false);
-    const page = getXenoTrialsStagePageV192(catalog, { media: 'film', selectedId: stage.id, revealSelected: true });
-    assert.equal(page.total, 23);
+    const page = getXenoTrialsStagePageV192(catalog, { media: 'simulation', selectedId: stage.id, revealSelected: true });
+    assert.equal(page.total, 70);
     assert.ok(page.stages.includes(stage), stage.id);
     assert.deepEqual(getXenoTrialsStagePreviewCropV192(stage), stage.atlasV192.sourceRects[0], stage.id);
     const receipt = beginXenoTrialsV96(createXenoTrialsProgressV96(), { stageId: stage.id });
@@ -31,7 +35,7 @@ test('the eight film stages are selectable with exact ticket identities and the 
   }
 });
 
-test('the public release admits exactly sixteen distinct verified film stage textures', async () => {
+test('the public release admits exactly sixteen distinct verified stage textures', async () => {
   const root = fileURLToPath(new URL('../', import.meta.url));
   const report = await verifyXenoIconicStageAdmissionsV194(root);
   assert.deepEqual([report.stages, report.textures, report.imagePlanes], [8, 16, 24]);

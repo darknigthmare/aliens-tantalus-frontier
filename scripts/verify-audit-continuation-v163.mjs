@@ -7,6 +7,7 @@ import { ARBITER_PROTOCOLS_SUCCESSORS_V191, ARBITER_PROTOCOLS_NEW_INPUTS_V191 } 
 import { FRANCHISE_STAGES_SUCCESSORS_V192, FRANCHISE_STAGES_NEW_INPUTS_V192 } from './audit-xeno-franchise-stages-v192.mjs';
 import { ORIGINAL_ARENAS_SUCCESSORS_V193, ORIGINAL_ARENAS_NEW_INPUTS_V193 } from './audit-xeno-original-arenas-v193.mjs';
 import { ICONIC_STAGES_SUCCESSORS_V194, ICONIC_STAGES_NEW_INPUTS_V194 } from './audit-xeno-iconic-stages-v194.mjs';
+import { STAGE_CLASSIFICATION_SUCCESSORS_V195, STAGE_CLASSIFICATION_NEW_INPUTS_V195 } from './audit-xeno-stage-classification-v195.mjs';
 import { reviewedOriginalNamesDigestV183 } from './audit-original-names-v183.mjs';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -688,7 +689,8 @@ test('V178 resolves only exact MainM successors while every V177 witness stays h
     ...ARBITER_PROTOCOLS_SUCCESSORS_V191, ...ARBITER_PROTOCOLS_NEW_INPUTS_V191,
     ...FRANCHISE_STAGES_SUCCESSORS_V192, ...FRANCHISE_STAGES_NEW_INPUTS_V192,
     ...ORIGINAL_ARENAS_SUCCESSORS_V193, ...ORIGINAL_ARENAS_NEW_INPUTS_V193,
-    ...ICONIC_STAGES_SUCCESSORS_V194, ...ICONIC_STAGES_NEW_INPUTS_V194
+    ...ICONIC_STAGES_SUCCESSORS_V194, ...ICONIC_STAGES_NEW_INPUTS_V194,
+    ...STAGE_CLASSIFICATION_SUCCESSORS_V195, ...STAGE_CLASSIFICATION_NEW_INPUTS_V195
   };
   const introducedRuntimePaths = [
     'src/tactical-reload-v77.js', 'src/weapon-actions-v130.js',

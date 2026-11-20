@@ -2,6 +2,8 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedStageClassificationDigestV195, stageClassificationRuntimeSourcesV195,
+  verifyStageClassificationV195 } from './audit-xeno-stage-classification-v195.mjs';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const readRepository = path => readFileSync(new URL('../' + path, import.meta.url));
@@ -236,28 +238,31 @@ export const ICONIC_STAGES_NEW_INPUTS_V194 = freezeReceipts({
 });
 
 export function reviewedIconicStagesDigestV194(path, endpointV193) {
-  if (!Object.hasOwn(ICONIC_STAGES_SUCCESSORS_V194, path)) return endpointV193;
+  if (!Object.hasOwn(ICONIC_STAGES_SUCCESSORS_V194, path)) return reviewedStageClassificationDigestV195(path, endpointV193);
   const receipt = ICONIC_STAGES_SUCCESSORS_V194[path];
   assert.equal(endpointV193, receipt.previousSha256, 'Incorrect V193 endpoint for V194: ' + path);
   assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256), 'Invalid V194 successor digest: ' + path);
   assert.notEqual(receipt.previousSha256, receipt.currentSha256, 'Unchanged V194 successor: ' + path);
-  return receipt.currentSha256;
+  return reviewedStageClassificationDigestV195(path, receipt.currentSha256);
 }
 
 export function iconicStagesRuntimeSourcesV194(historical) {
   const result = { ...historical };
   for (const [path, receipt] of Object.entries(ICONIC_STAGES_SUCCESSORS_V194)) {
     if (receipt.kind !== 'runtime') continue;
-    if (result[path] !== undefined && result[path] !== receipt.currentSha256)
-      assert.equal(result[path], receipt.previousSha256, 'Incorrect V194 runtime view predecessor: ' + path);
-    result[path] = receipt.currentSha256;
+    const current = reviewedStageClassificationDigestV195(path, receipt.currentSha256);
+    if (result[path] !== undefined)
+      assert.ok([receipt.previousSha256, receipt.currentSha256, current].includes(result[path]), 'Incorrect V194 runtime view predecessor: ' + path);
+    result[path] = current;
   }
   for (const [path, receipt] of Object.entries(ICONIC_STAGES_NEW_INPUTS_V194)) {
     if (receipt.kind !== 'runtime') continue;
-    if (result[path] !== undefined) assert.equal(result[path], receipt.sha256, 'Incorrect new V194 runtime digest: ' + path);
-    result[path] = receipt.sha256;
+    const current = reviewedStageClassificationDigestV195(path, receipt.sha256);
+    if (result[path] !== undefined)
+      assert.ok([receipt.sha256, current].includes(result[path]), 'Incorrect new V194 runtime digest: ' + path);
+    result[path] = current;
   }
-  return Object.freeze(result);
+  return stageClassificationRuntimeSourcesV195(result);
 }
 
 export function verifyIconicStagesV194(readSource = readRepository) {
@@ -276,7 +281,8 @@ export function verifyIconicStagesV194(readSource = readRepository) {
   for (const [path, receipt] of inputs) {
     assert.ok(safePath(path) && kinds.has(receipt.kind) && validHash(receipt.sha256), 'Invalid V194 source receipt: ' + path);
     assert.deepEqual(Object.keys(receipt).sort(), ['kind', 'sha256']);
-    assert.equal(sha(readSource(path)), receipt.sha256, 'Unreviewed V194 added-input bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedStageClassificationDigestV195(path, receipt.sha256),
+      'Unreviewed V194 added-input bytes: ' + path);
   }
   for (const [path, receipt] of Object.entries(ICONIC_STAGES_HISTORICAL_DECLARATIONS_V194)) {
     const source = readSource(path).toString();
@@ -285,6 +291,7 @@ export function verifyIconicStagesV194(readSource = readRepository) {
     assert.ok(start >= 0 && end > start, 'Missing historical declaration anchors: ' + path);
     assert.equal(sha(source.slice(start, end)), receipt.sha256, 'Historical receipt declarations changed: ' + path);
   }
+  verifyStageClassificationV195(readSource);
   return Object.freeze({
     baselineCommit: ICONIC_STAGES_BASELINE_V194,
     successors: successors.length,
