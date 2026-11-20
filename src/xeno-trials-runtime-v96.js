@@ -37,7 +37,7 @@ import { drawXenoTrialsOperationV188, getXenoTrialsOperationHudV188 } from './xe
 import { drawXenoTrialsStageHazardsV188 } from './xeno-trials-stage-hazards-render-v188.js';
 import { createXenoTrialsAudioV189 } from './xeno-trials-audio-v189.js';
 import { getXenoTrialsSpriteAtlasV189, drawXenoTrialsSpriteAtlasV189, requestXenoTrialsSpriteAtlasV189, getXenoTrialsSpriteEnvelopeV189 } from './xeno-trials-sprite-atlas-v189.js';
-import { getXenoTrialsRuntimeSpriteAtlas, drawXenoTrialsSpriteAtlasV191, requestXenoTrialsSpriteAtlasV191, getXenoTrialsSpriteEnvelopeV191 } from './xeno-trials-sprite-atlas-v191.js';
+import { getXenoTrialsRuntimeSpriteAtlas, getXenoTrialsSpriteAtlasV197, drawXenoTrialsSpriteAtlasV191, requestXenoTrialsSpriteAtlasV191, getXenoTrialsSpriteEnvelopeV191 } from './xeno-trials-sprite-atlas-v191.js';
 import { drawXenoTrialsSpriteAtlasV188, requestXenoTrialsSpriteAtlasV188, getXenoTrialsSpriteEnvelopeV188 } from './xeno-trials-sprite-atlas-v188.js';
 import { getXenoTrialsStageHazardViewV188 } from './xeno-trials-stage-hazards-v188.js';
 
@@ -334,10 +334,17 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     const reactionCue = preparedReaction || (hordeProtocol && match.result && fighter.hp <= 0 ? { state: 'ko', progress: 1 } : null) || reactions(match, fighter, {
       blocked: reactionBlocked,
       spec: fighter.attack && getXenoTrialsAttackV147(definition, fighter.attack.kind, XENO_TRIALS_ATTACKS_V96[fighter.attack.kind]) });
-    const drawnSpriteV191 = !reactionBlocked && drawXenoTrialsSpriteAtlasV191(context, fighter, art, images,
-      { includeV197: true, tick: match.tick, cue: reactionCue, moving, distance: swarmView?.distance || 0, timeSeconds,
+    // A dual-admitted pilot can finish the visual fall on his drawn ground
+    // key. The mesh remains the fallback until the optional texture loads.
+    const settledOnAtlas = pilotPose?.contactV197?.phase === 'settled' && outroV155?.phase === 'complete'
+      && getXenoTrialsSpriteAtlasV197(fighter, art);
+    const drawnSpriteV191 = (!reactionBlocked || settledOnAtlas) && drawXenoTrialsSpriteAtlasV191(context,
+      settledOnAtlas ? { ...fighter, y: 0 } : fighter, art, images,
+      { includeV197: true, tick: match.tick, cue: settledOnAtlas ? { state: 'ko', progress: 1 } : reactionCue,
+        moving, distance: swarmView?.distance || 0, timeSeconds,
         spec: fighter.attack && getXenoTrialsAttackV147(definition, fighter.attack.kind, XENO_TRIALS_ATTACKS_V96[fighter.attack.kind]),
-        metrics: { width, height, pivotX, bottom, sourceFacing }, x: drawX, y: ground, facing: drawFacing, reducedMotion });
+        metrics: { width, height, pivotX, bottom, sourceFacing }, x: drawX,
+        y: settledOnAtlas ? XENO_TRIALS_ARENA_V96.floor : ground, facing: drawFacing, reducedMotion });
     const drawnSpriteV189 = !drawnSpriteV191 && !reactionBlocked && drawXenoTrialsSpriteAtlasV189(context, fighter, art, images,
       { cue: reactionCue, moving, distance: swarmView?.distance || 0, timeSeconds,
         spec: fighter.attack && getXenoTrialsAttackV147(definition, fighter.attack.kind, XENO_TRIALS_ATTACKS_V96[fighter.attack.kind]),
@@ -361,7 +368,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       ...(!drawnSpriteV191&&pose?.preparationV163?{preparationV163:{...pose.preparationV163}}:{}),
       ...(exitView?{exitV157:{...exitView,stepped:rigDrawn?.clip==='spatial-exit-v157',pose:pose?.exitPoseV157||null}}:{}),
       ...(pose?.sequenceIdV155 ? {sequenceIdV155:pose.sequenceIdV155,beatV155:pose.beatV155,animation:pose.animation,...(pose.sequenceIdV156?{sequenceIdV156:pose.sequenceIdV156}:{})} : {}),
-      ...(pilotPose?.sequenceIdV197 ? { sequenceIdV197: pilotPose.sequenceIdV197, beatV197: pilotPose.beatV197,
+      ...(!drawnSpriteV191 && pilotPose?.sequenceIdV197 ? { sequenceIdV197: pilotPose.sequenceIdV197, beatV197: pilotPose.beatV197,
         terminalModeV197: pilotPose.terminalModeV197, contactV197: pilotPose.contactV197 } : {}) });
     const attackDrawn = !rigDrawn && canShowAttack && drawEnemyImportAttackV109(context, art, images, {
       attack: fighter.attack, spec: getXenoTrialsAttackV147(definition, fighter.attack?.kind, XENO_TRIALS_ATTACKS_V96[fighter.attack?.kind]), reducedMotion,

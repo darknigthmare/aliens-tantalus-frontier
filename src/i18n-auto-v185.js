@@ -6,6 +6,7 @@
 import { currentLanguageV185, LANGUAGE_EVENT_V185 } from './i18n-v185.js';
 import { XENO_TRIALS_ORIGINAL_ARENAS_V193 } from './xeno-trials-original-arenas-v193.js';
 import { XENO_TRIALS_REFERENCED_STAGES_V196 } from './xeno-trials-referenced-stages-v196.js';
+import { XENO_TRIALS_PRIORITY_STAGES_V198 } from './xeno-trials-priority-stages-v198.js';
 import { XENO_TRIALS_ICONIC_STAGES_V194 } from './xeno-trials-iconic-stages-v194.js';
 
 const ATTRIBUTES = Object.freeze(['placeholder', 'aria-label', 'title', 'alt']);
@@ -14,7 +15,8 @@ const CACHE_LIMIT = 4000;
 const arenaLabels = new Map([
   ...XENO_TRIALS_ORIGINAL_ARENAS_V193,
   ...XENO_TRIALS_ICONIC_STAGES_V194,
-  ...XENO_TRIALS_REFERENCED_STAGES_V196
+  ...XENO_TRIALS_REFERENCED_STAGES_V196,
+  ...XENO_TRIALS_PRIORITY_STAGES_V198
 ].flatMap(({ label, labelEn }) => [
   [label, labelEn],
   [label.toUpperCase(), labelEn.toUpperCase()]

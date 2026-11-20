@@ -1,3 +1,4 @@
+import { publicXenoPriorityStagePathAdmissionV198, PUBLIC_PRIORITY_STAGE_DIRECTORY_V198 } from './public-xeno-priority-stage-admissions-v198.mjs';
 import { publicXenoSpritePathAdmissionV197, PUBLIC_XENO_SPRITE_DIRECTORY_V197 } from './public-xeno-sprite-admissions-v197.mjs';
 import { publicXenoReferencedStagePathAdmissionV196, PUBLIC_REFERENCED_STAGE_DIRECTORY_V196 } from './public-xeno-referenced-stage-admissions-v196.mjs';
 import { publicXenoIconicStagePathAdmissionV194, PUBLIC_ICONIC_STAGE_DIRECTORY_V194 } from './public-xeno-iconic-stage-admissions-v194.mjs';
@@ -245,6 +246,8 @@ export function createBuildAssetFilter(projectRoot, {
     // fs.cp also visits the source root (relative path ''). This is a container,
     // not a distributable filename; descend before applying file-path rules.
     if (sourcePath === '') return true;
+    const priorityStageAdmissionV198 = publicXenoPriorityStagePathAdmissionV198(sourcePath, { directory: sourcePath === PUBLIC_PRIORITY_STAGE_DIRECTORY_V198 });
+    if (priorityStageAdmissionV198 !== null) return priorityStageAdmissionV198;
     const referencedStageAdmissionV196 = publicXenoReferencedStagePathAdmissionV196(sourcePath, { directory: sourcePath === PUBLIC_REFERENCED_STAGE_DIRECTORY_V196 });
     if (referencedStageAdmissionV196 !== null) return referencedStageAdmissionV196;
     const iconicStageAdmissionV194 = publicXenoIconicStagePathAdmissionV194(sourcePath, { directory: sourcePath === PUBLIC_ICONIC_STAGE_DIRECTORY_V194 });

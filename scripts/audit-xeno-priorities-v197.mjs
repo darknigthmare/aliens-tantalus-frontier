@@ -2,6 +2,8 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedXenoPriorityStagesDigestV198, verifyXenoPriorityStagesV198,
+  xenoPriorityStagesRuntimeSourcesV198 } from './audit-xeno-priority-stages-v198.mjs';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const readRepository = path => readFileSync(new URL('../' + path, import.meta.url));
@@ -216,29 +218,32 @@ export const XENO_PRIORITIES_NEW_INPUTS_V197 = freezeReceipts({
 });
 
 export function reviewedXenoPrioritiesDigestV197(path, endpointV196) {
-  if (!Object.hasOwn(XENO_PRIORITIES_SUCCESSORS_V197, path)) return endpointV196;
+  if (!Object.hasOwn(XENO_PRIORITIES_SUCCESSORS_V197, path)) return reviewedXenoPriorityStagesDigestV198(path, endpointV196);
   const receipt = XENO_PRIORITIES_SUCCESSORS_V197[path];
   assert.equal(endpointV196, receipt.previousSha256, 'Incorrect V196 endpoint for V197: ' + path);
   assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256), 'Invalid V197 successor digest: ' + path);
   assert.notEqual(receipt.previousSha256, receipt.currentSha256, 'Unchanged V197 successor: ' + path);
-  return receipt.currentSha256;
+  return reviewedXenoPriorityStagesDigestV198(path, receipt.currentSha256);
 }
 
 export function xenoPrioritiesRuntimeSourcesV197(historical) {
   const result = { ...historical };
   for (const [path, receipt] of Object.entries(XENO_PRIORITIES_SUCCESSORS_V197)) {
     if (receipt.kind !== 'runtime') continue;
-    if (result[path] !== undefined && result[path] !== receipt.currentSha256)
-      assert.equal(result[path], receipt.previousSha256, 'Incorrect V197 runtime view predecessor: ' + path);
-    result[path] = receipt.currentSha256;
+    const current = reviewedXenoPriorityStagesDigestV198(path, receipt.currentSha256);
+    if (result[path] !== undefined)
+      assert.ok([receipt.previousSha256, receipt.currentSha256, current].includes(result[path]),
+        'Incorrect V197 runtime view predecessor: ' + path);
+    result[path] = current;
   }
   for (const [path, receipt] of Object.entries(XENO_PRIORITIES_NEW_INPUTS_V197)) {
     if (receipt.kind !== 'runtime') continue;
+    const current = reviewedXenoPriorityStagesDigestV198(path, receipt.sha256);
     if (result[path] !== undefined)
-      assert.equal(result[path], receipt.sha256, 'Incorrect new V197 runtime digest: ' + path);
-    result[path] = receipt.sha256;
+      assert.ok([receipt.sha256, current].includes(result[path]), 'Incorrect new V197 runtime digest: ' + path);
+    result[path] = current;
   }
-  return Object.freeze(result);
+  return xenoPriorityStagesRuntimeSourcesV198(result);
 }
 
 export function verifyXenoPrioritiesV197(readSource = readRepository) {
@@ -258,7 +263,7 @@ export function verifyXenoPrioritiesV197(readSource = readRepository) {
   for (const [path, receipt] of inputs) {
     assert.ok(safePath(path) && kinds.has(receipt.kind) && validHash(receipt.sha256), 'Invalid V197 source receipt: ' + path);
     assert.deepEqual(Object.keys(receipt).sort(), ['kind', 'sha256']);
-    assert.equal(sha(readSource(path)), receipt.sha256, 'Unreviewed V197 added-input bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedXenoPriorityStagesDigestV198(path, receipt.sha256), 'Unreviewed V197 added-input bytes: ' + path);
   }
   for (const [path, receipt] of Object.entries(XENO_PRIORITIES_HISTORICAL_DECLARATIONS_V197)) {
     const source = readSource(path).toString();
@@ -267,6 +272,7 @@ export function verifyXenoPrioritiesV197(readSource = readRepository) {
     assert.ok(start >= 0 && end > start, 'Missing historical declaration anchors: ' + path);
     assert.equal(sha(source.slice(start, end)), receipt.sha256, 'Historical receipt declarations changed: ' + path);
   }
+  verifyXenoPriorityStagesV198(readSource);
   return Object.freeze({
     baselineCommit: XENO_PRIORITIES_BASELINE_V197,
     successors: successors.length,

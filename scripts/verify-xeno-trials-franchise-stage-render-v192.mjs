@@ -29,7 +29,9 @@ async function fixtureModules(data = fixtures, iconicData = [], referencedData =
     .replace("import { XENO_TRIALS_ICONIC_STAGES_V194 } from './xeno-trials-iconic-stages-v194.js';",
       `const XENO_TRIALS_ICONIC_STAGES_V194 = ${JSON.stringify(iconicData)};`)
     .replace("import { XENO_TRIALS_REFERENCED_STAGES_V196 } from './xeno-trials-referenced-stages-v196.js';",
-      `const XENO_TRIALS_REFERENCED_STAGES_V196 = ${JSON.stringify(referencedData)};`);
+      `const XENO_TRIALS_REFERENCED_STAGES_V196 = ${JSON.stringify(referencedData)};`)
+    .replace("import { XENO_TRIALS_PRIORITY_STAGES_V198 } from './xeno-trials-priority-stages-v198.js';",
+      'const XENO_TRIALS_PRIORITY_STAGES_V198 = [];');
   assert.notEqual(source, scenesSource, 'Only the declared stage data imports are replaced.');
   const url = moduleUrl(source), scene = await import(url);
   const render = await import(moduleUrl(rendererSource.replace("'./xeno-trials-franchise-stage-scenes-v192.js'", JSON.stringify(url))));

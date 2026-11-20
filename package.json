@@ -94,7 +94,8 @@
     "test:trials:iconic:stages:v194": "node --test scripts/verify-xeno-iconic-stages-v194.mjs scripts/verify-xeno-iconic-stages-audit-v194.mjs",
     "test:trials:stage:classification:v195": "node --test scripts/verify-xeno-stage-classification-audit-v195.mjs",
     "test:trials:referenced:stages:v196": "node --test scripts/verify-xeno-referenced-film-stages-v196.mjs scripts/verify-xeno-referenced-film-stages-audit-v196.mjs",
-    "test:trials:priorities:v197": "node --test scripts/verify-xeno-trials-priorities-v197.mjs scripts/verify-xeno-trials-duel-checkpoint-v197.mjs scripts/verify-xeno-trials-pilot-sequences-v197.mjs scripts/verify-xeno-trials-rig-v197.mjs scripts/verify-xeno-priorities-audit-v197.mjs"
+    "test:trials:priorities:v197": "node --test scripts/verify-xeno-trials-priorities-v197.mjs scripts/verify-xeno-trials-duel-checkpoint-v197.mjs scripts/verify-xeno-trials-pilot-sequences-v197.mjs scripts/verify-xeno-trials-rig-v197.mjs scripts/verify-xeno-priorities-audit-v197.mjs",
+    "test:trials:priorities:stages:v198": "node --test scripts/verify-xeno-priority-stages-v198.mjs scripts/verify-xeno-priority-stages-audit-v198.mjs"
   },
   "engines": {
     "node": ">=22"

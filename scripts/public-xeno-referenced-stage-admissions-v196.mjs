@@ -25,15 +25,16 @@ async function verifyTexture(root, path, metadata, requireAlpha) {
   return bytes.length;
 }
 
-export async function verifyXenoReferencedStageAdmissionsV196(root) {
-  assert.equal(stages.length, 6);
-  assert.equal(assets.size, 12);
-  assert.equal(new Set(stages.map(stage => stage.id)).size, 6);
+export async function verifyXenoIndependentStageAdmissions(root, stages, { directory, prefix, count }) {
+  const textures = new Set(stages.flatMap(stage => [stage.backdrop, stage.propsV194.path]));
+  assert.equal(stages.length, count);
+  assert.equal(textures.size, count * 2);
+  assert.equal(new Set(stages.map(stage => stage.id)).size, count);
   const digests = new Set();
   let bytes = 0;
   for (const stage of stages) {
-    assert.match(stage.id, /^xt196-[a-z0-9-]+$/);
-    const stem = PUBLIC_REFERENCED_STAGE_DIRECTORY_V196 + '/' + stage.id.slice('xt196-'.length);
+    assert.ok(stage.id.startsWith(prefix) && /^[a-z0-9-]+$/.test(stage.id.slice(prefix.length)), stage.id);
+    const stem = directory + '/' + stage.id.slice(prefix.length);
     const base = stage.atlasV192, props = stage.propsV194;
     assert.equal(stage.backdrop, '/' + stem + '-base.png');
     assert.equal(props.path, '/' + stem + '-props.png');
@@ -50,6 +51,11 @@ export async function verifyXenoReferencedStageAdmissionsV196(root) {
     }
     assert.deepEqual(props.rect, [0, 0, props.width, props.height]);
   }
-  assert.equal(digests.size, 12);
-  return { stages: stages.length, textures: assets.size, imagePlanes: stages.length * 3, bytes };
+  assert.equal(digests.size, count * 2);
+  return { stages: stages.length, textures: textures.size, imagePlanes: stages.length * 3, bytes };
+}
+
+export function verifyXenoReferencedStageAdmissionsV196(root) {
+  return verifyXenoIndependentStageAdmissions(root, stages, { directory: PUBLIC_REFERENCED_STAGE_DIRECTORY_V196,
+    prefix: 'xt196-', count: 6 });
 }

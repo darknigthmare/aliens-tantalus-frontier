@@ -2,6 +2,7 @@ import { XENO_TRIALS_FRANCHISE_STAGES_V192 } from './xeno-trials-franchise-stage
 import { XENO_TRIALS_ORIGINAL_ARENAS_V193 } from './xeno-trials-original-arenas-v193.js';
 import { XENO_TRIALS_ICONIC_STAGES_V194 } from './xeno-trials-iconic-stages-v194.js';
 import { XENO_TRIALS_REFERENCED_STAGES_V196 } from './xeno-trials-referenced-stages-v196.js';
+import { XENO_TRIALS_PRIORITY_STAGES_V198 } from './xeno-trials-priority-stages-v198.js';
 
 // These schedules describe MIRE scenery. Their tick is
 // supplied by the existing match; they own no simulation, clock or collider.
@@ -21,14 +22,16 @@ const stageSources = Object.freeze({
   192: 'fifty-franchise-stage-atlases-v192',
   193: 'original-tantalus-stage-atlases-v193',
   194: 'iconic-stage-compositions-v194',
-  196: 'referenced-film-stage-compositions-v196'
+  196: 'referenced-film-stage-compositions-v196',
+  198: 'priority-stage-compositions-v198'
 });
-export const usesXenoTrialsIndependentProps = revision => revision === 194 || revision === 196;
+export const usesXenoTrialsIndependentProps = revision => revision === 194 || revision === 196 || revision === 198;
 const layeredStages = [
   ...XENO_TRIALS_FRANCHISE_STAGES_V192,
   ...XENO_TRIALS_ORIGINAL_ARENAS_V193,
   ...XENO_TRIALS_ICONIC_STAGES_V194,
-  ...XENO_TRIALS_REFERENCED_STAGES_V196
+  ...XENO_TRIALS_REFERENCED_STAGES_V196,
+  ...XENO_TRIALS_PRIORITY_STAGES_V198
 ];
 const stages = new Map(layeredStages.map(stage => [stage.id, stage]));
 const profiles = new Map(layeredStages.map((stage, index) => {
@@ -80,7 +83,7 @@ function makePlane(id, [sx, sy, sw, sh], path, hash, parallax, opacity) {
     plane: id === 'foreground' ? 'below-feet' : 'behind-fighters', path, expectedSourceSha256: hash });
 }
 
-/** V192/V193 use three crops from a single atlas. V194/V196 admit two base
+/** V192/V193 use three crops from a single atlas. V194/V196/V198 admit two base
  * crops and an independent transparent prop plate. Each decoded texture must
  * match the registered dimensions. SHA-256 describes the registered source. */
 export function getXenoTrialsFranchiseStageAtlasPlanesV192(stageId, image, propsImage) {

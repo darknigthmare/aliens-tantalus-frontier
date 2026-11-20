@@ -37,7 +37,7 @@ function paintAtlas(ctx, stage, images, camera, front, renderTick, drawBehindPro
   for (const plane of planes) {
     if ((plane.plane === 'below-feet') !== front) continue;
     const layout = getXenoTrialsFranchiseStageAtlasLayoutV192(plane, camera, {
-      mirrorForeground: front && admitted.stageRevision === 196
+      mirrorForeground: front && (admitted.stageRevision === 196 || admitted.stageRevision === 198)
     });
     if (!layout) continue;
     if (plane.separateProps && drawBehindProps) {

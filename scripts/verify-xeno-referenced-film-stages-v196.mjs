@@ -18,15 +18,16 @@ test('all six film settings can be selected, previewed and restored from saved t
     'xt196-nostromo-bridge', 'xt196-nostromo-infirmary', 'xt196-hadleys-hope-operations',
     'xt196-fiorina-evac-shore', 'xt196-bouvet-pyramid-entrance', 'xt196-renaissance-laboratory'
   ]);
-  assert.equal(catalog.length, 126);
-  assert.equal(new Set(catalog.map(({ id }) => id)).size, catalog.length);
-  assert.deepEqual(catalog.slice(120), stages);
+  const historical = catalog.slice(0, 126);
+  assert.equal(historical.length, 126);
+  assert.equal(new Set(historical.map(({ id }) => id)).size, historical.length);
+  assert.deepEqual(historical.slice(120), stages);
   assert.equal(getXenoTrialsStagePageV192(catalog, { media: 'simulation' }).total, 70);
   for (const stage of stages) {
     assert.equal(stage.media, 'film', stage.id);
     assert.equal(stage.stageRevision, 196, stage.id);
     assert.equal(stage.canonExact, false, stage.id);
-    const page = getXenoTrialsStagePageV192(catalog, { media: 'film', selectedId: stage.id, revealSelected: true });
+    const page = getXenoTrialsStagePageV192(historical, { media: 'film', selectedId: stage.id, revealSelected: true });
     assert.equal(page.total, 21, stage.id);
     assert.ok(page.selectedVisible && page.stages.includes(stage), stage.id);
     assert.deepEqual(getXenoTrialsStagePreviewCropV192(stage), stage.atlasV192.sourceRects[0], stage.id);
