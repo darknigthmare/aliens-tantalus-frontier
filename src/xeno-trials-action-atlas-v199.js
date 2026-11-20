@@ -1,4 +1,5 @@
 import { XENO_TRIALS_ACTION_DATA_V199 } from './xeno-trials-action-data-v199.js';
+import { XENO_TRIALS_SUPER_DATA_V200 } from './xeno-trials-super-data-v200.js';
 import { getXenoTrialsArtV96, getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
 import { XENO_TRIALS_SPRITE_REFERENCES_V188 } from './xeno-trials-sprite-atlas-v188.js';
 import { getXenoTrialsSuperV148 } from './xeno-trials-supers-v148.js';
@@ -18,10 +19,18 @@ export const XENO_TRIALS_ACTION_FRAME_IDS_V199 = freeze({
   super: superKeys.flatMap(phase => [0, 1].map(key => `super-${phase}-${key}`))
 });
 
-function createAtlas(data) {
+const extraSuperFrames = freeze({
+  'warden-acid-barrage': XENO_TRIALS_ACTION_FRAME_IDS_V199.super,
+  'exploder-terminal-burst': XENO_TRIALS_ACTION_FRAME_IDS_V199.super.slice(0, 4),
+  'harbinger-committed-leap': ['super-windup-0', 'super-windup-1',
+    'super-active-free', 'super-active-ground', 'super-recovery-0', 'super-recovery-1']
+});
+
+function createAtlas(data, revision) {
   const { fighterId, profileId, kind, sourcePose, texture, frames } = data;
-  const fail = detail => { throw new Error(`Invalid Trials action atlas V199 (${fighterId}): ${detail}`); };
+  const fail = detail => { throw new Error(`Invalid Trials action atlas V${revision} (${fighterId}): ${detail}`); };
   const fighter = getXenoTrialsFighterV96(fighterId), art = getXenoTrialsArtV96(fighterId);
+  if (revision === 200 && (kind !== 'super' || !Object.hasOwn(extraSuperFrames, data.superId))) fail('V200 super plan');
   const isAir = kind === 'air-combat', superSpec = getXenoTrialsSuperV148(fighter);
   const refs = XENO_TRIALS_SPRITE_REFERENCES_V188[fighterId];
   const sourceHash = art?.sha256 ?? refs?.sha256, sourceBounds = art?.alphaBounds ?? refs?.alphaBounds;
@@ -34,12 +43,12 @@ function createAtlas(data) {
     || !sourceBounds.every((coordinate, index) => coordinate === sourcePose.alphaBounds[index])) fail('source plate');
   if (!data.provenance?.generation || !data.provenance?.reference || !Number.isFinite(data.lowAlphaMassFraction)
     || data.lowAlphaMassFraction < 0 || data.lowAlphaMassFraction >= .008) fail('review and alpha evidence');
-  if (!texture || texture.path !== `/assets/openai/sprites/xeno-trials-v199/${fighterId}-${kind}-sheet.png`
+  if (!texture || texture.path !== `/assets/openai/sprites/xeno-trials-v${revision}/${fighterId}-${kind}-sheet.png`
     || !hash(texture.sha256) || ![texture.width, texture.height].every(n => Number.isInteger(n) && n > 0 && n <= 8192)
     || texture.width * texture.height > 16777216 || texture.facing !== 1 || !positive(data.referenceHeight)
     || data.referenceHeight > texture.height) fail('texture and size calibration');
 
-  const ids = XENO_TRIALS_ACTION_FRAME_IDS_V199[kind];
+  const ids = revision === 200 ? extraSuperFrames[data.superId] : XENO_TRIALS_ACTION_FRAME_IDS_V199[kind];
   if (!Array.isArray(frames) || frames.length !== ids.length) fail('frame count');
   for (const [index, frame] of frames.entries()) {
     if (frame?.id !== ids[index] || !tuple(frame.rect, 4) || !frame.rect.every(Number.isInteger)) fail('frame identity and rectangle');
@@ -49,27 +58,35 @@ function createAtlas(data) {
     if (!tuple(frame.alphaBounds, 4) || !frame.alphaBounds.every(Number.isInteger)) fail('silhouette');
     const [left, top, right, bottom] = frame.alphaBounds;
     if (left < 1 || top < 1 || right <= left || bottom <= top || right >= width || bottom >= height) fail('uncut silhouette');
+    const free = isAir || frame.id === 'super-active-free';
     if (!tuple(frame.anchor, 2) || frame.anchor[0] < 0 || frame.anchor[0] >= width
-      || frame.anchor[1] < (isAir ? bottom - data.referenceHeight * .2 : bottom - 1)
-      || frame.anchor[1] > (isAir ? height * 2 : bottom + 2)) fail('logical root');
+      || frame.anchor[1] < (free ? bottom - data.referenceHeight * .2 : bottom - 1)
+      || frame.anchor[1] > (free ? height * 2 : bottom + 2)) fail('logical root');
     const inside = point => tuple(point, 2) && point[0] >= left && point[0] < right && point[1] >= top && point[1] < bottom;
-    if (!Array.isArray(frame.supports) || frame.supportMode !== (isAir ? 'free' : 'grounded')) fail('support mode');
-    if (isAir) {
+    if (!Array.isArray(frame.supports) || frame.supportMode !== (free ? 'free' : 'grounded')) fail('support mode');
+    if (free) {
       if (!inside(frame.pelvis) || frame.anchor[0] !== frame.pelvis[0] || frame.supports.length
-        || frame.anchor[1] <= frame.pelvis[1] || Math.abs(frame.anchor[1] - frame.pelvis[1]
+        || frame.anchor[1] <= frame.pelvis[1] || isAir && Math.abs(frame.anchor[1] - frame.pelvis[1]
           - frames[0].anchor[1] + frames[0].pelvis[1]) > 1e-8) fail('airborne pelvis projection');
     } else if (!frame.supports.length || frame.supports.length > 4
       || frame.supports.some(point => !inside(point) || Math.abs(point[1] - frame.anchor[1]) > 4)) fail('grounded supports');
   }
-  return freeze({ ...data, movementCoverage: isAir ? 'six-airborne-attack-keys' : 'six-native-super-keys',
+  return freeze({ ...data, revision, movementCoverage: isAir ? 'six-airborne-attack-keys' : `${frames.length}-native-super-keys`,
     primaryAction: isAir ? 'airborne-light-heavy' : superSpec.id });
 }
 
-export const XENO_TRIALS_ACTION_ATLASES_V199 = freeze(XENO_TRIALS_ACTION_DATA_V199.map(createAtlas));
-const admitted = new Map(XENO_TRIALS_ACTION_ATLASES_V199.map(atlas => [atlas.fighterId, atlas]));
-if (admitted.size !== XENO_TRIALS_ACTION_ATLASES_V199.length) throw new Error('Duplicate Trials action atlas identity V199');
+export const XENO_TRIALS_ACTION_ATLASES_V199 = freeze(XENO_TRIALS_ACTION_DATA_V199.map(data => createAtlas(data, 199)));
+export const XENO_TRIALS_SUPER_ATLASES_V200 = freeze(XENO_TRIALS_SUPER_DATA_V200.map(data => createAtlas(data, 200)));
+const registered = [...XENO_TRIALS_ACTION_ATLASES_V199, ...XENO_TRIALS_SUPER_ATLASES_V200];
+const admitted = new Map(registered.map(atlas => [atlas.fighterId, atlas]));
+if (admitted.size !== registered.length) throw new Error('Duplicate Trials action atlas identity');
 
 export function getXenoTrialsActionAtlasV199(fighter, art) {
+  const atlas = getXenoTrialsRuntimeActionAtlas(fighter, art);
+  return atlas?.revision === 199 ? atlas : null;
+}
+
+export function getXenoTrialsRuntimeActionAtlas(fighter, art) {
   const atlas = admitted.get(fighter?.id), source = atlas?.sourcePose;
   if (!atlas || fighter.profileId !== undefined && fighter.profileId !== atlas.profileId || art?.id !== atlas.profileId
     || art.path !== source.path || art.sourceWidth !== source.width || art.sourceHeight !== source.height
@@ -85,16 +102,25 @@ export function sampleXenoTrialsActionFrameV199(atlas, fighter, options = {}) {
     || ['hurt', 'guard-break', 'recover', 'ko'].includes(options.cue?.state)) return null;
   const attack = fighter.attack, isAir = atlas.kind === 'air-combat', spec = options.spec;
   if (!attack || (isAir ? fighter.y <= 0 || !['light', 'heavy'].includes(attack.kind) || spec?.groundedOnly
-    : fighter.y !== 0 || attack.kind !== 'super' || spec !== getXenoTrialsSuperV148(getXenoTrialsFighterV96(fighter.id))?.spec)
+    : attack.kind !== 'super' || spec !== getXenoTrialsSuperV148(getXenoTrialsFighterV96(fighter.id))?.spec)
     || ![spec?.startup, spec?.active, spec?.recovery].every(positive)
     || !Number.isFinite(attack.age) || attack.age < 0 || attack.age >= spec.startup + spec.active + spec.recovery) return null;
 
-  const ends = [spec.startup, spec.startup + spec.active];
+  // The Exploder is gone after its charge. The Harbinger's actual
+  // support state decides between the live leap and landing silhouettes.
+  const sacrificial = atlas.superId === 'exploder-terminal-burst';
+  const charge = sacrificial ? spec.chargeDuration : spec.active;
+  if (sacrificial && attack.age >= spec.startup + charge) return null;
+  const ends = [spec.startup, spec.startup + charge];
   const phaseIndex = attack.age < ends[0] ? 0 : attack.age < ends[1] ? 1 : 2;
-  const duration = [spec.startup, spec.active, spec.recovery][phaseIndex];
+  const duration = [spec.startup, charge, spec.recovery][phaseIndex];
   const phaseProgress = (attack.age - ([0, ...ends][phaseIndex])) / duration;
-  const index = isAir ? (attack.kind === 'heavy' ? 3 : 0) + phaseIndex
-    : phaseIndex * 2 + Number(!options.reducedMotion && phaseProgress >= .5);
-  return Object.freeze({ atlas, frame: atlas.frames[index], phase: ['windup', 'contact', 'recovery'][phaseIndex],
-    phaseProgress, renderKind: 'drawn-sprite-atlas-v199', reducedMotion: options.reducedMotion === true });
+  const leapPhase = atlas.superId === 'harbinger-committed-leap' && phaseIndex === 1 && attack.launchedV147;
+  if (!isAir && fighter.y > 0 && !leapPhase) return null;
+  const alternate = leapPhase ? fighter.y === 0 : !options.reducedMotion && phaseProgress >= .5;
+  const index = isAir ? (attack.kind === 'heavy' ? 3 : 0) + phaseIndex : phaseIndex * 2 + Number(alternate);
+  const frame = atlas.frames[index];
+  if ((frame.supportMode === 'free') !== (fighter.y > 0)) return null;
+  return Object.freeze({ atlas, frame, phase: ['windup', 'contact', 'recovery'][phaseIndex],
+    phaseProgress, renderKind: `drawn-sprite-atlas-v${atlas.revision}`, reducedMotion: options.reducedMotion === true });
 }

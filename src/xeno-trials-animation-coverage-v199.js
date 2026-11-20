@@ -1,22 +1,29 @@
 import { getXenoTrialsAnimationCoverageV197 } from './xeno-trials-animation-coverage-v197.js';
 import { getXenoTrialsArtV96, getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
 import { getXenoTrialsRigV199 } from './xeno-trials-rig-v154.js';
-import { getXenoTrialsActionAtlasV199 } from './xeno-trials-action-atlas-v199.js';
+import { getXenoTrialsActionAtlasV199, getXenoTrialsRuntimeActionAtlas } from './xeno-trials-action-atlas-v199.js';
 
-const cache = new Map();
+const historicalCache = new Map(), runtimeCache = new Map();
 
 export function getXenoTrialsAnimationCoverageV199(value) {
+  return getCoverage(value, getXenoTrialsActionAtlasV199, historicalCache);
+}
+export function getXenoTrialsRuntimeAnimationCoverage(value) {
+  return getCoverage(value, getXenoTrialsRuntimeActionAtlas, runtimeCache);
+}
+
+function getCoverage(value, getAtlas, cache) {
   const base = getXenoTrialsAnimationCoverageV197(value);
   if (!base) return null;
   if (cache.has(base.id)) return cache.get(base.id);
   const fighter = getXenoTrialsFighterV96(base.id), art = getXenoTrialsArtV96(base.id);
-  const atlas = getXenoTrialsActionAtlasV199(fighter, art), rig = getXenoTrialsRigV199(fighter, art);
+  const atlas = getAtlas(fighter, art), rig = getXenoTrialsRigV199(fighter, art);
   if (!atlas && !rig) return base;
   const states = { ...base.states };
 
-  function admit(action, id, path, renderKind, frameIds, limitations) {
+  function admit(action, id, path, renderKind, frameIds, limitations, revision = 199) {
     const previous = states[action];
-    const media = Object.freeze({ id, path, revision: 199, renderKind, frameIds: Object.freeze(frameIds) });
+    const media = Object.freeze({ id, path, revision, renderKind, frameIds: Object.freeze(frameIds) });
     const leading = previous?.renderKind === 'drawn' && renderKind === 'mesh' ? previous : media;
     states[action] = Object.freeze({ ...previous, supported: true, motionSupported: true,
       renderKind: leading.renderKind, frameIds: leading.frameIds,
@@ -29,7 +36,8 @@ export function getXenoTrialsAnimationCoverageV199(value) {
   }
   if (atlas?.kind === 'super') {
     admit('super', atlas.superId, atlas.texture.path, 'drawn', atlas.frames.map(frame => frame.id),
-      ['grounded-only', 'native-super-windows', 'two-keys-per-phase']);
+      [atlas.superId === 'harbinger-committed-leap' ? 'native-leap-and-landing' : 'grounded-only',
+        'native-super-windows', 'sampled-native-phases'], atlas.revision);
   }
   if (rig) {
     admit('presentation', rig.id, rig.path, 'mesh', ['intro', 'round-win', 'round-loss'], ['source-bound-mesh']);

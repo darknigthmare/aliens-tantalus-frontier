@@ -38,8 +38,8 @@ import { drawXenoTrialsStageHazardsV188 } from './xeno-trials-stage-hazards-rend
 import { createXenoTrialsAudioV189 } from './xeno-trials-audio-v189.js';
 import { getXenoTrialsSpriteAtlasV189, drawXenoTrialsSpriteAtlasV189, requestXenoTrialsSpriteAtlasV189, getXenoTrialsSpriteEnvelopeV189 } from './xeno-trials-sprite-atlas-v189.js';
 import { getXenoTrialsRuntimeSpriteAtlas, getXenoTrialsSpriteAtlasV197, drawXenoTrialsSpriteAtlasV191,
-  requestXenoTrialsSpriteAtlasV191, getXenoTrialsSpriteEnvelopeV191, drawXenoTrialsActionAtlasV199,
-  requestXenoTrialsActionAtlasV199, getXenoTrialsActionEnvelopeV199 } from './xeno-trials-sprite-atlas-v191.js';
+  requestXenoTrialsSpriteAtlasV191, getXenoTrialsSpriteEnvelopeV191, drawXenoTrialsRuntimeActionAtlas,
+  requestXenoTrialsRuntimeActionAtlas, getXenoTrialsActionEnvelope } from './xeno-trials-sprite-atlas-v191.js';
 import { drawXenoTrialsSpriteAtlasV188, requestXenoTrialsSpriteAtlasV188, getXenoTrialsSpriteEnvelopeV188 } from './xeno-trials-sprite-atlas-v188.js';
 import { getXenoTrialsStageHazardViewV188 } from './xeno-trials-stage-hazards-v188.js';
 
@@ -98,7 +98,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
         || getXenoTrialsSpriteEnvelopeV188(fighter, art, metrics);
       const kind = fighter.attack?.kind;
       const spec = kind && getXenoTrialsAttackV147(getXenoTrialsFighterV96(fighter.id), kind, XENO_TRIALS_ATTACKS_V96[kind]);
-      return getXenoTrialsActionEnvelopeV199(fighter, art, metrics, spec, previous);
+      return getXenoTrialsActionEnvelope(fighter, art, metrics, spec, previous);
     } });
   let cameraView = camera.getState(), frameDelta = 0;
   let presentation = restored ? { phase: 'active', elapsedMs: 0, round: match.round } : createXenoPresentationV97(), outroV155 = null, terminalV156 = null, tauntV156 = null, exitV157 = null, landingV157 = null;
@@ -359,7 +359,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     const settledOnAtlas = pilotPose?.contactV197?.phase === 'settled' && outroV155?.phase === 'complete'
       && getXenoTrialsSpriteAtlasV197(fighter, art);
     const drawnModernAtlas = (!reactionBlocked && match.phase === 'active'
-      && drawXenoTrialsActionAtlasV199(context, fighter, art, images, spriteOptions))
+      && drawXenoTrialsRuntimeActionAtlas(context, fighter, art, images, spriteOptions))
       || ((!reactionBlocked || settledOnAtlas) && drawXenoTrialsSpriteAtlasV191(context,
         settledOnAtlas ? { ...fighter, y: 0 } : fighter, art, images, {
           ...spriteOptions, includeV197: true,
@@ -786,7 +786,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       await Promise.allSettled(preloadFighters.flatMap(fighter => {
         const art = getXenoTrialsArtV96(fighter.id, fighter.variant);
         return [requestXenoTrialsSpriteAtlasV191(images, fighter, art, loadImage, () => !stopped, true),
-          requestXenoTrialsActionAtlasV199(images, fighter, art, loadImage, () => !stopped)];
+          requestXenoTrialsRuntimeActionAtlas(images, fighter, art, loadImage, () => !stopped)];
       }));
       if (stopped) return false;
       loaded = true; assetFailure = results.slice(0, paths.length).some(r => r.status === 'rejected');

@@ -12,6 +12,7 @@ import { REFERENCED_FILM_STAGES_SUCCESSORS_V196, REFERENCED_FILM_STAGES_NEW_INPU
 import { XENO_PRIORITIES_SUCCESSORS_V197, XENO_PRIORITIES_NEW_INPUTS_V197 } from './audit-xeno-priorities-v197.mjs';
 import { XENO_PRIORITY_STAGES_SUCCESSORS_V198, XENO_PRIORITY_STAGES_NEW_INPUTS_V198 } from './audit-xeno-priority-stages-v198.mjs';
 import { XENO_PRIORITIES_SUCCESSORS_V199, XENO_PRIORITIES_NEW_INPUTS_V199 } from './audit-xeno-priorities-v199.mjs';
+import { XENO_SUPERS_SUCCESSORS_V200, XENO_SUPERS_NEW_INPUTS_V200 } from './audit-xeno-supers-v200.mjs';
 import { reviewedOriginalNamesDigestV183 } from './audit-original-names-v183.mjs';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -698,7 +699,8 @@ test('V178 resolves only exact MainM successors while every V177 witness stays h
     ...REFERENCED_FILM_STAGES_SUCCESSORS_V196, ...REFERENCED_FILM_STAGES_NEW_INPUTS_V196,
     ...XENO_PRIORITIES_SUCCESSORS_V197, ...XENO_PRIORITIES_NEW_INPUTS_V197,
     ...XENO_PRIORITY_STAGES_SUCCESSORS_V198, ...XENO_PRIORITY_STAGES_NEW_INPUTS_V198,
-    ...XENO_PRIORITIES_SUCCESSORS_V199, ...XENO_PRIORITIES_NEW_INPUTS_V199
+    ...XENO_PRIORITIES_SUCCESSORS_V199, ...XENO_PRIORITIES_NEW_INPUTS_V199,
+    ...XENO_SUPERS_SUCCESSORS_V200, ...XENO_SUPERS_NEW_INPUTS_V200
   };
   const introducedRuntimePaths = [
     'src/tactical-reload-v77.js', 'src/weapon-actions-v130.js',

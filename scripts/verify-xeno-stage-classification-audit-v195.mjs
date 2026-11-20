@@ -77,7 +77,7 @@ test('only the catalogue category changes for eight stages and the V194 relay ch
 
 test('audit tooling and the outcome report have exact source-only release admissions', () => {
   assert.match(read(terminal).toString(), /from '\.\/audit-xeno-referenced-film-stages-v196\.mjs'/);
-  assert.doesNotMatch(read('scripts/audit-xeno-priorities-v199.mjs').toString(),
+  assert.doesNotMatch(read('scripts/audit-xeno-supers-v200.mjs').toString(),
     /(?:from\s*|import\s*\(?\s*)['"]\.\//);
   for (const path of [terminal, verifier, report]) {
     assert.equal(isPublicDistributionPathV86(path), true, path);
