@@ -20,6 +20,7 @@ import {
   franchiseStagesRuntimeSourcesV192 as runtimeRelay,
   verifyFranchiseStagesV192 as verifyPrevious
 } from './audit-xeno-franchise-stages-v192.mjs';
+import { reviewedIconicStagesDigestV194 as later } from './audit-xeno-iconic-stages-v194.mjs';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 
@@ -46,7 +47,7 @@ test('V193 preserves the published V192 audit declarations and anchors every suc
   for (const [path, receipt] of Object.entries(successors)) {
     assert.ok(publishedPaths.has(path), path);
     assert.equal(sha(git(['show', `${baseline}:${path}`])), receipt.previousSha256, path);
-    assert.equal(advance(path, receipt.previousSha256), receipt.currentSha256, path);
+    assert.equal(advance(path, receipt.previousSha256), later(path, receipt.currentSha256), path);
     assert.throws(() => advance(path, receipt.currentSha256), /Incorrect V192 endpoint for V193/);
   }
   for (const path of Object.keys(inputs)) assert.ok(!publishedPaths.has(path), path);
@@ -74,25 +75,25 @@ test('the runtime view includes reviewed V193 sources and rejects a false predec
   assert.ok(Object.isFrozen(reviewed));
   assert.deepEqual(runtimeRelay(reviewed), reviewed);
   for (const [path, receipt] of Object.entries(successors)) {
-    if (receipt.kind === 'runtime') assert.equal(reviewed[path], receipt.currentSha256, path);
+    if (receipt.kind === 'runtime') assert.equal(reviewed[path], later(path, receipt.currentSha256), path);
   }
   const newRuntime = Object.entries(inputs).filter(([, receipt]) => receipt.kind === 'runtime');
   assert.ok(newRuntime.length > 0);
-  for (const [path, receipt] of newRuntime) assert.equal(reviewed[path], receipt.sha256, path);
+  for (const [path, receipt] of newRuntime) assert.equal(reviewed[path], later(path, receipt.sha256), path);
   const successor = Object.entries(successors).find(([, receipt]) => receipt.kind === 'runtime');
   assert.ok(successor);
   assert.throws(() => runtimeSources({ [successor[0]]: '0'.repeat(64) }), /Incorrect V193 runtime view predecessor/);
 });
 
 test('audit tooling and the outcome report stay source-only, with no broad V193 path admission', () => {
-  const terminal = 'scripts/audit-xeno-original-arenas-v193.mjs';
+  const audit = 'scripts/audit-xeno-original-arenas-v193.mjs';
   const verifier = 'scripts/verify-xeno-original-arenas-audit-v193.mjs';
   const report = 'docs/forge/xeno-trials/V193-ORIGINAL-ARENAS.md';
-  for (const path of [terminal, verifier, report]) {
+  for (const path of [audit, verifier, report]) {
     assert.equal(isPublicDistributionPathV86(path), true, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);
   }
-  for (const path of [terminal, report]) {
+  for (const path of [audit, report]) {
     assert.ok(!Object.hasOwn(successors, path) && !Object.hasOwn(inputs, path), path);
   }
   for (const path of ['scripts/audit-xeno-original-unreviewed-v193.mjs',

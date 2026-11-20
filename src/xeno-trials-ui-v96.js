@@ -56,7 +56,7 @@ export function getXenoTrialsStagePageV192(stages, { media = 'all', page = 0, se
 /** A viewport, not an edited thumbnail: only the first admitted image plane
  * is visible, including atlases whose three bands have unequal integer heights. */
 export function getXenoTrialsStagePreviewCropV192(stage) {
-  const atlas = (stage?.stageRevision === 192 || stage?.stageRevision === 193) && stage.atlasV192;
+  const atlas = [192, 193, 194].includes(stage?.stageRevision) && stage.atlasV192;
   if (!atlas || !Number.isInteger(atlas.width) || !Number.isInteger(atlas.height)
     || atlas.width <= 0 || atlas.height < 3) return null;
   const crop = atlas.sourceRects?.[0] || [0, 0, atlas.width, Math.floor(atlas.height / 3)];
@@ -71,7 +71,9 @@ const stagePreviewImageV192 = (stage, alt = '') => {
   if (!stage.backdrop) return '<i></i><i></i><i></i>';
   const crop = getXenoTrialsStagePreviewCropV192(stage);
   if (!crop) return `<img src="${escapeHtml(stage.backdrop)}" alt="${escapeHtml(alt)}" loading="lazy">`;
-  return `<svg class="xt-stage-image-v192" viewBox="${crop.join(' ')}" preserveAspectRatio="xMidYMid slice" focusable="false" ${alt ? `role="img" aria-label="${escapeHtml(alt)}"` : 'aria-hidden="true"'}><image href="${escapeHtml(stage.backdrop)}" width="${stage.atlasV192.width}" height="${stage.atlasV192.height}"/></svg>`;
+  const props = alt && stage.stageRevision === 194 && stage.propsV194;
+  const propsImage = props ? `<image href="${escapeHtml(props.path)}" x="${crop[0]}" y="${crop[1]}" width="${crop[2]}" height="${crop[3]}" preserveAspectRatio="xMidYMax meet"/>` : '';
+  return `<svg class="xt-stage-image-v192" viewBox="${crop.join(' ')}" preserveAspectRatio="xMidYMid slice" focusable="false" ${alt ? `role="img" aria-label="${escapeHtml(alt)}"` : 'aria-hidden="true"'}><image href="${escapeHtml(stage.backdrop)}" width="${stage.atlasV192.width}" height="${stage.atlasV192.height}"/>${propsImage}</svg>`;
 };
 export const XENO_TRIALS_SPECIAL_LABELS_V96 = Object.freeze({
   tail: 'Fouet caudal', pounce: 'Bond', ram: 'Charge', slash: 'Lacération', acid: 'Salve acide',

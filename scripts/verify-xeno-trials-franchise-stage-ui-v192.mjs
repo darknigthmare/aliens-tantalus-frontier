@@ -120,13 +120,16 @@ test('all fifty registered franchise locations appear through their native media
   const seen = [];
   for (const kind of ['film', 'series', 'game', 'comic', 'novel']) {
     h.el('stage-media').value = kind; h.ui.stagePageV192 = 0; h.ui.stageSelectionV192 = h.ui.form.elements.stageId.value;
-    const expected = additions.filter(stage => stage.media === kind);
+    const expected = stages.filter(stage => stage.media === kind);
     for (let index = 0; index < Math.max(1, Math.ceil(expected.length / 12)); index++) {
       h.ui.stagePageV192 = index; h.ui.renderPreviews();
       const html = h.el('arena-cards').innerHTML, ids = cardIds(html);
-      assert.ok(ids.length <= 12); seen.push(...ids);
+      assert.ok(ids.length <= 12);
       for (const id of ids) {
-        const stage = additions.find(stage => stage.id === id);
+        const stage = expected.find(stage => stage.id === id);
+        assert.ok(stage, id);
+        if (stage.stageRevision !== 192) continue;
+        seen.push(id);
         assert.ok(html.includes(`viewBox="${crop(stage).join(' ')}"`), id);
         assert.ok(html.includes(`href="${stage.backdrop}"`), id);
       }

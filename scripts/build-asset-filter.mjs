@@ -1,3 +1,4 @@
+import { publicXenoIconicStagePathAdmissionV194, PUBLIC_ICONIC_STAGE_DIRECTORY_V194 } from './public-xeno-iconic-stage-admissions-v194.mjs';
 import { publicXenoOriginalArenaPathAdmissionV193, PUBLIC_XENO_ORIGINAL_ARENA_DIRECTORIES_V193 } from './public-xeno-original-arena-admissions-v193.mjs';
 import { publicXenoFranchiseStagePathAdmissionV192, PUBLIC_XENO_FRANCHISE_STAGE_DIRECTORIES_V192 } from './public-xeno-franchise-stage-admissions-v192.mjs';
 import { publicReleasePathAdmissionV163 } from './public-release-admissions-v163.mjs';
@@ -242,6 +243,8 @@ export function createBuildAssetFilter(projectRoot, {
     // fs.cp also visits the source root (relative path ''). This is a container,
     // not a distributable filename; descend before applying file-path rules.
     if (sourcePath === '') return true;
+    const iconicStageAdmissionV194 = publicXenoIconicStagePathAdmissionV194(sourcePath, { directory: sourcePath === PUBLIC_ICONIC_STAGE_DIRECTORY_V194 });
+    if (iconicStageAdmissionV194 !== null) return iconicStageAdmissionV194;
     const originalArenaAdmissionV193 = publicXenoOriginalArenaPathAdmissionV193(sourcePath, { directory: PUBLIC_XENO_ORIGINAL_ARENA_DIRECTORIES_V193.includes(sourcePath) });
     if (originalArenaAdmissionV193 !== null) return originalArenaAdmissionV193;
     const franchiseAdmissionV192 = publicXenoFranchiseStagePathAdmissionV192(sourcePath, { directory: PUBLIC_XENO_FRANCHISE_STAGE_DIRECTORIES_V192.includes(sourcePath) });

@@ -2,6 +2,8 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedIconicStagesDigestV194, iconicStagesRuntimeSourcesV194,
+  verifyIconicStagesV194 } from './audit-xeno-iconic-stages-v194.mjs';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const readRepository = path => readFileSync(new URL('../' + path, import.meta.url));
@@ -210,26 +212,27 @@ export const ORIGINAL_ARENAS_NEW_INPUTS_V193 = freezeReceipts({
 });
 
 export function reviewedOriginalArenasDigestV193(path, endpointV192) {
-  if (!Object.hasOwn(ORIGINAL_ARENAS_SUCCESSORS_V193, path)) return endpointV192;
+  if (!Object.hasOwn(ORIGINAL_ARENAS_SUCCESSORS_V193, path)) return reviewedIconicStagesDigestV194(path, endpointV192);
   const receipt = ORIGINAL_ARENAS_SUCCESSORS_V193[path];
   assert.equal(endpointV192, receipt.previousSha256, 'Incorrect V192 endpoint for V193: ' + path);
   assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256), 'Invalid V193 successor digest: ' + path);
   assert.notEqual(receipt.previousSha256, receipt.currentSha256, 'Unchanged V193 successor: ' + path);
-  return receipt.currentSha256;
+  return reviewedIconicStagesDigestV194(path, receipt.currentSha256);
 }
 
 export function originalArenasRuntimeSourcesV193(historical) {
   const result = { ...historical };
   for (const [path, receipt] of Object.entries(ORIGINAL_ARENAS_SUCCESSORS_V193)) {
     if (receipt.kind !== 'runtime') continue;
-    if (result[path] !== undefined && result[path] !== receipt.currentSha256)
-      assert.equal(result[path], receipt.previousSha256, 'Incorrect V193 runtime view predecessor: ' + path);
-    result[path] = receipt.currentSha256;
+    const current = reviewedIconicStagesDigestV194(path, receipt.currentSha256);
+    if (result[path] !== undefined)
+      assert.ok([receipt.previousSha256, receipt.currentSha256, current].includes(result[path]), 'Incorrect V193 runtime view predecessor: ' + path);
+    result[path] = current;
   }
   for (const [path, receipt] of Object.entries(ORIGINAL_ARENAS_NEW_INPUTS_V193)) {
-    if (receipt.kind === 'runtime') result[path] = receipt.sha256;
+    if (receipt.kind === 'runtime') result[path] = reviewedIconicStagesDigestV194(path, receipt.sha256);
   }
-  return Object.freeze(result);
+  return iconicStagesRuntimeSourcesV194(result);
 }
 
 export function verifyOriginalArenasV193(readSource = readRepository) {
@@ -248,7 +251,7 @@ export function verifyOriginalArenasV193(readSource = readRepository) {
   for (const [path, receipt] of inputs) {
     assert.ok(safePath(path) && kinds.has(receipt.kind) && validHash(receipt.sha256), 'Invalid V193 source receipt: ' + path);
     assert.deepEqual(Object.keys(receipt).sort(), ['kind', 'sha256']);
-    assert.equal(sha(readSource(path)), receipt.sha256, 'Unreviewed V193 added-input bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedIconicStagesDigestV194(path, receipt.sha256), 'Unreviewed V193 added-input bytes: ' + path);
   }
   for (const [path, receipt] of Object.entries(ORIGINAL_ARENAS_HISTORICAL_DECLARATIONS_V193)) {
     const source = readSource(path).toString();
@@ -257,6 +260,7 @@ export function verifyOriginalArenasV193(readSource = readRepository) {
     assert.ok(start >= 0 && end > start, 'Missing historical declaration anchors: ' + path);
     assert.equal(sha(source.slice(start, end)), receipt.sha256, 'Historical receipt declarations changed: ' + path);
   }
+  verifyIconicStagesV194(readSource);
   return Object.freeze({
     baselineCommit: ORIGINAL_ARENAS_BASELINE_V193,
     successors: successors.length,

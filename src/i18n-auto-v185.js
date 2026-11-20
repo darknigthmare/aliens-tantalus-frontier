@@ -5,11 +5,12 @@
 // save, game rules or identifiers; it only changes what is displayed.
 import { currentLanguageV185, LANGUAGE_EVENT_V185 } from './i18n-v185.js';
 import { XENO_TRIALS_ORIGINAL_ARENAS_V193 } from './xeno-trials-original-arenas-v193.js';
+import { XENO_TRIALS_ICONIC_STAGES_V194 } from './xeno-trials-iconic-stages-v194.js';
 
 const ATTRIBUTES = Object.freeze(['placeholder', 'aria-label', 'title', 'alt']);
 const SKIP_TAGS = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'CODE', 'PRE', 'NOSCRIPT']);
 const CACHE_LIMIT = 4000;
-const arenaLabels = new Map(XENO_TRIALS_ORIGINAL_ARENAS_V193.flatMap(({ label, labelEn }) => [
+const arenaLabels = new Map([...XENO_TRIALS_ORIGINAL_ARENAS_V193, ...XENO_TRIALS_ICONIC_STAGES_V194].flatMap(({ label, labelEn }) => [
   [label, labelEn],
   [label.toUpperCase(), labelEn.toUpperCase()]
 ]));

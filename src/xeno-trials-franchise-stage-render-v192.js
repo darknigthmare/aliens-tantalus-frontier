@@ -10,29 +10,44 @@ const clip = (ctx, box) => { ctx.beginPath(); ctx.rect(box.x, box.y, box.width, 
 export function getXenoTrialsFranchiseStageAtlasLayoutV192(plane, camera = {}) {
   if (!plane || ![plane.sw, plane.sh, plane.parallax].every(Number.isFinite) || !(plane.sw > 0) || !(plane.sh > 0)) return null;
   const floor = clamp(finite(camera.floor, 450), 180, 530);
-  const factor = Math.max(1160 / plane.sw, (plane.id === 'foreground' ? 128 : floor) / plane.sh);
+  const coverWidth = 1160 / plane.sw;
+  const factor = plane.separateProps ? coverWidth : Math.max(coverWidth, (plane.id === 'foreground' ? 128 : floor) / plane.sh);
   const width = plane.sw * factor, height = plane.sh * factor;
   const origin = (1000 - width) / 2 - (clamp(finite(camera.center, 500), -1e9, 1e9) - 500) * plane.parallax;
+  if (plane.separateProps) return Object.freeze({ width, height, y: floor - height, tiles: Object.freeze([origin]) });
   const start = ((origin % width) + width) % width - width;
   const tiles = []; for (let x = start; x < 1000; x += width) tiles.push(x);
   return Object.freeze({ width, height, y: plane.id === 'foreground' ? 560 - height : floor - height, tiles: Object.freeze(tiles) });
 }
-function paintAtlas(ctx, stage, images, camera, front, renderTick) {
-  if (stage.backdrop !== getXenoTrialsFranchiseStageV192(stage.id)?.backdrop) return Object.freeze([]);
-  const image = images?.get?.(stage.backdrop), planes = getXenoTrialsFranchiseStageAtlasPlanesV192(stage.id, image), receipts = [];
+function paintAtlas(ctx, stage, images, camera, front, renderTick, drawBehindProps) {
+  const admitted = getXenoTrialsFranchiseStageV192(stage.id);
+  if (!admitted || stage.backdrop !== admitted.backdrop) {
+    drawBehindProps?.();
+    return Object.freeze([]);
+  }
+  const baseImage = images?.get?.(admitted.backdrop);
+  const propsImage = admitted.propsV194 && images?.get?.(admitted.propsV194.path);
+  const planes = getXenoTrialsFranchiseStageAtlasPlanesV192(stage.id, baseImage, propsImage), receipts = [];
   for (const plane of planes) {
     if ((plane.plane === 'below-feet') !== front) continue;
     const layout = getXenoTrialsFranchiseStageAtlasLayoutV192(plane, camera); if (!layout) continue;
+    if (plane.separateProps && drawBehindProps) {
+      drawBehindProps();
+      drawBehindProps = null;
+    }
+    const image = plane.separateProps ? propsImage : baseImage;
     ctx.globalAlpha = plane.opacity;
     for (const x of layout.tiles) ctx.drawImage(image, plane.sx, plane.sy, plane.sw, plane.sh, x, layout.y, layout.width, layout.height);
     // A receipt is appended only after the corresponding Canvas submissions.
     // The expected source hash comes from admission; HTTP byte identity is
     // independently checked by the browser pilot, not inferred from Image.
-    receipts.push(Object.freeze({ id: plane.id, stageId: stage.id, path: stage.backdrop,
+    receipts.push(Object.freeze({ id: plane.id, stageId: stage.id, path: plane.path,
       expectedSourceSha256: plane.expectedSourceSha256, sourceIdentity: 'admitted-registry-expected-sha256',
       sourceRect: Object.freeze([plane.sx, plane.sy, plane.sw, plane.sh]), renderTick, drawn: true,
-      destination: Object.freeze({ width: layout.width, height: layout.height, y: layout.y, xPositions: layout.tiles }), tiles: layout.tiles.length }));
+      destination: Object.freeze({ width: layout.width, height: layout.height, y: layout.y, xPositions: layout.tiles }), tiles: layout.tiles.length,
+      ...(admitted.stageRevision === 194 ? { parallax: plane.parallax, opacity: plane.opacity } : {}) }));
   }
+  drawBehindProps?.();
   return Object.freeze(receipts);
 }
 function fixtures(ctx, profile, view) {
@@ -130,10 +145,17 @@ export function drawXenoTrialsFranchiseStageRearV192(ctx, stage, images, camera 
   if (!profile || !view) return null;
   ctx.save(); ctx.fillStyle = stage.background; ctx.fillRect(0, 0, 1000, 560);
   ctx.save(); clip(ctx, view.rearClip);
-  const drawnPlanes = paintAtlas(ctx, stage, images, camera, false, view.renderTick);
-  fixtures(ctx, profile, view);
   const eventReceipts = [];
-  for (const event of view.events) { const receipt = eventDraw(ctx, event, profile, view); if (receipt) eventReceipts.push(receipt); }
+  const drawEvents = () => {
+    for (const event of view.events) {
+      const receipt = eventDraw(ctx, event, profile, view);
+      if (receipt) eventReceipts.push(receipt);
+    }
+  };
+  const layeredEvents = profile.revision === 194;
+  const drawnPlanes = paintAtlas(ctx, stage, images, camera, false, view.renderTick, layeredEvents ? drawEvents : null);
+  fixtures(ctx, profile, view);
+  if (!layeredEvents) drawEvents();
   ctx.restore();
   ctx.globalAlpha = 1; ctx.fillStyle = stage.floor; ctx.fillRect(0, view.floor, 1000, 560 - view.floor);
   ctx.globalAlpha = .5; ctx.fillStyle = stage.accent; ctx.fillRect(0, view.floor, 1000, 2);

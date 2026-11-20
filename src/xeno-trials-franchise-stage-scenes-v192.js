@@ -1,5 +1,6 @@
 import { XENO_TRIALS_FRANCHISE_STAGES_V192 } from './xeno-trials-franchise-stages-v192.js';
 import { XENO_TRIALS_ORIGINAL_ARENAS_V193 } from './xeno-trials-original-arenas-v193.js';
+import { XENO_TRIALS_ICONIC_STAGES_V194 } from './xeno-trials-iconic-stages-v194.js';
 
 // These schedules describe MIRE scenery. Their tick is
 // supplied by the existing match; they own no simulation, clock or collider.
@@ -15,17 +16,25 @@ export const XENO_TRIALS_FRANCHISE_STAGE_EVENT_KINDS_V192 = Object.freeze([
   'snow-drift', 'searchlight-sweep', 'rail-transit', 'water-drip'
 ]);
 const allowedKinds = new Set(XENO_TRIALS_FRANCHISE_STAGE_EVENT_KINDS_V192);
-const layeredStages = [...XENO_TRIALS_FRANCHISE_STAGES_V192, ...XENO_TRIALS_ORIGINAL_ARENAS_V193];
+const stageSources = Object.freeze({
+  192: 'fifty-franchise-stage-atlases-v192',
+  193: 'original-tantalus-stage-atlases-v193',
+  194: 'iconic-stage-compositions-v194'
+});
+const layeredStages = [...XENO_TRIALS_FRANCHISE_STAGES_V192, ...XENO_TRIALS_ORIGINAL_ARENAS_V193, ...XENO_TRIALS_ICONIC_STAGES_V194];
 const stages = new Map(layeredStages.map(stage => [stage.id, stage]));
 const profiles = new Map(layeredStages.map((stage, index) => {
   const config = stage.sceneV192 || {}, seed = Number.isSafeInteger(config.seed) && config.seed > 0 ? config.seed : index + 1;
   const anchors = [0, 1].map(n => clamp(finite(config.anchors?.[n], n ? .82 : .18), .08, .92));
   const kinds = [0, 1].map(n => allowedKinds.has(config.eventKinds?.[n]) ? config.eventKinds[n] : n ? 'archive-scan' : 'coolant-plume');
-  const profile = freeze({ stageId: stage.id, revision: stage.stageRevision ?? 192, replacesArena: true,
+  const revision = stage.stageRevision ?? 192;
+  const separateProps = revision === 194;
+  const profile = freeze({ stageId: stage.id, revision, replacesArena: true,
     architecture: typeof config.architecture === 'string' ? config.architecture : 'enclosed-bay',
-    source: stage.stageRevision === 193 ? 'original-tantalus-stage-atlases-v193' : 'fifty-franchise-stage-atlases-v192', seed, accent: stage.accent, anchors,
-    fixtureParallax: .48 + seed % 3 * .025, eventParallax: .13 + seed % 4 * .018,
-    foregroundParallax: 1.15 + seed % 3 * .02,
+    source: stageSources[revision] ?? stageSources[192], seed, accent: stage.accent, anchors,
+    fixtureParallax: separateProps ? .68 : .48 + seed % 3 * .025,
+    eventParallax: separateProps ? .20 : .13 + seed % 4 * .018,
+    foregroundParallax: separateProps ? 1.18 : 1.15 + seed % 3 * .02,
     events: kinds.map((kind, n) => ({ id: `${stage.id}-rear-${n + 1}`, kind,
       periodTicks: 3400 + seed * 29 + n * 419, durationTicks: 1180 + seed % 5 * 85 + n * 110,
       offsetTicks: 110 + seed % 7 * 37 + n * 307, anchor: anchors[n],
@@ -37,29 +46,58 @@ const profiles = new Map(layeredStages.map((stage, index) => {
 
 export const getXenoTrialsFranchiseStageV192 = stageId => stages.get(stageId) || null;
 export const getXenoTrialsFranchiseStageSceneV192 = stageId => profiles.get(stageId) || null;
-export const getXenoTrialsFranchiseStageAssetsV192 = stageId => stages.has(stageId)
-  ? Object.freeze([stages.get(stageId).backdrop]) : empty;
+export function getXenoTrialsFranchiseStageAssetsV192(stageId) {
+  const stage = stages.get(stageId);
+  if (!stage) return empty;
+  const props = stage.stageRevision === 194 && stage.propsV194?.path;
+  return Object.freeze(props ? [stage.backdrop, props] : [stage.backdrop]);
+}
 
-/** Three explicit source crops; no image pixels are resized, rewritten or
- * composited here. A decoded image must have the exact admitted dimensions.
- * sha256 is expected provenance from the source registry, not a claim that a
- * synchronous Canvas draw has independently hashed a browser Image. */
-export function getXenoTrialsFranchiseStageAtlasPlanesV192(stageId, image) {
+function matchesTexture(texture, image) {
+  return !!texture && /^[a-f0-9]{64}$/.test(texture.sha256 || '') && image?.complete !== false
+    && Number.isSafeInteger(texture.width) && Number.isSafeInteger(texture.height)
+    && texture.width > 0 && texture.height > 0
+    && image?.naturalWidth === texture.width && image?.naturalHeight === texture.height;
+}
+
+function isTextureRect(rect, texture) {
+  if (!Array.isArray(rect) || rect.length !== 4 || !rect.every(Number.isSafeInteger)) return false;
+  const [x, y, width, height] = rect;
+  return x >= 0 && y >= 0 && width > 0 && height > 0
+    && x + width <= texture.width && y + height <= texture.height;
+}
+
+function makePlane(id, [sx, sy, sw, sh], path, hash, parallax, opacity) {
+  return freeze({ id, sx, sy, sw, sh, parallax, opacity,
+    plane: id === 'foreground' ? 'below-feet' : 'behind-fighters', path, expectedSourceSha256: hash });
+}
+
+/** V192/V193 use three crops from a single atlas. V194 admits two base
+ * crops and an independent transparent prop plate. Each decoded texture must
+ * match the registered dimensions. SHA-256 describes the registered source. */
+export function getXenoTrialsFranchiseStageAtlasPlanesV192(stageId, image, propsImage) {
   const stage = stages.get(stageId), atlas = stage?.atlasV192;
-  if (!atlas || !/^[a-f0-9]{64}$/.test(atlas.sha256 || '') || image?.complete === false
-    || !(image?.naturalWidth > 0) || !(image?.naturalHeight > 0)
-    || image.naturalWidth !== atlas.width || image.naturalHeight !== atlas.height
-    || !Number.isSafeInteger(atlas.width) || !Number.isSafeInteger(atlas.height) || atlas.height < 3) return empty;
+  if (!matchesTexture(atlas, image) || atlas.height < 3) return empty;
+  const separateProps = stage.stageRevision === 194;
   const cuts = [0, Math.floor(atlas.height / 3), Math.floor(atlas.height * 2 / 3), atlas.height];
-  const rects = atlas.sourceRects || cuts.slice(0, 3).map((y, n) => [0, y, atlas.width, cuts[n + 1] - y]);
-  if (!Array.isArray(rects) || rects.length !== 3 || rects.some(rect => !Array.isArray(rect) || rect.length !== 4
-    || !rect.every(Number.isSafeInteger) || rect[0] < 0 || rect[1] < 0 || rect[2] <= 0 || rect[3] <= 0
-    || rect[0] + rect[2] > atlas.width || rect[1] + rect[3] > atlas.height)
+  const rects = separateProps ? atlas.sourceRects
+    : atlas.sourceRects || cuts.slice(0, 3).map((y, n) => [0, y, atlas.width, cuts[n + 1] - y]);
+  if (!Array.isArray(rects) || rects.length !== (separateProps ? 2 : 3)
+    || rects.some(rect => !isTextureRect(rect, atlas))
     || rects.some((rect, n) => n > 0 && rect[1] < rects[n - 1][1] + rects[n - 1][3])) return empty;
+  if (separateProps) {
+    const far = makePlane('far', rects[0], stage.backdrop, atlas.sha256, .065, 1);
+    const foreground = makePlane('foreground', rects[1], stage.backdrop, atlas.sha256,
+      profiles.get(stageId).foregroundParallax, 1);
+    const props = stage.propsV194;
+    if (!props?.path || props.path === stage.backdrop || !matchesTexture(props, propsImage)
+      || !isTextureRect(props.rect, props)) return Object.freeze([far, foreground]);
+    const middle = makePlane('middle', props.rect, props.path, props.sha256, .42, 1);
+    return Object.freeze([far, freeze({ ...middle, separateProps: true }), foreground]);
+  }
   const names = ['far', 'middle', 'foreground'], factors = [.035, .28, profiles.get(stageId).foregroundParallax];
-  return Object.freeze(rects.map(([sx, sy, sw, sh], n) => freeze({ id: names[n], sx, sy, sw, sh,
-    parallax: factors[n], opacity: n === 1 ? .9 : 1, plane: n === 2 ? 'below-feet' : 'behind-fighters',
-    path: stage.backdrop, expectedSourceSha256: atlas.sha256 })));
+  return Object.freeze(rects.map((rect, n) => makePlane(names[n], rect, stage.backdrop, atlas.sha256,
+    factors[n], n === 1 ? .9 : 1)));
 }
 
 export function getXenoTrialsFranchiseStageViewV192(stageId, camera = {}, tick = 0, options = {}) {

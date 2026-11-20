@@ -20,20 +20,22 @@ const fixtures = Array.from({ length: 11 }, (_, n) => ({ id: `xt192-declared-hos
 const scenesSource = readFileSync(new URL('../src/xeno-trials-franchise-stage-scenes-v192.js', import.meta.url), 'utf8');
 const rendererSource = readFileSync(new URL('../src/xeno-trials-franchise-stage-render-v192.js', import.meta.url), 'utf8');
 const moduleUrl = source => `data:text/javascript;base64,${Buffer.from(source).toString('base64')}`;
-async function fixtureModules(data = fixtures) {
+async function fixtureModules(data = fixtures, iconicData = []) {
   const source = scenesSource
     .replace("import { XENO_TRIALS_FRANCHISE_STAGES_V192 } from './xeno-trials-franchise-stages-v192.js';",
       `const XENO_TRIALS_FRANCHISE_STAGES_V192 = ${JSON.stringify(data)};`)
     .replace("import { XENO_TRIALS_ORIGINAL_ARENAS_V193 } from './xeno-trials-original-arenas-v193.js';",
-      'const XENO_TRIALS_ORIGINAL_ARENAS_V193 = [];');
+      'const XENO_TRIALS_ORIGINAL_ARENAS_V193 = [];')
+    .replace("import { XENO_TRIALS_ICONIC_STAGES_V194 } from './xeno-trials-iconic-stages-v194.js';",
+      `const XENO_TRIALS_ICONIC_STAGES_V194 = ${JSON.stringify(iconicData)};`);
   assert.notEqual(source, scenesSource, 'Only the declared stage data imports are replaced.');
   const url = moduleUrl(source), scene = await import(url);
   const render = await import(moduleUrl(rendererSource.replace("'./xeno-trials-franchise-stage-scenes-v192.js'", JSON.stringify(url))));
   return { ...scene, ...render };
 }
 function context() {
-  const calls = [];
-  return new Proxy({ calls, drawImage(...args) { calls.push(['drawImage', ...args]); } },
+  const calls = [], drawOpacities = [];
+  return new Proxy({ calls, drawOpacities, drawImage(...args) { drawOpacities.push(this.globalAlpha); calls.push(['drawImage', ...args]); } },
     { get: (object, key) => object[key] ?? ((...args) => calls.push([key, ...args])) });
 }
 const image = { naturalWidth: 701, naturalHeight: 503, complete: true };
@@ -137,6 +139,81 @@ test('scene source owns no wall clock, random state, input, damage or animation 
   }
 });
 
+const iconic = {
+  ...fixtures[0], id: 'xt194-declared-iconic-fixture', stageRevision: 194,
+  backdrop: '/declared-iconic-base.png',
+  atlasV192: { width: 701, height: 503, sha256: 'a'.repeat(64), sourceRects: [[0, 0, 701, 321], [0, 329, 701, 174]] },
+  propsV194: { path: '/declared-iconic-props.png', width: 900, height: 600,
+    sha256: 'b'.repeat(64), rect: [0, 0, 900, 600] }
+};
+const propsImage = { naturalWidth: 900, naturalHeight: 600, complete: true };
+const iconicMod = await fixtureModules([], [iconic]);
+const iconicImages = new Map([[iconic.backdrop, image], [iconic.propsV194.path, propsImage]]);
+
+test('V194 Canvas submissions draw the admitted middle plate once at native opacity between the two base crops', () => {
+  const camera = { center: 510, floor: 450 }, rear = context(), foreground = context(), tick = 333;
+  const rearView = iconicMod.drawXenoTrialsFranchiseStageRearV192(rear, iconic, iconicImages, camera, tick);
+  const frontView = iconicMod.drawXenoTrialsFranchiseStageFrontV192(foreground, iconic, iconicImages, camera, tick);
+  assert.equal(rearView.revision, 194); assert.equal(frontView.revision, 194);
+  const planes = [...rearView.drawnPlanes, ...frontView.drawnPlanes];
+  assert.deepEqual(planes.map(plane => plane.id), ['far', 'middle', 'foreground']);
+  assert.deepEqual(planes.map(plane => plane.path), [iconic.backdrop, iconic.propsV194.path, iconic.backdrop]);
+  assert.deepEqual(planes.map(plane => plane.expectedSourceSha256),
+    [iconic.atlasV192.sha256, iconic.propsV194.sha256, iconic.atlasV192.sha256]);
+  assert.deepEqual(planes.map(plane => plane.sourceRect), [
+    iconic.atlasV192.sourceRects[0], iconic.propsV194.rect, iconic.atlasV192.sourceRects[1]
+  ]);
+  assert.deepEqual(planes.map(plane => plane.parallax), [.065, .42, 1.18]);
+  assert.ok(planes.every(plane => plane.drawn && plane.renderTick === tick && plane.opacity === 1));
+  assert.deepEqual(rear.calls.filter(call => call[0] === 'drawImage').map(call => call[1]),
+    [...Array(planes[0].tiles).fill(image), propsImage]);
+  const baseDraw = rear.calls.findLastIndex(call => call[0] === 'drawImage' && call[1] === image);
+  const propsDraw = rear.calls.findIndex(call => call[0] === 'drawImage' && call[1] === propsImage);
+  assert.ok(rearView.eventReceipts.some(event => event.kind === 'airlock-cycle'));
+  assert.ok(rear.calls.slice(baseDraw + 1, propsDraw).some(call => call[0] === 'strokeRect'),
+    'V194 draws the distant airlock after the base and before the alpha props.');
+  assert.ok([...rear.drawOpacities, ...foreground.drawOpacities].every(opacity => opacity === 1));
+  assert.deepEqual(foreground.calls.find(call => call[0] === 'rect'), ['rect', 0, 458, 1000, 102]);
+  assert.equal(planes[1].tiles, 1);
+  assert.equal(planes[1].destination.y + planes[1].destination.height, camera.floor);
+  assert.equal(planes[1].destination.width / planes[1].destination.height, propsImage.naturalWidth / propsImage.naturalHeight);
+});
+
+test('V194 camera positions separate the five depths and never repeat the props plate', () => {
+  const tick = 335, cameraA = { center: 482, floor: 450 }, cameraB = { center: 527, floor: 450 };
+  const draw = camera => [
+    iconicMod.drawXenoTrialsFranchiseStageRearV192(context(), iconic, iconicImages, camera, tick),
+    iconicMod.drawXenoTrialsFranchiseStageFrontV192(context(), iconic, iconicImages, camera, tick)
+  ];
+  const [rearA, frontA] = draw(cameraA), [rearB, frontB] = draw(cameraB), pan = cameraB.center - cameraA.center;
+  const profile = iconicMod.getXenoTrialsFranchiseStageSceneV192(iconic.id);
+  const planesA = [...rearA.drawnPlanes, ...frontA.drawnPlanes], planesB = [...rearB.drawnPlanes, ...frontB.drawnPlanes];
+  assert.equal(new Set([...planesA.map(plane => plane.parallax), profile.fixtureParallax, profile.eventParallax]).size, 5);
+  for (const [index, plane] of planesA.entries()) {
+    assert.ok(Math.abs(planesB[index].destination.xPositions[0] - plane.destination.xPositions[0] + pan * plane.parallax) < 1e-9);
+  }
+  assert.ok(Math.abs(rearB.fixtureOffsetX - rearA.fixtureOffsetX + pan * profile.fixtureParallax) < 1e-9);
+  assert.ok(Math.abs(rearB.events[0].x - rearA.events[0].x + pan * profile.eventParallax) < 1e-9);
+});
+
+test('V194 missing, unready, wrong-size or out-of-bounds props retain both base crops without a false receipt', async () => {
+  const camera = { center: 500, floor: 450 };
+  const variants = [
+    [iconicMod, iconic, undefined], [iconicMod, iconic, { ...propsImage, complete: false }],
+    [iconicMod, iconic, { ...propsImage, naturalWidth: propsImage.naturalWidth + 1 }]
+  ];
+  const bad = { ...iconic, propsV194: { ...iconic.propsV194, rect: [1, 0, 900, 600] } };
+  variants.push([await fixtureModules([], [bad]), bad, propsImage]);
+  for (const [renderer, stage, props] of variants) {
+    const map = new Map([[stage.backdrop, image], [stage.propsV194.path, props]]), rear = context(), front = context();
+    const draw = kind => renderer[`drawXenoTrialsFranchiseStage${kind}V192`](kind === 'Rear' ? rear : front, stage, map, camera, 335);
+    const rearView = draw('Rear'), frontView = draw('Front');
+    assert.equal(rearView.proceduralFallback, false); assert.equal(frontView.proceduralFallback, false);
+    assert.deepEqual([...rearView.drawnPlanes, ...frontView.drawnPlanes].map(plane => plane.id), ['far', 'foreground']);
+    assert.ok([...rear.calls, ...front.calls].filter(call => call[0] === 'drawImage').every(call => call[1] === image));
+  }
+});
+
 // Real catalog integration below uses admitted runtime data and the real
 // controller, with declared Canvas/Image/RAF host doubles. It does not decode
 // PNG pixels and is not reported as Chromium or human gameplay evidence.
@@ -150,7 +227,12 @@ function target(extra = {}) {
 async function runtimeHost(stageId, missing = false, configuration = {}) {
   const { createXenoTrialsRuntimeV96 } = await import('../src/xeno-trials-runtime-v96.js');
   const { XENO_TRIALS_FRANCHISE_STAGES_V192: stages } = await import('../src/xeno-trials-franchise-stages-v192.js');
+  const { XENO_TRIALS_ICONIC_STAGES_V194: iconicStages } = await import('../src/xeno-trials-iconic-stages-v194.js');
   const byPath = new Map(stages.map(stage => [stage.backdrop, stage.atlasV192]));
+  for (const stage of iconicStages) {
+    byPath.set(stage.backdrop, stage.atlasV192);
+    byPath.set(stage.propsV194.path, stage.propsV194);
+  }
   const window = target(), document = target({ hidden: false, hasFocus: () => true });
   const ctx = new Proxy({ measureText: value => ({ width: String(value).length * 7 }), createLinearGradient: () => ({ addColorStop() {} }) }, { get: (object, key) => object[key] ?? (() => {}) });
   const canvas = target({ tagName: 'CANVAS', width: 1000, height: 560, getContext: () => ctx, setAttribute() {}, focus() { document.activeElement = this; }, closest: () => null });
@@ -160,7 +242,10 @@ async function runtimeHost(stageId, missing = false, configuration = {}) {
     config: { stageId, playerId: 'warrior', opponentId: 'queen', difficulty: 'easy', seed: 192, roundSeconds: 120, ...configuration },
     loadImage: async path => {
       loads.push(path); const atlas = byPath.get(path);
-      if (atlas) { if (missing) throw new Error('Declared missing optional stage atlas'); return { naturalWidth: atlas.width, naturalHeight: atlas.height, complete: true }; }
+      if (atlas) {
+        if (missing === true || path === missing) throw new Error('Declared missing optional stage texture');
+        return { naturalWidth: atlas.width, naturalHeight: atlas.height, complete: true };
+      }
       try { const b = readFileSync(new URL(`..${path}`, import.meta.url)); if (b.subarray(1, 4).toString() === 'PNG') return { naturalWidth: b.readUInt32BE(16), naturalHeight: b.readUInt32BE(20), complete: true }; } catch { /* Declared old non-PNG decode double. */ }
       return { naturalWidth: 1024, naturalHeight: 1024, complete: true };
     }, requestAnimationFrame: callback => { queue.set(++serial, callback); return serial; }, cancelAnimationFrame: id => queue.delete(id) });
@@ -198,6 +283,23 @@ test('actual new-stage optional texture failure preserves native simulation and 
   assert.equal(state.stageSceneV192.rear.proceduralFallback, true); assert.deepEqual(state.stageSceneV192.rear.drawnPlanes, []);
   assert.deepEqual(state.stageSceneV192.front.drawnPlanes, []); assert.equal(state.paused, false);
   const tick = state.tick; h.frames(30); assert.ok(h.runtime.getState().tick > tick); h.runtime.stop();
+});
+
+test('real V194 runtime loads only the selected stage base and props and tolerates a missing prop file', async () => {
+  const { XENO_TRIALS_ICONIC_STAGES_V194: iconicStages } = await import('../src/xeno-trials-iconic-stages-v194.js');
+  assert.equal(iconicStages.length, 8);
+  const stage = iconicStages[0];
+  for (const missing of [false, stage.propsV194.path]) {
+    const h = await runtimeHost(stage.id, missing), match = h.runtime.getState();
+    assert.deepEqual(h.loads.filter(path => path.startsWith('/assets/openai/stages/xeno-trials-v194/')),
+      [stage.backdrop, stage.propsV194.path]);
+    assert.deepEqual(match.stageSceneV192.rear.drawnPlanes.map(plane => plane.id), missing ? ['far'] : ['far', 'middle']);
+    assert.deepEqual(match.stageSceneV192.front.drawnPlanes.map(plane => plane.id), ['foreground']);
+    h.frames(30);
+    assert.ok(h.runtime.getState().tick > match.tick);
+    assert.equal(h.runtime.getState().paused, false);
+    h.runtime.stop();
+  }
 });
 
 

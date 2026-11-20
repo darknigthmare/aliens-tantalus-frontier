@@ -26,9 +26,9 @@ test('the twelve original atlases ship with their exact crops and no candidate f
 });
 
 test('the twelve IDs append once and remain available in the Tantalus filter and saved tickets', () => {
-  assert.equal(catalog.length, 112);
-  assert.equal(new Set(catalog.map(stage => stage.id)).size, 112);
-  assert.deepEqual(catalog.slice(100), arenas);
+  const v193Catalog = catalog.slice(0, 112);
+  assert.equal(new Set(v193Catalog.map(stage => stage.id)).size, 112);
+  assert.deepEqual(v193Catalog.slice(100), arenas);
   for (const arena of arenas) {
     const page = getXenoTrialsStagePageV192(catalog, {
       media: 'simulation', selectedId: arena.id, revealSelected: true
