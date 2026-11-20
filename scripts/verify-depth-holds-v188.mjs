@@ -11,7 +11,7 @@ import { buildCampaignsWithSpecialOperationsV67 } from '../src/special-operation
 import { buildCargoHoldSectionV188, inDepthSectionV188, overDepthSectionV188, stepEnemyDepthV188, MISSION_ATTACK_BAND_V188, QZ17_CAMPAIGN_ID_V188 } from '../src/mission-depth-v188.js';
 import { DEPTH_HOLD_DEFINITIONS_V188, DEPTH_HOLD_IDS_V188, DEPTH_HOLD_LANE_MIN_V188, depthLaneIssuesV188, depthPassageV188, holdWallFeaturesV188,
   hidesWallV188, resolveDepthHoldDefinitionV188, spansHoldDepthV188 } from '../src/depth-hold-sections-v188.js';
-import { DEPTH_HOLD_SLOTS_V188, DEPTH_HOLD_SLOT_FILES_PRESENT_V188, drawDepthHoldSlotV188 } from '../src/depth-hold-slots-v188.js';
+import { DEPTH_HOLD_SLOTS_V188, DEPTH_HOLD_SLOT_FILES_PRESENT_V188, DEPTH_HOLD_SLOT_SOURCE_RECTS_V188, drawDepthHoldSlotV188 } from '../src/depth-hold-slots-v188.js';
 import { blockedByFootprintV188, depthShotSettleV188, DEPTH_SHOT_BAND_V188 } from '../src/hub-depth-rooms-v188.js';
 import { qz17HoldLayoutV188 } from '../src/qz17-level-dressing-v188.js';
 
@@ -217,17 +217,71 @@ test('holds: QZ-17 builds exactly the spec-002 section', async () => {
   assert.equal(DEPTH_HOLD_DEFINITIONS_V188[0].bigCastes, 'service-deck');
 });
 
-test('holds: named art slots with primitive fallbacks, shipped offline, no image requested', () => {
-  assert.deepEqual(DEPTH_HOLD_SLOT_FILES_PRESENT_V188, []);
+test('holds: named art slots use shipped PNGs offline and keep explicit primitive fallbacks', () => {
+  assert.deepEqual([...DEPTH_HOLD_SLOT_FILES_PRESENT_V188].sort(), DEPTH_HOLD_SLOTS_V188.map(slot => slot.id).sort());
   const used = new Set(DEPTH_HOLD_DEFINITIONS_V188.flatMap(entry => (entry.props || []).map(item => item.slot)));
+  const sw = read('sw.js');
   for (const entry of DEPTH_HOLD_SLOTS_V188) {
     for (const key of ['id', 'purpose', 'width', 'height', 'layer', 'brief']) assert.ok(entry[key], `${entry.id}.${key}`);
     assert.ok(used.has(entry.id), `${entry.id} is used by a hold`);
     let requested = 0; const calls = [];
     const ctx = new Proxy({}, { get: (_, key) => (...args) => { calls.push(key); } });
-    const source = drawDepthHoldSlotV188(ctx, { slot: entry.id }, { x: 0, y: 0, w: entry.width, h: entry.height }, { ImageCtor: class { set src(v) { requested++; } } });
+    const bytes = readFileSync(new URL(`..${entry.path}`, import.meta.url));
+    assert.ok(bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])), `${entry.id}: genuine PNG`);
+    assert.ok(bytes.readUInt32BE(16) > 0 && bytes.readUInt32BE(20) > 0, `${entry.id}: valid native dimensions`);
+    assert.ok(sw.includes(`'${entry.path}'`), `${entry.id}: cached offline`);
+    const source = drawDepthHoldSlotV188(ctx, { slot: entry.id }, { x: 0, y: 0, w: entry.width, h: entry.height }, { present: [], ImageCtor: class { set src(v) { requested++; } } });
     assert.equal(source, 'primitive'); assert.equal(requested, 0); assert.ok(calls.includes('fillRect'));
   }
-  const sw = read('sw.js'); for (const file of ['/src/depth-hold-sections-v188.js', '/src/depth-hold-slots-v188.js']) assert.ok(sw.includes(`'${file}'`), file);
+  for (const file of ['/src/depth-hold-sections-v188.js', '/src/depth-hold-slots-v188.js']) assert.ok(sw.includes(`'${file}'`), file);
   assert.doesNotMatch(read('src/game-production-runtime.js'), /depth-hold/, 'composition unchanged');
+});
+
+function artRecorder() {
+  const draws = [], text = [], stack = [], state = { globalAlpha: .6, globalCompositeOperation: 'source-over', fillStyle: '#123456', font: '11px monospace', textAlign: 'left', textBaseline: 'alphabetic' };
+  const api = { save() { stack.push({ ...state }); }, restore() { assert.ok(stack.length); Object.assign(state, stack.pop()); },
+    drawImage(image, ...box) { draws.push({ image, box }); }, fillText(value) { text.push(value); } };
+  const ctx = new Proxy(state, { get: (target, key) => key in api ? api[key] : key in target ? target[key] : () => {}, set: (target, key, value) => { target[key] = value; return true; } });
+  return { ctx, draws, text, stack, state };
+}
+
+test('holds: raster props preserve their aspect, physical box, floor baseline and per-instance crate codes', () => {
+  for (const slot of DEPTH_HOLD_SLOTS_V188) {
+    const frame = DEPTH_HOLD_SLOT_SOURCE_RECTS_V188[slot.id], bytes = readFileSync(new URL(`..${slot.path}`, import.meta.url));
+    assert.deepEqual([frame.width, frame.height], [bytes.readUInt32BE(16), bytes.readUInt32BE(20)]);
+    const [sx, sy, sw, sh] = frame.rect; assert.ok(sx >= 0 && sy >= 0 && sx + sw <= frame.width && sy + sh <= frame.height);
+    class ImageFixture { constructor() { this.complete = true; this.naturalWidth = frame.width; this.naturalHeight = frame.height; } }
+    const prop = Object.freeze({ slot: slot.id, labels: ['C-34', 'C-35'] }), box = Object.freeze({ x: 1011, y: 800, w: slot.width, h: slot.height }), rec = artRecorder(), state = { ...rec.state };
+    assert.equal(drawDepthHoldSlotV188(rec.ctx, prop, box, { ImageCtor: ImageFixture }), 'image');
+    const draw = rec.draws[0], [x, y, width, height] = draw.box.slice(-4);
+    assert.equal(draw.image.src, slot.path); assert.deepEqual(draw.box.slice(0, 4), frame.rect);
+    assert.ok(Math.abs(width / height - sw / sh) < 1e-8, `${slot.id}: no distortion`);
+    assert.ok(Math.abs(x + width / 2 - box.x - box.w / 2) < 1e-8, `${slot.id}: centred in footprint`);
+    assert.ok(Math.abs(y + height - box.y - box.h) < 1e-8, `${slot.id}: contact at the original floor baseline`);
+    assert.ok(x >= box.x - 1e-8 && y >= box.y - 1e-8 && width <= box.w + 1e-8 && height <= box.h + 1e-8);
+    if (slot.id === 'freighter-crate-stack') {
+      assert.deepEqual(rec.text, ['C-34', 'C-35']);
+      const west = artRecorder(); drawDepthHoldSlotV188(west.ctx, { slot: slot.id, labels: ['C-21', 'C-22'] }, box, { ImageCtor: ImageFixture }); assert.deepEqual(west.text, ['C-21', 'C-22']);
+    }
+    assert.deepEqual(rec.state, state); assert.equal(rec.stack.length, 0);
+  }
+  // A replacement source with another native size must not inherit stale crop coordinates.
+  class SquareImage { complete = true; naturalWidth = 200; naturalHeight = 200; }
+  const rec = artRecorder(), box = { x: 10, y: 20, w: 61, h: 92 };
+  drawDepthHoldSlotV188(rec.ctx, { slot: 'freighter-crate-stack' }, box, { ImageCtor: SquareImage });
+  assert.deepEqual(rec.draws[0].box, [0, 0, 200, 200, 10, 51, 61, 61]);
+});
+
+test('holds: an unready or failed raster keeps the fallback and a completed load replaces it without re-requesting', () => {
+  let image, requests = 0;
+  class DelayedImage { constructor() { image = this; this.complete = false; this.naturalWidth = this.naturalHeight = 0; } set src(value) { this.path = value; requests++; } }
+  const prop = { slot: 'quarantine-cart' }, box = { x: 20, y: 30, w: 76, h: 40 }, rec = artRecorder();
+  for (let n = 0; n < 2; n++) assert.equal(drawDepthHoldSlotV188(rec.ctx, prop, box, { ImageCtor: DelayedImage }), 'primitive');
+  image.complete = true; assert.equal(drawDepthHoldSlotV188(rec.ctx, prop, box, { ImageCtor: DelayedImage }), 'primitive', 'failed zero-size image');
+  image.naturalWidth = 400; image.naturalHeight = 200;
+  assert.equal(drawDepthHoldSlotV188(rec.ctx, prop, box, { ImageCtor: DelayedImage }), 'image'); assert.equal(requests, 1);
+  const state = { ...rec.state };
+  const broken = new Proxy(rec.ctx, { get: (target, key) => key === 'drawImage' ? () => { throw Error('draw failed'); } : target[key] });
+  assert.throws(() => drawDepthHoldSlotV188(broken, prop, box, { ImageCtor: DelayedImage }), /draw failed/);
+  assert.equal(rec.ctx.globalAlpha, state.globalAlpha); assert.equal(rec.stack.length, 0);
 });

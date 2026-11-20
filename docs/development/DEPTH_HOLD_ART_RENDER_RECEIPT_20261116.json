@@ -1,0 +1,564 @@
+{
+  "schema": "depth-hold-art-render-v188",
+  "status": "passed-with-declared-native-fixtures",
+  "sourceFiles": {
+    "src/depth-hold-slots-v188.js": "7ebace8edea88182775793b289eaa16fc02e11488725108885ab6ecbd6160ec6",
+    "src/depth-hold-deck-v188.js": "d6bad4be1cb32a4c7d8ad1dd3a2c4a9c7b65b5a5899655efd608e106ae898703",
+    "scripts/verify-depth-holds-v188.mjs": "4f372e48c2a48bbba551b20f9268b121c313e2e0871fc9b0e0385886687dc1ae",
+    "scripts/verify-visual-fixes-v188.mjs": "5af8f5188c560f66baee52c6500e7b8137e17a54d0c19a5af96e328861420006"
+  },
+  "test": {
+    "command": "node --test scripts/verify-depth-holds-v188.mjs scripts/verify-visual-fixes-v188.mjs",
+    "tests": 24,
+    "passed": 24,
+    "failed": 0,
+    "skipped": 0,
+    "logSha256": "182a04516492847e9bb30eb4bbd6b88d5c8b40a05360e2070523684e8a8f48d5"
+  },
+  "render": {
+    "before": 6,
+    "after": 6,
+    "total": 12,
+    "exceptions": [],
+    "renderer": "Production GameEngine/mission-depth renderer; native Canvas; actual PNG pixels via declared Pillow RGBA fixture. Seed7 and player/front-behind positions injected; no browser/full playthrough/performance claim; reducedMotion true; native font fallback.",
+    "beforeContract": "Before deliberately makes only the five depth-hold images unavailable to exercise their original primitive fallbacks; same production renderer, scene, positions and native adapter as After.",
+    "depthArtUsed": [
+      "/assets/depth-holds/v188/hold-deck-plating.png",
+      "/assets/depth-holds/v188/freighter-crate-stack.png",
+      "/assets/depth-holds/v188/freighter-drum-rack.png",
+      "/assets/depth-holds/v188/quarantine-cart.png",
+      "/assets/depth-holds/v188/quarantine-crate.png"
+    ],
+    "frames": [
+      {
+        "file": "before-qz17-cargo-hold-front.png",
+        "campaign": "special-narrative-qz17",
+        "section": "qz17-cargo-hold",
+        "phase": "front",
+        "player": {
+          "x": 1019.5,
+          "y": 776,
+          "w": 42,
+          "h": 92,
+          "depthZ": -76
+        },
+        "prop": {
+          "id": "qz17-pallet",
+          "kind": "pallet",
+          "x": 1010,
+          "w": 61,
+          "h": 46,
+          "z": -52,
+          "footprint": {
+            "id": "qz17-pallet",
+            "x0": 1010,
+            "x1": 1071,
+            "z0": -62,
+            "z1": -42
+          }
+        },
+        "geometry": {
+          "x0": 937,
+          "x1": 1526,
+          "floorY": 868,
+          "zMin": -80,
+          "zMax": 0
+        }
+      },
+      {
+        "file": "before-qz17-cargo-hold-behind.png",
+        "campaign": "special-narrative-qz17",
+        "section": "qz17-cargo-hold",
+        "phase": "behind",
+        "player": {
+          "x": 1373,
+          "y": 776,
+          "w": 42,
+          "h": 92,
+          "depthZ": -28
+        },
+        "prop": {
+          "id": "qz17-container-east",
+          "kind": "container",
+          "x": 1319,
+          "w": 150,
+          "h": 132,
+          "z": -62,
+          "stack": 1,
+          "labels": [
+            "QZ17-01"
+          ],
+          "footprint": {
+            "id": "qz17-container-east",
+            "x0": 1319,
+            "x1": 1469,
+            "z0": -90,
+            "z1": -36
+          }
+        },
+        "geometry": {
+          "x0": 937,
+          "x1": 1526,
+          "floorY": 868,
+          "zMin": -80,
+          "zMax": 0
+        }
+      },
+      {
+        "file": "before-freighter-cargo-hold-front.png",
+        "campaign": "pair-004-mire",
+        "section": "freighter-cargo-hold",
+        "phase": "front",
+        "player": {
+          "x": 1020.5,
+          "y": 776,
+          "w": 42,
+          "h": 92,
+          "depthZ": -76
+        },
+        "prop": {
+          "id": "freighter-stack-west",
+          "kind": "crate-stack",
+          "x": 1011,
+          "w": 61,
+          "h": 92,
+          "z": -47,
+          "slot": "freighter-crate-stack",
+          "labels": [
+            "C-21",
+            "C-22"
+          ],
+          "footprint": {
+            "id": "freighter-stack-west",
+            "x0": 1011,
+            "x1": 1072,
+            "z0": -60,
+            "z1": -34
+          }
+        },
+        "geometry": {
+          "x0": 938,
+          "x1": 1522,
+          "floorY": 868,
+          "zMin": -80,
+          "zMax": 0
+        }
+      },
+      {
+        "file": "before-freighter-cargo-hold-behind.png",
+        "campaign": "pair-004-mire",
+        "section": "freighter-cargo-hold",
+        "phase": "behind",
+        "player": {
+          "x": 1020.5,
+          "y": 776,
+          "w": 42,
+          "h": 92,
+          "depthZ": -26
+        },
+        "prop": {
+          "id": "freighter-stack-west",
+          "kind": "crate-stack",
+          "x": 1011,
+          "w": 61,
+          "h": 92,
+          "z": -47,
+          "slot": "freighter-crate-stack",
+          "labels": [
+            "C-21",
+            "C-22"
+          ],
+          "footprint": {
+            "id": "freighter-stack-west",
+            "x0": 1011,
+            "x1": 1072,
+            "z0": -60,
+            "z1": -34
+          }
+        },
+        "geometry": {
+          "x0": 938,
+          "x1": 1522,
+          "floorY": 868,
+          "zMin": -80,
+          "zMax": 0
+        }
+      },
+      {
+        "file": "before-lethe-quarantine-hold-front.png",
+        "campaign": "special-alien-survival-systems",
+        "section": "lethe-quarantine-hold",
+        "phase": "front",
+        "player": {
+          "x": 1138,
+          "y": 776,
+          "w": 42,
+          "h": 92,
+          "depthZ": -76
+        },
+        "prop": {
+          "id": "quarantine-cart",
+          "kind": "quarantine-cart",
+          "x": 1121,
+          "w": 76,
+          "h": 40,
+          "z": -48,
+          "slot": "quarantine-cart",
+          "footprint": {
+            "id": "quarantine-cart",
+            "x0": 1121,
+            "x1": 1197,
+            "z0": -58,
+            "z1": -40
+          }
+        },
+        "geometry": {
+          "x0": 941,
+          "x1": 1534,
+          "floorY": 868,
+          "zMin": -80,
+          "zMax": 0
+        }
+      },
+      {
+        "file": "before-lethe-quarantine-hold-behind.png",
+        "campaign": "special-alien-survival-systems",
+        "section": "lethe-quarantine-hold",
+        "phase": "behind",
+        "player": {
+          "x": 1036,
+          "y": 776,
+          "w": 42,
+          "h": 92,
+          "depthZ": -46
+        },
+        "prop": {
+          "id": "quarantine-crate-west",
+          "kind": "quarantine-crate",
+          "x": 1011,
+          "w": 92,
+          "h": 61,
+          "z": -67,
+          "slot": "quarantine-crate",
+          "footprint": {
+            "id": "quarantine-crate-west",
+            "x0": 1011,
+            "x1": 1103,
+            "z0": -86,
+            "z1": -54
+          }
+        },
+        "geometry": {
+          "x0": 941,
+          "x1": 1534,
+          "floorY": 868,
+          "zMin": -80,
+          "zMax": 0
+        }
+      },
+      {
+        "file": "after-qz17-cargo-hold-front.png",
+        "campaign": "special-narrative-qz17",
+        "section": "qz17-cargo-hold",
+        "phase": "front",
+        "player": {
+          "x": 1019.5,
+          "y": 776,
+          "w": 42,
+          "h": 92,
+          "depthZ": -76
+        },
+        "prop": {
+          "id": "qz17-pallet",
+          "kind": "pallet",
+          "x": 1010,
+          "w": 61,
+          "h": 46,
+          "z": -52,
+          "footprint": {
+            "id": "qz17-pallet",
+            "x0": 1010,
+            "x1": 1071,
+            "z0": -62,
+            "z1": -42
+          }
+        },
+        "geometry": {
+          "x0": 937,
+          "x1": 1526,
+          "floorY": 868,
+          "zMin": -80,
+          "zMax": 0
+        }
+      },
+      {
+        "file": "after-qz17-cargo-hold-behind.png",
+        "campaign": "special-narrative-qz17",
+        "section": "qz17-cargo-hold",
+        "phase": "behind",
+        "player": {
+          "x": 1373,
+          "y": 776,
+          "w": 42,
+          "h": 92,
+          "depthZ": -28
+        },
+        "prop": {
+          "id": "qz17-container-east",
+          "kind": "container",
+          "x": 1319,
+          "w": 150,
+          "h": 132,
+          "z": -62,
+          "stack": 1,
+          "labels": [
+            "QZ17-01"
+          ],
+          "footprint": {
+            "id": "qz17-container-east",
+            "x0": 1319,
+            "x1": 1469,
+            "z0": -90,
+            "z1": -36
+          }
+        },
+        "geometry": {
+          "x0": 937,
+          "x1": 1526,
+          "floorY": 868,
+          "zMin": -80,
+          "zMax": 0
+        }
+      },
+      {
+        "file": "after-freighter-cargo-hold-front.png",
+        "campaign": "pair-004-mire",
+        "section": "freighter-cargo-hold",
+        "phase": "front",
+        "player": {
+          "x": 1020.5,
+          "y": 776,
+          "w": 42,
+          "h": 92,
+          "depthZ": -76
+        },
+        "prop": {
+          "id": "freighter-stack-west",
+          "kind": "crate-stack",
+          "x": 1011,
+          "w": 61,
+          "h": 92,
+          "z": -47,
+          "slot": "freighter-crate-stack",
+          "labels": [
+            "C-21",
+            "C-22"
+          ],
+          "footprint": {
+            "id": "freighter-stack-west",
+            "x0": 1011,
+            "x1": 1072,
+            "z0": -60,
+            "z1": -34
+          }
+        },
+        "geometry": {
+          "x0": 938,
+          "x1": 1522,
+          "floorY": 868,
+          "zMin": -80,
+          "zMax": 0
+        }
+      },
+      {
+        "file": "after-freighter-cargo-hold-behind.png",
+        "campaign": "pair-004-mire",
+        "section": "freighter-cargo-hold",
+        "phase": "behind",
+        "player": {
+          "x": 1020.5,
+          "y": 776,
+          "w": 42,
+          "h": 92,
+          "depthZ": -26
+        },
+        "prop": {
+          "id": "freighter-stack-west",
+          "kind": "crate-stack",
+          "x": 1011,
+          "w": 61,
+          "h": 92,
+          "z": -47,
+          "slot": "freighter-crate-stack",
+          "labels": [
+            "C-21",
+            "C-22"
+          ],
+          "footprint": {
+            "id": "freighter-stack-west",
+            "x0": 1011,
+            "x1": 1072,
+            "z0": -60,
+            "z1": -34
+          }
+        },
+        "geometry": {
+          "x0": 938,
+          "x1": 1522,
+          "floorY": 868,
+          "zMin": -80,
+          "zMax": 0
+        }
+      },
+      {
+        "file": "after-lethe-quarantine-hold-front.png",
+        "campaign": "special-alien-survival-systems",
+        "section": "lethe-quarantine-hold",
+        "phase": "front",
+        "player": {
+          "x": 1138,
+          "y": 776,
+          "w": 42,
+          "h": 92,
+          "depthZ": -76
+        },
+        "prop": {
+          "id": "quarantine-cart",
+          "kind": "quarantine-cart",
+          "x": 1121,
+          "w": 76,
+          "h": 40,
+          "z": -48,
+          "slot": "quarantine-cart",
+          "footprint": {
+            "id": "quarantine-cart",
+            "x0": 1121,
+            "x1": 1197,
+            "z0": -58,
+            "z1": -40
+          }
+        },
+        "geometry": {
+          "x0": 941,
+          "x1": 1534,
+          "floorY": 868,
+          "zMin": -80,
+          "zMax": 0
+        }
+      },
+      {
+        "file": "after-lethe-quarantine-hold-behind.png",
+        "campaign": "special-alien-survival-systems",
+        "section": "lethe-quarantine-hold",
+        "phase": "behind",
+        "player": {
+          "x": 1036,
+          "y": 776,
+          "w": 42,
+          "h": 92,
+          "depthZ": -46
+        },
+        "prop": {
+          "id": "quarantine-crate-west",
+          "kind": "quarantine-crate",
+          "x": 1011,
+          "w": 92,
+          "h": 61,
+          "z": -67,
+          "slot": "quarantine-crate",
+          "footprint": {
+            "id": "quarantine-crate-west",
+            "x0": 1011,
+            "x1": 1103,
+            "z0": -86,
+            "z1": -54
+          }
+        },
+        "geometry": {
+          "x0": 941,
+          "x1": 1534,
+          "floorY": 868,
+          "zMin": -80,
+          "zMax": 0
+        }
+      }
+    ]
+  },
+  "nativeMaskAdapter": {
+    "scope": "Only destination-in fill() of rectangular paths under a nonidentity transform in the native QA context; corners replayed in device coordinates; no production module changed.",
+    "selfCheck": {
+      "rawTranslatedMatchesExpected": false,
+      "adaptedTranslatedMatchesExpected": true,
+      "expectedRgbaSha256": "943b62360b9b7fb2120b95549980fe306b429dc44b8cbfcfdbc385b0b40dffe2"
+    },
+    "beforeNormalizedFills": 3,
+    "afterNormalizedFills": 3
+  },
+  "decodedSourceImages": 31,
+  "depthArt": [
+    {
+      "path": "/assets/depth-holds/v188/freighter-crate-stack.png",
+      "raw": "18bcb104404c9d74.rgba",
+      "width": 1022,
+      "height": 1538,
+      "sourceSha256": "ae0da3c844374e1d346001d7894a1e09c54d5936b88c9f01c4ba2fdf9b79a395",
+      "pixelSha256": "c1f14b652bc693d12fc1bcc876583a5ff455cd131c33bd20f6ca6a261d8c523b"
+    },
+    {
+      "path": "/assets/depth-holds/v188/freighter-drum-rack.png",
+      "raw": "7b4a7424619553c8.rgba",
+      "width": 1705,
+      "height": 923,
+      "sourceSha256": "d8e16985551f43e43885d9dfea4c735fc9133b29bd63f2972a39e8a189b1aa8b",
+      "pixelSha256": "871d97bd445ae0633d70975bc6c811f6d5f6ad01424f81691314ea711aa47892"
+    },
+    {
+      "path": "/assets/depth-holds/v188/hold-deck-plating.png",
+      "raw": "b323358ca1ec2f16.rgba",
+      "width": 1254,
+      "height": 1254,
+      "sourceSha256": "b70a723e34baea129ff410d10e4a76d0f2436d48d88385daa3f9ce0e92f63415",
+      "pixelSha256": "6366763c3cbe08792cda95229be807f13907c7f72ba7b3d8a167fe89985d1743"
+    },
+    {
+      "path": "/assets/depth-holds/v188/quarantine-cart.png",
+      "raw": "c26537697f44914e.rgba",
+      "width": 1728,
+      "height": 910,
+      "sourceSha256": "c073efc885fabf2abcf7cade539c12ab9e6fcaa8557d7253668077ef68ef8798",
+      "pixelSha256": "abd481dcdce862fd1f756872bd625de5da76eb1ed8e8584627811a517fd9a0cf"
+    },
+    {
+      "path": "/assets/depth-holds/v188/quarantine-crate.png",
+      "raw": "e42922b4420db86f.rgba",
+      "width": 1536,
+      "height": 1024,
+      "sourceSha256": "f1b9e3c447d3a3e4c89a5b5f62c57a6405775d97b799b1e7698f8e56ce2a34f9",
+      "pixelSha256": "6a4a82e0ffadde7621d08410681ebb884578b345994554264441ae3b800e5ebb"
+    }
+  ],
+  "sourcePixels": "Original PNG files unchanged. Pillow decoded source images to RGBA fixtures for the native backend; cropping, projection and drawing use production modules.",
+  "placement": "Same seed7, camera and fixed actor states before/after. The front lane is physically free by blockedByFootprintV188; a rear position is eight depth units behind the selected footprint. No physics stepping or new movement rule.",
+  "limitations": [
+    "Native Canvas, not a browser session.",
+    "Before explicitly withholds only the five newly supplied images; original primitive fallbacks remain active.",
+    "Only translated rectangular destination-in fills are normalized in the QA context, with pixel-equivalence self-check; no production engine correction.",
+    "Typography uses native available-font fallback.",
+    "No full playthrough, browser decoding/offline-network validation or performance benchmark."
+  ],
+  "artifacts": {
+    "before-qz17-cargo-hold-front.png": "181e206cd00d015b158a62bdd7b9f6445fc79f66896c2a4ad9ce5b134d1d0b5f",
+    "before-freighter-cargo-hold-front.png": "12c43d201047c371c80fe110f4a19090efde0a6d2f1860c8f623cb836f5cd325",
+    "before-lethe-quarantine-hold-front.png": "6faefda1cabf5d8a764ae23f1436734ada463cb12a3314ac025473e88c2a8a33",
+    "after-qz17-cargo-hold-front.png": "756472f5ab89095eefac7da0eb9d405cf27f5a9ee96f4de71f1e27cfa83f1d6b",
+    "after-freighter-cargo-hold-front.png": "b76cc1e858cd79ccd0ab69d15e581fe32b1675b8306f1429ee474a1f976d7c7a",
+    "after-lethe-quarantine-hold-front.png": "1ce98bf249d5a6fcffd13e79617a58bfd9438e826ffa6a63ecb088926ce6d976",
+    "before-qz17-cargo-hold-behind.png": "fed0f44de1f8f6ad12474baefd04865e250802d46b4e74e9c6d35f73719b322f",
+    "before-freighter-cargo-hold-behind.png": "1d664face82fc862e874b02e5ec7c77b20f707794a56f5762ce79788542c6665",
+    "before-lethe-quarantine-hold-behind.png": "a024c44cea1bf03b26c7254fc2b263b6286c8edbe90e5e0bd78a67e223a7b08c",
+    "after-qz17-cargo-hold-behind.png": "9130510b34a7848c1757b4f507290ddf8bfa2ad050dfd00fc2b324e341ed5236",
+    "after-freighter-cargo-hold-behind.png": "3a908f1e064ae96d34cba3954119ce4d10687f8cfb2a7ae3acb49af08960fd43",
+    "after-lethe-quarantine-hold-behind.png": "040b3e56b245544033912a593c3a4b7ba3f1a889ff076e2ce21157b65d11e742",
+    "before-after-overview.png": "a7bba507ec254da751a71cc22de25d8edfa9fba17d0045c1ed10f50caef449d2"
+  }
+}

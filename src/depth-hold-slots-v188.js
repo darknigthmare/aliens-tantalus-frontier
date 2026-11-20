@@ -1,10 +1,10 @@
 // V188 — named art slots for the floor objects of the mission holds in depth
-// (specs/004-cales-profondeur-suite). Image generation is deferred (owner
-// decision 2026-11-15): every object is drawn with Canvas primitives as a
-// PLACEHOLDER and routed through one of these slots. When an image is later
+// (specs/004-cales-profondeur-suite). The owner's resumed art pass supplies
+// raster objects; every slot retains its Canvas primitive fallback. When an image is
 // produced for a slot, commit it at the slot's path AND add the slot id to
 // DEPTH_HOLD_SLOT_FILES_PRESENT_V188: only listed slots are ever requested.
-// Sizes follow the project scale, 1 m ≈ 51 px; sprites are never scaled.
+// Logical boxes follow the project scale, 1 m ≈ 51 px. Larger source rasters
+// fit inside those same boxes; physical sizes and footprints never change.
 // Markings are codes and pictograms only (no player text to translate).
 
 export const DEPTH_HOLD_SLOT_ROOT_V188 = '/assets/depth-holds/v188/';
@@ -24,17 +24,27 @@ export const DEPTH_HOLD_SLOTS_V188 = Object.freeze([
     'Low steel sample cart tipped on its side, a cracked sample case, side view; transparent background.')
 ]);
 export const DEPTH_HOLD_SLOT_IDS_V188 = Object.freeze(DEPTH_HOLD_SLOTS_V188.map(entry => entry.id));
-// Slots whose PNG is committed under DEPTH_HOLD_SLOT_ROOT_V188. Empty until the art is produced.
-export const DEPTH_HOLD_SLOT_FILES_PRESENT_V188 = Object.freeze([]);
+// Authored PNGs physically present under DEPTH_HOLD_SLOT_ROOT_V188.
+export const DEPTH_HOLD_SLOT_FILES_PRESENT_V188 = Object.freeze(['freighter-crate-stack', 'freighter-drum-rack', 'quarantine-crate', 'quarantine-cart']);
+// Measured useful alpha bounds remove export margins at draw time. The native
+// size guard keeps another source revision from receiving the wrong crop.
+export const DEPTH_HOLD_SLOT_SOURCE_RECTS_V188 = Object.freeze({
+  'freighter-crate-stack': Object.freeze({ width: 1022, height: 1538, rect: Object.freeze([74, 32, 873, 1469]) }),
+  'freighter-drum-rack': Object.freeze({ width: 1705, height: 923, rect: Object.freeze([50, 43, 1600, 850]) }),
+  'quarantine-crate': Object.freeze({ width: 1536, height: 1024, rect: Object.freeze([15, 37, 1504, 950]) }),
+  'quarantine-cart': Object.freeze({ width: 1728, height: 910, rect: Object.freeze([30, 18, 1684, 873]) })
+});
 
 export function getDepthHoldSlotV188(id) { return DEPTH_HOLD_SLOTS_V188.find(entry => entry.id === id) || null; }
 
-const images = new Map();
+const images = new WeakMap();
 function slotImage(id, present, ImageCtor) {
   if (!present.includes(id) || !ImageCtor) return null;
-  let image = images.get(id);
-  if (!image) { image = new ImageCtor(); image.src = getDepthHoldSlotV188(id).path; images.set(id, image); }
-  return image.complete && image.naturalWidth > 0 ? image : null;
+  let cache = images.get(ImageCtor);
+  if (!cache) { cache = new Map(); images.set(ImageCtor, cache); }
+  let image = cache.get(id);
+  if (!image) { image = new ImageCtor(); image.src = getDepthHoldSlotV188(id).path; cache.set(id, image); }
+  return image.complete && image.naturalWidth > 0 && image.naturalHeight > 0 ? image : null;
 }
 
 /** Draws a slotted floor object into its box: the committed image when there is one, the primitive fallback otherwise. */
@@ -44,7 +54,23 @@ export function drawDepthHoldSlotV188(ctx, prop, box, { present = DEPTH_HOLD_SLO
   ctx.save();
   try {
     ctx.fillStyle = 'rgba(0,0,0,.35)'; ctx.beginPath(); ctx.ellipse(box.x + box.w / 2, box.y + box.h + 2, box.w * .55, 6, 0, 0, Math.PI * 2); ctx.fill();
-    if (image) { ctx.drawImage(image, box.x, box.y, box.w, box.h); return 'image'; }
+    if (image) {
+      const frame = DEPTH_HOLD_SLOT_SOURCE_RECTS_V188[prop.slot];
+      const crop = frame && image.naturalWidth === frame.width && image.naturalHeight === frame.height ? frame.rect : [0, 0, image.naturalWidth, image.naturalHeight];
+      const scale = Math.min(box.w / crop[2], box.h / crop[3]), width = crop[2] * scale, height = crop[3] * scale;
+      const x = box.x + (box.w - width) / 2, y = box.y + box.h - height;
+      ctx.drawImage(image, ...crop, x, y, width, height);
+      // Codes belong to each placed stack, not to a shared generated bitmap.
+      if (prop.slot === 'freighter-crate-stack') {
+        ctx.font = '700 6px monospace'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        for (const [index, code] of (prop.labels || ['C-21', 'C-22']).slice(0, 2).entries()) {
+          const ly = y + height * (index ? .291 : .715);
+          ctx.fillStyle = '#292a24'; ctx.fillRect(x + width * .32, ly - 3.5, width * .36, 7);
+          ctx.fillStyle = '#c9a54a'; ctx.fillText(code, x + width / 2, ly, width * .34);
+        }
+      }
+      return 'image';
+    }
     // The primitive drawing is rendered once per object into an offscreen canvas, then blitted (frame cost).
     const cached = fallbackCanvas(prop, box);
     if (cached) ctx.drawImage(cached, 0, 0, cached.width, cached.height, box.x - PAD, box.y - PAD, cached.width, cached.height);

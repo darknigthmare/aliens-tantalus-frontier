@@ -278,13 +278,28 @@ export function withApcConvoyRuntimeV121(BaseEngine) {
       this.apcConvoyCheckpointV121 = this.captureApcConvoyCheckpointV121();
       this.onEvent({ type: 'checkpoint', checkpoint: `apc-convoy-${id}`, operationId: APC_CONVOY_OPERATION_V121 });
     }
+    apcConvoyRewardsV121(actor = this.player) {
+      return { credits: Math.min(10000, 850 + actor.kills * 10 + Math.floor(this.vehicle.hull / 340 * 250)), salvage: this.inventory.salvage,
+        intel: this.inventory.intel, retries: this.mission.retries, elapsedSeconds: Math.round(this.mission.elapsed),
+        noCasualty: this.mission.casualties === 0, vehicleRecovered: true, hullRemaining: Math.round(this.vehicle.hull), operationId: APC_CONVOY_OPERATION_V121 };
+    }
+    finalizeDeferredMissionCompletionV188(event) {
+      if (!this.isApcConvoyV121() || event?.type !== 'mission-complete' || event.operationId !== APC_CONVOY_OPERATION_V121)
+        return super.finalizeDeferredMissionCompletionV188?.(event) ?? event;
+      const state = this.apcConvoyV121;
+      if (this.mission?.state !== 'complete' || !state.complete || !state.rewardClaimed) return event;
+      // Boarding can earn real kills or damage the surviving hull after the
+      // extraction was confirmed. Settle from that final native state without
+      // replaying completeMission, its access cancellation or its terminal event.
+      const rewards = this.apcConvoyRewardsV121();
+      state.rewards = rewards; this.mission.rewards = clone(rewards);
+      return { ...event, kills: this.player.kills + this.coop.kills, rewards: clone(rewards) };
+    }
     completeMission(actor = this.player) {
       if (!this.isApcConvoyV121()) return super.completeMission(actor);
       const state = this.apcConvoyV121;
       if (!this.canApcConvoyActV121(actor) || state.complete || state.rewardClaimed || this.missingApcConvoyRequirementV121()) return false;
-      const rewards = { credits: Math.min(10000, 850 + actor.kills * 10 + Math.floor(this.vehicle.hull / 340 * 250)), salvage: this.inventory.salvage,
-        intel: this.inventory.intel, retries: this.mission.retries, elapsedSeconds: Math.round(this.mission.elapsed),
-        noCasualty: this.mission.casualties === 0, vehicleRecovered: true, hullRemaining: Math.round(this.vehicle.hull), operationId: APC_CONVOY_OPERATION_V121 };
+      const rewards = this.apcConvoyRewardsV121(actor);
       state.complete = true; state.rewardClaimed = true; state.rewards = rewards; this.syncApcConvoyWorldV121();
       const sink = this.onEvent;
       this.onEvent = event => { if (event.type === 'mission-complete') { this.mission.rewards = clone(rewards); sink({ ...event, rewards: clone(rewards), operationId: APC_CONVOY_OPERATION_V121 }); } else sink(event); };

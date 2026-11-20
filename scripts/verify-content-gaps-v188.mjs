@@ -18,7 +18,9 @@ import {
   applyCrewQuestOperationResultV188, normalizeCrewQuestsV188, crewQuestsSnapshotV188
 } from '../src/crew-quests-v188.js';
 import { JUMP_TRAVEL_DAYS_V188, applyJumpTravelTimeV188, jumpRouteTextV188, jumpArrivalTextV188 } from '../src/galaxy-travel-v188.js';
-import { CONTENT_GAP_SLOTS_V188, CONTENT_GAP_FILES_PRESENT_V188, ContentGapAssetLoaderV188 } from '../src/content-gap-slots-v188.js';
+import { CONTENT_GAP_SLOTS_V188, CONTENT_GAP_SLOT_IDS_V188, CONTENT_GAP_FILES_PRESENT_V188,
+  CONTENT_GAP_EVIDENCE_IDS_V188, CONTENT_GAP_CAPTIONS_V188, ContentGapAssetLoaderV188 } from '../src/content-gap-slots-v188.js';
+import { openContentSceneDialogV188 } from '../src/content-gap-ui-v188.js';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url), 'utf8');
 const roundTrip = save => migrateSave(JSON.parse(JSON.stringify(save)));
@@ -194,16 +196,171 @@ test('travel: the route shows fuel and days before departure; arrival adds 14 da
 });
 
 // —— Art slots, service worker, admission ——
-test('art slots: Canvas placeholders only, every slot draws, no network request without a committed file', () => {
-  assert.deepEqual(CONTENT_GAP_FILES_PRESENT_V188, []);
-  for (const id of CONTENT_GAP_FILES_PRESENT_V188) assert.ok(existsSync(new URL(`..${CONTENT_GAP_SLOTS_V188.find(entry => entry.id === id).path}`, import.meta.url)));
+test('art slots: all six admitted content cards are real PNGs and every original scene/quest keeps its slot', () => {
+  assert.deepEqual(CONTENT_GAP_FILES_PRESENT_V188, CONTENT_GAP_SLOT_IDS_V188);
+  assert.equal(CONTENT_GAP_FILES_PRESENT_V188.length, 6);
+  for (const id of CONTENT_GAP_FILES_PRESENT_V188) {
+    const path = new URL(`..${CONTENT_GAP_SLOTS_V188.find(entry => entry.id === id).path}`, import.meta.url);
+    assert.ok(existsSync(path), id);
+    const bytes = readFileSync(path);
+    assert.equal(bytes.subarray(0, 8).toString('hex'), '89504e470d0a1a0a', id);
+    assert.equal(bytes.subarray(12, 16).toString(), 'IHDR', id);
+    assert.ok(bytes.readUInt32BE(16) >= 640 && bytes.readUInt32BE(20) >= 280, id);
+    assert.ok([2, 6].includes(bytes[25]), 'RGB or RGBA PNG');
+  }
+  for (const scene of Object.values(STATION_SCENES_V188)) assert.ok(CONTENT_GAP_SLOT_IDS_V188.includes(scene.slot));
+  for (const quest of CREW_QUESTS_V188) assert.ok(CONTENT_GAP_SLOT_IDS_V188.includes(quest.slot));
+});
+
+test('art fallback: every content card remains available without an image and unadmitted paths are never requested', () => {
   const calls = [];
   const ctx = new Proxy({}, { get: (_, key) => (key in Object.prototype ? undefined : (...args) => { calls.push(key); return { width: 10 }; }), set: () => true });
-  const loader = new ContentGapAssetLoaderV188({ ImageCtor: class {} });
+  const loader = new ContentGapAssetLoaderV188({ ImageCtor: class {}, present: [] });
   assert.deepEqual(loader.preload(), []);
-  for (const slot of CONTENT_GAP_SLOTS_V188) assert.equal(loader.draw(ctx, slot.id, 640, 280, { language: 'en' }), 'primitive');
+  for (const slot of CONTENT_GAP_SLOTS_V188) {
+    assert.equal(loader.draw(ctx, slot.id, 640, 280, { language: 'en' }), 'primitive');
+    assert.notEqual(CONTENT_GAP_CAPTIONS_V188[slot.id].fr, CONTENT_GAP_CAPTIONS_V188[slot.id].en);
+  }
   assert.ok(calls.length > 50);
-  for (const slot of [...new Set(['asphodele-exterior', 'cassius-core', 'echo8-recording', 'order-documents', 'seal-fragment', 'david-memory'])]) assert.ok(CONTENT_GAP_SLOTS_V188.some(entry => entry.id === slot));
+  assert.throws(() => loader.draw(ctx, 'unknown', 640, 280), /Unknown content art slot/);
+});
+
+function artContext() {
+  const calls = [], state = {};
+  const ctx = new Proxy(state, { get: (target, key) => key in target ? target[key] : (...args) => {
+    calls.push({ key, args }); return { width: String(args[0] || '').length * 6.6, addColorStop() {} };
+  }, set: (target, key, value) => { target[key] = value; return true; } });
+  return { ctx, calls };
+}
+function delayedImages() {
+  const created = [];
+  class Image {
+    constructor() { this.complete = false; this.naturalWidth = 0; this.naturalHeight = 0; this.events = new Map(); created.push(this); }
+    addEventListener(type, fn) { if (!this.events.has(type)) this.events.set(type, new Set()); this.events.get(type).add(fn); }
+    removeEventListener(type, fn) { this.events.get(type)?.delete(fn); }
+    settle(type = 'load', width = 1600, height = 900) {
+      this.complete = true; this.naturalWidth = type === 'load' ? width : 0; this.naturalHeight = type === 'load' ? height : 0;
+      for (const fn of [...(this.events.get(type) || [])]) fn();
+    }
+  }
+  return { Image, created };
+}
+
+test('content art loader: six lazy sources use a uniform bounded crop, native evidence and one completion notification', () => {
+  const { Image, created } = delayedImages(), { ctx, calls } = artContext();
+  const loader = new ContentGapAssetLoaderV188({ ImageCtor: Image, present: CONTENT_GAP_SLOT_IDS_V188 });
+  assert.equal(created.length, 0);
+  for (const [index, slot] of CONTENT_GAP_SLOTS_V188.entries()) {
+    let notifications = 0;
+    const release = loader.subscribe(slot.id, () => { notifications += 1; });
+    loader.preload([slot.id, 'unknown']); loader.preload([slot.id]);
+    assert.equal(created.length, index + 1); assert.equal(created[index].src, slot.path);
+    assert.equal(loader.draw(ctx, slot.id, 640, 280), 'primitive');
+    created[index].settle(); created[index].settle(); assert.equal(notifications, 1);
+    calls.length = 0;
+    assert.equal(loader.draw(ctx, slot.id, 640, 280), 'image');
+    const draw = calls.find(call => call.key === 'drawImage').args;
+    assert.equal(draw[0], created[index]); assert.deepEqual(draw.slice(1), [0, 100, 1600, 700, 0, 0, 640, 280]);
+    assert.equal(draw[7] / draw[3], draw[8] / draw[4]);
+    assert.ok(draw[1] >= 0 && draw[2] >= 0 && draw[1] + draw[3] <= 1600 && draw[2] + draw[4] <= 900);
+    assert.equal(loader.frames[slot.id].evidence, CONTENT_GAP_EVIDENCE_IDS_V188.includes(slot.id));
+    assert.ok(calls.some(call => call.key === 'fillText' && call.args[0] === CONTENT_GAP_CAPTIONS_V188[slot.id].fr));
+    if (slot.id === 'cassius-core') assert.deepEqual(calls.filter(call => call.key === 'fillRect').map(call => call.args), [[0, 256, 640, 24]], 'the generated screen is not hidden by an opaque plate');
+    release(); assert.equal(loader.listeners.has(slot.id), false);
+  }
+  assert.deepEqual(loader.requested, CONTENT_GAP_SLOTS_V188.map(slot => slot.path));
+});
+
+test('content art errors: failed loads, invalid dimensions, synchronous cached loads and drawing exceptions stay safe', () => {
+  const { Image, created } = delayedImages(), { ctx, calls } = artContext();
+  const loader = new ContentGapAssetLoaderV188({ ImageCtor: Image, present: CONTENT_GAP_SLOT_IDS_V188 });
+  loader.preload(['echo8-recording']); created[0].settle('error');
+  assert.equal(loader.draw(ctx, 'echo8-recording', 640, 280), 'primitive');
+  loader.preload(['echo8-recording']); assert.equal(created.length, 1, 'errors cannot create request loops');
+  loader.preload(['david-memory']); created[1].settle('load', 1600, 0);
+  assert.equal(loader.image('david-memory'), null); assert.equal(loader.states.get('david-memory'), 'error');
+  const sync = new ContentGapAssetLoaderV188({ present: ['cassius-core'], ImageCtor: class {
+    set src(value) { this._src = value; this.complete = true; this.naturalWidth = 1890; this.naturalHeight = 832; this.onload?.(); }
+    get src() { return this._src; }
+  } });
+  let repaints = 0; sync.subscribe('cassius-core', () => { repaints += 1; }); sync.preload();
+  assert.equal(repaints, 1); assert.ok(sync.image('cassius-core'));
+  assert.equal(sync.draw(ctx, 'cassius-core', 640, 280), 'image');
+  calls.length = 0; ctx.drawImage = () => { throw new Error('unavailable decoder'); };
+  assert.equal(sync.draw(ctx, 'cassius-core', 640, 280), 'primitive');
+  assert.equal(sync.states.get('cassius-core'), 'error'); assert.equal(sync.frames['cassius-core'].crop, null);
+  assert.equal(calls.filter(call => call.key === 'save').length, calls.filter(call => call.key === 'restore').length);
+});
+
+test('content evidence: FR/EN facts stay exact and reused pictures do not invent current quest outcomes', () => {
+  const { ctx, calls } = artContext(), loader = new ContentGapAssetLoaderV188({ ImageCtor: null, present: [] });
+  const rendered = (id, language) => {
+    calls.length = 0; loader.draw(ctx, id, 640, 280, { language });
+    return calls.filter(call => call.key === 'fillText').map(call => call.args[0]);
+  };
+  for (const id of CONTENT_GAP_EVIDENCE_IDS_V188) assert.notDeepEqual(rendered(id, 'fr'), rendered(id, 'en'), id);
+  const ordersEn = rendered('order-documents', 'en').join(' '), ordersFr = rendered('order-documents', 'fr').join(' ');
+  assert.ok(ordersFr.includes('ADMIN. COLONIALE')); assert.ok(ordersEn.includes('COLONIAL ADMIN.'), 'the Administration stamp is native and translated');
+  for (const text of ['Protect the population of Cocyte and report on the incident.', 'QZ17 freight keeps priority on the network until further notice.',
+    'The Tantalus may requisition the civil and industrial means of Cocyte.', 'No company equipment leaves the depot without the representative’s agreement.']) assert.ok(ordersEn.includes(text), text);
+  for (const text of ['Protéger la population de Cocyte et rendre compte de l’incident.', 'Le fret QZ17 garde la priorité sur le réseau jusqu’à nouvel ordre.',
+    'Le Tantalus peut réquisitionner les moyens civils et industriels de Cocyte.', 'Aucun matériel de la compagnie ne quitte le dépôt sans accord du représentant.']) assert.ok(ordersFr.includes(text), text);
+  for (const language of ['fr', 'en']) {
+    const echo = rendered('echo8-recording', language);
+    for (const time of ['05:58', '05:59', '06:00']) assert.ok(echo.includes(time));
+    assert.ok(!echo.some(text => /06:00:0[57]/.test(text)), 'the card does not silently resolve the existing narrative cut-second discrepancy');
+    assert.ok(!echo.some(text => /Kessler|member|membre/i.test(text)), 'no invented roster names');
+    const david = rendered('david-memory', language);
+    assert.ok(david.includes('DAVID-8R')); assert.ok(david.some(text => text.startsWith('3 ')));
+    assert.ok(!david.some(text => /QZ-9|restaur|restored|effac|erased|3\/3/i.test(text)), 'a reused card is not a completion receipt or an early memory reveal');
+    const cassius = rendered('cassius-core', language);
+    assert.ok(cassius.some(text => /ARCHIV/.test(text))); assert.ok(!cassius.some(text => /QUARANTINE ACTIVE|QUARANTAINE ACTIVE/.test(text)));
+  }
+  assert.ok(rendered('seal-fragment', 'fr').includes('QZ17-04'));
+  assert.ok(rendered('seal-fragment', 'fr').includes('TRANSIT VÉRIFIÉ'));
+  assert.ok(rendered('seal-fragment', 'en').includes('TRANSIT VERIFIED'));
+});
+
+function sceneDocument(ctx) {
+  const document = { activeElement: null, focusCalls: 0 };
+  class Element {
+    constructor(tag) { this.tagName = tag; this.children = []; this.dataset = {}; this.style = {}; this.events = new Map(); this.ownerDocument = document; }
+    get isConnected() { return this === document.body || Boolean(this.parentElement?.isConnected); }
+    append(...children) { for (const child of children) { child.parentElement = this; this.children.push(child); } }
+    replaceChildren(...children) { for (const child of this.children) child.parentElement = null; this.children = []; this.append(...children); }
+    remove() { if (this.parentElement) this.parentElement.children = this.parentElement.children.filter(child => child !== this); this.parentElement = null; }
+    setAttribute(key, value) { this[key] = value; }
+    getContext() { return ctx; }
+    addEventListener(type, fn) { if (!this.events.has(type)) this.events.set(type, new Set()); this.events.get(type).add(fn); }
+    fire(type) { for (const fn of [...(this.events.get(type) || [])]) fn({ preventDefault() {} }); }
+    close() { this.open = false; this.fire('close'); }
+    showModal() { this.open = true; }
+    focus() { document.activeElement = this; document.focusCalls += 1; }
+    querySelector(tag) { for (const child of this.children) { if (child.tagName === tag) return child; const result = child.querySelector(tag); if (result) return result; } return null; }
+  }
+  document.createElement = tag => new Element(tag); document.body = new Element('body'); return document;
+}
+
+test('content scene dialog: its real loader repaints only the current image and never repeats a choice or steals focus', () => {
+  const { ctx, calls } = artContext(), { Image, created } = delayedImages(), document = sceneDocument(ctx);
+  const loader = new ContentGapAssetLoaderV188({ ImageCtor: Image, present: CONTENT_GAP_SLOT_IDS_V188 });
+  let choices = 0, closes = 0;
+  const view = openContentSceneDialogV188({ document, loader, slot: 'echo8-recording', title: 'Rook', text: 'Track',
+    options: [{ id: 'next', label: 'Next' }], onChoose: () => { choices += 1; return { slot: 'asphodele-exterior', title: 'Asphodèle', text: 'Station', options: [{ id: 'done', label: 'Done' }] }; }, onClose: () => { closes += 1; } });
+  assert.equal(created.length, 1); assert.equal(loader.usage['echo8-recording'], 'primitive');
+  const focused = document.activeElement, focusCalls = document.focusCalls, paragraph = view.dialog.children[2];
+  created[0].settle(); assert.equal(loader.usage['echo8-recording'], 'image');
+  assert.equal(document.activeElement, focused); assert.equal(document.focusCalls, focusCalls); assert.equal(choices, 0); assert.equal(paragraph.textContent, 'Track');
+  focused.fire('click'); assert.equal(choices, 1); assert.equal(created.length, 2);
+  assert.equal(loader.listeners.has('echo8-recording'), false);
+  view.render({ slot: 'cassius-core', title: 'CASSIUS', text: 'Decision', options: [{ id: 'erase', label: 'Erase' }] });
+  calls.length = 0; created[1].settle(); assert.equal(calls.length, 0);
+  const focusBeforeError = document.focusCalls; created[2].settle('error');
+  assert.equal(loader.usage['cassius-core'], 'primitive'); assert.equal(document.focusCalls, focusBeforeError); assert.equal(choices, 1);
+  view.render({ slot: 'david-memory', title: 'DAVID-8R' }); assert.equal(created.length, 4);
+  view.close(); calls.length = 0; created[3].settle();
+  assert.equal(calls.length, 0); assert.equal(loader.listeners.size, 0); assert.equal(closes, 1); assert.equal(document.body.children.length, 0);
+  view.render({ slot: 'order-documents' }); assert.equal(created.length, 4);
 });
 
 test('service worker, package script and source-only admission', () => {

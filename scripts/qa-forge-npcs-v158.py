@@ -6,6 +6,7 @@ import importlib.metadata
 import json
 import os
 from pathlib import Path
+import time
 from playwright.sync_api import sync_playwright
 
 parser = argparse.ArgumentParser()
@@ -85,12 +86,24 @@ def point(page, x, y):
       return {x:(m.x+(x+.5)*m.scale)/e.canvas.width*r.width,y:(m.y+(y+.5)*m.scale)/e.canvas.height*r.height};}''', {'x': x, 'y': y})
 
 
-def enter_forge(page):
-    page.locator('#title-start:visible, #title-forge:visible').first.wait_for(state='visible', timeout=45000)
+def enter_forge(page, timeout=45000):
+    # The intro's transparent fade admits mouse clicks before it releases
+    # keyboard capture. Finish it before any playtest can launch or resume.
+    # Detachment, title controls and editor readiness share the entry budget.
+    deadline = time.monotonic() + timeout / 1000
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('Forge entry exceeded its original intro and menu budget.')
+        return milliseconds
+
+    page.locator('#intro-v188').wait_for(state='detached', timeout=remaining())
+    page.locator('#title-start:visible, #title-forge:visible').first.wait_for(state='visible', timeout=remaining())
     if page.locator('#title-start').is_visible():
-        page.locator('#title-start').click()
-    page.locator('#title-forge').click()
-    page.locator('#editor-canvas').wait_for(state='visible')
+        page.locator('#title-start').click(timeout=remaining())
+    page.locator('#title-forge').click(timeout=remaining())
+    page.locator('#editor-canvas').wait_for(state='visible', timeout=remaining())
 
 
 def walk(page, kind, target, direction=1):
@@ -111,6 +124,107 @@ def checkpoint_panel(page, kind=None):
     if panel.locator('details').get_attribute('open') is None:
         panel.locator('summary').click()
     return panel
+
+
+def resume_interaction_state(page, kind):
+    return page.evaluate('''kind=>{const e=kind==='mission'?__ATF_GAME__:__ATF_HUB__;
+      const nearest=kind==='ship'?e.nearestForgeInteractionV141?.():null;
+      const npc=kind==='ship'?(nearest?.type==='npc'?nearest.entity:null):e.forgeNarrativeNpcV158?.();
+      const admitted=kind==='mission'?e.canPerformGameplayAction?.(e.player,{allowVent:true,allowSquadTask:true})
+        :e.running&&!e.paused&&!e.forgeShipStartingV141&&!e.forgeNarrativeOpenV156&&e.player?.alive;
+      return {running:e.running,paused:!!e.paused,room:e.forgeSessionV141?.currentRoomId,
+        admitted:!!admitted,npcCellId:npc?.cellId||null,dialog:e.forgeNarrativeOpenV156||null,
+        enemyLoading:!!e.enemyAtlasLoadingPausedV65,userLoading:!!e.userCasteLoadingV88,
+        shipStarting:!!e.forgeShipStartingV141,handover:!!e.dropshipHandoverBlocksV188?.(),
+        focus:document.activeElement?.id||null,documentFocused:document.hasFocus(),
+        keys:[...e.keys],deferred:e.deferredActionKeyV188?{...e.deferredActionKeyV188}:null};}''', kind)
+
+
+def start_resume_key_trace(page, kind):
+    # Observe only the single resumed E interaction. Passive listeners never
+    # cancel input, alter the engine or repeat a key; collection is bounded.
+    return page.evaluate_handle('''kind=>{
+      const rows=[],listeners=[],timers=new Set(),maxRows=64;let dropped=0;
+      const identity=n=>n?{tag:n.tagName||n.nodeName||(n===window?'WINDOW':null),id:n.id||null,role:n.getAttribute?.('role')||null}:null;
+      const native=()=>{const e=kind==='mission'?__ATF_GAME__:__ATF_HUB__;
+        const nearest=kind==='ship'?e.nearestForgeInteractionV141?.():null;
+        const npc=kind==='ship'?(nearest?.type==='npc'?nearest.entity:null):e.forgeNarrativeNpcV158?.();
+        const admitted=kind==='mission'?e.canPerformGameplayAction?.(e.player,{allowVent:true,allowSquadTask:true})
+          :e.running&&!e.paused&&!e.forgeShipStartingV141&&!e.forgeNarrativeOpenV156&&e.player?.alive;
+        return {running:e.running,paused:!!e.paused,mission:e.mission?.state||null,
+          room:e.forgeSessionV141?.currentRoomId||null,dialog:e.forgeNarrativeOpenV156||null,
+          admitted:!!admitted,npcCellId:npc?.cellId||null,
+          enemyLoading:!!e.enemyAtlasLoadingPausedV65,userLoading:!!e.userCasteLoadingV88,
+          shipStarting:!!e.forgeShipStartingV141,handover:!!e.dropshipHandoverBlocksV188?.(),
+          keys:[...(e.keys||[])],deferred:e.deferredActionKeyV188?{...e.deferredActionKeyV188}:null};};
+      const record=value=>{if(rows.length>=maxRows){dropped++;return;}
+        rows.push({...value,atMs:performance.now(),focus:identity(document.activeElement),
+          documentFocused:document.hasFocus(),documentHidden:document.hidden,native:native()});};
+      for(const [host,label] of [[window,'window'],[document,'document']])for(const capture of [true,false]){
+        const listener=event=>{
+          if(rows.length>=maxRows){dropped++;return;}
+          const entry={type:event.type,listener:label,capture,eventPhase:event.eventPhase,
+            key:event.key||null,code:event.code||null,repeat:!!event.repeat,defaultPrevented:event.defaultPrevented,
+            ctrlKey:!!event.ctrlKey,altKey:!!event.altKey,metaKey:!!event.metaKey,shiftKey:!!event.shiftKey,isComposing:!!event.isComposing,
+            trusted:event.isTrusted,target:identity(event.target),relatedTarget:identity(event.relatedTarget),
+            path:event.composedPath().slice(0,8).map(identity)};
+          record(entry);
+          if(label==='window'&&capture&&['keydown','keyup'].includes(event.type)){
+            const timer=setTimeout(()=>{timers.delete(timer);record({...entry,listener:'next-task',capture:null,
+              eventPhase:null,defaultPrevented:event.defaultPrevented});},0);timers.add(timer);
+          }
+        };
+        for(const type of ['keydown','keyup','focusin','focusout']){
+          host.addEventListener(type,listener,{capture,passive:true});listeners.push([host,type,listener,capture]);
+        }
+      }
+      record({type:'armed',expectedCode:'KeyE'});
+      return {stop(){for(const [host,type,listener,capture] of listeners)host.removeEventListener(type,listener,capture);
+        for(const timer of timers)clearTimeout(timer);record({type:'collected'});return {maxRows,dropped,rows};}};
+    }''', kind)
+
+
+def reopen_resumed_dialogue(page, kind, game_canvas, dialog):
+    # A restored checkpoint and a drawn prompt do not certify input admission.
+    # Observe that same native gate before the single E press; do not retry it
+    # or move the actor whose exact restored position was just checked.
+    deadline = time.monotonic() + 30
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('Forge resumed dialogue exceeded its 30 second input budget.')
+        return milliseconds
+
+    trace = report.setdefault('resumeInteractions', {}).setdefault(kind, {})
+    key_trace = None
+    try:
+        game_canvas.focus(timeout=remaining())
+        trace['before'] = resume_interaction_state(page, kind)
+        page.wait_for_function('''kind=>{const e=kind==='mission'?__ATF_GAME__:__ATF_HUB__;
+          const nearest=kind==='ship'?e.nearestForgeInteractionV141?.():null;
+          const npc=kind==='ship'?(nearest?.type==='npc'?nearest.entity:null):e.forgeNarrativeNpcV158?.();
+          const admitted=kind==='mission'?e.canPerformGameplayAction?.(e.player,{allowVent:true,allowSquadTask:true})
+            :e.running&&!e.paused&&!e.forgeShipStartingV141&&!e.forgeNarrativeOpenV156&&e.player?.alive;
+          return admitted&&npc?.cellId==='b-npc'&&e.forgeSessionV141?.currentRoomId==='b'
+            &&document.activeElement===e.canvas&&document.hasFocus();}''', arg=kind, timeout=remaining())
+        trace['ready'] = resume_interaction_state(page, kind)
+        key_trace = start_resume_key_trace(page, kind)
+        remaining()
+        page.keyboard.press('KeyE')
+        dialog.wait_for(state='visible', timeout=remaining())
+    finally:
+        if key_trace is not None:
+            try:
+                trace['keyEvents'] = key_trace.evaluate('trace=>trace.stop()')
+            except Exception as error:
+                trace['keyEvents'] = {'collectionError': str(error)}
+            finally:
+                try:
+                    key_trace.dispose()
+                except Exception:
+                    pass
+        trace['after'] = resume_interaction_state(page, kind)
 
 
 with sync_playwright() as p:
@@ -297,7 +411,7 @@ with sync_playwright() as p:
             (output/f'{kind}-checkpoint-observations.json').write_text(json.dumps(checkpoint_observations,ensure_ascii=False,indent=2)+'\n')
             check(kind + ': JSON reload reconstructs the right physical PNJ and preserves wounds/ammunition, completed goals and history without replay',
                   restored['running'] and not restored['paused'] and not checkpoint_observations['mismatches'])
-            game_canvas.focus(); page.keyboard.press('KeyE'); dialog.wait_for(state='visible')
+            reopen_resumed_dialogue(page, kind, game_canvas, dialog)
             check(kind + ': resumed PNJ keeps its finished cursor and cannot repeat the exchange', dialog.locator('[data-story-choice]').count()==0 and observe(page,kind)['items']==[])
             capture(page,f'{kind}-04-reloaded-dialogue.png')
             page.keyboard.press('Escape'); dialog.wait_for(state='detached')
@@ -321,6 +435,8 @@ with sync_playwright() as p:
         observations=report.get('checkpointObservations',{}).get(kind,{}) if 'kind' in locals() else {}
         if observations:
             detail+=' | checkpoint='+json.dumps({key:observations.get(key) for key in ['durable','liveAfterSave','restored','mismatches']},ensure_ascii=False,separators=(',',':'))
+        if 'kind' in locals() and kind in report.get('resumeInteractions', {}):
+            detail+=' | resumeInteraction='+json.dumps(report['resumeInteractions'][kind],ensure_ascii=False,separators=(',',':'))
         print('::error title=Forge NPC::'+detail.replace('%','%25').replace('\r','%0D').replace('\n','%0A'),flush=True)
         try:
             report['failureContext']=page.evaluate('''()=>({focus:{tag:document.activeElement?.tagName,id:document.activeElement?.id,documentFocused:document.hasFocus()},views:[...document.querySelectorAll('.view.active')].map(n=>n.dataset.panel),messages:[...document.querySelectorAll('.forge-message-v130')].map(n=>n.textContent)})''')

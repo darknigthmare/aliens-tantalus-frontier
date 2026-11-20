@@ -27,8 +27,10 @@ import { CREW_QUESTS_TANTALUS_V188 } from '../src/crew-quests-tantalus-v188.js';
 import { ACT5_ADVISORS_V188, ACT5_SOLID_TRUST_V188 } from '../src/story-act5-v188.js';
 import { applyJumpTravelTimeV188 } from '../src/galaxy-travel-v188.js';
 import { deliverTravelMessagesV188, travelMessagesListV188, normalizeTravelMessagesV188, travelArrivalNoticeV188, TRAVEL_MESSAGES_MAX_V188 } from '../src/travel-messages-v188.js';
-import { COLONY_CREW_SLOTS_V188, COLONY_CREW_FILES_PRESENT_V188, ColonyCrewAssetLoaderV188, getColonyCrewSlotV188 } from '../src/colony-crew-slots-v188.js';
+import { COLONY_CREW_SLOTS_V188, COLONY_CREW_FILES_PRESENT_V188, COLONY_CREW_EVIDENCE_IDS_V188,
+  ColonyCrewAssetLoaderV188, getColonyCrewSlotV188 } from '../src/colony-crew-slots-v188.js';
 import { CONTENT_GAP_SLOTS_V188 } from '../src/content-gap-slots-v188.js';
+import { openContentSceneDialogV188 } from '../src/content-gap-ui-v188.js';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url), 'utf8');
 const roundTrip = save => migrateSave(JSON.parse(JSON.stringify(save)));
@@ -367,21 +369,146 @@ test('i18n: campaign texts in the reviewed catalog; quests, scenes, decisions an
 });
 
 // —— Art slots, service worker, admission ——
-test('art slots: every scene and quest slot exists, draws a Canvas placeholder, requests nothing without a committed file', () => {
-  assert.deepEqual(COLONY_CREW_FILES_PRESENT_V188, []);
-  for (const id of COLONY_CREW_FILES_PRESENT_V188) assert.ok(existsSync(new URL(`..${getColonyCrewSlotV188(id).path}`, import.meta.url)));
+test('art slots: all eighteen admitted scene files are real PNGs and every scene/quest keeps its slot', () => {
+  assert.equal(COLONY_CREW_FILES_PRESENT_V188.length, 18);
+  assert.deepEqual([...COLONY_CREW_FILES_PRESENT_V188].sort(), COLONY_CREW_SLOTS_V188.map(slot => slot.id).sort());
+  for (const id of COLONY_CREW_FILES_PRESENT_V188) {
+    const file = new URL(`..${getColonyCrewSlotV188(id).path}`, import.meta.url); assert.ok(existsSync(file), id);
+    const bytes = readFileSync(file);
+    assert.equal(bytes.subarray(0, 8).toString('hex'), '89504e470d0a1a0a', id);
+    assert.equal(bytes.subarray(12, 16).toString(), 'IHDR', id);
+    assert.ok(bytes.readUInt32BE(16) > 0 && bytes.readUInt32BE(20) > 0, id);
+  }
   const known = id => getColonyCrewSlotV188(id) || CONTENT_GAP_SLOTS_V188.some(entry => entry.id === id);
   for (const scene of Object.values(COLONY_SCENES_V188)) assert.ok(known(scene.slot), scene.slot);
   for (const quest of CREW_QUESTS_TANTALUS_V188) assert.ok(known(quest.slot), quest.slot);
+});
+
+test('art fallback: all slots remain readable without images and never request unadmitted files', () => {
   const calls = [];
   const ctx = new Proxy({}, { get: (_, key) => (key in Object.prototype ? undefined : (...args) => { calls.push(key); return { addColorStop() {}, width: 10 }; }), set: () => true });
-  const loader = new ColonyCrewAssetLoaderV188({ ImageCtor: class {} });
+  const loader = new ColonyCrewAssetLoaderV188({ ImageCtor: class {}, present: [] });
   assert.deepEqual(loader.preload(), []);
   for (const slot of COLONY_CREW_SLOTS_V188) { assert.equal(loader.draw(ctx, slot.id, 640, 280, { language: 'en' }), 'primitive'); assert.ok(slot.brief.length > 40); assert.notEqual(slot.label.fr, slot.label.en); }
   assert.ok(calls.length > 200);
   assert.throws(() => loader.draw(ctx, 'nope', 10, 10), /Unknown colony art slot/);
   assert.match(read('src/content-gap-ui-v188.js'), /getColonyCrewSlotV188\(slot\) \? \(sharedColonyLoader/);
   for (const slot of COLONY_CREW_SLOTS_V188) assert.doesNotMatch(slot.brief, /\b1:1\b/);
+});
+
+const artContext = () => {
+  const calls = [], state = {};
+  const ctx = new Proxy(state, { get: (target, key) => key in target ? target[key] : (...args) => {
+    calls.push({ key, args }); return { addColorStop() {}, width: 10 };
+  }, set: (target, key, value) => { target[key] = value; return true; } });
+  return { ctx, calls };
+};
+function delayedImages() {
+  const created = [];
+  class Image {
+    constructor() { this.complete = false; this.naturalWidth = 0; this.naturalHeight = 0; this.events = new Map(); created.push(this); }
+    addEventListener(type, fn) { if (!this.events.has(type)) this.events.set(type, new Set()); this.events.get(type).add(fn); }
+    removeEventListener(type, fn) { this.events.get(type)?.delete(fn); }
+    settle(type = 'load', width = 1600, height = 900) {
+      this.complete = true; this.naturalWidth = type === 'load' ? width : 0; this.naturalHeight = type === 'load' ? height : 0;
+      for (const fn of [...(this.events.get(type) || [])]) fn();
+    }
+  }
+  return { Image, created };
+}
+
+test('art loader: lazy, one request per admitted slot, bounded uniform cover, failed-image fallback and unsubscription', () => {
+  const { Image, created } = delayedImages(), { ctx, calls } = artContext();
+  const loader = new ColonyCrewAssetLoaderV188({ ImageCtor: Image });
+  assert.equal(created.length, 0, 'constructor is lazy');
+  let updates = 0; const release = loader.subscribe('colony-quay-warehouse', () => { updates += 1; });
+  loader.preload(['colony-quay-warehouse', 'unknown']); loader.preload(['colony-quay-warehouse']);
+  assert.equal(created.length, 1); assert.deepEqual(loader.requested, ['/assets/content/v188/colony/colony-quay-warehouse.png']);
+  assert.equal(loader.draw(ctx, 'colony-quay-warehouse', 640, 280), 'primitive');
+  created[0].settle(); assert.equal(updates, 1);
+  assert.equal(loader.draw(ctx, 'colony-quay-warehouse', 640, 280), 'image');
+  const draw = calls.findLast(call => call.key === 'drawImage').args;
+  assert.equal(draw[0], created[0]); assert.deepEqual(draw.slice(1), [0, 100, 1600, 700, 0, 0, 640, 280]);
+  assert.equal(draw[7] / draw[3], draw[8] / draw[4], 'one scale in both axes');
+  assert.ok(draw[1] >= 0 && draw[2] >= 0 && draw[1] + draw[3] <= 1600 && draw[2] + draw[4] <= 900);
+  release(); assert.equal(loader.listeners.has('colony-quay-warehouse'), false);
+  loader.preload(['colony-screening']); created[1].settle('error');
+  assert.equal(loader.draw(ctx, 'colony-screening', 640, 280), 'primitive');
+  loader.preload(['colony-screening']); assert.equal(created.length, 2, 'a failed file does not form a request loop');
+  assert.equal(loader.frames['colony-screening'].crop, null);
+  loader.preload(['colony-processor']); created[2].settle('load', 100, 0);
+  assert.equal(loader.image('colony-processor'), null, 'invalid natural dimensions remain fallback');
+});
+
+test('art evidence: exact narrative numbers, distinct CRT meanings, readable FR/EN labels, no invented Wren timestamps', () => {
+  const { ctx, calls } = artContext(), loader = new ColonyCrewAssetLoaderV188({ ImageCtor: null, present: [] });
+  const rendered = (id, language) => {
+    calls.length = 0; loader.draw(ctx, id, 640, 280, { language });
+    return calls.filter(call => call.key === 'fillText').map(call => call.args[0]);
+  };
+  for (const id of COLONY_CREW_EVIDENCE_IDS_V188) {
+    const fr = rendered(id, 'fr'), en = rendered(id, 'en');
+    assert.equal(loader.frames[id].evidence, true); assert.notDeepEqual(fr, en, id);
+  }
+  const flight = rendered('quest-flight-recorder', 'en');
+  for (const fact of ['900 m', '22 min', '02:14', '02:36', 'SLOT RESERVED']) assert.ok(flight.includes(fact), fact);
+  const reactor = rendered('quest-reactor', 'en');
+  for (const fact of ['+4 %', '100 %', '104 %', '01:00', '05:00']) assert.ok(reactor.includes(fact), fact);
+  const register = rendered('quest-register', 'fr');
+  for (const fact of ['13:58', '14:01', '14:02', 'Ordre : « Fermez l’accès. »', 'Charge de Reyes']) assert.ok(register.includes(fact), fact);
+  assert.ok(rendered('quest-colonist-list', 'en').includes('QZ-18: 3 calls held for 6 days'));
+  const directive = rendered('quest-directive', 'en');
+  assert.ok(directive.includes('BISHOP-9')); assert.ok(directive.includes('REDACTED LINE'));
+  assert.ok(!directive.some(text => /900|22 min|104/.test(text)), 'the directive does not inherit the generic flight graph');
+  const notebooks = rendered('wren-notebooks', 'en');
+  assert.ok(notebooks.includes('UNDER SEAL')); assert.ok(notebooks.includes('FREIGHT PRIORITY'));
+  assert.ok(!notebooks.some(text => /\b\d{2}:\d{2}\b/u.test(text)), 'Wren’s actual hours are not specified by the story');
+});
+
+function sceneDocument(ctx) {
+  const document = { activeElement: null, focusCalls: 0 };
+  class Element {
+    constructor(tag) { this.tagName = tag; this.children = []; this.dataset = {}; this.style = {}; this.events = new Map(); this.ownerDocument = document; }
+    get isConnected() { return this === document.body || Boolean(this.parentElement?.isConnected); }
+    append(...children) { for (const child of children) { child.parentElement = this; this.children.push(child); } }
+    replaceChildren(...children) { for (const child of this.children) child.parentElement = null; this.children = []; this.append(...children); }
+    remove() { if (this.parentElement) this.parentElement.children = this.parentElement.children.filter(child => child !== this); this.parentElement = null; }
+    setAttribute(key, value) { this[key] = value; }
+    getContext() { return ctx; }
+    addEventListener(type, fn) { if (!this.events.has(type)) this.events.set(type, new Set()); this.events.get(type).add(fn); }
+    fire(type) { for (const fn of [...(this.events.get(type) || [])]) fn({ preventDefault() {} }); }
+    close() { this.open = false; this.fire('close'); }
+    showModal() { this.open = true; }
+    focus() { document.activeElement = this; document.focusCalls += 1; }
+    querySelector(tag) { for (const child of this.children) { if (child.tagName === tag) return child; const result = child.querySelector(tag); if (result) return result; } return null; }
+  }
+  document.createElement = tag => new Element(tag); document.body = new Element('body'); return document;
+}
+
+test('scene dialog: a late image repaints the current card without replaying choices, moving focus or touching another slot', () => {
+  const { ctx, calls } = artContext(), { Image, created } = delayedImages(), document = sceneDocument(ctx);
+  const loader = new ColonyCrewAssetLoaderV188({ ImageCtor: Image });
+  let choices = 0, closes = 0;
+  const view = openContentSceneDialogV188({ document, loader, slot: 'colony-quay-warehouse', title: 'Warehouse', text: 'First scene',
+    options: [{ id: 'next', label: 'Next' }], onChoose: () => { choices += 1; return { slot: 'colony-processor', title: 'Processor', text: 'Second scene', options: [{ id: 'done', label: 'Done' }] }; }, onClose: () => { closes += 1; } });
+  assert.equal(created.length, 1); assert.equal(loader.usage['colony-quay-warehouse'], 'primitive');
+  const focused = document.activeElement, focusCount = document.focusCalls;
+  created[0].settle(); assert.equal(loader.usage['colony-quay-warehouse'], 'image');
+  assert.equal(document.activeElement, focused); assert.equal(document.focusCalls, focusCount); assert.equal(choices, 0);
+  focused.fire('click'); assert.equal(choices, 1); assert.equal(created.length, 2);
+  assert.equal(view.dialog.dataset.contentSceneV188, 'colony-processor');
+  assert.equal(loader.listeners.has('colony-quay-warehouse'), false);
+  view.render({ slot: 'colony-cult', title: 'Cult', text: 'Third scene', options: [{ id: 'done', label: 'Done' }] });
+  assert.equal(created.length, 3); calls.length = 0;
+  created[1].settle(); assert.equal(calls.length, 0, 'superseded slot cannot repaint the dialog');
+  const focusBeforeFailure = document.focusCalls;
+  created[2].settle('error'); assert.equal(loader.usage['colony-cult'], 'primitive');
+  assert.equal(document.focusCalls, focusBeforeFailure); assert.equal(choices, 1);
+  view.render({ slot: 'quest-vents', title: 'Vents', text: 'Fourth scene' }); assert.equal(created.length, 4);
+  view.close(); calls.length = 0; created[3].settle();
+  assert.equal(calls.length, 0, 'a closed dialog cannot receive a late image');
+  assert.equal(loader.listeners.size, 0); assert.equal(closes, 1); assert.equal(document.body.children.length, 0);
+  view.render({ slot: 'colony-beacon' }); assert.equal(created.length, 4, 'render after close is inert');
 });
 
 test('service worker, package script and source-only admission', () => {

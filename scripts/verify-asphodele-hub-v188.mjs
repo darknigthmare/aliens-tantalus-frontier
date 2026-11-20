@@ -24,7 +24,12 @@ import {
   kesslerTagPendingV188, depositKesslerTagV188, kesslerTagInLockerV188, asphodeleSaveViewV188, stationCinematicDueV188, cassiusCoreLineV188,
   memorialTextV188, asphodeleHubSummaryV188
 } from '../src/asphodele-hub-v188.js';
-import { ASPHODELE_HUB_SLOTS_V188, ASPHODELE_HUB_SLOT_IDS_V188, ASPHODELE_HUB_FILES_PRESENT_V188, AsphodeleHubAssetLoaderV188 } from '../src/asphodele-hub-slots-v188.js';
+import { ASPHODELE_HUB_SLOTS_V188, ASPHODELE_HUB_SLOT_IDS_V188, ASPHODELE_HUB_FILES_PRESENT_V188, AsphodeleHubAssetLoaderV188, getAsphodeleHubSlotV188,
+  ASPHODELE_HUB_IMAGE_SOURCE_RECTS_V188, ASPHODELE_HUB_IMAGE_ANCHORS_V188, ASPHODELE_ACTOR_IMAGE_LAYOUTS_V188,
+  drawAsphodeleWallV188, drawAsphodeleWallTrimV188, drawAsphodeleDoorV188, drawAsphodelePostV188, drawAsphodeleCradlesV188,
+  drawDockedVesselV188, drawAsphodeleActorV188 } from '../src/asphodele-hub-slots-v188.js';
+import { ASPHODELE_MISSION_SLOT_IDS_V188, ASPHODELE_MISSION_IMAGE_SOURCE_RECTS_V188, drawAsphodeleMissionSlotV188 } from '../src/asphodele-mission-dressing-v188.js';
+import { fixture } from './engine-host-v188.mjs';
 import { STATION_CINEMATICS_V188, STATION_CINEMATIC_IDS_V188 } from '../src/station-cinematics-v188.js';
 import { CINEMATICS_V188, cinematicDurationV188, drawCinematicFrameV188, cinematicSetLayoutV188 } from '../src/story-cinematics-v188.js';
 import { blockedByFootprintV188 } from '../src/hub-depth-rooms-v188.js';
@@ -129,7 +134,7 @@ test('graph: every module is reachable from the docks once unlocked; locks name 
 });
 
 // —— Physical traversal through the real annex physics (no DOM) ——
-function makeRuntime(save) {
+function makeRuntime(save, { loader = null } = {}) {
   class Base {
     constructor() { this.keys = new Set(); this.actions = []; this.onAction = action => { this.actions.push(action); return true; }; this.onStatus = () => {}; }
     start() { this.state = { deck: 3, roomId: 'dropship-hangar' }; this.player = { x: 0, y: 532, w: 44, h: 92, vx: 0, vy: 0, grounded: true, facing: 1, alive: true, health: 100 };
@@ -140,6 +145,7 @@ function makeRuntime(save) {
   }
   for (const key of ['updateAnnexPhysicsV71', 'stepAnnexPhysicsV72', 'annexSolidCollidersV71', 'resolveAnnexHorizontalV71', 'resolveAnnexVerticalV71']) Base.prototype[key] = PhysicalHub.prototype[key];
   const Runtime = withHubAsphodeleV188(Base), hub = new Runtime();
+  if (loader) hub.asphLoaderV188 = loader;
   hub.start({}, { asphodeleSaveViewV188: asphodeleSaveViewV188(save) });
   return hub;
 }
@@ -338,7 +344,7 @@ test('art slots: unique ids, briefs that cite references without claiming 1:1, n
   for (const entry of ASPHODELE_HUB_SLOTS_V188) { assert.ok(entry.brief.length > 40 && entry.purpose); assert.doesNotMatch(entry.brief, /1:1/); }
   for (const id of ASPHODELE_HUB_FILES_PRESENT_V188) assert.ok(existsSync(new URL('..' + ASPHODELE_HUB_SLOTS_V188.find(entry => entry.id === id).path, import.meta.url)));
   for (const room of ASPHODELE_ROOM_IDS_V188) assert.ok(ASPHODELE_HUB_SLOT_IDS_V188.includes(`asph-wall-${room.slice(5)}`), `${room} wall slot`);
-  const loader = new AsphodeleHubAssetLoaderV188({ ImageCtor: class { } });
+  const loader = new AsphodeleHubAssetLoaderV188({ ImageCtor: class { }, present: [] });
   assert.deepEqual(loader.preload(), []);
   let drawn = 0; assert.equal(loader.draw(proxyCtx(), 'asph-door', 0, 0, 96, 132, () => { drawn++; }), 'primitive'); assert.equal(drawn, 1);
   assert.throws(() => loader.draw(proxyCtx(), 'nope', 0, 0, 1, 1));
@@ -367,4 +373,376 @@ test('i18n: every player-facing string of the hub, missions and contracts exists
   for (const choice of ['rewrite', 'restrain', 'erase']) { const save = retaken(); save.stationV188.cassius = choice;
     assert.notEqual(cassiusCoreLineV188(save, 'fr'), cassiusCoreLineV188(save, 'en')); }
   assert.notEqual(memorialTextV188(retaken(), 'fr'), memorialTextV188(retaken(), 'en'));
+});
+
+
+// —— Mission image integration: explicit fixture dimensions, actual production composition ——
+const artTrace = () => {
+  const calls = [], states = [], state = { fillStyle: '', strokeStyle: '', lineWidth: 1, font: '', textAlign: '', textBaseline: '' };
+  const ctx = new Proxy(state, {
+    get(target, key) {
+      if (key in target) return target[key];
+      return (...args) => {
+        calls.push({ method: key, args, fillStyle: target.fillStyle, strokeStyle: target.strokeStyle, lineWidth: target.lineWidth });
+        if (key === 'save') states.push({ ...target });
+        if (key === 'restore') { assert.ok(states.length, 'balanced canvas save/restore'); Object.assign(target, states.pop()); }
+      };
+    }
+  });
+  return { ctx, calls, states };
+};
+// No bitmap pixels are claimed by these unit fixtures: a deliberately large
+// valid source canvas exercises image composition and any inspected source window.
+class MissionImageFixture {
+  complete = true; naturalWidth = 8192; naturalHeight = 8192;
+}
+
+test('hub detail art: entry and real room transitions request only local assets, once, never mission PNGs', () => {
+  const save = everything(); boardAsphodeleV188(save);
+  // Explicit image fixture: this verifies requested paths, not network traffic.
+  const loader = new AsphodeleHubAssetLoaderV188({ ImageCtor: MissionImageFixture, present: ASPHODELE_HUB_SLOT_IDS_V188 });
+  const hub = makeRuntime(save, { loader });
+  const names = () => loader.requested.map(path => path.split('/').at(-1).replace('.png', ''));
+  assert.deepEqual(new Set(names()), new Set(['asph-wall-docks', 'asph-door', 'asph-ud4l-docked', 'asph-crucible-shuttle', 'asph-grue', 'asph-npc-docker']));
+  hub.preloadAsphodeleRoomV188(); assert.equal(loader.requested.length, 6, 'no request repeated in the same room');
+  for (const [room, door] of [['asph-docks', 'docks-ring'], ['asph-ring', 'ring-spoke']]) {
+    walk(hub, getAsphodeleDoorV188(room, door).x); assert.equal(useDoor(hub), true);
+  }
+  const beforeControl = new Set(names());
+  walk(hub, getAsphodeleDoorV188('asph-spoke', 'spoke-hub').x); assert.equal(useDoor(hub), true);
+  assert.equal(hub.asphStateV188.roomId, 'asph-control');
+  assert.deepEqual(new Set(names().filter(id => !beforeControl.has(id))), new Set(['asph-wall-control', 'asph-qz-map', 'asph-cassius-core']));
+  assert.equal(names().filter(id => id === 'asph-door').length, 1);
+  assert.equal(names().filter(id => id === 'asph-npc-technician').length, 1, 'technicians shared with the spoke are reused');
+  assert.ok(!names().some(id => id.startsWith('asph-msn-') || ['asph-wall-lab', 'asph-bunks', 'asph-cradles'].includes(id)));
+});
+
+const detailTrace = (draw, { image = true } = {}) => {
+  const trace = artTrace();
+  const loader = new AsphodeleHubAssetLoaderV188({ ImageCtor: MissionImageFixture, present: image ? ASPHODELE_HUB_SLOT_IDS_V188 : [] });
+  loader.preload(); draw(trace.ctx, loader);
+  assert.equal(trace.states.length, 0, 'detail rendering restores Canvas state');
+  return { ...trace, loader };
+};
+const imageCalls = trace => trace.calls.filter(call => call.method === 'drawImage');
+const fillsOf = (trace, color) => trace.calls.filter(call => call.method === 'fillRect' && call.fillStyle === color);
+
+test('hub detail art: proportional door leaves retain all three native lamps and the locked mark', () => {
+  for (const [state, color] of [['open', '#7dff9a'], ['locked', '#e15b4f'], ['shuttle', '#e2b53a']]) {
+    for (const image of [false, true]) {
+      const trace = detailTrace((ctx, loader) => drawAsphodeleDoorV188(ctx, 400, state, 0, true, loader), { image });
+      assert.ok(fillsOf(trace, '#2b3236').some(call => call.args.join() === [342, 478, 116, 146].join()), 'unchanged physical frame');
+      assert.ok(fillsOf(trace, color).some(call => call.args.join() === [390, 468, 20, 7].join()), state + ' lamp outside image');
+      assert.equal(trace.calls.filter(call => call.method === 'stroke' && call.strokeStyle === '#e15b4f').length, state === 'locked' ? 1 : 0);
+      assert.equal(imageCalls(trace).length, image ? 1 : 0);
+      if (image) {
+        const [, sx, sy, sw, sh, x, y, w, h] = imageCalls(trace)[0].args;
+        assert.deepEqual([sx, sy, sw, sh], ASPHODELE_HUB_IMAGE_SOURCE_RECTS_V188['asph-door']);
+        assert.ok(Math.abs(w / sw - h / sh) < 1e-12); assert.equal(y + h, 624);
+        assert.ok(x >= 352 && x + w <= 448 && y >= 492);
+      }
+    }
+  }
+  const pending = detailTrace((ctx, loader) => {
+    loader.images.get('asph-door').complete = false;
+    assert.equal(drawAsphodeleDoorV188(ctx, 400, 'locked', 0, true, loader), 'primitive');
+  });
+  assert.equal(imageCalls(pending).length, 0); assert.ok(fillsOf(pending, '#e15b4f').length);
+});
+
+test('hub detail art: CASSIUS, relays, night rounds and repairs retain their live states above the PNG', () => {
+  const post = (id, state, image) => detailTrace((ctx, loader) => drawAsphodelePostV188(ctx, id, 600, { state, still: true, loader }), { image });
+  for (const image of [false, true]) {
+    for (const cassius of ['erase', 'restrain', 'rewrite']) {
+      const trace = post('control-cassius', { cassius }, image);
+      assert.equal(fillsOf(trace, cassius === 'erase' ? '#050806' : '#06200f').length, 6, 'all six screens follow CASSIUS');
+      const waves = trace.calls.filter(call => call.method === 'stroke');
+      assert.equal(waves.length, cassius === 'erase' ? 0 : 2, 'erasure removes both waveform segments');
+      if (waves.length) assert.ok(waves.every(call => call.strokeStyle === (cassius === 'restrain' ? 'rgba(226,181,58,.8)' : 'rgba(125,255,154,.9)')));
+      assert.equal(trace.calls.filter(call => call.method === 'clip').length, 6, 'waveforms cannot cross CRT bezels');
+    }
+    const off = post('relay-bays', { relayOnline: false }, image), on = post('relay-bays', { relayOnline: true }, image);
+    assert.equal(fillsOf(off, '#e2b53a').length, 3); assert.equal(fillsOf(off, '#3b3424').length, 21);
+    assert.equal(fillsOf(on, '#7dff9a').length + fillsOf(on, '#2f6d45').length, 24);
+    assert.equal(fillsOf(off, '#0b1410').length, 1, 'held-message terminal remains separate');
+    assert.equal(fillsOf(post('lower-night', { nights: 0 }, image), '#4a2420').length, 5);
+    assert.equal(fillsOf(post('lower-night', { nights: 5 }, image), '#7dff9a').length, 5);
+    assert.equal(fillsOf(post('repair-bench', { cheyenne: 0 }, image), '#1c2923').length, 3);
+    assert.equal(fillsOf(post('repair-bench', { cheyenne: 3 }, image), '#7dff9a').length, 3);
+  }
+});
+
+test('hub detail art: distinct station plan and archive, original cradle labels, native window and Echo-8 identity', () => {
+  for (const id of ['ring-plan', 'lab-archives']) {
+    const trace = detailTrace((ctx, loader) => drawAsphodelePostV188(ctx, id, 600, { loader }));
+    assert.equal(imageCalls(trace).length, 0, id + ' is its own native equipment');
+  }
+  const cradles = detailTrace((ctx, loader) => drawAsphodeleCradlesV188(ctx, 520, loader));
+  assert.equal(imageCalls(cradles).length, 1, 'one three-cradle group, not an archive replacement');
+  assert.equal(cradles.calls.filter(call => call.method === 'fillText' && call.args[0] === 'QZ17').length, 3);
+  for (const kind of ['ud4l', 'echo8', 'crucible']) {
+    const trace = detailTrace((ctx, loader) => drawDockedVesselV188(ctx, 400, kind, loader));
+    assert.ok(fillsOf(trace, '#05080b').some(call => call.args.join() === [290, 250, 220, 130].join()));
+    assert.equal(fillsOf(trace, 'rgba(230,240,255,.6)').length, 14, 'native space and stars remain behind alpha');
+    assert.ok(trace.calls.findIndex(call => call.method === 'strokeRect') > trace.calls.findIndex(call => call.method === 'drawImage'), 'native window rim covers the vessel');
+    assert.equal(trace.calls.filter(call => call.method === 'fillText' && call.args[0] === 'ECHO-8').length, kind === 'echo8' ? 1 : 0);
+    const [, , , sw, sh, x, y, w, h] = imageCalls(trace)[0].args;
+    assert.ok(Math.abs(w / sw - h / sh) < 1e-12 && x >= 296 && x + w <= 504 && y >= 256 && y + h <= 374);
+    assert.ok(trace.calls.some(call => call.method === 'clip'));
+  }
+  const memorial = detailTrace((ctx, loader) => drawAsphodelePostV188(ctx, 'memorial-plaques', 600, { still: true, loader }));
+  assert.equal(fillsOf(memorial, '#d9c9a4').length, 0, 'generated candle bases are not doubled');
+  assert.equal(fillsOf(memorial, 'rgba(255,190,110,0.7)').length, 8, 'all eight candle glows remain native');
+});
+
+test('hub detail art: floor contact and physical bed, bunk and scanner proportions survive source sampling', () => {
+  const cases = [['quarters-register', [360], 624], ['medbay-beds', [102, 102], 624], ['medbay-scanner', [124], 624]];
+  for (const [id, widths, floor] of cases) {
+    const trace = detailTrace((ctx, loader) => drawAsphodelePostV188(ctx, id, 600, { still: true, loader }));
+    assert.equal(imageCalls(trace).length, widths.length, id);
+    imageCalls(trace).forEach((call, index) => {
+      const [, , , sw, sh, , y, w, h] = call.args;
+      assert.ok(Math.abs(w / sw - h / sh) < 1e-12, id + ' keeps source proportions');
+      assert.ok(w <= widths[index] + 1e-9); assert.ok(Math.abs(y + h - floor) < 1e-9, id + ' touches the floor');
+      if (id === 'quarters-register') assert.ok(h <= 130);
+      if (id === 'medbay-scanner') assert.ok(h <= 112);
+    });
+    if (id === 'medbay-beds') {
+      const draws = imageCalls(trace); assert.ok(Math.abs(draws[1].args[5] - draws[0].args[5] - 180) < 1e-9, 'original bed spacing');
+      assert.notDeepEqual(draws[0].args.slice(1, 5), draws[1].args.slice(1, 5), 'each authored bed is used once');
+    }
+  }
+});
+
+test('hub detail art: every admitted measured window and actor pose stays inside its original PNG', () => {
+  for (const id of ASPHODELE_HUB_FILES_PRESENT_V188.filter(id => !id.startsWith('asph-msn-') && !id.startsWith('asph-wall-'))) {
+    const bytes = readFileSync(new URL('..' + getAsphodeleHubSlotV188(id).path, import.meta.url));
+    const width = bytes.readUInt32BE(16), height = bytes.readUInt32BE(20);
+    const valid = rect => Array.isArray(rect) && rect.length === 4 && rect.every(Number.isFinite) && rect[0] >= 0 && rect[1] >= 0 && rect[2] > 0 && rect[3] > 0 && rect[0] + rect[2] <= width && rect[1] + rect[3] <= height;
+    if (getAsphodeleHubSlotV188(id).layer === 'actor') {
+      const layout = ASPHODELE_ACTOR_IMAGE_LAYOUTS_V188[id];
+      assert.ok(layout && Number.isFinite(layout.referenceHeight) && layout.referenceHeight > 0, id + ' common scale');
+      assert.equal(layout.frames.length, id === 'asph-grue' ? 1 : 4);
+      for (const frame of layout.frames) { assert.ok(valid(frame.rect), id + ' actual frame'); assert.ok(frame.foot.every(Number.isFinite)); }
+    } else assert.ok(valid(ASPHODELE_HUB_IMAGE_SOURCE_RECTS_V188[id]), id + ' measured opaque extent');
+    for (const [key, rect] of Object.entries(ASPHODELE_HUB_IMAGE_ANCHORS_V188[id] || {})) assert.ok(valid(rect), id + '/' + key);
+  }
+});
+
+test('hub detail art: real actor frames share one scale and foot pivot through walking, turning and reduced motion', () => {
+  for (const id of ['asph-npc-docker', 'asph-npc-merchant', 'asph-npc-technician', 'asph-grue']) {
+    const layout = ASPHODELE_ACTOR_IMAGE_LAYOUTS_V188[id]; assert.ok(layout, id + ' authored poses declared');
+    const cases = id === 'asph-grue' ? [[0, false, false, 0]] : [[0, false, false, 0], [0, true, false, 1], [Math.PI / 2, true, false, 2], [Math.PI, true, false, 3], [Math.PI * 1.5, true, false, 2], [Math.PI, true, true, 0]];
+    for (const facing of [-1, 1]) for (const [phase, moving, still, frameIndex] of cases) {
+      const trace = detailTrace((ctx, loader) => assert.equal(drawAsphodeleActorV188(ctx, loader, id, 400, 650, { facing, phase, moving, still }), 'image'));
+      const frame = layout.frames[frameIndex], scale = getAsphodeleHubSlotV188(id).height / layout.referenceHeight;
+      assert.deepEqual(trace.calls.find(call => call.method === 'translate').args, [400, 650]);
+      assert.deepEqual(trace.calls.find(call => call.method === 'scale').args, [facing * scale, scale]);
+      const [, sx, sy, sw, sh, x, y, w, h] = imageCalls(trace)[0].args;
+      assert.deepEqual([sx, sy, sw, sh], frame.rect, 'selected authored pose');
+      assert.deepEqual([x, y, w, h], [sx - frame.foot[0], sy - frame.foot[1], sw, sh], 'foot pivot, no per-frame squeeze');
+      assert.equal(trace.calls.filter(call => call.method === 'ellipse').length, 1, 'one native contact shadow');
+    }
+    const missing = detailTrace((ctx, loader) => assert.equal(drawAsphodeleActorV188(ctx, loader, id, 400, 650, { moving: true }), 'primitive'), { image: false });
+    assert.equal(imageCalls(missing).length, 0); assert.ok(missing.calls.some(call => call.method === 'fillRect'));
+  }
+});
+
+test('hub wall art: uniform scaling and world anchoring survive camera movement and different image proportions', () => {
+  // Explicit geometry fixtures, not a claim to have rendered bitmap pixels.
+  for (const [naturalWidth, naturalHeight] of [[1280, 504], [2560, 1008], [2304, 1024]]) {
+    const loader = new AsphodeleHubAssetLoaderV188({ ImageCtor: null, present: [] });
+    const image = { complete: true, naturalWidth, naturalHeight };
+    loader.images.set('asph-wall-ring', image);
+    const tileWidth = naturalWidth * 504 / naturalHeight;
+    const landmarks = new Map();
+    for (const camera of [0, 127, 128, 319, 767, 1279, 1280]) {
+      const x0 = Math.max(0, Math.floor(camera / 128) * 128), x1 = Math.min(2560, camera + 1408);
+      const trace = artTrace();
+      assert.equal(loader.drawWall(trace.ctx, 'asph-wall-ring', x0, 120, x1 - x0, 504, () => assert.fail('loaded wall fell back')), 'image');
+      assert.deepEqual(trace.calls.find(call => call.method === 'rect').args, [x0, 120, x1 - x0, 504]);
+      assert.ok(trace.calls.some(call => call.method === 'clip'), 'wall stays inside the visible room span');
+      const draws = trace.calls.filter(call => call.method === 'drawImage');
+      assert.ok(draws.length >= 1 && draws.length <= 3);
+      assert.ok(draws[0].args[1] <= x0 && draws.at(-1).args[1] + tileWidth >= x1, 'no hole at either clip edge');
+      for (let index = 0; index < draws.length; index++) {
+        const [bitmap, x, y, w, h] = draws[index].args;
+        assert.equal(bitmap, image); assert.equal(y, 120); assert.equal(h, 504);
+        assert.ok(Math.abs(w / naturalWidth - h / naturalHeight) < 1e-12, 'same scale on both axes');
+        assert.ok(Math.abs(x / tileWidth - Math.round(x / tileWidth)) < 1e-12, 'origin belongs to world, not camera');
+        if (index) assert.equal(x, draws[index - 1].args[1] + w, 'neighbouring panels share an exact boundary');
+        // An interior source landmark retains the same world position for a
+        // given tile, even when the camera expands or shortens the draw span.
+        const tile = Math.round(x / tileWidth), landmark = x + naturalWidth * .37 * w / naturalWidth;
+        if (landmarks.has(tile)) assert.ok(Math.abs(landmark - landmarks.get(tile)) < 1e-9, 'same landmark after scrolling');
+        else landmarks.set(tile, landmark);
+      }
+      assert.equal(trace.states.length, 0, 'canvas state restored');
+    }
+  }
+});
+
+test('hub wall art: missing, pending and malformed images retain the original primitive callback', () => {
+  const loader = new AsphodeleHubAssetLoaderV188({ ImageCtor: null, present: [] });
+  const fallbacks = [], trace = artTrace();
+  for (const image of [null, { complete: false, naturalWidth: 1280, naturalHeight: 504 },
+    { complete: true, naturalWidth: 1280, naturalHeight: 0 }, { complete: true, naturalWidth: Infinity, naturalHeight: 504 }]) {
+    loader.images.set('asph-wall-docks', image);
+    assert.equal(loader.drawWall(trace.ctx, 'asph-wall-docks', 256, 120, 1408, 504, (...args) => fallbacks.push(args)), 'primitive');
+    assert.equal(loader.usage['asph-wall-docks'], 'primitive');
+  }
+  assert.equal(fallbacks.length, 4);
+  assert.ok(fallbacks.every(args => args[0] === trace.ctx && args.slice(1).join(',') === '256,120,1408,504'));
+  assert.equal(trace.calls.filter(call => call.method === 'drawImage').length, 0);
+  assert.throws(() => loader.drawWall(trace.ctx, 'asph-door', 0, 120, 96, 132), /wall art slot/);
+  assert.throws(() => loader.drawWall(trace.ctx, 'unknown', 0, 120, 96, 132), /wall art slot/);
+});
+
+test('hub wall art: a continuous Canvas pattern avoids separate fractional edges and retains its world transform', () => {
+  const loader = new AsphodeleHubAssetLoaderV188({ ImageCtor: null, present: [] });
+  const image = { complete: true, naturalWidth: 1983, naturalHeight: 793 }, pattern = { fixture: 'repeat-x' };
+  const scale = 504 / 793, trace = artTrace(); let created = 0;
+  trace.ctx.createPattern = (bitmap, repeat) => { assert.equal(bitmap, image); assert.equal(repeat, 'repeat-x'); created++; return pattern; };
+  loader.images.set('asph-wall-ring', image);
+  for (const camera of [0, 127, 128, 767, 1280]) {
+    trace.calls.length = 0;
+    const x0 = Math.floor(camera / 128) * 128, x1 = Math.min(2560, camera + 1408);
+    assert.equal(loader.drawWall(trace.ctx, 'asph-wall-ring', x0, 120, x1 - x0, 504), 'image');
+    assert.deepEqual(trace.calls.find(call => call.method === 'translate').args, [0, 120]);
+    assert.deepEqual(trace.calls.find(call => call.method === 'scale').args, [scale, scale]);
+    const fills = trace.calls.filter(call => call.method === 'fillRect');
+    assert.equal(fills.length, 1, 'continuous surface rather than adjacent antialiased image rectangles');
+    assert.equal(fills[0].fillStyle, pattern);
+    const [x, y, w, h] = fills[0].args;
+    assert.ok(x * scale <= x0 && (x + w) * scale >= x1, 'surface covers the clipped viewport including fractional edge samples');
+    assert.equal(y, 0); assert.ok(Math.abs(h * scale - 504) < 1e-9);
+    assert.equal(trace.calls.filter(call => call.method === 'drawImage').length, 0);
+    assert.equal(trace.states.length, 0);
+  }
+  assert.equal(created, 1, 'unchanged source reuses its pattern on the same canvas');
+});
+
+test('hub wall art: native hazard paint respects the same door openings as the primitive in every camera span', () => {
+  for (const room of Object.values(ASPHODELE_ROOMS_V188)) {
+    const gaps = room.doors.map(entry => [entry.x - 58, entry.x + 58]);
+    for (const camera of [0, Math.max(0, room.width - 1280)]) {
+      const x0 = Math.max(0, Math.floor(camera / 128) * 128), x1 = Math.min(room.width, camera + 1408);
+      const primitive = artTrace(), imageTrim = artTrace();
+      drawAsphodeleWallV188(primitive.ctx, room.module, x0, x1 - x0, 0, gaps);
+      drawAsphodeleWallTrimV188(imageTrim.ctx, room.module, x0, x1 - x0, gaps);
+      const bands = trace => trace.calls.filter(call => call.method === 'fillRect' && call.args[1] === 600 && call.args[3] === 6)
+        .map(call => ({ args: call.args, color: call.fillStyle }));
+      assert.deepEqual(bands(imageTrim), bands(primitive), room.id + ' keeps native floor markings');
+      for (const { args: [x, , width] } of bands(imageTrim)) for (const [g0, g1] of gaps)
+        assert.ok(x + width <= g0 || x >= g1, room.id + ' paint never crosses a door frame');
+      assert.ok(imageTrim.calls.some(call => call.method === 'fillRect' && call.args.join(',') === [x0, 96, x1 - x0, 40].join(',')), 'native ceiling beam retained');
+    }
+  }
+});
+
+const slotTrace = (kind, { present = true, ...options } = {}) => {
+  const id = `asph-msn-${kind}`, slot = getAsphodeleHubSlotV188(id), trace = artTrace();
+  const loader = new AsphodeleHubAssetLoaderV188({ ImageCtor: MissionImageFixture, present: present ? [id] : [] }); loader.preload([id]);
+  const source = drawAsphodeleMissionSlotV188(trace.ctx, loader, { kind, x: 100, y: 150, w: slot.width, h: slot.height }, options);
+  assert.equal(trace.states.length, 0);
+  return { ...trace, source };
+};
+
+test('mission art: explicit nine-file preload is idempotent; visiting the hub does not preload mission images', () => {
+  const loader = new AsphodeleHubAssetLoaderV188({ ImageCtor: MissionImageFixture, present: [...ASPHODELE_MISSION_SLOT_IDS_V188, 'asph-door', 'unknown'] });
+  assert.deepEqual(loader.preload(), ['/assets/asphodele/v188/asph-door.png']);
+  const mission = new AsphodeleHubAssetLoaderV188({ ImageCtor: MissionImageFixture, present: ASPHODELE_MISSION_SLOT_IDS_V188 });
+  assert.equal(mission.preload(ASPHODELE_MISSION_SLOT_IDS_V188).length, 9);
+  assert.equal(mission.preload(ASPHODELE_MISSION_SLOT_IDS_V188).length, 9, 'no duplicate image requests');
+  assert.ok(mission.requested.every(path => path.includes('/asph-msn-')));
+  for (const id of ASPHODELE_HUB_FILES_PRESENT_V188.filter(id => id.startsWith('asph-msn-'))) {
+    const bytes = readFileSync(new URL('..' + getAsphodeleHubSlotV188(id).path, import.meta.url));
+    assert.equal(bytes.subarray(1, 4).toString(), 'PNG', id);
+    const width = bytes.readUInt32BE(16), height = bytes.readUInt32BE(20), rect = ASPHODELE_MISSION_IMAGE_SOURCE_RECTS_V188[id];
+    assert.ok(width > 0 && height > 0);
+    if (rect) assert.ok(rect[0] >= 0 && rect[1] >= 0 && rect[2] > 0 && rect[3] > 0 && rect[0] + rect[2] <= width && rect[1] + rect[3] <= height, id + ' source window inside original PNG');
+  }
+});
+
+test('mission art: proportional image/source-window fit, loading/error fallback and clipped short conduit', () => {
+  const loader = new AsphodeleHubAssetLoaderV188({ ImageCtor: MissionImageFixture, present: ['asph-msn-panel', 'asph-msn-conduit'] });
+  loader.preload(['asph-msn-panel', 'asph-msn-conduit']);
+  const trace = artTrace(); let fallback = 0;
+  assert.equal(loader.draw(trace.ctx, 'asph-msn-panel', 10, 20, 128, 112, () => fallback++, { fit: 'contain', sourceRect: [20, 30, 200, 100] }), 'image');
+  const draw = trace.calls.find(call => call.method === 'drawImage');
+  assert.deepEqual(draw.args.slice(1), [20, 30, 200, 100, 10, 44, 128, 64], 'uniform scale and centered inside bounds');
+  const image = loader.images.get('asph-msn-panel');
+  image.complete = false;
+  assert.equal(loader.draw(trace.ctx, 'asph-msn-panel', 10, 20, 128, 112, () => fallback++, { fit: 'contain' }), 'primitive');
+  image.complete = true; image.naturalHeight = 0;
+  assert.equal(loader.draw(trace.ctx, 'asph-msn-panel', 10, 20, 128, 112, () => fallback++, { fit: 'contain' }), 'primitive');
+  image.naturalHeight = 8192;
+  assert.equal(loader.draw(trace.ctx, 'asph-msn-panel', 10, 20, 128, 112, () => fallback++, { fit: 'contain', sourceRect: [8190, 0, 100, 100] }), 'primitive');
+  assert.equal(fallback, 3, 'pending, malformed and invalid-window images all keep the primitive');
+  const clips = [];
+  const delegate = { draw(_ctx, id, x, y, w, h, fallbackFn, options) { clips.push({ id, x, y, w, h, options }); return 'image'; } };
+  drawAsphodeleMissionSlotV188(trace.ctx, delegate, { kind: 'conduit', x: 20, y: 40, w: 128, h: 12 });
+  assert.deepEqual(trace.calls.filter(call => call.method === 'rect').at(-1).args, [20, 40, 128, 12]);
+  assert.ok(trace.calls.some(call => call.method === 'clip'));
+  assert.equal(clips[0].w, 306, 'conduit keeps its original scale when the free span is shorter');
+  assert.equal(clips[0].options.fit, 'contain');
+  const unchangedHub = artTrace();
+  loader.images.set('asph-door', new MissionImageFixture());
+  loader.draw(unchangedHub.ctx, 'asph-door', 5, 6, 96, 132);
+  assert.deepEqual(unchangedHub.calls.find(call => call.method === 'drawImage').args.slice(1), [5, 6, 96, 132], 'existing hub draw contract unchanged');
+});
+
+test('mission art: FR/EN labels, live CRT, needles and lamp survive both image and primitive paths without duplicate props', () => {
+  for (const english of [false, true]) for (const kind of ['panel', 'crt', 'sign', 'conduit', 'blackbox', 'resin', 'salvage', 'gauge', 'camera']) {
+    const image = slotTrace(kind, { english, sector: 'lower', time: 1 }), primitive = slotTrace(kind, { present: false, english, sector: 'lower', time: 1 });
+    assert.equal(image.source, 'image'); assert.equal(primitive.source, 'primitive');
+    const labels = trace => trace.calls.filter(call => call.method === 'fillText').map(call => call.args);
+    assert.deepEqual(labels(image).map(args => args[0]), labels(primitive).map(args => args[0]), kind + ' keeps exact text in either render path');
+    for (const [text, x, y, maxWidth] of labels(image)) {
+      assert.ok(text.length > 0 && maxWidth > 0 && x + maxWidth <= 253 && y <= 252, kind + ' label is bounded');
+    }
+    if (kind === 'sign') assert.equal(labels(image)[0][0], english ? 'ASPHODÈLE · LOWER DECKS' : 'ASPHODÈLE · PONTS INFÉRIEURS');
+    if (kind === 'blackbox' || kind === 'salvage') {
+      const color = kind === 'blackbox' ? '#d06b2a' : '#4a3a28', count = kind === 'blackbox' ? 3 : 2;
+      assert.equal(primitive.calls.filter(call => call.method === 'fillRect' && call.fillStyle === color).length, count);
+      assert.equal(image.calls.filter(call => call.method === 'fillRect' && call.fillStyle === color).length, 0, 'physical props come from PNG once');
+    }
+  }
+  const crtLines = trace => trace.calls.filter(call => call.method === 'fillRect' && call.fillStyle === 'rgba(125,255,154,.6)').map(call => call.args);
+  const crt0 = slotTrace('crt', { time: 0 }), crt2 = slotTrace('crt', { time: 2 });
+  assert.equal(crtLines(crt0).length, 3); assert.notDeepEqual(crtLines(crt0), crtLines(crt2));
+  const needles = trace => trace.calls.filter(call => call.method === 'lineTo').map(call => call.args);
+  const gauge0 = slotTrace('gauge', { time: 0 }), gauge2 = slotTrace('gauge', { time: 2 });
+  assert.equal(needles(gauge0).length, 3); assert.notDeepEqual(needles(gauge0), needles(gauge2));
+  const [, sx, sy, sw, sh, dx, dy, dw, dh] = gauge0.calls.find(call => call.method === 'drawImage').args;
+  const starts = gauge0.calls.filter(call => call.method === 'moveTo').map(call => call.args);
+  for (const [i, px] of [324, 768, 1212].entries()) {
+    assert.ok(Math.abs(starts[i][0] - (dx + (px - sx) * dw / sw)) < 1e-9, 'needle starts at the measured image pivot x');
+    assert.ok(Math.abs(starts[i][1] - (dy + (485 - sy) * dh / sh)) < 1e-9, 'needle starts at the measured image pivot y');
+  }
+  assert.deepEqual(slotTrace('gauge', { present: false }).calls.filter(call => call.method === 'moveTo').map(call => call.args), [[130, 206], [176, 206], [222, 206]], 'fallback pivots unchanged');
+  const camera = slotTrace('camera');
+  const lamp = camera.calls.find(call => call.method === 'fillRect' && call.fillStyle === '#e15b4f');
+  assert.ok(lamp && lamp.args[2] > 0 && lamp.args[3] > 0);
+  assert.ok(!camera.calls.some(call => call.method === 'fillRect' && call.fillStyle === '#06140b'), 'camera image glass and bezel remain intact');
+  const fallbackCamera = slotTrace('camera', { present: false });
+  assert.ok(fallbackCamera.calls.some(call => call.method === 'fillRect' && call.fillStyle === '#e15b4f' && call.args[2] === 5 && call.args[3] === 5));
+  assert.ok(fallbackCamera.calls.some(call => call.method === 'fillRect' && call.fillStyle === '#06140b' && call.args[2] === 129 && call.args[3] === 30));
+});
+
+test('mission art: real production engine draws all fourteen station campaigns with the admitted path and unchanged passage clearance', async () => {
+  assert.equal(ASPHODELE_CAMPAIGNS_V188.length, 14);
+  for (const campaign of ASPHODELE_CAMPAIGNS_V188) {
+    const { engine, draws } = await fixture({ campaign, seed: 7 }), dressing = engine.asphMissionDressingV188;
+    assert.ok(dressing?.feature, campaign.id);
+    assert.deepEqual(engine.asphMissionLoaderV188.requested, ASPHODELE_MISSION_SLOT_IDS_V188.filter(id => ASPHODELE_HUB_FILES_PRESENT_V188.includes(id)).map(id => getAsphodeleHubSlotV188(id).path));
+    for (const entry of [...dressing.props, dressing.feature]) for (const [x0, x1, top, bottom] of dressing.exclusions) {
+      const touchesHeight = !(Number.isFinite(top) && Number.isFinite(bottom) && (bottom < entry.y || top > entry.y + entry.h));
+      assert.ok(!touchesHeight || entry.x + entry.w <= x0 || entry.x >= x1, campaign.id + ' keeps the 18 px clearance');
+    }
+    engine.camera.x = Math.max(0, dressing.feature.x - 400); engine.draw();
+    const id = 'asph-msn-' + dressing.feature.kind, admitted = ASPHODELE_HUB_FILES_PRESENT_V188.includes(id);
+    assert.equal(engine.asphMissionLoaderV188.usage[id], admitted ? 'image' : 'primitive', campaign.id);
+    if (admitted) assert.ok(draws.some(draw => draw.path === getAsphodeleHubSlotV188(id).path), campaign.id + ' draws its actual admitted PNG');
+  }
 });

@@ -10,8 +10,38 @@ import { APP_RELEASE_V143 } from '../src/release-info-v143.js';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
 import { resolveSourceCommitV143, stampReleaseHtmlV143 } from './build-release-v143.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { COLONY_CREW_SLOTS_V188, COLONY_CREW_FILES_PRESENT_V188 } from '../src/colony-crew-slots-v188.js';
 
 const worker = await readFile(new URL('../sw.js', import.meta.url), 'utf8');
+const ASPHODELE_CARDS_V188 = ['asphodele-exterior', 'cassius-core', 'echo8-recording', 'order-documents', 'seal-fragment', 'david-memory']
+  .map(id => `/assets/content/v188/${id}.png`);
+const ASPHODELE_MISSION_ART_V188 = ['panel', 'crt', 'sign', 'conduit', 'blackbox', 'resin', 'salvage', 'gauge', 'camera']
+  .map(id => `/assets/asphodele/v188/asph-msn-${id}.png`);
+const ASPHODELE_HUB_WALL_ART_V188 = ['docks', 'ring', 'spoke', 'control', 'relay', 'lab', 'memorial', 'greenhouse', 'market', 'quarters', 'medbay', 'lower', 'repair']
+  .map(id => `/assets/asphodele/v188/asph-wall-${id}.png`);
+const ASPHODELE_HUB_DETAIL_ART_V188 = ['door', 'ud4l-docked', 'crucible-shuttle', 'cassius-core', 'qz-map', 'relay-bays', 'cradles', 'memorial-plaques',
+  'hydro-bays', 'crucible-stall', 'grue', 'bunks', 'medbay-beds', 'medbay-scanner', 'echo8-barricade', 'night-board', 'repair-cradle', 'npc-docker', 'npc-merchant', 'npc-technician']
+  .map(id => `/assets/asphodele/v188/asph-${id}.png`);
+const ASPHODELE_CINEMATIC_ART_V188 = ['ring', 'hub', 'rook-quarters', 'helmet-corridor', 'ceiling-drone', 'bent-door']
+  .map(id => `/assets/asphodele/v188/cinematics/asph-cin-${id}.png`);
+const ASPHODELE_RUNTIME_ART_V188 = [...ASPHODELE_CARDS_V188, ...ASPHODELE_MISSION_ART_V188, ...ASPHODELE_HUB_WALL_ART_V188, ...ASPHODELE_HUB_DETAIL_ART_V188, ...ASPHODELE_CINEMATIC_ART_V188];
+const ACT5_RUNTIME_ART_V188 = ['m577-side-corrected', 'm577-rain-departure', 'bridge-collapse', 'quay-standoff', 'port-gates-rollcall',
+  'port-meridien-epilogue', 'freight-trailer', 'colonist-trailer', 'echo8-locker-epilogue'].map(id => `/assets/act5/v188/${id}.png`);
+const BIOLOGICAL_RUNTIME_ART_V188 = ['qz17-cradle-breached', 'depot-resin-helmet-corridor', 'human-resin-support']
+  .map(id => `/assets/biological/v188/${id}.png`);
+const PROLOGUE_RUNTIME_ART_V188 = ['tomas-wren-standing', 'lucia-ferro-standing', 'adele-sarrazin-standing',
+  'resident-child-standing', 'north-quay-patient', 'medical-stretcher', 'port-meridien-night-approach',
+  'relay-access-badge', 'relay-reaching-hand', 'cryo-supply-shelf', 'cryo-service-trolley'].map(id => `/assets/prologue/v188/${id}.png`);
+const CARGO_ABYSS_RUNTIME_ART_V188 = [
+  ...['idle', 'advance', 'claw-tail', 'roar-hurt'].map(clip => `/assets/cargo/v188/matriarch-${clip}.png`),
+  '/assets/abyss/v188/manta-6-hull.png'
+];
+const HADAL_RUNTIME_ART_V188 = ['upper-parts', 'leg-parts', 'helmet'].map(part => `/assets/abyss/v188/hadal-${part}.png`);
+const BROODSTORM_QUEEN_RUNTIME_ART_V188 = ['idle', 'chase', 'death'].map(clip => `/assets/broodstorm/v188/flying-queen-${clip}.png`);
+const QUEEN_MOTHER_RUNTIME_ART_V188 = ['rest-anticipation', 'action-death', 'arms'].map(part => `/assets/queen-mother/v188/adult-${part}.png`);
+const QUEEN_MOTHER_GUARD_RUNTIME_ART_V188 = ['/assets/openai/sprites/normalized/enemies/xenomorph-praetorian-action-sheet.png'];
+const QUEEN_MOTHER_CHOIR_RUNTIME_ART_V188 = ['/assets/queen-mother/v188/choirs-original.png'];
+const REVIEWED_RUNTIME_ART_V188 = [...ASPHODELE_RUNTIME_ART_V188, ...ACT5_RUNTIME_ART_V188, ...BIOLOGICAL_RUNTIME_ART_V188, ...PROLOGUE_RUNTIME_ART_V188, ...CARGO_ABYSS_RUNTIME_ART_V188, ...HADAL_RUNTIME_ART_V188, ...BROODSTORM_QUEEN_RUNTIME_ART_V188, ...QUEEN_MOTHER_RUNTIME_ART_V188, ...QUEEN_MOTHER_GUARD_RUNTIME_ART_V188, ...QUEEN_MOTHER_CHOIR_RUNTIME_ART_V188];
 const ORIGIN = 'https://tantalus.test';
 const req = (path, options) => new Request(new URL(path, ORIGIN), options);
 function response(path, { private: secret = false, status = 200, mime, vary } = {}) {
@@ -162,6 +192,205 @@ test('public image caches normally and survives a network interruption', async (
   h.network(async () => { throw new Error('offline'); });
   assert.equal(await (await h.dispatch('fetch', { request })).value.text(), 'public static bytes');
 });
+test('colony cards: all eighteen admitted PNGs stay lazy and survive a later network interruption', async () => {
+  const h = host(), paths = COLONY_CREW_SLOTS_V188.filter(slot => COLONY_CREW_FILES_PRESENT_V188.includes(slot.id)).map(slot => slot.path);
+  assert.equal(paths.length, 18);
+  assert.equal(h.calls.length, 0);
+  assert.equal((await (await h.caches.open(h.api.CACHE)).keys()).length, 0);
+  for (const path of paths) {
+    assert.equal(h.api.SHELL.includes(path), false, 'scene art must not increase the mandatory precache');
+    assert.equal(h.api.cacheableRequestV143(req(path)), true, path);
+  }
+  h.network(async request => new Response(`card:${new URL(request.url).pathname}`, { headers: { 'content-type': 'image/png' } }));
+  for (const path of paths) {
+    const fetched = await h.dispatch('fetch', { request: req(path) });
+    assert.equal(fetched.intercepted, true);
+    assert.equal(await fetched.value.text(), `card:${path}`);
+  }
+  assert.equal((await (await h.caches.open(h.api.CACHE)).keys()).length, 18);
+  h.network(async () => { throw new Error('offline'); });
+  for (const path of paths) assert.equal(await (await h.dispatch('fetch', { request: req(path) })).value.text(), `card:${path}`);
+});
+test('colony cards: exact paths preserve origin, method and private-request exclusions', async () => {
+  const h = host(), path = '/assets/content/v188/colony/quest-apc.png';
+  for (const [candidate, options] of [
+    ['/assets/content/v188/colony/unreviewed.png', {}], ['/assets/content/v189/colony/quest-apc.png', {}],
+    ['/assets/content/v188/colony/quest-apc.webp', {}], ['/assets/content/v188/colony/QUEST-APC.png', {}],
+    ['/assets/content/v188/private.png', {}], [`https://foreign.test${path}`, {}], [`${path}?version=1`, {}],
+    [path, { method: 'HEAD' }], [path, { method: 'POST', body: 'private' }],
+    [path, { cache: 'no-store' }], [path, { headers: { 'cache-control': 'private' } }],
+    [path, { headers: { authorization: 'Bearer account-A' } }], [path, { headers: { apikey: 'account-A' } }],
+    [path, { headers: { range: 'bytes=0-20' } }]
+  ]) {
+    const request = req(candidate, options);
+    assert.equal(h.api.cacheableRequestV143(request), false, candidate);
+    assert.equal((await h.dispatch('fetch', { request })).intercepted, false, candidate);
+  }
+  assert.equal(h.calls.length, 0);
+});
+test('colony cards: invalid and newly private responses cannot leave a usable cached copy', async () => {
+  const path = '/assets/content/v188/colony/wren-notebooks.png';
+  for (const config of [{ private: true }, { mime: 'text/html' }, { status: 206 }, { status: 404 }, { vary: 'Authorization' }, { vary: 'Cookie' }, { vary: '*' }]) {
+    const h = host(), request = req(path);
+    await h.dispatch('fetch', { request });
+    assert.ok(await (await h.caches.open(h.api.CACHE)).match(request));
+    h.network(async () => response(path, config));
+    await h.dispatch('fetch', { request });
+    assert.equal(await (await h.caches.open(h.api.CACHE)).match(request), undefined);
+    h.network(async () => { throw new Error('offline'); });
+    assert.equal((await h.dispatch('fetch', { request })).value.type, 'error');
+  }
+});
+test('Reviewed scene art: Asphodele, Act V, biological evidence, prologue, Matriarch, MANTA, HADAL, Broodstorm, Queen Mother and adapted guards stay lazy through installation and survive a later network interruption', async () => {
+  const h = host();
+  assert.equal(h.api.CACHE, 'atf-v143-queen-mother-choir-art-20261117');
+  await h.dispatch('install');
+  const cache = await h.caches.open(h.api.CACHE);
+  assert.equal(h.api.SHELL.filter(path => path === '/src/biological-art-v188.js').length, 1,
+    'the shared presentation module is an explicit offline-shell dependency');
+  assert.ok(await cache.match(req('/src/biological-art-v188.js')));
+  assert.equal(h.api.SHELL.filter(path => path === '/src/prologue-art-v188.js').length, 1,
+    'the prologue presentation module is an explicit offline-shell dependency');
+  assert.ok(await cache.match(req('/src/prologue-art-v188.js')));
+  assert.equal(h.api.SHELL.filter(path => path === '/src/port-quay-art-v188.js').length, 1,
+    'the playable quay adapter is an explicit offline-shell dependency');
+  assert.ok(await cache.match(req('/src/port-quay-art-v188.js')));
+  for (const path of ['/src/cargo-matriarch-art-v188.js', '/src/manta-art-v188.js']) {
+    assert.equal(h.api.SHELL.filter(entry => entry === path).length, 1,
+      'the dedicated creature and vehicle renderers are explicit offline-shell dependencies');
+    assert.ok(await cache.match(req(path)));
+  }
+  assert.equal(h.api.SHELL.filter(path => path === '/src/hadal-player-art-v188.js').length, 1,
+    'the contextual HADAL renderer is an explicit offline-shell dependency');
+  assert.ok(await cache.match(req('/src/hadal-player-art-v188.js')));
+  assert.equal(h.api.SHELL.filter(path => path === '/src/broodstorm-queen-art-v188.js').length, 1,
+    'the dedicated Broodstorm Queen renderer is an explicit offline-shell dependency');
+  assert.ok(await cache.match(req('/src/broodstorm-queen-art-v188.js')));
+  assert.equal(h.api.SHELL.filter(path => path === '/src/queen-mother-art-v188.js').length, 1,
+    'the contextual Queen Mother renderer is an explicit offline-shell dependency');
+  assert.ok(await cache.match(req('/src/queen-mother-art-v188.js')));
+  assert.equal(h.api.SHELL.filter(path => path === '/src/queen-mother-guard-art-v188.js').length, 1,
+    'the adapted guard renderer is an explicit offline-shell dependency');
+  assert.ok(await cache.match(req('/src/queen-mother-guard-art-v188.js')));
+  assert.equal(h.api.SHELL.filter(path => path === '/src/queen-mother-choir-art-v188.js').length, 1,
+    'the original local Choir renderer is an explicit offline-shell dependency');
+  assert.ok(await cache.match(req('/src/queen-mother-choir-art-v188.js')));
+  for (const path of REVIEWED_RUNTIME_ART_V188) {
+    assert.equal(h.api.SHELL.includes(path), false, 'scene, mission, hub and cinematic art must not increase the mandatory precache');
+    assert.equal(h.calls.some(request => new URL(request.url).pathname === path), false, 'installation must not fetch the image');
+    assert.equal(await cache.match(req(path)), undefined);
+    assert.equal(h.api.cacheableRequestV143(req(path)), true, path);
+  }
+  for (const id of ['tomas-wren', 'lucia-ferro', 'adele-sarrazin']) {
+    const path = `/assets/colony/v188/${id}.png`;
+    assert.equal(h.api.SHELL.includes(path), true, 'existing portrait precache stays intact');
+    assert.ok(await cache.match(req(path)));
+  }
+  h.network(async () => { throw new Error('offline before first view'); });
+  for (const path of REVIEWED_RUNTIME_ART_V188) assert.equal((await h.dispatch('fetch', { request: req(path) })).value.type, 'error');
+  assert.equal((await cache.keys()).length, h.api.SHELL.length);
+  h.network(async request => new Response(`art:${new URL(request.url).pathname}`, { headers: { 'content-type': 'image/png' } }));
+  for (const path of REVIEWED_RUNTIME_ART_V188) {
+    const fetched = await h.dispatch('fetch', { request: req(path) });
+    assert.equal(fetched.intercepted, true);
+    assert.equal(await fetched.value.text(), `art:${path}`);
+  }
+  assert.equal((await cache.keys()).length, h.api.SHELL.length + REVIEWED_RUNTIME_ART_V188.length);
+  h.network(async () => { throw new Error('offline after first view'); });
+  for (const path of REVIEWED_RUNTIME_ART_V188) assert.equal(await (await h.dispatch('fetch', { request: req(path) })).value.text(), `art:${path}`);
+});
+test('Reviewed scene art: exact paths reject unreviewed neighbors, out-of-scope hub art and private requests', async () => {
+  const h = host(), path = '/assets/content/v188/cassius-core.png';
+  for (const [candidate, options] of [
+    ['/assets/content/v188/unreviewed.png', {}], ['/assets/content/v188/asphodele-exterior-extra.png', {}],
+    ['/assets/content/v188/nested/cassius-core.png', {}], [`${path}/extra.png`, {}],
+    ['/assets/content/v189/cassius-core.png', {}], ['/assets/content/v188/cassius-core.webp', {}],
+    ['/assets/content/v188/CASSIUS-CORE.png', {}], ['/assets/content/v188/%63assius-core.png', {}],
+    ['/assets/asphodele/v188/asph-unreviewed.png', {}], ['/assets/asphodele/v188/asph-npc-unreviewed.png', {}],
+    ['/assets/asphodele/v188/asph-unreviewed-shuttle.png', {}],
+    ...[...ASPHODELE_HUB_DETAIL_ART_V188, ...ASPHODELE_CINEMATIC_ART_V188].flatMap(artPath => [
+      [artPath.replace(/\.png$/, '-extra.png'), {}], [artPath.replace('/v188/', '/v188/nested/'), {}],
+      [artPath.replace('/v188/', '/v189/'), {}], [artPath.replace(/\.png$/, '.webp'), {}],
+      [artPath.replace('/asph-', '/ASPH-'), {}], [artPath.replace('/asph-', '/%61sph-'), {}]
+    ]),
+    ['/assets/act5/v188/relay-room.png', {}], ['/assets/act5/v188/unreviewed.png', {}],
+    ...ACT5_RUNTIME_ART_V188.flatMap(artPath => [
+      [artPath.replace(/\.png$/, '-extra.png'), {}], [artPath.replace('/v188/', '/v188/nested/'), {}],
+      [artPath.replace('/v188/', '/v189/'), {}], [artPath.replace(/\.png$/, '.webp'), {}],
+      [artPath.replace('/act5/', '/ACT5/'), {}], [artPath.replace('/act5/', '/%61ct5/'), {}]
+    ]),
+    ['/assets/biological/v188/unreviewed.png', {}], ['/assets/biological/v188/human-resin-body.png', {}],
+    ...BIOLOGICAL_RUNTIME_ART_V188.flatMap(artPath => [
+      [artPath.replace(/\.png$/, '-extra.png'), {}], [artPath.replace('/v188/', '/v188/nested/'), {}],
+      [artPath.replace('/v188/', '/v189/'), {}], [artPath.replace(/\.png$/, '.webp'), {}],
+      [artPath.replace('/biological/', '/BIOLOGICAL/'), {}], [artPath.replace('/biological/', '/%62iological/'), {}]
+    ]),
+    ['/assets/prologue/v188/unreviewed.png', {}], ['/assets/prologue/v188/north-quay-diagnosis.png', {}],
+    ...PROLOGUE_RUNTIME_ART_V188.flatMap(artPath => [
+      [artPath.replace(/\.png$/, '-extra.png'), {}], [artPath.replace('/v188/', '/v188/nested/'), {}],
+      [artPath.replace('/v188/', '/v189/'), {}], [artPath.replace(/\.png$/, '.webp'), {}],
+      [artPath.replace('/prologue/', '/PROLOGUE/'), {}], [artPath.replace('/prologue/', '/%70rologue/'), {}]
+    ]),
+    ['/assets/cargo/v188/unreviewed.png', {}], ['/assets/abyss/v188/unreviewed.png', {}],
+    ...CARGO_ABYSS_RUNTIME_ART_V188.flatMap(artPath => [
+      [artPath.replace(/\.png$/, '-extra.png'), {}], [artPath.replace('/v188/', '/v188/nested/'), {}],
+      [artPath.replace('/v188/', '/v189/'), {}], [artPath.replace(/\.png$/, '.webp'), {}],
+      [artPath.replace('/cargo/', '/CARGO/').replace('/abyss/', '/ABYSS/'), {}],
+      [artPath.replace('/cargo/', '/%63argo/').replace('/abyss/', '/%61byss/'), {}]
+    ]),
+    ...HADAL_RUNTIME_ART_V188.flatMap(artPath => [
+      [artPath.replace(/\.png$/, '-extra.png'), {}], [artPath.replace('/v188/', '/v188/nested/'), {}],
+      [artPath.replace('/v188/', '/v189/'), {}], [artPath.replace(/\.png$/, '.webp'), {}],
+      [artPath.replace('/hadal-', '/HADAL-'), {}], [artPath.replace('/hadal-', '/%68adal-'), {}]
+    ]),
+    ['/assets/broodstorm/v188/unreviewed.png', {}],
+    ...BROODSTORM_QUEEN_RUNTIME_ART_V188.flatMap(artPath => [
+      [artPath.replace(/\.png$/, '-extra.png'), {}], [artPath.replace('/v188/', '/v188/nested/'), {}],
+      [artPath.replace('/v188/', '/v189/'), {}], [artPath.replace(/\.png$/, '.webp'), {}],
+      [artPath.replace('/broodstorm/', '/BROODSTORM/'), {}], [artPath.replace('/broodstorm/', '/%62roodstorm/'), {}]
+    ]),
+    ['/assets/queen-mother/v188/unreviewed.png', {}],
+    ...[...QUEEN_MOTHER_RUNTIME_ART_V188, ...QUEEN_MOTHER_CHOIR_RUNTIME_ART_V188].flatMap(artPath => [
+      [artPath.replace(/\.png$/, '-extra.png'), {}], [artPath.replace('/v188/', '/v188/nested/'), {}],
+      [artPath.replace('/v188/', '/v189/'), {}], [artPath.replace(/\.png$/, '.webp'), {}],
+      [artPath.replace('/queen-mother/', '/QUEEN-MOTHER/'), {}], [artPath.replace('/queen-mother/', '/%71ueen-mother/'), {}]
+    ]),
+    ['/assets/asphodele/v188/asph-wall-unreviewed.png', {}], ['/assets/asphodele/v188/asph-msn-unreviewed.png', {}],
+    ['/assets/asphodele/v188/asph-wall-docks-extra.png', {}], ['/assets/asphodele/v188/nested/asph-wall-docks.png', {}],
+    ['/assets/asphodele/v189/asph-wall-docks.png', {}], ['/assets/asphodele/v188/asph-wall-docks.webp', {}],
+    ['/assets/asphodele/v188/ASPH-WALL-DOCKS.png', {}], ['/assets/asphodele/v188/%61sph-wall-docks.png', {}],
+    ['/assets/asphodele/v188/asph-msn-panel-extra.png', {}], ['/assets/asphodele/v188/nested/asph-msn-panel.png', {}],
+    ['/assets/asphodele/v189/asph-msn-panel.png', {}], ['/assets/asphodele/v188/asph-msn-panel.webp', {}],
+    ['/assets/asphodele/v188/ASPH-MSN-PANEL.png', {}], ['/assets/asphodele/v188/%61sph-msn-panel.png', {}],
+    ...REVIEWED_RUNTIME_ART_V188.flatMap(artPath => [
+      [`https://foreign.test${artPath}`, {}], [`${artPath}?version=1`, {}],
+      [artPath, { method: 'HEAD' }], [artPath, { method: 'POST', body: 'private' }],
+      [artPath, { cache: 'no-store' }], [artPath, { headers: { 'cache-control': 'private' } }],
+      [artPath, { headers: { authorization: 'Bearer account-A' } }], [artPath, { headers: { apikey: 'account-A' } }],
+      [artPath, { headers: { range: 'bytes=0-20' } }]
+    ])
+  ]) {
+    const request = req(candidate, options);
+    assert.equal(h.api.cacheableRequestV143(request), false, candidate);
+    assert.equal((await h.dispatch('fetch', { request })).intercepted, false, candidate);
+  }
+  assert.equal(h.calls.length, 0);
+  assert.equal((await (await h.caches.open(h.api.CACHE)).keys()).length, 0);
+});
+test('Reviewed scene art: invalid and newly private responses remove the older public cached copy', async () => {
+  for (const path of REVIEWED_RUNTIME_ART_V188) {
+    for (const config of [{ private: true }, { mime: 'text/html' }, { status: 206 }, { status: 404 }, { vary: 'Authorization' }, { vary: 'Cookie' }, { vary: '*' }]) {
+      const h = host(), request = req(path);
+      await h.dispatch('fetch', { request });
+      assert.ok(await (await h.caches.open(h.api.CACHE)).match(request));
+      h.network(async () => response(path, config));
+      await h.dispatch('fetch', { request });
+      assert.equal(await (await h.caches.open(h.api.CACHE)).match(request), undefined);
+      h.network(async () => { throw new Error('offline'); });
+      assert.equal((await h.dispatch('fetch', { request })).value.type, 'error');
+    }
+  }
+});
 test('installed executable shell is pinned instead of mixing deployments', async () => {
   const h = host(), request = req('/src/app.js');
   await (await h.caches.open(h.api.CACHE)).put(request, new Response('old stable module', { headers: { 'content-type': 'text/javascript' } }));
@@ -240,7 +469,60 @@ test('release commit identity uses the actual checkout, with a strict archive fa
 });
 test('release workflow, reports and gamedev guidance are source tooling only', () => {
   for (const path of ['.github/workflows/full-release-v143.yml', 'docs/forge/V143-AUDIT-FIXES.md',
-    'AGENTS.md', 'docs/development/GAMEDEV_GUIDANCE.md']) {
+    'AGENTS.md', 'docs/development/GAMEDEV_GUIDANCE.md',
+    'docs/development/ASPHODELE_HUB_WALL_ART_PROVENANCE_20261117.json',
+    'docs/development/ASPHODELE_HUB_WALL_ART_QA_20261117.md',
+    'docs/development/ASPHODELE_HUB_WALL_ART_OVERVIEW_20261117.png',
+    'docs/development/ASPHODELE_HUB_WALL_ART_RENDER_RECEIPT_20261117.json',
+    'docs/development/ASPHODELE_HUB_DETAIL_ART_PROVENANCE_20261117.json',
+    'docs/development/ASPHODELE_HUB_DETAIL_ART_QA_20261117.md',
+    'docs/development/ASPHODELE_HUB_DETAIL_ART_OVERVIEW_20261117.png',
+    'docs/development/ASPHODELE_HUB_DETAIL_ART_RENDER_RECEIPT_20261117.json',
+    'docs/development/ASPHODELE_CINEMATIC_ART_PROVENANCE_20261117.json',
+    'docs/development/ASPHODELE_CINEMATIC_ART_QA_20261117.md',
+    'docs/development/ASPHODELE_CINEMATIC_ART_OVERVIEW_20261117.png',
+    'docs/development/ASPHODELE_CINEMATIC_ART_RENDER_RECEIPT_20261117.json',
+    'docs/development/ACT5_ART_PROVENANCE_20261117.json',
+    'docs/development/ACT5_ART_QA_20261117.md',
+    'docs/development/ACT5_ART_OVERVIEW_20261117.png',
+    'docs/development/ACT5_ART_RENDER_RECEIPT_20261117.json',
+    'docs/development/BIOLOGICAL_ART_PROVENANCE_20261117.json',
+    'docs/development/BIOLOGICAL_ART_QA_20261117.md',
+    'docs/development/BIOLOGICAL_ART_OVERVIEW_20261117.png',
+    'docs/development/BIOLOGICAL_ART_RENDER_RECEIPT_20261117.json',
+    'docs/development/PROLOGUE_ART_PROVENANCE_20261117.json',
+    'docs/development/PROLOGUE_ART_QA_20261117.md',
+    'docs/development/PROLOGUE_ART_OVERVIEW_20261117.png',
+    'docs/development/PROLOGUE_ART_RENDER_RECEIPT_20261117.json',
+    'docs/development/PORT_QUAY_ART_PROVENANCE_20261117.json',
+    'docs/development/PORT_QUAY_ART_QA_20261117.md',
+    'docs/development/PORT_QUAY_ART_OVERVIEW_20261117.png',
+    'docs/development/PORT_QUAY_ART_RENDER_RECEIPT_20261117.json',
+    'docs/development/CARGO_ABYSS_ART_PROVENANCE_20261117.json',
+    'docs/development/CARGO_ABYSS_ART_QA_20261117.md',
+    'docs/development/CARGO_ABYSS_ART_RENDER_RECEIPT_20261117.json',
+    'docs/development/CARGO_ABYSS_ART_OVERVIEW_20261117.png',
+    'docs/development/HADAL_ART_PROVENANCE_20261117.json',
+    'docs/development/HADAL_ART_QA_20261117.md',
+    'docs/development/HADAL_ART_RENDER_RECEIPT_20261117.json',
+    'docs/development/HADAL_ART_OVERVIEW_20261117.png',
+    'docs/development/BROODSTORM_QUEEN_ART_PROVENANCE_20261117.json',
+    'docs/development/BROODSTORM_QUEEN_ART_QA_20261117.md',
+    'docs/development/BROODSTORM_QUEEN_ART_RENDER_RECEIPT_20261117.json',
+    'docs/development/BROODSTORM_QUEEN_ART_OVERVIEW_20261117.png',
+    'docs/development/QUEEN_MOTHER_ART_PROVENANCE_20261117.json',
+    'docs/development/QUEEN_MOTHER_ART_QA_20261117.md',
+    'docs/development/QUEEN_MOTHER_ART_RENDER_RECEIPT_20261117.json',
+    'docs/development/QUEEN_MOTHER_ART_OVERVIEW_20261117.png',
+    'docs/development/QUEEN_MOTHER_GUARD_ART_PROVENANCE_20261117.json',
+    'docs/development/QUEEN_MOTHER_GUARD_ART_QA_20261117.md',
+    'docs/development/QUEEN_MOTHER_GUARD_ART_RENDER_RECEIPT_20261117.json',
+    'docs/development/QUEEN_MOTHER_GUARD_ART_OVERVIEW_20261117.png',
+    'docs/development/QUEEN_MOTHER_CHOIR_ART_PROVENANCE_20261117.json',
+    'docs/development/QUEEN_MOTHER_CHOIR_ART_QA_20261117.md',
+    'docs/development/QUEEN_MOTHER_CHOIR_ART_RENDER_RECEIPT_20261117.json',
+    'docs/development/QUEEN_MOTHER_CHOIR_ART_OVERVIEW_20261117.png',
+    'scripts/verify-cargo-matriarch-art-v188.mjs', 'scripts/verify-manta-art-v188.mjs', 'scripts/verify-hadal-player-art-v188.mjs', 'scripts/verify-broodstorm-queen-art-v188.mjs', 'scripts/verify-queen-mother-art-v188.mjs', 'scripts/verify-queen-mother-guard-art-v188.mjs', 'scripts/verify-queen-mother-choir-art-v188.mjs']) {
     assert.equal(isPublicDistributionPathV86(path), true); assert.equal(isPublicDistributionPathV86(path, { built: true }), false);
   }
 });
@@ -306,6 +588,19 @@ test('gamedev guidance admission stays exact and rejects unrelated documents', (
   assert.equal(isPublicDistributionPathV86('docs/development', { directory: true }), true);
   assert.equal(isPublicDistributionPathV86('docs/development', { directory: true, built: true }), false);
   for (const path of ['docs/development/unreviewed.md', 'docs/development/GAMEDEV_GUIDANCE.md.bak',
+    'docs/development/ASPHODELE_HUB_WALL_ART_QA_20261117.md.bak', 'docs/development/ASPHODELE_HUB_WALL_ART_UNREVIEWED_20261117.png',
+    'docs/development/ASPHODELE_HUB_DETAIL_ART_QA_20261117.md.bak', 'docs/development/ASPHODELE_HUB_DETAIL_ART_UNREVIEWED_20261117.png',
+    'docs/development/ASPHODELE_CINEMATIC_ART_QA_20261117.md.bak', 'docs/development/ASPHODELE_CINEMATIC_ART_UNREVIEWED_20261117.png',
+    'docs/development/ACT5_ART_QA_20261117.md.bak', 'docs/development/ACT5_ART_UNREVIEWED_20261117.png',
+    'docs/development/BIOLOGICAL_ART_QA_20261117.md.bak', 'docs/development/BIOLOGICAL_ART_UNREVIEWED_20261117.png',
+    'docs/development/PROLOGUE_ART_QA_20261117.md.bak', 'docs/development/PROLOGUE_ART_UNREVIEWED_20261117.png',
+    'docs/development/PORT_QUAY_ART_QA_20261117.md.bak', 'docs/development/PORT_QUAY_ART_UNREVIEWED_20261117.png',
+    'docs/development/CARGO_ABYSS_ART_QA_20261117.md.bak', 'docs/development/CARGO_ABYSS_ART_UNREVIEWED_20261117.png',
+    'docs/development/HADAL_ART_QA_20261117.md.bak', 'docs/development/HADAL_ART_UNREVIEWED_20261117.png',
+    'docs/development/BROODSTORM_QUEEN_ART_QA_20261117.md.bak', 'docs/development/BROODSTORM_QUEEN_ART_UNREVIEWED_20261117.png',
+    'docs/development/QUEEN_MOTHER_ART_QA_20261117.md.bak', 'docs/development/QUEEN_MOTHER_ART_UNREVIEWED_20261117.png',
+    'docs/development/QUEEN_MOTHER_GUARD_ART_QA_20261117.md.bak', 'docs/development/QUEEN_MOTHER_GUARD_ART_UNREVIEWED_20261117.png',
+    'docs/development/QUEEN_MOTHER_CHOIR_ART_QA_20261117.md.bak', 'docs/development/QUEEN_MOTHER_CHOIR_ART_UNREVIEWED_20261117.png',
     'AGENTS.md.bak', 'src/AGENTS.md', 'docs/development/../private.md']) {
     assert.equal(isPublicDistributionPathV86(path), false, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);

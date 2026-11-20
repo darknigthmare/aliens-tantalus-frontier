@@ -21,8 +21,8 @@
 // docking airlock) comes to the extraction point, the marines or the APC board
 // under covering fire, the ship lifts, then
 //   onEvent({ type: 'extraction-boarding-complete-v188', mode, placeType })
-// and the held mission-complete event, unchanged, so rewards, debrief and
-// paidRewardsV188 run exactly as without the sequence, once.
+// and the held mission-complete event. A mode with deferred accounting settles
+// its canonical result after the fight; rewards and debrief are delivered once.
 //
 // Resume: a capture taken mid-landing records the post-landing poses (no
 // replay); a capture taken mid-boarding records the boarding and its held
@@ -59,7 +59,7 @@ const SKIP_KEYS = new Set(['KeyE', 'Escape', 'Enter']);
  * [PROPOSÉ] Defended boarding (gameplay gaps V188): during the extraction boarding the enemies keep moving
  * and attacking, the chin turret and the marine covering from the bay really hit (damage per tracer, reach
  * from the gun), and the marines take damage but never fall below `floorHealth` while they board: the
- * extraction already succeeded (mission-complete is held, its rewards fixed), so a death here could not be
+ * extraction already succeeded (mission-complete is held until boarding ends), so a death here could not be
  * honoured without contradicting it. Boarded marines are out of reach.
  */
 export const DEFENDED_BOARDING_V188 = Object.freeze({ tracerDamage: 14, reach: 900, floorHealth: 1 });
@@ -136,6 +136,7 @@ export function withMissionDropshipHandoverV188(Base) {
 
     start(options = {}) {
       this.handoverV188 = null; this.handoverDepartedV188 = false; this.handoverExtractedV188 = false;
+      this.handoverTerminalPosesV188 = null;
       this.handoverParticlesV188 = []; this.handoverShakeV188 = 0;
       let policy = dropshipHandoverPolicyV188(options);
       this.handoverConfigV188 = policy;
@@ -157,6 +158,10 @@ export function withMissionDropshipHandoverV188(Base) {
       if (saved?.boarding && typeof saved.boarding === 'object' && this.mission?.state === 'complete' && saved.boarding.event) {
         // A resumed boarding is finished whatever the launch flow: its held event is still owed.
         this.beginExtractionV188(saved.boarding.event, normalizeHandoverOptionV188(saved.boarding) || policy, Number(saved.boarding.t) || 0);
+      } else if (saved?.schema === 188 && saved.extracted === true && saved.boarding === null && this.mission?.state === 'complete') {
+        // A terminal checkpoint already delivered its event. Keep the marines
+        // aboard without replaying boarding, rewards or the ascent cinematic.
+        this.handoverDepartedV188 = true; this.handoverExtractedV188 = true;
       } else if (policy?.insertion && !resumed && this.mission?.state === 'active' && !this.handoverLandedKeysV188.has(key) && this.player) {
         this.handoverLandedKeysV188.add(key); // a retry of the same deployment never lands twice
         this.beginInsertionV188(policy);
@@ -334,12 +339,24 @@ export function withMissionDropshipHandoverV188(Base) {
       }
     }
     finishBoardingV188(seq, skipped) {
+      if (!this.running || this.handoverV188 !== seq || seq?.kind !== 'extraction' || this.mission?.state !== 'complete') return false;
+      // Settle before either callback: the presentation callback can pause the
+      // engine, and the terminal callback captures the authoritative save.
+      seq.event = this.finalizeDeferredMissionCompletionV188?.(seq.event) ?? seq.event;
+      // The app captures inside the terminal callback, after the staged sequence
+      // is gone. Keep only its native poses for capture; the live drawn poses and
+      // the paid event are not part of this bounded, per-mission record. An ordinary
+      // stop keeps the actors, so this record lasts until the next start as well.
+      this.handoverTerminalPosesV188 = { kind: 'extraction',
+        actors: (seq.actors || []).map(entry => ({ actor: entry.actor, final: { ...entry.final } })),
+        vehicleStart: seq.vehicleStart ? { ...seq.vehicleStart } : null };
       this.handoverV188 = null; this.handoverDepartedV188 = true; this.handoverExtractedV188 = true; this.handoverParticlesV188 = [];
       this.onEvent?.({ type: 'extraction-boarding-complete-v188', mode: seq.mode, placeType: seq.placeType,
         boardedBy: seq.boardedBy || 'foot', skipped: Boolean(skipped) });
-      // The held terminal event, unchanged: the app pays it once, as before.
+      // The held terminal event, finalized once: the app pays it once, as before.
       const sink = this.handoverSinkV188;
       if (typeof sink === 'function') sink(seq.event);
+      return true;
     }
 
     skipDropshipHandoverV188() {
@@ -633,11 +650,12 @@ export function withMissionDropshipHandoverV188(Base) {
     }
     captureResumeState() {
       const seq = this.handoverV188;
-      const state = seq?.blocking && seq.resolved ? this.withHandoverPosesV188(seq, () => super.captureResumeState()) : super.captureResumeState();
-      if (state && typeof state === 'object' && (this.handoverConfigV188 || seq)) {
+      const poses = seq?.blocking && seq.resolved ? seq : this.mission?.state === 'complete' ? this.handoverTerminalPosesV188 : null;
+      const state = poses ? this.withHandoverPosesV188(poses, () => super.captureResumeState()) : super.captureResumeState();
+      if (state && typeof state === 'object' && (this.handoverConfigV188 || seq || this.handoverExtractedV188)) {
         let event = null;
         if (seq?.kind === 'extraction') { try { event = structuredClone(seq.event); } catch { event = seq.event; } }
-        state.dropshipHandoverV188 = { schema: 188, landed: true,
+        state.dropshipHandoverV188 = { schema: 188, landed: true, extracted: this.handoverExtractedV188 === true,
           boarding: seq?.kind === 'extraction' ? { mode: seq.mode, placeType: seq.placeType, short: seq.short,
             t: Math.min(seq.t, phaseEnd(seq, seq.style === 'dock' ? 'seal' : 'arrive')), event } : null };
       }

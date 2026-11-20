@@ -4,8 +4,14 @@ import { readFileSync, existsSync } from 'node:fs';
 import { CINEMATICS_V188, CINEMATIC_IDS_V188, CINEMATIC_IMAGES_V188, NORTH_QUAY_NAMES_V188, cinematicDurationV188,
   cinematicShotAtV188, drawCinematicFrameV188, CinematicPlayerV188 } from '../src/story-cinematics-v188.js';
 import { getNpcDialoguePortraitV168 } from '../src/npc-dialogue-portraits-v168.js';
+import { getColonyPortraitV188 } from '../src/colony-portraits-v188.js';
 import { createDefaultSave, migrateSave } from '../src/save.js';
 import { markStoryCinematicSeenV188, normalizeStoryCampaignV188 } from '../src/story-campaign-v188.js';
+import { BIOLOGICAL_ART_V188, BIOLOGICAL_NEW_ART_IDS_V188, BIOLOGICAL_CINEMATIC_ART_BY_ID_V188,
+  BIOLOGICAL_ART_BY_CONSUMER_V188, BIOLOGICAL_HELMET_V188, biologicalCinematicSourcesV188,
+  biologicalConsumerSourcesV188, prepareBiologicalArtV188, biologicalArtFitV188,
+  biologicalManifestCountV188 } from '../src/biological-art-v188.js';
+import { PROLOGUE_ART_V188, PROLOGUE_CINEMATIC_ART_BY_ID_V188, prologueCinematicSourcesV188 } from '../src/prologue-art-v188.js';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url), 'utf8');
 function recorder() {
@@ -209,4 +215,234 @@ test('interlude: Jun Park first, then the crisis; the crew follows the alert rou
   assert.equal(interludeCrisisClearedV188(save, crisis.id), true); assert.equal(interludeChoicePendingV188(save), true);
   const calm = NPC_IDENTITIES_V62.map(identity => resolveNpcRoutineV62(identity.crewId, { save, hub: save.hub, crisis: save.hub.activeCrisis, clock: save.clock }));
   assert.ok(calm.every(routine => routine.reason !== 'active-crisis'), 'the alert ends with the crisis');
+});
+
+// Header-derived dimensions and Canvas operation records are fixtures, not a
+// browser screenshot. The separate native-raster QA decodes the same files.
+function biologicalImages(paths = Object.values(BIOLOGICAL_ART_V188).map(entry => entry.path)) {
+  return Object.fromEntries(paths.map(path => {
+    const bytes = readFileSync(new URL(`..${path}`, import.meta.url));
+    assert.equal(bytes.subarray(1, 4).toString(), 'PNG', path);
+    return [path, { src: path, complete: true, naturalWidth: bytes.readUInt32BE(16), naturalHeight: bytes.readUInt32BE(20) }];
+  }));
+}
+function biologicalRecorder() {
+  const calls = [], gradient = { addColorStop() {} };
+  const ctx = new Proxy({ globalAlpha: 1, measureText: value => ({ width: String(value).length * 17 }),
+    createLinearGradient: () => gradient, createRadialGradient: () => gradient,
+    fillText(value, ...args) { calls.push({ op: 'text', value: String(value), args }); },
+    drawImage(image, ...args) { calls.push({ op: 'image', path: image.src, args }); },
+    fillRect(...args) { calls.push({ op: 'fillRect', args }); } },
+  { get: (object, key) => key in object ? object[key] : () => {} });
+  return { ctx, calls };
+}
+
+test('biological art: three new files, exact consumer lists and every source has an active use', () => {
+  assert.deepEqual(BIOLOGICAL_NEW_ART_IDS_V188, ['qz17-cradle-breached', 'depot-resin-helmet-corridor', 'human-resin-support']);
+  assert.equal(Object.keys(BIOLOGICAL_ART_V188).length, 18);
+  assert.deepEqual(Object.keys(BIOLOGICAL_CINEMATIC_ART_BY_ID_V188), ['cin-11', 'cin-31', 'cin-40', 'cin-41', 'cin-50', 'cin-51', 'cin-qz17-retour']);
+  const images = biologicalImages(); assert.equal(Object.keys(images).length, 18);
+  const used = new Set(Object.values(BIOLOGICAL_ART_BY_CONSUMER_V188).flat());
+  assert.deepEqual([...used].sort(), Object.keys(BIOLOGICAL_ART_V188).sort());
+  assert.equal(biologicalCinematicSourcesV188('cin-72'), null);
+  assert.deepEqual(biologicalConsumerSourcesV188('other'), []);
+  for (const id of Object.keys(BIOLOGICAL_ART_V188).filter(key => !key.startsWith('asph-npc-'))) {
+    const fit = biologicalArtFitV188(images, id, [10, 20, 500, 300]); assert.ok(fit, id);
+    assert.ok(Math.abs(fit.w / fit.h - fit.sw / fit.sh) < 1e-9, `${id} stays proportional`);
+    const image = images[BIOLOGICAL_ART_V188[id].path];
+    assert.ok(fit.sx >= 0 && fit.sy >= 0 && fit.sx + fit.sw <= image.naturalWidth && fit.sy + fit.sh <= image.naturalHeight);
+  }
+});
+
+test('biological lazy loading: Object and Map share pending images, retry errors only on entry and leave other consumers alone', () => {
+  for (const images of [{}, new Map()]) {
+    const requests = [];
+    class ImageDouble { complete = false; naturalWidth = 0; naturalHeight = 0; set src(value) { this.path = value; requests.push(value); } }
+    const read = path => images instanceof Map ? images.get(path) : images[path];
+    const paths = prepareBiologicalArtV188(images, 'qz17-cradle', ImageDouble);
+    assert.deepEqual(requests, paths); assert.equal(paths.length, 1);
+    prepareBiologicalArtV188(images, 'qz17-cradle', ImageDouble); assert.equal(requests.length, 1, 'pending request reused');
+    read(paths[0]).complete = true;
+    prepareBiologicalArtV188(images, 'qz17-cradle', ImageDouble); assert.equal(requests.length, 2, 'new entry retries an error');
+    Object.assign(read(paths[0]), { complete: true, naturalWidth: 100, naturalHeight: 100 });
+    prepareBiologicalArtV188(images, 'qz17-cradle', ImageDouble); assert.equal(requests.length, 2, 'ready image reused');
+    prepareBiologicalArtV188(images, 'black-cocoon', ImageDouble); assert.equal(requests.length, 3);
+    prepareBiologicalArtV188(images, 'other', ImageDouble); assert.equal(requests.length, 3);
+  }
+});
+
+test('biological cinema preload requests its own art and portraits, reuses pending files and retries a failed replay', () => {
+  for (const id of Object.keys(BIOLOGICAL_CINEMATIC_ART_BY_ID_V188)) {
+    const requested = [];
+    class ImageDouble { complete = false; naturalWidth = 0; set src(path) { this.path = path; requested.push(path); } }
+    const player = new CinematicPlayerV188({ ImageCtor: ImageDouble }), expected = new Set(biologicalCinematicSourcesV188(id));
+    for (const shot of CINEMATICS_V188[id].shots) { const portrait = getNpcDialoguePortraitV168(shot.line?.crewId); if (portrait) expected.add(portrait.source); }
+    player.preload(id); assert.deepEqual(new Set(requested), expected, id);
+    player.preload(id); assert.equal(requested.length, expected.size, 'no duplicate pending load');
+    const failed = requested[0]; player.images[failed].complete = true;
+    player.preload(id); assert.equal(requested.length, expected.size + 1); assert.equal(requested.at(-1), failed);
+    assert.ok(!requested.some(path => Object.values(CINEMATIC_IMAGES_V188).includes(path)), `${id} has no unrelated title image request`);
+  }
+});
+
+test('biological cinema: all seven source lists are actually drawn across eighteen unchanged bilingual plans', () => {
+  const portraits = Object.keys(BIOLOGICAL_CINEMATIC_ART_BY_ID_V188).flatMap(id => CINEMATICS_V188[id].shots
+    .map(shot => getNpcDialoguePortraitV168(shot.line?.crewId)?.source).filter(Boolean));
+  const images = biologicalImages([...new Set([...Object.values(BIOLOGICAL_ART_V188).map(entry => entry.path), ...portraits])]);
+  const context = { m577: { colonists: 6, containers: 3 } }, before = structuredClone(context);
+  let plans = 0;
+  for (const [id, ids] of Object.entries(BIOLOGICAL_CINEMATIC_ART_BY_ID_V188)) {
+    const used = new Set(); let start = 0;
+    for (const entry of CINEMATICS_V188[id].shots) {
+      for (const language of ['fr', 'en']) for (const reducedMotion of [false, true]) {
+        const { ctx, calls } = biologicalRecorder();
+        drawCinematicFrameV188(ctx, id, start + entry.seconds * .8, { images, language, reducedMotion, context });
+        calls.filter(call => call.op === 'image').forEach(call => used.add(call.path));
+        assert.deepEqual(context, before, 'drawing cannot mutate the manifest');
+      }
+      start += entry.seconds; plans++;
+    }
+    const expected = new Set([...ids.map(key => BIOLOGICAL_ART_V188[key].path), ...CINEMATICS_V188[id].shots
+      .map(shot => getNpcDialoguePortraitV168(shot.line?.crewId)?.source).filter(Boolean)]);
+    assert.deepEqual([...used].sort(), [...expected].sort(), id);
+  }
+  assert.equal(plans, 18);
+});
+
+test('CIN31: zero through six survivors and zero through three containers remain native with art, partial art and fallback', () => {
+  const loaded = biologicalImages(), cratesPath = BIOLOGICAL_ART_V188['quarantine-crate'].path;
+  for (const images of [loaded, { [cratesPath]: loaded[cratesPath] }, {}]) for (const language of ['fr', 'en']) {
+    for (let colonists = 0; colonists <= 6; colonists++) {
+      const { ctx, calls } = biologicalRecorder(); drawCinematicFrameV188(ctx, 'cin-31', 8, { images, language, context: { m577: { colonists } } });
+      const expected = colonists ? `${colonists} / 6` : language === 'en' ? 'NO SEAT GIVEN' : 'AUCUNE PLACE DONNÉE';
+      assert.ok(calls.some(call => call.op === 'text' && call.value === expected));
+      if (images === loaded) assert.equal(calls.filter(call => call.op === 'image' && /asph-npc-/.test(call.path)).length, colonists);
+    }
+    for (let containers = 0; containers <= 3; containers++) {
+      const { ctx, calls } = biologicalRecorder(); drawCinematicFrameV188(ctx, 'cin-31', 18, { images, language, context: { m577: { containers } } });
+      const expected = containers ? `${containers} / 3` : language === 'en' ? 'NO CONTAINER ABOARD' : 'AUCUN CONTENEUR À BORD';
+      assert.ok(calls.some(call => call.op === 'text' && call.value === expected));
+      if (images[cratesPath]) assert.equal(calls.filter(call => call.op === 'image' && call.path === cratesPath).length, containers);
+    }
+  }
+  assert.deepEqual([-2, '3.8', Infinity, undefined, 99].map(value => biologicalManifestCountV188(value, 6)), [0, 3, 0, 0, 6]);
+});
+
+test('CIN50: the existing ceiling drone appears only after 55 percent and REC is drawn after the camera and letterbox', () => {
+  const images = biologicalImages(), path = BIOLOGICAL_ART_V188['ceiling-drone'].path;
+  for (const reducedMotion of [false, true]) for (const progress of [.01, .55, .55001, .99]) {
+    const { ctx, calls } = biologicalRecorder(); drawCinematicFrameV188(ctx, 'cin-50', 22 * progress, { images, reducedMotion });
+    assert.equal(calls.filter(call => call.op === 'image' && call.path === path).length, progress > .55 ? 1 : 0);
+    const rec = calls.findIndex(call => call.op === 'text' && call.value === '● REC');
+    const bars = calls.findLastIndex(call => call.op === 'fillRect' && call.args.join() === '0,628,1280,92');
+    assert.ok(rec > bars && bars >= 0); assert.deepEqual(calls[rec].args.slice(0, 2), BIOLOGICAL_HELMET_V188.rec);
+  }
+});
+
+test('biological monitors: status thresholds, bilingual evidence and quarantine header stay native inside either bezel or fallback', () => {
+  for (const images of [biologicalImages(), {}]) for (const language of ['fr', 'en']) for (const reducedMotion of [false, true]) {
+    for (const [id, index, start] of [['cin-31', 2, 20], ['cin-51', 0, 0]]) {
+      const entry = CINEMATICS_V188[id].shots[index], words = entry.status[language].split(' ');
+      for (const progress of [.4, .8]) {
+        const { ctx, calls } = biologicalRecorder(); drawCinematicFrameV188(ctx, id, start + entry.seconds * progress, { images, language, reducedMotion });
+        const rendered = calls.filter(call => call.op === 'text').map(call => call.value).join(' ');
+        assert.equal(words.every(word => rendered.includes(word)), progress > .45);
+      }
+    }
+    const { ctx, calls } = biologicalRecorder(); drawCinematicFrameV188(ctx, 'cin-41', 12.8, { images, language, reducedMotion });
+    const lines = calls.filter(call => call.op === 'text').map(call => call.value);
+    assert.ok(lines.some(value => value.includes(language === 'en' ? 'QUARANTINE LOG' : 'JOURNAL DE QUARANTAINE') && value.includes('02:31')));
+    assert.ok(!lines.some(value => value.includes('QZ-18')));
+    for (const row of CINEMATICS_V188['cin-41'].shots[0].lines) assert.ok(lines.includes(row[language]));
+  }
+});
+
+function prologueImages() {
+  return Object.fromEntries(Object.values(PROLOGUE_ART_V188).map(({ path }) => {
+    const bytes = readFileSync(new URL(`..${path}`, import.meta.url)); let naturalWidth, naturalHeight;
+    if (bytes.subarray(1, 4).toString() === 'PNG') { naturalWidth = bytes.readUInt32BE(16); naturalHeight = bytes.readUInt32BE(20); }
+    else { assert.equal(bytes.subarray(8, 16).toString(), 'WEBPVP8L', path); const bits = bytes.readUInt32LE(21);
+      naturalWidth = (bits & 0x3fff) + 1; naturalHeight = ((bits >>> 14) & 0x3fff) + 1; }
+    return [path, { src: path, complete: true, naturalWidth, naturalHeight }];
+  }));
+}
+
+test('opening art preload is scoped, includes the actual speaker portraits, and retries only failed entries on replay', () => {
+  for (const id of Object.keys(PROLOGUE_CINEMATIC_ART_BY_ID_V188)) {
+    const requests = [];
+    class ImageDouble { complete = false; naturalWidth = 0; set src(path) { this.path = path; requests.push(path); } }
+    const player = new CinematicPlayerV188({ ImageCtor: ImageDouble }); player.preload(id);
+    const expected = new Set(prologueCinematicSourcesV188(id));
+    for (const entry of CINEMATICS_V188[id].shots) {
+      const portrait = entry.line?.crewId ? getNpcDialoguePortraitV168(entry.line.crewId) : getColonyPortraitV188(entry.line?.speaker);
+      if (portrait) expected.add(portrait.source);
+    }
+    assert.deepEqual(new Set(requests), expected, id);
+    assert.ok(!requests.some(path => /biological|asph-cin-helmet|ceiling-drone/.test(path)), 'no later evidence or threat is requested');
+    player.preload(id); assert.equal(requests.length, expected.size, 'in-flight loads are shared');
+    const failed = requests[0]; player.images[failed].complete = true;
+    player.preload(id); assert.equal(requests.length, expected.size + 1); assert.equal(requests.at(-1), failed);
+    Object.assign(player.images[failed], { complete: true, naturalWidth: 100, naturalHeight: 100 });
+    player.preload(id); assert.equal(requests.length, expected.size + 1, 'successful replay reuses its image');
+  }
+  assert.equal(prologueCinematicSourcesV188('cin-31'), null);
+});
+
+test('opening art dependencies are drawn by their own 35 plans; drawing preserves context and makes no image requests', () => {
+  const images = prologueImages(), context = Object.freeze({ m577: Object.freeze({ colonists: 3, containers: 2 }), marker: 'unchanged' });
+  const before = JSON.stringify(context), previous = globalThis.Image; let plans = 0;
+  globalThis.Image = class { constructor() { throw new Error('draw must never request an image'); } };
+  try {
+    for (const id of Object.keys(PROLOGUE_CINEMATIC_ART_BY_ID_V188)) {
+      let start = 0; const used = new Set();
+      for (const entry of CINEMATICS_V188[id].shots) {
+        for (const language of ['fr', 'en']) for (const reducedMotion of [false, true]) {
+          const trace = biologicalRecorder(); drawCinematicFrameV188(trace.ctx, id, start + entry.seconds * .82, { images, language, reducedMotion, context });
+          trace.calls.filter(call => call.op === 'image').forEach(call => used.add(call.path));
+          if (entry.caption) assert.ok(trace.calls.some(call => call.op === 'text' && call.value === entry.caption[language]));
+          if (entry.line) assert.ok(trace.calls.some(call => call.op === 'text' && call.value === entry.line.speaker));
+        }
+        start += entry.seconds; plans++;
+      }
+      const expected = new Set(prologueCinematicSourcesV188(id));
+      for (const entry of CINEMATICS_V188[id].shots) {
+        const portrait = entry.line?.crewId ? getNpcDialoguePortraitV168(entry.line.crewId) : getColonyPortraitV188(entry.line?.speaker);
+        if (portrait && images[portrait.source]) expected.add(portrait.source);
+      }
+      assert.deepEqual([...used].sort(), [...expected].sort(), `${id}: declared art is actually used`);
+    }
+  } finally { if (previous === undefined) delete globalThis.Image; else globalThis.Image = previous; }
+  assert.equal(plans, 35); assert.equal(JSON.stringify(context), before);
+});
+
+test('late prologue art repaints at a fixed clock; skips, replacement and stale frames cannot revive a finished cinematic', async () => {
+  let now = 0; const frames = [], listeners = new Map(), overlays = [], requests = [], traces = [];
+  const document = {
+    body: { append(node) { overlays.push(node); } },
+    createElement(kind) { const trace = biologicalRecorder(); if (kind === 'canvas') traces.push(trace);
+      return { append(...children) { this.children = children; }, setAttribute() {}, remove() { this.removed = true; }, getContext() { return trace.ctx; } }; },
+    addEventListener(type, listener) { listeners.set(type, listener); }, removeEventListener(type, listener) { if (listeners.get(type) === listener) listeners.delete(type); }
+  };
+  class ImageDouble { complete = false; naturalWidth = 0; naturalHeight = 0;
+    set src(path) { this.path = path; requests.push(path); } get src() { return this.path; } }
+  const player = new CinematicPlayerV188({ document, now: () => now, requestFrame: frame => frames.push(frame), ImageCtor: ImageDouble });
+  const real = prologueImages(), path = PROLOGUE_ART_V188['north-quay-patient'].path;
+  const loaded = source => { const { naturalWidth, naturalHeight } = real[source]; Object.assign(player.images[source], { complete: true, naturalWidth, naturalHeight }); };
+  const key = code => listeners.get('keydown')({ code, preventDefault() {}, stopImmediatePropagation() {} });
+  const first = player.play('cin-p3-ferro', { reducedMotion: true }), state = player.active, requestCount = requests.length;
+  now = 2000; frames.shift()(); const beforeLate = traces[0].calls.length;
+  assert.ok(!traces[0].calls.some(call => call.op === 'image' && call.path === path));
+  loaded(path); frames.shift()();
+  assert.ok(traces[0].calls.slice(beforeLate).some(call => call.op === 'image' && call.path === path), 'a paused clock still accepts late art');
+  assert.equal(player.active, state); assert.equal(state.offset, 0); assert.equal(requests.length, requestCount);
+  key('Escape'); assert.equal(await first, 'skipped'); assert.ok(overlays[0].removed); assert.equal(listeners.size, 0);
+  const afterSkip = traces[0].calls.length; frames.shift()(); assert.equal(traces[0].calls.length, afterSkip, 'queued old frame does not draw');
+  loaded(PROLOGUE_ART_V188['medical-stretcher'].path); assert.equal(player.active, null); assert.equal(overlays.length, 1, 'late completion creates no overlay');
+
+  const replay = player.play('cin-p3-ferro'), oldFrame = frames.shift(), replacement = player.play('cin-01');
+  assert.equal(await replay, 'replaced'); assert.ok(overlays[1].removed); const newState = player.active;
+  oldFrame(); assert.equal(player.active, newState); assert.equal(newState.id, 'cin-01'); assert.equal(listeners.size, 1);
+  key('Enter'); frames.shift()(); assert.equal(cinematicShotAtV188('cin-01', newState.offset).shot.kind, 'locker');
+  now += 21000; frames.shift()(); assert.equal(await replacement, 'complete');
+  assert.equal(player.active, null); assert.equal(listeners.size, 0); assert.ok(overlays[2].removed);
 });

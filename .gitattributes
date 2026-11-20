@@ -91,3 +91,5 @@ docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/s
 # V119 reviewed third-party distribution files are bound to their exact bytes.
 src/vendor/supabase-2.117.2.js -text
 src/vendor/supabase-LICENSE.txt -text
+# Historical ZIPs and their pinned archive inventory retain exact original bytes.
+archives/project-recovery-20261116/** -text

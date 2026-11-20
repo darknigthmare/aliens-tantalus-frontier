@@ -1,7 +1,9 @@
 /** V188 — owner-approved P0/P1 priorities of the campaign bible (§56).
  *
  * Baseline: 803db26dbd7ed453d9534eee237806053438f300 (main after PR #46). The predecessor of
- * every receipt is the reviewed V187 endpoint of that file at this baseline.
+ * each original receipt is the reviewed V187 endpoint at this baseline. The
+ * continuation blocks separately anchor later changed sources to their exact
+ * published bytes; historical predecessors and earlier endpoints stay intact.
  * The owner lifted the save/catalogue protection for this lot on 2026-11-12
  * (bible §56.1): each changed byte still needs an exact receipt here, and
  * migrations stay additive. This terminal module imports no audit and has no
@@ -48,11 +50,15 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
     "previousSha256": "95287e9c3f9be2b88db9e391a9a143c4c69be8956b6763e4113645974b9e878d",
-    "currentSha256": "c2da8bf71518dc324f36b36f00b41bab24f91018f34f7049b98fd20eb03a8700"
+    "currentSha256": "64a13e855d68cda96d0541c78202b77bdcf0703eaf1c91a786fd93e21cc3a271"
   },
   "hub-level.css": {
     "previousSha256": "13e29b3719e1246d595dadca4c786cbeb5a471dece902104b0ccd29a1de9908d",
     "currentSha256": "12c8e9e7f561a2eaec89fe9dfac46a190b1cd801a303cd85e95820b66821c818"
+  },
+  "hub-stations-v61.css": {
+    "previousSha256": "eaf2b041ec39337b763d6d919859a7f79276c5eff920049980428b365202dfd5",
+    "currentSha256": "863d52f5e9b27f5c2395e4619a855a613eeec68290148b09ccbf965593269e57"
   },
   "index.html": {
     "previousSha256": "337a0b230d0b075bf70e5122240f1ce8e0d2deaebbbd563a15496ea92b5f4d66",
@@ -60,7 +66,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "package.json": {
     "previousSha256": "ff133a405bfc1ef2afa7085fcb2a6cde27a9f52c4af0de5172a058b47082eb48",
-    "currentSha256": "e044d1717c55f29cf3bb9609893472dce2d8b3501b76b56b4b0f6bf057000730"
+    "currentSha256": "d10e191570b28fe0e2a6213c1ee1e0b75b49ad152f0024e81feb45fb4f9f760e"
   },
   "player-appearance-v126.css": {
     "previousSha256": "da7045c7fd7d41da99eecf48d316150b2d16fac276fe635bb881034bd68c9320",
@@ -84,7 +90,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-audit-v143.mjs": {
     "previousSha256": "825a8672e074c335568669ce8e5c496ed2fb70af9e11f3d834169da1a8d5a1c2",
-    "currentSha256": "5fb943bf7878a2d6e8f39cc70fefb9ef64d8f2d95e9a916a111cee946d29cf25"
+    "currentSha256": "9939371033f1654e51a73366a4d129c63f85d0871a40ca7014afe1f228a4fce0"
   },
   "scripts/verify-campaign-lethe-v163.mjs": {
     "previousSha256": "cb3ac8826d4f15bbab86e0c42dcd225aeee341c9b10950046fb14af104473049",
@@ -124,7 +130,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "328c764b2bf467d0bc21ae86abf415a7722bd0a88cba486eb2167c22fa8f0b84",
-    "currentSha256": "bc15cef4edd698424d7c3c5e3bc9ccd2d9eef9d13a2f637e871120b5d6c93d7c"
+    "currentSha256": "db03102b96ba14c20a265f83e39f1223657a6b2fc38b31f00983eb5fb80a16d5"
   },
   "src/alien-survival-runtime-v70.js": {
     "previousSha256": "65d5c0c4ca446021b6ff58ed6be61fc622c0908ede9d9d74b730fa0efef2fd93",
@@ -140,11 +146,11 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/apc-convoy-runtime-v121.js": {
     "previousSha256": "b1fa0c689763ca94ddb37b99020acedcd176d057b5d26f16ef24f9171c39a4a9",
-    "currentSha256": "159df2391dddc71d7df5c0cfd789b497bd232ecdbac72eb1daf5800d6f5feb8a"
+    "currentSha256": "afcdfd3f15db9ca405e40bee563a2d1ffff5d90bcaa2c6db377385e22a77b32b"
   },
   "src/app.js": {
     "previousSha256": "482835e65677c536085a1344cf61c3ffa5e09e2af1b8029b949e000a533038ae",
-    "currentSha256": "13d9db7b981496456d3f6f335f47ebc3c08e8e037f93c8016bdad4721e85f915"
+    "currentSha256": "2db6b8019a1e5fd30d96a43f89f09da34d1246c7127e2e89bd2d3cbab6735968"
   },
   "src/archive-relay-presentation-v160.js": {
     "previousSha256": "e628ccee6aa0a2ee40eea1fdd3b66b11800c3185c39bbd91c18d662c05749a30",
@@ -360,7 +366,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "src/npc-dialogue-portraits-v168.js": {
     "previousSha256": "04a7f8db4f4bb7bd10b2da6d90b8a0e20f647c3c9d0b6123fee77fd65d1b56c7",
-    "currentSha256": "5d7cf32c8b49f454d703e708dd29c344c530aaa4a8f58382c4e6de2313a08f98"
+    "currentSha256": "147141d9b25c9ff873ccf53eb6b19199d55879bff1eca983bdfa4e539565915c"
   },
   "src/npc-dialogue-v62.js": {
     "previousSha256": "806cfb582c5506cf62d09fc1addbf9a2461839c8d38e0e8a24221ef8ec73ac21",
@@ -428,7 +434,7 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
   },
   "sw.js": {
     "previousSha256": "ff86bba365c3875c8ebaeb0abe13b2a6185ccd5f1a030b4ee5b15ac0e4a12f9b",
-    "currentSha256": "b96cff30448c09caa3abef4b868422f090363b4153b8fa8948ae3741dc068154"
+    "currentSha256": "20f87df7565d64fc36ebef8a24ef94695cf41fabcc80a1ee9706fa854615f842"
   },
   "title-screen-v61.css": {
     "previousSha256": "3a748b04d5e6c9a7e04c189b2c1910c3163a0840968be6bcbb6352e10e16369f",
@@ -445,6 +451,489 @@ export const TANTALUS_PRIORITIES_SUCCESSORS_V188 = freeze({
 });
 // END V188 SOURCE RECEIPTS
 
+// Reviewed V188 continuation. These predecessors are the exact published
+// bytes at this commit, not replacements for any historical V187 witness.
+export const TANTALUS_PRIORITIES_CONTINUATION_V188 = freeze({
+  "baseline": "da8b29fa4b7688d18686b1e28be4065c3a821d3b",
+  "successors": {
+    "scripts/verify-audit-continuation-v158.mjs": {
+      "previousSha256": "87ca45b2c3c48d96e9ae02f4a57241b723372e3e12cd172ef4f978f34ba3eb98",
+      "currentSha256": "86d8781274bc77362ad291d6a638c02c74c0521e8bcee5776c913b8fef06400e"
+    },
+    "scripts/verify-black-cocoon-presentation-v158.mjs": {
+      "previousSha256": "96029dc66cb8781bd30bd91482dbfbc7466679020fd22420784e7baaac43bfa5",
+      "currentSha256": "635ee8e4463e32676dbd7be409a5f92cb9ed4d40b0ee59097251e90819645b99"
+    },
+    "scripts/verify-cinematic-coherence-v188.mjs": {
+      "previousSha256": "fd1f943ea6b50c339073a936eaed60dafa0618b472988353b93edd31d106d07f",
+      "currentSha256": "5f5bd9495aa0d7e7de6de16ee2f20b0064e4a9fc2ddb54f7f3f0c8ad7d6d72de"
+    },
+    "scripts/verify-dropship-handover-v188.mjs": {
+      "previousSha256": "3f644dcaf173647081d3f1dab2c8fd642fc82d6839a7d1b26de129e567a3ca05",
+      "currentSha256": "6fe5f58c1dba4b070a67aa2ed9db09163c8e1364f40f7f247f8790fdec387730"
+    },
+    "scripts/verify-qz17-coherence-v188.mjs": {
+      "previousSha256": "c06ba96c8b6e400f71da707ba18beed8c9f47afffb867d432c704bc8f2f92fcd",
+      "currentSha256": "9ff1d74e8f5b3f41bb043d4abe3ed7b65f656a254cc6ae639e4f6cfbd6b3b815"
+    },
+    "scripts/verify-story-cinematics-v188.mjs": {
+      "previousSha256": "4047f1f7607812751ea8314f81e0cfa5171fc5cf43abd3f3e6afd62f478aeaa6",
+      "currentSha256": "66dd489ef35c8ffcb53eee350e1234f34669cfd1f0abb75949a83a47651a295d"
+    },
+    "src/black-cocoon-presentation-v158.js": {
+      "previousSha256": "69169757f789461886aed3788b79e5ba9adcbd8bfa41b5cab81af85ff0be0767",
+      "currentSha256": "b82fd90a95873e4ae9a48ed27f1ed7f15c72dbd38a13bdb47bc17a6ef19fae0b"
+    },
+    "src/mission-dropship-handover-v188.js": {
+      "previousSha256": "ea7aba8f264a931fe71de296b444f2c7810c214f7b825f6f7e56c11865f17b95",
+      "currentSha256": "33105db7fba9625779121edbb5ccdb1cce6ba0f1f1dd93069e064750b30243c7"
+    },
+    "src/qz17-level-dressing-v188.js": {
+      "previousSha256": "2a5ad6d33e9ecabd0d26a7510b19d1ab396927516491d8a636ffc2aacd33806b",
+      "currentSha256": "3b435206e6ae12ae37d0d78469696e4bd2ffd7e5a9aee817d3bde521e90162af"
+    },
+    "src/story-cinematics-v188.js": {
+      "previousSha256": "1b0783003a58b4dca02193b6c9048750b068ac99c3023534479786f6009c6465",
+      "currentSha256": "921e3a8ae80b0000e1ee4eed5af38bc84312d7458109db879a33ebad1b1221cc"
+    }
+  },
+  "addedSources": {
+    "src/biological-art-v188.js": "5547ba7e1a2d924eb5ca4c9862c4b73003a6eca2ee0498893649d5d67b7a1afe"
+  }
+});
+
+// Prologue art and native QA continuation from the published Chromium-tested
+// lot. Earlier receipt blocks remain byte-for-byte historical; this block
+// records only this lot's changed endpoints and its separately added helper.
+export const TANTALUS_PRIORITIES_PROLOGUE_V188 = freeze({
+  "baseline": "d54f13cc55983ddb5f55851071c9144198fe1155",
+  "successors": {
+    "scripts/qa-black-cocoon-browser-v158.mjs": {
+      "previousSha256": "ebb81a7deeab1c1a2d8ce47d1f14759889638b9af2f42859ef26119e2f459b0b",
+      "currentSha256": "fc5b73f2315d19766cf1a609066f3f4fa89b557caf64e6b4e4bf618e1702cef8"
+    },
+    "scripts/qa-campaign-story-v160.py": {
+      "previousSha256": "0a6cd23cdcc3bf32e8209258e4920e7897264883e10877401f787f010cde5a4e",
+      "currentSha256": "0483f3b99b6d0b05cd7a7bbb984e2a662360a3828ad532d0c0fbbd201072e49f"
+    },
+    "scripts/qa-forge-npcs-v158.py": {
+      "previousSha256": "5c0b24aed9faf3e0921cfdb698735329063f5d93e1bb2a6b49c5c74e9afc677b",
+      "currentSha256": "0d6bcda73a5ee085eb9a886ca755e56ec1a2195a13e6f0fff9c4014e562193f1"
+    },
+    "scripts/qa-title-compositions-v163.py": {
+      "previousSha256": "9444fe218aa06dfdef566bf996ebc43c6cd91a6b33a203ec2d3471f2af7b0b1a",
+      "currentSha256": "2c854d3190619b506b45fe1e22d21014f8f12af56a6966598a327c3fbdc2554a"
+    },
+    "scripts/qa-trials-continuity-v163.py": {
+      "previousSha256": "173f2e35f826970cee84ac967a44715f991efd7665f1dbf46f8c0db384b95e31",
+      "currentSha256": "a5a3ae0189e2ad47c5d2f2b12985f9e935e8f8c27bc9fe92001b5886deae4a0b"
+    },
+    "scripts/verify-audit-v143.mjs": {
+      "previousSha256": "9939371033f1654e51a73366a4d129c63f85d0871a40ca7014afe1f228a4fce0",
+      "currentSha256": "b2283b440d2be425eaadebc919dde1495656d875e31025ecd475e27428ad5efb"
+    },
+    "scripts/verify-black-cocoon-presentation-v158.mjs": {
+      "previousSha256": "635ee8e4463e32676dbd7be409a5f92cb9ed4d40b0ee59097251e90819645b99",
+      "currentSha256": "5b4a2e933b81654f746e8a94c7214523bd7dbb92cdb92dc3adef8dbd3031cedd"
+    },
+    "scripts/verify-campaign-story-v160.mjs": {
+      "previousSha256": "55b6b5ac7e045df047ccb6d867905e7cfec44a0f29e9dbda9a74778df9d39cad",
+      "currentSha256": "63fd6e24dc57561e3d88f0d549906a8a1b891ace8767675cb4ca42699bbcbe1b"
+    },
+    "scripts/verify-cinematic-coherence-v188.mjs": {
+      "previousSha256": "5f5bd9495aa0d7e7de6de16ee2f20b0064e4a9fc2ddb54f7f3f0c8ad7d6d72de",
+      "currentSha256": "947ff56e984fd27bf9781ecb4ba03bc1116cc4c6b9a30198dd5287785299b67c"
+    },
+    "scripts/verify-legacy-operations-v131.mjs": {
+      "previousSha256": "950fbaa2c7b92d1b062ac7b933862c52c7787ca00671e1922213686100ec3e28",
+      "currentSha256": "c8823fea400d848cd1d90c65ff841a5a6f6833b84515ab799eb2bf41627706e5"
+    },
+    "scripts/verify-public-release-v86.mjs": {
+      "previousSha256": "db03102b96ba14c20a265f83e39f1223657a6b2fc38b31f00983eb5fb80a16d5",
+      "currentSha256": "0376088c873ed60751b81d646cadd0e965476df5e61b88c0d83a40670d45dce5"
+    },
+    "scripts/verify-story-cinematics-v188.mjs": {
+      "previousSha256": "66dd489ef35c8ffcb53eee350e1234f34669cfd1f0abb75949a83a47651a295d",
+      "currentSha256": "1da532f57ba644b790a22e8ed9b64c0cee08cca6dd9ef60c435bf97e2b7d712a"
+    },
+    "src/story-cinematics-v188.js": {
+      "previousSha256": "921e3a8ae80b0000e1ee4eed5af38bc84312d7458109db879a33ebad1b1221cc",
+      "currentSha256": "6f1715c07ce920fc375eeb2fb3668b6826ac437cf8b61daf854fdb753556e47f"
+    },
+    "sw.js": {
+      "previousSha256": "20f87df7565d64fc36ebef8a24ef94695cf41fabcc80a1ee9706fa854615f842",
+      "currentSha256": "082f8d2e6b94053c5e080256f359c1fbad4b787d6e3b6a052001724b8cd54f66"
+    }
+  },
+  "addedSources": {
+    "src/prologue-art-v188.js": "df4ff4fc5a69c8f1834eae84a3687ab374e00591af0531be95b7bc19538986de"
+  }
+});
+
+// Port-Méridien quay art and native QA drivers continue the published endpoints.
+// Historical receipt blocks and separately added helpers remain unchanged.
+export const TANTALUS_PRIORITIES_QUAY_V188 = freeze({
+  "baseline": "ee565717bdc698594c41f76fe1e1c72c2a730656",
+  "successors": {
+    "scripts/qa-campaign-story-v160.py": {
+      "previousSha256": "0483f3b99b6d0b05cd7a7bbb984e2a662360a3828ad532d0c0fbbd201072e49f",
+      "currentSha256": "7d3ded62763a4db3f5fa1a2554c91d46656f87d0f18459896e2b804301ee3e71"
+    },
+    "scripts/qa-forge-npcs-v158.py": {
+      "previousSha256": "0d6bcda73a5ee085eb9a886ca755e56ec1a2195a13e6f0fff9c4014e562193f1",
+      "currentSha256": "a0adc5378c5a79df12fab12987e87970804e9e38c0d7895369629db3203bef82"
+    },
+    "scripts/qa-trials-continuity-v163.py": {
+      "previousSha256": "a5a3ae0189e2ad47c5d2f2b12985f9e935e8f8c27bc9fe92001b5886deae4a0b",
+      "currentSha256": "be26d35484c30516f1a6a243d4a74e993389c551bb57fddd1121caf0252d3e76"
+    },
+    "scripts/verify-audit-v143.mjs": {
+      "previousSha256": "b2283b440d2be425eaadebc919dde1495656d875e31025ecd475e27428ad5efb",
+      "currentSha256": "9dc8947f8b6d3dfb568777307390e561874e213c41edd501b6b4835cb3531a7a"
+    },
+    "scripts/verify-campaign-story-v160.mjs": {
+      "previousSha256": "63fd6e24dc57561e3d88f0d549906a8a1b891ace8767675cb4ca42699bbcbe1b",
+      "currentSha256": "147d29402ef405c00b52f8453f991373c7ab869651d6b36046b54ee1c6340863"
+    },
+    "scripts/verify-forge-npcs-v158.mjs": {
+      "previousSha256": "ae3813cbb02f125e450fcf08217c2ffa8512915d98bb983961d1a2810a9ec34d",
+      "currentSha256": "f4a31b5e47c01e150aaa0b26a819130f560a717b157a0e307d58e17dbc6f0dab"
+    },
+    "scripts/verify-legacy-operations-v131.mjs": {
+      "previousSha256": "c8823fea400d848cd1d90c65ff841a5a6f6833b84515ab799eb2bf41627706e5",
+      "currentSha256": "5f6d68c9ebf657650f7700d40d512fd939c7d1bc32b0968af8e457e6669cc2fe"
+    },
+    "scripts/verify-public-release-v86.mjs": {
+      "previousSha256": "0376088c873ed60751b81d646cadd0e965476df5e61b88c0d83a40670d45dce5",
+      "currentSha256": "dac556b3f8fa6ce714732094dda492c4f7c6b25422b32901a72e219ca10fe67f"
+    },
+    "scripts/verify-quay-coherence-v188.mjs": {
+      "previousSha256": "d69f271f5db777ade2b32f4608f58675d405ed84b1015992a850c083bd4da929",
+      "currentSha256": "a0c770e096a727bdb68718b6787f4ab02aeb0e4cc670b3eca5f4979a4d28bc97"
+    },
+    "src/hub-port-meridien-v90.js": {
+      "previousSha256": "a81ed4df17c3b91edaf52c66bf24bd3981190c2b73db22366c3e4076de76cabb",
+      "currentSha256": "c6b38c0fd78f8576cfc72769b6b3b0a8bda12764dfdffb2b35f20bbf23ff1fc9"
+    },
+    "sw.js": {
+      "previousSha256": "082f8d2e6b94053c5e080256f359c1fbad4b787d6e3b6a052001724b8cd54f66",
+      "currentSha256": "50b6526783bce8a799d19123059dcee6dc535cf4b2ac45534e0b9bcea2726a41"
+    }
+  },
+  "addedSources": {
+    "src/port-quay-art-v188.js": "dbae88f45d2b296994841c561f438b314c6c5556fdb79a26eebfac5d19e32997"
+  }
+});
+
+// Cargo Matriarch art, the MANTA hull, the native title QA entry and their
+// verification continue the exact published R endpoints. Historical reports stay immutable;
+// the separate registry contract below permits only Cargo's declared art delta.
+export const TANTALUS_PRIORITIES_CARGO_ABYSS_V188 = freeze({
+  "baseline": "232693f1e0ed24e404bb2fb0dbcd779611ccd2fc",
+  "successors": {
+    "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
+      "previousSha256": "64a13e855d68cda96d0541c78202b77bdcf0703eaf1c91a786fd93e21cc3a271",
+      "currentSha256": "af84940ea813e6307086101b0a1439c1e02f84fd2cc6afee8f69b0527d79c812"
+    },
+    "package.json": {
+      "previousSha256": "d10e191570b28fe0e2a6213c1ee1e0b75b49ad152f0024e81feb45fb4f9f760e",
+      "currentSha256": "386949dd02f996625f0ec7317fe4355f1316b3cadb000d7ee837a3ea4c0a570d"
+    },
+    "scripts/qa-title-compositions-v163.py": {
+      "previousSha256": "2c854d3190619b506b45fe1e22d21014f8f12af56a6966598a327c3fbdc2554a",
+      "currentSha256": "e5ea9bd5a6dddf15ad3c4993f7233ff1ec3f8aac497ab815e16b19df86d381d3"
+    },
+    "scripts/verify-audit-continuation-v157.mjs": {
+      "previousSha256": "641676a21373c30747555d01f180a8c38f07819091860c6c1924bf6f5c08b5cf",
+      "currentSha256": "1c1987e69cc44577a44a49182f79522a886ef00fd5758d7d1538e9fc3f90dedb"
+    },
+    "scripts/verify-audit-continuation-v158.mjs": {
+      "previousSha256": "86d8781274bc77362ad291d6a638c02c74c0521e8bcee5776c913b8fef06400e",
+      "currentSha256": "41393b57bbd863f90bec5af9c367193954bd0bba1048e87c8d0b48a8c9804525"
+    },
+    "scripts/verify-audit-v143.mjs": {
+      "previousSha256": "9dc8947f8b6d3dfb568777307390e561874e213c41edd501b6b4835cb3531a7a",
+      "currentSha256": "2eb58ef20c62f91c392827358da0062063efcbe793695d14d221e63de7768c87"
+    },
+    "scripts/verify-black-cocoon-presentation-v158.mjs": {
+      "previousSha256": "5b4a2e933b81654f746e8a94c7214523bd7dbb92cdb92dc3adef8dbd3031cedd",
+      "currentSha256": "112c504b77d81943596e21d13caef1df9d8ed4e47968e22443fea87687cefbf5"
+    },
+    "scripts/verify-intro-v188.mjs": {
+      "previousSha256": "49a813bcfed5f5065c2e9bac02eb53e566eb17d22d53cb55257b940d8f8e37a9",
+      "currentSha256": "2d1cb7bcd706969a484e68773407ccbb6e45ffed82a32a186c88e31ac6a013f0"
+    },
+    "scripts/verify-public-release-v86.mjs": {
+      "previousSha256": "dac556b3f8fa6ce714732094dda492c4f7c6b25422b32901a72e219ca10fe67f",
+      "currentSha256": "71f4efa64f734ff6e378f378b90071f0159bbb54c817f7e2e42c176d08f8a5bc"
+    },
+    "src/cargo-brutal-runtime-v67.js": {
+      "previousSha256": "60f511f19a3359935a4317e359e66037330c77955834226732b14b1059696ab9",
+      "currentSha256": "9487c281d5f07e40b1771c18033ac68928a96a7cfb51c1efda37791173b1af8a"
+    },
+    "src/i18n-en-catalog-v185.js": {
+      "previousSha256": "28d42706b8ee4a3713532837328f33bdb2b6fc7b0517cd2dc911ac9a9a601c38",
+      "currentSha256": "c4d72221b1455a84c43112171a28cae38f74000baa2a2609f1d3f236f9944218"
+    },
+    "src/legacy-operation-state-v131.js": {
+      "previousSha256": "95c3759015297bd0c6e5120222758ded484675d41610db68c40faa7d75c7a0f1",
+      "currentSha256": "54cd1b9305cdeab348acb9b050f004a5278b8e295f3670ad23ff5d43de23e1ae"
+    },
+    "src/legacy-operations-v131.js": {
+      "previousSha256": "7c7de1da1e5c1bd43c89a5dc1ecdc86ca777fb872283f0cf2d4cd9857ae49cc5",
+      "currentSha256": "ae50089c68584ef983e7fd9ab70537eeb824ba4fb1b0a427fab9e2d9d2948bb4"
+    },
+    "src/special-operations-v131.js": {
+      "previousSha256": "0e9805fce4ecddc8dc00f694b7646885e8a8292f8460928639c4eb9ffae48f83",
+      "currentSha256": "5c412f4c3adb8df674b25740ce7b2227a0ead01844c82d219a226a3497035243"
+    },
+    "sw.js": {
+      "previousSha256": "50b6526783bce8a799d19123059dcee6dc535cf4b2ac45534e0b9bcea2726a41",
+      "currentSha256": "85c8f787966610c1cd17570f137717222334a01d337da30ed2898a1385610b24"
+    }
+  },
+  "addedSources": {
+    "scripts/verify-cargo-matriarch-art-v188.mjs": "23e595a75d98bde1c392f7415d371ffd8a551e5c1b4f38e44eb9209f983ab97e",
+    "scripts/verify-manta-art-v188.mjs": "640b2872d3fde367d13ef251e347da791b349f5678a891aef24e1766ae1de084",
+    "src/cargo-matriarch-art-v188.js": "e2322b5183fa4b31700184bcdf623526004587e088db07ec75755fa22ea4b8d4",
+    "src/manta-art-v188.js": "e8ad760a1d3c5b64d1f686fcc7c49b568b2fa507caee9b77d82eafd9932ed97c"
+  }
+});
+
+// HADAL adds a contextual local Abyss presentation and the existing native
+// field-action advance. These exact C predecessors remain separate from the
+// published Cargo receipts; no registry promotion or new swim cycle is claimed.
+export const TANTALUS_PRIORITIES_HADAL_V188 = freeze({
+  "baseline": "a3634de7c294ae82554d899057fab96088ccf769",
+  "successors": {
+    "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
+      "previousSha256": "af84940ea813e6307086101b0a1439c1e02f84fd2cc6afee8f69b0527d79c812",
+      "currentSha256": "2438b8895b36a729434264e0488c4687cdf2e9a377160bdbf476a073a57e5c9c"
+    },
+    "package.json": {
+      "previousSha256": "386949dd02f996625f0ec7317fe4355f1316b3cadb000d7ee837a3ea4c0a570d",
+      "currentSha256": "48c789b2740a9b1a2b2b128699051ef3df5ae4b20efa3c35b1b277771f3b7510"
+    },
+    "scripts/verify-audit-v143.mjs": {
+      "previousSha256": "2eb58ef20c62f91c392827358da0062063efcbe793695d14d221e63de7768c87",
+      "currentSha256": "e0830aced7f0172ac455b2caa1f01fab29a886a98323ef9dffac1942eadcd999"
+    },
+    "scripts/verify-public-release-v86.mjs": {
+      "previousSha256": "71f4efa64f734ff6e378f378b90071f0159bbb54c817f7e2e42c176d08f8a5bc",
+      "currentSha256": "43d082f94a0ee3fdba5b40c55c2d663220d9f92af615e0dfd0b6196f1734faef"
+    },
+    "src/i18n-en-catalog-v185.js": {
+      "previousSha256": "c4d72221b1455a84c43112171a28cae38f74000baa2a2609f1d3f236f9944218",
+      "currentSha256": "3148d98764e42a05192d72ad7c64e565ca3648c6922704a9db7fba99b8d8ee2d"
+    },
+    "src/legacy-operation-state-v131.js": {
+      "previousSha256": "54cd1b9305cdeab348acb9b050f004a5278b8e295f3670ad23ff5d43de23e1ae",
+      "currentSha256": "68d888f3725d4fb06be41c30bee84e776cdc7dcad92e52f725e8511a8cb157ab"
+    },
+    "src/legacy-operations-v131.js": {
+      "previousSha256": "ae50089c68584ef983e7fd9ab70537eeb824ba4fb1b0a427fab9e2d9d2948bb4",
+      "currentSha256": "e3233ae75f5e81436cf920e28b9cf7ea52e03b3a99860992dd3d74449eda8d29"
+    },
+    "src/player-appearance-runtime-v126.js": {
+      "previousSha256": "cce67f9128241fcf6e8f6932a57ec73b080c7e875acf024e15259450dbd9188b",
+      "currentSha256": "8bb9769611a9c117fdebd039343d59a57e2e3c9c97a508224134c079cf1b5c11"
+    },
+    "src/player-body-rig-v125.js": {
+      "previousSha256": "401f81aaf0b2f1ab3b90353486782aa755fb54fd16084a5beda964c5d6c8a1df",
+      "currentSha256": "f281fa6f7ff16263b5b6dc5a249e5db0a76e994bd2d680af7b637deaf26e0f71"
+    },
+    "src/player-locomotion-rig-v129.js": {
+      "previousSha256": "4af0bb1aaca511418267e0e5fead565de6ec739263c35ffa84eeb85573416dda",
+      "currentSha256": "e3001bebca64500ccd12a0ba50fc3c16fe1700acbf89845a694f52e16f62bd06"
+    },
+    "src/player-modular-rig-v126.js": {
+      "previousSha256": "2fef117a684b16b6c426ed93f932ce91e660648682f50600c799f5cd6126c8f9",
+      "currentSha256": "a63248ee1295dd786ac030c3825e596fe4927f202c4cf7ccd82b5c9d9a4699c5"
+    },
+    "src/player-transit-rig-v128.js": {
+      "previousSha256": "5aceb439b4d5b5421073e4a9bd0fa0e5a7f8d2673fbbf3e88dbc69ebd98472fd",
+      "currentSha256": "9ac395f6122f45f1c96b70238f81129bf501eab61d11c0529415cf71115f6b08"
+    },
+    "src/player-weapon-runtime-v125.js": {
+      "previousSha256": "a2d11f762b1064be9b888e7d1e9502e161784be9f09012376b11426fe88b2032",
+      "currentSha256": "88ab2fb9c476a8d07b1cecd961c9b7844833283406ea74b9fa1915401d534ca6"
+    },
+    "sw.js": {
+      "previousSha256": "85c8f787966610c1cd17570f137717222334a01d337da30ed2898a1385610b24",
+      "currentSha256": "024d58728b16a4485dcf618a822280003b7eeb966561df0eac3b1e17c44b4b19"
+    }
+  },
+  "addedSources": {
+    "scripts/verify-hadal-player-art-v188.mjs": "e0b4bd68e153235ece159b282b77f8e7682f580598e8940b98bafd5d88ef72bd",
+    "src/hadal-player-art-v188.js": "7cc75eefd3b187c166368d037696865cc8072eefd827b8b0cd4da818ee33c5f3"
+  }
+});
+
+// Broodstorm adds local winged-queen art without promoting the chapter or its
+// dropship corpus. The H source endpoints remain separate historical receipts.
+export const TANTALUS_PRIORITIES_BROODSTORM_V188 = freeze({
+  "baseline": "361e40670c393dd548b4faa081f12edb0e9b05c4",
+  "successors": {
+    "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
+      "previousSha256": "2438b8895b36a729434264e0488c4687cdf2e9a377160bdbf476a073a57e5c9c",
+      "currentSha256": "5460541da3d8b8f45e59ea584afb00e8be32378f19e82bcceb0fab688d527471"
+    },
+    "package.json": {
+      "previousSha256": "48c789b2740a9b1a2b2b128699051ef3df5ae4b20efa3c35b1b277771f3b7510",
+      "currentSha256": "de4535cf179efd3fe86b6a73622b979ef0f75892d1865aad18d407fa7700b3d2"
+    },
+    "scripts/verify-audit-continuation-v157.mjs": {
+      "previousSha256": "1c1987e69cc44577a44a49182f79522a886ef00fd5758d7d1538e9fc3f90dedb",
+      "currentSha256": "afb20cffa2a0214c7802b7c9b36f5dadcc7c8eef795452e1c08bf0bdd19c6697"
+    },
+    "scripts/verify-audit-continuation-v158.mjs": {
+      "previousSha256": "41393b57bbd863f90bec5af9c367193954bd0bba1048e87c8d0b48a8c9804525",
+      "currentSha256": "1bc844e8a063004fdd64141d8e3d908fd10163fb6c9e2ef39a8353581c172406"
+    },
+    "scripts/verify-audit-v143.mjs": {
+      "previousSha256": "e0830aced7f0172ac455b2caa1f01fab29a886a98323ef9dffac1942eadcd999",
+      "currentSha256": "50a8b5904d59e82b788c23738d8a9ec809f69fd20beb965d7328b70698ce217d"
+    },
+    "scripts/verify-black-cocoon-presentation-v158.mjs": {
+      "previousSha256": "112c504b77d81943596e21d13caef1df9d8ed4e47968e22443fea87687cefbf5",
+      "currentSha256": "fe489fab18e96fa26ba31cb3f39ea61e8f70ba4daa120613b4d564faa60eb0a5"
+    },
+    "scripts/verify-public-release-v86.mjs": {
+      "previousSha256": "43d082f94a0ee3fdba5b40c55c2d663220d9f92af615e0dfd0b6196f1734faef",
+      "currentSha256": "4c92d631018952c243a3c3ac49b64cdf18bf04f609daf322ec99c2c6ce333425"
+    },
+    "src/i18n-en-catalog-v185.js": {
+      "previousSha256": "3148d98764e42a05192d72ad7c64e565ca3648c6922704a9db7fba99b8d8ee2d",
+      "currentSha256": "73d71fb68c960c112c3bf1cd792e5a522279de76f4f7d634a0d33257303d63ae"
+    },
+    "src/legacy-operation-state-v131.js": {
+      "previousSha256": "68d888f3725d4fb06be41c30bee84e776cdc7dcad92e52f725e8511a8cb157ab",
+      "currentSha256": "bda3ae3681cf383b1a8100e9110ba931ab62ba4d4f0f94a02d4a98ed80add7da"
+    },
+    "src/legacy-operations-v131.js": {
+      "previousSha256": "e3233ae75f5e81436cf920e28b9cf7ea52e03b3a99860992dd3d74449eda8d29",
+      "currentSha256": "ebeb8393217142382d16f0319df409eea4f3775aba25e62867000dedadcc4aec"
+    },
+    "src/special-operations-v131.js": {
+      "previousSha256": "5c412f4c3adb8df674b25740ce7b2227a0ead01844c82d219a226a3497035243",
+      "currentSha256": "99a629ceba7042ca320e50d384fe9b9e734bdefa452bd5485899661adca5b45a"
+    },
+    "sw.js": {
+      "previousSha256": "024d58728b16a4485dcf618a822280003b7eeb966561df0eac3b1e17c44b4b19",
+      "currentSha256": "6bf7972ff27396e71d850cdb13d449d187d35ec170e2c217122dde630fa6cdd3"
+    }
+  },
+  "addedSources": {
+    "scripts/verify-broodstorm-queen-art-v188.mjs": "bd82cf599d623cf2e9ed9db608a5577a8e229aee411c6c3c00dcf3e2159b5a6f",
+    "src/broodstorm-queen-art-v188.js": "634572ca055f5a82900d77b7c03f0c6f6124246336d56bcbf761e15767f05702"
+  }
+});
+
+// V157/V158 remain immutable reports. This records only the reviewed registry
+// declaration after Cargo's dedicated art; clip/pixel evidence is verified
+// separately. Neither Cocon nor HADAL gains a completed scope or canon claim.
+export const TANTALUS_PRIORITIES_CARGO_REGISTRY_V188 = freeze({
+  baseline: '232693f1e0ed24e404bb2fb0dbcd779611ccd2fc',
+  historicalSnapshot: {
+    path: 'docs/forge/xeno-trials/progress-v158.json',
+    sha256: '4af5ae6469aa13ec1ea999eaa1fced2f616f23363a3df806cf2d34deb6c67ef7'
+  },
+  operationId: 'cargo-brutal',
+  removedDebt: 'dedicated-cargo-matriarch-art',
+  // These two title changes were already published in the R baseline. They
+  // do not alter identity, route, status, remaining scope or adaptation flags.
+  titlesAlreadyPublishedAtBaseline: {
+    'hive-world': 'TR-0 : LA RUCHE-MONDE',
+    'narrative-collectables': 'QZ-17 — LA CARGAISON FANTÔME'
+  },
+  previousCounts: { total: 21, effective: 1, partial: 20, missing: 0, playable: 21 },
+  currentCounts: { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 }
+});
+
+export function verifyCargoRegistryContinuationV188(operations, counts, readSource = readRepository) {
+  const transition = TANTALUS_PRIORITIES_CARGO_REGISTRY_V188;
+  const bytes = readSource(transition.historicalSnapshot.path);
+  assert.equal(sha(bytes), transition.historicalSnapshot.sha256, 'Changed historical V158 operations snapshot');
+  const snapshot = JSON.parse(bytes.toString());
+  assert.deepEqual(snapshot.runtimeContracts.operations.counts, transition.previousCounts);
+  const rows = snapshot.tables['10_Operations'].rows;
+  assert.equal(rows.length, 21);
+  assert.deepEqual(rows.find(row => row[0] === transition.operationId),
+    ['cargo-brutal', 'CARGO BRUTAL', 'special-cargo-brutal', 'partial', 1, transition.removedDebt, 0]);
+  const expected = rows.map(([id, promisedTitle, route, implementationStatus, playable, remaining, canonExact]) => ({
+    id, promisedTitle: transition.titlesAlreadyPublishedAtBaseline[id] || promisedTitle, route,
+    implementationStatus: id === transition.operationId ? 'effective' : implementationStatus,
+    playable: playable === 1,
+    remainingMechanics: id === transition.operationId ? [] : remaining ? remaining.split('; ') : [],
+    canonExact: canonExact === 1
+  }));
+  const actual = operations.map(operation => {
+    assert.ok(Array.isArray(operation.remainingMechanics), 'Missing explicit remaining scope: ' + operation.id);
+    return {
+      id: operation.id, promisedTitle: operation.promisedTitle,
+      route: operation.campaignId || operation.accessSurface || '',
+      implementationStatus: operation.implementationStatus, playable: operation.playable,
+      remainingMechanics: [...operation.remainingMechanics], canonExact: operation.canonExact
+    };
+  });
+  assert.deepEqual(actual, expected, 'Only the Cargo art debt and its local implementation status may change');
+  const derivedCounts = {
+    total: actual.length, effective: actual.filter(row => row.implementationStatus === 'effective').length,
+    partial: actual.filter(row => row.implementationStatus === 'partial').length,
+    missing: actual.filter(row => row.implementationStatus === 'missing').length,
+    playable: actual.filter(row => row.playable).length
+  };
+  assert.deepEqual(derivedCounts, transition.currentCounts);
+  assert.deepEqual(counts, derivedCounts, 'Registry counters must describe its exact current rows');
+  return freeze({ historicalCounts: transition.previousCounts, currentCounts: transition.currentCounts,
+    changedIds: [transition.operationId], unchangedOperations: rows.length - 1 });
+}
+
+// The H registry retains Cargo's reviewed transition. Broodstorm now removes
+// only its dedicated queen-art debt; its dropship scope and partial status stay
+// explicit. This declaration does not certify pixels, canon or a whole campaign.
+export const TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188 = freeze({
+  baseline: '361e40670c393dd548b4faa081f12edb0e9b05c4',
+  baselineRegistry: {
+    path: 'src/special-operations-v131.js',
+    sha256: '5c412f4c3adb8df674b25740ce7b2227a0ead01844c82d219a226a3497035243',
+    declarationsSha256: 'b9fb8c67c5cb0e06b2c8a75fb8bfc39765b8b78357e445acca702ec92ba32a14'
+  },
+  operationId: 'broodstorm',
+  removedDebt: 'dedicated-flying-queen-art',
+  previousRemainingMechanics: ['dedicated-flying-queen-art', 'complete-modular-dropship-corpus'],
+  currentRemainingMechanics: ['complete-modular-dropship-corpus'],
+  previousCounts: { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 },
+  currentCounts: { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 }
+});
+
+export function verifyBroodstormRegistryContinuationV188(operations, counts, readSource = readRepository) {
+  const transition = TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188;
+  const matches = operations.filter(operation => operation.id === transition.operationId);
+  assert.equal(matches.length, 1, 'Exactly one Broodstorm registry declaration is required');
+  const operation = matches[0];
+  assert.deepEqual(operation.remainingMechanics, transition.currentRemainingMechanics,
+    'Only the dedicated Broodstorm queen-art debt may be removed');
+  assert.equal(operation.implementationStatus, 'partial', 'Broodstorm remains a partial chapter');
+  assert.equal(operation.canonExact, false, 'Broodstorm remains an original adaptation');
+  assert.equal(operation.playable, true);
+  assert.deepEqual(counts, transition.currentCounts, 'Broodstorm art does not promote a whole operation');
+  const projected = operations.map(entry => entry === operation
+    ? { ...entry, remainingMechanics: [...transition.previousRemainingMechanics] } : entry);
+  // Pin every declaration field, including production order and required scope.
+  // The nested campaign object has separate source receipts (including notices);
+  // its route ID remains part of this exact H declaration projection.
+  const declarations = projected.map(entry => Object.keys(entry).filter(key => key !== 'campaign').sort()
+    .map(key => [key, entry[key]]));
+  assert.equal(sha(JSON.stringify(declarations)), transition.baselineRegistry.declarationsSha256,
+    'Only the reviewed Broodstorm debt may differ from the exact H registry declarations');
+  const historical = verifyCargoRegistryContinuationV188(projected, counts, readSource);
+  assert.deepEqual(historical.currentCounts, transition.previousCounts);
+  const changedIds = [...historical.changedIds, transition.operationId];
+  return freeze({ historicalCounts: historical.historicalCounts, currentCounts: transition.currentCounts,
+    changedIds, unchangedOperations: operations.length - changedIds.length });
+}
+
 export const TANTALUS_PRIORITIES_SOURCE_ONLY_PATHS_V188 = Object.freeze([
   'scripts/audit-tantalus-priorities-v188.mjs',
   'scripts/verify-tantalus-priorities-v188.mjs',
@@ -452,23 +941,541 @@ export const TANTALUS_PRIORITIES_SOURCE_ONLY_PATHS_V188 = Object.freeze([
   'docs/development/PRIORITIES_P0_P1_V188.md'
 ]);
 
+// Queen Mother source continuation from exact B2. These receipts identify
+// frozen candidate bytes; runtime/visual QA and publication remain separate.
+export const TANTALUS_PRIORITIES_QUEEN_MOTHER_V188 = freeze({
+  "baseline": "b9aee06a0783bc7c0cf7094268a08618364df781",
+  "successors": {
+    "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
+      "previousSha256": "5460541da3d8b8f45e59ea584afb00e8be32378f19e82bcceb0fab688d527471",
+      "currentSha256": "f8f0b2d4d67183b09f9d8be7f989d8032ad3e4796295367e4a07fc11bf86ab7e"
+    },
+    "package.json": {
+      "previousSha256": "de4535cf179efd3fe86b6a73622b979ef0f75892d1865aad18d407fa7700b3d2",
+      "currentSha256": "2f1841faceabf92adbe9f829bac3e66ad81c7900064bdc1b382d0470e1717e4f"
+    },
+    "scripts/verify-audit-continuation-v157.mjs": {
+      "previousSha256": "afb20cffa2a0214c7802b7c9b36f5dadcc7c8eef795452e1c08bf0bdd19c6697",
+      "currentSha256": "6a88297b6d018c5086f2cdd92b88ff408eafc9fbf869be52365988edbb8a76c0"
+    },
+    "scripts/verify-audit-continuation-v158.mjs": {
+      "previousSha256": "1bc844e8a063004fdd64141d8e3d908fd10163fb6c9e2ef39a8353581c172406",
+      "currentSha256": "4fbb9c96780e8d46143f87997963246b9c634e4503a692742bacec7c8dad7f24"
+    },
+    "scripts/verify-audit-v143.mjs": {
+      "previousSha256": "50a8b5904d59e82b788c23738d8a9ec809f69fd20beb965d7328b70698ce217d",
+      "currentSha256": "32df0186eeb4bd76263a46c6517f1f2f92fcb0aa25fa47c41292d7e178bc0ca7"
+    },
+    "scripts/verify-black-cocoon-presentation-v158.mjs": {
+      "previousSha256": "fe489fab18e96fa26ba31cb3f39ea61e8f70ba4daa120613b4d564faa60eb0a5",
+      "currentSha256": "488aa7cfe2b50a2f0c40a20793b50dcded23f5babe0634208c204d573444f175"
+    },
+    "scripts/verify-public-release-v86.mjs": {
+      "previousSha256": "4c92d631018952c243a3c3ac49b64cdf18bf04f609daf322ec99c2c6ce333425",
+      "currentSha256": "11fc3b2d559034519dcb66c678e70c489f0b9132a7797142513860e81d654647"
+    },
+    "src/ecosystem-missions-v131.js": {
+      "previousSha256": "646012d4cd8465db13739b0df8a00407acf04cad8ffe5ee6f5035818b0c33ddc",
+      "currentSha256": "3b90f5739b4ff282d29304f0dc2aa7ad12150efb80e4b7459d60071ad4f03ec7"
+    },
+    "src/ecosystem-systems-v131.js": {
+      "previousSha256": "4e240a73054c5fefe872200f8b34a7055feff373d8f6c43b27e81d0c5ed621a3",
+      "currentSha256": "4fda558fd365aa872cc656c5565bef204dd967da9a2fb3b8f673d87678b8353f"
+    },
+    "src/i18n-en-catalog-v185.js": {
+      "previousSha256": "73d71fb68c960c112c3bf1cd792e5a522279de76f4f7d634a0d33257303d63ae",
+      "currentSha256": "4c75f584d9a2a4fc1d7328f0b85a38bd037f75f416131af9cca135012d1daee7"
+    },
+    "src/special-operations-v131.js": {
+      "previousSha256": "99a629ceba7042ca320e50d384fe9b9e734bdefa452bd5485899661adca5b45a",
+      "currentSha256": "433ddc7b821c98b973c10fc9e3aa39bc66c77e8cf9364dd9f1a25d03b70b08af"
+    },
+    "sw.js": {
+      "previousSha256": "6bf7972ff27396e71d850cdb13d449d187d35ec170e2c217122dde630fa6cdd3",
+      "currentSha256": "881f6a320f57315bdd5f8985a091cc967ba6d8090b02290997c43e9fd7eeeac5"
+    }
+  },
+  "addedSources": {
+    "scripts/verify-queen-mother-art-v188.mjs": "cabf01a56b817a86ff16f026a51f4614e9ff78764a76c391bbdf86d64a121d80",
+    "src/queen-mother-art-v188.js": "a22492e65b278c4bce30552e8fd85a748a8171305e73aae87d151cd1b0841187"
+  }
+});
+
+export const TANTALUS_PRIORITIES_QUEEN_MOTHER_REGISTRY_V188 = freeze({
+  baseline: 'b9aee06a0783bc7c0cf7094268a08618364df781',
+  baselineRegistry: {
+    path: 'src/special-operations-v131.js',
+    sha256: '99a629ceba7042ca320e50d384fe9b9e734bdefa452bd5485899661adca5b45a',
+    declarationsSha256: 'bc90066e0fa20fc3222d5f252354622af72df66f5670f868ea29fb582ccbebec'
+  },
+  operationId: 'queen-mother-song',
+  removedDebt: 'dedicated-queen-mother-animation',
+  previousRemainingMechanics: ['dedicated-queen-mother-animation', 'complete-royal-cast'],
+  currentRemainingMechanics: ['complete-royal-cast'],
+  previousCounts: { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 },
+  currentCounts: { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 }
+});
+
+export function verifyQueenMotherRegistryContinuationV188(operations, counts, readSource = readRepository) {
+  const transition = TANTALUS_PRIORITIES_QUEEN_MOTHER_REGISTRY_V188;
+  const matches = operations.filter(operation => operation.id === transition.operationId);
+  assert.equal(matches.length, 1, 'Exactly one Queen Mother registry declaration is required');
+  const operation = matches[0];
+  assert.deepEqual(operation.remainingMechanics, transition.currentRemainingMechanics,
+    'Only the dedicated Queen Mother animation debt may be removed');
+  assert.equal(operation.implementationStatus, 'partial', 'Queen Mother remains a partial chapter');
+  assert.equal(operation.canonExact, false, 'Queen Mother remains an original adaptation');
+  assert.equal(operation.playable, true);
+  assert.deepEqual(counts, transition.currentCounts, 'Queen Mother art does not promote a whole operation');
+  const projected = operations.map(entry => entry === operation
+    ? { ...entry, remainingMechanics: [...transition.previousRemainingMechanics] } : entry);
+  // Restore only Queen Mother's debt to B2. Campaign descriptions have their own
+  // source receipts; every other declaration field and its order remain exact.
+  const declarations = projected.map(entry => Object.keys(entry).filter(key => key !== 'campaign').sort()
+    .map(key => [key, entry[key]]));
+  assert.equal(sha(JSON.stringify(declarations)), transition.baselineRegistry.declarationsSha256,
+    'Only the reviewed Queen Mother debt may differ from the exact B2 registry declarations');
+  const historical = verifyBroodstormRegistryContinuationV188(projected, counts, readSource);
+  assert.deepEqual(historical.currentCounts, transition.previousCounts);
+  const changedIds = [...historical.changedIds, transition.operationId];
+  return freeze({ historicalCounts: historical.historicalCounts, currentCounts: transition.currentCounts,
+    changedIds, unchangedOperations: operations.length - changedIds.length });
+}
+
+
+// Queen Mother guard source continuation from exact Q. No registry debt is
+// closed by this presentation-only lot; the historical Q receipts stay intact.
+export const TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188 = freeze({
+  "baseline": "c1d4c636347275d2d3a6ecbc15ebfcfeadfb035c",
+  "successors": {
+    "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
+      "previousSha256": "f8f0b2d4d67183b09f9d8be7f989d8032ad3e4796295367e4a07fc11bf86ab7e",
+      "currentSha256": "c1c14fc8e850a7bbfd4946196edd233db6324b7898c4878298554f2ad0bbd438"
+    },
+    "package.json": {
+      "previousSha256": "2f1841faceabf92adbe9f829bac3e66ad81c7900064bdc1b382d0470e1717e4f",
+      "currentSha256": "3066253712f123ae2008fced03a1473b849f67a8d364bbc0864f30588f35d609"
+    },
+    "scripts/verify-audit-continuation-v157.mjs": {
+      "previousSha256": "6a88297b6d018c5086f2cdd92b88ff408eafc9fbf869be52365988edbb8a76c0",
+      "currentSha256": "a3230677a0ea8bcafab21917da2823e49777bcc2c1e406bb9dc6b91e396c2155"
+    },
+    "scripts/verify-audit-continuation-v158.mjs": {
+      "previousSha256": "4fbb9c96780e8d46143f87997963246b9c634e4503a692742bacec7c8dad7f24",
+      "currentSha256": "80f296774fff4bbd1eaecca48fdd4c63cb1beaca03ed0c44a3d674ebfae87a28"
+    },
+    "scripts/verify-audit-v143.mjs": {
+      "previousSha256": "32df0186eeb4bd76263a46c6517f1f2f92fcb0aa25fa47c41292d7e178bc0ca7",
+      "currentSha256": "3a2ad226bf0ae4076e3fbd526f2d03fa3bd7459f8811f0d27d6a1a33a3626e85"
+    },
+    "scripts/verify-black-cocoon-presentation-v158.mjs": {
+      "previousSha256": "488aa7cfe2b50a2f0c40a20793b50dcded23f5babe0634208c204d573444f175",
+      "currentSha256": "a35cab0472f11b1e656aec251a035dc1cd3a4b9df6e6803ab0f2da83ab313cb1"
+    },
+    "scripts/verify-public-release-v86.mjs": {
+      "previousSha256": "11fc3b2d559034519dcb66c678e70c489f0b9132a7797142513860e81d654647",
+      "currentSha256": "0d663f627b878c05ecd067c417d2bd2895ffeede9de0b21e6ad3852134d10a7d"
+    },
+    "src/ecosystem-missions-v131.js": {
+      "previousSha256": "3b90f5739b4ff282d29304f0dc2aa7ad12150efb80e4b7459d60071ad4f03ec7",
+      "currentSha256": "34fc724a8b7c758153b42f7f1542512056a12aef6b6c119f6e8cea7ce9fa5c7d"
+    },
+    "src/ecosystem-systems-v131.js": {
+      "previousSha256": "4fda558fd365aa872cc656c5565bef204dd967da9a2fb3b8f673d87678b8353f",
+      "currentSha256": "577e12210793abf2ea46df9afef38aeab26bbce12a960073379cf6a639993d5c"
+    },
+    "src/game-production-runtime.js": {
+      "previousSha256": "5cfd2d4a4e5ca6d01529332d67f9afa0564cfa05dbcfabd06657f90559a7e141",
+      "currentSha256": "48604c22ea4a37dc33270a190bc9e8b4a36a8edd35c9e0d2707d2d90866055bb"
+    },
+    "src/i18n-en-catalog-v185.js": {
+      "previousSha256": "4c75f584d9a2a4fc1d7328f0b85a38bd037f75f416131af9cca135012d1daee7",
+      "currentSha256": "4b3e6552f422a1a7d30b9940eebd81880e292bcbae5067cf1e2697284dbca917"
+    },
+    "sw.js": {
+      "previousSha256": "881f6a320f57315bdd5f8985a091cc967ba6d8090b02290997c43e9fd7eeeac5",
+      "currentSha256": "e31f82016ae97434c8805dd00d35279c6246bc9c52ddc32faa3c678996db8d22"
+    }
+  },
+  "addedSourceSuccessors": {
+    "scripts/verify-queen-mother-art-v188.mjs": {
+      "previousSha256": "cabf01a56b817a86ff16f026a51f4614e9ff78764a76c391bbdf86d64a121d80",
+      "currentSha256": "889d7e7a91eecb6fa9ba780982a164c458c394b8174d59514ce8baf5125f15b3"
+    }
+  },
+  "addedSources": {
+    "scripts/verify-queen-mother-guard-art-v188.mjs": "ec26cb25201477732fd747eda4a88a7bdaf88e88acd2e36e3cdef710b17f7d38",
+    "src/queen-mother-guard-art-v188.js": "fa5a6c5f123a826f97675e50c02a2f48cabc4010dbceafac82e16c42bf9bd540"
+  }
+});
+
+export const TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_REGISTRY_V188 = freeze({
+  baseline: 'c1d4c636347275d2d3a6ecbc15ebfcfeadfb035c',
+  baselineRegistry: {
+    path: 'src/special-operations-v131.js',
+    sha256: '433ddc7b821c98b973c10fc9e3aa39bc66c77e8cf9364dd9f1a25d03b70b08af',
+    declarationsSha256: '46cdb671b6cc3cb1591c5fe4cd124d85335278d93b79a386cddbd9cc4995618a'
+  },
+  operationId: 'queen-mother-song',
+  projection: 'identity',
+  removedDebts: [],
+  newChangedIds: [],
+  historicalChangedIds: ['cargo-brutal', 'broodstorm', 'queen-mother-song'],
+  previousRemainingMechanics: ['complete-royal-cast'],
+  currentRemainingMechanics: ['complete-royal-cast'],
+  previousCounts: { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 },
+  currentCounts: { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 }
+});
+
+export function verifyQueenMotherGuardRegistryContinuationV188(operations, counts, readSource = readRepository) {
+  const continuation = TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_REGISTRY_V188;
+  assert.equal(sha(readSource(continuation.baselineRegistry.path)), continuation.baselineRegistry.sha256,
+    'Guard presentation must retain the exact Q registry source bytes');
+  const matches = operations.filter(operation => operation.id === continuation.operationId);
+  assert.equal(matches.length, 1, 'Exactly one Queen Mother registry declaration is required');
+  const operation = matches[0];
+  assert.deepEqual(operation.remainingMechanics, continuation.currentRemainingMechanics,
+    'Guard presentation leaves the complete royal cast debt open');
+  assert.equal(operation.implementationStatus, 'partial', 'Guard presentation does not promote Queen Mother');
+  assert.equal(operation.canonExact, false, 'Guard presentation assigns no canonical identity');
+  assert.equal(operation.playable, true);
+  assert.deepEqual(counts, continuation.currentCounts, 'Guard presentation does not change registry counts');
+  const declarations = operations.map(entry => Object.keys(entry).filter(key => key !== 'campaign').sort()
+    .map(key => [key, entry[key]]));
+  assert.equal(sha(JSON.stringify(declarations)), continuation.baselineRegistry.declarationsSha256,
+    'Guard presentation must preserve every exact Q registry declaration');
+  // R projects identically to Q. In particular, do not append Queen Mother a
+  // second time to the historical set of operations whose registry changed.
+  const historical = verifyQueenMotherRegistryContinuationV188(operations, counts, readSource);
+  assert.deepEqual(historical.currentCounts, continuation.previousCounts);
+  assert.deepEqual(historical.changedIds, continuation.historicalChangedIds);
+  assert.equal(new Set(historical.changedIds).size, historical.changedIds.length);
+  assert.equal(historical.unchangedOperations, 18);
+  return historical;
+}
+
+// Queen Mother choir source continuation from exact R. The original presentation
+// does not close complete-royal-cast or change any registry declaration.
+export const TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188 = freeze({
+  "baseline": "ded6ef34dd35a659313e9361b407f6b94b62fb96",
+  "successors": {
+    "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
+      "previousSha256": "c1c14fc8e850a7bbfd4946196edd233db6324b7898c4878298554f2ad0bbd438",
+      "currentSha256": "d03dcc6e75b22a69890b389d5c0ef84311d5ea2e12d9dbe8233c2ff78bd419cb"
+    },
+    "package.json": {
+      "previousSha256": "3066253712f123ae2008fced03a1473b849f67a8d364bbc0864f30588f35d609",
+      "currentSha256": "b74e5e7d949a29976fb562f1a8215a01426a1b950301cc37b25939421e2becf1"
+    },
+    "scripts/verify-audit-continuation-v157.mjs": {
+      "previousSha256": "a3230677a0ea8bcafab21917da2823e49777bcc2c1e406bb9dc6b91e396c2155",
+      "currentSha256": "a92ffa1c385c12159293a1d18d36c881180f48291bc58947076ed2f7b67784d3"
+    },
+    "scripts/verify-audit-continuation-v158.mjs": {
+      "previousSha256": "80f296774fff4bbd1eaecca48fdd4c63cb1beaca03ed0c44a3d674ebfae87a28",
+      "currentSha256": "09977386675167a50d8e399532c948c344d753237ca50383d93bb5cda112fc68"
+    },
+    "scripts/verify-audit-v143.mjs": {
+      "previousSha256": "3a2ad226bf0ae4076e3fbd526f2d03fa3bd7459f8811f0d27d6a1a33a3626e85",
+      "currentSha256": "38cc0350f341d18a3536944e19391285e4756195e3c82af6e923d4072a615d08"
+    },
+    "scripts/verify-black-cocoon-presentation-v158.mjs": {
+      "previousSha256": "a35cab0472f11b1e656aec251a035dc1cd3a4b9df6e6803ab0f2da83ab313cb1",
+      "currentSha256": "cb52f555918b941d0eed87a3e4b10fcfdab8563536e47187b8b42dad3db6e930"
+    },
+    "scripts/verify-public-release-v86.mjs": {
+      "previousSha256": "0d663f627b878c05ecd067c417d2bd2895ffeede9de0b21e6ad3852134d10a7d",
+      "currentSha256": "d3e7ef7d42dc48cd69d6f0ffc7c577545b5682a82f0411ea753c1b44c248268a"
+    },
+    "src/ecosystem-missions-v131.js": {
+      "previousSha256": "34fc724a8b7c758153b42f7f1542512056a12aef6b6c119f6e8cea7ce9fa5c7d",
+      "currentSha256": "bced08c735be1c49f01afab83cc0e134960f2bdc90a480dca2d056eabc3e0be3"
+    },
+    "src/ecosystem-systems-v131.js": {
+      "previousSha256": "577e12210793abf2ea46df9afef38aeab26bbce12a960073379cf6a639993d5c",
+      "currentSha256": "b3719aaea2f23be2a031c15cb66d857386f11a3f410230d5885f6c9f21e16272"
+    },
+    "src/i18n-en-catalog-v185.js": {
+      "previousSha256": "4b3e6552f422a1a7d30b9940eebd81880e292bcbae5067cf1e2697284dbca917",
+      "currentSha256": "11a0ec21f4ac8a04b65af1a3532d190996eed9c806fdbede9a9334975dc8e5dd"
+    },
+    "sw.js": {
+      "previousSha256": "e31f82016ae97434c8805dd00d35279c6246bc9c52ddc32faa3c678996db8d22",
+      "currentSha256": "41c8c1094fd4ae3edd95abb3d3921de4342e6475aed0eada96f97f0c36321eb4"
+    }
+  },
+  "addedSourceSuccessors": {
+    "scripts/verify-queen-mother-art-v188.mjs": {
+      "previousSha256": "889d7e7a91eecb6fa9ba780982a164c458c394b8174d59514ce8baf5125f15b3",
+      "currentSha256": "2bfd94395adcd5ca0b6d6b6ae9ed8dd9bf9d550e3cb90b3dc52b903e63de2b24"
+    }
+  },
+  "addedSources": {
+    "scripts/verify-queen-mother-choir-art-v188.mjs": "c2d672e1d1e671042d799712f94bbcdac86a66a39ee2a358beaeab403f20c81d",
+    "src/queen-mother-choir-art-v188.js": "d5258e5b3c571f571a87ca4b1345d32c79504888c994fa0774adef68bdf85ed6"
+  }
+});
+
+export const TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_REGISTRY_V188 = freeze({
+  baseline: 'ded6ef34dd35a659313e9361b407f6b94b62fb96',
+  baselineRegistry: {
+    path: 'src/special-operations-v131.js',
+    sha256: '433ddc7b821c98b973c10fc9e3aa39bc66c77e8cf9364dd9f1a25d03b70b08af',
+    declarationsSha256: '46cdb671b6cc3cb1591c5fe4cd124d85335278d93b79a386cddbd9cc4995618a'
+  },
+  operationId: 'queen-mother-song',
+  projection: 'identity',
+  removedDebts: [],
+  newChangedIds: [],
+  historicalChangedIds: ['cargo-brutal', 'broodstorm', 'queen-mother-song'],
+  previousRemainingMechanics: ['complete-royal-cast'],
+  currentRemainingMechanics: ['complete-royal-cast'],
+  previousCounts: { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 },
+  currentCounts: { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 }
+});
+
+export function verifyQueenMotherChoirRegistryContinuationV188(operations, counts, readSource = readRepository) {
+  const continuation = TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_REGISTRY_V188;
+  assert.equal(sha(readSource(continuation.baselineRegistry.path)), continuation.baselineRegistry.sha256,
+    'Choir presentation must retain the exact R registry source bytes');
+  const matches = operations.filter(operation => operation.id === continuation.operationId);
+  assert.equal(matches.length, 1, 'Exactly one Queen Mother registry declaration is required');
+  const operation = matches[0];
+  assert.deepEqual(operation.remainingMechanics, continuation.currentRemainingMechanics,
+    'Choir presentation leaves the complete royal cast debt open');
+  assert.equal(operation.implementationStatus, 'partial', 'Choir presentation does not promote Queen Mother');
+  assert.equal(operation.canonExact, false, 'Choir presentation assigns no canonical identity');
+  assert.equal(operation.playable, true);
+  assert.deepEqual(counts, continuation.currentCounts, 'Choir presentation does not change registry counts');
+  const declarations = operations.map(entry => Object.keys(entry).filter(key => key !== 'campaign').sort()
+    .map(key => [key, entry[key]]));
+  assert.equal(sha(JSON.stringify(declarations)), continuation.baselineRegistry.declarationsSha256,
+    'Choir presentation must preserve every exact R registry declaration');
+  const historical = verifyQueenMotherGuardRegistryContinuationV188(operations, counts, readSource);
+  assert.deepEqual(historical.currentCounts, continuation.previousCounts);
+  assert.deepEqual(historical.changedIds, continuation.historicalChangedIds);
+  assert.equal(new Set(historical.changedIds).size, historical.changedIds.length);
+  assert.equal(historical.unchangedOperations, 18);
+  return historical;
+}
+
 export function reviewedTantalusPrioritiesDigestV188(path, endpoint) {
-  const receipt = TANTALUS_PRIORITIES_SUCCESSORS_V188[path];
-  if (!receipt) return endpoint;
-  assert.equal(endpoint, receipt.previousSha256, 'Broken V187-to-V188 source chain: ' + path);
-  assert.ok(validHash(receipt.currentSha256), 'Invalid V188 source digest: ' + path);
-  assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A V188 successor must identify changed bytes: ' + path);
-  return receipt.currentSha256;
+  const historical = TANTALUS_PRIORITIES_SUCCESSORS_V188[path];
+  const receipt = historical || TANTALUS_PRIORITIES_CONTINUATION_V188.successors[path];
+  let current = endpoint;
+  if (receipt) {
+    assert.equal(current, receipt.previousSha256,
+      (historical ? 'Broken V187-to-V188 source chain: ' : 'Broken published-V188 source chain: ') + path);
+    assert.ok(validHash(receipt.currentSha256), 'Invalid V188 source digest: ' + path);
+    assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A V188 successor must identify changed bytes: ' + path);
+    current = receipt.currentSha256;
+  }
+  const prologue = TANTALUS_PRIORITIES_PROLOGUE_V188.successors[path];
+  if (prologue) {
+    assert.equal(current, prologue.previousSha256, 'Broken d54f13cc-to-prologue source chain: ' + path);
+    assert.ok(validHash(prologue.currentSha256), 'Invalid prologue source digest: ' + path);
+    assert.notEqual(prologue.currentSha256, prologue.previousSha256, 'A prologue successor must identify changed bytes: ' + path);
+    current = prologue.currentSha256;
+  }
+  const quay = TANTALUS_PRIORITIES_QUAY_V188.successors[path];
+  if (quay) {
+    assert.equal(current, quay.previousSha256, 'Broken ee565717-to-quay source chain: ' + path);
+    assert.ok(validHash(quay.currentSha256), 'Invalid quay source digest: ' + path);
+    assert.notEqual(quay.currentSha256, quay.previousSha256, 'A quay successor must identify changed bytes: ' + path);
+    current = quay.currentSha256;
+  }
+  const cargoAbyss = TANTALUS_PRIORITIES_CARGO_ABYSS_V188.successors[path];
+  if (cargoAbyss) {
+    assert.equal(current, cargoAbyss.previousSha256, 'Broken 232693f1-to-cargo-abyss source chain: ' + path);
+    assert.ok(validHash(cargoAbyss.currentSha256), 'Invalid cargo-abyss source digest: ' + path);
+    assert.notEqual(cargoAbyss.currentSha256, cargoAbyss.previousSha256, 'A cargo-abyss successor must identify changed bytes: ' + path);
+    current = cargoAbyss.currentSha256;
+  }
+  const hadal = TANTALUS_PRIORITIES_HADAL_V188.successors[path];
+  if (hadal) {
+    assert.equal(current, hadal.previousSha256, 'Broken a3634de7-to-hadal source chain: ' + path);
+    assert.ok(validHash(hadal.currentSha256), 'Invalid hadal source digest: ' + path);
+    assert.notEqual(hadal.currentSha256, hadal.previousSha256, 'A hadal successor must identify changed bytes: ' + path);
+    current = hadal.currentSha256;
+  }
+  const broodstorm = TANTALUS_PRIORITIES_BROODSTORM_V188.successors[path];
+  if (broodstorm) {
+    assert.equal(current, broodstorm.previousSha256, 'Broken 361e4067-to-broodstorm source chain: ' + path);
+    assert.ok(validHash(broodstorm.currentSha256), 'Invalid broodstorm source digest: ' + path);
+    assert.notEqual(broodstorm.currentSha256, broodstorm.previousSha256, 'A broodstorm successor must identify changed bytes: ' + path);
+    current = broodstorm.currentSha256;
+  }
+  const queenMother = TANTALUS_PRIORITIES_QUEEN_MOTHER_V188.successors[path];
+  if (queenMother) {
+    assert.equal(current, queenMother.previousSha256, 'Broken b9aee06a-to-queen-mother source chain: ' + path);
+    assert.ok(validHash(queenMother.currentSha256), 'Invalid queen-mother source digest: ' + path);
+    assert.notEqual(queenMother.currentSha256, queenMother.previousSha256, 'A queen-mother successor must identify changed bytes: ' + path);
+    current = queenMother.currentSha256;
+  }
+  const guards = TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188;
+  const guard = guards.successors[path] || guards.addedSourceSuccessors[path];
+  if (guard) {
+    assert.equal(current, guard.previousSha256, 'Broken c1d4c636-to-queen-mother-guard source chain: ' + path);
+    assert.ok(validHash(guard.currentSha256), 'Invalid queen-mother-guard source digest: ' + path);
+    assert.notEqual(guard.currentSha256, guard.previousSha256, 'A queen-mother-guard successor must identify changed bytes: ' + path);
+    current = guard.currentSha256;
+  }
+  const choirs = TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188;
+  const choir = choirs.successors[path] || choirs.addedSourceSuccessors[path];
+  if (!choir) return current;
+  assert.equal(current, choir.previousSha256, 'Broken ded6ef34-to-queen-mother-choir source chain: ' + path);
+  assert.ok(validHash(choir.currentSha256), 'Invalid queen-mother-choir source digest: ' + path);
+  assert.notEqual(choir.currentSha256, choir.previousSha256, 'A queen-mother-choir successor must identify changed bytes: ' + path);
+  return choir.currentSha256;
 }
 
 export function verifyTantalusPrioritiesV188(readSource = readRepository) {
-  for (const [path, receipt] of Object.entries(TANTALUS_PRIORITIES_SUCCESSORS_V188)) {
+  const continuation = TANTALUS_PRIORITIES_CONTINUATION_V188;
+  for (const path of Object.keys(continuation.successors)) {
+    assert.equal(Object.hasOwn(TANTALUS_PRIORITIES_SUCCESSORS_V188, path), false,
+      'A published-V188 receipt must not replace a historical receipt: ' + path);
+  }
+  const successors = new Map([...Object.entries(TANTALUS_PRIORITIES_SUCCESSORS_V188), ...Object.entries(continuation.successors)]);
+  const prologue = TANTALUS_PRIORITIES_PROLOGUE_V188;
+  for (const [path, receipt] of Object.entries(prologue.successors)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
+    assert.equal(Object.hasOwn(continuation.addedSources, path), false, 'A prologue successor cannot replace a separately added V188 source: ' + path);
+    if (successors.has(path)) assert.equal(receipt.previousSha256, successors.get(path).currentSha256,
+      'Broken historical-to-d54f13cc endpoint: ' + path);
+    else successors.set(path, receipt);
+  }
+  const quay = TANTALUS_PRIORITIES_QUAY_V188;
+  for (const [path, receipt] of Object.entries(quay.successors)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
+    assert.equal(Object.hasOwn(continuation.addedSources, path) || Object.hasOwn(prologue.addedSources, path), false,
+      'A quay successor cannot replace a separately added V188 source: ' + path);
+    const previous = prologue.successors[path] || successors.get(path);
+    if (previous) assert.equal(receipt.previousSha256, previous.currentSha256,
+      'Broken historical-to-ee565717 endpoint: ' + path);
+    else successors.set(path, receipt);
+  }
+  const cargoAbyss = TANTALUS_PRIORITIES_CARGO_ABYSS_V188;
+  for (const [path, receipt] of Object.entries(cargoAbyss.successors)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
+    assert.equal(Object.hasOwn(continuation.addedSources, path) || Object.hasOwn(prologue.addedSources, path)
+      || Object.hasOwn(quay.addedSources, path), false,
+    'A cargo-abyss successor cannot replace a separately added V188 source: ' + path);
+    const previous = quay.successors[path] || prologue.successors[path] || successors.get(path);
+    if (previous) assert.equal(receipt.previousSha256, previous.currentSha256,
+      'Broken historical-to-232693f1 endpoint: ' + path);
+    else successors.set(path, receipt);
+  }
+  const hadal = TANTALUS_PRIORITIES_HADAL_V188;
+  for (const [path, receipt] of Object.entries(hadal.successors)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
+    assert.equal(Object.hasOwn(continuation.addedSources, path) || Object.hasOwn(prologue.addedSources, path)
+      || Object.hasOwn(quay.addedSources, path) || Object.hasOwn(cargoAbyss.addedSources, path), false,
+    'A hadal successor cannot replace a separately added V188 source: ' + path);
+    const previous = cargoAbyss.successors[path] || quay.successors[path] || prologue.successors[path] || successors.get(path);
+    if (previous) assert.equal(receipt.previousSha256, previous.currentSha256,
+      'Broken historical-to-a3634de7 endpoint: ' + path);
+    else successors.set(path, receipt);
+  }
+  const broodstorm = TANTALUS_PRIORITIES_BROODSTORM_V188;
+  for (const [path, receipt] of Object.entries(broodstorm.successors)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
+    assert.equal(Object.hasOwn(continuation.addedSources, path) || Object.hasOwn(prologue.addedSources, path)
+      || Object.hasOwn(quay.addedSources, path) || Object.hasOwn(cargoAbyss.addedSources, path)
+      || Object.hasOwn(hadal.addedSources, path), false,
+    'A broodstorm successor cannot replace a separately added V188 source: ' + path);
+    const previous = hadal.successors[path] || cargoAbyss.successors[path] || quay.successors[path]
+      || prologue.successors[path] || successors.get(path);
+    if (previous) assert.equal(receipt.previousSha256, previous.currentSha256,
+      'Broken historical-to-361e4067 endpoint: ' + path);
+    else successors.set(path, receipt);
+  }
+  const queenMother = TANTALUS_PRIORITIES_QUEEN_MOTHER_V188;
+  for (const [path, receipt] of Object.entries(queenMother.successors)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
+    assert.equal(Object.hasOwn(continuation.addedSources, path) || Object.hasOwn(prologue.addedSources, path)
+      || Object.hasOwn(quay.addedSources, path) || Object.hasOwn(cargoAbyss.addedSources, path)
+      || Object.hasOwn(hadal.addedSources, path) || Object.hasOwn(broodstorm.addedSources, path), false,
+    'A queen-mother successor cannot replace a separately added V188 source: ' + path);
+    const previous = broodstorm.successors[path] || hadal.successors[path] || cargoAbyss.successors[path]
+      || quay.successors[path] || prologue.successors[path] || successors.get(path);
+    if (previous) assert.equal(receipt.previousSha256, previous.currentSha256,
+      'Broken historical-to-b9aee06a endpoint: ' + path);
+    else successors.set(path, receipt);
+  }
+  const guards = TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188;
+  const historicalAddedSources = new Map([...Object.entries(continuation.addedSources), ...Object.entries(prologue.addedSources),
+    ...Object.entries(quay.addedSources), ...Object.entries(cargoAbyss.addedSources), ...Object.entries(hadal.addedSources),
+    ...Object.entries(broodstorm.addedSources), ...Object.entries(queenMother.addedSources)]);
+  assert.deepEqual(Object.keys(guards.addedSourceSuccessors), ['scripts/verify-queen-mother-art-v188.mjs'],
+    'The guard continuation may supersede only the explicitly reviewed Q notice test');
+  for (const [path, receipt] of Object.entries(guards.successors)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
+    assert.equal(historicalAddedSources.has(path), false,
+      'A guard successor cannot replace a separately added V188 source: ' + path);
+    const previous = queenMother.successors[path] || broodstorm.successors[path] || hadal.successors[path]
+      || cargoAbyss.successors[path] || quay.successors[path] || prologue.successors[path] || successors.get(path);
+    assert.ok(previous, 'A guard successor needs a reviewed historical endpoint: ' + path);
+    assert.equal(receipt.previousSha256, previous.currentSha256, 'Broken historical-to-c1d4c636 endpoint: ' + path);
+  }
+  for (const [path, receipt] of Object.entries(guards.addedSourceSuccessors)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
+    assert.equal(successors.has(path) || Object.hasOwn(guards.successors, path) || Object.hasOwn(guards.addedSources, path), false,
+      'An added-source successor cannot disguise or duplicate another source: ' + path);
+    assert.equal(receipt.previousSha256, queenMother.addedSources[path], 'Broken Q added-source predecessor: ' + path);
+    assert.notEqual(receipt.currentSha256, receipt.previousSha256,
+      'An added-source successor must identify changed bytes: ' + path);
+  }
+  const choirs = TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188;
+  const priorAddedSources = new Map([...historicalAddedSources, ...Object.entries(guards.addedSources)]);
+  assert.deepEqual(Object.keys(choirs.addedSourceSuccessors), ['scripts/verify-queen-mother-art-v188.mjs'],
+    'The choir continuation may supersede only the explicitly reviewed Q notice test');
+  for (const [path, receipt] of Object.entries(choirs.successors)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
+    assert.equal(priorAddedSources.has(path), false,
+      'A choir successor cannot replace a separately added V188 source: ' + path);
+    const previous = guards.successors[path];
+    assert.ok(previous, 'A choir successor needs a reviewed R endpoint: ' + path);
+    assert.equal(receipt.previousSha256, previous.currentSha256, 'Broken historical-to-ded6ef34 endpoint: ' + path);
+  }
+  for (const [path, receipt] of Object.entries(choirs.addedSourceSuccessors)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
+    assert.equal(successors.has(path) || Object.hasOwn(choirs.successors, path) || Object.hasOwn(choirs.addedSources, path), false,
+      'A choir added-source successor cannot disguise or duplicate another source: ' + path);
+    assert.ok(Object.hasOwn(guards.addedSourceSuccessors, path), 'A choir added-source successor must preserve its R predecessor');
+    assert.equal(receipt.previousSha256, guards.addedSourceSuccessors[path].currentSha256,
+      'Broken R added-source predecessor; Unreviewed V188 source bytes: ' + path);
+    assert.notEqual(receipt.currentSha256, receipt.previousSha256,
+      'A choir added-source successor must identify changed bytes: ' + path);
+  }
+  for (const [path, receipt] of successors) {
     assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
     assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
     assert.equal(sha(readSource(path)), reviewedTantalusPrioritiesDigestV188(path, receipt.previousSha256),
       'Unreviewed V188 source bytes: ' + path);
   }
-  return Object.freeze({ successors: Object.keys(TANTALUS_PRIORITIES_SUCCESSORS_V188).length });
+  const addedSources = new Set();
+  for (const [path, digest] of [...Object.entries(continuation.addedSources), ...Object.entries(prologue.addedSources),
+    ...Object.entries(quay.addedSources), ...Object.entries(cargoAbyss.addedSources), ...Object.entries(hadal.addedSources),
+    ...Object.entries(broodstorm.addedSources), ...Object.entries(queenMother.addedSources), ...Object.entries(guards.addedSources),
+    ...Object.entries(choirs.addedSources)]) {
+    assert.equal(successors.has(path) || addedSources.has(path), false, 'A new V188 source cannot replace a successor or added source: ' + path);
+    addedSources.add(path);
+    assert.ok(validHash(digest), 'Invalid new V188 source digest: ' + path);
+    const endpoint = Object.hasOwn(guards.addedSourceSuccessors, path) || Object.hasOwn(choirs.addedSourceSuccessors, path)
+      ? reviewedTantalusPrioritiesDigestV188(path, digest) : digest;
+    assert.equal(sha(readSource(path)), endpoint, 'Unreviewed V188 source bytes: ' + path);
+  }
+  return Object.freeze({ successors: successors.size, addedSources: addedSources.size });
 }
 
 if (process.argv[1] && new URL(import.meta.url).pathname === process.argv[1]) {

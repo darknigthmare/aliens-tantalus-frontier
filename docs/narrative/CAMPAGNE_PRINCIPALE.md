@@ -307,7 +307,7 @@ Postes et salles : `HUB_NPC_ROSTER` (`src/hub-v52-runtime.js`). Fonctions narrat
 | **Tomas Wren** | Port-Méridien | Chef de quai. A vu passer les conteneurs scellés ; se tait pour ne pas perdre son contrat. |
 | **Lucia Ferro** | Port-Méridien | Médecin de la colonie. A vu les premiers cas « d'intoxication » qui n'en étaient pas. |
 
-**Portraits provisoires de Sarrazin, Wren et Ferro (V188, décisions Q78 et Q79).** Ces trois personnages n'affichaient que leurs initiales. Ils ont désormais un portrait **provisoire** dessiné en primitives Canvas (`src/placeholder-portraits-v188.js`). Ce sont des adaptations du projet, et non des portraits fidèles à la franchise : aucune image générée n'est utilisée. Le cadrage reprend celui des portraits de l'équipage (tête et épaules, fond transparent, lumière principale en haut à droite). Chaque portrait porte un **signe distinctif lisible par sa forme**, pour rester reconnaissable en mode daltonien et dans le petit cadre de 80 px des cinématiques. Les portraits sont utilisés dans le sous-titre des cinématiques (`cin-p3-wren` sur le quai, `cin-p3-ferro` au triage, `cin-doyenne`) et dans le cadre de dialogue du hub si l'un d'eux y prend la parole. La table de reconstruction ne montre aujourd'hui ni nom ni portrait.
+**Portraits de Sarrazin, Wren et Ferro (V188, continuation du 16 novembre 2026).** La demande de génération du propriétaire succède au choix provisoire Q78/Q79. Trois PNG originaux sont maintenant raccordés par `src/colony-portraits-v188.js`, dans les dialogues et les sous-titres des cinématiques (`cin-p3-wren` sur le quai, `cin-p3-ferro` au triage, `cin-doyenne`). Leur cadrage tête-épaules, fond transparent, lumière principale en haut à droite et signes distinctifs reprennent la définition ci-dessous. Les primitives de `src/placeholder-portraits-v188.js` restent le repli pendant le chargement et en cas d'échec. Les choix physiques sont des adaptations du projet **[PROPOSÉ]**, sans ressemblance d'acteur revendiquée. Les images gardent la même identité dans tous les réglages daltoniens ; les variantes de couleurs décrites dans la table concernent le repli Canvas. La table de reconstruction ne montre aujourd'hui ni nom ni portrait. Provenance, contrôles à 80 px et limites : [rapport du lot](../development/COLONY_ART_QA_20261116.md).
 
 | Personnage | Documenté | Adapté **[PROPOSÉ]** | À définir |
 | --- | --- | --- | --- |
@@ -315,7 +315,7 @@ Postes et salles : `HUB_NPC_ROSTER` (`src/hub-v52-runtime.js`). Fonctions narrat
 | **Tomas Wren** | Chef de quai (§2.3) ; gilet haute visibilité et tablette (§56.12, passe de cohérence du quai). | Environ 45 ans ; cheveux courts grisonnants, barbe de quelques jours ; veste de travail anthracite. **Signe :** gilet haute visibilité, avec deux bretelles et deux bandes réfléchissantes qui forment un « H ». Orange haute visibilité, vermillon en mode daltonien. La tablette n'est pas dessinée dans le portrait. | Âge, origine, couleur exacte du gilet et logo éventuel de l'employeur du port. |
 | **Lucia Ferro** | Médecin de la colonie (§2.3) ; brassard à croix (§56.12). | Environ 38 ans ; cheveux sombres noués en chignon ; veste de terrain olive sur une tenue de soins claire. **Signe :** brassard blanc sur le haut du bras droit, avec une croix pleine. Croix rouge, vermillon en mode daltonien. Les proportions de la croix ne reprennent pas l'emblème protégé de la Croix-Rouge. | Âge, origine, blouse ou tenue d'isolement (§2.4.4 : variantes de `hazmat-suit` à créer) et emblème médical définitif. |
 
-Ces portraits restent provisoires. Le lot de portraits prévu au §2.4.4 et les expressions (question 84) restent à produire.
+Les trois portraits de base sont produits et intégrés. Les autres portraits prévus au §2.4.4 et les expressions (question 84) restent à produire ; ce lot ne crée ni pose corporelle ni nouveau PNJ.
 | **I. Voss** | QZ-18 | Contremaître dont le badge a signé la priorité de fret à 18:43 (`archive-relay-state-v122.js`). Disparu. |
 | **Directrice Halloran** | Weyland-Yutani | Responsable régionale du réseau QZ. Ne s'adresse au Tantalus que par messages différés. Cite toujours une clause. |
 | **CASSIUS** | Station Asphodèle | Système de gestion Seegson de la station. Applique la quarantaine à la lettre depuis des semaines, sans personne pour la corriger. Ni malveillant ni conscient : obéissant. |
@@ -1073,7 +1073,7 @@ Contrats et chantiers [PROPOSÉ] : Purge du réservoir → Énergie (nid contre 
 
 **Décisions [PROPOSÉ].** C4 : Marshals (stabilité +4, quarantaine +2), exil (stabilité +2, infestation +3), médiation d'Adèle si le frère a été ramené (stabilité +6, 2 volontaires). Grue : accepter (alliage +60, stabilité −2) ou refuser (stabilité +2).
 
-**Fidélité.** Aucune fidélité « 1:1 ». Repères documentés : portes soudées et tourelles sentinelles UA 571-C (*Aliens*, 1986, et son édition spéciale, 1991) ; processeur atmosphérique de Hadley's Hope (*Aliens*, 1986) ; embryon révélé par un scanner médical (*Alien 3*, 1992) ; Marshals coloniaux et matériel Seegson à bas coût, synthétiques bloqués sur une consigne (*Alien: Isolation*, 2014) ; chargeur P-5000 et M577 (*Aliens*, 1986). Adaptations du projet : charte et chantiers, carnets de Wren et ses deux bordereaux, culte des « Enfants de l'Hôte Parfait » (§1.5, art original à refaire, Q47), Grue. Textes des scènes et décisions [PROPOSÉ]. À définir : niveaux dédiés (les missions utilisent les gabarits génériques), art des 7 emplacements colonie (`colony-crew-slots-v188.js`, placeholders Canvas).
+**Fidélité.** Aucune fidélité « 1:1 ». Repères documentés : portes soudées et tourelles sentinelles UA 571-C (*Aliens*, 1986, et son édition spéciale, 1991) ; processeur atmosphérique de Hadley's Hope (*Aliens*, 1986) ; embryon révélé par un scanner médical (*Alien 3*, 1992) ; Marshals coloniaux et matériel Seegson à bas coût, synthétiques bloqués sur une consigne (*Alien: Isolation*, 2014) ; chargeur P-5000 et M577 (*Aliens*, 1986). Adaptations du projet : charte et chantiers, carnets de Wren et ses deux bordereaux, culte des « Enfants de l'Hôte Parfait » (§1.5, art original à refaire, Q47), Grue. Textes des scènes et décisions [PROPOSÉ]. Les 7 illustrations de retour de colonie sont désormais produites et chargées par `colony-crew-slots-v188.js` (continuation du 16 novembre 2026) ; les indices et légendes restent natifs FR/EN. À définir : les niveaux dédiés, puisque les missions utilisent encore les gabarits génériques. Ces illustrations de dialogue ne constituent pas des décors de niveau ni de nouveaux acteurs.
 
 **Reste à faire.** Niveaux dédiés de C1-C4 (soudure des sas, contrôle biologique sans panique, enquête de nuit) ; console du quai (Q26) ; quartiers V2 (Q24) ; palier *Libre* ; recrutement de Nadia Bensaïd à *Rétablie* (§8.3) ; vie de la colonie entre deux missions (Q29).
 
@@ -1168,10 +1168,10 @@ Echo-9 retrouve la plaque du sergent Kessler et le dernier enregistrement de l'�
 Décisions par défaut appliquées : Q6 (S1-S4 comme missions avant le hub), Q7 (choix CASSIUS définitif), Q103 (feature Spec Kit `specs/005-front-asphodele-quetes/`). Code : `src/station-asphodele-v188.js`, raccordé à `content.js`, `save.js` (`stationV188`), `story-dossier-v188.js` et au Commandement.
 
 - **Accès** : Acte II terminé → quête de Rook « Six heures », dont la fin joue *Six heures de silence* (§8.4) → S1 → S2 → décision CASSIUS → S3 → S4. Les missions verrouillées ne sont pas proposées ; le lancement est refusé avec la raison. Une mission en cours reste reprise.
-- **Missions** : `station-s1` à `station-s4` sur Cocyte (`world-05-lethe`), gabarit intérieur de vaisseau, objectifs et registres de §7.2 et §0.3 (Horreur, Tension, Horreur, Action). Le décor est l'intérieur de vaisseau générique : la station n'a pas encore son art (§29.4).
+- **Missions** : `station-s1` à `station-s4` sur Cocyte (`world-05-lethe`), gabarit intérieur de vaisseau, objectifs et registres de §7.2 et §0.3 (Horreur, Tension, Horreur, Action). Le décor est l'intérieur de vaisseau générique : les illustrations de scène de §7.8 ne remplacent pas l'art jouable encore à produire (§29.4).
 - **Dossier** : S2 donne la pièce *Ordres de livraison archivés par CASSIUS*, même si CASSIUS est effacé ensuite (§5.7.1). S4 rend la condition « Asphodèle reprise » vraie ; la salle des relais vient du hub Asphodèle (`asphodeleRelayReadyV188`), condition lue par l'Acte V (§5.11).
 - **Effets CASSIUS [PROPOSÉ]** : réécrit, quarantaine de Cocyte −6 et stabilité +3 ; bridé, quarantaine −3 ; effacé, aucun effet. Les annexes fermées par le bridage n'existent pas encore.
-- **Scènes de retour** (S1, S3, S4) et décision CASSIUS : au Commandement, une seule fois, image d'emplacement en primitives Canvas (`src/content-gap-slots-v188.js`).
+- **Scènes de retour** (S1, S3, S4) et décision CASSIUS : au Commandement, une seule fois, illustrations de `src/content-gap-slots-v188.js` depuis la continuation du 16 novembre 2026 (§7.8), avec repli en primitives Canvas.
 - **[PROPOSÉ]** : la consigne qui ferme le sas 3 à 6:00:05 est appliquée par CASSIUS (indice de la quête de Rook) ; les journaux des survivants s'arrêtent au quatrième jour.
 - **Fidélité** : aucune fidélité « 1:1 ». Apparence documentée citée dans la spec 005 (détecteur trompé par l'air en mouvement et caméras de casque, *Aliens*, 1986 ; Seegson et son IA qui applique ses consignes, *Alien: Isolation*, 2014). CASSIUS, Asphodèle, Echo-8 et Kessler sont des créations du projet. À définir : décor, interface vocale de CASSIUS, visage de Kessler.
 - **Reste à faire** (mis à jour par §7.6) : ~~hub Asphodèle, annexes, contrats, CIN-70 à CIN-72, plaque de Kessler~~ → première version en §7.6 ; restent les points listés en §7.6.
@@ -1203,7 +1203,7 @@ Décisions par défaut appliquées : Q22 (A, modules construits dans le moteur d
 | UD-4L | *Aliens* (1986) | Vu au hublot du sas 1 | Image |
 | Echo-8, Kessler, Grue, Crucible | — | Créations du projet, silhouettes en primitives | Visages, costumes |
 
-- **Art** : 20 emplacements nommés (`src/asphodele-hub-slots-v188.js`), placeholders en primitives Canvas, 1 m ≈ 51 px ; aucune image générée.
+- **Art du hub** : 20 emplacements nommés (`src/asphodele-hub-slots-v188.js`), placeholders en primitives Canvas, 1 m ≈ 51 px ; aucune image générée pour ces emplacements. Les illustrations de scène de §7.8 sont distinctes.
 - **Reste à faire** (mis à jour par §7.7) : ~~quartiers, infirmerie, ponts inférieurs et hangar de réparation ; commerce du marché (Q30) ; effets des contrats autres que *Relais en dérive* ; décors de station pour les missions annexes et les contrats~~ → §7.7 ; restent la rotation visuelle de l'anneau en jeu, l'art final et le plan V3 (Q23 B, non retenu).
 
 ### 7.7 Modules rouverts, effets des contrats, marché, foules — [PARTIEL] V188 (suite de la spec 007, 2026-11-16)
@@ -1232,8 +1232,49 @@ Décision par défaut appliquée : Q30 (A, économie existante et stock limité 
 | Hangar de réparation | Hangar du *Sulaco*, *Aliens* (1986) : rails de grue, bandes de danger | Atelier du Cheyenne | Vaisseau en réparation, art |
 | Dockers, marchands, techniciens | Techniciens de Sevastopol, *Alien: Isolation* (2014) | Silhouettes en primitives | Costumes, visages |
 
-- **Art** : 22 emplacements ajoutés (42 au total), primitives Canvas, 1 m ≈ 51 px ; aucune image générée.
+- **Art du hub et des missions** : 22 emplacements ajoutés (42 au total), 1 m ≈ 51 px. La continuation de §7.9 fournit les neuf images `asph-msn-*` de mission ; les 33 emplacements du hub restent en primitives Canvas. Les illustrations de scène de §7.8 constituent un lot distinct.
 - **Reste à faire** : art final ; commerce d'armes ; médecin, jardiniers et mécaniciens ; `orig-asphodele-1`, `-3` et `-4` (§39.2) ; rotation visuelle de l'anneau ; plan V3.
+
+### 7.8 Illustrations de scène Asphodèle — [PARTIEL] V188 (continuation du 16 novembre 2026)
+
+À la demande de continuation du propriétaire, six PNG complètent les six emplacements de `src/content-gap-slots-v188.js`, dans `assets/content/v188/`. Ils illustrent les dialogues et les preuves, dans un cadre logique de 640 × 280 px. Les cinq cartes de preuve réservent leurs surfaces au texte, aux nombres et aux graphes dessinés par Canvas en FR/EN ; les primitives restent le repli du chargement.
+
+| Emplacement | Composition du projet | Invariant narratif |
+| --- | --- | --- |
+| `asphodele-exterior` | Anneau sur rayons autour d'un moyeu sombre, espace noir, gris froid | Feux éteints ; navette Crucible sur l'anneau et dropship d'Echo-8 au sas |
+| `cassius-core` | CRT verts et une seule onde, sans visage ni avatar | Quarantaine, priorité cargaison, préservation des actifs ; les consignes sont présentées comme archives, sans imposer l'état de CASSIUS après S2 |
+| `echo8-recording` | Écran de capteurs de Rook et onde audio de caméra casque | Fenêtre 05:58 à 06:00, repère de coupure rouge ; les secondes des scènes et de la quête ne sont pas réécrites |
+| `order-documents` | Deux feuilles côte à côte sous une lampe, sans logo de compagnie | Articles 2 et 5 de l'Administration, points 4 et 7 de la compagnie ; les quatre citations de la quête (`crew-quests-v188.js`, §8.4) restent exactes en FR/EN |
+| `seal-fragment` | Sceau électronique rompu dans un plateau, lentille et lumière froide | Résine sur la face interne, QZ17-04, tampon « ASPHODÈLE · TRANSIT VÉRIFIÉ » ; référence de matière : atlas QZ17 existant |
+| `david-memory` | Grille mémoire sur CRT et trois composants de relais | Un secteur cible ; aucun « 3/3 », état de restauration terminé ou effacement des journaux imposé avant l'achèvement de la quête |
+
+**Références et fidélité.** Les matières et la mise en scène prolongent les cartes du lot colonie/équipage, l'UD-4L existant et l'atlas des collectables QZ17. Les références de franchise restent celles de §7.6 et §8.4 ; Asphodèle, CASSIUS, Echo-8, Kessler, Crucible, les deux ordres et les autres preuves sont des créations du projet. Ces illustrations ne certifient pas une reproduction canonique « 1:1 » et n'ajoutent aucun visage de Kessler ni portrait de DAVID-8R.
+
+**Limites conservées.** Ce lot de cartes laissait les 42 emplacements `asph-*` des décors, props et acteurs jouables en primitives ; neuf sont ensuite complétés par §7.9. La carte `cassius-core` ne remplace pas le prop `asph-cassius-core`. CIN-70 à CIN-72 continuent d'utiliser leurs plans Canvas dans `station-cinematics-v188.js` ; la rotation de l'anneau, les poses des personnages et l'art final des niveaux ne sont pas achevés par ce lot. La chronologie de l'enregistrement d'Echo-8 n'est pas modifiée.
+
+Traçabilité : [prompts, références et empreintes des six PNG](../development/ASPHODELE_ART_PROVENANCE_20261116.json), [contrôles et limites](../development/ASPHODELE_ART_QA_20261116.md), [planche des illustrations](../development/ASPHODELE_ART_OVERVIEW_20261116.png), [primitive extérieure de référence](../development/ASPHODELE_ART_PRIMITIVE_REFERENCE_20261116.png).
+
+### 7.9 Objets de mission Asphodèle — [PARTIEL] V188 (continuation du 16 novembre 2026)
+
+La demande de continuation avec fidélité à la franchise produit les neuf PNG de `assets/asphodele/v188/asph-msn-*.png`. Ils remplacent les primitives d'habillage des sept missions annexes, six contrats et de l'inspection nocturne, dans leurs emplacements existants. Les 33 emplacements du hub restent à produire.
+
+| Emplacement | Composition contrôlée | Surface native conservée |
+| --- | --- | --- |
+| `asph-msn-panel` | Panneau frontal riveté, deux plaques d'accès, bande de danger | Cadre 128 × 112 px |
+| `asph-msn-crt` | Boîtier analogique, verre vert sombre, deux boutons | Trois lignes d'état animées ; 51 × 41 px |
+| `asph-msn-sign` | Plaque de secteur vide, encadrement ivoire et graphite | Secteur exact FR/EN dans le cadre 153 × 26 px |
+| `asph-msn-conduit` | Trois conduits parallèles, huit brides orange | Échelle de 306 × 12 px ; fin de travée rognée sans compression |
+| `asph-msn-blackbox` | Trois enregistreurs orange distincts dans leur rack | Libellé QZ exact FR/EN |
+| `asph-msn-resin` | Trappe fermée, résine sombre sur sa partie inférieure | Avertissement biologique exact FR/EN |
+| `asph-msn-salvage` | Deux caisses de récupération, hauteurs décalées | Libellé Crucible exact FR/EN |
+| `asph-msn-gauge` | Trois cadrans analogiques et un volant de vanne | Aiguilles animées alignées sur les pivots ; libellé FR/EN |
+| `asph-msn-camera` | Une caméra sans visage, un voyant et un écran vert sombre | Voyant rouge et titre CASSIUS natifs |
+
+Les cinq éléments propres à une mission restent dans un cadre de 153 × 102 px. Le rythme de 306 px, le plafond y = 110, les marges de 18 px autour des portes, échelles, ascenseurs et conduits, ainsi que l'unique élément de mission restent ceux du plan existant. Les images sont dessinées proportionnellement dans une fenêtre source déclarée ; aucun PNG original n'est redimensionné ou réencodé. Les primitives demeurent le repli pendant le chargement et en cas d'échec. Les missions demandent leurs neuf images ; une visite du hub ne les télécharge pas. Le cache runtime admet ces neuf chemins exacts après leur premier chargement public valide.
+
+**Références et portée de la fidélité.** Les images de couloir, de porte et la planche de direction artistique publiées par [Paul Abbott, Lead Environment Artist](https://www.pauldavidabbott.co.uk/alien-isolation), ainsi que les captures de terminal et de zone cargo présentées par [Gary Napper, lead designer](https://www.gamedeveloper.com/design/game-design-deep-dive-the-save-system-of-i-alien-isolation-i-), ont été inspectées et fournies au générateur. Elles fixent les matières et le vocabulaire de construction. Asphodèle, le rack QZ, les caisses Crucible, le module de pression et CASSIUS restent des assemblages du projet. Les images primaires des props précis de Tunde Glover, Liam Tart et Brad Wright n'ont pas été récupérées ; leurs pages textuelles ne certifient donc aucun contour exact. La résine est une adaptation du motif de ruche cité par la bible, sans référence rapprochée primaire inspectée dans cette passe. Ce lot ne revendique pas neuf répliques canoniques « 1:1 ».
+
+Traçabilité : [prompts, références, fenêtres et empreintes](../development/ASPHODELE_MISSION_ART_PROVENANCE_20261116.json), [validation et limites](../development/ASPHODELE_MISSION_ART_QA_20261116.md), [planche des objets intégrés](../development/ASPHODELE_MISSION_ART_OVERVIEW_20261116.png).
 
 ---
 
@@ -1297,6 +1338,8 @@ Décision par défaut Q9 : DAVID-8R, Harlow, Rook et Vega. Code : `src/crew-ques
 
 Fidélité : la quête de Vega reprend un thème documenté, la consigne de la compagnie qui passe avant l'équipage (« Special Order 937 », *Alien*, 1979, scène de MU/TH/UR) ; les deux ordres sont des textes du projet. Reste : la vie à bord (§8.2) et les recrues (§8.3) ; les 12 autres quêtes sont au §8.5.
 
+**Illustrations (continuation du 16 novembre 2026).** Les quatre cartes de Rook (`echo8-recording`), Vega (`order-documents`), Harlow (`seal-fragment`) et DAVID-8R (`david-memory`) sont produites dans le lot de six de §7.8. Les preuves et libellés exacts restent natifs FR/EN ; aucune nouvelle seconde de coupure, décision ni résultat de quête n'est figé dans les PNG. Les poses de dialogue, objets animés et décors jouables restent des besoins distincts.
+
 ### 8.5 Les douze autres quêtes — [PARTIEL] V188 (lot colonie et équipage, 2026-11-16)
 
 Code : `src/crew-quests-tantalus-v188.js` (données), lues par `src/crew-quests-v188.js` (mêmes règles et même sauvegarde `crewQuestsV188`, champ additif `mark` pour une preuve). Proposées dans la conversation du hub ; listées à la table tactique (16 quêtes). Conseillers de l'Acte V d'abord (Sanaa, Cal, Orlov, Leila : leur avantage au conseil demande une loyauté ≥ 75). Une mauvaise lecture ne coûte rien ; rien n'est payé avant la preuve ; chaque quête paie une fois. Preuves, lectures, répliques et valeurs [PROPOSÉ].
@@ -1318,7 +1361,7 @@ Code : `src/crew-quests-tantalus-v188.js` (données), lues par `src/crew-quests-
 
 **Adaptations.** « Battre ses temps au pas de tir » devient : réussir une nouvelle qualification M41A après avoir accepté (le pas de tir ne garde pas de chronomètre par escouade). Les « charges de brèche » de Reyes sont des grenades M40 HEDP du catalogue (aucune charge de brèche n'y existe). Les composants de Mercer, Doyle et Okafor viennent d'opérations réussies sur Cocyte, comme ceux de DAVID-8R. La loyauté gagnée ne suffit pas seule pour Sanaa (56 + 12) : les choix de rapport du §8 complètent.
 
-**Fidélité.** Aucune fidélité « 1:1 ». Repères documentés : tourelles sentinelles UA 571-C (*Aliens*, édition spéciale, 1991) ; M577 et détecteur de mouvement (*Aliens*, 1986) ; lance-grenades U1 du M41A (*Aliens*, 1986 ; désignation M40 HEDP du *Colonial Marines Technical Manual*, 1995) ; directive d'un synthétique de la compagnie, thème de « Special Order 937 » (*Alien*, 1979). Adaptations du projet : Echo-8, Kessler, transport Kappa, ferme 12, registres, relevés du réacteur. À définir : art des 11 emplacements de quête (`colony-crew-slots-v188.js`, placeholders Canvas), poses de dialogue.
+**Fidélité.** Aucune fidélité « 1:1 ». Repères documentés : tourelles sentinelles UA 571-C (*Aliens*, édition spéciale, 1991) ; M577 et détecteur de mouvement (*Aliens*, 1986) ; lance-grenades U1 du M41A (*Aliens*, 1986 ; désignation M40 HEDP du *Colonial Marines Technical Manual*, 1995) ; directive d'un synthétique de la compagnie, thème de « Special Order 937 » (*Alien*, 1979). Adaptations du projet : Echo-8, Kessler, transport Kappa, ferme 12, registres, relevés du réacteur. Les 11 illustrations de quête sont désormais produites et chargées à la demande par `colony-crew-slots-v188.js` (continuation du 16 novembre 2026). Les heures, quantités, graphes et itinéraire restent dessinés par le jeu en FR/EN, indépendamment des PNG. Les poses de dialogue restent à définir.
 
 **Reste à faire.** Vie à bord (§8.2, dont *Écoute de nuit* et *Le casier vide* comme fil de quête), recrues (§8.3, dont Nadia Bensaïd à *Rétablie*), effets sur la course APC dédiée de l'Acte V.
 
@@ -1332,7 +1375,7 @@ Classement d'après le registre courant `special-operations-v131.js`, utilisé p
 
 | Opération | Statut | Place | Accroche [PROPOSÉ] | Ancrage Alien |
 | --- | --- | --- | --- | --- |
-| **Cargo Brutal** | Chapitre **[EXISTANT]** / promesse **[PARTIEL]** | Avant Acte I | Un cargo civil en route vers Port-Méridien transporte un conteneur QZ17 mal scellé. L'art dédié de la Matriarche manque encore. | Cargo infesté. |
+| **Cargo Brutal** | Chapitre **[EXISTANT]** / art Matriarche **[PRÉSENT]** | Avant Acte I | Un cargo civil en route vers Port-Méridien transporte un conteneur QZ17 mal scellé. Quatre planches dédiées et seize poses sont intégrées depuis la continuation V188 du 17 novembre 2026 ; design original du projet. | Cargo infesté. |
 | **Systèmes de survie Alien** | **[EXISTANT]** effective | Entre Actes I et II | Évasion d'un poste médical en quarantaine près du port ; mécaniques réutilisées dans l'interlude et S3. | Auto-destruction, soudure, acide. |
 | **Doctrine Alpha / Bravo** | **[PARTIEL]** | Avant C1 ou C5 | Défense de colonie à cinq routes, quatre membres minimum : tenir Port-Méridien. | Escouade de Marines. |
 
@@ -1569,7 +1612,7 @@ Lieu : réseau de canyons rouges, tours relais perchées, station minière de **
 | 2.1 | Intro | **Relais Gorge-Seize** | Le dropship d'Orlov se pose sur une tour relais. Les mineurs parlent de « bruits dans la roche ». Le détecteur de mouvement s'affole à cause des échos : il faut apprendre à lire les faux signaux. | `defend the colony` | Détecteur de mouvement, menace invisible. | — | 25 min |
 | 2.2 | Principale | **Le sol qui s'ouvre** | Escorter un convoi de mineurs vers la ville troglodyte. La lignée fouisseuse attaque par-dessous : il faut surveiller les vibrations et rester sur les dalles renforcées. | `escort a colony convoy` | Attaque par les conduits et le sol. | — | 35 min |
 | 2.3 | Principale | **Les nids sous les surplombs** | Couvrir à bord du Cheyenne l'évacuation d'un avant-poste attaqué en piqué par la lignée aérienne. Escorte, appui, tir sur les nids des falaises. | `hold the extraction zone` | Dropship, appui aérien. | **Broodstorm** (Cheyenne, falaises, surplombs) | 40 min |
-| 2.4 | Principale | **La Reine volante** | Traquer la Reine aérienne jusqu'à son aire, au sommet d'une aiguille rocheuse. Combat en hauteur, vent, chutes. | `track an apex specimen` | Reine adaptée à son milieu. | **Broodstorm** (Flying Queen, art dédié encore manquant) | 40 min |
+| 2.4 | Principale | **La Reine volante** | Traquer la Reine aérienne jusqu'à son aire, au sommet d'une aiguille rocheuse. Combat en hauteur, vent, chutes. | `track an apex specimen` | Reine adaptée à son milieu. | **Broodstorm** (Reine ailée illustrée dans le chapitre local ; arc proposé à produire) | 40 min |
 | 2.5 | Principale | **La carte des lignées** | Inez croise les données de Nacre-7 et d'Echo Basin : les deux lignées ont été **déposées**, pas arrivées par hasard. Un registre de vol de la tour relais montre des cargos W-Y passés six mois plus tôt, venant d'un monde absent des cartes civiles : TR-0. | `recover black-box data` | La compagnie sème des œufs pour observer. | — | 25 min |
 
 **Annexes de l'arc 2**
@@ -2850,6 +2893,8 @@ Les fichiers de `assets/user/` sont des **références** fournies par le propri�
 
 **Socle de l'arc [À CRÉER] :** décor de station orbitale en trois couches (anneau extérieur, pont de contrôle, laboratoire de transit, ponts inférieurs, serre, salle des relais, mémorial) ; PNJ Grue, récupérateurs Crucible ; interface vocale de CASSIUS ; dropship d'Echo-8 amarré.
 
+**Mise à jour art de scène (16 novembre 2026, §7.8).** Les cartes d'extérieur, de CASSIUS et de l'enregistrement d'Echo-8 sont produites, ainsi que les trois autres cartes de preuve du lot. Elles servent les dialogues ; les besoins du tableau ci-dessous en décors jouables, props de hub, acteurs, animations et plans de CIN-70 à CIN-72 restent distincts. Le statut d'une illustration ne vaut pas achèvement d'une mission.
+
 | Mission | Props spécifiques | Personnages / ennemis | Animations | VFX | Actions |
 | --- | --- | --- | --- | --- | --- |
 | Six heures de silence | Enregistrement casque à l'écran **[À CRÉER]** | Rook **[PRÉSENT]** | — | Bruit radio **[À CRÉER]** | — |
@@ -2864,6 +2909,8 @@ Les fichiers de `assets/user/` sont des **références** fournies par le propri�
 
 Elles se jouent surtout au hub, avec des PNJ **[PRÉSENT]**. Besoins **[À CRÉER]** : poses de dialogue assises ou au poste pour chaque membre (au moins une par personnage), objets de quête (composants de DAVID-8R, plaques de colons, fragment de sceau, tourelles sentinelles, enregistreurs de Kappa), écran de sélection des recrues (Voss, Bensaïd, Reed, Seo : planches de déplacement et de mission à créer pour chacun).
 
+**Illustrations disponibles (16 novembre 2026).** Les onze cartes de §8.5 et les quatre cartes des premières quêtes de §8.4 sont produites. Leur présence ne fournit pas les poses ni les props animés de la liste ci-dessus. La carte d'Echo-8 est aussi réutilisée par la quête d'ECHO-A.
+
 ---
 
 ## 30. Campagne annexe 1 — La Saison des Reines
@@ -2876,36 +2923,36 @@ Elles se jouent surtout au hub, avec des PNJ **[PRÉSENT]**. Besoins **[À CRÉE
 | --- | --- | --- | --- | --- | --- |
 | 1.1 Le quai noyé | Tables servies, pompes **[À CRÉER]** | Navarre **[À CRÉER]** | — | Pluie sur l'eau **[À CRÉER]** | — |
 | 1.2 Les bassins | Œufs fixés comme des coraux **[À CRÉER]** ; filets avec cocons **[DETTE]** | Drones récifaux | Bassin qui se vide (niveau d'eau) **[À CRÉER]** | Écoulement **[À CRÉER]** | Pompage **[À CRÉER]** |
-| 1.3 Plongée HADAL | Coque immergée, nid **[À CRÉER]** | Lurker récifal | Nage en scaphandre **[DETTE]** (`dedicated-hadal-manta-art`) | Bulles, particules, lampe **[À CRÉER]** | Nage **[CODE]** ; oxygène limité **[À CRÉER]** |
-| 1.4 Reine des récifs | Fossé, nid royal **[À CRÉER]** | Reine récifale **[À CRÉER]** | MANTA-6 **[DETTE]** ; Reine nageant **[À CRÉER]** | Torpilles, traînées, projecteurs **[À CRÉER]** | Pilotage sous-marin **[CODE]** (chapitre existant) |
+| 1.3 Plongée HADAL | Coque immergée, nid **[À CRÉER]** | Lurker récifal | Tenue HADAL modulaire **[PRÉSENT]** dans le chapitre local ; cycle de nage dédié **[DETTE]** (`dedicated-hadal-manta-art`) | Bulles, particules, lampe **[À CRÉER]** | Nage **[CODE]** ; oxygène limité **[À CRÉER]** dans cet arc proposé |
+| 1.4 Reine des récifs | Fossé, nid royal **[À CRÉER]** | Reine récifale **[À CRÉER]** | Coque statique MANTA-6 **[PRÉSENT]** dans le chapitre local ; animations supplémentaires **[DETTE]** ; Reine nageant **[À CRÉER]** | Torpilles, traînées, projecteurs **[À CRÉER]** | Pilotage sous-marin **[CODE]** (chapitre existant) ; arc Nacre-7 proposé distinct |
 | 1.5 Ce que Rask voulait | Œuf royal en caisson **[À CRÉER]** | Rask, escouade W-Y | — | — | Choix laisser/saisir/détruire **[À CRÉER]** |
 | Annexes (3) | Laboratoire inondé, filets, phare **[À CRÉER]** | Pêcheur survivant **[À CRÉER]** | Canots qui approchent **[À CRÉER]** | Faisceau du phare **[À CRÉER]** | Hissage de filet **[À CRÉER]** |
 | Cinématiques CQ-01, CQ-02 | Trois coquilles d'œuf, fossé éclairé **[À CRÉER]** | Inez **[PRÉSENT]** | — | — | — |
 
 ### 30.2 Arc 2 · Echo Basin
 
-**Socle de l'arc :** canyons rouges, tour relais, ville troglodyte de Gorge-Seize, aiguille rocheuse **[À CRÉER]** (fond `planet-exterior` **[PRÉSENT]** comme base) ; mineurs **[À CRÉER]** ; lignée fouisseuse (base `xenomorph-crusher-action-sheet`, `xenomorph-burster-action-sheet-v56` **[PRÉSENT]**, variante **[À CRÉER]**) ; lignée aérienne et Reine volante **[DETTE]** (`dedicated-flying-queen-art`) ; Cheyenne **[PRÉSENT]** (`ud-4l-cheyenne-dropship-action-sheet`), version modulaire **[DETTE]** (`complete-modular-dropship-corpus`).
+**Socle de l'arc :** canyons rouges, tour relais, ville troglodyte de Gorge-Seize, aiguille rocheuse **[À CRÉER]** (fond `planet-exterior` **[PRÉSENT]** comme base) ; mineurs **[À CRÉER]** ; lignée fouisseuse (base `xenomorph-crusher-action-sheet`, `xenomorph-burster-action-sheet-v56` **[PRÉSENT]**, variante **[À CRÉER]**) ; lignée aérienne **[DETTE]** ; Reine ailée **[PRÉSENT]** dans le chapitre local Broodstorm (douze poses, voir §56.17), réemploi dans cet arc et atterrissage **[À CRÉER]** ; Cheyenne **[PRÉSENT]** (`ud-4l-cheyenne-dropship-action-sheet`), version modulaire **[DETTE]** (`complete-modular-dropship-corpus`).
 
 | Mission | Props | Personnages / ennemis | Animations | VFX | Actions |
 | --- | --- | --- | --- | --- | --- |
 | 2.1 Relais Gorge-Seize | Tour relais **[À CRÉER]** | Mineurs **[À CRÉER]** | — | Faux échos sur le détecteur (interface) **[À CRÉER]** | Lecture des faux signaux **[À CRÉER]** |
 | 2.2 Le sol qui s'ouvre | Dalles renforcées, galeries qui s'ouvrent **[À CRÉER]** | Fouisseurs **[À CRÉER]** | Sortie de sol **[À CRÉER]** | Fissures, poussière **[À CRÉER]** | Vibrations à surveiller **[À CRÉER]** |
 | 2.3 Nids sous les surplombs | Nids de falaise **[À CRÉER]** | Planeurs **[À CRÉER]** | Piqué **[À CRÉER]** | Tir aérien, explosions **[PRÉSENT]** (`combat-vfx-animation-sheet`) | Tir depuis l'appareil **[CODE]** (Broodstorm) |
-| 2.4 La Reine volante | Aire au sommet **[À CRÉER]** | Reine volante **[DETTE]** | Vol, atterrissage **[DETTE]** | Vent, chutes de pierres **[À CRÉER]** | Combat en hauteur **[À CRÉER]** |
+| 2.4 La Reine volante | Aire au sommet **[À CRÉER]** | Art local Broodstorm **[PRÉSENT]** ; rencontre de cet arc **[À CRÉER]** | Poursuite, réaction et mort en vol **[PRÉSENT]** dans Broodstorm ; atterrissage **[DETTE]** | Vent, chutes de pierres **[À CRÉER]** | Combat en hauteur de cet arc **[À CRÉER]** |
 | 2.5 Carte des lignées | Registre de vol **[À CRÉER]** | Inez **[PRÉSENT]** | — | — | Lecture **[CODE]** |
 | Annexes (4) | Puits 7, épave Crucible, capteurs sismiques, route des crêtes **[À CRÉER]** | Contremaître, Rask, Grue **[À CRÉER]** | Remontée de puits (ascenseur) **[À CRÉER]** | — | — |
-| CQ-03 | Coucher de soleil sur le canyon **[À CRÉER]** | Reine volante **[DETTE]** | — | — | — |
+| CQ-03 | Coucher de soleil sur le canyon **[À CRÉER]** | Référence Broodstorm **[PRÉSENT]** ; mise en scène CQ-03 **[À CRÉER]** | — | — | — |
 
 ### 30.3 Arc 3 · TR-0, la Ruche-monde
 
-**Socle de l'arc :** surface vivante, organes, noyau **[DETTE]** (`complete-organ-biomes`, `dedicated-planet-queen-art`) ; Base Ombelle sous la résine **[À CRÉER]** ; Reine-Mère et Chœurs **[DETTE]** (`dedicated-queen-mother-animation`, `complete-royal-cast`) ; praetorian **[PRÉSENT]**.
+**Socle de l'arc :** surface vivante, organes, noyau **[DETTE]** (`complete-organ-biomes`, `dedicated-planet-queen-art`) ; Base Ombelle sous la résine **[À CRÉER]** ; adulte Reine-Mère rouge **[PRÉSENT]** dans le chapitre local « Le chant de la Reine-Mère » (huit poses composées, §56.18), gardes locaux illustrés par réemploi adapté de l'atlas praetorian **[PRÉSENT]** (§56.19), réemploi dans l'arc étendu **[À CRÉER]** ; trois Chœurs locaux illustrés par création originale **[PRÉSENT]** (§56.20) ; casting royal complet **[DETTE]** (`complete-royal-cast`) ; praetorian **[PRÉSENT]**.
 
 | Mission | Props | Personnages / ennemis | Animations | VFX | Actions |
 | --- | --- | --- | --- | --- | --- |
 | 3.1 Atterrissage | Croûte qui respire **[DETTE]** | — | Surface animée **[DETTE]** | Pulsations **[À CRÉER]** | Jauge de bruit **[CODE]** (alerte existante) |
 | 3.2 Base Ombelle | Laboratoire W-Y sous résine, registres d'expédition **[À CRÉER]** | — | — | — | Lecture **[CODE]** |
-| 3.3 Trois Chœurs | Nurserie, artère royale, balises **[CODE]** (chapitre existant) | Castes reliées **[DETTE]** | — | Ondes du Chœur **[À CRÉER]** | Rupture des Chœurs **[CODE]** |
-| 3.4 La Reine-Mère | Salle royale **[CODE]** | Reine-Mère **[DETTE]** | 4 phases **[DETTE]** | — | Boss **[CODE]** |
+| 3.3 Trois Chœurs | Nurserie, artère royale, balises **[CODE]** (chapitre existant) | Trois cibles locales illustrées **[PRÉSENT]** ; castes reliées **[DETTE]** | Quatre états de présentation originaux **[PRÉSENT]** (§56.20) | Ondes du Chœur **[À CRÉER]** | Rupture des Chœurs **[CODE]** |
+| 3.4 La Reine-Mère | Salle royale **[CODE]** (chapitre existant) | Adulte rouge et gardes locaux illustrés **[PRÉSENT]** ; rencontre de l'arc étendu **[À CRÉER]** | Huit poses composées de l'adulte et seize cellules réemployées pour les gardes **[PRÉSENT]** ; quatre phases natives **[CODE]** | — | Boss local **[CODE]** |
 | 3.5 Le noyau | Organes, noyau, sas **[CODE]** | — | Effondrement **[À CRÉER]** | Effondrement, poussière organique **[À CRÉER]** | Fuite chronométrée **[CODE]** |
 | Annexes (2) | Chambre froide **[À CRÉER]** | Chercheur survivant **[À CRÉER]** ; praetorian capturé **[PRÉSENT]** | Créature entravée **[À CRÉER]** | — | Capture d'organisme **[À CRÉER]** |
 | CQ-04 à 06 | Vue orbitale de TR-0, décollage **[À CRÉER]** | — | — | — | — |
@@ -3090,8 +3137,11 @@ Ces missions réutilisent au maximum les décors de zone **[PRÉSENT]** (`ship-*
 | Créature | Statut |
 | --- | --- |
 | Reine récifale, lignée fouisseuse, lignée aérienne | [À CRÉER] (variantes de castes [PRÉSENT]) |
-| Reine volante | [DETTE] |
-| Reine-Mère, Chœurs, Ruche-monde | [DETTE] |
+| Reine volante | Art local Broodstorm [PRÉSENT] ; atterrissage et autres rencontres [À CRÉER] |
+| Reine-Mère adulte | Art et huit poses du chapitre local [PRÉSENT] ; autres rencontres [À CRÉER] |
+| Gardes de la Reine-Mère | Présentation locale adaptée de l'atlas praetorian [PRÉSENT] ; aucune nouvelle attribution de caste |
+| Chœurs locaux de la Reine-Mère | Présentation originale des trois cibles [PRÉSENT] ; aucune attribution de caste |
+| Casting royal complet et Ruche-monde | [DETTE] |
 | Jeri, SAINT, Éloïse, HUSH-6, Chasseur de Mères | [DETTE] |
 | Synthétique de maintenance industrielle (boss de Kéos) | [À CRÉER] |
 | Faune de Pangaea, castes Sauria, Porte-Ruche Colosse | [DETTE] |
@@ -3174,8 +3224,11 @@ Pour chaque élément à créer, un **lot de génération** type est indiqué :
 | Reine récifale | [À CRÉER] | `xenomorph-queen-*` |
 | Lignée fouisseuse | Variante [À CRÉER] | `xenomorph-crusher`, `xenomorph-burster` |
 | Lignée aérienne (planeurs) | [À CRÉER] | — |
-| Reine volante | [DETTE] | — |
-| Reine-Mère, Chœurs, Ruche-monde | [DETTE] | — |
+| Reine volante | Art local Broodstorm [PRÉSENT] ; autres rencontres [À CRÉER] | Trois planches de quatre poses ; §56.17 |
+| Reine-Mère adulte | Art local [PRÉSENT] ; autres rencontres [À CRÉER] | Deux planches de corps, quatre bras composés ; §56.18 |
+| Gardes de la Reine-Mère | Présentation locale adaptée [PRÉSENT] | Atlas praetorian existant, seize cellules, six gardes initiaux et douze renforts possibles ; §56.19 |
+| Chœurs locaux de la Reine-Mère | Présentation originale [PRÉSENT] | Une même arche costale pour les trois cibles, quatre états et appuis fixes ; §56.20 |
+| Casting royal complet et Ruche-monde | [DETTE] | Les trois objets locaux illustrés ne définissent pas les trois castes reliées ni le casting étendu de TR-0 |
 | Jeri, SAINT, Éloïse, HUSH-6, Chasseur de Mères | [DETTE] | — |
 | Faune de Pangaea, castes Sauria, Porte-Ruche Colosse | [DETTE] | `wild-boar-host` (principe d'hôte animal) |
 | Ingénieur (le Dormeur) | [À CRÉER] | — |
@@ -3197,7 +3250,7 @@ Pour chaque élément à créer, un **lot de génération** type est indiqué :
 | --- | --- | --- |
 | M577 | Acte III, Acte V, missions | [PRÉSENT] |
 | Cheyenne | Insertion, Echo Basin, Broodstorm | [PRÉSENT] ; modulaire [DETTE] |
-| Scaphandre HADAL, sous-marin MANTA-6 | Nacre-7 | [DETTE] (`dedicated-hadal-manta-art`) |
+| Scaphandre HADAL, sous-marin MANTA-6 | Chapitre local Abysse Noir ; arc Nacre-7 proposé | Tenue HADAL modulaire et coque statique MANTA-6 [PRÉSENT] (V188, 17 novembre 2026) ; cycle de nage et animations supplémentaires [DETTE] (`dedicated-hadal-manta-art`) |
 | USS Tantalus, vue extérieure | Cinématiques, carte galactique | [À CRÉER] (aucun fichier trouvé ; `tantalus-command-skiff` est une navette) |
 | Station Asphodèle, vue extérieure et anneau | Cinématiques, hub | [À CRÉER] |
 | Vaisseau de Grue (Crucible) | Asphodèle, Tyndare | [À CRÉER] |
@@ -3245,7 +3298,7 @@ Pour chaque élément à créer, un **lot de génération** type est indiqué :
 | Tenue de colon d'Hadley's Hope (archive 004) | Akintola, colons | [À CRÉER] (adaptation originale, pas une copie) |
 | Tenue d'expédition W-Y | Viret, Rask | Base `weyland-yutani-commando` [PRÉSENT] ; variantes [À CRÉER] |
 | Tenue de récupérateur Crucible | Grue, récupérateurs | [À CRÉER] |
-| Scaphandre HADAL | Nacre-7 | [DETTE] |
+| Scaphandre HADAL | Nacre-7 | Art modulaire [PRÉSENT] dans le chapitre local Abysse Noir ; arc Nacre-7 proposé distinct |
 
 ### 38.8 Props — manques par famille
 
@@ -4908,9 +4961,86 @@ Décision du propriétaire : certaines salles passent en **profondeur** (2,5D, d
 
 ### 56.13 Manques de contenu (V188, 2026-11-15)
 
-Audit bible contre code : [`AUDIT_CONTENU_V188.md`](../development/AUDIT_CONTENU_V188.md) (66 lignes au commit `250d81a` : 14 faites, 18 partielles, 32 manquantes, 2 bloquées par l'art). Comblés en partie dans ce lot, sans être terminés : front station Asphodèle S1-S4 et choix CASSIUS (§7.5), quatre quêtes de l'équipage (§8.4), temps de voyage (§13.6). Feature : `specs/005-front-asphodele-quetes/`. Tests : `scripts/verify-content-gaps-v188.mjs` ; contrôle Chromium sur fixture importée (déclaré dans la spec). Aucun de ces éléments n'a son art final.
+Audit bible contre code : [`AUDIT_CONTENU_V188.md`](../development/AUDIT_CONTENU_V188.md) (66 lignes au commit `250d81a` : 14 faites, 18 partielles, 32 manquantes, 2 bloquées par l'art). Comblés en partie dans ce lot, sans être terminés : front station Asphodèle S1-S4 et choix CASSIUS (§7.5), quatre quêtes de l'équipage (§8.4), temps de voyage (§13.6). Feature : `specs/005-front-asphodele-quetes/`. Tests : `scripts/verify-content-gaps-v188.mjs` ; contrôle Chromium sur fixture importée (déclaré dans la spec). À la fin de cette phase, aucun de ces éléments n'avait son art final. La continuation du 16 novembre 2026 ajoute les six illustrations de scène de §7.8 ; les décors, acteurs et animations jouables restent à produire.
 
 Suite (spec 007, `specs/007-hub-asphodele/`) : hub Asphodèle atteignable (8 modules sur 12 de §42.2), 7 missions annexes, 6 contrats dont *Relais en dérive*, prédicat de *Transmettre*, CIN-70 à CIN-72, plaque de Kessler au casier d'Echo-8 (§7.6, §42.4). Tests : `scripts/verify-asphodele-hub-v188.mjs` ; QA Chromium au clavier `scripts/qa-asphodele-hub-v188.mjs` (fixtures déclarées). Rien n'est déclaré terminé.
 ### 56.14 Acte V, fins et épilogue (V188, 2026-11-15)
 
 Manque n° 3 de l'audit comblé en partie : conseil de guerre, choix final, missions finales, face-à-face, trois fins, épilogue au Tantalus, générique et partie libre (§5.11). Feature : `specs/006-acte-v-fins/`. Tests : `scripts/verify-act5-endings-v188.mjs` (dans `test:priorities:v188`) ; contrôle Chromium de la fin « Les vivants, sans preuve » sur fixture importée (FR et EN), avec deux injections déclarées (checkpoint, fin de mission). Statut : **Partiel** — la course APC dédiée, la Reine dédiée et l'art restent à faire ; rien n'est déclaré terminé.
+
+### 56.15 Matriarche de Soute et coque MANTA-6 (V188, 2026-11-17)
+
+La continuation d'art produit quatre planches dédiées de la Matriarche de Soute : attente, marche, griffes/queue, rugissement/réaction, chacune de quatre poses. Le combat Cargo conserve les mêmes clips, événements, gabarit physique, phases, checkpoints et reprises. Les impacts visuels sont raccordés aux marqueurs natifs : griffes en frame 9, queue en frame 11. Seul l'acteur de cette rencontre prend la nouvelle identité ; les Reines du reste du jeu et le repli restent inchangés. Le statut local de Cargo redevient effectif dans le registre courant, avec `canonExact:false`.
+
+Le chapitre existant Abysse Noir reçoit une coque MANTA-6 originale, bleu pétrole usé, en profil latéral. Elle remplace le rectangle provisoire sans changer la boîte 180 × 86, l'accès, la visée ou le tir. C'est une coque statique : les poses HADAL, la nage dédiée, le bestiaire aquatique, les animations de trappe/propulsion/dégâts et l'arc Nacre-7 proposé ne sont pas produits par cette livraison. La dette combinée `dedicated-hadal-manta-art` reste donc ouverte.
+
+Les cinq PNG sont reliés à leurs prompts, empreintes et consommateurs dans [`CARGO_ABYSS_ART_PROVENANCE_20261117.json`](../development/CARGO_ABYSS_ART_PROVENANCE_20261117.json). La [planche de contrôle](../development/CARGO_ABYSS_ART_OVERVIEW_20261117.png) et le [rapport de revue](../development/CARGO_ABYSS_ART_QA_20261117.md) documentent les 16 poses et leurs limites. Il s'agit de designs originaux du projet à partir de ses références ; aucun modèle individuel de Matriarche ou de MANTA n'était fixé plus précisément dans la bible, et aucune certification canonique globale n'est ajoutée.
+
+### 56.16 Scaphandre HADAL modulaire et posture immergée (V188, 2026-11-17)
+
+Le chapitre local Abysse Noir reçoit trois PNG dédiés au scaphandre : trois torses, huit pièces de bras et gants, un bassin, six pièces de jambes et bottes, et un casque fermé avec joint cervical. Les 19 pièces disponibles se composent sur le rig humain existant ; une pose courante en emploie 15. Les matières reprennent l'équipement pressurisé du projet : tissu anthracite, plaques olive usées, raccords en laiton terne et visière opaque. Les pixels des trois sources sont conservés. Il s'agit d'un design original de Tantalus, sans modèle canonique individuel de HADAL fixé dans la bible.
+
+Le raccord s'applique au véritable joueur admissible dans Abysse Noir, hors MANTA, sans modifier sa sélection persistante. Les trois sources basculent ensemble ; si l'une manque, les pièces natives sont conservées ensemble. La posture commune relie thorax, cou, bassin, bras et arme à la sonde d'oxygène existante, avec semelles et solveurs natifs. Le casque reste attaché au col ; il n'est pas déplacé seul. Cette posture vaut aussi pendant le repli. Le point de tir des anciennes poses aériennes peut donc changer, mais le projectile accepté, les mains et l'arme dessinée partagent le même point, indépendamment du chargement des images. Le gabarit physique de 42 × 92, les modes, les vitesses, la pression et les règles d'oxygène restent inchangés.
+
+L'ancienne bande cyan de visière et le cadre provisoire sont omis seulement si le kit a effectivement été dessiné pendant la passe courante ; un reçu ancien ne suffit pas. Les autres acteurs, les tenues incompatibles, le neuro et les transits à contacts imposés gardent leurs exclusions ou contraintes natives. Les sources sont gérées par le cache d'apparence existant, sans ajouter de boucle d'animation ni de costume sauvegardé.
+
+Un défaut de service révélé pendant cette intégration est corrigé : le déplacement Legacy court-circuitait l'avance des manipulations admises. Un appel à leur propriétaire natif permet maintenant au soin de se terminer en 2,2 secondes actives, avec un seul kit et 48 points de santé plafonnés. Pause, impacts, annulation et restauration conservent leurs règles. Aucune nouvelle règle d'annulation par intention clavier n'est ajoutée à Legacy.
+
+Les poses de support, suspension, montée, descente, visée, tir, recharge et service utilisent les animations natives. Aucun nouveau cycle de battement de nage, animation de trappe/propulsion du MANTA, bestiaire aquatique ou chapitre de l'arc Nacre-7 n'est livré par ce raccord. La dette combinée `dedicated-hadal-manta-art` reste ouverte, le registre reste à 19 chapitres partiels et deux effectifs, et `canonExact` reste faux. Les preuves et leurs limites sont dans [`HADAL_ART_QA_20261117.md`](../development/HADAL_ART_QA_20261117.md), la [planche intégrée](../development/HADAL_ART_OVERVIEW_20261117.png) et la [provenance](../development/HADAL_ART_PROVENANCE_20261117.json).
+
+
+### 56.17 Reine ailée de Broodstorm (V188, 2026-11-17)
+
+Le chapitre local Broodstorm reçoit trois planches de quatre poses pour sa Reine ailée : battements de poursuite, vol retenu/réaction et perte de tenue en suspension. Les douze images reprennent la référence 36 du corpus Tantalus (`ref-36-queen-xeno-winged-2.png`) : crête noire métallique, corps biomécanique sombre, membranes orangées et queue articulée. La référence 37, dont l'angle et l'identité diffèrent, n'est pas mélangée à cette série. Les trois PNG conservent leurs pixels de génération. Ce corpus porte sur le design original du projet ; la génération ne certifie pas une identité de franchise « 1:1 ».
+
+Le raccord est réservé au véritable acteur `legacy-queen-0` de Broodstorm, y compris après le passage natif de la phase de combat à l'extraction. Les images se chargent ensemble à l'entrée du chapitre. Une source absente, incomplète ou étrangère conserve le dessin natif entier. Les autres Reines, la Matriarche Cargo, les acteurs détachés et les autres missions restent exclus. Les battements et réactions ne modifient ni la boîte physique de 336 × 268,28125, ni la vitesse, les contacts, les dégâts, les ressources, les portes ou les sauvegardes.
+
+Les hanches sont recalées à partir de repères anatomiques documentés. Une échelle uniforme par famille compense la différence de taille des dessins source ; les ailes ne déterminent jamais la taille du corps. La variation volontaire de posture pendant la mort reste visible. Les ailes et la queue prolongent les seules bornes de visibilité. La barre de santé conserve ses valeurs et son style ; son nouveau plafond fixe dégage les membranes sans suivre chaque battement.
+
+Le contrôleur existant conserve les clips et leurs cadences : poursuite à 10 images par seconde, repos/réaction à 4 et mort à 7, avec la dernière pose maintenue jusqu'à la disparition native du corps. La réaction ordinaire de 0,24 seconde montre généralement la première pose du clip de repos ; disposer de quatre images ne signifie pas que chaque impact les joue toutes. Aucun nouvel événement d'attaque n'est associé aux images. Aucun atterrissage, chute physique ou nouveau comportement de boss n'est introduit.
+
+La dette locale `dedicated-flying-queen-art` est close. Broodstorm reste partiel : `complete-modular-dropship-corpus` demeure ouvert. L'aire d'Echo Basin, la rencontre 2.4, la cinématique CQ-03, l'atterrissage et les actes ultérieurs restent distincts de ce chapitre existant. Le registre conserve 21 opérations jouables, 19 partielles et deux effectives ; aucune autre dette ni valeur `canonExact` n'est promue. Les snapshots historiques restent inchangés.
+
+Les [mesures et la provenance](../development/BROODSTORM_QUEEN_ART_PROVENANCE_20261117.json), la [planche du rendu intégré](../development/BROODSTORM_QUEEN_ART_OVERVIEW_20261117.png) et le [rapport de vérification](../development/BROODSTORM_QUEEN_ART_QA_20261117.md) distinguent les dessins générés, les observations natives, les fixtures et les limites de validation.
+
+### 56.18 Reine-Mère adulte rouge (V188, 2026-11-17)
+
+Le chapitre existant « Le chant de la Reine-Mère » reçoit trois PNG dédiés : quatre corps de repos/anticipation, quatre corps d'émission/réaction/effondrement et quatre bras séparés. Une pose assemble un corps et ses quatre bras ; les douze pièces dessinées ne sont donc pas douze frames d'animation. Les deux grands bras et les deux petits gardent leurs propres attaches. Les membres lointains passent derrière le corps, les proches devant, puis l'ensemble est inversé pour l'autre direction.
+
+L'identité vient du dossier `yhw:XEN-032` du corpus du projet et des photographies officielles de la Red Queen Mother de *Genocide* présentée par NECA : rouge cramoisi, crête allongée, cou côtelé, quatre bras, appendices ivoire et queue segmentée. Les vues en perspective d'une figurine ne définissent pas toutes les poses d'un adulte vivant en profil latéral. Le résultat est une adaptation documentée de cette référence ; `visual1to1:false` et `canonExact:false` restent inchangés. L'œuf Reine-Mère historique n'est pas utilisé comme anatomie adulte, et cette identité n'est pas assimilée à une Empress.
+
+Le raccord concerne uniquement l'objet boss courant de cette opération. Les Chœurs, les gardes et les deux autres écosystèmes qui réemploient son identifiant conservent leur présentation. Les trois sources se chargent à l'entrée ou après une reprise réussie et sont admises ensemble ; une source manquante, incorrecte ou étrangère conserve le corps vectoriel entier. Le rendu ne charge pas les images et ne fait avancer aucune horloge.
+
+Le moteur garde son corps physique de 170 × 210, ses 600 points de santé, sa protection par les trois Chœurs, ses quatre phases et ses vraies salves. La pose d'émission suit l'ajout effectif d'un projectile de l'acteur ; une transition de phase seule ne la déclenche pas. Son marqueur privé expire dans la mise à jour native, même sans dessin. Il n'est pas sauvegardé et ne se rejoue pas après un tour d'horloge ou une reprise réussie. L'origine physique du tir reste celle du combat existant ; elle n'est pas déplacée vers la bouche dessinée.
+
+Une même échelle anatomique lie les huit corps aux quatre membres. Les appuis des poses repliées sont recalés au sol sans redimensionner l'acteur. Le nom, la barre de santé et l'avertissement jaune d'anticipation restent dans le passage natif, au-dessus de la composition. La mort lit la durée native de 1,2 seconde et conserve l'alpha 0,3. Seules les bornes de visibilité tiennent compte de la crête, de la queue et des bras ; les collisions restent inchangées.
+
+La dette locale `dedicated-queen-mother-animation` est close par ce raccord. Le chapitre reste partiel : `complete-royal-cast` demeure ouvert, comme les lieux, cinématiques et rencontres proposés pour l'arc étendu de TR-0. Le registre conserve 21 opérations jouables, 19 partielles et deux effectives, avec ses snapshots historiques intacts. Les [sources et prompts](../development/QUEEN_MOTHER_ART_PROVENANCE_20261117.json), la [planche intégrée](../development/QUEEN_MOTHER_ART_OVERVIEW_20261117.png) et la [QA](../development/QUEEN_MOTHER_ART_QA_20261117.md) documentent les itérations rejetées, la composition, les contrôles exécutés et leurs limites.
+
+### 56.19 Gardes du chapitre Reine-Mère (V188, 2026-11-17)
+
+Les six gardes initiaux et les douze renforts possibles du chapitre existant reçoivent une présentation animée issue de l'atlas normalisé `xenomorph-praetorian-action-sheet.png`, déjà présent dans le projet. Le PNG de 1024 × 1024 et ses seize cellules de 256 × 256 sont réemployés intacts. Cette adaptation visuelle du rôle `guard` ne transforme pas les acteurs en une nouvelle caste : leurs descripteurs restent sans caste, sans profil de catalogue importé et sans changement de statut canonique. Les trois Chœurs restent vectoriels. Le registre garde `complete-royal-cast` ouvert et ses 21 opérations jouables, 19 partielles et deux effectives ; aucune dette supplémentaire n'est déclarée close.
+
+Une échelle commune de 70/161 conserve les proportions entre les seize poses. Chaque cellule est dessinée entière, dans les deux directions, avec son ancrage horizontal anatomique et la ligne d'appui source à Y = 240. Le bassin n'est pas immobilisé verticalement : les flexions et l'effondrement restent visibles. Cette calibration manuelle ne mesure pas une taille canonique ; elle ajuste la présentation au corps physique natif de 58 × 70. La santé de 105, la vitesse de 72 et les règles de contact restent celles du garde existant.
+
+Les cellules 0–3 servent au repos, 4–7 au déplacement, 8 à l'anticipation, 9 au contact accepté, 10–11 à sa récupération et 12–15 à la mort. Le déplacement est observé après le retour de toutes les couches natives du moteur, y compris celles qui retiennent l'acteur pendant la grâce d'insertion. Le cycle de marche dépend de la distance effectivement parcourue, à raison de 7,2 pixels par cellule. La vitesse déclarée, l'alerte ou une tentative de déplacement bloquée ne suffisent pas à l'avancer. L'événement de frappe du catalogue praetorian n'est pas importé : l'image de contact suit uniquement le retour positif de la vraie fonction de dommage native. Son marqueur privé dure 0,3 seconde et expire pendant la mise à jour, même hors champ.
+
+Le chargement appartient à l'entrée et à la reprise réussie du chapitre. Une source absente, incomplète ou étrangère conserve le corps vectoriel entier. La disponibilité de cet atlas est indépendante de celle des trois sources de l'adulte. Les anciens objets après reprise, les Chœurs, le boss adulte et les deux autres écosystèmes sont exclus de ce raccord. Les données sauvegardées ne reçoivent ni distance d'animation ni marqueur de contact. Le nom, la barre de santé et l'ellipse jaune d'anticipation restent dessinés par leur propriétaire natif ; les sept pointes de la Reine-Mère ne sont pas appliquées aux gardes.
+
+La mort lit les 1,2 seconde natives et conserve l'alpha 0,3. La dernière cellule est maintenue jusqu'à la disparition du corps. L'atlas ne possède pas de ligne de blessure distincte : les effets natifs restent responsables de ce retour visuel. Le mouvement réduit fixe les cycles ordinaires de repos et de marche sans supprimer l'anticipation, le contact ou la mort. Les bornes visuelles couvrent les cellules complètes et leurs miroirs, sans agrandir les collisions ni la portée d'attaque. Les [références et la provenance](../development/QUEEN_MOTHER_GUARD_ART_PROVENANCE_20261117.json), la [planche du rendu intégré](../development/QUEEN_MOTHER_GUARD_ART_OVERVIEW_20261117.png) et le [rapport de vérification](../development/QUEEN_MOTHER_GUARD_ART_QA_20261117.md) distinguent la calibration statique, les poses de contrôle et les événements réellement exécutés par le moteur.
+
+### 56.20 Chœurs du chapitre Reine-Mère (V188, 2026-11-17)
+
+Les trois cibles nommées CHŒUR 1, CHŒUR 2 et CHŒUR 3 du chapitre existant reçoivent une même présentation originale Tantalus. Une base basse à deux appuis fusionnés soutient une arche costale ouverte, étranglée en son milieu, avec une membrane bordeaux/mauve. Cette forme distingue les cibles de l'œuf, du garde et de la crête de l'adulte. Les références locales ont guidé les matières et le contraste ; elles n'établissent pas une anatomie de Chœur. Aucun nom de caste, lien à Genocide ou identité du Chœur d'Éloïse n'est attribué à cette création.
+
+La planche intacte `assets/queen-mother/v188/choirs-original.png` fournit quatre cellules complètes de 627 × 627 dans un PNG RGBA de 1254 × 1254, soit 920 091 octets. Les quatre fonctions sont présence A, présence B, contraction au coup reçu et neutralisé. Elles emploient une échelle unique de 90/525 et les appuis de la base centrale mesurés par pose. La vue est presque frontale ; le miroir inverse l'asymétrie des lames. Il ne transforme pas cette vue en profil latéral documenté.
+
+Le corps physique demeure 66 × 90, avec 110 points de santé, sans locomotion ni attaque propres au Chœur. Le recul générique produit par les dégâts natifs reste possible et inchangé. Le cycle discret A/B lit l'horloge existante à une cellule par seconde ; le mouvement réduit conserve A. La réaction lit le vrai `hurtClock`, sans marqueur privé, et la mort est prioritaire. La présence B est environ deux pixels plus basse, la réaction mesure 72 pixels et le neutralisé 37,2 pixels à l'échelle commune. Aucun agrandissement par pose ne masque ces proportions. Les franges rougeâtres et la quasi-opacité du corps source, majoritairement à alpha 253, restent conservées.
+
+Les trois objets courants sont admis par leur identité, leur ID, leur rôle et leur indice natifs. L'admission n'est pas limitée à la phase « choirs » : le dernier cadavre reste illustré après le passage à « mother-1 », jusqu'à l'expiration native. Un ancien objet après reprise, une copie détachée, un garde, l'adulte ou une cible homonyme des deux autres écosystèmes ne reçoit pas cette présentation. Le chargement du Chœur reste indépendant de celui de l'adulte et des gardes ; une source indisponible conserve le dessin vectoriel entier.
+
+Les effets de neutralisation restent ceux du chapitre : un seul indice est coché, la pression perd 16 avec plancher à zéro et le jalon existant est produit une fois. Le boss reste protégé tant qu'une cible subsiste ; la composante de pression liée à sa phase demeure après leur disparition. Les trois cibles ne deviennent ni des nurseries, ni des artères, ni des balises. La sauvegarde conserve les états déjà prévus ; une blessure passée n'est pas rejouée à la reprise et un cadavre conserve seulement son temps restant.
+
+Le nom et la barre restent dans leur passage natif. Un éventuel avertissement résiduel conserve l'ellipse target inclinée à +0,18 radian, sans pointes royales ; cet état de compatibilité n'ajoute aucune attaque. Le corps neutralisé garde l'alpha natif 0,3 et la durée de 1,2 seconde, avec sa faible hauteur et les occultations possibles du monde. Les bornes de visibilité sont conservatrices et ne modifient ni collision, ni portée, ni ordre des acteurs.
+
+L'adulte, les gardes et les trois cibles locales disposent ainsi d'un habillage illustré. Cela ne définit pas les « trois castes reliées » de l'arc proposé, ne produit ni les ondes, ni la vibration collective CQ-05, ni les lieux ou rencontres étendus de TR-0. `complete-royal-cast` demeure ouverte, avec 21 opérations jouables, 19 partielles et deux effectives ; aucune déclaration canonique n'est promue. Les [sources et choix de création](../development/QUEEN_MOTHER_CHOIR_ART_PROVENANCE_20261117.json), la [planche intégrée](../development/QUEEN_MOTHER_CHOIR_ART_OVERVIEW_20261117.png) et la [QA](../development/QUEEN_MOTHER_CHOIR_ART_QA_20261117.md) distinguent les prototypes de placement, les événements natifs, les rendus observés et leurs limites.

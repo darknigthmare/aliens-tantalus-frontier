@@ -1,8 +1,13 @@
 import { VEHICLES } from './content-core-v50.js';
 import { buildMissionLevelV52 } from './mission-levels-v52.js';
 import { sweepProjectileAabbV83 } from './projectile-collision-v83.js';
-import { resolveVehicleAnimation } from './sprite-animation-runtime.js';
+import { resolveVehicleAnimation, resolveEnemyAnimation } from './sprite-animation-runtime.js';
+import { getAnimationEntityKeyV57 } from './game-v52-runtime.js';
 import { loadPlayerCostumeAssetsV119 } from './player-costume-skins-v119.js';
+import { preloadMantaArtV188, drawMantaArtV188 } from './manta-art-v188.js';
+import { hadalPlayerArtReadyV188 } from './hadal-player-art-v188.js';
+import { preloadBroodstormQueenArtV188, broodstormQueenArtReadyV188, isBroodstormQueenArtOwnerV188,
+  broodstormQueenVisualBoundsV188, drawBroodstormQueenArtV188 } from './broodstorm-queen-art-v188.js';
 import { LEGACY_CAMPAIGNS_V131, LEGACY_STATIONS_V131, LEGACY_BOUNDS_V131,
   createLegacyOperationStateV131, validateLegacyOperationStateV131, legacyOperationDossierV131 } from './legacy-operation-state-v131.js';
 export { LEGACY_CAMPAIGNS_V131 } from './legacy-operation-state-v131.js';
@@ -91,6 +96,8 @@ export function withLegacyMissionsV131(BaseEngine) {
       super.start({ ...options, resumeState: undefined, vehicle, crew: [], squad: [], neuroProfile: null,
         apexDossier: null, userCasteCampaignV88: false, verticalWorldV130: false, destructibleSceneryV130: false });
       this.configureLegacyWorldV131(); this.syncLegacyWorldV131();
+      if (campaign.kind === 'abyss') preloadMantaArtV188(this.images);
+      if (campaign.kind === 'broodstorm') preloadBroodstormQueenArtV188(this.images);
       if (options.resumeState) this.lastResumeResult = this.applyResumeState(options.resumeState);
       this.legacyCheckpointV131 ||= this.captureLegacyCheckpointV131();
       this.onEvent({ type: 'special-operation-started', campaignId: campaign.id, operationId: campaign.specialOperationId, localPlayers: 1, status: 'partial' });
@@ -178,7 +185,7 @@ export function withLegacyMissionsV131(BaseEngine) {
       Object.assign(actor, { id: `legacy-${role}-${index}`, legacyIdV131: `${role}-${index}`, legacyRoleV131: role,
         health: role === 'hunt' ? 160 : role === 'fighter' ? 75 : 420, maxHealth: role === 'hunt' ? 160 : role === 'fighter' ? 75 : 420,
         attackClock: 1.5, alert: true, attackWindupClock: 0 });
-      if (role === 'queen') { actor.name = 'FlyingQueen · Queen adaptée'; actor.visualApproximation = true; actor.visualFallbackReason = 'Gameplay aérien adapté ; planche FlyingQueen dédiée absente.'; }
+      if (role === 'queen') { actor.name = 'Reine ailée · Broodstorm'; actor.visualApproximation = true; actor.visualFallbackReason = 'Identité illustrée propre à Broodstorm ; comportement aérien adapté de Queen.'; }
       if (role === 'predator') { actor.name = 'Briseur hydrothermal · Ceto adapté'; actor.visualApproximation = true; actor.visualFallbackReason = 'Boss de chapitre adapté du prédateur Ceto existant.'; }
       this.enemies.push(actor); return actor;
     }
@@ -280,6 +287,7 @@ export function withLegacyMissionsV131(BaseEngine) {
       actor.grounded = !state.aboard && this.platforms.some(platform => Math.abs(actor.y + actor.h - platform.y) < 1);
       actor.climbing = false; if (state.aboard) this.pinLegacyDriverV131();
       if (this.keys.has('KeyF') || this.keys.has('TouchFire')) this.fire(actor);
+      this.advanceFieldActionV124?.(actor, delta);
     }
     updateVehicleDriver(actor, delta, controls) { if (!this.isLegacyMissionV131()) return super.updateVehicleDriver(actor, delta, controls); }
     updateEnemy(enemy, delta) {
@@ -528,16 +536,51 @@ export function withLegacyMissionsV131(BaseEngine) {
     }
     getSnapshot() { return { ...super.getSnapshot(), ...(this.isLegacyMissionV131() ? { legacyMissionV131: { ...clone(this.legacyMissionV131), dossier: this.getLegacyMissionDossierV131() } } : {}) }; }
     getGameplayReport() { return { ...super.getGameplayReport(), ...(this.isLegacyMissionV131() ? { legacyMissionV131: this.getSnapshot().legacyMissionV131 } : {}) }; }
+    getVisibleEnemiesV65() {
+      const visible = super.getVisibleEnemiesV65();
+      if (this.legacyMissionV131?.kind !== 'broodstorm' || !this.camera || !broodstormQueenArtReadyV188(this.images)) return visible;
+      const admitted = new Set(visible);
+      for (const enemy of this.enemies) {
+        if (admitted.has(enemy) || !isBroodstormQueenArtOwnerV188(this,enemy) || enemy.dormant
+          || (!enemy.alive && !(enemy.deathClock > 0))) continue;
+        const bounds = broodstormQueenVisualBoundsV188(enemy);
+        // Same logical viewport and 64px overscan as V51. Only this actor's
+        // extra wings/cell edges enlarge visual admission; its body is intact.
+        if (bounds && bounds.x + bounds.w >= this.camera.x - 64 && bounds.x <= this.camera.x + 1280 + 64
+          && bounds.y + bounds.h >= this.camera.y - 64 && bounds.y <= this.camera.y + 720 + 64) admitted.add(enemy);
+      }
+      return this.enemies.filter(enemy => admitted.has(enemy));
+    }
+    drawEnemy(ctx, enemy) {
+      if (isBroodstormQueenArtOwnerV188(this,enemy) && broodstormQueenArtReadyV188(this.images)) {
+        const sample = this.spriteAnimation?.sample(getAnimationEntityKeyV57('enemy',enemy,'hostile'),
+          resolveEnemyAnimation(enemy),this.animationTime, {
+            emit:false,reducedMotion:Boolean(this.accessibilityRuntime?.reducedMotion),physicalActor:enemy,
+            physicalContext:this.bioforgeLevelV80 ? 'bioforge' : 'mission',
+            movementEnabled:!this.paused && !this.enemyAtlasLoadingPausedV65 && !this.userCasteLoadingV88
+              && (this.bioforgeLevelV80 ? ['printing','combat'].includes(this.bioforgeRootV80?.activeSession?.phase) : this.mission?.state === 'active')
+          });
+        if (drawBroodstormQueenArtV188(ctx,this.images,enemy,sample)) return;
+      }
+      return super.drawEnemy(ctx,enemy);
+    }
     drawVehicle(ctx) {
       if (!this.isLegacyMissionV131() || this.legacyMissionV131.kind !== 'abyss') return super.drawVehicle(ctx);
       const body = this.vehicle; if (!body.active) return;
+      if (drawMantaArtV188(ctx, this.images, body)) return;
       ctx.save(); ctx.fillStyle = '#236579'; ctx.fillRect(body.x, body.y, body.w, body.h); ctx.strokeStyle = '#92cbd9'; ctx.lineWidth = 3;
       ctx.strokeRect(body.x, body.y, body.w, body.h); ctx.fillStyle = '#b4e3dd'; ctx.fillRect(body.x + 28, body.y + 16, 72, 32);
       ctx.font = '11px monospace'; ctx.fillText('MANTA · PROTOTYPE', body.x, body.y - 12); ctx.restore();
     }
     drawActor(ctx, actor) {
+      const previousAppearance = actor?.playerAppearanceVisualV126;
       super.drawActor(ctx, actor);
       if (this.legacyMissionV131?.kind !== 'abyss' || actor !== this.player || actor.inVehicle || !actor.alive) return;
+      const appearance = actor.playerAppearanceVisualV126;
+      // Only a completed suit in THIS draw replaces the old pressure proxy.
+      // A stale receipt at the same animation time, or one lost PNG, cannot
+      // hide the native fallback overlay.
+      if (appearance !== previousAppearance && appearance?.hadal?.drawn && hadalPlayerArtReadyV188(this.images)) return;
       ctx.save(); ctx.strokeStyle = actor.magneticAttachedV131 ? '#efd18a' : '#a0e5e5'; ctx.lineWidth = 2;
       ctx.strokeRect(actor.x - 4, actor.y + 6, actor.w + 8, actor.h - 8);
       ctx.fillStyle = '#9edbdacc'; ctx.fillRect(actor.x + 3, actor.y + 14, actor.w - 6, 12); ctx.restore();

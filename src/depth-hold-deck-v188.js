@@ -6,9 +6,9 @@
 // truss of the hold floor only, right after that platform, so hazards, objects,
 // actors and their contact shadows land on it.
 //
-// Image generation is deferred: the deck is a named art slot whose PLACEHOLDER
-// is drawn with Canvas primitives (plating, a grating lane along the wall,
-// perspective seams converging above the hold, a front lip). When an image is
+// The deck texture is projected into the existing band; grating, seams, lip
+// and contact shading remain live Canvas geometry. The primitive plating is
+// retained as a fallback. When an image is
 // produced, commit it at the slot path AND list the slot id in
 // DEPTH_HOLD_DECK_FILES_PRESENT_V188: only listed slots are requested.
 // No marking on the deck is player text.
@@ -16,14 +16,16 @@
 export const DEPTH_HOLD_DECK_SLOT_V188 = Object.freeze({
   id: 'hold-deck-plating', layer: 'floor', path: '/assets/depth-holds/v188/hold-deck-plating.png',
   purpose: 'Hold floor seen at the depth band: steel plating, a grating lane along the back wall, tie-down seams, front lip.',
-  brief: 'Worn steel cargo-deck plating seen from a low three-quarter side angle, diamond tread, a strip of open grating along the far wall, tie-down tracks; tileable horizontally; no text.'
+  brief: 'Opaque worn dark steel cargo-deck texture seen orthographically from above, subtle diamond tread, no objects, text, horizon or baked perspective; tileable on both axes. The renderer supplies the grating lane, perspective, front lip and contact shading.'
 });
-export const DEPTH_HOLD_DECK_FILES_PRESENT_V188 = Object.freeze([]);
+export const DEPTH_HOLD_DECK_FILES_PRESENT_V188 = Object.freeze(['hold-deck-plating']);
 /** Height of the front lip under the deck band, and of the soft shadow below it. */
 export const DEPTH_HOLD_DECK_LIP_V188 = 8;
 export const DEPTH_HOLD_DECK_SHADOW_V188 = 22;
 /** The vanishing height of the perspective seams, above the floor line (px). */
 export const DEPTH_HOLD_DECK_VANISH_V188 = 520;
+/** Texture repeat in world pixels at the front edge, independent of hold length. */
+export const DEPTH_HOLD_DECK_TILE_V188 = 192;
 
 /** Screen geometry of a section's deck. */
 export function depthHoldDeckGeometryV188(section) {
@@ -50,12 +52,12 @@ export function isHoldFloorPlatformV188(section, platform) {
     && platform.x < section.x1 && platform.x + platform.w > section.x0);
 }
 
-const images = new Map(), rendered = new Map();
+const images = new WeakMap(), rendered = new Map(), textured = new WeakMap();
 function slotImage(present, ImageCtor) {
   if (!present.includes(DEPTH_HOLD_DECK_SLOT_V188.id) || !ImageCtor) return null;
-  let image = images.get(DEPTH_HOLD_DECK_SLOT_V188.id);
-  if (!image) { image = new ImageCtor(); image.src = DEPTH_HOLD_DECK_SLOT_V188.path; images.set(DEPTH_HOLD_DECK_SLOT_V188.id, image); }
-  return image.complete && image.naturalWidth > 0 ? image : null;
+  let image = images.get(ImageCtor);
+  if (!image) { image = new ImageCtor(); image.src = DEPTH_HOLD_DECK_SLOT_V188.path; images.set(ImageCtor, image); }
+  return image.complete && image.naturalWidth > 0 && image.naturalHeight > 0 ? image : null;
 }
 
 /**
@@ -70,38 +72,36 @@ export function drawDepthHoldDeckV188(ctx, section, { clipX0 = section.x0, clipX
   ctx.save();
   try {
     const image = slotImage(present, ImageCtor);
-    if (image) {
-      const sx = (a - g.x0) / (g.x1 - g.x0) * image.naturalWidth, sw = (b - a) / (g.x1 - g.x0) * image.naturalWidth;
-      ctx.drawImage(image, sx, 0, sw, image.naturalHeight, a, g.top, b - a, g.depth + g.lip);
-      return 'image';
-    }
-    const cached = deckCanvas(section, g, height);
-    if (cached) { ctx.drawImage(cached, a - g.x0, 0, b - a, height, a, g.top, b - a, height); return 'cached'; }
+    const cached = deckCanvas(section, g, height, image);
+    if (cached) { ctx.drawImage(cached, a - g.x0, 0, b - a, height, a, g.top, b - a, height); return image ? 'image' : 'cached'; }
     ctx.beginPath(); ctx.rect(a, g.top - 1, b - a, height + 1); ctx.clip();
-    paintDeckV188(ctx, g, 0, 0);
-    return 'primitive';
+    return paintDeckV188(ctx, g, 0, 0, image) ? 'image' : 'primitive';
   } finally { ctx.restore(); }
 }
 
-function deckCanvas(section, g, height) {
+function deckCanvas(section, g, height, image = null) {
   const key = `${section.id}|${g.x0}|${g.x1}|${g.top}|${g.depth}`;
-  if (rendered.has(key)) return rendered.get(key);
+  let cache = rendered;
+  if (image) { cache = textured.get(image); if (!cache) { cache = new Map(); textured.set(image, cache); } }
+  if (cache.has(key)) return cache.get(key);
   const canvas = globalThis.document?.createElement?.('canvas'), c = canvas?.getContext?.('2d');
   if (!c) return null; // no offscreen canvas (Node host): drawn directly
   canvas.width = Math.ceil(g.x1 - g.x0); canvas.height = Math.ceil(height);
-  paintDeckV188(c, g, g.x0, g.top);
-  if (rendered.size > 8) rendered.clear();
-  rendered.set(key, canvas); return canvas;
+  const usedImage = paintDeckV188(c, g, g.x0, g.top, image);
+  if (image && !usedImage) return null;
+  if (cache.size > 8) cache.clear();
+  cache.set(key, canvas); return canvas;
 }
 
 /** The primitive placeholder, painted with (ox, oy) as the canvas origin of (x0, top). */
-export function paintDeckV188(ctx, g, ox = 0, oy = 0) {
+export function paintDeckV188(ctx, g, ox = 0, oy = 0, image = null) {
   const X = x => x - ox, Y = y => y - oy, w = g.x1 - g.x0;
   const top = Y(g.top), front = Y(g.front);
   // Plating: lit towards the camera, darker under the wall.
   const plate = ctx.createLinearGradient?.(0, top, 0, front);
   if (plate) { plate.addColorStop(0, '#171d1f'); plate.addColorStop(1, '#2c3437'); ctx.fillStyle = plate; } else ctx.fillStyle = '#232a2d';
   ctx.fillRect(X(g.x0), top, w, g.depth);
+  const usedImage = image ? paintDeckTextureV188(ctx, g, image, ox, oy) : false;
   // Grating lane along the wall (the rail walk, z 0 … -14): open slots over a dark sump.
   const lane = Math.min(14, g.depth / 4);
   ctx.fillStyle = '#0c1012'; ctx.fillRect(X(g.x0), top, w, lane);
@@ -132,6 +132,25 @@ export function paintDeckV188(ctx, g, ox = 0, oy = 0) {
   ctx.fillStyle = '#c9a54a'; for (let x = g.x0 + 10; x < g.x1 - 10; x += 40) ctx.fillRect(X(x), front + 3, 18, 2); // edge marking
   const fall = ctx.createLinearGradient?.(0, front + g.lip, 0, front + g.lip + g.shadow);
   if (fall) { fall.addColorStop(0, 'rgba(0,0,0,.55)'); fall.addColorStop(1, 'rgba(0,0,0,0)'); ctx.fillStyle = fall; ctx.fillRect(X(g.x0), front + g.lip, w, g.shadow); }
+  return usedImage;
+}
+
+/** Project a repeated top-down texture towards the same vanishing point as the
+ * live seams. One-pixel rows are prepared once in the section's cached deck;
+ * clipped platform fragments therefore share one phase and one perspective. */
+function paintDeckTextureV188(ctx, g, image, ox, oy) {
+  const pattern = ctx.createPattern?.(image, 'repeat');
+  if (!pattern) return false;
+  const texel = DEPTH_HOLD_DECK_TILE_V188 / image.naturalWidth, width = g.x1 - g.x0;
+  ctx.save(); ctx.globalAlpha *= .78; ctx.fillStyle = pattern;
+  for (let row = 0; row < g.depth; row++) {
+    const height = Math.min(1, g.depth - row), y = g.top + row, k = (y + height / 2 - g.vanishY) / (g.front - g.vanishY), scale = texel * k;
+    const originX = g.vanishX + (g.x0 - g.vanishX) * k;
+    ctx.save(); ctx.translate(originX - ox, g.front - oy); ctx.scale(scale, -scale);
+    ctx.fillRect((g.x0 - originX) / scale, (g.front - y - height) / scale, width / scale, height / scale);
+    ctx.restore();
+  }
+  ctx.restore(); return true;
 }
 
 /** Soft contact shadow covering a floor object's footprint depth (z0 … z1, clamped to the deck). */

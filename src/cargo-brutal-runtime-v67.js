@@ -5,6 +5,9 @@ import {
   CARGO_BRUTAL_VISUAL_REGISTRY_V67,
   resolveCargoBrutalSurvivorFrameV67
 } from './cargo-brutal-visuals-v67.js';
+import { cargoMatriarchArtReadyV188, drawCargoMatriarchArtV188, preloadCargoMatriarchArtV188 } from './cargo-matriarch-art-v188.js';
+import { resolveEnemyAnimation } from './sprite-animation-runtime.js';
+import { getAnimationEntityKeyV57 } from './game-v52-runtime.js';
 
 const WORLD_WIDTH = 6200;
 const DEFAULT_MAIN_DECK_Y = 470;
@@ -367,6 +370,7 @@ export function withCargoBrutalRuntimeV67(BaseEngine) {
       const snapshot = super.start(options);
       if (!this.isCargoBrutalV67()) return snapshot;
       this.loadCargoBrutalVisualsV67();
+      preloadCargoMatriarchArtV188(this.images);
       this.configureCargoBrutalWorldV67({
         restored: Boolean(this.lastResumeResult?.applied || this.pendingCargoBrutalResumeV67),
         loaderPose
@@ -1151,6 +1155,21 @@ export function withCargoBrutalRuntimeV67(BaseEngine) {
 
     drawEnemy(ctx, enemy) {
       if (this.isCargoBrutalV67() && enemy === this.cargoMatriarchV67 && !this.cargoBrutalV67?.matriarch.active) return;
+      // Only this encounter owns the dedicated identity. Other queens and the
+      // scale normalizer's detached measurement bodies keep their native art;
+      // image readiness must never determine the encounter's collision body.
+      // Wait for the body's native measurement as well: the four new images
+      // can arrive before the historical bitmap used to establish that body.
+      if (this.isCargoBrutalV67() && enemy === this.cargoMatriarchV67 && enemy.creatureScaleV188 && cargoMatriarchArtReadyV188(this.images)) {
+        const request = resolveEnemyAnimation(enemy);
+        const sample = this.spriteAnimation?.sample(getAnimationEntityKeyV57('enemy', enemy, 'hostile'), request, this.animationTime, {
+          emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion), physicalActor: enemy,
+          physicalContext: this.bioforgeLevelV80 ? 'bioforge' : 'mission',
+          movementEnabled: !this.paused && !this.enemyAtlasLoadingPausedV65 && !this.userCasteLoadingV88
+            && (this.bioforgeLevelV80 ? ['printing', 'combat'].includes(this.bioforgeRootV80?.activeSession?.phase) : this.mission?.state === 'active')
+        });
+        if (drawCargoMatriarchArtV188(ctx, this.images, enemy, sample)) return;
+      }
       return super.drawEnemy(ctx, enemy);
     }
 

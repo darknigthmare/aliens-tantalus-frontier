@@ -16,9 +16,10 @@
 // Documented look, cited only: the corridors of Sevastopol in Alien: Isolation
 // (2014) — riveted plating, yellow-black bands, CRT boxes — and the operations
 // room of Hadley's Hope in Aliens (1986) for the monitor banks. Adaptation:
-// Asphodèle is a Seegson QZ relay station (project creation). To define: final art
-// behind the `asph-msn-*` slots. No claim of 1:1 fidelity; placeholders in Canvas
-// primitives, no generated image. Sizes [PROPOSÉ].
+// Asphodèle is a Seegson QZ relay station (project creation). The `asph-msn-*`
+// images replace static surfaces only; bilingual text, CRT lines, needles and
+// indicator lamps remain native. Canvas primitives are the loading/error
+// fallback. Native sizes [PROPOSÉ]; no franchise 1:1 certification.
 import { isAsphodeleCampaignV188, asphodeleContractKeyV188 } from './asphodele-missions-v188.js';
 import { AsphodeleHubAssetLoaderV188 } from './asphodele-hub-slots-v188.js';
 
@@ -142,11 +143,11 @@ export function withAsphodeleMissionDressingV188(Base) {
           for (const band of dressing.bands) if (band.x + band.w >= left && band.x <= right) drawAsphodeleHazardBandV188(ctx, band);
           for (const entry of dressing.props) {
             if (entry.x + entry.w < left || entry.x > right) continue;
-            loader.draw(ctx, `asph-msn-${entry.kind}`, entry.x, entry.y, entry.w, entry.h, () => drawAsphodeleMissionPropV188(ctx, entry, { sector: dressing.sector, english, time }));
+            drawAsphodeleMissionSlotV188(ctx, loader, entry, { sector: dressing.sector, english, time });
           }
           const feature = dressing.feature;
           if (feature && feature.x + feature.w >= left && feature.x <= right)
-            loader.draw(ctx, `asph-msn-${feature.kind}`, feature.x, feature.y, feature.w, feature.h, () => drawAsphodeleMissionFeatureV188(ctx, feature, { english, time }));
+            drawAsphodeleMissionSlotV188(ctx, loader, feature, { english, time });
         } finally { ctx.restore(); }
       }
       return super.drawWorld(ctx);
@@ -155,38 +156,121 @@ export function withAsphodeleMissionDressingV188(Base) {
 }
 export const ASPHODELE_MISSION_SLOT_IDS_V188 = Object.freeze(['asph-msn-panel', 'asph-msn-crt', 'asph-msn-sign', 'asph-msn-conduit',
   'asph-msn-blackbox', 'asph-msn-resin', 'asph-msn-salvage', 'asph-msn-gauge', 'asph-msn-camera']);
+// Source windows are declared only after the corresponding byte-original PNG
+// has been inspected. They remove transparent master-canvas margins at draw time.
+export const ASPHODELE_MISSION_IMAGE_SOURCE_RECTS_V188 = Object.freeze({
+  'asph-msn-panel': Object.freeze([16, 24, 1309, 1131]),
+  'asph-msn-crt': Object.freeze([0, 6, 1396, 1115]),
+  'asph-msn-sign': Object.freeze([20, 193, 2132, 335]),
+  'asph-msn-conduit': Object.freeze([8, 359, 1991, 66]),
+  'asph-msn-blackbox': Object.freeze([12, 12, 1510, 999]),
+  'asph-msn-resin': Object.freeze([22, 12, 1495, 1002]),
+  'asph-msn-salvage': Object.freeze([29, 30, 1479, 967]),
+  'asph-msn-gauge': Object.freeze([27, 11, 1482, 1001]),
+  'asph-msn-camera': Object.freeze([32, 24, 1472, 978])
+});
+// Measured pivots in the byte-original image. Only the image path projects these
+// through its source window; the fallback retains its original native pivots.
+const IMAGE_GAUGE_PIVOTS_V188 = Object.freeze([[324, 485], [768, 485], [1212, 485]].map(Object.freeze));
+const WALL_PROP_KINDS = new Set(['panel', 'crt', 'sign', 'conduit']);
+const FEATURE_TEXT = Object.freeze({
+  blackbox: ['ENREGISTREURS QZ', 'QZ RECORDERS', '#e2b53a'],
+  resin: ['ACCÈS RESTREINT · BIO', 'RESTRICTED · BIO', '#e15b4f'],
+  salvage: ['CRUCIBLE · RÉCUPÉRATION', 'CRUCIBLE · SALVAGE', '#e0873a'],
+  gauge: ['PRESSION · SECTEUR', 'PRESSURE · SECTOR', '#8fb3a8'],
+  camera: ['CASSIUS · SURVEILLANCE', 'CASSIUS · SURVEILLANCE', '#7dff9a']
+});
+
+/** The image and its native labels/indicators share the layout's hard bounds.
+ * A shortened conduit keeps its 6 m scale and is clipped, never squeezed. */
+export function drawAsphodeleMissionSlotV188(ctx, loader, entry, options = {}) {
+  const { x, y, w, h, kind } = entry, id = `asph-msn-${kind}`;
+  const primitive = WALL_PROP_KINDS.has(kind) ? drawAsphodeleMissionPropV188 : drawAsphodeleMissionFeatureV188;
+  ctx.save();
+  try {
+    ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip();
+    const drawWidth = kind === 'conduit' ? ASPHODELE_MISSION_SIZES_V188.conduit.w : w;
+    const sourceRect = ASPHODELE_MISSION_IMAGE_SOURCE_RECTS_V188[id];
+    const source = loader.draw(ctx, id, x, y, drawWidth, h,
+      () => primitive(ctx, entry, { ...options, nativeOverlay: false }),
+      { fit: 'contain', sourceRect });
+    const image = source === 'image' ? loader.image?.(id) : null;
+    let imageFrame = null;
+    if (image) {
+      const [sx, sy, sw, sh] = sourceRect || [0, 0, image.naturalWidth, image.naturalHeight], scale = Math.min(drawWidth / sw, h / sh);
+      imageFrame = { sx, sy, scale, x: x + (drawWidth - sw * scale) / 2, y: y + (h - sh * scale) / 2 };
+    }
+    drawAsphodeleMissionOverlayV188(ctx, entry, { ...options, imageFrame });
+    return source;
+  } finally { ctx.restore(); }
+}
 
 export function drawAsphodeleHazardBandV188(ctx, band) {
   for (let x = band.x; x < band.x + band.w; x += 16) { ctx.fillStyle = Math.floor((x - band.x) / 16) % 2 ? '#15171a' : '#b8933f'; ctx.fillRect(x, band.y, Math.min(16, band.x + band.w - x), 5); }
 }
-/** Generic station wall props (placeholders behind asph-msn-panel / crt / sign / conduit). */
-export function drawAsphodeleMissionPropV188(ctx, entry, { sector = 'ring', english = false, time = 0 } = {}) {
+/** Static station wall fallback. The public primitive still includes its overlay
+ * unless the slot compositor requests the static pass alone. */
+export function drawAsphodeleMissionPropV188(ctx, entry, options = {}) {
   const { x, y, w, h } = entry;
   switch (entry.kind) {
     case 'panel': ctx.fillStyle = 'rgba(38,46,50,.88)'; ctx.fillRect(x, y, w, h); ctx.strokeStyle = 'rgba(0,0,0,.45)'; ctx.lineWidth = 2; ctx.strokeRect(x + 1, y + 1, w - 2, h - 2);
-      ctx.fillStyle = 'rgba(150,160,150,.5)'; for (let i = 0; i < 4; i++) { ctx.fillRect(x + 6, y + 8 + i * (h - 16) / 3, 3, 3); ctx.fillRect(x + w - 9, y + 8 + i * (h - 16) / 3, 3, 3); } // rivets
+      ctx.fillStyle = 'rgba(150,160,150,.5)'; for (let i = 0; i < 4; i++) { ctx.fillRect(x + 6, y + 8 + i * (h - 16) / 3, 3, 3); ctx.fillRect(x + w - 9, y + 8 + i * (h - 16) / 3, 3, 3); }
       ctx.fillStyle = 'rgba(184,147,63,.65)'; ctx.fillRect(x + 14, y + h - 18, w - 28, 6); break;
-    case 'crt': ctx.fillStyle = '#20272a'; ctx.fillRect(x, y, w, h); ctx.fillStyle = '#06140b'; ctx.fillRect(x + 5, y + 5, w - 10, h - 14);
-      ctx.fillStyle = 'rgba(125,255,154,.6)'; for (let i = 0; i < 3; i++) ctx.fillRect(x + 9, y + 10 + i * 7, (w - 22) * (.4 + ((i * 37 + Math.floor(time)) % 5) / 8), 2); break;
-    case 'sign': ctx.fillStyle = '#0e1517'; ctx.fillRect(x, y, w, h); ctx.fillStyle = '#d8e2da'; ctx.font = '700 10px ui-monospace, monospace'; ctx.textAlign = 'left';
-      ctx.fillText(`ASPHODÈLE · ${SECTOR_TEXT[sector][english ? 1 : 0]}`, x + 8, y + 17); break;
+    case 'crt': ctx.fillStyle = '#20272a'; ctx.fillRect(x, y, w, h); ctx.fillStyle = '#06140b'; ctx.fillRect(x + 5, y + 5, w - 10, h - 14); break;
+    case 'sign': ctx.fillStyle = '#0e1517'; ctx.fillRect(x, y, w, h); break;
     case 'conduit': ctx.fillStyle = '#2b3135'; ctx.fillRect(x, y, w, h); ctx.fillStyle = '#d06b2a'; for (let px = x + 10; px < x + w - 10; px += 40) ctx.fillRect(px, y + 2, 18, h - 4); break;
     default: break;
   }
+  if (options.nativeOverlay !== false) drawAsphodeleMissionOverlayV188(ctx, entry, options);
 }
-/** Mission features (placeholders behind asph-msn-blackbox / resin / salvage / gauge / camera). */
-export function drawAsphodeleMissionFeatureV188(ctx, feature, { english = false, time = 0 } = {}) {
-  const { x, y, w, h, kind } = feature, label = (fr, en) => english ? en : fr;
+/** Static feature fallback. Recorder/crate/dial counts belong to this fallback
+ * or to the inspected image, never to both passes at once. */
+export function drawAsphodeleMissionFeatureV188(ctx, feature, options = {}) {
+  const { x, y, w, h, kind } = feature;
   ctx.fillStyle = '#121a1d'; ctx.fillRect(x, y, w, h); ctx.strokeStyle = '#3a4448'; ctx.lineWidth = 2; ctx.strokeRect(x + 1, y + 1, w - 2, h - 2);
-  ctx.font = '700 9px ui-monospace, monospace'; ctx.textAlign = 'left'; ctx.fillStyle = '#d8e2da';
-  if (kind === 'blackbox') { for (let i = 0; i < 3; i++) { ctx.fillStyle = '#d06b2a'; ctx.fillRect(x + 14 + i * 44, y + 30, 34, 44); ctx.fillStyle = '#111'; ctx.fillRect(x + 20 + i * 44, y + 40, 22, 6); }
-    ctx.fillStyle = '#e2b53a'; ctx.fillText(label('ENREGISTREURS QZ', 'QZ RECORDERS'), x + 10, y + 18); }
-  else if (kind === 'resin') { ctx.fillStyle = '#2a2a24'; ctx.beginPath(); ctx.moveTo(x, y + h); ctx.quadraticCurveTo(x + w * .3, y + 20, x + w * .55, y + h); ctx.quadraticCurveTo(x + w * .8, y + 30, x + w, y + h); ctx.fill();
-    ctx.fillStyle = '#e15b4f'; ctx.fillText(label('ACCÈS RESTREINT · BIO', 'RESTRICTED · BIO'), x + 10, y + 18); }
-  else if (kind === 'salvage') { ctx.fillStyle = '#4a3a28'; ctx.fillRect(x + 12, y + 46, 61, 46); ctx.fillRect(x + 80, y + 58, 61, 34); ctx.fillStyle = '#e0873a'; ctx.fillText(label('CRUCIBLE · RÉCUPÉRATION', 'CRUCIBLE · SALVAGE'), x + 10, y + 18); }
-  else if (kind === 'gauge') { for (let i = 0; i < 3; i++) { const cx = x + 30 + i * 46, cy = y + 56; ctx.strokeStyle = '#8fb3a8'; ctx.beginPath(); ctx.arc(cx, cy, 16, 0, Math.PI * 2); ctx.stroke();
-      const a = -Math.PI * .75 + (i + 1) * .6 + Math.sin(time + i) * .05; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(a) * 13, cy + Math.sin(a) * 13); ctx.stroke(); }
-    ctx.fillStyle = '#8fb3a8'; ctx.fillText(label('PRESSION · SECTEUR', 'PRESSURE · SECTOR'), x + 10, y + 18); }
-  else if (kind === 'camera') { ctx.fillStyle = '#2b3236'; ctx.fillRect(x + w / 2 - 22, y + 34, 44, 20); ctx.fillStyle = '#e15b4f'; ctx.fillRect(x + w / 2 + 14, y + 40, 5, 5);
-    ctx.fillStyle = '#06140b'; ctx.fillRect(x + 12, y + 62, w - 24, 30); ctx.fillStyle = '#7dff9a'; ctx.fillText(label('CASSIUS · SURVEILLANCE', 'CASSIUS · SURVEILLANCE'), x + 10, y + 18); }
+  if (kind === 'blackbox') { for (let i = 0; i < 3; i++) { ctx.fillStyle = '#d06b2a'; ctx.fillRect(x + 14 + i * 44, y + 30, 34, 44); ctx.fillStyle = '#111'; ctx.fillRect(x + 20 + i * 44, y + 40, 22, 6); } }
+  else if (kind === 'resin') { ctx.fillStyle = '#2a2a24'; ctx.beginPath(); ctx.moveTo(x, y + h); ctx.quadraticCurveTo(x + w * .3, y + 20, x + w * .55, y + h); ctx.quadraticCurveTo(x + w * .8, y + 30, x + w, y + h); ctx.fill(); }
+  else if (kind === 'salvage') { ctx.fillStyle = '#4a3a28'; ctx.fillRect(x + 12, y + 46, 61, 46); ctx.fillRect(x + 80, y + 58, 61, 34); }
+  else if (kind === 'gauge') { ctx.strokeStyle = '#8fb3a8'; for (let i = 0; i < 3; i++) { ctx.beginPath(); ctx.arc(x + 30 + i * 46, y + 56, 16, 0, Math.PI * 2); ctx.stroke(); } }
+  else if (kind === 'camera') { ctx.fillStyle = '#2b3236'; ctx.fillRect(x + w / 2 - 22, y + 34, 44, 20); }
+  if (options.nativeOverlay !== false) drawAsphodeleMissionOverlayV188(ctx, feature, options);
+}
+
+/** Text and changing indicators are rendered after either the PNG or fallback.
+ * No game state, collision, objective or save field is derived from the art. */
+export function drawAsphodeleMissionOverlayV188(ctx, entry, { sector = 'ring', english = false, time = 0, imageFrame = null } = {}) {
+  const { x, y, w, kind } = entry;
+  if (kind === 'crt') {
+    ctx.fillStyle = 'rgba(125,255,154,.6)';
+    for (let i = 0; i < 3; i++) ctx.fillRect(x + 9, y + 10 + i * 7, (w - 22) * (.4 + ((i * 37 + Math.floor(time)) % 5) / 8), 2);
+  } else if (kind === 'sign') {
+    ctx.fillStyle = '#d8e2da'; ctx.font = '700 10px ui-monospace, monospace'; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+    const inset = imageFrame ? 12 : 8; // leave the inspected image's ivory bezel clear
+    ctx.fillText(`ASPHODÈLE · ${SECTOR_TEXT[sector][english ? 1 : 0]}`, x + inset, y + 17, w - inset * 2);
+  } else if (kind === 'gauge') {
+    ctx.strokeStyle = '#8fb3a8'; ctx.lineWidth = 2;
+    for (let i = 0; i < 3; i++) {
+      const [px, py] = IMAGE_GAUGE_PIVOTS_V188[i];
+      const cx = imageFrame ? imageFrame.x + (px - imageFrame.sx) * imageFrame.scale : x + 30 + i * 46;
+      const cy = imageFrame ? imageFrame.y + (py - imageFrame.sy) * imageFrame.scale : y + 56;
+      const a = -Math.PI * .75 + (i + 1) * .6 + Math.sin(time + i) * .05;
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(a) * 13, cy + Math.sin(a) * 13); ctx.stroke();
+    }
+  } else if (kind === 'camera') {
+    ctx.fillStyle = '#e15b4f';
+    if (imageFrame) {
+      // The inspected PNG has its own glass and bezel; only the lamp's inner
+      // face is native. Its measured source rectangle is [882, 392, 33, 36].
+      ctx.fillRect(imageFrame.x + (882 - imageFrame.sx) * imageFrame.scale, imageFrame.y + (392 - imageFrame.sy) * imageFrame.scale, 33 * imageFrame.scale, 36 * imageFrame.scale);
+    } else {
+      ctx.fillRect(x + w / 2 + 14, y + 40, 5, 5);
+      ctx.fillStyle = '#06140b'; ctx.fillRect(x + 12, y + 62, w - 24, 30);
+    }
+  }
+  const label = FEATURE_TEXT[kind];
+  if (label) {
+    ctx.font = '700 9px ui-monospace, monospace'; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic'; ctx.fillStyle = label[2];
+    const baseline = imageFrame && kind === 'resin' ? 16 : 18; // the resin hatch has a shallower title plate
+    ctx.fillText(label[english ? 1 : 0], x + 10, y + baseline, w - 20);
+  }
 }

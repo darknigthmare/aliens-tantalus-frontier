@@ -26,15 +26,31 @@ export function openContentSceneDialogV188({ document = globalThis.document, loa
   const paragraph = document.createElement('p'); paragraph.setAttribute('aria-live', 'polite');
   const feedback = document.createElement('p'); feedback.className = 'hint'; feedback.hidden = true;
   const footer = document.createElement('footer'); footer.style.flexWrap = 'wrap'; // V188 spec 007: longer option lists wrap instead of overflowing
-  let closed = false;
-  const close = () => { if (closed) return; closed = true; dialog.close?.(); dialog.remove(); onClose?.(); };
+  let closed = false, pictureRevision = 0, releasePicture = () => {};
+  const close = () => {
+    if (closed) return;
+    closed = true; pictureRevision += 1; releasePicture(); releasePicture = () => {};
+    dialog.close?.(); dialog.remove(); onClose?.();
+  };
   const render = ({ title: nextTitle = title, text: nextText = '', options: nextOptions = [], feedback: note = null, slot: nextSlot = slot } = {}) => {
+    if (closed) return;
+    const revision = ++pictureRevision;
+    releasePicture(); releasePicture = () => {};
     heading.textContent = nextTitle; paragraph.textContent = nextText;
     feedback.hidden = !note; feedback.textContent = note || '';
     if (nextSlot) {
-      const ctx = canvas.getContext?.('2d');
-      if (ctx) { loaderOf(loader, nextSlot).draw(ctx, nextSlot, canvas.width, canvas.height, { language }); dialog.dataset.contentSceneV188 = nextSlot; }
       canvas.hidden = false;
+      const ctx = canvas.getContext?.('2d'), selectedLoader = loaderOf(loader, nextSlot);
+      dialog.dataset.contentSceneV188 = nextSlot;
+      const drawPicture = () => {
+        // Image callbacks repaint only the current picture. They do not rerun
+        // choices, change focus, speak the paragraph again or revive a dialog.
+        if (!ctx || closed || revision !== pictureRevision || dialog.isConnected === false) return;
+        selectedLoader.draw(ctx, nextSlot, canvas.width, canvas.height, { language });
+      };
+      releasePicture = selectedLoader.subscribe?.(nextSlot, drawPicture) || (() => {});
+      selectedLoader.preload?.([nextSlot]);
+      drawPicture();
     } else canvas.hidden = true;
     footer.replaceChildren();
     for (const entry of nextOptions) {
@@ -54,6 +70,7 @@ export function openContentSceneDialogV188({ document = globalThis.document, loa
     footer.querySelector('button')?.focus?.();
   };
   dialog.addEventListener('cancel', event => { event.preventDefault(); if (dismissLabel) close(); });
+  dialog.addEventListener('close', close);
   dialog.append(heading, canvas, paragraph, feedback, footer); document.body.append(dialog);
   render({ title, text, options });
   dialog.showModal?.();

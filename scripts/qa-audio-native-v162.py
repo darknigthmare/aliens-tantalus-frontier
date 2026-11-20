@@ -28,7 +28,7 @@ report = {'status': 'running', 'checks': [], 'captures': [], 'pageErrors': [], '
           'controlledHttpResponses': [], 'audioResponses': [],
           'method': 'Native title/navigation, Save file input, keyboard sliders, held fire, real reload, native tab/window switching. Read-only audio observations. One disclosed HTTP404 manifest scenario.',
           'limitations': ['Automated Chromium, not human listening or physical speaker/headphone validation.',
-                         'Five real AudioBuffers and three advancing original music loops prove decode/playback, not canonical franchise sound or recorded audible output.',
+                         'Every published effect buffer and the advancing original music loops prove decode/playback, not canonical franchise sound or recorded audible output.',
                          'No new audio asset, voice recording or artwork is introduced.',
                          'Background playback may continue or pause under browser policy; only an actually observed hidden state is counted as hidden-tab coverage.']}
 
@@ -42,6 +42,23 @@ def check(label, condition):
     assert condition, label
     report['checks'].append(label)
     print('PASS ' + label, flush=True)
+
+
+def published_banks(manifest):
+    return {kind: {slot_id: slot['sources'] for slot_id, slot in manifest['tracks'][kind].items()
+                   if slot['sources']} for kind in ['sfx', 'music']}
+
+
+manifest_path = repo / 'assets/audio/manifest.json'
+published_manifest = json.loads(manifest_path.read_text())
+expected_banks = published_banks(published_manifest)
+expected_effect_ids = sorted(expected_banks['sfx'])
+expected_sources = [source for slots in expected_banks.values() for sources in slots.values() for source in sources]
+expected_paths = [source['path'] for source in expected_sources]
+assert expected_effect_ids and len(expected_paths) == len(set(expected_paths)), 'Published audio sources must be nonempty and unique.'
+report['publishedBanks'] = {'manifestSha256': hashlib.sha256(manifest_path.read_bytes()).hexdigest(),
+                          'effectIds': expected_effect_ids, 'musicIds': sorted(expected_banks['music']),
+                          'sourcePaths': expected_paths}
 
 
 def capture(page, name):
@@ -102,6 +119,23 @@ def open_view(page, view):
     page.locator(f'#nav [data-view="{view}"]').click()
 
 
+def remaining_ui_budget(deadline):
+    milliseconds = int((deadline - time.monotonic()) * 1000)
+    if milliseconds <= 0:
+        raise TimeoutError('The native UI did not become ready within its existing time budget.')
+    return milliseconds
+
+
+def open_title_settings(page):
+    # During the intro fade, pointer events already reach the title while its
+    # capture listener still owns the keyboard. Wait for the actual handoff.
+    deadline = time.monotonic() + 45
+    page.locator('#intro-v188').wait_for(state='detached', timeout=remaining_ui_budget(deadline))
+    page.locator('#title-start').click(timeout=remaining_ui_budget(deadline))
+    page.locator('#title-options').click(timeout=remaining_ui_budget(deadline))
+    page.locator('.view[data-panel="settings"].active').wait_for(state='visible', timeout=remaining_ui_budget(deadline))
+
+
 def playing(page, scene):
     page.wait_for_function('''scene=>{const a=__ATF_AUDIO_V77__;return a.scene===scene&&a.musicStatus==='playing'
       &&[...a.musicVoices].some(v=>v.scene===scene&&!v.stopping&&!v.audio.paused
@@ -114,9 +148,23 @@ def playing(page, scene):
 
 
 def slider(page, selector, position):
+    deadline = time.monotonic() + 30
     target = page.locator(selector)
-    target.focus()
-    page.keyboard.press('Home' if position == 0 else 'End')
+    key = 'Home' if position == 0 else 'End'
+    journey = {'selector': selector, 'key': key, 'requestedValue': position}
+    report.setdefault('sliderInputs', []).append(journey)
+    target.wait_for(state='visible', timeout=remaining_ui_budget(deadline))
+    assert target.is_enabled(timeout=remaining_ui_budget(deadline)), selector + ': the native range is enabled'
+    target.focus(timeout=remaining_ui_budget(deadline))
+    read_control = '''element=>({value:element.value,focused:document.activeElement===element,
+      inert:!!element.closest('[inert]'),introPresent:!!document.querySelector('#intro-v188')})'''
+    journey['before'] = target.evaluate(read_control, timeout=remaining_ui_budget(deadline))
+    assert journey['before']['focused'] and not journey['before']['inert'] and not journey['before']['introPresent'], \
+        selector + ': the native range owns keyboard input after the intro'
+    target.press(key, timeout=remaining_ui_budget(deadline))
+    journey['after'] = target.evaluate(read_control, timeout=remaining_ui_budget(deadline))
+    assert journey['after']['focused'] and float(journey['after']['value']) == position, \
+        selector + ': the native range receives ' + key + ' and reaches the requested value'
 
 
 def verify_bank_transfer(source, actual):
@@ -186,7 +234,8 @@ raw_profile = subprocess.run(['node', '--input-type=module', '-e', script], cwd=
                              capture_output=True, text=True, check=True).stdout.encode()
 (output / 'disclosed-audio-profile-v162.json').write_bytes(raw_profile)
 report['fixtureSha256'] = hashlib.sha256(raw_profile).hexdigest()
-source_paths = sorted([*repo.glob('src/**/*.js'), *repo.glob('*.css'), repo / 'sw.js', repo / 'index.html', Path(__file__).resolve()])
+source_paths = sorted([*repo.glob('src/**/*.js'), *repo.glob('*.css'), repo / 'sw.js', repo / 'index.html',
+                       manifest_path, Path(__file__).resolve()])
 source_start = {str(p.relative_to(repo)): hashlib.sha256(p.read_bytes()).hexdigest() for p in source_paths}
 (output / 'profile-source-start.json').write_text(json.dumps(source_start, indent=2))
 
@@ -207,9 +256,10 @@ with sync_playwright() as pw:
     try:
         step('native gesture unlock, real bank loading and mute during a disclosed pending music transfer')
         page.goto(args.base, wait_until='domcontentloaded')
-        page.locator('#title-start').click(timeout=45000)
-        page.locator('#title-options').click()
-        page.wait_for_function('()=>__ATF_AUDIO_V77__?.context?.state==="running"&&__ATF_AUDIO_V77__.effectBuffers.size===5')
+        open_title_settings(page)
+        # The menu transfer is deliberately held only until the native mute.
+        # Waiting for every effect here would spend its real network timeout.
+        page.wait_for_function('()=>__ATF_AUDIO_V77__?.context?.state==="running"&&__ATF_AUDIO_V77__.manifestStatus==="ready"')
         deadline = time.monotonic() + 20
         while not pending_menu and time.monotonic() < deadline:
             page.wait_for_timeout(50)
@@ -221,9 +271,14 @@ with sync_playwright() as pw:
         page.wait_for_function('()=>__ATF_AUDIO_V77__.volumes.music===0&&!__ATF_AUDIO_V77__.musicVoices.size&&__ATF_AUDIO_V77__.musicPendingGeneration===-1')
         check('Muting during the real pending music transfer leaves no late media voice', observed(page)['music'] == [])
         slider(page, '#setting-music', 1)
+        page.wait_for_function('''expected=>{const a=__ATF_AUDIO_V77__,ids=[...a.effectBuffers.keys()].sort();
+          return a.context?.state==='running'&&ids.length===expected.length&&ids.every((id,index)=>id===expected[index]);}''',
+                               arg=expected_effect_ids)
         menu = playing(page, 'menu')
-        check('Five shipped effects decode into bounded reusable native buffers',
-              {e['id'] for e in menu['effects']} == {'shot', 'tracker', 'hit', 'ui', 'alarm'}
+        check('The runtime accepts exactly the published effect and music sources',
+              published_banks(menu['manifest']) == expected_banks)
+        check('Every published effect decodes into a bounded reusable native buffer',
+              sorted(e['id'] for e in menu['effects']) == expected_effect_ids
               and all(e['length'] > 0 and e['channels'] == 1 and math.isfinite(e['duration']) and e['duration'] > 0 for e in menu['effects']))
         capture(page, '01-original-menu-banks.png')
 
@@ -276,16 +331,23 @@ with sync_playwright() as pw:
         # A real gesture owns any resume required by the browser's policy.
         page.locator('#game-canvas').click(position={'x': 420, 'y': 340})
         playing(page, 'mission')
-        manifest = observed(page)['manifest']
-        expected_sources = [source for kind in ['sfx', 'music'] for slot in manifest['tracks'][kind].values() for source in slot['sources']]
-        received = {entry['path']: entry for entry in report['audioResponses']}
-        report['bankTransferVerification'] = [verify_bank_transfer(source, received.get(source['path'])) for source in expected_sources]
+        received = {}
+        for entry in report['audioResponses']:
+            received.setdefault(entry['path'], []).append(entry)
+        report['bankTransferVerification'] = []
+        for source in expected_sources:
+            transfers = received.get(source['path'], [])
+            row = verify_bank_transfer(source, transfers[0] if len(transfers) == 1 else None)
+            report['bankTransferVerification'].append({**row, 'transferCount': len(transfers)})
+        report['unexpectedAudioPaths'] = sorted(set(received) - set(expected_paths))
+        report['duplicateAudioPaths'] = sorted(path for path, transfers in received.items() if len(transfers) != 1)
         report['httpMimePolicy'] = {'exactTypes': ['audio/wav', 'audio/ogg'],
                                    'explicitAliases': {'audio/x-wav': 'audio/wav'},
                                    'unknownTypesAccepted': False, 'bytesAndSha256MustMatchExactly': True}
-        check('All eight real WAV/OGG transfers match exact bytes/SHA256 and the declared MIME or explicit WAV alias',
-              len(expected_sources) == 8 and all(row['mimeAccepted'] and row['bytesAndSha256Exact']
-                                                for row in report['bankTransferVerification']))
+        check('Every published audio source transfers once with exact bytes/SHA256 and the declared MIME or explicit WAV alias',
+              set(received) == set(expected_paths) and not report['duplicateAudioPaths']
+              and all(row['transferCount'] == 1 and row['mimeAccepted'] and row['bytesAndSha256Exact']
+                      for row in report['bankTransferVerification']))
         report['decodedNativeBanks'] = observed(page)
 
         step('native mute settings and actual reload')
@@ -294,8 +356,7 @@ with sync_playwright() as pw:
         slider(page, '#setting-music', 0); slider(page, '#setting-effects', 0)
         page.wait_for_function('()=>!__ATF_AUDIO_V77__.musicVoices.size&&!__ATF_AUDIO_V77__.effectVoices.size&&!__ATF_AUDIO_V77__.timers.size')
         page.reload(wait_until='domcontentloaded')
-        page.locator('#title-start').click(timeout=45000)
-        page.locator('#title-options').click()
+        open_title_settings(page)
         after_reload = observed(page)
         check('Native slider mute survives reload without reviving mission media or delayed effects',
               after_reload['volumes']['music'] == after_reload['volumes']['effects'] == 0
@@ -312,8 +373,7 @@ with sync_playwright() as pw:
         fallback = fallback_context.new_page(); fallback.set_default_timeout(30000); watch(fallback, 'missing-manifest-404')
         fallback.route('**/assets/audio/manifest.json', lambda route: route.fulfill(status=404, content_type='application/json', body='{}'))
         fallback.goto(args.base, wait_until='domcontentloaded')
-        fallback.locator('#title-start').click(timeout=45000)
-        fallback.locator('#title-options').click()
+        open_title_settings(fallback)
         fallback.wait_for_function('()=>__ATF_AUDIO_V77__.manifestStatus==="unavailable"&&__ATF_AUDIO_V77__.context?.state==="running"&&__ATF_AUDIO_V77__.musicStatus==="silent-missing"')
         state = observed(fallback)
         check('The controlled HTTP404 manifest leaves an unlocked context, no fake decoded bank and no music voice',

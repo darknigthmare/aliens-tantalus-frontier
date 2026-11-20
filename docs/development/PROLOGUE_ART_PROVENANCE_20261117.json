@@ -1,0 +1,2451 @@
+{
+  "schema": "tantalus-prologue-art-provenance-v188",
+  "date": "2026-11-17",
+  "timeZone": "Europe/Paris",
+  "baseCommit": "d54f13cc55983ddb5f55851071c9144198fe1155",
+  "baseTree": "69e738dd17b23fad802e0b4e83d1a58fc1a88491",
+  "pullRequestTarget": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/49",
+  "scope": {
+    "newImages": 11,
+    "cinematicIds": [
+      "cin-00",
+      "cin-01",
+      "cin-p2",
+      "cin-02",
+      "cin-03",
+      "cin-p3-wren",
+      "cin-p3-ferro",
+      "cin-20",
+      "cin-10",
+      "cin-doyenne",
+      "cin-20-rook"
+    ],
+    "cinematicShots": 35,
+    "imageBearingShots": 31,
+    "nativeOnlyShots": [
+      {
+        "cinematicId": "cin-00",
+        "shot": 1,
+        "role": "telemetry"
+      },
+      {
+        "cinematicId": "cin-00",
+        "shot": 8,
+        "role": "title"
+      },
+      {
+        "cinematicId": "cin-p2",
+        "shot": 1,
+        "role": "messages"
+      },
+      {
+        "cinematicId": "cin-20",
+        "shot": 2,
+        "role": "names"
+      }
+    ],
+    "cinematics": [
+      {
+        "id": "cin-00",
+        "shots": 8,
+        "seconds": 65
+      },
+      {
+        "id": "cin-01",
+        "shots": 2,
+        "seconds": 20
+      },
+      {
+        "id": "cin-p2",
+        "shots": 2,
+        "seconds": 16
+      },
+      {
+        "id": "cin-02",
+        "shots": 4,
+        "seconds": 42
+      },
+      {
+        "id": "cin-03",
+        "shots": 4,
+        "seconds": 33
+      },
+      {
+        "id": "cin-p3-wren",
+        "shots": 1,
+        "seconds": 7
+      },
+      {
+        "id": "cin-p3-ferro",
+        "shots": 2,
+        "seconds": 14
+      },
+      {
+        "id": "cin-20",
+        "shots": 3,
+        "seconds": 40
+      },
+      {
+        "id": "cin-10",
+        "shots": 2,
+        "seconds": 30
+      },
+      {
+        "id": "cin-doyenne",
+        "shots": 6,
+        "seconds": 43
+      },
+      {
+        "id": "cin-20-rook",
+        "shots": 1,
+        "seconds": 10
+      }
+    ],
+    "outsideScopeCinematics": 17,
+    "outsideScopeShots": 46
+  },
+  "tool": "image_gen.imagegen",
+  "generationOutputCount": 11,
+  "selectedOutputCount": 11,
+  "selectedBytes": 20246573,
+  "rejectedIterations": [],
+  "primaryVisualReferences": [],
+  "projectVisualReferences": [
+    {
+      "type": "project-asset",
+      "path": "assets/colony/v188/tomas-wren.png",
+      "sha256": "2bccd0d73d6b62121b19b8431fbe8f4cdc89d3870f8c6aca503c7cd84e08b568",
+      "bytes": 2083314,
+      "use": "Existing project identity, architecture or material reference; not an independent franchise canon reference."
+    },
+    {
+      "type": "project-asset",
+      "path": "assets/colony/v188/lucia-ferro.png",
+      "sha256": "ffb494c738010d7afeb9e0bf87cf08f139f626846d2dcd0d7ce53532d5d81a85",
+      "bytes": 1803124,
+      "use": "Existing project identity, architecture or material reference; not an independent franchise canon reference."
+    },
+    {
+      "type": "project-asset",
+      "path": "assets/colony/v188/adele-sarrazin.png",
+      "sha256": "215edceda92172729bfb48ae8398712f92480c4469527303a0ce9adc24b0ef0f",
+      "bytes": 2155734,
+      "use": "Existing project identity, architecture or material reference; not an independent franchise canon reference."
+    },
+    {
+      "type": "project-asset",
+      "path": "assets/act5/v188/port-meridien-epilogue.png",
+      "sha256": "1cdeb08cd138f6fbe9e61c5a6201b0dfb56e1685a85917057b5b671b81fb03e2",
+      "bytes": 2556371,
+      "use": "Existing project identity, architecture or material reference; not an independent franchise canon reference."
+    },
+    {
+      "type": "project-asset",
+      "path": "assets/act5/v188/echo8-locker-epilogue.png",
+      "sha256": "f2387865f38f7abf8e71869e8e098b792d5f96149898cb94eae00a1b993b3e8b",
+      "bytes": 1966134,
+      "use": "Existing project identity, architecture or material reference; not an independent franchise canon reference."
+    }
+  ],
+  "selectedOutputs": [
+    {
+      "id": "tomas-wren-standing",
+      "path": "assets/prologue/v188/tomas-wren-standing.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "bytes": 1834919,
+      "sha256": "813bbea119895af717ded84eefebc26f09c8fad10ebeec63378ad8c8476a6402",
+      "selected": true,
+      "rawBytesPreserved": true,
+      "alpha": {
+        "extrema": [
+          0,
+          254
+        ],
+        "transparentPixels": 1087254,
+        "nonzeroBounds": [
+          49,
+          0,
+          996,
+          1536
+        ],
+        "bounds32": [
+          245,
+          14,
+          738,
+          1525
+        ]
+      },
+      "generatorOutputIdentity": {
+        "kind": "sha256-of-raw-generator-output",
+        "sha256": "813bbea119895af717ded84eefebc26f09c8fad10ebeec63378ad8c8476a6402"
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "transparent_background": true,
+        "prompt": "Use case: identity-preserve. Asset type: one standalone full-body character sprite for the existing 2D side-view Aliens: Tantalus Frontier Canvas game. Extend the supplied exact head-and-shoulders portrait into a complete standing person, preserving the same face, apparent age, hair, skin, clothing fabrics, colours, details and painterly-realistic UHD rendering. The existing image is the identity and costume reference, not a backdrop. One character only, full head to boot soles, entirely inside the frame with 6% clear margins. Three-quarter lateral view facing screen RIGHT, consistent with the portrait; relaxed standing dialogue pose, believable 7.5-head adult proportions, both feet on one level baseline. Natural anatomy, exactly two arms, two hands and two legs. Separately readable arms and hands; hands empty. Crisp detailed opaque character with a clean natural alpha edge. Real transparent background and transparent area between limbs; no scenery, floor, shadow oval, grid, frame, caption, UI, watermark or extra objects. Neutral soft overhead/cool left fill with restrained warm edge light, matching the reference. Maintain realistic worn materials; no cartoon outlines, pixel art, anime, glossy plastic, armour upgrades or redesign. This is an original project resident, not a film actor. Do not add names or new lettering. Make a tall portrait-oriented full-body cutout.\nCharacter: TOMAS WREN, a weathered middle-aged male dock worker, 1.80 m scale. Preserve the exact short dark hair greying at the temples, stubble, facial lines and face structure. Preserve the charcoal work jacket/collar and the rusty orange safety waistcoat with broad aged ivory reflective vertical and horizontal strips. Continue the outfit below the supplied bust with practical charcoal work trousers, modest utility pockets and sturdy dark industrial safety boots. Vest ends at the hips. Slightly broad working build, shoulders relaxed, an attentive reserved expression; head turns a little toward the right, hands loosely lowered by his sides. No weapon, helmet, bag, radio, clipboard or invented badge.",
+        "referencedImagesInOrder": [
+          {
+            "type": "project-asset",
+            "path": "assets/colony/v188/tomas-wren.png",
+            "sha256": "2bccd0d73d6b62121b19b8431fbe8f4cdc89d3870f8c6aca503c7cd84e08b568"
+          }
+        ]
+      },
+      "pixelEditing": "None. The selected generator file is copied byte for byte into the runtime asset path."
+    },
+    {
+      "id": "lucia-ferro-standing",
+      "path": "assets/prologue/v188/lucia-ferro-standing.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "bytes": 1659079,
+      "sha256": "504bd8360ae90941b89171cb2b7d0d14b75432842b6d75e56548587b9dc49697",
+      "selected": true,
+      "rawBytesPreserved": true,
+      "alpha": {
+        "extrema": [
+          0,
+          254
+        ],
+        "transparentPixels": 1141643,
+        "nonzeroBounds": [
+          39,
+          11,
+          1004,
+          1522
+        ],
+        "bounds32": [
+          291,
+          14,
+          736,
+          1520
+        ]
+      },
+      "generatorOutputIdentity": {
+        "kind": "sha256-of-raw-generator-output",
+        "sha256": "504bd8360ae90941b89171cb2b7d0d14b75432842b6d75e56548587b9dc49697"
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "transparent_background": true,
+        "prompt": "Use case: identity-preserve. Asset type: one standalone full-body character sprite for the existing 2D side-view Aliens: Tantalus Frontier Canvas game. Extend the supplied exact head-and-shoulders portrait into a complete standing person, preserving the same face, apparent age, hair, skin, clothing fabrics, colours, details and painterly-realistic UHD rendering. The existing image is the identity and costume reference, not a backdrop. One character only, full head to boot soles, entirely inside the frame with 6% clear margins. Three-quarter lateral view facing screen RIGHT, consistent with the portrait; relaxed standing dialogue pose, believable 7.5-head adult proportions, both feet on one level baseline. Natural anatomy, exactly two arms, two hands and two legs. Separately readable arms and hands; hands empty. Crisp detailed opaque character with a clean natural alpha edge. Real transparent background and transparent area between limbs; no scenery, floor, shadow oval, grid, frame, caption, UI, watermark or extra objects. Neutral soft overhead/cool left fill with restrained warm edge light, matching the reference. Maintain realistic worn materials; no cartoon outlines, pixel art, anime, glossy plastic, armour upgrades or redesign. This is an original project resident, not a film actor. Do not add names or new lettering. Make a tall portrait-oriented full-body cutout.\nCharacter: LUCIA FERRO, the original adult female colony medic, 1.70 m scale. Preserve the exact brown eyes, face, dark brown hair tied in a low bun with loose strands and calm concerned expression. Preserve the weathered olive medical field jacket, open over slate-blue/grey V-neck scrubs, and the existing worn off-white medical armband with muted red cross on the near upper arm. Continue the visible scrubs into practical matching slate-grey trousers and low dark non-slip work boots. Jacket ends just below the hips. Average realistic build, attentive slight forward inclination, arms relaxed with one elbow slightly bent but both hands empty and visible. No weapon, helmet, surgical mask, stethoscope, clipboard, new bags or extra insignia.",
+        "referencedImagesInOrder": [
+          {
+            "type": "project-asset",
+            "path": "assets/colony/v188/lucia-ferro.png",
+            "sha256": "ffb494c738010d7afeb9e0bf87cf08f139f626846d2dcd0d7ce53532d5d81a85"
+          }
+        ]
+      },
+      "pixelEditing": "None. The selected generator file is copied byte for byte into the runtime asset path."
+    },
+    {
+      "id": "adele-sarrazin-standing",
+      "path": "assets/prologue/v188/adele-sarrazin-standing.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "bytes": 1848312,
+      "sha256": "aa4343f367e388038443f5697e1cc621f218bdc7b4b2cc8b07883fe0b0e5d719",
+      "selected": true,
+      "rawBytesPreserved": true,
+      "alpha": {
+        "extrema": [
+          0,
+          254
+        ],
+        "transparentPixels": 1042584,
+        "nonzeroBounds": [
+          0,
+          9,
+          1010,
+          1536
+        ],
+        "bounds32": [
+          249,
+          14,
+          766,
+          1525
+        ]
+      },
+      "generatorOutputIdentity": {
+        "kind": "sha256-of-raw-generator-output",
+        "sha256": "aa4343f367e388038443f5697e1cc621f218bdc7b4b2cc8b07883fe0b0e5d719"
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "transparent_background": true,
+        "prompt": "Use case: identity-preserve. Asset type: one standalone full-body character sprite for the existing 2D side-view Aliens: Tantalus Frontier Canvas game. Extend the supplied exact head-and-shoulders portrait into a complete standing person, preserving the same face, apparent age, hair, skin, clothing fabrics, colours, details and painterly-realistic UHD rendering. The existing image is the identity and costume reference, not a backdrop. One character only, full head to boot soles, entirely inside the frame with 6% clear margins. Three-quarter lateral view facing screen RIGHT, consistent with the portrait; relaxed standing dialogue pose, believable 7.5-head adult proportions, both feet on one level baseline. Natural anatomy, exactly two arms, two hands and two legs. Separately readable arms and hands; hands empty. Crisp detailed opaque character with a clean natural alpha edge. Real transparent background and transparent area between limbs; no scenery, floor, shadow oval, grid, frame, caption, UI, watermark or extra objects. Neutral soft overhead/cool left fill with restrained warm edge light, matching the reference. Maintain realistic worn materials; no cartoon outlines, pixel art, anime, glossy plastic, armour upgrades or redesign. This is an original project resident, not a film actor. Do not add names or new lettering. Make a tall portrait-oriented full-body cutout.\nCharacter: ADÈLE SARRAZIN, the original elderly female colony elder, 1.62 m scale. Preserve the exact aged face, deep natural wrinkles, silver-grey hair drawn into a low bun, dark eyes and steady determined expression. Preserve the charcoal-brown weathered heavy coat with broad lapels, and the distinctive long wool scarf of broad rust-orange and aged cream stripes with cream fringes. Complete the coat to mid-thigh length with plain dark practical trousers and sturdy modest brown boots. Slight natural age-related stoop of the shoulders, realistic shorter adult proportions, no caricature. Scarf ends stay against the front of the coat without hiding the hands. Arms rest at her sides, hands empty. No cane, weapon, backpack, jewellery or new emblem.",
+        "referencedImagesInOrder": [
+          {
+            "type": "project-asset",
+            "path": "assets/colony/v188/adele-sarrazin.png",
+            "sha256": "215edceda92172729bfb48ae8398712f92480c4469527303a0ce9adc24b0ef0f"
+          }
+        ]
+      },
+      "pixelEditing": "None. The selected generator file is copied byte for byte into the runtime asset path."
+    },
+    {
+      "id": "resident-child-standing",
+      "path": "assets/prologue/v188/resident-child-standing.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "bytes": 1635680,
+      "sha256": "7b97f1c768365909cb40ed728acf21281fc95b675f37ea4b60853a72226ed0cb",
+      "selected": true,
+      "rawBytesPreserved": true,
+      "alpha": {
+        "extrema": [
+          0,
+          254
+        ],
+        "transparentPixels": 1128478,
+        "nonzeroBounds": [
+          0,
+          0,
+          1002,
+          1536
+        ],
+        "bounds32": [
+          269,
+          11,
+          687,
+          1523
+        ]
+      },
+      "generatorOutputIdentity": {
+        "kind": "sha256-of-raw-generator-output",
+        "sha256": "7b97f1c768365909cb40ed728acf21281fc95b675f37ea4b60853a72226ed0cb"
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "transparent_background": true,
+        "prompt": "Use case: stylized-concept. Asset type: one complete original civilian child sprite for Aliens: Tantalus Frontier, a realistic painterly 2D side-view industrial science-fiction game. Primary request: a young Port-Méridien resident, about 8–9 years old, standing naturally, full head to shoe soles, three-quarter lateral view facing screen LEFT toward the speaking adult. Intended real height 1.30 metres. Plausible child anatomy, about six heads tall, clearly a child rather than a scaled adult. Short loosely curled dark brown hair, a calm slightly wary expression, natural warm medium skin tone, slim normal build. Worn teal-grey hooded weather jacket with the hood down, muted ochre sweater at the collar, charcoal trousers with subtle repaired knees, simple small brown ankle boots. Ordinary practical civilian clothing, no uniform or labour equipment. Both hands relaxed and empty by the sides, both legs readable, feet on the same horizontal baseline. One person only, realistic proportions, complete silhouette with a small clear margin on all sides. Rich detailed fabric and natural face matching grounded military-industrial painted game sprites, neutral soft cool lighting with a restrained warm rim. REAL TRANSPARENT BACKGROUND, transparent between limbs, no scenery, floor, shadow disc, text, names, insignia, watermark, weapons, blood, armour, bags or extra characters. Tall portrait composition. This is an original unnamed child in a civilian conversation scene.",
+        "referencedImagesInOrder": []
+      },
+      "pixelEditing": "None. The selected generator file is copied byte for byte into the runtime asset path."
+    },
+    {
+      "id": "north-quay-patient",
+      "path": "assets/prologue/v188/north-quay-patient.png",
+      "size": [
+        2172,
+        724
+      ],
+      "mode": "RGBA",
+      "bytes": 1348393,
+      "sha256": "124a2b47efa6bd5e91677c6e22686ea89e4f2062a0dd030373f6ad678535bc26",
+      "selected": true,
+      "rawBytesPreserved": true,
+      "alpha": {
+        "extrema": [
+          0,
+          255
+        ],
+        "transparentPixels": 940564,
+        "nonzeroBounds": [
+          14,
+          7,
+          2160,
+          724
+        ],
+        "bounds32": [
+          18,
+          201,
+          2153,
+          585
+        ]
+      },
+      "generatorOutputIdentity": {
+        "kind": "sha256-of-raw-generator-output",
+        "sha256": "124a2b47efa6bd5e91677c6e22686ea89e4f2062a0dd030373f6ad678535bc26"
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "transparent_background": true,
+        "prompt": "Use case: stylized-concept. Asset type: one independent complete lying adult patient sprite, transparent, for a 2D lateral medical scene in Aliens: Tantalus Frontier. Primary request: an ordinary original adult male dock resident about 1.75 m tall, lying flat on his back, HEAD AT THE RIGHT, feet at the left, shown in a strict readable side view with a slight high angle only sufficient to see the upper torso. The entire body from hair to shoe tips is visible with clear margins. Short dark hair, eyes quietly closed, tired neutral face, intact human anatomy. Plain slate-grey short-sleeve undershirt, a simple wide aged-white cloth bandage wrapped around the upper chest over the shirt, charcoal work trousers and worn low dark shoes. A clean uninjured exterior: no visible wound, blood, parasite, chestburster, restraints or medical diagnosis. Arms resting alongside the body, one near hand visible near the hip; two arms and two legs correctly formed. Body in a neutral straight supine resting pose, no bent knees, arching, floating limbs or seated torso. The back, hips, heels and head are arranged to rest on a flat mattress; no mattress, pillow, bed, stretcher, tubes or equipment in this image. Realistic body thickness and 7.5-head adult proportions; horizontal long composition around 3:1. The chest bandage must be well defined for a subtle native breathing animation applied later. Highly detailed painterly-realistic UHD game art, weathered cloth, soft neutral cool-white clinic light, restrained contrast. REAL transparent background including empty space around the hands/legs. One patient only, no scenery, floor, cast shadow, border, labels, text or watermark.",
+        "referencedImagesInOrder": []
+      },
+      "pixelEditing": "None. The selected generator file is copied byte for byte into the runtime asset path."
+    },
+    {
+      "id": "medical-stretcher",
+      "path": "assets/prologue/v188/medical-stretcher.png",
+      "size": [
+        1923,
+        818
+      ],
+      "mode": "RGBA",
+      "bytes": 1474544,
+      "sha256": "25e0c95260270dc55bc40d407758844487ee7de13f85b947b00a95b139f0efba",
+      "selected": true,
+      "rawBytesPreserved": true,
+      "alpha": {
+        "extrema": [
+          0,
+          255
+        ],
+        "transparentPixels": 867263,
+        "nonzeroBounds": [
+          0,
+          19,
+          1923,
+          818
+        ],
+        "bounds32": [
+          12,
+          87,
+          1913,
+          813
+        ]
+      },
+      "generatorOutputIdentity": {
+        "kind": "sha256-of-raw-generator-output",
+        "sha256": "25e0c95260270dc55bc40d407758844487ee7de13f85b947b00a95b139f0efba"
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "transparent_background": true,
+        "prompt": "Use case: stylized-concept. Asset type: standalone empty wheeled stretcher sprite for an original industrial colony medical room in the 2D game Aliens: Tantalus Frontier. Render a complete empty 2-metre long wheeled medical gurney in strict lateral side elevation, head end RIGHT and foot end LEFT. The mattress top is 0.85 metres above the wheel contact line; maintain this real ratio of length to height. Thin flat horizontal dark desaturated blue-grey waterproof mattress with a straight uninterrupted top surface. Rectangular worn brushed-steel frame, two crossed structural supports, a low utility shelf, four casters in two visible near/far pairs; all wheels touch the same horizontal baseline. Side safety rails folded DOWN below mattress level so a separately rendered patient will not be occluded. Modest handles at the ends, no tall footboards or raised backrest. Grounded practical 1980s industrial science-fiction construction, no futuristic glowing strips, no modern readable logos. Empty: no person, blanket, pillow, bandage, hanging bag, monitor, tools, straps or medical diagram. Entire stretcher including all handles and wheels inside the frame with generous clear margin. Highly detailed painterly realistic UHD sprite, neutral soft cool clinic light, worn metal and dull rubber, no exaggerated rust. REAL TRANSPARENT BACKGROUND, transparent through the structural frame and under the mattress; no scenery, floor, floor shadow, caption, grid, watermark or border. Wide landscape composition.",
+        "referencedImagesInOrder": []
+      },
+      "pixelEditing": "None. The selected generator file is copied byte for byte into the runtime asset path."
+    },
+    {
+      "id": "port-meridien-night-approach",
+      "path": "assets/prologue/v188/port-meridien-night-approach.png",
+      "size": [
+        1900,
+        828
+      ],
+      "mode": "RGB",
+      "bytes": 2130258,
+      "sha256": "fb2bd475fecefafe6fcadfdbf79a88d95daaa6440d1a88be2e8f0672a64b91dd",
+      "selected": true,
+      "rawBytesPreserved": true,
+      "alpha": null,
+      "generatorOutputIdentity": {
+        "kind": "sha256-of-raw-generator-output",
+        "sha256": "fb2bd475fecefafe6fcadfdbf79a88d95daaa6440d1a88be2e8f0672a64b91dd"
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "transparent_background": false,
+        "prompt": "Use case: compositing. Asset type: wide establishing background for the night arrival at Port-Méridien in Aliens: Tantalus Frontier. Reference image: the existing Port-Méridien dawn panorama, used to preserve the exact original colony architecture, mountain ridge, materials and industrial design continuity. Produce a new NIGHT APPROACH view of this same place, before the later dawn epilogue. Keep the distinctive broad-crowned atmospheric processor with its vertical ribbed tower and clustered pipes, the squat sloping-roof grey colony buildings, tanks, domes, railings and distant barren ridges recognizably consistent with the reference. It is deep stormy NIGHT, dark blue-black overcast sky, wet industrial surfaces, restrained practical amber windows and lamps. Absolutely no sunrise, sunset, bright horizon or daylight. Slightly elevated approach view with an unoccupied landing apron in the foreground, colony in the middle distance and the processor centered around 63% of image width. Keep the processor's top around the upper-middle area, fully visible, with enough clear sky for the game to add a small steam plume. The foreground must contain one EMPTY shallow elliptical landing pad, center around 30% width and 78% height, occupying roughly 13–47% of width and 71–85% of height. Its worn metal/concrete landing surface and subtly outlined rim must be clearly readable; keep the pad rim empty and unlit because eight warning beacons will be drawn and animated by the game. A slightly misty mountain ridge in the distance. Preserve natural scale, cinematic realistic painterly high detail and the restrained worn 1980s industrial sci-fi materials of the reference, with wide horizontal framing approximately 2.3:1. No people, aircraft, vehicles, spacecraft, words, signs, text, HUD, overlay, black bars, vignette frame, watermark, alien resin, damage spectacle, monsters or diagnosis symbols. No baked falling rain streaks or steam plume: the renderer will animate weather. Opaque full-frame environment art, not a transparent sprite.",
+        "referencedImagesInOrder": [
+          {
+            "type": "project-asset",
+            "path": "assets/act5/v188/port-meridien-epilogue.png",
+            "sha256": "1cdeb08cd138f6fbe9e61c5a6201b0dfb56e1685a85917057b5b671b81fb03e2"
+          }
+        ]
+      },
+      "pixelEditing": "None. The selected generator file is copied byte for byte into the runtime asset path."
+    },
+    {
+      "id": "relay-access-badge",
+      "path": "assets/prologue/v188/relay-access-badge.png",
+      "size": [
+        1580,
+        996
+      ],
+      "mode": "RGBA",
+      "bytes": 2995719,
+      "sha256": "6a4c951da23fe6677cd9ea77f7da7fe0fa8174170fcad46afe0637f0ab9e2148",
+      "selected": true,
+      "rawBytesPreserved": true,
+      "alpha": {
+        "extrema": [
+          0,
+          255
+        ],
+        "transparentPixels": 235217,
+        "nonzeroBounds": [
+          0,
+          29,
+          1554,
+          996
+        ],
+        "bounds32": [
+          26,
+          63,
+          1550,
+          948
+        ]
+      },
+      "generatorOutputIdentity": {
+        "kind": "sha256-of-raw-generator-output",
+        "sha256": "6a4c951da23fe6677cd9ea77f7da7fe0fa8174170fcad46afe0637f0ab9e2148"
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "transparent_background": true,
+        "prompt": "Use case: stylized-concept. Asset type: one standalone anonymous access badge prop, transparent PNG, for a close-up cinematic of an original remote industrial colony relay in the 2D game Aliens: Tantalus Frontier. A single worn horizontal landscape laminated identification card, about the proportions of an 85 by 54 mm badge, bone-ivory face, softly rounded corners, fine scuffed edges and a thin grey rim. Viewed from above at a modest angle so it can lie on a dark console tabletop; keep its long edges nearly horizontal and the complete card inside the frame. On the left, only a faded grey rectangular photo placeholder with indistinct abstract marks, no identifiable face. On the right, three short faded grey bars resembling completely unreadable worn print; NO legible name, number, text, barcode, logo, company affiliation or icon. Subtle lamination and grime, understated functional 1980s industrial sci-fi prop. One card only; no hand, lanyard, clip, strap, desk or other object. Realistic painterly UHD art matching detailed game props, soft neutral desk lighting, strong enough edge definition for a small 160-pixel rendering. REAL TRANSPARENT BACKGROUND, no floor, cast shadow, blur field, border, watermark or UI. The blank anonymous identity is intentional and must remain anonymous.",
+        "referencedImagesInOrder": []
+      },
+      "pixelEditing": "None. The selected generator file is copied byte for byte into the runtime asset path."
+    },
+    {
+      "id": "relay-reaching-hand",
+      "path": "assets/prologue/v188/relay-reaching-hand.png",
+      "size": [
+        2164,
+        726
+      ],
+      "mode": "RGBA",
+      "bytes": 2052143,
+      "sha256": "8d8f998b65704b9d31625a7e04f533cc5da9b172bbee3f4453fb582b76e63204",
+      "selected": true,
+      "rawBytesPreserved": true,
+      "alpha": {
+        "extrema": [
+          0,
+          255
+        ],
+        "transparentPixels": 622418,
+        "nonzeroBounds": [
+          0,
+          0,
+          2164,
+          726
+        ],
+        "bounds32": [
+          47,
+          9,
+          2163,
+          702
+        ]
+      },
+      "generatorOutputIdentity": {
+        "kind": "sha256-of-raw-generator-output",
+        "sha256": "8d8f998b65704b9d31625a7e04f533cc5da9b172bbee3f4453fb582b76e63204"
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "transparent_background": true,
+        "prompt": "Use case: stylized-concept. Asset type: one standalone reaching forearm and hand sprite, transparent PNG, for a close-up cinematic in the 2D game Aliens: Tantalus Frontier. An anonymous adult human right forearm enters horizontally from the RIGHT; the hand and fingers extend toward the LEFT as if about to slide a small identification card off a console tabletop. View from above at a modest angle: show the back of the hand and a little of its outer side, fingers naturally relaxed and slightly curled down, five anatomically correct digits including a visible thumb on the near lower side. Natural uninjured warm tan skin, ordinary subtle veins and wrinkles, no jewellery. Worn plain charcoal-brown industrial work-jacket sleeve covers the forearm and ends in a simple cuff at the wrist. Sleeve continues to a clean cropped boundary at the far RIGHT of this isolated asset, to be clipped by the screen edge in animation. Hand, fingertips and wrist entirely visible with transparent margin. Forearm and hand roughly horizontal; natural adult proportions, total visible sleeve plus hand about 35 cm long. ONE hand and ONE forearm only. Empty hand: do not draw a badge, card, tool, weapon or any held object. Realistic detailed painterly UHD sprite, soft neutral overhead desk light, worn cloth consistent with a grounded 1980s industrial sci-fi setting. REAL TRANSPARENT BACKGROUND, no torso, face, table, floor, rectangular backdrop, cast shadow, caption, writing, logo or watermark. Wide landscape composition.",
+        "referencedImagesInOrder": []
+      },
+      "pixelEditing": "None. The selected generator file is copied byte for byte into the runtime asset path."
+    },
+    {
+      "id": "cryo-supply-shelf",
+      "path": "assets/prologue/v188/cryo-supply-shelf.png",
+      "size": [
+        1330,
+        1182
+      ],
+      "mode": "RGBA",
+      "bytes": 2346415,
+      "sha256": "9f5973938e3243957e2800411c6b82383cb459195b0579182a3496bfd3316c41",
+      "selected": true,
+      "rawBytesPreserved": true,
+      "alpha": {
+        "extrema": [
+          0,
+          255
+        ],
+        "transparentPixels": 478191,
+        "nonzeroBounds": [
+          0,
+          0,
+          1321,
+          1182
+        ],
+        "bounds32": [
+          107,
+          109,
+          1224,
+          1080
+        ]
+      },
+      "generatorOutputIdentity": {
+        "kind": "sha256-of-raw-generator-output",
+        "sha256": "9f5973938e3243957e2800411c6b82383cb459195b0579182a3496bfd3316c41"
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "transparent_background": true,
+        "prompt": "Use case: style-transfer. Asset type: one transparent environmental prop sprite for the existing Aliens: Tantalus Frontier side-view Canvas game. Input image is a MATERIAL AND RENDERING REFERENCE ONLY: match its worn blue-grey industrial steel, restrained brushed details and realistic painterly finish; do not reproduce the tall locker. Primary request: a compact wall-mounted supply shelf, physical overall size 0.90 metres wide by 0.80 metres tall, seen almost straight from the front with only minimal top and side depth. Rectangular dark aged steel backboard and frame, two horizontal shelves, exactly SIX plain ivory rectangular fabric supply packets, arranged as THREE packets across the upper shelf and THREE across the lower shelf. Each packet upright, separately readable, softly worn canvas, folded top edge and subtle seams; no writing or labels. All six packets remain fully visible and countable, no extra supplies. Slightly brown-charcoal inner frame, cool steel outer corners, low restrained wear, practical utilitarian construction from the same ship as the reference locker. Complete small rack inside the image, no cropping, 8 percent clear padding around every edge. Overall visible rack width:height ratio about 1.125. True transparent background outside the prop. Soft cool frontal/overhead lighting, crisp natural edges, realistic detailed materials, no stylized outlines. No wall, floor, room, person, locker, cart, weapons, medical symbols, text, logo, serial number, warning, UI or watermark. This is an original anonymous ship accessory, not a new story clue. One compact rack only.",
+        "referencedImagesInOrder": [
+          {
+            "type": "project-asset",
+            "path": "assets/act5/v188/echo8-locker-epilogue.png",
+            "sha256": "f2387865f38f7abf8e71869e8e098b792d5f96149898cb94eae00a1b993b3e8b"
+          }
+        ]
+      },
+      "pixelEditing": "None. The selected generator file is copied byte for byte into the runtime asset path."
+    },
+    {
+      "id": "cryo-service-trolley",
+      "path": "assets/prologue/v188/cryo-service-trolley.png",
+      "size": [
+        1322,
+        1190
+      ],
+      "mode": "RGBA",
+      "bytes": 921111,
+      "sha256": "abe35c303c162eb442b1ae77b088ce03590ec1d8be5ad38f8e40e32c784d5b5e",
+      "selected": true,
+      "rawBytesPreserved": true,
+      "alpha": {
+        "extrema": [
+          0,
+          255
+        ],
+        "transparentPixels": 1081916,
+        "nonzeroBounds": [
+          0,
+          9,
+          1308,
+          1190
+        ],
+        "bounds32": [
+          200,
+          114,
+          1122,
+          1106
+        ]
+      },
+      "generatorOutputIdentity": {
+        "kind": "sha256-of-raw-generator-output",
+        "sha256": "abe35c303c162eb442b1ae77b088ce03590ec1d8be5ad38f8e40e32c784d5b5e"
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "transparent_background": true,
+        "prompt": "Use case: style-transfer. Asset type: one transparent environmental prop sprite for the existing Aliens: Tantalus Frontier side-view Canvas game. Input image is a MATERIAL AND RENDERING REFERENCE ONLY: match its worn blue-grey industrial steel, subdued tones and realistic painterly finish; do not reproduce the locker. Primary request: one small EMPTY two-tier service trolley, physical outer size 0.80 metres wide by 0.90 metres tall including wheels. Almost frontal side-elevation for a side-view game, slight visible top surface but little perspective distortion, overall visible width:height ratio about 0.89. Exactly TWO flat rectangular metal trays, upper tray at the top and lower tray halfway down the frame; four slender square tubular uprights; exactly FOUR small industrial caster wheels beneath the feet, rear pair subtly visible behind the front pair, all bottom contact points on one horizontal ground baseline. All trays are empty. Practical charcoal-blue-grey brushed steel, modest rounded tray lips, bolted corners, soft edge wear; subtle cool overhead light matching the reference ship locker. No objects, crates, bags, straps, equipment or contents on the trolley, no occupant. Complete trolley including all wheels entirely inside the canvas with 8 percent transparent padding on all sides. Real transparent background and transparent open space between trays and legs; no wall, floor, cast shadow ellipse, room, backdrop, text, symbols, branding, warning, numbers, UI or watermark. One original anonymous ship service cart, upright and undamaged, not a stretcher or overturned cart. Realistic detailed game art, no cartoon outline.",
+        "referencedImagesInOrder": [
+          {
+            "type": "project-asset",
+            "path": "assets/act5/v188/echo8-locker-epilogue.png",
+            "sha256": "f2387865f38f7abf8e71869e8e098b792d5f96149898cb94eae00a1b993b3e8b"
+          }
+        ]
+      },
+      "pixelEditing": "None. The selected generator file is copied byte for byte into the runtime asset path."
+    }
+  ],
+  "fidelity": {
+    "canonicalReplicaCertified": false,
+    "referenceScope": "The three resident busts, the existing dawn view of Port-Meridien and the ECHO-8 locker are project references. No new external canonical appearance is asserted in this lot.",
+    "checkedAppearance": [
+      "Wren, Ferro and Sarrazin keep the existing faces, hair, clothing palettes and characteristic garments.",
+      "The child has child proportions and a dedicated 1.30 m body.",
+      "Night architecture is derived from the existing Port-Meridien panorama; no dawn horizon is introduced.",
+      "The wall shelf has six separate ivory packets in two rows of three; the trolley is upright and empty with two trays and four casters."
+    ],
+    "projectAdaptations": [
+      "Full bodies, the unnamed child and patient, the stretcher, badge and reaching hand are original project content.",
+      "The shelf packets are anonymous supplies without text or a new narrative use.",
+      "Native game quantities, positions, reveal thresholds and interfaces govern the composed scenes."
+    ],
+    "preservedNativeElements": [
+      "All 28 cinematic scenario records and all existing durations/dialogue/choices.",
+      "Four horizontal cryopods: 03 open behind 01, 02 and 04; two native upright silhouettes on the rescue-bay door.",
+      "ECHO-8 crossed seal, two QZ17 container labels, five north-quay names, 37 messages and their ages.",
+      "18:41 / 18:42 / 18:54 clocks, Cocyte projection/orbit/quarantine lamp, eight pad beacons, relay lamp and weather.",
+      "Patient breathing sin(time * 2.2) * 2, reduced-motion handling, hand appearance after 45 percent and its 620 px travel."
+    ]
+  },
+  "transientPathPolicy": "Generator output identities are exact byte hashes. Temporary generator identifiers and signed transport URLs are omitted.",
+  "reusedRuntimeImages": [
+    {
+      "id": "relay",
+      "path": "assets/content/v188/colony/colony-beacon.png",
+      "size": [
+        1891,
+        831
+      ],
+      "mode": "RGB",
+      "bytes": 2431568,
+      "sha256": "c102f59ef92a479c2088fb7b36b746f49be0ad107000b3771799f85c10f37c52",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "crt-bezel",
+      "path": "assets/insertion/v188/crt-bezel.png",
+      "size": [
+        1484,
+        1060
+      ],
+      "mode": "RGBA",
+      "bytes": 877924,
+      "sha256": "6c6b8af55ac7567e6fbd31c3c8b1ee89c4a9ac893d598d87b342f397df021796",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "asph-ring",
+      "path": "assets/asphodele/v188/cinematics/asph-cin-ring.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "bytes": 1229267,
+      "sha256": "2f5e24f61b6bde87d6719f371bb58836aa162806aeba390721e4d5c87518a652",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "asph-hub",
+      "path": "assets/asphodele/v188/cinematics/asph-cin-hub.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "bytes": 1959228,
+      "sha256": "4d98f277eea7de3fbf41674c6d2255d3c95615c6975e1f97a55b5332e94dd4cd",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "space",
+      "path": "assets/openai/ui/title/v79/space/space-01-deep-frontier.png",
+      "size": [
+        1600,
+        900
+      ],
+      "mode": "RGB",
+      "bytes": 1382097,
+      "sha256": "5393ac4e5ef8900e0988e2585d808c54dbf227b2dda2b4febb7d268940734e8e",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "stars",
+      "path": "assets/openai/ui/title/v79/stars/stars-01-distant-field.png",
+      "size": [
+        1600,
+        900
+      ],
+      "mode": "RGBA",
+      "bytes": 88879,
+      "sha256": "8c6c5915d3820c4ba80f1e072b97e0440bd0f2f230d09e15574affbbdc408b02",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "planet",
+      "path": "assets/openai/ui/title/v79/planet/planet-02-ceto-basin.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1539154,
+      "sha256": "3bfa14220945a74207b1f3fc48d1037fff7777b41e18eafd9742c36d990e6b17",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "tantalus",
+      "path": "assets/openai/ui/title/v79/orbitals/orbitals-01-tantalus-transport.png",
+      "size": [
+        1600,
+        900
+      ],
+      "mode": "RGBA",
+      "bytes": 661590,
+      "sha256": "22fb27544fcbe3da7ea20755b8d9cc60a87187885b1b387027ce903e6a9586ef",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "dropship",
+      "path": "assets/openai/mission/insertion/tantalus-dropship-approach-v62.png",
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "bytes": 2140529,
+      "sha256": "35cf9d10f3df30fae249a97dd31e2f2e52d7251292c5bced4bc4ece195e24d02",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "troop-bay",
+      "path": "assets/insertion/v188/ud4l-troop-bay.png",
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "bytes": 2173153,
+      "sha256": "aa47a7b7ff6fbad208ec7b360a64c85c66f53a2136e8a38bc827eed0b25fd8df",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "cryo-bulkhead",
+      "path": "assets/openai/metroidvania/zones/ship-cargo-far.png",
+      "size": [
+        1600,
+        900
+      ],
+      "mode": "RGB",
+      "bytes": 1098113,
+      "sha256": "d22dfa8f97147f040b233045e7c67a7304996974c0f9ea50128e772edb08c673",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "cryo-overhead",
+      "path": "assets/openai/hub/layers/command-cryo-overhead.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "bytes": 633241,
+      "sha256": "ead6d84bd6598ffdbc808d60071f15a56fe7c56221f9d394941d8111b0abbe93",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "container-skin",
+      "path": "assets/openai/hub/layers/v138/interior-wall-atlas.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 2426250,
+      "sha256": "059f10b591b318f0081f7e15164d7abb01ab76ddf4de0b928bcf4ee094841033",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "quay-airlock",
+      "path": "assets/openai/metroidvania/props/open-bulkhead.png",
+      "size": [
+        160,
+        232
+      ],
+      "mode": "RGBA",
+      "bytes": 23594,
+      "sha256": "9348837744930c1332657f6878fa23ec58fa520ddd2fa4d0a43643b43bda0532",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "cryopod",
+      "path": "assets/openai/hub/props/cryopod.png",
+      "size": [
+        241,
+        131
+      ],
+      "mode": "RGBA",
+      "bytes": 53492,
+      "sha256": "5792ee4f6296348e15e3870f6d3b61c210e3df7bb30d3519fb545393ba8aa6cb",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "echo8-locker",
+      "path": "assets/act5/v188/echo8-locker-epilogue.png",
+      "size": [
+        802,
+        1960
+      ],
+      "mode": "RGBA",
+      "bytes": 1966134,
+      "sha256": "f2387865f38f7abf8e71869e8e098b792d5f96149898cb94eae00a1b993b3e8b",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "escape-bay-door",
+      "path": "assets/openai/hub/annexes/v71/escape-pods/door.webp",
+      "size": [
+        384,
+        512
+      ],
+      "mode": "RGBA",
+      "bytes": 122264,
+      "sha256": "e3aaab7dad4409878b0e392c2cb9a301de2c8190802e1cff1140066af70dc8c4",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "briefing-room",
+      "path": "assets/openai/hub/rooms/command-briefing.png",
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "bytes": 1595975,
+      "sha256": "23808a5630773e9c4c294a738c4d720b50a004d68c12195a7f007bf3d602ca34",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "tactical-table",
+      "path": "assets/openai/hub/props/operations-table-v61.png",
+      "size": [
+        1024,
+        512
+      ],
+      "mode": "RGBA",
+      "bytes": 675195,
+      "sha256": "d236cc5324de598591cfb412e8f47b504d255b4119481137f893796155034c46",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "range",
+      "path": "assets/content/v188/colony/quest-range.png",
+      "size": [
+        1890,
+        832
+      ],
+      "mode": "RGB",
+      "bytes": 2403952,
+      "sha256": "e235e96a4bb8341c528f4318d5f25d8e03f947bec8146bbebae03188318aed00",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "quay",
+      "path": "assets/act5/v188/quay-standoff.png",
+      "size": [
+        1935,
+        813
+      ],
+      "mode": "RGB",
+      "bytes": 2682911,
+      "sha256": "36c427b8ce6a592431568e73f7c81f0367d3901aea6d813219db94ac9fb711b2",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "medical-room",
+      "path": "assets/openai/hub/rooms/habitat-medical.png",
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "bytes": 1534526,
+      "sha256": "38fc8e0c7552a53aec330c7c70e98f299d9058d52ed583dc67d8f8ca57be3262",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "quarters",
+      "path": "assets/asphodele/v188/cinematics/asph-cin-rook-quarters.png",
+      "size": [
+        1939,
+        811
+      ],
+      "mode": "RGB",
+      "bytes": 1819959,
+      "sha256": "a6adaf3a7f2206e1e25cd29c12bf34a43768f34b817a86b1df5cc675a783c137",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "north-wall",
+      "path": "assets/content/v188/colony/colony-walls.png",
+      "size": [
+        1893,
+        831
+      ],
+      "mode": "RGB",
+      "bytes": 2514990,
+      "sha256": "a427764a9d312d81afb4bd9ac1d4a3b0c1ded7445e487a824302c1a60c73f3d1",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "resident-docker",
+      "path": "assets/asphodele/v188/asph-npc-docker.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "bytes": 1112083,
+      "sha256": "9ab758528b1b317c1cfc4277ce3f3444e35ebf1a3090bdaa939dd9aa4d8f0e89",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "resident-merchant",
+      "path": "assets/asphodele/v188/asph-npc-merchant.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "bytes": 1012530,
+      "sha256": "106d2657fbafeb802b5e638f66ad8f2695f84597ad18114346751571d93d7bf8",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "vega",
+      "path": "assets/openai/sprites/normalized/npcs/mara-vega-locomotion-sheet.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 494920,
+      "sha256": "b74106a299e1d48fc7acb160940a54285faf405f7e60bd6293203db5f6d4ac35",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "inez",
+      "path": "assets/openai/sprites/normalized/npcs/inez-harlow-locomotion-sheet.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 576507,
+      "sha256": "dd0e93df51e4240ac0a91e2cee6d2b824688afaee88f12a0e86c7ea7e1ed0a92",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "velez",
+      "path": "assets/openai/sprites/normalized/npcs/tamsin-velez-locomotion-sheet.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 572790,
+      "sha256": "2c08ef078352f74fe00d48fa7843f138cdd4675a9c58988425d4ffaf974843d5",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "david",
+      "path": "assets/openai/sprites/normalized/npcs/david-8r-locomotion-sheet.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 582485,
+      "sha256": "e70554f1edc05bfbb8f00d765b96b168a855b90cfe5d3b4a88f50102874ca61a",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "asha",
+      "path": "assets/openai/sprites/normalized/npcs/asha-mbaye-locomotion-sheet.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 579150,
+      "sha256": "a9cfe2c6df338f0a3c1f743cb936914460c0126b560687785c156b12ce1614c7",
+      "unchangedFromBase": true
+    },
+    {
+      "id": "echo9-idle",
+      "path": "assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 628213,
+      "sha256": "f5b25ca6189d0a2891d1a6f60635417238d7dc52bfece7ae20a2cd9dffa21ca3",
+      "unchangedFromBase": true
+    }
+  ],
+  "runtime": {
+    "module": "src/prologue-art-v188.js",
+    "catalogueImageCount": 43,
+    "newImageCount": 11,
+    "reusedImageCount": 32,
+    "cinematicResourceIds": {
+      "cin-00": [
+        "relay",
+        "crt-bezel",
+        "relay-access-badge",
+        "relay-reaching-hand",
+        "asph-ring",
+        "asph-hub",
+        "space",
+        "stars",
+        "planet",
+        "tantalus"
+      ],
+      "cin-01": [
+        "cryo-bulkhead",
+        "cryo-overhead",
+        "cryopod",
+        "echo8-locker",
+        "escape-bay-door",
+        "david",
+        "cryo-supply-shelf",
+        "cryo-service-trolley"
+      ],
+      "cin-p2": [
+        "range",
+        "vega"
+      ],
+      "cin-02": [
+        "briefing-room",
+        "tactical-table",
+        "inez",
+        "vega",
+        "velez",
+        "echo9-idle"
+      ],
+      "cin-03": [
+        "dropship",
+        "troop-bay",
+        "port-meridien-night-approach"
+      ],
+      "cin-p3-wren": [
+        "quay",
+        "container-skin",
+        "quay-airlock",
+        "tomas-wren-standing",
+        "resident-docker",
+        "resident-merchant",
+        "resident-child-standing"
+      ],
+      "cin-p3-ferro": [
+        "medical-room",
+        "lucia-ferro-standing",
+        "medical-stretcher",
+        "north-quay-patient"
+      ],
+      "cin-20": [
+        "quarters"
+      ],
+      "cin-10": [
+        "dropship",
+        "troop-bay"
+      ],
+      "cin-doyenne": [
+        "quay",
+        "container-skin",
+        "quay-airlock",
+        "asha",
+        "adele-sarrazin-standing",
+        "medical-room",
+        "port-meridien-night-approach",
+        "north-wall"
+      ],
+      "cin-20-rook": [
+        "quarters"
+      ]
+    },
+    "sourceRects": {
+      "tomas-wren-standing": [
+        243,
+        12,
+        497,
+        1515
+      ],
+      "lucia-ferro-standing": [
+        289,
+        12,
+        449,
+        1510
+      ],
+      "adele-sarrazin-standing": [
+        247,
+        12,
+        521,
+        1515
+      ],
+      "resident-child-standing": [
+        267,
+        9,
+        422,
+        1516
+      ],
+      "north-quay-patient": [
+        16,
+        199,
+        2139,
+        388
+      ],
+      "medical-stretcher": [
+        10,
+        85,
+        1905,
+        730
+      ],
+      "relay-access-badge": [
+        24,
+        61,
+        1528,
+        889
+      ],
+      "relay-reaching-hand": [
+        45,
+        7,
+        2119,
+        697
+      ],
+      "cryo-supply-shelf": [
+        105,
+        107,
+        1121,
+        975
+      ],
+      "cryo-service-trolley": [
+        198,
+        112,
+        926,
+        996
+      ],
+      "cryopod": [
+        8,
+        9,
+        224,
+        114
+      ],
+      "echo8-locker": [
+        116,
+        118,
+        567,
+        1734
+      ],
+      "escape-bay-door": [
+        24,
+        133,
+        338,
+        349
+      ],
+      "tactical-table": [
+        57,
+        60,
+        932,
+        402
+      ],
+      "container-skin": [
+        27,
+        545,
+        462,
+        414
+      ],
+      "quay-airlock": [
+        2,
+        2,
+        156,
+        174
+      ],
+      "asph-ring": [
+        31,
+        31,
+        1192,
+        1192
+      ],
+      "asph-hub": [
+        72,
+        72,
+        1110,
+        1110
+      ],
+      "medical-room": [
+        0,
+        74,
+        1672,
+        666
+      ],
+      "briefing-room": [
+        0,
+        74,
+        1672,
+        666
+      ],
+      "vega": [
+        92,
+        21,
+        71,
+        221
+      ],
+      "inez": [
+        93,
+        14,
+        69,
+        228
+      ],
+      "velez": [
+        79,
+        15,
+        97,
+        227
+      ],
+      "david": [
+        93,
+        15,
+        70,
+        227
+      ],
+      "asha": [
+        90,
+        14,
+        75,
+        228
+      ],
+      "echo9-idle": [
+        70,
+        47,
+        115,
+        193
+      ],
+      "resident-docker": [
+        130,
+        71,
+        161,
+        760
+      ],
+      "resident-merchant": [
+        126,
+        59,
+        179,
+        770
+      ]
+    },
+    "anchors": {
+      "tomas-wren-standing": {
+        "foot": [
+          493,
+          1524
+        ]
+      },
+      "lucia-ferro-standing": {
+        "foot": [
+          514,
+          1519
+        ]
+      },
+      "adele-sarrazin-standing": {
+        "foot": [
+          507,
+          1524
+        ]
+      },
+      "resident-child-standing": {
+        "foot": [
+          478,
+          1522
+        ]
+      },
+      "north-quay-patient": {
+        "support": [
+          1110,
+          573
+        ],
+        "chest": [
+          1200,
+          199,
+          640,
+          388
+        ],
+        "head": [
+          2010,
+          395
+        ],
+        "heel": [
+          90,
+          576
+        ]
+      },
+      "medical-stretcher": {
+        "ground": [
+          961,
+          812
+        ],
+        "mattress": [
+          96,
+          87,
+          1733,
+          88
+        ],
+        "support": [
+          962,
+          170
+        ]
+      },
+      "relay-access-badge": {
+        "body": [
+          26,
+          63,
+          1524,
+          885
+        ]
+      },
+      "relay-reaching-hand": {
+        "fingertips": [
+          54,
+          453
+        ]
+      },
+      "port-meridien-night-approach": {
+        "pad": [
+          290,
+          636,
+          950,
+          124
+        ],
+        "processor": [
+          1110,
+          80,
+          474,
+          485
+        ]
+      },
+      "relay": {
+        "lamp": [
+          600,
+          40,
+          27,
+          30
+        ]
+      },
+      "cryo-supply-shelf": {
+        "mount": [
+          665,
+          1079
+        ]
+      },
+      "cryo-service-trolley": {
+        "ground": [
+          662,
+          1105
+        ]
+      },
+      "echo8-locker": {
+        "label": [
+          220,
+          565,
+          362,
+          106
+        ]
+      },
+      "cryopod": {
+        "lid": [
+          44,
+          15,
+          136,
+          56
+        ],
+        "hinge": [
+          174,
+          66
+        ]
+      },
+      "crt-bezel": {
+        "screen": [
+          106,
+          110,
+          1270,
+          790
+        ]
+      },
+      "asph-ring": {
+        "pivot": [
+          627,
+          627
+        ]
+      },
+      "asph-hub": {
+        "pivot": [
+          627,
+          627
+        ],
+        "quarantine": [
+          616,
+          616,
+          23,
+          23
+        ]
+      },
+      "vega": {
+        "foot": [
+          128,
+          240
+        ]
+      },
+      "inez": {
+        "foot": [
+          128,
+          240
+        ]
+      },
+      "velez": {
+        "foot": [
+          128,
+          240
+        ]
+      },
+      "david": {
+        "foot": [
+          128,
+          240
+        ]
+      },
+      "asha": {
+        "foot": [
+          128,
+          240
+        ]
+      },
+      "echo9-idle": {
+        "foot": [
+          128,
+          240
+        ]
+      },
+      "resident-docker": {
+        "foot": [
+          221.75,
+          829
+        ]
+      },
+      "resident-merchant": {
+        "foot": [
+          221.75,
+          827
+        ]
+      }
+    },
+    "nativeSetLayouts": {
+      "cryo": {
+        "scene": "cryo",
+        "scale": 140,
+        "floor": 510,
+        "items": [
+          {
+            "kind": "locker",
+            "x": 120,
+            "w": 0.9,
+            "h": 2.2,
+            "label": "ECHO-8",
+            "sealed": true,
+            "metres": [
+              0.9,
+              2.2
+            ],
+            "px": {
+              "x": 120,
+              "w": 126,
+              "h": 308,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "bay-door",
+            "x": 310,
+            "w": 1.6,
+            "h": 2.6,
+            "label": "CAPSULES DE SAUVETAGE",
+            "metres": [
+              1.6,
+              2.6
+            ],
+            "px": {
+              "x": 310,
+              "w": 224,
+              "h": 364,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "person",
+            "x": 640,
+            "w": 0.5,
+            "h": 1.8,
+            "who": "DAVID-8R",
+            "crewId": "crew-10-david-8r",
+            "android": true,
+            "metres": [
+              0.5,
+              1.8
+            ],
+            "px": {
+              "x": 640,
+              "w": 70,
+              "h": 252,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "capsule",
+            "x": 770,
+            "w": 2.3,
+            "h": 1.1,
+            "number": "03",
+            "open": true,
+            "metres": [
+              2.3,
+              1.1
+            ],
+            "px": {
+              "x": 770,
+              "w": 322,
+              "h": 154,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "capsule",
+            "x": -70,
+            "w": 2.3,
+            "h": 1.1,
+            "number": "01",
+            "open": false,
+            "drop": 0.65,
+            "metres": [
+              2.3,
+              1.1
+            ],
+            "px": {
+              "x": -70,
+              "w": 322,
+              "h": 154,
+              "drop": 91
+            }
+          },
+          {
+            "kind": "capsule",
+            "x": 300,
+            "w": 2.3,
+            "h": 1.1,
+            "number": "02",
+            "open": false,
+            "drop": 0.65,
+            "metres": [
+              2.3,
+              1.1
+            ],
+            "px": {
+              "x": 300,
+              "w": 322,
+              "h": 154,
+              "drop": 91
+            }
+          },
+          {
+            "kind": "capsule",
+            "x": 1040,
+            "w": 2.3,
+            "h": 1.1,
+            "number": "04",
+            "open": false,
+            "drop": 0.65,
+            "metres": [
+              2.3,
+              1.1
+            ],
+            "px": {
+              "x": 1040,
+              "w": 322,
+              "h": 154,
+              "drop": 91
+            }
+          }
+        ]
+      },
+      "locker": {
+        "scene": "locker",
+        "scale": 190,
+        "floor": 610,
+        "items": [
+          {
+            "kind": "shelf",
+            "x": 250,
+            "w": 0.9,
+            "h": 0.8,
+            "mount": 1.3,
+            "metres": [
+              0.9,
+              0.8
+            ],
+            "px": {
+              "x": 250,
+              "w": 171,
+              "h": 152,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "locker",
+            "x": 555,
+            "w": 0.9,
+            "h": 2.2,
+            "label": "ECHO-8",
+            "sealed": true,
+            "metres": [
+              0.9,
+              2.2
+            ],
+            "px": {
+              "x": 555,
+              "w": 171,
+              "h": 418,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "trolley",
+            "x": 820,
+            "w": 0.8,
+            "h": 0.9,
+            "metres": [
+              0.8,
+              0.9
+            ],
+            "px": {
+              "x": 820,
+              "w": 152,
+              "h": 171,
+              "drop": 0
+            }
+          }
+        ]
+      },
+      "hologram": {
+        "scene": "hologram",
+        "scale": 220,
+        "floor": 700,
+        "items": [
+          {
+            "kind": "table",
+            "x": 299,
+            "w": 3.1,
+            "h": 0.9,
+            "metres": [
+              3.1,
+              0.9
+            ],
+            "px": {
+              "x": 299,
+              "w": 682,
+              "h": 198,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "person",
+            "x": 140,
+            "w": 0.5,
+            "h": 1.8,
+            "who": "INEZ HARLOW",
+            "crewId": "crew-09-inez-harlow",
+            "metres": [
+              0.5,
+              1.8
+            ],
+            "px": {
+              "x": 140,
+              "w": 110,
+              "h": 396,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "person",
+            "x": 320,
+            "w": 0.5,
+            "h": 1.8,
+            "who": "LT. MARA VEGA",
+            "crewId": "crew-01-mara-vega",
+            "metres": [
+              0.5,
+              1.8
+            ],
+            "px": {
+              "x": 320,
+              "w": 110,
+              "h": 396,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "person",
+            "x": 960,
+            "w": 0.5,
+            "h": 1.8,
+            "who": "TAMSIN VELEZ",
+            "crewId": "crew-02-tamsin-velez",
+            "metres": [
+              0.5,
+              1.8
+            ],
+            "px": {
+              "x": 960,
+              "w": 110,
+              "h": 396,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "person",
+            "x": 1140,
+            "w": 0.5,
+            "h": 1.8,
+            "who": "ECHO-9",
+            "metres": [
+              0.5,
+              1.8
+            ],
+            "px": {
+              "x": 1140,
+              "w": 110,
+              "h": 396,
+              "drop": 0
+            }
+          }
+        ]
+      },
+      "triage": {
+        "scene": "triage",
+        "scale": 180,
+        "floor": 560,
+        "items": [
+          {
+            "kind": "person",
+            "x": 640,
+            "w": 0.5,
+            "h": 1.7,
+            "who": "LUCIA FERRO",
+            "metres": [
+              0.5,
+              1.7
+            ],
+            "px": {
+              "x": 640,
+              "w": 90,
+              "h": 306,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "stretcher",
+            "x": 760,
+            "w": 2,
+            "h": 0.85,
+            "metres": [
+              2,
+              0.85
+            ],
+            "px": {
+              "x": 760,
+              "w": 360,
+              "h": 153,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "patient",
+            "x": 785,
+            "w": 1.75,
+            "h": 0.25,
+            "bandaged": true,
+            "metres": [
+              1.75,
+              0.25
+            ],
+            "px": {
+              "x": 785,
+              "w": 315,
+              "h": 45,
+              "drop": 0
+            }
+          }
+        ]
+      },
+      "quay": {
+        "scene": "quay",
+        "scale": 80,
+        "floor": 520,
+        "items": [
+          {
+            "kind": "container",
+            "x": 20,
+            "w": 2.99,
+            "h": 2.59,
+            "stack": 2,
+            "label": "QZ17",
+            "metres": [
+              2.99,
+              2.59
+            ],
+            "px": {
+              "x": 20,
+              "w": 239,
+              "h": 207,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "container",
+            "x": 270,
+            "w": 2.99,
+            "h": 2.59,
+            "stack": 1,
+            "metres": [
+              2.99,
+              2.59
+            ],
+            "px": {
+              "x": 270,
+              "w": 239,
+              "h": 207,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "container",
+            "x": 940,
+            "w": 2.99,
+            "h": 2.59,
+            "stack": 1,
+            "label": "QZ17",
+            "metres": [
+              2.99,
+              2.59
+            ],
+            "px": {
+              "x": 940,
+              "w": 239,
+              "h": 207,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "container",
+            "x": 1180,
+            "w": 2.99,
+            "h": 2.59,
+            "stack": 2,
+            "metres": [
+              2.99,
+              2.59
+            ],
+            "px": {
+              "x": 1180,
+              "w": 239,
+              "h": 207,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "airlock",
+            "x": 600,
+            "w": 2.4,
+            "h": 2.6,
+            "lit": true,
+            "metres": [
+              2.4,
+              2.6
+            ],
+            "px": {
+              "x": 600,
+              "w": 192,
+              "h": 208,
+              "drop": 0
+            }
+          }
+        ]
+      }
+    },
+    "nativeQuayCastLayouts": {
+      "arrival": {
+        "scene": "quay",
+        "scale": 80,
+        "floor": 520,
+        "items": [
+          {
+            "kind": "container",
+            "x": 20,
+            "w": 2.99,
+            "h": 2.59,
+            "stack": 2,
+            "label": "QZ17",
+            "metres": [
+              2.99,
+              2.59
+            ],
+            "px": {
+              "x": 20,
+              "w": 239,
+              "h": 207,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "container",
+            "x": 270,
+            "w": 2.99,
+            "h": 2.59,
+            "stack": 1,
+            "metres": [
+              2.99,
+              2.59
+            ],
+            "px": {
+              "x": 270,
+              "w": 239,
+              "h": 207,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "container",
+            "x": 940,
+            "w": 2.99,
+            "h": 2.59,
+            "stack": 1,
+            "label": "QZ17",
+            "metres": [
+              2.99,
+              2.59
+            ],
+            "px": {
+              "x": 940,
+              "w": 239,
+              "h": 207,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "container",
+            "x": 1180,
+            "w": 2.99,
+            "h": 2.59,
+            "stack": 2,
+            "metres": [
+              2.99,
+              2.59
+            ],
+            "px": {
+              "x": 1180,
+              "w": 239,
+              "h": 207,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "airlock",
+            "x": 600,
+            "w": 2.4,
+            "h": 2.6,
+            "lit": true,
+            "metres": [
+              2.4,
+              2.6
+            ],
+            "px": {
+              "x": 600,
+              "w": 192,
+              "h": 208,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "person",
+            "x": 470,
+            "w": 0.5,
+            "h": 1.8,
+            "who": "TOMAS WREN",
+            "metres": [
+              0.5,
+              1.8
+            ],
+            "px": {
+              "x": 470,
+              "w": 40,
+              "h": 144,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "resident",
+            "x": 820,
+            "w": 0.45,
+            "h": 1.75,
+            "who": "HABITANT 1",
+            "metres": [
+              0.45,
+              1.75
+            ],
+            "px": {
+              "x": 820,
+              "w": 36,
+              "h": 140,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "resident",
+            "x": 868,
+            "w": 0.45,
+            "h": 1.6,
+            "who": "HABITANT 2",
+            "metres": [
+              0.45,
+              1.6
+            ],
+            "px": {
+              "x": 868,
+              "w": 36,
+              "h": 128,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "resident",
+            "x": 906,
+            "w": 0.4,
+            "h": 1.3,
+            "who": "HABITANT 3",
+            "metres": [
+              0.4,
+              1.3
+            ],
+            "px": {
+              "x": 906,
+              "w": 32,
+              "h": 104,
+              "drop": 0
+            }
+          }
+        ]
+      },
+      "elder": {
+        "scene": "quay",
+        "scale": 80,
+        "floor": 520,
+        "items": [
+          {
+            "kind": "container",
+            "x": 20,
+            "w": 2.99,
+            "h": 2.59,
+            "stack": 2,
+            "label": "QZ17",
+            "metres": [
+              2.99,
+              2.59
+            ],
+            "px": {
+              "x": 20,
+              "w": 239,
+              "h": 207,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "container",
+            "x": 270,
+            "w": 2.99,
+            "h": 2.59,
+            "stack": 1,
+            "metres": [
+              2.99,
+              2.59
+            ],
+            "px": {
+              "x": 270,
+              "w": 239,
+              "h": 207,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "container",
+            "x": 940,
+            "w": 2.99,
+            "h": 2.59,
+            "stack": 1,
+            "label": "QZ17",
+            "metres": [
+              2.99,
+              2.59
+            ],
+            "px": {
+              "x": 940,
+              "w": 239,
+              "h": 207,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "container",
+            "x": 1180,
+            "w": 2.99,
+            "h": 2.59,
+            "stack": 2,
+            "metres": [
+              2.99,
+              2.59
+            ],
+            "px": {
+              "x": 1180,
+              "w": 239,
+              "h": 207,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "airlock",
+            "x": 600,
+            "w": 2.4,
+            "h": 2.6,
+            "lit": true,
+            "metres": [
+              2.4,
+              2.6
+            ],
+            "px": {
+              "x": 600,
+              "w": 192,
+              "h": 208,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "person",
+            "x": 480,
+            "w": 0.5,
+            "h": 1.75,
+            "who": "ASHA MBAYE",
+            "crewId": "crew-12-asha-mbaye",
+            "metres": [
+              0.5,
+              1.75
+            ],
+            "px": {
+              "x": 480,
+              "w": 40,
+              "h": 140,
+              "drop": 0
+            }
+          },
+          {
+            "kind": "person",
+            "x": 860,
+            "w": 0.5,
+            "h": 1.62,
+            "who": "ADÈLE SARRAZIN",
+            "elder": true,
+            "metres": [
+              0.5,
+              1.62
+            ],
+            "px": {
+              "x": 860,
+              "w": 40,
+              "h": 130,
+              "drop": 0
+            }
+          }
+        ]
+      }
+    },
+    "bodyScale": "Uniform scale from a measured source window and foot pivot. Sarrazin is mirrored toward Asha; other authored directions remain unchanged.",
+    "patientPlacement": "The 2 m reference measures the 1733 px mattress length, mapped to 360 px. Handles extend outside it. Front wheels stay at floor 560; head and heel contacts account for the rear and front mattress edges in the source perspective. Only the thorax animates.",
+    "loading": "Only current-cinematic sources and actual speaker portraits are requested. Pending images are shared, failed images are retried on entry/replay, and draw calls never request an image. Missing backgrounds/props retain their native fallback. Finished/replaced cinematics cannot be revived by late loading or stale RAF callbacks.",
+    "sourceOnlyDocuments": [
+      "docs/development/PROLOGUE_ART_QA_20261117.md",
+      "docs/development/PROLOGUE_ART_PROVENANCE_20261117.json",
+      "docs/development/PROLOGUE_ART_RENDER_RECEIPT_20261117.json",
+      "docs/development/PROLOGUE_ART_OVERVIEW_20261117.png"
+    ],
+    "offline": {
+      "sourceCacheName": "atf-v143-prologue-art-20261117",
+      "shellEntryCount": 725,
+      "newShellModule": "/src/prologue-art-v188.js",
+      "newImagesPrecached": false,
+      "newImagesExactPaths": [
+        "/assets/prologue/v188/tomas-wren-standing.png",
+        "/assets/prologue/v188/lucia-ferro-standing.png",
+        "/assets/prologue/v188/adele-sarrazin-standing.png",
+        "/assets/prologue/v188/resident-child-standing.png",
+        "/assets/prologue/v188/north-quay-patient.png",
+        "/assets/prologue/v188/medical-stretcher.png",
+        "/assets/prologue/v188/port-meridien-night-approach.png",
+        "/assets/prologue/v188/relay-access-badge.png",
+        "/assets/prologue/v188/relay-reaching-hand.png",
+        "/assets/prologue/v188/cryo-supply-shelf.png",
+        "/assets/prologue/v188/cryo-service-trolley.png"
+      ],
+      "runtimeEntryLimit": 256
+    }
+  },
+  "qa": {
+    "report": "docs/development/PROLOGUE_ART_QA_20261117.md",
+    "overview": "docs/development/PROLOGUE_ART_OVERVIEW_20261117.png",
+    "receipt": "docs/development/PROLOGUE_ART_RENDER_RECEIPT_20261117.json",
+    "nativeRender": {
+      "cinematics": 11,
+      "targetShots": 35,
+      "renderedFrames": 70,
+      "fallbackFrames": 70,
+      "newImageContributions": 11,
+      "unchangedScenarios": 28,
+      "outsideCinematics": 17,
+      "unchangedOutsideRasters": 46,
+      "unchangedOutsideTraces": 184,
+      "finalTextGlyphs": 109706,
+      "errors": 0,
+      "warnings": 52
+    },
+    "sourceHashes": {
+      "src/prologue-art-v188.js": "df4ff4fc5a69c8f1834eae84a3687ab374e00591af0531be95b7bc19538986de",
+      "src/story-cinematics-v188.js": "6f1715c07ce920fc375eeb2fb3668b6826ac437cf8b61daf854fdb753556e47f",
+      "src/station-cinematics-v188.js": "b346d65c9cf4a7bb3d155da9b1a72bd6e9439be2facced644b330e654b46bf87",
+      "src/act5-slots-v188.js": "348fb81b62690cb14cfdf94dbbadd740761e4e92507b35ebd2a7a01b92b47328",
+      "src/biological-art-v188.js": "5547ba7e1a2d924eb5ca4c9862c4b73003a6eca2ee0498893649d5d67b7a1afe",
+      "src/asphodele-hub-slots-v188.js": "95d74e5bfb2e3e9e1fd17f5359408c8daf5a97ce73aa1094df9339fb7bbb5f7e"
+    },
+    "sourcesStable": true,
+    "imageBytesStable": true,
+    "fixture": {
+      "renderer": "Production Canvas drawCinematicFrameV188 under @napi-rs/canvas with exact source PNG/WebP paths.",
+      "limit": "Explicit rendering and preload fixtures. No browser, keyboard/network/gameplay or save journey is claimed.",
+      "baseline": "Published commit d54f13cc55983ddb5f55851071c9144198fe1155 source snapshot; existing selected art is shared and hashed.",
+      "fonts": [
+        {
+          "name": "DejaVuSansMono.ttf",
+          "alias": "monospace",
+          "sha256": "54bf827eb99404e8f430c330ad30f063334f637eba0109b6a18d4f566a8e9dd8"
+        },
+        {
+          "name": "DejaVuSansMono-Bold.ttf",
+          "alias": "monospace",
+          "sha256": "0d3c03d1b667192f91223660a3163325cf83132662fe4d9f7d6e596bf7a995c2"
+        },
+        {
+          "name": "DejaVuSans.ttf",
+          "alias": "sans-serif",
+          "sha256": "57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e"
+        },
+        {
+          "name": "DejaVuSans-Bold.ttf",
+          "alias": "sans-serif",
+          "sha256": "a4c5bc453ca281d90ea079e596da7ae0dfeb5777497c29ec254e76d97ff6f890"
+        }
+      ],
+      "monoWidths": {
+        "iiii": 40.939998626708984,
+        "WWWW": 40.939998626708984
+      },
+      "finalTextRule": "Subtitles, full speaker names and final captions: opaque glyph core tolerance 2 RGB. In-scene text uses an opaque coverage mask with the same glyph geometry even when the production text is translucent; actual output contribution is measured against a text-omission frame, and exact native strings are checked independently.",
+      "imageDecoder": "loadImage(absolute source path). Selected PNG/WebP bytes are never converted or modified. A browser-shaped currentSrc URL is exposed after decoding for the existing colony-portrait ownership guard, which rejects the native decoder absolute filesystem path.",
+      "imageContribution": "Only the selected image is replaced with a ready transparent native Canvas of equal dimensions, leaving rendering geometry and branches unchanged.",
+      "outscopeTrace": "Exact operation traces use the same deterministic Canvas double before and after; measureText uses 9 units per character. Separate native raster comparisons use registered fonts."
+    },
+    "nativeContributions": [
+      {
+        "id": "tomas-wren-standing",
+        "path": "/assets/prologue/v188/tomas-wren-standing.png",
+        "consumer": "cin-p3-wren",
+        "shot": 0,
+        "changedPixels": 4896,
+        "maxChannel": 225,
+        "tolerance": 0
+      },
+      {
+        "id": "lucia-ferro-standing",
+        "path": "/assets/prologue/v188/lucia-ferro-standing.png",
+        "consumer": "cin-p3-ferro",
+        "shot": 0,
+        "changedPixels": 19770,
+        "maxChannel": 207,
+        "tolerance": 0
+      },
+      {
+        "id": "adele-sarrazin-standing",
+        "path": "/assets/prologue/v188/adele-sarrazin-standing.png",
+        "consumer": "cin-doyenne",
+        "shot": 0,
+        "changedPixels": 4382,
+        "maxChannel": 200,
+        "tolerance": 0
+      },
+      {
+        "id": "resident-child-standing",
+        "path": "/assets/prologue/v188/resident-child-standing.png",
+        "consumer": "cin-p3-wren",
+        "shot": 0,
+        "changedPixels": 2343,
+        "maxChannel": 170,
+        "tolerance": 0
+      },
+      {
+        "id": "north-quay-patient",
+        "path": "/assets/prologue/v188/north-quay-patient.png",
+        "consumer": "cin-p3-ferro",
+        "shot": 0,
+        "changedPixels": 15367,
+        "maxChannel": 165,
+        "tolerance": 0
+      },
+      {
+        "id": "medical-stretcher",
+        "path": "/assets/prologue/v188/medical-stretcher.png",
+        "consumer": "cin-p3-ferro",
+        "shot": 0,
+        "changedPixels": 30677,
+        "maxChannel": 218,
+        "tolerance": 0
+      },
+      {
+        "id": "port-meridien-night-approach",
+        "path": "/assets/prologue/v188/port-meridien-night-approach.png",
+        "consumer": "cin-03",
+        "shot": 3,
+        "changedPixels": 685800,
+        "maxChannel": 254,
+        "tolerance": 0
+      },
+      {
+        "id": "relay-access-badge",
+        "path": "/assets/prologue/v188/relay-access-badge.png",
+        "consumer": "cin-00",
+        "shot": 3,
+        "changedPixels": 17274,
+        "maxChannel": 231,
+        "tolerance": 0
+      },
+      {
+        "id": "relay-reaching-hand",
+        "path": "/assets/prologue/v188/relay-reaching-hand.png",
+        "consumer": "cin-00",
+        "shot": 3,
+        "changedPixels": 76287,
+        "maxChannel": 183,
+        "tolerance": 0
+      },
+      {
+        "id": "cryo-supply-shelf",
+        "path": "/assets/prologue/v188/cryo-supply-shelf.png",
+        "consumer": "cin-01",
+        "shot": 1,
+        "changedPixels": 29341,
+        "maxChannel": 211,
+        "tolerance": 0
+      },
+      {
+        "id": "cryo-service-trolley",
+        "path": "/assets/prologue/v188/cryo-service-trolley.png",
+        "consumer": "cin-01",
+        "shot": 1,
+        "changedPixels": 13512,
+        "maxChannel": 221,
+        "tolerance": 0
+      }
+    ],
+    "actualLocalBrowserJourney": false,
+    "targetedTests": [
+      {
+        "command": "node --test scripts/verify-story-cinematics-v188.mjs scripts/verify-cinematic-coherence-v188.mjs",
+        "passed": 39,
+        "failed": 0
+      },
+      {
+        "command": "npm run test:audit",
+        "passed": 132,
+        "failed": 0
+      }
+    ],
+    "publicationValidation": "The full release suite and built artifact are recorded separately on the exact published commit in PR 49; this provenance does not embed a self-referential future commit."
+  }
+}

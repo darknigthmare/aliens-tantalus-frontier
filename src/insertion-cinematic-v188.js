@@ -7,7 +7,7 @@
 // - exterior shots, cockpit and troop-bay shots with live CRT screens driven by
 //   one flight state, then a handover to the level (engine side, other agent);
 // - the M577 rides under the belly when the mission deploys it.
-// Everything is drawn with Canvas primitives as PLACEHOLDERS routed through the
+// Produced raster art and the remaining Canvas primitive placeholders use the
 // named slots of insertion-asset-slots-v188.js. Look based on documented
 // references from Aliens (1986); not presented as 1:1 or franchise-certified.
 // Values marked [PROPOSÉ] are project choices (bible, insertion fidelity table).
@@ -411,28 +411,36 @@ const STARS = Array.from({ length: 240 }, (_, i) => {
   return [(h % 2048) / 2048, ((h >>> 11) % 1024) / 1024, 1 + (h >>> 21) % 3, .25 + ((h >>> 24) % 70) / 100];
 });
 function stars(ctx, assets, drift, alpha = 1) {
-  assets.draw(ctx, 'starfield-deep', 0, 0, W, H, () => {
+  const image = assets.image('starfield-deep'), tileWidth = image?.naturalHeight > 0 ? H * image.naturalWidth / image.naturalHeight : W;
+  ctx.save();
+  // A black star plate contributes light without painting over the atmosphere.
+  ctx.globalCompositeOperation = 'screen';
+  assets.draw(ctx, 'starfield-deep', 0, 0, tileWidth, H, () => {
     ctx.fillStyle = '#e8f0f4';
     for (const [x, y, layer, a] of STARS) {
       const px = ((x * W * 1.6 - drift * layer * .5) % W + W) % W;
       ctx.globalAlpha = a * alpha; ctx.fillRect(px, y * H, layer > 2 ? 2 : 1.4, layer > 2 ? 2 : 1.4);
     }
     ctx.globalAlpha = 1;
-  });
+  }, { alpha, scroll: drift * .5, repeatWidth: W });
+  ctx.restore();
 }
 function letterbox(ctx) { ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, INSERTION_LETTERBOX_V188); ctx.fillRect(0, H - INSERTION_LETTERBOX_V188, W, INSERTION_LETTERBOX_V188); }
 
 function dropship(ctx, assets, x, y, scale, { apc = false, ramp = 0, engine = 0, gear = false, heat = 0, lights = true, time = 0, tilt = 0, steady = false } = {}) {
   ctx.save(); ctx.translate(x, y); ctx.rotate(tilt); ctx.scale(scale, scale);
-  if (apc) assets.draw(ctx, 'm577-side', -150, 18, 300, 125, () => apcShape(ctx, -150, 30, 1));
+  const raster = Boolean(assets.image('ud4l-side'));
+  const engineX = raster ? -85 : -300, engineY = raster ? -20 : -10;
+  // The powered exhaust is live even when the airframe comes from a PNG.
+  if (engine > 0) {
+    const flare = steady ? 1 : .85 + .15 * Math.sin(time * 40);
+    const glow = ctx.createRadialGradient(engineX, engineY, 4, engineX, engineY, 110 * engine * flare);
+    glow.addColorStop(0, 'rgba(190,230,255,.9)'); glow.addColorStop(.35, 'rgba(120,170,255,.35)'); glow.addColorStop(1, 'rgba(80,120,255,0)');
+    ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(engineX, engineY, 110 * engine * flare, 0, Math.PI * 2); ctx.fill();
+  }
+  if (apc) assets.draw(ctx, 'm577-side', -150, 18, 300, 125, () => apcShape(ctx, -150, 30, 1), { fit: 'contain' });
   assets.draw(ctx, 'ud4l-side', -320, -120, 640, 240, () => {
     // UD-4L side profile (placeholder): angular hull, chin turret, stub wing, twin booms/fins, rear ramp.
-    if (engine > 0) {
-      const flare = steady ? 1 : .85 + .15 * Math.sin(time * 40);
-      const glow = ctx.createRadialGradient(-300, -10, 4, -300, -10, 110 * engine * flare);
-      glow.addColorStop(0, 'rgba(190,230,255,.9)'); glow.addColorStop(.35, 'rgba(120,170,255,.35)'); glow.addColorStop(1, 'rgba(80,120,255,0)');
-      ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(-300, -10, 110 * engine * flare, 0, Math.PI * 2); ctx.fill();
-    }
     ctx.fillStyle = '#2b3128';
     ctx.beginPath(); ctx.moveTo(250, -6); ctx.lineTo(200, -46); ctx.lineTo(90, -60); ctx.lineTo(-170, -56); ctx.lineTo(-250, -40);
     ctx.lineTo(-300, -30); ctx.lineTo(-300, 4); ctx.lineTo(-170, 14); ctx.lineTo(-170, 30); ctx.lineTo(150, 30); ctx.lineTo(230, 12); ctx.closePath(); ctx.fill();
@@ -444,31 +452,35 @@ function dropship(ctx, assets, x, y, scale, { apc = false, ramp = 0, engine = 0,
     ctx.fillStyle = '#7d9aa1'; ctx.beginPath(); ctx.moveTo(240, -10); ctx.lineTo(196, -42); ctx.lineTo(150, -44); ctx.lineTo(160, -14); ctx.fill(); // canopy
     ctx.fillStyle = '#161915'; ctx.beginPath(); ctx.arc(205, 30, 15, 0, Math.PI * 2); ctx.fill(); ctx.fillRect(205, 26, 42, 5); // chin turret and barrel
     ctx.fillStyle = AMBER; ctx.globalAlpha = .55; ctx.fillRect(-120, -44, 60, 4); ctx.fillRect(-40, -44, 14, 4); ctx.globalAlpha = 1; // hull markings
-    ctx.fillStyle = '#1a1e19'; // rear ramp, hinged at the bottom of the tail
-    ctx.save(); ctx.translate(-170, 30); ctx.rotate(ramp * .9); ctx.fillRect(-90, -6, 90, 8); ctx.restore();
-    if (ramp > .1) { ctx.fillStyle = 'rgba(220,60,50,.55)'; ctx.fillRect(-176, -30, 8, 56); }
-    if (gear) { ctx.fillStyle = '#121411'; for (const gx of [-140, 120]) { ctx.fillRect(gx, 30, 6, 32); ctx.fillRect(gx - 12, 60, 30, 6); } }
-    if (lights) {
-      const on = steady || Math.sin(time * 6) > 0;
-      ctx.fillStyle = on ? '#ff5a4a' : '#5a1a16'; ctx.fillRect(-306, -112, 6, 6);
-      ctx.fillStyle = on ? '#8dff9a' : '#1e4a24'; ctx.fillRect(84, -6, 6, 6);
-    }
-    if (heat > 0) {
-      const sheath = ctx.createRadialGradient(240, 4, 4, 240, 4, 140);
-      sheath.addColorStop(0, `rgba(255,236,190,${.9 * heat})`); sheath.addColorStop(.4, `rgba(255,140,60,${.55 * heat})`); sheath.addColorStop(1, 'rgba(255,80,30,0)');
-      ctx.globalCompositeOperation = 'lighter'; ctx.fillStyle = sheath; ctx.beginPath(); ctx.arc(240, 4, 140, 0, Math.PI * 2); ctx.fill();
-      ctx.globalCompositeOperation = 'source-over';
-    }
-  });
+  }, { fit: 'contain' });
+  // Presentation anchors measured on the authored profile; the flight state is
+  // shared with the primitive fallback. The ramp lowers towards the ground.
+  const bellyY = raster ? 64 : 30, rampX = raster ? -80 : -170;
+  if (!raster || ramp > 0) {
+    ctx.fillStyle = '#1a1e19';
+    ctx.save(); ctx.translate(rampX, bellyY); ctx.rotate(-ramp * .42); ctx.fillRect(-90, -6, 90, 8); ctx.restore();
+  }
+  if (ramp > .1) { ctx.fillStyle = 'rgba(220,60,50,.55)'; ctx.fillRect(rampX - 6, bellyY - 44, 8, 44); }
+  if (gear) { ctx.fillStyle = '#121411'; for (const gx of [-100, 180]) { ctx.fillRect(gx, bellyY, 6, 32); ctx.fillRect(gx - 12, bellyY + 30, 30, 6); } }
+  if (lights) {
+    const on = steady || Math.sin(time * 6) > 0;
+    ctx.fillStyle = on ? '#ff5a4a' : '#5a1a16'; ctx.fillRect(raster ? -292 : -306, raster ? -82 : -112, 6, 6);
+    ctx.fillStyle = on ? '#8dff9a' : '#1e4a24'; ctx.fillRect(raster ? 215 : 84, raster ? 12 : -6, 6, 6);
+  }
+  if (heat > 0) {
+    const sheath = ctx.createRadialGradient(240, 4, 4, 240, 4, 140);
+    sheath.addColorStop(0, `rgba(255,236,190,${.9 * heat})`); sheath.addColorStop(.4, `rgba(255,140,60,${.55 * heat})`); sheath.addColorStop(1, 'rgba(255,80,30,0)');
+    ctx.globalCompositeOperation = 'lighter'; ctx.fillStyle = sheath; ctx.beginPath(); ctx.arc(240, 4, 140, 0, Math.PI * 2); ctx.fill();
+  }
   ctx.restore();
 }
 function apcShape(ctx, x, y, scale) {
-  // M577 side silhouette (placeholder): long low wedge hull, four road wheels, rear roof turret.
+  // M577 side silhouette (placeholder): long low wedge hull, two visible wheels, rear roof turret.
   ctx.save(); ctx.translate(x, y); ctx.scale(scale, scale);
   ctx.fillStyle = '#2d3229'; ctx.beginPath(); ctx.moveTo(0, 40); ctx.lineTo(28, 8); ctx.lineTo(250, 4); ctx.lineTo(296, 22); ctx.lineTo(300, 70); ctx.lineTo(10, 72); ctx.closePath(); ctx.fill();
   ctx.fillStyle = '#23271f'; ctx.fillRect(200, -10, 64, 16); ctx.fillRect(210, -16, 70, 6); // turret and twin barrels
-  ctx.fillStyle = '#121411'; for (const wx of [50, 115, 180, 245]) { ctx.beginPath(); ctx.arc(wx, 76, 20, 0, Math.PI * 2); ctx.fill(); }
-  ctx.fillStyle = '#4a4f44'; for (const wx of [50, 115, 180, 245]) { ctx.beginPath(); ctx.arc(wx, 76, 7, 0, Math.PI * 2); ctx.fill(); }
+  ctx.fillStyle = '#121411'; for (const wx of [65, 235]) { ctx.beginPath(); ctx.arc(wx, 76, 27, 0, Math.PI * 2); ctx.fill(); }
+  ctx.fillStyle = '#4a4f44'; for (const wx of [65, 235]) { ctx.beginPath(); ctx.arc(wx, 76, 9, 0, Math.PI * 2); ctx.fill(); }
   ctx.strokeStyle = 'rgba(233,208,122,.5)'; ctx.lineWidth = 2; ctx.strokeRect(120, 22, 46, 36); // side door
   ctx.restore();
 }
@@ -484,11 +496,11 @@ function tantalusHull(ctx, assets, x, y, scale, bayOpen = 1) {
     ctx.fillStyle = `rgba(255,120,80,${.35 + .45 * bayOpen})`; ctx.fillRect(140, 24, 260, 10 + 14 * bayOpen); // drop-bay opening
     ctx.fillStyle = '#e9d07a'; for (let i = 140; i < 400; i += 26) ctx.fillRect(i, 22, 12, 3);
     for (const lx of [-700, -300, 100, 600]) { ctx.fillStyle = 'rgba(255,90,70,.8)'; ctx.fillRect(lx, 30, 5, 5); }
-  });
+  }, { fit: 'contain' });
   ctx.restore();
 }
 function planetBody(ctx, assets, profile, cx, cy, r, { airless = false, time = 0 } = {}) {
-  assets.draw(ctx, airless ? 'moon-limb' : 'planet-limb', 0, 0, W, H, () => {
+  assets.draw(ctx, airless ? 'moon-limb' : 'planet-limb', cx - r, cy - r, r * 2, r * 2, () => {
     const [near, far] = profile.terrain, sky = profile.sky;
     const body = ctx.createRadialGradient(cx - r * .3, cy - r * .5, r * .2, cx, cy, r);
     body.addColorStop(0, shade(near, 1.6)); body.addColorStop(1, shade(far, .6));
@@ -510,10 +522,14 @@ function planetBody(ctx, assets, profile, cx, cy, r, { airless = false, time = 0
       ctx.globalAlpha = 1;
     }
     ctx.restore();
-    if (!airless) { ctx.strokeStyle = shade(sky[1], 2.2); ctx.globalAlpha = .7; ctx.lineWidth = 8; ctx.beginPath(); ctx.arc(cx, cy, r + 4, Math.PI * 1.05, Math.PI * 1.95); ctx.stroke(); ctx.globalAlpha = 1; }
-  });
+  }, { tint: profile.terrain[0] });
+  // The same atmosphere rim follows the live orbital geometry for raster and fallback.
+  if (!airless) {
+    ctx.save(); ctx.strokeStyle = shade(profile.sky[1], 2.2); ctx.globalAlpha *= .7; ctx.lineWidth = 8;
+    ctx.beginPath(); ctx.arc(cx, cy, r + 4, Math.PI * 1.05, Math.PI * 1.95); ctx.stroke(); ctx.restore();
+  }
 }
-function vessel(ctx, assets, x, y, scale, time, steady) {
+function vessel(ctx, assets, x, y, scale, time, steady, worldId) {
   ctx.save(); ctx.translate(x, y); ctx.scale(scale, scale);
   assets.draw(ctx, 'target-vessel', -800, -350, 1600, 700, () => {
     ctx.fillStyle = '#25282b'; ctx.fillRect(-760, -160, 1400, 300); ctx.fillStyle = '#1b1d20'; ctx.fillRect(-600, -260, 500, 110); ctx.fillRect(200, 130, 380, 90);
@@ -523,22 +539,28 @@ function vessel(ctx, assets, x, y, scale, time, steady) {
     const on = steady || Math.sin(time * 4) > 0; ctx.fillStyle = on ? '#8dff9a' : '#244a2a';
     for (const ly of [-56, 52]) ctx.fillRect(676, ly, 8, 8);
     ctx.fillStyle = 'rgba(30,10,8,.6)'; ctx.beginPath(); ctx.ellipse(-200, 40, 160, 60, .2, 0, Math.PI * 2); ctx.fill(); // scorched plating
-  });
+  }, { fit: 'contain', worldId });
   ctx.restore();
 }
 function clouds(ctx, assets, profile, scroll, y, height, alpha, slotId = 'cloud-far') {
-  assets.draw(ctx, slotId, 0, y - height, W, height * 2, () => {
+  // Raster exports include soft transparent margins; give their formations the
+  // same visible scale as the wide fallback ellipses, rather than tiny repeats.
+  const image = assets.image(slotId), layerHeight = height * (image ? 4 : 2);
+  const tileWidth = image?.naturalHeight > 0 ? layerHeight * image.naturalWidth / image.naturalHeight : W;
+  assets.draw(ctx, slotId, 0, y - layerHeight / 2, tileWidth, layerHeight, () => {
     ctx.fillStyle = shade(profile.sky[1], 1.25); ctx.globalAlpha = alpha;
     for (let i = 0; i < 14; i++) {
       const h = hash(`${slotId}:${i}`), cx = (((h % 1600) - scroll) % (W + 400) + W + 400) % (W + 400) - 200;
       ctx.beginPath(); ctx.ellipse(cx, y + ((h >>> 12) % 60) - 30, 140 + (h >>> 18) % 160, height * (.35 + ((h >>> 8) % 40) / 100), 0, 0, Math.PI * 2); ctx.fill();
     }
     ctx.globalAlpha = 1;
-  });
+  }, { tint: shade(profile.sky[1], 1.25), alpha, scroll, repeatWidth: W, seamlessRepeat: true });
 }
 function terrainHeight(seed, x) { return Math.sin(x * .004 + seed) * 40 + Math.sin(x * .011 + seed * 2) * 18 + Math.sin(x * .031 + seed * 3) * 6; }
 function terrain(ctx, assets, profile, scroll, horizon, slotId = 'terrain-far', near = false) {
-  assets.draw(ctx, slotId, 0, horizon - 120, W, H - horizon + 120, () => {
+  const image = assets.image(slotId), layerHeight = H - horizon + 120;
+  const tileWidth = image?.naturalHeight > 0 ? layerHeight * image.naturalWidth / image.naturalHeight : W;
+  assets.draw(ctx, slotId, 0, horizon - 120, tileWidth, layerHeight, () => {
     const seed = (hash(profile.worldId || 'x') % 100) / 10 + (near ? 4 : 0), scale = near ? 2.2 : 1;
     ctx.fillStyle = profile.terrain[near ? 1 : 0]; ctx.beginPath(); ctx.moveTo(0, H);
     for (let x = 0; x <= W; x += 20) ctx.lineTo(x, horizon - terrainHeight(seed, x + scroll) * scale);
@@ -548,7 +570,7 @@ function terrain(ctx, assets, profile, scroll, horizon, slotId = 'terrain-far', 
       ctx.fillRect(tx, horizon - 120, 26, 90); ctx.fillRect(tx - 14, horizon - 70, 54, 16);
       ctx.fillStyle = 'rgba(255,90,70,.8)'; ctx.fillRect(tx + 10, horizon - 126, 6, 6);
     }
-  });
+  }, { tint: profile.terrain[near ? 1 : 0], scroll, repeatWidth: W });
 }
 function weather(ctx, profile, time, reducedMotion, intensity = 1) {
   const kind = profile.weather;
@@ -570,8 +592,8 @@ function weather(ctx, profile, time, reducedMotion, intensity = 1) {
 }
 function plasma(ctx, assets, cx, cy, heat, time, steady) {
   if (heat <= 0) return;
-  assets.draw(ctx, 'entry-plasma', 0, 0, W, H, () => {
-    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+  ctx.save(); ctx.globalCompositeOperation = 'lighter';
+  assets.draw(ctx, 'entry-plasma', cx - W / 2, cy - H / 2, W, H, () => {
     for (let i = 0; i < 26; i++) {
       const h = hash(`plasma:${i}`), angle = (i / 26) * Math.PI * 2 + ((h % 100) / 100 - .5) * .3;
       const len = (220 + (h >>> 10) % 360) * heat, phase = steady ? .5 : ((time * 2.4 + i * .13) % 1);
@@ -583,8 +605,8 @@ function plasma(ctx, assets, cx, cy, heat, time, steady) {
     const glow = ctx.createRadialGradient(cx, cy, 10, cx, cy, 260 * heat + 40);
     glow.addColorStop(0, `rgba(255,240,200,${.85 * heat})`); glow.addColorStop(.3, `rgba(255,140,50,${.5 * heat})`); glow.addColorStop(1, 'rgba(255,60,20,0)');
     ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(cx, cy, 260 * heat + 40, 0, Math.PI * 2); ctx.fill();
-    ctx.restore();
-  });
+  }, { alpha: heat * (steady ? 1 : .92 + .08 * Math.sin(time * 8)) });
+  ctx.restore();
 }
 function skyFor(ctx, profile, state) {
   if (profile.placeType !== 'atmosphere') { ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H); return 1; }
@@ -597,6 +619,9 @@ function skyFor(ctx, profile, state) {
 
 // —— Live CRT screens ——
 function crt(ctx, assets, x, y, w, h, title, colour, body) {
+  // Draw the authored frame first. A slightly opaque or undersized exported
+  // opening must never hide live telemetry or the radio portrait.
+  assets.draw(ctx, 'crt-bezel', x - 8, y - 8, w + 16, h + 16, () => { ctx.strokeStyle = '#2a2e2b'; ctx.lineWidth = 8; ctx.strokeRect(x - 4, y - 4, w + 8, h + 8); ctx.lineWidth = 1; });
   ctx.fillStyle = '#020604'; ctx.fillRect(x, y, w, h);
   ctx.save(); ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip();
   ctx.strokeStyle = colour; ctx.fillStyle = colour; ctx.font = '700 12px monospace'; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
@@ -604,7 +629,6 @@ function crt(ctx, assets, x, y, w, h, title, colour, body) {
   body(x, y + 20, w, h - 20);
   ctx.fillStyle = 'rgba(0,0,0,.22)'; for (let sy = y; sy < y + h; sy += 3) ctx.fillRect(x, sy, w, 1); // scanlines
   ctx.restore();
-  assets.draw(ctx, 'crt-bezel', x - 8, y - 8, w + 16, h + 16, () => { ctx.strokeStyle = '#2a2e2b'; ctx.lineWidth = 8; ctx.strokeRect(x - 4, y - 4, w + 8, h + 8); ctx.lineWidth = 1; });
 }
 function levelShape(ctx, level, x, y, size, colour) {
   ctx.fillStyle = colour; ctx.beginPath();
@@ -690,25 +714,57 @@ function systems(ctx, assets, x, y, w, h, model, colorblind) {
 }
 function commsBox(ctx, assets, x, y, w, h, line, language, time, steady) {
   crt(ctx, assets, x, y, w, h, 'COMMS', AMBER, (bx, by, bw, bh) => {
-    assets.draw(ctx, 'comms-pilot', bx + 6, by + 4, 56, 56, () => {
+    const neutral = () => {
       ctx.globalAlpha = .7; ctx.beginPath(); ctx.arc(bx + 34, by + 26, 16, Math.PI, 0); ctx.fill(); ctx.fillRect(bx + 18, by + 26, 32, 22);
       ctx.globalAlpha = 1; ctx.fillStyle = '#020604'; ctx.fillRect(bx + 24, by + 22, 20, 8); ctx.fillStyle = AMBER;
-    });
+    };
+    if (line?.speaker === PILOT) assets.draw(ctx, 'comms-pilot', bx + 6, by + 4, 56, 56, neutral, { tint: CRT, fit: 'contain' });
+    else neutral();
     const level = line && !steady ? .4 + .6 * Math.abs(Math.sin(time * 11)) : line ? .7 : .05;
     for (let i = 0; i < 18; i++) { const bar = (Math.abs(Math.sin(i * 1.7 + time * (steady ? 0 : 9))) * .8 + .2) * level * (bh - 18); ctx.fillRect(bx + 72 + i * 7, by + bh - 6 - bar * .8, 4, bar * .8); }
     ctx.font = '11px monospace'; ctx.fillStyle = AMBER; ctx.fillText(line ? line.speaker[language === 'en' ? 'en' : 'fr'] : (language === 'en' ? 'CHANNEL OPEN' : 'CANAL OUVERT'), bx + 72, by + 12);
   });
 }
 
+const COCKPIT_ART_CACHE = new WeakMap();
+function cockpitArt(ctx, assets, fallback) {
+  const image = assets.image('ud4l-cockpit');
+  if (!image) { assets.draw(ctx, 'ud4l-cockpit', 0, 0, W, H, fallback); return; }
+  // Measured openings in the authored 16:9 frame, expressed at 1280×720.
+  // Piecewise projection puts the real metal borders around the live displays;
+  // screen programs retain their readable dimensions. Original PNG unchanged.
+  const rows = [[0, 0], [85, 100], [280, 330], [334, 370], [450, 520], [483, 538], [544, 622], [720, 720]];
+  const columns = [[0, 0], [81, 70], [329, 370], [401, 390], [603, 640], [678, 660], [918, 960], [985, 980], [1191, 1210], [1280, 1280]];
+  const paint = destination => {
+    for (let row = 1; row < rows.length; row++) {
+      const [sy, dy] = rows[row - 1], sh = rows[row][0] - sy, dh = rows[row][1] - dy;
+      const cols = sy < 334 ? [[0, 0], [W, W]] : columns;
+      for (let col = 1; col < cols.length; col++) {
+        const [sx, dx] = cols[col - 1], sw = cols[col][0] - sx, dw = cols[col][1] - dx;
+        destination.save(); destination.beginPath(); destination.rect(dx, dy, dw, dh); destination.clip();
+        destination.translate(dx - sx * dw / sw, dy - sy * dh / sh); destination.scale(dw / sw, dh / sh);
+        assets.draw(destination, 'ud4l-cockpit', 0, 0, W, H);
+        destination.restore();
+      }
+    }
+  };
+  let cached = COCKPIT_ART_CACHE.get(image);
+  if (!cached) {
+    const canvas = assets.createCanvas?.(W, H), surface = canvas?.getContext?.('2d');
+    if (surface) { paint(surface); cached = canvas; COCKPIT_ART_CACHE.set(image, canvas); }
+  }
+  if (cached) ctx.drawImage(cached, 0, 0, W, H); else paint(ctx);
+}
+
 function cockpit(ctx, assets, sequence, state, local, time, options) {
   const { profile } = sequence, lang = options.language, model = insertionScreenModelV188(state, sequence, lang);
   // canopy view
-  ctx.save(); ctx.beginPath(); ctx.moveTo(120, 100); ctx.lineTo(1160, 100); ctx.lineTo(1060, 330); ctx.lineTo(220, 330); ctx.closePath(); ctx.clip();
+  ctx.save(); ctx.beginPath(); ctx.moveTo(126, 100); ctx.lineTo(1158, 100); ctx.lineTo(1058, 330); ctx.lineTo(228, 330); ctx.closePath(); ctx.clip();
   const starAlpha = skyFor(ctx, profile, state);
   if (starAlpha > .05) stars(ctx, assets, time * 30, starAlpha);
   if (sequence.placeType === 'space') {
     if (state.shotKind === 'cockpit-rendezvous' || state.shotKind === 'cockpit-release') tantalusHull(ctx, assets, 640, 220, .4 + (1 - state.d) * .2);
-    else vessel(ctx, assets, 640, 220, .12 + (1 - clamp01((state.range ?? 0) / 26000)) * .45, time, options.reducedMotion);
+    else vessel(ctx, assets, 640, 220, .12 + (1 - clamp01((state.range ?? 0) / 26000)) * .45, time, options.reducedMotion, profile.worldId);
   } else if (state.shotKind === 'cockpit-release' || state.shotKind === 'cockpit-rendezvous') {
     tantalusHull(ctx, assets, 640, state.shotKind === 'cockpit-release' ? 190 : 230, .5);
   } else {
@@ -720,14 +776,19 @@ function cockpit(ctx, assets, sequence, state, local, time, options) {
     if (state.heat > .1) { ctx.fillStyle = `rgba(255,120,40,${state.heat * .5})`; ctx.fillRect(0, 0, W, H); }
   }
   ctx.restore();
-  // cockpit frame
-  assets.draw(ctx, 'ud4l-cockpit', 0, 0, W, H, () => {
+  // Protect the live canopy even if generated alpha has imprecise borders.
+  // The central strut remains solid; every screen is drawn over the frame.
+  ctx.save(); ctx.beginPath(); ctx.rect(0, 0, W, H);
+  ctx.moveTo(126, 100); ctx.lineTo(1158, 100); ctx.lineTo(1058, 330); ctx.lineTo(228, 330); ctx.closePath();
+  ctx.rect(626, 100, 28, 230); ctx.clip('evenodd');
+  cockpitArt(ctx, assets, () => {
     ctx.fillStyle = '#0a0c0b'; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(W, 0); ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath();
-    ctx.moveTo(120, 100); ctx.lineTo(220, 330); ctx.lineTo(1060, 330); ctx.lineTo(1160, 100); ctx.closePath(); ctx.fill('evenodd');
+    ctx.moveTo(126, 100); ctx.lineTo(228, 330); ctx.lineTo(1058, 330); ctx.lineTo(1158, 100); ctx.closePath(); ctx.fill('evenodd');
     ctx.fillStyle = '#151816'; ctx.fillRect(0, 330, W, H - 330); ctx.fillRect(626, 100, 28, 230); // centre strut and console
     ctx.fillStyle = '#1d211e'; ctx.beginPath(); ctx.moveTo(0, 330); ctx.lineTo(W, 330); ctx.lineTo(W, 352); ctx.lineTo(0, 352); ctx.fill();
     ctx.fillStyle = '#0e100f'; ctx.beginPath(); ctx.ellipse(250, 640, 150, 120, 0, 0, Math.PI * 2); ctx.ellipse(1030, 640, 150, 120, 0, 0, Math.PI * 2); ctx.fill(); // seat backs
   });
+  ctx.restore();
   const colour = sequence.placeType === 'airless' || state.heat > .55 ? AMBER : CRT;
   navDisplay(ctx, assets, 70, 370, 300, 150, model, state, sequence, colour, time);
   terrainRadar(ctx, assets, 390, 370, 250, 150, profile, state, colour, sequence);
@@ -742,20 +803,26 @@ function troopBay(ctx, assets, sequence, state, local, time, options) {
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
     ctx.fillStyle = '#120605'; for (let x = 0; x < W; x += 110) ctx.fillRect(x, 0, 18, H); // hull ribs
     ctx.fillStyle = '#331310'; ctx.fillRect(0, 470, W, 30); ctx.fillRect(0, 230, W, 16); // seat rail and rack
-    const lamp = options.reducedMotion ? .7 : .6 + .4 * Math.abs(Math.sin(time * 1.8));
-    ctx.fillStyle = `rgba(255,60,40,${.25 * lamp})`; ctx.fillRect(0, 100, W, 20);
-    for (let x = 160; x < W; x += 320) { const glow = ctx.createRadialGradient(x, 110, 4, x, 110, 120); glow.addColorStop(0, `rgba(255,70,50,${.45 * lamp})`); glow.addColorStop(1, 'rgba(255,70,50,0)'); ctx.fillStyle = glow; ctx.fillRect(x - 120, 0, 240, 240); }
   });
-  // marines in harness seats (1 m ≈ 51 px: seated 52×80)
+  const lamp = options.reducedMotion ? .7 : .6 + .4 * Math.abs(Math.sin(time * 1.8));
+  ctx.fillStyle = `rgba(255,60,40,${.25 * lamp})`; ctx.fillRect(0, 100, W, 20);
+  for (let x = 160; x < W; x += 320) { const glow = ctx.createRadialGradient(x, 110, 4, x, 110, 120); glow.addColorStop(0, `rgba(255,70,50,${.45 * lamp})`); glow.addColorStop(1, 'rgba(255,70,50,0)'); ctx.fillStyle = glow; ctx.fillRect(x - 120, 0, 240, 240); }
+  // Close interior camera, registered to the six physical seats in the raster.
+  // This presentation scale does not change the 51 px/m gameplay convention.
   const crew = sequence.mode === 'apc' ? 4 : 6;
+  const seatXs = [160, 336, 512, 684, 860, 1030], closeView = Boolean(assets.image('ud4l-troop-bay'));
   for (let i = 0; i < crew; i++) {
     const sway = options.reducedMotion ? 0 : Math.sin(time * 3 + i) * 2 * state.turbulence;
-    assets.draw(ctx, 'marine-seated', 140 + i * 170 + sway, 392, 52, 80, (c, x, y) => {
+    const x = (closeView ? seatXs[i] : 140 + i * 170) + sway, y = closeView ? 250 : 392, width = closeView ? 184 : 52, height = closeView ? 276 : 80;
+    assets.draw(ctx, 'marine-seated', x, y, width, height, (c, dx, dy) => {
+      c.save(); c.translate(dx, dy); c.scale(width / 52, height / 80);
+      const x = 0, y = 0;
       c.fillStyle = '#0b0605'; c.fillRect(x + 10, y + 18, 32, 44); c.beginPath(); c.arc(x + 26, y + 12, 13, 0, Math.PI * 2); c.fill();
       c.fillRect(x + 36, y + 40, 22, 12); c.fillRect(x + 48, y + 52, 10, 30); // thighs and shins
       c.strokeStyle = '#5e5a4c'; c.lineWidth = 4; c.beginPath(); c.moveTo(x + 4, y + 10); c.lineTo(x + 4, y + 50); c.lineTo(x + 44, y + 50); c.stroke(); c.lineWidth = 1; // harness bar
       c.fillStyle = '#20100e'; c.fillRect(x - 6, y - 10, 5, 64); // rifle upright
-    });
+      c.restore();
+    }, { fit: 'contain', tint: '#8e5c48' });
   }
   // small status monitor (same flight state as the cockpit)
   const model = insertionScreenModelV188(state, sequence, options.language);
@@ -765,7 +832,7 @@ function troopBay(ctx, assets, sequence, state, local, time, options) {
   });
   if (sequence.mode === 'apc') { // the belly bay below: the M577 visible through the floor grating
     ctx.fillStyle = 'rgba(0,0,0,.55)'; ctx.fillRect(0, 560, W, 70);
-    assets.draw(ctx, 'm577-side', 420, 566, 300, 60, () => apcShape(ctx, 430, 562, .7));
+    assets.draw(ctx, 'm577-side', 420, 566, 300, 60, () => apcShape(ctx, 430, 562, .7), { fit: 'contain' });
     ctx.fillStyle = AMBER; ctx.font = '700 12px monospace'; ctx.textAlign = 'left'; ctx.fillText(options.language === 'en' ? 'BELLY BAY · M577' : 'SOUTE VENTRALE · M577', 740, 600);
   }
 }
@@ -776,16 +843,17 @@ function bayInterior(ctx, assets, sequence, state, local, progress, time, option
     ctx.fillStyle = '#0e1012'; ctx.fillRect(0, 0, W, H);
     ctx.fillStyle = '#1a1d20'; for (let x = 0; x < W; x += 140) ctx.fillRect(x, 0, 30, 500); // ribbed bulkheads
     ctx.fillStyle = '#25292d'; ctx.fillRect(0, 120, W, 26); // overhead rail
-    // open bay doors at the bottom: space below
-    ctx.fillStyle = '#000'; ctx.fillRect(160, 520, 960, 200);
-    ctx.save(); ctx.beginPath(); ctx.rect(160, 520, 960, 200); ctx.clip(); stars(ctx, assets, time * 6, 1);
-    if (sequence.placeType !== 'space') planetBody(ctx, assets, sequence.profile, 640, 1500, 900, { airless: sequence.placeType === 'airless', time });
-    ctx.restore();
     ctx.fillStyle = '#e9d07a'; for (let x = 160; x < 1120; x += 40) { ctx.fillRect(x, 512, 20, 8); } // hazard edge
     ctx.fillStyle = '#16191b'; ctx.fillRect(0, 500, 160, 220); ctx.fillRect(1120, 500, 160, 220);
-    const alarm = options.reducedMotion ? .6 : .5 + .5 * Math.sin(time * 5);
-    for (const lx of [60, 1220]) { const glow = ctx.createRadialGradient(lx, 200, 4, lx, 200, 160); glow.addColorStop(0, `rgba(255,60,40,${.6 * alarm})`); glow.addColorStop(1, 'rgba(255,60,40,0)'); ctx.fillStyle = glow; ctx.fillRect(lx - 160, 40, 320, 320); }
   });
+  // This aperture is a live view, never baked stars or a planet from the bay image.
+  // Its exact rectangle also protects the view if an art revision has opaque pixels here.
+  ctx.save(); ctx.beginPath(); ctx.rect(160, 520, 960, 200); ctx.clip();
+  ctx.fillStyle = '#000'; ctx.fillRect(160, 520, 960, 200); stars(ctx, assets, time * 6, 1);
+  if (sequence.placeType !== 'space') planetBody(ctx, assets, sequence.profile, 640, 1500, 900, { airless: sequence.placeType === 'airless', time });
+  ctx.restore();
+  const alarm = options.reducedMotion ? .6 : .5 + .5 * Math.sin(time * 5);
+  for (const lx of [60, 1220]) { const glow = ctx.createRadialGradient(lx, 200, 4, lx, 200, 160); glow.addColorStop(0, `rgba(255,60,40,${.6 * alarm})`); glow.addColorStop(1, 'rgba(255,60,40,0)'); ctx.fillStyle = glow; ctx.fillRect(lx - 160, 40, 320, 320); }
   // the clamp holds the UD-4L; at the end of the insertion bay shot it releases
   // insertion: the rail lowers the UD-4L toward the open doors; return: it rises into the clamp
   const drop = returning ? (1 - ease(progress)) * 260 : ease(progress) * 70;
@@ -810,7 +878,7 @@ function drawShot(ctx, assets, sequence, at, state, time, options) {
       const starAlpha = skyFor(ctx, profile, state); stars(ctx, assets, time * 40, Math.max(starAlpha, sequence.placeType === 'atmosphere' ? 0 : 1));
       if (sequence.placeType === 'space') {
         const k = ease(progress), returning = entry.kind === 'transit-return';
-        vessel(ctx, assets, returning ? lerp(900, 1400, k) : lerp(1300, 900, k), 380, returning ? lerp(.5, .2, k) : lerp(.2, .5, k), time, steady);
+        vessel(ctx, assets, returning ? lerp(900, 1400, k) : lerp(1300, 900, k), 380, returning ? lerp(.5, .2, k) : lerp(.2, .5, k), time, steady, profile.worldId);
         dropship(ctx, assets, returning ? lerp(700, 300, k) : lerp(200, 520, k), 420, .3, { engine: .7, time, steady });
       } else {
         const rise = entry.kind === 'orbit' ? 0 : 200 * ease(progress);
@@ -827,7 +895,7 @@ function drawShot(ctx, assets, sequence, at, state, time, options) {
       assets.draw(ctx, 'ud4l-front', 520, 250, 240, 160, () => {
         ctx.fillStyle = '#1a1d18'; ctx.beginPath(); ctx.moveTo(640, 270); ctx.lineTo(735, 330); ctx.lineTo(700, 360); ctx.lineTo(580, 360); ctx.lineTo(545, 330); ctx.closePath(); ctx.fill();
         ctx.fillRect(520, 330, 240, 10); ctx.fillStyle = '#7d9aa1'; ctx.fillRect(612, 296, 56, 16); ctx.fillStyle = '#0d0f0c'; ctx.beginPath(); ctx.arc(640, 368, 12, 0, Math.PI * 2); ctx.fill();
-      });
+      }, { fit: 'contain' });
       if (state.heat > .2) { ctx.fillStyle = `rgba(255,110,40,${state.heat * .18})`; ctx.fillRect(0, 0, W, H); }
       break;
     }
@@ -847,24 +915,27 @@ function drawShot(ctx, assets, sequence, at, state, time, options) {
       // landing pad with lights
       ctx.fillStyle = '#141616'; ctx.fillRect(420, 600, 440, 18);
       for (let i = 0; i < 6; i++) { const on = steady || Math.floor(time * 4 + i) % 2 === 0; ctx.fillStyle = on ? AMBER : '#3a3420'; ctx.fillRect(430 + i * 84, 596, 10, 5); }
-      const lift = Math.max(0, (progress - .25) / .75), groundY = 560, alt = landing ? lerp(-140, groundY, Math.min(1, k * 1.15)) : lerp(groundY, 120, lift * lift);
+      const lift = Math.max(0, (progress - .25) / .75), groundY = 560, padY = 600, alt = landing ? lerp(-140, groundY, Math.min(1, k * 1.15)) : lerp(groundY, 120, lift * lift);
       const x = landing ? lerp(160, 640, Math.min(1, k * 1.2)) : lerp(640, 1060, lift * lift); // nose first, never tail first
       // engine dust / spray near the ground
       const nearGround = clamp01(1 - Math.abs(alt - groundY) / 160);
       if (nearGround > 0) { ctx.fillStyle = sequence.placeType === 'airless' ? 'rgba(170,170,160,.35)' : 'rgba(180,170,150,.25)'; for (let i = 0; i < 12; i++) { ctx.beginPath(); ctx.ellipse(x + (i - 6) * 40 * (1 + nearGround), 610 - i % 3 * 6, 60 * nearGround, 18 * nearGround, 0, 0, Math.PI * 2); ctx.fill(); } }
       const apcOnGround = sequence.mode === 'apc' && !state.apcAttached;
-      if (apcOnGround) { const roll = landing ? (progress - .9) / .1 : 0; assets.draw(ctx, 'm577-side', x - 150 - roll * 160, groundY + 8, 300, 60, () => apcShape(ctx, x - 150 - Math.max(0, roll) * 160, groundY - 8, .62)); }
-      dropship(ctx, assets, x, alt - 70, .5, { apc: state.apcAttached, ramp: state.rampOpen ? 1 : 0, engine: 1, gear: state.gearDown, time, tilt: landing ? -.06 * (1 - k) : -.1 * progress, steady });
+      if (apcOnGround) { const roll = landing ? Math.max(0, (progress - .9) / .1) : 0; assets.draw(ctx, 'm577-side', x - 150 - roll * 160, padY - 60, 300, 60, () => apcShape(ctx, x - 150 - roll * 160, padY - 103 * .62, .62), { fit: 'contain' }); }
+      // Register the image's lowest contact point with the drawn pad, retaining
+      // the original flight trajectory and attachment/release state.
+      const contactOffset = sequence.mode === 'apc' ? (assets.image('m577-side') ? 71.5 : 66.5) : (assets.image('ud4l-side') ? 50 : 33);
+      dropship(ctx, assets, x, alt + padY - groundY - contactOffset, .5, { apc: state.apcAttached, ramp: state.rampOpen ? 1 : 0, engine: 1, gear: state.gearDown, time, tilt: landing ? -.06 * (1 - k) : -.1 * progress, steady });
       if (state.rampOpen && sequence.mode === 'foot') { // marines down the ramp (1 m ≈ 51 px; 44×92 standing, here at the shot's 0.5 scale)
         ctx.fillStyle = '#060807'; const out = landing ? (progress - .82) / .18 : 1 - progress / .25;
-        for (let i = 0; i < 4; i++) { const mx = x - 130 - i * 26 - out * 90; ctx.fillRect(mx, groundY - 40, 11, 23); ctx.beginPath(); ctx.arc(mx + 5.5, groundY - 44, 5, 0, Math.PI * 2); ctx.fill(); }
+        for (let i = 0; i < 4; i++) { const mx = x - 130 - i * 26 - out * 90; ctx.fillRect(mx, padY - 23, 11, 23); ctx.beginPath(); ctx.arc(mx + 5.5, padY - 27, 5, 0, Math.PI * 2); ctx.fill(); }
       }
       weather(ctx, profile, time, steady, 1);
       break;
     }
     case 'docking': case 'undock': {
       ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H); stars(ctx, assets, time * 3);
-      vessel(ctx, assets, 520, 360, .75, time, steady);
+      vessel(ctx, assets, 520, 360, .75, time, steady, profile.worldId);
       const k = ease(progress), docking = entry.kind === 'docking';
       const gap = docking ? lerp(420, 0, k) : lerp(0, 420, k);
       dropship(ctx, assets, 1040 + gap, 330, .5, { engine: .35, time, tilt: 0, steady, ramp: state.rampOpen ? .2 : 0 });
@@ -940,7 +1011,7 @@ export class InsertionCinematicPlayerV188 {
   }
   play(sequence, { language = 'fr', reducedMotion = false, colorblind = false, shake = 1, onCue = null } = {}) {
     if (!sequence?.shots?.length || !this.document?.body) return Promise.resolve('unavailable');
-    this.stop('replaced'); this.assets.preload(INSERTION_ASSET_SLOT_IDS_V188);
+    this.stop('replaced'); this.assets.preload(INSERTION_ASSET_SLOT_IDS_V188); this.assets.preloadWorld?.(sequence.profile.worldId);
     const en = language === 'en', overlay = this.document.createElement('div');
     overlay.className = 'cinematic-v188 insertion-cinematic-v188'; overlay.setAttribute('role', 'dialog');
     overlay.dataset.placeType = sequence.placeType; overlay.dataset.direction = sequence.direction; overlay.dataset.length = sequence.short ? 'short' : 'full';

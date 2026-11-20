@@ -47,9 +47,25 @@ def open_view(page, view):
     page.locator(f'#nav [data-view="{view}"]').click()
 
 
+def open_title_menu_after_intro(page, timeout=45000):
+    # The fading intro admits mouse clicks while still capturing keyboard
+    # input. Wait before entering the menu, hence before any restored flight
+    # can advance. Detachment and the existing click share its original budget.
+    deadline = time.monotonic() + timeout / 1000
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('Title entry exceeded its original intro and click budget.')
+        return milliseconds
+
+    page.locator('#intro-v188').wait_for(state='detached', timeout=remaining())
+    page.locator('#title-start').click(timeout=remaining())
+
+
 def import_initial(page, base, raw, name):
     page.goto(base, wait_until='domcontentloaded')
-    page.locator('#title-start').click(timeout=45000)
+    open_title_menu_after_intro(page)
     page.locator('#title-options').click()
     page.locator('#save-import').set_input_files({'name': name + '.json', 'mimeType': 'application/json', 'buffer': raw})
     page.wait_for_function('name=>__ATF_V51__?.saveSystem.data.player.name===name', arg=name)
@@ -61,7 +77,10 @@ def brood(page):
       mission:e.mission?{state:e.mission.state,failureReason:e.mission.failureReason}:null,
       legacy:e.legacyMissionV131?structuredClone(e.legacyMissionV131):null,
       bombs:structuredClone(e.legacyBombsV131||[]),resume:e.lastResumeResult?structuredClone(e.lastResumeResult):null,
-      vehicle:e.vehicle?{x:e.vehicle.x,y:e.vehicle.y,w:e.vehicle.w,h:e.vehicle.h,vx:e.vehicle.vx,vy:e.vehicle.vy,hull:e.vehicle.hull,fuel:e.vehicle.fuel}:null,
+      ready:Boolean(e.canPerformGameplayAction?.(e.player,{allowVent:true,allowSquadTask:true})),
+      savePolicy:e.missionSavePolicyV188?.(),camera:{...e.camera},
+      contacts:(e.enemies||[]).filter(n=>n.alive).map(n=>({id:n.id,x:n.x,y:n.y,w:n.w,h:n.h,health:n.health})),
+      vehicle:e.vehicle?{x:e.vehicle.x,y:e.vehicle.y,w:e.vehicle.w,h:e.vehicle.h,vx:e.vehicle.vx,vy:e.vehicle.vy,hull:e.vehicle.hull,fuel:e.vehicle.fuel,turretAmmo:e.vehicle.turretAmmo}:null,
       player:e.player?{x:e.player.x,y:e.player.y,w:e.player.w,h:e.player.h,health:e.player.health,alive:e.player.alive,inVehicle:e.player.inVehicle}:null};}''')
 
 
@@ -69,14 +88,104 @@ def paused_brood(value):
     return {k: value[k] for k in ['paused', 'mission', 'legacy', 'bombs', 'vehicle', 'player']}
 
 
-def steer_brood(page, x, y):
+def wait_brood_runtime(page, runtime_ready, timeout=45000):
+    # Fresh launches now play the V188 flight before engine.start. Use its
+    # visible public control; a checkpoint resume can already be in the game.
+    # Observation, click and the original readiness check share one budget.
+    deadline = time.monotonic() + timeout / 1000
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('Broodstorm runtime readiness exceeded its launch budget.')
+        return milliseconds
+
+    skip_selector = '.insertion-cinematic-v188[data-direction="insertion"] .insertion-skip-v188'
+    page.wait_for_function(f'''()=>{{
+      const skip = document.querySelector('{skip_selector}');
+      return ({runtime_ready})() || Boolean(skip && skip.getClientRects().length
+        && getComputedStyle(skip).visibility !== 'hidden');
+    }}''', timeout=remaining())
+    skip = page.locator(skip_selector)
+    if skip.is_visible():
+        skip.click(timeout=remaining())
+    page.wait_for_function(runtime_ready, timeout=remaining())
+
+
+def pause_brood_for_checkpoint(page, report, phase, timeout=30000):
+    # A KeyP sent while another control owns focus can be rejected by the
+    # native input guard. Observe acceptance immediately; never blindly toggle
+    # again or spend the entire projectile lifetime waiting for a lost key.
+    started = time.monotonic()
+    deadline = started + timeout / 1000
+    evidence = {'phase': phase, 'timeLimitSeconds': timeout / 1000, 'attemptLimit': 3, 'attempts': []}
+    report.setdefault('nativePauseAcquisition', []).append(evidence)
+    probe = '''()=>{const e=__ATF_GAME__,canvas=document.querySelector('#game-canvas');
+      const visible=n=>Boolean(n&&!n.hidden&&n.getClientRects().length
+        &&getComputedStyle(n).visibility!=='hidden'&&getComputedStyle(n).display!=='none');
+      const active=document.activeElement;
+      return {running:e.running,paused:e.paused,mission:e.mission?.state,kind:e.legacyMissionV131?.kind,
+        canvasVisible:visible(canvas),canvasFocused:active===canvas,documentFocused:document.hasFocus(),
+        modalVisible:[...document.querySelectorAll('[role="dialog"],[aria-modal="true"]')].some(visible),
+        handoverBlocking:Boolean(e.dropshipHandoverBlocksV188?.()),
+        focusOwner:active?{tag:active.tagName,id:active.id||null}:null,
+        liveBombCount:(e.legacyBombsV131||[]).length,payload:e.legacyMissionV131?.bombs,
+        nests:e.legacyMissionV131?.nests?.slice(),observedAtMs:performance.now()};}'''
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('Broodstorm pause exceeded its original acquisition budget.')
+        return milliseconds
+
+    def admitted(state):
+        assert state['running'] and state['kind'] == 'broodstorm' and state['mission'] == 'active', 'Pause belongs to the active native Broodstorm mission.'
+        if state['paused']:
+            evidence['acquired'] = True
+            evidence['elapsedSeconds'] = time.monotonic() - started
+            return True
+        assert state['canvasVisible'] and not state['modalVisible'] and not state['handoverBlocking'], 'The visible native flight must own pause input.'
+        return False
+
+    for _ in range(evidence['attemptLimit']):
+        remaining()
+        attempt = {'before': page.evaluate(probe)}
+        evidence['attempts'].append(attempt)
+        if admitted(attempt['before']):
+            return
+        page.locator('#game-canvas').focus(timeout=remaining())
+        attempt['focused'] = page.evaluate(probe)
+        if admitted(attempt['focused']):
+            return
+        assert attempt['focused']['canvasFocused'] and attempt['focused']['documentFocused'], 'The native canvas must actually own keyboard focus.'
+        remaining()
+        page.keyboard.press('KeyP')
+        attempt['key'] = 'KeyP'
+        attempt['after'] = page.evaluate(probe)
+        remaining()
+        if admitted(attempt['after']):
+            return
+    raise AssertionError('Native KeyP was rejected after three observed focus acquisitions.')
+
+
+def steer_brood(page, x, y, deadline=None):
     held = set()
-    deadline = time.monotonic() + 45
-    page.locator('#game-canvas').focus()
+    deadline = time.monotonic() + 45 if deadline is None else deadline
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('Native flight exceeded its original 45 second budget.')
+        return milliseconds
+
+    page.locator('#game-canvas').focus(timeout=remaining())
     try:
         while time.monotonic() < deadline:
             state = brood(page)
             assert state['mission']['state'] == 'active' and state['player']['alive'], 'Native flight remains active.'
+            if not state['ready']:
+                page.wait_for_timeout(min(25, remaining()))
+                continue
             vehicle = state['vehicle']
             dx, dy = x - vehicle['x'] - vehicle['w'] / 2, y - vehicle['y'] - vehicle['h'] / 2
             wanted = set()
@@ -84,14 +193,21 @@ def steer_brood(page, x, y):
                 wanted.add('KeyD' if dx > 0 else 'KeyA')
             if abs(dy) > 14:
                 wanted.add('KeyS' if dy > 0 else 'KeyW')
-            for key in held - wanted:
-                page.keyboard.up(key)
-            for key in wanted - held:
-                page.keyboard.down(key)
-            held = wanted
             if not wanted:
                 break
-            page.wait_for_timeout(25)
+            # Release each physical pulse before observing again. A slow read
+            # must not extend a held direction and oscillate across the nest.
+            axes = [abs(value) for value in [dx, dy] if abs(value) > 14]
+            speed = 300 / (2 ** .5 if len(axes) == 2 else 1)
+            pulse = max(1, min(100, int((min(axes) - 7) / speed * 1000)))
+            held = wanted
+            for key in held:
+                page.keyboard.down(key)
+            page.wait_for_timeout(min(pulse, remaining()))
+            for key in held:
+                page.keyboard.up(key)
+            held = set()
+            page.wait_for_function('()=>Math.abs(__ATF_GAME__.vehicle.vx)<1e-6&&Math.abs(__ATF_GAME__.vehicle.vy)<1e-6', timeout=min(30000, remaining()))
         else:
             raise AssertionError('Native flight did not reach its visible bombardment position.')
     finally:
@@ -99,7 +215,111 @@ def steer_brood(page, x, y):
             page.keyboard.up(key)
     # Releasing a direction does not erase the previous physical velocity until
     # the next native update. Waiting for rest avoids bombing with inherited vx.
-    page.wait_for_function('()=>Math.abs(__ATF_GAME__.vehicle.vx)<1e-6&&Math.abs(__ATF_GAME__.vehicle.vy)<1e-6')
+    page.wait_for_function('()=>Math.abs(__ATF_GAME__.vehicle.vx)<1e-6&&Math.abs(__ATF_GAME__.vehicle.vy)<1e-6', timeout=min(30000, remaining()))
+
+
+def secure_brood_save(page, deadline, report):
+    """Protect the real escort and clear the six finite fighter waves with F.
+
+    An alerted fighter forbids saving even outside the nearby-threat radius.
+    Spend only the remainder of the second flight's original 45 second budget;
+    the final bomb is still aboard throughout combat and the return to its nest.
+    """
+    held, aiming = set(), False
+    trace = []
+    report['nativeBroodstormSaveWindow'] = {'flightBudgetSeconds': 45, 'observations': trace}
+    previous = None
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('Native Broodstorm flight and save clearance exceeded the original 45 second budget.')
+        return milliseconds
+
+    def release():
+        nonlocal held, aiming
+        for key in held:
+            page.keyboard.up(key)
+        held = set()
+        if aiming:
+            page.mouse.up(button='right')
+            aiming = False
+
+    page.locator('#game-canvas').focus(timeout=remaining())
+    try:
+        while True:
+            remaining()
+            state = brood(page)
+            legacy, vehicle = state['legacy'], state['vehicle']
+            assert state['running'] and state['player']['alive'] and state['mission']['state'] == 'active', 'Native flight remains active.'
+            assert legacy['stage'] == 1 and legacy['bombs'] == 1 and legacy['nests'] == [0, 70] and not state['bombs'], \
+                'Escort protection must preserve the last finite charge and exact nest damage.'
+            target = min(state['contacts'], key=lambda n: (n['x'] - vehicle['x']) ** 2 + (n['y'] - vehicle['y']) ** 2, default=None)
+            flags = (legacy['wave'], target['id'] if target else None, state['ready'], state['savePolicy']['allowed'])
+            if flags != previous:
+                trace.append({'flightWallSeconds': 45 - (deadline - time.monotonic()), 'wave': legacy['wave'],
+                              'target': target, 'vehicle': vehicle, 'escort': legacy['escort'],
+                              'ready': state['ready'], 'savePolicy': state['savePolicy']})
+                previous = flags
+            if legacy['wave'] == 6 and not target and state['savePolicy']['allowed']:
+                break
+            if not state['ready']:
+                release()
+                page.wait_for_timeout(min(25, remaining()))
+                continue
+            # Intercept each fighter at turret height. Between contacts, hold
+            # ahead of the escort's 650px advance radius so the transport does
+            # not reach its destination before the saved final bomb is tested.
+            goal_x = target['x'] + target['w'] / 2 + 250 if target else legacy['escort']['x'] + 700
+            goal_y = target['y'] + target['h'] / 2 + 15 if target else legacy['escort']['y'] + 58
+            dx, dy = goal_x - vehicle['x'] - vehicle['w'] / 2, goal_y - vehicle['y'] - vehicle['h'] / 2
+            wanted = set()
+            if abs(dx) > 14:
+                wanted.add('KeyD' if dx > 0 else 'KeyA')
+            if abs(dy) > 14:
+                wanted.add('KeyS' if dy > 0 else 'KeyW')
+            if target:
+                box = page.locator('#game-canvas').bounding_box()
+                assert box, 'The native Cheyenne canvas must remain visible.'
+                # An off-screen contact must not receive a mouse-down outside
+                # the canvas. Clip its ray from the real turret pivot, keeping
+                # the direction that the native eight-way aim will resolve.
+                ox = vehicle['x'] + vehicle['w'] / 2 - state['camera']['x']
+                oy = vehicle['y'] + 28 - state['camera']['y']
+                ax = target['x'] + target['w'] / 2 - state['camera']['x'] - ox
+                ay = target['y'] + target['h'] / 2 - state['camera']['y'] - oy
+                scale = 1
+                for origin, direction, limit in [(ox, ax, 1280), (oy, ay, 720)]:
+                    if direction > 0:
+                        scale = min(scale, (limit - 4 - origin) / direction)
+                    elif direction < 0:
+                        scale = min(scale, (4 - origin) / direction)
+                assert scale > 0, 'The native turret pivot must remain inside its viewport.'
+                page.mouse.move(box['x'] + (ox + ax * scale) * box['width'] / 1280,
+                                box['y'] + (oy + ay * scale) * box['height'] / 720)
+                if not aiming:
+                    page.mouse.down(button='right')
+                    aiming = True
+                wanted.add('KeyF')
+            elif aiming:
+                page.mouse.up(button='right')
+                aiming = False
+            for key in held - wanted:
+                page.keyboard.up(key)
+            for key in wanted - held:
+                page.keyboard.down(key)
+            held = wanted
+            page.wait_for_timeout(min(100, remaining()))
+    finally:
+        release()
+    steer_brood(page, 1560, 550, deadline=deadline)
+    state = brood(page)
+    remaining()
+    assert state['savePolicy']['allowed'] and not state['contacts'] and state['legacy']['wave'] == 6, \
+        'The final drop requires a real admitted save window after the finite fighters.'
+    report['nativeBroodstormSaveWindow']['beforeFinalDrop'] = {
+        'flightWallSeconds': 45 - (deadline - time.monotonic()), 'savePolicy': state['savePolicy'],
+        'vehicle': state['vehicle'], 'escort': state['legacy']['escort'], 'wave': state['legacy']['wave']}
 
 
 def drop_brood(page, before_count, wait_impact=True):
@@ -169,7 +389,7 @@ def run_brood(page, args, out, report, check, capture):
     print('STEP Broodstorm: native launch, six finite drops, save final bomb in flight', flush=True)
     import_initial(page, args.base, raw, name)
     open_view(page, 'command'); page.locator('#operation-launch').click()
-    page.wait_for_function('()=>__ATF_GAME__?.running&&__ATF_GAME__.legacyMissionV131?.kind==="broodstorm"&&!__ATF_GAME__.enemyAtlasLoadingPausedV65', timeout=45000)
+    wait_brood_runtime(page, '()=>__ATF_GAME__?.running&&__ATF_GAME__.legacyMissionV131?.kind==="broodstorm"&&!__ATF_GAME__.enemyAtlasLoadingPausedV65', timeout=45000)
     page.locator('#game-canvas').focus()
     page.keyboard.down('KeyE')
     try:
@@ -186,14 +406,17 @@ def run_brood(page, args, out, report, check, capture):
     steer_brood(page, 960, 550)
     drop_brood(page, 4); drop_brood(page, 3)
     check('two native swept impacts destroy the first nest', brood(page)['legacy']['nests'] == [0, 140])
-    steer_brood(page, 1560, 550)
+    final_flight_deadline = time.monotonic() + 45
+    steer_brood(page, 1560, 550, deadline=final_flight_deadline)
     drop_brood(page, 2)
     check('the third useful impact leaves exactly one charge and half of the second nest', brood(page)['legacy']['bombs'] == 1 and brood(page)['legacy']['nests'] == [0, 70])
+    secure_brood_save(page, final_flight_deadline, report)
     drop_brood(page, 1, wait_impact=False)
-    page.keyboard.press('KeyP')
-    page.wait_for_function('()=>__ATF_GAME__.paused===true')
+    pause_brood_for_checkpoint(page, report, 'before-final-bomb-save')
     frozen = brood(page)
     check('native pause catches the last finite charge in flight, with zero charges refunded', frozen['legacy']['bombs'] == 0 and len(frozen['bombs']) == 1 and frozen['legacy']['nests'] == [0, 70] and frozen['mission']['state'] == 'active')
+    check('the paused final charge has an admitted native save window after all six fighter waves',
+        frozen['savePolicy']['allowed'] and frozen['legacy']['wave'] == 6 and not frozen['contacts'])
     capture(page, '02-final-native-bomb-paused.png', '#game-canvas')
     for key in ['KeyB', 'KeyF', 'KeyE']:
         page.keyboard.press(key)
@@ -206,13 +429,10 @@ def run_brood(page, args, out, report, check, capture):
     check('the visible save control stores the exact last projectile and exhausted payload', saved_bombs == frozen['bombs'] and operation['resumeState']['specialOperation']['legacyMissionV131']['bombs'] == 0)
     (out / 'observed-native-final-bomb-checkpoint.json').write_text(json.dumps(saved, ensure_ascii=False, indent=2))
     page.reload(wait_until='domcontentloaded')
-    page.locator('#title-start').click(timeout=45000); page.locator('#title-continue').click()
+    open_title_menu_after_intro(page); page.locator('#title-continue').click()
     open_view(page, 'command'); page.locator('#operation-launch').click()
-    page.wait_for_function('()=>__ATF_GAME__?.running&&__ATF_GAME__.legacyMissionV131?.kind==="broodstorm"', timeout=45000)
-    page.locator('#game-canvas').focus()
-    if not brood(page)['paused']:
-        page.keyboard.press('KeyP')
-    page.wait_for_function('()=>__ATF_GAME__.paused===true')
+    wait_brood_runtime(page, '()=>__ATF_GAME__?.running&&__ATF_GAME__.legacyMissionV131?.kind==="broodstorm"', timeout=45000)
+    pause_brood_for_checkpoint(page, report, 'after-final-bomb-resume')
     restored = brood(page)
     check('real reload admits the same native checkpoint and operation with no refund or result', restored['resume']['applied'] is True and restored['save']['strategy']['currentOperation']['id'] == operation['id'] and restored['save']['strategy']['currentOperation']['resumeState']['specialOperation']['legacyBombsV157'] == saved_bombs and restored['legacy']['bombs'] == 0 and restored['legacy']['nests'] == [0, 70] and len(restored['bombs']) == 1 and restored['mission']['state'] == 'active')
     original, flying = saved_bombs[0], restored['bombs'][0]
@@ -388,7 +608,7 @@ def run_exit(page, args, out, report, check, capture, player_id, index):
             (out / 'navigation-events-guardian-keyboard.json').write_text(json.dumps(details['keyboardNavigationEvents'], ensure_ascii=False, indent=2))
     # A real reload exercises the saved result rather than only a live module.
     page.reload(wait_until='domcontentloaded')
-    page.locator('#title-start').click(timeout=45000); page.locator('#title-continue').click()
+    open_title_menu_after_intro(page); page.locator('#title-continue').click()
     open_view(page, 'xenotrials')
     check(slug + ': native reload preserves the saved single receipt without reopening a completed duel', page.evaluate(READ_TRIALS)['match'] is None and page.evaluate(READ_TRIALS)['progress'] == settled)
     report['spatialExits'].append(details)

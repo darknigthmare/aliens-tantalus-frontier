@@ -11,7 +11,7 @@ import { buildMissionLevelV52, selectMissionTemplateV52 } from '../src/mission-l
 import { ALIEN_SURVIVAL_CAMPAIGN_V70 } from '../src/alien-survival-systems-v70.js';
 import { QZ17_CAMPAIGN_ID_V188 } from '../src/mission-depth-v188.js';
 import { DEPTH_HOLD_DECK_SLOT_V188, DEPTH_HOLD_DECK_FILES_PRESENT_V188, depthHoldDeckGeometryV188, deckSeamTopXV188,
-  drawDepthHoldDeckV188, drawFootprintShadowV188, isHoldFloorPlatformV188 } from '../src/depth-hold-deck-v188.js';
+  drawDepthHoldDeckV188, drawFootprintShadowV188, isHoldFloorPlatformV188, DEPTH_HOLD_DECK_TILE_V188 } from '../src/depth-hold-deck-v188.js';
 import { placeWorldLabelV188, labelSpriteBoxV188 } from '../src/world-label-layout-v188.js';
 import { ENEMY_DEDICATED_POSES_V99, drawEnemyDedicatedPoseV99 } from '../src/enemy-dedicated-poses-v99.js';
 import { missionPoseStatureV188, missionPoseStatureScaleV188 } from '../src/enemy-mission-stature-v188.js';
@@ -59,8 +59,12 @@ async function mission(campaign, extra = {}) {
 
 // —— 12. Depth hold deck ——
 test('12: every hold draws a deck over its depth band, right after the hold floor platform, under objects and actors', async () => {
-  assert.deepEqual(DEPTH_HOLD_DECK_FILES_PRESENT_V188, [], 'placeholder slot until art is produced');
+  assert.deepEqual(DEPTH_HOLD_DECK_FILES_PRESENT_V188, ['hold-deck-plating']);
   assert.match(DEPTH_HOLD_DECK_SLOT_V188.path, /^\/assets\/depth-holds\/v188\/hold-deck-plating\.png$/);
+  const bytes = readFileSync(new URL(`..${DEPTH_HOLD_DECK_SLOT_V188.path}`, import.meta.url));
+  assert.ok(bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])));
+  assert.ok(bytes.readUInt32BE(16) > 0 && bytes.readUInt32BE(20) > 0);
+  assert.ok(read('sw.js').includes(`'${DEPTH_HOLD_DECK_SLOT_V188.path}'`));
   for (const campaign of [QZ17, FREIGHTER, ALIEN_SURVIVAL_CAMPAIGN_V70]) {
     const { engine } = await mission(campaign);
     const section = engine.missionDepthSectionV188;
@@ -108,7 +112,7 @@ test('12: every hold draws a deck over its depth band, right after the hold floo
 test('12: the deck is clipped to each floor platform and drawn only once per frame', () => {
   const section = { id: 'probe', x0: 100, x1: 700, floorY: 500, zMin: -80, zMax: 0 };
   const rec = recorder();
-  assert.equal(drawDepthHoldDeckV188(rec.ctx, section, { clipX0: 0, clipX1: 300 }), 'primitive');
+  assert.equal(drawDepthHoldDeckV188(rec.ctx, section, { clipX0: 0, clipX1: 300, present: [] }), 'primitive');
   const clip = rec.calls.find(call => call.name === 'rect');
   assert.deepEqual(clip.args, [100, 499, 200, 80 + 8 + 22 + 1]);
   assert.equal(drawDepthHoldDeckV188(recorder().ctx, section, { clipX0: 800, clipX1: 900 }), null, 'outside the hold');
@@ -117,6 +121,46 @@ test('12: the deck is clipped to each floor platform and drawn only once per fra
   const src = read('src/mission-depth-v188.js');
   assert.match(src, /frame\.deckDrawn = true/);
   assert.doesNotMatch(src, /rgba\(0,0,0,\.22\)/, 'the old void gradient is gone');
+});
+
+test('12: a loaded deck repeats at fixed world scale, projects towards the vanishing point and shares clipped fragments', () => {
+  class TextureImage { complete = true; naturalWidth = 1254; naturalHeight = 1254; }
+  const section = { id: 'raster-probe', x0: 100, x1: 700, floorY: 500, zMin: -80, zMax: 0 }, rec = recorder();
+  rec.ctx.createPattern = (image, repeat) => ({ image, repeat });
+  assert.equal(drawDepthHoldDeckV188(rec.ctx, section, { ImageCtor: TextureImage, clipX0: 100, clipX1: 350 }), 'image');
+  const rows = rec.calls.filter(call => call.name === 'fillRect' && call.fillStyle?.repeat === 'repeat');
+  assert.equal(rows.length, 80, 'texture is projected by depth, not stretched to hold width');
+  assert.ok(rows[0].sx < rows.at(-1).sx && rows.every(row => row.sy === -row.sx), 'repeat size grows towards the camera with uniform source proportions');
+  assert.ok(Math.abs(rows.at(-1).sx * 1254 - DEPTH_HOLD_DECK_TILE_V188) < 1, 'front-edge repeat uses world pixels');
+  assert.equal(rec.calls.filter(call => call.name === 'drawImage').length, 0, 'the entire texture is never stretched over the hold');
+  const next = recorder(); next.ctx.createPattern = rec.ctx.createPattern;
+  drawDepthHoldDeckV188(next.ctx, section, { ImageCtor: TextureImage, clipX0: 350, clipX1: 700 });
+  assert.deepEqual(next.calls.filter(call => call.name === 'fillRect' && call.fillStyle?.repeat === 'repeat').map(call => [call.args, call.tx, call.ty, call.sx, call.sy]),
+    rows.map(call => [call.args, call.tx, call.ty, call.sx, call.sy]), 'platform clips share the same global texture phase');
+  assert.deepEqual(next.calls.find(call => call.name === 'rect').args, [350, 499, 350, 111]);
+  const long = recorder(); long.ctx.createPattern = rec.ctx.createPattern;
+  drawDepthHoldDeckV188(long.ctx, { ...section, id: 'long-probe', x1: 4900 }, { ImageCtor: TextureImage });
+  assert.deepEqual(long.calls.filter(call => call.name === 'fillRect' && call.fillStyle?.repeat === 'repeat').map(call => call.sx), rows.map(call => call.sx), 'an eight-times-longer hold keeps texture scale');
+  for (const probe of [rec, next, long]) probe.balanced();
+});
+
+test('12: the projected raster deck is cached per section without losing its lip, shadow or clipping', () => {
+  const previous = globalThis.document, surfaces = [];
+  globalThis.document = { createElement() { const rec = recorder(), surface = { width: 0, height: 0, getContext: () => rec.ctx, rec }; rec.ctx.createPattern = (image, repeat) => ({ image, repeat }); surfaces.push(surface); return surface; } };
+  try {
+    class TextureImage { complete = true; naturalWidth = 1254; naturalHeight = 1254; }
+    const section = { id: 'cached-raster', x0: 100, x1: 700, floorY: 500, zMin: -80, zMax: 0 }, destination = recorder();
+    destination.ctx.globalAlpha = .6; destination.ctx.globalCompositeOperation = 'multiply';
+    for (const [clipX0, clipX1] of [[100, 350], [350, 700]]) assert.equal(drawDepthHoldDeckV188(destination.ctx, section, { ImageCtor: TextureImage, clipX0, clipX1 }), 'image');
+    assert.equal(surfaces.length, 1, 'one projected deck serves every fragment and subsequent frame');
+    const surface = surfaces[0], g = depthHoldDeckGeometryV188(section);
+    assert.deepEqual([surface.width, surface.height], [600, g.depth + g.lip + g.shadow]);
+    const draws = destination.calls.filter(call => call.name === 'drawImage'); assert.equal(draws.length, 2);
+    assert.ok(draws.every(call => call.args[0] === surface));
+    assert.deepEqual(draws.map(call => call.args.slice(1)), [[0, 0, 250, 110, 100, 500, 250, 110], [250, 0, 350, 110, 350, 500, 350, 110]]);
+    assert.ok(surface.rec.calls.some(call => call.name === 'fillRect' && call.args[1] === g.depth + g.lip && call.args[3] === g.shadow), 'front-edge shadow remains below the raster');
+    assert.equal(destination.ctx.globalAlpha, .6); assert.equal(destination.ctx.globalCompositeOperation, 'multiply'); destination.balanced(); surface.rec.balanced();
+  } finally { globalThis.document = previous; }
 });
 
 // —— 13. Save-terminal prompt ——

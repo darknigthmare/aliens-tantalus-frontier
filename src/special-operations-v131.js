@@ -15,7 +15,7 @@ const routes = new Map(NEW_SPECIAL_CAMPAIGNS_V131.map(c => [c.specialOperationId
 routes.set('black-cocoon', BLACK_COCOON_CAMPAIGN_V121);
 routes.set('last-course-tantalus', APC_CONVOY_CAMPAIGN_V121);
 const limitations = {
-  'queen-mother-song': ['dedicated-queen-mother-animation', 'complete-royal-cast'],
+  'queen-mother-song': ['complete-royal-cast'],
   'hive-world': ['dedicated-planet-queen-art', 'complete-organ-biomes'],
   'titan-equalizer': ['dedicated-talos-titan-art', 'canonical-mega-loader-corpus'],
   'eloise-uncrowned-queen': ['dedicated-eloise-animation', 'hush-six-and-mother-hunter-art'],
@@ -25,11 +25,12 @@ const limitations = {
   'protocol-z110': ['dedicated-z110-and-morrigan-art', 'complete-mecha-animation-corpus'],
   'black-abyss': ['dedicated-hadal-manta-art', 'complete-aquatic-bestiary'],
   'mire-archive-001': ['complete-nostromo-cast', 'complete-historical-campaign'],
-  broodstorm: ['dedicated-flying-queen-art', 'complete-modular-dropship-corpus'],
+  broodstorm: ['complete-modular-dropship-corpus'],
   'black-cocoon': ['dedicated-cocoon-bitmap-corpus', 'extended-survivor-campaign'],
-  'last-course-tantalus': ['local-convoy-coop'],
-  'cargo-brutal': ['dedicated-cargo-matriarch-art']
+  'last-course-tantalus': ['local-convoy-coop']
 };
+// V188: Cargo's four dedicated Matriarch clips are produced. Its V67 local
+// gameplay status applies again; canonExact remains false for this adaptation.
 const freeze = entry => Object.freeze({ ...entry, canonExact: false,
   requiredMechanics: Object.freeze([...entry.requiredMechanics]),
   remainingMechanics: Object.freeze([...(entry.remainingMechanics || [])]) });

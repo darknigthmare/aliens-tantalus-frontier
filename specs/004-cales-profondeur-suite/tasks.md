@@ -28,4 +28,6 @@
 - [x] T011 `scripts/verify-depth-holds-v188.mjs` : emprises et voies, rail, bandes, guidage, saut, reprise, QZ-17 inchangée, emplacements.
 - [x] T012 Parcours Chromium de chaque cale et mesure A/B alternée.
 - [x] T013 Admission des fichiers et enregistrement du test dans `test:priorities:v188`.
-- [ ] T014 Art des 4 emplacements (autre agent) ; réévaluer la couverture du rail dans les cargos ; recette par le propriétaire.
+- [x] T014 Art des 4 emplacements : PNG originaux livrés, recadrages de silhouette et placement proportionnel dans les boîtes physiques existantes ; codes cargo propres à chaque instance (suite du 16 novembre 2026).
+- [x] T015 Matière du pont : texture orthographique répétée et projetée, caillebotis arrière, joints, lèvre et ombres conservés ; cinq fichiers au cache hors ligne. Voir `docs/development/DEPTH_HOLD_ART_QA_20261116.md` pour la recette automatisée.
+- [ ] T016 Recette joueur du propriétaire avec les nouveaux visuels et appréciation de la couverture du rail dans les cargos ; les captures natives avant/après ne remplacent pas ce parcours.

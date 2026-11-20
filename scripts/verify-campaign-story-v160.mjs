@@ -1,8 +1,11 @@
 import test from 'node:test';
-import { deriveStoryCampaignV188, markStoryDebriefSeenV188, STORY_RELAY_CAMPAIGN_ID_V188 } from '../src/story-campaign-v188.js';
+import { deriveStoryCampaignV188, markStoryDebriefSeenV188, markStoryCinematicSeenV188,
+  normalizeStoryCampaignV188, interludeDueV188, STORY_RELAY_CAMPAIGN_ID_V188 } from '../src/story-campaign-v188.js';
 import assert from 'node:assert/strict';
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
+import { createInterface } from 'node:readline';
+import { createContext, runInContext } from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -26,6 +29,13 @@ import { mountLetheContinuityV163 } from '../src/campaign-lethe-continuity-ui-v1
 import { hostV136 } from './forge-native-host-v136.mjs';
 import { HUB_NPC_ANNEX_WORKPOST_ROUTE_DEFINITIONS_V165 } from '../src/npc-annex-workpost-routes-v165.js';
 import { campaignObjectiveLabelV188 } from '../src/mission-objective-panel-v188.js';
+import { InsertionCinematicPlayerV188, buildInsertionSequenceV188, insertionWorldProfileV188 } from '../src/insertion-cinematic-v188.js';
+import { CinematicPlayerV188, CINEMATICS_V188 } from '../src/story-cinematics-v188.js';
+import { cinematicReturnSceneV188 } from '../src/audio.js';
+import { getCommandMissionsV110 } from '../src/player-surfaces-v110.js';
+import { filterUnlockedCampaignsV188 } from '../src/station-asphodele-v188.js';
+import { filterColonyCampaignsV188 } from '../src/colony-missions-v188.js';
+import { filterAct5CampaignsV188, deriveStoryWithAct5V188 } from '../src/story-act5-v188.js';
 
 const world = WORLDS.find(entry => entry.id === campaign.worldId);
 const clone = value => structuredClone(value);
@@ -661,6 +671,346 @@ Path(sys.argv[3]).write_text(json.dumps({'results': results, 'numerical': numeri
   }
 }
 const workpostActor = (save, id = 'rook-cctv') => save.hub.npcAnnexWorkpostRoutesV165.routes[id].actor;
+
+async function driveNativeExtractionReturn({ cinematic = true, lastId = 'operation-native-return', success = true } = {}) {
+  const { document } = storyDocument(), canvas = document.createElement('canvas'), button = document.createElement('button');
+  const modes = new Set(['mission-mode']), clicks = [], gradient = { addColorStop() {} };
+  const ctx = new Proxy({ measureText: text => ({ width: String(text).length * 7 }), createLinearGradient: () => gradient,
+    createRadialGradient: () => gradient }, { get: (object, key) => object[key] || (() => {}) });
+  const createElement = document.createElement;
+  document.createElement = tag => { const node = createElement(tag); node.getContext = () => ctx; return node; };
+  canvas.getClientRects = button.getClientRects = () => [{}];
+  document.body.append(canvas, button);
+  document.documentElement = { classList: { contains: value => modes.has(value) } };
+  const overlay = () => document.body.querySelector('.insertion-cinematic-v188');
+  const skip = () => overlay()?.querySelector('.insertion-skip-v188') || null;
+  document.querySelector = selector => selector === '#game-canvas' ? canvas : selector === '#retreat-mission' ? button
+    : selector.includes('.insertion-skip-v188') ? skip() : selector.includes('.insertion-cinematic-v188') ? overlay() : null;
+  const save = returnedFixture({ id: lastId, success }); save.strategy.currentOperation = null;
+  const before = JSON.stringify(save), engine = { running: true, mission: { state: 'complete' } };
+  const context = createContext({ document, __ATF_GAME__: engine, __ATF_V51__: { saveSystem: { data: save } },
+    getComputedStyle: () => ({ visibility: 'visible' }) });
+  let now = 0, completed = null;
+  const player = new InsertionCinematicPlayerV188({ document, now: () => now, requestFrame: () => {},
+    assets: { preload() {}, image: () => null, draw() {} } });
+  if (cinematic) {
+    const sequence = buildInsertionSequenceV188({ direction: 'extraction', profile: insertionWorldProfileV188(world) });
+    assert.ok(sequence.duration > 30, 'The full native extraction exceeds the old click budget.');
+    void player.play(sequence).then(reason => { completed = reason; });
+    skip().getClientRects = () => [{}];
+  }
+  const python = String.raw`
+import ast,json,sys
+from pathlib import Path
+tree=ast.parse(Path(sys.argv[1]).read_text());now=0
+def rpc(method,**data):
+ global now
+ print(json.dumps({'method':method,**data}),flush=True)
+ response=json.loads(sys.stdin.readline());now=response['now']
+ if response.get('error'):raise AssertionError(response['error'])
+ return response.get('value')
+class Clock:
+ def monotonic(self):return now/1000
+class Locator:
+ def __init__(self,selector):self.selector=selector
+ def is_visible(self):return rpc('visible',selector=self.selector)
+ def click(self,**kwargs):return rpc('click',selector=self.selector,**kwargs)
+class Page:
+ def locator(self,selector):return Locator(selector)
+ def evaluate(self,expression,arg=None):return rpc('evaluate',expression=expression,arg=arg)
+ def wait_for_function(self,expression,arg=None,**kwargs):return rpc('wait',expression=expression,arg=arg,**kwargs)
+helpers=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='return_after_native_extraction']
+assert len(helpers)==1
+scope={'time':Clock()};exec(compile(ast.Module(body=helpers,type_ignores=[]),sys.argv[1],'exec'),scope)
+try:result={'ok':True,'evidence':scope['return_after_native_extraction'](Page(),'operation-native-return')}
+except (AssertionError,TimeoutError) as error:result={'ok':False,'error':str(error)}
+print(json.dumps({'method':'complete','result':result}),flush=True)
+`;
+  const source = fileURLToPath(new URL('./qa-campaign-story-v160.py', import.meta.url));
+  const child = spawn('python3', ['-B', '-c', python, source], { stdio: ['pipe', 'pipe', 'pipe'] });
+  let stderr = '', result; child.stderr.on('data', chunk => { stderr += chunk; });
+  const done = new Promise(resolve => child.on('exit', code => resolve(code))), timer = setTimeout(() => child.kill('SIGKILL'), 10000);
+  try {
+    for await (const line of createInterface({ input: child.stdout })) {
+      const request = JSON.parse(line); let value = null, error;
+      if (request.method === 'complete') { result = request.result; continue; }
+      try {
+        if (request.method === 'evaluate' || request.method === 'wait') {
+          value = runInContext('(' + request.expression + ')', context)(request.arg);
+          if (request.method === 'wait' && !value) { now += request.timeout || 30000; throw Error('Native readiness was not satisfied within the existing budget.'); }
+        } else if (request.method === 'visible') value = Boolean(document.querySelector(request.selector));
+        else if (request.method === 'click') {
+          if (request.selector === '#retreat-mission' && overlay()) {
+            now += request.timeout || 30000; throw Error('Native extraction dialog intercepts the return click.');
+          }
+          const node = document.querySelector(request.selector); assert.ok(node, 'The public control exists.'); clicks.push(request.selector);
+          if (node === button) modes.delete('mission-mode'); else node.onclick();
+        } else throw Error('Unexpected driver operation: ' + request.method);
+      } catch (caught) { error = caught.message; }
+      child.stdin.write(JSON.stringify({ now, value, error }) + '\n');
+    }
+    assert.equal(await done, 0, stderr); assert.ok(result); assert.equal(JSON.stringify(save), before, 'UI return cannot mutate the receipt fixture.');
+    return { result, clicks, completed, exited: !modes.has('mission-mode'), now };
+  } finally { clearTimeout(timer); child.kill(); player.stop(); }
+}
+
+test('QA native extraction return uses the production skip before the visible return and preserves the receipt', async t => {
+  for (const cinematic of [true, false]) {
+    const observed = await driveNativeExtractionReturn({ cinematic });
+    assert.equal(observed.result.ok, true, JSON.stringify(observed)); assert.equal(observed.exited, true);
+    assert.deepEqual(observed.clicks, cinematic ? ['.insertion-cinematic-v188[data-direction="extraction"] .insertion-skip-v188', '#retreat-mission'] : ['#retreat-mission']);
+    assert.equal(observed.completed, cinematic ? 'skipped' : null);
+    assert.equal(observed.result.evidence.publicSkipUsed, cinematic);
+    assert.ok(observed.now < 30000);
+  }
+  t.diagnostic('Actual Python helper and production InsertionCinematicPlayerV188; declared DOM/Canvas/clock host and terminal save fixture, not a browser journey.');
+});
+
+test('QA native extraction return refuses a foreign operation or failed result without clicking', async () => {
+  for (const fixture of [{ lastId: 'operation-foreign' }, { success: false }]) {
+    const observed = await driveNativeExtractionReturn({ cinematic: false, ...fixture });
+    assert.equal(observed.result.ok, false); assert.deepEqual(observed.clicks, []); assert.equal(observed.exited, false);
+  }
+});
+
+async function driveNativeReturnConsultation({ seen = [], alreadyDebriefed = false, foreignFilm = false,
+  operationId = null } = {}) {
+  const { save } = await nativeCompletedRun('technical-audit');
+  const payment = applyCampaignConsequence(save, campaign, world, { success: true }).storyReturn;
+  assert.equal(payment.applied, true); assert.equal(payment.amount, 2);
+  save.strategy.plannedCampaignId = alreadyDebriefed ? 'special-narrative-qz17' : campaign.id;
+  save.storyCampaignV188.cinematicsSeen = [...seen];
+  if (alreadyDebriefed) markStoryDebriefSeenV188(save, campaign.id);
+  const values = new Map(), system = new SaveSystem({ getItem: key => values.get(key) ?? null,
+    setItem: (key, value) => values.set(key, value), removeItem: key => values.delete(key) });
+  system.newGame(1); system.commit(save);
+  const expectedOperationId = operationId || system.data.strategy.lastOperation.id;
+  const protectedState = () => clone({ clock: system.data.clock, galaxy: system.data.galaxy, crew: system.data.crew,
+    archive: system.data.archiveRelayArchivesV122, lastOperation: system.data.strategy.lastOperation,
+    currentOperation: system.data.strategy.currentOperation });
+  const before = protectedState(), { document, root } = storyDocument(), controls = new Map(), calls = [], gaps = [], errors = [];
+  const gradient = { addColorStop() {} }, ctx = new Proxy({ measureText: text => ({ width: String(text).length * 7 }),
+    createLinearGradient: () => gradient, createRadialGradient: () => gradient },
+  { get: (object, key) => key in object ? object[key] : () => {} });
+  const createElement = document.createElement;
+  document.createElement = tag => {
+    const node = createElement(tag); node.getContext = () => ctx;
+    node.getClientRects = () => document.body.contains(node) && !node.hidden ? [{}] : [];
+    return node;
+  };
+  root.getClientRects = () => [{}]; document.documentElement = { lang: 'fr' };
+  const add = (id, tag = 'div', value = '') => {
+    const node = document.createElement(tag); node.id = id; node.value = value;
+    document.body.append(node); controls.set(id, node); return node;
+  };
+  controls.set('operation-plan', root);
+  add('campaign-mode', 'select', 'all'); add('campaign-search', 'input'); add('campaign-list');
+  const destination = add('command-world-v110', 'select', world.id), mission = add('command-mission-v110', 'select');
+  add('command-mission-status-v110');
+  for (const select of [destination, mission]) Object.defineProperty(select, 'innerHTML', {
+    set(html) { select.optionValues = [...html.matchAll(/<option value="([^"]*)"/gu)].map(match => match[1]); }
+  });
+  Object.defineProperty(root, 'innerHTML', { set() {
+    root.replaceChildren(); const launch = document.createElement('button');
+    launch.id = 'operation-launch'; root.append(launch); controls.set(launch.id, launch);
+  } });
+  const overlays = () => document.body.querySelectorAll('.cinematic-v188');
+  const lookup = selector => {
+    if (selector === '[data-panel="command"].active #operation-launch') return controls.get('operation-launch');
+    if (selector.startsWith('#')) return controls.get(selector.slice(1)) || null;
+    if (selector.startsWith('.cinematic-v188')) {
+      const title = selector.match(/\[aria-label="([^"]+)"\]/u)?.[1];
+      const overlay = overlays().find(node => !title || node.getAttribute('aria-label') === title);
+      return selector.endsWith('.cinematic-skip-v188') ? overlay?.querySelector('.cinematic-skip-v188') || null : overlay || null;
+    }
+    return document.body.querySelector(selector);
+  };
+  document.querySelector = lookup;
+  let now = 0;
+  const player = new CinematicPlayerV188({ document, now: () => now, requestFrame() {}, ImageCtor: null });
+  const dependencies = { document, saveSystem: system, clone, deriveStoryCampaignV188, markStoryDebriefSeenV188,
+    markStoryCinematicSeenV188, normalizeStoryCampaignV188, interludeDueV188, STORY_RELAY_CAMPAIGN_ID_V188,
+    CINEMATICS_V188, cinematicPlayerV188: player, cinematicReturnSceneV188,
+    audio: { scene: 'command', stopMusic() {}, setMusicMoodV188() {}, restoreMoodV188() {} },
+    viewAudioSceneV188: () => 'command', hubEngine: { running: false }, engine: { running: false },
+    stationReturnOnViewV188: () => false, act5OnViewV188: () => false, colonyReturnOnViewV188: () => false,
+    renderHubStatus() {}, toast: message => errors.push(message),
+    CAMPAIGNS: [campaign, CAMPAIGNS.find(entry => entry.id === 'special-narrative-qz17')], WORLDS,
+    WEAPONS: [], EQUIPMENT: [], VEHICLES: [], CREW: [],
+    getCommandMissionsV110,
+    unlockedCampaignsV188: list => filterColonyCampaignsV188(system.data,
+      filterAct5CampaignsV188(system.data, filterUnlockedCampaignsV188(system.data, list))),
+    storyStateV188: () => deriveStoryWithAct5V188(system.data, { language: 'fr' }),
+    missionNameV188: entry => entry.name, renderSpecialOperationsV67() {},
+    renderColonyReconstructionV188() {}, renderStationFrontV188() {}, renderCrewQuestsPanelV188() {}, renderAct5PanelV188() {},
+    preserveCampaignStoryReturnV160, preserveConvoyReturnHistoryV162, preserveLetheContinuityV163,
+    mountCampaignDebriefV160, mountCampaignDebriefV161, mountConvoyReturnHistoryV162, mountLetheContinuityV163,
+    recordCampaignStoryReviewV160, recordLetheContinuityReviewV163, campaignObjectiveLabelV188, researchBonusRowV188: () => '',
+    getOperationBrief: () => ({ crewIds: [], ready: true, risk: 0, hours: 0 }), resolveCrewDefinitionV85: member => member,
+    getSpecialOperationByCampaignIdV67: () => null, isSoloSpecialOperationV131: () => true,
+    getAlphaBravoStrategicRecoveryV69: () => ({ canAbandon: false }),
+    APC_CONVOY_CAMPAIGN_V121: { id: 'other-convoy' }, BLACK_COCOON_CAMPAIGN_V121: { id: 'other-cocoon' },
+    ARCHIVE_RELAY_CAMPAIGN_V122: campaign, escapeHtml: String, formatCost: () => '',
+    byId: id => controls.get(id) || null,
+    launchCampaign() { throw Error('This consultation must never launch a mission.'); }, abandonBlockedOperationV69() {}
+  };
+  // Execute the app's full return hook, Promise chain, plan/debrief renderers,
+  // and native selector handlers. Only navigation, unrelated panels/brief
+  // decoration, DOM/Canvas and the clock are represented by this declared host.
+  const app = readFileSync(new URL('../src/app.js', import.meta.url), 'utf8');
+  const section = (start, end, offset = 0) => {
+    const a = app.indexOf(start, offset), b = app.indexOf(end, a);
+    assert.ok(a >= 0 && b > a); return app.slice(a, b);
+  };
+  const source = [
+    section('function markStoryDebriefOnViewV188() {', '\n// V188 prologue cinematics'),
+    section('function playStoryCinematicV188(', '\nfunction openPlayerCreatorV84('),
+    section('function renderCommandMissionsV110() {', '\nfunction renderStrategy()'),
+    section('function renderCampaigns() {', '\nfunction specialOperationStatusV67('),
+    section('function renderOperationPlan() {', '\nfunction procurementActionsV62('),
+    section("  byId('command-world-v110').onchange", "  globalThis.addEventListener('keydown'", app.indexOf('function bind() {'))
+  ].join('\n');
+  const native = new Function(...Object.keys(dependencies), `
+    let activeView = 'command', creatorOwnerV84 = null, cinematicReturnV188 = null, interludeResumePendingV188 = false;
+    ${source}
+    return { markStoryDebriefOnViewV188, renderOperationPlan };
+  `)(...Object.values(dependencies));
+  native.renderOperationPlan();
+  if (foreignFilm) void player.play('cin-01');
+  const context = createContext({ document, __ATF_V51__: { saveSystem: system },
+    getComputedStyle: () => ({ visibility: 'visible' }) });
+  const python = String.raw`
+import ast,json,sys
+from pathlib import Path
+tree=ast.parse(Path(sys.argv[1]).read_text());now=0
+def rpc(method,**data):
+ global now
+ print(json.dumps({'method':method,**data}),flush=True)
+ response=json.loads(sys.stdin.readline());now=response['now']
+ if response.get('error'):raise TimeoutError(response['error'])
+ return response.get('value')
+class Clock:
+ def monotonic(self):return now/1000
+class Locator:
+ def __init__(self,selector):self.selector=selector
+ def is_visible(self):return rpc('visible',selector=self.selector)
+ def click(self,**kwargs):return rpc('click',selector=self.selector,**kwargs)
+ def select_option(self,value,**kwargs):return rpc('select',selector=self.selector,value=value,**kwargs)
+ def wait_for(self,**kwargs):return rpc('locator_wait',selector=self.selector,**kwargs)
+ def inner_text(self,**kwargs):return rpc('text',selector=self.selector,**kwargs)
+class Page:
+ def locator(self,selector):return Locator(selector)
+ def evaluate(self,expression,arg=None):return rpc('evaluate',expression=expression,arg=arg)
+ def wait_for_function(self,expression,arg=None,**kwargs):return rpc('wait',expression=expression,arg=arg,**kwargs)
+def is_check(node,label):
+ return isinstance(node,ast.Expr) and isinstance(node.value,ast.Call) and isinstance(node.value.func,ast.Name) and node.value.func.id=='check' and isinstance(node.value.args[0],ast.Constant) and node.value.args[0].value==label
+start_label='the actual return aboard keeps the victory receipt and cannot repay it'
+end_label='return dialogue distinguishes documented cause and unidentified author'
+bodies=[node.body for node in ast.walk(tree) if hasattr(node,'body') and isinstance(node.body,list) and any(is_check(item,start_label) for item in node.body)]
+assert len(bodies)==1
+body=bodies[0];a=next(i for i,item in enumerate(body) if is_check(item,start_label));b=next(i for i,item in enumerate(body) if is_check(item,end_label))
+helpers=[node for node in tree.body if isinstance(node,ast.FunctionDef) and node.name in ['open_plan','select_qz18_return_after_cinematics']]
+checks=[]
+def check(label,value):
+ assert value,label
+ checks.append(label)
+scope={'time':Clock(),'page':Page(),'returned':{'id':sys.argv[2]},'report':{},'check':check,'open_view':lambda page,view:rpc('open_view',view=view)}
+exec(compile(ast.Module(body=helpers,type_ignores=[]),sys.argv[1],'exec'),scope)
+try:
+ exec(compile(ast.Module(body=body[a+1:b+1],type_ignores=[]),sys.argv[1],'exec'),scope)
+ result={'ok':True,'report':scope['report'],'checks':checks}
+except (AssertionError,TimeoutError) as error:result={'ok':False,'error':str(error),'report':scope['report'],'checks':checks}
+print(json.dumps({'method':'complete','result':result}),flush=True)
+`;
+  const qaSource = fileURLToPath(new URL('./qa-campaign-story-v160.py', import.meta.url));
+  const child = spawn('python3', ['-B', '-c', python, qaSource, expectedOperationId], { stdio: ['pipe', 'pipe', 'pipe'] });
+  let stderr = '', result; child.stderr.on('data', chunk => { stderr += chunk; });
+  const done = new Promise(resolve => child.on('exit', code => resolve(code))), timer = setTimeout(() => child.kill('SIGKILL'), 10000);
+  const flush = async () => { for (let n = 0; n < 8; n++) await Promise.resolve(); };
+  try {
+    for await (const line of createInterface({ input: child.stdout })) {
+      const request = JSON.parse(line); let value = null, error;
+      if (request.method === 'complete') { result = request.result; continue; }
+      calls.push({ ...request, at: now, plan: system.data.strategy.plannedCampaignId,
+        seen: [...system.data.storyCampaignV188.cinematicsSeen], overlays: overlays().map(node => node.getAttribute('aria-label')) });
+      try {
+        if (request.method === 'open_view') {
+          assert.equal(request.view, 'command'); queueMicrotask(native.markStoryDebriefOnViewV188); await flush();
+        } else if (request.method === 'evaluate' || request.method === 'wait') {
+          const read = () => runInContext('(' + request.expression + ')', context)(request.arg);
+          value = read(); if (request.method === 'wait' && !value) { await flush(); value = read(); }
+          if (request.method === 'wait' && !value) throw Error('Native return readiness did not satisfy the shared budget.');
+        } else {
+          const node = lookup(request.selector);
+          if (request.method === 'visible') value = Boolean(node?.getClientRects().length);
+          else {
+            if (!node?.getClientRects().length) throw Error('The requested native control or debrief is absent.');
+            if (request.method === 'text') value = node.textContent;
+            else if (request.method === 'locator_wait') assert.equal(request.state, 'visible');
+            else if (request.method === 'click') {
+              assert.equal(node, player.active?.overlay.querySelector('.cinematic-skip-v188'));
+              node.onclick(); gaps.push({ overlays: overlays().length, seen: [...system.data.storyCampaignV188.cinematicsSeen] });
+            } else if (request.method === 'select') {
+              if (overlays().length) throw Error('A native cinematic still owns the public controls.');
+              assert.ok(node.optionValues.includes(request.value)); assert.equal(node.disabled, false);
+              node.value = request.value; node.onchange({ target: node });
+            } else throw Error('Unexpected driver operation: ' + request.method);
+          }
+        }
+      } catch (caught) { error = caught.message; now += request.timeout || 30000; }
+      if (!error) now += 17; // Declared transport latency makes remaining-budget checks observable.
+      child.stdin.write(JSON.stringify({ now, value, error }) + '\n');
+    }
+    assert.equal(await done, 0, stderr); assert.ok(result);
+    assert.deepEqual(protectedState(), before, 'Films and plan consultation cannot pay, read, deploy or replace this native receipt.');
+    assert.deepEqual(errors, []);
+    return { result, calls, gaps, now, plan: system.data.strategy.plannedCampaignId,
+      seen: [...system.data.storyCampaignV188.cinematicsSeen], overlayCount: overlays().length,
+      panel: root.querySelector('[data-campaign-story-return]')?.textContent || null };
+  } finally { clearTimeout(timer); child.kill(); player.stop(); await flush(); }
+}
+
+test('QA QZ-18 return consultation completes the native two-film chain before selecting its own durable report', async t => {
+  for (const fixture of [{}, { seen: ['cin-20'] }, { seen: ['cin-20', 'cin-20-rook'], alreadyDebriefed: true }]) {
+    const observed = await driveNativeReturnConsultation(fixture);
+    assert.equal(observed.result.ok, true, JSON.stringify(observed));
+    assert.equal(observed.plan, campaign.id); assert.equal(observed.overlayCount, 0);
+    assert.deepEqual(observed.seen, ['cin-20', 'cin-20-rook']);
+    assert.match(observed.panel, /l’identité de son auteur reste inconnue/u);
+    const selections = observed.calls.filter(call => call.method === 'select');
+    assert.deepEqual(selections.map(call => [call.selector, call.value]), [
+      ['#command-world-v110', ''], ['#command-mission-v110', campaign.id]
+    ]);
+    assert.equal(selections[0].plan, 'special-narrative-qz17', 'The native recommendation must have advanced before the explicit consultation.');
+    for (const selection of selections) {
+      assert.deepEqual(selection.seen, ['cin-20', 'cin-20-rook']); assert.deepEqual(selection.overlays, []);
+    }
+    const clicked = observed.calls.filter(call => call.method === 'click');
+    assert.equal(clicked.length, 2 - (fixture.seen?.length || 0));
+    if (!fixture.seen?.length) assert.deepEqual(observed.gaps[0], { overlays: 0, seen: [] },
+      'The real first skip has a transient empty overlay before its Promise commits and starts Rook.');
+    const bounded = observed.calls.filter(call => call.timeout !== undefined);
+    assert.ok(bounded.length >= 3);
+    const deadline = bounded[0].at + bounded[0].timeout, enteredAt = observed.calls.find(call => call.method === 'evaluate').at;
+    assert.ok(Math.abs(deadline - enteredAt - 30000) <= 1);
+    assert.ok(bounded.every(call => call.timeout > 0 && call.at + call.timeout <= deadline + 1));
+    assert.ok(observed.now < 30000);
+  }
+  t.diagnostic('Actual Python consultation block, native return from GameEngine, app Promise/selector/render functions and CinematicPlayer. Declared DOM/Canvas/clock/navigation host and unrelated panel decoration; not a Chromium journey.');
+});
+
+test('QA QZ-18 return consultation refuses a foreign receipt and times out without skipping a foreign film', async () => {
+  for (const fixture of [{ operationId: 'operation-foreign' }, { foreignFilm: true, alreadyDebriefed: true }]) {
+    const observed = await driveNativeReturnConsultation(fixture);
+    assert.equal(observed.result.ok, false, JSON.stringify(observed));
+    assert.deepEqual(observed.calls.filter(call => ['click', 'select'].includes(call.method)), []);
+    assert.equal(observed.plan, 'special-narrative-qz17');
+    if (fixture.foreignFilm) {
+      assert.equal(observed.overlayCount, 1); assert.deepEqual(observed.seen, []);
+      assert.ok(observed.now <= 30000 + 3 * 17, 'The absent expected film cannot renew the thirty-second consultation budget.');
+    }
+  }
+});
 
 test('gamedev QA reload: exact registered workpost clocks advance only within measured elapsed time', () => {
   assert.deepEqual(HUB_NPC_ANNEX_WORKPOST_ROUTE_DEFINITIONS_V165.map(d => [d.id, d.crewId]),

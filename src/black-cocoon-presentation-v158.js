@@ -1,13 +1,14 @@
 import { resolvePlayerBodyRigV125, resolvePlayerArmPoseV125 } from './player-body-rig-v125.js';
 import { PLAYER_MODULAR_RIG_ANCHORS_V126, resolvePlayerModularRigV126,
   drawPlayerModularRigV126 } from './player-modular-rig-v126.js';
+import { prepareBiologicalArtV188, drawHumanResinSupportV188 } from './biological-art-v188.js';
 
 /** Dedicated presentation of the requested human resin captivity. This is an
- * original procedural environment animation, not the Romulus specimen, a new
- * bitmap corpus, or a claim of canonical reproduction. Native V121 owns every
+ * original environment animation with an empty raster wall support, not the
+ * Romulus specimen or a claim of canonical reproduction. Native V121 owns every
  * interaction, injury, resource, release, checkpoint and extraction. */
 export const BLACK_COCOON_PRESENTATION_V158 = Object.freeze({
-  schema: 158, operationId: 'black-cocoon', source: 'original-procedural-human-resin-binding',
+  schema: 158, operationId: 'black-cocoon', source: 'original-resin-support-with-native-human-binding',
   animationStatus: 'dedicated-procedural-animation', canonExact: false,
   wakeDuration: 1.4, releaseDuration: .9, strandCount: 9,
   remaining: Object.freeze(['extended-survivor-campaign', 'complete-dedicated-mission-art'])
@@ -96,65 +97,106 @@ export function resolveBlackCocoonPlayerRigV158({ actor, presentation, images, a
     bodyRig, handPose, arms, requiredAssets: modular.requiredAssets, firing: false };
 }
 
+function layerBounds(layer) {
+  const source = layer?.sourceRect, m = layer?.matrix; if (!source || !m) return null;
+  const corners = [[source.x, source.y], [source.x + source.width, source.y],
+    [source.x, source.y + source.height], [source.x + source.width, source.y + source.height]]
+    .map(([x, y]) => point(m.a * x + m.c * y + m.e, m.b * x + m.d * y + m.f));
+  const x = Math.min(...corners.map(p => p.x)), y = Math.min(...corners.map(p => p.y));
+  return { x, y, width: Math.max(...corners.map(p => p.x)) - x, height: Math.max(...corners.map(p => p.y)) - y };
+}
+
+/** The support belongs to the wall, not the player's changing pose. Measure a
+ * neutral, upright version of the same native rig at the original anchor.
+ * This is stable across wake/struggle, release, walking, crouching and old saves;
+ * it never changes the real actor, its costume, injury priority or collision. */
+export function resolveBlackCocoonResinLayoutV158({ actor, presentation, images } = {}) {
+  if (!actor || !presentation?.visible) return null;
+  const { x, groundY } = presentation.anchor;
+  const observed = { ...actor, x: x - actor.w / 2, y: groundY - actor.h,
+    alive: true, downed: false, inVehicle: false, ventTransit: null, vehicleAccessPhase: null,
+    v52HurtClock: 0, shockClock: 0, climbing: false, vx: 0, vy: 0, grounded: true, crouching: false };
+  const reference = { ...presentation, actorPose: true, wake: 1, working: false, forced: false, elapsed: 0, reducedMotion: true };
+  const native = resolveBlackCocoonPlayerRigV158({ actor: observed, presentation: reference, images });
+  const modular = native.bodyRig && resolvePlayerModularRigV126({ bodyRig: native.bodyRig, appearance: observed.appearanceV126, images });
+  const head = layerBounds(modular?.layers?.find(layer => layer.id === 'bare-head'));
+  const crown = modular?.layers?.filter(layer => layer.slot === 'head' || layer.slot === 'helmet')
+    .map(layerBounds).filter(Boolean) || [];
+  const headTop = crown.length ? Math.min(...crown.map(bound => bound.y)) : groundY - Math.max(48, finite(actor.h, 92));
+  const height = clamp(groundY - headTop, 48, 180), width = height * .62, detailScale = height / 146;
+  const shoulders = native.bodyRig?.shoulders;
+  const shoulderY = shoulders ? Math.max(shoulders.near.y, shoulders.far.y) : groundY - height * .68;
+  const headBottom = head ? head.y + head.height : groundY - height * .8;
+  return freeze({ height, width, detailScale,
+    // The shallow up-curve and its round stroke must also clear the face.
+    bandTop: Math.max(shoulderY + 5 * detailScale, headBottom + 11 * detailScale),
+    bandBottom: groundY - height * .1, headBounds: head, shoulderY,
+    reference: 'native-standing-modular-anchors' });
+}
+
 /** Fixed support geometry. The right/left half of every cut strap retracts to
  * its wall attachment; the final fragments settle at that same wall/floor. */
-export function blackCocoonResinGeometryV158(presentation, { height = 146, width = 86 } = {}) {
+export function blackCocoonResinGeometryV158(presentation, { height = 146, width = 86, bandTop = null, bandBottom = null, detailScale = height / 146 } = {}) {
   if (!presentation?.visible) return null;
-  const h = clamp(height, 80, 240), w = clamp(width, 56, 150);
+  const h = clamp(height, 48, 240), w = clamp(width, 28, 150), k = clamp(detailScale, .3, 1.65);
   const { x, groundY } = presentation.anchor, top = groundY - h;
-  const sway = !presentation.reducedMotion && !presentation.freed ? Math.sin(presentation.elapsed * 2.2) * .6 : 0;
+  const clearance = Math.max(4, 3.5 * k + .5);
+  const upper = clamp(bandTop ?? top + h * .15, top, groundY - clearance - 4);
+  const lower = clamp(bandBottom ?? top + h * .84, upper, groundY - clearance);
+  const sway = !presentation.reducedMotion && !presentation.freed ? Math.sin(presentation.elapsed * 2.2) * .6 * k : 0;
   const release = presentation.release;
   const bands = Array.from({ length: BLACK_COCOON_PRESENTATION_V158.strandCount }, (_, index) => {
     const fraction = index / (BLACK_COCOON_PRESENTATION_V158.strandCount - 1);
-    const y = top + h * (.15 + fraction * .69);
+    const y = upper + fraction * (lower - upper);
     const span = w * (.38 + .1 * Math.sin(fraction * Math.PI));
     const severed = smooth((presentation.cut - (.08 + index * .09)) / .12);
-    const gap = (8 + severed * 23) * (1 + release * .6);
-    const drop = release * (groundY - y - 4);
+    const gap = (8 + severed * 23) * (1 + release * .6) * k;
+    const drop = release * (groundY - y - clearance);
     return { index, y: y + drop, left: x - span, right: x + span,
-      leftTip: x + 2 - (gap + 2) * severed, rightTip: x - 2 + (gap + 2) * severed, severed, drop,
-      sag: severed * 10 * (1 - release) * (index % 2 ? 1 : -1), sway };
+      leftTip: x + 2 * k - (gap + 2 * k) * severed, rightTip: x - 2 * k + (gap + 2 * k) * severed, severed, drop,
+      sag: severed * 10 * k * (1 - release) * (index % 2 ? 1 : -1), sway };
   });
-  return { anchor: { x, groundY }, x, top, groundY, width: w, height: h, bands };
+  return { anchor: { x, groundY }, x, top, groundY, width: w, height: h, detailScale: k, clearance, bandTop: upper, bandBottom: lower, bands };
 }
 
-export function drawBlackCocoonResinV158(ctx, presentation, { layer = 'front', height, width } = {}) {
-  const geometry = blackCocoonResinGeometryV158(presentation, { height, width });
+export function drawBlackCocoonResinV158(ctx, presentation, { layer = 'front', images = null, ...dimensions } = {}) {
+  const geometry = blackCocoonResinGeometryV158(presentation, dimensions);
   if (!geometry || !ctx?.save) return null;
-  const { x, top, groundY, width: w, height: h, bands } = geometry;
+  const { x, top, groundY, width: w, height: h, detailScale: k, clearance, bands } = geometry;
+  if (layer === 'back' && drawHumanResinSupportV188(ctx, images, geometry)) return geometry;
   // Every point in a cubic's convex hull, including its control points, stays
-  // above the support. Four pixels include the widest 7px round stroke and AA.
-  const supportedY = y => Math.min(groundY - 4, y);
+  // above the support. Clearance includes the scaled round stroke and AA.
+  const supportedY = y => Math.min(groundY - clearance, y);
   ctx.save(); ctx.lineCap = 'round';
   if (layer === 'back') {
-    ctx.fillStyle = '#131d1af0'; ctx.strokeStyle = '#354438'; ctx.lineWidth = 7;
-    ctx.beginPath(); ctx.moveTo(x - w * .52, groundY - 4);
+    ctx.fillStyle = '#171512f0'; ctx.strokeStyle = '#3b3630'; ctx.lineWidth = 7 * k;
+    ctx.beginPath(); ctx.moveTo(x - w * .52, groundY - clearance);
     ctx.bezierCurveTo(x - w * .68, top + h * .5, x - w * .3, top - 9, x, top - 7);
-    ctx.bezierCurveTo(x + w * .49, top - 8, x + w * .64, top + h * .6, x + w * .51, groundY - 4);
+    ctx.bezierCurveTo(x + w * .49, top - 8, x + w * .64, top + h * .6, x + w * .51, groundY - clearance);
     ctx.closePath(); ctx.fill(); ctx.stroke();
     for (let i = 0; i < 7; i++) {
-      const offset = (i - 3) * 7;
-      ctx.strokeStyle = i % 2 ? '#465345' : '#28392f'; ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.moveTo(x + offset, groundY - 4);
+      const offset = (i - 3) * 7 * k;
+      ctx.strokeStyle = i % 2 ? '#645b50' : '#2d2823'; ctx.lineWidth = 2 * k;
+      ctx.beginPath(); ctx.moveTo(x + offset, groundY - clearance);
       ctx.bezierCurveTo(x - w * .58 + offset, top + h * .6, x + w * .36 + offset, top + h * .13, x + offset * .5, top - 3); ctx.stroke();
     }
   } else {
     for (const band of bands) {
       const y = band.y, bend = band.sag + band.sway;
-      for (const [color, thickness] of [['#1b281eea', 7], ['#58634a', 3.2], ['#a6ac7b99', .9]]) {
-        ctx.strokeStyle = color; ctx.lineWidth = thickness;
+      for (const [color, thickness] of [['#211c17ee', 7], ['#655c50', 3.2], ['#a7a8a099', .9]]) {
+        ctx.strokeStyle = color; ctx.lineWidth = thickness * k;
         ctx.beginPath(); ctx.moveTo(band.left, supportedY(y));
-        ctx.bezierCurveTo(band.left + 9, supportedY(y - 6), x - 12, supportedY(y + bend), band.leftTip, supportedY(y + bend)); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(band.right, supportedY(y + 3 * (1 - presentation.release)));
-        ctx.bezierCurveTo(band.right - 10, supportedY(y - 6), x + 12, supportedY(y - bend), band.rightTip, supportedY(y - bend)); ctx.stroke();
+        ctx.bezierCurveTo(band.left + 9 * k, supportedY(y - 6 * k), x - 12 * k, supportedY(y + bend), band.leftTip, supportedY(y + bend)); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(band.right, supportedY(y + 3 * k * (1 - presentation.release)));
+        ctx.bezierCurveTo(band.right - 10 * k, supportedY(y - 6 * k), x + 12 * k, supportedY(y - bend), band.rightTip, supportedY(y - bend)); ctx.stroke();
       }
       if (band.severed > 0 && band.severed < 1) {
-        ctx.strokeStyle = '#bec48eaa'; ctx.lineWidth = .8;
+        ctx.strokeStyle = '#c2bbaaaa'; ctx.lineWidth = .8 * k;
         ctx.beginPath(); ctx.moveTo(band.leftTip, supportedY(y + bend)); ctx.lineTo(band.rightTip, supportedY(y - bend)); ctx.stroke();
       }
     }
-    ctx.fillStyle = '#283a2ce8';
-    ctx.beginPath(); ctx.ellipse(x, groundY - 4, w * .57, 2.5, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#2e2822e8';
+    ctx.beginPath(); ctx.ellipse(x, groundY - clearance, w * .57, 2.5 * k, 0, 0, Math.PI * 2); ctx.fill();
   }
   ctx.restore(); return geometry;
 }
@@ -163,6 +205,11 @@ export function withBlackCocoonPresentationV158(Base) {
   if (Base.blackCocoonPresentationV158 === true) return Base;
   return class BlackCocoonPresentationV158 extends Base {
     static blackCocoonPresentationV158 = true;
+    start(options = {}) {
+      const result = super.start(options);
+      if (this.hasBlackCocoonPresentationV158()) prepareBiologicalArtV188(this.images, 'black-cocoon');
+      return result;
+    }
     hasBlackCocoonPresentationV158() { return Boolean(this.isBlackCocoonV121?.() && this.blackCocoonPropsV121?.cocoon); }
     blackCocoonPresentationV158() {
       return this.hasBlackCocoonPresentationV158() ? resolveBlackCocoonPresentationV158(this.blackCocoonV121,
@@ -178,7 +225,7 @@ export function withBlackCocoonPresentationV158(Base) {
     drawActor(ctx, actor) {
       const presentation = actor === this.player ? this.blackCocoonPresentationV158() : null;
       if (!presentation?.visible) return super.drawActor(ctx, actor);
-      const dimensions = { height: 146, width: 86 };
+      const dimensions = { ...resolveBlackCocoonResinLayoutV158({ actor, presentation, images: this.images }), images: this.images };
       drawBlackCocoonResinV158(ctx, presentation, { ...dimensions, layer: 'back' });
       const result = super.drawActor(ctx, actor);
       drawBlackCocoonResinV158(ctx, presentation, { ...dimensions, layer: 'front' });

@@ -22,7 +22,7 @@ import { filterAct5CampaignsV188, act5LockReasonV188, act5LockTextV188, applyAct
   finishAct5CreditsV188, act5StateV188, act5BridgeDueV188, act5BridgeSecondsV188, chooseAct5BridgeV188, ACT5_BRIDGE_TEXT_V188, ACT5_STANDOFF_TEXT_V188,
   act5CrewEpilogueLineV188, markAct5EpilogueTalkV188, act5LockerLabelV188, act5CinematicContextV188, deriveStoryWithAct5V188, act5SnapshotV188,
   act5LateColonistsSavedV188 } from './story-act5-v188.js';
-import { Act5AssetLoaderV188 } from './act5-slots-v188.js';
+import { Act5AssetLoaderV188, watchAct5PictureV188 } from './act5-slots-v188.js';
 import { storyDossierV188 } from './story-dossier-v188.js';
 import { withHubEcho8LockerV188, echo8LockerNotesV188 } from './hub-echo8-locker-v188.js';
 import { withHubPrologueRoomsV188 } from './hub-prologue-rooms-v188.js';
@@ -1958,13 +1958,14 @@ function maybeOpenAct5BridgeV188() {
   Object.assign(overlay.style, { position: 'fixed', left: '50%', top: '12%', transform: 'translateX(-50%)', zIndex: '60', width: 'min(92vw, 560px)',
     background: 'rgba(5,10,8,.94)', border: '1px solid #7dff9a', borderRadius: '4px', padding: '12px 16px', color: '#e6efe6', font: '14px monospace' });
   const canvas = Object.assign(document.createElement('canvas'), { width: 640, height: 280 }); Object.assign(canvas.style, { width: '100%', height: 'auto', display: 'block' });
-  const ctx = canvas.getContext?.('2d'); if (ctx) act5LoaderV188().draw(ctx, 'bridge-collapse', 640, 280, { language: lang });
+  const ctx = canvas.getContext?.('2d');
+  const releasePicture = watchAct5PictureV188(act5LoaderV188(), ctx, 'bridge-collapse', 640, 280, { language: lang });
   const heading = Object.assign(document.createElement('h3'), { textContent: text.title[lang] }); heading.style.margin = '8px 0 4px';
   const paragraph = Object.assign(document.createElement('p'), { textContent: text.text[lang] }); paragraph.style.margin = '0 0 8px';
   const clock = Object.assign(document.createElement('p'), { className: 'act5-bridge-clock-v188', textContent: `${total} s` }); clock.style.cssText = 'margin:0 0 8px;color:#e9d07a;font-weight:700';
   const footer = document.createElement('footer'); footer.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap';
   let elapsed = 0, last = performance.now(), timer = null;
-  const close = () => { clearInterval(timer); overlay.remove(); act5BridgeOverlayV188 = null; };
+  const close = () => { releasePicture(); clearInterval(timer); overlay.remove(); act5BridgeOverlayV188 = null; };
   const finish = (choice, timedOut = false) => {
     close();
     if (!chooseAct5BridgeV188(saveSystem.data, choice, { timedOut })) return;

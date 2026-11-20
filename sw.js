@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-open-workstreams-v179';
+const CACHE = 'atf-v143-queen-mother-choir-art-20261117';
 const SHELL = Object.freeze([
   '/src/alien-base-bridge-v1.js',
   '/src/alien-base-snapshot-v1.js',
@@ -64,6 +64,16 @@ const SHELL = Object.freeze([
   '/src/campaign-story-ui-v160.js',
   '/src/archive-relay-presentation-v160.js',
   '/src/black-cocoon-presentation-v158.js',
+  '/src/biological-art-v188.js',
+  '/src/prologue-art-v188.js',
+  '/src/port-quay-art-v188.js',
+  '/src/cargo-matriarch-art-v188.js',
+  '/src/manta-art-v188.js',
+  '/src/hadal-player-art-v188.js',
+  '/src/broodstorm-queen-art-v188.js',
+  '/src/queen-mother-art-v188.js',
+  '/src/queen-mother-guard-art-v188.js',
+  '/src/queen-mother-choir-art-v188.js',
   '/src/npc-circulation-v158.js',
   '/src/npc-annex-circulation-v159.js',
   '/src/forge-npcs-v158.js',
@@ -217,7 +227,34 @@ const SHELL = Object.freeze([
   '/src/story-cinematics-v188.js',
   '/src/insertion-cinematic-v188.js',
   '/src/insertion-asset-slots-v188.js',
+  '/assets/insertion/v188/starfield-deep.png',
+  '/assets/insertion/v188/ud4l-side.png',
+  '/assets/insertion/v188/m577-side.png',
+  '/assets/insertion/v188/ud4l-cockpit.png',
+  '/assets/insertion/v188/crt-bezel.png',
+  '/assets/insertion/v188/ud4l-troop-bay.png',
+  '/assets/insertion/v188/marine-seated.png',
+  '/assets/insertion/v188/entry-plasma.png',
+  '/assets/insertion/v188/terrain-near.png',
+  '/assets/openai/sprites/normalized/npcs/maksim-orlov-locomotion-sheet.png',
+  '/assets/insertion/v188/tantalus-drop-bay.png',
+  '/assets/insertion/v188/tantalus-hull-exterior.png',
+  '/assets/insertion/v188/planet-limb.png',
+  '/assets/insertion/v188/moon-limb.png',
+  '/assets/insertion/v188/target-vessel.png',
+  '/assets/insertion/v188/terrain-far.png',
+  '/assets/insertion/v188/cloud-far.png',
+  '/assets/insertion/v188/cloud-near.png',
+  '/assets/depth-holds/v188/freighter-crate-stack.png',
+  '/assets/depth-holds/v188/freighter-drum-rack.png',
+  '/assets/depth-holds/v188/quarantine-crate.png',
+  '/assets/depth-holds/v188/quarantine-cart.png',
+  '/assets/depth-holds/v188/hold-deck-plating.png',
   '/src/placeholder-portraits-v188.js',
+  '/src/colony-portraits-v188.js',
+  '/assets/colony/v188/tomas-wren.png',
+  '/assets/colony/v188/lucia-ferro.png',
+  '/assets/colony/v188/adele-sarrazin.png',
   '/src/hub-echo8-locker-v188.js',
   '/src/m577-manifest-ui-v188.js',
   '/src/story-choice-ui-v188.js',
@@ -695,6 +732,146 @@ const SHELL = Object.freeze([
   '/xeno-trials-v96.css',
 ]);
 const SHELL_PATHS = new Set(SHELL);
+// Reviewed scene cards and mission props join the bounded runtime cache on demand.
+// Keep exact allow-lists: other content and hub files do not become cacheable.
+const COLONY_CARD_PATHS_V188 = new Set([
+  '/assets/content/v188/colony/colony-quay-warehouse.png',
+  '/assets/content/v188/colony/colony-processor.png',
+  '/assets/content/v188/colony/colony-screening.png',
+  '/assets/content/v188/colony/colony-cult.png',
+  '/assets/content/v188/colony/wren-notebooks.png',
+  '/assets/content/v188/colony/colony-beacon.png',
+  '/assets/content/v188/colony/colony-walls.png',
+  '/assets/content/v188/colony/quest-sentry.png',
+  '/assets/content/v188/colony/quest-apc.png',
+  '/assets/content/v188/colony/quest-flight-recorder.png',
+  '/assets/content/v188/colony/quest-route-map.png',
+  '/assets/content/v188/colony/quest-range.png',
+  '/assets/content/v188/colony/quest-colonist-list.png',
+  '/assets/content/v188/colony/quest-tags.png',
+  '/assets/content/v188/colony/quest-directive.png',
+  '/assets/content/v188/colony/quest-register.png',
+  '/assets/content/v188/colony/quest-reactor.png',
+  '/assets/content/v188/colony/quest-vents.png'
+]);
+const ASPHODELE_CARD_PATHS_V188 = new Set([
+  '/assets/content/v188/asphodele-exterior.png',
+  '/assets/content/v188/cassius-core.png',
+  '/assets/content/v188/echo8-recording.png',
+  '/assets/content/v188/order-documents.png',
+  '/assets/content/v188/seal-fragment.png',
+  '/assets/content/v188/david-memory.png'
+]);
+const ASPHODELE_MISSION_PATHS_V188 = new Set([
+  '/assets/asphodele/v188/asph-msn-panel.png',
+  '/assets/asphodele/v188/asph-msn-crt.png',
+  '/assets/asphodele/v188/asph-msn-sign.png',
+  '/assets/asphodele/v188/asph-msn-conduit.png',
+  '/assets/asphodele/v188/asph-msn-blackbox.png',
+  '/assets/asphodele/v188/asph-msn-resin.png',
+  '/assets/asphodele/v188/asph-msn-salvage.png',
+  '/assets/asphodele/v188/asph-msn-gauge.png',
+  '/assets/asphodele/v188/asph-msn-camera.png'
+]);
+const ASPHODELE_HUB_WALL_PATHS_V188 = new Set([
+  '/assets/asphodele/v188/asph-wall-docks.png',
+  '/assets/asphodele/v188/asph-wall-ring.png',
+  '/assets/asphodele/v188/asph-wall-spoke.png',
+  '/assets/asphodele/v188/asph-wall-control.png',
+  '/assets/asphodele/v188/asph-wall-relay.png',
+  '/assets/asphodele/v188/asph-wall-lab.png',
+  '/assets/asphodele/v188/asph-wall-memorial.png',
+  '/assets/asphodele/v188/asph-wall-greenhouse.png',
+  '/assets/asphodele/v188/asph-wall-market.png',
+  '/assets/asphodele/v188/asph-wall-quarters.png',
+  '/assets/asphodele/v188/asph-wall-medbay.png',
+  '/assets/asphodele/v188/asph-wall-lower.png',
+  '/assets/asphodele/v188/asph-wall-repair.png'
+]);
+const ASPHODELE_HUB_DETAIL_PATHS_V188 = new Set([
+  '/assets/asphodele/v188/asph-door.png',
+  '/assets/asphodele/v188/asph-ud4l-docked.png',
+  '/assets/asphodele/v188/asph-crucible-shuttle.png',
+  '/assets/asphodele/v188/asph-cassius-core.png',
+  '/assets/asphodele/v188/asph-qz-map.png',
+  '/assets/asphodele/v188/asph-relay-bays.png',
+  '/assets/asphodele/v188/asph-cradles.png',
+  '/assets/asphodele/v188/asph-memorial-plaques.png',
+  '/assets/asphodele/v188/asph-hydro-bays.png',
+  '/assets/asphodele/v188/asph-crucible-stall.png',
+  '/assets/asphodele/v188/asph-bunks.png',
+  '/assets/asphodele/v188/asph-medbay-beds.png',
+  '/assets/asphodele/v188/asph-medbay-scanner.png',
+  '/assets/asphodele/v188/asph-echo8-barricade.png',
+  '/assets/asphodele/v188/asph-night-board.png',
+  '/assets/asphodele/v188/asph-repair-cradle.png',
+  '/assets/asphodele/v188/asph-grue.png',
+  '/assets/asphodele/v188/asph-npc-docker.png',
+  '/assets/asphodele/v188/asph-npc-merchant.png',
+  '/assets/asphodele/v188/asph-npc-technician.png'
+]);
+const ASPHODELE_CINEMATIC_PATHS_V188 = new Set([
+  '/assets/asphodele/v188/cinematics/asph-cin-ring.png',
+  '/assets/asphodele/v188/cinematics/asph-cin-hub.png',
+  '/assets/asphodele/v188/cinematics/asph-cin-rook-quarters.png',
+  '/assets/asphodele/v188/cinematics/asph-cin-helmet-corridor.png',
+  '/assets/asphodele/v188/cinematics/asph-cin-ceiling-drone.png',
+  '/assets/asphodele/v188/cinematics/asph-cin-bent-door.png'
+]);
+const ACT5_ART_PATHS_V188 = new Set([
+  '/assets/act5/v188/m577-side-corrected.png',
+  '/assets/act5/v188/m577-rain-departure.png',
+  '/assets/act5/v188/bridge-collapse.png',
+  '/assets/act5/v188/quay-standoff.png',
+  '/assets/act5/v188/port-gates-rollcall.png',
+  '/assets/act5/v188/port-meridien-epilogue.png',
+  '/assets/act5/v188/freight-trailer.png',
+  '/assets/act5/v188/colonist-trailer.png',
+  '/assets/act5/v188/echo8-locker-epilogue.png'
+]);
+const BIOLOGICAL_ART_PATHS_V188 = new Set([
+  '/assets/biological/v188/qz17-cradle-breached.png',
+  '/assets/biological/v188/depot-resin-helmet-corridor.png',
+  '/assets/biological/v188/human-resin-support.png'
+]);
+const PROLOGUE_ART_PATHS_V188 = new Set([
+  '/assets/prologue/v188/tomas-wren-standing.png',
+  '/assets/prologue/v188/lucia-ferro-standing.png',
+  '/assets/prologue/v188/adele-sarrazin-standing.png',
+  '/assets/prologue/v188/resident-child-standing.png',
+  '/assets/prologue/v188/north-quay-patient.png',
+  '/assets/prologue/v188/medical-stretcher.png',
+  '/assets/prologue/v188/port-meridien-night-approach.png',
+  '/assets/prologue/v188/relay-access-badge.png',
+  '/assets/prologue/v188/relay-reaching-hand.png',
+  '/assets/prologue/v188/cryo-supply-shelf.png',
+  '/assets/prologue/v188/cryo-service-trolley.png'
+]);
+const CARGO_ABYSS_ART_PATHS_V188 = new Set([
+  '/assets/cargo/v188/matriarch-idle.png',
+  '/assets/cargo/v188/matriarch-advance.png',
+  '/assets/cargo/v188/matriarch-claw-tail.png',
+  '/assets/cargo/v188/matriarch-roar-hurt.png',
+  '/assets/abyss/v188/manta-6-hull.png'
+]);
+const HADAL_ART_PATHS_V188 = new Set([
+  '/assets/abyss/v188/hadal-upper-parts.png',
+  '/assets/abyss/v188/hadal-leg-parts.png',
+  '/assets/abyss/v188/hadal-helmet.png'
+]);
+const BROODSTORM_QUEEN_ART_PATHS_V188 = new Set([
+  '/assets/broodstorm/v188/flying-queen-idle.png',
+  '/assets/broodstorm/v188/flying-queen-chase.png',
+  '/assets/broodstorm/v188/flying-queen-death.png'
+]);
+const QUEEN_MOTHER_ART_PATHS_V188 = new Set([
+  '/assets/queen-mother/v188/adult-rest-anticipation.png',
+  '/assets/queen-mother/v188/adult-action-death.png',
+  '/assets/queen-mother/v188/adult-arms.png'
+]);
+const QUEEN_MOTHER_CHOIR_ART_PATHS_V188 = new Set([
+  '/assets/queen-mother/v188/choirs-original.png'
+]);
 const MAX_RUNTIME_ENTRIES_V143 = 256;
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const PRIVATE_HEADERS_V143 = ['authorization', 'proxy-authorization', 'apikey', 'x-api-key', 'x-auth-token'];
@@ -709,6 +886,20 @@ function cacheableRequestV143(request) {
     const path = url.pathname;
     if (/%|\\|\/\//.test(path)) return false;
     if (SHELL_PATHS.has(path)) return true;
+    if (COLONY_CARD_PATHS_V188.has(path)) return true;
+    if (ASPHODELE_CARD_PATHS_V188.has(path)) return true;
+    if (ASPHODELE_MISSION_PATHS_V188.has(path)) return true;
+    if (ASPHODELE_HUB_WALL_PATHS_V188.has(path)) return true;
+    if (ASPHODELE_HUB_DETAIL_PATHS_V188.has(path)) return true;
+    if (ASPHODELE_CINEMATIC_PATHS_V188.has(path)) return true;
+    if (ACT5_ART_PATHS_V188.has(path)) return true;
+    if (BIOLOGICAL_ART_PATHS_V188.has(path)) return true;
+    if (PROLOGUE_ART_PATHS_V188.has(path)) return true;
+    if (CARGO_ABYSS_ART_PATHS_V188.has(path)) return true;
+    if (HADAL_ART_PATHS_V188.has(path)) return true;
+    if (BROODSTORM_QUEEN_ART_PATHS_V188.has(path)) return true;
+    if (QUEEN_MOTHER_ART_PATHS_V188.has(path)) return true;
+    if (QUEEN_MOTHER_CHOIR_ART_PATHS_V188.has(path)) return true;
     // No API, account, save, unknown document or third-party endpoint can enter
     // Cache Storage, even when it returns HTTP 200 or an image-like extension.
     return /^\/assets\/(?:openai|user|equipment)\/[a-z0-9/_.-]+\.(?:png|webp|jpg|jpeg)$/i.test(path)

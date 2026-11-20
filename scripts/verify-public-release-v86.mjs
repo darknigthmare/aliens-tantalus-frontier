@@ -1,4 +1,5 @@
 import { publicReleasePathAdmissionV163, verifyPublicAdmissionsV163 } from './public-release-admissions-v163.mjs';
+import { projectRecoveryPathAdmission20261116, verifyProjectRecoveryArchive20261116 } from './project-recovery-admission-20261116.mjs';
 import assert from 'node:assert/strict';
 import { readdir, readFile, lstat } from 'node:fs/promises';
 import { basename, join, resolve } from 'node:path';
@@ -391,12 +392,98 @@ const FORGE_TOOLING_V140 = new Set([
   'scripts/verify-colony-crew-v188.mjs',
   'scripts/qa-colony-crew-v188.mjs',
   'docs/development/INSERTION_ART_SLOTS_V188.md',
+  'docs/development/INSERTION_ART_PROVENANCE_20261116.json',
+  'docs/development/INSERTION_ART_QA_20261116.md',
+  'docs/development/INSERTION_ART_ATMOSPHERE_20261116.png',
+  'docs/development/INSERTION_ART_AIRLESS_20261116.png',
+  'docs/development/INSERTION_ART_SPACE_20261116.png',
+  'docs/development/INSERTION_ART_INTERIORS_20261116.png',
+  'docs/development/INSERTION_ART_RENDER_RECEIPT_20261116.json',
+  'docs/development/DEPTH_HOLD_ART_PROVENANCE_20261116.json',
+  'docs/development/DEPTH_HOLD_ART_QA_20261116.md',
+  'docs/development/DEPTH_HOLD_ART_OVERVIEW_20261116.png',
+  'docs/development/DEPTH_HOLD_ART_RENDER_RECEIPT_20261116.json',
+  'docs/development/COLONY_ART_PROVENANCE_20261116.json',
+  'docs/development/COLONY_ART_QA_20261116.md',
+  'docs/development/COLONY_ART_OVERVIEW_20261116.png',
+  'docs/development/COLONY_PORTRAITS_OVERVIEW_20261116.png',
+  'docs/development/COLONY_ART_RENDER_RECEIPT_20261116.json',
+  'docs/development/ASPHODELE_ART_PROVENANCE_20261116.json',
+  'docs/development/ASPHODELE_ART_QA_20261116.md',
+  'docs/development/ASPHODELE_ART_OVERVIEW_20261116.png',
+  'docs/development/ASPHODELE_ART_RENDER_RECEIPT_20261116.json',
+  'docs/development/ASPHODELE_ART_PRIMITIVE_REFERENCE_20261116.png',
+  'docs/development/ASPHODELE_MISSION_ART_PROVENANCE_20261116.json',
+  'docs/development/ASPHODELE_MISSION_ART_QA_20261116.md',
+  'docs/development/ASPHODELE_MISSION_ART_OVERVIEW_20261116.png',
+  'docs/development/ASPHODELE_MISSION_ART_RENDER_RECEIPT_20261116.json',
+  'docs/development/ASPHODELE_MISSION_ART_PRIMITIVE_REFERENCE_20261116.png',
+  'docs/development/ASPHODELE_HUB_WALL_ART_PROVENANCE_20261117.json',
+  'docs/development/ASPHODELE_HUB_WALL_ART_QA_20261117.md',
+  'docs/development/ASPHODELE_HUB_WALL_ART_OVERVIEW_20261117.png',
+  'docs/development/ASPHODELE_HUB_WALL_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/ASPHODELE_HUB_DETAIL_ART_PROVENANCE_20261117.json',
+  'docs/development/ASPHODELE_HUB_DETAIL_ART_QA_20261117.md',
+  'docs/development/ASPHODELE_HUB_DETAIL_ART_OVERVIEW_20261117.png',
+  'docs/development/ASPHODELE_HUB_DETAIL_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/ASPHODELE_CINEMATIC_ART_PROVENANCE_20261117.json',
+  'docs/development/ASPHODELE_CINEMATIC_ART_QA_20261117.md',
+  'docs/development/ASPHODELE_CINEMATIC_ART_OVERVIEW_20261117.png',
+  'docs/development/ASPHODELE_CINEMATIC_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/ACT5_ART_PROVENANCE_20261117.json',
+  'docs/development/ACT5_ART_QA_20261117.md',
+  'docs/development/ACT5_ART_OVERVIEW_20261117.png',
+  'docs/development/ACT5_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/BIOLOGICAL_ART_PROVENANCE_20261117.json',
+  'docs/development/BIOLOGICAL_ART_QA_20261117.md',
+  'docs/development/BIOLOGICAL_ART_OVERVIEW_20261117.png',
+  'docs/development/BIOLOGICAL_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/PROLOGUE_ART_PROVENANCE_20261117.json',
+  'docs/development/PROLOGUE_ART_QA_20261117.md',
+  'docs/development/PROLOGUE_ART_OVERVIEW_20261117.png',
+  'docs/development/PROLOGUE_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/PORT_QUAY_ART_PROVENANCE_20261117.json',
+  'docs/development/PORT_QUAY_ART_QA_20261117.md',
+  'docs/development/PORT_QUAY_ART_OVERVIEW_20261117.png',
+  'docs/development/PORT_QUAY_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/CARGO_ABYSS_ART_PROVENANCE_20261117.json',
+  'docs/development/CARGO_ABYSS_ART_QA_20261117.md',
+  'docs/development/CARGO_ABYSS_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/CARGO_ABYSS_ART_OVERVIEW_20261117.png',
+  'docs/development/HADAL_ART_PROVENANCE_20261117.json',
+  'docs/development/HADAL_ART_QA_20261117.md',
+  'docs/development/HADAL_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/HADAL_ART_OVERVIEW_20261117.png',
+  'docs/development/BROODSTORM_QUEEN_ART_PROVENANCE_20261117.json',
+  'docs/development/BROODSTORM_QUEEN_ART_QA_20261117.md',
+  'docs/development/BROODSTORM_QUEEN_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/BROODSTORM_QUEEN_ART_OVERVIEW_20261117.png',
+  'docs/development/QUEEN_MOTHER_ART_PROVENANCE_20261117.json',
+  'docs/development/QUEEN_MOTHER_ART_QA_20261117.md',
+  'docs/development/QUEEN_MOTHER_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/QUEEN_MOTHER_ART_OVERVIEW_20261117.png',
+  'docs/development/QUEEN_MOTHER_GUARD_ART_PROVENANCE_20261117.json',
+  'docs/development/QUEEN_MOTHER_GUARD_ART_QA_20261117.md',
+  'docs/development/QUEEN_MOTHER_GUARD_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/QUEEN_MOTHER_GUARD_ART_OVERVIEW_20261117.png',
+  'docs/development/QUEEN_MOTHER_CHOIR_ART_PROVENANCE_20261117.json',
+  'docs/development/QUEEN_MOTHER_CHOIR_ART_QA_20261117.md',
+  'docs/development/QUEEN_MOTHER_CHOIR_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/QUEEN_MOTHER_CHOIR_ART_OVERVIEW_20261117.png',
+  'scripts/verify-colony-portraits-v188.mjs',
   'scripts/verify-insertion-cinematic-v188.mjs',
   'scripts/verify-mission-depth-v188.mjs',
   'scripts/verify-cinematic-coherence-v188.mjs',
   'scripts/verify-placeholder-portraits-v188.mjs',
   'scripts/verify-qz17-coherence-v188.mjs',
   'scripts/verify-quay-coherence-v188.mjs',
+  'scripts/verify-cargo-matriarch-art-v188.mjs',
+  'scripts/verify-manta-art-v188.mjs',
+  'scripts/verify-hadal-player-art-v188.mjs',
+  'scripts/verify-broodstorm-queen-art-v188.mjs',
+  'scripts/verify-queen-mother-art-v188.mjs',
+  'scripts/verify-queen-mother-guard-art-v188.mjs',
+  'scripts/verify-queen-mother-choir-art-v188.mjs',
   'scripts/verify-prologue-rooms-v188.mjs',
   'scripts/verify-bugfix-campaign-v188.mjs',
   'scripts/verify-bugfix-first-hour-v188.mjs',
@@ -694,6 +781,8 @@ export const AI_TOOLS_SOURCE_ONLY_PATHS_V188 = AI_TOOLS_ADOPTED_V188;
 // Pure checks are exported so adversarial cases can be verified without placing
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
+  const recoveryAdmission = projectRecoveryPathAdmission20261116(path, { directory, built });
+  if (recoveryAdmission !== null) return recoveryAdmission;
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
   if (V179_SOURCE_ONLY_SCRIPTS.has(path)) return !built;
   if (!built && FORGE_TOOLING_V140.has(path)) return true;
@@ -767,6 +856,9 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
     }
   }
   await walk(resolve(root));
+  // Scan admitted paths and private text first, including partial adversarial
+  // fixtures. A complete source validation still requires the exact archives.
+  await verifyProjectRecoveryArchive20261116(root, { built });
   const { USER_REFERENCE_LIBRARY_V100 } = await import(pathToFileURL(join(resolve(root), 'src/user-reference-library-v100.js')).href);
   const registeredJpgs = USER_REFERENCE_LIBRARY_V100.map(entry => entry.path.replace(/^\//, '')).filter(path => path.endsWith('.jpg'));
   assert.deepEqual([...new Set(registeredJpgs)].sort(), [...USER_REFERENCE_JPG_PATHS_V100].sort(), 'Reference JPG allowlist differs from the runtime registry.');

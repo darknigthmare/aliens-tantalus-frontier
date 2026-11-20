@@ -1,14 +1,18 @@
 // V188 — prologue and first-hour cinematics (bible §4, §5.2, §10).
 // Scripted Canvas 2D sequences: fixed shots, slow pans, dialogue frames with the
 // reviewed crew portraits (npc-dialogue-portraits-v168.js). No pre-rendered
-// video, no generated image: decors are drawn with primitives; space, planet and
-// the Tantalus reuse the existing title-scene layers. Every cinematic can be
+// video: reviewed scenery and separate actors accompany native projections,
+// evidence text and physical sets; colony speakers retain their portraits. Every cinematic can be
 // skipped and replayed, and none grants a reward.
 import { getNpcDialoguePortraitV168, drawNpcDialoguePortraitV168 } from './npc-dialogue-portraits-v168.js';
 import { getPlaceholderPortraitV188, drawPlaceholderPortraitV188 } from './placeholder-portraits-v188.js';
+import { getColonyPortraitV188, drawColonyPortraitV188 } from './colony-portraits-v188.js';
 import { colorblindPaletteActiveV188 } from './colorblind-palette-v188.js';
-import { STATION_CINEMATICS_V188, STATION_CINEMATIC_SETS_V188, STATION_CINEMATIC_PALETTES_V188, drawStationSetItemV188, drawStationShotV188 } from './station-cinematics-v188.js';
-import { Act5AssetLoaderV188 } from './act5-slots-v188.js';
+import { STATION_CINEMATICS_V188, STATION_CINEMATIC_SETS_V188, STATION_CINEMATIC_PALETTES_V188, drawStationSetItemV188, drawStationSetArtV188,
+  drawStationShotV188, drawStationBackgroundV188, drawStationTerminalV188, drawStationHelmetV188, drawStationHelmetHudV188, stationCinematicSourcesV188 } from './station-cinematics-v188.js';
+import { Act5AssetLoaderV188, act5CinematicSourcesV188, drawAct5DialogueV188 } from './act5-slots-v188.js';
+import { biologicalCinematicSourcesV188, drawBiologicalBackgroundV188, drawBiologicalShotV188, drawBiologicalHelmetHudV188 } from './biological-art-v188.js';
+import { prologueCinematicSourcesV188, drawPrologueBackgroundV188, drawPrologueSetArtV188, drawPrologueShotV188 } from './prologue-art-v188.js';
 
 const t = (fr, en) => Object.freeze({ fr, en });
 const shot = (seconds, kind, data = {}) => Object.freeze({ seconds, kind, ...data });
@@ -382,11 +386,13 @@ function figure(ctx, x, floor, height, color = '#020504', { rim = null, elder = 
     ctx.beginPath(); ctx.moveTo(x - shoulders / 2, top + head * 1.25); ctx.lineTo(x + shoulders / 2, top + head * 1.25); ctx.stroke(); }
   ctx.restore();
 }
-function drawSet(ctx, scene, { cast = null, time = 0, reducedMotion = false, speakerId = null } = {}) {
+function drawSet(ctx, scene, { cast = null, time = 0, reducedMotion = false, speakerId = null, images = null, cinematicId = null } = {}) {
   const layout = cinematicSetLayoutV188(scene, { cast }); if (!layout) return null;
   const { floor, scale } = layout;
   for (const entry of layout.items) {
     const { x, w, h } = entry.px, top = floor - h;
+    if (images && drawStationSetArtV188(ctx, entry, { images, x, w, h, top, floor, time, reducedMotion })) continue;
+    if (images && drawPrologueSetArtV188(ctx, entry, { images, cinematicId, scene, layout, time, reducedMotion })) continue;
     switch (entry.kind) {
       case 'locker': { // standalone steel locker, label plate, seal tape across the door
         ctx.fillStyle = '#1d2a2e'; ctx.fillRect(x, top, w, h); ctx.strokeStyle = 'rgba(160,200,205,.25)'; ctx.lineWidth = 2; ctx.strokeRect(x + .5, top + .5, w - 1, h - 1);
@@ -468,10 +474,18 @@ function drawSet(ctx, scene, { cast = null, time = 0, reducedMotion = false, spe
   }
   return layout;
 }
-function background(ctx, images, scene, time, reducedMotion, { cast = null, speakerId = null } = {}) {
-  const set = { cast, time, reducedMotion, speakerId };
+function background(ctx, images, scene, time, reducedMotion, { cast = null, speakerId = null, cinematicId = null } = {}) {
+  const set = { cast, time, reducedMotion, speakerId, cinematicId };
+  const prologue = () => drawPrologueBackgroundV188(ctx, images, cinematicId, scene, { time, reducedMotion });
+  if (drawAct5DialogueV188(ctx, cinematicId, scene, { images, time, reducedMotion })) return;
+  if (drawBiologicalBackgroundV188(ctx, images, cinematicId, scene, { time, reducedMotion, speakerId })) return;
+  if (drawStationBackgroundV188(ctx, images, cinematicId, scene, { time, reducedMotion, W, H })) {
+    if (STATION_CINEMATIC_SETS_V188[scene]) drawSet(ctx, scene, { ...set, images });
+    return;
+  }
+  if (['range', 'dropship', 'quarters'].includes(scene) && prologue()) return;
   if (scene === 'hologram') {
-    ctx.fillStyle = '#030907'; ctx.fillRect(0, 0, W, H);
+    if (!prologue()) { ctx.fillStyle = '#030907'; ctx.fillRect(0, 0, W, H); }
     cone(ctx, 640, 560, 760, 140, 'rgba(70,190,160,.16)'); // the table projects upwards
     ctx.strokeStyle = 'rgba(95,210,180,.55)'; ctx.lineWidth = 2;
     const spin = reducedMotion ? 0 : time * .25, flicker = reducedMotion ? 1 : .85 + .15 * Math.sin(time * 23);
@@ -481,10 +495,10 @@ function background(ctx, images, scene, time, reducedMotion, { cast = null, spea
     ctx.beginPath(); ctx.ellipse(640, 300, 290, 70, -.25, 0, Math.PI * 2); ctx.stroke(); // orbit
     const sx = 640 + Math.cos(spin * 1.6) * 290, sy = 300 + Math.sin(spin * 1.6) * 70 * .9;
     ctx.fillStyle = '#e15b4f'; ctx.fillRect(sx - 7, sy - 7, 14, 14); // Asphodèle, red quarantine light
-    ctx.font = '13px monospace'; ctx.fillStyle = '#9fe7cf'; ctx.fillText('COCYTE', 600, 110); ctx.fillStyle = '#e15b4f'; ctx.fillText('ASPHODÈLE · QZ ROUGE', sx + 12, sy - 10);
+    ctx.font = '13px monospace'; ctx.fillStyle = '#9fe7cf'; ctx.fillText('COCYTE', 600, 145); ctx.fillStyle = '#e15b4f'; ctx.fillText('ASPHODÈLE · QZ ROUGE', sx + 12, sy - 10);
     ctx.globalAlpha = 1;
     ctx.fillStyle = 'rgba(150,240,210,.05)'; for (let y = 110; y < 520; y += 6) ctx.fillRect(420, y, 440, 1); // projection scanlines
-    drawSet(ctx, 'hologram', set); // the table and, backlit around it, Harlow, Vega, Velez and Echo-9
+    drawSet(ctx, 'hologram', { ...set, images }); // the table and, backlit around it, Harlow, Vega, Velez and Echo-9
     return;
   }
   const palette = STATION_CINEMATIC_PALETTES_V188[scene] || { cryo: ['#061014', '#10232a'], range: ['#100f0a', '#22200f'], quay: ['#070a0d', '#141b22'], triage: ['#0d1112', '#1e2629'], quarters: ['#0d0a08', '#1d1712'], dropship: ['#0a0606', '#1c0f0d'], cradle: ['#0b1113', '#162024'], lab: ['#0d1214', '#1b2428'], alarm: ['#140606', '#2a0e0c'] }[scene] || ['#0b0f10', '#151b1d'];
@@ -493,9 +507,11 @@ function background(ctx, images, scene, time, reducedMotion, { cast = null, spea
   ctx.fillRect(0, 0, W, H);
   ctx.fillStyle = 'rgba(255,255,255,.025)'; for (let x = 0; x < W; x += 160) ctx.fillRect(x, 0, 2, H);
   if (scene === 'cryo') { // the hub cryo bay as played: ECHO-8 locker, escape-pod door, DAVID-8R, capsule 03 open, 01/02/04 near
-    for (const x of [260, 700, 1000]) { ctx.fillStyle = 'rgba(200,235,245,.55)'; ctx.fillRect(x - 70, 110, 140, 6); cone(ctx, x, 116, 360, 510, 'rgba(150,210,230,.09)'); }
-    ctx.fillStyle = '#0b161b'; ctx.fillRect(0, 510, W, 210); // deck
-    drawSet(ctx, 'cryo', set);
+    if (!prologue()) {
+      for (const x of [260, 700, 1000]) { ctx.fillStyle = 'rgba(200,235,245,.55)'; ctx.fillRect(x - 70, 110, 140, 6); cone(ctx, x, 116, 360, 510, 'rgba(150,210,230,.09)'); }
+      ctx.fillStyle = '#0b161b'; ctx.fillRect(0, 510, W, 210); // deck
+    }
+    drawSet(ctx, 'cryo', { ...set, images });
     mist(ctx, time, reducedMotion, 'rgba(190,225,235,.025)', 490);
   }
   if (scene === 'range') { // firing lanes, man-shaped boards, sodium work lights
@@ -506,9 +522,11 @@ function background(ctx, images, scene, time, reducedMotion, { cast = null, spea
   }
   if (scene === 'quay' || scene === 'dropship') {
     if (scene === 'quay') { // cranes and container stacks against floodlights
-      ctx.fillStyle = '#05080a'; ctx.fillRect(140, 150, 20, 400); ctx.fillRect(140, 150, 300, 16); ctx.fillRect(980, 190, 18, 360); ctx.fillRect(820, 190, 260, 14);
-      ctx.fillStyle = '#0d1216'; ctx.fillRect(0, 520, W, 200); // quay slab
-      drawSet(ctx, 'quay', set); // 10-ft containers (two marked QZ17), the lit airlock, and who stands on the quay
+      if (!prologue()) {
+        ctx.fillStyle = '#05080a'; ctx.fillRect(140, 150, 20, 400); ctx.fillRect(140, 150, 300, 16); ctx.fillRect(980, 190, 18, 360); ctx.fillRect(820, 190, 260, 14);
+        ctx.fillStyle = '#0d1216'; ctx.fillRect(0, 520, W, 200); // quay slab
+      }
+      drawSet(ctx, 'quay', { ...set, images }); // 10-ft containers (two marked QZ17), the lit airlock, and who stands on the quay
       for (const x of [300, 900]) { light(ctx, x, 140, 60, 'rgba(255,236,190,.6)'); cone(ctx, x, 140, 520, 640, 'rgba(255,230,180,.08)'); }
       ctx.fillStyle = 'rgba(255,230,180,.06)'; for (let i = 0; i < 12; i++) ctx.fillRect(240 + (i * 97) % 760, 580 + (i % 4) * 8, 60, 2); // wet reflections
       rain(ctx, time, reducedMotion, 'rgba(170,200,210,.22)');
@@ -523,11 +541,13 @@ function background(ctx, images, scene, time, reducedMotion, { cast = null, spea
       ctx.fillStyle = (Math.floor(time * 1.4) % 2) ? '#e15b4f' : '#5a1f1b'; ctx.fillRect(620, 112, 40, 10); ctx.restore();
     }
   }
-  if (scene === 'triage') { // curtains, surgical lamp, stretcher and a patient with a bandaged chest (primitives)
-    ctx.fillStyle = 'rgba(190,200,190,.08)'; for (let x = 80; x < 640; x += 36) ctx.fillRect(x, 130, 20, 380);
-    light(ctx, 940, 150, 70, 'rgba(240,250,255,.55)'); cone(ctx, 940, 150, 420, 520, 'rgba(230,240,245,.10)');
-    ctx.fillStyle = '#151b1d'; ctx.fillRect(0, 560, W, 160); // floor
-    drawSet(ctx, 'triage', set); // Lucia Ferro beside the 2 m stretcher, the patient's chest bandaged
+  if (scene === 'triage') { // the room has two empty fixed beds; the rolling stretcher is in front
+    if (!prologue()) {
+      ctx.fillStyle = 'rgba(190,200,190,.08)'; for (let x = 80; x < 640; x += 36) ctx.fillRect(x, 130, 20, 380);
+      light(ctx, 940, 150, 70, 'rgba(240,250,255,.55)'); cone(ctx, 940, 150, 420, 520, 'rgba(230,240,245,.10)');
+      ctx.fillStyle = '#151b1d'; ctx.fillRect(0, 560, W, 160); // floor
+    }
+    drawSet(ctx, 'triage', { ...set, images }); // Lucia Ferro beside the 2 m stretcher, the patient's chest bandaged
   }
   if (STATION_CINEMATIC_SETS_V188[scene]) { ctx.fillStyle = '#0a0f0c'; ctx.fillRect(0, 560, W, 160); drawSet(ctx, scene, set); } // V188 spec 007
   if (scene === 'cradle') { ctx.fillStyle = '#0a1012'; ctx.fillRect(0, 560, W, 160); drawSet(ctx, 'cradle', set); } // the maintenance alcove
@@ -541,11 +561,11 @@ function background(ctx, images, scene, time, reducedMotion, { cast = null, spea
     ctx.fillStyle = 'rgba(120,230,170,.35)'; for (let y = 316; y < 404; y += 12) ctx.fillRect(776, y, 120 + (y % 5) * 10, 3);
   }
 }
-/** What the lower-third frame shows for a speaker: the reviewed crew crop, a
- * PLACEHOLDER primitive portrait (Wren, Ferro, Sarrazin) or, otherwise, initials. */
+/** Preferred lower-third portrait. Colony images retain their primitive
+ * fallback until loaded; this classification does not claim load success. */
 export function cinematicSpeakerPortraitKindV188(line) {
   if (line?.crewId && getNpcDialoguePortraitV168(line.crewId)) return 'crew-crop';
-  return !line?.crewId && getPlaceholderPortraitV188(line?.speaker) ? 'placeholder-portrait' : 'initials';
+  return !line?.crewId && getColonyPortraitV188(line?.speaker) ? 'colony-portrait' : 'initials';
 }
 function portrait(ctx, images, crewId, name, x, y, size) {
   ctx.fillStyle = '#0a1210'; ctx.fillRect(x, y, size, size);
@@ -555,7 +575,10 @@ function portrait(ctx, images, crewId, name, x, y, size) {
     const crop = profile.crop; ctx.imageSmoothingEnabled = false;
     ctx.drawImage(image, crop.x, crop.y, crop.w, crop.h, x + 4, y + 4, size - 8, size - 8); return true;
   }
-  // Wren, Ferro, Sarrazin (Q78): PLACEHOLDER primitive portraits, not franchise likenesses.
+  const colony = crewId ? null : getColonyPortraitV188(name);
+  if (colony && drawColonyPortraitV188(ctx, images[colony.source], colony,
+    { x: x + 4, y: y + 4, width: size - 8 })) return true;
+  // Wren, Ferro, Sarrazin (Q78): keep a readable bust when the art is unavailable.
   const placeholder = crewId ? null : getPlaceholderPortraitV188(name);
   if (placeholder) { drawPlaceholderPortraitV188(ctx, placeholder, { x: x + 4, y: y + 4, size: size - 8, colorblind: colorblindPaletteActiveV188() }); return true; }
   const initials = String(name).split(/[\s·.]+/).filter(Boolean).slice(0, 2).map(part => part[0]).join('').toUpperCase();
@@ -571,6 +594,10 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
   ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
   const camera = cinematicCameraV188(current, progress, reducedMotion);
   ctx.save(); ctx.translate(W / 2 + camera.x, H / 2 + camera.y); ctx.scale(camera.zoom, camera.zoom); ctx.translate(-W / 2, -H / 2);
+  const biological = () => drawBiologicalShotV188(ctx, id, current, { images, local, progress, lang, reducedMotion, context, caption: (text, y) => caption(ctx, text, y) });
+  const prologue = () => drawPrologueShotV188(ctx, id, current, { images, local, progress, lang, reducedMotion,
+    caption: (text, y) => caption(ctx, text, y), rain: (time, still, color) => rain(ctx, time, still, color),
+    drawSet: scene => drawSet(ctx, scene, { images, cinematicId: id, time: local, reducedMotion }) });
   switch (current.kind) {
     case 'telemetry': {
       ctx.strokeStyle = '#59d27f'; ctx.lineWidth = 2; ctx.beginPath();
@@ -578,6 +605,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       ctx.stroke(); break;
     }
     case 'relay-rain': {
+      if (prologue()) break;
       ctx.fillStyle = '#0b1014'; ctx.fillRect(0, 0, W, H);
       ctx.fillStyle = '#1b242b'; ctx.fillRect(520, 220, 240, 380); ctx.fillRect(610, 90, 60, 140); // relay mast and hut
       ctx.fillStyle = (Math.floor(local * 1.5) % 2) ? '#e15b4f' : '#5a1f1b'; ctx.fillRect(632, 80, 16, 10);
@@ -585,6 +613,9 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       rain(ctx, local, reducedMotion); caption(ctx, current.caption?.[lang]); break;
     }
     case 'terminal': {
+      if (biological()) break;
+      if (prologue()) break;
+      if (id === 'cin-71') { drawStationTerminalV188(ctx, current, { images, local, progress, lang, reducedMotion }); caption(ctx, current.caption?.[lang]); break; }
       ctx.fillStyle = '#071009'; ctx.fillRect(200, 120, 880, 420); ctx.strokeStyle = '#2f6d45'; ctx.strokeRect(200.5, 120.5, 880, 420);
       ctx.font = '22px monospace'; ctx.fillStyle = '#8df0b0';
       ctx.fillText(`QZ-18 · FILE DE DÉTRESSE · ${current.clock}`, 240, 180);
@@ -595,6 +626,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       caption(ctx, current.caption?.[lang]); break;
     }
     case 'badge': {
+      if (prologue()) break;
       ctx.fillStyle = '#121414'; ctx.fillRect(0, 380, W, 340); // console desk
       ctx.fillStyle = '#c8c3b2'; ctx.fillRect(560, 430, 160, 100); ctx.fillStyle = '#6f6a5d'; ctx.fillRect(580, 450, 50, 60);
       ctx.fillStyle = '#9a958a'; for (let i = 0; i < 3; i++) ctx.fillRect(645, 455 + i * 18, 60, 7); // illegible name
@@ -602,8 +634,10 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       break;
     }
     case 'orbit-station': {
+      if (prologue()) break;
       if (ready(images[CINEMATIC_IMAGES_V188.space])) ctx.drawImage(images[CINEMATIC_IMAGES_V188.space], 0, 0, W, H);
-      if (ready(images[CINEMATIC_IMAGES_V188.planet])) ctx.drawImage(images[CINEMATIC_IMAGES_V188.planet], 380, 300, 900, 520);
+      const planet = images[CINEMATIC_IMAGES_V188.planet];
+      if (ready(planet)) ctx.drawImage(planet, 0, 0, planet.naturalWidth, planet.naturalHeight, 380, 300, 900, 900 * planet.naturalHeight / planet.naturalWidth);
       const x = 380 - (reducedMotion ? 0 : local * 6); ctx.fillStyle = '#2b3236'; ctx.fillRect(x, 220, 260, 26); ctx.fillRect(x + 110, 160, 40, 150); // dark station
       ctx.fillStyle = (Math.floor(local * 1.2) % 2) ? '#e15b4f' : '#6a1d18'; ctx.fillRect(x + 124, 150, 12, 12);
       caption(ctx, current.caption?.[lang], 120); break;
@@ -611,7 +645,8 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
     case 'tantalus-orbit': {
       if (ready(images[CINEMATIC_IMAGES_V188.space])) ctx.drawImage(images[CINEMATIC_IMAGES_V188.space], 0, 0, W, H);
       if (ready(images[CINEMATIC_IMAGES_V188.stars])) ctx.drawImage(images[CINEMATIC_IMAGES_V188.stars], 0, 0, W, H);
-      if (ready(images[CINEMATIC_IMAGES_V188.planet])) ctx.drawImage(images[CINEMATIC_IMAGES_V188.planet], 520, 360, 900, 520);
+      const planet = images[CINEMATIC_IMAGES_V188.planet];
+      if (ready(planet)) ctx.drawImage(planet, 0, 0, planet.naturalWidth, planet.naturalHeight, 520, 360, 900, 900 * planet.naturalHeight / planet.naturalWidth);
       const ship = images[CINEMATIC_IMAGES_V188.tantalus];
       if (ready(ship)) { const width = 620, height = width * ship.naturalHeight / ship.naturalWidth, x = -width + (reducedMotion ? 1 : progress) * (W * .62);
         ctx.drawImage(ship, x, 220, width, height); }
@@ -629,11 +664,13 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       rain(ctx, local, reducedMotion); caption(ctx, current.caption?.[lang]); break;
     }
     case 'cradle': {
+      if (biological()) break;
       ctx.fillStyle = '#0b1113'; ctx.fillRect(0, 0, W, H); ctx.fillStyle = '#0a1012'; ctx.fillRect(0, 560, W, 160);
       drawSet(ctx, 'cradle', { time: local, reducedMotion }); // a cradle sized for a lying adult, restraints torn from inside
       caption(ctx, current.caption?.[lang]); break;
     }
     case 'port-tour': {
+      if (prologue()) break;
       ctx.fillStyle = '#0d1114'; ctx.fillRect(0, 0, W, H);
       ctx.fillStyle = '#1a2026'; ctx.fillRect(0, 520, W, 200); // ground
       const pan = reducedMotion ? 0 : progress * 60;
@@ -646,6 +683,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       caption(ctx, current.caption?.[lang]); break;
     }
     case 'ramp': {
+      if (biological()) break;
       ctx.fillStyle = '#0d1114'; ctx.fillRect(0, 0, W, H); ctx.fillStyle = '#2a3036'; ctx.beginPath(); ctx.moveTo(300, 560); ctx.lineTo(980, 560); ctx.lineTo(820, 380); ctx.lineTo(460, 380); ctx.fill(); // M577 ramp
       const count = Math.max(0, Math.min(6, Number(context?.m577?.colonists) || 0));
       for (let i = 0; i < count; i++) { const walk = reducedMotion ? .5 : Math.min(1, progress * 1.3 - i * .08), x = 520 + i * 40, y = 400 + walk * 170;
@@ -655,6 +693,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       caption(ctx, current.caption?.[lang], 90); break;
     }
     case 'sealed-crates': {
+      if (biological()) break;
       ctx.fillStyle = '#0b0f12'; ctx.fillRect(0, 0, W, H);
       const count = Math.max(0, Math.min(3, Number(context?.m577?.containers) || 0));
       for (let i = 0; i < count; i++) { const x = 360 + i * 200; ctx.fillStyle = '#3a3226'; ctx.fillRect(x, 380, 160, 120); ctx.strokeStyle = '#e9d07a'; ctx.lineWidth = 3; ctx.strokeRect(x + 6, 386, 148, 108);
@@ -664,6 +703,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       caption(ctx, current.caption?.[lang], 90); break;
     }
     case 'bio-screen': {
+      if (biological()) break;
       ctx.fillStyle = '#060a09'; ctx.fillRect(0, 0, W, H); ctx.strokeStyle = '#2f6d45'; ctx.strokeRect(220.5, 160.5, 840, 400);
       ctx.strokeStyle = 'rgba(141,240,176,.4)'; for (let y = 200; y < 540; y += 22) { ctx.beginPath(); ctx.moveTo(240, y); ctx.lineTo(1040, y); ctx.stroke(); }
       const scan = 240 + ((reducedMotion ? .5 : progress) * 800) % 800; ctx.fillStyle = 'rgba(141,240,176,.25)'; ctx.fillRect(scan, 170, 8, 380);
@@ -672,6 +712,8 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       break;
     }
     case 'helmet-cam': {
+      if (biological()) break;
+      if (id === 'cin-72') { drawStationHelmetV188(ctx, current, { images, local, progress, lang, reducedMotion, caption: text => caption(ctx, text), W, H }); break; }
       ctx.fillStyle = '#070a08'; ctx.fillRect(0, 0, W, H);
       ctx.fillStyle = '#121a16'; ctx.beginPath(); ctx.moveTo(0, H); ctx.lineTo(560, 300); ctx.lineTo(720, 300); ctx.lineTo(W, H); ctx.fill(); // corridor
       if (progress > .55) { ctx.fillStyle = '#020302'; ctx.beginPath(); ctx.ellipse(700, 110, 120, 34, 0, 0, Math.PI * 2); ctx.fill(); ctx.fillRect(640, 60, 10, 90); ctx.fillRect(760, 70, 8, 80); } // silhouette on the ceiling
@@ -681,11 +723,12 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       ctx.fillStyle = '#e15b4f'; ctx.font = '14px monospace'; ctx.fillText('● REC', 40, 50); caption(ctx, current.caption?.[lang]); break;
     }
     case 'signal-lost': {
-      ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H); const seed = Math.floor(local * 30);
+      ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H); const seed = ['cin-50', 'cin-72'].includes(id) && reducedMotion ? 3 : Math.floor(local * 30);
       if (progress < .2) { ctx.fillStyle = 'rgba(220,230,225,.5)'; for (let i = 0; i < 900; i++) ctx.fillRect(((i * 7919 + seed * 104729) % W), ((i * 6271 + seed * 1299709) % H), 3, 3); }
       caption(ctx, current.caption?.[lang], 380); break;
     }
     case 'alarm-deck': {
+      if (biological()) break;
       const pulse = reducedMotion ? .5 : .5 + .5 * Math.sin(local * 5);
       ctx.fillStyle = '#0c0707'; ctx.fillRect(0, 0, W, H); ctx.fillStyle = `rgba(200,40,30,${.12 + pulse * .22})`; ctx.fillRect(0, 0, W, H);
       ctx.fillStyle = '#1d1414'; ctx.fillRect(0, 520, W, 200); for (let x = 60; x < W; x += 220) { ctx.fillStyle = '#2a1d1d'; ctx.fillRect(x, 200, 140, 320); }
@@ -697,6 +740,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       ctx.fillText(current.caption[lang], W / 2, H / 2); ctx.textAlign = 'left'; break;
     }
     case 'locker': { // the ECHO-8 locker as it stands in the cryo bay: alone, emptied, sealed
+      if (prologue()) break;
       ctx.fillStyle = '#0d1517'; ctx.fillRect(0, 0, W, H); ctx.fillStyle = 'rgba(255,255,255,.03)'; for (let x = 0; x < W; x += 120) ctx.fillRect(x, 0, 2, 610);
       ctx.fillStyle = '#0a1113'; ctx.fillRect(0, 610, W, 110);
       drawSet(ctx, 'locker', { time: local, reducedMotion });
@@ -707,7 +751,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       const count = Math.min(37, Math.floor(progress * 46));
       for (let i = 0; i < count; i++) { ctx.fillStyle = i === count - 1 ? '#e9d07a' : '#59d27f';
         const age = i === 36 ? '4 H' : `${lang === 'en' ? 'D' : 'J'}-${Math.max(1, 6 - Math.floor(i / 7))}`;
-        ctx.fillText(`PORT-MÉRIDIEN · ${age} · ${lang === 'en' ? 'DISTRESS RELAY' : 'RELAIS DE DÉTRESSE'} #${String(i + 1).padStart(2, '0')}`, i < 19 ? 90 : 680, 90 + (i % 19) * 26); }
+        ctx.fillText(`PORT-MÉRIDIEN · ${age} · ${lang === 'en' ? 'DISTRESS RELAY' : 'RELAIS DE DÉTRESSE'} #${String(i + 1).padStart(2, '0')}`, i < 19 ? 90 : 680, 116 + (i % 19) * 24); }
       caption(ctx, current.caption?.[lang], 650); break;
     }
     case 'name-list': {
@@ -718,6 +762,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       ctx.textAlign = 'left'; break;
     }
     case 'port-approach': { // night descent: ridge, the port's lights, the pad beacons, heavy rain
+      if (prologue()) break;
       const sky = ctx.createLinearGradient?.(0, 0, 0, H); if (sky) { sky.addColorStop(0, '#0d1a1f'); sky.addColorStop(1, '#05080a'); ctx.fillStyle = sky; } else ctx.fillStyle = '#081014';
       ctx.fillRect(0, 0, W, H);
       ctx.fillStyle = '#04070a'; ctx.beginPath(); ctx.moveTo(0, 380); for (let x = 0; x <= W; x += 80) ctx.lineTo(x, 330 + Math.sin(x * .013) * 40 + Math.cos(x * .031) * 18); ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.fill();
@@ -731,7 +776,8 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       rain(ctx, local, reducedMotion, 'rgba(170,200,210,.3)'); caption(ctx, current.caption?.[lang]); break;
     }
     case 'act5-slot': {
-      act5LoaderV188.draw(ctx, current.slot, W, H, { language: lang, context: context?.act5 || {}, time: local, progress, reducedMotion });
+      act5LoaderV188.draw(ctx, current.slot, W, H, { images, language: lang, context: context?.act5 || {}, time: local, progress, reducedMotion,
+        closing: id === 'cin-61' && current === CINEMATICS_V188[id].shots[2] });
       caption(ctx, current.caption?.[lang]); break; // the roll-call count is drawn by the plate itself
     }
     case 'act5-lines': { // ending and epilogue facts, typed line by line (from the save, never granted here)
@@ -745,7 +791,7 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       break;
     }
     case 'credits': { // same palette and letter-spacing as the opening credit (intro-sequence-v188.js)
-      act5LoaderV188.draw(ctx, 'credits-starfield', W, H, { language: lang, time: local, progress, reducedMotion });
+      act5LoaderV188.draw(ctx, 'credits-starfield', W, H, { images, language: lang, time: local, progress, reducedMotion });
       const entries = Array.isArray(context?.act5?.credits) && context.act5.credits.length ? context.act5.credits : [{ by: 'A fan game by', name: 'Darknigthmare' }];
       const span = 1 / entries.length, index_ = Math.min(entries.length - 1, Math.floor(progress / span)), inner = (progress - index_ * span) / span;
       const alpha = reducedMotion ? 1 : Math.max(0, Math.min(1, inner < .2 ? inner / .2 : inner > .85 ? (1 - inner) / .15 : 1));
@@ -755,14 +801,17 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       ctx.fillText(spaced(String(entry.name).toUpperCase(), 3), W / 2, H / 2 + 34); ctx.shadowBlur = 0; ctx.globalAlpha = 1; ctx.textAlign = 'left'; break;
     }
     case 'dialogue': {
-      background(ctx, images, current.scene, local, reducedMotion, { cast: current.cast, speakerId: current.line?.crewId });
+      if (id === 'cin-60' && current.scene === 'alarm') act5LoaderV188.draw(ctx, 'm577-rain-departure', W, H, { images, language: lang, time: local, progress: .45, reducedMotion });
+      else background(ctx, images, current.scene, local, reducedMotion, { cast: current.cast, speakerId: current.line?.crewId, cinematicId: id });
       subtitle = current; break;
     }
-    default: drawStationShotV188(ctx, current, { local, progress, lang, reducedMotion, caption: (text, y) => caption(ctx, text, y), W, H }); break;
+    default: drawStationShotV188(ctx, current, { images, local, progress, lang, reducedMotion, caption: (text, y) => caption(ctx, text, y), W, H }); break;
   }
   ctx.restore();
   if (current.kind !== 'title' && current.kind !== 'credits') grain(ctx, local, reducedMotion);
   ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, LETTERBOX_V188); ctx.fillRect(0, H - LETTERBOX_V188, W, LETTERBOX_V188);
+  if (id === 'cin-72' && current.kind === 'helmet-cam') drawStationHelmetHudV188(ctx);
+  if (id === 'cin-50' && current.kind === 'helmet-cam') drawBiologicalHelmetHudV188(ctx);
   if (subtitle) drawSubtitleV188(ctx, images, subtitle, progress, lang, local, reducedMotion);
   drawCaptions(ctx);
   // Fade to black only where the scene changes; lines of one conversation cut directly.
@@ -794,12 +843,19 @@ export class CinematicPlayerV188 {
     Object.assign(this, { document, now, requestFrame, ImageCtor }); this.images = {}; this.active = null;
   }
   preload(id) {
-    const sources = new Set(Object.values(CINEMATIC_IMAGES_V188));
+    const stationSources = stationCinematicSourcesV188(id);
+    const act5Sources = act5CinematicSourcesV188(id);
+    const biologicalSources = biologicalCinematicSourcesV188(id);
+    const prologueSources = prologueCinematicSourcesV188(id);
+    const sources = new Set(stationSources || act5Sources || biologicalSources || prologueSources || Object.values(CINEMATIC_IMAGES_V188));
     for (const entry of CINEMATICS_V188[id]?.shots || []) {
       const profile = entry.line?.crewId ? getNpcDialoguePortraitV168(entry.line.crewId) : null; if (profile) sources.add(profile.source);
+      const colony = !entry.line?.crewId ? getColonyPortraitV188(entry.line?.speaker) : null;
+      if (colony) sources.add(colony.source);
     }
-    for (const source of sources) if (!this.images[source] && this.ImageCtor) { const image = new this.ImageCtor(); image.src = source; this.images[source] = image; }
-    act5LoaderV188.preload(); // requests only the Act V slots whose file is committed
+    for (const source of sources) if ((!this.images[source] || ((act5Sources || biologicalSources || prologueSources) && this.images[source].complete && !this.images[source].naturalWidth)) && this.ImageCtor) {
+      const image = new this.ImageCtor(); image.src = source; this.images[source] = image;
+    }
   }
   play(id, { language = 'fr', reducedMotion = false, context = {} } = {}) {
     if (!CINEMATICS_V188[id] || !this.document?.body) return Promise.resolve('unavailable');

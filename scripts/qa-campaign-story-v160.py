@@ -90,6 +90,46 @@ def open_plan(page):
     page.locator('[data-panel="command"].active #operation-launch').wait_for(state='visible')
 
 
+def select_qz18_return_after_cinematics(page, operation_id, timeout=30000):
+    # Opening Command acknowledges the story return and recommends QZ17.
+    # Finish both public films before explicitly consulting the QZ18 plan;
+    # their Promise chain can briefly have no overlay between its two parts.
+    deadline = time.monotonic() + timeout / 1000
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('QZ18 return consultation exceeded its original budget.')
+        return milliseconds
+
+    owned_return = '''id=>{const s=__ATF_V51__.saveSystem.data;
+      const last=s.strategy.lastOperation, archived=s.archiveRelayArchivesV122?.lastReturnV160;
+      return s.strategy.currentOperation===null&&last?.id===id&&last.success===true
+      &&last.campaignId==='special-archive-relay'&&archived?.operationId===id
+      &&archived.campaignId==='special-archive-relay'&&archived.success===true;}'''
+    assert page.evaluate(owned_return, operation_id), 'The successful QZ18 return owns this consultation.'
+    public_skips = []
+    for cinematic_id, title in [('cin-20', 'Treize minutes'), ('cin-20-rook', 'La signature')]:
+        seen = 'id=>(__ATF_V51__.saveSystem.data.storyCampaignV188?.cinematicsSeen||[]).includes(id)'
+        selector = f'.cinematic-v188[aria-label="{title}"] .cinematic-skip-v188'
+        page.wait_for_function(f'''id=>{{const skip=document.querySelector('{selector}');
+          return ({seen})(id)||Boolean(skip&&skip.getClientRects().length
+            &&getComputedStyle(skip).visibility!=='hidden');}}''', arg=cinematic_id, timeout=remaining())
+        if not page.evaluate(seen, cinematic_id):
+            page.locator(selector).click(timeout=remaining())
+            public_skips.append(cinematic_id)
+        page.wait_for_function(seen, arg=cinematic_id, timeout=remaining())
+    page.wait_for_function('()=>!document.querySelector(".cinematic-v188")', timeout=remaining())
+    page.locator('#command-world-v110').select_option('', timeout=remaining())
+    page.locator('#command-mission-v110').select_option('special-archive-relay', timeout=remaining())
+    page.wait_for_function(f'''id=>({owned_return})(id)
+      &&__ATF_V51__.saveSystem.data.strategy.plannedCampaignId==='special-archive-relay'
+      &&!document.querySelector('.cinematic-v188')''', arg=operation_id, timeout=remaining())
+    page.locator('[data-campaign-story-return]').wait_for(state='visible', timeout=remaining())
+    return {'operationId': operation_id, 'publicSkips': public_skips,
+            'selectedCampaignId': 'special-archive-relay', 'timeLimitSeconds': timeout / 1000}
+
+
 def continue_existing_profile(page):
     # The first title button opens the title menu; CONTINUER owns resumption.
     page.locator('#title-start').click(timeout=45000)
@@ -147,11 +187,70 @@ def read_station(page):
     page.locator('#game-canvas').focus()
 
 
+def await_runtime(page):
+    # The authored briefing can finish before the public V188 flight hands
+    # control to the player. Native resumes can also bypass that flight.
+    deadline = time.monotonic() + 30
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('QZ18 runtime readiness exceeded its launch budget.')
+        return milliseconds
+
+    runtime_ready = '''()=>__ATF_GAME__?.running&&__ATF_GAME__.isArchiveRelayV122?.()
+      &&__ATF_GAME__.mission?.state==="active"&&!document.querySelector('#mission-runtime-v62').hidden
+      &&!__ATF_GAME__.dropshipHandoverBlocksV188?.()'''
+    skip_selector = '.insertion-cinematic-v188[data-direction="insertion"] .insertion-skip-v188'
+    page.wait_for_function(f'''()=>{{
+      const skip = document.querySelector('{skip_selector}');
+      return ({runtime_ready})() || Boolean(skip && skip.getClientRects().length
+        && getComputedStyle(skip).visibility !== 'hidden');
+    }}''', timeout=remaining())
+    skip = page.locator(skip_selector)
+    if skip.is_visible():
+        skip.click(timeout=remaining())
+    page.wait_for_function(runtime_ready, timeout=remaining())
+    page.wait_for_function('()=>__ATF_GAME__.getSnapshot().archiveRelayPresentationV160?.ready===true', timeout=remaining())
+    page.locator('#game-canvas').focus(timeout=remaining())
+
+
 def start_runtime(page):
     page.locator('[data-insertion-action="advance"]').click()
-    page.wait_for_function('()=>__ATF_GAME__?.running&&__ATF_GAME__.isArchiveRelayV122?.()&&!document.querySelector("#mission-runtime-v62").hidden')
-    page.wait_for_function('()=>__ATF_GAME__.getSnapshot().archiveRelayPresentationV160?.ready===true')
-    page.locator('#game-canvas').focus()
+    await_runtime(page)
+
+
+def return_after_native_extraction(page, operation_id, timeout=30000):
+    # The successful receipt can precede the full V188 extraction film. Its
+    # public skip owns that modal; the return button becomes usable afterward.
+    deadline = time.monotonic() + timeout / 1000
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('QZ18 extraction return exceeded its original budget.')
+        return milliseconds
+
+    owned_victory = '''id=>{const s=__ATF_V51__.saveSystem.data;
+      return __ATF_GAME__.mission?.state==='complete'&&s.strategy.lastOperation?.id===id
+      &&s.strategy.lastOperation.success===true&&s.strategy.currentOperation===null;}'''
+    assert page.evaluate(owned_victory, operation_id), 'The successful native operation owns this return.'
+    overlay_selector = '.insertion-cinematic-v188[data-direction="extraction"]'
+    skip_selector = overlay_selector + ' .insertion-skip-v188'
+    return_ready = f'''id=>{{const button=document.querySelector('#retreat-mission');
+      return ({owned_victory})(id)&&!document.querySelector('{overlay_selector}')
+      &&Boolean(button&&button.getClientRects().length&&getComputedStyle(button).visibility!=='hidden');}}'''
+    page.wait_for_function(f'''id=>{{const skip=document.querySelector('{skip_selector}');
+      return ({return_ready})(id)||(({owned_victory})(id)&&Boolean(skip&&skip.getClientRects().length
+      &&getComputedStyle(skip).visibility!=='hidden'));}}''', arg=operation_id, timeout=remaining())
+    skip = page.locator(skip_selector)
+    skipped = skip.is_visible()
+    if skipped:
+        skip.click(timeout=remaining())
+    page.wait_for_function(return_ready, arg=operation_id, timeout=remaining())
+    page.locator('#retreat-mission').click(timeout=remaining())
+    page.wait_for_function('()=>!document.documentElement.classList.contains("mission-mode")', timeout=remaining())
+    return {'operationId': operation_id, 'publicSkipUsed': skipped, 'timeLimitSeconds': timeout / 1000}
 
 
 def protected(save):
@@ -361,13 +460,12 @@ with sync_playwright() as pw:
         ledger = next(item for item in returned['insertionState']['phases'] if item['kind'] == 'preparation')['payload']['campaignStoryReturnV160']
         check('actual extraction transfers six records and pays only the selected technical protocol', len(victory['archiveRelayArchivesV122']['case']['documentIds']) == 6 and victory['archiveRelayArchivesV122']['case']['operationId'] == returned['id'] and ledger['receipt']['protocolId'] == 'technical-audit' and ledger['receipt']['amount'] == 2)
         check('a durable victory offers an explicit return aboard instead of retreat', page.locator('#retreat-mission').inner_text().strip() == 'RETOUR À BORD')
-        # Mission mode owns its visible exit; navigation is available afterward.
-        page.locator('#retreat-mission').click()
-        page.wait_for_function('()=>!document.documentElement.classList.contains("mission-mode")')
+        report['nativeExtraction'] = return_after_native_extraction(page, returned['id'])
         back_aboard = observed(page)['save']
         board_ledger = next(item for item in back_aboard['strategy']['lastOperation']['insertionState']['phases'] if item['kind'] == 'preparation')['payload']['campaignStoryReturnV160']
         check('the actual return aboard keeps the victory receipt and cannot repay it', back_aboard['strategy']['currentOperation'] is None and back_aboard['strategy']['lastOperation']['id'] == returned['id'] and back_aboard['strategy']['lastOperation']['success'] is True and back_aboard['galaxy']['resources'] == victory['galaxy']['resources'] and back_aboard['archiveRelayArchivesV122'] == victory['archiveRelayArchivesV122'] and board_ledger['receipt'] == ledger['receipt'])
         open_plan(page)
+        report['nativeReturnDebrief'] = select_qz18_return_after_cinematics(page, returned['id'])
         check('return dialogue distinguishes documented cause and unidentified author', 'l’identité de son auteur reste inconnue' in page.locator('[data-campaign-story-return]').inner_text())
         capture(page, '09-return-dialogue.png', '#operation-plan')
         # Native hub exit persists the actual hub pose before command becomes
@@ -492,7 +590,7 @@ with sync_playwright() as pw:
         page.locator('[data-story-protocol="crew-prevention"]').click()
         check('the next operation can choose the other protocol with reduced motion', page.locator('#mission-insertion-v62').get_attribute('data-reduced-motion') == 'true')
         page.locator('[data-insertion-action="skip"]').click()
-        page.wait_for_function('()=>__ATF_GAME__.running&&__ATF_GAME__.mission.state==="active"&&!document.querySelector("#mission-runtime-v62").hidden')
+        await_runtime(page)
         check('replay skip transfers control without a second research payment', observed(page)['save']['galaxy']['resources']['research'] == victory['galaxy']['resources']['research'])
         walk_center(page, 240)
         mission_save = page.locator('#mission-save-v160')
@@ -511,7 +609,7 @@ with sync_playwright() as pw:
         report['legacyFixtureBasis'] = 'Actual native quick-save from this run; only player name and currentOperation.insertionState differ.'
         import_profile(page, legacy_raw, 'legacy-observed-qz18.json')
         open_plan(page); page.locator('#operation-launch').click()
-        page.wait_for_function('()=>__ATF_GAME__.running&&__ATF_GAME__.isArchiveRelayV122?.()&&!document.querySelector("#mission-runtime-v62").hidden')
+        await_runtime(page)
         resumed = observed(page)
         check('an old QZ18 resume enters its actual saved level without a retroactive briefing or protocol', not resumed['insertionVisible'] and resumed['save']['strategy']['currentOperation']['insertionState'] is None and abs(resumed['player']['x'] - mid['strategy']['currentOperation']['resumeState']['player']['x']) < 5)
         capture(page, '11-legacy-mid-level-resume.png')

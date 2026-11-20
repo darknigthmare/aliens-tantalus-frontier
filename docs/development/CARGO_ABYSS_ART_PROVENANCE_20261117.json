@@ -1,0 +1,526 @@
+{
+  "schema": "tantalus-cargo-abyss-art-provenance-v1",
+  "date": "2026-11-17",
+  "predecessor": "232693f1e0ed24e404bb2fb0dbcd779611ccd2fc",
+  "scope": {
+    "newImages": 5,
+    "newImageBytes": 9133636,
+    "matriarchClips": 4,
+    "matriarchPoses": 16,
+    "mantaHullImages": 1,
+    "originalTantalusDesigns": true,
+    "canonExact": false,
+    "runtimeSources": [
+      "src/cargo-matriarch-art-v188.js",
+      "src/cargo-brutal-runtime-v67.js",
+      "src/manta-art-v188.js",
+      "src/legacy-operations-v131.js",
+      "src/special-operations-v131.js",
+      "src/legacy-operation-state-v131.js",
+      "src/i18n-en-catalog-v185.js"
+    ]
+  },
+  "assets": [
+    {
+      "id": "manta-6-hull",
+      "path": "assets/abyss/v188/manta-6-hull.png",
+      "bytes": 1963093,
+      "sha256": "9aa46795758c27e5871fdb561e3508e5298d6771109c9f5014618a287d629a07",
+      "nativeSize": [
+        1813,
+        868
+      ],
+      "mode": "RGBA",
+      "generator": "built-in image_gen",
+      "copiedWithoutReencoding": true,
+      "initialPrompt": "Use case: stylized-concept.\nAsset type: production-ready transparent side-view vehicle sprite for the original game Aliens: Tantalus Frontier.\nCreate one original MANTA-6 compact industrial deep-sea submersible hull. The existing game prototype is 180 units long by 86 units high; preserve that compact silhouette, with an opaque subject bounding-box ratio very close to 2.093:1. Strict orthographic side elevation, nose pointing right, no perspective yaw, no view of the far side, no floor. The entire hull and all attached parts must fit fully inside the image with a small transparent margin.\nHull design: low compact pressure capsule with an integrated low cockpit canopy on its upper half, one broad pale green smoked-glass window running from the left-middle towards the centre, rounded armoured right-facing bow, integrated small protected stern propulsion at the left. Only a single pilot is implied; no person visible. No fixed gun barrel or torpedo tubes: the game supplies its own separately aimed equipment.\nMaterial and palette: weathered petrol-blue/teal painted steel (#236579 family), restrained pale cyan edge highlights (#92cbd9 family), pale desaturated green window reflections (#b4e3dd family), blackened metal fittings, convincing bolted plates, small panel seams, scuffs and salt-worn edges. Gritty industrial science-fiction realism matching finely rendered 2D game props, legible at 180 x 86 pixels, strong coherent silhouette. Neutral soft overhead lighting, controlled highlights, no dramatic glowing effects.\nBackground must be genuinely transparent RGBA, including between small appendages. No ocean, bubbles, smoke, wake, seabed, cast shadow, people, text, logo, watermark, labels, or sheet of variants. This is an original Tantalus vehicle design, not a replica of a film vehicle. Produce exactly one complete right-facing hull.\n",
+      "alphaBounds": [
+        0,
+        8,
+        1799,
+        868
+      ],
+      "alpha128Bounds": [
+        33,
+        55,
+        1775,
+        795
+      ],
+      "referenceRoles": {
+        "toolImageInputs": [],
+        "localMaterialReferenceInspected": "assets/openai/equipment/v121-vehicles/ceto-patrol-boat-native-v121.png",
+        "geometryAndPalette": "Legacy procedural hull 180x86, #236579/#92cbd9/#b4e3dd; no detailed canonical hull specified in the bible."
+      }
+    },
+    {
+      "id": "matriarch-idle",
+      "path": "assets/cargo/v188/matriarch-idle.png",
+      "bytes": 1783411,
+      "sha256": "85fd67760c5ebc8d8509468428bc284da84e8793bd1c6597e3a7001209e05326",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generator": "built-in image_gen",
+      "copiedWithoutReencoding": true,
+      "initialPrompt": "Use case: identity-preserve.\nAsset type: transparent production combat sprite sheet for the original Tantalus character \"Matriarche de Soute\".\nInput image 1 is the existing shared queen sheet, supplied as the anatomy, side-view rendering style and pose reference. Edit it into a dedicated character asset: output EXACTLY FOUR full-body idle poses in a regular 2 by 2 grid, not the original 16-pose grid. Each of the four equal square cells contains one and only one complete creature facing RIGHT.\nPreserve the recognizable royal xenomorph anatomy of the reference: broad swept-back cranial crown, elongated eyeless head, biomechanical rib cage, large clawed arms, digitigrade legs, dorsal spines, long segmented tail. Establish a consistent original Matriarche identity in all four cells: charcoal-black heavy chitin, slightly broader crown plate and shoulder armour, rubbed dull silver edges and subtle dusty grey wear consistent with a cargo hold. No added clothing, accessories, weapons or extra limbs. This is an original game variant, not a newly asserted film-canonical design.\nThe four cells are consecutive restrained idle breathing poses, read left to right then top to bottom: neutral ready stance, tiny chest lift, highest inhalation, relaxed return. Keep feet planted, body scale and identity identical, with only slight torso and hand changes. No walking, lunging or falling poses on this sheet.\nFrame geometry is critical: all anatomy including tail, crown and claws stays within its OWN cell, never crossing a grid boundary. At least 6% clear margin around the silhouette. Ground contact is at 91% of each cell height, body core centred near 57% of each cell width. Entire creature around 78% of cell height; do not enlarge one pose relative to another. Tail folds behind toward the left, clear of neighboring frames.\nStrict side elevation, realistic hand-rendered industrial-horror 2D sprite quality matching the reference. Crisp detailed silhouette readable at 300 by245 game units, restrained cool highlights, soft neutral illumination. Genuinely transparent RGBA background, including gaps between limbs. No checkerboard painted into pixels, backdrop, ground, shadow puddle, grid lines, labels, captions, text, glow or watermark.\n",
+      "cells": [
+        {
+          "cell": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "alphaBounds": [
+            0,
+            31,
+            627,
+            627
+          ],
+          "alpha128Bounds": [
+            53,
+            35,
+            546,
+            549
+          ]
+        },
+        {
+          "cell": [
+            627,
+            0,
+            1254,
+            627
+          ],
+          "alphaBounds": [
+            1,
+            21,
+            613,
+            627
+          ],
+          "alpha128Bounds": [
+            53,
+            34,
+            547,
+            549
+          ]
+        },
+        {
+          "cell": [
+            0,
+            627,
+            627,
+            1254
+          ],
+          "alphaBounds": [
+            0,
+            1,
+            627,
+            609
+          ],
+          "alpha128Bounds": [
+            53,
+            35,
+            547,
+            549
+          ]
+        },
+        {
+          "cell": [
+            627,
+            627,
+            1254,
+            1254
+          ],
+          "alphaBounds": [
+            1,
+            1,
+            627,
+            627
+          ],
+          "alpha128Bounds": [
+            53,
+            39,
+            546,
+            549
+          ]
+        }
+      ],
+      "referenceRoles": {
+        "toolImageInput": "assets/openai/sprites/normalized/enemies/xenomorph-queen-combat-sheet.png",
+        "purpose": "Existing anatomy and rendering style; a dedicated original Tantalus identity, not a claim of canonical verification."
+      }
+    },
+    {
+      "id": "matriarch-advance",
+      "path": "assets/cargo/v188/matriarch-advance.png",
+      "bytes": 1764956,
+      "sha256": "c2bec6b148ee4d7349b0515ad960b960e53e9a91d757a00caae567ac95a06acb",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generator": "built-in image_gen",
+      "copiedWithoutReencoding": true,
+      "initialPrompt": "Use case: identity-preserve. Edit the attached four-pose Matriarche de Soute sheet into a new production animation sheet for this EXACT SAME individual. The attached image is the identity and rendering reference, not a suggestion for a different creature. Preserve its charcoal and dull-silver materials, precisely the same broad swept-back crown, skull, shoulder armour, rib cage, paired large clawed arms, digitigrade legs, dorsal spines and segmented tail. Same detailed side-view sprite style. All creatures face RIGHT. Output EXACTLY FOUR full-body poses in a regular 2 by 2 grid, read left-to-right then top-to-bottom. The four cells are equal square cells. One complete creature per cell, all appendages safely within that cell. No parts may touch or cross a cell boundary. Keep equal anatomical scale across all poses and the same scale as the reference. Keep a safe transparent margin, especially around the crown, tail tip and feet. The main body pivot is near 57% cell width and the ground contact is at 91% cell height. Maintain that common ground line rather than placing poses at different heights. Genuinely transparent RGBA background including between limbs, no backdrop, checkerboard, grid, words, numbers, labels, effects, smoke, gore, floor or shadows. No extra limbs, no costume or weapons.\nAnimation: ADVANCE, exactly four successive frames of one planted walking stride, not four identical idle stances. Pose 1: left visible leg steps forward/right while other leg supports behind. Pose 2: body passes over the planted foot, opposite leg lifts through. Pose 3: opposite leg takes forward support with a clearly different stride silhouette. Pose 4: passing return toward pose 1. Coordinate the heavy torso, balanced counter-swing of claws and compact trailing tail. No running, jumping, sliding, lunging or changing body size. Feet that support weight must lie on the common ground line; elevated swing feet may lift naturally. The four frames will loop at seven frames per second.\n",
+      "cells": [
+        {
+          "cell": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "alphaBounds": [
+            0,
+            31,
+            627,
+            627
+          ],
+          "alpha128Bounds": [
+            61,
+            35,
+            590,
+            547
+          ]
+        },
+        {
+          "cell": [
+            627,
+            0,
+            1254,
+            627
+          ],
+          "alphaBounds": [
+            1,
+            3,
+            589,
+            627
+          ],
+          "alpha128Bounds": [
+            58,
+            35,
+            563,
+            546
+          ]
+        },
+        {
+          "cell": [
+            0,
+            627,
+            627,
+            1254
+          ],
+          "alphaBounds": [
+            0,
+            1,
+            627,
+            604
+          ],
+          "alpha128Bounds": [
+            57,
+            35,
+            564,
+            547
+          ]
+        },
+        {
+          "cell": [
+            627,
+            627,
+            1254,
+            1254
+          ],
+          "alphaBounds": [
+            1,
+            0,
+            617,
+            603
+          ],
+          "alpha128Bounds": [
+            63,
+            35,
+            572,
+            548
+          ]
+        }
+      ],
+      "referenceRoles": {
+        "toolImageInput": "assets/cargo/v188/matriarch-idle.png",
+        "purpose": "Preserve the same dedicated character across clips."
+      }
+    },
+    {
+      "id": "matriarch-claw-tail",
+      "path": "assets/cargo/v188/matriarch-claw-tail.png",
+      "bytes": 1821646,
+      "sha256": "37ec3207b6aa4bdffd214b79f7f34b557892760b5ad54ca337067218e8fd4298",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generator": "built-in image_gen",
+      "copiedWithoutReencoding": true,
+      "initialPrompt": "Use case: identity-preserve. Edit the attached four-pose Matriarche de Soute sheet into a new production animation sheet for this EXACT SAME individual. The attached image is the identity and rendering reference, not a suggestion for a different creature. Preserve its charcoal and dull-silver materials, precisely the same broad swept-back crown, skull, shoulder armour, rib cage, paired large clawed arms, digitigrade legs, dorsal spines and segmented tail. Same detailed side-view sprite style. All creatures face RIGHT. Output EXACTLY FOUR full-body poses in a regular 2 by 2 grid, read left-to-right then top-to-bottom. The four cells are equal square cells. One complete creature per cell, all appendages safely within that cell. No parts may touch or cross a cell boundary. Keep equal anatomical scale across all poses and the same scale as the reference. Keep a safe transparent margin, especially around the crown, tail tip and feet. The main body pivot is near 57% cell width and the ground contact is at 91% cell height. Maintain that common ground line rather than placing poses at different heights. Genuinely transparent RGBA background including between limbs, no backdrop, checkerboard, grid, words, numbers, labels, effects, smoke, gore, floor or shadows. No extra limbs, no costume or weapons.\nAnimation: CLAW-TAIL ATTACK, exactly four sequential attack frames, NOT four neutral idle poses. Pose 1: wind-up, torso slightly back, both clawed arms drawn in. Pose 2: decisive forward/right extension of both claws with torso leaning into the strike; keep both feet in the same physical ground area. Pose 3: tail rises and whips in a readable curved arc while the claws begin to recover, retain full tail tip within the frame. Pose 4: recovery into the original ready stance, arms lowered. Keep complete anatomy visible, no cropped claws or tails, no detached streaks or duplicate ghost limbs. No projectiles, victim, blood, energy, motion blur or special effects. The game controls all damage and movement. These four poses form a non-looping action at nine frames per second.\n",
+      "cells": [
+        {
+          "cell": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "alphaBounds": [
+            0,
+            17,
+            627,
+            609
+          ],
+          "alpha128Bounds": [
+            54,
+            24,
+            526,
+            561
+          ]
+        },
+        {
+          "cell": [
+            627,
+            0,
+            1254,
+            627
+          ],
+          "alphaBounds": [
+            1,
+            0,
+            614,
+            627
+          ],
+          "alpha128Bounds": [
+            14,
+            39,
+            611,
+            562
+          ]
+        },
+        {
+          "cell": [
+            0,
+            627,
+            627,
+            1254
+          ],
+          "alphaBounds": [
+            0,
+            7,
+            627,
+            627
+          ],
+          "alpha128Bounds": [
+            31,
+            48,
+            569,
+            556
+          ]
+        },
+        {
+          "cell": [
+            627,
+            627,
+            1254,
+            1254
+          ],
+          "alphaBounds": [
+            1,
+            1,
+            626,
+            627
+          ],
+          "alpha128Bounds": [
+            29,
+            22,
+            613,
+            556
+          ]
+        }
+      ],
+      "referenceRoles": {
+        "toolImageInput": "assets/cargo/v188/matriarch-idle.png",
+        "purpose": "Preserve the same dedicated character across clips."
+      },
+      "correction": {
+        "supersededCandidateSha256": "c6fc594fddb42739fa491bfd1e2c7824e77db685f06b2eaf7f99d63837dcbaa3",
+        "reason": "Initial last cell recovered while native tail-hit belongs to frame 11. Final fourth cell shows a connected forward tail strike.",
+        "prompt": "Use case: precise-object-edit.\nEdit only the attack sequence of this Matriarche de Soute sprite sheet. Keep the SAME exact character identity, materials, anatomy, side view, right-facing orientation, 2 by 2 grid, and complete transparent silhouettes. This is a timing correction for an existing production animation.\nKeep the TOP TWO CELLS unchanged as closely as possible: upper-left is claw wind-up, upper-right is claws fully extended for the claw-hit event.\nCorrect the BOTTOM TWO CELLS so the main TAIL STRIKE is in the BOTTOM RIGHT cell, the fourth and final frame:\n- Bottom-left, third frame: claws recovering, body braced and tail coiling back as the clear anticipation for a tail strike. It is NOT the peak strike.\n- Bottom-right, fourth frame: peak forward tail whip. The complete segmented tail sweeps from behind the creature at the left, curves up and over the body, and its sharp tip points forward to the RIGHT beyond the skull/forearms, visibly striking in front of the creature. This frame MUST NOT be an idle stance or a simple tail curled behind the legs. Two feet brace on the ground. Keep all tail segments visibly connected to the creature. No extra or detached tail. The tail arc and tip must remain completely inside this cell with a clear transparent margin.\nPreserve equal anatomical scale, the 627-by-627 conceptual cell grid and stable body pivot near x350 in each cell. Ground contacts approximately y554–560 relative to each cell. Maintain roughly 520–535 px total silhouette height; bend the tail arc to stay within that height, never clip it at a cell edge. No image resizing, warping or change of camera angle.\nNo extra limbs, no motion trails, no victim, blood, special effects, labels, numbers, text, borders or background. Preserve true RGBA transparency, including gaps between tail and body. The visual sequence must now be wind-up / CLAW HIT / tail anticipation / TAIL HIT, with the final tail hit explicitly directed to the right.\n",
+        "nativeEvents": {
+          "combat:claw-hit": {
+            "frame": 9,
+            "sourceRect": [
+              627,
+              0,
+              627,
+              627
+            ]
+          },
+          "combat:tail-hit": {
+            "frame": 11,
+            "sourceRect": [
+              627,
+              627,
+              627,
+              627
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "matriarch-roar-hurt",
+      "path": "assets/cargo/v188/matriarch-roar-hurt.png",
+      "bytes": 1800530,
+      "sha256": "1b6428ee180ce52d6eb8762f8681c39d81bd7b57ae14a26b7d3dcfa30620dd0f",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generator": "built-in image_gen",
+      "copiedWithoutReencoding": true,
+      "initialPrompt": "Use case: identity-preserve. Edit the attached four-pose Matriarche de Soute sheet into a new production animation sheet for this EXACT SAME individual. The attached image is the identity and rendering reference, not a suggestion for a different creature. Preserve its charcoal and dull-silver materials, precisely the same broad swept-back crown, skull, shoulder armour, rib cage, paired large clawed arms, digitigrade legs, dorsal spines and segmented tail. Same detailed side-view sprite style. All creatures face RIGHT. Output EXACTLY FOUR full-body poses in a regular 2 by 2 grid, read left-to-right then top-to-bottom. The four cells are equal square cells. One complete creature per cell, all appendages safely within that cell. No parts may touch or cross a cell boundary. Keep equal anatomical scale across all poses and the same scale as the reference. Keep a safe transparent margin, especially around the crown, tail tip and feet. The main body pivot is near 57% cell width and the ground contact is at 91% cell height. Maintain that common ground line rather than placing poses at different heights. Genuinely transparent RGBA background including between limbs, no backdrop, checkerboard, grid, words, numbers, labels, effects, smoke, gore, floor or shadows. No extra limbs, no costume or weapons.\nAnimation: ROAR-HURT REACTION, exactly four sequential reaction frames, NOT a walk or a death. Pose 1: lift chest and head slightly, jaw opens in a threat. Pose 2: peak full roar, head tilted upward but facing right, forearms tensed, both feet planted. Pose 3: short recoil, torso hunches and crown dips, claws pull inward without collapse. Pose 4: recover toward the reference ready stance. Preserve identical body dimensions and the feet's common ground baseline. The skull must not be clipped by the top of its cell even during the roar. No falling body, dismemberment, injuries, blood, victim or effects. These four frames form a non-looping reaction at seven frames per second.\n",
+      "cells": [
+        {
+          "cell": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "alphaBounds": [
+            0,
+            16,
+            627,
+            627
+          ],
+          "alpha128Bounds": [
+            52,
+            24,
+            549,
+            553
+          ]
+        },
+        {
+          "cell": [
+            627,
+            0,
+            1254,
+            627
+          ],
+          "alphaBounds": [
+            1,
+            1,
+            583,
+            627
+          ],
+          "alpha128Bounds": [
+            51,
+            13,
+            536,
+            554
+          ]
+        },
+        {
+          "cell": [
+            0,
+            627,
+            627,
+            1254
+          ],
+          "alphaBounds": [
+            0,
+            1,
+            627,
+            627
+          ],
+          "alpha128Bounds": [
+            51,
+            54,
+            560,
+            554
+          ]
+        },
+        {
+          "cell": [
+            627,
+            627,
+            1254,
+            1254
+          ],
+          "alphaBounds": [
+            0,
+            0,
+            591,
+            627
+          ],
+          "alpha128Bounds": [
+            51,
+            45,
+            562,
+            553
+          ]
+        }
+      ],
+      "referenceRoles": {
+        "toolImageInput": "assets/cargo/v188/matriarch-idle.png",
+        "purpose": "Preserve the same dedicated character across clips."
+      }
+    }
+  ],
+  "runtimeHashes": {
+    "src/cargo-matriarch-art-v188.js": "e2322b5183fa4b31700184bcdf623526004587e088db07ec75755fa22ea4b8d4",
+    "src/cargo-brutal-runtime-v67.js": "9487c281d5f07e40b1771c18033ac68928a96a7cfb51c1efda37791173b1af8a",
+    "src/manta-art-v188.js": "e8ad760a1d3c5b64d1f686fcc7c49b568b2fa507caee9b77d82eafd9932ed97c",
+    "src/legacy-operations-v131.js": "ae50089c68584ef983e7fd9ab70537eeb824ba4fb1b0a427fab9e2d9d2948bb4",
+    "src/special-operations-v131.js": "5c412f4c3adb8df674b25740ce7b2227a0ead01844c82d219a226a3497035243",
+    "src/legacy-operation-state-v131.js": "54cd1b9305cdeab348acb9b050f004a5278b8e295f3670ad23ff5d43de23e1ae",
+    "src/i18n-en-catalog-v185.js": "c4d72221b1455a84c43112171a28cae38f74000baa2a2609f1d3f236f9944218"
+  },
+  "renderReceipt": {
+    "path": "docs/development/CARGO_ABYSS_ART_RENDER_RECEIPT_20261117.json",
+    "sha256": "5700aec0b85640add6b90da1eb4f2b4b34ba1d62d362938e6b35f19e752ff9fb",
+    "checks": 264,
+    "passed": 264,
+    "errors": 0,
+    "newImages": 5,
+    "imageBytes": 9133636,
+    "dedicatedPoseRenders": 32,
+    "cargoFrames": 39,
+    "cargoReferenceFrames": 39,
+    "mantaWorldFrames": 4,
+    "mantaIsolatedConditions": 10,
+    "maximumFootGapPx": 0,
+    "fallbackComparisons": 5
+  },
+  "overview": {
+    "path": "docs/development/CARGO_ABYSS_ART_OVERVIEW_20261117.png",
+    "width": 1680,
+    "height": 2100,
+    "sha256": "f1320e57b9077c0b8f3e1f3ea76ebc90c6611973c366b218a85bfb7b3519ca05"
+  },
+  "preservation": [
+    "Source PNG bytes copied unchanged from generated outputs.",
+    "Game IDs, saves, collisions, phase thresholds and rewards unchanged.",
+    "Matriarch uses the existing four clips, native events and physical normalizer.",
+    "Other queens retain their original renderer.",
+    "All existing image assets are unchanged; five additional PNGs only."
+  ],
+  "openScope": [
+    "HADAL modular suit and swimming poses",
+    "Aquatic bestiary and later proposed Nacre-7 campaign",
+    "MANTA hatch, propulsion and damage/destruction animations",
+    "Global canonical 1:1 verification",
+    "New Chromium qualification on the eventual published commit"
+  ]
+}

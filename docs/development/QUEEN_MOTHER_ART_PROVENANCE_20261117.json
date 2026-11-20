@@ -1,0 +1,2309 @@
+{
+  "schema": "queen-mother-modular-art-provenance-v188",
+  "createdAtUtc": "2026-11-17T20:19:10.507870+00:00",
+  "baselineCommit": "b9aee06a0783bc7c0cf7094268a08618364df781",
+  "scope": "Illustrated adult in the existing local Queen Mother Song encounter; other royal cast and proposed extended acts remain separate.",
+  "fidelity": {
+    "projectRecord": "yhw:XEN-032",
+    "projectCitedSource": "yhw:X-S13",
+    "projectCorpus": "docs/development/ALIEN_BASE_SOURCE_SNAPSHOTS_20261102.json",
+    "identity": "Red Queen Mother from Aliens: Genocide; selected for the existing project Red Hive lineage.",
+    "primaryPhotographs": [
+      {
+        "galleryIndex": 9,
+        "sourcePage": "https://store.necaonline.com/blogs/news/shipping-aliens-genocide-red-queen-mother-and-avengers-age-of-ultron-head-knockers",
+        "finalURL": "https://necaonline.com/wp-content/uploads/2015/08/1300x-Red_Queen_Genocide1.jpg",
+        "sha256": "75193fc810f02896ac2d7200a2788155aa111cb79fd0614ef0eb6f57865fe4d4",
+        "bytes": 180128,
+        "dimensions": [
+          906,
+          1300
+        ],
+        "role": "Primary full-body front three-quarter reference",
+        "observed": "Isolated red adult on white; entire crest, ribbed neck and torso, two pairs of arms, legs and curled tail are visible. White/ivory facial appendages and teeth contrast with the red/dark body.",
+        "visuallyInspected": true
+      },
+      {
+        "galleryIndex": 10,
+        "sourcePage": "https://store.necaonline.com/blogs/news/shipping-aliens-genocide-red-queen-mother-and-avengers-age-of-ultron-head-knockers",
+        "finalURL": "https://necaonline.com/wp-content/uploads/2015/08/1300x-Red_Queen2.jpg",
+        "sha256": "55607db633c6d776e1aa3ca951a8cf5733a666770cb4ccb905a08f10561a747c",
+        "bytes": 159817,
+        "dimensions": [
+          1010,
+          1300
+        ],
+        "role": "Opposite front three-quarter reference",
+        "observed": "Isolated red adult on white, opposite front orientation; four-arm arrangement and forward facial/inner-mouth details visible. Tail extends behind the left leg.",
+        "visuallyInspected": true
+      },
+      {
+        "galleryIndex": 11,
+        "sourcePage": "https://store.necaonline.com/blogs/news/shipping-aliens-genocide-red-queen-mother-and-avengers-age-of-ultron-head-knockers",
+        "finalURL": "https://necaonline.com/wp-content/uploads/2015/08/1300x-Red_Queen3.jpg",
+        "sha256": "01e757462608dcc54dc84574ec9c7786427b7a3fd14d424e2357359c60105fe7",
+        "bytes": 185524,
+        "dimensions": [
+          943,
+          1300
+        ],
+        "role": "Side/rear three-quarter silhouette reference",
+        "observed": "Isolated red adult on white, facing right; upper/back crest panels and taper, back ribs, tail vertebrae, both leg shapes and visible foot contact shown. This is not a strict orthographic side view.",
+        "visuallyInspected": true
+      }
+    ],
+    "referenceManifestSha256": "b0cef3b45d9d9e5e8b5526ee3ebe7c981716c91f8dc40576cbe9d79f55822909",
+    "preservedFeatures": [
+      "red elongated crest",
+      "ribbed neck",
+      "two large and two small arms",
+      "two legs",
+      "ivory facial appendages",
+      "segmented tail"
+    ],
+    "interpretation": "Articulated figurine photographs in perspective do not define exact living orthographic anatomy or all game poses.",
+    "excludedPhotograph": {
+      "galleryIndex": 1,
+      "sha256": "31094851f93ed7a68b59f28bc1ab7e51a1bc17b30d03d4c34810343ea7f16854",
+      "reason": "Diorama includes another blue Queen; context only, never a generation reference."
+    },
+    "ovomorphUsedAsAdultReference": false,
+    "automaticallyClassifiedAsEmpress": false,
+    "projectVisual1to1Promoted": false,
+    "globalCanonicalOneToOneCertification": false
+  },
+  "generations": [
+    {
+      "id": "adult-rest-anticipation-4pose-v1",
+      "tool": "image_gen.imagegen",
+      "mode": "built-in",
+      "createdAtUtc": "2026-11-17T19:17:20.120573+00:00",
+      "intent": "generate with photographic references",
+      "transparentBackground": true,
+      "requestedDimensions": [
+        2048,
+        2048
+      ],
+      "actualDimensions": [
+        1254,
+        1254
+      ],
+      "actualMode": "RGBA",
+      "inputReferences": [
+        {
+          "kind": "primary-photograph",
+          "url": "https://necaonline.com/wp-content/uploads/2015/08/1300x-Red_Queen_Genocide1.jpg",
+          "sha256": "75193fc810f02896ac2d7200a2788155aa111cb79fd0614ef0eb6f57865fe4d4"
+        },
+        {
+          "kind": "primary-photograph",
+          "url": "https://necaonline.com/wp-content/uploads/2015/08/1300x-Red_Queen2.jpg",
+          "sha256": "55607db633c6d776e1aa3ca951a8cf5733a666770cb4ccb905a08f10561a747c"
+        },
+        {
+          "kind": "primary-photograph",
+          "url": "https://necaonline.com/wp-content/uploads/2015/08/1300x-Red_Queen3.jpg",
+          "sha256": "01e757462608dcc54dc84574ec9c7786427b7a3fd14d424e2357359c60105fe7"
+        }
+      ],
+      "rawSha256": "61c501c88f2c6140c72c384adf864461a5500dd1cf1f460a654eb90c49d644d6",
+      "rawBytes": 1464482,
+      "prompt": "Use case: stylized-concept\nAsset type: transparent game character sprite atlas, first adult Red Queen Mother sheet for Aliens Tantalus.\nPrimary request: Generate ONE square 2048 x 2048 pixel RGBA image, laid out as a perfectly regular 2 x 2 grid of four complete full-body poses of the SAME red adult creature. Background must be truly transparent.\n\nInput references, in order:\n1. neca-red-queen-09.jpg — primary full-body identity and anatomy reference.\n2. neca-red-queen-10.jpg — opposite three-quarter view, confirming four arms, ribbed throat/thorax and ivory facial structures.\n3. neca-red-queen-11.jpg — complementary side/rear view of the long swept-back head crest, back, legs and articulated tail.\nUse these three photographs only as visual references for the SAME RED creature. Reconstruct a strict right-facing side view; do not copy their three-quarter camera views.\n\nIdentity invariants in ALL four cells: the same distinctive very long backward-sloping red head crest, the same red ridged and layered carapace, tall ribbed neck and thorax, EXACTLY FOUR ARMS (two large primary arms and two smaller secondary arms below them), exactly two digitigrade legs, the same ivory teeth and pale facial horns/tendrils, the same long red segmented vertebral tail with its whole pointed tip. The head crest is a single cranial structure, never a pair of wings. No wings, no blue caste, no alternate queen design, no added limbs, no eggs, no ovipositor.\n\nLiving-creature rendering: detailed dark biomechanical horror game art, deep blood-red and burgundy chitin with dark recessed ribs and restrained natural wet highlights; preserve the red-reference identity and ivory facial details. Translate the photographed figure into living anatomy. No toy pivot holes, screws, ball joints, molded seam gaps or plastic display supports. No added orange glow, fire, magic or projectile.\n\nCamera and registration: strictly 90-degree right-facing side profile in EVERY cell, fixed orthographic game camera, no change of view, no zoom. Use one identical anatomical stature, skull size, torso length, pelvis size and limb lengths across all four poses. Both planted feet must remain on precisely the same invisible local ground line and at the same local positions in every cell. Preserve pelvis/body registration; the requested changes are small upper-body animation poses, not walking or size changes. Clearly separate the silhouettes of the four hands enough that the two primary and two secondary arms remain identifiable in profile.\n\nCell order, left to right, top to bottom:\nTOP LEFT — Rest 0: neutral alert standing posture, primary arms comfortably bent forward, secondary arms relaxed under the thorax, mouth mostly closed with ivory teeth visible, feet planted.\nTOP RIGHT — Rest 1: the same rest pose with only a very subtle breathing/neck and finger change. Exactly the same planted stance and anatomical proportions.\nBOTTOM LEFT — Early anticipation: grounded early attack windup; the head/neck begins to draw back slightly and the primary arms begin to prepare, with the smaller arms flexing close to the thorax. Feet and pelvis stay registered.\nBOTTOM RIGHT — Advanced anticipation: a clearly later but still restrained windup, the same head and four arms visibly poised to act; the mouth may open slightly. This remains preparation only: no strike completed, no spit, no beam, no projectile, no effect, no victim.\n\nFraming: four equally sized square cells. Each cell contains ONE entire creature including the complete crest, all hands, both feet and the entire tail. Keep generous visible transparent margins on every side, at least roughly 8 percent of the cell; the feet sit near 88 percent of the local cell height. Fit the complete curved tail behind the creature within that same cell, with a fully visible tip. No pixel of a creature should touch a cell boundary or overlap a neighboring cell. Keep the local ground line identical across the rows. Do not draw the ground line.\n\nOutput: clean isolated transparent cutouts only, identical lighting in all cells, no background color, no checkerboard drawn into the pixels, no scenery, no cast shadow on a floor, no captions, no numbers, no grid lines, no borders, no watermark. Requested sheet size is 2048 x 2048; preserve genuine alpha.\n",
+      "promptSha256": "82521d0ebb076cfa5a0cae01816cdbedc65a6758168804363ca7c92628a56f90",
+      "sourcePixelsUnchangedAfterGeneration": true,
+      "disposition": "Rejected: fourth arm/hand not independently legible in the full-body sheet."
+    },
+    {
+      "id": "adult-rest-anticipation-4pose-v2",
+      "tool": "image_gen.imagegen",
+      "mode": "built-in",
+      "createdAtUtc": "2026-11-17T19:22:46.247975+00:00",
+      "intent": "edit existing sheet, arm anatomy only",
+      "transparentBackground": true,
+      "requestedDimensions": [
+        1254,
+        1254
+      ],
+      "actualDimensions": [
+        1254,
+        1254
+      ],
+      "actualMode": "RGBA",
+      "inputReferences": [
+        {
+          "kind": "generated-source",
+          "generationId": "adult-rest-anticipation-4pose-v1",
+          "sha256": "61c501c88f2c6140c72c384adf864461a5500dd1cf1f460a654eb90c49d644d6"
+        },
+        {
+          "kind": "primary-photograph",
+          "url": "https://necaonline.com/wp-content/uploads/2015/08/1300x-Red_Queen_Genocide1.jpg",
+          "sha256": "75193fc810f02896ac2d7200a2788155aa111cb79fd0614ef0eb6f57865fe4d4"
+        },
+        {
+          "kind": "primary-photograph",
+          "url": "https://necaonline.com/wp-content/uploads/2015/08/1300x-Red_Queen2.jpg",
+          "sha256": "55607db633c6d776e1aa3ca951a8cf5733a666770cb4ccb905a08f10561a747c"
+        },
+        {
+          "kind": "primary-photograph",
+          "url": "https://necaonline.com/wp-content/uploads/2015/08/1300x-Red_Queen3.jpg",
+          "sha256": "01e757462608dcc54dc84574ec9c7786427b7a3fd14d424e2357359c60105fe7"
+        }
+      ],
+      "rawSha256": "03fb740d95c9a5939f860b63360c75eca42fbec3361b593edd9be0a5ab27a736",
+      "rawBytes": 1542201,
+      "prompt": "Use case: precise-object-edit\nAsset type: one transparent 2 x 2 sprite atlas, anatomy correction only.\n\nImage 1 is the EDIT TARGET: the existing 1254 x 1254 RGBA sprite sheet with four right-facing poses of the same red adult Queen Mother.\nImages 2, 3 and 4 are ANATOMY REFERENCES ONLY: three views of the same red four-armed creature. Do not replace the target with a photographed toy or their camera angles.\n\nMake ONE targeted correction to Image 1: ensure EXACTLY FOUR COMPLETE, CLEARLY DISTINCT ARMS AND FOUR SEPARATE CLAWED HANDS in EACH of its four cells. The existing target has only three clearly traceable arm/hand groups, so the fourth currently merges or disappears. Correct this ambiguity. Four arms TOTAL, never four additional arms and never five hands.\n\nAnatomical construction: two large primary arms attach at the upper shoulders; two shorter secondary arms attach lower on the ribbed thorax. Each of the four arms must have its own identifiable attachment region, upper arm, elbow, forearm and one hand. Reveal the far-side arms by subtly offsetting their elbows and hands in the side silhouette so their connected limb paths can be followed. Preserve the side-on camera; do not rotate the torso into a three-quarter view to expose them. Leave real transparent space between the four hands and between the separated forearms where they project beyond the body. In particular, make the far shorter thoracic arm and its fourth hand independently visible instead of fused into the near short arm or a long forearm. Maintain coherent living anatomy, not detached hands or duplicate claw clusters.\n\nKeep the pose roles already present: top-left rest 0, top-right subtle alert rest 1, bottom-left early anticipation, bottom-right advanced anticipation. Keep the two primary arms' existing rest-versus-windup attitudes; fit the clarified secondary pair into those same attitudes. Do not invent a completed attack.\n\nStrict invariants outside this small arm/attachment correction:\n- Keep the same single elongated red head crest, red/burgundy material and lighting, ribbed neck/thorax, skull, face, ivory horns/tendrils and ALL MOUTH/JAW POSITIONS EXACTLY AS THEY ARE. The protruding inner jaw at alert rest is intentional. Do not close, open, retract, extend or redesign any jaw.\n- Keep the same pelvis, body stature, torso length, two legs, foot positions and invisible ground line in every cell.\n- Keep the full segmented tail and its tip, all crest tips, the strict right-facing profile, camera, anatomical scale and registration.\n- Keep the original regular 2 x 2 grid, original canvas size and framing. Do not crop, resize, zoom, move sprites, add margins, or move the ground line.\n- Preserve genuine transparency and the existing transparent gaps. No background, checkerboard baked into pixels, scenery, floor, shadow, labels, borders or watermark.\n- No wings, extra caste, added objects, projectile, effects, extra legs, fifth hand, toy pivot holes, mechanical pins or display stand.\n\nReturn just the corrected full transparent sprite sheet. The only intended visual change is making the four arms and four hands anatomically clear in each existing pose.\n",
+      "promptSha256": "a9538ddd47b22886c79787f965b5553a82958e89408040d99f180d8bb387b6f7",
+      "sourcePixelsUnchangedAfterGeneration": true,
+      "disposition": "Rejected: targeted arm correction still leaves the fourth limb merged with the torso."
+    },
+    {
+      "id": "modular-body-4pose-v1",
+      "tool": "image_gen.imagegen",
+      "mode": "built-in",
+      "createdAtUtc": "2026-11-17T19:32:37.593816+00:00",
+      "intent": "edit V2 to remove all arms/hands; reconstruct torso for four modular layers",
+      "transparentBackground": true,
+      "requestedDimensions": [
+        1254,
+        1254
+      ],
+      "actualDimensions": [
+        1254,
+        1254
+      ],
+      "actualMode": "RGBA",
+      "inputReferences": [
+        {
+          "kind": "generated-source",
+          "generationId": "adult-rest-anticipation-4pose-v2",
+          "sha256": "03fb740d95c9a5939f860b63360c75eca42fbec3361b593edd9be0a5ab27a736"
+        },
+        {
+          "kind": "primary-photograph",
+          "url": "https://necaonline.com/wp-content/uploads/2015/08/1300x-Red_Queen_Genocide1.jpg",
+          "sha256": "75193fc810f02896ac2d7200a2788155aa111cb79fd0614ef0eb6f57865fe4d4"
+        },
+        {
+          "kind": "primary-photograph",
+          "url": "https://necaonline.com/wp-content/uploads/2015/08/1300x-Red_Queen2.jpg",
+          "sha256": "55607db633c6d776e1aa3ca951a8cf5733a666770cb4ccb905a08f10561a747c"
+        },
+        {
+          "kind": "primary-photograph",
+          "url": "https://necaonline.com/wp-content/uploads/2015/08/1300x-Red_Queen3.jpg",
+          "sha256": "01e757462608dcc54dc84574ec9c7786427b7a3fd14d424e2357359c60105fe7"
+        }
+      ],
+      "rawSha256": "f22750aa4da56bf7200087acc5fe727052da076c8ecaf8f61bde64a4ebc7eb72",
+      "rawBytes": 1397419,
+      "prompt": "Use case: precise-object-edit\nAsset type: modular creature BODY-ONLY sprite atlas for a 2D game.\n\nImage 1 is the EDIT TARGET: the existing 2 x 2 transparent atlas of the red adult Queen Mother. Images 2, 3 and 4 are visual anatomy references for this same red creature only.\n\nCreate the BODY-ONLY version of Image 1 by REMOVING EVERY ARM AND EVERY HAND from ALL FOUR FIGURES. Remove all long and short arms, upper arms, elbows, forearms, fingers and claws that belong to the arms, including partially merged or overlapping ones. There must be ZERO ARMS and ZERO HANDS anywhere in this sheet. This is a deliberately incomplete modular sprite body, ready to receive four separately rendered arm layers later; do not grow replacement arms or hide hands against the torso.\n\nCleanly reconstruct the underlying ribbed torso and shoulder/thoracic carapace where the arms were removed. Keep only very discreet natural attachment pads at the upper shoulder and lower thorax, smoothly integrated into the anatomy. No protruding arm stubs, no empty round mechanical holes, no open wounds, no blood, no torn tissue, no toy joints, no pins and no large socket symbols. Far-side attachments may be concealed naturally by the body. Do not draw annotation marks.\n\nPreserve the same individual and all the other existing body features: one very elongated swept-back red cranial crest, the ivory horns and facial tendrils, every existing jaw/inner-jaw pose, long ribbed neck, ribbed torso, pelvis, exactly TWO complete legs and feet, and the ENTIRE red vertebral tail including its pointed tip. Facial tendrils are not arms: retain them. Leg claws are not hands: retain both complete feet. Keep the same dark red/burgundy living biomechanical materials and lighting. No wings or alternate caste.\n\nPreserve the four semantic poses and their order:\ntop left alert rest0, top right subtly different alert rest1;\nbottom left early anticipation, bottom right advanced anticipation.\nHead/neck attitudes stay as in the target. This body-only sheet intentionally has no arm action.\nKeep strict right-facing profile in every cell, one fixed camera and the same anatomical body proportions/stature across all four cells.\n\nComposition: keep a regular square 2 x 2 grid of equal square cells. Each cell must contain one COMPLETE body, crest and whole tail. Give all four bodies sufficient TRANSPARENT PADDING: about 8 percent of the cell or more on all sides. If necessary, uniformly reduce/recenter all four complete figures together by the same factor to obtain that padding; do not crop, stretch, shorten the tail or alter anatomical proportions. Keep the two feet at consistent local ground/contact positions across the four cells, on one shared invisible ground line around 88 percent of each cell's height. Do not draw a floor or a ground line.\n\nOutput: the full body-only 2 x 2 atlas, requested 1254 x 1254 RGBA, genuinely transparent background. No text, labels, grid lines, borders, background color, checkerboard baked into pixels, floor, cast shadow, other body fragments or extra objects. ZERO ARMS OR HANDS.\n",
+      "promptSha256": "c001e04388aed70c2b7a352293cc8b31fe7d9c68b031ec60edafb046bcd783aa",
+      "sourcePixelsUnchangedAfterGeneration": true,
+      "disposition": "Accepted as an armless source after four-arm placement review; retained shoulder capsule is covered by the near large arm."
+    },
+    {
+      "id": "modular-arms-4part-v1",
+      "tool": "image_gen.imagegen",
+      "mode": "built-in",
+      "createdAtUtc": "2026-11-17T19:37:56.633479+00:00",
+      "intent": "generate isolated four-arm kit using accepted-for-prototype armless body plus V2 and three NECA photographs",
+      "transparentBackground": true,
+      "requestedDimensions": [
+        1254,
+        1254
+      ],
+      "actualDimensions": [
+        1254,
+        1254
+      ],
+      "actualMode": "RGBA",
+      "inputReferences": [
+        {
+          "kind": "generated-source",
+          "generationId": "modular-body-4pose-v1",
+          "sha256": "f22750aa4da56bf7200087acc5fe727052da076c8ecaf8f61bde64a4ebc7eb72"
+        },
+        {
+          "kind": "generated-source",
+          "generationId": "adult-rest-anticipation-4pose-v2",
+          "sha256": "03fb740d95c9a5939f860b63360c75eca42fbec3361b593edd9be0a5ab27a736"
+        },
+        {
+          "kind": "primary-photograph",
+          "url": "https://necaonline.com/wp-content/uploads/2015/08/1300x-Red_Queen_Genocide1.jpg",
+          "sha256": "75193fc810f02896ac2d7200a2788155aa111cb79fd0614ef0eb6f57865fe4d4"
+        },
+        {
+          "kind": "primary-photograph",
+          "url": "https://necaonline.com/wp-content/uploads/2015/08/1300x-Red_Queen2.jpg",
+          "sha256": "55607db633c6d776e1aa3ca951a8cf5733a666770cb4ccb905a08f10561a747c"
+        },
+        {
+          "kind": "primary-photograph",
+          "url": "https://necaonline.com/wp-content/uploads/2015/08/1300x-Red_Queen3.jpg",
+          "sha256": "01e757462608dcc54dc84574ec9c7786427b7a3fd14d424e2357359c60105fe7"
+        }
+      ],
+      "rawSha256": "d6e34554ffbb5a0b0a444c4e3f91d956691c8f3fd248ed99baa0481bd92bf593",
+      "rawBytes": 677912,
+      "prompt": "Use case: stylized-concept\nAsset type: transparent modular arm-parts atlas for one red adult Queen Mother game character.\n\nCreate ONE square RGBA atlas with a regular 2 x 2 grid containing EXACTLY FOUR isolated complete arms, ONE arm per cell and ONE hand attached to each arm.\nThis is a parts kit, NOT a picture of complete creatures. Do not draw any head, neck, torso, ribs, pelvis, leg, foot, tail or extra body fragment.\n\nReference roles:\nImage 1: the accepted-for-prototype body-only atlas, establishing red carapace, lighting, scale, attachment regions and strict right-facing view.\nImage 2: continuity of the existing creature and arm materials; do not copy its arm-count ambiguity.\nImages 3, 4, 5: the same red creature photographed from three views. Use their large shoulder arms and shorter lower-thoracic arms for authentic anatomy and proportions, translated into living biomechanical tissue rather than a toy.\n\nCell order:\nTOP LEFT — LARGE NEAR ARM: one complete large primary arm from broad proximal shoulder cap through full upper arm, elbow and forearm to its single entire clawed hand.\nTOP RIGHT — LARGE FAR ARM: the opposite primary arm of the same creature, same anatomy and scale, in a compatible side view; use slightly darker far-side lighting only.\nBOTTOM LEFT — SMALL NEAR ARM: one complete shorter secondary arm from its small proximal thoracic root through upper arm, elbow and forearm to one complete clawed hand.\nBOTTOM RIGHT — SMALL FAR ARM: the opposite smaller secondary arm, same anatomy and scale as the small near arm; use slightly darker far-side lighting only.\n\nGeometry and pose:\nAll four arms should be oriented for the same RIGHT-FACING creature. Each proximal root is toward the upper-left portion of its local cell; the arm descends to a bent elbow, then the forearm reaches toward the right with fingers curving downward. Use a clear, readable bent shape, not a straight stick.\nThe TWO LARGE arms must have a relatively VERTICAL UPPER ARM and a forward, right-reaching elbow/forearm, matching the upright shoulder capsule retained on Image 1. Make the broad proximal cap and the upper-arm silhouette sufficient to overlap/cover that fixed capsule when the whole arm is rotated modestly; do not make a dangling thin root or an extra empty sleeve. The complete upper arm is required: this part will attach at the top shoulder, NOT at the bottom of the body's capsule.\nThe TWO SMALL arms are genuinely shorter and finer, about 55–65 percent of the large arms' total anatomical chain length, as in the reference creature. Their bases attach lower on the thorax. Give the small far arm a slightly more upward-reaching forearm and the small near arm a slightly lower-reaching forearm so their two complete hands can remain vertically separated in composition.\nThe far arms are not new mutant designs; retain the same joints, finger shapes and carapace features as their near counterparts. Four arms TOTAL, four hands TOTAL. Each arm is a SINGLE CONNECTED limb from proximal root to all fingertips. No detached fingertips, duplicate hands, merged arms or fifth hand.\n\nStyle and scale:\nDark red/burgundy glossy living biomechanical carapace matching Image 1, dark recessed grooves, natural restrained highlights, the same pale claw tips where present in the photos. No toy pivot holes, screws, pins, ball-joint holes, artificial cutaway, wounds or blood. Proximal roots should end in a clean rounded overlapping attachment silhouette suitable for a game layer, not a gory severed stump.\nKeep a common anatomical pixel scale across the four parts; the small arms must visibly be smaller, not enlarged to fill their cells. At the body's current scale, a large arm's full shoulder-to-fingertip chain is approximately 220–250 source pixels and a small arm about 130–160 source pixels. Do not stretch one limb to fill the square. These are small modular parts with generous transparent padding.\n\nLayout/output:\nRequested 1254 x 1254 RGBA, four equal 627 x 627 cells, one entire isolated arm per cell with all roots and fingertips fully inside its own cell and ample transparent space all around. Background genuinely transparent. No full bodies, no stump of torso, no text, labels, numbers, borders, grid lines, floor shadows, backdrop or checkerboard pixels. Only the four isolated arm parts.\n",
+      "promptSha256": "987e7acd7aec17dd3f274cf7549c0d9e154f97ac0f788bbf18cbd5c93b50227d",
+      "sourcePixelsUnchangedAfterGeneration": true,
+      "disposition": "Accepted four isolated anatomical parts; sizes and attachment coordinates are calibrated in the renderer."
+    },
+    {
+      "id": "modular-body-action-death-4pose-v1",
+      "tool": "image_gen.imagegen",
+      "mode": "built-in",
+      "createdAtUtc": "2026-11-17T19:54:36.658074+00:00",
+      "intent": "generate four new arm-free body poses, preserve body A anatomical scale",
+      "transparentBackground": true,
+      "requestedDimensions": [
+        1254,
+        1254
+      ],
+      "actualDimensions": [
+        1254,
+        1254
+      ],
+      "actualMode": "RGBA",
+      "inputReferences": [
+        {
+          "kind": "generated-source",
+          "generationId": "modular-body-4pose-v1",
+          "sha256": "f22750aa4da56bf7200087acc5fe727052da076c8ecaf8f61bde64a4ebc7eb72"
+        },
+        {
+          "kind": "generated-source",
+          "generationId": "modular-arms-4part-v1",
+          "sha256": "d6e34554ffbb5a0b0a444c4e3f91d956691c8f3fd248ed99baa0481bd92bf593"
+        },
+        {
+          "kind": "primary-photograph",
+          "url": "https://necaonline.com/wp-content/uploads/2015/08/1300x-Red_Queen_Genocide1.jpg",
+          "sha256": "75193fc810f02896ac2d7200a2788155aa111cb79fd0614ef0eb6f57865fe4d4"
+        },
+        {
+          "kind": "primary-photograph",
+          "url": "https://necaonline.com/wp-content/uploads/2015/08/1300x-Red_Queen2.jpg",
+          "sha256": "55607db633c6d776e1aa3ca951a8cf5733a666770cb4ccb905a08f10561a747c"
+        },
+        {
+          "kind": "primary-photograph",
+          "url": "https://necaonline.com/wp-content/uploads/2015/08/1300x-Red_Queen3.jpg",
+          "sha256": "01e757462608dcc54dc84574ec9c7786427b7a3fd14d424e2357359c60105fe7"
+        }
+      ],
+      "rawSha256": "5653f8aaf8dfc0943e032d4caaf467397ce3b3276bb2e1859754a05ee817676f",
+      "rawBytes": 1817020,
+      "prompt": "Use case: stylized-concept\nAsset type: second BODY-ONLY modular sprite atlas for the SAME red adult Queen Mother, four action/death body poses.\n\nCreate ONE square RGBA 2 x 2 atlas with FOUR COMPLETE ARM-FREE BODIES. This continues the body-only atlas in Image 1. The four arms are separate game layers in Image 2 and MUST NOT appear in this new body sheet.\n\nReference roles:\nImage 1: primary body identity, anatomical proportions, exact scale, red/ivory appearance, side-profile camera and ground-line reference. This is the same individual in all new cells.\nImage 2: material/continuity reference for the separate modular arms ONLY. Do not draw any of these arms or hands into the bodies.\nImages 3, 4, 5: anatomical references for the SAME red adult photographed from three angles. Preserve the unique long red crest, face, ivory appendages, ribbed neck/thorax, pelvis, legs and articulated tail. Ignore the photographed arms for this BODY-ONLY output. No blue queen or alternate caste.\n\nZERO ARMS and ZERO HANDS in all four output cells. No long arms, short arms, elbows, forearms, fingers or projected arm stumps. Keep the discreet integrated shoulder/thorax attachment surfaces from the body-only reference, in positions appropriate to the torso. Reconstruct the underlying carapace/ribs cleanly. This is a modular art asset, not an injury: no amputation wounds, exposed cut tissue or blood. Preserve the ivory facial tendrils and all toes/claws of the two feet; those are not arm parts.\n\nExactly these FOUR body poses, left to right then top to bottom:\nTOP LEFT — EMISSION: standing braced in the same right-facing stance as the first sheet, a purposeful head/neck forward tension and modest open-mouth emission attitude. This accompanies a game attack but does not depict its projectile origin: NO spit, projectile, beam, mist, muzzle flash or effect anywhere.\nTOP RIGHT — RECOVERY / REACTION: the same complete standing body settling after the attack, head and ribbed torso slightly released and recoiling. Preserve both legs and feet, crest and entire tail; no walking pose or size change.\nBOTTOM LEFT — COLLAPSE: a physically plausible fall toward the ground in strict side view, the same torso leaning strongly forward/down, knees folding, head lowering while the long crest and whole articulated tail remain attached and entirely visible. The body is losing support, not exploding or disintegrating.\nBOTTOM RIGHT — NEUTRALIZED BODY: the same creature settled on the ground in a compact natural side-view collapse, legs folded, torso low, head still facing right, long cranial crest and every facial appendage retained, tail curled naturally behind/around the body with its complete pointed tip visible. This is a quiet non-graphic corpse. No wound, gore, detached part, missing leg, replacement limb or extra object.\n\nAnatomical scale and framing:\nUse one fixed orthographic RIGHT-FACING camera for all four poses. Maintain the SAME anatomical scale as Image 1: the same absolute skull/crest length, neck segment lengths, torso dimensions, pelvis size, leg lengths and tail thickness across every cell. The collapsed bodies must occupy less vertical space naturally; DO NOT enlarge them to fill the squares. Do not independently fit or resize any silhouette to a cell.\nRequested sheet size 1254 x 1254, regular equal 2 x 2 cells of 627 x 627. The body reference uses a shared invisible contact/ground line close to local y609 in each 627px cell; retain this line for standing feet and for the grounded corpse. Do not draw the ground line or floor. Keep whole crest, ivory facial appendages, both legs/feet and ENTIRE tail fully inside each cell with visible transparent margins. Curl the tail and fold the legs naturally to keep the whole dead body in the cell at the SAME scale; do not shorten or truncate anatomy. No body may touch a cell boundary or overlap another cell.\n\nRendering: same dark red/burgundy living biomechanical material, restrained wet highlights and dark rib recesses as Image 1, same ivory facial structures; preserve that design in death. No wings, new spikes, toy pivot holes or plastic stand. Keep true alpha transparency. No background color, scenery, cast floor shadow, checkerboard baked into pixels, text, labels, numbers, borders or grid lines. Four complete bodies, no arms or hands, no effects.\n",
+      "promptSha256": "1cfc209069a8d0e2ec6f2cbdd92171894b1b1a6564bc63b25ae133d5ad0cf71b",
+      "sourcePixelsUnchangedAfterGeneration": true,
+      "disposition": "Rejected: broad gray/red translucent haze around the four bodies."
+    },
+    {
+      "id": "modular-body-action-death-4pose-v2",
+      "tool": "image_gen.imagegen",
+      "mode": "built-in",
+      "createdAtUtc": "2026-11-17T19:58:47.418564+00:00",
+      "intent": "background-extraction edit only; preserve B1 anatomy/poses/scale/grid",
+      "transparentBackground": true,
+      "requestedDimensions": [
+        1254,
+        1254
+      ],
+      "actualDimensions": [
+        1254,
+        1254
+      ],
+      "actualMode": "RGBA",
+      "inputReferences": [
+        {
+          "kind": "generated-source",
+          "generationId": "modular-body-action-death-4pose-v1",
+          "sha256": "5653f8aaf8dfc0943e032d4caaf467397ce3b3276bb2e1859754a05ee817676f"
+        }
+      ],
+      "rawSha256": "d4fe4d25f496f1245de056666c96851a7ca41fc9342e8ef1a0f88eb2713ce725",
+      "rawBytes": 1417281,
+      "prompt": "Use case: background-extraction\nEdit target: Image 1, the existing 1254 x 1254 RGBA 2 x 2 body-only creature atlas.\n\nMake ONLY a transparency cleanup. Keep the four existing red bodies, poses, anatomical size, position, framing, 2 x 2 grid, color/material detail, jaw positions, crest, ivory facial appendages, complete tail, two legs and feet exactly as shown. Do not redesign or redraw their anatomy, do not move any body, do not change the per-cell scale, and do not recrop or resize the sheet.\n\nThe target has unwanted broad gray/pink translucent haze above the two upper bodies, plus red/gray mist, glow, dust and translucent stains around the silhouettes and in gaps. REMOVE ALL OF THAT BACKGROUND CONTAMINATION. Outside the real solid creature silhouettes, pixels must be truly transparent with alpha zero. Keep partial alpha only for a narrow natural antialiased edge of the actual creature contours, not a large fuzzy halo. Clean the transparent spaces between the legs, inside the tail loops, under the crest and between the facial appendages too. Preserve those fine real appendages and thin parts of the creature; remove only unrelated haze and scattered background speckles.\n\nDo not paint a black or white background over the haze. Do not add a checkerboard. The background is genuine empty alpha, including the canvas borders and the gaps between all four cells.\n\nThis is a modular BODY-ONLY sheet. Add ZERO arms and ZERO hands, no projectile, no attack effect, no glow, no shadow, no labels, no grid lines, no border, no extra objects. The four poses must stay the same: emission, recovery/reaction, collapse, neutralized body. Keep the bodies' existing ground/contact placements; this edit does not fix or change their anchors.\n\nReturn the full corrected 1254 x 1254 transparent RGBA atlas, retaining all existing creature pixels and fine contour detail as faithfully as possible while removing the unwanted surrounding fog and red/gray residue.\n",
+      "promptSha256": "fb4e46cdce25af77d457ae7ccc8d346b43c7395d4886cd20ea27ab57fab0d08f",
+      "sourcePixelsUnchangedAfterGeneration": true,
+      "disposition": "Accepted corrected source after raw PNG and dark/light review. Final body pivots follow measured support; requested pixel/position preservation is not asserted as exact between generations."
+    }
+  ],
+  "art": [
+    {
+      "family": "rest",
+      "path": "assets/queen-mother/v188/adult-rest-anticipation.png",
+      "imageKey": "queen-mother-rest-v188",
+      "sha256": "f22750aa4da56bf7200087acc5fe727052da076c8ecaf8f61bde64a4ebc7eb72",
+      "bytes": 1397419,
+      "generationId": "modular-body-4pose-v1",
+      "sourcePixelsUnchanged": true,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sourceFacing": "right",
+      "layout": {
+        "rows": 2,
+        "columns": 2,
+        "cellWidth": 627,
+        "cellHeight": 627,
+        "order": "row-major"
+      },
+      "measurementsSha256": "4fd6f4d4dd1ba03dd82fabd9c419d82e6b3061753f2e72e63523f1152c2fb3b9",
+      "measurements": {
+        "cells": [
+          {
+            "index": 0,
+            "id": "rest-0",
+            "rectXYWH": [
+              0,
+              0,
+              627,
+              627
+            ],
+            "alpha": {
+              "1": {
+                "bboxLTRBExclusive": [
+                  45,
+                  14,
+                  627,
+                  627
+                ],
+                "marginLTRB": [
+                  45,
+                  14,
+                  0,
+                  0
+                ],
+                "pixels": 124221,
+                "touchesCellBoundary": true
+              },
+              "16": {
+                "bboxLTRBExclusive": [
+                  89,
+                  16,
+                  566,
+                  609
+                ],
+                "marginLTRB": [
+                  89,
+                  16,
+                  61,
+                  18
+                ],
+                "pixels": 96409,
+                "touchesCellBoundary": false
+              },
+              "32": {
+                "bboxLTRBExclusive": [
+                  89,
+                  16,
+                  566,
+                  609
+                ],
+                "marginLTRB": [
+                  89,
+                  16,
+                  61,
+                  18
+                ],
+                "pixels": 95401,
+                "touchesCellBoundary": false
+              },
+              "128": {
+                "bboxLTRBExclusive": [
+                  89,
+                  17,
+                  565,
+                  608
+                ],
+                "marginLTRB": [
+                  89,
+                  17,
+                  62,
+                  19
+                ],
+                "pixels": 92214,
+                "touchesCellBoundary": false
+              }
+            },
+            "footSupportWindows": {
+              "rear-left-foot": {
+                "windowXYWH": [
+                  100,
+                  580,
+                  160,
+                  47
+                ],
+                "alpha128BBoxLTRBExclusive": [
+                  118,
+                  580,
+                  204,
+                  608
+                ],
+                "lastOpaqueRowInclusive": 607
+              },
+              "front-right-foot": {
+                "windowXYWH": [
+                  280,
+                  580,
+                  190,
+                  47
+                ],
+                "alpha128BBoxLTRBExclusive": [
+                  328,
+                  580,
+                  423,
+                  608
+                ],
+                "lastOpaqueRowInclusive": 607
+              }
+            }
+          },
+          {
+            "index": 1,
+            "id": "rest-1",
+            "rectXYWH": [
+              627,
+              0,
+              627,
+              627
+            ],
+            "alpha": {
+              "1": {
+                "bboxLTRBExclusive": [
+                  0,
+                  14,
+                  605,
+                  627
+                ],
+                "marginLTRB": [
+                  0,
+                  14,
+                  22,
+                  0
+                ],
+                "pixels": 123138,
+                "touchesCellBoundary": true
+              },
+              "16": {
+                "bboxLTRBExclusive": [
+                  88,
+                  16,
+                  552,
+                  609
+                ],
+                "marginLTRB": [
+                  88,
+                  16,
+                  75,
+                  18
+                ],
+                "pixels": 95976,
+                "touchesCellBoundary": false
+              },
+              "32": {
+                "bboxLTRBExclusive": [
+                  88,
+                  16,
+                  552,
+                  609
+                ],
+                "marginLTRB": [
+                  88,
+                  16,
+                  75,
+                  18
+                ],
+                "pixels": 95006,
+                "touchesCellBoundary": false
+              },
+              "128": {
+                "bboxLTRBExclusive": [
+                  89,
+                  17,
+                  551,
+                  608
+                ],
+                "marginLTRB": [
+                  89,
+                  17,
+                  76,
+                  19
+                ],
+                "pixels": 91832,
+                "touchesCellBoundary": false
+              }
+            },
+            "footSupportWindows": {
+              "rear-left-foot": {
+                "windowXYWH": [
+                  100,
+                  580,
+                  160,
+                  47
+                ],
+                "alpha128BBoxLTRBExclusive": [
+                  117,
+                  580,
+                  204,
+                  608
+                ],
+                "lastOpaqueRowInclusive": 607
+              },
+              "front-right-foot": {
+                "windowXYWH": [
+                  280,
+                  580,
+                  190,
+                  47
+                ],
+                "alpha128BBoxLTRBExclusive": [
+                  328,
+                  580,
+                  422,
+                  608
+                ],
+                "lastOpaqueRowInclusive": 607
+              }
+            }
+          },
+          {
+            "index": 2,
+            "id": "anticipation-early",
+            "rectXYWH": [
+              0,
+              627,
+              627,
+              627
+            ],
+            "alpha": {
+              "1": {
+                "bboxLTRBExclusive": [
+                  39,
+                  0,
+                  627,
+                  611
+                ],
+                "marginLTRB": [
+                  39,
+                  0,
+                  0,
+                  16
+                ],
+                "pixels": 123333,
+                "touchesCellBoundary": true
+              },
+              "16": {
+                "bboxLTRBExclusive": [
+                  87,
+                  17,
+                  562,
+                  609
+                ],
+                "marginLTRB": [
+                  87,
+                  17,
+                  65,
+                  18
+                ],
+                "pixels": 96062,
+                "touchesCellBoundary": false
+              },
+              "32": {
+                "bboxLTRBExclusive": [
+                  87,
+                  17,
+                  562,
+                  609
+                ],
+                "marginLTRB": [
+                  87,
+                  17,
+                  65,
+                  18
+                ],
+                "pixels": 94966,
+                "touchesCellBoundary": false
+              },
+              "128": {
+                "bboxLTRBExclusive": [
+                  88,
+                  18,
+                  561,
+                  608
+                ],
+                "marginLTRB": [
+                  88,
+                  18,
+                  66,
+                  19
+                ],
+                "pixels": 91594,
+                "touchesCellBoundary": false
+              }
+            },
+            "footSupportWindows": {
+              "rear-left-foot": {
+                "windowXYWH": [
+                  100,
+                  580,
+                  160,
+                  47
+                ],
+                "alpha128BBoxLTRBExclusive": [
+                  118,
+                  580,
+                  204,
+                  608
+                ],
+                "lastOpaqueRowInclusive": 607
+              },
+              "front-right-foot": {
+                "windowXYWH": [
+                  280,
+                  580,
+                  190,
+                  47
+                ],
+                "alpha128BBoxLTRBExclusive": [
+                  328,
+                  580,
+                  423,
+                  608
+                ],
+                "lastOpaqueRowInclusive": 607
+              }
+            }
+          },
+          {
+            "index": 3,
+            "id": "anticipation-advanced",
+            "rectXYWH": [
+              627,
+              627,
+              627,
+              627
+            ],
+            "alpha": {
+              "1": {
+                "bboxLTRBExclusive": [
+                  1,
+                  1,
+                  601,
+                  613
+                ],
+                "marginLTRB": [
+                  1,
+                  1,
+                  26,
+                  14
+                ],
+                "pixels": 125248,
+                "touchesCellBoundary": false
+              },
+              "16": {
+                "bboxLTRBExclusive": [
+                  85,
+                  17,
+                  557,
+                  609
+                ],
+                "marginLTRB": [
+                  85,
+                  17,
+                  70,
+                  18
+                ],
+                "pixels": 97446,
+                "touchesCellBoundary": false
+              },
+              "32": {
+                "bboxLTRBExclusive": [
+                  85,
+                  18,
+                  557,
+                  609
+                ],
+                "marginLTRB": [
+                  85,
+                  18,
+                  70,
+                  18
+                ],
+                "pixels": 96392,
+                "touchesCellBoundary": false
+              },
+              "128": {
+                "bboxLTRBExclusive": [
+                  86,
+                  18,
+                  556,
+                  608
+                ],
+                "marginLTRB": [
+                  86,
+                  18,
+                  71,
+                  19
+                ],
+                "pixels": 93043,
+                "touchesCellBoundary": false
+              }
+            },
+            "footSupportWindows": {
+              "rear-left-foot": {
+                "windowXYWH": [
+                  100,
+                  580,
+                  160,
+                  47
+                ],
+                "alpha128BBoxLTRBExclusive": [
+                  117,
+                  580,
+                  204,
+                  608
+                ],
+                "lastOpaqueRowInclusive": 607
+              },
+              "front-right-foot": {
+                "windowXYWH": [
+                  280,
+                  580,
+                  190,
+                  47
+                ],
+                "alpha128BBoxLTRBExclusive": [
+                  328,
+                  580,
+                  423,
+                  608
+                ],
+                "lastOpaqueRowInclusive": 607
+              }
+            }
+          }
+        ],
+        "outerBorderMaxAlpha": 0,
+        "seamMaxAlpha": 1,
+        "alphaStatistics": {
+          "min": 0,
+          "max": 255,
+          "transparent": 1076576,
+          "partial": 495023,
+          "opaque": 917
+        }
+      }
+    },
+    {
+      "family": "action",
+      "path": "assets/queen-mother/v188/adult-action-death.png",
+      "imageKey": "queen-mother-action-v188",
+      "sha256": "d4fe4d25f496f1245de056666c96851a7ca41fc9342e8ef1a0f88eb2713ce725",
+      "bytes": 1417281,
+      "generationId": "modular-body-action-death-4pose-v2",
+      "sourcePixelsUnchanged": true,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sourceFacing": "right",
+      "layout": {
+        "rows": 2,
+        "columns": 2,
+        "cellWidth": 627,
+        "cellHeight": 627,
+        "order": "row-major"
+      },
+      "measurementsSha256": "6587e987fd17bfe22ceb90d2466add6f8efa4e8e8dbaa6c38ab5172ab4316888",
+      "measurements": {
+        "cells": [
+          {
+            "index": 0,
+            "id": "emission",
+            "rectXYWH": [
+              0,
+              0,
+              627,
+              627
+            ],
+            "alpha": {
+              "1": {
+                "bboxLTRBExclusive": [
+                  33,
+                  10,
+                  627,
+                  627
+                ],
+                "marginLTRB": [
+                  33,
+                  10,
+                  0,
+                  0
+                ],
+                "pixels": 144696,
+                "touchesCellBoundary": true
+              },
+              "16": {
+                "bboxLTRBExclusive": [
+                  80,
+                  13,
+                  590,
+                  614
+                ],
+                "marginLTRB": [
+                  80,
+                  13,
+                  37,
+                  13
+                ],
+                "pixels": 108093,
+                "touchesCellBoundary": false
+              },
+              "32": {
+                "bboxLTRBExclusive": [
+                  81,
+                  13,
+                  590,
+                  614
+                ],
+                "marginLTRB": [
+                  81,
+                  13,
+                  37,
+                  13
+                ],
+                "pixels": 107116,
+                "touchesCellBoundary": false
+              },
+              "128": {
+                "bboxLTRBExclusive": [
+                  81,
+                  13,
+                  590,
+                  613
+                ],
+                "marginLTRB": [
+                  81,
+                  13,
+                  37,
+                  14
+                ],
+                "pixels": 104167,
+                "touchesCellBoundary": false
+              },
+              "250": {
+                "bboxLTRBExclusive": [
+                  82,
+                  26,
+                  588,
+                  612
+                ],
+                "marginLTRB": [
+                  82,
+                  26,
+                  39,
+                  15
+                ],
+                "pixels": 90910,
+                "touchesCellBoundary": false
+              }
+            }
+          },
+          {
+            "index": 1,
+            "id": "recovery-reaction",
+            "rectXYWH": [
+              627,
+              0,
+              627,
+              627
+            ],
+            "alpha": {
+              "1": {
+                "bboxLTRBExclusive": [
+                  1,
+                  17,
+                  595,
+                  627
+                ],
+                "marginLTRB": [
+                  1,
+                  17,
+                  32,
+                  0
+                ],
+                "pixels": 140113,
+                "touchesCellBoundary": true
+              },
+              "16": {
+                "bboxLTRBExclusive": [
+                  70,
+                  20,
+                  541,
+                  614
+                ],
+                "marginLTRB": [
+                  70,
+                  20,
+                  86,
+                  13
+                ],
+                "pixels": 105867,
+                "touchesCellBoundary": false
+              },
+              "32": {
+                "bboxLTRBExclusive": [
+                  70,
+                  21,
+                  541,
+                  614
+                ],
+                "marginLTRB": [
+                  70,
+                  21,
+                  86,
+                  13
+                ],
+                "pixels": 104819,
+                "touchesCellBoundary": false
+              },
+              "128": {
+                "bboxLTRBExclusive": [
+                  70,
+                  21,
+                  540,
+                  613
+                ],
+                "marginLTRB": [
+                  70,
+                  21,
+                  87,
+                  14
+                ],
+                "pixels": 101881,
+                "touchesCellBoundary": false
+              },
+              "250": {
+                "bboxLTRBExclusive": [
+                  72,
+                  22,
+                  537,
+                  612
+                ],
+                "marginLTRB": [
+                  72,
+                  22,
+                  90,
+                  15
+                ],
+                "pixels": 87951,
+                "touchesCellBoundary": false
+              }
+            }
+          },
+          {
+            "index": 2,
+            "id": "collapse",
+            "rectXYWH": [
+              0,
+              627,
+              627,
+              627
+            ],
+            "alpha": {
+              "1": {
+                "bboxLTRBExclusive": [
+                  0,
+                  0,
+                  627,
+                  607
+                ],
+                "marginLTRB": [
+                  0,
+                  0,
+                  0,
+                  20
+                ],
+                "pixels": 141097,
+                "touchesCellBoundary": true
+              },
+              "16": {
+                "bboxLTRBExclusive": [
+                  56,
+                  146,
+                  603,
+                  570
+                ],
+                "marginLTRB": [
+                  56,
+                  146,
+                  24,
+                  57
+                ],
+                "pixels": 104586,
+                "touchesCellBoundary": false
+              },
+              "32": {
+                "bboxLTRBExclusive": [
+                  57,
+                  146,
+                  602,
+                  570
+                ],
+                "marginLTRB": [
+                  57,
+                  146,
+                  25,
+                  57
+                ],
+                "pixels": 103662,
+                "touchesCellBoundary": false
+              },
+              "128": {
+                "bboxLTRBExclusive": [
+                  57,
+                  147,
+                  602,
+                  570
+                ],
+                "marginLTRB": [
+                  57,
+                  147,
+                  25,
+                  57
+                ],
+                "pixels": 100860,
+                "touchesCellBoundary": false
+              },
+              "250": {
+                "bboxLTRBExclusive": [
+                  63,
+                  149,
+                  597,
+                  569
+                ],
+                "marginLTRB": [
+                  63,
+                  149,
+                  30,
+                  58
+                ],
+                "pixels": 87891,
+                "touchesCellBoundary": false
+              }
+            }
+          },
+          {
+            "index": 3,
+            "id": "neutralized",
+            "rectXYWH": [
+              627,
+              627,
+              627,
+              627
+            ],
+            "alpha": {
+              "1": {
+                "bboxLTRBExclusive": [
+                  0,
+                  0,
+                  603,
+                  605
+                ],
+                "marginLTRB": [
+                  0,
+                  0,
+                  24,
+                  22
+                ],
+                "pixels": 97868,
+                "touchesCellBoundary": true
+              },
+              "16": {
+                "bboxLTRBExclusive": [
+                  55,
+                  296,
+                  599,
+                  549
+                ],
+                "marginLTRB": [
+                  55,
+                  296,
+                  28,
+                  78
+                ],
+                "pixels": 80574,
+                "touchesCellBoundary": false
+              },
+              "32": {
+                "bboxLTRBExclusive": [
+                  55,
+                  296,
+                  598,
+                  549
+                ],
+                "marginLTRB": [
+                  55,
+                  296,
+                  29,
+                  78
+                ],
+                "pixels": 80071,
+                "touchesCellBoundary": false
+              },
+              "128": {
+                "bboxLTRBExclusive": [
+                  56,
+                  297,
+                  598,
+                  548
+                ],
+                "marginLTRB": [
+                  56,
+                  297,
+                  29,
+                  79
+                ],
+                "pixels": 78411,
+                "touchesCellBoundary": false
+              },
+              "250": {
+                "bboxLTRBExclusive": [
+                  57,
+                  305,
+                  594,
+                  547
+                ],
+                "marginLTRB": [
+                  57,
+                  305,
+                  33,
+                  80
+                ],
+                "pixels": 70931,
+                "touchesCellBoundary": false
+              }
+            }
+          }
+        ],
+        "outerBorderMaxAlpha": 1,
+        "seamMaxAlpha": 1,
+        "alphaStatistics": {
+          "min": 0,
+          "max": 255,
+          "transparent": 1048742,
+          "partial": 522913,
+          "opaque": 861
+        },
+        "backgroundProbes": [
+          {
+            "xy": [
+              250,
+              0
+            ],
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "previousAlpha": 4
+          },
+          {
+            "xy": [
+              400,
+              0
+            ],
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "previousAlpha": 25
+          },
+          {
+            "xy": [
+              500,
+              0
+            ],
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "previousAlpha": 23
+          },
+          {
+            "xy": [
+              600,
+              0
+            ],
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "previousAlpha": 9
+          },
+          {
+            "xy": [
+              400,
+              30
+            ],
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "previousAlpha": 19
+          },
+          {
+            "xy": [
+              600,
+              50
+            ],
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "previousAlpha": 7
+          },
+          {
+            "xy": [
+              850,
+              0
+            ],
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "previousAlpha": 7
+          },
+          {
+            "xy": [
+              1000,
+              0
+            ],
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "previousAlpha": 30
+          },
+          {
+            "xy": [
+              1200,
+              0
+            ],
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "previousAlpha": 10
+          },
+          {
+            "xy": [
+              900,
+              50
+            ],
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "previousAlpha": 8
+          },
+          {
+            "xy": [
+              622,
+              15
+            ],
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "previousAlpha": 8
+          },
+          {
+            "xy": [
+              635,
+              15
+            ],
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "previousAlpha": 6
+          },
+          {
+            "xy": [
+              625,
+              300
+            ],
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "previousAlpha": 0
+          },
+          {
+            "xy": [
+              600,
+              625
+            ],
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "previousAlpha": 0
+          }
+        ],
+        "distantAlphaComparison": {
+          "v1": {
+            "definition": "Pixels more than3source pixels from the alpha128 core; a diagnostic, not a semantic silhouette segmentation.",
+            "nonzeroSamples": 476013,
+            "maxAlpha": 41,
+            "samplesAtLeast16": 22287,
+            "samplesAtLeast32": 2714
+          },
+          "v2": {
+            "definition": "Pixels more than3source pixels from the alpha128 core; a diagnostic, not a semantic silhouette segmentation.",
+            "nonzeroSamples": 102406,
+            "maxAlpha": 117,
+            "samplesAtLeast16": 40,
+            "samplesAtLeast32": 4
+          }
+        },
+        "v1PixelComparison": {
+          "dimensionsEqual": true,
+          "changedPixels": 875571,
+          "samePixels": 696945,
+          "statement": "The built-in edit may re-render foreground detail; exact foreground pixel preservation is not claimed."
+        }
+      }
+    },
+    {
+      "family": "arms",
+      "path": "assets/queen-mother/v188/adult-arms.png",
+      "imageKey": "queen-mother-arms-v188",
+      "sha256": "d6e34554ffbb5a0b0a444c4e3f91d956691c8f3fd248ed99baa0481bd92bf593",
+      "bytes": 677912,
+      "generationId": "modular-arms-4part-v1",
+      "sourcePixelsUnchanged": true,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sourceFacing": "right",
+      "layout": {
+        "rows": 2,
+        "columns": 2,
+        "cellWidth": 627,
+        "cellHeight": 627,
+        "order": "row-major"
+      },
+      "measurementsSha256": "140fa1973886533e2d16ee27aefcfb5093f03da99cd7b60a9fbfb081aaad67f5",
+      "measurements": {
+        "cells": [
+          {
+            "index": 0,
+            "id": "large-near",
+            "rectXYWH": [
+              0,
+              0,
+              627,
+              627
+            ],
+            "alpha": {
+              "1": {
+                "bboxLTRBExclusive": [
+                  47,
+                  71,
+                  627,
+                  627
+                ],
+                "marginLTRB": [
+                  47,
+                  71,
+                  0,
+                  0
+                ],
+                "pixels": 84876,
+                "touchesCellBoundary": true
+              },
+              "16": {
+                "bboxLTRBExclusive": [
+                  50,
+                  93,
+                  587,
+                  592
+                ],
+                "marginLTRB": [
+                  50,
+                  93,
+                  40,
+                  35
+                ],
+                "pixels": 77730,
+                "touchesCellBoundary": false
+              },
+              "32": {
+                "bboxLTRBExclusive": [
+                  50,
+                  93,
+                  587,
+                  592
+                ],
+                "marginLTRB": [
+                  50,
+                  93,
+                  40,
+                  35
+                ],
+                "pixels": 77309,
+                "touchesCellBoundary": false
+              },
+              "128": {
+                "bboxLTRBExclusive": [
+                  50,
+                  94,
+                  586,
+                  592
+                ],
+                "marginLTRB": [
+                  50,
+                  94,
+                  41,
+                  35
+                ],
+                "pixels": 75831,
+                "touchesCellBoundary": false
+              }
+            }
+          },
+          {
+            "index": 1,
+            "id": "large-far",
+            "rectXYWH": [
+              627,
+              0,
+              627,
+              627
+            ],
+            "alpha": {
+              "1": {
+                "bboxLTRBExclusive": [
+                  7,
+                  35,
+                  593,
+                  627
+                ],
+                "marginLTRB": [
+                  7,
+                  35,
+                  34,
+                  0
+                ],
+                "pixels": 82544,
+                "touchesCellBoundary": true
+              },
+              "16": {
+                "bboxLTRBExclusive": [
+                  51,
+                  89,
+                  588,
+                  593
+                ],
+                "marginLTRB": [
+                  51,
+                  89,
+                  39,
+                  34
+                ],
+                "pixels": 75114,
+                "touchesCellBoundary": false
+              },
+              "32": {
+                "bboxLTRBExclusive": [
+                  51,
+                  89,
+                  588,
+                  593
+                ],
+                "marginLTRB": [
+                  51,
+                  89,
+                  39,
+                  34
+                ],
+                "pixels": 74701,
+                "touchesCellBoundary": false
+              },
+              "128": {
+                "bboxLTRBExclusive": [
+                  52,
+                  90,
+                  587,
+                  592
+                ],
+                "marginLTRB": [
+                  52,
+                  90,
+                  40,
+                  35
+                ],
+                "pixels": 73220,
+                "touchesCellBoundary": false
+              }
+            }
+          },
+          {
+            "index": 2,
+            "id": "small-near",
+            "rectXYWH": [
+              0,
+              627,
+              627,
+              627
+            ],
+            "alpha": {
+              "1": {
+                "bboxLTRBExclusive": [
+                  0,
+                  0,
+                  627,
+                  627
+                ],
+                "marginLTRB": [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "pixels": 41636,
+                "touchesCellBoundary": true
+              },
+              "16": {
+                "bboxLTRBExclusive": [
+                  77,
+                  177,
+                  558,
+                  482
+                ],
+                "marginLTRB": [
+                  77,
+                  177,
+                  69,
+                  145
+                ],
+                "pixels": 34217,
+                "touchesCellBoundary": false
+              },
+              "32": {
+                "bboxLTRBExclusive": [
+                  77,
+                  178,
+                  558,
+                  482
+                ],
+                "marginLTRB": [
+                  77,
+                  178,
+                  69,
+                  145
+                ],
+                "pixels": 33907,
+                "touchesCellBoundary": false
+              },
+              "128": {
+                "bboxLTRBExclusive": [
+                  77,
+                  178,
+                  557,
+                  482
+                ],
+                "marginLTRB": [
+                  77,
+                  178,
+                  70,
+                  145
+                ],
+                "pixels": 32797,
+                "touchesCellBoundary": false
+              }
+            }
+          },
+          {
+            "index": 3,
+            "id": "small-far",
+            "rectXYWH": [
+              627,
+              627,
+              627,
+              627
+            ],
+            "alpha": {
+              "1": {
+                "bboxLTRBExclusive": [
+                  1,
+                  1,
+                  609,
+                  627
+                ],
+                "marginLTRB": [
+                  1,
+                  1,
+                  18,
+                  0
+                ],
+                "pixels": 35373,
+                "touchesCellBoundary": true
+              },
+              "16": {
+                "bboxLTRBExclusive": [
+                  84,
+                  196,
+                  525,
+                  406
+                ],
+                "marginLTRB": [
+                  84,
+                  196,
+                  102,
+                  221
+                ],
+                "pixels": 28965,
+                "touchesCellBoundary": false
+              },
+              "32": {
+                "bboxLTRBExclusive": [
+                  84,
+                  196,
+                  525,
+                  405
+                ],
+                "marginLTRB": [
+                  84,
+                  196,
+                  102,
+                  222
+                ],
+                "pixels": 28680,
+                "touchesCellBoundary": false
+              },
+              "128": {
+                "bboxLTRBExclusive": [
+                  85,
+                  197,
+                  524,
+                  405
+                ],
+                "marginLTRB": [
+                  85,
+                  197,
+                  103,
+                  222
+                ],
+                "pixels": 27741,
+                "touchesCellBoundary": false
+              }
+            }
+          }
+        ],
+        "outerBorderMaxAlpha": 1,
+        "seamMaxAlpha": 1,
+        "alphaStatistics": {
+          "min": 0,
+          "max": 255,
+          "transparent": 1328087,
+          "partial": 243165,
+          "opaque": 1264
+        }
+      }
+    }
+  ],
+  "newImageCount": 3,
+  "newImageBytes": 3492612,
+  "runtimeHashes": {
+    "src/queen-mother-art-v188.js": "a22492e65b278c4bce30552e8fd85a748a8171305e73aae87d151cd1b0841187",
+    "src/ecosystem-missions-v131.js": "3b90f5739b4ff282d29304f0dc2aa7ad12150efb80e4b7459d60071ad4f03ec7",
+    "src/ecosystem-systems-v131.js": "4fda558fd365aa872cc656c5565bef204dd967da9a2fb3b8f673d87678b8353f",
+    "src/i18n-en-catalog-v185.js": "4c75f584d9a2a4fc1d7328f0b85a38bd037f75f416131af9cca135012d1daee7",
+    "src/special-operations-v131.js": "433ddc7b821c98b973c10fc9e3aa39bc66c77e8cf9364dd9f1a25d03b70b08af"
+  },
+  "registration": {
+    "sources": {
+      "rest": {
+        "path": "/assets/queen-mother/v188/adult-rest-anticipation.png",
+        "imageKey": "queen-mother-rest-v188",
+        "width": 1254,
+        "height": 1254,
+        "sha256": "f22750aa4da56bf7200087acc5fe727052da076c8ecaf8f61bde64a4ebc7eb72"
+      },
+      "action": {
+        "path": "/assets/queen-mother/v188/adult-action-death.png",
+        "imageKey": "queen-mother-action-v188",
+        "width": 1254,
+        "height": 1254,
+        "sha256": "d4fe4d25f496f1245de056666c96851a7ca41fc9342e8ef1a0f88eb2713ce725"
+      },
+      "arms": {
+        "path": "/assets/queen-mother/v188/adult-arms.png",
+        "imageKey": "queen-mother-arms-v188",
+        "width": 1254,
+        "height": 1254,
+        "sha256": "d6e34554ffbb5a0b0a444c4e3f91d956691c8f3fd248ed99baa0481bd92bf593"
+      }
+    },
+    "frames": {
+      "rest-0": {
+        "sourceId": "rest",
+        "index": 0,
+        "rect": [
+          0,
+          0,
+          627,
+          627
+        ],
+        "pivot": [
+          272,
+          609
+        ],
+        "referenceHeight": 593,
+        "arms": {
+          "large-near": {
+            "attach": [
+              339,
+              182
+            ],
+            "angle": 4
+          },
+          "large-far": {
+            "attach": [
+              344,
+              184
+            ],
+            "angle": -40
+          },
+          "small-near": {
+            "attach": [
+              370,
+              251
+            ],
+            "angle": 50
+          },
+          "small-far": {
+            "attach": [
+              351,
+              232
+            ],
+            "angle": -20
+          }
+        }
+      },
+      "rest-1": {
+        "sourceId": "rest",
+        "index": 1,
+        "rect": [
+          627,
+          0,
+          627,
+          627
+        ],
+        "pivot": [
+          272,
+          609
+        ],
+        "referenceHeight": 593,
+        "arms": {
+          "large-near": {
+            "attach": [
+              339,
+              182
+            ],
+            "angle": 4
+          },
+          "large-far": {
+            "attach": [
+              344,
+              184
+            ],
+            "angle": -40
+          },
+          "small-near": {
+            "attach": [
+              370,
+              251
+            ],
+            "angle": 50
+          },
+          "small-far": {
+            "attach": [
+              351,
+              232
+            ],
+            "angle": -20
+          }
+        }
+      },
+      "anticipation-early": {
+        "sourceId": "rest",
+        "index": 2,
+        "rect": [
+          0,
+          627,
+          627,
+          627
+        ],
+        "pivot": [
+          272,
+          609
+        ],
+        "referenceHeight": 593,
+        "arms": {
+          "large-near": {
+            "attach": [
+              339,
+              182
+            ],
+            "angle": 4
+          },
+          "large-far": {
+            "attach": [
+              344,
+              184
+            ],
+            "angle": -40
+          },
+          "small-near": {
+            "attach": [
+              370,
+              251
+            ],
+            "angle": 50
+          },
+          "small-far": {
+            "attach": [
+              351,
+              232
+            ],
+            "angle": -20
+          }
+        }
+      },
+      "anticipation-advanced": {
+        "sourceId": "rest",
+        "index": 3,
+        "rect": [
+          627,
+          627,
+          627,
+          627
+        ],
+        "pivot": [
+          272,
+          609
+        ],
+        "referenceHeight": 593,
+        "arms": {
+          "large-near": {
+            "attach": [
+              339,
+              182
+            ],
+            "angle": 4
+          },
+          "large-far": {
+            "attach": [
+              344,
+              184
+            ],
+            "angle": -40
+          },
+          "small-near": {
+            "attach": [
+              370,
+              251
+            ],
+            "angle": 50
+          },
+          "small-far": {
+            "attach": [
+              351,
+              232
+            ],
+            "angle": -20
+          }
+        }
+      },
+      "emission": {
+        "sourceId": "action",
+        "index": 0,
+        "rect": [
+          0,
+          0,
+          627,
+          627
+        ],
+        "pivot": [
+          272,
+          614
+        ],
+        "referenceHeight": 593,
+        "arms": {
+          "large-near": {
+            "attach": [
+              350,
+              180
+            ],
+            "angle": 4
+          },
+          "large-far": {
+            "attach": [
+              355,
+              182
+            ],
+            "angle": -40
+          },
+          "small-near": {
+            "attach": [
+              381,
+              249
+            ],
+            "angle": 50
+          },
+          "small-far": {
+            "attach": [
+              362,
+              230
+            ],
+            "angle": -20
+          }
+        }
+      },
+      "recovery": {
+        "sourceId": "action",
+        "index": 1,
+        "rect": [
+          627,
+          0,
+          627,
+          627
+        ],
+        "pivot": [
+          272,
+          614
+        ],
+        "referenceHeight": 593,
+        "arms": {
+          "large-near": {
+            "attach": [
+              328,
+              203
+            ],
+            "angle": 4
+          },
+          "large-far": {
+            "attach": [
+              333,
+              205
+            ],
+            "angle": -40
+          },
+          "small-near": {
+            "attach": [
+              359,
+              272
+            ],
+            "angle": 50
+          },
+          "small-far": {
+            "attach": [
+              340,
+              253
+            ],
+            "angle": -20
+          }
+        }
+      },
+      "collapse": {
+        "sourceId": "action",
+        "index": 2,
+        "rect": [
+          0,
+          627,
+          627,
+          627
+        ],
+        "pivot": [
+          272,
+          570
+        ],
+        "referenceHeight": 593,
+        "arms": {
+          "large-near": {
+            "attach": [
+              365,
+              245
+            ],
+            "angle": 40
+          },
+          "large-far": {
+            "attach": [
+              370,
+              247
+            ],
+            "angle": 0
+          },
+          "small-near": {
+            "attach": [
+              400,
+              285
+            ],
+            "angle": 90
+          },
+          "small-far": {
+            "attach": [
+              385,
+              265
+            ],
+            "angle": 20
+          }
+        }
+      },
+      "neutralized": {
+        "sourceId": "action",
+        "index": 3,
+        "rect": [
+          627,
+          627,
+          627,
+          627
+        ],
+        "pivot": [
+          272,
+          549
+        ],
+        "referenceHeight": 593,
+        "arms": {
+          "large-near": {
+            "attach": [
+              370,
+              410
+            ],
+            "angle": 95
+          },
+          "large-far": {
+            "attach": [
+              375,
+              412
+            ],
+            "angle": 110
+          },
+          "small-near": {
+            "attach": [
+              415,
+              440
+            ],
+            "angle": 100
+          },
+          "small-far": {
+            "attach": [
+              395,
+              425
+            ],
+            "angle": 120
+          }
+        }
+      }
+    },
+    "arms": {
+      "large-near": {
+        "index": 0,
+        "rect": [
+          0,
+          0,
+          627,
+          627
+        ],
+        "pivot": [
+          145,
+          145
+        ],
+        "scale": 0.12
+      },
+      "large-far": {
+        "index": 1,
+        "rect": [
+          627,
+          0,
+          627,
+          627
+        ],
+        "pivot": [
+          130,
+          145
+        ],
+        "scale": 0.115
+      },
+      "small-near": {
+        "index": 2,
+        "rect": [
+          0,
+          627,
+          627,
+          627
+        ],
+        "pivot": [
+          155,
+          205
+        ],
+        "scale": 0.085
+      },
+      "small-far": {
+        "index": 3,
+        "rect": [
+          627,
+          627,
+          627,
+          627
+        ],
+        "pivot": [
+          130,
+          220
+        ],
+        "scale": 0.085
+      }
+    },
+    "presentation": {
+      "referenceBodyHeight": 210,
+      "windupSplit": 0.425,
+      "idleFramesPerSecond": 2,
+      "emissionSeconds": 0.12,
+      "salvoSeconds": 0.32,
+      "collapseSeconds": 0.25,
+      "corpseSeconds": 1.2,
+      "visualBoundsPadding": 4,
+      "layerOrder": [
+        "large-far",
+        "small-far",
+        "body",
+        "large-near",
+        "small-near"
+      ]
+    },
+    "coordinateConvention": "Cell-local source pixels; body pivot at native center of ground contact. Arm scale is world pixels per source pixel at native actor height210, then multiplied by actor.h/210, not by bodyScale.",
+    "bodyScale": "actor.h/593 for all eight poses",
+    "perPoseBoundingBoxScaleFitting": false,
+    "nativeGroundPoint": [
+      "actor.x+actor.w/2",
+      "actor.y+actor.h"
+    ],
+    "sameSourceArmPartsAcrossAllPoses": true,
+    "layerMirror": "One overall mirror preserves far-body-near layer order.",
+    "uncertainty": "Attachment and support coordinates are visual engineering measurements, not exact canonical anatomy. Narrow antialiased fringes remain; no software alpha threshold or resampling was applied to source PNGs.",
+    "deathAlpha": "Native globalAlpha0.3 is applied to each of five components; overlapping components can accumulate opacity. No offscreen group-opacity substitution."
+  },
+  "integration": {
+    "helper": "src/queen-mother-art-v188.js",
+    "owner": "src/ecosystem-missions-v131.js",
+    "operationId": "queen-mother-song",
+    "actorId": "eco131-boss",
+    "role": "boss",
+    "currentActorMembershipRequired": true,
+    "detachedStaleAndOtherEcosystemOwnersRejected": true,
+    "physicalAabb": {
+      "width": 170,
+      "height": 210
+    },
+    "nativeMaxHealth": 600,
+    "nativePhases": 4,
+    "choirsRequired": 3,
+    "nativeWindupSeconds": 0.85,
+    "nativeProjectileOrigin": [
+      "actor.x+actor.w/2",
+      "actor.y+actor.h*0.48"
+    ],
+    "projectileOriginMovedToDrawnMouth": false,
+    "salvoCue": "Private WeakMap marker only after new owned projectiles that are not held by the native outer insertion-grace owner. Native update advances and expires it before AI early returns; draw only reads.",
+    "insertionGrace": "The outer insertion-safe-zone mixin can truncate new projectiles in its finally block. A matching insertionGraceEnemyV188 owner prevents a false visual shot; the native four-second protection and projectile rules are unchanged.",
+    "insertionGraceOwnerSource": {
+      "path": "src/insertion-safe-zone-v188.js",
+      "sha256": "6016910403aa17b43d2c9ce4b68bf4d17e42bb64df902a9f86ea5356b64400f1",
+      "modifiedByThisLot": false
+    },
+    "phaseChangeCreatesSalvoCue": false,
+    "clockWrapReplaysCue": false,
+    "resume": "Successful resume creates a new owner without replay; rejected resume retains old actor and cue.",
+    "loading": "Three exact same-origin PNG sources admitted atomically. Entry and successful resume may load/retry; drawing and late image callbacks cannot change actor state.",
+    "nativeNameHealthAndWarningPassRetained": true,
+    "culling": "Conservative full-cell union of bodies and arms across poses and mirrors, only for the current ready owner. No physical collision expansion.",
+    "nativeCorpseSeconds": 1.2,
+    "nativeCorpseComponentAlpha": 0.3,
+    "saveSchema": 52,
+    "newSavedActorFields": [],
+    "newRafOrIndependentClock": false
+  },
+  "verification": {
+    "sourceVerifier": "scripts/verify-queen-mother-art-v188.mjs",
+    "qaReport": "docs/development/QUEEN_MOTHER_ART_QA_20261117.md",
+    "nativeRenderReceipt": "docs/development/QUEEN_MOTHER_ART_RENDER_RECEIPT_20261117.json",
+    "overview": "docs/development/QUEEN_MOTHER_ART_OVERVIEW_20261117.png",
+    "sourceAcceptanceIsNativeValidation": false,
+    "localBrowserJourneyClaimed": false
+  },
+  "remainingScope": {
+    "closedLocalArtDebt": "dedicated-queen-mother-animation",
+    "implementationStatus": "partial",
+    "remainingQueenMotherDebt": [
+      "complete-royal-cast"
+    ],
+    "notProducedHere": [
+      "illustrated Choirs and guards",
+      "complete royal cast",
+      "full TR-0 arc",
+      "new boss attacks",
+      "cinematics and extended acts"
+    ],
+    "registryCounts": {
+      "total": 21,
+      "playable": 21,
+      "partial": 19,
+      "effective": 2,
+      "missing": 0
+    },
+    "canonExact": false
+  }
+}
