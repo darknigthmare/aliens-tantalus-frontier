@@ -1,3 +1,4 @@
+import { publicXenoPriorityPathAdmissionV201, PUBLIC_XENO_PRIORITY_DIRECTORY_V201 } from './public-xeno-priority-admissions-v201.mjs';
 import { publicXenoSuperPathAdmissionV200, PUBLIC_XENO_SUPER_DIRECTORY_V200 } from './public-xeno-super-admissions-v200.mjs';
 import { publicXenoActionPathAdmissionV199, PUBLIC_XENO_ACTION_DIRECTORY_V199 } from './public-xeno-action-admissions-v199.mjs';
 import { publicXenoPriorityStagePathAdmissionV198, PUBLIC_PRIORITY_STAGE_DIRECTORY_V198 } from './public-xeno-priority-stage-admissions-v198.mjs';
@@ -258,6 +259,8 @@ export function createBuildAssetFilter(projectRoot, {
     if (originalArenaAdmissionV193 !== null) return originalArenaAdmissionV193;
     const franchiseAdmissionV192 = publicXenoFranchiseStagePathAdmissionV192(sourcePath, { directory: PUBLIC_XENO_FRANCHISE_STAGE_DIRECTORIES_V192.includes(sourcePath) });
     if (franchiseAdmissionV192 !== null) return franchiseAdmissionV192;
+    const priorityAdmissionV201 = publicXenoPriorityPathAdmissionV201(sourcePath, { directory: sourcePath === PUBLIC_XENO_PRIORITY_DIRECTORY_V201 });
+    if (priorityAdmissionV201 !== null) return priorityAdmissionV201;
     const superAdmissionV200 = publicXenoSuperPathAdmissionV200(sourcePath, { directory: sourcePath === PUBLIC_XENO_SUPER_DIRECTORY_V200 });
     if (superAdmissionV200 !== null) return superAdmissionV200;
     const actionAdmissionV199 = publicXenoActionPathAdmissionV199(sourcePath, { directory: sourcePath === PUBLIC_XENO_ACTION_DIRECTORY_V199 });

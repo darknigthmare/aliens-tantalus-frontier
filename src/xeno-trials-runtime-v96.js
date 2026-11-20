@@ -1,7 +1,8 @@
 import { createXenoTrialsOutroV155, advanceXenoTrialsOutroV155, skipXenoTrialsOutroV155,
  getXenoTrialsSequenceCueV155, sampleXenoTrialsSequenceV155, skipXenoTrialsIntroV155,
  createXenoTrialsTerminalV156, createXenoTrialsTauntV156, advanceXenoTrialsTauntV156, getXenoTrialsSequenceCueV156, createXenoTrialsExitV157, getXenoTrialsExitViewV157, createXenoTrialsLandingV157, getXenoTrialsLandingViewV157 } from './xeno-trials-sequences-v155.js';
-import { getXenoTrialsRigV154, getXenoTrialsRigV197, getXenoTrialsRigV199, getXenoTrialsRigCueV154, sampleXenoTrialsRigV154, drawXenoTrialsRigV154, sampleXenoTrialsExitPoseV157 } from './xeno-trials-rig-v154.js';
+import { getXenoTrialsRigV154, getXenoTrialsRigV197, getXenoTrialsRigV199, getXenoTrialsRigV201,
+  getXenoTrialsRigCueV154, sampleXenoTrialsRigV154, drawXenoTrialsRigV154, sampleXenoTrialsExitPoseV157 } from './xeno-trials-rig-v154.js';
 import { createXenoTrialsPilotOutroV197, getXenoTrialsPilotSequenceV197 } from './xeno-trials-pilot-sequences-v197.js';
 import { getXenoTrialsGrappleViewV153, drawXenoTrialsGrappleV153 } from './xeno-trials-grapple-v153.js';
 import { drawXenoTrialsAcidV152 } from './xeno-trials-acid-pools-v152.js';
@@ -22,6 +23,7 @@ import { drawSynthConeV110 } from './synth-combat-v110.js';
 import { getXenoTrialsCaptureAssetsV163, getXenoTrialsCaptureViewV163, getXenoTrialsCaptureReceiptV163,
  drawXenoTrialsCaptureTargetV163, sampleXenoTrialsPreparationV163 } from './xeno-trials-capture-v163.js';
 import { getXenoTrialsHordeProtocolV180 } from './xeno-trials-horde-v180.js';
+import { drawXenoTrialsReinforcementV201 } from './xeno-trials-reinforcements-v201.js';
 import { getXenoTrialsStageAssetsV180, getXenoTrialsStageDepthViewV180 } from './xeno-trials-stage-depth-v180.js';
 import { getXenoTrialsStageSceneV190, getXenoTrialsStageAssetsV190 } from './xeno-trials-stage-scenes-v190.js';
 import { drawXenoTrialsStageRearV190, drawXenoTrialsStageFrontV190 } from './xeno-trials-stage-scenes-render-v190.js';
@@ -111,10 +113,12 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   let captureViewV163 = null;
   let stageSceneRearV190 = null, stageSceneFrontV190 = null;
   let stageSceneRearV192 = null, stageSceneFrontV192 = null;
+  let reinforcementV201 = null;
   const snapshot = () => ({ ...getXenoTrialsSnapshotV96(match), presentation: presentationView(),
     audioV189: sound.getState(),
     stageSceneV190: { rear: stageSceneRearV190, front: stageSceneFrontV190 },
     stageSceneV192: { rear: stageSceneRearV192, front: stageSceneFrontV192 },
+    ...(reinforcementV201 ? { reinforcementV201 } : {}),
     operationViewV188: getXenoTrialsOperationHudV188(match), stageHazardViewV188: getXenoTrialsStageHazardViewV188(match),
     resumedV186: Boolean(hordeCheckpoint), checkpointV186: { ...checkpointStatus },
     ...(duelCheckpoint ? { resumedV197: true } : {}),
@@ -288,6 +292,8 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       { reducedMotion: reduceMotion(), phase: match.phase, phaseTime: match.phaseTime });
     stageSceneRearV192 = drawXenoTrialsFranchiseStageRearV192(context, stage, images, cameraView, match.tick,
       { reducedMotion: reduceMotion(), phase: match.phase, phaseTime: match.phaseTime });
+    reinforcementV201 = loaded && !assetFailure && !presentationView().blocksSimulation
+      ? drawXenoTrialsReinforcementV201(context, match, cameraView, reduceMotion()) : null;
   }
   function drawFighter(fighter, preparedReaction = null) {
     const exitView=getXenoTrialsExitViewV157(match,fighter,exitV157,reduceMotion());
@@ -326,7 +332,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     const pilotPose = !exitView && !captureViewV163 && !sequenceCue
       && getXenoTrialsPilotSequenceV197(historicalRig, match, fighter, presentationState, outroV155, reducedMotion);
     const authoredRig = !pilotPose && !sequenceCue && !exitView && !captureViewV163
-      && (getXenoTrialsRigV199(definition, art) || getXenoTrialsRigV197(definition, art));
+      && (getXenoTrialsRigV201(definition, art) || getXenoTrialsRigV199(definition, art) || getXenoTrialsRigV197(definition, art));
     const authoredCue = authoredRig && getXenoTrialsRigCueV154(authoredRig, match, fighter, presentationState);
     const rig = authoredCue ? authoredRig : historicalRig;
     const cue = sequenceCue || authoredCue || (rig && getXenoTrialsRigCueV154(rig, match, fighter, presentationState));
@@ -499,6 +505,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       text(`PV ${Math.ceil(player.hp)} · VAGUE ${horde.wave}/${horde.waveCount}`, 30, 95, 14);
       text(`CONTACTS ${horde.alive} · NEUTRALISÉS ${horde.totalKills}/${horde.totalEnemies}`, 970, 31, 15, '#edba74', 'right');
       text(`${Math.ceil(match.timeRemaining)} s`, 970, 61, 24, '#eee3bd', 'right');
+      if (reinforcementV201 && !isPaused()) text(reinforcementV201.label, 500, 130, 15, '#f5c078', 'center', 580);
       const boss = getXenoTrialsHordeBossViewV186(hordeProtocol, horde, match.fighters);
       if (boss && ['active', 'incoming'].includes(boss.phase)) {
         const definition = getXenoTrialsFighterV96(boss.fighterId);
@@ -709,6 +716,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       if (!outroPlaying()) { running = false; clearInputs(); }
     } else {
       const wasBlocking = presentationView().blocksSimulation, beforeRound = match.round, beforePhase = match.phase;
+      const beforeHordePhase = match.hordeV180?.phase;
       presentation = advanceXenoPresentationV97(presentation,dt*1000,match.paused || doc?.hidden || !loaded);
       if (wasBlocking && !presentationView().blocksSimulation) clearInputs();
       if (!wasBlocking) stepXenoTrialsMatchV96(match,dt,controls());
@@ -724,7 +732,9 @@ export function createXenoTrialsRuntimeV96(options = {}) {
         tauntV156 = null; frameDelta = 0; clearInputs();
       }
       const roundEnded = beforePhase === 'active' && match.phase === 'round-over';
-      checkpointNow(roundStarted ? 'round-start' : roundEnded ? 'round-end' : 'periodic');
+      const hordeChanged = match.hordeV180?.phase !== beforeHordePhase;
+      if (hordeChanged) checkpointNow(beforeHordePhase === 'intermission' ? 'wave-start' : 'wave-clear');
+      else checkpointNow(roundStarted ? 'round-start' : roundEnded ? 'round-end' : 'periodic');
       if (stopped) return;
       notifyElapsed += dt; render(); notify(match.phase === 'match-over' && !emittedResult);
       if (match.phase === 'match-over' && !outroPlaying()) { running = false; clearInputs(); }

@@ -13,6 +13,7 @@ import {
   reviewedXenoSupersDigestV200 as advance,
   verifyXenoSupersV200 as verify
 } from './audit-xeno-supers-v200.mjs';
+import { reviewedXenoPrioritiesDigestV201 as advanceToV201 } from './audit-xeno-priorities-v201.mjs';
 import {
   xenoPrioritiesRuntimeSourcesV199 as priorRuntimeSources,
   verifyXenoPrioritiesV199 as verifyPrior
@@ -25,9 +26,11 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const git = args => execFileSync('git', args, { cwd: root, maxBuffer: 32 * 1024 * 1024 });
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
 const readBaseline = path => git(['show', baseline + ':' + path]);
+const readPublished = path => git(['show', '005568f7f285ca5ec704e0e87498b2e5b68211a9:' + path]);
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const prior = 'scripts/audit-xeno-priorities-v199.mjs';
-const terminal = 'scripts/audit-xeno-supers-v200.mjs';
+const relay = 'scripts/audit-xeno-supers-v200.mjs';
+const terminal = 'scripts/audit-xeno-priorities-v201.mjs';
 const verifier = 'scripts/verify-xeno-supers-audit-v200.mjs';
 const report = 'docs/forge/xeno-trials/V200-SUPERS.md';
 const spritePrefix = 'assets/openai/sprites/xeno-trials-v200/';
@@ -58,6 +61,7 @@ test('V200 preserves V199 historical declarations and every successor starts at 
     assert.ok(published.has(path), path);
     assert.ok(Object.isFrozen(receipt), path);
     assert.equal(sha(readBaseline(path)), receipt.previousSha256, path);
+    assert.equal(sha(readPublished(path)), receipt.currentSha256, path);
     assert.equal(advance(path, receipt.previousSha256), sha(read(path)), path);
     for (const forged of [receipt.currentSha256, '0'.repeat(64), null])
       assert.throws(() => advance(path, forged), /Incorrect V199 endpoint for V200/, path);
@@ -65,7 +69,8 @@ test('V200 preserves V199 historical declarations and every successor starts at 
   for (const [path, receipt] of Object.entries(inputs)) {
     assert.ok(!published.has(path), path);
     assert.ok(Object.isFrozen(receipt), path);
-    assert.equal(sha(read(path)), receipt.sha256, path);
+    assert.equal(sha(readPublished(path)), receipt.sha256, path);
+    assert.equal(sha(read(path)), advanceToV201(path, receipt.sha256), path);
   }
   assert.equal(advance('constructor', 'history'), 'history');
 });
@@ -99,24 +104,25 @@ test('V200 extends the effective runtime and retains strict predecessor checks',
   assert.deepEqual(priorRuntimeSources(effective), effective);
   for (const [path, receipt] of Object.entries(successors)) {
     if (receipt.kind !== 'runtime') continue;
-    assert.equal(effective[path], receipt.currentSha256, path);
+    assert.equal(effective[path], advanceToV201(path, receipt.currentSha256), path);
     assert.throws(() => runtimeSources({ [path]: '0'.repeat(64) }), /Incorrect V200 runtime view predecessor/);
   }
   for (const [path, receipt] of Object.entries(inputs)) {
     if (receipt.kind !== 'runtime') continue;
-    assert.equal(effective[path], receipt.sha256, path);
+    assert.equal(effective[path], advanceToV201(path, receipt.sha256), path);
     assert.throws(() => runtimeSources({ [path]: '0'.repeat(64) }), /Incorrect new V200 runtime digest/);
   }
 });
 
-test('the terminal audit, its test and the mutable outcome report are exact source-only paths', () => {
+test('the V200 audit relays to V201 and its tooling and mutable report stay source-only', () => {
   assert.match(read(prior).toString(), /from '\.\/audit-xeno-supers-v200\.mjs'/);
+  assert.match(read(relay).toString(), /from '\.\/audit-xeno-priorities-v201\.mjs'/);
   assert.doesNotMatch(read(terminal).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
-  for (const path of [terminal, verifier, report]) {
+  for (const path of [relay, terminal, verifier, report]) {
     assert.equal(isPublicDistributionPathV86(path), true, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);
   }
-  for (const path of [terminal, report])
+  for (const path of [relay, terminal, report])
     assert.ok(!Object.hasOwn(inputs, path) && !Object.hasOwn(successors, path), path);
   for (const path of [spritePrefix + 'unreviewed-super-sheet.png', 'scripts/audit-xeno-supers-unreviewed-v200.mjs'])
     assert.equal(isPublicDistributionPathV86(path), false, path);

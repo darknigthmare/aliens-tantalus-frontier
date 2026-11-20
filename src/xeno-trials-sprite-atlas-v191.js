@@ -5,7 +5,9 @@ import { getXenoTrialsArtV96, getXenoTrialsFighterV96 } from './xeno-trials-data
 import { getXenoTrialsSpecialStyleV147 } from './xeno-trials-signatures-v147.js';
 import { XENO_TRIALS_SPRITE_REFERENCES_V188, XENO_TRIALS_SPRITE_FRAME_IDS_V188 } from './xeno-trials-sprite-atlas-v188.js';
 import { getXenoTrialsSpriteEnvelopeV189 } from './xeno-trials-sprite-atlas-v189.js';
-import { XENO_TRIALS_ACTION_ATLASES_V199, XENO_TRIALS_SUPER_ATLASES_V200, getXenoTrialsActionAtlasV199, getXenoTrialsRuntimeActionAtlas, sampleXenoTrialsActionFrameV199 } from './xeno-trials-action-atlas-v199.js';
+import { XENO_TRIALS_ACTION_ATLASES_V199, XENO_TRIALS_SUPER_ATLASES_V200, XENO_TRIALS_PRIORITY_ATLASES_V201,
+  getXenoTrialsActionAtlasV199, getXenoTrialsActiveActionAtlas, getXenoTrialsRuntimeActionAtlases,
+  sampleXenoTrialsActionFrameV199 } from './xeno-trials-action-atlas-v199.js';
 
 const freeze = value => {
   if (value && typeof value === 'object') { Object.values(value).forEach(freeze); Object.freeze(value); }
@@ -46,7 +48,8 @@ export const XENO_TRIALS_SPRITE_REFERENCES_V191 = freeze({ ...XENO_TRIALS_SPRITE
     work: 'Lot AlienTentalus — adaptation de jeu non canonique' }
 });
 const constructed = new WeakMap();
-for (const atlas of [...XENO_TRIALS_ACTION_ATLASES_V199, ...XENO_TRIALS_SUPER_ATLASES_V200]) constructed.set(atlas, atlas.revision);
+for (const atlas of [...XENO_TRIALS_ACTION_ATLASES_V199, ...XENO_TRIALS_SUPER_ATLASES_V200, ...XENO_TRIALS_PRIORITY_ATLASES_V201])
+  constructed.set(atlas, atlas.revision);
 const visibleHeight = (atlas, metrics) => metrics?.visibleHeight ?? metrics?.height
   * (atlas.sourcePose.alphaBounds[3] - atlas.sourcePose.alphaBounds[1]) / atlas.sourcePose.height;
 
@@ -209,8 +212,10 @@ export function requestXenoTrialsSpriteAtlasV191(images, fighter, art, loadImage
   const atlas = (includeV197 ? getXenoTrialsRuntimeSpriteAtlas : getXenoTrialsSpriteAtlasV191)(fighter, art);
   return requestAtlasImage(images, atlas, loadImage, isActive);
 }
-export function requestXenoTrialsRuntimeActionAtlas(images, fighter, art, loadImage = browserLoad, isActive = () => true) {
-  return requestAtlasImage(images, getXenoTrialsRuntimeActionAtlas(fighter, art), loadImage, isActive);
+export async function requestXenoTrialsRuntimeActionAtlas(images, fighter, art, loadImage = browserLoad, isActive = () => true) {
+  const atlases = getXenoTrialsRuntimeActionAtlases(fighter, art);
+  const results = await Promise.all(atlases.map(atlas => requestAtlasImage(images, atlas, loadImage, isActive)));
+  return results.length > 0 && results.every(Boolean);
 }
 function requestAtlasImage(images, atlas, loadImage, isActive) {
   if (!atlas || !images?.get || !images?.set || typeof loadImage !== 'function' || typeof isActive !== 'function') return Promise.resolve(false);
@@ -233,7 +238,7 @@ export function drawXenoTrialsActionAtlasV199(ctx, fighter, art, images, options
   return paintActionAtlasFrame(ctx, fighter, images, getXenoTrialsActionAtlasV199(fighter, art), options);
 }
 export function drawXenoTrialsRuntimeActionAtlas(ctx, fighter, art, images, options = {}) {
-  return paintActionAtlasFrame(ctx, fighter, images, getXenoTrialsRuntimeActionAtlas(fighter, art), options);
+  return paintActionAtlasFrame(ctx, fighter, images, getXenoTrialsActiveActionAtlas(fighter, art), options);
 }
 function paintActionAtlasFrame(ctx, fighter, images, atlas, options) {
   const selected = atlas && sampleXenoTrialsActionFrameV199(atlas, fighter, options);
@@ -272,7 +277,7 @@ export function getXenoTrialsSpriteEnvelopeV191(fighter, art, metrics, includeV1
   return atlasEnvelope(fighter, atlas, metrics, old);
 }
 export function getXenoTrialsActionEnvelope(fighter, art, metrics, spec, otherEnvelope) {
-  const atlas = getXenoTrialsRuntimeActionAtlas(fighter, art);
+  const atlas = getXenoTrialsActiveActionAtlas(fighter, art);
   const selected = atlas && sampleXenoTrialsActionFrameV199(atlas, fighter, { spec });
   if (!selected) return otherEnvelope;
   return atlasEnvelope(fighter, atlas, metrics, otherEnvelope, fighter.attack.facing);

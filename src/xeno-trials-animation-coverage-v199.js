@@ -1,24 +1,26 @@
 import { getXenoTrialsAnimationCoverageV197 } from './xeno-trials-animation-coverage-v197.js';
 import { getXenoTrialsArtV96, getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
-import { getXenoTrialsRigV199 } from './xeno-trials-rig-v154.js';
-import { getXenoTrialsActionAtlasV199, getXenoTrialsRuntimeActionAtlas } from './xeno-trials-action-atlas-v199.js';
+import { getXenoTrialsRigV199, getXenoTrialsRigV201 } from './xeno-trials-rig-v154.js';
+import { getXenoTrialsActionAtlasV199, getXenoTrialsRuntimeActionAtlases } from './xeno-trials-action-atlas-v199.js';
 
 const historicalCache = new Map(), runtimeCache = new Map();
 
 export function getXenoTrialsAnimationCoverageV199(value) {
-  return getCoverage(value, getXenoTrialsActionAtlasV199, historicalCache);
+  return getCoverage(value, historicalCache, false);
 }
 export function getXenoTrialsRuntimeAnimationCoverage(value) {
-  return getCoverage(value, getXenoTrialsRuntimeActionAtlas, runtimeCache);
+  return getCoverage(value, runtimeCache, true);
 }
 
-function getCoverage(value, getAtlas, cache) {
+function getCoverage(value, cache, runtime) {
   const base = getXenoTrialsAnimationCoverageV197(value);
   if (!base) return null;
   if (cache.has(base.id)) return cache.get(base.id);
   const fighter = getXenoTrialsFighterV96(base.id), art = getXenoTrialsArtV96(base.id);
-  const atlas = getAtlas(fighter, art), rig = getXenoTrialsRigV199(fighter, art);
-  if (!atlas && !rig) return base;
+  const atlases = runtime ? getXenoTrialsRuntimeActionAtlases(fighter, art)
+    : [getXenoTrialsActionAtlasV199(fighter, art)].filter(Boolean);
+  const rig = (runtime && getXenoTrialsRigV201(fighter, art)) || getXenoTrialsRigV199(fighter, art);
+  if (!atlases.length && !rig) return base;
   const states = { ...base.states };
 
   function admit(action, id, path, renderKind, frameIds, limitations, revision = 199) {
@@ -29,27 +31,33 @@ function getCoverage(value, getAtlas, cache) {
       renderKind: leading.renderKind, frameIds: leading.frameIds,
       sources: Object.freeze([media, ...(previous?.sources || [])]), limitations: Object.freeze(limitations) });
   }
-  if (atlas?.kind === 'air-combat') for (const action of ['light', 'heavy']) {
-    admit(action, `atlas-v199-${base.id}`, atlas.texture.path, 'drawn',
-      atlas.frames.filter(frame => frame.id.startsWith(`air-${action}-`)).map(frame => frame.id),
-      ['airborne-only', 'native-attack-windows', 'three-keys-for-this-action']);
-  }
-  if (atlas?.kind === 'super') {
-    admit('super', atlas.superId, atlas.texture.path, 'drawn', atlas.frames.map(frame => frame.id),
-      [atlas.superId === 'harbinger-committed-leap' ? 'native-leap-and-landing' : 'grounded-only',
-        'native-super-windows', 'sampled-native-phases'], atlas.revision);
+  for (const atlas of atlases) {
+    if (atlas.kind === 'air-combat') {
+      for (const action of ['light', 'heavy']) admit(action, `atlas-v${atlas.revision}-${base.id}`, atlas.texture.path, 'drawn',
+        atlas.frames.filter(frame => frame.id.startsWith(`air-${action}-`)).map(frame => frame.id),
+        ['airborne-only', 'native-attack-windows', 'three-keys-for-this-action'], atlas.revision);
+    } else if (atlas.kind === 'ground-special') {
+      admit('special', atlas.specialStyle, atlas.texture.path, 'drawn', atlas.frames.map(frame => frame.id),
+        ['grounded-only', 'native-attack-windows', 'sampled-native-phases'], atlas.revision);
+    } else {
+      admit('super', atlas.superId, atlas.texture.path, 'drawn', atlas.frames.map(frame => frame.id),
+        [atlas.superId === 'harbinger-committed-leap' ? 'native-leap-and-landing' : 'grounded-only',
+          'native-super-windows', 'sampled-native-phases'], atlas.revision);
+    }
   }
   if (rig) {
-    admit('presentation', rig.id, rig.path, 'mesh', ['intro', 'round-win', 'round-loss'], ['source-bound-mesh']);
+    admit('presentation', rig.id, rig.path, 'mesh', ['intro', 'round-win', 'round-loss'],
+      ['source-bound-mesh'], rig.presentationRevision);
     for (const action of ['light', 'heavy', 'special']) admit(action, rig.id, rig.path, 'mesh', ['recovery'],
-      ['native-grounded-recovery-only', 'source-bound-mesh']);
+      ['native-grounded-recovery-only', 'source-bound-mesh'], rig.presentationRevision);
   }
   const drawnStates = Object.freeze(Object.keys(states).filter(action => states[action].renderKind === 'drawn'));
   const meshStates = Object.freeze(Object.keys(states).filter(action => states[action].renderKind === 'mesh'));
   const hasDrawnGestures = drawnStates.some(action => action !== 'idle');
   const result = Object.freeze({ ...base, states: Object.freeze(states), drawnStates, meshStates, hasDrawnGestures,
     playerLabel: hasDrawnGestures ? 'Gestes dessinés' : 'Gestes articulés',
-    coverageBasis: 'identity-bound-native-attack-windows-v199' });
+    coverageBasis: `identity-bound-native-attack-windows-v${rig?.presentationRevision === 201
+      || atlases.some(atlas => atlas.revision === 201) ? 201 : 199}` });
   cache.set(base.id, result);
   return result;
 }

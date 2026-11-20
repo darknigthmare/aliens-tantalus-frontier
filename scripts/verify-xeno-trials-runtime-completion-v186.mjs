@@ -22,8 +22,10 @@ function target(extra={}){const events=new Map();return Object.assign({
 },extra);}
 const pad=()=>({index:0,connected:true,mapping:'standard',axes:[0,0],buttons:Array.from({length:17},()=>({pressed:false,value:0}))});
 const press=(controller,index,value=true)=>{controller.buttons[index]={pressed:value,value:value?1:0};};
-function ticket(id='xth180-incoming-1'){
- const t=beginXenoTrialsV96(createXenoTrialsProgressV96(),{playerId:'warrior',activityV119:{branch:'horde',id}});
+function ticket(id='xth180-incoming-1',playerId='warrior'){
+ const progress=createXenoTrialsProgressV96();
+ if(!progress.unlocked.includes(playerId))progress.unlocked.push(playerId);
+ const t=beginXenoTrialsV96(progress,{playerId,activityV119:{branch:'horde',id}});
  assert.equal(t.applied,true);return t;
 }
 function ownerFor(initial){
@@ -81,6 +83,44 @@ test('runtime pause saves its raw engine state through the UI and reload restore
  assert.deepEqual(coreFrom(r.state(),cp.snapshot),cp.snapshot);assert.equal(r.state().checkpointV186.reason,'restored');
  const before=r.state().tick;r.frames(25);assert.equal(r.state().tick,before);assert.equal(r.runtime.resume(),true);r.frames(3);assert.ok(r.state().tick>before);
  h.runtime.stop();r.runtime.stop();
+});
+
+test('horde intermission and the arrival of reinforcements save their own native state',async()=>{
+ const t=ticket('xth180-incoming-1','queen'),owner=ownerFor(t.state),h=host({config:t.config,owner});await h.start();
+ let active=h.state();
+ for(let frame=0;frame<550&&active.hordeV180.phase==='active'&&!active.result;frame++){
+  const {left,right}=controls(active);
+  const input={left,right,heavy:active.tick%120===0,light:active.tick%120===50,special:active.tick%120===80};
+  for(const [action,pressed] of Object.entries(input))h.runtime.setInput(action,pressed);
+  h.frames(1,1000/120);active=h.state();
+ }
+ assert.equal(active.hordeV180.phase,'intermission',`tick ${active.tick}, kills ${active.hordeV180.totalKills}`);assert.ok(active.tick<600);
+ assert.equal(h.checkpoints.at(-1)?.reason,'wave-clear');
+ const first=normalizeXenoTrialsProgressV96(clone(owner.progress)).pending.checkpointV186.snapshot;
+ assert.equal(first.tick,active.tick);assert.equal(first.hordeV180.wavesCleared,1);
+ assert.equal(first.hordeV180.totalKills,5);assert.equal(first.fighters.length,1);
+ const r=host({config:t.config,owner,resumeSnapshot:first});await r.start();
+ assert.equal(r.state().paused,true);assert.deepEqual(coreFrom(r.state(),first),first);
+ assert.equal(r.runtime.resume(),true);
+ const commit=owner.ui.onCommit;
+ owner.ui.onCommit=()=>{throw new Error('storage unavailable');};
+ for(let frame=0;frame<125&&r.state().tick<first.hordeV180.nextWaveTick;frame++)r.frames(1,1000/120);
+ owner.ui.onCommit=commit;
+ const next=r.state();
+ assert.equal(next.hordeV180.wave,2);assert.equal(next.hordeV180.phase,'active');
+ assert.equal(next.hordeV180.wavesCleared,1);assert.equal(next.hordeV180.totalKills,5);
+ assert.equal(r.checkpoints.at(-1)?.reason,'wave-start');
+ assert.equal(next.checkpointV186.saved,false);
+ assert.equal(owner.progress.pending.checkpointV186.tick,first.tick);
+ assert.equal(r.runtime.pause(),true);
+ const durable=normalizeXenoTrialsProgressV96(clone(owner.progress));
+ const second=durable.pending.checkpointV186.snapshot;
+ assert.equal(second.tick,next.tick);assert.deepEqual(coreFrom(r.state(),second),second);
+ const reloaded=host({config:durable.pending.config,resumeSnapshot:second});await reloaded.start();
+ assert.equal(reloaded.state().paused,true);assert.deepEqual(coreFrom(reloaded.state(),second),second);
+ assert.equal(durable.pending.matchId,t.config.matchId);assert.equal(durable.credits,t.state.credits);
+ assert.equal(durable.xp,t.state.xp);assert.deepEqual(durable.ledger,t.state.ledger);
+ h.runtime.stop();r.runtime.stop();reloaded.runtime.stop();
 });
 
 test('manual and timed next rounds save the native score during the new countdown',async()=>{

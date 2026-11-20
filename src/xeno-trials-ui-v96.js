@@ -605,7 +605,9 @@ export class XenoTrialsUiV96 {
     if (horde) {
       this.el('horde-alive').textContent = String(horde.alive);
       this.el('horde-remaining').textContent = String(horde.remaining);
-      this.el('horde-phase').textContent = operation ? 'CONTACTS DE TERRAIN' : horde.phase;
+      const hordePhase = this.el('horde-phase');
+      hordePhase.textContent = horde.reinforcement?.label || (operation ? 'CONTACTS DE TERRAIN' : horde.phase);
+      hordePhase.setAttribute('data-reinforcement', String(Boolean(horde.reinforcement)));
       this.el('horde-kills').textContent = `${horde.kills} / ${horde.total} NEUTRALISÉS`;
       this.el('horde-progress').max = Math.max(1, horde.total);
       this.el('horde-progress').value = horde.kills;

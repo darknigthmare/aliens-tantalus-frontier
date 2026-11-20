@@ -1,5 +1,6 @@
 import { getXenoTrialsHordeProtocolV180 } from './xeno-trials-horde-v180.js';
 import { getXenoTrialsHordeBossViewV186 } from './xeno-trials-horde-bosses-v186.js';
+import { getXenoTrialsReinforcementV201 } from './xeno-trials-reinforcements-v201.js';
 
 /** Read-only terminal views. Counters come from the horde snapshot, never from
  * DOM state, a second clock, or the old successive-duel event checkpoint. */
@@ -33,12 +34,14 @@ export function getXenoTrialsHordeViewV180(snapshot) {
     ? snapshot.result?.winner === 'player' ? 'SECTEUR SÉCURISÉ' : 'CONTACT PERDU'
       : state.phase === 'intermission' ? 'VAGUE NEUTRALISÉE · RENFORTS EN APPROCHE'
         : state.phase === 'complete' ? 'SECTEUR SÉCURISÉ' : alive > 0 ? 'CONTACTS HOSTILES' : 'RENFORTS EN APPROCHE';
-  return Object.freeze({ wave, waveCount, alive, remaining, kills, total, boss, bossPhase,
+  const reinforcement = snapshot.paused ? null : getXenoTrialsReinforcementV201(snapshot);
+  const announcedWave = reinforcement?.kind === 'wave' ? reinforcement.wave : wave;
+  return Object.freeze({ wave, waveCount, alive, remaining, kills, total, boss, bossPhase, reinforcement,
     totalRemaining: count(state.totalRemaining), concurrent: count(state.concurrent),
     maxConcurrent: count(state.maxConcurrent), phase,
     waveLabel: `VAGUE ${wave} / ${waveCount}`,
     // Live-region ownership stays at phase/wave granularity. Rapid kills and
     // arrivals update ordinary text, without flooding a screen reader.
-    announcement: `${phase}. Vague ${wave} sur ${waveCount}.${bossPhase ? ` ${bossPhase}.` : ''}`,
+    announcement: `${phase}. Vague ${announcedWave} sur ${waveCount}.${bossPhase ? ` ${bossPhase}.` : ''}`,
     status: `${phase} · Vague ${wave}/${waveCount} · ${alive} contacts actifs · ${remaining} renforts · ${kills}/${total} neutralisés` });
 }
