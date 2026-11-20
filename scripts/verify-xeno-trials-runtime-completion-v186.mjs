@@ -83,6 +83,67 @@ test('runtime pause saves its raw engine state through the UI and reload restore
  h.runtime.stop();r.runtime.stop();
 });
 
+test('manual and timed next rounds save the native score during the new countdown',async()=>{
+ for(const manual of [true,false]){
+  const t=beginXenoTrialsV96(createXenoTrialsProgressV96(),{
+   playerId:'warrior',opponentId:'runner',difficulty:'easy',roundSeconds:30,
+   activityV119:{branch:'on-demand',id:'on-demand',rules:{initialHp:1}}
+  });
+  assert.equal(t.applied,true);
+  const owner=ownerFor(t.state),h=host({config:t.config,owner});
+  await h.start();
+  let active=h.state();
+  for(let frame=0;frame<250&&active.phase==='active';frame++){
+   const input=controls(active);
+   for(const action of ['left','right','light','heavy'])h.runtime.setInput(action,input[action]);
+   h.frames();
+   active=h.state();
+  }
+  assert.equal(active.phase,'round-over');
+  assert.ok(active.events.some(event=>event.type==='round-end'&&event.reason==='ko'));
+  assert.ok(active.tick<600,'KO occurred before the periodic autosave');
+  assert.equal(h.checkpoints.at(-1)?.reason,'round-end');
+  assert.equal(owner.progress.pending.duelCheckpointV197.snapshot.roundWinner,active.roundWinner);
+  const wins=active.wins;
+  // The timed path models one refused write to exercise the real pause retry.
+  const commit=owner.ui.onCommit;
+  if(!manual)owner.ui.onCommit=()=>{throw new Error('storage unavailable');};
+  if(manual)assert.equal(h.runtime.nextRound(),true);
+  else for(let frame=0;frame<120&&h.state().round===1;frame++)h.frames();
+  owner.ui.onCommit=commit;
+  const countdown=h.state();
+  assert.equal(countdown.round,2);
+  assert.equal(countdown.presentation.phase,'countdown');
+  assert.equal(h.checkpoints.at(-1).reason,'round-start');
+  assert.equal(countdown.checkpointV186.saved,manual);
+  assert.equal(owner.progress.pending.duelCheckpointV197.snapshot.round,manual?2:1);
+  assert.deepEqual(owner.progress.pending.duelCheckpointV197.snapshot.wins,wins);
+
+  assert.equal(h.runtime.pause(),true);
+  assert.equal(h.checkpoints.at(-1).reason,'pause');
+  assert.equal(h.checkpoints.at(-1).raw.round,2);
+  assert.equal(h.state().checkpointV186.saved,true);
+  h.runtime.stop();
+  assert.equal(h.checkpoints.at(-1).reason,'stop');
+  const durable=normalizeXenoTrialsProgressV96(clone(owner.progress));
+  assert.equal(durable.credits,t.state.credits);
+  assert.deepEqual(durable.ledger,t.state.ledger);
+  const second=durable.pending.duelCheckpointV197.snapshot;
+  assert.equal(second.round,2);
+  assert.equal(second.tick,countdown.tick);
+  assert.deepEqual(second.wins,wins);
+  const restored=host({config:durable.pending.config,resumeDuelSnapshot:second});
+  await restored.start();
+  assert.equal(restored.state().paused,true);
+  assert.deepEqual(coreFrom(restored.state(),second),second);
+  assert.equal(restored.runtime.resume(),true);restored.frames(3);
+  assert.ok(restored.state().tick>second.tick);
+  assert.deepEqual(restored.state().wins,wins);
+  assert.equal(restored.results.length,0);
+  restored.runtime.stop();
+ }
+});
+
 test('periodic checkpoints contain raw snapshots and a storage refusal is visible without awarding a result',async()=>{
  const t=ticket(),h=host({config:t.config,onCheckpoint:()=>false});await h.start();h.runtime.setInput('guard',true);h.frames(320);
  assert.equal(h.state().checkpointV186.saved,false);assert.equal(h.state().checkpointV186.reason,'periodic');assert.equal(h.results.length,0);

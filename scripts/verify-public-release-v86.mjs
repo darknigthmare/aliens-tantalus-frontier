@@ -1,3 +1,4 @@
+import { publicXenoActionPathAdmissionV199, verifyXenoActionAdmissionsV199 } from './public-xeno-action-admissions-v199.mjs';
 import { publicXenoPriorityStagePathAdmissionV198, verifyXenoPriorityStageAdmissionsV198 } from './public-xeno-priority-stage-admissions-v198.mjs';
 import { publicXenoSpritePathAdmissionV197, verifyXenoSpriteAdmissionsV197 } from './public-xeno-sprite-admissions-v197.mjs';
 import { publicXenoReferencedStagePathAdmissionV196, verifyXenoReferencedStageAdmissionsV196 } from './public-xeno-referenced-stage-admissions-v196.mjs';
@@ -703,6 +704,15 @@ const PRIVATE_TEXT = [
   /['"]V\d+_(?:BATCH_\d+|[A-Z_]*IMAGEGEN)/
 ];
 
+const XENO_PRIORITIES_SOURCE_ONLY_V199 = new Set([
+  'docs/forge/xeno-trials/V199-PRIORITIES.md',
+  'scripts/audit-xeno-priorities-v199.mjs',
+  'scripts/public-xeno-action-admissions-v199.mjs',
+  'scripts/verify-xeno-priorities-audit-v199.mjs',
+  'scripts/verify-xeno-trials-actions-v199.mjs',
+  'scripts/verify-xeno-trials-rig-v199.mjs'
+]);
+
 const XENO_PRIORITY_STAGES_SOURCE_ONLY_V198 = new Set([
   'docs/forge/xeno-trials/V198-PRIORITY-STAGES.md',
   'scripts/audit-xeno-priority-stages-v198.mjs',
@@ -756,6 +766,7 @@ const XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193 = new Set([
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
+  if (XENO_PRIORITIES_SOURCE_ONLY_V199.has(path)) return !built;
   if (XENO_PRIORITY_STAGES_SOURCE_ONLY_V198.has(path)) return !built;
   if (XENO_PRIORITIES_SOURCE_ONLY_V197.has(path)) return !built;
   if (XENO_REFERENCED_STAGE_SOURCE_ONLY_V196.has(path)) return !built;
@@ -772,6 +783,8 @@ export function isPublicDistributionPathV86(path, { directory = false, built = f
   if (FORGE_STYLES_V140.has(path)) return true;
   const segments = path.split('/');
   if (segments.some(part => !part || part === '.' || part === '..' || PRIVATE_SEGMENT.test(part))) return false;
+  const actionAdmissionV199 = publicXenoActionPathAdmissionV199(path, { directory });
+  if (actionAdmissionV199 !== null) return actionAdmissionV199;
   const spriteAdmissionV197 = publicXenoSpritePathAdmissionV197(path, { directory });
   if (spriteAdmissionV197 !== null) return spriteAdmissionV197;
   const spriteAdmissionV191 = publicXenoSpritePathAdmissionV191(path, { directory });
@@ -870,6 +883,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   await verifyArbiterImageAdmissionsV190(root);
   await verifyXenoSpriteAdmissionsV191(root);
   await verifyXenoSpriteAdmissionsV197(root);
+  await verifyXenoActionAdmissionsV199(root);
   await verifyXenoFranchiseStageAdmissionsV192(root);
   await verifyXenoOriginalArenaAdmissionsV193(root);
   await verifyXenoIconicStageAdmissionsV194(root);

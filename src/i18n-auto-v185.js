@@ -21,7 +21,9 @@ const arenaLabels = new Map([
   [label, labelEn],
   [label.toUpperCase(), labelEn.toUpperCase()]
 ]));
-const duelResumeLabels = new Map([
+const trialLabels = new Map([
+  ['Super dessiné', 'Drawn super'],
+  ['Frappes aériennes dessinées', 'Drawn aerial attacks'],
   ['REPRENDRE LE DUEL CONSERVÉ', 'RESUME SAVED DUEL'],
   ['RECOMMENCER DEPUIS LA PREMIÈRE MANCHE', 'RESTART FROM ROUND ONE'],
   ['REPRISE CONSERVÉE · ÉTAT DU DUEL ENREGISTRÉ', 'CHECKPOINT SAVED · DUEL STATE RECORDED'],
@@ -86,7 +88,7 @@ function fromPatterns(text) {
 function translateWhole(text) {
   if (exact.has(text)) return exact.get(text);
   if (upper.has(text)) return upper.get(text);
-  return arenaLabels.get(text) ?? duelResumeLabels.get(text) ?? fromPatterns(text);
+  return arenaLabels.get(text) ?? trialLabels.get(text) ?? fromPatterns(text);
 }
 
 // Messages are often joined: "ERREUR · A. B." Translate each known piece,

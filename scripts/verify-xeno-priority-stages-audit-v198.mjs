@@ -18,6 +18,7 @@ import {
   verifyXenoPrioritiesV197 as verifyPrior
 } from './audit-xeno-priorities-v197.mjs';
 import { verifyStageClassificationV195 as verifyEarlier } from './audit-xeno-stage-classification-v195.mjs';
+import { reviewedXenoPrioritiesDigestV199 as advanceToV199 } from './audit-xeno-priorities-v199.mjs';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 
@@ -67,7 +68,7 @@ test('V198 preserves V197 historical declarations and every successor starts at 
   for (const [path, receipt] of Object.entries(inputs)) {
     assert.ok(!published.has(path), path);
     assert.ok(Object.isFrozen(receipt), path);
-    assert.equal(sha(read(path)), receipt.sha256, path);
+    assert.equal(sha(read(path)), advanceToV199(path, receipt.sha256), path);
   }
   assert.equal(advance('constructor', 'history'), 'history');
 });
@@ -100,19 +101,19 @@ test('V198 extends the effective runtime and retains strict predecessor checks',
   assert.deepEqual(priorRuntimeSources(effective), effective);
   for (const [path, receipt] of Object.entries(successors)) {
     if (receipt.kind !== 'runtime') continue;
-    assert.equal(effective[path], receipt.currentSha256, path);
+    assert.equal(effective[path], advanceToV199(path, receipt.currentSha256), path);
     assert.throws(() => runtimeSources({ [path]: '0'.repeat(64) }), /Incorrect V198 runtime view predecessor/);
   }
   for (const [path, receipt] of Object.entries(inputs)) {
     if (receipt.kind !== 'runtime') continue;
-    assert.equal(effective[path], receipt.sha256, path);
+    assert.equal(effective[path], advanceToV199(path, receipt.sha256), path);
     assert.throws(() => runtimeSources({ [path]: '0'.repeat(64) }), /Incorrect new V198 runtime digest/);
   }
 });
 
 test('the terminal audit, its test and the mutable outcome report are exact source-only paths', () => {
   assert.match(read(prior).toString(), /from '\.\/audit-xeno-priority-stages-v198\.mjs'/);
-  assert.doesNotMatch(read(terminal).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  assert.match(read(terminal).toString(), /from '\.\/audit-xeno-priorities-v199\.mjs'/);
   for (const path of [terminal, verifier, report]) {
     assert.equal(isPublicDistributionPathV86(path), true, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);

@@ -67,8 +67,8 @@ test('the complete legacy bridge validates the joined view while default metadat
   assert.deepEqual(verifyNativeQaResourcesV187(read), { successors: 8, preserved: 7 });
 });
 
-test('the completion relays to the exact terminal V198 audit and remains source-only', () => {
-  const terminal = 'scripts/audit-xeno-priority-stages-v198.mjs';
+test('the completion relays to the exact terminal V199 audit and remains source-only', () => {
+  const terminal = 'scripts/audit-xeno-priorities-v199.mjs';
   assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(read(terminal).toString()), false);
   assert.match(read('scripts/audit-xeno-trials-completion-v186.mjs').toString(), /from '\.\/audit-xeno-stage-operations-v188\.mjs'/);
   assert.equal(Object.hasOwn(COMPLETION_SOURCES_V186, terminal), false);

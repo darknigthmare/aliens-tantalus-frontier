@@ -7,6 +7,7 @@ import { XENO_TRIALS_ARENA_V105 as ARENA, resolveXenoTrialsBodiesV105 } from './
 import { XENO_TRIALS_ACID_POOL_V152 as ACID, hasXenoTrialsAcidPoolsV152 } from './xeno-trials-acid-pools-v152.js';
 import { XENO_TRIALS_GRAPPLE_V153 as GRAPPLE, hasXenoTrialsGrappleV153, isXenoTrialsGrappleTargetV153 } from './xeno-trials-grapple-v153.js';
 import { getXenoTrialsCasteV151 } from './xeno-trials-castes-v151.js';
+import { normalizeXenoTrialsRulesV119 } from './xeno-trials-modes-v119.js';
 
 const sides = ['player', 'opponent'];
 const actions = ['left', 'right', 'jump', 'guard', 'light', 'heavy', 'special', 'super'];
@@ -20,6 +21,7 @@ const coreKeys = ['version', 'config', 'rng', 'accumulator', 'tick', 'round', 'o
   'paused', 'timeRemaining', 'wins', 'roundWinner', 'roundReason', 'result', 'fighters', 'projectiles', 'events', 'serial', 'ai',
   'synthEffectsV110', 'acidDropsV152', 'acidPoolsV152', 'acidNextHitV152', 'grappleV153'];
 const persistedBranches = ['on-demand', 'campaign', 'contracts', 'challenges'];
+const defaultRules = Object.freeze(normalizeXenoTrialsRulesV119());
 const maxTicks = 0x7fffffff;
 const record = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const number = (value, min, max) => Number.isFinite(value) && value >= min && value <= max;
@@ -210,7 +212,8 @@ export function createXenoTrialsDuelCheckpointV197(snapshot, ticket) {
     || ['hordeV180', 'operationV188', 'stageHazardsV188'].some(key => raw[key] !== undefined || config[key] !== undefined)
     || !['matchId', 'seed', 'playerId', 'opponentId', 'factionId', 'stageId', 'difficulty', 'roundSeconds', 'roundsToWin']
       .every(key => config[key] === ticket[key]) || config.roundsToWin !== 2 || config.introSeconds !== 0 || config.holdRoundTransition !== true
-    || !record(config.rulesV119) || !same(config.rulesV119, ticket.rulesV119) || !same(config.activityV119, ticket.activityV119)) return null;
+    || !record(config.rulesV119) || !same(config.rulesV119, ticket.rulesV119 ?? defaultRules)
+    || !same(config.activityV119, ticket.activityV119)) return null;
   const definitions = sides.map(side => getXenoTrialsFighterV96(ticket[`${side}Id`]));
   if (definitions.some(definition => !definition)) return null;
   const variants = definitions.map((definition, i) => definition.variants.includes(ticket[`${sides[i]}Variant`])

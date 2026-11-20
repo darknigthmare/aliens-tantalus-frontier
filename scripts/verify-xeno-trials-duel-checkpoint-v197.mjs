@@ -74,6 +74,29 @@ test('a real round result resumes from pause with its score and same-tick next r
   assert.equal(second.state.pending.duelCheckpointV197.snapshot.round, 2);
 });
 
+test('legacy unclassified duels resume using the native default rules and settle once', () => {
+  const { match, start, ticket } = duel({ activityV119: undefined });
+  assert.equal(ticket.activityV119, undefined);
+  assert.equal(ticket.rulesV119, undefined);
+  for (let n = 0; n < 180; n++) stepXenoTrialsMatchV96(match, step, { right: true, light: n % 23 === 0 });
+  const saved = checkpointXenoTrialsDuelV197(start, match);
+  assert.equal(saved.applied, true);
+  const durable = normalizeXenoTrialsProgressV96(json(saved.state));
+  const restored = json(durable.pending.duelCheckpointV197.snapshot);
+  assert.deepEqual(restored, { ...getXenoTrialsSnapshotV96(match), paused: true, accumulator: 0 });
+  const alternateRules = json(restored);
+  alternateRules.config.rulesV119.noSpecial = true;
+  assert.equal(createXenoTrialsDuelCheckpointV197(alternateRules, ticket), null);
+  setXenoTrialsPausedV96(restored, false);
+  while (restored.phase !== 'match-over') {
+    playRound(restored);
+    if (restored.phase === 'round-over') assert.equal(nextXenoTrialsRoundV96(restored), true);
+  }
+  const settled = settleXenoTrialsV96(durable, restored.result);
+  assert.equal(settled.applied, true);
+  assert.equal(settleXenoTrialsV96(settled.state, restored.result).applied, false);
+});
+
 test('in-flight native projectiles retain their authored spec and reject forged impact power', () => {
   const { match, start, ticket } = duel({ playerId: 'synth-trooper', opponentId: 'arachnoid' });
   for (let n = 0; n < 100 && !match.projectiles.some(projectile => projectile.owner === 'player'); n++)

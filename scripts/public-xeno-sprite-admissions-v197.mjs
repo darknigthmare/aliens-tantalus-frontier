@@ -15,7 +15,11 @@ export function publicXenoSpritePathAdmissionV197(path, { directory = false } = 
   return !directory && files.has(path);
 }
 
-export async function verifyXenoSpriteAdmissionsV197(root) {
+export function verifyXenoSpriteAdmissionsV197(root) {
+  return verifyXenoAtlasFiles(root, atlases, files);
+}
+
+export async function verifyXenoAtlasFiles(root, atlases, files) {
   assert.equal(atlases.length, files.size);
   assert.deepEqual(new Set(atlases.map(atlas => atlas.texture.path.slice(1))), files);
   assert.equal(new Set(atlases.map(atlas => atlas.texture.sha256)).size, files.size);
