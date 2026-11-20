@@ -12,6 +12,7 @@ import {
   reviewedStageClassificationDigestV195 as advance,
   verifyStageClassificationV195 as verify
 } from './audit-xeno-stage-classification-v195.mjs';
+import { reviewedReferencedFilmStagesDigestV196 as later } from './audit-xeno-referenced-film-stages-v196.mjs';
 import {
   ICONIC_STAGES_NEW_INPUTS_V194 as originalInputs,
   iconicStagesRuntimeSourcesV194 as runtimeRelay,
@@ -48,7 +49,7 @@ test('V195 leaves the V194 declarations byte-identical and binds exact successor
   for (const [path, receipt] of Object.entries(successors)) {
     assert.ok(published.has(path), path);
     assert.equal(sha(readBaseline(path)), receipt.previousSha256, path);
-    assert.equal(advance(path, receipt.previousSha256), receipt.currentSha256, path);
+    assert.equal(advance(path, receipt.previousSha256), later(path, receipt.currentSha256), path);
     assert.throws(() => advance(path, receipt.currentSha256), /Incorrect V194 endpoint for V195/, path);
   }
   for (const path of Object.keys(inputs)) assert.ok(!published.has(path), path);
@@ -75,7 +76,9 @@ test('only the catalogue category changes for eight stages and the V194 relay ch
 });
 
 test('audit tooling and the outcome report have exact source-only release admissions', () => {
-  assert.doesNotMatch(read(terminal).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  assert.match(read(terminal).toString(), /from '\.\/audit-xeno-referenced-film-stages-v196\.mjs'/);
+  assert.doesNotMatch(read('scripts/audit-xeno-referenced-film-stages-v196.mjs').toString(),
+    /(?:from\s*|import\s*\(?\s*)['"]\.\//);
   for (const path of [terminal, verifier, report]) {
     assert.equal(isPublicDistributionPathV86(path), true, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);

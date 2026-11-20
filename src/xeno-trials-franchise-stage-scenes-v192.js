@@ -1,6 +1,7 @@
 import { XENO_TRIALS_FRANCHISE_STAGES_V192 } from './xeno-trials-franchise-stages-v192.js';
 import { XENO_TRIALS_ORIGINAL_ARENAS_V193 } from './xeno-trials-original-arenas-v193.js';
 import { XENO_TRIALS_ICONIC_STAGES_V194 } from './xeno-trials-iconic-stages-v194.js';
+import { XENO_TRIALS_REFERENCED_STAGES_V196 } from './xeno-trials-referenced-stages-v196.js';
 
 // These schedules describe MIRE scenery. Their tick is
 // supplied by the existing match; they own no simulation, clock or collider.
@@ -19,16 +20,23 @@ const allowedKinds = new Set(XENO_TRIALS_FRANCHISE_STAGE_EVENT_KINDS_V192);
 const stageSources = Object.freeze({
   192: 'fifty-franchise-stage-atlases-v192',
   193: 'original-tantalus-stage-atlases-v193',
-  194: 'iconic-stage-compositions-v194'
+  194: 'iconic-stage-compositions-v194',
+  196: 'referenced-film-stage-compositions-v196'
 });
-const layeredStages = [...XENO_TRIALS_FRANCHISE_STAGES_V192, ...XENO_TRIALS_ORIGINAL_ARENAS_V193, ...XENO_TRIALS_ICONIC_STAGES_V194];
+export const usesXenoTrialsIndependentProps = revision => revision === 194 || revision === 196;
+const layeredStages = [
+  ...XENO_TRIALS_FRANCHISE_STAGES_V192,
+  ...XENO_TRIALS_ORIGINAL_ARENAS_V193,
+  ...XENO_TRIALS_ICONIC_STAGES_V194,
+  ...XENO_TRIALS_REFERENCED_STAGES_V196
+];
 const stages = new Map(layeredStages.map(stage => [stage.id, stage]));
 const profiles = new Map(layeredStages.map((stage, index) => {
   const config = stage.sceneV192 || {}, seed = Number.isSafeInteger(config.seed) && config.seed > 0 ? config.seed : index + 1;
   const anchors = [0, 1].map(n => clamp(finite(config.anchors?.[n], n ? .82 : .18), .08, .92));
   const kinds = [0, 1].map(n => allowedKinds.has(config.eventKinds?.[n]) ? config.eventKinds[n] : n ? 'archive-scan' : 'coolant-plume');
   const revision = stage.stageRevision ?? 192;
-  const separateProps = revision === 194;
+  const separateProps = usesXenoTrialsIndependentProps(revision);
   const profile = freeze({ stageId: stage.id, revision, replacesArena: true,
     architecture: typeof config.architecture === 'string' ? config.architecture : 'enclosed-bay',
     source: stageSources[revision] ?? stageSources[192], seed, accent: stage.accent, anchors,
@@ -49,7 +57,7 @@ export const getXenoTrialsFranchiseStageSceneV192 = stageId => profiles.get(stag
 export function getXenoTrialsFranchiseStageAssetsV192(stageId) {
   const stage = stages.get(stageId);
   if (!stage) return empty;
-  const props = stage.stageRevision === 194 && stage.propsV194?.path;
+  const props = usesXenoTrialsIndependentProps(stage.stageRevision) && stage.propsV194?.path;
   return Object.freeze(props ? [stage.backdrop, props] : [stage.backdrop]);
 }
 
@@ -72,13 +80,13 @@ function makePlane(id, [sx, sy, sw, sh], path, hash, parallax, opacity) {
     plane: id === 'foreground' ? 'below-feet' : 'behind-fighters', path, expectedSourceSha256: hash });
 }
 
-/** V192/V193 use three crops from a single atlas. V194 admits two base
+/** V192/V193 use three crops from a single atlas. V194/V196 admit two base
  * crops and an independent transparent prop plate. Each decoded texture must
  * match the registered dimensions. SHA-256 describes the registered source. */
 export function getXenoTrialsFranchiseStageAtlasPlanesV192(stageId, image, propsImage) {
   const stage = stages.get(stageId), atlas = stage?.atlasV192;
   if (!matchesTexture(atlas, image) || atlas.height < 3) return empty;
-  const separateProps = stage.stageRevision === 194;
+  const separateProps = usesXenoTrialsIndependentProps(stage.stageRevision);
   const cuts = [0, Math.floor(atlas.height / 3), Math.floor(atlas.height * 2 / 3), atlas.height];
   const rects = separateProps ? atlas.sourceRects
     : atlas.sourceRects || cuts.slice(0, 3).map((y, n) => [0, y, atlas.width, cuts[n + 1] - y]);

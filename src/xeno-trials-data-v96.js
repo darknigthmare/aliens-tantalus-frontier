@@ -17,6 +17,7 @@ import { XENO_TRIALS_BOSS_STAGES_V179 } from './xeno-trials-boss-stages-v179.js'
 import { XENO_TRIALS_CORPORATE_STAGES_V190 } from './xeno-trials-stage-scenes-v190.js';
 import { XENO_TRIALS_FRANCHISE_STAGES_V192 } from './xeno-trials-franchise-stages-v192.js';
 import { XENO_TRIALS_ORIGINAL_ARENAS_V193 } from './xeno-trials-original-arenas-v193.js';
+import { XENO_TRIALS_REFERENCED_STAGES_V196 } from './xeno-trials-referenced-stages-v196.js';
 import { XENO_TRIALS_ICONIC_STAGES_V194 } from './xeno-trials-iconic-stages-v194.js';
 
 const ADAPTATIONS_V112 = Object.freeze([...XENO_TRIALS_AFE2_V112, ...XENO_TRIALS_AUTOMATONS_V112]);
@@ -294,7 +295,8 @@ export const XENO_TRIALS_STAGES_V96 = Object.freeze([
   ...XENO_TRIALS_CORPORATE_STAGES_V190,
   ...XENO_TRIALS_FRANCHISE_STAGES_V192,
   ...XENO_TRIALS_ORIGINAL_ARENAS_V193,
-  ...XENO_TRIALS_ICONIC_STAGES_V194
+  ...XENO_TRIALS_ICONIC_STAGES_V194,
+  ...XENO_TRIALS_REFERENCED_STAGES_V196
 ]);
 export const XENO_TRIALS_CONTROLS_V96 = Object.freeze({
   left: '← / Q / A', right: '→ / D', jump: '↑ / Z / W / Espace',

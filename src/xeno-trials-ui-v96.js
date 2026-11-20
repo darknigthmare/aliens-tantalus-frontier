@@ -1,3 +1,4 @@
+import { usesXenoTrialsIndependentProps } from './xeno-trials-franchise-stage-scenes-v192.js';
 import { renderArbiterTerminalDossierV190 } from './xeno-arbiter-ui-v190.js';
 import { ARBITER_PROGRAMS_V191, ARBITER_HORDE_PROTOCOLS_V191, getArbiterProgramV191, getArbiterArchiveAccessV191 } from './xeno-arbiter-protocols-v191.js';
 import { getXenoTrialsRigV154 } from './xeno-trials-rig-v154.js';
@@ -56,7 +57,8 @@ export function getXenoTrialsStagePageV192(stages, { media = 'all', page = 0, se
 /** A viewport, not an edited thumbnail: only the first admitted image plane
  * is visible, including atlases whose three bands have unequal integer heights. */
 export function getXenoTrialsStagePreviewCropV192(stage) {
-  const atlas = [192, 193, 194].includes(stage?.stageRevision) && stage.atlasV192;
+  const revision = stage?.stageRevision;
+  const atlas = (revision === 192 || revision === 193 || usesXenoTrialsIndependentProps(revision)) && stage.atlasV192;
   if (!atlas || !Number.isInteger(atlas.width) || !Number.isInteger(atlas.height)
     || atlas.width <= 0 || atlas.height < 3) return null;
   const crop = atlas.sourceRects?.[0] || [0, 0, atlas.width, Math.floor(atlas.height / 3)];
@@ -71,7 +73,7 @@ const stagePreviewImageV192 = (stage, alt = '') => {
   if (!stage.backdrop) return '<i></i><i></i><i></i>';
   const crop = getXenoTrialsStagePreviewCropV192(stage);
   if (!crop) return `<img src="${escapeHtml(stage.backdrop)}" alt="${escapeHtml(alt)}" loading="lazy">`;
-  const props = alt && stage.stageRevision === 194 && stage.propsV194;
+  const props = alt && usesXenoTrialsIndependentProps(stage.stageRevision) && stage.propsV194;
   const propsImage = props ? `<image href="${escapeHtml(props.path)}" x="${crop[0]}" y="${crop[1]}" width="${crop[2]}" height="${crop[3]}" preserveAspectRatio="xMidYMax meet"/>` : '';
   return `<svg class="xt-stage-image-v192" viewBox="${crop.join(' ')}" preserveAspectRatio="xMidYMid slice" focusable="false" ${alt ? `role="img" aria-label="${escapeHtml(alt)}"` : 'aria-hidden="true"'}><image href="${escapeHtml(stage.backdrop)}" width="${stage.atlasV192.width}" height="${stage.atlasV192.height}"/>${propsImage}</svg>`;
 };

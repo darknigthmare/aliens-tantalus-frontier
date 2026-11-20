@@ -12,10 +12,11 @@ import { verifyXenoIconicStageAdmissionsV194 } from './public-xeno-iconic-stage-
 
 test('the eight original adaptations are classified as simulations and keep their exact ticket identities', () => {
   assert.equal(stages.length, 8);
-  assert.equal(catalog.length, 120);
-  assert.equal(new Set(catalog.map(stage => stage.id)).size, 120);
-  assert.deepEqual(catalog.slice(112), stages);
-  const films = catalog.filter(stage => stage.media === 'film');
+  const historical = catalog.slice(0, 120);
+  assert.equal(historical.length, 120);
+  assert.equal(new Set(historical.map(stage => stage.id)).size, 120);
+  assert.deepEqual(historical.slice(112), stages);
+  const films = historical.filter(stage => stage.media === 'film');
   assert.equal(films.length, 15);
   const filmIds = new Set(films.map(stage => stage.id));
   for (const stage of stages) {

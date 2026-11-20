@@ -2,6 +2,8 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { referencedFilmStagesRuntimeSourcesV196, reviewedReferencedFilmStagesDigestV196,
+  verifyReferencedFilmStagesV196 } from './audit-xeno-referenced-film-stages-v196.mjs';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const readRepository = path => readFileSync(new URL('../' + path, import.meta.url));
@@ -120,23 +122,26 @@ export const STAGE_CLASSIFICATION_NEW_INPUTS_V195 = freezeReceipts({
 });
 
 export function reviewedStageClassificationDigestV195(path, endpointV194) {
-  if (!Object.hasOwn(STAGE_CLASSIFICATION_SUCCESSORS_V195, path)) return endpointV194;
+  if (!Object.hasOwn(STAGE_CLASSIFICATION_SUCCESSORS_V195, path))
+    return reviewedReferencedFilmStagesDigestV196(path, endpointV194);
   const receipt = STAGE_CLASSIFICATION_SUCCESSORS_V195[path];
   assert.equal(endpointV194, receipt.previousSha256, 'Incorrect V194 endpoint for V195: ' + path);
   assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256), 'Invalid V195 successor digest: ' + path);
   assert.notEqual(receipt.previousSha256, receipt.currentSha256, 'Unchanged V195 successor: ' + path);
-  return receipt.currentSha256;
+  return reviewedReferencedFilmStagesDigestV196(path, receipt.currentSha256);
 }
 
 export function stageClassificationRuntimeSourcesV195(historical) {
   const result = { ...historical };
   for (const [path, receipt] of Object.entries(STAGE_CLASSIFICATION_SUCCESSORS_V195)) {
     if (receipt.kind !== 'runtime') continue;
-    if (result[path] !== undefined && result[path] !== receipt.currentSha256)
-      assert.equal(result[path], receipt.previousSha256, 'Incorrect V195 runtime view predecessor: ' + path);
-    result[path] = receipt.currentSha256;
+    const current = reviewedReferencedFilmStagesDigestV196(path, receipt.currentSha256);
+    if (result[path] !== undefined)
+      assert.ok([receipt.previousSha256, receipt.currentSha256, current].includes(result[path]),
+        'Incorrect V195 runtime view predecessor: ' + path);
+    result[path] = current;
   }
-  return Object.freeze(result);
+  return referencedFilmStagesRuntimeSourcesV196(result);
 }
 
 export function verifyStageClassificationV195(readSource = readRepository) {
@@ -157,7 +162,8 @@ export function verifyStageClassificationV195(readSource = readRepository) {
     assert.ok(safePath(path) && ['verifier', 'document-input'].includes(receipt.kind) && validHash(receipt.sha256),
       'Invalid V195 source receipt: ' + path);
     assert.deepEqual(Object.keys(receipt).sort(), ['kind', 'sha256']);
-    assert.equal(sha(readSource(path)), receipt.sha256, 'Unreviewed V195 added-input bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedReferencedFilmStagesDigestV196(path, receipt.sha256),
+      'Unreviewed V195 added-input bytes: ' + path);
   }
   for (const [path, receipt] of Object.entries(STAGE_CLASSIFICATION_HISTORICAL_DECLARATIONS_V195)) {
     const source = readSource(path).toString();
@@ -166,6 +172,7 @@ export function verifyStageClassificationV195(readSource = readRepository) {
     assert.ok(start >= 0 && end > start, 'Missing historical declaration anchors: ' + path);
     assert.equal(sha(source.slice(start, end)), receipt.sha256, 'Historical receipt declarations changed: ' + path);
   }
+  verifyReferencedFilmStagesV196(readSource);
   return Object.freeze({
     baselineCommit: STAGE_CLASSIFICATION_BASELINE_V195,
     successors: successors.length,

@@ -20,14 +20,16 @@ const fixtures = Array.from({ length: 11 }, (_, n) => ({ id: `xt192-declared-hos
 const scenesSource = readFileSync(new URL('../src/xeno-trials-franchise-stage-scenes-v192.js', import.meta.url), 'utf8');
 const rendererSource = readFileSync(new URL('../src/xeno-trials-franchise-stage-render-v192.js', import.meta.url), 'utf8');
 const moduleUrl = source => `data:text/javascript;base64,${Buffer.from(source).toString('base64')}`;
-async function fixtureModules(data = fixtures, iconicData = []) {
+async function fixtureModules(data = fixtures, iconicData = [], referencedData = []) {
   const source = scenesSource
     .replace("import { XENO_TRIALS_FRANCHISE_STAGES_V192 } from './xeno-trials-franchise-stages-v192.js';",
       `const XENO_TRIALS_FRANCHISE_STAGES_V192 = ${JSON.stringify(data)};`)
     .replace("import { XENO_TRIALS_ORIGINAL_ARENAS_V193 } from './xeno-trials-original-arenas-v193.js';",
       'const XENO_TRIALS_ORIGINAL_ARENAS_V193 = [];')
     .replace("import { XENO_TRIALS_ICONIC_STAGES_V194 } from './xeno-trials-iconic-stages-v194.js';",
-      `const XENO_TRIALS_ICONIC_STAGES_V194 = ${JSON.stringify(iconicData)};`);
+      `const XENO_TRIALS_ICONIC_STAGES_V194 = ${JSON.stringify(iconicData)};`)
+    .replace("import { XENO_TRIALS_REFERENCED_STAGES_V196 } from './xeno-trials-referenced-stages-v196.js';",
+      `const XENO_TRIALS_REFERENCED_STAGES_V196 = ${JSON.stringify(referencedData)};`);
   assert.notEqual(source, scenesSource, 'Only the declared stage data imports are replaced.');
   const url = moduleUrl(source), scene = await import(url);
   const render = await import(moduleUrl(rendererSource.replace("'./xeno-trials-franchise-stage-scenes-v192.js'", JSON.stringify(url))));
@@ -149,6 +151,40 @@ const iconic = {
 const propsImage = { naturalWidth: 900, naturalHeight: 600, complete: true };
 const iconicMod = await fixtureModules([], [iconic]);
 const iconicImages = new Map([[iconic.backdrop, image], [iconic.propsV194.path, propsImage]]);
+
+test('V196 retains the independent texture routing, camera motion and draw order of V194', async () => {
+  const referenced = { ...iconic, id: 'xt196-declared-reference-fixture', stageRevision: 196 };
+  const renderer = await fixtureModules([], [iconic], [referenced]);
+  assert.deepEqual(renderer.getXenoTrialsFranchiseStageAssetsV192(referenced.id), [referenced.backdrop, referenced.propsV194.path]);
+  for (const camera of [{ center: 482, floor: 450 }, { center: 527, floor: 439 }]) {
+    for (const images of [iconicImages, new Map([[iconic.backdrop, image]])]) {
+      for (const drawStage of [renderer.drawXenoTrialsFranchiseStageRearV192, renderer.drawXenoTrialsFranchiseStageFrontV192]) {
+        const oldCanvas = context(), newCanvas = context();
+        const previous = drawStage(oldCanvas, iconic, images, camera, 333);
+        const current = drawStage(newCanvas, referenced, images, camera, 333);
+        assert.equal(current.revision, 196);
+        assert.deepEqual(newCanvas.calls, oldCanvas.calls);
+        assert.deepEqual(newCanvas.drawOpacities, oldCanvas.drawOpacities);
+        assert.deepEqual(current.drawnPlanes, previous.drawnPlanes.map(plane => ({ ...plane, stageId: referenced.id })));
+      }
+    }
+  }
+  for (const center of [150, 850]) {
+    const previous = context(), current = context();
+    const [oldPlane] = renderer.drawXenoTrialsFranchiseStageFrontV192(previous, iconic, iconicImages, { center }, 333).drawnPlanes;
+    const [newPlane] = renderer.drawXenoTrialsFranchiseStageFrontV192(current, referenced, iconicImages, { center }, 333).drawnPlanes;
+    assert.deepEqual(newPlane.destination, oldPlane.destination);
+    assert.equal(newPlane.tiles, 2);
+    assert.ok(!previous.calls.some(([name]) => name === 'scale'));
+    const { width, xPositions } = newPlane.destination;
+    const reflectedX = xPositions[center < 500 ? 0 : 1];
+    const transform = current.calls.findIndex(([name]) => name === 'translate');
+    assert.deepEqual(current.calls.slice(transform, transform + 2), [['translate', reflectedX + width, 0], ['scale', -1, 1]]);
+    assert.equal(current.calls[transform + 2][0], 'drawImage');
+    assert.equal(current.calls[transform + 2][6], 0);
+    assert.deepEqual(current.calls[transform + 3], ['restore']);
+  }
+});
 
 test('V194 Canvas submissions draw the admitted middle plate once at native opacity between the two base crops', () => {
   const camera = { center: 510, floor: 450 }, rear = context(), foreground = context(), tick = 333;

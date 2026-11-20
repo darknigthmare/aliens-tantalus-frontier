@@ -1,3 +1,4 @@
+import { publicXenoReferencedStagePathAdmissionV196, verifyXenoReferencedStageAdmissionsV196 } from './public-xeno-referenced-stage-admissions-v196.mjs';
 import { publicXenoIconicStagePathAdmissionV194, verifyXenoIconicStageAdmissionsV194 } from './public-xeno-iconic-stage-admissions-v194.mjs';
 import { publicXenoOriginalArenaPathAdmissionV193, verifyXenoOriginalArenaAdmissionsV193 } from './public-xeno-original-arena-admissions-v193.mjs';
 import { publicXenoFranchiseStagePathAdmissionV192, verifyXenoFranchiseStageAdmissionsV192 } from './public-xeno-franchise-stage-admissions-v192.mjs';
@@ -700,6 +701,14 @@ const PRIVATE_TEXT = [
   /['"]V\d+_(?:BATCH_\d+|[A-Z_]*IMAGEGEN)/
 ];
 
+const XENO_REFERENCED_STAGE_SOURCE_ONLY_V196 = new Set([
+  'docs/forge/xeno-trials/V196-REFERENCED-FILM-STAGES.md',
+  'scripts/public-xeno-referenced-stage-admissions-v196.mjs',
+  'scripts/audit-xeno-referenced-film-stages-v196.mjs',
+  'scripts/verify-xeno-referenced-film-stages-audit-v196.mjs',
+  'scripts/verify-xeno-referenced-film-stages-v196.mjs'
+]);
+
 const XENO_STAGE_CLASSIFICATION_SOURCE_ONLY_V195 = new Set([
   'docs/forge/xeno-trials/V195-STAGE-CLASSIFICATION.md',
   'scripts/audit-xeno-stage-classification-v195.mjs',
@@ -726,6 +735,7 @@ const XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193 = new Set([
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
+  if (XENO_REFERENCED_STAGE_SOURCE_ONLY_V196.has(path)) return !built;
   if (XENO_STAGE_CLASSIFICATION_SOURCE_ONLY_V195.has(path)) return !built;
   if (XENO_ICONIC_STAGE_SOURCE_ONLY_V194.has(path)) return !built;
   if (XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193.has(path)) return !built;
@@ -741,6 +751,8 @@ export function isPublicDistributionPathV86(path, { directory = false, built = f
   if (segments.some(part => !part || part === '.' || part === '..' || PRIVATE_SEGMENT.test(part))) return false;
   const spriteAdmissionV191 = publicXenoSpritePathAdmissionV191(path, { directory });
   if (spriteAdmissionV191 !== null) return spriteAdmissionV191;
+  const referencedStageAdmissionV196 = publicXenoReferencedStagePathAdmissionV196(path, { directory });
+  if (referencedStageAdmissionV196 !== null) return referencedStageAdmissionV196;
   const iconicStageAdmissionV194 = publicXenoIconicStagePathAdmissionV194(path, { directory });
   if (iconicStageAdmissionV194 !== null) return iconicStageAdmissionV194;
   const originalArenaAdmissionV193 = publicXenoOriginalArenaPathAdmissionV193(path, { directory });
@@ -833,6 +845,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   await verifyXenoFranchiseStageAdmissionsV192(root);
   await verifyXenoOriginalArenaAdmissionsV193(root);
   await verifyXenoIconicStageAdmissionsV194(root);
+  await verifyXenoReferencedStageAdmissionsV196(root);
   return { ok: true, version: RELEASE.version, files, assets, privateDocuments: 0 };
 }
 

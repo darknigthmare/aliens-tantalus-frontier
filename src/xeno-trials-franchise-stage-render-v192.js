@@ -1,5 +1,5 @@
 import { getXenoTrialsFranchiseStageV192, getXenoTrialsFranchiseStageSceneV192, getXenoTrialsFranchiseStageViewV192,
-  getXenoTrialsFranchiseStageAtlasPlanesV192 } from './xeno-trials-franchise-stage-scenes-v192.js';
+  getXenoTrialsFranchiseStageAtlasPlanesV192, usesXenoTrialsIndependentProps } from './xeno-trials-franchise-stage-scenes-v192.js';
 
 const finite = (value, fallback) => Number.isFinite(value) ? value : fallback;
 const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
@@ -7,7 +7,7 @@ const clip = (ctx, box) => { ctx.beginPath(); ctx.rect(box.x, box.y, box.width, 
 
 /** Bounded two-tile submission preserves each band's aspect. All camera
  * translation is visual; the physical arena and fighter positions are shared. */
-export function getXenoTrialsFranchiseStageAtlasLayoutV192(plane, camera = {}) {
+export function getXenoTrialsFranchiseStageAtlasLayoutV192(plane, camera = {}, { mirrorForeground = false } = {}) {
   if (!plane || ![plane.sw, plane.sh, plane.parallax].every(Number.isFinite) || !(plane.sw > 0) || !(plane.sh > 0)) return null;
   const floor = clamp(finite(camera.floor, 450), 180, 530);
   const coverWidth = 1160 / plane.sw;
@@ -16,8 +16,14 @@ export function getXenoTrialsFranchiseStageAtlasLayoutV192(plane, camera = {}) {
   const origin = (1000 - width) / 2 - (clamp(finite(camera.center, 500), -1e9, 1e9) - 500) * plane.parallax;
   if (plane.separateProps) return Object.freeze({ width, height, y: floor - height, tiles: Object.freeze([origin]) });
   const start = ((origin % width) + width) % width - width;
-  const tiles = []; for (let x = start; x < 1000; x += width) tiles.push(x);
-  return Object.freeze({ width, height, y: plane.id === 'foreground' ? 560 - height : floor - height, tiles: Object.freeze(tiles) });
+  const tiles = [];
+  for (let x = start; x < 1000; x += width) tiles.push(x);
+  // Reflect adjacent copies so the edge of the authored foreground joins itself.
+  const reflected = mirrorForeground
+    ? { mirrored: Object.freeze(tiles.filter(x => Math.round((x - origin) / width) % 2 !== 0)) }
+    : {};
+  return Object.freeze({ width, height, y: plane.id === 'foreground' ? 560 - height : floor - height,
+    tiles: Object.freeze(tiles), ...reflected });
 }
 function paintAtlas(ctx, stage, images, camera, front, renderTick, drawBehindProps) {
   const admitted = getXenoTrialsFranchiseStageV192(stage.id);
@@ -30,14 +36,26 @@ function paintAtlas(ctx, stage, images, camera, front, renderTick, drawBehindPro
   const planes = getXenoTrialsFranchiseStageAtlasPlanesV192(stage.id, baseImage, propsImage), receipts = [];
   for (const plane of planes) {
     if ((plane.plane === 'below-feet') !== front) continue;
-    const layout = getXenoTrialsFranchiseStageAtlasLayoutV192(plane, camera); if (!layout) continue;
+    const layout = getXenoTrialsFranchiseStageAtlasLayoutV192(plane, camera, {
+      mirrorForeground: front && admitted.stageRevision === 196
+    });
+    if (!layout) continue;
     if (plane.separateProps && drawBehindProps) {
       drawBehindProps();
       drawBehindProps = null;
     }
     const image = plane.separateProps ? propsImage : baseImage;
     ctx.globalAlpha = plane.opacity;
-    for (const x of layout.tiles) ctx.drawImage(image, plane.sx, plane.sy, plane.sw, plane.sh, x, layout.y, layout.width, layout.height);
+    for (const x of layout.tiles) {
+      const mirrored = layout.mirrored?.includes(x);
+      if (mirrored) {
+        ctx.save();
+        ctx.translate(x + layout.width, 0);
+        ctx.scale(-1, 1);
+      }
+      ctx.drawImage(image, plane.sx, plane.sy, plane.sw, plane.sh, mirrored ? 0 : x, layout.y, layout.width, layout.height);
+      if (mirrored) ctx.restore();
+    }
     // A receipt is appended only after the corresponding Canvas submissions.
     // The expected source hash comes from admission; HTTP byte identity is
     // independently checked by the browser pilot, not inferred from Image.
@@ -45,7 +63,7 @@ function paintAtlas(ctx, stage, images, camera, front, renderTick, drawBehindPro
       expectedSourceSha256: plane.expectedSourceSha256, sourceIdentity: 'admitted-registry-expected-sha256',
       sourceRect: Object.freeze([plane.sx, plane.sy, plane.sw, plane.sh]), renderTick, drawn: true,
       destination: Object.freeze({ width: layout.width, height: layout.height, y: layout.y, xPositions: layout.tiles }), tiles: layout.tiles.length,
-      ...(admitted.stageRevision === 194 ? { parallax: plane.parallax, opacity: plane.opacity } : {}) }));
+      ...(usesXenoTrialsIndependentProps(admitted.stageRevision) ? { parallax: plane.parallax, opacity: plane.opacity } : {}) }));
   }
   drawBehindProps?.();
   return Object.freeze(receipts);
@@ -152,7 +170,7 @@ export function drawXenoTrialsFranchiseStageRearV192(ctx, stage, images, camera 
       if (receipt) eventReceipts.push(receipt);
     }
   };
-  const layeredEvents = profile.revision === 194;
+  const layeredEvents = usesXenoTrialsIndependentProps(profile.revision);
   const drawnPlanes = paintAtlas(ctx, stage, images, camera, false, view.renderTick, layeredEvents ? drawEvents : null);
   fixtures(ctx, profile, view);
   if (!layeredEvents) drawEvents();
