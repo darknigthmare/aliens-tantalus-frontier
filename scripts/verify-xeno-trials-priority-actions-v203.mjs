@@ -83,7 +83,8 @@ test('V203 coverage preserves Chrysalis combat, admits the exact Razor Claws pla
   assert.equal(getXenoTrialsRuntimeActionAtlases(razor, razorArt)[0].revision, 203);
   assert.deepEqual(getXenoTrialsRuntimeActionAtlases(razor, { ...razorArt, sha256: '0'.repeat(64) }), []);
   const coverage = XENO_TRIALS_FIGHTERS_V96.map(getXenoTrialsRuntimeAnimationCoverage);
-  assert.equal(coverage.filter(entry => entry.hasDrawnGestures).length, 35);
+  assert.equal(coverage.filter(entry => entry.drawnStates.some(action => action !== 'idle'
+    && entry.states[action].sources.some(source => source.renderKind === 'drawn' && source.revision <= 203))).length, 35);
   assert.equal(coverage.filter(entry => entry.states.guard.sources.some(source => source.revision === 203)).length, 20);
   assert.ok(coverage.every(entry => !entry.fullAnimation && !entry.canonExact));
 });

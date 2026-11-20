@@ -1,6 +1,7 @@
 import { getXenoTrialsOperationV188, getXenoTrialsOperationViewV188, XENO_TRIALS_OPERATION_LIMITS_V188 } from './xeno-trials-operations-v188.js';
-import { getXenoTrialsBodyBoundsV105 } from './xeno-trials-geometry-v105.js';
+import { getXenoTrialsBodyBoundsV105, XENO_TRIALS_ARENA_V105 } from './xeno-trials-geometry-v105.js';
 import { drawXenoTrialsExtractionV203 } from './xeno-trials-extraction-presentation-v203.js';
+import { drawXenoTrialsPurgeV204, getXenoTrialsPurgeTelemetryV204 } from './xeno-trials-purge-presentation-v204.js';
 
 const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
 const kinds = Object.freeze({ escort: 'ESCORTE', relay: 'RELAIS', purge: 'PURGE', beacon: 'BALISE', extraction: 'EXTRACTION' });
@@ -15,6 +16,7 @@ export function getXenoTrialsOperationHudV188(match) {
   let instruction = view.status === 'completed' ? 'Objectifs validés.' : view.status === 'failed' ? 'Évaluation interrompue.' : view.instruction;
   let beaconWindow = null;
   let extractionWorkV203 = null;
+  const purgeV204 = getXenoTrialsPurgeTelemetryV204(match, view, XENO_TRIALS_ARENA_V105);
   if (target && body) {
     const contact = player.y === 0 && body.left <= target.x + target.radius && body.right >= target.x - target.radius;
     const label = contact ? target.label : target.x < body.center ? `← ${target.label}` : `${target.label} →`;
@@ -26,13 +28,15 @@ export function getXenoTrialsOperationHudV188(match) {
       beaconWindow = { id: target.id, open, contact, remainingTicks: target.windowRemainingTicks, seconds };
     } else {
       instruction = contact ? `${label} · MAINTENEZ INTERAGIR` : label;
-      if (view.kind === 'extraction') {
-        extractionWorkV203 = { id: target.id, kind: target.kind, contact, progress: target.progress,
+      if (view.kind === 'extraction' || purgeV204) {
+        const work = { id: target.id, kind: target.kind, contact, progress: target.progress,
           requiredTicks: target.requiredTicks, percent: Math.floor(target.progress * 100 / target.requiredTicks) };
+        if (purgeV204) purgeV204.work = work;
+        else extractionWorkV203 = work;
       }
     }
   }
-  return { ...view, phase, orders: view.instruction, instruction, beaconWindow, extractionWorkV203 };
+  return { ...view, phase, orders: view.instruction, instruction, beaconWindow, extractionWorkV203, purgeV204 };
 }
 
 /** A briefing describes the authored physical objective. It never changes a
@@ -61,6 +65,10 @@ export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear',
     return { id: view.id, plane, entities: view.entities.length,
       extraction: drawXenoTrialsExtractionV203(ctx, match, view, floor, reducedMotion) };
   }
+  if (view.kind === 'purge' && plane === 'rear') {
+    return { id: view.id, plane, entities: view.entities.length,
+      purge: drawXenoTrialsPurgeV204(ctx, match, view, arena, reducedMotion) };
+  }
   ctx.save();
   for (const entity of view.entities) {
     if (!Number.isFinite(entity.x) || !Number.isFinite(entity.radius)) continue;
@@ -88,8 +96,6 @@ export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear',
     if (entity.kind === 'cargo' || entity.kind === 'supply') {
       ctx.fillRect(x - width / 2 + 7, floor - height + 6, 5, height - 14);
       ctx.fillRect(x + width / 2 - 12, floor - height + 6, 5, height - 14);
-    } else if (entity.kind === 'vent') {
-      for (let offset = -12; offset <= 12; offset += 8) ctx.fillRect(x + offset, floor - 25, 3, 18);
     } else {
       ctx.fillRect(x - width / 2 + 7, floor - height + 8, width - 14, 9);
       ctx.fillStyle = entity.windowOpen === false && !entity.completed ? '#bd7658' : '#a9d79b';

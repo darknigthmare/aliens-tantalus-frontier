@@ -31,7 +31,9 @@ const trialLabels = new Map([
   ['Duel restauré. Reprenez avec P, Start ou le bouton Reprendre.', 'Duel restored. Resume with P, Start or the Resume button.'],
   ['Duel sauvegardé. Retrouvez la manche, la santé et le chrono enregistrés.', 'Duel saved. Resume with your saved round, health and timer.'],
   ['FENÊTRE VERTE', 'GREEN WINDOW'],
-  ['FENÊTRE FERMÉE', 'WINDOW CLOSED']
+  ['FENÊTRE FERMÉE', 'WINDOW CLOSED'],
+  ['PRESSION DU CONFINEMENT', 'CONTAINMENT PRESSURE'],
+  ['SORTIE DE ZONE', 'CLEAR THE HAZARD']
 ]);
 
 // The English catalog (~600 kB) is loaded only when English is chosen, so a

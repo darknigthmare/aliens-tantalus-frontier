@@ -51,7 +51,7 @@ for(const entry of OPS)test(`${entry.id}: title, actual briefing, world labels, 
   assert.equal(translate(text.pressureLabel),'GROUNDED INTERACTION · E / L3 / TOUCH');
   for(const entity of world.entities)assert.equal(translate(entity.label),label(entity));
   const isBeacon=entry.kind==='beacon',closed=isBeacon?'WINDOW CLOSED · ':'';
-  const physicalChoice=isBeacon||entry.kind==='extraction';
+  const physicalChoice=isBeacon||['extraction','purge'].includes(entry.kind);
   const target=physicalChoice?world.entities.find(entity=>entity.active):world.entities.find(entity=>entity.x===world.target.x&&entity.label===world.target.label);
   const name=label(target),player=match.fighters[0];
   player.x=5000;assert.equal(translate(hud(match).instruction),`${closed}← ${name}`);

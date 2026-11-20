@@ -100,6 +100,7 @@ const ARCHIVE_BRANCH_V191 = 'arbiter-archives';
 const TERMINAL_BRANCHES_V191 = Object.freeze([...BRANCHES, Object.freeze({ id: ARCHIVE_BRANCH_V191, label: 'ARCHIVES ARBITER',
   description: '20 hordes et 20 opérations issues de la copie isolée AB-40. Les six retours de l’enquête ouvrent ces dossiers.' })]);
 const activityBranchV191 = (branch, id) => branch === ARCHIVE_BRANCH_V191 ? getArbiterProgramV191(id)?.branch : activityBranchV179(branch);
+const RESULT_RETRY_DELAY_MS = 500;
 
 /** UI owns no campaign money and never writes outside its current save owner. */
 export class XenoTrialsUiV96 {
@@ -107,6 +108,7 @@ export class XenoTrialsUiV96 {
     Object.assign(this, { root, getProgress, onCommit, canCommit, onReturn, audioDirector, getCampaignProgress, onOpenArbiterDossier });
     this.audioEnabledV189 = true;
     this.runtime = null; this.generation = 0; this.selected = 'warrior'; this.active = false;
+    this.resultRetryTimer = null;
     this.selectionStep = 'home'; this.branchV119 = null; this.activityV119 = null;
     this.rosterPageV179 = 0; this.rosterSelectionV179 = null;
     this.programPageV186 = 0;
@@ -164,7 +166,7 @@ export class XenoTrialsUiV96 {
         <span class="xt-vital-value xt-super-value-v148" data-xt="${side}-super-value" hidden></span><progress class="xt-super-meter-v148" data-xt="${side}-super" max="100" value="0" aria-label="Jauge de super ${i ? 'adversaire' : 'joueur'}" hidden></progress></div>`).join('')}
         <div class="xt-match-clock"><span data-xt="round">MANCHE 1</span><strong data-xt="clock" role="timer" aria-live="off" aria-label="Secondes restantes">99</strong><span class="xt-clock-unit">SECONDES</span><strong data-xt="score" aria-label="Manches gagnées : joueur — adversaire">0 — 0</strong></div>
         <div class="xt-horde-telemetry" data-xt="horde-hud" hidden><span class="xt-horde-link">MIRE / TÉLÉMÉTRIE TACTIQUE</span><div class="xt-horde-counter-row"><div><span>CONTACTS ACTIFS</span><strong data-xt="horde-alive">0</strong></div><div><span>RENFORTS EN ATTENTE</span><strong data-xt="horde-remaining">0</strong></div></div><span data-xt="horde-phase" class="xt-horde-phase"></span><span class="xt-horde-total" data-xt="horde-kills"></span><progress data-xt="horde-progress" class="xt-horde-progress" max="1" value="0" aria-label="Contacts neutralisés sur la population totale"></progress></div>
-      <section data-xt="boss-hud" class="xt-boss-hud-v186" hidden><span>CONTACT MAJEUR</span><strong data-xt="boss-name"></strong><span data-xt="boss-phase"></span><progress data-xt="boss-hp" max="1" value="1" aria-label="Santé du contact majeur"></progress><span data-xt="boss-hp-value"></span></section><section data-xt="operation-hud" class="xt-operation-hud-v188" hidden><div><span data-xt="operation-phase"></span><strong data-xt="operation-title"></strong></div><p data-xt="operation-instruction"><span data-xt="operation-task-text"></span><span data-xt="operation-work-value"></span></p><progress data-xt="operation-progress" max="1" value="0" aria-label="Progression de l’objectif"></progress><span data-xt="operation-progress-value"></span><span data-xt="operation-integrity"></span><p data-xt="operation-hint"></p><p data-xt="operation-hazard"></p></section><div class="xt-hud-meta-v186"><p class="xt-input-device-v186" data-xt="input-device" role="status">CLAVIER / TACTILE</p><p data-xt="checkpoint-status" class="xt-checkpoint-v186" role="status" aria-live="polite"></p><button type="button" class="button" data-xt="retry-checkpoint" hidden>RÉESSAYER LA SAUVEGARDE DE REPRISE</button></div></div><p data-xt="horde-announcement" class="xt-sr-only" role="status" aria-live="polite"></p>
+      <section data-xt="boss-hud" class="xt-boss-hud-v186" hidden><span>CONTACT MAJEUR</span><strong data-xt="boss-name"></strong><span data-xt="boss-phase"></span><progress data-xt="boss-hp" max="1" value="1" aria-label="Santé du contact majeur"></progress><span data-xt="boss-hp-value"></span></section><section data-xt="operation-hud" class="xt-operation-hud-v188" hidden><div><span data-xt="operation-phase"></span><strong data-xt="operation-title"></strong></div><p data-xt="operation-instruction"><span data-xt="operation-task-text"></span><span data-xt="operation-work-value"></span></p><progress data-xt="operation-progress" max="1" value="0" aria-label="Progression de l’objectif"></progress><span data-xt="operation-progress-value"></span><span data-xt="operation-integrity"></span><p data-xt="operation-pressure" hidden><span>PRESSION DU CONFINEMENT</span><span data-xt="operation-pressure-value"></span></p><p data-xt="operation-hint"></p><p data-xt="operation-hazard"></p></section><div class="xt-hud-meta-v186"><p class="xt-input-device-v186" data-xt="input-device" role="status">CLAVIER / TACTILE</p><p data-xt="checkpoint-status" class="xt-checkpoint-v186" role="status" aria-live="polite"></p><button type="button" class="button" data-xt="retry-checkpoint" hidden>RÉESSAYER LA SAUVEGARDE DE REPRISE</button></div></div><p data-xt="horde-announcement" class="xt-sr-only" role="status" aria-live="polite"></p>
       <div class="xt-arena"><canvas width="1000" height="560" tabindex="0" data-xt="canvas" aria-label="Arène de combat Xeno Trials" aria-describedby="xeno-trials-help-v96"></canvas>
       <p data-xt="health" class="xt-sr-only" aria-label="Santé et endurance des combattants"></p></div>
       <div class="xt-actions"><button class="button" data-xt="pause" disabled>PAUSE</button><button type="button" class="button" data-xt="taunt" hidden disabled>T · DÉFI</button><button type="button" class="button" data-xt="skip-sequence" hidden>PASSER LA PRÉSENTATION</button><button class="button" data-xt="next" hidden>MANCHE SUIVANTE</button><button class="button" data-xt="retry-save" hidden>RÉESSAYER LA SAUVEGARDE DU RÉSULTAT</button></div><section data-xt="pause-overlay" class="xt-pause-overlay-v119" role="dialog" aria-modal="true" aria-labelledby="xeno-trials-pause-title-v119" hidden><h2 id="xeno-trials-pause-title-v119">ÉVALUATION SUSPENDUE</h2><p>Q/D ou flèches · Saut Z/↑ · Garde S/↓ · Attaques J/K/L · Super I (jauge pleine) · P ou Échap pour reprendre.</p><p data-xt="operation-input-hint" hidden>E / L3 / INTERAGIR : maintenez au sol près de la cible indiquée. Évitez les zones de danger annoncées avant leur activation.</p><p data-xt="operation-orders" hidden></p><p class="xt-input-hint-v186" data-xt="input-hint">CLAVIER / TACTILE / MANETTE STANDARD · Stick ou croix : déplacement · A : saut · LT : garde · X/Y/B : attaques · RT : super · Start/Back : pause. Relâchez les commandes après une reprise.</p><p>La simulation et le chrono sont arrêtés. Reprenez l’évaluation ou abandonnez-la sans gain.</p><button type="button" class="button" data-xt="audio-toggle" aria-label="Sons de Trials" aria-pressed="true">COUPER LES SONS DE TRIALS</button><p class="xt-audio-hint-v189">Le volume des effets suit les réglages audio du profil.</p><button type="button" class="button" data-xt="retry-checkpoint-overlay" hidden>RÉESSAYER LA SAUVEGARDE DE REPRISE</button><button type="button" class="button primary" data-xt="resume-overlay">REPRENDRE</button><button type="button" class="button danger-outline" data-xt="abandon-overlay">ABANDONNER · SANS GAIN</button></section>
@@ -323,10 +325,10 @@ export class XenoTrialsUiV96 {
     if (rules.timeLimitSeconds) this.form.elements.roundSeconds.value=String(rules.timeLimitSeconds);
     this.renderActivitiesV119(this.state()); return true;
   }
-  commit(transaction) {
+  commit(transaction, { pauseOnFailure = true } = {}) {
     if (!this.active || !this.canCommit() || !transaction?.applied) return false;
     try { this.onCommit(transaction.state); this.render(); return true; }
-    catch (error) { this.runtime?.pause(); this.message(`Sauvegarde refusée : ${error.message}. Aucun gain confirmé.`); return false; }
+    catch (error) { if (pauseOnFailure) this.runtime?.pause(); this.message(`Sauvegarde refusée : ${error.message}. Aucun gain confirmé.`); return false; }
   }
   restorePendingSelection() {
     // Saved duels retain their historical timer/palette; previews describe that ticket.
@@ -480,8 +482,14 @@ export class XenoTrialsUiV96 {
     this.el('arena-cards').innerHTML = page.stages.map(s => `<button type="button" class="xt-arena-card" data-xt-arena="${s.id}" aria-pressed="${s.id === stage.id}" ${locked || activity?.stageId && activity.stageId !== s.id ? 'disabled' : ''} style="--xt-back:${s.background};--xt-floor:${s.floor};--xt-accent:${s.accent}"><span class="xt-arena-thumbnail${s.stageRevision === 190 ? ' xt-atlas-preview-v190' : ''}">${stagePreviewImageV192(s)}</span><strong>${escapeHtml(s.label)}</strong><small>${activity?.stageId ? 'Environnement assigné à l’évaluation' : s.backdrop ? 'SECTEUR RÉPERTORIÉ' : 'SECTEUR MIRE'} · 2D</small>${s.media ? `<small>${escapeHtml(stageMediaLabelV192(s))} · ${escapeHtml(s.sourceWork || '')}</small>` : ''}</button>`).join('') || '<p class="xt-help">Aucune arène pour ce support. Votre sélection est conservée.</p>';
     this.el('stage-preview').innerHTML = `<div class="xt-stage-scene${stage.stageRevision === 190 ? ' xt-atlas-preview-v190' : ''}" style="--xt-back:${stage.background};--xt-floor:${stage.floor};--xt-accent:${stage.accent}">${stagePreviewImageV192(stage, 'Aperçu du décor sélectionné')}<span>${escapeHtml(stage.label)}</span></div><p>${horde ? `${horde.pressureLabel} · ${horde.waveLabel} · ${horde.healthLabel}` : matchup} · ${escapeHtml(stage.label)}</p>`;
   }
-  closeRuntime() { this.runtime?.stop(); this.root.removeAttribute('data-xt-outro'); this.el('skip-sequence').hidden = true; this.el('taunt').hidden=true; this.el('taunt').disabled=true; this.generation++; this.runtime = null; this.loading = false; this.lastStatus = null; this.lastResumedTickV186 = null; this.lastGamepadHintV186 = null; }
+  cancelResultRetry() {
+    if (this.resultRetryTimer == null) return;
+    clearTimeout(this.resultRetryTimer);
+    this.resultRetryTimer = null;
+  }
+  closeRuntime() { this.cancelResultRetry(); this.runtime?.stop(); this.root.removeAttribute('data-xt-outro'); this.el('skip-sequence').hidden = true; this.el('taunt').hidden=true; this.el('taunt').disabled=true; this.generation++; this.runtime = null; this.loading = false; this.lastStatus = null; this.lastResumedTickV186 = null; this.lastGamepadHintV186 = null; }
   close() {
+    if (this.unsavedResult) this.finish(this.unsavedResult);
     this.closeRuntime(); this.active = false; this.unsavedResult = null; this.lastStatus = null;
     this.root.ownerDocument?.documentElement?.classList?.remove('xt-fullscreen-v119');
     this.el('retry-save').hidden = true; this.el('next').hidden = true;
@@ -581,20 +589,28 @@ export class XenoTrialsUiV96 {
       this.el('operation-title').textContent = operation.title;
       this.el('operation-phase').textContent = snapshot.paused ? 'PAUSE' : operation.phase;
       const operationInstruction = this.el('operation-instruction'), beacon = operation.beaconWindow;
-      const work = operation.extractionWorkV203;
+      const purge = operation.purgeV204;
+      const work = operation.extractionWorkV203 || purge?.work;
       this.el('operation-task-text').textContent = operation.instruction;
       this.el('operation-work-value').textContent = beacon ? ` · ${beacon.seconds} s` : work?.contact ? ` · ${work.percent} %` : '';
       operationInstruction.setAttribute('data-beacon-window', beacon ? beacon.open ? 'open' : 'closed' : '');
-      operationInstruction.setAttribute('data-extraction-work', String(Boolean(work?.contact)));
+      operationInstruction.setAttribute('data-extraction-work', String(Boolean(operation.extractionWorkV203?.contact)));
+      operationInstruction.setAttribute('data-purge-work', String(Boolean(purge?.work?.contact)));
       this.el('operation-progress').max = Math.max(1, operation.progress.total);
       this.el('operation-progress').value = operation.progress.done;
       this.el('operation-progress-value').textContent = operation.progress.label;
       this.el('operation-integrity').textContent = operation.integrity === null || operation.integrity === undefined ? '' : `INTÉGRITÉ ${Math.ceil(operation.integrity)} / 100`;
+      const pressureLine = this.el('operation-pressure'), pressure = purge?.pressure;
+      pressureLine.hidden = !pressure;
+      pressureLine.setAttribute('data-phase', pressure?.phase || '');
+      this.el('operation-pressure-value').textContent = pressure ? ` · −${pressure.expectedLoss} / ${pressure.seconds} s` : '';
       const operationHint = this.el('operation-hint');
-      operationHint.hidden = Boolean(beacon);
+      operationHint.hidden = Boolean(beacon || purge?.work?.contact);
       operationHint.textContent = operation.hint;
       const hazard = snapshot.stageHazardViewV188;
-      this.el('operation-hazard').textContent = hazard && ['warning', 'active'].includes(hazard.phase) ? `${hazard.phase === 'warning' ? 'DANGER ANNONCÉ' : 'DANGER ACTIF'} · ${hazard.label} · ${hazard.hint || 'Quittez la zone balisée.'}` : '';
+      const escape = purge?.escape;
+      const escapeHint = escape ? `SORTIE DE ZONE · ${escape.preferred === 'left' ? '←' : '→'}` : hazard?.hint || 'Quittez la zone balisée.';
+      this.el('operation-hazard').textContent = hazard && ['warning', 'active'].includes(hazard.phase) ? `${hazard.phase === 'warning' ? 'DANGER ANNONCÉ' : 'DANGER ACTIF'} · ${hazard.label} · ${escapeHint}` : '';
       this.el('operation-hazard').setAttribute('data-active', String(hazard?.phase === 'active'));
     }
     if (!horde || snapshot.phase === 'match-over')
@@ -692,12 +708,24 @@ export class XenoTrialsUiV96 {
     this.root.setAttribute('data-xt-phase', snapshot.phase);
   }
   finish(result) {
-    if (!result || !this.active || !this.canCommit()) return false;
+    if (!result || !this.active || !this.canCommit() || this.unsavedResult && this.unsavedResult !== result) return false;
+    const firstAttempt = !this.unsavedResult;
+    this.cancelResultRetry();
     const transaction = settleXenoTrialsV96(this.getProgress(), result);
     if (!transaction.applied) { this.message('Résultat non applicable à ce duel. Aucun gain ajouté.'); return false; }
     this.unsavedResult = result;
     this.render(); // Lock conflicting actions even when the storage commit below throws.
-    if (!this.commit(transaction)) { this.el('retry-save').hidden = false; return false; }
+    if (!this.commit(transaction, { pauseOnFailure: false })) {
+      this.el('retry-save').hidden = false;
+      if (firstAttempt) {
+        const generation = this.generation;
+        this.resultRetryTimer = setTimeout(() => {
+          this.resultRetryTimer = null;
+          if (generation === this.generation && this.unsavedResult === result) this.finish(result);
+        }, RESULT_RETRY_DELAY_MS);
+      }
+      return false;
+    }
     this.unsavedResult = null; this.el('retry-save').hidden = true;
     const outcome = { player: 'VICTOIRE', opponent: 'DÉFAITE', draw: 'ÉGALITÉ' }[result.winner];
     this.el('result').textContent = `${outcome} · Résultat sauvegardé · +${transaction.receipt.credits} crédits de simulation · +${transaction.receipt.xp} XP${transaction.receipt.modeReward?.continuing ? ' · Série en cours : préparez le passage suivant.' : ''}${transaction.receipt.modeReward?.secondary ? ' · Objectif secondaire validé.' : ''}`;

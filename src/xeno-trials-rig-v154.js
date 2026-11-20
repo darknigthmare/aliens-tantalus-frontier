@@ -8,6 +8,7 @@ import { XENO_TRIALS_RIG_DATA_V199 } from './xeno-trials-rig-data-v199.js';
 import { XENO_TRIALS_RIG_DATA_V201 } from './xeno-trials-rig-data-v201.js';
 import { XENO_TRIALS_RIG_DATA_V202 } from './xeno-trials-rig-data-v202.js';
 import { XENO_TRIALS_DEFENSE_DATA_V203 } from './xeno-trials-defense-data-v203.js';
+import { XENO_TRIALS_DEFENSE_DATA_V204 } from './xeno-trials-defense-data-v204.js';
 import { XENO_TRIALS_GRAPPLE_V153 } from './xeno-trials-grapple-v153.js';
 import { XENO_TRIALS_CASTES_V151 } from './xeno-trials-castes-v151.js';
 import { XENO_TRIALS_SIGNATURES_V147, getXenoTrialsAttackV147 } from './xeno-trials-signatures-v147.js';
@@ -50,8 +51,9 @@ export const XENO_TRIALS_ARTICULATED_RIGS_V199 = admitArticulatedRigs(XENO_TRIAL
 export const XENO_TRIALS_ARTICULATED_RIGS_V201 = admitArticulatedRigs(XENO_TRIALS_RIG_DATA_V201, 201);
 export const XENO_TRIALS_ARTICULATED_RIGS_V202 = admitArticulatedRigs(XENO_TRIALS_RIG_DATA_V202, 202);
 export const XENO_TRIALS_DEFENSE_RIGS_V203 = admitArticulatedRigs(XENO_TRIALS_DEFENSE_DATA_V203, 203, true);
-const defenseRigs = new Set(XENO_TRIALS_DEFENSE_RIGS_V203);
-const defenseRigByFighter = new Map(XENO_TRIALS_DEFENSE_RIGS_V203.map(rig => [rig.fighterId, rig]));
+export const XENO_TRIALS_DEFENSE_RIGS_V204 = admitArticulatedRigs(XENO_TRIALS_DEFENSE_DATA_V204, 204, true);
+const defenseRigs = new Set([...XENO_TRIALS_DEFENSE_RIGS_V203, ...XENO_TRIALS_DEFENSE_RIGS_V204]);
+const defenseRigByFighter = new Map([...defenseRigs].map(rig => [rig.fighterId, rig]));
 if (defenseRigs.size !== defenseRigByFighter.size) throw new Error('Duplicate Trials defense fighter');
 const articulatedRigByFighterV197 = new Map(XENO_TRIALS_ARTICULATED_RIGS_V197.map(rig => [rig.fighterId, rig]));
 const articulatedRigByFighterV199 = new Map(XENO_TRIALS_ARTICULATED_RIGS_V199.map(rig => [rig.fighterId, rig]));
@@ -88,8 +90,16 @@ export const getXenoTrialsRigV199 = (definition, art) => getArticulatedRig(artic
 export const getXenoTrialsRigV201 = (definition, art) => getArticulatedRig(articulatedRigByFighterV201, definition, art);
 export const getXenoTrialsRigV202 = (definition, art) => getArticulatedRig(articulatedRigByFighterV202, definition, art);
 export const getXenoTrialsRuntimeArticulatedRig = (definition, art) => getArticulatedRig(runtimeArticulatedRigByFighter, definition, art);
-export const getXenoTrialsDefenseRigV203 = (definition, art) => getArticulatedRig(defenseRigByFighter, definition, art,
+export const getXenoTrialsRuntimeDefenseRig = (definition, art) => getArticulatedRig(defenseRigByFighter, definition, art,
  art?.sha256 ?? ENEMY_DISPLAY_ALPHA_V110[art?.path]?.sha256);
+export const getXenoTrialsDefenseRigV203 = (definition, art) => {
+ const rig = getXenoTrialsRuntimeDefenseRig(definition, art);
+ return rig?.defenseRevision === 203 ? rig : null;
+};
+export const getXenoTrialsDefenseRigV204 = (definition, art) => {
+ const rig = getXenoTrialsRuntimeDefenseRig(definition, art);
+ return rig?.defenseRevision === 204 ? rig : null;
+};
 const inside=(p,r)=>r&&p[0]>=r[0]&&p[0]<=r[2]&&p[1]>=r[1]&&p[1]<=r[3];
 const inPolygonV163=(p,polygon)=>{let hit=false;for(let i=0,j=polygon.length-1;i<polygon.length;j=i++){
  const a=polygon[i],b=polygon[j];if((a[1]>p[1])!==(b[1]>p[1])&&p[0]<(b[0]-a[0])*(p[1]-a[1])/(b[1]-a[1])+a[0])hit=!hit;

@@ -1,0 +1,103 @@
+import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import test from 'node:test';
+import { fileURLToPath } from 'node:url';
+import {
+  XENO_PRIORITIES_BASELINE_V204 as baseline,
+  XENO_PRIORITIES_HISTORICAL_DECLARATIONS_V204 as declarations,
+  XENO_PRIORITIES_NEW_INPUTS_V204 as inputs,
+  XENO_PRIORITIES_SUCCESSORS_V204 as successors,
+  reviewedXenoPrioritiesDigestV204 as advance,
+  verifyXenoPrioritiesV204 as verify,
+  xenoPrioritiesRuntimeSourcesV204 as runtimeSources
+} from './audit-xeno-priorities-v204.mjs';
+import { verifyXenoPrioritiesV203 as verifyPrior, xenoPrioritiesRuntimeSourcesV203 as runtimeRelay } from './audit-xeno-priorities-v203.mjs';
+import { verifyXenoPrioritiesV202 as verifyEarlier } from './audit-xeno-priorities-v202.mjs';
+import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { collectReleaseTestsV143 } from './test-release-v143.mjs';
+
+const root = fileURLToPath(new URL('../', import.meta.url));
+const git = args => execFileSync('git', args, { cwd: root, maxBuffer: 32 * 1024 * 1024 });
+const read = path => readFileSync(new URL('../' + path, import.meta.url));
+const sha = bytes => createHash('sha256').update(bytes).digest('hex');
+const prior = 'scripts/audit-xeno-priorities-v203.mjs';
+const terminal = 'scripts/audit-xeno-priorities-v204.mjs';
+const verifier = 'scripts/verify-xeno-priorities-audit-v204.mjs';
+const report = 'docs/forge/xeno-trials/V204-PRIORITIES.md';
+
+test('V204 preserves the published V203 declarations and accepts each successor only from its exact predecessor', () => {
+  assert.equal(baseline, '0f001296db2e63cd62d938877926ee8412a37338');
+  assert.deepEqual(Object.keys(declarations), [prior]);
+  const receipt = declarations[prior];
+  const extract = source => {
+    const start = source.indexOf(receipt.start);
+    const end = source.indexOf(receipt.end, start + receipt.start.length);
+    assert.ok(start >= 0 && end > start);
+    return source.slice(start, end);
+  };
+  const historical = extract(git(['show', baseline + ':' + prior]).toString());
+  assert.equal(extract(read(prior).toString()), historical);
+  assert.equal(sha(historical), receipt.sha256);
+  const published = new Set(git(['ls-tree', '-r', '--name-only', baseline]).toString().trim().split('\n'));
+  assert.ok(Object.hasOwn(successors, prior));
+  for (const [path, entry] of Object.entries(successors)) {
+    assert.ok(published.has(path), path);
+    assert.ok(Object.isFrozen(entry), path);
+    assert.equal(sha(git(['show', baseline + ':' + path])), entry.previousSha256, path);
+    assert.equal(advance(path, entry.previousSha256), sha(read(path)), path);
+    assert.throws(() => advance(path, entry.currentSha256), /Incorrect V203 endpoint for V204/, path);
+  }
+  for (const [path, entry] of Object.entries(inputs)) {
+    assert.ok(!published.has(path), path);
+    assert.ok(Object.isFrozen(entry), path);
+    assert.equal(sha(read(path)), entry.sha256, path);
+  }
+  assert.equal(advance('constructor', 'untouched'), 'untouched');
+});
+
+test('V204 assets and runtime are exact public admissions, verified by the historical audit relays', () => {
+  const assets = Object.keys(inputs).filter(path => inputs[path].kind === 'asset');
+  assert.ok(assets.length > 0);
+  assert.equal(new Set(assets.map(path => inputs[path].sha256)).size, assets.length);
+  for (const path of assets) {
+    assert.equal(isPublicDistributionPathV86(path), true, path);
+    assert.equal(isPublicDistributionPathV86(path, { built: true }), true, path);
+  }
+  const newRuntime = Object.keys(inputs).find(path => inputs[path].kind === 'runtime');
+  assert.ok(newRuntime);
+  for (const audit of [verify, verifyPrior, verifyEarlier]) {
+    assert.equal(audit().historicalResultsTransferred, false);
+    for (const path of [assets[0], newRuntime]) {
+      const changed = candidate => candidate === path ? Buffer.from('unreviewed V204 input') : read(candidate);
+      assert.throws(() => audit(changed), error => error.message.includes(path), path);
+    }
+  }
+  const historical = Object.freeze({ untouched: 'history' });
+  const effective = runtimeRelay(historical);
+  assert.deepEqual(historical, { untouched: 'history' });
+  assert.ok(Object.isFrozen(effective));
+  assert.deepEqual(runtimeRelay(effective), effective);
+  for (const [path, entry] of Object.entries(successors)) {
+    if (entry.kind !== 'runtime') continue;
+    assert.equal(effective[path], entry.currentSha256, path);
+    assert.throws(() => runtimeSources({ [path]: '0'.repeat(64) }), /Incorrect V204 runtime view predecessor/, path);
+  }
+  assert.equal(effective[newRuntime], inputs[newRuntime].sha256);
+  assert.throws(() => runtimeSources({ [newRuntime]: '0'.repeat(64) }), /Incorrect new V204 runtime digest/);
+});
+
+test('the terminal audit and release evidence stay at exact source-only paths', () => {
+  assert.match(read(prior).toString(), /from '\.\/audit-xeno-priorities-v204\.mjs'/);
+  assert.doesNotMatch(read(terminal).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  for (const path of [terminal, verifier, report]) {
+    assert.equal(isPublicDistributionPathV86(path), true, path);
+    assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);
+  }
+  for (const path of [terminal, report])
+    assert.ok(!Object.hasOwn(inputs, path) && !Object.hasOwn(successors, path), path);
+  for (const path of ['assets/openai/sprites/xeno-trials-v204/unreviewed-sheet.png', 'scripts/audit-xeno-priorities-unreviewed-v204.mjs'])
+    assert.equal(isPublicDistributionPathV86(path), false, path);
+  assert.equal(collectReleaseTestsV143(JSON.parse(read('package.json')).scripts).filter(path => path === verifier).length, 1);
+});

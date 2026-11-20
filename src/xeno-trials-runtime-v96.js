@@ -1,7 +1,7 @@
 import { createXenoTrialsOutroV155, advanceXenoTrialsOutroV155, skipXenoTrialsOutroV155,
  getXenoTrialsSequenceCueV155, sampleXenoTrialsSequenceV155, skipXenoTrialsIntroV155,
  createXenoTrialsTerminalV156, createXenoTrialsTauntV156, advanceXenoTrialsTauntV156, getXenoTrialsSequenceCueV156, createXenoTrialsExitV157, getXenoTrialsExitViewV157, createXenoTrialsLandingV157, getXenoTrialsLandingViewV157 } from './xeno-trials-sequences-v155.js';
-import { getXenoTrialsRigV154, getXenoTrialsRuntimeArticulatedRig, getXenoTrialsDefenseRigV203,
+import { getXenoTrialsRigV154, getXenoTrialsRuntimeArticulatedRig, getXenoTrialsRuntimeDefenseRig,
   getXenoTrialsRigCueV154, sampleXenoTrialsRigV154, drawXenoTrialsRigV154, sampleXenoTrialsExitPoseV157 } from './xeno-trials-rig-v154.js';
 import { createXenoTrialsPilotOutroV197, getXenoTrialsPilotSequenceV197 } from './xeno-trials-pilot-sequences-v197.js';
 import { getXenoTrialsGrappleViewV153, drawXenoTrialsGrappleV153 } from './xeno-trials-grapple-v153.js';
@@ -88,7 +88,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     return atlas?.kind === 'combat' && images.has(atlas.texture.path);
   };
   const reactions = createXenoTrialsReactionObserverV186({
-    canObserve: fighter => observesDrawnReaction(fighter) || Boolean(getXenoTrialsDefenseRigV203(
+    canObserve: fighter => observesDrawnReaction(fighter) || Boolean(getXenoTrialsRuntimeDefenseRig(
       getXenoTrialsFighterV96(fighter?.id), getXenoTrialsArtV96(fighter?.id, fighter?.variant))),
     canObserveDefeated: observesDrawnReaction
   });
@@ -126,6 +126,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   let reinforcementV201 = null;
   let operationSceneV202 = null;
   let operationSceneV203 = null;
+  let operationSceneV204 = null;
   const snapshot = () => ({ ...getXenoTrialsSnapshotV96(match), presentation: presentationView(),
     audioV189: sound.getState(),
     stageSceneV190: { rear: stageSceneRearV190, front: stageSceneFrontV190 },
@@ -134,6 +135,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     operationViewV188: getXenoTrialsOperationHudV188(match), stageHazardViewV188: getXenoTrialsStageHazardViewV188(match),
     ...(operationSceneV202 ? { operationSceneV202 } : {}),
     ...(operationSceneV203 ? { operationSceneV203 } : {}),
+    ...(operationSceneV204 ? { operationSceneV204 } : {}),
     resumedV186: Boolean(hordeCheckpoint), checkpointV186: { ...checkpointStatus },
     ...(duelCheckpoint ? { resumedV197: true } : {}),
     gamepadV186: gamepadView ? { connected: gamepadView.connected, index: gamepadView.index, needsNeutral: gamepadView.needsNeutral } : null,
@@ -379,7 +381,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     const observedReaction = preparedReaction || (hordeProtocol && match.result && fighter.hp <= 0 ? { state: 'ko', progress: 1 } : null) || reactions(match, fighter, {
       blocked: reactionBlocked, spec });
     const defenseRig = !reactionBlocked && fighter.hp > 0 && match.phase === 'active'
-      ? getXenoTrialsDefenseRigV203(definition, art) : null;
+      ? getXenoTrialsRuntimeDefenseRig(definition, art) : null;
     const actionTakesPriority = defenseRig && fighter.attack && !fighter.guard && fighter.stun <= 0 && fighter.hitFlash <= 0;
     const reactionCue = actionTakesPriority ? null : observedReaction;
     const spriteOptions = { tick: match.tick, cue: reactionCue, moving, distance: swarmView?.distance || 0,
@@ -475,6 +477,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     const operationRear = drawXenoTrialsOperationV188(context, match, XENO_TRIALS_ARENA_V96, { plane: 'rear', reducedMotion: reduceMotion() });
     operationSceneV202 = operationRear?.beacons ? operationRear : null;
     operationSceneV203 = operationRear?.extraction ?? null;
+    operationSceneV204 = operationRear?.purge ?? null;
     drawXenoTrialsStageHazardsV188(context, match, XENO_TRIALS_ARENA_V96, { plane: 'rear', reducedMotion: reduceMotion() });
     drawXenoTrialsAcidV152(context, match, XENO_TRIALS_ARENA_V96, reduceMotion());
     if (hordeProtocol && !presentationView().blocksSimulation) for (const ghost of defeatedBodiesV186()) {

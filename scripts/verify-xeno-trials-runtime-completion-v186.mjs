@@ -213,6 +213,55 @@ test('a refused milestone retries during live play and persistent refusal exhaus
  }
 });
 
+test('an interrupted result write retries once and returning preserves the proved outcome',context=>{
+ context.mock.timers.enable({apis:['setTimeout']});
+ const t=beginXenoTrialsV96(createXenoTrialsProgressV96(),{
+  playerId:'warrior',opponentId:'runner',difficulty:'easy',roundSeconds:30,
+  activityV119:{branch:'on-demand',id:'on-demand',rules:{initialHp:1}}
+ });
+ assert.equal(t.applied,true);
+ const match=createXenoTrialsMatchV96({...t.config,introSeconds:0});
+ for(let tick=0;tick<3000&&!match.result;tick++)stepXenoTrialsMatchV96(match,1/120,controls(match));
+ assert.equal(match.phase,'match-over');assert.equal(match.result.reason,'ko');
+ for(const scenario of ['return','stay','owner-change','persistent']){
+  const owner=ownerFor(t.state),elements=new Map(),ui=owner.ui;
+  Object.assign(ui,{root:{removeAttribute(){}},render(){},el(key){
+   if(!elements.has(key))elements.set(key,{hidden:true,textContent:''});
+   return elements.get(key);
+  }});
+  const commit=ui.onCommit;let attempts=0;
+  ui.onCommit=value=>{
+   attempts++;
+   if(attempts===1||scenario==='persistent'&&attempts===2)throw new Error('storage unavailable');
+   commit(value);
+  };
+  assert.equal(ui.finish(match.result),false);
+  assert.equal(ui.unsavedResult,match.result);assert.equal(ui.el('retry-save').hidden,false);
+  assert.equal(owner.progress.pending.matchId,t.config.matchId);assert.deepEqual(owner.progress.ledger,[]);
+  if(scenario==='owner-change')owner.owned=false;
+  if(scenario==='return'||scenario==='owner-change')ui.close();
+  context.mock.timers.tick(499);
+  assert.equal(attempts,scenario==='return'?2:1,'no deferred write before half a second');
+  context.mock.timers.tick(2500);
+  assert.equal(attempts,scenario==='owner-change'?1:2);
+  if(scenario==='owner-change'){
+   assert.equal(owner.progress.pending.matchId,t.config.matchId);assert.deepEqual(owner.progress.ledger,[]);
+   assert.equal(owner.progress.credits,t.state.credits);continue;
+  }
+  if(scenario==='persistent'){
+   assert.equal(owner.progress.pending.matchId,t.config.matchId);assert.deepEqual(owner.progress.ledger,[]);
+   assert.equal(ui.unsavedResult,match.result);assert.equal(ui.el('retry-save').hidden,false);
+   assert.equal(ui.finish(ui.unsavedResult),true,'manual retry stays available after the deferred retry fails');
+  }
+  assert.equal(ui.unsavedResult,null);assert.equal(ui.el('retry-save').hidden,true);
+  assert.equal(owner.progress.pending,null);assert.equal(owner.progress.ledger.length,1);
+  const receipt=owner.progress.ledger[0];
+  assert.equal(receipt.matchId,t.config.matchId);assert.equal(receipt.winner,match.result.winner);
+  assert.equal(owner.progress.credits,t.state.credits+receipt.credits);assert.equal(owner.progress.xp,t.state.xp+receipt.xp);
+  assert.equal(ui.finish(match.result),false);assert.equal(owner.progress.ledger.length,1);
+ }
+});
+
 test('manual and timed next rounds save the native score during the new countdown',async()=>{
  for(const manual of [true,false]){
   const t=beginXenoTrialsV96(createXenoTrialsProgressV96(),{

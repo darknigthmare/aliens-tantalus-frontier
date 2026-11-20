@@ -1,6 +1,6 @@
 import { getXenoTrialsAnimationCoverageV197 } from './xeno-trials-animation-coverage-v197.js';
 import { getXenoTrialsArtV96, getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
-import { getXenoTrialsRigV199, getXenoTrialsRuntimeArticulatedRig, getXenoTrialsDefenseRigV203 } from './xeno-trials-rig-v154.js';
+import { getXenoTrialsRigV199, getXenoTrialsRuntimeArticulatedRig, getXenoTrialsRuntimeDefenseRig } from './xeno-trials-rig-v154.js';
 import { getXenoTrialsActionAtlasV199, getXenoTrialsRuntimeActionAtlases } from './xeno-trials-action-atlas-v199.js';
 
 const historicalCache = new Map(), runtimeCache = new Map();
@@ -21,7 +21,7 @@ function getCoverage(value, cache, runtime) {
     : [getXenoTrialsActionAtlasV199(fighter, art)].filter(Boolean);
   const sourceRig = (runtime ? getXenoTrialsRuntimeArticulatedRig : getXenoTrialsRigV199)(fighter, art);
   const rig = sourceRig?.presentationRevision >= 199 ? sourceRig : null;
-  const defense = runtime && getXenoTrialsDefenseRigV203(fighter, art);
+  const defense = runtime && getXenoTrialsRuntimeDefenseRig(fighter, art);
   if (!atlases.length && !rig && !defense) return base;
   const states = { ...base.states };
 

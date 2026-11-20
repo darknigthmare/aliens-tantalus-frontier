@@ -171,7 +171,9 @@
 .xt-operation-hud-v188 [data-xt="operation-hint"]{font-size:9px;color:#9fac99}
 .xt-operation-hud-v188 [data-beacon-window="closed"]{color:#f6c487;font-weight:700}
 .xt-operation-hud-v188 [data-beacon-window="open"]{color:#b2e6bc;font-weight:700}
-.xt-operation-hud-v188 [data-extraction-work="true"]{color:#edcb94;font-weight:700}
+.xt-operation-hud-v188 :is([data-extraction-work="true"],[data-purge-work="true"]){color:#edcb94;font-weight:700}
+.xt-operation-hud-v188 [data-xt="operation-pressure"]{color:#c5af91}
+.xt-operation-hud-v188 [data-xt="operation-pressure"][data-phase="warning"]{color:#ffd1a0;font-weight:700}
 .xt-controls [data-xeno-action="interact"]{border-color:#c9af73;color:#f1da9b;grid-column:1/-1;grid-row:3}
 
 .xt-operation-hud-v188 [data-xt="operation-hazard"]{color:#e8c18b;border-left:2px solid #b19763;padding-left:8px;font-size:9px}

@@ -39,7 +39,7 @@ export const XENO_TRIALS_OPERATIONS_V188=freeze(kinds.flatMap((kind,family)=>Arr
 })));
 const catalogue=new Map(XENO_TRIALS_OPERATIONS_V188.map(entry=>[entry.id,entry]));
 export const getXenoTrialsOperationV188=id=>catalogue.get(id)||getArbiterOperationV191(id);
-export const XENO_TRIALS_OPERATION_LIMITS_V188=freeze({schema:188,maxObjectives:3,ticksPerSecond:120,maxIntegrity:100,cargoPressureTicks:120,purgePressureTicks:240});
+export const XENO_TRIALS_OPERATION_LIMITS_V188=freeze({schema:188,maxObjectives:3,ticksPerSecond:120,maxIntegrity:100,cargoPressureTicks:120,purgePressureTicks:240,purgeRegrowTicks:18});
 const stateKeys=['schema','operationId','matchId','seed','status','failureReason','elapsedTicks','startedTick','lastTick','completedTick','progress','completed','integrity','cargoTravelTicks','cargoX','carrying','delivered','depotTicks','exitTicks'];
 const integer=(value,min,max)=>Number.isSafeInteger(value)&&value>=min&&value<=max;
 const record=value=>value&&typeof value==='object'&&!Array.isArray(value);
@@ -106,10 +106,10 @@ export function stepXenoTrialsOperationV188(state,match,dt,input={},emit=null){
  }else if(entry.kind==='purge'){
   for(let index=0;index<entry.objectives.length;index++)if(!state.completed[index]){
    if(charging(index))state.progress[index]++;
-   else if(state.elapsedTicks%18===0)state.progress[index]=Math.max(0,state.progress[index]-1);
+   else if(state.elapsedTicks%XENO_TRIALS_OPERATION_LIMITS_V188.purgeRegrowTicks===0)state.progress[index]=Math.max(0,state.progress[index]-1);
    if(state.progress[index]>=entry.objectives[index].requiredTicks)complete(index);
   }
-  if(state.elapsedTicks%240===0)state.integrity=Math.max(0,state.integrity-entry.objectives.length+doneCount(state));
+  if(state.elapsedTicks%XENO_TRIALS_OPERATION_LIMITS_V188.purgePressureTicks===0)state.integrity=Math.max(0,state.integrity-entry.objectives.length+doneCount(state));
  }else if(entry.kind==='beacon'){
   for(let index=0;index<entry.objectives.length;index++)if(!state.completed[index]){
    state.progress[index]=charging(index)&&windowOpen(entry.objectives[index],state.elapsedTicks)?state.progress[index]+1:Math.max(0,state.progress[index]-2);
@@ -207,7 +207,7 @@ export function getXenoTrialsOperationViewV188(match){
  let entities=entry.objectives.map((objective,index)=>({...objective,active:!state.completed[index]&&(entry.kind!=='relay'||index===state.completed.findIndex(done=>!done)),completed:state.completed[index],progress:state.progress[index],
   ...(entry.kind==='beacon'?beaconWindow(objective,state.elapsedTicks):{})}));
  let target=entities.find(entity=>!entity.completed)||null;
- if(entry.kind==='beacon'&&state.status==='active'){
+ if(['beacon','purge'].includes(entry.kind)&&state.status==='active'){
   const touching=entities.filter(entity=>!entity.completed&&nearby(match.fighters?.[0],entity));
   target=touching.find(entity=>entity.windowOpen)||touching[0]||target;
  }
@@ -230,5 +230,5 @@ export function getXenoTrialsOperationViewV188(match){
   timeRemaining:Math.max(0,entry.roundSeconds-state.elapsedTicks/120),integrity:state.integrity,carrying:state.carrying,entities,
   target:target?{x:target.x,radius:target.radius,label:target.label,
    ...(entry.kind==='beacon'?{id:target.id,windowOpen:target.windowOpen,windowRemainingTicks:target.windowRemainingTicks}:{}),
-   ...(entry.kind==='extraction'?{id:target.id,kind:target.kind,progress:target.progress,requiredTicks:target.requiredTicks}:{})}:null};
+   ...(['extraction','purge'].includes(entry.kind)?{id:target.id,kind:target.kind,progress:target.progress,requiredTicks:target.requiredTicks}:{})}:null};
 }

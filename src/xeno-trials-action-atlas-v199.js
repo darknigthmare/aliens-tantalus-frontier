@@ -6,6 +6,8 @@ import { XENO_TRIALS_PRIORITY_AIR_DATA_V202 } from './xeno-trials-priority-air-d
 import { XENO_TRIALS_PRIORITY_GROUND_DATA_V202 } from './xeno-trials-priority-ground-data-v202.js';
 import { XENO_TRIALS_PRIORITY_AIR_DATA_V203 } from './xeno-trials-priority-air-data-v203.js';
 import { XENO_TRIALS_PRIORITY_GROUND_DATA_V203 } from './xeno-trials-priority-ground-data-v203.js';
+import { XENO_TRIALS_PRIORITY_AIR_DATA_V204 } from './xeno-trials-priority-air-data-v204.js';
+import { XENO_TRIALS_PRIORITY_GROUND_DATA_V204 } from './xeno-trials-priority-ground-data-v204.js';
 import { getXenoTrialsArtV96, getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
 import { ENEMY_DISPLAY_ALPHA_V110 } from './enemy-display-alpha-v110.js';
 import { XENO_TRIALS_SPRITE_REFERENCES_V189 } from './xeno-trials-sprite-atlas-v189.js';
@@ -24,11 +26,11 @@ const phaseKeys = ['windup', 'impact', 'recovery'];
 const superKeys = ['windup', 'active', 'recovery'];
 const airFightersByRevision = {
   199: ['warrior', 'runner'], 201: ['queen', 'import-game-afe2-warden'],
-  202: ['prowler', 'ravager'], 203: ['chrysalis', 'razor-claws']
+  202: ['prowler', 'ravager'], 203: ['chrysalis', 'razor-claws'], 204: ['synth-containment', 'smasher']
 };
 const groundSpecialStyles = {
   201: { mantis: 'slash', 'synth-sniper': 'pulse' }, 202: { rhino: 'ram', 'synth-heavy': 'pulse' },
-  203: { 'armored-joe': 'ram', 'synth-good-boy': 'pulse' }
+  203: { 'armored-joe': 'ram', 'synth-good-boy': 'pulse' }, 204: { 'synth-tecsek': 'slash', 'import-xeno-kingrogue': 'tail' }
 };
 const atlasKinds = new Map([['light', 'air-combat'], ['heavy', 'air-combat'], ['special', 'ground-special'], ['super', 'super']]);
 export const XENO_TRIALS_ACTION_FRAME_IDS_V199 = freeze({
@@ -113,9 +115,12 @@ export const XENO_TRIALS_PRIORITY_ATLASES_V202 = freeze(
   [...XENO_TRIALS_PRIORITY_AIR_DATA_V202, ...XENO_TRIALS_PRIORITY_GROUND_DATA_V202].map(data => createAtlas(data, 202)));
 export const XENO_TRIALS_PRIORITY_ATLASES_V203 = freeze(
   [...XENO_TRIALS_PRIORITY_AIR_DATA_V203, ...XENO_TRIALS_PRIORITY_GROUND_DATA_V203].map(data => createAtlas(data, 203)));
+export const XENO_TRIALS_PRIORITY_ATLASES_V204 = freeze(
+  [...XENO_TRIALS_PRIORITY_AIR_DATA_V204, ...XENO_TRIALS_PRIORITY_GROUND_DATA_V204].map(data => createAtlas(data, 204)));
 export const XENO_TRIALS_RUNTIME_ACTION_ATLASES = Object.freeze([
   ...XENO_TRIALS_ACTION_ATLASES_V199, ...XENO_TRIALS_SUPER_ATLASES_V200,
-  ...XENO_TRIALS_PRIORITY_ATLASES_V201, ...XENO_TRIALS_PRIORITY_ATLASES_V202, ...XENO_TRIALS_PRIORITY_ATLASES_V203
+  ...XENO_TRIALS_PRIORITY_ATLASES_V201, ...XENO_TRIALS_PRIORITY_ATLASES_V202,
+  ...XENO_TRIALS_PRIORITY_ATLASES_V203, ...XENO_TRIALS_PRIORITY_ATLASES_V204
 ]);
 const admitted = new Map(), noAtlases = Object.freeze([]);
 for (const atlas of XENO_TRIALS_RUNTIME_ACTION_ATLASES) {
