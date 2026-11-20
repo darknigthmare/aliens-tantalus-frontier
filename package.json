@@ -101,7 +101,8 @@
     "test:trials:priorities:v201": "node --test scripts/verify-xeno-trials-priority-actions-v201.mjs scripts/verify-xeno-trials-reinforcements-v201.mjs scripts/verify-xeno-trials-rig-v201.mjs scripts/verify-xeno-priorities-audit-v201.mjs",
     "test:trials:priorities:v202": "node --test scripts/verify-xeno-trials-priority-actions-v202.mjs scripts/verify-xeno-trials-beacon-windows-v202.mjs scripts/verify-xeno-trials-rig-v202.mjs scripts/verify-xeno-priorities-audit-v202.mjs",
     "test:trials:priorities:v203": "node --test scripts/verify-xeno-trials-priority-actions-v203.mjs scripts/verify-xeno-trials-defense-v203.mjs scripts/verify-xeno-trials-extraction-presentation-v203.mjs scripts/verify-xeno-priorities-audit-v203.mjs",
-    "test:trials:priorities:v204": "node --test scripts/verify-xeno-trials-priority-actions-v204.mjs scripts/verify-xeno-trials-defense-v204.mjs scripts/verify-xeno-trials-purge-presentation-v204.mjs scripts/verify-xeno-priorities-audit-v204.mjs"
+    "test:trials:priorities:v204": "node --test scripts/verify-xeno-trials-priority-actions-v204.mjs scripts/verify-xeno-trials-defense-v204.mjs scripts/verify-xeno-trials-purge-presentation-v204.mjs scripts/verify-xeno-priorities-audit-v204.mjs",
+    "test:trials:visuals:v205": "node --test scripts/verify-xeno-trials-visual-assets-v205.mjs scripts/verify-xeno-visual-assets-audit-v205.mjs"
   },
   "engines": {
     "node": ">=22"

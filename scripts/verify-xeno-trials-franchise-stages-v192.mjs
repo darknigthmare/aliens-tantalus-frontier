@@ -20,7 +20,7 @@ const previous = path => execFileSync('git', ['show', baseline + ':' + path], { 
 const read = path => readFileSync(new URL('../' + path, import.meta.url), 'utf8');
 const distribution = { film: 15, series: 5, game: 15, comic: 8, novel: 7 };
 
-test('fifty distinct franchise locations append after the exact fifty-stage public V191 prefix', () => {
+test('fifty franchise locations retain their V191 prefix apart from three exact V205 backdrop additions', () => {
   const v192Catalog = stages.slice(0, 100);
   assert.equal(v192Catalog.length, 100); assert.equal(additions.length, 50);
   for (const path of ['src/xeno-trials-boss-stages-v179.js', 'src/xeno-trials-stage-scenes-v190.js']) assert.equal(read(path), previous(path), path);
@@ -30,7 +30,14 @@ test('fifty distinct franchise locations append after the exact fifty-stage publ
   // Evaluate only the trusted historical stage-array declaration with its two
   // unchanged, byte-verified data dependencies; no current extension is injected.
   const historical = new Function('XENO_TRIALS_BOSS_STAGES_V179', 'XENO_TRIALS_CORPORATE_STAGES_V190', expression)(boss, corporate);
-  assert.deepEqual(v192Catalog.slice(0, 50), historical); assert.deepEqual(v192Catalog.slice(50), additions);
+  const prefix = v192Catalog.slice(0, 50).map(stage => ({ ...stage }));
+  for (const id of ['containment-deck', 'reactor-ring', 'hive-vault']) {
+    const stage = prefix.find(value => value.id === id);
+    assert.equal(stage.backdrop, `/assets/openai/xeno-trials-v205/stages/${id}.png`);
+    assert.equal(Object.hasOwn(historical.find(value => value.id === id), 'backdrop'), false);
+    delete stage.backdrop;
+  }
+  assert.deepEqual(prefix, historical); assert.deepEqual(v192Catalog.slice(50), additions);
   assert.equal(new Set(v192Catalog.map(stage => stage.id)).size, 100);
   assert.equal(new Set(additions.map(stage => stage.backdrop)).size, 50);
   for (const [media, total] of Object.entries(distribution)) assert.equal(additions.filter(stage => stage.media === media).length, total, media);

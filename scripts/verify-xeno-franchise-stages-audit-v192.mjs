@@ -104,7 +104,7 @@ test('complete-history CI and credential isolation remain byte-identical to the 
   }
 });
 
-test('the complete fifty-stage historical prefix and its admitted backdrop bytes survive the exact fifty new IDs', () => {
+test('the historical fifty-stage prefix survives with only the three explicit V205 backdrop additions', () => {
   const old = baselineStageCatalog();
   assert.equal(old.length, legacy.count); assert.equal(legacy.count, 50);
   assert.deepEqual(old.map(stage => stage.id), legacy.stageIds);
@@ -112,6 +112,14 @@ test('the complete fifty-stage historical prefix and its admitted backdrop bytes
   const catalogV192 = catalog.slice(0, 100);
   assert.equal(catalogV192.length, 100); assert.equal(new Set(catalogV192.map(stage => stage.id)).size, 100);
   const currentPrefix = JSON.parse(JSON.stringify(catalog.slice(0, legacy.count)));
+  // V205 adds art to exactly the three former procedural simulations. Strip
+  // only those separately asserted fields before comparing the historical data.
+  for (const id of ['containment-deck', 'reactor-ring', 'hive-vault']) {
+    const stage = currentPrefix.find(value => value.id === id);
+    assert.equal(stage.backdrop, `/assets/openai/xeno-trials-v205/stages/${id}.png`);
+    assert.equal(Object.hasOwn(old.find(value => value.id === id), 'backdrop'), false);
+    delete stage.backdrop;
+  }
   assert.deepEqual(currentPrefix, old, 'All fifty historical stage objects and their order remain exact.');
   assert.equal(sha(canonical(currentPrefix)), legacy.canonicalSha256);
   const newIds = catalogV192.slice(legacy.count).map(stage => stage.id);
@@ -157,8 +165,8 @@ test('the complete source chain keeps archival defaults and admits only the exac
   assert.throws(() => runtime({ [first[0]]: '0'.repeat(64) }), /Incorrect V192 runtime view predecessor/);
 });
 
-test('V192 relays to terminal V204, pins its V191 relay and keeps tools, production records and mutable outcomes out of the game build', () => {
-  const terminal = 'scripts/audit-xeno-priorities-v204.mjs', relay = 'scripts/audit-xeno-arbiter-protocols-v191.mjs';
+test('V192 relays to terminal V205, pins its V191 relay and keeps tools, production records and mutable outcomes out of the game build', () => {
+  const terminal = 'scripts/audit-xeno-visual-assets-v205.mjs', relay = 'scripts/audit-xeno-arbiter-protocols-v191.mjs';
   assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(read(terminal).toString()), false);
   assert.equal(Object.hasOwn(successors, terminal) || Object.hasOwn(inputs, terminal), false);
   assert.ok(successors[relay]); assert.match(read(relay).toString(), /from '\.\/audit-xeno-franchise-stages-v192\.mjs'/);
