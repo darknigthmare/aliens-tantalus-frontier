@@ -1,3 +1,4 @@
+import { publicXenoSpritePathAdmissionV197, PUBLIC_XENO_SPRITE_DIRECTORY_V197 } from './public-xeno-sprite-admissions-v197.mjs';
 import { publicXenoReferencedStagePathAdmissionV196, PUBLIC_REFERENCED_STAGE_DIRECTORY_V196 } from './public-xeno-referenced-stage-admissions-v196.mjs';
 import { publicXenoIconicStagePathAdmissionV194, PUBLIC_ICONIC_STAGE_DIRECTORY_V194 } from './public-xeno-iconic-stage-admissions-v194.mjs';
 import { publicXenoOriginalArenaPathAdmissionV193, PUBLIC_XENO_ORIGINAL_ARENA_DIRECTORIES_V193 } from './public-xeno-original-arena-admissions-v193.mjs';
@@ -252,6 +253,8 @@ export function createBuildAssetFilter(projectRoot, {
     if (originalArenaAdmissionV193 !== null) return originalArenaAdmissionV193;
     const franchiseAdmissionV192 = publicXenoFranchiseStagePathAdmissionV192(sourcePath, { directory: PUBLIC_XENO_FRANCHISE_STAGE_DIRECTORIES_V192.includes(sourcePath) });
     if (franchiseAdmissionV192 !== null) return franchiseAdmissionV192;
+    const spriteAdmissionV197 = publicXenoSpritePathAdmissionV197(sourcePath, { directory: sourcePath === PUBLIC_XENO_SPRITE_DIRECTORY_V197 });
+    if (spriteAdmissionV197 !== null) return spriteAdmissionV197;
     const spriteAdmissionV191 = publicXenoSpritePathAdmissionV191(sourcePath, { directory: sourcePath === 'assets/openai/sprites/xeno-trials-v191' });
     if (spriteAdmissionV191 !== null) return spriteAdmissionV191;
     const arbiterAdmissionV190 = publicArbiterPathAdmissionV190(sourcePath, { directory:

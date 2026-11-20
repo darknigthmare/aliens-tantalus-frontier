@@ -20,6 +20,7 @@ import {
   stageClassificationRuntimeSourcesV195 as runtimeRelay,
   verifyStageClassificationV195 as verifyPrior
 } from './audit-xeno-stage-classification-v195.mjs';
+import { reviewedXenoPrioritiesDigestV197 as advanceToV197 } from './audit-xeno-priorities-v197.mjs';
 import { XENO_TRIALS_STAGES_V96 as catalog } from '../src/xeno-trials-data-v96.js';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
@@ -104,12 +105,12 @@ test('the runtime relay covers each V196 runtime while rejecting forged predeces
   }
   for (const [path, receipt] of Object.entries(successors)) {
     if (receipt.kind !== 'runtime') continue;
-    assert.equal(effective[path], receipt.currentSha256, path);
+    assert.equal(effective[path], advanceToV197(path, receipt.currentSha256), path);
     assert.throws(() => runtimeSources({ [path]: '0'.repeat(64) }), /Incorrect V196 runtime view predecessor/);
   }
   for (const [path, receipt] of Object.entries(inputs)) {
     if (receipt.kind !== 'runtime') continue;
-    assert.equal(effective[path], receipt.sha256, path);
+    assert.equal(effective[path], advanceToV197(path, receipt.sha256), path);
     assert.throws(() => runtimeSources({ [path]: '0'.repeat(64) }), /Incorrect new V196 runtime digest/);
   }
 });
@@ -126,7 +127,7 @@ test('the eight stages classified in V195 retain their Git data and simulation c
 
 test('audit tooling and the outcome report are source-only and unrelated paths stay excluded', () => {
   assert.match(read(priorAudit).toString(), /from '\.\/audit-xeno-referenced-film-stages-v196\.mjs'/);
-  assert.doesNotMatch(read(terminal).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  assert.match(read(terminal).toString(), /from '\.\/audit-xeno-priorities-v197\.mjs'/);
   for (const path of [terminal, verifier, report]) {
     assert.equal(isPublicDistributionPathV86(path), true, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);

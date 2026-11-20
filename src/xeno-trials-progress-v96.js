@@ -4,6 +4,8 @@ import { createXenoTrialsModesProgressV119, normalizeXenoTrialsModesProgressV119
 import { getXenoTrialsHordeProtocolV180 } from './xeno-trials-horde-v180.js';
 import { createXenoTrialsHordeCheckpointV186, normalizeXenoTrialsHordeCheckpointV186,
   isXenoTrialsCheckpointForwardV186 } from './xeno-trials-horde-checkpoint-v186.js';
+import { createXenoTrialsDuelCheckpointV197, normalizeXenoTrialsDuelCheckpointV197, isXenoTrialsDuelTicketV197,
+  isXenoTrialsDuelCheckpointForwardV197, isXenoTrialsDuelResultForwardV197 } from './xeno-trials-duel-checkpoint-v197.js';
 import { getXenoTrialsOperationV188, validateXenoTrialsOperationSnapshotV188,
   getXenoTrialsOperationReceiptV188, isXenoTrialsOperationForwardV188 } from './xeno-trials-operations-v188.js';
 import { validateXenoTrialsStageHazardsV188, isXenoTrialsStageHazardsForwardV188 } from './xeno-trials-stage-hazards-v188.js';
@@ -90,6 +92,10 @@ export function normalizeXenoTrialsProgressV96(value) {
       const checkpoint = normalizeXenoTrialsHordeCheckpointV186(ticket.checkpointV186, base.pending.config);
       if (checkpoint) base.pending.checkpointV186 = checkpoint;
     }
+    if (base.pending && ticket.duelCheckpointV197) {
+      const checkpoint = normalizeXenoTrialsDuelCheckpointV197(ticket.duelCheckpointV197, base.pending.config);
+      if (checkpoint) base.pending.duelCheckpointV197 = checkpoint;
+    }
   }
   return base;
 }
@@ -113,6 +119,25 @@ export function clearXenoTrialsCheckpointV186(value) {
   const state = normalizeXenoTrialsProgressV96(value);
   if (!state.pending?.checkpointV186) return { applied: false, state, reason: 'checkpoint-unavailable' };
   delete state.pending.checkpointV186;
+  return { applied: true, state };
+}
+
+/** A duel checkpoint advances only the current nonterminal ticket. */
+export function checkpointXenoTrialsDuelV197(value, snapshot) {
+  const state = normalizeXenoTrialsProgressV96(value), ticket = state.pending;
+  if (!isXenoTrialsDuelTicketV197(ticket?.config)) return { applied: false, state, reason: 'duel-checkpoint-ticket-unavailable' };
+  const checkpoint = createXenoTrialsDuelCheckpointV197(snapshot, ticket.config);
+  if (!checkpoint) return { applied: false, state, reason: 'invalid-duel-checkpoint' };
+  if (!isXenoTrialsDuelCheckpointForwardV197(ticket.duelCheckpointV197, checkpoint))
+    return { applied: false, state, reason: 'stale-duel-checkpoint' };
+  ticket.duelCheckpointV197 = checkpoint;
+  return { applied: true, state };
+}
+
+export function clearXenoTrialsDuelCheckpointV197(value) {
+  const state = normalizeXenoTrialsProgressV96(value);
+  if (!state.pending?.duelCheckpointV197) return { applied: false, state, reason: 'duel-checkpoint-unavailable' };
+  delete state.pending.duelCheckpointV197;
   return { applied: true, state };
 }
 
@@ -264,7 +289,7 @@ export function settleXenoTrialsV96(value, result) {
     && record(result?.rulesV119) && JSON.stringify(normalizeXenoTrialsRulesV119(result.rulesV119)) === JSON.stringify(ticket.config.rulesV119)
     && record(result?.playerStats) && ['hits', 'damage', 'blocks', 'specials'].every(k => Number.isInteger(result.playerStats[k]) && result.playerStats[k] >= 0);
   if (!ticket || result?.completed !== true || result.matchId !== ticket.matchId
-    || !modeMatches || !checkpointMatches
+    || !modeMatches || !checkpointMatches || !isXenoTrialsDuelResultForwardV197(ticket.duelCheckpointV197, result)
     || !['player', 'opponent', 'draw'].includes(result.winner)
     || !['playerId', 'opponentId', 'factionId', 'stageId', 'difficulty', 'seed'].every(k => result[k] === ticket.config[k])
     || !['player', 'opponent'].every(side => result[`${side}Variant`] === (ticket.config[`${side}Id`] === 'arachnoid' ? ticket.config[`${side}Variant`] : null))

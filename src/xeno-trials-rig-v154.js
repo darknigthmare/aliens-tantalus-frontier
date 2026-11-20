@@ -3,8 +3,12 @@ import { sampleXenoTrialsCaptureReceptionV158 } from './xeno-trials-capture-rece
 import { XENO_TRIALS_RIG_DATA_V154 } from './xeno-trials-rig-data-v154.js';
 import { XENO_TRIALS_RIG_DATA_V163 } from './xeno-trials-rig-data-v163.js';
 import { XENO_TRIALS_RIG_DATA_V165 } from './xeno-trials-rig-data-v165.js';
+import { XENO_TRIALS_RIG_DATA_V197 } from './xeno-trials-rig-data-v197.js';
 import { XENO_TRIALS_GRAPPLE_V153 } from './xeno-trials-grapple-v153.js';
 import { XENO_TRIALS_CASTES_V151 } from './xeno-trials-castes-v151.js';
+import { XENO_TRIALS_SIGNATURES_V147, getXenoTrialsAttackV147 } from './xeno-trials-signatures-v147.js';
+import { XENO_TRIALS_ATTACKS_V96 } from './xeno-trials-combat-contract-v186.js';
+import { getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
 import { XENO_PRESENTATION_V97 } from './xeno-trials-presentation-v97.js';
 import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 // Read-only native-texture skinning: original small-amplitude key poses, not
@@ -15,6 +19,26 @@ export const XENO_TRIALS_RIGS_V154=freeze(XENO_TRIALS_RIG_DATA_V154);
 // individually measured presentation plates, without admitting historical
 // capture/exit choreography. An object copy still cannot acquire admission.
 const admittedRigsV163=freeze([...XENO_TRIALS_RIGS_V154,...XENO_TRIALS_RIG_DATA_V163,...XENO_TRIALS_RIG_DATA_V165]);
+const legacyRigByFighter = new Map(admittedRigsV163.map(rig => [rig.fighterId, rig]));
+export const XENO_TRIALS_ARTICULATED_RIGS_V197 = freeze(XENO_TRIALS_RIG_DATA_V197.map(entry => {
+ const native = legacyRigByFighter.get(entry.fighterId);
+ if (!native || native.profileId !== entry.profileId || native.sourceSha256 !== entry.sourceSha256)
+  throw new Error(`Xeno Trials V197 landmarks require the measured source plate for ${entry.fighterId}`);
+ const supportY = Math.min(...Object.values(entry.contacts).filter(contact => contact.bone === 'hips').map(contact => contact.point[1]));
+ const { cell } = native.mesh;
+ return {
+  id: `rig-v197-${native.fighterId}`, fighterId: native.fighterId, profileId: native.profileId, path: native.path,
+  sourceWidth: native.sourceWidth, sourceHeight: native.sourceHeight, sourceFacing: native.sourceFacing, sourceSha256: native.sourceSha256,
+  mesh: native.mesh, bones: entry.bones, contacts: entry.contacts, poses: entry.poses, anatomy: entry.anatomy,
+  pinned: [0, Math.floor((supportY - cell) / cell) * cell, native.sourceWidth, native.sourceHeight],
+  ...(entry.preserveRigidRegions ? { rigidZonesV163: native.rigidZonesV163 } : {}),
+  presentationRevision: 197, animation: 'source-anchored-presentation-and-recovery-v197',
+  canonExact: false, fullLocomotion: false, captureSequenceAdmission: false
+ };
+}));
+const articulatedRigByFighterV197 = new Map(XENO_TRIALS_ARTICULATED_RIGS_V197.map(rig => [rig.fighterId, rig]));
+const admittedRigs = new Set([...admittedRigsV163, ...XENO_TRIALS_ARTICULATED_RIGS_V197]);
+const pilotProfilesV197 = new Map(XENO_TRIALS_SIGNATURES_V147.map(entry => [entry.fighterId, entry.profileId]));
 export const XENO_TRIALS_RIG_TIMING_V154=Object.freeze({intro:XENO_PRESENTATION_V97.introMs/1000,round:1.8,release:XENO_TRIALS_GRAPPLE_V153.recovery,settle:.12});
 const clamp=(v,lo=0,hi=1)=>Math.max(lo,Math.min(hi,v));
 const smooth=v=>{const t=clamp(v);return t*t*(3-2*t);};
@@ -26,6 +50,12 @@ export function getXenoTrialsRigV154(definition,art){
  const r=admittedRigsV163.find(r=>r.fighterId===definition?.id&&r.profileId===definition.profileId);
  return r&&art?.id===r.profileId&&art.path===r.path&&art.sourceWidth===r.sourceWidth&&art.sourceHeight===r.sourceHeight
   &&art.sourceFacing===r.sourceFacing&&(!art.sha256||art.sha256===r.sourceSha256)?r:null;
+}
+export function getXenoTrialsRigV197(definition, art) {
+ const rig = articulatedRigByFighterV197.get(definition?.id);
+ return rig && definition.profileId === rig.profileId && art?.id === rig.profileId && art.path === rig.path
+  && art.sourceWidth === rig.sourceWidth && art.sourceHeight === rig.sourceHeight && art.sourceFacing === rig.sourceFacing
+  && art.sha256 === rig.sourceSha256 ? rig : null;
 }
 const inside=(p,r)=>r&&p[0]>=r[0]&&p[0]<=r[2]&&p[1]>=r[1]&&p[1]<=r[3];
 const inPolygonV163=(p,polygon)=>{let hit=false;for(let i=0,j=polygon.length-1;i<polygon.length;j=i++){
@@ -56,7 +86,7 @@ const meshes=new WeakMap();
 const receptionContactsV158=new WeakMap();
 // Native alpha cells are retained even when they contain a single visible pixel.
 export function getXenoTrialsRigMeshV154(rig){
- if(!admittedRigsV163.includes(rig))return null;
+ if(!admittedRigs.has(rig))return null;
  if(meshes.has(rig))return meshes.get(rig);
  const{cell,cols,rows,mask}=rig.mesh,vertices=[],triangles=[],lookup=new Map();
  const vertex=(x,y)=>{
@@ -87,7 +117,8 @@ export function getXenoTrialsRigMeshV154(rig){
 }
 // Only events and phases owned by this match can select a clip.
 export function getXenoTrialsRigCueV154(rig,match,fighter,presentation=null){
- if(!admittedRigsV163.includes(rig)||fighter?.id!==rig.fighterId||!match?.fighters?.includes(fighter))return null;
+ if(!admittedRigs.has(rig)||fighter?.id!==rig.fighterId||!match?.fighters?.includes(fighter))return null;
+ if(rig.presentationRevision===197)return getXenoTrialsRigCueV197(rig,match,fighter,presentation);
  const index=match.fighters.indexOf(fighter),T=XENO_TRIALS_RIG_TIMING_V154;
  if(match.phase==='active'&&presentation?.fighterSlot===index&&presentation.blocksSimulation)
   return{clip:'intro',progress:clamp(presentation.elapsedMs/(T.intro*1000)),elapsed:presentation.elapsedMs/1000};
@@ -118,12 +149,34 @@ export function getXenoTrialsRigCueV154(rig,match,fighter,presentation=null){
  }
  return null;
 }
+function getXenoTrialsRigCueV197(rig, match, fighter, presentation) {
+ if (fighter.y !== 0) return null;
+ const { intro, round } = XENO_TRIALS_RIG_TIMING_V154;
+ if (match.phase === 'active' && presentation?.blocksSimulation && Number.isFinite(presentation.elapsedMs)
+  && presentation.fighterSlot === match.fighters.indexOf(fighter)) {
+  const elapsed = clamp(presentation.elapsedMs / 1000, 0, intro);
+  return { clip: 'intro', progress: elapsed / intro, elapsed };
+ }
+ if (match.phase === 'round-over' && ['player', 'opponent'].includes(match.roundWinner) && Number.isFinite(match.phaseTime)) {
+  const elapsed = clamp(round - match.phaseTime, 0, round);
+  return { clip: match.roundWinner === fighter.side ? 'round-win' : 'round-loss', progress: elapsed / round, elapsed };
+ }
+ if (match.phase !== 'active' || presentation?.blocksSimulation || !(fighter.hp > 0) || fighter.guard
+  || fighter.stun > 0 || fighter.hitFlash > 0 || match.grappleV153 && [match.grappleV153.attacker, match.grappleV153.target].includes(fighter.side)) return null;
+ const attack = fighter.attack;
+ if (!['light', 'heavy', 'special'].includes(attack?.kind) || !Number.isFinite(attack.age)) return null;
+ const definition = getXenoTrialsFighterV96(rig.fighterId);
+ const { startup, active, recovery } = getXenoTrialsAttackV147(definition, attack.kind, XENO_TRIALS_ATTACKS_V96[attack.kind]);
+ const elapsed = attack.age - startup - active;
+ return elapsed >= 0 && elapsed < recovery ? { clip: 'recovery', progress: elapsed / recovery, elapsed } : null;
+}
 // Rigid bone transforms blend only the source mesh, never the simulation bodies.
 export function sampleXenoTrialsRigV154(rig,cue,reducedMotion=false){
- if(!admittedRigsV163.includes(rig)||!Object.hasOwn(rig.poses,cue?.clip)||!Number.isFinite(cue.progress)||!Number.isFinite(cue.elapsed)||cue.elapsed<0)return null;
+ if(!admittedRigs.has(rig)||!Object.hasOwn(rig.poses,cue?.clip)||!Number.isFinite(cue.progress)||!Number.isFinite(cue.elapsed)||cue.elapsed<0)return null;
  const p=clamp(cue.progress);let gain=1;
  if(cue.clip==='intro')gain=Math.sin(Math.PI*p)**2;
  else if(cue.clip==='windup')gain=Math.sin(Math.PI*p)**2;
+ else if(cue.clip==='recovery')gain=smooth(p/.25)*(1-smooth((p-.42)/.58));
  else if(cue.clip==='release')gain=1-smooth(p);
  else if(cue.clip.startsWith('round-'))gain=smooth(p/.3)*(1-smooth((p-.78)/.22));
  else gain=smooth(cue.elapsed/XENO_TRIALS_RIG_TIMING_V154.settle);
@@ -145,7 +198,7 @@ export function sampleXenoTrialsRigV154(rig,cue,reducedMotion=false){
  const frame={rigId:rig.id,clip:cue.clip,progress:p,angles,vertices,contacts,reducedMotion,canonExact:false,animation:rig.animation,active:gain>1e-6};
  // New sparse rigs report the same painted attachment that the affine mesh
  // actually displays. A desired bone target is not a skin-contact measurement.
- if(rig.presentationRevision===165)for(const[name,anchor]of Object.entries(rig.contacts)){
+ if(rig.presentationRevision===165||rig.presentationRevision===197)for(const[name,anchor]of Object.entries(rig.contacts)){
   const displayed=projectXenoTrialsMeshPointV157(rig,frame,anchor.point);
   if(!displayed)return null;
   frame.contacts[name]=displayed;
@@ -156,11 +209,19 @@ export function sampleXenoTrialsRigV154(rig,cue,reducedMotion=false){
 /** V155 presentation-only angle sampler. Exact native rigs and bounded angles;
  * support bones cannot rotate. It never accepts an unreviewed replacement rig. */
 export function sampleXenoTrialsSequenceAnglesV155(rig, cue, keyedAngles, reducedMotion = false) {
- if (!XENO_TRIALS_RIGS_V154.includes(rig) || !cue || !Number.isFinite(cue.progress)
+ return XENO_TRIALS_RIGS_V154.includes(rig) ? sampleXenoTrialsSequenceAngles(rig, cue, keyedAngles, reducedMotion) : null;
+}
+export function sampleXenoTrialsSequenceAnglesV197(rig, cue, keyedAngles, reducedMotion = false) {
+ if (!admittedRigsV163.includes(rig) || pilotProfilesV197.get(rig.fighterId) !== rig.profileId) return null;
+ return sampleXenoTrialsSequenceAngles(rig, cue, keyedAngles, reducedMotion, true);
+}
+function sampleXenoTrialsSequenceAngles(rig, cue, keyedAngles, reducedMotion, projectContacts = false) {
+ if (!cue || !Number.isFinite(cue.progress)
   || !Number.isFinite(cue.elapsed) || cue.elapsed < 0 || !keyedAngles || typeof keyedAngles !== 'object') return null;
  const allowed = new Set(rig.bones.map(b => b.id));
+ const fixed = new Set(['hips', ...(projectContacts ? (rig.supportContactsV165 || []).map(name => rig.contacts[name]?.bone) : [])]);
  if (Object.entries(keyedAngles).some(([key,value]) => !allowed.has(key) || !Number.isFinite(value)
-  || Math.abs(value) > 8 || key === 'hips' && value !== 0)) return null;
+  || Math.abs(value) > 8 || fixed.has(key) && value !== 0)) return null;
  const angles = {}, matrices = {};
  for (const bone of rig.bones) {
   angles[bone.id] = reducedMotion ? 0 : keyedAngles[bone.id] || 0;
@@ -171,8 +232,14 @@ export function sampleXenoTrialsSequenceAnglesV155(rig, cue, keyedAngles, reduce
   const p = point(matrices[id],x,y); out[0] += p[0]*w; out[1] += p[1]*w; return out;
  },[0,0]));
  const contacts = Object.fromEntries(Object.entries(rig.contacts).map(([name,a]) => [name,point(matrices[a.bone],...a.point)]));
- return {rigId:rig.id,clip:cue.clip,progress:clamp(cue.progress),angles,vertices,contacts,reducedMotion,
-  canonExact:false,animation:'authored-native-sequence-v155',active:Object.values(angles).some(n=>Math.abs(n)>1e-6)};
+ const frame = {rigId:rig.id,clip:cue.clip,progress:clamp(cue.progress),angles,vertices,contacts,reducedMotion,
+  canonExact:false,animation:projectContacts?'authored-native-sequence-v197':'authored-native-sequence-v155',active:Object.values(angles).some(n=>Math.abs(n)>1e-6)};
+ if (projectContacts) for (const [name, anchor] of Object.entries(rig.contacts)) {
+  const projected = projectXenoTrialsMeshPointV157(rig, frame, anchor.point);
+  if (!projected) return null;
+  frame.contacts[name] = projected;
+ }
+ return frame;
 }
 /** Restrained, distance-driven steps for the separate V157 exit only. Native
  * plates do not contain a complete walk. The cage keeps the carried upper body
@@ -257,7 +324,7 @@ function affine(s,d){
 }
 // Wrong images or inverted triangles fall back to the exact native pose.
 export function drawXenoTrialsRigV154(ctx,rig,image,frame,metrics,x,y,facing){
- if(!frame?.active||!admittedRigsV163.includes(rig)||frame.rigId!==rig.id||image?.complete===false
+ if(!frame?.active||!admittedRigs.has(rig)||frame.rigId!==rig.id||image?.complete===false
   ||(image?.naturalWidth??image?.width)!==rig.sourceWidth||(image?.naturalHeight??image?.height)!==rig.sourceHeight
   ||![x,y,metrics?.width,metrics?.height,metrics?.pivotX,metrics?.bottom].every(Number.isFinite)||metrics.width<=0||metrics.height<=0
   ||![-1,1].includes(facing)||typeof ctx?.clip!=='function'||typeof ctx?.transform!=='function')return null;

@@ -19,6 +19,13 @@ const arenaLabels = new Map([
   [label, labelEn],
   [label.toUpperCase(), labelEn.toUpperCase()]
 ]));
+const duelResumeLabels = new Map([
+  ['REPRENDRE LE DUEL CONSERVÉ', 'RESUME SAVED DUEL'],
+  ['RECOMMENCER DEPUIS LA PREMIÈRE MANCHE', 'RESTART FROM ROUND ONE'],
+  ['REPRISE CONSERVÉE · ÉTAT DU DUEL ENREGISTRÉ', 'CHECKPOINT SAVED · DUEL STATE RECORDED'],
+  ['Duel restauré. Reprenez avec P, Start ou le bouton Reprendre.', 'Duel restored. Resume with P, Start or the Resume button.'],
+  ['Duel sauvegardé. Retrouvez la manche, la santé et le chrono enregistrés.', 'Duel saved. Resume with your saved round, health and timer.']
+]);
 
 // The English catalog (~600 kB) is loaded only when English is chosen, so a
 // French session downloads and parses nothing more.
@@ -77,7 +84,7 @@ function fromPatterns(text) {
 function translateWhole(text) {
   if (exact.has(text)) return exact.get(text);
   if (upper.has(text)) return upper.get(text);
-  return arenaLabels.get(text) ?? fromPatterns(text);
+  return arenaLabels.get(text) ?? duelResumeLabels.get(text) ?? fromPatterns(text);
 }
 
 // Messages are often joined: "ERREUR · A. B." Translate each known piece,

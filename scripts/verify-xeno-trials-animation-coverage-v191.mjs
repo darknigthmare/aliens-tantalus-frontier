@@ -10,6 +10,7 @@ import { XENO_TRIALS_ANIMATION_ACTIONS_V191 as actions, getXenoTrialsAnimationCo
 import { XENO_TRIALS_SPRITE_ATLASES_V191 as atlases, getXenoTrialsSpriteAtlasV191 as atlasFor } from '../src/xeno-trials-sprite-atlas-v191.js';
 import { FRANCHISE_STAGES_BASELINE_V192 as publicationBaseline, FRANCHISE_STAGES_SUCCESSORS_V192 as successors,
   reviewedFranchiseStagesDigestV192 } from './audit-xeno-franchise-stages-v192.mjs';
+import { ARBITER_PROTOCOLS_NEW_INPUTS_V191 as introduced } from './audit-xeno-arbiter-protocols-v191.mjs';
 
 const reportPath = 'docs/forge/xeno-trials/animation-coverage-v191.json';
 const reportBytes = readFileSync(new URL('../' + reportPath, import.meta.url));
@@ -28,17 +29,16 @@ test('the new ledger is source-bound, reproducible and keeps its V189 predecesso
   const reviewedPaths = [];
   for (const [path, expected] of Object.entries(report.sourceSha256)) {
     const current = sha(readFileSync(new URL('../' + path, import.meta.url)));
-    if (path === 'src/xeno-trials-runtime-v96.js') {
-      // The fifty-stage continuation changes this renderer, not the V191
-      // animation ledger. Bind its old digest to the physical published tree
-      // before advancing that one source through the reviewed V192 receipt.
-      assert.equal(sha(readPublicationBaseline(path)), expected, 'The V191 runtime digest must match its real publication baseline.');
-      assert.equal(successors[path]?.previousSha256, expected, path);
+    if (['src/xeno-trials-runtime-v96.js', 'src/xeno-trials-sprite-atlas-v191.js'].includes(path)) {
+      // Bind the unchanged V191 ledger to its published tree before resolving
+      // the shared renderer through the current audit chain.
+      assert.equal(sha(readPublicationBaseline(path)), expected, path);
+      assert.equal(successors[path]?.previousSha256 ?? introduced[path]?.sha256, expected, path);
       assert.equal(current, reviewedFranchiseStagesDigestV192(path, expected), path);
       reviewedPaths.push(path);
     } else assert.equal(current, expected, path);
   }
-  assert.deepEqual(reviewedPaths, ['src/xeno-trials-runtime-v96.js']);
+  assert.deepEqual(reviewedPaths.sort(), ['src/xeno-trials-runtime-v96.js', 'src/xeno-trials-sprite-atlas-v191.js']);
   assert.ok(report.scope.includes('capture drawings remain outside'));
   const historical = oldSummary(); assert.equal(historical.schema, 189); assert.equal(historical.uniqueAdmittedDrawnFrames, 160);
   assert.equal(historical.trialsDrawnFrames, 120); assert.equal(historical.byAction.special.drawn, 0);

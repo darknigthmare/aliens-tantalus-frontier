@@ -1,6 +1,7 @@
 import { XENO_TRIALS_SPRITE_COMBAT_DATA_V191 } from './xeno-trials-sprite-combat-data-v191.js';
 import { XENO_TRIALS_SPRITE_SPECIAL_DATA_V191 } from './xeno-trials-sprite-special-data-v191.js';
-import { getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
+import { XENO_TRIALS_SPRITE_COMBAT_DATA_V197 } from './xeno-trials-sprite-combat-data-v197.js';
+import { getXenoTrialsArtV96, getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
 import { getXenoTrialsSpecialStyleV147 } from './xeno-trials-signatures-v147.js';
 import { XENO_TRIALS_SPRITE_REFERENCES_V188, XENO_TRIALS_SPRITE_FRAME_IDS_V188 } from './xeno-trials-sprite-atlas-v188.js';
 import { getXenoTrialsSpriteEnvelopeV189 } from './xeno-trials-sprite-atlas-v189.js';
@@ -43,29 +44,43 @@ export const XENO_TRIALS_SPRITE_REFERENCES_V191 = freeze({ ...XENO_TRIALS_SPRITE
     facing: -1, alphaBounds: [99, 133, 1072, 1292], anatomy: 'horned-biped',
     work: 'Lot AlienTentalus — adaptation de jeu non canonique' }
 });
-const constructed = new WeakSet();
+const constructed = new WeakMap();
 const visibleHeight = (atlas, metrics) => metrics?.visibleHeight ?? metrics?.height
   * (atlas.sourcePose.alphaBounds[3] - atlas.sourcePose.alphaBounds[1]) / atlas.sourcePose.height;
 
 /** Validate reviewed drawings without altering any native attack, geometry or
  * source plate. A factory fixture is not admitted to the runtime registry. */
 export function createXenoTrialsSpriteAtlasV191(input) {
-  const fail = detail => { throw new Error(`Invalid Trials sprite atlas V191: ${detail}`); };
+  return createXenoTrialsSpriteAtlas(input, 191);
+}
+
+function createXenoTrialsSpriteAtlas(input, revision) {
+  const fail = detail => { throw new Error(`Invalid Trials sprite atlas V${revision}: ${detail}`); };
   if (!input || typeof input !== 'object' || Array.isArray(input)) fail('input');
-  const d = JSON.parse(JSON.stringify(input)), source = XENO_TRIALS_SPRITE_REFERENCES_V191[d.fighterId];
+  const d = JSON.parse(JSON.stringify(input));
+  const priority = revision === 197;
+  const original = priority && getXenoTrialsFighterV96(d.fighterId);
+  const art = original && getXenoTrialsArtV96(d.fighterId);
+  const source = priority ? art && {
+    profileId: original.profileId, path: art.path, sha256: art.sha256,
+    width: art.sourceWidth, height: art.sourceHeight, facing: art.sourceFacing,
+    alphaBounds: art.alphaBounds, anatomy: d.sourcePose?.anatomy, work: art.work
+  } : XENO_TRIALS_SPRITE_REFERENCES_V191[d.fighterId];
   const combat = d.kind === 'combat', special = d.kind === 'special';
-  if (!source || d.profileId !== source.profileId || !(combat && Object.hasOwn(XENO_TRIALS_PRIMARY_ACTIONS_V191, d.fighterId)
-    || special && Object.hasOwn(XENO_TRIALS_SPECIAL_ACTIONS_V191, d.fighterId))) fail('fighter identity or kind');
+  const action = priority ? combat && d.primaryAction : combat ? XENO_TRIALS_PRIMARY_ACTIONS_V191[d.fighterId]
+    : special && XENO_TRIALS_SPECIAL_ACTIONS_V191[d.fighterId];
+  if (!source || d.profileId !== source.profileId || !action || priority && (!hash(source.sha256)
+    || !tuple(source.alphaBounds, 4) || !source.anatomy || typeof action !== 'string')) fail('fighter identity or kind');
   if (!d.sourcePose || Object.keys(d.sourcePose).length !== Object.keys(source).length
     || Object.entries(source).some(([key, value]) => JSON.stringify(d.sourcePose[key]) !== JSON.stringify(value))) fail('source plate');
   if (d.reviewStatus !== 'accepted-drawn-atlas' || d.identityVerified !== true || d.alphaVerified !== true
     || d.anchorsVerified !== true || d.wholeBodyVerified !== true || d.canonExact !== false || d.fullLocomotion !== false
     || d.fullProne !== combat || d.movementCoverage !== (combat ? 'two-step-combat-keys' : 'ten-special-attack-keys')) fail('review or scope');
-  if (d.primaryAction !== (combat ? XENO_TRIALS_PRIMARY_ACTIONS_V191[d.fighterId] : XENO_TRIALS_SPECIAL_ACTIONS_V191[d.fighterId])) fail('anatomical action');
+  if (d.primaryAction !== action) fail('anatomical action');
   if (special && (d.calibrationFrameId !== 'special-windup-0' || d.calibrationBasis !== 'neutral-preparation-key')) fail('neutral special calibration');
   if (!d.provenance || !['generation', 'reference'].every(key => typeof d.provenance[key] === 'string' && d.provenance[key].trim())) fail('provenance');
   const texture = d.texture;
-  if (!texture || texture.path !== `/assets/openai/sprites/xeno-trials-v191/${d.fighterId}-${d.kind}-sheet.png`
+  if (!texture || texture.path !== `/assets/openai/sprites/xeno-trials-v${revision}/${d.fighterId}-${d.kind}-sheet.png`
     || !hash(texture.sha256) || ![texture.width, texture.height].every(n => Number.isInteger(n) && n > 0 && n <= 8192)
     || texture.width * texture.height > 16777216 || texture.facing !== 1) fail('texture');
   if (d.alphaBoundsThreshold !== 16 || d.cutEdgeAlphaMax !== 1 || d.supportAlphaMin !== 128
@@ -96,7 +111,7 @@ export function createXenoTrialsSpriteAtlasV191(input) {
   }
   const neutral = d.frames[0].alphaBounds;
   if (Math.abs(d.referenceHeight - neutral[3] + neutral[1]) > 1e-8) fail('neutral reference height');
-  freeze(d); constructed.add(d); return d;
+  freeze(d); constructed.set(d, revision); return d;
 }
 
 export const XENO_TRIALS_SPRITE_ATLASES_V191 = freeze([
@@ -105,14 +120,22 @@ export const XENO_TRIALS_SPRITE_ATLASES_V191 = freeze([
 const admitted = new Map(XENO_TRIALS_SPRITE_ATLASES_V191.map(atlas => [atlas.fighterId, atlas]));
 if (admitted.size !== XENO_TRIALS_SPRITE_ATLASES_V191.length) throw new Error('Duplicate Trials sprite atlas V191 identity');
 
-export function getXenoTrialsSpriteAtlasV191(fighter, art) {
-  const atlas = admitted.get(fighter?.id), source = atlas?.sourcePose;
+export const XENO_TRIALS_SPRITE_ATLASES_V197 = freeze(XENO_TRIALS_SPRITE_COMBAT_DATA_V197.map(data => createXenoTrialsSpriteAtlas(data, 197)));
+const priorityAtlases = new Map(XENO_TRIALS_SPRITE_ATLASES_V197.map(atlas => [atlas.fighterId, atlas]));
+if (priorityAtlases.size !== XENO_TRIALS_SPRITE_ATLASES_V197.length) throw new Error('Duplicate Trials sprite atlas V197 identity');
+
+function findAtlas(registry, fighter, art) {
+  const atlas = registry.get(fighter?.id), source = atlas?.sourcePose;
   if (!atlas || getXenoTrialsFighterV96(fighter.id)?.profileId !== atlas.profileId
     || fighter.profileId !== undefined && fighter.profileId !== atlas.profileId
     || art?.id !== atlas.profileId || art.path !== source.path || art.sourceWidth !== source.width
     || art.sourceHeight !== source.height || art.sourceFacing !== source.facing || art.sha256 && art.sha256 !== source.sha256) return null;
   return atlas;
 }
+export const getXenoTrialsSpriteAtlasV191 = (fighter, art) => findAtlas(admitted, fighter, art);
+export const getXenoTrialsSpriteAtlasV197 = (fighter, art) => findAtlas(priorityAtlases, fighter, art);
+export const getXenoTrialsRuntimeSpriteAtlas = (fighter, art) => getXenoTrialsSpriteAtlasV197(fighter, art)
+  || getXenoTrialsSpriteAtlasV191(fighter, art);
 const empty = Object.freeze([]);
 export function getXenoTrialsSpriteAtlasesV191(fighter, art) {
   const atlas = getXenoTrialsSpriteAtlasV191(fighter, art); return atlas ? Object.freeze([atlas]) : empty;
@@ -159,7 +182,7 @@ export function sampleXenoTrialsSpriteAtlasV191(atlas, fighter, options = {}) {
     }
   }
   return Object.freeze({ atlas, frame: atlas.frames.find(frame => frame.id === id), phase, phaseProgress,
-    renderKind: 'drawn-sprite-atlas-v191', reducedMotion: options.reducedMotion === true });
+    renderKind: `drawn-sprite-atlas-v${constructed.get(atlas)}`, reducedMotion: options.reducedMotion === true });
 }
 
 export function getXenoTrialsSpriteLayoutV191(atlas, frame, metrics, { x, y, facing = 1 } = {}) {
@@ -180,8 +203,8 @@ const browserLoad = path => new Promise((resolve, reject) => {
   const image = new globalThis.Image(); image.onload = () => resolve(image); image.onerror = reject; image.src = path;
 });
 const requested = new WeakMap();
-export function requestXenoTrialsSpriteAtlasV191(images, fighter, art, loadImage = browserLoad, isActive = () => true) {
-  const atlas = getXenoTrialsSpriteAtlasV191(fighter, art);
+export function requestXenoTrialsSpriteAtlasV191(images, fighter, art, loadImage = browserLoad, isActive = () => true, includeV197 = false) {
+  const atlas = (includeV197 ? getXenoTrialsRuntimeSpriteAtlas : getXenoTrialsSpriteAtlasV191)(fighter, art);
   if (!atlas || !images?.get || !images?.set || typeof loadImage !== 'function' || typeof isActive !== 'function') return Promise.resolve(false);
   const path = atlas.texture.path;
   if (ready(images.get(path), atlas)) return Promise.resolve(true);
@@ -194,7 +217,8 @@ export function requestXenoTrialsSpriteAtlasV191(images, fighter, art, loadImage
   attempts.set(path, attempt); return attempt;
 }
 export function drawXenoTrialsSpriteAtlasV191(ctx, fighter, art, images, options = {}) {
-  const atlas = getXenoTrialsSpriteAtlasV191(fighter, art), image = atlas && images?.get?.(atlas.texture.path);
+  const atlas = (options.includeV197 ? getXenoTrialsRuntimeSpriteAtlas : getXenoTrialsSpriteAtlasV191)(fighter, art);
+  const image = atlas && images?.get?.(atlas.texture.path);
   const selected = atlas && sampleXenoTrialsSpriteAtlasV191(atlas, fighter, options);
   if (!selected || !ready(image, atlas)) return null;
   const frame = selected.frame, layout = getXenoTrialsSpriteLayoutV191(atlas, frame, options.metrics, {
@@ -205,8 +229,8 @@ export function drawXenoTrialsSpriteAtlasV191(ctx, fighter, art, images, options
   ctx.save(); ctx.translate(layout.x, layout.y); ctx.scale(layout.flip, 1);
   ctx.drawImage(image, ...frame.rect, -frame.anchor[0] * layout.scale, -frame.anchor[1] * layout.scale,
     frame.rect[2] * layout.scale, frame.rect[3] * layout.scale); ctx.restore();
-  return { drawn: true, animation: 'drawn-sprite-atlas-v191', bounds: layout.bounds, supports: layout.supports,
-    spriteAtlasV191: { drawn: true, fighterId: fighter.id, profileId: atlas.profileId, kind: atlas.kind, frameId: frame.id,
+  return { drawn: true, animation: selected.renderKind, bounds: layout.bounds, supports: layout.supports,
+    [`spriteAtlasV${constructed.get(atlas)}`]: { drawn: true, fighterId: fighter.id, profileId: atlas.profileId, kind: atlas.kind, frameId: frame.id,
       phase: selected.phase, phaseProgress: selected.phaseProgress, path: atlas.texture.path, sha256: atlas.texture.sha256,
       sourceRect: [...frame.rect], imageWidth: Number(image.naturalWidth || image.width), imageHeight: Number(image.naturalHeight || image.height),
       referencePath: atlas.sourcePose.path, referenceSha256: atlas.sourcePose.sha256,
@@ -216,8 +240,9 @@ export function drawXenoTrialsSpriteAtlasV191(ctx, fighter, art, images, options
       canonExact: false, fullLocomotion: false, fullProne: frame.id === 'ko-ground', movementCoverage: atlas.movementCoverage,
       primaryAction: atlas.primaryAction, reducedMotion: selected.reducedMotion } };
 }
-export function getXenoTrialsSpriteEnvelopeV191(fighter, art, metrics) {
-  const old = getXenoTrialsSpriteEnvelopeV189(fighter, art, metrics), atlas = getXenoTrialsSpriteAtlasV191(fighter, art);
+export function getXenoTrialsSpriteEnvelopeV191(fighter, art, metrics, includeV197 = false) {
+  const old = getXenoTrialsSpriteEnvelopeV189(fighter, art, metrics);
+  const atlas = (includeV197 ? getXenoTrialsRuntimeSpriteAtlas : getXenoTrialsSpriteAtlasV191)(fighter, art);
   if (!atlas) return old;
   const layouts = atlas.frames.map(frame => getXenoTrialsSpriteLayoutV191(atlas, frame, metrics,
     { x: fighter.x, y: -fighter.y, facing: fighter.facing }));

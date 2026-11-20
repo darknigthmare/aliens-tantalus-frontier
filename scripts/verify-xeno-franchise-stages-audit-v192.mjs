@@ -157,8 +157,8 @@ test('the complete source chain keeps archival defaults and admits only the exac
   assert.throws(() => runtime({ [first[0]]: '0'.repeat(64) }), /Incorrect V192 runtime view predecessor/);
 });
 
-test('V192 relays to terminal V196, pins its V191 relay and keeps tools, production records and mutable outcomes out of the game build', () => {
-  const terminal = 'scripts/audit-xeno-referenced-film-stages-v196.mjs', relay = 'scripts/audit-xeno-arbiter-protocols-v191.mjs';
+test('V192 relays to terminal V197, pins its V191 relay and keeps tools, production records and mutable outcomes out of the game build', () => {
+  const terminal = 'scripts/audit-xeno-priorities-v197.mjs', relay = 'scripts/audit-xeno-arbiter-protocols-v191.mjs';
   assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(read(terminal).toString()), false);
   assert.equal(Object.hasOwn(successors, terminal) || Object.hasOwn(inputs, terminal), false);
   assert.ok(successors[relay]); assert.match(read(relay).toString(), /from '\.\/audit-xeno-franchise-stages-v192\.mjs'/);

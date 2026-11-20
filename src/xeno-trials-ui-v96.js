@@ -10,7 +10,8 @@ import { XENO_TRIALS_FIGHTERS_V96 as FIGHTERS, XENO_TRIALS_FACTIONS_V96 as FACTI
   XENO_TRIALS_STAGES_V96 as STAGES, getXenoTrialsArtV96 } from './xeno-trials-data-v96.js';
 import { normalizeXenoTrialsProgressV96, getXenoTrialsUnlockCostV96,
   beginXenoTrialsV96, settleXenoTrialsV96, abandonXenoTrialsV96, unlockXenoTrialsFighterV96, renewXenoTrialsContractsV119,
-  checkpointXenoTrialsV186, clearXenoTrialsCheckpointV186 } from './xeno-trials-progress-v96.js';
+  checkpointXenoTrialsV186, clearXenoTrialsCheckpointV186,
+  checkpointXenoTrialsDuelV197, clearXenoTrialsDuelCheckpointV197 } from './xeno-trials-progress-v96.js';
 import { createXenoTrialsRuntimeV96 } from './xeno-trials-runtime-v96.js';
 import { filterXenoTrialsRosterV97, XENO_TRIALS_SELECTION_FAMILIES_V119 as FAMILIES,
   getXenoTrialsSelectionFamilyV119 } from './xeno-trials-selection-v97.js';
@@ -20,7 +21,7 @@ import { XENO_TRIALS_BRANCHES_V119 as BRANCHES, XENO_TRIALS_CAMPAIGN_V119 as CAM
 import { renderEnemyImportPreviewV103 } from './enemy-import-admissions-v103.js';
 import { getEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
 import { getEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
-import { getXenoTrialsAnimationCoverageV191 } from './xeno-trials-animation-coverage-v191.js';
+import { getXenoTrialsAnimationCoverageV197 } from './xeno-trials-animation-coverage-v197.js';
 import { getXenoTrialsRosterPageV179, getXenoTrialsRosterProfileV179 } from './xeno-trials-roster-v179.js';
 import { XENO_TRIALS_HORDE_PROTOCOLS_V186 as HORDE_PROTOCOLS } from './xeno-trials-horde-v180.js';
 import { XENO_TRIALS_OPERATIONS_V188 as OPERATIONS } from './xeno-trials-operations-v188.js';
@@ -123,7 +124,7 @@ export class XenoTrialsUiV96 {
         <label>Famille<select data-xt="family">${options(FAMILIES)}</select></label>
         <label>Rôle<select data-xt="role"><option value="all">Tous les rôles</option>${Object.entries(roleLabel).map(([id,label]) => `<option value="${id}">${label}</option>`).join('')}</select></label>
         <label>Faction simulée<select data-xt="faction-filter"><option value="all">Toutes les factions</option>${options(FACTIONS)}</select></label>
-        <label>Animation<select data-xt="animation"><option value="all">Tous les gestes</option><option value="drawn">Gestes dessinés</option></select></label><label>Disponibilité<select data-xt="ownership"><option value="all">Toute l’écurie</option><option value="owned">Acquis</option><option value="locked">À débloquer</option></select></label>
+        <label>Animation<select data-xt="animation"><option value="all">Tous les gestes</option><option value="drawn">Gestes dessinés</option><option value="articulated">Gestes articulés</option></select></label><label>Disponibilité<select data-xt="ownership"><option value="all">Toute l’écurie</option><option value="owned">Acquis</option><option value="locked">À débloquer</option></select></label>
         <label>Trier<select data-xt="sort"><option value="catalog">Catalogue</option><option value="name">Nom A–Z</option><option value="health">Santé décroissante</option><option value="speed">Vitesse décroissante</option><option value="cost">Coût de déblocage croissant</option></select></label>
       </div><button type="button" class="button" data-xt="reset-filters">RÉINITIALISER LES FILTRES</button><p data-xt="count" class="xt-help" role="status"></p><nav aria-label="Lots de 40 spécimens"><button type="button" class="button" data-xt="roster-previous">← LOT PRÉCÉDENT</button><span data-xt="roster-page" role="status" aria-live="polite"></span><button type="button" class="button" data-xt="roster-next">LOT SUIVANT →</button><button type="button" class="button" data-xt="roster-selection">RETROUVER MA SÉLECTION</button></nav><div data-xt="roster" class="xt-fighters"></div></aside>
       <div class="xt-main"><form data-xt="form" class="xt-config">
@@ -265,9 +266,10 @@ export class XenoTrialsUiV96 {
     };
     this.el('search').addEventListener('input', () => { this.rosterPageV179 = 0; this.render(); });
     this.el('restart').onclick = event => this.launch(this.state().pending?.config, event);
-    this.el('restart-from-start').onclick = () => {
+    this.el('restart-from-start').onclick = event => {
       if (!this.active || this.isRunning() || this.unsavedResult) return;
-      if (this.commit(clearXenoTrialsCheckpointV186(this.getProgress()))) void this.launch(this.state().pending?.config);
+      const clear = this.state().pending?.duelCheckpointV197 ? clearXenoTrialsDuelCheckpointV197 : clearXenoTrialsCheckpointV186;
+      if (this.commit(clear(this.getProgress()))) void this.launch(this.state().pending?.config, event);
     };
     this.el('program-filter').addEventListener('change', () => { this.programPageV186 = 0; this.renderActivitiesV119(this.state()); });
     for (const [key, delta] of [['program-previous', -1], ['program-next', 1]]) this.el(key).onclick = () => {
@@ -447,7 +449,7 @@ export class XenoTrialsUiV96 {
       const attack = getEnemyImportAttackV109(art);
       const signature = getXenoTrialsSignatureV147(f);
       const rig=getXenoTrialsRigV154(f,art);
-      const coverage = getXenoTrialsAnimationCoverageV191(f.id);
+      const coverage = getXenoTrialsAnimationCoverageV197(f.id);
       const motionLabel = coverage?.playerLabel || (rig ? (rig.id.startsWith('rig-v154-') ? 'Présentations, défi et réactions disponibles.' : 'Présentations et réactions disponibles.') : attack ? `Marche : 4 poses adaptées · ${attack.label}` : walk?.label);
       const desiredFacing = i ? -1 : 1;
       const sourceFacing = art?.sourceFacing === 1 ? 1 : -1;
@@ -496,10 +498,12 @@ export class XenoTrialsUiV96 {
     this.closeRuntime(); const generation = this.generation;
     this.selectionStep = 'combat'; this.loading = true; this.render(); this.message(config.activityV119?.branch === 'horde' || config.hordeV180 ? 'MIRE / PRÉPARATION DU SECTEUR ET DES CONTACTS…' : 'MIRE / PRÉPARATION DES DEUX SPÉCIMENS…');
     try {
+    const ticket = this.state().pending;
     const runtime = createXenoTrialsRuntimeV96({ canvas: this.el('canvas'), config,
       controlsRoot: this.el('controls'), statusElement: null, htmlHud: true,
       audioDirector: this.audioDirector, audioEnabled: this.audioEnabledV189,
-      resumeSnapshot: this.state().pending?.checkpointV186?.snapshot,
+      resumeSnapshot: ticket?.checkpointV186?.snapshot,
+      resumeDuelSnapshot: ticket?.duelCheckpointV197?.snapshot,
       onCheckpoint: snapshot => this.persistCheckpointV186(snapshot, generation),
       onState: snapshot => { if (this.active && generation === this.generation) this.updateMatch(snapshot); },
       onResult: result => { if (this.active && generation === this.generation && this.canCommit()) this.finish(result); },
@@ -526,12 +530,15 @@ export class XenoTrialsUiV96 {
   }
   persistCheckpointV186(snapshot, generation) {
     if (!this.active || generation !== this.generation || !this.canCommit() || this.unsavedResult) return false;
-    const transaction = checkpointXenoTrialsV186(this.getProgress(), snapshot);
+    const save = snapshot.hordeV180 ? checkpointXenoTrialsV186 : checkpointXenoTrialsDuelV197;
+    const transaction = save(this.getProgress(), snapshot);
     if (!transaction.applied) return false;
     try {
       this.onCommit(transaction.state);
       this.el('retry-checkpoint').hidden = this.el('retry-checkpoint-overlay').hidden = true;
-      this.el('checkpoint-status').textContent = snapshot.operationV188 ? 'REPRISE CONSERVÉE · OBJECTIFS ET DANGERS ENREGISTRÉS' : `REPRISE CONSERVÉE · VAGUE ${snapshot.hordeV180.wave} / ${snapshot.hordeV180.waveCount}`;
+      this.el('checkpoint-status').textContent = snapshot.operationV188 ? 'REPRISE CONSERVÉE · OBJECTIFS ET DANGERS ENREGISTRÉS'
+        : snapshot.hordeV180 ? `REPRISE CONSERVÉE · VAGUE ${snapshot.hordeV180.wave} / ${snapshot.hordeV180.waveCount}`
+          : 'REPRISE CONSERVÉE · ÉTAT DU DUEL ENREGISTRÉ';
       return true;
     } catch {
       this.el('retry-checkpoint').hidden = this.el('retry-checkpoint-overlay').hidden = false;
@@ -549,8 +556,11 @@ export class XenoTrialsUiV96 {
     if (deviceHint !== this.lastGamepadHintV186) {
       this.el('input-device').textContent = deviceHint; this.lastGamepadHintV186 = deviceHint;
     }
-    if (snapshot.resumedV186 && snapshot.paused && snapshot.checkpointV186?.saved !== false && this.lastResumedTickV186 !== snapshot.tick) {
-      this.el('checkpoint-status').textContent = snapshot.operationV188 ? 'Reprise de l’opération conservée. Reprenez avec P, Start ou le bouton Reprendre.' : 'Reprise de la vague conservée. Reprenez avec P, Start ou le bouton Reprendre.';
+    if ((snapshot.resumedV186 || snapshot.resumedV197) && snapshot.paused
+      && snapshot.checkpointV186?.saved !== false && this.lastResumedTickV186 !== snapshot.tick) {
+      this.el('checkpoint-status').textContent = snapshot.resumedV197 ? 'Duel restauré. Reprenez avec P, Start ou le bouton Reprendre.'
+        : snapshot.operationV188 ? 'Reprise de l’opération conservée. Reprenez avec P, Start ou le bouton Reprendre.'
+          : 'Reprise de la vague conservée. Reprenez avec P, Start ou le bouton Reprendre.';
       this.lastResumedTickV186 = snapshot.tick;
     }
     const wasPaused = this.root.getAttribute('data-xt-paused') === 'true';
@@ -694,7 +704,10 @@ export class XenoTrialsUiV96 {
     this.el('progress').textContent = `DIVISION ${Math.floor(state.xp / 300) + 1} · ${state.xp} XP · ${state.credits} crédits de simulation · ${state.wins} V / ${state.losses} D / ${state.draws} N · ${state.unlocked.length}/${FIGHTERS.length} spécimens`;
     let filtered = filterXenoTrialsRosterV97(FIGHTERS, { family: this.el('family').value || 'all', role: this.el('role').value || 'all', ownership: this.el('ownership').value || 'all', sort: this.el('sort').value || 'catalog', query: this.el('search').value, unlocked: state.unlocked,
       factionRoster: FACTIONS.find(f => f.id === this.el('faction-filter').value)?.roster || null });
-    if (this.el('animation').value === 'drawn') filtered = filtered.filter(fighter => getXenoTrialsAnimationCoverageV191(fighter.id)?.hasDrawnGestures);
+    const animation = this.el('animation').value;
+    if (animation === 'drawn') filtered = filtered.filter(fighter => getXenoTrialsAnimationCoverageV197(fighter.id)?.hasDrawnGestures);
+    if (animation === 'articulated') filtered = filtered.filter(fighter =>
+      getXenoTrialsAnimationCoverageV197(fighter.id)?.meshStates.some(action => action !== 'presentation'));
     const page = getXenoTrialsRosterPageV179(filtered, { page: this.rosterPageV179, selectedId: this.selected, revealSelected: this.rosterSelectionV179 !== this.selected });
     this.rosterPageV179 = page.page; this.rosterSelectionV179 = this.selected;
     this.el('count').textContent = `${filtered.length} / ${FIGHTERS.length} spécimens · Sélection : ${FIGHTERS.find(f => f.id === this.selected).label}`;
@@ -705,15 +718,20 @@ export class XenoTrialsUiV96 {
     this.el('roster').innerHTML = page.fighters.map(f => {
       const unlocked = state.unlocked.includes(f.id), art = getXenoTrialsArtV96(f.id, f.id === 'arachnoid' ? this.form.elements.playerVariant.value : null), cost = getXenoTrialsUnlockCostV96(f.id);
       const portrait = renderEnemyImportPreviewV103(art, f.label, 'clamp(70px, 9vw, 95px)') || `<img src="${art.path}" alt="${f.label}" loading="lazy">`;
-      return `<article class="xt-fighter ${this.selected === f.id ? 'selected' : ''}"><button type="button" data-xt-fighter="${f.id}" aria-pressed="${this.selected === f.id}" ${running || state.pending ? 'disabled' : ''}>${portrait}<strong>${f.label}</strong><small>${roleLabel[f.role]} · ${f.hp} PV</small><small>${getXenoTrialsFighterSpecialLabelV147(f)}</small><small class="xt-motion-status-v189">${escapeHtml(getXenoTrialsAnimationCoverageV191(f.id)?.playerLabel || '')}</small>${getXenoTrialsSuperV148(f) ? `<small>Super : ${getXenoTrialsSuperV148(f).label}</small>` : ''}</button>${unlocked ? '<span class="xt-owned">ACQUIS</span>' : `<button type="button" class="xt-unlock" data-xt-unlock="${f.id}" ${this.unsavedResult || state.pending || state.credits < cost ? 'disabled' : ''}>DÉBLOQUER · ${cost}</button>`}</article>`;
+      return `<article class="xt-fighter ${this.selected === f.id ? 'selected' : ''}"><button type="button" data-xt-fighter="${f.id}" aria-pressed="${this.selected === f.id}" ${running || state.pending ? 'disabled' : ''}>${portrait}<strong>${f.label}</strong><small>${roleLabel[f.role]} · ${f.hp} PV</small><small>${getXenoTrialsFighterSpecialLabelV147(f)}</small><small class="xt-motion-status-v189">${escapeHtml(getXenoTrialsAnimationCoverageV197(f.id)?.playerLabel || '')}</small>${getXenoTrialsSuperV148(f) ? `<small>Super : ${getXenoTrialsSuperV148(f).label}</small>` : ''}</button>${unlocked ? '<span class="xt-owned">ACQUIS</span>' : `<button type="button" class="xt-unlock" data-xt-unlock="${f.id}" ${this.unsavedResult || state.pending || state.credits < cost ? 'disabled' : ''}>DÉBLOQUER · ${cost}</button>`}</article>`;
     }).join('') || '<p class="xt-help">Aucun spécimen ne correspond à ces filtres. Votre sélection est conservée.</p>';
     const activity = this.activityV119 && resolveXenoTrialsActivityV119(this.activityV119, state.modesV119);
     const horde = combatBriefingV188(activity);
     if (!running) this.root.setAttribute('data-xt-mode', horde ? 'horde' : 'duel');
     this.el('start').textContent = horde?.operation ? 'ENGAGER L’OPÉRATION' : horde ? 'ENGAGER LE PROTOCOLE HORDE' : 'LANCER LE DUEL';
     this.el('confirm-fighters').textContent = horde ? 'CONFIRMER · VÉRIFIER LE SECTEUR →' : 'CONFIRMER · CHOISIR L’ARÈNE →';
-    this.el('restart').textContent = state.pending?.config?.operationV188 ? state.pending?.checkpointV186 ? 'REPRENDRE L’OPÉRATION CONSERVÉE' : 'RECOMMENCER L’OPÉRATION SAUVEGARDÉE' : state.pending?.checkpointV186 ? `REPRENDRE LA VAGUE ${state.pending.checkpointV186.snapshot.hordeV180.wave}` : state.pending?.config?.activityV119?.branch === 'horde' ? 'RECOMMENCER LE PROTOCOLE SAUVEGARDÉ' : 'RECOMMENCER LE DUEL SAUVEGARDÉ';
-    this.el('restart-from-start').hidden = !state.pending?.checkpointV186 || running;
+    const duelCheckpoint = state.pending?.duelCheckpointV197;
+    this.el('restart').textContent = duelCheckpoint ? 'REPRENDRE LE DUEL CONSERVÉ'
+      : state.pending?.config?.operationV188 ? state.pending.checkpointV186 ? 'REPRENDRE L’OPÉRATION CONSERVÉE' : 'RECOMMENCER L’OPÉRATION SAUVEGARDÉE'
+        : state.pending?.checkpointV186 ? `REPRENDRE LA VAGUE ${state.pending.checkpointV186.snapshot.hordeV180.wave}`
+          : state.pending?.config?.activityV119?.branch === 'horde' ? 'RECOMMENCER LE PROTOCOLE SAUVEGARDÉ' : 'RECOMMENCER LE DUEL SAUVEGARDÉ';
+    this.el('restart-from-start').textContent = duelCheckpoint ? 'RECOMMENCER DEPUIS LA PREMIÈRE MANCHE' : 'RECOMMENCER DEPUIS LA PREMIÈRE VAGUE';
+    this.el('restart-from-start').hidden = !(duelCheckpoint || state.pending?.checkpointV186) || running;
     this.el('restart-from-start').disabled = Boolean(this.unsavedResult);
     this.el('mode-help').textContent = horde ? horde.orders : 'Deux manches gagnantes. Surveillez votre endurance et punissez les attaques manquées.';
     const wrongCombatant = Boolean(activity?.forcedPlayerId && this.selected !== activity.forcedPlayerId
@@ -753,6 +771,9 @@ export class XenoTrialsUiV96 {
     }
     // A terminal result awaiting its commit is not a resumable saved duel.
     if (!running && this.unsavedResult) this.message('Évaluation terminée. Résultat en attente de sauvegarde. Réessayez la sauvegarde du résultat.');
-    else if (!running && state.pending) this.message(state.pending.checkpointV186 ? 'Reprise conservée. Retrouvez la vague et la santé enregistrées, puis reprenez depuis la pause.' : state.pending.config?.activityV119?.branch === 'horde' ? 'Protocole sauvegardé en attente. Recommencez depuis la première vague ou annulez sans gain.' : 'Duel sauvegardé en attente. Recommencez depuis la première manche ou annulez sans gain.');
+    else if (!running && state.pending) this.message(duelCheckpoint ? 'Duel sauvegardé. Retrouvez la manche, la santé et le chrono enregistrés.'
+      : state.pending.checkpointV186 ? 'Reprise conservée. Retrouvez la vague et la santé enregistrées, puis reprenez depuis la pause.'
+        : state.pending.config?.activityV119?.branch === 'horde' ? 'Protocole sauvegardé en attente. Recommencez depuis la première vague ou annulez sans gain.'
+          : 'Duel sauvegardé en attente. Recommencez depuis la première manche ou annulez sans gain.');
   }
 }

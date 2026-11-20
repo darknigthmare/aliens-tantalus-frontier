@@ -1,3 +1,4 @@
+import { publicXenoSpritePathAdmissionV197, verifyXenoSpriteAdmissionsV197 } from './public-xeno-sprite-admissions-v197.mjs';
 import { publicXenoReferencedStagePathAdmissionV196, verifyXenoReferencedStageAdmissionsV196 } from './public-xeno-referenced-stage-admissions-v196.mjs';
 import { publicXenoIconicStagePathAdmissionV194, verifyXenoIconicStageAdmissionsV194 } from './public-xeno-iconic-stage-admissions-v194.mjs';
 import { publicXenoOriginalArenaPathAdmissionV193, verifyXenoOriginalArenaAdmissionsV193 } from './public-xeno-original-arena-admissions-v193.mjs';
@@ -701,6 +702,17 @@ const PRIVATE_TEXT = [
   /['"]V\d+_(?:BATCH_\d+|[A-Z_]*IMAGEGEN)/
 ];
 
+const XENO_PRIORITIES_SOURCE_ONLY_V197 = new Set([
+  'docs/forge/xeno-trials/V197-PRIORITIES.md',
+  'scripts/audit-xeno-priorities-v197.mjs',
+  'scripts/public-xeno-sprite-admissions-v197.mjs',
+  'scripts/verify-xeno-priorities-audit-v197.mjs',
+  'scripts/verify-xeno-trials-priorities-v197.mjs',
+  'scripts/verify-xeno-trials-duel-checkpoint-v197.mjs',
+  'scripts/verify-xeno-trials-pilot-sequences-v197.mjs',
+  'scripts/verify-xeno-trials-rig-v197.mjs'
+]);
+
 const XENO_REFERENCED_STAGE_SOURCE_ONLY_V196 = new Set([
   'docs/forge/xeno-trials/V196-REFERENCED-FILM-STAGES.md',
   'scripts/public-xeno-referenced-stage-admissions-v196.mjs',
@@ -735,6 +747,7 @@ const XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193 = new Set([
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
+  if (XENO_PRIORITIES_SOURCE_ONLY_V197.has(path)) return !built;
   if (XENO_REFERENCED_STAGE_SOURCE_ONLY_V196.has(path)) return !built;
   if (XENO_STAGE_CLASSIFICATION_SOURCE_ONLY_V195.has(path)) return !built;
   if (XENO_ICONIC_STAGE_SOURCE_ONLY_V194.has(path)) return !built;
@@ -749,6 +762,8 @@ export function isPublicDistributionPathV86(path, { directory = false, built = f
   if (FORGE_STYLES_V140.has(path)) return true;
   const segments = path.split('/');
   if (segments.some(part => !part || part === '.' || part === '..' || PRIVATE_SEGMENT.test(part))) return false;
+  const spriteAdmissionV197 = publicXenoSpritePathAdmissionV197(path, { directory });
+  if (spriteAdmissionV197 !== null) return spriteAdmissionV197;
   const spriteAdmissionV191 = publicXenoSpritePathAdmissionV191(path, { directory });
   if (spriteAdmissionV191 !== null) return spriteAdmissionV191;
   const referencedStageAdmissionV196 = publicXenoReferencedStagePathAdmissionV196(path, { directory });
@@ -842,6 +857,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   await verifyXenoSpriteAdmissionsV189(root);
   await verifyArbiterImageAdmissionsV190(root);
   await verifyXenoSpriteAdmissionsV191(root);
+  await verifyXenoSpriteAdmissionsV197(root);
   await verifyXenoFranchiseStageAdmissionsV192(root);
   await verifyXenoOriginalArenaAdmissionsV193(root);
   await verifyXenoIconicStageAdmissionsV194(root);
