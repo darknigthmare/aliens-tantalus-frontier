@@ -4,7 +4,10 @@ import { XENO_TRIALS_PRIORITY_AIR_DATA_V201 } from './xeno-trials-priority-air-d
 import { XENO_TRIALS_PRIORITY_GROUND_DATA_V201 } from './xeno-trials-priority-ground-data-v201.js';
 import { XENO_TRIALS_PRIORITY_AIR_DATA_V202 } from './xeno-trials-priority-air-data-v202.js';
 import { XENO_TRIALS_PRIORITY_GROUND_DATA_V202 } from './xeno-trials-priority-ground-data-v202.js';
+import { XENO_TRIALS_PRIORITY_AIR_DATA_V203 } from './xeno-trials-priority-air-data-v203.js';
+import { XENO_TRIALS_PRIORITY_GROUND_DATA_V203 } from './xeno-trials-priority-ground-data-v203.js';
 import { getXenoTrialsArtV96, getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
+import { ENEMY_DISPLAY_ALPHA_V110 } from './enemy-display-alpha-v110.js';
 import { XENO_TRIALS_SPRITE_REFERENCES_V189 } from './xeno-trials-sprite-atlas-v189.js';
 import { getXenoTrialsSuperV148 } from './xeno-trials-supers-v148.js';
 import { getXenoTrialsAttackV147, getXenoTrialsSpecialStyleV147 } from './xeno-trials-signatures-v147.js';
@@ -19,8 +22,14 @@ const positive = value => Number.isFinite(value) && value > 0;
 const tuple = (value, length) => Array.isArray(value) && value.length === length && value.every(Number.isFinite);
 const phaseKeys = ['windup', 'impact', 'recovery'];
 const superKeys = ['windup', 'active', 'recovery'];
-const airFightersByRevision = { 199: ['warrior', 'runner'], 201: ['queen', 'import-game-afe2-warden'], 202: ['prowler', 'ravager'] };
-const groundSpecialStyles = { 201: { mantis: 'slash', 'synth-sniper': 'pulse' }, 202: { rhino: 'ram', 'synth-heavy': 'pulse' } };
+const airFightersByRevision = {
+  199: ['warrior', 'runner'], 201: ['queen', 'import-game-afe2-warden'],
+  202: ['prowler', 'ravager'], 203: ['chrysalis', 'razor-claws']
+};
+const groundSpecialStyles = {
+  201: { mantis: 'slash', 'synth-sniper': 'pulse' }, 202: { rhino: 'ram', 'synth-heavy': 'pulse' },
+  203: { 'armored-joe': 'ram', 'synth-good-boy': 'pulse' }
+};
 const atlasKinds = new Map([['light', 'air-combat'], ['heavy', 'air-combat'], ['special', 'ground-special'], ['super', 'super']]);
 export const XENO_TRIALS_ACTION_FRAME_IDS_V199 = freeze({
   'air-combat': ['light', 'heavy'].flatMap(action => phaseKeys.map(key => `air-${action}-${key}`)),
@@ -48,7 +57,9 @@ function createAtlas(data, revision) {
       && data.superId === undefined
     : kind === 'super' && revision < 201 && superSpec && data.superId === superSpec.id;
   const refs = XENO_TRIALS_SPRITE_REFERENCES_V189[fighterId];
-  const sourceHash = art?.sha256 ?? refs?.sha256, sourceBounds = art?.alphaBounds ?? refs?.alphaBounds;
+  const measured = ENEMY_DISPLAY_ALPHA_V110[art?.path];
+  const sourceHash = art?.sha256 ?? refs?.sha256 ?? measured?.sha256;
+  const sourceBounds = art?.alphaBounds ?? refs?.alphaBounds ?? measured?.bounds;
   if (!fighter || !art || fighter.profileId !== profileId || !admitsAction) fail('identity and admitted action');
   if (!sourcePose || !hash(sourceHash) || sourcePose.profileId !== profileId || sourcePose.path !== art.path
     || sourcePose.sha256 !== sourceHash || sourcePose.width !== art.sourceWidth || sourcePose.height !== art.sourceHeight
@@ -100,9 +111,11 @@ export const XENO_TRIALS_PRIORITY_ATLASES_V201 = freeze(
   [...XENO_TRIALS_PRIORITY_AIR_DATA_V201, ...XENO_TRIALS_PRIORITY_GROUND_DATA_V201].map(data => createAtlas(data, 201)));
 export const XENO_TRIALS_PRIORITY_ATLASES_V202 = freeze(
   [...XENO_TRIALS_PRIORITY_AIR_DATA_V202, ...XENO_TRIALS_PRIORITY_GROUND_DATA_V202].map(data => createAtlas(data, 202)));
+export const XENO_TRIALS_PRIORITY_ATLASES_V203 = freeze(
+  [...XENO_TRIALS_PRIORITY_AIR_DATA_V203, ...XENO_TRIALS_PRIORITY_GROUND_DATA_V203].map(data => createAtlas(data, 203)));
 export const XENO_TRIALS_RUNTIME_ACTION_ATLASES = Object.freeze([
   ...XENO_TRIALS_ACTION_ATLASES_V199, ...XENO_TRIALS_SUPER_ATLASES_V200,
-  ...XENO_TRIALS_PRIORITY_ATLASES_V201, ...XENO_TRIALS_PRIORITY_ATLASES_V202
+  ...XENO_TRIALS_PRIORITY_ATLASES_V201, ...XENO_TRIALS_PRIORITY_ATLASES_V202, ...XENO_TRIALS_PRIORITY_ATLASES_V203
 ]);
 const admitted = new Map(), noAtlases = Object.freeze([]);
 for (const atlas of XENO_TRIALS_RUNTIME_ACTION_ATLASES) {

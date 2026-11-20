@@ -82,7 +82,8 @@ test('Prowler retains his separate leap and Trials coverage reflects the admitte
   assert.equal(getXenoTrialsRuntimeSpriteAtlas(definition, art).primaryAction, 'leap');
   assert.equal(getXenoTrialsActiveActionAtlas({ ...definition, attack: { kind: 'special' } }, art), null);
   const coverage = XENO_TRIALS_FIGHTERS_V96.map(getXenoTrialsRuntimeAnimationCoverage);
-  assert.equal(coverage.filter(entry => entry.hasDrawnGestures).length, 32);
+  assert.equal(coverage.filter(entry => entry.drawnStates.some(action => action !== 'idle'
+    && entry.states[action].sources.some(source => source.renderKind === 'drawn' && source.revision <= 202))).length, 32);
   assert.equal(coverage.filter(entry => entry.states.presentation.sources.some(source => source.revision === 202)).length, 28);
   assert.ok(coverage.every(entry => !entry.fullAnimation && !entry.canonExact));
   for (const [id, action] of scenarios) {

@@ -174,6 +174,45 @@ test('Arbiter objective completions autosave immediately and an acquired caisson
  }
 });
 
+test('a refused milestone retries during live play and persistent refusal exhausts its retry budget',async()=>{
+ for(const recover of [true,false]){
+  const t=archiveOperationTicket('extraction'),owner=ownerFor(t.state),h=host({config:t.config,owner});await h.start();
+  assert.equal(h.runtime.saveCheckpoint(),true);
+  const original=clone(owner.progress.pending.checkpointV186);const commit=owner.ui.onCommit;let attempts=0;
+  owner.ui.onCommit=value=>{
+   attempts++;
+   if(!recover||attempts===1)throw new Error('storage unavailable');
+   commit(value);
+  };
+  const pickup=workUntil(h,operation=>operation.completed[0]);
+  for(const action of ['left','right','interact'])h.runtime.setInput(action,false);
+  assert.equal(pickup.checkpointV186.saved,false);assert.deepEqual(owner.progress.pending.checkpointV186,original);
+  assert.equal(attempts,1);
+  h.frames(24);
+  assert.equal(attempts,1,'no early retry during the first 400 ms');
+  h.frames(86);
+  assert.equal(h.state().paused,false);assert.equal(h.state().hordeV180.wave,1);
+  assert.ok(h.state().tick-pickup.tick<600,'ordinary periodic save has not run');
+  assert.deepEqual(h.checkpoints.slice(1).map(row=>row.reason),recover
+   ? ['operation-objective','milestone-retry'] : ['operation-objective','milestone-retry','milestone-retry']);
+  assert.equal(attempts,recover?2:3);
+  assert.equal(owner.commits,recover?2:1);
+  const durable=normalizeXenoTrialsProgressV96(clone(owner.progress));
+  assert.equal(durable.pending.matchId,t.config.matchId);
+  assert.equal(durable.credits,t.state.credits);assert.equal(durable.xp,t.state.xp);assert.deepEqual(durable.ledger,t.state.ledger);
+  if(recover){
+   const saved=durable.pending.checkpointV186.snapshot;
+   assert.equal(h.state().checkpointV186.saved,true);assert.ok(saved.tick>pickup.tick);
+   assert.equal(saved.operationV188.carrying,0);assert.equal(saved.operationV188.delivered[0],false);
+   const restored=host({config:durable.pending.config,resumeSnapshot:saved});await restored.start();
+   assert.equal(restored.state().paused,true);assert.deepEqual(coreFrom(restored.state(),saved),saved);restored.runtime.stop();
+  }else{
+   assert.equal(h.state().checkpointV186.saved,false);assert.deepEqual(durable.pending.checkpointV186,original);
+  }
+  h.runtime.stop();
+ }
+});
+
 test('manual and timed next rounds save the native score during the new countdown',async()=>{
  for(const manual of [true,false]){
   const t=beginXenoTrialsV96(createXenoTrialsProgressV96(),{

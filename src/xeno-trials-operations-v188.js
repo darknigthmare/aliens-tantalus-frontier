@@ -213,10 +213,13 @@ export function getXenoTrialsOperationViewV188(match){
  }
  if(entry.kind==='escort'){entities=[{...entities[0],x:state.cargoX,destinationX:entry.cargoEndX,integrity:state.integrity}];target=entities[0];}
  if(entry.kind==='extraction'){
-  entities=entities.map((entity,index)=>({...entity,active:!state.completed[index],delivered:state.delivered[index],carried:state.carrying===index}));
+  entities=entities.map((entity,index)=>({...entity,active:state.carrying<0&&!state.completed[index],delivered:state.delivered[index],carried:state.carrying===index}));
   entities.push({...entry.depot,active:state.carrying>=0,completed:state.delivered.every(Boolean),progress:state.depotTicks},
    {...entry.exit,active:state.delivered.every(Boolean),completed:state.status==='completed',progress:state.exitTicks});
   target=state.carrying>=0?entities.find(entity=>entity.kind==='depot'):state.delivered.every(Boolean)?entities.find(entity=>entity.kind==='exit'):entities.find(entity=>entity.kind==='supply'&&!entity.completed);
+  if(target?.kind==='supply'){
+   target=entities.find(entity=>entity.kind==='supply'&&!entity.completed&&nearby(match.fighters?.[0],entity))||target;
+  }
  }
  const done=entry.kind==='extraction'?state.delivered.filter(Boolean).length:doneCount(state);
  const failureLabel={'player-ko':'Spécimen neutralisé',time:'Temps écoulé','structure-destroyed':'Intégrité épuisée'}[state.failureReason]||'Évaluation interrompue';
@@ -226,5 +229,6 @@ export function getXenoTrialsOperationViewV188(match){
   progress:{done,total:entry.objectives.length,label:entry.kind==='extraction'?`${done}/${entry.objectives.length} caissons livrés`:`${done}/${entry.objectives.length} objectifs validés`},
   timeRemaining:Math.max(0,entry.roundSeconds-state.elapsedTicks/120),integrity:state.integrity,carrying:state.carrying,entities,
   target:target?{x:target.x,radius:target.radius,label:target.label,
-   ...(entry.kind==='beacon'?{id:target.id,windowOpen:target.windowOpen,windowRemainingTicks:target.windowRemainingTicks}:{})}:null};
+   ...(entry.kind==='beacon'?{id:target.id,windowOpen:target.windowOpen,windowRemainingTicks:target.windowRemainingTicks}:{}),
+   ...(entry.kind==='extraction'?{id:target.id,kind:target.kind,progress:target.progress,requiredTicks:target.requiredTicks}:{})}:null};
 }

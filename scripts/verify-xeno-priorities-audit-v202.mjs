@@ -13,6 +13,7 @@ import {
   verifyXenoPrioritiesV202 as verify,
   xenoPrioritiesRuntimeSourcesV202 as runtimeSources
 } from './audit-xeno-priorities-v202.mjs';
+import { reviewedXenoPrioritiesDigestV203 as advanceToV203 } from './audit-xeno-priorities-v203.mjs';
 import { verifyXenoPrioritiesV201 as verifyPrior, xenoPrioritiesRuntimeSourcesV201 as runtimeRelay } from './audit-xeno-priorities-v201.mjs';
 import { verifyXenoSupersV200 as verifyEarlier } from './audit-xeno-supers-v200.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
@@ -21,9 +22,11 @@ import { collectReleaseTestsV143 } from './test-release-v143.mjs';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const git = args => execFileSync('git', args, { cwd: root, maxBuffer: 32 * 1024 * 1024 });
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
+const readPublished = path => git(['show', '362d1d77cf730e60e9505bcb17ab70a2f2e1fd4c:' + path]);
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const prior = 'scripts/audit-xeno-priorities-v201.mjs';
-const terminal = 'scripts/audit-xeno-priorities-v202.mjs';
+const relay = 'scripts/audit-xeno-priorities-v202.mjs';
+const terminal = 'scripts/audit-xeno-priorities-v203.mjs';
 const verifier = 'scripts/verify-xeno-priorities-audit-v202.mjs';
 const report = 'docs/forge/xeno-trials/V202-PRIORITIES.md';
 
@@ -46,13 +49,15 @@ test('V202 preserves the published V201 declarations and accepts each successor 
     assert.ok(published.has(path), path);
     assert.ok(Object.isFrozen(entry), path);
     assert.equal(sha(git(['show', baseline + ':' + path])), entry.previousSha256, path);
+    assert.equal(sha(readPublished(path)), entry.currentSha256, path);
     assert.equal(advance(path, entry.previousSha256), sha(read(path)), path);
     assert.throws(() => advance(path, entry.currentSha256), /Incorrect V201 endpoint for V202/, path);
   }
   for (const [path, entry] of Object.entries(inputs)) {
     assert.ok(!published.has(path), path);
     assert.ok(Object.isFrozen(entry), path);
-    assert.equal(sha(read(path)), entry.sha256, path);
+    assert.equal(sha(readPublished(path)), entry.sha256, path);
+    assert.equal(sha(read(path)), advanceToV203(path, entry.sha256), path);
   }
   assert.equal(advance('constructor', 'untouched'), 'untouched');
 });
@@ -81,21 +86,22 @@ test('V202 assets and runtime are exact public admissions, verified by the histo
   assert.deepEqual(runtimeRelay(effective), effective);
   for (const [path, entry] of Object.entries(successors)) {
     if (entry.kind !== 'runtime') continue;
-    assert.equal(effective[path], entry.currentSha256, path);
+    assert.equal(effective[path], advanceToV203(path, entry.currentSha256), path);
     assert.throws(() => runtimeSources({ [path]: '0'.repeat(64) }), /Incorrect V202 runtime view predecessor/, path);
   }
-  assert.equal(effective[newRuntime], inputs[newRuntime].sha256);
+  assert.equal(effective[newRuntime], advanceToV203(newRuntime, inputs[newRuntime].sha256));
   assert.throws(() => runtimeSources({ [newRuntime]: '0'.repeat(64) }), /Incorrect new V202 runtime digest/);
 });
 
-test('the terminal audit and release evidence stay at exact source-only paths', () => {
+test('the V202 audit relays to V203 and release evidence stays at exact source-only paths', () => {
   assert.match(read(prior).toString(), /from '\.\/audit-xeno-priorities-v202\.mjs'/);
+  assert.match(read(relay).toString(), /from '\.\/audit-xeno-priorities-v203\.mjs'/);
   assert.doesNotMatch(read(terminal).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
-  for (const path of [terminal, verifier, report]) {
+  for (const path of [relay, terminal, verifier, report]) {
     assert.equal(isPublicDistributionPathV86(path), true, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);
   }
-  for (const path of [terminal, report])
+  for (const path of [relay, terminal, report])
     assert.ok(!Object.hasOwn(inputs, path) && !Object.hasOwn(successors, path), path);
   for (const path of ['assets/openai/sprites/xeno-trials-v202/unreviewed-sheet.png', 'scripts/audit-xeno-priorities-unreviewed-v202.mjs'])
     assert.equal(isPublicDistributionPathV86(path), false, path);

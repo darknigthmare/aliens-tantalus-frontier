@@ -7,11 +7,13 @@ import { XENO_TRIALS_RIG_DATA_V197 } from './xeno-trials-rig-data-v197.js';
 import { XENO_TRIALS_RIG_DATA_V199 } from './xeno-trials-rig-data-v199.js';
 import { XENO_TRIALS_RIG_DATA_V201 } from './xeno-trials-rig-data-v201.js';
 import { XENO_TRIALS_RIG_DATA_V202 } from './xeno-trials-rig-data-v202.js';
+import { XENO_TRIALS_DEFENSE_DATA_V203 } from './xeno-trials-defense-data-v203.js';
 import { XENO_TRIALS_GRAPPLE_V153 } from './xeno-trials-grapple-v153.js';
 import { XENO_TRIALS_CASTES_V151 } from './xeno-trials-castes-v151.js';
 import { XENO_TRIALS_SIGNATURES_V147, getXenoTrialsAttackV147 } from './xeno-trials-signatures-v147.js';
 import { XENO_TRIALS_ATTACKS_V96 } from './xeno-trials-combat-contract-v186.js';
 import { getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
+import { ENEMY_DISPLAY_ALPHA_V110 } from './enemy-display-alpha-v110.js';
 import { XENO_PRESENTATION_V97 } from './xeno-trials-presentation-v97.js';
 import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 // Read-only native-texture skinning: original small-amplitude key poses, not
@@ -23,7 +25,7 @@ export const XENO_TRIALS_RIGS_V154=freeze(XENO_TRIALS_RIG_DATA_V154);
 // capture/exit choreography. An object copy still cannot acquire admission.
 const admittedRigsV163=freeze([...XENO_TRIALS_RIGS_V154,...XENO_TRIALS_RIG_DATA_V163,...XENO_TRIALS_RIG_DATA_V165]);
 const legacyRigByFighter = new Map(admittedRigsV163.map(rig => [rig.fighterId, rig]));
-function admitArticulatedRigs(data, revision) {
+function admitArticulatedRigs(data, revision, defense = false) {
  return freeze(data.map(entry => {
   const native = legacyRigByFighter.get(entry.fighterId);
   if (!native || native.profileId !== entry.profileId || native.sourceSha256 !== entry.sourceSha256)
@@ -31,12 +33,14 @@ function admitArticulatedRigs(data, revision) {
   const supportY = Math.min(...Object.values(entry.contacts).filter(contact => contact.bone === 'hips').map(contact => contact.point[1]));
   const { cell } = native.mesh;
   return {
-   id: `rig-v${revision}-${native.fighterId}`, fighterId: native.fighterId, profileId: native.profileId, path: native.path,
+   id: `${defense ? 'defense-rig' : 'rig'}-v${revision}-${native.fighterId}`,
+   fighterId: native.fighterId, profileId: native.profileId, path: native.path,
    sourceWidth: native.sourceWidth, sourceHeight: native.sourceHeight, sourceFacing: native.sourceFacing, sourceSha256: native.sourceSha256,
    mesh: native.mesh, bones: entry.bones, contacts: entry.contacts, poses: entry.poses, anatomy: entry.anatomy,
    pinned: [0, Math.floor((supportY - cell) / cell) * cell, native.sourceWidth, native.sourceHeight],
    ...(entry.preserveRigidRegions ? { rigidZonesV163: native.rigidZonesV163 } : {}),
-   presentationRevision: revision, animation: `source-anchored-presentation-and-recovery-v${revision}`,
+   ...(defense ? { defenseRevision: revision, animation: `source-anchored-defense-v${revision}` }
+     : { presentationRevision: revision, animation: `source-anchored-presentation-and-recovery-v${revision}` }),
    canonExact: false, fullLocomotion: false, captureSequenceAdmission: false
   };
  }));
@@ -45,6 +49,10 @@ export const XENO_TRIALS_ARTICULATED_RIGS_V197 = admitArticulatedRigs(XENO_TRIAL
 export const XENO_TRIALS_ARTICULATED_RIGS_V199 = admitArticulatedRigs(XENO_TRIALS_RIG_DATA_V199, 199);
 export const XENO_TRIALS_ARTICULATED_RIGS_V201 = admitArticulatedRigs(XENO_TRIALS_RIG_DATA_V201, 201);
 export const XENO_TRIALS_ARTICULATED_RIGS_V202 = admitArticulatedRigs(XENO_TRIALS_RIG_DATA_V202, 202);
+export const XENO_TRIALS_DEFENSE_RIGS_V203 = admitArticulatedRigs(XENO_TRIALS_DEFENSE_DATA_V203, 203, true);
+const defenseRigs = new Set(XENO_TRIALS_DEFENSE_RIGS_V203);
+const defenseRigByFighter = new Map(XENO_TRIALS_DEFENSE_RIGS_V203.map(rig => [rig.fighterId, rig]));
+if (defenseRigs.size !== defenseRigByFighter.size) throw new Error('Duplicate Trials defense fighter');
 const articulatedRigByFighterV197 = new Map(XENO_TRIALS_ARTICULATED_RIGS_V197.map(rig => [rig.fighterId, rig]));
 const articulatedRigByFighterV199 = new Map(XENO_TRIALS_ARTICULATED_RIGS_V199.map(rig => [rig.fighterId, rig]));
 const articulatedRigByFighterV201 = new Map(XENO_TRIALS_ARTICULATED_RIGS_V201.map(rig => [rig.fighterId, rig]));
@@ -55,7 +63,7 @@ const articulatedRigs = new Set([
 ]);
 const runtimeArticulatedRigByFighter = new Map([...articulatedRigs].map(rig => [rig.fighterId, rig]));
 if (runtimeArticulatedRigByFighter.size !== articulatedRigs.size) throw new Error('Duplicate articulated Trials fighter');
-const admittedRigs = new Set([...admittedRigsV163, ...articulatedRigs]);
+const admittedRigs = new Set([...admittedRigsV163, ...articulatedRigs, ...defenseRigs]);
 const pilotProfilesV197 = new Map(XENO_TRIALS_SIGNATURES_V147.map(entry => [entry.fighterId, entry.profileId]));
 export const XENO_TRIALS_RIG_TIMING_V154=Object.freeze({intro:XENO_PRESENTATION_V97.introMs/1000,round:1.8,release:XENO_TRIALS_GRAPPLE_V153.recovery,settle:.12});
 const clamp=(v,lo=0,hi=1)=>Math.max(lo,Math.min(hi,v));
@@ -69,17 +77,19 @@ export function getXenoTrialsRigV154(definition,art){
  return r&&art?.id===r.profileId&&art.path===r.path&&art.sourceWidth===r.sourceWidth&&art.sourceHeight===r.sourceHeight
   &&art.sourceFacing===r.sourceFacing&&(!art.sha256||art.sha256===r.sourceSha256)?r:null;
 }
-function getArticulatedRig(rigs, definition, art) {
+function getArticulatedRig(rigs, definition, art, sourceHash = art?.sha256) {
  const rig = rigs.get(definition?.id);
  return rig && definition.profileId === rig.profileId && art?.id === rig.profileId && art.path === rig.path
   && art.sourceWidth === rig.sourceWidth && art.sourceHeight === rig.sourceHeight && art.sourceFacing === rig.sourceFacing
-  && art.sha256 === rig.sourceSha256 ? rig : null;
+  && sourceHash === rig.sourceSha256 ? rig : null;
 }
 export const getXenoTrialsRigV197 = (definition, art) => getArticulatedRig(articulatedRigByFighterV197, definition, art);
 export const getXenoTrialsRigV199 = (definition, art) => getArticulatedRig(articulatedRigByFighterV199, definition, art);
 export const getXenoTrialsRigV201 = (definition, art) => getArticulatedRig(articulatedRigByFighterV201, definition, art);
 export const getXenoTrialsRigV202 = (definition, art) => getArticulatedRig(articulatedRigByFighterV202, definition, art);
 export const getXenoTrialsRuntimeArticulatedRig = (definition, art) => getArticulatedRig(runtimeArticulatedRigByFighter, definition, art);
+export const getXenoTrialsDefenseRigV203 = (definition, art) => getArticulatedRig(defenseRigByFighter, definition, art,
+ art?.sha256 ?? ENEMY_DISPLAY_ALPHA_V110[art?.path]?.sha256);
 const inside=(p,r)=>r&&p[0]>=r[0]&&p[0]<=r[2]&&p[1]>=r[1]&&p[1]<=r[3];
 const inPolygonV163=(p,polygon)=>{let hit=false;for(let i=0,j=polygon.length-1;i<polygon.length;j=i++){
  const a=polygon[i],b=polygon[j];if((a[1]>p[1])!==(b[1]>p[1])&&p[0]<(b[0]-a[0])*(p[1]-a[1])/(b[1]-a[1])+a[0])hit=!hit;
@@ -140,7 +150,7 @@ export function getXenoTrialsRigMeshV154(rig){
 }
 // Only events and phases owned by this match can select a clip.
 export function getXenoTrialsRigCueV154(rig,match,fighter,presentation=null){
- if(!admittedRigs.has(rig)||fighter?.id!==rig.fighterId||!match?.fighters?.includes(fighter))return null;
+ if(!admittedRigs.has(rig)||defenseRigs.has(rig)||fighter?.id!==rig.fighterId||!match?.fighters?.includes(fighter))return null;
  if(articulatedRigs.has(rig))return getGroundedArticulatedRigCue(rig,match,fighter,presentation);
  const index=match.fighters.indexOf(fighter),T=XENO_TRIALS_RIG_TIMING_V154;
  if(match.phase==='active'&&presentation?.fighterSlot===index&&presentation.blocksSimulation)
@@ -197,7 +207,12 @@ function getGroundedArticulatedRigCue(rig, match, fighter, presentation) {
 export function sampleXenoTrialsRigV154(rig,cue,reducedMotion=false){
  if(!admittedRigs.has(rig)||!Object.hasOwn(rig.poses,cue?.clip)||!Number.isFinite(cue.progress)||!Number.isFinite(cue.elapsed)||cue.elapsed<0)return null;
  const p=clamp(cue.progress);let gain=1;
- if(cue.clip==='intro')gain=Math.sin(Math.PI*p)**2;
+ if (defenseRigs.has(rig)) {
+  if (cue.clip === 'hurt') gain = Math.sin(Math.PI * p);
+  else if (cue.clip === 'recover') gain = 1 - smooth(p);
+  else gain = smooth(p);
+  if (Number.isFinite(cue.gain)) gain *= clamp(cue.gain);
+ } else if(cue.clip==='intro')gain=Math.sin(Math.PI*p)**2;
  else if(cue.clip==='windup')gain=Math.sin(Math.PI*p)**2;
  else if(cue.clip==='recovery')gain=smooth(p/.25)*(1-smooth((p-.42)/.58));
  else if(cue.clip==='release')gain=1-smooth(p);
@@ -221,7 +236,7 @@ export function sampleXenoTrialsRigV154(rig,cue,reducedMotion=false){
  const frame={rigId:rig.id,clip:cue.clip,progress:p,angles,vertices,contacts,reducedMotion,canonExact:false,animation:rig.animation,active:gain>1e-6};
  // New sparse rigs report the same painted attachment that the affine mesh
  // actually displays. A desired bone target is not a skin-contact measurement.
- if(rig.presentationRevision===165||articulatedRigs.has(rig))for(const[name,anchor]of Object.entries(rig.contacts)){
+ if(rig.presentationRevision===165||articulatedRigs.has(rig)||defenseRigs.has(rig))for(const[name,anchor]of Object.entries(rig.contacts)){
   const displayed=projectXenoTrialsMeshPointV157(rig,frame,anchor.point);
   if(!displayed)return null;
   frame.contacts[name]=displayed;
@@ -377,6 +392,7 @@ export function drawXenoTrialsRigV154(ctx,rig,image,frame,metrics,x,y,facing){
  return{rigId:rig.id,clip:frame.clip,progress:frame.progress,drawn:true,triangles:draws.length,sourcePath:rig.path,sourceSha256:rig.sourceSha256,
   contacts:Object.fromEntries(Object.entries(frame.contacts).map(([key,p])=>[key,world(p)])),animation:frame.animation,canonExact:false,
   ...(rig.presentationRevision>=199?{presentationRevision:rig.presentationRevision}:{}),
+  ...(defenseRigs.has(rig)?{defenseRevision:rig.defenseRevision}:{}),
   ...(frame.restraintPoseV156?{restraintPoseV156:{...frame.restraintPoseV156,
    knees:frame.restraintPoseV156.knees.map(world),hips:frame.restraintPoseV156.hips.map(world)}}:{}),
   ...(reception?{captureReceptionV158:{...reception,hips:reception.hips.map(world),knees:reception.knees.map(world),ankles:reception.ankles.map(world)}}:{})};

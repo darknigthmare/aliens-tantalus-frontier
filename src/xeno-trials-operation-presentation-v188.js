@@ -1,5 +1,6 @@
 import { getXenoTrialsOperationV188, getXenoTrialsOperationViewV188, XENO_TRIALS_OPERATION_LIMITS_V188 } from './xeno-trials-operations-v188.js';
 import { getXenoTrialsBodyBoundsV105 } from './xeno-trials-geometry-v105.js';
+import { drawXenoTrialsExtractionV203 } from './xeno-trials-extraction-presentation-v203.js';
 
 const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
 const kinds = Object.freeze({ escort: 'ESCORTE', relay: 'RELAIS', purge: 'PURGE', beacon: 'BALISE', extraction: 'EXTRACTION' });
@@ -13,6 +14,7 @@ export function getXenoTrialsOperationHudV188(match) {
   const body = player ? getXenoTrialsBodyBoundsV105(player) : null;
   let instruction = view.status === 'completed' ? 'Objectifs validés.' : view.status === 'failed' ? 'Évaluation interrompue.' : view.instruction;
   let beaconWindow = null;
+  let extractionWorkV203 = null;
   if (target && body) {
     const contact = player.y === 0 && body.left <= target.x + target.radius && body.right >= target.x - target.radius;
     const label = contact ? target.label : target.x < body.center ? `← ${target.label}` : `${target.label} →`;
@@ -24,9 +26,13 @@ export function getXenoTrialsOperationHudV188(match) {
       beaconWindow = { id: target.id, open, contact, remainingTicks: target.windowRemainingTicks, seconds };
     } else {
       instruction = contact ? `${label} · MAINTENEZ INTERAGIR` : label;
+      if (view.kind === 'extraction') {
+        extractionWorkV203 = { id: target.id, kind: target.kind, contact, progress: target.progress,
+          requiredTicks: target.requiredTicks, percent: Math.floor(target.progress * 100 / target.requiredTicks) };
+      }
     }
   }
-  return { ...view, phase, orders: view.instruction, instruction, beaconWindow };
+  return { ...view, phase, orders: view.instruction, instruction, beaconWindow, extractionWorkV203 };
 }
 
 /** A briefing describes the authored physical objective. It never changes a
@@ -50,9 +56,15 @@ export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear',
   const view = getXenoTrialsOperationViewV188(match);
   if (!view) return null;
   const floor = arena.floor, beacons = [];
+  const extraction = view.kind === 'extraction';
+  if (extraction && plane === 'rear') {
+    return { id: view.id, plane, entities: view.entities.length,
+      extraction: drawXenoTrialsExtractionV203(ctx, match, view, floor, reducedMotion) };
+  }
   ctx.save();
   for (const entity of view.entities) {
     if (!Number.isFinite(entity.x) || !Number.isFinite(entity.radius)) continue;
+    if (entity.kind === 'supply' && (entity.carried || entity.delivered)) continue;
     const color = entity.kind === 'beacon' ? beaconColor(entity) : entity.completed ? '#91bd8c' : entity.active ? '#ecd08c' : '#8a9d98';
     const x = entity.x, width = entity.kind === 'cargo' ? 84 : entity.kind === 'depot' || entity.kind === 'exit' ? 100 : 42;
     ctx.strokeStyle = color; ctx.fillStyle = '#142124'; ctx.lineWidth = 2;
