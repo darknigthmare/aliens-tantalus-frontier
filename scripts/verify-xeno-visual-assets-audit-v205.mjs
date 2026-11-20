@@ -9,6 +9,7 @@ import { XENO_VISUAL_ASSETS_BASELINE_V205 as baseline, XENO_VISUAL_ASSETS_HISTOR
   reviewedXenoVisualAssetsDigestV205 as advance, verifyXenoVisualAssetsV205 as verify,
   xenoVisualAssetsRuntimeSourcesV205 as runtimeSources } from './audit-xeno-visual-assets-v205.mjs';
 import { verifyXenoPrioritiesV204 as priorVerify } from './audit-xeno-priorities-v204.mjs';
+import { reviewedXenoProductionAssetsDigestV206 as advanceToV206 } from './audit-xeno-production-assets-v206.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
 import { verifyXenoVisualAdmissionsV205, publicXenoVisualPathAdmissionV205 } from './public-xeno-visual-admissions-v205.mjs';
@@ -33,7 +34,7 @@ test('V205 preserves the published V204 receipts and accepts each transition onl
     assert.equal(advance(path, receipt.previousSha256), sha(read(path)), path);
     assert.throws(() => advance(path, receipt.currentSha256), /Incorrect V204 endpoint for V205/, path);
   }
-  for (const [path, receipt] of Object.entries(inputs)) { assert.equal(published.has(path), false, path); assert.equal(sha(read(path)), receipt.sha256, path); }
+  for (const [path, receipt] of Object.entries(inputs)) { assert.equal(published.has(path), false, path); assert.equal(sha(read(path)), advanceToV206(path, receipt.sha256), path); }
   assert.equal(advance('constructor', 'untouched'), 'untouched');
 });
 
@@ -57,7 +58,8 @@ test('V205 fails closed on modified images, source modules and missing relay end
 
 test('exact runtime images can ship while production poses, documentation, audit and tests remain source-only', () => {
   const audit = 'scripts/audit-xeno-visual-assets-v205.mjs';
-  assert.doesNotMatch(read(audit).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  assert.match(read(audit).toString(), /from '\.\/audit-xeno-production-assets-v206\.mjs'/);
+  assert.doesNotMatch(read('scripts/audit-xeno-production-assets-v206.mjs').toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
   assert.match(read('scripts/audit-xeno-priorities-v204.mjs').toString(), /from '\.\/audit-xeno-visual-assets-v205\.mjs'/);
   for (const path of [audit, 'scripts/public-xeno-visual-admissions-v205.mjs',
     'scripts/verify-xeno-trials-visual-assets-v205.mjs', 'scripts/verify-xeno-visual-assets-audit-v205.mjs',

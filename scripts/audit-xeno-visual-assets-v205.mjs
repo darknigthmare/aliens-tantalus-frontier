@@ -1,5 +1,6 @@
 /** Reviewed source inputs for Xeno Trials V205, anchored to the public V204 commit. */
 import assert from 'node:assert/strict';
+import { reviewedXenoProductionAssetsDigestV206, verifyXenoProductionAssetsV206 } from './audit-xeno-production-assets-v206.mjs';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 
@@ -289,12 +290,12 @@ export const XENO_VISUAL_ASSETS_NEW_INPUTS_V205 = freezeReceipts({
 });
 
 export function reviewedXenoVisualAssetsDigestV205(path, endpointV204) {
-  if (!Object.hasOwn(XENO_VISUAL_ASSETS_SUCCESSORS_V205, path)) return endpointV204;
+  if (!Object.hasOwn(XENO_VISUAL_ASSETS_SUCCESSORS_V205, path)) return reviewedXenoProductionAssetsDigestV206(path, endpointV204);
   const receipt = XENO_VISUAL_ASSETS_SUCCESSORS_V205[path];
   assert.equal(endpointV204, receipt.previousSha256, 'Incorrect V204 endpoint for V205: ' + path);
   assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256), 'Invalid V205 successor digest: ' + path);
   assert.notEqual(receipt.previousSha256, receipt.currentSha256, 'Unchanged V205 successor: ' + path);
-  return receipt.currentSha256;
+  return reviewedXenoProductionAssetsDigestV206(path, receipt.currentSha256);
 }
 
 export function xenoVisualAssetsRuntimeSourcesV205(historical) {
@@ -331,7 +332,7 @@ export function verifyXenoVisualAssetsV205(readSource = readRepository) {
   for (const [path, receipt] of inputs) {
     assert.ok(safePath(path) && kinds.has(receipt.kind) && validHash(receipt.sha256), 'Invalid V205 source receipt: ' + path);
     assert.deepEqual(Object.keys(receipt).sort(), ['kind', 'sha256']);
-    assert.equal(sha(readSource(path)), receipt.sha256, 'Unreviewed V205 added-input bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedXenoProductionAssetsDigestV206(path, receipt.sha256), 'Unreviewed V205 added-input bytes: ' + path);
   }
   for (const [path, receipt] of Object.entries(XENO_VISUAL_ASSETS_HISTORICAL_DECLARATIONS_V205)) {
     const source = readSource(path).toString();
@@ -340,6 +341,7 @@ export function verifyXenoVisualAssetsV205(readSource = readRepository) {
     assert.ok(start >= 0 && end > start, 'Missing historical declaration anchors: ' + path);
     assert.equal(sha(source.slice(start, end)), receipt.sha256, 'Historical receipt declarations changed: ' + path);
   }
+  verifyXenoProductionAssetsV206(readSource);
   return Object.freeze({ baselineCommit: XENO_VISUAL_ASSETS_BASELINE_V205, successors: successors.length,
     addedInputs: inputs.length, historicalResultsTransferred: false });
 }

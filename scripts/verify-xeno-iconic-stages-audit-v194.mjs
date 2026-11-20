@@ -110,7 +110,7 @@ test('the V194 audit and report are source-only and unrelated candidates stay ex
   assert.match(read(terminal).toString(), /from '\.\/audit-xeno-stage-classification-v195\.mjs'/);
   assert.match(read('scripts/audit-xeno-stage-classification-v195.mjs').toString(),
     /from '\.\/audit-xeno-referenced-film-stages-v196\.mjs'/);
-  assert.doesNotMatch(read('scripts/audit-xeno-visual-assets-v205.mjs').toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  assert.doesNotMatch(read('scripts/audit-xeno-production-assets-v206.mjs').toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
   for (const path of [terminal, verifier, report]) {
     assert.equal(isPublicDistributionPathV86(path), true, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);
