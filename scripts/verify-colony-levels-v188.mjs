@@ -89,7 +89,7 @@ test('C1: V2 depth corridor on the port street, lifts parked, generic encounter 
   for (const lift of engine.lifts) { assert.equal(lift.y, places.floorY); assert.equal(lift.controlledV130, false); }
   assert.equal(engine.enemies.length, 0); assert.equal(engine.mission.objectives.boss, true);
   for (const event of engine.missionLevelEvents.values()) assert.equal(event.triggered, true);
-  assert.ok(places.container < places.shutter.x && places.shutter.x < places.infirmary && places.infirmary < places.airlockA && places.airlockA < places.airlockB && places.airlockB < places.platform.x0);
+  assert.ok(places.shutter.x < places.container && places.container < places.infirmary && places.infirmary < places.airlockA && places.airlockA < places.airlockB && places.airlockB < places.platform.x0);
   // The street is continuous: walking from the quay to the platform never falls.
   // Injection: the marine walks off the rail (z −50), around the wall-side crates covers.
   run.place(places.quay + 120); engine.player.depthZ = -50; engine.keys.add('KeyD');
@@ -301,7 +301,7 @@ test('colony levels: other missions keep their behaviour; composition, offline s
   const strings = ['E (MAINTENIR)  BAISSER LE RIDEAU DE L’ENTREPÔT', 'E  ESCORTER LES PATIENTS VERS LA PLATE-FORME', 'E  DÉPLOYER LA SENTINELLE ICI',
     'E  RELANCER LE PROCESSEUR ATMOSPHÉRIQUE', 'E  RASSURER LE RESCAPÉ', 'E  CONFIER LE PORTEUR À NOOR OKAFOR', 'E  MAÎTRISER LE CONVERTI (NON LÉTAL)',
     'SAS SOUDÉ', 'SCELLÉ DE L’INTÉRIEUR', 'PANIQUE', 'LES ÉLUS'];
-  for (const id of COLONY_LEVEL_IDS_V188) for (const phase of COLONY_LEVEL_PHASES_V188[id]) strings.push(phase.label.fr.toUpperCase());
+  for (const id of COLONY_LEVEL_IDS_V188) for (const phase of COLONY_LEVEL_PHASES_V188[id]) strings.push(phase.label.fr); // the catalog also answers its upper case
   for (const text of strings) assert.ok(Object.hasOwn(EN_CATALOG_V185, text), `EN: ${text}`);
   for (const pattern of ['SAS A {0} % · SAS B {1} %', 'ÉCLOSION ESTIMÉE {0}:{1}', 'INDICES {0}/3']) assert.ok(Object.hasOwn(EN_PATTERNS_V185, pattern), `EN: ${pattern}`);
 });

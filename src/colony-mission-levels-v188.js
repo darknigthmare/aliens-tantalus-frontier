@@ -760,7 +760,7 @@ export function withColonyMissionLevelsV188(Base) {
         const clue = key.split(':')[1]; pr.clues[clue] = true;
         const text = { log: 'Journal du sas : ouvert de l’intérieur, 02 h 14, badge d’un colon.', sign: 'Peint à la main : « LES ÉLUS NE CRAIGNENT RIEN ».',
           seal: 'Scellé du conduit forcé à la main, résine fraîche sur la grille.' }[clue];
-        return done(`${text} (${Object.values(pr.clues).filter(Boolean).length}/3)`, 5);
+        return done(text, 5);
       }
       if (key === 'lore') { pr.lore = true; if (this.inventory) this.inventory.intel = (Number(this.inventory.intel) || 0) + 1; return done('Carnet d’un converti : « L’Hôte Parfait nous attend sous le port. » Le conduit s’arrête ici.', 6); }
       if (key.startsWith('subdue:')) {
@@ -918,6 +918,33 @@ export function withColonyMissionLevelsV188(Base) {
       ctx.fillRect(0, 0, 1280, 720);
       ctx.restore();
     }
+    /** HUD lines of the level: the first one is the objective box's progress line. */
+    colonyHudLinesV188() {
+      const level = this.colonyLevelV188, pr = level.progress, id = level.campaignId, phase = this.colonyPhaseIdV188(), lines = [];
+      if (id === 'colony-c1') {
+        if (phase === 'contain') lines.push(`RIDEAU ${Math.round(pr.shutter * 100)} %`);
+        if (phase === 'evacuate') lines.push(`PATIENTS SUR LA PLATE-FORME ${pr.civilians.filter(entry => entry.state === 'safe').length}/3`);
+        if (phase === 'weld') lines.push(`SAS A ${Math.round(pr.weldA * 100)} % · SAS B ${Math.round(pr.weldB * 100)} %`);
+        if (pr.carried > 0) lines.push(`SENTINELLES À DÉPLOYER ${pr.carried}`);
+        for (const turret of pr.turrets) if (turret.ammo <= 40) lines.push(`SENTINELLE ${turret.id.split('-')[1]} · MUNITIONS ${Math.max(0, turret.ammo)}`);
+      }
+      if (id === 'colony-c2' && phase === 'control') lines.push(`DISJONCTEURS ${pr.breakers.filter(Boolean).length}/3`);
+      if (id === 'colony-c2' && phase === 'nest') lines.push(`PURGE ${Math.round(pr.purge * 100)} %`);
+      if (id === 'colony-c3') {
+        if (phase === 'scan') lines.push(`CONTRÔLÉS ${pr.scanned}/5`);
+        if (pr.hatchRemaining !== null && !pr.delivered) lines.push(`ÉCLOSION ESTIMÉE ${Math.floor(pr.hatchRemaining / 60)}:${String(Math.floor(pr.hatchRemaining % 60)).padStart(2, '0')}`);
+      }
+      if (id === 'colony-c4') {
+        if (phase === 'dormitories') lines.push(`INDICES ${Object.values(pr.clues).filter(Boolean).length}/3`);
+        if (phase === 'gathering') lines.push(`COCON ${Math.round(pr.resin * 100)} %`);
+        if (pr.cultKilled) lines.push(`CONVERTIS TUÉS ${pr.cultKilled} · STABILITÉ ${colonyCultStabilityCostV188(pr.cultKilled)}`);
+      }
+      if (!lines.length) lines.push(this.colonyMissingV188() || 'EXTRACTION DISPONIBLE');
+      return lines;
+    }
+    objectiveProgressText() {
+      return this.colonyLevelV188 ? this.colonyHudLinesV188()[0] : super.objectiveProgressText();
+    }
     drawHud(ctx) {
       super.drawHud(ctx);
       const level = this.colonyLevelV188;
@@ -926,24 +953,11 @@ export function withColonyMissionLevelsV188(Base) {
       ctx.save();
       try {
         ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
-        const lines = [];
-        if (id === 'colony-c1') {
-          if (this.colonyPhaseIdV188() === 'evacuate') lines.push(`PATIENTS SUR LA PLATE-FORME ${pr.civilians.filter(entry => entry.state === 'safe').length}/3`);
-          if (this.colonyPhaseIdV188() === 'weld') lines.push(`SAS A ${Math.round(pr.weldA * 100)} % · SAS B ${Math.round(pr.weldB * 100)} %`);
-          if (pr.carried > 0) lines.push(`SENTINELLES À DÉPLOYER ${pr.carried}`);
-          for (const turret of pr.turrets) if (turret.ammo <= 40) lines.push(`SENTINELLE ${turret.id.split('-')[1]} · MUNITIONS ${Math.max(0, turret.ammo)}`);
-        }
-        if (id === 'colony-c2' && this.colonyPhaseIdV188() === 'control') lines.push(`DISJONCTEURS ${pr.breakers.filter(Boolean).length}/3`);
+        const lines = this.colonyHudLinesV188().slice(1);
         if (id === 'colony-c3') {
-          if (pr.hatchRemaining !== null && !pr.delivered) lines.push(`ÉCLOSION ESTIMÉE ${Math.floor(pr.hatchRemaining / 60)}:${String(Math.floor(pr.hatchRemaining % 60)).padStart(2, '0')}`);
-          if (this.colonyPhaseIdV188() === 'scan') lines.push(`CONTRÔLÉS ${pr.scanned}/5`);
-          ctx.fillStyle = 'rgba(4,12,9,.75)'; ctx.fillRect(540, 96, 200, 10);
-          ctx.fillStyle = pr.panic > 70 ? '#e15b4f' : '#d5b562'; ctx.fillRect(540, 96, 200 * pr.panic / R.panic.threshold, 10);
-          ctx.font = '700 10px monospace'; ctx.fillStyle = '#d8e6d8'; ctx.fillText('PANIQUE', 640, 92);
-        }
-        if (id === 'colony-c4') {
-          if (this.colonyPhaseIdV188() === 'dormitories') lines.push(`INDICES ${Object.values(pr.clues).filter(Boolean).length}/3`);
-          if (pr.cultKilled) lines.push(`CONVERTIS TUÉS ${pr.cultKilled} · STABILITÉ ${colonyCultStabilityCostV188(pr.cultKilled)}`);
+          ctx.fillStyle = 'rgba(4,12,9,.75)'; ctx.fillRect(540, 160, 200, 10);
+          ctx.fillStyle = pr.panic > 70 ? '#e15b4f' : '#d5b562'; ctx.fillRect(540, 160, 200 * pr.panic / R.panic.threshold, 10);
+          ctx.font = '700 10px monospace'; ctx.fillStyle = '#d8e6d8'; ctx.fillText('PANIQUE', 640, 157);
         }
         const holding = level.runtime.holding;
         if (holding) {
@@ -954,7 +968,7 @@ export function withColonyMissionLevelsV188(Base) {
           ctx.fillText(holding.paused ? `INTERROMPU · ${Math.round(value * 100)} %` : `${Math.round(value * 100)} %`, 640, 554);
         }
         ctx.font = '700 12px monospace';
-        lines.forEach((line, index) => { ctx.fillStyle = '#e2d6a8'; ctx.fillText(line, 640, 124 + index * 16); });
+        lines.forEach((line, index) => { ctx.fillStyle = '#e2d6a8'; ctx.fillText(line, 640, 190 + index * 16); });
         if (level.message) {
           ctx.font = '14px sans-serif'; const width = Math.min(1100, (ctx.measureText?.(level.message.text)?.width || level.message.text.length * 7) + 40);
           ctx.fillStyle = 'rgba(4,12,9,.82)'; ctx.fillRect(640 - width / 2, 600, width, 28);

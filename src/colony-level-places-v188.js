@@ -38,7 +38,7 @@ export function colonyC1PlacesV188(engine) {
   const airlockA = gate ? round(gate.x + gate.w / 2) : round((s.streetB + s.security) / 2);
   return Object.freeze({ ...s,
     corridor: Object.freeze({ x0: s.drop + 140, x1: s.extraction - 150 }),
-    container: s.warehouseDoorway.x - 190, // QZ17-04, west of the warehouse doorway
+    container: s.warehouseDoorway.x + s.warehouseDoorway.w + 50, // QZ17-04, beside the warehouse doorway (clear of the colony gate)
     shutter: s.warehouseDoorway, // the warehouse doorway takes the roller shutter
     infirmary: s.streetB, lucia: s.streetB + 130,
     patients: Object.freeze([s.streetB - 70, s.streetB - 20, s.streetB + 30]),
