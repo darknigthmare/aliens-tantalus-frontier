@@ -6,7 +6,7 @@ import {
   TANTALUS_PRIORITIES_BASELINE_V188, TANTALUS_PRIORITIES_SUCCESSORS_V188, TANTALUS_PRIORITIES_CONTINUATION_V188,
   TANTALUS_PRIORITIES_PROLOGUE_V188, TANTALUS_PRIORITIES_QUAY_V188, TANTALUS_PRIORITIES_CARGO_ABYSS_V188,
   TANTALUS_PRIORITIES_HADAL_V188, TANTALUS_PRIORITIES_BROODSTORM_V188, TANTALUS_PRIORITIES_QUEEN_MOTHER_V188,
-  TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188, TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188,
+  TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188, TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188, TANTALUS_PRIORITIES_LEAD_CONTINUATION_V188,
   TANTALUS_PRIORITIES_SOURCE_ONLY_PATHS_V188, reviewedTantalusPrioritiesDigestV188,
   verifyTantalusPrioritiesV188, TANTALUS_PRIORITIES_CARGO_REGISTRY_V188, verifyCargoRegistryContinuationV188,
   TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188, verifyBroodstormRegistryContinuationV188,
@@ -26,6 +26,9 @@ const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 // declarations first; only the Cargo test then restores Broodstorm to H.
 const bOperations = operations.map(operation => ({ ...operation, remainingMechanics: operation.id === 'queen-mother-song'
   ? ['dedicated-queen-mother-animation', 'complete-royal-cast'] : [...operation.remainingMechanics] }));
+
+// The lead continuation (after b6e01ef1) is the last link: an endpoint it reviews maps to the current bytes.
+const leadEndV188 = (path, digest) => { const r = TANTALUS_PRIORITIES_LEAD_CONTINUATION_V188.successors[path]; return r && r.previousSha256 === digest ? r.currentSha256 : digest; };
 
 test('V188 registry continuation closes only the Cargo art debt and rejects neighboring promotions', () => {
   // Cargo remains tested on H, after restoring the later Queen Mother and
@@ -635,14 +638,14 @@ test('V188 rejects mutated bytes and arbitrary predecessor endpoints', () => {
   }
   for (const [path, receipt] of Object.entries(TANTALUS_PRIORITIES_PROLOGUE_V188.successors)) {
     const anchor = TANTALUS_PRIORITIES_SUCCESSORS_V188[path] || TANTALUS_PRIORITIES_CONTINUATION_V188.successors[path] || receipt;
-    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188.successors[path]?.currentSha256
+    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), leadEndV188(path, TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_QUEEN_MOTHER_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_BROODSTORM_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_HADAL_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_CARGO_ABYSS_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_QUAY_V188.successors[path]?.currentSha256 || receipt.currentSha256,
-      'The original anchor must resolve through every exact published endpoint: ' + path);
+      'The original anchor must resolve through every exact published endpoint: ' + path));
     assert.throws(() => verifyTantalusPrioritiesV188(candidate => candidate === path
       ? Buffer.concat([read(candidate), Buffer.from('\n// unreviewed')]) : read(candidate)), /Unreviewed V188 source bytes/);
     assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, '0'.repeat(64)), /Broken .* source chain/);
@@ -651,13 +654,13 @@ test('V188 rejects mutated bytes and arbitrary predecessor endpoints', () => {
   for (const [path, receipt] of Object.entries(TANTALUS_PRIORITIES_QUAY_V188.successors)) {
     const anchor = TANTALUS_PRIORITIES_SUCCESSORS_V188[path] || TANTALUS_PRIORITIES_CONTINUATION_V188.successors[path]
       || TANTALUS_PRIORITIES_PROLOGUE_V188.successors[path] || receipt;
-    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188.successors[path]?.currentSha256
+    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), leadEndV188(path, TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_QUEEN_MOTHER_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_BROODSTORM_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_HADAL_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_CARGO_ABYSS_V188.successors[path]?.currentSha256 || receipt.currentSha256,
-      'The original anchor must resolve through the exact published ee565717 endpoint: ' + path);
+      'The original anchor must resolve through the exact published ee565717 endpoint: ' + path));
     assert.throws(() => verifyTantalusPrioritiesV188(candidate => candidate === path
       ? Buffer.concat([read(candidate), Buffer.from('\n// unreviewed')]) : read(candidate)), /Unreviewed V188 source bytes/);
     assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, '0'.repeat(64)), /Broken .* source chain/);
@@ -667,12 +670,12 @@ test('V188 rejects mutated bytes and arbitrary predecessor endpoints', () => {
   for (const [path, receipt] of Object.entries(TANTALUS_PRIORITIES_CARGO_ABYSS_V188.successors)) {
     const anchor = TANTALUS_PRIORITIES_SUCCESSORS_V188[path] || TANTALUS_PRIORITIES_CONTINUATION_V188.successors[path]
       || TANTALUS_PRIORITIES_PROLOGUE_V188.successors[path] || TANTALUS_PRIORITIES_QUAY_V188.successors[path] || receipt;
-    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188.successors[path]?.currentSha256
+    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), leadEndV188(path, TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_QUEEN_MOTHER_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_BROODSTORM_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_HADAL_V188.successors[path]?.currentSha256 || receipt.currentSha256,
-      'The original anchor must resolve through the exact published 232693f1 endpoint: ' + path);
+      'The original anchor must resolve through the exact published 232693f1 endpoint: ' + path));
     assert.throws(() => verifyTantalusPrioritiesV188(candidate => candidate === path
       ? Buffer.concat([read(candidate), Buffer.from('\n// unreviewed')]) : read(candidate)), /Unreviewed V188 source bytes/);
     assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, '0'.repeat(64)), /Broken .* source chain/);
@@ -683,11 +686,11 @@ test('V188 rejects mutated bytes and arbitrary predecessor endpoints', () => {
     const anchor = TANTALUS_PRIORITIES_SUCCESSORS_V188[path] || TANTALUS_PRIORITIES_CONTINUATION_V188.successors[path]
       || TANTALUS_PRIORITIES_PROLOGUE_V188.successors[path] || TANTALUS_PRIORITIES_QUAY_V188.successors[path]
       || TANTALUS_PRIORITIES_CARGO_ABYSS_V188.successors[path] || receipt;
-    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188.successors[path]?.currentSha256
+    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), leadEndV188(path, TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_QUEEN_MOTHER_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_BROODSTORM_V188.successors[path]?.currentSha256 || receipt.currentSha256,
-      'The original anchor must resolve through the exact published a3634de7 endpoint: ' + path);
+      'The original anchor must resolve through the exact published a3634de7 endpoint: ' + path));
     assert.throws(() => verifyTantalusPrioritiesV188(candidate => candidate === path
       ? Buffer.concat([read(candidate), Buffer.from('\n// unreviewed')]) : read(candidate)), /Unreviewed V188 source bytes/);
     assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, '0'.repeat(64)), /Broken .* source chain/);
@@ -698,10 +701,10 @@ test('V188 rejects mutated bytes and arbitrary predecessor endpoints', () => {
     const anchor = TANTALUS_PRIORITIES_SUCCESSORS_V188[path] || TANTALUS_PRIORITIES_CONTINUATION_V188.successors[path]
       || TANTALUS_PRIORITIES_PROLOGUE_V188.successors[path] || TANTALUS_PRIORITIES_QUAY_V188.successors[path]
       || TANTALUS_PRIORITIES_CARGO_ABYSS_V188.successors[path] || TANTALUS_PRIORITIES_HADAL_V188.successors[path] || receipt;
-    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188.successors[path]?.currentSha256
+    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), leadEndV188(path, TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_QUEEN_MOTHER_V188.successors[path]?.currentSha256 || receipt.currentSha256,
-      'The original anchor must resolve through the exact published 361e4067 endpoint: ' + path);
+      'The original anchor must resolve through the exact published 361e4067 endpoint: ' + path));
     assert.throws(() => verifyTantalusPrioritiesV188(candidate => candidate === path
       ? Buffer.concat([read(candidate), Buffer.from('\n// unreviewed')]) : read(candidate)), /Unreviewed V188 source bytes/);
     assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, '0'.repeat(64)), /Broken .* source chain/);
@@ -713,9 +716,9 @@ test('V188 rejects mutated bytes and arbitrary predecessor endpoints', () => {
       || TANTALUS_PRIORITIES_PROLOGUE_V188.successors[path] || TANTALUS_PRIORITIES_QUAY_V188.successors[path]
       || TANTALUS_PRIORITIES_CARGO_ABYSS_V188.successors[path] || TANTALUS_PRIORITIES_HADAL_V188.successors[path]
       || TANTALUS_PRIORITIES_BROODSTORM_V188.successors[path] || receipt;
-    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188.successors[path]?.currentSha256
+    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), leadEndV188(path, TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188.successors[path]?.currentSha256
       || TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188.successors[path]?.currentSha256 || receipt.currentSha256,
-      'The original anchor must resolve through the exact published B2 endpoint: ' + path);
+      'The original anchor must resolve through the exact published B2 endpoint: ' + path));
     assert.throws(() => verifyTantalusPrioritiesV188(candidate => candidate === path
       ? Buffer.concat([read(candidate), Buffer.from('\n// unreviewed')]) : read(candidate)), /Unreviewed V188 source bytes/);
     assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, '0'.repeat(64)), /Broken .* source chain/);
@@ -729,7 +732,7 @@ test('V188 rejects mutated bytes and arbitrary predecessor endpoints', () => {
       || TANTALUS_PRIORITIES_BROODSTORM_V188.successors[path] || TANTALUS_PRIORITIES_QUEEN_MOTHER_V188.successors[path];
     assert.ok(anchor, 'Every R source successor starts from a reviewed historical endpoint.');
     assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256),
-      TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188.successors[path]?.currentSha256 || receipt.currentSha256);
+      leadEndV188(path, TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188.successors[path]?.currentSha256 || receipt.currentSha256));
     assert.throws(() => verifyTantalusPrioritiesV188(candidate => candidate === path
       ? Buffer.concat([read(candidate), Buffer.from('\n// unreviewed')]) : read(candidate)), /Unreviewed V188 source bytes/);
     assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, '0'.repeat(64)), /Broken .* source chain/);
@@ -874,7 +877,7 @@ test('Queen Mother choir resolves through exact R predecessors and rejects bypas
       || TANTALUS_PRIORITIES_CARGO_ABYSS_V188.successors[path] || TANTALUS_PRIORITIES_HADAL_V188.successors[path]
       || TANTALUS_PRIORITIES_BROODSTORM_V188.successors[path] || TANTALUS_PRIORITIES_QUEEN_MOTHER_V188.successors[path];
     assert.ok(anchor);
-    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), receipt.currentSha256);
+    assert.equal(reviewedTantalusPrioritiesDigestV188(path, anchor.previousSha256), leadEndV188(path, receipt.currentSha256));
     assert.equal(receipt.previousSha256, TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188.successors[path].currentSha256);
     for (const endpoint of ['0'.repeat(64), receipt.previousSha256, receipt.currentSha256]) {
       assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, endpoint), /Broken .* source chain/);

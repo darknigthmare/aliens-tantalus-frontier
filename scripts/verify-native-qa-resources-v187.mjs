@@ -1,3 +1,4 @@
+import { TANTALUS_PRIORITIES_LEAD_CONTINUATION_V188 } from './audit-tantalus-priorities-v188.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -7,7 +8,9 @@ import {
   NATIVE_QA_RESOURCES_SOURCE_ONLY_PATHS_V187, NATIVE_QA_DEPENDENCY_GUARD_SUCCESSOR_V187,
   NATIVE_QA_PRESERVED_SHA256_V187, reviewedNativeQaResourcesDigestV187,
   reviewedNativeQaDependencyGuardDigestV187, verifyNativeQaDependencyBodyV187,
-  verifyNativeQaResourcesV187
+  verifyNativeQaResourcesV187, OBSCURA_SOURCE_SHA256_20261115,
+  OBSCURA_SOURCE_ONLY_PATHS_20261115, OBSCURA_VERIFIER_SUCCESSOR_20261115,
+  reviewedObscuraDigest20261115, verifyObscuraSources20261115
 } from './audit-native-qa-resources-v187.mjs';
 import { verifyI18nMaintenanceV186 } from './audit-i18n-maintenance-v186.mjs';
 import { verifyI18nV185 } from './audit-i18n-v185.mjs';
@@ -86,4 +89,43 @@ test('V187 audit and documentation stay source-only and the new audit test enter
   assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(terminal), false);
   assert.equal(Object.hasOwn(NATIVE_QA_RESOURCES_SUCCESSORS_V187, 'scripts/audit-native-qa-resources-v187.mjs'), false);
   assert.equal(Object.keys(NATIVE_QA_RESOURCES_SUCCESSORS_V187).some(path => path.startsWith('src/')), false);
+});
+
+
+test('Obscura admits only its exact source directories and files, never a public build', () => {
+  const files = new Set(Object.keys(OBSCURA_SOURCE_SHA256_20261115));
+  assert.equal(files.size, 6);
+  for (const path of OBSCURA_SOURCE_ONLY_PATHS_20261115) {
+    const directory = !files.has(path);
+    assert.equal(isPublicDistributionPathV86(path, { directory }), true, path);
+    assert.equal(isPublicDistributionPathV86(path, { directory, built: true }), false, path);
+  }
+  for (const path of ['.agents/skills/unreviewed/SKILL.md', '.claude/skills/unreviewed/SKILL.md',
+    '.agents/skills/obscura/hook.js', '.claude/skills/obscura/settings.json',
+    '.ai-tools/obscura/private.json', '.ai-tools/obscura/../private.json']) {
+    assert.equal(isPublicDistributionPathV86(path), false, path);
+    assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);
+  }
+});
+
+test('Obscura binds every skill, licence and guide byte without transferring old test receipts', () => {
+  assert.deepEqual(verifyObscuraSources20261115(),
+    { sources: 6, runtimeChanged: false, historicalEvidenceTransferred: false });
+  for (const path of Object.keys(OBSCURA_SOURCE_SHA256_20261115)) {
+    assert.throws(() => verifyObscuraSources20261115(candidate => candidate === path
+      ? Buffer.concat([read(candidate), Buffer.from('\nchanged')]) : read(candidate)), /Unreviewed Obscura source bytes/);
+  }
+});
+
+test('Obscura continues the exact V187 verifier endpoint and refuses arbitrary predecessors', () => {
+  const receipt = OBSCURA_VERIFIER_SUCCESSOR_20261115;
+  assert.equal(receipt.previousSha256, NATIVE_QA_RESOURCES_SUCCESSORS_V187[receipt.path].currentSha256);
+  assert.equal(reviewedObscuraDigest20261115(receipt.path, receipt.previousSha256), receipt.currentSha256);
+  // On the Tantalus branch the verifier also carries the V188 work: the lead continuation (after b6e01ef1)
+  // reviews the merged bytes; on main the Obscura endpoint is the file itself.
+  const lead = TANTALUS_PRIORITIES_LEAD_CONTINUATION_V188.successors[receipt.path];
+  assert.equal(sha(read(receipt.path)), lead ? lead.currentSha256 : receipt.currentSha256);
+  for (const forged of ['0'.repeat(64), receipt.currentSha256])
+    assert.throws(() => reviewedObscuraDigest20261115(receipt.path, forged), /Broken V187-to-Obscura source chain/);
+  assert.equal(reviewedObscuraDigest20261115('src/unreviewed.js', 'unchanged'), 'unchanged');
 });

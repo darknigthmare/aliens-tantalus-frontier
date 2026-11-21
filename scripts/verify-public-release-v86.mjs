@@ -261,6 +261,21 @@ for (const file of [
 // Development tools recovered from the published Forge branch stay in Git.
 // They are never admitted in a built distribution, nor copied by the builder.
 const FORGE_TOOLING_V140 = new Set([
+  // Obscura 2026-11-15: exact developer paths; never included in the built distribution.
+  '.agents',
+  '.agents/skills',
+  '.agents/skills/obscura',
+  '.agents/skills/obscura/SKILL.md',
+  '.agents/skills/obscura/LICENSE',
+  '.claude',
+  '.claude/skills',
+  '.claude/skills/obscura',
+  '.claude/skills/obscura/SKILL.md',
+  '.claude/skills/obscura/LICENSE',
+  '.ai-tools/obscura',
+  '.ai-tools/obscura/README.md',
+  '.ai-tools/obscura/source.json',
+
   // Exact PR integration and optional developer tooling stay source-only.
   'scripts/audit-pr-integration-v182.mjs',
   'scripts/qa-hub-door-bays-v182.py',
