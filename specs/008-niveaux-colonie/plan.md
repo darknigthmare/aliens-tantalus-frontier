@@ -4,7 +4,7 @@
 
 ## Résumé technique
 
-Un mixin `withColonyMissionLevelsV188` (`src/colony-mission-levels-v188.js`) est composé juste à l'intérieur de l'habillage Asphodèle, entre `withAsphodeleMissionDressingV188(` et `withVfxV188(` ; l'ordre des autres couches et les contrôles d'adjacence (dropship, profondeur, échelle des créatures, matte) sont inchangés. Au démarrage d'une mission C1-C4 générée, il :
+Un mixin `withColonyMissionLevelsV188` (`src/colony-mission-levels-v188.js`) est composé juste sous les repères de pas, entre `withFootstepCuesV188(` et `withMissionObjectivePanelV188(` ; l'ordre des autres couches et les contrôles d'adjacence (dropship, profondeur, échelle des créatures, matte) sont inchangés. Au démarrage d'une mission C1-C4 générée, il :
 
 - retire le roster générique (reine comprise), consomme les événements du gabarit, cache les nœuds d'objectif génériques ;
 - sur la rue de colonie : gare les deux ascenseurs au niveau de la rue (rue continue, échelles conservées), ouvre les portes nécessaires (C4 : volet de sécurité scellé de l'intérieur) ;

@@ -288,7 +288,7 @@ test('colony levels: other missions keep their behaviour; composition, offline s
   assert.equal(contract.engine.colonyLevelV188, null); assert.equal(contract.engine.missionDepthSectionV188, null);
   assert.ok(contract.engine.spawnedEnemiesV188.length > 0, 'the generic roster stays for contracts');
   const runtime = read('src/game-production-runtime.js');
-  assert.match(runtime, /withAsphodeleMissionDressingV188\(withColonyMissionLevelsV188\(withVfxV188\(/);
+  assert.match(runtime, /withFootstepCuesV188\(withColonyMissionLevelsV188\(withMissionObjectivePanelV188\(/);
   const sw = read('sw.js');
   for (const file of ['/src/colony-mission-levels-v188.js', '/src/colony-level-places-v188.js', '/src/colony-level-art-v188.js']) assert.ok(sw.includes(`'${file}'`), file);
   assert.deepEqual(COLONY_LEVEL_ART_FILES_PRESENT_V188, [], 'placeholders only: no image claimed');

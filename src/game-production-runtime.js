@@ -112,13 +112,14 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
 // The Xeno Arbiter campaign runtime (V190) sits just outside the magazine
 // recovery world, as on the Xeno Trials line; the V188 layers wrap it.
 // The dedicated colony levels C1-C4 (V188, colony-mission-levels-v188.js) sit just inside the
-// Asphodèle dressing: their spawns, held interactions and phases run under the depth holds
-// (the C1 corridor), the caste behaviours and the handover, which all see the authored encounter.
+// footstep cues, above the objective panel: their spawns, held interactions and phases run under
+// the combat feel, the creature scale, the caste behaviours, the depth holds (the C1 corridor) and
+// the handover, which all see the authored encounter. The adjacencies the other suites pin are kept.
 // The in-level dropship handover (V188) wraps every mission layer: while it
 // withholds control nothing below it runs, so mission time (and with it the
 // insertion grace) only starts when control is given, and it can hold the
 // mission-complete event of any mode until the boarding is over.
-export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepthRoomsV188(withQz17LevelDressingV188(withCasteBehaviorsV188(withInsertionSafeZoneV188(withRunOptionsRuntimeV188(withAsphodeleMissionDressingV188(withColonyMissionLevelsV188(withVfxV188(withFranchiseFidelityV188(withGameplayGapsV188(withCombatFeelV188(withCreatureScaleV188(withFootstepCuesV188(withMissionObjectivePanelV188(withTensionDirectorV188(withArbiterCampaignRuntimeV190(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(withMissionLayerMatteV188(V158ProductionEngine))))))))))))))))))))))) {
+export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepthRoomsV188(withQz17LevelDressingV188(withCasteBehaviorsV188(withInsertionSafeZoneV188(withRunOptionsRuntimeV188(withAsphodeleMissionDressingV188(withVfxV188(withFranchiseFidelityV188(withGameplayGapsV188(withCombatFeelV188(withCreatureScaleV188(withFootstepCuesV188(withColonyMissionLevelsV188(withMissionObjectivePanelV188(withTensionDirectorV188(withArbiterCampaignRuntimeV190(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(withMissionLayerMatteV188(V158ProductionEngine))))))))))))))))))))))) {
   updateEnemy(actor, delta) {
     // Observe final accepted displacement after every existing wrapper,
     // including insertion grace and depth holds. Their order is unchanged.
