@@ -53,7 +53,7 @@ export function colonyC3PlacesV188(engine) {
   const s = colonyStreetPlacesV188(engine);
   return Object.freeze({ ...s,
     m577: s.quay - 330, arrivals: Object.freeze([s.quay - 150, s.quay - 110, s.quay - 70, s.quay - 30, s.quay + 10]),
-    scanner: s.plaza + 120, queue: Object.freeze([s.plaza - 40, s.plaza - 85, s.plaza - 130, s.plaza - 175, s.plaza - 220]),
+    scanner: s.plaza + 200, queue: Object.freeze([s.plaza - 40, s.plaza - 85, s.plaza - 130, s.plaza - 175, s.plaza - 220]),
     noor: s.streetB + 100, ward: Object.freeze([s.streetB - 150, s.streetB - 110, s.streetB - 70, s.streetB - 30, s.streetB + 10]),
     sideRooms: Object.freeze([s.warehouseDoorway.x + 38, s.plaza - 360, s.plaza + 380, s.streetB - 300])
   });
