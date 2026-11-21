@@ -17,6 +17,7 @@
 import { qz17HoldLayoutV188, unfitForHoldV188 } from './qz17-level-dressing-v188.js';
 import { blockedByFootprintV188 } from './hub-depth-rooms-v188.js';
 import { selectMissionTemplateV52 } from './mission-levels-v52.js';
+import { colonyC1PlacesV188 } from './colony-level-places-v188.js';
 
 export const DEPTH_HOLD_LANE_MIN_V188 = 20;
 export const DEPTH_HOLD_Z_PER_METRE_V188 = 22;
@@ -187,6 +188,36 @@ export const DEPTH_HOLD_DEFINITIONS_V188 = Object.freeze([
       Object.freeze({ prop: 'quarantine-cart', z: -70 }),
       Object.freeze({ prop: 'quarantine-crate-west', z: -30 })
     ])
+  }),
+  // V188 colony levels (bible §43.1: « missions de défense en V2 : rues et murs en couloir de profondeur (C1…) »).
+  // C1 « Tenir le port »: the port street from the quay to the landing platform, measured on the colony
+  // template (colony-level-places-v188.js); the lifts are parked at street level by the colony level layer.
+  // Its objects reuse the shipped hold slots: port freight, a drum rack in the street, a medical crate.
+  Object.freeze({
+    id: 'colony-c1-port-corridor', spec: 'colony-levels', campaignIds: Object.freeze(['colony-c1']),
+    zoneId: null, zMin: -80, zMax: 0, doorBand: 20, interactBand: 24, speed: 150, railCovers: true, railCoversAnyZone: true, bigCastes: 'span',
+    bounds(engine) {
+      const places = colonyC1PlacesV188(engine), { x0, x1 } = places.corridor;
+      const floor = list(engine?.platforms).some(entry => Math.abs(entry.y - places.floorY) < 1 && entry.x <= x0 + 40 && entry.x + entry.w >= x0);
+      return floor && x1 - x0 > 300 ? { x0, x1, floorY: places.floorY } : null;
+    },
+    layout(bounds, engine) {
+      const places = colonyC1PlacesV188(engine), at = x => x - bounds.x0, door = places.shutter;
+      // The level's own wall art is wall content too: the container, the shutter, the infirmary, airlock B.
+      const features = [...holdWallFeaturesV188(engine, bounds),
+        { id: 'colony:container', kind: 'wall-art', x0: places.container - 4, x1: places.container + 160 },
+        { id: 'colony:shutter', kind: 'wall-art', x0: door.x - 6, x1: door.x + door.w + 36 },
+        { id: 'colony:infirmary', kind: 'wall-art', x0: places.infirmary - 120, x1: places.lucia + 40 },
+        { id: 'colony:airlock-b', kind: 'wall-art', x0: places.airlockB - 60, x1: places.airlockB + 60 }].sort((a, b) => a.x0 - b.x0);
+      const { placed, skipped } = placeHoldPropsV188([
+        Object.freeze({ id: 'colony-freight-quay', kind: 'crate-stack', slot: 'freighter-crate-stack', w: 61, h: 92, z: -47, z0: -60, z1: -34, at: at(places.quay + 240), labels: ['PM-12', 'PM-13'] }),
+        Object.freeze({ id: 'colony-drums-street', kind: 'drum-rack', slot: 'freighter-drum-rack', w: 96, h: 52, z: -73, z0: -88, z1: -66, at: at(places.plaza + 170) }),
+        Object.freeze({ id: 'colony-medical-crate', kind: 'quarantine-crate', slot: 'quarantine-crate', w: 92, h: 61, z: -67, z0: -86, z1: -54, at: at(places.infirmary - 260) }),
+        Object.freeze({ id: 'colony-freight-platform', kind: 'crate-stack', slot: 'freighter-crate-stack', w: 61, h: 92, z: -47, z0: -60, z1: -34, at: at(places.pad + 260), labels: ['PM-31', 'PM-32'] })
+      ], bounds, features, this);
+      return { props: placed, bay: null, skipped };
+    },
+    sleeperSlots: Object.freeze([])
   })
 ]);
 export const DEPTH_HOLD_IDS_V188 = Object.freeze(DEPTH_HOLD_DEFINITIONS_V188.map(entry => entry.id));
@@ -202,20 +233,21 @@ export function resolveDepthHoldDefinitionV188({ campaign, world } = {}) {
 /** Builds the section of a definition on the generated level. */
 export function buildDepthHoldSectionV188(engine, definition) {
   if (!definition) return null;
-  const bounds = shipCargoHoldBoundsV188(engine);
+  const bounds = typeof definition.bounds === 'function' ? definition.bounds(engine) : shipCargoHoldBoundsV188(engine);
   if (!bounds) return null;
   const { x0, x1, floorY } = bounds;
   let props, bay = null, skipped = [];
   if (definition.layout) ({ props, bay = null, skipped = [] } = definition.layout(bounds, engine));
   else ({ placed: props, skipped } = placeHoldPropsV188(definition.props, bounds, holdWallFeaturesV188(engine, bounds), definition));
   // A rail crates cover left in the hold stays a wall-side object (jumped near the wall, walked around further out).
-  const covers = definition.railCovers ? list(engine.covers).filter(cover => cover.zoneId === definition.zoneId && cover.x >= x0 && cover.x + cover.w <= x1)
+  const covers = definition.railCovers ? list(engine.covers).filter(cover => (definition.railCoversAnyZone
+    ? Math.abs(Number(cover.y) + (Number(cover.h) || 0) - floorY) < 6 : cover.zoneId === definition.zoneId) && cover.x >= x0 && cover.x + cover.w <= x1)
     .map(cover => prop(`cover:${cover.id}`, 'cover', cover.x, cover.w, cover.h, -2, -34, 1)) : [];
   const section = { id: definition.id, roomId: definition.id, zoneId: definition.zoneId, x0, x1, floorY,
     zMin: definition.zMin, zMax: definition.zMax, doorBand: definition.doorBand, interactBand: definition.interactBand, speed: definition.speed,
     dropship: null, bay, props: Object.freeze([...props, ...covers]), containers: Object.freeze(props), coverIds: Object.freeze(covers.map(entry => entry.id.slice(6))) };
   // QZ-17 keeps exactly its spec-002 shape; the other holds add their placement report.
-  if (!definition.layout) Object.assign(section, { skipped: Object.freeze(skipped) });
+  if (!definition.layout || definition.bounds) Object.assign(section, { skipped: Object.freeze(skipped) });
   return Object.freeze(section);
 }
 
