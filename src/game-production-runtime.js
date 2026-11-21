@@ -68,6 +68,7 @@ import { withCasteBehaviorsV188 } from './caste-behaviors-v188.js';
 import { withCreatureScaleV188 } from './creature-scale-v188.js';
 import { beginQueenMotherGuardStepV188, finishQueenMotherGuardStepV188 } from './queen-mother-guard-art-v188.js';
 import { withArbiterCampaignRuntimeV190 } from './xeno-arbiter-runtime-v190.js';
+import { withAct5ConvoyRaceV188 } from './act5-convoy-race-runtime-v188.js';
 
 export * from './game-production-core.js';
 
@@ -90,7 +91,10 @@ const V131ProductionEngine = withLegacyMissionsV131(withEcosystemMissionsV131(wi
   withHiveMissionsV131(withApcCourseV131(withWeaponActionsV131(V130ProductionEngine))))));
 const V132ProductionEngine = withNarrativeEvidenceV132(withHordeDirectorV132(
   withSquadDoctrineV132(withPlaceablesExtensionV132(V131ProductionEngine))));
-const V158ProductionEngine = withBlackCocoonPresentationV158(V132ProductionEngine);
+// V188 Act V convoy race (act5-convoy-race-runtime-v188.js) owns the two race missions' scene; it
+// wraps the whole V158 chain (so it overrides the Act III convoy and the generic missions for its
+// own campaign ids only) and sits under every V188 layer, whose order is unchanged.
+const V158ProductionEngine = withAct5ConvoyRaceV188(withBlackCocoonPresentationV158(V132ProductionEngine));
 
 export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   const result = buildCoreEnemyEncounterEligibility(enemy, context);

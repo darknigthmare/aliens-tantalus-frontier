@@ -39,10 +39,16 @@
 - [x] T025 Produire la QA de 166 captures PNG sous Canvas natif : neuf contributions visibles, six contacts de pneus, quatre passagers et quatre couvercles ; 29 comparaisons raster hors périmètre sans différence et 256 traces Canvas identiques. Fixtures et doubles déclarés ; aucun nouveau parcours navigateur revendiqué par ce lot.
 - [x] T026 Relier [provenance](../../docs/development/ACT5_ART_PROVENANCE_20261117.json), [QA et limites](../../docs/development/ACT5_ART_QA_20261117.md), [planche intégrée](../../docs/development/ACT5_ART_OVERVIEW_20261117.png) et [reçu de rendu](../../docs/development/ACT5_ART_RENDER_RECEIPT_20261117.json) ; actualiser l'audit en conservant les bilans historiques.
 
+## Phase 7 — Course du convoi (Q1 A au sens strict, 2026-11-21)
+
+- [x] T027 Règles pures : chaîne d'attelage à ressort amorti, largage, pont qui s'affaisse puis s'effondre, coureurs bloqués par une remorque, Reine admise puis machine à états explicite (`src/act5-convoy-race-v188.js`).
+- [x] T028 Runtime de mission pour `act5-last-run` et `act5-depot-queen`, composé sous les couches V188 sans changer leur ordre ; un checkpoint par phase ; reprise et redémarrage (`src/act5-convoy-race-runtime-v188.js`).
+- [x] T029 Raccordement : M577 attribué, remorques lues dans le manifeste, largage = décision du pont, conséquences additives `act5.convoyV188`, sons V188, VFX V188, radio FR/EN (`src/app.js`, `src/story-act5-v188.js`, `src/story-act5-state-v188.js`).
+- [x] T030 Tests `scripts/verify-act5-convoy-race-v188.mjs` (dans `test:priorities:v188`) et parcours navigateur `scripts/qa-act5-convoy-race-v188.mjs`.
+
 ## Reporté
 
-- Course APC dédiée (remorques, pont physique, poursuite de la Reine) sur le moteur de `apc-convoy-runtime-v121.js` (Q1 A au sens strict).
-- Sprite de la Reine du dépôt. La course dédiée, le pont physique et cette Reine restent proposés ; l'art des quatorze emplacements actifs est couvert en phase 6, et `relay-room` reste volontairement sans image faute de consommateur.
+- Sprite de la Reine du dépôt en poursuite : emplacement `act5-queen-chase-side` déclaré, substitut Canvas à 245 px en attendant ; l'art des quatorze emplacements actifs est couvert en phase 6, et `relay-room` reste volontairement sans image faute de consommateur.
 - Hub Asphodèle et sa salle des relais visitable (chantier parallèle) ; palier *Libre* de la colonie après « Le relais parle ».
 - Démission d'Inez et relève de Vega en partie libre (racontées, sans effet sur l'équipage).
 - Nouvelle partie + (§45.2).

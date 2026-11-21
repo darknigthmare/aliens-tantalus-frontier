@@ -22,7 +22,8 @@ import { filterAct5CampaignsV188, act5LockReasonV188, act5LockTextV188, applyAct
   startAct5CouncilV188, act5CouncilV188, decideAct5V188, advanceAct5ToEndingV188, act5EndingSummaryV188, finishAct5EndingV188, finishAct5EpilogueV188,
   finishAct5CreditsV188, act5StateV188, act5BridgeDueV188, act5BridgeSecondsV188, chooseAct5BridgeV188, ACT5_BRIDGE_TEXT_V188, ACT5_STANDOFF_TEXT_V188,
   act5CrewEpilogueLineV188, markAct5EpilogueTalkV188, act5LockerLabelV188, act5CinematicContextV188, deriveStoryWithAct5V188, act5SnapshotV188,
-  act5LateColonistsSavedV188 } from './story-act5-v188.js';
+  act5LateColonistsSavedV188, act5ConvoySetupV188, recordAct5TrailerDropV188, markAct5BridgeCrossedV188, recordAct5QueenKilledV188 } from './story-act5-v188.js';
+import { isAct5RaceCampaignV188, act5RaceCueV188 } from './act5-convoy-race-v188.js';
 import { Act5AssetLoaderV188, watchAct5PictureV188 } from './act5-slots-v188.js';
 import { storyDossierV188 } from './story-dossier-v188.js';
 import { withHubEcho8LockerV188, echo8LockerNotesV188 } from './hub-echo8-locker-v188.js';
@@ -1964,7 +1965,7 @@ function openAct5EpilogueLineV188(crewId) {
 let act5BridgeOverlayV188 = null;
 function maybeOpenAct5BridgeV188() {
   const campaignId = saveSystem.data.strategy.currentOperation?.campaignId;
-  if (act5BridgeOverlayV188 || activeView !== 'play' || !act5BridgeDueV188(saveSystem.data, campaignId)) return false;
+  if (act5BridgeOverlayV188 || activeView !== 'play' || engine.isAct5RaceV188?.() || !act5BridgeDueV188(saveSystem.data, campaignId)) return false;
   const lang = act5LangV188(), total = act5BridgeSecondsV188(saveSystem.data), text = ACT5_BRIDGE_TEXT_V188;
   const overlay = document.createElement('div'); overlay.className = 'act5-bridge-v188'; overlay.setAttribute('role', 'alertdialog'); overlay.setAttribute('aria-live', 'assertive');
   Object.assign(overlay.style, { position: 'fixed', left: '50%', top: '12%', transform: 'translateX(-50%)', zIndex: '60', width: 'min(92vw, 560px)',
@@ -1999,6 +2000,27 @@ function maybeOpenAct5BridgeV188() {
     const left = Math.max(0, total - elapsed); clock.textContent = `${Math.ceil(left)} s`;
     if (left <= 0) finish(null, true);
   }, 200);
+  return true;
+}
+// V188 Act V convoy race: a trailer left behind and the race milestones are written to the save
+// when they happen (like the bridge choice they replace), additively under storyCampaignV188.act5.
+function recordAct5RaceEventV188(event) {
+  if (event.replay || saveSystem.data.strategy.currentOperation?.campaignId !== event.campaignId) return false;
+  let changed = false;
+  if (event.type === 'act5-trailer-dropped-v188') changed = recordAct5TrailerDropV188(saveSystem.data, { trailer: event.trailer, campaignId: event.campaignId, cause: event.cause, metres: event.metres });
+  else if (event.id === 'bridge-crossed') changed = markAct5BridgeCrossedV188(saveSystem.data);
+  else if (event.id === 'queen-killed') changed = recordAct5QueenKilledV188(saveSystem.data);
+  if (!changed) return false;
+  try { saveSystem.commit(); } catch (error) { toast(error.message); return false; }
+  if (event.type === 'act5-trailer-dropped-v188') {
+    const lang = act5LangV188(), state = act5StateV188(saveSystem.data), text = ACT5_BRIDGE_TEXT_V188;
+    const parts = [];
+    if (event.campaignId === 'act5-last-run' && ['bridge', 'timeout', 'collapse'].includes(event.cause) && state.convoyV188?.drops?.[0]?.trailer === event.trailer) {
+      parts.push(event.cause === 'timeout' ? text.results.timeout[lang] : text.results[state.bridge][lang]);
+      if (state.bridge === 'colonists' && act5LateColonistsSavedV188(saveSystem.data) > 0) parts.push(text.results.route[lang]);
+    }
+    if (parts.length) { const message = parts.join(' '); engine.pushCaption?.('mission', message); const log = byId('mission-log'); if (log) log.textContent = `RADIO · ${message}`; }
+  }
   return true;
 }
 function renderAct5PanelV188() {
@@ -2392,7 +2414,8 @@ function renderOperationPlan() {
   const specialOperation = getSpecialOperationByCampaignIdV67(campaign.id);
   const arbiterMissionV190 = getArbiterMissionV190(campaign.id);
   const soloOperationV121 = isSoloSpecialOperationV131(campaign.id) || Boolean(arbiterMissionV190);
-  const convoyOperationV121 = campaign.id === APC_CONVOY_CAMPAIGN_V121.id;
+  // The Act V convoy race (act5-convoy-race-v188.js) issues the M577 too; literal ids keep this renderer self-contained.
+  const convoyOperationV121 = campaign.id === APC_CONVOY_CAMPAIGN_V121.id || /^act5-(last-run|depot-queen)$/.test(campaign.id);
   const issuedVehicle = convoyOperationV121 ? VEHICLES.find(entry => entry.id === 'vehicle-001-m577-armored-personnel-carrier') : specialOperation?.issuedVehicleId
     ? VEHICLES.find((entry) => entry.id === specialOperation.issuedVehicleId)
     : null;
@@ -3551,8 +3574,11 @@ function startMissionRuntimeNowV62(context, insertionHandoverV188 = null) {
   engine.start({
     userCasteCampaignV88: !getSpecialOperationByCampaignIdV67(campaign.id)
       && !getArbiterMissionV190(campaign.id)
-      && ![BLACK_COCOON_CAMPAIGN_V121.id, APC_CONVOY_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id].includes(campaign.id),
+      && ![BLACK_COCOON_CAMPAIGN_V121.id, APC_CONVOY_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id].includes(campaign.id)
+      && !isAct5RaceCampaignV188(campaign.id),
     operationId: deployment.operation.id,
+    // V188 Act V convoy race: towed trailers from the M577 manifest and the decisions already recorded.
+    act5RaceV188: act5ConvoySetupV188(saveSystem.data, campaign.id),
     arbiterProgressV190: saveSystem.data.xenoArbiterV190,
     seed: levelSeed.seed,
     world: { ...world, ...worldState },
@@ -3780,7 +3806,7 @@ function launchCampaign(campaign = null) {
   const equipment = operationLoadout.equipment;
   const specialOperation = getSpecialOperationByCampaignIdV67(campaign.id);
   const vehicle = getArbiterMissionV190(campaign.id) || [BLACK_COCOON_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id, ...NEW_SPECIAL_CAMPAIGNS_V131.map(c=>c.id)].includes(campaign.id) ? null
-    : campaign.id === APC_CONVOY_CAMPAIGN_V121.id ? VEHICLES.find(entry => entry.id === 'vehicle-001-m577-armored-personnel-carrier')
+    : campaign.id === APC_CONVOY_CAMPAIGN_V121.id || isAct5RaceCampaignV188(campaign.id) ? VEHICLES.find(entry => entry.id === 'vehicle-001-m577-armored-personnel-carrier')
     : specialOperation?.issuedVehicleId
     ? VEHICLES.find((entry) => entry.id === specialOperation.issuedVehicleId) || operationLoadout.vehicle
     : operationLoadout.vehicle;
@@ -3924,7 +3950,7 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
 // Textual comms only: no voice asset is implied. Keep mission instructions
 // readable over routine combat/checkpoint captions, but never over fatal alerts.
 function writeMissionRadioV121(event, log) {
-  if (!['black-cocoon-radio', 'apc-convoy-radio', 'c12-horde-radio', 'archive-relay-radio',
+  if (!['black-cocoon-radio', 'apc-convoy-radio', 'c12-horde-radio', 'archive-relay-radio', 'act5-race-radio-v188',
     'hive-radio-v131', 'ecosystem-radio-v131', 'legacy-operation-radio', 'arbiter-radio-v190'].includes(event?.type)) return false;
   const text = String(event.text || '').trim();
   if (!text) return false;
@@ -4136,6 +4162,9 @@ function handleGameEvent(event) {
   // V188 priority cues and in-mission music moods (bible §53.2, §55.7).
   const enemyV188 = event.type === 'spotted' ? engine.enemies?.find?.((entry) => entry.id === event.enemyId) : null;
   const cueV188 = enemyV188 ? casteCueV188(enemyV188) : cueForGameEventV188(event);
+  // V188 Act V convoy race: its events map onto the same existing cue set.
+  const raceCueV188 = cueV188 ? null : act5RaceCueV188(event);
+  if (raceCueV188) audio.cue(raceCueV188);
   if (cueV188) {
     audio.cue(cueV188);
     const captionV188 = saveSystem.data.settings.subtitles ? soundCaptionV188(cueV188, document.documentElement.lang) : null;
@@ -4159,8 +4188,9 @@ function handleGameEvent(event) {
     try { commitCurrentRuntimeV78({ includeSessionTime: true }); sessionStart = Date.now(); renderClock(); toast('Terminal : sauvegarde confirmée.'); }
     catch (error) { toast(error.message); }
   }
-  // V188 spec 006: the bridge of « Dernier départ » gives way at the first checkpoint.
+  // V188 spec 006: the bridge of « Dernier départ » gives way at the first checkpoint (the dedicated race plays it instead).
   if (event.type === 'checkpoint') queueMicrotask(maybeOpenAct5BridgeV188);
+  if (event.type === 'act5-trailer-dropped-v188' || event.type === 'act5-race-milestone-v188') recordAct5RaceEventV188(event);
   if (event.type === 'checkpoint') { audio.checkpoint(); recordOperationFlag(saveSystem.data, `checkpoint-${event.checkpoint}`); log.textContent = `CHECKPOINT ${checkpointLabelV188(event.checkpoint).toUpperCase()} SÉCURISÉ.`; }
   if (event.type === 'power-restored' || event.type === 'shortcut' || event.type === 'archive-recovered') recordOperationFlag(saveSystem.data, event.type);
   if (event.type === 'supply') {

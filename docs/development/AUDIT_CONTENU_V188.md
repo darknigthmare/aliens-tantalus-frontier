@@ -69,7 +69,7 @@ Les statuts « À faire » du §53 (tir, tension, caste, accessibilité, répliq
 | Acte IV Cocon noir | Partiel | `special-black-cocoon`, CIN-51 ; **art** du cocon en dette |
 | Dossier QZ17 (7 pièces) | Partiel | 5 pièces lisibles ; CASSIUS (S2) et Wren (`colony-a-quai`) affichées « pas encore jouables ». *Lot colonie et équipage : les 7 pièces sont jouables ; reste Partiel tant que les pièces 1-5 n'ont pas leur art.* |
 | Choix final et fins (§5.7.1) | Partiel | Règles `finalChoiceOptionsV188`, `resolveFinalChoiceV188` testées, sans écran ni conseil de guerre. *Spec 006 : conseil et trois fins jouables (Partiel).* |
-| Acte V « Non viable », course APC, épilogue | Manquant | Q1, Q2, Q5. *Spec 006 : Partiel, course APC dédiée absente.* |
+| Acte V « Non viable », course APC, épilogue | Manquant | Q1, Q2, Q5. *Spec 006 : Partiel, course APC dédiée absente.* *2026-11-21 : course, pont et poursuite jouables ; Reine en substitut Canvas, toujours Partiel.* |
 
 ## 3. Front colonie — Port-Méridien (§6, §43)
 
@@ -144,7 +144,7 @@ Les 206 paires `pair-NNN-mire` sont des reconstitutions génériques, pas les ar
 | Choix de protocole MIRE | Manquant | Voir §8 |
 | Capture d'organisme vivant | Partiel | Objectif générique `capture a live organism` et choix de l'Interlude ; pas de mécanique dédiée |
 | Commande d'arrêt synthétique, accès avec indice de confiance | Partiel | Chapitres Jeri, A.T.A.X.-Q (`hive-control-v131.js`) ; aucun système commun |
-| Largage de remorque, manifeste fret / passagers | Partiel | Manifeste du M577 (Acte III) ; largage absent (Q17) |
+| Largage de remorque, manifeste fret / passagers | Partiel | Manifeste du M577 (Acte III) ; largage absent (Q17). *2026-11-21 : largage jouable dans la course de l'Acte V (`act5-convoy-race-v188.js`), contenu des remorques lu dans le manifeste, conséquences additives `act5.convoyV188` ; voir « Course du convoi de l'Acte V ».* |
 | Apesanteur, gravité faible | Manquant | — |
 | Contamination et traitement, transformation d'un Marine | Manquant | Q57 : avec *Fièvre noire* |
 | Test biologique avec incertitude | Manquant | — |
@@ -219,7 +219,7 @@ Vérifications : `node --test scripts/verify-asphodele-hub-v188.mjs` ; parcours 
 | Élément | Avant | Après | Preuve |
 | --- | --- | --- | --- |
 | Choix final et fins (§5.7.1) | Partiel (règles sans écran) | Partiel | Conseil de guerre à la table tactique, décision unique, trois fins atteignables ; textes [PROPOSÉ] à valider |
-| Acte V « Non viable » | Manquant | Partiel | Trois missions finales par ligne sur des gabarits existants, pont chronométré, face-à-face au quai, CIN-60, CIN-61 ; course APC et Reine dédiées absentes (Q1) |
+| Acte V « Non viable » | Manquant | Partiel | Trois missions finales par ligne sur des gabarits existants, pont chronométré, face-à-face au quai, CIN-60, CIN-61 ; course APC et Reine dédiées absentes (Q1). *2026-11-21 : course et poursuite dédiées jouables, sprite de la Reine à produire.* |
 | Épilogue (§5.8) | Manquant | Partiel | Au Tantalus : derniers mots, casier d'Echo-8, CIN-92, générique, partie libre ; plans fixes ailleurs (Q5 A) |
 | Option *Transmettre* | Bloquée (salle des relais) | Dépend du hub Asphodèle | Lue par défaut (`asphodeleRelayReadyV188`, hub Asphodèle) ; l'Acte V la propose quand elle est vraie |
 | Cinématiques CIN-60, CIN-61, CIN-90 (×3) | Manquant | Partiel | Lecteur Canvas du prologue, 15 emplacements en primitives (`src/act5-slots-v188.js`) |
@@ -561,6 +561,20 @@ Le registre demeure une identité C → R, avec **54/54** dans ses quatre suites
 La distribution réussit **77/77**, puis le contrôle source passe sur **3 571 fichiers et 1 602 assets**, avec zéro document privé. Un seul helper rejoint le shell de **733 entrées** ; le PNG reste chargé à la demande et les quatre preuves sont source-only. Le schéma reste 52. Les 29 fichiers surveillés et l'identité Git sont stables pendant cette passe, dont le reçu a pour SHA-256 `c1aedeb36a557ca66e45f12cb4ac2bb3e9123e8aafb02115f68c5ab70fc5d072`. Les rapports sont ensuite complétés ; les cinq gates, le build et la publication C sont attribués séparément au commit exact dans la PR #49.
 
 Preuves : [provenance et calibration](QUEEN_MOTHER_CHOIR_ART_PROVENANCE_20261117.json), [QA et limites](QUEEN_MOTHER_CHOIR_ART_QA_20261117.md), [planche native](QUEEN_MOTHER_CHOIR_ART_OVERVIEW_20261117.png), [reçu consolidé](QUEEN_MOTHER_CHOIR_ART_RENDER_RECEIPT_20261117.json).
+
+## Course du convoi de l'Acte V (continuation du 21 novembre 2026)
+
+Base : `7bce88d6`. *Dernier départ* (`act5-last-run`) et *La Reine du dépôt* (`act5-depot-queen`) deviennent une course APC dédiée, sans changer leurs identifiants ni l'enchaînement du conseil. Règles : [`act5-convoy-race-v188.js`](../../src/act5-convoy-race-v188.js) ; mission : [`act5-convoy-race-runtime-v188.js`](../../src/act5-convoy-race-runtime-v188.js), composée juste au-dessus de la chaîne V158, sous toutes les couches V188 dont l'ordre est inchangé ; détail et valeurs [PROPOSÉ] dans la bible (§5.11, « Course du convoi »).
+
+| Élément | Statut | Constat |
+| --- | --- | --- |
+| Remorques physiques | Partiel | Chaîne M577 → colons → fret sur timons à ressort amorti avec butées ; masse et traînée ralentissent le convoi ; art existant des deux remorques réemployé à son chemin d'origine |
+| Largage de remorque | Partiel | `C` / `X` ; la première remorque lâchée pendant *Dernier départ* est la décision du pont ; une remorque abandonnée arrête coureurs ou Reine ; conséquences additives `storyCampaignV188.act5.convoyV188` (colons perdus après le pont retirés de l'appel de CIN-61) |
+| Pont jouable | Partiel | Tablier qui s'affaisse sous deux remorques (fenêtre 15 s, +6 avec Orlov), attelage arrière qui cède sans décision, effondrement qui suit le convoi et l'emporte s'il s'arrête ; primitives Canvas |
+| Poursuite de la Reine | Partiel | Admission du profil royal de stature 4,8 m avant toute logique, machine à états explicite, 245 px ; **substitut Canvas**, emplacement `act5-queen-chase-side` déclaré sans fichier |
+| Checkpoints, reprise, extraction | Partiel | Un checkpoint par phase ; capture et reprise validées ; insertion et extraction UD-4L en mode `apc` |
+
+Vérifications : `scripts/verify-act5-convoy-race-v188.mjs` (12 tests, dans `test:priorities:v188`) ; parcours Chromium `scripts/qa-act5-convoy-race-v188.mjs` sur deux fixtures importées par l'écran Options, au clavier réel, sans injection de position : 12/12 contrôles, aucune erreur de page ni de console. Les captures attestent le rendu de ce parcours, pas une fidélité « 1:1 ». Le M577 de mission garde sa planche d'action existante ; la Reine, le pont et les coureurs sont des primitives en attente d'art. Le statut global de l'Acte V reste **Partiel**.
 
 ## Continuation — Niveaux dédiés des missions de colonie C1-C4 (21 novembre 2026)
 
