@@ -305,3 +305,21 @@ test('colony levels: other missions keep their behaviour; composition, offline s
   for (const text of strings) assert.ok(Object.hasOwn(EN_CATALOG_V185, text), `EN: ${text}`);
   for (const pattern of ['SAS A {0} % · SAS B {1} %', 'ÉCLOSION ESTIMÉE {0}:{1}', 'INDICES {0}/3']) assert.ok(Object.hasOwn(EN_PATTERNS_V185, pattern), `EN: ${pattern}`);
 });
+
+test('C3: a scatter after some screenings never sends a screened survivor back to the queue', async () => {
+  const run = await level('colony-c3'), { engine, places, place, use } = run, pr = run.progress;
+  place(places.arrivals[2]); use();
+  for (let x = places.arrivals[2]; x < places.plaza + 60; x += 10) { place(x); tick(engine, .12); }
+  tick(engine, 2); place(places.scanner - 40);
+  for (let i = 0; i < 20 && pr().scanned < 2; i++) { if (!pr().civilians.some(entry => entry.state === 'scan')) use(); tick(engine, 1); }
+  // Injection: the panic is set just under the threshold, then the aim key is held towards the crowd.
+  pr().panic = 99; place(places.plaza - 300); engine.player.facing = 1; engine.keys.add('ShiftLeft'); tick(engine, .2); engine.keys.delete('ShiftLeft');
+  assert.equal(pr().scatters, 1);
+  tick(engine, 6);
+  for (const entry of pr().civilians.filter(item => item.state === 'scatter')) { place(entry.x); use(); }
+  for (const entry of pr().civilians) if (entry.result) assert.notEqual(entry.state, 'queue', entry.id);
+  place(places.scanner - 40);
+  for (let i = 0; i < 40 && pr().scanned < 5; i++) { if (!pr().civilians.some(entry => entry.state === 'scan')) use(); tick(engine, 1); }
+  assert.equal(pr().scanned, 5); assert.equal(pr().civilians.filter(entry => entry.result === 'carrier').length, 1);
+  assert.ok(pr().civilians.every(entry => entry.result), 'each survivor screened once');
+});

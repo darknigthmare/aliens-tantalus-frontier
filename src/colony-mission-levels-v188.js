@@ -747,7 +747,10 @@ export function withColonyMissionLevelsV188(Base) {
       if (key === 'scan') { const next = pr.civilians.find(entry => entry.state === 'queue'); if (next) { next.state = 'scan'; level.runtime.scanClock = 0; } return done('Contrôle biologique en cours…', 2); }
       if (key.startsWith('calm:')) {
         const entry = pr.civilians.find(item => `calm:${item.id}` === key);
-        if (entry) { entry.state = entry.resume === 'hold' ? (this.colonyPhaseIdV188() === 'carrier' ? 'follow' : 'hold') : entry.resume === 'wait' ? 'wait' : this.colonyPhaseIdV188() === 'arrivals' ? 'follow' : this.colonyPhaseIdV188() === 'scan' ? 'queue' : entry.result === 'carrier' ? 'follow' : 'ward'; }
+        // A screened survivor never goes back in the queue: the carrier waits (or follows), the others go to the ward.
+        const phase = this.colonyPhaseIdV188();
+        if (entry) entry.state = entry.result === 'carrier' ? (phase === 'carrier' ? 'follow' : 'hold') : entry.result === 'clear' ? 'ward'
+          : entry.resume === 'wait' ? 'wait' : phase === 'arrivals' ? 'follow' : 'queue';
         return done('Rescapé rassuré.', 2);
       }
       if (key === 'deliver') {
