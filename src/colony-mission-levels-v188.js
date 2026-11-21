@@ -112,7 +112,7 @@ export function colonySpawnXV188({ marines = [], side = 'east', deck = { x0: 0, 
 /** [PROPOSÉ] C4: lethal handling of converts costs Port-Méridien stability (−1 per convert killed, at most −3). */
 export function colonyCultStabilityCostV188(killed) {
   const count = Math.max(0, Math.floor(Number(killed) || 0));
-  return Math.max(R.cult.stabilityCostMax, count * R.cult.stabilityPerKill);
+  return count ? Math.max(R.cult.stabilityCostMax, count * R.cult.stabilityPerKill) : 0;
 }
 /** Applied once with the operation result (app finalize): only C4, only on success, only if converts were killed. */
 export function applyColonyLevelResultV188(save, { success = false, campaignId = null, result = null } = {}) {
@@ -241,7 +241,8 @@ export function withColonyMissionLevelsV188(Base) {
     enterColonyPhaseV188(phaseId) {
       const level = this.colonyLevelV188, id = level.campaignId, progress = level.progress;
       if (phaseId === 'extract') {
-        if (id === 'colony-c1') this.markObjectiveAction?.('colony-port-held', { welded: 2 });
+        // The port held: the defend objective is fulfilled by the welds (its generic zone hold is not offered).
+        if (id === 'colony-c1') { if (this.objectiveState) { this.objectiveState.started = true; this.objectiveState.holdRemaining = 0; } this.markObjectiveAction?.('colony-port-held', { welded: 2 }); }
         if (id === 'colony-c3') {
           if (this.mission?.objectives) this.mission.objectives.route = true;
           if (this.objectiveState) this.objectiveState.rescued = Math.max(this.objectiveState.rescued || 0, this.objectiveRuntime?.nodeCount || 0);

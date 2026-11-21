@@ -135,8 +135,10 @@ export function placeHoldPropsV188(specs, bounds, features, { zMin = -80, zMax =
   return { placed, skipped };
 }
 
+// V188 colony levels: C2 « L'air du port » is an interior of Port-Méridien, played in V1 (bible §43.1).
+const V1_INTERIOR_CAMPAIGNS = Object.freeze(['colony-c2']);
 const isShipCampaignOfItsOwn = (campaign, world) => {
-  if (!campaign || campaign.specialOperationId || String(campaign.id || '').startsWith('special-')) return false;
+  if (!campaign || campaign.specialOperationId || String(campaign.id || '').startsWith('special-') || V1_INTERIOR_CAMPAIGNS.includes(campaign.id)) return false;
   return selectMissionTemplateV52({ campaign: { ...campaign, templateId: campaign.templateId }, world: world || {} }) === SHIP_TEMPLATE;
 };
 
@@ -210,7 +212,7 @@ export const DEPTH_HOLD_DEFINITIONS_V188 = Object.freeze([
         { id: 'colony:infirmary', kind: 'wall-art', x0: places.infirmary - 120, x1: places.lucia + 40 },
         { id: 'colony:airlock-b', kind: 'wall-art', x0: places.airlockB - 60, x1: places.airlockB + 60 }].sort((a, b) => a.x0 - b.x0);
       const { placed, skipped } = placeHoldPropsV188([
-        Object.freeze({ id: 'colony-freight-quay', kind: 'crate-stack', slot: 'freighter-crate-stack', w: 61, h: 92, z: -47, z0: -60, z1: -34, at: at(places.quay + 240), labels: ['PM-12', 'PM-13'] }),
+        Object.freeze({ id: 'colony-freight-quay', kind: 'crate-stack', slot: 'freighter-crate-stack', w: 61, h: 92, z: -47, z0: -60, z1: -34, at: at(places.quay - 230), labels: ['PM-12', 'PM-13'] }),
         Object.freeze({ id: 'colony-drums-street', kind: 'drum-rack', slot: 'freighter-drum-rack', w: 96, h: 52, z: -73, z0: -88, z1: -66, at: at(places.plaza + 170) }),
         Object.freeze({ id: 'colony-medical-crate', kind: 'quarantine-crate', slot: 'quarantine-crate', w: 92, h: 61, z: -67, z0: -86, z1: -54, at: at(places.infirmary - 260) }),
         Object.freeze({ id: 'colony-freight-platform', kind: 'crate-stack', slot: 'freighter-crate-stack', w: 61, h: 92, z: -47, z0: -60, z1: -34, at: at(places.pad + 260), labels: ['PM-31', 'PM-32'] })

@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-tantalus-xeno-trials-merge-20261121';
+const CACHE = 'atf-v143-tantalus-colony-levels-20261121';
 const SHELL = Object.freeze([
   '/src/xeno-trials-visual-assets-v205.js',
   '/src/xeno-trials-priority-air-data-v204.js',
@@ -348,6 +348,9 @@ const SHELL = Object.freeze([
   '/src/crew-quests-tantalus-v188.js',
   '/src/travel-messages-v188.js',
   '/src/colony-crew-slots-v188.js',
+  '/src/colony-mission-levels-v188.js',
+  '/src/colony-level-places-v188.js',
+  '/src/colony-level-art-v188.js',
   '/src/asphodele-missions-v188.js',
   '/src/asphodele-hub-v188.js',
   '/src/asphodele-hub-slots-v188.js',

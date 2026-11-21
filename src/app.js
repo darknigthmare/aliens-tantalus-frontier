@@ -6,6 +6,7 @@ import { deliverTravelMessagesV188, travelMessagesListV188, travelArrivalNoticeV
 import { filterColonyCampaignsV188, colonyLockReasonV188, colonyLockTextV188, applyColonyMissionResultV188, applyColonyC5LaunchV188, colonyMissionsSnapshotV188,
   colonyReturnSceneDueV188, markColonySceneSeenV188, COLONY_SCENES_V188, colonyC4DecisionPendingV188, colonyGrueDecisionPendingV188, colonyC4OptionsV188,
   chooseColonyC4V188, chooseColonyGrueV188, COLONY_DECISION_TEXT_V188, COLONY_GRUE_CHOICES_V188, colonyCampaignNameV188 } from './colony-missions-v188.js';
+import { applyColonyLevelResultV188 } from './colony-mission-levels-v188.js';
 import { openContentSceneDialogV188 } from './content-gap-ui-v188.js';
 import { withHubAsphodeleV188 } from './hub-asphodele-v188.js';
 import { asphodeleSaveViewV188, asphodeleShuttleStatusV188, boardAsphodeleV188, returnToTantalusV188, leaveAsphodeleForOperationV188, normalizeAsphodeleHubV188,
@@ -3876,6 +3877,8 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   if (campaign && world) applyCampaignConsequence(candidate, campaign, world, { success: resolvedSuccess });
   // V188 colony lot (bible §6.2): a colony mission pays its colony reward once; a contract validates its own site.
   const colonyMissionV188 = applyColonyMissionResultV188(candidate, { success: resolvedSuccess, campaignId: operation.campaignId });
+  // V188 dedicated colony levels: converts killed in C4 cost Port-Méridien stability [PROPOSÉ]; the C4 decision is unchanged.
+  applyColonyLevelResultV188(candidate, { success: resolvedSuccess, campaignId: operation.campaignId, result: engine.colonyLevelResultV188?.() || null });
   // V188 reconstruction (bible §6.3): an operation on Cocyte validates or damages a site.
   const colonyChangeV188 = applyColonyOperationResultV188(candidate, { success: resolvedSuccess, worldId: operation.worldId || campaign?.worldId });
   // V188 crew quests (bible §8.1): DAVID-8R's relay components come back from successful operations on Cocyte.
