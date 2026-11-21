@@ -305,6 +305,39 @@ def get_frame(page):
 # Observe startup before Python receives it and arm the same special's first
 # floor observer here. Its only control action remains the declared public
 # pause click at real floor contact. Combat, clocks and keys stay native.
+DRAWN_STARTUP_WITNESS_V191 = r'''(m,fighter,view)=>{
+ const s=view?.spriteAtlasV191,a=fighter?.attack;
+ // A single reviewed Prowler preparation, never a generic animation flag.
+ const texture={path:'/assets/openai/sprites/xeno-trials-v191/prowler-special-sheet.png',
+  sha256:'68b21b568fc9e31298955a0f8ec1c2c1e3fa4cdd8a3eff7f40454ea1dac135bc',width:1983,height:793};
+ const reference={path:'/assets/user/castes-v87/game_afe_prowler.png',
+  sha256:'48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544'};
+ const rects=[[0,0,397,396],[397,0,396,396],[793,0,397,396]],startup=.32;
+ if(!m||m.phase!=='active'||m.paused||m.presentation?.blocksSimulation||m.grappleV153
+  ||fighter?.id!=='prowler'||!m.fighters?.includes(fighter)||!['player','opponent','cpu'].includes(fighter.side)||view?.side!==fighter.side
+  ||view.drawn!==true||view.animation!=='drawn-sprite-atlas-v191'||view.preparationV163
+  ||s?.drawn!==true||s.fighterId!==fighter.id||s.profileId!=='castes-game_afe_prowler'
+  ||s.kind!=='special'||s.primaryAction!=='leap'||s.phase!=='windup'
+  ||a?.kind!=='special'||!Number.isInteger(a.id)||!Number.isFinite(a.age)||a.age<0||a.age>=startup
+  ||fighter.hp<=0||fighter.y!==0||fighter.guard||fighter.stun>0||fighter.hitFlash>0
+  ||s.attackId!==a.id||s.attackAge!==a.age||s.renderTick!==m.tick||!Number.isInteger(m.tick)
+  ||s.path!==texture.path||s.sha256!==texture.sha256||s.imageWidth!==texture.width||s.imageHeight!==texture.height
+  ||s.referencePath!==reference.path||s.referenceSha256!==reference.sha256
+  ||s.supportMode!=='grounded'||s.grounded!==true||!Number.isFinite(s.scale)||s.scale<=0
+  ||typeof s.reducedMotion!=='boolean'||!Number.isFinite(s.phaseProgress)
+  ||Math.abs(s.phaseProgress-a.age/startup)>1e-9)return null;
+ const index=s.reducedMotion?0:Math.min(2,Math.floor(a.age/startup*3));
+ if(s.frameId!=='special-windup-'+index||JSON.stringify(s.sourceRect)!==JSON.stringify(rects[index]))return null;
+ const event=[...(m.events||[])].reverse().find(e=>e.type==='attack'&&e.side===fighter.side
+  &&e.kind==='special'&&e.id===a.id+1);
+ if(!event||!Number.isInteger(event.tick)||event.tick<0||event.tick>m.tick)return null;
+ return{kind:'drawn-atlas-v191',fighterId:fighter.id,side:fighter.side,profileId:s.profileId,
+  path:s.path,sha256:s.sha256,referencePath:s.referencePath,referenceSha256:s.referenceSha256,
+  imageWidth:s.imageWidth,imageHeight:s.imageHeight,sourceRect:[...s.sourceRect],frameId:s.frameId,
+  phase:s.phase,phaseProgress:s.phaseProgress,reducedMotion:s.reducedMotion,
+  attackId:a.id,attackAge:a.age,attackEventId:event.id,renderTick:s.renderTick};
+}'''
+
 PLAYER_STARTUP_OBSERVER_V177 = r'''c=>{
  const prior=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__;
  if(prior){
@@ -318,6 +351,38 @@ PLAYER_STARTUP_OBSERVER_V177 = r'''c=>{
  }
  const out=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__={expected:c,ready:false,done:false,accepted:null,frame:null,error:null};
  const started=performance.now();
+ const drawnPreparationV191 = (m,fighter,view)=>{
+ const s=view?.spriteAtlasV191,a=fighter?.attack;
+ // A single reviewed Prowler preparation, never a generic animation flag.
+ const texture={path:'/assets/openai/sprites/xeno-trials-v191/prowler-special-sheet.png',
+  sha256:'68b21b568fc9e31298955a0f8ec1c2c1e3fa4cdd8a3eff7f40454ea1dac135bc',width:1983,height:793};
+ const reference={path:'/assets/user/castes-v87/game_afe_prowler.png',
+  sha256:'48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544'};
+ const rects=[[0,0,397,396],[397,0,396,396],[793,0,397,396]],startup=.32;
+ if(!m||m.phase!=='active'||m.paused||m.presentation?.blocksSimulation||m.grappleV153
+  ||fighter?.id!=='prowler'||!m.fighters?.includes(fighter)||!['player','opponent','cpu'].includes(fighter.side)||view?.side!==fighter.side
+  ||view.drawn!==true||view.animation!=='drawn-sprite-atlas-v191'||view.preparationV163
+  ||s?.drawn!==true||s.fighterId!==fighter.id||s.profileId!=='castes-game_afe_prowler'
+  ||s.kind!=='special'||s.primaryAction!=='leap'||s.phase!=='windup'
+  ||a?.kind!=='special'||!Number.isInteger(a.id)||!Number.isFinite(a.age)||a.age<0||a.age>=startup
+  ||fighter.hp<=0||fighter.y!==0||fighter.guard||fighter.stun>0||fighter.hitFlash>0
+  ||s.attackId!==a.id||s.attackAge!==a.age||s.renderTick!==m.tick||!Number.isInteger(m.tick)
+  ||s.path!==texture.path||s.sha256!==texture.sha256||s.imageWidth!==texture.width||s.imageHeight!==texture.height
+  ||s.referencePath!==reference.path||s.referenceSha256!==reference.sha256
+  ||s.supportMode!=='grounded'||s.grounded!==true||!Number.isFinite(s.scale)||s.scale<=0
+  ||typeof s.reducedMotion!=='boolean'||!Number.isFinite(s.phaseProgress)
+  ||Math.abs(s.phaseProgress-a.age/startup)>1e-9)return null;
+ const index=s.reducedMotion?0:Math.min(2,Math.floor(a.age/startup*3));
+ if(s.frameId!=='special-windup-'+index||JSON.stringify(s.sourceRect)!==JSON.stringify(rects[index]))return null;
+ const event=[...(m.events||[])].reverse().find(e=>e.type==='attack'&&e.side===fighter.side
+  &&e.kind==='special'&&e.id===a.id+1);
+ if(!event||!Number.isInteger(event.tick)||event.tick<0||event.tick>m.tick)return null;
+ return{kind:'drawn-atlas-v191',fighterId:fighter.id,side:fighter.side,profileId:s.profileId,
+  path:s.path,sha256:s.sha256,referencePath:s.referencePath,referenceSha256:s.referenceSha256,
+  imageWidth:s.imageWidth,imageHeight:s.imageHeight,sourceRect:[...s.sourceRect],frameId:s.frameId,
+  phase:s.phase,phaseProgress:s.phaseProgress,reducedMotion:s.reducedMotion,
+  attackId:a.id,attackAge:a.age,attackEventId:event.id,renderTick:s.renderTick};
+};
  function sample(){
   if(out.cancelled||out.done)return;
   if(performance.now()-started>c.timeoutMs){out.done=true;out.error='Native startup observation exceeded the remaining original acquisition budget';return;}
@@ -328,7 +393,8 @@ PLAYER_STARTUP_OBSERVER_V177 = r'''c=>{
   const event=[...m.events].reverse().find(e=>e.type==='attack'&&e.side==='player'&&e.kind==='special'&&e.id>c.lastEventId);
   if(!out.accepted&&event&&player.stats.specials>c.specialsBefore)
    out.accepted={attemptNumber:c.attemptNumber,attackEventId:event.id,observedTick:m.tick};
-  const cue=m.rigViewsV154?.find(v=>v.side==='player'&&(c.after?v.preparationV163:v.clip==='windup'));
+  const drawn=c.after&&m.rigViewsV154?.map(view=>({view,witness:drawnPreparationV191(m,player,view)})).find(v=>v.witness);
+  const cue=drawn?.view||m.rigViewsV154?.find(v=>v.side==='player'&&!v.spriteAtlasV191&&(c.after?v.preparationV163:v.clip==='windup'));
   // The native engine allocates attack.id, then immediately emits attack
   // with the next serial. A different player's old pose is never evidence.
   if(out.accepted&&event?.id===out.accepted.attackEventId&&event.id===attack?.id+1
@@ -336,7 +402,8 @@ PLAYER_STARTUP_OBSERVER_V177 = r'''c=>{
    const source=document.querySelector('[data-xt="canvas"]'),bitmap=document.createElement('canvas');
    bitmap.width=source.width;bitmap.height=source.height;bitmap.getContext('2d').drawImage(source,0,0);
    out.frame={state:structuredClone(state),bitmap,preparationProof:{attackId:attack.id,attackEventId:event.id,
-    attackEventTick:event.tick,frameTick:m.tick,attackAge:attack.age,clip:cue.clip,
+    attackEventTick:event.tick,frameTick:m.tick,attackAge:attack.age,clip:drawn?drawn.witness.frameId:cue.clip,
+    ...(drawn?{kind:'drawn-atlas-v191',drawnPreparationV191:drawn.witness}:{}),
     observation:'read-only-native-raf-bitmap-before-png-encoding'}};
    if(c.captureFloor){
     const arm=globalThis.__ATF_ARM_CAPTURE_FLOOR_V207__;
@@ -361,7 +428,9 @@ PLAYER_STARTUP_EXPORT_V179 = r'''expected=>{
  if(!o?.ready||!m||!p||m.config.matchId!==expected.matchId||m.round!==expected.round
    ||JSON.stringify(m.fighters.map(f=>[f.id,f.side]))!==JSON.stringify(expected.participants)
    ||['attackId','attackEventId','attackEventTick','frameTick','attackAge','clip']
-     .some(k=>p[k]!==expected.proof[k])||o.accepted?.attackEventId!==p.attackEventId)return null;
+     .some(k=>p[k]!==expected.proof[k])||o.accepted?.attackEventId!==p.attackEventId
+   ||p.kind!==expected.proof.kind
+   ||JSON.stringify(p.drawnPreparationV191??null)!==JSON.stringify(expected.proof.drawnPreparationV191??null))return null;
  return{state:f.state,png:f.bitmap.toDataURL('image/png'),preparationProof:p};
 }'''
 
@@ -825,7 +894,7 @@ def main():
                     check(name + ': real menu selection and ordinary native health', [f['id'] for f in m['fighters']] == [player, opponent] and all(f['hp'] > 1 for f in m['fighters']))
                     capture(name+'-start.png', get_frame(page), 'Native production menu match before combat; real asset bytes and world dimensions.')
                     if role == 'cpu-captor':
-                        prep_predicate = "m.rigViewsV154.some(v=>v.side==='opponent'&&v.preparationV163)" if after else "m.fighters[1].attack?.kind==='special'&&m.fighters[1].attack.age<.32"
+                        prep_predicate = ("m.rigViewsV154.some(v=>v.side==='opponent'&&!v.spriteAtlasV191&&v.preparationV163)||m.rigViewsV154.some(v=>(" + DRAWN_STARTUP_WITNESS_V191 + ")(m,m.fighters[1],v))") if after else "m.fighters[1].attack?.kind==='special'&&m.fighters[1].attack.age<.32"
                         preparation = wait_frame(page, prep_predicate)
                     else:
                         acquisition = {'profile': name}

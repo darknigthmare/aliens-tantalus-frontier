@@ -26,6 +26,8 @@ import { preserveConvoyReturnHistoryV162 } from '../src/campaign-convoy-history-
 import { mountConvoyReturnHistoryV162 } from '../src/campaign-convoy-history-ui-v162.js';
 import { preserveLetheContinuityV163, recordLetheContinuityReviewV163 } from '../src/campaign-lethe-continuity-v163.js';
 import { mountLetheContinuityV163 } from '../src/campaign-lethe-continuity-ui-v163.js';
+import { getArbiterMissionV190 } from '../src/xeno-arbiter-campaign-v190.js';
+import { mountArbiterDossierV190 } from '../src/xeno-arbiter-ui-v190.js';
 import { hostV136 } from './forge-native-host-v136.mjs';
 import { HUB_NPC_ANNEX_WORKPOST_ROUTE_DEFINITIONS_V165 } from '../src/npc-annex-workpost-routes-v165.js';
 import { campaignObjectiveLabelV188 } from '../src/mission-objective-panel-v188.js';
@@ -519,6 +521,11 @@ test('PR15: the actual app review callback restores focus to the replaced topic 
   const dependencies = { saveSystem: system, deriveStoryCampaignV188, markStoryDebriefSeenV188, campaignObjectiveLabelV188, researchBonusRowV188: () => '', STORY_RELAY_CAMPAIGN_ID_V188, clone, preserveCampaignStoryReturnV160,
     preserveConvoyReturnHistoryV162, mountConvoyReturnHistoryV162,
     preserveLetheContinuityV163, mountLetheContinuityV163, recordLetheContinuityReviewV163,
+    getArbiterMissionV190, mountArbiterDossierV190,
+    // The production dossier mounts alongside this legacy report. Its separate
+    // navigation is outside this focus scenario and must never be exercised.
+    planArbiterMissionV190() { assert.fail('Legacy QZ-18 reading cannot plan an ARBITER mission.'); },
+    showView() { assert.fail('Legacy QZ-18 reading cannot open the Trials terminal.'); },
     CAMPAIGNS: [campaign], WORLDS: [world], WEAPONS: [], EQUIPMENT: [], VEHICLES: [], CREW: [],
     getOperationBrief: () => ({ crewIds: [], ready: true, risk: 0, hours: 0 }),
     resolveCrewDefinitionV85: member => member, getSpecialOperationByCampaignIdV67: () => null,
@@ -838,6 +845,9 @@ async function driveNativeReturnConsultation({ seen = [], alreadyDebriefed = fal
     CAMPAIGNS: [campaign, CAMPAIGNS.find(entry => entry.id === 'special-narrative-qz17')], WORLDS,
     WEAPONS: [], EQUIPMENT: [], VEHICLES: [], CREW: [],
     getCommandMissionsV110,
+    // Xeno Trials V190 (merged line): the ARBITER dossier mounts beside this report; it is never planned here.
+    getArbiterMissionV190, mountArbiterDossierV190,
+    planArbiterMissionV190() { assert.fail('The QZ-18 return consultation cannot plan an ARBITER mission.'); },
     unlockedCampaignsV188: list => filterColonyCampaignsV188(system.data,
       filterAct5CampaignsV188(system.data, filterUnlockedCampaignsV188(system.data, list))),
     storyStateV188: () => deriveStoryWithAct5V188(system.data, { language: 'fr' }),

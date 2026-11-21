@@ -1,0 +1,106 @@
+{
+  "lot": "XENO-FRANCHISE-STAGES-50-V192",
+  "baseCommit": "0e9843808823a9ce9da73e5b2effeefa1ee51f26",
+  "state": "VERIFIED_SOURCE_FROZEN",
+  "target": {
+    "preservedStages": 50,
+    "newStages": 50,
+    "totalStages": 100,
+    "newImages": 50,
+    "imagePlanes": 150,
+    "extraProceduralDepthsPerStage": 2,
+    "eventsPerStage": 2,
+    "eventKinds": 21,
+    "distribution": {
+      "film": 15,
+      "series": 5,
+      "game": 15,
+      "comic": 8,
+      "novel": 7
+    }
+  },
+  "invariants": {
+    "oldStageIdsPreserved": true,
+    "oldBackdropBytesPreserved": true,
+    "physicsChanged": false,
+    "newPhysicalHazards": 0,
+    "mainSaveSchema": 52,
+    "ticketSchema": 96,
+    "loadOnlySelectedStageAtlas": true,
+    "stagePageSize": 12,
+    "newProgramIds": 0
+  },
+  "validation": {
+    "state": "PASSED",
+    "nativeAssertions": 480,
+    "nativeCaptures": 63,
+    "nativePageScreenshots": 10,
+    "nativeCanvasExports": 53,
+    "newStageVisits": 50,
+    "legacyVisits": 3,
+    "completeNativeMatches": 1,
+    "nativeMatchScore": "2–0",
+    "browserSourceFiles": 661,
+    "sharedFrozenPathsMatched": 61,
+    "newPngHttpBodies": 50,
+    "httpBodies": 56,
+    "javascriptErrors": 0,
+    "httpErrors": 0,
+    "requestFailures": 0,
+    "uniqueNodeTestFiles": 272,
+    "firstGlobalRun": {
+      "tests": 5647,
+      "pass": 5645,
+      "fail": 1,
+      "skipped": 1,
+      "failure": "Historical V191 coverage verifier did not yet relay its runtime SHA through the approved V192 successor.",
+      "productChangeRequired": false,
+      "resolution": "RESOLVED_STRICT_SUCCESSION_AND_FRESH_COMPLETE_RERUN"
+    },
+    "evidenceDirectory": "/workspace/tantalus-inventory/reprise-v192",
+    "sourceAdmission": {
+      "files": 2701,
+      "assets": 1505,
+      "privateDocuments": 0
+    },
+    "buildFiles": 2109,
+    "buildShell": 667,
+    "node": {
+      "tests": 5647,
+      "pass": 5646,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 1,
+      "todo": 0
+    },
+    "sourceFreezeFiles": 92,
+    "sourceAudit": {
+      "baselineCommit": "0e9843808823a9ce9da73e5b2effeefa1ee51f26",
+      "successors": 29,
+      "addedInputs": 62,
+      "preservedPlates": 12,
+      "historicalResultsTransferred": false,
+      "independentReadback": "PASSED"
+    },
+    "externalValidation": "validation-final.json"
+  },
+  "limits": [
+    "Fifty side-view arenas do not mean fifty planets, fifty missions or fifty additional horde programs.",
+    "Some official work overviews are accessible; unavailable reference pages are not treated as reviewed primary imagery.",
+    "Architecture, lateral geometry, image lighting and background events are project adaptations, not measured1:1 reproductions.",
+    "A native rendering visit or Canvas export is not a complete match victory."
+  ],
+  "publication": {
+    "state": "EXTERNAL_RECEIPT_AFTER_COMMIT",
+    "externalReceipt": "/workspace/tantalus-inventory/reprise-v192/publication-final.json",
+    "priorQuotaResource": "api-deployments-free-per-day",
+    "retryNoEarlierThanUTC": "2026-11-14T10:06:31.294100+00:00",
+    "settingsChanged": false
+  },
+  "production": {
+    "newImages": 50,
+    "imagePlanes": 150,
+    "imageBytes": 131289151,
+    "bitmapEdits": 0
+  }
+}

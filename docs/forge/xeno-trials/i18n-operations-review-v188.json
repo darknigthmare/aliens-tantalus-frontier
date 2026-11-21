@@ -1,0 +1,917 @@
+{
+  "format": "atf-i18n-review-v186",
+  "exact": [
+    {
+      "fr": "Maintenez E près du chariot et accompagnez-le jusqu’au sas. Sa progression s’arrête dès que vous vous éloignez. Les ennemis proches endommagent le chariot.",
+      "en": "Hold E near the trolley and accompany it to the airlock. It stops moving when you move away. Nearby enemies damage the trolley.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "CONVOI DE CONFINEMENT · 01",
+      "en": "CONTAINMENT CONVOY · 01",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "CONVOI DE CONFINEMENT · 1",
+      "en": "CONTAINMENT CONVOY · 1",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "CONVOI DE CONFINEMENT · 02",
+      "en": "CONTAINMENT CONVOY · 02",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "CONVOI DE CONFINEMENT · 2",
+      "en": "CONTAINMENT CONVOY · 2",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "CONVOI DE CONFINEMENT · 03",
+      "en": "CONTAINMENT CONVOY · 03",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "CONVOI DE CONFINEMENT · 3",
+      "en": "CONTAINMENT CONVOY · 3",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "CONVOI DE CONFINEMENT · 04",
+      "en": "CONTAINMENT CONVOY · 04",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "CONVOI DE CONFINEMENT · 4",
+      "en": "CONTAINMENT CONVOY · 4",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "CONVOI DE CONFINEMENT · 05",
+      "en": "CONTAINMENT CONVOY · 05",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "CONVOI DE CONFINEMENT · 5",
+      "en": "CONTAINMENT CONVOY · 5",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "CONVOI DE CONFINEMENT · 06",
+      "en": "CONTAINMENT CONVOY · 06",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "CONVOI DE CONFINEMENT · 6",
+      "en": "CONTAINMENT CONVOY · 6",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "CONVOI DE CONFINEMENT · 07",
+      "en": "CONTAINMENT CONVOY · 07",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "CONVOI DE CONFINEMENT · 7",
+      "en": "CONTAINMENT CONVOY · 7",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "CONVOI DE CONFINEMENT · 08",
+      "en": "CONTAINMENT CONVOY · 08",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "CONVOI DE CONFINEMENT · 8",
+      "en": "CONTAINMENT CONVOY · 8",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Ralliez les trois relais dans l’ordre indiqué et maintenez E pour les charger. Quitter une charge inachevée la fait redescendre.",
+      "en": "Reach the three relays in the indicated order and hold E to charge them. An unfinished charge drains when you leave.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RELAIS DE SECOURS · 01",
+      "en": "EMERGENCY RELAYS · 01",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RELAIS DE SECOURS · 1",
+      "en": "EMERGENCY RELAYS · 1",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RELAIS DE SECOURS · 02",
+      "en": "EMERGENCY RELAYS · 02",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RELAIS DE SECOURS · 2",
+      "en": "EMERGENCY RELAYS · 2",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RELAIS DE SECOURS · 03",
+      "en": "EMERGENCY RELAYS · 03",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RELAIS DE SECOURS · 3",
+      "en": "EMERGENCY RELAYS · 3",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RELAIS DE SECOURS · 04",
+      "en": "EMERGENCY RELAYS · 04",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RELAIS DE SECOURS · 4",
+      "en": "EMERGENCY RELAYS · 4",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RELAIS DE SECOURS · 05",
+      "en": "EMERGENCY RELAYS · 05",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RELAIS DE SECOURS · 5",
+      "en": "EMERGENCY RELAYS · 5",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RELAIS DE SECOURS · 06",
+      "en": "EMERGENCY RELAYS · 06",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RELAIS DE SECOURS · 6",
+      "en": "EMERGENCY RELAYS · 6",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RELAIS DE SECOURS · 07",
+      "en": "EMERGENCY RELAYS · 07",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RELAIS DE SECOURS · 7",
+      "en": "EMERGENCY RELAYS · 7",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RELAIS DE SECOURS · 08",
+      "en": "EMERGENCY RELAYS · 08",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RELAIS DE SECOURS · 8",
+      "en": "EMERGENCY RELAYS · 8",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Maintenez E près des conduits pour les purger et les sceller. Les foyers inachevés se régénèrent ; chaque foyer ouvert affaiblit le confinement.",
+      "en": "Hold E near the ducts to purge and seal them. Unfinished sources regenerate; each open source weakens containment.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "PURGE DES CONDUITS · 01",
+      "en": "DUCT PURGE · 01",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "PURGE DES CONDUITS · 1",
+      "en": "DUCT PURGE · 1",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "PURGE DES CONDUITS · 02",
+      "en": "DUCT PURGE · 02",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "PURGE DES CONDUITS · 2",
+      "en": "DUCT PURGE · 2",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "PURGE DES CONDUITS · 03",
+      "en": "DUCT PURGE · 03",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "PURGE DES CONDUITS · 3",
+      "en": "DUCT PURGE · 3",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "PURGE DES CONDUITS · 04",
+      "en": "DUCT PURGE · 04",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "PURGE DES CONDUITS · 4",
+      "en": "DUCT PURGE · 4",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "PURGE DES CONDUITS · 05",
+      "en": "DUCT PURGE · 05",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "PURGE DES CONDUITS · 5",
+      "en": "DUCT PURGE · 5",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "PURGE DES CONDUITS · 06",
+      "en": "DUCT PURGE · 06",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "PURGE DES CONDUITS · 6",
+      "en": "DUCT PURGE · 6",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "PURGE DES CONDUITS · 07",
+      "en": "DUCT PURGE · 07",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "PURGE DES CONDUITS · 7",
+      "en": "DUCT PURGE · 7",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "PURGE DES CONDUITS · 08",
+      "en": "DUCT PURGE · 08",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "PURGE DES CONDUITS · 8",
+      "en": "DUCT PURGE · 8",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Maintenez E près d’une balise pendant sa fenêtre verte. Une charge inachevée retombe hors de cette fenêtre. Synchronisez les trois balises.",
+      "en": "Hold E near a beacon during its green window. An unfinished charge drains outside that window. Synchronize all three beacons.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "BALISES SYNCHRONISÉES · 01",
+      "en": "SYNCHRONIZED BEACONS · 01",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "BALISES SYNCHRONISÉES · 1",
+      "en": "SYNCHRONIZED BEACONS · 1",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "BALISES SYNCHRONISÉES · 02",
+      "en": "SYNCHRONIZED BEACONS · 02",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "BALISES SYNCHRONISÉES · 2",
+      "en": "SYNCHRONIZED BEACONS · 2",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "BALISES SYNCHRONISÉES · 03",
+      "en": "SYNCHRONIZED BEACONS · 03",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "BALISES SYNCHRONISÉES · 3",
+      "en": "SYNCHRONIZED BEACONS · 3",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "BALISES SYNCHRONISÉES · 04",
+      "en": "SYNCHRONIZED BEACONS · 04",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "BALISES SYNCHRONISÉES · 4",
+      "en": "SYNCHRONIZED BEACONS · 4",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "BALISES SYNCHRONISÉES · 05",
+      "en": "SYNCHRONIZED BEACONS · 05",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "BALISES SYNCHRONISÉES · 5",
+      "en": "SYNCHRONIZED BEACONS · 5",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "BALISES SYNCHRONISÉES · 06",
+      "en": "SYNCHRONIZED BEACONS · 06",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "BALISES SYNCHRONISÉES · 6",
+      "en": "SYNCHRONIZED BEACONS · 6",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "BALISES SYNCHRONISÉES · 07",
+      "en": "SYNCHRONIZED BEACONS · 07",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "BALISES SYNCHRONISÉES · 7",
+      "en": "SYNCHRONIZED BEACONS · 7",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "BALISES SYNCHRONISÉES · 08",
+      "en": "SYNCHRONIZED BEACONS · 08",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "BALISES SYNCHRONISÉES · 8",
+      "en": "SYNCHRONIZED BEACONS · 8",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Maintenez E près d’un caisson, rapportez-le au dépôt et maintenez E pour le livrer. Transportez un seul caisson à la fois, puis rejoignez le sas.",
+      "en": "Hold E near a crate, bring it to the depot, then hold E to deliver it. Carry one crate at a time, then reach the airlock.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RÉCUPÉRATION DE CAISSONS · 01",
+      "en": "CRATE RECOVERY · 01",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RÉCUPÉRATION DE CAISSONS · 1",
+      "en": "CRATE RECOVERY · 1",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RÉCUPÉRATION DE CAISSONS · 02",
+      "en": "CRATE RECOVERY · 02",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RÉCUPÉRATION DE CAISSONS · 2",
+      "en": "CRATE RECOVERY · 2",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RÉCUPÉRATION DE CAISSONS · 03",
+      "en": "CRATE RECOVERY · 03",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RÉCUPÉRATION DE CAISSONS · 3",
+      "en": "CRATE RECOVERY · 3",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RÉCUPÉRATION DE CAISSONS · 04",
+      "en": "CRATE RECOVERY · 04",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RÉCUPÉRATION DE CAISSONS · 4",
+      "en": "CRATE RECOVERY · 4",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RÉCUPÉRATION DE CAISSONS · 05",
+      "en": "CRATE RECOVERY · 05",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RÉCUPÉRATION DE CAISSONS · 5",
+      "en": "CRATE RECOVERY · 5",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RÉCUPÉRATION DE CAISSONS · 06",
+      "en": "CRATE RECOVERY · 06",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RÉCUPÉRATION DE CAISSONS · 6",
+      "en": "CRATE RECOVERY · 6",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RÉCUPÉRATION DE CAISSONS · 07",
+      "en": "CRATE RECOVERY · 07",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RÉCUPÉRATION DE CAISSONS · 7",
+      "en": "CRATE RECOVERY · 7",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RÉCUPÉRATION DE CAISSONS · 08",
+      "en": "CRATE RECOVERY · 08",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RÉCUPÉRATION DE CAISSONS · 8",
+      "en": "CRATE RECOVERY · 8",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "OPÉRATIONS",
+      "en": "OPERATIONS",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Objectifs de terrain, escorte, relais, purge, balises et extraction.",
+      "en": "Field objectives, escort, relays, purge, beacons and extraction.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Maintenir pour interagir avec l’objectif",
+      "en": "Hold to interact with the objective",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "E · INTERAGIR",
+      "en": "E · INTERACT",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "CAISSON EN TRANSIT",
+      "en": "CRATE IN TRANSIT",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "OBJECTIF ATTEINT",
+      "en": "OBJECTIVE COMPLETE",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "OBJECTIF PERDU",
+      "en": "OBJECTIVE LOST",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Objectifs validés.",
+      "en": "Objectives complete.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Évaluation interrompue.",
+      "en": "Evaluation interrupted.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "INTERACTION AU SOL · E / L3 / TACTILE",
+      "en": "GROUNDED INTERACTION · E / L3 / TOUCH",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Maintenez E, L3 ou INTERAGIR au contact de la cible indiquée.",
+      "en": "Hold E, L3 or INTERACT next to the indicated target.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "La réussite dépend de l’objectif, même si des contacts restent actifs.",
+      "en": "Success depends on the objective, even if contacts remain active.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "MIRE / OPÉRATION DE TERRAIN",
+      "en": "MIRE / FIELD OPERATION",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "OPÉRATION / OBJECTIF DE TERRAIN",
+      "en": "OPERATION / FIELD OBJECTIVE",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "ENGAGER L’OPÉRATION",
+      "en": "BEGIN OPERATION",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "REPRENDRE L’OPÉRATION CONSERVÉE",
+      "en": "RESUME SAVED OPERATION",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "RECOMMENCER L’OPÉRATION SAUVEGARDÉE",
+      "en": "RESTART SAVED OPERATION",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "CONTACTS DE TERRAIN",
+      "en": "FIELD CONTACTS",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Objectifs validés",
+      "en": "Completed objectives",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Progression de l’objectif",
+      "en": "Objective progress",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "REPRISE CONSERVÉE · OBJECTIFS ET DANGERS ENREGISTRÉS",
+      "en": "CHECKPOINT SAVED · OBJECTIVES AND HAZARDS RECORDED",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Reprise de l’opération conservée. Reprenez avec P, Start ou le bouton Reprendre.",
+      "en": "Operation checkpoint saved. Resume with P, Start or the Resume button.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "E / L3 / INTERAGIR : maintenez au sol près de la cible indiquée. Évitez les zones de danger annoncées avant leur activation.",
+      "en": "E / L3 / INTERACT: hold while grounded near the indicated target. Leave marked hazard zones before they activate.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "DANGER ANNONCÉ",
+      "en": "HAZARD WARNING",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "DANGER ACTIF",
+      "en": "HAZARD ACTIVE",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Quittez la zone balisée.",
+      "en": "Leave the marked zone.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "DÉCHARGE DE VAPEUR",
+      "en": "STEAM DISCHARGE",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "ARC ÉLECTRIQUE",
+      "en": "ELECTRICAL ARC",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "CHUTE DE DÉBRIS",
+      "en": "FALLING DEBRIS",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "FUITE CORROSIVE",
+      "en": "CORROSIVE LEAK",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "PURGE CRYOGÉNIQUE",
+      "en": "CRYOGENIC PURGE",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Quittez le conduit balisé avant la décharge.",
+      "en": "Leave the marked duct before discharge.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Sautez la bande au sol ou attendez hors de sa portée.",
+      "en": "Jump over the ground strip or wait outside its reach.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Dégagez la zone de chute balisée.",
+      "en": "Leave the marked fall zone.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Évitez la fuite au sol ; une issue reste libre.",
+      "en": "Avoid the leak on the floor; an escape remains open.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Franchissez la purge après le signal.",
+      "en": "Cross the purge after the signal.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Chariot de confinement",
+      "en": "Containment trolley",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Dépôt de récupération",
+      "en": "Recovery depot",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Sas d’extraction",
+      "en": "Extraction airlock",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "MAINTENEZ INTERAGIR",
+      "en": "HOLD INTERACT",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Rejoignez le sas.",
+      "en": "Reach the airlock.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "ESCORTE",
+      "en": "ESCORT",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "PURGE",
+      "en": "PURGE",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "EXTRACTION",
+      "en": "EXTRACTION",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "03 · OPÉRATION",
+      "en": "03 · OPERATION",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "← Chariot de confinement",
+      "en": "← Containment trolley",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Chariot de confinement →",
+      "en": "Containment trolley →",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "← Dépôt de récupération",
+      "en": "← Recovery depot",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Dépôt de récupération →",
+      "en": "Recovery depot →",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "← Sas d’extraction",
+      "en": "← Extraction airlock",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Sas d’extraction →",
+      "en": "Extraction airlock →",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Escorter, rétablir les relais, purger, synchroniser et extraire sous pression.",
+      "en": "Escort, restore relays, purge, synchronize and extract under pressure.",
+      "source": "src/xeno-trials-modes-v119.js"
+    },
+    {
+      "fr": "Maintenez E près du chariot et accompagnez-le jusqu’au sas. Sa progression s’arrête dès que vous vous éloignez. Les ennemis proches endommagent le chariot. Maintenez E, L3 ou INTERAGIR au contact de la cible indiquée. La réussite dépend de l’objectif, même si des contacts restent actifs.",
+      "en": "Hold E near the trolley and accompany it to the airlock. It stops moving when you move away. Nearby enemies damage the trolley. Hold E, L3 or INTERACT next to the indicated target. Success depends on the objective, even if contacts remain active.",
+      "source": "src/xeno-trials-operation-presentation-v188.js"
+    },
+    {
+      "fr": "Ralliez les trois relais dans l’ordre indiqué et maintenez E pour les charger. Quitter une charge inachevée la fait redescendre. Maintenez E, L3 ou INTERAGIR au contact de la cible indiquée. La réussite dépend de l’objectif, même si des contacts restent actifs.",
+      "en": "Reach the three relays in the indicated order and hold E to charge them. An unfinished charge drains when you leave. Hold E, L3 or INTERACT next to the indicated target. Success depends on the objective, even if contacts remain active.",
+      "source": "src/xeno-trials-operation-presentation-v188.js"
+    },
+    {
+      "fr": "Maintenez E près des conduits pour les purger et les sceller. Les foyers inachevés se régénèrent ; chaque foyer ouvert affaiblit le confinement. Maintenez E, L3 ou INTERAGIR au contact de la cible indiquée. La réussite dépend de l’objectif, même si des contacts restent actifs.",
+      "en": "Hold E near the ducts to purge and seal them. Unfinished sources regenerate; each open source weakens containment. Hold E, L3 or INTERACT next to the indicated target. Success depends on the objective, even if contacts remain active.",
+      "source": "src/xeno-trials-operation-presentation-v188.js"
+    },
+    {
+      "fr": "Maintenez E près d’une balise pendant sa fenêtre verte. Une charge inachevée retombe hors de cette fenêtre. Synchronisez les trois balises. Maintenez E, L3 ou INTERAGIR au contact de la cible indiquée. La réussite dépend de l’objectif, même si des contacts restent actifs.",
+      "en": "Hold E near a beacon during its green window. An unfinished charge drains outside that window. Synchronize all three beacons. Hold E, L3 or INTERACT next to the indicated target. Success depends on the objective, even if contacts remain active.",
+      "source": "src/xeno-trials-operation-presentation-v188.js"
+    },
+    {
+      "fr": "Maintenez E près d’un caisson, rapportez-le au dépôt et maintenez E pour le livrer. Transportez un seul caisson à la fois, puis rejoignez le sas. Maintenez E, L3 ou INTERAGIR au contact de la cible indiquée. La réussite dépend de l’objectif, même si des contacts restent actifs.",
+      "en": "Hold E near a crate, bring it to the depot, then hold E to deliver it. Carry one crate at a time, then reach the airlock. Hold E, L3 or INTERACT next to the indicated target. Success depends on the objective, even if contacts remain active.",
+      "source": "src/xeno-trials-operation-presentation-v188.js"
+    },
+    {
+      "fr": "Évaluation interrompue : Spécimen neutralisé.",
+      "en": "Evaluation interrupted: Specimen incapacitated.",
+      "source": "src/xeno-trials-operations-v188.js"
+    },
+    {
+      "fr": "Évaluation interrompue : Temps écoulé.",
+      "en": "Evaluation interrupted: Time expired.",
+      "source": "src/xeno-trials-operations-v188.js"
+    },
+    {
+      "fr": "Évaluation interrompue : Intégrité épuisée.",
+      "en": "Evaluation interrupted: Integrity depleted.",
+      "source": "src/xeno-trials-operations-v188.js"
+    }
+  ],
+  "patterns": [
+    {
+      "fr": "Relais {0}",
+      "en": "Relay {0}",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "← Relais {0}",
+      "en": "← Relay {0}",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Relais {0} →",
+      "en": "Relay {0} →",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Conduit {0}",
+      "en": "Duct {0}",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "← Conduit {0}",
+      "en": "← Duct {0}",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Conduit {0} →",
+      "en": "Duct {0} →",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Balise {0}",
+      "en": "Beacon {0}",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "← Balise {0}",
+      "en": "← Beacon {0}",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Balise {0} →",
+      "en": "Beacon {0} →",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Caisson {0}",
+      "en": "Crate {0}",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "← Caisson {0}",
+      "en": "← Crate {0}",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "Caisson {0} →",
+      "en": "Crate {0} →",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "{0} OPÉRATIONS / OBJECTIFS PHYSIQUES / DANGERS DE TERRAIN",
+      "en": "{0} OPERATIONS / PHYSICAL OBJECTIVES / FIELD HAZARDS",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "INTÉGRITÉ {0} / 100",
+      "en": "INTEGRITY {0} / 100",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "{0}/{1} objectifs validés",
+      "en": "{0}/{1} objectives complete",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "{0}/{1} caissons livrés",
+      "en": "{0}/{1} crates delivered",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "{0} · MAINTENEZ INTERAGIR",
+      "en": "{0} · HOLD INTERACT",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "{0} · maintenez E à proximité.",
+      "en": "{0} · hold E nearby.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "{0} · maintenez E à proximité pendant la fenêtre verte.",
+      "en": "{0} · hold E nearby during the green window.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-operations-v188.js; src/xeno-trials-operation-presentation-v188.js; src/xeno-trials-stage-hazards-v188.js"
+    },
+    {
+      "fr": "OPÉRATION ACTIVE · {0} · {1}/{2} objectifs validés",
+      "en": "ACTIVE OPERATION · {0} · {1}/{2} objectives complete",
+      "source": "src/xeno-trials-runtime-v96.js:statusText; src/xeno-trials-operation-presentation-v188.js:getXenoTrialsOperationHudV188"
+    },
+    {
+      "fr": "OPÉRATION ACTIVE · {0} · {1}/{2} caissons livrés",
+      "en": "ACTIVE OPERATION · {0} · {1}/{2} crates delivered",
+      "source": "src/xeno-trials-runtime-v96.js:statusText; src/xeno-trials-operation-presentation-v188.js:getXenoTrialsOperationHudV188"
+    },
+    {
+      "fr": "PAUSE · {0} · {1}/{2} objectifs validés",
+      "en": "PAUSE · {0} · {1}/{2} objectives complete",
+      "source": "src/xeno-trials-runtime-v96.js:statusText; src/xeno-trials-operation-presentation-v188.js:getXenoTrialsOperationHudV188"
+    },
+    {
+      "fr": "PAUSE · {0} · {1}/{2} caissons livrés",
+      "en": "PAUSE · {0} · {1}/{2} crates delivered",
+      "source": "src/xeno-trials-runtime-v96.js:statusText; src/xeno-trials-operation-presentation-v188.js:getXenoTrialsOperationHudV188"
+    },
+    {
+      "fr": "OBJECTIF ATTEINT · {0} · {1}/{2} objectifs validés",
+      "en": "OBJECTIVE COMPLETE · {0} · {1}/{2} objectives complete",
+      "source": "src/xeno-trials-runtime-v96.js:statusText; src/xeno-trials-operation-presentation-v188.js:getXenoTrialsOperationHudV188"
+    },
+    {
+      "fr": "OBJECTIF ATTEINT · {0} · {1}/{2} caissons livrés",
+      "en": "OBJECTIVE COMPLETE · {0} · {1}/{2} crates delivered",
+      "source": "src/xeno-trials-runtime-v96.js:statusText; src/xeno-trials-operation-presentation-v188.js:getXenoTrialsOperationHudV188"
+    },
+    {
+      "fr": "OBJECTIF PERDU · {0} · {1}/{2} objectifs validés",
+      "en": "OBJECTIVE LOST · {0} · {1}/{2} objectives complete",
+      "source": "src/xeno-trials-runtime-v96.js:statusText; src/xeno-trials-operation-presentation-v188.js:getXenoTrialsOperationHudV188"
+    },
+    {
+      "fr": "OBJECTIF PERDU · {0} · {1}/{2} caissons livrés",
+      "en": "OBJECTIVE LOST · {0} · {1}/{2} crates delivered",
+      "source": "src/xeno-trials-runtime-v96.js:statusText; src/xeno-trials-operation-presentation-v188.js:getXenoTrialsOperationHudV188"
+    },
+    {
+      "fr": "CAISSON EN TRANSIT · {0} · {1}/{2} caissons livrés",
+      "en": "CRATE IN TRANSIT · {0} · {1}/{2} crates delivered",
+      "source": "src/xeno-trials-runtime-v96.js:statusText; src/xeno-trials-operation-presentation-v188.js:getXenoTrialsOperationHudV188"
+    },
+    {
+      "fr": "OPÉRATION ACTIVE · {0} · MAINTENEZ INTERAGIR · {1}/{2} objectifs validés",
+      "en": "ACTIVE OPERATION · {0} · HOLD INTERACT · {1}/{2} objectives complete",
+      "source": "src/xeno-trials-runtime-v96.js:statusText; src/xeno-trials-operation-presentation-v188.js:contact instruction"
+    },
+    {
+      "fr": "OPÉRATION ACTIVE · {0} · MAINTENEZ INTERAGIR · {1}/{2} caissons livrés",
+      "en": "ACTIVE OPERATION · {0} · HOLD INTERACT · {1}/{2} crates delivered",
+      "source": "src/xeno-trials-runtime-v96.js:statusText; src/xeno-trials-operation-presentation-v188.js:contact instruction"
+    },
+    {
+      "fr": "PAUSE · {0} · MAINTENEZ INTERAGIR · {1}/{2} objectifs validés",
+      "en": "PAUSE · {0} · HOLD INTERACT · {1}/{2} objectives complete",
+      "source": "src/xeno-trials-runtime-v96.js:statusText; src/xeno-trials-operation-presentation-v188.js:contact instruction"
+    },
+    {
+      "fr": "PAUSE · {0} · MAINTENEZ INTERAGIR · {1}/{2} caissons livrés",
+      "en": "PAUSE · {0} · HOLD INTERACT · {1}/{2} crates delivered",
+      "source": "src/xeno-trials-runtime-v96.js:statusText; src/xeno-trials-operation-presentation-v188.js:contact instruction"
+    },
+    {
+      "fr": "OBJECTIF ATTEINT · {0} · MAINTENEZ INTERAGIR · {1}/{2} objectifs validés",
+      "en": "OBJECTIVE COMPLETE · {0} · HOLD INTERACT · {1}/{2} objectives complete",
+      "source": "src/xeno-trials-runtime-v96.js:statusText; src/xeno-trials-operation-presentation-v188.js:contact instruction"
+    },
+    {
+      "fr": "OBJECTIF ATTEINT · {0} · MAINTENEZ INTERAGIR · {1}/{2} caissons livrés",
+      "en": "OBJECTIVE COMPLETE · {0} · HOLD INTERACT · {1}/{2} crates delivered",
+      "source": "src/xeno-trials-runtime-v96.js:statusText; src/xeno-trials-operation-presentation-v188.js:contact instruction"
+    },
+    {
+      "fr": "OBJECTIF PERDU · {0} · MAINTENEZ INTERAGIR · {1}/{2} objectifs validés",
+      "en": "OBJECTIVE LOST · {0} · HOLD INTERACT · {1}/{2} objectives complete",
+      "source": "src/xeno-trials-runtime-v96.js:statusText; src/xeno-trials-operation-presentation-v188.js:contact instruction"
+    },
+    {
+      "fr": "OBJECTIF PERDU · {0} · MAINTENEZ INTERAGIR · {1}/{2} caissons livrés",
+      "en": "OBJECTIVE LOST · {0} · HOLD INTERACT · {1}/{2} crates delivered",
+      "source": "src/xeno-trials-runtime-v96.js:statusText; src/xeno-trials-operation-presentation-v188.js:contact instruction"
+    },
+    {
+      "fr": "CAISSON EN TRANSIT · {0} · MAINTENEZ INTERAGIR · {1}/{2} caissons livrés",
+      "en": "CRATE IN TRANSIT · {0} · HOLD INTERACT · {1}/{2} crates delivered",
+      "source": "src/xeno-trials-runtime-v96.js:statusText; src/xeno-trials-operation-presentation-v188.js:contact instruction"
+    }
+  ]
+}

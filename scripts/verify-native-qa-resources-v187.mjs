@@ -1,4 +1,4 @@
-import { TANTALUS_PRIORITIES_LEAD_CONTINUATION_V188 } from './audit-tantalus-priorities-v188.mjs';
+import { TANTALUS_PRIORITIES_LEAD_CONTINUATION_V188, TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188 } from './audit-tantalus-priorities-v188.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -64,13 +64,16 @@ test('V187 continues the exact V180 dependency guard instead of removing its imm
   assert.ok(Object.isFrozen(NATIVE_QA_DEPENDENCY_GUARD_SUCCESSOR_V187));
 });
 
-test('V187 workflow changes only the explicit crew-lifts resource selection and keeps the 55 minute job', () => {
+test('V187 resource selection and 55 minute job survive the exact V190 complete-history checkout addition', () => {
   const path = '.github/workflows/non-forge-regression-v163.yml';
   const workflow = read(path).toString();
   const option = ' --dependency-resource-profile ci-slow4';
   assert.equal(workflow.split(option).length - 1, 1);
-  assert.equal(sha(workflow.replace(option, '')), NATIVE_QA_RESOURCES_SUCCESSORS_V187[path].previousSha256,
-    'This receipt covers precisely one CLI selection, with no other workflow changes.');
+  const sourceHistoryOption = '          fetch-depth: 0\n';
+  assert.equal(workflow.split(sourceHistoryOption).length - 1, 1, 'V190 admits exactly one complete-history checkout option.');
+  const historicalWorkflow = workflow.replace(sourceHistoryOption, '');
+  assert.equal(sha(historicalWorkflow.replace(option, '')), NATIVE_QA_RESOURCES_SUCCESSORS_V187[path].previousSha256,
+    'The V187 historical receipt still covers precisely one CLI selection; V190 separately admits only the complete-history checkout option.');
   assert.match(workflow.match(/crew-lifts\)[\s\S]*?;;/)[0], /--dependency-resource-profile ci-slow4/);
   assert.match(workflow, /^    timeout-minutes: 55$/m);
 });
@@ -85,8 +88,15 @@ test('V187 audit and documentation stay source-only and the new audit test enter
     'docs/development/NATIVE_QA_UNREVIEWED_V187.md']) assert.equal(isPublicDistributionPathV86(path), false);
   const files = collectReleaseTestsV143(JSON.parse(read('package.json')).scripts);
   assert.equal(files.filter(path => path === 'scripts/verify-native-qa-resources-v187.mjs').length, 1);
-  const terminal = read('scripts/audit-tantalus-priorities-v188.mjs').toString();
-  assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(terminal), false);
+  const relay = read('scripts/audit-native-qa-resources-v187.mjs').toString();
+  assert.match(relay, /from '\.\/audit-xeno-trials-completion-v186\.mjs'/);
+  assert.match(relay, /from '\.\/audit-tantalus-priorities-v188\.mjs'/);
+  assert.match(read('scripts/audit-xeno-trials-completion-v186.mjs').toString(), /from '\.\/audit-xeno-stage-operations-v188\.mjs'/);
+  // After the Xeno Trials merge V187 continues into two chains; each terminal imports no audit.
+  for (const terminalPath of ['scripts/audit-tantalus-priorities-v188.mjs', 'scripts/audit-xeno-production-assets-v206.mjs']) {
+    const terminal = read(terminalPath).toString();
+    assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(terminal), false);
+  }
   assert.equal(Object.hasOwn(NATIVE_QA_RESOURCES_SUCCESSORS_V187, 'scripts/audit-native-qa-resources-v187.mjs'), false);
   assert.equal(Object.keys(NATIVE_QA_RESOURCES_SUCCESSORS_V187).some(path => path.startsWith('src/')), false);
 });
@@ -122,10 +132,45 @@ test('Obscura continues the exact V187 verifier endpoint and refuses arbitrary p
   assert.equal(receipt.previousSha256, NATIVE_QA_RESOURCES_SUCCESSORS_V187[receipt.path].currentSha256);
   assert.equal(reviewedObscuraDigest20261115(receipt.path, receipt.previousSha256), receipt.currentSha256);
   // On the Tantalus branch the verifier also carries the V188 work: the lead continuation (after b6e01ef1)
-  // reviews the merged bytes; on main the Obscura endpoint is the file itself.
+  // reviews the main-merge bytes, then the Xeno Trials join (after 0d1d9950) reviews the merged bytes;
+  // on main the Obscura endpoint is the file itself.
   const lead = TANTALUS_PRIORITIES_LEAD_CONTINUATION_V188.successors[receipt.path];
-  assert.equal(sha(read(receipt.path)), lead ? lead.currentSha256 : receipt.currentSha256);
+  const join = Object.hasOwn(TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors, receipt.path)
+    ? TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors[receipt.path] : null;
+  if (join) assert.equal(join.previousSha256, lead ? lead.currentSha256 : receipt.currentSha256);
+  assert.equal(sha(read(receipt.path)), join ? join.currentSha256 : lead ? lead.currentSha256 : receipt.currentSha256);
   for (const forged of ['0'.repeat(64), receipt.currentSha256])
     assert.throws(() => reviewedObscuraDigest20261115(receipt.path, forged), /Broken V187-to-Obscura source chain/);
   assert.equal(reviewedObscuraDigest20261115('src/unreviewed.js', 'unchanged'), 'unchanged');
+});
+
+test('The Xeno Trials join resolves both V187 successor chains to the same merged bytes and refuses forged links', async () => {
+  const { reviewedAfterNativeQaResourcesV187 } = await import('./audit-native-qa-resources-v187.mjs');
+  const { reviewedCompletionDigestV186 } = await import('./audit-xeno-trials-completion-v186.mjs');
+  const { reviewedTantalusPrioritiesDigestV188, verifyTantalusPrioritiesV188 } = await import('./audit-tantalus-priorities-v188.mjs');
+  const { XENO_TRIALS_TANTALUS_JOIN_V206, reviewedXenoTrialsTantalusJoinV206, verifyXenoTrialsTantalusJoinV206 } =
+    await import('./audit-xeno-production-assets-v206.mjs');
+  const tantalusJoin = TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors, xenoJoin = XENO_TRIALS_TANTALUS_JOIN_V206.successors;
+  let shared = 0;
+  for (const [path, receipt] of Object.entries(NATIVE_QA_RESOURCES_SUCCESSORS_V187)) {
+    const xeno = reviewedCompletionDigestV186(path, receipt.currentSha256);
+    const tantalus = reviewedTantalusPrioritiesDigestV188(path, receipt.currentSha256);
+    if (xeno !== receipt.currentSha256 && tantalus !== receipt.currentSha256) { shared++; assert.equal(xeno, tantalus, path); }
+    assert.equal(reviewedAfterNativeQaResourcesV187(path, receipt.currentSha256), sha(read(path)), path);
+  }
+  assert.ok(shared > 0, 'at least one V187 successor is pinned by both chains');
+  assert.equal(reviewedAfterNativeQaResourcesV187('src/unreviewed.js', 'unchanged'), 'unchanged');
+  assert.deepEqual(Object.keys(verifyXenoTrialsTantalusJoinV206()).sort(), ['baselineCommit', 'successors']);
+  for (const [path, receipt] of Object.entries(xenoJoin)) {
+    assert.equal(sha(read(path)), receipt.currentSha256, path);
+    for (const forged of ['0'.repeat(64), receipt.currentSha256])
+      assert.throws(() => reviewedXenoTrialsTantalusJoinV206(path, forged), /Broken fa2d62fe-to-tantalus-join source chain/);
+  }
+  for (const [path, receipt] of Object.entries(tantalusJoin)) assert.equal(sha(read(path)), receipt.currentSha256, path);
+  const path = 'scripts/audit-native-qa-resources-v187.mjs';
+  assert.ok(Object.hasOwn(tantalusJoin, path) && Object.hasOwn(xenoJoin, path), 'the relay itself is reviewed on both chains');
+  const mutated = candidate => candidate === path ? Buffer.concat([read(candidate), Buffer.from('\n// unreviewed')]) : read(candidate);
+  assert.throws(() => verifyXenoTrialsTantalusJoinV206(mutated), /Unreviewed tantalus-join source bytes/);
+  assert.throws(() => verifyTantalusPrioritiesV188(mutated), /Unreviewed (?:V188|lead-continuation|xeno-trials-join) source bytes/);
+  assert.throws(() => reviewedTantalusPrioritiesDigestV188(path, tantalusJoin[path].currentSha256), /Broken .* source chain/);
 });

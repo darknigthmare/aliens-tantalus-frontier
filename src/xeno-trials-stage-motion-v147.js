@@ -1,12 +1,16 @@
-/** Original scenery for the six simulated arenas. Not film recreations.
+import { XENO_TRIALS_BOSS_STAGES_V179 } from './xeno-trials-boss-stages-v179.js';
+
+/** Original scenery for the simulated arenas. Not film recreations.
  * This module reads simulation time only: no wall clock, randomness, gameplay
  * collider, damage, reward or independent animation loop is introduced.
  */
-export const XENO_TRIALS_STAGE_MOTION_V147 = Object.freeze({
+const historicalMotion = Object.freeze({
   'containment-deck': 'pressure-monitors', 'reactor-ring': 'coolant-cycle',
   'hive-vault': 'resin-drops', 'tantalus-bridge': 'sensor-sweep',
   'tantalus-cargo': 'suspended-cables', 'planet-surface': 'windborne-dust'
 });
+export const XENO_TRIALS_STAGE_MOTION_V147 = Object.freeze({ ...historicalMotion,
+  ...Object.fromEntries(XENO_TRIALS_BOSS_STAGES_V179.map(stage => [stage.id, historicalMotion[stage.motionBaseStageId]])) });
 export function getXenoTrialsStageMotionV147(stageId, tick = 0, reducedMotion = false) {
   const kind = Object.hasOwn(XENO_TRIALS_STAGE_MOTION_V147, stageId) ? XENO_TRIALS_STAGE_MOTION_V147[stageId] : null;
   const time = reducedMotion || !Number.isFinite(tick) ? 0 : Math.max(0, tick) / 120;
@@ -84,11 +88,13 @@ export function drawXenoTrialsStageMotionV147(ctx, stage, camera, tick = 0, redu
 /** Phase-cued set dressing for the original simulated arenas, not source-film
  * choreography or fighter poses. R1 defeat remains recoverable; no terminal
  * event, organ change, collision, damage or reward can be emitted here. */
-export const XENO_TRIALS_STAGE_CUES_V149 = Object.freeze({
+const historicalCues = Object.freeze({
   'containment-deck': 'seal-indicators', 'reactor-ring': 'coolant-valves',
   'hive-vault': 'observation-filaments', 'tantalus-bridge': 'evaluation-monitors',
   'tantalus-cargo': 'bay-guides', 'planet-surface': 'perimeter-beacons'
 });
+export const XENO_TRIALS_STAGE_CUES_V149 = Object.freeze({ ...historicalCues,
+  ...Object.fromEntries(XENO_TRIALS_BOSS_STAGES_V179.map(stage => [stage.id, historicalCues[stage.motionBaseStageId]])) });
 const clampCue = value => Math.max(0, Math.min(1, value));
 export function getXenoTrialsStageCueV149(stageId, context = {}, reducedMotion = false) {
   const supported = Object.hasOwn(XENO_TRIALS_STAGE_CUES_V149, stageId);

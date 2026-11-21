@@ -7,6 +7,7 @@ import {
   TANTALUS_PRIORITIES_PROLOGUE_V188, TANTALUS_PRIORITIES_QUAY_V188, TANTALUS_PRIORITIES_CARGO_ABYSS_V188,
   TANTALUS_PRIORITIES_HADAL_V188, TANTALUS_PRIORITIES_BROODSTORM_V188, TANTALUS_PRIORITIES_QUEEN_MOTHER_V188,
   TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188, TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188, TANTALUS_PRIORITIES_LEAD_CONTINUATION_V188,
+  TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188,
   TANTALUS_PRIORITIES_SOURCE_ONLY_PATHS_V188, reviewedTantalusPrioritiesDigestV188,
   verifyTantalusPrioritiesV188, TANTALUS_PRIORITIES_CARGO_REGISTRY_V188, verifyCargoRegistryContinuationV188,
   TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188, verifyBroodstormRegistryContinuationV188,
@@ -27,8 +28,14 @@ const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const bOperations = operations.map(operation => ({ ...operation, remainingMechanics: operation.id === 'queen-mother-song'
   ? ['dedicated-queen-mother-animation', 'complete-royal-cast'] : [...operation.remainingMechanics] }));
 
-// The lead continuation (after b6e01ef1) is the last link: an endpoint it reviews maps to the current bytes.
-const leadEndV188 = (path, digest) => { const r = TANTALUS_PRIORITIES_LEAD_CONTINUATION_V188.successors[path]; return r && r.previousSha256 === digest ? r.currentSha256 : digest; };
+// The lead continuation (after b6e01ef1) and then the Xeno Trials join (after 0d1d9950) are the last
+// links: an endpoint they review maps to the current merged bytes.
+const leadEndV188 = (path, digest) => {
+  const r = TANTALUS_PRIORITIES_LEAD_CONTINUATION_V188.successors[path];
+  const lead = r && r.previousSha256 === digest ? r.currentSha256 : digest;
+  const j = Object.hasOwn(TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors, path) ? TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors[path] : null;
+  return j && j.previousSha256 === lead ? j.currentSha256 : lead;
+};
 
 test('V188 registry continuation closes only the Cargo art debt and rejects neighboring promotions', () => {
   // Cargo remains tested on H, after restoring the later Queen Mother and
@@ -837,12 +844,13 @@ test('Queen Mother guard terminal rejects false Q links, invented births and any
   const path = 'src/game-production-runtime.js', notice = 'scripts/verify-queen-mother-art-v188.mjs';
   for (const [reason, mutate, error] of [
     ['false Q predecessor', receipt => { receipt.successors[path].previousSha256 = '0'.repeat(64); }, /Broken historical-to-c1d4c636/],
-    ['unreviewed R endpoint', receipt => { receipt.successors[path].currentSha256 = '0'.repeat(64); }, /Unreviewed V188 source bytes/],
+    // The 0d1d9950 Xeno Trials join reviews this runtime file, so a forged R endpoint is now refused at that link.
+    ['unreviewed R endpoint', receipt => { receipt.successors[path].currentSha256 = '0'.repeat(64); }, /Unreviewed V188 source bytes|Broken 0d1d9950-to-xeno-trials-join source chain/],
     ['unchanged ordinary successor', receipt => { receipt.successors[path].currentSha256 = receipt.successors[path].previousSha256; }, /must identify changed bytes/],
     ['ordinary successor duplicated as new', receipt => { receipt.addedSources[path] = receipt.successors[path].currentSha256; }, /A new V188 source cannot replace a successor/],
     ['ordinary successor disguised as new', receipt => {
       receipt.addedSources[path] = receipt.successors[path].currentSha256; delete receipt.successors[path];
-    }, /Unreviewed V188 source bytes/],
+    }, /Unreviewed V188 source bytes|Broken 0d1d9950-to-xeno-trials-join source chain/],
     ['false Q test birth', receipt => { receipt.addedSourceSuccessors[notice].previousSha256 = '0'.repeat(64); }, /Broken Q added-source predecessor/],
     ['unreviewed Q test endpoint', receipt => { receipt.addedSourceSuccessors[notice].currentSha256 = '0'.repeat(64); }, /Unreviewed V188 source bytes/],
     ['unchanged Q test successor', receipt => { receipt.addedSourceSuccessors[notice].currentSha256 = receipt.addedSourceSuccessors[notice].previousSha256; }, /must identify changed bytes/],

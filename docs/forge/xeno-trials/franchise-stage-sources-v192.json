@@ -1,0 +1,2312 @@
+{
+  "lot": "XENO-FRANCHISE-STAGES-50-V192",
+  "baseCommit": "0e9843808823a9ce9da73e5b2effeefa1ee51f26",
+  "selectedLocations": 50,
+  "distribution": {
+    "film": 15,
+    "series": 5,
+    "game": 15,
+    "comic": 8,
+    "novel": 7
+  },
+  "evidencePolicy": "Official accessible overview pages corroborate works only within their actual scope. Unavailable secondary pages are recorded as unavailable, never as reviewed primary imagery. All lateral geometry, colors and stage events are project adaptations; no measured1:1 fidelity is claimed.",
+  "stages": [
+    {
+      "id": "xt192-nostromo-galley",
+      "titleFr": "Nostromo / Réfectoire",
+      "titleEn": "Nostromo / Galley",
+      "media": "films",
+      "work": "Alien (1979)",
+      "location": "USCSS Nostromo",
+      "visualBriefFr": "Tables centrales, sièges fixés au sol, panneaux ivoire de vaisseau de travail, lumière pratique froide, accès étroits.",
+      "events": [
+        "airlock-cycle",
+        "coolant-plume"
+      ],
+      "references": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/alien",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "Readable official page supports the quoted work context only. Specific room geometry, framing, materials, colors and event timing remain unmeasured project adaptations.",
+          "contentAccess": "READABLE",
+          "bodySha256": "41811d3aadb0305d78b97df92159cea97e8c8af5c8ce583a3b42c5dbec5b832a",
+          "bodyBytes": 847060,
+          "retrievedAt": "2026-11-13T15:25:49.379071+00:00",
+          "evidenceFile": "sources/849b46a867d0ac75.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "officialContextSummary": "The official synopsis identifies the Nostromo as a mineral tug whose crew investigates a transmission. It does not establish any of the proposed room geometry."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Alien",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.503941+00:00",
+          "evidenceFile": "sources/34c4a98a4fe5edee.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "USCSS Nostromo — Alien (1979)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-nostromo-chain-room",
+      "titleFr": "Nostromo / Salle des chaînes",
+      "titleEn": "Nostromo / Chain Room",
+      "media": "films",
+      "work": "Alien (1979)",
+      "location": "USCSS Nostromo",
+      "visualBriefFr": "Haute salle industrielle sombre, chaînes de levage suspendues, caillebotis humides et conduites; volumes de machinerie, condensation.",
+      "events": [
+        "freight-transit",
+        "water-drip"
+      ],
+      "references": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/alien",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "Readable official page supports the quoted work context only. Specific room geometry, framing, materials, colors and event timing remain unmeasured project adaptations.",
+          "contentAccess": "READABLE",
+          "bodySha256": "41811d3aadb0305d78b97df92159cea97e8c8af5c8ce583a3b42c5dbec5b832a",
+          "bodyBytes": 847060,
+          "retrievedAt": "2026-11-13T15:25:49.379071+00:00",
+          "evidenceFile": "sources/849b46a867d0ac75.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "officialContextSummary": "The official synopsis identifies the Nostromo as a mineral tug whose crew investigates a transmission. It does not establish any of the proposed room geometry."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Alien",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.503941+00:00",
+          "evidenceFile": "sources/34c4a98a4fe5edee.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "USCSS Nostromo — Alien (1979)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-lv426-derelict-pilot",
+      "titleFr": "LV-426 / Chambre du pilote",
+      "titleEn": "LV-426 / Pilot Chamber",
+      "media": "films",
+      "work": "Alien (1979)",
+      "location": "Épave Derelict de LV-426",
+      "visualBriefFr": "Architecture biomécanique nervurée monumentale, siège du pilote fossilisé au fond, voûtes organiques et lumière bleu-gris; sol adapté en galerie latérale.",
+      "events": [
+        "ash-drift",
+        "storm-front"
+      ],
+      "references": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/alien",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "Readable official page supports the quoted work context only. Specific room geometry, framing, materials, colors and event timing remain unmeasured project adaptations.",
+          "contentAccess": "READABLE",
+          "bodySha256": "41811d3aadb0305d78b97df92159cea97e8c8af5c8ce583a3b42c5dbec5b832a",
+          "bodyBytes": 847060,
+          "retrievedAt": "2026-11-13T15:25:49.379071+00:00",
+          "evidenceFile": "sources/849b46a867d0ac75.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "officialContextSummary": "The official synopsis identifies the Nostromo as a mineral tug whose crew investigates a transmission. It does not establish any of the proposed room geometry."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Alien",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.503941+00:00",
+          "evidenceFile": "sources/34c4a98a4fe5edee.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Épave Derelict de LV-426 — Alien (1979)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-hadleys-hope-street",
+      "titleFr": "Hadley’s Hope / Rue de la colonie",
+      "titleEn": "Hadley’s Hope / Colony Street",
+      "media": "films",
+      "work": "Aliens (1986)",
+      "location": "Hadley’s Hope, LV-426",
+      "visualBriefFr": "Modules coloniaux utilitaires, coursive de liaison et baie de véhicules, enseignes non nécessaires, chaussée mouillée, ciel de tempête.",
+      "events": [
+        "rain-curtain",
+        "searchlight-sweep"
+      ],
+      "references": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/aliens",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "Readable official page supports the quoted work context only. Specific room geometry, framing, materials, colors and event timing remain unmeasured project adaptations.",
+          "contentAccess": "READABLE",
+          "bodySha256": "16b850367fce3f873a3c428092f78c61314f59c3f0bb22e965f98fefea3f58fd",
+          "bodyBytes": 860444,
+          "retrievedAt": "2026-11-13T15:25:49.634527+00:00",
+          "evidenceFile": "sources/7b37c90f218277b3.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "officialContextSummary": "The official product synopsis describes Ripley’s return to the alien threat. Room-level stage composition is not verified by that copy."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Aliens",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.623131+00:00",
+          "evidenceFile": "sources/68205792659f9889.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Hadley’s Hope, LV-426 — Aliens (1986)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-lv426-atmosphere-hive",
+      "titleFr": "LV-426 / Ruche du processeur",
+      "titleEn": "LV-426 / Processor Hive",
+      "media": "films",
+      "work": "Aliens (1986)",
+      "location": "Processeur atmosphérique de LV-426",
+      "visualBriefFr": "Ossature du processeur industriel envahie de résine noire, tuyaux et passerelles, masses de ruche en profondeur, lumière ambre filtrée et vapeur.",
+      "events": [
+        "hive-movement",
+        "water-drip"
+      ],
+      "references": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/aliens",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "Readable official page supports the quoted work context only. Specific room geometry, framing, materials, colors and event timing remain unmeasured project adaptations.",
+          "contentAccess": "READABLE",
+          "bodySha256": "16b850367fce3f873a3c428092f78c61314f59c3f0bb22e965f98fefea3f58fd",
+          "bodyBytes": 860444,
+          "retrievedAt": "2026-11-13T15:25:49.634527+00:00",
+          "evidenceFile": "sources/7b37c90f218277b3.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "officialContextSummary": "The official product synopsis describes Ripley’s return to the alien threat. Room-level stage composition is not verified by that copy."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Aliens",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.623131+00:00",
+          "evidenceFile": "sources/68205792659f9889.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Processeur atmosphérique de LV-426 — Aliens (1986)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-sulaco-hangar",
+      "titleFr": "Sulaco / Hangar des dropships",
+      "titleEn": "Sulaco / Dropship Hangar",
+      "media": "films",
+      "work": "Aliens (1986)",
+      "location": "USS Sulaco",
+      "visualBriefFr": "Grand hangar militaire sombre, berceaux et rails du dropship, structures de maintenance jaunes, portes et travées hautes; aucun pilote ou combat peint.",
+      "events": [
+        "freight-transit",
+        "airlock-cycle"
+      ],
+      "references": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/aliens",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "Readable official page supports the quoted work context only. Specific room geometry, framing, materials, colors and event timing remain unmeasured project adaptations.",
+          "contentAccess": "READABLE",
+          "bodySha256": "16b850367fce3f873a3c428092f78c61314f59c3f0bb22e965f98fefea3f58fd",
+          "bodyBytes": 860444,
+          "retrievedAt": "2026-11-13T15:25:49.634527+00:00",
+          "evidenceFile": "sources/7b37c90f218277b3.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "officialContextSummary": "The official product synopsis describes Ripley’s return to the alien threat. Room-level stage composition is not verified by that copy."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Aliens",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.623131+00:00",
+          "evidenceFile": "sources/68205792659f9889.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "USS Sulaco — Aliens (1986)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-fury161-leadworks",
+      "titleFr": "Fiorina 161 / Fonderie",
+      "titleEn": "Fiorina 161 / Leadworks",
+      "media": "films",
+      "work": "Alien³ (1992)",
+      "location": "Fiorina 161",
+      "visualBriefFr": "Fonderie carcérale rouillée, canaux de coulée, creuset de plomb en arrière-plan, charpente écrasante et lumière orangée de métal chauffé.",
+      "events": [
+        "furnace-embers",
+        "coolant-plume"
+      ],
+      "references": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/alien-3",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "Readable official page supports the quoted work context only. Specific room geometry, framing, materials, colors and event timing remain unmeasured project adaptations.",
+          "contentAccess": "READABLE",
+          "bodySha256": "e9d03a571ab2744e393918a0f4e5d8439b3b12cdbd7def8a046d7ac235d2c802",
+          "bodyBytes": 829594,
+          "retrievedAt": "2026-11-13T15:25:49.250955+00:00",
+          "evidenceFile": "sources/1422a4d9a03ea444.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "officialContextSummary": "The official synopsis places Ripley at a remote ore refinery after her crash. Furnace composition and floor dimensions are project adaptations."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Alien_3",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.549709+00:00",
+          "evidenceFile": "sources/e130770f0c8d31af.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Fiorina 161 — Alien³ (1992)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-auriga-clone-laboratory",
+      "titleFr": "Auriga / Laboratoire des clones",
+      "titleEn": "Auriga / Clone Laboratory",
+      "media": "films",
+      "work": "Alien Resurrection (1997)",
+      "location": "USM Auriga",
+      "visualBriefFr": "Laboratoire militaire biomédical, longues baies vitrées et cuves de prélèvements, surfaces métal pâle et éclairage froid clinique, machines en profondeur.",
+      "events": [
+        "containment-scan",
+        "archive-scan"
+      ],
+      "references": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/alien-resurrection",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "Readable official page supports the quoted work context only. Specific room geometry, framing, materials, colors and event timing remain unmeasured project adaptations.",
+          "contentAccess": "READABLE",
+          "bodySha256": "2a912718653cef38231ca71016a9a2bcb94a270a243d86fd8bec42d563fe0712",
+          "bodyBytes": 830040,
+          "retrievedAt": "2026-11-13T15:25:50.013301+00:00",
+          "evidenceFile": "sources/8424ba088cb2d8f6.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "officialContextSummary": "The official synopsis describes military scientists cloning Ripley and extracting a queen. It does not measure the Auriga rooms used in the stage briefs."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Alien_Resurrection",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.557350+00:00",
+          "evidenceFile": "sources/25f7597a1dcf5d5a.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "USM Auriga — Alien Resurrection (1997)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-auriga-flooded-galley",
+      "titleFr": "Auriga / Réfectoire inondé",
+      "titleEn": "Auriga / Flooded Galley",
+      "media": "films",
+      "work": "Alien Resurrection (1997)",
+      "location": "USM Auriga",
+      "visualBriefFr": "Salle de restauration noyée, structures de cuisine industrielles et panneaux submergés, perspective vert-bleu, particules et reflets; combat placé sur une passerelle de simulation adaptée.",
+      "events": [
+        "water-drip",
+        "reactor-conduit"
+      ],
+      "references": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/alien-resurrection",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "Readable official page supports the quoted work context only. Specific room geometry, framing, materials, colors and event timing remain unmeasured project adaptations.",
+          "contentAccess": "READABLE",
+          "bodySha256": "2a912718653cef38231ca71016a9a2bcb94a270a243d86fd8bec42d563fe0712",
+          "bodyBytes": 830040,
+          "retrievedAt": "2026-11-13T15:25:50.013301+00:00",
+          "evidenceFile": "sources/8424ba088cb2d8f6.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "officialContextSummary": "The official synopsis describes military scientists cloning Ripley and extracting a queen. It does not measure the Auriga rooms used in the stage briefs."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Alien_Resurrection",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.557350+00:00",
+          "evidenceFile": "sources/25f7597a1dcf5d5a.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "USM Auriga — Alien Resurrection (1997)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-lv223-orrery",
+      "titleFr": "LV-223 / Salle de navigation",
+      "titleEn": "LV-223 / Orrery",
+      "media": "films",
+      "work": "Prometheus (2012)",
+      "location": "Vaisseau des Ingénieurs sur LV-223",
+      "visualBriefFr": "Chambre de pilotage des Ingénieurs avec fauteuil central et côtes biomécaniques, sphères célestes holographiques discrètes au fond; ne pas saturer le plan de combat.",
+      "events": [
+        "archive-scan",
+        "bioluminescent-pulse"
+      ],
+      "references": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/prometheus",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "Readable official page supports the quoted work context only. Specific room geometry, framing, materials, colors and event timing remain unmeasured project adaptations.",
+          "contentAccess": "READABLE",
+          "bodySha256": "9eef83c4a48399de374f16d7ef1ad59d25297472036697b1aec42ae89a60e66d",
+          "bodyBytes": 761512,
+          "retrievedAt": "2026-11-13T15:25:49.823945+00:00",
+          "evidenceFile": "sources/77b053ff6e236cf1.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "officialContextSummary": "The official synopsis describes an expedition searching for humanity’s origins. The proposed Engineer rooms are curated from the work, with no frame measurement supplied."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Prometheus",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.743009+00:00",
+          "evidenceFile": "sources/709016faf4fb335b.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Vaisseau des Ingénieurs sur LV-223 — Prometheus (2012)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-lv223-ampule-chamber",
+      "titleFr": "LV-223 / Chambre des urnes",
+      "titleEn": "LV-223 / Ampule Chamber",
+      "media": "films",
+      "work": "Prometheus (2012)",
+      "location": "Installation des Ingénieurs sur LV-223",
+      "visualBriefFr": "Grande tête sculptée au fond, rangs d’urnes sombres, murs de pierre et métal organique, strates de poussière humide et lumière minérale froide.",
+      "events": [
+        "water-drip",
+        "spore-drift"
+      ],
+      "references": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/prometheus",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "Readable official page supports the quoted work context only. Specific room geometry, framing, materials, colors and event timing remain unmeasured project adaptations.",
+          "contentAccess": "READABLE",
+          "bodySha256": "9eef83c4a48399de374f16d7ef1ad59d25297472036697b1aec42ae89a60e66d",
+          "bodyBytes": 761512,
+          "retrievedAt": "2026-11-13T15:25:49.823945+00:00",
+          "evidenceFile": "sources/77b053ff6e236cf1.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "officialContextSummary": "The official synopsis describes an expedition searching for humanity’s origins. The proposed Engineer rooms are curated from the work, with no frame measurement supplied."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Prometheus",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.743009+00:00",
+          "evidenceFile": "sources/709016faf4fb335b.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Installation des Ingénieurs sur LV-223 — Prometheus (2012)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-planet4-necropolis",
+      "titleFr": "Planète 4 / Nécropole",
+      "titleEn": "Planet 4 / Necropolis",
+      "media": "films",
+      "work": "Alien: Covenant (2017)",
+      "location": "Cité des Ingénieurs, Planète 4",
+      "visualBriefFr": "Cité de pierre monumentale, arcades et tours, longue esplanade silencieuse, gris minéral avec faible lumière dorée; masses pétrifiées en silhouettes très lointaines sans gore.",
+      "events": [
+        "ash-drift",
+        "storm-front"
+      ],
+      "references": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/alien-covenant",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "Readable official page supports the quoted work context only. Specific room geometry, framing, materials, colors and event timing remain unmeasured project adaptations.",
+          "contentAccess": "READABLE",
+          "bodySha256": "ddaf6a7acd005c234b09afe851629bc64eb2f68310c7b6a7ef49d21938a96542",
+          "bodyBytes": 824181,
+          "retrievedAt": "2026-11-13T15:25:49.351066+00:00",
+          "evidenceFile": "sources/7283820c9f71323e.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "officialContextSummary": "The official synopsis describes a colony ship discovering a remote planet. These scene layouts and event timings are reconstructed for the project."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Alien:_Covenant",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.463724+00:00",
+          "evidenceFile": "sources/ee030be1943f05d8.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Cité des Ingénieurs, Planète 4 — Alien: Covenant (2017)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-planet4-wheat-field",
+      "titleFr": "Planète 4 / Champ de blé",
+      "titleEn": "Planet 4 / Wheat Field",
+      "media": "films",
+      "work": "Alien: Covenant (2017)",
+      "location": "Zone de débarquement de Planète 4",
+      "visualBriefFr": "Blé terrestre haut et clair dans un paysage extraterrestre montagneux, arbres sombres, rivière et roche, atmosphère couverte, site de débarquement lointain.",
+      "events": [
+        "storm-front",
+        "spore-drift"
+      ],
+      "references": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/alien-covenant",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "Readable official page supports the quoted work context only. Specific room geometry, framing, materials, colors and event timing remain unmeasured project adaptations.",
+          "contentAccess": "READABLE",
+          "bodySha256": "ddaf6a7acd005c234b09afe851629bc64eb2f68310c7b6a7ef49d21938a96542",
+          "bodyBytes": 824181,
+          "retrievedAt": "2026-11-13T15:25:49.351066+00:00",
+          "evidenceFile": "sources/7283820c9f71323e.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "officialContextSummary": "The official synopsis describes a colony ship discovering a remote planet. These scene layouts and event timings are reconstructed for the project."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Alien:_Covenant",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.463724+00:00",
+          "evidenceFile": "sources/ee030be1943f05d8.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Zone de débarquement de Planète 4 — Alien: Covenant (2017)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-renaissance-cryo-chamber",
+      "titleFr": "Renaissance / Baie cryogénique",
+      "titleEn": "Renaissance / Cryogenic Bay",
+      "media": "films",
+      "work": "Alien: Romulus (2024)",
+      "location": "Station Renaissance",
+      "visualBriefFr": "Compartiment cryogénique industriel rétrofuturiste, unités de stase et racks, lumière blanche de service mêlée à de l’ambre d’alarme, parois métalliques et câbles.",
+      "events": [
+        "coolant-plume",
+        "containment-scan"
+      ],
+      "references": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/alien-romulus",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "Readable official page supports the quoted work context only. Specific room geometry, framing, materials, colors and event timing remain unmeasured project adaptations.",
+          "contentAccess": "READABLE",
+          "bodySha256": "21dd3de3033a6b7e167b5638bc9ff56c9e4392de54a50865e9f7ea0c369e363d",
+          "bodyBytes": 856092,
+          "retrievedAt": "2026-11-13T15:25:50.130117+00:00",
+          "evidenceFile": "sources/e59be0978d2d54c4.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "officialContextSummary": "The official synopsis identifies young colonists scavenging a derelict station. Room geometry and colors have not been measured here."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Alien:_Romulus",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.549919+00:00",
+          "evidenceFile": "sources/a8c2a0ad2bd68173.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Station Renaissance — Alien: Romulus (2024)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-jacksons-star-street",
+      "titleFr": "Jackson’s Star / Rue minière",
+      "titleEn": "Jackson’s Star / Mining Street",
+      "media": "films",
+      "work": "Alien: Romulus (2024)",
+      "location": "Colonie de Jackson’s Star",
+      "visualBriefFr": "Rue dense et sombre d’une colonie minière sans soleil visible, tours d’extraction et conduites, faible signalétique de compagnie, humidité et lumière ambre dans les logements.",
+      "events": [
+        "ash-drift",
+        "freight-transit"
+      ],
+      "references": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/alien-romulus",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "Readable official page supports the quoted work context only. Specific room geometry, framing, materials, colors and event timing remain unmeasured project adaptations.",
+          "contentAccess": "READABLE",
+          "bodySha256": "21dd3de3033a6b7e167b5638bc9ff56c9e4392de54a50865e9f7ea0c369e363d",
+          "bodyBytes": 856092,
+          "retrievedAt": "2026-11-13T15:25:50.130117+00:00",
+          "evidenceFile": "sources/e59be0978d2d54c4.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "officialContextSummary": "The official synopsis identifies young colonists scavenging a derelict station. Room geometry and colors have not been measured here."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Alien:_Romulus",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.549919+00:00",
+          "evidenceFile": "sources/a8c2a0ad2bd68173.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Colonie de Jackson’s Star — Alien: Romulus (2024)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-maginot-specimen-hold",
+      "titleFr": "Maginot / Soute des spécimens",
+      "titleEn": "Maginot / Specimen Hold",
+      "media": "serie",
+      "work": "Alien: Earth (2025)",
+      "location": "USCSS Maginot",
+      "visualBriefFr": "Intérieur fonctionnel de vaisseau de recherche de Weyland-Yutani, conteneurs biologiques et volumes de fret sous éclairage de service; géométrie latérale adaptée, espèces non inventées.",
+      "events": [
+        "containment-scan",
+        "freight-transit"
+      ],
+      "references": [
+        {
+          "url": "https://www.20thcenturystudios.com/franchises/alien",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "This readable franchise URL serves an Alien1979 overview; it does not independently corroborate Alien:Earth, Neverland, Maginot or NewSiam. Only the overview was consulted.",
+          "contentAccess": "READABLE",
+          "bodySha256": "41811d3aadb0305d78b97df92159cea97e8c8af5c8ce583a3b42c5dbec5b832a",
+          "bodyBytes": 847060,
+          "retrievedAt": "2026-11-13T15:25:49.413575+00:00",
+          "evidenceFile": "sources/4198b23c493f8e71.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "supportsSelectedWork": false,
+          "officialContextSummary": "The queried20thCentury franchise page serves an Alien1979 overview and does not corroborate the series settings. Series-specific primary plates were not recovered."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Alien:_Earth",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.454163+00:00",
+          "evidenceFile": "sources/68559d1757fef45f.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "USCSS Maginot — Alien: Earth (2025)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-maginot-bridge",
+      "titleFr": "Maginot / Passerelle",
+      "titleEn": "Maginot / Bridge",
+      "media": "serie",
+      "work": "Alien: Earth (2025)",
+      "location": "USCSS Maginot",
+      "visualBriefFr": "Passerelle de transport scientifique, consoles de navigation denses et vitrages donnant sur l’approche terrestre, palette bleu-gris et ambre, pas de personnage peint au premier plan.",
+      "events": [
+        "orbital-transit",
+        "archive-scan"
+      ],
+      "references": [
+        {
+          "url": "https://www.20thcenturystudios.com/franchises/alien",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "This readable franchise URL serves an Alien1979 overview; it does not independently corroborate Alien:Earth, Neverland, Maginot or NewSiam. Only the overview was consulted.",
+          "contentAccess": "READABLE",
+          "bodySha256": "41811d3aadb0305d78b97df92159cea97e8c8af5c8ce583a3b42c5dbec5b832a",
+          "bodyBytes": 847060,
+          "retrievedAt": "2026-11-13T15:25:49.413575+00:00",
+          "evidenceFile": "sources/4198b23c493f8e71.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "supportsSelectedWork": false,
+          "officialContextSummary": "The queried20thCentury franchise page serves an Alien1979 overview and does not corroborate the series settings. Series-specific primary plates were not recovered."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Alien:_Earth",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.454163+00:00",
+          "evidenceFile": "sources/68559d1757fef45f.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "USCSS Maginot — Alien: Earth (2025)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-new-siam-crash-site",
+      "titleFr": "New Siam / Site du crash",
+      "titleEn": "New Siam / Crash Site",
+      "media": "serie",
+      "work": "Alien: Earth (2025)",
+      "location": "New Siam, Terre",
+      "visualBriefFr": "Ville tropicale dense et complexe de Prodigy endommagé par le crash du Maginot, fragments de coque et structure bâtie, humidité nocturne et fumées au loin.",
+      "events": [
+        "rain-curtain",
+        "coolant-plume"
+      ],
+      "references": [
+        {
+          "url": "https://www.20thcenturystudios.com/franchises/alien",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "This readable franchise URL serves an Alien1979 overview; it does not independently corroborate Alien:Earth, Neverland, Maginot or NewSiam. Only the overview was consulted.",
+          "contentAccess": "READABLE",
+          "bodySha256": "41811d3aadb0305d78b97df92159cea97e8c8af5c8ce583a3b42c5dbec5b832a",
+          "bodyBytes": 847060,
+          "retrievedAt": "2026-11-13T15:25:49.413575+00:00",
+          "evidenceFile": "sources/4198b23c493f8e71.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "supportsSelectedWork": false,
+          "officialContextSummary": "The queried20thCentury franchise page serves an Alien1979 overview and does not corroborate the series settings. Series-specific primary plates were not recovered."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Alien:_Earth",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.454163+00:00",
+          "evidenceFile": "sources/68559d1757fef45f.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "New Siam, Terre — Alien: Earth (2025)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-neverland-laboratory",
+      "titleFr": "Neverland / Laboratoire",
+      "titleEn": "Neverland / Laboratory",
+      "media": "serie",
+      "work": "Alien: Earth (2025)",
+      "location": "Île de Neverland, complexe Prodigy",
+      "visualBriefFr": "Installation de recherche de Prodigy sur une île tropicale, laboratoire de confinement, baies vitrées, surfaces de synthèse propres, végétation extérieure visible au fond.",
+      "events": [
+        "containment-scan",
+        "archive-scan"
+      ],
+      "references": [
+        {
+          "url": "https://www.20thcenturystudios.com/franchises/alien",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "This readable franchise URL serves an Alien1979 overview; it does not independently corroborate Alien:Earth, Neverland, Maginot or NewSiam. Only the overview was consulted.",
+          "contentAccess": "READABLE",
+          "bodySha256": "41811d3aadb0305d78b97df92159cea97e8c8af5c8ce583a3b42c5dbec5b832a",
+          "bodyBytes": 847060,
+          "retrievedAt": "2026-11-13T15:25:49.413575+00:00",
+          "evidenceFile": "sources/4198b23c493f8e71.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "supportsSelectedWork": false,
+          "officialContextSummary": "The queried20thCentury franchise page serves an Alien1979 overview and does not corroborate the series settings. Series-specific primary plates were not recovered."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Alien:_Earth",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.454163+00:00",
+          "evidenceFile": "sources/68559d1757fef45f.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Île de Neverland, complexe Prodigy — Alien: Earth (2025)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-neverland-jungle",
+      "titleFr": "Neverland / Lisière tropicale",
+      "titleEn": "Neverland / Jungle Edge",
+      "media": "serie",
+      "work": "Alien: Earth (2025)",
+      "location": "Île de Neverland",
+      "visualBriefFr": "Végétation tropicale humide dense autour du complexe de Prodigy, lisière forestière et constructions modernes distantes, air chaud et brume légère.",
+      "events": [
+        "water-drip",
+        "spore-drift"
+      ],
+      "references": [
+        {
+          "url": "https://www.20thcenturystudios.com/franchises/alien",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "This readable franchise URL serves an Alien1979 overview; it does not independently corroborate Alien:Earth, Neverland, Maginot or NewSiam. Only the overview was consulted.",
+          "contentAccess": "READABLE",
+          "bodySha256": "41811d3aadb0305d78b97df92159cea97e8c8af5c8ce583a3b42c5dbec5b832a",
+          "bodyBytes": 847060,
+          "retrievedAt": "2026-11-13T15:25:49.413575+00:00",
+          "evidenceFile": "sources/4198b23c493f8e71.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "supportsSelectedWork": false,
+          "officialContextSummary": "The queried20thCentury franchise page serves an Alien1979 overview and does not corroborate the series settings. Series-specific primary plates were not recovered."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Alien:_Earth",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.454163+00:00",
+          "evidenceFile": "sources/68559d1757fef45f.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Île de Neverland — Alien: Earth (2025)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-sevastopol-lorenz-systech",
+      "titleFr": "Sevastopol / Lorenz Systech",
+      "titleEn": "Sevastopol / Lorenz Systech",
+      "media": "jeux",
+      "work": "Alien: Isolation (2014)",
+      "location": "Sevastopol, Lorenz Systech Spire",
+      "visualBriefFr": "Gare et transit spatial Seegson, grandes baies sur KG-348, écrans cathodiques, panneaux crème et orange, géométrie modulaire des années 1970.",
+      "events": [
+        "rail-transit",
+        "orbital-transit"
+      ],
+      "references": [
+        {
+          "url": "https://www.feralinteractive.com/en/games/alienisolation/",
+          "type": "primary-official-product",
+          "httpStatus": 403,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "a32fd4ba3158c0bce8c46782aabb4e7da7a7a0a89aeb166f1be89f5c3c826629",
+          "bodyBytes": 38672,
+          "retrievedAt": "2026-11-13T15:25:50.787067+00:00",
+          "evidenceFile": "sources/96723fd28b858d80.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Alien:_Isolation",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.468116+00:00",
+          "evidenceFile": "sources/83c5149cfc42bb15.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Sevastopol, Lorenz Systech Spire — Alien: Isolation (2014)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-sevastopol-san-cristobal",
+      "titleFr": "Sevastopol / San Cristobal",
+      "titleEn": "Sevastopol / San Cristobal",
+      "media": "jeux",
+      "work": "Alien: Isolation (2014)",
+      "location": "San Cristobal Medical Facility, Sevastopol",
+      "visualBriefFr": "Couloirs cliniques vieillissants, lits et postes de soins, portes de salles, panneaux crème/vert, éclairage de veille et baies d’observation.",
+      "events": [
+        "containment-scan",
+        "airlock-cycle"
+      ],
+      "references": [
+        {
+          "url": "https://www.feralinteractive.com/en/games/alienisolation/",
+          "type": "primary-official-product",
+          "httpStatus": 403,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "a32fd4ba3158c0bce8c46782aabb4e7da7a7a0a89aeb166f1be89f5c3c826629",
+          "bodyBytes": 38672,
+          "retrievedAt": "2026-11-13T15:25:50.787067+00:00",
+          "evidenceFile": "sources/96723fd28b858d80.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Alien:_Isolation",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.468116+00:00",
+          "evidenceFile": "sources/83c5149cfc42bb15.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "San Cristobal Medical Facility, Sevastopol — Alien: Isolation (2014)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-sevastopol-reactor-nest",
+      "titleFr": "Sevastopol / Nid du réacteur",
+      "titleEn": "Sevastopol / Reactor Nest",
+      "media": "jeux",
+      "work": "Alien: Isolation (2014)",
+      "location": "Réacteur Apollo, Sevastopol",
+      "visualBriefFr": "Passerelles en caillebotis sous grosses colonnes du réacteur, résine en profondeur, tuyaux industriels, lumière rouge/orange diffuse sans stroboscope.",
+      "events": [
+        "reactor-conduit",
+        "hive-movement"
+      ],
+      "references": [
+        {
+          "url": "https://www.feralinteractive.com/en/games/alienisolation/",
+          "type": "primary-official-product",
+          "httpStatus": 403,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "a32fd4ba3158c0bce8c46782aabb4e7da7a7a0a89aeb166f1be89f5c3c826629",
+          "bodyBytes": 38672,
+          "retrievedAt": "2026-11-13T15:25:50.787067+00:00",
+          "evidenceFile": "sources/96723fd28b858d80.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Alien:_Isolation",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.468116+00:00",
+          "evidenceFile": "sources/83c5149cfc42bb15.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Réacteur Apollo, Sevastopol — Alien: Isolation (2014)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-lv1201-forward-facility",
+      "titleFr": "LV-1201 / Complexe avancé",
+      "titleEn": "LV-1201 / Forward Facility",
+      "media": "jeux",
+      "work": "Aliens versus Predator 2 (2001)",
+      "location": "Forward Observation Pods / complexe de recherche, LV-1201",
+      "visualBriefFr": "Bâtiments de recherche militaires modulaires dans la jungle de LV-1201, grillages, plateformes de service et lumière de sécurité verte; proportions recomposées pour la vue latérale.",
+      "events": [
+        "rain-curtain",
+        "searchlight-sweep"
+      ],
+      "references": [
+        {
+          "url": "https://avp.fandom.com/wiki/Aliens_versus_Predator_2",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.622759+00:00",
+          "evidenceFile": "sources/d7255c82b7a22bbe.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/LV-1201",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.679379+00:00",
+          "evidenceFile": "sources/3d18320780647f27.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Forward Observation Pods / complexe de recherche, LV-1201 — Aliens versus Predator 2 (2001)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-lv1201-ancient-ruins",
+      "titleFr": "LV-1201 / Ruines anciennes",
+      "titleEn": "LV-1201 / Ancient Ruins",
+      "media": "jeux",
+      "work": "Aliens versus Predator 2 (2001)",
+      "location": "Ruines anciennes, LV-1201",
+      "visualBriefFr": "Architecture ancienne monumentale et jungle, blocs gravés, portes massives et statues en ombre, textures minérales terre et lueurs bleu-vert.",
+      "events": [
+        "water-drip",
+        "ash-drift"
+      ],
+      "references": [
+        {
+          "url": "https://avp.fandom.com/wiki/Aliens_versus_Predator_2",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.622759+00:00",
+          "evidenceFile": "sources/d7255c82b7a22bbe.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/LV-1201",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.679379+00:00",
+          "evidenceFile": "sources/3d18320780647f27.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Ruines anciennes, LV-1201 — Aliens versus Predator 2 (2001)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-bg386-freya-prospect",
+      "titleFr": "BG-386 / Freya’s Prospect",
+      "titleEn": "BG-386 / Freya’s Prospect",
+      "media": "jeux",
+      "work": "Aliens vs. Predator (2010)",
+      "location": "Freya’s Prospect, BG-386",
+      "visualBriefFr": "Colonie de prospection de Weyland-Yutani dans une jungle dense, barrières et grillages, tours de service, pluie et éclairage militaire usé.",
+      "events": [
+        "rain-curtain",
+        "freight-transit"
+      ],
+      "references": [
+        {
+          "url": "https://avp.fandom.com/wiki/Aliens_vs._Predator_(2010_video_game)",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.682439+00:00",
+          "evidenceFile": "sources/8344fc57b205a620.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/BG-386",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.699187+00:00",
+          "evidenceFile": "sources/871c3aba8c2f5ba5.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Freya’s Prospect, BG-386 — Aliens vs. Predator (2010)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-bg386-pyramid",
+      "titleFr": "BG-386 / Pyramide",
+      "titleEn": "BG-386 / Pyramid",
+      "media": "jeux",
+      "work": "Aliens vs. Predator (2010)",
+      "location": "Pyramide ancienne, BG-386",
+      "visualBriefFr": "Chambre pyramidale yautja monumentale, blocs gravés et axes de visée massifs, motifs triangulaires et éclairage rouge discret; aucune inscription lisible nécessaire.",
+      "events": [
+        "archive-scan",
+        "ash-drift"
+      ],
+      "references": [
+        {
+          "url": "https://avp.fandom.com/wiki/Aliens_vs._Predator_(2010_video_game)",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.682439+00:00",
+          "evidenceFile": "sources/8344fc57b205a620.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/BG-386",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.699187+00:00",
+          "evidenceFile": "sources/871c3aba8c2f5ba5.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Pyramide ancienne, BG-386 — Aliens vs. Predator (2010)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-katanga-refinery",
+      "titleFr": "Katanga / Raffinerie",
+      "titleEn": "Katanga / Refinery",
+      "media": "jeux",
+      "work": "Aliens: Fireteam Elite (2021)",
+      "location": "Station Katanga",
+      "visualBriefFr": "Raffinerie orbitale industrielle, silos et travées géantes, convoyeurs et canalisations, métal bleu froid traversé de résine aux niveaux inférieurs.",
+      "events": [
+        "freight-transit",
+        "reactor-conduit"
+      ],
+      "references": [
+        {
+          "url": "https://www.aliensfireteamelite.com/",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "Readable official page supports the quoted work context only. Specific room geometry, framing, materials, colors and event timing remain unmeasured project adaptations.",
+          "contentAccess": "READABLE",
+          "bodySha256": "762d7bd7c455435dab56d7ea4471cd574bc3878feeb7a7eddae3a48c1927ac9f",
+          "bodyBytes": 38167,
+          "retrievedAt": "2026-11-13T15:25:50.185223+00:00",
+          "evidenceFile": "sources/15dd96052b245635.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "officialContextSummary": "The official product page identifies a cooperative marine survival shooter within the Alien universe. Stage architecture is not independently measured by this page."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Aliens:_Fireteam_Elite",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.607729+00:00",
+          "evidenceFile": "sources/26f5ac39f298e827.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Station Katanga — Aliens: Fireteam Elite (2021)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-endeavor-hangar",
+      "titleFr": "Endeavor / Hangar",
+      "titleEn": "Endeavor / Hangar",
+      "media": "jeux",
+      "work": "Aliens: Fireteam Elite (2021)",
+      "location": "UAS Endeavor",
+      "visualBriefFr": "Hangar militaire de l’Endeavor, berceaux de dropship, racks de matériel et larges portes de service, acier gris et marquages jaunes.",
+      "events": [
+        "shuttle-approach",
+        "airlock-cycle"
+      ],
+      "references": [
+        {
+          "url": "https://www.aliensfireteamelite.com/",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "Readable official page supports the quoted work context only. Specific room geometry, framing, materials, colors and event timing remain unmeasured project adaptations.",
+          "contentAccess": "READABLE",
+          "bodySha256": "762d7bd7c455435dab56d7ea4471cd574bc3878feeb7a7eddae3a48c1927ac9f",
+          "bodyBytes": 38167,
+          "retrievedAt": "2026-11-13T15:25:50.185223+00:00",
+          "evidenceFile": "sources/15dd96052b245635.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "officialContextSummary": "The official product page identifies a cooperative marine survival shooter within the Alien universe. Stage architecture is not independently measured by this page."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Aliens:_Fireteam_Elite",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.607729+00:00",
+          "evidenceFile": "sources/26f5ac39f298e827.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "UAS Endeavor — Aliens: Fireteam Elite (2021)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-lv895-engineer-ruins",
+      "titleFr": "LV-895 / Ruines des Ingénieurs",
+      "titleEn": "LV-895 / Engineer Ruins",
+      "media": "jeux",
+      "work": "Aliens: Fireteam Elite (2021)",
+      "location": "Ruines des Ingénieurs sur LV-895",
+      "visualBriefFr": "Constructions biomécaniques des Ingénieurs enfouies dans un paysage de jungle, arcades et sculptures monumentales, pierre noire et végétation humide.",
+      "events": [
+        "spore-drift",
+        "water-drip"
+      ],
+      "references": [
+        {
+          "url": "https://www.aliensfireteamelite.com/",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "Readable official page supports the quoted work context only. Specific room geometry, framing, materials, colors and event timing remain unmeasured project adaptations.",
+          "contentAccess": "READABLE",
+          "bodySha256": "762d7bd7c455435dab56d7ea4471cd574bc3878feeb7a7eddae3a48c1927ac9f",
+          "bodyBytes": 38167,
+          "retrievedAt": "2026-11-13T15:25:50.185223+00:00",
+          "evidenceFile": "sources/15dd96052b245635.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "officialContextSummary": "The official product page identifies a cooperative marine survival shooter within the Alien universe. Stage architecture is not independently measured by this page."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Aliens:_Fireteam_Elite",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.607729+00:00",
+          "evidenceFile": "sources/26f5ac39f298e827.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Ruines des Ingénieurs sur LV-895 — Aliens: Fireteam Elite (2021)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-lethe-dead-hills",
+      "titleFr": "Lethe / Dead Hills",
+      "titleEn": "Lethe / Dead Hills",
+      "media": "jeux",
+      "work": "Aliens: Dark Descent (2023)",
+      "location": "Colonie de Dead Hills, Lethe",
+      "visualBriefFr": "Avant-poste colonial poussiéreux avec élevage, locaux de service et quais, roche rouge autour de blocs industriels, lumière de nuit et poussière en mouvement.",
+      "events": [
+        "sand-drift",
+        "searchlight-sweep"
+      ],
+      "references": [
+        {
+          "url": "https://www.focus-entmt.com/en/games/aliens-dark-descent",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "Readable official page supports the quoted work context only. Specific room geometry, framing, materials, colors and event timing remain unmeasured project adaptations.",
+          "contentAccess": "READABLE",
+          "bodySha256": "6b6b196bf051aaafc2bd4f55cd14eaf0a1817512e9717e8ac6b1669660f0805c",
+          "bodyBytes": 79176,
+          "retrievedAt": "2026-11-13T15:25:50.853624+00:00",
+          "evidenceFile": "sources/c16c7dedca69886c.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "officialContextSummary": "The official publisher page identifies the game and its squad-survival setting. Individual stage measurements are not supplied."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Aliens:_Dark_Descent",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.674248+00:00",
+          "evidenceFile": "sources/74a21d1e83643c4e.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Colonie de Dead Hills, Lethe — Aliens: Dark Descent (2023)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-lethe-berkleys-docks",
+      "titleFr": "Lethe / Quais de Berkley",
+      "titleEn": "Lethe / Berkley’s Docks",
+      "media": "jeux",
+      "work": "Aliens: Dark Descent (2023)",
+      "location": "Berkley’s Docks, Lethe",
+      "visualBriefFr": "Grand port de fret colonial, piles de conteneurs, grues, plateformes de chargement et infrastructures orbitales éloignées, palette acier et orange sale.",
+      "events": [
+        "freight-transit",
+        "rail-transit"
+      ],
+      "references": [
+        {
+          "url": "https://www.focus-entmt.com/en/games/aliens-dark-descent",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "Readable official page supports the quoted work context only. Specific room geometry, framing, materials, colors and event timing remain unmeasured project adaptations.",
+          "contentAccess": "READABLE",
+          "bodySha256": "6b6b196bf051aaafc2bd4f55cd14eaf0a1817512e9717e8ac6b1669660f0805c",
+          "bodyBytes": 79176,
+          "retrievedAt": "2026-11-13T15:25:50.853624+00:00",
+          "evidenceFile": "sources/c16c7dedca69886c.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "officialContextSummary": "The official publisher page identifies the game and its squad-survival setting. Individual stage measurements are not supplied."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Aliens:_Dark_Descent",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.674248+00:00",
+          "evidenceFile": "sources/74a21d1e83643c4e.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Berkley’s Docks, Lethe — Aliens: Dark Descent (2023)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-lethe-pioneer-station",
+      "titleFr": "Lethe / Pioneer Station",
+      "titleEn": "Lethe / Pioneer Station",
+      "media": "jeux",
+      "work": "Aliens: Dark Descent (2023)",
+      "location": "Pioneer Station, orbite de Lethe",
+      "visualBriefFr": "Station orbitale administrative et de sécurité, grandes baies sur la planète, sas et postes de contrôle, architecture blanche industrielle avec niveaux d’alerte rouges.",
+      "events": [
+        "orbital-transit",
+        "airlock-cycle"
+      ],
+      "references": [
+        {
+          "url": "https://www.focus-entmt.com/en/games/aliens-dark-descent",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "Readable official page supports the quoted work context only. Specific room geometry, framing, materials, colors and event timing remain unmeasured project adaptations.",
+          "contentAccess": "READABLE",
+          "bodySha256": "6b6b196bf051aaafc2bd4f55cd14eaf0a1817512e9717e8ac6b1669660f0805c",
+          "bodyBytes": 79176,
+          "retrievedAt": "2026-11-13T15:25:50.853624+00:00",
+          "evidenceFile": "sources/c16c7dedca69886c.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "officialContextSummary": "The official publisher page identifies the game and its squad-survival setting. Individual stage measurements are not supplied."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Aliens:_Dark_Descent",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.674248+00:00",
+          "evidenceFile": "sources/74a21d1e83643c4e.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Pioneer Station, orbite de Lethe — Aliens: Dark Descent (2023)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-otago-flight-deck",
+      "titleFr": "Otago / Pont d’envol",
+      "titleEn": "Otago / Flight Deck",
+      "media": "jeux",
+      "work": "Aliens: Dark Descent (2023)",
+      "location": "USS Otago, épave sur Lethe",
+      "visualBriefFr": "Bâtiment militaire échoué, hangar et aire de préparation avec dropship, coque abîmée et environnement désertique visible par la brèche; scène de simulation latérale.",
+      "events": [
+        "shuttle-approach",
+        "coolant-plume"
+      ],
+      "references": [
+        {
+          "url": "https://www.focus-entmt.com/en/games/aliens-dark-descent",
+          "type": "primary-official-product",
+          "httpStatus": 200,
+          "evidenceScope": "Readable official page supports the quoted work context only. Specific room geometry, framing, materials, colors and event timing remain unmeasured project adaptations.",
+          "contentAccess": "READABLE",
+          "bodySha256": "6b6b196bf051aaafc2bd4f55cd14eaf0a1817512e9717e8ac6b1669660f0805c",
+          "bodyBytes": 79176,
+          "retrievedAt": "2026-11-13T15:25:50.853624+00:00",
+          "evidenceFile": "sources/c16c7dedca69886c.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false,
+          "officialContextSummary": "The official publisher page identifies the game and its squad-survival setting. Individual stage measurements are not supplied."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Aliens:_Dark_Descent",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.674248+00:00",
+          "evidenceFile": "sources/74a21d1e83643c4e.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "USS Otago, épave sur Lethe — Aliens: Dark Descent (2023)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-purdan-zeta-colony",
+      "titleFr": "Purdan / Colonie Zeta",
+      "titleEn": "Purdan / Zeta Colony",
+      "media": "jeux",
+      "work": "Alien: Rogue Incursion (2024)",
+      "location": "Purdan, installation Gemini Exoplanet Solutions",
+      "visualBriefFr": "Installation coloniale isolée de Gemini sur Purdan, bâtiments industriels et laboratoires de recherche, quais et tuyaux sur terrain rocailleux sombre; vue latérale adaptée.",
+      "events": [
+        "coolant-plume",
+        "searchlight-sweep"
+      ],
+      "references": [
+        {
+          "url": "https://avp.fandom.com/wiki/Alien:_Rogue_Incursion",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.535465+00:00",
+          "evidenceFile": "sources/e401fcca0574d20c.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Purdan",
+          "type": "secondary-encyclopedia",
+          "httpStatus": 402,
+          "evidenceScope": "URL attempted, content inaccessible or non-success response; no room or geometry verification transferred from this request.",
+          "contentAccess": "INACCESSIBLE_OR_NON_CONTENT",
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "retrievedAt": "2026-11-13T15:25:48.731668+00:00",
+          "evidenceFile": "sources/479c9e42f0bdbbda.txt",
+          "geometryVerifiedByThisFetch": false,
+          "specificRoomVerifiedByThisFetch": false
+        }
+      ],
+      "canonExact": false,
+      "sideViewAdaptation": "Original MIRE side-view reconstruction of the named work/location; one flat combat plane, architectural depths in three image bands, no claim that these fighting-floor dimensions exist in the work.",
+      "visualEvidenceLimits": "Named location and broad depicted architecture are used; geometry, camera angle, lighting composition and background-event timing are project adaptations. No exact primary frame measurement is claimed.",
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "knownWorkLevelFacts": "Purdan, installation Gemini Exoplanet Solutions — Alien: Rogue Incursion (2024)",
+      "sourceVisualMeasurementAvailable": false,
+      "referenceStatus": "work-setting-curation-no-primary-plate-measurement"
+    },
+    {
+      "id": "xt192-ryushi-prosperity-wells",
+      "media": "comics",
+      "titleFr": "Ryushi / Prosperity Wells",
+      "titleEn": "Ryushi / Prosperity Wells",
+      "work": "Aliens vs. Predator (1990)",
+      "location": "Prosperity Wells",
+      "knownWorkLevelFacts": "Colonie d’éleveurs sur le monde désertique Ryushi ; complexe humain agricole et enclos, falaises arides.",
+      "sourceVisualMeasurementAvailable": false,
+      "canonExact": false,
+      "canonStatus": "franchise-setting-project-reconstruction",
+      "appearanceStatus": "project-interpretation-no-primary-plate-measurement",
+      "sideViewAdaptation": "Scène réorganisée en trois profondeurs visuelles et un plan de combat horizontal dégagé ; aucune fidélité de plan 1:1 affirmée.",
+      "referenceStatus": "licensed-work-setting-known-not-primary-measured",
+      "references": [
+        {
+          "url": "https://avp.fandom.com/wiki/Prosperity_Wells",
+          "sourceType": "secondary-fan-wiki",
+          "requestedAt": "2026-11-13T15:24:21.984672+00:00",
+          "method": "GET",
+          "imageDownloaded": false,
+          "contentConsulted": false,
+          "locationNameVerifiedByThisFetch": false,
+          "geometryVerifiedByThisFetch": false,
+          "httpStatus": 402,
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "accessState": "BLOCKED_HTTP_402"
+        }
+      ],
+      "uncertainty": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet.",
+      "visualBriefFr": "Façade basse de colonie, enclos en fond, mesas ocres très éloignées, plateformes et câbles agricoles ; aucune foule au premier plan.",
+      "events": [
+        "sand-drift",
+        "freight-transit"
+      ],
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "visualEvidenceLimits": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet."
+    },
+    {
+      "id": "xt192-charon-rogue-lab",
+      "media": "comics",
+      "titleFr": "Charon / Complexe Rogue",
+      "titleEn": "Charon / Rogue Complex",
+      "work": "Aliens: Rogue",
+      "location": "Charon experimental complex",
+      "knownWorkLevelFacts": "Complexe d’expérimentation et ruche souterraine associés à Rogue ; ne pas attribuer ce lieu à Nightmare Asylum.",
+      "sourceVisualMeasurementAvailable": false,
+      "canonExact": false,
+      "canonStatus": "franchise-setting-project-reconstruction",
+      "appearanceStatus": "project-interpretation-no-primary-plate-measurement",
+      "sideViewAdaptation": "Scène réorganisée en trois profondeurs visuelles et un plan de combat horizontal dégagé ; aucune fidélité de plan 1:1 affirmée.",
+      "referenceStatus": "inherited-project-citation-not-primary-rechecked",
+      "references": [
+        {
+          "url": "https://avp.fandom.com/wiki/Aliens:_Rogue",
+          "sourceType": "secondary-fan-wiki",
+          "requestedAt": "2026-11-13T15:24:21.985366+00:00",
+          "method": "GET",
+          "imageDownloaded": false,
+          "contentConsulted": false,
+          "locationNameVerifiedByThisFetch": false,
+          "geometryVerifiedByThisFetch": false,
+          "httpStatus": 402,
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "accessState": "BLOCKED_HTTP_402"
+        }
+      ],
+      "uncertainty": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet.",
+      "visualBriefFr": "Laboratoire institutionnel austère, coursives de recherche, cloisons d’observation, profondeur souterraine ; les dimensions de la salle sont une adaptation.",
+      "events": [
+        "containment-scan",
+        "airlock-cycle"
+      ],
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "visualEvidenceLimits": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet."
+    },
+    {
+      "id": "xt192-innominata-labyrinth",
+      "media": "comics",
+      "titleFr": "Innominata / Labyrinthe",
+      "titleEn": "Innominata / Labyrinth",
+      "work": "Aliens: Labyrinth",
+      "location": "Innominata research station",
+      "knownWorkLevelFacts": "Station de recherche d’Aliens: Labyrinth, lieu des expériences du docteur Church ; ne pas inventer de numéro de pont ou de chambre.",
+      "sourceVisualMeasurementAvailable": false,
+      "canonExact": false,
+      "canonStatus": "franchise-setting-project-reconstruction",
+      "appearanceStatus": "project-interpretation-no-primary-plate-measurement",
+      "sideViewAdaptation": "Scène réorganisée en trois profondeurs visuelles et un plan de combat horizontal dégagé ; aucune fidélité de plan 1:1 affirmée.",
+      "referenceStatus": "known-literary-setting-not-primary-rechecked",
+      "references": [
+        {
+          "url": "https://avp.fandom.com/wiki/Innominata",
+          "sourceType": "secondary-fan-wiki",
+          "requestedAt": "2026-11-13T15:24:21.985797+00:00",
+          "method": "GET",
+          "imageDownloaded": false,
+          "contentConsulted": false,
+          "locationNameVerifiedByThisFetch": false,
+          "geometryVerifiedByThisFetch": false,
+          "httpStatus": 402,
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "accessState": "BLOCKED_HTTP_402"
+        }
+      ],
+      "uncertainty": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet.",
+      "visualBriefFr": "Coursive de laboratoire orbital sombre avec vitres d’observation, faisceaux de conduites et profondeur clinique ; dessin de l’architecture interprété.",
+      "events": [
+        "hive-movement",
+        "archive-scan"
+      ],
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "visualEvidenceLimits": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet."
+    },
+    {
+      "id": "xt192-sphacteria-dead-orbit",
+      "media": "comics",
+      "titleFr": "Sphacteria / Orbite morte",
+      "titleEn": "Sphacteria / Dead Orbit",
+      "work": "Aliens: Dead Orbit",
+      "location": "Sphacteria orbital facility",
+      "knownWorkLevelFacts": "Installation orbitale isolée du récit Dead Orbit ; environnement industriel usé et espaces exigus.",
+      "sourceVisualMeasurementAvailable": false,
+      "canonExact": false,
+      "canonStatus": "franchise-setting-project-reconstruction",
+      "appearanceStatus": "project-interpretation-no-primary-plate-measurement",
+      "sideViewAdaptation": "Scène réorganisée en trois profondeurs visuelles et un plan de combat horizontal dégagé ; aucune fidélité de plan 1:1 affirmée.",
+      "referenceStatus": "known-comic-setting-not-primary-rechecked",
+      "references": [
+        {
+          "url": "https://avp.fandom.com/wiki/Aliens:_Dead_Orbit",
+          "sourceType": "secondary-fan-wiki",
+          "requestedAt": "2026-11-13T15:24:21.986357+00:00",
+          "method": "GET",
+          "imageDownloaded": false,
+          "contentConsulted": false,
+          "locationNameVerifiedByThisFetch": false,
+          "geometryVerifiedByThisFetch": false,
+          "httpStatus": 402,
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "accessState": "BLOCKED_HTTP_402"
+        }
+      ],
+      "uncertainty": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet.",
+      "visualBriefFr": "Coursive de station aux gaines apparentes, débris retenus, hublots sur le vide, éclairage utilitaire ambre ; géométrie adaptée pour une arène lisible.",
+      "events": [
+        "orbital-transit",
+        "coolant-plume"
+      ],
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "visualEvidenceLimits": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet."
+    },
+    {
+      "id": "xt192-xenomorph-prime-genocide",
+      "media": "comics",
+      "titleFr": "Genocide / Monde des ruches",
+      "titleEn": "Genocide / Hive World",
+      "work": "Aliens: Genocide",
+      "location": "Planet of the rival red and black xenomorph hives",
+      "knownWorkLevelFacts": "Monde infesté au cœur de Genocide ; Xenomorph Prime est un nom secondaire utilisé pour le cataloguer, sans certifier le lieu d’origine de l’espèce.",
+      "sourceVisualMeasurementAvailable": false,
+      "canonExact": false,
+      "canonStatus": "franchise-setting-project-reconstruction",
+      "appearanceStatus": "project-interpretation-no-primary-plate-measurement",
+      "sideViewAdaptation": "Scène réorganisée en trois profondeurs visuelles et un plan de combat horizontal dégagé ; aucune fidélité de plan 1:1 affirmée.",
+      "referenceStatus": "work-and-red-black-populations-inherited-location-shape-unmeasured",
+      "references": [
+        {
+          "url": "https://avp.fandom.com/wiki/Aliens:_Genocide",
+          "sourceType": "secondary-fan-wiki",
+          "requestedAt": "2026-11-13T15:24:22.140443+00:00",
+          "method": "GET",
+          "imageDownloaded": false,
+          "contentConsulted": false,
+          "locationNameVerifiedByThisFetch": false,
+          "geometryVerifiedByThisFetch": false,
+          "httpStatus": 402,
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "accessState": "BLOCKED_HTTP_402"
+        }
+      ],
+      "uncertainty": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet.",
+      "visualBriefFr": "Paysage raviné de résine noire et rouge, deux masses de ruche en opposition au lointain, silhouettes minérales ; aucun grand alien imprimé dans la zone de combat.",
+      "events": [
+        "hive-movement",
+        "ash-drift"
+      ],
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "visualEvidenceLimits": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet."
+    },
+    {
+      "id": "xt192-epsilon-station",
+      "media": "comics",
+      "titleFr": "Station Epsilon / Quarantaine",
+      "titleEn": "Epsilon Station / Quarantine",
+      "work": "Alien (2021) #2–3",
+      "location": "Epsilon Station",
+      "knownWorkLevelFacts": "Station Epsilon du premier arc Marvel Alien (2021) ; cadre de confinement corporatif.",
+      "sourceVisualMeasurementAvailable": false,
+      "canonExact": false,
+      "canonStatus": "franchise-setting-project-reconstruction",
+      "appearanceStatus": "project-interpretation-no-primary-plate-measurement",
+      "sideViewAdaptation": "Scène réorganisée en trois profondeurs visuelles et un plan de combat horizontal dégagé ; aucune fidélité de plan 1:1 affirmée.",
+      "referenceStatus": "inherited-project-citation-not-primary-rechecked",
+      "references": [
+        {
+          "url": "https://avp.fandom.com/wiki/Epsilon_Station",
+          "sourceType": "secondary-fan-wiki",
+          "requestedAt": "2026-11-13T15:24:22.167633+00:00",
+          "method": "GET",
+          "imageDownloaded": false,
+          "contentConsulted": false,
+          "locationNameVerifiedByThisFetch": false,
+          "geometryVerifiedByThisFetch": false,
+          "httpStatus": 402,
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "accessState": "BLOCKED_HTTP_402"
+        }
+      ],
+      "uncertainty": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet.",
+      "visualBriefFr": "Environnement orbital corporatif froid, coursive de confinement et vitrages de laboratoire ; aménagement latéral original.",
+      "events": [
+        "containment-scan",
+        "reactor-conduit"
+      ],
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "visualEvidenceLimits": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet."
+    },
+    {
+      "id": "xt192-tobler-nine-factory",
+      "media": "comics",
+      "titleFr": "Tobler-9 / Usine gelée",
+      "titleEn": "Tobler-9 / Frozen Factory",
+      "work": "Alien (2022) #2–3",
+      "location": "Tobler-9",
+      "knownWorkLevelFacts": "Monde industriel Tobler-9, installation isolée et environnement froid du récit Marvel de 2022.",
+      "sourceVisualMeasurementAvailable": false,
+      "canonExact": false,
+      "canonStatus": "franchise-setting-project-reconstruction",
+      "appearanceStatus": "project-interpretation-no-primary-plate-measurement",
+      "sideViewAdaptation": "Scène réorganisée en trois profondeurs visuelles et un plan de combat horizontal dégagé ; aucune fidélité de plan 1:1 affirmée.",
+      "referenceStatus": "inherited-project-citation-not-primary-rechecked",
+      "references": [
+        {
+          "url": "https://avp.fandom.com/wiki/Tobler-9",
+          "sourceType": "secondary-fan-wiki",
+          "requestedAt": "2026-11-13T15:24:22.169350+00:00",
+          "method": "GET",
+          "imageDownloaded": false,
+          "contentConsulted": false,
+          "locationNameVerifiedByThisFetch": false,
+          "geometryVerifiedByThisFetch": false,
+          "httpStatus": 402,
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "accessState": "BLOCKED_HTTP_402"
+        }
+      ],
+      "uncertainty": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet.",
+      "visualBriefFr": "Usine extérieure ou galerie vitrée glacée, pylônes industriels, neige et fumées éloignées ; pas de plan reproduit.",
+      "events": [
+        "freight-transit",
+        "coolant-plume"
+      ],
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "visualEvidenceLimits": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet."
+    },
+    {
+      "id": "xt192-earth-war-city",
+      "media": "comics",
+      "titleFr": "Terre / Ville infestée",
+      "titleEn": "Earth / Infested City",
+      "work": "Aliens: Earth War",
+      "location": "Unspecified infested urban district on Earth",
+      "knownWorkLevelFacts": "La Terre infestée d’Earth War ; le quartier n’est volontairement ni nommé ni présenté comme une ville précise attestée.",
+      "sourceVisualMeasurementAvailable": false,
+      "canonExact": false,
+      "canonStatus": "franchise-setting-project-reconstruction",
+      "appearanceStatus": "project-interpretation-no-primary-plate-measurement",
+      "sideViewAdaptation": "Scène réorganisée en trois profondeurs visuelles et un plan de combat horizontal dégagé ; aucune fidélité de plan 1:1 affirmée.",
+      "referenceStatus": "known-work-global-setting-local-district-project-original",
+      "references": [
+        {
+          "url": "https://avp.fandom.com/wiki/Aliens:_Earth_War",
+          "sourceType": "secondary-fan-wiki",
+          "requestedAt": "2026-11-13T15:24:22.195451+00:00",
+          "method": "GET",
+          "imageDownloaded": false,
+          "contentConsulted": false,
+          "locationNameVerifiedByThisFetch": false,
+          "geometryVerifiedByThisFetch": false,
+          "httpStatus": 402,
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "accessState": "BLOCKED_HTTP_402"
+        }
+      ],
+      "uncertainty": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet.",
+      "visualBriefFr": "Artère urbaine désertée, bâtiments massifs et résine couvrant les infrastructures au lointain ; quartier et disposition créés pour le projet.",
+      "events": [
+        "ash-drift",
+        "searchlight-sweep"
+      ],
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "visualEvidenceLimits": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet."
+    },
+    {
+      "id": "xt192-lv178-trimonite-mine",
+      "media": "romans",
+      "titleFr": "LV-178 / Mine de trimonite",
+      "titleEn": "LV-178 / Trimonite Mine",
+      "work": "Alien: Out of the Shadows",
+      "location": "LV-178 trimonite mine",
+      "knownWorkLevelFacts": "Site minier de LV-178 dans Out of the Shadows ; exploitation souterraine et installation humaine.",
+      "sourceVisualMeasurementAvailable": false,
+      "canonExact": false,
+      "canonStatus": "franchise-setting-project-reconstruction",
+      "appearanceStatus": "project-interpretation-no-primary-plate-measurement",
+      "sideViewAdaptation": "Scène réorganisée en trois profondeurs visuelles et un plan de combat horizontal dégagé ; aucune fidélité de plan 1:1 affirmée.",
+      "referenceStatus": "known-novel-setting-not-primary-measured",
+      "references": [
+        {
+          "url": "https://avp.fandom.com/wiki/LV-178",
+          "sourceType": "secondary-fan-wiki",
+          "requestedAt": "2026-11-13T15:24:22.219513+00:00",
+          "method": "GET",
+          "imageDownloaded": false,
+          "contentConsulted": false,
+          "locationNameVerifiedByThisFetch": false,
+          "geometryVerifiedByThisFetch": false,
+          "httpStatus": 402,
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "accessState": "BLOCKED_HTTP_402"
+        }
+      ],
+      "uncertainty": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet.",
+      "visualBriefFr": "Galerie minière très profonde, roche sombre, rails et poutres d’étai, poussière ambrée ; dimensions et organisation de l’arène interprétées.",
+      "events": [
+        "sand-drift",
+        "freight-transit"
+      ],
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "visualEvidenceLimits": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet."
+    },
+    {
+      "id": "xt192-marion-engineering",
+      "media": "romans",
+      "titleFr": "Marion / Salle des machines",
+      "titleEn": "Marion / Engineering",
+      "work": "Alien: Out of the Shadows",
+      "location": "Marion mining vessel",
+      "knownWorkLevelFacts": "Vaisseau minier Marion de l’équipage de Chris Hooper ; lieu physique distinct de la mine de LV-178.",
+      "sourceVisualMeasurementAvailable": false,
+      "canonExact": false,
+      "canonStatus": "franchise-setting-project-reconstruction",
+      "appearanceStatus": "project-interpretation-no-primary-plate-measurement",
+      "sideViewAdaptation": "Scène réorganisée en trois profondeurs visuelles et un plan de combat horizontal dégagé ; aucune fidélité de plan 1:1 affirmée.",
+      "referenceStatus": "known-vessel-interior-project-adaptation",
+      "references": [
+        {
+          "url": "https://avp.fandom.com/wiki/Marion",
+          "sourceType": "secondary-fan-wiki",
+          "requestedAt": "2026-11-13T15:24:22.280510+00:00",
+          "method": "GET",
+          "imageDownloaded": false,
+          "contentConsulted": false,
+          "locationNameVerifiedByThisFetch": false,
+          "geometryVerifiedByThisFetch": false,
+          "httpStatus": 402,
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "accessState": "BLOCKED_HTTP_402"
+        }
+      ],
+      "uncertainty": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet.",
+      "visualBriefFr": "Pont technique de vieux vaisseau minier, grandes conduites, armoires, passerelles arrière et sas de maintenance ; configuration de salle non attestée.",
+      "events": [
+        "coolant-plume",
+        "airlock-cycle"
+      ],
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "visualEvidenceLimits": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet."
+    },
+    {
+      "id": "xt192-cold-forge-containment",
+      "media": "romans",
+      "titleFr": "Cold Forge / Confinement",
+      "titleEn": "Cold Forge / Containment",
+      "work": "Alien: The Cold Forge",
+      "location": "RB-232 / Cold Forge station",
+      "knownWorkLevelFacts": "Station RB-232 du roman The Cold Forge ; ne pas la remplacer par la désignation de planète LV-871.",
+      "sourceVisualMeasurementAvailable": false,
+      "canonExact": false,
+      "canonStatus": "franchise-setting-project-reconstruction",
+      "appearanceStatus": "project-interpretation-no-primary-plate-measurement",
+      "sideViewAdaptation": "Scène réorganisée en trois profondeurs visuelles et un plan de combat horizontal dégagé ; aucune fidélité de plan 1:1 affirmée.",
+      "referenceStatus": "known-novel-setting-not-primary-rechecked",
+      "references": [
+        {
+          "url": "https://avp.fandom.com/wiki/RB-232",
+          "sourceType": "secondary-fan-wiki",
+          "requestedAt": "2026-11-13T15:24:22.300366+00:00",
+          "method": "GET",
+          "imageDownloaded": false,
+          "contentConsulted": false,
+          "locationNameVerifiedByThisFetch": false,
+          "geometryVerifiedByThisFetch": false,
+          "httpStatus": 402,
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "accessState": "BLOCKED_HTTP_402"
+        }
+      ],
+      "uncertainty": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet.",
+      "visualBriefFr": "Laboratoire orbital de recherche, cloisons froides et vitres d’observation, modules de confinement scellés ; aucun plan primaire mesuré.",
+      "events": [
+        "containment-scan",
+        "archive-scan"
+      ],
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "visualEvidenceLimits": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet."
+    },
+    {
+      "id": "xt192-charybdis-industrial",
+      "media": "romans",
+      "titleFr": "Charybdis / Terminal industriel",
+      "titleEn": "Charybdis / Industrial Terminal",
+      "work": "Alien: Into Charybdis",
+      "location": "Charybdis colony industrial installation",
+      "knownWorkLevelFacts": "Installation industrielle de la colonie Charybdis ; aucun nom de compagnie, baie ou bâtiment non confirmé n’est ajouté.",
+      "sourceVisualMeasurementAvailable": false,
+      "canonExact": false,
+      "canonStatus": "franchise-setting-project-reconstruction",
+      "appearanceStatus": "project-interpretation-no-primary-plate-measurement",
+      "sideViewAdaptation": "Scène réorganisée en trois profondeurs visuelles et un plan de combat horizontal dégagé ; aucune fidélité de plan 1:1 affirmée.",
+      "referenceStatus": "known-novel-colony-unmeasured-architecture",
+      "references": [
+        {
+          "url": "https://avp.fandom.com/wiki/Alien:_Into_Charybdis",
+          "sourceType": "secondary-fan-wiki",
+          "requestedAt": "2026-11-13T15:24:22.303991+00:00",
+          "method": "GET",
+          "imageDownloaded": false,
+          "contentConsulted": false,
+          "locationNameVerifiedByThisFetch": false,
+          "geometryVerifiedByThisFetch": false,
+          "httpStatus": 402,
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "accessState": "BLOCKED_HTTP_402"
+        }
+      ],
+      "uncertainty": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet.",
+      "visualBriefFr": "Installation coloniale de données et de maintenance, strates industrielles, gaines et coursives sous grandes structures ; choix architecturaux originaux.",
+      "events": [
+        "ocean-swell",
+        "storm-front"
+      ],
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "visualEvidenceLimits": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet."
+    },
+    {
+      "id": "xt192-ataegina-mountain-hold",
+      "media": "romans",
+      "titleFr": "Ataegina / Refuge de montagne",
+      "titleEn": "Ataegina / Mountain Hold",
+      "work": "Alien: Phalanx",
+      "location": "Unnamed mountain hold on Ataegina",
+      "knownWorkLevelFacts": "Monde d’Ataegina et ses refuges fortifiés de montagne ; Ahiliyah est une protagoniste, pas le nom d’un refuge.",
+      "sourceVisualMeasurementAvailable": false,
+      "canonExact": false,
+      "canonStatus": "franchise-setting-project-reconstruction",
+      "appearanceStatus": "project-interpretation-no-primary-plate-measurement",
+      "sideViewAdaptation": "Scène réorganisée en trois profondeurs visuelles et un plan de combat horizontal dégagé ; aucune fidélité de plan 1:1 affirmée.",
+      "referenceStatus": "known-novel-world-unnamed-hold-project-adaptation",
+      "references": [
+        {
+          "url": "https://avp.fandom.com/wiki/Ataegina",
+          "sourceType": "secondary-fan-wiki",
+          "requestedAt": "2026-11-13T15:24:22.313257+00:00",
+          "method": "GET",
+          "imageDownloaded": false,
+          "contentConsulted": false,
+          "locationNameVerifiedByThisFetch": false,
+          "geometryVerifiedByThisFetch": false,
+          "httpStatus": 402,
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "accessState": "BLOCKED_HTTP_402"
+        }
+      ],
+      "uncertainty": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet.",
+      "visualBriefFr": "Fortification de pierre dans la roche montagneuse, terrasse latérale et entrée défensive, gouffres au lointain ; refuge non nommé et plan original.",
+      "events": [
+        "ash-drift",
+        "searchlight-sweep"
+      ],
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "visualEvidenceLimits": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet."
+    },
+    {
+      "id": "xt192-jericho-three-laboratory",
+      "media": "romans",
+      "titleFr": "Jericho 3 / Laboratoire",
+      "titleEn": "Jericho 3 / Laboratory",
+      "work": "Alien: Prototype",
+      "location": "Jericho 3 industrial research installation",
+      "knownWorkLevelFacts": "Cadre colonial industriel de Jericho3 dans Prototype ; aucune numérotation d’étage ou de laboratoire affirmée.",
+      "sourceVisualMeasurementAvailable": false,
+      "canonExact": false,
+      "canonStatus": "franchise-setting-project-reconstruction",
+      "appearanceStatus": "project-interpretation-no-primary-plate-measurement",
+      "sideViewAdaptation": "Scène réorganisée en trois profondeurs visuelles et un plan de combat horizontal dégagé ; aucune fidélité de plan 1:1 affirmée.",
+      "referenceStatus": "known-novel-setting-not-primary-rechecked",
+      "references": [
+        {
+          "url": "https://avp.fandom.com/wiki/Jericho_3",
+          "sourceType": "secondary-fan-wiki",
+          "requestedAt": "2026-11-13T15:24:22.368078+00:00",
+          "method": "GET",
+          "imageDownloaded": false,
+          "contentConsulted": false,
+          "locationNameVerifiedByThisFetch": false,
+          "geometryVerifiedByThisFetch": false,
+          "httpStatus": 402,
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "accessState": "BLOCKED_HTTP_402"
+        }
+      ],
+      "uncertainty": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet.",
+      "visualBriefFr": "Bâtiment de recherche privé sur colonie industrielle, vitrages de confinement, coursives et équipements techniques ; plan de salle interprété.",
+      "events": [
+        "containment-scan",
+        "airlock-cycle"
+      ],
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "visualEvidenceLimits": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet."
+    },
+    {
+      "id": "xt192-euryale-rainforest",
+      "media": "romans",
+      "titleFr": "Euryale / Forêt humide",
+      "titleEn": "Euryale / Rainforest",
+      "work": "Alien: Echo",
+      "location": "Euryale colony rainforest",
+      "knownWorkLevelFacts": "Monde d’Euryale dans Echo ; végétation et installation de recherche coloniale, sans nom de vallée ou de laboratoire inventé.",
+      "sourceVisualMeasurementAvailable": false,
+      "canonExact": false,
+      "canonStatus": "franchise-setting-project-reconstruction",
+      "appearanceStatus": "project-interpretation-no-primary-plate-measurement",
+      "sideViewAdaptation": "Scène réorganisée en trois profondeurs visuelles et un plan de combat horizontal dégagé ; aucune fidélité de plan 1:1 affirmée.",
+      "referenceStatus": "known-novel-setting-not-primary-rechecked",
+      "references": [
+        {
+          "url": "https://avp.fandom.com/wiki/Euryale",
+          "sourceType": "secondary-fan-wiki",
+          "requestedAt": "2026-11-13T15:24:22.370067+00:00",
+          "method": "GET",
+          "imageDownloaded": false,
+          "contentConsulted": false,
+          "locationNameVerifiedByThisFetch": false,
+          "geometryVerifiedByThisFetch": false,
+          "httpStatus": 402,
+          "bodySha256": "35e642f0e1bd426b9d8b0ee0284aefe801873dc13c18819fbeeaf2bf47136664",
+          "bodyBytes": 55,
+          "accessState": "BLOCKED_HTTP_402"
+        }
+      ],
+      "uncertainty": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet.",
+      "visualBriefFr": "Forêt humide exotique autour d’un avant-poste scientifique, silhouettes de canopée et fines passerelles ; espèces végétales et disposition interprétées.",
+      "events": [
+        "rain-curtain",
+        "spore-drift"
+      ],
+      "eventEvidenceScope": "Decorative MIRE event choices adapted to this environment; not assertions that these timed incidents occur in the original work. No gameplay damage.",
+      "visualEvidenceLimits": "L’article secondaire ciblé répond402 et n’a pas pu être consulté. Les noms de lieux proviennent du récit connu et, lorsque précisé, de citations locales héritées ; architecture fine et événements sont des adaptations du projet."
+    }
+  ]
+}

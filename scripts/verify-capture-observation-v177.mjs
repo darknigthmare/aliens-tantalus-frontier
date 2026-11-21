@@ -8,6 +8,7 @@ import { execFileSync } from 'node:child_process';
 // These are callback fixtures; native menu duels remain a separate browser QA.
 const python=readFileSync(process.env.ATF_CAPTURE_DRIVER_SOURCE||new URL('./qa-xeno-trials-capture-v163.py',import.meta.url),'utf8');
 const source=python.match(/PLAYER_STARTUP_OBSERVER_V177 = r'''([\s\S]*?)'''/)[1];
+const drawnWitnessSource=python.match(/DRAWN_STARTUP_WITNESS_V191 = r'''([\s\S]*?)'''/)?.[1];
 function fixture(){
   const frames=[],copies=[],encodings=[],floorArms=[];let now=0;
   const match={config:{matchId:'qa-match'},round:1,tick:10,phase:'active',grappleV153:null,
@@ -36,6 +37,117 @@ function startup(f){
   f.match.events=[{id:4,type:'attack',side:'player',kind:'special',tick:11}];
   f.match.rigViewsV154=[{side:'player',preparationV163:true,clip:'special-windup'}];
 }
+
+// These image/Canvas objects are declared host doubles. The receipt is produced
+// by the actual V191 renderer, whose real admitted PNG bytes are checked below.
+// No callback fixture here is claimed to be another native browser capture.
+async function drawnStartupV191(f,index=0){
+ const S=await import('../src/xeno-trials-sprite-atlas-v191.js');
+ const D=await import('../src/xeno-trials-data-v96.js');
+ const A=await import('../src/xeno-trials-signatures-v147.js');
+ const E=await import('../src/xeno-trials-engine-v96.js');
+ startup(f);
+ const fighter=f.match.fighters[0];Object.assign(fighter,{x:420,y:0,hp:185,facing:1,guard:false,stun:0,hitFlash:0});
+ fighter.attack.age=[.06,.14,.25][index];
+ const art=D.getXenoTrialsArtV96(fighter.id),atlas=S.getXenoTrialsSpriteAtlasV191(fighter,art);
+ assert.ok(atlas);const image={naturalWidth:atlas.texture.width,naturalHeight:atlas.texture.height};
+ const draws=[],ctx={save(){},restore(){},translate(){},scale(){},drawImage(...args){draws.push(args);}};
+ const draw=S.drawXenoTrialsSpriteAtlasV191(ctx,fighter,art,new Map([[atlas.texture.path,image]]),{
+  metrics:{visibleHeight:240},x:420,y:450,facing:1,tick:f.match.tick,
+  spec:A.getXenoTrialsAttackV147(D.getXenoTrialsFighterV96(fighter.id),'special',E.XENO_TRIALS_ATTACKS_V96.special)});
+ assert.equal(draws.length,1);assert.ok(draw?.spriteAtlasV191);
+ assert.deepEqual(draws[0].slice(1,5),atlas.frames[index].rect);
+ f.match.rigViewsV154=[{side:'player',...draw}];
+ return{atlas,draw,draws,image,spec:A.getXenoTrialsAttackV147(D.getXenoTrialsFighterV96(fighter.id),'special',E.XENO_TRIALS_ATTACKS_V96.special)};
+}
+
+test('the V191 witness pins the real Prowler image, source plate, three crops and native startup without importing it in an old browser',async()=>{
+ assert.ok(drawnWitnessSource);assert.ok(source.includes('const drawnPreparationV191 = '+drawnWitnessSource+';'));
+ const f=fixture(),native=await drawnStartupV191(f),s=native.draw.spriteAtlasV191;
+ const {createHash}=await import('node:crypto');
+ assert.equal(createHash('sha256').update(readFileSync(new URL('..'+s.path,import.meta.url))).digest('hex'),s.sha256);
+ assert.equal(createHash('sha256').update(readFileSync(new URL('..'+s.referencePath,import.meta.url))).digest('hex'),s.referenceSha256);
+ assert.equal(native.spec.startup,.32);
+ const witness=runInNewContext('('+drawnWitnessSource+')');
+ for(let index=0;index<3;index++){
+  const g=fixture(),receipt=await drawnStartupV191(g,index);
+  const proof=witness(g.match,g.match.fighters[0],g.match.rigViewsV154[0]);
+  assert.ok(proof);assert.deepEqual(JSON.parse(JSON.stringify(proof.sourceRect)),receipt.atlas.frames[index].rect);
+  assert.equal(proof.frameId,'special-windup-'+index);assert.equal(proof.kind,'drawn-atlas-v191');
+ }
+ assert.doesNotMatch(drawnWitnessSource,/\bimport\b|fetch\(|new Image/,'Observation cannot load a new module, bitmap or runtime dependency in the old browser.');
+});
+
+test('an actually submitted V191 preparation freezes its own bitmap and arms the same native first floor without claiming a V163 mesh',async()=>{
+ const f=fixture();f.arm({specialStartup:.32,captureFloor:true});const native=await drawnStartupV191(f);
+ const before=structuredClone(f.state);f.step();const proof=f.out().frame.preparationProof;
+ assert.equal(f.out().ready,true);assert.equal(f.copies.length,1);assert.equal(f.encodings.length,0);
+ assert.equal(proof.kind,'drawn-atlas-v191');assert.equal(proof.clip,'special-windup-0');
+ assert.equal(proof.drawnPreparationV191.sha256,native.atlas.texture.sha256);
+ assert.equal(proof.drawnPreparationV191.attackId,proof.attackId);assert.equal(proof.drawnPreparationV191.attackEventId,proof.attackEventId);
+ assert.equal(proof.drawnPreparationV191.renderTick,proof.frameTick);assert.equal(f.floorArms.length,1);
+ assert.equal(f.floorArms[0].attackEventId,proof.attackEventId);
+ assert.equal(Object.hasOwn(f.out().frame.state.match.rigViewsV154[0],'preparationV163'),false);
+ assert.deepEqual(f.state,before,'The observation may copy evidence but cannot alter combat.');
+});
+
+test('foreign, stale, unsubmitted or geometrically different V191 receipts cannot borrow a legacy mesh witness',async()=>{
+ const changes=[
+  f=>f.match.rigViewsV154[0].drawn=false,
+  f=>f.match.rigViewsV154[0].animation='mesh-v163',
+  f=>f.match.rigViewsV154[0].side='cpu',
+  f=>f.match.rigViewsV154[0].preparationV163=true,
+  ...[
+   ['drawn',false],['fighterId','warrior'],['profileId','foreign-profile'],['kind','combat'],['primaryAction','tail'],
+   ['phase','contact'],['frameId','special-active-0'],['path','/other.png'],['sha256','0'.repeat(64)],
+   ['referencePath','/foreign-source.png'],['referenceSha256','1'.repeat(64)],['imageWidth',1982],['imageHeight',792],
+   ['sourceRect',[1,0,397,396]],['phaseProgress',.75],['attackId',9],['attackAge',.07],['renderTick',10],
+   ['grounded',false],['supportMode','free'],['scale',0]
+  ].map(([key,value])=>f=>f.match.rigViewsV154[0].spriteAtlasV191[key]=value),
+  f=>f.match.fighters[0].attack.id=9,
+  f=>f.match.fighters[0].attack.kind='light',
+  f=>f.match.fighters[0].attack.age=.32,
+  f=>f.match.fighters[0].y=1,
+  f=>f.match.fighters[0].guard=true,
+  f=>f.match.events[0].id=2,
+  f=>f.match.events[0].side='cpu',
+  f=>f.match.events[0].tick=12,
+  f=>f.match.fighters[0].stats.specials=0,
+  f=>f.match.tick=12,
+  f=>f.match.paused=true,
+  f=>f.match.presentation={blocksSimulation:true}
+ ];
+ for(const change of changes){
+  const f=fixture();f.arm({specialStartup:.32});await drawnStartupV191(f);change(f);f.step();
+  assert.equal(f.out().ready,false);assert.equal(f.copies.length,0);assert.equal(f.encodings.length,0);
+ }
+});
+
+test('V191 CPU observation requires the exact current Prowler event and a submitted source crop',async()=>{
+ const f=fixture();await drawnStartupV191(f);
+ const prowler=f.match.fighters[0];prowler.side='opponent';
+ f.match.fighters[1].side='player';f.match.events[0].side='opponent';f.match.rigViewsV154[0].side='opponent';
+ const witness=runInNewContext('('+drawnWitnessSource+')');
+ assert.equal(witness(f.match,prowler,f.match.rigViewsV154[0]).side,'opponent');
+ assert.equal(witness(f.match,structuredClone(prowler),f.match.rigViewsV154[0]),null,'A foreign object cannot borrow the current actor identity.');
+ f.match.events[0].id++;assert.equal(witness(f.match,prowler,f.match.rigViewsV154[0]),null);
+ assert.ok(python.includes('+ DRAWN_STARTUP_WITNESS_V191 +'),'The CPU predicate reuses the same reviewed witness as the player observer.');
+});
+
+test('deferred V191 startup PNG export refuses changes to its new source witness before encoding',async()=>{
+ const exportSource=python.match(/PLAYER_STARTUP_EXPORT_V179 = r'''([\s\S]*?)'''/)[1];
+ const make=async()=>{const f=fixture();f.arm({specialStartup:.32});await drawnStartupV191(f);f.step();
+  const frame=f.out().frame;return{f,expected:{matchId:frame.state.match.config.matchId,round:frame.state.match.round,
+   participants:frame.state.match.fighters.map(v=>[v.id,v.side]),proof:structuredClone(frame.preparationProof)},
+   exportFrame:runInNewContext('('+exportSource+')',f.context)};};
+ const good=await make();assert.equal(good.exportFrame(good.expected).png,'recorded-png');
+ for(const field of ['sha256','referenceSha256','frameId','sourceRect','attackId','attackEventId','renderTick']){
+  const bad=await make();bad.f.out().frame.preparationProof.drawnPreparationV191[field]='foreign';
+  assert.equal(bad.exportFrame(bad.expected),null);assert.equal(bad.f.encodings.length,0);
+ }
+ const bad=await make();bad.f.out().frame.preparationProof.kind='mesh-v163';
+ assert.equal(bad.exportFrame(bad.expected),null);assert.equal(bad.f.encodings.length,0);
+});
 test('a native startup bitmap is frozen before delayed PNG encoding and later hold observation',()=>{
   const f=fixture();f.arm();startup(f);const original=structuredClone(f.state);f.step();
   assert.equal(f.out().ready,true);assert.equal(f.copies.length,1);assert.equal(f.encodings.length,0);

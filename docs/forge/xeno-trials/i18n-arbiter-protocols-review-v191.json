@@ -1,0 +1,277 @@
+{
+  "format": "atf-i18n-review-v186",
+  "exact": [
+    {
+      "fr": "CHAMBRE D’ARBITRAGE",
+      "en": "ARBITRATION CHAMBER",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "TRANSIT DES SPÉCIMENS",
+      "en": "SPECIMEN TRANSIT",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "GALERIE DES MANDATAIRES",
+      "en": "DELEGATES’ GALLERY",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "ARCHIVES SOUS SCELLÉS",
+      "en": "SEALED ARCHIVES",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "CONVOI SOUS SCELLÉS",
+      "en": "SEALED CONVOY",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "RELAIS HORS RÉSEAU",
+      "en": "OFFLINE RELAYS",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "PURGE DE CONFINEMENT",
+      "en": "CONTAINMENT PURGE",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "BALISES DE CONTRÔLE",
+      "en": "CONTROL BEACONS",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "RETOUR DES CAISSONS",
+      "en": "CRATE RETURN",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "Les archives de la chambre reconstituent la pression des séances privées. Les mises et concessions restent des pièces du dossier, jamais des enjeux de cette copie. 2 vagues de troupes à 15–35 PV. Aucun soin automatique entre les vagues.",
+      "en": "The chamber archives reconstruct the pressure of private sessions. Stakes and concessions remain evidence in the dossier, never wagers in this copy. 2 waves of troops with 15–35 HP. No automatic healing between waves.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "Les archives de la chambre reconstituent la pression des séances privées. Les mises et concessions restent des pièces du dossier, jamais des enjeux de cette copie. 3 vagues de troupes à 15–35 PV. Aucun soin automatique entre les vagues.",
+      "en": "The chamber archives reconstruct the pressure of private sessions. Stakes and concessions remain evidence in the dossier, never wagers in this copy. 3 waves of troops with 15–35 HP. No automatic healing between waves.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "Les archives de la chambre reconstituent la pression des séances privées. Les mises et concessions restent des pièces du dossier, jamais des enjeux de cette copie. 4 vagues de troupes à 15–35 PV. Aucun soin automatique entre les vagues.",
+      "en": "The chamber archives reconstruct the pressure of private sessions. Stakes and concessions remain evidence in the dossier, never wagers in this copy. 4 waves of troops with 15–35 HP. No automatic healing between waves.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "Les archives de la chambre reconstituent la pression des séances privées. Les mises et concessions restent des pièces du dossier, jamais des enjeux de cette copie. 4 vagues de troupes à 15–35 PV. Finale : un contact majeur à 260 PV et deux gardes. Aucun soin automatique entre les vagues.",
+      "en": "The chamber archives reconstruct the pressure of private sessions. Stakes and concessions remain evidence in the dossier, never wagers in this copy. 4 waves of troops with 15–35 HP. Finale: one major contact with 260 HP and two guards. No automatic healing between waves.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "Les séquences de convoyage montrent les ruptures de confinement dissimulées dans les registres de fret. Le rail et les contacts sont reconstruits sur le banc isolé. 2 vagues de troupes à 15–35 PV. Aucun soin automatique entre les vagues.",
+      "en": "The freight sequences show containment breaches concealed in the cargo registers. The rail and contacts are reconstructed on the isolated bench. 2 waves of troops with 15–35 HP. No automatic healing between waves.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "Les séquences de convoyage montrent les ruptures de confinement dissimulées dans les registres de fret. Le rail et les contacts sont reconstruits sur le banc isolé. 3 vagues de troupes à 15–35 PV. Aucun soin automatique entre les vagues.",
+      "en": "The freight sequences show containment breaches concealed in the cargo registers. The rail and contacts are reconstructed on the isolated bench. 3 waves of troops with 15–35 HP. No automatic healing between waves.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "Les séquences de convoyage montrent les ruptures de confinement dissimulées dans les registres de fret. Le rail et les contacts sont reconstruits sur le banc isolé. 4 vagues de troupes à 15–35 PV. Aucun soin automatique entre les vagues.",
+      "en": "The freight sequences show containment breaches concealed in the cargo registers. The rail and contacts are reconstructed on the isolated bench. 4 waves of troops with 15–35 HP. No automatic healing between waves.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "Les séquences de convoyage montrent les ruptures de confinement dissimulées dans les registres de fret. Le rail et les contacts sont reconstruits sur le banc isolé. 4 vagues de troupes à 15–35 PV. Finale : un contact majeur à 220 PV et deux gardes. Aucun soin automatique entre les vagues.",
+      "en": "The freight sequences show containment breaches concealed in the cargo registers. The rail and contacts are reconstructed on the isolated bench. 4 waves of troops with 15–35 HP. Finale: one major contact with 220 HP and two guards. No automatic healing between waves.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "La galerie conserve les relevés de sécurité des invités, dont une séance privée mêlant agents synthétiques et finale Smasher. Ces affrontements sont relus comme un exercice, sans exécuter leurs anciennes sanctions. 2 vagues de troupes à 15–35 PV. Aucun soin automatique entre les vagues.",
+      "en": "The gallery preserves the guests’ security logs, including a private session mixing synthetic agents with a Smasher finale. These confrontations are replayed as an exercise, without enforcing their former sanctions. 2 waves of troops with 15–35 HP. No automatic healing between waves.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "La galerie conserve les relevés de sécurité des invités, dont une séance privée mêlant agents synthétiques et finale Smasher. Ces affrontements sont relus comme un exercice, sans exécuter leurs anciennes sanctions. 3 vagues de troupes à 15–35 PV. Aucun soin automatique entre les vagues.",
+      "en": "The gallery preserves the guests’ security logs, including a private session mixing synthetic agents with a Smasher finale. These confrontations are replayed as an exercise, without enforcing their former sanctions. 3 waves of troops with 15–35 HP. No automatic healing between waves.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "La galerie conserve les relevés de sécurité des invités, dont une séance privée mêlant agents synthétiques et finale Smasher. Ces affrontements sont relus comme un exercice, sans exécuter leurs anciennes sanctions. 4 vagues de troupes à 15–35 PV. Aucun soin automatique entre les vagues.",
+      "en": "The gallery preserves the guests’ security logs, including a private session mixing synthetic agents with a Smasher finale. These confrontations are replayed as an exercise, without enforcing their former sanctions. 4 waves of troops with 15–35 HP. No automatic healing between waves.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "La galerie conserve les relevés de sécurité des invités, dont une séance privée mêlant agents synthétiques et finale Smasher. Ces affrontements sont relus comme un exercice, sans exécuter leurs anciennes sanctions. 4 vagues de troupes à 15–35 PV. Finale : un contact majeur à 200 PV et deux gardes. Aucun soin automatique entre les vagues.",
+      "en": "The gallery preserves the guests’ security logs, including a private session mixing synthetic agents with a Smasher finale. These confrontations are replayed as an exercise, without enforcing their former sanctions. 4 waves of troops with 15–35 HP. Finale: one major contact with 200 HP and two guards. No automatic healing between waves.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "La copie des serveurs garde les relevés biologiques et les accès révoqués. Les contacts éprouvent la récupération des preuves, sans ouvrir le réseau compagnie. 2 vagues de troupes à 15–35 PV. Aucun soin automatique entre les vagues.",
+      "en": "The server copy retains biological readings and revoked access records. Contacts test the recovery of evidence, without opening the company network. 2 waves of troops with 15–35 HP. No automatic healing between waves.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "La copie des serveurs garde les relevés biologiques et les accès révoqués. Les contacts éprouvent la récupération des preuves, sans ouvrir le réseau compagnie. 3 vagues de troupes à 15–35 PV. Aucun soin automatique entre les vagues.",
+      "en": "The server copy retains biological readings and revoked access records. Contacts test the recovery of evidence, without opening the company network. 3 waves of troops with 15–35 HP. No automatic healing between waves.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "La copie des serveurs garde les relevés biologiques et les accès révoqués. Les contacts éprouvent la récupération des preuves, sans ouvrir le réseau compagnie. 4 vagues de troupes à 15–35 PV. Aucun soin automatique entre les vagues.",
+      "en": "The server copy retains biological readings and revoked access records. Contacts test the recovery of evidence, without opening the company network. 4 waves of troops with 15–35 HP. No automatic healing between waves.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "La copie des serveurs garde les relevés biologiques et les accès révoqués. Les contacts éprouvent la récupération des preuves, sans ouvrir le réseau compagnie. 4 vagues de troupes à 15–35 PV. Finale : un contact majeur à 180 PV et deux gardes. Aucun soin automatique entre les vagues.",
+      "en": "The server copy retains biological readings and revoked access records. Contacts test the recovery of evidence, without opening the company network. 4 waves of troops with 15–35 HP. Finale: one major contact with 180 HP and two guards. No automatic healing between waves.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "Les archives de la chambre reconstituent la pression des séances privées. Les mises et concessions restent des pièces du dossier, jamais des enjeux de cette copie. Maintenez E près du chariot et accompagnez-le jusqu’au sas. Sa progression s’arrête dès que vous vous éloignez. Les ennemis proches endommagent le chariot.",
+      "en": "The chamber archives reconstruct the pressure of private sessions. Stakes and concessions remain evidence in the dossier, never wagers in this copy. Hold E near the trolley and accompany it to the airlock. It stops moving when you move away. Nearby enemies damage the trolley.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "Les archives de la chambre reconstituent la pression des séances privées. Les mises et concessions restent des pièces du dossier, jamais des enjeux de cette copie. Ralliez les trois relais dans l’ordre indiqué et maintenez E pour les charger. Quitter une charge inachevée la fait redescendre.",
+      "en": "The chamber archives reconstruct the pressure of private sessions. Stakes and concessions remain evidence in the dossier, never wagers in this copy. Reach the three relays in the indicated order and hold E to charge them. An unfinished charge drains when you leave.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "Les archives de la chambre reconstituent la pression des séances privées. Les mises et concessions restent des pièces du dossier, jamais des enjeux de cette copie. Maintenez E près des conduits pour les purger et les sceller. Les foyers inachevés se régénèrent ; chaque foyer ouvert affaiblit le confinement.",
+      "en": "The chamber archives reconstruct the pressure of private sessions. Stakes and concessions remain evidence in the dossier, never wagers in this copy. Hold E near the ducts to purge and seal them. Unfinished sources regenerate; each open source weakens containment.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "Les archives de la chambre reconstituent la pression des séances privées. Les mises et concessions restent des pièces du dossier, jamais des enjeux de cette copie. Maintenez E près d’une balise pendant sa fenêtre verte. Une charge inachevée retombe hors de cette fenêtre. Synchronisez les trois balises.",
+      "en": "The chamber archives reconstruct the pressure of private sessions. Stakes and concessions remain evidence in the dossier, never wagers in this copy. Hold E near a beacon during its green window. An unfinished charge drains outside that window. Synchronize all three beacons.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "Les archives de la chambre reconstituent la pression des séances privées. Les mises et concessions restent des pièces du dossier, jamais des enjeux de cette copie. Maintenez E près d’un caisson, rapportez-le au dépôt et maintenez E pour le livrer. Transportez un seul caisson à la fois, puis rejoignez le sas.",
+      "en": "The chamber archives reconstruct the pressure of private sessions. Stakes and concessions remain evidence in the dossier, never wagers in this copy. Hold E near a crate, bring it to the depot, then hold E to deliver it. Carry one crate at a time, then reach the airlock.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "Les séquences de convoyage montrent les ruptures de confinement dissimulées dans les registres de fret. Le rail et les contacts sont reconstruits sur le banc isolé. Maintenez E près du chariot et accompagnez-le jusqu’au sas. Sa progression s’arrête dès que vous vous éloignez. Les ennemis proches endommagent le chariot.",
+      "en": "The freight sequences show containment breaches concealed in the cargo registers. The rail and contacts are reconstructed on the isolated bench. Hold E near the trolley and accompany it to the airlock. It stops moving when you move away. Nearby enemies damage the trolley.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "Les séquences de convoyage montrent les ruptures de confinement dissimulées dans les registres de fret. Le rail et les contacts sont reconstruits sur le banc isolé. Ralliez les trois relais dans l’ordre indiqué et maintenez E pour les charger. Quitter une charge inachevée la fait redescendre.",
+      "en": "The freight sequences show containment breaches concealed in the cargo registers. The rail and contacts are reconstructed on the isolated bench. Reach the three relays in the indicated order and hold E to charge them. An unfinished charge drains when you leave.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "Les séquences de convoyage montrent les ruptures de confinement dissimulées dans les registres de fret. Le rail et les contacts sont reconstruits sur le banc isolé. Maintenez E près des conduits pour les purger et les sceller. Les foyers inachevés se régénèrent ; chaque foyer ouvert affaiblit le confinement.",
+      "en": "The freight sequences show containment breaches concealed in the cargo registers. The rail and contacts are reconstructed on the isolated bench. Hold E near the ducts to purge and seal them. Unfinished sources regenerate; each open source weakens containment.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "Les séquences de convoyage montrent les ruptures de confinement dissimulées dans les registres de fret. Le rail et les contacts sont reconstruits sur le banc isolé. Maintenez E près d’une balise pendant sa fenêtre verte. Une charge inachevée retombe hors de cette fenêtre. Synchronisez les trois balises.",
+      "en": "The freight sequences show containment breaches concealed in the cargo registers. The rail and contacts are reconstructed on the isolated bench. Hold E near a beacon during its green window. An unfinished charge drains outside that window. Synchronize all three beacons.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "Les séquences de convoyage montrent les ruptures de confinement dissimulées dans les registres de fret. Le rail et les contacts sont reconstruits sur le banc isolé. Maintenez E près d’un caisson, rapportez-le au dépôt et maintenez E pour le livrer. Transportez un seul caisson à la fois, puis rejoignez le sas.",
+      "en": "The freight sequences show containment breaches concealed in the cargo registers. The rail and contacts are reconstructed on the isolated bench. Hold E near a crate, bring it to the depot, then hold E to deliver it. Carry one crate at a time, then reach the airlock.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "La galerie conserve les relevés de sécurité des invités, dont une séance privée mêlant agents synthétiques et finale Smasher. Ces affrontements sont relus comme un exercice, sans exécuter leurs anciennes sanctions. Maintenez E près du chariot et accompagnez-le jusqu’au sas. Sa progression s’arrête dès que vous vous éloignez. Les ennemis proches endommagent le chariot.",
+      "en": "The gallery preserves the guests’ security logs, including a private session mixing synthetic agents with a Smasher finale. These confrontations are replayed as an exercise, without enforcing their former sanctions. Hold E near the trolley and accompany it to the airlock. It stops moving when you move away. Nearby enemies damage the trolley.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "La galerie conserve les relevés de sécurité des invités, dont une séance privée mêlant agents synthétiques et finale Smasher. Ces affrontements sont relus comme un exercice, sans exécuter leurs anciennes sanctions. Ralliez les trois relais dans l’ordre indiqué et maintenez E pour les charger. Quitter une charge inachevée la fait redescendre.",
+      "en": "The gallery preserves the guests’ security logs, including a private session mixing synthetic agents with a Smasher finale. These confrontations are replayed as an exercise, without enforcing their former sanctions. Reach the three relays in the indicated order and hold E to charge them. An unfinished charge drains when you leave.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "La galerie conserve les relevés de sécurité des invités, dont une séance privée mêlant agents synthétiques et finale Smasher. Ces affrontements sont relus comme un exercice, sans exécuter leurs anciennes sanctions. Maintenez E près des conduits pour les purger et les sceller. Les foyers inachevés se régénèrent ; chaque foyer ouvert affaiblit le confinement.",
+      "en": "The gallery preserves the guests’ security logs, including a private session mixing synthetic agents with a Smasher finale. These confrontations are replayed as an exercise, without enforcing their former sanctions. Hold E near the ducts to purge and seal them. Unfinished sources regenerate; each open source weakens containment.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "La galerie conserve les relevés de sécurité des invités, dont une séance privée mêlant agents synthétiques et finale Smasher. Ces affrontements sont relus comme un exercice, sans exécuter leurs anciennes sanctions. Maintenez E près d’une balise pendant sa fenêtre verte. Une charge inachevée retombe hors de cette fenêtre. Synchronisez les trois balises.",
+      "en": "The gallery preserves the guests’ security logs, including a private session mixing synthetic agents with a Smasher finale. These confrontations are replayed as an exercise, without enforcing their former sanctions. Hold E near a beacon during its green window. An unfinished charge drains outside that window. Synchronize all three beacons.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "La galerie conserve les relevés de sécurité des invités, dont une séance privée mêlant agents synthétiques et finale Smasher. Ces affrontements sont relus comme un exercice, sans exécuter leurs anciennes sanctions. Maintenez E près d’un caisson, rapportez-le au dépôt et maintenez E pour le livrer. Transportez un seul caisson à la fois, puis rejoignez le sas.",
+      "en": "The gallery preserves the guests’ security logs, including a private session mixing synthetic agents with a Smasher finale. These confrontations are replayed as an exercise, without enforcing their former sanctions. Hold E near a crate, bring it to the depot, then hold E to deliver it. Carry one crate at a time, then reach the airlock.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "La copie des serveurs garde les relevés biologiques et les accès révoqués. Les contacts éprouvent la récupération des preuves, sans ouvrir le réseau compagnie. Maintenez E près du chariot et accompagnez-le jusqu’au sas. Sa progression s’arrête dès que vous vous éloignez. Les ennemis proches endommagent le chariot.",
+      "en": "The server copy retains biological readings and revoked access records. Contacts test the recovery of evidence, without opening the company network. Hold E near the trolley and accompany it to the airlock. It stops moving when you move away. Nearby enemies damage the trolley.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "La copie des serveurs garde les relevés biologiques et les accès révoqués. Les contacts éprouvent la récupération des preuves, sans ouvrir le réseau compagnie. Ralliez les trois relais dans l’ordre indiqué et maintenez E pour les charger. Quitter une charge inachevée la fait redescendre.",
+      "en": "The server copy retains biological readings and revoked access records. Contacts test the recovery of evidence, without opening the company network. Reach the three relays in the indicated order and hold E to charge them. An unfinished charge drains when you leave.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "La copie des serveurs garde les relevés biologiques et les accès révoqués. Les contacts éprouvent la récupération des preuves, sans ouvrir le réseau compagnie. Maintenez E près des conduits pour les purger et les sceller. Les foyers inachevés se régénèrent ; chaque foyer ouvert affaiblit le confinement.",
+      "en": "The server copy retains biological readings and revoked access records. Contacts test the recovery of evidence, without opening the company network. Hold E near the ducts to purge and seal them. Unfinished sources regenerate; each open source weakens containment.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "La copie des serveurs garde les relevés biologiques et les accès révoqués. Les contacts éprouvent la récupération des preuves, sans ouvrir le réseau compagnie. Maintenez E près d’une balise pendant sa fenêtre verte. Une charge inachevée retombe hors de cette fenêtre. Synchronisez les trois balises.",
+      "en": "The server copy retains biological readings and revoked access records. Contacts test the recovery of evidence, without opening the company network. Hold E near a beacon during its green window. An unfinished charge drains outside that window. Synchronize all three beacons.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "La copie des serveurs garde les relevés biologiques et les accès révoqués. Les contacts éprouvent la récupération des preuves, sans ouvrir le réseau compagnie. Maintenez E près d’un caisson, rapportez-le au dépôt et maintenez E pour le livrer. Transportez un seul caisson à la fois, puis rejoignez le sas.",
+      "en": "The server copy retains biological readings and revoked access records. Contacts test the recovery of evidence, without opening the company network. Hold E near a crate, bring it to the depot, then hold E to deliver it. Carry one crate at a time, then reach the airlock.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "ARCHIVES ARBITER",
+      "en": "ARBITER ARCHIVES",
+      "source": "src/xeno-arbiter-protocols-v191.js; src/xeno-trials-ui-v96.js"
+    },
+    {
+      "fr": "20 hordes et 20 opérations issues de la copie isolée AB-40. Les six retours de l’enquête ouvrent ces dossiers.",
+      "en": "20 hordes and 20 operations from the isolated AB-40 copy. The investigation’s six returns open these records.",
+      "source": "src/xeno-trials-ui-v96.js"
+    },
+    {
+      "fr": "SCELLÉS · TERMINER L’ENQUÊTE ARBITER",
+      "en": "SEALED · COMPLETE THE ARBITER INVESTIGATION",
+      "source": "src/xeno-trials-ui-v96.js"
+    },
+    {
+      "fr": "40 DOSSIERS / 20 HORDES / 20 OPÉRATIONS",
+      "en": "40 DOSSIERS / 20 HORDES / 20 OPERATIONS",
+      "source": "src/xeno-trials-ui-v96.js"
+    },
+    {
+      "fr": "Copie locale isolée. 20 hordes et 20 opérations récupérées.",
+      "en": "Isolated local copy. 20 hordes and 20 operations recovered.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "40 DOSSIERS / 20 HORDES / 20 OPÉRATIONS · ARCHIVES ARBITER · Copie locale isolée. 20 hordes et 20 opérations récupérées.",
+      "en": "40 DOSSIERS / 20 HORDES / 20 OPERATIONS · ARBITER ARCHIVES · Isolated local copy. 20 hordes and 20 operations recovered.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-arbiter-protocols-v191.js"
+    }
+  ],
+  "patterns": [
+    {
+      "fr": "ARCHIVES ARBITER · {0}/6 retours validés. Terminez les six extractions du dossier ARBITER.",
+      "en": "ARBITER ARCHIVES · {0}/6 returns validated. Complete all six ARBITER dossier extractions.",
+      "source": "src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "40 DOSSIERS / 20 HORDES / 20 OPÉRATIONS · ARCHIVES ARBITER · {0}/6 retours validés. Terminez les six extractions du dossier ARBITER.",
+      "en": "40 DOSSIERS / 20 HORDES / 20 OPERATIONS · ARBITER ARCHIVES · {0}/6 returns validated. Complete all six ARBITER dossier extractions.",
+      "source": "src/xeno-trials-ui-v96.js; src/xeno-arbiter-protocols-v191.js"
+    },
+    {
+      "fr": "{0} Maintenez E, L3 ou INTERAGIR au contact de la cible indiquée. La réussite dépend de l’objectif, même si des contacts restent actifs.",
+      "en": "{0} Hold E, L3 or INTERACT next to the indicated target. Success depends on the objective, even if contacts remain active.",
+      "source": "src/xeno-trials-operation-presentation-v188.js; src/xeno-arbiter-protocols-v191.js"
+    }
+  ]
+}

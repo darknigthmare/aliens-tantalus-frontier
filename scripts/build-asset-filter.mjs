@@ -1,6 +1,23 @@
+import { publicXenoProductionPathAdmissionV206 } from './public-xeno-production-admissions-v206.mjs';
+import { publicXenoVisualPathAdmissionV205, PUBLIC_XENO_VISUAL_DIRECTORIES_V205 } from './public-xeno-visual-admissions-v205.mjs';
+import { publicXenoPriorityPathAdmissionV204, PUBLIC_XENO_PRIORITY_DIRECTORY_V204 } from './public-xeno-priority-admissions-v204.mjs';
+import { publicXenoPriorityPathAdmissionV203, PUBLIC_XENO_PRIORITY_DIRECTORY_V203 } from './public-xeno-priority-admissions-v203.mjs';
+import { publicXenoPriorityPathAdmissionV202, PUBLIC_XENO_PRIORITY_DIRECTORY_V202 } from './public-xeno-priority-admissions-v202.mjs';
+import { publicXenoPriorityPathAdmissionV201, PUBLIC_XENO_PRIORITY_DIRECTORY_V201 } from './public-xeno-priority-admissions-v201.mjs';
+import { publicXenoSuperPathAdmissionV200, PUBLIC_XENO_SUPER_DIRECTORY_V200 } from './public-xeno-super-admissions-v200.mjs';
+import { publicXenoActionPathAdmissionV199, PUBLIC_XENO_ACTION_DIRECTORY_V199 } from './public-xeno-action-admissions-v199.mjs';
+import { publicXenoPriorityStagePathAdmissionV198, PUBLIC_PRIORITY_STAGE_DIRECTORY_V198 } from './public-xeno-priority-stage-admissions-v198.mjs';
+import { publicXenoSpritePathAdmissionV197, PUBLIC_XENO_SPRITE_DIRECTORY_V197 } from './public-xeno-sprite-admissions-v197.mjs';
+import { publicXenoReferencedStagePathAdmissionV196, PUBLIC_REFERENCED_STAGE_DIRECTORY_V196 } from './public-xeno-referenced-stage-admissions-v196.mjs';
+import { publicXenoIconicStagePathAdmissionV194, PUBLIC_ICONIC_STAGE_DIRECTORY_V194 } from './public-xeno-iconic-stage-admissions-v194.mjs';
+import { publicXenoOriginalArenaPathAdmissionV193, PUBLIC_XENO_ORIGINAL_ARENA_DIRECTORIES_V193 } from './public-xeno-original-arena-admissions-v193.mjs';
+import { publicXenoFranchiseStagePathAdmissionV192, PUBLIC_XENO_FRANCHISE_STAGE_DIRECTORIES_V192 } from './public-xeno-franchise-stage-admissions-v192.mjs';
 import { publicReleasePathAdmissionV163 } from './public-release-admissions-v163.mjs';
+import { publicXenoSpritePathAdmissionV191 } from './public-xeno-sprite-admissions-v191.mjs';
+import { publicArbiterPathAdmissionV190 } from './public-xeno-arbiter-admissions-v190.mjs';
 import { PUBLIC_COSTUME_ASSET_PATHS_V165, publicCostumePathAdmissionV165 } from './public-costume-admissions-v165.mjs';
 import { relative } from 'node:path';
+import { publicCampaignArtPathAdmissionV180 } from './public-campaign-art-admissions-v180.mjs';
 
 const costumeDirectoriesV165 = new Set(PUBLIC_COSTUME_ASSET_PATHS_V165.flatMap(path => {
   const parts = path.split('/');
@@ -238,6 +255,42 @@ export function createBuildAssetFilter(projectRoot, {
     // fs.cp also visits the source root (relative path ''). This is a container,
     // not a distributable filename; descend before applying file-path rules.
     if (sourcePath === '') return true;
+    const productionAdmissionV206 = publicXenoProductionPathAdmissionV206(sourcePath, { built: true });
+    if (productionAdmissionV206 !== null) return productionAdmissionV206;
+    const visualAdmissionV205 = publicXenoVisualPathAdmissionV205(sourcePath, { directory: PUBLIC_XENO_VISUAL_DIRECTORIES_V205.has(sourcePath), built: true });
+    if (visualAdmissionV205 !== null) return visualAdmissionV205;
+    const priorityStageAdmissionV198 = publicXenoPriorityStagePathAdmissionV198(sourcePath, { directory: sourcePath === PUBLIC_PRIORITY_STAGE_DIRECTORY_V198 });
+    if (priorityStageAdmissionV198 !== null) return priorityStageAdmissionV198;
+    const referencedStageAdmissionV196 = publicXenoReferencedStagePathAdmissionV196(sourcePath, { directory: sourcePath === PUBLIC_REFERENCED_STAGE_DIRECTORY_V196 });
+    if (referencedStageAdmissionV196 !== null) return referencedStageAdmissionV196;
+    const iconicStageAdmissionV194 = publicXenoIconicStagePathAdmissionV194(sourcePath, { directory: sourcePath === PUBLIC_ICONIC_STAGE_DIRECTORY_V194 });
+    if (iconicStageAdmissionV194 !== null) return iconicStageAdmissionV194;
+    const originalArenaAdmissionV193 = publicXenoOriginalArenaPathAdmissionV193(sourcePath, { directory: PUBLIC_XENO_ORIGINAL_ARENA_DIRECTORIES_V193.includes(sourcePath) });
+    if (originalArenaAdmissionV193 !== null) return originalArenaAdmissionV193;
+    const franchiseAdmissionV192 = publicXenoFranchiseStagePathAdmissionV192(sourcePath, { directory: PUBLIC_XENO_FRANCHISE_STAGE_DIRECTORIES_V192.includes(sourcePath) });
+    if (franchiseAdmissionV192 !== null) return franchiseAdmissionV192;
+    const priorityAdmissionV204 = publicXenoPriorityPathAdmissionV204(sourcePath, { directory: sourcePath === PUBLIC_XENO_PRIORITY_DIRECTORY_V204 });
+    if (priorityAdmissionV204 !== null) return priorityAdmissionV204;
+    const priorityAdmissionV203 = publicXenoPriorityPathAdmissionV203(sourcePath, { directory: sourcePath === PUBLIC_XENO_PRIORITY_DIRECTORY_V203 });
+    if (priorityAdmissionV203 !== null) return priorityAdmissionV203;
+    const priorityAdmissionV202 = publicXenoPriorityPathAdmissionV202(sourcePath, { directory: sourcePath === PUBLIC_XENO_PRIORITY_DIRECTORY_V202 });
+    if (priorityAdmissionV202 !== null) return priorityAdmissionV202;
+    const priorityAdmissionV201 = publicXenoPriorityPathAdmissionV201(sourcePath, { directory: sourcePath === PUBLIC_XENO_PRIORITY_DIRECTORY_V201 });
+    if (priorityAdmissionV201 !== null) return priorityAdmissionV201;
+    const superAdmissionV200 = publicXenoSuperPathAdmissionV200(sourcePath, { directory: sourcePath === PUBLIC_XENO_SUPER_DIRECTORY_V200 });
+    if (superAdmissionV200 !== null) return superAdmissionV200;
+    const actionAdmissionV199 = publicXenoActionPathAdmissionV199(sourcePath, { directory: sourcePath === PUBLIC_XENO_ACTION_DIRECTORY_V199 });
+    if (actionAdmissionV199 !== null) return actionAdmissionV199;
+    const spriteAdmissionV197 = publicXenoSpritePathAdmissionV197(sourcePath, { directory: sourcePath === PUBLIC_XENO_SPRITE_DIRECTORY_V197 });
+    if (spriteAdmissionV197 !== null) return spriteAdmissionV197;
+    const spriteAdmissionV191 = publicXenoSpritePathAdmissionV191(sourcePath, { directory: sourcePath === 'assets/openai/sprites/xeno-trials-v191' });
+    if (spriteAdmissionV191 !== null) return spriteAdmissionV191;
+    const arbiterAdmissionV190 = publicArbiterPathAdmissionV190(sourcePath, { directory:
+      ['assets/openai/stages/xeno-trials-v190', 'assets/openai/campaign/xeno-arbiter-v190'].includes(sourcePath) });
+    if (arbiterAdmissionV190 !== null) return arbiterAdmissionV190;
+    const campaignAdmissionV180 = publicCampaignArtPathAdmissionV180(sourcePath,
+      { directory: ['assets/openai/campaign', 'assets/openai/campaign/v180'].includes(sourcePath) });
+    if (campaignAdmissionV180 !== null) return campaignAdmissionV180;
     const costumeAdmissionV165 = publicCostumePathAdmissionV165(sourcePath, { directory: costumeDirectoriesV165.has(sourcePath) });
     if (costumeAdmissionV165 !== null) return costumeAdmissionV165;
     const v163Admission = publicReleasePathAdmissionV163(sourcePath, { directory: sourcePath === 'assets/openai/sprites/trials-v163' });

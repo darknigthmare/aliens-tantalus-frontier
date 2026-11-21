@@ -1,0 +1,806 @@
+{
+  "lot": "XENO-STAGE-OPERATIONS-V188",
+  "baseCommit": "bf42bc7aa5a674b4d204145670181a940d16a5aa",
+  "state": "LOCALLY_VERIFIED",
+  "counts": {
+    "roster": 189,
+    "preservedHordes": 80,
+    "operations": 40,
+    "operationFamilies": 5,
+    "stageHazardSettings": 40,
+    "hazardTypes": 5,
+    "drawnPoses": 40,
+    "atlasIdentities": 4,
+    "newPngBytes": 5985175,
+    "exactTranslationsAdded": 145,
+    "translationPatternsAdded": 37
+  },
+  "operations": [
+    {
+      "id": "xto188-escort-1",
+      "kind": "escort",
+      "stageId": "xt179-ship-habitation",
+      "hordeProtocolId": "xth180-incoming-1",
+      "roundSeconds": 140,
+      "reward": 315
+    },
+    {
+      "id": "xto188-escort-2",
+      "kind": "escort",
+      "stageId": "xt179-ship-extraction",
+      "hordeProtocolId": "xth180-incoming-1",
+      "roundSeconds": 150,
+      "reward": 350
+    },
+    {
+      "id": "xto188-escort-3",
+      "kind": "escort",
+      "stageId": "xt179-ship-engineering",
+      "hordeProtocolId": "xth180-incoming-1",
+      "roundSeconds": 160,
+      "reward": 385
+    },
+    {
+      "id": "xto188-escort-4",
+      "kind": "escort",
+      "stageId": "xt179-ship-docking",
+      "hordeProtocolId": "xth180-incoming-1",
+      "roundSeconds": 170,
+      "reward": 420
+    },
+    {
+      "id": "xto188-escort-5",
+      "kind": "escort",
+      "stageId": "xt179-planet-surface",
+      "hordeProtocolId": "xth180-incoming-1",
+      "roundSeconds": 180,
+      "reward": 455
+    },
+    {
+      "id": "xto188-escort-6",
+      "kind": "escort",
+      "stageId": "xt179-planet-ruins",
+      "hordeProtocolId": "xth180-incoming-2",
+      "roundSeconds": 190,
+      "reward": 490
+    },
+    {
+      "id": "xto188-escort-7",
+      "kind": "escort",
+      "stageId": "xt179-planet-ridge",
+      "hordeProtocolId": "xth180-incoming-2",
+      "roundSeconds": 200,
+      "reward": 525
+    },
+    {
+      "id": "xto188-escort-8",
+      "kind": "escort",
+      "stageId": "xt179-planet-evac",
+      "hordeProtocolId": "xth180-incoming-2",
+      "roundSeconds": 210,
+      "reward": 560
+    },
+    {
+      "id": "xto188-relay-1",
+      "kind": "relay",
+      "stageId": "xt179-planet-caves",
+      "hordeProtocolId": "xth180-blackout-1",
+      "roundSeconds": 140,
+      "reward": 315
+    },
+    {
+      "id": "xto188-relay-2",
+      "kind": "relay",
+      "stageId": "xt179-planet-approach",
+      "hordeProtocolId": "xth180-blackout-1",
+      "roundSeconds": 150,
+      "reward": 350
+    },
+    {
+      "id": "xto188-relay-3",
+      "kind": "relay",
+      "stageId": "xt179-colony-utility",
+      "hordeProtocolId": "xth180-blackout-1",
+      "roundSeconds": 160,
+      "reward": 385
+    },
+    {
+      "id": "xto188-relay-4",
+      "kind": "relay",
+      "stageId": "xt179-colony-security",
+      "hordeProtocolId": "xth180-blackout-1",
+      "roundSeconds": 170,
+      "reward": 420
+    },
+    {
+      "id": "xto188-relay-5",
+      "kind": "relay",
+      "stageId": "xt179-colony-landing",
+      "hordeProtocolId": "xth180-blackout-1",
+      "roundSeconds": 180,
+      "reward": 455
+    },
+    {
+      "id": "xto188-relay-6",
+      "kind": "relay",
+      "stageId": "xt179-colony-habitat",
+      "hordeProtocolId": "xth180-blackout-2",
+      "roundSeconds": 190,
+      "reward": 490
+    },
+    {
+      "id": "xto188-relay-7",
+      "kind": "relay",
+      "stageId": "xt179-colony-civic",
+      "hordeProtocolId": "xth180-blackout-2",
+      "roundSeconds": 200,
+      "reward": 525
+    },
+    {
+      "id": "xto188-relay-8",
+      "kind": "relay",
+      "stageId": "xt179-colony-approach",
+      "hordeProtocolId": "xth180-blackout-2",
+      "roundSeconds": 210,
+      "reward": 560
+    },
+    {
+      "id": "xto188-purge-1",
+      "kind": "purge",
+      "stageId": "xt179-workshop",
+      "hordeProtocolId": "xth180-acid-1",
+      "roundSeconds": 140,
+      "reward": 315
+    },
+    {
+      "id": "xto188-purge-2",
+      "kind": "purge",
+      "stageId": "xt179-vehicle-bay",
+      "hordeProtocolId": "xth180-acid-1",
+      "roundSeconds": 150,
+      "reward": 350
+    },
+    {
+      "id": "xto188-purge-3",
+      "kind": "purge",
+      "stageId": "xt179-quarantine",
+      "hordeProtocolId": "xth180-acid-1",
+      "roundSeconds": 160,
+      "reward": 385
+    },
+    {
+      "id": "xto188-purge-4",
+      "kind": "purge",
+      "stageId": "xt179-armory",
+      "hordeProtocolId": "xth180-acid-1",
+      "roundSeconds": 170,
+      "reward": 420
+    },
+    {
+      "id": "xto188-purge-5",
+      "kind": "purge",
+      "stageId": "xt179-quarters",
+      "hordeProtocolId": "xth180-acid-1",
+      "roundSeconds": 180,
+      "reward": 455
+    },
+    {
+      "id": "xto188-purge-6",
+      "kind": "purge",
+      "stageId": "xt179-mess",
+      "hordeProtocolId": "xth180-acid-2",
+      "roundSeconds": 190,
+      "reward": 490
+    },
+    {
+      "id": "xto188-purge-7",
+      "kind": "purge",
+      "stageId": "xt179-medical",
+      "hordeProtocolId": "xth180-acid-2",
+      "roundSeconds": 200,
+      "reward": 525
+    },
+    {
+      "id": "xto188-purge-8",
+      "kind": "purge",
+      "stageId": "xt179-laboratory",
+      "hordeProtocolId": "xth180-acid-2",
+      "roundSeconds": 210,
+      "reward": 560
+    },
+    {
+      "id": "xto188-beacon-1",
+      "kind": "beacon",
+      "stageId": "xt179-sensors",
+      "hordeProtocolId": "xth180-quarantine-1",
+      "roundSeconds": 140,
+      "reward": 315
+    },
+    {
+      "id": "xto188-beacon-2",
+      "kind": "beacon",
+      "stageId": "xt179-reactor",
+      "hordeProtocolId": "xth180-quarantine-1",
+      "roundSeconds": 150,
+      "reward": 350
+    },
+    {
+      "id": "xto188-beacon-3",
+      "kind": "beacon",
+      "stageId": "xt179-life-support",
+      "hordeProtocolId": "xth180-quarantine-1",
+      "roundSeconds": 160,
+      "reward": 385
+    },
+    {
+      "id": "xto188-beacon-4",
+      "kind": "beacon",
+      "stageId": "xt179-hangar",
+      "hordeProtocolId": "xth180-quarantine-1",
+      "roundSeconds": 170,
+      "reward": 420
+    },
+    {
+      "id": "xto188-beacon-5",
+      "kind": "beacon",
+      "stageId": "xt179-cryo",
+      "hordeProtocolId": "xth180-quarantine-1",
+      "roundSeconds": 180,
+      "reward": 455
+    },
+    {
+      "id": "xto188-beacon-6",
+      "kind": "beacon",
+      "stageId": "xt179-cic",
+      "hordeProtocolId": "xth180-quarantine-2",
+      "roundSeconds": 190,
+      "reward": 490
+    },
+    {
+      "id": "xto188-beacon-7",
+      "kind": "beacon",
+      "stageId": "xt179-briefing",
+      "hordeProtocolId": "xth180-quarantine-2",
+      "roundSeconds": 200,
+      "reward": 525
+    },
+    {
+      "id": "xto188-beacon-8",
+      "kind": "beacon",
+      "stageId": "xt179-bridge",
+      "hordeProtocolId": "xth180-quarantine-2",
+      "roundSeconds": 210,
+      "reward": 560
+    },
+    {
+      "id": "xto188-extraction-1",
+      "kind": "extraction",
+      "stageId": "xt179-synthetic-bay",
+      "hordeProtocolId": "xth180-extraction-1",
+      "roundSeconds": 140,
+      "reward": 315
+    },
+    {
+      "id": "xto188-extraction-2",
+      "kind": "extraction",
+      "stageId": "xt179-proving-ground",
+      "hordeProtocolId": "xth180-extraction-1",
+      "roundSeconds": 150,
+      "reward": 350
+    },
+    {
+      "id": "xto188-extraction-3",
+      "kind": "extraction",
+      "stageId": "xt179-morgue",
+      "hordeProtocolId": "xth180-extraction-1",
+      "roundSeconds": 160,
+      "reward": 385
+    },
+    {
+      "id": "xto188-extraction-4",
+      "kind": "extraction",
+      "stageId": "xt179-archives",
+      "hordeProtocolId": "xth180-extraction-1",
+      "roundSeconds": 170,
+      "reward": 420
+    },
+    {
+      "id": "xto188-extraction-5",
+      "kind": "extraction",
+      "stageId": "xt179-logistics",
+      "hordeProtocolId": "xth180-extraction-1",
+      "roundSeconds": 180,
+      "reward": 455
+    },
+    {
+      "id": "xto188-extraction-6",
+      "kind": "extraction",
+      "stageId": "xt179-escape-pods",
+      "hordeProtocolId": "xth180-extraction-2",
+      "roundSeconds": 190,
+      "reward": 490
+    },
+    {
+      "id": "xto188-extraction-7",
+      "kind": "extraction",
+      "stageId": "xt179-arrival",
+      "hordeProtocolId": "xth180-extraction-2",
+      "roundSeconds": 200,
+      "reward": 525
+    },
+    {
+      "id": "xto188-extraction-8",
+      "kind": "extraction",
+      "stageId": "xt179-bioforge",
+      "hordeProtocolId": "xth180-extraction-2",
+      "roundSeconds": 210,
+      "reward": 560
+    }
+  ],
+  "hazards": [
+    {
+      "id": "xhz188-ship-habitation",
+      "stageId": "xt179-ship-habitation",
+      "kind": "steam",
+      "warningTicks": 600,
+      "activeTicks": 60,
+      "damage": 6
+    },
+    {
+      "id": "xhz188-ship-extraction",
+      "stageId": "xt179-ship-extraction",
+      "kind": "arc",
+      "warningTicks": 660,
+      "activeTicks": 42,
+      "damage": 7
+    },
+    {
+      "id": "xhz188-ship-engineering",
+      "stageId": "xt179-ship-engineering",
+      "kind": "steam",
+      "warningTicks": 720,
+      "activeTicks": 60,
+      "damage": 6
+    },
+    {
+      "id": "xhz188-ship-docking",
+      "stageId": "xt179-ship-docking",
+      "kind": "debris",
+      "warningTicks": 600,
+      "activeTicks": 12,
+      "damage": 8
+    },
+    {
+      "id": "xhz188-planet-surface",
+      "stageId": "xt179-planet-surface",
+      "kind": "debris",
+      "warningTicks": 660,
+      "activeTicks": 12,
+      "damage": 8
+    },
+    {
+      "id": "xhz188-planet-ruins",
+      "stageId": "xt179-planet-ruins",
+      "kind": "debris",
+      "warningTicks": 720,
+      "activeTicks": 12,
+      "damage": 8
+    },
+    {
+      "id": "xhz188-planet-ridge",
+      "stageId": "xt179-planet-ridge",
+      "kind": "debris",
+      "warningTicks": 600,
+      "activeTicks": 12,
+      "damage": 8
+    },
+    {
+      "id": "xhz188-planet-evac",
+      "stageId": "xt179-planet-evac",
+      "kind": "arc",
+      "warningTicks": 660,
+      "activeTicks": 42,
+      "damage": 7
+    },
+    {
+      "id": "xhz188-planet-caves",
+      "stageId": "xt179-planet-caves",
+      "kind": "corrosive",
+      "warningTicks": 720,
+      "activeTicks": 150,
+      "damage": 4
+    },
+    {
+      "id": "xhz188-planet-approach",
+      "stageId": "xt179-planet-approach",
+      "kind": "debris",
+      "warningTicks": 600,
+      "activeTicks": 12,
+      "damage": 8
+    },
+    {
+      "id": "xhz188-colony-utility",
+      "stageId": "xt179-colony-utility",
+      "kind": "steam",
+      "warningTicks": 660,
+      "activeTicks": 60,
+      "damage": 6
+    },
+    {
+      "id": "xhz188-colony-security",
+      "stageId": "xt179-colony-security",
+      "kind": "arc",
+      "warningTicks": 720,
+      "activeTicks": 42,
+      "damage": 7
+    },
+    {
+      "id": "xhz188-colony-landing",
+      "stageId": "xt179-colony-landing",
+      "kind": "debris",
+      "warningTicks": 600,
+      "activeTicks": 12,
+      "damage": 8
+    },
+    {
+      "id": "xhz188-colony-habitat",
+      "stageId": "xt179-colony-habitat",
+      "kind": "corrosive",
+      "warningTicks": 660,
+      "activeTicks": 150,
+      "damage": 4
+    },
+    {
+      "id": "xhz188-colony-civic",
+      "stageId": "xt179-colony-civic",
+      "kind": "arc",
+      "warningTicks": 720,
+      "activeTicks": 42,
+      "damage": 7
+    },
+    {
+      "id": "xhz188-colony-approach",
+      "stageId": "xt179-colony-approach",
+      "kind": "debris",
+      "warningTicks": 600,
+      "activeTicks": 12,
+      "damage": 8
+    },
+    {
+      "id": "xhz188-workshop",
+      "stageId": "xt179-workshop",
+      "kind": "arc",
+      "warningTicks": 660,
+      "activeTicks": 42,
+      "damage": 7
+    },
+    {
+      "id": "xhz188-vehicle-bay",
+      "stageId": "xt179-vehicle-bay",
+      "kind": "debris",
+      "warningTicks": 720,
+      "activeTicks": 12,
+      "damage": 8
+    },
+    {
+      "id": "xhz188-quarantine",
+      "stageId": "xt179-quarantine",
+      "kind": "corrosive",
+      "warningTicks": 600,
+      "activeTicks": 150,
+      "damage": 4
+    },
+    {
+      "id": "xhz188-armory",
+      "stageId": "xt179-armory",
+      "kind": "arc",
+      "warningTicks": 660,
+      "activeTicks": 42,
+      "damage": 7
+    },
+    {
+      "id": "xhz188-quarters",
+      "stageId": "xt179-quarters",
+      "kind": "steam",
+      "warningTicks": 720,
+      "activeTicks": 60,
+      "damage": 6
+    },
+    {
+      "id": "xhz188-mess",
+      "stageId": "xt179-mess",
+      "kind": "steam",
+      "warningTicks": 600,
+      "activeTicks": 60,
+      "damage": 6
+    },
+    {
+      "id": "xhz188-medical",
+      "stageId": "xt179-medical",
+      "kind": "cryo",
+      "warningTicks": 660,
+      "activeTicks": 84,
+      "damage": 5
+    },
+    {
+      "id": "xhz188-laboratory",
+      "stageId": "xt179-laboratory",
+      "kind": "corrosive",
+      "warningTicks": 720,
+      "activeTicks": 150,
+      "damage": 4
+    },
+    {
+      "id": "xhz188-sensors",
+      "stageId": "xt179-sensors",
+      "kind": "arc",
+      "warningTicks": 600,
+      "activeTicks": 42,
+      "damage": 7
+    },
+    {
+      "id": "xhz188-reactor",
+      "stageId": "xt179-reactor",
+      "kind": "arc",
+      "warningTicks": 660,
+      "activeTicks": 42,
+      "damage": 7
+    },
+    {
+      "id": "xhz188-life-support",
+      "stageId": "xt179-life-support",
+      "kind": "steam",
+      "warningTicks": 720,
+      "activeTicks": 60,
+      "damage": 6
+    },
+    {
+      "id": "xhz188-hangar",
+      "stageId": "xt179-hangar",
+      "kind": "debris",
+      "warningTicks": 600,
+      "activeTicks": 12,
+      "damage": 8
+    },
+    {
+      "id": "xhz188-cryo",
+      "stageId": "xt179-cryo",
+      "kind": "cryo",
+      "warningTicks": 660,
+      "activeTicks": 84,
+      "damage": 5
+    },
+    {
+      "id": "xhz188-cic",
+      "stageId": "xt179-cic",
+      "kind": "arc",
+      "warningTicks": 720,
+      "activeTicks": 42,
+      "damage": 7
+    },
+    {
+      "id": "xhz188-briefing",
+      "stageId": "xt179-briefing",
+      "kind": "steam",
+      "warningTicks": 600,
+      "activeTicks": 60,
+      "damage": 6
+    },
+    {
+      "id": "xhz188-bridge",
+      "stageId": "xt179-bridge",
+      "kind": "arc",
+      "warningTicks": 660,
+      "activeTicks": 42,
+      "damage": 7
+    },
+    {
+      "id": "xhz188-synthetic-bay",
+      "stageId": "xt179-synthetic-bay",
+      "kind": "cryo",
+      "warningTicks": 720,
+      "activeTicks": 84,
+      "damage": 5
+    },
+    {
+      "id": "xhz188-proving-ground",
+      "stageId": "xt179-proving-ground",
+      "kind": "debris",
+      "warningTicks": 600,
+      "activeTicks": 12,
+      "damage": 8
+    },
+    {
+      "id": "xhz188-morgue",
+      "stageId": "xt179-morgue",
+      "kind": "cryo",
+      "warningTicks": 660,
+      "activeTicks": 84,
+      "damage": 5
+    },
+    {
+      "id": "xhz188-archives",
+      "stageId": "xt179-archives",
+      "kind": "arc",
+      "warningTicks": 720,
+      "activeTicks": 42,
+      "damage": 7
+    },
+    {
+      "id": "xhz188-logistics",
+      "stageId": "xt179-logistics",
+      "kind": "debris",
+      "warningTicks": 600,
+      "activeTicks": 12,
+      "damage": 8
+    },
+    {
+      "id": "xhz188-escape-pods",
+      "stageId": "xt179-escape-pods",
+      "kind": "steam",
+      "warningTicks": 660,
+      "activeTicks": 60,
+      "damage": 6
+    },
+    {
+      "id": "xhz188-arrival",
+      "stageId": "xt179-arrival",
+      "kind": "steam",
+      "warningTicks": 720,
+      "activeTicks": 60,
+      "damage": 6
+    },
+    {
+      "id": "xhz188-bioforge",
+      "stageId": "xt179-bioforge",
+      "kind": "corrosive",
+      "warningTicks": 600,
+      "activeTicks": 150,
+      "damage": 4
+    }
+  ],
+  "sprites": [
+    {
+      "fighterId": "warrior",
+      "path": "/assets/openai/sprites/xeno-trials-v188/warrior-combat-sheet.png",
+      "sha256": "2ef7903a864d621f42d4720cf61483b7445141519a5752c36e39fb6418148e91",
+      "frames": 10,
+      "fullProne": true,
+      "fullLocomotion": false,
+      "canonExact": false
+    },
+    {
+      "fighterId": "runner",
+      "path": "/assets/openai/sprites/xeno-trials-v188/runner-combat-sheet.png",
+      "sha256": "3df7c0df3b7c7d4109d888c46ac1a9f2beffbe89b6fd8cf065e63abdba14ea74",
+      "frames": 10,
+      "fullProne": true,
+      "fullLocomotion": false,
+      "canonExact": false
+    },
+    {
+      "fighterId": "prowler",
+      "path": "/assets/openai/sprites/xeno-trials-v188/prowler-combat-sheet.png",
+      "sha256": "602d78555ace3a5ed55a5ea35165fffa3689dba21fbd345d1956f53fc4b6bf35",
+      "frames": 10,
+      "fullProne": true,
+      "fullLocomotion": false,
+      "canonExact": false
+    },
+    {
+      "fighterId": "spitter",
+      "path": "/assets/openai/sprites/xeno-trials-v188/spitter-combat-sheet.png",
+      "sha256": "e59450c2680221e2080682bd77c2c83352dd9d72125aa2f6bca27c8277a6f2b5",
+      "frames": 10,
+      "fullProne": true,
+      "fullLocomotion": false,
+      "canonExact": false
+    }
+  ],
+  "remaining": [
+    "Complete drawn movesets for every fighter, including jumps and full locomotion cycles",
+    "Primary-source matched motion, anatomy and measured 1:1 franchise fidelity",
+    "Special/super choreography and further identities beyond the four drawn sheets",
+    "Multiplayer"
+  ],
+  "fidelity": {
+    "canonExact": false,
+    "source": "Project fan-made plates; official identity/capability context only",
+    "fullRosterAnimationComplete": false
+  },
+  "validation": {
+    "state": "PASSED",
+    "evidenceDirectory": "/workspace/tantalus-inventory/reprise-v188",
+    "nativeBrowser": {
+      "state": "PASSED",
+      "checks": 52,
+      "captures": 17,
+      "pageErrors": 0,
+      "httpErrors": 0,
+      "requestFailures": 0,
+      "sourceFilesUnchanged": 583,
+      "httpFilesMatching": 21,
+      "newPngFilesMatching": 4,
+      "harnessSha256": "fcd1c89d34d3201e0922d85e8cb494ecd7c8c01d7104aea71c60bd631571a388",
+      "completedRuns": 4,
+      "kindsPlayedToResult": [
+        "escort",
+        "extraction"
+      ],
+      "outcomes": [
+        "escort-win-zero-kills",
+        "extraction-win-three-deliveries",
+        "escort-loss-player-ko",
+        "extraction-loss-player-ko"
+      ],
+      "partialUiRuns": 2,
+      "catalogEntriesVisited": 40,
+      "atlasIdentitiesObserved": 4,
+      "drawnPosesObserved": 34,
+      "drawnPosesAdmitted": 40,
+      "nativeAtlasKoTick": 95,
+      "checkpoint": {
+        "tick": 301,
+        "cargoProgress": 182,
+        "comparedFields": 24,
+        "hazardLastTick": 301
+      },
+      "limits": [
+        "Native failures observed are player knockouts; cargo destruction and deadlines covered by declared logic fixtures",
+        "Standard gamepad is simulated, not physical hardware",
+        "Super-capable character partial UI entry and purchases do not count as a victory"
+      ],
+      "evidence": "native-final/summary.json"
+    },
+    "sourceAdmission": {
+      "state": "PASSED",
+      "files": 2550,
+      "assets": 1434,
+      "privateDocuments": 0
+    },
+    "build": {
+      "state": "PASSED_AT_FROZEN_SOURCE",
+      "files": 2018,
+      "shell": 647,
+      "commitMetadata": "FINAL_SHA_IN_EXTERNAL_RECEIPT",
+      "evidence": "check-built-final.log"
+    },
+    "sourceSuccession": {
+      "state": "PASSED",
+      "baseline": "bf42bc7aa5a674b4d204145670181a940d16a5aa",
+      "preservedCompletionReceipts": 71,
+      "successors": 22,
+      "newInputs": 22,
+      "preservedPlates": 4,
+      "historicalResultsTransferred": false,
+      "physicalPins": 48
+    },
+    "koRendererRegression": {
+      "state": "PASSED",
+      "tests": 80,
+      "productChanged": false,
+      "scope": "Historical KO test now checks exact admitted drawn sprite source/phase or existing mesh fallback; full suite rerun after this test and succession update.",
+      "evidence": "ko-renderer-receipt-regression.log"
+    },
+    "node": {
+      "state": "PASSED",
+      "uniqueFiles": 247,
+      "tests": 4860,
+      "pass": 4859,
+      "fail": 0,
+      "skipped": 1,
+      "concurrency": 4,
+      "sourceFreezeUnchanged": true,
+      "evidence": "test-all-final.log"
+    }
+  },
+  "publication": {
+    "state": "EXACT_COMMIT_RECEIPT_RECORDED_SEPARATELY",
+    "priorDeploymentBlock": {
+      "resource": "api-deployments-free-per-day",
+      "retryAfterSeconds": 86400,
+      "respected": true
+    },
+    "settingsChanged": false
+  }
+}

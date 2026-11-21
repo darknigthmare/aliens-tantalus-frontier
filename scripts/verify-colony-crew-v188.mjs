@@ -46,7 +46,7 @@ const restored = save => { const colony = normalizeColonyV188(save.colonyV188); 
 // —— Colony missions: content ——
 test('colony content: C1-C4, 7 side missions, 8 contracts on Cocyte from existing templates, §0.3 registers, C5 = act5-port-walls', () => {
   assert.equal(validateContent().ok, true);
-  assert.equal(CAMPAIGNS.length, 496);
+  assert.equal(CAMPAIGNS.length, 502);
   assert.deepEqual(COLONY_MAIN_MISSIONS_V188.map(entry => entry.id), ['colony-c1', 'colony-c2', 'colony-c3', 'colony-c4']);
   assert.deepEqual(COLONY_SIDE_MISSIONS_V188.map(entry => entry.id), ['colony-a-quai', 'colony-a-ferro', 'colony-a-abri', 'colony-a-seegson', 'colony-a-balise', 'colony-a-crucible', 'colony-a-converti']);
   assert.equal(COLONY_CONTRACTS_V188.length, 8);
@@ -59,7 +59,7 @@ test('colony content: C1-C4, 7 side missions, 8 contracts on Cocyte from existin
   assert.deepEqual(COLONY_SIDE_MISSIONS_V188.map(resolveMissionRegisterV188), ['tension', 'horror', 'tension', 'tension', 'horror', 'calm', 'horror']);
   assert.ok(CAMPAIGNS.some(entry => entry.id === COLONY_C5_CAMPAIGN_ID_V188), 'C5 is the Act V mission, id kept');
   assert.equal(new Set(CAMPAIGNS.map(entry => entry.id)).size, CAMPAIGNS.length);
-  assert.match(read('src/content.js'), /campaigns: 496/);
+  assert.match(read('src/content.js'), /campaigns: 502/);
 });
 
 // —— Access ——

@@ -1178,6 +1178,195 @@ export const TANTALUS_PRIORITIES_LEAD_CONTINUATION_V188 = freeze({ baseline: 'b6
   }
 } });
 // END LEAD CONTINUATION RECEIPTS
+// Xeno Trials join after 0d1d9950 (Tantalus V188 + PR #49 + main merge): merge of
+// feat/xeno-trials-priorities-v204 (V186 completion to V206, PR #50). Each receipt maps
+// the exact 0d1d9950 endpoint, the bytes the lead continuation reviews, to the merged bytes.
+// The Xeno Trials chain ends with its own XENO_TRIALS_TANTALUS_JOIN_V206; V187 requires
+// both chains to agree wherever both pin a path. Historical receipt blocks stay unchanged.
+// BEGIN XENO TRIALS JOIN RECEIPTS
+export const TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188 = freeze({ baseline: '0d1d9950ea7c6f4120d6133b6d0f4cafa2c97921', successors: {
+  ".github/workflows/full-release-v143.yml": {
+    "previousSha256": "0ec3deb5a88aac2e6bae73f51f41ed653ce3ff202254fb318bcff98034fbe8a2",
+    "currentSha256": "16ef2b6b1b1b1c5268b278ccfc703cb7316b09fe2089a9820c5e3f96aa81982b"
+  },
+  ".github/workflows/non-forge-regression-v163.yml": {
+    "previousSha256": "6b7270ac2cd8f5d84ba529de5f3675cedf0e430898823c1d107872980b7a6002",
+    "currentSha256": "3db6cc53887a07224afacb2a0e15df9889d4bd09319d2cf3b2ff91767463e518"
+  },
+  "index.html": {
+    "previousSha256": "3ef0afc6493e26c7c483549ad2df64b59c96fcb5beaa8b1f2c35a99400fd35de",
+    "currentSha256": "a3655c982389d7a0af384f484254db817b04dfd9d3a2af0518a79714244314d2"
+  },
+  "package.json": {
+    "previousSha256": "b74e5e7d949a29976fb562f1a8215a01426a1b950301cc37b25939421e2becf1",
+    "currentSha256": "26a3e3482f241488f6d74a8321ed4ac9222a01d9b9197f1c21a5c1ed17375b80"
+  },
+  "scripts/audit-native-qa-resources-v187.mjs": {
+    "previousSha256": "11c877212a478982dcfc0157e54a66ac478812ab35c4fda44cf31b5bfc23f28a",
+    "currentSha256": "e230ff8baf9dc681dace32ff9beb3c24eb5d4dda464128dbbcbe8e7d86930e47"
+  },
+  "scripts/audit-succession-v163.mjs": {
+    "previousSha256": "d69451f1d8848662cac1264b24640faec9346ff36c633e62802378fc9a981390",
+    "currentSha256": "ca57080fe834777e4b40888801525523fb93f2f873ec93ab941101e4edb341bd"
+  },
+  "scripts/build-asset-filter.mjs": {
+    "previousSha256": "dbdc1d49628142db4953ebce8e752fb351cb05b1224db29ba3e7c1aa795a898e",
+    "currentSha256": "384b67baf7303dd12f74e90836510fd2a884068a18ceaf96cc89412a0ce50073"
+  },
+  "scripts/build.mjs": {
+    "previousSha256": "99314d444b6866c54f3c9552919e083c303cf300840de5baaddebf9426e681be",
+    "currentSha256": "fa817256bc9832c9390055ddab431e8dd9e1320b273904c39f2489ff6807ab12"
+  },
+  "scripts/qa-xeno-trials-capture-v163.py": {
+    "previousSha256": "a6b4653534000439a743fd24455c01cfc73c4926b8ea8e28c77e770d675f8146",
+    "currentSha256": "3f338ef56a2a0389ad28e0724ab510521eb9aa1f0acc26be3ca6ff8dcdc135b5"
+  },
+  "scripts/verify-act5-endings-v188.mjs": {
+    "previousSha256": "104b74cf27bdc521269d387cb13dcc69852eb9525767ce6da8820eb1d7b42c83",
+    "currentSha256": "531f31d14cfc1b3a68d42eb0e439f1c9f1d2787707df4ee9ee70fe233d772399"
+  },
+  "scripts/verify-audit-continuation-v163.mjs": {
+    "previousSha256": "7d1f368a4a6e5b3f8ae8a5161c8a8d819e32c33a14013dfed2ef8a1bb16cbd29",
+    "currentSha256": "f10f3470e2511997f2bfb23a1f4d94ea9555f16991f1d2db867c67ce8ebdceaf"
+  },
+  "scripts/verify-audit-v143.mjs": {
+    "previousSha256": "38cc0350f341d18a3536944e19391285e4756195e3c82af6e923d4072a615d08",
+    "currentSha256": "7f12a9dff90be21d26d7b6c7c46c95690fb0902ce8d5507e7f4d3be9541d3420"
+  },
+  "scripts/verify-campaign-lethe-v163.mjs": {
+    "previousSha256": "fb8cbbd3dd9d6fb4f356a3e167f9537cf0f04619e6cb94feaebb5de5cca7cdde",
+    "currentSha256": "dcd9ef0b0814546780eed9fbf40ffbe90444d673d782025b0405df77951161c0"
+  },
+  "scripts/verify-campaign-story-v160.mjs": {
+    "previousSha256": "147d29402ef405c00b52f8453f991373c7ab869651d6b36046b54ee1c6340863",
+    "currentSha256": "1a2c71beee2bc19433d6c67120ce582067e31ed2181309448d00398e454b06d0"
+  },
+  "scripts/verify-capture-observation-v177.mjs": {
+    "previousSha256": "e44f384d7d3a27f4dc17a9ef67ee9b84e076976c5bda46d2a265ac06a1944742",
+    "currentSha256": "3bcc9fac691aa886d4d5ce1c2918edccca0d8ff8b5e9b8c81e0099718a1de669"
+  },
+  "scripts/verify-colony-crew-v188.mjs": {
+    "previousSha256": "b5a676c106ebef34cad714d87706ccc628617a6ae1998b42ea2130be91b880b1",
+    "currentSha256": "a5374622c4cf0cade4e198669b19bf1ac10845867706b8e68a744fafe2a02a58"
+  },
+  "scripts/verify-i18n-audit-v186.mjs": {
+    "previousSha256": "a3efc37fd10216930c26e9afb54c52d6a6b71050c233db87b5b1c224748c166a",
+    "currentSha256": "4abcfb2e30d5cc770e9299c5af4b766fc5b1f20de1628f4f7a17b611ce428263"
+  },
+  "scripts/verify-native-qa-resources-v187.mjs": {
+    "previousSha256": "eead35d778af227d4a7809baa0fc10ff0ddec0d4fc3f07f2cef8b6d7cf6c63b6",
+    "currentSha256": "05367a5372ae834063f6fce495b70d431553977c46efef28337921eb71525bde"
+  },
+  "scripts/verify-public-release-v86.mjs": {
+    "previousSha256": "d3db745228acb958a138e62562fe4ea056dbc8f7bd61ca9cf203df74eaf62ca0",
+    "currentSha256": "0aac7a88849bace62fe016c29a341aeaf2750b978f4a7785a5933b6c8499b4ff"
+  },
+  "scripts/verify-tantalus-priorities-v188.mjs": {
+    "previousSha256": "9496d07fe2693a3c92d35a9050a4a984c67d0fbaa3855029e2997678b2eb440d",
+    "currentSha256": "26618e6dd185cc260b2faea41df8d7a3194b61d77e0d9ebd2bbb095ac7079f5b"
+  },
+  "scripts/verify-xeno-trials-feedback-v149.mjs": {
+    "previousSha256": "e9b3f36763c67348a50d00b4e21fa3012e6c3554496004d3a14746b684a1e561",
+    "currentSha256": "2cc60dbd099da623eac050029484ba4cae97b6e921e624a5dccee00fd9d27f50"
+  },
+  "scripts/verify-xeno-trials-plan-v146.mjs": {
+    "previousSha256": "62b344b8572fbe7ebdcc733d846c17f356227aa49ee24084527b380902508b6a",
+    "currentSha256": "b9cc15d2912840d8ee02dd469062081af0253d9c858f6e35a07e22effff7c09c"
+  },
+  "scripts/verify-xeno-trials-signatures-v147.mjs": {
+    "previousSha256": "87bfad249fd6331e49959f9f02b4f56b34703ba81126cd7f506be731182e4a12",
+    "currentSha256": "cc07ea22c0520bbd88cf1a0319cdbd8b6d41f83166e7790764e013293543cf7e"
+  },
+  "src/app.js": {
+    "previousSha256": "2db6b8019a1e5fd30d96a43f89f09da34d1246c7127e2e89bd2d3cbab6735968",
+    "currentSha256": "fc32e4c44ea6f25b60a8bce9be7b50b69e9c010a806098cce0722069ac0359fc"
+  },
+  "src/content.js": {
+    "previousSha256": "fa090839aedabdc5fbbc56b7205258e47b38fa313198293a56e81f6566d43494",
+    "currentSha256": "3541cb9916316e755e998c95ff61bee23acb867f333c572fed122809c40708a5"
+  },
+  "src/game-production-runtime.js": {
+    "previousSha256": "48604c22ea4a37dc33270a190bc9e8b4a36a8edd35c9e0d2707d2d90866055bb",
+    "currentSha256": "719ad67c15c93afc4b8930e3c4819900d4ba5ae12d5a00f925c384fa635cee8b"
+  },
+  "src/i18n-auto-v185.js": {
+    "previousSha256": "d9b0f2405eeae7eb2b1ea0d1f6a389ac736f89f4558e9e66c965b58498ebd90c",
+    "currentSha256": "efd03c160bef3d4fc96c7480087e736b99b6a2e9aafbe88db0d03f486e9c475e"
+  },
+  "src/i18n-en-catalog-v185.js": {
+    "previousSha256": "11a0ec21f4ac8a04b65af1a3532d190996eed9c806fdbede9a9334975dc8e5dd",
+    "currentSha256": "762b9ffd30a248c3b9917b1969018ecb5ffa15ba2066b6654d99bcf6f658cf03"
+  },
+  "src/mission-insertion-ui-v62.js": {
+    "previousSha256": "b55874f7a3b8d7eeb933cdaedce431517920d60dd18b46895088dc4e211d5591",
+    "currentSha256": "c875da1636078baa8ef2e84059112579d7d6945eef75b23430cd29dfb32fa2ce"
+  },
+  "src/player-surfaces-v110.js": {
+    "previousSha256": "88cf09a67c5fc21a7a55c49209dcdd5c84b9362f21e1618a7b30aed11c5453d4",
+    "currentSha256": "4b0772b9ffc5d616635b4704d7a88c8cd1bb16fafbbb599293fb9000c65ea160"
+  },
+  "src/save.js": {
+    "previousSha256": "6b8a71b39143f289775ad5b8a497fbdbcddacec774bb2387904d030274c1f125",
+    "currentSha256": "711bc839d8f57c6390c6d5752ba82773bdd36f9e8743ea16a623115ec593a4e2"
+  },
+  "src/xeno-trials-acid-pools-v152.js": {
+    "previousSha256": "1995962ffc6618f7a94910f6f49f92a2560b4562a033deea418930201d22354b",
+    "currentSha256": "35e3c771aae245986cf3e22b92514380874db68a5843e45f956629273012be56"
+  },
+  "src/xeno-trials-arena-layers-v119.js": {
+    "previousSha256": "3a2a12a55d1398cc16d039664c61f278a7b9f09779a92994c5efc79139bde2c8",
+    "currentSha256": "1bac81e30e980bf6f5f3b982290c63600a3ed75f108a4324c779a207535caae4"
+  },
+  "src/xeno-trials-data-v96.js": {
+    "previousSha256": "14e11161a71b2a65a70c085f17e4c169df2f89b3cc196bc8aeaec07af1baf5be",
+    "currentSha256": "35187237611c078a13f9710c72e8d211fce5db1be63e45d7f4b17f4904f3bb7d"
+  },
+  "src/xeno-trials-engine-v96.js": {
+    "previousSha256": "48e4e6cc8091e2f266f0b6831eb5d08f523a9acc27ba1f23cea3f227aaf0a007",
+    "currentSha256": "c8cbc099dbd72e1c7e7bb651f88599e41f9066fb80a6643bf46343944eb1e9c2"
+  },
+  "src/xeno-trials-modes-v119.js": {
+    "previousSha256": "756af6bc90755f16a6afdf3e256082a3281698045ff16a642f2e8e2e0fce4dfd",
+    "currentSha256": "03485b8db260cdddbbce04ab4c2f622bccef7c7fa1e615043b605d35d406e232"
+  },
+  "src/xeno-trials-progress-v96.js": {
+    "previousSha256": "168a272b5c8b82cc4e5770cc48e261bd2725984eafeba566363b9b488a5da0fa",
+    "currentSha256": "9d2384a6e568d63ecc1d0280e03bf6ed6b166b9a86d227dd7e912d81920bc8bc"
+  },
+  "src/xeno-trials-rig-v154.js": {
+    "previousSha256": "c380d8b4613ef37cb978880050c37a183b4113bfa7e833817810fc95ef1a93a5",
+    "currentSha256": "014776eebd5748f5b1b16fd04c0e1cad419e4a7a497b2f922f86817801be887f"
+  },
+  "src/xeno-trials-runtime-v96.js": {
+    "previousSha256": "ef87fa84ba5f085cd0fc973b40dfeb11cf832f88b5168e259c2bc406303a2867",
+    "currentSha256": "9725d80048699a6399b69a765c9d6b4dc3451014bf049b9b9f92484e53bdf6a3"
+  },
+  "src/xeno-trials-scale-v110.js": {
+    "previousSha256": "1980a559dec2c744f841b0557b911464a178cf67b8245c0fe7dcd274aea39b81",
+    "currentSha256": "de01e4cf4c1e63693b3d7599c97e9d5af45a85ce9cc8a2a071582e37deed794c"
+  },
+  "src/xeno-trials-stage-motion-v147.js": {
+    "previousSha256": "9a23ffd03d4997f14d81c4184000e47dfdf9d33d500f30a1b001db3600faacd7",
+    "currentSha256": "4f7313115c2fb5e420ac86d5af537507a18a4e3f0542efd97a41dce582a9e847"
+  },
+  "src/xeno-trials-ui-v96.js": {
+    "previousSha256": "205e7446f0f0ca4a92e33ed200fd2eedd9b0dfeeb4c61529a1e679dab1a000a1",
+    "currentSha256": "ee90244bfe1a80290197d17533bc34660637c30632c1f7623eff6ab85c3e3ca0"
+  },
+  "sw.js": {
+    "previousSha256": "41c8c1094fd4ae3edd95abb3d3921de4342e6475aed0eada96f97f0c36321eb4",
+    "currentSha256": "b3238d36963228d3e10705eb8a604fd6ca71c09f5f73d0e27583273d1e4f0850"
+  },
+  "xeno-trials-fullscreen-v119.css": {
+    "previousSha256": "972fb0679d394bfb5426a84cc748657a72ca0d567cad037899fd010819800712",
+    "currentSha256": "bd5ef078de84720b02e7a08522b89fc11632aa606bef3eac5287a545a99c324a"
+  },
+  "xeno-trials-v96.css": {
+    "previousSha256": "8f682f017674d4078583fec043d4e85721700884606a7d16889d8d4512d7998a",
+    "currentSha256": "a1744d001fadd8a2ea3917b5c79cfcc3a4794987c0ef9e8310c23389b0acb15c"
+  }
+} });
+// END XENO TRIALS JOIN RECEIPTS
 export const TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188 = freeze({
   "baseline": "ded6ef34dd35a659313e9361b407f6b94b62fb96",
   "successors": {
@@ -1351,11 +1540,18 @@ export function reviewedTantalusPrioritiesDigestV188(path, endpoint) {
     current = choir.currentSha256;
   }
   const lead = TANTALUS_PRIORITIES_LEAD_CONTINUATION_V188.successors[path];
-  if (!lead) return current;
-  assert.equal(current, lead.previousSha256, 'Broken b6e01ef1-to-lead-continuation source chain: ' + path);
-  assert.ok(validHash(lead.currentSha256), 'Invalid lead-continuation source digest: ' + path);
-  assert.notEqual(lead.currentSha256, lead.previousSha256, 'A lead-continuation successor must identify changed bytes: ' + path);
-  return lead.currentSha256;
+  if (lead) {
+    assert.equal(current, lead.previousSha256, 'Broken b6e01ef1-to-lead-continuation source chain: ' + path);
+    assert.ok(validHash(lead.currentSha256), 'Invalid lead-continuation source digest: ' + path);
+    assert.notEqual(lead.currentSha256, lead.previousSha256, 'A lead-continuation successor must identify changed bytes: ' + path);
+    current = lead.currentSha256;
+  }
+  if (!Object.hasOwn(TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors, path)) return current;
+  const join = TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors[path];
+  assert.equal(current, join.previousSha256, 'Broken 0d1d9950-to-xeno-trials-join source chain: ' + path);
+  assert.ok(validHash(join.currentSha256), 'Invalid xeno-trials-join source digest: ' + path);
+  assert.notEqual(join.currentSha256, join.previousSha256, 'A xeno-trials-join successor must identify changed bytes: ' + path);
+  return join.currentSha256;
 }
 
 export function verifyTantalusPrioritiesV188(readSource = readRepository) {
@@ -1504,10 +1700,22 @@ export function verifyTantalusPrioritiesV188(readSource = readRepository) {
       ? reviewedTantalusPrioritiesDigestV188(path, digest) : digest;
     assert.equal(sha(readSource(path)), endpoint, 'Unreviewed V188 source bytes: ' + path);
   }
+  const join = TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188;
   for (const [path, receipt] of Object.entries(TANTALUS_PRIORITIES_LEAD_CONTINUATION_V188.successors)) {
     assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
     assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
-    assert.equal(sha(readSource(path)), receipt.currentSha256, 'Unreviewed lead-continuation source bytes: ' + path);
+    // The lead endpoint is the reviewed 0d1d9950 predecessor of the Xeno Trials join.
+    const joined = join.successors[path];
+    if (joined) assert.equal(joined.previousSha256, receipt.currentSha256, 'Broken lead-to-xeno-trials-join endpoint: ' + path);
+    assert.equal(sha(readSource(path)), joined ? joined.currentSha256 : receipt.currentSha256,
+      'Unreviewed lead-continuation source bytes: ' + path);
+  }
+  assert.match(join.baseline, /^[a-f0-9]{40}$/, 'The Xeno Trials join needs its exact 0d1d9950 baseline');
+  for (const [path, receipt] of Object.entries(join.successors)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
+    assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A xeno-trials-join successor must identify changed bytes: ' + path);
+    assert.equal(sha(readSource(path)), receipt.currentSha256, 'Unreviewed xeno-trials-join source bytes: ' + path);
   }
   return Object.freeze({ successors: successors.size, addedSources: addedSources.size });
 }

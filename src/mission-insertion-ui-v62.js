@@ -12,6 +12,7 @@ import {
 import { campaignInsertionStoryV160, chooseCampaignStoryProtocolV160 } from './campaign-story-v160.js';
 import { campaignInsertionStoryV161, chooseConvoyStoryProtocolV161, hasCampaignStoryV161 } from './campaign-convoy-story-v161.js';
 import { campaignInsertionStoryV163, chooseLetheStoryProtocolV163, hasCampaignStoryV163 } from './campaign-lethe-story-v163.js';
+import { arbiterInsertionStoryV190 } from './xeno-arbiter-campaign-v190.js';
 import { drawArchiveRelayInsertionShotV160, loadArchiveRelayArtV160 } from './archive-relay-presentation-v160.js';
 import { campaignObjectiveLabelV188 } from './mission-objective-panel-v188.js';
 
@@ -95,7 +96,7 @@ function clamp(value) {
 function safeMediaSource(value) {
   const source = nonEmptyString(value, 1200);
   if (!source) return null;
-  if (/^(?:javascript|data:text\/html):/iu.test(source)) return null;
+  if (/^(?:javascript:|data:text\/html(?:[;,:]|$))/iu.test(source)) return null;
   return source;
 }
 
@@ -106,7 +107,9 @@ function safeMediaSource(value) {
 export function normalizeMissionInsertionMediaV62(candidate) {
   if (!isRecord(candidate)) return null;
   const id = nonEmptyString(candidate.id || candidate.key, 180);
-  const source = safeMediaSource(candidate.src || candidate.file || candidate.path);
+  // A host may compose this resolver with a campaign-specific one. Accept our
+  // own normalized source field so falling back does not erase valid media.
+  const source = safeMediaSource(candidate.src || candidate.file || candidate.path || candidate.source);
   if (!id || !source) return null;
   const mediaType = String(candidate.mediaType || candidate.type || candidate.kind || '').toLowerCase();
   const type = mediaType === 'video' || /\.(?:mp4|webm|ogv)(?:[?#].*)?$/iu.test(source)
@@ -186,7 +189,7 @@ export function getMissionInsertionUiModelV62(state, options = {}) {
   const restored = restoreMissionInsertionV62(state);
   const phase = restored.phases[restored.currentIndex];
   const relayStory = campaignInsertionStoryV160(restored);
-  const story = relayStory || campaignInsertionStoryV161(restored) || campaignInsertionStoryV163(restored);
+  const story = relayStory || campaignInsertionStoryV161(restored) || campaignInsertionStoryV163(restored) || arbiterInsertionStoryV190(restored);
   const storyScene = relayStory && ['deployment', 'player-control'].includes(phase.kind)
     ? { kind: 'native-qz18-scene', cameraX: 0, width: 1280, height: 720 } : null;
   const media = resolveMissionInsertionMediaV62({
@@ -357,7 +360,7 @@ export class MissionInsertionUiV62 {
       return { ok: false, reason: this.state.paused ? 'paused' : 'unavailable', state: this.state };
     }
     const phase = getActiveMissionInsertionPhaseV62(this.state);
-    const story = campaignInsertionStoryV160(this.state) || campaignInsertionStoryV161(this.state) || campaignInsertionStoryV163(this.state);
+    const story = campaignInsertionStoryV160(this.state) || campaignInsertionStoryV161(this.state) || campaignInsertionStoryV163(this.state) || arbiterInsertionStoryV190(this.state);
     // Let every radio line be read before an illustrated approach/deployment
     // advances. The manual continue action remains available at all times.
     const spokenWords = story?.lines.reduce((count, line) => count + line.text.split(/\s+/u).length, 0) || 0;

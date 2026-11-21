@@ -66,6 +66,7 @@ import { withRunOptionsRuntimeV188 } from './run-options-runtime-v188.js';
 import { withCasteBehaviorsV188 } from './caste-behaviors-v188.js';
 import { withCreatureScaleV188 } from './creature-scale-v188.js';
 import { beginQueenMotherGuardStepV188, finishQueenMotherGuardStepV188 } from './queen-mother-guard-art-v188.js';
+import { withArbiterCampaignRuntimeV190 } from './xeno-arbiter-runtime-v190.js';
 
 export * from './game-production-core.js';
 
@@ -107,11 +108,13 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
 // The creature scale (V188, creature-scale-v188.js) sits under the combat feel: every layer
 // above it (caste behaviours and their ceiling flip, QZ-17 dressing, depth holds, acid blood)
 // sees the rescaled bodies, and the flip of the body box maps the scaled sprite onto itself.
+// The Xeno Arbiter campaign runtime (V190) sits just outside the magazine
+// recovery world, as on the Xeno Trials line; the V188 layers wrap it.
 // The in-level dropship handover (V188) wraps every mission layer: while it
 // withholds control nothing below it runs, so mission time (and with it the
 // insertion grace) only starts when control is given, and it can hold the
 // mission-complete event of any mode until the boarding is over.
-export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepthRoomsV188(withQz17LevelDressingV188(withCasteBehaviorsV188(withInsertionSafeZoneV188(withRunOptionsRuntimeV188(withAsphodeleMissionDressingV188(withVfxV188(withFranchiseFidelityV188(withGameplayGapsV188(withCombatFeelV188(withCreatureScaleV188(withFootstepCuesV188(withMissionObjectivePanelV188(withTensionDirectorV188(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(withMissionLayerMatteV188(V158ProductionEngine))))))))))))))))))))) {
+export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepthRoomsV188(withQz17LevelDressingV188(withCasteBehaviorsV188(withInsertionSafeZoneV188(withRunOptionsRuntimeV188(withAsphodeleMissionDressingV188(withVfxV188(withFranchiseFidelityV188(withGameplayGapsV188(withCombatFeelV188(withCreatureScaleV188(withFootstepCuesV188(withMissionObjectivePanelV188(withTensionDirectorV188(withArbiterCampaignRuntimeV190(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(withMissionLayerMatteV188(V158ProductionEngine)))))))))))))))))))))) {
   updateEnemy(actor, delta) {
     // Observe final accepted displacement after every existing wrapper,
     // including insertion grace and depth holds. Their order is unchanged.

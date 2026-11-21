@@ -83,7 +83,7 @@ function toEnding(save, recommended, options) {
 test('content: five Act V missions on Cocyte from existing templates, registers, ids unchanged elsewhere', () => {
   assert.deepEqual(ACT5_CAMPAIGN_IDS_V188, ['act5-last-run', 'act5-depot-queen', 'act5-port-walls', 'act5-evacuation']);
   assert.equal(validateContent().ok, true);
-  assert.equal(CAMPAIGNS.length, 496); // + orig-asphodele-2 (spec 007 follow-up), + 19 Port-Méridien missions and contracts
+  assert.equal(CAMPAIGNS.length, 502); // 496 Tantalus + 6 Xeno Arbiter operations (V190); + orig-asphodele-2 (spec 007 follow-up), + 19 Port-Méridien missions and contracts
   for (const campaign of ACT5_CAMPAIGNS_V188) {
     assert.ok(CAMPAIGNS.some(entry => entry.id === campaign.id), campaign.id);
     assert.equal(selectMissionTemplateV52({ campaign }), campaign.templateId, campaign.id);

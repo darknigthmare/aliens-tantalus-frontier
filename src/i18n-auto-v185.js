@@ -4,10 +4,37 @@
 // and Canvas 2D text. Unknown text is left in French. Nothing here touches the
 // save, game rules or identifiers; it only changes what is displayed.
 import { currentLanguageV185, LANGUAGE_EVENT_V185 } from './i18n-v185.js';
+import { XENO_TRIALS_ORIGINAL_ARENAS_V193 } from './xeno-trials-original-arenas-v193.js';
+import { XENO_TRIALS_REFERENCED_STAGES_V196 } from './xeno-trials-referenced-stages-v196.js';
+import { XENO_TRIALS_PRIORITY_STAGES_V198 } from './xeno-trials-priority-stages-v198.js';
+import { XENO_TRIALS_ICONIC_STAGES_V194 } from './xeno-trials-iconic-stages-v194.js';
 
 const ATTRIBUTES = Object.freeze(['placeholder', 'aria-label', 'title', 'alt']);
 const SKIP_TAGS = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'CODE', 'PRE', 'NOSCRIPT']);
 const CACHE_LIMIT = 4000;
+const arenaLabels = new Map([
+  ...XENO_TRIALS_ORIGINAL_ARENAS_V193,
+  ...XENO_TRIALS_ICONIC_STAGES_V194,
+  ...XENO_TRIALS_REFERENCED_STAGES_V196,
+  ...XENO_TRIALS_PRIORITY_STAGES_V198
+].flatMap(({ label, labelEn }) => [
+  [label, labelEn],
+  [label.toUpperCase(), labelEn.toUpperCase()]
+]));
+const trialLabels = new Map([
+  ['Super dessiné', 'Drawn super'],
+  ['Frappes aériennes dessinées', 'Drawn aerial attacks'],
+  ['Spéciale dessinée', 'Drawn special'],
+  ['REPRENDRE LE DUEL CONSERVÉ', 'RESUME SAVED DUEL'],
+  ['RECOMMENCER DEPUIS LA PREMIÈRE MANCHE', 'RESTART FROM ROUND ONE'],
+  ['REPRISE CONSERVÉE · ÉTAT DU DUEL ENREGISTRÉ', 'CHECKPOINT SAVED · DUEL STATE RECORDED'],
+  ['Duel restauré. Reprenez avec P, Start ou le bouton Reprendre.', 'Duel restored. Resume with P, Start or the Resume button.'],
+  ['Duel sauvegardé. Retrouvez la manche, la santé et le chrono enregistrés.', 'Duel saved. Resume with your saved round, health and timer.'],
+  ['FENÊTRE VERTE', 'GREEN WINDOW'],
+  ['FENÊTRE FERMÉE', 'WINDOW CLOSED'],
+  ['PRESSION DU CONFINEMENT', 'CONTAINMENT PRESSURE'],
+  ['SORTIE DE ZONE', 'CLEAR THE HAZARD']
+]);
 
 // The English catalog (~600 kB) is loaded only when English is chosen, so a
 // French session downloads and parses nothing more.
@@ -66,12 +93,17 @@ function fromPatterns(text) {
 function translateWhole(text) {
   if (exact.has(text)) return exact.get(text);
   if (upper.has(text)) return upper.get(text);
-  return fromPatterns(text);
+  return arenaLabels.get(text) ?? trialLabels.get(text) ?? fromPatterns(text);
 }
 
 // Messages are often joined: "ERREUR · A. B." Translate each known piece,
 // split on " · " and between sentences; unknown pieces stay French.
 function translateCore(text, depth = 0) {
+  // Generic contact patterns would absorb the beacon's window label into an
+  // untranslated placeholder. Keep its independent telemetry fields separate.
+  if (depth < 2 && /(?:^| · )FENÊTRE (?:VERTE|FERMÉE) · /u.test(text)) {
+    return text.split(' · ').map(piece => translateCore(piece, depth + 1)).join(' · ');
+  }
   const whole = translateWhole(text);
   if (whole != null) return whole;
   if (depth > 1) return text;
