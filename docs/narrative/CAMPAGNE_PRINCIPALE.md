@@ -712,16 +712,16 @@ Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-m
 
 ### 5.6 Acte V — « Non viable »
 
-**Statut :** **[PARTIEL] V188** (spec 006, 2026-11-15) — conseil de guerre, choix final, trois missions finales sur des gabarits existants, face-à-face au quai, CIN-60, CIN-61 et les trois fins sont jouables ; détail et valeurs au §5.11. La course APC dédiée (remorques, pont physique, poursuite de la Reine sur le moteur de `special-apc-convoy`) reste **[PROPOSÉ]** ; le registre `special-operations-v131.js` rattache toujours `last-course-tantalus` au chapitre de l'Acte III.
+**Statut :** **[PARTIEL] V188** (spec 006, 2026-11-15) — conseil de guerre, choix final, trois missions finales, face-à-face au quai, CIN-60, CIN-61 et les trois fins sont jouables ; détail et valeurs au §5.11. **[PARTIEL] V188 (2026-11-21)** : *Dernier départ* est une course APC dédiée (M577, remorques physiques, largage, pont jouable qui s'effondre) et *La Reine du dépôt* une poursuite de la Reine (§5.11, « Course du convoi ») ; la Reine reste un **substitut Canvas** en attente de son art. Le registre `special-operations-v131.js` rattache toujours `last-course-tantalus` au chapitre de l'Acte III.
 
 **Situation [PROPOSÉ] :** Halloran déclare Port-Méridien **non viable** au titre de la charte, avec effet à l'arrivée d'une équipe de récupération de la compagnie. L'équipe (commandos Weyland-Yutani, déjà au catalogue) vient « sécuriser les actifs » du dépôt et de la colonie. Pendant ce temps, la ruche du dépôt, privée de livraisons, sort vers la surface et coupe la route du complexe au port.
 
 1. **Conseil de guerre** au Tantalus : chaque membre dont la confiance est *solide* propose un avantage (tourelles de Sanaa, blindage de Cal, fenêtre d'Orlov, route de Leila).
 2. **Choix final du joueur** (décision §45.2) : Echo-9 recommande une ligne à Mara Vega. Les options proposées dépendent des choix cumulés de la campagne (§5.7.1). Vega suit la recommandation si sa confiance envers l'escouade est au moins *operationnel* (`NPC_TRUST_LEVELS_V62`) ; sinon elle tranche elle-même selon le dossier : protéger la colonie avec 5 pièces ou plus, laisser la compagnie récupérer le dépôt en dessous.
 3. **CIN-60 « Dernier départ »** : le M577 quitte le complexe sous la pluie avec les derniers ouvriers.
-4. Nouvelle course APC **[PROPOSÉ]**, à construire à partir du chapitre existant.
-5. Point médian **[PROPOSÉ]** : un pont cède ; lâcher la remorque de fret ou celle des colons en retard.
-6. Poursuite de Reine **[PROPOSÉ]** : la Reine du dépôt, nourrie par les livraisons QZ17.
+4. Course APC **[PARTIEL] V188** : `act5-last-run`, M577 et deux remorques attelées (§5.11).
+5. Point médian **[PARTIEL] V188** : le pont cède sous les deux remorques ; lâcher celle du fret ou celle des colons en retard, en conduisant.
+6. Poursuite de Reine **[PARTIEL] V188** : `act5-depot-queen`, la Reine du dépôt poursuit le convoi ; sprite à produire (substitut Canvas).
 7. Arrivée aux murs de Port-Méridien : la course débouche sur C5 (§6.2).
 8. Si la colonie est protégée : face-à-face au quai avec l'équipe de récupération. Le joueur ne gagne pas en tirant : il gagne si le dossier est assez solide pour que les commandos reçoivent l'ordre de se retirer (ou si l'ICC est saisie via Asphodèle, §7).
 
@@ -928,7 +928,7 @@ Décisions par défaut appliquées (questionnaire `QUESTIONS_PROPRIETAIRE_V188.m
 2. **Conseil de guerre** (table tactique, non refermable) : ordre de Halloran ; avantages des membres en confiance *solide* ; réplique de CASSIUS s'il est conservé ou mention de son effacement ; réplique d'Echo-9 pour `origin-03` et `origin-10` ; dossier n/7 ; options et raisons d'une option fermée.
 3. **Décision** : Echo-9 recommande ; `resolveFinalChoiceV188` décide (Vega suit à 55). Q3 A validée par défaut : avec 5 pièces sans canal sûr, Vega tient la colonie. CIN-60 suit.
 4. **Missions finales**, dans l'ordre : `act5-last-run` *Dernier départ* (`escort a colony convoy`, extérieur) → `act5-depot-queen` *La Reine du dépôt* (`track an apex specimen`, boss) → `act5-port-walls` *Les portes du port* (`defend the colony`) pour *Transmettre* et *Tenir*, ou `act5-evacuation` *L'évacuation* (`hold the extraction zone`) pour *Céder*. Registre Action.
-5. **Pont** (Q2 A) : au premier checkpoint de *Dernier départ*, choix sans pause entre le fret et les colons en retard.
+5. **Pont** (Q2 A) : choix sans pause entre le fret et les colons en retard. Depuis la course dédiée (2026-11-21), il se joue sur le tablier en conduisant (`C` / `X`) ; la boîte chronométrée au premier checkpoint reste un repli hors course.
 6. **Quai** (Q4 A) : *Transmettre* → ICC saisie, retrait ; *Tenir* avec 5 pièces → retrait des commandos ; *Tenir* en dessous → siège jusqu'à l'aube, sans tir. *Céder* : pas de face-à-face.
 7. **CIN-61** : appel des arrivés = civils du quai (P-3) + colons du M577 + colons en retard arrivés.
 8. **Fin** (CIN-90) : texte de la fin du §5.7 ; avec « Le relais parle », clause levée au palier *Autonome*, charte suspendue en dessous (§5.7.1).
@@ -950,11 +950,33 @@ Décisions par défaut appliquées (questionnaire `QUESTIONS_PROPRIETAIRE_V188.m
 | *Céder* sans restitution | stress +10 pour chaque membre de l'équipage |
 | Textes | ordre de Halloran, répliques des conseillers, de CASSIUS et d'Echo-9 au conseil, textes du pont et du quai, répliques de Cal (CIN-60) et de Rook (CIN-61), 24 derniers mots (Vega, Harlow, Rook, DAVID-8R, BISHOP-9, Okafor, Orlov, Mbaye × 3 fins), faits de l'épilogue |
 
-**Fidélité** : aucune fidélité « 1:1 ». Repères documentés cités dans la spec 006 : cofinancement de la colonie avec l'Administration coloniale et audience de l'ICC (*Aliens*, 1986) ; Marshals coloniaux (*Alien: Isolation*, 2014) ; équipe de la compagnie venue récupérer l'« actif » (*Alien 3*, 1992, dernière scène) ; « Special Order 937 » (*Alien*, 1979) ; M577 sous la pluie, Reine et retour en hypersommeil (*Aliens*, 1986). Adaptations du projet : charte et clause, conseil, pont, appel, casier d'Echo-8. À définir : course APC dédiée, sprite de la Reine, art des 15 emplacements (`src/act5-slots-v188.js`).
+**Fidélité** : aucune fidélité « 1:1 ». Repères documentés cités dans la spec 006 : cofinancement de la colonie avec l'Administration coloniale et audience de l'ICC (*Aliens*, 1986) ; Marshals coloniaux (*Alien: Isolation*, 2014) ; équipe de la compagnie venue récupérer l'« actif » (*Alien 3*, 1992, dernière scène) ; « Special Order 937 » (*Alien*, 1979) ; M577 sous la pluie, Reine et retour en hypersommeil (*Aliens*, 1986). Adaptations du projet : charte et clause, conseil, pont, appel, casier d'Echo-8. À définir : sprite de la Reine (substitut Canvas dans la course, voir « Course du convoi »), art des 15 emplacements (`src/act5-slots-v188.js`).
 
 **Salle des relais** : condition de *Transmettre* fournie par le hub Asphodèle (`asphodeleRelayReadyV188`), lue par défaut par `finalChoiceOptionsV188` ; l'Acte V ne la reconstruit pas.
 
-**Reste à faire** : course APC dédiée (Q1 A au sens strict), Reine dédiée, palier *Libre* après « Le relais parle », effets durables de la relève de Vega et de la démission d'Inez en partie libre, nouvelle partie +, art.
+**Course du convoi — [PARTIEL] V188 (2026-11-21, Q1 A au sens strict).** Code : `src/act5-convoy-race-v188.js` (règles pures, textes FR/EN, emplacements d'art, substituts Canvas), `src/act5-convoy-race-runtime-v188.js` (mission, composé juste au-dessus de la chaîne V158, sous toutes les couches V188) ; écritures de sauvegarde dans `src/story-act5-v188.js` ; tests `scripts/verify-act5-convoy-race-v188.mjs` ; parcours navigateur `scripts/qa-act5-convoy-race-v188.mjs`.
+
+- **Lancement** : depuis la ligne décidée au conseil, comme avant (identifiants `act5-last-run` et `act5-depot-queen` inchangés). Le M577 est attribué d'office ; insertion et extraction passent par le UD-4L en mode `apc` (gabarit `planet-exterior`).
+- **Remorques** (ordre M577 → colons → fret) : la remorque des colons porte les 4 colons en retard ; celle du fret porte les conteneurs scellés du manifeste de l'Acte III (`storyCampaignV188.m577Manifest.containers`) ; les colons du manifeste voyagent dans le M577 et ne sont pas largables. Chaque remorque suit sur un timon à ressort amorti avec butées ; masse, roulement et traînée réduisent la vitesse du convoi.
+- **Largage** : `C` lâche les colons, `X` le fret. Pendant *Dernier départ*, la première remorque lâchée **est** la décision du pont (`act5.bridge`, même règle Q2 A) ; une remorque lâchée sur la route arrête les poursuivants qui l'atteignent. Pendant la poursuite, la remorque restante peut servir de leurre : la Reine s'arrête pour la déchiqueter.
+- **Pont jouable** : à 24 m sur le tablier avec deux remorques, le tablier s'affaisse et le convoi s'enlise ; la fenêtre de décision reste 15 s (+6 avec Orlov). Sans décision, l'attelage arrière (fret) cède seul. L'effondrement progresse derrière le convoi ; un convoi arrêté sur le tablier y bascule (échec, reprise au checkpoint du pont, la décision enregistrée restant acquise). La boîte de choix chronométrée précédente reste en repli hors de cette course.
+- **Reine** : admise seulement si le profil du catalogue est `enemy-008-queen`, de caste royale (`royal`/`boss`) et de la classe de stature 4,8 m (`creature-scale-v188.js`) ; elle est dessinée à **245 px** (1 m ≈ 51 px). Machine à états explicite : traque → préparation → bond → reprise, déséquilibre sous le feu, festin sur une remorque abandonnée, mort. Elle n'entre pas dans `this.enemies` : aucune logique commune (tactiques, castes, horde) ne lui est appliquée. Au carrefour du port, le convoi s'arrête et doit l'abattre.
+- **Checkpoints** : un par phase (route, pont, rive nord, approche du port ; poursuite, carrefour).
+- **Sauvegarde additive** : `storyCampaignV188.act5.convoyV188 = { drops: [{ trailer, mission, cause, metres }], bridgeCrossed, queen }`, absent des anciennes sauvegardes, validé par `normalizeAct5ConvoyV188` ; le validateur de `src/save.js` n'est pas modifié. Conséquence : des colons en retard perdus après le pont ne rejoignent pas le port (appel de CIN-61) ; la route de Leila ne ramène que ceux laissés pendant *Dernier départ*.
+- **Retours** : sons existants V188 (tourelle, cri du coureur et de la Reine, alarme du pont, attelage), particules de la couche VFX V188, journal radio FR/EN.
+
+| Valeur [PROPOSÉ] | Réglage |
+| --- | --- |
+| M577 | 22 t, traction 62 kN, blindage 340 |
+| Remorque | 9 t, timon 1,6 m, ressort 120 kN/m, amortisseur 24 kN·s/m, intégrité 100 |
+| Tracé | course 1 500 m, pont à 700 m sur 90 m, effondrement 2 m/s (enlisé) puis 7 m/s ; poursuite 1 600 m |
+| Tourelle arrière | 8 coups/s, 12 dégâts, portée 70 m, surchauffe à 100 % |
+| Coureurs | `enemy-006-runner`, 80 PV, 19 m/s, vagues de 2 toutes les 7 s, arrêtés 4 s par une remorque |
+| Reine | santé du catalogue × 12, traque 20 m/s, bond 24 m/s, 34 dégâts à une remorque, dégâts du catalogue au blindage, festin 6 s |
+
+**Fidélité** : documenté (*Aliens*, 1986) — le M577 et sa fuite du processeur, la Reine qui poursuit les survivants jusqu'à la plate-forme d'évacuation du *Sulaco*. Adaptation du projet — remorques, pont, poursuite routière, tourelle tirant vers l'arrière, festin sur une remorque. À définir — sprite de la Reine (emplacement `act5-queen-chase-side`, 520 × 245, aucun fichier demandé tant qu'il est absent), longueur réelle du M577 à l'échelle du projet (le véhicule garde ses 190 px de mission). Aucune fidélité « 1:1 ».
+
+**Reste à faire** : art de la Reine en poursuite, palier *Libre* après « Le relais parle », effets durables de la relève de Vega et de la démission d'Inez en partie libre, nouvelle partie +, conséquence éventuelle de la perte du fret au-delà de son enregistrement (question au propriétaire).
 
 ---
 

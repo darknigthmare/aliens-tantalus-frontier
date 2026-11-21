@@ -264,7 +264,7 @@ test('colony cards: invalid and newly private responses cannot leave a usable ca
 });
 test('Reviewed scene art: Asphodele, Act V, biological evidence, prologue, Matriarch, MANTA, HADAL, Broodstorm, Queen Mother and adapted guards stay lazy through installation and survive a later network interruption', async () => {
   const h = host();
-  assert.equal(h.api.CACHE, 'atf-v143-tantalus-xeno-trials-merge-20261121');
+  assert.equal(h.api.CACHE, 'atf-v143-tantalus-act5-convoy-race-20261121');
   await h.dispatch('install');
   const cache = await h.caches.open(h.api.CACHE);
   assert.equal(h.api.SHELL.filter(path => path === '/src/biological-art-v188.js').length, 1,

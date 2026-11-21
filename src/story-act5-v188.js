@@ -10,7 +10,7 @@ import { normalizeStoryCampaignV188, storyEndingReachedV188, deriveStoryCampaign
 import { storyDossierV188, finalChoiceOptionsV188, resolveFinalChoiceV188, FINAL_OPTIONS_V188, ENDINGS_V188 } from './story-dossier-v188.js';
 import { asphodeleRetakenV188, normalizeStationV188, kesslerTagRecoveredV188 } from './station-asphodele-v188.js';
 import { colonyRescuedV188, colonyTierV188 } from './colony-reconstruction-v188.js';
-import { createAct5V188, normalizeAct5V188, ACT5_OPTION_IDS_V188 } from './story-act5-state-v188.js';
+import { createAct5V188, normalizeAct5V188, normalizeAct5ConvoyV188, ACT5_OPTION_IDS_V188, ACT5_TRAILER_IDS_V188, ACT5_DROP_CAUSES_V188 } from './story-act5-state-v188.js';
 
 export * from './story-act5-state-v188.js';
 
@@ -259,13 +259,57 @@ export function chooseAct5BridgeV188(save, choice, { timedOut = false } = {}) {
   if (!['freight', 'colonists'].includes(value)) return false;
   return writeAct5(save, state => { state.bridge = value; state.bridgeTimedOut = Boolean(timedOut); });
 }
-/** Late colonists who still reach the port. */
+/** Late colonists who still reach the port. A colonists' trailer lost after the bridge (Queen chase,
+ * act5-convoy-race-v188.js) loses them; Leila's route only walks back those left during « Dernier départ ». */
 export function act5LateColonistsSavedV188(save) {
-  const state = act5StateV188(save);
-  if (state.bridge === 'freight') return ACT5_LATE_COLONISTS_V188;
-  if (state.bridge === 'colonists') return state.advantages.includes('route') ? 2 : 0;
+  const state = act5StateV188(save), lost = state.convoyV188?.drops.find(drop => drop.trailer === 'colonists') || null;
+  const route = state.advantages.includes('route') ? 2 : 0;
+  if (state.bridge === 'freight') return !lost ? ACT5_LATE_COLONISTS_V188 : lost.mission === 'act5-last-run' ? route : 0;
+  if (state.bridge === 'colonists') return route;
   return 0;
 }
+
+// —— Dedicated convoy race (§5.11, act5-convoy-race-v188.js): what the save gives the run, what the run writes back ——
+const raceMissions = Object.freeze(['act5-last-run', 'act5-depot-queen']);
+const convoyOf = state => state.convoyV188 || { drops: [], bridgeCrossed: false, queen: null };
+/** Trailers still towed when a race mission starts (order M577 → colonists → freight), or null. */
+export function act5ConvoySetupV188(save, campaignId) {
+  if (!raceMissions.includes(campaignId)) return null;
+  const state = act5StateV188(save), replay = completed(save).includes(campaignId);
+  if (!replay && (state.phase !== 'final' || !state.decision)) return null;
+  const story = normalizeStoryCampaignV188(save?.storyCampaignV188), manifest = story.m577Manifest || { containers: 0, colonists: 0 };
+  const gone = new Set(replay ? [] : [...convoyOf(state).drops.map(drop => drop.trailer), ...(state.bridge ? [state.bridge] : [])]);
+  if (!replay && campaignId === 'act5-depot-queen' && !state.bridge) gone.add(ACT5_BRIDGE_DEFAULT_V188); // the bridge always took one
+  const trailers = ACT5_TRAILER_IDS_V188.filter(id => !gone.has(id)).map(id => Object.freeze(id === 'colonists'
+    ? { id, people: ACT5_LATE_COLONISTS_V188, containers: 0 } : { id, people: 0, containers: manifest.containers }));
+  return Object.freeze({ campaignId, replay, trailers: Object.freeze(trailers), apcColonists: manifest.colonists, containers: manifest.containers,
+    bridgeSeconds: act5BridgeSecondsV188(save), bridgeDecided: replay ? false : Boolean(state.bridge) });
+}
+function writeConvoy(save, mutate) {
+  return writeAct5(save, state => {
+    const convoy = structuredClone(convoyOf(state)); if (mutate(convoy) === false) return false;
+    const normalized = normalizeAct5ConvoyV188(convoy); if (normalized) state.convoyV188 = normalized; else delete state.convoyV188;
+  });
+}
+/** A trailer left on the road, on the bridge, to the horde or to the Queen. Mutates the candidate save, once per trailer.
+ * During « Dernier départ » the first trailer left is the bridge decision (§5.6 step 5); a replay records nothing. */
+export function recordAct5TrailerDropV188(save, { trailer, campaignId, cause, metres = 0 } = {}) {
+  if (!ACT5_TRAILER_IDS_V188.includes(trailer) || !raceMissions.includes(campaignId) || !ACT5_DROP_CAUSES_V188.includes(cause)) return false;
+  const state = act5StateV188(save);
+  if (state.phase !== 'final' || completed(save).includes(campaignId) || convoyOf(state).drops.some(drop => drop.trailer === trailer)) return false;
+  if (campaignId === 'act5-last-run' && act5BridgeDueV188(save, campaignId)) {
+    const timedOut = cause === 'timeout';
+    if (timedOut && trailer !== ACT5_BRIDGE_DEFAULT_V188) return false;
+    if (!chooseAct5BridgeV188(save, trailer, { timedOut })) return false;
+  }
+  return writeConvoy(save, convoy => { convoy.drops.push({ trailer, mission: campaignId, cause, metres }); });
+}
+export const markAct5BridgeCrossedV188 = save => act5StateV188(save).phase === 'final' && !convoyOf(act5StateV188(save)).bridgeCrossed
+  && !completed(save).includes('act5-last-run') && writeConvoy(save, convoy => { convoy.bridgeCrossed = true; });
+export const recordAct5QueenKilledV188 = save => act5StateV188(save).phase === 'final' && !convoyOf(act5StateV188(save)).queen
+  && !completed(save).includes('act5-depot-queen') && writeConvoy(save, convoy => { convoy.queen = 'killed'; });
+/** The trailers really lost, for the debrief and the epilogue. */
+export const act5ConvoyDropsV188 = save => Object.freeze(convoyOf(act5StateV188(save)).drops.map(drop => Object.freeze({ ...drop })));
 
 /** In the operation resolution (finalizeOperation candidate). Returns what changed, or null. */
 export function applyAct5OperationResultV188(save, { success, campaignId } = {}) {

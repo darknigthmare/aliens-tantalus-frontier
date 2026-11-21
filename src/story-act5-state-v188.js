@@ -10,6 +10,11 @@ export const ACT5_ENDING_IDS_V188 = Object.freeze(['relay-speaks', 'freight-firs
 export const ACT5_ADVANTAGE_IDS_V188 = Object.freeze(['turrets', 'armour', 'window', 'route']);
 export const ACT5_BRIDGE_IDS_V188 = Object.freeze(['freight', 'colonists']);
 export const ACT5_STANDOFF_IDS_V188 = Object.freeze(['transmitted', 'withdrawn', 'held']);
+// V188 dedicated convoy race (act5-convoy-race-v188.js): trailer drops and the Queen chase, additive.
+export const ACT5_TRAILER_IDS_V188 = Object.freeze(['colonists', 'freight']);
+export const ACT5_DROP_CAUSES_V188 = Object.freeze(['road', 'bridge', 'timeout', 'collapse', 'horde', 'queen', 'decoy']);
+export const ACT5_RACE_MISSIONS_V188 = Object.freeze(['act5-last-run', 'act5-depot-queen']);
+export const ACT5_QUEEN_OUTCOMES_V188 = Object.freeze(['killed']);
 const CREW_ID = /^crew-\d{2}-[a-z0-9-]{1,40}$/;
 const MAX_TALKED = 16;
 
@@ -19,6 +24,19 @@ const count = (value, max) => Math.max(0, Math.min(max, Math.floor(Number(value)
 export function createAct5V188() {
   return { schema: 188, phase: null, recommended: null, decision: null, advantages: [], bridge: null, bridgeTimedOut: false,
     standoff: null, epilogueTalked: [], lockerRead: false };
+}
+
+/** `convoyV188`: present only once the dedicated race recorded something (older saves never have it). */
+export function normalizeAct5ConvoyV188(raw) {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
+  const drops = [];
+  for (const entry of Array.isArray(raw.drops) ? raw.drops : []) {
+    const trailer = pick(ACT5_TRAILER_IDS_V188, entry?.trailer), mission = pick(ACT5_RACE_MISSIONS_V188, entry?.mission), cause = pick(ACT5_DROP_CAUSES_V188, entry?.cause);
+    if (!trailer || !mission || !cause || drops.some(drop => drop.trailer === trailer)) continue;
+    drops.push({ trailer, mission, cause, metres: count(entry.metres, 5000) });
+  }
+  const convoy = { drops, bridgeCrossed: raw.bridgeCrossed === true, queen: pick(ACT5_QUEEN_OUTCOMES_V188, raw.queen) };
+  return drops.length || convoy.bridgeCrossed || convoy.queen ? convoy : null;
 }
 
 function normalizeDecision(raw) {
@@ -45,6 +63,8 @@ export function normalizeAct5V188(raw) {
   state.standoff = pick(ACT5_STANDOFF_IDS_V188, raw.standoff);
   state.epilogueTalked = Array.isArray(raw.epilogueTalked) ? [...new Set(raw.epilogueTalked.filter(id => typeof id === 'string' && CREW_ID.test(id)))].slice(0, MAX_TALKED) : [];
   state.lockerRead = raw.lockerRead === true;
+  const convoy = normalizeAct5ConvoyV188(raw.convoyV188);
+  if (convoy) state.convoyV188 = convoy;
   if (!state.phase) return null;
   return state;
 }
