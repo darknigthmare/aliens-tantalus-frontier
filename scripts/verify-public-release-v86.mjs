@@ -544,6 +544,7 @@ const FORGE_TOOLING_V140 = new Set([
   'scripts/verify-colony-crew-v188.mjs',
   // V188 dedicated colony levels C1-C4: suite and spec, source-only exact paths.
   'scripts/verify-colony-levels-v188.mjs',
+  'scripts/qa-colony-levels-v188.mjs',
   'specs/008-niveaux-colonie',
   'specs/008-niveaux-colonie/spec.md',
   'specs/008-niveaux-colonie/plan.md',
