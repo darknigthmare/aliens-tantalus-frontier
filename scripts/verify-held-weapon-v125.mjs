@@ -3,6 +3,7 @@ import test from 'node:test';
 import { readFileSync } from 'node:fs';
 import { WEAPONS } from '../src/content-core-v50.js';
 import { USER_EQUIPMENT_V95 } from '../src/user-equipment-v95.js';
+import { WEAPON_ADDITION_IDS_V188 } from '../src/weapon-catalog-additions-v188.js';
 import { HELD_WEAPON_PROFILES_V125, resolveHeldWeaponProfileV125 as profile } from '../src/held-weapon-profiles-v125.js';
 import { getHeldWeaponPoseV125 as pose, drawHeldWeaponV125 as draw, translateHeldWeaponPoseV125 as translate,
   HELD_WEAPON_SURFACE_HEIGHTS_V125 } from '../src/held-weapon-renderer-v125.js';
@@ -26,11 +27,16 @@ const pointAt = (value, pivot) => ({
 });
 const equalPoint = (actual, expected) => { approximately(actual.x, expected.x); approximately(actual.y, expected.y); };
 
-test('178 catalogue and 3 admitted user weapons resolve to their full native sources and real PNG dimensions', () => {
+test('178 plaqued catalogue and 3 admitted user weapons resolve to their full native sources and real PNG dimensions', () => {
   const userWeapons = USER_EQUIPMENT_V95.filter(item => item.kind === 'weapon');
-  assert.equal(HELD_WEAPON_PROFILES_V125.length, WEAPONS.length + userWeapons.length);
+  // V188 (spec 014): the only catalogue entries without a native plaque are the
+  // explicitly listed pending-plaque additions; they never get a held PNG profile.
+  const plaqued = WEAPONS.filter(weapon => !WEAPON_ADDITION_IDS_V188.includes(weapon.id));
+  assert.equal(plaqued.length, 178);
+  for (const id of WEAPON_ADDITION_IDS_V188) assert.equal(profile(id), null, id);
+  assert.equal(HELD_WEAPON_PROFILES_V125.length, plaqued.length + userWeapons.length);
   const images = new Map();
-  for (const weapon of [...WEAPONS, ...userWeapons]) {
+  for (const weapon of [...plaqued, ...userWeapons]) {
     const value = profile(weapon);
     assert.ok(value, weapon.id); assert.equal(value.weaponId, weapon.id);
     assert.equal(value.sourceLayout, 'native-full-canvas'); assert.equal(value.sheetId, null);

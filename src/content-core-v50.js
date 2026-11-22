@@ -1,6 +1,7 @@
 import { WEAPONS_ADDITIONS_V116 } from './weapon-native-visuals-v116.js';
 import { ADMITTED_WEAPON_ADDITIONS_V121 } from './weapon-release-v121.js';
 import { ADMITTED_WEAPON_ADDITIONS_V122 } from './weapon-release-v122.js';
+import { WEAPON_CATALOG_ADDITIONS_V188 } from './weapon-catalog-additions-v188.js';
 import { VEHICLE_CATALOG_ADDITIONS_V121 } from './vehicle-catalog-additions-v121.js';
 import { VEHICLE_CATALOG_ADDITIONS_V122 } from './vehicle-catalog-additions-v122.js';
 import { VEHICLE_NATIVE_POSES_V122 } from './vehicle-native-visuals-v122.js';
@@ -239,7 +240,9 @@ export const WEAPONS = Object.freeze([...Array.from({ length: 146 }, (_, index) 
     rarity: rarity(index), provenance: index < weaponSeeds.length ? 'licensed-reference' : 'gameplay-variant',
     tags: [seed[1], index % 3 === 0 ? 'acid-safe' : 'field', index % 5 === 0 ? 'heavy' : 'portable']
   };
-}), ...WEAPONS_ADDITIONS_V116, ...ADMITTED_WEAPON_ADDITIONS_V121, ...ADMITTED_WEAPON_ADDITIONS_V122]);
+}), ...WEAPONS_ADDITIONS_V116, ...ADMITTED_WEAPON_ADDITIONS_V121, ...ADMITTED_WEAPON_ADDITIONS_V122,
+  // V188 (spec 014): pending-plaque franchise additions; never purchasable without a native plaque.
+  ...WEAPON_CATALOG_ADDITIONS_V188]);
 
 const equipmentSeeds = [
   'Motion Tracker', 'Access Tuner', 'Maintenance Jack', 'Cutting Torch', 'Flashlight', 'Medkit',
@@ -578,7 +581,7 @@ export const CONTENT_COUNTS = Object.freeze({
 export const CONTENT_TARGETS = Object.freeze({
   worlds: 64,
   campaigns: 436,
-  weapons: 146 + WEAPONS_ADDITIONS_V116.length + ADMITTED_WEAPON_ADDITIONS_V121.length + ADMITTED_WEAPON_ADDITIONS_V122.length,
+  weapons: 146 + WEAPONS_ADDITIONS_V116.length + ADMITTED_WEAPON_ADDITIONS_V121.length + ADMITTED_WEAPON_ADDITIONS_V122.length + WEAPON_CATALOG_ADDITIONS_V188.length,
   equipment: 106,
   enemies: 571,
   vehicles: VEHICLES.length,

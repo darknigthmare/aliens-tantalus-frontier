@@ -514,7 +514,7 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
   },
   "src/content-core-v50.js": {
     "previousSha256": "6d073593ea5854b17ae626556ba6bf6259f835bd4eb59ba3e0d1a5c785418fdb",
-    "currentSha256": "720ddfcc4bcf9522877c555ae7a9958c18feca506567e00294b1703f72236589"
+    "currentSha256": "28dad893d9520149a217f4e3041b3e5d3f622700b00c23998df2ff3312f289bd"
   },
   "src/content.js": {
     "previousSha256": "a7fb0c9bc6da8ff2bf9c008dfbbf2f580a9207ac9a8b1ec6f8e06025003363ff",
@@ -771,6 +771,14 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
   "src/weapon-magazine-recovery-runtime-v168.js": {
     "previousSha256": "73eb796bf6d9159239e8a8c499bc8b73db9975a69016df5b7d9ef2d2d4eccf13",
     "currentSha256": "8fb77f86e0f5a3f02ec756ad659fe86347927bb8c2de1d54798e04f71453dcdd"
+  },
+  "src/weapon-reference-coverage-v121.js": {
+    "previousSha256": "7604a2a9c3157153a7a9d02caa7c7fbfcfb2326a02f032c8b6ab41246c640c2e",
+    "currentSha256": "ea8172971488dcc3542a3d53d8698cae9a0aca692ece17b09b25403e934f18d1"
+  },
+  "src/weapon-reference-coverage-v122.js": {
+    "previousSha256": "2ded211d99501d8b6e38da6c79185bf61b8afb1f8cf00429b2d1fc8072bd0b23",
+    "currentSha256": "854d7fc92500e7f0a7a172674c530433b0e5944ef5f9865571b32c3e806287c8"
   },
   "styles.css": {
     "previousSha256": "5d7f49517ea4377aaf2847e7ef5f5dd5f6e4b015301e1280072d41fd9edab36c",
