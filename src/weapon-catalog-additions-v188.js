@@ -29,7 +29,7 @@ export const WEAPON_CATALOG_ADDITIONS_V188 = freeze([
     sourceRefs: ['https://www.imfdb.org/wiki/Ithaca_37_%22Stakeout%22', 'https://avp.fandom.com/wiki/File:Hicks%27_Shotgun_in_film_and_game.png'],
     identityEvidence: 'on-screen-film-prop-identified-by-secondary-firearm-database',
     identityVerified: false,
-    sourceMechanism: 'pump-action-tube-magazine',
+    sourceMechanism: 'pump-action-tube-magazine', ammunitionV188: '12 ga shotshell (chambrage de l’arme réelle) [À VÉRIFIER]',
     description: 'Fusil à pompe de Hicks, Aliens (1986). Accessoire de tournage identifié comme Ithaca 37 raccourci par des bases secondaires (IMFDB, wiki AVP) ; Stakeout d’usine ou modèle long recoupé reste débattu. Alimentation tube et pompe documentées par le mécanisme réel ; capacité 4 et cadence [PROPOSÉ]. Aucune plaque native : silhouette Canvas provisoire.'
   },
   {
@@ -42,7 +42,7 @@ export const WEAPON_CATALOG_ADDITIONS_V188 = freeze([
     sourceRefs: ['https://alienisolation.fandom.com/wiki/Items'],
     identityEvidence: 'first-party-manual-names-weapon-class-only',
     identityVerified: true,
-    sourceMechanism: 'pump-action-tube-magazine',
+    sourceMechanism: 'pump-action-tube-magazine', ammunitionV188: 'shotshell [À DÉFINIR]',
     description: 'Fusil à pompe de Sevastopol, Alien: Isolation. Le manuel Feral nomme seulement la classe « Shotgun » ; la désignation « Model 37 12 Gauge » vient d’un wiki secondaire. Tube et pompe [À VÉRIFIER] ; capacité 4 [PROPOSÉ]. Aucune plaque native : silhouette Canvas provisoire.'
   },
   {
@@ -55,7 +55,7 @@ export const WEAPON_CATALOG_ADDITIONS_V188 = freeze([
     sourceRefs: ['https://alienisolation.fandom.com/wiki/Items'],
     identityEvidence: 'first-party-manual-names-weapon-class-only',
     identityVerified: true,
-    sourceMechanism: 'fuel-canister-flame-jet',
+    sourceMechanism: 'fuel-canister-flame-jet', ammunitionV188: 'fuel [À DÉFINIR]',
     description: 'Lance-flammes de Sevastopol, Alien: Isolation (classe nommée par le manuel Feral). Réservoir de carburant, aucune douille ; 80 unités de carburant et débit [PROPOSÉ]. Aucune plaque native : silhouette Canvas provisoire.'
   }
 ]);
