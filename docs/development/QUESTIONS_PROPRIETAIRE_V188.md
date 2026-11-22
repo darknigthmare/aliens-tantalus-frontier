@@ -716,3 +716,17 @@ Décisions reçues hors questionnaire après la course du convoi de l'Acte V (`c
 | D4d | C1 : **adoucir la perspective** excessive aux deux bouts du couloir de profondeur | Plafond de perspective du pont (`deckPerspectiveSpan` 640 px **[PROPOSÉ]**) : au-delà d'un demi-écran du centre, les joints gardent l'inclinaison qu'ils ont à cette distance (≈ 85 px au lieu de ≈ 296 px aux extrémités) ; les autres cales sont inchangées | — |
 
 Aucune de ces décisions ne certifie une fidélité « 1:1 ».
+
+## Niveaux dédiés de la station S1-S4 (2026-11-22) — valeurs par défaut appliquées
+
+Demande reçue : des niveaux dédiés pour S1-S4 sur le modèle du lot colonie (spec `009-niveaux-station`, bible §7.10). Les choix ci-dessous sont appliqués par défaut **[PROPOSÉ]** et restent révisables.
+
+| # | Question | Défaut appliqué | Autres options |
+| --- | --- | --- | --- |
+| S9-1 | Rendu des quatre niveaux | V1 (intérieur de station) ; la cale de cargo procédurale (caisses d'un cargo) est retirée de S1-S4 | V2 pour le collier d'arrimage de S1 (nouvelle définition de cale) |
+| S9-2 | Faut-il enregistrer l'issue des récupérateurs de S1 (négociés / forcés) pour l'arrivée de S4 (« récupérateurs alliés si négociés », §7.2) ? | Non enregistrée ; S4 montre Grue si Port-Méridien a accepté son prix (`colonyMissionsV188.grue = accept`) | Champ additif `stationV188.s1Salvagers` (migration testée) |
+| S9-3 | Conduits de la station pendant S1-S4 | Scellés (aucune traversée), pour que chaque cloison soit le seul passage | Ouvrir un réseau de conduits dédié dans S3 (ventilation) |
+| S9-4 | Valeurs de jeu (minuteur de S3 150 s, tenue du quai 60 s, œufs, effectifs) | Celles de la bible §7.10 | À régler après playtest |
+| S9-5 | Arrivée des colons volontaires en S4 (§7.2) | Non représentée (équipe technique et Grue seulement) | Silhouettes de colons de Port-Méridien selon le palier de la colonie |
+
+Aucune de ces valeurs ne certifie une fidélité « 1:1 ».

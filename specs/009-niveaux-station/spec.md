@@ -1,0 +1,29 @@
+# Spécification : niveaux dédiés des missions de la station Asphodèle S1-S4
+
+**Spec** : `009-niveaux-station` | **Date** : 2026-11-22 | **Bible** : §7.1-§7.9, §42 (`docs/narrative/CAMPAGNE_PRINCIPALE.md`) | **Modèle** : `specs/008-niveaux-colonie`
+
+## Contexte
+
+`station-s1` à `station-s4` (spec 005) se jouaient sur le gabarit générique `ship-interior-vertical` : roster tiré du catalogue, générateur, terminal d'archives, et la cale de cargo procédurale d'un cargo (caisses C-21/C-22) en V2. Rien ne racontait l'abordage sous silence, la voix de CASSIUS, les ponts scellés ni la reprise. Le propriétaire demande une couche de niveau par mission, posée sur ce gabarit, comme le lot colonie, sans toucher aux identifiants, objectifs de campagne, récompenses, à la sauvegarde `stationV188`, à la chaîne d'accès (intro → S1 → S2 → décision CASSIUS → S3 → S4), à la décision CASSIUS (réécrire / brider / effacer, prise une fois au Commandement), aux scènes de retour ni aux pièces du dossier.
+
+L'intro *Six heures de silence* (`station-intro-silence`) n'est pas une mission : c'est la fin de la quête de Rook et CIN-70, à bord du Tantalus. Elle n'a pas de niveau (vérifié : aucune campagne de cet identifiant).
+
+## Exigences
+
+- **FR-001** Chaque mission S1-S4 suit des phases écrites ; chaque phase écrit un checkpoint à son début ; reprise et nouvelle tentative y reviennent avec la phase telle qu'elle commençait (champ de reprise additif `stationLevelV188`).
+- **FR-002** Tout ennemi apparu par la couche naît derrière une zone sûre de 900 px (jamais plus près d'un marine du même pont, jamais derrière une porte fermée ou un cadre scellé) et attend 4 s. [PROPOSÉ, règle du lot colonie]
+- **FR-003** Les quatre niveaux restent en V1 (intérieur de station) : la cale de cargo procédurale ne s'applique plus à S1-S4.
+- **FR-004** Parcours vérifié (AGENTS.md) : les conduits de la station sont scellés (aucune traversée V62, par le marine, les alliés ni les créatures ; l'entrée dit pourquoi) ; deux cadres scellés prolongent les cloisons sur les ponts supérieurs (cloison de coque au-dessus de la cloison de l'anneau, grille soudée sur l'échelle du puits de jonction), si bien que chaque cloison du pont inférieur est le seul passage de sa section. Contrôle logique (`stationAccessV188`, graphe du gabarit) et physique (les murs).
+- **FR-005** S1 *L'arrimage* (horreur) : sas d'arrimage sans courant cyclé à la manivelle (maintenu 4 s), dropship d'Echo-8 au collier ; anneau éteint (lampe du marine), ventilateurs qui saturent le détecteur ; deux traces d'Echo-8 (barricade « E-8 · 05:52 », six traits de craie) ; récupérateurs de Grue à la cloison de l'anneau : **négocier** (ils ouvrent) ou **forcer** (maintenu 5 s ; ils reviennent armés, derrière la zone sûre) ; pont de contrôle : alimentation de secours (objectif `power`) ; extraction au sas extérieur.
+- **FR-006** S2 *La voix de CASSIUS* (tension) : trois disjoncteurs de secteur guidés par Idris Kwan à la radio (quais, galerie de l'anneau, passerelle de coque), puis la cloison de l'anneau ; réacteur auxiliaire relancé (maintenu 5 s, objectif `power`) ; CASSIUS au pont de contrôle cite ses trois consignes (quarantaine, priorité cargaison, préservation des actifs) ; copie des ordres de livraison QZ17 (maintenu 3 s). La décision n'est **pas** prise dans le niveau : elle reste celle du Commandement.
+- **FR-007** S3 *Les ponts scellés* (horreur) : le sas 3 dépend de la décision CASSIUS (réécrit : il l'ouvre ; bridé : code manuel, 3 s ; effacé : forcé à la main, 6 s, et plus de créatures) ; laboratoire de transit : berceaux QZ17 ouverts, journaux des survivants (quatrième jour), œufs (s'ouvrent à l'approche, saut du parasite si l'on reste, brûlables) ; routage d'énergie : deux circuits pour trois (sas + éclairage, ou sas + ventilation qui ferme les conduits et réduit l'attaque) ; combat confiné à l'arrière, plaque de Kessler et dernier enregistrement ; compte à rebours de fermeture de la quarantaine (150 s) qui remplace le minuteur générique de 105 s ; échec « quarantaine refermée » et reprise à la phase.
+- **FR-008** S4 *Le hub Asphodèle* (action) : purge du dernier nid au puits de jonction (maintenu 5 s) ; trois vannes de secteur ; tenir le quai 60 s (cloison du quai maintenue ouverte pour l'arrimage, minuteur arrêté hors du quai, vagues derrière la zone sûre) ; arrivée de l'équipe technique du Tantalus, et des récupérateurs de Grue si la colonie a accepté son prix ; extraction déplacée au quai (navette de l'équipe). La tenue de zone générique (12 s, vagues à 460 px) n'est plus proposée.
+- **FR-009** Art : emplacements nommés ; PNG Asphodèle existants réemployés quand ils conviennent (UD-4L au collier, barricade d'Echo-8, noyau de CASSIUS, carte QZ, berceaux, manomètres, résine, technicien, marchand Crucible, Grue, habillage `asph-msn-*`) ; primitives Canvas pour le reste. Aucune image générée. Textes FR + EN par le catalogue revu.
+
+## Fidélité
+
+Aucune fidélité « 1:1 ». Documenté (cité) : stations Seegson et leur système de gestion obéissant, cycle manuel des sas, détecteur trompé par l'air en mouvement, coursives rivetées de Sevastopol (*Alien: Isolation*, 2014 ; direction artistique d'environnement publiée par Paul Abbott) ; détecteur de mouvement, caméras de casque, équipe perdue (*Aliens*, 1986) ; œufs et saut du parasite (*Alien*, 1979 ; *Aliens*, 1986) ; nids de résine (*Aliens*, 1986). Adapté par le projet : Asphodèle, CASSIUS, Echo-8, Kessler, Grue et Crucible (créations du projet), laboratoire de transit et berceaux QZ17, routage d'énergie, compte à rebours de S3. À définir : art des emplacements en primitives, voix de CASSIUS et de Kwan.
+
+## Hors périmètre
+
+Art final ; voix ; enregistrement de la négociation de S1 dans la sauvegarde (question propriétaire) ; annexes, contrats et ronde de nuit (habillage existant, gabarit générique inchangé) ; hub Asphodèle (spec 007).
