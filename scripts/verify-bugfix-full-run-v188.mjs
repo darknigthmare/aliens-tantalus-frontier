@@ -35,6 +35,25 @@ test('boss checkpoint: after the boss falls, a checkpoint restart lands on a rea
   assert.ok(engine.player.y + engine.player.h <= boss.groundY + 1, `feet ${engine.player.y + engine.player.h} under ${boss.groundY}`);
 });
 
+// Found after QZ-18: the dossier piece « Priorité de fret à 18:43 » is held once CIN-20-ROOK
+// is seen (story-dossier-v188.js), but the Command panel was drawn before that cinematic and
+// never redrawn: it kept « DOSSIER QZ17 · 2/7 » while the save held 3/7, even after switching
+// views. A cinematic newly recorded as seen now redraws the Command missions panel (dossier).
+test('dossier panel: a newly seen story cinematic redraws the Command dossier (CIN-20-ROOK → 3/7)', async () => {
+  const { readFileSync } = await import('node:fs');
+  const app = readFileSync(new URL('../src/app.js', import.meta.url), 'utf8');
+  const body = app.slice(app.indexOf('function playStoryCinematicV188('), app.indexOf('function openPlayerCreatorV84('));
+  assert.match(body, /markStoryCinematicSeenV188\(candidate, id\)\) \{ saveSystem\.commit\(candidate\); [^}]*renderCommandMissionsV110\(\)/,
+    'the commit of a newly seen cinematic redraws the Command dossier');
+  const { storyDossierV188 } = await import('../src/story-dossier-v188.js');
+  const { createDefaultSave } = await import('../src/save.js');
+  const save = createDefaultSave();
+  save.archiveRelayArchivesV122 = { schema: 122, case: { verdict: 'delayed-distress' } };
+  const before = storyDossierV188(save).pieces.find(piece => piece.id === 'priority-1843').held;
+  save.storyCampaignV188.cinematicsSeen = [...save.storyCampaignV188.cinematicsSeen, 'cin-20-rook'];
+  assert.deepEqual([before, storyDossierV188(save).pieces.find(piece => piece.id === 'priority-1843').held], [false, true], 'the piece depends on the cinematic');
+});
+
 // Found after QZ-18: the hub objective sends the marine to « Salle de briefing, table
 // tactique », but the table was a weak prop (priority 10): Tamsin Velez, Mara Vega, ECHO-A
 // and Maksim Orlov stand around it, and any crew member within reach always won E. No spot

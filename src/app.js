@@ -1176,7 +1176,8 @@ function playStoryCinematicV188(id, { once = true, record = true, context = {} }
   return cinematicPlayerV188.play(id, { language: document.documentElement.lang, context,
     reducedMotion: Boolean(saveSystem.data?.settings?.reducedMotion) }).then(result => {
     if (record && !creatorOwnerV84) {
-      try { const candidate = clone(saveSystem.data); if (markStoryCinematicSeenV188(candidate, id)) saveSystem.commit(candidate); } catch (error) { toast(error.message); }
+      // V188 full run: dossier pieces can depend on a seen cinematic (CIN-20-ROOK), so the Command dossier is redrawn.
+      try { const candidate = clone(saveSystem.data); if (markStoryCinematicSeenV188(candidate, id)) { saveSystem.commit(candidate); try { renderCommandMissionsV110(); } catch { /* the panel redraws with the next view */ } } } catch (error) { toast(error.message); }
     }
     if (result === 'replaced') return result;
     if (cinematicReturnV188 === restore) cinematicReturnV188 = null;
