@@ -46,6 +46,12 @@ Lire les références approfondies uniquement si la tâche en a besoin. Si une s
 - Dans la PR, expliquer le problème, le comportement obtenu, les vérifications réellement exécutées et les limites restantes. Mettre à jour le suivi existant concerné sans déclarer terminé un contenu seulement listé ou généré.
 
 <!-- BEGIN:shared-ai-tooling -->
+## Outils de développement du jeu (spec 012)
+
+- Lanceur de scènes caché : `npm run dev`, puis `/devtools/` (ou `/dev`). Chaque entrée construit une sauvegarde cohérente (`devtools/dev-fixtures-v188.js` : règles du jeu, `migrateSave`, `inspectSaveSlotV78`, injections déclarées) et ouvre `/?atf-dev=v188`, où le serveur injecte un stockage isolé (le profil réel n'est ni lu ni écrit) et le panneau DEV (options, surcouches, pause, image par image, sortie).
+- Stand de tir : entrée « Stand de tir » ; mission réelle relancée par `engine.start` avec l'arme, l'équipement et les cibles choisis ; mesures et réglages exportés en diff JSON pour revue (`__ATF_DEV_V188__.range`).
+- Source seulement : `devtools/` et `scripts/dev-tools-server-v188.mjs` sont admis par chemins exacts dans `scripts/verify-public-release-v86.mjs` et absents du build. Ne jamais relier le lanceur à un écran joueur. Détails : `specs/012-outils-dev/plan.md`.
+
 ## Outils de développement IA
 
 Ce dépôt peut utiliser [Spec Kit](https://github.com/github/spec-kit),
