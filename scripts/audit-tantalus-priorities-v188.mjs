@@ -1251,11 +1251,11 @@ export const TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188 = freeze({ baseline: '0d1
   },
   "scripts/verify-campaign-lethe-v163.mjs": {
     "previousSha256": "fb8cbbd3dd9d6fb4f356a3e167f9537cf0f04619e6cb94feaebb5de5cca7cdde",
-    "currentSha256": "dcd9ef0b0814546780eed9fbf40ffbe90444d673d782025b0405df77951161c0"
+    "currentSha256": "e46391c24e1a4cbda36560a96f2908966feb8f6fa4c0ba91545b587648ee71a2"
   },
   "scripts/verify-campaign-story-v160.mjs": {
     "previousSha256": "147d29402ef405c00b52f8453f991373c7ab869651d6b36046b54ee1c6340863",
-    "currentSha256": "1a2c71beee2bc19433d6c67120ce582067e31ed2181309448d00398e454b06d0"
+    "currentSha256": "65469c8fee6bfa18a0faf5b633aa91ef658c2410eca3a17f1cadfe81bff23d5b"
   },
   "scripts/verify-capture-observation-v177.mjs": {
     "previousSha256": "e44f384d7d3a27f4dc17a9ef67ee9b84e076976c5bda46d2a265ac06a1944742",
