@@ -551,6 +551,13 @@ const FORGE_TOOLING_V140 = new Set([
   'specs/008-niveaux-colonie/spec.md',
   'specs/008-niveaux-colonie/plan.md',
   'specs/008-niveaux-colonie/tasks.md',
+  // V188 dedicated Asphodèle station levels S1-S4: suite, browser QA and spec, source-only exact paths.
+  'scripts/verify-station-levels-v188.mjs',
+  'scripts/qa-station-levels-v188.mjs',
+  'specs/009-niveaux-station',
+  'specs/009-niveaux-station/spec.md',
+  'specs/009-niveaux-station/plan.md',
+  'specs/009-niveaux-station/tasks.md',
   'scripts/qa-colony-crew-v188.mjs',
   'docs/development/INSERTION_ART_SLOTS_V188.md',
   'docs/development/INSERTION_ART_PROVENANCE_20261116.json',

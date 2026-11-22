@@ -70,7 +70,7 @@ export function stationS3PlacesV188(engine) {
     airlock3: Object.freeze({ x: x.dockDoor - 60, y: decks.low }),
     lab: Object.freeze({ x0: x.dockDoor + 40, x1: x.cargoDoor - 40 }),
     cradles: Object.freeze({ x: x.dockDoor + 70, y: decks.low }),
-    eggs: Object.freeze([x.cargo - 40, x.cargo + 70, x.cargoDoor - 120].map(value => round(value))),
+    eggs: Object.freeze([x.cargo + 80, x.cargo + 200].map(value => round(value))), // between the cradles and the aft bulkhead
     log: Object.freeze({ x: x.dockDoor + 60, y: decks.low }),
     router: Object.freeze({ x: x.reactor - 110, y: decks.low }),
     tag: Object.freeze({ x: x.aftLow + 90, y: decks.low })

@@ -49,7 +49,7 @@ export const STATION_LEVEL_RULES_V188 = Object.freeze({
   pxPerMetre: 51, marine: Object.freeze({ w: 44, h: 92 }), safeZonePx: 900, graceSeconds: 4,
   reach: 76, damagePause: .9,
   holds: Object.freeze({ crank: 4, force: 5, reactor: 5, orders: 3, code: 3, forceAirlock: 6, burn: 2, purge: 5, valve: 3 }),
-  egg: Object.freeze({ trigger: 110, opening: 1.5, damage: 22 }),
+  egg: Object.freeze({ trigger: 100, opening: 1.5, damage: 22 }),
   sealSeconds: 150, holdSeconds: 60,
   darkness: Object.freeze({ s1: .62, s1Power: .4, s3: .58, s3Lights: .2 })
 });
@@ -638,7 +638,7 @@ export function withStationMissionLevelsV188(Base) {
         }
         if (phase === 'lab' || phase === 'routing') {
           if (!pr.log) add('log', p.log.x, p.log.y, 'E  LIRE LES JOURNAUX DES SURVIVANTS', { reach: 50 });
-          if (!pr.cradles) add('cradles', p.cradles.x + 200, p.cradles.y, 'E  EXAMINER LES BERCEAUX QZ17', { reach: 60 });
+          if (!pr.cradles) add('cradles', p.cradles.x + 190, p.cradles.y, 'E  EXAMINER LES BERCEAUX QZ17', { reach: 60 });
           for (const egg of pr.eggs) if (egg.state === 'closed' || egg.state === 'opening') hold(`burn:${egg.id}`, egg.x, p.decks.low, 'BRÛLER L’ŒUF', { reach: 95 });
         }
         if (phase === 'routing') {
