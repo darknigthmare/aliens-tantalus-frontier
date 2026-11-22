@@ -28,3 +28,8 @@ scripts/report-sprite-components.py
 .DS_Store
 Thumbs.db
 .env*
+
+# CodeGraph — index local (ne pas versionner)
+.codegraph/
+.codegraph-wsl/
+.codegraph-*/
