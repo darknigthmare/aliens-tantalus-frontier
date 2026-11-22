@@ -608,3 +608,19 @@ Base : `79df744c`. Décisions enregistrées dans `QUESTIONS_PROPRIETAIRE_V188.md
 | C1 : perspective du couloir | Partiel | Joints du pont plafonnés à un demi-écran du centre (640 px [PROPOSÉ]) ; vérifié par géométrie et captures, pas par un retour de playtest |
 
 Vérifications exécutées : tests Node étendus `verify-act5-convoy-race-v188` (15/15), `verify-act5-endings-v188` (27/27), `verify-colony-levels-v188` (15/15), `verify-dropship-handover-v188` (44/44) ; parcours Chromium `qa-act5-convoy-race-v188.mjs` 18/18 et `qa-colony-levels-v188.mjs` 44/44, sans erreur de page, fixtures et injections déclarées en tête des scripts. Dans ce parcours navigateur, la Reine a été blessée et déséquilibrée mais n'a pas atteint son plancher (une remorque abandonnée l'a retenue) : le recul n'y a pas été observé ; il est couvert par le test Node déterministe. Rien n'est déclaré « 1:1 » ; aucune image n'a été générée.
+
+## Décisions du propriétaire du 22 novembre 2026 — second tour
+
+Le M577 à l'échelle partout, le M577 de C3, Noor sur l'écran de préparation, le cadrage de la poursuite (`QUESTIONS_PROPRIETAIRE_V188.md`, D5-D8).
+
+| Élément | Statut | Constat |
+| --- | --- | --- |
+| M577 conduit des niveaux ordinaires à l'échelle | Partiel | 449 × 112 px pour les véhicules 001 et 002 (substitut Canvas `m577-mission-side-scale`, la planche d'action de 250 px n'étant pas à cette échelle). Stationnement dérivé de la géométrie existante (voie de sol continue, ni cabine d'ascenseur, ni pont bas, ni porte, voie de l'extraction), conduite bornée à la voie, sortie par la porte latérale, tir depuis la tourelle de toit. Contrôlé sur tous les niveaux ordinaires où il roule (`colony-multiroute`, `planet-exterior`). Dans la rue de la colonie il était garé au-dessus de la cage d'ascenseur de la sécurité. Reprises : champ additif `vehicle.w`, anciens enregistrements acceptés au même centre. La forge garde l'ancienne boîte (fichiers gelés) |
+| M577 du largage à l'échelle | Partiel | Même coque ; le UD-4L reste en vol stationnaire (150 px [PROPOSÉ]) pour le descendre ou le hisser, le M577 roule dans sa voie sans franchir de porte et repart hissé ; extraction à bord : levage au-dessus de la coque, sur sa voie. Substituts Canvas |
+| C3 : M577 garé au quai | Partiel | 449 px, entièrement sur le sol du quai, derrière la voie des marines (le UD-4L se pose devant lui), non conduisible ; substitut Canvas |
+| C3 : Noor sur l'écran de préparation | Fait | Listée « INDISPONIBLE · Noor Okafor · À L'INFIRMERIE » avec le motif, FR à l'écran et EN au catalogue ; seulement pour C3 et si elle est dans l'escouade |
+| Acte V : Reine coupée à courte portée | Partiel | Cadrage de poursuite [PROPOSÉ] (décalage puis recul jusqu'à 0,78) ; à moins de 3 m, queue coupée de 16 px au plus (Node), quelques dizaines de pixels pendant le recul lui-même ; à valider en jeu |
+| Recul de la Reine en QA navigateur | Fait (QA) | Rejeu avec deux remorques maintenues attachées (injection déclarée) : recul observé |
+| Embarquement d'extraction sauté par la touche E | Corrigé | La touche qui confirme l'extraction ne compte plus comme « passer » (0,25 s de séquence minimum) |
+
+Vérifications exécutées : voir le rapport de la PR (suite `verify-m577-everywhere-v188.mjs` dans `test:priorities:v188`, parcours Chromium `qa-apc-levels-v188.mjs`, `qa-colony-levels-v188.mjs` et `qa-act5-convoy-race-v188.mjs` étendus, fixtures et injections déclarées en tête des scripts). Les captures attestent ces parcours, pas une fidélité « 1:1 » ; aucune image n'a été générée.
