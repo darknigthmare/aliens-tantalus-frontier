@@ -1388,7 +1388,7 @@ Elles utilisent le système de rapport existant (`npc-dialogue-v62.js`) : confia
 | `ship-sensor` | **Écoute de nuit** | Capteurs | Pendant la phase `break`, capter des messages retenus par le réseau QZ ; chaque fragment ajoute un nom à *Les noms de Port-Méridien*. |
 | `ship-armory` | **Inventaire contradictoire** | Armurerie | Le registre ne correspond pas aux râteliers. Petite enquête qui forme aux méthodes de l'Acte II. |
 | `ship-vehicle` | **Les plaques du M577** | Baie véhicules | Une plaque d'un ancien équipage, trouvée dans le blindé. |
-| `ship-bioforge` | **Ce qu'on garde en vie** | Bioforge | Débat Inez / BISHOP-9 sur la conservation des spécimens ; ouvre l'accès narratif à la Bioforge (**[PARTIEL]** comme système). |
+| `ship-bioforge` | **Ce qu'on garde en vie** | Bioforge | Débat Inez / BISHOP-9 sur la conservation des spécimens ; ouvre l'accès narratif à la Bioforge (**[PARTIEL]** comme système ; quête non codée). Le laboratoire de confinement (spec 013, 2026-11-22) lui prépare deux lieux : le stockage froid (échantillons conservés, compteur réel) et la galerie d'observation derrière verre blindé, où Inez et BISHOP-9 pourraient se tenir **[À DÉFINIR]**. |
 
 ### 8.3 Recrutement
 
@@ -3716,7 +3716,7 @@ Reprises du contrat du homeworld de Yautja, adaptées à ce moteur Canvas 2D :
 | Atelier `workshop` | V1 | V1 | 6 | Établi, pièces de chargeur, tête synthétique sur un étau (campagne 2) | Étincelles de meuleuse | Fabrication des récompenses |
 | Baie véhicules `vehicle-bay` | V1 | **V2** | 6 | M577 garé, pont élévateur, pièces de blindage, chargeur P-5000 | Fumée d'échappement, gyrophares | Réparation du M577 (quête de Cal) |
 | Logistique `logistics` | V1 | **V2** | 8 | Rayonnages de fret, palettes, chariot élévateur, caisses scellées | Chariot qui circule, scanner de caisse | Gestion des ressources, fret de Port-Méridien |
-| Bioforge `bioforge` | V1 | V1 | 6 | Cuves, sas biologique | Liquides, bulles | Accès narratif (quête « Ce qu'on garde en vie ») |
+| Bioforge `bioforge` | V1 | V1 (laboratoire de confinement, spec 013) | 6 salles → 8 zones | Stockage froid, salle de contrôle, sas biologique, admission, hall des cuves (2 cuves de stase de la file), cellule de confinement et galerie d'observation (profondeur), baie d'analyse et incinérateur, sas de sortie — **primitives Canvas** derrière des emplacements nommés `bioforge-lab-*`, PNG V80 conservés | Liquides et bulles des cuves (VFX V188 `bubble`), brume de décontamination, givre, braises, cycle de purge animé | Console → terminal ; stockage froid, analyse, incinérateur en lecture ; décontamination de sortie obligatoire puis retour au hub à pied. Accès narratif (quête « Ce qu'on garde en vie ») **non codé** |
 | Pas de tir `proving-ground` | V1 | V1 (enveloppe protégée) | 6 | Cibles mobiles, tableau des scores | Impacts sur cibles | Temps de Velez (quête) |
 
 **Secteur ingénierie**

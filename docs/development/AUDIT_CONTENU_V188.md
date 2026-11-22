@@ -660,3 +660,19 @@ Inchangés : identifiants de contenu (le chapitre garde `special-black-abyss-v13
 Fidélité : rien n'est déclaré « 1:1 » ; aucune image générée ; CQ-01 à CQ-06 et les scènes sont des primitives Canvas nommées.
 
 Vérifications réellement exécutées : voir le rapport de la PR, `scripts/verify-side-campaign-queens-v188.mjs` (dans `test:priorities:v188`) et le parcours Chromium `scripts/qa-side-campaign-queens-v188.mjs` (fixtures et injections déclarées en tête : fin de l'Acte V posée dans la sauvegarde importée, objectif générique marqué atteint avant `completeMission()`, chapitre Abysse Noir posé comme fait dans le second profil faute de reçu V131 sans partie jouée). Un parcours injecté ne vaut pas une partie jouée sans aide ; combats et équilibrage restent à éprouver.
+
+## Bioforge — laboratoire de confinement (2026-11-22)
+
+Spec `specs/013-bioforge` ; audit de level design `docs/development/BIOFORGE_AUDIT_V188.md` ; bible §8.2 (`ship-bioforge`) et tableau du secteur industriel. Code : `src/bioforge-lab-layout-v188.js`, `src/bioforge-lab-render-v188.js`, `src/bioforge-lab-runtime-v188.js` (mixin ajouté en fin de chaîne dans `src/bioforge-runtime-v80.js`), `src/bioforge-level-v80.js` (trois stations et la cabine de sortie déplacées), `src/bioforge-ui-v80.js`, `src/app.js`, `bioforge-v80.css`, `src/vfx-v188.js` et `src/vfx-slots-v188.js` (type `bubble`). Hors de la Frontier Forge gelée.
+
+| Élément | Avant | Après | Reste |
+| --- | --- | --- | --- |
+| Plan | 6 salles identiques, portes = murs invisibles de 10 m | 8 zones nommées dans les 6 salles, cloisons pleine hauteur, plafonds à hauteur humaine | Étage d'observation praticable |
+| Arrivée et sortie | Scène inerte avant session ; sortie seulement par le terminal | Promenade sans session ; sortie à pied après purge, décontamination de 2,4 s **[PROPOSÉ]**, retour à l'annexe du hub | Reprise exacte pendant la sortie |
+| Flux d'admission | File seulement dans le terminal | Tableau de file et deux cuves de stase dans le monde | — |
+| Fonctions de laboratoire | Absentes | Stockage froid, analyse, incinérateur (lecture seule), galerie en profondeur | Quête `ship-bioforge`, PNJ |
+| Art | PNG V80 | PNG V80 conservés + primitives `bioforge-lab-*` | Images des emplacements (aucune générée) |
+
+Inchangés : identifiants de salles, portes, stations et emplacements, monde 2880×720, arène, sauvegarde `bioforgeV80` (aucun champ ajouté), admissions V132, règles de session. Fidélité : références citées dans la spec (Alien 1979, Aliens 1986, Alien Resurrection 1997, Prometheus 2012, Covenant 2017, Alien: Isolation 2014), séparées en documenté / adapté / à définir ; rien n'est « 1:1 ».
+
+Vérifications réellement exécutées : `scripts/verify-bioforge-lab-v188.mjs` (dans `test:priorities:v188`), parcours Chromium `scripts/qa-bioforge-lab-v188.mjs` à 1366×768 et 390×844 (fixture et crochet de reprise déclarés en tête), mesure de rendu avant/après dans l'audit ; voir le rapport de la PR pour les suites complètes.

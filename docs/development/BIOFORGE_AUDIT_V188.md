@@ -66,6 +66,8 @@ Gravité : **B** bloquant pour le level design, **M** majeur, **m** mineur.
 18. **M — Mobile 390×844** : le canvas fait 390×219 px (marine ≈ 28 px de haut, HUD illisible) ; en configuration, le terminal recouvre le canvas et des textes du terminal se chevauchent (« AJOUTER UNE LIGNE », « TOTAL 1/48 » passent sous les boutons).
 19. **m — Voile de premier plan** : calque `foreground` à 34 % d'opacité et parallaxe 1,08 sur toute la scène ; il ternit les acteurs sans donner de profondeur lisible.
 20. **m — Éclairage uniforme** : aucune lumière propre aux salles, aucun changement en combat hormis le texte du HUD.
+22. **M — Le « SAS B » n'est pas un sas.** Les deux portes du sas d'entrée sont `control-seal` (x 440) et `inner-interlock` (x 670) ; la salle `airlock-outer` (670–920) n'a pas de porte côté baie et s'ouvre directement sur l'imprimante. La seule chambre fermée est le « SAS A ».
+23. **m — Battants hors échelle de collision.** L'atlas de sas est vu de face et couvre ~75 px de part et d'autre de chaque porte au sol : les stations de purge (x 2535) et de retour (x 2740) étaient en partie derrière les battants des portes `arena-return` et `hub-return`.
 21. Ligne des pieds : correcte (pieds à y = 620, grille du décor à ~615–640). Proportions des créatures : conformes aux admissions V132 (corps issus des atlas, aucun redimensionnement).
 
 ## 4. Ce qui fonctionne et doit être conservé
@@ -80,3 +82,31 @@ Gravité : **B** bloquant pour le level design, **M** majeur, **m** mineur.
 Contraintes : le monde reste 2880×720 (les validateurs physique V87 et tactique V132 bornent x à 2880) ; l'arène, les portes et les emplacements d'apparition gardent leurs coordonnées ; les stations peuvent se déplacer (positions non sauvegardées). La refonte est donc une **réorganisation fonctionnelle** du même ruban : cloisons visibles, salles à hauteur humaine, zones nommées, interactions dans le monde, sortie physique avec décontamination. Voir `specs/013-bioforge/spec.md`.
 
 Hors de portée de ce lot (signalé) : un étage d'observation praticable (exigerait d'agrandir le monde et de migrer les validateurs), la quête `ship-bioforge`, des images définitives (emplacements nommés en primitives Canvas).
+
+## 6. Résultat de la refonte (spec 013)
+
+Même fixture et même parcours clavier qu'au §1, sur la branche de la refonte. Parcours Chromium `scripts/qa-bioforge-lab-v188.mjs` : 30 contrôles réussis à 1366×768 (entrée par le hub, promenade, stockage froid, console, session, trois étapes, cellule, combat au clavier, purge, sortie physique, incinérateur, analyse, décontamination interrompue puis complète, porte, retour au hub, reprise après rechargement, purge d'urgence et retour par le terminal), 13 à 390×844 (jusqu'à l'entrée dans la cellule) ; 0 erreur de page ou de console.
+
+| Constat | Après |
+| --- | --- |
+| 1, 2 sortie inaccessible, aller-retour | Après une purge réussie, D ou E reprend la marche dans la cellule ; la porte du Tantalus s'ouvre après 2,4 s de décontamination dans la cabine ; la franchir ramène à l'annexe du hub. Le terminal reste un second chemin. |
+| 3 arrivée inerte | Sans session, l'opérateur marche dans la salle de contrôle et le stockage froid ; la console ouvre le terminal. |
+| 6, 7, 8 architecture, salles, échelle | Cloisons pleine hauteur au-dessus des battants, plafonds à 5–5,6 m dans les salles fermées, halls ouverts, huit zones signalées, lumières propres. |
+| 9, 10 passerelles | Passerelles et échelles dessinées, signalées « PASSERELLE · SPÉCIMENS ». L'opérateur n'escalade toujours pas (choix conservé). |
+| 12, 13, 14 fonctions | Tableau de file, deux cuves de stase, brume au cycle d'interlock, stockage froid, baie d'analyse, incinérateur, galerie d'observation en profondeur (non praticable), cycle de purge animé. |
+| 16, 17, 18, 19 lisibilité | HUD en haut à droite, invites « E — … » dans le monde, légende à droite, terminal réduit pendant la marche, terminal mobile sans chevauchement, voile de premier plan à 18 %. |
+| 22, 23 | Zones renommées (sas biologique = la chambre entre deux portes ; admission ensuite) ; consoles et cabine déplacées hors des battants. |
+
+Restent : quête `ship-bioforge` (15), lisibilité du canvas mobile (18 : le canvas reste à l'échelle 0,3), images définitives, étage d'observation praticable, reprise exacte pendant la sortie.
+
+### Coût de rendu, même scène avant/après
+
+Protocole : Chromium headless de l'environnement de développement (conteneur sans GPU déclaré), 1366×768, même fixture importée, entrée directe par le crochet QA `__ATF_BIOFORGE_V80__.open()` (déclaré), état préparé sans session ; caméra posée à x = 0, 1000 et 1600 ; 60 appels de chauffe puis 400 appels synchrones de `draw()` par position, 3 tours ; base `7989c757` servie sur un second port, mesures alternées base/refonte, trois passages.
+
+| Caméra | Avant (ms par `draw()`) | Après (ms par `draw()`) |
+| --- | --- | --- |
+| x = 0 (salle de contrôle, scène la plus chargée) | 3,1 – 6,9 (médiane 4,1) | 4,8 – 7,4 (médiane 5,8) |
+| x = 1000 (sas, admission, hall) | 0,8 – 1,7 (médiane 1,0) | 1,0 – 2,2 (médiane 1,6) |
+| x = 1600 (cellule) | 0,8 – 2,5 (médiane 1,1) | 1,1 – 2,7 (médiane 1,1) |
+
+Neuf échantillons par case. La refonte coûte environ 1,7 ms par image dans la scène la plus chargée, environ 0,5 ms au niveau du hall et rien de mesurable dans la cellule, dans cet environnement bruité (budget d'une image à 60 i/s : 16,7 ms). Mesures intermédiaires : les dégradés des cônes de lumière coûtaient ~1 ms (remplacés par deux cônes plats) ; une mise en cache du décor statique dans un canevas de 2880 px n'apportait aucun gain mesurable et a été retirée. Aucun gain n'est annoncé ; aucune mesure n'a été faite sur une machine de joueur.
