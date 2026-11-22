@@ -40,8 +40,11 @@ import { drawStationLevelSlotV188, STATION_LEVEL_REUSED_PNGS_V188 } from './stat
 import { normalizeStationV188 } from './station-asphodele-v188.js';
 import { asphodeleMissionLayoutV188, drawAsphodeleMissionSlotV188, drawAsphodeleHazardBandV188, ASPHODELE_MISSION_SLOT_IDS_V188 } from './asphodele-mission-dressing-v188.js';
 import { AsphodeleHubAssetLoaderV188 } from './asphodele-hub-slots-v188.js';
+import { CASSIUS_INTERROGATION_V188 } from './confrontation-entries-v188.js';
 
 export const STATION_LEVEL_IDS_V188 = Object.freeze(['station-s1', 'station-s2', 'station-s3', 'station-s4']);
+/** Spec 010 hearing played in S2, after the reactor restart and before the existing CASSIUS decision. */
+export const STATION_CASSIUS_HEARING_ID_V188 = CASSIUS_INTERROGATION_V188.id;
 export const isStationLevelCampaignV188 = id => STATION_LEVEL_IDS_V188.includes(typeof id === 'string' ? id : id?.id);
 
 /** [PROPOSÉ] timings, counts and distances of the dedicated station levels. */
@@ -111,9 +114,8 @@ export const STATION_LEVEL_TEXT_V188 = Object.freeze({
   breakerTwo: t('Kwan : « Deux secteurs en ligne. Plus qu’un. »', 'Kwan: "Two sectors online. One left."'),
   breakersDone: t('Kwan : « Trois secteurs en ligne. La cloison de l’anneau est déverrouillée : direction le réacteur. »', 'Kwan: "Three sectors online. The ring bulkhead is unlocked: head for the reactor."'),
   reactorDone: t('Réacteur relancé, air en circulation. CASSIUS se réveille au pont de contrôle.', 'Reactor restarted, air circulating. CASSIUS wakes on the control deck.'),
-  qQuarantine: t('CASSIUS : « Consigne 1 : quarantaine de la station et de Cocyte. Aucune consigne ne me permet de la lever. »', 'CASSIUS: "Directive 1: quarantine of the station and of Cocyte. No directive allows me to lift it."'),
-  qCargo: t('CASSIUS : « Consigne 2 : priorité cargaison. Les livraisons QZ17 vers le dépôt ont continué. »', 'CASSIUS: "Directive 2: cargo priority. The QZ17 deliveries to the depot continued."'),
-  qAssets: t('CASSIUS : « Consigne 3 : préservation des actifs. L’équipage n’en faisait pas partie. »', 'CASSIUS: "Directive 3: preservation of assets. The crew was not among them."'),
+  hearingOpen: t('L’interrogatoire de CASSIUS commence : lui opposer les pièces du dossier QZ17, ou se taire.', 'The interrogation of CASSIUS begins: confront it with the pieces of the QZ17 file, or stay silent.'),
+  hearingPaused: t('Interrogatoire suspendu. Il reprendra à la consigne suivante.', 'Interrogation suspended. It will resume at the next directive.'),
   orders: t('Ordres de livraison QZ17 archivés copiés au dossier. La décision sur CASSIUS se prendra au Commandement.', 'Archived QZ17 delivery orders copied to the file. The decision on CASSIUS will be taken at Command.'),
   // S3
   airlockRewrite: t('CASSIUS : « Les vivants d’abord. J’ouvre le sas 3. »', 'CASSIUS: "The living first. Opening airlock 3."'),
@@ -198,7 +200,7 @@ export function stationAccessV188(engine) {
 
 function initialProgress(campaignId, places) {
   if (campaignId === 'station-s1') return { crank: 0, traces: { barricade: false, chalk: false }, salvagers: null, force: 0, emergency: false };
-  if (campaignId === 'station-s2') return { breakers: { dock: false, ring: false, hull: false }, reactor: 0, questions: { quarantine: false, cargo: false, assets: false }, orders: 0 };
+  if (campaignId === 'station-s2') return { breakers: { dock: false, ring: false, hull: false }, reactor: 0, hearing: null, orders: 0 };
   if (campaignId === 'station-s3') return { airlock: 0, airlockOpen: false, log: false, cradles: false, eggs: places.eggs.map((x, index) => ({ id: `egg-${index + 1}`, x, state: 'closed', clock: 0, burn: 0 })),
     eggHits: 0, routes: [], sealRemaining: null, tag: false };
   return { purge: 0, valves: { junction: 0, habitation: 0, ring: 0 }, holdRemaining: R.holdSeconds, arrived: false };
@@ -539,6 +541,22 @@ export function withStationMissionLevelsV188(Base) {
         this.stationMessageV188(TX('orders'), 7); this.advanceStationPhaseV188();
       }
     }
+    /**
+     * Spec 010: the app reports the hearing's state when its dialog closes ('won' / 'lost' once concluded,
+     * null when it was suspended before the last exchange). Only the level's own progress changes: the
+     * outcome feeds the text of the existing CASSIUS decision at Command, nothing else.
+     */
+    resolveStationCassiusHearingV188(outcome = null) {
+      const level = this.stationLevelV188;
+      if (level?.campaignId !== 'station-s2' || this.stationPhaseIdV188() !== 'cassius') return false;
+      const pr = level.progress, lang = globalThis.document?.documentElement?.lang === 'en' ? 'en' : 'fr';
+      if (outcome !== 'won' && outcome !== 'lost') { pr.hearing = null; this.stationMessageV188(TX('hearingPaused'), 4); return false; }
+      pr.hearing = outcome;
+      this.stationMessageV188(CASSIUS_INTERROGATION_V188.endings[outcome][lang], 7);
+      this.onEvent?.({ type: 'station-cassius-hearing-concluded-v188', outcome });
+      return true;
+    }
+
     // —— S3 « Les ponts scellés » ——
     updateStationS3V188(dt) {
       const level = this.stationLevelV188, pr = level.progress, p = level.places, phase = this.stationPhaseIdV188(), actor = this.player;
@@ -625,8 +643,8 @@ export function withStationMissionLevelsV188(Base) {
         if (phase === 'sectors') for (const breaker of p.breakers) if (!pr.breakers[breaker.id]) add(`breaker:${breaker.id}`, breaker.x, breaker.y, 'E  RÉARMER LE DISJONCTEUR DE SECTEUR', { reach: 55 });
         if (phase === 'reactor') hold('reactor', p.reactor.x, p.reactor.y, 'RELANCER LE RÉACTEUR AUXILIAIRE');
         if (phase === 'cassius') {
-          const next = ['quarantine', 'cargo', 'assets'].find(key => !pr.questions[key]);
-          if (next) add(`question:${next}`, p.cassius.x, p.cassius.y, { quarantine: 'E  INTERROGER CASSIUS · QUARANTAINE', cargo: 'E  INTERROGER CASSIUS · PRIORITÉ CARGAISON', assets: 'E  INTERROGER CASSIUS · PRÉSERVATION DES ACTIFS' }[next], { reach: 100 });
+          // Spec 010 hearing (CASSIUS_INTERROGATION_V188): opened by the app over the paused level; concluded, the orders can be copied.
+          if (pr.hearing !== 'won' && pr.hearing !== 'lost') { if (pr.hearing !== 'open') add('hearing', p.cassius.x, p.cassius.y, 'E  OUVRIR L’INTERROGATOIRE DE CASSIUS', { reach: 100 }); }
           else hold('orders', p.cassius.x, p.cassius.y, 'COPIER LES ORDRES DE LIVRAISON QZ17', { reach: 100 });
         }
       }
@@ -702,7 +720,12 @@ export function withStationMissionLevelsV188(Base) {
         if (count >= 3) this.advanceStationPhaseV188();
         return true;
       }
-      if (key.startsWith('question:')) { const id = key.split(':')[1]; pr.questions[id] = true; return done(TX({ quarantine: 'qQuarantine', cargo: 'qCargo', assets: 'qAssets' }[id]), 7); }
+      if (key === 'hearing') {
+        pr.hearing = 'open';
+        this.stationMessageV188(TX('hearingOpen'), 6);
+        this.onEvent?.({ type: 'station-cassius-hearing-v188', confrontationId: STATION_CASSIUS_HEARING_ID_V188, campaignId: level.campaignId });
+        return done(null);
+      }
       if (key === 'airlock:ask') { this.openStationAirlock3V188('ask'); return true; }
       if (key === 'log') { pr.log = true; if (this.inventory) this.inventory.intel = (Number(this.inventory.intel) || 0) + 1; return done(TX('log'), 6); }
       if (key === 'cradles') { pr.cradles = true; return done(TX('cradles'), 6); }
@@ -764,7 +787,7 @@ export function withStationMissionLevelsV188(Base) {
       if (!level) return null;
       const pr = level.progress;
       return Object.freeze({ campaignId: level.campaignId, phase: this.stationPhaseIdV188(), salvagers: pr.salvagers || null, routes: pr.routes ? [...pr.routes] : null,
-        eggsBurnt: pr.eggs ? pr.eggs.filter(egg => egg.state === 'burnt').length : null, eggHits: pr.eggHits ?? null, tag: pr.tag ?? null, cassius: level.cassius });
+        hearing: pr.hearing ?? null, eggsBurnt: pr.eggs ? pr.eggs.filter(egg => egg.state === 'burnt').length : null, eggHits: pr.eggHits ?? null, tag: pr.tag ?? null, cassius: level.cassius });
     }
     getSnapshot() {
       const snapshot = super.getSnapshot(), level = this.stationLevelV188;
@@ -869,7 +892,7 @@ export function withStationMissionLevelsV188(Base) {
       }
       if (id === 'station-s2') {
         if (phase === 'sectors') lines.push(`DISJONCTEURS ${Object.values(pr.breakers).filter(Boolean).length}/3`);
-        if (phase === 'cassius') lines.push(`CONSIGNES CITÉES ${Object.values(pr.questions).filter(Boolean).length}/3`);
+        if (phase === 'cassius' && pr.hearing === 'open') lines.push('INTERROGATOIRE DE CASSIUS EN COURS');
       }
       if (id === 'station-s3') {
         if (phase === 'lab') lines.push(`LABORATOIRE ${[pr.log, pr.cradles].filter(Boolean).length}/2`);

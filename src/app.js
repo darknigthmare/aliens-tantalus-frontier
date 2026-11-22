@@ -24,7 +24,8 @@ import { filterAct5CampaignsV188, act5LockReasonV188, act5LockTextV188, applyAct
   act5CrewEpilogueLineV188, markAct5EpilogueTalkV188, act5LockerLabelV188, act5CinematicContextV188, deriveStoryWithAct5V188, act5SnapshotV188,
   act5LateColonistsSavedV188, act5ConvoySetupV188, recordAct5TrailerDropV188, markAct5BridgeCrossedV188, recordAct5QueenKilledV188,
   ACT5_AUDIENCE_ID_V188, startAct5AudienceV188, act5AudienceDueV188 } from './story-act5-v188.js';
-import { confrontationViewV188, playConfrontationMoveV188 } from './confrontation-v188.js';
+import { confrontationViewV188, playConfrontationMoveV188, confrontationStateV188, confrontationOutcomeV188, startConfrontationV188, CASSIUS_INTERROGATION_V188 } from './confrontation-v188.js';
+import { STATION_CASSIUS_HEARING_ID_V188 } from './station-mission-levels-v188.js';
 import { openConfrontationDialogV188 } from './confrontation-ui-v188.js';
 import { isAct5RaceCampaignV188, act5RaceCueV188 } from './act5-convoy-race-v188.js';
 import { Act5AssetLoaderV188, watchAct5PictureV188 } from './act5-slots-v188.js';
@@ -1598,13 +1599,40 @@ function commitCandidateV188(mutate) {
   catch (error) { toast(error.message); return false; }
 }
 let stationSceneOpenV188 = false;
+// Spec 009 × spec 010: in S2, after the reactor restart, the level asks for the CASSIUS hearing. It opens over
+// the paused mission; each exchange is committed at once (a retry resumes at the next directive). On close, the
+// level learns the outcome (or that the hearing was suspended); the existing decision follows at Command.
+function openStationCassiusHearingV188() {
+  const id = STATION_CASSIUS_HEARING_ID_V188;
+  if (document.querySelector('[data-confrontation-v188]')) return true;
+  const concluded = confrontationOutcomeV188(saveSystem.data, id);
+  if (concluded) { engine.resolveStationCassiusHearingV188?.(concluded); return true; }
+  if (!confrontationStateV188(saveSystem.data, id) && !commitCandidateV188(candidate => startConfrontationV188(candidate, id))) { engine.resolveStationCassiusHearingV188?.(null); return true; }
+  const lang = document.documentElement.lang === 'en' ? 'en' : 'fr';
+  const resume = activeView === 'play' && engine.running && !engine.paused;
+  if (resume) engine.togglePause();
+  const close = () => {
+    if (resume && activeView === 'play' && engine.running && engine.paused) engine.togglePause();
+    engine.resolveStationCassiusHearingV188?.(confrontationOutcomeV188(saveSystem.data, id));
+  };
+  const dialog = openConfrontationDialogV188({ language: lang,
+    reducedMotion: Boolean(saveSystem.data.settings?.reducedMotion || globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches),
+    getView: () => confrontationViewV188(saveSystem.data, id, lang),
+    onMove: pieceId => { let move = null; commitCandidateV188(candidate => { move = playConfrontationMoveV188(candidate, id, pieceId); return move ? true : false; }); return move; },
+    onClose: close });
+  if (!dialog) close();
+  return true;
+}
 function stationReturnOnViewV188() {
   if (stationSceneOpenV188 || document.querySelector('.content-scene-v188')) return true;
   if (playStationCinematicDueV188()) return true; // V188 spec 007: CIN-70 to CIN-72 come before the scene or the decision
   const lang = document.documentElement.lang === 'en' ? 'en' : 'fr';
   if (cassiusChoicePendingV188(saveSystem.data)) {
     stationSceneOpenV188 = true;
-    openContentSceneDialogV188({ language: lang, slot: CASSIUS_DIALOG_V188.slot, title: CASSIUS_DIALOG_V188.title[lang], text: CASSIUS_DIALOG_V188.text[lang],
+    // Spec 010 wired in S2 (spec 009): the hearing's outcome only adds CASSIUS's last answer to the decision text.
+    const hearing = confrontationOutcomeV188(saveSystem.data, STATION_CASSIUS_HEARING_ID_V188);
+    const decisionText = hearing ? `${CASSIUS_DIALOG_V188.text[lang]}\n${CASSIUS_INTERROGATION_V188.endings[hearing][lang]}` : CASSIUS_DIALOG_V188.text[lang];
+    openContentSceneDialogV188({ language: lang, slot: CASSIUS_DIALOG_V188.slot, title: CASSIUS_DIALOG_V188.title[lang], text: decisionText,
       options: CASSIUS_CHOICES_V188.map(id => ({ id, label: CASSIUS_DIALOG_V188.options[id][lang] })),
       onChoose: (choice) => {
         if (choice === 'continue') return null;
@@ -4095,6 +4123,7 @@ function handleGameEvent(event) {
   if (event.type === 'squad-command-open-v132') return openSquadCommandDockV132();
   if (event.type === 'hive-control-open-v131') return openHiveCommandDockV131(event);
   if (event.type === 'archive-relay-open') return openArchiveRelayReaderV122(event);
+  if (event.type === 'station-cassius-hearing-v188') return openStationCassiusHearingV188();
   if (writeMissionRadioV121(event, log)) return;
   const protectedRadioV121 = Number(log.dataset.radioUntilV121 || 0) > Date.now()
     ? log.textContent : null;

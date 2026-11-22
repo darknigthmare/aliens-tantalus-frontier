@@ -15,9 +15,13 @@ Le gabarit, lu comme la station [PROPOSÉ] : pont inférieur = collier et sas 1 
 
 L'objectif de campagne existant reste celui qui valide l'extraction : S1 `board` (énergie de secours du pont + un sas ouvert), S2 `restore` (réacteur), S3 `escape` (le minuteur générique est neutralisé pendant le niveau, la sortie marque l'évasion), S4 `hold` (la tenue du quai marque l'action).
 
+## Interrogatoire de CASSIUS (spec 010)
+
+À l'interaction du cœur, le niveau émet `station-cassius-hearing-v188` ; `src/app.js` (`openStationCassiusHearingV188`) met la mission en pause, crée la partie une fois (`startConfrontationV188`), ouvre `openConfrontationDialogV188` et enregistre chaque échange (`commitCandidateV188`). À la fermeture, la mission reprend et le niveau reçoit l'issue (`resolveStationCassiusHearingV188`) : conclue, les ordres peuvent être copiés ; interrompue, l'interrogatoire est proposé de nouveau. Au Commandement, la décision existante ajoute à son texte la réponse finale de l'entrée (`endings.won` / `endings.lost`) ; choix et effets inchangés.
+
 ## Persistance
 
-Champ additif de reprise `stationLevelV188` : `{ schema: 188, campaignId, phase, progress, checkpoint }`, instantané pris au début de la phase, avant l'événement `checkpoint`. La sauvegarde de campagne n'a aucun nouveau champ ; `stationV188` garde sa forme. Le niveau lit la décision CASSIUS (`stationV188.cassius`) et la décision Grue de la colonie (`colonyMissionsV188.grue`) depuis `narrativeArchiveSave`, déjà passé au moteur par `src/app.js`. `stationLevelResultV188()` résume ce que le niveau a vu (récupérateurs, routage, œufs) sans écriture.
+Champ additif de reprise `stationLevelV188` : `{ schema: 188, campaignId, phase, progress, checkpoint }`, instantané pris au début de la phase, avant l'événement `checkpoint`. La sauvegarde de campagne n’a aucun nouveau champ ; `stationV188` garde sa forme ; l’interrogatoire écrit le champ existant de la spec 010 (`storyCampaignV188.confrontationsV188`). Le niveau lit la décision CASSIUS (`stationV188.cassius`) et la décision Grue de la colonie (`colonyMissionsV188.grue`) depuis `narrativeArchiveSave`, déjà passé au moteur par `src/app.js`. `stationLevelResultV188()` résume ce que le niveau a vu (récupérateurs, routage, œufs) sans écriture.
 
 ## Vérification
 

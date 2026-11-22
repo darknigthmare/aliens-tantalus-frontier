@@ -12,6 +12,9 @@
 // `defeatEnemy` (no combat is claimed); (3) S4: the remaining dock-hold time is set to 3 s
 // (the 60 s hold itself is covered by the Node suite). Interactions use the real keyboard
 // (E pressed, or held), the mission is launched from the Command order and extracted with E.
+// S2: the spec 010 hearing is played with the dialog’s own buttons (silence on every exchange,
+// so the « lost » outcome; « won » is covered by the Node suite), then the decision text is read
+// at the Command table after CIN-71 (skipped with Escape).
 // The physical check of the sealed frames uses the real D key and Space.
 // Usage: PORT=4671 node scripts/dev.mjs & ; node scripts/qa-station-levels-v188.mjs <out-dir> [ids]
 import assert from 'node:assert/strict';
@@ -96,7 +99,7 @@ async function launch(id) {
   check(`${id}: dedicated level running after the insertion (V1, no generic roster)`, state.campaign === id && !state.corridor, state);
   return state;
 }
-let P = null;
+let P = null, S2_HEARING = null;
 // Injection (1): move the marine to a place of the level (places read from the level itself).
 async function moveTo(x, deck = 'low') {
   const y = typeof deck === 'number' ? deck : P.decks[deck];
@@ -165,10 +168,25 @@ for (const id of only) {
     await moveTo(P.reactor.x); await press(); await holdE(6); await shot('station-s2-02-reactor');
     check('S2: reactor restarted', await phase() === 'cassius' && await game(() => globalThis.__ATF_GAME__.powerNode.active));
     await moveTo(P.cassius.x, 'top');
-    for (let i = 0; i < 3; i++) await press();
-    await shot('station-s2-03-cassius');
+    check('S2: hearing offered at the core', /INTERROGATOIRE DE CASSIUS/.test(await prompt()), await prompt());
+    await press();
+    // Spec 010 hearing over the paused level: silence on every exchange (real buttons of the dialog).
+    const dialog = page.locator('[data-confrontation-v188]');
+    await dialog.waitFor({ timeout: 10000 }).catch(() => {});
+    check('S2: hearing dialog opened, mission paused', await dialog.count() > 0 && await game(() => globalThis.__ATF_GAME__.paused), await dialog.count());
+    await shot('station-s2-03-hearing');
+    for (let i = 0; i < 30 && await dialog.count(); i++) {
+      const silence = dialog.locator('[data-confrontation-silence-v188]'), next = dialog.locator('[data-confrontation-continue-v188]');
+      if (await next.count()) await next.click(); else if (await silence.count()) await silence.click();
+      await page.waitForTimeout(700);
+    }
+    const hearing = await game(() => ({ hearing: globalThis.__ATF_GAME__.stationLevelV188.progress.hearing, paused: globalThis.__ATF_GAME__.paused }));
+    check('S2: hearing concluded, level resumed', ['won', 'lost'].includes(hearing.hearing) && !hearing.paused, hearing);
+    await page.locator('#game-canvas').focus().catch(() => {});
+    await shot('station-s2-04-cassius');
     await holdE(4);
     check('S2: CASSIUS questioned, orders copied', await phase() === 'extract');
+    S2_HEARING = hearing.hearing;
   }
   if (id === 'station-s3') {
     await moveTo(P.airlock3.x); check('S3: CASSIUS erased → airlock 3 forced by hand', /FORCER LE SAS 3/.test(await prompt()), await prompt());
@@ -194,6 +212,20 @@ for (const id of only) {
     check('S4: the technical team arrives, extraction at the dock', await phase() === 'extract');
   }
   await extract(id);
+  if (id === 'station-s2') {
+    // Back aboard, then the Command table: CIN-71 (skipped with Escape), then the existing decision.
+    for (let i = 0; i < 40 && !(await page.locator('dialog.content-scene-v188').count()); i++) {
+      if (await page.getByText('PASSER (ÉCHAP)').first().isVisible().catch(() => false) || await page.locator('.cinematic-v188').count()) { await page.keyboard.press('Escape'); await page.waitForTimeout(600); continue; }
+      const back = page.locator('#retreat-mission');
+      if (await back.isVisible().catch(() => false) && /RETOUR/.test(await back.textContent())) { await back.click(); await page.waitForTimeout(1200); continue; }
+      if (i > 4) await navigate('command').catch(() => {});
+      await page.waitForTimeout(800);
+    }
+    const text = await page.locator('dialog.content-scene-v188').first().textContent().catch(() => '');
+    await shot('station-s2-05-decision');
+    check('S2: the existing CASSIUS decision carries the hearing’s last answer (text only, three choices)',
+      /CASSIUS ne ment pas/.test(text) && /Mes consignes (se contredisent|restent cohérentes)/.test(text) && /RÉÉCRIRE/.test(text) && /LE BRIDER/.test(text) && /L’EFFACER/.test(text), { hearing: S2_HEARING, text: text.slice(0, 400) });
+  }
   for (let i = 0; i < 25; i++) {
     if (await page.getByText('PASSER (ÉCHAP)').first().isVisible().catch(() => false)) { await page.keyboard.press('Escape'); await page.waitForTimeout(600); continue; }
     const back = page.locator('#retreat-mission');

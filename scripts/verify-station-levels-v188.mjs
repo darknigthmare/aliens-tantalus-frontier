@@ -11,12 +11,13 @@ import { fixture, tick } from './engine-host-v188.mjs';
 import { CAMPAIGNS, WORLDS, LEVEL_SEEDS } from '../src/content.js';
 import { buildMissionLevelV52 } from '../src/mission-levels-v52.js';
 import { STATION_LEVEL_IDS_V188, STATION_LEVEL_PHASES_V188, STATION_LEVEL_RULES_V188, STATION_LEVEL_TEXT_V188, STATION_BARRIERS_V188,
-  stepStationHoldV188, stationSpawnXV188, stationAirlock3ModeV188, stepStationEggV188, stationAccessV188, isStationLevelCampaignV188 } from '../src/station-mission-levels-v188.js';
+  stepStationHoldV188, stationSpawnXV188, STATION_CASSIUS_HEARING_ID_V188, stationAirlock3ModeV188, stepStationEggV188, stationAccessV188, isStationLevelCampaignV188 } from '../src/station-mission-levels-v188.js';
 import { STATION_LEVEL_ART_SLOTS_V188, STATION_LEVEL_ART_FILES_PRESENT_V188, STATION_LEVEL_REUSED_PNGS_V188, drawStationLevelSlotV188 } from '../src/station-level-art-v188.js';
 import { ASPHODELE_HUB_FILES_PRESENT_V188, getAsphodeleHubSlotV188 } from '../src/asphodele-hub-slots-v188.js';
 import { STATION_CAMPAIGNS_V188, normalizeStationV188, cassiusChoicePendingV188 } from '../src/station-asphodele-v188.js';
 import { resolveDepthHoldDefinitionV188 } from '../src/depth-hold-sections-v188.js';
 import { EN_CATALOG_V185, EN_PATTERNS_V185 } from '../src/i18n-en-catalog-v185.js';
+import { CASSIUS_INTERROGATION_V188, confrontationOutcomeV188, startConfrontationV188, playConfrontationMoveV188 } from '../src/confrontation-v188.js';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url), 'utf8');
 const campaignOf = id => CAMPAIGNS.find(entry => entry.id === id);
@@ -173,10 +174,19 @@ test('S2 « La voix de CASSIUS »: breakers with Kwan, reactor, three directives
   engine.interact(engine.player); hold(5.3);
   assert.equal(engine.powerNode.active, true); assert.equal(engine.mission.objectives.power, true); assert.equal(engine.stationPhaseIdV188(), 'cassius');
   place(places.cassius.x, places.decks.top);
-  for (const [prompt, line] of [['QUARANTAINE', 'qQuarantine'], ['PRIORITÉ CARGAISON', 'qCargo'], ['PRÉSERVATION DES ACTIFS', 'qAssets']]) {
-    assert.equal(engine.getInteractionPrompt(), `E  INTERROGER CASSIUS · ${prompt}`); use();
-    assert.equal(engine.stationLevelV188.message.text, STATION_LEVEL_TEXT_V188[line].fr);
-  }
+  // Spec 010 hearing: the level asks for it (the app opens the dialog over the paused mission), then learns the outcome.
+  assert.equal(engine.getInteractionPrompt(), 'E  OUVRIR L’INTERROGATOIRE DE CASSIUS'); use();
+  const asked = run.events.filter(event => event.type === 'station-cassius-hearing-v188');
+  assert.equal(asked.length, 1); assert.equal(asked[0].confrontationId, STATION_CASSIUS_HEARING_ID_V188); assert.equal(STATION_CASSIUS_HEARING_ID_V188, 'station-s2-cassius');
+  assert.equal(engine.getInteractionPrompt(), '', 'nothing else while the hearing is open');
+  assert.equal(engine.missingExtractionRequirement(), 'CASSIUS NON INTERROGÉ');
+  // Suspended before its last exchange: it can be reopened.
+  assert.equal(engine.resolveStationCassiusHearingV188(null), false);
+  assert.equal(engine.getInteractionPrompt(), 'E  OUVRIR L’INTERROGATOIRE DE CASSIUS'); use();
+  // Injection: the outcome the app reads from the save when the dialog closes.
+  assert.equal(engine.resolveStationCassiusHearingV188('won'), true);
+  assert.equal(engine.stationLevelV188.message.text, CASSIUS_INTERROGATION_V188.endings.won.fr);
+  assert.equal(engine.stationLevelResultV188().hearing, 'won');
   assert.equal(engine.getInteractionPrompt(), 'E (MAINTENIR)  COPIER LES ORDRES DE LIVRAISON QZ17');
   engine.interact(engine.player); hold(3.3);
   assert.equal(engine.stationPhaseIdV188(), 'extract');
@@ -292,6 +302,19 @@ test('station levels: other missions keep their behaviour; composition, offline 
   for (const id of STATION_LEVEL_IDS_V188) for (const phase of STATION_LEVEL_PHASES_V188[id]) strings.push(phase.label.fr);
   for (const text of strings) assert.ok(Object.hasOwn(EN_CATALOG_V185, text), `EN: ${text}`);
   for (const id of STATION_LEVEL_IDS_V188) for (const phase of STATION_LEVEL_PHASES_V188[id]) assert.equal(EN_CATALOG_V185[phase.label.fr], phase.label.en);
-  for (const pattern of ['TRACES D’ECHO-8 {0}/2', 'CONSIGNES CITÉES {0}/3', 'LABORATOIRE {0}/2', 'FERMETURE DE LA QUARANTAINE {0}:{1}', 'VANNES {0}/3', 'ARRIMAGE DE LA NAVETTE {0} s'])
+  for (const pattern of ['TRACES D’ECHO-8 {0}/2', 'LABORATOIRE {0}/2', 'FERMETURE DE LA QUARANTAINE {0}:{1}', 'VANNES {0}/3', 'ARRIMAGE DE LA NAVETTE {0} s'])
     assert.ok(Object.hasOwn(EN_PATTERNS_V185, pattern), `EN: ${pattern}`);
+});
+
+test('S2 × spec 010: the CASSIUS hearing is wired in the level and only feeds the text of the existing decision', () => {
+  const app = read('src/app.js');
+  assert.match(app, /event\.type === 'station-cassius-hearing-v188'\) return openStationCassiusHearingV188\(\)/);
+  assert.match(app, /engine\.resolveStationCassiusHearingV188\?\.\(confrontationOutcomeV188\(saveSystem\.data, id\)\)/);
+  assert.match(app, /const decisionText = hearing \? `\$\{CASSIUS_DIALOG_V188\.text\[lang\]\}\\n\$\{CASSIUS_INTERROGATION_V188\.endings\[hearing\]\[lang\]\}`/);
+  // The decision itself is untouched: the same three choices, same effects, whatever the outcome.
+  const save = { galaxy: { completedCampaignIds: ['special-archive-relay', 'station-s1', 'station-s2'], worldState: {} }, stationV188: { introHeard: true }, storyCampaignV188: {} };
+  assert.equal(startConfrontationV188(save, STATION_CASSIUS_HEARING_ID_V188), true);
+  for (let i = 0; i < 5 && !confrontationOutcomeV188(save, STATION_CASSIUS_HEARING_ID_V188); i++) playConfrontationMoveV188(save, STATION_CASSIUS_HEARING_ID_V188, null);
+  assert.equal(confrontationOutcomeV188(save, STATION_CASSIUS_HEARING_ID_V188), 'lost', 'silence throughout loses');
+  assert.equal(cassiusChoicePendingV188(save), true, 'the decision is still due, unchanged');
 });
