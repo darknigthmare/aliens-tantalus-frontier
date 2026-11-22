@@ -342,7 +342,9 @@ async function convoyBoardingAccountingFixture(t, { survivor = true } = {}) {
   Object.assign(engine.apcCourseStateV131, { kills: 20, totalDistance: 3200, score: 5700 });
   engine.player.kills = 20; engine.mission.elapsed = 93.47940000000659;
   const runner = survivor ? engine.apcConvoySpawnV121('enemy-006-runner', 'horde') : null;
-  if (runner) Object.assign(runner, { x: 678.0690624999985, health: 79.116, dormant: false, alert: true });
+  // The runner keeps its recorded gap to the hull's nose (276.93 px); the M577 to scale (owner decision
+  // 2026-11-22, m577-scale-v188.js) moved the nose from x 955 to 805.
+  if (runner) Object.assign(runner, { x: engine.vehicle.x - (955 - 678.0690624999985), health: 79.116, dormant: false, alert: true });
   engine.syncApcConvoyWorldV121();
   engine.keys.add('KeyE'); tick(engine, 3.05); engine.keys.clear();
   assert.equal(engine.mission.state, 'complete');

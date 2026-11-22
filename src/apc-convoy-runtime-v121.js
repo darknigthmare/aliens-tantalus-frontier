@@ -1,4 +1,5 @@
 import { VEHICLES } from './content-core-v50.js';
+import { M577_SCALE_V188, applyM577MissionScaleV188, m577AnchorsV188, m577HitboxRuntimeV188, drawM577ScaledPlaceholderV188 } from './m577-scale-v188.js';
 import { buildMissionLevelV52 } from './mission-levels-v52.js';
 import { cancelTacticalReloadV77 } from './tactical-reload-v77.js';
 import { convoyMilestoneTransmissionV161 } from './campaign-convoy-story-v161.js';
@@ -8,6 +9,11 @@ import { APC_CONVOY_CAMPAIGN_V121, APC_CONVOY_OPERATION_V121, APC_CONVOY_LIMITS_
 export { APC_CONVOY_CAMPAIGN_V121 } from './apc-convoy-state-v121.js';
 export const APC_CONVOY_ASSET_V121 = '/assets/openai/sprites/normalized/vehicles/m577-apc-action-sheet.png';
 const APC_ID = 'vehicle-001-m577-armored-personnel-carrier';
+// V188 owner decision 2026-11-22: the M577 to scale (m577-scale-v188.js, 8.8 m [À VÉRIFIER] ≈ 449 px).
+// Its left edge (the nose: the convoy faces left) moves from 955 to 805 so the whole hull stays in the
+// 1280 px view; a checkpoint written with the legacy 190 × 104 box (x 955, y 466) is still accepted.
+export const APC_CONVOY_VEHICLE_X_V121 = 805;
+const LEGACY_APC_X = 955, LEGACY_APC_Y = 570 - M577_SCALE_V188.legacy.h;
 const safeProfiles = new Set(['enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner', 'enemy-008-queen', 'enemy-009-crusher']);
 const list = value => Array.isArray(value) ? value : [];
 const center = actor => actor.x + actor.w / 2;
@@ -64,8 +70,9 @@ export function withApcConvoyRuntimeV121(BaseEngine) {
       this.missionVentNetworkV62 = null; this.missionVentActorsV62?.clear();
       this.missionLevelEvents?.clear(); this.missionLevelSpawns?.clear(); this.missionLevelTimers?.clear(); this.missionLevelExtractionTimer = null;
       this.missionLevelBounds = { width: 1280, height: 620, voidY: 720 };
+      applyM577MissionScaleV188(this.vehicle, { anchorX: APC_CONVOY_VEHICLE_X_V121 });
       Object.assign(this.vehicle, { id: APC_ID, active: true, occupied: true, driver: this.player, passengers: [],
-        x: 955, y: 570 - this.vehicle.h, groundY: 570 - this.vehicle.h, facing: -1,
+        x: APC_CONVOY_VEHICLE_X_V121, y: 570 - M577_SCALE_V188.h, groundY: 570 - M577_SCALE_V188.h, facing: -1,
         vx: 0, vy: 0, hull: 340, maxHull: 340, fuel: 100, turretAmmo: 110, maxTurretAmmo: 110, turretReserve: 120,
         canFire: true, destroyed: false, supportRepairRate: 0, gunnerBonus: 1 });
       // This operation starts already seated: no boarding transition or undefined
@@ -79,7 +86,13 @@ export function withApcConvoyRuntimeV121(BaseEngine) {
       this.checkpoint = { id: 'insertion', x: this.player.x, y: this.player.y };
     }
     pinApcConvoyDriverV121() {
-      this.player.inVehicle = true; this.player.x = this.vehicle.x + 48; this.player.y = this.vehicle.y + 10;
+      // The scaled hull keeps its place whatever a resume restored (legacy 190 px boxes included).
+      if (this.vehicle && !this.vehicle.destroyed) {
+        Object.assign(this.vehicle, { w: M577_SCALE_V188.w, h: M577_SCALE_V188.h, x: APC_CONVOY_VEHICLE_X_V121, m577ScaleV188: true });
+        if (this.vehicle.y + this.vehicle.h !== 570 && !this.apcCourseStateV131) this.vehicle.y = 570 - this.vehicle.h;
+      }
+      // The driver sits in the cab behind the nose glazing (m577-scale-v188.js anchors), as before near the nose.
+      this.player.inVehicle = true; this.player.x = m577AnchorsV188(this.vehicle).seat.x - (this.player.w || 42) / 2; this.player.y = this.vehicle.y + 10;
       this.player.vx = 0; this.player.vy = 0; this.player.facing = -1; this.player.climbing = false; this.player.ladderId = null;
       this.vehicle.occupied = true; this.vehicle.driver = this.player; this.vehicle.passengers = [];
     }
@@ -93,6 +106,20 @@ export function withApcConvoyRuntimeV121(BaseEngine) {
       if (state.complete && state.rewards) this.mission.rewards = clone(state.rewards);
     }
     setCoop(enabled) { return super.setCoop(this.isApcConvoyV121() ? false : enabled); }
+    refreshSpriteCollisionProfiles() {
+      const result = super.refreshSpriteCollisionProfiles?.();
+      if (this.isApcConvoyV121() && this.vehicle?.m577ScaleV188) this.vehicle.spriteHitbox = m577HitboxRuntimeV188(this.vehicle);
+      return result;
+    }
+    /** The M577 to scale, nose to the left (Canvas placeholder until the slot m577-mission-side-scale exists). */
+    drawVehicle(ctx) {
+      if (!this.isApcConvoyV121() || !this.vehicle?.m577ScaleV188) return super.drawVehicle(ctx);
+      if (!this.vehicle.active || this.vehicle.destroyed) return undefined;
+      const state = this.apcConvoyV121;
+      drawM577ScaledPlaceholderV188(ctx, this.vehicle.x, this.vehicle.y + this.vehicle.h, -1,
+        { wheelTurn: -(state.roadOffset || 0) / M577_SCALE_V188.wheelRadius, turretRecoil: (this.player.fireClock || 0) > 0 ? 1 : 0 });
+      return undefined;
+    }
     updateObjectiveRuntime(delta) { if (!this.isApcConvoyV121()) return super.updateObjectiveRuntime(delta); }
     updateMissionPhase() { if (!this.isApcConvoyV121()) return super.updateMissionPhase(); this.syncApcConvoyWorldV121(); }
     missingObjectiveRequirement(options) { return this.isApcConvoyV121() ? this.missingApcConvoyRequirementV121() : super.missingObjectiveRequirement(options); }
@@ -328,7 +355,7 @@ export function withApcConvoyRuntimeV121(BaseEngine) {
         || Number(id.seed) !== Number(this.resumeIdentity?.seed) || raw.missionLevel?.signature !== this.missionLevelRuntime?.signature
         || !['active', 'failed', 'complete'].includes(raw.mission?.state) || (raw.mission.state === 'complete') !== state.complete
         || state.enemies.some(enemy => !safeProfiles.has(enemy.profileId)) || !vehicle || vehicle.id !== APC_ID
-        || vehicle.x !== 955 || vehicle.y !== 570 - this.vehicle.h || vehicle.active !== true
+        || ![APC_CONVOY_VEHICLE_X_V121, LEGACY_APC_X].includes(vehicle.x) || ![570 - this.vehicle.h, LEGACY_APC_Y].includes(vehicle.y) || vehicle.active !== true
         || !Number.isFinite(vehicle.hull) || vehicle.hull < 0 || vehicle.hull > 340 || !Number.isFinite(vehicle.fuel) || vehicle.fuel < 0 || vehicle.fuel > 100
         || !Number.isInteger(vehicle.turretAmmo) || vehicle.turretAmmo < 0 || vehicle.turretAmmo > 110
         || !Number.isInteger(vehicle.turretReserve) || vehicle.turretReserve < 0 || vehicle.turretReserve > 120
@@ -397,8 +424,10 @@ export function withApcConvoyRuntimeV121(BaseEngine) {
     drawWorld(ctx) {
       super.drawWorld(ctx); if (!this.isApcConvoyV121()) return;
       if (this.apcConvoyV121.phase === 'evacuation' || this.apcConvoyV121.complete) {
-        ctx.save(); ctx.strokeStyle = '#8bc6c8'; ctx.lineWidth = 7; ctx.strokeRect(915, 270, 340, 300);
-        ctx.font = '700 15px monospace'; ctx.fillStyle = '#b4dadb'; ctx.fillText('PÉRIMÈTRE TANTALUS', 933, 254); ctx.restore();
+        // The perimeter frame encloses the hull to scale.
+        const x0 = Math.round(this.vehicle.x - 20), w = Math.round(Math.min(1270 - x0, this.vehicle.w + 30));
+        ctx.save(); ctx.strokeStyle = '#8bc6c8'; ctx.lineWidth = 7; ctx.strokeRect(x0, 270, w, 300);
+        ctx.font = '700 15px monospace'; ctx.fillStyle = '#b4dadb'; ctx.fillText('PÉRIMÈTRE TANTALUS', x0 + 18, 254); ctx.restore();
       }
     }
     drawHud(ctx) {

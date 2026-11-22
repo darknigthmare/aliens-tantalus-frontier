@@ -9,7 +9,11 @@
 // wraps it unchanged. Save consequences go out as events
 // (`act5-trailer-dropped-v188`, `act5-race-milestone-v188`); the app writes them
 // with story-act5-v188.js. One checkpoint per phase (owner rule).
+// Owner decision 2026-11-22: the M577 is drawn and collides to scale (m577-scale-v188.js,
+// 8.8 m [À VÉRIFIER] ≈ 449 px; Canvas placeholder behind the slot m577-mission-side-scale);
+// the trailers keep their own 4.6 m [PROPOSÉ] and hang on the M577's rear hitch.
 import { VEHICLES } from './content-core-v50.js';
+import { M577_SCALE_V188, applyM577MissionScaleV188, m577AnchorsV188, m577HitboxRuntimeV188, drawM577ScaledPlaceholderV188 } from './m577-scale-v188.js';
 import {
   ACT5_RACE_V188, ACT5_RACE_TEXT_V188, isAct5RaceCampaignV188, createAct5RaceStateV188, stepAct5RaceV188, engageAct5RaceV188,
   dropAct5TrailerV188, act5RacePhaseV188, act5RaceRearV188, act5RaceTargetV188, sanitizeAct5RaceStateV188, act5QueenAdmissibleV188,
@@ -19,7 +23,8 @@ import {
 
 export const ACT5_RACE_OPERATION_V188 = 'act5-convoy-race';
 const APC_ID = 'vehicle-001-m577-armored-personnel-carrier';
-const GROUND = 570, APC_SCREEN_X = 930;
+// The M577's left (rear) edge on screen: nose at 1229 px when stopped, the whole convoy (≈ 21 m) in the 1280 px view.
+const GROUND = 570, APC_SCREEN_X = 780;
 const clone = value => structuredClone(value);
 const list = value => Array.isArray(value) ? value : [];
 const lang = () => globalThis.document?.documentElement?.lang === 'en' ? 'en' : 'fr';
@@ -96,7 +101,7 @@ export function withAct5ConvoyRaceV188(BaseEngine) {
       return Boolean(this.running && !this.paused && !this.enemyAtlasLoadingPausedV65 && this.mission?.state === 'active'
         && actor === this.player && actor?.alive && !actor.downed && this.vehicle?.active && !this.vehicle.destroyed);
     }
-    act5TrailerSizeV188() { const w = Math.round((this.vehicle?.w || 190) * .9); return { w, h: Math.round(w * 662 / 2134) + 10 }; }
+    act5TrailerSizeV188() { const w = Math.round(ACT5_RACE_V188.trailer.length * ACT5_RACE_V188.pixelsPerMetre); return { w, h: Math.round(w * 662 / 2134) + 10 }; }
     configureAct5RaceWorldV188() {
       this.enemies = []; this.bullets = []; this.hostileProjectiles = []; this.drops = []; this.squadActors = []; this.coopEnabled = false;
       this.platforms = [{ id: 'act5r-road', x: 0, y: GROUND, w: 1280, h: 38, floor: true, art: 'floor' }];
@@ -109,6 +114,7 @@ export function withAct5ConvoyRaceV188(BaseEngine) {
       this.missionVentNetworkV62 = null; this.missionVentActorsV62?.clear?.();
       this.missionLevelEvents?.clear?.(); this.missionLevelSpawns?.clear?.(); this.missionLevelTimers?.clear?.(); this.missionLevelExtractionTimer = null;
       this.missionLevelBounds = { width: 1280, height: 620, voidY: 720 };
+      applyM577MissionScaleV188(this.vehicle, { anchorX: APC_SCREEN_X });
       Object.assign(this.vehicle, { id: APC_ID, active: true, occupied: true, driver: this.player, passengers: [],
         x: APC_SCREEN_X, y: GROUND - this.vehicle.h, groundY: GROUND - this.vehicle.h, facing: 1, vx: 0, vy: 0,
         hull: ACT5_RACE_V188.apc.hull, maxHull: ACT5_RACE_V188.apc.hull, fuel: 100, turretAmmo: 0, maxTurretAmmo: 0, turretReserve: 0,
@@ -121,7 +127,8 @@ export function withAct5ConvoyRaceV188(BaseEngine) {
       this.checkpoint = { id: 'insertion', x: this.player.x, y: this.player.y };
     }
     pinAct5RaceDriverV188() {
-      this.player.inVehicle = true; this.player.x = this.vehicle.x + 48; this.player.y = this.vehicle.y + 10;
+      // The driver sits in the cab behind the nose glazing (m577-scale-v188.js anchors).
+      this.player.inVehicle = true; this.player.x = m577AnchorsV188(this.vehicle).seat.x - (this.player.w || 42) / 2; this.player.y = this.vehicle.y + 10;
       this.player.vx = 0; this.player.vy = 0; this.player.facing = 1; this.player.climbing = false; this.player.ladderId = null;
       this.vehicle.occupied = true; this.vehicle.driver = this.player; this.vehicle.passengers = [];
     }
@@ -140,6 +147,11 @@ export function withAct5ConvoyRaceV188(BaseEngine) {
       }
     }
     setCoop(enabled) { return super.setCoop(this.isAct5RaceV188() ? false : enabled); }
+    refreshSpriteCollisionProfiles() {
+      const result = super.refreshSpriteCollisionProfiles?.();
+      if (this.isAct5RaceV188() && this.vehicle?.m577ScaleV188) this.vehicle.spriteHitbox = m577HitboxRuntimeV188(this.vehicle);
+      return result;
+    }
     updateObjectiveRuntime(delta) { if (!this.isAct5RaceV188()) return super.updateObjectiveRuntime(delta); }
     updateMissionPhase() { if (!this.isAct5RaceV188()) return super.updateMissionPhase(); this.syncAct5RaceWorldV188(); }
     missingObjectiveRequirement(options) { return this.isAct5RaceV188() ? this.missingAct5RaceRequirementV188() : super.missingObjectiveRequirement(options); }
@@ -240,6 +252,11 @@ export function withAct5ConvoyRaceV188(BaseEngine) {
           }
           case 'queen-lunge': this.onEvent({ type: 'act5-race-queen-v188', id: 'lunge' }); this.act5RaceRadioV188('lunge', tx(R.lunge)); break;
           case 'queen-feeding': this.onEvent({ type: 'act5-race-queen-v188', id: 'feeding' }); this.act5RaceRadioV188('feeding', tx(R.feeding)); break;
+          case 'queen-recoil':
+            this.onEvent({ type: 'act5-race-queen-v188', id: 'recoil' }); this.act5RaceRadioV188('recoil', tx(R.recoil));
+            this.vfxEmitV188?.('acid', this.act5ScreenXV188(state.queen.s + 1.2), GROUND - 150, { count: 8, angle: Math.PI, spread: 1.4, speed: 220, life: .45, size: 3, floorY: GROUND });
+            this.act5RaceFxV188.shake = Math.max(this.act5RaceFxV188.shake, .2);
+            break;
           case 'queen-killed':
             this.player.kills = (Number(this.player.kills) || 0) + 1;
             this.onEvent({ type: 'act5-race-queen-v188', id: 'roar' });
@@ -333,7 +350,10 @@ export function withAct5ConvoyRaceV188(BaseEngine) {
         speed: Math.round(state.apc.v * 3.6), hull: Math.round(state.apc.hull), trailers: state.trailers.map(trailer => ({ id: trailer.id, gap: +((state.apc.s - trailer.s).toFixed(2)), integrity: trailer.integrity })),
         dropped: state.dropped.map(trailer => ({ id: trailer.id, cause: trailer.dropCause })), bridge: state.bridge ? { strain: state.bridge.strain, crossed: state.bridge.crossed,
           left: Math.max(0, +(state.bridge.window - state.bridge.strainClock).toFixed(1)), collapse: state.bridge.collapse } : null,
-        queen: state.queen ? { state: state.queen.state, health: Math.round(state.queen.health), maxHealth: state.queen.maxHealth, gap: +((act5RaceRearV188(state) - state.queen.s - 2.4).toFixed(1)), height: state.queen.height } : null,
+        queen: state.queen ? { state: state.queen.state, health: Math.round(state.queen.health), maxHealth: state.queen.maxHealth, gap: +((act5RaceRearV188(state) - state.queen.s - 2.4).toFixed(1)), height: state.queen.height,
+          killable: state.apc.s >= state.length, floor: Math.ceil(state.queen.maxHealth * ACT5_RACE_V188.queen.chaseFloor) } : null,
+        apcPx: { w: this.vehicle.w, h: this.vehicle.h, metres: +(this.vehicle.w / ACT5_RACE_V188.pixelsPerMetre).toFixed(2), x: Math.round(this.vehicle.x), feet: Math.round(this.vehicle.y + this.vehicle.h) },
+        trailerPx: this.act5TrailerSizeV188(),
         runners: state.runners.filter(runner => runner.alive).length, checkpoints: [...state.checkpoints], complete: state.complete, failed: state.failed };
     }
     getSnapshot() { return { ...super.getSnapshot(), ...(this.isAct5RaceV188() ? { act5RaceV188: this.act5RaceSnapshotV188() } : {}) }; }
@@ -404,11 +424,13 @@ export function withAct5ConvoyRaceV188(BaseEngine) {
       const state = this.act5RaceV188, size = this.act5TrailerSizeV188();
       for (const trailer of state.dropped) this.drawAct5TrailerV188(ctx, trailer, size, true);
       // Drawbars, then towed trailers (each follows its own physics position).
-      let frontX = this.vehicle.x + 8;
+      // The first drawbar hangs on the M577's rear hitch, each next one on the rear coupling of the trailer ahead.
+      const hitch = m577AnchorsV188(this.vehicle).rearHitch;
+      let frontX = hitch.x;
       for (const trailer of state.trailers) {
         const x = this.act5ScreenXV188(trailer.s) - size.w / 2, y = GROUND - 22 + trailer.bounce * 6;
-        ctx.strokeStyle = '#141a17'; ctx.lineWidth = 5; ctx.beginPath(); ctx.moveTo(x + size.w - 4, y); ctx.lineTo(frontX, GROUND - 24); ctx.stroke();
-        ctx.fillStyle = '#8a8f7a'; ctx.fillRect(frontX - 4, GROUND - 28, 8, 8);
+        ctx.strokeStyle = '#141a17'; ctx.lineWidth = 5; ctx.beginPath(); ctx.moveTo(x + size.w - 4, y); ctx.lineTo(frontX, hitch.y); ctx.stroke();
+        ctx.fillStyle = '#8a8f7a'; ctx.fillRect(frontX - 4, hitch.y - 4, 8, 8);
         this.drawAct5TrailerV188(ctx, trailer, size, false);
         frontX = x + 4;
       }
@@ -427,13 +449,22 @@ export function withAct5ConvoyRaceV188(BaseEngine) {
       }
       const target = act5RaceTargetV188(state);
       if (this.act5RaceFxV188.tracer > 0 && target) {
-        const tx0 = this.vehicle.x + this.vehicle.w * .3, ty0 = this.vehicle.y + 18, txx = this.act5ScreenXV188(target.s), ty = GROUND - (target.kind === 'queen' ? 150 : 45);
+        const turret = m577AnchorsV188(this.vehicle).turret, tx0 = turret.x, ty0 = turret.y, txx = this.act5ScreenXV188(target.s), ty = GROUND - (target.kind === 'queen' ? 150 : 45);
         ctx.strokeStyle = 'rgba(255,214,120,.85)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(tx0, ty0); ctx.lineTo(txx, ty); ctx.stroke();
         ctx.fillStyle = 'rgba(255,235,170,.9)'; ctx.beginPath(); ctx.arc(tx0, ty0, 5, 0, Math.PI * 2); ctx.fill();
       }
       ctx.restore();
     }
     drawForeground(ctx) { if (!this.isAct5RaceV188()) return super.drawForeground(ctx); }
+    /** The M577 to scale (Canvas placeholder until the slot m577-mission-side-scale exists), wheels on the road line. */
+    drawVehicle(ctx) {
+      if (!this.isAct5RaceV188() || !this.vehicle?.m577ScaleV188) return super.drawVehicle(ctx);
+      if (!this.vehicle.active || this.vehicle.destroyed) return undefined;
+      const state = this.act5RaceV188, hurt = this.act5RaceFxV188.shake > 0 ? 1 : 0;
+      drawM577ScaledPlaceholderV188(ctx, this.vehicle.x, this.vehicle.y + this.vehicle.h, 1,
+        { wheelTurn: state.apc.s * ACT5_RACE_V188.pixelsPerMetre / M577_SCALE_V188.wheelRadius, hurt, turretRecoil: this.act5RaceFxV188.tracer > 0 ? 1 : 0 });
+      return undefined;
+    }
     drawAct5OffscreenV188(ctx, label, metres) {
       ctx.save(); ctx.fillStyle = '#e07a5f'; ctx.font = '700 13px monospace';
       ctx.beginPath(); ctx.moveTo(14, GROUND - 120); ctx.lineTo(30, GROUND - 130); ctx.lineTo(30, GROUND - 110); ctx.fill();

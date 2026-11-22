@@ -12,8 +12,15 @@
 // processing plant, the Queen pursuing the survivors to the landing platform.
 // Adapted by the project: towed trailers, the bridge, the depot Queen chasing a
 // road convoy, the turret firing to the rear. To define: the Queen's sprite
-// (named slot `act5-queen-chase-side`, Canvas placeholder meanwhile), the real
-// M577 length at project scale. Nothing here claims a 1:1 reproduction.
+// (named slot `act5-queen-chase-side`, Canvas placeholder meanwhile), the M577
+// mission sprite (m577-scale-v188.js: 8.8 m [À VÉRIFIER] ≈ 449 px, named slot
+// `m577-mission-side-scale`, Canvas placeholder meanwhile). Nothing here claims a
+// 1:1 reproduction.
+//
+// Owner decision 2026-11-22: the Queen always reaches the port junction. During
+// the road chase she is hurt, staggered and thrown back (`recoil`), never killed:
+// her health stops at a floor until the convoy stands at the junction, where
+// only the final stand-off can bring her down.
 import { CREATURE_SCALE_V188, isQueenStatureKeyV188 } from './creature-scale-v188.js';
 
 const freeze = Object.freeze;
@@ -25,7 +32,7 @@ export const ACT5_RACE_V188 = freeze({
   pixelsPerMetre: CREATURE_SCALE_V188.pixelsPerMetre, // project scale: 1 m ≈ 51 px
   substep: 1 / 120, maxStep: .1, gravity: 9.81,
   apc: freeze({ mass: 22, force: 62, brake: 90, roll: .02, aero: .14, hull: 340 }),
-  trailer: freeze({ mass: 9, roll: .05, aero: .05, brakeRoll: .5, hitch: 1.6, spring: 120, damper: 24, slack: .6, integrity: 100 }),
+  trailer: freeze({ length: 4.6, mass: 9, roll: .05, aero: .05, brakeRoll: .5, hitch: 1.6, spring: 120, damper: 24, slack: .6, integrity: 100 }),
   turret: freeze({ rate: 8, damage: 12, heatPerRound: 3.4, cool: 30, cooledAt: 35, reach: 70 }),
   race: freeze({ length: 1500, bridgeStart: 700, bridgeLength: 90, segment: 6, strainAt: 24, strainDamping: 20,
     collapseDelay: 1.2, collapseCreep: 2, collapseSpeed: 7, collapseTrail: 10, collapseTrailStrained: 7, fallSeconds: 1.6, snapSeconds: .45,
@@ -33,7 +40,9 @@ export const ACT5_RACE_V188 = freeze({
   runner: freeze({ profileId: 'enemy-006-runner', health: 80, speed: 19, latch: 1, hitEvery: 1.2, trailerDamage: 9, hullDamage: 14, blockSeconds: 4, height: 92 }),
   chase: freeze({ length: 1600, queenStart: 110, standStop: 4 }),
   queen: freeze({ profileId: 'enemy-008-queen', healthFactor: 12, stalk: 20, standStalk: 6, windupAt: 5.5, windup: .7, lunge: 24, lungeSeconds: .65,
-    recover: 1.3, recoverSpeed: 12, staggerDamage: 200, stagger: .6, staggerSpeed: 4, feed: 6, trailerHit: 34, hullFactor: 1, reach: 1.2 }),
+    recover: 1.3, recoverSpeed: 12, staggerDamage: 200, stagger: .6, staggerSpeed: 4, feed: 6, trailerHit: 34, hullFactor: 1, reach: 1.2,
+    // Owner decision 2026-11-22 [PROPOSÉ values]: before the junction her health stops at 30 %; a hit there throws her back 8 m over 0.8 s.
+    chaseFloor: .3, recoil: .8, recoilMetres: 8 }),
   arrival: freeze({ brakeFrom: 60 })
 });
 
@@ -51,12 +60,14 @@ export function act5RunnerAdmissibleV188(profile) {
 
 // Explicit Queen state machine: allowed transitions only.
 export const ACT5_QUEEN_TRANSITIONS_V188 = freeze({
-  stalk: freeze(['windup', 'staggered', 'feeding', 'dead']),
-  windup: freeze(['lunge', 'staggered', 'dead']),
-  lunge: freeze(['recover', 'dead']),
-  recover: freeze(['stalk', 'staggered', 'feeding', 'dead']),
-  staggered: freeze(['stalk', 'dead']),
-  feeding: freeze(['stalk', 'dead']),
+  stalk: freeze(['windup', 'staggered', 'recoil', 'feeding', 'dead']),
+  windup: freeze(['lunge', 'staggered', 'recoil', 'dead']),
+  lunge: freeze(['recover', 'recoil', 'dead']),
+  recover: freeze(['stalk', 'staggered', 'recoil', 'feeding', 'dead']),
+  staggered: freeze(['stalk', 'recoil', 'dead']),
+  // Thrown back under fire at her health floor (road chase only): she always comes back.
+  recoil: freeze(['stalk']),
+  feeding: freeze(['stalk', 'recoil', 'dead']),
   dead: freeze([])
 });
 function setQueenState(queen, next) {
@@ -69,8 +80,8 @@ function setQueenState(queen, next) {
 // —— State ——
 const finite = (value, fallback = 0) => Number.isFinite(Number(value)) ? Number(value) : fallback;
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
-/** apcLength: metres of the drawn hull (vehicle.w / 51). */
-export function createAct5RaceStateV188({ campaignId, trailers = [], apcLength = 4.6, trailerLength = 4.6, bridgeSeconds = 15, queenProfile = null, replay = false } = {}) {
+/** apcLength: metres of the drawn hull (vehicle.w / 51; the M577 to scale is 8.8 m [À VÉRIFIER], m577-scale-v188.js). */
+export function createAct5RaceStateV188({ campaignId, trailers = [], apcLength = 8.8, trailerLength = ACT5_RACE_V188.trailer.length, bridgeSeconds = 15, queenProfile = null, replay = false } = {}) {
   if (!isAct5RaceCampaignV188(campaignId)) return null;
   const R = ACT5_RACE_V188, chase = campaignId === 'act5-depot-queen';
   const state = { schema: 188, campaignId, mode: chase ? 'chase' : 'race', replay: Boolean(replay), phase: 'briefing', elapsed: 0,
@@ -298,10 +309,26 @@ function stepQueen(state, dt) {
       queen.v = R.recoverSpeed; if (queen.clock >= R.recover) setQueenState(queen, 'stalk'); break;
     }
     case 'staggered': queen.v = R.staggerSpeed; if (queen.clock >= R.stagger) setQueenState(queen, 'stalk'); break;
+    case 'recoil': queen.v = -R.recoilMetres / R.recoil; if (queen.clock >= R.recoil) setQueenState(queen, 'stalk'); break;
     case 'feeding': queen.v = 0; if (queen.clock >= R.feed) { setQueenState(queen, 'stalk'); queen.feedingOn = null; } break;
     default: break;
   }
   queen.s = Math.min(queen.s + queen.v * dt, rearOfConvoy(state) - 2.4 - .2);
+}
+/** Owner decision 2026-11-22: she can only be killed at the port junction (the chase's `stand` phase). */
+export const act5QueenKillableV188 = state => Boolean(state?.queen && state.mode === 'chase' && state.apc.s >= state.length);
+/** Damage to the Queen: below the junction her health stops at the floor; a hit at the floor throws her back. */
+function hurtQueen(state, damage) {
+  const queen = state.queen, R = ACT5_RACE_V188.queen, killable = act5QueenKillableV188(state);
+  const floor = killable ? 0 : Math.ceil(queen.maxHealth * R.chaseFloor), before = queen.health;
+  queen.health = Math.max(floor, queen.health - damage); queen.staggerMeter += damage;
+  event(state, 'hit', { target: 'queen', damage });
+  if (queen.health <= 0) { setQueenState(queen, 'dead'); event(state, 'queen-killed'); return; }
+  if (!killable && queen.health === floor && (before === floor || queen.staggerMeter >= R.staggerDamage) && queen.state !== 'recoil') {
+    if (setQueenState(queen, 'recoil')) { queen.staggerMeter = 0; queen.feedingOn = null; event(state, 'queen-recoil'); }
+    return;
+  }
+  if (queen.staggerMeter >= R.staggerDamage && setQueenState(queen, 'staggered')) { queen.staggerMeter = 0; event(state, 'queen-staggered'); }
 }
 
 // —— Turret (rear-facing, auto-tracking) ——
@@ -332,10 +359,7 @@ function stepTurret(state, dt, firing) {
   turret.firing = true;
   const damage = rounds * R.damage;
   if (target.kind === 'queen') {
-    const queen = state.queen; queen.health = Math.max(0, queen.health - damage); queen.staggerMeter += damage;
-    event(state, 'hit', { target: 'queen', damage });
-    if (queen.health <= 0) { setQueenState(queen, 'dead'); event(state, 'queen-killed'); }
-    else if (queen.staggerMeter >= ACT5_RACE_V188.queen.staggerDamage && setQueenState(queen, 'staggered')) { queen.staggerMeter = 0; event(state, 'queen-staggered'); }
+    hurtQueen(state, damage);
   } else {
     const runner = state.runners.find(entry => entry.id === target.id);
     runner.health -= damage; event(state, 'hit', { target: runner.id, damage });
@@ -398,7 +422,7 @@ export function act5RaceCueV188(event) {
   switch (event?.type) {
     case 'act5-race-turret-v188': return 'weapon-smartgun';
     case 'act5-race-wave-v188': return 'cry-runner';
-    case 'act5-race-queen-v188': return event.id === 'lunge' || event.id === 'roar' ? 'cry-queen' : null;
+    case 'act5-race-queen-v188': return event.id === 'lunge' || event.id === 'roar' || event.id === 'recoil' ? 'cry-queen' : null;
     case 'act5-race-bridge-v188': return event.id === 'strain' ? 'alarm-general' : event.id === 'collapse' ? 'door-forced' : null;
     case 'act5-trailer-dropped-v188': return 'door-close';
     default: return null;
@@ -412,7 +436,7 @@ export const ACT5_RACE_SLOTS_V188 = freeze([
   slot('act5-queen-chase-side', 520, 245, 'The depot Queen running after the convoy, side view, facing right; drawn 245 px tall (4.8 m at 1 m ≈ 51 px).',
     'Documented reference: the Queen of Aliens (1986) — crested head shield, inner jaw, two pairs of arms, long tail, digitigrade legs; adapted: running gait on a road, no egg sac; transparent background. To produce; Canvas placeholder meanwhile.', false),
   // Existing Act V art (act5-slots-v188.js), reused at its original path.
-  slot('m577-side-corrected', 2124, 706, 'M577 side profile already produced for the Act V cinematics (not used in the race: the mission vehicle keeps its action sheet).', 'Existing file.', true),
+  slot('m577-side-corrected', 2124, 706, 'M577 side profile already produced for the Act V cinematics (not used in the race: the mission vehicle is drawn to scale by m577-scale-v188.js, slot m577-mission-side-scale).', 'Existing file.', true),
   slot('colonist-trailer', 2134, 662, 'Late colonists’ trailer, side view (existing Act V art).', 'Existing file.', true),
   slot('freight-trailer', 2126, 658, 'Company freight trailer, side view (existing Act V art).', 'Existing file.', true)
 ]);
@@ -424,7 +448,7 @@ export const act5RaceSlotV188 = id => ACT5_RACE_SLOTS_V188.find(entry => entry.i
 export function drawAct5QueenPlaceholderV188(ctx, x, footY, { height = CREATURE_SCALE_V188.queen.height, gait = 0, state = 'stalk', hurt = 0 } = {}) {
   const k = height / 245;
   ctx.save(); ctx.translate(x, footY); ctx.scale(k, k);
-  const lunge = state === 'lunge' ? 1 : state === 'windup' ? -.5 : 0, crouch = state === 'windup' ? 14 : state === 'feeding' ? 22 : 0;
+  const lunge = state === 'lunge' ? 1 : state === 'windup' || state === 'recoil' ? -.5 : 0, crouch = state === 'windup' ? 14 : state === 'feeding' ? 22 : state === 'recoil' ? 18 : 0;
   const step = Math.sin(gait), step2 = Math.sin(gait + Math.PI);
   ctx.fillStyle = hurt > 0 ? '#2b2f33' : '#14181b'; ctx.strokeStyle = '#3d4a52'; ctx.lineWidth = 2;
   // tail
@@ -502,7 +526,8 @@ export const ACT5_RACE_TEXT_V188 = freeze({
     lunge: t('La Reine bondit sur l’arrière du convoi.', 'The Queen leaps at the rear of the convoy.'),
     feeding: t('La Reine s’acharne sur la remorque abandonnée.', 'The Queen tears into the abandoned trailer.'),
     stand: t('Cal : « Carrefour du port. On s’arrête ici : elle ne passera pas. »', 'Cal: "Port junction. We stop here: she won’t get past."'),
-    killed: t('La Reine du dépôt s’effondre sur la route.', 'The depot Queen collapses on the road.'),
+    killed: t('La Reine du dépôt s’effondre au carrefour du port.', 'The depot Queen collapses at the port junction.'),
+    recoil: t('Touchée, la Reine recule… et revient. Elle ne tombera qu’au carrefour.', 'Hit, the Queen falls back… and comes again. She will only fall at the junction.'),
     torn: t('Une remorque est arrachée de l’attelage.', 'A trailer is torn from its coupling.')
   }),
   fail: freeze({ bridge: t('Le M577 a basculé avec le tablier.', 'The M577 went down with the deck.'), hull: t('M577 détruit sur la route du port.', 'M577 destroyed on the port road.') })
