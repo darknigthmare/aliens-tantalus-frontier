@@ -1518,6 +1518,12 @@ export function withV52LevelRuntime(BaseEngine) {
       const wasBoss = Boolean(enemy?.isBoss && enemy.alive);
       const result = super.defeatEnemy(enemy, owner);
       if (wasBoss && !enemy.alive) {
+        // V188 full run (2026-11-22): the base « containment » checkpoint uses the legacy world
+        // floor (930). A level has its own surfaces (QZ-17: 868), so a restart there fell under
+        // the floor and was downed again. Keep the checkpoint on the surface the boss stood on.
+        if (this.missionLevelRuntime && this.checkpoint?.id === 'containment' && Number.isFinite(enemy.groundY) && this.player) {
+          this.checkpoint = { ...this.checkpoint, x: Math.max(20, enemy.x + (enemy.w || 0) / 2 - this.player.w / 2), y: Math.max(0, enemy.groundY - this.player.h) };
+        }
         for (const door of this.doors.filter((candidate) => candidate.lockedBy === 'boss' && candidate.levelLocked)) {
           door.levelLocked = false;
           this.missionLevelTelemetry.doorChanges += 1;
