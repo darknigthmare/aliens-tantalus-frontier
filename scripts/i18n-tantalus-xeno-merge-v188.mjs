@@ -758,7 +758,10 @@ export const TANTALUS_I18N_DELTA_V188 = Object.freeze({
       "Noor Okafor reste à l’infirmerie pour le contrôle biologique : elle ne suit pas l’escouade dans cette mission.",
       "GRILLE DE SERVICE SOUDÉE · PASSER PAR LES CONDUITS",
       "PORTE DU TOIT SOUDÉE · PASSER PAR LES CONDUITS",
-      "Soudé de l’autre côté. Les conduits mènent au rassemblement."
+      "Soudé de l’autre côté. Les conduits mènent au rassemblement.",
+      "Noor Okafor · À L’INFIRMERIE",
+      "MOTIF",
+      "Indisponible pour C3 : elle tient l’infirmerie de Port-Méridien pour le contrôle biologique des rescapés du M577."
     ],
     "changed": {
       "Extraire le renseignement synthétique": {

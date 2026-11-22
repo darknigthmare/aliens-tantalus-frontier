@@ -48,6 +48,18 @@ export function colonyC3SquadV188(crew, campaignId) {
   const list = Array.isArray(crew) ? crew : [];
   return campaignId === 'colony-c3' ? list.filter(member => (member?.id || member) !== COLONY_C3_NOOR_ID_V188) : list;
 }
+/** C3 mission preparation (owner decision 2026-11-22, round 2): Noor stays listed, marked unavailable, with the reason. */
+export const COLONY_C3_NOOR_PREP_V188 = Object.freeze({
+  status: Object.freeze({ fr: 'Noor Okafor · À L’INFIRMERIE', en: 'Noor Okafor · AT THE INFIRMARY' }),
+  reason: Object.freeze({ fr: 'Indisponible pour C3 : elle tient l’infirmerie de Port-Méridien pour le contrôle biologique des rescapés du M577.',
+    en: 'Unavailable for C3: she holds the Port-Méridien infirmary for the biological screening of the M577 survivors.' })
+});
+/** The squad of the preparation screen: names deployed, and the members posted elsewhere for this mission. */
+export function colonyPreparationCrewV188(campaignId, crewIds = []) {
+  const ids = Array.isArray(crewIds) ? crewIds : [];
+  const posted = campaignId === 'colony-c3' && ids.includes(COLONY_C3_NOOR_ID_V188) ? [COLONY_C3_NOOR_ID_V188] : [];
+  return Object.freeze({ deployed: Object.freeze(ids.filter(id => !posted.includes(id))), unavailable: Object.freeze(posted.map(id => Object.freeze({ id, ...COLONY_C3_NOOR_PREP_V188 }))) });
+}
 export const COLONY_C3_NOOR_LINE_V188 = Object.freeze({ fr: 'Noor Okafor reste à l’infirmerie pour le contrôle biologique : elle ne suit pas l’escouade dans cette mission.',
   en: 'Noor Okafor stays at the infirmary for the biological screening: she does not follow the squad on this mission.' });
 /** C4: the two walks around the ducts, closed by welded architecture (bible §6.4). Edge ids of the colony template graph. */
@@ -943,6 +955,9 @@ export function withColonyMissionLevelsV188(Base) {
         if (this.colonyPhaseIdV188() === 'extract') p.route.forEach(([x, y], index) => drawGuideLightV188(ctx, x, y - 120, time, index));
       }
       if (id === 'colony-c3') {
+        // The M577 that brought the survivors, to scale, parked on the quay apron behind the marines' lane (scenery, no collider):
+        // drawn before the dropship and the actors, so the UD-4L landing in front of it never intersects it.
+        drawColonyM577V188(ctx, p.m577, p.floorY, -1);
         drawColonyLevelSlotV188(ctx, 'colony-scanner-arch', p.scanner - 51, p.floorY, { tone: pr.civilians.some(entry => entry.state === 'scan') ? 'scan' : pr.revealedAt !== null ? 'alarm' : 'idle' });
         drawColonyLevelSlotV188(ctx, 'colony-infirmary-front', p.streetB - 110, p.floorY - 6);
       }
@@ -972,7 +987,6 @@ export function withColonyMissionLevelsV188(Base) {
         }
         if (id === 'colony-c2' && level.runtime.holding?.key === 'purge' && !level.runtime.holding.paused) drawWeldSparksV188(ctx, p.nest.x, p.nest.y - 50, time, 1.5);
         if (id === 'colony-c3') {
-          drawColonyM577V188(ctx, p.m577 - 120, p.floorY, -1);
           drawColonyLevelSlotV188(ctx, 'colony-npc-noor', p.noor - 21, p.floorY);
         }
         if (id === 'colony-c4') for (const entry of pr.cultists) if (entry.state === 'subdued') {

@@ -7316,7 +7316,10 @@ export const EN_CATALOG_V185 = Object.freeze({
 "Noor Okafor reste à l’infirmerie pour le contrôle biologique : elle ne suit pas l’escouade dans cette mission.": "Noor Okafor stays at the infirmary for the biological screening: she does not follow the squad on this mission.",
 "GRILLE DE SERVICE SOUDÉE · PASSER PAR LES CONDUITS": "SERVICE GRATE WELDED · USE THE DUCTS",
 "PORTE DU TOIT SOUDÉE · PASSER PAR LES CONDUITS": "ROOF DOOR WELDED · USE THE DUCTS",
-"Soudé de l’autre côté. Les conduits mènent au rassemblement.": "Welded from the other side. The ducts lead to the gathering."
+"Soudé de l’autre côté. Les conduits mènent au rassemblement.": "Welded from the other side. The ducts lead to the gathering.",
+"Noor Okafor · À L’INFIRMERIE": "Noor Okafor · AT THE INFIRMARY",
+"MOTIF": "REASON",
+"Indisponible pour C3 : elle tient l’infirmerie de Port-Méridien pour le contrôle biologique des rescapés du M577.": "Unavailable for C3: she holds the Port-Méridien infirmary for the biological screening of the M577 survivors."
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 // V188 systems bug hunt (merged via i18n-catalog-maintenance-v186 review).

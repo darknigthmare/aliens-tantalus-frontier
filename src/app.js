@@ -6,7 +6,7 @@ import { deliverTravelMessagesV188, travelMessagesListV188, travelArrivalNoticeV
 import { filterColonyCampaignsV188, colonyLockReasonV188, colonyLockTextV188, applyColonyMissionResultV188, applyColonyC5LaunchV188, colonyMissionsSnapshotV188,
   colonyReturnSceneDueV188, markColonySceneSeenV188, COLONY_SCENES_V188, colonyC4DecisionPendingV188, colonyGrueDecisionPendingV188, colonyC4OptionsV188,
   chooseColonyC4V188, chooseColonyGrueV188, COLONY_DECISION_TEXT_V188, COLONY_GRUE_CHOICES_V188, colonyCampaignNameV188 } from './colony-missions-v188.js';
-import { applyColonyLevelResultV188, COLONY_STREET_NO_APC_IDS_V188 } from './colony-mission-levels-v188.js';
+import { applyColonyLevelResultV188, COLONY_STREET_NO_APC_IDS_V188, colonyPreparationCrewV188 } from './colony-mission-levels-v188.js';
 import { openContentSceneDialogV188 } from './content-gap-ui-v188.js';
 import { withHubAsphodeleV188 } from './hub-asphodele-v188.js';
 import { asphodeleSaveViewV188, asphodeleShuttleStatusV188, boardAsphodeleV188, returnToTantalusV188, leaveAsphodeleForOperationV188, normalizeAsphodeleHubV188,
@@ -2408,7 +2408,10 @@ function renderOperationPlan() {
   const operationWorldId = saveSystem.data.strategy.currentOperation?.worldId;
   const world = WORLDS.find((entry) => entry.id === (operationWorldId || campaign.worldId)) || WORLDS[0];
   const brief = getOperationBrief(saveSystem.data, campaign, world);
-  const crewNames = brief.crewIds.map((id) => resolveCrewDefinitionV85(saveSystem.data.crew.find(member => member.id === id) || { id }, CREW)?.name || id);
+  // V188 owner decision 2026-11-22 (round 2): in C3 Noor Okafor stays listed, marked unavailable (at the infirmary) with the reason.
+  const preparationCrewV188 = colonyPreparationCrewV188(campaign.id, brief.crewIds);
+  const crewNames = preparationCrewV188.deployed.map((id) => resolveCrewDefinitionV85(saveSystem.data.crew.find(member => member.id === id) || { id }, CREW)?.name || id);
+  const unavailableCrewRowsV188 = preparationCrewV188.unavailable.map((entry) => `<span>INDISPONIBLE</span><b class="crew-unavailable-v188" data-crew-unavailable-v188="${escapeHtml(entry.id)}">${escapeHtml(entry.status.fr)}</b><span>MOTIF</span><b class="crew-unavailable-reason-v188">${escapeHtml(entry.reason.fr)}</b>`).join('');
   const weapon = WEAPONS.find((entry) => entry.id === saveSystem.data.player.weaponIds.at(-1));
   const equipment = saveSystem.data.player.equipmentIds.map((id) => EQUIPMENT.find((entry) => entry.id === id)?.name || id);
   const specialOperation = getSpecialOperationByCampaignIdV67(campaign.id);
@@ -2448,7 +2451,7 @@ function renderOperationPlan() {
   const specialNotice = specialOperation
     ? `<div class="special-operation-notice"><span>ORDRE PRIORITAIRE</span><b>${escapeHtml(specialOperation.promisedTitle)}</b><p>${specialNoticeCopy}</p></div>`
     : soloNoticeV121;
-  byId('operation-plan').innerHTML = `<span class="eyebrow">PLAN OPÉRATIONNEL · ${escapeHtml(campaign.mode)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaignObjectiveLabelV188(campaign.objective))} · ${escapeHtml(world.name)}</p>${specialNotice}${recoveryNotice}<div class="operation-risk"><b>${brief.risk}%</b><span>RISQUE</span></div><div class="data-list"><span>TRANSIT</span><b>${brief.hours} h</b><span>COÛT</span><b>${formatCost(brief.cost)}</b><span>RÉCOMPENSE</span><b>${formatCost(brief.reward)}</b>${researchBonusRowV188(campaign)}<span>ESCOUADE</span><b>${soloOperationV121 ? 'UN OPÉRATEUR · SOLO' : escapeHtml(crewNames.join(', ') || 'AUCUNE')}</b><span>ARME</span><b>${escapeHtml(weapon?.name || 'AUCUNE')}</b><span>ÉQUIPEMENT</span><b>${escapeHtml(equipment.join(', ') || 'AUCUN')}</b><span>VÉHICULE</span><b>${escapeHtml(vehicle?.name || 'AUCUN')}${issuedVehicle ? ' · FOURNI SUR ZONE' : ''}</b></div><div class="button-row"><button id="operation-launch" class="button primary wide" ${launchDisabled ? 'disabled' : ''}>${launchLabel}</button>${recoveryAction}</div>`;
+  byId('operation-plan').innerHTML = `<span class="eyebrow">PLAN OPÉRATIONNEL · ${escapeHtml(campaign.mode)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaignObjectiveLabelV188(campaign.objective))} · ${escapeHtml(world.name)}</p>${specialNotice}${recoveryNotice}<div class="operation-risk"><b>${brief.risk}%</b><span>RISQUE</span></div><div class="data-list"><span>TRANSIT</span><b>${brief.hours} h</b><span>COÛT</span><b>${formatCost(brief.cost)}</b><span>RÉCOMPENSE</span><b>${formatCost(brief.reward)}</b>${researchBonusRowV188(campaign)}<span>ESCOUADE</span><b>${soloOperationV121 ? 'UN OPÉRATEUR · SOLO' : escapeHtml(crewNames.join(', ') || 'AUCUNE')}</b>${soloOperationV121 ? '' : unavailableCrewRowsV188}<span>ARME</span><b>${escapeHtml(weapon?.name || 'AUCUNE')}</b><span>ÉQUIPEMENT</span><b>${escapeHtml(equipment.join(', ') || 'AUCUN')}</b><span>VÉHICULE</span><b>${escapeHtml(vehicle?.name || 'AUCUN')}${issuedVehicle ? ' · FOURNI SUR ZONE' : ''}</b></div><div class="button-row"><button id="operation-launch" class="button primary wide" ${launchDisabled ? 'disabled' : ''}>${launchLabel}</button>${recoveryAction}</div>`;
   byId('operation-launch').onclick = () => launchCampaign(campaign);
   mountArbiterDossierV190(byId('operation-plan'), { progress: saveSystem.data.xenoArbiterV190,
     selectedCampaignId: campaign.id, activeOperation: operation,

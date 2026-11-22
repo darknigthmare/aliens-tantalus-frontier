@@ -51,8 +51,12 @@ export function colonyC1PlacesV188(engine) {
 /** C3 « Le convoi des rescapés »: M577 quay → triage corridor → scanner post → infirmary. */
 export function colonyC3PlacesV188(engine) {
   const s = colonyStreetPlacesV188(engine);
+  // The parked M577 to scale (449 px, hull centre): its whole length on the quay floor (from the start of the street floor,
+  // 8 px margin), nose to the level start, rear door towards the survivors it brought (owner decision 2026-11-22, round 2).
+  const street = list(engine?.platforms).filter(entry => Math.abs(Number(entry.y) - s.floorY) < 1 && Number(entry.x) <= s.quay);
+  const floorStart = street.length ? Math.min(...street.map(entry => Number(entry.x))) : 55;
   return Object.freeze({ ...s,
-    m577: s.quay - 330, arrivals: Object.freeze([s.quay - 150, s.quay - 110, s.quay - 70, s.quay - 30, s.quay + 10]),
+    m577: round(Math.max(floorStart + 8 + 449 / 2, s.quay - 362)), arrivals: Object.freeze([s.quay - 150, s.quay - 110, s.quay - 70, s.quay - 30, s.quay + 10]),
     scanner: s.plaza + 200, queue: Object.freeze([s.plaza - 40, s.plaza - 85, s.plaza - 130, s.plaza - 175, s.plaza - 220]),
     noor: s.streetB + 100, ward: Object.freeze([s.streetB - 150, s.streetB - 110, s.streetB - 70, s.streetB - 30, s.streetB + 10]),
     sideRooms: Object.freeze([s.warehouseDoorway.x + 38, s.plaza - 360, s.plaza + 380, s.streetB - 300])

@@ -13,6 +13,7 @@
 // for colonists of Port-Méridien, never their final look.
 import { CARGO_BRUTAL_SURVIVORS_SHEET_V67 } from './cargo-brutal-visuals-v67.js';
 import { drawM577TransportV188 } from './level-dropship-slots-v188.js';
+import { M577_SCALE_V188 } from './m577-scale-v188.js';
 
 export const COLONY_LEVEL_ART_ROOT_V188 = '/assets/colony/levels/v188/';
 const slot = (id, layer, width, height, purpose, fidelity) => Object.freeze({ id, layer, width, height, purpose, fidelity,
@@ -219,8 +220,10 @@ export function drawColonyCivilianV188(ctx, { x, feetY, row = 0, pose = 'idle', 
   } finally { ctx.restore(); }
 }
 
-/** The M577 at the quay (C3): the shipped level primitive, parked. */
-export function drawColonyM577V188(ctx, x, bottom, facing = -1) { drawM577TransportV188(ctx, x, bottom, facing); }
+/** The M577 at the quay (C3), to scale (owner decision 2026-11-22, round 2: 8.8 m [À VÉRIFIER] ≈ 449 px, m577-scale-v188.js):
+ *  `centre` is the hull centre, wheels on `bottom`. Scenery: it brought the survivors, nobody drives it. */
+export const COLONY_C3_M577_V188 = Object.freeze({ w: M577_SCALE_V188.w, drawnHeight: M577_SCALE_V188.drawnHeight, facing: -1, layer: 'world-back-wall', drivable: false });
+export function drawColonyM577V188(ctx, centre, bottom, facing = COLONY_C3_M577_V188.facing) { drawM577TransportV188(ctx, centre - COLONY_C3_M577_V188.w / 2, bottom, facing); }
 
 /** Welding sparks: deterministic from time and seed, never stored. */
 export function drawWeldSparksV188(ctx, x, y, time = 0, intensity = 1) {

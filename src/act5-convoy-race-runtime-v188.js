@@ -25,6 +25,16 @@ export const ACT5_RACE_OPERATION_V188 = 'act5-convoy-race';
 const APC_ID = 'vehicle-001-m577-armored-personnel-carrier';
 // The M577's left (rear) edge on screen: nose at 1229 px when stopped, the whole convoy (≈ 21 m) in the 1280 px view.
 const GROUND = 570, APC_SCREEN_X = 780;
+/**
+ * [PROPOSÉ] Chase framing (owner decision 2026-11-22, round 2). The convoy to scale (M577 449 px + two 235 px trailers on
+ * 1.6 m drawbars ≈ 1080 px) and the 245 px Queen (≈ 370 px from tail tip to jaws) are wider than the 1280 px view: at close
+ * range her tail ran off the left edge. When she is within `reach` px of the view, the camera frames her whole figure
+ * `margin` px inside the left edge and keeps the M577's roof turret mount (the gun the player fires) `turretMargin` px
+ * inside the right edge: it pans right first (the cab and nose may leave on the right), then pulls back (zoom down to
+ * `minZoom`, about the road line, so scale stays uniform) when both cannot fit at 1:1 — the two-trailer replay at windup range.
+ * Eased at `ease` per second. The race rules keep their screen coordinates: only the drawing is framed (world → z·x + b).
+ */
+export const ACT5_CHASE_FRAMING_V188 = Object.freeze({ status: 'PROPOSÉ', margin: 24, turretMargin: 48, minZoom: .78, ease: 12, queenTail: 236, queenJaw: 134, reach: 1400 });
 const clone = value => structuredClone(value);
 const list = value => Array.isArray(value) ? value : [];
 const lang = () => globalThis.document?.documentElement?.lang === 'en' ? 'en' : 'fr';
@@ -122,7 +132,7 @@ export function withAct5ConvoyRaceV188(BaseEngine) {
       this.vehicle.accessTransition = null; this.vehicle.accessSecureClock = 0; this.vehicle.squadAccessRuntime = null;
       this.pinAct5RaceDriverV188();
       this.refreshSpriteCollisionProfiles?.();
-      this.camera.x = 0; this.camera.y = 0;
+      this.camera.x = 0; this.camera.y = 0; this.act5FrameStateV188 = { z: 1, b: 0 };
       this.objective = { id: 'act5r-port-gate', x: 1150, y: 450, w: 80, h: 120, complete: false };
       this.checkpoint = { id: 'insertion', x: this.player.x, y: this.player.y };
     }
@@ -133,6 +143,31 @@ export function withAct5ConvoyRaceV188(BaseEngine) {
       this.vehicle.occupied = true; this.vehicle.driver = this.player; this.vehicle.passengers = [];
     }
     act5ApcScreenXV188() { return APC_SCREEN_X - Math.min(60, (this.act5RaceV188?.apc.v || 0) * 2.4); }
+    /** Screen extent of the Queen placeholder before the pan (tail tip, jaws), or null. */
+    act5QueenExtentV188() {
+      const queen = this.act5RaceV188?.queen; if (!queen || queen.state === 'dead') return null;
+      const x = this.act5ScreenXV188(queen.s), k = (queen.height || 245) / 245, F = ACT5_CHASE_FRAMING_V188;
+      return { x, left: x - F.queenTail * k, right: x + F.queenJaw * k };
+    }
+    /** Framing of the world (screen x = z·x + b, ground line kept): identity in the race or with the Queen far behind. */
+    act5FrameV188() { const frame = this.act5FrameStateV188; return frame && Number.isFinite(frame.z) && Number.isFinite(frame.b) ? frame : { z: 1, b: 0 }; }
+    /** Eased framing towards the Queen when she is close (ACT5_CHASE_FRAMING_V188). */
+    act5FrameTargetV188(dt = 0) {
+      const F = ACT5_CHASE_FRAMING_V188, now = this.act5FrameV188(), queen = this.act5QueenExtentV188();
+      let target = { z: 1, b: 0 };
+      if (queen && queen.right > -F.reach) {
+        const turret = m577AnchorsV188(this.vehicle).turret.x, room = 1280 - F.turretMargin - F.margin, span = turret - queen.left;
+        if (span <= room) target = { z: 1, b: Math.max(0, Math.min(1280 - F.turretMargin - turret, F.margin - queen.left)) };
+        else { const z = Math.max(F.minZoom, room / span); target = { z, b: Math.min(F.margin - z * queen.left, 1280 - F.turretMargin - z * turret) }; }
+      }
+      if (!(dt > 0)) return target;
+      const k = Math.min(1, dt * F.ease);
+      return { z: now.z + (target.z - now.z) * k, b: now.b + (target.b - now.b) * k };
+    }
+    /** Applies the framing to a world-space context (ground line kept at the road). */
+    applyAct5FrameV188(ctx) { const { z, b } = this.act5FrameV188(); if (z !== 1 || b !== 0) { ctx.translate(b, GROUND * (1 - z)); ctx.scale(z, z); } }
+    /** World x range visible on screen under the framing. */
+    act5VisibleV188() { const { z, b } = this.act5FrameV188(); return { x0: (0 - b) / z, x1: (1280 - b) / z }; }
     act5ScreenXV188(s) { return this.act5ApcScreenXV188() + this.vehicle.w / 2 + (s - this.act5RaceV188.apc.s) * ACT5_RACE_V188.pixelsPerMetre; }
     syncAct5RaceWorldV188() {
       if (!this.isAct5RaceV188() || !this.vehicle) return;
@@ -205,6 +240,7 @@ export function withAct5ConvoyRaceV188(BaseEngine) {
       super.update(dt);
       if (this.mission.state !== 'active') return;
       this.camera.x = 0; this.camera.y = 0;
+      this.act5FrameStateV188 = this.act5FrameTargetV188(dt);
       this.processAct5RaceEventsV188(events);
       this.act5RaceFxV188.tracer = Math.max(0, this.act5RaceFxV188.tracer - dt); this.act5RaceFxV188.shake = Math.max(0, this.act5RaceFxV188.shake - dt);
       this.syncAct5RaceWorldV188();
@@ -354,6 +390,9 @@ export function withAct5ConvoyRaceV188(BaseEngine) {
           killable: state.apc.s >= state.length, floor: Math.ceil(state.queen.maxHealth * ACT5_RACE_V188.queen.chaseFloor) } : null,
         apcPx: { w: this.vehicle.w, h: this.vehicle.h, metres: +(this.vehicle.w / ACT5_RACE_V188.pixelsPerMetre).toFixed(2), x: Math.round(this.vehicle.x), feet: Math.round(this.vehicle.y + this.vehicle.h) },
         trailerPx: this.act5TrailerSizeV188(),
+        framing: (() => { const queen = this.act5QueenExtentV188(), { z, b } = this.act5FrameV188(), at = x => Math.round(b + z * x), a = m577AnchorsV188(this.vehicle);
+          return { zoom: +z.toFixed(3), offset: Math.round(b), queenLeft: queen ? at(queen.left) : null, queenRight: queen ? at(queen.right) : null,
+            apcLeft: at(this.vehicle.x), apcRight: at(this.vehicle.x + this.vehicle.w), turret: at(a.turret.x), muzzle: at(a.muzzle.x) }; })(),
         runners: state.runners.filter(runner => runner.alive).length, checkpoints: [...state.checkpoints], complete: state.complete, failed: state.failed };
     }
     getSnapshot() { return { ...super.getSnapshot(), ...(this.isAct5RaceV188() ? { act5RaceV188: this.act5RaceSnapshotV188() } : {}) }; }
@@ -371,16 +410,18 @@ export function withAct5ConvoyRaceV188(BaseEngine) {
       for (let i = -1; i < 9; i++) { const x = i * 220 - (offset * .05) % 220; ctx.beginPath(); ctx.moveTo(x, 420); ctx.lineTo(x + 110, 330 - (i % 3) * 22); ctx.lineTo(x + 220, 420); ctx.fill(); }
       ctx.fillStyle = '#172327';
       for (let i = -1; i < 12; i++) { const x = i * 150 - (offset * .2) % 150; ctx.fillRect(x, 400 - (i % 2) * 30, 18, 170); ctx.fillRect(x - 20, 420, 58, 6); }
-      // Road or bridge under the convoy.
-      const bridge = state.bridge;
+      // Road or bridge under the convoy, framed with the world (chase framing, ACT5_CHASE_FRAMING_V188).
+      const bridge = state.bridge, { x0: L, x1: R } = this.act5VisibleV188();
+      ctx.save(); this.applyAct5FrameV188(ctx);
       const bx0 = bridge ? this.act5ScreenXV188(bridge.start) : Infinity, bx1 = bridge ? this.act5ScreenXV188(bridge.start + bridge.length) : -Infinity;
       ctx.fillStyle = '#273238';
-      if (bx0 > 0) ctx.fillRect(0, GROUND, Math.min(1280, bx0), 150);
-      if (bx1 < 1280) ctx.fillRect(Math.max(0, bx1), GROUND, 1280 - Math.max(0, bx1), 150);
-      if (bridge && bx1 > 0 && bx0 < 1280) this.drawAct5BridgeV188(ctx, bx0, bx1);
+      if (bx0 > L) ctx.fillRect(L, GROUND, Math.min(R, bx0) - L, 150);
+      if (bx1 < R) ctx.fillRect(Math.max(L, bx1), GROUND, R - Math.max(L, bx1), 150);
+      if (bridge && bx1 > L && bx0 < R) this.drawAct5BridgeV188(ctx, bx0, bx1);
       ctx.fillStyle = '#a5a58a';
-      for (let x = -((offset) % 150); x < 1350; x += 150) if (x + 74 < bx0 || x > bx1) ctx.fillRect(x, GROUND + 19, 74, 4);
+      for (let x = L - ((offset + L) % 150 + 150) % 150; x < R + 70; x += 150) if (x + 74 < bx0 || x > bx1) ctx.fillRect(x, GROUND + 19, 74, 4);
       if (state.mode === 'chase' || state.mode === 'race') this.drawAct5PortGateV188(ctx);
+      ctx.restore();
       // Rain (reduced motion: still drops).
       const still = Boolean(this.accessibilityRuntime?.reducedMotion), time = still ? 0 : this.animationTime || 0;
       ctx.strokeStyle = 'rgba(170,200,210,.22)'; ctx.lineWidth = 1; ctx.beginPath();
@@ -394,8 +435,8 @@ export function withAct5ConvoyRaceV188(BaseEngine) {
       ctx.strokeStyle = '#3b4a4f'; ctx.lineWidth = 3;
       const load = this.act5RaceV188.trailers.length, sag = bridge.strain ? 16 : load ? 4 : 0;
       bridge.segments.forEach((segment, index) => {
-        const sx = x0 + index * R.segment * ppm, w = R.segment * ppm;
-        if (sx > 1280 || sx + w < 0) return;
+        const sx = x0 + index * R.segment * ppm, w = R.segment * ppm, view = this.act5VisibleV188();
+        if (sx > view.x1 || sx + w < view.x0) return;
         const falling = segment.fall >= 0, drop = falling ? Math.min(400, 260 * segment.fall * segment.fall) : 0, tilt = falling ? Math.min(.6, segment.fall * .5) * (index % 2 ? 1 : -1) : 0;
         const middle = Math.sin(Math.PI * (index + .5) / bridge.segments.length) * sag;
         if (falling && drop >= 400) return;
@@ -420,6 +461,9 @@ export function withAct5ConvoyRaceV188(BaseEngine) {
     drawWorld(ctx) {
       if (!this.isAct5RaceV188()) return super.drawWorld(ctx);
       const shake = this.act5RaceFxV188.shake > 0 && !this.accessibilityRuntime?.reducedMotion ? Math.sin(this.animationTime * 90) * 3 : 0;
+      // The chase framing stays on the context after this draw (no restore here): the layers drawn after it in the same world
+      // pass (VFX) share it; the engine's own world save/restore ends it with the pass.
+      this.applyAct5FrameV188(ctx);
       ctx.save(); ctx.translate(0, shake);
       const state = this.act5RaceV188, size = this.act5TrailerSizeV188();
       for (const trailer of state.dropped) this.drawAct5TrailerV188(ctx, trailer, size, true);
@@ -438,14 +482,18 @@ export function withAct5ConvoyRaceV188(BaseEngine) {
       // (through the final drawVehicle, so the handover layer still hides or poses it).
       this.drawVehicle(ctx);
       for (const runner of state.runners) {
-        const x = this.act5ScreenXV188(runner.s); if (x < -100 || x > 1380) continue;
+        const x = this.act5ScreenXV188(runner.s), view = this.act5VisibleV188(); if (x < view.x0 - 100 || x > view.x1 + 100) continue;
         ctx.save(); if (!runner.alive) ctx.globalAlpha = Math.max(0, 1 - (runner.deadClock || 0));
         drawAct5RunnerPlaceholderV188(ctx, x, GROUND + (runner.alive ? 0 : 10), { height: ACT5_RACE_V188.runner.height, gait: runner.gait }); ctx.restore();
       }
       if (state.queen && state.queen.state !== 'dead') {
-        const x = this.act5ScreenXV188(state.queen.s);
-        if (x > -300) drawAct5QueenPlaceholderV188(ctx, x, GROUND, { height: state.queen.height, gait: state.queen.gait, state: state.queen.state });
-        else this.drawAct5OffscreenV188(ctx, tx(ACT5_RACE_TEXT_V188.queen), act5RaceRearV188(state) - state.queen.s);
+        const x = this.act5ScreenXV188(state.queen.s), view = this.act5VisibleV188();
+        if (x > view.x0 - 300) drawAct5QueenPlaceholderV188(ctx, x, GROUND, { height: state.queen.height, gait: state.queen.gait, state: state.queen.state });
+        else {
+          // The off-screen marker is a screen-edge cue: drawn in screen space, whatever the framing.
+          const { z, b } = this.act5FrameV188(); ctx.save(); ctx.scale(1 / z, 1 / z); ctx.translate(-b, -GROUND * (1 - z));
+          this.drawAct5OffscreenV188(ctx, tx(ACT5_RACE_TEXT_V188.queen), act5RaceRearV188(state) - state.queen.s); ctx.restore();
+        }
       }
       const target = act5RaceTargetV188(state);
       if (this.act5RaceFxV188.tracer > 0 && target) {
@@ -471,7 +519,7 @@ export function withAct5ConvoyRaceV188(BaseEngine) {
       ctx.fillText(`${label} · ${Math.max(0, Math.round(metres))} m`, 36, GROUND - 115); ctx.restore();
     }
     drawAct5TrailerV188(ctx, trailer, size, detached) {
-      const x = this.act5ScreenXV188(trailer.s) - size.w / 2; if (x > 1300 || x + size.w < -20) return;
+      const x = this.act5ScreenXV188(trailer.s) - size.w / 2, view = this.act5VisibleV188(); if (x > view.x1 + 20 || x + size.w < view.x0 - 20) return;
       const fall = trailer.falling >= 0 ? Math.min(500, 300 * trailer.falling * trailer.falling) : 0;
       if (fall >= 500) return;
       const y = GROUND + (detached ? 0 : trailer.bounce * 6) + fall;

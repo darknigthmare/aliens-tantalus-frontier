@@ -245,10 +245,12 @@ export function withMissionDropshipHandoverV188(Base) {
         // The M577 rides in the belly bay (Aliens, 1986) and is lowered on its hoist.
         const facing = seq.ownVehicle ? (vehicle.facing || 1) : 1, w = seq.ownVehicle ? vehicle.w : LEVEL_DROPSHIP_SCALE_V188.m577.w;
         // The 8.8 m hull stays on its floor lane (no lift cabin, door or level edge crossed): lowered and final points clamp to it.
-        const lane = seq.ownVehicle && this.m577LaneV188 ? this.m577LaneV188 : this.m577LaneAtV188(groundY, spawn, w);
+        const lane = seq.ownVehicle && this.m577LaneV188 ? this.m577LaneV188 : this.m577LaneAtV188(groundY, spawn, w, { splitDoors: true });
         const inLane = c => lane ? m577ClampToLaneV188(c - w / 2, lane, w) + w / 2 : c;
-        const finalCentre = inLane(seq.ownVehicle ? vehicle.x + vehicle.w / 2 : spawn + 140);
+        let finalCentre = inLane(seq.ownVehicle ? vehicle.x + vehicle.w / 2 : spawn + 140);
         const lowerCentre = inLane(clamp(finalCentre - facing * M577_DROP_V188.drive, this.camera.x + 160, this.camera.x + 1120));
+        // Near a level start the transport cannot be lowered behind its stop: it rolls its full distance forward instead.
+        if (!seq.ownVehicle) finalCentre = inLane(lowerCentre + facing * M577_DROP_V188.drive);
         seq.m577Lane = lane;
         seq.dir = facing > 0 ? 1 : -1;
         seq.ship = { tailX: lowerCentre + seq.dir * UD4L_FRAME_V188.belly.x, groundY, dir: seq.dir, lift: 0, gear: 1 };
@@ -297,9 +299,13 @@ export function withMissionDropshipHandoverV188(Base) {
       }
     }
     /** The floor lane of a scaled M577 standing at feet line `feetY` near `x` (null when none holds the hull). */
-    m577LaneAtV188(feetY, x, w = M577_SCALE_V188.w) {
+    m577LaneAtV188(feetY, x, w = M577_SCALE_V188.w, { splitDoors = false } = {}) {
       const bounds = this.handoverBoundsV188(), far = lane => Math.min(Math.abs(lane.x0 - x), Math.abs(lane.x1 - x));
-      const lanes = m577LanesV188({ platforms: this.platforms, lifts: this.lifts, walls: this.walls, feetY, width: bounds.w }).filter(lane => lane.x1 - lane.x0 >= w + 16);
+      let lanes = m577LanesV188({ platforms: this.platforms, lifts: this.lifts, walls: this.walls, feetY, width: bounds.w });
+      // A door (open or shut) stands across the lane: the lowered transport stays on the landing side of it.
+      if (splitDoors) for (const door of this.doors || []) lanes = lanes.flatMap(lane => door.x + door.w <= lane.x0 || door.x >= lane.x1 ? [lane]
+        : [{ x0: lane.x0, x1: door.x }, { x0: door.x + door.w, x1: lane.x1 }].filter(part => part.x1 > part.x0));
+      lanes = lanes.filter(lane => lane.x1 - lane.x0 >= w + 16);
       return lanes.find(lane => x >= lane.x0 && x <= lane.x1) || [...lanes].sort((a, b) => far(a) - far(b))[0] || null;
     }
     giveControlV188(seq, skipped) {
