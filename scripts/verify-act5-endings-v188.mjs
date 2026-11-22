@@ -75,7 +75,8 @@ function toEnding(save, recommended, options) {
   const decision = decide(save, recommended);
   assert.ok(decision, `decision for ${recommended}`);
   playFinal(save, options);
-  assert.ok(['standoff', 'to-ending'].includes(act5TableActionV188(save)));
+  // Spec 010: « Tenir » first opens the quay hearing ('audience'); without it the Q4 A rule applies.
+  assert.ok(['standoff', 'to-ending', 'audience'].includes(act5TableActionV188(save)));
   advanceAct5ToEndingV188(save);
   return decision;
 }
