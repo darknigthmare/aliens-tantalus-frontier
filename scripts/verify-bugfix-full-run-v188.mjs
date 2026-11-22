@@ -34,3 +34,28 @@ test('boss checkpoint: after the boss falls, a checkpoint restart lands on a rea
   assert.ok(engine.player.grounded, 'the restarted marine stands on a surface');
   assert.ok(engine.player.y + engine.player.h <= boss.groundY + 1, `feet ${engine.player.y + engine.player.h} under ${boss.groundY}`);
 });
+
+// Found after QZ-18: the hub objective sends the marine to « Salle de briefing, table
+// tactique », but the table was a weak prop (priority 10): Tamsin Velez, Mara Vega, ECHO-A
+// and Maksim Orlov stand around it, and any crew member within reach always won E. No spot
+// of the table offered it (the west end is the archives door). The operations table is a
+// priority station, like the UD-4L: at its centre and not facing a crew member, E opens it.
+test('briefing table: a priority station that crew standing around it no longer hide', async () => {
+  const { HubGame, HUB_DECKS } = await import('../src/hub-game.js');
+  const { HubGame: HubV52 } = await import('../src/hub-v52-runtime.js');
+  const briefing = HUB_DECKS[0].rooms.find(room => room.id === 'briefing');
+  const bounds = briefing.propInteractionBounds, centre = bounds.x + bounds.w / 2;
+  const stub = { player: { x: centre - 21, w: 42, y: 532, h: 92, facing: 1 }, currentRoom: () => briefing };
+  const table = HubGame.prototype.nearestInteraction.call(stub);
+  assert.equal(table?.action, 'navigate:operations');
+  assert.ok(table.interactionPriority >= 100, `briefing table priority ${table.interactionPriority}`);
+  const velez = { crewId: 'crew-02-tamsin-velez', name: 'Tamsin Velez', x: centre - 60, w: 44 };
+  const choose = () => HubV52.prototype.hubInteractionChoiceV188.call({ ...stub, nearestInteraction: () => table, nearestHubNpc: () => velez });
+  assert.equal(choose().kind, 'physical', 'at the table centre, facing away from Velez: the table');
+  stub.player.facing = -1;
+  assert.equal(choose().kind, 'npc', 'facing Velez at arm’s length: talk');
+  // Other rooms keep their weak props (crew first).
+  const mess = HUB_DECKS[1].rooms.find(room => room.id === 'mess');
+  const messProp = HubGame.prototype.nearestInteraction.call({ player: { x: mess.propInteractionBounds.x + 10, w: 42 }, currentRoom: () => mess });
+  assert.equal(messProp?.interactionPriority, 10);
+});
