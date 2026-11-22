@@ -1,3 +1,4 @@
+import { colonyPreparationCrewV188 } from '../src/colony-mission-levels-v188.js';
 import test from 'node:test';
 import { deriveStoryCampaignV188, markStoryDebriefSeenV188, STORY_RELAY_CAMPAIGN_ID_V188 } from '../src/story-campaign-v188.js';
 import { campaignObjectiveLabelV188 } from '../src/mission-objective-panel-v188.js';
@@ -323,7 +324,7 @@ test('the actual app renderer atomically selects plans and records readings whil
   Object.defineProperty(root, 'innerHTML', { set() {
     root.replaceChildren(); launch = document.createElement('button'); root.append(launch);
   } });
-  const dependencies = { saveSystem: system, deriveStoryCampaignV188, markStoryDebriefSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, campaignObjectiveLabelV188, researchBonusRowV188: () => '', clone, CAMPAIGNS, WORLDS, CREW, WEAPONS, EQUIPMENT, VEHICLES,
+  const dependencies = { saveSystem: system, deriveStoryCampaignV188, markStoryDebriefSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, campaignObjectiveLabelV188, researchBonusRowV188: () => '', colonyPreparationCrewV188, clone, CAMPAIGNS, WORLDS, CREW, WEAPONS, EQUIPMENT, VEHICLES,
     preserveCampaignStoryReturnV160, preserveConvoyReturnHistoryV162, preserveLetheContinuityV163,
     recordCampaignStoryReviewV160, recordCampaignStoryReviewV161, recordLetheContinuityReviewV163,
     mountCampaignDebriefV160, mountCampaignDebriefV161, mountConvoyReturnHistoryV162, mountLetheContinuityV163,

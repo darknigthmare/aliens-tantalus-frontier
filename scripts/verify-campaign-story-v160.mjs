@@ -1,3 +1,4 @@
+import { colonyPreparationCrewV188 } from '../src/colony-mission-levels-v188.js';
 import test from 'node:test';
 import { deriveStoryCampaignV188, markStoryDebriefSeenV188, markStoryCinematicSeenV188,
   normalizeStoryCampaignV188, interludeDueV188, STORY_RELAY_CAMPAIGN_ID_V188 } from '../src/story-campaign-v188.js';
@@ -518,7 +519,7 @@ test('PR15: the actual app review callback restores focus to the replaced topic 
     root.replaceChildren(); resets.push(document.activeElement);
     launch = document.createElement('button'); root.append(launch);
   } });
-  const dependencies = { saveSystem: system, deriveStoryCampaignV188, markStoryDebriefSeenV188, campaignObjectiveLabelV188, researchBonusRowV188: () => '', STORY_RELAY_CAMPAIGN_ID_V188, clone, preserveCampaignStoryReturnV160,
+  const dependencies = { saveSystem: system, deriveStoryCampaignV188, markStoryDebriefSeenV188, campaignObjectiveLabelV188, researchBonusRowV188: () => '', colonyPreparationCrewV188, STORY_RELAY_CAMPAIGN_ID_V188, clone, preserveCampaignStoryReturnV160,
     preserveConvoyReturnHistoryV162, mountConvoyReturnHistoryV162,
     preserveLetheContinuityV163, mountLetheContinuityV163, recordLetheContinuityReviewV163,
     getArbiterMissionV190, mountArbiterDossierV190,
@@ -855,7 +856,7 @@ async function driveNativeReturnConsultation({ seen = [], alreadyDebriefed = fal
     renderColonyReconstructionV188() {}, renderStationFrontV188() {}, renderCrewQuestsPanelV188() {}, renderAct5PanelV188() {},
     preserveCampaignStoryReturnV160, preserveConvoyReturnHistoryV162, preserveLetheContinuityV163,
     mountCampaignDebriefV160, mountCampaignDebriefV161, mountConvoyReturnHistoryV162, mountLetheContinuityV163,
-    recordCampaignStoryReviewV160, recordLetheContinuityReviewV163, campaignObjectiveLabelV188, researchBonusRowV188: () => '',
+    recordCampaignStoryReviewV160, recordLetheContinuityReviewV163, campaignObjectiveLabelV188, researchBonusRowV188: () => '', colonyPreparationCrewV188,
     getOperationBrief: () => ({ crewIds: [], ready: true, risk: 0, hours: 0 }), resolveCrewDefinitionV85: member => member,
     getSpecialOperationByCampaignIdV67: () => null, isSoloSpecialOperationV131: () => true,
     getAlphaBravoStrategicRecoveryV69: () => ({ canAbandon: false }),
