@@ -136,7 +136,9 @@ export function placeHoldPropsV188(specs, bounds, features, { zMin = -80, zMax =
 }
 
 // V188 colony levels: C2 « L'air du port » is an interior of Port-Méridien, played in V1 (bible §43.1).
-const V1_INTERIOR_CAMPAIGNS = Object.freeze(['colony-c2']);
+// V188 station levels (spec 009): S1-S4 are the decks of Asphodèle, played in V1; the freighter
+// cargo hold (crate stacks of a cargo ship) does not belong to a relay station.
+const V1_INTERIOR_CAMPAIGNS = Object.freeze(['colony-c2', 'station-s1', 'station-s2', 'station-s3', 'station-s4']);
 const isShipCampaignOfItsOwn = (campaign, world) => {
   if (!campaign || campaign.specialOperationId || String(campaign.id || '').startsWith('special-') || V1_INTERIOR_CAMPAIGNS.includes(campaign.id)) return false;
   return selectMissionTemplateV52({ campaign: { ...campaign, templateId: campaign.templateId }, world: world || {} }) === SHIP_TEMPLATE;
