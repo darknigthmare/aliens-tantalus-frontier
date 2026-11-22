@@ -723,7 +723,7 @@ Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-m
 5. Point médian **[PARTIEL] V188** : le pont cède sous les deux remorques ; lâcher celle du fret ou celle des colons en retard, en conduisant.
 6. Poursuite de Reine **[PARTIEL] V188** : `act5-depot-queen`, la Reine du dépôt poursuit le convoi ; sprite à produire (substitut Canvas).
 7. Arrivée aux murs de Port-Méridien : la course débouche sur C5 (§6.2).
-8. Si la colonie est protégée : face-à-face au quai avec l'équipe de récupération. Le joueur ne gagne pas en tirant : il gagne si le dossier est assez solide pour que les commandos reçoivent l'ordre de se retirer (ou si l'ICC est saisie via Asphodèle, §7).
+8. Si la colonie est protégée : face-à-face au quai avec l'équipe de récupération. Le joueur ne gagne pas en tirant : il gagne si le dossier est assez solide pour que les commandos reçoivent l'ordre de se retirer (ou si l'ICC est saisie via Asphodèle, §7). **[PARTIEL] V188 (spec 010, 2026-11-22)** : avec *Tenir la colonie*, ce face-à-face est une audience sans tir avec la Directrice Halloran, par la liaison QZ du quai (§5.11, « Audience au quai »).
 
 **CIN-61 « Les portes du port »** : Rook fait l'appel des colons arrivés. Le nombre affiché est la somme réelle des sauvetages de la campagne.
 
@@ -929,7 +929,7 @@ Décisions par défaut appliquées (questionnaire `QUESTIONS_PROPRIETAIRE_V188.m
 3. **Décision** : Echo-9 recommande ; `resolveFinalChoiceV188` décide (Vega suit à 55). Q3 A validée par défaut : avec 5 pièces sans canal sûr, Vega tient la colonie. CIN-60 suit.
 4. **Missions finales**, dans l'ordre : `act5-last-run` *Dernier départ* (`escort a colony convoy`, extérieur) → `act5-depot-queen` *La Reine du dépôt* (`track an apex specimen`, boss) → `act5-port-walls` *Les portes du port* (`defend the colony`) pour *Transmettre* et *Tenir*, ou `act5-evacuation` *L'évacuation* (`hold the extraction zone`) pour *Céder*. Registre Action.
 5. **Pont** (Q2 A) : choix sans pause entre le fret et les colons en retard. Depuis la course dédiée (2026-11-21), il se joue sur le tablier en conduisant (`C` / `X`) ; la boîte chronométrée au premier checkpoint reste un repli hors course.
-6. **Quai** (Q4 A) : *Transmettre* → ICC saisie, retrait ; *Tenir* avec 5 pièces → retrait des commandos ; *Tenir* en dessous → siège jusqu'à l'aube, sans tir. *Céder* : pas de face-à-face.
+6. **Quai** (Q4 A) : *Transmettre* → ICC saisie, retrait ; *Tenir* → audience sans tir avec Halloran (spec 010, ci-dessous) : gagnée → retrait des commandos, perdue → siège jusqu'à l'aube, sans tir ; sans audience jouée (ancien flux), 5 pièces → retrait. *Céder* : pas de face-à-face.
 7. **CIN-61** : appel des arrivés = civils du quai (P-3) + colons du M577 + colons en retard arrivés.
 8. **Fin** (CIN-90) : texte de la fin du §5.7 ; avec « Le relais parle », clause levée au palier *Autonome*, charte suspendue en dessous (§5.7.1).
 9. **Épilogue** (Q5 A) : au Tantalus, « ÉPILOGUE · Dernier mot » dans la conversation de huit membres de l'équipage ; le casier d'Echo-8 porte `RETOUR CONFIRMÉ` (plaque de Kessler ramenée de S3) ou `POSTE LIBÉRÉ`. Le lire joue CIN-92 : Port-Méridien, Asphodèle (éclairée si reprise), la baie cryo, puis les faits de la partie (colonie, appel, CASSIUS, dossier et ce qui reste non prouvé, confiance de l'équipage, créature de l'Interlude, réplique « Retour » de l'origine d'Echo-9, §2.4.2).
@@ -980,6 +980,16 @@ Décisions par défaut appliquées (questionnaire `QUESTIONS_PROPRIETAIRE_V188.m
 **Fidélité** : documenté (*Aliens*, 1986) — le M577 et sa fuite du processeur, la Reine qui poursuit les survivants jusqu'à la plate-forme d'évacuation du *Sulaco*. Adaptation du projet — remorques, pont, poursuite routière, tourelle tirant vers l'arrière, festin sur une remorque. À définir — sprite de la Reine (emplacement `act5-queen-chase-side`, 520 × 245, aucun fichier demandé tant qu'il est absent), sprite de mission du M577 (emplacement `m577-mission-side-scale`, 449 × 140) et sa longueur documentée (8,8 m [À VÉRIFIER]). Aucune fidélité « 1:1 ».
 
 - **Fret perdu (décision du 2026-11-22)** : les conteneurs du manifeste voyagent dans la remorque de fret. Une remorque de fret lâchée au pont (choix ou délai) ou sur la route les emporte : `act5ContainersBroughtBackV188` vaut alors 0, *Céder le dépôt* n'est plus une « restitution » (`act5RestitutionHeldV188`), le coût moral s'applique une fois au passage à la fin (champ additif `act5.restitutionLostV188`), la fin ajoute « Le fret perdu en route ne revient pas : Halloran ne parle plus de « restitution »… » et l'épilogue un fait « Fret perdu : … au fond du ravin du pont / sur la route du port avec n conteneur(s) QZ17 » (FR + EN). Avec le fret ramené, la fin dit « Halloran présente la cession du dépôt comme une « restitution » : n conteneurs QZ17 rendus ».
+
+**Audience au quai — [PARTIEL] V188 (spec 010, 2026-11-22).** Première mécanique nouvelle de Q17 A (« face-à-face sans tir »). Code : `src/confrontation-state-v188.js` (règles), `src/confrontation-entries-v188.js` (données FR/EN), `src/confrontation-v188.js` (registre, sauvegarde), `src/confrontation-ui-v188.js` (présentation) ; raccordement dans `src/story-act5-v188.js` et `src/app.js` ; tests `scripts/verify-confrontation-v188.mjs`, parcours `scripts/qa-confrontation-v188.mjs`.
+
+- **Déroulé** : ligne *Tenir la colonie*, après les trois missions finales, à la table tactique. L'officier des commandos tient la liaison QZ ; la Directrice Halloran répond depuis la direction régionale (§2.3 : elle ne s'adresse au Tantalus que par messages). Sept échanges : elle cite une clause (charte, clause 14 ; manifeste QZ17 ; protocole d'expédition, article 3 ; délégation d'Asphodèle ; protocole des synthétiques ; annexe de viabilité ; règlement des enquêtes internes). Echo-9 répond par une pièce du dossier QZ17 détenue, ou se tait.
+- **Règles [PROPOSÉ]** : pièce décisive +2 de terrain, partielle +1 (pièce dépensée), hors sujet −1 de crédibilité (pièce gardée), silence sans effet ; crédibilité 3 ; cible 10 ; gagnée dès la cible, perdue à crédibilité 0 ou après le dernier échange. Chaque pièce est décisive à un seul échange : l'audience est impossible sous 5 pièces et gagnable à partir de 5 (borne de Q4 A conservée). Avec 5 pièces exactement, il faut chacune au bon moment.
+- **Issue** : gagnée → `act5.standoff = 'withdrawn'`, perdue → `'held'` ; la scène du quai, CIN-61, la fin et l'épilogue existants suivent. Aucune fin nouvelle. *Transmettre* et *Céder* inchangés.
+- **Sauvegarde additive** : `storyCampaignV188.confrontationsV188['act5-halloran-quay']`, écrite à chaque échange ; un rechargement reprend à l'échange suivant ; absente des anciennes sauvegardes, qui gardent la règle Q4 A.
+- **Accessibilité** : aucune limite de temps ; mouvement réduit respecté ; clavier (1-9, S), souris, toucher ; texte lisible hors du Canvas ; Échap ne ferme pas l'audience.
+- **Fidélité** : ton de la compagnie qui « cite » (§1.3) ; audience de l'ICC (*Aliens*, 1986). Clause 14 reprise du §21 (CE-05) ; autres numéros de clause et répliques **[PROPOSÉ]**. Portrait de Halloran : substitut Canvas (buste sur écran CRT, emplacement `confrontation-halloran-crt`), aucune fidélité « 1:1 ».
+- **Entrée prête pour S2** : interrogatoire de CASSIUS (`station-s2-cassius`, §7.2), non raccordé (lot des niveaux de la station) ; voir spec 010.
 
 **Reste à faire** : art de la Reine en poursuite et du M577 de mission, longueur documentée du M577, palier *Libre* après « Le relais parle », effets durables de la relève de Vega et de la démission d'Inez en partie libre, nouvelle partie +.
 
@@ -1153,6 +1163,8 @@ Le joueur doit **l'aborder**, **la remettre en service**, découvrir ce qui s'y 
 | **Réécrire ses priorités** (« les vivants d'abord ») | CASSIUS reste au service du hub ; meilleur réseau ; il peut être repris si la compagnie retrouve un accès administrateur. |
 | **Le brider** | Fonctions réduites, aucun risque ; certaines annexes indisponibles. |
 | **L'effacer** | Station en mode manuel ; ponts inférieurs ouverts à la force, plus dangereux ; perte de ses archives (une pièce du dossier en moins). |
+
+**Interrogatoire de CASSIUS — [PROPOSÉ] (spec 010, 2026-11-22)** : une entrée d'audience sans tir est prête (`station-s2-cassius`, `src/confrontation-entries-v188.js`) : CASSIUS cite cinq consignes (Q-1 quarantaine, P-2 priorité cargaison, A-3 préservation des actifs, journal des personnes, intégrité des journaux) ; Echo-9 lui oppose les pièces détenues (pas les ordres de livraison, récupérés en S2 même). Elle n'est pas encore raccordée ; son issue (`conceded` / `held`) nourrirait la décision existante ci-dessus sans nouvelle option (question Q-010-2).
 
 **Annexes**
 

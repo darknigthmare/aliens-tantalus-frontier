@@ -5,6 +5,7 @@
 // other record holds: which story debriefs the player has opened.
 import { currentLanguageV185 } from './i18n-v185.js';
 import { normalizeAct5V188 } from './story-act5-state-v188.js';
+import { normalizeConfrontationsV188 } from './confrontation-state-v188.js';
 
 export const STORY_RELAY_CAMPAIGN_ID_V188 = 'special-archive-relay';
 export const STORY_SLICE_STEPS_V188 = Object.freeze(['creation', 'wake', 'ship', 'port', 'briefing', 'qz18', 'debrief', 'next']);
@@ -45,6 +46,9 @@ export function normalizeStoryCampaignV188(raw) {
   // Act V (spec 006): additive, present only once the save holds something for it.
   const act5 = normalizeAct5V188(raw.act5);
   if (act5) base.act5 = act5;
+  // No-shooting audiences (spec 010): additive, present only once an audience has started.
+  const confrontations = normalizeConfrontationsV188(raw.confrontationsV188);
+  if (confrontations) base.confrontationsV188 = confrontations;
   return base;
 }
 

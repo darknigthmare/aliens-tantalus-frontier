@@ -10,6 +10,7 @@ import { normalizeStoryCampaignV188, storyEndingReachedV188, deriveStoryCampaign
 import { storyDossierV188, finalChoiceOptionsV188, resolveFinalChoiceV188, FINAL_OPTIONS_V188, ENDINGS_V188 } from './story-dossier-v188.js';
 import { asphodeleRetakenV188, normalizeStationV188, kesslerTagRecoveredV188 } from './station-asphodele-v188.js';
 import { colonyRescuedV188, colonyTierV188 } from './colony-reconstruction-v188.js';
+import { confrontationOutcomeV188, confrontationDecisionV188, startConfrontationV188, confrontationStateV188 } from './confrontation-v188.js';
 import { createAct5V188, normalizeAct5V188, normalizeAct5ConvoyV188, ACT5_OPTION_IDS_V188, ACT5_TRAILER_IDS_V188, ACT5_DROP_CAUSES_V188 } from './story-act5-state-v188.js';
 
 export * from './story-act5-state-v188.js';
@@ -355,11 +356,31 @@ export const ACT5_STANDOFF_TEXT_V188 = Object.freeze({
   recovery: t('Pendant la nuit, une équipe de la compagnie tente de récupérer la créature à bord du Tantalus. L’équipage la repousse au sas du laboratoire.',
     'During the night, a company team tries to recover the creature aboard the Tantalus. The crew pushes it back at the laboratory airlock.')
 });
+// Spec 010: with « Tenir la colonie », the quay is a no-shooting hearing with Halloran
+// (confrontation-entries-v188.js). Its outcome feeds the existing standoff ids: won → 'withdrawn',
+// lost → 'held'. Without a concluded hearing (saves or flows that never opened it), the Q4 A
+// rule applies as before: 5 pieces → 'withdrawn'. The hearing keeps that threshold as its bound:
+// below 5 pieces it cannot be won, from 5 pieces it can (scripts/verify-confrontation-v188.mjs).
+export const ACT5_AUDIENCE_ID_V188 = 'act5-halloran-quay';
 export function act5StandoffOutcomeV188(save) {
   const state = act5StateV188(save);
   if (!state.decision || state.decision.option === 'cede') return null;
   if (state.decision.option === 'transmit') return 'transmitted';
+  const audience = confrontationDecisionV188(save, ACT5_AUDIENCE_ID_V188);
+  if (audience === 'withdrawn' || audience === 'held') return audience;
   return storyDossierV188(save).count >= ACT5_STANDOFF_PIECES_V188 ? 'withdrawn' : 'held';
+}
+/** The quay hearing is due: line « Tenir », final missions done, hearing not concluded. */
+export function act5AudienceDueV188(save) {
+  const state = act5StateV188(save);
+  return state.phase === 'final' && state.decision?.option === 'hold' && act5FinalMissionsDoneV188(save)
+    && !confrontationOutcomeV188(save, ACT5_AUDIENCE_ID_V188);
+}
+/** Opens (or resumes) the quay hearing. Mutates the candidate save; true when it is ready to play. */
+export function startAct5AudienceV188(save) {
+  if (!act5AudienceDueV188(save)) return false;
+  startConfrontationV188(save, ACT5_AUDIENCE_ID_V188);
+  return Boolean(confrontationStateV188(save, ACT5_AUDIENCE_ID_V188));
 }
 
 /** What the briefing table should do next for Act V, or null. */
@@ -369,7 +390,8 @@ export function act5TableActionV188(save) {
   if (state.phase === 'council') return 'council';
   if (state.phase === 'final') {
     if (!act5FinalMissionsDoneV188(save)) return null;
-    return state.decision.option === 'cede' ? 'to-ending' : 'standoff';
+    if (state.decision.option === 'cede') return 'to-ending';
+    return act5AudienceDueV188(save) ? 'audience' : 'standoff';
   }
   if (state.phase === 'ending') return 'ending';
   if (state.phase === 'credits') return 'credits';
@@ -378,7 +400,8 @@ export function act5TableActionV188(save) {
 /** After the last final mission: records the standoff (if any) and moves to the ending. Mutates the candidate save. */
 export function advanceAct5ToEndingV188(save) {
   const action = act5TableActionV188(save);
-  if (action !== 'standoff' && action !== 'to-ending') return null;
+  // 'audience': the hearing has not concluded; callers without a presentation (tests, older flows) keep Q4 A.
+  if (action !== 'standoff' && action !== 'to-ending' && action !== 'audience') return null;
   const standoff = act5StandoffOutcomeV188(save), decision = act5StateV188(save).decision;
   // Owner decision 2026-11-22: a restitution promised at the council but whose freight was lost costs the
   // morale « Céder » without restitution costs (§5.7.1), once, when Halloran takes the depot.

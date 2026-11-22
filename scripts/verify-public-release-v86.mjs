@@ -543,6 +543,13 @@ const FORGE_TOOLING_V140 = new Set([
   'scripts/verify-act5-endings-v188.mjs',
   'scripts/verify-act5-convoy-race-v188.mjs',
   'scripts/qa-act5-convoy-race-v188.mjs',
+  // V188 no-shooting hearing (spec 010): suite, browser QA and spec, source-only exact paths.
+  'scripts/verify-confrontation-v188.mjs',
+  'scripts/qa-confrontation-v188.mjs',
+  'specs/010-face-a-face',
+  'specs/010-face-a-face/spec.md',
+  'specs/010-face-a-face/plan.md',
+  'specs/010-face-a-face/tasks.md',
   'scripts/verify-colony-crew-v188.mjs',
   // V188 dedicated colony levels C1-C4: suite and spec, source-only exact paths.
   'scripts/verify-colony-levels-v188.mjs',

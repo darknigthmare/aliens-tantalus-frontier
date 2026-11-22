@@ -22,7 +22,10 @@ import { filterAct5CampaignsV188, act5LockReasonV188, act5LockTextV188, applyAct
   startAct5CouncilV188, act5CouncilV188, decideAct5V188, advanceAct5ToEndingV188, act5EndingSummaryV188, finishAct5EndingV188, finishAct5EpilogueV188,
   finishAct5CreditsV188, act5StateV188, act5BridgeDueV188, act5BridgeSecondsV188, chooseAct5BridgeV188, ACT5_BRIDGE_TEXT_V188, ACT5_STANDOFF_TEXT_V188,
   act5CrewEpilogueLineV188, markAct5EpilogueTalkV188, act5LockerLabelV188, act5CinematicContextV188, deriveStoryWithAct5V188, act5SnapshotV188,
-  act5LateColonistsSavedV188, act5ConvoySetupV188, recordAct5TrailerDropV188, markAct5BridgeCrossedV188, recordAct5QueenKilledV188 } from './story-act5-v188.js';
+  act5LateColonistsSavedV188, act5ConvoySetupV188, recordAct5TrailerDropV188, markAct5BridgeCrossedV188, recordAct5QueenKilledV188,
+  ACT5_AUDIENCE_ID_V188, startAct5AudienceV188, act5AudienceDueV188 } from './story-act5-v188.js';
+import { confrontationViewV188, playConfrontationMoveV188 } from './confrontation-v188.js';
+import { openConfrontationDialogV188 } from './confrontation-ui-v188.js';
 import { isAct5RaceCampaignV188, act5RaceCueV188 } from './act5-convoy-race-v188.js';
 import { Act5AssetLoaderV188, watchAct5PictureV188 } from './act5-slots-v188.js';
 import { storyDossierV188 } from './story-dossier-v188.js';
@@ -1878,6 +1881,7 @@ function act5OnViewV188() {
   if (action === 'council') { openAct5CouncilV188(); return true; }
   if (action === 'ending') { void playAct5EndingV188(); return true; }
   if (action === 'credits') { void playAct5CreditsV188(); return true; }
+  if (action === 'audience') { openAct5AudienceV188(); return true; }
   let outcome = null;
   if (!commitCandidateV188(candidate => { outcome = advanceAct5ToEndingV188(candidate); return outcome ? true : false; })) return true;
   if (!outcome.standoff) { void playAct5EndingV188(); return true; }
@@ -1887,6 +1891,21 @@ function act5OnViewV188() {
   act5SceneV188({ slot: 'quay-standoff', title: ACT5_STANDOFF_TEXT_V188.title[lang], text, options: [{ id: 'continue', label: lang === 'en' ? 'CONTINUE' : 'CONTINUER' }],
     onClose: () => { act5FlowOpenV188 = false; void playAct5EndingV188(); } });
   return true;
+}
+// Spec 010: « Tenir la colonie » — the quay is a no-shooting hearing with Halloran. Each exchange is
+// committed at once (a reload resumes at the next clause); its outcome feeds act5.standoff, then the
+// table moves on to the quay scene and the ending as before.
+function openAct5AudienceV188() {
+  if (document.querySelector('[data-confrontation-v188]')) return;
+  if (!commitCandidateV188(candidate => startAct5AudienceV188(candidate))) return;
+  const lang = act5LangV188();
+  act5FlowOpenV188 = true;
+  const dialog = openConfrontationDialogV188({ language: lang,
+    reducedMotion: Boolean(saveSystem.data.settings?.reducedMotion || globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches),
+    getView: () => confrontationViewV188(saveSystem.data, ACT5_AUDIENCE_ID_V188, lang),
+    onMove: pieceId => { let move = null; commitCandidateV188(candidate => { move = playConfrontationMoveV188(candidate, ACT5_AUDIENCE_ID_V188, pieceId); return move ? true : false; }); return move; },
+    onClose: () => { act5FlowOpenV188 = false; queueMicrotask(() => act5OnViewV188()); } });
+  if (!dialog) act5FlowOpenV188 = false;
 }
 function openAct5CouncilV188() {
   if (document.querySelector('[data-act5-scene-v188]')) return;
@@ -2040,6 +2059,8 @@ function renderAct5PanelV188() {
   }
   const button = (label, onclick) => { const entry = Object.assign(document.createElement('button'), { type: 'button', className: 'button compact', textContent: label, onclick }); entry.dataset.act5PanelV188 = 'true'; parts.push(entry); };
   if (['council', 'ending', 'credits'].includes(snapshot.phase) || (!snapshot.phase && snapshot.open)) button(en ? 'OPEN' : 'OUVRIR', () => { if (!saveSystem.data.strategy.currentOperation) act5OnViewV188(); });
+  if (act5AudienceDueV188(saveSystem.data)) { hint(en ? 'The quay: a hearing with Halloran, without shooting. Answer each clause with a piece of the QZ17 file.' : 'Le quai : audience avec Halloran, sans tir. Répondez à chaque clause par une pièce du dossier QZ17.');
+    button(en ? 'QUAY HEARING' : 'AUDIENCE AU QUAI', () => { if (!saveSystem.data.strategy.currentOperation) act5OnViewV188(); }); }
   if (snapshot.phase === 'epilogue') { hint(en ? 'Epilogue: talk to the crew, then read the ECHO-8 locker in the cryo bay.' : 'Épilogue : parlez à l’équipage, puis lisez le casier ECHO-8 en baie cryo.');
     button(en ? 'THE TANTALUS LEAVES' : 'LE TANTALUS REPART', () => act5LockerOnReadV188()); }
   if (snapshot.complete) hint(en ? 'Campaign complete: free play continues.' : 'Campagne terminée : la partie continue.');

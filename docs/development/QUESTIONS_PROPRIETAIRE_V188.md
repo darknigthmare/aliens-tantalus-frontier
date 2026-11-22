@@ -717,6 +717,32 @@ Décisions reçues hors questionnaire après la course du convoi de l'Acte V (`c
 
 Aucune de ces décisions ne certifie une fidélité « 1:1 ».
 
+## Face-à-face sans tir (2026-11-22, spec 010) — décisions par défaut et questions
+
+Lot de la première mécanique nouvelle de Q17 A. Valeurs et règles appliquées par défaut (option recommandée), réglables sans nouvelle décision ; détail dans la bible (§5.11, « Audience au quai ») et `specs/010-face-a-face/`.
+
+### Q-010-1. Le quai peut-il être perdu avec 5 pièces ou plus ? [PRODUCTION]
+*Contexte : Q4 A fixait le retrait des commandos à 5 pièces, sans jeu. L'audience garde ce seuil comme borne (impossible sous 5, gagnable à partir de 5), mais une audience mal menée est perdue même avec 7 pièces.*
+- A. Oui : l'audience décide, le dossier ouvre seulement la possibilité. **(Appliqué par défaut)** — c'est le sens d'un face-à-face joué.
+- B. Non : avec 5 pièces ou plus, une audience perdue est rejouable jusqu'au retrait.
+- C. L'audience devient facultative : un bouton « lire le dossier » applique directement Q4 A.
+
+### Q-010-2. Effet de l'interrogatoire de CASSIUS sur la décision S2 [PRODUCTION]
+*Contexte : entrée prête (`station-s2-cassius`), non raccordée ; aucune fin ni option nouvelle.*
+- A. Gagné : CASSIUS « ne résiste pas » à *Réécrire* (texte seulement) ; perdu : rien ne change. **(Recommandé)**
+- B. Perdu : *Réécrire* fermé, seuls *Brider* et *Effacer* restent.
+- C. Aucun effet, l'interrogatoire est seulement narratif.
+
+### Q-010-3. Interroger BISHOP-9 après CIN-41 (Interlude) [PLUS TARD]
+*Contexte : CIN-41 dit que « personne ne l'a interrogé ». Le système le permet, mais aucune décision existante n'est à nourrir.*
+- A. Plus tard, avec la quête `station-a-bishop` (« Accès administrateur »). **(Recommandé)**
+- B. Ne pas l'ajouter.
+
+### Q-010-4. Halloran : directrice ou représentant [PRODUCTION]
+*Contexte : la bible (§2.3, §5.2, CIN-20) dit « Directrice Halloran » ; des répliques plus anciennes de l'Acte V disent « le représentant Halloran » et « il bluffe » (`story-act5-v188.js`, conseil de guerre). L'audience suit la bible (féminin).*
+- A. Directrice : corriger les deux répliques du conseil. **(Recommandé)**
+- B. Garder les deux formes.
+
 ## Décisions du propriétaire (2026-11-22, second tour) — appliquées
 
 Décisions reçues après la livraison `48b0a599` (D1-D4d ci-dessus). Elles lèvent les réserves « Reste ouvert » de D1, D4a et D4b. Base : `48b0a599`.
