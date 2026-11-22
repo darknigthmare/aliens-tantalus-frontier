@@ -802,7 +802,7 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
   },
   "sw.js": {
     "previousSha256": "8352d786320ead53a5cdcbb8582ee1d1d2212798a0b92b006f07d912ac254cec",
-    "currentSha256": "1c7c4c51ece0839b7d41de1db5d7306f374f540a96260ab205d702398a387aec"
+    "currentSha256": "b689fff077b1e8fa0ca5ef10d4b37ef7ab84c74352b0799fa868fd141f930c89"
   },
   "title-screen-v61.css": {
     "previousSha256": "3a748b04d5e6c9a7e04c189b2c1910c3163a0840968be6bcbb6352e10e16369f",
