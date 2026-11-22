@@ -148,6 +148,7 @@ const OPTION_TEXT = Object.freeze({
   cede: t('Laisser la compagnie récupérer le dépôt et négocier l’évacuation.', 'Let the company recover the depot and negotiate the evacuation.'),
   restitution: t('Halloran parle de « restitution » : avec 2 conteneurs ou plus à bord, céder ne coûte aucun moral à l’équipage.', 'Halloran calls it "restitution": with 2 or more containers aboard, ceding costs the crew no morale.'),
   noRestitution: t('Sans conteneur à rendre, céder pèse sur le moral de l’équipage.', 'With no container to hand back, ceding weighs on the crew’s morale.'),
+  restitutionFreight: t('Les conteneurs voyagent dans la remorque de fret : perdus en route, ils ne comptent plus comme rendus.', 'The containers ride in the freight trailer: lost on the way, they no longer count as handed back.'),
   recovery: t('Halloran exige aussi la créature capturée : tenir la colonie déclenche une tentative de récupération à bord du Tantalus.', 'Halloran also demands the captured creature: holding the colony triggers a recovery attempt aboard the Tantalus.'),
   transmitClosed: t('« Transmettre » n’est pas ouvert :', '"Transmit" is not open:'),
   needRetake: t('Asphodèle n’est pas reprise (S4)', 'Asphodèle is not retaken (S4)'),
@@ -178,6 +179,7 @@ export function act5CouncilV188(save, language = 'fr', context = {}) {
   const list = options.map(option => {
     const notes = [];
     if (option.id === 'cede') notes.push(option.restitution ? OPTION_TEXT.restitution[lang] : OPTION_TEXT.noRestitution[lang]);
+    if (option.id === 'cede' && option.restitution) notes.push(OPTION_TEXT.restitutionFreight[lang]);
     if (option.id === 'hold' && option.recoveryAttemptAboard) notes.push(OPTION_TEXT.recovery[lang]);
     return Object.freeze({ id: option.id, label: FINAL_OPTIONS_V188[option.id].label[lang], description: OPTION_TEXT[option.id][lang],
       ending: ENDINGS_V188[option.ending][lang], notes: Object.freeze(notes) });
@@ -311,6 +313,28 @@ export const recordAct5QueenKilledV188 = save => act5StateV188(save).phase === '
 /** The trailers really lost, for the debrief and the epilogue. */
 export const act5ConvoyDropsV188 = save => Object.freeze(convoyOf(act5StateV188(save)).drops.map(drop => Object.freeze({ ...drop })));
 
+// —— Freight brought back (owner decision 2026-11-22, bible §5.7.1, §5.11) ——
+// The Act III containers ride in the freight trailer (act5ConvoySetupV188). A freight trailer left on the
+// bridge (the bridge decision, its default included) or later on the road takes them with it: they no
+// longer count as brought back. Halloran's « restitution » (2 containers or more) needs them at the port.
+export const ACT5_RESTITUTION_CONTAINERS_V188 = 2;
+/** Where the freight trailer was lost, or null: { mission, cause, place: 'ravine' | 'road' }. */
+export function act5FreightLossV188(save) {
+  const state = act5StateV188(save), drop = convoyOf(state).drops.find(entry => entry.trailer === 'freight') || null;
+  if (drop) return Object.freeze({ mission: drop.mission, cause: drop.cause,
+    place: drop.mission === 'act5-last-run' && ['bridge', 'timeout', 'collapse'].includes(drop.cause) ? 'ravine' : 'road' });
+  if (state.bridge === 'freight') return Object.freeze({ mission: 'act5-last-run', cause: state.bridgeTimedOut ? 'timeout' : 'bridge', place: 'ravine' });
+  return null;
+}
+export const act5ManifestContainersV188 = save => Math.max(0, Math.floor(Number(normalizeStoryCampaignV188(save?.storyCampaignV188).m577Manifest?.containers) || 0));
+/** Containers really brought back to the port: none once the freight trailer is lost. */
+export const act5ContainersBroughtBackV188 = save => act5FreightLossV188(save) ? 0 : act5ManifestContainersV188(save);
+/** « Céder le dépôt » is still presented as a restitution: promised at the council and enough containers arrived. */
+export function act5RestitutionHeldV188(save) {
+  const decision = act5StateV188(save).decision;
+  return Boolean(decision?.option === 'cede' && decision.restitution && act5ContainersBroughtBackV188(save) >= ACT5_RESTITUTION_CONTAINERS_V188);
+}
+
 /** In the operation resolution (finalizeOperation candidate). Returns what changed, or null. */
 export function applyAct5OperationResultV188(save, { success, campaignId } = {}) {
   if (!success || !isAct5CampaignV188(campaignId)) return null;
@@ -355,9 +379,15 @@ export function act5TableActionV188(save) {
 export function advanceAct5ToEndingV188(save) {
   const action = act5TableActionV188(save);
   if (action !== 'standoff' && action !== 'to-ending') return null;
-  const standoff = act5StandoffOutcomeV188(save);
-  writeAct5(save, state => { state.standoff = standoff; state.phase = 'ending'; });
-  return Object.freeze({ standoff });
+  const standoff = act5StandoffOutcomeV188(save), decision = act5StateV188(save).decision;
+  // Owner decision 2026-11-22: a restitution promised at the council but whose freight was lost costs the
+  // morale « Céder » without restitution costs (§5.7.1), once, when Halloran takes the depot.
+  const restitutionLost = Boolean(decision?.option === 'cede' && decision.restitution && !act5RestitutionHeldV188(save) && !act5StateV188(save).restitutionLostV188);
+  writeAct5(save, state => { state.standoff = standoff; state.phase = 'ending'; if (restitutionLost) state.restitutionLostV188 = true; });
+  if (restitutionLost && Array.isArray(save.crew)) {
+    for (const member of save.crew) if (member && Number.isFinite(Number(member.stress))) member.stress = Math.min(100, Number(member.stress) + ACT5_CEDE_STRESS_V188);
+  }
+  return Object.freeze({ standoff, ...(restitutionLost ? { restitutionLost: true } : {}) });
 }
 export const finishAct5EndingV188 = save => act5StateV188(save).phase === 'ending' && writeAct5(save, state => { state.phase = 'epilogue'; });
 
@@ -370,7 +400,12 @@ const ENDING_TEXT = Object.freeze({
   'freight-first': t('La colonie passe sous administration de la compagnie. Inez Harlow démissionne. Le dossier est classé « incident technique ».',
     'The colony passes under company administration. Inez Harlow resigns. The file is closed as a "technical incident".'),
   'living-without-proof': t('La colonie tient cette nuit-là, mais la clause s’applique. La capitaine Vega est relevée à l’arrivée.',
-    'The colony holds that night, but the clause applies. Captain Vega is relieved on arrival.')
+    'The colony holds that night, but the clause applies. Captain Vega is relieved on arrival.'),
+  // Owner decision 2026-11-22: « Céder » and the freight brought back (or not).
+  restitution: t('Halloran présente la cession du dépôt comme une « restitution » : {0} conteneurs QZ17 rendus à la compagnie.',
+    'Halloran presents the handover of the depot as a "restitution": {0} QZ17 containers returned to the company.'),
+  restitutionLost: t('Le fret perdu en route ne revient pas : Halloran ne parle plus de « restitution », et la cession pèse sur le moral de l’équipage.',
+    'The freight lost on the way does not come back: Halloran no longer speaks of a "restitution", and the handover weighs on the crew’s morale.')
 });
 export function act5EndingSummaryV188(save, language = 'fr') {
   const lang = L(language), state = act5StateV188(save);
@@ -379,8 +414,11 @@ export function act5EndingSummaryV188(save, language = 'fr') {
   if (ending === 'relay-speaks') lines.push(tier === 'autonomous' ? ENDING_TEXT.autonomous[lang] : ENDING_TEXT.suspended[lang]);
   if (state.standoff) lines.push(ACT5_STANDOFF_TEXT_V188[state.standoff][lang]);
   if (state.decision.recoveryAttempt && state.decision.option === 'hold') lines.push(ACT5_STANDOFF_TEXT_V188.recovery[lang]);
+  if (state.decision.option === 'cede' && state.decision.restitution) lines.push(act5RestitutionHeldV188(save)
+    ? ENDING_TEXT.restitution[lang].replace('{0}', String(act5ContainersBroughtBackV188(save))) : ENDING_TEXT.restitutionLost[lang]);
   return Object.freeze({ ending, title: ENDINGS_V188[ending][lang], cinematic: ACT5_ENDING_CINEMATICS_V188[ending], lines: Object.freeze(lines),
-    charterKept: ending === 'relay-speaks' && tier === 'autonomous', tier });
+    charterKept: ending === 'relay-speaks' && tier === 'autonomous', tier, containersBroughtBack: act5ContainersBroughtBackV188(save),
+    restitution: act5RestitutionHeldV188(save), freightLost: Boolean(act5FreightLossV188(save)) });
 }
 /** CIN-61: the real sum of the campaign's rescues (quay civilians, M577 colonists, late colonists). */
 export function act5RollCallV188(save) { return colonyRescuedV188(save) + act5LateColonistsSavedV188(save); }
@@ -476,6 +514,13 @@ const EPILOGUE_TEXT = Object.freeze({
   vegaRelieved: t('Mara Vega est relevée de son commandement.', 'Mara Vega is relieved of her command.'),
   inezResigned: t('Inez Harlow quitte le Tantalus.', 'Inez Harlow leaves the Tantalus.'),
   cryo: t('Le Tantalus se prépare à repartir : la baie cryo rouvre ses caissons.', 'The Tantalus prepares to leave: the cryo bay reopens its pods.'),
+  // Owner decision 2026-11-22: the epilogue names the lost freight.
+  freightRavine: t('Fret perdu : la remorque est au fond du ravin du pont avec {0} conteneur(s) QZ17 ; rien n’en a été ramené.',
+    'Freight lost: the trailer lies at the bottom of the bridge ravine with {0} QZ17 container(s); none of it was brought back.'),
+  freightRoad: t('Fret perdu : la remorque est restée sur la route du port avec {0} conteneur(s) QZ17 ; rien n’en a été ramené.',
+    'Freight lost: the trailer was left on the port road with {0} QZ17 container(s); none of it was brought back.'),
+  freightEmptyRavine: t('Fret perdu : la remorque de fret, vide, est au fond du ravin du pont.', 'Freight lost: the empty freight trailer lies at the bottom of the bridge ravine.'),
+  freightEmptyRoad: t('Fret perdu : la remorque de fret, vide, est restée sur la route du port.', 'Freight lost: the empty freight trailer was left on the port road.'),
   locker: t('Casier ECHO-8 :', 'ECHO-8 locker:')
 });
 /** Every epilogue fact, each from recorded state: CASSIUS, the colony, crew trust, the dossier, the locker, Echo-9's line. */
@@ -494,6 +539,10 @@ export function act5EpilogueV188(save, language = 'fr') {
   facts.push({ id: 'crew', text: `${EPILOGUE_TEXT.solid[lang]} ${solid}.${ending === 'living-without-proof' ? ` ${EPILOGUE_TEXT.vegaRelieved[lang]}` : ''}${ending === 'freight-first' ? ` ${EPILOGUE_TEXT.inezResigned[lang]}` : ''}` });
   const outcome = normalizeStoryCampaignV188(save?.storyCampaignV188).interlude?.outcome;
   if (outcome) facts.push({ id: 'creature', text: EPILOGUE_TEXT[outcome][lang] });
+  const freight = act5FreightLossV188(save), carried = act5ManifestContainersV188(save);
+  if (freight) facts.push({ id: 'freight', text: carried
+    ? EPILOGUE_TEXT[freight.place === 'ravine' ? 'freightRavine' : 'freightRoad'][lang].replace('{0}', String(carried))
+    : EPILOGUE_TEXT[freight.place === 'ravine' ? 'freightEmptyRavine' : 'freightEmptyRoad'][lang] });
   facts.push({ id: 'cryo', text: EPILOGUE_TEXT.cryo[lang] });
   facts.push({ id: 'locker', text: `${EPILOGUE_TEXT.locker[lang]} ${act5LockerLabelV188(save, lang)}.` });
   const origin = ACT5_ORIGIN_RETURN_LINES_V188[save?.player?.originV188] || ACT5_ORIGIN_RETURN_LINES_V188['origin-20'];

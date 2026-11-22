@@ -21,6 +21,7 @@ import {
   ACT5_CAMPAIGNS_V188, ACT5_CAMPAIGN_IDS_V188, ACT5_NAMES_EN_V188, act5OpenV188, act5StateV188, act5LockReasonV188, act5LockTextV188,
   filterAct5CampaignsV188, act5MissionPathV188, startAct5CouncilV188, act5CouncilV188, decideAct5V188, applyAct5LaunchAdvantagesV188,
   act5BridgeDueV188, act5BridgeSecondsV188, chooseAct5BridgeV188, act5LateColonistsSavedV188, applyAct5OperationResultV188, act5TableActionV188,
+  act5RestitutionHeldV188, act5ContainersBroughtBackV188, act5FreightLossV188,
   advanceAct5ToEndingV188, act5EndingSummaryV188, finishAct5EndingV188, act5RollCallV188, act5EpilogueV188, act5CrewEpilogueLineV188,
   markAct5EpilogueTalkV188, act5LockerLabelV188, finishAct5EpilogueV188, finishAct5CreditsV188, act5CompleteV188, act5ObjectiveV188,
   deriveStoryWithAct5V188, act5SnapshotV188, act5CinematicContextV188, normalizeAct5V188, ACT5_ADVISORS_V188, ACT5_CREW_EPILOGUE_V188,
@@ -387,11 +388,33 @@ test('ending « Les vivants, sans preuve »: Hold; the quay is won with 5 pieces
 });
 
 test('ending « Le fret d’abord »: Cede; restitution with 2+ containers, otherwise the crew pays in morale', () => {
+  // Owner decision 2026-11-22: the containers ride in the freight trailer; the restitution needs them at the
+  // port, so the bridge here keeps the freight (the colonists' trailer is the one left).
   const restitution = threshold({ containers: 2 });
   const stress = restitution.crew.map(member => member.stress);
-  toEnding(restitution, 'cede');
+  toEnding(restitution, 'cede', { bridge: 'colonists' });
   assert.equal(act5StateV188(restitution).decision.ending, 'freight-first'); assert.equal(act5StateV188(restitution).decision.restitution, true);
   assert.deepEqual(restitution.crew.map(member => member.stress), stress);
+  assert.equal(act5RestitutionHeldV188(restitution), true); assert.equal(act5ContainersBroughtBackV188(restitution), 2);
+  assert.match(act5EndingSummaryV188(restitution, 'fr').lines.join(' '), /« restitution » : 2 conteneurs QZ17 rendus/);
+  assert.ok(!act5EpilogueV188(restitution, 'en').some(fact => fact.id === 'freight'));
+  assert.equal(act5StateV188(restitution).restitutionLostV188, undefined);
+  // The same council, but the freight trailer goes down with the bridge: no restitution, the morale cost once.
+  const lost = threshold({ containers: 2 });
+  const lostBefore = lost.crew.map(member => member.stress);
+  toEnding(lost, 'cede', { bridge: 'freight' });
+  assert.equal(act5StateV188(lost).decision.restitution, true, 'the council record is unchanged');
+  assert.equal(act5ContainersBroughtBackV188(lost), 0); assert.equal(act5RestitutionHeldV188(lost), false);
+  assert.ok(lost.crew.every((member, index) => member.stress === Math.min(100, lostBefore[index] + 10)), 'the morale cost of a cede without restitution');
+  assert.equal(act5StateV188(lost).restitutionLostV188, true);
+  assert.equal(advanceAct5ToEndingV188(lost), null, 'applied once');
+  const lostSummary = act5EndingSummaryV188(lost, 'en');
+  assert.equal(lostSummary.freightLost, true); assert.equal(lostSummary.restitution, false);
+  assert.match(lostSummary.lines.join(' '), /no longer speaks of a "restitution"/);
+  assert.match(act5EndingSummaryV188(lost, 'fr').lines.join(' '), /ne parle plus de « restitution »/);
+  assert.match(act5EpilogueV188(lost, 'fr').find(fact => fact.id === 'freight').text, /ravin du pont avec 2 conteneur\(s\) QZ17/);
+  assert.match(act5EpilogueV188(lost, 'en').find(fact => fact.id === 'freight').text, /bridge ravine with 2 QZ17 container\(s\)/);
+  assert.equal(normalizeAct5V188(JSON.parse(JSON.stringify(act5StateV188(lost)))).restitutionLostV188, true, 'additive field survives a reload');
   assert.equal(act5StateV188(restitution).standoff, null, 'no quay standoff when the depot is ceded');
   assert.deepEqual(act5MissionPathV188('cede'), ['act5-last-run', 'act5-depot-queen', 'act5-evacuation']);
   const plain = threshold({ containers: 1 });

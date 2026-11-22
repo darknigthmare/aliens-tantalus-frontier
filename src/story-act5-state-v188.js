@@ -65,6 +65,9 @@ export function normalizeAct5V188(raw) {
   state.lockerRead = raw.lockerRead === true;
   const convoy = normalizeAct5ConvoyV188(raw.convoyV188);
   if (convoy) state.convoyV188 = convoy;
+  // Owner decision 2026-11-22 (additive, absent from older saves): the restitution promised at the council
+  // fell through because the freight trailer was lost; its morale cost was applied once, on the way to the ending.
+  if (raw.restitutionLostV188 === true && state.decision?.option === 'cede' && state.decision.restitution) state.restitutionLostV188 = true;
   if (!state.phase) return null;
   return state;
 }

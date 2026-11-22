@@ -398,6 +398,18 @@ test('APC boarding finalization: the real 20→21 kill pays 1300→1310 before t
   assert.equal(subject.save.strategy.lastOperation.apcCourseResultV131.kills, 21);
 });
 
+test('Act III convoy: the M577 to scale (owner decision 2026-11-22), nose left in view, legacy checkpoints still accepted', async t => {
+  const subject = await convoyBoardingAccountingFixture(t, { survivor: false }), engine = subject.engine, v = engine.vehicle;
+  assert.equal(v.w, 449); assert.equal(v.h, 112); assert.equal(v.facing, -1); assert.equal(v.x, 805);
+  assert.ok(v.x >= 0 && v.x + v.w <= 1280, 'the whole hull in the 1280 px view');
+  engine.refreshSpriteCollisionProfiles(); assert.equal(v.spriteHitbox.id, 'm577-scale-v188', 'collisions on the scaled hull');
+  const capture = engine.captureResumeState();
+  assert.equal(engine.validateApcConvoyResumeV121(capture).valid, true);
+  // A checkpoint written before the scale change (190 × 104 box at x 955) still validates; the hull is re-pinned to scale.
+  const legacy = structuredClone(capture); Object.assign(legacy.vehicle, { x: 955, y: 570 - 104, w: 190, h: 104 });
+  assert.equal(engine.validateApcConvoyResumeV121(legacy).valid, true);
+});
+
 test('APC boarding finalization: unchanged battle keeps the canonical reward and stale completion cannot emit twice', async t => {
   const subject = await convoyBoardingAccountingFixture(t, { survivor: false }), { engine, events, seq } = subject;
   const original = structuredClone(engine.mission.rewards);

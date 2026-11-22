@@ -226,3 +226,62 @@ test('wiring: composition, app launch and save flow, i18n, service worker shell'
   for (const file of ['act5-convoy-race-v188.js', 'act5-convoy-race-runtime-v188.js']) assert.ok(sw.includes(`'/src/${file}'`), file);
   void act5RaceRearV188;
 });
+
+// —— Owner decisions of 2026-11-22 ——
+test('M577 to scale: 8.8 m at 51 px/m [À VÉRIFIER], wheels on the road, hitch and turret on the hull, whole convoy in view', async () => {
+  const { M577_SCALE_V188, M577_MISSION_SLOT_V188, m577AnchorsV188, drawM577ScaledPlaceholderV188, m577ScaleCampaignV188 } = await import('../src/m577-scale-v188.js');
+  assert.equal(M577_SCALE_V188.status, 'À VÉRIFIER'); assert.equal(M577_SCALE_V188.w, Math.round(M577_SCALE_V188.metres * CREATURE_SCALE_V188.pixelsPerMetre));
+  assert.equal(M577_MISSION_SLOT_V188.present, false, 'placeholder only: no file requested');
+  for (const id of ['special-apc-convoy', 'act5-last-run', 'act5-depot-queen']) assert.ok(m577ScaleCampaignV188(id), id);
+  const { engine } = await fixture('act5-last-run');
+  const v = engine.vehicle, snap = engine.act5RaceSnapshotV188();
+  assert.equal(v.w, 449); assert.equal(v.h, 112); assert.equal(snap.apcPx.metres, 8.8);
+  assert.equal(+engine.act5RaceV188.apc.length.toFixed(2), 8.8, 'the rules use the drawn length (449 / 51)');
+  assert.equal(v.y + v.h, 570, 'feet on the road line'); assert.ok(v.x >= 0 && v.x + v.w <= 1280, 'the hull stays in view');
+  // Collision box = the hull to scale (no legacy 190 px sprite cell).
+  assert.equal(v.spriteHitbox.id, 'm577-scale-v188'); assert.equal(v.spriteHitbox.local.w, 445);
+  // The first drawbar hangs on the rear hitch; the trailers keep 4.6 m.
+  const a = m577AnchorsV188(v); assert.equal(a.rearHitch.x, v.x); assert.equal(a.rearHitch.y, 570 - 24);
+  assert.ok(a.turret.x > v.x && a.turret.x < v.x + v.w / 2, 'rear roof turret'); assert.ok(a.seat.x > v.x + v.w / 2, 'cab behind the nose');
+  assert.equal(snap.trailerPx.w, 235);
+  const rearScreen = engine.act5ScreenXV188(act5RaceRearV188(engine.act5RaceV188));
+  assert.ok(rearScreen > 0, `the two trailers fit behind the M577 (${Math.round(rearScreen)} px)`);
+  // The placeholder: tyres touch the feet line, nothing below it, drawn length = 449 px.
+  const pts = []; const m = { tx: 0, ty: 0, sx: 1 };
+  const probe = new Proxy({}, { get: (target, key) => key === 'translate' ? (x, y) => { m.tx += x * m.sx; m.ty += y; } : key === 'scale' ? (sx) => { m.sx *= sx; }
+    : key === 'arc' ? (x, y, r) => pts.push({ x: m.tx + x * m.sx, y: m.ty + y + r }) : ['moveTo', 'lineTo'].includes(key) ? (x, y) => pts.push({ x: m.tx + x * m.sx, y: m.ty + y }) : () => {} });
+  drawM577ScaledPlaceholderV188(probe, 100, 600, 1);
+  assert.equal(Math.max(...pts.map(p => p.y)), 600, 'wheels on the feet line');
+  const xs = pts.map(p => p.x); assert.ok(Math.min(...xs) >= 100 - 1 && Math.max(...xs) <= 100 + 449 + 1, `${Math.min(...xs)}…${Math.max(...xs)}`);
+});
+
+test('Queen: hurt, staggered and thrown back during the chase, never killed before the port junction; killable only there', () => {
+  const state = createAct5RaceStateV188({ campaignId: 'act5-depot-queen', trailers: [{ id: 'colonists', people: 4 }], queenProfile: queen }); engageAct5RaceV188(state);
+  const floor = Math.ceil(state.queen.maxHealth * ACT5_RACE_V188.queen.chaseFloor), seen = [];
+  let lowest = Infinity, killedAt = null;
+  for (let n = 0; n < 300 * 60 && !state.complete && !state.failed; n++) {
+    for (const event of stepAct5RaceV188(state, 1 / 60, { throttle: 1, fire: true })) { seen.push(event.type); if (event.type === 'queen-killed') killedAt = state.apc.s; }
+    if (act5RacePhaseV188(state) === 'chase') { lowest = Math.min(lowest, state.queen.health); assert.notEqual(state.queen.state, 'dead', 'alive on the road'); }
+    for (const [from, to] of state.queen.trail || []) assert.ok(ACT5_QUEEN_TRANSITIONS_V188[from].includes(to), `${from}→${to}`);
+  }
+  assert.equal(lowest, floor, 'the road chase brings her down to her floor, not below');
+  assert.ok(seen.includes('queen-recoil'), 'she is thrown back under fire at her floor');
+  assert.equal(state.complete, true); assert.equal(state.queen.state, 'dead');
+  assert.ok(killedAt >= state.length, `killed at the junction (${killedAt} m)`);
+  assert.deepEqual(ACT5_QUEEN_TRANSITIONS_V188.recoil, ['stalk'], 'recoil always returns to the chase');
+  assert.equal(act5RaceCueV188({ type: 'act5-race-queen-v188', id: 'recoil' }), 'cry-queen');
+});
+
+test('freight: a freight trailer lost on the road takes the containers with it (restitution and epilogue)', async () => {
+  const { act5FreightLossV188, act5ContainersBroughtBackV188, act5RestitutionHeldV188, act5EpilogueV188 } = await import('../src/story-act5-v188.js');
+  const save = act5Save('cede'); save.storyCampaignV188.act5.decision.restitution = true;
+  assert.equal(act5ContainersBroughtBackV188(save), 2); assert.equal(act5RestitutionHeldV188(save), true);
+  assert.equal(recordAct5TrailerDropV188(save, { trailer: 'colonists', campaignId: 'act5-last-run', cause: 'bridge', metres: 720 }), true);
+  save.galaxy.completedCampaignIds.push('act5-last-run');
+  assert.equal(act5RestitutionHeldV188(save), true, 'the colonists were left: the freight still rides');
+  assert.equal(recordAct5TrailerDropV188(save, { trailer: 'freight', campaignId: 'act5-depot-queen', cause: 'decoy', metres: 900 }), true);
+  assert.deepEqual({ ...act5FreightLossV188(save) }, { mission: 'act5-depot-queen', cause: 'decoy', place: 'road' });
+  assert.equal(act5ContainersBroughtBackV188(save), 0); assert.equal(act5RestitutionHeldV188(save), false);
+  save.storyCampaignV188.act5.phase = 'epilogue';
+  assert.match(act5EpilogueV188(save, 'fr').find(fact => fact.id === 'freight').text, /route du port avec 2 conteneur/);
+});

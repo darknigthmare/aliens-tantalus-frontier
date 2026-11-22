@@ -149,7 +149,7 @@ export function withAct5ConvoyRaceV188(BaseEngine) {
     setCoop(enabled) { return super.setCoop(this.isAct5RaceV188() ? false : enabled); }
     refreshSpriteCollisionProfiles() {
       const result = super.refreshSpriteCollisionProfiles?.();
-      if (this.isAct5RaceV188() && this.vehicle?.m577ScaleV188) this.vehicle.spriteHitbox = m577HitboxRuntimeV188(this.vehicle);
+      if (this.act5RaceActiveV188 && this.vehicle?.m577ScaleV188) this.vehicle.spriteHitbox = m577HitboxRuntimeV188(this.vehicle);
       return result;
     }
     updateObjectiveRuntime(delta) { if (!this.isAct5RaceV188()) return super.updateObjectiveRuntime(delta); }
