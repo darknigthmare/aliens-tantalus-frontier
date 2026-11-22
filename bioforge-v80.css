@@ -452,3 +452,10 @@ html.bioforge-mode body {
     backdrop-filter: none;
   }
 }
+
+/* V188 (spec 013): the sticky actions bar is opaque and also covers the terminal's
+   bottom padding, so scrolled composition text never shows through or under it. */
+.bioforge-actions-v80 {
+  background: #04100c;
+  box-shadow: 0 14px 0 0 #04100c, 0 -8px 12px rgba(4, 16, 12, .9);
+}

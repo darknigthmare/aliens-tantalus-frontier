@@ -644,6 +644,11 @@ function handleBioforgeEventV80(event) {
   if (event?.type === 'bioforge-asset-error') toast(`BIOFORGE · image indisponible : ${event.assetId || 'asset inconnu'}.`);
   if (event?.type === 'bioforge-exit-locked') toast('BIOFORGE · sortie verrouillée tant que la purge n’est pas complète.');
   // V188 containment lab: read-only reports, the control console and the physical exit.
+  if (event?.type === 'bioforge-ambulatory-started' && bioforgeUiV80) {
+    bioforgeUiV80.labWalkV188 = true;
+    bioforgeUiV80.terminalExpandedV87 = false;
+    bioforgeUiV80.syncTerminalV87?.();
+  }
   if (event?.type === 'bioforge-lab-report' && status && typeof event.text === 'string') status.textContent = event.text;
   if (event?.type === 'bioforge-terminal-requested' && bioforgeUiV80) {
     bioforgeUiV80.terminalExpandedV87 = true;
@@ -680,6 +685,7 @@ function prepareBioforgeViewV80() {
   }
   // V188: the lab can be walked (no session, or the exit after a purge) while this view is shown.
   bioforgeRuntimeV80.armBioforgeAmbulatoryV188?.(true);
+  if (bioforgeUiV80) bioforgeUiV80.labWalkV188 = false;
   renderBioforgeUiV87({ state: bioforgeRuntimeV80.bioforgeRootV80, resetDraft: true });
 }
 
@@ -693,6 +699,7 @@ function startBioforgeFromTerminalV80(configuration) {
     seed: 80000 + Number(saveSystem.data.bioforgeV80?.serial || 0) + 1
   }));
   if (result?.applied !== false) {
+    if (bioforgeUiV80) bioforgeUiV80.labWalkV188 = false;
     renderBioforgeUiV87({ state: bioforgeRuntimeV80.bioforgeRootV80 });
     byId('bioforge-canvas-v80').focus({ preventScroll: true });
   }

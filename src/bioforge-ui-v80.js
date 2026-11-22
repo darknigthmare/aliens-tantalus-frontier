@@ -415,7 +415,8 @@ export class BioforgeUiV80 {
     else terminal.appendChild(this.terminalToggleV87);
   }
   syncTerminalV87() {
-    const active = Boolean(this.model?.active);
+    // V188: a lab walk (no session, or the exit after a purge) also reduces the terminal.
+    const active = Boolean(this.model?.active) || this.labWalkV188 === true;
     this.root.dataset.terminalCompact = active && !this.terminalExpandedV87 ? 'true' : 'false';
     this.terminalToggleV87.hidden = !active;
     this.terminalToggleV87.textContent = this.terminalExpandedV87 ? 'RÉDUIRE LE TERMINAL' : 'AFFICHER LE TERMINAL';

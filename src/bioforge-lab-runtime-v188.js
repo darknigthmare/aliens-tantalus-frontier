@@ -26,6 +26,8 @@ export const BIOFORGE_AMBULATORY_KEYS_V188 = Object.freeze(['KeyA', 'KeyD', 'Arr
 export const BIOFORGE_PURGE_ANIMATION_SECONDS_V188 = 1.6;
 export const BIOFORGE_LAB_CAPTION_SECONDS_V188 = 4;
 const MOVE_KEYS = new Set(['KeyA', 'KeyD', 'ArrowLeft', 'ArrowRight']);
+const PHASE_LABELS_V188 = Object.freeze({ configuration: 'CONFIGURATION', sealing: 'SCELLEMENT', printing: 'IMPRESSION',
+  combat: 'COMBAT', result: 'RÉSULTAT', purging: 'PURGE', return: 'RETOUR' });
 const VIEW_W = 1280;
 
 function labRandom(seed = 188) {
@@ -204,8 +206,11 @@ export function withBioforgeContainmentLabV188(Base) {
     }
 
     resolveBioforgeLabPromptV188() {
-      return resolveBioforgeLabInteractionV188(this.bioforgeLevelV80, this.player,
+      const target = resolveBioforgeLabInteractionV188(this.bioforgeLevelV80, this.player,
         { mode: this.getBioforgeLabModeV188(), stage: this.bioforgeTransferStageV80 });
+      // A running or finished exit cycle needs no further press.
+      if (target?.kind === 'exit-decon' && (this.bioforgeExitDeconV188.active || this.bioforgeExitDeconV188.complete)) return null;
+      return target;
     }
 
     setBioforgeLabCaptionV188(text) {
@@ -353,11 +358,13 @@ export function withBioforgeContainmentLabV188(Base) {
       const zone = getBioforgeLabZoneV188((this.player?.x || 0) + (this.player?.w || 0) / 2);
       ctx.fillStyle = '#9be0ae';
       ctx.font = 'bold 13px monospace';
-      ctx.fillText(`BIOFORGE · ${String(snapshot.phase).toUpperCase()}${zone ? ` · ${zone.label}` : ''}`, x + 16, y + 24);
+      ctx.fillText(`BIOFORGE · ${PHASE_LABELS_V188[snapshot.phase] || String(snapshot.phase).toUpperCase()}${zone ? ` · ${zone.label}` : ''}`, x + 16, y + 24);
       ctx.fillStyle = '#ccd9cc';
       ctx.font = '12px monospace';
       const profileCount = new Set((snapshot.composition || []).map(line => line.profileId)).size;
-      const profileLabel = snapshot.profileId || (profileCount > 0 ? `MIXTE (${profileCount} PROFILS)` : 'AUCUN PROFIL');
+      const board = this.bioforgeLabDisplayCacheV188.board || [];
+      const single = profileCount === 1 ? board.find(row => row.profileId === snapshot.composition[0].profileId)?.name : null;
+      const profileLabel = single ? String(single).toUpperCase() : profileCount > 1 ? `MIXTE (${profileCount} PROFILS)` : 'AUCUN PROFIL';
       ctx.fillText(`${profileLabel} · ${snapshot.printed}/${snapshot.quantity} IMPRIMÉS · ${snapshot.kills} NEUTRALISÉS`, x + 16, y + 46);
       const instruction = this.getBioforgeLabInstructionV188(snapshot);
       if (instruction) {

@@ -84,13 +84,17 @@ function drawZoneLight(ctx, zone, view) {
   rect(ctx, color, cx - 26, top, 52, 4);
 }
 
+// Hanging zone sign, centred on the free span between the bulkhead partitions and
+// drawn after them so a partition never hides it.
 function drawSign(ctx, zone, view) {
-  const y = zone.ceilingY != null ? zone.ceilingY + 8 : view.level.world.ceilingY + (zone.id === 'containment-cell' ? 198 : 18);
-  const x = zone.id === 'containment-cell' ? zone.x + 48 : zone.x + 12;
-  const w = Math.min(zone.w - 24, 240);
-  rect(ctx, 'rgba(6,12,10,.86)', x, y, w, 34); frame(ctx, zone.light, x, y, w, 34, 1);
-  label(ctx, zone.label, x + 8, y + 15, { size: 11, color: '#e4efe6', bold: true });
-  label(ctx, zone.detail, x + 8, y + 28, { size: 9, color: zone.light });
+  const doorAt = (x) => view.doors.some(door => Math.abs(door.x + door.w / 2 - x) < 1);
+  const left = zone.x + (doorAt(zone.x) ? PARTITION_W / 2 : 0), right = zone.x + zone.w - (doorAt(zone.x + zone.w) ? PARTITION_W / 2 : 0);
+  const w = Math.max(150, Math.min(220, right - left - 8));
+  const x = Math.max(zone.x + 4, Math.min(zone.x + zone.w - w - 4, (left + right) / 2 - w / 2));
+  const y = zone.ceilingY != null ? zone.ceilingY - 46 : zone.id === 'containment-cell' ? BIOFORGE_OBSERVATION_GALLERY_V188.y + BIOFORGE_OBSERVATION_GALLERY_V188.h + 16 : view.level.world.ceilingY + 16;
+  rect(ctx, 'rgba(6,12,10,.9)', x, y, w, 34); frame(ctx, zone.light, x, y, w, 34, 1);
+  label(ctx, zone.label, x + w / 2, y + 15, { size: 11, color: '#e4efe6', bold: true, align: 'center' });
+  label(ctx, zone.detail, x + w / 2, y + 28, { size: 9, color: zone.light, align: 'center' });
 }
 
 function drawPartitions(ctx, view) {
@@ -312,15 +316,16 @@ export function drawBioforgeLabBackV188(ctx, view) {
     drawn++;
   }
   drawCatwalks(ctx, view);
-  for (const zone of BIOFORGE_LAB_ZONES_V188) if (visible(zone.x, zone.w, view.cameraX)) drawSign(ctx, zone, view);
   ctx.restore();
   return drawn;
 }
 
-/** Partition walls above the V80 bulkhead leaves (drawn after the leaves). */
+/** Partition walls above the V80 bulkhead leaves (drawn after the leaves), then zone signs. */
 export function drawBioforgeLabPartitionsV188(ctx, view) {
   if (!ctx || !view?.level) return;
-  ctx.save(); drawPartitions(ctx, view); ctx.restore();
+  ctx.save(); drawPartitions(ctx, view);
+  for (const zone of BIOFORGE_LAB_ZONES_V188) if (visible(zone.x, zone.w, view.cameraX)) drawSign(ctx, zone, view);
+  ctx.restore();
 }
 
 /** World-space front layer: VFX particles and the interaction prompt. */
@@ -340,14 +345,15 @@ export function drawBioforgeLabFrontV188(ctx, view) {
   }
 }
 
-/** Screen-space caption for a lab report (bottom left, above the touch bar). */
+/** Screen-space caption for a lab report (bottom right: the terminal occupies the left side). */
 export function drawBioforgeLabCaptionV188(ctx, caption) {
   if (!ctx || !caption?.text) return;
   ctx.save();
   ctx.font = '13px monospace';
-  const width = Math.min(1180, (ctx.measureText?.(caption.text)?.width || caption.text.length * 8) + 32);
-  rect(ctx, 'rgba(3,10,8,.9)', 24, 640, width, 34); frame(ctx, '#7fd8d0', 24, 640, width, 34, 1);
-  label(ctx, caption.text, 40, 662, { size: 13, color: '#dff3ea' });
+  const width = Math.min(820, (ctx.measureText?.(caption.text)?.width || caption.text.length * 8) + 32);
+  const x = VIEW_W - 24 - width;
+  rect(ctx, 'rgba(3,10,8,.9)', x, 640, width, 34); frame(ctx, '#7fd8d0', x, 640, width, 34, 1);
+  label(ctx, caption.text, x + 16, 662, { size: 13, color: '#dff3ea' });
   ctx.restore();
 }
 
