@@ -149,7 +149,7 @@ Les 206 paires `pair-NNN-mire` sont des reconstitutions génériques, pas les ar
 | Contamination et traitement, transformation d'un Marine | Manquant | Q57 : avec *Fièvre noire* |
 | Test biologique avec incertitude | Manquant | — |
 | Oxygène limité en plongée | Manquant | — |
-| Face-à-face sans tir, audience à choix de pièces | Manquant | Q17 : première mécanique à créer |
+| Face-à-face sans tir, audience à choix de pièces | Partiel | Q17 : première mécanique à créer. *2026-11-22 (spec 010) : système d'audience réutilisable piloté par des données (`confrontation-v188.js`), raccordé au quai de l'Acte V avec Halloran (issue → `act5.standoff`) ; entrée CASSIUS S2 prête, non raccordée ; portraits en substituts Canvas.* |
 | Retrait d'embryon | Manquant | — |
 | Blocage de murs mobiles | Manquant | — |
 | Choix CASSIUS, isolement des synthétiques du bord | Manquant | Voir §4 |
@@ -219,7 +219,7 @@ Vérifications : `node --test scripts/verify-asphodele-hub-v188.mjs` ; parcours 
 | Élément | Avant | Après | Preuve |
 | --- | --- | --- | --- |
 | Choix final et fins (§5.7.1) | Partiel (règles sans écran) | Partiel | Conseil de guerre à la table tactique, décision unique, trois fins atteignables ; textes [PROPOSÉ] à valider |
-| Acte V « Non viable » | Manquant | Partiel | Trois missions finales par ligne sur des gabarits existants, pont chronométré, face-à-face au quai, CIN-60, CIN-61 ; course APC et Reine dédiées absentes (Q1). *2026-11-21 : course et poursuite dédiées jouables, sprite de la Reine à produire.* |
+| Acte V « Non viable » | Manquant | Partiel | Trois missions finales par ligne sur des gabarits existants, pont chronométré, face-à-face au quai (audience sans tir avec Halloran pour *Tenir*, spec 010), CIN-60, CIN-61 ; course APC et Reine dédiées absentes (Q1). *2026-11-21 : course et poursuite dédiées jouables, sprite de la Reine à produire.* |
 | Épilogue (§5.8) | Manquant | Partiel | Au Tantalus : derniers mots, casier d'Echo-8, CIN-92, générique, partie libre ; plans fixes ailleurs (Q5 A) |
 | Option *Transmettre* | Bloquée (salle des relais) | Dépend du hub Asphodèle | Lue par défaut (`asphodeleRelayReadyV188`, hub Asphodèle) ; l'Acte V la propose quand elle est vraie |
 | Cinématiques CIN-60, CIN-61, CIN-90 (×3) | Manquant | Partiel | Lecteur Canvas du prologue, 15 emplacements en primitives (`src/act5-slots-v188.js`) |
