@@ -52,6 +52,7 @@
 - [x] T032 Fret perdu : conteneurs retirés du compte, plus de « restitution », coût moral une fois, fin et épilogue FR/EN (`src/story-act5-v188.js`, champ additif `act5.restitutionLostV188`).
 - [x] T033 La Reine atteint toujours le carrefour : plancher de santé et état `recoil` pendant la poursuite, mort seulement au carrefour.
 - [ ] T034 Sprite de mission du M577 et longueur documentée — ouvert.
+- [x] T035 (second tour, 2026-11-22) Cadrage de la poursuite : silhouette entière de la Reine à courte portée, tourelle du M577 dans la vue (décalage puis recul jusqu'à 0,78, `ACT5_CHASE_FRAMING_V188` [PROPOSÉ]) ; recul de la Reine observé en QA navigateur (rejeu, deux remorques maintenues attachées, injection déclarée).
 
 ## Reporté
 

@@ -18,4 +18,6 @@
 - [x] T013 C1, C3, C4 : M577 du joueur rangé, insertion et extraction à pied
 - [x] T014 C4 : grille de la galerie et porte du toit soudées ; conduits obligatoires (contrôles logique et physique)
 - [x] T015 C1 : perspective du pont du couloir plafonnée à un demi-écran
-- [ ] T016 Confirmer le M577 garé au quai de C3 (décor de l'arrivée des rescapés) — ouvert
+- [x] T016 M577 garé au quai de C3 confirmé (second tour, 2026-11-22) : à l'échelle (449 px), entièrement sur le sol du quai, décor non conduisible derrière la voie des marines
+- [x] T017 Écran de préparation de C3 : Noor Okafor listée « indisponible · à l'infirmerie » avec la raison (FR/EN)
+- [x] T018 M577 conduit des niveaux ordinaires et M577 du largage à l'échelle (voie de sol, stationnement, vol stationnaire du UD-4L) — `scripts/verify-m577-everywhere-v188.mjs`, `scripts/qa-apc-levels-v188.mjs`
