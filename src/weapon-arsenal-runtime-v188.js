@@ -295,6 +295,12 @@ export function withArsenalFeedsV188(Base) {
 
     drawWorld(ctx) {
       const result = super.drawWorld(ctx);
+      this.drawArsenalPlaceholdersV188(ctx);
+      return result;
+    }
+
+    /** Pending-plaque weapons: a named Canvas silhouette along the aim, never an image. */
+    drawArsenalPlaceholdersV188(ctx) {
       for (const actor of [this.player, this.coop]) {
         if (!ctx || !this.arsenalRoleV188(actor) || actor.alive === false) continue;
         const profile = this.arsenalProfileForV188(actor);
@@ -311,7 +317,6 @@ export function withArsenalFeedsV188(Base) {
         ctx.restore();
         this.arsenalStatsV188.placeholders++;
       }
-      return result;
     }
 
     // —— persistence ——

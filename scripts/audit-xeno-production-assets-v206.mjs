@@ -274,7 +274,7 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
   },
   "package.json": {
     "previousSha256": "d5d2e4c965479a658b2289e7e51fff6456c099fb99e9b322ea289a3cd40a89ef",
-    "currentSha256": "9c75de97ed96ac084d3cc03ec4c45cde8095603eb438d4b1fde2e951d7eeaeb8"
+    "currentSha256": "941e83831d1b0b5bed286628a479820b909abfb2c6039c655d822d2587ee3939"
   },
   "player-appearance-v126.css": {
     "previousSha256": "da7045c7fd7d41da99eecf48d316150b2d16fac276fe635bb881034bd68c9320",
@@ -350,7 +350,7 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
   },
   "scripts/verify-audit-continuation-v157.mjs": {
     "previousSha256": "641676a21373c30747555d01f180a8c38f07819091860c6c1924bf6f5c08b5cf",
-    "currentSha256": "a92ffa1c385c12159293a1d18d36c881180f48291bc58947076ed2f7b67784d3"
+    "currentSha256": "73cf9f322340a7d4e68e58bb772f74e6b9e54d14383b4fb72f8bf299ad0d3d8a"
   },
   "scripts/verify-audit-continuation-v158.mjs": {
     "previousSha256": "87ca45b2c3c48d96e9ae02f4a57241b723372e3e12cd172ef4f978f34ba3eb98",
@@ -358,7 +358,7 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
   },
   "scripts/verify-audit-v143.mjs": {
     "previousSha256": "3884df6e20f1d9bfeab80087c5b4e208ef773b3ecbe3ed27fd2cd962b280b45e",
-    "currentSha256": "e6a08a673f52a5e96ba9fe6bd877af88e7ab6582449f58141f6f0985b0a27e43"
+    "currentSha256": "65ce82d7a992d20cba6c0deebb58f9f6b8b00ec9bbc3d405d23fd637b9994df8"
   },
   "scripts/verify-black-cocoon-presentation-v158.mjs": {
     "previousSha256": "96029dc66cb8781bd30bd91482dbfbc7466679020fd22420784e7baaac43bfa5",
@@ -383,6 +383,10 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
   "scripts/verify-forge-npcs-v158.mjs": {
     "previousSha256": "ae3813cbb02f125e450fcf08217c2ffa8512915d98bb983961d1a2810a9ec34d",
     "currentSha256": "f4a31b5e47c01e150aaa0b26a819130f560a717b157a0e307d58e17dbc6f0dab"
+  },
+  "scripts/verify-held-weapon-v125.mjs": {
+    "previousSha256": "b3aa212f548364ba5558476a09ac1b8eafd99fd0c86fff95dccb6893a9bcec78",
+    "currentSha256": "41ebce23ebedc85b6549a5f010a7e975a2f84736126adc0191c0922b3c8ea1a5"
   },
   "scripts/verify-hub-lift-transit-v163.mjs": {
     "previousSha256": "91c11a74e3ebdd63beb3147a959bee1e5f2b679de87ea811b3516d515f7a0f0a",
@@ -410,7 +414,7 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "1b81da575ba68fcb5186cd5c47cd9d25f525904b84000b97e1b05ad796dab2cc",
-    "currentSha256": "c13611f88da9bd389daf20e20657459d9bebb6125c83fe03ad04c0d6aa8eabc2"
+    "currentSha256": "f016037a477532e0fe10ae1baeecfbb8db1bfa9b4a585aad8f84b3e2e933d928"
   },
   "scripts/verify-xeno-arbiter-campaign-v190.mjs": {
     "previousSha256": "54554db19910b260837967ece8f6ec6918e6c946ea6a2b5b643679ab84d3b41f",
@@ -500,6 +504,10 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
     "previousSha256": "40332c0214212b5916d7880d8df64d5d84b270a7f4ed2e27ae3f7782d8903e9c",
     "currentSha256": "9487c281d5f07e40b1771c18033ac68928a96a7cfb51c1efda37791173b1af8a"
   },
+  "src/catalog-runtime-v62.js": {
+    "previousSha256": "805cff98cb884c4e407caa01b149eb3a49127b52a3e8d8eab30f190159a21143",
+    "currentSha256": "af883c02a9d7414b628347367f0b1a812a666df1cf0552ca7cf2995c03e0a26c"
+  },
   "src/catalog-scale-v72.js": {
     "previousSha256": "f778ab5a45e01900c99b7912c8ddcab65597b76590e2168e8a0c7d36b84e8f1f",
     "currentSha256": "ed80e44ad26691b6009884ba370e96877192a8fc2b701d946681692dbda37e62"
@@ -562,7 +570,7 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
   },
   "src/game-production-runtime.js": {
     "previousSha256": "2c12ae1bfe30bd28c19035cf84e2cbbe10c88d2c39fc24b5dab21d91229a2886",
-    "currentSha256": "54c0c0d1107e620c52680adf091918b27c78d8b7744242be96368d333eafeee6"
+    "currentSha256": "c82536440c96ef5c08a683c34949d70644a347c1b3b1e9e03be20bad64f91658"
   },
   "src/game-runtime.js": {
     "previousSha256": "9005aae32379ade306e187ea6c3d156f1a3083178bc0c0808d9963cdd6b8f379",
@@ -772,6 +780,10 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
     "previousSha256": "73eb796bf6d9159239e8a8c499bc8b73db9975a69016df5b7d9ef2d2d4eccf13",
     "currentSha256": "8fb77f86e0f5a3f02ec756ad659fe86347927bb8c2de1d54798e04f71453dcdd"
   },
+  "src/weapon-presentation-profiles-v124.js": {
+    "previousSha256": "9b41acb35ef2bb887b8afc0e8a7455e5b47f178ee4c8488621c891eae6342858",
+    "currentSha256": "4cfa06618fa8dbbbbdfbaaba75384dbee57c496b63a7e09a33262501a5b68298"
+  },
   "src/weapon-reference-coverage-v121.js": {
     "previousSha256": "7604a2a9c3157153a7a9d02caa7c7fbfcfb2326a02f032c8b6ab41246c640c2e",
     "currentSha256": "ea8172971488dcc3542a3d53d8698cae9a0aca692ece17b09b25403e934f18d1"
@@ -780,13 +792,17 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
     "previousSha256": "2ded211d99501d8b6e38da6c79185bf61b8afb1f8cf00429b2d1fc8072bd0b23",
     "currentSha256": "854d7fc92500e7f0a7a172674c530433b0e5944ef5f9865571b32c3e806287c8"
   },
+  "src/weapon-research-index-v171.js": {
+    "previousSha256": "1a2d3f5ea0f3f19311fb8ec2e0d67d23bc5e2a6dd8ec62902d175f144b84de9b",
+    "currentSha256": "4dbe4269c98e8e2baa87af6143c58b6278d4ba875e8b399334b716b3a75cf12a"
+  },
   "styles.css": {
     "previousSha256": "5d7f49517ea4377aaf2847e7ef5f5dd5f6e4b015301e1280072d41fd9edab36c",
     "currentSha256": "21f254351e30dd23c320bee7ecb29781496549fcc9df3c5ce42712ce4e678950"
   },
   "sw.js": {
     "previousSha256": "8352d786320ead53a5cdcbb8582ee1d1d2212798a0b92b006f07d912ac254cec",
-    "currentSha256": "2cb0eeae96e67b66ddcb300113cf58e952784c50d77ae5e0b4a7674018a0efb2"
+    "currentSha256": "1c7c4c51ece0839b7d41de1db5d7306f374f540a96260ab205d702398a387aec"
   },
   "title-screen-v61.css": {
     "previousSha256": "3a748b04d5e6c9a7e04c189b2c1910c3163a0840968be6bcbb6352e10e16369f",

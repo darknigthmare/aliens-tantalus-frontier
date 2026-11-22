@@ -185,7 +185,13 @@ function feedFor(weapon, baseId, presentation) {
   const kind = row?.feed || (addition ? BRIDGED_BASES[baseId] : null) || presentation.reload.feed || 'none';
   const detachable = inspectDetachableFeedV193(weapon);
   const bridge = BRIDGED_BASES[baseId] || null;
-  const rule = CAPACITY_RULES[baseId] || (bridge ? CAPACITY_RULES[bridge] : null);
+  // A finish variant shares its base's tube or cylinder: the generated legacy
+  // number (e.g. a 90-shell tube) is not a mechanism. Belts and tanks keep the
+  // catalogue gameplay quantity.
+  const base = catalogue.get(baseId);
+  const rule = CAPACITY_RULES[baseId] || (bridge ? CAPACITY_RULES[bridge] : null)
+    || (['tube', 'cylinder'].includes(bridge) && base && base.id !== weapon.id
+      ? { capacity: base.magazine, source: 'base model ' + base.id + ' tube capacity (finish variant shares the mechanism) [PROPOSÉ]' } : null);
   return {
     kind, kindSource: row ? CSV_PATH + ' · Alimentation (' + row.id + ')' : addition ? 'weapon-catalog-additions-v188 · sourceMechanism'
       : 'V124 presentation feed [À DÉFINIR]',
