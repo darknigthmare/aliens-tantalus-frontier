@@ -7,7 +7,9 @@ export const LEGACY_CAMPAIGNS_V131 = Object.freeze([
     summary: 'Chapitre solo : script physique, portes, synchronisation et compte à rebours.',
     limitations: 'Costume Nostromo existant adapté ; opérateur du casting actuel. Les sept membres et Jones ne disposent pas de leurs propres animations. Derelict et actes extérieurs non produits.' },
   { id: 'special-black-abyss-v131', kind: 'abyss', specialOperationId: 'black-abyss', name: 'ABYSSE NOIR · THALASSA-7',
-    worldId: 'world-10-ceto', year: 2204, mode: 'SUBAQUATIQUE', templateId: 'planet-exterior',
+    // V188 spec 011 (bible §13.4, Q15): the chapter now belongs to « La Saison des Reines », Arc 1, on Nacre-7.
+    // Additive move: deployments started before it keep their Ceto id (`legacyWorldIdsV188`, operation-receipts-v131.js).
+    worldId: 'world-31-nacre-7', legacyWorldIdsV188: Object.freeze(['world-10-ceto']), year: 2204, mode: 'SUBAQUATIQUE', templateId: 'planet-exterior',
     objective: 'Traverser le canyon, récupérer le noyau, stabiliser la ruche et revenir à la cloche.',
     summary: 'Nage libre, oxygène, pression, trois modes HADAL, MANTA et prédateur aquatique adapté.',
     limitations: 'Scaphandre HADAL et coque MANTA-6 illustrés ; nage dédiée et animations aquatiques incomplètes. Boss adapté du Ceto Reef Predator existant ; arsenal, dix castes, second boss et actes ultérieurs non produits.' },

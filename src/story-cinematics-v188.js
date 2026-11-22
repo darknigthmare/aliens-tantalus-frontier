@@ -13,6 +13,7 @@ import { STATION_CINEMATICS_V188, STATION_CINEMATIC_SETS_V188, STATION_CINEMATIC
 import { Act5AssetLoaderV188, act5CinematicSourcesV188, drawAct5DialogueV188 } from './act5-slots-v188.js';
 import { biologicalCinematicSourcesV188, drawBiologicalBackgroundV188, drawBiologicalShotV188, drawBiologicalHelmetHudV188 } from './biological-art-v188.js';
 import { prologueCinematicSourcesV188, drawPrologueBackgroundV188, drawPrologueSetArtV188, drawPrologueShotV188 } from './prologue-art-v188.js';
+import { QUEENS_CINEMATICS_V188, drawQueensShotV188, queensCinematicSourcesV188 } from './queens-cinematics-v188.js';
 
 const t = (fr, en) => Object.freeze({ fr, en });
 const shot = (seconds, kind, data = {}) => Object.freeze({ seconds, kind, ...data });
@@ -212,7 +213,9 @@ export const CINEMATICS_V188 = Object.freeze({
       'The “cargo priority” profile wasn’t activated at the relay. It was authorised remotely. The signature comes from Asphodèle station.') })
   ]) }),
   // V188 spec 007: CIN-70 to CIN-72, the Asphodèle station front (station-cinematics-v188.js).
-  ...STATION_CINEMATICS_V188
+  ...STATION_CINEMATICS_V188,
+  // V188 spec 011: CQ-01 to CQ-06, « La Saison des Reines » (queens-cinematics-v188.js, Canvas placeholders).
+  ...QUEENS_CINEMATICS_V188
 });
 export const CINEMATIC_IDS_V188 = Object.freeze(Object.keys(CINEMATICS_V188));
 
@@ -805,7 +808,9 @@ export function drawCinematicFrameV188(ctx, id, time, { images = {}, language = 
       else background(ctx, images, current.scene, local, reducedMotion, { cast: current.cast, speakerId: current.line?.crewId, cinematicId: id });
       subtitle = current; break;
     }
-    default: drawStationShotV188(ctx, current, { images, local, progress, lang, reducedMotion, caption: (text, y) => caption(ctx, text, y), W, H }); break;
+    default:
+      if (drawQueensShotV188(ctx, current, { local, progress, lang, reducedMotion, caption: (text, y) => caption(ctx, text, y), W, H })) break;
+      drawStationShotV188(ctx, current, { images, local, progress, lang, reducedMotion, caption: (text, y) => caption(ctx, text, y), W, H }); break;
   }
   ctx.restore();
   if (current.kind !== 'title' && current.kind !== 'credits') grain(ctx, local, reducedMotion);
@@ -847,7 +852,8 @@ export class CinematicPlayerV188 {
     const act5Sources = act5CinematicSourcesV188(id);
     const biologicalSources = biologicalCinematicSourcesV188(id);
     const prologueSources = prologueCinematicSourcesV188(id);
-    const sources = new Set(stationSources || act5Sources || biologicalSources || prologueSources || Object.values(CINEMATIC_IMAGES_V188));
+    const queensSources = queensCinematicSourcesV188(id); // V188 spec 011: primitives only, no image source
+    const sources = new Set(stationSources || act5Sources || biologicalSources || prologueSources || queensSources || Object.values(CINEMATIC_IMAGES_V188));
     for (const entry of CINEMATICS_V188[id]?.shots || []) {
       const profile = entry.line?.crewId ? getNpcDialoguePortraitV168(entry.line.crewId) : null; if (profile) sources.add(profile.source);
       const colony = !entry.line?.crewId ? getColonyPortraitV188(entry.line?.speaker) : null;

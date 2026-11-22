@@ -3,6 +3,7 @@ import { createColonyV188, normalizeColonyV188 } from './colony-reconstruction-v
 import { createColonyMissionsV188, normalizeColonyMissionsV188 } from './colony-missions-v188.js';
 import { createTravelMessagesV188, normalizeTravelMessagesV188 } from './travel-messages-v188.js';
 import { createStationV188, normalizeStationV188 } from './station-asphodele-v188.js';
+import { createSideCampaignsV188, normalizeSideCampaignsV188 } from './side-campaign-queens-v188.js';
 import { createCrewQuestsV188, normalizeCrewQuestsV188 } from './crew-quests-v188.js';
 import { createAsphodeleHubV188, normalizeAsphodeleHubV188 } from './asphodele-hub-v188.js';
 import { asphodeleRiskReductionV188 } from './asphodele-missions-v188.js';
@@ -389,6 +390,7 @@ export function createDefaultSave(profile = 1) {
     colonyMissionsV188: createColonyMissionsV188(),
     travelMessagesV188: createTravelMessagesV188(),
     stationV188: createStationV188(),
+    sideCampaignsV188: createSideCampaignsV188(),
     crewQuestsV188: createCrewQuestsV188(),
     asphodeleHubV188: createAsphodeleHubV188(),
     alphaBravoDoctrine: createAlphaBravoDoctrineV69(),
@@ -2487,6 +2489,8 @@ export function migrateSave(input, profile = 1) {
   migrated.travelMessagesV188 = normalizeTravelMessagesV188(source.travelMessagesV188);
   // V188 content gaps (spec 005): additive; an older save has not heard the station intro nor taken a quest.
   migrated.stationV188 = normalizeStationV188(source.stationV188);
+  // V188 spec 011: additive; an older save has received no side-campaign call.
+  migrated.sideCampaignsV188 = normalizeSideCampaignsV188(source.sideCampaignsV188);
   migrated.crewQuestsV188 = normalizeCrewQuestsV188(source.crewQuestsV188);
   // V188 spec 007: additive; an older save is aboard the Tantalus, with no contract done.
   migrated.asphodeleHubV188 = normalizeAsphodeleHubV188(source.asphodeleHubV188);

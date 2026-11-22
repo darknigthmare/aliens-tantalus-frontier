@@ -113,8 +113,8 @@ test('MIRE keeps every stable ID and leaves original Frontier operations untouch
   // V190 Xeno Arbiter special operations follow the Tantalus lot in the merged campaign order.
   assert.deepEqual(CAMPAIGNS.slice(496).map(c => c.id), ['special-arbiter-01-freight', 'special-arbiter-02-gallery',
     'special-arbiter-03-custody', 'special-arbiter-04-arbitration', 'special-arbiter-05-isolation', 'special-arbiter-06-local']);
-  assert.equal(CAMPAIGNS.length, 502);
-  assert.equal(new Set(CAMPAIGNS.map(c => c.id)).size, 502);
+  assert.equal(CAMPAIGNS.length, 511);
+  assert.equal(new Set(CAMPAIGNS.map(c => c.id)).size, 511);
 });
 for (const source of MIRE_SETTINGS_V143) test(`MIRE setting: ${source.source}`, () => {
   const entries = CAMPAIGNS.filter(c => c.mode === 'MIRE' && c.source === source.source);
@@ -264,7 +264,7 @@ test('colony cards: invalid and newly private responses cannot leave a usable ca
 });
 test('Reviewed scene art: Asphodele, Act V, biological evidence, prologue, Matriarch, MANTA, HADAL, Broodstorm, Queen Mother and adapted guards stay lazy through installation and survive a later network interruption', async () => {
   const h = host();
-  assert.equal(h.api.CACHE, 'atf-v143-tantalus-face-a-face-station-levels-20261122');
+  assert.equal(h.api.CACHE, 'atf-v143-tantalus-saison-des-reines-20261122');
   await h.dispatch('install');
   const cache = await h.caches.open(h.api.CACHE);
   assert.equal(h.api.SHELL.filter(path => path === '/src/biological-art-v188.js').length, 1,

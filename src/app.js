@@ -2,7 +2,14 @@ import { colonySnapshotV188, investColonySiteV188, applyColonyOperationResultV18
 import { filterUnlockedCampaignsV188, stationLockReasonV188, stationLockTextV188, stationSnapshotV188, cassiusChoicePendingV188, chooseCassiusV188, CASSIUS_CHOICES_V188, CASSIUS_DIALOG_V188, stationReturnSceneDueV188, markStationSceneSeenV188, STATION_SCENES_V188 } from './station-asphodele-v188.js';
 import { crewQuestActionsV188, acceptCrewQuestV188, crewQuestStepV188, answerCrewQuestStepV188, turnInCrewQuestV188, applyCrewQuestOperationResultV188, crewQuestsSnapshotV188, getCrewQuestV188, davidMemoryRestoredV188, crewQuestEpilogueLineV188, crewQuestNotesV188 } from './crew-quests-v188.js';
 import { jumpRouteTextV188, applyJumpTravelTimeV188, jumpArrivalTextV188 } from './galaxy-travel-v188.js';
-import { deliverTravelMessagesV188, travelMessagesListV188, travelArrivalNoticeV188, TRAVEL_MESSAGES_TEXT_V188 } from './travel-messages-v188.js';
+import { deliverTravelMessagesV188, travelMessagesListV188, travelArrivalNoticeV188, TRAVEL_MESSAGES_TEXT_V188, pushCampaignTravelMessageV188 } from './travel-messages-v188.js';
+// V188 spec 011: « La Saison des Reines », first side campaign (call, travel, Arc 1, Rask choice, debrief).
+import { filterQueensCampaignsV188, queensLockReasonV188, queensLockTextV188, applyQueensOperationResultV188, queensCallDueV188, receiveQueensCallV188,
+  queensCallPendingV188, acceptQueensCallV188, queensCallTextV188, QUEENS_CALL_DIALOG_V188, QUEENS_CALL_CINEMATIC_V188, recordQueensArrivalV188,
+  queensReturnSceneDueV188, markQueensSceneSeenV188, QUEENS_SCENES_V188, QUEENS_SCENE_CINEMATICS_V188, queensRaskChoicePendingV188, chooseQueensRaskEggV188,
+  QUEENS_RASK_DIALOG_V188, QUEENS_RASK_CHOICES_V188, queensArc1DebriefDueV188, queensArc1DebriefV188, queensSnapshotV188, queensEncounterCatalogV188,
+  queensCampaignNameV188, QUEENS_NACRE_WORLD_ID_V188 } from './side-campaign-queens-v188.js';
+import { QueensSceneLoaderV188 } from './queens-cinematics-v188.js';
 import { filterColonyCampaignsV188, colonyLockReasonV188, colonyLockTextV188, applyColonyMissionResultV188, applyColonyC5LaunchV188, colonyMissionsSnapshotV188,
   colonyReturnSceneDueV188, markColonySceneSeenV188, COLONY_SCENES_V188, colonyC4DecisionPendingV188, colonyGrueDecisionPendingV188, colonyC4OptionsV188,
   chooseColonyC4V188, chooseColonyGrueV188, COLONY_DECISION_TEXT_V188, COLONY_GRUE_CHOICES_V188, colonyCampaignNameV188 } from './colony-missions-v188.js';
@@ -1118,6 +1125,8 @@ function markStoryDebriefOnViewV188() {
   if (act5OnViewV188()) return;
   // V188 colony lot: Port-Méridien return scenes and decisions (C4, « Le prix de Grue »), once each.
   if (colonyReturnOnViewV188()) return;
+  // V188 spec 011: « La Saison des Reines » — the call after Act V, then its return scenes, the Rask choice and the debrief.
+  if (queensOnViewV188()) return;
   if (deriveStoryCampaignV188(saveSystem.data).step !== 'debrief') return;
   try {
     const candidate = clone(saveSystem.data);
@@ -1573,6 +1582,113 @@ function renderStationFrontV188() {
   if (snapshot.hint) { const line = document.createElement('p'); line.className = 'hint'; line.textContent = snapshot.hint; parts.push(line); }
   host.replaceChildren(...parts);
 }
+// V188 spec 011 (bible §14): « La Saison des Reines » at the briefing table.
+function queensJumpFuelV188() {
+  const world = WORLDS.find(entry => entry.id === QUEENS_NACRE_WORLD_ID_V188);
+  return world ? getJumpReadinessV115(saveSystem.data, world, WORLDS).fuel : null;
+}
+function renderQueensPanelV188() {
+  const host = byId('side-campaign-queens-v188'); if (!host) return;
+  const lang = document.documentElement.lang === 'en' ? 'en' : 'fr', snapshot = queensSnapshotV188(saveSystem.data, lang, { fuel: queensJumpFuelV188() });
+  const title = document.createElement('h4'); title.textContent = `${snapshot.heading} · ${snapshot.statusLabel.toUpperCase()}`;
+  const parts = [title], hint = text => { const line = document.createElement('p'); line.className = 'hint'; line.textContent = text; parts.push(line); return line; };
+  host.dataset.queensStatusV188 = snapshot.status;
+  if (snapshot.status === 'locked') { hint(snapshot.hint); host.replaceChildren(...parts); return; }
+  if (snapshot.callPending) {
+    hint(lang === 'en' ? 'A call from Nacre-7 is waiting for an answer.' : 'Un appel de Nacre-7 attend une réponse.');
+    const button = Object.assign(document.createElement('button'), { type: 'button', className: 'button compact', textContent: lang === 'en' ? 'READ THE CALL' : 'LIRE L’APPEL' });
+    button.dataset.queensCallV188 = 'open'; button.addEventListener('click', () => openQueensCallDialogV188()); parts.push(button);
+    host.replaceChildren(...parts); return;
+  }
+  const arc = document.createElement('p'); arc.className = 'eyebrow'; arc.textContent = snapshot.arcTitle; parts.push(arc);
+  const list = document.createElement('ul');
+  for (const step of snapshot.steps) {
+    const item = document.createElement('li'); item.dataset.held = String(step.done); item.dataset.queensStepV188 = step.id;
+    item.textContent = `${step.done ? '■' : step.id === snapshot.nextId ? '▣' : '□'} ${step.label} · ${step.name}`; list.append(item);
+  }
+  parts.push(list);
+  const sides = document.createElement('ul');
+  for (const step of snapshot.sides) {
+    const item = document.createElement('li'); item.dataset.held = String(step.done);
+    item.textContent = `${step.done ? '■' : '□'} ${snapshot.sideLabel} · ${step.name}`; sides.append(item);
+  }
+  parts.push(sides);
+  if (snapshot.contracts.some(entry => entry.count)) hint(`${snapshot.contractsLabel} : ${snapshot.contracts.filter(entry => entry.count).map(entry => `${entry.name} ×${entry.count}`).join(', ')}`);
+  if (snapshot.orbit) hint(snapshot.orbit).dataset.queensOrbitV188 = 'true';
+  if (snapshot.blockedHint) hint(snapshot.blockedHint);
+  if (snapshot.choice) hint(`RASK · ${snapshot.choice}`);
+  for (const later of snapshot.later) hint(later);
+  host.replaceChildren(...parts);
+}
+const queensSceneLoaderV188 = new QueensSceneLoaderV188();
+let queensSceneOpenV188 = false;
+function openQueensCallDialogV188() {
+  if (queensSceneOpenV188 || document.querySelector('.content-scene-v188') || !queensCallPendingV188(saveSystem.data)) return false;
+  const lang = document.documentElement.lang === 'en' ? 'en' : 'fr';
+  queensSceneOpenV188 = true;
+  const scene = openContentSceneDialogV188({ language: lang, loader: queensSceneLoaderV188, slot: QUEENS_CALL_DIALOG_V188.slot, title: QUEENS_CALL_DIALOG_V188.title[lang],
+    text: queensCallTextV188(saveSystem.data, lang, { fuel: queensJumpFuelV188() }),
+    options: [{ id: 'accept', label: QUEENS_CALL_DIALOG_V188.options.accept[lang] }, { id: 'later', label: QUEENS_CALL_DIALOG_V188.options.later[lang] }],
+    onChoose: (choice) => {
+      if (choice !== 'accept') return null;
+      return commitCandidateV188(candidate => acceptQueensCallV188(candidate) ? true : false)
+        ? { text: QUEENS_CALL_DIALOG_V188.accepted[lang], options: [{ id: 'close', label: lang === 'en' ? 'CLOSE' : 'FERMER' }] } : null;
+    },
+    onClose: () => { queensSceneOpenV188 = false; renderAll(); } });
+  const paragraph = scene?.dialog?.querySelector('p'); if (paragraph) paragraph.style.whiteSpace = 'pre-line';
+  return true;
+}
+/** Briefing table: true when the campaign took the view (call, cinematic, return scene, Rask choice or debrief). */
+function queensOnViewV188() {
+  if (queensSceneOpenV188 || document.querySelector('.content-scene-v188') || cinematicPlayerV188.active) return true;
+  const lang = document.documentElement.lang === 'en' ? 'en' : 'fr';
+  // The call (§13.3 step 1): recorded once, filed in the alert journal with its delay, then CQ-01 and the briefing.
+  if (queensCallDueV188(saveSystem.data)) {
+    const received = commitCandidateV188(candidate => {
+      const message = receiveQueensCallV188(candidate, { relayRoomReady: asphodeleRelayReadyV188(candidate) });
+      if (!message) return false;
+      pushCampaignTravelMessageV188(candidate, message); return true;
+    });
+    if (!received) return false;
+    queensSceneOpenV188 = true;
+    void playStoryCinematicV188(QUEENS_CALL_CINEMATIC_V188).then(() => { queensSceneOpenV188 = false; if (['operations', 'command'].includes(activeView)) openQueensCallDialogV188(); });
+    return true;
+  }
+  const sceneId = queensReturnSceneDueV188(saveSystem.data);
+  if (sceneId) {
+    if (!commitCandidateV188(candidate => markQueensSceneSeenV188(candidate, sceneId))) return true;
+    const scene = QUEENS_SCENES_V188[sceneId], cinematic = QUEENS_SCENE_CINEMATICS_V188[sceneId];
+    queensSceneOpenV188 = true;
+    const open = () => openContentSceneDialogV188({ language: lang, loader: queensSceneLoaderV188, slot: scene.slot, title: scene.title[lang], text: scene.text[lang],
+      options: [{ id: 'continue', label: lang === 'en' ? 'CONTINUE' : 'CONTINUER' }], onChoose: () => null,
+      onClose: () => { queensSceneOpenV188 = false; renderAll(); queueMicrotask(markStoryDebriefOnViewV188); } });
+    if (cinematic) void playStoryCinematicV188(cinematic).then(open); else open();
+    return true;
+  }
+  if (queensRaskChoicePendingV188(saveSystem.data)) {
+    queensSceneOpenV188 = true;
+    openContentSceneDialogV188({ language: lang, loader: queensSceneLoaderV188, slot: QUEENS_RASK_DIALOG_V188.slot, title: QUEENS_RASK_DIALOG_V188.title[lang],
+      text: QUEENS_RASK_DIALOG_V188.text[lang], options: QUEENS_RASK_CHOICES_V188.map(id => ({ id, label: QUEENS_RASK_DIALOG_V188.options[id][lang] })),
+      onChoose: (choice) => {
+        if (choice === 'continue') return null;
+        return commitCandidateV188(candidate => chooseQueensRaskEggV188(candidate, choice) ? true : false)
+          ? { text: QUEENS_RASK_DIALOG_V188.results[choice][lang], options: [{ id: 'continue', label: lang === 'en' ? 'CONTINUE' : 'CONTINUER' }] } : null;
+      },
+      onClose: () => { queensSceneOpenV188 = false; renderAll(); queueMicrotask(markStoryDebriefOnViewV188); } });
+    return true;
+  }
+  if (queensArc1DebriefDueV188(saveSystem.data)) {
+    if (!commitCandidateV188(candidate => markQueensSceneSeenV188(candidate, 'arc1-debrief'))) return true;
+    const debrief = queensArc1DebriefV188(saveSystem.data, lang);
+    queensSceneOpenV188 = true;
+    const scene = openContentSceneDialogV188({ language: lang, loader: queensSceneLoaderV188, slot: debrief.slot, title: debrief.title, text: debrief.text,
+      options: [{ id: 'continue', label: lang === 'en' ? 'CONTINUE' : 'CONTINUER' }], onChoose: () => null,
+      onClose: () => { queensSceneOpenV188 = false; renderAll(); } });
+    const paragraph = scene?.dialog?.querySelector('p'); if (paragraph) paragraph.style.whiteSpace = 'pre-line';
+    return true;
+  }
+  return false;
+}
 // V188 crew quests (bible §8.1, Q9): where to find each giver and how far the quest is.
 function renderCrewQuestsPanelV188() {
   const host = byId('crew-quests-v188'); if (!host) return;
@@ -1888,7 +2004,7 @@ function openKesslerTagDialogV188(notes) {
 }
 // —— V188 spec 006 (bible §5.6-§5.8): Act V « Non viable » ——
 // Hoisted helpers: the briefing table and the mission lists read them during the first render.
-function unlockedCampaignsV188(list) { return filterColonyCampaignsV188(saveSystem.data, filterAct5CampaignsV188(saveSystem.data, filterUnlockedCampaignsV188(saveSystem.data, list))); }
+function unlockedCampaignsV188(list) { return filterQueensCampaignsV188(saveSystem.data, filterColonyCampaignsV188(saveSystem.data, filterAct5CampaignsV188(saveSystem.data, filterUnlockedCampaignsV188(saveSystem.data, list)))); }
 function storyStateV188() { return deriveStoryWithAct5V188(saveSystem.data, { language: document.documentElement.lang === 'en' ? 'en' : 'fr' }); }
 function act5LangV188() { return document.documentElement.lang === 'en' ? 'en' : 'fr'; }
 let act5LoaderInstanceV188 = null;
@@ -2180,6 +2296,7 @@ function renderCommandMissionsV110() {
   }
   renderColonyReconstructionV188();
   renderStationFrontV188();
+  renderQueensPanelV188();
   renderCrewQuestsPanelV188();
   renderAct5PanelV188();
   byId('command-mission-status-v110').textContent = active ? 'MISSION ACTIVE · manifeste verrouillé'
@@ -2330,6 +2447,9 @@ function tickGalaxyJumpV116() {
       // V188 colony and crew lot (bible §13.2): the messages that followed the Tantalus arrive late, once per jump.
       const lateV188 = deliverTravelMessagesV188(saveSystem.data, settlement, { relayRoomReady: asphodeleRelayReadyV188(saveSystem.data) });
       if (lateV188.length) settlement.result = `${settlement.result} ${travelArrivalNoticeV188(lateV188.length, document.documentElement.lang)}`;
+      // V188 spec 011: the first arrival at Nacre-7 after the call is accepted, in the same transaction.
+      const queensArrivalV188 = recordQueensArrivalV188(saveSystem.data, settlement);
+      if (queensArrivalV188) pushCampaignTravelMessageV188(saveSystem.data, queensArrivalV188);
       return settlement;
     }, undefined, { duringTransitV116: true });
     if (!result && ownsTimelineV84(owner)) { failedJumpOwnerV116 = owner; renderGalaxyJumpV116(); }
@@ -3638,7 +3758,8 @@ function startMissionRuntimeNowV62(context, insertionHandoverV188 = null) {
     seed: levelSeed.seed,
     world: { ...world, ...worldState },
     campaign,
-    enemyCatalog: ENEMIES,
+    // V188 spec 011 (game-ai: admissibility first): the campaign's own missions field the reef lineage only.
+    enemyCatalog: queensEncounterCatalogV188(campaign.id, ENEMIES),
     weapon,
     equipment,
     crew,
@@ -3819,6 +3940,9 @@ function launchCampaign(campaign = null) {
   // V188 colony lot: Port-Méridien missions follow the acts, C1 → C4 and the colony tiers (bible §6.2, §6.3).
   const colonyLockV188 = activeOperation ? null : colonyLockReasonV188(saveSystem.data, campaign.id);
   if (colonyLockV188) { toast(colonyLockTextV188(colonyLockV188, document.documentElement.lang)); return false; }
+  // V188 spec 011: « La Saison des Reines » follows its call, the Tantalus orbit of Nacre-7 and the arc order.
+  const queensLockV188 = activeOperation ? null : queensLockReasonV188(saveSystem.data, campaign.id);
+  if (queensLockV188) { toast(queensLockTextV188(queensLockV188, document.documentElement.lang)); return false; }
   // Act III moral choice (bible §5.3): the M577 manifest is signed before the convoy leaves.
   if (!activeOperation && campaign.id === 'special-apc-convoy' && !normalizeStoryCampaignV188(saveSystem.data.storyCampaignV188).m577Manifest) {
     openM577ManifestDialogV188({ language: document.documentElement.lang, onConfirm: (manifest) => {
@@ -3968,6 +4092,8 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   const asphodeleContractV188 = applyAsphodeleOperationResultV188(candidate, { success: resolvedSuccess, campaignId: operation.campaignId, operationId: operation.id });
   // V188 spec 006: the bridge default if the choice never showed.
   const act5ChangeV188 = applyAct5OperationResultV188(candidate, { success: resolvedSuccess, campaignId: operation.campaignId });
+  // V188 spec 011: a mission of « La Saison des Reines » completed while the campaign is accepted advances its arc.
+  const queensChangeV188 = applyQueensOperationResultV188(candidate, { success: resolvedSuccess, campaignId: operation.campaignId });
   // V188 debrief: the amounts the hub actually receives (before the transit clock runs).
   outcome.paidV188 = paidRewardsV188(resourcesBeforeV188, candidate.galaxy.resources);
   // V188 reactive lines (bible §53.6): failure, colonist loss, injured return.
@@ -3989,6 +4115,7 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   if (colonyMissionV188?.population) toast(document.documentElement.lang === 'en' ? `Port-Méridien: +${colonyMissionV188.population} people for the sites.` : `Port-Méridien : +${colonyMissionV188.population} personnes pour les chantiers.`);
   if (colonyChangeV188?.damaged) toast(document.documentElement.lang === 'en' ? `Port-Méridien: a site lost one functioning level (${colonySiteV188(colonyChangeV188.damaged)}).` : `Port-Méridien : un chantier perd un niveau de fonctionnement (${colonySiteV188(colonyChangeV188.damaged)}).`);
   if (asphodeleContractV188) toast(asphodeleContractEffectTextV188(candidate, asphodeleContractV188, document.documentElement.lang === 'en' ? 'en' : 'fr'));
+  if (queensChangeV188?.kind === 'contract') toast(document.documentElement.lang === 'en' ? `Nacre-7: local contract done (${queensCampaignNameV188(operation.campaignId, 'en')} ×${queensChangeV188.count}).` : `Nacre-7 : contrat local accompli (${queensCampaignNameV188(operation.campaignId, 'fr')} ×${queensChangeV188.count}).`);
   if (act5ChangeV188?.kind === 'bridge-default') toast(ACT5_BRIDGE_TEXT_V188.results.timeout[document.documentElement.lang === 'en' ? 'en' : 'fr']);
   for (const change of questChangeV188 || []) {
     const questToastV188 = getCrewQuestV188(change.id)?.toastText?.[document.documentElement.lang === 'en' ? 'en' : 'fr'];

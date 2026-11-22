@@ -10,13 +10,15 @@
 // The additive save field is `travelMessagesV188`. Delays and texts marked
 // [PROPOSÉ] are recorded in bible §13.7.
 import { JUMP_TRAVEL_DAYS_V188 } from './galaxy-travel-v188.js';
+// V188 spec 011: the side-campaign calls (kind 'campaign') use the same journal; texts in the campaign module.
+import { QUEENS_MESSAGE_TEXT_V188, queensMessageVariantV188 } from './side-campaign-queens-v188.js';
 
 const t = (fr, en) => Object.freeze({ fr, en });
 const L = language => language === 'en' ? 'en' : 'fr';
 const has = (list, id) => Array.isArray(list) && list.includes(id);
 const fill = (text, values) => text.replace(/\{(\w+)\}/g, (_, key) => String(values[key] ?? ''));
 
-export const TRAVEL_MESSAGE_KINDS_V188 = Object.freeze(['colony', 'asphodele', 'company', 'origin', 'destination']);
+export const TRAVEL_MESSAGE_KINDS_V188 = Object.freeze(['colony', 'asphodele', 'company', 'origin', 'destination', 'campaign']);
 export const TRAVEL_MESSAGES_MAX_V188 = 30;
 export const COCYTE_WORLD_ID_V188 = 'world-05-lethe';
 // [PROPOSÉ] delays: by the QZ network a call loses days; through Asphodèle's relay room it loses fewer;
@@ -117,7 +119,7 @@ export const TRAVEL_MESSAGES_TEXT_V188 = Object.freeze({
 
 /** Display text for one message, in the current language; `worldName(id)` names a world. */
 export function travelMessageTextV188(message, save, language = 'fr', worldName = id => id) {
-  const lang = L(language), text = TEXT[message?.kind];
+  const lang = L(language), text = message?.kind === 'campaign' ? QUEENS_MESSAGE_TEXT_V188[queensMessageVariantV188(message)] : TEXT[message?.kind];
   if (!text) return null;
   const now = message.worldId ? worldOf(save, message.worldId) : null;
   const delay = message.receivedDay - message.sentDay;
@@ -134,3 +136,13 @@ export function travelMessagesListV188(save, language = 'fr', worldName, limit =
     .map(message => travelMessageTextV188(message, save, language, worldName)).filter(Boolean);
 }
 export const travelArrivalNoticeV188 = (count, language = 'fr') => fill(TRAVEL_MESSAGES_TEXT_V188.arrived[L(language)], { n: count });
+
+/** V188 spec 011: files one side-campaign message (call or arrival) in the journal. Mutates the candidate save; true when added. */
+export function pushCampaignTravelMessageV188(save, message) {
+  if (!save || message?.kind !== 'campaign' || !queensMessageVariantV188(message)) return false;
+  const state = normalizeTravelMessagesV188(save.travelMessagesV188);
+  if (state.messages.some(entry => entry.id === message.id)) return false;
+  state.messages = [...state.messages, message];
+  save.travelMessagesV188 = normalizeTravelMessagesV188(state);
+  return save.travelMessagesV188.messages.some(entry => entry.id === message.id);
+}
