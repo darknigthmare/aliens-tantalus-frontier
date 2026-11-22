@@ -254,7 +254,6 @@ function mountPanel(range) {
   document.body.append(panel);
   const $ = selector => panel.querySelector(selector);
   $('[data-range-weapon]').value = range.state.weaponId;
-  setInterval(() => { if (document.activeElement !== $('[data-range-weapon]')) $('[data-range-weapon]').value = range.state.weaponId; }, 1000);
   panel.addEventListener('click', event => {
     const button = event.target.closest('button'); if (!button) return;
     try {

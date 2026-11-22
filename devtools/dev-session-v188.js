@@ -6,6 +6,7 @@
 // ammo, reveal, time scale, frame step, no spawns). Everything it changes lives in the
 // isolated dev storage (dev-storage-v188.js); « Quitter » discards the session.
 import { CAMPAIGNS } from '/src/content.js';
+import { expectedLandedV188 } from './dev-catalog-v188.js';
 
 const session = globalThis.__ATF_DEV_SESSION_V188__ || { active: false, toggles: {} };
 const byId = id => document.getElementById(id);
@@ -27,6 +28,7 @@ const state = {
   landed: null, error: null, log: [], toggles: { godMode: false, infiniteAmmo: false, reveal: false, timeScale: 1, colliders: false,
     places: false, spawnZones: false, footLine: false, noSpawns: false, ...(session.toggles || {}) }
 };
+try { state.expected = session.launch ? expectedLandedV188(session.launch, JSON.parse(globalThis.localStorage.getItem('atf-v47-profile-1') || 'null')) : null; } catch { state.expected = null; }
 const log = (type, detail = {}) => { state.log.push({ t: Math.round(performance.now()), type, ...detail }); if (state.log.length > 400) state.log.shift(); };
 
 // —— Boot and title ——
@@ -172,6 +174,7 @@ export function instrumentEngine(engine) {
   // The options of the last real start (launchCampaign): the range restarts the same level with another loadout.
   engine.start = options => { engine.devLastStartOptionsV188 = options; return start(options); };
   engine.update = delta => {
+    if (state.devPaused && !state.stepping) return undefined; // dev pause, independent of the game's own pause
     const scaled = delta * (Number(state.toggles.timeScale) || 1);
     const result = update(scaled); applyToggles();
     for (const hook of engine.devFrameHooksV188) { try { hook(scaled); } catch (error) { log('frame-hook-error', { message: error.message }); } }
@@ -182,10 +185,13 @@ export function instrumentEngine(engine) {
 /** Advances one 1/60 s step while paused (frame step). */
 export function frameStepV188(steps = 1) {
   const engine = globalThis.__ATF_V51__?.engine; if (!engine?.running) return false;
+  state.devPaused = true; state.stepping = true;
   const wasPaused = engine.paused;
-  for (let i = 0; i < steps; i += 1) { engine.paused = false; engine.update(1 / 60); engine.paused = true; }
-  engine.draw(); engine.paused = wasPaused || true; frameStepPending += steps; return true;
+  try { for (let i = 0; i < steps; i += 1) { engine.paused = false; engine.update(1 / 60); } }
+  finally { engine.paused = wasPaused; state.stepping = false; }
+  engine.draw(); frameStepPending += steps; return true;
 }
+export function setDevPauseV188(paused = !state.devPaused) { state.devPaused = Boolean(paused); return state.devPaused; }
 
 // —— Overlays (world space: the mission draw scales 1280×720 and translates by the camera) ——
 function drawOverlays(engine) {
@@ -260,7 +266,7 @@ function mountHud() {
   }
   const scale = hud.querySelector('[data-dev-timescale]'); scale.value = String(state.toggles.timeScale || 1);
   scale.onchange = () => { state.toggles.timeScale = Number(scale.value); persistToggles(); };
-  hud.querySelector('[data-dev-pause]').onclick = () => { const engine = globalThis.__ATF_V51__?.engine; if (engine?.running) engine.togglePause(); };
+  hud.querySelector('[data-dev-pause]').onclick = event => { event.currentTarget.textContent = setDevPauseV188() ? 'Reprendre' : 'Pause'; };
   hud.querySelector('[data-dev-step]').onclick = () => frameStepV188(1);
   hud.querySelector('[data-dev-relaunch]').onclick = () => relaunch();
   hud.querySelector('[data-dev-exit]').onclick = () => exitSession();
@@ -277,15 +283,15 @@ function relaunch() {
 }
 /** Discards the dev session: the in-memory profile is dropped, the real localStorage was never written. */
 export function exitSession() {
-  try { sessionStorage.removeItem(session.sessionKey); } catch { /* ignore */ }
+  try { session.discard?.(); sessionStorage.removeItem(session.sessionKey); } catch { /* ignore */ }
   location.assign('/devtools/');
 }
 
 globalThis.__ATF_DEV_V188__ = {
   get status() { return state.status; }, get landed() { return state.landed; }, get error() { return state.error; },
-  get entryId() { return state.entryId; }, get log() { return state.log.slice(); }, get range() { return state.range || null; },
-  toggles: state.toggles, frameStep: frameStepV188, exit: exitSession,
-  snapshot: () => ({ status: state.status, landed: state.landed, error: state.error, entryId: state.entryId, view: activeView(), toggles: { ...state.toggles } })
+  get entryId() { return state.entryId; }, get expected() { return state.expected; }, get log() { return state.log.slice(); }, get range() { return state.range || null; },
+  toggles: state.toggles, frameStep: frameStepV188, setPause: setDevPauseV188, get paused() { return Boolean(state.devPaused); }, exit: exitSession,
+  snapshot: () => ({ status: state.status, landed: state.landed, expected: state.expected, error: state.error, entryId: state.entryId, view: activeView(), toggles: { ...state.toggles } })
 };
 
 if (session.active) {

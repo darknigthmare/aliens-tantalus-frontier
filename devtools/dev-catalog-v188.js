@@ -76,7 +76,7 @@ export function buildDevCatalogV188() {
   add('start-intro', 'start', L('Générique d’ouverture puis titre', 'Opening credit then title'), { kind: 'intro', base: 'default' }, { sceneId: 'intro' });
   add('start-creator', 'start', L('Création du personnage (CIN-00 puis dossier)', 'Player creation (CIN-00 then file)'), { kind: 'creator', base: 'default' }, { sceneId: 'creator' });
   // Prologue
-  for (const step of DEV_PROLOGUE_STEPS_V188) add(`prologue-${step.id}`, 'prologue', L(step.fr, step.en), { kind: 'hub', base: 'prologue', step: step.id },
+  for (const step of DEV_PROLOGUE_STEPS_V188) add(`prologue-${step.id}`, 'prologue', L(step.fr, step.en), { kind: 'hub', base: 'prologue', step: step.id, ...(step.landRoom ? { landRoom: step.landRoom } : {}) },
     { sceneId: `prologue:${step.id}`, keywords: step.step });
   // Hub rooms (Tantalus)
   for (const [deck, definition] of HUB_DECKS.entries()) for (const room of definition.rooms) {
@@ -174,6 +174,16 @@ export function buildDevCatalogV188() {
 /** The range runs on a normal FRONTIER mission so the squad doctrine (V132) and every mixin are live. */
 export const DEV_RANGE_CAMPAIGN_V188 = (CAMPAIGNS.find(c => c.mode === 'FRONTIER' && c.worldId === 'world-05-lethe' && !/^(?:special-|station-|colony-|queens-|act5-|orig-)/.test(c.id))
   || CAMPAIGNS.find(c => c.mode === 'FRONTIER' && !/^(?:special-|station-|colony-|queens-|act5-)/.test(c.id))).id;
+
+/** The scene the dev session reports once landed (`__ATF_DEV_V188__.landed`) for a launch and its built save.
+ * Story states (decisions, endings, hearings) land on the view or room that opens them. */
+export function expectedLandedV188(launch, save = null) {
+  if (launch.kind === 'mission') return `mission:${launch.campaignId}${launch.phase ? `#${launch.phase.id}` : ''}`;
+  if (launch.kind === 'hub') return launch.asphodele ? `asphodele:${launch.asphodele}` : `hub:${launch.landRoom || launch.hub?.roomId || save?.hub?.roomId || 'unknown'}`;
+  if (launch.kind === 'view') return `view:${launch.view}`;
+  if (launch.kind === 'cinematic') return `cinematic:${launch.cinematicId}`;
+  return launch.kind; // title, intro, creator, range
+}
 
 /** Search over label (FR/EN), id and keywords; `category` filters. */
 export function filterDevCatalogV188(entries, { query = '', category = '' } = {}) {

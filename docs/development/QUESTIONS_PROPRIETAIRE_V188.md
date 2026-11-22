@@ -796,3 +796,13 @@ Décisions déjà prises et appliquées : Q13 B (après l'Acte V), Q15 B (dépla
 | R8 | TR-0 | Absent du catalogue des 64 mondes ; l'arc 3 attend sa création | Réutiliser un monde existant |
 
 Aucune de ces valeurs ne certifie une fidélité « 1:1 ».
+
+## Outils de développement : lanceur de scènes caché et stand de tir (2026-11-22, spec 012) — valeurs par défaut appliquées
+
+| # | Question | Valeur appliquée | Autre possibilité |
+| --- | --- | --- | --- |
+| D-012-1 | Exposition de la page de développement | Serveur de développement seulement (`/devtools/`, `/dev`, session `/?atf-dev=v188`) ; fichiers admis en source seulement, absents du build public | Page déployée derrière un paramètre secret (refusé : un paramètre n'est pas une protection) |
+| D-012-2 | Sauvegarde utilisée par une session de développement | Stockage en mémoire de l'onglet, alimenté par la fixture ; le profil réel n'est ni lu ni écrit ; supprimée en quittant | Emplacement de profil dédié dans `localStorage` (risque d'écrasement par erreur) |
+| D-012-3 | Prérequis impossibles à produire sans falsifier un reçu runtime (retours ARBITER 02-06) | Entrées affichées désactivées avec leur raison | Forger les reçus (refusé : état impossible) |
+| D-012-4 | Réglages du stand | En mémoire, appliqués par relance du niveau, exportés en diff JSON pour revue ; jamais écrits dans les sources | Écriture directe dans `content.js` |
+| D-012-5 | Mission support du stand | Première campagne FRONTIER ordinaire de Cocyte (`pair-005-frontier`), pour que la doctrine d'escouade V132 et les posables soient actifs | Niveau de stand dédié à construire |

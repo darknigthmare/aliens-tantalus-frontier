@@ -50,3 +50,5 @@
 .atf-dev-hud-v188 select, .atf-dev-range-v188 select { width: auto !important; min-height: 0; font: inherit; }
 .atf-dev-range-v188 input[type=number] { width: 80px !important; }
 .atf-dev-hud-v188 button, .atf-dev-range-v188 button { width: auto; min-height: 0; font: inherit; letter-spacing: normal; }
+/* styles-v50.css gives every input/select a 220 px minimum width. */
+.atf-dev-hud-v188 input, .atf-dev-hud-v188 select, .atf-dev-range-v188 input, .atf-dev-range-v188 select { min-width: 0 !important; padding: 2px 4px; }

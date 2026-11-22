@@ -40,6 +40,8 @@
     sessionKey: SESSION_KEY,
     isolated: true,
     get writes() { return writes; },
+    // « Quitter »: later writes (pagehide autosave) must not bring the session back.
+    discard: function () { session = null; try { window.sessionStorage.removeItem(SESSION_KEY); } catch (error) { /* ignore */ } },
     snapshotStorage: function () { var copy = {}; data.forEach(function (value, key) { copy[key] = value; }); return copy; }
   });
   document.documentElement.dataset.atfDevSession = session ? 'active' : 'empty';
