@@ -174,7 +174,7 @@ for (const id of only) {
     await moveTo(P.airlock3.x); check('S3: CASSIUS erased → airlock 3 forced by hand', /FORCER LE SAS 3/.test(await prompt()), await prompt());
     await shot('station-s3-01-airlock3'); await holdE(7);
     check('S3: airlock 3 open, lab phase', await phase() === 'lab');
-    await moveTo(P.cradles.x + 190); await shot('station-s3-02-lab'); await press(); await moveTo(P.log.x); await press();
+    await moveTo(P.cradles.x + P.cradles.w / 2); await shot('station-s3-02-lab'); await press(); await moveTo(P.log.x); await press();
     check('S3: lab searched, routing phase', await phase() === 'routing');
     await moveTo(P.router.x - 30); await press(); await shot('station-s3-03-routing');
     check('S3: power routed (airlocks + lights), escape phase with the seal countdown', await phase() === 'escape'

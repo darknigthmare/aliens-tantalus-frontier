@@ -41,14 +41,14 @@ export function stationPlacesV188(engine) {
 export function stationS1PlacesV188(engine) {
   const s = stationPlacesV188(engine), { x, decks } = s;
   return Object.freeze({ ...s,
-    collar: Object.freeze({ x: x.drop - 170, y: decks.low }), // Echo-8’s dropship behind the collar window, west of the drop
+    collar: Object.freeze({ x: Math.max(20, x.drop - 160), y: decks.low }), // Echo-8’s dropship behind the collar window, at the west end
     crank: Object.freeze({ x: x.dockDoor - 70, y: decks.low }),
     fans: Object.freeze([Object.freeze({ x: x.cargo - 51, y: decks.low }), Object.freeze({ x: x.service + 80, y: decks.mid })]),
     ring: Object.freeze({ x0: x.dockDoor, x1: x.cargoDoor }), // the fan-saturated stretch of the ring
-    traces: Object.freeze([Object.freeze({ id: 'barricade', x: x.dockDoor + 150, y: decks.low, text: 'E-8 · 05:52' }),
+    traces: Object.freeze([Object.freeze({ id: 'barricade', x: x.dockDoor + 140, y: decks.low, text: 'E-8 · 05:52' }),
       Object.freeze({ id: 'chalk', x: x.service - 40, y: decks.mid, text: 'IIIIII' })]),
     salvagers: Object.freeze({ x: x.cargoDoor - 110, y: decks.low }),
-    console: Object.freeze({ x: x.bridge + 40, y: decks.top })
+    console: Object.freeze({ x: x.bridge - 130, y: decks.top }) // clear of the control deck's rear doorway
   });
 }
 
@@ -59,7 +59,7 @@ export function stationS2PlacesV188(engine) {
     breakers: Object.freeze([Object.freeze({ id: 'dock', x: x.dockDoor - 150, y: decks.low }), Object.freeze({ id: 'ring', x: x.service + 60, y: decks.mid }),
       Object.freeze({ id: 'hull', x: x.hull + 40, y: decks.top })]),
     reactor: Object.freeze({ x: x.reactor, y: decks.low }),
-    cassius: Object.freeze({ x: x.bridge, y: decks.top })
+    cassius: Object.freeze({ x: x.bridge - 130, y: decks.top }) // clear of the control deck's rear doorway
   });
 }
 
@@ -69,9 +69,9 @@ export function stationS3PlacesV188(engine) {
   return Object.freeze({ ...s,
     airlock3: Object.freeze({ x: x.dockDoor - 60, y: decks.low }),
     lab: Object.freeze({ x0: x.dockDoor + 40, x1: x.cargoDoor - 40 }),
-    cradles: Object.freeze({ x: x.dockDoor + 70, y: decks.low }),
-    eggs: Object.freeze([x.cargo + 80, x.cargo + 200].map(value => round(value))), // between the cradles and the aft bulkhead
-    log: Object.freeze({ x: x.dockDoor + 60, y: decks.low }),
+    cradles: Object.freeze({ x: x.cargoDoor - 297, y: decks.low, w: 270 }), // east of the lab's rear doorway
+    eggs: Object.freeze([x.dockDoor + 190, x.dockDoor + 295].map(value => round(value))), // across the lab, between airlock 3 and the cradles
+    log: Object.freeze({ x: x.dockDoor + 50, y: decks.low }),
     router: Object.freeze({ x: x.reactor - 110, y: decks.low }),
     tag: Object.freeze({ x: x.aftLow + 90, y: decks.low })
   });

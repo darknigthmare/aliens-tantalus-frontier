@@ -207,7 +207,7 @@ test('S3 « Les ponts scellés »: airlock 3 follows the CASSIUS decision; lab, 
   assert.equal(pr().eggs[0].state, 'burnt');
   assert.equal(engine.doorRequirement(places.doors.cargo), 'LABORATOIRE NON FOUILLÉ');
   run.clear(); place(places.log.x); assert.equal(engine.getInteractionPrompt(), 'E  LIRE LES JOURNAUX DES SURVIVANTS'); use();
-  run.clear(); place(places.cradles.x + 190); assert.equal(engine.getInteractionPrompt(), 'E  EXAMINER LES BERCEAUX QZ17'); use();
+  run.clear(); place(places.cradles.x + places.cradles.w / 2); assert.equal(engine.getInteractionPrompt(), 'E  EXAMINER LES BERCEAUX QZ17'); use();
   assert.equal(engine.stationPhaseIdV188(), 'routing'); assert.equal(engine.checkpoint.id, 'station-s3-routing');
   assert.equal(engine.doorRequirement(places.doors.aft), 'SAS SANS ÉNERGIE · ROUTAGE');
   run.clear(); place(places.router.x + 30); assert.equal(engine.getInteractionPrompt(), 'E  ROUTER : SAS + VENTILATION'); use();

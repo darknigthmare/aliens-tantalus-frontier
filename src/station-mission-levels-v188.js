@@ -638,7 +638,7 @@ export function withStationMissionLevelsV188(Base) {
         }
         if (phase === 'lab' || phase === 'routing') {
           if (!pr.log) add('log', p.log.x, p.log.y, 'E  LIRE LES JOURNAUX DES SURVIVANTS', { reach: 50 });
-          if (!pr.cradles) add('cradles', p.cradles.x + 190, p.cradles.y, 'E  EXAMINER LES BERCEAUX QZ17', { reach: 60 });
+          if (!pr.cradles) add('cradles', p.cradles.x + p.cradles.w / 2, p.cradles.y, 'E  EXAMINER LES BERCEAUX QZ17', { reach: 60 });
           for (const egg of pr.eggs) if (egg.state === 'closed' || egg.state === 'opening') hold(`burn:${egg.id}`, egg.x, p.decks.low, 'BRÛLER L’ŒUF', { reach: 95 });
         }
         if (phase === 'routing') {
@@ -792,10 +792,10 @@ export function withStationMissionLevelsV188(Base) {
       const slot = (name, x, bottom, options) => drawStationLevelSlotV188(ctx, loader, name, x, bottom, options);
       const { decks, x } = p;
       if (id === 'station-s1') {
-        slot('station-echo8-dropship', p.collar.x - 180, decks.low - 6);
+        slot('station-echo8-dropship', p.collar.x, decks.low - 6);
         slot('station-manual-crank', p.crank.x - 23, decks.low - 20, { progress: pr.crank });
         for (const fan of p.fans) slot('station-ventilation-fan', fan.x, fan.y - 110, { time });
-        slot('station-echo8-barricade', p.traces[0].x - 140, decks.low, { text: p.traces[0].text });
+        slot('station-echo8-barricade', p.traces[0].x - 110, decks.low, { w: 220, h: 103, text: p.traces[0].text });
         slot('station-chalk-marks', p.traces[1].x - 30, decks.mid - 60);
         slot('station-control-map', p.console.x - 120, decks.top - 30);
       }
@@ -806,7 +806,7 @@ export function withStationMissionLevelsV188(Base) {
       }
       if (id === 'station-s3') {
         if (!pr.airlockOpen) slot('station-airlock3-seal', x.dockDoor - 32, decks.low, { text: 'SAS 3 · QUARANTAINE' });
-        slot('station-qz17-cradles', p.cradles.x, decks.low);
+        slot('station-qz17-cradles', p.cradles.x, decks.low, { w: p.cradles.w, h: 51 });
         slot('station-survivor-log', p.log.x - 20, decks.low - 60);
         slot('station-power-router', p.router.x - 38, decks.low - 30, { routes: pr.routes });
         slot('station-echo8-barricade', x.aftLow - 160, decks.low, { text: 'E-8' });
