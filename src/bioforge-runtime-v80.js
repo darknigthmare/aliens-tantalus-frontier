@@ -53,6 +53,7 @@ import { normalizePlayerAppearanceV126 } from './player-appearance-v126.js';
 import { getBioforgeAdmissionV132, getBioforgeAdmissionForSheetV132, isBioforgeAdmissionImageReadyV132 } from './bioforge-admissions-v132.js';
 import { captureBioforgeTacticsV132, restoreBioforgeTacticsV132 } from './bioforge-tactics-state-v132.js';
 import { signalColorV188 } from './colorblind-palette-v188.js';
+import { withBioforgeContainmentLabV188 } from './bioforge-lab-runtime-v188.js';
 
 export const BIOFORGE_SEAL_SECONDS_V80 = 0.72;
 export const BIOFORGE_PRINT_INTERVAL_SECONDS_V80 = 0.46;
@@ -1664,7 +1665,8 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
   };
 }
 
-const BioforgeGameEngineV80 = withBioforgeRuntimeV80(GameEngine);
+// V188 (spec 013): the containment-lab mixin is appended after the V80 chain.
+const BioforgeGameEngineV80 = withBioforgeContainmentLabV188(withBioforgeRuntimeV80(GameEngine));
 
 export class BioforgeRuntimeV80 extends BioforgeGameEngineV80 {}
 

@@ -572,7 +572,13 @@ const BIOFORGE_EVENT_MESSAGES_V80 = Object.freeze({
   'bioforge-persistence-failed': 'SAUVEGARDE REFUSÉE · SIMULATION ARRÊTÉE · AUCUN SUCCÈS CONFIRMÉ',
   'bioforge-reinforcements-appended': 'RENFORTS AJOUTÉS À LA FILE · CAPACITÉ ACTIVE INCHANGÉE',
   'bioforge-reinforcements-replayed': 'RENFORTS DÉJÀ ENREGISTRÉS · AUCUN DOUBLON AJOUTÉ',
-  'bioforge-pending-cancelled': 'ATTENTE ANNULÉE · SPÉCIMENS VIVANTS CONSERVÉS'
+  'bioforge-pending-cancelled': 'ATTENTE ANNULÉE · SPÉCIMENS VIVANTS CONSERVÉS',
+  // V188 containment lab (spec 013).
+  'bioforge-ambulatory-started': 'DÉPLACEMENT DANS LE LABORATOIRE · AUCUNE SESSION MODIFIÉE',
+  'bioforge-exit-decon-started': 'DÉCONTAMINATION DE SORTIE EN COURS',
+  'bioforge-exit-decon-interrupted': 'DÉCONTAMINATION INTERROMPUE · RESTEZ DANS LA CABINE',
+  'bioforge-exit-decon-complete': 'DÉCONTAMINATION TERMINÉE · PORTE DU TANTALUS OUVERTE',
+  'bioforge-egress-complete': 'RETOUR AU TANTALUS PAR LE SAS DE SORTIE'
 });
 
 function renderBioforgeUiV87({ state = saveSystem.data.bioforgeV80, resetDraft = false } = {}) {
@@ -637,6 +643,14 @@ function handleBioforgeEventV80(event) {
   if (message && status) status.textContent = message;
   if (event?.type === 'bioforge-asset-error') toast(`BIOFORGE · image indisponible : ${event.assetId || 'asset inconnu'}.`);
   if (event?.type === 'bioforge-exit-locked') toast('BIOFORGE · sortie verrouillée tant que la purge n’est pas complète.');
+  // V188 containment lab: read-only reports, the control console and the physical exit.
+  if (event?.type === 'bioforge-lab-report' && status && typeof event.text === 'string') status.textContent = event.text;
+  if (event?.type === 'bioforge-terminal-requested' && bioforgeUiV80) {
+    bioforgeUiV80.terminalExpandedV87 = true;
+    bioforgeUiV80.syncTerminalV87?.();
+    byId('bioforge-profile-v80')?.scrollIntoView?.({ block: 'nearest' });
+  }
+  if (event?.type === 'bioforge-egress-complete') setTimeout(() => returnBioforgeToHubV80(), 0);
 }
 
 function bioforgePlayerPresentationOptionsV126() {
@@ -664,6 +678,8 @@ function prepareBioforgeViewV80() {
     bioforgeRuntimeV80.prepare(state, presentation);
     toast(error.message);
   }
+  // V188: the lab can be walked (no session, or the exit after a purge) while this view is shown.
+  bioforgeRuntimeV80.armBioforgeAmbulatoryV188?.(true);
   renderBioforgeUiV87({ state: bioforgeRuntimeV80.bioforgeRootV80, resetDraft: true });
 }
 

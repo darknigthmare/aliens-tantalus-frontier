@@ -42,7 +42,9 @@ export const VFX_KINDS_V188 = Object.freeze({
   steam: kind('steam-puff', -55, 1.4, .16),
   dust: kind('footstep-dust', -6, 2.5, .42),
   splash: kind('footstep-splash', 0, 0, .8),
-  ping: kind('tracker-ping', 0, 0, .55, false, true)
+  ping: kind('tracker-ping', 0, 0, .55, false, true),
+  // V188 Bioforge lab (spec 013): rising bubbles in stasis-tank liquid.
+  bubble: kind('liquid-bubble', -120, 1.1, .75)
 });
 
 /** Bounded pool: `cap` particle objects are allocated once and recycled (swap-remove). */
