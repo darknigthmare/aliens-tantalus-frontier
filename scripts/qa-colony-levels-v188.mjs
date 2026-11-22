@@ -17,6 +17,10 @@
 // (injection (1) puts the marine on the roof and in the gallery, then the real D key and Space
 // walk and jump east; the logical check imports the page's colony module), and captures both
 // ends of the C1 corridor (perspective capped). Running these checks only: argv[3] = ids.
+// Owner decisions of 2026-11-22 (round 2): the C3 preparation screen (#operation-plan, read before
+// launch) lists Noor Okafor as unavailable « à l'infirmerie » with the reason; the EN text is read
+// from the page's own catalogue module (`import('/src/i18n-en-catalog-v185.js')`); the M577 parked at
+// the quay is checked at scale on the quay floor from the page's level (places, platforms, doors).
 // Usage: PORT=4641 node scripts/dev.mjs & ; node scripts/qa-colony-levels-v188.mjs <out-dir>
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -83,6 +87,17 @@ async function launch(id) {
   const options = await page.locator('#command-mission-v110 option').evaluateAll(nodes => nodes.map(node => node.value));
   check(`${id}: offered in the Command mission order`, options.includes(id), options.filter(entry => entry.startsWith('colony-c')));
   await page.locator('#command-mission-v110').selectOption(id); await page.waitForTimeout(400);
+  if (id === 'colony-c3') {
+    const plan = await page.locator('#operation-plan').innerText();
+    const row = await page.locator('#operation-plan [data-crew-unavailable-v188]').evaluateAll(nodes => nodes.map(node => ({ id: node.dataset.crewUnavailableV188, text: node.textContent })));
+    const en = await page.evaluate(async () => { const { EN_CATALOG_V185 } = await import('/src/i18n-en-catalog-v185.js');
+      return { status: EN_CATALOG_V185['Noor Okafor · À L’INFIRMERIE'], reason: EN_CATALOG_V185['Indisponible pour C3 : elle tient l’infirmerie de Port-Méridien pour le contrôle biologique des rescapés du M577.'] }; });
+    const squad = plan.split('\n').find(line => /ESCOUADE/.test(line)) || '';
+    check('C3 preparation: Noor Okafor listed as unavailable at the infirmary, with the reason (FR on screen, EN catalogued)',
+      row.length === 1 && row[0].id === 'crew-04-noor-okafor' && /Noor Okafor · À L’INFIRMERIE/.test(plan) && /INDISPONIBLE/.test(plan) && /contrôle biologique des rescapés du M577/.test(plan)
+        && en.status === 'Noor Okafor · AT THE INFIRMARY' && /^Unavailable for C3/.test(en.reason || ''), { row, squad, en });
+    await page.locator('#operation-plan').screenshot({ path: join(out, 'colony-c3-prep-noor.png') }); report.shots.push(join(out, 'colony-c3-prep-noor.png'));
+  }
   await page.locator('#operation-launch').click(); await page.waitForTimeout(1200);
   for (let i = 0; i < 40; i++) {
     const live = await game(() => Boolean(globalThis.__ATF_GAME__?.mission && globalThis.__ATF_GAME__?.running && globalThis.__ATF_GAME__?.colonyLevelV188));
@@ -146,6 +161,17 @@ for (const id of only) {
     const noor = await game(() => { const e = globalThis.__ATF_GAME__; return { posted: Boolean(e.colonyLevelV188.noorPosted),
       manifest: (e.squadManifestV132 || []).map(member => member.id), actors: (e.squadActors || []).map(member => member.crewId || member.memberId || member.id), message: e.colonyLevelV188.message?.text || null }; });
     check('C3: Noor Okafor posted at the infirmary, not in the squad', noor.posted && !noor.manifest.includes('crew-04-noor-okafor') && !noor.actors.some(entry => String(entry).includes('noor')) && /Noor Okafor reste à l’infirmerie/.test(noor.message || ''), noor);
+    const quay = await game(async () => {
+      const e = globalThis.__ATF_GAME__, p = e.colonyLevelV188.places, { COLONY_C3_M577_V188 } = await import('/src/colony-level-art-v188.js');
+      const x0 = p.m577 - COLONY_C3_M577_V188.w / 2, x1 = p.m577 + COLONY_C3_M577_V188.w / 2;
+      const floor = e.platforms.filter(entry => Math.abs(entry.y - p.floorY) < 1).map(entry => [entry.x, entry.x + entry.w]).sort((a, b) => a[0] - b[0]);
+      let covered = 0, cursor = x0; for (const [a, b] of floor) { const s = Math.max(a, cursor), t = Math.min(b, x1); if (t > s) { covered += t - s; cursor = t; } }
+      return { w: COLONY_C3_M577_V188.w, drivable: COLONY_C3_M577_V188.drivable, x0, x1, covered, quay: p.quay, arrivals: p.arrivals,
+        doors: e.doors.filter(door => door.x < x1 && door.x + door.w > x0).map(door => door.id), vehicleActive: Boolean(e.vehicle?.active) };
+    });
+    check('C3: the M577 that brought the survivors is parked at the quay, to scale (449 px) on the quay floor, scenery (nothing drivable)',
+      quay.w === 449 && quay.drivable === false && quay.covered >= 448 && !quay.doors.length && !quay.vehicleActive && quay.arrivals[0] >= quay.x1 - 20, quay);
+    await moveTo(Math.round((quay.x0 + quay.x1) / 2) + 300); await page.waitForTimeout(500); await shot('colony-c3-00b-m577-quay');
   }
   if (id === 'colony-c1') {
     const span = await game(() => globalThis.__ATF_GAME__.missionDepthSectionV188?.deckPerspectiveSpan ?? null);

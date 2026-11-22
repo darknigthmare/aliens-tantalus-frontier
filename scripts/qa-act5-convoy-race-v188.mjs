@@ -9,6 +9,11 @@
 // stored save; for the epilogue a copy of the save is set to phase 'epilogue' (declared injection,
 // in memory only, never written back).
 // Input: real keyboard (E engage, D throttle, F turret, C / X uncouple). No position injection.
+// Owner decisions of 2026-11-22 (round 2): a fourth run replays « La Reine du dépôt » (both missions
+// already completed: the replay tows both trailers) with one declared injection — the towed trailers'
+// integrity is held at 100 every 100 ms (`pinTrailers`), the fixture that keeps them attached so the
+// Queen never feeds on a torn one and reaches her health floor: her `recoil` is observed. The chase
+// framing is read from the race snapshot (`framing`: zoom, Queen extent, turret, on screen) at close range.
 // Usage: BASE_URL=http://127.0.0.1:4631/ node scripts/qa-act5-convoy-race-v188.mjs <out-dir>
 import { createRequire } from 'node:module';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -24,11 +29,11 @@ await mkdir(out, { recursive: true });
 const report = { baseUrl, checks: [], pageErrors: [], consoleErrors: [], shots: [], snapshots: {} };
 const check = (label, condition, evidence = null) => { report.checks.push({ label, passed: Boolean(condition), evidence }); console.log(JSON.stringify({ check: label, passed: Boolean(condition), evidence })); };
 
-function fixture({ lastRunDone = false, cede = false } = {}) {
+function fixture({ lastRunDone = false, cede = false, queenDone = false } = {}) {
   const save = createDefaultSave(); save.needsPlayerCreationV84 = false; save.scene = 'command';
   save.worldId = 'world-05-lethe'; save.galaxy.shipWorldIdV116 = 'world-05-lethe';
   save.galaxy.completedCampaignIds = [...new Set([...save.galaxy.completedCampaignIds, 'special-narrative-qz17', 'special-archive-relay', 'special-apc-convoy', 'special-c12-horde', 'special-black-cocoon',
-    ...(lastRunDone ? ['act5-last-run'] : [])])];
+    ...(lastRunDone ? ['act5-last-run'] : []), ...(queenDone ? ['act5-last-run', 'act5-depot-queen'] : [])])];
   const story = save.storyCampaignV188;
   story.cinematicsSeen = [...CINEMATIC_IDS_V188]; story.debriefSeen = [...new Set([...(story.debriefSeen || []), 'special-black-cocoon', 'special-c12-horde', 'special-apc-convoy', 'special-archive-relay'])];
   story.m577Manifest = { containers: 2, colonists: 2, resolved: true };
@@ -172,6 +177,33 @@ try {
   check('ending and epilogue mention the lost freight (FR + EN)', ending.lines.some(line => /ne parle plus de « restitution »/.test(line)) && ending.linesEn.some(line => /no longer speaks of a "restitution"/.test(line))
     && /ravin du pont avec 2 conteneur/.test(ending.freightFr || '') && /bridge ravine with 2 QZ17/.test(ending.freightEn || ''), ending);
   report.snapshots.cede = { race: s, ending };
+
+  // —— Owner decisions 2026-11-22 (round 2): the Queen's recoil, trailers kept attached; the close-range framing ——
+  await importProfile(fixture({ queenDone: true }), 'act5-queen-replay.json');
+  await launch('act5-depot-queen');
+  s = await race();
+  check('replay chase: both trailers towed (longer convoy), Queen at 245 px', s?.trailers.length === 2 && s.queen?.height === 245, { trailers: s?.trailers, queen: s?.queen });
+  const pinTrailers = () => page.evaluate(() => { for (const trailer of globalThis.__ATF_GAME__?.act5RaceV188?.trailers || []) trailer.integrity = 100; });
+  await page.keyboard.press('KeyE'); await page.waitForTimeout(300);
+  await hold(['KeyD', 'KeyF'], 200);
+  const framing = { close: [], recoil: null, states: new Set() };
+  for (let i = 0; i < 900 && !(s = await race())?.complete && !s?.failed; i++) {
+    await pinTrailers();
+    if (s.queen) {
+      framing.states.add(s.queen.state);
+      if (s.queen.state !== 'dead' && s.queen.gap < 3) framing.close.push(s.framing);
+      if (s.queen.state === 'recoil' && !framing.recoil) { framing.recoil = { metres: s.metres, trailers: s.trailers.length, health: s.queen.health, floor: s.queen.floor, framing: s.framing }; await shot('11-queen-recoil-trailers-attached'); }
+      if (s.queen.gap < 3 && framing.close.length === 5) await shot('12-queen-close-framed');
+    }
+    await page.waitForTimeout(100);
+  }
+  await release(['KeyD', 'KeyF']);
+  check('the Queen recoils (thrown back at her health floor) with both trailers attached', Boolean(framing.recoil) && framing.recoil.trailers === 2 && framing.recoil.health === framing.recoil.floor, framing.recoil);
+  const worst = framing.close.reduce((low, f) => Math.min(low, f.queenLeft), Infinity), turret = framing.close.reduce((high, f) => Math.max(high, f.turret), -Infinity);
+  check('at close range her whole figure stays in view (tail within 16 px of the left edge at worst), the roof turret in view',
+    framing.close.length > 5 && worst >= -16 && turret <= 1232 + 1 && framing.close.every(f => f.zoom >= .78 && f.zoom <= 1), { samples: framing.close.length, worstLeft: worst, maxTurret: turret, zooms: [...new Set(framing.close.map(f => f.zoom))].slice(0, 8) });
+  check('replay chase ends at the junction', s?.complete === true, { phase: s?.phase, states: [...framing.states] });
+  report.snapshots.replay = { race: s, recoil: framing.recoil };
 } finally {
   check('no page error', report.pageErrors.length === 0, report.pageErrors);
   await writeFile(join(out, 'report.json'), JSON.stringify(report, null, 2));

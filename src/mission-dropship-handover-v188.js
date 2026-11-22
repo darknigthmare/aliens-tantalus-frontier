@@ -194,7 +194,8 @@ export function withMissionDropshipHandoverV188(Base) {
       if (!this.handoverKeysBoundV188 && typeof globalThis.addEventListener === 'function') {
         this.handoverKeysBoundV188 = true;
         globalThis.addEventListener('keydown', event => {
-          if (!this.running || event.repeat || !SKIP_KEYS.has(event.code) || !this.handoverV188?.blocking) return;
+          // The E press that confirms an extraction starts the boarding on this same keydown: it is not a skip request.
+          if (!this.running || event.repeat || !SKIP_KEYS.has(event.code) || !this.handoverV188?.blocking || !(this.handoverV188.t > .25)) return;
           if (this.canRouteGameplayKey && !this.canRouteGameplayKey(event)) return;
           event.preventDefault?.();
           this.skipDropshipHandoverV188();

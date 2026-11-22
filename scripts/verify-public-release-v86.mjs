@@ -547,6 +547,9 @@ const FORGE_TOOLING_V140 = new Set([
   // V188 dedicated colony levels C1-C4: suite and spec, source-only exact paths.
   'scripts/verify-colony-levels-v188.mjs',
   'scripts/qa-colony-levels-v188.mjs',
+  // V188 the M577 to scale everywhere (owner decisions 2026-11-22, round 2): suite and browser pass, source-only exact paths.
+  'scripts/verify-m577-everywhere-v188.mjs',
+  'scripts/qa-apc-levels-v188.mjs',
   'specs/008-niveaux-colonie',
   'specs/008-niveaux-colonie/spec.md',
   'specs/008-niveaux-colonie/plan.md',
