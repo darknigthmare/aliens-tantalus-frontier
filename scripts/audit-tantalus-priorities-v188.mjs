@@ -1195,19 +1195,19 @@ export const TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188 = freeze({ baseline: '0d1
   },
   "docs/arsenal/README.md": {
     "previousSha256": "61c87b06e64ba5d2bdb3d91d22fb33b0fb8038309be8c3d98a43547444e13b4f",
-    "currentSha256": "112cf2ec236f1fc8da0af8268db1ffc857741d028560942e0413a66e0562a336"
+    "currentSha256": "d133b3b9412a04117390aee16872fda291fde068e0139eddb210c79ecc0723ad"
   },
   "docs/development/AUDIT_CONTENU_V188.md": {
     "previousSha256": "68d3f8c15a10195a773b0ec826d32341d01f7b554bef1370777dfbee219e3923",
-    "currentSha256": "57f80081695f4d55a77fb941a007e0d41d14e280cb91560c53c3d9b772ebed9e"
+    "currentSha256": "d1f77117d765eb853eec3f569732d496ccc7df8181c4167057b77433b5b26c7a"
   },
   "docs/development/QUESTIONS_PROPRIETAIRE_V188.md": {
     "previousSha256": "15018c92727c164872514278c03acb8ffab23ab0d1501b8ba663018caf497951",
-    "currentSha256": "ad10c73bab3a7e4c84c6bce59030a7e81d746b91ea6f3e942bae9c888901db7c"
+    "currentSha256": "2a9ae40d4e010ba803108a1ea684edd5d138dbc0a55dfa025e49dfab0ec7696c"
   },
   "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
     "previousSha256": "d03dcc6e75b22a69890b389d5c0ef84311d5ea2e12d9dbe8233c2ff78bd419cb",
-    "currentSha256": "19cdfa837271744d93c9d23bff792c5bc6f761ebd8a4411eafcc168c36e92195"
+    "currentSha256": "8251d74d5d5c837b27855d4f528c492921346aae8b9f16fa3174a829982a7125"
   },
   "index.html": {
     "previousSha256": "3ef0afc6493e26c7c483549ad2df64b59c96fcb5beaa8b1f2c35a99400fd35de",
@@ -1355,7 +1355,7 @@ export const TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188 = freeze({ baseline: '0d1
   },
   "src/i18n-en-catalog-v185.js": {
     "previousSha256": "11a0ec21f4ac8a04b65af1a3532d190996eed9c806fdbede9a9334975dc8e5dd",
-    "currentSha256": "a04bcb9c39275d2498e63a1b94f2cf4fb8e08d0808dc89a737bff19a07fbf848"
+    "currentSha256": "e176e771968ee8db8e5b84ed277b676a3786b7495d2b2f8c26f87d418030392e"
   },
   "src/legacy-operation-state-v131.js": {
     "previousSha256": "bda3ae3681cf383b1a8100e9110ba931ab62ba4d4f0f94a02d4a98ed80add7da",

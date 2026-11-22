@@ -3,7 +3,8 @@
  * the existing armory rule (no dedicated plaque => no procurement) keeps them
  * non-purchasable, and the held/hub renderers draw a named Canvas placeholder
  * slot instead of an image. Every number is original Tantalus gameplay tuning
- * marked [PROPOSÉ]; identities cite their source and none is certified 1:1.
+ * marked [PROPOSÉ] (statsPolicy and docs/development/ARSENAL_COMPLETION_V188.md);
+ * identities cite their source and none is certified 1:1.
  * Existing IDs, saves and numbering are untouched (new IDs start at 194; 191 stays a test-reserved unknown number).
  */
 const freeze = value => {
@@ -30,7 +31,7 @@ export const WEAPON_CATALOG_ADDITIONS_V188 = freeze([
     identityEvidence: 'on-screen-film-prop-identified-by-secondary-firearm-database',
     identityVerified: false,
     sourceMechanism: 'pump-action-tube-magazine', ammunitionV188: '12 ga shotshell (chambrage de l’arme réelle) [À VÉRIFIER]',
-    description: 'Fusil à pompe de Hicks, Aliens (1986). Accessoire de tournage identifié comme Ithaca 37 raccourci par des bases secondaires (IMFDB, wiki AVP) ; Stakeout d’usine ou modèle long recoupé reste débattu. Alimentation tube et pompe documentées par le mécanisme réel ; capacité 4 et cadence [PROPOSÉ]. Aucune plaque native : silhouette Canvas provisoire.'
+    description: 'Fusil à pompe du caporal Hicks dans Aliens (1986), identifié comme un Ithaca 37 raccourci par des bases secondaires. Alimentation par tube et pompe. Plaque d’armurerie à produire : non disponible à l’achat.'
   },
   {
     ...common,
@@ -43,7 +44,7 @@ export const WEAPON_CATALOG_ADDITIONS_V188 = freeze([
     identityEvidence: 'first-party-manual-names-weapon-class-only',
     identityVerified: true,
     sourceMechanism: 'pump-action-tube-magazine', ammunitionV188: 'shotshell [À DÉFINIR]',
-    description: 'Fusil à pompe de Sevastopol, Alien: Isolation. Le manuel Feral nomme seulement la classe « Shotgun » ; la désignation « Model 37 12 Gauge » vient d’un wiki secondaire. Tube et pompe [À VÉRIFIER] ; capacité 4 [PROPOSÉ]. Aucune plaque native : silhouette Canvas provisoire.'
+    description: 'Fusil à pompe trouvé à bord de Sevastopol (Alien: Isolation). Alimentation par tube et pompe. Plaque d’armurerie à produire : non disponible à l’achat.'
   },
   {
     ...common,
@@ -56,7 +57,7 @@ export const WEAPON_CATALOG_ADDITIONS_V188 = freeze([
     identityEvidence: 'first-party-manual-names-weapon-class-only',
     identityVerified: true,
     sourceMechanism: 'fuel-canister-flame-jet', ammunitionV188: 'fuel [À DÉFINIR]',
-    description: 'Lance-flammes de Sevastopol, Alien: Isolation (classe nommée par le manuel Feral). Réservoir de carburant, aucune douille ; 80 unités de carburant et débit [PROPOSÉ]. Aucune plaque native : silhouette Canvas provisoire.'
+    description: 'Lance-flammes trouvé à bord de Sevastopol (Alien: Isolation). Réservoir de carburant, aucune douille. Plaque d’armurerie à produire : non disponible à l’achat.'
   }
 ]);
 export const WEAPON_ADDITION_IDS_V188 = Object.freeze(WEAPON_CATALOG_ADDITIONS_V188.map(weapon => weapon.id));
