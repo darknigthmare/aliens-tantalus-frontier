@@ -187,7 +187,7 @@ try {
   await page.keyboard.press('KeyE'); await page.waitForTimeout(300);
   await hold(['KeyD', 'KeyF'], 200);
   const framing = { close: [], recoil: null, states: new Set() };
-  for (let i = 0; i < 900 && !(s = await race())?.complete && !s?.failed; i++) {
+  for (let i = 0, until = Date.now() + 360000; Date.now() < until && !(s = await race())?.complete && !s?.failed; i++) {
     await pinTrailers();
     if (s.queen) {
       framing.states.add(s.queen.state);

@@ -263,7 +263,8 @@ for (const id of only) {
       if (!progress.civilians.some(entry => entry.state === 'scan')) await press(); else await page.waitForTimeout(900);
       if (i === 6) await shot('colony-c3-03-scanner');
     }
-    check('C3: five screened, carrier revealed', await phase() === 'carrier', await game(() => globalThis.__ATF_GAME__.colonyLevelV188.progress.hatchRemaining));
+    for (let i = 0; i < 12 && await phase() !== 'carrier'; i++) await page.waitForTimeout(500); // the last scan settles before the phase turns
+    check('C3: five screened, carrier revealed', await phase() === 'carrier', await game(() => ({ phase: globalThis.__ATF_GAME__.colonyPhaseIdV188(), scanned: globalThis.__ATF_GAME__.colonyLevelV188.progress.scanned, states: globalThis.__ATF_GAME__.colonyLevelV188.progress.civilians.map(entry => entry.state), hatch: globalThis.__ATF_GAME__.colonyLevelV188.progress.hatchRemaining })));
     for (let i = 0; i < 40; i++) {
       const at = await game(() => { const pr = globalThis.__ATF_GAME__.colonyLevelV188.progress; return pr.civilians[pr.carrier].x; });
       if (at >= P.noor - 140) break;

@@ -756,3 +756,12 @@ Décisions reçues après la livraison `48b0a599` (D1-D4d ci-dessus). Elles lèv
 | — | Correction trouvée par la QA du largage | La touche E qui confirme l'extraction atteignait aussi l'écoute « passer » de la séquence qu'elle venait de lancer : l'embarquement en niveau était sauté. Un « passer » n'est accepté qu'après 0,25 s de séquence | — |
 
 Aucune de ces décisions ne certifie une fidélité « 1:1 » ; tous les visuels du M577 en niveau restent des substituts Canvas.
+
+## Réponses du propriétaire aux questions Q-010-1 à Q-010-4 (2026-11-22)
+
+| Question | Réponse | Application |
+| --- | --- | --- |
+| Q-010-1 | **A** : l'audience décide ; 5 pièces ou plus rendent la victoire possible, pas automatique | Comportement actuel conservé (aucun changement de code) |
+| Q-010-2 | **A** : l'issue de l'interrogatoire de CASSIUS ne change que le texte de la décision S2 | Réponse enregistrée ; l'entrée `station-s2-cassius` reste à raccorder dans ce sens (aucune option ni fin nouvelle) |
+| Q-010-3 | **A** : l'interrogatoire de BISHOP-9 viendra plus tard, avec la quête `station-a-bishop` (« Accès administrateur ») | Reporté, rien n'est ajouté maintenant |
+| Q-010-4 | **A** : Halloran est une femme, « Directrice » comme en §2.3 | Les deux répliques anciennes du conseil de guerre sont corrigées en FR et EN (`src/story-act5-v188.js`) : « devant la directrice Halloran » / "before Director Halloran", « elle bluffe sur les délais » / "she bluffs about deadlines". Recherche faite dans `src/`, `docs/` et `specs/` : aucune autre forme masculine pour Halloran |
