@@ -9,18 +9,20 @@ import { createVfxPoolV188, spawnVfxParticleV188, stepVfxPoolV188, drawVfxPartic
 import { signalColorV188 } from './colorblind-palette-v188.js';
 import {
   BIOFORGE_LAB_ZONES_V188, BIOFORGE_LAB_PROPS_V188, BIOFORGE_OBSERVATION_GALLERY_V188,
-  BIOFORGE_EXIT_DECON_SECONDS_V188, getBioforgeLabZoneV188
+  BIOFORGE_EXIT_DECON_SECONDS_V188, BIOFORGE_LAB_PHASE_LABELS_V188, getBioforgeLabZoneV188
 } from './bioforge-lab-layout-v188.js';
 
 export const BIOFORGE_LAB_VFX_CAP_V188 = 160;
 export const BIOFORGE_LAB_FOREGROUND_ALPHA_V188 = 0.18;
 const VIEW_W = 1280;
-const STEEL = '#1b2422', STEEL_DARK = '#0d1312', STEEL_EDGE = '#3c4a46', PLATE = '#26312e';
+const STEEL = '#1b2422', STEEL_DARK = '#0d1312', STEEL_EDGE = '#3c4a46', PLATE = '#242e2b';
 const PARTITION_W = 150;
 
 export function createBioforgeLabVfxV188() { return createVfxPoolV188({ cap: BIOFORGE_LAB_VFX_CAP_V188, decalCap: 0 }); }
 
-const visible = (x, w, cameraX, margin = 40) => x + w >= cameraX - margin && x <= cameraX + VIEW_W + margin;
+// view.span (whole world) is used when the static layers are rendered once into a cache.
+const visible = (x, w, view, margin = 40) => view.span ? x + w >= view.span.left && x <= view.span.right
+  : x + w >= view.cameraX - margin && x <= view.cameraX + VIEW_W + margin;
 
 function rect(ctx, fill, x, y, w, h) { ctx.fillStyle = fill; ctx.fillRect(x, y, w, h); }
 function frame(ctx, stroke, x, y, w, h, width = 2) { ctx.strokeStyle = stroke; ctx.lineWidth = width; ctx.strokeRect(x + .5, y + .5, w - 1, h - 1); }
@@ -38,7 +40,7 @@ function label(ctx, text, x, y, { size = 11, color = '#cfe2d4', align = 'left', 
 function drawShells(ctx, view) {
   const { level, cameraX } = view;
   const { ceilingY, floorY, width } = level.world;
-  const left = Math.max(0, cameraX - 40), right = Math.min(width, cameraX + VIEW_W + 40);
+  const left = view.span ? 0 : Math.max(0, cameraX - 40), right = view.span ? width : Math.min(width, cameraX + VIEW_W + 40);
   rect(ctx, STEEL_DARK, left, 0, right - left, ceilingY);
   rect(ctx, STEEL_EDGE, left, ceilingY - 4, right - left, 4);
   rect(ctx, '#121917', left, floorY, right - left, 720 - floorY);
@@ -46,7 +48,7 @@ function drawShells(ctx, view) {
   ctx.fillStyle = '#1f2826';
   for (let x = Math.floor(left / 48) * 48; x < right; x += 48) ctx.fillRect(x, floorY + 10, 30, 4);
   for (const zone of BIOFORGE_LAB_ZONES_V188) {
-    if (!visible(zone.x, zone.w, cameraX)) continue;
+    if (!visible(zone.x, zone.w, view)) continue;
     if (zone.ceilingY != null) {
       // Solid mass above the visual ceiling, then a lit back wall at human scale.
       rect(ctx, '#111816', zone.x, ceilingY, zone.w, zone.ceilingY - ceilingY);
@@ -55,13 +57,13 @@ function drawShells(ctx, view) {
       rect(ctx, STEEL_EDGE, zone.x, zone.ceilingY - 10, zone.w, 10);
       // Back wall; an observation window is left clear so the V80 process modules show through.
       const pane = BIOFORGE_LAB_PROPS_V188.find(prop => prop.zoneId === zone.id && prop.slot === 'bioforge-lab-observation-window');
-      ctx.save(); ctx.globalAlpha = .9; ctx.fillStyle = PLATE; ctx.beginPath();
+      ctx.fillStyle = PLATE; ctx.beginPath();
       ctx.rect(zone.x, zone.ceilingY, zone.w, floorY - zone.ceilingY);
       if (pane) ctx.rect(pane.x, pane.y, pane.w, pane.h);
-      ctx.fill('evenodd'); ctx.restore();
+      ctx.fill('evenodd');
       ctx.strokeStyle = 'rgba(0,0,0,.35)'; ctx.lineWidth = 1;
       for (let x = zone.x + 40; x < zone.x + zone.w; x += 58) { ctx.beginPath(); ctx.moveTo(x + .5, zone.ceilingY); ctx.lineTo(x + .5, floorY); ctx.stroke(); }
-      rect(ctx, 'rgba(0,0,0,.28)', zone.x, floorY - 46, zone.w, 46);
+      rect(ctx, '#1d2523', zone.x, floorY - 46, zone.w, 46);
     }
   }
 }
@@ -73,13 +75,16 @@ function drawZoneLight(ctx, zone, view) {
   let color = zone.light;
   if (zone.id === 'containment-cell' && ['combat', 'printing', 'sealing'].includes(view.phase)) color = '#d0503c';
   if (zone.id === 'exit-decon' && view.exitDecon?.active) color = '#7fe0e8';
-  const gradient = ctx.createLinearGradient ? ctx.createLinearGradient(0, top, 0, level.world.floorY) : null;
+  // Two flat translucent cones (wide halo, narrow core): a gradient per zone was
+  // measured at about 1 ms per frame in the reference scene, these at a fraction.
   ctx.save();
-  ctx.globalAlpha = view.reducedMotion ? .14 : .18;
-  if (gradient) { gradient.addColorStop(0, color); gradient.addColorStop(1, 'rgba(0,0,0,0)'); ctx.fillStyle = gradient; }
-  else ctx.fillStyle = color;
-  const spread = Math.min(zone.w / 2 - 6, 170);
-  ctx.beginPath(); ctx.moveTo(cx - 24, top); ctx.lineTo(cx + 24, top); ctx.lineTo(cx + spread, level.world.floorY); ctx.lineTo(cx - spread, level.world.floorY); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = color;
+  const floor = level.world.floorY, spread = Math.min(zone.w / 2 - 6, 170);
+  for (const [alpha, width, reach] of [[.07, spread, 1], [.07, spread * .5, .7]]) {
+    ctx.globalAlpha = alpha;
+    const bottom = top + (floor - top) * reach;
+    ctx.beginPath(); ctx.moveTo(cx - 24, top); ctx.lineTo(cx + 24, top); ctx.lineTo(cx + width, bottom); ctx.lineTo(cx - width, bottom); ctx.closePath(); ctx.fill();
+  }
   ctx.restore();
   rect(ctx, color, cx - 26, top, 52, 4);
 }
@@ -97,29 +102,29 @@ function drawSign(ctx, zone, view) {
   label(ctx, zone.detail, x + w / 2, y + 28, { size: 9, color: zone.light, align: 'center' });
 }
 
-function drawPartitions(ctx, view) {
-  const { level, cameraX } = view;
+function drawPartitions(ctx, view, { lightsOnly = false, structureOnly = false } = {}) {
+  const { level } = view;
   const { ceilingY, floorY } = level.world;
   for (const door of view.doors) {
     const cx = door.x + door.w / 2, x = cx - PARTITION_W / 2;
-    if (!visible(x, PARTITION_W, cameraX)) continue;
+    if (!visible(x, PARTITION_W, view)) continue;
+    const lintel = floorY - 168;
+    const light = signalColorV188(door.open ? 'bioforge-door-open' : 'bioforge-door-locked');
+    if (lightsOnly) { rect(ctx, light, cx - 18, lintel - 34, 36, 8); continue; }
     // The 40×536 collider now reads as a full-height bulkhead: wall mass above
     // the door leaf (V80 bulkhead atlas, 180 px) down to the lintel.
-    const lintel = floorY - 168;
     rect(ctx, STEEL, x, ceilingY, PARTITION_W, lintel - ceilingY);
     rect(ctx, STEEL_EDGE, x, ceilingY, 6, lintel - ceilingY); rect(ctx, STEEL_EDGE, x + PARTITION_W - 6, ceilingY, 6, lintel - ceilingY);
     ctx.fillStyle = '#28332f';
     for (let y = ceilingY + 30; y < lintel - 20; y += 60) ctx.fillRect(x + 14, y, PARTITION_W - 28, 22);
     hazard(ctx, x, lintel - 14, PARTITION_W, 14);
-    const state = door.open ? 'bioforge-door-open' : 'bioforge-door-locked';
-    rect(ctx, signalColorV188(state), cx - 18, lintel - 34, 36, 8);
+    if (!structureOnly) rect(ctx, light, cx - 18, lintel - 34, 36, 8);
   }
 }
 
 function drawCatwalks(ctx, view) {
-  const { level, cameraX } = view;
   for (const platform of view.platforms) {
-    if (platform.floor || !visible(platform.x, platform.w, cameraX)) continue;
+    if (platform.floor || !visible(platform.x, platform.w, view)) continue;
     rect(ctx, '#2c3532', platform.x, platform.y, platform.w, platform.h);
     ctx.fillStyle = '#151c1a';
     for (let x = platform.x + 4; x < platform.x + platform.w - 4; x += 10) ctx.fillRect(x, platform.y + 5, 5, platform.h - 9);
@@ -132,7 +137,7 @@ function drawCatwalks(ctx, view) {
     label(ctx, 'PASSERELLE · SPÉCIMENS', platform.x + platform.w / 2, platform.y + platform.h + 15, { size: 9, color: '#c9b27a', align: 'center' });
   }
   for (const ladder of view.ladders) {
-    if (!visible(ladder.x, ladder.w, cameraX)) continue;
+    if (!visible(ladder.x, ladder.w, view)) continue;
     ctx.strokeStyle = '#59675f'; ctx.lineWidth = 3; ctx.beginPath();
     ctx.moveTo(ladder.x + 8, ladder.top); ctx.lineTo(ladder.x + 8, ladder.bottom);
     ctx.moveTo(ladder.x + ladder.w - 8, ladder.top); ctx.lineTo(ladder.x + ladder.w - 8, ladder.bottom);
@@ -143,7 +148,7 @@ function drawCatwalks(ctx, view) {
 
 function drawGallery(ctx, view) {
   const g = BIOFORGE_OBSERVATION_GALLERY_V188;
-  if (!visible(g.x, g.w, view.cameraX)) return;
+  if (!visible(g.x, g.w, view)) return;
   rect(ctx, '#0a1110', g.x - 10, g.y - 10, g.w + 20, g.h + 20);
   rect(ctx, '#132320', g.x, g.y, g.w, g.h);
   // Observers: anonymous placeholders (Inez / BISHOP-9 presence is to define).
@@ -218,7 +223,7 @@ function drawProp(ctx, prop, view) {
         for (let line = 0; line < 4; line++) ctx.fillRect(mx + 4, y + 5 + line * 6, 8 + ((i * 7 + line * 5 + Math.floor(t * 2)) % 20), 2);
       }
       rect(ctx, '#0a1413', x + 10, y + 38, 92, 32); frame(ctx, '#3f5650', x + 10, y + 38, 92, 32, 1);
-      label(ctx, String(view.phase || 'CONFIGURATION').toUpperCase().slice(0, 12), x + 56, y + 58, { size: 9, color: '#8fe0a6', align: 'center' });
+      label(ctx, BIOFORGE_LAB_PHASE_LABELS_V188[view.phase] || 'CONFIGURATION', x + 56, y + 58, { size: 9, color: '#8fe0a6', align: 'center' });
       break;
     case 'bioforge-lab-observation-window':
       // A clear bay onto the lab: the V80 process modules show through the glass.
@@ -301,21 +306,35 @@ function drawProp(ctx, prop, view) {
   }
 }
 
+// Props whose look never changes (drawn with the architecture). A cached world layer
+// was measured and gave no gain in the reference scene (spec 013 plan), so none is kept.
+const STATIC_PROP_SLOTS_V188 = new Set(['bioforge-lab-cryo-drawers', 'bioforge-lab-observation-window', 'bioforge-lab-decon-nozzles',
+  'bioforge-lab-purge-vents', 'bioforge-lab-dissection-table']);
+
+function drawBackStatic(ctx, view) {
+  drawShells(ctx, view);
+  drawGallery(ctx, view);
+  for (const prop of BIOFORGE_LAB_PROPS_V188) if (STATIC_PROP_SLOTS_V188.has(prop.slot) && visible(prop.x, prop.w, view)) drawProp(ctx, prop, view);
+  drawCatwalks(ctx, view);
+}
+function drawFrontStatic(ctx, view) {
+  drawPartitions(ctx, view, { structureOnly: true });
+  for (const zone of BIOFORGE_LAB_ZONES_V188) if (visible(zone.x, zone.w, view)) drawSign(ctx, zone, view);
+}
+
 /** World-space back layer: drawn after the V80 process modules, before actors. */
 export function drawBioforgeLabBackV188(ctx, view) {
   if (!ctx || !view?.level) return 0;
   ctx.save();
-  drawShells(ctx, view);
-  if (visible(BIOFORGE_OBSERVATION_GALLERY_V188.x, BIOFORGE_OBSERVATION_GALLERY_V188.w, view.cameraX)) drawGallery(ctx, view);
+  drawBackStatic(ctx, view);
   let drawn = 0;
-  for (const zone of BIOFORGE_LAB_ZONES_V188) if (visible(zone.x, zone.w, view.cameraX)) drawZoneLight(ctx, zone, view);
+  for (const zone of BIOFORGE_LAB_ZONES_V188) if (visible(zone.x, zone.w, view)) drawZoneLight(ctx, zone, view);
   for (const prop of BIOFORGE_LAB_PROPS_V188) {
-    if (!visible(prop.x, prop.w, view.cameraX)) continue;
+    if (STATIC_PROP_SLOTS_V188.has(prop.slot) || !visible(prop.x, prop.w, view)) continue;
     if (prop.slot === 'bioforge-lab-stasis-tank') drawTank(ctx, prop, view.tanks?.[prop.tankIndex] || { state: 'empty' }, view);
     else drawProp(ctx, prop, view);
     drawn++;
   }
-  drawCatwalks(ctx, view);
   ctx.restore();
   return drawn;
 }
@@ -323,8 +342,9 @@ export function drawBioforgeLabBackV188(ctx, view) {
 /** Partition walls above the V80 bulkhead leaves (drawn after the leaves), then zone signs. */
 export function drawBioforgeLabPartitionsV188(ctx, view) {
   if (!ctx || !view?.level) return;
-  ctx.save(); drawPartitions(ctx, view);
-  for (const zone of BIOFORGE_LAB_ZONES_V188) if (visible(zone.x, zone.w, view.cameraX)) drawSign(ctx, zone, view);
+  ctx.save();
+  drawFrontStatic(ctx, view);
+  drawPartitions(ctx, view, { lightsOnly: true });
   ctx.restore();
 }
 
@@ -365,11 +385,11 @@ export function stepBioforgeLabAmbienceV188(pool, dt, view, random = Math.random
   for (const prop of BIOFORGE_LAB_PROPS_V188) {
     if (prop.slot !== 'bioforge-lab-stasis-tank') continue;
     const tank = view.tanks?.[prop.tankIndex];
-    if (!tank || !['stasis', 'configured'].includes(tank.state) || !visible(prop.x, prop.w, view.cameraX)) continue;
+    if (!tank || !['stasis', 'configured'].includes(tank.state) || !visible(prop.x, prop.w, view)) continue;
     if (emit(7)) spawnVfxParticleV188(pool, 'bubble', prop.x + 8 + random() * (prop.w - 16), prop.y + prop.h - 22, (random() - .5) * 6, -20 - random() * 20, 1.1, 3 + random() * 3);
   }
   const drawers = BIOFORGE_LAB_PROPS_V188.find(prop => prop.id === 'cryo-drawers');
-  if (visible(drawers.x, drawers.w, view.cameraX) && emit(2.2)) spawnVfxParticleV188(pool, 'steam', drawers.x + 10 + random() * (drawers.w - 20), drawers.y + 30 + random() * 160, 6 + random() * 8, 18, 1.4, 14);
+  if (visible(drawers.x, drawers.w, view) && emit(2.2)) spawnVfxParticleV188(pool, 'steam', drawers.x + 10 + random() * (drawers.w - 20), drawers.y + 30 + random() * 160, 6 + random() * 8, 18, 1.4, 14);
   if (view.entryMist > 0) {
     const nozzles = BIOFORGE_LAB_PROPS_V188.find(prop => prop.id === 'decon-nozzles');
     for (let i = 0; i < 2; i++) if (emit(16)) spawnVfxParticleV188(pool, 'steam', nozzles.x + random() * nozzles.w, nozzles.y + 22, (random() - .5) * 18, 90 + random() * 50, 1.6, 22 + random() * 12);

@@ -18,6 +18,8 @@ export const BIOFORGE_LAB_STAGE_RADIUS_V188 = 142;
 export const BIOFORGE_EXIT_DECON_SECONDS_V188 = 2.4; // [PROPOSÉ]
 export const BIOFORGE_ENTRY_MIST_SECONDS_V188 = 1.6;
 export const BIOFORGE_LAB_TANK_COUNT_V188 = 2;
+export const BIOFORGE_LAB_PHASE_LABELS_V188 = Object.freeze({ configuration: 'CONFIGURATION', sealing: 'SCELLEMENT', printing: 'IMPRESSION',
+  combat: 'COMBAT', result: 'RÉSULTAT', purging: 'PURGE', return: 'RETOUR' });
 
 const freezeDeep = (value) => {
   if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value;
@@ -114,7 +116,7 @@ export function resolveBioforgeStagePromptV188(level, actor, stage) {
   if (stage === 0 && doorDistance(control) <= BIOFORGE_LAB_STAGE_RADIUS_V188)
     return { id: 'stage-control-seal', kind: 'stage', x: centerX(control), distance: doorDistance(control), prompt: 'E — OUVRIR LE SAS A' };
   if (stage === 1 && actorCenter.x > control.x && doorDistance(inner) <= BIOFORGE_LAB_STAGE_RADIUS_V188)
-    return { id: 'stage-inner-interlock', kind: 'stage', x: centerX(inner), distance: doorDistance(inner), prompt: 'E — CYCLE D’INTERLOCK · SAS B' };
+    return { id: 'stage-inner-interlock', kind: 'stage', x: centerX(inner), distance: doorDistance(inner), prompt: 'E — CYCLE D’INTERLOCK' };
   if (stage === 2 && actorCenter.x > inner.x && printerDistance <= BIOFORGE_LAB_STAGE_RADIUS_V188)
     return { id: 'stage-printer', kind: 'stage', x: centerX(printer), distance: Math.abs(actorCenter.x - centerX(printer)), prompt: 'E — ARMER L’IMPRIMANTE' };
   return null;

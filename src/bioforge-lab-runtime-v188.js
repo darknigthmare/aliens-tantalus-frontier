@@ -15,7 +15,7 @@ import {
   BIOFORGE_ENTRY_MIST_SECONDS_V188, createBioforgeExitDeconV188, stepBioforgeExitDeconV188, isInsideBioforgeExitBoothV188,
   resolveBioforgeLabInteractionV188, getBioforgeTankDisplayV188, getBioforgeAdmissionBoardV188, getBioforgeLabZoneV188,
   buildBioforgeColdStorageReportV188, buildBioforgeAnalysisReportV188, buildBioforgeIncineratorReportV188,
-  BIOFORGE_EXIT_DECON_SECONDS_V188
+  BIOFORGE_EXIT_DECON_SECONDS_V188, BIOFORGE_LAB_PHASE_LABELS_V188
 } from './bioforge-lab-layout-v188.js';
 import {
   createBioforgeLabVfxV188, drawBioforgeLabBackV188, drawBioforgeLabPartitionsV188, drawBioforgeLabFrontV188,
@@ -26,8 +26,7 @@ export const BIOFORGE_AMBULATORY_KEYS_V188 = Object.freeze(['KeyA', 'KeyD', 'Arr
 export const BIOFORGE_PURGE_ANIMATION_SECONDS_V188 = 1.6;
 export const BIOFORGE_LAB_CAPTION_SECONDS_V188 = 4;
 const MOVE_KEYS = new Set(['KeyA', 'KeyD', 'ArrowLeft', 'ArrowRight']);
-const PHASE_LABELS_V188 = Object.freeze({ configuration: 'CONFIGURATION', sealing: 'SCELLEMENT', printing: 'IMPRESSION',
-  combat: 'COMBAT', result: 'RÉSULTAT', purging: 'PURGE', return: 'RETOUR' });
+const PHASE_LABELS_V188 = BIOFORGE_LAB_PHASE_LABELS_V188;
 const VIEW_W = 1280;
 
 function labRandom(seed = 188) {
