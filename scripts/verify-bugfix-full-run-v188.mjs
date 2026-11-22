@@ -54,6 +54,27 @@ test('dossier panel: a newly seen story cinematic redraws the Command dossier (C
   assert.deepEqual([before, storyDossierV188(save).pieces.find(piece => piece.id === 'priority-1843').held], [false, true], 'the piece depends on the cinematic');
 });
 
+// Found before C4 (after twelve sorties): supplies fell to 5 for a mission costing 6.
+// « DÉPLOYER ECHO-9 » was greyed out with no word of why (no title, no line in the plan);
+// the player could not tell what to fix. The plan now names the missing resources under
+// the button, with the existing FR/EN refusal (« Ressources insuffisantes : 5/6 RAVIT. »).
+test('operation plan: a launch refused for resources says which ones are missing (FR/EN)', async () => {
+  const { readFileSync } = await import('node:fs');
+  const app = readFileSync(new URL('../src/app.js', import.meta.url), 'utf8');
+  assert.match(app, /data-launch-refusal-v188/, 'the plan carries the refusal line');
+  assert.match(app, /missingStrategicCosts\(saveSystem\.data, brief\.cost\)/, 'the line is computed from the brief cost');
+  const { createDefaultSave, getOperationBrief, missingStrategicCosts, strategicCostRefusalV188 } = await import('../src/save.js');
+  const save = createDefaultSave();
+  const entry = campaign('colony-c4') || campaign('special-narrative-qz17');
+  const world = WORLDS.find(candidate => candidate.id === entry.worldId) || WORLDS[0];
+  save.hub.systems.supplies = 5;
+  const brief = getOperationBrief(save, entry, world);
+  const missing = missingStrategicCosts(save, brief.cost);
+  assert.ok(missing.some(item => item.key === 'supplies'), JSON.stringify(brief.cost));
+  assert.match(strategicCostRefusalV188({ missingCosts: missing }, 'fr'), /^Ressources insuffisantes : 5\/\d+ RAVIT\./);
+  assert.match(strategicCostRefusalV188({ missingCosts: missing }, 'en'), /^Insufficient resources: 5\/\d+ SUPPLY/);
+});
+
 // Found after QZ-18: the hub objective sends the marine to « Salle de briefing, table
 // tactique », but the table was a weak prop (priority 10): Tamsin Velez, Mara Vega, ECHO-A
 // and Maksim Orlov stand around it, and any crew member within reach always won E. No spot

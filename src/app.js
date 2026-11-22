@@ -60,7 +60,7 @@ import {
 } from './content.js';
 import {
   SaveSystem, COMMAND_ACTIONS, RESEARCH_PROJECTS, MAX_SQUAD_SIZE, canAfford,
-  executeStrategicAction, completeResearchProject, getProcurementQuote, procureCatalogItem, strategicCostRefusalV188,
+  executeStrategicAction, completeResearchProject, getProcurementQuote, procureCatalogItem, strategicCostRefusalV188, missingStrategicCosts,
   equipCatalogItem, selectStrategicVehicle, assignCrewMember, treatCrewMember, applyCostume,
   getOperationBrief, beginOperation, resolveOperationDeployment, recordOperationFlag, recordOperationResumeState, resolveOperation,
   getAlphaBravoStrategicRecoveryV69, abandonBlockedAlphaBravoOperationV69,
@@ -2602,6 +2602,9 @@ function renderOperationPlan() {
     ? `<div class="special-operation-notice"><span>REPRISE BLOQUÉE</span><b>ESCOUADE SOUS LE SEUIL DOCTRINAL</b><p>${recovery.activeCrewCount}/${recovery.minimumCrew} opérateurs actifs · indisponibles : ${escapeHtml(unavailableCrew.join(', ') || 'inconnus')}. Archivez cette sortie pour conserver les pertes sans appliquer de récompense.</p></div>`
     : '';
   const launchDisabled = recovery.canAbandon || (!brief.ready && !operation);
+  // V188 full run (2026-11-22): a launch refused for resources names what is missing, under the button.
+  const launchMissingV188 = !recovery.canAbandon && !operation && !brief.ready ? missingStrategicCosts(saveSystem.data, brief.cost) : [];
+  const launchRefusalV188 = launchMissingV188.length ? `<p class="hint" role="status" data-launch-refusal-v188>${escapeHtml(strategicCostRefusalV188({ missingCosts: launchMissingV188 }, document.documentElement.lang))}</p>` : '';
   const launchLabel = recovery.canAbandon ? 'REPRISE IMPOSSIBLE' : operation ? 'REPRENDRE L’OPÉRATION' : 'DÉPLOYER ECHO-9';
   const recoveryAction = recovery.canAbandon
     ? '<button id="operation-abandon-v69" class="button danger-outline wide">ARCHIVER L’OPÉRATION PERDUE</button>'
@@ -2623,7 +2626,7 @@ function renderOperationPlan() {
   const specialNotice = specialOperation
     ? `<div class="special-operation-notice"><span>ORDRE PRIORITAIRE</span><b>${escapeHtml(specialOperation.promisedTitle)}</b><p>${specialNoticeCopy}</p></div>`
     : soloNoticeV121;
-  byId('operation-plan').innerHTML = `<span class="eyebrow">PLAN OPÉRATIONNEL · ${escapeHtml(campaign.mode)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaignObjectiveLabelV188(campaign.objective))} · ${escapeHtml(world.name)}</p>${specialNotice}${recoveryNotice}<div class="operation-risk"><b>${brief.risk}%</b><span>RISQUE</span></div><div class="data-list"><span>TRANSIT</span><b>${brief.hours} h</b><span>COÛT</span><b>${formatCost(brief.cost)}</b><span>RÉCOMPENSE</span><b>${formatCost(brief.reward)}</b>${researchBonusRowV188(campaign)}<span>ESCOUADE</span><b>${soloOperationV121 ? 'UN OPÉRATEUR · SOLO' : escapeHtml(crewNames.join(', ') || 'AUCUNE')}</b>${soloOperationV121 ? '' : unavailableCrewRowsV188}<span>ARME</span><b>${escapeHtml(weapon?.name || 'AUCUNE')}</b><span>ÉQUIPEMENT</span><b>${escapeHtml(equipment.join(', ') || 'AUCUN')}</b><span>VÉHICULE</span><b>${escapeHtml(vehicle?.name || 'AUCUN')}${issuedVehicle ? ' · FOURNI SUR ZONE' : ''}</b></div><div class="button-row"><button id="operation-launch" class="button primary wide" ${launchDisabled ? 'disabled' : ''}>${launchLabel}</button>${recoveryAction}</div>`;
+  byId('operation-plan').innerHTML = `<span class="eyebrow">PLAN OPÉRATIONNEL · ${escapeHtml(campaign.mode)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaignObjectiveLabelV188(campaign.objective))} · ${escapeHtml(world.name)}</p>${specialNotice}${recoveryNotice}<div class="operation-risk"><b>${brief.risk}%</b><span>RISQUE</span></div><div class="data-list"><span>TRANSIT</span><b>${brief.hours} h</b><span>COÛT</span><b>${formatCost(brief.cost)}</b><span>RÉCOMPENSE</span><b>${formatCost(brief.reward)}</b>${researchBonusRowV188(campaign)}<span>ESCOUADE</span><b>${soloOperationV121 ? 'UN OPÉRATEUR · SOLO' : escapeHtml(crewNames.join(', ') || 'AUCUNE')}</b>${soloOperationV121 ? '' : unavailableCrewRowsV188}<span>ARME</span><b>${escapeHtml(weapon?.name || 'AUCUNE')}</b><span>ÉQUIPEMENT</span><b>${escapeHtml(equipment.join(', ') || 'AUCUN')}</b><span>VÉHICULE</span><b>${escapeHtml(vehicle?.name || 'AUCUN')}${issuedVehicle ? ' · FOURNI SUR ZONE' : ''}</b></div><div class="button-row"><button id="operation-launch" class="button primary wide" ${launchDisabled ? 'disabled' : ''}>${launchLabel}</button>${recoveryAction}</div>${launchRefusalV188}`;
   byId('operation-launch').onclick = () => launchCampaign(campaign);
   mountArbiterDossierV190(byId('operation-plan'), { progress: saveSystem.data.xenoArbiterV190,
     selectedCampaignId: campaign.id, activeOperation: operation,
