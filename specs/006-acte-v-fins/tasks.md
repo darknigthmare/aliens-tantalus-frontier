@@ -46,6 +46,13 @@
 - [x] T029 Raccordement : M577 attribué, remorques lues dans le manifeste, largage = décision du pont, conséquences additives `act5.convoyV188`, sons V188, VFX V188, radio FR/EN (`src/app.js`, `src/story-act5-v188.js`, `src/story-act5-state-v188.js`).
 - [x] T030 Tests `scripts/verify-act5-convoy-race-v188.mjs` (dans `test:priorities:v188`) et parcours navigateur `scripts/qa-act5-convoy-race-v188.mjs`.
 
+## Phase 8 — Décisions du propriétaire (2026-11-22)
+
+- [x] T031 M577 à l'échelle (8,8 m [À VÉRIFIER] = 449 px) dans la course et le convoi de l'Acte III, substitut Canvas derrière `m577-mission-side-scale`, attelage, tourelle, collisions et cadrage (`src/m577-scale-v188.js`).
+- [x] T032 Fret perdu : conteneurs retirés du compte, plus de « restitution », coût moral une fois, fin et épilogue FR/EN (`src/story-act5-v188.js`, champ additif `act5.restitutionLostV188`).
+- [x] T033 La Reine atteint toujours le carrefour : plancher de santé et état `recoil` pendant la poursuite, mort seulement au carrefour.
+- [ ] T034 Sprite de mission du M577 et longueur documentée — ouvert.
+
 ## Reporté
 
 - Sprite de la Reine du dépôt en poursuite : emplacement `act5-queen-chase-side` déclaré, substitut Canvas à 245 px en attendant ; l'art des quatorze emplacements actifs est couvert en phase 6, et `relay-room` reste volontairement sans image faute de consommateur.

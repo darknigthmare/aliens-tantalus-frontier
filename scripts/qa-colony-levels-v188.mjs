@@ -11,6 +11,12 @@
 // is raised by holding the aim key (Shift) towards the queue. Interactions use the
 // real keyboard (E pressed, or held for welds, purge and resin), the mission is
 // launched from the Command order and extracted with E.
+// Owner decisions of 2026-11-22: the default save deploys Noor Okafor and selects the M577; the
+// script checks that C1/C3/C4 run without the M577 (vehicle stowed, landing on foot), that C3 posts
+// Noor at the infirmary instead of the squad, that the C4 walks around the ducts are welded shut
+// (injection (1) puts the marine on the roof and in the gallery, then the real D key and Space
+// walk and jump east; the logical check imports the page's colony module), and captures both
+// ends of the C1 corridor (perspective capped). Running these checks only: argv[3] = ids.
 // Usage: PORT=4641 node scripts/dev.mjs & ; node scripts/qa-colony-levels-v188.mjs <out-dir>
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -131,6 +137,41 @@ for (const id of only) {
   await launch(id);
   P = await game(() => JSON.parse(JSON.stringify(globalThis.__ATF_GAME__.colonyLevelV188.places)));
   await shot(`${id}-00-start`);
+  if (['colony-c1', 'colony-c3', 'colony-c4'].includes(id)) {
+    const apc = await game(() => { const e = globalThis.__ATF_GAME__; return { active: Boolean(e.vehicle?.active), status: e.vehicle?.deploymentStatus || null, handover: e.handoverConfigV188?.mode || null,
+      requested: e.handoverConfigV188?.requestedMode || null, cinematic: globalThis.__ATF_INSERTION_V188__?.last?.handover?.mode || null, selected: e.selectedVehicleRuntime?.id || null }; });
+    check(`${id}: no M577 in the colony streets (stowed, landing on foot)`, !apc.active && apc.status === 'colony-street-v188' && apc.handover !== 'apc' && apc.cinematic !== 'apc', apc);
+  }
+  if (id === 'colony-c3') {
+    const noor = await game(() => { const e = globalThis.__ATF_GAME__; return { posted: Boolean(e.colonyLevelV188.noorPosted),
+      manifest: (e.squadManifestV132 || []).map(member => member.id), actors: (e.squadActors || []).map(member => member.crewId || member.memberId || member.id), message: e.colonyLevelV188.message?.text || null }; });
+    check('C3: Noor Okafor posted at the infirmary, not in the squad', noor.posted && !noor.manifest.includes('crew-04-noor-okafor') && !noor.actors.some(entry => String(entry).includes('noor')) && /Noor Okafor reste à l’infirmerie/.test(noor.message || ''), noor);
+  }
+  if (id === 'colony-c1') {
+    const span = await game(() => globalThis.__ATF_GAME__.missionDepthSectionV188?.deckPerspectiveSpan ?? null);
+    check('C1: corridor deck perspective capped at half a screen', span === 640, span);
+    const section = await game(() => { const s = globalThis.__ATF_GAME__.missionDepthSectionV188; return { x0: s.x0, x1: s.x1 }; });
+    await moveTo(section.x0 + 260); await page.waitForTimeout(600); await shot('colony-c1-00a-corridor-west-end');
+    await moveTo(section.x1 - 260); await page.waitForTimeout(600); await shot('colony-c1-00b-corridor-east-end');
+    await moveTo(P.shutter.x - 200); await page.waitForTimeout(300); await clearSpawns();
+  }
+  if (id === 'colony-c4') {
+    const barriers = await game(() => globalThis.__ATF_GAME__.colonyLevelV188.barriers.map(entry => ({ ...entry })));
+    check('C4: welded grate in the utility gallery and welded roof door', barriers.length === 2, barriers.map(entry => ({ id: entry.id, x: entry.x, y: entry.y, h: entry.h })));
+    const access = await game(async () => { const m = await import('/src/colony-mission-levels-v188.js'), e = globalThis.__ATF_GAME__;
+      return { onFoot: m.colonyC4AccessV188(e, { ducts: false }).gathering, ducts: m.colonyC4AccessV188(e).gathering }; });
+    check('C4 logical access: the gathering only through the ducts', access.onFoot === false && access.ducts === true, access);
+    for (const barrier of barriers) {
+      await moveTo(barrier.x - 160, barrier.floorY);
+      await page.keyboard.down('KeyD');
+      for (let t = 0; t < 8; t++) { await page.keyboard.press('Space'); await page.waitForTimeout(450); }
+      await page.keyboard.up('KeyD');
+      const at = await game(() => { const e = globalThis.__ATF_GAME__; return { x: e.player.x + e.player.w / 2, feet: e.player.y + e.player.h, prompt: e.getInteractionPrompt() }; });
+      await shot(`colony-c4-00-${barrier.id}`);
+      check(`C4 physical: ${barrier.id} stops the walk (D + jumps)`, at.x < barrier.x && Math.abs(at.feet - barrier.floorY) < 4 && at.prompt === barrier.requirement, { at, barrier: { x: barrier.x, floorY: barrier.floorY } });
+    }
+    await moveTo(P.clues.log); await page.waitForTimeout(200);
+  }
   if (id === 'colony-c1') {
     const corridor = await game(() => { const s = globalThis.__ATF_GAME__.missionDepthSectionV188; return s && { id: s.id, length: s.x1 - s.x0, props: s.props.length }; });
     check('C1: V2 depth corridor on the street', corridor?.id === 'colony-c1-port-corridor' && corridor.length >= 4200, corridor);

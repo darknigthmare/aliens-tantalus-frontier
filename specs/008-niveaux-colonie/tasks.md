@@ -11,3 +11,11 @@
 - [x] T009 Tests moteur et parcours Chromium
 - [ ] T010 Art des emplacements (aucune image produite) — ouvert
 - [ ] T011 Voix et dialogues complets des PNJ (Jun Park, Lucia Ferro, Noor Okafor) — ouvert
+
+## Décisions du propriétaire (2026-11-22)
+
+- [x] T012 C3 : Noor Okafor retirée de l'escouade pour C3 seulement, réplique FR/EN
+- [x] T013 C1, C3, C4 : M577 du joueur rangé, insertion et extraction à pied
+- [x] T014 C4 : grille de la galerie et porte du toit soudées ; conduits obligatoires (contrôles logique et physique)
+- [x] T015 C1 : perspective du pont du couloir plafonnée à un demi-écran
+- [ ] T016 Confirmer le M577 garé au quai de C3 (décor de l'arrivée des rescapés) — ouvert
