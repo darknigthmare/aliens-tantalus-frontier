@@ -1539,6 +1539,7 @@ Séquences d’insertion et d’extraction de mission (Tantalus ↔ UD-4L ↔ so
 | 7 | Valider les nouveaux lieux des campagnes annexes (TR-0, Kéos, Murmure, Tyndare, Pangaea comme monde, Hiéron, *Clémence*, *Bonne-Espérance*, Base Ombelle) et leurs personnages (Navarre, Rask, Oyelaran, Viret, Szabo, Moreau, Asch). | §14-18 — **Validé** |
 | 8 | Définir MIRE comme programme de modélisation de la compagnie ? | §18.3 — **Validé (archives fidèles et originales)** |
 | 9 | Ordre et conditions de déblocage des campagnes annexes. | §13.5 — **Validé : déblocage progressif** |
+| 10 | Parcours complet du 2026-11-22 (`docs/development/PLAYTHROUGH_V188_20261122.md`) : ravitaillement de la ligne principale, infestation à bord qui bloque le saut vers Nacre-7, ordre conseillé QZ-18 avant QZ-17, pont de la crise de l'Interlude. | §5, §13.5 — **Ouvert** (questions P-1 à P-5) |
 
 
 ---

@@ -660,3 +660,15 @@ Inchangés : identifiants de contenu (le chapitre garde `special-black-abyss-v13
 Fidélité : rien n'est déclaré « 1:1 » ; aucune image générée ; CQ-01 à CQ-06 et les scènes sont des primitives Canvas nommées.
 
 Vérifications réellement exécutées : voir le rapport de la PR, `scripts/verify-side-campaign-queens-v188.mjs` (dans `test:priorities:v188`) et le parcours Chromium `scripts/qa-side-campaign-queens-v188.mjs` (fixtures et injections déclarées en tête : fin de l'Acte V posée dans la sauvegarde importée, objectif générique marqué atteint avant `completeMission()`, chapitre Abysse Noir posé comme fait dans le second profil faute de reçu V131 sans partie jouée). Un parcours injecté ne vaut pas une partie jouée sans aide ; combats et équilibrage restent à éprouver.
+
+## Parcours complet de la campagne principale (2026-11-22)
+
+Une nouvelle partie a été jouée dans Chromium, du titre au saut vers Nacre-7 : prologue, Actes I à V, colonie C1-C4, station S1-S4, Interlude, audience Halloran sur « Tenir », fin, épilogue et appel de la Saison des Reines. Le détail est dans `docs/development/PLAYTHROUGH_V188_20261122.md`, avec les entrées réelles et les injections déclarées (téléportations, `defeatEnemy`, deux attentes raccourcies, deux modifications de sauvegarde pour le ravitaillement et l'infestation à bord).
+
+Quatre bogues ont été corrigés, avec les tests `scripts/verify-bugfix-full-run-v188.mjs` :
+- point de reprise du boss sous le sol (QZ-17) ;
+- table tactique de la salle de briefing masquée par l'équipage ;
+- dossier QZ17 non redessiné après CIN-20-ROOK ;
+- départ refusé sans nommer les ressources manquantes.
+
+Restent ouverts : la crise de l'Interlude sur le pont du joueur, l'ancien point de reprise faux des sauvegardes existantes, des textes d'objectif (P-2, conseil), le ravitaillement et l'infestation avant le saut (questions P-1 à P-5 du questionnaire). Le parcours utilise des injections : il ne vaut pas une partie jouée sans aide, et l'équilibrage reste à éprouver.

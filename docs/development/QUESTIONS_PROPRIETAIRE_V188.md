@@ -796,3 +796,15 @@ Décisions déjà prises et appliquées : Q13 B (après l'Acte V), Q15 B (dépla
 | R8 | TR-0 | Absent du catalogue des 64 mondes ; l'arc 3 attend sa création | Réutiliser un monde existant |
 
 Aucune de ces valeurs ne certifie une fidélité « 1:1 ».
+
+## Parcours complet de la campagne principale (2026-11-22) — questions ouvertes
+
+Le run est consigné dans `docs/development/PLAYTHROUGH_V188_20261122.md`. Aucune valeur n'a été changée sur ces points. Ils attendent une décision.
+
+| # | Question | Constat du parcours | Options |
+| --- | --- | --- | --- |
+| P-1 | Ravitaillement de la ligne principale | 78 au départ, environ 6 par sortie sur Cocyte. Il reste 5 avant C4, après 13 sorties (actes, colonie, station). Le jeu n'affiche aucune source évidente. | Source visible (marché, annexe logistique) ; coût réduit pour les missions de la ligne principale ; stock de départ plus haut |
+| P-2 | Infestation à bord avant le saut de la Saison des Reines | Le retour de « La Reine du dépôt » ouvre une chaîne pathogène qui bloque le saut vers Nacre-7 avec « Infestation à bord non résolue », sans indiquer le remède. | Guider vers les annexes (sas d'arrivée, CCTV, Bioforge) ; ne pas ouvrir de chaîne sur les missions finales ; ne pas bloquer le saut |
+| P-3 | Ordre conseillé | QZ-18 est recommandé avant QZ-17. Le conseil de guerre s'ouvre avant C4 et l'Interlude avant C3. | Garder ; suivre l'ordre de la bible (Acte I d'abord) |
+| P-4 | Crise de l'Interlude | L'objectif indique le pont 2, mais les menaces apparaissent sur le pont où se trouve le joueur (ancien système de crise du hub). | Placer la crise sur son pont ; ajuster le texte |
+| P-5 | Texte du conseil avec un seul conteneur | « Sans conteneur à rendre… » s'affiche alors qu'un conteneur a été ramené (la restitution demande 2 conteneurs). | Reformuler (« Pas assez de conteneurs pour une restitution ») |
