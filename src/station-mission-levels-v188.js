@@ -814,7 +814,6 @@ export function withStationMissionLevelsV188(Base) {
       if (id === 'station-s4') {
         slot('station-nest-resin', p.nest.x - 76, decks.mid, { burnt: pr.purge >= 1 });
         for (const valve of p.valves) slot('station-pressure-valve', valve.x - 76, valve.y - 30, { done: (pr.valves[valve.id] || 0) >= 1 });
-        slot('station-control-map', p.dock.x1 - 260, decks.low - 40);
       }
       for (const barrier of level.barriers || []) {
         ctx.fillStyle = '#2b3236'; ctx.fillRect(barrier.x, barrier.y, barrier.w, barrier.h);

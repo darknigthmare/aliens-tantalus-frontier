@@ -21,7 +21,7 @@ export const STATION_LEVEL_ART_SLOTS_V188 = Object.freeze([
   slot('station-echo8-dropship', 'wall', 360, 180, 'S1: Echo-8’s UD-4L still docked at the collar, seen through the collar window (reuses the docked UD-4L image).', 'adapted', 'asph-ud4l-docked'),
   slot('station-echo8-barricade', 'wall', 281, 132, 'S1, S3: Echo-8 barricade (welded door, sandbags, chalk); the chalk count is drawn by the game.', 'adapted', 'asph-echo8-barricade'),
   slot('station-cassius-core', 'wall', 160, 200, 'S2: CASSIUS core on the control deck, green CRT wall, one waveform, no face.', 'adapted', 'asph-cassius-core'),
-  slot('station-control-map', 'wall', 240, 150, 'S1, S4: QZ network map console of the control deck.', 'to-define', 'asph-qz-map'),
+  slot('station-control-map', 'wall', 240, 150, 'S1: QZ network map console of the control deck.', 'to-define', 'asph-qz-map'),
   slot('station-qz17-cradles', 'floor', 402, 76, 'S3: open QZ17 cradles of the transit laboratory, restraints cut.', 'adapted', 'asph-cradles'),
   slot('station-pressure-valve', 'wall', 153, 102, 'S4: sector pressure gauges and valve wheel (one per sector to repressurise).', 'to-define', 'asph-msn-gauge'),
   slot('station-nest-resin', 'wall', 153, 102, 'S4: the last resin nest over a sealed hatch of the junction.', 'documented', 'asph-msn-resin'),
