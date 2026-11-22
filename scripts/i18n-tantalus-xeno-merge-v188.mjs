@@ -754,7 +754,11 @@ export const TANTALUS_I18N_DELTA_V188 = Object.freeze({
       "Élu libéré. Le ramener à l’extraction.",
       "Converti maîtrisé et menotté.",
       "INFIRMERIE",
-      "PROCESSEUR"
+      "PROCESSEUR",
+      "Noor Okafor reste à l’infirmerie pour le contrôle biologique : elle ne suit pas l’escouade dans cette mission.",
+      "GRILLE DE SERVICE SOUDÉE · PASSER PAR LES CONDUITS",
+      "PORTE DU TOIT SOUDÉE · PASSER PAR LES CONDUITS",
+      "Soudé de l’autre côté. Les conduits mènent au rassemblement."
     ],
     "changed": {
       "Extraire le renseignement synthétique": {

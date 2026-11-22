@@ -26,6 +26,13 @@
 //   guns placed by the player, panic meter, hatch countdown, the Children of the
 //   Perfected Host converts and their « élus » (bible §1.5), non-lethal handling;
 // - to define: final art of every slot (colony-level-art-v188.js), voices.
+//
+// Owner decisions of 2026-11-22: in C3 Noor Okafor is the infirmary figure, not a squad
+// teammate (removed from the squad for this mission only, a line says why); the player's
+// M577 is stowed in C1, C3 and C4 (no APC in the colony streets, on foot at insertion);
+// in C4 a welded service grate closes the utility gallery and a welded roof door closes
+// the comms roof, so the ducts are the only way to the gathering (logical and physical
+// checks: colonyC4AccessV188 and the walls themselves).
 import { depthToScreenOffsetV188 } from './hub-depth-rooms-v188.js';
 import { colonyC1PlacesV188, colonyC2PlacesV188, colonyC3PlacesV188, colonyC4PlacesV188 } from './colony-level-places-v188.js';
 import { drawColonyLevelSlotV188, drawColonyCivilianV188, drawColonyM577V188, drawWeldSparksV188, drawGuideLightV188 } from './colony-level-art-v188.js';
@@ -33,6 +40,43 @@ import { COLONY_WORLD_ID_V188 } from './colony-reconstruction-v188.js';
 
 export const COLONY_LEVEL_IDS_V188 = Object.freeze(['colony-c1', 'colony-c2', 'colony-c3', 'colony-c4']);
 export const isColonyLevelCampaignV188 = id => COLONY_LEVEL_IDS_V188.includes(typeof id === 'string' ? id : id?.id);
+/** Street missions where the player's M577 stays aboard (owner decision 2026-11-22). */
+export const COLONY_STREET_NO_APC_IDS_V188 = Object.freeze(['colony-c1', 'colony-c3', 'colony-c4']);
+export const COLONY_C3_NOOR_ID_V188 = 'crew-04-noor-okafor';
+/** C3: Noor Okafor holds the infirmary; she is not deployed with the squad for this mission (restored afterwards). */
+export function colonyC3SquadV188(crew, campaignId) {
+  const list = Array.isArray(crew) ? crew : [];
+  return campaignId === 'colony-c3' ? list.filter(member => (member?.id || member) !== COLONY_C3_NOOR_ID_V188) : list;
+}
+export const COLONY_C3_NOOR_LINE_V188 = Object.freeze({ fr: 'Noor Okafor reste à l’infirmerie pour le contrôle biologique : elle ne suit pas l’escouade dans cette mission.',
+  en: 'Noor Okafor stays at the infirmary for the biological screening: she does not follow the squad on this mission.' });
+/** C4: the two walks around the ducts, closed by welded architecture (bible §6.4). Edge ids of the colony template graph. */
+export const COLONY_C4_BARRIERS_V188 = Object.freeze([
+  Object.freeze({ id: 'colony-c4-utility-grate-v188', slot: 'colony-utility-grate-sealed', edgeId: 'colony-e18', deck: 'low', requirement: 'GRILLE DE SERVICE SOUDÉE · PASSER PAR LES CONDUITS' }),
+  Object.freeze({ id: 'colony-c4-roof-hatch-v188', slot: 'colony-roof-hatch-sealed', edgeId: 'colony-e12', deck: 'roof', requirement: 'PORTE DU TOIT SOUDÉE · PASSER PAR LES CONDUITS' })
+]);
+/** Logical access in C4: which template nodes the marine reaches from the drop, on foot only or with the ducts. */
+export function colonyC4AccessV188(engine, { ducts = true } = {}) {
+  const graph = engine?.missionLevelRuntime?.graph, level = engine?.colonyLevelV188;
+  if (!graph) return null;
+  const closedDoors = new Set((engine.doors || []).filter(door => !door.open && door.levelLocked).map(door => door.edgeId));
+  const barred = new Set((level?.barriers || []).map(entry => entry.edgeId));
+  const links = new Map(graph.nodes.map(node => [node.id, []]));
+  const link = (a, b) => { links.get(a)?.push(b); links.get(b)?.push(a); };
+  for (const edge of graph.edges) if (!closedDoors.has(edge.id) && !barred.has(edge.id) && edge.kind !== 'vent') link(edge.from, edge.to);
+  // The V62 duct network: each portal stands by the template node nearest to it; the duct graph is connected
+  // (vent-network-v62.js), so any two portals of the network join.
+  const network = engine.missionVentNetworkV62;
+  if (ducts && network) {
+    const nodeAt = (x, y) => [...graph.nodes].sort((a, b) => Math.hypot(a.x - x, (a.y - y) * 2) - Math.hypot(b.x - x, (b.y - y) * 2))[0] || null;
+    const portals = (engine.vents || []).filter(vent => vent.portalId).map(vent => nodeAt(vent.x + (vent.w || 0) / 2, vent.y + (vent.h || 0))).filter(Boolean);
+    for (let i = 0; i < portals.length; i++) for (let j = i + 1; j < portals.length; j++) link(portals[i].id, portals[j].id);
+  }
+  const start = graph.nodes.find(node => node.anchor === 'spawn' || node.id.endsWith('-spawn'))?.id;
+  const seen = new Set(start ? [start] : []), queue = [...seen];
+  while (queue.length) for (const next of links.get(queue.shift()) || []) if (!seen.has(next)) { seen.add(next); queue.push(next); }
+  return Object.freeze({ reached: Object.freeze([...seen]), gathering: seen.has('colony-security') });
+}
 /** [PROPOSÉ] timings, counts and distances of the dedicated colony levels. */
 export const COLONY_LEVEL_RULES_V188 = Object.freeze({
   pxPerMetre: 51, marine: Object.freeze({ w: 44, h: 92 }), safeZonePx: 900, graceSeconds: 4,
@@ -154,8 +198,11 @@ export function withColonyMissionLevelsV188(Base) {
 
     start(options = {}) {
       this.colonyLevelV188 = null;
-      const result = super.start(options);
       const campaignId = options.campaign?.id || null;
+      // C3: Noor Okafor is the infirmary figure of the level; she is not a squad teammate in it.
+      const squad = isColonyLevelCampaignV188(campaignId) && !options.editorProject ? colonyC3SquadV188(options.crew, campaignId) : options.crew;
+      const noorPosted = Array.isArray(options.crew) && squad.length !== options.crew.length;
+      const result = super.start(noorPosted ? { ...options, crew: squad } : options);
       if (!isColonyLevelCampaignV188(campaignId) || !this.missionLevelRuntime || this.editorMode) return result;
       const places = campaignId === 'colony-c1' ? colonyC1PlacesV188(this) : campaignId === 'colony-c2' ? colonyC2PlacesV188(this)
         : campaignId === 'colony-c3' ? colonyC3PlacesV188(this) : colonyC4PlacesV188(this);
@@ -170,6 +217,7 @@ export function withColonyMissionLevelsV188(Base) {
         this.colonyLevelV188.snapshot = { phase: 0, progress: clone(progress) };
         this.materializeColonyLevelV188();
       }
+      if (noorPosted) { this.colonyLevelV188.noorPosted = true; this.colonyMessageV188(COLONY_C3_NOOR_LINE_V188.fr, 6); this.onEvent?.({ type: 'colony-noor-posted-v188', crewId: COLONY_C3_NOOR_ID_V188 }); }
       this.onEvent?.({ type: 'colony-level-ready-v188', campaignId, phase: this.colonyPhaseIdV188() });
       return result;
     }
@@ -193,11 +241,46 @@ export function withColonyMissionLevelsV188(Base) {
         if (places.securityGate && campaignId !== 'colony-c4') Object.assign(places.securityGate, { open: true, levelLocked: false, lockedBy: null });
         if (places.securityGate && campaignId === 'colony-c4') Object.assign(places.securityGate, { open: false, progress: 0, levelLocked: true, colonySealedV188: true });
       }
+      if (COLONY_STREET_NO_APC_IDS_V188.includes(campaignId) && this.vehicle?.active) {
+        // The player's M577 stays aboard: no APC in the colony streets (same stowing as the ship templates).
+        this.vehicle.active = false; this.vehicle.occupied = false; this.vehicle.driver = null; this.vehicle.passengers = [];
+        this.vehicle.deploymentStatus = 'colony-street-v188';
+        for (const actor of [this.player, this.coop]) if (actor) actor.inVehicle = false;
+      }
+      if (campaignId === 'colony-c4') this.colonyLevelV188.barriers = this.buildColonyC4BarriersV188(places);
       if (campaignId === 'colony-c2') {
         // The restart console takes the auxiliary power node; the extraction moves to the top deck (« extraction en haut »).
         if (this.powerNode) Object.assign(this.powerNode, { x: places.console.x, y: places.console.y - 64, active: false });
         if (this.objective) Object.assign(this.objective, { x: places.extraction.x - 34, y: places.extraction.y - 90 });
       }
+    }
+
+    /** C4: the welded grate of the utility gallery and the welded roof door, as walls (they block marines, creatures and shots). */
+    buildColonyC4BarriersV188(places) {
+      const platforms = this.platforms || [], ladders = this.ladders || [];
+      const at = id => platforms.find(entry => entry.id === `node-platform-${id}`);
+      const low = at('colony-security-low')?.y ?? at('colony-generator')?.y, roof = at('colony-security-high')?.y ?? places.roofY;
+      const down = ladders.find(entry => entry.id === 'colony-e21'), up = ladders.find(entry => entry.id === 'colony-e19');
+      const street = platforms.filter(entry => Math.abs(entry.y - places.floorY) < 1);
+      // The grate fills the gallery from its floor up to the underside of the street deck above it.
+      const under = x => Math.max(places.floorY, ...street.filter(entry => x + 40 >= entry.x && x <= entry.x + entry.w).map(entry => entry.y + (entry.h || 20))) + 2;
+      // The roof door stands against the comms block's roof structure (an existing wall of the template).
+      const roofWall = (this.walls || []).find(entry => entry.y < roof && entry.y + entry.h >= roof - 2 && entry.x > (places.cache?.x ?? 0) && entry.x < places.security);
+      const out = [];
+      for (const spec of COLONY_C4_BARRIERS_V188) {
+        let x, top, bottom;
+        if (spec.deck === 'low') {
+          if (!Number.isFinite(low) || !down || !up) continue;
+          x = Math.round((down.x + (down.w || 42) + up.x) / 2) - 20; top = under(x); bottom = low;
+        } else {
+          if (!Number.isFinite(roof)) continue;
+          x = roofWall ? Math.round(roofWall.x - 40) : Math.round((places.streetB + places.security) / 2); top = 0; bottom = roof;
+        }
+        const wall = { id: spec.id, x, y: top, w: 40, h: bottom - top, colonyBarrierV188: spec.id, edgeId: spec.edgeId, zoneId: spec.deck === 'low' ? 'colony-utility' : 'colony-civic' };
+        this.walls = [...(this.walls || []).filter(entry => entry.id !== spec.id), wall];
+        out.push(Object.freeze({ ...spec, x, y: top, w: 40, h: bottom - top, floorY: bottom }));
+      }
+      return Object.freeze(out);
     }
 
     // —— Phases, checkpoints, resume ——
@@ -689,6 +772,8 @@ export function withColonyMissionLevelsV188(Base) {
           if (!pr.clues.seal) add('clue:seal', p.clues.seal, p.floorY, 'E  EXAMINER LE SCELLÉ DU CONDUIT', { reach: 60 });
         }
         if (!pr.lore && phase !== 'dormitories') add('lore', p.cache.x, p.cache.y, 'E  FOUILLER LE SAC CACHÉ', { reach: 60 });
+        // Information only: why the walk ends here (the welded architecture), and where to go.
+        for (const barrier of level.barriers || []) add(`barrier:${barrier.id}`, barrier.x + barrier.w / 2, barrier.floorY, barrier.requirement, { reach: 90 });
         if (phase === 'gathering') hold('resin', p.cocoon, p.floorY, 'DÉCOUPER LA RÉSINE DU COCON');
         for (const enemy of this.enemies || []) if (enemy.colonyCultistV188 && enemy.alive && (!enemy.alert || enemy.staggerClock > 0))
           add(`subdue:${enemy.colonyCultistV188}`, centre(enemy), feet(enemy), 'E  MAÎTRISER LE CONVERTI (NON LÉTAL)', { reach: R.cult.subdueReach });
@@ -732,6 +817,7 @@ export function withColonyMissionLevelsV188(Base) {
         return done('Sentinelle déployée.', 2);
       }
       if (key === 'weldA-side') return done('Souder le sas A depuis la plate-forme : passer à l’est de la porte.', 3);
+      if (key.startsWith('barrier:')) return done('Soudé de l’autre côté. Les conduits mènent au rassemblement.', 3);
       if (key.startsWith('breaker:')) { pr.breakers[Number(key.split(':')[1])] = true; return done(`Disjoncteur réarmé (${pr.breakers.filter(Boolean).length}/3).`, 2); }
       if (key === 'restart') {
         pr.restarted = true;
@@ -829,7 +915,9 @@ export function withColonyMissionLevelsV188(Base) {
       const snapshot = super.getSnapshot(), level = this.colonyLevelV188;
       if (!level) return snapshot;
       return { ...snapshot, colonyLevelV188: { campaignId: level.campaignId, phase: this.colonyPhaseIdV188(), checkpoint: level.checkpointId,
-        progress: clone(level.progress), missing: this.colonyMissingV188(), corridor: this.missionDepthSectionV188?.id || null } };
+        progress: clone(level.progress), missing: this.colonyMissingV188(), corridor: this.missionDepthSectionV188?.id || null,
+        noorPosted: Boolean(level.noorPosted), vehicleStowed: COLONY_STREET_NO_APC_IDS_V188.includes(level.campaignId) ? !this.vehicle?.active : null,
+        barriers: (level.barriers || []).map(entry => ({ id: entry.id, x: entry.x, y: entry.y, w: entry.w, h: entry.h })) } };
     }
 
     // —— Drawing ——
@@ -864,6 +952,7 @@ export function withColonyMissionLevelsV188(Base) {
         drawColonyLevelSlotV188(ctx, 'colony-tampered-seal', p.clues.seal - 25, p.floorY - 50);
         if (!pr.lore) drawColonyLevelSlotV188(ctx, 'colony-lore-cache', p.cache.x - 23, p.cache.y);
         drawColonyLevelSlotV188(ctx, 'colony-cocoon-elu', p.cocoon - 30, p.floorY - 6, { freed: pr.freed });
+        for (const barrier of level.barriers || []) drawColonyLevelSlotV188(ctx, barrier.slot, barrier.x, barrier.floorY, { w: barrier.w, h: barrier.h });
       }
     }
     /** People and door-attached art, after doors and before the marines (the native authored-people hook). */

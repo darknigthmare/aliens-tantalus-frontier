@@ -223,7 +223,7 @@ test('wiring: composition, app launch and save flow, i18n, service worker shell'
   assert.match(app, /act5-trailer-dropped-v188/);
   assert.match(app, /engine\.isAct5RaceV188\?\.\(\)/);
   const sw = read('sw.js');
-  for (const file of ['act5-convoy-race-v188.js', 'act5-convoy-race-runtime-v188.js']) assert.ok(sw.includes(`'/src/${file}'`), file);
+  for (const file of ['act5-convoy-race-v188.js', 'act5-convoy-race-runtime-v188.js', 'm577-scale-v188.js']) assert.ok(sw.includes(`'/src/${file}'`), file);
   void act5RaceRearV188;
 });
 

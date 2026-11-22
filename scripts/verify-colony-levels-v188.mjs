@@ -323,3 +323,103 @@ test('C3: a scatter after some screenings never sends a screened survivor back t
   assert.equal(pr().scanned, 5); assert.equal(pr().civilians.filter(entry => entry.result === 'carrier').length, 1);
   assert.ok(pr().civilians.every(entry => entry.result), 'each survivor screened once');
 });
+
+// —— Owner decisions of 2026-11-22 ——
+test('C1, C3, C4: the player’s M577 stays aboard (no APC in the colony streets, on foot at insertion); C2 and contracts unchanged', async () => {
+  const { apcHandoverAdmissibleV188 } = await import('../src/mission-dropship-handover-v188.js');
+  const { COLONY_STREET_NO_APC_IDS_V188 } = await import('../src/colony-mission-levels-v188.js');
+  assert.deepEqual(COLONY_STREET_NO_APC_IDS_V188, ['colony-c1', 'colony-c3', 'colony-c4']);
+  for (const id of COLONY_STREET_NO_APC_IDS_V188) {
+    const run = await level(id);
+    assert.equal(run.engine.vehicle.active, false, `${id}: vehicle stowed`); assert.equal(run.engine.vehicle.deploymentStatus, 'colony-street-v188');
+    assert.equal(run.engine.player.inVehicle, false);
+    assert.ok(!run.engine.interactionCandidatesV188(run.engine.player).some(entry => /vehicle/.test(entry.kind)), `${id}: no « V PILOTER »`);
+    assert.equal(run.engine.getSnapshot().colonyLevelV188.vehicleStowed, true);
+    assert.equal(apcHandoverAdmissibleV188({ placeType: 'atmosphere', templateId: 'colony-multiroute', vehicleId: 'vehicle-001-m577-armored-personnel-carrier', campaignId: id }), false, `${id}: insertion on foot`);
+  }
+  assert.equal(apcHandoverAdmissibleV188({ placeType: 'atmosphere', templateId: 'colony-multiroute', vehicleId: 'vehicle-001-m577-armored-personnel-carrier', campaignId: 'colony-l-murs' }), true, 'contracts keep the APC insertion');
+  const app = read('src/app.js');
+  assert.match(app, /COLONY_STREET_NO_APC_IDS_V188\.includes\(context\.campaign\?\.id\) \? null : context\.vehicle/, 'the insertion cinematic carries no M577 either');
+});
+
+test('C3: Noor Okafor is the infirmary figure, not a squad teammate (this mission only), with a FR/EN line', async () => {
+  const { colonyC3SquadV188, COLONY_C3_NOOR_LINE_V188 } = await import('../src/colony-mission-levels-v188.js');
+  const { CREW } = await import('../src/content-core-v50.js');
+  const crew = ['crew-04-noor-okafor', 'crew-06-rook', 'crew-01-mara-vega'].map(id => ({ ...CREW.find(entry => entry.id === id), status: 'active' })).filter(entry => entry.id);
+  assert.equal(crew.length, 3);
+  assert.deepEqual(colonyC3SquadV188(crew, 'colony-c3').map(entry => entry.id), ['crew-06-rook', 'crew-01-mara-vega']);
+  assert.deepEqual(colonyC3SquadV188(crew, 'colony-c1').map(entry => entry.id), crew.map(entry => entry.id), 'restored outside C3');
+  const run = await level('colony-c3', { crew });
+  assert.equal(run.engine.colonyLevelV188.noorPosted, true);
+  assert.deepEqual((run.engine.squadManifestV132 || []).map(entry => entry.id), ['crew-06-rook', 'crew-01-mara-vega'], 'not in the deployed squad');
+  assert.ok(!(run.engine.squadActors || []).some(entry => entry.crewId === 'crew-04-noor-okafor' || entry.id === 'crew-04-noor-okafor'));
+  assert.equal(run.engine.colonyLevelV188.message.text, COLONY_C3_NOOR_LINE_V188.fr);
+  assert.ok(run.events.some(event => event.type === 'colony-noor-posted-v188'));
+  assert.ok(Object.hasOwn(EN_CATALOG_V185, COLONY_C3_NOOR_LINE_V188.fr), 'EN in the reviewed catalog');
+  assert.equal(EN_CATALOG_V185[COLONY_C3_NOOR_LINE_V188.fr], COLONY_C3_NOOR_LINE_V188.en);
+  // She is still the one who takes the carrier (the level's figure, drawn at the infirmary).
+  assert.equal(run.places.noor, run.places.streetB + 100);
+  const c1 = await level('colony-c1', { crew });
+  assert.notEqual(c1.engine.colonyLevelV188.noorPosted, true, 'C1 deploys her as before');
+  assert.ok(c1.engine.squadManifestV132.some(entry => entry.id === 'crew-04-noor-okafor'));
+});
+
+test('C4: the utility gallery and the roof are welded shut; the ducts are the only way to the gathering (logical and physical)', async () => {
+  const { colonyC4AccessV188, COLONY_C4_BARRIERS_V188 } = await import('../src/colony-mission-levels-v188.js');
+  const run = await level('colony-c4'), { engine, places } = run;
+  const barriers = engine.colonyLevelV188.barriers;
+  assert.deepEqual(barriers.map(entry => entry.id), COLONY_C4_BARRIERS_V188.map(entry => entry.id));
+  for (const barrier of barriers) {
+    const wall = engine.walls.find(entry => entry.id === barrier.id);
+    assert.ok(wall, barrier.id); assert.equal(wall.y + wall.h, barrier.floorY, 'stands on its floor');
+    assert.ok(wall.h >= 160, `${barrier.id}: taller than a jump (${wall.h} px)`);
+  }
+  const grate = barriers.find(entry => entry.id === 'colony-c4-utility-grate-v188');
+  assert.ok(grate.y > places.floorY, 'the grate stays under the street deck (the street is not blocked)');
+  assert.ok(engine.toolPickup.x + engine.toolPickup.w < grate.x, 'the cutting torch of the gallery stays reachable, west of the grate');
+  // Logical: on foot the gathering (colony-security) is out of reach; with the ducts it is reached.
+  assert.equal(colonyC4AccessV188(engine, { ducts: false }).gathering, false);
+  assert.equal(colonyC4AccessV188(engine).gathering, true);
+  // Physical: walking east (and jumping) on the roof, in the gallery and in the street never passes.
+  const walk = (x, y) => {
+    run.place(x, y); engine.keys.add('KeyD'); let max = 0;
+    for (let i = 0; i < 160; i++) { if (i % 6 === 0) engine.player.jumpBuffer = .14; tick(engine, .1); max = Math.max(max, centre(engine.player)); }
+    engine.keys.delete('KeyD'); return max;
+  };
+  const roof = barriers.find(entry => entry.id === 'colony-c4-roof-hatch-v188');
+  assert.ok(walk(2700, roof.floorY) < roof.x, 'roof: stopped by the welded roof door');
+  assert.ok(walk(2960, grate.floorY) < grate.x, 'gallery: stopped by the welded grate');
+  assert.ok(walk(2900, places.floorY) < places.securityGate.x, 'street: the security shutter is sealed from inside');
+  // The visible reason is offered at the barrier.
+  run.place(grate.x - 30, grate.floorY); assert.equal(engine.getInteractionPrompt(), 'GRILLE DE SERVICE SOUDÉE · PASSER PAR LES CONDUITS');
+  run.place(roof.x - 30, roof.floorY); assert.equal(engine.getInteractionPrompt(), 'PORTE DU TOIT SOUDÉE · PASSER PAR LES CONDUITS');
+  for (const text of COLONY_C4_BARRIERS_V188.map(entry => entry.requirement)) assert.ok(Object.hasOwn(EN_CATALOG_V185, text), `EN: ${text}`);
+  // The ducts: from the street entrance to the security wall exit, east of the sealed shutter. Injection: the torch is held.
+  const again = await level('colony-c4'), e = again.engine;
+  e.inventory.cutter = true; again.place(again.places.ventEntry);
+  assert.ok(e.enterMissionVentV62(e.player), 'the duct opens with the torch');
+  for (let i = 0; i < 40 && e.player.ventTransit?.phase !== 'at-node'; i++) tick(e, .1);
+  e.keys.add('KeyD'); for (let i = 0; i < 200 && !(e.player.ventTransit?.phase === 'at-node' && e.player.ventTransit.currentNodeId === 'colony-duct-security'); i++) tick(e, .1); e.keys.delete('KeyD');
+  assert.equal(e.player.ventTransit?.currentNodeId, 'colony-duct-security');
+  e.beginMissionVentExitV62(e.player); for (let i = 0; i < 40 && e.player.ventTransit; i++) tick(e, .1);
+  assert.ok(centre(e.player) > again.places.securityGate.x + again.places.securityGate.w, 'out on the street beyond the shutter');
+  assert.ok(Math.abs(e.player.y + e.player.h - again.places.floorY) < 2);
+});
+
+test('C1: the deck perspective of the 4 450 px street is softened at both ends (capped at half a screen), other holds unchanged', async () => {
+  const { depthHoldDeckGeometryV188, deckSeamTopXV188 } = await import('../src/depth-hold-deck-v188.js');
+  const run = await level('colony-c1'), section = run.engine.missionDepthSectionV188, g = depthHoldDeckGeometryV188(section);
+  assert.equal(section.deckPerspectiveSpan, 640); assert.equal(g.span, 640);
+  const lean = xf => Math.abs(deckSeamTopXV188(g, xf) - xf);
+  const uncapped = { ...g }; delete uncapped.span;
+  const atEdgeOfScreen = lean(g.vanishX + 640);
+  for (const xf of [g.x0, g.x1]) {
+    assert.ok(Math.abs(lean(xf) - atEdgeOfScreen) < .01, `the end seam leans as at a screen edge (${lean(xf).toFixed(1)} px)`);
+    assert.ok(Math.abs(deckSeamTopXV188(uncapped, xf) - xf) > 3 * lean(xf), 'it leaned more than three times as much before');
+  }
+  assert.equal(deckSeamTopXV188(g, g.vanishX + 300), deckSeamTopXV188(uncapped, g.vanishX + 300), 'the centre keeps its perspective');
+  assert.ok(deckSeamTopXV188(g, g.x0) > g.x0 && deckSeamTopXV188(g, g.x1) < g.x1, 'seams still lean inward');
+  // Holds without a cap keep their geometry (QZ-17 shape unchanged).
+  const qz = buildMissionLevelV52({ campaign: campaignOf('special-narrative-qz17'), world: worldOf(campaignOf('special-narrative-qz17')), levelSeeds: LEVEL_SEEDS });
+  assert.ok(qz); assert.equal(Object.hasOwn(depthHoldDeckGeometryV188({ x0: 0, x1: 800, floorY: 600, zMin: -80, zMax: 0 }), 'span'), false);
+});

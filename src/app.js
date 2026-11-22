@@ -6,7 +6,7 @@ import { deliverTravelMessagesV188, travelMessagesListV188, travelArrivalNoticeV
 import { filterColonyCampaignsV188, colonyLockReasonV188, colonyLockTextV188, applyColonyMissionResultV188, applyColonyC5LaunchV188, colonyMissionsSnapshotV188,
   colonyReturnSceneDueV188, markColonySceneSeenV188, COLONY_SCENES_V188, colonyC4DecisionPendingV188, colonyGrueDecisionPendingV188, colonyC4OptionsV188,
   chooseColonyC4V188, chooseColonyGrueV188, COLONY_DECISION_TEXT_V188, COLONY_GRUE_CHOICES_V188, colonyCampaignNameV188 } from './colony-missions-v188.js';
-import { applyColonyLevelResultV188 } from './colony-mission-levels-v188.js';
+import { applyColonyLevelResultV188, COLONY_STREET_NO_APC_IDS_V188 } from './colony-mission-levels-v188.js';
 import { openContentSceneDialogV188 } from './content-gap-ui-v188.js';
 import { withHubAsphodeleV188 } from './hub-asphodele-v188.js';
 import { asphodeleSaveViewV188, asphodeleShuttleStatusV188, boardAsphodeleV188, returnToTantalusV188, leaveAsphodeleForOperationV188, normalizeAsphodeleHubV188,
@@ -3521,7 +3521,8 @@ function insertionCinematicPlanV188(context) {
   const storyApproach = context.campaign?.id === 'special-narrative-qz17' && !(story.cinematicsSeen || []).includes('cin-10');
   const { short } = selectInsertionLengthV188({ worldId: context.world.id, seenWorldIds: insertionSeenWorldIdsV188(saveSystem.data, 'insertion'),
     alwaysFull: saveSystem.data.settings.insertionAlwaysFullV188 === true });
-  const vehicle = getSpecialOperationByCampaignIdV67(context.campaign?.id)?.id === 'cargo-brutal' ? null : context.vehicle;
+  // Owner decision 2026-11-22: the colony streets of C1, C3, C4 are reached on foot (no M577 under the belly).
+  const vehicle = getSpecialOperationByCampaignIdV67(context.campaign?.id)?.id === 'cargo-brutal' || COLONY_STREET_NO_APC_IDS_V188.includes(context.campaign?.id) ? null : context.vehicle;
   const handover = buildInsertionHandoverV188({ world: context.world, campaign: context.campaign, templateId: context.missionLevel?.templateId,
     vehicle, short: short || storyApproach });
   return { handover, world: context.world, campaign: context.campaign };

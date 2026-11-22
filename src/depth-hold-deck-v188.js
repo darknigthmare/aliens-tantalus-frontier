@@ -27,18 +27,27 @@ export const DEPTH_HOLD_DECK_VANISH_V188 = 520;
 /** Texture repeat in world pixels at the front edge, independent of hold length. */
 export const DEPTH_HOLD_DECK_TILE_V188 = 192;
 
-/** Screen geometry of a section's deck. */
+/** Screen geometry of a section's deck. A long section may cap its perspective (`deckPerspectiveSpan`, px):
+ * farther than that from the centre, the seams keep the lean they have at that distance (V188 owner decision
+ * 2026-11-22, C1 port corridor: a 4 450 px street read as a funnel at both ends). Other holds: no cap. */
 export function depthHoldDeckGeometryV188(section) {
   const depth = Math.max(0, -(Number(section.zMin) || 0) + (Number(section.zMax) || 0));
   const top = section.floorY - (Number(section.zMax) || 0), front = top + depth;
-  return { x0: section.x0, x1: section.x1, top, front, depth, lip: DEPTH_HOLD_DECK_LIP_V188, shadow: DEPTH_HOLD_DECK_SHADOW_V188,
+  const geometry = { x0: section.x0, x1: section.x1, top, front, depth, lip: DEPTH_HOLD_DECK_LIP_V188, shadow: DEPTH_HOLD_DECK_SHADOW_V188,
     vanishX: (section.x0 + section.x1) / 2, vanishY: top - DEPTH_HOLD_DECK_VANISH_V188 };
+  if (Number.isFinite(section.deckPerspectiveSpan) && section.deckPerspectiveSpan > 0) geometry.span = section.deckPerspectiveSpan;
+  return geometry;
 }
-/** x on the floor line of a seam that meets the front edge at xFront (one-point perspective). */
+/** The vanishing x seen by a seam at xFront: the section's, or no farther than `span` from the seam. */
+export const deckLocalVanishXV188 = (geometry, xFront) => Number.isFinite(geometry.span)
+  ? Math.max(xFront - geometry.span, Math.min(xFront + geometry.span, geometry.vanishX)) : geometry.vanishX;
+/** x on the floor line of a seam that meets the front edge at xFront (one-point perspective, capped by `span`). */
 export function deckSeamTopXV188(geometry, xFront) {
-  const { vanishX, vanishY, top, front } = geometry;
+  const { vanishY, top, front } = geometry, vanishX = deckLocalVanishXV188(geometry, xFront);
   return vanishX + (xFront - vanishX) * (top - vanishY) / (front - vanishY);
 }
+/** Screen x at row ratio k (1 at the front edge) of a point whose front-edge x is xFront. */
+const deckRowXV188 = (geometry, xFront, k) => { const vx = deckLocalVanishXV188(geometry, xFront); return vx + (xFront - vx) * k; };
 /** Screen y of a depth z on the deck. */
 export const deckRowYV188 = (section, z) => section.floorY - z;
 
@@ -80,7 +89,7 @@ export function drawDepthHoldDeckV188(ctx, section, { clipX0 = section.x0, clipX
 }
 
 function deckCanvas(section, g, height, image = null) {
-  const key = `${section.id}|${g.x0}|${g.x1}|${g.top}|${g.depth}`;
+  const key = `${section.id}|${g.x0}|${g.x1}|${g.top}|${g.depth}|${g.span ?? ''}`;
   let cache = rendered;
   if (image) { cache = textured.get(image); if (!cache) { cache = new Map(); textured.set(image, cache); } }
   if (cache.has(key)) return cache.get(key);
@@ -124,7 +133,7 @@ export function paintDeckV188(ctx, g, ox = 0, oy = 0, image = null) {
   ctx.fillStyle = 'rgba(255,255,255,.06)';
   for (const t of [.55, .76, .95]) {
     const y = top + lane + (g.depth - lane) * t, k = (y - Y(g.vanishY)) / (front - Y(g.vanishY));
-    for (let xf = first - 96; xf <= g.x1 + 96; xf += 32) { const x = g.vanishX + (xf - g.vanishX) * k; ctx.fillRect(X(x) - 1, Math.round(y) - 1, 3, 1); }
+    for (let xf = first - 96; xf <= g.x1 + 96; xf += 32) { const x = deckRowXV188(g, xf, k); ctx.fillRect(X(x) - 1, Math.round(y) - 1, 3, 1); }
   }
   // Front lip: the deck's edge facing the camera, then a soft shadow onto the void.
   ctx.fillStyle = '#4b5659'; ctx.fillRect(X(g.x0), front - 1, w, 2);
@@ -144,13 +153,24 @@ function paintDeckTextureV188(ctx, g, image, ox, oy) {
   const texel = DEPTH_HOLD_DECK_TILE_V188 / image.naturalWidth, width = g.x1 - g.x0;
   ctx.save(); ctx.globalAlpha *= .78; ctx.fillStyle = pattern;
   for (let row = 0; row < g.depth; row++) {
-    const height = Math.min(1, g.depth - row), y = g.top + row, k = (y + height / 2 - g.vanishY) / (g.front - g.vanishY), scale = texel * k;
-    const originX = g.vanishX + (g.x0 - g.vanishX) * k;
-    ctx.save(); ctx.translate(originX - ox, g.front - oy); ctx.scale(scale, -scale);
-    ctx.fillRect((g.x0 - originX) / scale, (g.front - y - height) / scale, width / scale, height / scale);
-    ctx.restore();
+    const height = Math.min(1, g.depth - row), y = g.top + row, k = (y + height / 2 - g.vanishY) / (g.front - g.vanishY);
+    // Bands of this row: [screen x0, screen x1, scale, screen x of the texture origin (front x = g.x0)].
+    // Without a cap: one band, the one-point projection. With a cap (`span`): the centre keeps it; beyond,
+    // a seam sees its vanishing point `span` away, i.e. the row is shifted by span·(1−k) at full scale.
+    const bands = [];
+    if (Number.isFinite(g.span)) {
+      const c0 = g.vanishX - g.span * k, c1 = g.vanishX + g.span * k;
+      bands.push([g.x0, c0, texel, g.x0 + g.span * (1 - k)], [c0, c1, texel * k, g.vanishX + (g.x0 - g.vanishX) * k], [c1, g.x1, texel, g.x0 - g.span * (1 - k)]);
+    } else bands.push([g.x0, g.x1, texel * k, g.vanishX + (g.x0 - g.vanishX) * k]);
+    for (const [left, right, scale, originX] of bands) {
+      const a = Math.max(g.x0, left), b = Math.min(g.x1, right);
+      if (!(b > a)) continue;
+      ctx.save(); ctx.translate(originX - ox, g.front - oy); const rowScale = texel * k; ctx.scale(scale, -rowScale);
+      ctx.fillRect((a - originX) / scale, (g.front - y - height) / rowScale, (b - a) / scale, height / rowScale);
+      ctx.restore();
+    }
   }
-  ctx.restore(); return true;
+  ctx.restore(); return width > 0;
 }
 
 /** Soft contact shadow covering a floor object's footprint depth (z0 … z1, clamped to the deck). */

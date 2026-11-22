@@ -81,8 +81,11 @@ export function dropshipHandoverPolicyV188(options = {}) {
 /** App rule (V188 cinematic contract): the M577 rides only for vehicle 001/002, on a
  *  colony-multiroute or planet-exterior template, never in 'space'. Otherwise 'foot'. */
 export const APC_HANDOVER_TEMPLATES_V188 = Object.freeze(['colony-multiroute', 'planet-exterior']);
-export function apcHandoverAdmissibleV188({ placeType, templateId, vehicleId } = {}) {
-  return placeType !== 'space' && APC_HANDOVER_TEMPLATES_V188.includes(templateId) && /^vehicle-00[12]-/.test(String(vehicleId || ''));
+/** Owner decision 2026-11-22: no M577 in the Port-Méridien streets of C1, C3, C4 (colony-mission-levels-v188.js). */
+export const APC_HANDOVER_EXCLUDED_CAMPAIGNS_V188 = Object.freeze(['colony-c1', 'colony-c3', 'colony-c4']);
+export function apcHandoverAdmissibleV188({ placeType, templateId, vehicleId, campaignId = null } = {}) {
+  return placeType !== 'space' && APC_HANDOVER_TEMPLATES_V188.includes(templateId) && /^vehicle-00[12]-/.test(String(vehicleId || ''))
+    && !APC_HANDOVER_EXCLUDED_CAMPAIGNS_V188.includes(campaignId);
 }
 export function buildHandoverPlanV188(name, short = false) {
   const plan = DROPSHIP_HANDOVER_PLANS_V188[name], scale = short ? plan.short : 1;
@@ -143,7 +146,7 @@ export function withMissionDropshipHandoverV188(Base) {
       this.installHandoverRoutesV188();
       const result = super.start(options);
       if (policy?.mode === 'apc' && !apcHandoverAdmissibleV188({ placeType: policy.placeType, templateId: options.missionLevel?.templateId,
-        vehicleId: options.vehicle?.id || (this.apcConvoyActiveV121 ? this.vehicle?.id : '') })) {
+        vehicleId: options.vehicle?.id || (this.apcConvoyActiveV121 ? this.vehicle?.id : ''), campaignId: policy.campaignId })) {
         policy = Object.freeze({ ...policy, mode: 'foot', requestedMode: 'apc' }); // mismatch with the carried-M577 rule: on foot
         this.handoverConfigV188 = policy;
       }

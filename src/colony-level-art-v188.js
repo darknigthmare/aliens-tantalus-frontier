@@ -36,7 +36,10 @@ export const COLONY_LEVEL_ART_SLOTS_V188 = Object.freeze([
   slot('colony-tampered-seal', 'wall', 51, 31, 'C4: forced vent seal (1 × 0.6 m).', 'to-define'),
   slot('colony-lore-cache', 'floor', 46, 31, 'C4: a convert’s hidden bag at the dead end of the duct (0.9 × 0.6 m).', 'to-define'),
   slot('colony-npc-noor', 'actor', 42, 92, 'C3: Noor Okafor at the infirmary block (placeholder silhouette, marine scale).', 'to-define'),
-  slot('colony-npc-lucia', 'actor', 42, 92, 'C1: Lucia Ferro at her infirmary (placeholder silhouette, marine scale).', 'to-define')
+  slot('colony-npc-lucia', 'actor', 42, 92, 'C1: Lucia Ferro at her infirmary (placeholder silhouette, marine scale).', 'to-define'),
+  // Owner decision 2026-11-22: in C4 the vents are the only way to the gathering; these close the two walks around them.
+  slot('colony-utility-grate-sealed', 'wall', 40, 258, 'C4: service grate of the utility gallery, welded shut from the gathering side (0.8 × 5 m, floor to ceiling of the gallery).', 'adapted'),
+  slot('colony-roof-hatch-sealed', 'wall', 40, 160, 'C4: roof access door of the comms block, chained and welded (0.8 × 3.1 m).', 'adapted')
 ]);
 export const COLONY_LEVEL_ART_SLOT_IDS_V188 = Object.freeze(COLONY_LEVEL_ART_SLOTS_V188.map(entry => entry.id));
 /** Authored PNGs physically present under COLONY_LEVEL_ART_ROOT_V188 (none yet). */
@@ -162,6 +165,16 @@ function drawSlotPrimitive(ctx, id, x, y, w, h, o) {
     case 'colony-cult-sign': ctx.fillStyle = '#2a201b'; ctx.fillRect(x, y, w, h); ctx.fillStyle = '#9b2f28'; ctx.fillRect(x + 4, y + h - 8, w - 8, 3); break;
     case 'colony-airlock-log': ctx.fillStyle = '#20272a'; ctx.fillRect(x, y, w, h); ctx.fillStyle = '#06140b'; ctx.fillRect(x + 4, y + 4, w - 8, h - 8); break;
     case 'colony-tampered-seal': ctx.fillStyle = '#3a4448'; ctx.fillRect(x, y, w, h); ctx.strokeStyle = '#d06b2a'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(x + 4, y + 4); ctx.lineTo(x + w - 4, y + h - 4); ctx.stroke(); break;
+    case 'colony-utility-grate-sealed': case 'colony-roof-hatch-sealed': {
+      // Frame, bars and weld beads; amber/black hazard band at hand height (no text: the prompt explains it).
+      ctx.fillStyle = '#2a3133'; ctx.fillRect(x, y, w, h); ctx.strokeStyle = '#596468'; ctx.lineWidth = 3; ctx.strokeRect(x + 1.5, y + 1.5, w - 3, h - 3);
+      ctx.strokeStyle = '#7b878a'; ctx.lineWidth = 2;
+      if (id === 'colony-utility-grate-sealed') for (let bx = x + 8; bx < x + w - 4; bx += 8) { ctx.beginPath(); ctx.moveTo(bx, y + 4); ctx.lineTo(bx, y + h - 4); ctx.stroke(); }
+      else { ctx.fillStyle = '#3b4447'; ctx.fillRect(x + 6, y + 10, w - 12, h - 20); ctx.strokeStyle = '#8e8a6a'; ctx.beginPath(); ctx.moveTo(x + 4, y + h * .45); ctx.lineTo(x + w - 4, y + h * .55); ctx.moveTo(x + 4, y + h * .55); ctx.lineTo(x + w - 4, y + h * .45); ctx.stroke(); }
+      for (let yy = y + 10; yy < y + h - 6; yy += 22) { ctx.fillStyle = '#e0a33a'; ctx.fillRect(x + 1, yy, 4, 9); ctx.fillRect(x + w - 5, yy + 11, 4, 9); }
+      const band = y + h - 70; for (let i = 0; i < 4; i++) { ctx.fillStyle = i % 2 ? '#1b1d1c' : '#d5a531'; ctx.fillRect(x + i * w / 4, band, w / 4, 10); }
+      break;
+    }
     case 'colony-lore-cache': ctx.fillStyle = '#4a3a28'; ctx.fillRect(x, y + 6, w, h - 6); ctx.fillStyle = '#2b2219'; ctx.fillRect(x + 6, y, w - 12, 8); break;
     case 'colony-npc-noor': case 'colony-npc-lucia': {
       const coat = id === 'colony-npc-noor' ? '#d9dcd2' : '#c6d3d6';

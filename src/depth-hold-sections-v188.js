@@ -198,6 +198,9 @@ export const DEPTH_HOLD_DEFINITIONS_V188 = Object.freeze([
   Object.freeze({
     id: 'colony-c1-port-corridor', spec: 'colony-levels', campaignIds: Object.freeze(['colony-c1']),
     zoneId: null, zMin: -80, zMax: 0, doorBand: 20, interactBand: 24, speed: 150, railCovers: true, railCoversAnyZone: true, bigCastes: 'span',
+    // Owner decision 2026-11-22 [PROPOSÉ 640 px, half a screen]: the deck seams never lean more than they do at the
+    // edge of a screen centred on the street; before, the ends of the 4 450 px street leaned ≈ 3.5 times more.
+    deckPerspectiveSpan: 640,
     bounds(engine) {
       const places = colonyC1PlacesV188(engine), { x0, x1 } = places.corridor;
       const floor = list(engine?.platforms).some(entry => Math.abs(entry.y - places.floorY) < 1 && entry.x <= x0 + 40 && entry.x + entry.w >= x0);
@@ -247,7 +250,8 @@ export function buildDepthHoldSectionV188(engine, definition) {
     .map(cover => prop(`cover:${cover.id}`, 'cover', cover.x, cover.w, cover.h, -2, -34, 1)) : [];
   const section = { id: definition.id, roomId: definition.id, zoneId: definition.zoneId, x0, x1, floorY,
     zMin: definition.zMin, zMax: definition.zMax, doorBand: definition.doorBand, interactBand: definition.interactBand, speed: definition.speed,
-    dropship: null, bay, props: Object.freeze([...props, ...covers]), containers: Object.freeze(props), coverIds: Object.freeze(covers.map(entry => entry.id.slice(6))) };
+    dropship: null, bay, props: Object.freeze([...props, ...covers]), containers: Object.freeze(props), coverIds: Object.freeze(covers.map(entry => entry.id.slice(6))),
+    ...(Number.isFinite(definition.deckPerspectiveSpan) ? { deckPerspectiveSpan: definition.deckPerspectiveSpan } : {}) };
   // QZ-17 keeps exactly its spec-002 shape; the other holds add their placement report.
   if (!definition.layout || definition.bounds) Object.assign(section, { skipped: Object.freeze(skipped) });
   return Object.freeze(section);
