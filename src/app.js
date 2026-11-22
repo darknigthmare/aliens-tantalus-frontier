@@ -24,7 +24,9 @@ import { filterAct5CampaignsV188, act5LockReasonV188, act5LockTextV188, applyAct
   act5CrewEpilogueLineV188, markAct5EpilogueTalkV188, act5LockerLabelV188, act5CinematicContextV188, deriveStoryWithAct5V188, act5SnapshotV188,
   act5LateColonistsSavedV188, act5ConvoySetupV188, recordAct5TrailerDropV188, markAct5BridgeCrossedV188, recordAct5QueenKilledV188,
   ACT5_AUDIENCE_ID_V188, startAct5AudienceV188, act5AudienceDueV188 } from './story-act5-v188.js';
-import { confrontationViewV188, playConfrontationMoveV188, confrontationStateV188, confrontationOutcomeV188, startConfrontationV188, CASSIUS_INTERROGATION_V188 } from './confrontation-v188.js';
+import { confrontationViewV188, playConfrontationMoveV188 } from './confrontation-v188.js';
+// Spec 009 × spec 010: the CASSIUS hearing of S2.
+import { confrontationStateV188, confrontationOutcomeV188, startConfrontationV188, CASSIUS_INTERROGATION_V188 } from './confrontation-v188.js';
 import { STATION_CASSIUS_HEARING_ID_V188 } from './station-mission-levels-v188.js';
 import { openConfrontationDialogV188 } from './confrontation-ui-v188.js';
 import { isAct5RaceCampaignV188, act5RaceCueV188 } from './act5-convoy-race-v188.js';
