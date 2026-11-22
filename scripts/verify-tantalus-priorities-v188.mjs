@@ -786,8 +786,11 @@ test('Broodstorm terminal rejects a false H receipt or an added-source disguise 
   assert.ok(start >= 0 && end > start);
   // Keep the historical B receipt mutations on a B successor untouched by Q.
   // Q's own registry receipt is exercised separately below.
-  const path = 'src/legacy-operation-state-v131.js';
+  // V188 spec 011 moved the Abysse Noir chapter's worldId (src/legacy-operation-state-v131.js), so that
+  // B successor is now also a join successor; the B runtime successor is untouched by Q and by the join.
+  const path = 'src/legacy-operations-v131.js';
   assert.equal(Object.hasOwn(TANTALUS_PRIORITIES_QUEEN_MOTHER_V188.successors, path), false);
+  assert.equal(Object.hasOwn(TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors, path), false);
   for (const [reason, mutate, error] of [
     ['false H predecessor', receipt => { receipt.successors[path].previousSha256 = '0'.repeat(64); }, /Broken historical-to-361e4067/],
     ['unreviewed terminal bytes', receipt => { receipt.successors[path].currentSha256 = '0'.repeat(64); }, /Unreviewed V188 source bytes/],

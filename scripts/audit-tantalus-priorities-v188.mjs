@@ -1291,7 +1291,7 @@ export const TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188 = freeze({ baseline: '0d1
   },
   "scripts/verify-tantalus-priorities-v188.mjs": {
     "previousSha256": "9496d07fe2693a3c92d35a9050a4a984c67d0fbaa3855029e2997678b2eb440d",
-    "currentSha256": "26618e6dd185cc260b2faea41df8d7a3194b61d77e0d9ebd2bbb095ac7079f5b"
+    "currentSha256": "e399e1174c2d43a5637cff7ef69391b8fc61487a231325049c196698ec4f7f69"
   },
   "scripts/verify-xeno-trials-feedback-v149.mjs": {
     "previousSha256": "e9b3f36763c67348a50d00b4e21fa3012e6c3554496004d3a14746b684a1e561",
