@@ -743,6 +743,20 @@ Lot de la première mécanique nouvelle de Q17 A. Valeurs et règles appliquées
 - A. Directrice : corriger les deux répliques du conseil. **(Recommandé)**
 - B. Garder les deux formes.
 
+## Niveaux dédiés de la station S1-S4 (2026-11-22) — valeurs par défaut appliquées
+
+Demande reçue : des niveaux dédiés pour S1-S4 sur le modèle du lot colonie (spec `009-niveaux-station`, bible §7.10). Les choix ci-dessous sont appliqués par défaut **[PROPOSÉ]** et restent révisables.
+
+| # | Question | Défaut appliqué | Autres options |
+| --- | --- | --- | --- |
+| S9-1 | Rendu des quatre niveaux | V1 (intérieur de station) ; la cale de cargo procédurale (caisses d'un cargo) est retirée de S1-S4 | V2 pour le collier d'arrimage de S1 (nouvelle définition de cale) |
+| S9-2 | Faut-il enregistrer l'issue des récupérateurs de S1 (négociés / forcés) pour l'arrivée de S4 (« récupérateurs alliés si négociés », §7.2) ? | Non enregistrée ; S4 montre Grue si Port-Méridien a accepté son prix (`colonyMissionsV188.grue = accept`) | Champ additif `stationV188.s1Salvagers` (migration testée) |
+| S9-3 | Conduits de la station pendant S1-S4 | Scellés (aucune traversée), pour que chaque cloison soit le seul passage | Ouvrir un réseau de conduits dédié dans S3 (ventilation) |
+| S9-4 | Valeurs de jeu (minuteur de S3 150 s, tenue du quai 60 s, œufs, effectifs) | Celles de la bible §7.10 | À régler après playtest |
+| S9-5 | Arrivée des colons volontaires en S4 (§7.2) | Non représentée (équipe technique et Grue seulement) | Silhouettes de colons de Port-Méridien selon le palier de la colonie |
+
+Aucune de ces valeurs ne certifie une fidélité « 1:1 ».
+
 ## Décisions du propriétaire (2026-11-22, second tour) — appliquées
 
 Décisions reçues après la livraison `48b0a599` (D1-D4d ci-dessus). Elles lèvent les réserves « Reste ouvert » de D1, D4a et D4b. Base : `48b0a599`.

@@ -88,7 +88,7 @@ Les statuts « À faire » du §53 (tir, tension, caste, accessibilité, répliq
 | Élément | Statut | Constat |
 | --- | --- | --- |
 | `station-intro-silence` (Calme, à bord) | Manquant | Débloqué par la quête de Rook (§8.1) |
-| S1 L'arrimage, S2 La voix de CASSIUS, S3 Les ponts scellés, S4 Le hub Asphodèle | Manquant | Q6 : produire S1-S4 comme missions avant le hub ; Q103 : feature Spec Kit |
+| S1 L'arrimage, S2 La voix de CASSIUS, S3 Les ponts scellés, S4 Le hub Asphodèle | Partiel (spec 005 ; niveaux dédiés du 22 novembre) | Q6 : produire S1-S4 comme missions avant le hub ; Q103 : feature Spec Kit. *22 novembre : niveaux dédiés de S1-S4 posés sur le gabarit vaisseau (V1), voir la section finale ; dix emplacements en primitives, voix absentes* |
 | Choix CASSIUS (réécrire / brider / effacer) | Manquant | Q7 : choix définitif |
 | Annexes (7) et contrats locaux (6) | Partiel (spec 007) | Les 13 sont lançables après S4, verrous [PROPOSÉ] ; contrats comptés ; seul *Relais en dérive* a un effet ; décor générique d'intérieur de vaisseau |
 | Hub Asphodèle : 7 modules (§7.3, §42) | Partiel (spec 007 et suite) | 12 modules de §42.2 atteignables à pied (Q22 A, Q23 A) ; quartiers, infirmerie, ponts inférieurs et hangar de réparation rouverts (§7.7) ; commerce Crucible (Q30 A) ; effets des six contrats ; foules ; treize parois et vingt détails PNG intégrés dans les treize salles, trois atlas d'ouvriers animés ; plan V3 non fait |
@@ -608,6 +608,24 @@ Base : `79df744c`. Décisions enregistrées dans `QUESTIONS_PROPRIETAIRE_V188.md
 | C1 : perspective du couloir | Partiel | Joints du pont plafonnés à un demi-écran du centre (640 px [PROPOSÉ]) ; vérifié par géométrie et captures, pas par un retour de playtest |
 
 Vérifications exécutées : tests Node étendus `verify-act5-convoy-race-v188` (15/15), `verify-act5-endings-v188` (27/27), `verify-colony-levels-v188` (15/15), `verify-dropship-handover-v188` (44/44) ; parcours Chromium `qa-act5-convoy-race-v188.mjs` 18/18 et `qa-colony-levels-v188.mjs` 44/44, sans erreur de page, fixtures et injections déclarées en tête des scripts. Dans ce parcours navigateur, la Reine a été blessée et déséquilibrée mais n'a pas atteint son plancher (une remorque abandonnée l'a retenue) : le recul n'y a pas été observé ; il est couvert par le test Node déterministe. Rien n'est déclaré « 1:1 » ; aucune image n'a été générée.
+
+## Niveaux dédiés de la station S1-S4 (2026-11-22)
+
+Spec `specs/009-niveaux-station` ; bible §7.10. Code : `src/station-mission-levels-v188.js` (phases, apparitions, interactions maintenues, checkpoints, cadres scellés, dessin), `src/station-level-places-v188.js` (lieux mesurés sur le gabarit), `src/station-level-art-v188.js` (20 emplacements : 10 réemploient un PNG Asphodèle admis, 10 en primitives). Modèle : niveaux dédiés de la colonie (spec 008).
+
+| Élément | Avant | Après | Reste |
+| --- | --- | --- | --- |
+| S1 L'arrimage | Gabarit vaisseau générique (roster, générateur, archives) et cale de cargo procédurale V2 | V1 : sas manuel, anneau éteint, ventilateurs et détecteur saturé, deux traces d'Echo-8, récupérateurs négociés ou forcés, alimentation de secours du pont de contrôle | Art de la manivelle, du ventilateur, de la craie ; l'issue des récupérateurs n'est pas sauvegardée |
+| S2 La voix de CASSIUS | Idem | V1 : trois disjoncteurs avec Kwan à la radio, réacteur relancé, interrogatoire de CASSIUS (spec 010, sur la mission en pause), ordres QZ17 copiés ; décision CASSIUS inchangée au Commandement, son texte reprend la dernière réponse de l'interrogatoire | Voix de CASSIUS et de Kwan ; art du disjoncteur et du panneau du réacteur |
+| S3 Les ponts scellés | Idem, minuteur générique de 105 s | V1 : sas 3 selon la décision CASSIUS, laboratoire (berceaux, journaux, deux œufs), routage d'énergie, combat confiné, plaque de Kessler, compte à rebours de 150 s | Art de l'œuf, du journal, de la plaque, du routeur, du scellé |
+| S4 Le hub Asphodèle | Idem, tenue de zone générique de 12 s | V1 : dernier nid, trois vannes, quai tenu 60 s, arrivée de l'équipe (et de Grue si alliée), extraction au quai | Arrivée des colons volontaires non représentée |
+| Parcours | Les conduits V62 et les ponts supérieurs contournaient chaque cloison | Conduits scellés, deux cadres scellés sur les ponts supérieurs ; chaque cloison est le seul passage (accès logique `stationAccessV188`, passage physique vérifié) | Art des cadres scellés |
+
+Inchangés : identifiants, objectifs de campagne et objectifs d'exécution (`board-vessel`, `restore-atmosphere`, `escape-quarantine`, `hold-extraction`), récompenses, `stationV188` (forme vérifiée), chaîne d'accès, décision CASSIUS, scènes de retour, pièces du dossier, annexes et contrats (gabarit générique et habillage `asph-msn-*`). L'intro *Six heures de silence* n'a pas de gabarit de mission (fin de quête et CIN-70).
+
+Fidélité : rien n'est déclaré « 1:1 ». Documenté : système Seegson obéissant, sas manuels, détecteur trompé par l'air en mouvement (*Alien: Isolation*, 2014 ; références de Paul Abbott) ; équipe perdue et caméras de casque (*Aliens*, 1986) ; œufs (*Alien*, 1979 ; *Aliens*). Adapté : plan de la station sur le gabarit, routage d'énergie, compte à rebours, issue des récupérateurs.
+
+Vérifications réellement exécutées : voir le rapport de la PR, `scripts/verify-station-levels-v188.mjs` (dans `test:priorities:v188`) et le parcours Chromium `scripts/qa-station-levels-v188.mjs` (fixtures et injections déclarées en tête du script : marine déplacé entre les lieux, apparitions encore vivantes retirées par `defeatEnemy`, tenue du quai de S4 ramenée à 3 s).
 
 ## Décisions du propriétaire du 22 novembre 2026 — second tour
 

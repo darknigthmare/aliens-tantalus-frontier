@@ -9,7 +9,7 @@
 - [x] T007 Coque hors ligne, admission des sources, suite déclarée, QA déclarée
 - [x] T008 Tests Node (`verify-confrontation-v188.mjs`) et parcours Chromium (`qa-confrontation-v188.mjs`)
 - [x] T009 Bible (§5.6, §5.11, §7.2), audit de contenu, questions au propriétaire (Q-010-1 à Q-010-4)
-- [ ] T010 Raccorder l'interrogatoire de CASSIUS en S2 (lot des niveaux de la station) — ouvert, entrée et API prêtes
+- [x] T010 Raccorder l'interrogatoire de CASSIUS en S2 (lot des niveaux de la station, spec 009) — fait : ouvert au cœur de CASSIUS après la relance du réacteur, avant la décision existante ; l'issue n'ajoute que la dernière réponse de CASSIUS au texte de la décision
 - [ ] T011 Effet de l'issue de CASSIUS sur la décision existante (Q-010-2) — en attente du propriétaire
 - [ ] T012 Art des portraits de Halloran et du cœur de CASSIUS (substituts Canvas) — ouvert
 - [ ] T013 Voix des répliques — ouvert

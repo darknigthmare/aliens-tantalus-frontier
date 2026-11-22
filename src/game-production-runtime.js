@@ -7,6 +7,7 @@ import { withMissionDropshipHandoverV188 } from './mission-dropship-handover-v18
 import { withQz17LevelDressingV188 } from './qz17-level-dressing-v188.js';
 import { withAsphodeleMissionDressingV188 } from './asphodele-mission-dressing-v188.js';
 import { withColonyMissionLevelsV188 } from './colony-mission-levels-v188.js';
+import { withStationMissionLevelsV188 } from './station-mission-levels-v188.js';
 import {
   GameEngine as ProductionCoreEngine,
   buildEnemyEncounterEligibility as buildCoreEnemyEncounterEligibility
@@ -119,11 +120,13 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
 // footstep cues, above the objective panel: their spawns, held interactions and phases run under
 // the combat feel, the creature scale, the caste behaviours, the depth holds (the C1 corridor) and
 // the handover, which all see the authored encounter. The adjacencies the other suites pin are kept.
+// The dedicated Asphodèle station levels S1-S4 (V188, station-mission-levels-v188.js, spec 009) sit
+// just inside the objective panel, above the tension director, under the same outer layers.
 // The in-level dropship handover (V188) wraps every mission layer: while it
 // withholds control nothing below it runs, so mission time (and with it the
 // insertion grace) only starts when control is given, and it can hold the
 // mission-complete event of any mode until the boarding is over.
-export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepthRoomsV188(withQz17LevelDressingV188(withCasteBehaviorsV188(withInsertionSafeZoneV188(withRunOptionsRuntimeV188(withAsphodeleMissionDressingV188(withVfxV188(withFranchiseFidelityV188(withGameplayGapsV188(withCombatFeelV188(withCreatureScaleV188(withFootstepCuesV188(withColonyMissionLevelsV188(withMissionObjectivePanelV188(withTensionDirectorV188(withArbiterCampaignRuntimeV190(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(withMissionLayerMatteV188(V158ProductionEngine))))))))))))))))))))))) {
+export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepthRoomsV188(withQz17LevelDressingV188(withCasteBehaviorsV188(withInsertionSafeZoneV188(withRunOptionsRuntimeV188(withAsphodeleMissionDressingV188(withVfxV188(withFranchiseFidelityV188(withGameplayGapsV188(withCombatFeelV188(withCreatureScaleV188(withFootstepCuesV188(withColonyMissionLevelsV188(withMissionObjectivePanelV188(withStationMissionLevelsV188(withTensionDirectorV188(withArbiterCampaignRuntimeV190(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(withMissionLayerMatteV188(V158ProductionEngine)))))))))))))))))))))))) {
   updateEnemy(actor, delta) {
     // Observe final accepted displacement after every existing wrapper,
     // including insertion grace and depth holds. Their order is unchanged.
