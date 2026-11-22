@@ -5721,6 +5721,8 @@ async function boot() {
   // V188 QA hook: the insertion player and the last sequence's frame-time summary.
   globalThis.__ATF_INSERTION_V188__ = { player: insertionPlayerV188, last: null, get mission() { return insertionMissionV188 ? clone(insertionMissionV188.handover) : null; } };
   globalThis.__ATF_HUB__ = hubEngine;
+  // V188 spec 012 QA hook: replays a story cinematic by id (CIN-xx, CQ-xx) without recording it as seen.
+  globalThis.__ATF_STORY_V188__ = { playCinematic: (id) => playStoryCinematicV188(String(id), { once: false, record: false }) };
   globalThis.__ATF_TITLE_VFX_V188__ = titleVfxV188;
   globalThis.__ATF_XENO_TRIALS_V96__ = {
     open: () => showView('xenotrials'),

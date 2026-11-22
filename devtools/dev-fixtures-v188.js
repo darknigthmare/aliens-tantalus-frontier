@@ -399,3 +399,18 @@ export function devFixtureFactsV188(save) {
   };
 }
 export { MAIN_ORDER as DEV_MAIN_ORDER_V188, STATION_MAIN as DEV_STATION_MAIN_V188, COLONY_MAIN as DEV_COLONY_MAIN_V188, QUEENS_ARC1_ORDER_V188 };
+
+// —— Dev session (what the launcher hands to the isolated game page) ——
+export const DEV_SESSION_KEY_V188 = 'atf-dev-session-v188';
+export const DEV_PROFILE_KEY_V188 = 'atf-v47-profile-1';
+export const DEV_SELECTED_PROFILE_KEY_V188 = 'atf-v78-selected-profile';
+export const DEV_LANGUAGE_KEY_V188 = 'atf-language-v185';
+/** The whole isolated storage of a session: profile 1 (the fixture), the selected-profile
+ * marker and the language. Nothing from the player's own localStorage is copied. */
+export function buildDevSessionV188(entry, { language = 'fr', difficulty = 'standard', toggles = {} } = {}) {
+  if (entry.blocked) throw new Error(`fixture: ${entry.id} is not available (${entry.blocked})`);
+  const built = buildDevSaveV188(entry.launch, { language, difficulty });
+  const storage = { [DEV_PROFILE_KEY_V188]: JSON.stringify(built.save), [DEV_SELECTED_PROFILE_KEY_V188]: '1', [DEV_LANGUAGE_KEY_V188]: language === 'en' ? 'en' : 'fr' };
+  return { schema: DEV_FIXTURE_SCHEMA_V188, entryId: entry.id, sceneId: entry.sceneId, launch: entry.launch, toggles: { ...toggles },
+    storage, initialStorage: { ...storage }, completed: built.completed, injections: built.injections, inspection: built.inspection };
+}
