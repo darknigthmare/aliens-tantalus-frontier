@@ -122,10 +122,10 @@ export function drawQueensShotV188(ctx, current, { local = 0, progress = 0, lang
         const g = ctx.createLinearGradient?.(0, 0, 0, H); if (g) { g.addColorStop(0, 'rgba(200,230,240,.20)'); g.addColorStop(1, 'rgba(0,0,0,0)'); ctx.fillStyle = g; }
         else ctx.fillStyle = 'rgba(200,230,240,.12)';
         ctx.beginPath(); ctx.moveTo(560, 0); ctx.lineTo(720, 0); ctx.lineTo(1000, H); ctx.lineTo(280, H); ctx.closePath(); ctx.fill(); // floodlight cone
-        const rise = H + 120 - p * 520; queenSilhouette(ctx, 640, rise, 1.1, '#0c1418');
+        const rise = 640 - Math.min(1, p * 1.6) * 300; queenSilhouette(ctx, 640, rise, 1.1, '#2b3c43');
         ctx.fillStyle = 'rgba(190,255,230,.75)'; if (p > .55) { ctx.fillRect(480, rise - 36, 10, 4); ctx.fillRect(520, rise - 30, 6, 4); } // wet sheen
       } else {
-        queenSilhouette(ctx, 640 + p * 80, 420 + p * 220, 1.1 - p * .5, `rgba(12,20,24,${1 - p})`);
+        queenSilhouette(ctx, 640 + p * 80, 340 + p * 260, 1.1 - p * .5, `rgba(43,60,67,${1 - p})`);
       }
       ctx.fillStyle = '#1a2a30'; ctx.fillRect(560, 40, 160, 30); ctx.fillStyle = '#e9d07a'; ctx.fillRect(570, 64, 20, 8); ctx.fillRect(690, 64, 20, 8); // MANTA-6 above
       break;
@@ -159,7 +159,7 @@ export function drawQueensShotV188(ctx, current, { local = 0, progress = 0, lang
   }
   caption(current.caption?.[lang]);
   ctx.fillStyle = 'rgba(233,208,122,.8)'; ctx.font = '12px monospace';
-  ctx.fillText(lang === 'en' ? 'PLACEHOLDER · CANVAS' : 'PROVISOIRE · CANVAS', 24, H - 100);
+  ctx.fillText(lang === 'en' ? 'PLACEHOLDER · CANVAS' : 'PROVISOIRE · CANVAS', 80, H - 120);
   return true;
 }
 
