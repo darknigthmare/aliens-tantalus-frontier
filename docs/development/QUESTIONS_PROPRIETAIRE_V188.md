@@ -797,7 +797,6 @@ Décisions déjà prises et appliquées : Q13 B (après l'Acte V), Q15 B (dépla
 
 Aucune de ces valeurs ne certifie une fidélité « 1:1 ».
 
-<<<<<<< HEAD
 ## Parcours complet de la campagne principale (2026-11-22) — questions ouvertes
 
 Le run est consigné dans `docs/development/PLAYTHROUGH_V188_20261122.md`. Aucune valeur n'a été changée sur ces points. Ils attendent une décision.
@@ -809,7 +808,7 @@ Le run est consigné dans `docs/development/PLAYTHROUGH_V188_20261122.md`. Aucun
 | P-3 | Ordre conseillé | QZ-18 est recommandé avant QZ-17. Le conseil de guerre s'ouvre avant C4 et l'Interlude avant C3. | Garder ; suivre l'ordre de la bible (Acte I d'abord) |
 | P-4 | Crise de l'Interlude | L'objectif indique le pont 2, mais les menaces apparaissent sur le pont où se trouve le joueur (ancien système de crise du hub). | Placer la crise sur son pont ; ajuster le texte |
 | P-5 | Texte du conseil avec un seul conteneur | « Sans conteneur à rendre… » s'affiche alors qu'un conteneur a été ramené (la restitution demande 2 conteneurs). | Reformuler (« Pas assez de conteneurs pour une restitution ») |
-=======
+
 ## Outils de développement : lanceur de scènes caché et stand de tir (2026-11-22, spec 012) — valeurs par défaut appliquées
 
 | # | Question | Valeur appliquée | Autre possibilité |
@@ -819,4 +818,3 @@ Le run est consigné dans `docs/development/PLAYTHROUGH_V188_20261122.md`. Aucun
 | D-012-3 | Prérequis impossibles à produire sans falsifier un reçu runtime (retours ARBITER 02-06) | Entrées affichées désactivées avec leur raison | Forger les reçus (refusé : état impossible) |
 | D-012-4 | Réglages du stand | En mémoire, appliqués par relance du niveau, exportés en diff JSON pour revue ; jamais écrits dans les sources | Écriture directe dans `content.js` |
 | D-012-5 | Mission support du stand | Première campagne FRONTIER ordinaire de Cocyte (`pair-005-frontier`), pour que la doctrine d'escouade V132 et les posables soient actifs | Niveau de stand dédié à construire |
->>>>>>> origin/claude/nifty-shannon-qpy1hl
