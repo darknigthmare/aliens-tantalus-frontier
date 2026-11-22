@@ -38,6 +38,7 @@ import { cinematicReturnSceneV188 } from '../src/audio.js';
 import { getCommandMissionsV110 } from '../src/player-surfaces-v110.js';
 import { filterUnlockedCampaignsV188 } from '../src/station-asphodele-v188.js';
 import { filterColonyCampaignsV188 } from '../src/colony-missions-v188.js';
+import { filterQueensCampaignsV188 } from '../src/side-campaign-queens-v188.js';
 import { filterAct5CampaignsV188, deriveStoryWithAct5V188 } from '../src/story-act5-v188.js';
 
 const world = WORLDS.find(entry => entry.id === campaign.worldId);
@@ -841,7 +842,7 @@ async function driveNativeReturnConsultation({ seen = [], alreadyDebriefed = fal
     CINEMATICS_V188, cinematicPlayerV188: player, cinematicReturnSceneV188,
     audio: { scene: 'command', stopMusic() {}, setMusicMoodV188() {}, restoreMoodV188() {} },
     viewAudioSceneV188: () => 'command', hubEngine: { running: false }, engine: { running: false },
-    stationReturnOnViewV188: () => false, act5OnViewV188: () => false, colonyReturnOnViewV188: () => false,
+    stationReturnOnViewV188: () => false, act5OnViewV188: () => false, colonyReturnOnViewV188: () => false, queensOnViewV188: () => false,
     renderHubStatus() {}, toast: message => errors.push(message),
     CAMPAIGNS: [campaign, CAMPAIGNS.find(entry => entry.id === 'special-narrative-qz17')], WORLDS,
     WEAPONS: [], EQUIPMENT: [], VEHICLES: [], CREW: [],
@@ -849,11 +850,11 @@ async function driveNativeReturnConsultation({ seen = [], alreadyDebriefed = fal
     // Xeno Trials V190 (merged line): the ARBITER dossier mounts beside this report; it is never planned here.
     getArbiterMissionV190, mountArbiterDossierV190,
     planArbiterMissionV190() { assert.fail('The QZ-18 return consultation cannot plan an ARBITER mission.'); },
-    unlockedCampaignsV188: list => filterColonyCampaignsV188(system.data,
-      filterAct5CampaignsV188(system.data, filterUnlockedCampaignsV188(system.data, list))),
+    unlockedCampaignsV188: list => filterQueensCampaignsV188(system.data, filterColonyCampaignsV188(system.data,
+      filterAct5CampaignsV188(system.data, filterUnlockedCampaignsV188(system.data, list)))),
     storyStateV188: () => deriveStoryWithAct5V188(system.data, { language: 'fr' }),
     missionNameV188: entry => entry.name, renderSpecialOperationsV67() {},
-    renderColonyReconstructionV188() {}, renderStationFrontV188() {}, renderCrewQuestsPanelV188() {}, renderAct5PanelV188() {},
+    renderColonyReconstructionV188() {}, renderStationFrontV188() {}, renderQueensPanelV188() {}, renderCrewQuestsPanelV188() {}, renderAct5PanelV188() {},
     preserveCampaignStoryReturnV160, preserveConvoyReturnHistoryV162, preserveLetheContinuityV163,
     mountCampaignDebriefV160, mountCampaignDebriefV161, mountConvoyReturnHistoryV162, mountLetheContinuityV163,
     recordCampaignStoryReviewV160, recordLetheContinuityReviewV163, campaignObjectiveLabelV188, researchBonusRowV188: () => '', colonyPreparationCrewV188,
