@@ -796,3 +796,22 @@ Décisions déjà prises et appliquées : Q13 B (après l'Acte V), Q15 B (dépla
 | R8 | TR-0 | Absent du catalogue des 64 mondes ; l'arc 3 attend sa création | Réutiliser un monde existant |
 
 Aucune de ces valeurs ne certifie une fidélité « 1:1 ».
+
+## Arsenal — complétion du lot A (2026-11-22, spec 014) — valeurs par défaut appliquées
+
+Demande : « fidélité 1:1 comme le reste, compléter toutes les armes avec chargeurs, VFX, etc. ». La règle du projet est appliquée : rien n'est déclaré « 1:1 » ; documenté / adapté / à définir sont séparés dans `docs/development/ARSENAL_COMPLETION_V188.md`.
+
+| # | Question | Valeur appliquée | Autre possibilité |
+| --- | --- | --- | --- |
+| A1 | Armes de franchise sans plaque native | Ajoutées au catalogue (194–196), jouables par chargement, **non achetables** (règle « plaque dédiée requise ») avec silhouette Canvas | Les garder en dossiers de recherche jusqu'aux plaques |
+| A2 | Capacité des lanceurs M6B / M83 / M5 (72 dans le tube au catalogue historique) | Une roquette par tube, le reste en réserve (total conservé) | Garder le chiffre historique |
+| A3 | Capacité du .357 (44 au catalogue historique) | 6 chambres (CSV « Capacité canon ») ; finitions identiques | Garder 44 |
+| A4 | Finitions d'un fusil à pompe (p. ex. 90 cartouches) | Capacité de la base (4) | Garder les chiffres générés |
+| A5 | Pompe | Automatique, 0,4 s après chaque tir [PROPOSÉ] | Pompe sur une touche dédiée |
+| A6 | Chargeurs physiques hors M41A (VP70, M4A3, F44AA…) | Aucun sans preuve propre au modèle consignée | Fournir des sources par modèle |
+| A7 | Sons | Indices existants partagés | Commander/synthétiser des sons propres par arme |
+| A8 | Nostromo (lance-flammes, aiguillon), combinaison de Ripley | Non ajoutés : à inscrire d'abord à l'index avec source ; la combinaison demande deux alimentations | Les prioriser au prochain lot |
+| A9 | Cadence « 900 coups/min » du M41A (Technical Manual, 1995) | Non appliquée (cadence de jeu 7,7/s inchangée) | Décision du propriétaire |
+
+Option de développement : `arsenalFeedsV188: false` dans les options de `engine.start` rétablit le transfert numérique historique.
+
