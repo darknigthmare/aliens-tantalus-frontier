@@ -7420,7 +7420,35 @@ export const EN_CATALOG_V185 = Object.freeze({
 "SAS · ÉCL · VENT": "LOCK · LIGHT · VENT",
 "Noor Okafor · À L’INFIRMERIE": "Noor Okafor · AT THE INFIRMARY",
 "MOTIF": "REASON",
-"Indisponible pour C3 : elle tient l’infirmerie de Port-Méridien pour le contrôle biologique des rescapés du M577.": "Unavailable for C3: she holds the Port-Méridien infirmary for the biological screening of the M577 survivors."
+"Indisponible pour C3 : elle tient l’infirmerie de Port-Méridien pour le contrôle biologique des rescapés du M577.": "Unavailable for C3: she holds the Port-Méridien infirmary for the biological screening of the M577 survivors.",
+// V188 first side campaign « La Saison des Reines », spec 011 (reviewed through i18n-catalog-maintenance-v186 merge).
+"NACRE-7 · LE QUAI NOYÉ": "NACRE-7 · THE DROWNED QUAY",
+"Sous-Récif ne répond plus. Atterrir sous la pluie, fouiller les plates-formes désertes et retrouver le Dr Ilse Navarre dans la salle des pompes.": "Sous-Récif is not answering. Land in the rain, search the deserted platforms and find Dr Ilse Navarre in the pump room.",
+"Les plates-formes sur pilotis de Sous-Récif sont désertes, les repas encore servis. Le détecteur reste muet : tout se passe sous l’eau. Retrouver les survivants et le Dr Navarre, retranchée dans la salle des pompes.": "The stilted platforms of Sous-Récif are deserted, meals still served. The motion tracker stays silent: everything happens below the water. Find the survivors and Dr Navarre, holed up in the pump room.",
+"NACRE-7 · LES BASSINS": "NACRE-7 · THE PENS",
+"Rétablir les pompes pour vider deux bassins d’élevage. Au fond : des œufs fixés comme des coraux, et des cocons dans les filets.": "Restart the pumps to drain two breeding pens. At the bottom: eggs fixed like coral, and cocoons in the nets.",
+"Relancer la station de pompage de Sous-Récif, secteur par secteur, et vider deux bassins d’élevage. Le Dr Navarre guide depuis la salle des pompes. Ce que l’eau cachait remonte avec elle.": "Restart the Sous-Récif pumping station, sector by sector, and drain two breeding pens. Dr Navarre guides you from the pump room. What the water was hiding comes up with it.",
+"NACRE-7 · CE QUE RASK VOULAIT": "NACRE-7 · WHAT RASK WANTED",
+"L’escouade de récupération du capitaine Rask a prélevé un œuf royal pendant le combat. La rattraper sur les plates-formes avant son départ.": "Captain Rask’s salvage squad took a royal egg during the fight. Catch them on the platforms before they leave.",
+"L’escouade Weyland-Yutani du capitaine Tobiah Rask tient la plate-forme d’envol avec un caisson : un œuf royal prélevé dans le fossé. Tenir la zone jusqu’à leur navette, puis décider du caisson.": "Captain Tobiah Rask’s Weyland-Yutani squad holds the landing platform with a case: a royal egg taken in the trench. Hold the zone until their shuttle, then decide about the case.",
+"NACRE-7 · LES CARNETS DE NAVARRE": "NACRE-7 · NAVARRE’S NOTEBOOKS",
+"Récupérer les relevés du Dr Navarre dans le laboratoire inondé : elle a documenté l’adaptation récifale jour après jour.": "Recover Dr Navarre’s readings from the flooded laboratory: she documented the reef adaptation day after day.",
+"Le laboratoire de Navarre est sous l’eau jusqu’à mi-hauteur. Ses relevés sont restés dans les terminaux : l’adaptation récifale, jour après jour. Les ramener avant que l’eau ne monte encore.": "Navarre’s laboratory is half under water. Her readings are still in the terminals: the reef adaptation, day after day. Bring them back before the water rises further.",
+"NACRE-7 · LES FILETS": "NACRE-7 · THE NETS",
+"Remonter les filets d’élevage pour retrouver les disparus ; certains sont encore vivants dans des cocons.": "Haul up the breeding nets to find the missing; some are still alive in cocoons.",
+"Un pêcheur de Sous-Récif a vu ses camarades disparaître dans les filets d’élevage. Les remonter un par un et ramener ceux qui vivent encore.": "A Sous-Récif fisherman saw his mates vanish in the breeding nets. Haul them up one by one and bring back those still alive.",
+"NACRE-7 · LE PHARE DE SOUS-RÉCIF": "NACRE-7 · THE SOUS-RÉCIF LIGHTHOUSE",
+"Rallumer la balise du phare pour guider les canots de survivants vers le quai.": "Relight the lighthouse beacon to guide the survivors’ boats to the quay.",
+"Le phare de Sous-Récif est éteint. Rétablir son alimentation et relancer la balise : les canots de survivants dérivent dans le noir.": "The Sous-Récif lighthouse is dark. Restore its power and restart the beacon: the survivors’ boats are drifting in the dark.",
+"NACRE-7 · PURGE D’UN BASSIN": "NACRE-7 · PURGE A PEN",
+"Purger un bassin d’élevage où la lignée récifale a niché.": "Purge a breeding pen where the reef lineage has nested.",
+"Un bassin d’élevage abrite un nid de la lignée récifale, contre la machinerie de pompage. Le purger.": "A breeding pen holds a nest of the reef lineage, against the pumping machinery. Purge it.",
+"NACRE-7 · ESCORTE DES CANOTS": "NACRE-7 · BOAT ESCORT",
+"Escorter les canots de survivants jusqu’au quai.": "Escort the survivors’ boats to the quay.",
+"Des canots de survivants accostent sous la pluie. Les escorter des pontons jusqu’au quai.": "Survivors’ boats are coming alongside in the rain. Escort them from the pontoons to the quay.",
+"NACRE-7 · BOÎTES NOIRES DES CHALUTIERS": "NACRE-7 · TRAWLER BLACK BOXES",
+"Récupérer les boîtes noires des chalutiers échoués.": "Recover the black boxes of the stranded trawlers.",
+"Les chalutiers de Sous-Récif se sont échoués contre les pilotis. Récupérer leurs boîtes noires.": "The Sous-Récif trawlers ran aground against the stilts. Recover their black boxes."
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 // V188 systems bug hunt (merged via i18n-catalog-maintenance-v186 review).

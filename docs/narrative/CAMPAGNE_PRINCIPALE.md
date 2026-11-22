@@ -1595,7 +1595,7 @@ Les missions locales restent disponibles sur chaque lieu tant qu'il n'est pas pe
 
 Les lieux Nacre-7, Echo Basin, Sable Meridian, Pallas Rift, MIRE-9, Palimpste et Khepri Forge existent déjà dans le catalogue comme mondes originaux du projet (provenance `project-canon`, secteur Tantalus Reach, `content-core-v50.js`). Kéos, Murmure, Tyndare, Pangaea (comme monde), Hiéron, *Clémence* et *Bonne-Espérance* sont **[PROPOSÉ]**.
 
-**Chapitres existants :** tous les chapitres V131 cités sont **[PARTIEL]** et `playable: true` dans `special-operations-v131.js`, mais leur `worldId` actuel est `world-05-lethe`. Les déplacer vers le monde de leur campagne est un changement de données **[PROPOSÉ]**. Cette Partie II remplace le classement « archives MIRE » proposé au §9.2.
+**Chapitres existants :** tous les chapitres V131 cités sont **[PARTIEL]** et `playable: true` dans `special-operations-v131.js`. Leur `worldId` n'est pas toujours `world-05-lethe` : relevé du 22 novembre 2026, Abysse Noir était sur `world-10-ceto`, Broodstorm sur `world-01-acheron-lv-426`, Reine-Mère, Ruche-monde, Pangaea, les chapitres de ruche et de mécas sur `world-05-lethe`, MIRE sur `world-15-uscss-nostromo`. Les déplacer vers le monde de leur campagne est un changement de données additif, campagne par campagne (Q15 B). **[FAIT] V188 spec 011 :** Opération Abysse Noir (`special-black-abyss-v131`) est sur `world-31-nacre-7` ; `legacyWorldIdsV188: ['world-10-ceto']` garde valides les déploiements déjà en cours, l'identifiant et les succès enregistrés sont conservés. Les autres chapitres restent sur leur monde actuel jusqu'à leur arc. Cette Partie II remplace le classement « archives MIRE » proposé au §9.2.
 
 ### 13.5 Déblocage et ordre
 
@@ -1606,6 +1606,8 @@ Les lieux Nacre-7, Echo Basin, Sable Meridian, Pallas Rift, MIRE-9, Palimpste et
 | 2 · Directive zéro | Après 1 campagne annexe | Élevé |
 | 3 · Les Bâtisseurs | Après 2 campagnes annexes, dont la 4 | Élevé |
 | 5 · Le banc d'essai | Après 3 campagnes annexes | Maximal ; conclut le fil QZ17 |
+
+**[PARTIEL] V188 spec 011 (2026-11-22) :** la campagne 1 s'ouvre à la fin de la campagne principale, c'est-à-dire quand le générique de l'Acte V a été joué (`storyCampaignV188.act5.phase === 'complete'`) ; l'appel arrive alors à la salle de briefing (§14.11). Les campagnes 2 à 5 ne sont pas raccordées.
 
 ### 13.6 Temps de voyage — [PARTIEL] V188 (2026-11-15)
 
@@ -1622,12 +1624,14 @@ Code : `src/travel-messages-v188.js`, sauvegarde additive `travelMessagesV188` (
 | Weyland-Yutani · consigne (« préserver le matériel sous scellés ») | pendant le saut | 4 j (comme au §4, CIN-02) |
 | Monde laissé derrière (bulletin, puis valeur d'aujourd'hui) | à l'arrivée | envoyé 3 j après le départ |
 | Appel de la destination (valeur du message, puis valeur à l'arrivée) | à l'arrivée | 9 j |
+| Appel d'une campagne annexe (type `campaign`, spec 011) : Sous-Récif, Nacre-7 | à la salle de briefing, une fois, après l'Acte V | 9 j par le réseau QZ ; 2 j si Asphodèle est reprise et sa salle des relais en service |
+| Arrivée de la campagne annexe : Dr Ilse Navarre | au premier saut vers Nacre-7 après l'acceptation, dans la transaction du saut | 0 j |
 
 Les valeurs citées sont celles des mondes avant les 14 jours de simulation ; la table montre à côté la valeur du jour, souvent pire (« la situation à l'arrivée est pire que le message », §13.2). Fidélité : règle d'univers du projet (§1.3, §13.2) ; repère documenté, le silence de Hadley's Hope connu après coup et la traversée en hypersommeil du Sulaco (*Aliens*, 1986). Textes [PROPOSÉ]. Reste : vieillissement de l'équipage pendant le voyage, appels qui ouvrent les campagnes annexes (§13.3).
 
 ---
 
-## 14. Campagne annexe 1 — « La Saison des Reines »
+## 14. Campagne annexe 1 — « La Saison des Reines » — [PARTIEL] V188 (spec 011 : cadre et arc 1)
 
 ### 14.1 Fiche
 
@@ -1751,6 +1755,27 @@ Lieu : monde absent des cartes civiles. La Red Hive a colonisé toute sa biosph�
 ### 14.10 Récompenses
 
 Arme ou munitions anti-Reine (si Inez garde le spécimen), amélioration du Cheyenne, scaphandre HADAL pour les autres campagnes, entrées de bestiaire « lignées », recrue possible : **Dr Ilse Navarre** (scientifique).
+
+### 14.11 État de production — [PARTIEL] V188 (spec 011, 2026-11-22)
+
+Spec `specs/011-saison-des-reines`. Code : `src/side-campaign-queens-v188.js` (règles, données FR/EN), `src/queens-cinematics-v188.js` (CQ-01 à CQ-06), raccordement dans `src/app.js`, `src/save.js`, `src/content.js`, `src/travel-messages-v188.js`, `src/legacy-operation-state-v131.js`, `src/operation-receipts-v131.js`. Décisions appliquées : Q13 B, Q15 B, Q16 B, Q21 A.
+
+| Élément | Statut | Détail |
+| --- | --- | --- |
+| Appel (§13.3 étape 1) | Fait | Après le générique de l'Acte V, une fois : message daté au journal des alertes (§13.7), CQ-01, briefing avec le coût du saut, **ACCEPTER** ou **PLUS TARD** (l'appel reste lisible depuis le panneau) |
+| Voyage (§13.2, §13.6) | Fait | Accepter ouvre la route de Nacre-7 ; saut par la carte galactique existante (carburant `2 + ⌈danger/3⌉`, soit 4 pour Nacre-7 ; 14 jours) ; première arrivée enregistrée avec le message de Navarre |
+| Arc 1, histoire (§14.4) | Partiel | 1.1 `queens-1-1-quai`, 1.2 `queens-1-2-bassins`, 1.3-1.4 chapitre Opération Abysse Noir (une partie couvre les deux lignes), 1.5 `queens-1-5-rask` ; ordre strict ; planifiées depuis l'orbite de Nacre-7. 1.1, 1.2 et 1.5 jouent sur les gabarits génériques (`colony-multiroute`, `ship-interior-vertical`, `planet-exterior`) avec leur objectif de base : pas de niveau dédié |
+| Arc 1, annexes et locales | Partiel | `queens-a-navarre`, `queens-a-filets`, `queens-a-phare` (une fois) ; contrats `queens-l-bassin`, `queens-l-canots`, `queens-l-boites` (rejouables) ; ouverts après 1.1 ; gabarits génériques |
+| Ennemis (§14.3) | Partiel | Lignée récifale **[PROPOSÉ]** : Drone, Lurker, Runner, Reef Stalker, Reef Spitter (comportements déjà résolus par le registre : drone, embuscade, coureur, acide) ; escouade W-Y en 1.5. Le Ceto Reef Predator (nage) n'est pas admis sur les gabarits terrestres ; la Reine récifale reste le boss du chapitre |
+| Choix 1.5 (§14.8) | Partiel | Laisser / saisir / détruire, une fois, sauvegardé ; conséquences enregistrées (pièce du fil QZ17 et risque à bord si saisi ; spécimen de la compagnie si laissé). La crise à bord et l'effet sur la campagne 5 ne sont pas produits |
+| Retour (§13.3 étape 6) | Partiel | Scènes de retour de chaque mission d'histoire et annexe, CQ-02 avec le chapitre, compte rendu de l'arc 1 nuancé par le choix. Le compte rendu de campagne attend l'arc 3 |
+| Cinématiques (§14.7) | Partiel | CQ-01 à CQ-06 dans le lecteur Canvas, en primitives provisoires (emplacements `queens-cin-*`) ; CQ-01 et CQ-02 déclenchées, CQ-03 à CQ-06 rejouables seulement |
+| Arcs 2 et 3 (§14.5, §14.6) | Manquant | Listés au panneau « à produire ». TR-0 n'existe pas dans le catalogue des mondes |
+| Quêtes liées (§14.9), récompenses (§14.10) | Manquant | — |
+
+Valeurs **[PROPOSÉ]** : retards de l'appel (9 j réseau QZ, 2 j relais d'Asphodèle) ; annexes et locales ouvertes après 1.1 ; une mission d'histoire ou annexe jouée une fois par campagne, le chapitre restant rejouable sans faire avancer l'arc ; roster de la lignée ; tous les textes des scènes, de l'appel, du choix et du compte rendu. Sauvegarde additive `sideCampaignsV188.queens` (phase, jours d'appel, d'acceptation et d'arrivée, missions faites pendant la campagne, contrats, choix, scènes vues). Un succès d'Abysse Noir antérieur à la campagne reste enregistré mais ne compte pas pour l'arc.
+
+Fidélité : rien n'est déclaré « 1:1 ». Documenté : adaptation de l'organisme à son hôte et à son milieu, dépendance de la ruche envers sa Reine (*Alien*, 1979 ; *Aliens*, 1986 ; *Alien 3*, 1992) ; hypersommeil et nouvelles arrivées après coup (*Aliens*, 1986). Adapté par le projet : Sous-Récif, Navarre, Rask, les lignées, la Red Hive, TR-0. À définir : l'art de l'arc et des cinématiques (aucune image produite), les voix.
 
 ---
 
@@ -3002,6 +3027,8 @@ Elles se jouent surtout au hub, avec des PNJ **[PRÉSENT]**. Besoins **[À CRÉE
 | 1.5 Ce que Rask voulait | Œuf royal en caisson **[À CRÉER]** | Rask, escouade W-Y | — | — | Choix laisser/saisir/détruire **[À CRÉER]** |
 | Annexes (3) | Laboratoire inondé, filets, phare **[À CRÉER]** | Pêcheur survivant **[À CRÉER]** | Canots qui approchent **[À CRÉER]** | Faisceau du phare **[À CRÉER]** | Hissage de filet **[À CRÉER]** |
 | Cinématiques CQ-01, CQ-02 | Trois coquilles d'œuf, fossé éclairé **[À CRÉER]** | Inez **[PRÉSENT]** | — | — | — |
+
+**V188 spec 011 :** missions, choix laisser/saisir/détruire et scènes de retour **[CODE]** (§14.11) ; décors, props, Navarre, Rask, Reine récifale nageant et VFX ci-dessus restent **[À CRÉER]** : les scènes et CQ-01/CQ-02 les remplacent par des primitives Canvas nommées (`queens-quay`, `queens-pools`, `queens-trench`, `queens-rask`, `queens-cin-three-shells`, `queens-cin-trench-queen`…). Les missions 1.1, 1.2 et 1.5 tournent sur des gabarits génériques.
 
 ### 30.2 Arc 2 · Echo Basin
 

@@ -21,6 +21,7 @@ import { STATION_CAMPAIGNS_V188 } from '../src/station-asphodele-v188.js';
 import { ASPHODELE_CAMPAIGNS_V188 } from '../src/asphodele-missions-v188.js';
 import { ACT5_CAMPAIGNS_V188 } from '../src/story-act5-v188.js';
 import { COLONY_CAMPAIGNS_V188 } from '../src/colony-missions-v188.js';
+import { QUEENS_CAMPAIGNS_V188 } from '../src/side-campaign-queens-v188.js';
 
 const worker = await readFile(new URL('../sw.js', import.meta.url), 'utf8');
 const ASPHODELE_CARDS_V188 = ['asphodele-exterior', 'cassius-core', 'echo8-recording', 'order-documents', 'seal-fragment', 'david-memory']
@@ -111,8 +112,10 @@ test('MIRE keeps every stable ID and leaves original Frontier operations untouch
   assert.equal(tantalus.length, 41);
   assert.deepEqual(CAMPAIGNS.slice(455, 496), tantalus);
   // V190 Xeno Arbiter special operations follow the Tantalus lot in the merged campaign order.
-  assert.deepEqual(CAMPAIGNS.slice(496).map(c => c.id), ['special-arbiter-01-freight', 'special-arbiter-02-gallery',
+  assert.deepEqual(CAMPAIGNS.slice(496, 502).map(c => c.id), ['special-arbiter-01-freight', 'special-arbiter-02-gallery',
     'special-arbiter-03-custody', 'special-arbiter-04-arbitration', 'special-arbiter-05-isolation', 'special-arbiter-06-local']);
+  // V188 spec 011: the nine Arc 1 missions of « La Saison des Reines » come last.
+  assert.deepEqual(CAMPAIGNS.slice(502), QUEENS_CAMPAIGNS_V188);
   assert.equal(CAMPAIGNS.length, 511);
   assert.equal(new Set(CAMPAIGNS.map(c => c.id)).size, 511);
 });

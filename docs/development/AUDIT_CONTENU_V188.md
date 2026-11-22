@@ -40,7 +40,7 @@ Ces comptes conservent l'instantané du commit `250d81a` ; une ligne peut regrou
 3. **Acte V et fins (§5.6-§5.8)** : conseil de guerre, course APC, trois fins et épilogue absents ; la logique du choix final existe (`story-dossier-v188.js`) sans écran. Q1-Q5. *Mis à jour par la spec 006 : voir « Résultat du lot (spec 006) ».*
 4. **Missions de la colonie C1-C5 et annexes (§6.2)** : aucune. La reconstruction est validée par n'importe quelle opération réussie sur Cocyte (adaptation provisoire). Q25.
 5. **Voyage galactique (§13.2)** : le saut coûte du carburant, mais aucun temps ne passe. Q21 : coût fixe par saut, en carburant et en jours, affiché avant le départ.
-6. **Campagnes annexes (§14-§18)** : les chapitres V131 sont jouables isolément, mais aucune campagne, aucun arc, aucun appel ; leur `worldId` reste `world-05-lethe`. Q13 et Q15 : après l'Acte V, campagne par campagne.
+6. **Campagnes annexes (§14-§18)** : les chapitres V131 sont jouables isolément, mais aucune campagne, aucun arc, aucun appel ; leur `worldId` reste `world-05-lethe`. Q13 et Q15 : après l'Acte V, campagne par campagne. *Mise à jour du 22 novembre 2026 (spec 011) : campagne 1 partielle — appel, voyage, arc 1 (Nacre-7) et compte rendu de l'arc jouables ; Abysse Noir déplacé sur Nacre-7 ; arcs 2-3 et campagnes 2-5 manquants. Les `worldId` relevés n'étaient pas tous `world-05-lethe` (bible §13.4).*
 7. **Archives MIRE généralisées et protocoles (§26)** : seule l'archive 001 existe ; aucun protocole. Q18 et Q19 : archives originales d'abord.
 
 ## 1. Prologue et tranche verticale (§4, §53.1, §56.2)
@@ -117,11 +117,11 @@ Les statuts « À faire » du §53 (tir, tension, caste, accessibilité, répliq
 | --- | --- | --- |
 | Carte galactique et saut (`navigate:galaxy`) | Partiel | `galaxy-jump-v115.js` : carburant `2 + ⌈danger/3⌉`, séquence de 8 s ; **aucun temps de voyage** (Q21) |
 | Messages en retard, colonies qui évoluent pendant le voyage (§13.2) | Partiel (lot colonie et équipage) | `travel-messages-v188.js` : 3 à 5 messages par saut, une fois, au journal des alertes, FR/EN ; les mondes évoluent déjà (simulation) ; vieillissement de l'équipage absent |
-| Chapitres V131 raccordés à leur campagne (§13.4) | Partiel | Jouables isolément, `worldId` `world-05-lethe` ; déplacement campagne par campagne (Q15) |
-| Campagne 1 *La Saison des Reines* (§14) | Partiel | Chapitres Abysse Noir, Broodstorm, Reine-Mère jouables ; **art** en dette ; TR-0 `missing` ; arcs, appels et quêtes absents |
+| Chapitres V131 raccordés à leur campagne (§13.4) | Partiel | Abysse Noir raccordé à l'arc 1 sur `world-31-nacre-7` (spec 011, ancien monde accepté pour un déploiement en cours) ; les autres restent isolés sur leur monde actuel (Ceto n'était pas Cocyte : relevé en bible §13.4) ; déplacement campagne par campagne (Q15) |
+| Campagne 1 *La Saison des Reines* (§14) | Partiel | Spec 011 : appel après l'Acte V, acceptation, saut vers Nacre-7, arc 1 (3 missions, le chapitre, 3 annexes, 3 contrats sur gabarits génériques), choix de Rask, scènes et compte rendu, CQ-01/CQ-02 en primitives. Manquent : arcs 2 et 3, TR-0, quêtes, récompenses, niveaux dédiés et **art** |
 | Campagnes 2 à 5 (§15-§18) | Manquant | Chapitres V131 réutilisables ; aucun arc, appel, cinématique ni quête liée. Q13 : après l'Acte V |
 | Mondes proposés (Kéos, Murmure, Tyndare, Pangaea, Hiéron, *Clémence*, *Bonne-Espérance*) | Manquant | Absents du catalogue |
-| Déblocage et ordre des campagnes (§13.5) | Manquant | — |
+| Déblocage et ordre des campagnes (§13.5) | Partiel | Campagne 1 après le générique de l'Acte V (spec 011) ; campagnes 2 à 5 non raccordées |
 
 ## 8. Archives MIRE (§26)
 
@@ -642,3 +642,21 @@ Le M577 à l'échelle partout, le M577 de C3, Noor sur l'écran de préparation,
 | Embarquement d'extraction sauté par la touche E | Corrigé | La touche qui confirme l'extraction ne compte plus comme « passer » (0,25 s de séquence minimum) |
 
 Vérifications exécutées : voir le rapport de la PR (suite `verify-m577-everywhere-v188.mjs` dans `test:priorities:v188`, parcours Chromium `qa-apc-levels-v188.mjs`, `qa-colony-levels-v188.mjs` et `qa-act5-convoy-race-v188.mjs` étendus, fixtures et injections déclarées en tête des scripts). Les captures attestent ces parcours, pas une fidélité « 1:1 » ; aucune image n'a été générée.
+
+## Campagne annexe 1 « La Saison des Reines » — cadre et arc 1 (2026-11-22)
+
+Spec `specs/011-saison-des-reines` ; bible §13.4, §13.5, §13.7, §14.11, §30.1. Code : `src/side-campaign-queens-v188.js`, `src/queens-cinematics-v188.js`, raccordement dans `src/app.js`, `src/save.js`, `src/content.js`, `src/travel-messages-v188.js`, `src/legacy-operation-state-v131.js`, `src/operation-receipts-v131.js`, `index.html`.
+
+| Élément | Avant | Après | Reste |
+| --- | --- | --- | --- |
+| Appel et acceptation | Aucun | Après le générique de l'Acte V : message daté au journal, CQ-01, briefing avec le coût du saut, acceptation qui ouvre la route | Appels des campagnes 2-5 |
+| Voyage | Saut sans lien avec une campagne | Saut existant vers Nacre-7 (carburant, 14 jours), arrivée enregistrée une fois avec le message de Navarre ; missions planifiées depuis l'orbite | Vieillissement de l'équipage |
+| Arc 1 | Abysse Noir isolé sur Ceto | 1.1, 1.2, chapitre (1.3-1.4), 1.5 dans l'ordre ; 3 annexes, 3 contrats ; lignée récifale | Niveaux dédiés (gabarits génériques), art |
+| Choix et retour | — | Œuf de Rask (une fois), scènes de retour, CQ-02, compte rendu de l'arc 1 | Effets sur les campagnes 4-5, crise à bord |
+| Arcs 2 et 3, quêtes §14.9, récompenses §14.10 | Manquant | Manquant (listés au panneau « à produire ») | Tout |
+
+Inchangés : identifiants de contenu (le chapitre garde `special-black-abyss-v131`), succès déjà enregistrés, toutes les autres sauvegardes ; un seul champ de sauvegarde additif (`sideCampaignsV188`). Le moteur et l'ordre des mixins ne changent pas : le roster est filtré avant `engine.start`. Toutes les valeurs de délai, d'ordre et de roster sont [PROPOSÉ].
+
+Fidélité : rien n'est déclaré « 1:1 » ; aucune image générée ; CQ-01 à CQ-06 et les scènes sont des primitives Canvas nommées.
+
+Vérifications réellement exécutées : voir le rapport de la PR, `scripts/verify-side-campaign-queens-v188.mjs` (dans `test:priorities:v188`) et le parcours Chromium `scripts/qa-side-campaign-queens-v188.mjs` (fixtures et injections déclarées en tête : fin de l'Acte V posée dans la sauvegarde importée, objectif générique marqué atteint avant `completeMission()`, chapitre Abysse Noir posé comme fait dans le second profil faute de reçu V131 sans partie jouée). Un parcours injecté ne vaut pas une partie jouée sans aide ; combats et équilibrage restent à éprouver.

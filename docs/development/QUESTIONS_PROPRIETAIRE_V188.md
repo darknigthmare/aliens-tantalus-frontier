@@ -779,3 +779,20 @@ Aucune de ces décisions ne certifie une fidélité « 1:1 » ; tous les visuels
 | Q-010-2 | **A** : l'issue de l'interrogatoire de CASSIUS ne change que le texte de la décision S2 | Réponse enregistrée ; l'entrée `station-s2-cassius` reste à raccorder dans ce sens (aucune option ni fin nouvelle) |
 | Q-010-3 | **A** : l'interrogatoire de BISHOP-9 viendra plus tard, avec la quête `station-a-bishop` (« Accès administrateur ») | Reporté, rien n'est ajouté maintenant |
 | Q-010-4 | **A** : Halloran est une femme, « Directrice » comme en §2.3 | Les deux répliques anciennes du conseil de guerre sont corrigées en FR et EN (`src/story-act5-v188.js`) : « devant la directrice Halloran » / "before Director Halloran", « elle bluffe sur les délais » / "she bluffs about deadlines". Recherche faite dans `src/`, `docs/` et `specs/` : aucune autre forme masculine pour Halloran |
+
+## Campagne annexe 1 « La Saison des Reines » (2026-11-22, spec 011) — valeurs par défaut appliquées
+
+Décisions déjà prises et appliquées : Q13 B (après l'Acte V), Q15 B (déplacement des `worldId` campagne par campagne), Q16 B (un arc jouable d'abord), Q21 A (coût fixe par saut). Valeurs par défaut de ce lot, à confirmer :
+
+| # | Question | Valeur appliquée | Autre possibilité |
+| --- | --- | --- | --- |
+| R1 | Moment exact de « fin de la campagne principale » (§13.5) | Après le générique de l'Acte V (`act5.phase === 'complete'`) | Dès la fin choisie (phase `ending`) |
+| R2 | Abysse Noir après son déplacement sur Nacre-7 | Lancé seulement dans la campagne (appel accepté, orbite de Nacre-7, après 1.2) ; un ancien succès reste enregistré sans compter pour l'arc ; rejouable dans l'arc | Garder aussi une rejouabilité libre depuis le registre des opérations |
+| R3 | 1.3 et 1.4 (§14.4) | Une seule partie du chapitre couvre les deux lignes (HADAL puis MANTA-6 et le boss) | Découper le chapitre en deux missions |
+| R4 | Orbite requise | Les missions de la campagne se planifient depuis l'orbite de Nacre-7 | Planification à distance, comme les autres missions |
+| R5 | Retard de l'appel | 9 j par le réseau QZ, 2 j par la salle des relais d'Asphodèle | Autres délais |
+| R6 | Missions rejouées | Histoire et annexes une fois par campagne ; contrats rejouables | Tout rejouable |
+| R7 | Œuf saisi | Enregistré (pièce du fil QZ17, risque à bord) sans crise immédiate | Déclencher une crise biologique à bord au retour |
+| R8 | TR-0 | Absent du catalogue des 64 mondes ; l'arc 3 attend sa création | Réutiliser un monde existant |
+
+Aucune de ces valeurs ne certifie une fidélité « 1:1 ».

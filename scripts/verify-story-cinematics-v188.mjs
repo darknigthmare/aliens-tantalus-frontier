@@ -22,7 +22,7 @@ function recorder() {
 }
 
 test('durations follow bible §10 and every shot is bilingual', () => {
-  assert.deepEqual(CINEMATIC_IDS_V188, ['cin-00', 'cin-01', 'cin-p2', 'cin-02', 'cin-03', 'cin-p3-wren', 'cin-p3-ferro', 'cin-20', 'cin-10', 'cin-11', 'cin-qz17-retour', 'cin-doyenne', 'cin-31', 'cin-50', 'cin-51', 'cin-40', 'cin-41', 'cin-60', 'cin-61', 'cin-90-relay', 'cin-90-freight', 'cin-90-living', 'cin-92', 'cin-99-credits', 'cin-20-rook', 'cin-70', 'cin-71', 'cin-72']); // V188 spec 006: + Act V and endings; spec 007: + the station cinematics
+  assert.deepEqual(CINEMATIC_IDS_V188, ['cin-00', 'cin-01', 'cin-p2', 'cin-02', 'cin-03', 'cin-p3-wren', 'cin-p3-ferro', 'cin-20', 'cin-10', 'cin-11', 'cin-qz17-retour', 'cin-doyenne', 'cin-31', 'cin-50', 'cin-51', 'cin-40', 'cin-41', 'cin-60', 'cin-61', 'cin-90-relay', 'cin-90-freight', 'cin-90-living', 'cin-92', 'cin-99-credits', 'cin-20-rook', 'cin-70', 'cin-71', 'cin-72', 'cin-cq-01', 'cin-cq-02', 'cin-cq-03', 'cin-cq-04', 'cin-cq-05', 'cin-cq-06']); // V188 spec 006: + Act V and endings; spec 007: + the station cinematics; spec 011: + CQ-01 to CQ-06
   assert.equal(cinematicDurationV188('cin-40'), 30); assert.equal(cinematicDurationV188('cin-41'), 45);
   assert.equal(cinematicDurationV188('cin-31'), 30); assert.equal(cinematicDurationV188('cin-50'), 35); assert.equal(cinematicDurationV188('cin-51'), 25);
   const d = cinematicDurationV188; assert.ok(d('cin-00') >= 60 && d('cin-00') <= 75); assert.equal(d('cin-01'), 20);

@@ -568,6 +568,13 @@ const FORGE_TOOLING_V140 = new Set([
   'specs/009-niveaux-station/spec.md',
   'specs/009-niveaux-station/plan.md',
   'specs/009-niveaux-station/tasks.md',
+  // V188 first side campaign « La Saison des Reines » (spec 011): suite, browser QA and spec, source-only exact paths.
+  'scripts/verify-side-campaign-queens-v188.mjs',
+  'scripts/qa-side-campaign-queens-v188.mjs',
+  'specs/011-saison-des-reines',
+  'specs/011-saison-des-reines/spec.md',
+  'specs/011-saison-des-reines/plan.md',
+  'specs/011-saison-des-reines/tasks.md',
   'scripts/qa-colony-crew-v188.mjs',
   'docs/development/INSERTION_ART_SLOTS_V188.md',
   'docs/development/INSERTION_ART_PROVENANCE_20261116.json',
