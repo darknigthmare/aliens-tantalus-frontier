@@ -1207,11 +1207,11 @@ export const TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188 = freeze({ baseline: '0d1
   },
   "docs/development/AUDIT_CONTENU_V188.md": {
     "previousSha256": "68d3f8c15a10195a773b0ec826d32341d01f7b554bef1370777dfbee219e3923",
-    "currentSha256": "75269a0cf3d11495a63a4e24f8704cda6af55850d5c780d7579d25402262680d"
+    "currentSha256": "740004aa56a780d429ed2736aa1f89902984fa6f1645c44d4c499f965485816b"
   },
   "docs/development/QUESTIONS_PROPRIETAIRE_V188.md": {
     "previousSha256": "15018c92727c164872514278c03acb8ffab23ab0d1501b8ba663018caf497951",
-    "currentSha256": "def3622a9d7dbae1b2d26e44cf2a9c18c1038cb34142ec3fa7cae238c470c2d8"
+    "currentSha256": "dd1d64dd9a5408edec671025ed8ab60aa24574bbb5fe303d0056eb3055d80daf"
   },
   "docs/development/VFX_V188.md": {
     "previousSha256": "09b74ce7f2c596b5e038100cecc4bc5c1ea2ef368fcbbb14cdcbc48bf61efb00",
@@ -1227,7 +1227,7 @@ export const TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188 = freeze({ baseline: '0d1
   },
   "package.json": {
     "previousSha256": "b74e5e7d949a29976fb562f1a8215a01426a1b950301cc37b25939421e2becf1",
-    "currentSha256": "e13ca7cf33273b1f33760c68844dab37674b239cb4bf53ebf19eda8f18423e5d"
+    "currentSha256": "c6f168a09709d41147221f29049433eeb3f24e0c73e630e1b2823e1093b84709"
   },
   "scripts/audit-native-qa-resources-v187.mjs": {
     "previousSha256": "11c877212a478982dcfc0157e54a66ac478812ab35c4fda44cf31b5bfc23f28a",
