@@ -89,6 +89,7 @@ const SHELL = Object.freeze([
   '/src/weapon-catalog-additions-v188.js',
   '/src/weapon-arsenal-v188.js',
   '/src/weapon-arsenal-runtime-v188.js',
+  '/src/weapon-underbarrel-v174.js',
   '/src/npc-dialogue-portraits-v168.js',
   '/src/hub-room-backgrounds-v168.js',
   '/src/hub-room-batch-details-v168.js',
