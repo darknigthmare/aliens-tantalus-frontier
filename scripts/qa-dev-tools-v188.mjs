@@ -85,13 +85,15 @@ if (!only || only.includes('range-arsenal')) {
   const listed = await page.locator('[data-range-weapon] option').evaluateAll(nodes => nodes.map(node => node.value));
   check('range-arsenal: every Lot-A weapon and the V188 additions are listed', ids.length === 20 && ids.every(id => listed.includes(id)), { missing: ids.filter(id => !listed.includes(id)) });
   for (const id of ids) {
+    await page.evaluate(() => globalThis.__ATF_DEV_V188__.range.autoFire(0)); // the range clock restarts with the level
     if (/weapon-19[4-6]-/.test(id)) {
       await page.locator('[data-range-tab="weapons"]').click();
       await page.selectOption('[data-range-weapon]', id); await page.locator('[data-range-equip-weapon]').click();
     } else await page.evaluate(weaponId => globalThis.__ATF_DEV_V188__.range.setWeapon(weaponId), id);
     await page.waitForTimeout(400);
-    await page.evaluate(() => { const r = globalThis.__ATF_DEV_V188__.range; r.resetMeasures(); r.autoFire(1.4); });
-    await page.waitForTimeout(1900);
+    // A launcher must outlast one reload (single projectile per tube); the range clock restarts with the level.
+    await page.evaluate(() => { const r = globalThis.__ATF_DEV_V188__.range; r.resetMeasures(); r.autoFire(3.6); });
+    await page.waitForTimeout(4100);
     const m = await page.evaluate(() => globalThis.__ATF_DEV_V188__.range.measures());
     check(`range-arsenal ${id}: equipped, fired, arsenal profile read`, m.weapon.id === id && m.fireRate.shots > 0 && m.arsenal?.feed,
       { fired: m.fireRate.shots, arsenal: m.arsenal && { feed: m.arsenal.feed, bridge: m.arsenal.nativeBridge, capacity: m.arsenal.capacity, live: m.arsenal.live }, magazine: { ammo: m.magazine.ammo, size: m.magazine.size } });
