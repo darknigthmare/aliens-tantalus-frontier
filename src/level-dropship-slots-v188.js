@@ -15,11 +15,14 @@
 // - UD-4L Cheyenne, Aliens (1986): twin tail booms with fins, chin gun turret
 //   under the nose, rear loading ramp, skid landing gear, vectored engine
 //   downwash; carries the M577 in its belly bay and lowers it on a hoist.
-// - M577 APC, Aliens (1986): long angular six-wheeled hull with sloped glacis,
-//   a low roof turret with twin guns, rear/side troop doors.
+// - M577 APC, Aliens (1986): long low wedge hull with sloped glacis, rear roof
+//   turret with twin guns, side door between the road wheels (morphology and
+//   sources in m577-scale-v188.js; the 1:12 production miniature shows two road
+//   wheels per flank).
 // The proportions below are a project ADAPTATION of that appearance; the exact
 // silhouettes remain TO BE DEFINED by the reviewed images another tool produces.
 import { HUB_DROPSHIP_HANGAR_ART_V139 } from './hub-dropship-hangar-art-v139.js';
+import { M577_SCALE_V188, drawM577ScaledPlaceholderV188 } from './m577-scale-v188.js';
 
 export const LEVEL_DROPSHIP_SCALE_V188 = Object.freeze({
   pxPerMetre: 51, marine: Object.freeze({ w: 44, h: 92 }),
@@ -28,9 +31,11 @@ export const LEVEL_DROPSHIP_SCALE_V188 = Object.freeze({
   // marines' lane: it is drawn at true scale and allowed to run off-screen or
   // past the level edge rather than being scaled down (sprites are never scaled).
   ud4l: Object.freeze({ lengthM: 17, length: 870, height: 234 }),
-  // The project M577 keeps its existing 190×104 mission hitbox; the placeholder
-  // is drawn a little longer than the hitbox, like the existing sprite.
-  m577: Object.freeze({ w: 236, h: 104 })
+  // Owner decision 2026-11-22 (round 2): the M577 lowered from the belly is the
+  // M577 to scale of m577-scale-v188.js (8.8 m [À VÉRIFIER] ≈ 449 px, 112 px hull,
+  // 140 px drawn with the turret), like the drivable one. It hangs under the
+  // belly bay (local x ≈ 419) and fits under the 870 px hull: 195 → 644.
+  m577: Object.freeze({ w: M577_SCALE_V188.w, h: M577_SCALE_V188.h, drawnHeight: M577_SCALE_V188.drawnHeight })
 });
 
 const freeze = value => Object.freeze(value);
@@ -179,20 +184,10 @@ export function drawStatusBeaconV188(ctx, x, y, state, time, { reducedMotion = f
   ctx.restore();
 }
 
-/** M577 placeholder, side view, facing = +1 (nose right) or −1. Feet at y. */
-export function drawM577TransportV188(ctx, x, y, facing = 1, { wheelTurn = 0 } = {}) {
-  const { w, h } = LEVEL_DROPSHIP_SCALE_V188.m577;
-  ctx.save(); ctx.translate(x + w / 2, y); ctx.scale(facing, 1); ctx.translate(-w / 2, 0);
-  ctx.fillStyle = '#3d4434'; ctx.strokeStyle = '#191c16'; ctx.lineWidth = 2;
-  ctx.beginPath(); // angular hull: sloped glacis at the nose (right), flat rear door
-  ctx.moveTo(4, -22); ctx.lineTo(4, -78); ctx.lineTo(150, -84); ctx.lineTo(196, -74); ctx.lineTo(w - 2, -40); ctx.lineTo(w - 6, -22); ctx.closePath(); ctx.fill(); ctx.stroke();
-  ctx.fillStyle = '#323829'; ctx.fillRect(70, -100, 70, 18); ctx.strokeRect(70, -100, 70, 18);  // low roof turret
-  ctx.fillStyle = '#1e211b'; ctx.fillRect(140, -96, 46, 4); ctx.fillRect(140, -89, 46, 4);      // twin barrels
-  ctx.fillStyle = '#596049'; ctx.fillRect(10, -70, 22, 40);                                      // rear troop door
-  ctx.fillStyle = '#1f221c';
-  for (let i = 0; i < 6; i++) { const cx = 30 + i * 35; ctx.beginPath(); ctx.arc(cx, -14, 14, 0, Math.PI * 2); ctx.fill();
-    ctx.strokeStyle = '#454b3f'; ctx.beginPath(); ctx.moveTo(cx, -14); ctx.lineTo(cx + Math.cos(wheelTurn) * 10, -14 + Math.sin(wheelTurn) * 10); ctx.stroke(); }
-  ctx.restore();
+/** M577 placeholder, side view, facing = +1 (nose right) or −1. Feet at y. The M577 to scale
+ *  (m577-scale-v188.js, slot m577-mission-side-scale): one silhouette for every M577 of the game. */
+export function drawM577TransportV188(ctx, x, y, facing = 1, { wheelTurn = 0, command = false } = {}) {
+  drawM577ScaledPlaceholderV188(ctx, x, y, facing, { wheelTurn, command });
 }
 
 export function drawHoistV188(ctx, from, to) {

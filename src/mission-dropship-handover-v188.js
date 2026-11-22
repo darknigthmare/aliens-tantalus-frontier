@@ -30,6 +30,9 @@
 import { UD4L_FRAME_V188, UD4L_RAMP_FOOT_V188, LEVEL_DROPSHIP_SCALE_V188, ud4lToWorldV188, drawUd4lHullV188, drawUd4lRampV188,
   drawStatusBeaconV188, drawM577TransportV188, drawHoistV188, drawDockingCollarV188, drawDownwashParticlesV188,
   drawCoveringFireV188, drawHandoverLetterboxV188, levelDropshipSlotV188 } from './level-dropship-slots-v188.js';
+import { M577_SCALE_V188, applyM577MissionScaleV188, m577HitboxRuntimeV188, m577AnchorsV188, drawM577ScaledPlaceholderV188, isM577VehicleV188,
+  m577LanesV188, m577ParkingV188, m577ClampToLaneV188, m577SideDoorXV188 } from './m577-scale-v188.js';
+import { resolveCombatMuzzleV83 } from './combat-aim-v83.js';
 
 const MODES = ['foot', 'apc'], PLACES = ['atmosphere', 'airless', 'space'];
 const MECHA = ['special-titan-v131', 'special-z110-v131'];
@@ -63,6 +66,15 @@ const SKIP_KEYS = new Set(['KeyE', 'Escape', 'Enter']);
  * honoured without contradicting it. Boarded marines are out of reach.
  */
 export const DEFENDED_BOARDING_V188 = Object.freeze({ tracerDamage: 14, reach: 900, floorHealth: 1 });
+/**
+ * [PROPOSÉ] Owner decision 2026-11-22 (round 2): the M577 under the belly is the M577 to scale (449 × 112 px, 140 px with
+ * its turret). On its skids the UD-4L belly is 36 px above the ground: an 8.8 m hull cannot hang or drive under it there.
+ * In 'apc' mode the ship therefore holds a hover (`hover` px, skids clear of the hull) while the M577 is lowered
+ * (its turret recessed `recess` px into the bay) or hoisted, and the lowered M577 rolls at most `drive` px inside its
+ * floor lane (m577-scale-v188.js: no lift cabin, door or level edge crossed). The transport M577 (the squad rides it
+ * down; the mission's own M577 is parked in the level) backs under the belly and is hoisted again before lift-off.
+ */
+export const M577_DROP_V188 = Object.freeze({ status: 'PROPOSÉ', hover: 150, recess: 20, drive: 220 });
 const SILENT_DURING_BOARDING = new Set(['mission-complete', 'mission-failed', 'objective-failed', 'player-down', 'squad-down', 'squad-lost']);
 
 export function normalizeHandoverOptionV188(raw) {
@@ -144,7 +156,9 @@ export function withMissionDropshipHandoverV188(Base) {
       let policy = dropshipHandoverPolicyV188(options);
       this.handoverConfigV188 = policy;
       this.installHandoverRoutesV188();
+      this.m577LaneV188 = null; this.m577ParkingV188 = null;
       const result = super.start(options);
+      this.applyM577OrdinaryScaleV188(options);
       if (policy?.mode === 'apc' && !apcHandoverAdmissibleV188({ placeType: policy.placeType, templateId: options.missionLevel?.templateId,
         vehicleId: options.vehicle?.id || (this.apcConvoyActiveV121 ? this.vehicle?.id : ''), campaignId: policy.campaignId })) {
         policy = Object.freeze({ ...policy, mode: 'foot', requestedMode: 'apc' }); // mismatch with the carried-M577 rule: on foot
@@ -230,8 +244,12 @@ export function withMissionDropshipHandoverV188(Base) {
       } else if (seq.mode === 'apc') {
         // The M577 rides in the belly bay (Aliens, 1986) and is lowered on its hoist.
         const facing = seq.ownVehicle ? (vehicle.facing || 1) : 1, w = seq.ownVehicle ? vehicle.w : LEVEL_DROPSHIP_SCALE_V188.m577.w;
-        const finalCentre = seq.ownVehicle ? vehicle.x + vehicle.w / 2 : spawn + 140;
-        const lowerCentre = clamp(finalCentre - facing * 220, this.camera.x + 160, this.camera.x + 1120);
+        // The 8.8 m hull stays on its floor lane (no lift cabin, door or level edge crossed): lowered and final points clamp to it.
+        const lane = seq.ownVehicle && this.m577LaneV188 ? this.m577LaneV188 : this.m577LaneAtV188(groundY, spawn, w);
+        const inLane = c => lane ? m577ClampToLaneV188(c - w / 2, lane, w) + w / 2 : c;
+        const finalCentre = inLane(seq.ownVehicle ? vehicle.x + vehicle.w / 2 : spawn + 140);
+        const lowerCentre = inLane(clamp(finalCentre - facing * M577_DROP_V188.drive, this.camera.x + 160, this.camera.x + 1120));
+        seq.m577Lane = lane;
         seq.dir = facing > 0 ? 1 : -1;
         seq.ship = { tailX: lowerCentre + seq.dir * UD4L_FRAME_V188.belly.x, groundY, dir: seq.dir, lift: 0, gear: 1 };
         seq.apc = { own: seq.ownVehicle, facing, w, lowerX: lowerCentre - w / 2, finalX: finalCentre - w / 2, x: lowerCentre - w / 2,
@@ -278,6 +296,12 @@ export function withMissionDropshipHandoverV188(Base) {
         if (u < 1 && at.dx) actor.facing = at.dx; else { actor.facing = entry.final.facing; actor.x = entry.final.x; actor.y = entry.final.y; }
       }
     }
+    /** The floor lane of a scaled M577 standing at feet line `feetY` near `x` (null when none holds the hull). */
+    m577LaneAtV188(feetY, x, w = M577_SCALE_V188.w) {
+      const bounds = this.handoverBoundsV188(), far = lane => Math.min(Math.abs(lane.x0 - x), Math.abs(lane.x1 - x));
+      const lanes = m577LanesV188({ platforms: this.platforms, lifts: this.lifts, walls: this.walls, feetY, width: bounds.w }).filter(lane => lane.x1 - lane.x0 >= w + 16);
+      return lanes.find(lane => x >= lane.x0 && x <= lane.x1) || [...lanes].sort((a, b) => far(a) - far(b))[0] || null;
+    }
     giveControlV188(seq, skipped) {
       for (const entry of seq.actors || []) Object.assign(entry.actor, { x: entry.final.x, y: entry.final.y, facing: entry.final.facing, vx: 0, vy: 0 });
       if (seq.ownVehicle && seq.vehicleFinal) Object.assign(this.vehicle, seq.vehicleFinal, { vx: 0 });
@@ -309,7 +333,11 @@ export function withMissionDropshipHandoverV188(Base) {
         seq.collar = { x: footX, floorY: groundY };
         for (const entry of seq.actors) entry.path = [{ x: centreX(entry.actor), y: feetY(entry.actor) }, { x: footX, y: groundY }];
       } else if (seq.ownVehicle) {
-        seq.ship = { tailX: footX + seq.dir * UD4L_FRAME_V188.belly.x, groundY, dir: seq.dir, lift: 0, gear: 1 };
+        // The hoist point stands over the scaled hull kept on its lane (never past a lift shaft, a door or the level edge).
+        const v = this.vehicle, lane = v.m577OrdinaryV188 ? this.m577LaneV188 : null;
+        const under = lane ? m577ClampToLaneV188(footX - v.w / 2, lane, v.w) + v.w / 2 : footX;
+        seq.hoistX = under;
+        seq.ship = { tailX: under + seq.dir * UD4L_FRAME_V188.belly.x, groundY, dir: seq.dir, lift: 0, gear: 1 };
         seq.vehicleStart = { x: this.vehicle.x, y: this.vehicle.y };
         for (const entry of seq.actors) entry.path = entry.actor === player ? null : [{ x: centreX(entry.actor), y: feetY(entry.actor) }, { x: footX, y: groundY }];
       } else {
@@ -335,8 +363,8 @@ export function withMissionDropshipHandoverV188(Base) {
         const vehicle = this.vehicle, under = seq.ship.tailX - seq.dir * UD4L_FRAME_V188.belly.x - vehicle.w / 2;
         const drive = clamp01((seq.t - start) / ((end - start) * .5)), hoist = clamp01((seq.t - start - (end - start) * .5) / ((end - start) * .5));
         vehicle.x = seq.vehicleStart.x + (under - seq.vehicleStart.x) * ease(drive);
-        const bellyY = ud4lToWorldV188(seq.ship, UD4L_FRAME_V188.belly).y;
-        vehicle.y = seq.vehicleStart.y + (bellyY - 20 - (seq.vehicleStart.y + vehicle.h)) * ease(hoist);
+        // Hoisted into the bay of the hovering ship (M577_DROP_V188): the turret recesses, the hull hangs under the belly.
+        vehicle.y = seq.vehicleStart.y + (this.m577HungFeetV188(seq.ship) - (seq.vehicleStart.y + vehicle.h)) * ease(hoist);
         vehicle.vx = drive < 1 ? Math.sign(under - seq.vehicleStart.x) * 120 : 0;
         seq.vehicleHidden = hoist >= 1;
       }
@@ -434,31 +462,39 @@ export function withMissionDropshipHandoverV188(Base) {
       this.handoverShakeV188 = Math.max(0, this.handoverShakeV188 - dt);
     }
     poseShipV188(seq, now) {
-      const ship = seq.ship, high = 760;
+      // An M577 under the belly: the ship hovers (M577_DROP_V188); on insertion the ramp stays shut (the squad rides the M577).
+      const ship = seq.ship, high = 760, hover = seq.apc || seq.ownVehicle ? M577_DROP_V188.hover : 0;
       if (seq.kind === 'insertion') {
-        if (now.id === 'descend') { const u = ease(now.p); ship.lift = high * (1 - u); ship.gear = clamp01(now.p * 1.6 - .4); }
-        else if (now.id === 'settle') { ship.lift = Math.max(0, Math.sin(now.p * Math.PI) * 6 * (1 - now.p)); ship.gear = 1; }
-        else if (now.id === 'liftoff') { const u = now.p * now.p; ship.lift = u * (high + 200); ship.gear = 1 - clamp01(now.p * 2); }
-        else ship.lift = 0;
-        ship.ramp = now.id === 'ramp' ? ease(now.p) : now.id === 'disembark' ? 1 : now.id === 'close' ? 1 - ease(now.p) : now.id === 'liftoff' ? 0 : 0;
+        if (now.id === 'descend') { const u = ease(now.p); ship.lift = hover + (high - hover) * (1 - u); ship.gear = clamp01(now.p * 1.6 - .4); }
+        else if (now.id === 'settle') { ship.lift = hover + Math.max(0, Math.sin(now.p * Math.PI) * 6 * (1 - now.p)); ship.gear = 1; }
+        else if (now.id === 'liftoff') { const u = now.p * now.p; ship.lift = hover + u * (high + 200 - hover); ship.gear = 1 - clamp01(now.p * 2); }
+        else ship.lift = hover;
+        ship.ramp = hover ? 0 : now.id === 'ramp' ? ease(now.p) : now.id === 'disembark' ? 1 : now.id === 'close' ? 1 - ease(now.p) : now.id === 'liftoff' ? 0 : 0;
       } else {
-        if (now.id === 'arrive') { const u = ease(now.p); ship.lift = high * (1 - u); ship.gear = clamp01(now.p * 1.6 - .4); }
-        else if (now.id === 'lift') { const u = now.p * now.p; ship.lift = u * (high + 200); ship.gear = 1 - clamp01(now.p * 2); }
-        else ship.lift = 0;
+        if (now.id === 'arrive') { const u = ease(now.p); ship.lift = hover + (high - hover) * (1 - u); ship.gear = clamp01(now.p * 1.6 - .4); }
+        else if (now.id === 'lift') { const u = now.p * now.p; ship.lift = hover + u * (high + 200 - hover); ship.gear = 1 - clamp01(now.p * 2); }
+        else ship.lift = hover;
         ship.ramp = now.id === 'ramp' ? ease(now.p) : now.id === 'board' ? 1 : now.id === 'close' ? 1 - ease(now.p) : 0;
       }
     }
+    /** Feet line of an M577 hanging in the belly bay (turret recessed into the bay). */
+    m577HungFeetV188(ship) { return ud4lToWorldV188(ship, UD4L_FRAME_V188.belly).y + M577_SCALE_V188.drawnHeight - M577_DROP_V188.recess; }
     poseApcV188(seq, now, dt) {
       const apc = seq.apc, start = phaseStart(seq, 'disembark'), end = phaseEnd(seq, 'disembark'), span = end - start;
       const lower = clamp01((seq.t - start) / (span * .31)), drive = clamp01((seq.t - start - span * .31) / (span * .375));
       const before = apc.x;
-      if (apc.leaving) { apc.x += apc.facing * 260 * dt; apc.drop = 1; }
+      if (apc.leaving) {
+        // The transport backs under the belly during 'close' and is hoisted early in 'liftoff': it leaves with the ship.
+        const close = phaseStart(seq, 'close'), closeEnd = phaseEnd(seq, 'close'), lift = phaseStart(seq, 'liftoff'), liftEnd = phaseEnd(seq, 'liftoff');
+        const back = clamp01((seq.t - close) / Math.max(.05, closeEnd - close)), hoist = clamp01((seq.t - lift) / Math.max(.05, (liftEnd - lift) * .3));
+        apc.x = apc.finalX + (apc.lowerX - apc.finalX) * ease(back); apc.drop = 1 - ease(hoist);
+      }
       else if (seq.t < start) { apc.drop = 0; apc.x = apc.lowerX; }
       else { apc.drop = ease(lower); apc.x = apc.lowerX + (apc.finalX - apc.lowerX) * ease(drive); }
-      apc.wheel += (apc.x - before) / 14;
+      apc.wheel += (apc.x - before) / M577_SCALE_V188.wheelRadius;
       if (apc.own) {
-        const vehicle = this.vehicle, bellyY = ud4lToWorldV188(seq.ship, UD4L_FRAME_V188.belly).y;
-        vehicle.x = apc.x; vehicle.y = (bellyY - vehicle.h) + (seq.vehicleFinal.y - (bellyY - vehicle.h)) * apc.drop;
+        const vehicle = this.vehicle, hung = this.m577HungFeetV188(seq.ship) - vehicle.h;
+        vehicle.x = apc.x; vehicle.y = hung + (seq.vehicleFinal.y - hung) * apc.drop;
         vehicle.vx = Math.abs(apc.x - before) > .01 ? apc.facing * 120 : 0;
       }
     }
@@ -564,7 +600,14 @@ export function withMissionDropshipHandoverV188(Base) {
       const seq = this.handoverV188;
       if (seq) this.drawHandoverBackV188(ctx, seq);
       if (seq?.vehicleHidden || this.handoverDepartedV188 && this.player?.inVehicle) return undefined;
-      return super.drawVehicle(ctx);
+      const v = this.vehicle;
+      if (!v?.m577OrdinaryV188 || !v.active) return super.drawVehicle(ctx);
+      // The M577 to scale (slot m577-mission-side-scale, Canvas placeholder): the 250 px action sheet is not at this scale.
+      for (const member of this.activeSquadActors?.() || []) if (['entering', 'exiting'].includes(member.vehicleAccessPhase)) this.drawSquadActor(ctx, member);
+      const hurt = Number(v.hull) < Number(v.maxHull || 1) * .35 ? 1 : 0, firing = (this.player?.inVehicle && (this.player.fireClock || 0) > 0) ? 1 : 0;
+      drawM577ScaledPlaceholderV188(ctx, v.x, v.y + v.h, Number(v.facing) < 0 ? -1 : 1,
+        { wheelTurn: v.x / M577_SCALE_V188.wheelRadius, hurt, turretRecoil: firing, command: v.id === 'vehicle-002-m577-command-apc', wreck: Boolean(v.destroyed) });
+      return undefined;
     }
     drawHandoverBackV188(ctx, seq) {
       if (!seq.resolved) return;
@@ -583,7 +626,7 @@ export function withMissionDropshipHandoverV188(Base) {
       drawUd4lHullV188(ctx, ship, { image: hullImage() });
       if (seq.apc) { // in front of the hull: it hangs under the belly bay
         const bellyWorld = ud4lToWorldV188(ship, UD4L_FRAME_V188.belly), h = LEVEL_DROPSHIP_SCALE_V188.m577.h;
-        const footY = seq.groundY + (bellyWorld.y + h - 10 - seq.groundY) * (1 - seq.apc.drop);
+        const footY = seq.groundY + (this.m577HungFeetV188(ship) - seq.groundY) * (1 - seq.apc.drop);
         if (seq.apc.drop < 1 && phaseStart(seq, 'disembark') <= time) drawHoistV188(ctx, bellyWorld, { x: seq.apc.x + seq.apc.w / 2, y: footY - h });
         if (!seq.apc.own && phaseStart(seq, 'disembark') <= time) drawM577TransportV188(ctx, seq.apc.x, footY, seq.apc.facing, { wheelTurn: seq.apc.wheel });
       }
@@ -655,6 +698,8 @@ export function withMissionDropshipHandoverV188(Base) {
       const seq = this.handoverV188;
       const poses = seq?.blocking && seq.resolved ? seq : this.mission?.state === 'complete' ? this.handoverTerminalPosesV188 : null;
       const state = poses ? this.withHandoverPosesV188(poses, () => super.captureResumeState()) : super.captureResumeState();
+      // Additive: the scaled hull's width, so a resume restores its centre (records without it are the legacy 190 px box).
+      if (state?.vehicle && typeof state.vehicle === 'object' && this.vehicle?.m577OrdinaryV188) state.vehicle.w = this.vehicle.w;
       if (state && typeof state === 'object' && (this.handoverConfigV188 || seq || this.handoverExtractedV188)) {
         let event = null;
         if (seq?.kind === 'extraction') { try { event = structuredClone(seq.event); } catch { event = seq.event; } }
@@ -664,6 +709,113 @@ export function withMissionDropshipHandoverV188(Base) {
       }
       return state;
     }
+    applyResumeState(raw) {
+      const result = super.applyResumeState(raw), v = this.vehicle, saved = raw?.vehicle;
+      if (result?.applied && v && saved && typeof saved === 'object' && saved.id === v.id && isM577VehicleV188(v) && (!v.m577ScaleV188 || v.m577OrdinaryV188)
+        && Number.isFinite(Number(saved.x))) {
+        const width = Number(saved.w) > 0 && Number(saved.w) <= 1000 ? Number(saved.w) : M577_SCALE_V188.legacy.w, centre = Number(saved.x) + width / 2;
+        if (v.m577OrdinaryV188) { v.x = this.m577LaneV188 ? m577ClampToLaneV188(centre - v.w / 2, this.m577LaneV188, v.w) : centre - v.w / 2; v.spriteHitbox = m577HitboxRuntimeV188(v); }
+        else this.m577ResumeCentreV188 = centre;
+      }
+      return result;
+    }
+
+    // —— The drivable M577 to scale in the ordinary levels (owner decision 2026-11-22, round 2) ——
+    /** Scales the level's M577 (001/002) to 449 × 112 and parks it on a floor lane that holds it. Convoy and Act V keep their own. */
+    applyM577OrdinaryScaleV188(options = {}) {
+      const v = this.vehicle, centre = this.m577ResumeCentreV188; this.m577ResumeCentreV188 = null;
+      if (!v || !v.active || v.m577ScaleV188 || !isM577VehicleV188(v) || this.editorMode || options.editorProject || options.forgePlaytest || options.forgeSessionV141
+        || this.apcConvoyActiveV121 || this.act5RaceActiveV188 || this.mechaMissionV131) return false;
+      const feet = Number(v.y) + Number(v.h), preferred = Number.isFinite(centre) ? centre : Number(v.x) + Number(v.w) / 2;
+      applyM577MissionScaleV188(v); v.m577OrdinaryV188 = true;
+      this.parkM577V188(preferred, feet);
+      return true;
+    }
+    /** The lane the hull parks on: one that holds it and reaches the extraction (it is driven there to board), nearest to the
+     *  level's own vehicle point, on the same floor first; never one reached through a door. Geometry is read, never moved. */
+    chooseM577LaneV188(preferredCentre, feetY) {
+      const v = this.vehicle, bounds = this.handoverBoundsV188(), m = 8, need = v.w + 2 * m;
+      const extraction = this.objective && finite(this.objective.x) ? { x: this.objective.x + (this.objective.w || 0) / 2, feet: this.objective.y + (this.objective.h || 0) } : null;
+      const feetLines = [feetY, ...new Set((this.platforms || []).filter(entry => /^node-platform-/.test(String(entry.id || ''))).map(entry => entry.y))];
+      const doorCentres = (this.doors || []).map(door => door.x + door.w / 2);
+      let best = null;
+      for (const feet of feetLines) {
+        for (const lane of m577LanesV188({ platforms: this.platforms, lifts: this.lifts, walls: this.walls, feetY: feet, width: bounds.w })) {
+          if (lane.x1 - lane.x0 < need) continue;
+          const reachesExtraction = extraction && Math.abs(extraction.feet - feet) <= 24 && extraction.x >= lane.x0 && extraction.x <= lane.x1;
+          const nearest = Math.max(lane.x0 + m + v.w / 2, Math.min(lane.x1 - m - v.w / 2, preferredCentre));
+          const throughDoor = feet === feetY && doorCentres.some(x => x > Math.min(preferredCentre, nearest) && x < Math.max(preferredCentre, nearest));
+          const score = (reachesExtraction ? 0 : 10000) + (throughDoor ? 5000 : 0) + Math.abs(nearest - preferredCentre) + 2 * Math.abs(feet - feetY);
+          if (!best || score < best.score) best = { feet, lane, score, reachesExtraction: Boolean(reachesExtraction) };
+        }
+      }
+      return best;
+    }
+    parkM577V188(preferredCentre, preferredFeet) {
+      const v = this.vehicle, bounds = this.handoverBoundsV188();
+      const chosen = this.chooseM577LaneV188(preferredCentre, preferredFeet), feetY = chosen ? chosen.feet : preferredFeet;
+      const lanes = chosen ? [chosen.lane] : [];
+      const near = entry => entry && finite(entry.x) && finite(entry.y) && Math.abs(entry.y + (entry.h || 0) - feetY) < 80;
+      const avoid = [this.objective, this.powerNode, this.archiveTerminal, ...(this.supplies || []), ...(this.objectiveNodes || []), ...(this.covers || [])].filter(near);
+      const parking = m577ParkingV188({ lanes, doors: this.doors, ladders: this.ladders, avoid, feetY, preferredCentre, w: v.w });
+      v.y = feetY - v.h; v.groundY = v.y;
+      if (parking) { v.x = parking.x; this.m577LaneV188 = parking.lane; }
+      else { v.x = clamp(preferredCentre - v.w / 2, 0, Math.max(0, bounds.w - v.w)); this.m577LaneV188 = null; }
+      this.m577ParkingV188 = Object.freeze({ parked: Boolean(parking), preferredCentre, preferredFeet, feetY, centre: v.x + v.w / 2, lane: this.m577LaneV188,
+        segment: parking?.segment || null, clear: parking?.clear ?? false, reachesExtraction: Boolean(chosen?.reachesExtraction), lanes });
+      v.spriteHitbox = m577HitboxRuntimeV188(v);
+    }
+    refreshSpriteCollisionProfiles() {
+      const result = super.refreshSpriteCollisionProfiles?.();
+      if (this.vehicle?.m577OrdinaryV188) this.vehicle.spriteHitbox = m577HitboxRuntimeV188(this.vehicle);
+      return result;
+    }
+    updateVehicleDriver(actor, delta, controls) {
+      const result = super.updateVehicleDriver(actor, delta, controls), v = this.vehicle;
+      if (!v?.m577OrdinaryV188 || !v.active || this.handoverV188?.blocking) return result;
+      // A ground-locked 8.8 m hull never leaves its floor lane (lift shafts, low decks and the level edge stop it).
+      if (this.m577LaneV188) { const x = m577ClampToLaneV188(v.x, this.m577LaneV188, v.w); if (x !== v.x) { v.x = x; v.vx = 0; } }
+      const seat = m577AnchorsV188(v).seat.x;
+      for (const rider of [this.player, this.coop]) if (rider?.inVehicle) { rider.x = (rider === v.driver ? seat : seat - v.facing * 60) - (rider.w || 42) / 2; rider.y = v.y + 10; }
+      return result;
+    }
+    /** A marine leaves the scaled hull by its side door (between the road wheels), on the lane. */
+    placeM577ExitV188(actor, index = 0) {
+      const v = this.vehicle; if (!actor || !v?.m577OrdinaryV188) return;
+      const lane = this.m577LaneV188, door = m577SideDoorXV188(v) + index * 54;
+      actor.x = clamp(door - (actor.w || 42) / 2, lane ? lane.x0 : 0, (lane ? lane.x1 : this.handoverBoundsV188().w) - (actor.w || 42));
+      actor.y = v.y + v.h - actor.h;
+    }
+    commitVehicleAccessV59(actor, phase) {
+      const result = super.commitVehicleAccessV59?.(actor, phase);
+      if (result && phase === 'exiting') this.placeM577ExitV188(actor);
+      return result;
+    }
+    toggleVehicle(actor = this.player) {
+      const wasIn = Boolean(actor?.inVehicle), result = super.toggleVehicle(actor);
+      if (result && wasIn && !actor.inVehicle) this.placeM577ExitV188(actor);
+      return result;
+    }
+    ejectVehicleOccupants() {
+      const riders = [this.player, this.coop].filter(actor => actor?.inVehicle), result = super.ejectVehicleOccupants();
+      riders.forEach((actor, index) => this.placeM577ExitV188(actor, index));
+      return result;
+    }
+    /** The roof turret of the scaled hull fires from its own mount (rear roof), not from the box centre. */
+    resolvePlayerMuzzleV124(player, aim) {
+      const v = this.vehicle;
+      if (!player?.inVehicle || !v?.m577OrdinaryV188) return super.resolvePlayerMuzzleV124(player, aim);
+      const turret = m577AnchorsV188(v).turret;
+      return resolveCombatMuzzleV83(player, aim, { pivotX: turret.x, pivotY: turret.y, barrelLength: 70 });
+    }
+    m577ScaleSnapshotV188() {
+      const v = this.vehicle; if (!v) return null;
+      return { id: v.id, active: Boolean(v.active), scaled: Boolean(v.m577ScaleV188), ordinary: Boolean(v.m577OrdinaryV188), x: Math.round(v.x), y: Math.round(v.y), w: v.w, h: v.h,
+        feet: Math.round(v.y + v.h), facing: v.facing || 1, lane: this.m577LaneV188 ? { x0: Math.round(this.m577LaneV188.x0), x1: Math.round(this.m577LaneV188.x1) } : null,
+        parked: this.m577ParkingV188 ? { parked: this.m577ParkingV188.parked, clear: this.m577ParkingV188.clear, reachesExtraction: this.m577ParkingV188.reachesExtraction,
+          preferredCentre: Math.round(this.m577ParkingV188.preferredCentre), preferredFeet: Math.round(this.m577ParkingV188.preferredFeet) } : null };
+    }
+
     getSnapshot() {
       const seq = this.handoverV188;
       return { ...super.getSnapshot(), dropshipHandoverV188: seq ? { kind: seq.kind, style: seq.style, mode: seq.mode, placeType: seq.placeType,

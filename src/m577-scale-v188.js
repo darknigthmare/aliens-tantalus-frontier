@@ -67,7 +67,7 @@ export function m577AnchorsV188(vehicle) {
 }
 
 /** Canvas placeholder: wheels on the feet line `footY`, from x to x + w, nose towards `facing`. */
-export function drawM577ScaledPlaceholderV188(ctx, x, footY, facing = 1, { w = M577_SCALE_V188.w, wheelTurn = 0, hurt = 0, turretRecoil = 0 } = {}) {
+export function drawM577ScaledPlaceholderV188(ctx, x, footY, facing = 1, { w = M577_SCALE_V188.w, wheelTurn = 0, hurt = 0, turretRecoil = 0, command = false, wreck = false } = {}) {
   const S = M577_SCALE_V188, k = w / S.w, H = S.drawnHeight;
   ctx.save(); ctx.translate(x + w / 2, footY); ctx.scale(facing < 0 ? -k : k, k); ctx.translate(-S.w / 2, 0);
   ctx.lineWidth = 2; ctx.strokeStyle = '#191c16';
@@ -100,5 +100,79 @@ export function drawM577ScaledPlaceholderV188(ctx, x, footY, facing = 1, { w = M
     // Flat armoured wheel cover above the tyre.
     ctx.fillStyle = '#353b2d'; ctx.fillRect(cx - S.wheelRadius - 6, cy - S.wheelRadius - 8, (S.wheelRadius + 6) * 2, 8);
   }
+  // Command variant (vehicle 002, same hull) [PROPOSÉ]: two whip antennas and a roof comms box behind the turret.
+  if (command) {
+    ctx.strokeStyle = '#1e211b'; ctx.lineWidth = 2; ctx.fillStyle = '#2b3026';
+    ctx.fillRect(22, -124, 40, 12); ctx.beginPath(); ctx.moveTo(30, -124); ctx.lineTo(24, -196); ctx.moveTo(52, -124); ctx.lineTo(48, -178); ctx.stroke();
+  }
+  // Destroyed hull: scorched, the glazing out (the existing damage clip is not at this scale).
+  if (wreck) { ctx.fillStyle = 'rgba(12,10,8,.55)'; ctx.fillRect(2, -112, S.w - 4, 112 - S.clearance); }
   ctx.restore();
+}
+
+// —— The M577 to scale everywhere (owner decision 2026-11-22, round 2) ——
+// The drivable M577 of the ordinary levels (vehicles 001 and 002, the Command variant shares the hull)
+// and the one lowered by the UD-4L are drawn and collide at 449 × 112 too. A ground-locked 8.8 m
+// vehicle only stands on a continuous floor at its feet line: a lift cabin (120–144 px, under 3 m)
+// never carries it, an overhead deck lower than its drawn 140 px cuts its lane, a door splits where it
+// may be parked. Values below are [PROPOSÉ] project placements (1 m ≈ 51 px), the level geometry is
+// never moved: only the parking point and the driving lane are derived from it.
+export const M577_ORDINARY_IDS_V188 = freeze(['vehicle-001-m577-armored-personnel-carrier', 'vehicle-002-m577-command-apc']);
+export const isM577VehicleV188 = vehicle => M577_ORDINARY_IDS_V188.includes(String((typeof vehicle === 'string' ? vehicle : vehicle?.id) || ''));
+export const M577_LANE_V188 = freeze({ status: 'PROPOSÉ', terrain: 16, joinGap: 12, margin: 8, doorU: .47 });
+
+const span = object => {
+  const x = finite(object?.x, NaN), w = finite(object?.w, 0);
+  return Number.isFinite(x) && w > 0 ? [x, x + w] : null;
+};
+/** Floor lanes at a feet line: union of the floors within the terrain tolerance (lift cabins excluded), minus overheads under the drawn height. */
+export function m577LanesV188({ platforms = [], lifts = [], walls = [], feetY, width = Infinity, height = M577_SCALE_V188.drawnHeight } = {}) {
+  const T = M577_LANE_V188, liftIds = new Set((lifts || []).map(lift => lift?.id).filter(Boolean));
+  const solid = (platforms || []).filter(entry => entry && !liftIds.has(entry.id) && entry.kind !== 'lift');
+  const floors = solid.filter(entry => Math.abs(finite(entry.y, -1e9) - feetY) <= T.terrain).map(span).filter(Boolean).sort((a, b) => a[0] - b[0]);
+  const merged = [];
+  for (const [a, b] of floors) { const last = merged.at(-1); if (last && a <= last[1] + T.joinGap) last[1] = Math.max(last[1], b); else merged.push([a, b]); }
+  const top = feetY - height, low = feetY - T.terrain - 2;
+  const cuts = [...solid, ...(walls || [])].filter(entry => entry && finite(entry.y, 1e9) < low && finite(entry.y) + finite(entry.h, 0) > top).map(span).filter(Boolean);
+  let lanes = merged.map(([a, b]) => [Math.max(0, a), Math.min(width, b)]).filter(([a, b]) => b > a);
+  for (const [c0, c1] of cuts) lanes = lanes.flatMap(([a, b]) => c1 <= a || c0 >= b ? [[a, b]] : [[a, c0], [c1, b]].filter(([x0, x1]) => x1 - x0 > 1));
+  return lanes.map(([x0, x1]) => freeze({ x0, x1 }));
+}
+const laneAt = (lanes, x) => lanes.find(lane => x >= lane.x0 && x <= lane.x1) || null;
+/** Where the scaled hull parks: the lane of the preferred centre (or the nearest one reached without crossing a door), clear of doors,
+ *  ladders at its feet line and the listed interaction boxes. Returns null when no lane holds the hull. */
+export function m577ParkingV188({ lanes = [], doors = [], ladders = [], avoid = [], feetY, preferredCentre, w = M577_SCALE_V188.w } = {}) {
+  const m = M577_LANE_V188.margin, half = w / 2;
+  const doorSpans = (doors || []).map(span).filter(Boolean);
+  const ladderSpans = (ladders || []).filter(entry => {
+    const t = finite(entry?.top, NaN), b = finite(entry?.bottom, NaN);
+    return !Number.isFinite(t) || !Number.isFinite(b) || (feetY >= Math.min(t, b) - 30 && feetY <= Math.max(t, b) + 52);
+  }).map(entry => { const x = finite(entry.x), lw = Math.max(42, finite(entry.w, 42)); return [x - lw / 2, x + lw]; });
+  const avoidSpans = [...ladderSpans, ...(avoid || []).map(span).filter(Boolean)];
+  let segments = lanes.map(lane => [lane.x0, lane.x1]);
+  for (const [d0, d1] of doorSpans) segments = segments.flatMap(([a, b]) => d1 <= a || d0 >= b ? [[a, b]] : [[a, d0], [d1, b]].filter(([x0, x1]) => x1 - x0 > 1));
+  segments = segments.filter(([a, b]) => b - a >= w + 2 * m);
+  if (!segments.length) return null;
+  const crosses = (from, to) => doorSpans.some(([d0, d1]) => (d0 + d1) / 2 > Math.min(from, to) && (d0 + d1) / 2 < Math.max(from, to));
+  const distance = ([a, b]) => preferredCentre < a ? a - preferredCentre : preferredCentre > b ? preferredCentre - b : 0;
+  const ranked = [...segments].sort((s1, s2) => distance(s1) - distance(s2));
+  const segment = ranked.find(([a, b]) => !crosses(preferredCentre, Math.max(a, Math.min(b, preferredCentre)))) || ranked[0];
+  const lo = segment[0] + m + half, hi = segment[1] - m - half, start = Math.max(lo, Math.min(hi, preferredCentre));
+  const clear = c => avoidSpans.every(([a0, a1]) => a1 <= c - half || a0 >= c + half);
+  const candidates = [start, ...avoidSpans.flatMap(([a0, a1]) => [a1 + m + half, a0 - m - half])].filter(c => c >= lo && c <= hi);
+  const centre = candidates.filter(clear).sort((c1, c2) => Math.abs(c1 - start) - Math.abs(c2 - start))[0] ?? start;
+  const lane = laneAt(lanes, centre);
+  return freeze({ centre, x: centre - half, segment: freeze({ x0: segment[0], x1: segment[1] }),
+    lane: lane ? freeze({ x0: lane.x0, x1: lane.x1 }) : freeze({ x0: segment[0], x1: segment[1] }), clear: clear(centre) });
+}
+/** Keeps the hull inside its lane (left edge returned). */
+export function m577ClampToLaneV188(x, lane, w = M577_SCALE_V188.w) {
+  if (!lane) return x;
+  const m = M577_LANE_V188.margin, lo = lane.x0 + m, hi = Math.max(lo, lane.x1 - m - w);
+  return Math.max(lo, Math.min(hi, x));
+}
+/** Side door between the two road wheels (documented morphology), where a marine steps out. */
+export function m577SideDoorXV188(vehicle) {
+  const w = finite(vehicle?.w, M577_SCALE_V188.w), x = finite(vehicle?.x), u = M577_LANE_V188.doorU;
+  return finite(vehicle?.facing, 1) < 0 ? x + (1 - u) * w : x + u * w;
 }
