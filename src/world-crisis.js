@@ -119,7 +119,7 @@ function unlockEmergencyRoutes(result, sourceSave, hours) {
   const critical = Object.values(sourceSave.galaxy.worldState).some((state) => Number(state?.infestation) >= 85 || Number(state?.stability) <= 18);
   if (!critical) return result;
   const unlocked = new Set(result.save.galaxy.unlockedWorldIds);
-  const additions = WORLDS.filter((world) => !unlocked.has(world.id)).slice(0, 2 - result.unlocks.length);
+  const additions = WORLDS.filter((world) => !world.hiddenUntilV188 && !unlocked.has(world.id)).slice(0, 2 - result.unlocks.length);
   for (const world of additions) {
     result.save.galaxy.unlockedWorldIds.push(world.id);
     result.unlocks.push(world.id);

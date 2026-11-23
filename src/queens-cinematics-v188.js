@@ -31,8 +31,8 @@ export const QUEENS_CINEMATICS_V188 = Object.freeze({
     shot(6, 'dialogue', { scene: 'dropship', radio: true, line: line('MAKSIM ORLOV · RADIO', ORLOV,
       'Elle est partie vers le fond. Je vous remonte.', 'She went for the bottom. Bringing you up.') })
   ]) }),
-  // CQ-03 · L'aire (end of 2.4), CQ-04 · La peau du monde (3.1), CQ-05 · Le chant (3.3), CQ-06 · Effondrement (end of 3.5):
-  // defined for the replay list; their missions (arcs 2 and 3) are not playable in this lot.
+  // CQ-03 · L'aire (end of 2.4), CQ-04 · La peau du monde (TR-0's orbit, before 3.1), CQ-05 · Le chant (return of the
+  // Queen Mother chapter, 3.3-3.4), CQ-06 · Effondrement (end of 3.5): played by Arcs 2 and 3 (second lot, 2026-11-23).
   'cin-cq-03': Object.freeze({ id: 'cin-cq-03', title: t('L’aire', 'The eyrie'), music: null, shots: Object.freeze([
     shot(12, 'queens-shot', { scene: 'canyon', caption: t('ECHO BASIN · COUCHER DE SOLEIL SUR LE CANYON', 'ECHO BASIN · SUNSET OVER THE CANYON') }),
     shot(6, 'queens-shot', { scene: 'canyon-dive' })
@@ -50,8 +50,8 @@ export const QUEENS_CINEMATICS_V188 = Object.freeze({
   ]) })
 });
 export const QUEENS_CINEMATIC_IDS_V188 = Object.freeze(Object.keys(QUEENS_CINEMATICS_V188));
-// Played by the campaign in this lot; the others wait for their arcs (spec 011 « Reste »).
-export const QUEENS_CINEMATICS_WIRED_V188 = Object.freeze(['cin-cq-01', 'cin-cq-02']);
+// Played by the campaign (side-campaign-queens-v188.js: the call, and `QUEENS_SCENE_CINEMATICS_V188`).
+export const QUEENS_CINEMATICS_WIRED_V188 = Object.freeze(['cin-cq-01', 'cin-cq-02', 'cin-cq-03', 'cin-cq-04', 'cin-cq-05', 'cin-cq-06']);
 /** Named placeholder slots of each shot (no file behind any of them yet). */
 export const QUEENS_CINEMATIC_SLOTS_V188 = Object.freeze({
   eggs: 'queens-cin-three-shells', map: 'queens-cin-reach-map', trench: 'queens-cin-trench-queen', 'trench-dark': 'queens-cin-trench-queen',
@@ -130,7 +130,7 @@ export function drawQueensShotV188(ctx, current, { local = 0, progress = 0, lang
       ctx.fillStyle = '#1a2a30'; ctx.fillRect(560, 40, 160, 30); ctx.fillStyle = '#e9d07a'; ctx.fillRect(570, 64, 20, 8); ctx.fillRect(690, 64, 20, 8); // MANTA-6 above
       break;
     }
-    case 'canyon': case 'canyon-dive': { // CQ-03 (arc 2, not wired)
+    case 'canyon': case 'canyon-dive': { // CQ-03 (end of 2.4): the flying Queen glides over the canyon at sunset, then stoops
       const g = ctx.createLinearGradient?.(0, 0, 0, H); if (g) { g.addColorStop(0, '#3a1810'); g.addColorStop(.6, '#a2482a'); g.addColorStop(1, '#2a0f0a'); ctx.fillStyle = g; } else ctx.fillStyle = '#7a3420';
       ctx.fillRect(0, 0, W, H); ctx.fillStyle = '#1c0c08';
       ctx.beginPath(); ctx.moveTo(0, H); ctx.lineTo(0, 300); ctx.lineTo(260, 340); ctx.lineTo(380, 520); ctx.lineTo(900, 520); ctx.lineTo(1020, 320); ctx.lineTo(W, 280); ctx.lineTo(W, H); ctx.fill();
@@ -138,19 +138,19 @@ export function drawQueensShotV188(ctx, current, { local = 0, progress = 0, lang
       queenSilhouette(ctx, dive ? 640 + p * 200 : 200 + p * 700, dive ? 200 + p * 380 : 200 - Math.sin(p * Math.PI) * 40, dive ? .7 : .55, '#120806');
       break;
     }
-    case 'tr0-orbit': { // CQ-04 (arc 3, not wired): no sea, no forest, a black veined surface
+    case 'tr0-orbit': { // CQ-04 (TR-0's orbit): no sea, no forest, a black veined surface
       ctx.fillStyle = '#020305'; ctx.fillRect(0, 0, W, H); stars(ctx, W, H, 5);
       ctx.fillStyle = '#0b0a0c'; ctx.beginPath(); ctx.arc(820, 900, 620, 0, Math.PI * 2); ctx.fill();
       ctx.strokeStyle = 'rgba(150,40,40,.5)'; ctx.lineWidth = 2;
       for (let i = 0; i < 18; i++) { ctx.beginPath(); ctx.moveTo(820 + Math.cos(i) * 200, 900 - 520 + i * 9); ctx.bezierCurveTo(400 + i * 40, 500 + i * 6, 700 + i * 20, 420, 1100 - i * 10, 400 + i * 12); ctx.stroke(); }
       break;
     }
-    case 'choir': { // CQ-05 (arc 3, not wired)
+    case 'choir': { // CQ-05 (the Queen Mother chapter): the three Choirs hum together
       ctx.fillStyle = '#080404'; ctx.fillRect(0, 0, W, H); ctx.strokeStyle = 'rgba(225,91,79,.7)'; ctx.lineWidth = 2;
       for (let voice = 0; voice < 3; voice++) { ctx.beginPath(); for (let x = 0; x <= W; x += 6) { const y = 250 + voice * 110 + Math.sin(x * .02 + time * (2 + voice)) * 30; x ? ctx.lineTo(x, y) : ctx.moveTo(x, y); } ctx.stroke(); }
       break;
     }
-    case 'collapse': { // CQ-06 (arc 3, not wired)
+    case 'collapse': { // CQ-06 (end of 3.5): the dropship lifts off, the surface sinks behind it
       ctx.fillStyle = '#0a0606'; ctx.fillRect(0, 0, W, H); ctx.fillStyle = '#1e0f0d';
       ctx.fillRect(0, 520 + p * 120, W, H); ctx.fillStyle = '#2c3a40'; ctx.fillRect(560, 420 - p * 300, 160, 46); // dropship climbing
       break;
@@ -164,7 +164,8 @@ export function drawQueensShotV188(ctx, current, { local = 0, progress = 0, lang
 }
 
 // —— Return-scene pictures (content-gap-ui-v188 `loader` contract: draw / preload / subscribe) ——
-export const QUEENS_SCENE_SLOTS_V188 = Object.freeze(['queens-call', 'queens-quay', 'queens-pools', 'queens-trench', 'queens-rask', 'queens-debrief']);
+export const QUEENS_SCENE_SLOTS_V188 = Object.freeze(['queens-call', 'queens-quay', 'queens-pools', 'queens-trench', 'queens-rask', 'queens-debrief',
+  'queens-canyon', 'queens-eyrie', 'queens-tr0', 'queens-ombelle', 'queens-egg-crisis']);
 export class QueensSceneLoaderV188 {
   preload() {}
   subscribe() { return () => {}; }
@@ -184,6 +185,22 @@ export class QueensSceneLoaderV188 {
       ctx.fillStyle = '#1a2a30'; ctx.fillRect(560, 60, 160, 30); }
     else if (slot === 'queens-rask') { ctx.fillStyle = '#10171a'; ctx.fillRect(0, 500, W, 220); ctx.fillStyle = '#d8dccf'; ctx.fillRect(560, 390, 160, 110);
       ctx.strokeStyle = '#e9d07a'; ctx.lineWidth = 4; ctx.strokeRect(566, 396, 148, 98); ctx.fillStyle = '#2b3438'; for (const x of [360, 420, 860, 920]) { ctx.fillRect(x, 330, 34, 170); ctx.beginPath(); ctx.arc(x + 17, 318, 16, 0, Math.PI * 2); ctx.fill(); } }
+    else if (slot === 'queens-canyon' || slot === 'queens-eyrie') { // red canyon walls, a relay tower or the needle and its nest
+      ctx.fillStyle = '#7a3420'; ctx.fillRect(0, 0, W, H); ctx.fillStyle = '#1c0c08';
+      ctx.beginPath(); ctx.moveTo(0, H); ctx.lineTo(0, 300); ctx.lineTo(260, 340); ctx.lineTo(380, 560); ctx.lineTo(900, 560); ctx.lineTo(1020, 320); ctx.lineTo(W, 280); ctx.lineTo(W, H); ctx.fill();
+      if (slot === 'queens-eyrie') { ctx.beginPath(); ctx.moveTo(590, 560); ctx.lineTo(630, 150); ctx.lineTo(660, 150); ctx.lineTo(700, 560); ctx.fill(); queenSilhouette(ctx, 645, 130, .45, '#120806'); }
+      else { ctx.fillRect(628, 200, 24, 360); ctx.fillStyle = '#e9d07a'; ctx.fillRect(634, 186, 12, 12); ctx.fillStyle = '#1c0c08'; ctx.fillRect(590, 250, 100, 10); } }
+    else if (slot === 'queens-tr0' || slot === 'queens-ombelle') { // the living crust, or the company airlock caught in resin
+      ctx.fillStyle = '#050406'; ctx.fillRect(0, 0, W, H); ctx.fillStyle = '#0f0b0d'; ctx.fillRect(0, 430, W, 290);
+      ctx.strokeStyle = 'rgba(150,40,40,.55)'; ctx.lineWidth = 3;
+      for (let i = 0; i < 14; i++) { ctx.beginPath(); ctx.moveTo(i * 100 - 40, 430 + (i % 3) * 30); ctx.bezierCurveTo(i * 100, 520, i * 100 + 80, 470, i * 100 + 140, 700); ctx.stroke(); }
+      if (slot === 'queens-ombelle') { ctx.fillStyle = '#c9cdbf'; ctx.fillRect(540, 300, 200, 180); ctx.fillStyle = '#16191a'; ctx.fillRect(590, 340, 100, 140);
+        ctx.fillStyle = 'rgba(20,10,12,.85)'; ctx.beginPath(); ctx.moveTo(520, 300); ctx.quadraticCurveTo(640, 380, 760, 300); ctx.lineTo(760, 330); ctx.quadraticCurveTo(640, 430, 520, 330); ctx.fill(); } }
+    else if (slot === 'queens-egg-crisis') { // the Tantalus quarantine deck: an open case, the alarm lamp
+      ctx.fillStyle = '#0a0d0f'; ctx.fillRect(0, 0, W, H); ctx.fillStyle = '#151b1e'; ctx.fillRect(0, 520, W, 200);
+      ctx.fillStyle = '#d8dccf'; ctx.fillRect(540, 400, 200, 120); ctx.fillStyle = '#0a0d0f'; ctx.fillRect(560, 380, 160, 70); // lid forced open
+      ctx.strokeStyle = '#e9d07a'; ctx.lineWidth = 4; ctx.strokeRect(546, 406, 188, 108);
+      ctx.fillStyle = '#b3261e'; ctx.beginPath(); ctx.arc(640, 150, 26, 0, Math.PI * 2); ctx.fill(); ctx.fillStyle = 'rgba(179,38,30,.12)'; ctx.fillRect(0, 0, W, H); }
     else { ctx.fillStyle = '#0b1210'; ctx.fillRect(0, 0, W, H); ctx.strokeStyle = '#2f6d45'; ctx.strokeRect(200.5, 140.5, 880, 420);
       ctx.fillStyle = 'rgba(141,240,176,.5)'; for (let i = 0; i < 8; i++) ctx.fillRect(240, 190 + i * 40, 300 + (i * 97) % 400, 6); }
     ctx.fillStyle = 'rgba(233,208,122,.85)'; ctx.font = '600 22px monospace';

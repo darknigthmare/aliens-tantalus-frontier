@@ -14,7 +14,9 @@ export const LEGACY_CAMPAIGNS_V131 = Object.freeze([
     summary: 'Nage libre, oxygène, pression, trois modes HADAL, MANTA et prédateur aquatique adapté.',
     limitations: 'Scaphandre HADAL et coque MANTA-6 illustrés ; nage dédiée et animations aquatiques incomplètes. Boss adapté du Ceto Reef Predator existant ; arsenal, dix castes, second boss et actes ultérieurs non produits.' },
   { id: 'special-broodstorm-v131', kind: 'broodstorm', specialOperationId: 'broodstorm', name: 'BROODSTORM · CORRIDOR AÉRIEN',
-    worldId: 'world-01-acheron-lv-426', year: 2204, mode: 'AÉRIEN', templateId: 'planet-exterior',
+    // V188 spec 011 (bible §14.5, Q15): the chapter belongs to « La Saison des Reines », Arc 2, on Echo Basin (step 2.3).
+    // Additive move, as for Abysse Noir: a deployment started on Acheron keeps its id (`legacyWorldIdsV188`).
+    worldId: 'world-27-echo-basin', legacyWorldIdsV188: Object.freeze(['world-01-acheron-lv-426']), year: 2204, mode: 'AÉRIEN', templateId: 'planet-exterior',
     objective: 'Bombarder les nids, protéger le transport et vaincre la Reine ailée.',
     summary: 'Vol libre de Cheyenne, aile alliée, escorte physique, bombes et directeur de vagues.',
     limitations: 'Reine ailée illustrée pour Broodstorm (adaptation aérienne). Cheyenne existant réutilisé ; atterrissage de la Reine, modularité complète et autres actes non produits.' }

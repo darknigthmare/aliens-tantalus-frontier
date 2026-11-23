@@ -533,10 +533,14 @@ export function simulateGalaxy(save, options = {}) {
     return state && state.colonyLevel > 0 && state.stability >= 70 && state.infestation <= 35;
   }).length;
   const elapsedRoutes = Math.floor(Math.max(0, absoluteHours(endClock) - 24) / 72);
-  const targetUnlocked = Math.min(WORLDS.length, 8 + completedRoutes + Math.floor(stableColonies / 2) + elapsedRoutes);
+  // V188 spec 011: a hidden world (TR-0, `hiddenUntilV188`) is never opened by the generic routes;
+  // once its campaign has revealed it, it does not count towards the generic target either.
+  const routeWorlds = WORLDS.filter((world) => !world.hiddenUntilV188);
+  const revealedHidden = WORLDS.filter((world) => world.hiddenUntilV188 && unlockedBefore.has(world.id)).length;
+  const targetUnlocked = Math.min(routeWorlds.length, 8 + completedRoutes + Math.floor(stableColonies / 2) + elapsedRoutes) + revealedHidden;
   const unlocks = [];
   const unlocked = new Set(unlockedBefore);
-  for (const world of WORLDS) {
+  for (const world of routeWorlds) {
     if (unlocked.size >= targetUnlocked) break;
     if (unlocked.has(world.id)) continue;
     unlocked.add(world.id);

@@ -9,6 +9,7 @@
 import { markStationIntroHeardV188, STATION_WORLD_ID_V188 } from './station-asphodele-v188.js';
 import { CREW_QUESTS_TANTALUS_V188 } from './crew-quests-tantalus-v188.js';
 import { addColonyPopulationV188, advanceColonySiteV188 } from './colony-missions-v188.js';
+import { QUEENS_CREW_QUESTS_V188 } from './queens-crew-quests-v188.js';
 
 const t = (fr, en) => Object.freeze({ fr, en });
 const has = (list, id) => Array.isArray(list) && list.includes(id);
@@ -118,7 +119,9 @@ export const CREW_QUESTS_V188 = Object.freeze([
   })
 ]);
 // V188 colony and crew lot: the twelve other quests of §8.1 (crew-quests-tantalus-v188.js), same rules.
-export const CREW_QUESTS_ALL_V188 = Object.freeze([...CREW_QUESTS_V188, ...CREW_QUESTS_TANTALUS_V188]);
+// V188 spec 011 (bible §14.9): the three quests tied to « La Saison des Reines » (queens-crew-quests-v188.js),
+// appended last: a second quest for Doyle, Orlov and Harlow, offered after the campaign's Arc 2.
+export const CREW_QUESTS_ALL_V188 = Object.freeze([...CREW_QUESTS_V188, ...CREW_QUESTS_TANTALUS_V188, ...QUEENS_CREW_QUESTS_V188]);
 export const CREW_QUEST_IDS_V188 = Object.freeze(CREW_QUESTS_ALL_V188.map(quest => quest.id));
 const QUEST = new Map(CREW_QUESTS_ALL_V188.map(quest => [quest.id, quest]));
 export const getCrewQuestV188 = id => QUEST.get(id) || null;
@@ -268,8 +271,12 @@ export function crewQuestNotesV188(save, language = 'fr') {
   const lang = language === 'en' ? 'en' : 'fr', notes = [];
   if (stateOf(save, 'ship-kwan')?.stage === 'done') notes.push(lang === 'en' ? 'Interlude clue (Kwan): a preservation unit runs at night on the quarantine deck.' : 'Indice de l’Interlude (Kwan) : un caisson de conservation tourne la nuit au pont de quarantaine.');
   if (stateOf(save, 'ship-echo-a')?.stage === 'done') notes.push(lang === 'en' ? 'ECHO-A will speak in the epilogue.' : 'ECHO-A parlera à l’épilogue.');
+  // A finished quest can carry its own note (`doneNote`, queens-crew-quests-v188.js).
+  for (const quest of CREW_QUESTS_ALL_V188) if (quest.doneNote && stateOf(save, quest.id)?.stage === 'done') notes.push(quest.doneNote[lang]);
   return notes;
 }
+/** True when a quest is finished (the bestiary of the adaptations opens with `ship-q-harlow`). */
+export const crewQuestDoneV188 = (save, id) => stateOf(save, id)?.stage === 'done';
 
 /** Briefing-table list: every quest with its state and where to find its giver. */
 export function crewQuestsSnapshotV188(save, language = 'fr') {

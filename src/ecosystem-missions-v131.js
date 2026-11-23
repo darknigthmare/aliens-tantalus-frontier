@@ -22,8 +22,14 @@ const center = actor => ({ x: actor.x + actor.w / 2, y: actor.y + actor.h });
 const near = (actor, prop, radius = 86) => actor && prop && Math.hypot(center(actor).x - prop.x, center(actor).y - prop.floorY) <= radius;
 const overlap = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
 const own = actor => Boolean(actor?.ecosystemActorV131);
+// V188 spec 011 (bible §14.6, Q15; owner decision of 2026-11-23): the two Red Hive chapters belong to
+// « La Saison des Reines », Arc 3, on TR-0 (`world-65-tr-0`). Additive move: a deployment started on
+// Cocyte keeps its id (`legacyWorldIdsV188`, operation-receipts-v131.js). Pangaea stays where it was.
+const TR0_CHAPTER_OPERATIONS_V188 = Object.freeze(['queen-mother-song', 'hive-world']);
 const campaign = (id, operationId, name, summary, objective) => Object.freeze({ id, specialOperationId: operationId,
-  name, summary, objective, mode: 'STORY', worldId: 'world-05-lethe', year: 2204, canon: 'project-continuity',
+  name, summary, objective, mode: 'STORY', ...(TR0_CHAPTER_OPERATIONS_V188.includes(operationId)
+    ? { worldId: 'world-65-tr-0', legacyWorldIdsV188: Object.freeze(['world-05-lethe']) } : { worldId: 'world-05-lethe' }),
+  year: 2204, canon: 'project-continuity',
   source: 'Tantalus Special Operations', routes: 2, templateId: 'planet-exterior',
   description: operationId === 'queen-mother-song'
     ? 'Adaptation jouable originale : Reine-Mère rouge, gardes et trois Chœurs locaux illustrés et animés. Le casting royal complet et les actes étendus restent à produire.'

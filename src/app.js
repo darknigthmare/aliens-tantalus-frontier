@@ -1,14 +1,15 @@
 import { colonySnapshotV188, investColonySiteV188, applyColonyOperationResultV188, COLONY_TIERS_V188, colonyRescuedV188 } from './colony-reconstruction-v188.js';
 import { filterUnlockedCampaignsV188, stationLockReasonV188, stationLockTextV188, stationSnapshotV188, cassiusChoicePendingV188, chooseCassiusV188, CASSIUS_CHOICES_V188, CASSIUS_DIALOG_V188, stationReturnSceneDueV188, markStationSceneSeenV188, STATION_SCENES_V188 } from './station-asphodele-v188.js';
-import { crewQuestActionsV188, acceptCrewQuestV188, crewQuestStepV188, answerCrewQuestStepV188, turnInCrewQuestV188, applyCrewQuestOperationResultV188, crewQuestsSnapshotV188, getCrewQuestV188, davidMemoryRestoredV188, crewQuestEpilogueLineV188, crewQuestNotesV188 } from './crew-quests-v188.js';
+import { crewQuestActionsV188, acceptCrewQuestV188, crewQuestStepV188, answerCrewQuestStepV188, turnInCrewQuestV188, applyCrewQuestOperationResultV188, crewQuestsSnapshotV188, getCrewQuestV188, davidMemoryRestoredV188, crewQuestEpilogueLineV188, crewQuestNotesV188, crewQuestDoneV188 } from './crew-quests-v188.js';
 import { jumpRouteTextV188, applyJumpTravelTimeV188, jumpArrivalTextV188 } from './galaxy-travel-v188.js';
 import { deliverTravelMessagesV188, travelMessagesListV188, travelArrivalNoticeV188, TRAVEL_MESSAGES_TEXT_V188, pushCampaignTravelMessageV188 } from './travel-messages-v188.js';
-// V188 spec 011: « La Saison des Reines », first side campaign (call, travel, Arc 1, Rask choice, debrief).
+// V188 spec 011: « La Saison des Reines », first side campaign (call, travel, the three arcs, choices, debriefs, the seized egg's crisis).
 import { filterQueensCampaignsV188, queensLockReasonV188, queensLockTextV188, applyQueensOperationResultV188, queensCallDueV188, receiveQueensCallV188,
   queensCallPendingV188, acceptQueensCallV188, queensCallTextV188, QUEENS_CALL_DIALOG_V188, QUEENS_CALL_CINEMATIC_V188, recordQueensArrivalV188,
-  queensReturnSceneDueV188, markQueensSceneSeenV188, QUEENS_SCENES_V188, QUEENS_SCENE_CINEMATICS_V188, queensRaskChoicePendingV188, chooseQueensRaskEggV188,
-  QUEENS_RASK_DIALOG_V188, QUEENS_RASK_CHOICES_V188, queensArc1DebriefDueV188, queensArc1DebriefV188, queensSnapshotV188, queensEncounterCatalogV188,
-  queensCampaignNameV188, QUEENS_NACRE_WORLD_ID_V188 } from './side-campaign-queens-v188.js';
+  queensReturnSceneDueV188, markQueensSceneSeenV188, queensSceneV188, QUEENS_SCENE_CINEMATICS_V188, queensPendingChoiceV188, chooseQueensV188,
+  queensDebriefDueV188, queensDebriefV188, queensSnapshotV188, queensEncounterCatalogV188, queensCampaignNameV188, QUEENS_NACRE_WORLD_ID_V188,
+  QUEENS_ARCS_V188, syncQueensRoutesV188, queensWorldHiddenV188, queensEggCrisisDueV188, startQueensEggCrisisV188, resolveQueensEggCrisisV188,
+  reconcileQueensEggCrisisV188, queensCampaignUpkeepDueV188, QUEENS_EGG_CRISIS_NOTICE_V188 } from './side-campaign-queens-v188.js';
 import { QueensSceneLoaderV188 } from './queens-cinematics-v188.js';
 import { filterColonyCampaignsV188, colonyLockReasonV188, colonyLockTextV188, applyColonyMissionResultV188, applyColonyC5LaunchV188, colonyMissionsSnapshotV188,
   colonyReturnSceneDueV188, markColonySceneSeenV188, COLONY_SCENES_V188, colonyC4DecisionPendingV188, colonyGrueDecisionPendingV188, colonyC4OptionsV188,
@@ -1607,16 +1608,20 @@ function renderStationFrontV188() {
   host.replaceChildren(...parts);
 }
 // V188 spec 011 (bible §14): « La Saison des Reines » at the briefing table.
-function queensJumpFuelV188() {
-  const world = WORLDS.find(entry => entry.id === QUEENS_NACRE_WORLD_ID_V188);
+function queensJumpFuelV188(worldId = QUEENS_NACRE_WORLD_ID_V188) {
+  const world = WORLDS.find(entry => entry.id === worldId);
   return world ? getJumpReadinessV115(saveSystem.data, world, WORLDS).fuel : null;
 }
 function renderQueensPanelV188() {
   const host = byId('side-campaign-queens-v188'); if (!host) return;
-  const lang = document.documentElement.lang === 'en' ? 'en' : 'fr', snapshot = queensSnapshotV188(saveSystem.data, lang, { fuel: queensJumpFuelV188() });
+  const lang = document.documentElement.lang === 'en' ? 'en' : 'fr';
+  const snapshot = queensSnapshotV188(saveSystem.data, lang, { fuel: queensJumpFuelV188(),
+    fuelByWorld: Object.fromEntries(QUEENS_ARCS_V188.map(arc => [arc.worldId, queensJumpFuelV188(arc.worldId)])),
+    bestiaryUnlocked: crewQuestDoneV188(saveSystem.data, 'ship-q-harlow') });
   const title = document.createElement('h4'); title.textContent = `${snapshot.heading} · ${snapshot.statusLabel.toUpperCase()}`;
   const parts = [title], hint = text => { const line = document.createElement('p'); line.className = 'hint'; line.textContent = text; parts.push(line); return line; };
   host.dataset.queensStatusV188 = snapshot.status;
+  host.dataset.queensArcV188 = String(snapshot.currentArc);
   if (snapshot.status === 'locked') { hint(snapshot.hint); host.replaceChildren(...parts); return; }
   if (snapshot.callPending) {
     hint(lang === 'en' ? 'A call from Nacre-7 is waiting for an answer.' : 'Un appel de Nacre-7 attend une réponse.');
@@ -1624,24 +1629,35 @@ function renderQueensPanelV188() {
     button.dataset.queensCallV188 = 'open'; button.addEventListener('click', () => openQueensCallDialogV188()); parts.push(button);
     host.replaceChildren(...parts); return;
   }
-  const arc = document.createElement('p'); arc.className = 'eyebrow'; arc.textContent = snapshot.arcTitle; parts.push(arc);
-  const list = document.createElement('ul');
-  for (const step of snapshot.steps) {
-    const item = document.createElement('li'); item.dataset.held = String(step.done); item.dataset.queensStepV188 = step.id;
-    item.textContent = `${step.done ? '■' : step.id === snapshot.nextId ? '▣' : '□'} ${step.label} · ${step.name}`; list.append(item);
+  // One block per arc that has opened: a finished arc keeps its title only, the current one shows its steps.
+  for (const view of snapshot.arcs.filter(entry => entry.open)) {
+    const arc = document.createElement('p'); arc.className = 'eyebrow'; arc.dataset.queensArcTitleV188 = String(view.arc);
+    arc.textContent = view.complete && view.arc !== snapshot.currentArc ? `■ ${view.title} — ${snapshot.doneLabel}` : view.title; parts.push(arc);
+    if (view.arc !== snapshot.currentArc) continue;
+    const list = document.createElement('ul');
+    for (const step of view.steps) {
+      const item = document.createElement('li'); item.dataset.held = String(step.done); item.dataset.queensStepV188 = step.id;
+      item.textContent = `${step.done ? '■' : step.id === view.nextId ? '▣' : '□'} ${step.label} · ${step.name}`; list.append(item);
+    }
+    parts.push(list);
+    const sides = document.createElement('ul');
+    for (const step of view.sides) {
+      const item = document.createElement('li'); item.dataset.held = String(step.done);
+      item.textContent = `${step.done ? '■' : '□'} ${snapshot.sideLabel} · ${step.name}`; sides.append(item);
+    }
+    parts.push(sides);
+    if (view.contracts.some(entry => entry.count)) hint(`${snapshot.contractsLabel} : ${view.contracts.filter(entry => entry.count).map(entry => `${entry.name} ×${entry.count}`).join(', ')}`);
+    if (view.orbit) hint(view.orbit).dataset.queensOrbitV188 = 'true';
+    if (view.blockedHint) hint(view.blockedHint);
   }
-  parts.push(list);
-  const sides = document.createElement('ul');
-  for (const step of snapshot.sides) {
-    const item = document.createElement('li'); item.dataset.held = String(step.done);
-    item.textContent = `${step.done ? '■' : '□'} ${snapshot.sideLabel} · ${step.name}`; sides.append(item);
-  }
-  parts.push(sides);
-  if (snapshot.contracts.some(entry => entry.count)) hint(`${snapshot.contractsLabel} : ${snapshot.contracts.filter(entry => entry.count).map(entry => `${entry.name} ×${entry.count}`).join(', ')}`);
-  if (snapshot.orbit) hint(snapshot.orbit).dataset.queensOrbitV188 = 'true';
-  if (snapshot.blockedHint) hint(snapshot.blockedHint);
-  if (snapshot.choice) hint(`RASK · ${snapshot.choice}`);
+  for (const note of snapshot.notes) hint(note).dataset.queensNoteV188 = 'true';
   for (const later of snapshot.later) hint(later);
+  if (snapshot.bestiary.length) {
+    const heading = document.createElement('p'); heading.className = 'eyebrow'; heading.textContent = snapshot.bestiaryLabel; parts.push(heading);
+    const list = document.createElement('ul'); list.dataset.queensBestiaryV188 = 'true';
+    for (const entry of snapshot.bestiary) { const item = document.createElement('li'); item.textContent = `${entry.name} — ${entry.text}`; list.append(item); }
+    parts.push(list);
+  }
   host.replaceChildren(...parts);
 }
 const queensSceneLoaderV188 = new QueensSceneLoaderV188();
@@ -1662,7 +1678,7 @@ function openQueensCallDialogV188() {
   const paragraph = scene?.dialog?.querySelector('p'); if (paragraph) paragraph.style.whiteSpace = 'pre-line';
   return true;
 }
-/** Briefing table: true when the campaign took the view (call, cinematic, return scene, Rask choice or debrief). */
+/** Briefing table: true when the campaign took the view (call, cinematic, return scene, choice or debrief). */
 function queensOnViewV188() {
   if (queensSceneOpenV188 || document.querySelector('.content-scene-v188') || cinematicPlayerV188.active) return true;
   const lang = document.documentElement.lang === 'en' ? 'en' : 'fr';
@@ -1678,36 +1694,49 @@ function queensOnViewV188() {
     void playStoryCinematicV188(QUEENS_CALL_CINEMATIC_V188).then(() => { queensSceneOpenV188 = false; if (['operations', 'command'].includes(activeView)) openQueensCallDialogV188(); });
     return true;
   }
+  // Routes of the arcs already open (a save made before Arc 2 and Arc 3 existed), and the seized egg's
+  // crisis: started here when the jump could not start it, kept coherent with the hub after a reload.
+  if (queensCampaignUpkeepDueV188(saveSystem.data)) commitCandidateV188(candidate => {
+    const routes = syncQueensRoutesV188(candidate);
+    const crisis = queensEggCrisisDueV188(candidate) ? Boolean(startQueensEggCrisisV188(candidate, createForcedHubCrisisV188))
+      : Boolean(reconcileQueensEggCrisisV188(candidate, createForcedHubCrisisV188));
+    return routes || crisis;
+  });
   const sceneId = queensReturnSceneDueV188(saveSystem.data);
   if (sceneId) {
     if (!commitCandidateV188(candidate => markQueensSceneSeenV188(candidate, sceneId))) return true;
-    const scene = QUEENS_SCENES_V188[sceneId], cinematic = QUEENS_SCENE_CINEMATICS_V188[sceneId];
+    const scene = queensSceneV188(saveSystem.data, sceneId, lang), cinematic = QUEENS_SCENE_CINEMATICS_V188[sceneId];
     queensSceneOpenV188 = true;
-    const open = () => openContentSceneDialogV188({ language: lang, loader: queensSceneLoaderV188, slot: scene.slot, title: scene.title[lang], text: scene.text[lang],
+    const open = () => openContentSceneDialogV188({ language: lang, loader: queensSceneLoaderV188, slot: scene.slot, title: scene.title, text: scene.text,
       options: [{ id: 'continue', label: lang === 'en' ? 'CONTINUE' : 'CONTINUER' }], onChoose: () => null,
       onClose: () => { queensSceneOpenV188 = false; renderAll(); queueMicrotask(markStoryDebriefOnViewV188); } });
     if (cinematic) void playStoryCinematicV188(cinematic).then(open); else open();
     return true;
   }
-  if (queensRaskChoicePendingV188(saveSystem.data)) {
+  // §14.8: the royal egg of Rask (after 1.5), the live Praetorian (after « Un spécimen pour Inez »).
+  const pendingChoice = queensPendingChoiceV188(saveSystem.data);
+  if (pendingChoice) {
+    const dialog = pendingChoice.dialog;
     queensSceneOpenV188 = true;
-    openContentSceneDialogV188({ language: lang, loader: queensSceneLoaderV188, slot: QUEENS_RASK_DIALOG_V188.slot, title: QUEENS_RASK_DIALOG_V188.title[lang],
-      text: QUEENS_RASK_DIALOG_V188.text[lang], options: QUEENS_RASK_CHOICES_V188.map(id => ({ id, label: QUEENS_RASK_DIALOG_V188.options[id][lang] })),
+    openContentSceneDialogV188({ language: lang, loader: queensSceneLoaderV188, slot: dialog.slot, title: dialog.title[lang],
+      text: dialog.text[lang], options: pendingChoice.options.map(id => ({ id, label: dialog.options[id][lang] })),
       onChoose: (choice) => {
         if (choice === 'continue') return null;
-        return commitCandidateV188(candidate => chooseQueensRaskEggV188(candidate, choice) ? true : false)
-          ? { text: QUEENS_RASK_DIALOG_V188.results[choice][lang], options: [{ id: 'continue', label: lang === 'en' ? 'CONTINUE' : 'CONTINUER' }] } : null;
+        return commitCandidateV188(candidate => chooseQueensV188(candidate, pendingChoice.id, choice) ? true : false)
+          ? { text: dialog.results[choice][lang], options: [{ id: 'continue', label: lang === 'en' ? 'CONTINUE' : 'CONTINUER' }] } : null;
       },
       onClose: () => { queensSceneOpenV188 = false; renderAll(); queueMicrotask(markStoryDebriefOnViewV188); } });
     return true;
   }
-  if (queensArc1DebriefDueV188(saveSystem.data)) {
-    if (!commitCandidateV188(candidate => markQueensSceneSeenV188(candidate, 'arc1-debrief'))) return true;
-    const debrief = queensArc1DebriefV188(saveSystem.data, lang);
+  // Debriefs: Arc 1, Arc 2, then the campaign's single ending nuanced by the choices.
+  const debriefId = queensDebriefDueV188(saveSystem.data);
+  if (debriefId) {
+    if (!commitCandidateV188(candidate => markQueensSceneSeenV188(candidate, debriefId))) return true;
+    const debrief = queensDebriefV188(saveSystem.data, debriefId, lang);
     queensSceneOpenV188 = true;
     const scene = openContentSceneDialogV188({ language: lang, loader: queensSceneLoaderV188, slot: debrief.slot, title: debrief.title, text: debrief.text,
       options: [{ id: 'continue', label: lang === 'en' ? 'CONTINUE' : 'CONTINUER' }], onChoose: () => null,
-      onClose: () => { queensSceneOpenV188 = false; renderAll(); } });
+      onClose: () => { queensSceneOpenV188 = false; renderAll(); queueMicrotask(markStoryDebriefOnViewV188); } });
     const paragraph = scene?.dialog?.querySelector('p'); if (paragraph) paragraph.style.whiteSpace = 'pre-line';
     return true;
   }
@@ -2390,7 +2419,8 @@ function renderWorldDetail(world) {
 
 function renderGalaxy() {
   const term = byId('world-search').value.trim().toLowerCase();
-  const worlds = WORLDS.filter((world) => JSON.stringify(world).toLowerCase().includes(term));
+  // V188 spec 011: a hidden world (TR-0) is not on the map, nor found by the search, until its campaign reveals it.
+  const worlds = WORLDS.filter((world) => !queensWorldHiddenV188(saveSystem.data, world) && JSON.stringify(world).toLowerCase().includes(term));
   // V188: desktop keeps the spiral (left/top); a phone reads --cell-col/--cell-row
   // and the short code. The full name stays in the button for screen readers.
   const phoneGrid = snapWorldsToPhoneGridV188(worlds.map(world => ({ id: world.id, ...worldPosition(WORLDS.indexOf(world)) })));
@@ -2471,9 +2501,12 @@ function tickGalaxyJumpV116() {
       // V188 colony and crew lot (bible §13.2): the messages that followed the Tantalus arrive late, once per jump.
       const lateV188 = deliverTravelMessagesV188(saveSystem.data, settlement, { relayRoomReady: asphodeleRelayReadyV188(saveSystem.data) });
       if (lateV188.length) settlement.result = `${settlement.result} ${travelArrivalNoticeV188(lateV188.length, document.documentElement.lang)}`;
-      // V188 spec 011: the first arrival at Nacre-7 after the call is accepted, in the same transaction.
+      // V188 spec 011: the first arrival in the orbit of an open arc (Nacre-7, Echo Basin, TR-0), in the same transaction.
       const queensArrivalV188 = recordQueensArrivalV188(saveSystem.data, settlement);
       if (queensArrivalV188) pushCampaignTravelMessageV188(saveSystem.data, queensArrivalV188);
+      // The seized royal egg hatches when the crew wakes above TR-0: the hub's own quarantine crisis (same transaction).
+      if (queensEggCrisisDueV188(saveSystem.data) && startQueensEggCrisisV188(saveSystem.data, createForcedHubCrisisV188))
+        settlement.result = `${settlement.result} ${QUEENS_EGG_CRISIS_NOTICE_V188[document.documentElement.lang === 'en' ? 'en' : 'fr']}`;
       return settlement;
     }, undefined, { duringTransitV116: true });
     if (!result && ownsTimelineV84(owner)) { failedJumpOwnerV116 = owner; renderGalaxyJumpV116(); }
@@ -4142,7 +4175,7 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   if (colonyMissionV188?.population) toast(document.documentElement.lang === 'en' ? `Port-Méridien: +${colonyMissionV188.population} people for the sites.` : `Port-Méridien : +${colonyMissionV188.population} personnes pour les chantiers.`);
   if (colonyChangeV188?.damaged) toast(document.documentElement.lang === 'en' ? `Port-Méridien: a site lost one functioning level (${colonySiteV188(colonyChangeV188.damaged)}).` : `Port-Méridien : un chantier perd un niveau de fonctionnement (${colonySiteV188(colonyChangeV188.damaged)}).`);
   if (asphodeleContractV188) toast(asphodeleContractEffectTextV188(candidate, asphodeleContractV188, document.documentElement.lang === 'en' ? 'en' : 'fr'));
-  if (queensChangeV188?.kind === 'contract') toast(document.documentElement.lang === 'en' ? `Nacre-7: local contract done (${queensCampaignNameV188(operation.campaignId, 'en')} ×${queensChangeV188.count}).` : `Nacre-7 : contrat local accompli (${queensCampaignNameV188(operation.campaignId, 'fr')} ×${queensChangeV188.count}).`);
+  if (queensChangeV188?.kind === 'contract') toast(document.documentElement.lang === 'en' ? `${world?.name || 'Nacre-7'}: local contract done (${queensCampaignNameV188(operation.campaignId, 'en')} ×${queensChangeV188.count}).` : `${world?.name || 'Nacre-7'} : contrat local accompli (${queensCampaignNameV188(operation.campaignId, 'fr')} ×${queensChangeV188.count}).`);
   if (act5ChangeV188?.kind === 'bridge-default') toast(ACT5_BRIDGE_TEXT_V188.results.timeout[document.documentElement.lang === 'en' ? 'en' : 'fr']);
   for (const change of questChangeV188 || []) {
     const questToastV188 = getCrewQuestV188(change.id)?.toastText?.[document.documentElement.lang === 'en' ? 'en' : 'fr'];
@@ -4887,6 +4920,11 @@ function handleHubAction(interaction) {
       renderAll();
       toast(result.outcome === 'resolved' ? 'Crise neutralisée dans le niveau.' : 'Extraction médicale : dégâts persistants appliqués.');
       if (result.outcome === 'resolved' && interludeCrisisClearedV188(saveSystem.data, interaction.crisisId)) { saveSystem.commit(); continueInterludeV188(); }
+      // V188 spec 011: the seized royal egg's crisis ends with the hub's own outcome (creature neutralised, or team extracted).
+      if (resolveQueensEggCrisisV188(saveSystem.data, result.crisis?.id || interaction.crisisId, result.outcome)) {
+        saveSystem.commit(); renderAll();
+        toast(document.documentElement.lang === 'en' ? 'Quarantine deck secured. Report to the briefing table.' : 'Pont de quarantaine sécurisé. Rendez-vous à la table de briefing.');
+      }
     }
     return;
   }

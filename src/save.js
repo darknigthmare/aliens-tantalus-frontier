@@ -1124,7 +1124,7 @@ export function executeStrategicAction(save, actionId) {
   const incident = roll <= action.risk;
   let result = '';
   if (action.id === 'frontier-recon') {
-    const nextWorld = WORLDS.find((world) => !save.galaxy.unlockedWorldIds.includes(world.id));
+    const nextWorld = WORLDS.find((world) => !world.hiddenUntilV188 && !save.galaxy.unlockedWorldIds.includes(world.id));
     const research = incident ? 4 : 9;
     changeStrategicValue(save, 'research', research);
     save.hub.systems.research = clamp(save.hub.systems.research + (incident ? 3 : 7));
