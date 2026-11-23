@@ -17,6 +17,7 @@
  * Heavy Pulse Rifle plate by modulo, which would lend that art to another weapon.
  */
 import { PROVISIONAL_PLAQUE_ADMISSION_V188 } from './weapon-provisional-plaque-v188.js';
+import { FRANCHISE_LOT_C_ROWS_V188, FRANCHISE_LOT_C_RESEARCH_V188 } from './weapon-catalog-franchise-c-v188.js';
 const freeze = value => {
   if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value;
   for (const child of Object.values(value)) freeze(child);
@@ -51,6 +52,8 @@ export const WEAPON_RESEARCH_SUPPLEMENT_V188 = freeze([
   ['proposed-v188-alien-earth-kel-tec-ksg', 'Kel-Tec KSG (Morrow)', 'Alien: Earth (2025)', URL.earth],
   ['proposed-v188-alien-earth-steyr-aug', 'Steyr AUG', 'Alien: Earth (2025)', URL.earthHook],
   ['proposed-v188-alien-earth-kriss-vector', 'KRISS Vector', 'Alien: Earth (2025)', URL.earthHook]
+  // Lot C (src/weapon-catalog-franchise-c-v188.js): rows found while reading the lists of the remaining works.
+  , ...FRANCHISE_LOT_C_RESEARCH_V188
 ].map(([id, name, work, sourceUrl]) => ({ id, name, work, sourceUrl, priority: 'P1', admission: 'RESEARCH_ONLY', canonExact: false,
   evidence: 'recorded-with-source-v188' })));
 
@@ -355,7 +358,7 @@ const common = {
   visualStatus: 'canvas-placeholder-native-plaque-required', referenceStatus: 'SOURCE_IDENTITY_NO_PLAQUE',
   plaqueStatus: 'provisional-drawn', admissionV188: PROVISIONAL_PLAQUE_ADMISSION_V188
 };
-export const WEAPON_CATALOG_FRANCHISE_V188 = freeze(ROWS.map(row => ({
+const toWeapon = (row, lot) => ({
   ...common,
   id: 'weapon-' + row.n + '-' + row.slug, name: row.name, canonicalName: row.canonical,
   family: row.family, source: row.source, damage: row.stats[0], fireRate: row.stats[1], magazine: row.feed[1],
@@ -363,19 +366,29 @@ export const WEAPON_CATALOG_FRANCHISE_V188 = freeze(ROWS.map(row => ({
   sourceWork: row.work, appearances: [row.work], researchId: row.research, sourceUrl: row.url, sourceRefs: row.refs,
   identityEvidence: row.evidence, identityVerified: row.verified, sourceMechanism: row.mech, ammunitionV188: row.ammo,
   feedV188: { kind: row.feed[0], capacity: row.feed[1], capacitySource: row.feed[2], capacityDocumented: Boolean(row.feed[2]), note: row.feed[3] },
+  lotV188: lot,
+  // Lot C: a thrown device (grenade, incendiary, mine) is carried by the V130 thrown action — radius, fuse and status are [PROPOSÉ].
+  ...(row.device ? { thrownDeviceV188: { radius: row.device.radius, fuse: row.device.fuse, status: row.device.status } } : {}),
   description: row.fr
-})));
+});
+/** Lot B (ids 197–235): unchanged. */
+export const WEAPON_CATALOG_FRANCHISE_V188 = freeze(ROWS.map(row => toWeapon(row, 'B')));
 export const WEAPON_FRANCHISE_IDS_V188 = Object.freeze(WEAPON_CATALOG_FRANCHISE_V188.map(weapon => weapon.id));
+/** Lot C (ids 236–301, 256 and 296 skipped): the remaining works, appended after lot B. */
+export const WEAPON_CATALOG_FRANCHISE_LOT_C_V188 = freeze(FRANCHISE_LOT_C_ROWS_V188.map(row => toWeapon(row, 'C')));
+export const WEAPON_FRANCHISE_LOT_C_IDS_V188 = Object.freeze(WEAPON_CATALOG_FRANCHISE_LOT_C_V188.map(weapon => weapon.id));
 
-/** Fidelity ledger of the lot: one row per added weapon, three separated statuses. */
-export const WEAPON_FRANCHISE_LEDGER_V188 = freeze(ROWS.map(row => ({
-  weaponId: 'weapon-' + row.n + '-' + row.slug, name: row.name, work: row.work, researchId: row.research,
+/** Fidelity ledger of lots B and C: one row per added weapon, three separated statuses (`lot` tells them apart). */
+const toLedger = (row, lot) => ({
+  weaponId: 'weapon-' + row.n + '-' + row.slug, name: row.name, work: row.work, researchId: row.research, lot,
   sourceUrl: row.url, sourceRefs: row.refs, evidence: row.evidence,
   documented: [...row.documented, ...(row.feed[2] ? ['capacité ' + row.feed[1] + ' (' + row.feed[2] + ')'] : [])],
   adapted: ['dégâts ' + row.stats[0], 'cadence ' + row.stats[1] + '/s', 'rechargement ' + row.stats[2] + ' s',
-    ...(row.feed[2] ? [] : ['capacité ' + row.feed[1]]), 'alimentation de jeu « ' + row.feed[0] + ' »'].map(text => text + ' ' + P),
+    ...(row.feed[2] ? [] : ['capacité ' + row.feed[1]]), 'alimentation de jeu « ' + row.feed[0] + ' »',
+    ...(row.device ? ['rayon ' + row.device.radius + ' px', 'délai ' + row.device.fuse + ' s', 'effet « ' + (row.device.status || 'souffle') + ' »'] : [])].map(text => text + ' ' + P),
   toDefine: row.toDefine, feedNote: row.feed[3],
   canonExact: false, visualFidelity1to1: false, isPurchasable: true, plaque: 'provisional-drawn'
-})));
+});
+export const WEAPON_FRANCHISE_LEDGER_V188 = freeze([...ROWS.map(row => toLedger(row, 'B')), ...FRANCHISE_LOT_C_ROWS_V188.map(row => toLedger(row, 'C'))]);
 /** English descriptions reviewed with the French ones (catalogue key = French text). */
-export const WEAPON_FRANCHISE_DESCRIPTIONS_EN_V188 = freeze(Object.fromEntries(ROWS.map(row => [row.fr, row.en])));
+export const WEAPON_FRANCHISE_DESCRIPTIONS_EN_V188 = freeze(Object.fromEntries([...ROWS, ...FRANCHISE_LOT_C_ROWS_V188].map(row => [row.fr, row.en])));

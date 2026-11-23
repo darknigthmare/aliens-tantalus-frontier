@@ -27,6 +27,10 @@ export const WEAPON_ACTION_PROFILES_V130 = Object.freeze(WEAPONS.flatMap(weapon 
   let action;
   if (name === 'M40 HEDP Grenade') action = { kind: 'grenade', resource: 'grenades', cooldown: .75,
     size: 10, speed: 380, lift: 160, gravity: 900, fuse: 1.6, radius: 150 };
+  // V188 lot C: a catalogue row that declares a thrown device (exact field set by the franchise rows only) is
+  // carried by the same thrown action; radius and fuse are that row's own [PROPOSÉ] values.
+  else if (weapon.thrownDeviceV188 && weapon.sourceMechanism === 'thrown-device-v188') action = { kind: 'grenade', resource: 'grenades', cooldown: .75,
+    size: 10, speed: 380, lift: 160, gravity: 900, fuse: weapon.thrownDeviceV188.fuse, radius: weapon.thrownDeviceV188.radius };
   else if (name === 'Smart Disc') action = { kind: 'disc', resource: null, cooldown: .6,
     size: 12, speed: 460, returnSpeed: 600, outwardTime: .42, lifetime: 2.4 };
   else if (name === 'Stun Baton' || weapon.sourceMechanism === 'electric-prod-contact') action = { kind: 'stun', resource: null, cooldown: .65, range: 55, stun: 1.1 };
