@@ -168,11 +168,22 @@ export function getBioforgeTankDisplayV188(root) {
     ? { ...shown[index] } : { lineId: null, profileId: null, name: null, waiting: 0, printed: 0, state: 'empty' })));
 }
 
-export function buildBioforgeColdStorageReportV188(root) {
+/**
+ * Quest `ship-bioforge` (owner decision 2026-11-23): the protocol decided by the debate between Inez Harlow and
+ * BISHOP-9, as the laboratory shows it. Text only: the session rules, the counters and the purge are unchanged.
+ */
+export const BIOFORGE_CARE_POLICY_LINES_V188 = Object.freeze({
+  limit: Object.freeze({ report: 'PROTOCOLE HARLOW · ÉTUDE, PUIS INCINÉRATION', board: 'PROT. HARLOW · INCINÉRATION' }),
+  keep: Object.freeze({ report: 'PROTOCOLE BISHOP-9 · CONSERVATION SOUS SCELLÉS', board: 'PROT. BISHOP-9 · SOUS SCELLÉS' })
+});
+export const bioforgeCarePolicyLinesV188 = policy => BIOFORGE_CARE_POLICY_LINES_V188[policy] || null;
+
+export function buildBioforgeColdStorageReportV188(root, policy = null) {
   const records = root?.records && typeof root.records === 'object' ? Object.values(root.records) : [];
   const kept = records.filter(record => Number(record?.kills) > 0);
   const samples = kept.reduce((sum, record) => sum + Number(record.kills || 0), 0);
-  return Object.freeze({ samples, profiles: kept.length,
+  const lines = bioforgeCarePolicyLinesV188(policy);
+  return Object.freeze({ samples, profiles: kept.length, policy: lines ? policy : null, note: lines ? lines.report : null,
     text: samples ? `STOCKAGE FROID · ${samples} ÉCHANTILLON(S) · ${kept.length} PROFIL(S)` : 'STOCKAGE FROID · AUCUN ÉCHANTILLON CONSERVÉ' });
 }
 

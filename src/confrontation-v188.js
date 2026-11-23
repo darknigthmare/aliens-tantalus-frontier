@@ -19,7 +19,7 @@ import { validateConfrontationDefinitionV188, createConfrontationRunV188, normal
   confrontationWinnableV188, CONFRONTATION_GAINS_V188 } from './confrontation-state-v188.js';
 
 export * from './confrontation-state-v188.js';
-export { HALLORAN_QUAY_AUDIENCE_V188, CASSIUS_INTERROGATION_V188, CONFRONTATION_ENTRIES_V188 } from './confrontation-entries-v188.js';
+export { HALLORAN_QUAY_AUDIENCE_V188, CASSIUS_INTERROGATION_V188, BIOFORGE_CARE_DEBATE_V188, CONFRONTATION_ENTRIES_V188 } from './confrontation-entries-v188.js';
 
 const L = language => language === 'en' ? 'en' : 'fr';
 const registry = new Map();
@@ -35,10 +35,12 @@ for (const entry of CONFRONTATION_ENTRIES_V188) registerConfrontationV188(entry)
 export const getConfrontationV188 = id => registry.get(id) || null;
 export const confrontationIdsV188 = () => [...registry.keys()];
 
-/** Ids of the pieces of this audience held in the save (always read from the dossier, never granted). */
+/** Ids of the pieces of this audience held in the save (always read from the dossier, never granted),
+ * plus the entry's own arguments (`ownPieces`: readings of the ship, always at hand). */
 export function confrontationHeldIdsV188(save, id) {
   const def = getConfrontationV188(id); if (!def) return [];
-  return storyDossierV188(save).pieces.filter(piece => piece.held && def.pieces.includes(piece.id)).map(piece => piece.id);
+  const own = (def.ownPieces || []).map(piece => piece.id);
+  return [...storyDossierV188(save).pieces.filter(piece => piece.held && def.pieces.includes(piece.id) && !own.includes(piece.id)).map(piece => piece.id), ...own];
 }
 
 export function confrontationStateV188(save, id) {
@@ -83,6 +85,8 @@ export function confrontationPiecesV188(save, id, language = 'fr') {
   const def = getConfrontationV188(id); if (!def) return Object.freeze([]);
   const lang = L(language), run = confrontationStateV188(save, id), dossier = storyDossierV188(save, lang);
   return Object.freeze(def.pieces.map(pieceId => {
+    const own = (def.ownPieces || []).find(entry => entry.id === pieceId);
+    if (own) return Object.freeze({ id: pieceId, label: own.label[lang], source: 'own', held: true, spent: Boolean(run?.spent.includes(pieceId)) });
     const piece = dossier.pieces.find(entry => entry.id === pieceId);
     return Object.freeze({ id: pieceId, label: piece?.label || pieceId, source: piece?.source || null, held: Boolean(piece?.held), spent: Boolean(run?.spent.includes(pieceId)) });
   }));
@@ -102,6 +106,8 @@ export function confrontationViewV188(save, id, language = 'fr') {
   return Object.freeze({
     id, title: def.title[lang], intro: def.intro[lang], interlocutor: def.interlocutor.name[lang], role: def.interlocutor.role?.[lang] || '',
     portrait: def.interlocutor.portrait, slot: def.interlocutor.slot || null, witness: def.witness?.name?.[lang] || null,
+    witnessPortrait: def.witness?.portrait || null, witnessSlot: def.witness?.slot || null,
+    labels: def.labels ? Object.freeze({ won: def.labels.won[lang], lost: def.labels.lost[lang], pieces: def.labels.pieces[lang] }) : null,
     status: run.status, round: run.round, rounds: def.rounds.length, ground: run.ground, target: def.target,
     credibility: run.credibility, credibilityMax: def.credibility,
     citation: current ? current.citation[lang] : null, source: current ? current.source[lang] : null,

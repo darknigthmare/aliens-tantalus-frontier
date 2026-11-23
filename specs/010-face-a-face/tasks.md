@@ -13,3 +13,5 @@
 - [ ] T011 Effet de l'issue de CASSIUS sur la décision existante (Q-010-2) — en attente du propriétaire
 - [ ] T012 Art des portraits de Halloran et du cœur de CASSIUS (substituts Canvas) — ouvert
 - [ ] T013 Voix des répliques — ouvert
+- [x] T014 Troisième entrée (2026-11-23) : débat `ship-bioforge-care` de la quête « Ce qu'on garde en vie » ; extension additive du format (arguments propres `ownPieces`, portrait du témoin, libellés d'issue), entrées Halloran et CASSIUS inchangées
+- [ ] T015 Portraits de BISHOP-9 et d'Inez Harlow (substituts Canvas) — ouvert

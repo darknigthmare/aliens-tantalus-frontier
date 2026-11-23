@@ -1,7 +1,7 @@
 // V188 — dedicated levels of the Asphodèle station missions S1-S4 (bible §7.2, §7.4,
 // §42; spec 009). A layer on top of the generated `ship-interior-vertical` template the
 // four missions already use, built like the colony levels (colony-mission-levels-v188.js).
-// Ids, titles, campaign objectives, rewards, the `stationV188` save field, the access
+// Ids, titles, campaign objectives, rewards, the existing keys of the `stationV188` save field, the access
 // chain (intro → S1 → S2 → CASSIUS decision → S3 → S4), the CASSIUS decision itself
 // (`chooseCassiusV188`, taken once at the Command table after S2), the return scenes and
 // the dossier pieces are not touched: the layer only replaces the generic encounter
@@ -17,6 +17,12 @@
 // when it starts, and a resume or a retry lands there with the phase as it began (resume
 // field `stationLevelV188`); a held interaction (E) advances while held in reach, a hit
 // pauses it without resetting it.
+//
+// Owner decisions of 2026-11-23: S9-1, the docking collar of S1 is a 2.5D depth corridor (definition
+// `station-s1-docking-collar`, depth-hold-sections-v188.js) and the rest of S1 stays side view; S9-2, the
+// first successful S1 records how the salvagers were passed (`stationV188.s1Salvagers`, additive) and S4 reads
+// it (stationGrueAtDockV188); S9-5, the volunteer colonists of the save arrive at the dock at the end of the
+// hold; the template zone names give way to station names on door plates, zone line and local plan.
 //
 // Level checklist (AGENTS.md): the station ducts are sealed (no V62 traversal), and two
 // sealed frames continue the bulkheads on the upper decks — the hull seal above the cargo
@@ -37,7 +43,7 @@
 //   CASSIUS and Idris Kwan.
 import { stationLevelPlacesV188 } from './station-level-places-v188.js';
 import { drawStationLevelSlotV188, STATION_LEVEL_REUSED_PNGS_V188 } from './station-level-art-v188.js';
-import { normalizeStationV188 } from './station-asphodele-v188.js';
+import { normalizeStationV188, stationGrueAtDockV188, recordStationS1SalvagersV188 } from './station-asphodele-v188.js';
 import { asphodeleMissionLayoutV188, drawAsphodeleMissionSlotV188, drawAsphodeleHazardBandV188, ASPHODELE_MISSION_SLOT_IDS_V188 } from './asphodele-mission-dressing-v188.js';
 import { AsphodeleHubAssetLoaderV188 } from './asphodele-hub-slots-v188.js';
 import { CASSIUS_INTERROGATION_V188 } from './confrontation-entries-v188.js';
@@ -54,7 +60,12 @@ export const STATION_LEVEL_RULES_V188 = Object.freeze({
   holds: Object.freeze({ crank: 4, force: 5, reactor: 5, orders: 3, code: 3, forceAirlock: 6, burn: 2, purge: 5, valve: 3 }),
   egg: Object.freeze({ trigger: 100, opening: 1.5, damage: 22 }),
   sealSeconds: 150, holdSeconds: 60,
-  darkness: Object.freeze({ s1: .62, s1Power: .4, s3: .58, s3Lights: .2 })
+  darkness: Object.freeze({ s1: .62, s1Power: .4, s3: .58, s3Lights: .2 }),
+  // Owner decisions 2026-11-23 [PROPOSÉ]. S9-2: allied salvagers at the dock take three creatures of the hold on
+  // themselves (9 → 6, at most 3 at once instead of 4); hostile ones replace two creatures of the hold (the 2nd and
+  // the 5th arrival) with armed salvagers. S9-5: at most six colonist figures are drawn, whatever the count.
+  grue: Object.freeze({ allyHoldTotal: 6, allyMaxAlive: 3, hostileSlots: Object.freeze([1, 4]), lineAfter: 6 }),
+  volunteers: Object.freeze({ shownMax: 6, walkSeconds: 4 })
 });
 const R = STATION_LEVEL_RULES_V188;
 const SOURCES = Object.freeze({ drone: 'enemy-004-drone-big-chap', warrior: 'enemy-005-warrior', salvager: 'enemy-046-colonial-raider' });
@@ -89,6 +100,26 @@ export const STATION_LEVEL_PHASES_V188 = Object.freeze({
   ])
 });
 export const stationLevelPhaseIdsV188 = campaignId => (STATION_LEVEL_PHASES_V188[campaignId] || []).map(entry => entry.id);
+
+/**
+ * Station names of the template zones (owner decision 2026-11-23): the ship template calls them « Tube
+ * d’amarrage », « Soutes dépressurisées »… ; on Asphodèle the door plates, the zone line and the local plan
+ * read the station (station-level-places-v188.js). Zone ids are unchanged (art, saves). Names are [PROPOSÉ].
+ */
+export const STATION_ZONE_LABELS_V188 = Object.freeze({
+  default: Object.freeze({
+    'ship-docking': t('Collier d’arrimage', 'Docking collar'), 'ship-cargo': t('Anneau extérieur', 'Outer ring'),
+    'ship-engineering': t('Pont du réacteur', 'Reactor deck'), 'ship-habitation': t('Quartiers d’habitation', 'Habitation quarters'),
+    'ship-command': t('Pont de contrôle', 'Control deck'), 'ship-extraction': t('Sas extérieur', 'Outer airlock')
+  }),
+  'station-s3': Object.freeze({ 'ship-docking': t('Palier du sas 3', 'Airlock 3 landing'), 'ship-cargo': t('Laboratoire de transit', 'Transit laboratory'),
+    'ship-engineering': t('Routage d’énergie', 'Power routing'), 'ship-extraction': t('Sortie des ponts inférieurs', 'Lower decks exit') }),
+  'station-s4': Object.freeze({ 'ship-docking': t('Quai d’arrimage', 'Docking quay') })
+});
+export const stationZoneLabelV188 = (campaignId, zoneId, language = 'fr') => {
+  const entry = STATION_ZONE_LABELS_V188[campaignId]?.[zoneId] || STATION_ZONE_LABELS_V188.default[zoneId];
+  return entry ? entry[language === 'en' ? 'en' : 'fr'] : null;
+};
 
 /** The sealed frames of the upper decks (same for the four levels). Edge ids of the ship template graph. */
 export const STATION_BARRIERS_V188 = Object.freeze([
@@ -138,6 +169,14 @@ export const STATION_LEVEL_TEXT_V188 = Object.freeze({
   pressureDone: t('Station en pression. Tenir le quai : la navette de l’équipe technique s’arrime.', 'Station pressurised. Hold the dock: the technical team’s shuttle is docking.'),
   arrived: t('L’équipe technique du Tantalus est à bord. Asphodèle est reprise.', 'The Tantalus technical team is aboard. Asphodèle is retaken.'),
   arrivedGrue: t('L’équipe technique du Tantalus et les récupérateurs de Grue sont à bord. Asphodèle est reprise.', 'The Tantalus technical team and Grue’s salvagers are aboard. Asphodèle is retaken.'),
+  // Owner decision 2026-11-23 (S9-5): the volunteer colonists of Port-Méridien follow the team ({n} = the save's count).
+  arrivedVolunteers: t('L’équipe technique du Tantalus est à bord, suivie de {n} colon(s) volontaire(s) de Port-Méridien. Asphodèle est reprise.',
+    'The Tantalus technical team is aboard, followed by {n} volunteer colonist(s) from Port-Méridien. Asphodèle is retaken.'),
+  arrivedGrueVolunteers: t('L’équipe technique du Tantalus, les récupérateurs de Grue et {n} colon(s) volontaire(s) de Port-Méridien sont à bord. Asphodèle est reprise.',
+    'The Tantalus technical team, Grue’s salvagers and {n} volunteer colonist(s) from Port-Méridien are aboard. Asphodèle is retaken.'),
+  // Owner decision 2026-11-23 (S9-2): what S1 left behind.
+  grueAlly: t('Grue (radio) : « L’anneau tient parole, marines. Mes gens couvrent le quai. »', 'Grue (radio): "The ring keeps its word, marines. My people are covering the dock."'),
+  grueHostile: t('Grue (radio) : « Vous avez forcé ma cloison. Le quai, on vient le prendre. »', 'Grue (radio): "You forced my bulkhead. We are coming to take the dock."'),
   dockOpen: t('CLOISON DU QUAI MAINTENUE OUVERTE POUR L’ARRIMAGE', 'DOCK BULKHEAD HELD OPEN FOR DOCKING'),
   // Shared
   sealedFrame: t('Scellé de l’autre côté. Le chemin passe par le pont inférieur.', 'Sealed from the other side. The way goes through the lower deck.'),
@@ -178,6 +217,12 @@ export function stepStationEggV188(egg, { near = false, dt = 0 } = {}) {
   const leap = next.state === 'opening' && near && next.clock >= R.egg.opening;
   if (leap) { next.state = 'spent'; next.clock = 0; }
   return { egg: next, leap };
+}
+
+/** Applied once with the operation result (app finalize): a successful S1 records how the salvagers were passed (S9-2). */
+export function applyStationLevelResultV188(save, { success = false, campaignId = null, result = null } = {}) {
+  if (!success || campaignId !== 'station-s1' || result?.campaignId !== 'station-s1') return null;
+  return recordStationS1SalvagersV188(save, result.salvagers) ? Object.freeze({ campaignId, s1Salvagers: result.salvagers }) : null;
 }
 
 const clone = value => JSON.parse(JSON.stringify(value));
@@ -221,7 +266,10 @@ export function withStationMissionLevelsV188(Base) {
       const save = options.narrativeArchiveSave || null;
       const progress = initialProgress(campaignId, places);
       this.stationLevelV188 = { schema: 188, campaignId, places, phase: 0, progress, snapshot: null, checkpointId: null,
-        cassius: normalizeStationV188(save?.stationV188).cassius, grueAllied: save?.colonyMissionsV188?.grue === 'accept',
+        cassius: normalizeStationV188(save?.stationV188).cassius,
+        // S4 (owner decisions 2026-11-23): Grue from the S1 outcome first (stationGrueAtDockV188), the volunteers from the colony count.
+        grue: stationGrueAtDockV188(save).mode, grueAllied: stationGrueAtDockV188(save).aboard,
+        volunteers: Math.max(0, Math.floor(Number(save?.colonyMissionsV188?.population) || 0)),
         runtime: this.stationFreshRuntimeV188(), message: null, lastHitAt: -Infinity, barriers: [] };
       this.prepareStationLevelV188(campaignId, places);
       const saved = this.lastResumeResult?.applied ? options.resumeState?.stationLevelV188 : null;
@@ -251,6 +299,13 @@ export function withStationMissionLevelsV188(Base) {
       // Every bulkhead the level owns drops its template lock: the level says why it is closed.
       for (const door of Object.values(places.doors)) if (door) { door.stationTemplateLockV188 = door.lockedBy || null; door.lockedBy = null; }
       level.barriers = this.buildStationBarriersV188(places);
+      this.applyStationZoneLabelsV188(campaignId);
+      if (campaignId === 'station-s1' && places.corridor) {
+        // The collar is a depth corridor (S9-1): its lift cabin rests at deck level for the whole mission (no power; ladders remain).
+        for (const lift of this.lifts || []) if (lift.x < places.corridor.x1 && lift.x + lift.w > places.corridor.x0) {
+          Object.assign(lift, { y: places.decks.low, controlledV130: false, stateV130: 'idle', dwellV130: 0, stationParkedV188: true });
+        }
+      }
       if (campaignId === 'station-s4' && this.objective) {
         // The technical team’s shuttle docks at the quay: the extraction moves to the dock floor.
         Object.assign(this.objective, { x: places.arrival.x - 34, y: places.decks.low - 90 });
@@ -259,6 +314,15 @@ export function withStationMissionLevelsV188(Base) {
       this.stationDressingSectorV188 = { 'station-s1': 'ring', 'station-s2': 'hub', 'station-s3': 'lower', 'station-s4': 'hub' }[campaignId];
       this.stationLoaderV188 ||= new AsphodeleHubAssetLoaderV188();
       this.stationLoaderV188.preload([...ASPHODELE_MISSION_SLOT_IDS_V188, ...STATION_LEVEL_REUSED_PNGS_V188]);
+    }
+
+    /** Door plates, zone line and local plan read the station: a copy of the plan with the station names (ids, art and saves unchanged). */
+    applyStationZoneLabelsV188(campaignId) {
+      const plan = this.missionLevelRuntime;
+      if (!plan || !Array.isArray(plan.biomeZones)) return false;
+      const biomeZones = Object.freeze(plan.biomeZones.map(zone => { const label = stationZoneLabelV188(campaignId, zone.id); return label ? Object.freeze({ ...zone, label }) : zone; }));
+      this.missionLevelRuntime = Object.freeze({ ...plan, biomeZones });
+      return true;
     }
 
     /** The two sealed frames of the upper decks, as walls (they block marines, creatures and shots). */
@@ -406,7 +470,9 @@ export function withStationMissionLevelsV188(Base) {
       // A closed door or a sealed frame between the spawn and the marine: the creature could not reach them.
       const closedBetween = (a, b) => (this.doors || []).some(door => !door.open && door.y < floorY && door.y + door.h >= floorY - 4 && between(a, b, door))
         || (this.walls || []).some(wall => wall.stationBarrierV188 && wall.y < floorY && wall.y + wall.h >= floorY - 4 && between(a, b, wall));
-      return { x0, x1, supported, closedBetween };
+      // A spawn never stands inside the frame of a closed bulkhead (it would be walled in).
+      const inClosedFrame = x => (this.doors || []).some(door => !door.open && door.y < floorY && door.y + door.h >= floorY - 4 && x > door.x - 40 && x < door.x + door.w + 40);
+      return { x0, x1, supported, closedBetween, inClosedFrame };
     }
     updateStationSpawnsV188(plan) {
       const level = this.stationLevelV188, runtime = level.runtime;
@@ -418,8 +484,12 @@ export function withStationMissionLevelsV188(Base) {
       if (!deck || !marines.length) return;
       const same = marines.filter(actor => Math.abs(feet(actor) - plan.y) < 40).map(actor => ({ x: centre(actor) }));
       const reference = same.length ? same : marines.map(actor => ({ x: centre(actor) }));
-      const x = stationSpawnXV188({ marines: reference, side: plan.side, deck, offset: (runtime.spawned % 3) * 60,
-        blocked: candidate => !deck.supported(candidate) || reference.some(entry => deck.closedBetween(candidate, entry.x)) });
+      const blocked = candidate => !deck.supported(candidate) || deck.inClosedFrame(candidate) || reference.some(entry => deck.closedBetween(candidate, entry.x));
+      // The spread of a wave (0, 60, 120 px) gives way when a closed bulkhead stands in it: the creature then appears at the
+      // edge of the safe zone, on the marines' side of that bulkhead (before 2026-11-23 such a spawn was dropped, and the
+      // dock hold of S4 received two of its nine creatures while the ring bulkhead was closed).
+      let x = stationSpawnXV188({ marines: reference, side: plan.side, deck, offset: (runtime.spawned % 3) * 60, blocked });
+      if (!Number.isFinite(x) && runtime.spawned % 3) x = stationSpawnXV188({ marines: reference, side: plan.side, deck, offset: 0, blocked });
       if (!Number.isFinite(x)) { runtime.nextSpawnAt = runtime.phaseElapsed + 1; return; }
       this.spawnStationEnemyV188(plan.pool || 'drone', x, plan.y);
       runtime.spawned += 1; runtime.nextSpawnAt = runtime.phaseElapsed + plan.interval;
@@ -447,7 +517,12 @@ export function withStationMissionLevelsV188(Base) {
       }
       if (phase === 'nest' && pr.purge > 0) return { key: 'nest-wake', total: 2, maxAlive: 2, interval: 3, first: 1, side: 'west', y: decks.mid };
       if (phase === 'pressure') return { key: 'pressure', total: 3, maxAlive: 2, interval: 14, first: 10, side: 'east', y: decks.mid };
-      if (phase === 'hold') return { key: 'hold', total: 9, maxAlive: 4, interval: 5, first: 3, side: 'east', y: decks.low, pool: pr.holdRemaining < R.holdSeconds / 2 ? 'warrior' : 'drone' };
+      if (phase === 'hold') {
+        // S9-2 [PROPOSÉ]: allied salvagers thin the hold; hostile ones take two places of it.
+        const ally = level.grue === 'ally', raid = level.grue === 'hostile' && R.grue.hostileSlots.includes(level.runtime.spawnKey === 'hold' ? level.runtime.spawned : 0);
+        return { key: 'hold', total: ally ? R.grue.allyHoldTotal : 9, maxAlive: ally ? R.grue.allyMaxAlive : 4, interval: 5, first: 3, side: 'east', y: decks.low,
+          pool: raid ? 'salvager' : pr.holdRemaining < R.holdSeconds / 2 ? 'warrior' : 'drone' };
+      }
       return null;
     }
 
@@ -491,6 +566,10 @@ export function withStationMissionLevelsV188(Base) {
     objectiveInteractionV188(actor = this.player) { if (this.stationLevelV188) return null; return super.objectiveInteractionV188(actor); }
     stationHeldV188(actor = this.player) { return Boolean(this.keys?.has(actor?.coop ? 'KeyY' : 'KeyE')); }
     stationInReachV188(actor, x, y, reach = R.reach) {
+      // In the collar corridor of S1 the wall stands on the rail: nothing on it is worked from the front lanes.
+      const section = this.missionDepthSectionV188;
+      if (section && actor && Math.abs(feet(actor) - section.floorY) < 40 && centre(actor) >= section.x0 && centre(actor) <= section.x1
+        && Math.abs(Number(actor.depthZ) || 0) > section.interactBand) return false;
       return Boolean(actor?.alive && !actor.downed && !actor.ventTransit && Math.abs(centre(actor) - x) <= reach && Math.abs(feet(actor) - y) < 40);
     }
     /** Advances the held interaction `key` (a progress path) 0 → 1; returns true the frame it completes. */
@@ -608,11 +687,16 @@ export function withStationMissionLevelsV188(Base) {
       if (phase === 'hold') {
         const inZone = actor?.alive && Math.abs(centre(actor) - p.hold.x) <= p.hold.radius && Math.abs(feet(actor) - p.decks.low) < 40;
         if (inZone) pr.holdRemaining = Math.max(0, pr.holdRemaining - dt);
+        if (!level.runtime.grueLine && level.runtime.phaseElapsed >= R.grue.lineAfter && (level.grue === 'ally' || level.grue === 'hostile')) {
+          level.runtime.grueLine = true; this.stationMessageV188(TX(level.grue === 'ally' ? 'grueAlly' : 'grueHostile'), 6);
+          this.onEvent?.({ type: 'station-grue-dock-v188', mode: level.grue });
+        }
         const left = (this.enemies || []).some(enemy => enemy.alive && enemy.stationLevelSpawnV188 === 'hold');
         if (pr.holdRemaining <= 0 && !left) {
           pr.arrived = true;
-          this.stationMessageV188(TX(level.grueAllied ? 'arrivedGrue' : 'arrived'), 7);
-          this.onEvent?.({ type: 'station-team-arrived-v188', grue: level.grueAllied });
+          const key = level.volunteers > 0 ? (level.grueAllied ? 'arrivedGrueVolunteers' : 'arrivedVolunteers') : level.grueAllied ? 'arrivedGrue' : 'arrived';
+          this.stationMessageV188(TX(key).replace('{n}', String(level.volunteers)), 7);
+          this.onEvent?.({ type: 'station-team-arrived-v188', grue: level.grueAllied, grueMode: level.grue, volunteers: level.volunteers });
           this.advanceStationPhaseV188();
         }
       }
@@ -781,12 +865,12 @@ export function withStationMissionLevelsV188(Base) {
       return { steps: STATION_LEVEL_PHASES_V188[level.campaignId].map((entry, index) => ({ key: entry.id, label: entry.label[lang],
         done: index < level.phase || (entry.id === 'extract' && Boolean(this.mission?.objectives?.extract)) })) };
     }
-    /** Read-only summary of what the level recorded (nothing is written to the campaign save). */
+    /** Read-only summary of what the level recorded. The app applies it with the operation result (applyStationLevelResultV188: S1 salvagers only). */
     stationLevelResultV188() {
       const level = this.stationLevelV188;
       if (!level) return null;
       const pr = level.progress;
-      return Object.freeze({ campaignId: level.campaignId, phase: this.stationPhaseIdV188(), salvagers: pr.salvagers || null, routes: pr.routes ? [...pr.routes] : null,
+      return Object.freeze({ campaignId: level.campaignId, phase: this.stationPhaseIdV188(), salvagers: pr.salvagers || null, grue: level.grue, volunteers: level.volunteers, routes: pr.routes ? [...pr.routes] : null,
         hearing: pr.hearing ?? null, eggsBurnt: pr.eggs ? pr.eggs.filter(egg => egg.state === 'burnt').length : null, eggHits: pr.eggHits ?? null, tag: pr.tag ?? null, cassius: level.cassius });
     }
     getSnapshot() {
@@ -794,6 +878,7 @@ export function withStationMissionLevelsV188(Base) {
       if (!level) return snapshot;
       return { ...snapshot, stationLevelV188: { campaignId: level.campaignId, phase: this.stationPhaseIdV188(), checkpoint: level.checkpointId,
         progress: clone(level.progress), missing: this.stationMissingV188(), cassius: level.cassius, corridor: this.missionDepthSectionV188?.id || null,
+        grue: level.grue, volunteers: level.volunteers, volunteerFigures: this.stationVolunteerFiguresV188(),
         barriers: (level.barriers || []).map(entry => ({ id: entry.id, x: entry.x, y: entry.y, w: entry.w, h: entry.h })),
         locks: Object.fromEntries(Object.entries(level.places.doors).filter(([, door]) => door).map(([key, door]) => [key, door.stationLockV188 || null])) } };
     }
@@ -857,11 +942,29 @@ export function withStationMissionLevelsV188(Base) {
           for (const egg of pr.eggs) drawStationLevelSlotV188(ctx, loader, 'station-xeno-egg', egg.x - 20, decks.low, { state: egg.state, burnt: egg.state === 'burnt' });
           if (!pr.tag) drawStationLevelSlotV188(ctx, loader, 'station-kessler-tag', p.tag.x - 10, decks.low);
         }
-        if (id === 'station-s4' && pr.arrived) {
-          for (let i = 0; i < 3; i++) drawStationLevelSlotV188(ctx, loader, 'station-technician', p.arrival.x + 60 + i * 52, decks.low);
-          if (level.grueAllied) drawStationLevelSlotV188(ctx, loader, 'station-grue', p.arrival.x + 230, decks.low);
+        if (id === 'station-s4') {
+          const phase = this.stationPhaseIdV188();
+          // S9-2: allied salvagers stand by the dock bulkhead from the hold on; Grue herself comes aboard with the team.
+          if (level.grue === 'ally' && (phase === 'hold' || pr.arrived)) for (let i = 0; i < 2; i++) drawStationLevelSlotV188(ctx, loader, 'station-salvager', p.grue.x - 22 + i * 48, decks.low);
+          if (pr.arrived) {
+            for (let i = 0; i < 3; i++) drawStationLevelSlotV188(ctx, loader, 'station-technician', p.arrival.x + 60 + i * 52, decks.low);
+            if (level.grueAllied) drawStationLevelSlotV188(ctx, loader, 'station-grue', p.arrival.x + 230, decks.low);
+            // S9-5: the volunteer colonists walk in from the collar behind the team (count from the save, at most six figures).
+            for (const figure of this.stationVolunteerFiguresV188()) drawStationLevelSlotV188(ctx, loader, 'station-volunteer-colonist', figure.x - 22, decks.low, { index: figure.index });
+          }
         }
       } finally { ctx.restore(); }
+    }
+    /** S4: where each volunteer colonist stands now (walking in from the west end of the dock once the team is aboard). */
+    stationVolunteerFiguresV188() {
+      const level = this.stationLevelV188, p = level?.places;
+      if (level?.campaignId !== 'station-s4' || !level.progress.arrived || !p?.volunteers) return [];
+      const count = Math.min(R.volunteers.shownMax, level.volunteers), elapsed = this.stationPhaseIdV188() === 'extract' ? level.runtime.phaseElapsed : R.volunteers.walkSeconds;
+      return Array.from({ length: count }, (_, index) => {
+        const target = p.volunteers.x + index * p.volunteers.step, start = p.dock.x0 - 60 - index * 30;
+        const share = Math.max(0, Math.min(1, elapsed / R.volunteers.walkSeconds - index * .08));
+        return { index, x: Math.round(start + (target - start) * share), arrived: share >= 1 };
+      });
     }
     stationDarknessV188() {
       const level = this.stationLevelV188, pr = level?.progress;

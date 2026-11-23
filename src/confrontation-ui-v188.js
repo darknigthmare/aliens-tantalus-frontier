@@ -15,6 +15,10 @@
 // QZ link (bible §2.3: « ne s'adresse au Tantalus que par messages différés »), so
 // she is a CRT bust drawn with primitives behind the named slot of her entry;
 // CASSIUS is its core. Both are Canvas placeholders [PROPOSÉ].
+// Quest `ship-bioforge` (owner decision 2026-11-23): BISHOP-9 is a synthetic bust (project
+// character, no actor's likeness: a pale even face, a neat parting, a status light at the collar)
+// and Inez Harlow, who listens, a small scientist bust (lab coat, goggles pushed up). Canvas
+// placeholders too, behind the named slots of the entry.
 
 export const CONFRONTATION_STAGE_V188 = Object.freeze({ width: 960, height: 360 });
 const W = CONFRONTATION_STAGE_V188.width, H = CONFRONTATION_STAGE_V188.height, BAR = 22;
@@ -72,6 +76,43 @@ function drawCoreEye(ctx, x, y, size, time, still) {
   ctx.restore();
 }
 
+/** Synthetic bust (BISHOP-9) — primitives only: even features, lab collar, one status light. */
+function drawSyntheticBust(ctx, x, y, size, time, still) {
+  ctx.save(); ctx.beginPath(); ctx.rect(x, y, size, size); ctx.clip();
+  ctx.fillStyle = '#0c1418'; ctx.fillRect(x, y, size, size);
+  ctx.fillStyle = '#14242a'; for (let i = 0; i < 4; i += 1) ctx.fillRect(x + size * (.06 + i * .24), y + size * .08, size * .18, size * .5); // tank hall glass behind him
+  ctx.fillStyle = '#c9d2d0'; // lab jacket, closed collar
+  ctx.beginPath(); ctx.moveTo(x + size * .1, y + size); ctx.quadraticCurveTo(x + size * .16, y + size * .72, x + size * .5, y + size * .68);
+  ctx.quadraticCurveTo(x + size * .84, y + size * .72, x + size * .9, y + size); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = '#8e9a98'; ctx.fillRect(x + size * .43, y + size * .68, size * .14, size * .06);
+  ctx.fillStyle = '#d9cfc2'; ctx.fillRect(x + size * .45, y + size * .54, size * .1, size * .15); // neck
+  ctx.beginPath(); ctx.ellipse?.(x + size * .5, y + size * .4, size * .14, size * .19, 0, 0, Math.PI * 2); ctx.fill(); // face
+  ctx.fillStyle = '#5a5148'; ctx.beginPath(); ctx.ellipse?.(x + size * .5, y + size * .27, size * .15, size * .08, 0, Math.PI, Math.PI * 2); ctx.fill(); // neat hair
+  ctx.fillRect(x + size * .36, y + size * .26, size * .28, size * .03);
+  ctx.fillStyle = '#2a2622'; ctx.fillRect(x + size * .43, y + size * .39, size * .04, size * .012); ctx.fillRect(x + size * .53, y + size * .39, size * .04, size * .012);
+  ctx.fillRect(x + size * .46, y + size * .5, size * .08, size * .008);
+  const pulse = still ? 1 : .6 + .4 * Math.sin(time * 1.6);
+  ctx.fillStyle = `rgba(170,230,255,${.5 + .4 * pulse})`; ctx.beginPath(); ctx.arc(x + size * .6, y + size * .74, size * .018, 0, Math.PI * 2); ctx.fill(); // status light
+  ctx.restore();
+}
+/** Scientist bust (Inez Harlow) — primitives only: lab coat, goggles pushed up, hair tied back. */
+function drawScientistBust(ctx, x, y, size) {
+  ctx.save(); ctx.beginPath(); ctx.rect(x, y, size, size); ctx.clip();
+  ctx.fillStyle = '#10181a'; ctx.fillRect(x, y, size, size);
+  ctx.fillStyle = '#e4e2d6'; // lab coat
+  ctx.beginPath(); ctx.moveTo(x + size * .1, y + size); ctx.quadraticCurveTo(x + size * .18, y + size * .7, x + size * .5, y + size * .67);
+  ctx.quadraticCurveTo(x + size * .82, y + size * .7, x + size * .9, y + size); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = '#3f6f6a'; ctx.beginPath(); ctx.moveTo(x + size * .42, y + size * .68); ctx.lineTo(x + size * .5, y + size * .84); ctx.lineTo(x + size * .58, y + size * .68); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = '#a9785a'; ctx.fillRect(x + size * .45, y + size * .54, size * .1, size * .14); // neck
+  ctx.beginPath(); ctx.ellipse?.(x + size * .5, y + size * .4, size * .15, size * .19, 0, 0, Math.PI * 2); ctx.fill(); // face
+  ctx.fillStyle = '#231a16'; ctx.beginPath(); ctx.ellipse?.(x + size * .5, y + size * .29, size * .17, size * .11, 0, Math.PI, Math.PI * 2); ctx.fill(); // hair tied back
+  ctx.fillRect(x + size * .64, y + size * .28, size * .05, size * .16);
+  ctx.strokeStyle = '#e0a33a'; ctx.lineWidth = Math.max(1, size * .025); ctx.strokeRect(x + size * .39, y + size * .24, size * .22, size * .05); // goggles on the forehead
+  ctx.fillStyle = 'rgba(35,26,22,.8)'; ctx.fillRect(x + size * .43, y + size * .39, size * .04, size * .014); ctx.fillRect(x + size * .53, y + size * .39, size * .04, size * .014);
+  ctx.restore();
+}
+const PORTRAITS = Object.freeze({ 'crt-bust': drawCrtBust, 'core-eye': drawCoreEye, 'synthetic-bust': drawSyntheticBust, 'scientist-bust': drawScientistBust });
+
 /**
  * Paints one frame of the stage from a view (confrontationViewV188). Pure drawing:
  * `reveal` in [0, 1] is the share of the citation already shown (1 with reduced motion).
@@ -85,7 +126,7 @@ export function drawConfrontationStageV188(ctx, view, { language = 'fr', time = 
   // portrait frame, as in the cinematic lower third
   const px = 28, py = BAR + 30, size = 176;
   ctx.fillStyle = '#0a1210'; ctx.fillRect(px - 4, py - 4, size + 8, size + 8);
-  if (view.portrait === 'core-eye') drawCoreEye(ctx, px, py, size, time, still); else drawCrtBust(ctx, px, py, size, time, still);
+  (PORTRAITS[view.portrait] || drawCrtBust)(ctx, px, py, size, time, still);
   ctx.strokeStyle = 'rgba(131,213,161,.6)'; ctx.lineWidth = 1; ctx.strokeRect(px - 3.5, py - 3.5, size + 7, size + 7);
   ctx.fillStyle = '#7f9a8a'; ctx.font = '12px monospace'; wrap(ctx, view.role, size + 8).slice(0, 2).forEach((row, i) => ctx.fillText(row, px - 4, py + size + 22 + i * 15));
   // speaker and citation
@@ -119,9 +160,17 @@ export function drawConfrontationStageV188(ctx, view, { language = 'fr', time = 
     if (i < view.credibility) { ctx.fillStyle = '#e9d07a'; ctx.fill(); } else { ctx.strokeStyle = '#6a5a3a'; ctx.lineWidth = 2; ctx.stroke(); }
   }
   ctx.lineWidth = 1;
+  // The witness who listens (quest `ship-bioforge`): a small portrait under the gauges, with the name.
+  if (view.witnessPortrait && PORTRAITS[view.witnessPortrait]) {
+    const ws = 64, wx = gx, wy = H - BAR - ws - 30;
+    PORTRAITS[view.witnessPortrait](ctx, wx, wy, ws, time, still);
+    ctx.strokeStyle = 'rgba(131,213,161,.6)'; ctx.strokeRect(wx - .5, wy - .5, ws + 1, ws + 1);
+    ctx.fillStyle = '#7f9a8a'; ctx.font = '11px monospace'; wrap(ctx, view.witness || '', gw - ws - 8).slice(0, 3).forEach((row, i) => ctx.fillText(row, wx + ws + 8, wy + 14 + i * 14));
+  }
   if (view.status !== 'open') {
-    ctx.fillStyle = view.status === 'won' ? '#83d5a1' : '#e39a7a'; ctx.font = '700 14px monospace';
-    ctx.fillText(tx(UI_TEXT[view.status], lang), gx, BAR + 182);
+    // A weighed debate words its two outcomes itself (labels); neither is drawn as a defeat.
+    ctx.fillStyle = view.status === 'won' || view.labels ? '#83d5a1' : '#e39a7a'; ctx.font = view.labels ? '700 12px monospace' : '700 14px monospace';
+    wrap(ctx, view.labels ? view.labels[view.status] : tx(UI_TEXT[view.status], lang), gw).slice(0, 2).forEach((row, i) => ctx.fillText(row, gx, BAR + 182 + i * 15));
   } else if (!view.winnable) { ctx.fillStyle = '#e39a7a'; ctx.font = '12px monospace'; wrap(ctx, tx(UI_TEXT.unwinnable, lang), gw).forEach((row, i) => ctx.fillText(row, gx, BAR + 182 + i * 15)); }
   ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, BAR); ctx.fillRect(0, H - BAR, W, BAR); // letterbox
   ctx.restore();
@@ -146,7 +195,7 @@ export function openConfrontationDialogV188({ document = globalThis.document, la
   Object.assign(canvas.style, { width: '100%', height: 'auto', display: 'block', margin: '0 auto 10px', borderRadius: '4px' });
   const live = document.createElement('p'); live.setAttribute('aria-live', 'polite'); live.style.whiteSpace = 'pre-line'; live.dataset.confrontationLiveV188 = 'true';
   const status = document.createElement('p'); status.className = 'hint'; status.dataset.confrontationStatusV188 = 'true';
-  const list = document.createElement('div'); list.setAttribute('role', 'group'); list.setAttribute('aria-label', tx(UI_TEXT.pieces, lang));
+  const list = document.createElement('div'); list.setAttribute('role', 'group'); list.setAttribute('aria-label', getView().labels?.pieces || tx(UI_TEXT.pieces, lang));
   Object.assign(list.style, { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: '6px', margin: '8px 0' });
   const footer = document.createElement('footer'); footer.style.flexWrap = 'wrap';
   const ctx = canvas.getContext?.('2d');

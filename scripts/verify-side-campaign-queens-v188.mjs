@@ -697,7 +697,7 @@ test('Tantalus quests of the campaign: ship-q-doyle, ship-q-orlov, ship-q-harlow
   assert.deepEqual(QUEENS_CREW_QUEST_IDS_V188, ['ship-q-doyle', 'ship-q-orlov', 'ship-q-harlow'], 'ids of bible §14.9');
   assert.deepEqual(QUEENS_CREW_QUESTS_V188.map(quest => quest.crewId), ['crew-07-sanaa-doyle', 'crew-08-maksim-orlov', 'crew-09-inez-harlow']);
   assert.deepEqual(QUEENS_CREW_QUESTS_V188.map(quest => quest.title.fr), ['Tirer sur ce qui vole', 'Le vent des canyons', 'L’arbre des lignées']);
-  assert.deepEqual(CREW_QUESTS_ALL_V188.slice(-3), [...QUEENS_CREW_QUESTS_V188], 'appended after the sixteen crew quests');
+  assert.deepEqual(CREW_QUESTS_ALL_V188.slice(-3), [...QUEENS_CREW_QUESTS_V188], 'appended last, after the crew and ship-life quests');
   const offered = (save, quest) => crewQuestActionsV188(save, quest.crewId, 'fr').some(entry => entry.id === quest.id);
   const early = arc1Done('destroy');
   for (const quest of QUEENS_CREW_QUESTS_V188) { assert.equal(offered(early, quest), false, `${quest.id} waits for Arc 2`); assert.equal(acceptCrewQuestV188(early, quest.id), false); }

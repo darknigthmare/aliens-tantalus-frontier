@@ -29,6 +29,12 @@ test('the slice walks creation → wake → ship → port → briefing → qz18 
   save.openingV88 = { phase: 'ready' }; save.portMeridienV90 = { phase: 'triage' };
   assert.equal(deriveStoryCampaignV188(save).step, 'port');
   save.portMeridienV90 = { phase: 'complete' };
+  // Owner decision 2026-11-23 (P-3): Act I (QZ-17) is recommended first; QZ-18 follows once it is done.
+  const actOneBriefing = deriveStoryCampaignV188(save, { language: 'fr' });
+  assert.equal(actOneBriefing.step, 'briefing'); assert.equal(actOneBriefing.recommendedCampaignId, 'special-narrative-qz17');
+  assert.match(actOneBriefing.objective, /Acte I .*QZ-17/); assert.doesNotMatch(actOneBriefing.objective, /QZ-18/);
+  assert.match(deriveStoryCampaignV188(save, { language: 'en' }).objective, /Act I "The Ghost Cargo" \(QZ-17\)/);
+  save.galaxy.completedCampaignIds.push('special-narrative-qz17');
   const briefing = deriveStoryCampaignV188(save, { language: 'fr' });
   assert.equal(briefing.step, 'briefing'); assert.equal(briefing.recommendedCampaignId, STORY_RELAY_CAMPAIGN_ID_V188);
   assert.match(briefing.objective, /QZ-18/);
@@ -41,7 +47,10 @@ test('the slice walks creation → wake → ship → port → briefing → qz18 
   assert.equal(markStoryDebriefSeenV188(save, STORY_RELAY_CAMPAIGN_ID_V188), true);
   assert.equal(markStoryDebriefSeenV188(save, STORY_RELAY_CAMPAIGN_ID_V188), false);
   assert.equal(deriveStoryCampaignV188(save).step, 'next');
-  assert.equal(deriveStoryCampaignV188(save).recommendedCampaignId, 'special-narrative-qz17', 'Act I is recommended after QZ-18');
+  assert.equal(deriveStoryCampaignV188(save).recommendedCampaignId, null);
+  // An existing save that played QZ-18 first stays valid: Act I is then recommended until it is done.
+  save.galaxy.completedCampaignIds = save.galaxy.completedCampaignIds.filter(id => id !== 'special-narrative-qz17');
+  assert.equal(deriveStoryCampaignV188(save).recommendedCampaignId, 'special-narrative-qz17', 'Act I is recommended after a QZ-18 played first');
   save.galaxy.completedCampaignIds.push('special-narrative-qz17');
   assert.equal(deriveStoryCampaignV188(save).recommendedCampaignId, null);
   assert.deepEqual(STORY_SLICE_STEPS_V188, ['creation', 'wake', 'ship', 'port', 'briefing', 'qz18', 'debrief', 'next']);
@@ -151,7 +160,9 @@ test('journey: the real state machines walk the whole first hour and storyCampai
   for (const action of ['unload', 'carry', 'triage', 'power', 'escort']) port(action);
   port('escort', { civiliansX: [2160, 2215, 2270] }); port('report');
   assert.equal(save.portMeridienV90.phase, 'complete');
-  // Briefing → QZ-18 → return → debrief (§5.2).
+  // Briefing → Act I (QZ-17, recommended first since 2026-11-23) → QZ-18 → return → debrief (§5.2).
+  assert.equal(deriveStoryCampaignV188(save).recommendedCampaignId, 'special-narrative-qz17');
+  save.galaxy.completedCampaignIds.push('special-narrative-qz17'); // a native QZ-17 success records the chapter
   const briefing = deriveStoryCampaignV188(save); steps.push(briefing.step);
   const campaign = CAMPAIGNS.find(entry => entry.id === briefing.recommendedCampaignId);
   beginOperation(save, campaign, WORLDS.find(entry => entry.id === campaign.worldId)); steps.push(deriveStoryCampaignV188(save).step);

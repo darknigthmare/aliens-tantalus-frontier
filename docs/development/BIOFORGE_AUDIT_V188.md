@@ -110,3 +110,7 @@ Protocole : Chromium headless de l'environnement de développement (conteneur sa
 | x = 1600 (cellule) | 0,8 – 2,5 (médiane 1,1) | 1,1 – 2,7 (médiane 1,1) |
 
 Neuf échantillons par case. La refonte coûte environ 1,7 ms par image dans la scène la plus chargée, environ 0,5 ms au niveau du hall et rien de mesurable dans la cellule, dans cet environnement bruité (budget d'une image à 60 i/s : 16,7 ms). Mesures intermédiaires : les dégradés des cônes de lumière coûtaient ~1 ms (remplacés par deux cônes plats) ; une mise en cache du décor statique dans un canevas de 2880 px n'apportait aucun gain mesurable et a été retirée. Aucun gain n'est annoncé ; aucune mesure n'a été faite sur une machine de joueur.
+
+## Mise à jour du 23 novembre 2026
+
+Point 15 (accroche narrative) : la quête `ship-bioforge` « Ce qu'on garde en vie » est jouable (débat Inez Harlow / BISHOP-9 sur le système de face-à-face, bible §8.6). Le protocole décidé s'affiche au stockage froid et sous la file d'admission. Restent de ce point : la présence des deux personnages dans le laboratoire, leurs portraits définitifs et leurs voix.

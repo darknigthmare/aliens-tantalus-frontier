@@ -13,7 +13,7 @@ Le catalogue compte 178 armes (40 identités d’origine et leurs 106 finitions,
 - **FR-003 Politique d’alimentation.** Chargeur physique détachable et ramassage au sol uniquement avec preuve propre au modèle (inchangé : quatre M41A). Les autres armes utilisent l’alimentation documentée par le CSV avec son propre rechargement, sinon [À DÉFINIR].
 - **FR-004 Pont natif.** Tube, barillet, bande, réservoir et tir unique fonctionnent en mission pour les armes du lot A : pompe après chaque tir, insertion cartouche par cartouche interruptible, étuis retenus jusqu’au rechargement, remplacement de bande/réservoir, une roquette par tube ; somme munitions + réserve conservée ; sauvegarde/reprise ; désactivation `arsenalFeedsV188: false`.
 - **FR-005 VFX et audio.** Effets émis seulement après un tir accepté, par les couches existantes (`weapon-effects-v124`, `vfx-v188`) ; aucune douille pour M41A/M56/flammes/roquettes ; sons choisis parmi les indices V188 existants.
-- **FR-006 Armes ajoutées.** Ajouts en fin de catalogue avec identifiants neufs (194–196), sans renuméroter ; identité citée ; aucune plaque → non achetables par la règle existante de l’armurerie, silhouette Canvas derrière un emplacement nommé ; reliés au profil, à la maîtrise, à l’index de recherche et au registre V170.
+- **FR-006 Armes ajoutées.** Ajouts en fin de catalogue avec identifiants neufs (194–196), sans renuméroter ; identité citée ; aucune plaque → non achetables par la règle existante de l’armurerie (levée pour ces trois identifiants le 2026-11-23 : achetables derrière une plaque provisoire dessinée, voir FR-010), silhouette Canvas derrière un emplacement nommé ; reliés au profil, à la maîtrise, à l’index de recherche et au registre V170.
 - **FR-007 Sauvegardes.** Champs additifs (`arsenalFeedV188`, schéma 188) ; anciennes sauvegardes et identifiants intacts ; `src/save.js` inchangé.
 - **FR-008 Tests.** Suite Node dans `test:weapons` ; parcours Chromium tirant chaque arme du lot A en mission, 0 erreur.
 
@@ -24,3 +24,9 @@ Rien n’est « 1:1 ». Documenté : alimentation/munition par identité (CSV ma
 ## Périmètre du lot
 
 Lot A vérifié : armes USCM 001–017 et leurs finitions, revolver .357 (prototype V171) et ses finitions, ajouts 194–196 (75 identifiants). Hors lot : voir `tasks.md`.
+
+## Décisions du propriétaire du 2026-11-23
+
+- **FR-010 Plaque provisoire.** Les identifiants 194–196 sont achetables à l’armurerie au prix de la règle ordinaire. Leur fiche montre une plaque provisoire dessinée en Canvas derrière l’emplacement nommé `armory-plaque-provisional-<id>` ; aucune image n’est ajoutée et la plaque ne vaut pas art livré. Elles portent la même admission que le lot B (`admissionV188: 'provisional-plaque-purchasable'`) : une seule plaque, une seule porte d’achat.
+- **FR-011 Pompe manuelle en option.** La pompe reste automatique par défaut (0,4 s [PROPOSÉ]). Un réglage additif active la pompe manuelle : action dédiée réaffectable (B par défaut), bouton tactile, invite texte ; même délai minimal ; l’équipier reste en automatique.
+- Capacités (une roquette par tube, 6 chambres pour le .357, capacité de base pour les finitions) : conservées.

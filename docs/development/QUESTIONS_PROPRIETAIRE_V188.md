@@ -755,7 +755,7 @@ Demande reçue : des niveaux dédiés pour S1-S4 sur le modèle du lot colonie (
 | S9-4 | Valeurs de jeu (minuteur de S3 150 s, tenue du quai 60 s, œufs, effectifs) | Celles de la bible §7.10 | À régler après playtest |
 | S9-5 | Arrivée des colons volontaires en S4 (§7.2) | Non représentée (équipe technique et Grue seulement) | Silhouettes de colons de Port-Méridien selon le palier de la colonie |
 
-Aucune de ces valeurs ne certifie une fidélité « 1:1 ».
+Aucune de ces valeurs ne certifie une fidélité « 1:1 ». S9-1, S9-2 et S9-5 ont reçu une décision le 23 novembre 2026 (section « Décisions du propriétaire (2026-11-23) » en fin de document) ; S9-3 et S9-4 restent aux valeurs par défaut.
 
 ## Décisions du propriétaire (2026-11-22, second tour) — appliquées
 
@@ -827,7 +827,7 @@ Aucune de ces valeurs ne certifie une fidélité « 1:1 ».
 
 ## Parcours complet de la campagne principale (2026-11-22) — questions ouvertes
 
-Le run est consigné dans `docs/development/PLAYTHROUGH_V188_20261122.md`. Aucune valeur n'a été changée sur ces points. Ils attendent une décision.
+Le run est consigné dans `docs/development/PLAYTHROUGH_V188_20261122.md`. Aucune valeur n'avait été changée sur ces points à cette date. **Décisions rendues le 2026-11-23** : voir la section « Décisions du propriétaire (2026-11-23) — appliquées » en fin de document.
 
 | # | Question | Constat du parcours | Options |
 | --- | --- | --- | --- |
@@ -839,7 +839,7 @@ Le run est consigné dans `docs/development/PLAYTHROUGH_V188_20261122.md`. Aucun
 
 ## Arsenal — complétion du lot A (2026-11-22, spec 014) — valeurs par défaut appliquées
 
-Demande : « fidélité 1:1 comme le reste, compléter toutes les armes avec chargeurs, VFX, etc. ». La règle du projet est appliquée : rien n'est déclaré « 1:1 » ; documenté / adapté / à définir sont séparés dans `docs/development/ARSENAL_COMPLETION_V188.md`.
+Demande : « fidélité 1:1 comme le reste, compléter toutes les armes avec chargeurs, VFX, etc. ». La règle du projet est appliquée : rien n'est déclaré « 1:1 » ; documenté / adapté / à définir sont séparés dans `docs/development/ARSENAL_COMPLETION_V188.md`. **Décisions rendues le 2026-11-23 sur A1 à A5** : voir la section du même jour en fin de document (A1 et A5 changent, A2 à A4 sont confirmées).
 
 | # | Question | Valeur appliquée | Autre possibilité |
 | --- | --- | --- | --- |
@@ -904,7 +904,33 @@ Demande : « améliorer la Bio Forge — le level design est mal fait ». Audit 
 | B5 | Passerelles de la cellule | Réservées aux spécimens, signalées ; l'opérateur n'escalade pas | Escalade des échelles |
 | B6 | Quête `ship-bioforge` | Non codée ; deux lieux préparés (stockage froid, galerie) | Lot dédié : débat Inez / BISHOP-9 et choix de conservation |
 
-Aucune de ces valeurs ne certifie une fidélité « 1:1 ».
+Aucune de ces valeurs ne certifie une fidélité « 1:1 ». B6 a reçu une décision le 23 novembre 2026 (section suivante).
+
+## Décisions du propriétaire (2026-11-23) — appliquées
+
+Décisions reçues sur les questions S9-1, S9-2, S9-5 (niveaux de la station) et B6 (quête `ship-bioforge`), plus les libellés génériques des zones. Base : `f8b22e68`. Détail des règles : bible §7.11 et §8.6. Tout ce qui est chiffré ou rédigé ci-dessous est **[PROPOSÉ]** et révisable.
+
+| # | Décision | Application | Reste ouvert |
+| --- | --- | --- | --- |
+| S9-2 | **Enregistrer l'issue des récupérateurs de S1** ; en S4, négocié → Grue aide au quai ; forcé → hostile ou absente, quelle que soit la décision de la colonie | Champ additif `stationV188.s1Salvagers`, écrit une fois par la première réussite de S1. S4 : négocié → alliée (tenue 9 → 6 créatures, 3 à la fois, Grue à bord) quel que soit le prix ; forcé → **hostile** si le prix est refusé ou non décidé (2 récupérateurs armés dans la tenue), **absente** si le prix est accepté ; sauvegarde antérieure → comportement d'avant (présente si le prix est accepté) | Q-S9-6, Q-S9-7 |
+| S9-1 | **Le collier d'arrimage de S1 en profondeur**, comme C1, avec le dropship d'Echo-8 au collier ; le reste de S1 en vue de côté | Définition `station-s1-docking-collar` ; trois objets d'Echo-8 sur le plancher (emplacements des cales réemployés) ; monte-charge du collier au repos ; liste de contrôle du niveau vérifiée ; checkpoint par phase | Art propre au collier |
+| S9-5 | **Montrer les colons volontaires au quai de S4**, à la fin de la tenue | Nombre de la sauvegarde (`colonyMissionsV188.population`), six silhouettes au plus, entrée par le collier, texte avec le nombre réel ; primitive Canvas `station-volunteer-colonist` | Q-S9-8 ; silhouette définitive |
+| — | **Libellés génériques** (« Soutes dépressurisées… ») dans les niveaux de la station | Onze noms de zone FR/EN propres à la station sur les plaques, la ligne de zone et le plan local de S1-S4 | Noms à confirmer |
+| B6 | **Quête `ship-bioforge` « Ce qu'on garde en vie »** sur le système de face-à-face, sans tir, issue enregistrée, sans nouvelle fin, ouvrant l'accès narratif à la Bioforge | Entrée `ship-bioforge-care` ; protocole Harlow (loyauté d'Inez +5, stress de l'équipage −2) ou protocole BISHOP-9 (loyauté de BISHOP-9 +5, recherche +6) ; texte du protocole dans le laboratoire ; porte fermée jusqu'au débat, accès conservé aux sauvegardes qui ont déjà utilisé la Bioforge | B7, B8, B9 |
+| — | Correction trouvée en appliquant S9-2 | La tenue du quai de S4 ne recevait que 2 de ses 9 créatures tant que la cloison de l'anneau restait fermée (apparitions abandonnées) ; elles apparaissent désormais au bord de la zone sûre | Équilibrage de la tenue complète (S9-4) |
+
+Questions ouvertes par ces décisions :
+
+| # | Question | Valeur appliquée | Autre possibilité |
+| --- | --- | --- | --- |
+| Q-S9-6 | Négocié en S1 mais prix refusé par la colonie : Grue aide-t-elle encore ? | Oui (l'accord de l'anneau est le sien) | Présente sans aider ; absente |
+| Q-S9-7 | Forme de l'aide de Grue | La vague est réduite ; deux récupérateurs en silhouette à la cloison | Alliés armés qui tirent (comportement d'escouade à écrire) |
+| Q-S9-8 | Plafond des silhouettes de colons | 6 dessinées, nombre réel dans le texte | Autant que le compte ; selon le palier de la colonie |
+| B7 | Le protocole doit-il changer une règle de la Bioforge ? | Non : texte, loyauté, stress et recherche seulement | Harlow : purge automatique en fin de session ; BISHOP-9 : un spécimen gardé pour la session suivante |
+| B8 | Quand le débat se présente-t-il ? | À la première visite à la Bioforge, dès le début de la partie | Après l'Acte I (le sceau), pour que la pièce du dossier soit disponible |
+| B9 | Peut-on rouvrir le débat ? | Non : tranché une fois | Rejouable après l'Interlude ou l'Acte IV, avec les nouvelles pièces |
+
+Aucune de ces décisions ne certifie une fidélité « 1:1 » ; les figures, objets et portraits ajoutés sont des substituts Canvas ou des PNG déjà admis.
 
 ## Décision du propriétaire (2026-11-23) — page de développement livrée cachée dans le build public (spec 012)
 
@@ -926,3 +952,40 @@ Questions ouvertes :
 - **Q-012-1 [PRODUCTION].** Garder le nom par défaut public `labo-tantalus-v188` ou poser `ATF_DEV_TOOLS_PATH` chez l'hébergeur (recommandé si la discrétion compte) ? Dans ce cas l'adresse n'est connue que de ceux à qui elle est donnée, sans être protégée pour autant.
 - **Q-012-2 [PLUS TARD].** Faut-il un interrupteur de build pour publier sans les outils (par exemple une version destinée au public large), ou une protection côté hébergeur (mot de passe) ? Ni l'un ni l'autre n'est fait.
 - **Q-012-3 [PLUS TARD].** Brancher le QA sur le build dans la CI (durée ≈ 6 min avec Chromium) ?
+
+## Décisions du propriétaire (2026-11-23) — appliquées
+
+Réponses aux questions P-1 à P-5 du parcours complet et A1 à A5 de l'arsenal. Appliquées sur la base `f8b22e68`. Tests : `scripts/verify-owner-decisions-20261123-v188.mjs` (dans `test:priorities:v188`). Les valeurs inventées portent **[PROPOSÉ]**.
+
+| # | Décision | Application | Reste ouvert |
+| --- | --- | --- | --- |
+| P-1 | **Ravitaillement : source visible.** Chaque mission de colonie réussie et chaque chantier validé rendent du ravitaillement ; le Commandement dit où en gagner ; le message « ressources insuffisantes » reste | `COLONY_SUPPLY_RETURNS_V188` (`src/colony-reconstruction-v188.js`) : **+8 par mission de Port-Méridien réussie [PROPOSÉ]** (C1-C5, annexes, contrats, rejouées comprises), **+4 par niveau de chantier validé [PROPOSÉ]** (mission locale, quête d'équipage ou validation provisoire d'avant C1) ; soute plafonnée à 100. Une sortie sur Cocyte coûte 6 : une mission de colonie ou un contrat rapporte donc 2 net. Ligne sous les ressources du Commandement (FR/EN), rappel sous le refus de départ quand le ravitaillement manque, montant nommé au bilan. Simulation de la ligne principale (16 sorties depuis 78) : sans retour, la soute est vide après la 13e sortie ; avec retours, le point le plus bas reste à 30 ou plus, et cinq sorties ratées restent payables | Le **carburant** suit la même pente et n'a pas été décidé : 16 sorties × 4 = 64, soit exactement le stock de départ (64). Une seule sortie ratée bloque la ligne tant que le marché d'Asphodèle n'est pas ouvert (question P-6 ci-dessous). Sous 6 de ravitaillement, aucun départ n'est possible : il ne reste que le projet « Logistique du Tantalus » (+8, une fois) |
+| P-2 | **Saut vers Nacre-7 bloqué par la chaîne d'infestation : expliquer et guider.** Le blocage reste | `infestationJumpGuidanceV188` (`src/galaxy-travel-v188.js`) : la préparation hyperspatiale de la carte galactique affiche, sous « Infestation à bord non résolue », pourquoi (étape de la chaîne) et où agir (FR/EN) : console du sas d'arrivée, matrice CCTV, contrôle du sas BIOFORGE — les trois services d'annexe qui renforcent déjà le confinement. Si le confinement a cédé, le texte renvoie à l'intrusion à bord | La chaîne n'a pas de mission dédiée : elle se clôt par ces trois contrôles et le temps de bord. Durée réelle entre l'exposition et la clôture non mesurée en jeu |
+| P-3 | **Ordre des actes : QZ-17 d'abord.** | `deriveStoryCampaignV188` : après le prologue, l'objectif et l'étoile ★ de la table recommandent l'Acte I (QZ-17), puis l'Acte II (QZ-18). QZ-18 n'est **pas verrouillé** (dépriorisé seulement) : une sauvegarde qui l'a commencé ou terminé reste valide, et l'Acte I y reste recommandé ensuite | Le conseil de guerre s'ouvre toujours dès l'Acte IV terminé (avant C4) et l'Interlude avant C3 : non décidé. Le lanceur de développement garde son ordre interne de jalons (`act2` avant `act1`) |
+| P-4 | **Crise de l'Interlude : pont 2, comme le dit l'objectif.** | `configureCrisis` (`src/hub-v51-runtime.js`) : une crise que l'hôte lie à son pont apparaît autour de sa salle (quarantaine, pont 2) et attend là ; sur un autre pont, aucune menace, et la crise ne se résout pas toute seule. Seule la crise de l'Interlude est liée (`interludeCrisisDeckBoundV188`, déduit de la sauvegarde : un Interlude déjà en cours est lié aussi). Le relevé du hub nomme les menaces en attente (« 4 AU PONT 2 ») | Les autres crises du hub gardent l'ancien comportement (menaces sur le pont du joueur). Les PNJ ne réagissent pas différemment selon le pont |
+| P-5 | **Texte du conseil avec un seul conteneur.** | « Un seul conteneur à rendre : insuffisant pour une restitution. Céder pèse sur le moral de l’équipage. » / « Only one container to hand back: not enough for a restitution. Ceding weighs on the crew’s morale. » ; règle des 2-3 conteneurs inchangée | — |
+| A1 | **194–196 achetables dès maintenant** à l'armurerie, derrière une plaque provisoire dessinée | `src/weapon-provisional-plaque-v188.js`, commun avec le lot B (197–235) : les trois entrées portent `admissionV188: 'provisional-plaque-purchasable'` ; plaque Canvas (cadre en tirets, silhouette de la classe, légende « PLAQUE PROVISOIRE · ILLUSTRATION À PRODUIRE ») derrière l'emplacement nommé `armory-plaque-provisional-<id>` ; aucun fichier image. Prix : règle ordinaire de l'armurerie (`getProcurementQuote`) appliquée aux statistiques **[PROPOSÉ]** — 910 CR pour l'Ithaca 37 sur une sauvegarde sans remise. Une arme sans plaque et sans cette admission garde « PLAQUETTE DÉDIÉE REQUISE » | La plaque provisoire n'est pas de l'art livré : plaques natives à produire. Les râteliers du hub n'affichent pas ces armes |
+| A5 | **Fusils à pompe : option dans les réglages.** Automatique par défaut (0,4 s), pompe manuelle au choix | Réglage « Fusils à pompe : pompe manuelle (touche dédiée) » (`settings.pumpManualV188`, additif, faux par défaut) ; action « Pomper » réaffectable (B par défaut) ; bouton tactile « POMPE » affiché seulement quand l'option est active ; invite texte « POMPER [B] » au-dessus du marine. La course manuelle garde le même délai minimal de 0,4 s **[PROPOSÉ]** : un appui anticipé est retenu, aucun gain de cadence. Le rechargement arme toujours la pompe seul. L'équipier et la coop restent en automatique | B sert aussi à quatre opérations spéciales (ordres Alpha/Bravo, bombe, possession, frein APC) : avec la pompe manuelle, la touche y fait les deux ; elle se réaffecte dans Commandes |
+| A2-A4 | **Capacités conservées** : une roquette par tube, 6 chambres pour le .357, capacité du modèle de base pour les finitions | Aucune modification : décision consignée | — |
+
+Petits défauts du parcours corrigés dans le même lot :
+
+| Réf. | Défaut | Correction |
+| --- | --- | --- |
+| R3 | L'objectif P-2 parlait de « deux échelles vers le sas supérieur » et les deux panneaux avaient deux textes | Un seul texte FR/EN pour `opening.qualification` et `exercise.arm` : porte du Proving Ground au niveau du sol, console, puis l'échelle jusqu'au pas de tir |
+| R4 | `#hub-training-controls-v132` restait `display:flex` malgré `hidden` | Règle `[hidden]` dédiée ; les boutons sont retirés du document hors d'un pupitre |
+| R5 | « Ce profil a changé dans une autre session » remontait en erreur de page | Message affiché dans l'interface (au plus un toutes les 15 s) ; les autres erreurs d'écriture restent levées |
+| R6 | Deux boutons « CONFIRMER LA CONFRONTATION » identiques au verdict QZ-17 | Chaque bouton nomme sa conclusion : « CONFIRMER · … » |
+
+Non traités : R1 (ancien point de reprise sous le sol dans les sauvegardes existantes) et Q4 (arme de départ affichée au plan).
+
+### P-6. Carburant de la ligne principale [PRODUCTION]
+
+Le stock de départ (64) couvre exactement les 16 sorties de la ligne principale (4 chacune). Une sortie ratée ou un saut le rend insuffisant avant le marché d'Asphodèle.
+
+**Options :**
+- **A.** Même principe que le ravitaillement : la colonie rend du carburant (dépôt de Quais).
+- **B.** Stock de départ plus haut.
+- **C.** Garder : le marché d'Asphodèle est la source prévue.
+
+Aucune de ces décisions ne certifie une fidélité « 1:1 ».

@@ -615,10 +615,10 @@ Spec `specs/009-niveaux-station` ; bible §7.10. Code : `src/station-mission-lev
 
 | Élément | Avant | Après | Reste |
 | --- | --- | --- | --- |
-| S1 L'arrimage | Gabarit vaisseau générique (roster, générateur, archives) et cale de cargo procédurale V2 | V1 : sas manuel, anneau éteint, ventilateurs et détecteur saturé, deux traces d'Echo-8, récupérateurs négociés ou forcés, alimentation de secours du pont de contrôle | Art de la manivelle, du ventilateur, de la craie ; l'issue des récupérateurs n'est pas sauvegardée |
+| S1 L'arrimage | Gabarit vaisseau générique (roster, générateur, archives) et cale de cargo procédurale V2 | V1 : sas manuel, anneau éteint, ventilateurs et détecteur saturé, deux traces d'Echo-8, récupérateurs négociés ou forcés, alimentation de secours du pont de contrôle | Art de la manivelle, du ventilateur, de la craie ; issue des récupérateurs sauvegardée et collier en profondeur depuis le 23 novembre 2026 (section dédiée en fin de document) |
 | S2 La voix de CASSIUS | Idem | V1 : trois disjoncteurs avec Kwan à la radio, réacteur relancé, interrogatoire de CASSIUS (spec 010, sur la mission en pause), ordres QZ17 copiés ; décision CASSIUS inchangée au Commandement, son texte reprend la dernière réponse de l'interrogatoire | Voix de CASSIUS et de Kwan ; art du disjoncteur et du panneau du réacteur |
 | S3 Les ponts scellés | Idem, minuteur générique de 105 s | V1 : sas 3 selon la décision CASSIUS, laboratoire (berceaux, journaux, deux œufs), routage d'énergie, combat confiné, plaque de Kessler, compte à rebours de 150 s | Art de l'œuf, du journal, de la plaque, du routeur, du scellé |
-| S4 Le hub Asphodèle | Idem, tenue de zone générique de 12 s | V1 : dernier nid, trois vannes, quai tenu 60 s, arrivée de l'équipe (et de Grue si alliée), extraction au quai | Arrivée des colons volontaires non représentée |
+| S4 Le hub Asphodèle | Idem, tenue de zone générique de 12 s | V1 : dernier nid, trois vannes, quai tenu 60 s, arrivée de l'équipe (et de Grue si alliée), extraction au quai | Colons volontaires et Grue selon S1 : faits le 23 novembre 2026 (section dédiée en fin de document) ; silhouettes en primitives |
 | Parcours | Les conduits V62 et les ponts supérieurs contournaient chaque cloison | Conduits scellés, deux cadres scellés sur les ponts supérieurs ; chaque cloison est le seul passage (accès logique `stationAccessV188`, passage physique vérifié) | Art des cadres scellés |
 
 Inchangés : identifiants, objectifs de campagne et objectifs d'exécution (`board-vessel`, `restore-atmosphere`, `escape-quarantine`, `hold-extraction`), récompenses, `stationV188` (forme vérifiée), chaîne d'accès, décision CASSIUS, scènes de retour, pièces du dossier, annexes et contrats (gabarit générique et habillage `asph-msn-*`). L'intro *Six heures de silence* n'a pas de gabarit de mission (fin de quête et CIN-70).
@@ -715,9 +715,45 @@ Spec `specs/013-bioforge` ; audit de level design `docs/development/BIOFORGE_AUD
 | Plan | 6 salles identiques, portes = murs invisibles de 10 m | 8 zones nommées dans les 6 salles, cloisons pleine hauteur, plafonds à hauteur humaine | Étage d'observation praticable |
 | Arrivée et sortie | Scène inerte avant session ; sortie seulement par le terminal | Promenade sans session ; sortie à pied après purge, décontamination de 2,4 s **[PROPOSÉ]**, retour à l'annexe du hub | Reprise exacte pendant la sortie |
 | Flux d'admission | File seulement dans le terminal | Tableau de file et deux cuves de stase dans le monde | — |
-| Fonctions de laboratoire | Absentes | Stockage froid, analyse, incinérateur (lecture seule), galerie en profondeur | Quête `ship-bioforge`, PNJ |
+| Fonctions de laboratoire | Absentes | Stockage froid, analyse, incinérateur (lecture seule), galerie en profondeur | PNJ dans le laboratoire (la quête `ship-bioforge` est jouable depuis le 23 novembre 2026, section dédiée en fin de document) |
 | Art | PNG V80 | PNG V80 conservés + primitives `bioforge-lab-*` | Images des emplacements (aucune générée) |
 
 Inchangés : identifiants de salles, portes, stations et emplacements, monde 2880×720, arène, sauvegarde `bioforgeV80` (aucun champ ajouté), admissions V132, règles de session. Fidélité : références citées dans la spec (Alien 1979, Aliens 1986, Alien Resurrection 1997, Prometheus 2012, Covenant 2017, Alien: Isolation 2014), séparées en documenté / adapté / à définir ; rien n'est « 1:1 ».
 
 Vérifications réellement exécutées : `scripts/verify-bioforge-lab-v188.mjs` (dans `test:priorities:v188`), parcours Chromium `scripts/qa-bioforge-lab-v188.mjs` à 1366×768 et 390×844 (fixture et crochet de reprise déclarés en tête), mesure de rendu avant/après dans l'audit ; voir le rapport de la PR pour les suites complètes.
+
+## Décisions du propriétaire du 23 novembre 2026 — station (S9-1, S9-2, S9-5, noms des zones) et quête `ship-bioforge`
+
+Base : `f8b22e68`. Décisions enregistrées dans `QUESTIONS_PROPRIETAIRE_V188.md` (« Décisions du propriétaire (2026-11-23) ») ; règles et valeurs dans la bible (§7.11, §8.6). Identifiants de contenu et sauvegardes conservés ; un champ additif (`stationV188.s1Salvagers`, absent tant que S1 ne l'écrit pas) ; la quête écrit dans des champs existants (`crewQuestsV188`, `storyCampaignV188.confrontationsV188`). Aucune image générée ; aucun nouveau fichier source.
+
+| Élément | Statut | Constat |
+| --- | --- | --- |
+| S1 : collier d'arrimage en profondeur (S9-1) | Partiel | Définition `station-s1-docking-collar` (5ᵉ cale en profondeur), du plancher du collier à la cloison du quai ; reste de S1 en vue de côté ; monte-charge du collier au repos ; manivelle et sas sur le rail seulement. Objets du collier : emplacements d'art des cales réemployés (pas d'art propre à la station) ; dropship d'Echo-8 inchangé (PNG admis, au mur) |
+| S1 → S4 : issue des récupérateurs (S9-2) | Fait (règle) | `stationV188.s1Salvagers` écrit une fois par la première réussite de S1 ; S4 : alliée (tenue 9 → 6, 3 à la fois, Grue à bord), hostile (2 récupérateurs armés dans la tenue), absente, ou comportement antérieur si rien n'est enregistré. Les récupérateurs alliés sont des silhouettes : leur aide réduit la vague, ils ne tirent pas |
+| S4 : tenue du quai | Corrigé | Une apparition dont l'écart tombait derrière la cloison de l'anneau fermée était abandonnée : la tenue recevait 2 créatures sur 9. Elle apparaît maintenant au bord de la zone sûre. L'équilibrage de la tenue complète n'a pas été éprouvé par un playtest |
+| S4 : colons volontaires (S9-5) | Partiel | Nombre lu dans `colonyMissionsV188.population`, 6 silhouettes au plus, marche d'entrée depuis le collier, texte FR/EN avec le nombre réel. Emplacement `station-volunteer-colonist` en primitive Canvas (21ᵉ emplacement, 11 en primitives) |
+| S1-S4 : noms des zones | Fait | Plaques des cloisons, ligne de zone et plan local lisent la station (FR/EN, 11 noms **[PROPOSÉ]**) ; identifiants de zone, art et signature du niveau inchangés ; annexes et contrats gardent les noms du gabarit |
+| Quête `ship-bioforge` « Ce qu'on garde en vie » | Partiel | Entrée `ship-bioforge-care` du face-à-face (5 arguments, 3 relevés du bord toujours disponibles, 3 pièces du dossier selon la sauvegarde) ; deux protocoles, effets sur des valeurs existantes (loyauté, stress, recherche) et texte dans le laboratoire ; aucune fin touchée. Portraits de BISHOP-9 et d'Inez en substituts Canvas ; pas de voix ; les deux personnages ne sont pas dans le laboratoire |
+| Accès narratif à la Bioforge | Fait (règle) | Porte fermée tant que le débat n'est pas tranché ; une sauvegarde qui a déjà créé une session garde son accès et reçoit le débat par Inez ; le lanceur de développement ouvre la vue directement |
+| Face-à-face (spec 010) | Étendu | Extension additive : arguments propres à une entrée (`ownPieces`), petit portrait du témoin, libellés d'issue propres ; les entrées Halloran et CASSIUS et leurs règles sont inchangées |
+
+Fidélité : rien n'est déclaré « 1:1 ». Les repères documentés, les adaptations et ce qui reste à définir sont séparés dans la bible (§7.11, §8.6).
+
+Vérifications réellement exécutées : voir le rapport du lot. Suites Node étendues : `scripts/verify-station-levels-v188.mjs` (collier, issue enregistrée, quai de S4, colons, noms), `scripts/verify-depth-holds-v188.mjs`, `scripts/verify-confrontation-v188.mjs` (entrée, quête, accès, portraits), `scripts/verify-bioforge-lab-v188.mjs` (protocole affiché), `scripts/verify-colony-crew-v188.mjs`. Parcours Chromium : `scripts/qa-station-levels-v188.mjs` (S1, S4 négocié, `station-s4@forced`) et `scripts/qa-bioforge-lab-v188.mjs` (débat joué avec les boutons du dialogue) ; fixtures et injections déclarées en tête de chaque script.
+## Décisions du propriétaire du 23 novembre 2026
+
+Détail : `docs/development/QUESTIONS_PROPRIETAIRE_V188.md` (section du 2026-11-23) ; tests `scripts/verify-owner-decisions-20261123-v188.mjs`.
+
+| Sujet | Fait | Reste |
+| --- | --- | --- |
+| Ravitaillement (P-1) | La colonie rend du ravitaillement (+8 par mission réussie, +4 par niveau de chantier validé, **[PROPOSÉ]**) ; sources affichées au Commandement ; refus de départ conservé ; simulation de la ligne principale testée | Carburant non décidé (stock de départ égal au coût des 16 sorties) ; équilibrage non éprouvé en partie réelle |
+| Saut bloqué par l'infestation (P-2) | Blocage conservé ; raison et marche à suivre affichées à la carte galactique (FR/EN) | Pas de mission dédiée ; clôture de la chaîne non rejouée de bout en bout |
+| Ordre des actes (P-3) | Acte I recommandé avant l'Acte II ; QZ-18 non verrouillé | Ouverture du conseil avant C4 et de l'Interlude avant C3 inchangée |
+| Interlude (P-4) | Crise liée au pont 2, menaces en attente nommées au relevé du hub | Autres crises du hub inchangées |
+| Conseil (P-5) | Phrase propre au cas d'un seul conteneur | — |
+| Armes 194–196 (A1) | Achetables à l'armurerie derrière une **plaque provisoire dessinée** (Canvas, emplacement nommé) | **Art non livré** : plaques natives à produire ; identité et statistiques inchangées, rien n'est certifié « 1:1 » |
+| Pompe (A5) | Option « pompe manuelle » : touche dédiée réaffectable, bouton tactile, invite texte ; automatique par défaut | Sons et animation propres à la pompe manuelle |
+| Capacités (A2-A4) | Conservées, décision consignée | — |
+| Petits défauts du parcours | Texte de l'objectif P-2 unifié, groupe de commandes du pupitre réellement masqué, conflit de profil affiché, boutons du verdict QZ-17 distincts | R1 (anciennes sauvegardes), Q4 (arme affichée au plan) |
+
+Vérifié dans Chromium sur le lanceur de développement (stockage isolé) : objectif et étoile de fin de prologue, ligne des sources au Commandement, panneau de saut, plaque et achat de l'Ithaca 37, réglage et bouton de pompe, pompe manuelle en mission (QZ-17), crise de l'Interlude selon le pont. Injections déclarées dans le rapport de livraison.

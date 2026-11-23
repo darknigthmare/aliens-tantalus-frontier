@@ -4,6 +4,10 @@
 // the Options screen (#save-import). Default Bioforge composition (1 × Drone Big Chap).
 // Input: real keyboard only (A/D, E, F) and the terminal's own buttons, from the hub
 // quarantine door to the return to the hub. Runtime globals are observed, never written.
+// Quest `ship-bioforge` (owner decision 2026-11-23): the profile has never used the Bioforge, so the
+// station first opens the debate between Inez Harlow and BISHOP-9. It is played with the dialog's own
+// buttons (purge log, cold-storage counter, silence, night power reading → Harlow protocol), then the
+// Bioforge opens and the cold storage shows the protocol. No field of the save is injected for it.
 // Injection (declared): the resume check reloads the page and reopens the lab with the QA
 // hook __ATF_BIOFORGE_V80__.open() (direct entry) instead of walking the hub again.
 // Usage: PORT=4721 node scripts/dev.mjs & ; node scripts/qa-bioforge-lab-v188.mjs <out-dir> [1366x768|390x844]
@@ -89,7 +93,33 @@ await page.keyboard.press('KeyE');
 await page.waitForFunction(() => globalThis.__ATF_HUB__.currentAnnexV71?.()?.id === 'bioforge' && !globalThis.__ATF_HUB__.annexTransitionV71, null, { timeout: 15000 });
 const station = await page.evaluate(() => ({ ...globalThis.__ATF_HUB__.currentAnnexV71().station.bounds }));
 await hubWalk(station.x + station.w / 2 - 22);
-await page.keyboard.press('KeyE'); await page.waitForTimeout(2000); await closeDialogs();
+await page.keyboard.press('KeyE'); await page.waitForTimeout(1200);
+// Quest `ship-bioforge`: the debate at the airlock, with the dialog's own buttons.
+const offer = page.locator('dialog.content-scene-v188[open]');
+check('quest: the first visit opens the debate offer at the airlock (no Bioforge view yet)',
+  await offer.count() === 1 && /Inez Harlow · Ce qu’on garde en vie/.test(await offer.locator('h2').textContent()) && (await lab()).view !== 'bioforge-ui-v80', await offer.locator('h2').textContent().catch(() => null));
+await shot('00a-debate-offer', false);
+await offer.locator('button').first().click(); await page.waitForTimeout(600);
+const debate = page.locator('[data-confrontation-v188="ship-bioforge-care"]');
+check('quest: the debate dialog opens (BISHOP-9 speaks, Inez Harlow listens)', await debate.count() === 1, await debate.count());
+await shot('00b-debate-round-1', false);
+const heldPieces = await debate.locator('[data-confrontation-piece-v188]:not([disabled])').evaluateAll(nodes => nodes.map(node => node.dataset.confrontationPieceV188));
+check('quest: the three ship readings are at hand; the QZ17 pieces follow the save (none here)', heldPieces.join() === 'purge-log,cold-storage-count,night-power-draw', heldPieces);
+for (const piece of ['purge-log', 'cold-storage-count', null, 'night-power-draw']) {
+  await (piece ? debate.locator(`[data-confrontation-piece-v188="${piece}"]`) : debate.locator('[data-confrontation-silence-v188]')).click();
+  await page.waitForTimeout(500);
+}
+await shot('00c-debate-settled', false);
+const settledText = await debate.locator('[data-confrontation-live-v188]').textContent();
+check('quest: five points of ground settle the debate for the Harlow protocol', /On ne garde rien en vie/.test(settledText), settledText.slice(0, 200));
+await debate.locator('[data-confrontation-continue-v188]').click(); await page.waitForTimeout(600);
+const completion = page.locator('dialog.content-scene-v188[open]');
+check('quest: completion scene (Harlow protocol, Bioforge open)', /Protocole Harlow/.test(await completion.locator('p').first().textContent().catch(() => '')), await completion.locator('p').first().textContent().catch(() => null));
+await completion.locator('button').last().click(); await page.waitForTimeout(2000); await closeDialogs();
+const questSave = await page.evaluate(() => JSON.parse(localStorage.getItem('atf-v47-profile-1')));
+check('quest: recorded additively (quest answer, debate run, Inez +5, no new ending field)',
+  questSave.crewQuestsV188.quests['ship-bioforge']?.stage === 'done' && questSave.crewQuestsV188.quests['ship-bioforge'].answer === 'limit'
+  && questSave.storyCampaignV188.confrontationsV188['ship-bioforge-care'].status === 'won', questSave.crewQuestsV188.quests['ship-bioforge']);
 let state = await lab();
 check('entry: the hub station opens the Bioforge view without a session', state.view === 'bioforge-ui-v80' && state.phase === 'configuration' && !state.running, state);
 await shot('01-arrival', false);
@@ -100,6 +130,8 @@ state = await labWalk(50);
 check('standby: A walks the control room without starting a session', state.mode === 'standby' && state.running && state.phase === 'configuration' && state.x <= 70, state);
 state = await pressE();
 check('cold storage: E reads the archived samples (read-only)', /STOCKAGE FROID/.test(state.caption || ''), state.caption);
+const note = await page.evaluate(() => globalThis.__ATF_BIOFORGE_V80__.runtime.bioforgeLabCaptionV188?.note || null);
+check('cold storage: the protocol decided by the debate is shown', note === 'PROTOCOLE HARLOW · ÉTUDE, PUIS INCINÉRATION', note);
 await shot('02-cold-storage');
 state = await labWalk(212);
 check('control console prompt', /TERMINAL DE CONTRÔLE/.test(state.prompt || ''), state.prompt);

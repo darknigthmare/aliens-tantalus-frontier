@@ -32,6 +32,29 @@ export const COLONY_TIERS_V188 = Object.freeze([
 ]);
 export const COLONY_STABILITY_PER_LEVEL_V188 = 3;
 export const COLONY_AUTONOMOUS_STIPEND_V188 = Object.freeze({ credits: 150, alloy: 10 });
+// Owner decision 2026-11-23 (P-1): supplies have a visible source. [PROPOSÉ] each successful colony mission
+// sends back 8 supplies (a sortie on Cocyte costs 6, so a colony mission or a contract nets +2) and each
+// validated site level 4 (hold cap: 100).
+export const COLONY_SUPPLY_RETURNS_V188 = Object.freeze({ mission: 8, site: 4 });
+/** Adds supplies to the Tantalus hold (`hub.systems.supplies`, 0-100). Returns what was actually stored. */
+export function addColonySuppliesV188(save, amount) {
+  const systems = save?.hub?.systems;
+  if (!systems || !(amount > 0) || !Number.isFinite(Number(systems.supplies))) return 0;
+  const before = Number(systems.supplies);
+  systems.supplies = Math.max(0, Math.min(100, Math.round((before + amount) * 100) / 100));
+  return Math.round((systems.supplies - before) * 100) / 100;
+}
+/** One debrief fragment naming the supplies sent back by the colony (empty when none). */
+export function colonySuppliesLineV188(amount, language = 'fr') {
+  return amount > 0 ? (language === 'en' ? ` · +${amount} supplies from Port-Méridien` : ` · +${amount} ravitaillement de Port-Méridien`) : '';
+}
+/** Where supplies come from, for the Command table (FR/EN). */
+export function colonySupplySourcesTextV188(language = 'fr') {
+  const { mission, site } = COLONY_SUPPLY_RETURNS_V188;
+  return language === 'en'
+    ? `Supplies: +${mission} per successful Port-Méridien mission, +${site} per reconstruction site level validated; the "Tantalus logistics" project adds 8. Every sortie spends some.`
+    : `Ravitaillement : +${mission} par mission de Port-Méridien réussie, +${site} par niveau de chantier validé ; le projet « Logistique du Tantalus » en ajoute 8. Chaque sortie en consomme.`;
+}
 
 export function createColonyV188() {
   return { schema: 188, sites: Object.fromEntries(COLONY_SITE_IDS_V188.map(id => [id, { invested: 0, validated: 0 }])) };
@@ -132,6 +155,7 @@ export function applyColonyOperationResultV188(save, { success, worldId } = {}) 
     const pending = colonyLocalValidationActiveV188(save) ? null : COLONY_SITE_IDS_V188.find(id => colony.sites[id].invested > colony.sites[id].validated);
     if (!pending) return stipend ? { stipend } : null;
     colony.sites[pending].validated += 1; save.colonyV188 = colony;
+    addColonySuppliesV188(save, COLONY_SUPPLY_RETURNS_V188.site);
     const world = save.galaxy?.worldState?.[COLONY_WORLD_ID_V188];
     if (world && Number.isFinite(world.stability)) world.stability = Math.min(100, world.stability + COLONY_STABILITY_PER_LEVEL_V188);
     return { validated: pending, level: colony.sites[pending].validated, stipend };

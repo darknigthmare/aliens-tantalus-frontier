@@ -16,6 +16,11 @@
 // so the « lost » outcome; « won » is covered by the Node suite), then the decision text is read
 // at the Command table after CIN-71 (skipped with Escape).
 // The physical check of the sealed frames uses the real D key and Space.
+// Owner decisions 2026-11-23: S1 — the docking collar is a depth corridor (real S / W keys step in
+// depth); the salvagers outcome is read back from the stored save after the extraction. S4 — the
+// fixture also carries stationV188.s1Salvagers = 'negotiated' and colonyMissionsV188.population = 4
+// (Grue allied at the dock, four volunteer colonists); the id `station-s4@forced` runs S4 with
+// s1Salvagers = 'forced' and no price decision (hostile salvagers during the hold).
 // Usage: PORT=4671 node scripts/dev.mjs & ; node scripts/qa-station-levels-v188.mjs <out-dir> [ids]
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -35,13 +40,15 @@ const report = { checks: [], pageErrors: [], consoleErrors: [], shots: [] };
 const check = (label, condition, evidence = null) => { report.checks.push({ label, passed: Boolean(condition), evidence }); console.log(JSON.stringify({ check: label, passed: Boolean(condition), evidence })); };
 const ACTS = ['special-narrative-qz17', 'special-archive-relay'];
 
-function fixture(id) {
+function fixture(token) {
+  const [id, variant = null] = token.split('@');
   const save = createDefaultSave(); save.needsPlayerCreationV84 = false; save.scene = 'hub';
   save.worldId = 'world-05-lethe'; save.galaxy.shipWorldIdV116 = 'world-05-lethe';
   const before = ORDER.slice(0, ORDER.indexOf(id));
   save.galaxy.completedCampaignIds = [...new Set([...save.galaxy.completedCampaignIds, ...ACTS, ...before])];
   save.stationV188 = { schema: 188, introHeard: true, cassius: id === 'station-s3' ? 'erase' : id === 'station-s4' ? 'rewrite' : null,
     scenesSeen: ['s1', 's3', 's4'].filter(scene => before.includes(`station-${scene}`)) };
+  if (id === 'station-s4') { save.stationV188.s1Salvagers = variant === 'forced' ? 'forced' : 'negotiated'; save.colonyMissionsV188.population = 4; }
   save.storyCampaignV188.cinematicsSeen = [...CINEMATIC_IDS_V188];
   Object.assign(save.hub, { deck: 3, roomId: 'dropship-hangar', positionX: 470, facing: 1 });
   return save;
@@ -96,7 +103,10 @@ async function launch(id) {
   await page.locator('#game-canvas').focus().catch(() => {});
   const state = await game(() => ({ campaign: globalThis.__ATF_GAME__?.stationLevelV188?.campaignId, phase: globalThis.__ATF_GAME__?.stationPhaseIdV188?.(),
     corridor: globalThis.__ATF_GAME__?.missionDepthSectionV188?.id || null, enemies: globalThis.__ATF_GAME__?.enemies?.length }));
-  check(`${id}: dedicated level running after the insertion (V1, no generic roster)`, state.campaign === id && !state.corridor, state);
+  const corridor = id === 'station-s1' ? 'station-s1-docking-collar' : null; // S9-1: the collar of S1 only
+  check(`${id}: dedicated level running after the insertion (${corridor ? 'collar in depth' : 'V1'}, no generic roster)`, state.campaign === id && state.corridor === corridor, state);
+  const zones = await game(() => globalThis.__ATF_GAME__.missionLevelRuntime.biomeZones.map(zone => zone.label));
+  check(`${id}: zones carry station names (no template name left)`, !zones.some(label => /Soutes|Tube d’amarrage|Puits d’ingénierie|Passerelle|Sas arrière|Pont d’habitation/.test(label)), zones);
   return state;
 }
 let P = null, S2_HEARING = null;
@@ -112,8 +122,12 @@ const prompt = () => game(() => globalThis.__ATF_GAME__.getInteractionPrompt());
 const phase = () => game(() => globalThis.__ATF_GAME__.stationPhaseIdV188());
 async function press() { await clearSpawns(); await page.keyboard.press('KeyE'); await page.waitForTimeout(800); }
 async function holdE(seconds) {
+  // The key is held until the level's own held interaction ends (a loaded machine runs the game slower than the clock).
   await clearSpawns(); await page.keyboard.down('KeyE');
-  for (let t = 0; t < seconds; t += .5) { await clearSpawns(); await page.waitForTimeout(500); }
+  for (let t = 0; t < seconds * 6; t += .5) {
+    await clearSpawns(); await page.waitForTimeout(500);
+    if (t >= seconds - .5 && await game(() => !globalThis.__ATF_GAME__.stationLevelV188?.runtime?.holding)) break;
+  }
   await page.keyboard.up('KeyE'); await page.waitForTimeout(300);
 }
 async function extract(id) {
@@ -130,8 +144,9 @@ async function extract(id) {
   return save;
 }
 
-for (const id of only) {
-  await importProfile(fixture(id), `${id}.json`);
+for (const token of only) {
+  const [id, variant = null] = token.split('@');
+  await importProfile(fixture(token), `${id}.json`);
   await launch(id);
   P = await game(() => JSON.parse(JSON.stringify(globalThis.__ATF_GAME__.stationLevelV188.places)));
   await shot(`${id}-00-start`);
@@ -145,10 +160,33 @@ for (const id of only) {
       await page.keyboard.down('KeyD');
       for (let t = 0; t < 8; t++) { await page.keyboard.press('Space'); await page.waitForTimeout(450); }
       await page.keyboard.up('KeyD');
+      await page.waitForFunction(() => globalThis.__ATF_GAME__.player.grounded, null, { timeout: 8000 }).catch(() => {}); // the last jump has landed
       const at = await game(() => { const e = globalThis.__ATF_GAME__; return { x: e.player.x + e.player.w / 2, feet: e.player.y + e.player.h, prompt: e.getInteractionPrompt() }; });
       await shot(`station-s1-00-${barrier.id}`);
       check(`S1 physical: ${barrier.id} stops the walk (D + jumps) and says why`, at.x < barrier.x && Math.abs(at.feet - barrier.floorY) < 4 && at.prompt === barrier.requirement, { at, barrier: { x: barrier.x, floorY: barrier.floorY } });
     }
+    // S9-1: the collar in depth. Real keys: S steps towards the camera, W back to the wall; the crank is worked from the rail only.
+    const depthOf = () => game(() => { const e = globalThis.__ATF_GAME__; return { x: Math.round(e.player.x + e.player.w / 2), z: Math.round(e.player.depthZ), feet: e.player.y + e.player.h }; });
+    const keyUntil = async (code, done, limit = 12000) => { await page.keyboard.down(code); await page.waitForFunction(done, P, { timeout: limit, polling: 'raf' }).catch(() => {}); await page.keyboard.up(code); await page.waitForTimeout(150); };
+    await moveTo(P.x.drop + 60);
+    await keyUntil('KeyS', () => globalThis.__ATF_GAME__.player.depthZ <= -46);
+    const front = await depthOf();
+    check('S1 collar: S steps into the depth of the collar (the marine stays on the deck)', front.z <= -40 && front.z >= -64 && Math.abs(front.feet - P.decks.low) < 2, front);
+    // The middle lane passes behind the drums (front edge), then Echo-8's crates stand across it: the walk stops there.
+    await keyUntil('KeyD', places => { const p = globalThis.__ATF_GAME__.player; return p.x + p.w / 2 > places.ladders.dock - 130; });
+    await page.keyboard.down('KeyD'); await page.waitForTimeout(1500); await page.keyboard.up('KeyD');
+    const stopped = await depthOf();
+    check('S1 collar: the middle lane passes the drums and is stopped by Echo-8’s crates', stopped.x > P.collar.x + 346 && stopped.x < P.ladders.dock - 96 && stopped.z < -34, stopped);
+    await shot('station-s1-01a-collar-depth');
+    // Back towards the wall, the rail lane is free: the marine walks on to the ladder side.
+    await keyUntil('KeyW', () => globalThis.__ATF_GAME__.player.depthZ >= -20);
+    await keyUntil('KeyD', places => { const p = globalThis.__ATF_GAME__.player; return p.x + p.w / 2 > places.ladders.dock + 60; });
+    const passed = await depthOf();
+    check('S1 collar: by the wall lane the marine walks on past the crates', passed.x > P.ladders.dock + 40 && passed.z >= -24, passed);
+    await keyUntil('KeyS', () => globalThis.__ATF_GAME__.player.depthZ <= -70);
+    await game(([x]) => { const e = globalThis.__ATF_GAME__; e.player.x = x - e.player.w / 2; e.player.vx = 0; }, [P.crank.x - 40]); await page.waitForTimeout(200); // injection (1), depth kept
+    check('S1 collar: no crank prompt from the front lane', await prompt() === '', await prompt());
+    await keyUntil('KeyW', () => globalThis.__ATF_GAME__.player.depthZ >= -2);
     await moveTo(P.crank.x); check('S1: manual crank prompt', /MANIVELLE/.test(await prompt()), await prompt());
     await shot('station-s1-01-collar'); await holdE(5);
     check('S1: airlock cycled, ring phase', await phase() === 'ring');
@@ -205,13 +243,33 @@ for (const id of only) {
     check('S4: nest purged', await phase() === 'pressure');
     for (const valve of P.valves) { await moveTo(valve.x, valve.y); await holdE(4); }
     check('S4: station pressurised, dock hold', await phase() === 'hold');
-    await moveTo(P.hold.x); await page.waitForTimeout(3000); await shot('station-s4-02-hold');
+    const grue = await game(() => globalThis.__ATF_GAME__.stationLevelV188.grue);
+    check(`S4: Grue at the dock follows the S1 outcome (${variant || 'negotiated'})`, grue === (variant === 'forced' ? 'hostile' : 'ally'), grue);
+    await moveTo(P.hold.x);
+    if (variant === 'forced') {
+      // Hostile salvagers take the 2nd place of the hold (≈ 8 s): observed, then removed with the other spawns.
+      let raid = null;
+      for (let i = 0; i < 40 && !raid; i++) { await page.waitForTimeout(500); await game(() => { const e = globalThis.__ATF_GAME__; e.player.health = Math.max(e.player.health, 80); });
+        raid = await game(() => { const e = globalThis.__ATF_GAME__, enemy = e.enemies.find(item => item.alive && item.stationLevelSpawnV188 === 'hold' && item.biology === 'human'); return enemy ? { x: Math.round(enemy.x), grace: enemy.stationGraceV188 } : null; }); }
+      check('S4 forced: armed salvagers come to the dock during the hold, behind the safe zone', raid && Math.abs(raid.x - P.hold.x) >= 880, raid);
+      await shot('station-s4-02-hold-salvagers');
+    }
+    await page.waitForFunction(() => globalThis.__ATF_GAME__.stationLevelV188.runtime.grueLine === true, null, { timeout: 40000 }).catch(() => {});
+    if (variant !== 'forced') { await page.waitForTimeout(300); await shot('station-s4-02-hold'); }
+    const line = await game(() => globalThis.__ATF_GAME__.stationLevelV188.runtime.grueLine === true);
+    check('S4: Grue speaks on the radio during the hold', line, line);
     await game(() => { globalThis.__ATF_GAME__.stationLevelV188.progress.holdRemaining = 3; }); // injection (3)
     for (let i = 0; i < 12 && await phase() === 'hold'; i++) { await clearSpawns(); await page.waitForTimeout(600); }
-    await shot('station-s4-03-team');
     check('S4: the technical team arrives, extraction at the dock', await phase() === 'extract');
+    await page.waitForTimeout(1200); await shot('station-s4-03a-volunteers-walking');
+    await page.waitForFunction(() => { const figures = globalThis.__ATF_GAME__.stationVolunteerFiguresV188(); return figures.length > 0 && figures.every(entry => entry.arrived); }, null, { timeout: 40000 }).catch(() => {});
+    const arrival = await game(() => { const e = globalThis.__ATF_GAME__, l = e.stationLevelV188; return { volunteers: l.volunteers, figures: e.stationVolunteerFiguresV188(), aboard: l.grueAllied, dock: l.places.dock }; });
+    await moveTo(P.volunteers.x + 60); await page.waitForTimeout(400); await shot('station-s4-03-team');
+    check('S4: the volunteer colonists of the save (4) have walked in at the dock', arrival.volunteers === 4 && arrival.figures.length === 4 && arrival.figures.every(entry => entry.arrived && entry.x > arrival.dock.x0 && entry.x < arrival.dock.x1), arrival);
+    check(`S4: Grue aboard with the team only when allied (${variant || 'negotiated'})`, arrival.aboard === (variant !== 'forced'), arrival.aboard);
   }
-  await extract(id);
+  const done = await extract(id);
+  if (id === 'station-s1') check('S1: the salvagers outcome is saved with the operation (stationV188.s1Salvagers)', done.stationV188.s1Salvagers === 'negotiated', done.stationV188);
   if (id === 'station-s2') {
     // Back aboard, then the Command table: CIN-71 (skipped with Escape), then the existing decision.
     for (let i = 0; i < 40 && !(await page.locator('dialog.content-scene-v188').count()); i++) {

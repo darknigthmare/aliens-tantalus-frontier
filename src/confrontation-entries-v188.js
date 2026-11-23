@@ -9,7 +9,8 @@
 // [PROPOSÉ]; « Clause 14 » comes from the bible (§21, CE-05). The documented
 // reference points are cited in specs/010-face-a-face/spec.md.
 //
-// Piece ids are those of DOSSIER_PIECES_V188 (story-dossier-v188.js, bible §5.7).
+// Piece ids are those of DOSSIER_PIECES_V188 (story-dossier-v188.js, bible §5.7); an entry may add
+// arguments of its own (`ownPieces`), which are not pieces of the dossier and are never counted in it.
 
 const t = (fr, en) => Object.freeze({ fr, en });
 const round = (id, source, citation, counters, decisive) => Object.freeze({ id, source, citation, counters: Object.freeze(counters), replies: Object.freeze({ decisive }) });
@@ -138,5 +139,80 @@ export const CASSIUS_INTERROGATION_V188 = Object.freeze({
   outcomes: Object.freeze({ won: 'conceded', lost: 'held' })
 });
 
+/**
+ * Bioforge, quest `ship-bioforge` « Ce qu'on garde en vie » (bible §8.2; owner decision 2026-11-23).
+ * A debate, not a trial: BISHOP-9 argues for keeping specimens alive, Inez Harlow listens and will
+ * apply whatever comes out of it. Echo-9 answers each argument with a reading of the ship (`ownPieces`,
+ * always at hand) or a piece of the QZ17 file, or lets the argument stand: every argument left standing
+ * weighs for BISHOP-9. Nobody shoots, nobody is condemned; both outcomes are a protocol of the Bioforge.
+ * Arguments, readings, values and the two protocols are project adaptations [PROPOSÉ].
+ * Reference points (documented, not reproduced): the synthetic who keeps a specimen alive against the
+ * crew (Alien, 1979) and the company wanting specimens brought back alive (Aliens, 1986); specimens
+ * bred and observed behind glass (Alien Resurrection, 1997). No 1:1 claim.
+ */
+export const BIOFORGE_CARE_DEBATE_V188 = Object.freeze({
+  id: 'ship-bioforge-care',
+  title: t('Ce qu’on garde en vie · débat', 'What We Keep Alive · debate'),
+  intro: t('Devant le sas de la Bioforge, BISHOP-9 et Inez Harlow ne sont pas d’accord sur ce qu’on fait des spécimens après une session. BISHOP-9 expose ses raisons une à une. Echo-9 répond par un relevé du bord ou une pièce du dossier QZ17, ou laisse passer : chaque argument laissé debout compte pour BISHOP-9.',
+    'At the Bioforge airlock, BISHOP-9 and Inez Harlow disagree on what becomes of the specimens after a session. BISHOP-9 sets out his reasons one by one. Echo-9 answers with a ship reading or a piece of the QZ17 file, or lets it pass: every argument left standing counts for BISHOP-9.'),
+  interlocutor: Object.freeze({ name: t('BISHOP-9 · BIOFORGE', 'BISHOP-9 · BIOFORGE'), portrait: 'synthetic-bust', slot: 'confrontation-bishop9-bust',
+    role: t('Synthétique scientifique du Tantalus', 'Science synthetic of the Tantalus') }),
+  witness: Object.freeze({ name: t('INEZ HARLOW · ÉCOUTE', 'INEZ HARLOW · LISTENING'), portrait: 'scientist-bust', slot: 'confrontation-harlow-bust' }),
+  // Three readings of the ship, then three pieces of the QZ17 file (held or not, from the save).
+  pieces: Object.freeze(['purge-log', 'cold-storage-count', 'night-power-draw', 'seal-or-cradle', 'bishop-directive', 'depot-cradles']),
+  ownPieces: Object.freeze([
+    Object.freeze({ id: 'purge-log', label: t('Journal des purges de la cellule', 'Cell purge log') }),
+    Object.freeze({ id: 'cold-storage-count', label: t('Compteur du stockage froid', 'Cold-storage counter') }),
+    Object.freeze({ id: 'night-power-draw', label: t('Relevé de consommation nocturne du pont de quarantaine', 'Night power reading of the quarantine deck') })
+  ]),
+  labels: Object.freeze({ won: t('PROTOCOLE HARLOW RETENU', 'HARLOW PROTOCOL ADOPTED'), lost: t('PROTOCOLE BISHOP-9 MAINTENU', 'BISHOP-9 PROTOCOL KEPT'),
+    pieces: t('Relevés du bord et pièces du dossier QZ17', 'Ship readings and QZ17 file pieces') }),
+  credibility: 3, // [PROPOSÉ]
+  target: 5, // [PROPOSÉ] the three ship readings, each at its place, are just enough; one piece of the file gives room
+  rounds: Object.freeze([
+    round('knowledge', t('Protocole scientifique de bord, article 2', 'Ship science protocol, article 2'),
+      t('« Un spécimen vivant répond à des questions qu’un tissu mort ne pose pas. Sans lui, l’équipage combat à l’aveugle. »',
+        '"A living specimen answers questions a dead tissue does not ask. Without it, the crew fights blind."'),
+      { 'purge-log': 'decisive', 'night-power-draw': 'partial' },
+      t('« … Toutes les analyses versées au laboratoire viennent de tissus purgés. Je le reconnais. »', '"… Every analysis filed at the laboratory comes from purged tissue. I grant that."')),
+    round('containment', t('Consigne de confinement, niveau 4', 'Containment order, level 4'),
+      t('« La cellule tient. Aucun spécimen n’a franchi le double sas depuis sa mise en service. »',
+        '"The cell holds. No specimen has passed the double airlock since it was commissioned."'),
+      { 'seal-or-cradle': 'decisive', 'cold-storage-count': 'partial' },
+      t('« … Le conteneur QZ17-04 était scellé, lui aussi. Il s’est ouvert de l’intérieur. »', '"… Container QZ17-04 was sealed too. It opened from the inside."')),
+    round('directive', t('Directive de préservation', 'Preservation directive'),
+      t('« Ma directive demande de préserver les actifs biologiques. Je ne l’ai pas écrite. Je l’applique. »',
+        '"My directive asks me to preserve biological assets. I did not write it. I apply it."'),
+      { 'bishop-directive': 'decisive', 'purge-log': 'partial' },
+      t('« … Son émetteur est celui des ordres de livraison QZ17. Je ne peux pas vous dire pour qui je conserve. »', '"… Its issuer is that of the QZ17 delivery orders. I cannot tell you for whom I am keeping them."')),
+    round('cost', t('Registre de bord, énergie', 'Ship register, power'),
+      t('« Conserver ne coûte rien à l’équipage : un caisson, un peu de froid. »',
+        '"Keeping them costs the crew nothing: one unit, a little cold."'),
+      { 'night-power-draw': 'decisive', 'cold-storage-count': 'partial' },
+      t('« … Le caisson tourne la nuit sur le circuit du pont de quarantaine. Idris Kwan l’a mesuré. »', '"… The unit runs at night on the quarantine deck circuit. Idris Kwan measured it."')),
+    round('harm', t('Rapport médical de bord', 'Ship medical report'),
+      t('« Aucun membre de cet équipage n’a été blessé par un spécimen conservé. »',
+        '"No member of this crew has been hurt by a kept specimen."'),
+      { 'depot-cradles': 'decisive', 'seal-or-cradle': 'partial' },
+      t('« … Les cocons du dépôt servaient à garder des spécimens en vie. Je retire le mot “aucun”. »', '"… The depot cocoons were there to keep specimens alive. I withdraw the word “no”."'))
+  ]),
+  replies: Object.freeze({
+    decisive: t('Inez Harlow note la réponse sans un mot.', 'Inez Harlow notes the answer without a word.'),
+    partial: t('« C’est exact, et cela ne répond qu’à moitié. »', '"That is correct, and it answers only half."'),
+    wrong: t('« Ce relevé ne répond pas à ce que je viens de dire. » Inez Harlow lève les yeux de sa tablette.', '"That reading does not answer what I just said." Inez Harlow looks up from her tablet.'),
+    silence: t('« Pas d’objection. Je poursuis. »', '"No objection. I go on."')
+  }),
+  endings: Object.freeze({
+    won: t('BISHOP-9 : « Je consigne mon désaccord, et j’appliquerai votre protocole. » Inez Harlow : « Étude pendant la session, puis incinération. On ne garde rien en vie. »',
+      'BISHOP-9: "I record my disagreement, and I will apply your protocol." Inez Harlow: "Study during the session, then incineration. We keep nothing alive."'),
+    lost: t('Inez Harlow : « Alors on conserve. Sous scellés, sous ma clé, et je veux le compteur sous les yeux. » BISHOP-9 : « Vous l’aurez à chaque relève. »',
+      'Inez Harlow: "Then we keep them. Under seal, under my key, and I want the counter in front of me." BISHOP-9: "You will have it at every watch."')
+  }),
+  // Existing records fed by the outcome: the quest answer (`crewQuestsV188.quests['ship-bioforge'].answer`), which the
+  // Bioforge cold-storage report reads, and the existing crew and resource values (crew-quests-tantalus-v188.js).
+  feeds: 'crewQuestsV188.ship-bioforge',
+  outcomes: Object.freeze({ won: 'limit', lost: 'keep' })
+});
+
 /** Every entry, by id. The registry in confrontation-v188.js starts from this list. */
-export const CONFRONTATION_ENTRIES_V188 = Object.freeze([HALLORAN_QUAY_AUDIENCE_V188, CASSIUS_INTERROGATION_V188]);
+export const CONFRONTATION_ENTRIES_V188 = Object.freeze([HALLORAN_QUAY_AUDIENCE_V188, CASSIUS_INTERROGATION_V188, BIOFORGE_CARE_DEBATE_V188]);

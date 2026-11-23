@@ -19,7 +19,9 @@
 
 - [ ] T101 Images définitives des emplacements `bioforge-lab-*` et `liquid-bubble` (primitives Canvas aujourd'hui ; aucune image générée).
 - [ ] T102 Galerie d'observation praticable : exige d'agrandir le monde (validateurs V87 et V132 bornés à 2880 px) et une migration de sauvegarde.
-- [ ] T103 Quête `ship-bioforge` « Ce qu'on garde en vie » : débat Inez / BISHOP-9, présence des PNJ dans la galerie, choix de conservation des spécimens ; aucun code n'existe.
+- [x] T103 Quête `ship-bioforge` « Ce qu'on garde en vie » (décision du 2026-11-23) : débat Inez / BISHOP-9 joué comme face-à-face sans tir (entrée `ship-bioforge-care` de la spec 010), choix de conservation enregistré dans `crewQuestsV188`, protocole affiché au stockage froid et sous la file d'admission, accès narratif à la Bioforge (conservé pour les sauvegardes qui l'ont déjà utilisée). Bible §8.6.
+- [ ] T108 Présence d'Inez et de BISHOP-9 dans le laboratoire (galerie d'observation) ; portraits définitifs et voix du débat (substituts Canvas aujourd'hui).
+- [ ] T109 Effet de jeu du protocole sur les règles de session, s'il est souhaité (question B7) : aujourd'hui texte, loyauté, stress et recherche seulement.
 - [ ] T104 Reprise exacte pendant la sortie : une sauvegarde en phase `return` repart de la salle de contrôle, retour par le terminal.
 - [ ] T105 Lisibilité mobile du canvas (390 px : marine ≈ 28 px) : zoom ou cadrage dédié à définir.
 - [ ] T106 Son des cycles (sas, décontamination, incinérateur).

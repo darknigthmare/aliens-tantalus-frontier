@@ -10,7 +10,7 @@ import { createDefaultSave, migrateSave } from '../src/save.js';
 import { normalizeStoryCampaignV188 } from '../src/story-campaign-v188.js';
 import { DOSSIER_PIECES_V188, storyDossierV188 } from '../src/story-dossier-v188.js';
 import {
-  CONFRONTATION_ENTRIES_V188, HALLORAN_QUAY_AUDIENCE_V188, CASSIUS_INTERROGATION_V188, validateConfrontationDefinitionV188,
+  CONFRONTATION_ENTRIES_V188, HALLORAN_QUAY_AUDIENCE_V188, CASSIUS_INTERROGATION_V188, BIOFORGE_CARE_DEBATE_V188, CONFRONTATION_PORTRAITS_V188, validateConfrontationDefinitionV188,
   createConfrontationRunV188, applyConfrontationMoveV188, normalizeConfrontationRunV188, normalizeConfrontationsV188, bestReachableGroundV188,
   confrontationWinnableV188, registerConfrontationV188, getConfrontationV188, confrontationIdsV188, startConfrontationV188, playConfrontationMoveV188,
   confrontationStateV188, confrontationOutcomeV188, confrontationDecisionV188, confrontationViewV188, confrontationPiecesV188, confrontationHeldIdsV188
@@ -18,6 +18,10 @@ import {
 import { startAct5CouncilV188, decideAct5V188, act5MissionPathV188, chooseAct5BridgeV188, applyAct5OperationResultV188, act5TableActionV188,
   advanceAct5ToEndingV188, act5StateV188, act5AudienceDueV188, startAct5AudienceV188, ACT5_AUDIENCE_ID_V188, ACT5_STANDOFF_IDS_V188 } from '../src/story-act5-v188.js';
 import { drawConfrontationStageV188, CONFRONTATION_STAGE_V188 } from '../src/confrontation-ui-v188.js';
+import { CREW_QUESTS_ALL_V188, getCrewQuestV188, crewQuestActionsV188, crewQuestsSnapshotV188, normalizeCrewQuestsV188, startCrewDebateV188, concludeCrewDebateV188,
+  bioforgeCarePolicyV188, bioforgeNarrativeAccessV188 } from '../src/crew-quests-v188.js';
+import { buildBioforgeColdStorageReportV188, BIOFORGE_CARE_POLICY_LINES_V188 } from '../src/bioforge-lab-layout-v188.js';
+import { EN_CATALOG_V185 } from '../src/i18n-en-catalog-v185.js';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url), 'utf8');
 const roundTrip = save => migrateSave(JSON.parse(JSON.stringify(save)));
@@ -61,10 +65,12 @@ const decisiveRound = (def, piece) => def.rounds.findIndex(round => round.counte
 
 test('data entries are valid, FR and EN, and only use pieces of the QZ17 dossier', () => {
   const known = new Set(DOSSIER_PIECES_V188.map(piece => piece.id));
-  assert.deepEqual(confrontationIdsV188(), ['act5-halloran-quay', 'station-s2-cassius']);
+  // The third entry (quest `ship-bioforge`, 2026-11-23) adds ship readings of its own to the dossier pieces (tests below).
+  assert.deepEqual(confrontationIdsV188(), ['act5-halloran-quay', 'station-s2-cassius', 'ship-bioforge-care']);
   for (const def of CONFRONTATION_ENTRIES_V188) {
     assert.deepEqual(validateConfrontationDefinitionV188(def), [], def.id);
-    for (const piece of def.pieces) assert.ok(known.has(piece), `${def.id}: ${piece}`);
+    const own = new Set((def.ownPieces || []).map(piece => piece.id));
+    for (const piece of def.pieces) assert.ok(known.has(piece) || own.has(piece), `${def.id}: ${piece}`);
     for (const round of def.rounds) { assert.match(round.citation.fr, /«/); assert.match(round.citation.en, /"/); }
   }
   assert.equal(H.pieces.length, 7);
@@ -258,4 +264,139 @@ test('wiring: app imports the hearing, the table action opens it, the shell cach
   assert.match(ui, /roundSeconds = 0/, 'no time limit by default');
   assert.match(ui, /event\.key === 'Escape'\) \{ event\.preventDefault\(\); return; \}/);
   assert.doesNotMatch(read('src/confrontation-entries-v188.js'), /import /, 'entries are pure data');
+});
+
+// —— Quest `ship-bioforge` « Ce qu'on garde en vie » (owner decision 2026-11-23): a weighed debate on the same system ——
+const B = BIOFORGE_CARE_DEBATE_V188, QUEST = 'ship-bioforge';
+const OWN = ['purge-log', 'cold-storage-count', 'night-power-draw'];
+const playDebate = (save, moves) => moves.map(piece => playConfrontationMoveV188(save, B.id, piece));
+
+test('ship-bioforge: the debate is a data entry of the same system — own readings always at hand, QZ17 pieces from the save', () => {
+  assert.deepEqual(validateConfrontationDefinitionV188(B), []);
+  assert.equal(getConfrontationV188('ship-bioforge-care'), B);
+  assert.deepEqual(B.ownPieces.map(piece => piece.id), OWN); assert.deepEqual(B.pieces.slice(3), ['seal-or-cradle', 'bishop-directive', 'depot-cradles']);
+  const dossier = new Set(DOSSIER_PIECES_V188.map(piece => piece.id));
+  for (const piece of B.pieces) assert.equal(dossier.has(piece), !OWN.includes(piece), `${piece}: a ship reading is not a piece of the QZ17 dossier`);
+  assert.equal(B.interlocutor.portrait, 'synthetic-bust'); assert.equal(B.witness.portrait, 'scientist-bust');
+  assert.ok(CONFRONTATION_PORTRAITS_V188.includes('synthetic-bust') && CONFRONTATION_PORTRAITS_V188.includes('scientist-bust'));
+  assert.deepEqual(B.outcomes, { won: 'limit', lost: 'keep' }); assert.equal(B.rounds.length, 5); assert.equal(B.target, 5);
+  // A fresh save holds the three readings and nothing of the dossier; the dossier count is untouched by them.
+  const fresh = createDefaultSave();
+  assert.deepEqual(confrontationHeldIdsV188(fresh, B.id).sort(), [...OWN].sort());
+  assert.equal(storyDossierV188(fresh).count, 0);
+  assert.deepEqual(confrontationPiecesV188(fresh, B.id, 'en').map(piece => [piece.id, piece.held]), [...OWN.map(id => [id, true]), ['seal-or-cradle', false], ['bishop-directive', false], ['depot-cradles', false]]);
+  assert.equal(confrontationPiecesV188(fresh, B.id, 'en')[0].label, 'Cell purge log');
+  // Weighable from the start: the three readings, each at its place, are just enough; letting every argument stand keeps BISHOP-9's protocol.
+  assert.equal(bestReachableGroundV188(B, createConfrontationRunV188(B), OWN), 5);
+  assert.equal(bestReachableGroundV188(B, createConfrontationRunV188(B), B.pieces), 10);
+  let run = createConfrontationRunV188(B);
+  for (let i = 0; i < 5; i++) run = applyConfrontationMoveV188(B, run, null, OWN).run;
+  assert.equal(run.status, 'lost'); assert.equal(run.credibility, 3, 'silence costs nothing');
+  // A piece of the dossier is refused when the save does not hold it, accepted when it does.
+  assert.equal(applyConfrontationMoveV188(B, createConfrontationRunV188(B), 'depot-cradles', OWN), null);
+  const act = threshold({ pieces: ['seal-or-cradle', 'bishop-directive'] });
+  assert.ok(confrontationHeldIdsV188(act, B.id).includes('bishop-directive') && confrontationHeldIdsV188(act, B.id).includes('depot-cradles'));
+  // The other entries are unchanged by the extension (no own piece, no labels).
+  for (const def of [H, C]) { assert.equal(def.ownPieces, undefined); assert.equal(def.labels, undefined); assert.equal(confrontationViewV188(createDefaultSave(), def.id, 'fr').labels, null); }
+  // The validator checks the extension.
+  assert.match(validateConfrontationDefinitionV188({ ...B, ownPieces: [{ id: 'not-listed', label: { fr: 'x', en: 'x' } }] }).join(' | '), /ownPieces\[0\]\.id/);
+  assert.match(validateConfrontationDefinitionV188({ ...B, labels: { won: { fr: 'x', en: 'x' } } }).join(' | '), /labels\.lost/);
+  assert.match(validateConfrontationDefinitionV188({ ...B, witness: { ...B.witness, portrait: 'photo' } }).join(' | '), /witness\.portrait/);
+});
+
+test('ship-bioforge: quest flow — offered, started, concluded once; both protocols recorded additively and feeding existing values only', () => {
+  const quest = getCrewQuestV188(QUEST);
+  assert.equal(quest.kind, 'debate'); assert.equal(quest.confrontationId, B.id); assert.equal(quest.crewId, 'crew-09-inez-harlow');
+  assert.equal(CREW_QUESTS_ALL_V188[16], quest, 'appended after the sixteen §8.1 quests (the three « Saison des Reines » quests follow it)');
+  const loyalty = (save, id) => save.crew.find(member => member.id === id).loyalty;
+  // Harlow protocol ('limit'): won with the three readings.
+  const limit = createDefaultSave(); for (const member of limit.crew) member.stress = 10;
+  const before = { inez: loyalty(limit, 'crew-09-inez-harlow'), bishop: loyalty(limit, 'crew-05-bishop-9'), research: limit.galaxy.resources.research, keys: Object.keys(limit).sort() };
+  assert.equal(crewQuestsSnapshotV188(limit).find(entry => entry.id === QUEST).status, 'offered');
+  assert.deepEqual(concludeCrewDebateV188(limit, QUEST), { ok: false, reason: 'not-active' });
+  assert.equal(startCrewDebateV188(limit, QUEST), true);
+  assert.equal(crewQuestsSnapshotV188(limit).find(entry => entry.id === QUEST).status, 'active');
+  assert.equal(crewQuestActionsV188(limit, 'crew-09-inez-harlow').find(entry => entry.id === QUEST).action, 'continue', 'a debate left open is resumed from Inez');
+  assert.deepEqual(concludeCrewDebateV188(limit, QUEST), { ok: false, reason: 'open' }, 'not before the last exchange');
+  assert.deepEqual(playDebate(limit, ['purge-log', 'cold-storage-count', null, 'night-power-draw']).map(move => move.result), ['decisive', 'partial', 'silence', 'decisive']);
+  assert.equal(confrontationOutcomeV188(limit, B.id), 'won');
+  const done = concludeCrewDebateV188(limit, QUEST, 'en');
+  assert.equal(done.answer, 'limit'); assert.match(done.completion, /Harlow protocol/); assert.deepEqual(done.reward, { crewId: 'crew-09-inez-harlow', loyalty: 5, research: 0, crewStress: -2 });
+  assert.equal(loyalty(limit, 'crew-09-inez-harlow'), before.inez + 5); assert.equal(loyalty(limit, 'crew-05-bishop-9'), before.bishop);
+  assert.ok(limit.crew.every(member => member.stress === 8), 'the crew breathes a little easier'); assert.equal(limit.galaxy.resources.research, before.research);
+  assert.deepEqual(concludeCrewDebateV188(limit, QUEST), { ok: false, reason: 'not-active' }, 'paid once'); assert.equal(startCrewDebateV188(limit, QUEST), false);
+  assert.equal(bioforgeCarePolicyV188(limit), 'limit');
+  assert.deepEqual(Object.keys(limit).sort(), before.keys, 'no new save field: the quest answer and the debate run live in existing fields');
+  assert.deepEqual(limit.crewQuestsV188.quests[QUEST], { stage: 'done', step: 0, answer: 'limit' });
+  const reloaded = roundTrip(limit);
+  assert.deepEqual(reloaded.crewQuestsV188.quests[QUEST], { stage: 'done', step: 0, answer: 'limit' }); assert.equal(confrontationOutcomeV188(reloaded, B.id), 'won');
+  assert.equal(bioforgeCarePolicyV188(reloaded), 'limit');
+  // BISHOP-9 protocol ('keep'): every argument left standing.
+  const keep = createDefaultSave(); for (const member of keep.crew) member.stress = 10;
+  startCrewDebateV188(keep, QUEST); playDebate(keep, [null, null, null, null, null]);
+  const kept = concludeCrewDebateV188(keep, QUEST, 'fr');
+  assert.equal(kept.answer, 'keep'); assert.match(kept.completion, /Protocole BISHOP-9/); assert.deepEqual(kept.reward, { crewId: 'crew-05-bishop-9', loyalty: 5, research: 6, crewStress: 0 });
+  assert.equal(loyalty(keep, 'crew-05-bishop-9'), before.bishop + 5); assert.equal(keep.galaxy.resources.research, before.research + 6); assert.ok(keep.crew.every(member => member.stress === 10));
+  assert.equal(bioforgeCarePolicyV188(keep), 'keep');
+  // No ending, no Act V field, no dossier piece is touched by either outcome.
+  for (const save of [limit, keep]) { assert.equal(storyDossierV188(save).count, 0); assert.equal(act5StateV188(save).decision ?? null, null); }
+  // A reload in the middle resumes at the next argument.
+  const mid = createDefaultSave(); startCrewDebateV188(mid, QUEST); playDebate(mid, ['purge-log']);
+  const resumed = roundTrip(mid);
+  assert.equal(confrontationViewV188(resumed, B.id, 'fr').round, 1); assert.equal(startCrewDebateV188(resumed, QUEST), true); assert.equal(confrontationViewV188(resumed, B.id, 'fr').ground, 2);
+  // An older save (no quest record) and hostile records normalise without the quest.
+  assert.equal(normalizeCrewQuestsV188({ quests: { [QUEST]: { stage: 'done', answer: 'DROP TABLE' } } }).quests[QUEST].answer, undefined);
+  assert.equal(bioforgeCarePolicyV188({ crewQuestsV188: { quests: { [QUEST]: { stage: 'done', step: 0, answer: 'maybe' } } } }), null);
+});
+
+test('ship-bioforge: narrative access — closed until the debate is settled, kept for a save that already used the Bioforge', () => {
+  const fresh = createDefaultSave();
+  assert.deepEqual(bioforgeNarrativeAccessV188(fresh), { open: false, reason: 'debate-pending' });
+  assert.deepEqual(crewQuestActionsV188(fresh, 'crew-09-inez-harlow'), [], 'met at the airlock first: not pushed in Inez’s conversation on a fresh save');
+  for (const mutate of [save => { save.bioforgeV80.serial = 2; }, save => { save.bioforgeV80.history = [{ sessionId: 'bf-1', outcome: 'cleared' }]; }, save => { save.bioforgeV80.lastSessionId = 'bf-1'; }]) {
+    const used = createDefaultSave(); mutate(used);
+    assert.deepEqual(bioforgeNarrativeAccessV188(used), { open: true, reason: 'already-used' });
+    assert.equal(crewQuestActionsV188(used, 'crew-09-inez-harlow').find(entry => entry.id === QUEST).action, 'accept', 'the debate is then Inez’s to bring up');
+    assert.equal(bioforgeCarePolicyV188(used), null, 'no protocol shown until it is decided');
+  }
+  const settled = createDefaultSave(); startCrewDebateV188(settled, QUEST); playDebate(settled, [null, null, null, null, null]); concludeCrewDebateV188(settled, QUEST);
+  assert.deepEqual(bioforgeNarrativeAccessV188(settled), { open: true, reason: 'quest' });
+  assert.deepEqual(crewQuestActionsV188(settled, 'crew-09-inez-harlow'), [], 'done: no longer offered');
+  // The laboratory shows the protocol (text only); the counters are the real ones.
+  assert.equal(buildBioforgeColdStorageReportV188(settled.bioforgeV80, bioforgeCarePolicyV188(settled)).note, 'PROTOCOLE BISHOP-9 · CONSERVATION SOUS SCELLÉS');
+  assert.equal(buildBioforgeColdStorageReportV188(settled.bioforgeV80, null).note, null);
+  assert.equal(buildBioforgeColdStorageReportV188(settled.bioforgeV80, 'limit').text, buildBioforgeColdStorageReportV188(settled.bioforgeV80, null).text);
+  for (const lines of Object.values(BIOFORGE_CARE_POLICY_LINES_V188)) for (const text of Object.values(lines)) assert.ok(Object.hasOwn(EN_CATALOG_V185, text), `EN: ${text}`);
+  // App wiring: the annex station asks the debate first, then resolves itself again; the hub conversation opens the same debate.
+  const app = read('src/app.js');
+  assert.match(app, /if \(!bioforgeNarrativeAccessV188\(saveSystem\.data\)\.open\) \{[\s\S]{0,400}openCrewDebateV188\('ship-bioforge', \{ onSettled: \(\) => \{ if \(activeView === 'hub' && bioforgeNarrativeAccessV188\(saveSystem\.data\)\.open\) resolveAnnexStationV71\(interaction\); \} \}\)/);
+  assert.match(app, /if \(quest\.kind === 'debate'\) return openCrewDebateV188\(questId\);/);
+  assert.match(app, /bioforgeRuntimeV80\.setBioforgeCarePolicyV188\?\.\(bioforgeCarePolicyV188\(saveSystem\.data\)\);/);
+  assert.ok(app.indexOf("if (!bioforgeNarrativeAccessV188(saveSystem.data).open)") < app.indexOf("const key = 'annex:bioforge';"), 'no ship time is spent at the closed door');
+  for (const text of ['BIOFORGE · Inez Harlow et BISHOP-9 débattent devant le sas.', 'BIOFORGE · accès fermé tant que le débat n’est pas tranché.']) { assert.ok(app.includes(text)); assert.ok(Object.hasOwn(EN_CATALOG_V185, text), `EN: ${text}`); }
+});
+
+test('ship-bioforge: Canvas portraits and the debate’s own wording on the stage, FR and EN, with and without reduced motion', () => {
+  const save = createDefaultSave(); startCrewDebateV188(save, QUEST); playDebate(save, ['purge-log']);
+  for (const lang of ['fr', 'en']) {
+    const view = confrontationViewV188(save, B.id, lang);
+    assert.equal(view.portrait, 'synthetic-bust'); assert.equal(view.witnessPortrait, 'scientist-bust'); assert.match(view.witness, /INEZ HARLOW/);
+    assert.deepEqual(Object.keys(view.labels), ['won', 'lost', 'pieces']);
+    const calls = []; const ctx = new Proxy({ measureText: text => ({ width: String(text).length * 9 }), createRadialGradient: () => ({ addColorStop() {} }) },
+      { get: (target, key) => key in target ? target[key] : (...args) => { calls.push([key, args]); }, set: () => true });
+    for (const reducedMotion of [false, true]) assert.equal(drawConfrontationStageV188(ctx, view, { language: lang, time: 1.3, reveal: 1, reducedMotion }).ground, 2);
+    const texts = calls.filter(([key]) => key === 'fillText').map(([, args]) => args[0]).join(' ');
+    assert.match(texts, /BISHOP-9 · BIOFORGE/); assert.match(texts, /INEZ/); assert.match(texts, lang === 'en' ? /GROUND 2\/5/ : /TERRAIN 2\/5/);
+    assert.ok(calls.filter(([key]) => key === 'ellipse').length >= 8, 'two busts drawn with primitives (faces and hair), twice');
+  }
+  // Settled: the stage words the outcome as a protocol, never as a lost hearing.
+  playDebate(save, [null, null, null, null]);
+  for (const lang of ['fr', 'en']) {
+    const view = confrontationViewV188(save, B.id, lang), calls = [];
+    const ctx = new Proxy({ measureText: text => ({ width: String(text).length * 9 }), createRadialGradient: () => ({ addColorStop() {} }) },
+      { get: (target, key) => key in target ? target[key] : (...args) => { calls.push([key, args]); }, set: () => true });
+    drawConfrontationStageV188(ctx, view, { language: lang, reducedMotion: true });
+    const texts = calls.filter(([key]) => key === 'fillText').map(([, args]) => args[0]).join(' ');
+    assert.equal(view.status, 'lost'); assert.match(texts, lang === 'en' ? /BISHOP-9 PROTOCOL/ : /PROTOCOLE BISHOP-9/); assert.doesNotMatch(texts, /AUDIENCE PERDUE|HEARING LOST/);
+  }
 });

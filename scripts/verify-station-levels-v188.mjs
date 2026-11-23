@@ -8,13 +8,19 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fixture, tick } from './engine-host-v188.mjs';
+import { createDefaultSave, migrateSave } from '../src/save.js';
+import { depthLaneIssuesV188, depthPassageV188 } from '../src/depth-hold-sections-v188.js';
+import { blockedByFootprintV188 } from '../src/hub-depth-rooms-v188.js';
+import { useCatalogV185, autoTranslateV185 } from '../src/i18n-auto-v185.js';
+import { setLanguageV185 } from '../src/i18n-v185.js';
 import { CAMPAIGNS, WORLDS, LEVEL_SEEDS } from '../src/content.js';
 import { buildMissionLevelV52 } from '../src/mission-levels-v52.js';
 import { STATION_LEVEL_IDS_V188, STATION_LEVEL_PHASES_V188, STATION_LEVEL_RULES_V188, STATION_LEVEL_TEXT_V188, STATION_BARRIERS_V188,
-  stepStationHoldV188, stationSpawnXV188, STATION_CASSIUS_HEARING_ID_V188, stationAirlock3ModeV188, stepStationEggV188, stationAccessV188, isStationLevelCampaignV188 } from '../src/station-mission-levels-v188.js';
+  stepStationHoldV188, stationSpawnXV188, STATION_CASSIUS_HEARING_ID_V188, stationAirlock3ModeV188, stepStationEggV188, stationAccessV188, isStationLevelCampaignV188,
+  applyStationLevelResultV188, stationZoneLabelV188 } from '../src/station-mission-levels-v188.js';
 import { STATION_LEVEL_ART_SLOTS_V188, STATION_LEVEL_ART_FILES_PRESENT_V188, STATION_LEVEL_REUSED_PNGS_V188, drawStationLevelSlotV188 } from '../src/station-level-art-v188.js';
 import { ASPHODELE_HUB_FILES_PRESENT_V188, getAsphodeleHubSlotV188 } from '../src/asphodele-hub-slots-v188.js';
-import { STATION_CAMPAIGNS_V188, normalizeStationV188, cassiusChoicePendingV188 } from '../src/station-asphodele-v188.js';
+import { STATION_CAMPAIGNS_V188, normalizeStationV188, cassiusChoicePendingV188, stationGrueAtDockV188, STATION_S1_SALVAGER_OUTCOMES_V188 } from '../src/station-asphodele-v188.js';
 import { resolveDepthHoldDefinitionV188 } from '../src/depth-hold-sections-v188.js';
 import { EN_CATALOG_V185, EN_PATTERNS_V185 } from '../src/i18n-en-catalog-v185.js';
 import { CASSIUS_INTERROGATION_V188, confrontationOutcomeV188, startConfrontationV188, playConfrontationMoveV188 } from '../src/confrontation-v188.js';
@@ -58,7 +64,7 @@ test('station levels: data, ids and existing records are unchanged', () => {
   assert.equal(CAMPAIGNS.some(entry => entry.id === 'station-intro-silence'), false, 'the intro is a quest scene, not a mission template');
   assert.equal(STATION_LEVEL_RULES_V188.safeZonePx, 900); assert.equal(STATION_LEVEL_RULES_V188.graceSeconds, 4);
   assert.equal(STATION_LEVEL_RULES_V188.pxPerMetre, 51); assert.deepEqual(STATION_LEVEL_RULES_V188.marine, { w: 44, h: 92 });
-  // The save field keeps its shape (the levels write nothing to the campaign save).
+  // The save field keeps its shape; `s1Salvagers` (owner decision 2026-11-23) is additive and absent until S1 records it.
   assert.deepEqual(Object.keys(normalizeStationV188({})), ['schema', 'introHeard', 'cassius', 'scenesSeen']);
 });
 
@@ -74,11 +80,14 @@ test('station levels: pure rules (held interaction, safe zone, airlock 3 mode, e
   step = stepStationEggV188(step.egg, { near: true, dt: .6 }); assert.equal(step.leap, true); assert.equal(step.egg.state, 'spent');
 });
 
-test('S1-S4: V1 interiors, generic encounter replaced, ducts sealed, upper decks sealed over the bulkheads (logical and physical)', async () => {
+test('S1-S4: V1 interiors (S1: collar in depth only), generic encounter replaced, ducts sealed, upper decks sealed over the bulkheads (logical and physical)', async () => {
   for (const id of STATION_LEVEL_IDS_V188) {
     const run = await level(id), { engine, places } = run;
-    assert.equal(engine.missionDepthSectionV188, null, `${id}: V1`);
-    assert.equal(resolveDepthHoldDefinitionV188({ campaign: run.campaign, world: run.world }), null);
+    // Owner decision 2026-11-23 (S9-1): the docking collar of S1 is the one depth section of the station levels.
+    const collar = id === 'station-s1' ? 'station-s1-docking-collar' : null;
+    assert.equal(engine.missionDepthSectionV188?.id || null, collar, `${id}: ${collar ? 'collar in depth' : 'V1'}`);
+    assert.equal(resolveDepthHoldDefinitionV188({ campaign: run.campaign, world: run.world })?.id || null, collar);
+    if (collar) assert.ok(engine.missionDepthSectionV188.x1 <= places.doors.dock.x, 'the ring and the decks beyond the airlock stay side view');
     assert.equal(engine.enemies.length, 0); assert.equal(engine.mission.objectives.boss, true);
     for (const event of engine.missionLevelEvents.values()) assert.equal(event.triggered, true);
     // Sealed frames stand on their floors, taller than a jump.
@@ -300,7 +309,9 @@ test('station levels: other missions keep their behaviour; composition, offline 
   // FR strings drawn by the levels have their reviewed EN.
   const strings = [...Object.values(STATION_LEVEL_TEXT_V188).map(entry => entry.fr), ...STATION_BARRIERS_V188.map(entry => entry.requirement)];
   for (const id of STATION_LEVEL_IDS_V188) for (const phase of STATION_LEVEL_PHASES_V188[id]) strings.push(phase.label.fr);
-  for (const text of strings) assert.ok(Object.hasOwn(EN_CATALOG_V185, text), `EN: ${text}`);
+  // A text with a count ({n}) is a reviewed pattern ({0}); the others are exact entries.
+  for (const text of strings) assert.ok(text.includes('{n}') ? Object.hasOwn(EN_PATTERNS_V185, text.replace('{n}', '{0}')) : Object.hasOwn(EN_CATALOG_V185, text), `EN: ${text}`);
+  for (const entry of Object.values(STATION_LEVEL_TEXT_V188).filter(item => item.fr.includes('{n}'))) assert.equal(EN_PATTERNS_V185[entry.fr.replace('{n}', '{0}')], entry.en.replace('{n}', '{0}'));
   for (const id of STATION_LEVEL_IDS_V188) for (const phase of STATION_LEVEL_PHASES_V188[id]) assert.equal(EN_CATALOG_V185[phase.label.fr], phase.label.en);
   for (const pattern of ['TRACES D’ECHO-8 {0}/2', 'LABORATOIRE {0}/2', 'FERMETURE DE LA QUARANTAINE {0}:{1}', 'VANNES {0}/3', 'ARRIMAGE DE LA NAVETTE {0} s'])
     assert.ok(Object.hasOwn(EN_PATTERNS_V185, pattern), `EN: ${pattern}`);
@@ -317,4 +328,184 @@ test('S2 × spec 010: the CASSIUS hearing is wired in the level and only feeds t
   for (let i = 0; i < 5 && !confrontationOutcomeV188(save, STATION_CASSIUS_HEARING_ID_V188); i++) playConfrontationMoveV188(save, STATION_CASSIUS_HEARING_ID_V188, null);
   assert.equal(confrontationOutcomeV188(save, STATION_CASSIUS_HEARING_ID_V188), 'lost', 'silence throughout loses');
   assert.equal(cassiusChoicePendingV188(save), true, 'the decision is still due, unchanged');
+});
+
+// —— Owner decisions of 2026-11-23 (S9-1, S9-2, S9-5, station zone names) ——
+test('S9-1 · S1 docking collar: depth corridor up to the dock bulkhead (access, passage, arrival, round trip, resume, checkpoints)', async () => {
+  const run = await level('station-s1'), { engine, places, place, hold, events } = run, section = engine.missionDepthSectionV188;
+  assert.equal(resolveDepthHoldDefinitionV188({ campaign: run.campaign, world: run.world })?.id, 'station-s1-docking-collar');
+  assert.equal(section.id, 'station-s1-docking-collar'); assert.equal(section.floorY, places.decks.low);
+  assert.equal(section.x0, places.corridor.x0); assert.equal(section.x1, places.doors.dock.x, 'the corridor ends at the dock bulkhead: the ring stays side view');
+  assert.ok(section.x1 - section.x0 >= 700 && section.x1 - section.x0 <= 1000, `collar ${section.x1 - section.x0} px`);
+  // Passage: every object found its place, lanes of 20 units, no pocket, both ends reached on the rail.
+  assert.deepEqual(section.skipped, []); assert.deepEqual(section.containers.map(entry => entry.id), ['station-collar-drums', 'station-collar-crates', 'station-collar-medical']);
+  assert.deepEqual(depthLaneIssuesV188(section), []);
+  const passage = depthPassageV188(section); assert.ok(passage.westDoor && passage.eastDoor); assert.equal(passage.pockets, 0);
+  // An object that hides the wall stands clear of the collar window (Echo-8's dropship), the ladder and the crank.
+  const crates = section.containers.find(entry => entry.id === 'station-collar-crates');
+  assert.ok(crates.x >= places.collar.x + 364 && crates.x + crates.w <= places.ladders.dock, 'crates between the window and the ladder');
+  // Arrival: on the rail, on a free cell of the corridor; the collar lift rests at deck level (no power), the ladder remains.
+  assert.ok(centre(engine.player) > section.x0 && centre(engine.player) < section.x1); assert.equal(engine.player.depthZ, 0);
+  assert.equal(blockedByFootprintV188(section, centre(engine.player), 0, 18), false);
+  const lift = engine.lifts.find(entry => entry.stationParkedV188); assert.ok(lift, 'collar lift parked');
+  tick(engine, 3); assert.equal(lift.y, places.decks.low); assert.equal(lift.controlledV130, false);
+  assert.ok(engine.ladders.some(entry => entry.x > section.x0 && entry.x < section.x1), 'the collar ladder remains');
+  // Depth: S steps towards the camera; from the front lanes the crank is neither offered nor worked.
+  engine.keys.add('KeyS'); tick(engine, .7); engine.keys.delete('KeyS'); assert.ok(engine.player.depthZ <= -60, `z ${engine.player.depthZ}`);
+  place(places.crank.x - 40); engine.player.depthZ = -60; // injection: at the crank, in the front lane
+  assert.equal(engine.getInteractionPrompt(), ''); assert.equal(engine.interact(engine.player), false);
+  engine.keys.add('KeyW'); tick(engine, .7); engine.keys.delete('KeyW'); assert.equal(engine.player.depthZ, 0, 'W returns to the wall');
+  place(places.crank.x); assert.equal(engine.getInteractionPrompt(), 'E (MAINTENIR)  CYCLER LE SAS À LA MANIVELLE');
+  engine.interact(engine.player); hold(1.5); const part = run.progress().crank; assert.ok(part > .2 && part < 1);
+  engine.keys.add('KeyS'); hold(.6); engine.keys.delete('KeyS'); const away = run.progress().crank; hold(.5);
+  assert.equal(run.progress().crank, away, 'stepping away from the wall pauses the crank without resetting it'); assert.ok(away >= part);
+  // The bulkhead stands on the rail: from a front lane the closed or open airlock is not crossed.
+  engine.keys.add('KeyW'); tick(engine, .7); engine.keys.delete('KeyW'); engine.interact(engine.player); hold(4.2);
+  assert.equal(engine.stationPhaseIdV188(), 'ring'); assert.equal(places.doors.dock.open, true); assert.equal(engine.checkpoint.id, 'station-s1-ring');
+  place(section.x1 - 120); engine.player.depthZ = -50; engine.keys.add('KeyD'); tick(engine, 2); engine.keys.delete('KeyD');
+  assert.ok(centre(engine.player) <= section.x1, 'the open airlock is not crossed from a front lane');
+  // Round trip: through the airlock on the rail, the ring is side view (depth 0); back in the collar the depth is there again.
+  engine.player.depthZ = 0; engine.keys.add('KeyD'); for (let i = 0; i < 40 && centre(engine.player) < places.x.dockDoor + 90; i++) tick(engine, .25); engine.keys.delete('KeyD');
+  assert.ok(centre(engine.player) >= places.x.dockDoor + 90, 'walked through the cycled airlock');
+  engine.keys.add('KeyS'); tick(engine, .5); engine.keys.delete('KeyS'); assert.equal(engine.player.depthZ || 0, 0, 'no depth in the ring');
+  engine.keys.add('KeyA'); for (let i = 0; i < 60 && centre(engine.player) > section.x1 - 140; i++) tick(engine, .25); engine.keys.delete('KeyA');
+  assert.ok(centre(engine.player) < section.x1 - 100, 'walked back into the collar');
+  engine.keys.add('KeyS'); tick(engine, .4); engine.keys.delete('KeyS'); assert.ok(engine.player.depthZ < -20, 'depth again in the collar');
+  // Resume: the phase checkpoint and the depth both come back.
+  const saved = engine.captureResumeState();
+  assert.equal(saved.stationLevelV188.checkpoint, 'station-s1-ring'); assert.equal(saved.depthV188.section, 'station-s1-docking-collar');
+  const resumed = await level('station-s1', { resumeState: saved });
+  assert.equal(resumed.engine.lastResumeResult.applied, true); assert.equal(resumed.engine.stationPhaseIdV188(), 'ring');
+  assert.equal(resumed.engine.missionDepthSectionV188.id, 'station-s1-docking-collar'); assert.equal(resumed.places.doors.dock.open, true);
+  // A resume during the first phase keeps the marine's lane in the collar.
+  const fresh = await level('station-s1'); fresh.engine.keys.add('KeyS'); tick(fresh.engine, .3); fresh.engine.keys.delete('KeyS');
+  const lane = fresh.engine.player.depthZ, early = fresh.engine.captureResumeState();
+  const again = await level('station-s1', { resumeState: early });
+  assert.equal(again.engine.stationPhaseIdV188(), 'dock'); assert.ok(Math.abs(again.engine.player.depthZ - lane) < .2, 'depth restored');
+  // One checkpoint per phase after the first (which starts at the insertion).
+  assert.deepEqual(events.filter(event => event.type === 'station-level-phase-v188').map(event => event.checkpoint), ['station-s1-ring']);
+});
+
+test('S9-2 · the S1 salvagers outcome is saved once (additive), read by S4, and older saves keep today’s behaviour', () => {
+  assert.deepEqual(STATION_S1_SALVAGER_OUTCOMES_V188, ['negotiated', 'forced']);
+  assert.equal(normalizeStationV188({ s1Salvagers: 'forced' }).s1Salvagers, 'forced');
+  assert.equal('s1Salvagers' in normalizeStationV188({ s1Salvagers: 'bribed' }), false, 'unknown value dropped');
+  assert.equal('s1Salvagers' in createDefaultSave().stationV188, false, 'absent until S1 records it');
+  const save = createDefaultSave();
+  assert.equal(applyStationLevelResultV188(save, { success: false, campaignId: 'station-s1', result: { campaignId: 'station-s1', salvagers: 'forced' } }), null, 'a failed S1 records nothing');
+  assert.equal(applyStationLevelResultV188(save, { success: true, campaignId: 'station-s2', result: { campaignId: 'station-s2', salvagers: 'forced' } }), null);
+  assert.deepEqual(applyStationLevelResultV188(save, { success: true, campaignId: 'station-s1', result: { campaignId: 'station-s1', salvagers: 'negotiated' } }), { campaignId: 'station-s1', s1Salvagers: 'negotiated' });
+  assert.equal(applyStationLevelResultV188(save, { success: true, campaignId: 'station-s1', result: { campaignId: 'station-s1', salvagers: 'forced' } }), null, 'recorded once: a replay does not rewrite it');
+  assert.equal(save.stationV188.s1Salvagers, 'negotiated');
+  const reloaded = migrateSave(JSON.parse(JSON.stringify(save)));
+  assert.equal(reloaded.stationV188.s1Salvagers, 'negotiated', 'round trip');
+  const old = createDefaultSave(); old.stationV188 = { schema: 188, introHeard: true, cassius: 'rewrite', scenesSeen: ['s1'] };
+  assert.deepEqual(migrateSave(JSON.parse(JSON.stringify(old))).stationV188, { schema: 188, introHeard: true, cassius: 'rewrite', scenesSeen: ['s1'] }, 'an older save gains no field');
+  // Grue at the dock: the S1 outcome first; the colony price decides only after a forced bulkhead, or when nothing was recorded.
+  const at = (s1Salvagers, grue) => stationGrueAtDockV188({ stationV188: s1Salvagers ? { s1Salvagers } : {}, colonyMissionsV188: { grue } }).mode;
+  assert.deepEqual([null, 'accept', 'refuse'].map(price => at('negotiated', price)), ['ally', 'ally', 'ally']);
+  assert.deepEqual([null, 'accept', 'refuse'].map(price => at('forced', price)), ['hostile', 'absent', 'hostile']);
+  assert.deepEqual([null, 'accept', 'refuse'].map(price => at(null, price)), ['absent', 'present', 'absent'], 'older saves: the behaviour before this field');
+  assert.deepEqual(['ally', 'present', 'hostile', 'absent'].map(mode => ({ ally: true, present: true, hostile: false, absent: false })[mode]),
+    [at('negotiated', null), at(null, 'accept'), at('forced', null), at('forced', 'accept')].map(mode => stationGrueAtDockV188({ stationV188: { s1Salvagers: mode === 'ally' ? 'negotiated' : mode === 'present' ? undefined : 'forced' }, colonyMissionsV188: { grue: mode === 'present' || mode === 'absent' ? 'accept' : null } }).aboard));
+  const app = read('src/app.js');
+  assert.match(app, /applyStationLevelResultV188\(candidate, \{ success: resolvedSuccess, campaignId: operation\.campaignId, result: engine\.stationLevelResultV188\?\.\(\) \|\| null \}\)/);
+  assert.equal(read('src/save.js').includes('s1Salvagers'), false, 'the save validator is unchanged: the field is normalised by normalizeStationV188');
+});
+
+async function toHold(save) {
+  const run = await level('station-s4', { narrativeArchiveSave: save }), { engine, places, place, hold } = run;
+  place(places.nest.x, places.decks.mid); engine.interact(engine.player); hold(5.3);
+  for (const valve of places.valves) { run.clear(); place(valve.x, valve.y); engine.interact(engine.player); hold(3.3); }
+  assert.equal(engine.stationPhaseIdV188(), 'hold'); run.clear(); place(places.hold.x);
+  return run;
+}
+const s4Save = (s1Salvagers, grue = null, population = 0) => ({ stationV188: { introHeard: true, cassius: 'rewrite', scenesSeen: [], ...(s1Salvagers ? { s1Salvagers } : {}) }, colonyMissionsV188: { grue, population } });
+
+test('S9-2 · S4 dock: negotiated → Grue’s salvagers thin the hold and come aboard; forced → hostile or absent with the colony price', async () => {
+  const R = STATION_LEVEL_RULES_V188;
+  // Negotiated (price refused by the colony): allied all the same.
+  const ally = await toHold(s4Save('negotiated', 'refuse'));
+  assert.equal(ally.engine.stationLevelV188.grue, 'ally');
+  const allyPlan = ally.engine.stationSpawnPlanV188(); assert.equal(allyPlan.total, R.grue.allyHoldTotal); assert.equal(allyPlan.maxAlive, R.grue.allyMaxAlive); assert.notEqual(allyPlan.pool, 'salvager');
+  tick(ally.engine, R.grue.lineAfter + .5); assert.ok(ally.events.some(event => event.type === 'station-grue-dock-v188' && event.mode === 'ally'));
+  ally.engine.stationLevelV188.progress.holdRemaining = .05; ally.clear(); tick(ally.engine, .2); // injection: the hold is run out
+  assert.equal(ally.engine.stationLevelV188.message.text, STATION_LEVEL_TEXT_V188.arrivedGrue.fr);
+  assert.deepEqual(ally.events.find(event => event.type === 'station-team-arrived-v188'), { type: 'station-team-arrived-v188', grue: true, grueMode: 'ally', volunteers: 0 });
+  // Forced, price refused or not decided: two armed salvagers take the 2nd and 5th places of the hold, behind the safe zone, after the grace.
+  const hostile = await toHold(s4Save('forced', null));
+  assert.equal(hostile.engine.stationLevelV188.grue, 'hostile'); assert.equal(hostile.engine.stationSpawnPlanV188().total, 9);
+  const kinds = [];
+  for (let i = 0; i < 200 && kinds.length < 6; i++) {
+    tick(hostile.engine, .5);
+    for (const event of hostile.events.filter(entry => entry.type === 'station-level-spawn-v188' && entry.phase === 'hold').slice(kinds.length)) {
+      kinds.push(event.kind); assert.ok(Math.abs(event.x - hostile.places.hold.x) >= 900, 'safe zone');
+      assert.ok(hostile.engine.enemies.find(item => item.id === event.enemyId).stationGraceV188 > 0, 'grace');
+    }
+    hostile.clear(); hostile.engine.stationLevelV188.progress.holdRemaining = R.holdSeconds; // injection: spawns removed, the hold kept running
+  }
+  assert.deepEqual(kinds.map(kind => kind === 'salvager'), [false, true, false, false, true, false], kinds.join());
+  hostile.engine.stationLevelV188.progress.holdRemaining = .05; hostile.clear(); tick(hostile.engine, .2);
+  assert.equal(hostile.engine.stationLevelV188.message.text, STATION_LEVEL_TEXT_V188.arrived.fr, 'she does not come aboard');
+  // Forced, price accepted: absent — the same hold as before, nobody of hers at the dock.
+  const absent = await toHold(s4Save('forced', 'accept'));
+  assert.equal(absent.engine.stationLevelV188.grue, 'absent'); assert.equal(absent.engine.stationSpawnPlanV188().total, 9); assert.notEqual(absent.engine.stationSpawnPlanV188().pool, 'salvager');
+  tick(absent.engine, R.grue.lineAfter + .5); assert.equal(absent.events.some(event => event.type === 'station-grue-dock-v188'), false);
+  // Nothing recorded (older save), price accepted: she comes aboard with the team, with no help during the hold.
+  const legacy = await toHold(s4Save(null, 'accept'));
+  assert.equal(legacy.engine.stationLevelV188.grue, 'present'); assert.equal(legacy.engine.stationSpawnPlanV188().total, 9);
+  legacy.engine.stationLevelV188.progress.holdRemaining = .05; legacy.clear(); tick(legacy.engine, .2);
+  assert.equal(legacy.engine.stationLevelV188.message.text, STATION_LEVEL_TEXT_V188.arrivedGrue.fr);
+});
+
+test('S9-5 · S4 dock: the volunteer colonists of the save arrive behind the technical team at the end of the hold', async () => {
+  const R = STATION_LEVEL_RULES_V188, lang = text => text.replace('{n}', '9');
+  const run = await toHold(s4Save('negotiated', null, 9)), { engine, places } = run;
+  assert.equal(engine.stationLevelV188.volunteers, 9); assert.deepEqual(engine.stationVolunteerFiguresV188(), [], 'nobody before the team is aboard');
+  engine.stationLevelV188.progress.holdRemaining = .05; run.clear(); tick(engine, .2); // injection: the hold is run out
+  assert.equal(engine.stationPhaseIdV188(), 'extract');
+  assert.equal(engine.stationLevelV188.message.text, lang(STATION_LEVEL_TEXT_V188.arrivedGrueVolunteers.fr));
+  assert.equal(run.events.find(event => event.type === 'station-team-arrived-v188').volunteers, 9);
+  let figures = engine.stationVolunteerFiguresV188();
+  assert.equal(figures.length, R.volunteers.shownMax, 'at most six figures, whatever the count'); assert.ok(figures.some(entry => !entry.arrived), 'they walk in');
+  tick(engine, R.volunteers.walkSeconds * 1.6); figures = engine.stationVolunteerFiguresV188();
+  assert.ok(figures.every(entry => entry.arrived && entry.x > places.dock.x0 && entry.x + 22 < places.dock.x1), 'all on the dock floor');
+  assert.ok(figures.every((entry, index) => !index || entry.x - figures[index - 1].x >= 40), 'side by side, not stacked');
+  // Drawn through the named placeholder slot (no image claimed).
+  const calls = []; const ctx = new Proxy({}, { get: (_, key) => (...args) => { calls.push(key); return key === 'measureText' ? { width: 10 } : undefined; } });
+  assert.equal(drawStationLevelSlotV188(ctx, null, 'station-volunteer-colonist', 0, 100, { index: 2 }), 'primitive'); assert.ok(calls.length > 4);
+  // Count from the save: one colonist, no Grue; none → the text of before.
+  const one = await toHold(s4Save('forced', 'accept', 1)); one.engine.stationLevelV188.progress.holdRemaining = .05; one.clear(); tick(one.engine, .2);
+  assert.equal(one.engine.stationLevelV188.message.text, STATION_LEVEL_TEXT_V188.arrivedVolunteers.fr.replace('{n}', '1')); assert.equal(one.engine.stationVolunteerFiguresV188().length, 1);
+  const none = await toHold(s4Save(null, null, 0)); none.engine.stationLevelV188.progress.holdRemaining = .05; none.clear(); tick(none.engine, .2);
+  assert.equal(none.engine.stationLevelV188.message.text, STATION_LEVEL_TEXT_V188.arrived.fr); assert.deepEqual(none.engine.stationVolunteerFiguresV188(), []);
+});
+
+test('station levels: door plates, zone line and local plan carry station names (FR and EN), ids unchanged', async () => {
+  useCatalogV185({ EN_CATALOG_V185, EN_PATTERNS_V185 });
+  const template = ['Tube d’amarrage', 'Soutes dépressurisées', 'Puits d’ingénierie', 'Pont d’habitation', 'Passerelle', 'Sas arrière'];
+  for (const id of STATION_LEVEL_IDS_V188) {
+    const run = await level(id), zones = run.engine.missionLevelRuntime.biomeZones;
+    assert.deepEqual(zones.map(zone => zone.id), ['ship-docking', 'ship-cargo', 'ship-engineering', 'ship-habitation', 'ship-command', 'ship-extraction'], 'zone ids kept (art, saves)');
+    for (const zone of zones) {
+      assert.equal(template.includes(zone.label), false, `${id}: ${zone.label}`);
+      assert.equal(zone.label, stationZoneLabelV188(id, zone.id, 'fr')); assert.equal(EN_CATALOG_V185[zone.label], stationZoneLabelV188(id, zone.id, 'en'), `EN: ${zone.label}`);
+    }
+    // The dock bulkhead plate, as the engine composes it, and its English.
+    const door = run.places.doors.dock, names = new Map(zones.map(zone => [zone.id, zone.label]));
+    const plate = `CLOISON ÉTANCHE · ${names.get(door.fromZoneId)} ↔ ${names.get(door.toZoneId)}`;
+    setLanguageV185('en', { document: null, storage: null, persist: false });
+    try { const english = autoTranslateV185(plate); assert.equal(/[éèàç’]/.test(english.replace('↔', '')), false, english); assert.match(english, /^SEALED BULKHEAD · /); }
+    finally { setLanguageV185('fr', { document: null, storage: null, persist: false }); }
+    // The zone line of the page (mission-zone event) names the station.
+    run.place(run.places.x.cargo); tick(run.engine, .3);
+    const zoneEvent = run.events.filter(event => event.type === 'mission-zone').at(-1);
+    if (zoneEvent) assert.equal(template.includes(zoneEvent.name), false, zoneEvent.name);
+    assert.equal(run.engine.missionLevelRuntime.signature, run.engine.missionLevelRuntime.signature); assert.ok(run.engine.missionLevelRuntime.signature);
+  }
+  assert.equal(stationZoneLabelV188('station-s3', 'ship-cargo'), 'Laboratoire de transit'); assert.equal(stationZoneLabelV188('station-s4', 'ship-docking', 'en'), 'Docking quay');
+  // Other missions on the same template keep the template names.
+  const campaign = campaignOf('station-c-nid'), world = worldOf(campaign);
+  const other = await fixture({ campaign, seed: 7, options: { world, missionLevel: buildMissionLevelV52({ campaign, world, levelSeeds: LEVEL_SEEDS }) } });
+  assert.ok(other.engine.missionLevelRuntime.biomeZones.some(zone => zone.label === 'Soutes dépressurisées'));
 });

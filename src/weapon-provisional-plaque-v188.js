@@ -77,6 +77,8 @@ export const ARSENAL_PLACEHOLDER_CATEGORIES_V188 = Object.freeze(Object.fromEntr
 
 export const hasProvisionalPlaqueV188 = weapon => Boolean(weapon && typeof weapon === 'object'
   && weapon.admissionV188 === PROVISIONAL_PLAQUE_ADMISSION_V188 && /^weapon-\d{3}-[a-z0-9-]+$/.test(weapon.id || ''));
+/** Named armory slot a native plaque will replace (owner decisions of 2026-11-23). */
+export const armoryPlaqueSlotV188 = weapon => hasProvisionalPlaqueV188(weapon) ? `armory-plaque-provisional-${weapon.id}` : null;
 export function provisionalPlaqueSlotV188(weapon) {
   const entry = ARSENAL_PLACEHOLDER_CATEGORIES_V188[weapon?.placeholderCategoryV188]
     || ARSENAL_PLACEHOLDER_CATEGORIES_V188[weapon?.family === 'flame' ? 'flame' : 'shotgun'];
@@ -108,6 +110,7 @@ export function mountProvisionalPlaqueV188(document, target, weapon, label = '')
   figure.className = 'provisional-plaque-v188';
   figure.dataset.provisionalPlaqueV188 = weapon.id;
   figure.dataset.placeholderSlot = provisionalPlaqueSlotV188(weapon);
+  figure.dataset.slotV188 = armoryPlaqueSlotV188(weapon);
   figure.setAttribute('aria-label', `${label || weapon.name} — plaque provisoire dessinée, illustration à produire`);
   figure.style.margin = '0'; figure.style.width = '100%'; figure.style.textAlign = 'center';
   canvas.style.width = '100%'; canvas.style.height = 'auto'; canvas.setAttribute('aria-hidden', 'true');

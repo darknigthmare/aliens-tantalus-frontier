@@ -42,7 +42,8 @@ const fit = enemy => enemy.alive !== false && !spansHoldDepthV188({ bigCastes: '
 
 test('holds: one definition per hold, chosen by campaign; cargo-brutal and colony missions stay 2D', async () => {
   // V188 colony levels: the C1 port corridor is the fourth definition (verify-colony-levels-v188.mjs).
-  assert.deepEqual(DEPTH_HOLD_IDS_V188, ['qz17-cargo-hold', 'freighter-cargo-hold', 'lethe-quarantine-hold', 'colony-c1-port-corridor']);
+  // V188 station levels (owner decision 2026-11-23): the S1 docking collar is the fifth (verify-station-levels-v188.mjs).
+  assert.deepEqual(DEPTH_HOLD_IDS_V188, ['qz17-cargo-hold', 'freighter-cargo-hold', 'lethe-quarantine-hold', 'colony-c1-port-corridor', 'station-s1-docking-collar']);
   assert.ok(FREIGHTERS.length >= 5, 'several procedural ship missions');
   for (const campaign of FREIGHTERS) assert.equal(resolveDepthHoldDefinitionV188({ campaign, world: worldOf(campaign) })?.id, 'freighter-cargo-hold', campaign.id);
   assert.equal(resolveDepthHoldDefinitionV188({ campaign: QZ17 })?.id, 'qz17-cargo-hold');
