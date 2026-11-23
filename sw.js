@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-tantalus-arsenal-outils-dev-bioforge-lab-20261122';
+const CACHE = 'atf-v143-tantalus-collier-s1-debat-bioforge-20261123';
 const SHELL = Object.freeze([
   '/src/xeno-trials-visual-assets-v205.js',
   '/src/xeno-trials-priority-air-data-v204.js',

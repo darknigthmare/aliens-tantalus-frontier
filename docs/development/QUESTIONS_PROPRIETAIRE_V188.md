@@ -755,7 +755,7 @@ Demande reçue : des niveaux dédiés pour S1-S4 sur le modèle du lot colonie (
 | S9-4 | Valeurs de jeu (minuteur de S3 150 s, tenue du quai 60 s, œufs, effectifs) | Celles de la bible §7.10 | À régler après playtest |
 | S9-5 | Arrivée des colons volontaires en S4 (§7.2) | Non représentée (équipe technique et Grue seulement) | Silhouettes de colons de Port-Méridien selon le palier de la colonie |
 
-Aucune de ces valeurs ne certifie une fidélité « 1:1 ».
+Aucune de ces valeurs ne certifie une fidélité « 1:1 ». S9-1, S9-2 et S9-5 ont reçu une décision le 23 novembre 2026 (section « Décisions du propriétaire (2026-11-23) » en fin de document) ; S9-3 et S9-4 restent aux valeurs par défaut.
 
 ## Décisions du propriétaire (2026-11-22, second tour) — appliquées
 
@@ -850,4 +850,30 @@ Demande : « améliorer la Bio Forge — le level design est mal fait ». Audit 
 | B5 | Passerelles de la cellule | Réservées aux spécimens, signalées ; l'opérateur n'escalade pas | Escalade des échelles |
 | B6 | Quête `ship-bioforge` | Non codée ; deux lieux préparés (stockage froid, galerie) | Lot dédié : débat Inez / BISHOP-9 et choix de conservation |
 
-Aucune de ces valeurs ne certifie une fidélité « 1:1 ».
+Aucune de ces valeurs ne certifie une fidélité « 1:1 ». B6 a reçu une décision le 23 novembre 2026 (section suivante).
+
+## Décisions du propriétaire (2026-11-23) — appliquées
+
+Décisions reçues sur les questions S9-1, S9-2, S9-5 (niveaux de la station) et B6 (quête `ship-bioforge`), plus les libellés génériques des zones. Base : `f8b22e68`. Détail des règles : bible §7.11 et §8.6. Tout ce qui est chiffré ou rédigé ci-dessous est **[PROPOSÉ]** et révisable.
+
+| # | Décision | Application | Reste ouvert |
+| --- | --- | --- | --- |
+| S9-2 | **Enregistrer l'issue des récupérateurs de S1** ; en S4, négocié → Grue aide au quai ; forcé → hostile ou absente, quelle que soit la décision de la colonie | Champ additif `stationV188.s1Salvagers`, écrit une fois par la première réussite de S1. S4 : négocié → alliée (tenue 9 → 6 créatures, 3 à la fois, Grue à bord) quel que soit le prix ; forcé → **hostile** si le prix est refusé ou non décidé (2 récupérateurs armés dans la tenue), **absente** si le prix est accepté ; sauvegarde antérieure → comportement d'avant (présente si le prix est accepté) | Q-S9-6, Q-S9-7 |
+| S9-1 | **Le collier d'arrimage de S1 en profondeur**, comme C1, avec le dropship d'Echo-8 au collier ; le reste de S1 en vue de côté | Définition `station-s1-docking-collar` ; trois objets d'Echo-8 sur le plancher (emplacements des cales réemployés) ; monte-charge du collier au repos ; liste de contrôle du niveau vérifiée ; checkpoint par phase | Art propre au collier |
+| S9-5 | **Montrer les colons volontaires au quai de S4**, à la fin de la tenue | Nombre de la sauvegarde (`colonyMissionsV188.population`), six silhouettes au plus, entrée par le collier, texte avec le nombre réel ; primitive Canvas `station-volunteer-colonist` | Q-S9-8 ; silhouette définitive |
+| — | **Libellés génériques** (« Soutes dépressurisées… ») dans les niveaux de la station | Onze noms de zone FR/EN propres à la station sur les plaques, la ligne de zone et le plan local de S1-S4 | Noms à confirmer |
+| B6 | **Quête `ship-bioforge` « Ce qu'on garde en vie »** sur le système de face-à-face, sans tir, issue enregistrée, sans nouvelle fin, ouvrant l'accès narratif à la Bioforge | Entrée `ship-bioforge-care` ; protocole Harlow (loyauté d'Inez +5, stress de l'équipage −2) ou protocole BISHOP-9 (loyauté de BISHOP-9 +5, recherche +6) ; texte du protocole dans le laboratoire ; porte fermée jusqu'au débat, accès conservé aux sauvegardes qui ont déjà utilisé la Bioforge | B7, B8, B9 |
+| — | Correction trouvée en appliquant S9-2 | La tenue du quai de S4 ne recevait que 2 de ses 9 créatures tant que la cloison de l'anneau restait fermée (apparitions abandonnées) ; elles apparaissent désormais au bord de la zone sûre | Équilibrage de la tenue complète (S9-4) |
+
+Questions ouvertes par ces décisions :
+
+| # | Question | Valeur appliquée | Autre possibilité |
+| --- | --- | --- | --- |
+| Q-S9-6 | Négocié en S1 mais prix refusé par la colonie : Grue aide-t-elle encore ? | Oui (l'accord de l'anneau est le sien) | Présente sans aider ; absente |
+| Q-S9-7 | Forme de l'aide de Grue | La vague est réduite ; deux récupérateurs en silhouette à la cloison | Alliés armés qui tirent (comportement d'escouade à écrire) |
+| Q-S9-8 | Plafond des silhouettes de colons | 6 dessinées, nombre réel dans le texte | Autant que le compte ; selon le palier de la colonie |
+| B7 | Le protocole doit-il changer une règle de la Bioforge ? | Non : texte, loyauté, stress et recherche seulement | Harlow : purge automatique en fin de session ; BISHOP-9 : un spécimen gardé pour la session suivante |
+| B8 | Quand le débat se présente-t-il ? | À la première visite à la Bioforge, dès le début de la partie | Après l'Acte I (le sceau), pour que la pièce du dossier soit disponible |
+| B9 | Peut-on rouvrir le débat ? | Non : tranché une fois | Rejouable après l'Interlude ou l'Acte IV, avec les nouvelles pièces |
+
+Aucune de ces décisions ne certifie une fidélité « 1:1 » ; les figures, objets et portraits ajoutés sont des substituts Canvas ou des PNG déjà admis.
