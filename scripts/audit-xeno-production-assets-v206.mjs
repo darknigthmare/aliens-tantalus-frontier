@@ -226,7 +226,7 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
   },
   "AGENTS.md": {
     "previousSha256": "d8d93d1031a497ab88c3c17cff4828572d0a3f9029f5e62b983f295c769ca583",
-    "currentSha256": "15fb6bd8b06379942b03f2ebe4b44dae2259c662fd1a667d5df6baaddd7e2a3a"
+    "currentSha256": "c500c6bdf83ed8673c3872f02a07050a2341aea79a098b0b80a1110b55932f1b"
   },
   "LICENSE_NOTICE.md": {
     "previousSha256": "9a9f2b4bad2c4f0cd2a0b4b2b274607f12c80884489c41c30d1ea2fa1efea714",
@@ -278,7 +278,7 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
   },
   "package.json": {
     "previousSha256": "d5d2e4c965479a658b2289e7e51fff6456c099fb99e9b322ea289a3cd40a89ef",
-    "currentSha256": "9f2c2e87dc4de65e8444d8b8a512fefb407626b0f691741cf8d42d05dcd11a77"
+    "currentSha256": "6cdbe918ab95f0dc9750f630d2a5de9dddb46e8559cb2f8b5753b29876b82e71"
   },
   "player-appearance-v126.css": {
     "previousSha256": "da7045c7fd7d41da99eecf48d316150b2d16fac276fe635bb881034bd68c9320",
@@ -304,9 +304,13 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
     "previousSha256": "a48aaf9540b38871ff7e96433b9b90863e20e00926e9d3c25c255e0c9f812d63",
     "currentSha256": "384b67baf7303dd12f74e90836510fd2a884068a18ceaf96cc89412a0ce50073"
   },
+  "scripts/build-release-v143.mjs": {
+    "previousSha256": "43973fc01590bd92556bee1a3d0ccbc109be7c5f8cf96e0ae2da662eb1530e95",
+    "currentSha256": "543c94f49e114898172704ba6ef34958fab6db193093980932f4ebbbdedaafa1"
+  },
   "scripts/dev.mjs": {
     "previousSha256": "d0788bdc0244f0d5cdfd8e20add46f15d0a79703559cd85d5088e3a0de31d6a4",
-    "currentSha256": "ae1d136d1c298327d210d457b2010fabcf962868487d5445dd8b076decb11502"
+    "currentSha256": "46408dcc478c5960f1428a44c8b1cdd54fdf89e9553a57d87756e7a47c0d51a0"
   },
   "scripts/qa-audio-native-v162.py": {
     "previousSha256": "7146b44fe3e2f6db5daebc24db544a179576572c6fe5f233f5a64cea28b42f23",
@@ -422,7 +426,11 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "1b81da575ba68fcb5186cd5c47cd9d25f525904b84000b97e1b05ad796dab2cc",
-    "currentSha256": "14ace629cb26b8d07ad5d84ae3a828e913449d941e09467f7071f788107dd553"
+    "currentSha256": "01f820d677c242e1435ae3b2f7032baea221b638ca67d50e0b8ede9395eeb426"
+  },
+  "scripts/verify-release-artifact-v143.mjs": {
+    "previousSha256": "09254927c58489597131b98f3c0dc26159ec01c8265045299f52bf73819e2e60",
+    "currentSha256": "e5190e516d8c257e6b68f44cea5b95ec4c36df92e93f0ff1bdebebcc04e65bcc"
   },
   "scripts/verify-xeno-arbiter-campaign-v190.mjs": {
     "previousSha256": "54554db19910b260837967ece8f6ec6918e6c946ea6a2b5b643679ab84d3b41f",
