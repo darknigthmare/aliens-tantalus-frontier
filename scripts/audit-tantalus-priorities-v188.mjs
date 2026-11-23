@@ -1197,21 +1197,29 @@ export const TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188 = freeze({ baseline: '0d1
     "previousSha256": "d8d93d1031a497ab88c3c17cff4828572d0a3f9029f5e62b983f295c769ca583",
     "currentSha256": "15fb6bd8b06379942b03f2ebe4b44dae2259c662fd1a667d5df6baaddd7e2a3a"
   },
+  "bioforge-v80.css": {
+    "previousSha256": "759e4893bdb3cbc163e4e24432adf1b582429ca7377f0aa153abe22cf6b64178",
+    "currentSha256": "a4cf8a50187ecf06eb8c817f722b872deee0cfa6c9d30bcab5cbb4998347f43e"
+  },
   "docs/arsenal/README.md": {
     "previousSha256": "61c87b06e64ba5d2bdb3d91d22fb33b0fb8038309be8c3d98a43547444e13b4f",
     "currentSha256": "112cf2ec236f1fc8da0af8268db1ffc857741d028560942e0413a66e0562a336"
   },
   "docs/development/AUDIT_CONTENU_V188.md": {
     "previousSha256": "68d3f8c15a10195a773b0ec826d32341d01f7b554bef1370777dfbee219e3923",
-    "currentSha256": "9e9e086afbba47991701356fddff3a6b8b9f0f71bfdf9513043027180ed964c7"
+    "currentSha256": "0a8d4e0f47a7f8059d285c4a345fa7dd0d16787df6edcc803bfcbf000abdfbd1"
   },
   "docs/development/QUESTIONS_PROPRIETAIRE_V188.md": {
     "previousSha256": "15018c92727c164872514278c03acb8ffab23ab0d1501b8ba663018caf497951",
-    "currentSha256": "07c9c89727f9ea071a49d04d191b3134b079ded7c9365444810b34be4d23d3e5"
+    "currentSha256": "5bddfc57e55fe05c9ba138869f8867212bb55bdf9aaaf92fbf7521b04debf1a5"
+  },
+  "docs/development/VFX_V188.md": {
+    "previousSha256": "09b74ce7f2c596b5e038100cecc4bc5c1ea2ef368fcbbb14cdcbc48bf61efb00",
+    "currentSha256": "21bf09f2f6245849f34d0760fd57a14736b8b434450eb1694d0a28b36aa545fe"
   },
   "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
     "previousSha256": "d03dcc6e75b22a69890b389d5c0ef84311d5ea2e12d9dbe8233c2ff78bd419cb",
-    "currentSha256": "0d6efdb0ef6f233dab913fa38be98e9c1d2578729e78ce51f8bea045ec91cb30"
+    "currentSha256": "4bbcf03a272c46b9b13d8fc41a8c0d532194c73b32981e452526c9118f767025"
   },
   "index.html": {
     "previousSha256": "3ef0afc6493e26c7c483549ad2df64b59c96fcb5beaa8b1f2c35a99400fd35de",
@@ -1219,7 +1227,7 @@ export const TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188 = freeze({ baseline: '0d1
   },
   "package.json": {
     "previousSha256": "b74e5e7d949a29976fb562f1a8215a01426a1b950301cc37b25939421e2becf1",
-    "currentSha256": "950bd7a328087e7fc6cdd517b0f3c65b0ee0dcf8f18c443bd8e709a87065b085"
+    "currentSha256": "328edc30b8823689736deada3b6c63db282fa57188b97b32fe089c3caed43487"
   },
   "scripts/audit-native-qa-resources-v187.mjs": {
     "previousSha256": "11c877212a478982dcfc0157e54a66ac478812ab35c4fda44cf31b5bfc23f28a",
@@ -1255,7 +1263,7 @@ export const TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188 = freeze({ baseline: '0d1
   },
   "scripts/verify-audit-v143.mjs": {
     "previousSha256": "38cc0350f341d18a3536944e19391285e4756195e3c82af6e923d4072a615d08",
-    "currentSha256": "229664bff4edc64f862fb11f093f97fda7a8acbda36c1dc584571cda41cbed5f"
+    "currentSha256": "05b26d468eec824c74b576e58f0c5462b59ca972145b0d39a0b79632e493f796"
   },
   "scripts/verify-campaign-lethe-v163.mjs": {
     "previousSha256": "fb8cbbd3dd9d6fb4f356a3e167f9537cf0f04619e6cb94feaebb5de5cca7cdde",
@@ -1291,7 +1299,7 @@ export const TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188 = freeze({ baseline: '0d1
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "d3db745228acb958a138e62562fe4ea056dbc8f7bd61ca9cf203df74eaf62ca0",
-    "currentSha256": "b494d52bf91bf32b4da1065785dfa545ff2afdb6b2ae8a8b287cf39bf70d6fdb"
+    "currentSha256": "7aacc657fc01b9115ebb0d0eb8c4b0b7480927f38d6fa581852bfcfe9c9fd51c"
   },
   "scripts/verify-story-cinematics-v188.mjs": {
     "previousSha256": "1da532f57ba644b790a22e8ed9b64c0cee08cca6dd9ef60c435bf97e2b7d712a",
@@ -1323,7 +1331,19 @@ export const TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188 = freeze({ baseline: '0d1
   },
   "src/app.js": {
     "previousSha256": "2db6b8019a1e5fd30d96a43f89f09da34d1246c7127e2e89bd2d3cbab6735968",
-    "currentSha256": "d857b1e46060cd0247a8ed3a833ca2a37f4c2f9bcef1c25b5802f86d542bcd25"
+    "currentSha256": "f718b53950708c79034059942e780169f6e163b8bb2b63ec27ec54f9c592baee"
+  },
+  "src/bioforge-level-v80.js": {
+    "previousSha256": "6f29d2e2b09c65748d142fedbfac1b2016666889e4dffdcfdc8c9cd77d08e896",
+    "currentSha256": "c379530dd324c4f45c8b6b861ba16e0a14f5d3163e8c71e8fd4123cc923d76c7"
+  },
+  "src/bioforge-runtime-v80.js": {
+    "previousSha256": "1a12c4fc94e85767e6744be8e01861b9e1a325fd05c793f50bedc8ac9ae7448d",
+    "currentSha256": "0ffe71663a484a1072010a89c8ce8ac79a27556d23fb0bc764c6fc0ca3a55297"
+  },
+  "src/bioforge-ui-v80.js": {
+    "previousSha256": "0fb5333d530121c570ca5d14270ba39f705cb83e24c5b851d210386d3b85d059",
+    "currentSha256": "38997175f469ab035f81d1a25604b05130ce79aaa1155b46ab77a6a493c5f3a0"
   },
   "src/content.js": {
     "previousSha256": "fa090839aedabdc5fbbc56b7205258e47b38fa313198293a56e81f6566d43494",
@@ -1355,7 +1375,7 @@ export const TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188 = freeze({ baseline: '0d1
   },
   "src/i18n-en-catalog-v185.js": {
     "previousSha256": "11a0ec21f4ac8a04b65af1a3532d190996eed9c806fdbede9a9334975dc8e5dd",
-    "currentSha256": "a04bcb9c39275d2498e63a1b94f2cf4fb8e08d0808dc89a737bff19a07fbf848"
+    "currentSha256": "eb5909f8e93db9b3ea0fdc37388d0c85049e03d2f3f138549e37af1c882c0b32"
   },
   "src/legacy-operation-state-v131.js": {
     "previousSha256": "bda3ae3681cf383b1a8100e9110ba931ab62ba4d4f0f94a02d4a98ed80add7da",
@@ -1405,6 +1425,14 @@ export const TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188 = freeze({ baseline: '0d1
     "previousSha256": "70bcc68559aa9c37ecf90dfdba9dc575e4d6038e7d212abe55683c7e4652fa62",
     "currentSha256": "bb060e8a31ad1643d975641d47df711464f5c97b5deb82ae99e15a8f6ee333c0"
   },
+  "src/vfx-slots-v188.js": {
+    "previousSha256": "0453976c63dfb62306422c82f6e33476e33bede9ab5ba15ef299f086b8a745f7",
+    "currentSha256": "e25d6d37722a97b9452995aabe24856cb3821866e89c620ab32b71103856a420"
+  },
+  "src/vfx-v188.js": {
+    "previousSha256": "4037a54ac1b21e3a6b087c24afa3a6acbea26f4d0466e837a297b59dfce487ed",
+    "currentSha256": "38fc52189d7679728aacfe9a912fd6c13ef00ef62af0ee7d3085eb223ce8520d"
+  },
   "src/xeno-trials-acid-pools-v152.js": {
     "previousSha256": "1995962ffc6618f7a94910f6f49f92a2560b4562a033deea418930201d22354b",
     "currentSha256": "35e3c771aae245986cf3e22b92514380874db68a5843e45f956629273012be56"
@@ -1451,7 +1479,7 @@ export const TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188 = freeze({ baseline: '0d1
   },
   "sw.js": {
     "previousSha256": "41c8c1094fd4ae3edd95abb3d3921de4342e6475aed0eada96f97f0c36321eb4",
-    "currentSha256": "528022bdd52d4297e13ecb776a521b7160e3bb8677efc22e79de24fa0e328136"
+    "currentSha256": "ebfa30209a9936d1eefcf88d69d0b80114bb47ddf1259ee0f6311a4f0cb59f70"
   },
   "xeno-trials-fullscreen-v119.css": {
     "previousSha256": "972fb0679d394bfb5426a84cc748657a72ca0d567cad037899fd010819800712",

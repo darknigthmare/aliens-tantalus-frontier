@@ -676,3 +676,19 @@ Restent ouverts : la crise de l'Interlude sur le pont du joueur, l'ancien point 
 ## Outils de développement : lanceur de scènes et stand de tir (2026-11-22, spec 012)
 
 Outil de développement, pas du contenu joueur. Livré : lanceur caché (`/devtools/` sur `npm run dev`, environ 650 entrées générées depuis les registres : prologue, hubs Tantalus et Asphodèle, campagne principale, fins, colonie, station, Saison des Reines, cinématiques, opérations spéciales, toutes les campagnes, checkpoints de phase des niveaux dédiés), fixtures construites par les règles du jeu et validées (`migrateSave`, `inspectSaveSlotV78`), stockage isolé, options et surcouches, stand de tir dans le moteur réel avec mesures et export des réglages. Exclu du build public. Non livré (spec 012, `tasks.md`) : checkpoints internes de la course du convoi et des chapitres V131, retours ARBITER 02-06 (reçus runtime), réglage des ordres d'escouade gelés, traces des tirs instantanés, surcouches en profondeur.
+
+## Bioforge — laboratoire de confinement (2026-11-22)
+
+Spec `specs/013-bioforge` ; audit de level design `docs/development/BIOFORGE_AUDIT_V188.md` ; bible §8.2 (`ship-bioforge`) et tableau du secteur industriel. Code : `src/bioforge-lab-layout-v188.js`, `src/bioforge-lab-render-v188.js`, `src/bioforge-lab-runtime-v188.js` (mixin ajouté en fin de chaîne dans `src/bioforge-runtime-v80.js`), `src/bioforge-level-v80.js` (trois stations et la cabine de sortie déplacées), `src/bioforge-ui-v80.js`, `src/app.js`, `bioforge-v80.css`, `src/vfx-v188.js` et `src/vfx-slots-v188.js` (type `bubble`). Hors de la Frontier Forge gelée.
+
+| Élément | Avant | Après | Reste |
+| --- | --- | --- | --- |
+| Plan | 6 salles identiques, portes = murs invisibles de 10 m | 8 zones nommées dans les 6 salles, cloisons pleine hauteur, plafonds à hauteur humaine | Étage d'observation praticable |
+| Arrivée et sortie | Scène inerte avant session ; sortie seulement par le terminal | Promenade sans session ; sortie à pied après purge, décontamination de 2,4 s **[PROPOSÉ]**, retour à l'annexe du hub | Reprise exacte pendant la sortie |
+| Flux d'admission | File seulement dans le terminal | Tableau de file et deux cuves de stase dans le monde | — |
+| Fonctions de laboratoire | Absentes | Stockage froid, analyse, incinérateur (lecture seule), galerie en profondeur | Quête `ship-bioforge`, PNJ |
+| Art | PNG V80 | PNG V80 conservés + primitives `bioforge-lab-*` | Images des emplacements (aucune générée) |
+
+Inchangés : identifiants de salles, portes, stations et emplacements, monde 2880×720, arène, sauvegarde `bioforgeV80` (aucun champ ajouté), admissions V132, règles de session. Fidélité : références citées dans la spec (Alien 1979, Aliens 1986, Alien Resurrection 1997, Prometheus 2012, Covenant 2017, Alien: Isolation 2014), séparées en documenté / adapté / à définir ; rien n'est « 1:1 ».
+
+Vérifications réellement exécutées : `scripts/verify-bioforge-lab-v188.mjs` (dans `test:priorities:v188`), parcours Chromium `scripts/qa-bioforge-lab-v188.mjs` à 1366×768 et 390×844 (fixture et crochet de reprise déclarés en tête), mesure de rendu avant/après dans l'audit ; voir le rapport de la PR pour les suites complètes.

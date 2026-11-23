@@ -82,11 +82,13 @@ const LADDERS = freezeDeep([
   { id: 'arena-ladder-right', x: 2260, top: 470, bottom: 620, w: 52, roomId: 'containment-arena' }
 ]);
 
+// V188 (spec 013): control, purge and return consoles (and the exit booth) moved into their lab zones,
+// clear of the face-on bulkhead leaves; positions are not saved.
 const STATIONS = freezeDeep([
-  { id: 'bioforge-control', type: 'control', x: 190, y: 520, w: 76, h: 100, roomId: 'control-room', assetSlot: 'control-console' },
+  { id: 'bioforge-control', type: 'control', x: 200, y: 520, w: 76, h: 100, roomId: 'control-room', assetSlot: 'control-console' },
   { id: 'bioforge-printer', type: 'printer', x: 1080, y: 392, w: 148, h: 228, roomId: 'printer-bay', assetSlot: 'specimen-printer' },
-  { id: 'bioforge-purge', type: 'purge', x: 2535, y: 520, w: 76, h: 100, roomId: 'return-lock', assetSlot: 'purge-console' },
-  { id: 'bioforge-return', type: 'return', x: 2740, y: 520, w: 64, h: 100, roomId: 'return-lock', assetSlot: 'return-console' }
+  { id: 'bioforge-purge', type: 'purge', x: 2527, y: 520, w: 76, h: 100, roomId: 'return-lock', assetSlot: 'purge-console' },
+  { id: 'bioforge-return', type: 'return', x: 2688, y: 520, w: 64, h: 100, roomId: 'return-lock', assetSlot: 'return-console' }
 ]);
 
 const SPAWN_SLOTS = freezeDeep([
@@ -118,7 +120,7 @@ const AUTHORED_LEVEL = freezeDeep({
   playerSpawn: { x: 160, y: 528, w: 42, h: 92, facing: 1, roomId: 'control-room' },
   arenaPlayerSpawn: { x: 1350, y: 528, w: 42, h: 92, facing: 1, roomId: 'containment-arena' },
   arenaBounds: { x: 1300, y: 104, w: 1140, h: 516 },
-  returnTrigger: { x: 2680, y: 500, w: 132, h: 120, roomId: 'return-lock' },
+  returnTrigger: { x: 2672, y: 500, w: 92, h: 120, roomId: 'return-lock' },
   assetSlots: [
     'background-far',
     'background-mid',
