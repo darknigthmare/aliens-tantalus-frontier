@@ -989,3 +989,31 @@ Le stock de départ (64) couvre exactement les 16 sorties de la ligne principale
 - **C.** Garder : le marché d'Asphodèle est la source prévue.
 
 Aucune de ces décisions ne certifie une fidélité « 1:1 ».
+
+## Arsenal — lot C, reste de la franchise et tir secondaire (2026-11-23, spec 014) — décisions appliquées et hypothèses
+
+Décisions du propriétaire du 23 novembre 2026, appliquées sur la base `001a20bd`. Détail, sources, accès et reste : `docs/development/ARSENAL_COMPLETION_V188.md` (section « Lot C »). Tests : `scripts/verify-weapon-franchise-lot-c-v188.mjs` ; QA navigateur : `scripts/qa-arsenal-lot-c-v188.mjs`.
+
+| # | Décision | Application | Limite |
+| --- | --- | --- | --- |
+| C-A | Ajouter **maintenant** les armes rangées dans « reste » : *Fireteam Elite*, *Colonial Marines*, liste d'*AFE2*, *Alien RPG*, engins lancés d'*Isolation* si une classe peut les porter, Lacrima A20 / GEM-80, comics, romans. Répond aux questions B-A2 (ajoutées) et B-A3 (Predators toujours exclus) | 64 entrées de catalogue **236–301** (256 et 296 sautés : collision par modulo avec une plaque V112, comme 216), même admission `provisional-plaque-purchasable` et même plaque provisoire que le lot B ; registre `WEAPON_FRANCHISE_LEDGER_V188` (colonne `lot`). Les engins lancés sont portés par l'action de lancer V130 | 17 entrées « nom seul » (aucune page lisible : rien de documenté, tout [PROPOSÉ]) ; presque aucune capacité sourcée ; plaques natives à produire. Rien n'est « 1:1 » |
+| C-B | Tir secondaire : une action dédiée réaffectable, bouton tactile seulement si l'arme en a un, manette si le projet en gère une, second compteur, reprise, stand de tir. Répond à B-A4 | Action « Tir secondaire » (touche **N** par défaut), bouton « TIR 2 », stick gauche pressé ; lance-grenades 30 mm natif du M41A (4 coups, pompe, contrat V174), combinaison M41A + M240 de Ripley (`weapon-266`), F90 + SL40, M41A/2, lance-grenades du Draco, deux canons du ZX-76, coup par coup du VP78 ; compteur « [N] LG 30 MM 4/4 · PRÊT » ; `player.secondaryFireV188` dans la reprise | Joueur seulement ; valeurs [PROPOSÉ] ; modes d'un autre mécanisme non faits (visée automatique, types de grenades, surcharges…) |
+| C-C | Les six armes d'*Alien Resurrection* 203–208 restent en vente ; le VP70 reste à 52 (répond à B-A1 et B-A5) | Inchangé ; les 18 coups de l'arme réelle sont notés au dossier (`WEAPON_FEED_EVIDENCE_V188`, décision A6) | — |
+
+Hypothèses prises pour avancer (valeur appliquée, à confirmer ou corriger) :
+
+| # | Question | Valeur appliquée | Autre possibilité |
+| --- | --- | --- | --- |
+| C-1 | Touche par défaut du tir secondaire | **N** : libre dans le tableau des touches réaffectables. Elle sert aussi, dans les seules missions de commandement de la ruche, à changer de recrue : le tir secondaire y est neutralisé tant que l'opérateur commande | G (prise par le soin du second joueur), une touche de chiffre, ou le clic droit |
+| C-2 | Bouton de manette | Pression du stick gauche ; pas de tir secondaire à la manette tant que le pilote des chargeurs physiques est actif (le bouton y est le modificateur de rechargement rapide) | Une combinaison (viser + recharger), ou déplacer le modificateur |
+| C-3 | Entrées « nom seul » des comics et des romans | Deux emplacements gardent le nom générique du suivi (« Unidentified Comic Marine Sidearm », « Unidentified Novel Security Firearm »), jouables et achetables | Les retirer de la vente, ou les remplacer par des armes nommées une fois sourcées (trouvées : Taser Web Rifle, Sound Cannon, charge thumper — déjà ajoutées) |
+| C-4 | Mines (M20 Claymore, GEM-80, mine IEM) | Lancées comme des grenades à retardement | Une vraie classe « posée » (fil, proximité, cône) |
+| C-5 | Un seul tir secondaire par arme | Combinaison de Ripley : les flammes du M240 ; son lance-grenades n'est pas jouable. Draco : lance-grenades ; mode fusil non jouable | Un sélecteur de mode secondaire |
+| C-6 | Valeurs des tirs secondaires | 30 mm : 4 + 4 en réserve (8 au plus), 58 dégâts, rayon 130 px, pompe 0,5 s ; SL40 : un coup ; M240 de Ripley : 40 + 40 ; une caisse de munitions rend une grenade ou 20 unités | Autres valeurs ; réserve achetée à l'armurerie |
+| C-7 | Pompe du lance-grenades | Toujours automatique, même quand l'option « pompe manuelle » est active | La relier à l'action « Pomper » |
+| C-8 | Armes d'une même famille à plusieurs versions (EDS-93 Mk.2 et `weapon-160`, Type 21 Mk.2 et `weapon-156`, XM99A et `weapon-223`, armes légendaires et leurs modèles de base, F44AR et F44AA) | Entrées séparées, comme les lignes du suivi | Les fusionner en finitions d'un même modèle |
+
+Trouvé pendant la lecture, hors du suivi et non ajouté (à décider) : « Vasquez's Pistol » (arme légendaire de *Colonial Marines*), grenade B15, Skeeter Launcher (*Aliens versus Predator* Gold), Pulse Bomb et Mega Grenade (comics), M39A2, BD-14 Gecho, BD-21 Khokosh, Type 102 et F44A d'*AFE2*. Le *Colonial Marines Technical Manual* n'a pas été consulté.
+
+Aucune de ces décisions ne certifie une fidélité « 1:1 ».
+

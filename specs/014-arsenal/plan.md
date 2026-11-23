@@ -18,3 +18,11 @@
 - Pourquoi dans `WEAPONS` : les tables dérivées (actions V131, présentation V124, recherche, maîtrise) sont construites depuis le catalogue ; une liste séparée aurait laissé les ajouts sans projectiles ni effets. Les invariants « toute arme a une plaque » deviennent « toute arme hors des ajouts V188 listés a une plaque » (tests V125, V157).
 - Capacité de mécanisme : tir unique = 1, .357 = 6 (CSV), finition d’un tube/barillet = capacité de sa base ; normalisation hors rechargement, surplus vers la réserve.
 - Sons : indices V188 existants seulement (le compte de 41 indices est épinglé).
+
+## Lot C (23 novembre 2026)
+
+- Données : `src/weapon-catalog-franchise-c-v188.js` (lignes brutes, mêmes constructeurs que le lot B). Engins : `thrownDeviceV188` lu par `src/weapon-actions-v130.js` et `src/weapon-arsenal-runtime-v188.js`.
+- Tir secondaire : `src/weapon-secondary-fire-v188.js`, couche `withSecondaryFireV188` composée entre `withMagazineRecoveryWorldV168` et `withArsenalFeedsV188` (aucune adjacence testée n’est rompue). Le M41A utilise le contrat pur `src/weapon-underbarrel-v174.js` ; les autres modes une petite alimentation générique. Entrée : code d’action `KeyN` tenu dans `engine.keys` (clavier, bouton tactile `data-mission-key`, manette).
+- Persistance : `player.secondaryFireV188` dans `captureResumeState` / `applyResumeState`, bornes du mode recontrôlées à la reprise.
+- Vérification : `scripts/verify-weapon-franchise-lot-c-v188.mjs` (dans `test:weapons`), `scripts/qa-arsenal-lot-c-v188.mjs` (Chromium).
+

@@ -30,3 +30,11 @@ Lot A vérifié : armes USCM 001–017 et leurs finitions, revolver .357 (protot
 - **FR-010 Plaque provisoire.** Les identifiants 194–196 sont achetables à l’armurerie au prix de la règle ordinaire. Leur fiche montre une plaque provisoire dessinée en Canvas derrière l’emplacement nommé `armory-plaque-provisional-<id>` ; aucune image n’est ajoutée et la plaque ne vaut pas art livré. Elles portent la même admission que le lot B (`admissionV188: 'provisional-plaque-purchasable'`) : une seule plaque, une seule porte d’achat.
 - **FR-011 Pompe manuelle en option.** La pompe reste automatique par défaut (0,4 s [PROPOSÉ]). Un réglage additif active la pompe manuelle : action dédiée réaffectable (B par défaut), bouton tactile, invite texte ; même délai minimal ; l’équipier reste en automatique.
 - Capacités (une roquette par tube, 6 chambres pour le .357, capacité de base pour les finitions) : conservées.
+
+## Lot C — décisions du propriétaire du 2026-11-23
+
+- **FR-012 Reste de la franchise.** Les armes humaines que les lots A et B rangeaient dans « reste » sont ajoutées en fin de catalogue (236–301, numéros dont le modulo retombe sur une plaque existante sautés), avec l’admission et la plaque provisoire du lot B. Une arme dont aucune source n’a pu être lue est ajoutée sous son nom de suivi, tout en [PROPOSÉ], étiquetée « nom seul ». Les armes des Predators restent exclues.
+- **FR-013 Engins lancés.** Un engin (grenade, incendiaire, mine) n’est admis que par un champ et un mécanisme exacts de sa fiche ; il est porté par l’action de lancer existante.
+- **FR-014 Tir secondaire.** Une seule action dédiée et réaffectable ; bouton tactile visible seulement si l’arme tenue a un tir secondaire ; manette ; second compteur en texte ; reprise additive (aucun changement du validateur de sauvegarde) ; stand de tir. Un tir secondaire à alimentation propre ne consomme ni munition ni numéro de tir de l’arme principale. Valeurs [PROPOSÉ].
+- Rien n’est déclaré fidèle 1:1 ; documenté, adapté et à définir restent séparés (`docs/development/ARSENAL_COMPLETION_V188.md`).
+
