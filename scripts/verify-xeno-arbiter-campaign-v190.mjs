@@ -13,7 +13,7 @@ import { previousProgress, fixture, tick, walk, hold, finish } from './xeno-arbi
 // These are six distinct original investigative operations. No ancient IDs,
 // 1:1 art proof, physical corporate trial or live captive is invented here.
 test('six authored ARBITER chapters extend the real campaign catalog and have connected physical alternatives', () => {
-  assert.equal(CONTENT_COUNTS.campaigns, 511);
+  assert.equal(CONTENT_COUNTS.campaigns, 526);
   assert.equal(CAMPAIGNS.filter(c => c.id.startsWith('special-arbiter-')).length, 6);
   assert.equal(ARBITER_DEVICE_V190.canonExact, false);
   const signatures = new Set();

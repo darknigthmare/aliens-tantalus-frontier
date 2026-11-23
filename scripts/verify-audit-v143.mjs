@@ -116,8 +116,8 @@ test('MIRE keeps every stable ID and leaves original Frontier operations untouch
     'special-arbiter-03-custody', 'special-arbiter-04-arbitration', 'special-arbiter-05-isolation', 'special-arbiter-06-local']);
   // V188 spec 011: the nine Arc 1 missions of « La Saison des Reines » come last.
   assert.deepEqual(CAMPAIGNS.slice(502), QUEENS_CAMPAIGNS_V188);
-  assert.equal(CAMPAIGNS.length, 511);
-  assert.equal(new Set(CAMPAIGNS.map(c => c.id)).size, 511);
+  assert.equal(CAMPAIGNS.length, 526);
+  assert.equal(new Set(CAMPAIGNS.map(c => c.id)).size, 526);
 });
 for (const source of MIRE_SETTINGS_V143) test(`MIRE setting: ${source.source}`, () => {
   const entries = CAMPAIGNS.filter(c => c.mode === 'MIRE' && c.source === source.source);
