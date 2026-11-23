@@ -34,6 +34,7 @@ export const GROUP_GLOSSARY_V188 = Object.freeze({
     category: Object.freeze({
       bow: entry('Arcs', 'Bows'),
       deployable: entry('Déployables', 'Deployables'),
+      device: entry('Engins lancés', 'Thrown devices'), // V188 arsenal lot C
       energy: entry('Armes à énergie', 'Energy weapons'),
       explosive: entry('Explosifs', 'Explosives'),
       firearm: entry('Armes à feu', 'Firearms'),

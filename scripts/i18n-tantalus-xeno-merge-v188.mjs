@@ -1133,7 +1133,13 @@ export const TANTALUS_I18N_DELTA_V188 = Object.freeze({
       "Arme inscrite au suivi (Aliens novels) sous le nom « Unidentified Novel Security Firearm » ; aucune fiche n’a pu être relue. Jouable comme carabine automatique : classe et valeurs entièrement proposées. Plaque provisoire dessinée.",
       "Outil de minage du roman Alien: Out of the Shadows. Un extrait de page de fans (non relue) rapporte qu’une caisse de ses charges explose dans une soute du Marion. Le lanceur jouable ici est une proposition. Plaque provisoire dessinée.",
       "Tir secondaire",
-      "TIR 2"
+      "TIR 2",
+      "Engins lancés",
+      "Arme lourde de l’équipage du Betty dans Alien Resurrection (1997), vue en lance-flammes, lance-grenades et fusil selon l’IMFDB. Le lance-flammes est le tir principal, le lance-grenades le tir secondaire ; le mode fusil n’est pas jouable. Plaque provisoire dessinée.",
+      "Fusil du soldat Cole dans Alien: Covenant (2017), identifié comme un Thales F90 équipé d’un lance-grenades SL40 par l’IMFDB. Le lance-grenades est le tir secondaire. Plaque provisoire dessinée.",
+      "Arme de poing de dernier recours d’Aliens vs Predator (2010), tirant au coup par coup ou par rafales de trois : la rafale est le tir principal, le coup par coup le tir secondaire. Le jeu d’origine lui donne des munitions illimitées ; la capacité est ici un réglage. Plaque provisoire dessinée.",
+      "Fusil à canons jumelés d’Aliens vs Predator (2010), redoutable de près et long à recharger. Le tir secondaire décharge les deux canons. Plaque provisoire dessinée.",
+      "Fusil à impulsions de départ d’Aliens vs Predator (2010), avec un lance-grenades en tir secondaire, comme dans le jeu d’origine. Plaque provisoire dessinée."
     ],
     "changed": {
       "Extraire le renseignement synthétique": {

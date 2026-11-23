@@ -234,7 +234,7 @@ test('T106 — M41A 30 mm underbarrel launcher: four grenades, pump after each, 
     const actor = engine.player, primary = total(actor), shots = actor.shots;
     let state = engine.getSecondaryFireStateV188();
     assert.equal(state.available, true); assert.equal(state.loaded, 4); assert.equal(state.reserve, 4); assert.equal(state.capacity, 4);
-    assert.match(state.hud, /^TIR SEC\. \[N\] LG 30 MM 4\/4 · PRÊT$/);
+    assert.match(state.hud, /^\[N\] LG 30 MM 4\/4 · PRÊT$/);
     assert.equal(press(engine), true, 'first grenade');
     state = engine.getSecondaryFireStateV188();
     assert.equal(state.loaded, 3); assert.equal(state.needsPump, true); assert.equal(state.projectiles, 1);
@@ -413,6 +413,6 @@ test('input and wiring: one rebindable action on a free default key, touch butto
   const seen = [];
   const { engine } = missionV136({ weapon: named('weapon-001-m41a-pulse-rifle') });
   try { engine.secondaryInputV188 = { onAvailability: available => seen.push(available), keyLabel: () => 'G', language: () => 'en' }; engine.secondaryAvailabilityV188 = null; run(engine, 2);
-    assert.deepEqual(seen, [true]); assert.match(engine.getSecondaryFireStateV188().hud, /^ALT FIRE \[G\] 30 MM GL 4\/4 · READY$/); }
+    assert.deepEqual(seen, [true]); assert.match(engine.getSecondaryFireStateV188().hud, /^\[G\] 30 MM GL 4\/4 · READY$/); }
   finally { engine.dispose?.(); }
 });

@@ -445,12 +445,12 @@ export function withSecondaryFireV188(Base) {
       return result;
     }
 
-    /** Second HUD counter: its own text line under the status block (text and state word, not colour alone). */
+    /** Second HUD counter: key, mode, loaded/reserve and a state word (text, not colour alone). */
     secondaryHudTextV188(actor = this.player) {
       const record = actor?.secondaryFireV188, mode = record && this.secondaryModeForV188(actor);
       if (!record || !mode || mode.id !== record.modeId) return null;
       const en = this.secondaryInputV188?.language?.() === 'en', key = this.secondaryInputV188?.keyLabel?.() || 'N', pick = entry => en ? entry.en : entry.fr;
-      const head = `${pick(SECONDARY_FIRE_LABEL_V188)} [${key}] ${pick(mode.label)}`;
+      const head = `[${key}] ${pick(mode.label)}`;
       if (!record.feed) return `${head} · ${finite(actor.ammo)}/${mode.rounds}`;
       const state = record.reload ? SECONDARY_FIRE_STATUS_V188.reload : pumpOwed(record.feed) ? SECONDARY_FIRE_STATUS_V188.pump
         : loadedOf(record.feed) < 1 ? SECONDARY_FIRE_STATUS_V188.empty : SECONDARY_FIRE_STATUS_V188.ready;
@@ -462,11 +462,9 @@ export function withSecondaryFireV188(Base) {
       const text = this.secondaryHudTextV188(this.player);
       if (!ctx || !text || this.player?.alive === false || typeof ctx.fillText !== 'function') return result;
       ctx.save();
-      ctx.font = '12px monospace'; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
-      const width = Math.min(440, (ctx.measureText?.(text)?.width || text.length * 7.3) + 32);
-      ctx.fillStyle = 'rgba(3, 10, 8, .82)'; ctx.fillRect(18, 112, width, 24);
-      ctx.strokeStyle = '#8c7a45'; ctx.lineWidth = 1; ctx.strokeRect(18.5, 112.5, width, 24);
-      ctx.fillStyle = '#f2e3a6'; ctx.fillText(text, 34, 129);
+      // Right end of the fourth line of the status block (the area under the block belongs to the squad list).
+      ctx.font = '12px monospace'; ctx.textAlign = 'right'; ctx.textBaseline = 'alphabetic';
+      ctx.fillStyle = '#f2e3a6'; ctx.fillText(text, 446, 99);
       ctx.restore();
       return result;
     }
