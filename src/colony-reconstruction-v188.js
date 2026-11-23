@@ -33,8 +33,9 @@ export const COLONY_TIERS_V188 = Object.freeze([
 export const COLONY_STABILITY_PER_LEVEL_V188 = 3;
 export const COLONY_AUTONOMOUS_STIPEND_V188 = Object.freeze({ credits: 150, alloy: 10 });
 // Owner decision 2026-11-23 (P-1): supplies have a visible source. [PROPOSÉ] each successful colony mission
-// sends back 6 supplies (the price of a sortie on Cocyte) and each validated site level 4 (hold cap: 100).
-export const COLONY_SUPPLY_RETURNS_V188 = Object.freeze({ mission: 6, site: 4 });
+// sends back 8 supplies (a sortie on Cocyte costs 6, so a colony mission or a contract nets +2) and each
+// validated site level 4 (hold cap: 100).
+export const COLONY_SUPPLY_RETURNS_V188 = Object.freeze({ mission: 8, site: 4 });
 /** Adds supplies to the Tantalus hold (`hub.systems.supplies`, 0-100). Returns what was actually stored. */
 export function addColonySuppliesV188(save, amount) {
   const systems = save?.hub?.systems;

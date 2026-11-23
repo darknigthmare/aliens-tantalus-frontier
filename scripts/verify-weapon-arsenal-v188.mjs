@@ -52,7 +52,7 @@ test('catalogue integrity: 178 historical ids unchanged, three append-only pendi
   for (const weapon of WEAPON_CATALOG_ADDITIONS_V188) {
     assert.match(weapon.id, /^weapon-19[4-6]-[a-z0-9-]+$/);
     assert.equal(weapon.canonExact, false); assert.ok(weapon.sourceUrl && weapon.sourceWork && weapon.description && /proposed/.test(weapon.statsPolicy));
-    assert.equal(resolveWeaponVisualProfileV63(weapon), null, 'no plaque: the armory keeps procurement closed');
+    assert.equal(resolveWeaponVisualProfileV63(weapon), null, 'no native plaque (194–196 are sold behind a provisional drawn plaque since 2026-11-23: verify-owner-decisions-20261123-v188.mjs)');
     assert.ok(WEAPON_RESEARCH_INDEX_V171.some(row => row.id === weapon.researchId), weapon.researchId);
     if (weapon.fidelityDossierId) assert.ok(WEAPON_FIDELITY_DOSSIERS_V170.some(row => row.id === weapon.fidelityDossierId));
     assert.ok(Object.isFrozen(weapon));

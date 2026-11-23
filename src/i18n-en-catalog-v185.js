@@ -7514,7 +7514,15 @@ export const EN_CATALOG_V185 = Object.freeze({
 "DÉPLACEMENT DANS LE LABORATOIRE · AUCUNE SESSION MODIFIÉE": "MOVING THROUGH THE LAB · NO SESSION CHANGED",
 "DÉCONTAMINATION DE SORTIE EN COURS": "EXIT DECONTAMINATION IN PROGRESS",
 "DÉCONTAMINATION TERMINÉE · PORTE DU TANTALUS OUVERTE": "DECONTAMINATION COMPLETE · TANTALUS DOOR OPEN",
-"RETOUR AU TANTALUS PAR LE SAS DE SORTIE": "RETURN TO THE TANTALUS THROUGH THE EXIT AIRLOCK"
+"RETOUR AU TANTALUS PAR LE SAS DE SORTIE": "RETURN TO THE TANTALUS THROUGH THE EXIT AIRLOCK",
+// V188 owner decisions of 2026-11-23 (reviewed through i18n-catalog-maintenance-v186 merge).
+"Fusil à pompe du caporal Hicks dans Aliens (1986), identifié comme un Ithaca 37 raccourci par des bases secondaires. Alimentation par tube et pompe. Plaque d’armurerie provisoire (dessin) : disponible à l’armurerie.": "Corporal Hicks’ pump shotgun in Aliens (1986), identified as a cut-down Ithaca 37 by secondary references. Tube-fed, pump action. Provisional armory plate (drawing): available at the armory.",
+"Fusil à pompe trouvé à bord de Sevastopol (Alien: Isolation). Alimentation par tube et pompe. Plaque d’armurerie provisoire (dessin) : disponible à l’armurerie.": "Pump shotgun found aboard Sevastopol (Alien: Isolation). Tube-fed, pump action. Provisional armory plate (drawing): available at the armory.",
+"Lance-flammes trouvé à bord de Sevastopol (Alien: Isolation). Réservoir de carburant, aucune douille. Plaque d’armurerie provisoire (dessin) : disponible à l’armurerie.": "Flamethrower found aboard Sevastopol (Alien: Isolation). Fuel tank, no spent cases. Provisional armory plate (drawing): available at the armory.",
+"EXERCICE · Armurerie : porte du Proving Ground, au niveau du sol. Dans l’annexe, armez la console, puis montez par l’échelle (W, puis ESPACE au palier) jusqu’au pas de tir : neuf cibles, trois directions et une recharge.": "EXERCISE · Armory: Proving Ground door, at floor level. In the annex, arm the console, then climb the ladder (W, then SPACE at the landing) to the firing line: nine targets, three directions and one reload.",
+"Fusils à pompe : pompe manuelle (touche dédiée)": "Pump shotguns: manual pump (dedicated key)",
+"POMPE": "PUMP",
+"Pomper le fusil à pompe": "Pump the shotgun"
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 // V188 systems bug hunt (merged via i18n-catalog-maintenance-v186 review).
@@ -8164,5 +8172,7 @@ export const EN_PATTERNS_V185 = Object.freeze({
 "PRÉVU ×{0}": "PLANNED ×{0}",
 "STOCKAGE FROID · {0} ÉCHANTILLON(S) · {1} PROFIL(S)": "COLD STORAGE · {0} SAMPLE(S) · {1} PROFILE(S)",
 "ANALYSE · {0} · {1} IMPRIMÉ(S) · {2} NEUTRALISÉ(S)": "ANALYSIS · {0} · {1} PRINTED · {2} NEUTRALIZED",
-"DÉCONTAMINATION {0} %": "DECONTAMINATION {0} %"
+"DÉCONTAMINATION {0} %": "DECONTAMINATION {0} %",
+// V188 owner decisions of 2026-11-23 (reviewed through i18n-catalog-maintenance-v186 merge).
+"CONFIRMER · {0}": "CONFIRM · {0}"
 });

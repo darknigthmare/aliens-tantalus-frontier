@@ -953,7 +953,14 @@ export const TANTALUS_I18N_DELTA_V188 = Object.freeze({
       "DÉPLACEMENT DANS LE LABORATOIRE · AUCUNE SESSION MODIFIÉE",
       "DÉCONTAMINATION DE SORTIE EN COURS",
       "DÉCONTAMINATION TERMINÉE · PORTE DU TANTALUS OUVERTE",
-      "RETOUR AU TANTALUS PAR LE SAS DE SORTIE"
+      "RETOUR AU TANTALUS PAR LE SAS DE SORTIE",
+      "Fusil à pompe du caporal Hicks dans Aliens (1986), identifié comme un Ithaca 37 raccourci par des bases secondaires. Alimentation par tube et pompe. Plaque d’armurerie provisoire (dessin) : disponible à l’armurerie.",
+      "Fusil à pompe trouvé à bord de Sevastopol (Alien: Isolation). Alimentation par tube et pompe. Plaque d’armurerie provisoire (dessin) : disponible à l’armurerie.",
+      "Lance-flammes trouvé à bord de Sevastopol (Alien: Isolation). Réservoir de carburant, aucune douille. Plaque d’armurerie provisoire (dessin) : disponible à l’armurerie.",
+      "EXERCICE · Armurerie : porte du Proving Ground, au niveau du sol. Dans l’annexe, armez la console, puis montez par l’échelle (W, puis ESPACE au palier) jusqu’au pas de tir : neuf cibles, trois directions et une recharge.",
+      "Fusils à pompe : pompe manuelle (touche dédiée)",
+      "POMPE",
+      "Pomper le fusil à pompe"
     ],
     "changed": {
       "Extraire le renseignement synthétique": {
@@ -1093,7 +1100,8 @@ export const TANTALUS_I18N_DELTA_V188 = Object.freeze({
       "PRÉVU ×{0}",
       "STOCKAGE FROID · {0} ÉCHANTILLON(S) · {1} PROFIL(S)",
       "ANALYSE · {0} · {1} IMPRIMÉ(S) · {2} NEUTRALISÉ(S)",
-      "DÉCONTAMINATION {0} %"
+      "DÉCONTAMINATION {0} %",
+      "CONFIRMER · {0}"
     ],
     "changed": {
       "TEMPS {0} S · VISÉE {1}": {
