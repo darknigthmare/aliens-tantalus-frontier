@@ -5,6 +5,8 @@
  * slot instead of an image. Every number is original Tantalus gameplay tuning
  * marked [PROPOSÉ] (statsPolicy and docs/development/ARSENAL_COMPLETION_V188.md);
  * identities cite their source and none is certified 1:1.
+ * Owner decision 2026-11-23: ids 194–196 are purchasable behind a provisional drawn plaque
+ * (weapon-provisional-plaque-v188.js, explicit id list); `common` below is unchanged.
  * Existing IDs, saves and numbering are untouched (new IDs start at 194; 191 stays a test-reserved unknown number).
  */
 const freeze = value => {
@@ -31,7 +33,7 @@ export const WEAPON_CATALOG_ADDITIONS_V188 = freeze([
     identityEvidence: 'on-screen-film-prop-identified-by-secondary-firearm-database',
     identityVerified: false,
     sourceMechanism: 'pump-action-tube-magazine', ammunitionV188: '12 ga shotshell (chambrage de l’arme réelle) [À VÉRIFIER]',
-    description: 'Fusil à pompe du caporal Hicks dans Aliens (1986), identifié comme un Ithaca 37 raccourci par des bases secondaires. Alimentation par tube et pompe. Plaque d’armurerie à produire : non disponible à l’achat.'
+    description: 'Fusil à pompe du caporal Hicks dans Aliens (1986), identifié comme un Ithaca 37 raccourci par des bases secondaires. Alimentation par tube et pompe. Plaque d’armurerie provisoire (dessin) : disponible à l’armurerie.'
   },
   {
     ...common,
@@ -44,7 +46,7 @@ export const WEAPON_CATALOG_ADDITIONS_V188 = freeze([
     identityEvidence: 'first-party-manual-names-weapon-class-only',
     identityVerified: true,
     sourceMechanism: 'pump-action-tube-magazine', ammunitionV188: 'shotshell [À DÉFINIR]',
-    description: 'Fusil à pompe trouvé à bord de Sevastopol (Alien: Isolation). Alimentation par tube et pompe. Plaque d’armurerie à produire : non disponible à l’achat.'
+    description: 'Fusil à pompe trouvé à bord de Sevastopol (Alien: Isolation). Alimentation par tube et pompe. Plaque d’armurerie provisoire (dessin) : disponible à l’armurerie.'
   },
   {
     ...common,
@@ -57,7 +59,7 @@ export const WEAPON_CATALOG_ADDITIONS_V188 = freeze([
     identityEvidence: 'first-party-manual-names-weapon-class-only',
     identityVerified: true,
     sourceMechanism: 'fuel-canister-flame-jet', ammunitionV188: 'fuel [À DÉFINIR]',
-    description: 'Lance-flammes trouvé à bord de Sevastopol (Alien: Isolation). Réservoir de carburant, aucune douille. Plaque d’armurerie à produire : non disponible à l’achat.'
+    description: 'Lance-flammes trouvé à bord de Sevastopol (Alien: Isolation). Réservoir de carburant, aucune douille. Plaque d’armurerie provisoire (dessin) : disponible à l’armurerie.'
   }
 ]);
 export const WEAPON_ADDITION_IDS_V188 = Object.freeze(WEAPON_CATALOG_ADDITIONS_V188.map(weapon => weapon.id));

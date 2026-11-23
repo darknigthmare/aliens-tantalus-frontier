@@ -177,6 +177,7 @@ import { mountForgePlaytestCheckpointUIV157 } from './forge-playtest-checkpoint-
 import { mountForgeCampaignUIV161 } from './forge-campaign-ui-v161.js';
 import { AudioDirector, cinematicReturnSceneV188 } from './audio.js';
 import { resolveWeaponVisualProfileV63 } from './weapon-visual-runtime-v63.js';
+import { hasProvisionalPlaqueV188 } from './weapon-provisional-plaque-v188.js';
 import { getVehicleDeploymentGateV60, VEHICLE_DEPLOYMENT_ATLAS_REQUIRED_V122 } from './vehicle-deployment-gates-v60.js';
 import { TitleScreenController } from './title-screen-v61.js';
 import { TitleSceneControllerV79 } from './title-scene-v79.js';
@@ -2729,6 +2730,12 @@ function renderOperationPlan() {
   renderCommandMissionsV110();
 }
 
+/** The touch pump button exists only while the manual pump option is on. */
+function syncPumpTouchButtonV188() {
+  const button = byId('mission-pump-v188');
+  if (button) button.hidden = saveSystem.data?.settings?.pumpManualV188 !== true;
+}
+
 function procurementActionsV62(record) {
   const kind = record.catalog === 'weapons' ? 'weapon'
     : record.catalog === 'equipment' ? 'equipment'
@@ -2741,7 +2748,8 @@ function procurementActionsV62(record) {
   const inventoryKey = `${kind}Ids`;
   const owned = saveSystem.data.strategy.inventory[inventoryKey]?.includes(item.id);
   const loadoutLocked = Boolean(saveSystem.data.strategy.currentOperation);
-  if (kind === 'weapon' && !resolveWeaponVisualProfileV63(item)) {
+  // V188 owner decision 2026-11-23: 194–196 are purchasable behind their provisional drawn plaque; the rule stands for every other weapon.
+  if (kind === 'weapon' && !resolveWeaponVisualProfileV63(item) && !hasProvisionalPlaqueV188(item)) {
     const bridge = getExcelWeaponBridgeV63(item.id);
     const sourceLabel = bridge?.excelIds?.length ? ` · Excel ${bridge.excelIds.join(', ')}` : '';
     return [{
@@ -3256,6 +3264,8 @@ function renderProfiles() {
   byId('setting-motion').checked = saveSystem.data.settings.reducedMotion;
   byId('setting-subtitles').checked = saveSystem.data.settings.subtitles;
   if (byId('setting-insertion-full-v188')) byId('setting-insertion-full-v188').checked = saveSystem.data.settings.insertionAlwaysFullV188 === true;
+  if (byId('setting-pump-manual-v188')) byId('setting-pump-manual-v188').checked = saveSystem.data.settings.pumpManualV188 === true;
+  syncPumpTouchButtonV188();
   byId('setting-quality').value = saveSystem.data.settings.quality || 'high';
   byId('setting-contrast').value = saveSystem.data.settings.contrast || 'standard';
   byId('setting-aim-assist').value = saveSystem.data.settings.aimAssist || 'standard';
@@ -5244,6 +5254,14 @@ function setupRuntimeControls() {
   });
   byId('mission-vehicle').onclick = () => engine.toggleVehicle(engine.player);
   bindTacticalReloadButtonV77(byId('mission-reload'), engine, audio);
+  // V188 owner decision 2026-11-23: manual pump option — the engine reads the setting live; touch button and key label.
+  engine.pumpInputV188 = {
+    manual: () => saveSystem.data?.settings?.pumpManualV188 === true,
+    language: () => document.documentElement.lang,
+    keyLabel: () => String(normalizeKeyBindingsV188(saveSystem.data?.settings?.keyBindingsV188).pump || '').replace(/^(Key|Digit)/, '') || '—'
+  };
+  if (byId('mission-pump-v188')) byId('mission-pump-v188').onclick = () => engine.requestPumpV188?.(engine.player);
+  syncPumpTouchButtonV188();
   // Experimental physical feed only: Shift+R performs an honest speed reload.
   // Capture before the ordinary canvas R handler so one edge cannot start two reloads.
   globalThis.addEventListener('keydown', event => {
@@ -5556,6 +5574,7 @@ function bind() {
     'setting-permadeath-v188': ['crewPermadeathV188', (element) => normalizeCrewPermadeathV188(saveSystem.data.settings.crewPermadeathV188, element.checked)],
     'setting-colorblind-v188': ['colorblindV188', (element) => element.value],
     'setting-insertion-full-v188': ['insertionAlwaysFullV188', (element) => element.checked],
+    'setting-pump-manual-v188': ['pumpManualV188', (element) => element.checked],
     'setting-text-scale-v188': ['textScaleV188', (element) => Number(element.value)]
   };
   // V188 complete J1 key remapping (§53.8): capture-phase translation layer.

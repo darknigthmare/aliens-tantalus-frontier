@@ -421,7 +421,8 @@ export function createDefaultSave(profile = 1) {
       textScaleV188: 1,
       keyBindingsV188: defaultKeyBindingsV188(),
       customDifficultyV188: { ...DEFAULT_CUSTOM_DIFFICULTY_V188 },
-      insertionAlwaysFullV188: false
+      insertionAlwaysFullV188: false,
+      pumpManualV188: false
     },
     statistics: { playSeconds: 0, kills: 0, shots: 0, hits: 0, deaths: 0, rescues: 0, rooms: 0, campaigns: 0, strategicActions: 0, research: 0, procurements: 0, retreats: 0 }
   };
@@ -2507,6 +2508,8 @@ export function migrateSave(input, profile = 1) {
   migrated.settings.crewPermadeathV188 = settings.crewPermadeathV188 !== false;
   // V188 additive option: the full insertion cinematic every time (default: first visit only).
   migrated.settings.insertionAlwaysFullV188 = settings.insertionAlwaysFullV188 === true;
+  // V188 additive option (owner decision 2026-11-23): manual pump for pump shotguns; automatic by default.
+  migrated.settings.pumpManualV188 = settings.pumpManualV188 === true;
   migrated.settings.colorblindV188 = normalizeColorblindV188(settings.colorblindV188);
   migrated.settings.textScaleV188 = normalizeTextScaleV188(settings.textScaleV188);
   migrated.settings.keyBindingsV188 = normalizeKeyBindingsV188(settings.keyBindingsV188);

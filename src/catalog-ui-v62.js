@@ -23,6 +23,7 @@ import { resolveAlienBaseDossierV1, resolveAlienBaseIdentityProposalV1, resolveA
 import { resolveWeaponReferenceCoverageV122 as resolveWeaponReferenceCoverageV120 } from './weapon-reference-coverage-v122.js';
 import { groupLabelV188, catalogValueLabelV188 } from './group-glossary-v188.js';
 import { currentLanguageV185 } from './i18n-v185.js';
+import { mountProvisionalPlaqueV188 } from './weapon-provisional-plaque-v188.js';
 
 const importWalkV107 = id => {
   const art = getEnemyStaticPoseV96(id), walk = getEnemyImportAnimationV107(art), attack = getEnemyImportAttackV109(art);
@@ -815,6 +816,13 @@ export class CatalogWorkbenchV62 {
   }
 
   renderMissingMedia(target, record) {
+    // V188 owner decision 2026-11-23: weapons 194–196 show a provisional drawn plaque (Canvas, named slot), not an image.
+    if (record?.catalog === 'weapons') {
+      let language = 'fr';
+      try { language = currentLanguageV185(); } catch { language = 'fr'; }
+      if (mountProvisionalPlaqueV188(this.document, target, record, { detail: target?.classList?.contains('catalog-v62__detail-header'), language,
+        name: this.developerModeV110 ? record.name : playerCatalogNameV110(record.name) })) return;
+    }
     const message = createElement(this.document, 'span', 'catalog-v62__media-status', 'MÉDIA VISUEL NON DOCUMENTÉ');
     message.dataset.catalogMediaMissing = record.id;
     message.setAttribute('aria-label', `${this.developerModeV110 ? record.name : playerCatalogNameV110(record.name)} — média visuel non documenté`);

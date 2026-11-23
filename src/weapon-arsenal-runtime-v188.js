@@ -25,6 +25,11 @@ import { createSpecialFeedV171, fireSpecialFeedV171, cycleSpecialFeedV171, begin
   validateSpecialFeedV171 } from './weapon-special-feeds-v171.js';
 
 export const ARSENAL_RUNTIME_SCHEMA_V188 = 188;
+// Owner decision 2026-11-23 (A5): the pump stays automatic by default; a manual pump on a dedicated,
+// rebindable key (default B, `pump` in accessibility-v188.js) is an option. The stroke keeps the same
+// minimum cycle time as the automatic one (no rate-of-fire advantage); a press made early is kept.
+export const PUMP_ACTION_CODE_V188 = 'KeyB';
+export const PUMP_PROMPT_V188 = Object.freeze({ fr: 'POMPER', en: 'PUMP' });
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const rounds = value => Number.isSafeInteger(value) && value >= 0 ? value : 0;
 const ROCKET_TRAIL_SECONDS = 0.035; // [PROPOSÉ] smoke puff spacing
@@ -47,6 +52,31 @@ export function withArsenalFeedsV188(Base) {
   if (Base.arsenalFeedsRuntimeV188) return Base;
   return class ArsenalFeedsRuntimeV188 extends Base {
     static arsenalFeedsRuntimeV188 = true;
+
+    bind() {
+      super.bind();
+      globalThis.addEventListener?.('keydown', (event) => {
+        if (!this.running || event.repeat || event.code !== PUMP_ACTION_CODE_V188 || !this.canRouteGameplayKey(event)) return;
+        if (this.requestPumpV188(this.player)) event.preventDefault?.();
+      });
+    }
+
+    /** Manual pump option: read live from the host (settings), false when the host supplies nothing. */
+    pumpManualV188(actor = this.player) {
+      return actor === this.player && this.pumpInputV188?.manual?.() === true;
+    }
+    /** The dedicated pump action (key or touch button). True when a stroke is owed and was performed or queued. */
+    requestPumpV188(actor = this.player) {
+      const record = actor?.arsenalFeedV188;
+      if (!this.pumpManualV188(actor) || !record?.feed.needsCycle || this.paused || this.mission?.state !== 'active') return false;
+      record.pumpRequestedV188 = true;
+      this.advanceArsenalPumpV188(actor);
+      return true;
+    }
+    /** True while the player's tube-fed weapon waits for a manual stroke (HUD prompt, touch button). */
+    pumpDueV188(actor = this.player) {
+      return Boolean(this.pumpManualV188(actor) && actor?.arsenalFeedV188?.feed.needsCycle && !actor.reloading);
+    }
 
     start(options = {}) {
       this.arsenalFeedsEnabledV188 = options.arsenalFeedsV188 !== false;
@@ -196,7 +226,7 @@ export function withArsenalFeedsV188(Base) {
     pumpArsenalFeedV188(actor, record) {
       const done = cycleSpecialFeedV171(record.feed, 'pump-' + finite(actor.shots));
       if (!done) return false;
-      record.cycleDue = null;
+      record.cycleDue = null; record.pumpRequestedV188 = false;
       this.arsenalStatsV188.pumps++;
       if (actor === this.player) this.audio?.cue?.(getArsenalProfileV188(record.weaponId)?.audio.cycle || 'weapon-dry-fire');
       this.onEvent?.({ type: 'weapon-pump-v188', weaponId: record.weaponId, coop: Boolean(actor.coop) });
@@ -209,6 +239,8 @@ export function withArsenalFeedsV188(Base) {
       const busy = actor.reloading || actor.climbing || actor.alive === false || actor.downed
         || finite(actor.toolUseClock) > 0 || finite(actor.interactionClock) > 0 || finite(actor.meleeClock) > 0;
       if (busy || finite(this.animationTime) + 1e-9 < record.cycleDue) return;
+      // Manual option: the stroke waits for the player's pump action (kept when pressed early).
+      if (this.pumpManualV188(actor) && !record.pumpRequestedV188) return;
       this.pumpArsenalFeedV188(actor, record);
     }
 
@@ -296,7 +328,23 @@ export function withArsenalFeedsV188(Base) {
     drawWorld(ctx) {
       const result = super.drawWorld(ctx);
       this.drawArsenalPlaceholdersV188(ctx);
+      this.drawPumpPromptV188(ctx);
       return result;
+    }
+
+    /** Manual option: a text prompt above the marine while a stroke is owed (text, not colour alone). */
+    drawPumpPromptV188(ctx) {
+      const actor = this.player;
+      if (!ctx || !this.pumpDueV188(actor) || actor.alive === false || typeof ctx.fillText !== 'function') return;
+      const en = this.pumpInputV188?.language?.() === 'en', key = this.pumpInputV188?.keyLabel?.() || 'B';
+      const text = `${en ? PUMP_PROMPT_V188.en : PUMP_PROMPT_V188.fr} [${key}]`;
+      ctx.save();
+      ctx.font = '700 13px ui-monospace, monospace'; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+      const x = finite(actor.x) + finite(actor.w) / 2, y = finite(actor.y) - 14, width = (ctx.measureText?.(text)?.width || text.length * 8) + 14;
+      ctx.fillStyle = 'rgba(2, 8, 7, .82)'; ctx.fillRect(x - width / 2, y - 15, width, 21);
+      ctx.strokeStyle = '#e7c86a'; ctx.lineWidth = 1; ctx.strokeRect(x - width / 2 + 0.5, y - 14.5, width - 1, 20);
+      ctx.fillStyle = '#f2e3a6'; ctx.fillText(text, x, y);
+      ctx.restore();
     }
 
     /** Pending-plaque weapons: a named Canvas silhouette along the aim, never an image. */
