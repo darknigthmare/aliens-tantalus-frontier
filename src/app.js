@@ -46,7 +46,7 @@ import { detectReactiveTriggersV188, selectReactiveLinesV188 } from './reactive-
 import { applyAccessibilityV188, installKeyRemapV188, mountKeyBindingsUiV188, normalizeKeyBindingsV188, soundCaptionV188 } from './accessibility-v188.js';
 import { spareCrewMemberV188, normalizeCrewPermadeathV188, normalizeCustomDifficultyV188, normalizeOriginV188, CUSTOM_DIFFICULTY_BOUNDS_V188 } from './run-options-v188.js';
 import { cueForGameEventV188, casteCueV188 } from './audio-cues-v188.js';
-import { deriveStoryCampaignV188, markStoryDebriefSeenV188, markStoryCinematicSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, storyEndingReachedV188, resolveM577ManifestV188, normalizeStoryCampaignV188, startInterludeV188, interludeCrisisDeckBoundV188, interludeCrisisClearedV188, resolveInterludeV188, rescueJunParkV188, interludeChoicePendingV188, interludeDueV188, markStoryBeatSeenV188, reconcileInterludeCrisisV188 } from './story-campaign-v188.js';
+import { deriveStoryCampaignV188, markStoryDebriefSeenV188, markStoryCinematicSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, STORY_ACT_ONE_CAMPAIGN_ID_V188, storyEndingReachedV188, resolveM577ManifestV188, normalizeStoryCampaignV188, startInterludeV188, interludeCrisisDeckBoundV188, interludeCrisisClearedV188, resolveInterludeV188, rescueJunParkV188, interludeChoicePendingV188, interludeDueV188, markStoryBeatSeenV188, reconcileInterludeCrisisV188 } from './story-campaign-v188.js';
 import { InGameStagingV188, STAGED_BEATS_V188 } from './ingame-staging-v188.js';
 import { openStoryChoiceDialogV188 } from './story-choice-ui-v188.js';
 import { CinematicPlayerV188, CINEMATICS_V188 } from './story-cinematics-v188.js';
@@ -2726,6 +2726,15 @@ function renderOperationPlan() {
       } catch (error) { toast(error.message); return false; }
     }
   });
+  // V188 owner decision 2026-11-23 (P-3): the Lethe notebook lists its four chapters and starts at QZ-18.
+  // While the story recommends Act I, its advice line names Act I first (the notebook itself is unchanged).
+  if (!saveSystem.data.strategy.currentOperation && storyStateV188().recommendedCampaignId === STORY_ACT_ONE_CAMPAIGN_ID_V188
+    && !saveSystem.data.galaxy.completedCampaignIds.includes(STORY_RELAY_CAMPAIGN_ID_V188)) {
+    const adviceV188 = byId('operation-plan').querySelector('.lethe-continuity-v163__recommendation');
+    if (adviceV188) adviceV188.textContent = document.documentElement.lang === 'en'
+      ? 'Recommended next step: Act I (QZ-17), then Act II (QZ-18). The other operations stay available.'
+      : 'Prochaine étape conseillée : Acte I (QZ-17), puis Acte II (QZ-18). Les autres opérations restent accessibles.';
+  }
   // This render may have selected the first unlocked fallback campaign. Keep
   // the player selector synchronized with that exact displayed manifesto.
   renderCommandMissionsV110();

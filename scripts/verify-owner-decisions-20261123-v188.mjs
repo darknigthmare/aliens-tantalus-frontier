@@ -162,6 +162,7 @@ test('P-3 order: after the prologue Act I (QZ-17) is recommended, then Act II (Q
   assert.equal(deriveStoryCampaignV188(old).step, 'qz18', 'a QZ-18 in progress is still followed');
   old.strategy.currentOperation = null; old.galaxy.completedCampaignIds.push(STORY_RELAY_CAMPAIGN_ID_V188);
   assert.equal(deriveStoryCampaignV188(old).step, 'debrief');
+  assert.match(app, /Prochaine étape conseillée : Acte I \(QZ-17\), puis Acte II \(QZ-18\)/, 'the Lethe notebook advice names Act I first');
   // No lock was added: the QZ-18 brief is unchanged by the order.
   const relay = campaign(STORY_RELAY_CAMPAIGN_ID_V188);
   assert.equal(getOperationBrief(createDefaultSave(), relay, worldOf(relay)).worldUnlocked, true);
