@@ -1,4 +1,4 @@
-// Developer tools (spec 012, source-only): every entry of the hidden scene launcher.
+// Developer tools (spec 012; shipped hidden, see scripts/build-dev-tools-v188.mjs): every entry of the hidden scene launcher.
 // Entries are generated from the game's own registries (content.js campaigns, the hub
 // decks, the Asphodèle rooms, the story cinematics, the dedicated levels' phases).
 // An entry describes WHAT to open (`launch`) and the scene it must land on (`sceneId`);

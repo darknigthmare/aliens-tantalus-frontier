@@ -2751,7 +2751,8 @@ function procurementActionsV62(record) {
   const inventoryKey = `${kind}Ids`;
   const owned = saveSystem.data.strategy.inventory[inventoryKey]?.includes(item.id);
   const loadoutLocked = Boolean(saveSystem.data.strategy.currentOperation);
-  // V188 owner decision 2026-11-23: 194–196 are purchasable behind their provisional drawn plaque; the rule stands for every other weapon.
+  // V188 (owner decision, 23 Nov. 2026): a weapon admitted with a provisional drawn plaque (194–235) is purchasable now;
+  // the rule stands for every other weapon without a native plaque.
   if (kind === 'weapon' && !resolveWeaponVisualProfileV63(item) && !hasProvisionalPlaqueV188(item)) {
     const bridge = getExcelWeaponBridgeV63(item.id);
     const sourceLabel = bridge?.excelIds?.length ? ` · Excel ${bridge.excelIds.join(', ')}` : '';

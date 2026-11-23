@@ -27,6 +27,6 @@ Lot A vérifié : armes USCM 001–017 et leurs finitions, revolver .357 (protot
 
 ## Décisions du propriétaire du 2026-11-23
 
-- **FR-010 Plaque provisoire.** Les identifiants 194–196 sont achetables à l’armurerie au prix de la règle ordinaire. Leur fiche montre une plaque provisoire dessinée en Canvas derrière l’emplacement nommé `armory-plaque-provisional-<id>` ; aucune image n’est ajoutée et la plaque ne vaut pas art livré. La liste est explicite : aucune autre arme sans plaque n’est ouverte.
+- **FR-010 Plaque provisoire.** Les identifiants 194–196 sont achetables à l’armurerie au prix de la règle ordinaire. Leur fiche montre une plaque provisoire dessinée en Canvas derrière l’emplacement nommé `armory-plaque-provisional-<id>` ; aucune image n’est ajoutée et la plaque ne vaut pas art livré. Elles portent la même admission que le lot B (`admissionV188: 'provisional-plaque-purchasable'`) : une seule plaque, une seule porte d’achat.
 - **FR-011 Pompe manuelle en option.** La pompe reste automatique par défaut (0,4 s [PROPOSÉ]). Un réglage additif active la pompe manuelle : action dédiée réaffectable (B par défaut), bouton tactile, invite texte ; même délai minimal ; l’équipier reste en automatique.
 - Capacités (une roquette par tube, 6 chambres pour le .357, capacité de base pour les finitions) : conservées.

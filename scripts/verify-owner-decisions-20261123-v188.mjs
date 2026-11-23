@@ -20,8 +20,9 @@ import { deriveStoryCampaignV188, STORY_ACT_ONE_CAMPAIGN_ID_V188, STORY_RELAY_CA
 import { createHubCrisis } from '../src/world-crisis-core.js';
 import { HubGame as HubV51, HUB_DECKS, HUB_WORLD } from '../src/hub-v51-runtime.js';
 import { act5CouncilV188 } from '../src/story-act5-v188.js';
-import { hasProvisionalPlaqueV188, PROVISIONAL_PLAQUE_WEAPON_IDS_V188, provisionalPlaqueSlotV188, drawProvisionalPlaqueV188,
-  mountProvisionalPlaqueV188 } from '../src/weapon-provisional-plaque-v188.js';
+import { hasProvisionalPlaqueV188, armoryPlaqueSlotV188, provisionalPlaqueSlotV188, drawProvisionalPlaqueV188,
+  mountProvisionalPlaqueV188, PROVISIONAL_PLAQUE_ADMISSION_V188, PROVISIONAL_PLAQUE_LABEL_V188 } from '../src/weapon-provisional-plaque-v188.js';
+const OWNER_PLAQUE_IDS = Object.freeze(['weapon-194-hicks-ithaca-37-shotgun', 'weapon-195-sevastopol-pump-shotgun', 'weapon-196-sevastopol-flamethrower']);
 import { resolveWeaponVisualProfileV63 } from '../src/weapon-visual-runtime-v63.js';
 import { KEY_ACTIONS_V188, defaultKeyBindingsV188, normalizeKeyBindingsV188 } from '../src/accessibility-v188.js';
 import { PUMP_ACTION_CODE_V188 } from '../src/weapon-arsenal-runtime-v188.js';
@@ -228,17 +229,17 @@ test('P-5 council: exactly one container gets its own sentence; the 0 and 2–3 
 });
 
 // —— A1 · weapons 194–196 purchasable behind a provisional drawn plaque ——
-test('A1 arsenal: 194–196 are purchasable at the armory price rule behind a provisional Canvas plaque; no other weapon is opened', () => {
-  assert.deepEqual([...PROVISIONAL_PLAQUE_WEAPON_IDS_V188], ['weapon-194-hicks-ithaca-37-shotgun', 'weapon-195-sevastopol-pump-shotgun', 'weapon-196-sevastopol-flamethrower']);
+test('A1 arsenal: 194–196 are purchasable at the armory price rule behind the shared provisional Canvas plaque; the rule stands without the admission', () => {
   const without = WEAPONS.filter(weapon => !resolveWeaponVisualProfileV63(weapon));
-  for (const id of PROVISIONAL_PLAQUE_WEAPON_IDS_V188) {
+  for (const id of OWNER_PLAQUE_IDS) {
     const weapon = WEAPONS.find(entry => entry.id === id);
     assert.ok(weapon, id); assert.equal(resolveWeaponVisualProfileV63(weapon), null, 'still no native plaque: ' + id);
-    assert.equal(hasProvisionalPlaqueV188(weapon), true); assert.equal(provisionalPlaqueSlotV188(weapon), 'armory-plaque-provisional-' + id);
+    assert.equal(weapon.admissionV188, PROVISIONAL_PLAQUE_ADMISSION_V188, 'same admission field as lot B'); assert.equal(weapon.plaqueStatus, 'provisional-drawn');
+    assert.equal(hasProvisionalPlaqueV188(weapon), true); assert.equal(armoryPlaqueSlotV188(weapon), 'armory-plaque-provisional-' + id);
+    assert.equal(provisionalPlaqueSlotV188(weapon), id.endsWith('flamethrower') ? 'held-weapon-placeholder-flamethrower' : 'held-weapon-placeholder-shotgun');
     assert.match(weapon.description, /Plaque d’armurerie provisoire \(dessin\) : disponible à l’armurerie\.$/);
     assert.ok(EN_CATALOG_V185[weapon.description]?.endsWith('Provisional armory plate (drawing): available at the armory.'), 'EN description: ' + id);
     assert.equal(weapon.canonExact, false, 'a drawn plaque certifies nothing');
-    assert.equal(weapon.admissionV188, 'provisional-plaque-purchasable'); assert.equal(weapon.plaqueStatus, 'provisional-canvas');
     assert.equal(weapon.visualStatus, 'canvas-placeholder-native-plaque-required', 'the native plaque is still owed');
     // Armory rule: the ordinary quote, then a real purchase on a default save.
     const save = createDefaultSave(); save.galaxy.resources.credits = 100000;
@@ -249,26 +250,31 @@ test('A1 arsenal: 194–196 are purchasable at the armory price rule behind a pr
     assert.ok(save.strategy.inventory.weaponIds.includes(id)); assert.equal(save.galaxy.resources.credits, credits - quote.credits);
     assert.ok(migrateSave(JSON.parse(JSON.stringify(save))).strategy.inventory.weaponIds.includes(id), 'the purchase survives a reload');
   }
-  // Every other weapon without a native plaque keeps the historical rule.
-  for (const weapon of without.filter(entry => !PROVISIONAL_PLAQUE_WEAPON_IDS_V188.includes(entry.id))) assert.equal(hasProvisionalPlaqueV188(weapon), false, weapon.id);
-  assert.equal(hasProvisionalPlaqueV188('weapon-001-m41a-pulse-rifle'), false); assert.equal(provisionalPlaqueSlotV188('weapon-001-m41a-pulse-rifle'), null);
+  // One gate: a weapon without a native plaque is open only through the admission field.
+  for (const weapon of without) assert.equal(hasProvisionalPlaqueV188(weapon), weapon.admissionV188 === PROVISIONAL_PLAQUE_ADMISSION_V188, weapon.id);
+  const m41a = WEAPONS.find(entry => entry.id === 'weapon-001-m41a-pulse-rifle');
+  assert.equal(hasProvisionalPlaqueV188(m41a), false); assert.equal(armoryPlaqueSlotV188(m41a), null);
+  assert.equal(hasProvisionalPlaqueV188('weapon-194-hicks-ithaca-37-shotgun'), false, 'the gate reads the catalogue entry, not a bare id');
   assert.match(app, /!resolveWeaponVisualProfileV63\(item\) && !hasProvisionalPlaqueV188\(item\)/, 'the armory gate names the exception');
+  assert.equal(app.split('hasProvisionalPlaqueV188(item)').length - 1, 1, 'one purchase gate');
   assert.match(app, /PLAQUETTE DÉDIÉE REQUISE/, 'the rule still exists for the others');
-  // The plaque is a drawing: Canvas calls only, a text label, never an image.
+  // The plaque is a drawing: Canvas calls only, never an image.
   const calls = [];
-  const ctx = new Proxy({}, { get: (target, key) => key in target ? target[key] : (...args) => { calls.push([key, ...args]); return { width: 60 }; }, set: (target, key, value) => { target[key] = value; return true; } });
-  assert.equal(drawProvisionalPlaqueV188(ctx, 'weapon-196-sevastopol-flamethrower', 260, 132, { language: 'en', name: 'Sevastopol Flamethrower' }), true);
-  assert.ok(calls.some(([name, text]) => name === 'fillText' && text === 'PROVISIONAL PLAQUE')); assert.ok(calls.some(([name, text]) => name === 'fillText' && text === 'SEVASTOPOL FLAMETHROWER'));
+  const ctx = new Proxy({}, { get: (target, key) => key in target ? target[key] : (...args) => { calls.push([key, ...args]); }, set: (target, key, value) => { target[key] = value; return true; } });
+  const flamethrower = WEAPONS.find(entry => entry.id === 'weapon-196-sevastopol-flamethrower');
+  assert.equal(drawProvisionalPlaqueV188(ctx, flamethrower, 320, 160), true);
+  assert.ok(calls.some(([name]) => name === 'strokeRect') && calls.some(([name]) => name === 'fillRect'));
   assert.equal(calls.some(([name]) => name === 'drawImage'), false, 'no image');
-  assert.equal(drawProvisionalPlaqueV188(ctx, 'weapon-001-m41a-pulse-rifle', 260, 132), false);
-  const made = [], document = { createElement: tag => { const element = { tag, dataset: {}, style: {}, attributes: {}, setAttribute(name, value) { this.attributes[name] = value; }, getContext: () => ctx }; made.push(element); return element; } };
+  const document = { createElement: tag => ({ tag, dataset: {}, style: {}, attributes: {}, children: [], setAttribute(name, value) { this.attributes[name] = value; }, getContext: () => ctx, append(...nodes) { this.children.push(...nodes); } }) };
   const target = { children: [], append(child) { this.children.push(child); } };
-  const canvas = mountProvisionalPlaqueV188(document, target, { id: 'weapon-194-hicks-ithaca-37-shotgun', name: 'Hicks Ithaca 37 Shotgun', catalog: 'weapons' }, { language: 'fr' });
-  assert.equal(canvas.tag, 'canvas'); assert.equal(target.children[0], canvas);
-  assert.equal(canvas.dataset.slotV188, 'armory-plaque-provisional-weapon-194-hicks-ithaca-37-shotgun');
-  assert.match(canvas.attributes['aria-label'], /plaque provisoire\. Dessin d’attente/);
-  assert.equal(mountProvisionalPlaqueV188(document, target, { id: 'weapon-001-m41a-pulse-rifle' }), null);
-  assert.match(read('src/catalog-ui-v62.js'), /mountProvisionalPlaqueV188\(this\.document, target, record/);
+  const figure = mountProvisionalPlaqueV188(document, target, WEAPONS.find(entry => entry.id === OWNER_PLAQUE_IDS[0]), 'Hicks Ithaca 37 Shotgun');
+  assert.equal(figure.tag, 'figure'); assert.equal(target.children[0], figure);
+  assert.equal(figure.dataset.slotV188, 'armory-plaque-provisional-weapon-194-hicks-ithaca-37-shotgun');
+  assert.equal(figure.dataset.placeholderSlot, 'held-weapon-placeholder-shotgun');
+  assert.deepEqual(figure.children.map(child => child.tag), ['canvas', 'figcaption']); assert.equal(figure.children[1].textContent, PROVISIONAL_PLAQUE_LABEL_V188);
+  assert.match(figure.attributes['aria-label'], /plaque provisoire dessinée, illustration à produire/);
+  assert.equal(mountProvisionalPlaqueV188(document, target, m41a), null);
+  assert.match(read('src/catalog-ui-v62.js'), /mountProvisionalPlaqueV188\(this\.document, target, WEAPONS_V188\.find/);
 });
 
 // —— A5 · pump shotguns: automatic by default, manual pump as an option ——

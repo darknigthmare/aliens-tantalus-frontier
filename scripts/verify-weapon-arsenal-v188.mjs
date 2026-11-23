@@ -7,6 +7,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { WEAPONS, CONTENT_COUNTS, validateContent } from '../src/content-core-v50.js';
 import { WEAPON_CATALOG_ADDITIONS_V188, WEAPON_ADDITION_IDS_V188 } from '../src/weapon-catalog-additions-v188.js';
+import { WEAPON_RESEARCH_SUPPLEMENT_V188 } from '../src/weapon-catalog-franchise-v188.js';
 import { WEAPON_ARSENAL_PROFILES_V188, ARSENAL_SOURCE_ROWS_V188, ARSENAL_BRIDGED_WEAPON_IDS_V188,
   ARSENAL_LOT_A_BASE_IDS_V188, getArsenalProfileV188, listArsenalProfilesV188, arsenalBaseIdV188 } from '../src/weapon-arsenal-v188.js';
 import { inspectDetachableFeedV193 } from '../src/weapon-feed-admission-v193.js';
@@ -44,16 +45,16 @@ function parseCsv(text) {
   return rows;
 }
 
-test('catalogue integrity: 178 historical ids unchanged, three append-only pending-plaque additions', () => {
-  assert.equal(WEAPONS.length, 181); assert.equal(CONTENT_COUNTS.weapons, 181); assert.deepEqual(validateContent?.() ?? [], validateContent?.() ?? []);
-  assert.deepEqual(WEAPONS.slice(-3).map(weapon => weapon.id), WEAPON_ADDITION_IDS_V188);
+test('catalogue integrity: 178 historical ids unchanged, append-only additions (three Lot-A, then the franchise lot B)', () => {
+  assert.equal(WEAPONS.length, 178 + WEAPON_ADDITION_IDS_V188.length); assert.equal(CONTENT_COUNTS.weapons, WEAPONS.length); assert.deepEqual(validateContent?.() ?? [], validateContent?.() ?? []);
+  assert.deepEqual(WEAPONS.slice(178).map(weapon => weapon.id), WEAPON_ADDITION_IDS_V188);
   assert.equal(new Set(WEAPONS.map(weapon => weapon.id)).size, WEAPONS.length);
   assert.equal(WEAPONS[0].id, 'weapon-001-m41a-pulse-rifle'); assert.equal(WEAPONS[177].id, 'weapon-177-8a7-dambulla-machine-pistol');
   for (const weapon of WEAPON_CATALOG_ADDITIONS_V188) {
-    assert.match(weapon.id, /^weapon-19[4-6]-[a-z0-9-]+$/);
+    assert.match(weapon.id, /^weapon-(19[4-9]|2\d\d)-[a-z0-9-]+$/);
     assert.equal(weapon.canonExact, false); assert.ok(weapon.sourceUrl && weapon.sourceWork && weapon.description && /proposed/.test(weapon.statsPolicy));
-    assert.equal(resolveWeaponVisualProfileV63(weapon), null, 'no native plaque (194–196 are sold behind a provisional drawn plaque since 2026-11-23: verify-owner-decisions-20261123-v188.mjs)');
-    assert.ok(WEAPON_RESEARCH_INDEX_V171.some(row => row.id === weapon.researchId), weapon.researchId);
+    assert.equal(resolveWeaponVisualProfileV63(weapon), null, 'no native plaque (sold behind a provisional drawn plaque since 2026-11-23)');
+    assert.ok([...WEAPON_RESEARCH_INDEX_V171, ...WEAPON_RESEARCH_SUPPLEMENT_V188].some(row => row.id === weapon.researchId), weapon.researchId);
     if (weapon.fidelityDossierId) assert.ok(WEAPON_FIDELITY_DOSSIERS_V170.some(row => row.id === weapon.fidelityDossierId));
     assert.ok(Object.isFrozen(weapon));
   }
@@ -88,11 +89,12 @@ test('every catalogue weapon exposes one frozen, range-readable profile without 
     n + WEAPONS.filter(weapon => arsenalBaseIdV188(weapon) === id).length, 0));
 });
 
-test('feed policy: physical detachable magazines stay limited to the four reviewed M41A ids', () => {
+test('feed policy: physical detachable magazines stay limited to the reviewed M41A and (V188, decision A6) VP70 ids', () => {
   const detachable = WEAPON_ARSENAL_PROFILES_V188.filter(profile => profile.feed.detachableMagazine).map(profile => profile.weaponId);
   assert.deepEqual(detachable, WEAPONS.filter(weapon => inspectDetachableFeedV193(weapon).detachable).map(weapon => weapon.id));
-  assert.deepEqual(detachable, ['weapon-001-m41a-pulse-rifle', 'weapon-041-m41a-pulse-rifle-field',
-    'weapon-081-m41a-pulse-rifle-veteran', 'weapon-121-m41a-pulse-rifle-prototype']);
+  assert.deepEqual(detachable, ['weapon-001-m41a-pulse-rifle', 'weapon-004-vp70-combat-pistol', 'weapon-041-m41a-pulse-rifle-field',
+    'weapon-044-vp70-combat-pistol-field', 'weapon-081-m41a-pulse-rifle-veteran', 'weapon-084-vp70-combat-pistol-veteran',
+    'weapon-121-m41a-pulse-rifle-prototype', 'weapon-124-vp70-combat-pistol-prototype']);
   for (const profile of WEAPON_ARSENAL_PROFILES_V188) {
     assert.equal(profile.feed.worldPickup !== 'none-non-detachable-or-unreviewed', profile.feed.detachableMagazine, profile.weaponId);
     if (profile.feed.nativeBridge) {
@@ -100,7 +102,7 @@ test('feed policy: physical detachable magazines stay limited to the four review
       assert.equal(profile.feed.kind, profile.feed.nativeBridge, 'the bridge follows the recorded feed: ' + profile.weaponId);
     }
   }
-  assert.equal(ARSENAL_BRIDGED_WEAPON_IDS_V188.length, 31);
+  assert.equal(ARSENAL_BRIDGED_WEAPON_IDS_V188.length, 75); // 31 Lot-A ids + lot B (T104 bases with finishes, bridged franchise rows)
   assert.equal(getArsenalProfileV188('weapon-011-m83-sadar').feed.runtimeCapacity, 1);
   assert.equal(getArsenalProfileV188('weapon-021-357-magnum-revolver').feed.runtimeCapacity, 6);
   assert.equal(getArsenalProfileV188('weapon-005-m56-smartgun').vfx.ejection, 'none-caseless');
