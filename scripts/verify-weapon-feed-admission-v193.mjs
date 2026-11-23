@@ -25,8 +25,18 @@ test('V193 all four exact M56 identities reject inherited drum presentation with
     assert.equal(isDetachableMagazineFeedV177('drum',id),false,id);
     assert.deepEqual(a,before);}
 });
-test('V193 actual catalog admits only the four reviewed M41A identities',()=>{
-  assert.deepEqual(WEAPONS.filter(w=>inspectDetachableFeedV193(w).detachable).map(w=>w.id),rifles);
+// V188 (owner decision A6): the four VP70 identities are admitted on model-specific evidence (real H&K VP70 prop).
+const vp70s=['weapon-004-vp70-combat-pistol','weapon-044-vp70-combat-pistol-field',
+  'weapon-084-vp70-combat-pistol-veteran','weapon-124-vp70-combat-pistol-prototype'];
+test('V193 actual catalog admits only the four reviewed M41A identities and, since V188, the four VP70 identities',()=>{
+  assert.deepEqual(WEAPONS.filter(w=>inspectDetachableFeedV193(w).detachable).map(w=>w.id).sort(),[...rifles,...vp70s].sort());
+  for(const id of vp70s){const p=inspectDetachableFeedV193(named(id));
+    assert.equal(p.feed,'box');assert.equal(p.mechanismSource.sourceWeaponId,vp70s[0]);assert.equal(p.mechanismSource.value,'box');
+    assert.equal(p.modelEvidenceV188.model,'Heckler & Koch VP70');assert.match(p.modelEvidenceV188.mechanismUrl,/^https:\/\//);
+    assert.equal(p.modelEvidenceV188.propMagazineInspected,false);assert.equal(p.modelEvidenceV188.documentedCapacity,18);
+    assert.equal(p.canonExact,false);assert.equal(p.visualFidelity1to1,false);assert.equal(p.sourceMeasured,false);}
+  for(const id of ['weapon-003-m4a3-service-pistol','weapon-017-f44aa-pulse-rifle'])
+    assert.equal(inspectDetachableFeedV193(named(id)).detachable,false,id+' has no admitted model evidence');
   for(const id of rifles){const p=inspectDetachableFeedV193(named(id));
     assert.equal(p.feed,'box');assert.equal(p.ammoType,'caseless');
     assert.equal(p.mechanismSource.field,'Alimentation');assert.equal(p.mechanismSource.value,'box');

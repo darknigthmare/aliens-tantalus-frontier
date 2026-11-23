@@ -1,17 +1,24 @@
-// Spec 012 — developer tools (hidden scene launcher, shooting range), source-only.
+// Spec 012 — developer tools (hidden scene launcher, shooting range): shipped hidden in the public
+// build since the owner decision of 2026-11-23 (isolated, not linked, not precached).
 // Fixtures: every enabled launcher entry is built from createDefaultSave() by
 // devtools/dev-fixtures-v188.js (game rules + migrateSave + inspectSaveSlotV78); no other
-// injection than the ones each fixture declares in `injections`. The storage shim is run
-// in a vm with a fake window whose localStorage holds a "real" profile.
+// injection than the ones each fixture declares in `injections`. The inline bootstrap (the
+// storage shim behind the dev-query test) is run in a vm with a fake window whose localStorage
+// holds a "real" profile; the build step is run on a temporary directory with a copy of index.html.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, readdirSync } from 'node:fs';
+import { copyFileSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 import { buildDevCatalogV188, filterDevCatalogV188, expectedLandedV188, DEV_CATEGORIES_V188, DEV_RANGE_CAMPAIGN_V188 } from '../devtools/dev-catalog-v188.js';
 import { buildDevSessionV188, buildDevSaveV188, devCampaignBlockV188, devFixtureFactsV188, DEV_PROFILE_KEY_V188, DEV_PROLOGUE_STEPS_V188 } from '../devtools/dev-fixtures-v188.js';
 import { observedFireRateV188, windowDpsV188, theoreticalDpsV188, theoreticalTtkV188, ttkByCasteV188, spreadStatsV188, reloadStatsV188,
   rangeDistancePxV188, rangeDistanceMetresV188, applyTuningV188, tuningDiffV188 } from '../devtools/dev-range-metrics-v188.js';
-import { injectDevSessionHtmlV188, isDevSessionRequestV188 } from './dev-tools-server-v188.mjs';
+import { isDevSessionRequestV188 } from './dev-tools-server-v188.mjs';
+import { DEV_SESSION_SEARCH_TEST_V188, DEV_TOOLS_DEFAULT_PATH_V188, DEV_TOOLS_FILES_V188, devBootstrapScriptV188, extractDevBootstrapV188, findBuiltDevToolsPathV188,
+  injectDevBootstrapHtmlV188, resolveDevToolsPathV188, shipDevToolsV188, splitDevToolsManifestV188 } from './build-dev-tools-v188.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { inspectSaveSlotV78 } from '../src/save-profile-v78.js';
 import { migrateSave } from '../src/save.js';
@@ -154,51 +161,191 @@ test('a prerequisite is never marked done before the game would let it start', (
   assert.throws(() => buildDevSaveV188({ kind: 'view', before: ['colony-c2'] }), /colony-c2 is not launchable yet/);
 });
 
-test('public build exclusion: devtools and its server module are source-only', () => {
-  const files = readdirSync(new URL('../devtools/', import.meta.url));
-  assert.ok(files.length >= 8);
-  for (const path of ['devtools', ...files.map(file => `devtools/${file}`), 'scripts/dev-tools-server-v188.mjs', 'scripts/verify-dev-tools-v188.mjs', 'scripts/qa-dev-tools-v188.mjs',
+test('admissions: the tools are shipped under one hidden directory; scripts, specs and docs stay source-only', () => {
+  const files = readdirSync(new URL('../devtools/', import.meta.url)).sort();
+  assert.deepEqual(files, [...DEV_TOOLS_FILES_V188].sort(), 'the shipped list is the whole devtools directory');
+  for (const path of ['devtools', ...files.map(file => `devtools/${file}`)]) {
+    const directory = !path.includes('.');
+    assert.equal(isPublicDistributionPathV86(path, { directory }), true, `source admits ${path}`);
+    assert.equal(isPublicDistributionPathV86(path, { directory, built: true }), false, `a build never carries the source directory name: ${path}`);
+  }
+  for (const path of ['scripts/dev-tools-server-v188.mjs', 'scripts/build-dev-tools-v188.mjs', 'scripts/verify-dev-tools-v188.mjs', 'scripts/qa-dev-tools-v188.mjs', 'scripts/qa-dev-tools-built-v188.mjs',
     'specs/012-outils-dev', 'specs/012-outils-dev/spec.md', 'specs/012-outils-dev/plan.md', 'specs/012-outils-dev/tasks.md']) {
     const directory = !path.includes('.');
     assert.equal(isPublicDistributionPathV86(path, { directory }), true, `source admits ${path}`);
     assert.equal(isPublicDistributionPathV86(path, { directory, built: true }), false, `build rejects ${path}`);
   }
-  // Nothing shipped references the dev tools; the build copies only its listed roots.
-  const build = readFileSync(new URL('./build.mjs', import.meta.url), 'utf8');
-  assert.doesNotMatch(build, /devtools/);
-  assert.doesNotMatch(readFileSync(new URL('../index.html', import.meta.url), 'utf8'), /devtools|atf-dev/);
-  assert.doesNotMatch(readFileSync(new URL('../sw.js', import.meta.url), 'utf8'), /devtools/);
-  for (const file of readdirSync(new URL('../src/', import.meta.url)).filter(name => name.endsWith('.js')))
-    assert.doesNotMatch(readFileSync(new URL(`../src/${file}`, import.meta.url), 'utf8'), /devtools\//, file);
+  for (const hidden of [DEV_TOOLS_DEFAULT_PATH_V188, 'k3-quai-nord-0417']) {
+    assert.equal(isPublicDistributionPathV86(hidden, { directory: true, built: true }), true, hidden);
+    assert.equal(isPublicDistributionPathV86(hidden, { directory: true }), false, 'the hidden directory exists in a build only');
+    for (const file of DEV_TOOLS_FILES_V188) assert.equal(isPublicDistributionPathV86(`${hidden}/${file}`, { built: true }), true, file);
+    for (const stray of ['notes.md', 'dev-extra-v188.js', 'sub/dev-launcher-v188.js', 'sub']) assert.equal(isPublicDistributionPathV86(`${hidden}/${stray}`, { built: true, directory: stray === 'sub' }), false, stray);
+  }
+  for (const refused of ['docs', 'scripts', 'devtools', 'tests', 'short', 'Labo-Tantalus', 'a/b-c-d-e-f-g'])
+    assert.equal(isPublicDistributionPathV86(`${refused}/dev-launcher-v188.js`, { built: true }), false, refused);
 });
 
-test('dev server: injection only on /?atf-dev=v188, at exact anchors', () => {
-  assert.equal(isDevSessionRequestV188('/?atf-dev=v188'), true);
-  assert.equal(isDevSessionRequestV188('/index.html?atf-dev=v188&x=1'), true);
-  for (const url of ['/', '/?atf-dev=1', '/devtools/?atf-dev=v188', '/src/app.js?atf-dev=v188']) assert.equal(isDevSessionRequestV188(url), false, url);
-  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
-  const injected = injectDevSessionHtmlV188(html);
-  const storage = injected.indexOf('/devtools/dev-storage-v188.js'), first = injected.indexOf('<script');
-  assert.equal(storage > 0 && injected.lastIndexOf('<script', storage) === first, true, 'the isolated storage is the first script');
-  assert.ok(injected.indexOf('/devtools/dev-session-v188.js') > injected.indexOf('/src/app.js'));
-  assert.throws(() => injectDevSessionHtmlV188('<html></html>'), /anchors/);
+test('the access path is configurable at build time, with a documented default', () => {
+  assert.equal(resolveDevToolsPathV188({}), DEV_TOOLS_DEFAULT_PATH_V188);
+  assert.equal(resolveDevToolsPathV188({ ATF_DEV_TOOLS_PATH: '' }), DEV_TOOLS_DEFAULT_PATH_V188);
+  assert.equal(resolveDevToolsPathV188({ ATF_DEV_TOOLS_PATH: 'k3-quai-nord-0417' }), 'k3-quai-nord-0417');
+  for (const refused of ['dev', 'devtools', 'scripts', 'src', 'assets', 'a/b/c/d/e/f', '../outside1', 'UPPERCASE1', 'with space1', 'trailing-dash-', '-leading-dash', 'double--dash1', 'x'.repeat(65), 'node_modules', 'reference-masters'])
+    assert.throws(() => resolveDevToolsPathV188({ ATF_DEV_TOOLS_PATH: refused }), /ATF_DEV_TOOLS_PATH/, refused);
+  for (const text of ['AGENTS.md', 'specs/012-outils-dev/plan.md'].map(path => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8'))) {
+    assert.ok(text.includes(DEV_TOOLS_DEFAULT_PATH_V188) && text.includes('ATF_DEV_TOOLS_PATH'), 'the default and the variable are documented');
+    assert.match(text, /aucun contrôle d[’']accès/, 'hidden is stated as obscurity only');
+  }
 });
+
+test('not linked: no player file names the tools; the bootstrap is the only addition to the shell', () => {
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  assert.doesNotMatch(html, /devtools|atf-dev/, 'the source shell is unchanged: the bootstrap is added when served or built');
+  const mention = new RegExp(`devtools/|atf-dev(?!ice)|${DEV_TOOLS_DEFAULT_PATH_V188}|ATF_DEV_TOOLS`);
+  for (const file of readdirSync(new URL('../src/', import.meta.url)).filter(name => /\.(?:js|css)$/.test(name)))
+    assert.doesNotMatch(readFileSync(new URL(`../src/${file}`, import.meta.url), 'utf8'), mention, file);
+  for (const file of readdirSync(new URL('../', import.meta.url)).filter(name => /\.(?:css|webmanifest)$/.test(name) || name === 'sw.js' || name === 'vercel.json'))
+    assert.doesNotMatch(readFileSync(new URL(`../${file}`, import.meta.url), 'utf8'), mention, file);
+  // The tools find their own directory; nothing hard-codes the source name.
+  for (const file of DEV_TOOLS_FILES_V188.filter(name => name.endsWith('.js')))
+    assert.doesNotMatch(readFileSync(new URL(`../devtools/${file}`, import.meta.url), 'utf8'), /['"`]\/devtools\//, file);
+  assert.match(readFileSync(new URL('../devtools/dev-launcher-v188.js', import.meta.url), 'utf8'), /session\.base = DEV_BASE_PATH_V188/);
+  assert.match(readFileSync(new URL('../devtools/index.html', import.meta.url), 'utf8'), /<meta name="robots" content="noindex,nofollow">/);
+  // build.mjs (the game copy) is untouched; the release builder ships the tools afterwards.
+  assert.doesNotMatch(readFileSync(new URL('./build.mjs', import.meta.url), 'utf8'), /devtools|dev-tools/);
+  assert.match(readFileSync(new URL('./build-release-v143.mjs', import.meta.url), 'utf8'), /await shipDevToolsV188\(root, output\)/);
+});
+
+test('not precached: the service worker neither lists nor caches the tools or a dev URL', () => {
+  const worker = readFileSync(new URL('../sw.js', import.meta.url), 'utf8');
+  const origin = 'https://atf.test';
+  const context = vm.createContext({ self: { addEventListener() {}, location: { origin } }, URL, Request, Response, Headers });
+  vm.runInContext(`${worker};globalThis.api={SHELL,cacheableRequestV143};`, context);
+  assert.ok(context.api.SHELL.includes('/src/app.js'));
+  assert.equal(context.api.SHELL.some(path => /devtools|dev-(?:catalog|fixtures|launcher|range|session|storage)-v188/.test(path)), false);
+  const cacheable = path => context.api.cacheableRequestV143(new Request(origin + path));
+  assert.equal(cacheable('/src/app.js'), true, 'control: a shell module is cacheable');
+  for (const file of DEV_TOOLS_FILES_V188) for (const directory of ['devtools', DEV_TOOLS_DEFAULT_PATH_V188, 'k3-quai-nord-0417']) assert.equal(cacheable(`/${directory}/${file}`), false, `${directory}/${file}`);
+  for (const path of [`/${DEV_TOOLS_DEFAULT_PATH_V188}/`, '/?atf-dev=v188', '/index.html?atf-dev=v188']) assert.equal(cacheable(path), false, path);
+});
+
+test('bootstrap: first script of the shell, inert without the exact dev query', () => {
+  const shim = readFileSync(new URL('../devtools/dev-storage-v188.js', import.meta.url), 'utf8');
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  const injected = injectDevBootstrapHtmlV188(html, shim), boot = extractDevBootstrapV188(injected);
+  assert.equal(boot, devBootstrapScriptV188(shim));
+  assert.equal(injected.indexOf('<script'), injected.indexOf(boot), 'before intro-boot and every game script');
+  assert.equal(injected.replace(`\n  ${boot}`, ''), html, 'nothing else changes in the shell');
+  assert.ok(boot.startsWith(`<script data-atf-dev-boot="v188">if (${DEV_SESSION_SEARCH_TEST_V188}) {\n`), 'one test, then the shim');
+  assert.ok(boot.length < 5000, `inline size ${boot.length}`);
+  assert.doesNotMatch(boot, /^\s*\/\//m, 'comments are not shipped inline');
+  assert.doesNotMatch(boot, new RegExp(`devtools|${DEV_TOOLS_DEFAULT_PATH_V188}`), 'the shell does not name the hidden directory');
+  assert.throws(() => injectDevBootstrapHtmlV188(injected, shim), /already present/);
+  assert.throws(() => injectDevBootstrapHtmlV188('<html></html>', shim), /anchor/);
+  assert.throws(() => injectDevBootstrapHtmlV188(html.replace('<meta charset="UTF-8">', '<script></script><meta charset="UTF-8">'), shim), /preceded by a script/);
+  assert.throws(() => devBootstrapScriptV188('alert(1)'), /unexpected storage shim/);
+  const matches = search => new Function('location', `return ${DEV_SESSION_SEARCH_TEST_V188}`)({ search });
+  for (const search of ['?atf-dev=v188', '?x=1&atf-dev=v188', '?atf-dev=v188&x=1']) { assert.equal(matches(search), true, search); assert.equal(isDevSessionRequestV188('/' + search), true, search); }
+  for (const search of ['', '?', '?atf-dev=1', '?atf-dev=v1880', '?atf-dev', '?xatf-dev=v188', '?atf-dev=V188', '?q=atf-dev%3Dv188']) { assert.equal(matches(search), false, search); assert.equal(isDevSessionRequestV188('/' + search), false, search); }
+  assert.equal(isDevSessionRequestV188('/any/path?atf-dev=v188'), true, 'whatever path serves the shell (rewrite fallback), the query isolates');
+});
+
+/** A fake page: `real` is the player's storage, `session` this tab's sessionStorage. */
+function fakePage({ search = '?atf-dev=v188', session = null, lockedStorage = false } = {}) {
+  const real = new Map([['atf-v47-profile-1', '{"real":true}'], ['atf-language-v185', 'en']]);
+  const touched = { reads: 0, writes: 0 };
+  const realStorage = { getItem: key => { touched.reads += 1; return real.get(key) ?? null; }, setItem: (key, value) => { touched.writes += 1; real.set(key, value); }, removeItem: key => { touched.writes += 1; real.delete(key); } };
+  const sessionMap = new Map(session ? [['atf-dev-session-v188', JSON.stringify(session)]] : []);
+  const listeners = [], ready = [], appended = [], navigations = [];
+  const element = tag => ({ tag, style: {}, attributes: {}, setAttribute(name, value) { this.attributes[name] = value; } });
+  const window = { sessionStorage: { getItem: key => sessionMap.get(key) ?? null, setItem: (key, value) => sessionMap.set(key, value), removeItem: key => sessionMap.delete(key) },
+    addEventListener: (...args) => listeners.push(args), stop() { navigations.push('stop'); }, location: { search, replace: url => navigations.push(url) }, indexedDB: { open() { throw new Error('real IndexedDB opened'); } } };
+  Object.defineProperty(window, 'localStorage', { configurable: !lockedStorage, get: () => realStorage });
+  const document = { documentElement: { dataset: {} }, addEventListener: (type, listener) => { if (type === 'DOMContentLoaded') ready.push(listener); }, createElement: element,
+    head: { appendChild: node => appended.push(node) }, body: { appendChild: node => appended.push(node) } };
+  const context = vm.createContext({ window, document, location: window.location, Map, JSON, Object, Array, String, Boolean });
+  return { window, document, context, real, touched, sessionMap, listeners, appended, navigations, domReady: () => ready.forEach(listener => listener()) };
+}
+const SHIM = readFileSync(new URL('../devtools/dev-storage-v188.js', import.meta.url), 'utf8');
+const BOOT = devBootstrapScriptV188(SHIM).replace(/^<script[^>]*>/, '').replace(/<\/script>$/, '');
 
 test('isolated storage: the real localStorage is neither read nor written', () => {
-  const real = new Map([['atf-v47-profile-1', '{"real":true}'], ['atf-language-v185', 'en']]);
-  const realStorage = { getItem: key => real.get(key) ?? null, setItem: (key, value) => real.set(key, value), removeItem: key => real.delete(key) };
-  const session = new Map([['atf-dev-session-v188', JSON.stringify({ entryId: 'hub-armory', launch: { kind: 'hub' }, storage: { 'atf-v47-profile-1': '{"dev":true}' } })]]);
-  const listeners = [];
-  const window = { sessionStorage: { getItem: key => session.get(key) ?? null, setItem: (key, value) => session.set(key, value) }, addEventListener: (...args) => listeners.push(args) };
-  Object.defineProperty(window, 'localStorage', { configurable: true, get: () => realStorage });
-  const context = vm.createContext({ window, document: { documentElement: { dataset: {} } }, Map, JSON, Object, Array, String });
-  vm.runInContext(readFileSync(new URL('../devtools/dev-storage-v188.js', import.meta.url), 'utf8'), context);
+  const page = fakePage({ session: { entryId: 'hub-armory', launch: { kind: 'hub' }, base: '/k3-quai-nord-0417/', storage: { 'atf-v47-profile-1': '{"dev":true}' } } });
+  vm.runInContext(BOOT, page.context);
+  const { window } = page;
   assert.equal(window.localStorage.getItem('atf-v47-profile-1'), '{"dev":true}');
   assert.equal(window.localStorage.getItem('atf-language-v185'), null, 'nothing is copied from the real storage');
   window.localStorage.setItem('atf-v47-profile-1', '{"dev":2}'); window.localStorage.removeItem('x');
-  assert.equal(real.get('atf-v47-profile-1'), '{"real":true}');
-  assert.equal(JSON.parse(session.get('atf-dev-session-v188')).storage['atf-v47-profile-1'], '{"dev":2}', 'session persists in this tab only');
-  assert.ok(listeners.some(([type, , capture]) => type === 'storage' && capture === true), 'cross-tab storage events are stopped');
+  assert.equal(page.real.get('atf-v47-profile-1'), '{"real":true}');
+  assert.deepEqual(page.touched, { reads: 0, writes: 0 }, 'the real storage object is never used');
+  assert.equal(JSON.parse(page.sessionMap.get('atf-dev-session-v188')).storage['atf-v47-profile-1'], '{"dev":2}', 'session persists in this tab only');
+  assert.ok(page.listeners.some(([type, , capture]) => type === 'storage' && capture === true), 'cross-tab storage events are stopped');
+  assert.equal(window.indexedDB, undefined, 'the field photo gallery database is withheld');
+  assert.equal(window.__ATF_DEV_SESSION_V188__.isolated, true); assert.equal(window.__ATF_DEV_SESSION_V188__.base, '/k3-quai-nord-0417/');
+  // The session bridge is loaded after the game's scripts, from the launcher's own directory.
+  assert.equal(page.appended.length, 0); page.domReady();
+  assert.deepEqual(page.appended.map(node => [node.tag, node.type, node.src]), [['script', 'module', '/k3-quai-nord-0417/dev-session-v188.js']]);
+  // « Quitter »: a later write does not bring the session back.
+  window.__ATF_DEV_SESSION_V188__.discard(); window.localStorage.setItem('late', '1');
+  assert.equal(page.sessionMap.has('atf-dev-session-v188'), false);
+});
+
+test('isolated storage: inert without the dev query; isolated and empty without a session', () => {
+  const normal = fakePage({ search: '?x=1' });
+  vm.runInContext(BOOT, normal.context);
+  assert.equal(normal.window.__ATF_DEV_SESSION_V188__, undefined);
+  assert.equal(normal.window.localStorage.getItem('atf-language-v185'), 'en', 'the normal page keeps the real storage');
+  assert.equal(typeof normal.window.indexedDB.open, 'function');
+  assert.deepEqual([normal.listeners.length, normal.document.documentElement.dataset.atfDevSession], [0, undefined]);
+  normal.domReady(); assert.equal(normal.appended.length, 0);
+
+  const empty = fakePage();
+  vm.runInContext(BOOT, empty.context);
+  assert.equal(empty.window.localStorage.length, 0);
+  assert.equal(empty.document.documentElement.dataset.atfDevSession, 'empty');
+  empty.window.localStorage.setItem('atf-v47-profile-1', '{"new":true}');
+  assert.deepEqual(empty.touched, { reads: 0, writes: 0 }); assert.equal(empty.sessionMap.size, 0, 'nothing is persisted without a session');
+  empty.domReady();
+  assert.deepEqual(empty.appended.map(node => node.tag), ['p'], 'a note, and no script: the launcher address is not disclosed');
+});
+
+test('isolated storage: a session cannot name a foreign or nested script directory; an unisolable page does not run', () => {
+  for (const base of ['//evil.example/', 'https://evil.example/', '/a/b/', '/../', '/UPPER/', 'labo/', '/labo', '', null, 42, '/' + 'x'.repeat(65) + '/']) {
+    const page = fakePage({ session: { entryId: 'x', storage: {}, base } });
+    vm.runInContext(BOOT, page.context); page.domReady();
+    assert.equal(page.window.__ATF_DEV_SESSION_V188__.base, null, String(base));
+    assert.deepEqual(page.appended.map(node => node.tag), ['p'], String(base));
+  }
+  const locked = fakePage({ lockedStorage: true, session: { entryId: 'x', storage: {} } });
+  vm.runInContext(BOOT, locked.context);
+  assert.deepEqual(locked.navigations, ['stop', 'about:blank'], 'fail closed');
+  assert.equal(locked.window.__ATF_DEV_SESSION_V188__, undefined); assert.deepEqual(locked.touched, { reads: 0, writes: 0 });
+});
+
+test('build: the tools are copied under the configured path and fingerprinted without naming it', async () => {
+  const root = fileURLToPath(new URL('../', import.meta.url));
+  for (const env of [{}, { ATF_DEV_TOOLS_PATH: 'k3-quai-nord-0417' }]) {
+    const output = mkdtempSync(join(tmpdir(), 'atf-dev-tools-'));
+    try {
+      mkdirSync(join(output, 'src')); mkdirSync(join(output, 'assets'));
+      copyFileSync(join(root, 'index.html'), join(output, 'index.html'));
+      const shipped = await shipDevToolsV188(root, output, { env });
+      const path = env.ATF_DEV_TOOLS_PATH || DEV_TOOLS_DEFAULT_PATH_V188;
+      assert.deepEqual(shipped, { path, files: DEV_TOOLS_FILES_V188.length });
+      assert.equal(await findBuiltDevToolsPathV188(output), path);
+      assert.deepEqual(readdirSync(join(output, path)).sort(), [...DEV_TOOLS_FILES_V188].sort());
+      const page = readFileSync(join(output, path, 'index.html'), 'utf8');
+      assert.equal(page.includes('/devtools/'), false); assert.ok(page.includes(`src="/${path}/dev-launcher-v188.js"`) && page.includes(`href="/${path}/dev-v188.css"`));
+      for (const file of DEV_TOOLS_FILES_V188.filter(name => name !== 'index.html')) assert.deepEqual(readFileSync(join(output, path, file)), readFileSync(join(root, 'devtools', file)), file);
+      const shell = readFileSync(join(output, 'index.html'), 'utf8');
+      assert.equal(extractDevBootstrapV188(shell), devBootstrapScriptV188(SHIM)); assert.equal(shell.includes(path), false, 'the shell does not name the hidden directory');
+      const rows = [{ path: 'index.html', bytes: 1, sha256: 'a' }, { path: `${path}/index.html`, bytes: 2, sha256: 'b' }, { path: `${path}/dev-v188.css`, bytes: 3, sha256: 'c' }];
+      const split = splitDevToolsManifestV188(rows, path);
+      assert.deepEqual(split.files, [rows[0]]); assert.equal(split.devTools.files, 2); assert.equal(JSON.stringify(split).includes(path), false, 'the published manifest does not name the hidden directory');
+      assert.equal(split.devTools.sha256, splitDevToolsManifestV188(rows.map(row => ({ ...row, path: row.path.replace(path, 'another-hidden-name') })), 'another-hidden-name').devTools.sha256, 'same tools, same fingerprint, whatever the name');
+      mkdirSync(join(output, 'second-hidden-dir'));
+      await assert.rejects(findBuiltDevToolsPathV188(output), /exactly one hidden directory/);
+    } finally { rmSync(output, { recursive: true, force: true }); }
+  }
 });
 
 test('range metrics math', () => {

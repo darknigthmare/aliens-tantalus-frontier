@@ -7,6 +7,7 @@
  * identities cite their source and none is certified 1:1.
  * Existing IDs, saves and numbering are untouched (new IDs start at 194; 191 stays a test-reserved unknown number).
  */
+import { WEAPON_CATALOG_FRANCHISE_V188 } from './weapon-catalog-franchise-v188.js';
 const freeze = value => {
   if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value;
   for (const child of Object.values(value)) freeze(child);
@@ -58,7 +59,9 @@ export const WEAPON_CATALOG_ADDITIONS_V188 = freeze([
     identityVerified: true,
     sourceMechanism: 'fuel-canister-flame-jet', ammunitionV188: 'fuel [À DÉFINIR]',
     description: 'Lance-flammes trouvé à bord de Sevastopol (Alien: Isolation). Réservoir de carburant, aucune douille. Plaque d’armurerie à produire : non disponible à l’achat.'
-  }
+  },
+  // Lot B (franchise arsenal): ids 197+, provisional drawn plaque, purchasable.
+  ...WEAPON_CATALOG_FRANCHISE_V188
 ]);
 export const WEAPON_ADDITION_IDS_V188 = Object.freeze(WEAPON_CATALOG_ADDITIONS_V188.map(weapon => weapon.id));
 export const isPendingPlaqueWeaponV188 = weapon =>

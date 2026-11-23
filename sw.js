@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-tantalus-saison-des-reines-arcs-20261123';
+const CACHE = 'atf-v143-tantalus-arsenal-franchise-reines-arcs-20261123';
 const SHELL = Object.freeze([
   '/src/xeno-trials-visual-assets-v205.js',
   '/src/xeno-trials-priority-air-data-v204.js',
@@ -89,6 +89,8 @@ const SHELL = Object.freeze([
   '/src/weapon-catalog-additions-v188.js',
   '/src/weapon-arsenal-v188.js',
   '/src/weapon-arsenal-runtime-v188.js',
+  '/src/weapon-catalog-franchise-v188.js',
+  '/src/weapon-provisional-plaque-v188.js',
   '/src/weapon-underbarrel-v174.js',
   '/src/npc-dialogue-portraits-v168.js',
   '/src/hub-room-backgrounds-v168.js',

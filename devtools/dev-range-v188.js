@@ -1,4 +1,4 @@
-// Developer tools (spec 012, source-only): the shooting range. It is NOT a separate
+// Developer tools (spec 012; shipped hidden, see scripts/build-dev-tools-v188.mjs): the shooting range. It is NOT a separate
 // simulation: it runs inside the real GameEngine (src/game-production-runtime.js) on a
 // normal FRONTIER mission level (lighting, VFX, weapon effects, squad doctrine and
 // placeables are the live layers). A loadout change restarts that same level with the
@@ -237,7 +237,7 @@ function mountPanel(range) {
   const equipmentOptions = EQUIPMENT.map(entry => `<option value="${entry.id}">${escapeHtml(entry.name)} · ${escapeHtml(entry.grade)} · ${escapeHtml(entry.utility)}</option>`).join('');
   const casteOptions = CASTE_REPRESENTATIVES.map(entry => `<option value="${entry.id}">${escapeHtml(entry.caste)} · ${escapeHtml(entry.name)}</option>`).join('');
   const placeables = [...PLACEABLE_CATALOG_V86, ...PLACEABLE_EXTENSION_CATALOG_V132].map(entry => escapeHtml(entry.catalogId || entry.id || entry.name)).join(', ');
-  panel.innerHTML = `<nav role="tablist">${tabs.map(([id, label], index) => `<button type="button" role="tab" data-range-tab="${id}" aria-selected="${index === 0}">${label}</button>`).join('')}</nav>
+  panel.innerHTML = `<nav role="tablist">${tabs.map(([id, label], index) => `<button type="button" role="tab" data-range-tab="${id}" aria-selected="${index === 0}">${label}</button>`).join('')}<button type="button" data-range-collapse aria-expanded="true" aria-label="Replier ou déplier le stand">▾</button></nav>
     <section data-range-panel="weapons"><label>Arme <select data-range-weapon>${weaponOptions}</select></label> <button type="button" data-range-equip-weapon>Équiper (relance du niveau)</button>
       <div class="atf-dev-row"><button type="button" data-range-fire="0.5">Tir 0,5 s</button><button type="button" data-range-fire="3">Tir 3 s</button><button type="button" data-range-reload>Recharger</button><button type="button" data-range-reset>Remettre les mesures à zéro</button></div>
       <p class="atf-dev-note">Tir clavier/souris normal aussi. Arme sous le canon, alimentations spéciales et accessoires : ceux de l’entrée choisie (étiquettes du catalogue, profil d’action et état d’alimentation affichés dans Mesures).</p></section>
@@ -261,9 +261,17 @@ function mountPanel(range) {
   document.body.append(panel);
   const $ = selector => panel.querySelector(selector);
   $('[data-range-weapon]').value = range.state.weaponId;
+  // One bar when folded: the scene and the game's touch controls stay reachable (phone-size screens start folded).
+  const setCollapsed = collapsed => {
+    panel.classList.toggle('atf-dev-collapsed-v188', collapsed);
+    const toggle = $('[data-range-collapse]'); toggle.textContent = collapsed ? '▴' : '▾'; toggle.setAttribute('aria-expanded', String(!collapsed));
+  };
+  setCollapsed(Boolean(globalThis.matchMedia?.('(max-width: 640px), (max-height: 520px) and (pointer: coarse)').matches));
   panel.addEventListener('click', event => {
     const button = event.target.closest('button'); if (!button) return;
     try {
+      if (button.matches('[data-range-collapse]')) { setCollapsed(!panel.classList.contains('atf-dev-collapsed-v188')); return; }
+      if (button.dataset.rangeTab) setCollapsed(false);
       if (button.dataset.rangeTab) for (const tab of panel.querySelectorAll('[data-range-tab]')) {
         const on = tab === button; tab.setAttribute('aria-selected', String(on)); panel.querySelector(`[data-range-panel="${tab.dataset.rangeTab}"]`).hidden = !on;
       }

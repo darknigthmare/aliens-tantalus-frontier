@@ -1,3 +1,4 @@
+import { DEV_TOOLS_FILES_V188, isDevToolsPublicPathV188 } from './build-dev-tools-v188.mjs';
 import { publicXenoProductionPathAdmissionV206, verifyXenoProductionAdmissionsV206 } from './public-xeno-production-admissions-v206.mjs';
 import { publicXenoVisualPathAdmissionV205, verifyXenoVisualAdmissionsV205 } from './public-xeno-visual-admissions-v205.mjs';
 import { publicXenoPriorityPathAdmissionV204, verifyXenoPriorityAdmissionsV204 } from './public-xeno-priority-admissions-v204.mjs';
@@ -584,8 +585,9 @@ const FORGE_TOOLING_V140 = new Set([
   'specs/013-bioforge/spec.md',
   'specs/013-bioforge/plan.md',
   'specs/013-bioforge/tasks.md',
-  // V188 developer tools (spec 012): hidden scene launcher and shooting range, served by
-  // scripts/dev.mjs only; source-only exact paths, never part of a built distribution.
+  // V188 developer tools (spec 012): hidden scene launcher and shooting range. Source admission of
+  // the exact paths; since the owner decision of 2026-11-23 the devtools/ files are also shipped,
+  // under one hidden directory (see DEV_TOOLS_FILES_V188 below). Scripts, specs and docs stay source-only.
   'devtools',
   'devtools/dev-catalog-v188.js',
   'devtools/dev-fixtures-v188.js',
@@ -597,6 +599,8 @@ const FORGE_TOOLING_V140 = new Set([
   'devtools/dev-v188.css',
   'devtools/index.html',
   'scripts/dev-tools-server-v188.mjs',
+  'scripts/build-dev-tools-v188.mjs',
+  'scripts/qa-dev-tools-built-v188.mjs',
   'scripts/verify-dev-tools-v188.mjs',
   'scripts/qa-dev-tools-v188.mjs',
   'specs/012-outils-dev',
@@ -607,6 +611,8 @@ const FORGE_TOOLING_V140 = new Set([
   // V188 arsenal completion (spec 014): suite, browser QA, inventory and spec, source-only exact paths.
   'scripts/verify-weapon-arsenal-v188.mjs',
   'scripts/qa-arsenal-v188.mjs',
+  'scripts/verify-weapon-franchise-v188.mjs',
+  'scripts/qa-arsenal-franchise-v188.mjs',
   'docs/development/ARSENAL_COMPLETION_V188.md',
   'specs/014-arsenal',
   'specs/014-arsenal/spec.md',
@@ -1195,6 +1201,13 @@ export function isPublicDistributionPathV86(path, { directory = false, built = f
   if (XENO_ARBITER_SOURCE_ONLY_V190.has(path)) return !built;
   if (XENO_ANIMATION_SOURCE_ONLY_V189.has(path)) return !built;
   if (!built && FORGE_TOOLING_V140.has(path)) return true;
+  // Built distribution: one hidden top-level directory with exactly the developer tool files
+  // (scripts/verify-release-artifact-v143.mjs checks there is a single one and its fingerprint).
+  if (built) {
+    const [devDirectory, devFile, ...devRest] = path.split('/');
+    if (isDevToolsPublicPathV188(devDirectory) && !PRIVATE_SEGMENT.test(devDirectory))
+      return devFile === undefined ? directory : !directory && devRest.length === 0 && DEV_TOOLS_FILES_V188.includes(devFile);
+  }
   if (!built && AI_TOOLS_ADOPTED_V188.has(path)) return true;
   if (FORGE_STYLES_V140.has(path)) return true;
   const segments = path.split('/');

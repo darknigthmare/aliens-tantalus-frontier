@@ -24,6 +24,7 @@ import { WEAPON_MODULE_CATALOG_V168 } from './weapon-attachments-v168.js';
 import { M41A_UNDERBARREL_HOST_V174 } from './weapon-underbarrel-v174.js';
 import { WEAPON_MASTERY_MAX_LEVEL_V167 } from './weapon-mastery-v167.js';
 import { WEAPON_CATALOG_ADDITIONS_V188, isPendingPlaqueWeaponV188 } from './weapon-catalog-additions-v188.js';
+import { ARSENAL_PLACEHOLDER_CATEGORIES_V188 } from './weapon-provisional-plaque-v188.js';
 
 export const WEAPON_ARSENAL_SCHEMA_V188 = 188;
 const freeze = value => {
@@ -113,26 +114,59 @@ const sourceRows = new Map(ARSENAL_SOURCE_ROWS_V188.map(([id, feed, ammo, media,
  * revolver prototype and the V188 additions, with every finish variant. */
 const MARINE_BASES = Object.freeze(Array.from({ length: 17 }, (_, index) => WEAPONS[index].id));
 export const ARSENAL_LOT_A_BASE_IDS_V188 = Object.freeze([...MARINE_BASES, 'weapon-021-357-magnum-revolver',
-  ...WEAPON_CATALOG_ADDITIONS_V188.map(weapon => weapon.id)]);
+  ...WEAPON_CATALOG_ADDITIONS_V188.filter(weapon => !weapon.feedV188).map(weapon => weapon.id)]);
+/** Lot B (franchise arsenal): the provisional-plaque rows 197+, each verified in a mission by its own suite. */
+export const ARSENAL_LOT_B_IDS_V188 = Object.freeze(WEAPON_CATALOG_ADDITIONS_V188.filter(weapon => weapon.feedV188).map(weapon => weapon.id));
 
 /** Native specialized-feed bridge. Each kind reuses one V171 mechanism state
  * machine; the template id names that state machine, never the weapon source. */
 export const ARSENAL_FEED_TEMPLATES_V188 = freeze({
   tube: 'weapon-007-m37a2-pump-shotgun', cylinder: 'weapon-021-357-magnum-revolver',
-  belt: 'weapon-005-m56-smartgun', tank: 'weapon-006-m240-incinerator-unit', single: 'weapon-011-m83-sadar'
+  belt: 'weapon-005-m56-smartgun', tank: 'weapon-006-m240-incinerator-unit', single: 'weapon-011-m83-sadar',
+  // An energy cell is replaced as one sealed unit: it reuses the tank state machine (no shell, no cycle).
+  cell: 'weapon-006-m240-incinerator-unit'
 });
 const BRIDGED_BASES = freeze({
   'weapon-005-m56-smartgun': 'belt', 'weapon-006-m240-incinerator-unit': 'tank',
   'weapon-007-m37a2-pump-shotgun': 'tube', 'weapon-010-m6b-rocket-launcher': 'single',
   'weapon-011-m83-sadar': 'single', 'weapon-012-m5-rpg': 'single', 'weapon-021-357-magnum-revolver': 'cylinder',
   'weapon-194-hicks-ithaca-37-shotgun': 'tube', 'weapon-195-sevastopol-pump-shotgun': 'tube',
-  'weapon-196-sevastopol-flamethrower': 'tank'
+  'weapon-196-sevastopol-flamethrower': 'tank',
+  // Lot B (T104): the CSV-recorded non-box feeds outside Lot A. Capacities stay the catalogue values.
+  'weapon-020-es-4-electroshock-pistol': 'cell', 'weapon-025-plasma-rifle': 'cell', 'weapon-035-neuro-link-disruptor': 'cell',
+  'weapon-158-n79-eva-laser': 'cell', 'weapon-160-eds-93-zadak': 'cell', 'weapon-166-p649-hel': 'cell', 'weapon-168-evi-87-zvezda': 'cell',
+  'weapon-036-ripper-acid-projector': 'tank', 'weapon-037-reef-caster': 'tank', 'weapon-039-cryo-lance': 'tank',
+  'weapon-040-pathogen-containment-projector': 'tank', 'weapon-147-ocap-91-volcan': 'tank', 'weapon-152-type-99-incinerator': 'tank',
+  'weapon-150-l59-minigun': 'belt', 'weapon-161-thunderbolt-mk2': 'belt', 'weapon-170-frontier-revolver': 'cylinder',
+  // Lot B additions: the feed kind each row records (documented or [PROPOSÉ] in the row itself).
+  ...Object.fromEntries(WEAPON_CATALOG_ADDITIONS_V188.filter(weapon => ['tube', 'cylinder', 'belt', 'tank', 'cell'].includes(weapon.feedV188?.kind))
+    .map(weapon => [weapon.id, weapon.feedV188.kind]))
 });
+/** Recorded, deliberately NOT bridged (see ARSENAL_COMPLETION_V188.md): the stun baton spends no charge
+ * (V130 contact action), the cutting torch is a V130 tool, arrows and harpoons are V131 recoverable
+ * projectiles fed from the reserve, and a one-round bolt gun / sonic harpoon would be a balance change. */
+export const ARSENAL_UNBRIDGED_SPECIAL_FEEDS_V188 = freeze({
+  'weapon-033-stun-baton': 'v130-contact-action-spends-no-charge', 'weapon-029-cutting-torch': 'v130-tool-action',
+  'weapon-023-compound-bow': 'v131-recoverable-arrows-from-reserve', 'weapon-024-harpoon-gun': 'v131-recoverable-harpoons-from-reserve',
+  'weapon-022-bolt-gun': 'single-capacity-would-change-balance-owner-decision',
+  'weapon-034-sonic-harpoon': 'single-capacity-would-change-balance-owner-decision'
+});
+export { ARSENAL_PLACEHOLDER_CATEGORIES_V188 };
 /** Capacities that the feed mechanism (or the CSV) settles; others keep the catalogue value. */
 const CAPACITY_RULES = freeze({
   single: { capacity: 1, source: 'mechanism: one projectile per tube (CSV Alimentation=single)' },
   'weapon-021-357-magnum-revolver': { capacity: 6, source: CSV_PATH + ' · Capacité canon = 6' }
 });
+/** Owner decision A9 (23 Nov. 2026): the M41A dossier cites the commonly documented cyclic rate. The figure is
+ * read from secondary summaries of the Colonial Marines Technical Manual (1995) — the manual itself was not
+ * consulted — and the in-game cadence stays balance tuning [PROPOSÉ]: no gameplay value changes. */
+export const ARSENAL_DOCUMENTED_RATES_V188 = freeze({
+  'weapon-001-m41a-pulse-rifle': { roundsPerMinute: 900, status: 'secondary-summary-of-the-1995-technical-manual',
+    sourceUrl: 'https://www.avpcentral.com/aliens-colonial-marines-technical-manual',
+    sourceRefs: ['https://avpcentral.com/m41a-pulse-rifle-history-and-variants'],
+    note: 'Cadence citée : 900 coups/min selon les synthèses du Colonial Marines Technical Manual (1995), source secondaire. La cadence en jeu est un réglage d’équilibrage.' }
+});
+export const arsenalDocumentedRateV188 = weaponOrId => ARSENAL_DOCUMENTED_RATES_V188[arsenalBaseIdV188(weaponOrId)] || null;
 const PUMP_CYCLE_SECONDS = 0.4; // [PROPOSÉ] pump stroke; V124 ejects the hull at 0.18 s of it
 
 const catalogue = new Map(WEAPONS.map(weapon => [weapon.id, weapon]));
@@ -182,7 +216,7 @@ export function arsenalShotCueV188(profile) {
 function feedFor(weapon, baseId, presentation) {
   const row = sourceRows.get(baseId);
   const addition = isPendingPlaqueWeaponV188(weapon);
-  const kind = row?.feed || (addition ? BRIDGED_BASES[baseId] : null) || presentation.reload.feed || 'none';
+  const kind = row?.feed || (addition ? weapon.feedV188?.kind || BRIDGED_BASES[baseId] : null) || presentation.reload.feed || 'none';
   const detachable = inspectDetachableFeedV193(weapon);
   const bridge = BRIDGED_BASES[baseId] || null;
   // A finish variant shares its base's tube or cylinder: the generated legacy
@@ -191,9 +225,11 @@ function feedFor(weapon, baseId, presentation) {
   const base = catalogue.get(baseId);
   const rule = CAPACITY_RULES[baseId] || (bridge ? CAPACITY_RULES[bridge] : null)
     || (['tube', 'cylinder'].includes(bridge) && base && base.id !== weapon.id
-      ? { capacity: base.magazine, source: 'base model ' + base.id + ' tube capacity (finish variant shares the mechanism) [PROPOSÉ]' } : null);
+      ? { capacity: base.magazine, source: 'base model ' + base.id + ' tube capacity (finish variant shares the mechanism) [PROPOSÉ]' } : null)
+    || (weapon.feedV188?.capacityDocumented ? { capacity: weapon.magazine, source: weapon.feedV188.capacitySource } : null);
   return {
-    kind, kindSource: row ? CSV_PATH + ' · Alimentation (' + row.id + ')' : addition ? 'weapon-catalog-additions-v188 · sourceMechanism'
+    kind, kindSource: row ? CSV_PATH + ' · Alimentation (' + row.id + ')' : weapon.feedV188 ? 'weapon-catalog-franchise-v188 · feedV188 (' + weapon.feedV188.note + ')'
+      : addition ? 'weapon-catalog-additions-v188 · sourceMechanism'
       : 'V124 presentation feed [À DÉFINIR]',
     ammunition: row?.ammo || (addition ? weapon.ammunitionV188 : null) || '[À DÉFINIR]',
     sourceCapacity: row?.capacity && /^\d+$/.test(row.capacity) ? Number(row.capacity) : null,
@@ -225,14 +261,17 @@ function buildProfile(weapon) {
     { box: 'magwell', drum: 'magwell', belt: 'belt_harness', tank: 'tank_mount', cell: 'cell_port',
       tube: 'chamber', cylinder: 'chamber', single: 'projectile_head' }[feed.kind]].filter(Boolean);
   const modules = WEAPON_MODULE_CATALOG_V168.filter(module => module.supported.includes(weapon.id)).map(module => module.id);
-  const placeholderSlot = addition ? 'held-weapon-placeholder-' + (weapon.family === 'flame' ? 'flamethrower' : 'shotgun') : null;
+  const placeholder = addition ? ARSENAL_PLACEHOLDER_CATEGORIES_V188[weapon.placeholderCategoryV188]
+    || ARSENAL_PLACEHOLDER_CATEGORIES_V188[weapon.family === 'flame' ? 'flame' : 'shotgun'] : null;
+  const placeholderSlot = placeholder ? placeholder[0] : null;
   return {
     schema: 188, weaponId: weapon.id, baseId, name: weapon.name, family: weapon.family, source: weapon.source,
-    mark: weapon.mark, lotA: ARSENAL_LOT_A_BASE_IDS_V188.includes(baseId),
-    role: row?.role || (addition ? (weapon.family === 'flame' ? 'Flamethrower' : 'Shotgun') : weapon.family),
+    mark: weapon.mark, lotA: ARSENAL_LOT_A_BASE_IDS_V188.includes(baseId), lotB: ARSENAL_LOT_B_IDS_V188.includes(weapon.id),
+    role: row?.role || (placeholder ? placeholder[2] : weapon.family),
     feed,
     fire: { actionKind: action?.kind || 'legacy-single-bullet', modes,
       roundsPerSecond: Math.round(1000 / interval) / 1000, rateSource: '[PROPOSÉ] catalogue fireRate / V131 interval',
+      documentedRate: ARSENAL_DOCUMENTED_RATES_V188[baseId] || null,
       damage: weapon.damage, damageSource: '[PROPOSÉ] ' + (weapon.statsPolicy || 'catalogue') },
     reload: { seconds: weapon.reload, beats: RELOAD_BEATS[feed.nativeBridge || feed.kind] || RELOAD_BEATS.box,
       transaction: feed.detachableMagazine ? 'v167-physical-magazine-opt-in' : feed.nativeBridge ? 'v188-native-special-feed'
@@ -244,12 +283,15 @@ function buildProfile(weapon) {
     audio: { shot: null, reload: feed.kind === 'none' ? null : 'weapon-reload', dryFire: 'weapon-dry-fire',
       cycle: feed.nativeBridge === 'tube' ? 'weapon-dry-fire' : null, status: 'existing-original-synthesis-cues-reused [ADAPTÉ]' },
     held: { art: held ? 'native-plaque' : addition ? 'canvas-placeholder' : 'none', imageKey: held?.imageKey || null,
-      placeholderSlot, type: held?.type || (addition ? (weapon.family === 'flame' ? 'heavy' : 'shotgun') : null),
+      placeholderSlot, type: held?.type || (placeholder ? placeholder[1] : null),
       attachmentPoints: held ? ['grip', 'muzzle', 'support', 'reload', 'ejection'].filter(key => held[key + 'Pivot'])
-        : addition ? ['grip', 'muzzle', 'support', 'reload'].concat(weapon.family === 'flame' ? [] : ['ejection']) : [],
+        : addition ? ['grip', 'muzzle'].concat(['pistol', 'melee'].includes(placeholder[1]) ? [] : ['support'], weapon.family === 'melee' ? [] : ['reload'],
+          presentation.casing ? ['ejection'] : []) : [],
       moduleSlots: slots, admittedModules: modules },
     progression: { masteryMaxLevel: WEAPON_MASTERY_MAX_LEVEL_V167, masteryLedger: 'weapon-mastery-v167 (any catalogue id)' },
-    fidelity: { status: addition ? 'source-identity-no-plaque' : credibilityStatus(row?.credibility || base?.provenance),
+    fidelity: { status: weapon.plaqueStatus === 'provisional-drawn' ? 'source-identity-provisional-plaque'
+      : addition ? 'source-identity-no-plaque' : credibilityStatus(row?.credibility || base?.provenance),
+      identityEvidence: weapon.identityEvidence || null, capacityDocumented: weapon.feedV188?.capacityDocumented === true,
       sourceMedia: row?.media || weapon.sourceWork || null, sourceUrl: weapon.sourceUrl || null,
       researchId: weapon.researchId || null, canonExact: false, visualFidelity1to1: false,
       note: 'Documenté / adapté / à définir séparés dans docs/development/ARSENAL_COMPLETION_V188.md' }
@@ -269,6 +311,7 @@ export function getArsenalProfileV188(weaponOrId) {
     : weaponOrId && typeof weaponOrId === 'object' ? weaponOrId.id || weaponOrId.weaponId || weaponOrId.catalogId : null;
   return typeof id === 'string' ? byId.get(id) || null : null;
 }
-export function listArsenalProfilesV188({ lotA = null, bridged = null } = {}) {
-  return profiles.filter(p => (lotA === null || p.lotA === lotA) && (bridged === null || Boolean(p.feed.nativeBridge) === bridged));
+export function listArsenalProfilesV188({ lotA = null, lotB = null, bridged = null } = {}) {
+  return profiles.filter(p => (lotA === null || p.lotA === lotA) && (lotB === null || p.lotB === lotB)
+    && (bridged === null || Boolean(p.feed.nativeBridge) === bridged));
 }

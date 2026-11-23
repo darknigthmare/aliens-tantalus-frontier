@@ -1,4 +1,4 @@
-// Developer tools (spec 012, source-only): pure measurement and tuning math of the
+// Developer tools (spec 012; shipped hidden, see scripts/build-dev-tools-v188.mjs): pure measurement and tuning math of the
 // shooting range. Times are engine seconds (animationTime, scaled by the dev time scale,
 // so slow motion does not distort a rate); distances use the project scale 1 m = 51 px.
 export const RANGE_METRE_PX_V188 = 51;

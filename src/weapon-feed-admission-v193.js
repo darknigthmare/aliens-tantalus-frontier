@@ -24,11 +24,35 @@ const source=(weaponId,baseWeaponId,feed,ammoType,sourceRow,ammoSource)=>Object.
  * finish IDs share their existing base mechanism (content-core-v50 and V124),
  * not separate sequel/media receipts. No name, modulo or prefix inference.
  */
+/** V188 (owner decision A6, 23 Nov. 2026): model-specific evidence of a detachable magazine.
+ * VP70: the CSV records `box` and `9mm (prop real)`; the film prop is a real Heckler & Koch VP70
+ * (IMFDB actor page), a pistol fed by a detachable box magazine (IMFDB weapon page). Both are
+ * secondary databases; the prop's own magazine was not inspected. The game capacity of each
+ * finish stays the catalogue value [PROPOSÉ] — the real pistol's 18 rounds are not applied.
+ * M4A3 and F44AA are NOT admitted: see docs/development/QUESTIONS_PROPRIETAIRE_V188.md (A6). */
+const vp70='weapon-004-vp70-combat-pistol';
+export const WEAPON_FEED_EVIDENCE_V188=Object.freeze({
+  [vp70]:Object.freeze({model:'Heckler & Koch VP70',evidence:'real-firearm-prop-identified-by-secondary-database',
+    identityUrl:'https://www.imfdb.org/wiki/William_Hope',mechanismUrl:'https://www.imfdb.org/wiki/Heckler_%26_Koch_VP70',
+    documentedCapacity:18,documentedCapacityStatus:'real-pistol-general-specification-not-applied-to-game-capacity',
+    propMagazineInspected:false})
+});
+const sourceV188=(weaponId,baseWeaponId,sourceRow)=>Object.freeze({
+  weaponId,baseWeaponId,feed:'box',ammoType:'cased-9mm',detachable:true,
+  mechanismSource:Object.freeze({path:'docs/arsenal/data/tantalus_arsenal_master_v1.csv',
+    sourceWeaponId:baseWeaponId,field:'Alimentation',value:'box',row:sourceRow,media:'Aliens (1986)'}),
+  ammunitionSourceKey:'real-firearm-prop',ammunitionSourceMedia:'Aliens (1986) — real Heckler & Koch VP70 prop',
+  modelEvidenceV188:WEAPON_FEED_EVIDENCE_V188[baseWeaponId],
+  variantPolicy:weaponId===baseWeaponId?'source-identity':'existing-project-finish-variant',
+  sourceMeasured:false,canonExact:false,visualFidelity1to1:false
+});
 export const WEAPON_FEED_MECHANISMS_V193=Object.freeze([
   ...[m41a,'weapon-041-m41a-pulse-rifle-field','weapon-081-m41a-pulse-rifle-veteran',
     'weapon-121-m41a-pulse-rifle-prototype'].map(id=>source(id,m41a,'box','caseless',2,'m41a-manual')),
   ...[m56,'weapon-045-m56-smartgun-field','weapon-085-m56-smartgun-veteran',
-    'weapon-125-m56-smartgun-prototype'].map(id=>source(id,m56,'belt','m250-caseless',6,'m56-report'))
+    'weapon-125-m56-smartgun-prototype'].map(id=>source(id,m56,'belt','m250-caseless',6,'m56-report')),
+  ...[vp70,'weapon-044-vp70-combat-pistol-field','weapon-084-vp70-combat-pistol-veteran',
+    'weapon-124-vp70-combat-pistol-prototype'].map(id=>sourceV188(id,vp70,5))
 ]);
 const mechanisms=new Map(WEAPON_FEED_MECHANISMS_V193.map(s=>[s.weaponId,s]));
 export function getWeaponFeedMechanismV193(weaponId){
