@@ -1,4 +1,4 @@
-/* Developer tools (spec 012, source-only). Technical surfaces only: never loaded by the public build. */
+/* Developer tools (spec 012; shipped hidden). Technical surfaces only: loaded by the launcher and by a dev session, never by a player screen. */
 :root { --atf-dev-bg: #0d1214; --atf-dev-panel: rgba(10, 16, 18, .94); --atf-dev-line: #2c3b3f; --atf-dev-text: #d8e4e2; --atf-dev-dim: #8ba09d; --atf-dev-accent: #7fe0a8; --atf-dev-warn: #f0b35a; }
 .atf-dev-launcher-v188 { margin: 0; background: var(--atf-dev-bg); color: var(--atf-dev-text); font: 14px/1.4 system-ui, sans-serif; }
 .atf-dev-launcher-head { padding: 16px 20px 4px; }

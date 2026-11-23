@@ -7,6 +7,7 @@ import { resolveSafeBuildOutput } from './build-output-guard.mjs';
 import { APP_RELEASE_V143 } from '../src/release-info-v143.js';
 import { CAMPAIGNS } from '../src/content.js';
 import { SPECIAL_OPERATIONS_V131 } from '../src/special-operations-v131.js';
+import { findBuiltDevToolsPathV188, shipDevToolsV188, splitDevToolsManifestV188 } from './build-dev-tools-v188.mjs';
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 
 export async function fileManifestV143(root) {
@@ -71,12 +72,14 @@ export async function stampReleaseV143(root, output, { env = process.env } = {})
   await writeFile(join(output, 'sw.js'), worker.replace(/^const CACHE = 'atf-v143-[a-z0-9-]+';$/m, `const CACHE = '${cacheName}';`));
   const html = await readFile(join(output, 'index.html'), 'utf8');
   await writeFile(join(output, 'index.html'), stampReleaseHtmlV143(html, release));
-  const manifest = await fileManifestV143(output);
+  // Spec 012: the hidden developer tools are fingerprinted by file name only; their directory
+  // name is written in no published file (this manifest is itself published).
+  const { files: manifest, devTools } = splitDevToolsManifestV188(await fileManifestV143(output), await findBuiltDevToolsPathV188(output));
   const original = JSON.parse(await readFile(join(output, 'build-info.json'), 'utf8'));
   const mire = CAMPAIGNS.filter(entry => entry.mode === 'MIRE');
   const info = { ...original, version: pkg.version, sourceVersion: APP_RELEASE_V143.sourceVersion,
     sourceCommit, buildId, builtAt, cacheName, saveSchema: APP_RELEASE_V143.saveSchema,
-    inputFingerprint: fingerprint, manifestSha256: hash(JSON.stringify(manifest)), files: manifest,
+    inputFingerprint: fingerprint, manifestSha256: hash(JSON.stringify(manifest)), devTools, files: manifest,
     contentReadiness: { mireGeneratedScenarios: mire.length,
       mireSettingAdaptations: mire.filter(entry => entry.historicalSettingV143).length,
       mireOriginalSimulations: mire.filter(entry => !entry.historicalSettingV143).length,
@@ -95,6 +98,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const output = resolveSafeBuildOutput(root, process.env.ATF_BUILD_OUTPUT || 'dist');
   // Preserve the native asset admissions, audio manifest and private-data guards.
   await import('./build.mjs');
+  // Spec 012 (owner decision 2026-11-23): hidden developer tools and their inline isolation bootstrap.
+  const devTools = await shipDevToolsV188(root, output);
+  console.log(`Developer tools shipped hidden: ${devTools.files} files under a ${devTools.path.length}-character path (${process.env.ATF_DEV_TOOLS_PATH ? 'ATF_DEV_TOOLS_PATH' : 'documented default'}).`);
   const result = await stampReleaseV143(root, output);
   console.log(`Release ${result.buildId}: ${result.files.length} fingerprinted files; save schema ${result.saveSchema}.`);
 }

@@ -1,5 +1,5 @@
-// Developer tools (spec 012, source-only): the dev session bridge, injected after
-// src/app.js on `/?atf-dev=v188` (scripts/dev-tools-server-v188.mjs). It drives the real
+// Developer tools (spec 012): the dev session bridge, loaded after the game's scripts on
+// `/?atf-dev=v188` by the isolated-storage bootstrap (dev-storage-v188.js). It drives the real
 // page through its existing entry points (title buttons, showView, launchCampaign, the
 // dedicated levels' own phase transitions, the story cinematic player) and adds dev
 // overlays (colliders, places, spawn zones, foot line) and toggles (god mode, infinite
@@ -9,6 +9,8 @@ import { CAMPAIGNS } from '/src/content.js';
 import { expectedLandedV188 } from './dev-catalog-v188.js';
 
 const session = globalThis.__ATF_DEV_SESSION_V188__ || { active: false, toggles: {} };
+// The launcher lives next to this module, whatever the directory is called in a build.
+const DEV_LAUNCHER_URL = new URL('./', import.meta.url).pathname;
 const byId = id => document.getElementById(id);
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 async function waitFor(test, { timeout = 45000, step = 100, label = 'condition' } = {}) {
@@ -247,7 +249,7 @@ function drawOverlays(engine) {
 const TOGGLE_LABELS = [['godMode', 'Mode dieu'], ['infiniteAmmo', 'Munitions infinies'], ['reveal', 'Révéler (carte, hostiles)'], ['noSpawns', 'Aucune apparition'],
   ['colliders', 'Collisions'], ['places', 'Lieux et checkpoint'], ['spawnZones', 'Zones d’apparition'], ['footLine', 'Ligne des pieds et attaches']];
 function mountHud() {
-  const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = '/devtools/dev-v188.css'; document.head.append(style);
+  const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = new URL('./dev-v188.css', import.meta.url).href; document.head.append(style);
   const hud = document.createElement('aside'); hud.id = 'atf-dev-hud-v188'; hud.className = 'atf-dev-hud-v188'; hud.setAttribute('aria-label', 'Outils de développement');
   hud.innerHTML = `<header><b>DEV</b> <span data-dev-entry></span> <span data-dev-status></span>
     <button type="button" data-dev-collapse aria-expanded="true">–</button></header>
@@ -284,7 +286,7 @@ function relaunch() {
 /** Discards the dev session: the in-memory profile is dropped, the real localStorage was never written. */
 export function exitSession() {
   try { session.discard?.(); sessionStorage.removeItem(session.sessionKey); } catch { /* ignore */ }
-  location.assign('/devtools/');
+  location.assign(DEV_LAUNCHER_URL);
 }
 
 globalThis.__ATF_DEV_V188__ = {
@@ -302,6 +304,7 @@ if (session.active) {
 } else {
   state.status = 'no-session';
   const note = document.createElement('p'); note.className = 'atf-dev-empty-v188';
-  note.innerHTML = 'Aucune session de développement dans cet onglet : <a href="/devtools/">ouvrir le lanceur</a>. Le stockage est isolé et vide.';
+  note.innerHTML = 'Aucune session de développement dans cet onglet : <a data-dev-launcher-link>ouvrir le lanceur</a>. Le stockage est isolé et vide.';
+  note.querySelector('[data-dev-launcher-link]').href = DEV_LAUNCHER_URL;
   document.body.append(note);
 }

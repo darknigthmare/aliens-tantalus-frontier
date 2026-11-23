@@ -1,9 +1,10 @@
-// Developer tools (spec 012, source-only): the launcher page (devtools/index.html).
+// Developer tools (spec 012): the launcher page (devtools/index.html; hidden directory in a build).
 // It writes only to sessionStorage (this tab) and opens the isolated game page.
 import { buildDevCatalogV188, filterDevCatalogV188, DEV_CATEGORIES_V188 } from './dev-catalog-v188.js';
 import { buildDevSessionV188, DEV_SESSION_KEY_V188 } from './dev-fixtures-v188.js';
 
 export const DEV_GAME_URL_V188 = '/?atf-dev=v188';
+export const DEV_BASE_PATH_V188 = new URL('./', import.meta.url).pathname;
 const TOGGLES = [['godMode', 'Mode dieu'], ['infiniteAmmo', 'Munitions infinies'], ['reveal', 'Révéler carte et hostiles'], ['noSpawns', 'Aucune apparition'],
   ['colliders', 'Afficher les collisions'], ['places', 'Afficher lieux et checkpoints'], ['spawnZones', 'Afficher les zones d’apparition'], ['footLine', 'Ligne des pieds et attaches']];
 const catalog = buildDevCatalogV188();
@@ -37,6 +38,8 @@ function launch(id) {
   const toggles = { ...prefs.toggles, timeScale: Number(prefs.toggles.timeScale || 1) };
   try {
     const session = buildDevSessionV188(entry, { language: prefs.language, difficulty: prefs.difficulty, toggles });
+    // The isolated game page loads the session bridge from this launcher's own directory.
+    session.base = DEV_BASE_PATH_V188;
     sessionStorage.setItem(DEV_SESSION_KEY_V188, JSON.stringify(session));
     globalThis.__ATF_DEV_LAUNCHER_V188__.last = { entryId: entry.id, sceneId: entry.sceneId, injections: session.injections, completed: session.completed.length };
     location.assign(DEV_GAME_URL_V188);

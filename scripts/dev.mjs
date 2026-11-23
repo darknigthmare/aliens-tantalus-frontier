@@ -5,7 +5,7 @@ import { AUDIO_MIME_V77 } from '../src/audio-assets-v77.js';
 import { writeAudioManifestV77 } from './audio-scan-v77.mjs';
 import { APP_RELEASE_V143 } from '../src/release-info-v143.js';
 import { stampReleaseHtmlV143 } from './build-release-v143.mjs';
-import { injectDevSessionHtmlV188, isDevSessionRequestV188 } from './dev-tools-server-v188.mjs';
+import { createDevShellStamperV188 } from './dev-tools-server-v188.mjs';
 
 const root = process.cwd();
 const port = Number(process.env.PORT || 4173);
@@ -28,8 +28,11 @@ function safePath(url) {
 }
 
 await writeAudioManifestV77(root);
+// Spec 012: same shell as the public build (release labels, then the inline dev bootstrap, inert without the dev query).
+const devShell = await createDevShellStamperV188(root);
+const shellHtml = html => devShell(stampReleaseHtmlV143(html, APP_RELEASE_V143));
 createServer(async (request, response) => {
-  // Spec 012: the hidden developer launcher (devtools/, source-only) and its isolated game page.
+  // Spec 012: the hidden developer launcher (devtools/); the game page isolates itself (inline bootstrap).
   if ((request.url || '').split('?')[0] === '/dev') { response.writeHead(302, { location: '/devtools/' }).end(); return; }
   let file = safePath(request.url);
   if (!file) { response.writeHead(404, { 'content-type': 'text/plain; charset=utf-8' }).end('Not found'); return; }
@@ -37,8 +40,7 @@ createServer(async (request, response) => {
     const info = await stat(file);
     if (info.isDirectory()) file = join(file, 'index.html');
     const bytes = await readFile(file);
-    const stamped = file === join(root, 'index.html') ? stampReleaseHtmlV143(bytes.toString('utf8'), APP_RELEASE_V143) : bytes;
-    const body = file === join(root, 'index.html') && isDevSessionRequestV188(request.url) ? injectDevSessionHtmlV188(stamped) : stamped;
+    const body = file === join(root, 'index.html') ? shellHtml(bytes.toString('utf8')) : bytes;
     response.writeHead(200, {
       'content-type': mime[extname(file)] || 'application/octet-stream',
       'cache-control': extname(file) === '.html' ? 'no-store' : 'public, max-age=60',
@@ -59,7 +61,7 @@ createServer(async (request, response) => {
       return;
     }
     try {
-      const body = stampReleaseHtmlV143(await readFile(join(root, 'index.html'), 'utf8'), APP_RELEASE_V143);
+      const body = shellHtml(await readFile(join(root, 'index.html'), 'utf8'));
       response.writeHead(200, { 'content-type': mime['.html'], 'cache-control': 'no-store' });
       response.end(body);
     } catch { response.writeHead(404).end('Not found'); }

@@ -1,4 +1,4 @@
-// Developer tools (spec 012, source-only): the shooting range. It is NOT a separate
+// Developer tools (spec 012; shipped hidden, see scripts/build-dev-tools-v188.mjs): the shooting range. It is NOT a separate
 // simulation: it runs inside the real GameEngine (src/game-production-runtime.js) on a
 // normal FRONTIER mission level (lighting, VFX, weapon effects, squad doctrine and
 // placeables are the live layers). A loadout change restarts that same level with the
