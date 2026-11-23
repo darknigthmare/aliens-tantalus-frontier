@@ -831,7 +831,7 @@ Option de développement : `arsenalFeedsV188: false` dans les options de `engine
 
 | # | Question | Valeur appliquée | Autre possibilité |
 | --- | --- | --- | --- |
-| D-012-1 | Exposition de la page de développement | Serveur de développement seulement (`/devtools/`, `/dev`, session `/?atf-dev=v188`) ; fichiers admis en source seulement, absents du build public | Page déployée derrière un paramètre secret (refusé : un paramètre n'est pas une protection) |
+| D-012-1 | Exposition de la page de développement | ~~Serveur de développement seulement (`/devtools/`, `/dev`, session `/?atf-dev=v188`) ; fichiers admis en source seulement, absents du build public~~ **Remplacée le 2026-11-23** (voir « Décision du propriétaire (2026-11-23) » plus bas) | Page déployée derrière un paramètre secret (refusé : un paramètre n'est pas une protection) |
 | D-012-2 | Sauvegarde utilisée par une session de développement | Stockage en mémoire de l'onglet, alimenté par la fixture ; le profil réel n'est ni lu ni écrit ; supprimée en quittant | Emplacement de profil dédié dans `localStorage` (risque d'écrasement par erreur) |
 | D-012-3 | Prérequis impossibles à produire sans falsifier un reçu runtime (retours ARBITER 02-06) | Entrées affichées désactivées avec leur raison | Forger les reçus (refusé : état impossible) |
 | D-012-4 | Réglages du stand | En mémoire, appliqués par relance du niveau, exportés en diff JSON pour revue ; jamais écrits dans les sources | Écriture directe dans `content.js` |
@@ -851,3 +851,24 @@ Demande : « améliorer la Bio Forge — le level design est mal fait ». Audit 
 | B6 | Quête `ship-bioforge` | Non codée ; deux lieux préparés (stockage froid, galerie) | Lot dédié : débat Inez / BISHOP-9 et choix de conservation |
 
 Aucune de ces valeurs ne certifie une fidélité « 1:1 ».
+
+## Décision du propriétaire (2026-11-23) — page de développement livrée cachée dans le build public (spec 012)
+
+Décision : la page de développement cachée (lanceur de scènes et stand de tir) doit **aussi** être disponible dans le build publié, cachée : aucun lien depuis un écran joueur, accessible seulement par une adresse non évidente. Elle remplace la valeur par défaut D-012-1.
+
+Appliqué :
+
+| # | Point | Valeur appliquée | Remarque |
+| --- | --- | --- | --- |
+| D-012-6 | Adresse | `https://<site>/labo-tantalus-v188/` par défaut ; autre nom par `ATF_DEV_TOOLS_PATH` au build (un segment, 8 à 64 caractères `a-z`, `0-9`, `-`) | Le nom par défaut est public (ce dépôt). Un nom posé dans les variables d'environnement de l'hébergeur n'est écrit dans aucun fichier publié hors du dossier. |
+| D-012-7 | Portée de « caché » | Discrétion seulement : aucun contrôle d'accès, `noindex`, aucun lien, nom du dossier absent de `index.html`, `sw.js`, `build-info.json` et `src/` | Ce n'est pas une protection : qui connaît ou devine l'adresse ouvre la page. Aucun secret dans le dépôt. |
+| D-012-8 | Isolation sur hébergement statique | Premier script de `index.html`, en ligne, actif seulement pour `?atf-dev=v188` : `localStorage` → mémoire de l'onglet, `indexedDB` retiré, arrêt de la page si l'isolation échoue | D-012-2 inchangée (profil réel ni lu ni écrit). Le jeu normal n'exécute qu'un test d'expression régulière ; `index.html` publié contient ce script (≈3 Ko). |
+| D-012-9 | Service worker | Fichiers des outils hors précache et hors cache ; lus sur le réseau à la demande | Hors ligne, le lanceur ne s'ouvre pas. |
+| D-012-10 | Distribution | Les neuf fichiers de `devtools/` deviennent des chemins de distribution approuvés ; `scripts/`, `specs/`, `docs/` restent en source seulement | `check:built` contrôle la liste exacte et l'empreinte. |
+| D-012-11 | Téléphone | Lanceur et panneaux utilisables au doigt à 390×844 ; panneaux repliés au départ | Contrôlé en émulation Chromium, pas sur un appareil réel. |
+
+Questions ouvertes :
+
+- **Q-012-1 [PRODUCTION].** Garder le nom par défaut public `labo-tantalus-v188` ou poser `ATF_DEV_TOOLS_PATH` chez l'hébergeur (recommandé si la discrétion compte) ? Dans ce cas l'adresse n'est connue que de ceux à qui elle est donnée, sans être protégée pour autant.
+- **Q-012-2 [PLUS TARD].** Faut-il un interrupteur de build pour publier sans les outils (par exemple une version destinée au public large), ou une protection côté hébergeur (mot de passe) ? Ni l'un ni l'autre n'est fait.
+- **Q-012-3 [PLUS TARD].** Brancher le QA sur le build dans la CI (durée ≈ 6 min avec Chromium) ?
