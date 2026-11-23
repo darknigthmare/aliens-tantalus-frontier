@@ -8,6 +8,7 @@ import { normalizeAct5V188 } from './story-act5-state-v188.js';
 import { normalizeConfrontationsV188 } from './confrontation-state-v188.js';
 
 export const STORY_RELAY_CAMPAIGN_ID_V188 = 'special-archive-relay';
+export const STORY_ACT_ONE_CAMPAIGN_ID_V188 = 'special-narrative-qz17';
 export const STORY_SLICE_STEPS_V188 = Object.freeze(['creation', 'wake', 'ship', 'port', 'briefing', 'qz18', 'debrief', 'next']);
 const MAX_SEEN = 32;
 
@@ -15,6 +16,11 @@ const TEXT = Object.freeze({
   briefing: {
     fr: 'BRIEFING · Port-Méridien attend des réponses. Salle de briefing, table tactique : préparez « Le dernier relais » (QZ-18), puis déployez.',
     en: 'BRIEFING · Port-Méridien wants answers. Briefing room, tactical table: prepare "The Last Relay" (QZ-18), then deploy.'
+  },
+  // Owner decision 2026-11-23 (P-3): Act I (QZ-17) comes first, as in the bible.
+  briefingActOne: {
+    fr: 'BRIEFING · Port-Méridien attend des réponses. Salle de briefing, table tactique : préparez l’Acte I « La cargaison fantôme » (QZ-17), puis déployez.',
+    en: 'BRIEFING · Port-Méridien wants answers. Briefing room, tactical table: prepare Act I "The Ghost Cargo" (QZ-17), then deploy.'
   },
   qz18: {
     fr: 'ACTE II · QZ-18 : reconstituez le dossier du relais et revenez à bord.',
@@ -109,12 +115,16 @@ export function deriveStoryCampaignV188(save, { language = null } = {}) {
   if (save.portMeridienV90 && phase(save.portMeridienV90) !== 'complete') return result('port');
   if (current?.campaignId === STORY_RELAY_CAMPAIGN_ID_V188) return result('qz18', pick('qz18'), STORY_RELAY_CAMPAIGN_ID_V188);
   if (!completed.includes(STORY_RELAY_CAMPAIGN_ID_V188)) {
+    // Owner decision 2026-11-23 (P-3): Act I (QZ-17) is recommended first, then Act II (QZ-18). QZ-18 is
+    // de-prioritised, not locked: a save that already started or finished it stays valid.
+    if (!completed.includes(STORY_ACT_ONE_CAMPAIGN_ID_V188))
+      return result('briefing', current ? null : pick('briefingActOne'), STORY_ACT_ONE_CAMPAIGN_ID_V188);
     // Only the default route: a player already engaged elsewhere keeps control.
     return result('briefing', current ? null : pick('briefing'), STORY_RELAY_CAMPAIGN_ID_V188);
   }
   if (!story.debriefSeen.includes(STORY_RELAY_CAMPAIGN_ID_V188)) return result('debrief', current ? null : pick('debrief'), STORY_RELAY_CAMPAIGN_ID_V188);
   // After QZ-18, the chronological Act I (QZ-17) is recommended until it is done.
-  const actOne = 'special-narrative-qz17', recommended = completed.includes(actOne) ? null : actOne;
+  const actOne = STORY_ACT_ONE_CAMPAIGN_ID_V188, recommended = completed.includes(actOne) ? null : actOne;
   // The text points at a ★ chapter: without one, no story objective is shown.
   return result('next', current || !recommended ? null : pick('next'), recommended);
 }
