@@ -64,7 +64,9 @@ export const KEY_ACTIONS_V188 = Object.freeze([
   { id: 'aim', code: 'ShiftLeft', fr: 'Viser', en: 'Aim' }, { id: 'crouch', code: 'KeyZ', fr: 'S’accroupir', en: 'Crouch' }, { id: 'pause', code: 'KeyP', fr: 'Pause', en: 'Pause' },
   { id: 'objectives', code: 'KeyM', fr: 'Objectifs', en: 'Objectives' },
   // Owner decision 2026-11-23: manual pump of the pump shotguns (only when the option is on).
-  { id: 'pump', code: 'KeyB', fr: 'Pomper (pompe manuelle)', en: 'Pump (manual pump)' }
+  { id: 'pump', code: 'KeyB', fr: 'Pomper (pompe manuelle)', en: 'Pump (manual pump)' },
+  // Owner decision 2026-11-23 (lot C): secondary fire of the weapons that have one (underbarrel launcher, taped incinerator…).
+  { id: 'secondaryFire', code: 'KeyN', fr: 'Tir secondaire', en: 'Secondary fire' }
 ].map(Object.freeze));
 const CODE = /^(Key[A-Z]|Digit[0-9]|Numpad[0-9]|Arrow(Up|Down|Left|Right)|Space|Shift(Left|Right)|Control(Left|Right)|Alt(Left|Right)|Tab|Backquote|Minus|Equal|BracketLeft|BracketRight|Semicolon|Quote|Comma|Period|Slash|Backslash)$/;
 

@@ -154,6 +154,12 @@ export const ARSENAL_UNBRIDGED_SPECIAL_FEEDS_V188 = freeze({
   'weapon-034-sonic-harpoon': 'single-capacity-would-change-balance-owner-decision'
 });
 export { ARSENAL_PLACEHOLDER_CATEGORIES_V188 };
+/** Lot C: a status applied by a thrown device or a secondary flame jet needs a V131 profile to tick; the M240
+ * incinerator carries that bookkeeping (status only — the blast damage keeps the device's own id). */
+export const ARSENAL_STATUS_CARRIER_V188 = 'weapon-006-m240-incinerator-unit';
+/** Thrown devices (lot C): catalogue id → { radius, fuse, status }, all [PROPOSÉ]. */
+export const ARSENAL_THROWN_DEVICES_V188 = freeze(Object.fromEntries(WEAPON_CATALOG_ADDITIONS_V188
+  .filter(weapon => weapon.thrownDeviceV188).map(weapon => [weapon.id, { ...weapon.thrownDeviceV188 }])));
 /** Capacities that the feed mechanism (or the CSV) settles; others keep the catalogue value. */
 const CAPACITY_RULES = freeze({
   single: { capacity: 1, source: 'mechanism: one projectile per tube (CSV Alimentation=single)' },
@@ -259,7 +265,8 @@ function buildProfile(weapon) {
   const modes = [action?.kind === 'burst' ? 'burst-3' : action?.kind === 'scatter' ? (feed.nativeBridge === 'tube' ? 'pump-single' : 'semi-scatter')
     : action?.kind === 'stream' ? 'continuous-stream' : ['rocket', 'launcher'].includes(action?.kind) ? 'single-projectile'
       : ['melee', 'stun', 'torch', 'disc', 'grenade'].includes(action?.kind) ? action.kind : 'automatic'];
-  if (baseId === M41A_UNDERBARREL_HOST_V174) modes.push('underbarrel-30mm-v174-contract-not-native');
+  // Lot C (T106): the 30 mm launcher is native — fired by the secondary-fire action (weapon-secondary-fire-v188.js) on the V174 contract.
+  if (baseId === M41A_UNDERBARREL_HOST_V174) modes.push('underbarrel-30mm-native-secondary-fire-v188');
   const slots = ['muzzle', 'optic', 'side_rail', 'cosmetic',
     { box: 'magwell', drum: 'magwell', belt: 'belt_harness', tank: 'tank_mount', cell: 'cell_port',
       tube: 'chamber', cylinder: 'chamber', single: 'projectile_head' }[feed.kind]].filter(Boolean);
