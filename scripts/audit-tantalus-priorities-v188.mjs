@@ -1351,7 +1351,7 @@ export const TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188 = freeze({ baseline: '0d1
   },
   "src/app.js": {
     "previousSha256": "2db6b8019a1e5fd30d96a43f89f09da34d1246c7127e2e89bd2d3cbab6735968",
-    "currentSha256": "a43c8814b784d926bdc8c5944d634f665744347788826487cb80e69d097baf29"
+    "currentSha256": "e5673e45690c84143788445258103310f916debbc5e46270d4a2ab061728e5c0"
   },
   "src/bioforge-level-v80.js": {
     "previousSha256": "6f29d2e2b09c65748d142fedbfac1b2016666889e4dffdcfdc8c9cd77d08e896",
