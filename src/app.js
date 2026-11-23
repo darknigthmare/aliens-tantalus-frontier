@@ -551,6 +551,7 @@ function applyRuntimeSettings() {
   document.documentElement.dataset.quality = settings.quality || 'high';
   document.documentElement.dataset.contrast = settings.contrast || 'standard';
   document.documentElement.dataset.subtitles = settings.subtitles ? 'on' : 'off';
+  syncPumpTouchButtonV188();
   hubEngine.setReducedMotion(Boolean(settings.reducedMotion));
   engine.setCoop(Boolean(settings.coop));
   audio.setVolumes({ effects: settings.effects ?? 0.7, music: settings.music ?? 0.45 });
@@ -3196,7 +3197,8 @@ function renderHubTrainingControlsV132() {
   const root = byId('hub-training-controls-v132');
   const model = activeView === 'hub' ? hubEngine.getHubTrainingCommandsV132?.() : null;
   root.hidden = !model?.context;
-  if (!model?.context) return;
+  // V188 2026-11-23 (R4): outside a console, no stale command button stays in the document.
+  if (!model?.context) { if (root.innerHTML) root.innerHTML = ''; return; }
   const rooms = HUB_DECKS.flatMap(deck => deck.rooms);
   const html = model.commands.map(command => {
     const door = command.id === 'door-toggle' ? model.doors.find(door => door.id === command.value) : null;
@@ -4570,8 +4572,15 @@ function persistHub(patch) {
   const annex = hubEngine.currentAnnexV71();
   const parentY = annex ? hubEngine.annexReturnPoseV71?.y ?? hubEngine.restoreReturnPoseV71(annex).y : hubEngine.player?.y;
   const height = Number.isFinite(parentY) ? { positionY: Math.round(parentY) } : {};
-  saveSystem.commit({ hub: { ...clone(saveSystem.data.hub), ...patch, ...height } });
+  // V188 2026-11-23 (R5): a profile changed in another session is reported in the interface, not as a page error.
+  try { saveSystem.commit({ hub: { ...clone(saveSystem.data.hub), ...patch, ...height } }); hubSaveConflictAtV188 = 0; }
+  catch (error) {
+    if (error?.code !== 'SAVE_CONFLICT') throw error;
+    const now = Date.now();
+    if (now - hubSaveConflictAtV188 > 15000) { hubSaveConflictAtV188 = now; toast(error.message); }
+  }
 }
+let hubSaveConflictAtV188 = 0;
 
 function applyHubService(action) {
   const windowId = Math.floor(absoluteHours(saveSystem.data.clock) / 6);
