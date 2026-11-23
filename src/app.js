@@ -34,7 +34,7 @@ import { filterAct5CampaignsV188, act5LockReasonV188, act5LockTextV188, applyAct
 import { confrontationViewV188, playConfrontationMoveV188 } from './confrontation-v188.js';
 // Spec 009 × spec 010: the CASSIUS hearing of S2.
 import { confrontationStateV188, confrontationOutcomeV188, startConfrontationV188, CASSIUS_INTERROGATION_V188 } from './confrontation-v188.js';
-import { STATION_CASSIUS_HEARING_ID_V188 } from './station-mission-levels-v188.js';
+import { STATION_CASSIUS_HEARING_ID_V188, applyStationLevelResultV188 } from './station-mission-levels-v188.js';
 import { openConfrontationDialogV188 } from './confrontation-ui-v188.js';
 import { isAct5RaceCampaignV188, act5RaceCueV188 } from './act5-convoy-race-v188.js';
 import { Act5AssetLoaderV188, watchAct5PictureV188 } from './act5-slots-v188.js';
@@ -4111,6 +4111,8 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   const colonyMissionV188 = applyColonyMissionResultV188(candidate, { success: resolvedSuccess, campaignId: operation.campaignId });
   // V188 dedicated colony levels: converts killed in C4 cost Port-Méridien stability [PROPOSÉ]; the C4 decision is unchanged.
   applyColonyLevelResultV188(candidate, { success: resolvedSuccess, campaignId: operation.campaignId, result: engine.colonyLevelResultV188?.() || null });
+  // V188 station levels (owner decision 2026-11-23, S9-2): the first successful S1 records how Grue's salvagers were passed; S4 reads it.
+  applyStationLevelResultV188(candidate, { success: resolvedSuccess, campaignId: operation.campaignId, result: engine.stationLevelResultV188?.() || null });
   // V188 reconstruction (bible §6.3): an operation on Cocyte validates or damages a site.
   const colonyChangeV188 = applyColonyOperationResultV188(candidate, { success: resolvedSuccess, worldId: operation.worldId || campaign?.worldId });
   // V188 crew quests (bible §8.1): DAVID-8R's relay components come back from successful operations on Cocyte.

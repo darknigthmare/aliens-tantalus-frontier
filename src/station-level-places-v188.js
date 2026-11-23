@@ -40,7 +40,12 @@ export function stationPlacesV188(engine) {
 /** S1 « L’arrimage »: collar and manual airlock → dark ring (fans, Echo-8 traces, salvagers) → control deck. */
 export function stationS1PlacesV188(engine) {
   const s = stationPlacesV188(engine), { x, decks } = s;
+  // Owner decision 2026-11-23 (S9-1): the docking collar, from the west end of its floor to the dock bulkhead, is a
+  // 2.5D depth corridor (depth-hold-sections-v188.js, `station-s1-docking-collar`); the rest of S1 stays side view.
+  const collarFloor = list(engine?.platforms).filter(entry => entry.zoneId === 'ship-docking' && Math.abs(Number(entry.y) - decks.low) < 1);
+  const floorStart = collarFloor.length ? Math.min(...collarFloor.map(entry => Number(entry.x))) : 55;
   return Object.freeze({ ...s,
+    corridor: Object.freeze({ x0: round(floorStart + 2), x1: round(s.doors.dock ? s.doors.dock.x : x.dockDoor - 22) }),
     collar: Object.freeze({ x: Math.max(20, x.drop - 160), y: decks.low }), // Echo-8’s dropship behind the collar window, at the west end
     crank: Object.freeze({ x: x.dockDoor - 70, y: decks.low }),
     fans: Object.freeze([Object.freeze({ x: x.cargo - 51, y: decks.low }), Object.freeze({ x: x.service + 80, y: decks.mid })]),
@@ -86,7 +91,11 @@ export function stationS4PlacesV188(engine) {
     valves: Object.freeze([Object.freeze({ id: 'junction', x: x.junction - 200, y: decks.mid }), Object.freeze({ id: 'habitation', x: x.crew - 110, y: decks.mid }),
       Object.freeze({ id: 'ring', x: x.service - 20, y: decks.mid })]),
     dock: dockFloor, hold: Object.freeze({ x: round((dockFloor.x0 + dockFloor.x1) / 2), y: decks.low, radius: 300 }),
-    arrival: Object.freeze({ x: dockFloor.x0 + 40, y: decks.low })
+    arrival: Object.freeze({ x: dockFloor.x0 + 40, y: decks.low }),
+    // Owner decisions 2026-11-23 [PROPOSÉ placements]: Grue's people by the dock bulkhead (S9-2); the volunteer
+    // colonists of Port-Méridien behind the technical team, walking in from the collar (S9-5).
+    grue: Object.freeze({ x: x.dockDoor - 150, y: decks.low }),
+    volunteers: Object.freeze({ x: dockFloor.x0 + 330, step: 44, y: decks.low })
   });
 }
 

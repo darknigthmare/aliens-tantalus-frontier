@@ -52,6 +52,7 @@ export const CASSIUS_EFFECTS_V188 = Object.freeze({
   erase: Object.freeze({ quarantine: 0, stability: 0 })
 });
 const SCENE_IDS = Object.freeze(['s1', 's3', 's4']);
+export const STATION_S1_SALVAGER_OUTCOMES_V188 = Object.freeze(['negotiated', 'forced']);
 
 export function createStationV188() { return { schema: 188, introHeard: false, cassius: null, scenesSeen: [] }; }
 export function normalizeStationV188(raw) {
@@ -60,7 +61,33 @@ export function normalizeStationV188(raw) {
   base.introHeard = raw.introHeard === true;
   base.cassius = CASSIUS_CHOICES_V188.includes(raw.cassius) ? raw.cassius : null;
   base.scenesSeen = Array.isArray(raw.scenesSeen) ? [...new Set(raw.scenesSeen.filter(id => SCENE_IDS.includes(id)))] : [];
+  // Additive (owner decision 2026-11-23, S9-2): present only once S1 was completed with the dedicated level.
+  if (STATION_S1_SALVAGER_OUTCOMES_V188.includes(raw.s1Salvagers)) base.s1Salvagers = raw.s1Salvagers;
   return base;
+}
+
+// —— S1 salvagers → S4 dock (owner decision 2026-11-23, S9-2; bible §7.2 « récupérateurs alliés si négociés ») ——
+/** How Echo-9 passed Grue's salvagers in S1. Recorded once, by the first successful S1 [PROPOSÉ]. */
+export function recordStationS1SalvagersV188(save, outcome) {
+  if (!save || !STATION_S1_SALVAGER_OUTCOMES_V188.includes(outcome)) return false;
+  const station = normalizeStationV188(save.stationV188);
+  if (station.s1Salvagers) { save.stationV188 = station; return false; }
+  station.s1Salvagers = outcome; save.stationV188 = station; return true;
+}
+/**
+ * Grue at the dock of S4 [PROPOSÉ]. The S1 outcome comes first; the colony decision « Le prix de Grue »
+ * (`colonyMissionsV188.grue`) only matters when the bulkhead was forced, or when S1 recorded nothing.
+ * - negotiated → 'ally': her salvagers cover the dock during the hold and she comes aboard with the team,
+ *   whatever Port-Méridien answered to her price (the ring agreement is hers, not the colony's);
+ * - forced, price accepted → 'absent': the trade with the colony goes on, nobody comes to the dock;
+ * - forced, price refused or not decided → 'hostile': armed salvagers come to the dock during the hold;
+ * - nothing recorded (S1 finished before this field existed) → the behaviour of that time:
+ *   'present' when the price was accepted (she comes aboard with the team, no help), 'absent' otherwise.
+ */
+export function stationGrueAtDockV188(save) {
+  const outcome = normalizeStationV188(save?.stationV188).s1Salvagers || null, price = save?.colonyMissionsV188?.grue || null;
+  const mode = outcome === 'negotiated' ? 'ally' : outcome === 'forced' ? (price === 'accept' ? 'absent' : 'hostile') : price === 'accept' ? 'present' : 'absent';
+  return Object.freeze({ mode, s1Salvagers: outcome, price, aboard: mode === 'ally' || mode === 'present' });
 }
 
 const completed = save => Array.isArray(save?.galaxy?.completedCampaignIds) ? save.galaxy.completedCampaignIds : [];

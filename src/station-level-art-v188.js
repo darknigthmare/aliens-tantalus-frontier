@@ -38,7 +38,8 @@ export const STATION_LEVEL_ART_SLOTS_V188 = Object.freeze([
   slot('station-xeno-egg', 'floor', 41, 46, 'S3: an egg of the transit laboratory, closed, opening or spent (0.8 × 0.9 m).', 'documented'),
   slot('station-survivor-log', 'wall', 41, 41, 'S3: survivors’ log terminal, entries stop on day four (0.8 m).', 'to-define'),
   slot('station-kessler-tag', 'floor', 20, 12, 'S3: Sergeant Dario Kessler’s tag and the team’s last recording (0.4 m).', 'to-define'),
-  slot('station-power-router', 'wall', 76, 72, 'S3: power routing panel, three circuits for two feeds (1.5 × 1.4 m).', 'to-define')
+  slot('station-power-router', 'wall', 76, 72, 'S3: power routing panel, three circuits for two feeds (1.5 × 1.4 m).', 'to-define'),
+  slot('station-volunteer-colonist', 'actor', 44, 89, 'S4: a volunteer colonist of Port-Méridien arriving at the dock behind the technical team (owner decision 2026-11-23; coat varies with the index).', 'to-define')
 ]);
 export const STATION_LEVEL_ART_SLOT_IDS_V188 = Object.freeze(STATION_LEVEL_ART_SLOTS_V188.map(entry => entry.id));
 /** Placeholder slots with an authored PNG physically present (none yet). */
@@ -109,6 +110,11 @@ function drawSlotPrimitive(ctx, id, x, y, w, h, o) {
     case 'station-technician': figure(ctx, x, y, w, h, '#556066', '#e0a33a'); break;
     case 'station-salvager': figure(ctx, x, y, w, h, '#5b4630', '#e0873a'); break;
     case 'station-grue': figure(ctx, x, y, w, h, '#4b4a3c', '#c9a54a'); break;
+    case 'station-volunteer-colonist': {
+      // Port-Méridien work clothes, a kit bag in one hand; three coats so that a group does not read as clones.
+      const coats = ['#6a5a48', '#4f5d52', '#5a4f63'], index = Math.abs(Math.floor(Number(o.index) || 0));
+      figure(ctx, x, y, w, h, coats[index % coats.length], '#b8c2b0'); ctx.fillStyle = '#3a3329'; ctx.fillRect(x + w * (index % 2 ? .02 : .76), y + h * .62, w * .22, h * .2); break;
+    }
     case 'station-manual-crank': {
       ctx.fillStyle = '#20272a'; ctx.fillRect(x, y, w, h); ctx.strokeStyle = '#c9a54a'; ctx.lineWidth = 4;
       const a = (Number(o.progress) || 0) * Math.PI * 8; ctx.beginPath(); ctx.moveTo(x + w / 2, y + h / 2); ctx.lineTo(x + w / 2 + Math.cos(a) * 16, y + h / 2 + Math.sin(a) * 16); ctx.stroke(); break;

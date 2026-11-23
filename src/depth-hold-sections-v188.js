@@ -18,6 +18,7 @@ import { qz17HoldLayoutV188, unfitForHoldV188 } from './qz17-level-dressing-v188
 import { blockedByFootprintV188 } from './hub-depth-rooms-v188.js';
 import { selectMissionTemplateV52 } from './mission-levels-v52.js';
 import { colonyC1PlacesV188 } from './colony-level-places-v188.js';
+import { stationS1PlacesV188 } from './station-level-places-v188.js';
 
 export const DEPTH_HOLD_LANE_MIN_V188 = 20;
 export const DEPTH_HOLD_Z_PER_METRE_V188 = 22;
@@ -137,7 +138,8 @@ export function placeHoldPropsV188(specs, bounds, features, { zMin = -80, zMax =
 
 // V188 colony levels: C2 « L'air du port » is an interior of Port-Méridien, played in V1 (bible §43.1).
 // V188 station levels (spec 009): S1-S4 are the decks of Asphodèle, played in V1; the freighter
-// cargo hold (crate stacks of a cargo ship) does not belong to a relay station.
+// cargo hold (crate stacks of a cargo ship) does not belong to a relay station. Since the owner
+// decision of 2026-11-23 (S9-1), S1 has its own definition below: the docking collar only.
 const V1_INTERIOR_CAMPAIGNS = Object.freeze(['colony-c2', 'station-s1', 'station-s2', 'station-s3', 'station-s4']);
 const isShipCampaignOfItsOwn = (campaign, world) => {
   if (!campaign || campaign.specialOperationId || String(campaign.id || '').startsWith('special-') || V1_INTERIOR_CAMPAIGNS.includes(campaign.id)) return false;
@@ -221,6 +223,35 @@ export const DEPTH_HOLD_DEFINITIONS_V188 = Object.freeze([
         Object.freeze({ id: 'colony-drums-street', kind: 'drum-rack', slot: 'freighter-drum-rack', w: 96, h: 52, z: -73, z0: -88, z1: -66, at: at(places.plaza + 170) }),
         Object.freeze({ id: 'colony-medical-crate', kind: 'quarantine-crate', slot: 'quarantine-crate', w: 92, h: 61, z: -67, z0: -86, z1: -54, at: at(places.infirmary - 260) }),
         Object.freeze({ id: 'colony-freight-platform', kind: 'crate-stack', slot: 'freighter-crate-stack', w: 61, h: 92, z: -47, z0: -60, z1: -34, at: at(places.pad + 260), labels: ['PM-31', 'PM-32'] })
+      ], bounds, features, this);
+      return { props: placed, bay: null, skipped };
+    },
+    sleeperSlots: Object.freeze([])
+  }),
+  // V188 station levels, owner decision 2026-11-23 (S9-1): the docking collar of S1 « L’arrimage », from the west
+  // end of the collar floor to the dock bulkhead (station-level-places-v188.js), is a depth corridor like C1; the
+  // ring, the reactor deck and the control deck stay side view. Echo-8's dropship stays docked behind the collar
+  // window (wall art of the level); what the lost team left on the collar floor reuses the shipped hold slots
+  // [PROPOSÉ]: a pallet of crates by the ladder, drums in front of the window, a sealed medical crate before the
+  // airlock. The collar lift is parked at floor level by the level layer (the station has no power).
+  Object.freeze({
+    id: 'station-s1-docking-collar', spec: 'station-levels', campaignIds: Object.freeze(['station-s1']),
+    zoneId: 'ship-docking', zMin: -80, zMax: 0, doorBand: 20, interactBand: 24, speed: 150, railCovers: true, bigCastes: 'span',
+    bounds(engine) {
+      const places = stationS1PlacesV188(engine), { x0, x1 } = places.corridor, floorY = places.decks.low;
+      const floor = list(engine?.platforms).some(entry => Math.abs(entry.y - floorY) < 1 && entry.x <= x0 + 40 && entry.x + entry.w >= x0);
+      return floor && places.doors.dock && x1 - x0 > 300 ? { x0, x1, floorY } : null;
+    },
+    layout(bounds, engine) {
+      const places = stationS1PlacesV188(engine), at = x => x - bounds.x0;
+      // The level's own wall art is wall content too: the collar window (Echo-8's dropship) and the manual crank.
+      const features = [...holdWallFeaturesV188(engine, bounds),
+        { id: 'station:collar-window', kind: 'wall-art', x0: places.collar.x - 4, x1: places.collar.x + 364 },
+        { id: 'station:crank', kind: 'wall-art', x0: places.crank.x - 27, x1: places.crank.x + 27 }].sort((a, b) => a.x0 - b.x0);
+      const { placed, skipped } = placeHoldPropsV188([
+        Object.freeze({ id: 'station-collar-drums', kind: 'drum-rack', slot: 'freighter-drum-rack', w: 96, h: 52, z: -73, z0: -88, z1: -66, at: at(places.collar.x + 250) }),
+        Object.freeze({ id: 'station-collar-crates', kind: 'crate-stack', slot: 'freighter-crate-stack', w: 61, h: 92, z: -47, z0: -60, z1: -34, at: at(places.ladders.dock - 96), labels: ['E8-1', 'E8-2'] }),
+        Object.freeze({ id: 'station-collar-medical', kind: 'quarantine-crate', slot: 'quarantine-crate', w: 92, h: 61, z: -67, z0: -86, z1: -54, at: at(places.crank.x - 150) })
       ], bounds, features, this);
       return { props: placed, bay: null, skipped };
     },
