@@ -571,6 +571,7 @@ const FORGE_TOOLING_V140 = new Set([
   // V188 first side campaign « La Saison des Reines » (spec 011): suite, browser QA and spec, source-only exact paths.
   'scripts/verify-side-campaign-queens-v188.mjs',
   'scripts/qa-side-campaign-queens-v188.mjs',
+  'scripts/qa-side-campaign-queens-arcs-v188.mjs',
   'specs/011-saison-des-reines',
   'specs/011-saison-des-reines/spec.md',
   'specs/011-saison-des-reines/plan.md',

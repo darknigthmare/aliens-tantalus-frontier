@@ -24,7 +24,10 @@ import { STATION_LEVEL_PHASES_V188 } from '../src/station-mission-levels-v188.js
 import { act5StateV188 } from '../src/story-act5-v188.js';
 import { normalizeStoryCampaignV188 } from '../src/story-campaign-v188.js';
 import { confrontationStateV188 } from '../src/confrontation-v188.js';
-import { queensStateV188, QUEENS_NACRE_WORLD_ID_V188 } from '../src/side-campaign-queens-v188.js';
+import { queensStateV188, QUEENS_NACRE_WORLD_ID_V188, QUEENS_ECHO_WORLD_ID_V188, QUEENS_TR0_WORLD_ID_V188, QUEENS_ARCS_V188, QUEENS_CHAPTER_IDS_V188,
+  queensReturnSceneDueV188, queensDebriefDueV188, queensLockReasonV188, queensPendingChoiceV188, queensCampaignCompleteV188 } from '../src/side-campaign-queens-v188.js';
+import { QUEENS_CREW_QUESTS_V188 } from '../src/queens-crew-quests-v188.js';
+import { crewQuestActionsV188 } from '../src/crew-quests-v188.js';
 
 const catalog = buildDevCatalogV188();
 const sessions = new Map(catalog.filter(entry => !entry.blocked).map(entry => [entry.id, buildDevSessionV188(entry, { language: 'fr' })]));
@@ -88,6 +91,40 @@ test('story states: Interlude, council, hearing, each ending, epilogue, Saison d
   assert.equal(saveOf('queens-travel').galaxy.jumpV116.phase, 'charging');
   assert.ok(queensStateV188(saveOf('queens-arrival')).arrivedDay, 'arrival recorded by recordQueensArrivalV188');
   assert.equal(saveOf('queens-arrival').galaxy.shipWorldIdV116, QUEENS_NACRE_WORLD_ID_V188, 'the jump was settled by confirmJumpV115');
+  // Spec 011, second lot: every new step of Arcs 2 and 3 is reachable, built with the campaign's own rules.
+  const ids = new Set(catalog.map(entry => entry.id));
+  for (const arc of QUEENS_ARCS_V188) {
+    for (const id of arc.order) assert.ok(ids.has(`queens-arc${arc.arc}-${id}`), `${id}: story entry`);
+    for (const item of [...arc.sides, ...arc.contracts]) assert.ok(ids.has(`queens-side-${item.id}`), `${item.id}: side entry`);
+  }
+  assert.equal(saveOf('queens-arc2-arrival').galaxy.shipWorldIdV116, QUEENS_ECHO_WORLD_ID_V188);
+  assert.equal(queensReturnSceneDueV188(saveOf('queens-arc2-arrival')), 'echo-arrival');
+  assert.equal(saveOf('queens-arc3-arrival').galaxy.shipWorldIdV116, QUEENS_TR0_WORLD_ID_V188);
+  assert.equal(queensReturnSceneDueV188(saveOf('queens-arc3-arrival')), 'tr0-arrival', 'CQ-04 then the arrival scene');
+  assert.equal(queensDebriefDueV188(saveOf('queens-arc1-debrief')), 'arc1-debrief');
+  assert.equal(queensDebriefDueV188(saveOf('queens-arc2-debrief')), 'arc2-debrief');
+  assert.ok(saveOf('queens-tr0-map').galaxy.unlockedWorldIds.includes(QUEENS_TR0_WORLD_ID_V188), 'TR-0 revealed by 2.5');
+  assert.equal(saveOf('queens-arrival').galaxy.unlockedWorldIds.includes(QUEENS_TR0_WORLD_ID_V188), false, 'TR-0 hidden before Arc 3');
+  assert.equal(queensStateV188(saveOf('queens-side-queens-a-rask')).raskEgg, 'release', 'Rask calls only those who let him go');
+  assert.equal(queensLockReasonV188(saveOf('queens-side-queens-a-grue'), 'queens-a-grue'), null, 'Grue is an ally in that fixture');
+  const crisis = saveOf('queens-egg-crisis');
+  assert.equal(queensStateV188(crisis).eggCrisis.phase, 'alert');
+  assert.deepEqual([crisis.hub.activeCrisis.id, crisis.hub.activeCrisis.deck, crisis.hub.activeCrisis.roomId, crisis.hub.activeCrisis.resolved],
+    [queensStateV188(crisis).eggCrisis.crisisId, 2, 'quarantine', false], 'the hub crisis created by createHubCrisis');
+  assert.equal(queensStateV188(saveOf('queens-egg-after')).eggCrisis.outcome, 'neutralised');
+  assert.equal(queensReturnSceneDueV188(saveOf('queens-egg-after')), 'egg-crisis-after');
+  assert.equal(queensPendingChoiceV188(saveOf('queens-specimen-choice'))?.id, 'specimen');
+  for (const choice of ['inez', 'bishop']) {
+    const ending = saveOf(`queens-ending-${choice}`);
+    assert.equal(queensStateV188(ending).specimen, choice); assert.equal(queensCampaignCompleteV188(ending), true);
+    assert.equal(queensDebriefDueV188(ending), 'campaign-debrief', choice);
+  }
+  assert.equal(queensStateV188(saveOf('queens-ending-egg')).eggCrisis.outcome, 'extracted');
+  assert.equal(queensDebriefDueV188(saveOf('queens-ending-egg')), 'campaign-debrief');
+  const quests = saveOf('queens-crew-quests');
+  for (const quest of QUEENS_CREW_QUESTS_V188) assert.ok(crewQuestActionsV188(quests, quest.crewId, 'fr').some(entry => entry.id === quest.id && entry.action === 'accept'), `${quest.id} is offered`);
+  // The moved chapters are listed with their arc, not among the special operations.
+  for (const id of QUEENS_CHAPTER_IDS_V188) assert.equal(catalog.filter(entry => entry.launch.campaignId === id).every(entry => entry.category === 'queens'), true, id);
   assert.equal(saveOf('colony-c4-decision').colonyMissionsV188.c4, null);
   assert.equal(saveOf('station-cassius-choice').stationV188.cassius, null);
   assert.equal(saveOf('station-intro').stationV188.introHeard, false);

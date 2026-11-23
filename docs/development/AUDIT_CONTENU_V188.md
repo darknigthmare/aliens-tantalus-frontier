@@ -40,7 +40,7 @@ Ces comptes conservent l'instantané du commit `250d81a` ; une ligne peut regrou
 3. **Acte V et fins (§5.6-§5.8)** : conseil de guerre, course APC, trois fins et épilogue absents ; la logique du choix final existe (`story-dossier-v188.js`) sans écran. Q1-Q5. *Mis à jour par la spec 006 : voir « Résultat du lot (spec 006) ».*
 4. **Missions de la colonie C1-C5 et annexes (§6.2)** : aucune. La reconstruction est validée par n'importe quelle opération réussie sur Cocyte (adaptation provisoire). Q25.
 5. **Voyage galactique (§13.2)** : le saut coûte du carburant, mais aucun temps ne passe. Q21 : coût fixe par saut, en carburant et en jours, affiché avant le départ.
-6. **Campagnes annexes (§14-§18)** : les chapitres V131 sont jouables isolément, mais aucune campagne, aucun arc, aucun appel ; leur `worldId` reste `world-05-lethe`. Q13 et Q15 : après l'Acte V, campagne par campagne. *Mise à jour du 22 novembre 2026 (spec 011) : campagne 1 partielle — appel, voyage, arc 1 (Nacre-7) et compte rendu de l'arc jouables ; Abysse Noir déplacé sur Nacre-7 ; arcs 2-3 et campagnes 2-5 manquants. Les `worldId` relevés n'étaient pas tous `world-05-lethe` (bible §13.4).*
+6. **Campagnes annexes (§14-§18)** : les chapitres V131 sont jouables isolément, mais aucune campagne, aucun arc, aucun appel ; leur `worldId` reste `world-05-lethe`. Q13 et Q15 : après l'Acte V, campagne par campagne. *Mise à jour du 22 novembre 2026 (spec 011) : campagne 1 partielle — appel, voyage, arc 1 (Nacre-7) et compte rendu de l'arc jouables ; Abysse Noir déplacé sur Nacre-7 ; arcs 2-3 et campagnes 2-5 manquants. Les `worldId` relevés n'étaient pas tous `world-05-lethe` (bible §13.4).* *Mise à jour du 23 novembre 2026 (spec 011, second lot) : arcs 2 (Echo Basin) et 3 (TR-0, 65e monde, caché jusqu'à l'arc 3) jouables de bout en bout sur gabarits génériques, chapitres Broodstorm, Reine-Mère et Ruche-monde déplacés, choix, fin et crise de l'œuf saisi ; niveaux dédiés, art et campagnes 2-5 manquants.*
 7. **Archives MIRE généralisées et protocoles (§26)** : seule l'archive 001 existe ; aucun protocole. Q18 et Q19 : archives originales d'abord.
 
 ## 1. Prologue et tranche verticale (§4, §53.1, §56.2)
@@ -117,8 +117,8 @@ Les statuts « À faire » du §53 (tir, tension, caste, accessibilité, répliq
 | --- | --- | --- |
 | Carte galactique et saut (`navigate:galaxy`) | Partiel | `galaxy-jump-v115.js` : carburant `2 + ⌈danger/3⌉`, séquence de 8 s ; **aucun temps de voyage** (Q21) |
 | Messages en retard, colonies qui évoluent pendant le voyage (§13.2) | Partiel (lot colonie et équipage) | `travel-messages-v188.js` : 3 à 5 messages par saut, une fois, au journal des alertes, FR/EN ; les mondes évoluent déjà (simulation) ; vieillissement de l'équipage absent |
-| Chapitres V131 raccordés à leur campagne (§13.4) | Partiel | Abysse Noir raccordé à l'arc 1 sur `world-31-nacre-7` (spec 011, ancien monde accepté pour un déploiement en cours) ; les autres restent isolés sur leur monde actuel (Ceto n'était pas Cocyte : relevé en bible §13.4) ; déplacement campagne par campagne (Q15) |
-| Campagne 1 *La Saison des Reines* (§14) | Partiel | Spec 011 : appel après l'Acte V, acceptation, saut vers Nacre-7, arc 1 (3 missions, le chapitre, 3 annexes, 3 contrats sur gabarits génériques), choix de Rask, scènes et compte rendu, CQ-01/CQ-02 en primitives. Manquent : arcs 2 et 3, TR-0, quêtes, récompenses, niveaux dédiés et **art** |
+| Chapitres V131 raccordés à leur campagne (§13.4) | Partiel | Campagne 1 raccordée (spec 011) : Abysse Noir sur `world-31-nacre-7`, Broodstorm sur `world-27-echo-basin`, Reine-Mère et Ruche-monde sur `world-65-tr-0` (ancien monde accepté pour un déploiement en cours ; verrouillés jusqu'à leur place, puis librement rejouables) ; les chapitres des campagnes 2 à 5 restent isolés sur leur monde actuel (Ceto n'était pas Cocyte : relevé en bible §13.4) ; déplacement campagne par campagne (Q15) |
+| Campagne 1 *La Saison des Reines* (§14) | Partiel | Spec 011 : appel après l'Acte V, acceptation, sauts vers Nacre-7, Echo Basin et TR-0 ; trois arcs jouables de bout en bout (9 missions propres d'histoire, 4 chapitres réutilisés, 9 annexes, 6 contrats) sur gabarits génériques ; choix de Rask et du Praetorian, crise de l'œuf saisi à bord, comptes rendus et fin nuancée ; CQ-01 à CQ-06 jouées en primitives ; quêtes `ship-q-*` et bestiaire. Manquent : niveaux dédiés, **art**, variantes de castes, arme anti-Reine, statistiques Cheyenne/smartgun, recrue Navarre, effets sur la campagne 5 |
 | Campagnes 2 à 5 (§15-§18) | Manquant | Chapitres V131 réutilisables ; aucun arc, appel, cinématique ni quête liée. Q13 : après l'Acte V |
 | Mondes proposés (Kéos, Murmure, Tyndare, Pangaea, Hiéron, *Clémence*, *Bonne-Espérance*) | Manquant | Absents du catalogue |
 | Déblocage et ordre des campagnes (§13.5) | Partiel | Campagne 1 après le générique de l'Acte V (spec 011) ; campagnes 2 à 5 non raccordées |
@@ -660,6 +660,27 @@ Inchangés : identifiants de contenu (le chapitre garde `special-black-abyss-v13
 Fidélité : rien n'est déclaré « 1:1 » ; aucune image générée ; CQ-01 à CQ-06 et les scènes sont des primitives Canvas nommées.
 
 Vérifications réellement exécutées : voir le rapport de la PR, `scripts/verify-side-campaign-queens-v188.mjs` (dans `test:priorities:v188`) et le parcours Chromium `scripts/qa-side-campaign-queens-v188.mjs` (fixtures et injections déclarées en tête : fin de l'Acte V posée dans la sauvegarde importée, objectif générique marqué atteint avant `completeMission()`, chapitre Abysse Noir posé comme fait dans le second profil faute de reçu V131 sans partie jouée). Un parcours injecté ne vaut pas une partie jouée sans aide ; combats et équilibrage restent à éprouver.
+
+## Campagne annexe 1 « La Saison des Reines » — arcs 2 et 3, monde TR-0 (2026-11-23)
+
+Spec `specs/011-saison-des-reines` (second lot) ; bible §13.4, §14.11. Décisions du propriétaire du 2026-11-23 : R1 confirmé ; chapitres verrouillés jusqu'à leur place puis librement rejouables ; crise de l'œuf saisi plus tard, à l'arc 2 ou 3 ; TR-0 comme 65e monde, caché jusqu'à l'arc 3. Code : `src/side-campaign-queens-v188.js`, `src/queens-crew-quests-v188.js` (nouveau), `src/queens-cinematics-v188.js`, `src/content-core-v50.js`, `src/legacy-operation-state-v131.js`, `src/ecosystem-missions-v131.js`, `src/crew-quests-v188.js`, `src/world-crisis-core.js`, `src/world-crisis.js`, `src/save.js`, `src/app.js`, `devtools/`.
+
+| Élément | Avant | Après | Reste |
+| --- | --- | --- | --- |
+| Monde TR-0 | Absent du catalogue (64 mondes) | `world-65-tr-0`, 65e monde, `project-canon`, ajouté à la fin de `WORLDS` ; les 64 mondes générés et tout ce qui en dérive sont identiques (empreintes comparées avec la base) ; caché jusqu'à la fin de l'arc 2, jamais ouvert par les déblocages génériques | État du monde après la campagne ; mission `orig-tr0-1` (§39.3) |
+| Arc 2 (Echo Basin) | Manquant | 2.1, 2.2, Broodstorm (2.3), 2.4, 2.5 dans l'ordre ; 4 annexes (deux conditionnelles), 3 contrats ; lignées fouisseuse et aérienne ; CQ-03 ; compte rendu | Niveaux dédiés (faux signaux, sol qui s'ouvre, combat en hauteur), art, biomes d'Echo Basin |
+| Arc 3 (TR-0) | Manquant | 3.1, 3.2, Reine-Mère (3.3-3.4), Ruche-monde (3.5) dans l'ordre ; 2 annexes ; lignée Mère ; CQ-04, CQ-05, CQ-06 ; fin de campagne nuancée | Niveaux dédiés (alerte au bruit, Base Ombelle), art |
+| Chapitres réutilisés | Abysse Noir seul déplacé ; rejouable seulement en orbite | Les quatre déplacés avec `legacyWorldIdsV188` ; verrouillés jusqu'à leur place, puis rejouables depuis toute orbite sans refaire avancer la campagne | Chapitres des campagnes 2 à 5 |
+| Œuf saisi | Risque enregistré, aucune crise | Crise du hub existante (pont 2, quarantaine) au réveil en orbite de TR-0, par `createHubCrisis` ; deux issues ; l'arc 3 attend ; l'Interlude n'est pas modifié | — |
+| Choix et fin | Œuf de Rask | + Praetorian vivant (Inez / BISHOP-9), Rask sauvé (dérivé), fin unique nuancée | Effets sur la campagne 5 |
+| Quêtes §14.9, récompenses §14.10 | Manquant | Trois quêtes d'analyse après l'arc 2 ; bestiaire des adaptations | Statistiques smartgun et Cheyenne, arme anti-Reine, HADAL hors chapitre, recrue Navarre |
+| Outils de développement | Entrées de l'arc 1 | Une entrée par mission, arrivée, choix, compte rendu, crise et fin des arcs 2 et 3 | — |
+
+Compteurs : `WORLDS` 64 → 65 ; `CAMPAIGNS` 511 → 526 (15 missions propres aux arcs 2 et 3) ; quêtes d'équipage 16 → 19. Inchangés : identifiants de contenu, succès déjà enregistrés, validateur de sauvegarde (champs additifs dans `sideCampaignsV188.queens` ; état du monde TR-0 créé par la migration existante). Le moteur et l'ordre des mixins ne changent pas.
+
+Honnêteté : « jouable » signifie ici une mission lancée sur un gabarit de niveau existant, avec son objectif de base et le roster de sa lignée ; les situations propres décrites par la bible (détecteur trompé par l'écho, attaques par le sol, vent et chutes, silence obligatoire) ne sont pas produites. La Reine volante de 2.4 est la caste royale du catalogue, au sol. Aucune image générée : scènes et cinématiques en primitives Canvas nommées. Rien n'est déclaré « 1:1 ».
+
+Vérifications réellement exécutées : voir le rapport de la PR, `scripts/verify-side-campaign-queens-v188.mjs`, `scripts/verify-dev-tools-v188.mjs` et le parcours Chromium `scripts/qa-side-campaign-queens-v188.mjs` (fixtures et injections déclarées en tête).
 
 ## Parcours complet de la campagne principale (2026-11-22)
 

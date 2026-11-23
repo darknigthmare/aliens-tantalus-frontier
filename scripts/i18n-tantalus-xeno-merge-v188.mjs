@@ -999,7 +999,8 @@ export const TANTALUS_I18N_DELTA_V188 = Object.freeze({
       "TR-0 · UN SPÉCIMEN POUR INEZ",
       "Capturer un Praetorian vivant. Inez veut comprendre ; BISHOP-9 veut préserver.",
       "Capturer un Praetorian vivant à la surface de TR-0 et le ramener en caisson. Inez veut comprendre la lignée ; BISHOP-9 veut préserver le spécimen. Il faudra dire qui le garde.",
-      "ruche-monde absente des cartes civiles : surface vivante, organes, Base Ombelle sous la résine"
+      "ruche-monde absente des cartes civiles : surface vivante, organes, Base Ombelle sous la résine",
+      "65 MONDES // COLONIES SIMULÉES"
     ],
     "changed": {
       "Extraire le renseignement synthétique": {

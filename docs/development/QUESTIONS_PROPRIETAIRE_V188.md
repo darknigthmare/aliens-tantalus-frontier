@@ -797,6 +797,33 @@ Décisions déjà prises et appliquées : Q13 B (après l'Acte V), Q15 B (dépla
 
 Aucune de ces valeurs ne certifie une fidélité « 1:1 ».
 
+### Décisions du propriétaire du 2026-11-23 (appliquées, spec 011 second lot)
+
+| # | Décision | Application |
+| --- | --- | --- |
+| R1 | L'appel arrive après le générique (valeur conservée) | Inchangé : `act5.phase === 'complete'` |
+| R2 | Abysse Noir : verrouillé jusqu'à sa place dans l'arc 1, puis librement rejouable depuis le registre des opérations ; une rejouabilité ne refait pas avancer la campagne | Une fois joué à sa place, le chapitre n'a plus de verrou d'orbite ; un succès rejoué ne change rien. La même règle s'applique aux trois autres chapitres réutilisés (Broodstorm, Reine-Mère, Ruche-monde) |
+| R7 | Œuf saisi : le risque est enregistré maintenant ; la crise à bord éclate plus tard, à un moment choisi de l'arc 2 ou 3 | Crise du hub existante (xénomorphe, pont 2, quarantaine) créée par `createHubCrisis` au réveil d'hypersommeil en orbite de TR-0 (ouverture de l'arc 3) ; l'arc 3 attend son issue ; le module de l'Interlude n'est pas modifié |
+| R8 | TR-0 : nouveau 65e monde, original au projet, ajouté à la carte galactique et caché jusqu'à l'arc 3 | `world-65-tr-0`, provenance `project-canon`, ajout additif ; caché jusqu'à la fin de l'arc 2 qui le révèle ; compteurs de mondes mis à jour (65) |
+
+### Valeurs par défaut du second lot (2026-11-23), à confirmer
+
+| # | Question | Valeur appliquée | Autre possibilité |
+| --- | --- | --- | --- |
+| R9 | Moment exact de la crise de l'œuf | Réveil en orbite de TR-0, avant 3.1 : l'œuf royal « répond » au monde de la Mère | Retour de 2.4 (mort de la Reine volante) ; pendant le saut vers Echo Basin |
+| R10 | Issue « équipe évacuée » de la crise | La crise est close avec les dégâts des règles existantes du hub ; l'arc 3 s'ouvre | Réarmer la crise jusqu'à la victoire, comme l'Interlude |
+| R11 | « Si Rask a été épargné » (`queens-a-rask`, §14.5) | L'annexe s'ouvre seulement si l'œuf a été laissé à Rask | L'ouvrir aussi quand l'œuf a été détruit (Rask n'est tué dans aucune branche) |
+| R12 | 2.4 « La Reine volante » sans rencontre en hauteur | Gabarit `planet-exterior`, caste royale du catalogue au sol, lignée aérienne (Runner, Spitter) | Attendre le niveau dédié ; fusionner 2.4 dans Broodstorm comme 1.3-1.4 |
+| R13 | 3.3-3.4 et CQ-05 | Une partie du chapitre « Le chant de la Reine-Mère » couvre les deux lignes ; CQ-05 se joue à son retour | Découper le chapitre ; jouer CQ-05 avant son lancement |
+| R14 | Caractéristiques du monde TR-0 | Danger 10, infestation 100, stabilité 5, biomes `badlands` / `hive`, atmosphère toxique, faction Red Hive, saut à 6 de carburant | Autres valeurs |
+| R15 | TR-0 après la campagne | Le monde reste sur la carte, simulé comme les autres ; ses deux chapitres sont rejouables | État « effondré » (danger et infestation retombés, §39.3 `orig-tr0-1`) |
+| R16 | Effets immédiats du choix du Praetorian | Inez : recherche +15 ; BISHOP-9 : confiance +10 | Autres valeurs ; arme anti-Reine à créer (lot arsenal) |
+| R17 | Quêtes `ship-q-doyle` et `ship-q-orlov` | Quêtes d'analyse avec loyauté +10 ; les réglages du smartgun et du Cheyenne sont notés sans effet en mission | Leur donner un effet chiffré (cadence, suivi, coque du Cheyenne dans Broodstorm) |
+| R18 | Echo Basin | Biomes générés `cryogenic` / `reactor` laissés tels quels | Les corriger en canyons (`badlands` / `caverns`), comme les corrections de §22.17 |
+| R19 | Objectifs de base des annexes non fixés par la bible | `queens-a-mineurs`, `queens-a-rask`, `queens-a-ombelle` : `rescue survivors` ; `queens-a-sorensen` : `escort a colony convoy` ; `queens-a-grue` : `recover black-box data` | Autres objectifs |
+
+Aucune de ces valeurs ne certifie une fidélité « 1:1 ».
+
 ## Parcours complet de la campagne principale (2026-11-22) — questions ouvertes
 
 Le run est consigné dans `docs/development/PLAYTHROUGH_V188_20261122.md`. Aucune valeur n'a été changée sur ces points. Ils attendent une décision.

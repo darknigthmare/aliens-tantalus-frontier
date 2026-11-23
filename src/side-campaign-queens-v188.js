@@ -291,6 +291,9 @@ export const QUEENS_SPECIMEN_CHOICES_V188 = Object.freeze(['inez', 'bishop']);
 // the hub crisis API handed in by the caller. Outcomes: the creature neutralised, or the team extracted.
 export const QUEENS_EGG_CRISIS_V188 = Object.freeze({ kind: 'xenomorph', deck: 2, roomId: 'quarantine' });
 export const QUEENS_EGG_CRISIS_OUTCOMES_V188 = Object.freeze(['neutralised', 'extracted']);
+// One egg, one creature [PROPOSÉ]: the hub derives a threat count from the ship's pressure; the campaign
+// sets it to one on the crisis it has just created, so the hub shows what the scenes describe.
+export const QUEENS_EGG_CRISIS_COUNT_V188 = 1;
 const BEAT_SCENE_IDS = Object.freeze(['echo-arrival', 'tr0-arrival', 'egg-crisis-alert', 'egg-crisis-after']);
 const DEBRIEF_IDS = Object.freeze(['arc1-debrief', 'arc2-debrief', 'campaign-debrief']);
 const SCENE_IDS = Object.freeze([...RECORD_IDS, ...BEAT_SCENE_IDS, ...DEBRIEF_IDS]);
@@ -436,6 +439,14 @@ export function recordQueensArrivalV188(save, settlement) {
 export const queensEggCrisisDueV188 = save => { const state = queensStateV188(save); return state.raskEgg === 'seize' && Boolean(state.arrivedTr0Day) && !state.eggCrisis; };
 export const queensEggCrisisActiveV188 = save => queensStateV188(save).eggCrisis?.phase === 'alert';
 const activeCrisis = save => { const crisis = save?.hub?.activeCrisis; return crisis && typeof crisis === 'object' ? crisis : null; };
+/** Creates the hub crisis through the API handed in and sets its single creature. Returns the crisis as saved, or null. */
+function armEggCrisis(save, createCrisis) {
+  const created = createCrisis(save, { ...QUEENS_EGG_CRISIS_V188, force: true });
+  const saved = activeCrisis(save);
+  if (!created?.id || saved?.id !== created.id) return null;
+  saved.count = QUEENS_EGG_CRISIS_COUNT_V188;
+  return { ...saved };
+}
 /**
  * Starts the crisis through the hub crisis API (`createCrisis` is world-crisis-core.js `createHubCrisis`).
  * Another crisis still running aboard postpones it (the caller tries again). Mutates the candidate save.
@@ -444,8 +455,8 @@ export function startQueensEggCrisisV188(save, createCrisis) {
   if (!queensEggCrisisDueV188(save) || typeof createCrisis !== 'function' || !save?.hub) return null;
   const running = activeCrisis(save);
   if (running && running.resolved !== true) return null;
-  const crisis = createCrisis(save, { ...QUEENS_EGG_CRISIS_V188, force: true });
-  if (!crisis?.id) return null;
+  const crisis = armEggCrisis(save, createCrisis);
+  if (!crisis) return null;
   write(save, state => { state.eggCrisis = { phase: 'alert', crisisId: String(crisis.id), outcome: null }; });
   return crisis;
 }
@@ -470,8 +481,8 @@ export function reconcileQueensEggCrisisV188(save, createCrisis) {
     if (alerts.some(alert => alert?.id === `alert-${id}-${hubOutcome}`)) return resolveQueensEggCrisisV188(save, id, hubOutcome) ? 'resolved' : null;
   if (running?.id === id && running.resolved === true) return resolveQueensEggCrisisV188(save, id, 'resolved') ? 'resolved' : null;
   if (running && running.resolved !== true || typeof createCrisis !== 'function') return null;
-  const crisis = createCrisis(save, { ...QUEENS_EGG_CRISIS_V188, force: true });
-  if (!crisis?.id) return null;
+  const crisis = armEggCrisis(save, createCrisis);
+  if (!crisis) return null;
   write(save, next => { next.eggCrisis = { phase: 'alert', crisisId: String(crisis.id), outcome: null }; });
   return 'rearmed';
 }

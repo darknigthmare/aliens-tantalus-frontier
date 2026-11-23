@@ -7,7 +7,8 @@
 //    colony, Saison des Reines, world route) would let it start at that point, then the
 //    same pure result functions the debrief transaction calls are applied;
 //  - decisions (M577 manifest, Interlude, CASSIUS, C4, Grue, council, Rask, quay hearing,
-//    endings) go through their own mutators; a hyperspace jump through prepare/confirm.
+//    endings, the live Praetorian) go through their own mutators; a hyperspace jump through
+//    prepare/confirm; the seized egg's crisis through the hub crisis API and the hub's own event.
 // The result is migrated (migrateSave) and checked with the save slot validator
 // (inspectSaveSlotV78). What is not simulated is declared in `injections` (no resource
 // rewards are paid for skipped missions; Act I evidence is recorded as found).
@@ -21,7 +22,7 @@ import { createPortMeridienV90, PORT_PHASES_V90, PORT_RECEIPT_V90 } from '../src
 import { applyProvingGroundQualificationV81, PROVING_GROUND_COURSE_ID_V81 } from '../src/hub-annex-services-v71.js';
 import { markStoryDebriefSeenV188, normalizeStoryCampaignV188, startInterludeV188, interludeCrisisClearedV188, rescueJunParkV188,
   resolveInterludeV188, INTERLUDE_JUN_VENT_NODE_V188, deriveStoryCampaignV188, m577ManifestFromContainersV188 } from '../src/story-campaign-v188.js';
-import { createHubCrisis } from '../src/world-crisis-core.js';
+import { createHubCrisis, resolveHubCrisisEvent } from '../src/world-crisis-core.js';
 import { filterUnlockedCampaignsV188, stationLockReasonV188, markStationIntroHeardV188, chooseCassiusV188, cassiusChoicePendingV188,
   stationReturnSceneDueV188, markStationSceneSeenV188 } from '../src/station-asphodele-v188.js';
 import { filterAct5CampaignsV188, act5LockReasonV188, startAct5CouncilV188, decideAct5V188, act5StateV188, chooseAct5BridgeV188,
@@ -31,7 +32,9 @@ import { filterColonyCampaignsV188, colonyLockReasonV188, applyColonyMissionResu
   colonyGrueDecisionPendingV188, chooseColonyGrueV188, colonyReturnSceneDueV188, markColonySceneSeenV188 } from '../src/colony-missions-v188.js';
 import { filterQueensCampaignsV188, queensLockReasonV188, applyQueensOperationResultV188, receiveQueensCallV188, acceptQueensCallV188,
   recordQueensArrivalV188, queensReturnSceneDueV188, markQueensSceneSeenV188, chooseQueensRaskEggV188, queensRaskChoicePendingV188,
-  queensCallDueV188, QUEENS_NACRE_WORLD_ID_V188, QUEENS_ARC1_ORDER_V188 } from '../src/side-campaign-queens-v188.js';
+  queensCallDueV188, QUEENS_NACRE_WORLD_ID_V188, QUEENS_ARC1_ORDER_V188, QUEENS_ARC2_ORDER_V188, QUEENS_ECHO_WORLD_ID_V188, QUEENS_TR0_WORLD_ID_V188,
+  queensSpecimenChoicePendingV188, chooseQueensSpecimenV188, queensEggCrisisDueV188, startQueensEggCrisisV188, resolveQueensEggCrisisV188,
+  queensArcCompleteV188 } from '../src/side-campaign-queens-v188.js';
 import { applyAsphodeleOperationResultV188 } from '../src/asphodele-missions-v188.js';
 import { applyColonyOperationResultV188, investColonySiteV188, colonyTierV188, normalizeColonyV188, COLONY_SITE_IDS_V188 } from '../src/colony-reconstruction-v188.js';
 import { COLONY_CAMPAIGNS_V188 } from '../src/colony-missions-v188.js';
@@ -199,6 +202,7 @@ function applyPendingDecisions(save, choices) {
   if (choices.colonyGrue !== false && colonyGrueDecisionPendingV188(save)) chooseColonyGrueV188(save, choices.colonyGrue || 'accept');
   if (choices.grue !== false && gruePactPendingV188(save)) chooseGruePactV188(save, choices.grue || 'accept');
   if (choices.rask !== false && queensRaskChoicePendingV188(save)) chooseQueensRaskEggV188(save, choices.rask || 'destroy');
+  if (choices.specimen !== false && queensSpecimenChoicePendingV188(save)) chooseQueensSpecimenV188(save, choices.specimen || 'inez');
   if (choices.scenes === false) return;
   // Return scenes are read (as after a debrief): they would otherwise reopen over the target.
   for (let guard = 0; guard < 24; guard += 1) {
@@ -334,6 +338,37 @@ function queensCall(save, ledger, upTo) {
   recordQueensArrivalV188(save, settlement);
   ledger.injections.add('jump-fuel-topped-up');
 }
+// A later jump of the campaign (Echo Basin, TR-0): the real prepare/confirm, at a later fixed clock value.
+function queensJump(save, ledger, worldId, leg) {
+  const destination = world(worldId), now = DEV_NOW_V188 + leg * 10 * JUMP_CHARGE_MS_V116;
+  save.galaxy.resources.fuel = Math.max(save.galaxy.resources.fuel, 40);
+  prepareJumpV116(save, destination, WORLDS, now);
+  const settlement = confirmJumpV115(save, destination, WORLDS, now + JUMP_CHARGE_MS_V116);
+  if (settlement?.status !== 'arrived') throw new Error(`fixture: jump to ${worldId} refused`);
+  recordQueensArrivalV188(save, settlement);
+  ledger.injections.add('jump-fuel-topped-up');
+}
+/**
+ * Arc 2 (`arc` 2): Arc 1 finished with its decision, the Tantalus in Echo Basin's orbit.
+ * Arc 3 (`arc` 3): Arc 2 finished too, the Tantalus in TR-0's orbit. With a seized egg the crisis breaks
+ * out on arrival (hub crisis API); `egg` 'alert' leaves it running, otherwise the hub's own
+ * `crisis:resolved` event (or `crisis:player-down` for `egg` 'extracted') ends it.
+ */
+function queensArc(save, ledger, arc, choices, egg) {
+  for (const id of QUEENS_ARC1_ORDER_V188) devCompleteCampaignV188(save, id, ledger, choices);
+  if (!queensArcCompleteV188(save, 1)) throw new Error('fixture: Arc 1 needs its decision before Arc 2');
+  queensJump(save, ledger, QUEENS_ECHO_WORLD_ID_V188, 1);
+  if (arc < 3) return;
+  for (const id of QUEENS_ARC2_ORDER_V188) devCompleteCampaignV188(save, id, ledger, choices);
+  queensJump(save, ledger, QUEENS_TR0_WORLD_ID_V188, 2);
+  if (!queensEggCrisisDueV188(save)) return;
+  const crisis = startQueensEggCrisisV188(save, createHubCrisis);
+  if (!crisis) throw new Error('fixture: the egg crisis did not start');
+  if (egg === 'alert') return;
+  const result = resolveHubCrisisEvent(save, { action: egg === 'extracted' ? 'crisis:player-down' : 'crisis:resolved', kind: crisis.kind, crisisId: crisis.id });
+  if (!result.handled || !resolveQueensEggCrisisV188(save, result.crisis.id, result.outcome)) throw new Error('fixture: the egg crisis did not end');
+  ledger.injections.add('egg-crisis-hub-event');
+}
 
 /** Builds the save for a launch descriptor (see dev-catalog-v188.js). */
 export function buildDevSaveV188(launch, options = {}) {
@@ -352,7 +387,10 @@ export function buildDevSaveV188(launch, options = {}) {
   for (const id of launch.before || []) devCompleteCampaignV188(save, id, ledger, choices);
   if (launch.interlude) playInterlude(save, launch.interlude, choices.interlude || 'destroyed');
   if (launch.queens) queensCall(save, ledger, launch.queens);
+  if (launch.queensArc) queensArc(save, ledger, launch.queensArc, choices, launch.queensEgg);
   if (launch.queensBefore) for (const id of launch.queensBefore) devCompleteCampaignV188(save, id, ledger, choices);
+  // Scenes and debriefs already read at the table, so the entry opens on the one it names.
+  for (const id of launch.queensSeen || []) if (!markQueensSceneSeenV188(save, id)) throw new Error(`fixture: scene ${id} is not due`);
   if (launch.act5Phase === 'audience') { startAct5AudienceV188(save); }
   if (launch.act5Phase === 'ending' || launch.act5Phase === 'epilogue' || launch.act5Phase === 'credits') {
     advanceAct5ToEndingV188(save);

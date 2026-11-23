@@ -49,7 +49,7 @@ import {
   queensEncounterCatalogV188, queensCallTextV188, QUEENS_CALL_DIALOG_V188, QUEENS_RASK_DIALOG_V188, QUEENS_SPECIMEN_DIALOG_V188, QUEENS_LATER_ARCS_V188, isQueensCampaignV188,
   syncQueensRoutesV188, queensWorldHiddenV188, queensArcOpenV188, queensArcCompleteV188, queensCampaignCompleteV188, queensPendingChoiceV188, chooseQueensV188,
   queensSpecimenChoicePendingV188, chooseQueensSpecimenV188, QUEENS_SPECIMEN_EFFECTS_V188, queensDebriefDueV188, queensDebriefV188, queensBestiaryV188,
-  QUEENS_EGG_CRISIS_V188, queensEggCrisisDueV188, queensEggCrisisActiveV188, startQueensEggCrisisV188, resolveQueensEggCrisisV188, reconcileQueensEggCrisisV188,
+  QUEENS_EGG_CRISIS_V188, QUEENS_EGG_CRISIS_COUNT_V188, queensEggCrisisDueV188, queensEggCrisisActiveV188, startQueensEggCrisisV188, resolveQueensEggCrisisV188, reconcileQueensEggCrisisV188,
   queensCampaignUpkeepDueV188, QUEENS_MESSAGE_TEXT_V188
 } from '../src/side-campaign-queens-v188.js';
 
@@ -203,6 +203,11 @@ test('TR-0 is a 65th world, original to the project, hidden until Arc 3; the 64 
   advanceGalaxy(veteran, { hours: 24, generateCrisis: false });
   assert.equal(veteran.galaxy.unlockedWorldIds.length, 65); assert.equal(veteran.galaxy.unlockedWorldIds.at(-1), tr0.id);
   assert.match(read('src/app.js'), /WORLDS\.filter\(\(world\) => !queensWorldHiddenV188\(saveSystem\.data, world\) && JSON\.stringify\(world\)/, 'the galaxy map lists no hidden world');
+  // The map's heading counts the worlds it shows: 64 while TR-0 is hidden, 65 once revealed (both catalogued in English).
+  assert.match(read('index.html'), /<p class="eyebrow" data-world-count-v188>64 MONDES \/\/ COLONIES SIMULÉES<\/p>/);
+  assert.match(read('src/app.js'), /worldCountLabelV188\.textContent = `\$\{knownWorldsV188\} MONDES \/\/ COLONIES SIMULÉES`;/);
+  assert.equal(EN_CATALOG_V185['64 MONDES // COLONIES SIMULÉES'], '64 WORLDS // SIMULATED COLONIES');
+  assert.equal(EN_CATALOG_V185['65 MONDES // COLONIES SIMULÉES'], '65 WORLDS // SIMULATED COLONIES');
 });
 
 test('save field sideCampaignsV188 is additive and normalised', () => {
@@ -560,6 +565,8 @@ test('the seized egg: risk recorded in Arc 1, the crisis breaks out aboard on wa
   const crisis = startQueensEggCrisisV188(save, createHubCrisis);
   assert.ok(crisis?.id);
   assert.deepEqual([save.hub.activeCrisis.kind, save.hub.activeCrisis.deck, save.hub.activeCrisis.roomId, save.hub.activeCrisis.resolved], ['xenomorph', 2, 'quarantine', false]);
+  assert.equal(save.hub.activeCrisis.count, QUEENS_EGG_CRISIS_COUNT_V188, 'one egg, one creature');
+  assert.equal(crisis.id, save.hub.activeCrisis.id); assert.equal(QUEENS_EGG_CRISIS_COUNT_V188, 1);
   assert.deepEqual(queensStateV188(save).eggCrisis, { phase: 'alert', crisisId: crisis.id, outcome: null });
   assert.equal(startQueensEggCrisisV188(save, createHubCrisis), null, 'started once');
   assert.equal(queensEggCrisisActiveV188(save), true);
@@ -599,6 +606,7 @@ test('the seized egg: risk recorded in Arc 1, the crisis breaks out aboard on wa
   const gone = JSON.parse(JSON.stringify(save)); gone.hub.activeCrisis = null;
   assert.equal(reconcileQueensEggCrisisV188(gone, createHubCrisis), 'rearmed');
   assert.equal(gone.hub.activeCrisis.roomId, 'quarantine'); assert.equal(queensStateV188(gone).eggCrisis.crisisId, gone.hub.activeCrisis.id);
+  assert.equal(gone.hub.activeCrisis.count, 1);
   // The ending waits for the crisis and reports its outcome.
   for (const id of QUEENS_ARC3_ORDER_V188) assert.equal(complete(won, id)?.kind, 'step', id);
   for (const id of ['arc1-debrief', 'arc2-debrief']) markQueensSceneSeenV188(won, id);

@@ -23,8 +23,23 @@ Ordre de composition du moteur inchangé : aucun mixin ajouté. Le roster est fi
 - Le résultat d'une mission est appliqué au candidat de `finalizeOperation`, avant `advanceGalaxy` et l'écriture.
 - Choix et scènes : un `commitCandidateV188` chacun.
 
+## Second lot (arcs 2 et 3, 2026-11-23)
+
+| Élément | Fichier | Raccordement |
+| --- | --- | --- |
+| Monde TR-0 | `src/content-core-v50.js` : `GENERATED_WORLDS` (64, inchangés, indexés par les générateurs) et `TR0_WORLD_V188` ; `WORLDS = [...GENERATED_WORLDS, TR0_WORLD_V188]` | `save.js` crée et migre son état comme pour tout monde ; `hiddenUntilV188` lu par `world-crisis-core.js`, `world-crisis.js`, `save.js` (déblocages génériques) et par `renderGalaxy` via `queensWorldHiddenV188` |
+| Arcs | `src/side-campaign-queens-v188.js` : table `QUEENS_ARCS_V188` (monde, ordre, annexes, contrats, clé d'arrivée) ; verrous, résultats, scènes, comptes rendus et panneau écrits une fois pour les trois arcs | Mêmes points d'appel d'`app.js` que le premier lot |
+| Routes | `syncQueensRoutesV188` : appelé dans la transaction du choix de Rask et du résultat de mission ; à la table de briefing pour une sauvegarde du premier lot | `galaxy.unlockedWorldIds` |
+| Chapitres | `src/legacy-operation-state-v131.js` (Broodstorm), `src/ecosystem-missions-v131.js` (Reine-Mère, Ruche-monde) : `worldId` et `legacyWorldIdsV188` | Contrôle du reçu inchangé (`campaignWorldIdsV188`) |
+| Crise de l'œuf | `startQueensEggCrisisV188`, `resolveQueensEggCrisisV188`, `reconcileQueensEggCrisisV188` reçoivent `createHubCrisis` de l'appelant | `app.js` : transaction du saut (après l'arrivée), table de briefing (différé, rechargement), gestionnaire `crisis:*` du hub après `resolveHubCrisisEvent`. `story-campaign-v188.js` (Interlude) n'est pas modifié |
+| Quêtes | `src/queens-crew-quests-v188.js` (nouveau) ajouté à `CREW_QUESTS_ALL_V188` | Conversation du hub et panneau des quêtes existants ; `crewQuestDoneV188` ouvre le bestiaire du panneau |
+| Outils de développement | `devtools/dev-fixtures-v188.js` (`queensArc`, `queensJump`, `queensSeen`), `devtools/dev-catalog-v188.js` | Entrées générées depuis `QUEENS_ARCS_V188` |
+
+Ordre de composition du moteur toujours inchangé : aucun mixin ajouté, les rosters sont filtrés avant `engine.start`.
+
 ## Vérification
 
-- `scripts/verify-side-campaign-queens-v188.mjs` (dans `test:priorities:v188`) : données, déplacement du chapitre, sauvegarde, appel, vrai saut, ordre, scènes, choix, compte rendu, rosters (moteur de production), cinématiques, raccordement, catalogue.
+- `scripts/verify-side-campaign-queens-v188.mjs` (dans `test:priorities:v188`) : données des trois arcs, déplacement des quatre chapitres, monde TR-0 (additif, caché, jamais ouvert par les déblocages génériques), sauvegarde, appel, vrais sauts, ordre et rejouabilité des chapitres, scènes, choix, comptes rendus et fin, crise de l'œuf par l'API du hub, rosters des lignées (moteur de production), cinématiques, quêtes, raccordement, catalogue.
+- `scripts/verify-dev-tools-v188.mjs` : chaque entrée du lanceur produit une sauvegarde valide ; états des arcs 2 et 3.
 - `scripts/qa-side-campaign-queens-v188.mjs` : parcours Chromium (fixtures et injections déclarées en tête).
 - Suites partagées : `npm run test:all`, `check`, `build`, `check:built`, `i18n:check`.

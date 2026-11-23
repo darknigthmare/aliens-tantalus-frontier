@@ -158,7 +158,7 @@ check('accepted: Nacre-7 route unlocked, the arc waits for the orbit', accepted.
 await panel.scrollIntoViewIfNeeded();
 const panelText = await panel.innerText();
 check('the briefing table panel lists Arc 1 and the route', /LA SAISON DES REINES · RÉQUISITION ACCEPTÉE/.test(panelText) && /1\.1 · NACRE-7 · LE QUAI NOYÉ/.test(panelText)
-  && /saut vers Nacre-7 \(\d+ carburant · 14 jours en hypersommeil\)/.test(panelText) && /Arc 2 · Echo Basin[^\n]*à produire/.test(panelText), panelText);
+  && /saut vers Nacre-7 \(\d+ carburant · 14 jours en hypersommeil\)/.test(panelText) && /Arc 2 · Echo Basin[^\n]*ouvre après l’arc précédent/.test(panelText), panelText);
 await shot('03-panel-accepted', '#side-campaign-queens-v188');
 const options = await page.locator('#command-mission-v110 option').evaluateAll(nodes => nodes.map(node => node.value));
 check('away from Nacre-7, no campaign mission is offered', !options.some(id => id.startsWith('queens-')), options.filter(id => id.startsWith('queens-')));

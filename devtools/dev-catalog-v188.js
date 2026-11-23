@@ -12,7 +12,8 @@ import { COLONY_LEVEL_PHASES_V188 } from '../src/colony-mission-levels-v188.js';
 import { STATION_LEVEL_PHASES_V188 } from '../src/station-mission-levels-v188.js';
 import { ACT5_NAMES_EN_V188 } from '../src/story-act5-v188.js';
 import { colonyCampaignNameV188 } from '../src/colony-missions-v188.js';
-import { queensCampaignNameV188, QUEENS_ARC1_ORDER_V188 } from '../src/side-campaign-queens-v188.js';
+import { queensCampaignNameV188, QUEENS_ARC1_ORDER_V188, QUEENS_ARC2_ORDER_V188, QUEENS_ARC3_ORDER_V188, QUEENS_ARCS_V188, QUEENS_CHAPTER_IDS_V188,
+  QUEENS_NAMES_EN_V188 } from '../src/side-campaign-queens-v188.js';
 import { ASPHODELE_SIDE_NAMES_EN_V188, ASPHODELE_CONTRACT_NAMES_EN_V188 } from '../src/asphodele-missions-v188.js';
 import { getArbiterMissionV190 } from '../src/xeno-arbiter-campaign-v190.js';
 import { DEV_PROLOGUE_STEPS_V188 } from './dev-fixtures-v188.js';
@@ -41,7 +42,7 @@ const worldName = id => WORLDS.find(world => world.id === id)?.name || id;
 function campaignLabel(id) {
   const entry = campaignById.get(id), fr = entry?.name || id;
   const en = ACT5_NAMES_EN_V188[id] || ASPHODELE_SIDE_NAMES_EN_V188?.[id] || ASPHODELE_CONTRACT_NAMES_EN_V188?.[id]
-    || (/^colony-/.test(id) ? colonyCampaignNameV188(id, 'en') : null) || (/^queens-/.test(id) ? queensCampaignNameV188(id, 'en') : null) || fr;
+    || (/^colony-/.test(id) ? colonyCampaignNameV188(id, 'en') : null) || (/^queens-/.test(id) ? queensCampaignNameV188(id, 'en') : null) || QUEENS_NAMES_EN_V188[id] || fr;
   return L(fr, en);
 }
 const entry = (id, category, label, launch, extra = {}) => Object.freeze({ id, category, label, launch: Object.freeze({ ...launch }),
@@ -67,6 +68,11 @@ function sideColonyRecipe(id) {
   return { milestone: 'act4', colonyTier: 'restored' };
 }
 const QUEENS_BASE = { milestone: 'complete', queens: 'arrived' };
+// Arc 2 / Arc 3 (spec 011, second lot): the previous arcs finished, the Tantalus in the arc's orbit (dev-fixtures `queensArc`).
+const QUEENS_ARC = arc => arc === 1 ? QUEENS_BASE : { ...QUEENS_BASE, queensArc: arc };
+const QUEENS_DEBRIEFS = ['arc1-debrief', 'arc2-debrief'];
+// What a side mission needs beyond its arc's first mission (§14.5): Rask let go with his case; Grue as an ally.
+const QUEENS_SIDE_NEEDS = { 'queens-a-rask': { choices: { rask: 'release' } }, 'queens-a-grue': { before: ['station-a-grue'] } };
 
 export function buildDevCatalogV188() {
   const list = [];
@@ -134,9 +140,36 @@ export function buildDevCatalogV188() {
   add('queens-accepted', 'queens', L('Appel accepté · carte galactique', 'Call accepted · galaxy map'), { kind: 'view', view: 'galaxy', milestone: 'complete', queens: 'accepted' }, { sceneId: 'queens:accepted' });
   add('queens-travel', 'queens', L('Saut vers Nacre-7 en préparation', 'Jump to Nacre-7 charging'), { kind: 'view', view: 'galaxy', milestone: 'complete', queens: 'travel' }, { sceneId: 'queens:travel' });
   add('queens-arrival', 'queens', L('Arrivée en orbite de Nacre-7', 'Arrival in Nacre-7 orbit'), { kind: 'view', view: 'command', ...QUEENS_BASE }, { sceneId: 'queens:arrived' });
-  for (const [index, id] of QUEENS_ARC1_ORDER_V188.entries()) add(`queens-arc1-${id}`, 'queens', campaignLabel(id), mission(id, { ...QUEENS_BASE, queensBefore: QUEENS_ARC1_ORDER_V188.slice(0, index) }));
-  add('queens-rask-choice', 'queens', L('1.5 · Choix de l’œuf de Rask', '1.5 · Rask egg choice'), { kind: 'view', view: 'command', ...QUEENS_BASE, queensBefore: [...QUEENS_ARC1_ORDER_V188], choices: { rask: false } }, { sceneId: 'queens:rask-choice' });
-  for (const id of CAMPAIGNS.filter(c => /^queens-(?:a|l)-/.test(c.id)).map(c => c.id)) add(`queens-side-${id}`, 'queens', campaignLabel(id), mission(id, { ...QUEENS_BASE, queensBefore: ['queens-1-1-quai'] }));
+  for (const arc of QUEENS_ARCS_V188) {
+    const recipe = QUEENS_ARC(arc.arc), world = worldName(arc.worldId);
+    if (arc.arc > 1) add(`queens-arc${arc.arc}-arrival`, 'queens', L(`Arc ${arc.arc} · Arrivée en orbite de ${world}`, `Arc ${arc.arc} · Arrival in ${world} orbit`),
+      { kind: 'view', view: 'command', ...recipe }, { sceneId: `queens:arc${arc.arc}-arrived` });
+    // Story line in order (the reused chapters in their place), then the side missions and local contracts of the arc.
+    for (const [index, id] of arc.order.entries()) add(`queens-arc${arc.arc}-${id}`, 'queens', campaignLabel(id), mission(id, { ...recipe, queensBefore: arc.order.slice(0, index) }));
+    for (const item of [...arc.sides, ...arc.contracts]) add(`queens-side-${item.id}`, 'queens', campaignLabel(item.id),
+      mission(item.id, { ...recipe, queensBefore: [arc.order[0]], ...(QUEENS_SIDE_NEEDS[item.id] || {}) }));
+    if (arc.arc === 1) {
+      add('queens-rask-choice', 'queens', L('1.5 · Choix de l’œuf de Rask', '1.5 · Rask egg choice'), { kind: 'view', view: 'command', ...QUEENS_BASE, queensBefore: [...QUEENS_ARC1_ORDER_V188], choices: { rask: false } }, { sceneId: 'queens:rask-choice' });
+      add('queens-arc1-debrief', 'queens', L('Arc 1 · Compte rendu (route d’Echo Basin ouverte)', 'Arc 1 · Debrief (route to Echo Basin open)'), { kind: 'view', view: 'command', ...QUEENS_BASE, queensBefore: [...QUEENS_ARC1_ORDER_V188] }, { sceneId: 'queens:arc1-debrief' });
+    }
+  }
+  add('queens-arc2-debrief', 'queens', L('Arc 2 · Compte rendu (TR-0 révélé)', 'Arc 2 · Debrief (TR-0 revealed)'),
+    { kind: 'view', view: 'command', ...QUEENS_ARC(2), queensBefore: [...QUEENS_ARC2_ORDER_V188], queensSeen: ['arc1-debrief'] }, { sceneId: 'queens:arc2-debrief' });
+  add('queens-tr0-map', 'queens', L('Arc 2 terminé · TR-0 sur la carte galactique', 'Arc 2 over · TR-0 on the galaxy map'),
+    { kind: 'view', view: 'galaxy', ...QUEENS_ARC(2), queensBefore: [...QUEENS_ARC2_ORDER_V188], queensSeen: QUEENS_DEBRIEFS }, { sceneId: 'queens:tr0-revealed' });
+  add('queens-crew-quests', 'queens', L('Quêtes du Tantalus liées (Doyle, Orlov, Harlow) · après l’arc 2', 'Linked Tantalus quests (Doyle, Orlov, Harlow) · after Arc 2'),
+    { kind: 'view', view: 'command', ...QUEENS_ARC(2), queensBefore: [...QUEENS_ARC2_ORDER_V188], queensSeen: QUEENS_DEBRIEFS }, { sceneId: 'queens:crew-quests', keywords: 'ship-q-doyle ship-q-orlov ship-q-harlow' });
+  add('queens-egg-crisis', 'queens', L('Arc 3 · Œuf saisi : crise à bord (pont de quarantaine)', 'Arc 3 · Seized egg: crisis aboard (quarantine deck)'),
+    { kind: 'hub', ...QUEENS_ARC(3), choices: { rask: 'seize' }, queensEgg: 'alert', hub: { deck: 2, roomId: 'quarantine', positionX: 760, facing: 1 } }, { sceneId: 'queens:egg-crisis' });
+  add('queens-egg-after', 'queens', L('Arc 3 · Œuf saisi : après la crise (table)', 'Arc 3 · Seized egg: after the crisis (table)'),
+    { kind: 'view', view: 'command', ...QUEENS_ARC(3), choices: { rask: 'seize' }, queensSeen: [...QUEENS_DEBRIEFS, 'tr0-arrival', 'egg-crisis-alert'] }, { sceneId: 'queens:egg-after' });
+  add('queens-specimen-choice', 'queens', L('Arc 3 · Choix du Praetorian vivant (Inez ou BISHOP-9)', 'Arc 3 · Live Praetorian choice (Inez or BISHOP-9)'),
+    { kind: 'view', view: 'command', ...QUEENS_ARC(3), queensBefore: ['queens-3-1-peau', 'queens-a-echantillon'], choices: { specimen: false }, queensSeen: QUEENS_DEBRIEFS }, { sceneId: 'queens:specimen-choice' });
+  for (const [choice, label] of [['inez', L('Fin de campagne · Praetorian confié à Inez', 'Campaign ending · Praetorian given to Inez')], ['bishop', L('Fin de campagne · Praetorian confié à BISHOP-9', 'Campaign ending · Praetorian given to BISHOP-9')]])
+    add(`queens-ending-${choice}`, 'queens', label, { kind: 'view', view: 'command', ...QUEENS_ARC(3), queensBefore: ['queens-3-1-peau', 'queens-a-echantillon', ...QUEENS_ARC3_ORDER_V188.slice(1)],
+      choices: { specimen: choice }, queensSeen: QUEENS_DEBRIEFS }, { sceneId: `queens:ending-${choice}` });
+  add('queens-ending-egg', 'queens', L('Fin de campagne · œuf saisi, équipe évacuée pendant la crise', 'Campaign ending · seized egg, team extracted during the crisis'),
+    { kind: 'view', view: 'command', ...QUEENS_ARC(3), choices: { rask: 'seize' }, queensEgg: 'extracted', queensBefore: [...QUEENS_ARC3_ORDER_V188], queensSeen: QUEENS_DEBRIEFS }, { sceneId: 'queens:ending-egg' });
   // Phase checkpoints of the dedicated levels (one checkpoint per phase)
   for (const [table, recipeFor] of [[COLONY_LEVEL_PHASES_V188, id => COLONY_RECIPE[id]], [STATION_LEVEL_PHASES_V188, id => ({ milestone: 'act2', before: STATION_BEFORE[id] })]]) {
     for (const [campaignId, phases] of Object.entries(table)) for (const [index, phase] of phases.entries()) {
@@ -152,7 +185,7 @@ export function buildDevCatalogV188() {
       { kind: 'cinematic', cinematicId: id, ...(late || queens ? { milestone: 'act5-done' } : { milestone: 'act2' }) }, { keywords: id });
   }
   // Special operations (V131 and earlier), outside the chapters already listed.
-  const listed = new Set(['special-archive-relay', 'special-narrative-qz17', 'special-apc-convoy', 'special-c12-horde', 'special-black-cocoon', 'special-black-abyss-v131']);
+  const listed = new Set(['special-archive-relay', 'special-narrative-qz17', 'special-apc-convoy', 'special-c12-horde', 'special-black-cocoon', ...QUEENS_CHAPTER_IDS_V188]);
   for (const item of CAMPAIGNS.filter(c => /^special-/.test(c.id) && !listed.has(c.id))) {
     const arbiter = getArbiterMissionV190(item.id), first = item.id === 'special-arbiter-01-freight';
     add(`special-${item.id}`, 'special', campaignLabel(item.id), mission(item.id, { worldId: item.worldId }),

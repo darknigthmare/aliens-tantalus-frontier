@@ -7561,7 +7561,8 @@ export const EN_CATALOG_V185 = Object.freeze({
 "TR-0 · UN SPÉCIMEN POUR INEZ": "TR-0 · A SPECIMEN FOR INEZ",
 "Capturer un Praetorian vivant. Inez veut comprendre ; BISHOP-9 veut préserver.": "Capture a live Praetorian. Inez wants to understand; BISHOP-9 wants to preserve.",
 "Capturer un Praetorian vivant à la surface de TR-0 et le ramener en caisson. Inez veut comprendre la lignée ; BISHOP-9 veut préserver le spécimen. Il faudra dire qui le garde.": "Capture a live Praetorian on the surface of TR-0 and bring it back in a case. Inez wants to understand the lineage; BISHOP-9 wants to preserve the specimen. Someone will have to say who keeps it.",
-"ruche-monde absente des cartes civiles : surface vivante, organes, Base Ombelle sous la résine": "hive world absent from civilian charts: living surface, organs, Ombelle Base under the resin"
+"ruche-monde absente des cartes civiles : surface vivante, organes, Base Ombelle sous la résine": "hive world absent from civilian charts: living surface, organs, Ombelle Base under the resin",
+"65 MONDES // COLONIES SIMULÉES": "65 WORLDS // SIMULATED COLONIES"
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 // V188 systems bug hunt (merged via i18n-catalog-maintenance-v186 review).

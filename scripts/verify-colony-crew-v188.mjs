@@ -202,9 +202,15 @@ test('colony table: missions, effects and decisions are on the reconstruction ta
 
 // —— Crew quests ——
 test('crew quests: the twelve other §8.1 quests, one per remaining crew member, offered after their act', () => {
-  assert.equal(CREW_QUESTS_ALL_V188.length, 16);
+  // 16 crew quests of §8.1, then the three quests of « La Saison des Reines » (§14.9, spec 011): a second
+  // quest for Doyle, Orlov and Harlow, covered by scripts/verify-side-campaign-queens-v188.mjs.
+  assert.equal(CREW_QUESTS_ALL_V188.length, 19);
+  const crewQuests = CREW_QUESTS_ALL_V188.slice(0, 16);
+  assert.deepEqual(CREW_QUESTS_ALL_V188.slice(16).map(quest => quest.id), ['ship-q-doyle', 'ship-q-orlov', 'ship-q-harlow']);
+  assert.deepEqual(crewQuests, [...CREW_QUESTS_V188, ...CREW_QUESTS_TANTALUS_V188]);
   assert.deepEqual(CREW_QUESTS_V188.map(quest => quest.id), ['ship-rook', 'ship-vega', 'ship-harlow', 'ship-david'], 'spec 005 list unchanged');
-  assert.equal(new Set(CREW_QUESTS_ALL_V188.map(quest => quest.crewId)).size, 16, 'one quest per crew member');
+  assert.equal(new Set(crewQuests.map(quest => quest.crewId)).size, 16, 'one §8.1 quest per crew member');
+  assert.equal(new Set(CREW_QUESTS_ALL_V188.map(quest => quest.crewId)).size, 16, 'the campaign quests belong to existing crew members');
   assert.deepEqual(CREW_QUESTS_TANTALUS_V188.slice(0, 4).map(quest => quest.crewId), ACT5_ADVISORS_V188.map(entry => entry.crewId).sort((a, b) =>
     ['crew-07-sanaa-doyle', 'crew-16-cal-mercer', 'crew-08-maksim-orlov', 'crew-15-leila-s-rensen'].indexOf(a) - ['crew-07-sanaa-doyle', 'crew-16-cal-mercer', 'crew-08-maksim-orlov', 'crew-15-leila-s-rensen'].indexOf(b)), 'Act V advisors first');
   const fresh = createDefaultSave(); fresh.portMeridienV90 = null;

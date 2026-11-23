@@ -2421,6 +2421,8 @@ function renderGalaxy() {
   const term = byId('world-search').value.trim().toLowerCase();
   // V188 spec 011: a hidden world (TR-0) is not on the map, nor found by the search, until its campaign reveals it.
   const worlds = WORLDS.filter((world) => !queensWorldHiddenV188(saveSystem.data, world) && JSON.stringify(world).toLowerCase().includes(term));
+  const worldCountLabelV188 = document.querySelector('[data-world-count-v188]'), knownWorldsV188 = WORLDS.filter((world) => !queensWorldHiddenV188(saveSystem.data, world)).length;
+  if (worldCountLabelV188 && !worldCountLabelV188.textContent.startsWith(`${knownWorldsV188} `)) worldCountLabelV188.textContent = `${knownWorldsV188} MONDES // COLONIES SIMULÉES`;
   // V188: desktop keeps the spiral (left/top); a phone reads --cell-col/--cell-row
   // and the short code. The full name stays in the button for screen readers.
   const phoneGrid = snapWorldsToPhoneGridV188(worlds.map(world => ({ id: world.id, ...worldPosition(WORLDS.indexOf(world)) })));
