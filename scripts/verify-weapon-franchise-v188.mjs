@@ -8,7 +8,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { WEAPONS } from '../src/content-core-v50.js';
-import { WEAPON_CATALOG_FRANCHISE_V188, WEAPON_FRANCHISE_IDS_V188, WEAPON_FRANCHISE_LEDGER_V188,
+import { WEAPON_CATALOG_FRANCHISE_V188, WEAPON_CATALOG_FRANCHISE_LOT_C_V188, WEAPON_FRANCHISE_IDS_V188, WEAPON_FRANCHISE_LEDGER_V188 as WEAPON_FRANCHISE_LEDGER_ALL_V188,
   WEAPON_RESEARCH_SUPPLEMENT_V188, WEAPON_FRANCHISE_DESCRIPTIONS_EN_V188 } from '../src/weapon-catalog-franchise-v188.js';
 import { WEAPON_ADDITION_IDS_V188 } from '../src/weapon-catalog-additions-v188.js';
 import { getArsenalProfileV188, ARSENAL_BRIDGED_WEAPON_IDS_V188, ARSENAL_UNBRIDGED_SPECIAL_FEEDS_V188,
@@ -25,6 +25,8 @@ import { cancelTacticalReloadV77 } from '../src/tactical-reload-v77.js';
 import { createDefaultSave, getProcurementQuote, procureCatalogItem, canAfford } from '../src/save.js';
 import { missionV136 } from './forge-native-host-v136.mjs';
 
+// Lot C (scripts/verify-weapon-franchise-lot-c-v188.mjs) appends its rows to the same ledger and supplement; this suite keeps to lot B.
+const WEAPON_FRANCHISE_LEDGER_V188 = WEAPON_FRANCHISE_LEDGER_ALL_V188.filter(row => row.lot === 'B');
 const named = id => WEAPONS.find(weapon => weapon.id === id);
 const STEP = 1 / 60;
 function mission(id, extra = {}) {
@@ -42,8 +44,8 @@ function fireUntil(engine, count, limit = 900) {
 
 test('catalogue: 38 append-only franchise rows after 196, reserved numbers skipped, no art borrowed', () => {
   assert.equal(WEAPON_CATALOG_FRANCHISE_V188.length, 38);
-  assert.deepEqual(WEAPONS.slice(-38).map(weapon => weapon.id), WEAPON_FRANCHISE_IDS_V188);
-  assert.deepEqual(WEAPON_ADDITION_IDS_V188.slice(3), WEAPON_FRANCHISE_IDS_V188);
+  assert.deepEqual(WEAPONS.slice(181, 219).map(weapon => weapon.id), WEAPON_FRANCHISE_IDS_V188);
+  assert.deepEqual(WEAPON_ADDITION_IDS_V188.slice(3, 41), WEAPON_FRANCHISE_IDS_V188);
   assert.equal(new Set(WEAPONS.map(weapon => weapon.id)).size, WEAPONS.length);
   const numbers = WEAPON_FRANCHISE_IDS_V188.map(id => Number(id.slice(7, 10)));
   assert.deepEqual(numbers, [...Array.from({ length: 19 }, (_, i) => 197 + i), ...Array.from({ length: 19 }, (_, i) => 217 + i)]);
@@ -65,11 +67,11 @@ test('catalogue: 38 append-only franchise rows after 196, reserved numbers skipp
   }
   for (const row of WEAPON_RESEARCH_SUPPLEMENT_V188) {
     assert.match(row.id, /^proposed-v188-[a-z0-9-]+$/); assert.match(row.sourceUrl, /^https:\/\//);
-    assert.ok(WEAPON_CATALOG_FRANCHISE_V188.some(weapon => weapon.researchId === row.id), 'supplement row is cited: ' + row.id);
+    assert.ok([...WEAPON_CATALOG_FRANCHISE_V188, ...WEAPON_CATALOG_FRANCHISE_LOT_C_V188].some(weapon => weapon.researchId === row.id), 'supplement row is cited: ' + row.id);
   }
   // The research view reports each exact promotion of an index row.
   const promoted = getWeaponResearchIndexV171().filter(row => row.promotedCatalogIdV188);
-  assert.equal(promoted.length, 3 + WEAPON_CATALOG_FRANCHISE_V188.filter(weapon => !weapon.researchId.startsWith('proposed-v188-')).length);
+  assert.equal(promoted.length, 3 + [...WEAPON_CATALOG_FRANCHISE_V188, ...WEAPON_CATALOG_FRANCHISE_LOT_C_V188].filter(weapon => !weapon.researchId.startsWith('proposed-v188-')).length);
 });
 
 test('ledger: one row per added weapon, documented / adapted / to define kept apart, capacities only documented with a source', () => {
@@ -141,7 +143,7 @@ test('provisional plaque: drawn with Canvas primitives behind named slots, and t
 });
 
 test('T104: native feeds outside Lot A — cells, project tanks, belts and the Frontier cylinder conserve ammunition', () => {
-  assert.equal(ARSENAL_BRIDGED_WEAPON_IDS_V188.length, 75);
+  assert.equal(ARSENAL_BRIDGED_WEAPON_IDS_V188.length, 94); // 75 through lot B + 19 bridged lot-C rows
   const bases = ['weapon-020-es-4-electroshock-pistol', 'weapon-025-plasma-rifle', 'weapon-035-neuro-link-disruptor', 'weapon-158-n79-eva-laser',
     'weapon-160-eds-93-zadak', 'weapon-166-p649-hel', 'weapon-168-evi-87-zvezda', 'weapon-036-ripper-acid-projector', 'weapon-037-reef-caster',
     'weapon-039-cryo-lance', 'weapon-040-pathogen-containment-projector', 'weapon-147-ocap-91-volcan', 'weapon-152-type-99-incinerator',

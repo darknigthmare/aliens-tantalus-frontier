@@ -51,7 +51,7 @@ test('catalogue integrity: 178 historical ids unchanged, append-only additions (
   assert.equal(new Set(WEAPONS.map(weapon => weapon.id)).size, WEAPONS.length);
   assert.equal(WEAPONS[0].id, 'weapon-001-m41a-pulse-rifle'); assert.equal(WEAPONS[177].id, 'weapon-177-8a7-dambulla-machine-pistol');
   for (const weapon of WEAPON_CATALOG_ADDITIONS_V188) {
-    assert.match(weapon.id, /^weapon-(19[4-9]|2\d\d)-[a-z0-9-]+$/);
+    assert.match(weapon.id, /^weapon-(19[4-9]|2\d\d|30[01])-[a-z0-9-]+$/); // lot C ends at 301
     assert.equal(weapon.canonExact, false); assert.ok(weapon.sourceUrl && weapon.sourceWork && weapon.description && /proposed/.test(weapon.statsPolicy));
     assert.equal(resolveWeaponVisualProfileV63(weapon), null, 'no native plaque (sold behind a provisional drawn plaque since 2026-11-23)');
     assert.ok([...WEAPON_RESEARCH_INDEX_V171, ...WEAPON_RESEARCH_SUPPLEMENT_V188].some(row => row.id === weapon.researchId), weapon.researchId);
@@ -102,7 +102,7 @@ test('feed policy: physical detachable magazines stay limited to the reviewed M4
       assert.equal(profile.feed.kind, profile.feed.nativeBridge, 'the bridge follows the recorded feed: ' + profile.weaponId);
     }
   }
-  assert.equal(ARSENAL_BRIDGED_WEAPON_IDS_V188.length, 75); // 31 Lot-A ids + lot B (T104 bases with finishes, bridged franchise rows)
+  assert.equal(ARSENAL_BRIDGED_WEAPON_IDS_V188.length, 94); // 31 Lot-A ids + lot B (T104 bases with finishes, bridged franchise rows) + 19 bridged lot-C rows
   assert.equal(getArsenalProfileV188('weapon-011-m83-sadar').feed.runtimeCapacity, 1);
   assert.equal(getArsenalProfileV188('weapon-021-357-magnum-revolver').feed.runtimeCapacity, 6);
   assert.equal(getArsenalProfileV188('weapon-005-m56-smartgun').vfx.ejection, 'none-caseless');
