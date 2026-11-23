@@ -719,3 +719,20 @@ Base : `f8b22e68`. Décisions enregistrées dans `QUESTIONS_PROPRIETAIRE_V188.md
 Fidélité : rien n'est déclaré « 1:1 ». Les repères documentés, les adaptations et ce qui reste à définir sont séparés dans la bible (§7.11, §8.6).
 
 Vérifications réellement exécutées : voir le rapport du lot. Suites Node étendues : `scripts/verify-station-levels-v188.mjs` (collier, issue enregistrée, quai de S4, colons, noms), `scripts/verify-depth-holds-v188.mjs`, `scripts/verify-confrontation-v188.mjs` (entrée, quête, accès, portraits), `scripts/verify-bioforge-lab-v188.mjs` (protocole affiché), `scripts/verify-colony-crew-v188.mjs`. Parcours Chromium : `scripts/qa-station-levels-v188.mjs` (S1, S4 négocié, `station-s4@forced`) et `scripts/qa-bioforge-lab-v188.mjs` (débat joué avec les boutons du dialogue) ; fixtures et injections déclarées en tête de chaque script.
+## Décisions du propriétaire du 23 novembre 2026
+
+Détail : `docs/development/QUESTIONS_PROPRIETAIRE_V188.md` (section du 2026-11-23) ; tests `scripts/verify-owner-decisions-20261123-v188.mjs`.
+
+| Sujet | Fait | Reste |
+| --- | --- | --- |
+| Ravitaillement (P-1) | La colonie rend du ravitaillement (+8 par mission réussie, +4 par niveau de chantier validé, **[PROPOSÉ]**) ; sources affichées au Commandement ; refus de départ conservé ; simulation de la ligne principale testée | Carburant non décidé (stock de départ égal au coût des 16 sorties) ; équilibrage non éprouvé en partie réelle |
+| Saut bloqué par l'infestation (P-2) | Blocage conservé ; raison et marche à suivre affichées à la carte galactique (FR/EN) | Pas de mission dédiée ; clôture de la chaîne non rejouée de bout en bout |
+| Ordre des actes (P-3) | Acte I recommandé avant l'Acte II ; QZ-18 non verrouillé | Ouverture du conseil avant C4 et de l'Interlude avant C3 inchangée |
+| Interlude (P-4) | Crise liée au pont 2, menaces en attente nommées au relevé du hub | Autres crises du hub inchangées |
+| Conseil (P-5) | Phrase propre au cas d'un seul conteneur | — |
+| Armes 194–196 (A1) | Achetables à l'armurerie derrière une **plaque provisoire dessinée** (Canvas, emplacement nommé) | **Art non livré** : plaques natives à produire ; identité et statistiques inchangées, rien n'est certifié « 1:1 » |
+| Pompe (A5) | Option « pompe manuelle » : touche dédiée réaffectable, bouton tactile, invite texte ; automatique par défaut | Sons et animation propres à la pompe manuelle |
+| Capacités (A2-A4) | Conservées, décision consignée | — |
+| Petits défauts du parcours | Texte de l'objectif P-2 unifié, groupe de commandes du pupitre réellement masqué, conflit de profil affiché, boutons du verdict QZ-17 distincts | R1 (anciennes sauvegardes), Q4 (arme affichée au plan) |
+
+Vérifié dans Chromium sur le lanceur de développement (stockage isolé) : objectif et étoile de fin de prologue, ligne des sources au Commandement, panneau de saut, plaque et achat de l'Ithaca 37, réglage et bouton de pompe, pompe manuelle en mission (QZ-17), crise de l'Interlude selon le pont. Injections déclarées dans le rapport de livraison.

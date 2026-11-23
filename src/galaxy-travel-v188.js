@@ -42,3 +42,28 @@ export function applyJumpTravelTimeV188(save, settlement) {
   save.galaxy.jumpV116 = { ...save.galaxy.jumpV116, travelDaysV188: JUMP_TRAVEL_DAYS_V188 };
   return JUMP_TRAVEL_HOURS_V188;
 }
+
+// —— Owner decision 2026-11-23 (P-2): the jump stays blocked by an open infestation chain, but the map says
+// why and where to resolve it. The three consoles are the existing annex services that act on the chain
+// (`applyHubAnnexBusinessV71`: arrival airlock = quarantine, CCTV = scan, Bioforge access = seal). ——
+const INFESTATION_STAGE_LABELS_V188 = Object.freeze({
+  exposure: t('exposition', 'exposure'), anomaly: t('anomalie', 'anomaly'), clues: t('indices', 'clues'),
+  confirmation: t('confirmation', 'confirmation'), containment: t('confinement', 'containment'), infestation: t('rupture du confinement', 'containment breach')
+});
+export const INFESTATION_JUMP_ANNEX_IDS_V188 = Object.freeze(['arrival-airlock', 'cctv', 'bioforge']);
+/** Null when no open chain blocks the jump; otherwise the reason and the way out, in FR or EN. */
+export function infestationJumpGuidanceV188(save, language = 'fr') {
+  const chain = save?.hub?.infestationChain;
+  if (!chain || chain.resolved === true) return null;
+  const lang = language === 'en' ? 'en' : 'fr', stage = INFESTATION_STAGE_LABELS_V188[chain.stage]?.[lang] || null;
+  const breach = chain.stage === 'infestation';
+  const why = lang === 'en'
+    ? `Why: MU/TH/UR is tracking a contamination aboard${stage ? ` (stage: ${stage})` : ''}. The jump is refused until it is contained.`
+    : `Pourquoi : MU/TH/UR suit une contamination à bord${stage ? ` (étape : ${stage})` : ''}. Le saut est refusé tant qu’elle n’est pas contenue.`;
+  const how = breach
+    ? (lang === 'en' ? 'To do: containment has failed. Return to the Tantalus and clear the intrusion on the deck MU/TH/UR reports.'
+      : 'À faire : le confinement a cédé. Retournez dans le Tantalus et éliminez l’intrusion sur le pont signalé par MU/TH/UR.')
+    : (lang === 'en' ? 'To do, aboard the Tantalus: arrival airlock console (hangar deck), CCTV matrix (Security / CCTV, next to the CIC), then BIOFORGE airlock control (next to quarantine). Each check strengthens containment; the jump reopens once the chain is closed.'
+      : 'À faire, à bord du Tantalus : console du sas d’arrivée (pont du hangar), matrice CCTV (Sécurité / CCTV, à côté du CIC), puis contrôle du sas BIOFORGE (à côté de la quarantaine). Chaque contrôle renforce le confinement ; le saut se rouvre dès que la chaîne est close.');
+  return Object.freeze({ stage: chain.stage || null, breach, why, how, annexIds: INFESTATION_JUMP_ANNEX_IDS_V188 });
+}

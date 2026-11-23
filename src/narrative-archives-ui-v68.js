@@ -581,7 +581,7 @@ export class NarrativeArchivesUiV68 {
       const button = element(this.document, 'button', {
         className: `button${decision.applied ? '' : ' primary'}`,
         text: decision.applied ? decision.journalOnly ? 'CONCLUSION CONSERVÉE' : 'ROUTE DÉJÀ DÉBLOQUÉE'
-          : decision.lockedByChoice ? 'CHOIX EXCLU PAR LA DÉCISION' : decision.available ? 'CONFIRMER LA CONFRONTATION'
+          : decision.lockedByChoice ? 'CHOIX EXCLU PAR LA DÉCISION' : decision.available ? `CONFIRMER · ${decision.label}` /* V188 2026-11-23 (R6): each verdict button names its own conclusion */
             : decision.reason || `PREUVES MANQUANTES · ${decision.missingRequirements.length}`,
         attributes: { type: 'button', 'data-archive-decision': decision.id, disabled: decision.applied || decision.lockedByChoice || !decision.available || Boolean(this.pendingAction), 'aria-describedby': decisionDescriptionId }
       });

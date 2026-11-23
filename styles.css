@@ -826,6 +826,8 @@ button:disabled {
 }
 
 .mission-archives-overlay-v68[hidden] { display: none !important; }
+/* V188 2026-11-23 (R4): the console command group honours its hidden attribute despite .button-row. */
+#hub-training-controls-v132[hidden] { display: none !important; }
 
 .mission-archives-dialog-v68 {
   width: min(1480px, 100%);

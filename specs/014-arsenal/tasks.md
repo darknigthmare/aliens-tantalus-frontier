@@ -37,3 +37,10 @@
 - [ ] T106 M41A sous-canon 30 mm natif (contrat V174) — non fait au lot B : tir secondaire à concevoir avec les réglages des commandes ; sources réunies (Royal Armouries ; U1 à pompe, 4 coups selon la liste *Dark Descent*)
 - [ ] T107 Combinaison M41A + M240 de Ripley (dépend du tir secondaire de T106) — **Nostromo fait** au lot B : lance-flammes, aiguillon électrique et pistolet laser inscrits avec source puis ajoutés (197–199)
 - [ ] T108 Coop : le pont suit le second joueur, non couvert par le parcours Chromium
+
+## Décisions du propriétaire du 2026-11-23
+
+- [x] T301 Achat des identifiants 194–196 par la même admission et la même plaque provisoire que le lot B (`src/weapon-provisional-plaque-v188.js`, armurerie)
+- [x] T302 Option « pompe manuelle » : réglage, action réaffectable, bouton tactile, invite (`src/weapon-arsenal-runtime-v188.js`)
+- [x] T303 Tests `scripts/verify-owner-decisions-20261123-v188.mjs`
+- Plaques natives : voir T101 (194–235).

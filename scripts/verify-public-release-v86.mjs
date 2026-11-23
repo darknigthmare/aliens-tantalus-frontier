@@ -732,6 +732,7 @@ const FORGE_TOOLING_V140 = new Set([
   'scripts/verify-bugfix-playthrough-modes-v188.mjs',
   // V188 full main-campaign browser run of 2026-11-22 (regressions + run log), source-only exact paths.
   'scripts/verify-bugfix-full-run-v188.mjs',
+  'scripts/verify-owner-decisions-20261123-v188.mjs',
   'docs/development/PLAYTHROUGH_V188_20261122.md',
   // V188 mission VFX pass (slots + sourcing table), source-only exact paths.
   'scripts/verify-vfx-v188.mjs',

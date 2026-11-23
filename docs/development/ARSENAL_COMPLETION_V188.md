@@ -34,9 +34,18 @@ valeur est rangée en trois statuts :
 
 Trois dossiers P0/P1 de l’index de recherche V171 sont promus en entrées de
 catalogue **sans plaque** (`src/weapon-catalog-additions-v188.js`). La règle
-existante de l’armurerie (« PLAQUETTE DÉDIÉE REQUISE ») les rend **non
-achetables** tant qu’une plaque native admise n’existe pas ; elles sont jouables
-par chargement (sauvegarde) et lisibles par le stand de tir. Les numéros 194–196
+existante de l’armurerie (« PLAQUETTE DÉDIÉE REQUISE ») les rendait **non
+achetables** tant qu’une plaque native admise n’existait pas. **Décision du
+propriétaire du 2026-11-23** : ces trois identifiants sont achetables dès
+maintenant derrière une **plaque provisoire dessinée** (Canvas, emplacement
+nommé `armory-plaque-provisional-<id>`, `src/weapon-provisional-plaque-v188.js`),
+au prix de la règle ordinaire de l’armurerie appliquée à leurs statistiques
+[PROPOSÉ]. Elles portent la même admission que le lot B
+(`admissionV188: 'provisional-plaque-purchasable'`) : une seule plaque et une
+seule porte d’achat pour 194–235. La plaque provisoire n’est pas un art livré
+et ne certifie aucune apparence ; une arme sans plaque et sans cette admission
+garde la règle. Elles restent lisibles
+par le stand de tir. Les numéros 194–196
 évitent 191, réservé comme numéro inconnu par le test V124.
 
 | ID | Arme | Source citée | Documenté | Adapté [PROPOSÉ] | À définir |
@@ -52,8 +61,8 @@ par `researchId`, jamais par nom). Les dossiers V170 correspondants
 sont inchangés.
 
 Mise à jour du 23 novembre 2026 : le paragraphe « Non ajoutées » du lot A est
-remplacé par la section « Lot B » ci-dessous. L’achat des armes 194–196 relève
-du lot parallèle des décisions du propriétaire.
+remplacé par la section « Lot B » ci-dessous. L’achat des armes 194–196 est
+ouvert par la même admission que le lot B (décisions du propriétaire du même jour).
 
 ## Lot B — armes de la franchise ajoutées (23 novembre 2026)
 
@@ -518,3 +527,15 @@ Lot B (23 novembre 2026) :
 10. Coop : le pont suit le second joueur, non couvert par les parcours Chromium.
 11. Questions propriétaire : voir `docs/development/QUESTIONS_PROPRIETAIRE_V188.md`
     (sections arsenal des 22 et 23 novembre 2026).
+
+## Décisions du propriétaire du 2026-11-23
+
+| Réf. | Décision | État |
+| --- | --- | --- |
+| A1 | 194–196 achetables à l’armurerie avec une plaque provisoire dessinée | Fait (même admission `provisional-plaque-purchasable` que le lot B, 197–235 ; prix par la règle de l’armurerie ; plaques natives toujours à produire) |
+| A2 | Une roquette par tube | Conservé |
+| A3 | 6 chambres pour le .357 | Conservé |
+| A4 | Capacité du modèle de base pour les finitions | Conservé |
+| A5 | Pompe automatique par défaut (0,4 s [PROPOSÉ]) ; pompe manuelle en option | Fait : réglage `pumpManualV188`, action « Pomper » réaffectable (B), bouton tactile, invite texte ; même délai minimal, aucun gain de cadence |
+
+Tests : `scripts/verify-owner-decisions-20261123-v188.mjs`.

@@ -241,7 +241,8 @@ export const WEAPONS = Object.freeze([...Array.from({ length: 146 }, (_, index) 
     tags: [seed[1], index % 3 === 0 ? 'acid-safe' : 'field', index % 5 === 0 ? 'heavy' : 'portable']
   };
 }), ...WEAPONS_ADDITIONS_V116, ...ADMITTED_WEAPON_ADDITIONS_V121, ...ADMITTED_WEAPON_ADDITIONS_V122,
-  // V188 (spec 014): pending-plaque franchise additions; never purchasable without a native plaque.
+  // V188 (spec 014): franchise additions without a native plaque, sold behind a provisional drawn plaque since
+  // the owner decision of 2026-11-23 (`admissionV188`, weapon-provisional-plaque-v188.js).
   ...WEAPON_CATALOG_ADDITIONS_V188]);
 
 const equipmentSeeds = [

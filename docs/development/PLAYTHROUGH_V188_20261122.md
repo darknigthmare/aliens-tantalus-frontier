@@ -153,3 +153,12 @@ Les tests sont dans `scripts/verify-bugfix-full-run-v188.mjs`, ajouté à `test:
 
 Voir le rapport de livraison de cette branche : `npm run test:all`, `check`, `build`, `check:built`
 et `i18n:check` sont lancés sur le commit final, après la fusion d'`origin`.
+
+## Suites du 23 novembre 2026
+
+Décisions du propriétaire appliquées (`docs/development/QUESTIONS_PROPRIETAIRE_V188.md`, section du 2026-11-23 ; tests `scripts/verify-owner-decisions-20261123-v188.mjs`) :
+
+- **Q1** : la colonie rend du ravitaillement (mission réussie +8, niveau de chantier validé +4 [PROPOSÉ]) et le Commandement le dit. L'injection E1 n'est plus nécessaire pour le ravitaillement ; elle le reste pour le carburant (non décidé).
+- **Q2** : le blocage du saut reste, la carte galactique explique et guide. L'injection E2 reste le seul raccourci ; la clôture par les trois contrôles d'annexe n'a pas été rejouée de bout en bout.
+- **Q3** : l'Acte I (QZ-17) est recommandé avant l'Acte II.
+- **R2** : la crise de l'Interlude attend au pont 2. **R3 à R7** : corrigés. **R1** et **Q4** restent ouverts.

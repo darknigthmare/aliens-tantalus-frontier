@@ -149,6 +149,8 @@ const OPTION_TEXT = Object.freeze({
   cede: t('Laisser la compagnie récupérer le dépôt et négocier l’évacuation.', 'Let the company recover the depot and negotiate the evacuation.'),
   restitution: t('Halloran parle de « restitution » : avec 2 conteneurs ou plus à bord, céder ne coûte aucun moral à l’équipage.', 'Halloran calls it "restitution": with 2 or more containers aboard, ceding costs the crew no morale.'),
   noRestitution: t('Sans conteneur à rendre, céder pèse sur le moral de l’équipage.', 'With no container to hand back, ceding weighs on the crew’s morale.'),
+  // Owner decision 2026-11-23 (P-5): exactly one container aboard is named as such; the 2-3 container rule is unchanged.
+  oneContainer: t('Un seul conteneur à rendre : insuffisant pour une restitution. Céder pèse sur le moral de l’équipage.', 'Only one container to hand back: not enough for a restitution. Ceding weighs on the crew’s morale.'),
   restitutionFreight: t('Les conteneurs voyagent dans la remorque de fret : perdus en route, ils ne comptent plus comme rendus.', 'The containers ride in the freight trailer: lost on the way, they no longer count as handed back.'),
   recovery: t('Halloran exige aussi la créature capturée : tenir la colonie déclenche une tentative de récupération à bord du Tantalus.', 'Halloran also demands the captured creature: holding the colony triggers a recovery attempt aboard the Tantalus.'),
   transmitClosed: t('« Transmettre » n’est pas ouvert :', '"Transmit" is not open:'),
@@ -179,7 +181,8 @@ export function act5CouncilV188(save, language = 'fr', context = {}) {
   }
   const list = options.map(option => {
     const notes = [];
-    if (option.id === 'cede') notes.push(option.restitution ? OPTION_TEXT.restitution[lang] : OPTION_TEXT.noRestitution[lang]);
+    if (option.id === 'cede') notes.push(option.restitution ? OPTION_TEXT.restitution[lang]
+      : (save?.storyCampaignV188?.m577Manifest?.containers || 0) === 1 ? OPTION_TEXT.oneContainer[lang] : OPTION_TEXT.noRestitution[lang]);
     if (option.id === 'cede' && option.restitution) notes.push(OPTION_TEXT.restitutionFreight[lang]);
     if (option.id === 'hold' && option.recoveryAttemptAboard) notes.push(OPTION_TEXT.recovery[lang]);
     return Object.freeze({ id: option.id, label: FINAL_OPTIONS_V188[option.id].label[lang], description: OPTION_TEXT[option.id][lang],

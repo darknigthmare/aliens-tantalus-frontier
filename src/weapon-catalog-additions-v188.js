@@ -5,6 +5,8 @@
  * slot instead of an image. Every number is original Tantalus gameplay tuning
  * marked [PROPOSÉ] (statsPolicy and docs/development/ARSENAL_COMPLETION_V188.md);
  * identities cite their source and none is certified 1:1.
+ * Owner decision 2026-11-23: ids 194–196 are purchasable behind a provisional drawn plaque, through the
+ * same admission field as lot B (`admissionV188: 'provisional-plaque-purchasable'`); `common` is unchanged.
  * Existing IDs, saves and numbering are untouched (new IDs start at 194; 191 stays a test-reserved unknown number).
  */
 import { WEAPON_CATALOG_FRANCHISE_V188 } from './weapon-catalog-franchise-v188.js';
@@ -22,7 +24,7 @@ const common = {
 };
 export const WEAPON_CATALOG_ADDITIONS_V188 = freeze([
   {
-    ...common,
+    ...common, plaqueStatus: 'provisional-drawn', admissionV188: 'provisional-plaque-purchasable', // owner decision 2026-11-23
     id: 'weapon-194-hicks-ithaca-37-shotgun', name: 'Hicks Ithaca 37 Shotgun', canonicalName: 'Ithaca 37 (Hicks, Aliens 1986)',
     family: 'ballistic', source: 'USCM', damage: 46, fireRate: 1.5, magazine: 4, reload: 2.6, penetration: 18,
     tags: ['shotgun', 'portable'], placeholderCategoryV188: 'shotgun', sourceWork: 'Aliens (1986)', appearances: ['Aliens (1986)'],
@@ -32,10 +34,10 @@ export const WEAPON_CATALOG_ADDITIONS_V188 = freeze([
     identityEvidence: 'on-screen-film-prop-identified-by-secondary-firearm-database',
     identityVerified: false,
     sourceMechanism: 'pump-action-tube-magazine', ammunitionV188: '12 ga shotshell (chambrage de l’arme réelle) [À VÉRIFIER]',
-    description: 'Fusil à pompe du caporal Hicks dans Aliens (1986), identifié comme un Ithaca 37 raccourci par des bases secondaires. Alimentation par tube et pompe. Plaque d’armurerie à produire : non disponible à l’achat.'
+    description: 'Fusil à pompe du caporal Hicks dans Aliens (1986), identifié comme un Ithaca 37 raccourci par des bases secondaires. Alimentation par tube et pompe. Plaque d’armurerie provisoire (dessin) : disponible à l’armurerie.'
   },
   {
-    ...common,
+    ...common, plaqueStatus: 'provisional-drawn', admissionV188: 'provisional-plaque-purchasable', // owner decision 2026-11-23
     id: 'weapon-195-sevastopol-pump-shotgun', name: 'Sevastopol Pump Shotgun', canonicalName: 'Shotgun (Alien: Isolation)',
     family: 'ballistic', source: 'Sevastopol', damage: 42, fireRate: 1.3, magazine: 4, reload: 2.8, penetration: 14,
     tags: ['shotgun', 'portable'], placeholderCategoryV188: 'shotgun', sourceWork: 'Alien: Isolation', appearances: ['Alien: Isolation'],
@@ -45,10 +47,10 @@ export const WEAPON_CATALOG_ADDITIONS_V188 = freeze([
     identityEvidence: 'first-party-manual-names-weapon-class-only',
     identityVerified: true,
     sourceMechanism: 'pump-action-tube-magazine', ammunitionV188: 'shotshell [À DÉFINIR]',
-    description: 'Fusil à pompe trouvé à bord de Sevastopol (Alien: Isolation). Alimentation par tube et pompe. Plaque d’armurerie à produire : non disponible à l’achat.'
+    description: 'Fusil à pompe trouvé à bord de Sevastopol (Alien: Isolation). Alimentation par tube et pompe. Plaque d’armurerie provisoire (dessin) : disponible à l’armurerie.'
   },
   {
-    ...common,
+    ...common, plaqueStatus: 'provisional-drawn', admissionV188: 'provisional-plaque-purchasable', // owner decision 2026-11-23
     id: 'weapon-196-sevastopol-flamethrower', name: 'Sevastopol Flamethrower', canonicalName: 'Flamethrower (Alien: Isolation)',
     family: 'flame', source: 'Sevastopol', damage: 30, fireRate: 9, magazine: 80, reload: 2.4, penetration: 0,
     tags: ['flame', 'portable'], placeholderCategoryV188: 'flame', sourceWork: 'Alien: Isolation', appearances: ['Alien: Isolation'],
@@ -58,7 +60,7 @@ export const WEAPON_CATALOG_ADDITIONS_V188 = freeze([
     identityEvidence: 'first-party-manual-names-weapon-class-only',
     identityVerified: true,
     sourceMechanism: 'fuel-canister-flame-jet', ammunitionV188: 'fuel [À DÉFINIR]',
-    description: 'Lance-flammes trouvé à bord de Sevastopol (Alien: Isolation). Réservoir de carburant, aucune douille. Plaque d’armurerie à produire : non disponible à l’achat.'
+    description: 'Lance-flammes trouvé à bord de Sevastopol (Alien: Isolation). Réservoir de carburant, aucune douille. Plaque d’armurerie provisoire (dessin) : disponible à l’armurerie.'
   },
   // Lot B (franchise arsenal): ids 197+, provisional drawn plaque, purchasable.
   ...WEAPON_CATALOG_FRANCHISE_V188

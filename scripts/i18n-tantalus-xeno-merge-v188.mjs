@@ -1013,7 +1013,14 @@ export const TANTALUS_I18N_DELTA_V188 = Object.freeze({
       "PROT. HARLOW · INCINÉRATION",
       "PROT. BISHOP-9 · SOUS SCELLÉS",
       "BIOFORGE · Inez Harlow et BISHOP-9 débattent devant le sas.",
-      "BIOFORGE · accès fermé tant que le débat n’est pas tranché."
+      "BIOFORGE · accès fermé tant que le débat n’est pas tranché.",
+      "Fusil à pompe du caporal Hicks dans Aliens (1986), identifié comme un Ithaca 37 raccourci par des bases secondaires. Alimentation par tube et pompe. Plaque d’armurerie provisoire (dessin) : disponible à l’armurerie.",
+      "Fusil à pompe trouvé à bord de Sevastopol (Alien: Isolation). Alimentation par tube et pompe. Plaque d’armurerie provisoire (dessin) : disponible à l’armurerie.",
+      "Lance-flammes trouvé à bord de Sevastopol (Alien: Isolation). Réservoir de carburant, aucune douille. Plaque d’armurerie provisoire (dessin) : disponible à l’armurerie.",
+      "EXERCICE · Armurerie : porte du Proving Ground, au niveau du sol. Dans l’annexe, armez la console, puis montez par l’échelle (W, puis ESPACE au palier) jusqu’au pas de tir : neuf cibles, trois directions et une recharge.",
+      "Fusils à pompe : pompe manuelle (touche dédiée)",
+      "POMPE",
+      "Pomper le fusil à pompe"
     ],
     "changed": {
       "Extraire le renseignement synthétique": {
@@ -1156,7 +1163,8 @@ export const TANTALUS_I18N_DELTA_V188 = Object.freeze({
       "ANALYSE · {0} · {1} IMPRIMÉ(S) · {2} NEUTRALISÉ(S)",
       "DÉCONTAMINATION {0} %",
       "L’équipe technique du Tantalus est à bord, suivie de {0} colon(s) volontaire(s) de Port-Méridien. Asphodèle est reprise.",
-      "L’équipe technique du Tantalus, les récupérateurs de Grue et {0} colon(s) volontaire(s) de Port-Méridien sont à bord. Asphodèle est reprise."
+      "L’équipe technique du Tantalus, les récupérateurs de Grue et {0} colon(s) volontaire(s) de Port-Méridien sont à bord. Asphodèle est reprise.",
+      "CONFIRMER · {0}"
     ],
     "changed": {
       "TEMPS {0} S · VISÉE {1}": {

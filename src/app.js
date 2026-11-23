@@ -1,7 +1,8 @@
-import { colonySnapshotV188, investColonySiteV188, applyColonyOperationResultV188, COLONY_TIERS_V188, colonyRescuedV188 } from './colony-reconstruction-v188.js';
+import { colonySnapshotV188, investColonySiteV188, applyColonyOperationResultV188, COLONY_TIERS_V188, colonyRescuedV188,
+  colonySupplySourcesTextV188, colonySuppliesLineV188 } from './colony-reconstruction-v188.js';
 import { filterUnlockedCampaignsV188, stationLockReasonV188, stationLockTextV188, stationSnapshotV188, cassiusChoicePendingV188, chooseCassiusV188, CASSIUS_CHOICES_V188, CASSIUS_DIALOG_V188, stationReturnSceneDueV188, markStationSceneSeenV188, STATION_SCENES_V188 } from './station-asphodele-v188.js';
 import { startCrewDebateV188, concludeCrewDebateV188, bioforgeCarePolicyV188, bioforgeNarrativeAccessV188, crewQuestActionsV188, acceptCrewQuestV188, crewQuestStepV188, answerCrewQuestStepV188, turnInCrewQuestV188, applyCrewQuestOperationResultV188, crewQuestsSnapshotV188, getCrewQuestV188, davidMemoryRestoredV188, crewQuestEpilogueLineV188, crewQuestNotesV188 } from './crew-quests-v188.js';
-import { jumpRouteTextV188, applyJumpTravelTimeV188, jumpArrivalTextV188 } from './galaxy-travel-v188.js';
+import { jumpRouteTextV188, applyJumpTravelTimeV188, jumpArrivalTextV188, infestationJumpGuidanceV188 } from './galaxy-travel-v188.js';
 import { deliverTravelMessagesV188, travelMessagesListV188, travelArrivalNoticeV188, TRAVEL_MESSAGES_TEXT_V188, pushCampaignTravelMessageV188 } from './travel-messages-v188.js';
 // V188 spec 011: « La Saison des Reines », first side campaign (call, travel, Arc 1, Rask choice, debrief).
 import { filterQueensCampaignsV188, queensLockReasonV188, queensLockTextV188, applyQueensOperationResultV188, queensCallDueV188, receiveQueensCallV188,
@@ -45,7 +46,7 @@ import { detectReactiveTriggersV188, selectReactiveLinesV188 } from './reactive-
 import { applyAccessibilityV188, installKeyRemapV188, mountKeyBindingsUiV188, normalizeKeyBindingsV188, soundCaptionV188 } from './accessibility-v188.js';
 import { spareCrewMemberV188, normalizeCrewPermadeathV188, normalizeCustomDifficultyV188, normalizeOriginV188, CUSTOM_DIFFICULTY_BOUNDS_V188 } from './run-options-v188.js';
 import { cueForGameEventV188, casteCueV188 } from './audio-cues-v188.js';
-import { deriveStoryCampaignV188, markStoryDebriefSeenV188, markStoryCinematicSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, storyEndingReachedV188, resolveM577ManifestV188, normalizeStoryCampaignV188, startInterludeV188, interludeCrisisClearedV188, resolveInterludeV188, rescueJunParkV188, interludeChoicePendingV188, interludeDueV188, markStoryBeatSeenV188, reconcileInterludeCrisisV188 } from './story-campaign-v188.js';
+import { deriveStoryCampaignV188, markStoryDebriefSeenV188, markStoryCinematicSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, storyEndingReachedV188, resolveM577ManifestV188, normalizeStoryCampaignV188, startInterludeV188, interludeCrisisDeckBoundV188, interludeCrisisClearedV188, resolveInterludeV188, rescueJunParkV188, interludeChoicePendingV188, interludeDueV188, markStoryBeatSeenV188, reconcileInterludeCrisisV188 } from './story-campaign-v188.js';
 import { InGameStagingV188, STAGED_BEATS_V188 } from './ingame-staging-v188.js';
 import { openStoryChoiceDialogV188 } from './story-choice-ui-v188.js';
 import { CinematicPlayerV188, CINEMATICS_V188 } from './story-cinematics-v188.js';
@@ -369,6 +370,8 @@ const hubEngine = new StationHubGameV188(byId('hub-canvas'), {
   onTrainingEventV132: handleHubTrainingEventV132,
   onStatus: renderHubStatus
 });
+// V188 owner decision 2026-11-23 (P-4): the Interlude quarantine crisis stays on deck 2, as its objective says.
+hubEngine.crisisDeckBoundV188 = crisis => interludeCrisisDeckBoundV188(saveSystem.data, crisis);
 const bioforgeRuntimeV80 = new BioforgeRuntimeV80(byId('bioforge-canvas-v80'), {
   audio,
   onEvent: handleBioforgeEventV80,
@@ -548,6 +551,7 @@ function applyRuntimeSettings() {
   document.documentElement.dataset.quality = settings.quality || 'high';
   document.documentElement.dataset.contrast = settings.contrast || 'standard';
   document.documentElement.dataset.subtitles = settings.subtitles ? 'on' : 'off';
+  syncPumpTouchButtonV188();
   hubEngine.setReducedMotion(Boolean(settings.reducedMotion));
   engine.setCoop(Boolean(settings.coop));
   audio.setVolumes({ effects: settings.effects ?? 0.7, music: settings.music ?? 0.45 });
@@ -1501,6 +1505,13 @@ function renderCommand() {
     ['CR', resources.credits], ['ALLIAGE', resources.alloy], ['CARBURANT', resources.fuel], ['MÉD', resources.medical],
     ['R&D', resources.research], ['PATHOGÈNE', resources.pathogen], ['RAVIT.', systems.supplies], ['ÉNERGIE', systems.power]
   ].map(([label, value]) => `<span><b>${number(value)}</b>${label}</span>`).join('');
+  // V188 owner decision 2026-11-23 (P-1): the Command table says where supplies are earned.
+  let supplySourcesV188 = byId('supply-sources-v188');
+  if (!supplySourcesV188) {
+    supplySourcesV188 = Object.assign(document.createElement('p'), { id: 'supply-sources-v188', className: 'hint' });
+    byId('strategy-resources').after(supplySourcesV188);
+  }
+  supplySourcesV188.textContent = colonySupplySourcesTextV188(document.documentElement.lang);
   byId('squad-summary').innerHTML = `${meter('MORAL', systems.morale)}${meter('QUARANTAINE', systems.quarantine)}${meter('COQUE', systems.hull)}<p class="detail-copy">${saveSystem.data.strategy.selectedCrewIds.length}/${MAX_SQUAD_SIZE} affectés · ${saveSystem.data.memorial.length} au mémorial</p>`;
   const crisis = saveSystem.data.hub.activeCrisis;
   byId('crisis-summary').innerHTML = crisis && !crisis.resolved
@@ -2366,6 +2377,14 @@ function renderCommandMissionsV110() {
   renderAct5PanelV188();
   byId('command-mission-status-v110').textContent = active ? 'MISSION ACTIVE · manifeste verrouillé'
     : `${missions.length} ordres reçus. Sélectionnez une affectation pour consulter son manifeste.`;
+  // V188 owner decision 2026-11-23 (P-3): the Lethe notebook lists its four chapters and starts at QZ-18.
+  // While the story recommends Act I, its advice line names Act I first (the notebook itself is unchanged).
+  if (!active && recommendedV188 === 'special-narrative-qz17' && !saveSystem.data.galaxy.completedCampaignIds.includes(STORY_RELAY_CAMPAIGN_ID_V188)) {
+    const adviceV188 = byId('operation-plan')?.querySelector?.('.lethe-continuity-v163__recommendation');
+    if (adviceV188) adviceV188.textContent = document.documentElement.lang === 'en'
+      ? 'Recommended next step: Act I (QZ-17), then Act II (QZ-18). The other operations stay available.'
+      : 'Prochaine étape conseillée : Acte I (QZ-17), puis Acte II (QZ-18). Les autres opérations restent accessibles.';
+  }
 }
 
 function renderStrategy() {
@@ -2488,7 +2507,9 @@ function renderGalaxyJumpV116() {
   const failed = failedJumpOwnerV116 && ownsTimelineV84(failedJumpOwnerV116);
   const orbitalWorld = WORLDS.find(world => world.id === getShipWorldIdV116(saveSystem.data));
   const preparation = underway ? `<p>DESTINATION · ${escapeHtml(destination?.name || '')}</p><p role="status" aria-live="polite" data-jump-countdown-v116>${state.phase === 'blocked' ? `Transit suspendu · ${escapeHtml(state.reason)} · carburant conservé` : failed ? 'Enregistrement refusé · arrivée non confirmée · réessayez ou annulez' : `Stabilisation du champ · T−${Math.ceil(state.remainingMs / 1000)} s`}</p><progress data-jump-progress-v116 max="1" value="${state.progress}" aria-label="Préparation hyperspatiale" style="width:100%;height:14px"></progress><div class="button-row"><button class="button compact" data-cancel-jump-v116>ANNULER SANS DÉBIT</button>${failed ? '<button class="button compact" data-retry-jump-v116>RÉESSAYER L’ARRIVÉE</button>' : ''}</div>` : '';
-  const content = `<section id="galaxy-jump-panel-v116" class="galaxy-jump-v115"><p class="eyebrow">TANTALUS · PRÉPARATION HYPERSPATIALE</p><p>ORBITE · ${escapeHtml(orbitalWorld?.name || 'Position indéterminée')}</p>${preparation}<p>${jump.ready ? escapeHtml(jumpRouteTextV188(jump, document.documentElement.lang)) : escapeHtml(jump.reasons.join(' · '))}</p><button class="button primary wide" data-confirm-jump-v115="${activeWorld.id}" ${jump.ready ? '' : 'disabled'}>PRÉPARER LE TRANSIT</button></section>`;
+  // V188 owner decision 2026-11-23 (P-2): the block stays; the panel says why and where to resolve it.
+  const infestationGuidanceV188 = jump.ready ? null : infestationJumpGuidanceV188(saveSystem.data, document.documentElement.lang);
+  const content = `<section id="galaxy-jump-panel-v116" class="galaxy-jump-v115"><p class="eyebrow">TANTALUS · PRÉPARATION HYPERSPATIALE</p><p>ORBITE · ${escapeHtml(orbitalWorld?.name || 'Position indéterminée')}</p>${preparation}<p>${jump.ready ? escapeHtml(jumpRouteTextV188(jump, document.documentElement.lang)) : escapeHtml(jump.reasons.join(' · '))}</p>${infestationGuidanceV188 ? `<div class="hint" role="note" data-jump-infestation-guidance-v188><p>${escapeHtml(infestationGuidanceV188.why)}</p><p>${escapeHtml(infestationGuidanceV188.how)}</p></div>` : ''}<button class="button primary wide" data-confirm-jump-v115="${activeWorld.id}" ${jump.ready ? '' : 'disabled'}>PRÉPARER LE TRANSIT</button></section>`;
   const panel = byId('galaxy-jump-panel-v116');
   if (panel) panel.outerHTML = content;
   else byId('world-detail').insertAdjacentHTML('beforeend', content);
@@ -2668,7 +2689,7 @@ function renderOperationPlan() {
   const launchDisabled = recovery.canAbandon || (!brief.ready && !operation);
   // V188 full run (2026-11-22): a launch refused for resources names what is missing, under the button.
   const launchMissingV188 = !recovery.canAbandon && !operation && !brief.ready ? missingStrategicCosts(saveSystem.data, brief.cost) : [];
-  const launchRefusalV188 = launchMissingV188.length ? `<p class="hint" role="status" data-launch-refusal-v188>${escapeHtml(strategicCostRefusalV188({ missingCosts: launchMissingV188 }, document.documentElement.lang))}</p>` : '';
+  const launchRefusalV188 = launchMissingV188.length ? `<p class="hint" role="status" data-launch-refusal-v188>${escapeHtml(strategicCostRefusalV188({ missingCosts: launchMissingV188 }, document.documentElement.lang))}${launchMissingV188.some(entry => entry.key === 'supplies') ? ` ${escapeHtml(colonySupplySourcesTextV188(document.documentElement.lang))}` : ''}</p>` : '';
   const launchLabel = recovery.canAbandon ? 'REPRISE IMPOSSIBLE' : operation ? 'REPRENDRE L’OPÉRATION' : 'DÉPLOYER ECHO-9';
   const recoveryAction = recovery.canAbandon
     ? '<button id="operation-abandon-v69" class="button danger-outline wide">ARCHIVER L’OPÉRATION PERDUE</button>'
@@ -2770,7 +2791,8 @@ function procurementActionsV62(record) {
   const inventoryKey = `${kind}Ids`;
   const owned = saveSystem.data.strategy.inventory[inventoryKey]?.includes(item.id);
   const loadoutLocked = Boolean(saveSystem.data.strategy.currentOperation);
-  // V188 (owner decision, 23 Nov. 2026): a weapon with a provisional drawn plaque is purchasable now.
+  // V188 (owner decision, 23 Nov. 2026): a weapon admitted with a provisional drawn plaque (194–235) is purchasable now;
+  // the rule stands for every other weapon without a native plaque.
   if (kind === 'weapon' && !resolveWeaponVisualProfileV63(item) && !hasProvisionalPlaqueV188(item)) {
     const bridge = getExcelWeaponBridgeV63(item.id);
     const sourceLabel = bridge?.excelIds?.length ? ` · Excel ${bridge.excelIds.join(', ')}` : '';
@@ -3204,7 +3226,7 @@ function renderHubStatus(status = lastHubStatus) {
   const forgeShipSessionV141 = standaloneContext === 'forge-playtest' && forgePlaytest?.kind === 'ship' ? hubEngine.forgeSessionV141 : null;
   const provingAmmoV81 = `${Math.max(0, Number(status?.provingGroundMagazineV81) || 0)}/${Math.max(0, Number(status?.provingGroundReserveV81) || 0)}`;
   byId('hub-prompt').textContent = translateHubPromptV185(status?.prompt || 'A/D marcher · W/S grimper · C ramper · F tirer · E utiliser');
-  byId('hub-system-readout').innerHTML = `<span>${tV185('hub.readout.health', 'SANTÉ')} <b>${Math.round(status?.health ?? saveSystem.data.hub.playerHealth ?? 100)}%</b></span><span>${tV185('hub.readout.threats', 'MENACES')} <b>${status?.threats ?? saveSystem.data.hub.activeCrisis?.count ?? 0}</b></span><span>${tV185('hub.readout.route', 'ROUTE')} <b>${status?.route?.source || 'TANTALUS'}</b></span><span>${provingGroundActiveV81 ? tV185('hub.readout.qualif', 'QUALIF M41A') : tV185('hub.readout.level', 'NIVEAU')} <b>${provingGroundActiveV81 ? `${escapeHtml(provingPhaseV81)} · ${provingScoreV81} · ${provingAmmoV81}` : forgeShipSessionV141 ? tV185('hub.readout.rooms', `${forgeShipSessionV141.reachableRoomIds.length} SALLES`, { count: forgeShipSessionV141.reachableRoomIds.length }) : tV185('hub.readout.zones', `${status?.route?.nodeCount || 26} ZONES`, { count: status?.route?.nodeCount || 26 })}</b></span>`;
+  byId('hub-system-readout').innerHTML = `<span>${tV185('hub.readout.health', 'SANTÉ')} <b>${Math.round(status?.health ?? saveSystem.data.hub.playerHealth ?? 100)}%</b></span><span>${tV185('hub.readout.threats', 'MENACES')} <b>${status?.threats ?? saveSystem.data.hub.activeCrisis?.count ?? 0}${heldThreatsReadoutV188()}</b></span><span>${tV185('hub.readout.route', 'ROUTE')} <b>${status?.route?.source || 'TANTALUS'}</b></span><span>${provingGroundActiveV81 ? tV185('hub.readout.qualif', 'QUALIF M41A') : tV185('hub.readout.level', 'NIVEAU')} <b>${provingGroundActiveV81 ? `${escapeHtml(provingPhaseV81)} · ${provingScoreV81} · ${provingAmmoV81}` : forgeShipSessionV141 ? tV185('hub.readout.rooms', `${forgeShipSessionV141.reachableRoomIds.length} SALLES`, { count: forgeShipSessionV141.reachableRoomIds.length }) : tV185('hub.readout.zones', `${status?.route?.nodeCount || 26} ZONES`, { count: status?.route?.nodeCount || 26 })}</b></span>`;
   const hubView = document.querySelector('.view[data-panel="hub"]');
   if (hubView) hubView.dataset.provingGroundActiveV81 = String(provingGroundActiveV81);
   all('[data-proving-ground-control-v81]').forEach((button) => {
@@ -3214,11 +3236,24 @@ function renderHubStatus(status = lastHubStatus) {
   renderHubTrainingControlsV132();
 }
 
+/** V188 2026-11-23 (P-4): threats of a deck-bound crisis waiting on another deck are named with their deck. */
+function heldThreatsReadoutV188() {
+  const held = hubEngine.crisisHeldThreatsV188?.();
+  return held ? ` · ${held.count} ${document.documentElement.lang === 'en' ? 'ON DECK' : 'AU PONT'} ${held.deck}` : '';
+}
+
+/** The touch pump button exists only while the manual pump option is on. */
+function syncPumpTouchButtonV188() {
+  const button = byId('mission-pump-v188');
+  if (button) button.hidden = saveSystem.data?.settings?.pumpManualV188 !== true;
+}
+
 function renderHubTrainingControlsV132() {
   const root = byId('hub-training-controls-v132');
   const model = activeView === 'hub' ? hubEngine.getHubTrainingCommandsV132?.() : null;
   root.hidden = !model?.context;
-  if (!model?.context) return;
+  // V188 2026-11-23 (R4): outside a console, no stale command button stays in the document.
+  if (!model?.context) { if (root.innerHTML) root.innerHTML = ''; return; }
   const rooms = HUB_DECKS.flatMap(deck => deck.rooms);
   const html = model.commands.map(command => {
     const door = command.id === 'door-toggle' ? model.doors.find(door => door.id === command.value) : null;
@@ -3286,6 +3321,8 @@ function renderProfiles() {
   byId('setting-motion').checked = saveSystem.data.settings.reducedMotion;
   byId('setting-subtitles').checked = saveSystem.data.settings.subtitles;
   if (byId('setting-insertion-full-v188')) byId('setting-insertion-full-v188').checked = saveSystem.data.settings.insertionAlwaysFullV188 === true;
+  if (byId('setting-pump-manual-v188')) byId('setting-pump-manual-v188').checked = saveSystem.data.settings.pumpManualV188 === true;
+  syncPumpTouchButtonV188();
   byId('setting-quality').value = saveSystem.data.settings.quality || 'high';
   byId('setting-contrast').value = saveSystem.data.settings.contrast || 'standard';
   byId('setting-aim-assist').value = saveSystem.data.settings.aimAssist || 'standard';
@@ -4140,6 +4177,7 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   // operation or pay its rewards in memory before the durable write succeeds.
   const candidate = clone(saveSystem.data);
   const resourcesBeforeV188 = clone(candidate.galaxy.resources);
+  const suppliesBeforeV188 = Number(candidate.hub?.systems?.supplies) || 0;
   const outcome = resolveOperation(candidate, {
     success,
     kills: event.kills || 0,
@@ -4167,6 +4205,8 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   const queensChangeV188 = applyQueensOperationResultV188(candidate, { success: resolvedSuccess, campaignId: operation.campaignId });
   // V188 debrief: the amounts the hub actually receives (before the transit clock runs).
   outcome.paidV188 = paidRewardsV188(resourcesBeforeV188, candidate.galaxy.resources);
+  // V188 owner decision 2026-11-23 (P-1): supplies sent back by the colony (mission, validated site level).
+  outcome.suppliesPaidV188 = Math.max(0, Math.round(((Number(candidate.hub?.systems?.supplies) || 0) - suppliesBeforeV188) * 100) / 100);
   // V188 reactive lines (bible §53.6): failure, colonist loss, injured return.
   const reactiveLinesV188 = selectReactiveLinesV188(candidate,
     detectReactiveTriggersV188(saveSystem.data, candidate, operation, { success: resolvedSuccess }), {
@@ -4497,7 +4537,7 @@ function handleGameEvent(event) {
     byId('retreat-mission').textContent = 'RETOUR À BORD';
     // V188: the extraction screen and the log name what was paid, not the native mission tally.
     if (outcome.success && engine.mission) engine.mission.paidRewardsV188 = clone(outcome.paidV188);
-    log.textContent = outcome.success ? `${outcome.result} ${paidRewardsLineV188(outcome.paidV188)}` : outcome.result;
+    log.textContent = outcome.success ? `${outcome.result} ${paidRewardsLineV188(outcome.paidV188)}${colonySuppliesLineV188(outcome.suppliesPaidV188, document.documentElement.lang)}` : outcome.result;
     toast(outcome?.success
       ? 'Victoire persistée : monde, équipage, économie et continuité mis à jour.'
       : outcome?.result || 'Résolution enregistrée : les conditions de victoire ne sont pas remplies.');
@@ -4589,8 +4629,15 @@ function persistHub(patch) {
   const annex = hubEngine.currentAnnexV71();
   const parentY = annex ? hubEngine.annexReturnPoseV71?.y ?? hubEngine.restoreReturnPoseV71(annex).y : hubEngine.player?.y;
   const height = Number.isFinite(parentY) ? { positionY: Math.round(parentY) } : {};
-  saveSystem.commit({ hub: { ...clone(saveSystem.data.hub), ...patch, ...height } });
+  // V188 2026-11-23 (R5): a profile changed in another session is reported in the interface, not as a page error.
+  try { saveSystem.commit({ hub: { ...clone(saveSystem.data.hub), ...patch, ...height } }); hubSaveConflictAtV188 = 0; }
+  catch (error) {
+    if (error?.code !== 'SAVE_CONFLICT') throw error;
+    const now = Date.now();
+    if (now - hubSaveConflictAtV188 > 15000) { hubSaveConflictAtV188 = now; toast(error.message); }
+  }
 }
+let hubSaveConflictAtV188 = 0;
 
 function applyHubService(action) {
   const windowId = Math.floor(absoluteHours(saveSystem.data.clock) / 6);
@@ -5283,6 +5330,14 @@ function setupRuntimeControls() {
   });
   byId('mission-vehicle').onclick = () => engine.toggleVehicle(engine.player);
   bindTacticalReloadButtonV77(byId('mission-reload'), engine, audio);
+  // V188 owner decision 2026-11-23: manual pump option — the engine reads the setting live; touch button and key label.
+  engine.pumpInputV188 = {
+    manual: () => saveSystem.data?.settings?.pumpManualV188 === true,
+    language: () => document.documentElement.lang,
+    keyLabel: () => String(normalizeKeyBindingsV188(saveSystem.data?.settings?.keyBindingsV188).pump || '').replace(/^(Key|Digit)/, '') || '—'
+  };
+  if (byId('mission-pump-v188')) byId('mission-pump-v188').onclick = () => engine.requestPumpV188?.(engine.player);
+  syncPumpTouchButtonV188();
   // Experimental physical feed only: Shift+R performs an honest speed reload.
   // Capture before the ordinary canvas R handler so one edge cannot start two reloads.
   globalThis.addEventListener('keydown', event => {
@@ -5595,6 +5650,7 @@ function bind() {
     'setting-permadeath-v188': ['crewPermadeathV188', (element) => normalizeCrewPermadeathV188(saveSystem.data.settings.crewPermadeathV188, element.checked)],
     'setting-colorblind-v188': ['colorblindV188', (element) => element.value],
     'setting-insertion-full-v188': ['insertionAlwaysFullV188', (element) => element.checked],
+    'setting-pump-manual-v188': ['pumpManualV188', (element) => element.checked],
     'setting-text-scale-v188': ['textScaleV188', (element) => Number(element.value)]
   };
   // V188 complete J1 key remapping (§53.8): capture-phase translation layer.

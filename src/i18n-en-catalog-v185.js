@@ -7536,6 +7536,14 @@ export const EN_CATALOG_V185 = Object.freeze({
 "PROT. BISHOP-9 · SOUS SCELLÉS": "BISHOP-9 PROT. · UNDER SEAL",
 "BIOFORGE · Inez Harlow et BISHOP-9 débattent devant le sas.": "BIOFORGE · Inez Harlow and BISHOP-9 are debating at the airlock.",
 "BIOFORGE · accès fermé tant que le débat n’est pas tranché.": "BIOFORGE · access closed until the debate is settled.",
+// V188 owner decisions of 2026-11-23 (reviewed through i18n-catalog-maintenance-v186 merge).
+"Fusil à pompe du caporal Hicks dans Aliens (1986), identifié comme un Ithaca 37 raccourci par des bases secondaires. Alimentation par tube et pompe. Plaque d’armurerie provisoire (dessin) : disponible à l’armurerie.": "Corporal Hicks’ pump shotgun in Aliens (1986), identified as a cut-down Ithaca 37 by secondary references. Tube-fed, pump action. Provisional armory plate (drawing): available at the armory.",
+"Fusil à pompe trouvé à bord de Sevastopol (Alien: Isolation). Alimentation par tube et pompe. Plaque d’armurerie provisoire (dessin) : disponible à l’armurerie.": "Pump shotgun found aboard Sevastopol (Alien: Isolation). Tube-fed, pump action. Provisional armory plate (drawing): available at the armory.",
+"Lance-flammes trouvé à bord de Sevastopol (Alien: Isolation). Réservoir de carburant, aucune douille. Plaque d’armurerie provisoire (dessin) : disponible à l’armurerie.": "Flamethrower found aboard Sevastopol (Alien: Isolation). Fuel tank, no spent cases. Provisional armory plate (drawing): available at the armory.",
+"EXERCICE · Armurerie : porte du Proving Ground, au niveau du sol. Dans l’annexe, armez la console, puis montez par l’échelle (W, puis ESPACE au palier) jusqu’au pas de tir : neuf cibles, trois directions et une recharge.": "EXERCISE · Armory: Proving Ground door, at floor level. In the annex, arm the console, then climb the ladder (W, then SPACE at the landing) to the firing line: nine targets, three directions and one reload.",
+"Fusils à pompe : pompe manuelle (touche dédiée)": "Pump shotguns: manual pump (dedicated key)",
+"POMPE": "PUMP",
+"Pomper le fusil à pompe": "Pump the shotgun",
 // V188 franchise arsenal, spec 014 lot B (reviewed through i18n-catalog-maintenance-v186 merge).
 "Lance-flammes de fortune de l’équipage du Nostromo dans Alien (1979), assemblé par Parker d’après les bases secondaires. Réservoir de carburant, aucune douille. Plaque provisoire dessinée.": "Improvised flamethrower of the Nostromo crew in Alien (1979), assembled by Parker according to secondary databases. Fuel tank, no casing. Provisional drawn plaque.",
 "Aiguillon électrique bricolé par Brett dans Alien (1979), décrit comme une arme proche d’un aiguillon à bétail. Contact étourdissant, aucune munition. Plaque provisoire dessinée.": "Electric prod put together by Brett in Alien (1979), described as a weapon similar to a cattle prod. Stunning contact, no ammunition. Provisional drawn plaque.",
@@ -8233,6 +8241,8 @@ export const EN_PATTERNS_V185 = Object.freeze({
 // V188 station levels, owner decisions 2026-11-23: station zone names, Grue at the dock, volunteer colonists (reviewed through i18n-catalog-maintenance-v186 merge).
 "L’équipe technique du Tantalus est à bord, suivie de {0} colon(s) volontaire(s) de Port-Méridien. Asphodèle est reprise.": "The Tantalus technical team is aboard, followed by {0} volunteer colonist(s) from Port-Méridien. Asphodèle is retaken.",
 "L’équipe technique du Tantalus, les récupérateurs de Grue et {0} colon(s) volontaire(s) de Port-Méridien sont à bord. Asphodèle est reprise.": "The Tantalus technical team, Grue’s salvagers and {0} volunteer colonist(s) from Port-Méridien are aboard. Asphodèle is retaken.",
+// V188 owner decisions of 2026-11-23 (reviewed through i18n-catalog-maintenance-v186 merge).
+"CONFIRMER · {0}": "CONFIRM · {0}",
 // V188 franchise arsenal, spec 014 lot B.
 "{0} — plaque provisoire dessinée, illustration à produire": "{0} — provisional drawn plate, artwork to be produced"
 });
