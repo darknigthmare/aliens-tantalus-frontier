@@ -20,7 +20,7 @@ const check = (label, condition, evidence = null) => { report.checks.push({ labe
 // At least one entry per category; language EN for one of them.
 const SAMPLE = [
   ['start-title', 'fr'], ['start-creator', 'fr'], ['prologue-p2-qualification', 'fr'], ['prologue-p3-triage', 'en'], ['hub-armory', 'fr'], ['asphodele-asph-ring', 'fr'],
-  ['main-act1-qz17', 'fr'], ['main-council', 'fr'], ['ending-relay-speaks', 'en'], ['colony-c1', 'fr'], ['station-cassius-choice', 'fr'], ['queens-arrival', 'fr'],
+  ['main-act1-qz17', 'fr'], ['main-council', 'fr'], ['ending-relay-speaks', 'en'], ['colony-c1', 'fr'], ['station-cassius-choice', 'fr'], ['queens-arrival', 'fr'], ['queens-arc2-arrival', 'fr'], ['queens-egg-crisis', 'fr'], ['queens-ending-inez', 'en'],
   ['checkpoint-station-s1-control', 'fr'], ['cinematic-cin-cq-01', 'fr'], ['special-special-alpha-bravo-doctrine', 'fr'], ['trials-xeno', 'fr'], ['campaign-pair-001-mire', 'fr']
 ];
 const only = process.argv[3] ? process.argv[3].split(',') : null;
