@@ -910,12 +910,14 @@ test('Queen Mother choir terminal rejects false R links, a skipped Q birth and s
   const path = 'src/ecosystem-missions-v131.js', notice = 'scripts/verify-queen-mother-art-v188.mjs';
   for (const [reason, mutate, error] of [
     ['false R predecessor', receipt => { receipt.successors[path].previousSha256 = '0'.repeat(64); }, /Broken historical-to-ded6ef34/],
-    ['unreviewed C endpoint', receipt => { receipt.successors[path].currentSha256 = '0'.repeat(64); }, /Unreviewed V188 source bytes/],
+    // V188 spec 011 (2026-11-23): this file has a later reviewed successor in the join chain (the chapter moved to TR-0),
+    // so a forged endpoint here is now refused as a broken link to that successor, no longer as the final bytes.
+    ['unreviewed C endpoint', receipt => { receipt.successors[path].currentSha256 = '0'.repeat(64); }, /Broken 0d1d9950-to-xeno-trials-join source chain/],
     ['unchanged ordinary successor', receipt => { receipt.successors[path].currentSha256 = receipt.successors[path].previousSha256; }, /must identify changed bytes/],
     ['ordinary successor duplicated as new', receipt => { receipt.addedSources[path] = receipt.successors[path].currentSha256; }, /A new V188 source cannot replace a successor/],
     ['ordinary successor disguised as new', receipt => {
       receipt.addedSources[path] = receipt.successors[path].currentSha256; delete receipt.successors[path];
-    }, /Unreviewed V188 source bytes/],
+    }, /Broken 0d1d9950-to-xeno-trials-join source chain/],
     ['false R notice predecessor', receipt => { receipt.addedSourceSuccessors[notice].previousSha256 = '0'.repeat(64); }, /Broken R added-source predecessor/],
     ['skip R notice predecessor', receipt => { receipt.addedSourceSuccessors[notice].previousSha256 = TANTALUS_PRIORITIES_QUEEN_MOTHER_V188.addedSources[notice]; }, /Broken R added-source predecessor/],
     ['unreviewed C notice endpoint', receipt => { receipt.addedSourceSuccessors[notice].currentSha256 = '0'.repeat(64); }, /Unreviewed V188 source bytes/],
