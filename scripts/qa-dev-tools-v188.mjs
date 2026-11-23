@@ -74,6 +74,33 @@ for (const [id, language] of SAMPLE.filter(([id]) => !only || only.includes(id))
   if (['hub-armory', 'asphodele-asph-ring', 'main-council', 'cinematic-cin-cq-01', 'checkpoint-station-s1-control', 'ending-relay-speaks', 'start-creator', 'trials-xeno'].includes(id)) await shot(id);
 }
 
+// —— Spec 014: every Lot-A arsenal weapon (V188 additions included) is listed by the range and fires there ——
+// Injection (declared): `range.setWeapon(id)` and `range.autoFire()` of the range API; the three pending-plaque
+// additions are also chosen through the weapon select and its equip button (real clicks).
+if (!only || only.includes('range-arsenal')) {
+  const snap = await launchFromLauncher('range', 'fr');
+  check('range-arsenal: landed', snap.status === 'ready' && snap.landed === 'range', snap);
+  const ids = await page.evaluate(async () => (await import('/src/weapon-arsenal-v188.js')).listArsenalProfilesV188({ lotA: true })
+    .filter(p => p.weaponId === p.baseId && p.family !== 'sentry').map(p => p.weaponId));
+  const listed = await page.locator('[data-range-weapon] option').evaluateAll(nodes => nodes.map(node => node.value));
+  check('range-arsenal: every Lot-A weapon and the V188 additions are listed', ids.length === 20 && ids.every(id => listed.includes(id)), { missing: ids.filter(id => !listed.includes(id)) });
+  for (const id of ids) {
+    await page.evaluate(() => globalThis.__ATF_DEV_V188__.range.autoFire(0)); // the range clock restarts with the level
+    if (/weapon-19[4-6]-/.test(id)) {
+      await page.locator('[data-range-tab="weapons"]').click();
+      await page.selectOption('[data-range-weapon]', id); await page.locator('[data-range-equip-weapon]').click();
+    } else await page.evaluate(weaponId => globalThis.__ATF_DEV_V188__.range.setWeapon(weaponId), id);
+    await page.waitForTimeout(400);
+    // A launcher must outlast one reload (single projectile per tube); the range clock restarts with the level.
+    await page.evaluate(() => { const r = globalThis.__ATF_DEV_V188__.range; r.resetMeasures(); r.autoFire(3.6); });
+    await page.waitForTimeout(4100);
+    const m = await page.evaluate(() => globalThis.__ATF_DEV_V188__.range.measures());
+    check(`range-arsenal ${id}: equipped, fired, arsenal profile read`, m.weapon.id === id && m.fireRate.shots > 0 && m.arsenal?.feed,
+      { fired: m.fireRate.shots, arsenal: m.arsenal && { feed: m.arsenal.feed, bridge: m.arsenal.nativeBridge, capacity: m.arsenal.capacity, live: m.arsenal.live }, magazine: { ammo: m.magazine.ammo, size: m.magazine.size } });
+    if (id === 'weapon-194-hicks-ithaca-37-shotgun') { await page.locator('[data-range-tab="measures"]').click(); await page.waitForTimeout(400); await shot('range-arsenal-hicks'); }
+  }
+  await page.locator('[data-dev-exit]').click().catch(() => {});
+}
 // —— Shooting range: 3 weapons, an equipment item, a squad order, caste targets, measures, tuning export ——
 if (!only || only.includes('range')) {
   const snap = await launchFromLauncher('range', 'fr');

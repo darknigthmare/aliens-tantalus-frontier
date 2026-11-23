@@ -3387,6 +3387,8 @@ Pour chaque élément à créer, un **lot de génération** type est indiqué :
 | Fusées éclairantes | C5, missions de nuit | [À CRÉER] |
 | Armes Hyperdyne | Campagne 2, LV-895 | [À CRÉER] (base : catalogue d'armes existant) |
 
+**Arsenal (spec 014, 22 novembre 2026).** Le catalogue garde ses 178 armes et en ajoute trois sans plaque native, donc non achetables : le fusil à pompe de Hicks (*Aliens*, 1986 ; identification Ithaca 37 par l'IMFDB, source secondaire), le fusil à pompe et le lance-flammes de Sevastopol (*Alien: Isolation*, classes nommées par le manuel Feral) — silhouettes Canvas provisoires [À CRÉER : plaques]. Alimentations raccordées au jeu pour les armes des marines : tube et pompe (M37A2, fusils ajoutés), barillet (.357), bande (M56), réservoir (M240, lance-flammes de Sevastopol), une roquette par tube (M6B, M83, M5). Seul le M41A garde un chargeur physique (preuve V193) ; aucun autre chargeur n'est inventé. Capacités, cadences et temps : réglages du projet [PROPOSÉ]. Animations natives de pompe, barillet, bande et réservoir, sons propres et plaques : [À CRÉER]. Inventaire complet : `docs/development/ARSENAL_COMPLETION_V188.md`. Aucune arme n'est déclarée fidèle « 1:1 ».
+
 ### 38.7 Costumes — manques
 
 | Costume | Pour | Statut |

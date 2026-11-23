@@ -254,7 +254,7 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
   },
   "docs/arsenal/README.md": {
     "previousSha256": "61c87b06e64ba5d2bdb3d91d22fb33b0fb8038309be8c3d98a43547444e13b4f",
-    "currentSha256": "112cf2ec236f1fc8da0af8268db1ffc857741d028560942e0413a66e0562a336"
+    "currentSha256": "d133b3b9412a04117390aee16872fda291fde068e0139eddb210c79ecc0723ad"
   },
   "docs/forge/xeno-trials/ASSET_LOT_V205.json": {
     "previousSha256": "5b9137d9bd660da8f78987e864c5381bb6ab39e24e6421042cd47704e6710d76",
@@ -262,7 +262,7 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
   },
   "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
     "previousSha256": "95287e9c3f9be2b88db9e391a9a143c4c69be8956b6763e4113645974b9e878d",
-    "currentSha256": "4bbcf03a272c46b9b13d8fc41a8c0d532194c73b32981e452526c9118f767025"
+    "currentSha256": "82ece37ae946d3b201feb62baba298d227923621cef13c6b9cb9258e14f97a72"
   },
   "hub-level.css": {
     "previousSha256": "13e29b3719e1246d595dadca4c786cbeb5a471dece902104b0ccd29a1de9908d",
@@ -278,7 +278,7 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
   },
   "package.json": {
     "previousSha256": "d5d2e4c965479a658b2289e7e51fff6456c099fb99e9b322ea289a3cd40a89ef",
-    "currentSha256": "328edc30b8823689736deada3b6c63db282fa57188b97b32fe089c3caed43487"
+    "currentSha256": "9f2c2e87dc4de65e8444d8b8a512fefb407626b0f691741cf8d42d05dcd11a77"
   },
   "player-appearance-v126.css": {
     "previousSha256": "da7045c7fd7d41da99eecf48d316150b2d16fac276fe635bb881034bd68c9320",
@@ -358,7 +358,7 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
   },
   "scripts/verify-audit-continuation-v157.mjs": {
     "previousSha256": "641676a21373c30747555d01f180a8c38f07819091860c6c1924bf6f5c08b5cf",
-    "currentSha256": "a92ffa1c385c12159293a1d18d36c881180f48291bc58947076ed2f7b67784d3"
+    "currentSha256": "73cf9f322340a7d4e68e58bb772f74e6b9e54d14383b4fb72f8bf299ad0d3d8a"
   },
   "scripts/verify-audit-continuation-v158.mjs": {
     "previousSha256": "87ca45b2c3c48d96e9ae02f4a57241b723372e3e12cd172ef4f978f34ba3eb98",
@@ -366,7 +366,7 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
   },
   "scripts/verify-audit-v143.mjs": {
     "previousSha256": "3884df6e20f1d9bfeab80087c5b4e208ef773b3ecbe3ed27fd2cd962b280b45e",
-    "currentSha256": "05b26d468eec824c74b576e58f0c5462b59ca972145b0d39a0b79632e493f796"
+    "currentSha256": "fc88ca7119ace078b3c04fe568d3049a93768883eb8581a3492facd1949311d5"
   },
   "scripts/verify-black-cocoon-presentation-v158.mjs": {
     "previousSha256": "96029dc66cb8781bd30bd91482dbfbc7466679020fd22420784e7baaac43bfa5",
@@ -391,6 +391,10 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
   "scripts/verify-forge-npcs-v158.mjs": {
     "previousSha256": "ae3813cbb02f125e450fcf08217c2ffa8512915d98bb983961d1a2810a9ec34d",
     "currentSha256": "f4a31b5e47c01e150aaa0b26a819130f560a717b157a0e307d58e17dbc6f0dab"
+  },
+  "scripts/verify-held-weapon-v125.mjs": {
+    "previousSha256": "b3aa212f548364ba5558476a09ac1b8eafd99fd0c86fff95dccb6893a9bcec78",
+    "currentSha256": "41ebce23ebedc85b6549a5f010a7e975a2f84736126adc0191c0922b3c8ea1a5"
   },
   "scripts/verify-hub-lift-transit-v163.mjs": {
     "previousSha256": "91c11a74e3ebdd63beb3147a959bee1e5f2b679de87ea811b3516d515f7a0f0a",
@@ -418,7 +422,7 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "1b81da575ba68fcb5186cd5c47cd9d25f525904b84000b97e1b05ad796dab2cc",
-    "currentSha256": "7aacc657fc01b9115ebb0d0eb8c4b0b7480927f38d6fa581852bfcfe9c9fd51c"
+    "currentSha256": "14ace629cb26b8d07ad5d84ae3a828e913449d941e09467f7071f788107dd553"
   },
   "scripts/verify-xeno-arbiter-campaign-v190.mjs": {
     "previousSha256": "54554db19910b260837967ece8f6ec6918e6c946ea6a2b5b643679ab84d3b41f",
@@ -516,6 +520,10 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
     "previousSha256": "40332c0214212b5916d7880d8df64d5d84b270a7f4ed2e27ae3f7782d8903e9c",
     "currentSha256": "9487c281d5f07e40b1771c18033ac68928a96a7cfb51c1efda37791173b1af8a"
   },
+  "src/catalog-runtime-v62.js": {
+    "previousSha256": "805cff98cb884c4e407caa01b149eb3a49127b52a3e8d8eab30f190159a21143",
+    "currentSha256": "af883c02a9d7414b628347367f0b1a812a666df1cf0552ca7cf2995c03e0a26c"
+  },
   "src/catalog-scale-v72.js": {
     "previousSha256": "f778ab5a45e01900c99b7912c8ddcab65597b76590e2168e8a0c7d36b84e8f1f",
     "currentSha256": "ed80e44ad26691b6009884ba370e96877192a8fc2b701d946681692dbda37e62"
@@ -530,7 +538,7 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
   },
   "src/content-core-v50.js": {
     "previousSha256": "6d073593ea5854b17ae626556ba6bf6259f835bd4eb59ba3e0d1a5c785418fdb",
-    "currentSha256": "720ddfcc4bcf9522877c555ae7a9958c18feca506567e00294b1703f72236589"
+    "currentSha256": "28dad893d9520149a217f4e3041b3e5d3f622700b00c23998df2ff3312f289bd"
   },
   "src/content.js": {
     "previousSha256": "a7fb0c9bc6da8ff2bf9c008dfbbf2f580a9207ac9a8b1ec6f8e06025003363ff",
@@ -578,7 +586,7 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
   },
   "src/game-production-runtime.js": {
     "previousSha256": "2c12ae1bfe30bd28c19035cf84e2cbbe10c88d2c39fc24b5dab21d91229a2886",
-    "currentSha256": "54c0c0d1107e620c52680adf091918b27c78d8b7744242be96368d333eafeee6"
+    "currentSha256": "c82536440c96ef5c08a683c34949d70644a347c1b3b1e9e03be20bad64f91658"
   },
   "src/game-runtime.js": {
     "previousSha256": "9005aae32379ade306e187ea6c3d156f1a3083178bc0c0808d9963cdd6b8f379",
@@ -658,7 +666,7 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
   },
   "src/i18n-en-catalog-v185.js": {
     "previousSha256": "67d75b265b97eba14e2aa52b353bb3c6987bb9764a9d17d101b373a21e899a52",
-    "currentSha256": "eb5909f8e93db9b3ea0fdc37388d0c85049e03d2f3f138549e37af1c882c0b32"
+    "currentSha256": "89ffcad39a6b274694097bec462512e17c75d8cba874f3c21e7f2511b1f18cda"
   },
   "src/i18n-v185.js": {
     "previousSha256": "592b025ceca9008e73bff267be72a2a3b614767fc220f82cbf2a3ef792060e7e",
@@ -792,13 +800,29 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
     "previousSha256": "73eb796bf6d9159239e8a8c499bc8b73db9975a69016df5b7d9ef2d2d4eccf13",
     "currentSha256": "8fb77f86e0f5a3f02ec756ad659fe86347927bb8c2de1d54798e04f71453dcdd"
   },
+  "src/weapon-presentation-profiles-v124.js": {
+    "previousSha256": "9b41acb35ef2bb887b8afc0e8a7455e5b47f178ee4c8488621c891eae6342858",
+    "currentSha256": "4cfa06618fa8dbbbbdfbaaba75384dbee57c496b63a7e09a33262501a5b68298"
+  },
+  "src/weapon-reference-coverage-v121.js": {
+    "previousSha256": "7604a2a9c3157153a7a9d02caa7c7fbfcfb2326a02f032c8b6ab41246c640c2e",
+    "currentSha256": "ea8172971488dcc3542a3d53d8698cae9a0aca692ece17b09b25403e934f18d1"
+  },
+  "src/weapon-reference-coverage-v122.js": {
+    "previousSha256": "2ded211d99501d8b6e38da6c79185bf61b8afb1f8cf00429b2d1fc8072bd0b23",
+    "currentSha256": "854d7fc92500e7f0a7a172674c530433b0e5944ef5f9865571b32c3e806287c8"
+  },
+  "src/weapon-research-index-v171.js": {
+    "previousSha256": "1a2d3f5ea0f3f19311fb8ec2e0d67d23bc5e2a6dd8ec62902d175f144b84de9b",
+    "currentSha256": "4dbe4269c98e8e2baa87af6143c58b6278d4ba875e8b399334b716b3a75cf12a"
+  },
   "styles.css": {
     "previousSha256": "5d7f49517ea4377aaf2847e7ef5f5dd5f6e4b015301e1280072d41fd9edab36c",
     "currentSha256": "21f254351e30dd23c320bee7ecb29781496549fcc9df3c5ce42712ce4e678950"
   },
   "sw.js": {
     "previousSha256": "8352d786320ead53a5cdcbb8582ee1d1d2212798a0b92b006f07d912ac254cec",
-    "currentSha256": "ebfa30209a9936d1eefcf88d69d0b80114bb47ddf1259ee0f6311a4f0cb59f70"
+    "currentSha256": "6aab8972dd317213f01686f708016e1f63b14a4fd5df7d8f33601f5ee9595776"
   },
   "title-screen-v61.css": {
     "previousSha256": "3a748b04d5e6c9a7e04c189b2c1910c3163a0840968be6bcbb6352e10e16369f",

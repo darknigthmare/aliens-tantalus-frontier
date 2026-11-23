@@ -10,6 +10,9 @@ import assert from 'node:assert/strict';
 export const TANTALUS_I18N_DELTA_V188 = Object.freeze({
   "exact": {
     "added": [
+      "Fusil à pompe du caporal Hicks dans Aliens (1986), identifié comme un Ithaca 37 raccourci par des bases secondaires. Alimentation par tube et pompe. Plaque d’armurerie à produire : non disponible à l’achat.",
+      "Fusil à pompe trouvé à bord de Sevastopol (Alien: Isolation). Alimentation par tube et pompe. Plaque d’armurerie à produire : non disponible à l’achat.",
+      "Lance-flammes trouvé à bord de Sevastopol (Alien: Isolation). Réservoir de carburant, aucune douille. Plaque d’armurerie à produire : non disponible à l’achat.",
       "fichier illisible",
       "stockage inaccessible",
       "Lots de munitions pour la prochaine opération · gestion de réserve historique. Les chargeurs physiques restent propres aux armes en mission.",

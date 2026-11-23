@@ -7449,6 +7449,9 @@ export const EN_CATALOG_V185 = Object.freeze({
 "NACRE-7 · BOÎTES NOIRES DES CHALUTIERS": "NACRE-7 · TRAWLER BLACK BOXES",
 "Récupérer les boîtes noires des chalutiers échoués.": "Recover the black boxes of the stranded trawlers.",
 "Les chalutiers de Sous-Récif se sont échoués contre les pilotis. Récupérer leurs boîtes noires.": "The Sous-Récif trawlers ran aground against the stilts. Recover their black boxes.",
+"Fusil à pompe du caporal Hicks dans Aliens (1986), identifié comme un Ithaca 37 raccourci par des bases secondaires. Alimentation par tube et pompe. Plaque d’armurerie à produire : non disponible à l’achat.": "Corporal Hicks’ pump shotgun in Aliens (1986), identified as a cut-down Ithaca 37 by secondary references. Tube-fed, pump action. Armory plate still to be produced: not available for purchase.",
+"Fusil à pompe trouvé à bord de Sevastopol (Alien: Isolation). Alimentation par tube et pompe. Plaque d’armurerie à produire : non disponible à l’achat.": "Pump shotgun found aboard Sevastopol (Alien: Isolation). Tube-fed, pump action. Armory plate still to be produced: not available for purchase.",
+"Lance-flammes trouvé à bord de Sevastopol (Alien: Isolation). Réservoir de carburant, aucune douille. Plaque d’armurerie à produire : non disponible à l’achat.": "Flamethrower found aboard Sevastopol (Alien: Isolation). Fuel tank, no spent cases. Armory plate still to be produced: not available for purchase.",
 // V188 Bioforge containment lab, spec 013 (reviewed through i18n-catalog-maintenance-v186 merge).
 "STOCKAGE FROID": "COLD STORAGE",
 "SAS BIOLOGIQUE": "BIO-AIRLOCK",

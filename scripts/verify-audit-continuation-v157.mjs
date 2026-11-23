@@ -22,7 +22,11 @@ import { FORGE_CHECKPOINT_LIMITS_V157 as checkpointLimits,
   FORGE_CHECKPOINT_STORAGE_KEY_V157 as checkpointKey } from '../src/forge-playtest-checkpoint-v157.js';
 import { EXCEL_SOURCE_V61 as excelMetadata, EXCEL_WEAPON_BRIDGE_V61 as excelWeapons,
   EXCEL_VEHICLE_BRIDGE_V61 as excelVehicles } from '../src/excel-content-bridge-v61.js';
-import { CATALOG_COUNTS_V62 as gameCatalogueCounts } from '../src/catalog-runtime-v62.js';
+import { CATALOG_COUNTS_V62 as liveCatalogueCounts } from '../src/catalog-runtime-v62.js';
+import { WEAPON_ADDITION_IDS_V188 } from '../src/weapon-catalog-additions-v188.js';
+// The V157 record is historical: the V188 pending-plaque weapons (spec 014) came later.
+const gameCatalogueCounts = { ...liveCatalogueCounts, weapons: liveCatalogueCounts.weapons - WEAPON_ADDITION_IDS_V188.length,
+  total: liveCatalogueCounts.total - WEAPON_ADDITION_IDS_V188.length };
 
 const prefix = 'docs/forge/xeno-trials/';
 const read = path => readFileSync(new URL('../' + path, import.meta.url));

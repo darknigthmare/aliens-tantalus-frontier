@@ -177,6 +177,13 @@ export async function startDevRangeV188({ engine, api, session, log }) {
       magazine: { ammo: actor.ammo, size: actor.magazineSize, reserve: actor.ammoReserve, reloading: Boolean(actor.reloading), reloadPhase: pose.reloadPhase || null,
         feed: feed ? { feed: feed.feed, chamber: feed.chamber, mounted: feed.magazines?.find(m => m.location === 'mounted')?.rounds ?? null, magazines: feed.magazines?.length || 0, loose: feed.looseRounds } : null,
         thermal: engine.weaponThermalV131?.player ?? null, status: engine.weaponStatusesV131?.player ?? null },
+      // Spec 014: the arsenal contract (feed, capacity source, VFX/audio choices) and the live native feed.
+      arsenal: (() => { const state = engine.getArsenalStateV188?.('player'), profile = state?.profile;
+        return state ? { feed: profile?.feed.kind || null, nativeBridge: profile?.feed.nativeBridge || null, capacity: profile?.feed.runtimeCapacity ?? null,
+          capacitySource: profile?.feed.capacitySource || null, detachable: Boolean(profile?.feed.detachableMagazine), ejection: profile?.vfx.ejection || null,
+          tracer: profile?.vfx.tracer || null, shotCue: profile?.audio.shot || null, heldArt: profile?.held.art || null, fidelity: profile?.fidelity.status || null,
+          live: { bridged: state.bridged, loaded: state.loaded, reserve: state.reserve, needsCycle: state.needsCycle, spentCases: state.spentCases, pending: Boolean(state.pending) },
+          stats: state.stats } : null; })(),
       projectiles: { bullets: engine.bullets?.length || 0, v130: engine.weaponProjectilesV130?.length || 0, v131: engine.weaponProjectilesV131?.length || 0, beams: engine.weaponBeamsV131?.length || 0 },
       effects: engine.weaponEffectsSnapshotV124?.()?.stats || null,
       rig: { weaponMode: actor.weaponMode, grounded: actor.grounded, crouching: actor.crouching, climbing: actor.climbing, aiming: actor.aimingV124, fireClock: round(actor.fireClock, 3),
@@ -304,6 +311,7 @@ function mountPanel(range) {
       ['Cadence observée', `${m.fireRate.rate ?? '—'} /s (${m.fireRate.shots} tirs)`], ['DPS (3 s)', `marine ${m.dps.dps ?? '—'} · escouade ${m.squadDps.dps ?? '—'} · théorique rafale ${m.theoretical.burst} / soutenu ${m.theoretical.sustained}`],
       ['Rechargement', `${m.reloads.count} · moyen ${m.reloads.mean ?? '—'} s · dernier ${m.reloads.last ?? '—'} s`],
       ['Chargeur', `${m.magazine.ammo}/${m.magazine.size} · réserve ${m.magazine.reserve}${m.magazine.feed ? ` · alimentation ${m.magazine.feed.feed} chambre ${m.magazine.feed.chamber} monté ${m.magazine.feed.mounted}` : ''}${m.magazine.reloading ? ' · en rechargement' : ''}`],
+      ['Arsenal', m.arsenal ? `${m.arsenal.feed}${m.arsenal.nativeBridge ? ' (pont natif)' : ''} · capacité ${m.arsenal.capacity} · éjection ${m.arsenal.ejection} · traceur ${m.arsenal.tracer} · art ${m.arsenal.heldArt}${m.arsenal.live.needsCycle ? ' · POMPE' : ''}` : '—'],
       ['Dispersion', `σ ${m.spread.stdDeg ?? '—'}° · max ${m.spread.maxDeg ?? '—'}° · dérive ${m.spread.climbDeg ?? '—'}°/tir`],
       ['Projectiles', JSON.stringify(m.projectiles)], ['TTK observé', JSON.stringify(m.ttkObserved)], ['TTK théorique', Object.entries(m.ttkTheoretical).slice(0, 12).map(([caste, v]) => `${caste} ${v.seconds ?? '—'} s`).join(' · ')]];
     $('[data-range-measures]').innerHTML = rows.map(([k, v]) => `<tr><th>${escapeHtml(k)}</th><td>${escapeHtml(v)}</td></tr>`).join('');

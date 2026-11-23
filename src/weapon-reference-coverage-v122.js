@@ -1,6 +1,7 @@
 import { WEAPONS } from './content-core-v50.js';
 import { WEAPON_GEOMETRY_COVERAGE_V121, WEAPON_REFERENCE_COVERAGE_V121 } from './weapon-reference-coverage-v121.js';
 import { resolveAdmittedWeaponProfileV122 } from './weapon-release-v122.js';
+import { isPendingPlaqueWeaponV188 } from './weapon-catalog-additions-v188.js';
 
 const freeze = value => {
   if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value;
@@ -9,8 +10,35 @@ const freeze = value => {
 };
 const historicalRows = new Map(WEAPON_REFERENCE_COVERAGE_V121.map(row => [row.id, row]));
 const geometryMap = new Map(WEAPON_GEOMETRY_COVERAGE_V121.map(geometry => [geometry.baseId, geometry]));
+// V188 (spec 014): reviewed source identities whose native plaque does not
+// exist yet. They keep an explicit "no plaque" row instead of failing open:
+// no image, no animation claim, and the armory keeps refusing procurement.
+function pendingPlaqueRowV188(entry) {
+  const number = Number(entry.id.match(/^weapon-(\d{3})-/)[1]);
+  const geometry = freeze({
+    baseNumber: number, baseId: entry.id, name: entry.name, canonicalName: entry.canonicalName || entry.name,
+    source: entry.source, family: entry.family, projectOriginal: false,
+    catalogIds: [entry.id], catalogEntries: 1, sharedFinishCount: 0,
+    primaryMedia: { imageKey: null, path: null, sheetId: null, visualMode: 'canvas-placeholder',
+      dedicatedNativePlate: false, release: 'v188-pending-plaque', reviewStatus: 'source-identity-no-plaque', newThisPass: true,
+      availableStates: [], missingStates: ['idle', 'action', 'reload', 'service'], animationClaim: 'no-image-canvas-placeholder-slot' },
+    historicalMedia: null,
+    reference: { status: 'source-identity-no-visual-review', sourceKey: entry.identityEvidence, url: entry.sourceUrl,
+      work: entry.sourceWork, identityConfirmed: entry.identityVerified === true, visualReferenceAvailable: false,
+      caveat: 'Identité citée ; aucune plaque native ni revue visuelle.' },
+    canonExact: false, fidelityCertification: 'not-certified', dimensionsStatus: 'no-documented-physical-size',
+    statsPolicy: entry.statsPolicy, nativePlateStatus: 'missing-canvas-placeholder', candidateStatus: 'v188-pending-plaque',
+    note: entry.description
+  });
+  geometryMap.set(entry.id, geometry);
+  return { id: entry.id, catalogNumber: number, name: entry.name, baseNumber: number, baseId: entry.id, geometry,
+    isFinishVariant: false, finishArt: 'no-native-plaque', dedicatedNativePlate: false,
+    nativePlateStatus: geometry.nativePlateStatus, referenceStatus: geometry.reference.status, sourceWork: entry.sourceWork,
+    canonExact: false, fidelityCertification: 'not-certified' };
+}
 export const WEAPON_REFERENCE_COVERAGE_V122 = freeze(WEAPONS.map(entry => {
   if (historicalRows.has(entry.id)) return historicalRows.get(entry.id);
+  if (isPendingPlaqueWeaponV188(entry)) return pendingPlaqueRowV188(entry);
   const profile = resolveAdmittedWeaponProfileV122(entry);
   if (!profile) throw new Error(`Unreviewed V122 weapon catalogue addition: ${entry.id}`);
   const geometry = freeze({

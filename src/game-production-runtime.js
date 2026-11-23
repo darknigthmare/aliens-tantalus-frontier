@@ -57,6 +57,7 @@ import { withForgeMissionRuntimeV141 } from './forge-mission-runtime-v141.js';
 import { withForgeDecorationV141 } from './forge-decoration-v141.js';
 import { withMotionTrackerV160 } from './motion-tracker-v160.js';
 import { withMagazineRecoveryWorldV168 } from './weapon-magazine-recovery-runtime-v168.js';
+import { withArsenalFeedsV188 } from './weapon-arsenal-runtime-v188.js';
 import { captureMagazineFeedV168, restoreEquippedMagazineFeedV177 } from './weapon-magazine-world-v168.js';
 import { withArchiveRelayPresentationV160 } from './archive-relay-presentation-v160.js';
 import { withTensionDirectorV188 } from './tension-director-v188.js';
@@ -114,6 +115,9 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
 // The creature scale (V188, creature-scale-v188.js) sits under the combat feel: every layer
 // above it (caste behaviours and their ceiling flip, QZ-17 dressing, depth holds, acid blood)
 // sees the rescaled bodies, and the flip of the body box maps the scaled sprite onto itself.
+// The arsenal feed bridge (V188, spec 014, weapon-arsenal-runtime-v188.js) sits just inside the
+// magazine recovery world: outside every weapon action layer (V124–V131) whose shots it
+// accounts, inside the footstep cues and VFX layers whose shot cue and emitters it uses.
 // The Xeno Arbiter campaign runtime (V190) sits just outside the magazine
 // recovery world, as on the Xeno Trials line; the V188 layers wrap it.
 // The dedicated colony levels C1-C4 (V188, colony-mission-levels-v188.js) sit just inside the
@@ -126,7 +130,7 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
 // withholds control nothing below it runs, so mission time (and with it the
 // insertion grace) only starts when control is given, and it can hold the
 // mission-complete event of any mode until the boarding is over.
-export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepthRoomsV188(withQz17LevelDressingV188(withCasteBehaviorsV188(withInsertionSafeZoneV188(withRunOptionsRuntimeV188(withAsphodeleMissionDressingV188(withVfxV188(withFranchiseFidelityV188(withGameplayGapsV188(withCombatFeelV188(withCreatureScaleV188(withFootstepCuesV188(withColonyMissionLevelsV188(withMissionObjectivePanelV188(withStationMissionLevelsV188(withTensionDirectorV188(withArbiterCampaignRuntimeV190(withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(withMissionLayerMatteV188(V158ProductionEngine)))))))))))))))))))))))) {
+export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepthRoomsV188(withQz17LevelDressingV188(withCasteBehaviorsV188(withInsertionSafeZoneV188(withRunOptionsRuntimeV188(withAsphodeleMissionDressingV188(withVfxV188(withFranchiseFidelityV188(withGameplayGapsV188(withCombatFeelV188(withCreatureScaleV188(withFootstepCuesV188(withColonyMissionLevelsV188(withMissionObjectivePanelV188(withStationMissionLevelsV188(withTensionDirectorV188(withArbiterCampaignRuntimeV190(withMagazineRecoveryWorldV168(withArsenalFeedsV188(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(withMissionLayerMatteV188(V158ProductionEngine))))))))))))))))))))))))) {
   updateEnemy(actor, delta) {
     // Observe final accepted displacement after every existing wrapper,
     // including insertion grace and depth holds. Their order is unchanged.

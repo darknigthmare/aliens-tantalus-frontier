@@ -144,7 +144,9 @@ function classifyCatalogue(weapon) {
     ...derived('revolver', 'Revolver identity is explicit in the catalogue. Spent cases remain in the cylinder until an accepted reload.'),
     ...(baseName === '.357 magnum revolver' ? { caliber: '.357 Magnum' } : {})
   };
-  if (baseName === 'm37a2 pump shotgun' || baseName === 'm51 breaching scattergun') return derived('pump',
+  // V188 (spec 014): the pending-plaque pump shotguns are listed by exact id.
+  if (baseName === 'm37a2 pump shotgun' || baseName === 'm51 breaching scattergun'
+    || ['weapon-194-hicks-ithaca-37-shotgun', 'weapon-195-sevastopol-pump-shotgun'].includes(weapon.id)) return derived('pump',
     'Pump identity is in the name or catalogue description. One spent hull is emitted at the cycle event; 0.18 seconds is a presentation delay, not a certified mechanism measurement.');
   if (baseName === 'type 76 auto shotgun') return derived('autoShotgun',
     'Automatic shotgun identity is explicit in the catalogue. One hull per accepted shot, not per pellet; case finish, size and magazine presentation remain game tuning.');

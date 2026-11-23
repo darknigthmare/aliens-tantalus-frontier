@@ -391,3 +391,8 @@ principale (octets épinglés par la continuation V177) est conservé : son test
 du catalogue complet n'admet que ces quatre M41A, ce qui couvre les refus
 M56/M240/M37A2/M83/revolver de la branche. Les sections V193–V198 ci-dessus
 sont conservées comme historique documentaire.
+
+## V188 — complétion du lot A (spec 014, 22 novembre 2026)
+
+Inventaire par arme (alimentation et source, capacité, modes, rechargement, VFX, son, art tenu, chargeur au sol, fidélité) : `docs/development/ARSENAL_COMPLETION_V188.md`. Contrat lisible : `src/weapon-arsenal-v188.js` (sa table d'alimentation recopie ce CSV maître et est recontrôlée par `scripts/verify-weapon-arsenal-v188.mjs`). Le contrat V171 est désormais raccordé au moteur par `src/weapon-arsenal-runtime-v188.js` pour le tube, le barillet, la bande, le réservoir et le tir unique des armes marines ; la garde V193 est inchangée (chargeur physique : quatre M41A seulement). Trois identités de l'index de recherche sont promues en catalogue sans plaque (194–196), non achetables. Aucune fidélité « 1:1 » n'est déclarée.
+
