@@ -252,6 +252,8 @@ function drawProp(ctx, prop, view) {
         label(ctx, String(row.name || '—').toUpperCase().slice(0, 13), x + 8, ry, { size: 9, color: '#dbe8dc' });
         label(ctx, row.state === 'configured' ? `×${row.waiting}` : `${row.printed}/${row.printed + row.waiting}`, x + w - 8, ry, { size: 9, color: row.waiting ? '#8fe0a6' : '#9aa7a2', align: 'right' });
       });
+      // Quest `ship-bioforge`: the protocol in force, on a plate under the board (absent while the debate is not settled).
+      if (view.policyLine) { rect(ctx, '#0a1413', x, y + h + 3, w, 15); frame(ctx, '#7fd8d0', x, y + h + 3, w, 15, 1); label(ctx, view.policyLine, x + 6, y + h + 14, { size: 8, color: '#bfe9e2' }); }
       break;
     }
     case 'bioforge-lab-pressure-gauge': {
@@ -374,6 +376,11 @@ export function drawBioforgeLabCaptionV188(ctx, caption) {
   const x = VIEW_W - 24 - width;
   rect(ctx, 'rgba(3,10,8,.9)', x, 640, width, 34); frame(ctx, '#7fd8d0', x, 640, width, 34, 1);
   label(ctx, caption.text, x + 16, 662, { size: 13, color: '#dff3ea' });
+  if (caption.note) { // a second line above the first (the protocol of the cold storage)
+    const noteWidth = Math.min(820, (ctx.measureText?.(caption.note)?.width || caption.note.length * 8) + 32), nx = VIEW_W - 24 - noteWidth;
+    rect(ctx, 'rgba(3,10,8,.9)', nx, 602, noteWidth, 34); frame(ctx, '#e0b060', nx, 602, noteWidth, 34, 1);
+    label(ctx, caption.note, nx + 16, 624, { size: 13, color: '#f1dca8' });
+  }
   ctx.restore();
 }
 

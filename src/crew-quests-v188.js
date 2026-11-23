@@ -7,7 +7,8 @@
 // Pure rules and texts (FR/EN); the additive save field is `crewQuestsV188`.
 // Values marked [PROPOSÉ] are recorded in bible §8.4.
 import { markStationIntroHeardV188, STATION_WORLD_ID_V188 } from './station-asphodele-v188.js';
-import { CREW_QUESTS_TANTALUS_V188 } from './crew-quests-tantalus-v188.js';
+import { CREW_QUESTS_TANTALUS_V188, CREW_QUESTS_SHIP_LIFE_V188, BIOFORGE_CARE_QUEST_ID_V188 } from './crew-quests-tantalus-v188.js';
+import { startConfrontationV188, confrontationStateV188, confrontationOutcomeV188, getConfrontationV188 } from './confrontation-v188.js';
 import { addColonyPopulationV188, advanceColonySiteV188 } from './colony-missions-v188.js';
 
 const t = (fr, en) => Object.freeze({ fr, en });
@@ -118,7 +119,8 @@ export const CREW_QUESTS_V188 = Object.freeze([
   })
 ]);
 // V188 colony and crew lot: the twelve other quests of §8.1 (crew-quests-tantalus-v188.js), same rules.
-export const CREW_QUESTS_ALL_V188 = Object.freeze([...CREW_QUESTS_V188, ...CREW_QUESTS_TANTALUS_V188]);
+// Owner decision 2026-11-23: the first §8.2 ship-life quest (`ship-bioforge`, a debate) joins the same list and save field.
+export const CREW_QUESTS_ALL_V188 = Object.freeze([...CREW_QUESTS_V188, ...CREW_QUESTS_TANTALUS_V188, ...CREW_QUESTS_SHIP_LIFE_V188]);
 export const CREW_QUEST_IDS_V188 = Object.freeze(CREW_QUESTS_ALL_V188.map(quest => quest.id));
 const QUEST = new Map(CREW_QUESTS_ALL_V188.map(quest => [quest.id, quest]));
 export const getCrewQuestV188 = id => QUEST.get(id) || null;
@@ -161,7 +163,7 @@ export function crewQuestActionsV188(save, crewId, language = 'fr') {
     const ready = quest.kind === 'components' && state && state.components >= quest.components;
     const progress = quest.kind === 'components' && state ? ` (${state.components}/${quest.components})` : '';
     const gated = state && quest.gate && !crewQuestGateOpenV188(save, quest.id);
-    return Object.freeze({ id: quest.id, title: quest.title[lang], action: !state ? 'accept' : ready ? 'turn-in' : quest.kind === 'components' || gated ? 'wait' : 'continue',
+    return Object.freeze({ id: quest.id, title: quest.title[lang], action: !state ? 'accept' : ready ? 'turn-in' : quest.kind === 'debate' ? 'continue' : quest.kind === 'components' || gated ? 'wait' : 'continue',
       label: `${lang === 'en' ? 'QUEST' : 'QUÊTE'} · ${quest.title[lang]}${progress}` });
   }).filter(Boolean);
 }
@@ -253,6 +255,51 @@ export function applyCrewQuestOperationResultV188(save, { success, worldId, obje
   }
   if (changed.length) save.crewQuestsV188 = all;
   return changed.length ? changed : null;
+}
+
+// —— Debate quests (kind 'debate'): a no-shooting debate of spec 010 whose outcome is the quest answer ——
+/** Opens the debate: the quest becomes active and its confrontation run is created. Mutates the candidate save. */
+export function startCrewDebateV188(save, id) {
+  const quest = getCrewQuestV188(id);
+  if (!quest || quest.kind !== 'debate' || !save || !quest.available(save)) return false;
+  const all = normalizeCrewQuestsV188(save.crewQuestsV188), state = all.quests[id];
+  if (state?.stage === 'done') return false;
+  if (!state) { all.quests[id] = { stage: 'active', step: 0 }; save.crewQuestsV188 = all; }
+  startConfrontationV188(save, quest.confrontationId);
+  return Boolean(confrontationStateV188(save, quest.confrontationId));
+}
+/** Closes the debate once its last exchange is played: answer, effects and completion text. Mutates the candidate save, once. */
+export function concludeCrewDebateV188(save, id, language = 'fr') {
+  const lang = language === 'en' ? 'en' : 'fr', quest = getCrewQuestV188(id);
+  const all = normalizeCrewQuestsV188(save?.crewQuestsV188), state = all.quests[id];
+  if (!quest || quest.kind !== 'debate' || state?.stage !== 'active') return { ok: false, reason: 'not-active' };
+  const outcome = confrontationOutcomeV188(save, quest.confrontationId);
+  if (!outcome) return { ok: false, reason: 'open' };
+  const answer = getConfrontationV188(quest.confrontationId).outcomes[outcome];
+  state.stage = 'done'; state.answer = answer; save.crewQuestsV188 = all;
+  const spec = quest.rewardByAnswer?.[answer] || {};
+  const member = Array.isArray(save.crew) ? save.crew.find(entry => entry.id === spec.crewId) : null;
+  if (member && spec.loyalty) member.loyalty = Math.max(0, Math.min(100, (Number(member.loyalty) || 0) + spec.loyalty));
+  if (spec.research && save.galaxy?.resources) save.galaxy.resources.research = (Number(save.galaxy.resources.research) || 0) + spec.research;
+  if (spec.crewStress && Array.isArray(save.crew)) for (const entry of save.crew) if (entry && Number.isFinite(Number(entry.stress))) entry.stress = Math.max(0, Math.min(100, Number(entry.stress) + spec.crewStress));
+  return { ok: true, done: true, outcome, answer, completion: quest.completionByAnswer[answer][lang],
+    reward: Object.freeze({ crewId: member ? spec.crewId : null, loyalty: member ? spec.loyalty || 0 : 0, research: spec.research || 0, crewStress: spec.crewStress || 0 }) };
+}
+/** The protocol of the Bioforge decided by « Ce qu'on garde en vie »: 'limit', 'keep', or null while undecided. */
+export function bioforgeCarePolicyV188(save) {
+  const state = stateOf(save, BIOFORGE_CARE_QUEST_ID_V188);
+  return state?.stage === 'done' && (state.answer === 'limit' || state.answer === 'keep') ? state.answer : null;
+}
+/**
+ * Narrative access to the Bioforge: open once the debate is settled. A save that already used the Bioforge
+ * (a session was created: serial, history, last or active session) keeps its access; the debate then stays
+ * offered by Inez Harlow, without closing the door.
+ */
+export function bioforgeNarrativeAccessV188(save) {
+  if (stateOf(save, BIOFORGE_CARE_QUEST_ID_V188)?.stage === 'done') return Object.freeze({ open: true, reason: 'quest' });
+  const root = save?.bioforgeV80;
+  const used = Boolean(root && (Number(root.serial) > 0 || root.activeSession || root.lastSessionId || (Array.isArray(root.history) && root.history.length)));
+  return Object.freeze({ open: used, reason: used ? 'already-used' : 'debate-pending' });
 }
 
 export const davidMemoryRestoredV188 = save => stateOf(save, 'ship-david')?.stage === 'done';

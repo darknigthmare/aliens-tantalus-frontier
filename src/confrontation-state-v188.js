@@ -10,6 +10,11 @@
 // the last round passes. Nothing here grants a piece: the held pieces are always
 // read by the caller from the save (story-dossier-v188.js).
 //
+// Owner decision 2026-11-23 (quest `ship-bioforge`): an entry may also carry arguments of its own
+// (`ownPieces`, always at hand: readings of the ship, not pieces of the dossier), a small witness
+// portrait and its own wording for the two outcomes (`labels`), for a debate that is weighed rather
+// than won. The exchange rules are the same.
+//
 // Persistence is additive: `storyCampaignV188.confrontationsV188[id]` (absent from
 // older saves), normalised by `normalizeConfrontationsV188`, called from
 // `normalizeStoryCampaignV188`. The validator of src/save.js is unchanged.
@@ -19,6 +24,8 @@ export const CONFRONTATION_STATUSES_V188 = Object.freeze(['open', 'won', 'lost']
 export const CONFRONTATION_RESULTS_V188 = Object.freeze(['decisive', 'partial', 'wrong', 'silence']);
 export const CONFRONTATION_GAINS_V188 = Object.freeze({ decisive: 2, partial: 1, wrong: 0, silence: 0 }); // [PROPOSÉ]
 export const CONFRONTATION_WRONG_COST_V188 = 1; // [PROPOSÉ] credibility lost by a piece that does not answer
+/** Canvas portraits of the presentation (confrontation-ui-v188.js): a CRT bust, a core, a synthetic, a scientist. */
+export const CONFRONTATION_PORTRAITS_V188 = Object.freeze(['crt-bust', 'core-eye', 'synthetic-bust', 'scientist-bust']);
 const ID = /^[a-z0-9][a-z0-9-]{1,63}$/;
 const PIECE = /^[a-z0-9][a-z0-9-]{1,47}$/;
 const MAX_ROUNDS = 16;
@@ -37,9 +44,18 @@ export function validateConfrontationDefinitionV188(def) {
   if (!ID.test(def.id || '')) errors.push('id: lowercase id required');
   text(def.title, 'title'); text(def.intro, 'intro');
   if (!def.interlocutor || typeof def.interlocutor !== 'object') errors.push('interlocutor: required');
-  else { text(def.interlocutor.name, 'interlocutor.name'); if (!['crt-bust', 'core-eye'].includes(def.interlocutor.portrait)) errors.push('interlocutor.portrait: crt-bust or core-eye'); }
+  else { text(def.interlocutor.name, 'interlocutor.name'); if (!CONFRONTATION_PORTRAITS_V188.includes(def.interlocutor.portrait)) errors.push(`interlocutor.portrait: ${CONFRONTATION_PORTRAITS_V188.join(', ')}`); }
+  if (def.witness?.portrait !== undefined && !CONFRONTATION_PORTRAITS_V188.includes(def.witness.portrait)) errors.push('witness.portrait: unknown portrait');
   if (!Array.isArray(def.pieces) || !def.pieces.length || def.pieces.some(id => !PIECE.test(id))) errors.push('pieces: list of piece ids required');
   const pieces = new Set(def.pieces || []);
+  if (def.ownPieces !== undefined) {
+    if (!Array.isArray(def.ownPieces)) errors.push('ownPieces: list required');
+    else def.ownPieces.forEach((piece, index) => {
+      if (!PIECE.test(piece?.id || '') || !pieces.has(piece.id)) errors.push(`ownPieces[${index}].id: must be one of the pieces`);
+      text(piece?.label, `ownPieces[${index}].label`);
+    });
+  }
+  if (def.labels !== undefined) for (const key of ['won', 'lost', 'pieces']) text(def.labels?.[key], `labels.${key}`);
   if (!Number.isInteger(def.credibility) || def.credibility < 1 || def.credibility > 9) errors.push('credibility: 1 to 9');
   if (!Array.isArray(def.rounds) || !def.rounds.length || def.rounds.length > MAX_ROUNDS) errors.push(`rounds: 1 to ${MAX_ROUNDS}`);
   const decisiveOf = new Map();

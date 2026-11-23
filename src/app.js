@@ -1,6 +1,6 @@
 import { colonySnapshotV188, investColonySiteV188, applyColonyOperationResultV188, COLONY_TIERS_V188, colonyRescuedV188 } from './colony-reconstruction-v188.js';
 import { filterUnlockedCampaignsV188, stationLockReasonV188, stationLockTextV188, stationSnapshotV188, cassiusChoicePendingV188, chooseCassiusV188, CASSIUS_CHOICES_V188, CASSIUS_DIALOG_V188, stationReturnSceneDueV188, markStationSceneSeenV188, STATION_SCENES_V188 } from './station-asphodele-v188.js';
-import { crewQuestActionsV188, acceptCrewQuestV188, crewQuestStepV188, answerCrewQuestStepV188, turnInCrewQuestV188, applyCrewQuestOperationResultV188, crewQuestsSnapshotV188, getCrewQuestV188, davidMemoryRestoredV188, crewQuestEpilogueLineV188, crewQuestNotesV188 } from './crew-quests-v188.js';
+import { startCrewDebateV188, concludeCrewDebateV188, bioforgeCarePolicyV188, bioforgeNarrativeAccessV188, crewQuestActionsV188, acceptCrewQuestV188, crewQuestStepV188, answerCrewQuestStepV188, turnInCrewQuestV188, applyCrewQuestOperationResultV188, crewQuestsSnapshotV188, getCrewQuestV188, davidMemoryRestoredV188, crewQuestEpilogueLineV188, crewQuestNotesV188 } from './crew-quests-v188.js';
 import { jumpRouteTextV188, applyJumpTravelTimeV188, jumpArrivalTextV188 } from './galaxy-travel-v188.js';
 import { deliverTravelMessagesV188, travelMessagesListV188, travelArrivalNoticeV188, TRAVEL_MESSAGES_TEXT_V188, pushCampaignTravelMessageV188 } from './travel-messages-v188.js';
 // V188 spec 011: « La Saison des Reines », first side campaign (call, travel, Arc 1, Rask choice, debrief).
@@ -685,6 +685,8 @@ function prepareBioforgeViewV80() {
   }
   // V188: the lab can be walked (no session, or the exit after a purge) while this view is shown.
   bioforgeRuntimeV80.armBioforgeAmbulatoryV188?.(true);
+  // V188 quest `ship-bioforge`: the protocol decided by the debate is shown in the laboratory (text only).
+  bioforgeRuntimeV80.setBioforgeCarePolicyV188?.(bioforgeCarePolicyV188(saveSystem.data));
   if (bioforgeUiV80) bioforgeUiV80.labWalkV188 = false;
   renderBioforgeUiV87({ state: bioforgeRuntimeV80.bioforgeRootV80, resetDraft: true });
 }
@@ -2236,9 +2238,47 @@ function renderAct5PanelV188() {
   if (snapshot.complete) hint(en ? 'Campaign complete: free play continues.' : 'Campagne terminée : la partie continue.');
   host.replaceChildren(...parts);
 }
+// Quest `ship-bioforge` (owner decision 2026-11-23): a debate quest is played as a no-shooting debate of spec 010.
+// Offer → debate (each exchange committed at once; leaving and coming back resumes at the next argument) → the
+// outcome becomes the quest answer, its effects are applied once, and `onSettled` runs (the Bioforge door opens).
+function openCrewDebateV188(questId, { onSettled = null } = {}) {
+  const quest = getCrewQuestV188(questId); if (!quest || quest.kind !== 'debate') return false;
+  if (document.querySelector('[data-confrontation-v188]') || document.querySelector('.content-scene-v188')) return true;
+  const lang = document.documentElement.lang === 'en' ? 'en' : 'fr', en = lang === 'en';
+  const status = crewQuestsSnapshotV188(saveSystem.data, lang).find(entry => entry.id === questId)?.status;
+  if (status !== 'offered' && status !== 'active') return false;
+  closeHubDialogue({ resume: false, restoreFocus: false }); hubEngine.pause();
+  let settled = false;
+  const finish = () => { if (activeView === 'hub' && !activeHubStation) hubEngine.resume(); if (settled) onSettled?.(); };
+  const title = `${quest.giver} · ${quest.title[lang]}`;
+  const debate = () => {
+    if (!commitCandidateV188(candidate => startCrewDebateV188(candidate, questId))) { finish(); return; }
+    const dialog = openConfrontationDialogV188({ language: lang,
+      reducedMotion: Boolean(saveSystem.data.settings?.reducedMotion || globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches),
+      getView: () => confrontationViewV188(saveSystem.data, quest.confrontationId, lang),
+      onMove: pieceId => { let move = null; commitCandidateV188(candidate => { move = playConfrontationMoveV188(candidate, quest.confrontationId, pieceId); return move ? true : false; }); return move; },
+      onClose: () => {
+        let outcome = null;
+        commitCandidateV188(candidate => { outcome = concludeCrewDebateV188(candidate, questId, lang); return outcome.ok; });
+        if (!outcome?.ok) { finish(); return; }
+        settled = true;
+        if (!openContentSceneDialogV188({ language: lang, slot: quest.slot, title, text: outcome.completion,
+          options: [{ id: 'close', label: en ? 'CLOSE' : 'FERMER' }], onChoose: () => null, onClose: finish })) finish();
+      } });
+    if (!dialog) finish();
+  };
+  if (status === 'active') { debate(); return true; }
+  let accepted = false;
+  if (!openContentSceneDialogV188({ language: lang, slot: quest.slot, title, text: quest.offer[lang],
+    options: [{ id: 'accept', label: en ? 'HEAR THEM OUT' : 'LES ÉCOUTER' }, { id: 'leave', label: en ? 'LATER' : 'PLUS TARD' }],
+    onChoose: (id) => { accepted = id === 'accept'; return null; },
+    onClose: () => { if (accepted) debate(); else finish(); } })) finish();
+  return true;
+}
 // Opened from the hub conversation; the hub stays paused until the quest dialog closes.
 function openCrewQuestV188(questId) {
   const quest = getCrewQuestV188(questId); if (!quest) return false;
+  if (quest.kind === 'debate') return openCrewDebateV188(questId);
   const lang = document.documentElement.lang === 'en' ? 'en' : 'fr', en = lang === 'en';
   closeHubDialogue({ resume: false, restoreFocus: false }); hubEngine.pause();
   const action = crewQuestActionsV188(saveSystem.data, quest.crewId, lang).find(entry => entry.id === questId);
@@ -4688,6 +4728,16 @@ function resolveAnnexStationV71(interaction) {
   }
   const pending = saveSystem.data.hub.pendingModuleActionV71;
   if (annexId === 'bioforge') {
+    // V188 quest `ship-bioforge` « Ce qu'on garde en vie » (owner decision 2026-11-23): Inez Harlow and BISHOP-9 settle
+    // their debate at the airlock before the first visit (no ship time is spent at the door). Once it is settled the
+    // station is resolved again and the Bioforge opens. A save that already used the Bioforge keeps its access.
+    if (!bioforgeNarrativeAccessV188(saveSystem.data).open) {
+      const status = byId('hub-status');
+      if (status) status.textContent = 'BIOFORGE · Inez Harlow et BISHOP-9 débattent devant le sas.';
+      if (!openCrewDebateV188('ship-bioforge', { onSettled: () => { if (activeView === 'hub' && bioforgeNarrativeAccessV188(saveSystem.data).open) resolveAnnexStationV71(interaction); } }))
+        toast('BIOFORGE · accès fermé tant que le débat n’est pas tranché.');
+      return true;
+    }
     const key = 'annex:bioforge';
     const windowId = Math.floor(absoluteHours(saveSystem.data.clock) / 6);
     if (saveSystem.data.hub.services[key] !== windowId) {

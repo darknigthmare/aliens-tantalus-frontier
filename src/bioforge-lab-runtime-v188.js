@@ -14,7 +14,7 @@
 import {
   BIOFORGE_ENTRY_MIST_SECONDS_V188, createBioforgeExitDeconV188, stepBioforgeExitDeconV188, isInsideBioforgeExitBoothV188,
   resolveBioforgeLabInteractionV188, getBioforgeTankDisplayV188, getBioforgeAdmissionBoardV188, getBioforgeLabZoneV188,
-  buildBioforgeColdStorageReportV188, buildBioforgeAnalysisReportV188, buildBioforgeIncineratorReportV188,
+  buildBioforgeColdStorageReportV188, buildBioforgeAnalysisReportV188, buildBioforgeIncineratorReportV188, bioforgeCarePolicyLinesV188,
   BIOFORGE_EXIT_DECON_SECONDS_V188, BIOFORGE_LAB_PHASE_LABELS_V188
 } from './bioforge-lab-layout-v188.js';
 import {
@@ -212,9 +212,14 @@ export function withBioforgeContainmentLabV188(Base) {
       return target;
     }
 
-    setBioforgeLabCaptionV188(text) {
-      this.bioforgeLabCaptionV188 = { text, remaining: BIOFORGE_LAB_CAPTION_SECONDS_V188 };
+    setBioforgeLabCaptionV188(text, note = null) {
+      this.bioforgeLabCaptionV188 = { text, note: note || null, remaining: BIOFORGE_LAB_CAPTION_SECONDS_V188 };
       return text;
+    }
+    /** Quest `ship-bioforge`: the app passes the protocol decided by the debate ('limit', 'keep') or null. Text only. */
+    setBioforgeCarePolicyV188(policy = null) {
+      this.bioforgeCarePolicyV188 = bioforgeCarePolicyLinesV188(policy) ? policy : null;
+      return this.bioforgeCarePolicyV188;
     }
 
     interact(actor = this.player) {
@@ -234,7 +239,7 @@ export function withBioforgeContainmentLabV188(Base) {
     useBioforgeLabInteractionV188(target) {
       const root = this.bioforgeRootV80;
       let report = null;
-      if (target.kind === 'cold-storage') report = buildBioforgeColdStorageReportV188(root);
+      if (target.kind === 'cold-storage') report = buildBioforgeColdStorageReportV188(root, this.bioforgeCarePolicyV188 || null);
       else if (target.kind === 'analysis') report = buildBioforgeAnalysisReportV188(root);
       else if (target.kind === 'incinerator') report = buildBioforgeIncineratorReportV188(this.bioforgeLastPurgeV80);
       else if (target.kind === 'terminal') {
@@ -252,8 +257,8 @@ export function withBioforgeContainmentLabV188(Base) {
         }
         return true;
       } else return false;
-      this.setBioforgeLabCaptionV188(report.text);
-      this.emitBioforgeV80({ type: 'bioforge-lab-report', kind: target.kind, text: report.text });
+      this.setBioforgeLabCaptionV188(report.text, report.note || null);
+      this.emitBioforgeV80({ type: 'bioforge-lab-report', kind: target.kind, text: report.text, note: report.note || null });
       return true;
     }
 
@@ -268,7 +273,7 @@ export function withBioforgeContainmentLabV188(Base) {
         ladders: this.ladders || [], phase: session?.phase || (root?.recovery?.purgeRequired ? 'purging' : 'configuration'),
         stage: this.bioforgeTransferStageV80, time: Number(this.animationTime || 0),
         reducedMotion: Boolean(this.reducedMotion || this.accessibilityRuntime?.reducedMotion),
-        tanks: cache.tanks, board: cache.board, exitDecon: this.bioforgeExitDeconV188, entryMist: this.bioforgeEntryMistV188,
+        tanks: cache.tanks, board: cache.board, policyLine: bioforgeCarePolicyLinesV188(this.bioforgeCarePolicyV188)?.board || null, exitDecon: this.bioforgeExitDeconV188, entryMist: this.bioforgeEntryMistV188,
         egress: mode === 'egress', vfx: this.bioforgeLabVfxV188,
         prompt: this.running && !this.paused && this.player?.alive ? this.resolveBioforgeLabPromptV188() : null
       };
