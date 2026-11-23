@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="data:,">
   <title>Tantalus · outils de développement</title>
   <link rel="stylesheet" href="/devtools/dev-v188.css">
 </head>
@@ -19,7 +21,7 @@
     <label>Catégorie <select data-dev-category><option value="">Toutes</option></select></label>
     <label>Langue <select data-dev-language><option value="fr">FR</option><option value="en">EN</option></select></label>
     <label>Difficulté <select data-dev-difficulty><option value="story">Récit</option><option value="standard" selected>Standard</option><option value="nightmare">Cauchemar</option></select></label>
-    <fieldset class="atf-dev-toggles" data-dev-toggles><legend>Options de session</legend></fieldset>
+    <details class="atf-dev-options" data-dev-options><summary>Options de session</summary><div class="atf-dev-toggles" data-dev-toggles></div></details>
   </form>
   <p class="atf-dev-count" data-dev-count aria-live="polite"></p>
   <main class="atf-dev-catalog" data-dev-catalog></main>

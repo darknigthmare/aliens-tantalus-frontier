@@ -5,6 +5,7 @@
 // Injections (declared): the range API (`__ATF_DEV_V188__.range`) is called for the auto-fire, the
 // measures and the tuning export; everything else uses the launcher and HUD buttons (real clicks).
 // Usage: PORT=4711 node scripts/dev.mjs & ; BASE_URL=http://127.0.0.1:4711/ node scripts/qa-dev-tools-v188.mjs <out-dir> [ids]
+// Against a built tree served statically: DEV_TOOLS_URL_PATH=/<hidden path>/ (scripts/qa-dev-tools-built-v188.mjs is the dedicated built QA).
 import { createRequire } from 'node:module';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -12,6 +13,7 @@ import { join } from 'node:path';
 const require = createRequire(import.meta.url);
 const { chromium } = require('/opt/node-tools/node_modules/playwright');
 const baseUrl = (process.env.BASE_URL || 'http://127.0.0.1:4711/').replace(/\/$/, '');
+const devToolsPath = `/${(process.env.DEV_TOOLS_URL_PATH || '/devtools/').replace(/^\/+|\/+$/g, '')}/`;
 const out = process.argv[2] || 'qa-dev-tools';
 await mkdir(out, { recursive: true });
 const report = { baseUrl, checks: [], pageErrors: [], consoleErrors: [], shots: [] };
@@ -34,12 +36,12 @@ page.on('console', message => { if (message.type() === 'error' && !/Service Work
 const shot = async name => { const file = join(out, `${name}.png`); await page.screenshot({ path: file }); report.shots.push(file); };
 
 // The player's real profile on this origin, written before the launcher runs.
-await page.goto(`${baseUrl}/devtools/`, { waitUntil: 'domcontentloaded' });
+await page.goto(`${baseUrl}${devToolsPath}`, { waitUntil: 'domcontentloaded' });
 await page.evaluate(sentinel => { localStorage.clear(); localStorage.setItem('atf-v47-profile-1', sentinel); localStorage.setItem('atf-language-v185', 'fr'); }, SENTINEL);
 const realBefore = await page.evaluate(() => JSON.stringify(Object.fromEntries(Object.keys(localStorage).sort().map(key => [key, localStorage.getItem(key)]))));
 
 async function launchFromLauncher(id, language) {
-  await page.goto(`${baseUrl}/devtools/`, { waitUntil: 'domcontentloaded' });
+  await page.goto(`${baseUrl}${devToolsPath}`, { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => globalThis.__ATF_DEV_LAUNCHER_V188__);
   await page.selectOption('[data-dev-language]', language);
   await page.fill('[data-dev-search]', id);
@@ -165,7 +167,7 @@ if (!only || only.includes('range')) {
   await shot('range-tuning');
   // Exit: the session is dropped, back to the launcher.
   await page.locator('[data-dev-exit]').click();
-  await page.waitForURL(/\/devtools\/$/);
+  await page.waitForURL(url => url.pathname === devToolsPath);
   const left = await page.evaluate(() => sessionStorage.getItem('atf-dev-session-v188'));
   check('exit: the dev session is discarded', left === null, left);
 }

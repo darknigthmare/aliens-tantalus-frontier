@@ -20,6 +20,8 @@ for (const [key, label] of TOGGLES) $('[data-dev-toggles]').insertAdjacentHTML('
   `<label><input type="checkbox" data-dev-toggle="${key}"${prefs.toggles[key] ? ' checked' : ''}> ${escapeHtml(label)}</label>`);
 $('[data-dev-toggles]').insertAdjacentHTML('beforeend', `<label>Vitesse <select data-dev-timescale>${[0.1, 0.25, 0.5, 1, 1.5, 2]
   .map(v => `<option value="${v}"${Number(prefs.toggles.timeScale || 1) === v ? ' selected' : ''}>×${v}</option>`).join('')}</select></label>`);
+// Phone-size screens: the options fold under their title so the catalogue stays one swipe away.
+$('[data-dev-options]').open = !globalThis.matchMedia?.('(max-width: 640px)').matches || Object.values(prefs.toggles).some(value => value === true);
 $('[data-dev-language]').value = prefs.language; $('[data-dev-difficulty]').value = prefs.difficulty;
 $('[data-dev-category]').value = prefs.category; $('[data-dev-search]').value = prefs.query;
 

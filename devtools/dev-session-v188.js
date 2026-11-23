@@ -272,7 +272,13 @@ function mountHud() {
   hud.querySelector('[data-dev-step]').onclick = () => frameStepV188(1);
   hud.querySelector('[data-dev-relaunch]').onclick = () => relaunch();
   hud.querySelector('[data-dev-exit]').onclick = () => exitSession();
-  hud.querySelector('[data-dev-collapse]').onclick = event => { const body = hud.querySelector('[data-dev-body]'); body.hidden = !body.hidden; event.currentTarget.setAttribute('aria-expanded', String(!body.hidden)); };
+  const collapse = hud.querySelector('[data-dev-collapse]'), setCollapsed = collapsed => {
+    hud.querySelector('[data-dev-body]').hidden = collapsed; collapse.textContent = collapsed ? '+' : '–'; collapse.setAttribute('aria-expanded', String(!collapsed));
+  };
+  collapse.setAttribute('aria-label', 'Replier ou déplier le panneau DEV');
+  collapse.onclick = () => setCollapsed(!hud.querySelector('[data-dev-body]').hidden);
+  // Phone-size screens start folded: one bar over the scene.
+  setCollapsed(Boolean(globalThis.matchMedia?.('(max-width: 640px), (max-height: 520px) and (pointer: coarse)').matches));
   setInterval(() => { hud.querySelector('[data-dev-status]').textContent = `${state.status}${state.landed ? ` · ${state.landed}` : ''}${state.error ? ` · ${state.error}` : ''}`; }, 400);
 }
 function persistToggles() {
