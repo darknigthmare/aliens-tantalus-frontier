@@ -34,26 +34,27 @@ const lang = language => language === 'en' ? 'en' : 'fr';
 /** Draws the provisional plaque. Pure Canvas 2D calls; returns false when the weapon has none. */
 export function drawProvisionalPlaqueV188(ctx, weapon, width, height, { language = 'fr', name = null } = {}) {
   if (!ctx || !hasProvisionalPlaqueV188(weapon) || !(width > 0) || !(height > 0)) return false;
+  const unit = Math.max(1, height / 132), band = Math.round(14 * unit); // text and band follow the plaque size
   ctx.save();
   ctx.fillStyle = '#0b1210'; ctx.fillRect(0, 0, width, height);
   // Hatched band: reads as "provisional" without relying on colour alone.
-  ctx.save(); ctx.beginPath(); ctx.rect(0, 0, width, 14); ctx.clip();
-  ctx.fillStyle = '#2a2414'; ctx.fillRect(0, 0, width, 14);
-  ctx.strokeStyle = '#c9a646'; ctx.lineWidth = 3;
-  for (let x = -14; x < width + 14; x += 14) { ctx.beginPath(); ctx.moveTo(x, 14); ctx.lineTo(x + 14, 0); ctx.stroke(); }
+  ctx.save(); ctx.beginPath(); ctx.rect(0, 0, width, band); ctx.clip();
+  ctx.fillStyle = '#2a2414'; ctx.fillRect(0, 0, width, band);
+  ctx.strokeStyle = '#c9a646'; ctx.lineWidth = 3 * unit;
+  for (let x = -band; x < width + band; x += band) { ctx.beginPath(); ctx.moveTo(x, band); ctx.lineTo(x + band, 0); ctx.stroke(); }
   ctx.restore();
   ctx.strokeStyle = '#6fa482'; ctx.lineWidth = 1; ctx.setLineDash?.([6, 4]);
-  ctx.strokeRect(4.5, 18.5, width - 9, height - 23); ctx.setLineDash?.([]);
+  ctx.strokeRect(4.5, band + 4.5, width - 9, height - band - 9); ctx.setLineDash?.([]);
   // Silhouette: the same named Canvas slot as the weapon held in mission, enlarged.
-  const length = 46, scale = Math.max(1, Math.min((width - 40) / (length * 1.35), (height - 70) / 22));
-  ctx.save(); ctx.translate(width / 2 - length * 0.35 * scale, height / 2); ctx.scale(scale, scale);
+  const length = 46, scale = Math.max(1, Math.min((width - 40) / (length * 1.35), (height - 70 * unit) / 22));
+  ctx.save(); ctx.translate(width / 2 - length * 0.35 * scale, height / 2 - 6 * unit); ctx.scale(scale, scale);
   ARSENAL_PLACEHOLDER_SLOTS_V188[silhouetteSlot(weapon)](ctx, length);
   ctx.restore();
   ctx.fillStyle = '#d3e1d6'; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
-  ctx.font = '700 11px ui-monospace, monospace';
-  ctx.fillText(PROVISIONAL_PLAQUE_TEXT_V188.label[lang(language)], width / 2, height - 22, width - 16);
+  ctx.font = `700 ${Math.round(11 * unit)}px ui-monospace, monospace`;
+  ctx.fillText(PROVISIONAL_PLAQUE_TEXT_V188.label[lang(language)], width / 2, height - 24 * unit, width - 16);
   const title = String(name || (typeof weapon === 'object' && weapon?.name) || '').toUpperCase();
-  if (title) { ctx.fillStyle = '#9fb7a6'; ctx.font = '10px ui-monospace, monospace'; ctx.fillText(title, width / 2, height - 9, width - 16); }
+  if (title) { ctx.fillStyle = '#9fb7a6'; ctx.font = `${Math.round(10 * unit)}px ui-monospace, monospace`; ctx.fillText(title, width / 2, height - 10 * unit, width - 16); }
   ctx.restore();
   return true;
 }

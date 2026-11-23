@@ -172,7 +172,7 @@ export const DEV_PROLOGUE_STEPS_V188 = Object.freeze([
     fr: `P-3 · Quai des vivants · ${phase}`, en: `P-3 · Quay of the living · ${phase}`, onboarding: 'complete', opening: 'ready', port: phase,
     // Once boarded, the hub is the Port-Méridien quay (hub-port-meridien-v90.js); the ship pose stays the drop hangar.
     room: phase === 'pending' ? 'briefing' : 'dropship-hangar', landRoom: phase === 'pending' ? null : 'port-meridien-quay', step: 'port' })),
-  { id: 'p3-complete', fr: 'Fin du prologue · briefing QZ-18', en: 'End of prologue · QZ-18 briefing', onboarding: 'complete', opening: 'ready', port: 'complete', room: 'briefing', step: 'briefing' }
+  { id: 'p3-complete', fr: 'Fin du prologue · briefing Acte I (QZ-17)', en: 'End of prologue · Act I briefing (QZ-17)', onboarding: 'complete', opening: 'ready', port: 'complete', room: 'briefing', step: 'briefing' }
 ]);
 export function devPrologueSaveV188(stepId, options = {}) {
   const step = DEV_PROLOGUE_STEPS_V188.find(entry => entry.id === stepId);

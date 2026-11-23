@@ -2731,6 +2731,12 @@ function renderOperationPlan() {
   renderCommandMissionsV110();
 }
 
+/** V188 2026-11-23 (P-4): threats of a deck-bound crisis waiting on another deck are named with their deck. */
+function heldThreatsReadoutV188() {
+  const held = hubEngine.crisisHeldThreatsV188?.();
+  return held ? ` · ${held.count} ${document.documentElement.lang === 'en' ? 'ON DECK' : 'AU PONT'} ${held.deck}` : '';
+}
+
 /** The touch pump button exists only while the manual pump option is on. */
 function syncPumpTouchButtonV188() {
   const button = byId('mission-pump-v188');
@@ -3183,7 +3189,7 @@ function renderHubStatus(status = lastHubStatus) {
   const forgeShipSessionV141 = standaloneContext === 'forge-playtest' && forgePlaytest?.kind === 'ship' ? hubEngine.forgeSessionV141 : null;
   const provingAmmoV81 = `${Math.max(0, Number(status?.provingGroundMagazineV81) || 0)}/${Math.max(0, Number(status?.provingGroundReserveV81) || 0)}`;
   byId('hub-prompt').textContent = translateHubPromptV185(status?.prompt || 'A/D marcher · W/S grimper · C ramper · F tirer · E utiliser');
-  byId('hub-system-readout').innerHTML = `<span>${tV185('hub.readout.health', 'SANTÉ')} <b>${Math.round(status?.health ?? saveSystem.data.hub.playerHealth ?? 100)}%</b></span><span>${tV185('hub.readout.threats', 'MENACES')} <b>${status?.threats ?? saveSystem.data.hub.activeCrisis?.count ?? 0}</b></span><span>${tV185('hub.readout.route', 'ROUTE')} <b>${status?.route?.source || 'TANTALUS'}</b></span><span>${provingGroundActiveV81 ? tV185('hub.readout.qualif', 'QUALIF M41A') : tV185('hub.readout.level', 'NIVEAU')} <b>${provingGroundActiveV81 ? `${escapeHtml(provingPhaseV81)} · ${provingScoreV81} · ${provingAmmoV81}` : forgeShipSessionV141 ? tV185('hub.readout.rooms', `${forgeShipSessionV141.reachableRoomIds.length} SALLES`, { count: forgeShipSessionV141.reachableRoomIds.length }) : tV185('hub.readout.zones', `${status?.route?.nodeCount || 26} ZONES`, { count: status?.route?.nodeCount || 26 })}</b></span>`;
+  byId('hub-system-readout').innerHTML = `<span>${tV185('hub.readout.health', 'SANTÉ')} <b>${Math.round(status?.health ?? saveSystem.data.hub.playerHealth ?? 100)}%</b></span><span>${tV185('hub.readout.threats', 'MENACES')} <b>${status?.threats ?? saveSystem.data.hub.activeCrisis?.count ?? 0}${heldThreatsReadoutV188()}</b></span><span>${tV185('hub.readout.route', 'ROUTE')} <b>${status?.route?.source || 'TANTALUS'}</b></span><span>${provingGroundActiveV81 ? tV185('hub.readout.qualif', 'QUALIF M41A') : tV185('hub.readout.level', 'NIVEAU')} <b>${provingGroundActiveV81 ? `${escapeHtml(provingPhaseV81)} · ${provingScoreV81} · ${provingAmmoV81}` : forgeShipSessionV141 ? tV185('hub.readout.rooms', `${forgeShipSessionV141.reachableRoomIds.length} SALLES`, { count: forgeShipSessionV141.reachableRoomIds.length }) : tV185('hub.readout.zones', `${status?.route?.nodeCount || 26} ZONES`, { count: status?.route?.nodeCount || 26 })}</b></span>`;
   const hubView = document.querySelector('.view[data-panel="hub"]');
   if (hubView) hubView.dataset.provingGroundActiveV81 = String(provingGroundActiveV81);
   all('[data-proving-ground-control-v81]').forEach((button) => {
