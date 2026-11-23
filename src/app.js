@@ -1,4 +1,5 @@
-import { colonySnapshotV188, investColonySiteV188, applyColonyOperationResultV188, COLONY_TIERS_V188, colonyRescuedV188 } from './colony-reconstruction-v188.js';
+import { colonySnapshotV188, investColonySiteV188, applyColonyOperationResultV188, COLONY_TIERS_V188, colonyRescuedV188,
+  colonySupplySourcesTextV188, colonySuppliesLineV188 } from './colony-reconstruction-v188.js';
 import { filterUnlockedCampaignsV188, stationLockReasonV188, stationLockTextV188, stationSnapshotV188, cassiusChoicePendingV188, chooseCassiusV188, CASSIUS_CHOICES_V188, CASSIUS_DIALOG_V188, stationReturnSceneDueV188, markStationSceneSeenV188, STATION_SCENES_V188 } from './station-asphodele-v188.js';
 import { crewQuestActionsV188, acceptCrewQuestV188, crewQuestStepV188, answerCrewQuestStepV188, turnInCrewQuestV188, applyCrewQuestOperationResultV188, crewQuestsSnapshotV188, getCrewQuestV188, davidMemoryRestoredV188, crewQuestEpilogueLineV188, crewQuestNotesV188 } from './crew-quests-v188.js';
 import { jumpRouteTextV188, applyJumpTravelTimeV188, jumpArrivalTextV188 } from './galaxy-travel-v188.js';
@@ -1498,6 +1499,13 @@ function renderCommand() {
     ['CR', resources.credits], ['ALLIAGE', resources.alloy], ['CARBURANT', resources.fuel], ['MÉD', resources.medical],
     ['R&D', resources.research], ['PATHOGÈNE', resources.pathogen], ['RAVIT.', systems.supplies], ['ÉNERGIE', systems.power]
   ].map(([label, value]) => `<span><b>${number(value)}</b>${label}</span>`).join('');
+  // V188 owner decision 2026-11-23 (P-1): the Command table says where supplies are earned.
+  let supplySourcesV188 = byId('supply-sources-v188');
+  if (!supplySourcesV188) {
+    supplySourcesV188 = Object.assign(document.createElement('p'), { id: 'supply-sources-v188', className: 'hint' });
+    byId('strategy-resources').after(supplySourcesV188);
+  }
+  supplySourcesV188.textContent = colonySupplySourcesTextV188(document.documentElement.lang);
   byId('squad-summary').innerHTML = `${meter('MORAL', systems.morale)}${meter('QUARANTAINE', systems.quarantine)}${meter('COQUE', systems.hull)}<p class="detail-copy">${saveSystem.data.strategy.selectedCrewIds.length}/${MAX_SQUAD_SIZE} affectés · ${saveSystem.data.memorial.length} au mémorial</p>`;
   const crisis = saveSystem.data.hub.activeCrisis;
   byId('crisis-summary').innerHTML = crisis && !crisis.resolved
@@ -2627,7 +2635,7 @@ function renderOperationPlan() {
   const launchDisabled = recovery.canAbandon || (!brief.ready && !operation);
   // V188 full run (2026-11-22): a launch refused for resources names what is missing, under the button.
   const launchMissingV188 = !recovery.canAbandon && !operation && !brief.ready ? missingStrategicCosts(saveSystem.data, brief.cost) : [];
-  const launchRefusalV188 = launchMissingV188.length ? `<p class="hint" role="status" data-launch-refusal-v188>${escapeHtml(strategicCostRefusalV188({ missingCosts: launchMissingV188 }, document.documentElement.lang))}</p>` : '';
+  const launchRefusalV188 = launchMissingV188.length ? `<p class="hint" role="status" data-launch-refusal-v188>${escapeHtml(strategicCostRefusalV188({ missingCosts: launchMissingV188 }, document.documentElement.lang))}${launchMissingV188.some(entry => entry.key === 'supplies') ? ` ${escapeHtml(colonySupplySourcesTextV188(document.documentElement.lang))}` : ''}</p>` : '';
   const launchLabel = recovery.canAbandon ? 'REPRISE IMPOSSIBLE' : operation ? 'REPRENDRE L’OPÉRATION' : 'DÉPLOYER ECHO-9';
   const recoveryAction = recovery.canAbandon
     ? '<button id="operation-abandon-v69" class="button danger-outline wide">ARCHIVER L’OPÉRATION PERDUE</button>'
@@ -4098,6 +4106,7 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   // operation or pay its rewards in memory before the durable write succeeds.
   const candidate = clone(saveSystem.data);
   const resourcesBeforeV188 = clone(candidate.galaxy.resources);
+  const suppliesBeforeV188 = Number(candidate.hub?.systems?.supplies) || 0;
   const outcome = resolveOperation(candidate, {
     success,
     kills: event.kills || 0,
@@ -4123,6 +4132,8 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   const queensChangeV188 = applyQueensOperationResultV188(candidate, { success: resolvedSuccess, campaignId: operation.campaignId });
   // V188 debrief: the amounts the hub actually receives (before the transit clock runs).
   outcome.paidV188 = paidRewardsV188(resourcesBeforeV188, candidate.galaxy.resources);
+  // V188 owner decision 2026-11-23 (P-1): supplies sent back by the colony (mission, validated site level).
+  outcome.suppliesPaidV188 = Math.max(0, Math.round(((Number(candidate.hub?.systems?.supplies) || 0) - suppliesBeforeV188) * 100) / 100);
   // V188 reactive lines (bible §53.6): failure, colonist loss, injured return.
   const reactiveLinesV188 = selectReactiveLinesV188(candidate,
     detectReactiveTriggersV188(saveSystem.data, candidate, operation, { success: resolvedSuccess }), {
@@ -4453,7 +4464,7 @@ function handleGameEvent(event) {
     byId('retreat-mission').textContent = 'RETOUR À BORD';
     // V188: the extraction screen and the log name what was paid, not the native mission tally.
     if (outcome.success && engine.mission) engine.mission.paidRewardsV188 = clone(outcome.paidV188);
-    log.textContent = outcome.success ? `${outcome.result} ${paidRewardsLineV188(outcome.paidV188)}` : outcome.result;
+    log.textContent = outcome.success ? `${outcome.result} ${paidRewardsLineV188(outcome.paidV188)}${colonySuppliesLineV188(outcome.suppliesPaidV188, document.documentElement.lang)}` : outcome.result;
     toast(outcome?.success
       ? 'Victoire persistée : monde, équipage, économie et continuité mis à jour.'
       : outcome?.result || 'Résolution enregistrée : les conditions de victoire ne sont pas remplies.');

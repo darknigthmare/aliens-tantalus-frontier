@@ -10,7 +10,8 @@
 // (bible §5.6 step 7: « la course débouche sur C5 »); its id is kept.
 // Ids, titles, givers, objectives and registers come from bible §6.2 and §0.3.
 // Locks, sites, rewards and texts marked [PROPOSÉ] are recorded in bible §6.4.
-import { normalizeColonyV188, colonyTierV188, COLONY_WORLD_ID_V188, COLONY_STABILITY_PER_LEVEL_V188, COLONY_SITE_IDS_V188 } from './colony-reconstruction-v188.js';
+import { normalizeColonyV188, colonyTierV188, COLONY_WORLD_ID_V188, COLONY_STABILITY_PER_LEVEL_V188, COLONY_SITE_IDS_V188,
+  COLONY_SUPPLY_RETURNS_V188, addColonySuppliesV188 } from './colony-reconstruction-v188.js';
 
 const t = (fr, en) => Object.freeze({ fr, en });
 const L = language => language === 'en' ? 'en' : 'fr';
@@ -242,6 +243,7 @@ export function advanceColonySiteV188(save, siteId, { build = false } = {}) {
   else if (build && site.invested < 3) { site.invested += 1; site.validated += 1; }
   else return null;
   save.colonyV188 = colony;
+  addColonySuppliesV188(save, COLONY_SUPPLY_RETURNS_V188.site); // owner decision 2026-11-23 (P-1)
   adjustWorld(save, { stability: COLONY_STABILITY_PER_LEVEL_V188 });
   return Object.freeze({ site: siteId, level: site.validated });
 }
@@ -268,6 +270,8 @@ const ONCE_REWARDS = Object.freeze({
  */
 export function applyColonyMissionResultV188(save, { success = false, campaignId = null } = {}) {
   if (!success || !save || !isColonyLocalMissionV188(campaignId)) return null;
+  // Owner decision 2026-11-23 (P-1): every successful colony mission sends supplies back (replays included).
+  addColonySuppliesV188(save, COLONY_SUPPLY_RETURNS_V188.mission);
   const campaign = getColonyCampaignV188(campaignId);
   if (campaign?.replayableV188) {
     const key = campaign.colonyContractV188;
