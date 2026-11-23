@@ -23,6 +23,9 @@ import { resolveAlienBaseDossierV1, resolveAlienBaseIdentityProposalV1, resolveA
 import { resolveWeaponReferenceCoverageV122 as resolveWeaponReferenceCoverageV120 } from './weapon-reference-coverage-v122.js';
 import { groupLabelV188, catalogValueLabelV188 } from './group-glossary-v188.js';
 import { currentLanguageV185 } from './i18n-v185.js';
+import { WEAPONS as WEAPONS_V188 } from './content-core-v50.js';
+import { mountProvisionalPlaqueV188 } from './weapon-provisional-plaque-v188.js';
+import { arsenalDocumentedRateV188 } from './weapon-arsenal-v188.js';
 
 const importWalkV107 = id => {
   const art = getEnemyStaticPoseV96(id), walk = getEnemyImportAnimationV107(art), attack = getEnemyImportAttackV109(art);
@@ -815,6 +818,9 @@ export class CatalogWorkbenchV62 {
   }
 
   renderMissingMedia(target, record) {
+    // V188: a weapon admitted with a provisional plaque shows its drawn Canvas plaque (no image).
+    if (record.catalog === 'weapons' && mountProvisionalPlaqueV188(this.document, target, WEAPONS_V188.find(entry => entry.id === record.id),
+      this.developerModeV110 ? record.name : playerCatalogNameV110(record.name))) return;
     const message = createElement(this.document, 'span', 'catalog-v62__media-status', 'MÉDIA VISUEL NON DOCUMENTÉ');
     message.dataset.catalogMediaMissing = record.id;
     message.setAttribute('aria-label', `${this.developerModeV110 ? record.name : playerCatalogNameV110(record.name)} — média visuel non documenté`);
@@ -1005,8 +1011,16 @@ export class CatalogWorkbenchV62 {
     section.append(createElement(this.document, 'p', 'catalog-v62__fact-note', coverage.isFinishVariant
       ? 'Cette finition partage le visuel du modèle de base ; ses réglages de jeu sont conservés.'
       : geometry.primaryMedia.dedicatedNativePlate ? 'Illustration dédiée du modèle ; pose fixe d’inspection.'
-        : 'Atlas animé historique du modèle ; nouvelle illustration dédiée à compléter.'));
+        : geometry.primaryMedia.visualMode === 'canvas-placeholder' ? 'Aucune illustration du modèle : plaque provisoire dessinée, illustration dédiée à produire.'
+          : 'Atlas animé historique du modèle ; nouvelle illustration dédiée à compléter.'));
     section.append(createElement(this.document, 'p', 'catalog-v62__fact-note', reference.caveat));
+    // V188 (owner decision A9): the documented cyclic rate is cited as a source fact, apart from the game cadence.
+    const documentedRate = arsenalDocumentedRateV188(geometry.baseId);
+    if (documentedRate) {
+      const note = createElement(this.document, 'p', 'catalog-v62__fact-note', documentedRate.note);
+      note.dataset.documentedRateV188 = String(documentedRate.roundsPerMinute);
+      section.append(note);
+    }
     if (reference.url && /^https:\/\//.test(reference.url)) {
       const link = createElement(this.document, 'a', 'catalog-v62__reference-link', reference.label);
       link.href = reference.url; link.target = '_blank'; link.rel = 'noopener noreferrer';

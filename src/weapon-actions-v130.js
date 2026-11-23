@@ -29,7 +29,7 @@ export const WEAPON_ACTION_PROFILES_V130 = Object.freeze(WEAPONS.flatMap(weapon 
     size: 10, speed: 380, lift: 160, gravity: 900, fuse: 1.6, radius: 150 };
   else if (name === 'Smart Disc') action = { kind: 'disc', resource: null, cooldown: .6,
     size: 12, speed: 460, returnSpeed: 600, outwardTime: .42, lifetime: 2.4 };
-  else if (name === 'Stun Baton') action = { kind: 'stun', resource: null, cooldown: .65, range: 55, stun: 1.1 };
+  else if (name === 'Stun Baton' || weapon.sourceMechanism === 'electric-prod-contact') action = { kind: 'stun', resource: null, cooldown: .65, range: 55, stun: 1.1 };
   else if (name === 'Cutting Torch') action = { kind: 'torch', resource: 'fuel', cooldown: .65, range: 48 };
   else if (weapon.family === 'melee') action = { kind: 'melee', resource: null, cooldown: .48,
     range: name === 'Combi-Stick' ? 90 : name === 'Fire Axe' ? 72 : name === 'Maintenance Jack' ? 62

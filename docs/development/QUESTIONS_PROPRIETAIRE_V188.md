@@ -827,11 +827,37 @@ Demande : « fidélité 1:1 comme le reste, compléter toutes les armes avec cha
 
 Option de développement : `arsenalFeedsV188: false` dans les options de `engine.start` rétablit le transfert numérique historique.
 
+## Arsenal — lot B, armes de la franchise (2026-11-23, spec 014) — décisions appliquées et questions ouvertes
+
+Demande : « ajouter toutes les armes manquantes de l'univers Aliens, jouables, avec une fidélité 1:1 (films, séries, jeux, comics, romans…) ». Rien n'est déclaré « 1:1 » : chaque valeur est documentée (source citée), adaptée [PROPOSÉ] ou à définir. Détail, sources et reste : `docs/development/ARSENAL_COMPLETION_V188.md` (section « Lot B »).
+
+Décisions du propriétaire appliquées le 23 novembre 2026 :
+
+| # | Décision | Application | Limite |
+| --- | --- | --- | --- |
+| A1 (révisée) | Les nouvelles armes sont achetables maintenant, avec une plaque provisoire | Les 38 armes du lot B (197–235) portent `admissionV188: 'provisional-plaque-purchasable'` : plaque dessinée en Canvas à l'armurerie, bouton « ACQUÉRIR » ouvert. Mécanisme partagé `src/weapon-provisional-plaque-v188.js` ; les armes 194–196 relèvent du lot parallèle | La plaque provisoire n'est pas un art terminé ; plaques natives à produire |
+| A6 | Chargeur physique seulement avec une source citée par modèle | **VP70 admis** (accessoire réel Heckler & Koch VP70 : IMFDB, pages de l'acteur et de l'arme — sources secondaires) : chargeur physique et ramassage au sol par `weapon-feed-admission-v193`. **M4A3 et F44AA inchangés** | Recherché : IMFDB (VP70, *Aliens*), synthèses du *Technical Manual* (AVP Central), liste *Dark Descent* d'AvPGalaxy (« 12-round clip »), miroir de wiki (« replaceable magazines »), Wētā Workshop, Hook & Barrel, Popular Airsoft, The Firearm Blog (F44AA). M4A3 : aucune source primaire ni propre à l'accessoire. F44AA : rien sur un chargeur amovible. La capacité de jeu du VP70 (52) n'est pas ramenée aux 18 coups de l'arme réelle |
+| A9 | La fiche du M41A cite 900 coups/min ; la cadence de jeu reste un réglage | Note de fiche « Cadence citée : 900 coups/min selon les synthèses du Colonial Marines Technical Manual (1995), source secondaire » (FR/EN) ; cadence de jeu 7,7/s [PROPOSÉ] inchangée | Le manuel lui-même n'a pas été consulté : chiffre étiqueté « secondaire » |
+| A8 (suite) | Nostromo et combinaison de Ripley | Lance-flammes, aiguillon électrique et pistolet laser du Nostromo inscrits avec leur source puis ajoutés (197–199). Combinaison de Ripley **non ajoutée** | Elle demande un tir secondaire (deux alimentations), comme le lance-grenades du M41A |
+
+Questions ouvertes :
+
+| # | Question | Valeur appliquée | Autre possibilité |
+| --- | --- | --- | --- |
+| B-A1 | Armes dont seul le nom vient du suivi (six armes d'*Alien Resurrection*) | Ajoutées et jouables comme adaptation de classe, tout en [PROPOSÉ], étiquetées « page non relue » | Les retirer de la vente jusqu'à relecture de la source |
+| B-A2 | Familles reportées (*Fireteam Elite* 17, *Colonial Marines* 14, *Fireteam Elite 2* 16, *Alien RPG* 5, engins d'*Isolation*, comics, romans) | Non ajoutées : listes inaccessibles pendant le lot (HTTP 403/402) ou sans source au niveau de l'arme | Les ajouter sur le seul nom du suivi, comme B-A1 |
+| B-A3 | Armes des Predators (34 dossiers) | Exclues : la demande porte sur les armes humaines | Les ouvrir dans un lot « Yautja » |
+| B-A4 | Tir secondaire (lance-grenades U1 du M41A, combinaison de Ripley, F90 + SL40, M41A/2) | Non fait : touche et affichage à décider avec les réglages des commandes | Lot dédié ; touche proposée à choisir |
+| B-A5 | Capacité du VP70 | 52 (valeur de jeu) avec chargeur physique | 18 (arme réelle) : changement d'équilibrage |
+| B-A6 | Bolt Gun et harpon sonique (alimentation « single » du CSV) | Capacité de jeu inchangée, pas de pont natif | Un projectile par rechargement |
+| B-A7 | M-90 Minigun : 900 coups (liste du jeu d'origine) | Appliqué tel quel, dégâts faibles [PROPOSÉ] | Réduire pour l'équilibrage |
+| B-A8 | Engins lancés et mines (*Isolation*, GEM-80, claymore) | Aucune classe de jeu ; non ajoutés | Créer une classe « engin » |
+
 ## Outils de développement : lanceur de scènes caché et stand de tir (2026-11-22, spec 012) — valeurs par défaut appliquées
 
 | # | Question | Valeur appliquée | Autre possibilité |
 | --- | --- | --- | --- |
-| D-012-1 | Exposition de la page de développement | Serveur de développement seulement (`/devtools/`, `/dev`, session `/?atf-dev=v188`) ; fichiers admis en source seulement, absents du build public | Page déployée derrière un paramètre secret (refusé : un paramètre n'est pas une protection) |
+| D-012-1 | Exposition de la page de développement | ~~Serveur de développement seulement (`/devtools/`, `/dev`, session `/?atf-dev=v188`) ; fichiers admis en source seulement, absents du build public~~ **Remplacée le 2026-11-23** (voir « Décision du propriétaire (2026-11-23) » plus bas) | Page déployée derrière un paramètre secret (refusé : un paramètre n'est pas une protection) |
 | D-012-2 | Sauvegarde utilisée par une session de développement | Stockage en mémoire de l'onglet, alimenté par la fixture ; le profil réel n'est ni lu ni écrit ; supprimée en quittant | Emplacement de profil dédié dans `localStorage` (risque d'écrasement par erreur) |
 | D-012-3 | Prérequis impossibles à produire sans falsifier un reçu runtime (retours ARBITER 02-06) | Entrées affichées désactivées avec leur raison | Forger les reçus (refusé : état impossible) |
 | D-012-4 | Réglages du stand | En mémoire, appliqués par relance du niveau, exportés en diff JSON pour revue ; jamais écrits dans les sources | Écriture directe dans `content.js` |
@@ -877,3 +903,24 @@ Questions ouvertes par ces décisions :
 | B9 | Peut-on rouvrir le débat ? | Non : tranché une fois | Rejouable après l'Interlude ou l'Acte IV, avec les nouvelles pièces |
 
 Aucune de ces décisions ne certifie une fidélité « 1:1 » ; les figures, objets et portraits ajoutés sont des substituts Canvas ou des PNG déjà admis.
+
+## Décision du propriétaire (2026-11-23) — page de développement livrée cachée dans le build public (spec 012)
+
+Décision : la page de développement cachée (lanceur de scènes et stand de tir) doit **aussi** être disponible dans le build publié, cachée : aucun lien depuis un écran joueur, accessible seulement par une adresse non évidente. Elle remplace la valeur par défaut D-012-1.
+
+Appliqué :
+
+| # | Point | Valeur appliquée | Remarque |
+| --- | --- | --- | --- |
+| D-012-6 | Adresse | `https://<site>/labo-tantalus-v188/` par défaut ; autre nom par `ATF_DEV_TOOLS_PATH` au build (un segment, 8 à 64 caractères `a-z`, `0-9`, `-`) | Le nom par défaut est public (ce dépôt). Un nom posé dans les variables d'environnement de l'hébergeur n'est écrit dans aucun fichier publié hors du dossier. |
+| D-012-7 | Portée de « caché » | Discrétion seulement : aucun contrôle d'accès, `noindex`, aucun lien, nom du dossier absent de `index.html`, `sw.js`, `build-info.json` et `src/` | Ce n'est pas une protection : qui connaît ou devine l'adresse ouvre la page. Aucun secret dans le dépôt. |
+| D-012-8 | Isolation sur hébergement statique | Premier script de `index.html`, en ligne, actif seulement pour `?atf-dev=v188` : `localStorage` → mémoire de l'onglet, `indexedDB` retiré, arrêt de la page si l'isolation échoue | D-012-2 inchangée (profil réel ni lu ni écrit). Le jeu normal n'exécute qu'un test d'expression régulière ; `index.html` publié contient ce script (≈3,7 Ko, 1,6 Ko compressé). |
+| D-012-9 | Service worker | Fichiers des outils hors précache et hors cache ; lus sur le réseau à la demande | Hors ligne, le lanceur ne s'ouvre pas. |
+| D-012-10 | Distribution | Les neuf fichiers de `devtools/` deviennent des chemins de distribution approuvés ; `scripts/`, `specs/`, `docs/` restent en source seulement | `check:built` contrôle la liste exacte et l'empreinte. |
+| D-012-11 | Téléphone | Lanceur et panneaux utilisables au doigt à 390×844 ; panneaux repliés au départ | Contrôlé en émulation Chromium, pas sur un appareil réel. |
+
+Questions ouvertes :
+
+- **Q-012-1 [PRODUCTION].** Garder le nom par défaut public `labo-tantalus-v188` ou poser `ATF_DEV_TOOLS_PATH` chez l'hébergeur (recommandé si la discrétion compte) ? Dans ce cas l'adresse n'est connue que de ceux à qui elle est donnée, sans être protégée pour autant.
+- **Q-012-2 [PLUS TARD].** Faut-il un interrupteur de build pour publier sans les outils (par exemple une version destinée au public large), ou une protection côté hébergeur (mot de passe) ? Ni l'un ni l'autre n'est fait.
+- **Q-012-3 [PLUS TARD].** Brancher le QA sur le build dans la CI (durée ≈ 6 min avec Chromium) ?

@@ -1,4 +1,4 @@
-// Developer tools (spec 012, source-only, never built): coherent save fixtures for the
+// Developer tools (spec 012; shipped hidden, see scripts/build-dev-tools-v188.mjs): coherent save fixtures for the
 // hidden scene launcher. Every fixture starts from createDefaultSave() and only moves
 // forward through the game's own rules:
 //  - prologue steps are reached with the real advance* functions (onboarding, opening,

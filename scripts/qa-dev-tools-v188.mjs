@@ -5,6 +5,7 @@
 // Injections (declared): the range API (`__ATF_DEV_V188__.range`) is called for the auto-fire, the
 // measures and the tuning export; everything else uses the launcher and HUD buttons (real clicks).
 // Usage: PORT=4711 node scripts/dev.mjs & ; BASE_URL=http://127.0.0.1:4711/ node scripts/qa-dev-tools-v188.mjs <out-dir> [ids]
+// Against a built tree served statically: DEV_TOOLS_URL_PATH=/<hidden path>/ (scripts/qa-dev-tools-built-v188.mjs is the dedicated built QA).
 import { createRequire } from 'node:module';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -12,6 +13,7 @@ import { join } from 'node:path';
 const require = createRequire(import.meta.url);
 const { chromium } = require('/opt/node-tools/node_modules/playwright');
 const baseUrl = (process.env.BASE_URL || 'http://127.0.0.1:4711/').replace(/\/$/, '');
+const devToolsPath = `/${(process.env.DEV_TOOLS_URL_PATH || '/devtools/').replace(/^\/+|\/+$/g, '')}/`;
 const out = process.argv[2] || 'qa-dev-tools';
 await mkdir(out, { recursive: true });
 const report = { baseUrl, checks: [], pageErrors: [], consoleErrors: [], shots: [] };
@@ -34,18 +36,18 @@ page.on('console', message => { if (message.type() === 'error' && !/Service Work
 const shot = async name => { const file = join(out, `${name}.png`); await page.screenshot({ path: file }); report.shots.push(file); };
 
 // The player's real profile on this origin, written before the launcher runs.
-await page.goto(`${baseUrl}/devtools/`, { waitUntil: 'domcontentloaded' });
+await page.goto(`${baseUrl}${devToolsPath}`, { waitUntil: 'domcontentloaded' });
 await page.evaluate(sentinel => { localStorage.clear(); localStorage.setItem('atf-v47-profile-1', sentinel); localStorage.setItem('atf-language-v185', 'fr'); }, SENTINEL);
 const realBefore = await page.evaluate(() => JSON.stringify(Object.fromEntries(Object.keys(localStorage).sort().map(key => [key, localStorage.getItem(key)]))));
 
 async function launchFromLauncher(id, language) {
-  await page.goto(`${baseUrl}/devtools/`, { waitUntil: 'domcontentloaded' });
+  await page.goto(`${baseUrl}${devToolsPath}`, { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => globalThis.__ATF_DEV_LAUNCHER_V188__);
   await page.selectOption('[data-dev-language]', language);
   await page.fill('[data-dev-search]', id);
   const button = page.locator(`[data-dev-launch="${id}"]`);
   await button.click();
-  await page.waitForURL(/atf-dev=v188/);
+  await page.waitForURL(/atf-dev=v188/, { waitUntil: 'commit' }); // the game page's load event can exceed the default timeout on a busy machine
   await page.waitForFunction(() => ['ready', 'error'].includes(globalThis.__ATF_DEV_V188__?.status), null, { timeout: 150000 });
   return page.evaluate(() => globalThis.__ATF_DEV_V188__.snapshot());
 }
@@ -98,6 +100,27 @@ if (!only || only.includes('range-arsenal')) {
     check(`range-arsenal ${id}: equipped, fired, arsenal profile read`, m.weapon.id === id && m.fireRate.shots > 0 && m.arsenal?.feed,
       { fired: m.fireRate.shots, arsenal: m.arsenal && { feed: m.arsenal.feed, bridge: m.arsenal.nativeBridge, capacity: m.arsenal.capacity, live: m.arsenal.live }, magazine: { ammo: m.magazine.ammo, size: m.magazine.size } });
     if (id === 'weapon-194-hicks-ithaca-37-shotgun') { await page.locator('[data-range-tab="measures"]').click(); await page.waitForTimeout(400); await shot('range-arsenal-hicks'); }
+  }
+  // Lot B (franchise arsenal, ids 197+): every provisional-plaque weapon is listed and fires in the range.
+  // The first one is chosen through the weapon select and its equip button (real clicks), the others through
+  // `range.setWeapon(id)`. The contact weapon (electric prod) has no shot counter: only its equipment and profile are checked.
+  const lotB = await page.evaluate(async () => (await import('/src/weapon-arsenal-v188.js')).listArsenalProfilesV188({ lotB: true })
+    .map(p => ({ id: p.weaponId, contact: p.family === 'melee', slot: p.held.placeholderSlot })));
+  check('range-arsenal: every franchise (lot B) weapon is listed', lotB.length === 38 && lotB.every(entry => listed.includes(entry.id)), { missing: lotB.filter(entry => !listed.includes(entry.id)).map(entry => entry.id) });
+  for (const [index, entry] of lotB.entries()) {
+    await page.evaluate(() => globalThis.__ATF_DEV_V188__.range.autoFire(0));
+    if (index === 0) {
+      await page.locator('[data-range-tab="weapons"]').click();
+      await page.selectOption('[data-range-weapon]', entry.id); await page.locator('[data-range-equip-weapon]').click();
+    } else await page.evaluate(weaponId => globalThis.__ATF_DEV_V188__.range.setWeapon(weaponId), entry.id);
+    await page.waitForTimeout(400);
+    await page.evaluate(() => { const r = globalThis.__ATF_DEV_V188__.range; r.resetMeasures(); r.autoFire(2.4); });
+    await page.waitForTimeout(2900);
+    const m = await page.evaluate(() => globalThis.__ATF_DEV_V188__.range.measures());
+    check(`range-arsenal ${entry.id}: equipped${entry.contact ? '' : ', fired'}, arsenal profile read`,
+      m.weapon.id === entry.id && (entry.contact || m.fireRate.shots > 0) && m.arsenal?.feed,
+      { fired: m.fireRate.shots, arsenal: m.arsenal && { feed: m.arsenal.feed, bridge: m.arsenal.nativeBridge, capacity: m.arsenal.capacity }, slot: entry.slot });
+    if (index === 0) { await page.locator('[data-range-tab="measures"]').click(); await page.waitForTimeout(400); await shot('range-arsenal-franchise'); }
   }
   await page.locator('[data-dev-exit]').click().catch(() => {});
 }
@@ -165,11 +188,13 @@ if (!only || only.includes('range')) {
   await shot('range-tuning');
   // Exit: the session is dropped, back to the launcher.
   await page.locator('[data-dev-exit]').click();
-  await page.waitForURL(/\/devtools\/$/);
+  await page.waitForURL(url => url.pathname === devToolsPath);
   const left = await page.evaluate(() => sessionStorage.getItem('atf-dev-session-v188'));
   check('exit: the dev session is discarded', left === null, left);
 }
 
+// Read on the launcher page: a dev session page only sees its isolated storage.
+await page.goto(`${baseUrl}${devToolsPath}`, { waitUntil: 'domcontentloaded' });
 const realAfter = await page.evaluate(() => JSON.stringify(Object.fromEntries(Object.keys(localStorage).sort().map(key => [key, localStorage.getItem(key)]))));
 check('the real localStorage (player profile) is untouched by every dev session', realAfter === realBefore, { before: realBefore.slice(0, 200), after: realAfter.slice(0, 200) });
 await browser.close();

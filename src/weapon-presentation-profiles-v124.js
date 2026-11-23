@@ -134,7 +134,7 @@ function classifyCatalogue(weapon) {
     style: 'gel', status: 'documented-mechanism', sourceKeys: ['fireball-developer'],
     notes: 'D17 gel projectile: a brief launch light, no continuous flame jet and no invented brass case.'
   };
-  if (/pulse rifle/.test(baseName)) return inferred('caseless',
+  if (/pulse rifle/.test(baseName) && !(weapon.admissionV188 && weapon.family === 'energy')) return inferred('caseless',
     'Pulse-family presentation follows the M41A caseless convention. This adaptation does not establish this model’s exact ammunition or caliber.');
   if (['m39 submachine gun', 'm42a scope rifle'].includes(baseName)) return conservative('noEjectRifle',
     'The catalogue does not specify a metallic case. Ejection is omitted without asserting a verified cartridge type.');
@@ -146,7 +146,8 @@ function classifyCatalogue(weapon) {
   };
   // V188 (spec 014): the pending-plaque pump shotguns are listed by exact id.
   if (baseName === 'm37a2 pump shotgun' || baseName === 'm51 breaching scattergun'
-    || ['weapon-194-hicks-ithaca-37-shotgun', 'weapon-195-sevastopol-pump-shotgun'].includes(weapon.id)) return derived('pump',
+    || ['weapon-194-hicks-ithaca-37-shotgun', 'weapon-195-sevastopol-pump-shotgun'].includes(weapon.id)
+    || weapon.admissionV188 && weapon.sourceMechanism === 'pump-action-tube-magazine') return derived('pump',
     'Pump identity is in the name or catalogue description. One spent hull is emitted at the cycle event; 0.18 seconds is a presentation delay, not a certified mechanism measurement.');
   if (baseName === 'type 76 auto shotgun') return derived('autoShotgun',
     'Automatic shotgun identity is explicit in the catalogue. One hull per accepted shot, not per pellet; case finish, size and magazine presentation remain game tuning.');
