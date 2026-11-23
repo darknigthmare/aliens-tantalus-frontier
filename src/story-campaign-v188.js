@@ -190,6 +190,13 @@ export function interludeCrisisShapeV188(crisis) {
   return Boolean(crisis && typeof crisis === 'object' && crisis.kind === INTERLUDE_CRISIS_V188.kind
     && Number(crisis.deck) === INTERLUDE_CRISIS_V188.deck && crisis.roomId === INTERLUDE_CRISIS_V188.roomId);
 }
+/** Owner decision 2026-11-23 (P-4): the live Interlude crisis is bound to its deck (deck 2, quarantine).
+ * Derived from the save, so an Interlude already in progress in an existing save is bound too. */
+export function interludeCrisisDeckBoundV188(save, crisis) {
+  const interlude = normalizeStoryCampaignV188(save?.storyCampaignV188).interlude;
+  return Boolean(interlude?.phase === 'alert' && !interlude.crisisCleared && crisis && typeof crisis === 'object'
+    && crisis.id === interlude.crisisId && interludeCrisisShapeV188(crisis));
+}
 // Owner decision "replace the crisis": an ordinary crisis still active when the Interlude begins is
 // cancelled without penalty (no resolution rule, no casualty, no module damage) so the quarantine
 // crisis always carries its own kind, deck and room. Returns the cancelled crisis id or null.
