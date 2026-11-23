@@ -19,6 +19,7 @@
  * placeholder silhouette (no image). Audio reuses existing original cues.
  */
 import { getArsenalProfileV188 } from './weapon-arsenal-v188.js';
+import { ARSENAL_PLACEHOLDER_SLOTS_V188 } from './weapon-provisional-plaque-v188.js';
 import { resolveWeaponActionProfileV131 } from './weapon-actions-v131.js';
 import { createSpecialFeedV171, fireSpecialFeedV171, cycleSpecialFeedV171, beginSpecialReloadV171,
   advanceSpecialReloadV171, cancelSpecialReloadV171, captureSpecialFeedV171, restoreSpecialFeedV171,
@@ -29,19 +30,7 @@ const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallbac
 const rounds = value => Number.isSafeInteger(value) && value >= 0 ? value : 0;
 const ROCKET_TRAIL_SECONDS = 0.035; // [PROPOSÉ] smoke puff spacing
 
-/** Named Canvas placeholder slots for weapons without a native plaque. */
-export const ARSENAL_PLACEHOLDER_SLOTS_V188 = Object.freeze({
-  'held-weapon-placeholder-shotgun'(ctx, length) {
-    ctx.fillStyle = '#3b3f3c'; ctx.fillRect(-length * 0.18, -3, length * 1.0, 5);   // barrel + tube
-    ctx.fillStyle = '#5b4632'; ctx.fillRect(length * 0.28, 2, length * 0.3, 4);     // pump fore-end
-    ctx.fillStyle = '#2a2c2b'; ctx.fillRect(-length * 0.3, -2, length * 0.16, 9);   // pistol grip
-  },
-  'held-weapon-placeholder-flamethrower'(ctx, length) {
-    ctx.fillStyle = '#4a4d47'; ctx.fillRect(-length * 0.2, -4, length * 1.05, 7);
-    ctx.fillStyle = '#8a3b22'; ctx.beginPath(); ctx.arc(length * 0.1, 7, 6, 0, Math.PI * 2); ctx.fill(); // fuel canister
-    ctx.fillStyle = '#ffb34d'; ctx.fillRect(length * 0.82, -2, 3, 3);              // pilot light
-  }
-});
+export { ARSENAL_PLACEHOLDER_SLOTS_V188 };
 
 export function withArsenalFeedsV188(Base) {
   if (Base.arsenalFeedsRuntimeV188) return Base;

@@ -606,6 +606,8 @@ const FORGE_TOOLING_V140 = new Set([
   // V188 arsenal completion (spec 014): suite, browser QA, inventory and spec, source-only exact paths.
   'scripts/verify-weapon-arsenal-v188.mjs',
   'scripts/qa-arsenal-v188.mjs',
+  'scripts/verify-weapon-franchise-v188.mjs',
+  'scripts/qa-arsenal-franchise-v188.mjs',
   'docs/development/ARSENAL_COMPLETION_V188.md',
   'specs/014-arsenal',
   'specs/014-arsenal/spec.md',

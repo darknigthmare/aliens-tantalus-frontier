@@ -176,6 +176,7 @@ import { mountForgePlaytestCheckpointUIV157 } from './forge-playtest-checkpoint-
 import { mountForgeCampaignUIV161 } from './forge-campaign-ui-v161.js';
 import { AudioDirector, cinematicReturnSceneV188 } from './audio.js';
 import { resolveWeaponVisualProfileV63 } from './weapon-visual-runtime-v63.js';
+import { hasProvisionalPlaqueV188 } from './weapon-provisional-plaque-v188.js';
 import { getVehicleDeploymentGateV60, VEHICLE_DEPLOYMENT_ATLAS_REQUIRED_V122 } from './vehicle-deployment-gates-v60.js';
 import { TitleScreenController } from './title-screen-v61.js';
 import { TitleSceneControllerV79 } from './title-scene-v79.js';
@@ -2729,7 +2730,8 @@ function procurementActionsV62(record) {
   const inventoryKey = `${kind}Ids`;
   const owned = saveSystem.data.strategy.inventory[inventoryKey]?.includes(item.id);
   const loadoutLocked = Boolean(saveSystem.data.strategy.currentOperation);
-  if (kind === 'weapon' && !resolveWeaponVisualProfileV63(item)) {
+  // V188 (owner decision, 23 Nov. 2026): a weapon with a provisional drawn plaque is purchasable now.
+  if (kind === 'weapon' && !resolveWeaponVisualProfileV63(item) && !hasProvisionalPlaqueV188(item)) {
     const bridge = getExcelWeaponBridgeV63(item.id);
     const sourceLabel = bridge?.excelIds?.length ? ` · Excel ${bridge.excelIds.join(', ')}` : '';
     return [{

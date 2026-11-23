@@ -99,6 +99,27 @@ if (!only || only.includes('range-arsenal')) {
       { fired: m.fireRate.shots, arsenal: m.arsenal && { feed: m.arsenal.feed, bridge: m.arsenal.nativeBridge, capacity: m.arsenal.capacity, live: m.arsenal.live }, magazine: { ammo: m.magazine.ammo, size: m.magazine.size } });
     if (id === 'weapon-194-hicks-ithaca-37-shotgun') { await page.locator('[data-range-tab="measures"]').click(); await page.waitForTimeout(400); await shot('range-arsenal-hicks'); }
   }
+  // Lot B (franchise arsenal, ids 197+): every provisional-plaque weapon is listed and fires in the range.
+  // The first one is chosen through the weapon select and its equip button (real clicks), the others through
+  // `range.setWeapon(id)`. The contact weapon (electric prod) has no shot counter: only its equipment and profile are checked.
+  const lotB = await page.evaluate(async () => (await import('/src/weapon-arsenal-v188.js')).listArsenalProfilesV188({ lotB: true })
+    .map(p => ({ id: p.weaponId, contact: p.family === 'melee', slot: p.held.placeholderSlot })));
+  check('range-arsenal: every franchise (lot B) weapon is listed', lotB.length === 38 && lotB.every(entry => listed.includes(entry.id)), { missing: lotB.filter(entry => !listed.includes(entry.id)).map(entry => entry.id) });
+  for (const [index, entry] of lotB.entries()) {
+    await page.evaluate(() => globalThis.__ATF_DEV_V188__.range.autoFire(0));
+    if (index === 0) {
+      await page.locator('[data-range-tab="weapons"]').click();
+      await page.selectOption('[data-range-weapon]', entry.id); await page.locator('[data-range-equip-weapon]').click();
+    } else await page.evaluate(weaponId => globalThis.__ATF_DEV_V188__.range.setWeapon(weaponId), entry.id);
+    await page.waitForTimeout(400);
+    await page.evaluate(() => { const r = globalThis.__ATF_DEV_V188__.range; r.resetMeasures(); r.autoFire(2.4); });
+    await page.waitForTimeout(2900);
+    const m = await page.evaluate(() => globalThis.__ATF_DEV_V188__.range.measures());
+    check(`range-arsenal ${entry.id}: equipped${entry.contact ? '' : ', fired'}, arsenal profile read`,
+      m.weapon.id === entry.id && (entry.contact || m.fireRate.shots > 0) && m.arsenal?.feed,
+      { fired: m.fireRate.shots, arsenal: m.arsenal && { feed: m.arsenal.feed, bridge: m.arsenal.nativeBridge, capacity: m.arsenal.capacity }, slot: entry.slot });
+    if (index === 0) { await page.locator('[data-range-tab="measures"]').click(); await page.waitForTimeout(400); await shot('range-arsenal-franchise'); }
+  }
   await page.locator('[data-dev-exit]').click().catch(() => {});
 }
 // —— Shooting range: 3 weapons, an equipment item, a squad order, caste targets, measures, tuning export ——
