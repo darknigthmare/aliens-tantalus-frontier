@@ -47,7 +47,7 @@ async function launchFromLauncher(id, language) {
   await page.fill('[data-dev-search]', id);
   const button = page.locator(`[data-dev-launch="${id}"]`);
   await button.click();
-  await page.waitForURL(/atf-dev=v188/);
+  await page.waitForURL(/atf-dev=v188/, { waitUntil: 'commit' }); // the game page's load event can exceed the default timeout on a busy machine
   await page.waitForFunction(() => ['ready', 'error'].includes(globalThis.__ATF_DEV_V188__?.status), null, { timeout: 150000 });
   return page.evaluate(() => globalThis.__ATF_DEV_V188__.snapshot());
 }
@@ -172,6 +172,8 @@ if (!only || only.includes('range')) {
   check('exit: the dev session is discarded', left === null, left);
 }
 
+// Read on the launcher page: a dev session page only sees its isolated storage.
+await page.goto(`${baseUrl}${devToolsPath}`, { waitUntil: 'domcontentloaded' });
 const realAfter = await page.evaluate(() => JSON.stringify(Object.fromEntries(Object.keys(localStorage).sort().map(key => [key, localStorage.getItem(key)]))));
 check('the real localStorage (player profile) is untouched by every dev session', realAfter === realBefore, { before: realBefore.slice(0, 200), after: realAfter.slice(0, 200) });
 await browser.close();

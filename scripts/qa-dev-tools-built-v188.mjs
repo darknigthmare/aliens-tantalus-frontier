@@ -97,7 +97,7 @@ async function launch(page, id, language = 'fr', { tap = false } = {}) {
   await page.fill('[data-dev-search]', id);
   const button = page.locator(`[data-dev-launch="${id}"]`);
   if (tap) await button.tap(); else await button.click();
-  await page.waitForURL(/[?&]atf-dev=v188/);
+  await page.waitForURL(/[?&]atf-dev=v188/, { waitUntil: 'commit' }); // the game page's load event can exceed the default timeout on a busy machine
   await page.waitForFunction(() => ['ready', 'error'].includes(globalThis.__ATF_DEV_V188__?.status), null, { timeout: 150000 });
   return page.evaluate(() => globalThis.__ATF_DEV_V188__.snapshot());
 }
