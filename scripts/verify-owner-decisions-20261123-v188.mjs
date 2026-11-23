@@ -238,6 +238,8 @@ test('A1 arsenal: 194–196 are purchasable at the armory price rule behind a pr
     assert.match(weapon.description, /Plaque d’armurerie provisoire \(dessin\) : disponible à l’armurerie\.$/);
     assert.ok(EN_CATALOG_V185[weapon.description]?.endsWith('Provisional armory plate (drawing): available at the armory.'), 'EN description: ' + id);
     assert.equal(weapon.canonExact, false, 'a drawn plaque certifies nothing');
+    assert.equal(weapon.admissionV188, 'provisional-plaque-purchasable'); assert.equal(weapon.plaqueStatus, 'provisional-canvas');
+    assert.equal(weapon.visualStatus, 'canvas-placeholder-native-plaque-required', 'the native plaque is still owed');
     // Armory rule: the ordinary quote, then a real purchase on a default save.
     const save = createDefaultSave(); save.galaxy.resources.credits = 100000;
     const quote = getProcurementQuote(save, 'weapon', weapon);
