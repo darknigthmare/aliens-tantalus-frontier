@@ -799,7 +799,7 @@ Aucune de ces valeurs ne certifie une fidélité « 1:1 ».
 
 ## Parcours complet de la campagne principale (2026-11-22) — questions ouvertes
 
-Le run est consigné dans `docs/development/PLAYTHROUGH_V188_20261122.md`. Aucune valeur n'a été changée sur ces points. Ils attendent une décision.
+Le run est consigné dans `docs/development/PLAYTHROUGH_V188_20261122.md`. Aucune valeur n'avait été changée sur ces points à cette date. **Décisions rendues le 2026-11-23** : voir la section « Décisions du propriétaire (2026-11-23) — appliquées » en fin de document.
 
 | # | Question | Constat du parcours | Options |
 | --- | --- | --- | --- |
@@ -811,7 +811,7 @@ Le run est consigné dans `docs/development/PLAYTHROUGH_V188_20261122.md`. Aucun
 
 ## Arsenal — complétion du lot A (2026-11-22, spec 014) — valeurs par défaut appliquées
 
-Demande : « fidélité 1:1 comme le reste, compléter toutes les armes avec chargeurs, VFX, etc. ». La règle du projet est appliquée : rien n'est déclaré « 1:1 » ; documenté / adapté / à définir sont séparés dans `docs/development/ARSENAL_COMPLETION_V188.md`.
+Demande : « fidélité 1:1 comme le reste, compléter toutes les armes avec chargeurs, VFX, etc. ». La règle du projet est appliquée : rien n'est déclaré « 1:1 » ; documenté / adapté / à définir sont séparés dans `docs/development/ARSENAL_COMPLETION_V188.md`. **Décisions rendues le 2026-11-23 sur A1 à A5** : voir la section du même jour en fin de document (A1 et A5 changent, A2 à A4 sont confirmées).
 
 | # | Question | Valeur appliquée | Autre possibilité |
 | --- | --- | --- | --- |
@@ -851,3 +851,40 @@ Demande : « améliorer la Bio Forge — le level design est mal fait ». Audit 
 | B6 | Quête `ship-bioforge` | Non codée ; deux lieux préparés (stockage froid, galerie) | Lot dédié : débat Inez / BISHOP-9 et choix de conservation |
 
 Aucune de ces valeurs ne certifie une fidélité « 1:1 ».
+
+## Décisions du propriétaire (2026-11-23) — appliquées
+
+Réponses aux questions P-1 à P-5 du parcours complet et A1 à A5 de l'arsenal. Appliquées sur la base `f8b22e68`. Tests : `scripts/verify-owner-decisions-20261123-v188.mjs` (dans `test:priorities:v188`). Les valeurs inventées portent **[PROPOSÉ]**.
+
+| # | Décision | Application | Reste ouvert |
+| --- | --- | --- | --- |
+| P-1 | **Ravitaillement : source visible.** Chaque mission de colonie réussie et chaque chantier validé rendent du ravitaillement ; le Commandement dit où en gagner ; le message « ressources insuffisantes » reste | `COLONY_SUPPLY_RETURNS_V188` (`src/colony-reconstruction-v188.js`) : **+8 par mission de Port-Méridien réussie [PROPOSÉ]** (C1-C5, annexes, contrats, rejouées comprises), **+4 par niveau de chantier validé [PROPOSÉ]** (mission locale, quête d'équipage ou validation provisoire d'avant C1) ; soute plafonnée à 100. Une sortie sur Cocyte coûte 6 : une mission de colonie ou un contrat rapporte donc 2 net. Ligne sous les ressources du Commandement (FR/EN), rappel sous le refus de départ quand le ravitaillement manque, montant nommé au bilan. Simulation de la ligne principale (16 sorties depuis 78) : sans retour, la soute est vide après la 13e sortie ; avec retours, le point le plus bas reste à 30 ou plus, et cinq sorties ratées restent payables | Le **carburant** suit la même pente et n'a pas été décidé : 16 sorties × 4 = 64, soit exactement le stock de départ (64). Une seule sortie ratée bloque la ligne tant que le marché d'Asphodèle n'est pas ouvert (question P-6 ci-dessous). Sous 6 de ravitaillement, aucun départ n'est possible : il ne reste que le projet « Logistique du Tantalus » (+8, une fois) |
+| P-2 | **Saut vers Nacre-7 bloqué par la chaîne d'infestation : expliquer et guider.** Le blocage reste | `infestationJumpGuidanceV188` (`src/galaxy-travel-v188.js`) : la préparation hyperspatiale de la carte galactique affiche, sous « Infestation à bord non résolue », pourquoi (étape de la chaîne) et où agir (FR/EN) : console du sas d'arrivée, matrice CCTV, contrôle du sas BIOFORGE — les trois services d'annexe qui renforcent déjà le confinement. Si le confinement a cédé, le texte renvoie à l'intrusion à bord | La chaîne n'a pas de mission dédiée : elle se clôt par ces trois contrôles et le temps de bord. Durée réelle entre l'exposition et la clôture non mesurée en jeu |
+| P-3 | **Ordre des actes : QZ-17 d'abord.** | `deriveStoryCampaignV188` : après le prologue, l'objectif et l'étoile ★ de la table recommandent l'Acte I (QZ-17), puis l'Acte II (QZ-18). QZ-18 n'est **pas verrouillé** (dépriorisé seulement) : une sauvegarde qui l'a commencé ou terminé reste valide, et l'Acte I y reste recommandé ensuite | Le conseil de guerre s'ouvre toujours dès l'Acte IV terminé (avant C4) et l'Interlude avant C3 : non décidé. Le lanceur de développement garde son ordre interne de jalons (`act2` avant `act1`) |
+| P-4 | **Crise de l'Interlude : pont 2, comme le dit l'objectif.** | `configureCrisis` (`src/hub-v51-runtime.js`) : une crise que l'hôte lie à son pont apparaît autour de sa salle (quarantaine, pont 2) et attend là ; sur un autre pont, aucune menace, et la crise ne se résout pas toute seule. Seule la crise de l'Interlude est liée (`interludeCrisisDeckBoundV188`, déduit de la sauvegarde : un Interlude déjà en cours est lié aussi). Le relevé du hub nomme les menaces en attente (« 4 AU PONT 2 ») | Les autres crises du hub gardent l'ancien comportement (menaces sur le pont du joueur). Les PNJ ne réagissent pas différemment selon le pont |
+| P-5 | **Texte du conseil avec un seul conteneur.** | « Un seul conteneur à rendre : insuffisant pour une restitution. Céder pèse sur le moral de l’équipage. » / « Only one container to hand back: not enough for a restitution. Ceding weighs on the crew’s morale. » ; règle des 2-3 conteneurs inchangée | — |
+| A1 | **194–196 achetables dès maintenant** à l'armurerie, derrière une plaque provisoire dessinée | `src/weapon-provisional-plaque-v188.js` : liste explicite des trois identifiants ; plaque Canvas (bande hachurée, silhouette, « PLAQUE PROVISOIRE », nom) derrière l'emplacement nommé `armory-plaque-provisional-<id>` ; aucun fichier image. Prix : règle ordinaire de l'armurerie (`getProcurementQuote`) appliquée aux statistiques **[PROPOSÉ]** — 910 CR pour l'Ithaca 37 sur une sauvegarde sans remise. Toute autre arme sans plaque garde « PLAQUETTE DÉDIÉE REQUISE » | La plaque provisoire n'est pas de l'art livré : plaques natives à produire. Les râteliers du hub n'affichent pas ces armes |
+| A5 | **Fusils à pompe : option dans les réglages.** Automatique par défaut (0,4 s), pompe manuelle au choix | Réglage « Fusils à pompe : pompe manuelle (touche dédiée) » (`settings.pumpManualV188`, additif, faux par défaut) ; action « Pomper » réaffectable (B par défaut) ; bouton tactile « POMPE » affiché seulement quand l'option est active ; invite texte « POMPER [B] » au-dessus du marine. La course manuelle garde le même délai minimal de 0,4 s **[PROPOSÉ]** : un appui anticipé est retenu, aucun gain de cadence. Le rechargement arme toujours la pompe seul. L'équipier et la coop restent en automatique | B sert aussi à quatre opérations spéciales (ordres Alpha/Bravo, bombe, possession, frein APC) : avec la pompe manuelle, la touche y fait les deux ; elle se réaffecte dans Commandes |
+| A2-A4 | **Capacités conservées** : une roquette par tube, 6 chambres pour le .357, capacité du modèle de base pour les finitions | Aucune modification : décision consignée | — |
+
+Petits défauts du parcours corrigés dans le même lot :
+
+| Réf. | Défaut | Correction |
+| --- | --- | --- |
+| R3 | L'objectif P-2 parlait de « deux échelles vers le sas supérieur » et les deux panneaux avaient deux textes | Un seul texte FR/EN pour `opening.qualification` et `exercise.arm` : porte du Proving Ground au niveau du sol, console, puis l'échelle jusqu'au pas de tir |
+| R4 | `#hub-training-controls-v132` restait `display:flex` malgré `hidden` | Règle `[hidden]` dédiée ; les boutons sont retirés du document hors d'un pupitre |
+| R5 | « Ce profil a changé dans une autre session » remontait en erreur de page | Message affiché dans l'interface (au plus un toutes les 15 s) ; les autres erreurs d'écriture restent levées |
+| R6 | Deux boutons « CONFIRMER LA CONFRONTATION » identiques au verdict QZ-17 | Chaque bouton nomme sa conclusion : « CONFIRMER · … » |
+
+Non traités : R1 (ancien point de reprise sous le sol dans les sauvegardes existantes) et Q4 (arme de départ affichée au plan).
+
+### P-6. Carburant de la ligne principale [PRODUCTION]
+
+Le stock de départ (64) couvre exactement les 16 sorties de la ligne principale (4 chacune). Une sortie ratée ou un saut le rend insuffisant avant le marché d'Asphodèle.
+
+**Options :**
+- **A.** Même principe que le ravitaillement : la colonie rend du carburant (dépôt de Quais).
+- **B.** Stock de départ plus haut.
+- **C.** Garder : le marché d'Asphodèle est la source prévue.
+
+Aucune de ces décisions ne certifie une fidélité « 1:1 ».

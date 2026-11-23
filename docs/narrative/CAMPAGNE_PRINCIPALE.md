@@ -618,6 +618,8 @@ Au constat :
 
 ### 5.1 Acte I — « La cargaison fantôme » (QZ-17)
 
+**Ordre conseillé (décision du 2026-11-23)** : après le prologue, l'objectif et l'étoile ★ de la table tactique recommandent l'Acte I (QZ-17), puis l'Acte II (QZ-18). QZ-18 n'est pas verrouillé : une sauvegarde qui l'a joué d'abord reste valide (`deriveStoryCampaignV188`).
+
 **Statut :** **[PARTIEL]** — `special-narrative-qz17`, `narrative-collectables-v68.js`. Intérieur vertical, 4 routes, 2204.
 
 **Question :** qu'est-ce qui a été déplacé sur QZ-17, et pourquoi le bon officiel ment-il ?
@@ -681,6 +683,8 @@ Contenu existant : briefing « Le message arrivé trop tard » ; protocoles *Aud
 **Conséquence :** `story-m577-manifest` = colons (0-6) et conteneurs (0-3). Les colons ramenés rejoignent la population de Port-Méridien. **[EXISTANT] (V188)** : la population du monde de C-12 est augmentée une seule fois. Les conteneurs restent consignés pour l'Interlude (§5.4), qui n'est pas encore jouable.
 
 ### 5.4 Interlude — « Quarantaine » (à bord du Tantalus) — [PARTIEL] V188
+
+**Pont 2 (décision du 2026-11-23)** : les menaces de la crise apparaissent autour de la salle de quarantaine du pont 2 et y attendent ; le joueur doit s'y rendre. Sur un autre pont, le relevé du hub les nomme (« … AU PONT 2 »). Les autres crises du hub ne changent pas.
 
 **Raccordé (V188)** : après CIN-31, CIN-40 se joue, puis une crise xénomorphe forcée s'ouvre dans la salle de quarantaine du pont 2. Elle utilise le système de crise du hub existant. Une fois la crise résolue dans le niveau, le choix détruire ou capturer s'affiche ; il ne peut pas être esquivé et revient s'il a été interrompu. CIN-41 suit, et la loyauté de BISHOP-9 baisse de 20, soit un niveau de confiance. Un objectif dédié s'affiche au hub. Pendant la crise, tout l'équipage suit la routine `alert`, qui prend fin quand la crise est résolue. Jun Park est coincé dans le conduit du support-vie (pont 3) : le joueur doit l'y rejoindre par le réseau de conduits. Le choix ne s'ouvre qu'une fois la créature neutralisée et Jun ramené, dans n'importe quel ordre (§56.9). **Pas encore fait** : Jun Park visible dans le conduit et blessé à l'infirmerie (pose à créer).
 
@@ -762,6 +766,8 @@ Les pièces de CASSIUS (S2) et de Wren (annexe colonie) étaient affichées « p
 | **« Les vivants, sans preuve »** | Option *Tenir la colonie* choisie | La colonie tient cette nuit-là, mais la clause s'applique. Vega est relevée à l'arrivée. |
 
 #### 5.7.1 Choix final : options ouvertes par les choix cumulés — validé le 2026-11-06
+
+**Un seul conteneur (décision du 2026-11-23)** : le conseil écrit « Un seul conteneur à rendre : insuffisant pour une restitution. » ; la restitution demande toujours 2 conteneurs ou plus.
 
 **Logique [EXISTANT] V188** (`finalChoiceOptionsV188`, `resolveFinalChoiceV188`, testée) :
 - *Transmettre* n'est ouvert que si Asphodèle est reprise et sa salle des relais ouverte ; **V188** : la salle est fournie par le hub Asphodèle (`asphodeleRelayReadyV188`) et lue par défaut par `finalChoiceOptionsV188` ; l'Acte V (§5.11) s'appuie dessus.
@@ -1085,6 +1091,8 @@ Après C2, Asha ouvre la **table de reconstruction** (salle commune de Port-Mér
 | **Libre** | 7 chantiers niveau 3 + fin « Le relais parle » | Épilogue spécial : premier convoi civil hors réseau QZ. |
 
 ### 6.4 Missions de la colonie jouables — [PARTIEL] V188 (lot colonie et équipage, 2026-11-16)
+
+**Ravitaillement rendu par la colonie (décision du 2026-11-23) [PROPOSÉ]** : chaque mission de Port-Méridien réussie rend **8** de ravitaillement (rejouées et contrats compris), chaque niveau de chantier validé **4** ; soute plafonnée à 100 (`COLONY_SUPPLY_RETURNS_V188`). Une sortie sur Cocyte coûte 6. Le Commandement affiche ces sources ; le bilan nomme le montant reçu. Le carburant n'est pas concerné.
 
 Décision par défaut Q25 A : C1 puis C5 d'abord ; C2-C4, les annexes et les contrats suivent le même gabarit. Code : `src/colony-missions-v188.js` (données et règles), `src/colony-reconstruction-v188.js` (validation locale, volontaires), `src/colony-crew-slots-v188.js` (emplacements d'art) ; sauvegarde additive `colonyMissionsV188` (missions déjà payées, scènes vues, décisions C4 et Grue, compteurs de contrats, volontaires). Lancement depuis l'ordre de mission du Commandement, comme toute opération : départ du hangar, insertion, mission sur un gabarit existant, extraction, retour au hangar du Tantalus. Les missions verrouillées n'apparaissent pas dans les listes et le lancement les refuse.
 
@@ -1611,6 +1619,8 @@ Les lieux Nacre-7, Echo Basin, Sable Meridian, Pallas Rift, MIRE-9, Palimpste et
 **[PARTIEL] V188 spec 011 (2026-11-22) :** la campagne 1 s'ouvre à la fin de la campagne principale, c'est-à-dire quand le générique de l'Acte V a été joué (`storyCampaignV188.act5.phase === 'complete'`) ; l'appel arrive alors à la salle de briefing (§14.11). Les campagnes 2 à 5 ne sont pas raccordées.
 
 ### 13.6 Temps de voyage — [PARTIEL] V188 (2026-11-15)
+
+**Saut refusé pour infestation (décision du 2026-11-23)** : le refus reste. La préparation hyperspatiale dit pourquoi (étape de la chaîne) et où agir à bord : console du sas d'arrivée, matrice CCTV, contrôle du sas BIOFORGE ; si le confinement a cédé, éliminer l'intrusion (`infestationJumpGuidanceV188`, FR/EN).
 
 Décision par défaut Q21 : coût fixe par saut. Le carburant garde la règle existante (`2 + ⌈danger/3⌉`, `galaxy-jump-v115.js`) ; chaque saut ajoute **14 jours [PROPOSÉ]** d'hypersommeil, affichés avant le départ (« … unités de carburant · 14 jours en hypersommeil ») et ajoutés à l'arrivée (`src/galaxy-travel-v188.js`). La simulation existante fait évoluer les mondes pendant ces jours. Messages reçus en retard : §13.7. Reste : vieillissement de l'équipage pendant le voyage.
 

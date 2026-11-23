@@ -23,3 +23,10 @@
 - [ ] T106 M41A sous-canon 30 mm natif (contrat V174)
 - [ ] T107 Combinaison M41A + M240 de Ripley ; Nostromo (lance-flammes, aiguillon) à inscrire d’abord à l’index avec source
 - [ ] T108 Coop : le pont suit le second joueur, non couvert par le parcours Chromium
+
+## Décisions du propriétaire du 2026-11-23
+
+- [x] T020 Plaque provisoire dessinée et achat des identifiants 194–196 (`src/weapon-provisional-plaque-v188.js`, armurerie)
+- [x] T021 Option « pompe manuelle » : réglage, action réaffectable, bouton tactile, invite (`src/weapon-arsenal-runtime-v188.js`)
+- [x] T022 Tests `scripts/verify-owner-decisions-20261123-v188.mjs`
+- [ ] T023 Plaques natives des trois armes (hors génération d’image)

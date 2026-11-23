@@ -34,9 +34,15 @@ valeur est rangée en trois statuts :
 
 Trois dossiers P0/P1 de l’index de recherche V171 sont promus en entrées de
 catalogue **sans plaque** (`src/weapon-catalog-additions-v188.js`). La règle
-existante de l’armurerie (« PLAQUETTE DÉDIÉE REQUISE ») les rend **non
-achetables** tant qu’une plaque native admise n’existe pas ; elles sont jouables
-par chargement (sauvegarde) et lisibles par le stand de tir. Les numéros 194–196
+existante de l’armurerie (« PLAQUETTE DÉDIÉE REQUISE ») les rendait **non
+achetables** tant qu’une plaque native admise n’existait pas. **Décision du
+propriétaire du 2026-11-23** : ces trois identifiants sont achetables dès
+maintenant derrière une **plaque provisoire dessinée** (Canvas, emplacement
+nommé `armory-plaque-provisional-<id>`, `src/weapon-provisional-plaque-v188.js`),
+au prix de la règle ordinaire de l’armurerie appliquée à leurs statistiques
+[PROPOSÉ]. La plaque provisoire n’est pas un art livré et ne certifie aucune
+apparence ; toute autre arme sans plaque garde la règle. Elles restent lisibles
+par le stand de tir. Les numéros 194–196
 évitent 191, réservé comme numéro inconnu par le test V124.
 
 | ID | Arme | Source citée | Documenté | Adapté [PROPOSÉ] | À définir |
@@ -261,3 +267,15 @@ du M41A, **non consulté ici** : aucune valeur n’en est tirée [À VÉRIFIER].
    de douilles dédiés, M41A sous-canon 30 mm natif (contrat V174 non raccordé).
 6. Questions propriétaire : voir `docs/development/QUESTIONS_PROPRIETAIRE_V188.md`
    (section du 22 novembre 2026 — arsenal).
+
+## Décisions du propriétaire du 2026-11-23
+
+| Réf. | Décision | État |
+| --- | --- | --- |
+| A1 | 194–196 achetables à l’armurerie avec une plaque provisoire dessinée | Fait (liste explicite de trois identifiants ; prix par la règle de l’armurerie ; plaques natives toujours à produire) |
+| A2 | Une roquette par tube | Conservé |
+| A3 | 6 chambres pour le .357 | Conservé |
+| A4 | Capacité du modèle de base pour les finitions | Conservé |
+| A5 | Pompe automatique par défaut (0,4 s [PROPOSÉ]) ; pompe manuelle en option | Fait : réglage `pumpManualV188`, action « Pomper » réaffectable (B), bouton tactile, invite texte ; même délai minimal, aucun gain de cadence |
+
+Tests : `scripts/verify-owner-decisions-20261123-v188.mjs`.
