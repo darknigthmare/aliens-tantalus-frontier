@@ -274,6 +274,11 @@ export const CREW_QUESTS_TANTALUS_V188 = Object.freeze([
 // confrontation-entries-v188.js) and opens the narrative access to the Bioforge. Its outcome is the quest answer
 // ('limit' = Harlow protocol, 'keep' = BISHOP-9 protocol); effects are [PROPOSÉ] and use existing values only.
 export const BIOFORGE_CARE_QUEST_ID_V188 = 'ship-bioforge';
+/** A save that already used the Bioforge: at least one session was created (serial, history, last or active session). */
+export function bioforgeAlreadyUsedV188(save) {
+  const root = save?.bioforgeV80;
+  return Boolean(root && (Number(root.serial) > 0 || root.activeSession || root.lastSessionId || (Array.isArray(root.history) && root.history.length)));
+}
 export const CREW_QUESTS_SHIP_LIFE_V188 = Object.freeze([
   Object.freeze({
     id: BIOFORGE_CARE_QUEST_ID_V188, crewId: 'crew-09-inez-harlow', giver: 'Inez Harlow', slot: 'quest-directive', kind: 'debate',
@@ -282,7 +287,9 @@ export const CREW_QUESTS_SHIP_LIFE_V188 = Object.freeze([
     where: t('Inez Harlow et BISHOP-9, devant le sas de la Bioforge ; ou Inez sur sa ronde.', 'Inez Harlow and BISHOP-9, at the Bioforge airlock; or Inez on her rounds.'),
     offer: t('Devant le sas de la Bioforge, Inez Harlow barre le passage à BISHOP-9. « Il veut garder les spécimens en vie entre deux sessions. Moi, je veux tout brûler après étude. Personne n’entre tant que ce n’est pas tranché. Écoute-le, réponds-lui, et on appliquera ce qui en sort. »',
       'At the Bioforge airlock, Inez Harlow stands in BISHOP-9’s way. "He wants to keep the specimens alive between sessions. I want everything burnt after study. Nobody goes in until this is settled. Hear him out, answer him, and we will apply whatever comes of it."'),
-    available: () => true,
+    // The debate is met at the airlock on the first visit. In her hub conversation Inez only offers it to a save that
+    // already used the Bioforge (its door stays open: the debate is then hers to bring up).
+    available: () => true, offeredInConversation: bioforgeAlreadyUsedV188,
     completionByAnswer: Object.freeze({
       limit: t('CE QU’ON GARDE EN VIE · Protocole Harlow : étude pendant la session, puis incinération ; le stockage froid ne garde que des échantillons inertes. L’équipage respire un peu mieux. La Bioforge est ouverte.',
         'WHAT WE KEEP ALIVE · Harlow protocol: study during the session, then incineration; cold storage keeps inert samples only. The crew breathes a little easier. The Bioforge is open.'),

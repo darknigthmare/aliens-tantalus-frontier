@@ -229,6 +229,18 @@ test('walk without session: armed by the view, confined by the safety doors, nev
   press(subject);
   assert.match(engine.bioforgeLabCaptionV188.text, /STOCKAGE FROID/);
   assert.ok(events.some(event => event.type === 'bioforge-lab-report' && event.kind === 'cold-storage'));
+  // Quest `ship-bioforge` (2026-11-23): no protocol line until the debate is settled; then the cold storage and the
+  // admission board show it (text only: same report text, same counters, nothing written to the save).
+  assert.equal(engine.bioforgeLabCaptionV188.note, null); assert.equal(engine.buildBioforgeLabViewV188().policyLine, null);
+  assert.equal(engine.setBioforgeCarePolicyV188('anything'), null);
+  assert.equal(engine.setBioforgeCarePolicyV188('keep'), 'keep');
+  const reportText = engine.bioforgeLabCaptionV188.text; press(subject);
+  assert.equal(engine.bioforgeLabCaptionV188.text, reportText); assert.equal(engine.bioforgeLabCaptionV188.note, 'PROTOCOLE BISHOP-9 · CONSERVATION SOUS SCELLÉS');
+  assert.equal(engine.buildBioforgeLabViewV188().policyLine, 'PROT. BISHOP-9 · SOUS SCELLÉS');
+  subject.texts.length = 0; engine.camera.x = 0; engine.draw();
+  assert.ok(subject.texts.includes('PROT. BISHOP-9 · SOUS SCELLÉS') && subject.texts.includes('PROTOCOLE BISHOP-9 · CONSERVATION SOUS SCELLÉS'), 'drawn on the board plate and above the report');
+  assert.equal(engine.setBioforgeCarePolicyV188('limit'), 'limit'); assert.equal(engine.buildBioforgeLabViewV188().policyLine, 'PROT. HARLOW · INCINÉRATION');
+  assert.equal(commits.length, 0);
   await walk(subject, 217);
   press(subject);
   assert.ok(events.some(event => event.type === 'bioforge-terminal-requested'));
@@ -380,6 +392,8 @@ test('texts: every lab string the canvas or the status line shows has an English
       'ANALYSE · CONFINEMENT TENU · 1 IMPRIMÉ(S) · 1 NEUTRALISÉ(S)', 'INCINÉRATEUR · CYCLE CONFIRMÉ · CELLULE STÉRILE', 'DÉCONTAMINATION 53 %',
       'DÉCONTAMINATION TERMINÉE · RETOUR AU TANTALUS AUTORISÉ', 'PURGE CONFIRMÉE · D : REJOINDRE LE SAS DE SORTIE',
       'LABORATOIRE · CONSOLE (E) OU TERMINAL : LANCER LE CYCLE', 'RETOUR AU TANTALUS PAR LE SAS DE SORTIE',
+      // Quest `ship-bioforge`: the protocol lines of the cold storage and of the admission board.
+      'PROTOCOLE HARLOW · ÉTUDE, PUIS INCINÉRATION', 'PROTOCOLE BISHOP-9 · CONSERVATION SOUS SCELLÉS', 'PROT. HARLOW · INCINÉRATION', 'PROT. BISHOP-9 · SOUS SCELLÉS',
       // Phase labels are read inside the HUD line, split on « · » by the canvas translation.
       ...Object.values(BIOFORGE_LAB_PHASE_LABELS_V188).filter(label => !['CONFIGURATION', 'COMBAT', 'PURGE'].includes(label))
         .map(label => `BIOFORGE · ${label} · CELLULE DE CONFINEMENT`)

@@ -7514,7 +7514,28 @@ export const EN_CATALOG_V185 = Object.freeze({
 "DÉPLACEMENT DANS LE LABORATOIRE · AUCUNE SESSION MODIFIÉE": "MOVING THROUGH THE LAB · NO SESSION CHANGED",
 "DÉCONTAMINATION DE SORTIE EN COURS": "EXIT DECONTAMINATION IN PROGRESS",
 "DÉCONTAMINATION TERMINÉE · PORTE DU TANTALUS OUVERTE": "DECONTAMINATION COMPLETE · TANTALUS DOOR OPEN",
-"RETOUR AU TANTALUS PAR LE SAS DE SORTIE": "RETURN TO THE TANTALUS THROUGH THE EXIT AIRLOCK"
+"RETOUR AU TANTALUS PAR LE SAS DE SORTIE": "RETURN TO THE TANTALUS THROUGH THE EXIT AIRLOCK",
+// V188 station levels, owner decisions 2026-11-23: station zone names, Grue at the dock, volunteer colonists (reviewed through i18n-catalog-maintenance-v186 merge).
+"Collier d’arrimage": "Docking collar",
+"Anneau extérieur": "Outer ring",
+"Pont du réacteur": "Reactor deck",
+"Quartiers d’habitation": "Habitation quarters",
+"Pont de contrôle": "Control deck",
+"Sas extérieur": "Outer airlock",
+"Palier du sas 3": "Airlock 3 landing",
+"Laboratoire de transit": "Transit laboratory",
+"Routage d’énergie": "Power routing",
+"Sortie des ponts inférieurs": "Lower decks exit",
+"Quai d’arrimage": "Docking quay",
+"Grue (radio) : « L’anneau tient parole, marines. Mes gens couvrent le quai. »": "Grue (radio): \"The ring keeps its word, marines. My people are covering the dock.\"",
+"Grue (radio) : « Vous avez forcé ma cloison. Le quai, on vient le prendre. »": "Grue (radio): \"You forced my bulkhead. We are coming to take the dock.\"",
+// V188 quest ship-bioforge « Ce qu'on garde en vie », owner decision 2026-11-23 (reviewed through i18n-catalog-maintenance-v186 merge).
+"PROTOCOLE HARLOW · ÉTUDE, PUIS INCINÉRATION": "HARLOW PROTOCOL · STUDY, THEN INCINERATION",
+"PROTOCOLE BISHOP-9 · CONSERVATION SOUS SCELLÉS": "BISHOP-9 PROTOCOL · KEPT UNDER SEAL",
+"PROT. HARLOW · INCINÉRATION": "HARLOW PROT. · INCINERATION",
+"PROT. BISHOP-9 · SOUS SCELLÉS": "BISHOP-9 PROT. · UNDER SEAL",
+"BIOFORGE · Inez Harlow et BISHOP-9 débattent devant le sas.": "BIOFORGE · Inez Harlow and BISHOP-9 are debating at the airlock.",
+"BIOFORGE · accès fermé tant que le débat n’est pas tranché.": "BIOFORGE · access closed until the debate is settled."
 });
 export const EN_PATTERNS_V185 = Object.freeze({
 // V188 systems bug hunt (merged via i18n-catalog-maintenance-v186 review).
@@ -8164,5 +8185,8 @@ export const EN_PATTERNS_V185 = Object.freeze({
 "PRÉVU ×{0}": "PLANNED ×{0}",
 "STOCKAGE FROID · {0} ÉCHANTILLON(S) · {1} PROFIL(S)": "COLD STORAGE · {0} SAMPLE(S) · {1} PROFILE(S)",
 "ANALYSE · {0} · {1} IMPRIMÉ(S) · {2} NEUTRALISÉ(S)": "ANALYSIS · {0} · {1} PRINTED · {2} NEUTRALIZED",
-"DÉCONTAMINATION {0} %": "DECONTAMINATION {0} %"
+"DÉCONTAMINATION {0} %": "DECONTAMINATION {0} %",
+// V188 station levels, owner decisions 2026-11-23: station zone names, Grue at the dock, volunteer colonists (reviewed through i18n-catalog-maintenance-v186 merge).
+"L’équipe technique du Tantalus est à bord, suivie de {0} colon(s) volontaire(s) de Port-Méridien. Asphodèle est reprise.": "The Tantalus technical team is aboard, followed by {0} volunteer colonist(s) from Port-Méridien. Asphodèle is retaken.",
+"L’équipe technique du Tantalus, les récupérateurs de Grue et {0} colon(s) volontaire(s) de Port-Méridien sont à bord. Asphodèle est reprise.": "The Tantalus technical team, Grue’s salvagers and {0} volunteer colonist(s) from Port-Méridien are aboard. Asphodèle is retaken."
 });

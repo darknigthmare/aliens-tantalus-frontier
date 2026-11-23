@@ -470,7 +470,9 @@ export function withStationMissionLevelsV188(Base) {
       // A closed door or a sealed frame between the spawn and the marine: the creature could not reach them.
       const closedBetween = (a, b) => (this.doors || []).some(door => !door.open && door.y < floorY && door.y + door.h >= floorY - 4 && between(a, b, door))
         || (this.walls || []).some(wall => wall.stationBarrierV188 && wall.y < floorY && wall.y + wall.h >= floorY - 4 && between(a, b, wall));
-      return { x0, x1, supported, closedBetween };
+      // A spawn never stands inside the frame of a closed bulkhead (it would be walled in).
+      const inClosedFrame = x => (this.doors || []).some(door => !door.open && door.y < floorY && door.y + door.h >= floorY - 4 && x > door.x - 40 && x < door.x + door.w + 40);
+      return { x0, x1, supported, closedBetween, inClosedFrame };
     }
     updateStationSpawnsV188(plan) {
       const level = this.stationLevelV188, runtime = level.runtime;
@@ -482,8 +484,12 @@ export function withStationMissionLevelsV188(Base) {
       if (!deck || !marines.length) return;
       const same = marines.filter(actor => Math.abs(feet(actor) - plan.y) < 40).map(actor => ({ x: centre(actor) }));
       const reference = same.length ? same : marines.map(actor => ({ x: centre(actor) }));
-      const x = stationSpawnXV188({ marines: reference, side: plan.side, deck, offset: (runtime.spawned % 3) * 60,
-        blocked: candidate => !deck.supported(candidate) || reference.some(entry => deck.closedBetween(candidate, entry.x)) });
+      const blocked = candidate => !deck.supported(candidate) || deck.inClosedFrame(candidate) || reference.some(entry => deck.closedBetween(candidate, entry.x));
+      // The spread of a wave (0, 60, 120 px) gives way when a closed bulkhead stands in it: the creature then appears at the
+      // edge of the safe zone, on the marines' side of that bulkhead (before 2026-11-23 such a spawn was dropped, and the
+      // dock hold of S4 received two of its nine creatures while the ring bulkhead was closed).
+      let x = stationSpawnXV188({ marines: reference, side: plan.side, deck, offset: (runtime.spawned % 3) * 60, blocked });
+      if (!Number.isFinite(x) && runtime.spawned % 3) x = stationSpawnXV188({ marines: reference, side: plan.side, deck, offset: 0, blocked });
       if (!Number.isFinite(x)) { runtime.nextSpawnAt = runtime.phaseElapsed + 1; return; }
       this.spawnStationEnemyV188(plan.pool || 'drone', x, plan.y);
       runtime.spawned += 1; runtime.nextSpawnAt = runtime.phaseElapsed + plan.interval;

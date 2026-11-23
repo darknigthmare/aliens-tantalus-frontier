@@ -7,7 +7,7 @@
 // Pure rules and texts (FR/EN); the additive save field is `crewQuestsV188`.
 // Values marked [PROPOSÉ] are recorded in bible §8.4.
 import { markStationIntroHeardV188, STATION_WORLD_ID_V188 } from './station-asphodele-v188.js';
-import { CREW_QUESTS_TANTALUS_V188, CREW_QUESTS_SHIP_LIFE_V188, BIOFORGE_CARE_QUEST_ID_V188 } from './crew-quests-tantalus-v188.js';
+import { CREW_QUESTS_TANTALUS_V188, CREW_QUESTS_SHIP_LIFE_V188, BIOFORGE_CARE_QUEST_ID_V188, bioforgeAlreadyUsedV188 } from './crew-quests-tantalus-v188.js';
 import { startConfrontationV188, confrontationStateV188, confrontationOutcomeV188, getConfrontationV188 } from './confrontation-v188.js';
 import { addColonyPopulationV188, advanceColonySiteV188 } from './colony-missions-v188.js';
 
@@ -160,6 +160,7 @@ export function crewQuestActionsV188(save, crewId, language = 'fr') {
     const state = stateOf(save, quest.id);
     if (state?.stage === 'done') return null;
     if (!state && !quest.available(save)) return null;
+    if (!state && quest.offeredInConversation && !quest.offeredInConversation(save)) return null; // met elsewhere first (the Bioforge airlock)
     const ready = quest.kind === 'components' && state && state.components >= quest.components;
     const progress = quest.kind === 'components' && state ? ` (${state.components}/${quest.components})` : '';
     const gated = state && quest.gate && !crewQuestGateOpenV188(save, quest.id);
@@ -297,8 +298,7 @@ export function bioforgeCarePolicyV188(save) {
  */
 export function bioforgeNarrativeAccessV188(save) {
   if (stateOf(save, BIOFORGE_CARE_QUEST_ID_V188)?.stage === 'done') return Object.freeze({ open: true, reason: 'quest' });
-  const root = save?.bioforgeV80;
-  const used = Boolean(root && (Number(root.serial) > 0 || root.activeSession || root.lastSessionId || (Array.isArray(root.history) && root.history.length)));
+  const used = bioforgeAlreadyUsedV188(save);
   return Object.freeze({ open: used, reason: used ? 'already-used' : 'debate-pending' });
 }
 

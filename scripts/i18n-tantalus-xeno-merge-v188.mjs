@@ -953,7 +953,26 @@ export const TANTALUS_I18N_DELTA_V188 = Object.freeze({
       "DÉPLACEMENT DANS LE LABORATOIRE · AUCUNE SESSION MODIFIÉE",
       "DÉCONTAMINATION DE SORTIE EN COURS",
       "DÉCONTAMINATION TERMINÉE · PORTE DU TANTALUS OUVERTE",
-      "RETOUR AU TANTALUS PAR LE SAS DE SORTIE"
+      "RETOUR AU TANTALUS PAR LE SAS DE SORTIE",
+      "Collier d’arrimage",
+      "Anneau extérieur",
+      "Pont du réacteur",
+      "Quartiers d’habitation",
+      "Pont de contrôle",
+      "Sas extérieur",
+      "Palier du sas 3",
+      "Laboratoire de transit",
+      "Routage d’énergie",
+      "Sortie des ponts inférieurs",
+      "Quai d’arrimage",
+      "Grue (radio) : « L’anneau tient parole, marines. Mes gens couvrent le quai. »",
+      "Grue (radio) : « Vous avez forcé ma cloison. Le quai, on vient le prendre. »",
+      "PROTOCOLE HARLOW · ÉTUDE, PUIS INCINÉRATION",
+      "PROTOCOLE BISHOP-9 · CONSERVATION SOUS SCELLÉS",
+      "PROT. HARLOW · INCINÉRATION",
+      "PROT. BISHOP-9 · SOUS SCELLÉS",
+      "BIOFORGE · Inez Harlow et BISHOP-9 débattent devant le sas.",
+      "BIOFORGE · accès fermé tant que le débat n’est pas tranché."
     ],
     "changed": {
       "Extraire le renseignement synthétique": {
@@ -1093,7 +1112,9 @@ export const TANTALUS_I18N_DELTA_V188 = Object.freeze({
       "PRÉVU ×{0}",
       "STOCKAGE FROID · {0} ÉCHANTILLON(S) · {1} PROFIL(S)",
       "ANALYSE · {0} · {1} IMPRIMÉ(S) · {2} NEUTRALISÉ(S)",
-      "DÉCONTAMINATION {0} %"
+      "DÉCONTAMINATION {0} %",
+      "L’équipe technique du Tantalus est à bord, suivie de {0} colon(s) volontaire(s) de Port-Méridien. Asphodèle est reprise.",
+      "L’équipe technique du Tantalus, les récupérateurs de Grue et {0} colon(s) volontaire(s) de Port-Méridien sont à bord. Asphodèle est reprise."
     ],
     "changed": {
       "TEMPS {0} S · VISÉE {1}": {
