@@ -824,3 +824,18 @@ Option de développement : `arsenalFeedsV188: false` dans les options de `engine
 | D-012-3 | Prérequis impossibles à produire sans falsifier un reçu runtime (retours ARBITER 02-06) | Entrées affichées désactivées avec leur raison | Forger les reçus (refusé : état impossible) |
 | D-012-4 | Réglages du stand | En mémoire, appliqués par relance du niveau, exportés en diff JSON pour revue ; jamais écrits dans les sources | Écriture directe dans `content.js` |
 | D-012-5 | Mission support du stand | Première campagne FRONTIER ordinaire de Cocyte (`pair-005-frontier`), pour que la doctrine d'escouade V132 et les posables soient actifs | Niveau de stand dédié à construire |
+
+## Bioforge, laboratoire de confinement (2026-11-22, spec 013) — valeurs par défaut appliquées
+
+Demande : « améliorer la Bio Forge — le level design est mal fait ». Audit : `docs/development/BIOFORGE_AUDIT_V188.md`. Valeurs appliquées, à confirmer :
+
+| # | Question | Valeur appliquée | Autre possibilité |
+| --- | --- | --- | --- |
+| B1 | Galerie d'observation | Décor de profondeur au-dessus de la cellule, derrière verre blindé, non praticable (le monde reste 2880 px) | Étage praticable (monde agrandi, migration des sauvegardes V87/V132) |
+| B2 | Décontamination | Brume de présentation à l'entrée ; cycle obligatoire de 2,4 s à la sortie avant la porte du Tantalus | Cycle obligatoire aussi à l'entrée ; autre durée |
+| B3 | Sortie après la purge | À pied (D ou E) si l'opérateur est vivant dans la cellule ; sinon bouton « RETOUR AU HUB » | Sortie à pied seulement ; terminal seulement |
+| B4 | Marche sans session | Autorisée dans la salle de contrôle et le stockage froid, portes de sécurité fermées | Scène fixe jusqu'au lancement |
+| B5 | Passerelles de la cellule | Réservées aux spécimens, signalées ; l'opérateur n'escalade pas | Escalade des échelles |
+| B6 | Quête `ship-bioforge` | Non codée ; deux lieux préparés (stockage froid, galerie) | Lot dédié : débat Inez / BISHOP-9 et choix de conservation |
+
+Aucune de ces valeurs ne certifie une fidélité « 1:1 ».

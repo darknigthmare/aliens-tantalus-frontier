@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-tantalus-arsenal-outils-dev-20261122';
+const CACHE = 'atf-v143-tantalus-arsenal-outils-dev-bioforge-lab-20261122';
 const SHELL = Object.freeze([
   '/src/xeno-trials-visual-assets-v205.js',
   '/src/xeno-trials-priority-air-data-v204.js',
@@ -388,6 +388,9 @@ const SHELL = Object.freeze([
   '/src/automaton-combat-v113.js',
   '/src/bioforge-admissions-v132.js',
   '/src/bioforge-assets-v80.js',
+  '/src/bioforge-lab-layout-v188.js',
+  '/src/bioforge-lab-render-v188.js',
+  '/src/bioforge-lab-runtime-v188.js',
   '/src/bioforge-level-v80.js',
   '/src/bioforge-physical-state-v87.js',
   '/src/bioforge-runtime-v80.js',

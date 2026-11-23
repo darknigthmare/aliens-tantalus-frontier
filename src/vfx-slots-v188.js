@@ -62,7 +62,10 @@ export const VFX_SLOTS_V188 = Object.freeze([
   slot('sodium-wash', 'overlay', 1280, 720, 'Low sodium-orange emergency light wash over the scene at peak tension.',
     'Flat warm sodium-vapour orange light wash with darker corners, very low contrast; no text.'),
   slot('alarm-strobe', 'overlay', 1280, 720, 'Rotating amber emergency beacon sweep at peak tension.',
-    'Amber rotating-beacon light sweep across the top edge of the screen, soft; transparent centre; no text.')
+    'Amber rotating-beacon light sweep across the top edge of the screen, soft; transparent centre; no text.'),
+  // V188 Bioforge lab (spec 013).
+  slot('liquid-bubble', 'world-fx', 8, 8, 'Bubble rising in the liquid of a Bioforge stasis tank.',
+    'Small translucent pale-green bubble with a bright rim highlight, as in the liquid-filled specimen tubes of the Hadley\'s Hope medlab in Aliens (1986); transparent background.')
 ]);
 export const VFX_SLOT_IDS_V188 = Object.freeze(VFX_SLOTS_V188.map(entry => entry.id));
 // Slots whose PNG is committed under VFX_SLOT_ROOT_V188. Empty until the art is produced.
@@ -159,6 +162,10 @@ export const VFX_FALLBACKS_V188 = Object.freeze({
     ctx.fillStyle = '#9b1410';
     ctx.fillRect(0, 0, width, edge * .45); ctx.fillRect(0, height - edge * .45, width, edge * .45);
     ctx.fillRect(0, 0, edge * .6, height); ctx.fillRect(width - edge * .6, 0, edge * .6, height);
+  },
+  'liquid-bubble'(ctx, t, s) {
+    ctx.strokeStyle = '#d9fbe0'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(0, 0, Math.max(1, s * (.35 + t * .15)), 0, TAU); ctx.stroke();
+    ctx.fillStyle = '#f4fff6'; ctx.fillRect(-s * .15, -s * .2, Math.max(1, s * .12), Math.max(1, s * .12));
   },
   'alarm-strobe'(ctx, t, s, p) {
     const { width = 1280 } = p || {}, x = (t % 1) * (width + 400) - 200;

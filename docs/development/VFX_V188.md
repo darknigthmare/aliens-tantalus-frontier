@@ -37,6 +37,7 @@ Document source uniquement, exclu du build public. Code : [`src/vfx-v188.js`](..
 | `damage-vignette` | overlay | 1280×720 | Bords rouges quand le marine est blessé |
 | `sodium-wash` | overlay | 1280×720 | Lavis orangé d’éclairage de secours au pic de tension |
 | `alarm-strobe` | overlay | 1280×720 | Balayage de gyrophare ambre au pic de tension |
+| `liquid-bubble` | world-fx | 8×8 | Bulle montant dans le liquide d’une cuve de stase de la Bioforge (spec 013, type `bubble`) |
 
 Échelle du projet : 1 m ≈ 51 px, marine debout 44×92 px.
 
