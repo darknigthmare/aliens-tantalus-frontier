@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { mkdtemp, mkdir, writeFile, rm, symlink } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, writeFile, rm, symlink } from 'node:fs/promises';
 import { join, dirname } from 'node:path';
 import { tmpdir } from 'node:os';
 import { test } from 'node:test';
@@ -10,6 +10,7 @@ import {
   PROJECT_RECOVERY_TOOLS_20261116,
   compileProjectRecoveryManifest20261116,
   projectRecoveryPathAdmission20261116,
+  reviewedProjectRecovery20261116,
   verifyProjectRecoveryArchive20261116,
 } from './project-recovery-admission-20261116.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
@@ -26,6 +27,7 @@ async function fixture(t) {
   const root = await mkdtemp(join(tmpdir(), 'tantalus-predator-recovery-'));
   t.after(() => rm(root, { recursive: true, force: true }));
   await mkdir(dirname(join(root, manifestPath)), { recursive: true });
+  await mkdir(dirname(join(root, memberPath)), { recursive: true });
   const bytes = encoded(manifest());
   await writeFile(join(root, manifestPath), bytes);
   await writeFile(join(root, memberPath), original);
@@ -100,4 +102,32 @@ test('unlisted files, directories and archive symlinks cannot enter the source i
   await writeFile(join(root, 'external.txt'), original);
   await symlink(join(root, 'external.txt'), join(root, memberPath));
   await assert.rejects(verifyProjectRecoveryArchive20261116(root, { expectedSha256 }), /symlink/);
+});
+
+
+test('the aggregate keeps the reviewed Predator manifest and every historical member unchanged', async () => {
+  const inventory = reviewedProjectRecovery20261116();
+  const legacyPath = archiveRoot + '/predator/MANIFEST.json';
+  const bytes = await readFile(new URL('../' + legacyPath, import.meta.url));
+  const legacySha256 = 'e08ff5d1564bae543cf88f825c0cd8f041f9c91dc3664e66158af522bf4d6f06';
+  assert.equal(digest(bytes), legacySha256);
+  assert.equal(inventory.files.get(legacyPath)?.sha256, legacySha256);
+  for (const member of JSON.parse(bytes).files) assert.deepEqual(inventory.files.get(member.path), member);
+});
+
+test('Fiorina recovery admits only inventoried source bytes and remains excluded from the game build', () => {
+  const inventory = reviewedProjectRecovery20261116();
+  const members = [...inventory.files.keys()].filter(path => path.startsWith(archiveRoot + '/fiorina/'));
+  assert.ok(members.some(path => path.endsWith('ALIEN3_FIORINA_V114_ATLAS_CONTINUITE_SUR_V113.zip')));
+  assert.ok(members.some(path => path.endsWith('ALIEN3_FIORINA_V113_SEUILS_DE_FIORINA_SUR_V112.zip')));
+  assert.ok(members.some(path => path.endsWith('/INVENTAIRE.json')));
+  assert.equal(members.filter(path => path.includes('/evidence/')).length, 29);
+  for (const path of members) {
+    assert.equal(projectRecoveryPathAdmission20261116(path), true);
+    assert.equal(isPublicDistributionPathV86(path), true);
+    assert.equal(projectRecoveryPathAdmission20261116(path, { built: true }), false);
+    assert.equal(isPublicDistributionPathV86(path, { built: true }), false);
+  }
+  assert.equal(projectRecoveryPathAdmission20261116(archiveRoot + '/fiorina/unreviewed.zip'), false);
+  assert.equal(projectRecoveryPathAdmission20261116(archiveRoot + '/fiorina/.env'), false);
 });

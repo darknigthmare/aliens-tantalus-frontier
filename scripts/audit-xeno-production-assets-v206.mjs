@@ -884,18 +884,20 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
 // END TANTALUS JOIN RECEIPTS
 
 // BEGIN ALIENS 1986 INTEGRATION RECEIPTS
-// Six shared integration files and the expected-endpoint test, from exact 001a20b.
+// Six shared integration files, one Fiorina English objective correction and nine
+// endpoint/registry/catalog test adaptations, from exact 001a20b. Historical
+// receipts remain intact; inherited Fiorina product bytes have a separate block.
 // Historical declarations above remain unchanged; no old CI or art result transfers.
 export const XENO_TRIALS_ALIENS1986_JOIN_V206 = Object.freeze({
   baseline: '001a20bdc0f9f1a3c835e84d8f3c9434bc159330',
   successors: freezeReceipts({
   "index.html": {
     "previousSha256": "1ab4a1fd0e2a090c287e501e12f6476a15644ca8455a1689133fc1bbeae7f2fd",
-    "currentSha256": "d8152324df0054d7d81293c6a789583c06cbd2942e2a4e1983162b5b8671a431"
+    "currentSha256": "3cb5d844b1d7ea2726c8af2cb95b49f4515c0bf9322eca90cb4f241d219409a3"
   },
   "package.json": {
     "previousSha256": "6d261eda040a57d60f8b4039443517a0cfeddd55b657c77ae87d2c8f486a39be",
-    "currentSha256": "6e2348866bd60b9e21ca6c9b5d4ee078a7b65d527d61e2cbecb5c3f754b38c3c"
+    "currentSha256": "dd592ca645bc15842d45ab48f30c83a1337039f96982fb40916eaa7c47bd8c0b"
   },
   "scripts/build.mjs": {
     "previousSha256": "fa817256bc9832c9390055ddab431e8dd9e1320b273904c39f2489ff6807ab12",
@@ -907,7 +909,7 @@ export const XENO_TRIALS_ALIENS1986_JOIN_V206 = Object.freeze({
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "c5f3c645310d030cf6f4e9b89d5a6b4012f30b61d06fe3f3af9fcfb73582e9ae",
-    "currentSha256": "0221633221e2030cfe507aaff2c5694cf020f372aeb27c580959b426deb39aee"
+    "currentSha256": "c72a3d56d3f83b8b19f321be5dc8b7d7b3423f0e391194d4c4e000f6c2d7bcbc"
   },
   "src/title-screen-v61.js": {
     "previousSha256": "e0c10ca738df12c78b48a24d79cb049aea2ac3e1c08ec270d3eed750fe267342",
@@ -915,7 +917,43 @@ export const XENO_TRIALS_ALIENS1986_JOIN_V206 = Object.freeze({
   },
   "scripts/verify-tantalus-priorities-v188.mjs": {
     "previousSha256": "cc0bda305eec62e3577e72091d2b6b7ca38a71d238950698f614e88b6ae84fc8",
-    "currentSha256": "f1b06df240f0bd2dc19aa2e1416d10fcd60b90fc1403c3ea109b8b4d3ffd7b30"
+    "currentSha256": "0a9258c24914535d0aea43da726d8250a7ff63645860535b35c1835b94cfe737"
+  },
+  "scripts/verify-native-qa-resources-v187.mjs": {
+    "previousSha256": "05367a5372ae834063f6fce495b70d431553977c46efef28337921eb71525bde",
+    "currentSha256": "3e66e7ad4c4475632a2f216ee8efcb940f1bc2127b8e6efa2b09056f45a25734"
+  },
+  "scripts/verify-audit-continuation-v157.mjs": {
+    "previousSha256": "73cf9f322340a7d4e68e58bb772f74e6b9e54d14383b4fb72f8bf299ad0d3d8a",
+    "currentSha256": "a064c967dbd77143d24dbdab24134a0174cefaec30ac23efd42d4b9399afe15d"
+  },
+  "scripts/verify-audit-continuation-v158.mjs": {
+    "previousSha256": "09977386675167a50d8e399532c948c344d753237ca50383d93bb5cda112fc68",
+    "currentSha256": "8181ebe5a7dbf226d09ce1ffa27e61ba7571dbc80da100ceecf8099df870e5db"
+  },
+  "scripts/verify-black-cocoon-presentation-v158.mjs": {
+    "previousSha256": "cb52f555918b941d0eed87a3e4b10fcfdab8563536e47187b8b42dad3db6e930",
+    "currentSha256": "2a84cef425228efbb08185a9886dd8be0aa11667804d22ce438d17f95d603290"
+  },
+  "scripts/verify-audit-v143.mjs": {
+    "previousSha256": "efd454272d2a8e251a8e6b2a7a82f9894eee47b3923a9a027bacb18a8a0202e4",
+    "currentSha256": "e48029ce56f17da26b437ea4d2dbe2a4845bd45f57d454da1d12b1c9c5d51805"
+  },
+  "scripts/verify-colony-crew-v188.mjs": {
+    "previousSha256": "912fdacd502be953cae671169f4917788d078a45106f07a649917d363d3e220f",
+    "currentSha256": "07ca934406c79277efa9b231aa7ded7b2b1d996b760a3695506584c8f38cdf0b"
+  },
+  "scripts/verify-act5-endings-v188.mjs": {
+    "previousSha256": "88dd846ac4a5cab51d9563ab6a31b434d96f678603644355b864798876e77214",
+    "currentSha256": "3f24ce7b499bc15f67cab2ae8b4763c1e46b66712cd864bdbab7596ffbfc1918"
+  },
+  "scripts/verify-xeno-arbiter-campaign-v190.mjs": {
+    "previousSha256": "781a07800a322dde2c3bfd8cc07f98c013ad84be9fa3d9e06e15bdb504faa7f3",
+    "currentSha256": "5bd55a456bf914f5b79d1c5fca0bac35a3a70083fd99e5415174fac3babac89a"
+  },
+  "src/i18n-en-catalog-v185.js": {
+    "previousSha256": "f503f6e7edbbbb4ea3acd0f583c1c102bc54e10fa829d4e1fb089bf32825d763",
+    "currentSha256": "387b5b5a5e4461044cc24ecfaa5fb2f451b69bac3493b11099609c19b901b9d2"
   }
 })
 });
@@ -942,13 +980,72 @@ export function verifyXenoAliens1986V206(readSource = readRepository) {
 }
 // END ALIENS 1986 INTEGRATION RECEIPTS
 
+// BEGIN INHERITED FIORINA INTEGRATION RECEIPTS
+// Exact five product changes inherited from cumulative PR #56, not Aliens 1986 changes.
+// Shared index/package/release-verifier bytes are covered by the cumulative Aliens receipts.
+export const XENO_TRIALS_FIORINA_JOIN_V206 = Object.freeze({
+  baseline: '001a20bdc0f9f1a3c835e84d8f3c9434bc159330',
+  sourceCommit: '38a4a2272ec48a9cd5011f8a0055caaca6ab0774',
+  successors: freezeReceipts({
+  "src/app.js": {
+    "previousSha256": "da0588f8b64d8a1afd8f2e5ac3871cdc17336369fd87a743a1d9ae807b664798",
+    "currentSha256": "3419d730cc5988bfe30834a9e261567d84186c99f0a53eef513568bd820f01b5"
+  },
+  "src/content.js": {
+    "previousSha256": "05844898c856f7142195a9abde62b99af25f1764f3d07e1803c90a9a1f833907",
+    "currentSha256": "48376e6a33ef8fc6e71297df60723fa40724c12958b606b90fd7373715c08197"
+  },
+  "src/game-production-runtime.js": {
+    "previousSha256": "c82536440c96ef5c08a683c34949d70644a347c1b3b1e9e03be20bad64f91658",
+    "currentSha256": "e367fbb70e195c28194d0ee88fdeb8558ec4a7a4efc103b5bd1a0be45cd92f27"
+  },
+  "src/special-operations-v131.js": {
+    "previousSha256": "433ddc7b821c98b973c10fc9e3aa39bc66c77e8cf9364dd9f1a25d03b70b08af",
+    "currentSha256": "b7cd05a89ca5aa86b3c46244234cb197e6c0044437ba65c038b8bfc3c8827391"
+  },
+  "sw.js": {
+    "previousSha256": "31a06e95264d7280f823c1a78d6cebacb67260ea5468e8466e4bb2cbe0e916a5",
+    "currentSha256": "7e868ce49b89a29380bb6d83988b24a31c8443a09ac898efb3131e0f6db3d071"
+  }
+})
+});
+
+export function reviewedXenoFiorinaDigestV206(path, endpoint) {
+  if (!Object.hasOwn(XENO_TRIALS_FIORINA_JOIN_V206.successors, path)) return endpoint;
+  const receipt = XENO_TRIALS_FIORINA_JOIN_V206.successors[path];
+  assert.equal(endpoint, receipt.previousSha256, 'Broken 001a20b-to-fiorina source chain: ' + path);
+  assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256), 'Invalid Fiorina digest: ' + path);
+  assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A Fiorina successor must identify changed bytes: ' + path);
+  return receipt.currentSha256;
+}
+
+export function verifyXenoFiorinaV206(readSource = readRepository) {
+  const join = XENO_TRIALS_FIORINA_JOIN_V206;
+  assert.equal(join.baseline, '001a20bdc0f9f1a3c835e84d8f3c9434bc159330');
+  assert.equal(join.sourceCommit, '38a4a2272ec48a9cd5011f8a0055caaca6ab0774');
+  for (const [path, receipt] of Object.entries(join.successors)) {
+    assert.equal(Object.hasOwn(XENO_TRIALS_ALIENS1986_JOIN_V206.successors, path), false,
+      'Fiorina and Aliens receipts must have disjoint exact paths: ' + path);
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.equal(sha(readSource(path)), reviewedXenoFiorinaDigestV206(path, receipt.previousSha256),
+      'Unreviewed inherited Fiorina bytes: ' + path);
+  }
+  return Object.freeze({ baselineCommit: join.baseline, sourceCommit: join.sourceCommit,
+    successors: Object.keys(join.successors).length, historicalResultsTransferred: false });
+}
+
+export function reviewedXenoMergedIntegrationDigestV206(path, endpoint) {
+  return reviewedXenoFiorinaDigestV206(path, reviewedXenoAliens1986DigestV206(path, endpoint));
+}
+// END INHERITED FIORINA INTEGRATION RECEIPTS
+
 export function reviewedXenoTrialsTantalusJoinV206(path, endpointV206) {
-  if (!Object.hasOwn(XENO_TRIALS_TANTALUS_JOIN_V206.successors, path)) return reviewedXenoAliens1986DigestV206(path, endpointV206);
+  if (!Object.hasOwn(XENO_TRIALS_TANTALUS_JOIN_V206.successors, path)) return reviewedXenoMergedIntegrationDigestV206(path, endpointV206);
   const join = XENO_TRIALS_TANTALUS_JOIN_V206.successors[path];
   assert.equal(endpointV206, join.previousSha256, 'Broken fa2d62fe-to-tantalus-join source chain: ' + path);
   assert.ok(validHash(join.currentSha256), 'Invalid tantalus-join source digest: ' + path);
   assert.notEqual(join.currentSha256, join.previousSha256, 'A tantalus-join successor must identify changed bytes: ' + path);
-  return reviewedXenoAliens1986DigestV206(path, join.currentSha256);
+  return reviewedXenoMergedIntegrationDigestV206(path, join.currentSha256);
 }
 
 // Terminal runtime view: every runtime endpoint the V205 view publishes at fa2d62fe
@@ -958,12 +1055,19 @@ export function xenoTrialsTantalusJoinRuntimeSourcesV206(view) {
   for (const [path, receipt] of Object.entries(XENO_TRIALS_TANTALUS_JOIN_V206.successors)) {
     if (!Object.hasOwn(result, path)) continue;
     if (result[path] === receipt.previousSha256) result[path] = receipt.currentSha256;
-    else assert.equal(result[path], receipt.currentSha256, 'Incorrect tantalus-join runtime view predecessor: ' + path);
+    else assert.ok(result[path] === receipt.currentSha256
+      || result[path] === reviewedXenoMergedIntegrationDigestV206(path, receipt.currentSha256),
+    'Incorrect tantalus-join runtime view predecessor: ' + path);
   }
   for (const [path, receipt] of Object.entries(XENO_TRIALS_ALIENS1986_JOIN_V206.successors)) {
     if (!Object.hasOwn(result, path)) continue;
-    if (result[path] === receipt.previousSha256) result[path] = reviewedXenoAliens1986DigestV206(path, result[path]);
+    if (result[path] === receipt.previousSha256) result[path] = reviewedXenoMergedIntegrationDigestV206(path, result[path]);
     else assert.equal(result[path], receipt.currentSha256, 'Incorrect Aliens 1986 runtime view predecessor: ' + path);
+  }
+  for (const [path, receipt] of Object.entries(XENO_TRIALS_FIORINA_JOIN_V206.successors)) {
+    if (!Object.hasOwn(result, path)) continue;
+    if (result[path] === receipt.previousSha256) result[path] = reviewedXenoFiorinaDigestV206(path, result[path]);
+    else assert.equal(result[path], receipt.currentSha256, 'Incorrect Fiorina runtime view predecessor: ' + path);
   }
   return Object.freeze(result);
 }
@@ -986,9 +1090,10 @@ export function verifyXenoTrialsTantalusJoinV206(readSource = readRepository) {
     assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
     assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
     assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A tantalus-join successor must identify changed bytes: ' + path);
-    assert.equal(sha(readSource(path)), reviewedXenoAliens1986DigestV206(path, receipt.currentSha256), 'Unreviewed tantalus-join source bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedXenoMergedIntegrationDigestV206(path, receipt.currentSha256), 'Unreviewed tantalus-join source bytes: ' + path);
   }
   verifyXenoAliens1986V206(readSource);
+  verifyXenoFiorinaV206(readSource);
   return Object.freeze({ baselineCommit: join.baseline, successors: Object.keys(join.successors).length });
 }
 

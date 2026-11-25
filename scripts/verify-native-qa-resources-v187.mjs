@@ -1,4 +1,5 @@
-import { TANTALUS_PRIORITIES_LEAD_CONTINUATION_V188, TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188 } from './audit-tantalus-priorities-v188.mjs';
+import { TANTALUS_PRIORITIES_LEAD_CONTINUATION_V188, TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188,
+  reviewedTantalusMergedIntegrationDigestV188 } from './audit-tantalus-priorities-v188.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -138,7 +139,8 @@ test('Obscura continues the exact V187 verifier endpoint and refuses arbitrary p
   const join = Object.hasOwn(TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors, receipt.path)
     ? TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors[receipt.path] : null;
   if (join) assert.equal(join.previousSha256, lead ? lead.currentSha256 : receipt.currentSha256);
-  assert.equal(sha(read(receipt.path)), join ? join.currentSha256 : lead ? lead.currentSha256 : receipt.currentSha256);
+  assert.equal(sha(read(receipt.path)), reviewedTantalusMergedIntegrationDigestV188(receipt.path,
+    join ? join.currentSha256 : lead ? lead.currentSha256 : receipt.currentSha256));
   for (const forged of ['0'.repeat(64), receipt.currentSha256])
     assert.throws(() => reviewedObscuraDigest20261115(receipt.path, forged), /Broken V187-to-Obscura source chain/);
   assert.equal(reviewedObscuraDigest20261115('src/unreviewed.js', 'unchanged'), 'unchanged');
@@ -148,7 +150,8 @@ test('The Xeno Trials join resolves both V187 successor chains to the same merge
   const { reviewedAfterNativeQaResourcesV187 } = await import('./audit-native-qa-resources-v187.mjs');
   const { reviewedCompletionDigestV186 } = await import('./audit-xeno-trials-completion-v186.mjs');
   const { reviewedTantalusPrioritiesDigestV188, verifyTantalusPrioritiesV188 } = await import('./audit-tantalus-priorities-v188.mjs');
-  const { XENO_TRIALS_TANTALUS_JOIN_V206, reviewedXenoTrialsTantalusJoinV206, verifyXenoTrialsTantalusJoinV206 } =
+  const { XENO_TRIALS_TANTALUS_JOIN_V206, reviewedXenoTrialsTantalusJoinV206,
+    reviewedXenoMergedIntegrationDigestV206, verifyXenoTrialsTantalusJoinV206 } =
     await import('./audit-xeno-production-assets-v206.mjs');
   const tantalusJoin = TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors, xenoJoin = XENO_TRIALS_TANTALUS_JOIN_V206.successors;
   let shared = 0;
@@ -162,11 +165,12 @@ test('The Xeno Trials join resolves both V187 successor chains to the same merge
   assert.equal(reviewedAfterNativeQaResourcesV187('src/unreviewed.js', 'unchanged'), 'unchanged');
   assert.deepEqual(Object.keys(verifyXenoTrialsTantalusJoinV206()).sort(), ['baselineCommit', 'successors']);
   for (const [path, receipt] of Object.entries(xenoJoin)) {
-    assert.equal(sha(read(path)), receipt.currentSha256, path);
+    assert.equal(sha(read(path)), reviewedXenoMergedIntegrationDigestV206(path, receipt.currentSha256), path);
     for (const forged of ['0'.repeat(64), receipt.currentSha256])
       assert.throws(() => reviewedXenoTrialsTantalusJoinV206(path, forged), /Broken fa2d62fe-to-tantalus-join source chain/);
   }
-  for (const [path, receipt] of Object.entries(tantalusJoin)) assert.equal(sha(read(path)), receipt.currentSha256, path);
+  for (const [path, receipt] of Object.entries(tantalusJoin))
+    assert.equal(sha(read(path)), reviewedTantalusMergedIntegrationDigestV188(path, receipt.currentSha256), path);
   const path = 'scripts/audit-native-qa-resources-v187.mjs';
   assert.ok(Object.hasOwn(tantalusJoin, path) && Object.hasOwn(xenoJoin, path), 'the relay itself is reviewed on both chains');
   const mutated = candidate => candidate === path ? Buffer.concat([read(candidate), Buffer.from('\n// unreviewed')]) : read(candidate);

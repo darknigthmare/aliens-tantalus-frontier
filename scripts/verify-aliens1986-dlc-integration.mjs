@@ -19,10 +19,12 @@ import { buildAliens1986Dlc } from './build-aliens1986-dlc.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import {
   TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188, reviewedTantalusAliens1986DigestV188,
+  TANTALUS_PRIORITIES_FIORINA_JOIN_V188, reviewedTantalusFiorinaDigestV188, verifyTantalusFiorinaV188,
   reviewedTantalusPrioritiesDigestV188, verifyTantalusAliens1986V188,
 } from './audit-tantalus-priorities-v188.mjs';
 import {
   XENO_TRIALS_ALIENS1986_JOIN_V206, reviewedXenoAliens1986DigestV206,
+  XENO_TRIALS_FIORINA_JOIN_V206, reviewedXenoFiorinaDigestV206, verifyXenoFiorinaV206,
   reviewedXenoTrialsTantalusJoinV206, verifyXenoAliens1986V206, xenoTrialsTantalusJoinRuntimeSourcesV206,
 } from './audit-xeno-production-assets-v206.mjs';
 
@@ -49,13 +51,23 @@ async function fixture(t) {
   return { directory, expectedSha256: hash(manifest) };
 }
 
-test('the two historical audit terminals agree on exactly six integration files and one expected-endpoint test', () => {
+test('the two historical audit terminals agree on the exact integration changes, historical tests and inherited Fiorina sources', () => {
   assert.deepEqual(TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188, XENO_TRIALS_ALIENS1986_JOIN_V206);
+  assert.deepEqual(TANTALUS_PRIORITIES_FIORINA_JOIN_V188, XENO_TRIALS_FIORINA_JOIN_V206);
   const paths = ['index.html', 'package.json', 'scripts/build.mjs', 'scripts/build-dev-tools-v188.mjs',
-    'scripts/verify-public-release-v86.mjs', 'src/title-screen-v61.js', 'scripts/verify-tantalus-priorities-v188.mjs'];
-  for (const join of [TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188, XENO_TRIALS_ALIENS1986_JOIN_V206]) {
+    'scripts/verify-public-release-v86.mjs', 'src/title-screen-v61.js', 'scripts/verify-tantalus-priorities-v188.mjs',
+    'scripts/verify-native-qa-resources-v187.mjs', 'scripts/verify-audit-continuation-v157.mjs',
+    'scripts/verify-audit-continuation-v158.mjs', 'scripts/verify-black-cocoon-presentation-v158.mjs',
+    'scripts/verify-audit-v143.mjs', 'scripts/verify-colony-crew-v188.mjs', 'scripts/verify-act5-endings-v188.mjs',
+    'scripts/verify-xeno-arbiter-campaign-v190.mjs', 'src/i18n-en-catalog-v185.js'];
+  const fiorinaPaths = ['src/app.js', 'src/content.js', 'src/game-production-runtime.js', 'src/special-operations-v131.js', 'sw.js'];
+  for (const [join, expected] of [
+    [TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188, paths], [XENO_TRIALS_ALIENS1986_JOIN_V206, paths],
+    [TANTALUS_PRIORITIES_FIORINA_JOIN_V188, fiorinaPaths], [XENO_TRIALS_FIORINA_JOIN_V206, fiorinaPaths],
+  ]) {
     assert.equal(join.baseline, '001a20bdc0f9f1a3c835e84d8f3c9434bc159330');
-    assert.deepEqual(Object.keys(join.successors), paths);
+    assert.deepEqual(Object.keys(join.successors), expected);
+    if (expected === fiorinaPaths) assert.equal(join.sourceCommit, '38a4a2272ec48a9cd5011f8a0055caaca6ab0774');
     assert.ok(Object.isFrozen(join) && Object.isFrozen(join.successors));
     for (const [path, receipt] of Object.entries(join.successors)) {
       assert.ok(Object.isFrozen(receipt));
@@ -64,6 +76,7 @@ test('the two historical audit terminals agree on exactly six integration files 
       assert.notEqual(receipt.currentSha256, receipt.previousSha256, path);
     }
   }
+  assert.equal(new Set([...paths, ...fiorinaPaths]).size, paths.length + fiorinaPaths.length);
 });
 
 test('the exact integration continuation rejects invented predecessors and reaches the title through both fallback paths', () => {
@@ -79,6 +92,19 @@ test('the exact integration continuation rejects invented predecessors and reach
       assert.equal(resolver(path, 'unchanged'), 'unchanged', path);
     }
   }
+  for (const resolver of [reviewedTantalusFiorinaDigestV188, reviewedXenoFiorinaDigestV206]) {
+    for (const [path, receipt] of Object.entries(TANTALUS_PRIORITIES_FIORINA_JOIN_V188.successors)) {
+      assert.equal(resolver(path, receipt.previousSha256), receipt.currentSha256, path);
+      for (const bad of [receipt.currentSha256, '0'.repeat(64), undefined])
+        assert.throws(() => resolver(path, bad), /Broken 001a20b-to-fiorina source chain/, path);
+      const view = xenoTrialsTantalusJoinRuntimeSourcesV206({ [path]: receipt.previousSha256 });
+      assert.deepEqual(view, { [path]: receipt.currentSha256 });
+      assert.deepEqual(xenoTrialsTantalusJoinRuntimeSourcesV206(view), view);
+      assert.throws(() => xenoTrialsTantalusJoinRuntimeSourcesV206({ [path]: '0'.repeat(64) }), /Incorrect .*runtime view predecessor/);
+    }
+    for (const path of ['constructor', 'src/app.js/extra', 'src/unreviewed.js'])
+      assert.equal(resolver(path, 'unchanged'), 'unchanged', path);
+  }
   const path = 'src/title-screen-v61.js', receipt = entries[path];
   for (const resolver of [reviewedTantalusPrioritiesDigestV188, reviewedXenoTrialsTantalusJoinV206]) {
     assert.equal(resolver(path, receipt.previousSha256), receipt.currentSha256);
@@ -92,12 +118,21 @@ test('the exact integration continuation rejects invented predecessors and reach
 
 test('both audit terminals reject a further changed byte in every integration successor', () => {
   for (const verify of [verifyTantalusAliens1986V188, verifyXenoAliens1986V206]) {
-    assert.deepEqual(verify(), { baselineCommit: '001a20bdc0f9f1a3c835e84d8f3c9434bc159330', successors: 7,
+    assert.deepEqual(verify(), { baselineCommit: '001a20bdc0f9f1a3c835e84d8f3c9434bc159330', successors: 16,
       historicalResultsTransferred: false });
     for (const path of Object.keys(TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188.successors)) {
       const changed = Buffer.from(sourceBytes(path)); changed[changed.length - 1] ^= 1;
       assert.throws(() => verify(candidate => candidate === path ? changed : sourceBytes(candidate)),
         error => error.message.includes('Unreviewed Aliens 1986 integration bytes: ' + path));
+    }
+  }
+  for (const verify of [verifyTantalusFiorinaV188, verifyXenoFiorinaV206]) {
+    assert.deepEqual(verify(), { baselineCommit: '001a20bdc0f9f1a3c835e84d8f3c9434bc159330',
+      sourceCommit: '38a4a2272ec48a9cd5011f8a0055caaca6ab0774', successors: 5, historicalResultsTransferred: false });
+    for (const path of Object.keys(TANTALUS_PRIORITIES_FIORINA_JOIN_V188.successors)) {
+      const changed = Buffer.from(sourceBytes(path)); changed[changed.length - 1] ^= 1;
+      assert.throws(() => verify(candidate => candidate === path ? changed : sourceBytes(candidate)),
+        error => error.message.includes('Unreviewed inherited Fiorina bytes: ' + path));
     }
   }
 });

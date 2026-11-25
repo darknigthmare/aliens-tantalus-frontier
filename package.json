@@ -113,7 +113,9 @@
     "test:trials:production:v206": "node --test scripts/verify-xeno-production-assets-v206.mjs",
     "test:dlc:aliens1986": "npm --prefix modules/aliens-1986/v114 run check && node --test scripts/verify-aliens1986-dlc-integration.mjs",
     "check:dlc:aliens1986": "node scripts/public-aliens1986-dlc-admissions.mjs",
-    "qa:dlc:aliens1986": "python3 -B scripts/qa-aliens1986-integration.py"
+    "qa:dlc:aliens1986": "python3 -B scripts/qa-aliens1986-integration.py",
+    "test:fiorina": "node --test scripts/verify-fiorina-production-v114.mjs",
+    "qa:fiorina": "node scripts/qa-fiorina-native-v114.mjs"
   },
   "engines": {
     "node": ">=22"

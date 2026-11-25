@@ -1,0 +1,35 @@
+import {CAMPAIGN_V104} from './alien3-dlc-v104.js';
+import {center105,feet105,delta105} from './alien3-navigation-v105.js';
+import {emitNoiseV105,tellV105} from './alien3-encounter-v105.js';
+import {createSensesV106} from './alien3-senses-v106.js';
+import {effectiveLaneV107} from './alien3-operations-v107.js';
+import {updatePursuitV109} from './alien3-pursuit-v109.js';
+import {compileSteamV109,createSteamV109,beginSteamWorkV109,cancelSteamWorkV109,checkSteamWorkV109,advanceSteamWorkV109,stepSteamV109,fieldsV109,snapshotSteamV109,validateSteamV109} from './alien3-steam-v109.js';
+import {drawSteamFixturesV109,drawSteamJetsV109,drawSteamHintV109} from './alien3-art-v109.js';
+const editing=t=>Boolean(t?.closest?.('input,textarea,select,button,a,[contenteditable]:not([contenteditable="false"])'));
+export function withAlien3DlcRuntimeV109(Base){return class Alien3DlcRuntimeV109 extends Base{
+ start(options={}){this.alien3SteamAbortV109?.abort();this.alien3SteamV109=null;this.alien3SteamGeometryV109=null;this.alien3SafePointV109=null;const out=super.start(options);if(options.campaign?.id===CAMPAIGN_V104){this.alien3SteamGeometryV109=compileSteamV109(this.alien3NavV105);this.alien3SteamV109 ||=createSteamV109(this.alien3EncounterV105,this.alien3NavV105);this.bindSteamInputV109();}return out;}
+ beginAlien3EncounterV105(mode,options){const result=super.beginAlien3EncounterV105(mode,options);if(result){this.alien3SteamV109=createSteamV109(this.alien3EncounterV105,this.alien3NavV105);this.alien3SteamGeometryV109=compileSteamV109(this.alien3NavV105);this.alien3SafePointV109=null;}return result;}
+ useAlien3PurgeV109(){if(!this.alien3SteamV109||!this.alien3EncounterV105||this.alien3BlockedV105())return false;if(this.alien3SteamV109.work){if(this.alien3OperationsV107?.inputMode==='toggle')cancelSteamWorkV109(this.alien3SteamV109);return true;}const out=beginSteamWorkV109(this);if(out.message)tellV105(this.alien3EncounterV105,'',out.message,2.4);return out.ok;}
+ cancelAlien3PurgeV109(){return cancelSteamWorkV109(this.alien3SteamV109);}
+ update(dt){if(!this.alien3SteamV109||!this.alien3EncounterV105)return super.update(dt);const s=this.alien3SteamV109;if(this.alien3BlockedV105()){cancelSteamWorkV109(s);return super.update(dt);}const sec=delta105(dt);if(!sec)return super.update(dt);if(s.work&&!checkSteamWorkV109(this).ok)cancelSteamWorkV109(s);
+ for(const event of stepSteamV109(s,this.alien3SteamGeometryV109,this.doors||[],sec,this.player,effectiveLaneV107(this))){if(event.type==='heat'){const before=this.player.health;this.damagePlayer(this.player,event.damage,{source:'steam-v109'});s.stats.heatDamage+=Math.max(0,Math.round(before-this.player.health));}else if(event.type==='hiss')this.emitAlien3PurgeV109(event.site,.56);}
+ const out=super.update(dt);if(!this.alien3BlockedV105()){const event=advanceSteamWorkV109(this,sec);if(event?.type==='opened'){this.emitAlien3PurgeV109(event.site,1);tellV105(this.alien3EncounterV105,'','Écartez-vous du jet.',2.6);}}return out;}
+ emitAlien3PurgeV109(site,power){const s=this.alien3EncounterV105;if(!s||!site)return;const source={x:site.outletX,y:site.foot,w:0,h:0,depth:site.depth};emitNoiseV105(s,this.alien3NavV105,source,power,'steam:'+site.id);s.audioEvents.push({type:'steam',x:site.outletX,foot:site.foot});}
+ updateAlien3PursuitV106(enc,dt,options){if(!this.alien3SteamV109)return super.updateAlien3PursuitV106(enc,dt,options);const sense=this.alien3SensesV106||(this.alien3SensesV106=createSensesV106(enc.mode)),before=enc.pursuit.stats.sounds;const events=updatePursuitV109(enc.pursuit,this.alien3RunnerV88,this.player,this.alien3NavV105,this.doors||[],dt,{...options,sense,lights:this.alien3V103?.lights||{},flags:this.getAlien3VisualFlagsV102?.()||{},steamFields:fieldsV109(this.alien3SteamV109,this.alien3SteamGeometryV109,this.doors||[]),steamStats:this.alien3SteamV109.stats});
+ // Preserve V108 bolt accounting when using the new perception owner.
+ const trace=enc.pursuit.trace;if(this.alien3DiversionV108&&enc.pursuit.stats.sounds>before&&trace?.kind==='noise'&&(enc.noises||[]).some(n=>String(n.source).startsWith('bolt:')&&n.x===trace.x&&n.foot===trace.foot))this.alien3DiversionV108.stats.heard++;return events;}
+ interact(actor=this.player){return this.alien3SteamV109?.work?false:super.interact(actor);}
+ alien3CanUseDiversionV108(){return !this.alien3SteamV109?.work&&super.alien3CanUseDiversionV108();}
+ makeAlien3NoiseV105(){return this.alien3SteamV109?.work?false:super.makeAlien3NoiseV105();}
+ useAlien3UtilityV103(){return this.alien3SteamV109?.work?false:super.useAlien3UtilityV103();}
+ commandCompanionV106(){return this.alien3SteamV109?.work?false:super.commandCompanionV106();}
+ setAlien3InteractionModeV107(mode){cancelSteamWorkV109(this.alien3SteamV109);return super.setAlien3InteractionModeV107(mode);}
+ damagePlayer(p,n,options={}){const before=p?.health,out=super.damagePlayer(p,n,options);if(p===this.player&&p.health<before)cancelSteamWorkV109(this.alien3SteamV109);return out;}
+ bindSteamInputV109(){if(typeof globalThis.addEventListener!=='function')return;this.alien3SteamAbortV109=new AbortController();const signal=this.alien3SteamAbortV109.signal;globalThis.addEventListener('keydown',ev=>{if(!this.alien3SteamV109||editing(ev.target)||ev.isComposing||ev.ctrlKey||ev.metaKey||ev.altKey)return;if(['Escape','KeyC','KeyM'].includes(ev.code))cancelSteamWorkV109(this.alien3SteamV109);if(ev.code!=='KeyV'||ev.repeat||!this.alien3EncounterV105||this.alien3BlockedV105())return;ev.preventDefault();ev.stopImmediatePropagation();this.keys?.add('KeyV');this.useAlien3PurgeV109();},{capture:true,signal});globalThis.addEventListener('keyup',ev=>{if(ev.code==='KeyV'){this.keys?.delete('KeyV');if(this.alien3OperationsV107?.inputMode!=='toggle')cancelSteamWorkV109(this.alien3SteamV109);}},{capture:true,signal});globalThis.addEventListener('blur',()=>cancelSteamWorkV109(this.alien3SteamV109),{signal});}
+ drawWorld(c){const out=super.drawWorld(c);if(this.alien3SteamV109){drawSteamFixturesV109(c,this);drawSteamJetsV109(c,this);}return out;}
+ drawHud(c){super.drawHud(c);drawSteamHintV109(c,this);}
+ captureResumeState(){const base=super.captureResumeState();return this.alien3SteamV109?{...base,specialOperation:{...base.specialOperation,alien3V109:snapshotSteamV109(this.alien3SteamV109)}}:base;}
+ applyResumeState(raw){let validated=null;if(raw?.specialOperation?.alien3V109){if(!this.isAlien3MissionV105())return {applied:false,reason:'inactive'};const v=validateSteamV109(raw.specialOperation.alien3V109,raw.specialOperation.alien3V105,this.alien3NavV105);if(!v.ok)return {applied:false,reason:'V109-'+v.reason};validated=v.state;}const result=super.applyResumeState(raw);if(result?.applied&&this.isAlien3MissionV105()){this.alien3SteamGeometryV109=compileSteamV109(this.alien3NavV105);this.alien3SteamV109=validated||createSteamV109(this.alien3EncounterV105,this.alien3NavV105);}return result;}
+ stop(...args){cancelSteamWorkV109(this.alien3SteamV109);this.alien3SteamAbortV109?.abort();return super.stop?.(...args);}
+};}

@@ -60,6 +60,7 @@ import { withMagazineRecoveryWorldV168 } from './weapon-magazine-recovery-runtim
 import { withArsenalFeedsV188 } from './weapon-arsenal-runtime-v188.js';
 import { captureMagazineFeedV168, restoreEquippedMagazineFeedV177 } from './weapon-magazine-world-v168.js';
 import { withArchiveRelayPresentationV160 } from './archive-relay-presentation-v160.js';
+import { withAlien3ProductionV114, normalizeAlien3ProductionOptionsV114 } from './alien3-production-v114.js';
 import { withTensionDirectorV188 } from './tension-director-v188.js';
 import { withMissionObjectivePanelV188 } from './mission-objective-panel-v188.js';
 import { withFootstepCuesV188 } from './audio-cues-v188.js';
@@ -130,7 +131,7 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
 // withholds control nothing below it runs, so mission time (and with it the
 // insertion grace) only starts when control is given, and it can hold the
 // mission-complete event of any mode until the boarding is over.
-export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepthRoomsV188(withQz17LevelDressingV188(withCasteBehaviorsV188(withInsertionSafeZoneV188(withRunOptionsRuntimeV188(withAsphodeleMissionDressingV188(withVfxV188(withFranchiseFidelityV188(withGameplayGapsV188(withCombatFeelV188(withCreatureScaleV188(withFootstepCuesV188(withColonyMissionLevelsV188(withMissionObjectivePanelV188(withStationMissionLevelsV188(withTensionDirectorV188(withArbiterCampaignRuntimeV190(withMagazineRecoveryWorldV168(withArsenalFeedsV188(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(withMissionLayerMatteV188(V158ProductionEngine))))))))))))))))))))))))) {
+export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepthRoomsV188(withQz17LevelDressingV188(withCasteBehaviorsV188(withInsertionSafeZoneV188(withRunOptionsRuntimeV188(withAsphodeleMissionDressingV188(withVfxV188(withFranchiseFidelityV188(withGameplayGapsV188(withCombatFeelV188(withCreatureScaleV188(withFootstepCuesV188(withColonyMissionLevelsV188(withMissionObjectivePanelV188(withStationMissionLevelsV188(withTensionDirectorV188(withArbiterCampaignRuntimeV190(withMagazineRecoveryWorldV168(withArsenalFeedsV188(withMotionTrackerV160(withArchiveRelayPresentationV160(withAlien3ProductionV114(withForgeDecorationV141(withForgeMissionRuntimeV141(withMissionLayerMatteV188(V158ProductionEngine)))))))))))))))))))))))))) {
   updateEnemy(actor, delta) {
     // Observe final accepted displacement after every existing wrapper,
     // including insertion grace and depth holds. Their order is unchanged.
@@ -141,7 +142,7 @@ export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepth
   }
 
   start(options = {}) {
-    options = isolateForgeMissionOptionsV136(options);
+    options = isolateForgeMissionOptionsV136(normalizeAlien3ProductionOptionsV114(options));
     this.expectedMissionSignatureV130 = options.missionLevel?.signature || null;
     this.weaponMasteryV167 ||= createWeaponMasteryV167();
     this.experimentalPhysicalMagazinesV167 = options.experimentalPhysicalMagazinesV167 === true;
@@ -226,6 +227,10 @@ export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepth
   }
 
   fire(actor = this.player) {
+    if (this.isAlien3ProductionV114?.()) {
+      return this.canPerformGameplayAction(actor) && !actor.climbing && !(actor.toolUseClock > 0)
+        && !(actor.interactionClock > 0) ? this.fireAlien3ProductionV114(actor) : false;
+    }
     if (!this.canPerformGameplayAction(actor) || actor.climbing || actor.toolUseClock > 0
       || actor.interactionClock > 0 || this.playerWeaponFireBlockedV160?.(actor)) return false;
     const beforeShots = Number(actor?.shots) || 0;
@@ -247,6 +252,7 @@ export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepth
   }
 
   melee(actor = this.player) {
+    if (this.isAlien3ProductionV114?.()) return false;
     if (this.isMechaMissionV131?.() && actor?.inVehicle
       || this.isHiveMissionV131?.() && actor === this.player && this.hiveV131?.possession) {
       return this.canPerformGameplayAction(actor) ? super.melee(actor) : false;
@@ -286,19 +292,23 @@ export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepth
   }
 
   reload(actor = this.player) {
+    if (this.isAlien3ProductionV114?.()) return false;
     return this.canPerformGameplayAction(actor) && !actor.climbing && !(actor.meleeClock > 0)
       && !(actor.toolUseClock > 0) && !(actor.interactionClock > 0) ? super.reload(actor) : false;
   }
 
   useMedkit(actor = this.player) {
+    if (this.isAlien3ProductionV114?.()) return false;
     return this.canPerformGameplayAction(actor) ? super.useMedkit(actor) : false;
   }
 
   activateTracker(actor = this.player) {
+    if (this.isAlien3ProductionV114?.()) return false;
     return this.canPerformGameplayAction(actor) ? super.activateTracker(actor) : false;
   }
 
   toggleVehicle(actor = this.player) {
+    if (this.isAlien3ProductionV114?.()) return false;
     if (this.forgeNarrativeOpenV156) return false;
     if (!this.paused && this.running) this.cancelPlaceableV86(actor, 'vehicle');
     if (!this.paused && this.running) this.cancelFieldActionV124(actor, 'vehicle');
@@ -313,10 +323,12 @@ export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepth
   }
 
   useEquipment(equipmentId, actor = this.player) {
+    if (this.isAlien3ProductionV114?.()) return false;
     return this.canPerformGameplayAction(actor) ? super.useEquipment(equipmentId, actor) : false;
   }
 
   activateNeuroCountermeasure(actor = this.player) {
+    if (this.isAlien3ProductionV114?.()) return false;
     return this.canPerformGameplayAction(actor) ? super.activateNeuroCountermeasure(actor) : false;
   }
 
