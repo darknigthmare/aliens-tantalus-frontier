@@ -120,7 +120,7 @@
     "qa:dlc:avp": "node scripts/qa-dlc-avp-2004.mjs",
     "test:fiorina": "node --test scripts/verify-fiorina-production-v114.mjs",
     "qa:fiorina": "node scripts/qa-fiorina-native-v114.mjs",
-    "test:fiorina:sprites": "node --test --test-concurrency=1 scripts/verify-fiorina-sprite-renderer-v115.mjs scripts/verify-fiorina-sprite-admissions-v115.mjs",
+    "test:fiorina:sprites": "node --test scripts/verify-fiorina-sprite-renderer-v115.mjs scripts/verify-fiorina-sprite-admissions-v115.mjs",
     "qa:fiorina:sprites": "node scripts/qa-fiorina-sprites-v115.mjs",
     "qa:fiorina:native-sprites": "node scripts/qa-fiorina-native-sprites-v115.mjs"
   },
