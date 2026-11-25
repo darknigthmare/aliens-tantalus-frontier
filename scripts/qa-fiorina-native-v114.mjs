@@ -15,7 +15,8 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const baseUrl = process.env.BASE_URL || 'http://127.0.0.1:4399/';
 const out = resolve(process.argv[2] || 'qa-fiorina-native-v114');
 const campaignId = 'special-alien3-fiorina-161';
-const expectSpritesV115 = process.env.EXPECT_FIORINA_SPRITES_V115 === '1';
+const expectSpritesV116 = process.env.EXPECT_FIORINA_SPRITES_V116 === '1';
+const expectSpritesV115 = process.env.EXPECT_FIORINA_SPRITES_V115 === '1' || expectSpritesV116;
 await mkdir(out, { recursive: true });
 
 async function fixture() {
@@ -36,7 +37,7 @@ async function fixture() {
 const sourceFixture = await fixture();
 assert.equal(sourceFixture.inspection, 'ready', 'fixture must pass native save admission');
 const report = { schema: 114, surface: 'native-production-app', baseUrl,
-  expectSpritesV115, spriteResponses: [],
+  expectSpritesV115, expectSpritesV116, spriteResponses: [],
   fixture: { inspection: sourceFixture.inspection, injections: sourceFixture.injections },
   checks: [], cuts: {}, screenshots: [], pageErrors: [], consoleErrors: [] };
 const check = (name, condition, evidence = null) => {
@@ -112,6 +113,37 @@ async function verifySprites(page, cut, stage) {
     responses);
 }
 
+async function verifyMovementSprites(page, cut) {
+  if (!expectSpritesV116) return;
+  // The existing keyboard journey drives physics. Observe its presentation;
+  // neither the actor pose nor the bank is injected or manually preloaded.
+  await page.waitForFunction(() => {
+    const engine = globalThis.__ATF_GAME__;
+    const receipt = engine?.getAlien3SpriteReportV115?.().receipts?.ripley;
+    return engine?.player?.grounded && Math.abs(engine.player.vx || 0) > 2
+      && receipt?.drawn && ['ripley-crash-walk', 'ripley-crash-run'].includes(receipt.id);
+  }, null, { timeout: 5000 });
+  const movement = await page.evaluate(() => {
+    const engine = globalThis.__ATF_GAME__, report = engine.getAlien3SpriteReportV115();
+    const receipt = report.receipts.ripley;
+    const asset = engine.alien3SpriteBankV115.manifest.assets[receipt.id];
+    return { receipt, vx: engine.player.vx, grounded: engine.player.grounded,
+      source: asset.frames[receipt.frameIndex].src,
+      distinctSources: [...new Set(asset.frames.map(frame => frame.src))], cache: report.assets };
+  });
+  report.cuts[cut].movingSprites = movement;
+  check(`${cut}: keyboard motion renders the corresponding delivered pose`,
+    movement.grounded && Math.abs(movement.vx) > 2
+      && movement.receipt.id === (Math.abs(movement.vx) > 230 ? 'ripley-crash-run' : 'ripley-crash-walk'), movement);
+  check(`${cut}: movement uses a real two-pose PNG asset`, movement.distinctSources.length === 2
+    && report.spriteResponses.some(response => response.cut === cut && response.status === 200
+      && response.path === '/' + movement.source), movement);
+  check(`${cut}: movement keeps lazy loading bounded`, !movement.cache.preloadAll
+    && movement.cache.cachedImages <= movement.cache.maxCachedImages
+    && movement.cache.estimatedRgbaBytes <= movement.cache.maxDecodedBytes
+    && movement.cache.errors.length === 0, movement.cache);
+}
+
 try {
   browser = await chromium.launch({
     ...(process.env.CHROMIUM_EXECUTABLE ? { executablePath: process.env.CHROMIUM_EXECUTABLE } : {}),
@@ -159,8 +191,11 @@ try {
     await screenshot(page, `${cut}-mission`, '#game-canvas');
     await page.locator('#game-canvas').focus();
     await page.keyboard.down('d');
-    await page.waitForTimeout(1000);
-    await page.keyboard.up('d');
+    try {
+      await page.waitForTimeout(1000);
+      await verifyMovementSprites(page, cut);
+      if (expectSpritesV116) await screenshot(page, `${cut}-moving`, '#game-canvas');
+    } finally { await page.keyboard.up('d'); }
     const moved = await snapshot(page);
     check(`${cut}: keyboard movement traverses physical coast`, Number.isFinite(moved.player.x) && moved.player.x > started.player.x + 25, { from: started.player, to: moved.player });
     await page.keyboard.press('f', { delay: 100 });

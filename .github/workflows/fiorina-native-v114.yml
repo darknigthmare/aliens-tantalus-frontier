@@ -22,6 +22,8 @@ on:
       - 'scripts/verify-audit-v143.mjs'
       - 'docs/development/FIORINA_SPRITES_V115.md'
       - 'docs/development/FIORINA_SPRITES_V115.json'
+      - 'docs/development/FIORINA_SPRITES_V116.md'
+      - 'docs/development/FIORINA_SPRITES_V116.json'
       - 'assets/openai/sprites/alien3-fiorina-v115/**'
       - 'sw.js'
       - 'package.json'
@@ -59,30 +61,55 @@ jobs:
         run: node scripts/qa-fiorina-native-sprites-v115.mjs "$RUNNER_TEMP/fiorina-native-sprites-qa"
       - name: Package reviewed sprite sources
         run: |
+          node --input-type=module - <<'JS' > "$RUNNER_TEMP/fiorina-sprite-pack.json"
+          import assert from 'node:assert/strict';
+          import { createHash } from 'node:crypto';
+          import { lstat, readFile } from 'node:fs/promises';
+          import { verifyFiorinaSpriteAdmissionsV115, reviewedFiorinaSpritePackFilesV115 } from './scripts/public-fiorina-sprite-admissions-v115.mjs';
+          const verified = await verifyFiorinaSpriteAdmissionsV115(process.cwd());
+          const files = [];
+          for (const path of reviewedFiorinaSpritePackFilesV115()) {
+            const stat = await lstat(path);
+            assert.ok(stat.isFile() && !stat.isSymbolicLink(), path);
+            const bytes = await readFile(path);
+            files.push({ path, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex') });
+          }
+          assert.equal(files.filter(file => file.path.endsWith('.png')).length, verified.images);
+          console.log(JSON.stringify({ ...verified, files }));
+          JS
           python3 - <<'PY'
-          import json, os, pathlib, zipfile
+          import hashlib, json, os, pathlib, zipfile
           root = pathlib.Path.cwd()
+          inventory = json.loads((pathlib.Path(os.environ['RUNNER_TEMP']) / 'fiorina-sprite-pack.json').read_text())
           manifest_path = 'assets/openai/sprites/alien3-fiorina-v115/manifest.json'
-          manifest = json.loads((root / manifest_path).read_text())
+          manifest_bytes = (root / manifest_path).read_bytes()
+          assert hashlib.sha256(manifest_bytes).hexdigest() == inventory['manifestSha256']
+          manifest = json.loads(manifest_bytes)
           images = {asset['src'] for asset in manifest['assets'].values()}
           images.update(frame.get('src', asset['src']) for asset in manifest['assets'].values() for frame in asset.get('frames', []))
-          paths = [manifest_path, *sorted(images), 'docs/development/FIORINA_SPRITES_V115.json', 'docs/development/FIORINA_SPRITES_V115.md']
-          assert len(images) == 39 and len(set(paths)) == 42
-          target = pathlib.Path(os.environ['RUNNER_TEMP']) / 'FIORINA_SPRITES_V115.zip'
+          paths = [file['path'] for file in inventory['files']]
+          assert len(images) == inventory['images'] and len(set(paths)) == len(paths)
+          assert images == {path for path in paths if path.endswith('.png')}
+          target = pathlib.Path(os.environ['RUNNER_TEMP']) / 'FIORINA_SPRITES_V116.zip'
           with zipfile.ZipFile(target, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=6) as archive:
-              for path in paths:
+              for entry in inventory['files']:
+                  path = entry['path']
                   file = root / path
                   assert file.is_file() and not file.is_symlink() and file.resolve().is_relative_to(root)
-                  archive.write(file, path)
+                  data = file.read_bytes()
+                  assert len(data) == entry['bytes'] and hashlib.sha256(data).hexdigest() == entry['sha256'], path
+                  archive.writestr(path, data)
           with zipfile.ZipFile(target) as archive:
               assert archive.testzip() is None and set(archive.namelist()) == set(paths)
+              for entry in inventory['files']:
+                  assert hashlib.sha256(archive.read(entry['path'])).hexdigest() == entry['sha256'], entry['path']
           print(f'{len(paths)} reviewed files packaged: {target.name}')
           PY
       - name: Preserve downloadable sprite pack
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: fiorina-sprites-v115-pack
-          path: ${{ runner.temp }}/FIORINA_SPRITES_V115.zip
+          name: fiorina-sprites-v116-pack
+          path: ${{ runner.temp }}/FIORINA_SPRITES_V116.zip
           retention-days: 30
       - run: npm run build
       - run: npm run check:built
@@ -98,6 +125,7 @@ jobs:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/fiorina-browser/node_modules/playwright
           BASE_URL: http://127.0.0.1:4399/
           EXPECT_FIORINA_SPRITES_V115: '1'
+          EXPECT_FIORINA_SPRITES_V116: '1'
         run: |
           python3 -c 'from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler; from functools import partial; Server = type("Server", (ThreadingHTTPServer,), {"request_queue_size": 1024}); Server(("127.0.0.1", 4399), partial(SimpleHTTPRequestHandler, directory="dist")).serve_forever()' > "$RUNNER_TEMP/fiorina-http.log" 2>&1 &
           fiorina_server_pid=$!
@@ -120,7 +148,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: fiorina-sprites-v115
+          name: fiorina-sprites-v116
           path: |
             ${{ runner.temp }}/fiorina-sprites-qa/
             ${{ runner.temp }}/fiorina-native-sprites-qa/

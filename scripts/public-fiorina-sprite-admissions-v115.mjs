@@ -286,6 +286,175 @@ export const FIORINA_SPRITE_FILES_V115 = Object.freeze([
 ].map(Object.freeze));
 // END REVIEWED PINS
 
+// BEGIN REVIEWED V116 ADDITIONS
+// These additions extend the frozen V115 pixels; calibration changes live in
+// the separately pinned current manifest and the V116 provenance record.
+export const FIORINA_SPRITE_MANIFEST_SHA256_V116 = 'db64e2b36aa8a0fa424adf112a1669a0e325c4497067fc38ddbfe140af418e6a';
+export const FIORINA_SPRITE_ADDITIONS_V116 = Object.freeze([
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/boggs-idle.png",
+    "sha256": "8318c9dfae6299095250f33a755f40696061d1fdcaa409cfd0cd5d01999652b4",
+    "bytes": 2002234,
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/company-scientist-goggles.png",
+    "sha256": "3e06b1250b00f5c9a674b76230818b062d55f7d1eda3b3c17b3334661141f2fc",
+    "bytes": 1133798,
+    "width": 1774,
+    "height": 887
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/dillon-glasses.png",
+    "sha256": "fadc0da30854c40b00e8131a083f92f23487b4410ff2f66010edb26b25176f70",
+    "bytes": 1094340,
+    "width": 1774,
+    "height": 887
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/dillon-run-a.png",
+    "sha256": "4d3f92907e8dfbd964a8ce45e9660a834d5849a975cc917181adb1eb0074d949",
+    "bytes": 2052298,
+    "width": 1536,
+    "height": 1024
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/dillon-run-b.png",
+    "sha256": "5f80b6fadb6f43c6680df4bf030275c7573d7ea9b70a9b55bf905ac5c0b9ba1f",
+    "bytes": 1486704,
+    "width": 1199,
+    "height": 1312
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/fire-flare.png",
+    "sha256": "111952b339cd5c6ef566a7337dd8de208b14e46f0440ee93cca13b5773666bc0",
+    "bytes": 1286902,
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/morse-run-a.png",
+    "sha256": "8c79ea34ce729ea1b9e476269e06abc2e93aa38926c10fe185852c1313cb9972",
+    "bytes": 1856775,
+    "width": 1536,
+    "height": 1024
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/morse-run-b.png",
+    "sha256": "d4a3cebe670db8edf635d98e1934ca53a8ef61d1d01074886f2715f21a43c52a",
+    "bytes": 1333235,
+    "width": 1312,
+    "height": 1199
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/murphy-idle.png",
+    "sha256": "518aaf21595c0724b808b324b0d1f2c043b2d8918b4db388fb8834a6e2727329",
+    "bytes": 1742102,
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/ox-assembly-idle.png",
+    "sha256": "421a8ef4fc9b3a0afbdb86c5306e1909dbef5fccdde096147f92ef22e2508a51",
+    "bytes": 1965923,
+    "width": 1536,
+    "height": 1024
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/rains-idle.png",
+    "sha256": "2347c1f64ddc568c3c296fcb05e57466142eb1b52fea27979e0d3e88e551475c",
+    "bytes": 1821277,
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-run-a.png",
+    "sha256": "56d4539bbba13c504ec7365aa6208edc3adfbb8ab316d351213e29f0feca106d",
+    "bytes": 797953,
+    "width": 1134,
+    "height": 1387
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-run-b.png",
+    "sha256": "04c559dad497ee1d560485ede2fd13f7e0ba7a63135b376020fcba8f67e6b086",
+    "bytes": 1581184,
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-walk-a.png",
+    "sha256": "70f56bc433b4fbd37db810f15270401abcbfb159af0e10ebb67cf116ce6d062f",
+    "bytes": 903417,
+    "width": 987,
+    "height": 1594
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-walk-b.png",
+    "sha256": "10fd764540582a9884da1879b88b86be5234784166b733ff1e7f7efd1a629acf",
+    "bytes": 787330,
+    "width": 987,
+    "height": 1594
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-climb-b.png",
+    "sha256": "ad58afb51c8dfa683f6dce574f13218c34c5ac11bd976e8d63d0969e1899c9a6",
+    "bytes": 895383,
+    "width": 987,
+    "height": 1594
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-crouch-walk-a.png",
+    "sha256": "f44999bde103f631334f7a05faade80e71867a8722f2b103c5a95cdf10f3a2a5",
+    "bytes": 1294184,
+    "width": 1659,
+    "height": 948
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-crouch-walk-b.png",
+    "sha256": "f7d905f9cc5af0632eae849ebfafd990e6d0fb581be4e7104f7e1025b902c545",
+    "bytes": 1339067,
+    "width": 1312,
+    "height": 1199
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-hurt.png",
+    "sha256": "4943fec35630d7342d399303d815d08935e522388f2911dc9c749b3b16d8099a",
+    "bytes": 1007410,
+    "width": 986,
+    "height": 1594
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-interact.png",
+    "sha256": "c31ab78f727000fdf88db5e83694d337e80a2b998af8045fda36652b27cb4558",
+    "bytes": 870693,
+    "width": 986,
+    "height": 1594
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/royal-facehugger-assembly.png",
+    "sha256": "7d3ef42dba897af75eea1f9814bf96a1f15388dba13e7b4e018d03d0d3559e8d",
+    "bytes": 1342849,
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/weyland-yutani-matchbox.png",
+    "sha256": "ce8967b10b7d623c6720a4633b0b9559c6b7f261b0bbb0c4272016375481be45",
+    "bytes": 2535666,
+    "width": 1536,
+    "height": 1024
+  }
+].map(Object.freeze));
+// END REVIEWED V116 ADDITIONS
+
+export const FIORINA_SPRITE_CURRENT = Object.freeze({
+  revision: 'fiorina-sprites-v116',
+  manifestSha256: FIORINA_SPRITE_MANIFEST_SHA256_V116,
+  files: Object.freeze([...FIORINA_SPRITE_FILES_V115, ...FIORINA_SPRITE_ADDITIONS_V116]
+    .sort((a, b) => a.path.localeCompare(b.path))),
+});
+
 export const FIORINA_SPRITE_SOURCE_ONLY_V115 = new Set([
   'scripts/public-fiorina-sprite-admissions-v115.mjs',
   'scripts/verify-fiorina-sprite-admissions-v115.mjs',
@@ -294,9 +463,20 @@ export const FIORINA_SPRITE_SOURCE_ONLY_V115 = new Set([
   'scripts/qa-fiorina-native-sprites-v115.mjs',
   'docs/development/FIORINA_SPRITES_V115.md',
   'docs/development/FIORINA_SPRITES_V115.json',
+  'docs/development/FIORINA_SPRITES_V116.md',
+  'docs/development/FIORINA_SPRITES_V116.json',
 ]);
-const admitted = new Set([FIORINA_SPRITE_MANIFEST_V115, ...FIORINA_SPRITE_FILES_V115.map(file => file.path)]);
+const admitted = new Set([FIORINA_SPRITE_MANIFEST_V115, ...FIORINA_SPRITE_CURRENT.files.map(file => file.path)]);
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
+
+/** Source download only; the build still excludes every provenance document. */
+export function reviewedFiorinaSpritePackFilesV115() {
+  const documents = [...FIORINA_SPRITE_SOURCE_ONLY_V115]
+    .filter(path => /^docs\/development\/FIORINA_SPRITES_V[0-9]+\.(?:md|json)$/.test(path));
+  const paths = [FIORINA_SPRITE_MANIFEST_V115, ...FIORINA_SPRITE_CURRENT.files.map(file => file.path), ...documents];
+  assert.equal(new Set(paths).size, paths.length, 'Duplicate file in the reviewed sprite download');
+  return Object.freeze(paths);
+}
 
 export function publicFiorinaSpritePathAdmissionV115(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string') return null;
@@ -308,17 +488,17 @@ export function publicFiorinaSpritePathAdmissionV115(path, { directory = false, 
 
 export async function verifyFiorinaSpriteAdmissionsV115(root) {
   const bytes = await readFile(join(root, FIORINA_SPRITE_MANIFEST_V115));
-  assert.equal(digest(bytes), FIORINA_SPRITE_MANIFEST_SHA256_V115, 'Fiorina sprite manifest differs from the reviewed contract');
+  assert.equal(digest(bytes), FIORINA_SPRITE_CURRENT.manifestSha256, 'Fiorina sprite manifest differs from the reviewed contract');
   const raw = JSON.parse(bytes);
   const valid = validateAlien3SpriteManifestV115(raw);
   assert.equal(valid.ok, true, `Invalid Fiorina sprite manifest: ${valid.errors.join(', ')}`);
   const paths = new Set(Object.values(valid.manifest.assets).flatMap(entry => [entry.src, ...entry.frames.map(frame => frame.src)]));
-  assert.deepEqual([...paths].sort(), FIORINA_SPRITE_FILES_V115.map(file => file.path).sort(), 'Fiorina manifest and exact PNG allowlist differ');
+  assert.deepEqual([...paths].sort(), FIORINA_SPRITE_CURRENT.files.map(file => file.path).sort(), 'Fiorina manifest and exact PNG allowlist differ');
   const actualFiles = await readdir(join(root, FIORINA_SPRITE_DIRECTORY_V115), { withFileTypes: true });
   assert.deepEqual(actualFiles.map(file => `${FIORINA_SPRITE_DIRECTORY_V115}/${file.name}`).sort(), [...admitted].sort(), 'Unreviewed or missing file in the Fiorina sprite pack');
   assert.ok(actualFiles.every(file => file.isFile() && !file.isSymbolicLink()), 'Only regular files belong to the Fiorina sprite pack');
   const measured = new Map();
-  for (const file of FIORINA_SPRITE_FILES_V115) {
+  for (const file of FIORINA_SPRITE_CURRENT.files) {
     const fullPath = join(root, file.path);
     assert.equal((await lstat(fullPath)).isSymbolicLink(), false, file.path);
     const image = await readFile(fullPath);

@@ -238,8 +238,11 @@ export function alien3SpritePoseV115(actor = {}) {
   return 'idle';
 }
 
-export function selectAlien3HumanSpriteV115(actorId, actor, { phase = '', encounter = null } = {}) {
-  const pose = alien3SpritePoseV115(actor);
+export function selectAlien3HumanSpriteV115(actorId, actor, { phase = '', encounter = null, operationActive = false } = {}) {
+  let pose = alien3SpritePoseV115(actor);
+  // V107 owns sustained operations. Presentation reads that state without
+  // inventing an actor timer or outranking damage, air, crouch or locomotion.
+  if (actorId === 'ripley' && operationActive === true && pose === 'idle') pose = 'interact';
   let family = actorId;
   if (actorId === 'ripley') {
     const outfit = !encounter && ['wreckage', 'arrival', 'crash'].includes(phase) ? 'crash'

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "fiorina-sprites-v115",
+  "revision": "fiorina-sprites-v116",
   "assets": {
     "ripley-prison-idle": {
       "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-idle.png",
@@ -501,12 +501,12 @@
         "h": 1199
       },
       "pivot": {
-        "x": 605,
+        "x": 390,
         "y": 1150
       },
       "world": {
-        "w": 80.0296,
-        "h": 73.1368
+        "w": 64.5053,
+        "h": 58.9495
       },
       "facing": "right",
       "state": "crouch",
@@ -858,7 +858,8 @@
       "fidelity": "reference-based-adaptation",
       "exact": false,
       "limitations": [
-        "Pose de grimpe isolée au catalogue ; seconde phase rejetée pour appuis identiques, rendu procédural animé conservé."
+        "Phase A originale V115, désormais employée avec la phase B V116 par la boucle ripley-prison-climb.",
+        "Deux poses clés ; calage exact de chaque main et pied sur les barreaux non certifié."
       ]
     },
     "ripley-prison-jump": {
@@ -1286,6 +1287,1132 @@
             "h": 103.504
           },
           "sha256": "f1d84d58c9cd8bade16e9f9cfe982a6cea93693d966e9f52686f986972de1062"
+        }
+      ]
+    },
+    "dillon-run-a": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/dillon-run-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1536,
+        "h": 1024
+      },
+      "pivot": {
+        "x": 800,
+        "y": 1014
+      },
+      "world": {
+        "w": 108.0462,
+        "h": 72.0308
+      },
+      "facing": "right",
+      "state": "run-frame",
+      "sha256": "4d3f92907e8dfbd964a8ce45e9660a834d5849a975cc917181adb1eb0074d949",
+      "bytes": 2052298,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Pose animée interprétée à partir du sprite V115 ; aucune séquence du film copiée image par image.",
+        "Deux poses clés seulement par boucle ; phases intermédiaires et variantes gauche dédiées non produites.",
+        "Ressource de catalogue ; aucune modification de vitesse ou de comportement natif pour la forcer à apparaître."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "dillon-run-a",
+        "note": "Cycle de course au catalogue : dans le rabattage actuel, le personnage marche vers son poste puis attend."
+      }
+    },
+    "dillon-run-b": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/dillon-run-b.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1199,
+        "h": 1312
+      },
+      "pivot": {
+        "x": 620,
+        "y": 1303
+      },
+      "world": {
+        "w": 68.4137,
+        "h": 74.8614
+      },
+      "facing": "right",
+      "state": "run-frame",
+      "sha256": "5f80b6fadb6f43c6680df4bf030275c7573d7ea9b70a9b55bf905ac5c0b9ba1f",
+      "bytes": 1486704,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Pose animée interprétée à partir du sprite V115 ; aucune séquence du film copiée image par image.",
+        "Deux poses clés seulement par boucle ; phases intermédiaires et variantes gauche dédiées non produites.",
+        "Ressource de catalogue ; aucune modification de vitesse ou de comportement natif pour la forcer à apparaître."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "dillon-run-b",
+        "note": "Cycle de course au catalogue : dans le rabattage actuel, le personnage marche vers son poste puis attend."
+      }
+    },
+    "morse-run-a": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/morse-run-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1536,
+        "h": 1024
+      },
+      "pivot": {
+        "x": 800,
+        "y": 1013
+      },
+      "world": {
+        "w": 110.8562,
+        "h": 73.9042
+      },
+      "facing": "right",
+      "state": "run-frame",
+      "sha256": "8c79ea34ce729ea1b9e476269e06abc2e93aa38926c10fe185852c1313cb9972",
+      "bytes": 1856775,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Pose animée interprétée à partir du sprite V115 ; aucune séquence du film copiée image par image.",
+        "Deux poses clés seulement par boucle ; phases intermédiaires et variantes gauche dédiées non produites.",
+        "Ressource de catalogue ; aucune modification de vitesse ou de comportement natif pour la forcer à apparaître."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "morse-run-a",
+        "note": "Cycle de course au catalogue : dans le rabattage actuel, le personnage marche vers son poste puis attend."
+      }
+    },
+    "morse-run-b": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/morse-run-b.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1312,
+        "h": 1199
+      },
+      "pivot": {
+        "x": 650,
+        "y": 1186
+      },
+      "world": {
+        "w": 75.4958,
+        "h": 68.9935
+      },
+      "facing": "right",
+      "state": "run-frame",
+      "sha256": "d4a3cebe670db8edf635d98e1934ca53a8ef61d1d01074886f2715f21a43c52a",
+      "bytes": 1333235,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Pose animée interprétée à partir du sprite V115 ; aucune séquence du film copiée image par image.",
+        "Deux poses clés seulement par boucle ; phases intermédiaires et variantes gauche dédiées non produites.",
+        "Ressource de catalogue ; aucune modification de vitesse ou de comportement natif pour la forcer à apparaître."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "morse-run-b",
+        "note": "Cycle de course au catalogue : dans le rabattage actuel, le personnage marche vers son poste puis attend."
+      }
+    },
+    "ripley-prison-climb-b": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-climb-b.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 987,
+        "h": 1594
+      },
+      "pivot": {
+        "x": 462,
+        "y": 1577
+      },
+      "world": {
+        "w": 71.3187,
+        "h": 115.1794
+      },
+      "facing": "right",
+      "state": "climb-frame",
+      "sha256": "ad58afb51c8dfa683f6dce574f13218c34c5ac11bd976e8d63d0969e1899c9a6",
+      "bytes": 895383,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Pose animée interprétée à partir du sprite V115 ; aucune séquence du film copiée image par image.",
+        "Deux poses clés seulement par boucle ; phases intermédiaires et variantes gauche dédiées non produites."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-prison-climb-b",
+        "note": "Pose reliée au sélecteur natif de Ripley selon la tenue et l’état de jeu ; l’aperçu seul ne prouve pas un parcours."
+      }
+    },
+    "ripley-prison-crouch-walk-a": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-crouch-walk-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1659,
+        "h": 948
+      },
+      "pivot": {
+        "x": 600,
+        "y": 929
+      },
+      "world": {
+        "w": 84.1047,
+        "h": 48.0598
+      },
+      "facing": "right",
+      "state": "walk-frame",
+      "sha256": "f44999bde103f631334f7a05faade80e71867a8722f2b103c5a95cdf10f3a2a5",
+      "bytes": 1294184,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Pose animée interprétée à partir du sprite V115 ; aucune séquence du film copiée image par image.",
+        "Deux poses clés seulement par boucle ; phases intermédiaires et variantes gauche dédiées non produites."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-prison-crouch-walk-a",
+        "note": "Pose reliée au sélecteur natif de Ripley selon la tenue et l’état de jeu ; l’aperçu seul ne prouve pas un parcours."
+      }
+    },
+    "ripley-prison-crouch-walk-b": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-crouch-walk-b.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1312,
+        "h": 1199
+      },
+      "pivot": {
+        "x": 440,
+        "y": 1145
+      },
+      "world": {
+        "w": 61.0496,
+        "h": 55.7915
+      },
+      "facing": "right",
+      "state": "walk-frame",
+      "sha256": "f7d905f9cc5af0632eae849ebfafd990e6d0fb581be4e7104f7e1025b902c545",
+      "bytes": 1339067,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Pose animée interprétée à partir du sprite V115 ; aucune séquence du film copiée image par image.",
+        "Deux poses clés seulement par boucle ; phases intermédiaires et variantes gauche dédiées non produites."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-prison-crouch-walk-b",
+        "note": "Pose reliée au sélecteur natif de Ripley selon la tenue et l’état de jeu ; l’aperçu seul ne prouve pas un parcours."
+      }
+    },
+    "ripley-prison-hurt": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-hurt.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 986,
+        "h": 1594
+      },
+      "pivot": {
+        "x": 400,
+        "y": 1551
+      },
+      "world": {
+        "w": 57.867,
+        "h": 93.5497
+      },
+      "facing": "right",
+      "state": "hurt",
+      "sha256": "4943fec35630d7342d399303d815d08935e522388f2911dc9c749b3b16d8099a",
+      "bytes": 1007410,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Pose animée interprétée à partir du sprite V115 ; aucune séquence du film copiée image par image."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-prison-hurt",
+        "note": "Pose reliée au sélecteur natif de Ripley selon la tenue et l’état de jeu ; l’aperçu seul ne prouve pas un parcours."
+      }
+    },
+    "ripley-prison-interact": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-interact.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 986,
+        "h": 1594
+      },
+      "pivot": {
+        "x": 360,
+        "y": 1567
+      },
+      "world": {
+        "w": 61.1737,
+        "h": 98.8954
+      },
+      "facing": "right",
+      "state": "interact",
+      "sha256": "c31ab78f727000fdf88db5e83694d337e80a2b998af8045fda36652b27cb4558",
+      "bytes": 870693,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Pose animée interprétée à partir du sprite V115 ; aucune séquence du film copiée image par image."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-prison-interact",
+        "note": "Pose reliée au sélecteur natif de Ripley selon la tenue et l’état de jeu ; l’aperçu seul ne prouve pas un parcours."
+      }
+    },
+    "murphy-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/murphy-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 510.0,
+        "y": 1527
+      },
+      "world": {
+        "w": 67.7697,
+        "h": 101.6545
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "518aaf21595c0724b808b324b0d1f2c043b2d8918b4db388fb8834a6e2727329",
+      "bytes": 1742102,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Generated reconstruction, not a scan or certified 1:1 reproduction.",
+        "Abattoir outfit follows Assembly still 019; this is not the different maintenance scene outfit with goggles.",
+        "Boot soles, apron fasteners and hidden garment seams reconstructed from limited source resolution.",
+        "Alpha extrema 0..254; faint alpha1..7 noise exists beyond the visible silhouette. Use visibleBBoxAlpha8 for placement, not every nonzero alpha pixel."
+      ],
+      "catalogue": {
+        "context": "assembly",
+        "label": "Murphy — tenue de l’abattoir",
+        "note": "Tenue Assembly ; ressource de catalogue, le statut décédé de la campagne est conservé."
+      }
+    },
+    "boggs-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/boggs-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 505.5,
+        "y": 1528
+      },
+      "world": {
+        "w": 67.8595,
+        "h": 101.7893
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "8318c9dfae6299095250f33a755f40696061d1fdcaa409cfd0cd5d01999652b4",
+      "bytes": 2002234,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Generated reconstruction, not a scan or certified 1:1 reproduction.",
+        "Forehead tattoo is a generated interpretation; its smallest contours are not an exact decal trace.",
+        "Boot construction, trouser seams and pendant details are inferred where references are distant or obscured.",
+        "No idle film frame exists in this exact viewing angle; pose is an adaptation for the sprite catalogue."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "Boggs",
+        "note": "Ressource de catalogue ; son statut décédé reste propriétaire de sa présence dans la campagne."
+      }
+    },
+    "rains-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/rains-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 500.0,
+        "y": 1532
+      },
+      "world": {
+        "w": 67.1916,
+        "h": 100.7874
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "2347c1f64ddc568c3c296fcb05e57466142eb1b52fea27979e0d3e88e551475c",
+      "bytes": 1821277,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Generated reconstruction, not a scan or certified 1:1 reproduction.",
+        "Cap seam, coat fastenings and worn boot details are inferred where the original still is low resolution or shadowed.",
+        "Neutral standing pose and lighting are adapted for a reusable catalogue sprite.",
+        "The metal ring/cord on the chest is based on visible portrait detail, not identified as a named canonical item.",
+        "Very small lower transparent margin: visible alpha>=8 ends at y1535; opaque alpha>=128 at y1532 on a1536-pixel canvas. Whole boots remain present; add display padding in the catalogue renderer rather than silently editing the PNG."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "Rains",
+        "note": "Ressource de catalogue ; son statut décédé reste propriétaire de sa présence dans la campagne."
+      }
+    },
+    "ripley-crash-walk-a": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-walk-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 987,
+        "h": 1594
+      },
+      "pivot": {
+        "x": 450,
+        "y": 1548
+      },
+      "world": {
+        "w": 59.566,
+        "h": 96.1988
+      },
+      "facing": "right",
+      "state": "walk-frame",
+      "sha256": "70f56bc433b4fbd37db810f15270401abcbfb159af0e10ebb67cf116ce6d062f",
+      "bytes": 903417,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Two selected phases per gait form a minimal animation; no complete opposite-leg gait or smooth interpolation was generated.",
+        "Body pose and necessary fabric folds are interpreted; no claim of exact film movement.",
+        "Minor alpha1..7 fringe exists; validate on real light/dark Canvas backgrounds before release.",
+        "Deux poses clés seulement par boucle ; phases intermédiaires et variantes gauche dédiées non produites."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-walk-a",
+        "note": "Pose reliée au sélecteur natif de Ripley selon la tenue et l’état de jeu ; l’aperçu seul ne prouve pas un parcours."
+      }
+    },
+    "ripley-crash-walk-b": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-walk-b.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 987,
+        "h": 1594
+      },
+      "pivot": {
+        "x": 475,
+        "y": 1563
+      },
+      "world": {
+        "w": 59.566,
+        "h": 96.1988
+      },
+      "facing": "right",
+      "state": "walk-frame",
+      "sha256": "10fd764540582a9884da1879b88b86be5234784166b733ff1e7f7efd1a629acf",
+      "bytes": 787330,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Two selected phases per gait form a minimal animation; no complete opposite-leg gait or smooth interpolation was generated.",
+        "Body pose and necessary fabric folds are interpreted; no claim of exact film movement.",
+        "Minor alpha1..7 fringe exists; validate on real light/dark Canvas backgrounds before release.",
+        "Deux poses clés seulement par boucle ; phases intermédiaires et variantes gauche dédiées non produites."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-walk-b",
+        "note": "Pose reliée au sélecteur natif de Ripley selon la tenue et l’état de jeu ; l’aperçu seul ne prouve pas un parcours."
+      }
+    },
+    "ripley-crash-run-a": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-run-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1134,
+        "h": 1387
+      },
+      "pivot": {
+        "x": 515,
+        "y": 1342
+      },
+      "world": {
+        "w": 72.6795,
+        "h": 88.8946
+      },
+      "facing": "right",
+      "state": "run-frame",
+      "sha256": "56d4539bbba13c504ec7365aa6208edc3adfbb8ab316d351213e29f0feca106d",
+      "bytes": 797953,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Two selected phases per gait form a minimal animation; no complete opposite-leg gait or smooth interpolation was generated.",
+        "Body pose and necessary fabric folds are interpreted; no claim of exact film movement.",
+        "Minor alpha1..7 fringe exists; validate on real light/dark Canvas backgrounds before release.",
+        "Deux poses clés seulement par boucle ; phases intermédiaires et variantes gauche dédiées non produites."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-run-a",
+        "note": "Pose reliée au sélecteur natif de Ripley selon la tenue et l’état de jeu ; l’aperçu seul ne prouve pas un parcours."
+      }
+    },
+    "ripley-crash-run-b": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-run-b.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 405,
+        "y": 1507
+      },
+      "world": {
+        "w": 58.1771,
+        "h": 87.2656
+      },
+      "facing": "right",
+      "state": "run-frame",
+      "sha256": "04c559dad497ee1d560485ede2fd13f7e0ba7a63135b376020fcba8f67e6b086",
+      "bytes": 1581184,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Two selected phases per gait form a minimal animation; no complete opposite-leg gait or smooth interpolation was generated.",
+        "Body pose and necessary fabric folds are interpreted; no claim of exact film movement.",
+        "Minor alpha1..7 fringe exists; validate on real light/dark Canvas backgrounds before release.",
+        "Deux poses clés seulement par boucle ; phases intermédiaires et variantes gauche dédiées non produites."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-run-b",
+        "note": "Pose reliée au sélecteur natif de Ripley selon la tenue et l’état de jeu ; l’aperçu seul ne prouve pas un parcours."
+      }
+    },
+    "ox-assembly-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ox-assembly-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1536,
+        "h": 1024
+      },
+      "pivot": {
+        "x": 783.36,
+        "y": 947.2
+      },
+      "world": {
+        "w": 150,
+        "h": 100.0
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "421a8ef4fc9b3a0afbdb86c5306e1909dbef5fccdde096147f92ef22e2508a51",
+      "bytes": 1965923,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Vue latérale et pose calme reconstruites à partir d’un photogramme frontal très sombre de bœufs vivants.",
+        "Robe brun très sombre, masse et cornes guidées par le photogramme ; nuances du pelage, morphologie précise et éclairage interprétés.",
+        "Aucune certification de fidélité 1:1 ni d’identification d’une race."
+      ],
+      "catalogue": {
+        "context": "assembly",
+        "label": "Bovin vivant — Assembly",
+        "note": "Ressource de catalogue ; le shell ox-approach ne devient pas une salle native jouable."
+      }
+    },
+    "weyland-yutani-matchbox": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/weyland-yutani-matchbox.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1536,
+        "h": 1024
+      },
+      "pivot": {
+        "x": 768.0,
+        "y": 860.16
+      },
+      "world": {
+        "w": 18,
+        "h": 12.0
+      },
+      "facing": "right",
+      "state": "prop",
+      "sha256": "ce8967b10b7d623c6720a4633b0b9559c6b7f261b0bbb0c4272016375481be45",
+      "bytes": 2535666,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Boîte de production attribuée à la collection Nick Gillard par Propstore ; présence à un moment précis du montage non établie ici.",
+        "Tiroir refermé pour le sprite ; relief, éclairage et usure régénérés, graphisme approché et non fac-similé garanti."
+      ],
+      "catalogue": {
+        "context": "documentary",
+        "label": "Boîte d’allumettes Weyland-Yutani",
+        "note": "Accessoire de production documenté ; aucune apparition native revendiquée."
+      }
+    },
+    "company-scientist-goggles": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/company-scientist-goggles.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1774,
+        "h": 887
+      },
+      "pivot": {
+        "x": 887.0,
+        "y": 727.34
+      },
+      "world": {
+        "w": 16,
+        "h": 8.0
+      },
+      "facing": "right",
+      "state": "prop",
+      "sha256": "3e06b1250b00f5c9a674b76230818b062d55f7d1eda3b3c17b3334661141f2fc",
+      "bytes": 1133798,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Objet photographié avec peinture réfléchissante vieillie ; la légère réflexion argentée et les rayures sont régénérées.",
+        "Loupe unique conservée devant le verre droit du porteur ; socle de collection exclu.",
+        "Asset indépendant de catalogue ; ne prétend pas être un nouvel équipement jouable déjà intégré."
+      ],
+      "catalogue": {
+        "context": "documentary",
+        "label": "Lunettes du scientifique",
+        "note": "Accessoire autonome au catalogue ; ne remplace pas les lunettes intégrées au PNG du scientifique."
+      }
+    },
+    "royal-facehugger-assembly": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/royal-facehugger-assembly.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 2172,
+        "h": 724
+      },
+      "pivot": {
+        "x": 1629.0,
+        "y": 687.8
+      },
+      "world": {
+        "w": 100,
+        "h": 33.3333
+      },
+      "facing": "right",
+      "state": "prop",
+      "sha256": "7d3ef42dba897af75eea1f9814bf96a1f15388dba13e7b4e018d03d0d3559e8d",
+      "bytes": 1342849,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Variante Royal/Super de l’abattoir Assembly ; ce sprite ne représente pas le facehugger ordinaire rampant dans l’ouverture.",
+        "Accessoire de production photographié vieilli et avec des doigts incomplets ; extrémités restaurées et pose au sol reconstruites.",
+        "La palette olive-brun est guidée par la photographie de l’accessoire vieilli, dont Propstore signale l’assombrissement ; couleur de tournage exacte non certifiée.",
+        "Pose inerte de catalogue, aucun cycle locomoteur ajouté."
+      ],
+      "catalogue": {
+        "context": "assembly",
+        "label": "Facehugger royal — Assembly",
+        "note": "Accessoire inerte de la séquence de l’abattoir ; distinct du facehugger standard de l’ouverture, sans ennemi ajouté."
+      }
+    },
+    "dillon-glasses": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/dillon-glasses.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1774,
+        "h": 887
+      },
+      "pivot": {
+        "x": 887.0,
+        "y": 780.56
+      },
+      "world": {
+        "w": 16,
+        "h": 8.0
+      },
+      "facing": "right",
+      "state": "prop",
+      "sha256": "fadc0da30854c40b00e8131a083f92f23487b4410ff2f66010edb26b25176f70",
+      "bytes": 1094340,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Monture de lunettes attribuée à Dillon par Propstore, fabriquée par Anglo American Eyewear ; dimensions physiques non relevées.",
+        "Photo consultée de faible résolution (356 × 356 avec deux sujets) ; relief et usure fine interprétés.",
+        "Transparence des verres corrigée par imagegen pour éviter un écran blanc dans le jeu ; ce rendu optique est une adaptation."
+      ],
+      "catalogue": {
+        "context": "documentary",
+        "label": "Lunettes de Dillon",
+        "note": "Accessoire autonome au catalogue ; ne remplace pas les lunettes intégrées aux PNG de Dillon."
+      }
+    },
+    "fire-flare": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/fire-flare.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 484.0,
+        "y": 1500.0
+      },
+      "world": {
+        "w": 62,
+        "h": 93.0
+      },
+      "facing": "right",
+      "state": "prop",
+      "sha256": "111952b339cd5c6ef566a7337dd8de208b14e46f0440ee93cca13b5773666bc0",
+      "bytes": 1286902,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "État allumé uniquement : l’extrémité active est masquée par la lumière dans les photogrammes, aucun capuchon éteint ni mécanisme interne n’est reconstruit.",
+        "Forme visible de poignée, garde ronde et tube guidée par les photogrammes ; proportions précises, zones masquées par les mains, usure et fumée interprétées.",
+        "PNG unique statique : la flamme ne constitue pas un cycle d’animation.",
+        "Raccord proposé uniquement au décor conditionnel existant fire-flare-v113, sous flags.fire ; aucun objet porté ou arme supplémentaire."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "Fusée allumée",
+        "note": "Prop lié au support fire-flare-v113 et visible uniquement lorsque flags.fire est actif ; pas d’état éteint inventé."
+      }
+    },
+    "ripley-prison-climb": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-climb-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 986,
+        "h": 1594
+      },
+      "pivot": {
+        "x": 490,
+        "y": 1565
+      },
+      "world": {
+        "w": 71.2465,
+        "h": 115.1794
+      },
+      "facing": "right",
+      "state": "climb",
+      "sha256": "af6533431a7e98c837651271dcef8711db5e3a4d2735b34a25a59f426f57c9e0",
+      "bytes": 854856,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Cycle interprété à deux poses distinctes ; phases intermédiaires non produites."
+      ],
+      "fps": 5,
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-prison-climb",
+        "note": "Pose reliée au sélecteur natif de Ripley selon la tenue et l’état de jeu ; l’aperçu seul ne prouve pas un parcours."
+      },
+      "frames": [
+        {
+          "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-climb-a.png",
+          "x": 0,
+          "y": 0,
+          "w": 986,
+          "h": 1594,
+          "pivot": {
+            "x": 490,
+            "y": 1565
+          },
+          "world": {
+            "w": 71.2465,
+            "h": 115.1794
+          },
+          "sha256": "af6533431a7e98c837651271dcef8711db5e3a4d2735b34a25a59f426f57c9e0"
+        },
+        {
+          "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-climb-b.png",
+          "x": 0,
+          "y": 0,
+          "w": 987,
+          "h": 1594,
+          "pivot": {
+            "x": 462,
+            "y": 1577
+          },
+          "world": {
+            "w": 71.3187,
+            "h": 115.1794
+          },
+          "sha256": "ad58afb51c8dfa683f6dce574f13218c34c5ac11bd976e8d63d0969e1899c9a6"
+        }
+      ]
+    },
+    "ripley-prison-crouch-walk": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-crouch-walk-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1659,
+        "h": 948
+      },
+      "pivot": {
+        "x": 600,
+        "y": 929
+      },
+      "world": {
+        "w": 84.1047,
+        "h": 48.0598
+      },
+      "facing": "right",
+      "state": "crouch-walk",
+      "sha256": "f44999bde103f631334f7a05faade80e71867a8722f2b103c5a95cdf10f3a2a5",
+      "bytes": 1294184,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Cycle interprété à deux poses distinctes ; phases intermédiaires non produites."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-prison-crouch-walk",
+        "note": "Pose reliée au sélecteur natif de Ripley selon la tenue et l’état de jeu ; l’aperçu seul ne prouve pas un parcours."
+      },
+      "fps": 5,
+      "frames": [
+        {
+          "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-crouch-walk-a.png",
+          "x": 0,
+          "y": 0,
+          "w": 1659,
+          "h": 948,
+          "pivot": {
+            "x": 600,
+            "y": 929
+          },
+          "world": {
+            "w": 84.1047,
+            "h": 48.0598
+          },
+          "sha256": "f44999bde103f631334f7a05faade80e71867a8722f2b103c5a95cdf10f3a2a5"
+        },
+        {
+          "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-crouch-walk-b.png",
+          "x": 0,
+          "y": 0,
+          "w": 1312,
+          "h": 1199,
+          "pivot": {
+            "x": 440,
+            "y": 1145
+          },
+          "world": {
+            "w": 61.0496,
+            "h": 55.7915
+          },
+          "sha256": "f7d905f9cc5af0632eae849ebfafd990e6d0fb581be4e7104f7e1025b902c545"
+        }
+      ]
+    },
+    "ripley-crash-walk": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-walk-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 987,
+        "h": 1594
+      },
+      "pivot": {
+        "x": 450,
+        "y": 1548
+      },
+      "world": {
+        "w": 59.566,
+        "h": 96.1988
+      },
+      "facing": "right",
+      "state": "walk",
+      "sha256": "70f56bc433b4fbd37db810f15270401abcbfb159af0e10ebb67cf116ce6d062f",
+      "bytes": 903417,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Cycle interprété à deux poses distinctes ; phases intermédiaires non produites."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-walk",
+        "note": "Pose reliée au sélecteur natif de Ripley selon la tenue et l’état de jeu ; l’aperçu seul ne prouve pas un parcours."
+      },
+      "fps": 6,
+      "frames": [
+        {
+          "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-walk-a.png",
+          "x": 0,
+          "y": 0,
+          "w": 987,
+          "h": 1594,
+          "pivot": {
+            "x": 450,
+            "y": 1548
+          },
+          "world": {
+            "w": 59.566,
+            "h": 96.1988
+          },
+          "sha256": "70f56bc433b4fbd37db810f15270401abcbfb159af0e10ebb67cf116ce6d062f"
+        },
+        {
+          "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-walk-b.png",
+          "x": 0,
+          "y": 0,
+          "w": 987,
+          "h": 1594,
+          "pivot": {
+            "x": 475,
+            "y": 1563
+          },
+          "world": {
+            "w": 59.566,
+            "h": 96.1988
+          },
+          "sha256": "10fd764540582a9884da1879b88b86be5234784166b733ff1e7f7efd1a629acf"
+        }
+      ]
+    },
+    "ripley-crash-run": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-run-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1134,
+        "h": 1387
+      },
+      "pivot": {
+        "x": 515,
+        "y": 1342
+      },
+      "world": {
+        "w": 72.6795,
+        "h": 88.8946
+      },
+      "facing": "right",
+      "state": "run",
+      "sha256": "56d4539bbba13c504ec7365aa6208edc3adfbb8ab316d351213e29f0feca106d",
+      "bytes": 797953,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Cycle interprété à deux poses distinctes ; phases intermédiaires non produites."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-run",
+        "note": "Pose reliée au sélecteur natif de Ripley selon la tenue et l’état de jeu ; l’aperçu seul ne prouve pas un parcours."
+      },
+      "fps": 8,
+      "frames": [
+        {
+          "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-run-a.png",
+          "x": 0,
+          "y": 0,
+          "w": 1134,
+          "h": 1387,
+          "pivot": {
+            "x": 515,
+            "y": 1342
+          },
+          "world": {
+            "w": 72.6795,
+            "h": 88.8946
+          },
+          "sha256": "56d4539bbba13c504ec7365aa6208edc3adfbb8ab316d351213e29f0feca106d"
+        },
+        {
+          "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-run-b.png",
+          "x": 0,
+          "y": 0,
+          "w": 1024,
+          "h": 1536,
+          "pivot": {
+            "x": 405,
+            "y": 1507
+          },
+          "world": {
+            "w": 58.1771,
+            "h": 87.2656
+          },
+          "sha256": "04c559dad497ee1d560485ede2fd13f7e0ba7a63135b376020fcba8f67e6b086"
+        }
+      ]
+    },
+    "dillon-run": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/dillon-run-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1536,
+        "h": 1024
+      },
+      "pivot": {
+        "x": 800,
+        "y": 1014
+      },
+      "world": {
+        "w": 108.0462,
+        "h": 72.0308
+      },
+      "facing": "right",
+      "state": "run",
+      "sha256": "4d3f92907e8dfbd964a8ce45e9660a834d5849a975cc917181adb1eb0074d949",
+      "bytes": 2052298,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Cycle interprété à deux poses distinctes ; phases intermédiaires non produites.",
+        "Catalogue uniquement dans la chronologie actuelle ; les déplacements vers les postes restent des marches."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "dillon-run",
+        "note": "Cycle de course au catalogue : dans le rabattage actuel, le personnage marche vers son poste puis attend."
+      },
+      "fps": 8,
+      "frames": [
+        {
+          "src": "assets/openai/sprites/alien3-fiorina-v115/dillon-run-a.png",
+          "x": 0,
+          "y": 0,
+          "w": 1536,
+          "h": 1024,
+          "pivot": {
+            "x": 800,
+            "y": 1014
+          },
+          "world": {
+            "w": 108.0462,
+            "h": 72.0308
+          },
+          "sha256": "4d3f92907e8dfbd964a8ce45e9660a834d5849a975cc917181adb1eb0074d949"
+        },
+        {
+          "src": "assets/openai/sprites/alien3-fiorina-v115/dillon-run-b.png",
+          "x": 0,
+          "y": 0,
+          "w": 1199,
+          "h": 1312,
+          "pivot": {
+            "x": 620,
+            "y": 1303
+          },
+          "world": {
+            "w": 68.4137,
+            "h": 74.8614
+          },
+          "sha256": "5f80b6fadb6f43c6680df4bf030275c7573d7ea9b70a9b55bf905ac5c0b9ba1f"
+        }
+      ]
+    },
+    "morse-run": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/morse-run-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1536,
+        "h": 1024
+      },
+      "pivot": {
+        "x": 800,
+        "y": 1013
+      },
+      "world": {
+        "w": 110.8562,
+        "h": 73.9042
+      },
+      "facing": "right",
+      "state": "run",
+      "sha256": "8c79ea34ce729ea1b9e476269e06abc2e93aa38926c10fe185852c1313cb9972",
+      "bytes": 1856775,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Cycle interprété à deux poses distinctes ; phases intermédiaires non produites.",
+        "Catalogue uniquement dans la chronologie actuelle ; les déplacements vers les postes restent des marches."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "morse-run",
+        "note": "Cycle de course au catalogue : dans le rabattage actuel, le personnage marche vers son poste puis attend."
+      },
+      "fps": 8,
+      "frames": [
+        {
+          "src": "assets/openai/sprites/alien3-fiorina-v115/morse-run-a.png",
+          "x": 0,
+          "y": 0,
+          "w": 1536,
+          "h": 1024,
+          "pivot": {
+            "x": 800,
+            "y": 1013
+          },
+          "world": {
+            "w": 110.8562,
+            "h": 73.9042
+          },
+          "sha256": "8c79ea34ce729ea1b9e476269e06abc2e93aa38926c10fe185852c1313cb9972"
+        },
+        {
+          "src": "assets/openai/sprites/alien3-fiorina-v115/morse-run-b.png",
+          "x": 0,
+          "y": 0,
+          "w": 1312,
+          "h": 1199,
+          "pivot": {
+            "x": 650,
+            "y": 1186
+          },
+          "world": {
+            "w": 75.4958,
+            "h": 68.9935
+          },
+          "sha256": "d4a3cebe670db8edf635d98e1934ca53a8ef61d1d01074886f2715f21a43c52a"
         }
       ]
     }
