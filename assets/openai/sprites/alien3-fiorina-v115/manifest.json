@@ -1,0 +1,1293 @@
+{
+  "schemaVersion": 1,
+  "revision": "fiorina-sprites-v115",
+  "assets": {
+    "ripley-prison-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 986,
+        "h": 1595
+      },
+      "pivot": {
+        "x": 477,
+        "y": 1568
+      },
+      "world": {
+        "w": 66.2189,
+        "h": 107.1189
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "6693f849c8706de1c042206d951cf74ab8bf415664a8f07308b45afd3fcd6488",
+      "bytes": 844848,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": []
+    },
+    "ripley-coat-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-coat-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 986,
+        "h": 1595
+      },
+      "pivot": {
+        "x": 478,
+        "y": 1575
+      },
+      "world": {
+        "w": 65.7772,
+        "h": 106.4043
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "f308e1234869175fd8100bf06e5e4d811060afd7a720c21fb600d759ff109d79",
+      "bytes": 1096004,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": []
+    },
+    "dillon-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/dillon-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 482,
+        "y": 1523
+      },
+      "world": {
+        "w": 70.1743,
+        "h": 105.2615
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "9280c3c37a3f47dabe17606c32372886898d77162878912c41a1596bfdce6c78",
+      "bytes": 2162589,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": []
+    },
+    "clemens-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/clemens-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 486,
+        "y": 1527
+      },
+      "world": {
+        "w": 71.2053,
+        "h": 106.8079
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "8afc420f8af2598dd2917545c93c200ab9475cb950ecb33bff0b4b9515a25d9c",
+      "bytes": 1409997,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": []
+    },
+    "runner-prowl": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/runner-prowl.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1983,
+        "h": 793
+      },
+      "pivot": {
+        "x": 1145,
+        "y": 720
+      },
+      "world": {
+        "w": 292.6248,
+        "h": 117.0204
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "18f91c0958876a06c00a5ee613bfd8cec3f6d3bed5c645b15e420adffa60cb57",
+      "bytes": 1057406,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": []
+    },
+    "andrews-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/andrews-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 493,
+        "y": 1519
+      },
+      "world": {
+        "w": 68.6327,
+        "h": 102.9491
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "c7566fca89c76968de355bb25a748ab8c1a37102871b7a9e70c175cbb1f71423",
+      "bytes": 1649480,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": []
+    },
+    "golic-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/golic-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 887,
+        "h": 1774
+      },
+      "pivot": {
+        "x": 395,
+        "y": 1769
+      },
+      "world": {
+        "w": 50.312,
+        "h": 100.6239
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "198f7ceb34872bb43bda50898360a18a25ebca0739cbe837f5d64b325f8d961c",
+      "bytes": 1263301,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": []
+    },
+    "company-commando-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/company-commando-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 418,
+        "y": 1527
+      },
+      "world": {
+        "w": 70.9703,
+        "h": 106.4554
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "d01dd988cc783cc529b51eaea9a580ffe869bedc48d92447e98d2d949067c552",
+      "bytes": 2187435,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Le chargeur représenté reste trop long par rapport au M41A du film."
+      ]
+    },
+    "morse-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/morse-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 485,
+        "y": 1527
+      },
+      "world": {
+        "w": 68.1304,
+        "h": 102.1956
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "39bd0eb7db35164155d78a37c2dfceadd31d5b7ad3ba0782a7275d5ea18503c4",
+      "bytes": 1848723,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": []
+    },
+    "aaron-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/aaron-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 481,
+        "y": 1529
+      },
+      "world": {
+        "w": 67.2799,
+        "h": 100.9198
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "eac18238c6df8bf7b9cb408049ac570130f7ecc24f26f3ed04b50e7efee365d1",
+      "bytes": 1677354,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": []
+    },
+    "junior-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/junior-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 479,
+        "y": 1522
+      },
+      "world": {
+        "w": 67.9947,
+        "h": 101.992
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "8b34ef6ce5f54786103b28337a6152b17f03c8aaf56b975ae250d2bd3ef9046e",
+      "bytes": 1637039,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Tatouage non validé dans la référence disponible ; non ajouté."
+      ]
+    },
+    "ripley-prison-walk-a": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-walk-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 986,
+        "h": 1594
+      },
+      "pivot": {
+        "x": 477,
+        "y": 1499
+      },
+      "world": {
+        "w": 69.4568,
+        "h": 112.2861
+      },
+      "facing": "right",
+      "state": "walk-frame",
+      "sha256": "c08f45541bd3cc732fe018f5b0ae01b68573c1da8bd651e6c17c0203dd84edbc",
+      "bytes": 918090,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": []
+    },
+    "ripley-prison-walk-b": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-walk-b.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 986,
+        "h": 1594
+      },
+      "pivot": {
+        "x": 477,
+        "y": 1541
+      },
+      "world": {
+        "w": 66.5104,
+        "h": 107.5229
+      },
+      "facing": "right",
+      "state": "walk-frame",
+      "sha256": "8cf1f89af25b1918a86dc24e997d2d2f7f49118261e12c4d9b193f09145c2cb9",
+      "bytes": 916096,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": []
+    },
+    "bishop-damaged": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/bishop-damaged.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1862,
+        "h": 845
+      },
+      "pivot": {
+        "x": 936,
+        "y": 692
+      },
+      "world": {
+        "w": 92,
+        "h": 41.7508
+      },
+      "facing": "right",
+      "state": "static",
+      "sha256": "d9ac762365f330db4439ce4f148a88b82ec92f0943e5464257827522fd5196f5",
+      "bytes": 1716084,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": []
+    },
+    "company-scientist-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/company-scientist-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 480,
+        "y": 1528
+      },
+      "world": {
+        "w": 69.0794,
+        "h": 103.619
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "ec9728de46d913c791f1aadeac39fe2419f32a5eb0a0983151977ed7466458ea",
+      "bytes": 1832071,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": []
+    },
+    "bishop-representative-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/bishop-representative-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 486,
+        "y": 1523
+      },
+      "world": {
+        "w": 70.221,
+        "h": 105.3316
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "5df1ea8946a901a92b0e5597e0846699ee2ca35a53dfc80863ce87aae2dc7845",
+      "bytes": 1387754,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Palette interprétée depuis une photographie de presse noir et blanc."
+      ]
+    },
+    "spike-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/spike-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1536,
+        "h": 1024
+      },
+      "pivot": {
+        "x": 670,
+        "y": 1005
+      },
+      "world": {
+        "w": 70.9398,
+        "h": 47.2932
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "64f3f063548ab8f9ac57c4802332d54f9e259e6a5c677578915bb3b43133ad8e",
+      "bytes": 2000179,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Rottweiler vivant adapté ; absent du monde natif tant que le chenil n'est pas relié."
+      ]
+    },
+    "dillon-fire-axe": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/dillon-fire-axe.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1592,
+        "h": 988
+      },
+      "pivot": {
+        "x": 800,
+        "y": 485
+      },
+      "world": {
+        "w": 52,
+        "h": 32.2714
+      },
+      "facing": "right",
+      "state": "static",
+      "sha256": "96f5e1358fd83d0a80349ae5147cb4c2de079a38bbf57bbf4ff2198cecaa2188",
+      "bytes": 422108,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Objet graphique documenté ; aucun nouveau maniement d'arme ajouté."
+      ]
+    },
+    "ripley-prison-run-a": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-run-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1312,
+        "h": 1199
+      },
+      "pivot": {
+        "x": 626,
+        "y": 1182
+      },
+      "world": {
+        "w": 94.6804,
+        "h": 86.5258
+      },
+      "facing": "right",
+      "state": "run-frame",
+      "sha256": "8f0cc7d188896981c92876b4c95e78adcad9fce470189c1095921f6387effd7e",
+      "bytes": 873274,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": []
+    },
+    "ripley-prison-run-b": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-run-b.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1312,
+        "h": 1199
+      },
+      "pivot": {
+        "x": 661,
+        "y": 1182
+      },
+      "world": {
+        "w": 95.6667,
+        "h": 87.4271
+      },
+      "facing": "right",
+      "state": "run-frame",
+      "sha256": "a3b64ebabe95b429baea41b2be0f88ff61232f7cc9106b224b65991b650390f5",
+      "bytes": 859667,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": []
+    },
+    "ripley-prison-crouch": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-crouch.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1312,
+        "h": 1199
+      },
+      "pivot": {
+        "x": 605,
+        "y": 1150
+      },
+      "world": {
+        "w": 80.0296,
+        "h": 73.1368
+      },
+      "facing": "right",
+      "state": "crouch",
+      "sha256": "89ecdf43bbdba52d8eaa648808f679bfcf3171e99a34753f5851773eb2b7791a",
+      "bytes": 1202910,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": []
+    },
+    "david-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/david-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 503,
+        "y": 1526
+      },
+      "world": {
+        "w": 67.8146,
+        "h": 101.7219
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "6a647498795044e25dfc9e1ed2bec74b5cbd1ab1522e9c9a5911ebff2f97d518",
+      "bytes": 1768386,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Corps entier adapté depuis des références partielles ; bas de tenue et semelles non certifiés par le film.",
+        "Pose de repos seule ; mouvement conservé par le rendu procédural tant que les poses individuelles manquent."
+      ]
+    },
+    "arthur-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/arthur-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 502,
+        "y": 1526
+      },
+      "world": {
+        "w": 67.7249,
+        "h": 101.5873
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "007e097b18420e4b58785b56bd4134301f2a7c7482921241898195eadafe281c",
+      "bytes": 1815225,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Corps entier adapté depuis des références partielles ; bas de tenue et semelles non certifiés par le film.",
+        "Pose de repos seule ; mouvement conservé par le rendu procédural tant que les poses individuelles manquent."
+      ]
+    },
+    "kevin-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/kevin-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 887,
+        "h": 1774
+      },
+      "pivot": {
+        "x": 458,
+        "y": 1769
+      },
+      "world": {
+        "w": 50.6857,
+        "h": 101.3714
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "d728905173a943d95bf1359415674d6fc0ff80f7ee43a8f7dd1cac0986abb10e",
+      "bytes": 1342641,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Corps entier adapté depuis des références partielles ; bas de tenue et semelles non certifiés par le film.",
+        "Pose de repos seule ; mouvement conservé par le rendu procédural tant que les poses individuelles manquent."
+      ]
+    },
+    "gregor-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/gregor-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 491,
+        "y": 1526
+      },
+      "world": {
+        "w": 67.8595,
+        "h": 101.7893
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "d2e116aa9eade2c1df548dbb3898f2ee9a49c99d9f1091a306fb5453be6080c1",
+      "bytes": 1598640,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Corps entier adapté depuis des références partielles ; bas de tenue et semelles non certifiés par le film.",
+        "Pose de repos seule ; mouvement conservé par le rendu procédural tant que les poses individuelles manquent."
+      ]
+    },
+    "william-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/william-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 480,
+        "y": 1525
+      },
+      "world": {
+        "w": 67.6801,
+        "h": 101.5202
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "f6ac9a573d24959390e05c67608daae4067edcc6fd83b2dea0aef5acf34942db",
+      "bytes": 1715889,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Corps entier adapté depuis des références partielles ; bas de tenue et semelles non certifiés par le film.",
+        "Pose de repos seule ; mouvement conservé par le rendu procédural tant que les poses individuelles manquent."
+      ]
+    },
+    "jude-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/jude-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 512,
+        "y": 1526
+      },
+      "world": {
+        "w": 67.5462,
+        "h": 101.3193
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "e4e5e4a9c1093d585efb03b1b5e5b953e8ac933c81d774928b1a4aec88367dd1",
+      "bytes": 1806863,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Corps entier adapté depuis des références partielles ; bas de tenue et semelles non certifiés par le film.",
+        "Pose de repos seule ; mouvement conservé par le rendu procédural tant que les poses individuelles manquent."
+      ]
+    },
+    "troy-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/troy-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 516,
+        "y": 1525
+      },
+      "world": {
+        "w": 67.8146,
+        "h": 101.7219
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "5ccb678feb2ab3bf683bfda7067467c6d31f64d4384f7b28c13627276a1dd4f4",
+      "bytes": 1604281,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Corps entier adapté depuis des références partielles ; bas de tenue et semelles non certifiés par le film.",
+        "Pose de repos seule ; mouvement conservé par le rendu procédural tant que les poses individuelles manquent."
+      ]
+    },
+    "frank-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/frank-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 498,
+        "y": 1528
+      },
+      "world": {
+        "w": 67.4572,
+        "h": 101.1858
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "ca8d63fbd3ee31b9225a10f880f4c003b19bed6b79fff0ddc9f07b43f9baaf9b",
+      "bytes": 1962269,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Corps entier adapté depuis des références partielles ; bas de tenue et semelles non certifiés par le film.",
+        "Pose de repos seule ; mouvement conservé par le rendu procédural tant que les poses individuelles manquent."
+      ]
+    },
+    "eric-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/eric-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 513,
+        "y": 1530
+      },
+      "world": {
+        "w": 67.8146,
+        "h": 101.7219
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "50555f9bcc5c811f036ef8e09930ef26f6d464c5e411611ca3f7ad4ebd041ab6",
+      "bytes": 1659122,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Corps entier adapté depuis des références partielles ; bas de tenue et semelles non certifiés par le film.",
+        "Pose de repos seule ; mouvement conservé par le rendu procédural tant que les poses individuelles manquent."
+      ]
+    },
+    "ripley-crash-idle": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-idle.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 986,
+        "h": 1594
+      },
+      "pivot": {
+        "x": 494,
+        "y": 1564
+      },
+      "world": {
+        "w": 61.6651,
+        "h": 99.6899
+      },
+      "facing": "right",
+      "state": "idle",
+      "sha256": "129187cce0e1a346eef0b287f9f5148d29f390d65119a2de4ec5c664722b029b",
+      "bytes": 760366,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Pose debout reconstruite pour le jeu ; références de la séquence sur un lit ou lors du transport."
+      ]
+    },
+    "runner-walk-b": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/runner-walk-b.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1983,
+        "h": 793
+      },
+      "pivot": {
+        "x": 1145,
+        "y": 699
+      },
+      "world": {
+        "w": 292.6248,
+        "h": 117.0204
+      },
+      "facing": "right",
+      "state": "walk-frame",
+      "sha256": "964e5eb301082fc1361b651a1a48811159f61f4ddb5542323569677193af11b9",
+      "bytes": 1052134,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": []
+    },
+    "runner-run-b": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/runner-run-b.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 2172,
+        "h": 724
+      },
+      "pivot": {
+        "x": 1250,
+        "y": 662
+      },
+      "world": {
+        "w": 320.514,
+        "h": 106.8379
+      },
+      "facing": "right",
+      "state": "run-frame",
+      "sha256": "df8234fb8ba90267a49ab8a970e5422b3716939adfa31f34ec024e14091d1047",
+      "bytes": 959156,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Pose de course isolée disponible au catalogue ; cycle incomplet, rendu animé procédural conservé en course."
+      ]
+    },
+    "ripley-prison-climb-a": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-climb-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 986,
+        "h": 1594
+      },
+      "pivot": {
+        "x": 490,
+        "y": 1565
+      },
+      "world": {
+        "w": 71.2465,
+        "h": 115.1794
+      },
+      "facing": "right",
+      "state": "climb-frame",
+      "sha256": "af6533431a7e98c837651271dcef8711db5e3a4d2735b34a25a59f426f57c9e0",
+      "bytes": 854856,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Pose de grimpe isolée au catalogue ; seconde phase rejetée pour appuis identiques, rendu procédural animé conservé."
+      ]
+    },
+    "ripley-prison-jump": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-jump.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1536,
+        "h": 1024
+      },
+      "pivot": {
+        "x": 740,
+        "y": 982
+      },
+      "world": {
+        "w": 133.2163,
+        "h": 88.8109
+      },
+      "facing": "right",
+      "state": "jump",
+      "sha256": "71119e557be0a9eb10662590b935449ab67e75b612eda53b8e30f88c8dcd6b66",
+      "bytes": 1573681,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Pose aérienne unique, sans phases distinctes de décollage et de réception."
+      ]
+    },
+    "dillon-walk-a": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/dillon-walk-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1199,
+        "h": 1312
+      },
+      "pivot": {
+        "x": 650,
+        "y": 1284
+      },
+      "world": {
+        "w": 95.958,
+        "h": 105.0016
+      },
+      "facing": "right",
+      "state": "walk-frame",
+      "sha256": "dde10467a0ad1fb3c3805764c6e39e264269bcbbbfb06adecc8d23c3898b270b",
+      "bytes": 1613599,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": []
+    },
+    "dillon-walk-b": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/dillon-walk-b.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1199,
+        "h": 1312
+      },
+      "pivot": {
+        "x": 638,
+        "y": 1285
+      },
+      "world": {
+        "w": 97.549,
+        "h": 106.7425
+      },
+      "facing": "right",
+      "state": "walk-frame",
+      "sha256": "ad07c2b8451526028e7813478196f44ed7db4877cfc0a44ec7e4e7a6e1adf981",
+      "bytes": 1082812,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": []
+    },
+    "morse-walk-a": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/morse-walk-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 547,
+        "y": 1511
+      },
+      "world": {
+        "w": 67.7139,
+        "h": 101.5709
+      },
+      "facing": "right",
+      "state": "walk-frame",
+      "sha256": "9ac48ffb730e76ffb3ee23baf9187fa61bfc759959eaeff7db063bb7ea7938ad",
+      "bytes": 2240315,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": []
+    },
+    "morse-walk-b": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/morse-walk-b.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 516,
+        "y": 1513
+      },
+      "world": {
+        "w": 69.0027,
+        "h": 103.504
+      },
+      "facing": "right",
+      "state": "walk-frame",
+      "sha256": "f1d84d58c9cd8bade16e9f9cfe982a6cea93693d966e9f52686f986972de1062",
+      "bytes": 1922187,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": []
+    },
+    "ripley-prison-walk": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-walk-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 986,
+        "h": 1594
+      },
+      "pivot": {
+        "x": 477,
+        "y": 1499
+      },
+      "world": {
+        "w": 69.4568,
+        "h": 112.2861
+      },
+      "facing": "right",
+      "state": "walk",
+      "sha256": "c08f45541bd3cc732fe018f5b0ae01b68573c1da8bd651e6c17c0203dd84edbc",
+      "bytes": 918090,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Cycle de deux poses clés ; transitions intermédiaires non produites."
+      ],
+      "fps": 6,
+      "frames": [
+        {
+          "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-walk-a.png",
+          "x": 0,
+          "y": 0,
+          "w": 986,
+          "h": 1594,
+          "pivot": {
+            "x": 477,
+            "y": 1499
+          },
+          "world": {
+            "w": 69.4568,
+            "h": 112.2861
+          },
+          "sha256": "c08f45541bd3cc732fe018f5b0ae01b68573c1da8bd651e6c17c0203dd84edbc"
+        },
+        {
+          "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-walk-b.png",
+          "x": 0,
+          "y": 0,
+          "w": 986,
+          "h": 1594,
+          "pivot": {
+            "x": 477,
+            "y": 1541
+          },
+          "world": {
+            "w": 66.5104,
+            "h": 107.5229
+          },
+          "sha256": "8cf1f89af25b1918a86dc24e997d2d2f7f49118261e12c4d9b193f09145c2cb9"
+        }
+      ]
+    },
+    "ripley-prison-run": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-run-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1312,
+        "h": 1199
+      },
+      "pivot": {
+        "x": 626,
+        "y": 1182
+      },
+      "world": {
+        "w": 94.6804,
+        "h": 86.5258
+      },
+      "facing": "right",
+      "state": "run",
+      "sha256": "8f0cc7d188896981c92876b4c95e78adcad9fce470189c1095921f6387effd7e",
+      "bytes": 873274,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Cycle de deux poses clés ; transitions intermédiaires non produites."
+      ],
+      "fps": 8,
+      "frames": [
+        {
+          "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-run-a.png",
+          "x": 0,
+          "y": 0,
+          "w": 1312,
+          "h": 1199,
+          "pivot": {
+            "x": 626,
+            "y": 1182
+          },
+          "world": {
+            "w": 94.6804,
+            "h": 86.5258
+          },
+          "sha256": "8f0cc7d188896981c92876b4c95e78adcad9fce470189c1095921f6387effd7e"
+        },
+        {
+          "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-run-b.png",
+          "x": 0,
+          "y": 0,
+          "w": 1312,
+          "h": 1199,
+          "pivot": {
+            "x": 661,
+            "y": 1182
+          },
+          "world": {
+            "w": 95.6667,
+            "h": 87.4271
+          },
+          "sha256": "a3b64ebabe95b429baea41b2be0f88ff61232f7cc9106b224b65991b650390f5"
+        }
+      ]
+    },
+    "runner-walk": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/runner-prowl.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1983,
+        "h": 793
+      },
+      "pivot": {
+        "x": 1145,
+        "y": 720
+      },
+      "world": {
+        "w": 292.6248,
+        "h": 117.0204
+      },
+      "facing": "right",
+      "state": "walk",
+      "sha256": "18f91c0958876a06c00a5ee613bfd8cec3f6d3bed5c645b15e420adffa60cb57",
+      "bytes": 1057406,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Cycle de deux poses clés ; transitions intermédiaires non produites.",
+        "La pose de contact réutilise explicitement runner-prowl ; pas de duplication du PNG."
+      ],
+      "fps": 6,
+      "frames": [
+        {
+          "src": "assets/openai/sprites/alien3-fiorina-v115/runner-prowl.png",
+          "x": 0,
+          "y": 0,
+          "w": 1983,
+          "h": 793,
+          "pivot": {
+            "x": 1145,
+            "y": 720
+          },
+          "world": {
+            "w": 292.6248,
+            "h": 117.0204
+          },
+          "sha256": "18f91c0958876a06c00a5ee613bfd8cec3f6d3bed5c645b15e420adffa60cb57"
+        },
+        {
+          "src": "assets/openai/sprites/alien3-fiorina-v115/runner-walk-b.png",
+          "x": 0,
+          "y": 0,
+          "w": 1983,
+          "h": 793,
+          "pivot": {
+            "x": 1145,
+            "y": 699
+          },
+          "world": {
+            "w": 292.6248,
+            "h": 117.0204
+          },
+          "sha256": "964e5eb301082fc1361b651a1a48811159f61f4ddb5542323569677193af11b9"
+        }
+      ]
+    },
+    "dillon-walk": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/dillon-walk-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1199,
+        "h": 1312
+      },
+      "pivot": {
+        "x": 650,
+        "y": 1284
+      },
+      "world": {
+        "w": 95.958,
+        "h": 105.0016
+      },
+      "facing": "right",
+      "state": "walk",
+      "sha256": "dde10467a0ad1fb3c3805764c6e39e264269bcbbbfb06adecc8d23c3898b270b",
+      "bytes": 1613599,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Deux poses : contact et passage ; demi-cycle sommaire, sans seconde alternance complète des membres."
+      ],
+      "fps": 6,
+      "frames": [
+        {
+          "src": "assets/openai/sprites/alien3-fiorina-v115/dillon-walk-a.png",
+          "x": 0,
+          "y": 0,
+          "w": 1199,
+          "h": 1312,
+          "pivot": {
+            "x": 650,
+            "y": 1284
+          },
+          "world": {
+            "w": 95.958,
+            "h": 105.0016
+          },
+          "sha256": "dde10467a0ad1fb3c3805764c6e39e264269bcbbbfb06adecc8d23c3898b270b"
+        },
+        {
+          "src": "assets/openai/sprites/alien3-fiorina-v115/dillon-walk-b.png",
+          "x": 0,
+          "y": 0,
+          "w": 1199,
+          "h": 1312,
+          "pivot": {
+            "x": 638,
+            "y": 1285
+          },
+          "world": {
+            "w": 97.549,
+            "h": 106.7425
+          },
+          "sha256": "ad07c2b8451526028e7813478196f44ed7db4877cfc0a44ec7e4e7a6e1adf981"
+        }
+      ]
+    },
+    "morse-walk": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/morse-walk-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 547,
+        "y": 1511
+      },
+      "world": {
+        "w": 67.7139,
+        "h": 101.5709
+      },
+      "facing": "right",
+      "state": "walk",
+      "sha256": "9ac48ffb730e76ffb3ee23baf9187fa61bfc759959eaeff7db063bb7ea7938ad",
+      "bytes": 2240315,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Deux poses : contact et passage ; demi-cycle sommaire, sans seconde alternance complète des membres."
+      ],
+      "fps": 6,
+      "frames": [
+        {
+          "src": "assets/openai/sprites/alien3-fiorina-v115/morse-walk-a.png",
+          "x": 0,
+          "y": 0,
+          "w": 1024,
+          "h": 1536,
+          "pivot": {
+            "x": 547,
+            "y": 1511
+          },
+          "world": {
+            "w": 67.7139,
+            "h": 101.5709
+          },
+          "sha256": "9ac48ffb730e76ffb3ee23baf9187fa61bfc759959eaeff7db063bb7ea7938ad"
+        },
+        {
+          "src": "assets/openai/sprites/alien3-fiorina-v115/morse-walk-b.png",
+          "x": 0,
+          "y": 0,
+          "w": 1024,
+          "h": 1536,
+          "pivot": {
+            "x": 516,
+            "y": 1513
+          },
+          "world": {
+            "w": 69.0027,
+            "h": 103.504
+          },
+          "sha256": "f1d84d58c9cd8bade16e9f9cfe982a6cea93693d966e9f52686f986972de1062"
+        }
+      ]
+    }
+  }
+}

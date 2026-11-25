@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-tantalus-decisions-arsenal-franchise-collier-s1-debat-bioforge-reines-arcs-20261123';
+const CACHE = 'atf-v143-tantalus-decisions-arsenal-franchise-collier-s1-debat-bioforge-reines-arcs-fiorina-sprites-v115-20261125';
 const SHELL = Object.freeze([
   '/src/dlc-menu.js',
   '/src/xeno-trials-visual-assets-v205.js',
@@ -897,6 +897,9 @@ const SHELL = Object.freeze([
   '/src/alien3-navigation-v105.js',
   '/src/alien3-operations-v107.js',
   '/src/alien3-production-v114.js',
+  '/src/alien3-production-v115.js',
+  '/src/alien3-sprites-v115.js',
+  '/assets/openai/sprites/alien3-fiorina-v115/manifest.json',
   '/src/alien3-pursuit-v105.js',
   '/src/alien3-pursuit-v106.js',
   '/src/alien3-pursuit-v109.js',

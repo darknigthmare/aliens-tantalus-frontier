@@ -12,6 +12,9 @@ import { AVP_HOST_BASELINE_20261125 as baseline, AVP_HOST_SUCCESSORS_20261125 as
   AVP_ALIENS_INCOMING_SOURCES_20261125 as aliensIncoming,
   AVP_ALIENS_JOIN_SUCCESSORS_20261125 as aliensMerge,
   ALIENS_AVP_JOIN_SUCCESSORS_20261125 as aliasesFromAliens,
+  AVP_FIORINA_SPRITES_BASELINE_20261125 as spriteBaseline,
+  AVP_FIORINA_SPRITES_SUCCESSORS_20261125 as spriteSuccessors,
+  reviewedFiorinaSpriteHostDigest20261125 as advanceSprites,
   reviewedAliensIncomingDigest20261125 as advanceAliens,
   reviewedAvpHostDigest20261125 as advance, avpHostRuntimeSources20261125 as runtimeView,
   verifyAvpHostSources20261125 as verify } from './audit-dlc-avp-2004-20261125.mjs';
@@ -98,10 +101,22 @@ const expectedQualityPaths = [
   "scripts/verify-m577-everywhere-v188.mjs",
   "src/i18n-en-catalog-v185.js"
 ];
-const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge)])];
-const firstEndpoint = path => (successors[path] || joinSuccessors[path] || qualitySuccessors[path] || aliensMerge[path]).previousSha256;
-const finalEndpoint = path => (aliensMerge[path] || qualitySuccessors[path] || joinSuccessors[path] || successors[path]).currentSha256;
-const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge) source chain/;
+const expectedSpritePaths = [
+  '.github/workflows/fiorina-native-v114.yml',
+  'package.json',
+  'scripts/build-asset-filter.mjs',
+  'scripts/build.mjs',
+  'scripts/qa-fiorina-native-v114.mjs',
+  'scripts/verify-audit-v143.mjs',
+  'scripts/verify-public-release-v86.mjs',
+  'src/game-production-runtime.js',
+  'sw.js'
+];
+const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge), ...expectedSpritePaths])];
+const firstEndpoint = path => (successors[path] || joinSuccessors[path] || qualitySuccessors[path] || aliensMerge[path] || spriteSuccessors[path]).previousSha256;
+const mergedEndpoint = path => (aliensMerge[path] || qualitySuccessors[path] || joinSuccessors[path] || successors[path])?.currentSha256;
+const finalEndpoint = path => spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
+const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites) source chain/;
 
 test('AVP published receipts remain immutable while the exact Fiorina join verifies current bytes', () => {
   assert.equal(baseline, '001a20bdc0f9f1a3c835e84d8f3c9434bc159330');
@@ -117,7 +132,7 @@ test('AVP published receipts remain immutable while the exact Fiorina join verif
   assert.deepEqual(verify(), { baselineCommit: baseline, successors: verifiedPaths.length,
     joinedSuccessors: expectedJoinPaths.length, qualitySuccessors: expectedQualityPaths.length,
     aliensMergedSuccessors: Object.keys(aliensMerge).length, aliensIncomingSuccessors: Object.keys(aliasesFromAliens).length,
-    historicalEvidenceTransferred: false });
+    spriteSuccessors: expectedSpritePaths.length, historicalEvidenceTransferred: false });
 });
 
 test('the Aliens merge joins both exact published parents and refuses any unrecorded incoming endpoint', () => {
@@ -136,7 +151,7 @@ test('the Aliens merge joins both exact published parents and refuses any unreco
       assert.equal(aliasesFromAliens[path].previousSha256, digest, path);
       assert.notEqual(aliasesFromAliens[path].currentSha256, digest, path);
       assert.throws(() => advanceAliens(path, aliasesFromAliens[path].currentSha256), /Broken published-Aliens incoming source chain/, path);
-    } else assert.equal(digest, finalEndpoint(path), 'An unchanged parent needs no invented successor: ' + path);
+    } else assert.equal(digest, mergedEndpoint(path), 'An unchanged historical parent needs no invented merge successor: ' + path);
   }
   for (const [path, receipt] of Object.entries(aliensMerge)) {
     const published = qualitySuccessors[path] || joinSuccessors[path] || successors[path];
@@ -210,7 +225,7 @@ test('both historical chains reach the merged sources without rewriting either j
   }
 });
 
-test('runtime views accept only recorded baseline, AVP, join, quality or final merge endpoints', () => {
+test('runtime views accept only recorded baseline, AVP, join, quality, merge or sprite endpoints', () => {
   const predecessor = Object.fromEntries(verifiedPaths.map(path => [path, firstEndpoint(path)]));
   const publishedAvp = Object.fromEntries(verifiedPaths.map(path => [path, successors[path]?.currentSha256 || firstEndpoint(path)]));
   const joined = Object.fromEntries(verifiedPaths.map(path => [path, joinSuccessors[path]?.currentSha256 || successors[path]?.currentSha256 || firstEndpoint(path)]));
@@ -255,5 +270,37 @@ test('the actual terminal imports no audit and cannot admit its own bytes', () =
   assert.equal(Object.hasOwn(aliensMerge, audit), false);
   assert.equal(Object.hasOwn(aliasesFromAliens, audit), false);
   assert.equal(Object.hasOwn(aliensIncoming, audit), false);
+  assert.equal(Object.hasOwn(spriteSuccessors, audit), false);
   assert.doesNotMatch(source, /from\s+['"].*audit-/);
+});
+
+
+test('the V115 sprite host stage pins exactly its reviewed continuation changes', () => {
+  assert.equal(spriteBaseline, 'b89dc6ba47ee1ca90de29f3ccff47ddfe699d2d9');
+  assert.deepEqual(Object.keys(spriteSuccessors).sort(), [...expectedSpritePaths].sort());
+  assert.equal(sha(JSON.stringify(spriteSuccessors)), '9439407be7bf7587f66811d397d9d8e715e4087d4aed780abd776f532167be9a');
+  assert.ok(Object.isFrozen(spriteSuccessors));
+  for (const [path, receipt] of Object.entries(spriteSuccessors)) {
+    assert.ok(Object.isFrozen(receipt), path);
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256'], path);
+    assert.notEqual(receipt.previousSha256, receipt.currentSha256, path);
+    if (mergedEndpoint(path)) assert.equal(receipt.previousSha256, mergedEndpoint(path), path);
+    assert.equal(sha(read(path)), receipt.currentSha256, path);
+    assert.equal(advanceSprites(path, receipt.previousSha256), receipt.currentSha256, path);
+  }
+  assert.equal(Object.hasOwn(spriteSuccessors, audit), false);
+});
+
+test('the sprite stage rejects wrong or repeated predecessors and both parents reach its endpoint', () => {
+  for (const [path, receipt] of Object.entries(spriteSuccessors)) {
+    for (const value of [receipt.currentSha256, '0'.repeat(64), undefined])
+      assert.throws(() => advanceSprites(path, value), /Broken published-merge-to-Fiorina-sprites source chain/, path);
+    assert.equal(advance(path, firstEndpoint(path)), receipt.currentSha256, path);
+    if (Object.hasOwn(aliensIncoming, path))
+      assert.equal(advanceAliens(path, aliensIncoming[path]), receipt.currentSha256, path);
+    assert.deepEqual(runtimeView({ [path]: receipt.previousSha256 }), { [path]: receipt.currentSha256 });
+    assert.deepEqual(runtimeView({ [path]: receipt.currentSha256 }), { [path]: receipt.currentSha256 });
+  }
+  for (const path of ['src/unreviewed.js', 'src/game-production-runtime.js/extra', '__proto__', 'constructor', audit])
+    assert.equal(advanceSprites(path, 'unchanged'), 'unchanged', path);
 });

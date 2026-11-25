@@ -1,4 +1,5 @@
 import { verifyAvpBundle } from './build-dlc-avp-2004.mjs';
+import { verifyFiorinaSpriteAdmissionsV115 } from './public-fiorina-sprite-admissions-v115.mjs';
 import { verifyXenoVisualAdmissionsV205 } from './public-xeno-visual-admissions-v205.mjs';
 import { buildAliens1986Dlc } from './build-aliens1986-dlc.mjs';
 import { verifyXenoPriorityAdmissionsV204 } from './public-xeno-priority-admissions-v204.mjs';
@@ -31,6 +32,7 @@ import { verifyPublicAdmissionsV122 } from './public-release-admissions-v122.mjs
 import { verifyPublicAdmissionsV123 } from './public-release-admissions-v123.mjs';
 
 const root = process.cwd();
+await verifyFiorinaSpriteAdmissionsV115(root);
 await verifyAvpBundle(root);
 await verifyPublicAdmissionsV163(root);
 await verifyXenoSpriteAdmissionsV188(root);
@@ -111,6 +113,7 @@ await verifyPublicAdmissionsV119(output, { strict: true });
 await verifyPublicAdmissionsV120(output, { strict: true });
 await verifyPublicAdmissionsV121(output, { strict: true });
 await verifyPublicAdmissionsV122(output, { strict: true });
+await verifyFiorinaSpriteAdmissionsV115(output);
 console.log(`Built ${RELEASE.name} ${RELEASE.version} with ${Object.values(validation.counts).reduce((a, b) => a + b, 0)} catalog entries.`);
 
 await verifyXenoSpriteAdmissionsV188(output);
