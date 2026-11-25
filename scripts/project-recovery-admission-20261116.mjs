@@ -6,9 +6,9 @@ import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 export const PROJECT_RECOVERY_ROOT_20261116 = 'archives/project-recovery-20261116';
-export const PROJECT_RECOVERY_MANIFEST_20261116 = `${PROJECT_RECOVERY_ROOT_20261116}/predator/MANIFEST.json`;
+export const PROJECT_RECOVERY_MANIFEST_20261116 = `${PROJECT_RECOVERY_ROOT_20261116}/MANIFEST.json`;
 // Updated only after the complete import and its manifest have been reviewed.
-export const PROJECT_RECOVERY_MANIFEST_SHA256_20261116 = 'e08ff5d1564bae543cf88f825c0cd8f041f9c91dc3664e66158af522bf4d6f06';
+export const PROJECT_RECOVERY_MANIFEST_SHA256_20261116 = '933d2c3fd212315c8dbd689fdc2784d881eb7a4907e11f8e560361ee80d498e9';
 export const PROJECT_RECOVERY_TOOLS_20261116 = Object.freeze([
   'scripts/project-recovery-admission-20261116.mjs',
   'scripts/verify-project-recovery-admission-20261116.mjs',

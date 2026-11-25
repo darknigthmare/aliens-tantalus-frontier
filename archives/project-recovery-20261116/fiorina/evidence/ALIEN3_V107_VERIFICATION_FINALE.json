@@ -1,0 +1,131 @@
+{
+  "ok": true,
+  "schema": 107,
+  "archive": {
+    "ok": true,
+    "manifestFiles": 320,
+    "archive": "ALIEN3_FIORINA_V107_MANOEUVRES_SOUS_TENSION_SUR_V106.zip",
+    "bytes": 63597730,
+    "sha256": "4d08047711cbac05ea2fec80587834de5c8a50d1daa1a2337cd8c8adda203fe8"
+  },
+  "integrityBeforeTestExecution": {
+    "ok": true,
+    "manifestFiles": 320,
+    "missing": [],
+    "extra": [],
+    "badHashes": []
+  },
+  "freshExtractionTests": [
+    {
+      "group": "trap",
+      "assertions": 12,
+      "ok": true,
+      "scope": "Actual V107 modules in the simplified local host; neither full native game nor film campaign certified"
+    },
+    {
+      "group": "work",
+      "assertions": 20,
+      "ok": true,
+      "scope": "Actual shared V107 runtime with simplified bench. Traversal/key/pointer tests separate from directed wound. No full native campaign claimed."
+    },
+    {
+      "group": "unit",
+      "cases": 56,
+      "ok": true
+    },
+    {
+      "group": "installation",
+      "cases": 19,
+      "ok": true
+    },
+    {
+      "group": "codex",
+      "tests": 27,
+      "ok": true
+    },
+    {
+      "group": "ordinaryHtml",
+      "tests": 8,
+      "ok": true
+    },
+    {
+      "group": "unitV104Isolated",
+      "cases": 37,
+      "ok": true
+    },
+    {
+      "group": "unitV105Isolated",
+      "cases": 65,
+      "ok": true
+    },
+    {
+      "group": "unitV106Isolated",
+      "cases": 47,
+      "ok": true
+    }
+  ],
+  "nativeScreenshotsReproduced": 11,
+  "referenceScreenshots": 17,
+  "allReproducedIdentical": true,
+  "screenshots": [
+    {
+      "file": "qa-v107/captures/06_attente_postes.png",
+      "identical": true,
+      "sha256": "3b97bc1e9f3d0cbea4e85cf3c0f43e6efb227910958fc9fe74aa6a031b455255"
+    },
+    {
+      "file": "qa-v107/captures/06b_verrouillage.png",
+      "identical": true,
+      "sha256": "3523f19d1b2a1c523cbc3d6eef0087f8e531ddf8a6327d54fee040a3bfb19404"
+    },
+    {
+      "file": "qa-v107/captures/07_postes_tenus.png",
+      "identical": true,
+      "sha256": "eefe4cf7e11c0d64c25e73454bd08c75cad87eee435b725aa4fda931cdf86252"
+    },
+    {
+      "file": "qa-v107/captures/08_attaque_annoncee.png",
+      "identical": true,
+      "sha256": "251e3d2cab230a3ec5525dd386fe1e2d64350b5832ecd0d30abf692a28b3ff84"
+    },
+    {
+      "file": "qa-v107/captures/09_coulee.png",
+      "identical": true,
+      "sha256": "59abb1a6f595dfe56b5f6077ffa05f1ed689579cc41be813fed5b3e807562685"
+    },
+    {
+      "file": "qa-v107/captures/10_refroidissement.png",
+      "identical": true,
+      "sha256": "4e6820cf23e60bf882126c85e39398cfc61912801749e421c5c728fbbfaa8623"
+    },
+    {
+      "file": "qa-v107/captures/11_retour_morse.png",
+      "identical": true,
+      "sha256": "1f4a0e889bfe4665ecee54a7a054fe54527be271cb16c9024dce617510c71951"
+    },
+    {
+      "file": "qa-v107/captures/13_amorcage.png",
+      "identical": true,
+      "sha256": "edc2129ad6f7e980b92311949304e8ce3134b19d72dccbb3657df1c6b2dec745"
+    },
+    {
+      "file": "qa-v107/captures/14_plan_pendant_preparation.png",
+      "identical": true,
+      "sha256": "efe1bc82e7b02b79c2e6efb392b11e715d47f056b4fee1f88780bd343306a6bc"
+    },
+    {
+      "file": "qa-v107/captures/15_commande_appuyer.png",
+      "identical": true,
+      "sha256": "2a0a88f16de0b4ea811b4683d6b20075c6f9b23025d6df705fe47f41a3a8a080"
+    },
+    {
+      "file": "qa-v107/captures/16_interruption_blessure.png",
+      "identical": true,
+      "sha256": "cd6634383bd7e2ac80e596fadb9634b3bbf2cd43e17f4c07c9f7abd99035a564"
+    }
+  ],
+  "standaloneBuildReproducible": true,
+  "productionBuildExecuted": false,
+  "deploymentExecuted": false,
+  "scope": "Exact ZIP bytes extracted. Fresh unit/install tests, complete trap traversal, gesture/interrupt/accessibility checks, ordinary HTML and codex. Eleven of seventeen native captures reproduced. Profiles/resume/failure/audio/layout earlier exercised on the identical module hashes, not all rerun after extraction."
+}

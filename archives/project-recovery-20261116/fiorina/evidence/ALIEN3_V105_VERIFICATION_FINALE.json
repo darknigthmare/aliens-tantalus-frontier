@@ -1,0 +1,133 @@
+{
+  "ok": true,
+  "archive": "ALIEN3_FIORINA_V105_TRAQUES_PREPARATIFS_SUR_V104.zip",
+  "bytes": 27635609,
+  "sha256": "0241e3ff93b4418749e9bde32194881c3da377c9a001bcd2fc02e41a10fa71a9",
+  "verifiedManifestFiles": 161,
+  "missing": [],
+  "extra": [],
+  "badHashes": [],
+  "nativeBuildExecuted": false,
+  "postExtraction": {
+    "unitV105": 65,
+    "installerV105": 17,
+    "oldV104Unit": 37,
+    "oldV104Installer": 15,
+    "browserTrapControls": 11,
+    "deliveredNormalHtml": 7,
+    "codex": 15,
+    "identicalReproducedCaptures": [
+      {
+        "file": "qa-v105/captures/06_attente_morse.png",
+        "sameBytes": true
+      },
+      {
+        "file": "qa-v105/captures/07_postes_tenus.png",
+        "sameBytes": true
+      },
+      {
+        "file": "qa-v105/captures/08_attaque_annoncee.png",
+        "sameBytes": true
+      },
+      {
+        "file": "qa-v105/captures/09_coulee.png",
+        "sameBytes": true
+      },
+      {
+        "file": "qa-v105/captures/10_refroidissement.png",
+        "sameBytes": true
+      },
+      {
+        "file": "qa-v105/captures/11_retour_morse.png",
+        "sameBytes": true
+      }
+    ],
+    "syntax": {
+      "checked": 42,
+      "errors": 0
+    },
+    "transparentExports": [
+      {
+        "file": "furnace.png",
+        "transparent": true,
+        "size": [
+          256,
+          224
+        ]
+      },
+      {
+        "file": "runner-poses.png",
+        "transparent": true,
+        "size": [
+          5120,
+          128
+        ]
+      },
+      {
+        "file": "dillon-poses.png",
+        "transparent": true,
+        "size": [
+          768,
+          120
+        ]
+      },
+      {
+        "file": "ripley-poses.png",
+        "transparent": true,
+        "size": [
+          768,
+          120
+        ]
+      },
+      {
+        "file": "cell.png",
+        "transparent": true,
+        "size": [
+          256,
+          224
+        ]
+      },
+      {
+        "file": "aaron-poses.png",
+        "transparent": true,
+        "size": [
+          768,
+          120
+        ]
+      },
+      {
+        "file": "morse-poses.png",
+        "transparent": true,
+        "size": [
+          768,
+          120
+        ]
+      },
+      {
+        "file": "mold.png",
+        "transparent": true,
+        "size": [
+          256,
+          224
+        ]
+      },
+      {
+        "file": "eev.png",
+        "transparent": true,
+        "size": [
+          256,
+          224
+        ]
+      },
+      {
+        "file": "pump.png",
+        "transparent": true,
+        "size": [
+          256,
+          224
+        ]
+      }
+    ]
+  },
+  "clarification": "All six browser groups were run before packaging; the complete trap route, normal shipped HTML and codex were rerun from the final extraction. Other browser groups were not rerun again after extraction."
+}

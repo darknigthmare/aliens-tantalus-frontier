@@ -110,7 +110,9 @@
     "test:trials:priorities:v203": "node --test scripts/verify-xeno-trials-priority-actions-v203.mjs scripts/verify-xeno-trials-defense-v203.mjs scripts/verify-xeno-trials-extraction-presentation-v203.mjs scripts/verify-xeno-priorities-audit-v203.mjs",
     "test:trials:priorities:v204": "node --test scripts/verify-xeno-trials-priority-actions-v204.mjs scripts/verify-xeno-trials-defense-v204.mjs scripts/verify-xeno-trials-purge-presentation-v204.mjs scripts/verify-xeno-priorities-audit-v204.mjs",
     "test:trials:visuals:v205": "node --test scripts/verify-xeno-trials-visual-assets-v205.mjs scripts/verify-xeno-visual-assets-audit-v205.mjs",
-    "test:trials:production:v206": "node --test scripts/verify-xeno-production-assets-v206.mjs"
+    "test:trials:production:v206": "node --test scripts/verify-xeno-production-assets-v206.mjs",
+    "test:fiorina": "node --test scripts/verify-fiorina-production-v114.mjs",
+    "qa:fiorina": "node scripts/qa-fiorina-native-v114.mjs"
   },
   "engines": {
     "node": ">=22"

@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "archive": "ALIEN3_FIORINA_V106_TRACES_PENOMBRE_SUR_V105.zip",
+  "bytes": 45056353,
+  "sha256": "110f9b9f120104919e4b0affa634e6df587b4fd1e154d538755771a068f165aa",
+  "manifestFilesInitiallyVerified": 239,
+  "missing": 0,
+  "unexpected": 0,
+  "incorrectHashes": 0,
+  "replayedFromFreshExtraction": {
+    "unitV106": 47,
+    "installationV106": 18,
+    "unitV105": 65,
+    "installationV105": 17,
+    "unitV104": 37,
+    "installationV104": 15,
+    "browserTrapAssertions": 11,
+    "browserNewSensesAssertions": 14,
+    "deliveredHTMLAssertions": 7,
+    "codexAssertions": 20
+  },
+  "reproducedNativeCaptures": [
+    {
+      "file": "qa-v106/captures/06_attente_morse.png",
+      "identical": true,
+      "sha256": "edb71e1f61d3a718d8fd07536c6cf14df253633e92c00ead602925564f316a0a"
+    },
+    {
+      "file": "qa-v106/captures/07_postes_tenus.png",
+      "identical": true,
+      "sha256": "b6d8756f748700b29a2b34dbd378fb4b0c8a2f3fa5384c327ea76e0374063ad6"
+    },
+    {
+      "file": "qa-v106/captures/08_attaque_annoncee.png",
+      "identical": true,
+      "sha256": "787e3560a5876a780c522d1414b853262d9d568658dcab798ec692af2067dabd"
+    },
+    {
+      "file": "qa-v106/captures/09_coulee.png",
+      "identical": true,
+      "sha256": "5966357137ac34dd63b747650261ce4fc3827e45f520b2d21ca783dcbc99a403"
+    },
+    {
+      "file": "qa-v106/captures/10_refroidissement.png",
+      "identical": true,
+      "sha256": "7d4888c756c300bbd524edd60fe1cac78d8730533daf501c5774ee8b54e823d7"
+    },
+    {
+      "file": "qa-v106/captures/11_retour_morse.png",
+      "identical": true,
+      "sha256": "884a9d52ddae745d72c936fadc4f9d4c0e7e5782acc109bb9ea006707376f334"
+    },
+    {
+      "file": "qa-v106/captures/13_lampe_allumee.png",
+      "identical": true,
+      "sha256": "fc5c56be49b3a30f8e66236a479cfd2c7109e58d42c0ee763b6b5551a54a6d6f"
+    },
+    {
+      "file": "qa-v106/captures/14_lampe_eteinte.png",
+      "identical": true,
+      "sha256": "fb7285d816063fa47087ff916fe973808cc810c943a49e407bad28d23075a5c4"
+    },
+    {
+      "file": "qa-v106/captures/15_dillon_attend.png",
+      "identical": true,
+      "sha256": "4a1521cc06fe52af4061261b866f95de01afaf6f10cbe253c0df76c9a5f14fa6"
+    },
+    {
+      "file": "qa-v106/captures/16_dillon_repart.png",
+      "identical": true,
+      "sha256": "136261a3dd18a8aa19f13f977e24be83c22dbb5f4737422cda00c60a4ece2437"
+    }
+  ],
+  "totalNativeCapturesInReport": 16,
+  "productionNativeBuild": false,
+  "scope": "Manifest verified before running tests. Replay changes test logs in the verification directory only, never the delivered ZIP. Ten native captures were reproduced byte-for-byte, not all 16."
+}
