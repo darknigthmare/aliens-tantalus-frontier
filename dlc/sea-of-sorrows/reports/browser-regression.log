@@ -1,0 +1,53 @@
+02:52:22 PASS Le vrai HTML démarre : titre, boutons, aucune exception
+CAPTURE 01_menu.png
+02:52:23 PASS Réduction du mouvement et contraste activés depuis les réglages
+02:52:23 PASS Le réglage de lumière atteint le moteur de rendu
+02:52:24 PASS Nouvelle partie lancée par les commandes visibles
+02:52:24 PASS Déplacement clavier réel dans le moteur
+CAPTURE 02_depart.png
+02:52:25 PASS HUD et bandeau mission hors de la surface jouable
+02:52:25 PASS Une porte change réellement de salle via E
+02:52:26 PASS E maintenu remplit le travail sans validation instantanée
+02:52:26 PASS Le menu Pause stoppe effectivement le temps de simulation
+02:52:27 PASS Navigation clavier piégée dans le dialogue actif
+02:52:27 PASS Reprendre ne conserve pas une touche E fantôme
+02:52:30 PASS Prélèvement accompli après la durée d’action
+02:52:30 PASS Le dialogue narratif interrompt lui aussi la simulation
+02:52:30 PASS Autosauvegarde écrite dans la fixture explicite
+02:52:31 PASS Carte de secteur accessible
+02:52:31 PASS Plan local fondé sur les vraies emprises
+CAPTURE 03_plan_local.png
+02:52:31 PASS Recherche fonctionnelle dans les dossiers débloqués
+02:52:32 PASS F6 change la présentation et conserve la progression
+02:52:32 PASS Reprise depuis les données réellement sauvegardées
+02:52:32 PASS Les données du jeu hôte ne sont pas modifiées
+02:52:33 PASS Migration 0.1→0.5 via le bouton Reprendre
+02:52:33 PASS Copie de secours 0.1 conservée avant la nouvelle écriture
+02:52:33 PASS L’équipement possède des commandes utilisables
+02:52:34 PASS Soigner et remplacer depuis le menu consomment les réserves
+CAPTURE 04_equipement.png
+02:52:34 PASS La lampe peut être éteinte au clavier
+02:52:34 PASS Un leurre lancé crée une source sonore et coûte une charge
+02:52:35 PASS Le viseur reconnaît le corps du xénomorphe
+02:52:35 PASS Cliquer le corps produit un vrai dégât sur sa profondeur
+02:52:38 PASS Les 46 salles sont rendues dans les deux présentations
+CAPTURE 05_pompes.png
+CAPTURE 06_tubes.png
+CAPTURE 07_reine.png
+02:52:41 PASS B immobilise les deux brancards
+02:52:41 PASS B relance un suivi physique mesurable
+CAPTURE 08_convoi.png
+02:52:42 PASS L’état des deux châssis est visible hors du terrain
+02:52:46 PASS Arrimage réalisé par E maintenu dans la soute
+02:52:46 PASS Capture après arrimage, mousse réelle et validation clavier
+CAPTURE 09_capture.png
+02:52:47 PASS Erreur de stockage annoncée sans faux succès
+02:52:47 PASS Titre accessible en 390 × 844
+02:52:47 PASS Commandes tactiles de base présentes
+02:52:47 PASS Pas de débordement horizontal global en format étroit
+CAPTURE 10_format_etroit.png
+02:52:48 PASS Équipement accessible sur écran étroit
+CAPTURE 11_equipement_etroit.png
+02:52:48 PASS Aucune exception JavaScript pendant les contrôles
+02:52:48 PASS Le HTML autonome ne demande aucune ressource réseau
+RESULT 41 0

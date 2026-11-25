@@ -1,0 +1,155 @@
+{
+  "version": "0.8.0",
+  "html_sha256": "685bb5f448f594cef7c18f84136f31434598cbbdf43d178666617c5ab814ff76",
+  "checks": [
+    {
+      "name": "Version 0.8 / schéma 8 / 116 dossiers réellement chargés",
+      "pass": true
+    },
+    {
+      "name": "La commande Manette du titre ouvre le guide",
+      "pass": true
+    },
+    {
+      "name": "O ouvre une roue de huit commandes avec trois onglets",
+      "pass": true
+    },
+    {
+      "name": "La roue est une vraie pause, horloge stable",
+      "pass": true
+    },
+    {
+      "name": "Les armes non reçues restent indisponibles",
+      "pass": true
+    },
+    {
+      "name": "Cliquer une action indisponible ne ferme ni ne fournit une arme",
+      "pass": true
+    },
+    {
+      "name": "Échap referme seulement la roue",
+      "pass": true
+    },
+    {
+      "name": "La roue expose les ordres et les trois outils de travail",
+      "pass": true
+    },
+    {
+      "name": "Les menus de lecture sont accessibles dans la troisième page",
+      "pass": true
+    },
+    {
+      "name": "Le panneau capteurs affiche trois appareils distincts",
+      "pass": true
+    },
+    {
+      "name": "Les appareils rangés ne peuvent pas être activés à distance",
+      "pass": true
+    },
+    {
+      "name": "P pose physiquement un appareil récupéré pendant le parcours",
+      "pass": true
+    },
+    {
+      "name": "Une veille active consomme du temps de batterie",
+      "pass": true
+    },
+    {
+      "name": "La pause arrête aussi la consommation du capteur",
+      "pass": true
+    },
+    {
+      "name": "La coupure depuis la fiche atteint la simulation",
+      "pass": true
+    },
+    {
+      "name": "Une veille coupée ne consomme pas quand le jeu reprend",
+      "pass": true
+    },
+    {
+      "name": "P récupère sur place sans recharger",
+      "pass": true
+    },
+    {
+      "name": "Le plan local contient le capteur, pas un nouveau symbole ennemi",
+      "pass": true
+    },
+    {
+      "name": "Le dernier scan reçu est conservé dans la sauvegarde distante",
+      "pass": true
+    },
+    {
+      "name": "Une observation montre son heure, pas une identité de créature",
+      "pass": true
+    },
+    {
+      "name": "Choisir Cloison sélectionne un outil sans ouvrir instantanément",
+      "pass": true
+    },
+    {
+      "name": "E maintenu fait réellement progresser la manœuvre sélectionnée",
+      "pass": true
+    },
+    {
+      "name": "La cloison s’ouvre seulement au bout de sa durée",
+      "pass": false
+    }
+  ],
+  "passed": 22,
+  "failed": 2,
+  "fatal": "La cloison s’ouvre seulement au bout de sa durée",
+  "errors": [],
+  "requests": [],
+  "captures": [
+    {
+      "file": "01_roue_equipe.png",
+      "caption": "Roue Équipe sur un état gagné du parcours Hybride / Survie. Simulation figée.",
+      "source": "HYBRID-survival-08",
+      "source_sha256": "ed80f15dfb78c4d594a4fb586a7bc5840249284038dce832f065c61ad938c02f",
+      "image_sha256": "36f945cd347b223c6b472914b26b2c8145eb96597b44f6977f4ce7d43738e51f",
+      "state_sha256": "bc3e96e91e6537f7c1a862262258280efb495167e46511374cfa91e68006c9e6"
+    },
+    {
+      "file": "02_roue_materiel.png",
+      "caption": "Onglet Matériel. Les entrées indisponibles restent visibles mais ne donnent aucune ressource.",
+      "source": "HYBRID-survival-08",
+      "source_sha256": "ed80f15dfb78c4d594a4fb586a7bc5840249284038dce832f065c61ad938c02f",
+      "image_sha256": "d48b06dfbf1279bb64abfef23c8650890ed0c9b35384abbfa69d739f259fd455",
+      "state_sha256": "bc3e96e91e6537f7c1a862262258280efb495167e46511374cfa91e68006c9e6"
+    },
+    {
+      "file": "03_capteur_pose.png",
+      "caption": "Capteur posé avec la commande normale pendant le parcours, dans la tranchée. Position inchangée.",
+      "source": "sensor-deployed",
+      "source_sha256": "710c79dce593c1533f3a03822534afea2e9efd73223265841a533764efa166b7",
+      "image_sha256": "8979f0b077529e27d9d88a4ad82abf317714237762527ebe1c30b7b96cd6f96c",
+      "state_sha256": "1edc6491d0d1399eda90941b1d0e8e831d9d2323fa5e54af323e33b3e609fe53"
+    },
+    {
+      "file": "04_plan_capteur.png",
+      "caption": "Plan local du matériel posé ; aucun nouvel affichage de position ennemie.",
+      "source": "sensor-deployed",
+      "source_sha256": "710c79dce593c1533f3a03822534afea2e9efd73223265841a533764efa166b7",
+      "image_sha256": "ee77d9e0d0698a1efe5a5b74a8768971d374eddf12d172989be78aa41faef6f3",
+      "state_sha256": "1edc6491d0d1399eda90941b1d0e8e831d9d2323fa5e54af323e33b3e609fe53"
+    },
+    {
+      "file": "05_liaison_distante.png",
+      "caption": "Le joueur est au belvédère, le capteur dans la tranchée. Scan réellement reçu pendant la poursuite du parcours.",
+      "source": "sensor-remote",
+      "source_sha256": "77c916fe24ed1f11189e184c941704329c19bd90f15a4da1c78acd8ca17487c5",
+      "image_sha256": "1bbb68910ea4b867c4304e5da2395bf01b598ad5fcb33afc577709a50afbb7fb",
+      "state_sha256": "5a5a1b47727e3a4cd8840391a89798f927cdf0fa4447cbc813b64631a70b792b"
+    },
+    {
+      "file": "06_veille.png",
+      "caption": "Fiche des appareils depuis le même état gagné : liaison, charge restante et heure du dernier mouvement.",
+      "source": "sensor-remote",
+      "source_sha256": "77c916fe24ed1f11189e184c941704329c19bd90f15a4da1c78acd8ca17487c5",
+      "image_sha256": "2f57234046f73b6a601c14071ba5994de361d1c088b290767036efa7024f617e",
+      "state_sha256": "5a5a1b47727e3a4cd8840391a89798f927cdf0fa4447cbc813b64631a70b792b"
+    }
+  ],
+  "storage": "Explicit in-memory fixture. Native navigation is probed separately and blocked by the environment.",
+  "controller": "Synthetic standard Gamepad objects through navigator.getGamepads; not physical hardware tests."
+}

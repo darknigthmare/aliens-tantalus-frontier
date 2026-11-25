@@ -1,0 +1,664 @@
+{
+  "schemaVersion": 1,
+  "recoveredOn": "2026-11-25",
+  "provenance": "59 fichiers preexistants de la conversation Mer des Chagrins, conserves sans modification de leurs octets.",
+  "latestRecoveredVersion": "0.10.0",
+  "laterWorkStatus": "La v0.11 mentionnee dans le suivi nest pas retrouvee parmi les fichiers disponibles.",
+  "artifactCount": 59,
+  "totalOriginalBytes": 593192706,
+  "artifacts": [
+    {
+      "originalName": "02_mixage.png",
+      "sizeBytes": 318579,
+      "sha256": "6a57fd2817bdb9ef79dc31e8ac0ae9d6617f4926d58b8cb013d0a9182dc6947a",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/captures/02_mixage.png"
+      ],
+      "originalCreatedAt": "2026-09-29T05:54:29.174033Z",
+      "originalModifiedAt": "2026-09-29T05:54:29.174033Z"
+    },
+    {
+      "originalName": "02_pompes_preavis.png",
+      "sizeBytes": 1219296,
+      "sha256": "dcfb38784651d62024e526d2a5998fe745d7e0b54316c37664c622f3ddcb1945",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/captures/02_pompes_preavis.png"
+      ],
+      "originalCreatedAt": "2026-09-29T01:44:32.814196Z",
+      "originalModifiedAt": "2026-09-29T01:44:32.814196Z"
+    },
+    {
+      "originalName": "03_seuil.png",
+      "sizeBytes": 1379526,
+      "sha256": "0a6de1a9425ab37347019b8cf9db46a1f4f194a6faaf73bc46149668b0829040",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/captures/03_seuil.png"
+      ],
+      "originalCreatedAt": "2026-09-29T03:08:08.197517Z",
+      "originalModifiedAt": "2026-09-29T03:08:08.197517Z"
+    },
+    {
+      "originalName": "04_paliers_secours.png",
+      "sizeBytes": 905313,
+      "sha256": "0fa6a836065bce7844aa3e2b31a5d65e2fda36144b10eea0c38835bb79c93153",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/captures/04_paliers_secours.png"
+      ],
+      "originalCreatedAt": "2026-09-29T04:25:20.678905Z",
+      "originalModifiedAt": "2026-09-29T04:25:20.678905Z"
+    },
+    {
+      "originalName": "04_vestiaire_ouvert.png",
+      "sizeBytes": 1374270,
+      "sha256": "ff8886bff67b0ec40bee6f0cd4afa555c12deba11e48e64146cd9f5bd0470dd6",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/captures/04_vestiaire_ouvert.png"
+      ],
+      "originalCreatedAt": "2026-09-29T05:09:37.332541Z",
+      "originalModifiedAt": "2026-09-29T05:09:37.332541Z"
+    },
+    {
+      "originalName": "05_liaison_distante.png",
+      "sizeBytes": 1383808,
+      "sha256": "1bbb68910ea4b867c4304e5da2395bf01b598ad5fcb33afc577709a50afbb7fb",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/captures/05_liaison_distante.png"
+      ],
+      "originalCreatedAt": "2026-09-29T03:47:52.836664Z",
+      "originalModifiedAt": "2026-09-29T03:47:52.836664Z"
+    },
+    {
+      "originalName": "05_tubes.png",
+      "sizeBytes": 603173,
+      "sha256": "bc1987c69b76f287d2aefa4847e91296feaca798b826a5cc71c78b7f35fbc702",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/captures/05_tubes.png"
+      ],
+      "originalCreatedAt": "2026-09-29T00:19:45.686426+00:00",
+      "originalModifiedAt": "2026-09-29T00:19:45.686426+00:00"
+    },
+    {
+      "originalName": "06_escorte_discrete.png",
+      "sizeBytes": 361112,
+      "sha256": "cbd6854bd1c6fe4eab07da0943389cf62c4dcd0990912b2079ec93ed890ae388",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/captures/06_escorte_discrete.png"
+      ],
+      "originalCreatedAt": "2026-09-29T04:25:24.914987Z",
+      "originalModifiedAt": "2026-09-29T04:25:24.914987Z"
+    },
+    {
+      "originalName": "06_perception.png",
+      "sizeBytes": 1369202,
+      "sha256": "5bbf1cd8e1c09da5f2b94bea755319b6a5303dfe73fa7ff1e93a36ba1301aeda",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/captures/06_perception.png"
+      ],
+      "originalCreatedAt": "2026-09-29T02:30:27.017868Z",
+      "originalModifiedAt": "2026-09-29T02:30:27.017868Z"
+    },
+    {
+      "originalName": "06_seuil_silencieux.png",
+      "sizeBytes": 1202097,
+      "sha256": "aed03c622697483dd0d15d6d52e338e53786fb278dc8131632a4200d41c9e178",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/captures/06_seuil_silencieux.png"
+      ],
+      "originalCreatedAt": "2026-09-29T05:54:33.515690Z",
+      "originalModifiedAt": "2026-09-29T05:54:33.515690Z"
+    },
+    {
+      "originalName": "06_transit_convoi.png",
+      "sizeBytes": 1218929,
+      "sha256": "d056b3d7703e5ec5310ee4b5741a278eaf87c1e2e25b246b6cf423f80a2614f3",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/captures/06_transit_convoi.png"
+      ],
+      "originalCreatedAt": "2026-09-29T05:09:41.953546Z",
+      "originalModifiedAt": "2026-09-29T05:09:41.953546Z"
+    },
+    {
+      "originalName": "07_replis.png",
+      "sizeBytes": 186121,
+      "sha256": "a3c4dcc939c54cf3b0e299845c7fa4ad16c32476c7bbf07bdf4d2e2103c37a15",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/captures/07_replis.png"
+      ],
+      "originalCreatedAt": "2026-09-29T03:08:12.287822Z",
+      "originalModifiedAt": "2026-09-29T03:08:12.287822Z"
+    },
+    {
+      "originalName": "08_convoi.png",
+      "sizeBytes": 1359666,
+      "sha256": "44cb8e42a8e9504ec1be7fa200b0bc495f176a32bf0edeae0844772430ca8d55",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/captures/08_convoi.png"
+      ],
+      "originalCreatedAt": "2026-09-29T01:04:30.231046+00:00",
+      "originalModifiedAt": "2026-09-29T01:04:30.231046+00:00"
+    },
+    {
+      "originalName": "08_stase.png",
+      "sizeBytes": 1296897,
+      "sha256": "7f3648b826fb7cc692b47b1e7fbce0993434d76b9077665dd3b982fa839f2a1e",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/captures/08_stase.png"
+      ],
+      "originalCreatedAt": "2026-09-29T07:08:20.884522Z",
+      "originalModifiedAt": "2026-09-29T07:08:20.884522Z"
+    },
+    {
+      "originalName": "09_convoi.png",
+      "sizeBytes": 1232534,
+      "sha256": "2371646d3cc8b336e32854f1bc893e924bc850dfd7bd5c4b59a375c388dcc7eb",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/captures/09_convoi.png"
+      ],
+      "originalCreatedAt": "2026-09-29T02:30:23.054044Z",
+      "originalModifiedAt": "2026-09-29T02:30:23.054044Z"
+    },
+    {
+      "originalName": "09_seuil_s17.png",
+      "sizeBytes": 1166330,
+      "sha256": "17e1a7e518c01f3de59b98f084eae28f8c1cca17d4b19cd9676ca3a25ae1e9b7",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/captures/09_seuil_s17.png"
+      ],
+      "originalCreatedAt": "2026-09-29T07:08:15.973620Z",
+      "originalModifiedAt": "2026-09-29T07:08:15.973620Z"
+    },
+    {
+      "originalName": "10_reparation.png",
+      "sizeBytes": 1222431,
+      "sha256": "5aa0d74b02c24ff15c53486aedba5217159a16c32bdc1c93c1bc4c0eb0df06c3",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/captures/10_reparation.png"
+      ],
+      "originalCreatedAt": "2026-09-29T01:44:37.162495Z",
+      "originalModifiedAt": "2026-09-29T01:44:37.162495Z"
+    },
+    {
+      "originalName": "ALIEN_MER_DES_CHAGRINS_v0.1.0_DLC_AUTONOME.zip",
+      "sizeBytes": 8481728,
+      "sha256": "28d0fae31df52d8b30b18c56b0ee42bcef919ece5a085a82c17c3eb0d0df8fc5",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.1.0_DLC_AUTONOME.zip.part001",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.1.0_DLC_AUTONOME.zip.part002"
+      ],
+      "originalCreatedAt": "2026-09-29T00:19:29.134164Z",
+      "originalModifiedAt": "2026-09-29T00:19:29.134164Z"
+    },
+    {
+      "originalName": "ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip",
+      "sizeBytes": 115170444,
+      "sha256": "7a2761f657d20c8c515f460df27b5701ca151aa1cd4ff1a81a7ef5b5dec6a56e",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part001",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part002",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part003",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part004",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part005",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part006",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part007",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part008",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part009",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part010",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part011",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part012",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part013",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part014"
+      ],
+      "originalCreatedAt": "2026-09-29T07:07:47.928888Z",
+      "originalModifiedAt": "2026-09-29T07:07:47.928888Z"
+    },
+    {
+      "originalName": "ALIEN_MER_DES_CHAGRINS_v0.2.0_DLC_AUTONOME.zip",
+      "sizeBytes": 11958546,
+      "sha256": "0f5a15c7b198f221639e278ea5c4c23bd4f4d77dc8a94f69e043ffa83a7b3e0d",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.2.0_DLC_AUTONOME.zip.part001",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.2.0_DLC_AUTONOME.zip.part002"
+      ],
+      "originalCreatedAt": "2026-09-29T01:04:12.992886Z",
+      "originalModifiedAt": "2026-09-29T01:04:12.992886Z"
+    },
+    {
+      "originalName": "ALIEN_MER_DES_CHAGRINS_v0.3.0_DLC_AUTONOME.zip",
+      "sizeBytes": 28916956,
+      "sha256": "aa7934ffe009aae627391321202f88a6391b853254a669b710daaf18f6dc9dcd",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.3.0_DLC_AUTONOME.zip.part001",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.3.0_DLC_AUTONOME.zip.part002",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.3.0_DLC_AUTONOME.zip.part003",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.3.0_DLC_AUTONOME.zip.part004"
+      ],
+      "originalCreatedAt": "2026-09-29T01:44:14.659682Z",
+      "originalModifiedAt": "2026-09-29T01:44:14.659682Z"
+    },
+    {
+      "originalName": "ALIEN_MER_DES_CHAGRINS_v0.4.0_DLC_AUTONOME.zip",
+      "sizeBytes": 42458559,
+      "sha256": "44ec3f786124c28f001d969c643bd0a7972450789a0dbfd744f603f47caf96d0",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.4.0_DLC_AUTONOME.zip.part001",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.4.0_DLC_AUTONOME.zip.part002",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.4.0_DLC_AUTONOME.zip.part003",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.4.0_DLC_AUTONOME.zip.part004",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.4.0_DLC_AUTONOME.zip.part005",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.4.0_DLC_AUTONOME.zip.part006"
+      ],
+      "originalCreatedAt": "2026-09-29T02:30:05.628169Z",
+      "originalModifiedAt": "2026-09-29T02:30:05.628169Z"
+    },
+    {
+      "originalName": "ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip",
+      "sizeBytes": 54393612,
+      "sha256": "62dd32eb8cef50c1605b4835c6b3c0e5accaa77a564e22dbadda893e1f82229d",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip.part001",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip.part002",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip.part003",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip.part004",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip.part005",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip.part006",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip.part007"
+      ],
+      "originalCreatedAt": "2026-09-29T03:07:48.842867Z",
+      "originalModifiedAt": "2026-09-29T03:07:48.842867Z"
+    },
+    {
+      "originalName": "ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip",
+      "sizeBytes": 59082214,
+      "sha256": "e36aa7867c7f5e57034b98d11eea452dd7fbac649dcc989321c4dc51993f9ea7",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip.part001",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip.part002",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip.part003",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip.part004",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip.part005",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip.part006",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip.part007",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip.part008"
+      ],
+      "originalCreatedAt": "2026-09-29T03:47:33.918147Z",
+      "originalModifiedAt": "2026-09-29T03:47:33.918147Z"
+    },
+    {
+      "originalName": "ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip",
+      "sizeBytes": 68083017,
+      "sha256": "6899a71d15d3fceb18f5de228d1872d7340bf3711a7b866521a45ac11a3f5695",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part001",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part002",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part003",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part004",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part005",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part006",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part007",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part008",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part009"
+      ],
+      "originalCreatedAt": "2026-09-29T04:25:02.450047Z",
+      "originalModifiedAt": "2026-09-29T04:25:02.450047Z"
+    },
+    {
+      "originalName": "ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip",
+      "sizeBytes": 79991964,
+      "sha256": "3a4f54a44b3c793b057f5d8d2f20b3779e5b956baa3eec8960ed16f8900c36e1",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part001",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part002",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part003",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part004",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part005",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part006",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part007",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part008",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part009",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part010"
+      ],
+      "originalCreatedAt": "2026-09-29T05:09:18.807427Z",
+      "originalModifiedAt": "2026-09-29T05:09:18.807427Z"
+    },
+    {
+      "originalName": "ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip",
+      "sizeBytes": 84799492,
+      "sha256": "61dc9907fc3309ff4df73b45a1349dbb07e260aa21cdd36504147b2430123714",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part001",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part002",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part003",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part004",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part005",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part006",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part007",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part008",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part009",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part010",
+        "archives/mer-des-chagrins-20261125/artifacts/archives/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part011"
+      ],
+      "originalCreatedAt": "2026-09-29T05:54:09.369390Z",
+      "originalModifiedAt": "2026-09-29T05:54:09.369390Z"
+    },
+    {
+      "originalName": "CODEX_MER_DES_CHAGRINS.html",
+      "sizeBytes": 144816,
+      "sha256": "4bd2ed1562f7695810f6c9e60d78d91fd36f72cffc34bee68fdec36c72266fae",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/CODEX_MER_DES_CHAGRINS.html"
+      ],
+      "originalCreatedAt": "2026-09-29T00:19:37.783804Z",
+      "originalModifiedAt": "2026-09-29T00:19:37.783804Z"
+    },
+    {
+      "originalName": "CODEX_MER_DES_CHAGRINS_v0.10.0.html",
+      "sizeBytes": 600455,
+      "sha256": "b4bf54529f4093c9bce6bcaa680690c530e303a0532d9f2b2e695ab0a2c70a12",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/CODEX_MER_DES_CHAGRINS_v0.10.0.html"
+      ],
+      "originalCreatedAt": "2026-09-29T07:07:58.705484Z",
+      "originalModifiedAt": "2026-09-29T07:07:58.705484Z"
+    },
+    {
+      "originalName": "CODEX_MER_DES_CHAGRINS_v0.2.0.html",
+      "sizeBytes": 207811,
+      "sha256": "ea13c9033d471edba934835c6e50cf3bf6edfa8eb6838f87c56af4bf170a7d20",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/CODEX_MER_DES_CHAGRINS_v0.2.0.html"
+      ],
+      "originalCreatedAt": "2026-09-29T01:04:22.111051Z",
+      "originalModifiedAt": "2026-09-29T01:04:22.111051Z"
+    },
+    {
+      "originalName": "CODEX_MER_DES_CHAGRINS_v0.3.0.html",
+      "sizeBytes": 306101,
+      "sha256": "fcf938644163311d0ac73a68c64da80cc7408464ccb18983ca71a735cc7c083a",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/CODEX_MER_DES_CHAGRINS_v0.3.0.html"
+      ],
+      "originalCreatedAt": "2026-09-29T01:44:23.908319Z",
+      "originalModifiedAt": "2026-09-29T01:44:23.908319Z"
+    },
+    {
+      "originalName": "CODEX_MER_DES_CHAGRINS_v0.4.0.html",
+      "sizeBytes": 342226,
+      "sha256": "f0b5fdbf83a5760e9755ca1b8d6a4e5d497ca9fa32b02cd41ee07c2d82feb8ee",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/CODEX_MER_DES_CHAGRINS_v0.4.0.html"
+      ],
+      "originalCreatedAt": "2026-09-29T02:30:14.785010Z",
+      "originalModifiedAt": "2026-09-29T02:30:14.785010Z"
+    },
+    {
+      "originalName": "CODEX_MER_DES_CHAGRINS_v0.5.0.html",
+      "sizeBytes": 393634,
+      "sha256": "2cfd23557d7dff50d6739ae81ceba240279b31d179c3f23fc80eefa0b1f402a2",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/CODEX_MER_DES_CHAGRINS_v0.5.0.html"
+      ],
+      "originalCreatedAt": "2026-09-29T03:07:58.282294Z",
+      "originalModifiedAt": "2026-09-29T03:07:58.282294Z"
+    },
+    {
+      "originalName": "CODEX_MER_DES_CHAGRINS_v0.6.0.html",
+      "sizeBytes": 414885,
+      "sha256": "d6b254fe25d6a4e99d36c5943044ca7e512714e615014e4af98f05082b850b99",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/CODEX_MER_DES_CHAGRINS_v0.6.0.html"
+      ],
+      "originalCreatedAt": "2026-09-29T03:47:44.110572Z",
+      "originalModifiedAt": "2026-09-29T03:47:44.110572Z"
+    },
+    {
+      "originalName": "CODEX_MER_DES_CHAGRINS_v0.7.0.html",
+      "sizeBytes": 473118,
+      "sha256": "e8022eb9e1ae5b93f6f3f2cb87a19f2f93cd159c8acb0acb6a04ecbb704b0b28",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/CODEX_MER_DES_CHAGRINS_v0.7.0.html"
+      ],
+      "originalCreatedAt": "2026-09-29T04:25:11.847788Z",
+      "originalModifiedAt": "2026-09-29T04:25:11.847788Z"
+    },
+    {
+      "originalName": "CODEX_MER_DES_CHAGRINS_v0.8.0.html",
+      "sizeBytes": 538532,
+      "sha256": "7881dee73e1dc3e1a9827ba12e77c37d8e00002c060606d88c4bf0bec4f34c6c",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/CODEX_MER_DES_CHAGRINS_v0.8.0.html"
+      ],
+      "originalCreatedAt": "2026-09-29T05:09:28.154901Z",
+      "originalModifiedAt": "2026-09-29T05:09:28.154901Z"
+    },
+    {
+      "originalName": "CODEX_MER_DES_CHAGRINS_v0.9.0.html",
+      "sizeBytes": 546784,
+      "sha256": "a613f836f3df8ef40b00ad30368607fbf1a48b48535f41648017bc7b3a16ac70",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/CODEX_MER_DES_CHAGRINS_v0.9.0.html"
+      ],
+      "originalCreatedAt": "2026-09-29T05:54:19.870923Z",
+      "originalModifiedAt": "2026-09-29T05:54:19.870923Z"
+    },
+    {
+      "originalName": "MER_DES_CHAGRINS_JOUABLE.html",
+      "sizeBytes": 170064,
+      "sha256": "4e50f27a51c204934d524f18b81f5968b1a6899e4d94fd8fbd4f904c69b83126",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/MER_DES_CHAGRINS_JOUABLE.html"
+      ],
+      "originalCreatedAt": "2026-09-29T00:19:33.192426Z",
+      "originalModifiedAt": "2026-09-29T00:19:33.192426Z"
+    },
+    {
+      "originalName": "MER_DES_CHAGRINS_RAPPORT_ILLUSTRE.html",
+      "sizeBytes": 5532814,
+      "sha256": "bcf17ccda2189bada2c00596e73a83baebbb67281024edd080664452e46d00c3",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/MER_DES_CHAGRINS_RAPPORT_ILLUSTRE.html"
+      ],
+      "originalCreatedAt": "2026-09-29T00:19:41.959891Z",
+      "originalModifiedAt": "2026-09-29T00:19:41.959891Z"
+    },
+    {
+      "originalName": "MER_DES_CHAGRINS_v0.10.0_JOUABLE.html",
+      "sizeBytes": 551307,
+      "sha256": "881ce8fca80f5473366463ad864af050ed0783b329f443f32f90506b5761caaa",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/MER_DES_CHAGRINS_v0.10.0_JOUABLE.html"
+      ],
+      "originalCreatedAt": "2026-09-29T07:07:53.415811Z",
+      "originalModifiedAt": "2026-09-29T07:07:53.415811Z"
+    },
+    {
+      "originalName": "MER_DES_CHAGRINS_v0.10.0_RAPPORT_ILLUSTRE.html",
+      "sizeBytes": 990432,
+      "sha256": "3313874619a93e73665f478bbe2d823daee2d201887aa8570ea4f75ed3299f6c",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/MER_DES_CHAGRINS_v0.10.0_RAPPORT_ILLUSTRE.html"
+      ],
+      "originalCreatedAt": "2026-09-29T07:08:04.160170Z",
+      "originalModifiedAt": "2026-09-29T07:08:04.160170Z"
+    },
+    {
+      "originalName": "MER_DES_CHAGRINS_v0.2.0_JOUABLE.html",
+      "sizeBytes": 277512,
+      "sha256": "c9f10159e6016eb47816afc3d7122e2631bcfa126ab778e6b7f74f71ca6871ae",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/MER_DES_CHAGRINS_v0.2.0_JOUABLE.html"
+      ],
+      "originalCreatedAt": "2026-09-29T01:04:18.219923Z",
+      "originalModifiedAt": "2026-09-29T01:04:18.219923Z"
+    },
+    {
+      "originalName": "MER_DES_CHAGRINS_v0.2.0_RAPPORT_ILLUSTRE.html",
+      "sizeBytes": 1072706,
+      "sha256": "103da9e8aab905a9288e7339f9591f9245606db650e32595e258f903226bb49f",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/MER_DES_CHAGRINS_v0.2.0_RAPPORT_ILLUSTRE.html"
+      ],
+      "originalCreatedAt": "2026-09-29T01:04:26.181992Z",
+      "originalModifiedAt": "2026-09-29T01:04:26.181992Z"
+    },
+    {
+      "originalName": "MER_DES_CHAGRINS_v0.3.0_JOUABLE.html",
+      "sizeBytes": 313593,
+      "sha256": "88b73dc6c9aa1af7892d7f53a8419f4f789ca983d551de63b711301c7f581a00",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/MER_DES_CHAGRINS_v0.3.0_JOUABLE.html"
+      ],
+      "originalCreatedAt": "2026-09-29T01:44:18.994691Z",
+      "originalModifiedAt": "2026-09-29T01:44:18.994691Z"
+    },
+    {
+      "originalName": "MER_DES_CHAGRINS_v0.3.0_RAPPORT_ILLUSTRE.html",
+      "sizeBytes": 1780733,
+      "sha256": "0a53ee6d940407a7e51f8fdd15afe924f7bf84ed3767d7bfaf1a6835f17d08ea",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/MER_DES_CHAGRINS_v0.3.0_RAPPORT_ILLUSTRE.html"
+      ],
+      "originalCreatedAt": "2026-09-29T01:44:28.453844Z",
+      "originalModifiedAt": "2026-09-29T01:44:28.453844Z"
+    },
+    {
+      "originalName": "MER_DES_CHAGRINS_v0.4.0_JOUABLE.html",
+      "sizeBytes": 340969,
+      "sha256": "ebb936cd6aacce9c40b265d5dd8af59fdfca0cab11baed01279e67b82f367b1e",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/MER_DES_CHAGRINS_v0.4.0_JOUABLE.html"
+      ],
+      "originalCreatedAt": "2026-09-29T02:30:10.279855Z",
+      "originalModifiedAt": "2026-09-29T02:30:10.279855Z"
+    },
+    {
+      "originalName": "MER_DES_CHAGRINS_v0.4.0_RAPPORT_ILLUSTRE.html",
+      "sizeBytes": 1615133,
+      "sha256": "f5701e9dcb184904533599d05c40f7f6ef5f65235b4e9e32b7d8395966d8bd14",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/MER_DES_CHAGRINS_v0.4.0_RAPPORT_ILLUSTRE.html"
+      ],
+      "originalCreatedAt": "2026-09-29T02:30:19.177450Z",
+      "originalModifiedAt": "2026-09-29T02:30:19.177450Z"
+    },
+    {
+      "originalName": "MER_DES_CHAGRINS_v0.5.0_JOUABLE.html",
+      "sizeBytes": 360222,
+      "sha256": "1b4be49219a1f7734a42ab6798d33b0aee704eb016309306a35a0a67f2507b31",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/MER_DES_CHAGRINS_v0.5.0_JOUABLE.html"
+      ],
+      "originalCreatedAt": "2026-09-29T03:07:53.772089Z",
+      "originalModifiedAt": "2026-09-29T03:07:53.772089Z"
+    },
+    {
+      "originalName": "MER_DES_CHAGRINS_v0.5.0_RAPPORT_ILLUSTRE.html",
+      "sizeBytes": 1142389,
+      "sha256": "daf41cccd6131f22072c9af0368703c1006b2b6f16c9d85851972828b7dc10c6",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/MER_DES_CHAGRINS_v0.5.0_RAPPORT_ILLUSTRE.html"
+      ],
+      "originalCreatedAt": "2026-09-29T03:08:03.660722Z",
+      "originalModifiedAt": "2026-09-29T03:08:03.660722Z"
+    },
+    {
+      "originalName": "MER_DES_CHAGRINS_v0.6.0_JOUABLE.html",
+      "sizeBytes": 395986,
+      "sha256": "6ecea1d6aa3f0a51294a837b5ad1ec2aeaeb00c56c3059cbe193f23be08d0cb1",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/MER_DES_CHAGRINS_v0.6.0_JOUABLE.html"
+      ],
+      "originalCreatedAt": "2026-09-29T03:47:39.341646Z",
+      "originalModifiedAt": "2026-09-29T03:47:39.341646Z"
+    },
+    {
+      "originalName": "MER_DES_CHAGRINS_v0.6.0_RAPPORT_ILLUSTRE.html",
+      "sizeBytes": 752730,
+      "sha256": "9d5bfe22bdfaaf6728bdf32f47b9034d8c26fabf5b8e2c7350893602ebc963e4",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/MER_DES_CHAGRINS_v0.6.0_RAPPORT_ILLUSTRE.html"
+      ],
+      "originalCreatedAt": "2026-09-29T03:47:48.826529Z",
+      "originalModifiedAt": "2026-09-29T03:47:48.826529Z"
+    },
+    {
+      "originalName": "MER_DES_CHAGRINS_v0.7.0_JOUABLE.html",
+      "sizeBytes": 410632,
+      "sha256": "8dbdc5c8e42037a3d4593a0d7348114fd136e0a90faa57e7d191707b261c5eab",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/MER_DES_CHAGRINS_v0.7.0_JOUABLE.html"
+      ],
+      "originalCreatedAt": "2026-09-29T04:25:07.464621Z",
+      "originalModifiedAt": "2026-09-29T04:25:07.464621Z"
+    },
+    {
+      "originalName": "MER_DES_CHAGRINS_v0.7.0_RAPPORT_ILLUSTRE.html",
+      "sizeBytes": 454730,
+      "sha256": "77c92c096eddccc3d838ff22b891b4c7822e517b5ebddc7589634f08e637e570",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/MER_DES_CHAGRINS_v0.7.0_RAPPORT_ILLUSTRE.html"
+      ],
+      "originalCreatedAt": "2026-09-29T04:25:16.378605Z",
+      "originalModifiedAt": "2026-09-29T04:25:16.378605Z"
+    },
+    {
+      "originalName": "MER_DES_CHAGRINS_v0.8.0_JOUABLE.html",
+      "sizeBytes": 439311,
+      "sha256": "685bb5f448f594cef7c18f84136f31434598cbbdf43d178666617c5ab814ff76",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/MER_DES_CHAGRINS_v0.8.0_JOUABLE.html"
+      ],
+      "originalCreatedAt": "2026-09-29T05:09:23.667226Z",
+      "originalModifiedAt": "2026-09-29T05:09:23.667226Z"
+    },
+    {
+      "originalName": "MER_DES_CHAGRINS_v0.8.0_RAPPORT_ILLUSTRE.html",
+      "sizeBytes": 531723,
+      "sha256": "0963e35be423211971fb2a296c4662e5d6b33e5dd39d2bf091198393bbe44f5d",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/MER_DES_CHAGRINS_v0.8.0_RAPPORT_ILLUSTRE.html"
+      ],
+      "originalCreatedAt": "2026-09-29T05:09:32.993393Z",
+      "originalModifiedAt": "2026-09-29T05:09:32.993393Z"
+    },
+    {
+      "originalName": "MER_DES_CHAGRINS_v0.9.0_JOUABLE.html",
+      "sizeBytes": 475996,
+      "sha256": "0cc70544e2f3e38b63aa11b0aed0582b18017c0b5e2e0a73257432fcaae8864a",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/MER_DES_CHAGRINS_v0.9.0_JOUABLE.html"
+      ],
+      "originalCreatedAt": "2026-09-29T05:54:14.872814Z",
+      "originalModifiedAt": "2026-09-29T05:54:14.872814Z"
+    },
+    {
+      "originalName": "MER_DES_CHAGRINS_v0.9.0_RAPPORT_ILLUSTRE.html",
+      "sizeBytes": 456559,
+      "sha256": "664b8ee816435b69aea0950726a224c33b303d3071e3533cbab7f16d54b8d1de",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/MER_DES_CHAGRINS_v0.9.0_RAPPORT_ILLUSTRE.html"
+      ],
+      "originalCreatedAt": "2026-09-29T05:54:24.820939Z",
+      "originalModifiedAt": "2026-09-29T05:54:24.820939Z"
+    },
+    {
+      "originalName": "REGISTRE_FIDELITE_MER_DES_CHAGRINS_v0.10.0.html",
+      "sizeBytes": 22364,
+      "sha256": "f6f01d0e29aab0a78860fc23e86f958548f2215898f7878a064fed104d542deb",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/REGISTRE_FIDELITE_MER_DES_CHAGRINS_v0.10.0.html"
+      ],
+      "originalCreatedAt": "2026-09-29T07:08:10.631496Z",
+      "originalModifiedAt": "2026-09-29T07:08:10.631496Z"
+    },
+    {
+      "originalName": "VERIFICATION_MER_DES_CHAGRINS_v0.10.0.json",
+      "sizeBytes": 623,
+      "sha256": "ac4f3f71688d5d3e146a2c4bdee55fdd5f158ce7224212bce34a63644426510c",
+      "parts": [
+        "archives/mer-des-chagrins-20261125/artifacts/documents/VERIFICATION_MER_DES_CHAGRINS_v0.10.0.json"
+      ],
+      "originalCreatedAt": "2026-09-29T07:08:26.177315Z",
+      "originalModifiedAt": "2026-09-29T07:08:26.177315Z"
+    }
+  ]
+}

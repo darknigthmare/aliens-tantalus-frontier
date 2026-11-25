@@ -1,0 +1,226 @@
+[
+  {
+    "room": "s11",
+    "door": "link-42-a",
+    "before": 1178,
+    "after": 1180,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s11",
+    "door": "link-51-a",
+    "before": 2150,
+    "after": 2140,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s13",
+    "door": "link-46-a",
+    "before": 1373,
+    "after": 1380,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s16",
+    "door": "link-19-a",
+    "before": 1049,
+    "after": 1020,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s17",
+    "door": "link-47-a",
+    "before": 425,
+    "after": 300,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s17",
+    "door": "link-54-a",
+    "before": 1370,
+    "after": 1340,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s18",
+    "door": "link-52-b",
+    "before": 590,
+    "after": 580,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s19",
+    "door": "link-19-b",
+    "before": 1843,
+    "after": 1820,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s19",
+    "door": "link-21-a",
+    "before": 1958,
+    "after": 1960,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s20",
+    "door": "link-28-a",
+    "before": 806,
+    "after": 900,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s21",
+    "door": "link-21-b",
+    "before": 1798,
+    "after": 1840,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s22",
+    "door": "link-24-a",
+    "before": 1316,
+    "after": 1320,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s24",
+    "door": "link-24-b",
+    "before": 1517,
+    "after": 1560,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s26",
+    "door": "link-28-b",
+    "before": 1197,
+    "after": 1220,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s27",
+    "door": "link-32-a",
+    "before": 1233,
+    "after": 1240,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s29",
+    "door": "link-32-b",
+    "before": 1421,
+    "after": 1360,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s29",
+    "door": "link-49-a",
+    "before": 1870,
+    "after": 1860,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s31",
+    "door": "link-38-a",
+    "before": 1113,
+    "after": 1100,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s34",
+    "door": "link-38-b",
+    "before": 1370,
+    "after": 1320,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s35",
+    "door": "link-50-a",
+    "before": 2075,
+    "after": 2080,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s35",
+    "door": "link-57-a",
+    "before": 1550,
+    "after": 1540,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s37",
+    "door": "link-42-b",
+    "before": 1696,
+    "after": 1700,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s41",
+    "door": "link-46-b",
+    "before": 947,
+    "after": 820,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s42",
+    "door": "link-47-b",
+    "before": 1728,
+    "after": 1720,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s42",
+    "door": "link-52-a",
+    "before": 516,
+    "after": 340,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s44",
+    "door": "link-49-b",
+    "before": 1312,
+    "after": 1440,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s44",
+    "door": "link-53-a",
+    "before": 779,
+    "after": 780,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s45",
+    "door": "link-50-b",
+    "before": 1030,
+    "after": 1040,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s46",
+    "door": "link-51-b",
+    "before": 950,
+    "after": 940,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s47",
+    "door": "link-54-b",
+    "before": 821,
+    "after": 820,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s48",
+    "door": "link-56-a",
+    "before": 1651,
+    "after": 1660,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  },
+  {
+    "room": "s49",
+    "door": "link-57-b",
+    "before": 851,
+    "after": 860,
+    "reason": "Écarter dispositifs et zones interactives en projection latérale."
+  }
+]

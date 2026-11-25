@@ -17,6 +17,7 @@ import { publicXenoSpritePathAdmissionV191 } from './public-xeno-sprite-admissio
 import { publicArbiterPathAdmissionV190 } from './public-xeno-arbiter-admissions-v190.mjs';
 import { PUBLIC_COSTUME_ASSET_PATHS_V165, publicCostumePathAdmissionV165 } from './public-costume-admissions-v165.mjs';
 import { relative } from 'node:path';
+import { merDesChagrinsPathAdmission20261125, MER_PUBLIC_DIRECTORIES_20261125 } from './mer-des-chagrins-admission-20261125.mjs';
 import { publicCampaignArtPathAdmissionV180 } from './public-campaign-art-admissions-v180.mjs';
 
 const costumeDirectoriesV165 = new Set(PUBLIC_COSTUME_ASSET_PATHS_V165.flatMap(path => {
@@ -255,6 +256,10 @@ export function createBuildAssetFilter(projectRoot, {
     // fs.cp also visits the source root (relative path ''). This is a container,
     // not a distributable filename; descend before applying file-path rules.
     if (sourcePath === '') return true;
+    const merAdmission = merDesChagrinsPathAdmission20261125(sourcePath, {
+      directory: MER_PUBLIC_DIRECTORIES_20261125.includes(sourcePath), built: true,
+    });
+    if (merAdmission !== null) return merAdmission;
     const productionAdmissionV206 = publicXenoProductionPathAdmissionV206(sourcePath, { built: true });
     if (productionAdmissionV206 !== null) return productionAdmissionV206;
     const visualAdmissionV205 = publicXenoVisualPathAdmissionV205(sourcePath, { directory: PUBLIC_XENO_VISUAL_DIRECTORIES_V205.has(sourcePath), built: true });

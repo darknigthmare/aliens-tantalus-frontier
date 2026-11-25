@@ -1,0 +1,264 @@
+{
+  "version": "0.9.0",
+  "html_sha256": "0cc70544e2f3e38b63aa11b0aed0582b18017c0b5e2e0a73257432fcaae8864a",
+  "checks": [
+    {
+      "name": "Version 0.8, schéma 8 et 120 dossiers chargés",
+      "pass": true
+    },
+    {
+      "name": "Aucun point de repli inventé au premier démarrage",
+      "pass": true
+    },
+    {
+      "name": "Guide : poursuite, trois disciplines de tir, repli et journal",
+      "pass": true
+    },
+    {
+      "name": "Reprendre migre une vraie sauvegarde 0.4 vers 0.5",
+      "pass": true
+    },
+    {
+      "name": "Copie backup-v4 identique à l’ancien fichier",
+      "pass": true
+    },
+    {
+      "name": "La sauvegarde du jeu hôte n’a pas changé",
+      "pass": true
+    },
+    {
+      "name": "Reprendre offre un point de repli valide",
+      "pass": true
+    },
+    {
+      "name": "Une poursuite authentique est en cours à la reprise",
+      "pass": true
+    },
+    {
+      "name": "La créature progresse hors champ pendant un déplacement clavier",
+      "pass": true
+    },
+    {
+      "name": "Le signal visible provient du seuil réellement atteint",
+      "pass": true
+    },
+    {
+      "name": "Le signal n’ajoute pas un faux contact au détecteur",
+      "pass": true
+    },
+    {
+      "name": "Pause fige le franchissement annoncé",
+      "pass": true
+    },
+    {
+      "name": "Le journal contient le bruit entendu au seuil",
+      "pass": true
+    },
+    {
+      "name": "Le journal affiche des faits, pas des coordonnées ennemies",
+      "pass": true
+    },
+    {
+      "name": "L’arrivée ajoute la même identité dans la salle courante",
+      "pass": true
+    },
+    {
+      "name": "L’ennemi a quitté la population de la salle source",
+      "pass": true
+    },
+    {
+      "name": "L’arrivée ne produit pas de doublon mondial",
+      "pass": true
+    },
+    {
+      "name": "Une arrivée suivie d’un import reste valide",
+      "pass": true
+    },
+    {
+      "name": "La retraite gagnée a utilisé la consigne ne pas tirer",
+      "pass": true
+    },
+    {
+      "name": "N : ne pas tirer → riposte",
+      "pass": true
+    },
+    {
+      "name": "N : riposte → feu libre",
+      "pass": true
+    },
+    {
+      "name": "N : feu libre → ne pas tirer, visible dans le HUD",
+      "pass": true
+    },
+    {
+      "name": "Le cycle N ne modifie pas l’ordre de déplacement",
+      "pass": true
+    },
+    {
+      "name": "U ouvre le journal et met la partie en pause",
+      "pass": true
+    },
+    {
+      "name": "Une sauvegarde courante corrompue ne détruit pas les replis",
+      "pass": true
+    },
+    {
+      "name": "La corruption est annoncée sans lancer une nouvelle partie",
+      "pass": true
+    },
+    {
+      "name": "Trois points distincts sont proposés",
+      "pass": true
+    },
+    {
+      "name": "Restaurer exige une confirmation visible",
+      "pass": true
+    },
+    {
+      "name": "Choisir seul n’a pas écrasé la sauvegarde",
+      "pass": true
+    },
+    {
+      "name": "Annuler revient à la liste sans restauration",
+      "pass": true
+    },
+    {
+      "name": "Restaurer reprend le véritable ticket de poursuite",
+      "pass": true
+    },
+    {
+      "name": "La restauration ne laisse pas le titre masquer le jeu",
+      "pass": true
+    },
+    {
+      "name": "La sauvegarde remplacée est désormais un export valide",
+      "pass": true
+    },
+    {
+      "name": "La rotation conserve trois points au maximum",
+      "pass": true
+    },
+    {
+      "name": "L’échec d’écriture des replis est signalé",
+      "pass": true
+    },
+    {
+      "name": "Les replis invalides sont ignorés sans erreur JavaScript",
+      "pass": true
+    },
+    {
+      "name": "Le bilan terminé conserve le franchissement réellement subi",
+      "pass": true
+    },
+    {
+      "name": "Avertissement et HUD accessibles en 960 × 720 sans débordement global",
+      "pass": true
+    },
+    {
+      "name": "Aucune exception JavaScript pendant cette suite",
+      "pass": true
+    },
+    {
+      "name": "Le HTML autonome n’a demandé aucune ressource réseau",
+      "pass": true
+    }
+  ],
+  "passed": 40,
+  "failed": 0,
+  "captures": [
+    {
+      "file": "01_titre.png",
+      "description": "Écran titre de la v0.5.0 ; points de repli désactivés tant qu’aucune entrée n’est enregistrée.",
+      "provenance": "title/UI",
+      "source_save": null,
+      "source_sha256": null,
+      "image_sha256": "7a1fc2d12ae77c5d4086f617246a9186b86eadb0d46663c9e9c7fac6db2b338c",
+      "state_sha256": "40429703a514932103c9bcd920a2a0289fcda31f0e8cb87c4fb4e95e7fc84615"
+    },
+    {
+      "file": "07_replis.png",
+      "description": "Les trois points de repli proviennent de vraies sauvegardes gagnées. La sauvegarde courante est volontairement corrompue pour vérifier la récupération ; aucun acteur n’est déplacé.",
+      "provenance": "title/UI",
+      "source_save": null,
+      "source_sha256": null,
+      "image_sha256": "2f02f85f41537210e13a3b83a870eb9fcb1293ae1717279b19117c9ac07a6e98",
+      "state_sha256": "40429703a514932103c9bcd920a2a0289fcda31f0e8cb87c4fb4e95e7fc84615"
+    },
+    {
+      "file": "02_retraite.png",
+      "description": "Tranchée de fouille : Decker rejoint le seuil du belvédère ; Manning a reçu ne pas tirer. Sauvegarde du parcours continu Hybride / Survie.",
+      "provenance": "UI or frozen render from earned continuous-run save; no actor repositioning",
+      "source_save": "trace-before",
+      "source_sha256": "5acd89f09a833eab4849024b69d123644995d2974b1e0511f98252dd7ca19683",
+      "image_sha256": "4f2abca0b7974b2e31e5527e25976dd98fa6086108ec002317a6dab3e3c3a839",
+      "state_sha256": "b772652d5d6b9838d3bd1a94e0e8f96ac92a4c8fcb57d178adec888417b6a9c6"
+    },
+    {
+      "file": "03_seuil.png",
+      "description": "Le même adulte atteint le seuil dans la salle quittée. Le belvédère reçoit un avertissement avant son entrée. Sauvegarde gagnée, rendu figé.",
+      "provenance": "UI or frozen render from earned continuous-run save; no actor repositioning",
+      "source_save": "trace-warning",
+      "source_sha256": "c4c6fb2f4b5726aa59d47aa1be949ad8aa5f133261d779fbee24dca0981e348a",
+      "image_sha256": "96aa26c7c455db3750bb63099cbc3a7f941fc123fd36e1e65c911f9242efe803",
+      "state_sha256": "faa48cb25181a94734bad94c928ba76fbf088baff2948a9017764d76e3a04a8d"
+    },
+    {
+      "file": "04_arrivee.png",
+      "description": "L’adulte a franchi le seuil : identité transférée depuis la tranchée, sans nouvelle apparition artificielle. Sauvegarde gagnée, acteurs non replacés.",
+      "provenance": "UI or frozen render from earned continuous-run save; no actor repositioning",
+      "source_save": "trace-arrived",
+      "source_sha256": "118bd3c49b2dd7cb8099ee6f3b336119e14912738a5386aa8b2f4c6355a182a0",
+      "image_sha256": "3ef64cce265b3d8c0711eb34cfc47ef0a33ad5f518ca1ef609a997a3b4bb7236",
+      "state_sha256": "30d5ce40c49749fe09aa9e8ee5fbffc7019a1ee84232be583f880e49df0cdc34"
+    },
+    {
+      "file": "05_securise.png",
+      "description": "Après la retraite, le groupe sécurise le belvédère. La créature vaincue n’existe plus dans la tranchée et ne reviendra pas à chaque porte.",
+      "provenance": "UI or frozen render from earned continuous-run save; no actor repositioning",
+      "source_save": "trace-secured",
+      "source_sha256": "202232aeedb8c25c89000662fd0cef345e5013bf08ef73dd685998fe911b04e7",
+      "image_sha256": "17038193411d6dd24669b2856a62c42f6c1f727dd81f677e2a8ea1301c0c554d",
+      "state_sha256": "af1d320fa01ad3f7076510b97b26bfb6e98e47eac993909b535e96bc298184f7"
+    },
+    {
+      "file": "08_convoi.png",
+      "description": "Les deux brancards aux paliers, dans le parcours complet de cette version. Les contrôles de seuil exigent aussi un trajet dégagé.",
+      "provenance": "UI or frozen render from earned continuous-run save; no actor repositioning",
+      "source_save": "closed-gate-s35",
+      "source_sha256": "4a99cf07d8fcbaddcb10074301cd6806a9d50d2f3eeeb1293b4cfcd96b9595f3",
+      "image_sha256": "ce25eb2a70b1fad0eb5becda17ac08a5ae19316a13bf7037b024ed5e44f10898",
+      "state_sha256": "4ee5596fd18d3df607106de6080c7daec72601e9b8017b947866b4243a6c3747"
+    },
+    {
+      "file": "06_journal.png",
+      "description": "Journal réel du parcours : ordres de Manning, bruit du seuil et présence arrivée. Aucun ajout manuel au journal.",
+      "provenance": "UI or frozen render from earned continuous-run save; no actor repositioning",
+      "source_save": "trace-secured",
+      "source_sha256": "202232aeedb8c25c89000662fd0cef345e5013bf08ef73dd685998fe911b04e7",
+      "image_sha256": "932146628b62f2759c30b6709cc99996e6b05bedb4f937202311eedbca82aef6",
+      "state_sha256": "af1d320fa01ad3f7076510b97b26bfb6e98e47eac993909b535e96bc298184f7"
+    },
+    {
+      "file": "09_bilan.png",
+      "description": "Bilan réel du parcours Hybride / Survie : 33 objectifs, 46 salles et une retraite réellement poursuivie.",
+      "provenance": "UI or frozen render from earned continuous-run save; no actor repositioning",
+      "source_save": "HYBRID-survival-33",
+      "source_sha256": "5b1777671af02057cdbfbe4e29cb5bfde35370272a7feb019aa109f0a83bf112",
+      "image_sha256": "5b0b49d9ac1db2955304452e0e6fadbf0327ced163cbe3e1d159f3affff376ff",
+      "state_sha256": "86bc962c758176d188ec6ece9dae6ead45e2a28f1b63b884d1ca0ca2a988e8c8"
+    },
+    {
+      "file": "10_format_960.png",
+      "description": "Avertissement au seuil en 960 × 720, depuis la même sauvegarde gagnée. Contrôle de disposition, pas certification mobile.",
+      "provenance": "UI or frozen render from earned continuous-run save; no actor repositioning",
+      "source_save": "trace-warning",
+      "source_sha256": "c4c6fb2f4b5726aa59d47aa1be949ad8aa5f133261d779fbee24dca0981e348a",
+      "image_sha256": "7dbfaaa374e87eeeaced1f0d3653829aa0d18c5f9a36934814ef236c0120e79d",
+      "state_sha256": "faa48cb25181a94734bad94c928ba76fbf088baff2948a9017764d76e3a04a8d"
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "storage": "explicit memory fixture; native file and localhost blocked; no native persistence certification",
+  "method": "Earned continuous-run saves; live keyboard controls and unmodified frozen photographs are distinguished."
+}

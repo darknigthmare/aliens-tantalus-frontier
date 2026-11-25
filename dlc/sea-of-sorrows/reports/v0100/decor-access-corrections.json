@@ -1,0 +1,50 @@
+[
+  {
+    "room": "s07",
+    "placement": "s07-hero-0",
+    "before": "airlock",
+    "after": "seal-equipment"
+  },
+  {
+    "room": "s14",
+    "placement": "s14-hero-0",
+    "before": "lift",
+    "after": "hoist-drive"
+  },
+  {
+    "room": "s15",
+    "placement": "s15-hero-0",
+    "before": "lift",
+    "after": "hoist-drive"
+  },
+  {
+    "room": "s20",
+    "placement": "s20-hero-0",
+    "before": "breach",
+    "after": "rib"
+  },
+  {
+    "room": "s30",
+    "placement": "s30-hero-0",
+    "before": "lift",
+    "after": "hoist-drive"
+  },
+  {
+    "room": "s31",
+    "placement": "s31-hero-0",
+    "before": "stairs",
+    "after": "cableTray"
+  },
+  {
+    "room": "s35",
+    "placement": "s35-hero-0",
+    "before": "stairs",
+    "after": "cableTray"
+  },
+  {
+    "room": "s38",
+    "placement": "s38-hero-0",
+    "before": "isolation",
+    "after": "quarantine-instruments"
+  }
+]

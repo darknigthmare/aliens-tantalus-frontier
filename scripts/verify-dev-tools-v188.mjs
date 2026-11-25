@@ -7,7 +7,7 @@
 // holds a "real" profile; the build step is run on a temporary directory with a copy of index.html.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { copyFileSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
+import { copyFileSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -20,6 +20,7 @@ import { isDevSessionRequestV188 } from './dev-tools-server-v188.mjs';
 import { DEV_SESSION_SEARCH_TEST_V188, DEV_TOOLS_DEFAULT_PATH_V188, DEV_TOOLS_FILES_V188, devBootstrapScriptV188, extractDevBootstrapV188, findBuiltDevToolsPathV188,
   injectDevBootstrapHtmlV188, resolveDevToolsPathV188, shipDevToolsV188, splitDevToolsManifestV188 } from './build-dev-tools-v188.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { copyMerDesChagrinsRuntime20261125 } from './mer-des-chagrins-admission-20261125.mjs';
 import { inspectSaveSlotV78 } from '../src/save-profile-v78.js';
 import { migrateSave } from '../src/save.js';
 import { CAMPAIGNS, WEAPONS, ENEMIES } from '../src/content.js';
@@ -346,6 +347,31 @@ test('build: the tools are copied under the configured path and fingerprinted wi
       await assert.rejects(findBuiltDevToolsPathV188(output), /exactly one hidden directory/);
     } finally { rmSync(output, { recursive: true, force: true }); }
   }
+});
+
+test('build: reviewed public DLC is distinct from hidden tools; unknown and changed DLC files stay rejected', async () => {
+  const root = fileURLToPath(new URL('../', import.meta.url));
+  const output = mkdtempSync(join(tmpdir(), 'atf-dev-tools-dlc-'));
+  try {
+    mkdirSync(join(output, 'src')); mkdirSync(join(output, 'assets'));
+    copyFileSync(join(root, 'index.html'), join(output, 'index.html'));
+    await shipDevToolsV188(root, output, { env: {} });
+    await copyMerDesChagrinsRuntime20261125(root, output);
+    assert.equal(await findBuiltDevToolsPathV188(output), DEV_TOOLS_DEFAULT_PATH_V188);
+
+    const unexpected = join(output, 'dlc', 'unreviewed.html');
+    writeFileSync(unexpected, '<p>Unreviewed content</p>');
+    await assert.rejects(findBuiltDevToolsPathV188(output), /Unapproved built DLC path/);
+    rmSync(unexpected);
+
+    const catalogue = join(output, 'dlc', 'index.html'), original = readFileSync(catalogue);
+    writeFileSync(catalogue, '<p>Changed catalogue</p>');
+    await assert.rejects(findBuiltDevToolsPathV188(output), /Changed Mer des Chagrins size/);
+    writeFileSync(catalogue, original);
+
+    mkdirSync(join(output, 'second-hidden-dir'));
+    await assert.rejects(findBuiltDevToolsPathV188(output), /exactly one hidden directory/);
+  } finally { rmSync(output, { recursive: true, force: true }); }
 });
 
 test('range metrics math', () => {

@@ -1,0 +1,13 @@
+{
+  "id": "sea-of-sorrows",
+  "version": "0.10.0",
+  "title": "Alien : La Mer des Chagrins",
+  "legacyCampaignId": "v36_campaign_new_galveston_sea_of_sorrows",
+  "entryRoute": "/dlc/sea-of-sorrows/",
+  "saveNamespace": "tantalus.dlc.sea-of-sorrows.v1",
+  "economyWriteback": false,
+  "continuityPolicy": "archive_only_separate_late_timeline",
+  "integrationStatus": "standalone_route_only",
+  "nativeHostAdapterImplemented": false,
+  "note": "Descripteur documentaire, non consommé automatiquement par le jeu hôte. Aucun enregistrement dans son catalogue n’a été effectué."
+}

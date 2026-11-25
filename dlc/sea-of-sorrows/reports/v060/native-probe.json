@@ -1,0 +1,12 @@
+[
+  {
+    "kind": "http",
+    "allowed": false,
+    "error": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:8766/MER_DES_CHAGRINS_JOUABLE.html?qa\n"
+  },
+  {
+    "kind": "file",
+    "allowed": false,
+    "error": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/ALIEN_MER_DES_CHAGRINS_v0.6.0/MER_DES_CHAGRINS_JOUABLE.html?qa\n"
+  }
+]

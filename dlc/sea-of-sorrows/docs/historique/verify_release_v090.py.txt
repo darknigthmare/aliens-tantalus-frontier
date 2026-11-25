@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+"""Read-only evidence audit. --record writes before hashing; --manifest verifies shipped bytes."""
+from pathlib import Path
+import json,hashlib,re,sys
+R=Path(__file__).resolve().parents[1];checks=[]
+def load(p):return json.loads((R/p).read_text())
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def ck(n,v):checks.append({'name':n,'pass':bool(v)});print(('PASS 'if v else'FAIL ')+n)
+def hashes(d):return all((R/f).is_file()and sha(R/f)==h for f,h in d.items())
+D=load('data/campaign.json');version=load('package.json')['version'];modules=['data','core','render','world-art','tactics-art','controls','support','soundscape','main']
+raw=(R/'MER_DES_CHAGRINS_JOUABLE.html').read_text();hh=sha(R/'MER_DES_CHAGRINS_JOUABLE.html')
+expected=(R/'index.html').read_text().replace('<link rel="stylesheet" href="styles.css">','<style>\n'+(R/'styles.css').read_text()+'\n</style>')
+for m in modules:expected=expected.replace(f'<script src="src/{m}.js"></script>','<script>\n'+(R/f'src/{m}.js').read_text().replace('</script','<\\/script')+'\n</script>')
+ck('HTML autonome identique aux neuf sources et styles',raw==expected)
+source='/* Authored room graph and original adaptation text. */\n(function(root){const data='+json.dumps(D,ensure_ascii=False,separators=(',',':'))+';if(typeof module!=="undefined"&&module.exports)module.exports=data;root.SoSData=data;})(typeof globalThis!=="undefined"?globalThis:this);\n'
+ck('JSON et JavaScript de données identiques',(R/'src/data.js').read_text()==source)
+ck('Version 0.9.0 / schéma 8 / reçu cohérents',version==D['meta']['version']==load('integration/host-descriptor.json')['version']=='0.9.0'and D['meta']['schemaVersion']==8)
+ck('50 salles / 59 liaisons / 18 chapitres / 33 objectifs',len(D['rooms'])==50 and len(D['edges'])==59 and len(D['chapters'])==18 and sum(len(c['objectives'])for c in D['chapters'])==33)
+ck('120 dossiers uniques',len(D['codex'])==len({c['id']for c in D['codex']})==120)
+ck('120 obstacles / 355 placements / 52 familles',sum(len(r['obstacles'])for r in D['rooms'])==120 and sum(len(r['dressing'])for r in D['rooms'])==355 and len({p['kind']for r in D['rooms']for p in r['dressing']})==52)
+ck('Dix circuits, huit cloisons et neuf dangers conservés',sum(bool(r.get('lighting'))for r in D['rooms'])==10 and sum(len(r['shutters'])for r in D['rooms'])==8 and sum(len(r['hazards'])for r in D['rooms'])==9)
+ls=[l for r in D['rooms']for l in r.get('lockers',[])];ck('Dix casiers uniques avec ouverture 2,4 secondes',len(ls)==len({l['id']for l in ls})==10 and all(l['duration']==2.4 for l in ls))
+ck('38 liaisons de poursuite / 76 extrémités',len({d['pair']for r in D['rooms']for d in r['doors']if d.get('pursuitAllowed')})==38 and sum(bool(d.get('pursuitAllowed'))for r in D['rooms']for d in r['doors'])==76)
+ck('Seuils réciproques et transferts narratifs conformes',all(len([(r,d)for r in D['rooms']for d in r['doors']if d['pair']==e['id']])==(2 if e.get('bidirectional')else 1) for e in D['edges']))
+c=load('reports/CONTENT_COUNTS.json');ck('Comptage documentaire actuel',c['version']==version and c['dossiers']==120 and c['lockers']==10 and c['rooms']==50 and not c['published'] and not c['host_native_integration'])
+p=load('BUILD_PROVENANCE.json');ck('Provenance cumulative réelle 0.8 conservée',p['base']['version']=='0.8.0'and p['base']['bytes']==79991964 and p['base']['sha256']=='3a4f54a44b3c793b057f5d8d2f20b3779e5b956baa3eec8960ed16f8900c36e1'and p['delivery']==version)
+ck('Pas de fausse certification native ou matérielle',not p['native_browser_persistence_certified']and not p['controller_physical_hardware_tested']and not p['public_deployment'])
+ck('Aucun moteur ou inventaire hôte raccordé',not D['meta']['economyWriteback']and not load('integration/host-descriptor.json')['nativeHostAdapterImplemented'])
+installer=(R/'integration/install.cjs').read_text();ck('Installateur des neuf modules avec version courante',all("'src/"+m+".js'"in installer for m in modules)and"version:'0.9.0'"in installer)
+node=load('reports/node-inputs.json');tap=(R/'reports/node-tests.tap').read_text();ck('432 tests Node réussis',node['version']==version and node['passed']==432 and node['failed']==0 and'# tests 432'in tap and'# pass 432'in tap and'# fail 0'in tap)
+ck('Empreintes Node et TAP courantes',hashes(node['source_sha256'])and sha(R/'reports/node-tests.tap')==node['tap_sha256'])
+paths=['reports/browser-regression.json','reports/field-browser.json','reports/rearguard-browser.json','reports/trace-browser.json','reports/v060/browser.json','reports/v070/browser.json','reports/v080/browser.json','reports/v090/browser.json'];bs=[load(f)for f in paths]
+for f,b in zip(paths,bs):
+ ck('HTML réellement testé courant : '+f,b['version']==version and b['html_sha256']==hh)
+ ck('Suite réussie : '+f,b['failed']==0 and not b.get('fatal')and not b.get('errors')and all(c['pass']for c in b['checks'])and sum(c['pass']for c in b['checks'])==b['passed'])
+ck('100 rendus généraux effectués',bs[0]['room_smoke_renders']==100)
+ck('48 états de cloisons / 40 états d’éclairage',bs[2]['rendered_shutter_states']==48 and bs[5]['lighting_state_renders']==40)
+ck('Aucun chargement réseau de ressource',all(not b.get('requests',b.get('network_requests',b.get('network',[])))for b in bs))
+ck('Navigation native réellement refusée',len(bs[0]['native_navigation'])==2 and all(not n['allowed']and'ERR_BLOCKED_BY_ADMINISTRATOR'in n['error']for n in bs[0]['native_navigation']))
+mat=load('reports/v090/campaign.json');out=mat['outcomes'];ck('Six parcours des sources courantes',mat['version']==version and len(out)==6 and hashes(mat['source_sha256']))
+ck('Six fois 50 salles et 33 objectifs',all(o['passed']and o['objectives']==33 and len(o['rooms'])==50 for o in out))
+ck('Six fois dix casiers ouverts et transferts exécutés',all(o['stats']['lockersOpened']==10 and o['stats']['storageTransfers']>=10 for o in out))
+ck('Éclairage, lectures, cloisons et allures conservés',all(o['stats']['lightingCycles']==20 and o['stats']['formationChanges']==3 and o['stats']['readings']==8 and o['stats']['shutterCycles']==16 for o in out))
+ck('Poursuite, mesure distante et capteur récupéré',all(o['sensorRemoteObserved']and o['stats']['pursuitArrivals']>=1 and o['stats']['sensorsRecovered']>=1 for o in out))
+ck('Deux patients arrimés et vivants à chaque fin',all(o['convoy']['aboard']and all(a['integrity']>0 and a['status']=='aboard'for a in o['convoy']['actors'])for o in out))
+pattern=r'(HYBRID|CLASSIC)-(exploration|survival|oppression)-\d\d.json'
+fresh=[p for p in (R/'qa/access-fixtures').glob('*.json')if re.fullmatch(pattern,p.name)]
+ck('198 exports courants en schéma 8',len(fresh)==198 and all(json.loads(p.read_text())['schema']==8 for p in fresh))
+ck('Les 198 exports correspondent aux objectifs',all(json.loads(p.read_text())['state']['objectiveIndex']==int(p.stem.split('-')[-1])for p in fresh))
+old=[p for p in (R/'qa/storage-fixtures').glob('*.json')if re.fullmatch(pattern,p.name)]
+ck('198 exports historiques 0.8 schéma 8 préservés',len(old)==198 and all(json.loads(p.read_text())['schema']==8 for p in old))
+ck('Origines des scènes gagnées vérifiées',all(sha(R/'qa/access-fixtures'/f'{s["key"]}.json')==s['sha256']for s in mat['snapshots']))
+caps=bs[-1]['captures'];ck('Huit PNG et états photographiés intacts',len(caps)==8 and all(sha(R/'reports/v090/captures'/c['file'])==c['sha256']and sha(R/'reports/v090/capture-states'/(c['file']+'.json'))==c['state_sha256']for c in caps))
+ck('Les scènes avancées viennent des sauvegardes gagnées',all(not c['source_snapshot']or sha(R/'qa/access-fixtures'/(c['source_snapshot']+'.json'))==c['source_sha256']for c in caps))
+base=load('reports/difficulty-traversals.json');ck('Pilote direct courant : 4 fins / 2 morts',base['version']==version and hashes(base['source_sha256'])and sum(o['outcome']=='finished'for o in base['outcomes'])==4 and sum(o['outcome']=='stopped'for o in base['outcomes'])==2)
+review=load('reports/document-review.json');ck('Contrôles documentaires actuels réussis',review['version']==version and review['passed']>=21 and review['failed']==0 and not review['errors'])
+ck('Documents testés identiques aux livrables',hashes(review['input_sha256']))
+cod=(R/'CODEX_MER_DES_CHAGRINS.html').read_text();ck('Codex 50 plans / 10 LUX / 10 STOCK / 120 dossiers',cod.count('class="schematic"')==50 and cod.count('data-lux=')==10 and cod.count('data-locker=')==10 and'Registre des 120 dossiers'in cod)
+level=(R/'docs/CODEX_LEVEL_DESIGN_50_SALLES.md').read_text();ck('50 fiches Markdown courantes',level.count('### S')==50 and'0.9.0'in level)
+ck('README, changelog et guides actuels',all((R/f).is_file()and'0.9.0'in(R/f).read_text()for f in ['README.md','CHANGELOG_v0.9.0.md','integration/README.md','qa/README.md']))
+ck('Aucun fichier de police livré',not any(p.suffix.lower()in['.ttf','.otf','.woff','.woff2']for p in R.rglob('*')if p.is_file()))
+
+import subprocess,wave
+meta=json.loads(subprocess.check_output(['node','-e',"const s=require('./src/support.js'),a=require('./src/soundscape.js');console.log(JSON.stringify({keys:s.ACTIONS.length,cues:Object.keys(a.CUES).length,defaults:a.DEFAULTS}))"],cwd=R))
+ck('31 actions, 21 profils, audio muet et légendes actives par défaut',meta['keys']==31 and meta['cues']==21 and not meta['defaults']['enabled']and meta['defaults']['captions'])
+ck('Les quatre volumes documentés sont réels',all(k in meta['defaults'] for k in ['master','ambience','effects','alerts']))
+ck('21 signaux réellement rendus, finis et non silencieux',len(bs[-1]['audio_metrics'])==21 and all(a['finite']and 0<a['rms']<=a['peak']<1 for a in bs[-1]['audio_metrics']))
+with wave.open(str(R/'reports/v090/SONS_PROCEDURAUX_TEST.wav'),'rb')as wav:
+ ck('WAV de démonstration stéréo valide',wav.getnchannels()==2 and wav.getsampwidth()==2 and wav.getnframes()>24000)
+ck('Invariance périodique de simulation dans les six parcours',all(o['observationsWithoutMutation']>50 and len(o['cueCounts'])>=12 for o in out))
+ck('Pas de dépendance réseau dans le HTML jouable',not re.search(r'<(?:script|link)[^>]+(?:src|href)=[\"\'](?:https?:)?//',raw))
+
+if '--manifest'in sys.argv:
+ m=load('MANIFEST_SHA256.json');listed={i['path']for i in m['files']};actual={p.relative_to(R).as_posix()for p in R.rglob('*')if p.is_file()and p.name!='MANIFEST_SHA256.json'and'__pycache__'not in p.parts}
+ ck('Manifeste actuel et exhaustif',m['version']==version and listed==actual and len(listed)==len(m['files']))
+ ck('Tous les octets du manifeste sont intacts',all((R/i['path']).is_file()and(R/i['path']).stat().st_size==i['bytes']and sha(R/i['path'])==i['sha256']for i in m['files']))
+report=dict(version=version,scope='Evidence and bytes only, no native browser, hardware or deployment certification',passed=sum(c['pass']for c in checks),failed=sum(not c['pass']for c in checks),checks=checks,standalone_sha256=hh,browser_checks=sum(b['passed']for b in bs))
+if'--record'in sys.argv:(R/'reports/release-audit.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+print('AUDIT',report['passed'],'/',len(checks));sys.exit(1 if report['failed']else 0)

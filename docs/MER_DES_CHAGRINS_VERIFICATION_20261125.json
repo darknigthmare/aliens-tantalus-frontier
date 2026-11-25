@@ -1,0 +1,270 @@
+{
+  "schemaVersion": 1,
+  "scope": "Import GitHub de La Mer des Chagrins v0.10.0 et des 59 livrables retrouvés dans cette conversation.",
+  "repository": "darknigthmare/aliens-tantalus-frontier",
+  "baseCommit": "001a20bdc0f9f1a3c835e84d8f3c9434bc159330",
+  "branch": "codex/mer-des-chagrins-github-20261125",
+  "targetBranch": "claude/nifty-shannon-qpy1hl",
+  "runtime": {
+    "node": "24.22.3",
+    "python": "3.14.4",
+    "buildFromPreparedWorkingTree": true
+  },
+  "source": {
+    "version": "0.10.0",
+    "upstreamFiles": 3029,
+    "upstreamBytes": 208268182,
+    "originalFilesUnchanged": true,
+    "archiveSha256": "7a2761f657d20c8c515f460df27b5701ca151aa1cd4ff1a81a7ef5b5dec6a56e",
+    "archiveBytes": 115170444,
+    "importManifestSha256": "540b4857e3c15b536ad993b13c2546dcb5e01b682c0346b55956ce7f9bc9be4b"
+  },
+  "history": {
+    "originalFiles": 59,
+    "originalBytes": 593192706,
+    "manifestMembers": 124,
+    "manifestMemberBytes": 593229803,
+    "maximumPartBytes": 8388608,
+    "manifestSha256": "21ca112319b36e41f7bc921a7b811874ba704b03250cf3cc407db497d79021e0",
+    "physicalReconstructionsPassed": 59,
+    "orderedStreamingReconstructionsPassed": 59
+  },
+  "publicRuntime": {
+    "files": 13,
+    "bytes": 1109595,
+    "archiveFiles": 0,
+    "catalogSha256": "0a421d17668d8fba58557c6ef11f8d6ed17f9d2cf2857a483ad5d8aa25929a2a"
+  },
+  "checks": [
+    {
+      "name": "Original DLC check",
+      "command": "npm --prefix dlc/sea-of-sorrows run check",
+      "passed": 461,
+      "failed": 0,
+      "exitCode": 0
+    },
+    {
+      "name": "Source and distribution admission",
+      "command": "npm run test:mer-des-chagrins-import",
+      "passed": 15,
+      "failed": 0,
+      "exitCode": 0
+    },
+    {
+      "name": "Archive restorer adversarial fixtures",
+      "command": "python3 scripts/verify-mer-des-chagrins-restore.py --real",
+      "passed": 21,
+      "failed": 0,
+      "exitCode": 0,
+      "alsoPhysicallyRestoredOriginalFiles": 59
+    },
+    {
+      "name": "Title intro and visual effects",
+      "command": "node --test scripts/verify-intro-v188.mjs scripts/verify-title-vfx-v188.mjs",
+      "passed": 10,
+      "failed": 0,
+      "exitCode": 0
+    },
+    {
+      "name": "Hidden tools and DLC coexistence",
+      "command": "node --test scripts/verify-dev-tools-v188.mjs",
+      "passed": 17,
+      "failed": 0,
+      "exitCode": 0
+    },
+    {
+      "name": "CI bridge invoking original DLC check and Python fixtures",
+      "command": "npm run test:dlc:sea-of-sorrows",
+      "passed": 2,
+      "failed": 0,
+      "exitCode": 0,
+      "overlapsChecks": [
+        "Original DLC check",
+        "Archive restorer adversarial fixtures"
+      ]
+    },
+    {
+      "name": "CI discovery",
+      "collector": "collectReleaseTestsV143",
+      "testFiles": 386,
+      "dlcWrapperOccurrences": 1
+    },
+    {
+      "name": "Host catalogue structural controls",
+      "passed": 8,
+      "failed": 0
+    },
+    {
+      "name": "Temporary transport importer",
+      "passed": 12,
+      "failed": 0,
+      "shippedInRuntime": false
+    }
+  ],
+  "fixedDuringVerification": [
+    "Le vérificateur Python désactive l'écriture des caches avant l'import du reconstructeur.",
+    "La détection des outils cachés ne reconnaît le dossier DLC public qu'après vérification de ses 13 fichiers, tailles et empreintes.",
+    "Le wrapper Node ajoute le check original et les fixtures Python au collecteur test:all existant."
+  ],
+  "limits": [
+    "test:all complet et le workflow complet GitHub ne sont pas déclarés exécutés par cette préparation ; le workflow existant se déclenche sur la PR.",
+    "Le smoke navigateur compare le localStorage hôte d'un profil neuf, pas IndexedDB ni une sauvegarde humaine existante.",
+    "Aucune validation sur manette physique ni campagne humaine complète.",
+    "La fidélité 1:1 n'est pas certifiée ; les limites du registre original restent applicables.",
+    "Le DLC conserve son moteur et son espace de sauvegarde indépendants ; aucune conversion native au GameEngine Tantalus.",
+    "Aucun fichier de version 0.11 retrouvé ; aucune reconstitution supposée de cette version.",
+    "Cet import ne vaut pas fusion dans main ni déploiement en production."
+  ],
+  "verifiedAtUtc": "2026-11-25T17:05:57.699204+00:00",
+  "fullBuildCommands": [
+    {
+      "name": "dlc-core",
+      "exitCode": 0,
+      "seconds": 34.19
+    },
+    {
+      "name": "public-check",
+      "exitCode": 0,
+      "seconds": 29.53
+    },
+    {
+      "name": "build",
+      "exitCode": 0,
+      "seconds": 53.05
+    },
+    {
+      "name": "built-check",
+      "exitCode": 0,
+      "seconds": 24.99
+    }
+  ],
+  "buildReceipt": {
+    "ok": true,
+    "buildId": "143.0.0+001a20bdc0f9",
+    "sourceCommit": "001a20bdc0f9f1a3c835e84d8f3c9434bc159330",
+    "files": 2526,
+    "shell": 830,
+    "manifestSha256": "abf5577618a25c67b5b8a4e9c7cfae5bc52a301047475f701d781b2813f97b2c"
+  },
+  "browser": {
+    "method": "Native HTTP navigation in a fresh Chromium context, original HTML and runtime. Ordinary keyboard and buttons, real localStorage. No fixture, injected game state, policy override or storage replacement.",
+    "checks": [
+      {
+        "name": "Host keyboard focus reaches DLC link",
+        "pass": true
+      },
+      {
+        "name": "Host keyboard opens the catalogue",
+        "pass": true
+      },
+      {
+        "name": "Catalogue has only three navigation links",
+        "pass": true
+      },
+      {
+        "name": "Native download matches original standalone",
+        "pass": true,
+        "detail": {
+          "sha256": "881ce8fca80f5473366463ad864af050ed0783b329f443f32f90506b5761caaa",
+          "bytes": 551307
+        }
+      },
+      {
+        "name": "Catalogue fits 1440x900",
+        "pass": true
+      },
+      {
+        "name": "Catalogue actions remain usable 1440",
+        "pass": true
+      },
+      {
+        "name": "Catalogue fits 390x844",
+        "pass": true
+      },
+      {
+        "name": "Catalogue actions remain usable 390",
+        "pass": true
+      },
+      {
+        "name": "Catalogue fits 768x480",
+        "pass": true
+      },
+      {
+        "name": "Catalogue actions remain usable 768",
+        "pass": true
+      },
+      {
+        "name": "Catalogue return reopens host title",
+        "pass": true
+      },
+      {
+        "name": "DLC starts without a test hook",
+        "pass": true
+      },
+      {
+        "name": "DLC canvas is sized",
+        "pass": true
+      },
+      {
+        "name": "Ordinary keyboard moves the player",
+        "pass": true,
+        "detail": {
+          "before": 180,
+          "after": 279.0764999999999
+        }
+      },
+      {
+        "name": "DLC native save readback succeeds",
+        "pass": true
+      },
+      {
+        "name": "DLC continue available after reload",
+        "pass": true
+      },
+      {
+        "name": "DLC reload preserves player position",
+        "pass": true,
+        "detail": {
+          "after": 279.0764999999999,
+          "resumed": 279.0764999999999
+        }
+      },
+      {
+        "name": "DLC leaves host storage untouched",
+        "pass": true
+      },
+      {
+        "name": "All added storage keys belong to the DLC",
+        "pass": true
+      },
+      {
+        "name": "No JavaScript page errors",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "No failed HTTP resources",
+        "pass": true,
+        "detail": []
+      }
+    ],
+    "errors": [],
+    "httpErrors": [],
+    "browser": "159.0.8154.6",
+    "playwright": "1.65.1",
+    "storage": {
+      "hostKeys": [
+        "atf-v78-selected-profile",
+        "atf-device-v119",
+        "atf-frontier-forge-workspace-v134"
+      ],
+      "addedKeys": [
+        "tantalus.dlc.sea-of-sorrows.v1.last-valid",
+        "tantalus.dlc.sea-of-sorrows.v1",
+        "tantalus.dlc.sea-of-sorrows.v1.recovery"
+      ]
+    },
+    "passed": 21,
+    "failed": 0
+  }
+}

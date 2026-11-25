@@ -1,0 +1,3170 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Codex — La Mer des Chagrins</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#101813;color:#dce5d5;font:16px/1.7 Arial,sans-serif}header{padding:60px max(6vw,24px);border-bottom:1px solid #566747;background:linear-gradient(120deg,#203326,#151e16)}.eyebrow{color:#c7b779;letter-spacing:3px;font-size:11px}h1{font-size:clamp(28px,4vw,54px);line-height:1.1;font-weight:400;max-width:970px}h2{color:#e5d199;font-size:28px;margin:48px 0 18px;font-weight:400}h3{font-size:22px;color:#d5dfbd;margin-top:40px}h4{color:#cbd5a5}p{max-width:1100px}main{max-width:1280px;padding:20px 32px 80px;margin:auto}a{color:#e2c98e;overflow-wrap:anywhere}nav{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}nav a{padding:9px 15px;border:1px solid #67775a;text-decoration:none;border-radius:3px}.tag{display:inline-block;background:#4b4129;color:#efdcaa;padding:4px 11px;font-size:12px;border:1px solid #968454}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin:28px 0}.stats article{padding:20px;border:1px solid #586646;background:#1b291d}.stats strong{font-size:31px;display:block;color:#e3d199}.stats span{font-size:13px;color:#b6c3a5}section{scroll-margin-top:20px}.note{padding:16px 22px;border-left:3px solid #c5ad6a;background:#263020;font-size:14px}code{font-size:.87em;background:#273823;padding:2px 5px;border-radius:3px;overflow-wrap:anywhere}pre{white-space:pre-wrap;padding:20px;background:#243020}table{display:block;overflow:auto;width:100%;border-collapse:collapse;font-size:13px;line-height:1.55;margin:20px 0 30px}th,td{text-align:left;vertical-align:top;padding:10px 14px;border:1px solid #425739;min-width:100px}th{background:#35462b;color:#e8ddaf}tr:nth-child(2n){background:#1c2b1c}figure{margin:34px 0 52px;border:1px solid #4b5b3c;background:#152018}figure img{width:100%;height:auto;display:block}figure.phone img{max-height:840px;width:auto;max-width:100%;margin:auto}figcaption{padding:15px 20px;font-size:14px;color:#bac9ae}details{margin:25px 0;padding:14px 20px;background:#1a2b1d;border:1px solid #4d603c}summary{cursor:pointer;color:#e3d49d}footer{border-top:1px solid #405335;color:#a8b59c;font-size:12px;padding:30px 6vw}@media(max-width:700px){main{padding:16px}.stats{grid-template-columns:1fr 1fr;gap:10px}.stats article{padding:13px}header{padding:35px 22px}h2{font-size:24px}table{font-size:12px}body{font-size:15px}}@media print{body{background:white;color:#111}header{background:white}h1,h2,h3,a{color:#222}table{display:table;font-size:9px}.stats article,details{background:#eee}nav{display:none}figure{break-inside:avoid}}</style></head><body><header><div class="eyebrow">DOSSIER DE PRODUCTION / 29 SEPTEMBRE 2026</div><h1>La Mer des Chagrins<br>Les voix sous le sable</h1><span class="tag">V0.1.0 — PROTOTYPE AUTONOME</span><nav><a href="#campagne">Codex de campagne</a><a href="#salles">40 salles</a><a href="#sources">Sources et continuité</a></nav></header><main><p class="note">Document de la version effectivement livrée. Les plans détaillés, mécaniques et textes courts sont des créations d’adaptation. La fidélité intégrale au roman et l’intégration au moteur de Tantalus Frontier ne sont pas certifiées.</p><section id="campagne"><h1>ALIEN : LA MER DES CHAGRINS</h1>
+<h2>Les voix sous le sable — Codex de campagne, v0.1.0</h2>
+<p><strong>Statut : première version jouable autonome.</strong> Ce dossier décrit le contenu de cette archive, pas un DLC déjà intégré dans le moteur de Tantalus Frontier. Les chiffres de contenu sont issus de <code>data/campaign.json</code>. Les contrôles réalisés et leurs limites se trouvent dans <code>RAPPORT_QA.md</code>.</p>
+<h2>1. Intention</h2>
+<p>Il ne faut pas transformer Decker en un commando envoyé nettoyer une mine. L’entrée en matière est civile : inspection, constat, rapport et pression de la compagnie. L’équipement arrive ensuite. La descente doit faire sentir que les voies d’accès humaines se terminent à l’intérieur de structures qui n’ont pas été construites pour elles.</p>
+<p>La proposition de jeu repose sur trois tensions originales d’adaptation. Entendre la présence évite l’aveuglement mais augmente l’exposition. Tuer peut assurer la sécurité immédiate mais contredit l’ordre final de capture. Une issue connue peut être condamnée, à condition que le joueur dispose d’un autre chemin réel et lisible.</p>
+<p>Le jeu livré contient 18 chapitres, 33 objectifs séquentiels et 40 salles reliées par 45 liaisons. Il conserve une présentation latérale globale et une présentation hybride qui choisit le mouvement approprié à la salle. Ce n’est pas une campagne de 40 arènes interchangeables ni un simple catalogue de fiches : portes, conditions d’accès, captures, armes et sauvegardes sont exécutées par le moteur fourni. Cela reste un prototype : plusieurs salles partagent une famille graphique et les séquences narratives passent par des fenêtres de texte.</p>
+<h2>2. Trame et degrés de fidélité</h2>
+<p>La référence est le roman de James A. Moore, selon les limites documentées dans <code>SOURCES_CONTINUITE.md</code>. On conserve le cadre, Decker, l’expédition contrainte et l’enjeu de récupération. On ne prétend pas restituer mot pour mot les échanges, reproduire tous les figurants ou montrer chaque décès exactement comme dans l’œuvre.</p>
+<p>Les textes joués sont nouveaux. Par exemple, l’instruction de concentration n’explique pas au joueur des variables de programmation ; elle lui demande d’écouter ce qui approche. L’instruction de capture indique un geste à accomplir dans la soute. Le vocabulaire technique n’apparaît que dans ces documents de production et dans le format de données.</p>
+<p>La rencontre avec la reine est une adaptation fonctionnelle : trois attaches destructibles doivent être brûlées, puis les tirs deviennent efficaces. La division en trois attaches et la vulnérabilité conditionnelle sont des règles de jeu originales, pas des faits revendiqués du livre. De même, le joueur manie la mousse lors de la capture, alors que la source attribue le geste à Manning. La fin ne transforme pas les deux porteurs en personnes guéries par une simple interaction.</p>
+<h2>3. Déroulement spatial</h2>
+<p>L’inspection se déroule au bord de la zone toxique, près d’un carottier. Le transfert sanitaire, les démarches sur Terre et l’entretien imposé sont des changements de lieu explicitement identifiés. Ils ne sont pas représentés comme trois portes adjacentes dans le même couloir.</p>
+<p>Le retour sur New Galveston établit une aire d’atterrissage, un abri, une décontamination et une tête de puits. La mine comprend une recette inférieure, un relais, un atelier et une desserte électrique. La transition suivante traverse une carène enfouie, une brèche, une tranchée de fouille et des vestiges. Les tubes puis la zone de ponte se trouvent au-delà de ce réseau.</p>
+<p>La remontée n’introduit pas une seconde aire d’atterrissage sous un autre nom : le graphe rejoint <code>s11</code>, déjà visitée à l’arrivée. Ce retour est l’un des tests structurants. Les cages condamnées restent condamnées. La membrane ne doit jamais exiger de traverser une collision invisible : une dérivation repérée permet de revenir vers la suite.</p>
+<p>Les étages sont des transitions de salles par cages ou escaliers. Le prototype ne simule pas des étages superposés simultanément ni une physique de saut. La coupe et les paliers représentés sont une traduction spatiale simplifiée.</p>
+<h2>4. Présentation et collision</h2>
+<p>Le mode HYBRID global utilise 11 salles SIDE, 16 salles DEPTH et 13 salles HYBRID. SIDE impose une seule bande ; DEPTH offre une plage de profondeur plus large ; HYBRID resserre légèrement cette plage. Le mode CLASSIC ramène toute la campagne à une bande latérale et n’applique pas les obstacles de profondeur déclarés non bloquants pour cette présentation.</p>
+<p>Un point de monde possède une abscisse <code>x</code> et une profondeur normalisée <code>z</code>. Une unité n’équivaut pas à un mètre canonique. Les couverts occupent une surface ; changer de bande dans leur volume est interdit. Le tir teste sa trajectoire et les obstacles. Deux silhouettes superposées à l’écran ne suffisent pas pour garantir une touche.</p>
+<p>Les personnages, les ennemis, les objets et les couverts sont triés par profondeur. Un couvert au premier plan peut devenir partiellement transparent lorsqu’il masque le joueur, sans perdre sa collision. Les bandes de déplacement ne sont pas affichées comme un quadrillage de débogage.</p>
+<p>La caméra se déplace horizontalement. Les fonds lointains, les volumes intermédiaires et les éléments proches utilisent des décalages distincts. Le décor commence au sommet du canvas, immédiatement sous le bandeau d’état. Le HUD principal et l’objectif sont à l’extérieur du champ de jeu.</p>
+<p>Le mode SETPIECE des autres documents du projet n’a pas été implémenté ici : la navette et le combat final utilisent les systèmes de profondeur et leurs objectifs propres, sans quatrième contrôleur de caméra.</p>
+<h2>5. Empathie</h2>
+<p>Maintenir Espace augmente la pression de 20 unités par seconde, jusqu’à 100. Relâcher permet une récupération de 8 unités par seconde. La perception donne une orientation grossière et un message de proximité dans la salle courante ; elle n’affiche pas une carte de toutes les créatures ni des coordonnées à travers les niveaux.</p>
+<p>Au-dessus de 45 de pression, maintenir le lien peut alerter les ennemis à moins de 1 000 unités. Le message devient plus menaçant à haute pression. Le système n’accorde ni possession, ni ordre télépathique, ni sort offensif. Son objectif pédagogique exige un bref usage réel de la concentration.</p>
+<p>Cette version utilise un indice déterministe. Elle ne contient pas encore de faux souvenirs jouables, de visions alternatives, de réponses vocales adaptatives ou de lecture psychologique complexe de chaque mercenaire.</p>
+<h2>6. Combat et ressources</h2>
+<p>Le pistolet dispose d’un chargeur de 12 coups. Recharger transfère les munitions disponibles et impose un délai de tir. Le lance-flammes a une portée plus courte et brûle les attaches de la chambre. La mousse consomme des charges distinctes et accumule un degré d’immobilisation sans infliger de dégâts.</p>
+<p>Les trois armes n’emploient pas le même effet visuel. Les tirs respectent les couverts et la profondeur. Les adultes morts laissent un corps et une zone acide temporaire. Revenir dans la salle ne les fait pas réapparaître. Il n’existe pas de générateur infini de vagues dans cette livraison.</p>
+<p>Les huit postes de ravitaillement se vident une fois. Ils restaurent une partie de la santé, remplacent le filtre et donnent des réserves. Le filtre ne baisse dans le périmètre extérieur contaminé qu’après l’équipement. La difficulté modifie les dégâts reçus et les ressources distribuées, pas la topologie des objectifs.</p>
+<p>Exploration applique 45 % des dégâts de référence et 140 % des ravitaillements. Survie utilise les valeurs de référence. Oppression applique 135 % des dégâts et 80 % des ravitaillements. Ces réglages ont des tests fonctionnels ; leur agrément et leur durée n’ont pas fait l’objet d’une campagne de playtest humain.</p>
+<h2>7. Manning et les autres personnages</h2>
+<p>Manning est l’unique compagnon tactique simulé. Il peut suivre ou tenir une position. Il contourne les obstacles et tire lorsqu’une cible remplit les conditions de visibilité, de distance et de profondeur. Il ne tire pas sur l’adulte réservé à la capture. Il ne tire pas sur la reine avant la destruction des attaches.</p>
+<p>Les autres personnes interviennent par leurs fonctions narratives, quelques silhouettes de situation et des dossiers. La présence d’un nom dans le codex ne signifie pas qu’il possède déjà un acteur complet avec tous ses dialogues, comportements et animations. Le roster exhaustif de l’expédition et ses morts individuelles ne sont pas simulés.</p>
+<p>Decker ne contrôle pas à distance tous les mercenaires. Les deux porteurs de la phase d’évacuation correspondent à des interactions de brancards conservant leur état ; ils ne sont pas une IA d’escorte transportant physiquement chaque brancard à travers toutes les salles. C’est une simplification explicitement inscrite dans cette version.</p>
+<h2>8. Capture finale</h2>
+<p>L’adulte entre par un point défini de la soute. Le joueur doit le garder vivant, l’amener à proximité du caisson et appliquer assez de mousse. Trois impacts directs rapprochés suffisent à atteindre le seuil initial, mais l’immobilisation décroît lentement.</p>
+<p>Le caisson refuse la capture si la cible est trop loin, insuffisamment immobilisée ou morte. En cas de mort, l’expédition échoue à ce point et la reprise restaure la salle. Une fois capturé, l’adulte sort de la simulation hostile et le caisson est marqué verrouillé. La phase de quarantaine ne peut être atteinte avant la capture.</p>
+<p>Le test de navigateur prépare les positions d’un scénario de capture, effectue les tirs du moteur et active ensuite le caisson au clavier. Il ne se contente pas d’écrire le drapeau de réussite. Cette vérification ne remplace pas un parcours humain complet depuis l’inspection.</p>
+<h2>9. Carte et dossiers</h2>
+<p>La carte montre les salles visitées et les seuils voisins identifiés. Ses secteurs sont séparés par onglets. Elle représente les connexions, pas des coordonnées géographiques officielles. Les conditions et les fermetures dynamiques alimentent la lisibilité des liaisons ; la porte réelle demeure la référence pour entrer.</p>
+<p>Quarante relevés de terrain sont placés physiquement dans les salles. Vingt-quatre dossiers thématiques se débloquent selon la progression. Leur recherche filtre uniquement les entrées déjà disponibles. Une fiche sur une créature décrit ce que cette adaptation utilise, pas une certification exhaustive de la xénobiologie de la franchise.</p>
+<p>Les lectures, la carte, la pause et les courts passages narratifs arrêtent la simulation. Un passage de récit ne laisse pas un xénomorphe tuer le joueur derrière une fenêtre. La perte de focus neutralise les entrées pour éviter une course ou un tir bloqué.</p>
+<h2>10. Sauvegarde et reprise</h2>
+<p>La clé est <code>tantalus.dlc.sea-of-sorrows.v1</code>. Elle ne contient pas le solde de crédits, l’inventaire de Tantalus ou les récompenses des autres campagnes. L’état conserve les objectifs ordonnés, les drapeaux, les salles visitées, les dossiers, l’équipement, les ennemis, les corps, les caisses et un point de reprise.</p>
+<p>Chaque entrée de salle crée actuellement un point de reprise. Une mort puis une reprise restaurent ce point, pas un état intermédiaire arbitraire. L’import valide l’identité du DLC, les données numériques, les listes, les types de personnages, les objectifs et le point de reprise avant de modifier l’instance active. La taille acceptée est limitée.</p>
+<p>La sauvegarde automatique s’effectue aux événements importants, avec export et import manuels dans Pause. Le navigateur peut refuser son stockage, notamment selon le contexte d’ouverture d’un fichier. L’interface indique alors la nécessité d’exporter. Les tests de ce conteneur ont validé le contrat de stockage avec une fixture en mémoire ; ils ne certifient pas les permissions natives du navigateur de l’utilisateur.</p>
+<h2>11. Fabrication visuelle et sonore</h2>
+<p>Tous les décors et personnages de cette version sont des dessins vectoriels exécutés dans Canvas. Aucune capture du film, image promotionnelle, planche trouvée sur Internet ou musique extraite n’a été embarquée. Il n’y a pas de moteur de téléchargement d’assets caché.</p>
+<p>Les familles humaines utilisent structures, consoles, cages, postes de soins et équipements. Les obstacles des vestiges et de la ruche utilisent résine, débris de silice et côtes organiques plutôt que des caisses militaires répétées. Les passages organiques ont une silhouette propre. Les éclairages extérieurs reposent sur des poteaux, pas sur des fils flottant dans le ciel.</p>
+<p>Les graphismes restent stylisés et provisoires. Le générateur de dessin est livré dans <code>src/render.js</code> : chaque famille, acteur et effet peut être remplacé indépendamment. Il ne s’agit pas d’un pack de sprites de production avec toutes les animations. Les échelles expriment une hiérarchie visuelle de jeu, pas une mesure physique validée sur un modèle officiel.</p>
+<p>L’ambiance facultative et les sons de tir sont synthétisés avec Web Audio. Aucune voix du roman audio n’est incluse. Le mode de mouvements réduits limite les animations décoratives et supprime les transitions CSS ; ce n’est pas une certification d’accessibilité médicale ou une prise en charge de toutes les aides techniques.</p>
+<h2>12. Intégration : ce qui existe et ce qui n’existe pas</h2>
+<p><code>integration/install.cjs</code> copie le module dans un sous-dossier <code>dlc/sea-of-sorrows</code> d’un projet local et contrôle les empreintes. Il n’importe pas le moteur principal, ne modifie pas son index et n’enregistre pas automatiquement ce DLC dans un menu. Son désinstallateur refuse de supprimer un dossier modifié ou contenant des fichiers additionnels.</p>
+<p>Le descripteur contient un ancien identifiant de campagne pour aider un futur rapprochement. Ce n’est pas un adaptateur natif. Les règles de session, de rendu, de sauvegarde et de pause du dépôt courant doivent être auditées avant le raccordement. Aucun push GitHub et aucun déploiement Vercel n’ont été effectués pour cette livraison.</p>
+<h2>13. Conditions de passage à une version intégrée</h2>
+<p>Le raccordement devra d’abord préserver la séparation de sauvegarde et des récompenses. Ensuite, les 40 salles devront être traversées dans le moteur hôte sans téléportation de test. Le combat de la reine et la capture devront être réussis dans les trois difficultés par des joueurs. Les états de clavier, manette, tactile, son et focus devront être repris par les réglages communs du projet.</p>
+<p>Une passe de fidélité approfondie demandera une confrontation au roman complet : ordre des séquences, armes réellement confiées à Decker, survivants, rôle exact de chaque intervenant et limites des versions audio. Les ajouts graphiques doivent suivre les plans et les collisions, pas déplacer les issues pour arranger une illustration.</p>
+<p>Ces travaux ne sont pas annoncés comme réalisés. La livraison présente constitue une base jouable documentée et testée au niveau indiqué dans son rapport.</p>
+</section><section id="salles"><h1>Codex de level design — La Mer des Chagrins</h1>
+<h2>v0.1.0 · 40 salles / 45 liaisons</h2>
+<p>Ce document est généré à partir des données réellement lues par le moteur. Les dimensions sont des unités de jeu, pas des mesures du roman. Les noms détaillés de salles sont des créations d’adaptation. La carte ne prétend pas reproduire un plan canonique.</p>
+<h2>Doctrine et lecture des fiches</h2>
+<p>Chaque porte porte une paire de liaison. Le retour utilise cette même paire et restaure une position d’arrivée voisine du seuil ; les états de la salle persistent. Les coordonnées <code>x</code> sont horizontales, <code>z</code> indique la profondeur du sol. Les cadres du HUD restent hors du canvas.</p>
+<p>Le mode global CLASSIC ramène toutes les profondeurs à 0,55 et ignore les couvertures déclarées non bloquantes pour cette vue. Les conditions d’objectif ne changent pas. Les cages, escaliers, vols et transferts sont des changements de salle explicites, pas une physique verticale continue.</p>
+<p>Les « intentions de décor » reprises du champ <code>propNotes</code> constituent une direction de fabrication. Elles ne signifient pas que chaque accessoire nommé possède déjà un sprite dédié. Les tableaux de collision ci-dessous, eux, correspondent à des objets rendus et bloquants dans le prototype.</p>
+<p>La sauvegarde de reprise est créée à chaque entrée de salle par le moteur. Le champ historique <code>checkpoint</code> des données ne filtre pas ce comportement dans la version 0.1.0.</p>
+<h2>Parcours des chapitres</h2>
+<table>
+<thead>
+<tr>
+  <th>Chapitre du jeu</th>
+  <th>Objectifs jouables</th>
+  <th>Note de mise en scène</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>01 — La mer noire</td>
+  <td>Relever le carottier (s02)</td>
+  <td>Inspection civile. Aucun arsenal, aucun xénomorphe en patrouille sur le chantier.</td>
+</tr>
+<tr>
+  <td>02 — Le rapport</td>
+  <td>Transmettre les résultats (s03)</td>
+  <td>Une traversée sanitaire relie explicitement les deux planètes. Le rapport devient un objet de l’intrigue.</td>
+</tr>
+<tr>
+  <td>03 — Un rapport de trop</td>
+  <td>Déposer les conclusions (s04) ; Passer les examens (s06) ; Écouter le message familial (s05)</td>
+  <td>L’appartement et la Commission sont reliés par le tram, pas par un couloir de vaisseau.</td>
+</tr>
+<tr>
+  <td>04 — La dette</td>
+  <td>Écouter Rollins (s08) ; Récupérer l’équipement (s09)</td>
+  <td>La pression de la compagnie reste institutionnelle. Pas de combat de boss contre Rollins.</td>
+</tr>
+<tr>
+  <td>05 — Retour à Galveston</td>
+  <td>Rejoindre le briefing (s12) ; Vérifier les filtres (s13) ; Mettre la cage en service (s14)</td>
+  <td>Le camp de surface conserve son identité jusqu’au retour final.</td>
+</tr>
+<tr>
+  <td>06 — Sous les installations</td>
+  <td>Établir le relais (s16) ; Rétablir la desserte (s18)</td>
+  <td>Premier raccourci permanent, atelier facultatif et retour lisible au relais.</td>
+</tr>
+<tr>
+  <td>07 — La carène</td>
+  <td>Examiner la brèche (s20) ; Retrouver le balisage de fouille (s21)</td>
+  <td>Ne pas rebaptiser la coque en vaisseau d’Ingénieur sans source ; le relevé décrit ce qui est visible.</td>
+</tr>
+<tr>
+  <td>08 — La ville muette</td>
+  <td>Examiner les restes (s23) ; Récupérer le détecteur (s24)</td>
+  <td>Les vestiges ne deviennent pas une faction ennemie vivante inventée.</td>
+</tr>
+<tr>
+  <td>09 — Trois signaux</td>
+  <td>Écouter ce qui approche (s26) ; Retrouver la balise perdue (s28)</td>
+  <td>L’empathie est directionnelle et incertaine. Elle ne donne ni carte complète ni contrôle des créatures.</td>
+</tr>
+<tr>
+  <td>10 — Un chemin qui change</td>
+  <td>Marquer la dérivation (s27) ; Vérifier le passage fermé (s29)</td>
+  <td>Une fermeture scénarisée modifie un lien précis, jamais le graphe au hasard.</td>
+</tr>
+<tr>
+  <td>11 — La sortie perdue</td>
+  <td>Examiner le second ascenseur (s30)</td>
+  <td>La perte du puits est un événement du récit. Elle ne peut enfermer le joueur sans issue.</td>
+</tr>
+<tr>
+  <td>12 — L’autre escalier</td>
+  <td>Repérer la voie de secours (s31) ; Repérer un passage entre les œufs (s32)</td>
+  <td>Les œufs occupent des îlots contournables ; les parasites proviennent de points identifiables.</td>
+</tr>
+<tr>
+  <td>13 — La pondeuse</td>
+  <td>Ouvrir la voie au groupe (s33)</td>
+  <td>Affrontement collectif : Decker brûle les attaches et ouvre les angles de tir de Manning.</td>
+</tr>
+<tr>
+  <td>14 — Ceux qu’on emporte</td>
+  <td>Mettre Adams à l’abri (s34) ; Mettre Elway à l’abri (s34)</td>
+  <td>Aucun soin ne supprime une implantation ; la mise à l’abri n’équivaut pas à une guérison.</td>
+</tr>
+<tr>
+  <td>15 — Remonter</td>
+  <td>Actionner le treuil (s35) ; Ouvrir le passage du ravin (s36) ; Rallumer la balise d’approche (s11)</td>
+  <td>Retour à la vraie salle s11, recontextualisée ; aucune copie sans correspondance spatiale.</td>
+</tr>
+<tr>
+  <td>16 — Un spécimen vivant</td>
+  <td>Immobiliser puis enfermer l’adulte (s37)</td>
+  <td>Utiliser le moussoir pour immobiliser l’adulte dans la soute. Le tuer impose de reprendre la séquence.</td>
+</tr>
+<tr>
+  <td>17 — Réception de cargaison</td>
+  <td>Confirmer le transfert (s38) ; Observer la surface (s39)</td>
+  <td>La fin n’est pas réécrite en victoire parfaite de Decker. Le récit conserve le succès de la récupération.</td>
+</tr>
+<tr>
+  <td>18 — Les voix persistent</td>
+  <td>Entrer en hypersommeil (s40)</td>
+  <td>Épilogue contemplatif. Aucun nouveau boss psychique ; aucun bonus ramenant les spécimens dans la campagne 2204.</td>
+</tr>
+</tbody>
+</table>
+<h2>Fiches de salles</h2>
+<h3>S01 — Poste de contrôle</h3>
+<p><strong>Secteur : Surface · Profil : sand · Vue hybride : DEPTH · Largeur : 1960 unités.</strong></p>
+<p>Des herbes rases butent sur une bande de sable noir. Le poste reste relié à la voie de service.</p>
+<p><strong>Lecture spatiale.</strong> Surface de déplacement en profondeur ; obstacles contournables. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Portique de surveillance ; bornes météo ; clôture ouverte ; câbles enterrés ; traces de chenilles.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-01</td>
+  <td>s02 — Le carottier</td>
+  <td>door</td>
+  <td>1860 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<p>Cette salle assure un trajet, une respiration ou une rencontre ; elle ne déclenche pas de nouvel objectif principal. Sa visite et ses seuils persistent néanmoins.</p>
+<p>Relevé facultatif <code>field-s01</code> : x = 706, z = 0.25. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s01-block-0 — caisse industrielle</td>
+  <td>588 ; 0.22</td>
+  <td>140 ; 0.12</td>
+  <td>75</td>
+</tr>
+<tr>
+  <td>s01-block-1 — rayonnage</td>
+  <td>1098 ; 0.77</td>
+  <td>140 ; 0.12</td>
+  <td>75</td>
+</tr>
+<tr>
+  <td>s01-block-2 — faisceau de conduites</td>
+  <td>1490 ; 0.22</td>
+  <td>140 ; 0.12</td>
+  <td>75</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Aucun ennemi initial. Ne pas remplir cette salle de patrouilles pour augmenter artificiellement la durée.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S02 — Le carottier</h3>
+<p><strong>Secteur : Surface · Profil : sand · Vue hybride : DEPTH · Largeur : 2240 unités.</strong></p>
+<p>Le forage repose sur une plateforme dissymétrique au-dessus des tubes de silice. Une passerelle permet de contourner la machine.</p>
+<p><strong>Lecture spatiale.</strong> Surface de déplacement en profondeur ; obstacles contournables. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Carottier ancré ; vérins ; caisse de prélèvement ; manche à air ; balises de périmètre.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-01</td>
+  <td>s01 — Poste de contrôle</td>
+  <td>door</td>
+  <td>2140 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-02</td>
+  <td>s03 — Transport sanitaire</td>
+  <td>travel</td>
+  <td>100 ; 0.55</td>
+  <td>accident</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o01-01</code> : <strong>Relever le carottier</strong>, à x = 1142, z = 0.55. Déclenche <code>accident</code> après validation des conditions du type <code>sample</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s02</code> : x = 806, z = 0.25. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s02-block-0 — caisse industrielle</td>
+  <td>672 ; 0.22</td>
+  <td>164 ; 0.12</td>
+  <td>90</td>
+</tr>
+<tr>
+  <td>s02-block-1 — rayonnage</td>
+  <td>1254 ; 0.77</td>
+  <td>164 ; 0.12</td>
+  <td>90</td>
+</tr>
+<tr>
+  <td>s02-block-2 — faisceau de conduites</td>
+  <td>1702 ; 0.22</td>
+  <td>164 ; 0.12</td>
+  <td>90</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Aucun ennemi initial. Ne pas remplir cette salle de patrouilles pour augmenter artificiellement la durée.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S03 — Transport sanitaire</h3>
+<p><strong>Secteur : Transit · Profil : medical · Vue hybride : SIDE · Largeur : 1580 unités.</strong></p>
+<p>Une courte cabine pressurisée : couchette à gauche, terminal médical au centre, sas à droite.</p>
+<p><strong>Lecture spatiale.</strong> Bande latérale ; profondeur verrouillée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Couchette ; moniteur ; écran de télémétrie ; rangement mural ; hublot oblong.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-03</td>
+  <td>s04 — Bureau de la Commission</td>
+  <td>travel</td>
+  <td>1480 ; 0.55</td>
+  <td>report_sent</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o02-01</code> : <strong>Transmettre les résultats</strong>, à x = 806, z = 0.55. Déclenche <code>report_sent</code> après validation des conditions du type <code>analyse</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s03</code> : x = 569, z = 0.55. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<p>Pas de barrière de profondeur. La silhouette architecturale et les accessoires de fond ne sont pas des murs invisibles traversant la bande latérale.</p>
+<p><strong>Présences et rythme</strong></p>
+<p>Aucun ennemi initial. Ne pas remplir cette salle de patrouilles pour augmenter artificiellement la durée.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S04 — Bureau de la Commission</h3>
+<p><strong>Secteur : Terre · Profil : office · Vue hybride : HYBRID · Largeur : 1960 unités.</strong></p>
+<p>Les guichets ouvrent sur une salle de consultation. Les fenêtres montrent la ville et non le chantier minier.</p>
+<p><strong>Lecture spatiale.</strong> Volume de transition ; profondeur resserrée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Bureaux ; imprimante ; casiers ; rangements documentaires ; baie sur les voies urbaines.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-04</td>
+  <td>s05 — Appartement de Decker</td>
+  <td>tram</td>
+  <td>1860 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-05</td>
+  <td>s06 — Consultation</td>
+  <td>door</td>
+  <td>100 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o03-01</code> : <strong>Déposer les conclusions</strong>, à x = 1000, z = 0.55. Déclenche <code>report_filed</code> après validation des conditions du type <code>terminal</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s04</code> : x = 706, z = 0.25. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s04-block-0 — caisse industrielle</td>
+  <td>588 ; 0.22</td>
+  <td>140 ; 0.12</td>
+  <td>120</td>
+</tr>
+<tr>
+  <td>s04-block-1 — rayonnage</td>
+  <td>1098 ; 0.77</td>
+  <td>140 ; 0.12</td>
+  <td>120</td>
+</tr>
+<tr>
+  <td>s04-block-2 — faisceau de conduites</td>
+  <td>1490 ; 0.22</td>
+  <td>140 ; 0.12</td>
+  <td>120</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Aucun ennemi initial. Ne pas remplir cette salle de patrouilles pour augmenter artificiellement la durée.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S05 — Appartement de Decker</h3>
+<p><strong>Secteur : Terre · Profil : home · Vue hybride : SIDE · Largeur : 1800 unités.</strong></p>
+<p>Un logement habité, pas une arène. Des affaires familiales occupent le fond ; une circulation libre mène au terminal personnel.</p>
+<p><strong>Lecture spatiale.</strong> Bande latérale ; profondeur verrouillée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Table ; assises ; rangement bas ; dessins ; terminal familial ; fenêtre sur la rue.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-04</td>
+  <td>s04 — Bureau de la Commission</td>
+  <td>tram</td>
+  <td>1700 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-06</td>
+  <td>s07 — Coursive sous garde</td>
+  <td>story</td>
+  <td>100 ; 0.55</td>
+  <td>earth_done</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o03-03</code> : <strong>Écouter le message familial</strong>, à x = 918, z = 0.55. Déclenche <code>earth_done</code> après validation des conditions du type <code>message</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s05</code> : x = 648, z = 0.55. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<p>Pas de barrière de profondeur. La silhouette architecturale et les accessoires de fond ne sont pas des murs invisibles traversant la bande latérale.</p>
+<p><strong>Présences et rythme</strong></p>
+<p>Aucun ennemi initial. Ne pas remplir cette salle de patrouilles pour augmenter artificiellement la durée.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S06 — Consultation</h3>
+<p><strong>Secteur : Terre · Profil : medical · Vue hybride : HYBRID · Largeur : 1660 unités.</strong></p>
+<p>Le cabinet médical est relié à la Commission par la circulation publique. Un écran isole la table d’examen.</p>
+<p><strong>Lecture spatiale.</strong> Volume de transition ; profondeur resserrée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Table d’examen ; rideau ; analyseur ; lave-mains ; dossier patient.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-05</td>
+  <td>s04 — Bureau de la Commission</td>
+  <td>door</td>
+  <td>1560 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o03-02</code> : <strong>Passer les examens</strong>, à x = 1112, z = 0.55. Déclenche <code>exam_done</code> après validation des conditions du type <code>medical</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s06</code> : x = 664, z = 0.25. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s06-block-0 — caisse industrielle</td>
+  <td>498 ; 0.22</td>
+  <td>188 ; 0.12</td>
+  <td>90</td>
+</tr>
+<tr>
+  <td>s06-block-1 — rayonnage</td>
+  <td>930 ; 0.77</td>
+  <td>188 ; 0.12</td>
+  <td>90</td>
+</tr>
+<tr>
+  <td>s06-block-2 — faisceau de conduites</td>
+  <td>1262 ; 0.22</td>
+  <td>188 ; 0.12</td>
+  <td>90</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Aucun ennemi initial. Ne pas remplir cette salle de patrouilles pour augmenter artificiellement la durée.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S07 — Coursive sous garde</h3>
+<p><strong>Secteur : Vaisseau · Profil : ship · Vue hybride : SIDE · Largeur : 1720 unités.</strong></p>
+<p>Une coursive surveillée relie l’infirmerie à la salle d’entretien. Les portes de service ne mènent pas à un autre monde.</p>
+<p><strong>Lecture spatiale.</strong> Bande latérale ; profondeur verrouillée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Caméra ; grille de ventilation ; banc fixé ; canalisation ; voyant de verrou.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-07</td>
+  <td>s08 — La salle d’entretien</td>
+  <td>door</td>
+  <td>1620 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<p>Cette salle assure un trajet, une respiration ou une rencontre ; elle ne déclenche pas de nouvel objectif principal. Sa visite et ses seuils persistent néanmoins.</p>
+<p>Relevé facultatif <code>field-s07</code> : x = 619, z = 0.55. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<p>Pas de barrière de profondeur. La silhouette architecturale et les accessoires de fond ne sont pas des murs invisibles traversant la bande latérale.</p>
+<p><strong>Présences et rythme</strong></p>
+<p>Aucun ennemi initial. Ne pas remplir cette salle de patrouilles pour augmenter artificiellement la durée.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S08 — La salle d’entretien</h3>
+<p><strong>Secteur : Vaisseau · Profil : office · Vue hybride : HYBRID · Largeur : 1760 unités.</strong></p>
+<p>Deux sièges se font face, séparés par une console. Le vitrage laisse voir les coursives du bord.</p>
+<p><strong>Lecture spatiale.</strong> Volume de transition ; profondeur resserrée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Console ; deux fauteuils ; écran dossier ; armoire scellée ; vitrage technique.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-07</td>
+  <td>s07 — Coursive sous garde</td>
+  <td>door</td>
+  <td>1660 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-08</td>
+  <td>s09 — Réserve d’équipement</td>
+  <td>door</td>
+  <td>100 ; 0.55</td>
+  <td>contract</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o04-01</code> : <strong>Écouter Rollins</strong>, à x = 898, z = 0.55. Déclenche <code>contract</code> après validation des conditions du type <code>talk</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s08</code> : x = 634, z = 0.25. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s08-block-0 — caisse industrielle</td>
+  <td>528 ; 0.22</td>
+  <td>164 ; 0.12</td>
+  <td>120</td>
+</tr>
+<tr>
+  <td>s08-block-1 — rayonnage</td>
+  <td>986 ; 0.77</td>
+  <td>164 ; 0.12</td>
+  <td>120</td>
+</tr>
+<tr>
+  <td>s08-block-2 — faisceau de conduites</td>
+  <td>1338 ; 0.22</td>
+  <td>164 ; 0.12</td>
+  <td>120</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Aucun ennemi initial. Ne pas remplir cette salle de patrouilles pour augmenter artificiellement la durée.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S09 — Réserve d’équipement</h3>
+<p><strong>Secteur : Vaisseau · Profil : armory · Vue hybride : DEPTH · Largeur : 2080 unités.</strong></p>
+<p>Trois travées stockent l’équipement de l’expédition. Les passages entre les racks permettent de changer de profondeur.</p>
+<p><strong>Lecture spatiale.</strong> Surface de déplacement en profondeur ; obstacles contournables. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Racks ancrés ; combinaisons ; chargeurs ; malle de filtres ; casiers numérotés.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-08</td>
+  <td>s08 — La salle d’entretien</td>
+  <td>door</td>
+  <td>1980 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-09</td>
+  <td>s10 — Baie d’embarquement</td>
+  <td>door</td>
+  <td>100 ; 0.55</td>
+  <td>equipped</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o04-02</code> : <strong>Récupérer l’équipement</strong>, à x = 1394, z = 0.55. Déclenche <code>equipped</code> après validation des conditions du type <code>equipment</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s09</code> : x = 749, z = 0.25. Un poste de ravitaillement est disponible à x = 320, z = 0,55 ; sa consommation est définitive.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s09-block-0 — caisse industrielle</td>
+  <td>624 ; 0.22</td>
+  <td>188 ; 0.12</td>
+  <td>75</td>
+</tr>
+<tr>
+  <td>s09-block-1 — rayonnage</td>
+  <td>1165 ; 0.77</td>
+  <td>188 ; 0.12</td>
+  <td>75</td>
+</tr>
+<tr>
+  <td>s09-block-2 — faisceau de conduites</td>
+  <td>1581 ; 0.22</td>
+  <td>188 ; 0.12</td>
+  <td>75</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Aucun ennemi initial. Ne pas remplir cette salle de patrouilles pour augmenter artificiellement la durée.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S10 — Baie d’embarquement</h3>
+<p><strong>Secteur : Vaisseau · Profil : hangar · Vue hybride : DEPTH · Largeur : 2480 unités.</strong></p>
+<p>Une rampe et un couloir de sécurité conduisent à la navette. Les volumes au fond ne sont pas jouables.</p>
+<p><strong>Lecture spatiale.</strong> Surface de déplacement en profondeur ; obstacles contournables. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Navette ; câbles ombilicaux ; treuil ; chariots ; balises de rampe.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-09</td>
+  <td>s09 — Réserve d’équipement</td>
+  <td>door</td>
+  <td>2380 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-10</td>
+  <td>s11 — Aire d’atterrissage</td>
+  <td>flight</td>
+  <td>100 ; 0.55</td>
+  <td>equipped</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<p>Cette salle assure un trajet, une respiration ou une rencontre ; elle ne déclenche pas de nouvel objectif principal. Sa visite et ses seuils persistent néanmoins.</p>
+<p>Relevé facultatif <code>field-s10</code> : x = 893, z = 0.25. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s10-block-0 — caisse industrielle</td>
+  <td>744 ; 0.22</td>
+  <td>140 ; 0.12</td>
+  <td>90</td>
+</tr>
+<tr>
+  <td>s10-block-1 — rayonnage</td>
+  <td>1389 ; 0.77</td>
+  <td>140 ; 0.12</td>
+  <td>90</td>
+</tr>
+<tr>
+  <td>s10-block-2 — faisceau de conduites</td>
+  <td>1885 ; 0.22</td>
+  <td>140 ; 0.12</td>
+  <td>90</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Aucun ennemi initial. Ne pas remplir cette salle de patrouilles pour augmenter artificiellement la durée.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S11 — Aire d’atterrissage</h3>
+<p><strong>Secteur : Camp · Profil : sand · Vue hybride : DEPTH · Largeur : 2560 unités.</strong></p>
+<p>La même aire sera retrouvée au retour. Le camp reste à l’est et le ravin d’accès au nord.</p>
+<p><strong>Lecture spatiale.</strong> Surface de déplacement en profondeur ; obstacles contournables. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Dalles prises dans le sable ; balises ; réservoir ; abri radio ; traces de moteurs.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-11</td>
+  <td>s12 — Abri d’expédition</td>
+  <td>door</td>
+  <td>2460 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-41</td>
+  <td>s36 — Ravin de service</td>
+  <td>door</td>
+  <td>100 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-42</td>
+  <td>s37 — Soute de la navette</td>
+  <td>ramp</td>
+  <td>1178 ; 0.15</td>
+  <td>beacon_lit</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o15-03</code> : <strong>Rallumer la balise d’approche</strong>, à x = 1306, z = 0.55. Déclenche <code>beacon_lit</code> après validation des conditions du type <code>beacon</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s11</code> : x = 922, z = 0.25. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s11-block-0 — caisse industrielle</td>
+  <td>768 ; 0.22</td>
+  <td>164 ; 0.12</td>
+  <td>105</td>
+</tr>
+<tr>
+  <td>s11-block-1 — rayonnage</td>
+  <td>1434 ; 0.77</td>
+  <td>164 ; 0.12</td>
+  <td>105</td>
+</tr>
+<tr>
+  <td>s11-block-2 — faisceau de conduites</td>
+  <td>1946 ; 0.22</td>
+  <td>164 ; 0.12</td>
+  <td>105</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Aucun ennemi initial. Ne pas remplir cette salle de patrouilles pour augmenter artificiellement la durée.</p>
+<p><strong>Retour structurant.</strong> Cette salle est réutilisée après le ravin s36. Le départ final vers la soute s37 attend la balise. Ne pas créer un duplicata de cette aire au retour.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S12 — Abri d’expédition</h3>
+<p><strong>Secteur : Camp · Profil : camp · Vue hybride : HYBRID · Largeur : 1940 unités.</strong></p>
+<p>L’abri possède une entrée, une zone de briefing et un passage vers la décontamination.</p>
+<p><strong>Lecture spatiale.</strong> Volume de transition ; profondeur resserrée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Table de mission ; bancs ; cartes ; thermos ; casiers ; filtre d’air.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-11</td>
+  <td>s11 — Aire d’atterrissage</td>
+  <td>door</td>
+  <td>1840 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-12</td>
+  <td>s13 — Décontamination</td>
+  <td>door</td>
+  <td>100 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o05-01</code> : <strong>Rejoindre le briefing</strong>, à x = 989, z = 0.55. Déclenche <code>briefed</code> après validation des conditions du type <code>brief</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s12</code> : x = 698, z = 0.25. Un poste de ravitaillement est disponible à x = 320, z = 0,55 ; sa consommation est définitive.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s12-block-0 — caisse industrielle</td>
+  <td>582 ; 0.22</td>
+  <td>188 ; 0.12</td>
+  <td>120</td>
+</tr>
+<tr>
+  <td>s12-block-1 — rayonnage</td>
+  <td>1086 ; 0.77</td>
+  <td>188 ; 0.12</td>
+  <td>120</td>
+</tr>
+<tr>
+  <td>s12-block-2 — faisceau de conduites</td>
+  <td>1474 ; 0.22</td>
+  <td>188 ; 0.12</td>
+  <td>120</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Aucun ennemi initial. Ne pas remplir cette salle de patrouilles pour augmenter artificiellement la durée.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S13 — Décontamination</h3>
+<p><strong>Secteur : Camp · Profil : decon · Vue hybride : SIDE · Largeur : 1760 unités.</strong></p>
+<p>Deux portes encadrent les buses de nettoyage. Les équipements humides restent dans la partie sale.</p>
+<p><strong>Lecture spatiale.</strong> Bande latérale ; profondeur verrouillée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Buses ; caillebotis ; cuve de collecte ; combinaisons ; râtelier de bottes.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-12</td>
+  <td>s12 — Abri d’expédition</td>
+  <td>door</td>
+  <td>1660 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-13</td>
+  <td>s14 — Tête de puits</td>
+  <td>door</td>
+  <td>100 ; 0.55</td>
+  <td>filters_ready</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o05-02</code> : <strong>Vérifier les filtres</strong>, à x = 1179, z = 0.55. Déclenche <code>filters_ready</code> après validation des conditions du type <code>filter</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s13</code> : x = 634, z = 0.55. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<p>Pas de barrière de profondeur. La silhouette architecturale et les accessoires de fond ne sont pas des murs invisibles traversant la bande latérale.</p>
+<p><strong>Présences et rythme</strong></p>
+<p>Aucun ennemi initial. Ne pas remplir cette salle de patrouilles pour augmenter artificiellement la durée.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S14 — Tête de puits</h3>
+<p><strong>Secteur : Camp · Profil : lift · Vue hybride : DEPTH · Largeur : 2240 unités.</strong></p>
+<p>Une cage d’ascenseur occupe le centre d’un chevalement. La rambarde laisse seulement deux passages balisés.</p>
+<p><strong>Lecture spatiale.</strong> Surface de déplacement en profondeur ; obstacles contournables. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Cage ; poulies ; commandes ; garde-corps ; câble principal ; barrières de bord.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-13</td>
+  <td>s13 — Décontamination</td>
+  <td>door</td>
+  <td>2140 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-14</td>
+  <td>s15 — Recette inférieure</td>
+  <td>lift</td>
+  <td>100 ; 0.55</td>
+  <td>lift_ready ; condamné après lift_lost</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o05-03</code> : <strong>Mettre la cage en service</strong>, à x = 1142, z = 0.55. Déclenche <code>lift_ready</code> après validation des conditions du type <code>power</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s14</code> : x = 806, z = 0.25. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s14-block-0 — caisse industrielle</td>
+  <td>672 ; 0.22</td>
+  <td>164 ; 0.12</td>
+  <td>90</td>
+</tr>
+<tr>
+  <td>s14-block-1 — rayonnage</td>
+  <td>1254 ; 0.77</td>
+  <td>164 ; 0.12</td>
+  <td>90</td>
+</tr>
+<tr>
+  <td>s14-block-2 — faisceau de conduites</td>
+  <td>1702 ; 0.22</td>
+  <td>164 ; 0.12</td>
+  <td>90</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Aucun ennemi initial. Ne pas remplir cette salle de patrouilles pour augmenter artificiellement la durée.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S15 — Recette inférieure</h3>
+<p><strong>Secteur : Mine · Profil : lift · Vue hybride : HYBRID · Largeur : 2120 unités.</strong></p>
+<p>La cage arrive dans une recette protégée. Les rails sortent vers le relais, loin du bord du puits.</p>
+<p><strong>Lecture spatiale.</strong> Volume de transition ; profondeur resserrée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Cage ; rails ; butoir ; boulonnage ; tuyauteries ; éclairage de secours.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-14</td>
+  <td>s14 — Tête de puits</td>
+  <td>lift</td>
+  <td>2020 ; 0.55</td>
+  <td>accès ouvert selon la progression ; condamné après lift_lost</td>
+</tr>
+<tr>
+  <td>link-15</td>
+  <td>s16 — Relais de Cho</td>
+  <td>door</td>
+  <td>100 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<p>Cette salle assure un trajet, une respiration ou une rencontre ; elle ne déclenche pas de nouvel objectif principal. Sa visite et ses seuils persistent néanmoins.</p>
+<p>Relevé facultatif <code>field-s15</code> : x = 763, z = 0.25. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s15-block-0 — caisse industrielle</td>
+  <td>636 ; 0.22</td>
+  <td>188 ; 0.12</td>
+  <td>105</td>
+</tr>
+<tr>
+  <td>s15-block-1 — rayonnage</td>
+  <td>1187 ; 0.77</td>
+  <td>188 ; 0.12</td>
+  <td>105</td>
+</tr>
+<tr>
+  <td>s15-block-2 — faisceau de conduites</td>
+  <td>1611 ; 0.22</td>
+  <td>188 ; 0.12</td>
+  <td>105</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Aucun ennemi initial. Ne pas remplir cette salle de patrouilles pour augmenter artificiellement la durée.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S16 — Relais de Cho</h3>
+<p><strong>Secteur : Mine · Profil : relay · Vue hybride : DEPTH · Largeur : 2280 unités.</strong></p>
+<p>Le relais distribue les voies de la mine. La radio se trouve contre un mur, sans bloquer les circulations.</p>
+<p><strong>Lecture spatiale.</strong> Surface de déplacement en profondeur ; obstacles contournables. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Table radio ; touret ; casiers ; antenne filaire ; lampe ; repères de secteur.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-15</td>
+  <td>s15 — Recette inférieure</td>
+  <td>door</td>
+  <td>2180 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-16</td>
+  <td>s17 — Atelier de maintenance</td>
+  <td>door</td>
+  <td>100 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-19</td>
+  <td>s19 — La carène enfouie</td>
+  <td>shortcut</td>
+  <td>1049 ; 0.15</td>
+  <td>power_on</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o06-01</code> : <strong>Établir le relais</strong>, à x = 1163, z = 0.55. Déclenche <code>relay_ready</code> après validation des conditions du type <code>radio</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s16</code> : x = 821, z = 0.25. Un poste de ravitaillement est disponible à x = 320, z = 0,55 ; sa consommation est définitive.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s16-block-0 — caisse industrielle</td>
+  <td>684 ; 0.22</td>
+  <td>140 ; 0.12</td>
+  <td>120</td>
+</tr>
+<tr>
+  <td>s16-block-1 — rayonnage</td>
+  <td>1277 ; 0.77</td>
+  <td>140 ; 0.12</td>
+  <td>120</td>
+</tr>
+<tr>
+  <td>s16-block-2 — faisceau de conduites</td>
+  <td>1733 ; 0.22</td>
+  <td>140 ; 0.12</td>
+  <td>120</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Aucun ennemi initial. Ne pas remplir cette salle de patrouilles pour augmenter artificiellement la durée.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S17 — Atelier de maintenance</h3>
+<p><strong>Secteur : Mine · Profil : workshop · Vue hybride : HYBRID · Largeur : 1960 unités.</strong></p>
+<p>Un établi, un passage central libre et une remise arrière. Le matériel lourd reste appuyé au sol.</p>
+<p><strong>Lecture spatiale.</strong> Volume de transition ; profondeur resserrée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Établi ; outils ; bouteilles ; chariot ; caisses ; crochets ; établi secondaire.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-16</td>
+  <td>s16 — Relais de Cho</td>
+  <td>door</td>
+  <td>1860 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-17</td>
+  <td>s18 — Galerie d’alimentation</td>
+  <td>door</td>
+  <td>100 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<p>Cette salle assure un trajet, une respiration ou une rencontre ; elle ne déclenche pas de nouvel objectif principal. Sa visite et ses seuils persistent néanmoins.</p>
+<p>Relevé facultatif <code>field-s17</code> : x = 706, z = 0.25. Un poste de ravitaillement est disponible à x = 320, z = 0,55 ; sa consommation est définitive.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s17-block-0 — caisse industrielle</td>
+  <td>588 ; 0.22</td>
+  <td>164 ; 0.12</td>
+  <td>75</td>
+</tr>
+<tr>
+  <td>s17-block-1 — rayonnage</td>
+  <td>1098 ; 0.77</td>
+  <td>164 ; 0.12</td>
+  <td>75</td>
+</tr>
+<tr>
+  <td>s17-block-2 — faisceau de conduites</td>
+  <td>1490 ; 0.22</td>
+  <td>164 ; 0.12</td>
+  <td>75</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Aucun ennemi initial. Ne pas remplir cette salle de patrouilles pour augmenter artificiellement la durée.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S18 — Galerie d’alimentation</h3>
+<p><strong>Secteur : Mine · Profil : power · Vue hybride : SIDE · Largeur : 2420 unités.</strong></p>
+<p>Les câbles longent le plafond. Le chemin de service évite les armoires haute tension.</p>
+<p><strong>Lecture spatiale.</strong> Bande latérale ; profondeur verrouillée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Armoires ; câbles ; disjoncteurs ; isolateurs ; tuyaux ; porte coupe-feu.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-17</td>
+  <td>s17 — Atelier de maintenance</td>
+  <td>door</td>
+  <td>2320 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-18</td>
+  <td>s19 — La carène enfouie</td>
+  <td>door</td>
+  <td>100 ; 0.55</td>
+  <td>power_on</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o06-02</code> : <strong>Rétablir la desserte</strong>, à x = 1621, z = 0.55. Déclenche <code>power_on</code> après validation des conditions du type <code>power</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s18</code> : x = 871, z = 0.55. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<p>Pas de barrière de profondeur. La silhouette architecturale et les accessoires de fond ne sont pas des murs invisibles traversant la bande latérale.</p>
+<p><strong>Présences et rythme</strong></p>
+<p>Aucun ennemi initial. Ne pas remplir cette salle de patrouilles pour augmenter artificiellement la durée.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S19 — La carène enfouie</h3>
+<p><strong>Secteur : Vestiges · Profil : derelict · Vue hybride : DEPTH · Largeur : 2880 unités.</strong></p>
+<p>La coque apparaît dans une caverne bien plus vaste que le champ de déplacement. La zone de fouille se poursuit en contrebas.</p>
+<p><strong>Lecture spatiale.</strong> Surface de déplacement en profondeur ; obstacles contournables. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Coque courbe ; échafaudage ; passerelle ; roche fracturée ; balises humaines.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-18</td>
+  <td>s18 — Galerie d’alimentation</td>
+  <td>door</td>
+  <td>2780 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-19</td>
+  <td>s16 — Relais de Cho</td>
+  <td>shortcut</td>
+  <td>100 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-20</td>
+  <td>s20 — Brèche de coque</td>
+  <td>door</td>
+  <td>1325 ; 0.15</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-21</td>
+  <td>s21 — Tranchée de fouille</td>
+  <td>stairs</td>
+  <td>1958 ; 0.85</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<p>Cette salle assure un trajet, une respiration ou une rencontre ; elle ne déclenche pas de nouvel objectif principal. Sa visite et ses seuils persistent néanmoins.</p>
+<p>Relevé facultatif <code>field-s19</code> : x = 1037, z = 0.25. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s19-block-0 — masse de résine</td>
+  <td>864 ; 0.22</td>
+  <td>140 ; 0.12</td>
+  <td>105</td>
+</tr>
+<tr>
+  <td>s19-block-1 — débris de silice</td>
+  <td>1613 ; 0.77</td>
+  <td>140 ; 0.12</td>
+  <td>105</td>
+</tr>
+<tr>
+  <td>s19-block-2 — structure organique côtelée</td>
+  <td>2189 ; 0.22</td>
+  <td>140 ; 0.12</td>
+  <td>105</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Rencontre finie, sans réapparition automatique : adult à (1814 ; 0.35).</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S20 — Brèche de coque</h3>
+<p><strong>Secteur : Vestiges · Profil : alien · Vue hybride : HYBRID · Largeur : 2120 unités.</strong></p>
+<p>Une ouverture irrégulière suit la peau du vaisseau. Les ajouts humains s’arrêtent aux premiers renflements.</p>
+<p><strong>Lecture spatiale.</strong> Volume de transition ; profondeur resserrée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Arches non humaines ; peau nervurée ; jauges de relevé ; câbles humains temporaires.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-20</td>
+  <td>s19 — La carène enfouie</td>
+  <td>door</td>
+  <td>2020 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-28</td>
+  <td>s26 — Entrée des tubes</td>
+  <td>shortcut</td>
+  <td>100 ; 0.55</td>
+  <td>tracker_ready</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o07-01</code> : <strong>Examiner la brèche</strong>, à x = 1081, z = 0.55. Déclenche <code>hull_seen</code> après validation des conditions du type <code>scan</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s20</code> : x = 763, z = 0.25. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s20-block-0 — masse de résine</td>
+  <td>636 ; 0.22</td>
+  <td>164 ; 0.12</td>
+  <td>120</td>
+</tr>
+<tr>
+  <td>s20-block-1 — débris de silice</td>
+  <td>1187 ; 0.77</td>
+  <td>164 ; 0.12</td>
+  <td>120</td>
+</tr>
+<tr>
+  <td>s20-block-2 — structure organique côtelée</td>
+  <td>1611 ; 0.22</td>
+  <td>164 ; 0.12</td>
+  <td>120</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Rencontre finie, sans réapparition automatique : adult à (1336 ; 0.35).</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S21 — Tranchée de fouille</h3>
+<p><strong>Secteur : Vestiges · Profil : ruins · Vue hybride : DEPTH · Largeur : 2560 unités.</strong></p>
+<p>La fouille descend vers la ville ruinée. Les cordes, grilles et repères racontent le travail des chercheurs.</p>
+<p><strong>Lecture spatiale.</strong> Surface de déplacement en profondeur ; obstacles contournables. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Strates rocheuses ; tamis ; cordes ; boîtes d’échantillons ; piquets ; passerelle.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-21</td>
+  <td>s19 — La carène enfouie</td>
+  <td>stairs</td>
+  <td>2460 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-22</td>
+  <td>s22 — Esplanade ensevelie</td>
+  <td>door</td>
+  <td>100 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o07-02</code> : <strong>Retrouver le balisage de fouille</strong>, à x = 1715, z = 0.55. Déclenche <code>dig_seen</code> après validation des conditions du type <code>survey</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s21</code> : x = 922, z = 0.25. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s21-block-0 — masse de résine</td>
+  <td>768 ; 0.22</td>
+  <td>188 ; 0.12</td>
+  <td>75</td>
+</tr>
+<tr>
+  <td>s21-block-1 — débris de silice</td>
+  <td>1434 ; 0.77</td>
+  <td>188 ; 0.12</td>
+  <td>75</td>
+</tr>
+<tr>
+  <td>s21-block-2 — structure organique côtelée</td>
+  <td>1946 ; 0.22</td>
+  <td>188 ; 0.12</td>
+  <td>75</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Rencontre finie, sans réapparition automatique : adult à (1613 ; 0.35).</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S22 — Esplanade ensevelie</h3>
+<p><strong>Secteur : Vestiges · Profil : ruins · Vue hybride : DEPTH · Largeur : 2860 unités.</strong></p>
+<p>Des bâtiments non humains entourent une place partiellement dégagée. Les portes visibles ont des destinations cohérentes.</p>
+<p><strong>Lecture spatiale.</strong> Surface de déplacement en profondeur ; obstacles contournables. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Contreforts ; arches effondrées ; pierres ; éclairages sur trépied ; instruments.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-22</td>
+  <td>s21 — Tranchée de fouille</td>
+  <td>door</td>
+  <td>2760 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-23</td>
+  <td>s23 — Salle des restes</td>
+  <td>door</td>
+  <td>100 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-24</td>
+  <td>s24 — Poste de relevés</td>
+  <td>door</td>
+  <td>1316 ; 0.15</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<p>Cette salle assure un trajet, une respiration ou une rencontre ; elle ne déclenche pas de nouvel objectif principal. Sa visite et ses seuils persistent néanmoins.</p>
+<p>Relevé facultatif <code>field-s22</code> : x = 1030, z = 0.25. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s22-block-0 — masse de résine</td>
+  <td>858 ; 0.22</td>
+  <td>140 ; 0.12</td>
+  <td>90</td>
+</tr>
+<tr>
+  <td>s22-block-1 — débris de silice</td>
+  <td>1602 ; 0.77</td>
+  <td>140 ; 0.12</td>
+  <td>90</td>
+</tr>
+<tr>
+  <td>s22-block-2 — structure organique côtelée</td>
+  <td>2174 ; 0.22</td>
+  <td>140 ; 0.12</td>
+  <td>90</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Rencontre finie, sans réapparition automatique : adult à (1802 ; 0.35), adult à (2016 ; 0.71).</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S23 — Salle des restes</h3>
+<p><strong>Secteur : Vestiges · Profil : ossuary · Vue hybride : SIDE · Largeur : 1860 unités.</strong></p>
+<p>Les restes sont des témoins archéologiques, pas des ennemis ressuscités. Le joueur traverse un passage balisé.</p>
+<p><strong>Lecture spatiale.</strong> Bande latérale ; profondeur verrouillée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Tables de relevé ; fragments protégés ; toile ; scanner ; jalons ; niches.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-23</td>
+  <td>s22 — Esplanade ensevelie</td>
+  <td>door</td>
+  <td>1760 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-25</td>
+  <td>s24 — Poste de relevés</td>
+  <td>crawl</td>
+  <td>100 ; 0.55</td>
+  <td>survey_complete</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o08-01</code> : <strong>Examiner les restes</strong>, à x = 949, z = 0.55. Déclenche <code>survey_complete</code> après validation des conditions du type <code>scan</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s23</code> : x = 670, z = 0.55. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<p>Pas de barrière de profondeur. La silhouette architecturale et les accessoires de fond ne sont pas des murs invisibles traversant la bande latérale.</p>
+<p><strong>Présences et rythme</strong></p>
+<p>Rencontre finie, sans réapparition automatique : adult à (1172 ; 0.55).</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S24 — Poste de relevés</h3>
+<p><strong>Secteur : Vestiges · Profil : relay · Vue hybride : HYBRID · Largeur : 2120 unités.</strong></p>
+<p>Une implantation humaine fragile occupe un seuil de la cité. La radio et le matériel restent visibles depuis l’entrée.</p>
+<p><strong>Lecture spatiale.</strong> Volume de transition ; profondeur resserrée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Console portable ; caisses de capteurs ; panneaux ; fil guide ; bouteilles d’air.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-24</td>
+  <td>s22 — Esplanade ensevelie</td>
+  <td>door</td>
+  <td>2020 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-25</td>
+  <td>s23 — Salle des restes</td>
+  <td>crawl</td>
+  <td>100 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-26</td>
+  <td>s25 — Passerelle suspendue</td>
+  <td>door</td>
+  <td>975 ; 0.15</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o08-02</code> : <strong>Récupérer le détecteur</strong>, à x = 1420, z = 0.55. Déclenche <code>tracker_ready</code> après validation des conditions du type <code>equipment</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s24</code> : x = 763, z = 0.25. Un poste de ravitaillement est disponible à x = 320, z = 0,55 ; sa consommation est définitive.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s24-block-0 — caisse industrielle</td>
+  <td>636 ; 0.22</td>
+  <td>188 ; 0.12</td>
+  <td>120</td>
+</tr>
+<tr>
+  <td>s24-block-1 — rayonnage</td>
+  <td>1187 ; 0.77</td>
+  <td>188 ; 0.12</td>
+  <td>120</td>
+</tr>
+<tr>
+  <td>s24-block-2 — faisceau de conduites</td>
+  <td>1611 ; 0.22</td>
+  <td>188 ; 0.12</td>
+  <td>120</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Rencontre finie, sans réapparition automatique : adult à (1336 ; 0.35), adult à (1495 ; 0.71).</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S25 — Passerelle suspendue</h3>
+<p><strong>Secteur : Vestiges · Profil : bridge · Vue hybride : SIDE · Largeur : 2680 unités.</strong></p>
+<p>Une passerelle suit la paroi ; des volumes descendent sous le plan jouable. Le vide n’est pas une seconde route.</p>
+<p><strong>Lecture spatiale.</strong> Bande latérale ; profondeur verrouillée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Platelage ; ancrages ; câble latéral ; contreventement ; balises cassées.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-26</td>
+  <td>s24 — Poste de relevés</td>
+  <td>door</td>
+  <td>2580 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-27</td>
+  <td>s26 — Entrée des tubes</td>
+  <td>door</td>
+  <td>100 ; 0.55</td>
+  <td>tracker_ready</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<p>Cette salle assure un trajet, une respiration ou une rencontre ; elle ne déclenche pas de nouvel objectif principal. Sa visite et ses seuils persistent néanmoins.</p>
+<p>Relevé facultatif <code>field-s25</code> : x = 965, z = 0.55. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<p>Pas de barrière de profondeur. La silhouette architecturale et les accessoires de fond ne sont pas des murs invisibles traversant la bande latérale.</p>
+<p><strong>Présences et rythme</strong></p>
+<p>Rencontre finie, sans réapparition automatique : adult à (1688 ; 0.55), adult à (1889 ; 0.55).</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S26 — Entrée des tubes</h3>
+<p><strong>Secteur : Ruche · Profil : silica · Vue hybride : HYBRID · Largeur : 2120 unités.</strong></p>
+<p>La mine humaine rejoint des tubes de silice. La transition architecturale est visible avant le changement de salle.</p>
+<p><strong>Lecture spatiale.</strong> Volume de transition ; profondeur resserrée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Silice ; roche ; repères arrachés ; lampe tombée ; peau translucide ; résine.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-27</td>
+  <td>s25 — Passerelle suspendue</td>
+  <td>door</td>
+  <td>2020 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-28</td>
+  <td>s20 — Brèche de coque</td>
+  <td>shortcut</td>
+  <td>100 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-29</td>
+  <td>s27 — Le nœud ambré</td>
+  <td>door</td>
+  <td>975 ; 0.15</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o09-01</code> : <strong>Écouter ce qui approche</strong>, à x = 1081, z = 0.55. Déclenche <code>hive_sensed</code> après validation des conditions du type <code>sense</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s26</code> : x = 763, z = 0.25. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s26-block-0 — masse de résine</td>
+  <td>636 ; 0.22</td>
+  <td>164 ; 0.12</td>
+  <td>90</td>
+</tr>
+<tr>
+  <td>s26-block-1 — débris de silice</td>
+  <td>1187 ; 0.77</td>
+  <td>164 ; 0.12</td>
+  <td>90</td>
+</tr>
+<tr>
+  <td>s26-block-2 — structure organique côtelée</td>
+  <td>1611 ; 0.22</td>
+  <td>164 ; 0.12</td>
+  <td>90</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Rencontre finie, sans réapparition automatique : adult à (1336 ; 0.35), adult à (1495 ; 0.71).</p>
+<p><strong>Perception.</strong> L’objectif demande une pression minimale obtenue par Espace. Le message de direction est un indice de salle, pas une connaissance de toute la ruche.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S27 — Le nœud ambré</h3>
+<p><strong>Secteur : Ruche · Profil : silica · Vue hybride : DEPTH · Largeur : 2680 unités.</strong></p>
+<p>Trois passages composent une boucle. Les piliers de silice délimitent les bandes sans former un mur infranchissable.</p>
+<p><strong>Lecture spatiale.</strong> Surface de déplacement en profondeur ; obstacles contournables. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Piliers ; gouttes minérales ; membranes ; débris d’équipement ; trace de traînée.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-29</td>
+  <td>s26 — Entrée des tubes</td>
+  <td>door</td>
+  <td>2580 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-30</td>
+  <td>s28 — Alcôve des disparus</td>
+  <td>door</td>
+  <td>100 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-32</td>
+  <td>s29 — Le retour fermé</td>
+  <td>shortcut</td>
+  <td>1233 ; 0.15</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o10-01</code> : <strong>Marquer la dérivation</strong>, à x = 1367, z = 0.55. Déclenche <code>route_marked</code> après validation des conditions du type <code>route</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s27</code> : x = 965, z = 0.25. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s27-block-0 — masse de résine</td>
+  <td>804 ; 0.22</td>
+  <td>188 ; 0.12</td>
+  <td>105</td>
+</tr>
+<tr>
+  <td>s27-block-1 — débris de silice</td>
+  <td>1501 ; 0.77</td>
+  <td>188 ; 0.12</td>
+  <td>105</td>
+</tr>
+<tr>
+  <td>s27-block-2 — structure organique côtelée</td>
+  <td>2037 ; 0.22</td>
+  <td>188 ; 0.12</td>
+  <td>105</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Rencontre finie, sans réapparition automatique : adult à (1688 ; 0.35), adult à (1889 ; 0.71), adult à (2090 ; 0.50).</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S28 — Alcôve des disparus</h3>
+<p><strong>Secteur : Ruche · Profil : hive · Vue hybride : SIDE · Largeur : 1960 unités.</strong></p>
+<p>Une alcôve accessible par un boyau étroit. Les cocons occupent le fond, le passage reste latéral.</p>
+<p><strong>Lecture spatiale.</strong> Bande latérale ; profondeur verrouillée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Cocons ; casque ; balise ; arme vide ; résine ; réseaux organiques.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-30</td>
+  <td>s27 — Le nœud ambré</td>
+  <td>door</td>
+  <td>1860 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-31</td>
+  <td>s29 — Le retour fermé</td>
+  <td>door</td>
+  <td>100 ; 0.55</td>
+  <td>accès ouvert selon la progression ; fermé après maze_known</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o09-02</code> : <strong>Retrouver la balise perdue</strong>, à x = 1313, z = 0.55. Déclenche <code>tags_found</code> après validation des conditions du type <code>recover</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s28</code> : x = 706, z = 0.55. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<p>Pas de barrière de profondeur. La silhouette architecturale et les accessoires de fond ne sont pas des murs invisibles traversant la bande latérale.</p>
+<p><strong>Présences et rythme</strong></p>
+<p>Rencontre finie, sans réapparition automatique : adult à (1235 ; 0.55), adult à (1382 ; 0.55).</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S29 — Le retour fermé</h3>
+<p><strong>Secteur : Ruche · Profil : silica · Vue hybride : HYBRID · Largeur : 2220 unités.</strong></p>
+<p>Le retour se bouche après le relevé. Une dérivation identifiée existe avant le changement d’état.</p>
+<p><strong>Lecture spatiale.</strong> Volume de transition ; profondeur resserrée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Membrane de fermeture ; ancien repère ; fissure latérale ; tube de ventilation.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-31</td>
+  <td>s28 — Alcôve des disparus</td>
+  <td>door</td>
+  <td>2120 ; 0.55</td>
+  <td>accès ouvert selon la progression ; fermé après maze_known</td>
+</tr>
+<tr>
+  <td>link-32</td>
+  <td>s27 — Le nœud ambré</td>
+  <td>shortcut</td>
+  <td>100 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-33</td>
+  <td>s30 — Ascenseur secondaire</td>
+  <td>door</td>
+  <td>1021 ; 0.15</td>
+  <td>maze_known</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o10-02</code> : <strong>Vérifier le passage fermé</strong>, à x = 1487, z = 0.55. Déclenche <code>maze_known</code> après validation des conditions du type <code>seal</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s29</code> : x = 799, z = 0.25. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s29-block-0 — masse de résine</td>
+  <td>666 ; 0.22</td>
+  <td>164 ; 0.12</td>
+  <td>75</td>
+</tr>
+<tr>
+  <td>s29-block-1 — débris de silice</td>
+  <td>1243 ; 0.77</td>
+  <td>164 ; 0.12</td>
+  <td>75</td>
+</tr>
+<tr>
+  <td>s29-block-2 — structure organique côtelée</td>
+  <td>1687 ; 0.22</td>
+  <td>164 ; 0.12</td>
+  <td>75</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Rencontre finie, sans réapparition automatique : adult à (1399 ; 0.35), adult à (1565 ; 0.71), adult à (1732 ; 0.50).</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S30 — Ascenseur secondaire</h3>
+<p><strong>Secteur : Ruche · Profil : lift · Vue hybride : DEPTH · Largeur : 2300 unités.</strong></p>
+<p>La seconde installation ne garantit plus de sortie. Les commandes restent accessibles malgré les dommages.</p>
+<p><strong>Lecture spatiale.</strong> Surface de déplacement en profondeur ; obstacles contournables. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Cage inclinée ; câbles rompus ; supports tordus ; panneau défaut ; rambardes.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-33</td>
+  <td>s29 — Le retour fermé</td>
+  <td>door</td>
+  <td>2200 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-34</td>
+  <td>s31 — Pied de l’escalier</td>
+  <td>door</td>
+  <td>100 ; 0.55</td>
+  <td>lift_lost</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o11-01</code> : <strong>Examiner le second ascenseur</strong>, à x = 1173, z = 0.55. Déclenche <code>lift_lost</code> après validation des conditions du type <code>inspect</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s30</code> : x = 828, z = 0.25. Un poste de ravitaillement est disponible à x = 320, z = 0,55 ; sa consommation est définitive.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s30-block-0 — caisse industrielle</td>
+  <td>690 ; 0.22</td>
+  <td>188 ; 0.12</td>
+  <td>90</td>
+</tr>
+<tr>
+  <td>s30-block-1 — rayonnage</td>
+  <td>1288 ; 0.77</td>
+  <td>188 ; 0.12</td>
+  <td>90</td>
+</tr>
+<tr>
+  <td>s30-block-2 — faisceau de conduites</td>
+  <td>1748 ; 0.22</td>
+  <td>188 ; 0.12</td>
+  <td>90</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Rencontre finie, sans réapparition automatique : adult à (1449 ; 0.35), adult à (1622 ; 0.71).</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S31 — Pied de l’escalier</h3>
+<p><strong>Secteur : Ruche · Profil : stairs · Vue hybride : HYBRID · Largeur : 2420 unités.</strong></p>
+<p>La cage d’escalier possède des paliers lisibles et un itinéraire de maintenance, sans téléportation entre étages.</p>
+<p><strong>Lecture spatiale.</strong> Volume de transition ; profondeur resserrée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Volées ; paliers ; échelle de secours ; numérotation ; main courante ; conduites.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-34</td>
+  <td>s30 — Ascenseur secondaire</td>
+  <td>door</td>
+  <td>2320 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-35</td>
+  <td>s32 — Chambre des œufs</td>
+  <td>door</td>
+  <td>100 ; 0.55</td>
+  <td>stairs_known</td>
+</tr>
+<tr>
+  <td>link-38</td>
+  <td>s34 — Dérivation de secours</td>
+  <td>shortcut</td>
+  <td>1113 ; 0.15</td>
+  <td>queen_down</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o12-01</code> : <strong>Repérer la voie de secours</strong>, à x = 1234, z = 0.55. Déclenche <code>stairs_known</code> après validation des conditions du type <code>route</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s31</code> : x = 871, z = 0.25. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s31-block-0 — caisse industrielle</td>
+  <td>726 ; 0.22</td>
+  <td>140 ; 0.12</td>
+  <td>105</td>
+</tr>
+<tr>
+  <td>s31-block-1 — rayonnage</td>
+  <td>1355 ; 0.77</td>
+  <td>140 ; 0.12</td>
+  <td>105</td>
+</tr>
+<tr>
+  <td>s31-block-2 — faisceau de conduites</td>
+  <td>1839 ; 0.22</td>
+  <td>140 ; 0.12</td>
+  <td>105</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Rencontre finie, sans réapparition automatique : adult à (1525 ; 0.35), adult à (1706 ; 0.71), adult à (1888 ; 0.50).</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S32 — Chambre des œufs</h3>
+<p><strong>Secteur : Ruche · Profil : hive · Vue hybride : DEPTH · Largeur : 2820 unités.</strong></p>
+<p>Les œufs forment des îlots, jamais une grille décorative. Deux passages continus permettent de se replier.</p>
+<p><strong>Lecture spatiale.</strong> Surface de déplacement en profondeur ; obstacles contournables. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Œufs ; résine ; condensation ; carcasses minérales ; creux sombres ; gaines.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-35</td>
+  <td>s31 — Pied de l’escalier</td>
+  <td>door</td>
+  <td>2720 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-36</td>
+  <td>s33 — La pondeuse</td>
+  <td>door</td>
+  <td>100 ; 0.55</td>
+  <td>brood_seen</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o12-02</code> : <strong>Repérer un passage entre les œufs</strong>, à x = 1889, z = 0.55. Déclenche <code>brood_seen</code> après validation des conditions du type <code>brood</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s32</code> : x = 1015, z = 0.25. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s32-block-0 — masse de résine</td>
+  <td>846 ; 0.22</td>
+  <td>164 ; 0.12</td>
+  <td>120</td>
+</tr>
+<tr>
+  <td>s32-block-1 — débris de silice</td>
+  <td>1579 ; 0.77</td>
+  <td>164 ; 0.12</td>
+  <td>120</td>
+</tr>
+<tr>
+  <td>s32-block-2 — structure organique côtelée</td>
+  <td>2143 ; 0.22</td>
+  <td>164 ; 0.12</td>
+  <td>120</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Rencontre finie, sans réapparition automatique : facehugger à (1777 ; 0.35), adult à (1988 ; 0.71), facehugger à (2200 ; 0.50), adult à (2411 ; 0.78).</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S33 — La pondeuse</h3>
+<p><strong>Secteur : Ruche · Profil : queen · Vue hybride : DEPTH · Largeur : 3040 unités.</strong></p>
+<p>Une grande chambre distribue trois ancrages de résine autour d’un axe d’évacuation. Le boss ne remplit pas l’écran.</p>
+<p><strong>Lecture spatiale.</strong> Surface de déplacement en profondeur ; obstacles contournables. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Reine ; attaches ; ovipositeur stylisé ; œufs périphériques ; arches ; sol corrodé.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-36</td>
+  <td>s32 — Chambre des œufs</td>
+  <td>door</td>
+  <td>2940 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-37</td>
+  <td>s34 — Dérivation de secours</td>
+  <td>door</td>
+  <td>100 ; 0.55</td>
+  <td>queen_down</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o13-01</code> : <strong>Ouvrir la voie au groupe</strong>, à x = 2620, z = 0.55. Déclenche <code>queen_down</code> après validation des conditions du type <code>boss</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s33</code> : x = 1094, z = 0.25. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s33-block-0 — masse de résine</td>
+  <td>912 ; 0.22</td>
+  <td>188 ; 0.12</td>
+  <td>75</td>
+</tr>
+<tr>
+  <td>s33-block-1 — débris de silice</td>
+  <td>1702 ; 0.77</td>
+  <td>188 ; 0.12</td>
+  <td>75</td>
+</tr>
+<tr>
+  <td>s33-block-2 — structure organique côtelée</td>
+  <td>2310 ; 0.22</td>
+  <td>188 ; 0.12</td>
+  <td>75</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Rencontre finie, sans réapparition automatique : queen à (1915 ; 0.35).</p>
+<p><strong>Rencontre dédiée.</strong> Trois attaches à (980 ; 0,50), (1510 ; 0,38), (2220 ; 0,59). Le feu les détruit avant que la reine devienne vulnérable. Ces attaches et la règle d’invulnérabilité sont originales au jeu.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S34 — Dérivation de secours</h3>
+<p><strong>Secteur : Ruche · Profil : power · Vue hybride : HYBRID · Largeur : 2140 unités.</strong></p>
+<p>Le retour vers l’escalier passe par une galerie industrielle partiellement envahie. Une zone de soins improvisée ne promet aucune guérison.</p>
+<p><strong>Lecture spatiale.</strong> Volume de transition ; profondeur resserrée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Civière ; couvertures ; éclairage mobile ; caisses ; conduites ; fermeture coupe-feu.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-37</td>
+  <td>s33 — La pondeuse</td>
+  <td>door</td>
+  <td>2040 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-38</td>
+  <td>s31 — Pied de l’escalier</td>
+  <td>shortcut</td>
+  <td>100 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-39</td>
+  <td>s35 — Paliers supérieurs</td>
+  <td>stairs</td>
+  <td>984 ; 0.15</td>
+  <td>hosts_secured</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o14-01</code> : <strong>Mettre Adams à l’abri</strong>, à x = 920, z = 0.55. Déclenche <code>adams_secured</code> après validation des conditions du type <code>rescue</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+<li><code>o14-02</code> : <strong>Mettre Elway à l’abri</strong>, à x = 1450, z = 0.55. Déclenche <code>hosts_secured</code> après validation des conditions du type <code>rescue</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s34</code> : x = 770, z = 0.25. Un poste de ravitaillement est disponible à x = 320, z = 0,55 ; sa consommation est définitive.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s34-block-0 — caisse industrielle</td>
+  <td>642 ; 0.22</td>
+  <td>140 ; 0.12</td>
+  <td>90</td>
+</tr>
+<tr>
+  <td>s34-block-1 — rayonnage</td>
+  <td>1198 ; 0.77</td>
+  <td>140 ; 0.12</td>
+  <td>90</td>
+</tr>
+<tr>
+  <td>s34-block-2 — faisceau de conduites</td>
+  <td>1626 ; 0.22</td>
+  <td>140 ; 0.12</td>
+  <td>90</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Rencontre finie, sans réapparition automatique : adult à (1348 ; 0.35), adult à (1509 ; 0.71).</p>
+<p><strong>Porteurs.</strong> Deux validations distinctes, sans guérison implicite. Le transport est abstrait par la progression : les brancards ne suivent pas physiquement l’IA dans la version livrée.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S35 — Paliers supérieurs</h3>
+<p><strong>Secteur : Sortie · Profil : stairs · Vue hybride : SIDE · Largeur : 2660 unités.</strong></p>
+<p>Une succession de paliers comprimée pour le jeu, reliée explicitement au bas de la cage. Les marches sont une animation de liaison.</p>
+<p><strong>Lecture spatiale.</strong> Bande latérale ; profondeur verrouillée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Treuil ; paliers ; câble de levage ; mains courantes ; bouche de surface.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-39</td>
+  <td>s34 — Dérivation de secours</td>
+  <td>stairs</td>
+  <td>2560 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-40</td>
+  <td>s36 — Ravin de service</td>
+  <td>climb</td>
+  <td>100 ; 0.55</td>
+  <td>winch_ready</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o15-01</code> : <strong>Actionner le treuil</strong>, à x = 1357, z = 0.55. Déclenche <code>winch_ready</code> après validation des conditions du type <code>winch</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s35</code> : x = 958, z = 0.55. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<p>Pas de barrière de profondeur. La silhouette architecturale et les accessoires de fond ne sont pas des murs invisibles traversant la bande latérale.</p>
+<p><strong>Présences et rythme</strong></p>
+<p>Rencontre finie, sans réapparition automatique : adult à (1676 ; 0.55), adult à (1875 ; 0.55).</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S36 — Ravin de service</h3>
+<p><strong>Secteur : Sortie · Profil : sand · Vue hybride : DEPTH · Largeur : 2700 unités.</strong></p>
+<p>Le ravin rejoint le nord de l’aire initiale. Les mêmes tours et balises permettent de reconnaître le lieu.</p>
+<p><strong>Lecture spatiale.</strong> Surface de déplacement en profondeur ; obstacles contournables. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Talus ; antenne ; câble enterré ; talweg sec ; route de service ; sable en mouvement.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-40</td>
+  <td>s35 — Paliers supérieurs</td>
+  <td>climb</td>
+  <td>2600 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-41</td>
+  <td>s11 — Aire d’atterrissage</td>
+  <td>door</td>
+  <td>100 ; 0.55</td>
+  <td>route_open</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o15-02</code> : <strong>Ouvrir le passage du ravin</strong>, à x = 1809, z = 0.55. Déclenche <code>route_open</code> après validation des conditions du type <code>route</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s36</code> : x = 972, z = 0.25. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s36-block-0 — caisse industrielle</td>
+  <td>810 ; 0.22</td>
+  <td>188 ; 0.12</td>
+  <td>120</td>
+</tr>
+<tr>
+  <td>s36-block-1 — rayonnage</td>
+  <td>1512 ; 0.77</td>
+  <td>188 ; 0.12</td>
+  <td>120</td>
+</tr>
+<tr>
+  <td>s36-block-2 — faisceau de conduites</td>
+  <td>2052 ; 0.22</td>
+  <td>188 ; 0.12</td>
+  <td>120</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Rencontre finie, sans réapparition automatique : adult à (1701 ; 0.35), adult à (1904 ; 0.71), adult à (2106 ; 0.50).</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S37 — Soute de la navette</h3>
+<p><strong>Secteur : Sortie · Profil : hangar · Vue hybride : DEPTH · Largeur : 2400 unités.</strong></p>
+<p>La rampe débouche sur une soute assez large pour l’opération de capture. Le caisson est ancré, et non posé devant une porte.</p>
+<p><strong>Lecture spatiale.</strong> Surface de déplacement en profondeur ; obstacles contournables. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Caisson ; moussoir ; treuil ; sangles ; rampes ; rails de chargement ; banquettes.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-42</td>
+  <td>s11 — Aire d’atterrissage</td>
+  <td>ramp</td>
+  <td>2300 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-43</td>
+  <td>s38 — Quarantaine orbitale</td>
+  <td>flight</td>
+  <td>100 ; 0.55</td>
+  <td>live_capture</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o16-01</code> : <strong>Immobiliser puis enfermer l’adulte</strong>, à x = 1910, z = 0.55. Déclenche <code>live_capture</code> après validation des conditions du type <code>capture</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s37</code> : x = 864, z = 0.25. Un poste de ravitaillement est disponible à x = 320, z = 0,55 ; sa consommation est définitive.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s37-block-0 — caisse industrielle</td>
+  <td>720 ; 0.22</td>
+  <td>140 ; 0.12</td>
+  <td>75</td>
+</tr>
+<tr>
+  <td>s37-block-1 — rayonnage</td>
+  <td>1344 ; 0.77</td>
+  <td>140 ; 0.12</td>
+  <td>75</td>
+</tr>
+<tr>
+  <td>s37-block-2 — faisceau de conduites</td>
+  <td>1824 ; 0.22</td>
+  <td>140 ; 0.12</td>
+  <td>75</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Rencontre finie, sans réapparition automatique : captureAdult à (1512 ; 0.35).</p>
+<p><strong>Capture.</strong> Le caisson est à x = 1910. Seuil : immobilisation ≥ 0,95, cible vivante et distance de la cible au caisson ≤ 255 unités, joueur à portée d’interaction. L’allié exclut cet adulte de ses cibles. La mousse et le caisson doivent fonctionner avant l’accès à s38.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S38 — Quarantaine orbitale</h3>
+<p><strong>Secteur : Épilogue · Profil : medical · Vue hybride : SIDE · Largeur : 1840 unités.</strong></p>
+<p>Une vitre sépare le personnel des spécimens. Les hôtes ne sont pas soignés par une interaction magique.</p>
+<p><strong>Lecture spatiale.</strong> Bande latérale ; profondeur verrouillée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Vitrage ; cryocuves ; dossier transfert ; caméra ; clapets ; sas sécurisé.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-44</td>
+  <td>s39 — Poste d’observation</td>
+  <td>door</td>
+  <td>1740 ; 0.55</td>
+  <td>specimens_delivered</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o17-01</code> : <strong>Confirmer le transfert</strong>, à x = 938, z = 0.55. Déclenche <code>specimens_delivered</code> après validation des conditions du type <code>transfer</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s38</code> : x = 662, z = 0.55. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<p>Pas de barrière de profondeur. La silhouette architecturale et les accessoires de fond ne sont pas des murs invisibles traversant la bande latérale.</p>
+<p><strong>Présences et rythme</strong></p>
+<p>Aucun ennemi initial. Ne pas remplir cette salle de patrouilles pour augmenter artificiellement la durée.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S39 — Poste d’observation</h3>
+<p><strong>Secteur : Épilogue · Profil : ship · Vue hybride : HYBRID · Largeur : 2080 unités.</strong></p>
+<p>La baie montre la planète, pas une ville terrestre. La frappe est une séquence orbitale non jouable comme arme.</p>
+<p><strong>Lecture spatiale.</strong> Volume de transition ; profondeur resserrée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Baie ; console ; écran de mission ; sièges fixés ; éclairage de veille.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-44</td>
+  <td>s38 — Quarantaine orbitale</td>
+  <td>door</td>
+  <td>1980 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+<tr>
+  <td>link-45</td>
+  <td>s40 — Hypersommeil</td>
+  <td>door</td>
+  <td>100 ; 0.55</td>
+  <td>strike_seen</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o17-02</code> : <strong>Observer la surface</strong>, à x = 1394, z = 0.55. Déclenche <code>strike_seen</code> après validation des conditions du type <code>observe</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s39</code> : x = 749, z = 0.25. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Objet</th>
+  <th>Position (x ; z)</th>
+  <th>Emprise (largeur ; profondeur)</th>
+  <th>Hauteur visuelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>s39-block-0 — caisse industrielle</td>
+  <td>624 ; 0.22</td>
+  <td>188 ; 0.12</td>
+  <td>105</td>
+</tr>
+<tr>
+  <td>s39-block-1 — rayonnage</td>
+  <td>1165 ; 0.77</td>
+  <td>188 ; 0.12</td>
+  <td>105</td>
+</tr>
+<tr>
+  <td>s39-block-2 — faisceau de conduites</td>
+  <td>1581 ; 0.22</td>
+  <td>188 ; 0.12</td>
+  <td>105</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Présences et rythme</strong></p>
+<p>Aucun ennemi initial. Ne pas remplir cette salle de patrouilles pour augmenter artificiellement la durée.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h3>S40 — Hypersommeil</h3>
+<p><strong>Secteur : Épilogue · Profil : medical · Vue hybride : SIDE · Largeur : 1820 unités.</strong></p>
+<p>La dernière salle referme le récit. Des couchettes et des moniteurs encadrent un couloir presque vide.</p>
+<p><strong>Lecture spatiale.</strong> Bande latérale ; profondeur verrouillée. La ligne de desserte principale se situe autour de z = 0,55. Les interactions actives s’affichent dans le bandeau de mission, sans panneau central permanent.</p>
+<p><strong>Intentions de décor.</strong> Couchettes ; casiers ; terminal ; lumière de veille ; hublot ; tubulures.</p>
+<p><strong>Liaisons physiques et conditions initiales</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Seuil</th>
+  <th>Destination</th>
+  <th>Nature</th>
+  <th>Position (x ; z)</th>
+  <th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>link-45</td>
+  <td>s39 — Poste d’observation</td>
+  <td>door</td>
+  <td>1720 ; 0.55</td>
+  <td>accès ouvert selon la progression</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actions et ressources</strong></p>
+<ul>
+<li><code>o18-01</code> : <strong>Entrer en hypersommeil</strong>, à x = 928, z = 0.55. Déclenche <code>finished</code> après validation des conditions du type <code>sleep</code>. La validation n’est possible que lorsque cette étape est l’objectif courant.</li>
+</ul>
+<p>Relevé facultatif <code>field-s40</code> : x = 655, z = 0.55. Aucun ravitaillement automatique dans cette salle.</p>
+<p><strong>Obstacles jouables</strong></p>
+<p>Pas de barrière de profondeur. La silhouette architecturale et les accessoires de fond ne sont pas des murs invisibles traversant la bande latérale.</p>
+<p><strong>Présences et rythme</strong></p>
+<p>Aucun ennemi initial. Ne pas remplir cette salle de patrouilles pour augmenter artificiellement la durée.</p>
+<p><strong>Contrôle de salle.</strong> Vérifier le point d’entrée, les deux directions de chaque liaison réversible, la collision des objectifs, la lisibilité du personnage derrière le premier plan et la restauration de cet état. Le rapport détaille les contrôles automatisés effectivement réalisés ; cette fiche ne constitue pas un procès-verbal de playtest humain.</p>
+<h2>Registre des 64 dossiers</h2>
+<table>
+<thead>
+<tr>
+  <th>Identifiant</th>
+  <th>Titre</th>
+  <th>Catégorie</th>
+  <th>Statut de contenu</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>field-s01</td>
+  <td>Poste de contrôle</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s02</td>
+  <td>Le carottier</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s03</td>
+  <td>Transport sanitaire</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s04</td>
+  <td>Bureau de la Commission</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s05</td>
+  <td>Appartement de Decker</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s06</td>
+  <td>Consultation</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s07</td>
+  <td>Coursive sous garde</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s08</td>
+  <td>La salle d’entretien</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s09</td>
+  <td>Réserve d’équipement</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s10</td>
+  <td>Baie d’embarquement</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s11</td>
+  <td>Aire d’atterrissage</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s12</td>
+  <td>Abri d’expédition</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s13</td>
+  <td>Décontamination</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s14</td>
+  <td>Tête de puits</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s15</td>
+  <td>Recette inférieure</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s16</td>
+  <td>Relais de Cho</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s17</td>
+  <td>Atelier de maintenance</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s18</td>
+  <td>Galerie d’alimentation</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s19</td>
+  <td>La carène enfouie</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s20</td>
+  <td>Brèche de coque</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s21</td>
+  <td>Tranchée de fouille</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s22</td>
+  <td>Esplanade ensevelie</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s23</td>
+  <td>Salle des restes</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s24</td>
+  <td>Poste de relevés</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s25</td>
+  <td>Passerelle suspendue</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s26</td>
+  <td>Entrée des tubes</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s27</td>
+  <td>Le nœud ambré</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s28</td>
+  <td>Alcôve des disparus</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s29</td>
+  <td>Le retour fermé</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s30</td>
+  <td>Ascenseur secondaire</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s31</td>
+  <td>Pied de l’escalier</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s32</td>
+  <td>Chambre des œufs</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s33</td>
+  <td>La pondeuse</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s34</td>
+  <td>Dérivation de secours</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s35</td>
+  <td>Paliers supérieurs</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s36</td>
+  <td>Ravin de service</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s37</td>
+  <td>Soute de la navette</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s38</td>
+  <td>Quarantaine orbitale</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s39</td>
+  <td>Poste d’observation</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>field-s40</td>
+  <td>Hypersommeil</td>
+  <td>Terrain</td>
+  <td>adaptation_originale</td>
+</tr>
+<tr>
+  <td>dossier-decker</td>
+  <td>Alan Decker</td>
+  <td>Personnel</td>
+  <td>adaptation_fondee_sur_roman</td>
+</tr>
+<tr>
+  <td>dossier-rollins</td>
+  <td>Andrea Rollins</td>
+  <td>Personnel</td>
+  <td>adaptation_fondee_sur_roman</td>
+</tr>
+<tr>
+  <td>dossier-manning</td>
+  <td>Manning</td>
+  <td>Personnel</td>
+  <td>adaptation_fondee_sur_roman</td>
+</tr>
+<tr>
+  <td>dossier-cho</td>
+  <td>Dae Cho</td>
+  <td>Personnel</td>
+  <td>adaptation_fondee_sur_roman</td>
+</tr>
+<tr>
+  <td>dossier-adams</td>
+  <td>Adams</td>
+  <td>Personnel</td>
+  <td>adaptation_fondee_sur_roman</td>
+</tr>
+<tr>
+  <td>dossier-elway</td>
+  <td>Elway</td>
+  <td>Personnel</td>
+  <td>adaptation_fondee_sur_roman</td>
+</tr>
+<tr>
+  <td>dossier-rand</td>
+  <td>Lucas Rand</td>
+  <td>Personnel</td>
+  <td>adaptation_fondee_sur_roman</td>
+</tr>
+<tr>
+  <td>dossier-silas</td>
+  <td>Nigel Silas</td>
+  <td>Personnel</td>
+  <td>adaptation_fondee_sur_roman</td>
+</tr>
+<tr>
+  <td>dossier-icc</td>
+  <td>La Commission</td>
+  <td>Dossiers</td>
+  <td>adaptation_fondee_sur_roman</td>
+</tr>
+<tr>
+  <td>dossier-company</td>
+  <td>L’ordre de mission</td>
+  <td>Dossiers</td>
+  <td>adaptation_fondee_sur_roman</td>
+</tr>
+<tr>
+  <td>dossier-lineage</td>
+  <td>La lignée</td>
+  <td>Dossiers</td>
+  <td>adaptation_fondee_sur_roman</td>
+</tr>
+<tr>
+  <td>dossier-memory</td>
+  <td>Une haine qui reconnaît</td>
+  <td>Dossiers</td>
+  <td>regle_de_jeu_originale</td>
+</tr>
+<tr>
+  <td>dossier-empathy</td>
+  <td>Se concentrer</td>
+  <td>Équipement</td>
+  <td>regle_de_jeu_originale</td>
+</tr>
+<tr>
+  <td>dossier-detector</td>
+  <td>Détecteur</td>
+  <td>Équipement</td>
+  <td>regle_de_jeu_originale</td>
+</tr>
+<tr>
+  <td>dossier-filter</td>
+  <td>Filtration</td>
+  <td>Équipement</td>
+  <td>regle_de_jeu_originale</td>
+</tr>
+<tr>
+  <td>dossier-lamp</td>
+  <td>Éclairage</td>
+  <td>Équipement</td>
+  <td>regle_de_jeu_originale</td>
+</tr>
+<tr>
+  <td>dossier-pistol</td>
+  <td>Arme de secours</td>
+  <td>Équipement</td>
+  <td>regle_de_jeu_originale</td>
+</tr>
+<tr>
+  <td>dossier-flame</td>
+  <td>Lance-flammes</td>
+  <td>Équipement</td>
+  <td>regle_de_jeu_originale</td>
+</tr>
+<tr>
+  <td>dossier-foam</td>
+  <td>Moussoir de capture</td>
+  <td>Équipement</td>
+  <td>regle_de_jeu_originale</td>
+</tr>
+<tr>
+  <td>dossier-adult</td>
+  <td>Adulte</td>
+  <td>Menaces</td>
+  <td>regle_de_jeu_originale</td>
+</tr>
+<tr>
+  <td>dossier-parasite</td>
+  <td>Parasite</td>
+  <td>Menaces</td>
+  <td>regle_de_jeu_originale</td>
+</tr>
+<tr>
+  <td>dossier-queen</td>
+  <td>La pondeuse</td>
+  <td>Menaces</td>
+  <td>regle_de_jeu_originale</td>
+</tr>
+<tr>
+  <td>dossier-map</td>
+  <td>Lire le réseau</td>
+  <td>Terrain</td>
+  <td>regle_de_jeu_originale</td>
+</tr>
+<tr>
+  <td>dossier-survivors</td>
+  <td>Une extraction incomplète</td>
+  <td>Dossiers</td>
+  <td>adaptation_fondee_sur_roman</td>
+</tr>
+</tbody>
+</table>
+</section><section id="sources"><h1>Sources et limites de continuité</h1>
+<h2>Œuvre de référence</h2>
+<p><strong>Alien: Sea of Sorrows</strong>, James A. Moore, Titan Books, 2014. Titre français : <strong>Alien : La Mer des Chagrins</strong>. Cette livraison est une adaptation de jeu non officielle, pas une édition du livre ni une reproduction de l’adaptation audio.</p>
+<p><strong>S1 — Titan Books, présentation éditoriale.</strong> https://titanbooks.com/6484-alien-sea-of-sorrows-book-2/ — consultée le 29 septembre 2026. Source primaire pour l’auteur et le cadre : Alan Decker travaille pour l’ICC sur LV-178 / New Galveston ; les sables toxiques couvrent une ancienne excavation ; Weyland-Yutani impose une expédition de mercenaires pour obtenir un xénomorphe vivant. L’éditeur rattache Decker à Ellen Ripley. Aucun dialogue du roman n’est reproduit.</p>
+<p><strong>S2 — Xenopedia, Alien: Sea of Sorrows.</strong> https://avp.fandom.com/wiki/Alien%3A_Sea_of_Sorrows — source secondaire consultée le 29 septembre 2026. Repère de travail : retour de Decker sur Terre au passage à 2497 ; accident antérieur dans le prologue. Les incohérences signalées par cette notice interdisent de présenter cette adaptation comme une réconciliation officielle de toutes les chronologies.</p>
+<p><strong>S3 — AvP Central, Novel Overview and Plot.</strong> https://www.avpcentral.com/alien-sea-of-sorrows — article daté du 14 août 2026, extraits consultés le 29 septembre 2026. Source secondaire pour la trame d’expédition : empathie, mine, vestiges, tubes, crise de l’extraction, chambre de ponte. Le terme « Drukathi » relève de rapprochements ultérieurs : il ne devient pas une identification prononcée par Decker dans ce jeu.</p>
+<p><strong>S4 — Alien Universe Timeline, Sea of Sorrows.</strong> https://alientimeline.wordpress.com/2325-2381/sea-of-sorrows/ — source secondaire recoupant l’issue : Manning immobilise un adulte au moyen de mousse ; Adams et Elway sont évacués comme porteurs ; la compagnie récupère les spécimens et détruit la zone depuis l’orbite. Dans le prototype, l’utilisation de la mousse est confiée au joueur : c’est une redistribution ludique, non l’attribution exacte du geste dans le livre.</p>
+<p><strong>S5 — AvP Central, LV-178.</strong> https://www.avpcentral.com/lv-178 — source secondaire pour distinguer New Galveston de LV-426 et relier ce cadre à <em>Out of the Shadows</em>. La terraformation n’autorise pas à représenter toute la planète comme un océan de sable : les salles extérieures jouées représentent le périmètre contaminé.</p>
+<h2>Statut de vérification</h2>
+<p>Les matériaux consultés sont des notices éditoriales et des résumés publics. Le texte intégral du roman n’a pas été confronté ligne à ligne au jeu. Aucun numéro de page n’est inventé. Les noms des 18 chapitres de jeu, les 40 salles détaillées, leurs dimensions, leurs connexions, leurs équipements, les phrases d’interface et les dialogues courts sont des créations d’adaptation. Les chapitres du jeu ne correspondent pas aux chapitres éditoriaux.</p>
+<p>Le sous-titre <strong>Les voix sous le sable</strong> est original. Les sources ne prouvent pas les plans dessinés dans ce prototype. Les descriptions environnementales servent à leur cohérence interne, pas à certifier une topographie canonique.</p>
+<h2>Décisions de séparation</h2>
+<p>Pas de campagne sous-marine. Pas de LV-426 rebaptisée. Pas de Ripley jouable ou ressuscitée pour cette histoire. Pas d’arbre généalogique affirmant résoudre les contradictions entre médias. Pas de combat contre des Ingénieurs ou contre une espèce archéologique réanimée. Pas de reine « mémorielle » inventée présentée comme créature du roman. Pas de confirmation ajoutée de la nature synthétique de Rollins. Pas d’ajout d’Ash au nom de l’adaptation audio. Pas de mélange automatique avec Prometheus, Romulus, Earth ou la continuité d’un autre DLC.</p>
+<p>Les intitulés « reine », « adulte » et « parasite » décrivent les rôles retenus ; les sprites stylisés ne constituent pas une étude d’anatomie de référence.</p>
+<h2>Continuité Tantalus</h2>
+<p>La livraison conserve un espace de sauvegarde distinct. Son descripteur mentionne l’ancien identifiant de travail <code>v36_campaign_new_galveston_sea_of_sorrows</code>, retrouvé dans une ancienne livraison du projet, sans l’enregistrer dans le dépôt courant. Le récit tardif n’ajoute pas des prélèvements, descendants biologiques, armes ou renseignements futurs à une campagne principale située en 2204. Un éventuel module d’archives devra conserver cette séparation ; il ne constitue pas ici un dispositif diégétique de connaissance du futur.</p>
+</section></main><footer>ALIEN : LA MER DES CHAGRINS · v0.1.0 · Adaptation non officielle. Le rapport concerne ce prototype autonome, pas le jeu hôte publié.</footer></body></html>

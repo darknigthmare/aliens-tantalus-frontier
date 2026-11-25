@@ -1,0 +1,44 @@
+[
+  {
+    "room": "s01",
+    "cast": "rand",
+    "from": 650,
+    "to": 555
+  },
+  {
+    "room": "s02",
+    "cast": "badejo",
+    "from": 1250,
+    "to": 1305
+  },
+  {
+    "room": "s03",
+    "cast": "medic",
+    "from": 760,
+    "to": 955
+  },
+  {
+    "room": "s06",
+    "cast": "medic",
+    "from": 1140,
+    "to": 955
+  },
+  {
+    "room": "s12",
+    "cast": "adams",
+    "from": 1080,
+    "to": 1130
+  },
+  {
+    "room": "s38",
+    "cast": "rollins",
+    "from": 950,
+    "to": 1080
+  },
+  {
+    "room": "s39",
+    "cast": "cherbourg",
+    "from": 1300,
+    "to": 1230
+  }
+]

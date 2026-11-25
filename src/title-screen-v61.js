@@ -39,6 +39,7 @@ export class TitleScreenController {
     this.continueButton = root.querySelector('#title-continue');
     this.newButton = root.querySelector('#title-new');
     this.forgeButton = root.querySelector('#title-forge');
+    this.expeditionsLink = root.querySelector('#title-expeditions');
     this.optionsButton = root.querySelector('#title-options');
     this.profileStatus = root.querySelector('#title-profile-status');
     this.liveStatus = root.querySelector('#title-live-status');
@@ -99,7 +100,7 @@ export class TitleScreenController {
   }
 
   menuButtons() {
-    return [this.continueButton, this.newButton, this.forgeButton, this.optionsButton]
+    return [this.continueButton, this.newButton, this.forgeButton, this.expeditionsLink, this.optionsButton]
       .filter((button) => button && !button.hidden && !button.disabled);
   }
 

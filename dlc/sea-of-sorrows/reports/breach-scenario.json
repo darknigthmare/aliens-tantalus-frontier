@@ -1,0 +1,501 @@
+{
+  "version": "0.5.0",
+  "source_sha256": {
+    "src/core.js": "49132772cbeb00f7f1ea289aa94a806581e95e5ef4a343a6a7ec25ffde0ecbe4",
+    "src/data.js": "6cb61166e81d19f01dc5f8fc9fc90ec15e3451de176d98c594afa574d8c4a16e",
+    "qa/tactical.cjs": "212f0c7361d8a59d337d77596fb14660d7f6b90f6ce48be4d7ef7fa11b2f2217"
+  },
+  "passed": true,
+  "provenance": "Isolated scenario: direct s30 entry only, no position/health/progress edits after earned save. Not a continuous full run.",
+  "gate": {
+    "status": "broken",
+    "integrity": 0,
+    "progress": 0
+  },
+  "playerHP": 100,
+  "stats": {
+    "time": 110.79999999999585,
+    "shots": 0,
+    "kills": 0,
+    "archives": 0,
+    "doors": 9,
+    "empathySeconds": 10.300000000000011,
+    "damage": 0,
+    "deaths": 0,
+    "operations": 5,
+    "devices": 0,
+    "medkitsUsed": 0,
+    "filtersUsed": 0,
+    "decoysUsed": 0,
+    "escortMeters": 0,
+    "dodges": 0,
+    "repairs": 0,
+    "hazardDamage": 0,
+    "shutterCycles": 1,
+    "shutterBreaches": 1,
+    "rallyOrders": 0,
+    "readings": 0,
+    "pursuitStarts": 0,
+    "pursuitArrivals": 0,
+    "pursuitLost": 0
+  },
+  "log": [
+    {
+      "time": 100.54999999999643,
+      "gateIntegrity": 100,
+      "hp": 100,
+      "positions": [
+        {
+          "x": 1324.299999999996,
+          "z": 0.35,
+          "mode": "patrol",
+          "breach": null
+        },
+        {
+          "x": 1497.299999999996,
+          "z": 0.71,
+          "mode": "patrol",
+          "breach": null
+        }
+      ]
+    },
+    {
+      "time": 101.0499999999964,
+      "gateIntegrity": 100,
+      "hp": 100,
+      "positions": [
+        {
+          "x": 1353.299999999997,
+          "z": 0.35,
+          "mode": "patrol",
+          "breach": null
+        },
+        {
+          "x": 1526.299999999997,
+          "z": 0.71,
+          "mode": "patrol",
+          "breach": null
+        }
+      ]
+    },
+    {
+      "time": 101.54999999999637,
+      "gateIntegrity": 100,
+      "hp": 100,
+      "positions": [
+        {
+          "x": 1382.299999999998,
+          "z": 0.35,
+          "mode": "patrol",
+          "breach": null
+        },
+        {
+          "x": 1555.299999999998,
+          "z": 0.71,
+          "mode": "patrol",
+          "breach": null
+        }
+      ]
+    },
+    {
+      "time": 102.04999999999634,
+      "gateIntegrity": 100,
+      "hp": 100,
+      "positions": [
+        {
+          "x": 1411.2999999999988,
+          "z": 0.35,
+          "mode": "patrol",
+          "breach": null
+        },
+        {
+          "x": 1584.2999999999988,
+          "z": 0.71,
+          "mode": "patrol",
+          "breach": null
+        }
+      ]
+    },
+    {
+      "time": 102.54999999999632,
+      "gateIntegrity": 100,
+      "hp": 100,
+      "positions": [
+        {
+          "x": 1440.2999999999997,
+          "z": 0.35,
+          "mode": "patrol",
+          "breach": null
+        },
+        {
+          "x": 1613.2999999999997,
+          "z": 0.71,
+          "mode": "patrol",
+          "breach": null
+        }
+      ]
+    },
+    {
+      "time": 103.04999999999629,
+      "gateIntegrity": 100,
+      "hp": 100,
+      "positions": [
+        {
+          "x": 1451.9,
+          "z": 0.35,
+          "mode": "investigate",
+          "breach": null
+        },
+        {
+          "x": 1635.9065628470516,
+          "z": 0.7023414713103032,
+          "mode": "investigate",
+          "breach": null
+        }
+      ]
+    },
+    {
+      "time": 103.54999999999626,
+      "gateIntegrity": 100,
+      "hp": 100,
+      "positions": [
+        {
+          "x": 1391.9,
+          "z": 0.35,
+          "mode": "investigate",
+          "breach": null
+        },
+        {
+          "x": 1575.9186453050038,
+          "z": 0.7001435851418665,
+          "mode": "investigate",
+          "breach": null
+        }
+      ]
+    },
+    {
+      "time": 104.04999999999623,
+      "gateIntegrity": 100,
+      "hp": 100,
+      "positions": [
+        {
+          "x": 1331.9,
+          "z": 0.35,
+          "mode": "investigate",
+          "breach": null
+        },
+        {
+          "x": 1575.9185749908142,
+          "z": 0.7000040907150564,
+          "mode": "investigate",
+          "breach": null
+        }
+      ]
+    },
+    {
+      "time": 104.5499999999962,
+      "gateIntegrity": 100,
+      "hp": 100,
+      "positions": [
+        {
+          "x": 1271.9,
+          "z": 0.35,
+          "mode": "investigate",
+          "breach": null
+        },
+        {
+          "x": 1575.9185748783218,
+          "z": 0.7000000342458043,
+          "mode": "investigate",
+          "breach": null
+        }
+      ]
+    },
+    {
+      "time": 105.04999999999617,
+      "gateIntegrity": 100,
+      "hp": 100,
+      "positions": [
+        {
+          "x": 1211.9,
+          "z": 0.35,
+          "mode": "investigate",
+          "breach": null
+        },
+        {
+          "x": 1575.91857487832,
+          "z": 0.7000000009756527,
+          "mode": "investigate",
+          "breach": null
+        }
+      ]
+    },
+    {
+      "time": 105.54999999999615,
+      "gateIntegrity": 100,
+      "hp": 100,
+      "positions": [
+        {
+          "x": 1151.9,
+          "z": 0.35,
+          "mode": "investigate",
+          "breach": null
+        },
+        {
+          "x": 1587.91857487832,
+          "z": 0.7000000000067399,
+          "mode": "investigate",
+          "breach": null
+        }
+      ]
+    },
+    {
+      "time": 106.04999999999612,
+      "gateIntegrity": 100,
+      "hp": 100,
+      "positions": [
+        {
+          "x": 1139.9,
+          "z": 0.35,
+          "mode": "investigate",
+          "breach": {
+            "gate": "gate-s30",
+            "remaining": 0,
+            "duration": 0.9
+          }
+        },
+        {
+          "x": 1563.91857487832,
+          "z": 0.7000000000002821,
+          "mode": "investigate",
+          "breach": null
+        }
+      ]
+    },
+    {
+      "time": 106.54999999999609,
+      "gateIntegrity": 100,
+      "hp": 100,
+      "positions": [
+        {
+          "x": 1139.9,
+          "z": 0.35,
+          "mode": "investigate",
+          "breach": {
+            "gate": "gate-s30",
+            "remaining": 0,
+            "duration": 0.9
+          }
+        },
+        {
+          "x": 1587.91857487832,
+          "z": 0.7000000000000015,
+          "mode": "investigate",
+          "breach": null
+        }
+      ]
+    },
+    {
+      "time": 107.04999999999606,
+      "gateIntegrity": 75,
+      "hp": 100,
+      "positions": [
+        {
+          "x": 1139.9,
+          "z": 0.35,
+          "mode": "investigate",
+          "breach": null
+        },
+        {
+          "x": 1575.91857487832,
+          "z": 0.7000000000000001,
+          "mode": "investigate",
+          "breach": null
+        }
+      ]
+    },
+    {
+      "time": 107.54999999999603,
+      "gateIntegrity": 75,
+      "hp": 100,
+      "positions": [
+        {
+          "x": 1139.9,
+          "z": 0.35,
+          "mode": "investigate",
+          "breach": {
+            "gate": "gate-s30",
+            "remaining": 0,
+            "duration": 0.9
+          }
+        },
+        {
+          "x": 1575.91857487832,
+          "z": 0.7,
+          "mode": "investigate",
+          "breach": null
+        }
+      ]
+    },
+    {
+      "time": 108.049999999996,
+      "gateIntegrity": 50,
+      "hp": 100,
+      "positions": [
+        {
+          "x": 1139.9,
+          "z": 0.35,
+          "mode": "investigate",
+          "breach": null
+        },
+        {
+          "x": 1575.91857487832,
+          "z": 0.7,
+          "mode": "investigate",
+          "breach": null
+        }
+      ]
+    },
+    {
+      "time": 108.54999999999598,
+      "gateIntegrity": 50,
+      "hp": 100,
+      "positions": [
+        {
+          "x": 1139.9,
+          "z": 0.35,
+          "mode": "investigate",
+          "breach": {
+            "gate": "gate-s30",
+            "remaining": 0,
+            "duration": 0.9
+          }
+        },
+        {
+          "x": 1575.91857487832,
+          "z": 0.7,
+          "mode": "investigate",
+          "breach": null
+        }
+      ]
+    },
+    {
+      "time": 109.04999999999595,
+      "gateIntegrity": 50,
+      "hp": 100,
+      "positions": [
+        {
+          "x": 1139.9,
+          "z": 0.35,
+          "mode": "investigate",
+          "breach": {
+            "gate": "gate-s30",
+            "remaining": 0,
+            "duration": 0.9
+          }
+        },
+        {
+          "x": 1587.91857487832,
+          "z": 0.7,
+          "mode": "investigate",
+          "breach": null
+        }
+      ]
+    },
+    {
+      "time": 109.54999999999592,
+      "gateIntegrity": 25,
+      "hp": 100,
+      "positions": [
+        {
+          "x": 1139.9,
+          "z": 0.35,
+          "mode": "investigate",
+          "breach": null
+        },
+        {
+          "x": 1563.91857487832,
+          "z": 0.7,
+          "mode": "investigate",
+          "breach": null
+        }
+      ]
+    },
+    {
+      "time": 110.04999999999589,
+      "gateIntegrity": 25,
+      "hp": 100,
+      "positions": [
+        {
+          "x": 1139.9,
+          "z": 0.35,
+          "mode": "investigate",
+          "breach": {
+            "gate": "gate-s30",
+            "remaining": 0,
+            "duration": 0.9
+          }
+        },
+        {
+          "x": 1587.91857487832,
+          "z": 0.7,
+          "mode": "investigate",
+          "breach": null
+        }
+      ]
+    },
+    {
+      "time": 110.54999999999586,
+      "gateIntegrity": 25,
+      "hp": 100,
+      "positions": [
+        {
+          "x": 1139.9,
+          "z": 0.35,
+          "mode": "investigate",
+          "breach": {
+            "gate": "gate-s30",
+            "remaining": 0,
+            "duration": 0.9
+          }
+        },
+        {
+          "x": 1575.91857487832,
+          "z": 0.7,
+          "mode": "investigate",
+          "breach": null
+        }
+      ]
+    }
+  ],
+  "snapshots": [
+    {
+      "key": "scenario-closed",
+      "room": "s30",
+      "objectiveIndex": 7,
+      "time": 100.49999999999643,
+      "source": "prepared s30 entry from equipped save, all subsequent movement and damage simulated"
+    },
+    {
+      "key": "scenario-impact",
+      "room": "s30",
+      "objectiveIndex": 7,
+      "time": 106.04999999999612,
+      "source": "prepared s30 entry from equipped save, all subsequent movement and damage simulated"
+    },
+    {
+      "key": "scenario-damaged",
+      "room": "s30",
+      "objectiveIndex": 7,
+      "time": 106.59999999999609,
+      "source": "prepared s30 entry from equipped save, all subsequent movement and damage simulated"
+    },
+    {
+      "key": "scenario-broken",
+      "room": "s30",
+      "objectiveIndex": 7,
+      "time": 110.79999999999585,
+      "source": "prepared s30 entry from equipped save, all subsequent movement and damage simulated"
+    }
+  ]
+}

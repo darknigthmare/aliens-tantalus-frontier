@@ -1,0 +1,2784 @@
+
+> alien-mer-des-chagrins-prototype@0.10.0 check
+> node --check src/data.js && node --check src/core.js && node --check src/render.js && node --check src/world-art.js && node --check src/tactics-art.js && node --check src/controls.js && node --check src/main.js && node --check src/support.js && node --check src/soundscape.js && npm test
+
+
+> alien-mer-des-chagrins-prototype@0.10.0 test
+> node --test qa/core.test.cjs qa/field.test.cjs qa/install.test.cjs qa/tactical.test.cjs qa/rearguard.test.cjs qa/pursuit.test.cjs qa/sensors.test.cjs qa/lighting.test.cjs qa/storage.test.cjs qa/support.test.cjs qa/soundscape.test.cjs qa/fidelity.test.cjs
+
+TAP version 13
+# Subtest: Catalogue v0.8 : 50 salles, 59 liens, 18 chapitres, 33 objectifs, 120 dossiers
+ok 1 - Catalogue v0.8 : 50 salles, 59 liens, 18 chapitres, 33 objectifs, 120 dossiers
+  ---
+  duration_ms: 1.179783
+  type: 'test'
+  ...
+# Subtest: Dix annexes facultatives et treize dispositifs dont un arrimage obligatoire
+ok 2 - Dix annexes facultatives et treize dispositifs dont un arrimage obligatoire
+  ---
+  duration_ms: 0.192741
+  type: 'test'
+  ...
+# Subtest: 355 placements décoratifs explicites hors de la bande jouable ; 120 obstacles
+ok 3 - 355 placements décoratifs explicites hors de la bande jouable ; 120 obstacles
+  ---
+  duration_ms: 0.382649
+  type: 'test'
+  ...
+# Subtest: Les 59 connexions respectent leur sens ; retour par la même paire quand prévu
+ok 4 - Les 59 connexions respectent leur sens ; retour par la même paire quand prévu
+  ---
+  duration_ms: 0.314846
+  type: 'test'
+  ...
+# Subtest: HYBRID : chaque interaction, annexe et porte est accessible par chemin libre
+ok 5 - HYBRID : chaque interaction, annexe et porte est accessible par chemin libre
+  ---
+  duration_ms: 168.601806
+  type: 'test'
+  ...
+# Subtest: HYBRID : toutes les entrées et apparitions ennemies évitent les obstacles
+ok 6 - HYBRID : toutes les entrées et apparitions ennemies évitent les obstacles
+  ---
+  duration_ms: 16.888086
+  type: 'test'
+  ...
+# Subtest: HYBRID : les 33 sauvegardes du parcours continu se rechargent
+ok 7 - HYBRID : les 33 sauvegardes du parcours continu se rechargent
+  ---
+  duration_ms: 141.070093
+  type: 'test'
+  ...
+# Subtest: HYBRID : parcours continu départ-fin, déplacements et actions sans forcer les drapeaux
+ok 8 - HYBRID : parcours continu départ-fin, déplacements et actions sans forcer les drapeaux
+  ---
+  duration_ms: 392.99752
+  type: 'test'
+  ...
+# Subtest: CLASSIC : chaque interaction, annexe et porte est accessible par chemin libre
+ok 9 - CLASSIC : chaque interaction, annexe et porte est accessible par chemin libre
+  ---
+  duration_ms: 4.97635
+  type: 'test'
+  ...
+# Subtest: CLASSIC : toutes les entrées et apparitions ennemies évitent les obstacles
+ok 10 - CLASSIC : toutes les entrées et apparitions ennemies évitent les obstacles
+  ---
+  duration_ms: 8.781681
+  type: 'test'
+  ...
+# Subtest: CLASSIC : les 33 sauvegardes du parcours continu se rechargent
+ok 11 - CLASSIC : les 33 sauvegardes du parcours continu se rechargent
+  ---
+  duration_ms: 177.383922
+  type: 'test'
+  ...
+# Subtest: CLASSIC : parcours continu départ-fin, déplacements et actions sans forcer les drapeaux
+ok 12 - CLASSIC : parcours continu départ-fin, déplacements et actions sans forcer les drapeaux
+  ---
+  duration_ms: 235.756639
+  type: 'test'
+  ...
+# Subtest: Prélèvement : une pression brève ne valide plus une opération chronométrée
+ok 13 - Prélèvement : une pression brève ne valide plus une opération chronométrée
+  ---
+  duration_ms: 1.264241
+  type: 'test'
+  ...
+# Subtest: Relâcher E suspend le travail ; reprendre ne recommence pas à zéro
+ok 14 - Relâcher E suspend le travail ; reprendre ne recommence pas à zéro
+  ---
+  duration_ms: 0.701771
+  type: 'test'
+  ...
+# Subtest: Une opération n’avance plus hors de portée ni en tirant
+ok 15 - Une opération n’avance plus hors de portée ni en tirant
+  ---
+  duration_ms: 0.752507
+  type: 'test'
+  ...
+# Subtest: Les dégâts interrompent le travail pendant la récupération
+ok 16 - Les dégâts interrompent le travail pendant la récupération
+  ---
+  duration_ms: 0.487397
+  type: 'test'
+  ...
+# Subtest: Sauvegarder en cours de travail conserve une progression partielle valide
+ok 17 - Sauvegarder en cours de travail conserve une progression partielle valide
+  ---
+  duration_ms: 1.004729
+  type: 'test'
+  ...
+# Subtest: Maintenir E annule le déplacement, mais produit le bruit de la machine
+ok 18 - Maintenir E annule le déplacement, mais produit le bruit de la machine
+  ---
+  duration_ms: 8.260483
+  type: 'test'
+  ...
+# Subtest: La desserte reste fermée depuis les deux côtés avant alimentation
+ok 19 - La desserte reste fermée depuis les deux côtés avant alimentation
+  ---
+  duration_ms: 3.038201
+  type: 'test'
+  ...
+# Subtest: Les cages et la membrane condamnées restent closes
+ok 20 - Les cages et la membrane condamnées restent closes
+  ---
+  duration_ms: 8.172249
+  type: 'test'
+  ...
+# Subtest: Un déplacement rapide ne traverse pas un obstacle
+ok 21 - Un déplacement rapide ne traverse pas un obstacle
+  ---
+  duration_ms: 0.808712
+  type: 'test'
+  ...
+# Subtest: Le contournement utilise des segments libres et ne traverse pas le couvert
+ok 22 - Le contournement utilise des segments libres et ne traverse pas le couvert
+  ---
+  duration_ms: 5.152167
+  type: 'test'
+  ...
+# Subtest: Position proche du bord : un acteur peut encore calculer sa sortie
+ok 23 - Position proche du bord : un acteur peut encore calculer sa sortie
+  ---
+  duration_ms: 0.232502
+  type: 'test'
+  ...
+# Subtest: Bascule de vue : profondeur sûre sans réinitialiser la progression
+ok 24 - Bascule de vue : profondeur sûre sans réinitialiser la progression
+  ---
+  duration_ms: 3.431676
+  type: 'test'
+  ...
+# Subtest: Un couvert coupe la ligne de tir
+ok 25 - Un couvert coupe la ligne de tir
+  ---
+  duration_ms: 1.415189
+  type: 'test'
+  ...
+# Subtest: En profondeur le tir horizontal ne touche pas une autre bande
+ok 26 - En profondeur le tir horizontal ne touche pas une autre bande
+  ---
+  duration_ms: 1.267996
+  type: 'test'
+  ...
+# Subtest: Rechargement retardé : pas de munitions instantanées ni de double recharge
+ok 27 - Rechargement retardé : pas de munitions instantanées ni de double recharge
+  ---
+  duration_ms: 1.641951
+  type: 'test'
+  ...
+# Subtest: Sauvegarde pendant le rechargement : aucune duplication de balles
+ok 28 - Sauvegarde pendant le rechargement : aucune duplication de balles
+  ---
+  duration_ms: 2.801193
+  type: 'test'
+  ...
+# Subtest: Trousses : soin limité, aucun coût à pleine santé
+ok 29 - Trousses : soin limité, aucun coût à pleine santé
+  ---
+  duration_ms: 1.266554
+  type: 'test'
+  ...
+# Subtest: Cartouches : remplacement réel et refus à filtre neuf
+ok 30 - Cartouches : remplacement réel et refus à filtre neuf
+  ---
+  duration_ms: 1.445574
+  type: 'test'
+  ...
+# Subtest: La poussière use le filtre uniquement en extérieur après équipement
+ok 31 - La poussière use le filtre uniquement en extérieur après équipement
+  ---
+  duration_ms: 2.129447
+  type: 'test'
+  ...
+# Subtest: Le prélèvement des réserves reste unique après retour
+ok 32 - Le prélèvement des réserves reste unique après retour
+  ---
+  duration_ms: 1.785939
+  type: 'test'
+  ...
+# Subtest: Revenir dans la chambre de la reine ne régénère pas le combustible
+ok 33 - Revenir dans la chambre de la reine ne régénère pas le combustible
+  ---
+  duration_ms: 12.638149
+  type: 'test'
+  ...
+# Subtest: Empathie : montée, apaisement, information locale et alerte de pression
+ok 34 - Empathie : montée, apaisement, information locale et alerte de pression
+  ---
+  duration_ms: 7.044256
+  type: 'test'
+  ...
+# Subtest: Un détecteur ne montre que les mouvements actifs de la salle
+ok 35 - Un détecteur ne montre que les mouvements actifs de la salle
+  ---
+  duration_ms: 2.086533
+  type: 'test'
+  ...
+# Subtest: Éteindre le détecteur supprime les contacts sans retirer l’équipement
+ok 36 - Éteindre le détecteur supprime les contacts sans retirer l’équipement
+  ---
+  duration_ms: 4.529485
+  type: 'test'
+  ...
+# Subtest: Leurre : charge consommée, portée limitée, expiration en sept secondes
+ok 37 - Leurre : charge consommée, portée limitée, expiration en sept secondes
+  ---
+  duration_ms: 3.6929
+  type: 'test'
+  ...
+# Subtest: Un obstacle empêche le lancer de leurre et conserve la charge
+ok 38 - Un obstacle empêche le lancer de leurre et conserve la charge
+  ---
+  duration_ms: 2.053794
+  type: 'test'
+  ...
+# Subtest: Un ennemi entend un leurre sans connaître la position réelle du joueur
+ok 39 - Un ennemi entend un leurre sans connaître la position réelle du joueur
+  ---
+  duration_ms: 1.789304
+  type: 'test'
+  ...
+# Subtest: Perte de contact : recherche au dernier endroit, pas de poursuite omnisciente
+ok 40 - Perte de contact : recherche au dernier endroit, pas de poursuite omnisciente
+  ---
+  duration_ms: 1.81931
+  type: 'test'
+  ...
+# Subtest: Manning en riposte ne tue pas un adulte en patrouille
+ok 41 - Manning en riposte ne tue pas un adulte en patrouille
+  ---
+  duration_ms: 4.60569
+  type: 'test'
+  ...
+# Subtest: Manning ne tire jamais sur l’adulte destiné à la capture
+ok 42 - Manning ne tire jamais sur l’adulte destiné à la capture
+  ---
+  duration_ms: 6.836181
+  type: 'test'
+  ...
+# Subtest: Annexe filtres : deux recharges uniques et dossier déverrouillé
+ok 43 - Annexe filtres : deux recharges uniques et dossier déverrouillé
+  ---
+  duration_ms: 17.206462
+  type: 'test'
+  ...
+# Subtest: Annexe pompes : réduit effectivement le réarmement principal
+ok 44 - Annexe pompes : réduit effectivement le réarmement principal
+  ---
+  duration_ms: 3.433219
+  type: 'test'
+  ...
+# Subtest: Annexe relevés : archive préservée sans ajouter un objectif obligatoire
+ok 45 - Annexe relevés : archive préservée sans ajouter un objectif obligatoire
+  ---
+  duration_ms: 3.297873
+  type: 'test'
+  ...
+# Subtest: Purge fermée : la portée auditive baisse dans la dérivation voisine
+ok 46 - Purge fermée : la portée auditive baisse dans la dérivation voisine
+  ---
+  duration_ms: 5.802429
+  type: 'test'
+  ...
+# Subtest: Annexe médicale : deux soins et réparation des deux châssis présents
+ok 47 - Annexe médicale : deux soins et réparation des deux châssis présents
+  ---
+  duration_ms: 8.17941
+  type: 'test'
+  ...
+# Subtest: Guidage : la balise passe de cinq à deux secondes
+ok 48 - Guidage : la balise passe de cinq à deux secondes
+  ---
+  duration_ms: 8.822252
+  type: 'test'
+  ...
+# Subtest: Un seul brancard préparé ne permet pas de quitter les blessés
+ok 49 - Un seul brancard préparé ne permet pas de quitter les blessés
+  ---
+  duration_ms: 5.67079
+  type: 'test'
+  ...
+# Subtest: Les brancards avancent physiquement sans téléportation de suivi
+ok 50 - Les brancards avancent physiquement sans téléportation de suivi
+  ---
+  duration_ms: 6.807047
+  type: 'test'
+  ...
+# Subtest: Ordre halte : aucun déplacement du convoi tant que B ne le relance pas
+ok 51 - Ordre halte : aucun déplacement du convoi tant que B ne le relance pas
+  ---
+  duration_ms: 6.49172
+  type: 'test'
+  ...
+# Subtest: Une sortie refuse le convoi éloigné et les retours incompatibles
+ok 52 - Une sortie refuse le convoi éloigné et les retours incompatibles
+  ---
+  duration_ms: 6.705152
+  type: 'test'
+  ...
+# Subtest: Le treuil exige les deux brancards rassemblés
+ok 53 - Le treuil exige les deux brancards rassemblés
+  ---
+  duration_ms: 6.957304
+  type: 'test'
+  ...
+# Subtest: Les châssis peuvent être détruits et la reprise restaure leur entrée de salle
+ok 54 - Les châssis peuvent être détruits et la reprise restaure leur entrée de salle
+  ---
+  duration_ms: 7.394985
+  type: 'test'
+  ...
+# Subtest: Leur état et leur ordre sont conservés par sauvegarde
+ok 55 - Leur état et leur ordre sont conservés par sauvegarde
+  ---
+  duration_ms: 8.824576
+  type: 'test'
+  ...
+# Subtest: Arrimage : refuse les absents puis range les deux brancards réellement proches
+ok 56 - Arrimage : refuse les absents puis range les deux brancards réellement proches
+  ---
+  duration_ms: 8.945048
+  type: 'test'
+  ...
+# Subtest: La capture refuse le spécimen tant que les brancards ne sont pas arrimés
+ok 57 - La capture refuse le spécimen tant que les brancards ne sont pas arrimés
+  ---
+  duration_ms: 7.918967
+  type: 'test'
+  ...
+# Subtest: Capture réelle : vivant, proche, trois tirs de mousse et E
+ok 58 - Capture réelle : vivant, proche, trois tirs de mousse et E
+  ---
+  duration_ms: 10.080093
+  type: 'test'
+  ...
+# Subtest: Tuer le spécimen déclenche l’échec, jamais une capture de cadavre
+ok 59 - Tuer le spécimen déclenche l’échec, jamais une capture de cadavre
+  ---
+  duration_ms: 6.7559
+  type: 'test'
+  ...
+# Subtest: La reine reste invulnérable jusqu’aux trois attaches brûlées
+ok 60 - La reine reste invulnérable jusqu’aux trois attaches brûlées
+  ---
+  duration_ms: 6.568466
+  type: 'test'
+  ...
+# Subtest: Ancienne sauvegarde 0.1 neuve : migration sans perte de progression
+ok 61 - Ancienne sauvegarde 0.1 neuve : migration sans perte de progression
+  ---
+  duration_ms: 1.587719
+  type: 'test'
+  ...
+# Subtest: Ancienne sauvegarde 0.1 après sauvetage : reconstruction du convoi
+ok 62 - Ancienne sauvegarde 0.1 après sauvetage : reconstruction du convoi
+  ---
+  duration_ms: 4.516766
+  type: 'test'
+  ...
+# Subtest: Rejet transactionnel des corruptions : progression, coordonnées, ressources, convoi
+ok 63 - Rejet transactionnel des corruptions : progression, coordonnées, ressources, convoi
+  ---
+  duration_ms: 34.173223
+  type: 'test'
+  ...
+# Subtest: Import rejette les clés dangereuses, mauvais format et fichier surdimensionné
+ok 64 - Import rejette les clés dangereuses, mauvais format et fichier surdimensionné
+  ---
+  duration_ms: 0.367926
+  type: 'test'
+  ...
+# Subtest: Entrées non finies et deltas démesurés ne corrompent pas la physique
+ok 65 - Entrées non finies et deltas démesurés ne corrompent pas la physique
+  ---
+  duration_ms: 0.300434
+  type: 'test'
+  ...
+# Subtest: Aucune écriture vers l’économie Tantalus et namespace de migration préservé
+ok 66 - Aucune écriture vers l’économie Tantalus et namespace de migration préservé
+  ---
+  duration_ms: 0.324119
+  type: 'test'
+  ...
+# Subtest: Deux brancards au repos gardent un intervalle lisible sur une desserte droite
+ok 67 - Deux brancards au repos gardent un intervalle lisible sur une desserte droite
+  ---
+  duration_ms: 9.253624
+  type: 'test'
+  ...
+# Subtest: Une destination de suivi masquée par un couvert est rabattue sur un point sûr
+ok 68 - Une destination de suivi masquée par un couvert est rabattue sur un point sûr
+  ---
+  duration_ms: 5.255943
+  type: 'test'
+  ...
+# Subtest: Fidélité : cible, absence de comparaison intégrale et aucun pourcentage inventé
+ok 69 - Fidélité : cible, absence de comparaison intégrale et aucun pourcentage inventé
+  ---
+  duration_ms: 1.009526
+  type: 'test'
+  ...
+# Subtest: Chaque salle distingue son territoire et son implantation originale
+ok 70 - Chaque salle distingue son territoire et son implantation originale
+  ---
+  duration_ms: 0.277209
+  type: 'test'
+  ...
+# Subtest: Les pièces ne partagent plus la même case de carte dans leur secteur
+ok 71 - Les pièces ne partagent plus la même case de carte dans leur secteur
+  ---
+  duration_ms: 0.281265
+  type: 'test'
+  ...
+# Subtest: Les liens réciproques rejoignent la face opposée, les exceptions restent explicites
+ok 72 - Les liens réciproques rejoignent la face opposée, les exceptions restent explicites
+  ---
+  duration_ms: 1.160855
+  type: 'test'
+  ...
+# Subtest: Types structurels : transport, cage et escalier ne sont pas des portes ordinaires
+ok 73 - Types structurels : transport, cage et escalier ne sont pas des portes ordinaires
+  ---
+  duration_ms: 0.272172
+  type: 'test'
+  ...
+# Subtest: HYBRID : 113 approches et arrivées hors obstacles, reliées au centre
+ok 74 - HYBRID : 113 approches et arrivées hors obstacles, reliées au centre
+  ---
+  duration_ms: 37.483295
+  type: 'test'
+  ...
+# Subtest: CLASSIC : 113 approches et arrivées hors obstacles, reliées au centre
+ok 75 - CLASSIC : 113 approches et arrivées hors obstacles, reliées au centre
+  ---
+  duration_ms: 11.764218
+  type: 'test'
+  ...
+# Subtest: HYBRID : personnages et râteliers sur sol libre, pas sur un seuil
+ok 76 - HYBRID : personnages et râteliers sur sol libre, pas sur un seuil
+  ---
+  duration_ms: 7.44467
+  type: 'test'
+  ...
+# Subtest: CLASSIC : personnages et râteliers sur sol libre, pas sur un seuil
+ok 77 - CLASSIC : personnages et râteliers sur sol libre, pas sur un seuil
+  ---
+  duration_ms: 7.872467
+  type: 'test'
+  ...
+# Subtest: Registre : 17 profils visuels, chaque profil indique sa portée documentaire
+ok 78 - Registre : 17 profils visuels, chaque profil indique sa portée documentaire
+  ---
+  duration_ms: 0.551143
+  type: 'test'
+  ...
+# Subtest: Le jeu ne prétend pas posséder tous les équipements décrits dans le livre
+ok 79 - Le jeu ne prétend pas posséder tous les équipements décrits dans le livre
+  ---
+  duration_ms: 0.17244
+  type: 'test'
+  ...
+# Subtest: Avant remise du matériel : pas de fusils ni de retrait au râtelier
+ok 80 - Avant remise du matériel : pas de fusils ni de retrait au râtelier
+  ---
+  duration_ms: 0.736844
+  type: 'test'
+  ...
+# Subtest: Équipé mais éloigné : aucun retrait à distance
+ok 81 - Équipé mais éloigné : aucun retrait à distance
+  ---
+  duration_ms: 3.747983
+  type: 'test'
+  ...
+# Subtest: Dotation finie partagée entre les deux râteliers
+ok 82 - Dotation finie partagée entre les deux râteliers
+  ---
+  duration_ms: 2.707863
+  type: 'test'
+  ...
+# Subtest: Fusil à impulsions : dégâts et chargeur distincts du Reaper
+ok 83 - Fusil à impulsions : dégâts et chargeur distincts du Reaper
+  ---
+  duration_ms: 1.579547
+  type: 'test'
+  ...
+# Subtest: Une cloison fermée bloque aussi les nouveaux fusils
+ok 84 - Une cloison fermée bloque aussi les nouveaux fusils
+  ---
+  duration_ms: 3.713812
+  type: 'test'
+  ...
+# Subtest: Recharger ne crée pas de cartouches avant la fin du délai
+ok 85 - Recharger ne crée pas de cartouches avant la fin du délai
+  ---
+  duration_ms: 4.111343
+  type: 'test'
+  ...
+# Subtest: Chargeur complet et cellule non vide : remplacement refusé
+ok 86 - Chargeur complet et cellule non vide : remplacement refusé
+  ---
+  duration_ms: 1.377532
+  type: 'test'
+  ...
+# Subtest: Plasma : blocage thermique puis refroidissement sans recharge gratuite
+ok 87 - Plasma : blocage thermique puis refroidissement sans recharge gratuite
+  ---
+  duration_ms: 4.062069
+  type: 'test'
+  ...
+# Subtest: Plasma vide : une cellule consommée seulement en fin de rechargement
+ok 88 - Plasma vide : une cellule consommée seulement en fin de rechargement
+  ---
+  duration_ms: 1.796415
+  type: 'test'
+  ...
+# Subtest: Le plasma ne contourne pas la nécessité de garder le spécimen vivant
+ok 89 - Le plasma ne contourne pas la nécessité de garder le spécimen vivant
+  ---
+  duration_ms: 1.580138
+  type: 'test'
+  ...
+# Subtest: Les échanges de PNJ n’injectent aucun objectif
+ok 90 - Les échanges de PNJ n’injectent aucun objectif
+  ---
+  duration_ms: 0.460827
+  type: 'test'
+  ...
+# Subtest: Adams et Elway ne reviennent pas debout après le sauvetage
+ok 91 - Adams et Elway ne reviennent pas debout après le sauvetage
+  ---
+  duration_ms: 9.009755
+  type: 'test'
+  ...
+# Subtest: Une sauvegarde v0.9 conserve les réserves et ne reçoit pas une dotation fantôme
+ok 92 - Une sauvegarde v0.9 conserve les réserves et ne reçoit pas une dotation fantôme
+  ---
+  duration_ms: 1.162707
+  type: 'test'
+  ...
+# Subtest: Nouvelle arme et chaleur restaurées dans la version courante
+ok 93 - Nouvelle arme et chaleur restaurées dans la version courante
+  ---
+  duration_ms: 2.29614
+  type: 'test'
+  ...
+# Subtest: Corruptions de dotation refusées transactionnellement
+ok 94 - Corruptions de dotation refusées transactionnellement
+  ---
+  duration_ms: 5.238777
+  type: 'test'
+  ...
+# Subtest: Aucun ancien faux sas, double cage, escalier de décor ou brèche sans accès
+ok 95 - Aucun ancien faux sas, double cage, escalier de décor ou brèche sans accès
+  ---
+  duration_ms: 0.270639
+  type: 'test'
+  ...
+# Subtest: Les deux dispositifs de stase ne déclarent pas une guérison
+ok 96 - Les deux dispositifs de stase ne déclarent pas une guérison
+  ---
+  duration_ms: 0.109025
+  type: 'test'
+  ...
+# Subtest: Chaque seuil évite un dispositif à portée prioritaire en latérale
+ok 97 - Chaque seuil évite un dispositif à portée prioritaire en latérale
+  ---
+  duration_ms: 0.311461
+  type: 'test'
+  ...
+# Subtest: Catalogue : seize implantations revues, neuf sources cycliques, aucun acteur supplémentaire
+ok 98 - Catalogue : seize implantations revues, neuf sources cycliques, aucun acteur supplémentaire
+  ---
+  duration_ms: 1.869946
+  type: 'test'
+  ...
+# Subtest: Toutes les commandes sont hors des emprises nocives qu’elles coupent
+ok 99 - Toutes les commandes sont hors des emprises nocives qu’elles coupent
+  ---
+  duration_ms: 6.797993
+  type: 'test'
+  ...
+# Subtest: Esquive : direction, coût exact initial et temps de récupération
+ok 100 - Esquive : direction, coût exact initial et temps de récupération
+  ---
+  duration_ms: 11.539879
+  type: 'test'
+  ...
+# Subtest: Esquive refusée en civil, sans endurance ou après un échec
+ok 101 - Esquive refusée en civil, sans endurance ou après un échec
+  ---
+  duration_ms: 0.282217
+  type: 'test'
+  ...
+# Subtest: Sans direction, l’esquive est un pas de recul
+ok 102 - Sans direction, l’esquive est un pas de recul
+  ---
+  duration_ms: 2.601812
+  type: 'test'
+  ...
+# Subtest: Esquive diagonale normalisée : pas de bonus de vitesse
+ok 103 - Esquive diagonale normalisée : pas de bonus de vitesse
+  ---
+  duration_ms: 2.373587
+  type: 'test'
+  ...
+# Subtest: Esquive : impossible de traverser le pilier central
+ok 104 - Esquive : impossible de traverser le pilier central
+  ---
+  duration_ms: 2.360807
+  type: 'test'
+  ...
+# Subtest: Vue classique : esquive verticale rabattue en recul latéral
+ok 105 - Vue classique : esquive verticale rabattue en recul latéral
+  ---
+  duration_ms: 1.676894
+  type: 'test'
+  ...
+# Subtest: Sauvegarde pendant l’esquive : mouvement et récupération conservés
+ok 106 - Sauvegarde pendant l’esquive : mouvement et récupération conservés
+  ---
+  duration_ms: 3.183831
+  type: 'test'
+  ...
+# Subtest: Une attaque de contact ne blesse pas dès le premier contact
+ok 107 - Une attaque de contact ne blesse pas dès le premier contact
+  ---
+  duration_ms: 3.975167
+  type: 'test'
+  ...
+# Subtest: Une attaque engagée frappe après la préparation, jamais avant
+ok 108 - Une attaque engagée frappe après la préparation, jamais avant
+  ---
+  duration_ms: 1.553188
+  type: 'test'
+  ...
+# Subtest: Quitter l’emprise annoncée évite le coup verrouillé
+ok 109 - Quitter l’emprise annoncée évite le coup verrouillé
+  ---
+  duration_ms: 1.688261
+  type: 'test'
+  ...
+# Subtest: Immobiliser à la mousse annule la préparation ennemie
+ok 110 - Immobiliser à la mousse annule la préparation ennemie
+  ---
+  duration_ms: 2.504925
+  type: 'test'
+  ...
+# Subtest: Une cible abattue ne conserve pas de coup armé
+ok 111 - Une cible abattue ne conserve pas de coup armé
+  ---
+  duration_ms: 1.520678
+  type: 'test'
+  ...
+# Subtest: La préparation de reine est distincte et plus longue
+ok 112 - La préparation de reine est distincte et plus longue
+  ---
+  duration_ms: 7.781569
+  type: 'test'
+  ...
+# Subtest: Reprise d’une préparation : cible et temps restant identiques
+ok 113 - Reprise d’une préparation : cible et temps restant identiques
+  ---
+  duration_ms: 2.887223
+  type: 'test'
+  ...
+# Subtest: Aucun coup n’atteint un brancard déjà arrimé
+ok 114 - Aucun coup n’atteint un brancard déjà arrimé
+  ---
+  duration_ms: 8.719998
+  type: 'test'
+  ...
+# Subtest: HYBRID : trois phases et consignation persistante
+ok 115 - HYBRID : trois phases et consignation persistante
+  ---
+  duration_ms: 2.060764
+  type: 'test'
+  ...
+# Subtest: HYBRID : source active inflige un dommage, pas chaque image
+ok 116 - HYBRID : source active inflige un dommage, pas chaque image
+  ---
+  duration_ms: 2.142317
+  type: 'test'
+  ...
+# Subtest: HYBRID : horloge du danger sauvegardée et conservée au retour
+ok 117 - HYBRID : horloge du danger sauvegardée et conservée au retour
+  ---
+  duration_ms: 3.248519
+  type: 'test'
+  ...
+# Subtest: CLASSIC : trois phases et consignation persistante
+ok 118 - CLASSIC : trois phases et consignation persistante
+  ---
+  duration_ms: 1.790135
+  type: 'test'
+  ...
+# Subtest: CLASSIC : source active inflige un dommage, pas chaque image
+ok 119 - CLASSIC : source active inflige un dommage, pas chaque image
+  ---
+  duration_ms: 2.33614
+  type: 'test'
+  ...
+# Subtest: CLASSIC : horloge du danger sauvegardée et conservée au retour
+ok 120 - CLASSIC : horloge du danger sauvegardée et conservée au retour
+  ---
+  duration_ms: 2.917298
+  type: 'test'
+  ...
+# Subtest: Profondeur : passer à côté d’un panache ne consomme pas de filtre
+ok 121 - Profondeur : passer à côté d’un panache ne consomme pas de filtre
+  ---
+  duration_ms: 1.939441
+  type: 'test'
+  ...
+# Subtest: Panache : le filtre absorbe l’exposition avant les PV
+ok 122 - Panache : le filtre absorbe l’exposition avant les PV
+  ---
+  duration_ms: 1.695353
+  type: 'test'
+  ...
+# Subtest: Valve : maintien réel, fermeture permanente et sérialisation
+ok 123 - Valve : maintien réel, fermeture permanente et sérialisation
+  ---
+  duration_ms: 5.835107
+  type: 'test'
+  ...
+# Subtest: La réparation exige un convoi arrêté, proche, abîmé et des renforts
+ok 124 - La réparation exige un convoi arrêté, proche, abîmé et des renforts
+  ---
+  duration_ms: 6.542818
+  type: 'test'
+  ...
+# Subtest: Réparation : trois secondes, 35 points et un seul renfort consommé
+ok 125 - Réparation : trois secondes, 35 points et un seul renfort consommé
+  ---
+  duration_ms: 7.52378
+  type: 'test'
+  ...
+# Subtest: Réparation plafonnée à 100 : aucune consommation supplémentaire à vide
+ok 126 - Réparation plafonnée à 100 : aucune consommation supplémentaire à vide
+  ---
+  duration_ms: 8.876714
+  type: 'test'
+  ...
+# Subtest: Interruption de réparation : progression gardée dans la sauvegarde
+ok 127 - Interruption de réparation : progression gardée dans la sauvegarde
+  ---
+  duration_ms: 9.893411
+  type: 'test'
+  ...
+# Subtest: Dégâts : suspension réelle de réparation pendant récupération
+ok 128 - Dégâts : suspension réelle de réparation pendant récupération
+  ---
+  duration_ms: 7.050625
+  type: 'test'
+  ...
+# Subtest: Atelier de renforts : deux pièces uniques, caisse jamais rechargeable
+ok 129 - Atelier de renforts : deux pièces uniques, caisse jamais rechargeable
+  ---
+  duration_ms: 4.788306
+  type: 'test'
+  ...
+# Subtest: Un trajet marqué suit des seuils connus, pas une salle inventée
+ok 130 - Un trajet marqué suit des seuils connus, pas une salle inventée
+  ---
+  duration_ms: 0.432353
+  type: 'test'
+  ...
+# Subtest: Le marqueur se retire, se sauvegarde et indique l’arrivée
+ok 131 - Le marqueur se retire, se sauvegarde et indique l’arrivée
+  ---
+  duration_ms: 0.851837
+  type: 'test'
+  ...
+# Subtest: Un trajet tient compte d’un seuil condamné après la progression
+ok 132 - Un trajet tient compte d’un seuil condamné après la progression
+  ---
+  duration_ms: 4.990171
+  type: 'test'
+  ...
+# Subtest: Migration des 66 anciennes sauvegardes sans objectif ni ressource perdus
+ok 133 - Migration des 66 anciennes sauvegardes sans objectif ni ressource perdus
+  ---
+  duration_ms: 278.099668
+  type: 'test'
+  ...
+# Subtest: Import transactionnel : rejet des nouveaux champs invalides
+ok 134 - Import transactionnel : rejet des nouveaux champs invalides
+  ---
+  duration_ms: 50.169295
+  type: 'test'
+  ...
+# Subtest: Import transactionnel : refus de préparation d’attaque corrompue
+ok 135 - Import transactionnel : refus de préparation d’attaque corrompue
+  ---
+  duration_ms: 6.536007
+  type: 'test'
+  ...
+# Subtest: Copie locale : tous les fichiers présents, index hôte intact
+ok 136 - Copie locale : tous les fichiers présents, index hôte intact
+  ---
+  duration_ms: 10.526057
+  type: 'test'
+  ...
+# Subtest: Deux installations identiques sont idempotentes
+ok 137 - Deux installations identiques sont idempotentes
+  ---
+  duration_ms: 9.192091
+  type: 'test'
+  ...
+# Subtest: La désinstallation enlève uniquement son dossier
+ok 138 - La désinstallation enlève uniquement son dossier
+  ---
+  duration_ms: 7.749511
+  type: 'test'
+  ...
+# Subtest: Un fichier utilisateur modifié interdit la suppression
+ok 139 - Un fichier utilisateur modifié interdit la suppression
+  ---
+  duration_ms: 5.397166
+  type: 'test'
+  ...
+# Subtest: Un dossier étranger ou un fichier supplémentaire est préservé
+ok 140 - Un dossier étranger ou un fichier supplémentaire est préservé
+  ---
+  duration_ms: 8.492814
+  type: 'test'
+  ...
+# Subtest: Un dossier qui n’est pas un projet est refusé
+ok 141 - Un dossier qui n’est pas un projet est refusé
+  ---
+  duration_ms: 0.222577
+  type: 'test'
+  ...
+# Subtest: La route installée contient chacun des neuf modules réellement référencés
+ok 142 - La route installée contient chacun des neuf modules réellement référencés
+  ---
+  duration_ms: 5.708557
+  type: 'test'
+  ...
+# Subtest: 10 circuits uniques et six notices originales ajoutés
+ok 143 - 10 circuits uniques et six notices originales ajoutés
+  ---
+  duration_ms: 4.623968
+  type: 'test'
+  ...
+# Subtest: HYBRID : chaque pupitre est libre et joignable depuis le seuil
+ok 144 - HYBRID : chaque pupitre est libre et joignable depuis le seuil
+  ---
+  duration_ms: 25.754109
+  type: 'test'
+  ...
+# Subtest: HYBRID : deux secondes réelles, puis relâchement avant inversion
+ok 145 - HYBRID : deux secondes réelles, puis relâchement avant inversion
+  ---
+  duration_ms: 4.957662
+  type: 'test'
+  ...
+# Subtest: HYBRID : travail partiel conservé sans avancement à distance
+ok 146 - HYBRID : travail partiel conservé sans avancement à distance
+  ---
+  duration_ms: 5.987669
+  type: 'test'
+  ...
+# Subtest: HYBRID : E exécute la même opération que le moteur isolé
+ok 147 - HYBRID : E exécute la même opération que le moteur isolé
+  ---
+  duration_ms: 11.669524
+  type: 'test'
+  ...
+# Subtest: HYBRID : le blocage de travail causé par des dégâts est respecté
+ok 148 - HYBRID : le blocage de travail causé par des dégâts est respecté
+  ---
+  duration_ms: 2.406727
+  type: 'test'
+  ...
+# Subtest: HYBRID : lampe éteinte et circuit coupé réduisent la vision sans effacer la mémoire
+ok 149 - HYBRID : lampe éteinte et circuit coupé réduisent la vision sans effacer la mémoire
+  ---
+  duration_ms: 1.807491
+  type: 'test'
+  ...
+# Subtest: HYBRID : une créature voit dans la lumière puis cherche dans le noir
+ok 150 - HYBRID : une créature voit dans la lumière puis cherche dans le noir
+  ---
+  duration_ms: 2.432315
+  type: 'test'
+  ...
+# Subtest: HYBRID : le bruit reste audible sans lumière
+ok 151 - HYBRID : le bruit reste audible sans lumière
+  ---
+  duration_ms: 1.960813
+  type: 'test'
+  ...
+# Subtest: HYBRID : machines, dangers et cloisons restent indépendants
+ok 152 - HYBRID : machines, dangers et cloisons restent indépendants
+  ---
+  duration_ms: 9.278691
+  type: 'test'
+  ...
+# Subtest: HYBRID : coupure sauvegardée entre les salles et après reprise
+ok 153 - HYBRID : coupure sauvegardée entre les salles et après reprise
+  ---
+  duration_ms: 5.32077
+  type: 'test'
+  ...
+# Subtest: HYBRID : les capteurs ne deviennent pas aveugles dans le noir
+ok 154 - HYBRID : les capteurs ne deviennent pas aveugles dans le noir
+  ---
+  duration_ms: 3.542894
+  type: 'test'
+  ...
+# Subtest: HYBRID : ordonner une formation ne déplace ni soigne un patient
+ok 155 - HYBRID : ordonner une formation ne déplace ni soigne un patient
+  ---
+  duration_ms: 15.400493
+  type: 'test'
+  ...
+# Subtest: HYBRID : l’allure rapproche réellement le convoi avec ses collisions
+ok 156 - HYBRID : l’allure rapproche réellement le convoi avec ses collisions
+  ---
+  duration_ms: 15.926068
+  type: 'test'
+  ...
+# Subtest: HYBRID : la formation ne traverse pas une cloison fermée
+ok 157 - HYBRID : la formation ne traverse pas une cloison fermée
+  ---
+  duration_ms: 11.320067
+  type: 'test'
+  ...
+# Subtest: HYBRID : la halte arrête le bruit de roulement
+ok 158 - HYBRID : la halte arrête le bruit de roulement
+  ---
+  duration_ms: 6.937094
+  type: 'test'
+  ...
+# Subtest: HYBRID : reprise conserve formation, intégrité, stocks et poursuite
+ok 159 - HYBRID : reprise conserve formation, intégrité, stocks et poursuite
+  ---
+  duration_ms: 23.940228
+  type: 'test'
+  ...
+# Subtest: CLASSIC : chaque pupitre est libre et joignable depuis le seuil
+ok 160 - CLASSIC : chaque pupitre est libre et joignable depuis le seuil
+  ---
+  duration_ms: 12.902067
+  type: 'test'
+  ...
+# Subtest: CLASSIC : deux secondes réelles, puis relâchement avant inversion
+ok 161 - CLASSIC : deux secondes réelles, puis relâchement avant inversion
+  ---
+  duration_ms: 9.992591
+  type: 'test'
+  ...
+# Subtest: CLASSIC : travail partiel conservé sans avancement à distance
+ok 162 - CLASSIC : travail partiel conservé sans avancement à distance
+  ---
+  duration_ms: 2.66696
+  type: 'test'
+  ...
+# Subtest: CLASSIC : E exécute la même opération que le moteur isolé
+ok 163 - CLASSIC : E exécute la même opération que le moteur isolé
+  ---
+  duration_ms: 1.774001
+  type: 'test'
+  ...
+# Subtest: CLASSIC : le blocage de travail causé par des dégâts est respecté
+ok 164 - CLASSIC : le blocage de travail causé par des dégâts est respecté
+  ---
+  duration_ms: 1.327686
+  type: 'test'
+  ...
+# Subtest: CLASSIC : lampe éteinte et circuit coupé réduisent la vision sans effacer la mémoire
+ok 165 - CLASSIC : lampe éteinte et circuit coupé réduisent la vision sans effacer la mémoire
+  ---
+  duration_ms: 4.316173
+  type: 'test'
+  ...
+# Subtest: CLASSIC : une créature voit dans la lumière puis cherche dans le noir
+ok 166 - CLASSIC : une créature voit dans la lumière puis cherche dans le noir
+  ---
+  duration_ms: 1.289088
+  type: 'test'
+  ...
+# Subtest: CLASSIC : le bruit reste audible sans lumière
+ok 167 - CLASSIC : le bruit reste audible sans lumière
+  ---
+  duration_ms: 1.526957
+  type: 'test'
+  ...
+# Subtest: CLASSIC : machines, dangers et cloisons restent indépendants
+ok 168 - CLASSIC : machines, dangers et cloisons restent indépendants
+  ---
+  duration_ms: 4.15526
+  type: 'test'
+  ...
+# Subtest: CLASSIC : coupure sauvegardée entre les salles et après reprise
+ok 169 - CLASSIC : coupure sauvegardée entre les salles et après reprise
+  ---
+  duration_ms: 7.864335
+  type: 'test'
+  ...
+# Subtest: CLASSIC : les capteurs ne deviennent pas aveugles dans le noir
+ok 170 - CLASSIC : les capteurs ne deviennent pas aveugles dans le noir
+  ---
+  duration_ms: 1.766109
+  type: 'test'
+  ...
+# Subtest: CLASSIC : ordonner une formation ne déplace ni soigne un patient
+ok 171 - CLASSIC : ordonner une formation ne déplace ni soigne un patient
+  ---
+  duration_ms: 10.978721
+  type: 'test'
+  ...
+# Subtest: CLASSIC : l’allure rapproche réellement le convoi avec ses collisions
+ok 172 - CLASSIC : l’allure rapproche réellement le convoi avec ses collisions
+  ---
+  duration_ms: 5.75705
+  type: 'test'
+  ...
+# Subtest: CLASSIC : la formation ne traverse pas une cloison fermée
+ok 173 - CLASSIC : la formation ne traverse pas une cloison fermée
+  ---
+  duration_ms: 7.4642
+  type: 'test'
+  ...
+# Subtest: CLASSIC : la halte arrête le bruit de roulement
+ok 174 - CLASSIC : la halte arrête le bruit de roulement
+  ---
+  duration_ms: 6.096273
+  type: 'test'
+  ...
+# Subtest: CLASSIC : reprise conserve formation, intégrité, stocks et poursuite
+ok 175 - CLASSIC : reprise conserve formation, intégrité, stocks et poursuite
+  ---
+  duration_ms: 10.508721
+  type: 'test'
+  ...
+# Subtest: Une formation n’est pas disponible pendant le prologue
+ok 176 - Une formation n’est pas disponible pendant le prologue
+  ---
+  duration_ms: 0.189577
+  type: 'test'
+  ...
+# Subtest: Les noms de formation arbitraires et les clés de prototype sont refusés
+ok 177 - Les noms de formation arbitraires et les clés de prototype sont refusés
+  ---
+  duration_ms: 6.012626
+  type: 'test'
+  ...
+# Subtest: Un circuit ne peut être coupé dans une salle sans installation
+ok 178 - Un circuit ne peut être coupé dans une salle sans installation
+  ---
+  duration_ms: 1.458875
+  type: 'test'
+  ...
+# Subtest: Une valeur de temps excessive ne termine pas une manœuvre
+ok 179 - Une valeur de temps excessive ne termine pas une manœuvre
+  ---
+  duration_ms: 1.642542
+  type: 'test'
+  ...
+# Subtest: Éclairage derrière cloison : action impossible à distance
+ok 180 - Éclairage derrière cloison : action impossible à distance
+  ---
+  duration_ms: 2.130189
+  type: 'test'
+  ...
+# Subtest: 198 vrais exports v0.6 migrent en conservant capteurs et progression
+ok 181 - 198 vrais exports v0.6 migrent en conservant capteurs et progression
+  ---
+  duration_ms: 932.763462
+  type: 'test'
+  ...
+# Subtest: Import rejeté sans remplacer la partie : formation inconnue
+ok 182 - Import rejeté sans remplacer la partie : formation inconnue
+  ---
+  duration_ms: 2.21073
+  type: 'test'
+  ...
+# Subtest: Import rejeté sans remplacer la partie : circuit non booléen
+ok 183 - Import rejeté sans remplacer la partie : circuit non booléen
+  ---
+  duration_ms: 1.864718
+  type: 'test'
+  ...
+# Subtest: Import rejeté sans remplacer la partie : progrès négatif
+ok 184 - Import rejeté sans remplacer la partie : progrès négatif
+  ---
+  duration_ms: 1.796946
+  type: 'test'
+  ...
+# Subtest: Import rejeté sans remplacer la partie : progrès terminé
+ok 185 - Import rejeté sans remplacer la partie : progrès terminé
+  ---
+  duration_ms: 1.848783
+  type: 'test'
+  ...
+# Subtest: Import rejeté sans remplacer la partie : statistique fractionnaire
+ok 186 - Import rejeté sans remplacer la partie : statistique fractionnaire
+  ---
+  duration_ms: 1.823315
+  type: 'test'
+  ...
+# Subtest: Import rejeté sans remplacer la partie : salle sans éclairage coupée
+ok 187 - Import rejeté sans remplacer la partie : salle sans éclairage coupée
+  ---
+  duration_ms: 1.828574
+  type: 'test'
+  ...
+# Subtest: HYBRID : perception du roulement compact à 120 unités dans le noir
+ok 188 - HYBRID : perception du roulement compact à 120 unités dans le noir
+  ---
+  duration_ms: 6.146078
+  type: 'test'
+  ...
+# Subtest: HYBRID : perception du roulement quiet à 120 unités dans le noir
+ok 189 - HYBRID : perception du roulement quiet à 120 unités dans le noir
+  ---
+  duration_ms: 7.510019
+  type: 'test'
+  ...
+# Subtest: CLASSIC : perception du roulement compact à 120 unités dans le noir
+ok 190 - CLASSIC : perception du roulement compact à 120 unités dans le noir
+  ---
+  duration_ms: 8.437051
+  type: 'test'
+  ...
+# Subtest: CLASSIC : perception du roulement quiet à 120 unités dans le noir
+ok 191 - CLASSIC : perception du roulement quiet à 120 unités dans le noir
+  ---
+  duration_ms: 8.533516
+  type: 'test'
+  ...
+# Subtest: Le matériel posé ne peut occuper un pupitre d’éclairage
+ok 192 - Le matériel posé ne peut occuper un pupitre d’éclairage
+  ---
+  duration_ms: 2.184501
+  type: 'test'
+  ...
+# Subtest: HYBRID : une poursuite part uniquement après le franchissement réel
+ok 193 - HYBRID : une poursuite part uniquement après le franchissement réel
+  ---
+  duration_ms: 9.808382
+  type: 'test'
+  ...
+# Subtest: HYBRID : le poursuivant marche dans la salle quittée sans téléportation
+ok 194 - HYBRID : le poursuivant marche dans la salle quittée sans téléportation
+  ---
+  duration_ms: 3.353798
+  type: 'test'
+  ...
+# Subtest: HYBRID : signal au seuil, délai et identité/blessures conservés
+ok 195 - HYBRID : signal au seuil, délai et identité/blessures conservés
+  ---
+  duration_ms: 3.946384
+  type: 'test'
+  ...
+# Subtest: HYBRID : reprendre une poursuite à mi-parcours ne duplique pas la créature
+ok 196 - HYBRID : reprendre une poursuite à mi-parcours ne duplique pas la créature
+  ---
+  duration_ms: 4.463415
+  type: 'test'
+  ...
+# Subtest: HYBRID : changement de vue en transit conserve une apparition sûre
+ok 197 - HYBRID : changement de vue en transit conserve une apparition sûre
+  ---
+  duration_ms: 2.312524
+  type: 'test'
+  ...
+# Subtest: HYBRID : revenir dans la salle source annule le ticket sans déplacer la créature
+ok 198 - HYBRID : revenir dans la salle source annule le ticket sans déplacer la créature
+  ---
+  duration_ms: 2.097009
+  type: 'test'
+  ...
+# Subtest: HYBRID : la population migrée reste unique après plusieurs allers-retours
+ok 199 - HYBRID : la population migrée reste unique après plusieurs allers-retours
+  ---
+  duration_ms: 7.74924
+  type: 'test'
+  ...
+# Subtest: CLASSIC : une poursuite part uniquement après le franchissement réel
+ok 200 - CLASSIC : une poursuite part uniquement après le franchissement réel
+  ---
+  duration_ms: 1.372063
+  type: 'test'
+  ...
+# Subtest: CLASSIC : le poursuivant marche dans la salle quittée sans téléportation
+ok 201 - CLASSIC : le poursuivant marche dans la salle quittée sans téléportation
+  ---
+  duration_ms: 2.162327
+  type: 'test'
+  ...
+# Subtest: CLASSIC : signal au seuil, délai et identité/blessures conservés
+ok 202 - CLASSIC : signal au seuil, délai et identité/blessures conservés
+  ---
+  duration_ms: 2.307127
+  type: 'test'
+  ...
+# Subtest: CLASSIC : reprendre une poursuite à mi-parcours ne duplique pas la créature
+ok 203 - CLASSIC : reprendre une poursuite à mi-parcours ne duplique pas la créature
+  ---
+  duration_ms: 2.83889
+  type: 'test'
+  ...
+# Subtest: CLASSIC : changement de vue en transit conserve une apparition sûre
+ok 204 - CLASSIC : changement de vue en transit conserve une apparition sûre
+  ---
+  duration_ms: 1.8329
+  type: 'test'
+  ...
+# Subtest: CLASSIC : revenir dans la salle source annule le ticket sans déplacer la créature
+ok 205 - CLASSIC : revenir dans la salle source annule le ticket sans déplacer la créature
+  ---
+  duration_ms: 1.831978
+  type: 'test'
+  ...
+# Subtest: CLASSIC : la population migrée reste unique après plusieurs allers-retours
+ok 206 - CLASSIC : la population migrée reste unique après plusieurs allers-retours
+  ---
+  duration_ms: 7.304749
+  type: 'test'
+  ...
+# Subtest: Un ennemi mort ne poursuit pas
+ok 207 - Un ennemi mort ne poursuit pas
+  ---
+  duration_ms: 1.771547
+  type: 'test'
+  ...
+# Subtest: Un ennemi immobilisé ne connaît pas magiquement la sortie
+ok 208 - Un ennemi immobilisé ne connaît pas magiquement la sortie
+  ---
+  duration_ms: 1.638826
+  type: 'test'
+  ...
+# Subtest: Une enquête sur un leurre ne suit pas la sortie du joueur
+ok 209 - Une enquête sur un leurre ne suit pas la sortie du joueur
+  ---
+  duration_ms: 1.421158
+  type: 'test'
+  ...
+# Subtest: Un patrouilleur sans contact ne poursuit pas
+ok 210 - Un patrouilleur sans contact ne poursuit pas
+  ---
+  duration_ms: 1.649703
+  type: 'test'
+  ...
+# Subtest: Au-delà de sept mètres aucun ticket de poursuite
+ok 211 - Au-delà de sept mètres aucun ticket de poursuite
+  ---
+  duration_ms: 1.487558
+  type: 'test'
+  ...
+# Subtest: Le contact mémorisé trop loin du seuil ne suffit pas
+ok 212 - Le contact mémorisé trop loin du seuil ne suffit pas
+  ---
+  duration_ms: 1.259513
+  type: 'test'
+  ...
+# Subtest: Vols, ascenseurs et arènes sont exclus dans les deux sens
+ok 213 - Vols, ascenseurs et arènes sont exclus dans les deux sens
+  ---
+  duration_ms: 0.295286
+  type: 'test'
+  ...
+# Subtest: Toutes les connexions de poursuite ont un retour compatible
+ok 214 - Toutes les connexions de poursuite ont un retour compatible
+  ---
+  duration_ms: 0.265591
+  type: 'test'
+  ...
+# Subtest: Un ticket n’est pas ajouté deux fois
+ok 215 - Un ticket n’est pas ajouté deux fois
+  ---
+  duration_ms: 1.318442
+  type: 'test'
+  ...
+# Subtest: Une porte fermée par le scénario annule la poursuite sans supprimer l’ennemi
+ok 216 - Une porte fermée par le scénario annule la poursuite sans supprimer l’ennemi
+  ---
+  duration_ms: 1.618496
+  type: 'test'
+  ...
+# Subtest: Une destination quittée ne transmet pas une connaissance omnisciente
+ok 217 - Une destination quittée ne transmet pas une connaissance omnisciente
+  ---
+  duration_ms: 1.970858
+  type: 'test'
+  ...
+# Subtest: La mousse conserve et retarde une poursuite déjà engagée
+ok 218 - La mousse conserve et retarde une poursuite déjà engagée
+  ---
+  duration_ms: 1.80615
+  type: 'test'
+  ...
+# Subtest: Un délai expiré laisse la créature dans sa salle source
+ok 219 - Un délai expiré laisse la créature dans sa salle source
+  ---
+  duration_ms: 2.383201
+  type: 'test'
+  ...
+# Subtest: La journalisation reste bornée aux 24 derniers faits
+ok 220 - La journalisation reste bornée aux 24 derniers faits
+  ---
+  duration_ms: 2.09731
+  type: 'test'
+  ...
+# Subtest: Le journal ignore les étapes internes et les coordonnées de tirs
+ok 221 - Le journal ignore les étapes internes et les coordonnées de tirs
+  ---
+  duration_ms: 1.496391
+  type: 'test'
+  ...
+# Subtest: HYBRID : Manning trop loin interdit la transition physique, pas le graphe
+ok 222 - HYBRID : Manning trop loin interdit la transition physique, pas le graphe
+  ---
+  duration_ms: 1.990268
+  type: 'test'
+  ...
+# Subtest: HYBRID : des brancards proches mais séparés par une cloison ne sont pas rassemblés
+ok 223 - HYBRID : des brancards proches mais séparés par une cloison ne sont pas rassemblés
+  ---
+  duration_ms: 7.048181
+  type: 'test'
+  ...
+# Subtest: CLASSIC : Manning trop loin interdit la transition physique, pas le graphe
+ok 224 - CLASSIC : Manning trop loin interdit la transition physique, pas le graphe
+  ---
+  duration_ms: 1.407507
+  type: 'test'
+  ...
+# Subtest: CLASSIC : des brancards proches mais séparés par une cloison ne sont pas rassemblés
+ok 225 - CLASSIC : des brancards proches mais séparés par une cloison ne sont pas rassemblés
+  ---
+  duration_ms: 15.981432
+  type: 'test'
+  ...
+# Subtest: N passe par les trois disciplines de tir, sans agir sur l’ordre de marche
+ok 226 - N passe par les trois disciplines de tir, sans agir sur l’ordre de marche
+  ---
+  duration_ms: 1.287656
+  type: 'test'
+  ...
+# Subtest: Ne pas tirer laisse un ennemi engagé vivant malgré une ligne de tir dégagée
+ok 227 - Ne pas tirer laisse un ennemi engagé vivant malgré une ligne de tir dégagée
+  ---
+  duration_ms: 3.438686
+  type: 'test'
+  ...
+# Subtest: Import transactionnel : transferts, doublons et tickets illégaux sont rejetés
+ok 228 - Import transactionnel : transferts, doublons et tickets illégaux sont rejetés
+  ---
+  duration_ms: 10.027063
+  type: 'test'
+  ...
+# Subtest: Les 198 sauvegardes 0.4 migrent sans perdre progression, santé et consigne
+ok 229 - Les 198 sauvegardes 0.4 migrent sans perdre progression, santé et consigne
+  ---
+  duration_ms: 902.605402
+  type: 'test'
+  ...
+# Subtest: Deux poursuivants au maximum par franchissement, sans fabriquer le troisième
+ok 230 - Deux poursuivants au maximum par franchissement, sans fabriquer le troisième
+  ---
+  duration_ms: 2.076207
+  type: 'test'
+  ...
+# Subtest: Mourir puis reprendre restaure le ticket et la population du checkpoint
+ok 231 - Mourir puis reprendre restaure le ticket et la population du checkpoint
+  ---
+  duration_ms: 2.735594
+  type: 'test'
+  ...
+# Subtest: HYBRID / exploration : campagne complète avec retraite réellement poursuivie
+ok 232 - HYBRID / exploration : campagne complète avec retraite réellement poursuivie
+  ---
+  duration_ms: 877.167542
+  type: 'test'
+  ...
+# Subtest: HYBRID / survival : campagne complète avec retraite réellement poursuivie
+ok 233 - HYBRID / survival : campagne complète avec retraite réellement poursuivie
+  ---
+  duration_ms: 657.238989
+  type: 'test'
+  ...
+# Subtest: HYBRID / oppression : campagne complète avec retraite réellement poursuivie
+ok 234 - HYBRID / oppression : campagne complète avec retraite réellement poursuivie
+  ---
+  duration_ms: 535.830364
+  type: 'test'
+  ...
+# Subtest: CLASSIC / exploration : campagne complète avec retraite réellement poursuivie
+ok 235 - CLASSIC / exploration : campagne complète avec retraite réellement poursuivie
+  ---
+  duration_ms: 343.72185
+  type: 'test'
+  ...
+# Subtest: CLASSIC / survival : campagne complète avec retraite réellement poursuivie
+ok 236 - CLASSIC / survival : campagne complète avec retraite réellement poursuivie
+  ---
+  duration_ms: 287.903743
+  type: 'test'
+  ...
+# Subtest: CLASSIC / oppression : campagne complète avec retraite réellement poursuivie
+ok 237 - CLASSIC / oppression : campagne complète avec retraite réellement poursuivie
+  ---
+  duration_ms: 319.484598
+  type: 'test'
+  ...
+# Subtest: 8 cloisons, 16 pupitres, 8 rémanences et 108 dossiers identifiés
+ok 238 - 8 cloisons, 16 pupitres, 8 rémanences et 108 dossiers identifiés
+  ---
+  duration_ms: 2.71318
+  type: 'test'
+  ...
+# Subtest: HYBRID : les 16 pupitres sont atteignables en position ouverte
+ok 239 - HYBRID : les 16 pupitres sont atteignables en position ouverte
+  ---
+  duration_ms: 24.911817
+  type: 'test'
+  ...
+# Subtest: HYBRID : une cloison fermée bloque la marche et l’esquive
+ok 240 - HYBRID : une cloison fermée bloque la marche et l’esquive
+  ---
+  duration_ms: 31.285488
+  type: 'test'
+  ...
+# Subtest: HYBRID : les tirs et les lignes de vue sont interrompus par la cloison
+ok 241 - HYBRID : les tirs et les lignes de vue sont interrompus par la cloison
+  ---
+  duration_ms: 6.872876
+  type: 'test'
+  ...
+# Subtest: CLASSIC : les 16 pupitres sont atteignables en position ouverte
+ok 242 - CLASSIC : les 16 pupitres sont atteignables en position ouverte
+  ---
+  duration_ms: 18.735408
+  type: 'test'
+  ...
+# Subtest: CLASSIC : une cloison fermée bloque la marche et l’esquive
+ok 243 - CLASSIC : une cloison fermée bloque la marche et l’esquive
+  ---
+  duration_ms: 8.818246
+  type: 'test'
+  ...
+# Subtest: CLASSIC : les tirs et les lignes de vue sont interrompus par la cloison
+ok 244 - CLASSIC : les tirs et les lignes de vue sont interrompus par la cloison
+  ---
+  duration_ms: 18.423071
+  type: 'test'
+  ...
+# Subtest: Le maintien demande 2,4 secondes et ne referme pas en boucle
+ok 245 - Le maintien demande 2,4 secondes et ne referme pas en boucle
+  ---
+  duration_ms: 13.662617
+  type: 'test'
+  ...
+# Subtest: Relâcher, puis rouvrir demande réellement 1,6 seconde
+ok 246 - Relâcher, puis rouvrir demande réellement 1,6 seconde
+  ---
+  duration_ms: 12.984903
+  type: 'test'
+  ...
+# Subtest: Le pupitre opposé peut ouvrir la même cloison
+ok 247 - Le pupitre opposé peut ouvrir la même cloison
+  ---
+  duration_ms: 29.711119
+  type: 'test'
+  ...
+# Subtest: Manning dans la course bloque la fermeture sans le déplacer
+ok 248 - Manning dans la course bloque la fermeture sans le déplacer
+  ---
+  duration_ms: 6.396296
+  type: 'test'
+  ...
+# Subtest: Un brancard dans la course interdit la fermeture
+ok 249 - Un brancard dans la course interdit la fermeture
+  ---
+  duration_ms: 21.069049
+  type: 'test'
+  ...
+# Subtest: Un ennemi vivant dans la course interdit aussi la fermeture
+ok 250 - Un ennemi vivant dans la course interdit aussi la fermeture
+  ---
+  duration_ms: 5.782599
+  type: 'test'
+  ...
+# Subtest: Une commande distante ou sans équipement est refusée
+ok 251 - Une commande distante ou sans équipement est refusée
+  ---
+  duration_ms: 10.487078
+  type: 'test'
+  ...
+# Subtest: Atténuation sonore à travers la cloison, sans silence absolu
+ok 252 - Atténuation sonore à travers la cloison, sans silence absolu
+  ---
+  duration_ms: 3.027746
+  type: 'test'
+  ...
+# Subtest: Quatre frappes annoncées d’un adulte rompent la cloison
+ok 253 - Quatre frappes annoncées d’un adulte rompent la cloison
+  ---
+  duration_ms: 16.730503
+  type: 'test'
+  ...
+# Subtest: La mousse interrompt une frappe sur la cloison
+ok 254 - La mousse interrompt une frappe sur la cloison
+  ---
+  duration_ms: 28.110722
+  type: 'test'
+  ...
+# Subtest: Le progressif de manœuvre survit à un export/import
+ok 255 - Le progressif de manœuvre survit à un export/import
+  ---
+  duration_ms: 9.077057
+  type: 'test'
+  ...
+# Subtest: Rupture et intégrité sont persistées dans une autre salle et au chargement
+ok 256 - Rupture et intégrité sont persistées dans une autre salle et au chargement
+  ---
+  duration_ms: 4.710018
+  type: 'test'
+  ...
+# Subtest: Ordre de couverture : aucun déplacement instantané, arrivée par le moteur
+ok 257 - Ordre de couverture : aucun déplacement instantané, arrivée par le moteur
+  ---
+  duration_ms: 15.270442
+  type: 'test'
+  ...
+# Subtest: Le point désigné suit un vrai détour autour des obstacles
+ok 258 - Le point désigné suit un vrai détour autour des obstacles
+  ---
+  duration_ms: 22.990293
+  type: 'test'
+  ...
+# Subtest: Position hors portée, dans un obstacle ou derrière cloison : refus
+ok 259 - Position hors portée, dans un obstacle ou derrière cloison : refus
+  ---
+  duration_ms: 19.738108
+  type: 'test'
+  ...
+# Subtest: V rappelle Manning et efface le point ; changer de salle aussi
+ok 260 - V rappelle Manning et efface le point ; changer de salle aussi
+  ---
+  duration_ms: 2.439217
+  type: 'test'
+  ...
+# Subtest: Le point de couverture survit à l’import et à F6
+ok 261 - Le point de couverture survit à l’import et à F6
+  ---
+  duration_ms: 23.335534
+  type: 'test'
+  ...
+# Subtest: Une lecture immobile consigne un dossier sans changer l’objectif
+ok 262 - Une lecture immobile consigne un dossier sans changer l’objectif
+  ---
+  duration_ms: 3.941867
+  type: 'test'
+  ...
+# Subtest: Une lecture ne progresse ni à distance ni en déplacement
+ok 263 - Une lecture ne progresse ni à distance ni en déplacement
+  ---
+  duration_ms: 5.344396
+  type: 'test'
+  ...
+# Subtest: Le seuil de pression doit être atteint avant les trois secondes
+ok 264 - Le seuil de pression doit être atteint avant les trois secondes
+  ---
+  duration_ms: 2.867293
+  type: 'test'
+  ...
+# Subtest: Les rémanences non lues ne sont pas attribuées par la simple visite
+ok 265 - Les rémanences non lues ne sont pas attribuées par la simple visite
+  ---
+  duration_ms: 10.140304
+  type: 'test'
+  ...
+# Subtest: Une lecture interrompue conserve sa durée au chargement ; aucun doublon
+ok 266 - Une lecture interrompue conserve sa durée au chargement ; aucun doublon
+  ---
+  duration_ms: 5.656208
+  type: 'test'
+  ...
+# Subtest: Migration des 66 sauvegardes 0.3 : progression et ressources conservées
+ok 267 - Migration des 66 sauvegardes 0.3 : progression et ressources conservées
+  ---
+  duration_ms: 438.636125
+  type: 'test'
+  ...
+# Subtest: Import transactionnel : tous les nouveaux champs falsifiés sont rejetés
+ok 268 - Import transactionnel : tous les nouveaux champs falsifiés sont rejetés
+  ---
+  duration_ms: 21.955529
+  type: 'test'
+  ...
+# Subtest: HYBRID / exploration : campagne, 8 cloisons et 8 lectures sans injection
+ok 269 - HYBRID / exploration : campagne, 8 cloisons et 8 lectures sans injection
+  ---
+  duration_ms: 874.834274
+  type: 'test'
+  ...
+# Subtest: HYBRID / survival : campagne, 8 cloisons et 8 lectures sans injection
+ok 270 - HYBRID / survival : campagne, 8 cloisons et 8 lectures sans injection
+  ---
+  duration_ms: 516.101289
+  type: 'test'
+  ...
+# Subtest: HYBRID / oppression : campagne, 8 cloisons et 8 lectures sans injection
+ok 271 - HYBRID / oppression : campagne, 8 cloisons et 8 lectures sans injection
+  ---
+  duration_ms: 533.147283
+  type: 'test'
+  ...
+# Subtest: CLASSIC / exploration : campagne, 8 cloisons et 8 lectures sans injection
+ok 272 - CLASSIC / exploration : campagne, 8 cloisons et 8 lectures sans injection
+  ---
+  duration_ms: 339.373755
+  type: 'test'
+  ...
+# Subtest: CLASSIC / survival : campagne, 8 cloisons et 8 lectures sans injection
+ok 273 - CLASSIC / survival : campagne, 8 cloisons et 8 lectures sans injection
+  ---
+  duration_ms: 407.799925
+  type: 'test'
+  ...
+# Subtest: CLASSIC / oppression : campagne, 8 cloisons et 8 lectures sans injection
+ok 274 - CLASSIC / oppression : campagne, 8 cloisons et 8 lectures sans injection
+  ---
+  duration_ms: 390.364562
+  type: 'test'
+  ...
+# Subtest: Un repère distingue le prochain seuil ouvert de la cloison locale fermée
+ok 275 - Un repère distingue le prochain seuil ouvert de la cloison locale fermée
+  ---
+  duration_ms: 2.231923
+  type: 'test'
+  ...
+# Subtest: La cloison du mauvais côté et une destination atteinte ne bloquent pas le repère
+ok 276 - La cloison du mauvais côté et une destination atteinte ne bloquent pas le repère
+  ---
+  duration_ms: 1.523182
+  type: 'test'
+  ...
+# Subtest: HYBRID : les trois appareils ont une identité fixe et une charge limitée
+ok 277 - HYBRID : les trois appareils ont une identité fixe et une charge limitée
+  ---
+  duration_ms: 8.494186
+  type: 'test'
+  ...
+# Subtest: HYBRID : pose et récupération sans recharge ni création de matériel
+ok 278 - HYBRID : pose et récupération sans recharge ni création de matériel
+  ---
+  duration_ms: 5.456727
+  type: 'test'
+  ...
+# Subtest: HYBRID : le joueur en mouvement déclenche un vrai contact non identifié
+ok 279 - HYBRID : le joueur en mouvement déclenche un vrai contact non identifié
+  ---
+  duration_ms: 4.236832
+  type: 'test'
+  ...
+# Subtest: HYBRID : une silhouette immobile ne déclenche aucun signal
+ok 280 - HYBRID : une silhouette immobile ne déclenche aucun signal
+  ---
+  duration_ms: 1.838288
+  type: 'test'
+  ...
+# Subtest: HYBRID : mouvement réel d’un adulte détecté sans exposer son identité
+ok 281 - HYBRID : mouvement réel d’un adulte détecté sans exposer son identité
+  ---
+  duration_ms: 1.81299
+  type: 'test'
+  ...
+# Subtest: HYBRID : un adulte mort ou capturé est exclu
+ok 282 - HYBRID : un adulte mort ou capturé est exclu
+  ---
+  duration_ms: 3.469423
+  type: 'test'
+  ...
+# Subtest: HYBRID : une cloison masque le mouvement de l’autre côté
+ok 283 - HYBRID : une cloison masque le mouvement de l’autre côté
+  ---
+  duration_ms: 1.649323
+  type: 'test'
+  ...
+# Subtest: HYBRID : la portée de mesure n’est pas illimitée
+ok 284 - HYBRID : la portée de mesure n’est pas illimitée
+  ---
+  duration_ms: 1.339494
+  type: 'test'
+  ...
+# Subtest: HYBRID : la veille coupée n’émet et ne consomme rien
+ok 285 - HYBRID : la veille coupée n’émet et ne consomme rien
+  ---
+  duration_ms: 2.503293
+  type: 'test'
+  ...
+# Subtest: HYBRID : les capteurs rangés préservent leur batterie
+ok 286 - HYBRID : les capteurs rangés préservent leur batterie
+  ---
+  duration_ms: 2.353757
+  type: 'test'
+  ...
+# Subtest: HYBRID : la batterie épuisée coupe la veille sans disparition
+ok 287 - HYBRID : la batterie épuisée coupe la veille sans disparition
+  ---
+  duration_ms: 1.620259
+  type: 'test'
+  ...
+# Subtest: HYBRID : relire une sauvegarde conserve charge, position et dernière observation
+ok 288 - HYBRID : relire une sauvegarde conserve charge, position et dernière observation
+  ---
+  duration_ms: 5.544439
+  type: 'test'
+  ...
+# Subtest: CLASSIC : les trois appareils ont une identité fixe et une charge limitée
+ok 289 - CLASSIC : les trois appareils ont une identité fixe et une charge limitée
+  ---
+  duration_ms: 1.235638
+  type: 'test'
+  ...
+# Subtest: CLASSIC : pose et récupération sans recharge ni création de matériel
+ok 290 - CLASSIC : pose et récupération sans recharge ni création de matériel
+  ---
+  duration_ms: 1.553368
+  type: 'test'
+  ...
+# Subtest: CLASSIC : le joueur en mouvement déclenche un vrai contact non identifié
+ok 291 - CLASSIC : le joueur en mouvement déclenche un vrai contact non identifié
+  ---
+  duration_ms: 1.308117
+  type: 'test'
+  ...
+# Subtest: CLASSIC : une silhouette immobile ne déclenche aucun signal
+ok 292 - CLASSIC : une silhouette immobile ne déclenche aucun signal
+  ---
+  duration_ms: 2.128546
+  type: 'test'
+  ...
+# Subtest: CLASSIC : mouvement réel d’un adulte détecté sans exposer son identité
+ok 293 - CLASSIC : mouvement réel d’un adulte détecté sans exposer son identité
+  ---
+  duration_ms: 1.488739
+  type: 'test'
+  ...
+# Subtest: CLASSIC : un adulte mort ou capturé est exclu
+ok 294 - CLASSIC : un adulte mort ou capturé est exclu
+  ---
+  duration_ms: 1.254536
+  type: 'test'
+  ...
+# Subtest: CLASSIC : une cloison masque le mouvement de l’autre côté
+ok 295 - CLASSIC : une cloison masque le mouvement de l’autre côté
+  ---
+  duration_ms: 1.163659
+  type: 'test'
+  ...
+# Subtest: CLASSIC : la portée de mesure n’est pas illimitée
+ok 296 - CLASSIC : la portée de mesure n’est pas illimitée
+  ---
+  duration_ms: 1.255497
+  type: 'test'
+  ...
+# Subtest: CLASSIC : la veille coupée n’émet et ne consomme rien
+ok 297 - CLASSIC : la veille coupée n’émet et ne consomme rien
+  ---
+  duration_ms: 1.079942
+  type: 'test'
+  ...
+# Subtest: CLASSIC : les capteurs rangés préservent leur batterie
+ok 298 - CLASSIC : les capteurs rangés préservent leur batterie
+  ---
+  duration_ms: 1.081715
+  type: 'test'
+  ...
+# Subtest: CLASSIC : la batterie épuisée coupe la veille sans disparition
+ok 299 - CLASSIC : la batterie épuisée coupe la veille sans disparition
+  ---
+  duration_ms: 1.159252
+  type: 'test'
+  ...
+# Subtest: CLASSIC : relire une sauvegarde conserve charge, position et dernière observation
+ok 300 - CLASSIC : relire une sauvegarde conserve charge, position et dernière observation
+  ---
+  duration_ms: 2.62672
+  type: 'test'
+  ...
+# Subtest: Aucun appareil utilisable dans le prologue civil
+ok 301 - Aucun appareil utilisable dans le prologue civil
+  ---
+  duration_ms: 0.190768
+  type: 'test'
+  ...
+# Subtest: La pose refuse un seuil
+ok 302 - La pose refuse un seuil
+  ---
+  duration_ms: 4.034808
+  type: 'test'
+  ...
+# Subtest: La pose refuse la course d’une cloison même ouverte
+ok 303 - La pose refuse la course d’une cloison même ouverte
+  ---
+  duration_ms: 4.001627
+  type: 'test'
+  ...
+# Subtest: La pose refuse un vrai obstacle
+ok 304 - La pose refuse un vrai obstacle
+  ---
+  duration_ms: 1.107794
+  type: 'test'
+  ...
+# Subtest: Les trois poses ne permettent pas d’obtenir un quatrième appareil
+ok 305 - Les trois poses ne permettent pas d’obtenir un quatrième appareil
+  ---
+  duration_ms: 1.181876
+  type: 'test'
+  ...
+# Subtest: Une double activation immédiate ne pose/récupère pas le même capteur
+ok 306 - Une double activation immédiate ne pose/récupère pas le même capteur
+  ---
+  duration_ms: 5.123924
+  type: 'test'
+  ...
+# Subtest: Liaison atténante compatible, pas de radio à travers le monde
+ok 307 - Liaison atténante compatible, pas de radio à travers le monde
+  ---
+  duration_ms: 1.477352
+  type: 'test'
+  ...
+# Subtest: Les capteurs hors liaison consomment leur charge mais ne pistent pas un acteur figé
+ok 308 - Les capteurs hors liaison consomment leur charge mais ne pistent pas un acteur figé
+  ---
+  duration_ms: 1.302187
+  type: 'test'
+  ...
+# Subtest: Le premier scan après reprise n’invente pas un mouvement
+ok 309 - Le premier scan après reprise n’invente pas un mouvement
+  ---
+  duration_ms: 2.555121
+  type: 'test'
+  ...
+# Subtest: Un mouvement continu ne remplit pas le journal à chaque scan
+ok 310 - Un mouvement continu ne remplit pas le journal à chaque scan
+  ---
+  duration_ms: 13.485499
+  type: 'test'
+  ...
+# Subtest: Après deux secondes de silence un nouveau déplacement émet un nouveau fait
+ok 311 - Après deux secondes de silence un nouveau déplacement émet un nouveau fait
+  ---
+  duration_ms: 1.252533
+  type: 'test'
+  ...
+# Subtest: La méthode de scan restitue toujours la salle réelle après le contexte distant
+ok 312 - La méthode de scan restitue toujours la salle réelle après le contexte distant
+  ---
+  duration_ms: 1.322489
+  type: 'test'
+  ...
+# Subtest: Import atomique refuse charge négative
+ok 313 - Import atomique refuse charge négative
+  ---
+  duration_ms: 2.128897
+  type: 'test'
+  ...
+# Subtest: Import atomique refuse charge artificielle
+ok 314 - Import atomique refuse charge artificielle
+  ---
+  duration_ms: 10.113843
+  type: 'test'
+  ...
+# Subtest: Import atomique refuse id dupliqué
+ok 315 - Import atomique refuse id dupliqué
+  ---
+  duration_ms: 2.014354
+  type: 'test'
+  ...
+# Subtest: Import atomique refuse coordonnée non finie
+ok 316 - Import atomique refuse coordonnée non finie
+  ---
+  duration_ms: 5.978395
+  type: 'test'
+  ...
+# Subtest: Import atomique refuse salle inconnue
+ok 317 - Import atomique refuse salle inconnue
+  ---
+  duration_ms: 7.216435
+  type: 'test'
+  ...
+# Subtest: Import atomique refuse capteur rangé allumé
+ok 318 - Import atomique refuse capteur rangé allumé
+  ---
+  duration_ms: 1.906381
+  type: 'test'
+  ...
+# Subtest: Import atomique refuse observation future
+ok 319 - Import atomique refuse observation future
+  ---
+  duration_ms: 6.0214
+  type: 'test'
+  ...
+# Subtest: Import atomique refuse comptage négatif
+ok 320 - Import atomique refuse comptage négatif
+  ---
+  duration_ms: 2.099963
+  type: 'test'
+  ...
+# Subtest: Import atomique refuse suppression de pool
+ok 321 - Import atomique refuse suppression de pool
+  ---
+  duration_ms: 6.338208
+  type: 'test'
+  ...
+# Subtest: Import atomique refuse statistique truquée
+ok 322 - Import atomique refuse statistique truquée
+  ---
+  duration_ms: 1.644876
+  type: 'test'
+  ...
+# Subtest: Les 198 sauvegardes de schéma 5 migrent sans altérer les blessures, poursuites ou positions
+ok 323 - Les 198 sauvegardes de schéma 5 migrent sans altérer les blessures, poursuites ou positions
+  ---
+  duration_ms: 1266.139552
+  type: 'test'
+  ...
+# Subtest: Zone morte radiale supprime une dérive de stick
+ok 324 - Zone morte radiale supprime une dérive de stick
+  ---
+  duration_ms: 0.380365
+  type: 'test'
+  ...
+# Subtest: Le stick diagonal est borné à une vitesse normalisée
+ok 325 - Le stick diagonal est borné à une vitesse normalisée
+  ---
+  duration_ms: 0.122995
+  type: 'test'
+  ...
+# Subtest: Valeurs de stick illisibles ne contaminent pas le moteur
+ok 326 - Valeurs de stick illisibles ne contaminent pas le moteur
+  ---
+  duration_ms: 0.113632
+  type: 'test'
+  ...
+# Subtest: Connexion avec gâchette maintenue attend une position neutre
+ok 327 - Connexion avec gâchette maintenue attend une position neutre
+  ---
+  duration_ms: 0.552024
+  type: 'test'
+  ...
+# Subtest: Une pression maintenue produit un seul front de bouton
+ok 328 - Une pression maintenue produit un seul front de bouton
+  ---
+  duration_ms: 0.215425
+  type: 'test'
+  ...
+# Subtest: Réarmer après une pause interdit le tir fantôme
+ok 329 - Réarmer après une pause interdit le tir fantôme
+  ---
+  duration_ms: 0.308336
+  type: 'test'
+  ...
+# Subtest: Déconnexion est un événement unique
+ok 330 - Déconnexion est un événement unique
+  ---
+  duration_ms: 0.154493
+  type: 'test'
+  ...
+# Subtest: Un profil non standard ne reçoit pas un faux mapping de commandes
+ok 331 - Un profil non standard ne reçoit pas un faux mapping de commandes
+  ---
+  duration_ms: 0.121934
+  type: 'test'
+  ...
+# Subtest: Changer d’identité de manette réarme les commandes
+ok 332 - Changer d’identité de manette réarme les commandes
+  ---
+  duration_ms: 0.179491
+  type: 'test'
+  ...
+# Subtest: Les huit directions sélectionnent les huit secteurs de la roue
+ok 333 - Les huit directions sélectionnent les huit secteurs de la roue
+  ---
+  duration_ms: 0.181995
+  type: 'test'
+  ...
+# Subtest: La marche analogique respecte les mêmes collisions que les touches
+ok 334 - La marche analogique respecte les mêmes collisions que les touches
+  ---
+  duration_ms: 4.710989
+  type: 'test'
+  ...
+# Subtest: Audio désactivé par défaut, légendes disponibles sans contexte audio
+ok 335 - Audio désactivé par défaut, légendes disponibles sans contexte audio
+  ---
+  duration_ms: 2.846081
+  type: 'test'
+  ...
+# Subtest: Réglages audio bornés, valeurs invalides remplacées
+ok 336 - Réglages audio bornés, valeurs invalides remplacées
+  ---
+  duration_ms: 0.403029
+  type: 'test'
+  ...
+# Subtest: Signal connu sélectionné : pistol
+ok 337 - Signal connu sélectionné : pistol
+  ---
+  duration_ms: 0.194675
+  type: 'test'
+  ...
+# Subtest: Signal connu sélectionné : ally
+ok 338 - Signal connu sélectionné : ally
+  ---
+  duration_ms: 0.110207
+  type: 'test'
+  ...
+# Subtest: Signal connu sélectionné : foam
+ok 339 - Signal connu sélectionné : foam
+  ---
+  duration_ms: 0.161745
+  type: 'test'
+  ...
+# Subtest: Signal connu sélectionné : flame
+ok 340 - Signal connu sélectionné : flame
+  ---
+  duration_ms: 0.107082
+  type: 'test'
+  ...
+# Subtest: Signal connu sélectionné : reload
+ok 341 - Signal connu sélectionné : reload
+  ---
+  duration_ms: 0.176327
+  type: 'test'
+  ...
+# Subtest: Signal connu sélectionné : dodge
+ok 342 - Signal connu sélectionné : dodge
+  ---
+  duration_ms: 0.130116
+  type: 'test'
+  ...
+# Subtest: Signal connu sélectionné : step
+ok 343 - Signal connu sélectionné : step
+  ---
+  duration_ms: 0.363559
+  type: 'test'
+  ...
+# Subtest: Signal connu sélectionné : wheels
+ok 344 - Signal connu sélectionné : wheels
+  ---
+  duration_ms: 0.434837
+  type: 'test'
+  ...
+# Subtest: Signal connu sélectionné : impact
+ok 345 - Signal connu sélectionné : impact
+  ---
+  duration_ms: 0.203928
+  type: 'test'
+  ...
+# Subtest: Signal connu sélectionné : hurt
+ok 346 - Signal connu sélectionné : hurt
+  ---
+  duration_ms: 0.100031
+  type: 'test'
+  ...
+# Subtest: Signal connu sélectionné : windup
+ok 347 - Signal connu sélectionné : windup
+  ---
+  duration_ms: 0.072409
+  type: 'test'
+  ...
+# Subtest: Signal connu sélectionné : work
+ok 348 - Signal connu sélectionné : work
+  ---
+  duration_ms: 0.062374
+  type: 'test'
+  ...
+# Subtest: Signal connu sélectionné : latch
+ok 349 - Signal connu sélectionné : latch
+  ---
+  duration_ms: 0.058158
+  type: 'test'
+  ...
+# Subtest: Signal connu sélectionné : confirm
+ok 350 - Signal connu sélectionné : confirm
+  ---
+  duration_ms: 0.055664
+  type: 'test'
+  ...
+# Subtest: Signal connu sélectionné : sensor
+ok 351 - Signal connu sélectionné : sensor
+  ---
+  duration_ms: 0.065749
+  type: 'test'
+  ...
+# Subtest: Signal connu sélectionné : pursuit
+ok 352 - Signal connu sélectionné : pursuit
+  ---
+  duration_ms: 0.058378
+  type: 'test'
+  ...
+# Subtest: Signal connu sélectionné : warning
+ok 353 - Signal connu sélectionné : warning
+  ---
+  duration_ms: 0.057097
+  type: 'test'
+  ...
+# Subtest: Signal connu sélectionné : steam
+ok 354 - Signal connu sélectionné : steam
+  ---
+  duration_ms: 0.073151
+  type: 'test'
+  ...
+# Subtest: Signal connu sélectionné : gas
+ok 355 - Signal connu sélectionné : gas
+  ---
+  duration_ms: 0.056816
+  type: 'test'
+  ...
+# Subtest: Signal connu sélectionné : electric
+ok 356 - Signal connu sélectionné : electric
+  ---
+  duration_ms: 0.060882
+  type: 'test'
+  ...
+# Subtest: Signal connu sélectionné : low
+ok 357 - Signal connu sélectionné : low
+  ---
+  duration_ms: 0.056275
+  type: 'test'
+  ...
+# Subtest: Types inconnus et clés de prototype refusés
+ok 358 - Types inconnus et clés de prototype refusés
+  ---
+  duration_ms: 0.122525
+  type: 'test'
+  ...
+# Subtest: Cadence et mémoire bornées sans accumulation infinie
+ok 359 - Cadence et mémoire bornées sans accumulation infinie
+  ---
+  duration_ms: 1.365604
+  type: 'test'
+  ...
+# Subtest: Maximum deux légendes, alertes prioritaires
+ok 360 - Maximum deux légendes, alertes prioritaires
+  ---
+  duration_ms: 0.191039
+  type: 'test'
+  ...
+# Subtest: Le préavis de poursuite donne uniquement le message déjà émis
+ok 361 - Le préavis de poursuite donne uniquement le message déjà émis
+  ---
+  duration_ms: 13.305607
+  type: 'test'
+  ...
+# Subtest: Le capteur ne convertit pas les mouvements en identité de créature
+ok 362 - Le capteur ne convertit pas les mouvements en identité de créature
+  ---
+  duration_ms: 13.639682
+  type: 'test'
+  ...
+# Subtest: Une attaque cachée derrière la cloison ne crée ni son ni légende
+ok 363 - Une attaque cachée derrière la cloison ne crée ni son ni légende
+  ---
+  duration_ms: 22.457818
+  type: 'test'
+  ...
+# Subtest: Une attaque visible et proche déclenche son préavis
+ok 364 - Une attaque visible et proche déclenche son préavis
+  ---
+  duration_ms: 4.576776
+  type: 'test'
+  ...
+# Subtest: Un impact lointain n’est pas révélé
+ok 365 - Un impact lointain n’est pas révélé
+  ---
+  duration_ms: 12.275321
+  type: 'test'
+  ...
+# Subtest: Rechargement et esquive proviennent des commandes du moteur
+ok 366 - Rechargement et esquive proviennent des commandes du moteur
+  ---
+  duration_ms: 21.668285
+  type: 'test'
+  ...
+# Subtest: Station immobile : aucun pas fantôme
+ok 367 - Station immobile : aucun pas fantôme
+  ---
+  duration_ms: 5.92308
+  type: 'test'
+  ...
+# Subtest: Un déplacement réel produit des pas sans toucher à l’état
+ok 368 - Un déplacement réel produit des pas sans toucher à l’état
+  ---
+  duration_ms: 14.322674
+  type: 'test'
+  ...
+# Subtest: Un changement de salle ne produit pas un grand pas au point d’arrivée
+ok 369 - Un changement de salle ne produit pas un grand pas au point d’arrivée
+  ---
+  duration_ms: 12.415682
+  type: 'test'
+  ...
+# Subtest: Retour de sauvegarde : anciennes légendes et temporisations effacées
+ok 370 - Retour de sauvegarde : anciennes légendes et temporisations effacées
+  ---
+  duration_ms: 5.272267
+  type: 'test'
+  ...
+# Subtest: Les nouvelles observations laissent intact le fichier de sauvegarde
+ok 371 - Les nouvelles observations laissent intact le fichier de sauvegarde
+  ---
+  duration_ms: 19.443783
+  type: 'test'
+  ...
+# Subtest: Cent simulations avec/sans observations audio donnent les mêmes états
+ok 372 - Cent simulations avec/sans observations audio donnent les mêmes états
+  ---
+  duration_ms: 26.285047
+  type: 'test'
+  ...
+# Subtest: API audio indisponible : erreur lisible, simulation non concernée
+ok 373 - API audio indisponible : erreur lisible, simulation non concernée
+  ---
+  duration_ms: 0.483861
+  type: 'test'
+  ...
+# Subtest: 50 salles, 59 connexions, 120 dossiers, dix casiers distincts
+ok 374 - 50 salles, 59 connexions, 120 dossiers, dix casiers distincts
+  ---
+  duration_ms: 2.026273
+  type: 'test'
+  ...
+# Subtest: HYBRID : dix casiers accessibles et ciblables sans confondre E
+ok 375 - HYBRID : dix casiers accessibles et ciblables sans confondre E
+  ---
+  duration_ms: 54.208049
+  type: 'test'
+  ...
+# Subtest: HYBRID : douze seuils nouveaux libres et réciproques
+ok 376 - HYBRID : douze seuils nouveaux libres et réciproques
+  ---
+  duration_ms: 12.218013
+  type: 'test'
+  ...
+# Subtest: HYBRID : ouvrir ne donne aucune ressource et prend 2,4 secondes
+ok 377 - HYBRID : ouvrir ne donne aucune ressource et prend 2,4 secondes
+  ---
+  duration_ms: 5.790941
+  type: 'test'
+  ...
+# Subtest: HYBRID : progression partielle, éloignement, dégâts, esquive
+ok 378 - HYBRID : progression partielle, éloignement, dégâts, esquive
+  ---
+  duration_ms: 5.446992
+  type: 'test'
+  ...
+# Subtest: HYBRID : E réalise le travail dans la boucle de simulation
+ok 379 - HYBRID : E réalise le travail dans la boucle de simulation
+  ---
+  duration_ms: 6.744372
+  type: 'test'
+  ...
+# Subtest: HYBRID : ouvrir et transférer restent impossibles derrière cloison
+ok 380 - HYBRID : ouvrir et transférer restent impossibles derrière cloison
+  ---
+  duration_ms: 2.081576
+  type: 'test'
+  ...
+# Subtest: HYBRID : le convoi peut emprunter chacune des nouvelles annexes de remontée
+ok 381 - HYBRID : le convoi peut emprunter chacune des nouvelles annexes de remontée
+  ---
+  duration_ms: 7.135734
+  type: 'test'
+  ...
+# Subtest: CLASSIC : dix casiers accessibles et ciblables sans confondre E
+ok 382 - CLASSIC : dix casiers accessibles et ciblables sans confondre E
+  ---
+  duration_ms: 35.47895
+  type: 'test'
+  ...
+# Subtest: CLASSIC : douze seuils nouveaux libres et réciproques
+ok 383 - CLASSIC : douze seuils nouveaux libres et réciproques
+  ---
+  duration_ms: 10.421749
+  type: 'test'
+  ...
+# Subtest: CLASSIC : ouvrir ne donne aucune ressource et prend 2,4 secondes
+ok 384 - CLASSIC : ouvrir ne donne aucune ressource et prend 2,4 secondes
+  ---
+  duration_ms: 2.544355
+  type: 'test'
+  ...
+# Subtest: CLASSIC : progression partielle, éloignement, dégâts, esquive
+ok 385 - CLASSIC : progression partielle, éloignement, dégâts, esquive
+  ---
+  duration_ms: 2.953503
+  type: 'test'
+  ...
+# Subtest: CLASSIC : E réalise le travail dans la boucle de simulation
+ok 386 - CLASSIC : E réalise le travail dans la boucle de simulation
+  ---
+  duration_ms: 3.774243
+  type: 'test'
+  ...
+# Subtest: CLASSIC : ouvrir et transférer restent impossibles derrière cloison
+ok 387 - CLASSIC : ouvrir et transférer restent impossibles derrière cloison
+  ---
+  duration_ms: 1.794873
+  type: 'test'
+  ...
+# Subtest: CLASSIC : le convoi peut emprunter chacune des nouvelles annexes de remontée
+ok 388 - CLASSIC : le convoi peut emprunter chacune des nouvelles annexes de remontée
+  ---
+  duration_ms: 7.456088
+  type: 'test'
+  ...
+# Subtest: Transfert conservatif aller-retour : reserve
+ok 389 - Transfert conservatif aller-retour : reserve
+  ---
+  duration_ms: 2.824608
+  type: 'test'
+  ...
+# Subtest: Transfert conservatif aller-retour : fuel
+ok 390 - Transfert conservatif aller-retour : fuel
+  ---
+  duration_ms: 7.870734
+  type: 'test'
+  ...
+# Subtest: Transfert conservatif aller-retour : foam
+ok 391 - Transfert conservatif aller-retour : foam
+  ---
+  duration_ms: 3.166295
+  type: 'test'
+  ...
+# Subtest: Transfert conservatif aller-retour : medkits
+ok 392 - Transfert conservatif aller-retour : medkits
+  ---
+  duration_ms: 4.747073
+  type: 'test'
+  ...
+# Subtest: Transfert conservatif aller-retour : filters
+ok 393 - Transfert conservatif aller-retour : filters
+  ---
+  duration_ms: 1.792609
+  type: 'test'
+  ...
+# Subtest: Transfert conservatif aller-retour : decoys
+ok 394 - Transfert conservatif aller-retour : decoys
+  ---
+  duration_ms: 2.221326
+  type: 'test'
+  ...
+# Subtest: Transfert conservatif aller-retour : parts
+ok 395 - Transfert conservatif aller-retour : parts
+  ---
+  duration_ms: 2.547339
+  type: 'test'
+  ...
+# Subtest: Prendre le disponible laisse le surplus et respecte les limites
+ok 396 - Prendre le disponible laisse le surplus et respecte les limites
+  ---
+  duration_ms: 2.95798
+  type: 'test'
+  ...
+# Subtest: Un stock ancien supérieur à la limite n’est ni écrêté ni dupliqué
+ok 397 - Un stock ancien supérieur à la limite n’est ni écrêté ni dupliqué
+  ---
+  duration_ms: 1.900752
+  type: 'test'
+  ...
+# Subtest: Le chargeur, la santé et le filtre actif ne sont pas des stocks transférables
+ok 398 - Le chargeur, la santé et le filtre actif ne sont pas des stocks transférables
+  ---
+  duration_ms: 2.252494
+  type: 'test'
+  ...
+# Subtest: Quantités invalides, négatives et directions inconnues rejetées
+ok 399 - Quantités invalides, négatives et directions inconnues rejetées
+  ---
+  duration_ms: 1.839239
+  type: 'test'
+  ...
+# Subtest: Casier fermé : contenu inconnu et aucun échange
+ok 400 - Casier fermé : contenu inconnu et aucun échange
+  ---
+  duration_ms: 1.652838
+  type: 'test'
+  ...
+# Subtest: Pas de récupération à distance, même après ouverture
+ok 401 - Pas de récupération à distance, même après ouverture
+  ---
+  duration_ms: 6.017614
+  type: 'test'
+  ...
+# Subtest: État vide persistant, export/import et allers-retours sans régénération
+ok 402 - État vide persistant, export/import et allers-retours sans régénération
+  ---
+  duration_ms: 5.477428
+  type: 'test'
+  ...
+# Subtest: Rapport de stocks ne révèle pas les pièces non visitées
+ok 403 - Rapport de stocks ne révèle pas les pièces non visitées
+  ---
+  duration_ms: 0.369258
+  type: 'test'
+  ...
+# Subtest: Scellé impossible avant équipement et après échec
+ok 404 - Scellé impossible avant équipement et après échec
+  ---
+  duration_ms: 2.7197
+  type: 'test'
+  ...
+# Subtest: Les nouveaux pupitres ne peuvent pas être occupés par un capteur
+ok 405 - Les nouveaux pupitres ne peuvent pas être occupés par un capteur
+  ---
+  duration_ms: 2.989928
+  type: 'test'
+  ...
+# Subtest: Les deltas excessifs et non finis ne terminent pas un scellé
+ok 406 - Les deltas excessifs et non finis ne terminent pas un scellé
+  ---
+  duration_ms: 2.07751
+  type: 'test'
+  ...
+# Subtest: Import invalide refusé sans mutation : stock négatif
+ok 407 - Import invalide refusé sans mutation : stock négatif
+  ---
+  duration_ms: 4.006695
+  type: 'test'
+  ...
+# Subtest: Import invalide refusé sans mutation : stock fractionnaire
+ok 408 - Import invalide refusé sans mutation : stock fractionnaire
+  ---
+  duration_ms: 4.170943
+  type: 'test'
+  ...
+# Subtest: Import invalide refusé sans mutation : clé inconnue
+ok 409 - Import invalide refusé sans mutation : clé inconnue
+  ---
+  duration_ms: 4.370284
+  type: 'test'
+  ...
+# Subtest: Import invalide refusé sans mutation : scellé vidé sans ouverture
+ok 410 - Import invalide refusé sans mutation : scellé vidé sans ouverture
+  ---
+  duration_ms: 2.669264
+  type: 'test'
+  ...
+# Subtest: Import invalide refusé sans mutation : progression excessive
+ok 411 - Import invalide refusé sans mutation : progression excessive
+  ---
+  duration_ms: 2.570214
+  type: 'test'
+  ...
+# Subtest: Import invalide refusé sans mutation : ouverture non booléenne
+ok 412 - Import invalide refusé sans mutation : ouverture non booléenne
+  ---
+  duration_ms: 2.678798
+  type: 'test'
+  ...
+# Subtest: 198 sauvegardes v0.7 migrent sans perte de progression, ressources, éclairage ou convoi
+ok 413 - 198 sauvegardes v0.7 migrent sans perte de progression, ressources, éclairage ou convoi
+  ---
+  duration_ms: 888.721885
+  type: 'test'
+  ...
+# Subtest: Les brancards arrimés gardent leurs coordonnées lors d’une reprise et d’un changement de vue
+ok 414 - Les brancards arrimés gardent leurs coordonnées lors d’une reprise et d’un changement de vue
+  ---
+  duration_ms: 6.009672
+  type: 'test'
+  ...
+# Subtest: 31 actions distinctes et toutes les touches par défaut sans conflit
+ok 415 - 31 actions distinctes et toutes les touches par défaut sans conflit
+  ---
+  duration_ms: 2.551065
+  type: 'test'
+  ...
+# Subtest: Affectation use exportée et restaurée
+ok 416 - Affectation use exportée et restaurée
+  ---
+  duration_ms: 1.974464
+  type: 'test'
+  ...
+# Subtest: Affectation left exportée et restaurée
+ok 417 - Affectation left exportée et restaurée
+  ---
+  duration_ms: 0.407696
+  type: 'test'
+  ...
+# Subtest: Affectation focus exportée et restaurée
+ok 418 - Affectation focus exportée et restaurée
+  ---
+  duration_ms: 0.278511
+  type: 'test'
+  ...
+# Subtest: Affectation wheel exportée et restaurée
+ok 419 - Affectation wheel exportée et restaurée
+  ---
+  duration_ms: 0.405333
+  type: 'test'
+  ...
+# Subtest: Affectation map exportée et restaurée
+ok 420 - Affectation map exportée et restaurée
+  ---
+  duration_ms: 0.267724
+  type: 'test'
+  ...
+# Subtest: Affectation repair exportée et restaurée
+ok 421 - Affectation repair exportée et restaurée
+  ---
+  duration_ms: 0.325552
+  type: 'test'
+  ...
+# Subtest: Affectation rally exportée et restaurée
+ok 422 - Affectation rally exportée et restaurée
+  ---
+  duration_ms: 0.329958
+  type: 'test'
+  ...
+# Subtest: Affectation pistol exportée et restaurée
+ok 423 - Affectation pistol exportée et restaurée
+  ---
+  duration_ms: 0.52269
+  type: 'test'
+  ...
+# Subtest: Affectation presentation exportée et restaurée
+ok 424 - Affectation presentation exportée et restaurée
+  ---
+  duration_ms: 0.598374
+  type: 'test'
+  ...
+# Subtest: Les conflits sont refusés sans modification
+ok 425 - Les conflits sont refusés sans modification
+  ---
+  duration_ms: 0.341346
+  type: 'test'
+  ...
+# Subtest: Touche réservée ou invalide refusée : Escape
+ok 426 - Touche réservée ou invalide refusée : Escape
+  ---
+  duration_ms: 0.206382
+  type: 'test'
+  ...
+# Subtest: Touche réservée ou invalide refusée : Enter
+ok 427 - Touche réservée ou invalide refusée : Enter
+  ---
+  duration_ms: 0.14575
+  type: 'test'
+  ...
+# Subtest: Touche réservée ou invalide refusée : F5
+ok 428 - Touche réservée ou invalide refusée : F5
+  ---
+  duration_ms: 0.130527
+  type: 'test'
+  ...
+# Subtest: Touche réservée ou invalide refusée : F11
+ok 429 - Touche réservée ou invalide refusée : F11
+  ---
+  duration_ms: 0.135114
+  type: 'test'
+  ...
+# Subtest: Touche réservée ou invalide refusée : F12
+ok 430 - Touche réservée ou invalide refusée : F12
+  ---
+  duration_ms: 0.171149
+  type: 'test'
+  ...
+# Subtest: Touche réservée ou invalide refusée : MetaLeft
+ok 431 - Touche réservée ou invalide refusée : MetaLeft
+  ---
+  duration_ms: 0.1453
+  type: 'test'
+  ...
+# Subtest: Touche réservée ou invalide refusée : AltLeft
+ok 432 - Touche réservée ou invalide refusée : AltLeft
+  ---
+  duration_ms: 0.142044
+  type: 'test'
+  ...
+# Subtest: Touche réservée ou invalide refusée : __proto__
+ok 433 - Touche réservée ou invalide refusée : __proto__
+  ---
+  duration_ms: 0.1387
+  type: 'test'
+  ...
+# Subtest: Touche réservée ou invalide refusée : null
+ok 434 - Touche réservée ou invalide refusée : null
+  ---
+  duration_ms: 0.136516
+  type: 'test'
+  ...
+# Subtest: Préférences de clavier tronquées ignorées atomiquement
+ok 435 - Préférences de clavier tronquées ignorées atomiquement
+  ---
+  duration_ms: 0.229978
+  type: 'test'
+  ...
+# Subtest: Chargement avec touches dupliquées refusé atomiquement
+ok 436 - Chargement avec touches dupliquées refusé atomiquement
+  ---
+  duration_ms: 0.196037
+  type: 'test'
+  ...
+# Subtest: Libellé malveillant non conservé
+ok 437 - Libellé malveillant non conservé
+  ---
+  duration_ms: 0.39026
+  type: 'test'
+  ...
+# Subtest: Réinitialiser conserve toutes les commandes d’origine
+ok 438 - Réinitialiser conserve toutes les commandes d’origine
+  ---
+  duration_ms: 0.156406
+  type: 'test'
+  ...
+# Subtest: Deux touches pour une action : relâcher une touche ne relâche pas l’autre
+ok 439 - Deux touches pour une action : relâcher une touche ne relâche pas l’autre
+  ---
+  duration_ms: 0.185891
+  type: 'test'
+  ...
+# Subtest: Pause : les touches maintenues sont neutralisées jusqu’à relâchement
+ok 440 - Pause : les touches maintenues sont neutralisées jusqu’à relâchement
+  ---
+  duration_ms: 0.210668
+  type: 'test'
+  ...
+# Subtest: Affectation maintenue ne déclenche pas d’action en sortant des options
+ok 441 - Affectation maintenue ne déclenche pas d’action en sortant des options
+  ---
+  duration_ms: 0.156296
+  type: 'test'
+  ...
+# Subtest: Reconfiguration ne laisse pas une ancienne touche coincée
+ok 442 - Reconfiguration ne laisse pas une ancienne touche coincée
+  ---
+  duration_ms: 0.135084
+  type: 'test'
+  ...
+# Subtest: Première écriture : deux copies validées et relues
+ok 443 - Première écriture : deux copies validées et relues
+  ---
+  duration_ms: 12.970421
+  type: 'test'
+  ...
+# Subtest: Une sauvegarde identique mais sans secours reçoit une copie protégée
+ok 444 - Une sauvegarde identique mais sans secours reçoit une copie protégée
+  ---
+  duration_ms: 5.288171
+  type: 'test'
+  ...
+# Subtest: Deuxième écriture : copie précédente préservée avant remplacement
+ok 445 - Deuxième écriture : copie précédente préservée avant remplacement
+  ---
+  duration_ms: 4.143632
+  type: 'test'
+  ...
+# Subtest: Écriture identique ne provoque aucun doublement du stockage
+ok 446 - Écriture identique ne provoque aucun doublement du stockage
+  ---
+  duration_ms: 3.629114
+  type: 'test'
+  ...
+# Subtest: État invalide refusé avant toute opération de stockage
+ok 447 - État invalide refusé avant toute opération de stockage
+  ---
+  duration_ms: 0.424241
+  type: 'test'
+  ...
+# Subtest: Quota refusant la copie de sécurité : sauvegarde courante intacte
+ok 448 - Quota refusant la copie de sécurité : sauvegarde courante intacte
+  ---
+  duration_ms: 2.36858
+  type: 'test'
+  ...
+# Subtest: Quota sur l’écriture principale : les deux anciennes copies subsistent
+ok 449 - Quota sur l’écriture principale : les deux anciennes copies subsistent
+  ---
+  duration_ms: 2.432586
+  type: 'test'
+  ...
+# Subtest: Relecture de secours fausse : aucun remplacement principal
+ok 450 - Relecture de secours fausse : aucun remplacement principal
+  ---
+  duration_ms: 2.508311
+  type: 'test'
+  ...
+# Subtest: Relecture principale fausse : échec annoncé et secours lisible
+ok 451 - Relecture principale fausse : échec annoncé et secours lisible
+  ---
+  duration_ms: 3.42719
+  type: 'test'
+  ...
+# Subtest: Sauvegarde courante corrompue : le bon secours n’est pas remplacé
+ok 452 - Sauvegarde courante corrompue : le bon secours n’est pas remplacé
+  ---
+  duration_ms: 2.71925
+  type: 'test'
+  ...
+# Subtest: Inspecter un secours n’effectue jamais de restauration automatique
+ok 453 - Inspecter un secours n’effectue jamais de restauration automatique
+  ---
+  duration_ms: 1.341718
+  type: 'test'
+  ...
+# Subtest: Accès au stockage lui-même refusé : erreur exploitable
+ok 454 - Accès au stockage lui-même refusé : erreur exploitable
+  ---
+  duration_ms: 1.315008
+  type: 'test'
+  ...
+# Subtest: Les 198 exports v0.8 sont encore importables sans perte des stocks ni progression
+ok 455 - Les 198 exports v0.8 sont encore importables sans perte des stocks ni progression
+  ---
+  duration_ms: 930.238711
+  type: 'test'
+  ...
+# Subtest: HYBRID / exploration : campagne et six annexes, reprises réelles après chaque objectif
+ok 456 - HYBRID / exploration : campagne et six annexes, reprises réelles après chaque objectif
+  ---
+  duration_ms: 645.807716
+  type: 'test'
+  ...
+# Subtest: HYBRID / survival : campagne et six annexes, reprises réelles après chaque objectif
+ok 457 - HYBRID / survival : campagne et six annexes, reprises réelles après chaque objectif
+  ---
+  duration_ms: 459.38554
+  type: 'test'
+  ...
+# Subtest: HYBRID / oppression : campagne et six annexes, reprises réelles après chaque objectif
+ok 458 - HYBRID / oppression : campagne et six annexes, reprises réelles après chaque objectif
+  ---
+  duration_ms: 304.868556
+  type: 'test'
+  ...
+# Subtest: CLASSIC / exploration : campagne et six annexes, reprises réelles après chaque objectif
+ok 459 - CLASSIC / exploration : campagne et six annexes, reprises réelles après chaque objectif
+  ---
+  duration_ms: 276.679231
+  type: 'test'
+  ...
+# Subtest: CLASSIC / survival : campagne et six annexes, reprises réelles après chaque objectif
+ok 460 - CLASSIC / survival : campagne et six annexes, reprises réelles après chaque objectif
+  ---
+  duration_ms: 246.34188
+  type: 'test'
+  ...
+# Subtest: CLASSIC / oppression : campagne et six annexes, reprises réelles après chaque objectif
+ok 461 - CLASSIC / oppression : campagne et six annexes, reprises réelles après chaque objectif
+  ---
+  duration_ms: 242.124888
+  type: 'test'
+  ...
+1..461
+# tests 461
+# suites 0
+# pass 461
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 7108.016856

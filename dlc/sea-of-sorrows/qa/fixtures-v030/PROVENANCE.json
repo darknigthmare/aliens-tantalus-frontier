@@ -1,0 +1,337 @@
+{
+  "archive": "ALIEN_MER_DES_CHAGRINS_v0.3.0_DLC_AUTONOME.zip",
+  "archive_sha256": "aa7934ffe009aae627391321202f88a6391b853254a669b710daaf18f6dc9dcd",
+  "schema": 3,
+  "files": [
+    {
+      "file": "played-CLASSIC-01.json",
+      "sha256": "c87ad1ff16b77403e032662dd5e5916f7debb74cdb729830c7fe381c351b16d8",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-01.json"
+    },
+    {
+      "file": "played-CLASSIC-02.json",
+      "sha256": "23b229cfb873b13f2f780397f7bf22197893adcf4acd89bf18e017194a816638",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-02.json"
+    },
+    {
+      "file": "played-CLASSIC-03.json",
+      "sha256": "7a1b943f8319d7cb160b5e42422b8fc7e291afd09a9366e5e4cac4ef598441f2",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-03.json"
+    },
+    {
+      "file": "played-CLASSIC-04.json",
+      "sha256": "f5f9b61d7e3da6ecc7eb020cbc0cb84b1972b7596189393d7405a5dcd07c3b8a",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-04.json"
+    },
+    {
+      "file": "played-CLASSIC-05.json",
+      "sha256": "ceb72670cf26aac9692872d2df7870c754eef9332fa93bf4316c495b4962db0d",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-05.json"
+    },
+    {
+      "file": "played-CLASSIC-06.json",
+      "sha256": "429d0c2cc39f85654d8c14d25d9bf1f0d43cdd3d0439d713298d00f3d29ef720",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-06.json"
+    },
+    {
+      "file": "played-CLASSIC-07.json",
+      "sha256": "38eebdf9858aec5a78cb8938a5bd9834ae7ee62dd74abd746a37a1790c1391c6",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-07.json"
+    },
+    {
+      "file": "played-CLASSIC-08.json",
+      "sha256": "56e496afcb5fdf240eab42aa26b80582a532d303181632fcba3e3b80558c304f",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-08.json"
+    },
+    {
+      "file": "played-CLASSIC-09.json",
+      "sha256": "c2e0ccf64160992955e4bb831cf6901ff4646d11e956ec6926bf2d376f128e89",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-09.json"
+    },
+    {
+      "file": "played-CLASSIC-10.json",
+      "sha256": "82bea8a9a0d4bd8f425a9a182f88cc329cebef07d84dc5442d56acd2dcfa8855",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-10.json"
+    },
+    {
+      "file": "played-CLASSIC-11.json",
+      "sha256": "91f9254783a2b12b54daa64c157e27568d3dcac4a1bec750425c2998e7e080a3",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-11.json"
+    },
+    {
+      "file": "played-CLASSIC-12.json",
+      "sha256": "3de273c5aba845d8fc31cc905bdf3c50d38b5721cbe898dc84553b6b2fd29d8c",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-12.json"
+    },
+    {
+      "file": "played-CLASSIC-13.json",
+      "sha256": "08ed1bf8190a33d0103fe2999f516f76fcc2bc542e4925bd8c70a1611482a6cb",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-13.json"
+    },
+    {
+      "file": "played-CLASSIC-14.json",
+      "sha256": "5949b2e45ee7e00b4054284dc916e30002560772d0883d29c413fc91644cf191",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-14.json"
+    },
+    {
+      "file": "played-CLASSIC-15.json",
+      "sha256": "96c282d72935c9e9e14ef3d3085f79fe67c65dc80d114bd6a9d9d891fc483dd0",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-15.json"
+    },
+    {
+      "file": "played-CLASSIC-16.json",
+      "sha256": "236b14ce0dbf2da94757f9612397df412d9d439635377e9e1fdcc54f316038ad",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-16.json"
+    },
+    {
+      "file": "played-CLASSIC-17.json",
+      "sha256": "44a0a4f78c7dc09e74278ed4185bee1ae5255ebd78d06ec76870f0e1f857e93d",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-17.json"
+    },
+    {
+      "file": "played-CLASSIC-18.json",
+      "sha256": "165215738d7a9fe9e2aa7b7132ef1c1da896c049ff63c45a5bb5ee8462486171",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-18.json"
+    },
+    {
+      "file": "played-CLASSIC-19.json",
+      "sha256": "b8619b341f3d541170f47c2ce4ffbb0dcdeb0657e18f2a39ed2fa5e51a4579e2",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-19.json"
+    },
+    {
+      "file": "played-CLASSIC-20.json",
+      "sha256": "2d84a297b93c74c10639c959c8a65253ca5384acf610740b31842ced4ecabed7",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-20.json"
+    },
+    {
+      "file": "played-CLASSIC-21.json",
+      "sha256": "088920eff69f8a4c6c4aa6f3198402cd00bf5de74f97efa481d36e8772aaa45c",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-21.json"
+    },
+    {
+      "file": "played-CLASSIC-22.json",
+      "sha256": "c1cb74239ddf50fee24f874217db7e7df498c380afd5583dc642b2c185734c5c",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-22.json"
+    },
+    {
+      "file": "played-CLASSIC-23.json",
+      "sha256": "7f4b021d68d9d16d1dccf31081e17cfa062f3cf5001559807132fa49984a5a98",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-23.json"
+    },
+    {
+      "file": "played-CLASSIC-24.json",
+      "sha256": "a5537e235d1d016bc990da2faddbe7062a74c2081ec57436c848aa38e7cafed1",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-24.json"
+    },
+    {
+      "file": "played-CLASSIC-25.json",
+      "sha256": "4d9c5791b479d93eba11313eb4635511d563ddead9f39fe89e3364794e17bd79",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-25.json"
+    },
+    {
+      "file": "played-CLASSIC-26.json",
+      "sha256": "07de3d7a08881aa1abd7281e4f52640af660061c9795de0823a433e3aa32571e",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-26.json"
+    },
+    {
+      "file": "played-CLASSIC-27.json",
+      "sha256": "0139eaa55ad47fe2ac09ceb7d1b58ac3979e1d41ff1f03c9dbeb4d666773b488",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-27.json"
+    },
+    {
+      "file": "played-CLASSIC-28.json",
+      "sha256": "ce899d5f77dc8910fd2062edd511c47b41113c09250fe1115687c159496844b6",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-28.json"
+    },
+    {
+      "file": "played-CLASSIC-29.json",
+      "sha256": "50da36f1fa64f34e92fa94aabdcc431d7a855500856c29334ebd0e09d2175d0f",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-29.json"
+    },
+    {
+      "file": "played-CLASSIC-30.json",
+      "sha256": "b5ac8b06a6860e5579da18409a56c9fd1d731c9403db8378337fa7811be6311e",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-30.json"
+    },
+    {
+      "file": "played-CLASSIC-31.json",
+      "sha256": "d8dd3a1f6bc418d95d0affe7a2cf0438a315c7c04efda6861ad4d3ac80a22ef7",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-31.json"
+    },
+    {
+      "file": "played-CLASSIC-32.json",
+      "sha256": "31d14b48a20ebd762e71704e942566f3071cd5e58a472ca08ed781d8048bf108",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-32.json"
+    },
+    {
+      "file": "played-CLASSIC-33.json",
+      "sha256": "42ca4c5c53377cae69175c776dd3eed68f78aa3ff2ac9908bdf62d0996631264",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/CLASSIC-exploration-33.json"
+    },
+    {
+      "file": "played-HYBRID-01.json",
+      "sha256": "00a3d1f3005e5c7ddf2dea5d22c1930a8bdc20b8f5ae6b02be7642ba5c61dfff",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-01.json"
+    },
+    {
+      "file": "played-HYBRID-02.json",
+      "sha256": "fe6a7696eae7f707f1822312fd0b3b13d60900227326953ae54fdbf7da3e39bc",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-02.json"
+    },
+    {
+      "file": "played-HYBRID-03.json",
+      "sha256": "85d232267ccfa553b551cfc26c39921293075d41879086aebaa0d3f44f521615",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-03.json"
+    },
+    {
+      "file": "played-HYBRID-04.json",
+      "sha256": "bae280dde995be080e1f4018edfa55021ef62ec3e0f56a7e1635d31c7ee29d64",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-04.json"
+    },
+    {
+      "file": "played-HYBRID-05.json",
+      "sha256": "d9e75818372e1e03e8337c7c293f5e9836d5a6237bf9474355296d6e04021600",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-05.json"
+    },
+    {
+      "file": "played-HYBRID-06.json",
+      "sha256": "a6ac138535093e5a8b4ff4cc66acf452cb8b7e1b001533e33a3bff4ece22f1a4",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-06.json"
+    },
+    {
+      "file": "played-HYBRID-07.json",
+      "sha256": "aadd2f53eac2f303677320cd314bdee8d1caa11bc5afdd25f3d071aab80fa429",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-07.json"
+    },
+    {
+      "file": "played-HYBRID-08.json",
+      "sha256": "c532a76455168653366ce33ace82f0e54183fee25fde05d25cea191325c759e6",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-08.json"
+    },
+    {
+      "file": "played-HYBRID-09.json",
+      "sha256": "b256eb610524b8994bdd58fc00546d8374a5fa1a87e414465dbf650a249ec1ba",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-09.json"
+    },
+    {
+      "file": "played-HYBRID-10.json",
+      "sha256": "e56df6b0ed2ccb2059c53760790b8fa86c7c328283c90ea292a0694daf21f03a",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-10.json"
+    },
+    {
+      "file": "played-HYBRID-11.json",
+      "sha256": "8ed80f5e4763e015848a51c505a156b70049d849c03ba80b6ec31fbdbd7871f5",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-11.json"
+    },
+    {
+      "file": "played-HYBRID-12.json",
+      "sha256": "8e1b1296083068ade5d2d080d5a3bea761014f4c8c8d493f762a3fcfe5b69849",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-12.json"
+    },
+    {
+      "file": "played-HYBRID-13.json",
+      "sha256": "a34f6ab70fb3788991a684201c097f5af1d12f5800324bb7019bfde33c759245",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-13.json"
+    },
+    {
+      "file": "played-HYBRID-14.json",
+      "sha256": "591cc3e9c339f0101d0c12d32edeb03a9e905bf0bd35fc4b9f4295d72ee5da9a",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-14.json"
+    },
+    {
+      "file": "played-HYBRID-15.json",
+      "sha256": "b150ad6011e0f67c665f3469e5077f0ef6eaa37cefd47b5d43ad849ff4043f3e",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-15.json"
+    },
+    {
+      "file": "played-HYBRID-16.json",
+      "sha256": "afcfa00666626cad14378a92bc26e079e5a885de05db81a5131bc0cb587f9fca",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-16.json"
+    },
+    {
+      "file": "played-HYBRID-17.json",
+      "sha256": "7239e6cd438677c06d21873cf4cf6e4b9fec4304abd1d07c6ad19b2ad7f5c74c",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-17.json"
+    },
+    {
+      "file": "played-HYBRID-18.json",
+      "sha256": "b35fb42712266b6c8c931ef0a09a96e643a4f36d582df489f44a991ca06ad41d",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-18.json"
+    },
+    {
+      "file": "played-HYBRID-19.json",
+      "sha256": "0633b96f0bdef3c6fb7956e29550942a3570e3bba10e81f4db39c939c571e2c1",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-19.json"
+    },
+    {
+      "file": "played-HYBRID-20.json",
+      "sha256": "99b4c634fa632fd2c7275d2dce473d9cc92038c35a05271771673073e2f31ed1",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-20.json"
+    },
+    {
+      "file": "played-HYBRID-21.json",
+      "sha256": "e6ae849a59180a243890e0224a79c787aa813b776a755404e86dbc18488c4036",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-21.json"
+    },
+    {
+      "file": "played-HYBRID-22.json",
+      "sha256": "30fef29dbabca0e21cecfa5d8b418155056d9677c4f8d2fc36cfa7a81ae4625f",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-22.json"
+    },
+    {
+      "file": "played-HYBRID-23.json",
+      "sha256": "4c3e668d450a6611c9377a8262064886d40f3fcc561696deb94d98dee37b0c99",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-23.json"
+    },
+    {
+      "file": "played-HYBRID-24.json",
+      "sha256": "0497c1c41bbb969cedb59bb44ddf909d3ac1227fb5a676ad9b19aa00b65fe8e3",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-24.json"
+    },
+    {
+      "file": "played-HYBRID-25.json",
+      "sha256": "16e80156052e0803e8e10864a5b56e9c88836082dfa98b37f544fd8b6673e819",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-25.json"
+    },
+    {
+      "file": "played-HYBRID-26.json",
+      "sha256": "8e0166979266842ab405f811c5b801f988ad88f8d72f01a84ff55a443d78df2c",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-26.json"
+    },
+    {
+      "file": "played-HYBRID-27.json",
+      "sha256": "5b63ee03fb1248e9a1f9456579b7b6006f3cb3bc968c4b9cf948ef361c505270",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-27.json"
+    },
+    {
+      "file": "played-HYBRID-28.json",
+      "sha256": "faf3c1fdf463eaef646aed523d8a538ee134c2c7bd6f530057082b5f14fdbc5d",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-28.json"
+    },
+    {
+      "file": "played-HYBRID-29.json",
+      "sha256": "7bbcafc95796b050d2e4013e43ab4a70f70c7cded5b023f6b9756b726776b803",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-29.json"
+    },
+    {
+      "file": "played-HYBRID-30.json",
+      "sha256": "e02048be0743a0a48132664296b7d806a87910b2445a0ecd10e065745ec37eb0",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-30.json"
+    },
+    {
+      "file": "played-HYBRID-31.json",
+      "sha256": "830b53a096362f163b2a36c09f228ccbb18209f59ebc73bdd2e6384b23b0644c",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-31.json"
+    },
+    {
+      "file": "played-HYBRID-32.json",
+      "sha256": "e91068d2e8cf86760f9151dbef003a92c6e6be045422f2cbc01fe989d72b1396",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-32.json"
+    },
+    {
+      "file": "played-HYBRID-33.json",
+      "sha256": "7c4153f3584c8b7eecf07f3a7605dc8bec2d8263d075110c2b525092b3ee31f8",
+      "archive_source_path": "ALIEN_MER_DES_CHAGRINS_v0.3.0/qa/tactical-fixtures/HYBRID-exploration-33.json"
+    }
+  ]
+}

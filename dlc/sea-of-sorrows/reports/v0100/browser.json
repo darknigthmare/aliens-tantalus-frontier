@@ -1,0 +1,614 @@
+{
+  "version": "0.10.0",
+  "html_sha256": "881ce8fca80f5473366463ad864af050ed0783b329f443f32f90506b5761caaa",
+  "native_attempts": {
+    "file": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/ALIEN_MER_DES_CHAGRINS_v0.10.0/MER_DES_CHAGRINS_JOUABLE.html\n",
+    "http": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:34323/MER_DES_CHAGRINS_JOUABLE.html\n"
+  },
+  "checks": [
+    {
+      "name": "Version0.10 et registre présents",
+      "pass": true
+    },
+    {
+      "name": "Les 50 lieux sont inspectables avant la partie",
+      "pass": true
+    },
+    {
+      "name": "16 personnages identifiés, profil générique exclu du registre public",
+      "pass": true
+    },
+    {
+      "name": "Les visages complets ne sont pas présentés comme authentifiés",
+      "pass": true
+    },
+    {
+      "name": "Les rôles non joués sont signalés",
+      "pass": true
+    },
+    {
+      "name": "Sept entrées d’armes et quatorze d’équipement",
+      "pass": true
+    },
+    {
+      "name": "Dix sources externes identifiées",
+      "pass": true
+    },
+    {
+      "name": "La confrontation au texte intégral est explicitement absente",
+      "pass": true
+    },
+    {
+      "name": "Aucun retrait à distance",
+      "pass": true
+    },
+    {
+      "name": "Le râtelier est accessible après marche physique",
+      "pass": true
+    },
+    {
+      "name": "Une dotation de 90 cartouches impulsion et trois cellules plasma",
+      "pass": true
+    },
+    {
+      "name": "Retrait en double désactivé",
+      "pass": true
+    },
+    {
+      "name": "Sélection du plasma par le véritable bouton",
+      "pass": true
+    },
+    {
+      "name": "HUD du plasma séparé du Reaper",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s01",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s02",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s03",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s04",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s05",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s06",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s07",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s08",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s09",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s10",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s11",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s12",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s13",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s14",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s15",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s16",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s17",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s18",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s19",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s20",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s21",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s22",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s23",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s24",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s25",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s26",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s27",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s28",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s29",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s30",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s31",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s32",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s33",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s34",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s35",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s36",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s37",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s38",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s39",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s40",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s41",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s42",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s43",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s44",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s45",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s46",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s47",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s48",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s49",
+      "pass": true
+    },
+    {
+      "name": "HYBRID rendu de s50",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s01",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s02",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s03",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s04",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s05",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s06",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s07",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s08",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s09",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s10",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s11",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s12",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s13",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s14",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s15",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s16",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s17",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s18",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s19",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s20",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s21",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s22",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s23",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s24",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s25",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s26",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s27",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s28",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s29",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s30",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s31",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s32",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s33",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s34",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s35",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s36",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s37",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s38",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s39",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s40",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s41",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s42",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s43",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s44",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s45",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s46",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s47",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s48",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s49",
+      "pass": true
+    },
+    {
+      "name": "CLASSIC rendu de s50",
+      "pass": true
+    },
+    {
+      "name": "1024px registre lieux sans débordement horizontal",
+      "pass": true
+    },
+    {
+      "name": "1024px registre personnages sans débordement horizontal",
+      "pass": true
+    },
+    {
+      "name": "1024px registre materiel sans débordement horizontal",
+      "pass": true
+    },
+    {
+      "name": "1024px registre ecarts sans débordement horizontal",
+      "pass": true
+    },
+    {
+      "name": "1024px fermeture du registre accessible",
+      "pass": true
+    },
+    {
+      "name": "390px registre lieux sans débordement horizontal",
+      "pass": true
+    },
+    {
+      "name": "390px registre personnages sans débordement horizontal",
+      "pass": true
+    },
+    {
+      "name": "390px registre materiel sans débordement horizontal",
+      "pass": true
+    },
+    {
+      "name": "390px registre ecarts sans débordement horizontal",
+      "pass": true
+    },
+    {
+      "name": "390px fermeture du registre accessible",
+      "pass": true
+    },
+    {
+      "name": "360px registre lieux sans débordement horizontal",
+      "pass": true
+    },
+    {
+      "name": "360px registre personnages sans débordement horizontal",
+      "pass": true
+    },
+    {
+      "name": "360px registre materiel sans débordement horizontal",
+      "pass": true
+    },
+    {
+      "name": "360px registre ecarts sans débordement horizontal",
+      "pass": true
+    },
+    {
+      "name": "360px fermeture du registre accessible",
+      "pass": true
+    },
+    {
+      "name": "Aucune exception dans les nouveaux panneaux et rendus",
+      "pass": true
+    }
+  ],
+  "passed": 130,
+  "failed": 0,
+  "fatal": null,
+  "errors": [],
+  "captures": [
+    {
+      "file": "01_titre.png",
+      "caption": "Écran titre de la version courante. Nouvelle partie sans sauvegarde préparée.",
+      "source": null,
+      "prepared": false,
+      "sha256": "a4097ee3565057fad60fe455c92379cccf42bf6167ab0952ed035784c3cb729d"
+    },
+    {
+      "file": "02_personnages.png",
+      "caption": "Interprétations rendues par le même code que les personnages de terrain. Les traits sourcés et les inconnues sont séparés.",
+      "source": null,
+      "prepared": false,
+      "sha256": "f318f23719c0e6c34d9c295f5443215c5a720e3117d906162dfe11f6d8cf8486"
+    },
+    {
+      "file": "03_armurerie.png",
+      "caption": "Marche au clavier jusqu’au râtelier depuis la sauvegarde07, puis retrait et sélection au moyen des boutons. Aucune attribution authentifiée de tout cet arsenal à Decker.",
+      "source": "HYBRID-survival-07",
+      "prepared": false,
+      "sha256": "55e989915a5675de8e33e6c4cace4af6ae3388b1e513227130d2285a8c5ffe81"
+    },
+    {
+      "file": "04_ratelier_terrain.png",
+      "caption": "Après le retrait sur place, arme tenue et allocation marquée retirée. Position obtenue au clavier, non remplacée pour la capture.",
+      "source": "HYBRID-survival-07",
+      "prepared": false,
+      "sha256": "3ce403e0f3af295ac2fed0a0a688641403114a79586d86a2f448f15105a28a5c"
+    },
+    {
+      "file": "05_cage_puits.png",
+      "caption": "Tête de puits après validation de son objectif. La liaison verticale est dessinée comme une cage, non comme une porte de couloir.",
+      "source": "HYBRID-survival-10",
+      "prepared": false,
+      "sha256": "1756579b2597eacd6db1f9f6f0006586e52ace49b0cb4e4ee007ea6de5073fee"
+    },
+    {
+      "file": "06_atelier.png",
+      "caption": "Atelier depuis une sauvegarde des manœuvres de cloison. Paroi de premier plan et accès latéraux visibles selon le cadrage du moteur.",
+      "source": "closed-gate-s17",
+      "prepared": false,
+      "sha256": "0cc96102ed7ffbcfd1ad3853a9ab762892092e1e5ce25243898dce0b01e91ae7"
+    },
+    {
+      "file": "07_porteurs.png",
+      "caption": "Les deux porteurs pendant l’évacuation : parasites adhérents visibles. La variante royale d’Adams repose sur une notice secondaire ; proportions interprétées.",
+      "source": "HYBRID-survival-26",
+      "prepared": false,
+      "sha256": "1fe68039bccf6369f4f3361cae8b3ed150358e795b11f343ed1fb0f4e4546489"
+    },
+    {
+      "file": "08_stase.png",
+      "caption": "Consigne cryogénique après livraison. Tableau de stase interprété, fondé sur l’état des deux patients ; aucune guérison ajoutée.",
+      "source": "HYBRID-survival-31",
+      "prepared": false,
+      "sha256": "7f3648b826fb7cc692b47b1e7fbce0993434d76b9077665dd3b982fa839f2a1e"
+    },
+    {
+      "file": "09_seuil_s17.png",
+      "caption": "Contrôle préparé : joueur positionné à l’approche du seuil pour vérifier l’encastrement et la transparence. Ce cadrage n’est pas une progression gagnée.",
+      "source": null,
+      "prepared": true,
+      "sha256": "17e1a7e518c01f3de59b98f084eae28f8c1cca17d4b19cd9676ca3a25ae1e9b7"
+    },
+    {
+      "file": "09_seuil_s21.png",
+      "caption": "Contrôle préparé : joueur positionné à l’approche du seuil pour vérifier l’encastrement et la transparence. Ce cadrage n’est pas une progression gagnée.",
+      "source": null,
+      "prepared": true,
+      "sha256": "70897bf5b206fc8ca483d6fa9cd522170101d41e668085d2bee9c0418db2b204"
+    },
+    {
+      "file": "10_registre_390.png",
+      "caption": "Registre à390×844 : contrôle de disposition, pas certification d’un téléphone physique.",
+      "source": null,
+      "prepared": false,
+      "sha256": "423ac6b11e75d15e9e0b5054a40386f774bb83033aa8a92d40d2fabe0564c369"
+    }
+  ],
+  "method": "Chromium/Playwright with explicit memory storage after recorded native-navigation failures. Earned snapshots used for major captures; prepared geometry sweeps labelled separately."
+}

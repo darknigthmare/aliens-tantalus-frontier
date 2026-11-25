@@ -1,0 +1,12 @@
+{
+  "zip": "/mnt/data/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip",
+  "bytes": 115170444,
+  "sha256": "7a2761f657d20c8c515f460df27b5701ca151aa1cd4ff1a81a7ef5b5dec6a56e",
+  "files": 3029,
+  "extracted_root": "/mnt/data/mer_v0100_verify_extracted/ALIEN_MER_DES_CHAGRINS_v0.10.0",
+  "extracted_node_passed": 461,
+  "extracted_node_failed": 0,
+  "extracted_delivery_passed": 66,
+  "extracted_delivery_failed": 0,
+  "limitations": "Prototype autonome, fidélité partielle, texte intégral non confronté. Pas de certification de persistance native, de manette physique ni de playtest humain. Aucun push ou déploiement."
+}

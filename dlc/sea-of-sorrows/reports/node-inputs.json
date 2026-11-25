@@ -1,0 +1,33 @@
+{
+  "version": "0.9.0",
+  "passed": 432,
+  "failed": 0,
+  "tap_sha256": "4e13e11c8b2e18a3ff6fa8144378c4f257478e093d82ad2792900abad9d6f34b",
+  "source_sha256": {
+    "data/campaign.json": "cbd252fbd9a35e053358b30b5a28e984c022f2776e5fe3c1893fad4ad830c901",
+    "integration/install.cjs": "efe588b4006b95cb3437aab10c417f60ed68ddc22b2969378d115f1e9791a082",
+    "package.json": "2baef0b1ecd6fbb67a32ed1ce4efb3bcabf8629d29340d41d7687320638e6efe",
+    "qa/core.test.cjs": "78980a4df4c339359a65a08388ab661b3ce2ec98e8ade9add1ebdb5c291e94b6",
+    "qa/field.test.cjs": "ba9718a640e05cbf8686b04647c021e5c1129e01a0cf23a1cf7662c9dd0f76ad",
+    "qa/install.test.cjs": "8cc31648b3620720bc33900dffcecac8467f1f00f3b30c4000c431d0ec2b524e",
+    "qa/lighting.test.cjs": "acdd77ff00aaab729341e8e7d46b1745be078a9fe34e89a3fd9d9acf9b7b3ef9",
+    "qa/pursuit.test.cjs": "82314a828724cfe443eb7039def11a1f7b3cf4e0f9213209e058603aeae91f1e",
+    "qa/rearguard.test.cjs": "47d41d7754352b7678c1fb9eb5e32662307fbc5316a946e927ee0fd8b799ebff",
+    "qa/sensors.test.cjs": "f494a67797b0180ef8fa6ddacf2530bbac9b4a5ac1d3e604c9b0a90183e90bfd",
+    "qa/soundscape.test.cjs": "8c518b58ce994f97e3b97cc116333698e11bf2d5dcf63a7264511c744ca6cd6b",
+    "qa/storage.test.cjs": "b5a0c297e21b7ffa6d25b64c5da48ac5b3b9b956bdcf75ae2ab69903fcd35616",
+    "qa/support.test.cjs": "d75ecaf6acf160c599be6563b4120a2d63b4a3c8c949365360f11c118fdb44e9",
+    "qa/tactical.cjs": "e34317ef48b174b79312a64b661ee859b236aa50fdaecfc1f6d259ce7b88bf44",
+    "qa/tactical.test.cjs": "8674244adb3d3353bf9dbe0a99b4e36b3f8e79f373594bf216a9657cbba3c011",
+    "qa/traverse.cjs": "66690a8e979000aff3bbe559baed66494783fc355499143b957625f194e3b533",
+    "src/controls.js": "bab7db32af0cf0f45d604d16c2e52efd9fe55683d27571f936e16c174e4d1b8a",
+    "src/core.js": "d526cad30b79f9e61614df11a9daf257f9c0dab546dd62d890fb020fa182a5fd",
+    "src/data.js": "77f085faac52775b7425ca1a450f12f7fd1ae8b57678ba32cedbc7ce3d28c9c2",
+    "src/main.js": "64f88ace23edbb9b02fdd2bbd43b167fd722c9c0b2787a2f2155d8de941b6341",
+    "src/render.js": "150f18fc5f3ae0c38f7c0a66832472279efda402d1c65ac2bdb63f84015161a8",
+    "src/soundscape.js": "6afee8c906557a65178876b0a60b0919b9c93e0860e47e04f1c974144ae9ecee",
+    "src/support.js": "0dbf81935d64252faa5a610ef2bd348a0bea7780f2787bf6f02b4183d97046d3",
+    "src/tactics-art.js": "22cdb7e8ef81e21ac02fccfe72976cae373b14a452711b3a9fa7cf5f3ab05c66",
+    "src/world-art.js": "d704e52264af4dd9f6262d5c6d8012a587a0cc868ef7b249bb9cd3eaf99b5bcf"
+  }
+}

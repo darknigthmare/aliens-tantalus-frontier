@@ -1,0 +1,248 @@
+{
+  "version": "0.9.0",
+  "browser": "Chromium / Playwright",
+  "html_sha256": "0cc70544e2f3e38b63aa11b0aed0582b18017c0b5e2e0a73257432fcaae8864a",
+  "native_navigation": [
+    {
+      "kind": "file",
+      "allowed": false,
+      "error": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/ALIEN_MER_DES_CHAGRINS_v0.9.0/MER_DES_CHAGRINS_JOUABLE.html"
+    },
+    {
+      "kind": "http",
+      "allowed": false,
+      "error": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:43195/MER_DES_CHAGRINS_JOUABLE.html"
+    }
+  ],
+  "mode": "Exact standalone HTML loaded into browser DOM, without HTTP/file navigation bypass.",
+  "storage": "Explicit in-memory fixture, not native storage persistence.",
+  "human_playthrough": false,
+  "checks": [
+    {
+      "name": "Le vrai HTML démarre : titre, boutons, aucune exception",
+      "pass": true
+    },
+    {
+      "name": "Réduction du mouvement et contraste activés depuis les réglages",
+      "pass": true
+    },
+    {
+      "name": "Le réglage de lumière atteint le moteur de rendu",
+      "pass": true
+    },
+    {
+      "name": "Nouvelle partie lancée par les commandes visibles",
+      "pass": true
+    },
+    {
+      "name": "Déplacement clavier réel dans le moteur",
+      "pass": true
+    },
+    {
+      "name": "HUD et bandeau mission hors de la surface jouable",
+      "pass": true
+    },
+    {
+      "name": "Une porte change réellement de salle via E",
+      "pass": true
+    },
+    {
+      "name": "E maintenu remplit le travail sans validation instantanée",
+      "pass": true
+    },
+    {
+      "name": "Le menu Pause stoppe effectivement le temps de simulation",
+      "pass": true
+    },
+    {
+      "name": "Navigation clavier piégée dans le dialogue actif",
+      "pass": true
+    },
+    {
+      "name": "Reprendre ne conserve pas une touche E fantôme",
+      "pass": true
+    },
+    {
+      "name": "Prélèvement accompli après la durée d’action",
+      "pass": true
+    },
+    {
+      "name": "Le dialogue narratif interrompt lui aussi la simulation",
+      "pass": true
+    },
+    {
+      "name": "Autosauvegarde écrite dans la fixture explicite",
+      "pass": true
+    },
+    {
+      "name": "Carte de secteur accessible",
+      "pass": true
+    },
+    {
+      "name": "Plan local fondé sur les vraies emprises",
+      "pass": true
+    },
+    {
+      "name": "Recherche fonctionnelle dans les dossiers débloqués",
+      "pass": true
+    },
+    {
+      "name": "F6 change la présentation et conserve la progression",
+      "pass": true
+    },
+    {
+      "name": "Reprise depuis les données réellement sauvegardées",
+      "pass": true
+    },
+    {
+      "name": "Les données du jeu hôte ne sont pas modifiées",
+      "pass": true
+    },
+    {
+      "name": "Migration 0.1→0.5 via le bouton Reprendre",
+      "pass": true
+    },
+    {
+      "name": "Copie de secours 0.1 conservée avant la nouvelle écriture",
+      "pass": true
+    },
+    {
+      "name": "L’équipement possède des commandes utilisables",
+      "pass": true
+    },
+    {
+      "name": "Soigner et remplacer depuis le menu consomment les réserves",
+      "pass": true
+    },
+    {
+      "name": "La lampe peut être éteinte au clavier",
+      "pass": true
+    },
+    {
+      "name": "Un leurre lancé crée une source sonore et coûte une charge",
+      "pass": true
+    },
+    {
+      "name": "Le viseur reconnaît le corps du xénomorphe",
+      "pass": true
+    },
+    {
+      "name": "Cliquer le corps produit un vrai dégât sur sa profondeur",
+      "pass": true
+    },
+    {
+      "name": "Les 50 salles sont rendues dans les deux présentations",
+      "pass": true
+    },
+    {
+      "name": "B immobilise les deux brancards",
+      "pass": true
+    },
+    {
+      "name": "B relance un suivi physique mesurable",
+      "pass": true
+    },
+    {
+      "name": "L’état des deux châssis est visible hors du terrain",
+      "pass": true
+    },
+    {
+      "name": "Arrimage réalisé par E maintenu dans la soute",
+      "pass": true
+    },
+    {
+      "name": "Capture après arrimage, mousse réelle et validation clavier",
+      "pass": true
+    },
+    {
+      "name": "Erreur de stockage annoncée sans faux succès",
+      "pass": true
+    },
+    {
+      "name": "Titre accessible en 390 × 844",
+      "pass": true
+    },
+    {
+      "name": "Commandes tactiles de base présentes",
+      "pass": true
+    },
+    {
+      "name": "Pas de débordement horizontal global en format étroit",
+      "pass": true
+    },
+    {
+      "name": "Équipement accessible sur écran étroit",
+      "pass": true
+    },
+    {
+      "name": "Aucune exception JavaScript pendant les contrôles",
+      "pass": true
+    },
+    {
+      "name": "Le HTML autonome ne demande aucune ressource réseau",
+      "pass": true
+    }
+  ],
+  "passed": 41,
+  "failed": 0,
+  "room_smoke_renders": 100,
+  "errors": [],
+  "network_requests": [],
+  "captures": [
+    {
+      "file": "01_menu.png",
+      "description": "Écran titre v0.5 du véritable HTML autonome.",
+      "prepared_state": false
+    },
+    {
+      "file": "02_depart.png",
+      "description": "Début d’expédition après déplacement réel au clavier.",
+      "prepared_state": false
+    },
+    {
+      "file": "03_plan_local.png",
+      "description": "Carte locale de la salle du carottier. Accès et emprises du moteur, aucun ennemi dévoilé.",
+      "prepared_state": false
+    },
+    {
+      "file": "04_equipement.png",
+      "description": "Équipement en jeu : utilisation des soins et d’une cartouche depuis les boutons. Santé et usure initiales préparées.",
+      "prepared_state": true
+    },
+    {
+      "file": "05_pompes.png",
+      "description": "Annexe des pompes : machines de fond, profondeur praticable et dispositif de réarmement. Salle préparée.",
+      "prepared_state": true
+    },
+    {
+      "file": "06_tubes.png",
+      "description": "Nœud ambré : sol organique sans quadrillage métallique, silice et couverts de profondeur. Salle préparée.",
+      "prepared_state": true
+    },
+    {
+      "file": "07_reine.png",
+      "description": "Pondeuse : reprise du vrai point d’entrée du parcours enregistré ; caméra rapprochée pour examiner les attaches et la reine.",
+      "prepared_state": true
+    },
+    {
+      "file": "08_convoi.png",
+      "description": "Convoi chargé depuis la sauvegarde du parcours continu, puis halte et reprise au clavier. Position de Decker préparée pour le cadrage.",
+      "prepared_state": true
+    },
+    {
+      "file": "09_capture.png",
+      "description": "Capture dans le vrai moteur après arrimage par touche maintenue et trois tirs de mousse. Placements rapprochés préparés.",
+      "prepared_state": true
+    },
+    {
+      "file": "10_format_etroit.png",
+      "description": "Mise en page 390 × 844 du jeu en fonctionnement. Les contrôles tactiles restent un sous-ensemble du clavier.",
+      "prepared_state": false
+    },
+    {
+      "file": "11_equipement_etroit.png",
+      "description": "Équipement de début de partie dans une fenêtre de 390 × 844 ; défilement du panneau, pas du terrain.",
+      "prepared_state": false
+    }
+  ]
+}

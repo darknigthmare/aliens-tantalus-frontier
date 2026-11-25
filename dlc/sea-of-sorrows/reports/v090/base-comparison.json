@@ -1,0 +1,12 @@
+{
+  "base_version": "0.8.0",
+  "current_version": "0.9.0",
+  "engine_identical": true,
+  "base_engine_sha256": "d526cad30b79f9e61614df11a9daf257f9c0dab546dd62d890fb020fa182a5fd",
+  "current_engine_sha256": "d526cad30b79f9e61614df11a9daf257f9c0dab546dd62d890fb020fa182a5fd",
+  "rooms_identical": true,
+  "edges_identical": true,
+  "chapters_identical": true,
+  "codex_before": 116,
+  "codex_after": 120
+}

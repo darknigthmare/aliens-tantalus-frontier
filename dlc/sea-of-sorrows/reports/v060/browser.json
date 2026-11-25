@@ -1,0 +1,319 @@
+{
+  "version": "0.9.0",
+  "html_sha256": "0cc70544e2f3e38b63aa11b0aed0582b18017c0b5e2e0a73257432fcaae8864a",
+  "checks": [
+    {
+      "name": "Version 0.8 / schéma 8 / 120 dossiers réellement chargés",
+      "pass": true
+    },
+    {
+      "name": "La commande Manette du titre ouvre le guide",
+      "pass": true
+    },
+    {
+      "name": "O ouvre une roue de huit commandes avec trois onglets",
+      "pass": true
+    },
+    {
+      "name": "La roue est une vraie pause, horloge stable",
+      "pass": true
+    },
+    {
+      "name": "Les armes non reçues restent indisponibles",
+      "pass": true
+    },
+    {
+      "name": "Cliquer une action indisponible ne ferme ni ne fournit une arme",
+      "pass": true
+    },
+    {
+      "name": "Échap referme seulement la roue",
+      "pass": true
+    },
+    {
+      "name": "La roue expose les ordres et les trois outils de travail",
+      "pass": true
+    },
+    {
+      "name": "Les menus de lecture sont accessibles dans la troisième page",
+      "pass": true
+    },
+    {
+      "name": "Le panneau capteurs affiche trois appareils distincts",
+      "pass": true
+    },
+    {
+      "name": "Les appareils rangés ne peuvent pas être activés à distance",
+      "pass": true
+    },
+    {
+      "name": "P pose physiquement un appareil récupéré pendant le parcours",
+      "pass": true
+    },
+    {
+      "name": "Une veille active consomme du temps de batterie",
+      "pass": true
+    },
+    {
+      "name": "La pause arrête aussi la consommation du capteur",
+      "pass": true
+    },
+    {
+      "name": "La coupure depuis la fiche atteint la simulation",
+      "pass": true
+    },
+    {
+      "name": "Une veille coupée ne consomme pas quand le jeu reprend",
+      "pass": true
+    },
+    {
+      "name": "P récupère sur place sans recharger",
+      "pass": true
+    },
+    {
+      "name": "Le plan local contient le capteur, pas un nouveau symbole ennemi",
+      "pass": true
+    },
+    {
+      "name": "Le dernier scan reçu est conservé dans la sauvegarde distante",
+      "pass": true
+    },
+    {
+      "name": "Une observation montre son heure, pas une identité de créature",
+      "pass": true
+    },
+    {
+      "name": "Choisir Cloison sélectionne un outil sans ouvrir instantanément",
+      "pass": true
+    },
+    {
+      "name": "E maintenu fait réellement progresser la manœuvre sélectionnée",
+      "pass": true
+    },
+    {
+      "name": "La cloison s’ouvre seulement au bout de sa durée",
+      "pass": true
+    },
+    {
+      "name": "La roue restaure l’outil standard",
+      "pass": true
+    },
+    {
+      "name": "Une touche maintenue avant la pause ne repart pas sur sa répétition",
+      "pass": true
+    },
+    {
+      "name": "Le stick gauche standard produit un déplacement analogique",
+      "pass": true
+    },
+    {
+      "name": "La petite dérive du stick ne déplace pas Decker",
+      "pass": true
+    },
+    {
+      "name": "Le stick droit déplace un vrai viseur",
+      "pass": true
+    },
+    {
+      "name": "La gâchette droite appelle le vrai tir",
+      "pass": true
+    },
+    {
+      "name": "La gâchette gauche active l’empathie",
+      "pass": true
+    },
+    {
+      "name": "L1 / LB ouvre la roue",
+      "pass": true
+    },
+    {
+      "name": "R1 / RB change la page de la roue",
+      "pass": true
+    },
+    {
+      "name": "Le stick choisit le secteur inférieur",
+      "pass": true
+    },
+    {
+      "name": "Rond / B annule la roue sans action",
+      "pass": true
+    },
+    {
+      "name": "La fermeture de la roue ne relance pas une gâchette encore maintenue",
+      "pass": true
+    },
+    {
+      "name": "Relâcher puis presser à nouveau rend le tir disponible",
+      "pass": true
+    },
+    {
+      "name": "R1 sélectionne le travail de réparation hors menu",
+      "pass": true
+    },
+    {
+      "name": "R1 peut sélectionner le travail de cloison",
+      "pass": true
+    },
+    {
+      "name": "La flèche haute commande la lampe",
+      "pass": true
+    },
+    {
+      "name": "La flèche gauche commande Manning sans téléportation",
+      "pass": true
+    },
+    {
+      "name": "Select ouvre la carte",
+      "pass": true
+    },
+    {
+      "name": "Start met le jeu en pause",
+      "pass": true
+    },
+    {
+      "name": "Débrancher en partie ouvre Pause",
+      "pass": true
+    },
+    {
+      "name": "Rebrancher ne reprend pas la partie automatiquement",
+      "pass": true
+    },
+    {
+      "name": "Reprendre migre le schéma 5 avec trois appareils sans altérer la progression",
+      "pass": true
+    },
+    {
+      "name": "La copie de sauvegarde schéma 5 est conservée",
+      "pass": true
+    },
+    {
+      "name": "Aucune écriture dans la sauvegarde hôte",
+      "pass": true
+    },
+    {
+      "name": "1024×768 : huit commandes restent dans le panneau sans débordement horizontal",
+      "pass": true
+    },
+    {
+      "name": "1024×768 : aucune superposition des huit boutons",
+      "pass": true
+    },
+    {
+      "name": "390×844 : huit commandes restent dans le panneau sans débordement horizontal",
+      "pass": true
+    },
+    {
+      "name": "390×844 : aucune superposition des huit boutons",
+      "pass": true
+    },
+    {
+      "name": "360×780 : huit commandes restent dans le panneau sans débordement horizontal",
+      "pass": true
+    },
+    {
+      "name": "360×780 : aucune superposition des huit boutons",
+      "pass": true
+    },
+    {
+      "name": "Les fonctions anciennes restent présentes après les nouvelles commandes",
+      "pass": true
+    },
+    {
+      "name": "Aucune exception JavaScript pendant les contrôles",
+      "pass": true
+    },
+    {
+      "name": "Aucune requête de ressource réseau du HTML autonome",
+      "pass": true
+    }
+  ],
+  "passed": 56,
+  "failed": 0,
+  "fatal": null,
+  "errors": [],
+  "requests": [],
+  "captures": [
+    {
+      "file": "01_roue_equipe.png",
+      "caption": "Roue Équipe sur un état gagné du parcours Hybride / Survie. Simulation figée.",
+      "source": "HYBRID-survival-08",
+      "source_sha256": "ed80f15dfb78c4d594a4fb586a7bc5840249284038dce832f065c61ad938c02f",
+      "image_sha256": "cf43234908beeffe98ad70095ae79937c9a048f3992617125be49906f68c1f6d",
+      "state_sha256": "e48150a5e71b4a056beec0b8799ba832217f458fed90c6b13f48b3f143655759"
+    },
+    {
+      "file": "02_roue_materiel.png",
+      "caption": "Onglet Matériel. Les entrées indisponibles restent visibles mais ne donnent aucune ressource.",
+      "source": "HYBRID-survival-08",
+      "source_sha256": "ed80f15dfb78c4d594a4fb586a7bc5840249284038dce832f065c61ad938c02f",
+      "image_sha256": "44c3b5a02de0acee1585bc325eae210564085e8c726a637b7c897a2630a8fa0d",
+      "state_sha256": "e48150a5e71b4a056beec0b8799ba832217f458fed90c6b13f48b3f143655759"
+    },
+    {
+      "file": "03_capteur_pose.png",
+      "caption": "Capteur posé avec la commande normale pendant le parcours, dans la tranchée. Position inchangée.",
+      "source": "sensor-deployed",
+      "source_sha256": "710c79dce593c1533f3a03822534afea2e9efd73223265841a533764efa166b7",
+      "image_sha256": "89026172f8bf3d55234dda069192a55808f454755b07195db387d65f94bfa61e",
+      "state_sha256": "573df65525e71ef7370abc477a3800ac674a2d6430fb2b15d5fc89b151f518f4"
+    },
+    {
+      "file": "04_plan_capteur.png",
+      "caption": "Plan local du matériel posé ; aucun nouvel affichage de position ennemie.",
+      "source": "sensor-deployed",
+      "source_sha256": "710c79dce593c1533f3a03822534afea2e9efd73223265841a533764efa166b7",
+      "image_sha256": "3e6948dea371f5d8a82fce216d7a38bea9140df30f803cb7fbdbb55aec1c8ef5",
+      "state_sha256": "573df65525e71ef7370abc477a3800ac674a2d6430fb2b15d5fc89b151f518f4"
+    },
+    {
+      "file": "05_liaison_distante.png",
+      "caption": "Le joueur est au belvédère, le capteur dans la tranchée. Scan réellement reçu pendant la poursuite du parcours.",
+      "source": "sensor-remote",
+      "source_sha256": "77c916fe24ed1f11189e184c941704329c19bd90f15a4da1c78acd8ca17487c5",
+      "image_sha256": "3886539ab2c03e60bb80f297385b12341ebf690b17b47e98510e0d8eae9161a4",
+      "state_sha256": "d2f6eee2c53e6255b1037b92ca58b33d1ef340bacbb0d07fdeed5fa565a5df96"
+    },
+    {
+      "file": "06_veille.png",
+      "caption": "Fiche des appareils depuis le même état gagné : liaison, charge restante et heure du dernier mouvement.",
+      "source": "sensor-remote",
+      "source_sha256": "77c916fe24ed1f11189e184c941704329c19bd90f15a4da1c78acd8ca17487c5",
+      "image_sha256": "7fd46ed9dea7c2079c8f7fd5b9f4b9c4bdc7e52105986692bb3a8b4f5709462d",
+      "state_sha256": "d2f6eee2c53e6255b1037b92ca58b33d1ef340bacbb0d07fdeed5fa565a5df96"
+    },
+    {
+      "file": "07_roue_manette.png",
+      "caption": "Roue ouverte par un profil standard simulé. Les commandes passent par le même lecteur que navigator.getGamepads ; aucun matériel physique testé.",
+      "source": null,
+      "source_sha256": null,
+      "image_sha256": "cdfb00287f640e91af9127a17b47b1d7fe4be68755c44ccaaa2cd26812eaae4b",
+      "state_sha256": "c5d6a5a52b2abd686ee202200527088dfb15fdc650fa6d6c992ce5ce55e47861"
+    },
+    {
+      "file": "08_guide_manette.png",
+      "caption": "Guide de manette livré dans le jeu. Les boutons sont décrits par leur position standard.",
+      "source": null,
+      "source_sha256": null,
+      "image_sha256": "c56300e2ab8f8205f0cc266ce9d981c334c94fe811970a8208b1e59b6d47f4bf",
+      "state_sha256": "c5d6a5a52b2abd686ee202200527088dfb15fdc650fa6d6c992ce5ce55e47861"
+    },
+    {
+      "file": "09_roue_etroite.png",
+      "caption": "Roue en 390 × 844. Contrôle de disposition uniquement, pas une partie tactile complète.",
+      "source": "HYBRID-survival-08",
+      "source_sha256": "ed80f15dfb78c4d594a4fb586a7bc5840249284038dce832f065c61ad938c02f",
+      "image_sha256": "0a9a20e0260083c99054872b85e74075aa83a0b5d69fe94c7b4476608dd2a528",
+      "state_sha256": "e48150a5e71b4a056beec0b8799ba832217f458fed90c6b13f48b3f143655759"
+    },
+    {
+      "file": "10_convoi_ordres.png",
+      "caption": "Ordres disponibles pendant l’escorte, à partir de l’état gagné aux paliers supérieurs.",
+      "source": "closed-gate-s35",
+      "source_sha256": "a05bfd7daa83694d83e09bb7470cca84ee4b9c909439710f034f813bd66afa49",
+      "image_sha256": "c28291e62d8a80514dd706643df3ae4e48836f6b333fe8c4f62ef8d234f98139",
+      "state_sha256": "2233f028a86c37adfff67c6cd02ba04d2d55dc54924fc90917537933ad31b734"
+    }
+  ],
+  "storage": "Explicit in-memory fixture. Native navigation is probed separately and blocked by the environment.",
+  "controller": "Synthetic standard Gamepad objects through navigator.getGamepads; not physical hardware tests."
+}

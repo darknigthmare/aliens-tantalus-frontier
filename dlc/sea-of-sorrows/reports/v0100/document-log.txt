@@ -1,0 +1,29 @@
+PASS reports/RAPPORT_ILLUSTRE.html version courante
+PASS reports/RAPPORT_ILLUSTRE.html aucun identifiant dupliqué
+PASS reports/RAPPORT_ILLUSTRE.html liens internes valides
+PASS reports/RAPPORT_ILLUSTRE.html fidélité partielle visible
+PASS Onze images du rapport
+PASS Scènes préparées déclarées
+PASS reports/RAPPORT_ILLUSTRE.html 1440px pas de débordement horizontal global
+PASS reports/RAPPORT_ILLUSTRE.html 1024px pas de débordement horizontal global
+PASS reports/RAPPORT_ILLUSTRE.html 390px pas de débordement horizontal global
+PASS reports/RAPPORT_ILLUSTRE.html 360px pas de débordement horizontal global
+PASS CODEX_MER_DES_CHAGRINS.html version courante
+PASS CODEX_MER_DES_CHAGRINS.html aucun identifiant dupliqué
+PASS CODEX_MER_DES_CHAGRINS.html liens internes valides
+PASS CODEX_MER_DES_CHAGRINS.html fidélité partielle visible
+PASS 50 fiches avec schéma
+PASS CODEX_MER_DES_CHAGRINS.html 1440px pas de débordement horizontal global
+PASS CODEX_MER_DES_CHAGRINS.html 1024px pas de débordement horizontal global
+PASS CODEX_MER_DES_CHAGRINS.html 390px pas de débordement horizontal global
+PASS CODEX_MER_DES_CHAGRINS.html 360px pas de débordement horizontal global
+PASS REGISTRE_FIDELITE_MER_DES_CHAGRINS.html version courante
+PASS REGISTRE_FIDELITE_MER_DES_CHAGRINS.html aucun identifiant dupliqué
+PASS REGISTRE_FIDELITE_MER_DES_CHAGRINS.html liens internes valides
+PASS REGISTRE_FIDELITE_MER_DES_CHAGRINS.html fidélité partielle visible
+PASS REGISTRE_FIDELITE_MER_DES_CHAGRINS.html 1440px pas de débordement horizontal global
+PASS REGISTRE_FIDELITE_MER_DES_CHAGRINS.html 1024px pas de débordement horizontal global
+PASS REGISTRE_FIDELITE_MER_DES_CHAGRINS.html 390px pas de débordement horizontal global
+PASS REGISTRE_FIDELITE_MER_DES_CHAGRINS.html 360px pas de débordement horizontal global
+PASS Aucune exception documentaire
+RESULT 28 0

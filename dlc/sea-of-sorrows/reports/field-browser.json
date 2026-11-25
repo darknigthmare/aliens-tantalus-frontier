@@ -1,0 +1,283 @@
+{
+  "version": "0.9.0",
+  "html_sha256": "0cc70544e2f3e38b63aa11b0aed0582b18017c0b5e2e0a73257432fcaae8864a",
+  "browser": "Chromium / Playwright",
+  "storage": "Explicit in-memory fixture; no native persistence certification",
+  "navigation": "Exact HTML loaded with set_content; no file/HTTP policy bypass",
+  "captures_use_fixed_simulation": true,
+  "captures_reposition_actors": false,
+  "human_playthrough": false,
+  "checks": [
+    {
+      "name": "Le catalogue et le moteur chargent la version 0.5 et 96 dossiers",
+      "pass": true
+    },
+    {
+      "name": "Le guide explique Ctrl, la réparation et les cycles",
+      "pass": true
+    },
+    {
+      "name": "Reprendre migre une vraie sauvegarde 0.2 vers le schéma 5",
+      "pass": true
+    },
+    {
+      "name": "La copie backup-v2 conserve exactement le fichier précédent",
+      "pass": true
+    },
+    {
+      "name": "La migration ne touche pas à la sentinelle du jeu hôte",
+      "pass": true
+    },
+    {
+      "name": "L’export contient le repère, les pièces et le schéma 5",
+      "pass": true
+    },
+    {
+      "name": "Ctrl + direction déclenche une esquive au clavier",
+      "pass": true
+    },
+    {
+      "name": "L’esquive déplace le joueur et débite son endurance",
+      "pass": true
+    },
+    {
+      "name": "Le délai bloque un deuxième déclenchement immédiat",
+      "pass": true
+    },
+    {
+      "name": "Pause fige également une esquive en cours",
+      "pass": true
+    },
+    {
+      "name": "Reprendre ne conserve pas une direction fantôme",
+      "pass": true
+    },
+    {
+      "name": "La carte locale expose le véritable danger des pompes",
+      "pass": true
+    },
+    {
+      "name": "L’emprise de profondeur du danger respecte ses données",
+      "pass": true
+    },
+    {
+      "name": "Un dispositif isolé apparaît comme tel sur la carte",
+      "pass": true
+    },
+    {
+      "name": "Les destinations sélectionnables se limitent aux lieux repérés",
+      "pass": true
+    },
+    {
+      "name": "Le bouton de repère calcule un trajet actuellement ouvert",
+      "pass": true
+    },
+    {
+      "name": "Le repère affiche une consigne sans déplacer le joueur",
+      "pass": true
+    },
+    {
+      "name": "Le repère est conservé par export/import",
+      "pass": true
+    },
+    {
+      "name": "Effacer retire aussi la consigne du HUD",
+      "pass": true
+    },
+    {
+      "name": "Le stock de renforts figure dans l’équipement",
+      "pass": true
+    },
+    {
+      "name": "La sauvegarde de réparation reprend un brancard réellement endommagé",
+      "pass": true
+    },
+    {
+      "name": "Maintenir K affiche la progression de réparation",
+      "pass": true
+    },
+    {
+      "name": "La progression de réparation est gelée dans Pause",
+      "pass": true
+    },
+    {
+      "name": "La réparation ne redémarre pas sans K",
+      "pass": true
+    },
+    {
+      "name": "K termine la réparation et restaure le châssis",
+      "pass": true
+    },
+    {
+      "name": "La réparation achevée consomme un seul renfort",
+      "pass": true
+    },
+    {
+      "name": "Maintenir K sur un châssis intact ne dépense rien",
+      "pass": true
+    },
+    {
+      "name": "L’avertissement d’un danger atteint le bandeau HUD",
+      "pass": true
+    },
+    {
+      "name": "Le danger est effectivement dans sa phase de préavis",
+      "pass": true
+    },
+    {
+      "name": "La sauvegarde conserve l’horloge locale du danger",
+      "pass": true
+    },
+    {
+      "name": "Le réarmement met durablement le danger à l’arrêt",
+      "pass": true
+    },
+    {
+      "name": "Le préavis de frappe est affiché dans le HUD",
+      "pass": true
+    },
+    {
+      "name": "La pose capturée correspond à une vraie esquive active",
+      "pass": true
+    },
+    {
+      "name": "Le plan n’affiche aucune position de créature",
+      "pass": true
+    },
+    {
+      "name": "Le HUD ne déborde pas horizontalement en 390 × 844",
+      "pass": true
+    },
+    {
+      "name": "Le jeu conserve ses commandes tactiles de base en format étroit",
+      "pass": true
+    },
+    {
+      "name": "Le sélecteur de repère est accessible en format étroit",
+      "pass": true
+    },
+    {
+      "name": "HUD, terrain et mission restent séparés en 1024 × 768",
+      "pass": true
+    },
+    {
+      "name": "Aucune exception JavaScript pendant la régression des fonctions 0.3",
+      "pass": true
+    },
+    {
+      "name": "Le prototype ne charge aucune ressource distante",
+      "pass": true
+    }
+  ],
+  "passed": 40,
+  "failed": 0,
+  "captures": [
+    {
+      "file": "01_titre.png",
+      "description": "Écran titre de la v0.5.0, rendu par le HTML autonome.",
+      "provenance": "title",
+      "source_save": null,
+      "source_sha256": null,
+      "image_sha256": "7a1fc2d12ae77c5d4086f617246a9186b86eadb0d46663c9e9c7fac6db2b338c"
+    },
+    {
+      "file": "02_pompes_preavis.png",
+      "description": "Pompes : préavis avant émission de vapeur. Sauvegarde du parcours HYBRIDE / Survie ; rendu figé sans replacer les acteurs.",
+      "provenance": "continuous_save",
+      "source_save": "s42-warning",
+      "source_sha256": "6663f7c9be1cae567dabe56830a8cef53a422bdaa408efb7a55c090125bb60bd",
+      "image_sha256": "3cf5bc88c02dfc83b6655b310cc024260906f83f1bc80584c8c74e9f5e5483ad"
+    },
+    {
+      "file": "03_pompes_consignees.png",
+      "description": "Même passage après intervention : émission définitivement isolée, état issu du même parcours enregistré.",
+      "provenance": "continuous_save",
+      "source_save": "s42-isolated",
+      "source_sha256": "3259957cda787b73f1bbddb33f74634fab6c7dcc09b31324ae7d3541335d8072",
+      "image_sha256": "36573554069c3fb40b7aa7e13aee15aff1aafd295a95dda0bb7d737d7ad5df88"
+    },
+    {
+      "file": "04_esplanade.png",
+      "description": "Esplanade : pilier central et chemins de contournement. Position issue du parcours, sans déplacement pour la photo.",
+      "provenance": "continuous_save",
+      "source_save": "layout-s22",
+      "source_sha256": "174e380a0260df4373f47af83b8c9e3703310afb3b5cc3110c90bf48fc35d595",
+      "image_sha256": "5712230f33a7c3e8fc4078b72e8bc4f4bf1bb9031c9967b392a24508a0aa3cd3"
+    },
+    {
+      "file": "05_noeud_ambre.png",
+      "description": "Nœud ambré : volumes de silice et résine, passages latéraux et profondeur utile. État de parcours figé.",
+      "provenance": "continuous_save",
+      "source_save": "layout-s27",
+      "source_sha256": "310a70bce7ec5e93599547375ffb37f7603d1f0f5461a6bce0d45850266ca624",
+      "image_sha256": "a1a77fc9823321c942f115bfcb10583c27d812d902584de98e67386163f0ce9d"
+    },
+    {
+      "file": "06_ponte.png",
+      "description": "Zone de ponte : obstacles restructurés et desserte lisible. État du parcours continu.",
+      "provenance": "continuous_save",
+      "source_save": "layout-s32",
+      "source_sha256": "69ffd5baa3fa857df166447d3dd6a96ee9f24c4c5eacc67e7b9e33d2f92dcf16",
+      "image_sha256": "6fce92c1ecfd026a53ea6e8d62bfae049bca39a547dbb33128b4b6a6deca046d"
+    },
+    {
+      "file": "07_reine_preavis.png",
+      "description": "Reine : l’empreinte d’attaque est fixée au sol pendant sa préparation. Instant enregistré en combat, avant la décision d’esquive.",
+      "provenance": "continuous_save",
+      "source_save": "attack-s33",
+      "source_sha256": "753e8b74299c766f4284f7e5ec0f19dd251a87d04253cf996ab6cbc653f4e238",
+      "image_sha256": "4da939baf5cbb651d70209ff5d692040155fc9af299e6704f4ac1771d3e20bab"
+    },
+    {
+      "file": "08_esquive.png",
+      "description": "Même rencontre, une étape de simulation plus tard : esquive exécutée par une entrée normale du moteur. Endurance réellement consommée.",
+      "provenance": "continuous_save",
+      "source_save": "dodge",
+      "source_sha256": "b53b409229821bc8f89c11b187e1c1786dc6f40f4c6cbcd17f36f5a43a377ab0",
+      "image_sha256": "ae370fd8e447b987aadc57c892198aa3b6acecdff55d168bee52dfb3851edf2f"
+    },
+    {
+      "file": "09_convoi.png",
+      "description": "Entrée du treuil avec Adams et Elway : deux brancards physiques. Sauvegarde du parcours continu ; aucune intégrité ni position modifiée.",
+      "provenance": "continuous_save",
+      "source_save": "convoy",
+      "source_sha256": "b843f137bdb7fb42a53e0a0ad726e5b133838eb5ec59b587185e260dd9d8bf85",
+      "image_sha256": "6859f1e484207dc9de9dc547e3b95692015e44cd54dfe0f37f05a28bb6ec53be"
+    },
+    {
+      "file": "10_reparation.png",
+      "description": "Scénario ciblé repris du parcours : halte volontaire sous la vapeur, dégâts réels, puis réparation avec K. Sauvegarde à mi-réparation ; une entrée K de 0,001 s réaffiche la barre.",
+      "provenance": "targeted_played_scenario",
+      "source_save": "repair-played",
+      "source_sha256": "2e5176de9418bf76d2245a4f0f7b032534ecef5cf976149c6367c8b863c4958d",
+      "image_sha256": "c4b27af49f7c90456bb8138354ce8ca988560b6d541d5652c0c4bf6af9511e63"
+    },
+    {
+      "file": "11_capture.png",
+      "description": "Capture réussie après arrimage du convoi. Spécimen vivant et mousse consommée dans le parcours complet.",
+      "provenance": "continuous_save",
+      "source_save": "HYBRID-survival-30",
+      "source_sha256": "1c1b80b0a0812480a5c3170b76bed5a8c235be141b2273398299e02b74a6729f",
+      "image_sha256": "03904f03ab6d7c4a4fdf2e3a907a5925d085760b019382fc1b44571846d7c8b7"
+    },
+    {
+      "file": "12_plan_local.png",
+      "description": "Carte du passage des pompes : emprise de vapeur issue des coordonnées de collision, portes et intervention. Carte ouverte depuis la sauvegarde réelle.",
+      "provenance": "continuous_save_ui",
+      "source_save": "s42-warning",
+      "source_sha256": "6663f7c9be1cae567dabe56830a8cef53a422bdaa408efb7a55c090125bb60bd",
+      "image_sha256": "38ca8d917bdb5638fe72595d1ab6115e9e42e570d4cf21d329271b04a9b6a74e"
+    },
+    {
+      "file": "13_format_etroit.png",
+      "description": "Fenêtre 390 × 844 : présentation du même jeu et commandes tactiles de base. Clavier et souris restent nécessaires pour toutes les fonctions.",
+      "provenance": "continuous_save_responsive",
+      "source_save": "s42-isolated",
+      "source_sha256": "3259957cda787b73f1bbddb33f74634fab6c7dcc09b31324ae7d3541335d8072",
+      "image_sha256": "03a0a685d96e3ce44c4f5d70de8dc1b993aa68f7fa8f457d04dc540c38e7f8a1"
+    }
+  ],
+  "errors": [],
+  "network_requests": [],
+  "fatal": null
+}

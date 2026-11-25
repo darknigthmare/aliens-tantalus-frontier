@@ -1,0 +1,1276 @@
+[
+  {
+    "room": "s02",
+    "pair": "link-01",
+    "before": [
+      2140,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s02",
+    "pair": "link-02",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      2140,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s05",
+    "pair": "link-04",
+    "before": [
+      1700,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s05",
+    "pair": "link-06",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      1700,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s08",
+    "pair": "link-07",
+    "before": [
+      1660,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s08",
+    "pair": "link-08",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      1660,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s09",
+    "pair": "link-08",
+    "before": [
+      1980,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s09",
+    "pair": "link-09",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      1980,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s10",
+    "pair": "link-09",
+    "before": [
+      2380,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s10",
+    "pair": "link-10",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      2380,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s11",
+    "pair": "link-42",
+    "before": [
+      1178,
+      0.15
+    ],
+    "after": [
+      1180,
+      0.18
+    ],
+    "mount": "back"
+  },
+  {
+    "room": "s11",
+    "pair": "link-51",
+    "before": [
+      2150,
+      0.15
+    ],
+    "after": [
+      2140,
+      0.82
+    ],
+    "mount": "front"
+  },
+  {
+    "room": "s12",
+    "pair": "link-11",
+    "before": [
+      1840,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s12",
+    "pair": "link-12",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      1840,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s13",
+    "pair": "link-12",
+    "before": [
+      1660,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s13",
+    "pair": "link-13",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      1660,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s13",
+    "pair": "link-46",
+    "before": [
+      1373,
+      0.55
+    ],
+    "after": [
+      1380,
+      0.18
+    ],
+    "mount": "back"
+  },
+  {
+    "room": "s14",
+    "pair": "link-13",
+    "before": [
+      2140,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s14",
+    "pair": "link-14",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      2140,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s15",
+    "pair": "link-14",
+    "before": [
+      2020,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s15",
+    "pair": "link-15",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      2020,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s16",
+    "pair": "link-15",
+    "before": [
+      2180,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s16",
+    "pair": "link-16",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      2180,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s16",
+    "pair": "link-19",
+    "before": [
+      1049,
+      0.15
+    ],
+    "after": [
+      1020,
+      0.18
+    ],
+    "mount": "back"
+  },
+  {
+    "room": "s17",
+    "pair": "link-16",
+    "before": [
+      1860,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s17",
+    "pair": "link-17",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      1860,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s17",
+    "pair": "link-47",
+    "before": [
+      1680,
+      0.15
+    ],
+    "after": [
+      300,
+      0.18
+    ],
+    "mount": "back"
+  },
+  {
+    "room": "s17",
+    "pair": "link-54",
+    "before": [
+      1210,
+      0.55
+    ],
+    "after": [
+      1340,
+      0.82
+    ],
+    "mount": "front"
+  },
+  {
+    "room": "s18",
+    "pair": "link-17",
+    "before": [
+      2320,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s18",
+    "pair": "link-18",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      2320,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s18",
+    "pair": "link-52",
+    "before": [
+      590,
+      0.55
+    ],
+    "after": [
+      580,
+      0.82
+    ],
+    "mount": "front"
+  },
+  {
+    "room": "s18",
+    "pair": "link-56",
+    "before": [
+      1940,
+      0.55
+    ],
+    "after": [
+      1940,
+      0.18
+    ],
+    "mount": "back"
+  },
+  {
+    "room": "s19",
+    "pair": "link-18",
+    "before": [
+      2780,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s19",
+    "pair": "link-19",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      1820,
+      0.82
+    ],
+    "mount": "front"
+  },
+  {
+    "room": "s19",
+    "pair": "link-20",
+    "before": [
+      1325,
+      0.15
+    ],
+    "after": [
+      2780,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s19",
+    "pair": "link-21",
+    "before": [
+      1958,
+      0.85
+    ],
+    "after": [
+      1960,
+      0.18
+    ],
+    "mount": "back"
+  },
+  {
+    "room": "s20",
+    "pair": "link-20",
+    "before": [
+      2020,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s20",
+    "pair": "link-28",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      900,
+      0.18
+    ],
+    "mount": "back"
+  },
+  {
+    "room": "s21",
+    "pair": "link-21",
+    "before": [
+      2460,
+      0.55
+    ],
+    "after": [
+      1840,
+      0.82
+    ],
+    "mount": "front"
+  },
+  {
+    "room": "s21",
+    "pair": "link-22",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      2460,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s21",
+    "pair": "link-48",
+    "before": [
+      2170,
+      0.15
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s22",
+    "pair": "link-22",
+    "before": [
+      2760,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s22",
+    "pair": "link-23",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      2760,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s22",
+    "pair": "link-24",
+    "before": [
+      1316,
+      0.15
+    ],
+    "after": [
+      1320,
+      0.18
+    ],
+    "mount": "back"
+  },
+  {
+    "room": "s23",
+    "pair": "link-23",
+    "before": [
+      1760,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s23",
+    "pair": "link-25",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      1760,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s24",
+    "pair": "link-24",
+    "before": [
+      2020,
+      0.55
+    ],
+    "after": [
+      1560,
+      0.82
+    ],
+    "mount": "front"
+  },
+  {
+    "room": "s24",
+    "pair": "link-26",
+    "before": [
+      975,
+      0.15
+    ],
+    "after": [
+      2020,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s25",
+    "pair": "link-26",
+    "before": [
+      2580,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s25",
+    "pair": "link-27",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      2580,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s26",
+    "pair": "link-27",
+    "before": [
+      2020,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s26",
+    "pair": "link-28",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      1220,
+      0.82
+    ],
+    "mount": "front"
+  },
+  {
+    "room": "s26",
+    "pair": "link-29",
+    "before": [
+      975,
+      0.15
+    ],
+    "after": [
+      2020,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s27",
+    "pair": "link-29",
+    "before": [
+      2580,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s27",
+    "pair": "link-30",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      2580,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s27",
+    "pair": "link-32",
+    "before": [
+      1233,
+      0.15
+    ],
+    "after": [
+      1240,
+      0.18
+    ],
+    "mount": "back"
+  },
+  {
+    "room": "s28",
+    "pair": "link-30",
+    "before": [
+      1860,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s28",
+    "pair": "link-31",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      1860,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s29",
+    "pair": "link-31",
+    "before": [
+      2120,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s29",
+    "pair": "link-32",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      1360,
+      0.82
+    ],
+    "mount": "front"
+  },
+  {
+    "room": "s29",
+    "pair": "link-33",
+    "before": [
+      1021,
+      0.15
+    ],
+    "after": [
+      2120,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s29",
+    "pair": "link-49",
+    "before": [
+      1870,
+      0.15
+    ],
+    "after": [
+      1860,
+      0.18
+    ],
+    "mount": "back"
+  },
+  {
+    "room": "s30",
+    "pair": "link-33",
+    "before": [
+      2200,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s30",
+    "pair": "link-34",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      2200,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s31",
+    "pair": "link-34",
+    "before": [
+      2320,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s31",
+    "pair": "link-35",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      2320,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s31",
+    "pair": "link-38",
+    "before": [
+      1113,
+      0.15
+    ],
+    "after": [
+      1100,
+      0.18
+    ],
+    "mount": "back"
+  },
+  {
+    "room": "s31",
+    "pair": "link-53",
+    "before": [
+      680,
+      0.77
+    ],
+    "after": [
+      680,
+      0.82
+    ],
+    "mount": "front"
+  },
+  {
+    "room": "s32",
+    "pair": "link-35",
+    "before": [
+      2720,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s32",
+    "pair": "link-36",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      2720,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s33",
+    "pair": "link-36",
+    "before": [
+      2940,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s33",
+    "pair": "link-37",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      2940,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s34",
+    "pair": "link-37",
+    "before": [
+      2040,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s34",
+    "pair": "link-38",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      1320,
+      0.82
+    ],
+    "mount": "front"
+  },
+  {
+    "room": "s34",
+    "pair": "link-39",
+    "before": [
+      984,
+      0.15
+    ],
+    "after": [
+      2040,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s35",
+    "pair": "link-39",
+    "before": [
+      2560,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s35",
+    "pair": "link-40",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      2560,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s35",
+    "pair": "link-50",
+    "before": [
+      2075,
+      0.55
+    ],
+    "after": [
+      2080,
+      0.18
+    ],
+    "mount": "back"
+  },
+  {
+    "room": "s35",
+    "pair": "link-57",
+    "before": [
+      1550,
+      0.55
+    ],
+    "after": [
+      1540,
+      0.82
+    ],
+    "mount": "front"
+  },
+  {
+    "room": "s36",
+    "pair": "link-40",
+    "before": [
+      2600,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s36",
+    "pair": "link-41",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      2600,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s37",
+    "pair": "link-42",
+    "before": [
+      2300,
+      0.55
+    ],
+    "after": [
+      1700,
+      0.82
+    ],
+    "mount": "front"
+  },
+  {
+    "room": "s37",
+    "pair": "link-43",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      2300,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s39",
+    "pair": "link-44",
+    "before": [
+      1980,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s39",
+    "pair": "link-45",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      1980,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s40",
+    "pair": "link-45",
+    "before": [
+      1720,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s41",
+    "pair": "link-46",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      820,
+      0.82
+    ],
+    "mount": "front"
+  },
+  {
+    "room": "s42",
+    "pair": "link-47",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      1720,
+      0.82
+    ],
+    "mount": "front"
+  },
+  {
+    "room": "s42",
+    "pair": "link-52",
+    "before": [
+      2030,
+      0.55
+    ],
+    "after": [
+      340,
+      0.18
+    ],
+    "mount": "back"
+  },
+  {
+    "room": "s43",
+    "pair": "link-48",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      1740,
+      0.55
+    ],
+    "mount": "right"
+  },
+  {
+    "room": "s44",
+    "pair": "link-49",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      1440,
+      0.82
+    ],
+    "mount": "front"
+  },
+  {
+    "room": "s44",
+    "pair": "link-53",
+    "before": [
+      1920,
+      0.55
+    ],
+    "after": [
+      780,
+      0.18
+    ],
+    "mount": "back"
+  },
+  {
+    "room": "s45",
+    "pair": "link-50",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      1040,
+      0.82
+    ],
+    "mount": "front"
+  },
+  {
+    "room": "s45",
+    "pair": "link-59",
+    "before": [
+      1620,
+      0.55
+    ],
+    "after": [
+      100,
+      0.55
+    ],
+    "mount": "left"
+  },
+  {
+    "room": "s46",
+    "pair": "link-51",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      940,
+      0.18
+    ],
+    "mount": "back"
+  },
+  {
+    "room": "s47",
+    "pair": "link-54",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      820,
+      0.18
+    ],
+    "mount": "back"
+  },
+  {
+    "room": "s48",
+    "pair": "link-56",
+    "before": [
+      2480,
+      0.55
+    ],
+    "after": [
+      1660,
+      0.82
+    ],
+    "mount": "front"
+  },
+  {
+    "room": "s49",
+    "pair": "link-57",
+    "before": [
+      100,
+      0.55
+    ],
+    "after": [
+      860,
+      0.18
+    ],
+    "mount": "back"
+  }
+]

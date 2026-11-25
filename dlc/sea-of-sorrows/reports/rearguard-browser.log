@@ -1,0 +1,41 @@
+PASS HTML v0.5, schéma 6 et 102 dossiers chargés
+CAPTURE 01_titre.png
+PASS Guide : cloisons, position de Manning et lectures expliqués
+PASS Migration 0.3→0.5 par Reprendre sans changer les objectifs
+PASS Copie originale backup-v3 conservée exactement
+PASS Les sauvegardes du jeu hôte ne sont pas écrasées
+PASS G maintenu progresse sans ouverture instantanée
+CAPTURE 03_manoeuvre.png
+PASS Pause fige aussi une manœuvre de cloison
+PASS Reprendre ne garde pas la touche G enfoncée
+PASS La réouverture au clavier libère effectivement la collision
+PASS Une manœuvre terminée augmente le compteur une seule fois
+PASS Clic droit : ordre de position sans tir parasite
+PASS Manning marche vers le point sans téléportation
+PASS Manning atteint le point et le tient
+CAPTURE 08_manning.png
+PASS V rappelle Manning et annule le point
+PASS La carte utilise l’état réel de la cloison
+PASS Un clic sur le plan local donne aussi une position praticable
+PASS Le plan ne contient aucune balise de position ennemie
+PASS Espace révèle la lecture et sa progression à l’écran
+CAPTURE 06_perception.png
+PASS La lecture consigne un seul nouveau dossier
+PASS La lecture facultative ne valide pas un objectif principal
+PASS La perception se relit dans les dossiers débloqués
+CAPTURE 02_cloison.png
+CAPTURE 04_impact.png
+CAPTURE 05_rupture.png
+CAPTURE 09_convoi.png
+CAPTURE 10_ponte.png
+PASS Le HUD signale une cloison fermée sur le prochain passage
+PASS Le plan précise quelle cloison locale doit être ouverte
+CAPTURE 07_plan.png
+PASS Bilan final : 8 lectures et 16 manœuvres conservées
+CAPTURE 11_bilan.png
+PASS Format 960 × 720 sans débordement horizontal de la page
+CAPTURE 12_format_960.png
+PASS 48 rendus ciblés : 8 cloisons × 3 états × 2 présentations
+PASS Aucune erreur JavaScript dans cette suite
+PASS Aucune dépendance réseau du HTML autonome
+RESULT 28 0

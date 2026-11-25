@@ -1,0 +1,1697 @@
+[
+  {
+    "room": "s01",
+    "id": "link-01-a",
+    "pair": "link-01",
+    "old": {
+      "x": 1860,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1860,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "exterior-path"
+  },
+  {
+    "room": "s02",
+    "id": "link-01-b",
+    "pair": "link-01",
+    "old": {
+      "x": 2140,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "exterior-path"
+  },
+  {
+    "room": "s02",
+    "id": "link-02-a",
+    "pair": "link-02",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 2140,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "transit"
+  },
+  {
+    "room": "s03",
+    "id": "link-03-a",
+    "pair": "link-03",
+    "old": {
+      "x": 1480,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1480,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "transit"
+  },
+  {
+    "room": "s04",
+    "id": "link-04-a",
+    "pair": "link-04",
+    "old": {
+      "x": 1860,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1860,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "urban-transit"
+  },
+  {
+    "room": "s05",
+    "id": "link-04-b",
+    "pair": "link-04",
+    "old": {
+      "x": 1700,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "urban-transit"
+  },
+  {
+    "room": "s04",
+    "id": "link-05-a",
+    "pair": "link-05",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s06",
+    "id": "link-05-b",
+    "pair": "link-05",
+    "old": {
+      "x": 1560,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1560,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s05",
+    "id": "link-06-a",
+    "pair": "link-06",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1700,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "interlude"
+  },
+  {
+    "room": "s07",
+    "id": "link-07-a",
+    "pair": "link-07",
+    "old": {
+      "x": 1620,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1620,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s08",
+    "id": "link-07-b",
+    "pair": "link-07",
+    "old": {
+      "x": 1660,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s08",
+    "id": "link-08-a",
+    "pair": "link-08",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1660,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s09",
+    "id": "link-08-b",
+    "pair": "link-08",
+    "old": {
+      "x": 1980,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s09",
+    "id": "link-09-a",
+    "pair": "link-09",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1980,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s10",
+    "id": "link-09-b",
+    "pair": "link-09",
+    "old": {
+      "x": 2380,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s10",
+    "id": "link-10-a",
+    "pair": "link-10",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 2380,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "boarding"
+  },
+  {
+    "room": "s11",
+    "id": "link-11-a",
+    "pair": "link-11",
+    "old": {
+      "x": 2460,
+      "z": 0.55
+    },
+    "new": {
+      "x": 2460,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "building-entrance"
+  },
+  {
+    "room": "s12",
+    "id": "link-11-b",
+    "pair": "link-11",
+    "old": {
+      "x": 1840,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s12",
+    "id": "link-12-a",
+    "pair": "link-12",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1840,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s13",
+    "id": "link-12-b",
+    "pair": "link-12",
+    "old": {
+      "x": 1660,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s13",
+    "id": "link-13-a",
+    "pair": "link-13",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1660,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s14",
+    "id": "link-13-b",
+    "pair": "link-13",
+    "old": {
+      "x": 2140,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s14",
+    "id": "link-14-a",
+    "pair": "link-14",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 2140,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "lift-cage"
+  },
+  {
+    "room": "s15",
+    "id": "link-14-b",
+    "pair": "link-14",
+    "old": {
+      "x": 2020,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "lift-cage"
+  },
+  {
+    "room": "s15",
+    "id": "link-15-a",
+    "pair": "link-15",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 2020,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s16",
+    "id": "link-15-b",
+    "pair": "link-15",
+    "old": {
+      "x": 2180,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s16",
+    "id": "link-16-a",
+    "pair": "link-16",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 2180,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s17",
+    "id": "link-16-b",
+    "pair": "link-16",
+    "old": {
+      "x": 1860,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s17",
+    "id": "link-17-a",
+    "pair": "link-17",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1860,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s18",
+    "id": "link-17-b",
+    "pair": "link-17",
+    "old": {
+      "x": 2320,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s18",
+    "id": "link-18-a",
+    "pair": "link-18",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 2320,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s19",
+    "id": "link-18-b",
+    "pair": "link-18",
+    "old": {
+      "x": 2780,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s16",
+    "id": "link-19-a",
+    "pair": "link-19",
+    "old": {
+      "x": 1049,
+      "z": 0.15
+    },
+    "new": {
+      "x": 1049,
+      "z": 0.18
+    },
+    "mount": "back",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s19",
+    "id": "link-19-b",
+    "pair": "link-19",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1843,
+      "z": 0.82
+    },
+    "mount": "front",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s19",
+    "id": "link-20-a",
+    "pair": "link-20",
+    "old": {
+      "x": 1325,
+      "z": 0.15
+    },
+    "new": {
+      "x": 2780,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s20",
+    "id": "link-20-b",
+    "pair": "link-20",
+    "old": {
+      "x": 2020,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s19",
+    "id": "link-21-a",
+    "pair": "link-21",
+    "old": {
+      "x": 1958,
+      "z": 0.85
+    },
+    "new": {
+      "x": 1958,
+      "z": 0.18
+    },
+    "mount": "back",
+    "type": "stairwell"
+  },
+  {
+    "room": "s21",
+    "id": "link-21-b",
+    "pair": "link-21",
+    "old": {
+      "x": 2460,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1798,
+      "z": 0.82
+    },
+    "mount": "front",
+    "type": "stairwell"
+  },
+  {
+    "room": "s21",
+    "id": "link-22-a",
+    "pair": "link-22",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 2460,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s22",
+    "id": "link-22-b",
+    "pair": "link-22",
+    "old": {
+      "x": 2760,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s22",
+    "id": "link-23-a",
+    "pair": "link-23",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 2760,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s23",
+    "id": "link-23-b",
+    "pair": "link-23",
+    "old": {
+      "x": 1760,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s22",
+    "id": "link-24-a",
+    "pair": "link-24",
+    "old": {
+      "x": 1316,
+      "z": 0.15
+    },
+    "new": {
+      "x": 1316,
+      "z": 0.18
+    },
+    "mount": "back",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s24",
+    "id": "link-24-b",
+    "pair": "link-24",
+    "old": {
+      "x": 2020,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1517,
+      "z": 0.82
+    },
+    "mount": "front",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s23",
+    "id": "link-25-a",
+    "pair": "link-25",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1760,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "crawl-opening"
+  },
+  {
+    "room": "s24",
+    "id": "link-25-b",
+    "pair": "link-25",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "crawl-opening"
+  },
+  {
+    "room": "s24",
+    "id": "link-26-a",
+    "pair": "link-26",
+    "old": {
+      "x": 975,
+      "z": 0.15
+    },
+    "new": {
+      "x": 2020,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s25",
+    "id": "link-26-b",
+    "pair": "link-26",
+    "old": {
+      "x": 2580,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s25",
+    "id": "link-27-a",
+    "pair": "link-27",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 2580,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s26",
+    "id": "link-27-b",
+    "pair": "link-27",
+    "old": {
+      "x": 2020,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s20",
+    "id": "link-28-a",
+    "pair": "link-28",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 806,
+      "z": 0.18
+    },
+    "mount": "back",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s26",
+    "id": "link-28-b",
+    "pair": "link-28",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1197,
+      "z": 0.82
+    },
+    "mount": "front",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s26",
+    "id": "link-29-a",
+    "pair": "link-29",
+    "old": {
+      "x": 975,
+      "z": 0.15
+    },
+    "new": {
+      "x": 2020,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s27",
+    "id": "link-29-b",
+    "pair": "link-29",
+    "old": {
+      "x": 2580,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s27",
+    "id": "link-30-a",
+    "pair": "link-30",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 2580,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s28",
+    "id": "link-30-b",
+    "pair": "link-30",
+    "old": {
+      "x": 1860,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s28",
+    "id": "link-31-a",
+    "pair": "link-31",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1860,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s29",
+    "id": "link-31-b",
+    "pair": "link-31",
+    "old": {
+      "x": 2120,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s27",
+    "id": "link-32-a",
+    "pair": "link-32",
+    "old": {
+      "x": 1233,
+      "z": 0.15
+    },
+    "new": {
+      "x": 1233,
+      "z": 0.18
+    },
+    "mount": "back",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s29",
+    "id": "link-32-b",
+    "pair": "link-32",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1421,
+      "z": 0.82
+    },
+    "mount": "front",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s29",
+    "id": "link-33-a",
+    "pair": "link-33",
+    "old": {
+      "x": 1021,
+      "z": 0.15
+    },
+    "new": {
+      "x": 2120,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s30",
+    "id": "link-33-b",
+    "pair": "link-33",
+    "old": {
+      "x": 2200,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s30",
+    "id": "link-34-a",
+    "pair": "link-34",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 2200,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s31",
+    "id": "link-34-b",
+    "pair": "link-34",
+    "old": {
+      "x": 2320,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s31",
+    "id": "link-35-a",
+    "pair": "link-35",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 2320,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s32",
+    "id": "link-35-b",
+    "pair": "link-35",
+    "old": {
+      "x": 2720,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s32",
+    "id": "link-36-a",
+    "pair": "link-36",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 2720,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s33",
+    "id": "link-36-b",
+    "pair": "link-36",
+    "old": {
+      "x": 2940,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s33",
+    "id": "link-37-a",
+    "pair": "link-37",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 2940,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s34",
+    "id": "link-37-b",
+    "pair": "link-37",
+    "old": {
+      "x": 2040,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s31",
+    "id": "link-38-a",
+    "pair": "link-38",
+    "old": {
+      "x": 1113,
+      "z": 0.15
+    },
+    "new": {
+      "x": 1113,
+      "z": 0.18
+    },
+    "mount": "back",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s34",
+    "id": "link-38-b",
+    "pair": "link-38",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1370,
+      "z": 0.82
+    },
+    "mount": "front",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s34",
+    "id": "link-39-a",
+    "pair": "link-39",
+    "old": {
+      "x": 984,
+      "z": 0.15
+    },
+    "new": {
+      "x": 2040,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "stairwell"
+  },
+  {
+    "room": "s35",
+    "id": "link-39-b",
+    "pair": "link-39",
+    "old": {
+      "x": 2560,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "stairwell"
+  },
+  {
+    "room": "s35",
+    "id": "link-40-a",
+    "pair": "link-40",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 2560,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "stairwell"
+  },
+  {
+    "room": "s36",
+    "id": "link-40-b",
+    "pair": "link-40",
+    "old": {
+      "x": 2600,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "stairwell"
+  },
+  {
+    "room": "s36",
+    "id": "link-41-a",
+    "pair": "link-41",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 2600,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "exterior-path"
+  },
+  {
+    "room": "s11",
+    "id": "link-41-b",
+    "pair": "link-41",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "exterior-path"
+  },
+  {
+    "room": "s11",
+    "id": "link-42-a",
+    "pair": "link-42",
+    "old": {
+      "x": 1178,
+      "z": 0.15
+    },
+    "new": {
+      "x": 1178,
+      "z": 0.18
+    },
+    "mount": "back",
+    "type": "boarding-ramp"
+  },
+  {
+    "room": "s37",
+    "id": "link-42-b",
+    "pair": "link-42",
+    "old": {
+      "x": 2300,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1696,
+      "z": 0.82
+    },
+    "mount": "front",
+    "type": "boarding-ramp"
+  },
+  {
+    "room": "s37",
+    "id": "link-43-a",
+    "pair": "link-43",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 2300,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "boarding"
+  },
+  {
+    "room": "s38",
+    "id": "link-44-a",
+    "pair": "link-44",
+    "old": {
+      "x": 1740,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1740,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s39",
+    "id": "link-44-b",
+    "pair": "link-44",
+    "old": {
+      "x": 1980,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s39",
+    "id": "link-45-a",
+    "pair": "link-45",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1980,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s40",
+    "id": "link-45-b",
+    "pair": "link-45",
+    "old": {
+      "x": 1720,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s13",
+    "id": "link-46-a",
+    "pair": "link-46",
+    "old": {
+      "x": 1373,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1373,
+      "z": 0.18
+    },
+    "mount": "back",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s41",
+    "id": "link-46-b",
+    "pair": "link-46",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 947,
+      "z": 0.82
+    },
+    "mount": "front",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s17",
+    "id": "link-47-a",
+    "pair": "link-47",
+    "old": {
+      "x": 1680,
+      "z": 0.15
+    },
+    "new": {
+      "x": 425,
+      "z": 0.18
+    },
+    "mount": "back",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s42",
+    "id": "link-47-b",
+    "pair": "link-47",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1728,
+      "z": 0.82
+    },
+    "mount": "front",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s21",
+    "id": "link-48-a",
+    "pair": "link-48",
+    "old": {
+      "x": 2170,
+      "z": 0.15
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s43",
+    "id": "link-48-b",
+    "pair": "link-48",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1740,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s29",
+    "id": "link-49-a",
+    "pair": "link-49",
+    "old": {
+      "x": 1870,
+      "z": 0.15
+    },
+    "new": {
+      "x": 1870,
+      "z": 0.18
+    },
+    "mount": "back",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s44",
+    "id": "link-49-b",
+    "pair": "link-49",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1312,
+      "z": 0.82
+    },
+    "mount": "front",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s35",
+    "id": "link-50-a",
+    "pair": "link-50",
+    "old": {
+      "x": 2075,
+      "z": 0.55
+    },
+    "new": {
+      "x": 2075,
+      "z": 0.18
+    },
+    "mount": "back",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s45",
+    "id": "link-50-b",
+    "pair": "link-50",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1030,
+      "z": 0.82
+    },
+    "mount": "front",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s11",
+    "id": "link-51-a",
+    "pair": "link-51",
+    "old": {
+      "x": 2150,
+      "z": 0.15
+    },
+    "new": {
+      "x": 2150,
+      "z": 0.82
+    },
+    "mount": "front",
+    "type": "building-entrance"
+  },
+  {
+    "room": "s46",
+    "id": "link-51-b",
+    "pair": "link-51",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 950,
+      "z": 0.18
+    },
+    "mount": "back",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s42",
+    "id": "link-52-a",
+    "pair": "link-52",
+    "old": {
+      "x": 2030,
+      "z": 0.55
+    },
+    "new": {
+      "x": 516,
+      "z": 0.18
+    },
+    "mount": "back",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s18",
+    "id": "link-52-b",
+    "pair": "link-52",
+    "old": {
+      "x": 590,
+      "z": 0.55
+    },
+    "new": {
+      "x": 590,
+      "z": 0.82
+    },
+    "mount": "front",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s44",
+    "id": "link-53-a",
+    "pair": "link-53",
+    "old": {
+      "x": 1920,
+      "z": 0.55
+    },
+    "new": {
+      "x": 779,
+      "z": 0.18
+    },
+    "mount": "back",
+    "type": "rock-breach"
+  },
+  {
+    "room": "s31",
+    "id": "link-53-b",
+    "pair": "link-53",
+    "old": {
+      "x": 680,
+      "z": 0.77
+    },
+    "new": {
+      "x": 680,
+      "z": 0.82
+    },
+    "mount": "front",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s17",
+    "id": "link-54-a",
+    "pair": "link-54",
+    "old": {
+      "x": 1210,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1370,
+      "z": 0.82
+    },
+    "mount": "front",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s47",
+    "id": "link-54-b",
+    "pair": "link-54",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 821,
+      "z": 0.18
+    },
+    "mount": "back",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s47",
+    "id": "link-55-a",
+    "pair": "link-55",
+    "old": {
+      "x": 2060,
+      "z": 0.55
+    },
+    "new": {
+      "x": 2060,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s48",
+    "id": "link-55-b",
+    "pair": "link-55",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s48",
+    "id": "link-56-a",
+    "pair": "link-56",
+    "old": {
+      "x": 2480,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1651,
+      "z": 0.82
+    },
+    "mount": "front",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s18",
+    "id": "link-56-b",
+    "pair": "link-56",
+    "old": {
+      "x": 1940,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1940,
+      "z": 0.18
+    },
+    "mount": "back",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s35",
+    "id": "link-57-a",
+    "pair": "link-57",
+    "old": {
+      "x": 1550,
+      "z": 0.55
+    },
+    "new": {
+      "x": 1550,
+      "z": 0.82
+    },
+    "mount": "front",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s49",
+    "id": "link-57-b",
+    "pair": "link-57",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 851,
+      "z": 0.18
+    },
+    "mount": "back",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s49",
+    "id": "link-58-a",
+    "pair": "link-58",
+    "old": {
+      "x": 2140,
+      "z": 0.55
+    },
+    "new": {
+      "x": 2140,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s50",
+    "id": "link-58-b",
+    "pair": "link-58",
+    "old": {
+      "x": 100,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s50",
+    "id": "link-59-a",
+    "pair": "link-59",
+    "old": {
+      "x": 2320,
+      "z": 0.55
+    },
+    "new": {
+      "x": 2320,
+      "z": 0.55
+    },
+    "mount": "right",
+    "type": "bulkhead"
+  },
+  {
+    "room": "s45",
+    "id": "link-59-b",
+    "pair": "link-59",
+    "old": {
+      "x": 1620,
+      "z": 0.55
+    },
+    "new": {
+      "x": 100,
+      "z": 0.55
+    },
+    "mount": "left",
+    "type": "bulkhead"
+  }
+]

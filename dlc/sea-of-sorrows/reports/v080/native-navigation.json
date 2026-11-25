@@ -1,0 +1,12 @@
+[
+  {
+    "url": "file:///mnt/data/ALIEN_MER_DES_CHAGRINS_v0.8.0/MER_DES_CHAGRINS_JOUABLE.html",
+    "ok": false,
+    "reason": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/ALIEN_MER_DES_CHAGRINS_v0.8.0/MER_DES_CHAGRINS_JOUABLE.html\nCall log:\n  - navigating to \"file:///mnt/data/ALIEN_MER_DES_CHAGRINS_v0.8.0/MER_DES_CHAGRINS_JOUABLE.html\", waiting until \"load\"\n"
+  },
+  {
+    "url": "http://127.0.0.1:8198/index.html",
+    "ok": false,
+    "reason": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:8198/index.html\nCall log:\n  - navigating to \"http://127.0.0.1:8198/index.html\", waiting until \"load\"\n"
+  }
+]

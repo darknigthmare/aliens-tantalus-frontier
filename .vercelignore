@@ -183,3 +183,21 @@ docs/arsenal/**
 # Historical project archives are repository sources, never deployment inputs.
 archives
 archives/**
+
+# Mer des Chagrins deploys its runtime and reviewed manifest only.
+dlc/sea-of-sorrows/*
+!dlc/sea-of-sorrows/IMPORT_MANIFEST.json
+!dlc/sea-of-sorrows/index.html
+!dlc/sea-of-sorrows/styles.css
+!dlc/sea-of-sorrows/MER_DES_CHAGRINS_JOUABLE.html
+!dlc/sea-of-sorrows/src/
+dlc/sea-of-sorrows/src/*
+!dlc/sea-of-sorrows/src/data.js
+!dlc/sea-of-sorrows/src/core.js
+!dlc/sea-of-sorrows/src/render.js
+!dlc/sea-of-sorrows/src/world-art.js
+!dlc/sea-of-sorrows/src/tactics-art.js
+!dlc/sea-of-sorrows/src/controls.js
+!dlc/sea-of-sorrows/src/support.js
+!dlc/sea-of-sorrows/src/soundscape.js
+!dlc/sea-of-sorrows/src/main.js
