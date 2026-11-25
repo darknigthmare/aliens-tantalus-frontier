@@ -30,6 +30,14 @@ La même recette a ensuite été rejouée sur le build distribué : **21/21**, z
 
 Les quatre fichiers surveillés sont restés identiques pendant cette recette : wrapper, HTML du jeu, shell Tantalus et contrôleur du menu. Le reçu JSON conserve les assertions et les empreintes correspondantes. Les captures sont des sorties brutes ; leur seule existence ne constitue pas une revue artistique.
 
+## Ajustement après la première CI GitHub
+
+La première recette navigateur GitHub a réussi 16 contrôles de jeu et de persistance, puis détecté une réponse HTTP 404 dans la console, sans exception JavaScript. Cette première trace ne contenait pas l'URL de la ressource. Le lanceur ne déclarait aucune icône, et `/favicon.ico` était absent : la requête implicite d'icône est une cause probable, non une URL observée dans cette trace.
+
+Le lanceur déclare désormais l'icône PNG déjà distribuée par Tantalus. La recette enregistre les URL et statuts des erreurs HTTP ainsi que la localisation des messages console, sans filtrer les erreurs ni assouplir ses assertions. Elle utilise le navigateur installé par Playwright, sauf choix explicite avec `ATF_CHROMIUM_EXECUTABLE` ; la détection automatique d'un Chromium système est supprimée. Cette détection avait sélectionné Chromium 157 sur GitHub alors que Chromium 159 venait d'être installé pour la recette. Les résultats des nouveaux passages restent consultables dans la PR #57.
+
+Les empreintes des parcours consignés plus haut correspondent à leurs exécutions avant cet ajustement du lanceur. Le HTML V114 et les 1 159 fichiers récupérés restent identiques.
+
 ## Limites conservées
 
 Cette intégration ne réalise pas la fusion du DLC dans la campagne native. La partie reste une opération indépendante et la chronologie de son équipe est adaptée. La V114 comporte 25 inspections et 11 salles d’opération ; huit repères du suivi restent absents. Ses 24 références d’équipement ne correspondent pas toutes à une mécanique jouable. Les véhicules pilotables, la Reine et le final P-5000/sas restent ouverts.

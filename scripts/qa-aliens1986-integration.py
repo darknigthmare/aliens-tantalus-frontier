@@ -13,7 +13,6 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 import json
 import os
 from pathlib import Path
-import shutil
 import subprocess
 import threading
 from urllib.parse import urlsplit
@@ -67,7 +66,7 @@ def main():
         parser.error("Evidence must not overwrite the recovered corpus")
     output.mkdir(parents=True, exist_ok=True)
     sentinels = native_sentinels(source)
-    tests, errors, consoles, failed_requests, shots, exports = [], [], [], [], [], []
+    tests, errors, consoles, failed_requests, http_errors, shots, exports = [], [], [], [], [], [], []
     phase = {"name":"dlc"}
     receipt = {
         "schema":1, "startedAt":datetime.now(timezone.utc).isoformat(),
@@ -77,6 +76,7 @@ def main():
                     "clock":"Real requestAnimationFrame and wall clock"},
         "parentTitleRequested":not args.skip_title, "nativeTantalusGameplayTested":False, "physicalPhoneTested":False,
         "tests":tests, "pageErrors":errors, "consoleErrors":consoles, "requestFailures":failed_requests,
+        "httpErrors":http_errors,
         "captures":shots, "downloads":exports, "sourceHashes":{}
     }
     for rel in ["dlc/aliens-1986/index.html","dlc/aliens-1986/game.html","index.html","src/title-screen-v61.js"]:
@@ -111,7 +111,7 @@ def main():
     def player(state): return next(a for a in state["team"] if a["id"]=="ripley")
     try:
         with static_site(root,args.base) as base, sync_playwright() as pw:
-            executable=os.environ.get("ATF_CHROMIUM_EXECUTABLE") or shutil.which("chromium")
+            executable=os.environ.get("ATF_CHROMIUM_EXECUTABLE")
             launch={"headless":True,"args":["--no-sandbox","--disable-dev-shm-usage"]}
             if executable: launch["executable_path"]=executable
             browser=pw.chromium.launch(**launch)
@@ -128,8 +128,9 @@ def main():
             page=context.new_page()
             page.set_default_timeout(20000)
             page.on("pageerror",lambda e:errors.append({"phase":phase["name"],"message":str(e)}))
-            page.on("console",lambda m:consoles.append({"phase":phase["name"],"message":m.text}) if m.type=="error" else None)
+            page.on("console",lambda m:consoles.append({"phase":phase["name"],"message":m.text,"location":m.location}) if m.type=="error" else None)
             page.on("requestfailed",lambda r:failed_requests.append({"phase":phase["name"],"url":r.url,"failure":r.failure}))
+            page.on("response",lambda r:http_errors.append({"phase":phase["name"],"url":r.url,"status":r.status,"resourceType":r.request.resource_type}) if r.status>=400 else None)
             response=page.goto(base+"/dlc/aliens-1986/",wait_until="load")
             check("La route DLC repond en HTTP",response.status==200)
             child=frame(page)
@@ -181,7 +182,7 @@ def main():
             check("Reprise exacte apres rechargement",restored==saved)
             check("Porte, equipe et reserves conservees",restored["worlds"]["v106-hadley"]["doors"]["service-gate"]["open"] and restored["team"]==saved["team"] and restored["arsenal"]==saved["arsenal"])
             check("Aucun profil Tantalus ecrit par le DLC",{k:v for k,v in storage(page).items() if k!=DLC_KEY}==sentinels)
-            check("Aucune erreur JavaScript ou console DLC",not errors and not consoles,{"pageErrors":errors[:],"consoleErrors":consoles[:]})
+            check("Aucune erreur JavaScript, console ou ressource DLC",not errors and not consoles and not http_errors,{"pageErrors":errors[:],"consoleErrors":consoles[:],"httpErrors":http_errors[:]})
             phase["name"]="parent-return"
             with page.expect_navigation(wait_until="domcontentloaded"):page.locator("#return-tantalus").click()
             check("Retour a la racine Tantalus",urlsplit(page.url).path in ("/","/index.html"))
