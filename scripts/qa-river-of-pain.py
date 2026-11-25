@@ -144,7 +144,7 @@ def main():
                 frame=game_frame(page)
                 check("Slashless request retains its URL without a redirect",page.url==alias)
                 check("Slashless wrapper resolves exact playable route",
-                      page.locator("#river-of-pain-game").evaluate("(el)=>el.src")==base+ROUTE+"JOUER.html")
+                      page.locator("#river-of-pain-game").evaluate("(el)=>el.src")==base+ROUTE+"visual-v1/JOUER.html")
                 check("Slashless wrapper resolves its stylesheet",
                       page.locator('link[rel="stylesheet"]').evaluate("(el)=>el.href")==base+ROUTE+"integration.css")
                 check("Slashless wrapper resolves its integration script",

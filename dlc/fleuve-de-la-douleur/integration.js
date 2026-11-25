@@ -1,5 +1,6 @@
-// The preserved standalone game owns its simulation and persistence. This shell
-// adds only navigation and focus; it never reads or writes either game's saves.
+// Both DLC presentations use the preserved simulation and persistence. Native
+// links target the named iframe; this shell only owns navigation and focus.
+// It never reads or writes either game's saves.
 export function mountRiverOfPainShell(documentRef = globalThis.document) {
   const frame = documentRef?.getElementById('river-of-pain-game');
   const returnLink = documentRef?.getElementById('river-return-tantalus');

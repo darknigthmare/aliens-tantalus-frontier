@@ -1,0 +1,624 @@
+{
+  "schema": 1,
+  "visualRevision": "river-of-pain-visual-v1",
+  "sourceCommit": "cd5a58a6fea3084dfbbbb5516be9d0f6972d2320",
+  "originalStandaloneSha256": "91ae538879b939018cea5dc3ba2eb9e45faea7693fdd952efbe8531b33cdfced",
+  "referenceRegister": "../../../docs/development/RIVER_OF_PAIN_SPRITE_REFERENCES.md",
+  "coverage": "42 PNG de présentation. Les visages interprétés et les poses fixes ne certifient pas une reproduction 1:1 ni un jeu entièrement animé avec ces images.",
+  "assets": [
+    {
+      "id": "newt-idle-right",
+      "file": "assets/newt-idle-right.png",
+      "sha256": "d05fa2224dc42bf5e5e9841560bd7aa948c81c255f9786cee81ecf9e29b1e1b5",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create one highly faithful full-body 2D realistic painted game character sprite of Rebecca 'Newt' Jorden from Aliens (1986), using the girl on the RIGHT of the first reference for facial likeness and hair, and the official figure in the second reference for the clothing design. This sprite depicts an earlier day at Hadley's Hope BEFORE the colony collapse: same recognizable small child, age about six, child-sized head and limbs, natural long untidy dark-blonde/light-brown hair, plain dusty tan-brown long-sleeve shirt, faded blue-gray bib overalls with BOTH shoulder straps fastened correctly, simple practical closed dark brown shoes. Gently dusty but not ripped survival costume; no helmet, no weapons, no armor, no doll, no other person. Exactly one character standing quietly facing RIGHT in almost exact side view, head turned only slightly toward camera so likeness can be read, both arms relaxed, hands anatomically correct and empty, two feet separated slightly on one common invisible ground line. Game orthographic view, complete head-to-shoes within the image with ample transparent margin, consistent soft overhead neutral light, realistic illustrated fabric and skin, sharp readable silhouette, not a 3D plastic toy. No background, no floor, no drop-shadow, no letters, no frame. Transparent PNG.",
+      "fidelity": {
+        "status": "reference-informed",
+        "note": "Référence visuelle filmique et figurine NECA sous licence (R3 du registre v0.9). Cheveux longs, haut beige, salopette bleu gris, deux bretelles et absence de casque adaptés à la période précédant la chute. Visage généré : ressemblance exacte non certifiée."
+      }
+    },
+    {
+      "id": "anne-idle-right",
+      "file": "assets/anne-idle-right.png",
+      "sha256": "839d216f64558953911fa262b8696056f5261505d4aaa37e792ff27fb2d268bc",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Remove the ENTIRE background and soft brown glow from the referenced character image. Preserve exactly this one woman's face, pose, curly hair, jacket, trousers, boots and proportions. Make a clean tightly cut-out full-body game sprite. Everything outside her actual silhouette must be completely transparent, alpha zero, including the dark corners, all brown haze, the space between arms and body and between legs. Preserve natural individual hair edges without any colored halo. No new background, no glow, no shadow, no floor, no added objects, do not crop her boots or hair. One isolated full-body character on genuine transparent PNG.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Cheveux bouclés attestés par l’extrait autorisé Titan Books / Daily Dead (R1 du registre v0.9). Visage, teintes et tenue de prospectrice interprétés ; aucune fidélité 1:1 certifiée du visage."
+      }
+    },
+    {
+      "id": "komiskey-idle-right",
+      "file": "assets/komiskey-idle-right.png",
+      "sha256": "0f861e5b99d4c74e1c47c6784b5777618f6aff8dd99f793baeda9b4fe668d4e7",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Remove the ENTIRE background and soft brown/white glow from the referenced character image. Preserve exactly this short stout woman's face with blue eyes, brown curly hair, pose, doctor's coat, clothes, shoes and proportions. Make a clean cut-out full-body game sprite. Everything outside her actual silhouette must be completely transparent alpha zero, including all corners, all haze and the spaces beside coat/arms/legs. Preserve realistic soft hair edges without colored glow. No new background, no shadow, no floor, no new objects. Keep her entire head and both shoes within the image. One isolated character on true transparent PNG, with a small transparent border on every side.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "L’extrait autorisé Titan Books / Daily Dead (R1) décrit une personne petite et trapue, aux boucles brunes et aux yeux bleus. Blouse et visage interprétés ; la hauteur conserve la différence avec les autres adultes."
+      }
+    },
+    {
+      "id": "facehugger-idle-right",
+      "file": "assets/facehugger-idle-right.png",
+      "sha256": "4d16634f91c3d03a47c00832cdd41fbf70ca5cbc85647380b7befcf910253249",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Convert the referenced Aliens (1986) facehugger film prop into ONE faithful full-body living creature game sprite, shown at low side/three-quarter view facing RIGHT, isolated on transparent background. Use the authentic anatomy: compact flattened fleshy central body with two subtle lateral breathing folds; exactly EIGHT long fingerlike jointed walking legs, FOUR on the near side and FOUR on the far side, distinct separated limb paths; one long segmented tapering tail trailing and gently curling to the LEFT. All eight leg ends visible and logically connected, no ninth leg, no crab pincers, no eyes, no human face, no insect wings, no extra tail. The body is raised slightly in a poised idle stance, contact legs share an invisible level ground line. Beige-pink skin with subtle tendons and ridges, moist organic material, no broken foam/museum damage, no round black display stand. High-detail realistic painted game art, side-lit gently from above in neutral light, readable whole silhouette. Full tail and all feet contained in canvas with ample transparent margin. No victim, no gore, no egg, no environment, no floor or cast shadow, no text, no border. Only one creature, true transparent PNG.",
+      "fidelity": {
+        "status": "reference-informed",
+        "note": "Interprétation peinte d’un accessoire filmique de facehugger fourni en référence : huit pattes visibles et queue segmentée distincte. Anatomie vérifiée visuellement ; pas une numérisation 1:1 de l’accessoire ni une animation."
+      }
+    },
+    {
+      "id": "egg-sealed",
+      "file": "assets/egg-sealed.png",
+      "sha256": "16cfef03c669cbca5ce6064f4f83bce3ec0021655a76caf84c466a007ebc632c",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Transform this authentic Aliens (1986) xenomorph egg prop into ONE high-fidelity 2D realistic painted game prop sprite. Complete upright leathery brown-green ovoid egg, thick organic veined skin, slightly broader lower half, narrow top with FOUR closed fleshy lips meeting in a subtle X-shaped seam. Faithful film shape and size ratio. Living fresh organic material, no burnt museum damage or dry crumbling foam, subtle moist highlights but no bright glow. Front/side game view at eye level with just enough depth to read volume, base resting on an invisible horizontal ground line. The egg itself only, no creature, no contents, no resin nest, no pedestal, no floor, no shadow, no text. Clean alpha cutout, transparent outside the egg, generous transparent margin and complete top and base. Realistic material with a clearly readable silhouette at small size, no cartoon outline.",
+      "fidelity": {
+        "status": "reference-informed",
+        "note": "Interprétation peinte d’un œuf filmique fourni en référence : volume ovoïde, enveloppe organique brun olive et quatre lèvres closes. Prop statique fermé ; aucun état ouvert ni contenu généré."
+      }
+    },
+    {
+      "id": "russ-idle-right",
+      "file": "assets/russ-idle-right.png",
+      "sha256": "4282c95538e977790a58133d323c9cac3bce6e7a807f55306cdc1187de5ba565",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Russ Jorden, adult male colony prospector, father from Alien: River of Pain. Original face interpretation consistent with the tired unkempt appearance described in the book: middle-aged ordinary sturdy man, weathered face, rumpled short chestnut hair, light stubble, tired attentive eyes, not a glamorous action hero and not drunk. Worn muted olive-brown utility jacket, gray undershirt, dark gray-green work trousers, practical brown work boots, narrow utility belt. No helmet, no weapon, no backpack. One character only, full body from head to shoes, facing RIGHT in a near side view with face turned slightly toward camera, calm idle stance, two empty hands naturally resting at sides, two feet slightly apart on the same invisible ground line. Realistic painted 2D game sprite, 1986 cinematic retrofuture industrial colony, detailed cloth/skin, soft neutral overhead light, readable silhouette at 100 pixels, no cartoon outlines or toy joints. Complete silhouette inside canvas with transparent padding. True transparent PNG background, absolutely no background scene, floor, drop shadow, text or frame.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Apparence fatiguée attestée dans l’extrait autorisé Titan Books / Daily Dead (R1). Visage, pilosité et vêtements interprétés."
+      }
+    },
+    {
+      "id": "tim-idle-right",
+      "file": "assets/tim-idle-right.png",
+      "sha256": "79ab22619bfa0221ba4e40f64c7eafd5ab308085345697a24a8096d666104def",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Timothy Jorden, Newt's slightly older brother in Alien: River of Pain, an ordinary small boy about nine years old. His facial details are an original adaptation: slim child build, proportionately large child head, short tousled medium brown hair, curious expression. Worn muted sage-green zipped colony jacket over a beige shirt, gray-green practical trousers and plain dark sneakers. A child, no adult muscle or mature face, no armor or weapons, no toys. He must look taller than six-year-old Newt but much shorter than adults. One character only, full body from head to shoes, facing RIGHT in a near side view with face turned slightly toward camera, calm idle stance, two empty hands naturally resting at sides, two feet slightly apart on the same invisible ground line. Realistic painted 2D game sprite, 1986 cinematic retrofuture industrial colony, detailed cloth/skin, soft neutral overhead light, readable silhouette at 100 pixels, no cartoon outlines or toy joints. Complete silhouette inside canvas with transparent padding. True transparent PNG background, absolutely no background scene, floor, drop shadow, text or frame.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Identité et rôle familial attestés dans l’extrait autorisé Titan Books / Daily Dead (R1). Visage, tenue et écusson d’épaule interprétés ; proportions d’enfant conservées."
+      }
+    },
+    {
+      "id": "luisa-idle-right",
+      "file": "assets/luisa-idle-right.png",
+      "sha256": "613d023a2f734959a6d844fda455587bbdcc8c4eef4904c20d8b28f063eedc5e",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Luisa, a young girl colonist from the Alien: River of Pain game adaptation, approximately seven years old. An original face interpretation visibly DISTINCT from Newt: dark brown hair tied in a low ponytail, round gentle face, child proportions with short limbs. Dusty muted rose/brick-red knit long-sleeve top, dark gray-blue practical trousers, plain closed brown shoes. Fully dressed in simple utilitarian colony clothing, no overalls, no helmet or weapons or toy. One character only, full body from head to shoes, facing RIGHT in a near side view with face turned slightly toward camera, calm idle stance, two empty hands naturally resting at sides, two feet slightly apart on the same invisible ground line. Realistic painted 2D game sprite, 1986 cinematic retrofuture industrial colony, detailed cloth/skin, soft neutral overhead light, readable silhouette at 100 pixels, no cartoon outlines or toy joints. Complete silhouette inside canvas with transparent padding. True transparent PNG background, absolutely no background scene, floor, drop shadow, text or frame.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Enfant nommée du récit, distincte de Newt. Visage, cheveux attachés et vêtements interprétés ; apparence exacte non établie par les sources consultées."
+      }
+    },
+    {
+      "id": "mori-idle-right",
+      "file": "assets/mori-idle-right.png",
+      "sha256": "dd397d37ec935d0c187a6f37b0cb771090ac1d8bc26f9e0938376aeedd9e2208",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Dr. Mori, an adult male physician in the Alien: River of Pain colony game adaptation. An original neutral face interpretation, ordinary middle-aged clean-shaven man with short straight dark hair and average slender build. Light off-white mid-thigh laboratory coat, muted sage medical shirt, gray-green straight trousers, practical dark closed shoes, small blank medical name badge. Calm professional appearance, no stethoscope clutter, no object held, no weapon, no helmet. Visibly taller and slimmer than Dr Komiskey. One character only, full body from head to shoes, facing RIGHT in a near side view with face turned slightly toward camera, calm idle stance, two empty hands naturally resting at sides, two feet slightly apart on the same invisible ground line. Realistic painted 2D game sprite, 1986 cinematic retrofuture industrial colony, detailed cloth/skin, soft neutral overhead light, readable silhouette at 100 pixels, no cartoon outlines or toy joints. Complete silhouette inside canvas with transparent padding. True transparent PNG background, absolutely no background scene, floor, drop shadow, text or frame.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Médecin nommé du récit. Visage, coiffure et tenue médicale interprétés ; aucune ressemblance 1:1 revendiquée."
+      }
+    },
+    {
+      "id": "simpson-idle-right",
+      "file": "assets/simpson-idle-right.png",
+      "sha256": "a7aa907ded73f3aa3c25563073c912dda5bb42cad5613520c45ab42facdb9cb4",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Hadley's Hope colony administrator Al Simpson from Alien: River of Pain, original appearance adaptation without claiming a screen likeness: stocky middle-aged male, receding short gray-brown hair, serious practical expression, lightly weathered face. Worn pale warm-gray/beige work shirt with rolled cuffs and two chest pockets, straight charcoal-gray trousers, dark utility belt, plain dark work shoes. Clean bureaucratic workwear slightly tidier than prospectors, no suit or necktie, no armor or weapon. Exactly ONE complete head-to-boots character on true transparent PNG, right-facing almost side-on view with a slight three-quarter face, idle standing pose, both empty hands at sides, feet slightly separated at the same invisible ground level. Realistic painted 2D game art matching 1986 worn industrial retrofuture, practical ordinary person, detailed believable cloth and anatomy, soft neutral light, clear silhouette with transparent margin. No scene, no floor, no shadow blob, no vignette, no words or labels, no frame, no toy joints.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Administrateur identifié dans l’extrait autorisé Titan Books / Daily Dead (R1). Âge visible, visage et tenue interprétés. Placement et état dans la campagne 2179 relèvent de l’adaptation."
+      }
+    },
+    {
+      "id": "hansard-idle-right",
+      "file": "assets/hansard-idle-right.png",
+      "sha256": "7df5b8f75594e3c9846a66f164a049802189708cf214a2b13c14d6057c11bd5e",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Chief engineer Brad Hansard from Alien: River of Pain, original appearance adaptation. Middle-aged male with a broad strong practical build, short ash-brown hair, slight stubble, concentrated expression. Faded olive-gray utility coveralls with rolled sleeves and a small chest pocket, weathered brown utility belt and dark reinforced work boots. Worn plain fabric, visible functional seams, not a modern tactical vest. No helmet, no tools held, no weapon or armor. Exactly ONE complete head-to-boots character on true transparent PNG, right-facing almost side-on view with a slight three-quarter face, idle standing pose, both empty hands at sides, feet slightly separated at the same invisible ground level. Realistic painted 2D game art matching 1986 worn industrial retrofuture, practical ordinary person, detailed believable cloth and anatomy, soft neutral light, clear silhouette with transparent margin. No scene, no floor, no shadow blob, no vignette, no words or labels, no frame, no toy joints.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Ingénieur en chef identifié dans l’extrait autorisé Titan Books / Daily Dead (R1). Visage et tenue de travail interprétés. Placement et état en 2179 relèvent de l’adaptation."
+      }
+    },
+    {
+      "id": "joel-idle-right",
+      "file": "assets/joel-idle-right.png",
+      "sha256": "13ff0b658bc22d252ebfd3a77ed036570932d4d03ef4099c11c5b9aa5dc36224",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Joel, male nurse from Alien: River of Pain. Preserve the attested SLENDER physique, an ordinary young adult man with an especially lean build, short dark hair, gentle serious attentive face, original facial interpretation. Simple off-white short medical work jacket over muted pale sage scrubs, straight gray-green trousers, flat dark medical shoes, small blank rectangular ID badge. No doctor long coat; distinct from Dr Mori and stout Dr Komiskey. No held equipment or weapons. Exactly ONE complete head-to-boots character on true transparent PNG, right-facing almost side-on view with a slight three-quarter face, idle standing pose, both empty hands at sides, feet slightly separated at the same invisible ground level. Realistic painted 2D game art matching 1986 worn industrial retrofuture, practical ordinary person, detailed believable cloth and anatomy, soft neutral light, clear silhouette with transparent margin. No scene, no floor, no shadow blob, no vignette, no words or labels, no frame, no toy joints.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Infirmier mince décrit dans l’extrait autorisé Titan Books / Daily Dead (R1). Minceur conservée ; visage et tenue interprétés. Placement et état en 2179 relèvent de l’adaptation."
+      }
+    },
+    {
+      "id": "bronagh-idle-right",
+      "file": "assets/bronagh-idle-right.png",
+      "sha256": "81801b5b4ad9d4bb35018e5eea2efced0fdd6c86d239f24b05ea3bdc723f521b",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Bronagh, adult female colony cook from Alien: River of Pain, original visual interpretation. Middle-aged woman of sturdy ordinary build, brown hair neatly tied into a practical bun, gentle tired face. Worn tan long-sleeve colony shirt, simple pale beige kitchen apron ending at knees, slate-gray trousers, practical flat dark brown shoes. No chef toque, no fancy restaurant uniform, no held cookware or knife, no weapons. Utilitarian workplace clothing for an isolated working colony. Exactly ONE complete head-to-boots character on true transparent PNG, right-facing almost side-on view with a slight three-quarter face, idle standing pose, both empty hands at sides, feet slightly separated at the same invisible ground level. Realistic painted 2D game art matching 1986 worn industrial retrofuture, practical ordinary person, detailed believable cloth and anatomy, soft neutral light, clear silhouette with transparent margin. No scene, no floor, no shadow blob, no vignette, no words or labels, no frame, no toy joints.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Cuisinière identifiée dans l’extrait autorisé Titan Books / Daily Dead (R1). Visage, coiffure attachée et tablier interprétés. Placement et état en 2179 relèvent de l’adaptation."
+      }
+    },
+    {
+      "id": "armory-case",
+      "file": "assets/armory-case.png",
+      "sha256": "6656bac9e14d154b1c5eec4ebd3f62aaf52dd5594abf2feaf579ce725ed823d8",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "One isolated closed industrial equipment carrying case for a realistic 2D game set in the Aliens (1986) Hadley's Hope colony. A low wide rectangular rugged olive-brown hard case, width roughly twice its height, thick ribbed reinforced shell, two silver toggle latches, one recessed handle centered on front, black edge seals, subtle rubbed corners, sober 1980s industrial construction. Completely CLOSED with no contents or ammunition visible. This is an original colony equipment prop, not a claimed screen-used model. Front view with only a little right side and top visible, level base on invisible ground, complete object with ample transparent margin. Neutral soft light, realistic painted metal/polymer, readable silhouette at 80 pixels wide. No weapons, no people, no printed words/logos, no background, no floor, no drop shadow, no frame. True transparent PNG.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Caisse d’armurerie créée pour remplacer le modèle générique des cinq instances case. Design industriel de l’adaptation ; aucun modèle canonique exact revendiqué."
+      }
+    },
+    {
+      "id": "isolation-glass",
+      "file": "assets/isolation-glass.png",
+      "sha256": "eab5ae1dc0934887cfc90669ee991186311dc793ab56d16cd3ae4d7d17ad4bf2",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "One complete medical isolation viewing window panel as a standalone environment game sprite for the retrofuturistic Aliens (1986) colony aesthetic. A practical rectangular thick glass pane held in a worn off-white pale gray metal frame, approximately 120cm wide and 140cm tall, sturdy continuous rectangular frame with four dark mounting bolts and a short flat lower mounting rail. Clearly a WALL-MOUNTED window component, no door handle, no hinges, no floating free door, no furniture. Glass mostly transparent with very faint blue-green edge tint, tiny restrained reflection streaks, no reflected scene. Orthographic front view, entire rectangular frame visible, frame edges parallel and level, uncluttered. Realistic painted game prop, no drawing outline, no text or symbols. The exterior background and visible area THROUGH the glass must both be genuinely transparent (glass can retain very faint translucent shading). No wall around it, no pedestal, no floor or shadow, transparent PNG.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Cloison vitrée d’isolement créée pour le type glass. Matériaux et forme interprétés à partir de sa fonction dans la scène ; pas un plan canonique du roman."
+      }
+    },
+    {
+      "id": "specimen-jar",
+      "file": "assets/specimen-jar.png",
+      "sha256": "6bc3bb2e9310cd5b42ef9bdb64b3df521f3286868020dfdf1400886f359fdb47",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "One complete sealed cylindrical laboratory specimen jar for a realistic painted 2D Aliens (1986) colony game. An upright thick transparent glass cylinder approximately twice as tall as wide, heavy dull brushed steel circular lid and steel base, clear pale green preservative fluid. Inside is ONE small curled dormant beige facehugger specimen with a compact central body, four pairs of tucked fingerlike limbs and one long tail curled around its lower body. Recognizable preserved alien anatomy, no human remains or gore. Read as the glass specimen containers in the colony medical lab; restrained industrial 1980s materials, no modern touchscreen or neon. Front view with subtle ellipse on top for volume; complete base and top with transparent padding. The jar is isolated, exterior fully transparent, glass/fluid subtly translucent. No tabletop, no room, no labels, no stand, no cast shadow, no border. One jar only.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Bocal de laboratoire créé pour le prop specimen. Contenant, détails et disposition interprétés ; ne constitue pas une preuve de l’apparence exacte d’un accessoire filmique."
+      }
+    },
+    {
+      "id": "brackett-stowed-right",
+      "file": "assets/brackett-stowed-right.png",
+      "sha256": "39187b73b56a75a0115c0589aad2c1986ea9a7426450db46378925c2c18ab5f9",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create Captain Demian Brackett, a Colonial Marine from Alien: River of Pain, as an original face interpretation, adult man in his thirties with short brown hair, broad ordinary athletic shoulders and a focused face. Use these film prop references for the CLOTHING AND ARMOUR shapes: 1986 USCM curved olive camouflage chest/back shell, rounded shoulder caps, simple olive straps, pale tan/gray/brown patterned cotton fatigues, matching shin guards and black leather combat boots. Use the second helmet's rounded fabric-covered shape, small side camera and ear protection, but omit its identity labels and don't copy APONE/FROST names. Adapt armor fit to this captain, realistic mild wear, no huge sci-fi mech armor. He is at rest with equipment put away: empty hands, no gun or other weapon visible, no holstered gun sticking out. This is NOT Apone, Hicks or Frost and no known actor likeness is requested. ONE complete realistic painted 2D character sprite, full body including both boots with generous transparent margin, facing RIGHT in near side view, idle upright stance with two empty hands relaxed at sides. True transparent PNG background, no backdrop, no floor shadow, no text labels, no frame. Crisp silhouette, neutral soft overhead light, practical natural body proportions, no mannequin or toy joints.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Identité du roman ; visage interprété. Armure inspirée des accessoires originaux documentés par Propstore (R5/R6 de l’inventaire de sprites) ; aucun nom ou marquage personnel d’Apone ou Frost repris. Pose sans arme visible, utilisée seulement lorsque l’arme est rangée."
+      }
+    },
+    {
+      "id": "paris-stowed-right",
+      "file": "assets/paris-stowed-right.png",
+      "sha256": "1b51611c61d4ea40d247ec43604eceb8dcc398b8bfd99bef4a824f4573bc6944",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create Sergeant Paris, a female Colonial Marine from Alien: River of Pain, original face interpretation, adult woman in her thirties, medium warm-brown complexion matching this game's established palette, dark hair tied neatly at the nape under helmet, lean practical build and composed serious face. Faithfully adapt the two references' 1986 USCM COSTUME geometry to her body: curved hard olive camouflage chest/back shell, rounded shoulder armor, simple olive straps, pale tan/gray/brown cotton fatigues, matching shin guards and black combat boots. Helmet has rounded fabric cover, small side camera and ear protection; no copied character names or personal graffiti. Natural proportional armor, no exaggerated chest curves, no modern plate carrier, no bare torso. At rest with weapons put away, two empty hands, no weapon visible. She is not Vasquez or Dietrich; don't invent a movie actor likeness. ONE complete realistic painted 2D character sprite, full body including both boots with generous transparent margin, facing RIGHT in near side view, idle upright stance with two empty hands relaxed at sides. True transparent PNG background, no backdrop, no floor shadow, no text labels, no frame. Crisp silhouette, neutral soft overhead light, practical natural body proportions, no mannequin or toy joints.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Identité du roman ; visage interprété, sans ressemblance revendiquée avec une interprète audio. Armure inspirée des accessoires documentés par Propstore (R5/R6 de l’inventaire) ; aucun marquage personnel d’Apone ou Frost. Pose sans arme visible, utilisée seulement lorsque l’arme est rangée."
+      }
+    },
+    {
+      "id": "civilian-idle-right",
+      "file": "assets/civilian-idle-right.png",
+      "sha256": "fb00e3a28bcf13abd9f2dc08109c9dcf2aa9eb236542eca8d93c3a0354d253bb",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "An ordinary male Hadley's Hope colonist, the generic civilian profile in the River of Pain game, original character design. Adult about forty, medium build, short brown hair, weathered thoughtful face. Simple faded desaturated blue-gray zip-front work coveralls over a light gray undershirt, darker gray trouser section, plain brown work boots and narrow worn belt. Practical fabric with subtle stains, no armor, helmet or gun, no tablet or tools held. Visually distinct from the tan prospectors and white medical staff, no hero styling. ONE complete realistic painted 2D character sprite, full body including both boots with generous transparent margin, facing RIGHT in near side view, idle upright stance with two empty hands relaxed at sides. True transparent PNG background, no backdrop, no floor shadow, no text labels, no frame. Crisp silhouette, neutral soft overhead light, practical natural body proportions, no mannequin or toy joints.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Colon original de gameplay. Visage et vêtements créés pour cette adaptation ; aucune identité canonique revendiquée."
+      }
+    },
+    {
+      "id": "item-cell",
+      "file": "assets/item-cell.png",
+      "sha256": "6125c126a642acae17416d9bba824f0c5c5f0ba6410cfd779cbf95037d58d5b1",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "One isolated compact replaceable electrical power cell for a retrofuturistic 1986-style space colony game inventory. A palm-sized dark olive rectangular battery cartridge with chamfered corners, two clearly separated dull brass contacts on one short end, recessed small blue-green charge window and simple ribbed black gripping area. Original fictional industrial design with readable silhouette, mild wear and realistic painted metal/polymer. Three-quarter product view, complete object with ample transparent margin. No wires connected, no instruction markings, no diagrams, no label text, no extra objects, no hand, no background, no floor or shadow. True transparent PNG, realistic painted game art.",
+      "fidelity": {
+        "status": "reference-informed",
+        "note": "Équipement de l’inventaire interprété dans le langage industriel du film. La fonction et l’identifiant proviennent des données du DLC ; dessin généré, sans certification d’un modèle canonique exact ni ajout de capacité de jeu."
+      }
+    },
+    {
+      "id": "item-wire",
+      "file": "assets/item-wire.png",
+      "sha256": "6cedc5b514c00dfec896d9f395ed3f7a289347852acbce4c0d05305368b06d0a",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "One small neat looped coil of insulated copper electrical wire, about palm sized, faded red-brown rubber insulation with two short safely capped dull copper ends tucked close to the coil. Bound by one simple dark cloth tie, robust utilitarian colony maintenance salvage. Original game component design, not a specific film prop. One isolated object only, complete within transparent margins, subtle three-quarter product view, realistic painted 2D game inventory sprite with clear silhouette at small size, muted worn retroindustrial materials of a 1986 space colony, neutral soft overhead light. True transparent PNG background, no environment, no floor or shadow, no hand, no labels or text, no exploded view or assembly diagram.",
+      "fidelity": {
+        "status": "reference-informed",
+        "note": "Équipement de l’inventaire interprété dans le langage industriel du film. La fonction et l’identifiant proviennent des données du DLC ; dessin généré, sans certification d’un modèle canonique exact ni ajout de capacité de jeu."
+      }
+    },
+    {
+      "id": "item-casing",
+      "file": "assets/item-casing.png",
+      "sha256": "293c10fac5441475a41ca489441282596b4dffe6d02e83af5808706cac0feaae",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "One small empty industrial electronics housing used as a scavenged component in a colony survival game. Palm-sized rectangular dull gray metal project case with worn olive side edges, removable lid CLOSED and secured with four slotted screws, subtle ridges and one blank inset panel. No visible circuitry or functional schematic, no explosive parts, no weapon parts, no wires attached. Readable as a rugged empty utility casing. One isolated object only, complete within transparent margins, subtle three-quarter product view, realistic painted 2D game inventory sprite with clear silhouette at small size, muted worn retroindustrial materials of a 1986 space colony, neutral soft overhead light. True transparent PNG background, no environment, no floor or shadow, no hand, no labels or text, no exploded view or assembly diagram.",
+      "fidelity": {
+        "status": "reference-informed",
+        "note": "Équipement de l’inventaire interprété dans le langage industriel du film. La fonction et l’identifiant proviennent des données du DLC ; dessin généré, sans certification d’un modèle canonique exact ni ajout de capacité de jeu."
+      }
+    },
+    {
+      "id": "item-decoy",
+      "file": "assets/item-decoy.png",
+      "sha256": "dc2266d89fb9dc2fcce2b57700b916dc525b86156fba72dbe44a878764bbcf6d",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "One compact fictional electronic NOISE DECOY device for a space-colony survival game. A palm-sized squat olive rectangular utility box with a circular black speaker grille taking most of the front, one simple red indicator LED and a single black rotary switch on top, small loop handle on one side. It is a harmless sound-making distractor, like a worn portable beeper; no explosive elements, no weapon styling, no wiring instructions. Original 1980s analog industrial prop design. One isolated object only, complete within transparent margins, subtle three-quarter product view, realistic painted 2D game inventory sprite with clear silhouette at small size, muted worn retroindustrial materials of a 1986 space colony, neutral soft overhead light. True transparent PNG background, no environment, no floor or shadow, no hand, no labels or text, no exploded view or assembly diagram.",
+      "fidelity": {
+        "status": "reference-informed",
+        "note": "Équipement de l’inventaire interprété dans le langage industriel du film. La fonction et l’identifiant proviennent des données du DLC ; dessin généré, sans certification d’un modèle canonique exact ni ajout de capacité de jeu."
+      }
+    },
+    {
+      "id": "item-ration",
+      "file": "assets/item-ration.png",
+      "sha256": "d3ec3f1df0cfae2f3f7f9f3e94400f496ee538e5f745be69a8205705e5e5f4e3",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "One sealed food ration packet from an isolated industrial space colony. A compact rectangular vacuum-sealed beige-gray foil pouch with crimped edges, slightly bulging with a single meal inside, one small dark olive rectangular blank label area and muted blue stripe, subtle folds and storage wear. Clearly a practical preserved food pouch, not medicine or ammunition. Original retrofuturistic game prop, no brand or readable words. One isolated object only, complete within transparent margins, subtle three-quarter product view, realistic painted 2D game inventory sprite with clear silhouette at small size, muted worn retroindustrial materials of a 1986 space colony, neutral soft overhead light. True transparent PNG background, no environment, no floor or shadow, no hand, no labels or text, no exploded view or assembly diagram.",
+      "fidelity": {
+        "status": "reference-informed",
+        "note": "Équipement de l’inventaire interprété dans le langage industriel du film. La fonction et l’identifiant proviennent des données du DLC ; dessin généré, sans certification d’un modèle canonique exact ni ajout de capacité de jeu."
+      }
+    },
+    {
+      "id": "item-medkit",
+      "file": "assets/item-medkit.png",
+      "sha256": "79b74846845581e530f79cc108c40c506ea311e881dd452249a12bb23f8cbd1c",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "A compact closed colony first-aid kit: low rectangular worn ivory hard case with a muted forest-green horizontal band, simple raised ivory medical plus symbol in a dark green square, one sturdy gray handle, two latches, black edge seal. No red cross symbol. Clearly ordinary medical supplies, no contents visible, no needles or blood. Original functional game prop, not a claim of exact screen-used accessory. One isolated complete item with generous transparent padding. Realistic painted 2D game inventory sprite, muted 1986 retrofuture industrial materials, readable at small size, neutral soft light, three-quarter view. No people, no hand, no scene, no floor or drop shadow, no text instructions, no frame. True transparent PNG.",
+      "fidelity": {
+        "status": "reference-informed",
+        "note": "Équipement de l’inventaire interprété dans le langage industriel du film. La fonction et l’identifiant proviennent des données du DLC ; dessin généré, sans certification d’un modèle canonique exact ni ajout de capacité de jeu."
+      }
+    },
+    {
+      "id": "item-ammo",
+      "file": "assets/item-ammo.png",
+      "sha256": "c2cb45def685415533da6a129d957d28558a0ff2cd496d929d0749a0c71a7da5",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "One CLOSED compact ammunition supply tin as an inventory icon in an Aliens-inspired fictional colony survival game. A small rectangular olive-drab steel box, one folded flat top carrying handle, simple hinged lid, dark latch, one small faded yellow rectangle without legible words. No weapon, no loose cartridges, no firing, no internals, no specifications. Original game supply-container design, slightly scuffed corners, sturdy simple industrial shape. One isolated complete item with generous transparent padding. Realistic painted 2D game inventory sprite, muted 1986 retrofuture industrial materials, readable at small size, neutral soft light, three-quarter view. No people, no hand, no scene, no floor or drop shadow, no text instructions, no frame. True transparent PNG.",
+      "fidelity": {
+        "status": "reference-informed",
+        "note": "Équipement de l’inventaire interprété dans le langage industriel du film. La fonction et l’identifiant proviennent des données du DLC ; dessin généré, sans certification d’un modèle canonique exact ni ajout de capacité de jeu."
+      }
+    },
+    {
+      "id": "item-flare",
+      "file": "assets/item-flare.png",
+      "sha256": "3bb01ad9865e317225844bfd713e7dfebc204fdb72ae4d0b0f716721bd8ec343",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "One unlit emergency signal flare carried by space-colony workers, shown as a fictional survival-game inventory object. A single short thick dark red-orange cylinder with a ribbed black safety cap and a narrow pale gray band around one end, gently worn matte casing, no readable warning text. Unlit, sealed, no flame, no smoke, no sparks, no exploded view, no assembly details. One isolated complete item with generous transparent padding. Realistic painted 2D game inventory sprite, muted 1986 retrofuture industrial materials, readable at small size, neutral soft light, three-quarter view. No people, no hand, no scene, no floor or drop shadow, no text instructions, no frame. True transparent PNG.",
+      "fidelity": {
+        "status": "reference-informed",
+        "note": "Équipement de l’inventaire interprété dans le langage industriel du film. La fonction et l’identifiant proviennent des données du DLC ; dessin généré, sans certification d’un modèle canonique exact ni ajout de capacité de jeu."
+      }
+    },
+    {
+      "id": "item-weld",
+      "file": "assets/item-weld.png",
+      "sha256": "75b54c1faba7033ecc589a1e934afbb50c87d22e436d249f61f400af5f0d1b75",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Turn this reference of the Aliens (1986) Colonial Marine hand welding tool movie prop into ONE faithful realistic painted 2D game inventory sprite. Preserve the exact distinctive silhouette: narrow upright olive-brown ribbed grip body, long side clip, small red control, short transverse dark rounded nozzle near the top, and the rectangular protective viewing shield projecting upward at an angle. The object is a handheld maintenance WELDER, no pistol barrel or ammunition. Retain the prop's asymmetric geometry and proportions, complete grip and shield clearly inside canvas. Use mild functional wear rather than ruined museum chipping, shield subtly translucent. No hand, no flame or cutting effect, no diagram, no background or floor shadow, no lettering. One tool only, true transparent PNG, soft neutral light, slight three-quarter view like reference.",
+      "fidelity": {
+        "status": "reference-informed",
+        "note": "Référence photographique fournie : accessoire de soudage portatif d’Aliens (1986). Poignée nervurée, clip latéral, commande rouge, embout transversal et écran de protection relevé conservés. Interprétation peinte sans effet de découpe ni ajout de capacité de jeu ; reproduction 1:1 non certifiée."
+      }
+    },
+    {
+      "id": "item-light",
+      "file": "assets/item-light.png",
+      "sha256": "c5a3b025b64b5e0a1cf80877dddfc34bdd632747547ea0ffa8ade3fde2becb0f",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Convert the referenced original Aliens (1986) USCM shoulder torch into ONE faithful complete realistic painted 2D inventory sprite. Keep exactly its distinctive form: rectangular olive-brown perforated power housing, black molded vertical finger-grooved carrying grip on one end, two articulated black arms leading above to a small square lamp head with one circular glass lens and four mounting corners. Follow the photo geometry and proportions, not a generic flashlight. No wall power cable, no carrying pouch, no display base. Neutral soft light, lens not projecting a beam. Entire assembly with transparent margins, slight three-quarter view as reference, subtly worn movie industrial materials. One lamp only, no human, no floor, no shadow, no lettering, genuine transparent PNG.",
+      "fidelity": {
+        "status": "reference-informed",
+        "note": "Référence photographique Propstore : USCM Shoulder Torch Pack, collection Harry Harris. Boîtier perforé, poignée ouverte, bras articulés et tête carrée à lentille circulaire conservés. Interprétation peinte sans faisceau actif ; aucun modèle 1:1 certifié."
+      }
+    },
+    {
+      "id": "item-tracker",
+      "file": "assets/item-tracker.png",
+      "sha256": "013ca34001c0e3053d28942b142549b83c275304fa159c2b5700caaa37f6d245",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Make ONE realistic painted 2D game inventory sprite of the Aliens (1986) M314 motion tracker. Use the first TWO photos of the Master Replicas collectible for the complete BODY geometry, and the THIRD original film screen prop for the rectangular protruding screen housing. Faithful compact olive-brown drill-like body, large rectangular OPEN rear carrying handle, round grille housing on top, black horizontal side attachments and short cable loops. Show the three-quarter SCREEN SIDE like the second photo, with the side-mounted square Hama-style housing and convex green radar display. The red keypad is on the OPPOSITE side, so do not invent a keypad next to the visible screen. Keep the side screen protruding at correct scale, not a modern flat touchscreen. Remove collector display base, transparent support pillars, plaque, and loose display strap. One self-contained handheld detector only. True transparent background with padding around whole silhouette, no floor shadow, no hand, no labels or diagrams. Soft neutral light, subtle realistic wear, clean readable edges.",
+      "fidelity": {
+        "status": "reference-informed",
+        "note": "Corps guidé par les photographies de la réplique Master Replicas M314 et boîtier d’écran guidé par un accessoire filmique présenté par Propstore. La réplique n’est pas un original de tournage. Poignée ouverte et écran latéral saillant conservés ; affichage radar et petits détails de surface interprétés, sans certification 1:1."
+      }
+    },
+    {
+      "id": "vale-idle-right",
+      "file": "assets/vale-idle-right.png",
+      "sha256": "db6802101e3560a9cb7b784f28a1eace1b91f02427552b25acba26a3055ffe65",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Iona Vale, an ORIGINAL female maintenance resident of the River of Pain game, not a character with a claimed film likeness. Adult about35, medium warm-brown skin matching #b48664, SHORT practical dark hair, sturdy ordinary build. Worn muted desaturated teal-gray work coveralls (#658b89), gray trouser area, utility belt, dark work boots. Standing calmly facing RIGHT in near side view. Hold ONE small plain steel spanner securely in the near hand at waist height, with anatomically correct fingers wrapped around its handle; other arm relaxed. Tool clearly connected to hand, no floating accessory. Full body including both boots, transparent margins, realistic painted2Dgame character, neutral soft light, natural anatomy, no armor, no weapon, no background/floor/shadow/text/frame, true transparent PNG.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Iona Vale est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tools repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
+      }
+    },
+    {
+      "id": "rhee-idle-right",
+      "file": "assets/rhee-idle-right.png",
+      "sha256": "f741c01534cfdfe7dd8c903d1a9fcc6cf3806ea90251062308ebbd6715e3c484",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Malik Rhee, an ORIGINAL male colony cook resident of the River of Pain game, no claimed film likeness. Adult about40, deep warm-brown skin matching #755340, average sturdy build, short dark hair under a simple soft tan WORK CAP. Worn ochre-tan practical kitchen work shirt (#ab9066), plain charcoal trousers, brown shoes, no chef's toque or modern uniform. Standing calm facing RIGHT in near side view, holding ONE small worn cream ceramic mug naturally by its handle at waist height with the near hand, fingers anatomically correct, other arm relaxed. No floating object, no drink splash. Full head-to-shoes isolated, realistic painted2Dgame art, consistent 1986 industrial colony materials, transparent margin, soft neutral overhead light, true transparent PNG. No room, floor, shadow, text, frame, armor or weapons.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Malik Rhee est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire mug repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
+      }
+    },
+    {
+      "id": "arden-idle-right",
+      "file": "assets/arden-idle-right.png",
+      "sha256": "3913c1be3fed538b29ff3e8ce41c6851e3e9f8812583de493397854bac508911",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": null,
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Vera Arden est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tablet repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
+      },
+      "promptStatus": "La consigne exacte n’a pas été récupérée après la déconnexion. Le descriptif suivant résume le profil natif et ne se présente pas comme la consigne réellement envoyée.",
+      "reconstructedBrief": "Vera Arden : blouse de travail vert menthe #b2c6ba, peau #d3ad8d, cheveux attachés, tablette. Personnage original du DLC."
+    },
+    {
+      "id": "becker-idle-right",
+      "file": "assets/becker-idle-right.png",
+      "sha256": "aa229865395d0e493bac6a60721388f30f1b02dbcc8c82f451825fa5ed867288",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": null,
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Arun Becker est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tablet repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
+      },
+      "promptStatus": "La consigne exacte n’a pas été récupérée après la déconnexion. Le descriptif suivant résume le profil natif et ne se présente pas comme la consigne réellement envoyée.",
+      "reconstructedBrief": "Arun Becker : tenue bleue #7385a0, peau #976b53, cheveux courts, tablette. Personnage original du DLC."
+    },
+    {
+      "id": "ferris-idle-right",
+      "file": "assets/ferris-idle-right.png",
+      "sha256": "123a17145eaa3fb203af4f79e26ae0d75db938cea1ce16f6295b9f7b853322aa",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": null,
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Solène Ferris est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tools repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
+      },
+      "promptStatus": "La consigne exacte n’a pas été récupérée après la déconnexion. Le descriptif suivant résume le profil natif et ne se présente pas comme la consigne réellement envoyée.",
+      "reconstructedBrief": "Solène Ferris : tenue ocre #b59258, peau #aa7558, casquette, clé de mécanicien en main. Personnage original du DLC."
+    },
+    {
+      "id": "corban-idle-right",
+      "file": "assets/corban-idle-right.png",
+      "sha256": "04952fc6fcbfaf0bb396e2f668f9acda1abdac14d50fa110d426692e6132e0ef",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": null,
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Nils Corban est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tablet repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
+      },
+      "promptStatus": "La consigne exacte n’a pas été récupérée après la déconnexion. Le descriptif suivant résume le profil natif et ne se présente pas comme la consigne réellement envoyée.",
+      "reconstructedBrief": "Nils Corban : tenue bleu canard #648995, peau #c7a486, cheveux courts, tablette. Personnage original du DLC."
+    },
+    {
+      "id": "hale-idle-right",
+      "file": "assets/hale-idle-right.png",
+      "sha256": "059782863dcff9def1b2de1832554d5e5cc7ad10cf93ed690db935d76e3b4c77",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create ONE production-ready transparent PNG character sprite for a realistic hand-painted 2D side-view survival game set in a worn 1980s retro-futurist off-world industrial colony. One full body person only, no sheet, no variants, no lettering, no frame. This is Ezra Hale, an original workshop resident designed for the Aliens Tantalus River of Pain game, not a film actor likeness. Adult male of ordinary build, medium-dark warm brown skin matching #83604e, short dark hair covered by a simple worn work cap, faded terracotta work shirt/jacket matching #aa7961, dark charcoal work trousers, practical worn dark work boots. He is standing still facing RIGHT in near-profile with a slight three-quarter front view, natural anatomy and quiet alert expression. ONE small ordinary spanner is held securely in his near hand at waist level, physically touching the fingers, other arm resting naturally. No extra floating tools, no gun, no armour, no other people. Full head and both complete boots inside canvas with generous transparent padding on all sides. Natural realistic proportions, grounded industrial workwear, fine painted material detail readable at game scale, restrained directional studio lighting. Clean anti-aliased alpha edges and genuinely transparent background, no scenery, no floor, no ground shadow, no dramatic fog.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Ezra Hale est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tools repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
+      }
+    },
+    {
+      "id": "doran-idle-right",
+      "file": "assets/doran-idle-right.png",
+      "sha256": "36f6bccb48bc8272bd879cee6e1be0cdf4f5f8f9ba6833786648681a57ebb564",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create ONE production-ready transparent PNG character sprite for a realistic hand-painted 2D side-view survival game set in a worn 1980s retro-futurist off-world industrial colony. One full body person only, no sheet, no variants, no lettering, no frame. Mei Doran is an original resident designed for the Aliens Tantalus River of Pain game, not a film actor likeness. An adult female biomedical colony worker of ordinary build. Warm light tan skin matching #d0ab89, dark hair neatly tied back, faded sage green work shirt/jacket matching #85a59b. She holds ONE chunky 1980s grey industrial tablet with a small dim green screen securely in both hands at waist height. Dark charcoal practical work trousers and complete worn dark work boots. Standing still facing RIGHT in near profile with a slight three-quarter front view, natural human anatomy and quiet alert expression, natural hands. No extra floating accessories, no gun, no armour, no other person. Full head and both complete boots inside canvas with generous transparent padding all round. Natural realistic proportions, grounded industrial workwear, fine painted material detail readable at game scale, restrained studio lighting. Clean antialiased alpha edges, genuinely transparent background, no scenery, no floor, no cast ground shadow, no fog.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Mei Doran est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tablet repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
+      }
+    },
+    {
+      "id": "sato-idle-right",
+      "file": "assets/sato-idle-right.png",
+      "sha256": "ac91bb59be2cf284ad96d9234dd6a3adec14ae5949c68708b66dc09a8884e2df",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create ONE production-ready transparent PNG character sprite for a realistic hand-painted 2D side-view survival game set in a worn 1980s retro-futurist off-world industrial colony. One full body person only, no sheet, no variants, no lettering, no frame. Lina Sato is an original resident designed for the Aliens Tantalus River of Pain game, not a film actor likeness. An adult female laundry attendant of ordinary build. Warm medium tan skin matching #bd9172, dark hair tied back, muted lilac work shirt matching #958799. She holds ONE small stack of folded cream-coloured linen securely in both hands at waist height, the cloth resting physically on her hands. Dark charcoal practical work trousers and complete worn dark work boots. Standing still facing RIGHT in near profile with a slight three-quarter front view, natural human anatomy and quiet alert expression, natural hands. No extra floating accessories, no gun, no armour, no other person. Full head and both complete boots inside canvas with generous transparent padding all round. Natural realistic proportions, grounded industrial workwear, fine painted material detail readable at game scale, restrained studio lighting. Clean antialiased alpha edges, genuinely transparent background, no scenery, no floor, no cast ground shadow, no fog.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Lina Sato est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire linen repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
+      }
+    },
+    {
+      "id": "bell-idle-right",
+      "file": "assets/bell-idle-right.png",
+      "sha256": "53ee90e0855ba8f3ba25016f68b315d1c3ab57bd2e9ff7683554e37e78f55d33",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create ONE production-ready transparent PNG character sprite for a realistic hand-painted 2D side-view survival game set in a worn 1980s retro-futurist off-world industrial colony. One full body person only, no sheet, no variants, no lettering, no frame. Tomas Bell is an original resident designed for the Aliens Tantalus River of Pain game, not a film actor likeness. An adult male colony maintenance worker of ordinary build. Light warm skin matching #d6b99a, short brown hair, faded olive green work shirt/jacket matching #82985e. He holds ONE small ordinary spanner securely in his near hand at waist height, fingers wrapped naturally around it, other arm relaxed. Dark charcoal practical work trousers and complete worn dark work boots. Standing still facing RIGHT in near profile with a slight three-quarter front view, natural human anatomy and quiet alert expression, natural hands. No extra floating accessories, no gun, no armour, no other person. Full head and both complete boots inside canvas with generous transparent padding all round. Natural realistic proportions, grounded industrial workwear, fine painted material detail readable at game scale, restrained studio lighting. Clean antialiased alpha edges, genuinely transparent background, no scenery, no floor, no cast ground shadow, no fog.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Tomas Bell est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tools repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
+      }
+    },
+    {
+      "id": "kent-idle-right",
+      "file": "assets/kent-idle-right.png",
+      "sha256": "6152a0a339d86f9a38bea238bf7e9f9a1106132dcd9564cdfe923eb1bfdcd45a",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create ONE production-ready transparent PNG character sprite for a realistic hand-painted 2D side-view survival game set in a worn 1980s retro-futurist off-world industrial colony. One full body person only, no sheet, no variants, no lettering, no frame. Rosa Kent is an original resident designed for the Aliens Tantalus River of Pain game, not a film actor likeness. An adult female reception and administration worker of ordinary build. Warm medium-dark brown skin matching #8e634c, dark hair tied back, worn taupe work shirt/jacket matching #9b8464. She holds ONE chunky 1980s grey industrial tablet with a small dim green screen securely in both hands at waist height. Dark charcoal practical work trousers and complete worn dark work boots. Standing still facing RIGHT in near profile with a slight three-quarter front view, natural human anatomy and quiet alert expression, natural hands. No extra floating accessories, no gun, no armour, no other person. Full head and both complete boots inside canvas with generous transparent padding all round. Natural realistic proportions, grounded industrial workwear, fine painted material detail readable at game scale, restrained studio lighting. Clean antialiased alpha edges, genuinely transparent background, no scenery, no floor, no cast ground shadow, no fog.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Rosa Kent est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tablet repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
+      }
+    },
+    {
+      "id": "voss-idle-right",
+      "file": "assets/voss-idle-right.png",
+      "sha256": "dfd1e99b8a63f078f1a0625a2dc1373165b82bb8c56c3250e700f49b56a81016",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create ONE production-ready transparent PNG character sprite for a realistic hand-painted 2D side-view survival game set in a worn 1980s retro-futurist off-world industrial colony. One full body person only, no sheet, no variants, no lettering, no frame. Anton Voss is an original surveying and mapping resident designed for the Aliens Tantalus River of Pain game, not a film actor likeness. Adult male of ordinary build, warm light-medium skin matching #c3a18a, short practical dark hair, worn blue-grey industrial work shirt/jacket matching #879aa3, dark charcoal practical trousers and worn dark work boots. He holds ONE chunky grey 1980s industrial survey tablet with a small dim green screen securely with both hands at waist height. He stands still facing RIGHT in near profile, very slight three-quarter front view, natural human anatomy and quiet alert expression, realistic fingers physically supporting the tablet. No extra floating equipment, no weapon, no armour, no other person. Full head and both complete boots entirely inside the canvas with generous transparent padding all round. Natural realistic proportions, grounded practical industrial workwear, fine painted material detail readable at game scale, restrained studio light. Clean antialiased alpha edges, genuinely transparent background, no scenery, no floor, no ground shadow, no fog.",
+      "fidelity": {
+        "status": "interpretation",
+        "note": "Anton Voss est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tablet repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
+      }
+    }
+  ],
+  "notSelected": [
+    {
+      "target": "pulse",
+      "result": "Un premier dessin M41A a été rejeté lors de la comparaison : carénage inférieur et silhouette du canon incorrects. Aucun de ses pixels n’est admis dans ce lot."
+    },
+    {
+      "target": "pulse",
+      "result": "La correction demandée au générateur a été refusée. Le rendu natif est conservé."
+    },
+    {
+      "target": "flame",
+      "result": "La demande de M240 a été refusée par le générateur. Le rendu natif est conservé."
+    },
+    {
+      "target": "adult",
+      "result": "La demande de Warrior adulte a été refusée par le générateur. Le rendu natif est conservé."
+    }
+  ]
+}

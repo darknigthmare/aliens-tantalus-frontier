@@ -15,12 +15,15 @@
       <span aria-hidden="true">←</span> <span class="return-prefix">REVENIR À </span>TANTALUS
     </a>
     <h1><span class="dlc-series">ALIEN</span> Fleuve de la Douleur</h1>
-    <button id="river-focus-game" class="dlc-control" type="button" aria-controls="river-of-pain-game">Aller au jeu</button>
+    <div class="dlc-actions">
+      <a id="river-original-game" class="dlc-control" href="/dlc/fleuve-de-la-douleur/JOUER.html" target="river-of-pain-game" aria-controls="river-of-pain-game" aria-label="Ouvrir la version d’origine dans le jeu">Version d’origine</a>
+      <button id="river-focus-game" class="dlc-control" type="button" aria-controls="river-of-pain-game">Aller au jeu</button>
+    </div>
   </header>
   <main>
     <p id="river-controls" class="visually-hidden">F6 ramène le clavier au bouton de retour. Échap ouvre la pause du jeu. Cette campagne conserve sa propre sauvegarde.</p>
-    <p id="river-loading" class="loading-notice" role="status">Chargement de la colonie… <a href="/dlc/fleuve-de-la-douleur/JOUER.html">Ouvrir le jeu directement</a></p>
-    <iframe id="river-of-pain-game" src="/dlc/fleuve-de-la-douleur/JOUER.html" title="Alien : Fleuve de la Douleur — jeu" aria-describedby="river-controls" allow="fullscreen" allowfullscreen></iframe>
+    <p id="river-loading" class="loading-notice" role="status">Chargement de la colonie… <a href="/dlc/fleuve-de-la-douleur/visual-v1/JOUER.html">Ouvrir le jeu directement</a></p>
+    <iframe id="river-of-pain-game" name="river-of-pain-game" src="/dlc/fleuve-de-la-douleur/visual-v1/JOUER.html" title="Alien : Fleuve de la Douleur — jeu" aria-describedby="river-controls" allow="fullscreen" allowfullscreen></iframe>
   </main>
   <noscript><p class="script-notice">Ce jeu nécessite JavaScript. <a href="/">Retour au Tantalus</a></p></noscript>
 </body>

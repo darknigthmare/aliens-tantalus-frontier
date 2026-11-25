@@ -1176,7 +1176,18 @@
     "dlc/fleuve-de-la-douleur/integration.css",
     "dlc/fleuve-de-la-douleur/integration.js",
     "dlc/fleuve-de-la-douleur/JOUER.html",
-    "dlc/fleuve-de-la-douleur/LICENSE_NOTICE.md"
+    "dlc/fleuve-de-la-douleur/LICENSE_NOTICE.md",
+    "dlc/fleuve-de-la-douleur/visual-v1/JOUER.html",
+    "dlc/fleuve-de-la-douleur/visual-v1/GALLERY.html"
+  ],
+  "visualManifest": "dlc/fleuve-de-la-douleur/visual-v1/sprite-manifest.json",
+  "visualSourceFiles": [
+    "dlc/fleuve-de-la-douleur/visual-v1/sprite-loader.js",
+    "dlc/fleuve-de-la-douleur/visual-v1/creature-png.js",
+    "dlc/fleuve-de-la-douleur/visual-v1/actors-props-png.js",
+    "dlc/fleuve-de-la-douleur/visual-v1/sprite-manifest.json",
+    "dlc/fleuve-de-la-douleur/visual-v1/GENERATION_LOG.json",
+    "dlc/fleuve-de-la-douleur/visual-v1/README.md"
   ],
   "unrecovered": [
     "Version 0.10 locale mentionnée dans le suivi ; aucun fichier source ni paquet sauvegardé retrouvé."
