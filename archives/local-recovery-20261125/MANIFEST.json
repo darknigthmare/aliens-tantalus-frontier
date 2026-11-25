@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "title": "Archives locales Aliens: Tantalus Frontier",
+  "created_on": "2026-11-25",
+  "part_paths_relative_to_manifest": true,
+  "archive_count": 2,
+  "module_count": 2,
+  "total_source_bytes": 82599736,
+  "maximum_part_bytes": 10485760,
+  "expected_archive_count": 16,
+  "expected_total_source_bytes": 1189845299,
+  "remaining_archives_pending": [
+    "alien-resurrection-v125",
+    "mire-nostromo-v119",
+    "alien-covenant-v0-10-0",
+    "alien-hors-des-ombres-v0-10",
+    "alien-mer-des-chagrins-v0-1-0",
+    "alien-mer-des-chagrins-v0-10-0",
+    "alien-mer-des-chagrins-v0-2-0",
+    "alien-mer-des-chagrins-v0-3-0",
+    "alien-mer-des-chagrins-v0-4-0",
+    "alien-mer-des-chagrins-v0-5-0",
+    "alien-mer-des-chagrins-v0-6-0",
+    "alien-mer-des-chagrins-v0-7-0",
+    "alien-mer-des-chagrins-v0-8-0",
+    "alien-mer-des-chagrins-v0-9-0"
+  ],
+  "verification": {
+    "source_sha256": "Matched the recovered source archive inventory.",
+    "git_blob_sha": "Every created blob SHA matched the Git SHA calculated locally from the exact bytes.",
+    "reconstruction": "Manifest records ordered ranges, byte counts and SHA-256 for every part and complete archive.",
+    "zip_payload_crc": "Not claimed by this preservation step."
+  },
+  "integration_scope": {
+    "avp_2004": "Playable runtime and editable sources are integrated separately through pull request 55.",
+    "other_modules": "Complete source archives preserved; this does not certify their runtime integration or fidelity."
+  },
+  "archives": [
+    {
+      "id": "avp-2004-v0-11-0",
+      "module": "avp-2004",
+      "title": "AVP (2004)",
+      "version": "0.11.0",
+      "role": "current_recovered",
+      "original_name": "ALIENS_TANTALUS_DLC_AVP_2004_v0.11.0.zip",
+      "sha256": "0520c1d4ecc47ffd72ea2907807e978ca4fc0b8b26e49a80bc8c83166641a155",
+      "size_bytes": 58704014,
+      "zip_member_count": 620,
+      "storage": "split",
+      "parts": [
+        {
+          "path": "avp-2004/ALIENS_TANTALUS_DLC_AVP_2004_v0.11.0.zip.part001",
+          "offset": 0,
+          "size_bytes": 6291456,
+          "sha256": "6098da5c0b00edfaf12b980a96e85e3e8eb67323dd814f3b4f6cf2e8cae833f5",
+          "git_blob_sha": "26ccca600c751fb14c271f80f17cfd3d8a962e24"
+        },
+        {
+          "path": "avp-2004/ALIENS_TANTALUS_DLC_AVP_2004_v0.11.0.zip.part002",
+          "offset": 6291456,
+          "size_bytes": 10485760,
+          "sha256": "eb9d7fd332a0e1ba40b730076a68945294535b3e857d7672abca5fea18620d87",
+          "git_blob_sha": "814737ba4e5987407de5bec6fecc63d3fbad1b5b"
+        },
+        {
+          "path": "avp-2004/ALIENS_TANTALUS_DLC_AVP_2004_v0.11.0.zip.part003",
+          "offset": 16777216,
+          "size_bytes": 10485760,
+          "sha256": "917377b6b8783c9aef80033c547008549917800e0dca54b94ec97da16a3ec6e5",
+          "git_blob_sha": "1993fa4fcec6db8666b3eba11f53fef01d376bc4"
+        },
+        {
+          "path": "avp-2004/ALIENS_TANTALUS_DLC_AVP_2004_v0.11.0.zip.part004",
+          "offset": 27262976,
+          "size_bytes": 10485760,
+          "sha256": "4d7b183e065dba1b3cac0ce1c434d4d5a9741ac54a2be00742a31f50d2841b19",
+          "git_blob_sha": "fc9eaea7ff690fdf0f0f7756c76f264eb6e09005"
+        },
+        {
+          "path": "avp-2004/ALIENS_TANTALUS_DLC_AVP_2004_v0.11.0.zip.part005",
+          "offset": 37748736,
+          "size_bytes": 10485760,
+          "sha256": "50a982166742f3bd71c6ab712fb61f1b2bd21c8eb1aba7e47c227d470ca04057",
+          "git_blob_sha": "2b48d36592c7cd8ace3a448be419e9de4ccf5dde"
+        },
+        {
+          "path": "avp-2004/ALIENS_TANTALUS_DLC_AVP_2004_v0.11.0.zip.part006",
+          "offset": 48234496,
+          "size_bytes": 10469518,
+          "sha256": "bf6aab76e57b8bf4559b4f906befa6f1fbd139f588f7fdd06383bf19a58b1b30",
+          "git_blob_sha": "6a0d75365ca6b40aed063fffbf71dd7b5b457373"
+        }
+      ],
+      "status": "preserved"
+    },
+    {
+      "id": "alien-earth-v11",
+      "module": "alien-earth",
+      "title": "Alien: Earth",
+      "version": "11",
+      "role": "current_recovered",
+      "original_name": "ALIEN_EARTH_DLC_V11_MODULE_COMPLET.zip",
+      "sha256": "c6402939c7e3085609b191848f710cd2efe84c5bfe6547a2cf95ca39494c38f3",
+      "size_bytes": 23895722,
+      "zip_member_count": 180,
+      "storage": "split",
+      "parts": [
+        {
+          "path": "alien-earth/ALIEN_EARTH_DLC_V11_MODULE_COMPLET.zip.part001",
+          "offset": 0,
+          "size_bytes": 10485760,
+          "sha256": "617b87da33c483b191d62c1fb68da5e2a8100252f11d7774f7d6016f6873785b",
+          "git_blob_sha": "01fe031895bd1869c1633fe1feb1f084ef75dc27"
+        },
+        {
+          "path": "alien-earth/ALIEN_EARTH_DLC_V11_MODULE_COMPLET.zip.part002",
+          "offset": 10485760,
+          "size_bytes": 10485760,
+          "sha256": "22ffd1258d0ebc88b288a76fea05488dc737699f07d13fae5ee1607d5fcbe6b0",
+          "git_blob_sha": "2e6182a97b50bd9fea8dd53dea4bf5ea6bc4c873"
+        },
+        {
+          "path": "alien-earth/ALIEN_EARTH_DLC_V11_MODULE_COMPLET.zip.part003",
+          "offset": 20971520,
+          "size_bytes": 2924202,
+          "sha256": "3c73fba993587e3fef936599a8d027db43e877c1e5d5747f563f872122e7eb36",
+          "git_blob_sha": "a7a7653ba670a5a92657ac07d78c92cc3b5ed0a6"
+        }
+      ],
+      "status": "preserved"
+    }
+  ]
+}
