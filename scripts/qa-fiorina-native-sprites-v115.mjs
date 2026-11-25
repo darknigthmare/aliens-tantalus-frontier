@@ -41,7 +41,7 @@ const campaign = CAMPAIGNS.find((c) => c.id === 'special-alien3-fiorina-161');
 const world = WORLDS.find((w) => w.id === campaign.worldId) || WORLDS[0];
 const missionLevel = buildFiorinaMissionV114({ campaign, world, levelSeeds: LEVEL_SEEDS, seed: 114 });
 const options = { campaign, world, missionLevel, levelSeed: missionLevel.levelSeed, weapon: WEAPONS[0],
-  enemyCatalog: ENEMIES, equipment: [], crew: [], seed: 114 };
+  enemyCatalog: ENEMIES, equipment: [], crew: [], seed: 114, accessibility: { reducedMotion: false } };
 const report = { schemaVersion: 1, scope: 'Native GameEngine component rendering with actual delivered PNGs on Canvas/Skia; explicit DOM/RAF/image host doubles. Not a browser journey.',
   fixtures: ['native campaign seed114', 'injected narrative phase/pose/clock for render sampling',
     'reduced motion disabled in the fixture to inspect both delivered poses',
@@ -62,6 +62,11 @@ const physicalSnapshot = () => JSON.stringify([engine.player, engine.alien3Runne
   ...(engine.alien3EncounterV105?.participants || [])].map((actor) => actor && Object.fromEntries(
   ['id','x','y','w','h','vx','vy','moving','grounded','climbing','crouching','alive','depth','facing','nav']
     .map((key) => [key, actor[key]]))));
+// The active Fiorina renderer reads the V104 owner clock, not the host animation clock.
+const setFixtureArtTime = (time) => {
+  engine.alien3V104.clock = time;
+  assert.equal(engine.alien3ArtTimeV102(), time, 'Native art clock must expose the injected fixture time');
+};
 let sheetNumber = 0;
 
 async function flushSamples() {
@@ -141,7 +146,7 @@ try {
   await mkdir(output, { recursive: true });
   engine.start(options);
   engine.reducedMotion = false;
-  if (engine.accessibilityRuntime) engine.accessibilityRuntime.reducedMotion = false;
+  assert.equal(engine.accessibilityRuntime?.reducedMotion, false, 'Native start must honor the motion-enabled fixture');
   engine.alien3V104.settings.reducedMotion = false;
   bank = engine.registerAlien3SpriteManifestV115(manifest, { imageFactory: () => new DeliveredImage(),
     preloadAll, maxCachedImages: 6, maxDecodedBytes: 48 * 1024 * 1024 });
@@ -164,7 +169,7 @@ try {
     assert.equal(manifest.assets[sprite].frames?.length, 2, sprite + ': two delivered poses');
     Object.assign(engine.player, { moving: true, vx: speed, vy: 0, grounded: true });
     for (const frame of [0, 1]) {
-      engine.animationTime = (frame + .1) / manifest.assets[sprite].fps;
+      setFixtureArtTime((frame + .1) / manifest.assets[sprite].fps);
       await sample(sprite + '-frame-' + frame, ctx => engine.drawActor(ctx, engine.player), {
         focus: playerFocus(), expected: sprite, expectedFrame: frame,
         fixture: 'Native wreckage costume selection; injected grounded movement and render clock, no narrative progression.'
@@ -208,7 +213,7 @@ try {
   ]) {
     Object.assign(engine.player, { moving: true, vx: 120, vy: 0, grounded: true,
       crouching: false, climbing: false, v52HurtClock: 0, shockClock: 0, interactionClock: 0 }, changes);
-    engine.animationTime = .2;
+    setFixtureArtTime(.2);
     if (pose === 'jump-apex') assert.ok(hasAsset(sprite), 'Apex fixture requires the delivered jump pose');
     await sample('player-' + pose, (ctx) => engine.drawActor(ctx, engine.player), { focus: playerFocus(),
       expected: hasAsset(sprite) ? sprite : null, fixture: 'Authored traque encounter; injected ' + pose + ' pose. Absent sprite keeps procedural renderer.' });
@@ -219,7 +224,7 @@ try {
     if (hasAsset(sprite) && ['climb', 'crouch-walk'].includes(pose)) {
       assert.equal(manifest.assets[sprite].frames?.length, 2, sprite + ': two delivered poses');
       for (const frame of [0, 1]) {
-        engine.animationTime = (frame + .1) / manifest.assets[sprite].fps;
+        setFixtureArtTime((frame + .1) / manifest.assets[sprite].fps);
         await sample('player-' + pose + '-frame-' + frame, ctx => engine.drawActor(ctx, engine.player), {
           focus: playerFocus(), expected: sprite, expectedFrame: frame,
           fixture: 'Native player hook; injected ' + pose + ' physical state and explicit two-pose frame.'
