@@ -29,6 +29,7 @@ import { preserveLetheContinuityV163, recordLetheContinuityReviewV163 } from '..
 import { mountLetheContinuityV163 } from '../src/campaign-lethe-continuity-ui-v163.js';
 import { getArbiterMissionV190 } from '../src/xeno-arbiter-campaign-v190.js';
 import { mountArbiterDossierV190 } from '../src/xeno-arbiter-ui-v190.js';
+import { FIORINA_CUTS_V114, isFiorinaCampaignV114, fiorinaCutForOperationV114 } from '../src/fiorina-campaign-v114.js';
 import { hostV136 } from './forge-native-host-v136.mjs';
 import { HUB_NPC_ANNEX_WORKPOST_ROUTE_DEFINITIONS_V165 } from '../src/npc-annex-workpost-routes-v165.js';
 import { campaignObjectiveLabelV188 } from '../src/mission-objective-panel-v188.js';
@@ -521,6 +522,9 @@ test('PR15: the actual app review callback restores focus to the replaced topic 
     launch = document.createElement('button'); root.append(launch);
   } });
   const dependencies = { saveSystem: system, deriveStoryCampaignV188, markStoryDebriefSeenV188, campaignObjectiveLabelV188, researchBonusRowV188: () => '', colonyPreparationCrewV188, STORY_RELAY_CAMPAIGN_ID_V188, clone, preserveCampaignStoryReturnV160,
+    // Supply the actual archive selectors used by the extracted production
+    // renderer; its initial cut is explicit and this report remains QZ-18.
+    FIORINA_CUTS_V114, isFiorinaCampaignV114, fiorinaCutForOperationV114, pendingFiorinaCutV114: 'theatrical',
     preserveConvoyReturnHistoryV162, mountConvoyReturnHistoryV162,
     preserveLetheContinuityV163, mountLetheContinuityV163, recordLetheContinuityReviewV163,
     getArbiterMissionV190, mountArbiterDossierV190,
@@ -838,6 +842,8 @@ async function driveNativeReturnConsultation({ seen = [], alreadyDebriefed = fal
   let now = 0;
   const player = new CinematicPlayerV188({ document, now: () => now, requestFrame() {}, ImageCtor: null });
   const dependencies = { document, saveSystem: system, clone, deriveStoryCampaignV188, markStoryDebriefSeenV188,
+    // The real archive branch coexists with the native two-film return chain.
+    FIORINA_CUTS_V114, isFiorinaCampaignV114, fiorinaCutForOperationV114, pendingFiorinaCutV114: 'theatrical',
     markStoryCinematicSeenV188, normalizeStoryCampaignV188, interludeDueV188, STORY_RELAY_CAMPAIGN_ID_V188,
     CINEMATICS_V188, cinematicPlayerV188: player, cinematicReturnSceneV188,
     audio: { scene: 'command', stopMusic() {}, setMusicMoodV188() {}, restoreMoodV188() {} },

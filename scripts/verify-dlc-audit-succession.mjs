@@ -6,6 +6,8 @@ import { AVP_HOST_BASELINE_20261125 as baseline, AVP_HOST_SUCCESSORS_20261125 as
   AVP_FIORINA_JOIN_BASELINES_20261125 as joinBaselines,
   AVP_FIORINA_INCOMING_SOURCES_20261125 as incomingSources,
   AVP_FIORINA_JOIN_SUCCESSORS_20261125 as joinSuccessors,
+  AVP_FIORINA_QA_BASELINE_20261125 as qualityBaseline,
+  AVP_FIORINA_QA_SUCCESSORS_20261125 as qualitySuccessors,
   reviewedAvpHostDigest20261125 as advance, avpHostRuntimeSources20261125 as runtimeView,
   verifyAvpHostSources20261125 as verify } from './audit-dlc-avp-2004-20261125.mjs';
 import { reviewedAfterNativeQaResourcesV187 } from './audit-native-qa-resources-v187.mjs';
@@ -81,21 +83,33 @@ const expectedJoinPaths = [
   "sw.js"
 ];
 // END EXPECTED FIORINA JOIN PATHS
-const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths])];
-const firstEndpoint = path => (successors[path] || joinSuccessors[path]).previousSha256;
-const finalEndpoint = path => (joinSuccessors[path] || successors[path]).currentSha256;
-const brokenChain = /Broken (?:merged-Tantalus-to-AVP|AVP-to-Fiorina) host source chain/;
+const publishedJoinReceiptsSha256 = '7fed71bed2ff7dbf2e3cc24aa7cf7c2cee7513c85b4ae309d86bf5bf00576132';
+const expectedQualityPaths = [
+  "scripts/i18n-tantalus-xeno-merge-v188.mjs",
+  "scripts/verify-bugfix-texts-v188.mjs",
+  "scripts/verify-campaign-lethe-v163.mjs",
+  "scripts/verify-campaign-story-v160.mjs",
+  "scripts/verify-insertion-cinematic-v188.mjs",
+  "scripts/verify-m577-everywhere-v188.mjs",
+  "src/i18n-en-catalog-v185.js"
+];
+const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths])];
+const firstEndpoint = path => (successors[path] || joinSuccessors[path] || qualitySuccessors[path]).previousSha256;
+const finalEndpoint = path => (qualitySuccessors[path] || joinSuccessors[path] || successors[path]).currentSha256;
+const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA) source chain/;
 
 test('AVP published receipts remain immutable while the exact Fiorina join verifies current bytes', () => {
   assert.equal(baseline, '001a20bdc0f9f1a3c835e84d8f3c9434bc159330');
   assert.deepEqual(Object.keys(successors).sort(), [...expectedPaths].sort());
   assert.equal(sha(JSON.stringify(successors)), publishedAvpReceiptsSha256);
   assert.deepEqual(Object.keys(joinSuccessors).sort(), [...expectedJoinPaths].sort());
+  assert.equal(sha(JSON.stringify(joinSuccessors)), publishedJoinReceiptsSha256);
+  assert.deepEqual(Object.keys(qualitySuccessors).sort(), [...expectedQualityPaths].sort());
   assert.equal(Object.hasOwn(successors, audit), false);
   assert.equal(Object.hasOwn(joinSuccessors, audit), false);
-  assert.ok(Object.isFrozen(successors) && Object.isFrozen(joinSuccessors));
+  assert.ok(Object.isFrozen(successors) && Object.isFrozen(joinSuccessors) && Object.isFrozen(qualitySuccessors));
   assert.deepEqual(verify(), { baselineCommit: baseline, successors: verifiedPaths.length,
-    joinedSuccessors: expectedJoinPaths.length, historicalEvidenceTransferred: false });
+    joinedSuccessors: expectedJoinPaths.length, qualitySuccessors: expectedQualityPaths.length, historicalEvidenceTransferred: false });
 });
 
 test('the Fiorina join identifies both exact parents and every changed incoming host source', () => {
@@ -118,6 +132,22 @@ test('the Fiorina join identifies both exact parents and every changed incoming 
   // exact reviewed bytes rather than silently replacing that implementation.
   for (const path of ['src/content.js', 'src/game-production-runtime.js', 'src/special-operations-v131.js'])
     assert.equal(joinSuccessors[path].currentSha256, incomingSources[path], path);
+});
+
+test('translation and fixture corrections advance only from the published combined commit', () => {
+  assert.equal(qualityBaseline, 'd61077b3d71dc75d5268d62eb44373f4c8fe4bf4');
+  assert.equal(Object.hasOwn(qualitySuccessors, audit), false);
+  for (const [path, receipt] of Object.entries(qualitySuccessors)) {
+    assert.ok(Object.isFrozen(receipt));
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.notEqual(receipt.previousSha256, receipt.currentSha256, path);
+    const prior = joinSuccessors[path] || successors[path];
+    if (prior) assert.equal(receipt.previousSha256, prior.currentSha256, path);
+    if (xenoJoin.successors[path]) {
+      assert.equal(xenoJoin.successors[path].currentSha256, firstEndpoint(path), path);
+      assert.equal(reviewedXenoTrialsTantalusJoinV206(path, xenoJoin.successors[path].previousSha256), finalEndpoint(path), path);
+    }
+  }
 });
 
 test('the combined chain refuses unknown, skipped or repeated predecessors', () => {
@@ -144,13 +174,15 @@ test('both historical chains reach the merged sources without rewriting either j
   }
 });
 
-test('runtime views accept only the recorded baseline, AVP or joined endpoint', () => {
+test('runtime views accept only recorded baseline, AVP, join or quality endpoints', () => {
   const predecessor = Object.fromEntries(verifiedPaths.map(path => [path, firstEndpoint(path)]));
   const publishedAvp = Object.fromEntries(verifiedPaths.map(path => [path, successors[path]?.currentSha256 || firstEndpoint(path)]));
+  const joined = Object.fromEntries(verifiedPaths.map(path => [path, joinSuccessors[path]?.currentSha256 || successors[path]?.currentSha256 || firstEndpoint(path)]));
   const expected = Object.fromEntries(verifiedPaths.map(path => [path, finalEndpoint(path)]));
-  predecessor['src/untouched.js'] = publishedAvp['src/untouched.js'] = expected['src/untouched.js'] = 'unchanged';
+  predecessor['src/untouched.js'] = publishedAvp['src/untouched.js'] = joined['src/untouched.js'] = expected['src/untouched.js'] = 'unchanged';
   assert.deepEqual(runtimeView(predecessor), expected);
   assert.deepEqual(runtimeView(publishedAvp), expected);
+  assert.deepEqual(runtimeView(joined), expected);
   assert.deepEqual(runtimeView(expected), expected);
   assert.ok(Object.isFrozen(runtimeView(predecessor)));
   assert.deepEqual(runtimeView({}), {});
@@ -163,7 +195,7 @@ test('runtime views accept only the recorded baseline, AVP or joined endpoint', 
   }
 });
 
-test('a changed byte in every AVP or Fiorina successor fails the real reader contract', () => {
+test('a changed byte in every host, join or quality successor fails the real reader contract', () => {
   for (const path of verifiedPaths) {
     const altered = candidate => candidate === path ? Buffer.concat([read(candidate), Buffer.from('\n// unreviewed byte\n')]) : read(candidate);
     assert.throws(() => verify(altered), /Unreviewed AVP host source bytes/, path);
@@ -183,5 +215,6 @@ test('the actual terminal imports no audit and cannot admit its own bytes', () =
   assert.doesNotMatch(source, /(?:from\s*|import\s*\(?\s*)['"]\.\//);
   assert.equal(Object.hasOwn(successors, audit), false);
   assert.equal(Object.hasOwn(joinSuccessors, audit), false);
+  assert.equal(Object.hasOwn(qualitySuccessors, audit), false);
   assert.doesNotMatch(source, /from\s+['"].*audit-/);
 });

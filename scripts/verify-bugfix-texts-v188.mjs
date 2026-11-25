@@ -77,7 +77,8 @@ test('mission log: objective actions and insertion phases are named, not printed
   for (const phase of Object.keys(MISSION_INSERTION_PHASE_LABELS_V62)) assert.doesNotMatch(labels.insertionPhaseLabelV188(phase, MISSION_INSERTION_PHASE_LABELS_V62), ID);
   assert.equal(labels.insertionPhaseLabelV188('player-control', MISSION_INSERTION_PHASE_LABELS_V62), 'PRISE DE CONTRÔLE');
   const app = read('src/app.js');
-  assert.match(app, /OBJECTIF · \$\{objectiveActionLabelV188\(event\.action\)/);
+  assert.match(app, /OBJECTIF · \$\{\(isFiorinaCampaignV114\(engine\.campaign\) \? engine\.objectiveProgressText\?\.\(\) \|\| campaignObjectiveLabel\(engine\.campaign\.id\) : objectiveActionLabelV188\(event\.action\)\)\.toUpperCase\(\)\}/,
+    'Fiorina names its authored objective; ordinary missions retain the reviewed action label');
   assert.match(app, /INSERTION · \$\{insertionPhaseLabelV188\(phase/);
   assert.equal(en('SOUS-TITRE · MOUVEMENT DERRIÈRE LA PORTE'), 'CAPTION · MOVEMENT BEHIND THE DOOR');
 });
