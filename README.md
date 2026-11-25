@@ -2,7 +2,7 @@
 
 Cette branche `archive/local-recovery-20261125` conserve les fichiers complets qui étaient restés dans l'environnement de travail. Elle contient uniquement les archives et leurs outils de récupération.
 
-**État de cet instantané : 10 archives enregistrées sur 16, 710 038 466 octets.** Le transfert des autres archives est encore en cours.
+**État de cet instantané : 16 archives enregistrées sur 16, 1 189 845 299 octets.** Les 16 archives inventoriées sont présentes.
 
 ## Contenu
 
@@ -10,7 +10,7 @@ Cette branche `archive/local-recovery-20261125` conserve les fichiers complets q
 | --- | --- | --- | --- |
 | Alien : La Résurrection | 125 | `ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip` | Enregistrée |
 | AVP (2004) | 0.11.0 | `ALIENS_TANTALUS_DLC_AVP_2004_v0.11.0.zip` | Enregistrée |
-| MIRE / Nostromo | 119 | `ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip` | À transférer |
+| MIRE / Nostromo | 119 | `ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip` | Enregistrée |
 | Alien: Covenant | 0.10.0 | `ALIEN_COVENANT_v0.10.0_DLC_COMPLET.zip` | Enregistrée |
 | Alien: Earth | 11 | `ALIEN_EARTH_DLC_V11_MODULE_COMPLET.zip` | Enregistrée |
 | Alien : Hors des Ombres | 0.10 | `ALIEN_HORS_DES_OMBRES_V0_10_LE_MARION_PIECE_PAR_PIECE.zip` | Enregistrée |
@@ -19,11 +19,11 @@ Cette branche `archive/local-recovery-20261125` conserve les fichiers complets q
 | Alien : Mer des Chagrins | 0.2.0 | `ALIEN_MER_DES_CHAGRINS_v0.2.0_DLC_AUTONOME.zip` | Enregistrée |
 | Alien : Mer des Chagrins | 0.3.0 | `ALIEN_MER_DES_CHAGRINS_v0.3.0_DLC_AUTONOME.zip` | Enregistrée |
 | Alien : Mer des Chagrins | 0.4.0 | `ALIEN_MER_DES_CHAGRINS_v0.4.0_DLC_AUTONOME.zip` | Enregistrée |
-| Alien : Mer des Chagrins | 0.5.0 | `ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip` | À transférer |
-| Alien : Mer des Chagrins | 0.6.0 | `ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip` | À transférer |
-| Alien : Mer des Chagrins | 0.7.0 | `ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip` | À transférer |
-| Alien : Mer des Chagrins | 0.8.0 | `ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip` | À transférer |
-| Alien : Mer des Chagrins | 0.9.0 | `ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip` | À transférer |
+| Alien : Mer des Chagrins | 0.5.0 | `ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip` | Enregistrée |
+| Alien : Mer des Chagrins | 0.6.0 | `ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip` | Enregistrée |
+| Alien : Mer des Chagrins | 0.7.0 | `ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip` | Enregistrée |
+| Alien : Mer des Chagrins | 0.8.0 | `ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip` | Enregistrée |
+| Alien : Mer des Chagrins | 0.9.0 | `ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip` | Enregistrée |
 
 Le [manifeste](archives/local-recovery-20261125/MANIFEST.json) donne l'ordre des fragments, leurs tailles, leurs SHA-256 et leurs identifiants Git. Chaque fragment mesure au maximum 10 Mio. Le premier fragment AVP mesure 6 Mio ; l'ordre du manifeste reste la référence.
 

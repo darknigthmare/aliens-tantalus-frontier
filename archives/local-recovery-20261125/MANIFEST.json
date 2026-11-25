@@ -3,20 +3,13 @@
   "title": "Archives locales Aliens: Tantalus Frontier",
   "created_on": "2026-11-25",
   "part_paths_relative_to_manifest": true,
-  "archive_count": 10,
-  "module_count": 6,
-  "total_source_bytes": 710038466,
+  "archive_count": 16,
+  "module_count": 7,
+  "total_source_bytes": 1189845299,
   "maximum_part_bytes": 10485760,
   "expected_archive_count": 16,
   "expected_total_source_bytes": 1189845299,
-  "remaining_archives_pending": [
-    "mire-nostromo-v119",
-    "alien-mer-des-chagrins-v0-5-0",
-    "alien-mer-des-chagrins-v0-6-0",
-    "alien-mer-des-chagrins-v0-7-0",
-    "alien-mer-des-chagrins-v0-8-0",
-    "alien-mer-des-chagrins-v0-9-0"
-  ],
+  "remaining_archives_pending": [],
   "verification": {
     "source_sha256": "Matched the recovered source archive inventory.",
     "git_blob_sha": "Every created blob SHA matched the Git SHA calculated locally from the exact bytes.",
@@ -264,6 +257,112 @@
           "size_bytes": 10469518,
           "sha256": "bf6aab76e57b8bf4559b4f906befa6f1fbd139f588f7fdd06383bf19a58b1b30",
           "git_blob_sha": "6a0d75365ca6b40aed063fffbf71dd7b5b457373"
+        }
+      ],
+      "status": "preserved"
+    },
+    {
+      "id": "mire-nostromo-v119",
+      "module": "mire-nostromo",
+      "title": "MIRE / Nostromo",
+      "version": "119",
+      "role": "current_recovered",
+      "original_name": "ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip",
+      "sha256": "d25c5b914eb7f4c6535b828d75a24ff5a9541bcec6a274179ec6a71ed7600577",
+      "size_bytes": 133456534,
+      "zip_member_count": 1039,
+      "storage": "split",
+      "parts": [
+        {
+          "path": "mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part001",
+          "offset": 0,
+          "size_bytes": 10485760,
+          "sha256": "65c882a0afc4603dc60f3bb8a38d2dbcc43783c384582bbca6665e81388b0a32",
+          "git_blob_sha": "2829795684e2f4ce04fb5310804d5c55f1159e76"
+        },
+        {
+          "path": "mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part002",
+          "offset": 10485760,
+          "size_bytes": 10485760,
+          "sha256": "061277962ea92c166b814dd40554c5e18fb74b4d91d88508c2ecedf1ff818518",
+          "git_blob_sha": "b8170b4039e6b3b838fc5243901e7ffde50c25de"
+        },
+        {
+          "path": "mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part003",
+          "offset": 20971520,
+          "size_bytes": 10485760,
+          "sha256": "314b8597158672f85a026cf997ebf9976dff5c2bff47889e8412c6198af16182",
+          "git_blob_sha": "a546be132ef87d67cb168dfb576f0f9f84cf4aff"
+        },
+        {
+          "path": "mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part004",
+          "offset": 31457280,
+          "size_bytes": 10485760,
+          "sha256": "770dbca5c80a051162f21d239083d7b45fbb9387c023bbe76af696911c055dba",
+          "git_blob_sha": "42a3981c779e1fe497c317ba7c183045e6f71714"
+        },
+        {
+          "path": "mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part005",
+          "offset": 41943040,
+          "size_bytes": 10485760,
+          "sha256": "a8b524cce48cd4cb3beef5840b1a7100a0effab409b2c4fd24ab3e6fd733322c",
+          "git_blob_sha": "90d68ead29f36f91fbc3b7b27ad6b79498fcd47c"
+        },
+        {
+          "path": "mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part006",
+          "offset": 52428800,
+          "size_bytes": 10485760,
+          "sha256": "3db27e25dc05170d92edc8c4597cd1a1c091ead3feae616f069a0ad788eabf9f",
+          "git_blob_sha": "2beb999a7fdffb1f8c16b26af93d96f37f76021e"
+        },
+        {
+          "path": "mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part007",
+          "offset": 62914560,
+          "size_bytes": 10485760,
+          "sha256": "e554bfd55bf6956e22d58eba6783072508df770a6e1100d84f75aaf26643941c",
+          "git_blob_sha": "ab96487cf5dcb3aede5e311d7bf064c5a8fbd6d9"
+        },
+        {
+          "path": "mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part008",
+          "offset": 73400320,
+          "size_bytes": 10485760,
+          "sha256": "2876fcbce9c0f71d308f41e9591b2d62403e3786560ba94b999d98bafdc278db",
+          "git_blob_sha": "8634ce32e0020a546e11812e72cc4c1189adc9ae"
+        },
+        {
+          "path": "mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part009",
+          "offset": 83886080,
+          "size_bytes": 10485760,
+          "sha256": "38bdf37ef8eedf8296ea3997956f5fcca5342b90ff8c1baf92a548bc2ccb1d58",
+          "git_blob_sha": "eb0bf153c28696f68fcea342406de04450a939ed"
+        },
+        {
+          "path": "mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part010",
+          "offset": 94371840,
+          "size_bytes": 10485760,
+          "sha256": "79683a5b3f573e45286caa5fbf10e5be5ee4bfab5c7f38c41b84a1839f61116d",
+          "git_blob_sha": "ef1ab252542061c19264826912af3cae6163559c"
+        },
+        {
+          "path": "mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part011",
+          "offset": 104857600,
+          "size_bytes": 10485760,
+          "sha256": "9423fc96038234984a24fdfe364af7f643df6f35cf08b40d79a235cb1aa8b168",
+          "git_blob_sha": "6a90ce64139d982ee2045b907b08eb9d173a86af"
+        },
+        {
+          "path": "mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part012",
+          "offset": 115343360,
+          "size_bytes": 10485760,
+          "sha256": "a7bebfc309d01ad7c1fa18274cff4d99cbfe2c736aae65025699f4435b46cf36",
+          "git_blob_sha": "e919d5b541432d2feca32876db543125d1c0b5f0"
+        },
+        {
+          "path": "mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part013",
+          "offset": 125829120,
+          "size_bytes": 7627414,
+          "sha256": "73361ff73d2bbb0da68c525d27363300785306c076add0efa2537cc8649c241b",
+          "git_blob_sha": "774dec6fb3425e6eb7e58c7fef11165835754d81"
         }
       ],
       "status": "preserved"
@@ -678,6 +777,333 @@
           "size_bytes": 515519,
           "sha256": "d34a040bef3da367ff9015e51932c92a9fdcd221162e1ba63b17c99ec1efb459",
           "git_blob_sha": "92a7829c53e08a2f7690b1f608af49f712e0acc2"
+        }
+      ],
+      "status": "preserved"
+    },
+    {
+      "id": "alien-mer-des-chagrins-v0-5-0",
+      "module": "alien-mer-des-chagrins",
+      "title": "Alien : Mer des Chagrins",
+      "version": "0.5.0",
+      "role": "historical",
+      "original_name": "ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip",
+      "sha256": "62dd32eb8cef50c1605b4835c6b3c0e5accaa77a564e22dbadda893e1f82229d",
+      "size_bytes": 54393612,
+      "zip_member_count": 1465,
+      "storage": "split",
+      "parts": [
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip.part001",
+          "offset": 0,
+          "size_bytes": 10485760,
+          "sha256": "6eef2ed45ad42d57ce2fc399eb5edb6df3df8fa6a3465ddcdb8ec3b1530c8dfa",
+          "git_blob_sha": "f41727a4863fb20bdf4b0871f236a03420ebc469"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip.part002",
+          "offset": 10485760,
+          "size_bytes": 10485760,
+          "sha256": "ac95df973ca5a83fb35633f7b4b63b3e5c9c7c1b93aed8863393c982da36173f",
+          "git_blob_sha": "475dabc42765499fb1dfc898827294a19c04d708"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip.part003",
+          "offset": 20971520,
+          "size_bytes": 10485760,
+          "sha256": "0cde0efc63d879568184f6a1aaa082802a7331531c0cd5c4e77d864174e1d727",
+          "git_blob_sha": "0c59c1dbabeca9e5470b78628987e8b7a36a6a84"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip.part004",
+          "offset": 31457280,
+          "size_bytes": 10485760,
+          "sha256": "d615726fbb40129a0d4f2d39e1ffe6c7db16ca42baa27c41af32b3bcc011051b",
+          "git_blob_sha": "ad74440554f8bcce134775eda67d88ef84b31d66"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip.part005",
+          "offset": 41943040,
+          "size_bytes": 10485760,
+          "sha256": "74295eb4bb887a36cdaa4fb246f03fcf6c743d022d764475c4e207cd4148ddb3",
+          "git_blob_sha": "e132b1b289d048741519e2909e196ba745f37bc9"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip.part006",
+          "offset": 52428800,
+          "size_bytes": 1964812,
+          "sha256": "9e8294bc671c014ee0e53873ee0ccef4ce536e358fd438535c81b21f86903fc9",
+          "git_blob_sha": "ff3ecec9fc1a37220875b67d2305b75444050cda"
+        }
+      ],
+      "status": "preserved"
+    },
+    {
+      "id": "alien-mer-des-chagrins-v0-6-0",
+      "module": "alien-mer-des-chagrins",
+      "title": "Alien : Mer des Chagrins",
+      "version": "0.6.0",
+      "role": "historical",
+      "original_name": "ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip",
+      "sha256": "e36aa7867c7f5e57034b98d11eea452dd7fbac649dcc989321c4dc51993f9ea7",
+      "size_bytes": 59082214,
+      "zip_member_count": 1729,
+      "storage": "split",
+      "parts": [
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip.part001",
+          "offset": 0,
+          "size_bytes": 10485760,
+          "sha256": "948cd7d2262f83cb23f415f28ce9ccc1e76929f72f8392d5163c8eef9e3844a8",
+          "git_blob_sha": "2d761f9aaeefb6df3734b8409a7f9867cd8546d8"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip.part002",
+          "offset": 10485760,
+          "size_bytes": 10485760,
+          "sha256": "7a18c6c78c2bcfb3969a0659e67fae545022f9e909430842cb54348f99ab6278",
+          "git_blob_sha": "ac5625139a5055357321d9e55fc5de0910d7714f"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip.part003",
+          "offset": 20971520,
+          "size_bytes": 10485760,
+          "sha256": "f55c02939f2b4acb3608bc02c5f6659be1571dcab0290c00231af24091d096bc",
+          "git_blob_sha": "c0528a73b638d15e6c9c00f8c61dedc7b509303a"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip.part004",
+          "offset": 31457280,
+          "size_bytes": 10485760,
+          "sha256": "9c3659ca3b7082c91810d8dd4602eaad0ebda1ec2619d74f010b6c0769b81d74",
+          "git_blob_sha": "b7b552e8832e02c6f20b246d30fbb2ae5bcb3831"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip.part005",
+          "offset": 41943040,
+          "size_bytes": 10485760,
+          "sha256": "7f8b6db5c40b968483f09e4e15b68b648d85a47775cf63a3d706c763e66169f0",
+          "git_blob_sha": "5e466ddc524b695ba867e4ba7984cb421063014b"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip.part006",
+          "offset": 52428800,
+          "size_bytes": 6653414,
+          "sha256": "4bebcd54598730492e5e01249019350b3774e2908c354135540103f8e6b7d447",
+          "git_blob_sha": "d310dda5dd44ec5273701b4709751e1aec0e6f46"
+        }
+      ],
+      "status": "preserved"
+    },
+    {
+      "id": "alien-mer-des-chagrins-v0-7-0",
+      "module": "alien-mer-des-chagrins",
+      "title": "Alien : Mer des Chagrins",
+      "version": "0.7.0",
+      "role": "historical",
+      "original_name": "ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip",
+      "sha256": "6899a71d15d3fceb18f5de228d1872d7340bf3711a7b866521a45ac11a3f5695",
+      "size_bytes": 68083017,
+      "zip_member_count": 2013,
+      "storage": "split",
+      "parts": [
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part001",
+          "offset": 0,
+          "size_bytes": 10485760,
+          "sha256": "114842b0a7b29215d86bbaee3fda5a553a1625c92bcceee2c37adaf86cccc8f5",
+          "git_blob_sha": "16d794863e3f1b77d20c2f4fe438866d06b7c410"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part002",
+          "offset": 10485760,
+          "size_bytes": 10485760,
+          "sha256": "32488d33b8f5eeaadd48afd9c9f692c4447c015f62a7eb0ba3caf1e6e53ffa10",
+          "git_blob_sha": "0c4e0412a0bc72d2df93e40ca8748a8f0fe77726"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part003",
+          "offset": 20971520,
+          "size_bytes": 10485760,
+          "sha256": "d4da3623192feeb0d5321593379fc8819b56db233ac286826a2bf16e0ca87b5f",
+          "git_blob_sha": "b4a0bc9c783be763df65b23d3f172f6d50fe0f60"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part004",
+          "offset": 31457280,
+          "size_bytes": 10485760,
+          "sha256": "be2b56b213963afcdcb4b90e52c2ec45fd8ae6c5249d5824b60f0b2b97311d2e",
+          "git_blob_sha": "2e7d738197f8622dcbf32dbb22a95f4c848da784"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part005",
+          "offset": 41943040,
+          "size_bytes": 10485760,
+          "sha256": "5eaa03f9010c1aa5977ebb7bf5e2892cd9897f3fc96d0f5a41a1e324d4581472",
+          "git_blob_sha": "29858a31260163312bcf91442fb5ece941b4704c"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part006",
+          "offset": 52428800,
+          "size_bytes": 10485760,
+          "sha256": "2ba6b9c45989628a5c50a04f7a9a4b6b53972d58dc53f6cf8dc137826386fdf2",
+          "git_blob_sha": "bff9719af3d6265b1bc4a5022a867dd4440a1c85"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part007",
+          "offset": 62914560,
+          "size_bytes": 5168457,
+          "sha256": "ba40079715c71257d868dda522e470f18f36b031999fc4fb4ce9402b63e7e738",
+          "git_blob_sha": "c507efb346dd36e1f8ce8b5a64e40b8e6ae6352b"
+        }
+      ],
+      "status": "preserved"
+    },
+    {
+      "id": "alien-mer-des-chagrins-v0-8-0",
+      "module": "alien-mer-des-chagrins",
+      "title": "Alien : Mer des Chagrins",
+      "version": "0.8.0",
+      "role": "historical",
+      "original_name": "ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip",
+      "sha256": "3a4f54a44b3c793b057f5d8d2f20b3779e5b956baa3eec8960ed16f8900c36e1",
+      "size_bytes": 79991964,
+      "zip_member_count": 2331,
+      "storage": "split",
+      "parts": [
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part001",
+          "offset": 0,
+          "size_bytes": 10485760,
+          "sha256": "b4af87b98aa8f7603106edad25a8bb3db7a2290b779506b459a170cb2e860724",
+          "git_blob_sha": "f82be407178fa0fa31580d7db0543a76b36ef734"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part002",
+          "offset": 10485760,
+          "size_bytes": 10485760,
+          "sha256": "97b8d772fb3cbc875c20877e49eecdcfb43ef88408dd4dcd7c12c232e4bca8e2",
+          "git_blob_sha": "bb3288ba7a8ec102e1ecd292201b21f8d3912aed"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part003",
+          "offset": 20971520,
+          "size_bytes": 10485760,
+          "sha256": "56e1587f7403a7abab0490adda9dab97951a903d43d7044facf1338df2bb935a",
+          "git_blob_sha": "3e5f79f2e75801ac7774b310be8340668d5486c0"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part004",
+          "offset": 31457280,
+          "size_bytes": 10485760,
+          "sha256": "5c2e308095f588ccdcf8a96267fef665ef7fe2cdd7b0b2f7ef68845cff6be464",
+          "git_blob_sha": "591e108f9487a105a1bb529f4a299e8a785b1432"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part005",
+          "offset": 41943040,
+          "size_bytes": 10485760,
+          "sha256": "00c1b4a0356217ad425301490437b11a727be7ee4bf4e75df66bff40152e68fb",
+          "git_blob_sha": "9d575d89af769d1e89bb86e784220f182c6bbb96"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part006",
+          "offset": 52428800,
+          "size_bytes": 10485760,
+          "sha256": "e98887479920ba69af83e523baa4daba6a0e3d672d7140efc89544a00bae7778",
+          "git_blob_sha": "d7150b508c74706d208092df96c04f981241705b"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part007",
+          "offset": 62914560,
+          "size_bytes": 10485760,
+          "sha256": "b9f3ec4cdb18b3397b72bc99874bdbb87a0ac4e425b32b2f8ee176c6c99ca934",
+          "git_blob_sha": "0ef571e26845c2a094bd182d0c7728f7d169a096"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part008",
+          "offset": 73400320,
+          "size_bytes": 6591644,
+          "sha256": "06825b73120cedb8d55ea4a1de9961db9df93fb26197769f15f6ab7f5d69e868",
+          "git_blob_sha": "c96c0cd9dec7d348c56c568f9c36a1aed04a472b"
+        }
+      ],
+      "status": "preserved"
+    },
+    {
+      "id": "alien-mer-des-chagrins-v0-9-0",
+      "module": "alien-mer-des-chagrins",
+      "title": "Alien : Mer des Chagrins",
+      "version": "0.9.0",
+      "role": "historical",
+      "original_name": "ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip",
+      "sha256": "61dc9907fc3309ff4df73b45a1349dbb07e260aa21cdd36504147b2430123714",
+      "size_bytes": 84799492,
+      "zip_member_count": 2644,
+      "storage": "split",
+      "parts": [
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part001",
+          "offset": 0,
+          "size_bytes": 10485760,
+          "sha256": "24f5eea6cec5b9baa8b203eeebce3929fd67df9c424cbec70e4551ebd820251c",
+          "git_blob_sha": "1233359d57fbb6a2151f5c8dd43f5b2b56b4f8b0"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part002",
+          "offset": 10485760,
+          "size_bytes": 10485760,
+          "sha256": "cfa0595454a03dbe61e6832d6bac530cfd67ff0e10fae6ad60e3e1a5ff85ca72",
+          "git_blob_sha": "242161ca0d1cf5b78dea944d75e59cb76bb5ba04"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part003",
+          "offset": 20971520,
+          "size_bytes": 10485760,
+          "sha256": "3afa03c7d9a23b36570ec7f34ae592c1609f112e757037b117d9ea7bc2d3818a",
+          "git_blob_sha": "f50d00e82d86932e7cdb9e82de5f2dce78030c36"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part004",
+          "offset": 31457280,
+          "size_bytes": 10485760,
+          "sha256": "fa1bfa432115cbddb168ebd184b78dff5ed333140ec1f20017a44155d2122d4e",
+          "git_blob_sha": "695c322460013600898a528dc7f0fbfcfbf2f9fc"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part005",
+          "offset": 41943040,
+          "size_bytes": 10485760,
+          "sha256": "cec22a293d908e787ade96d99ae414bf12c82f7c35dca7d8b05b6396483b783f",
+          "git_blob_sha": "b5f6706a9815b0e79260b821976aa9e532ed6bb8"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part006",
+          "offset": 52428800,
+          "size_bytes": 10485760,
+          "sha256": "8e1f244adb55b3c7ed6c048519089bda44710af6402a80bd3e6819bae77a3c92",
+          "git_blob_sha": "00a2a7b1f00cb7d85dbeb1e9f38d6442f3260369"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part007",
+          "offset": 62914560,
+          "size_bytes": 10485760,
+          "sha256": "9921b92754633585e79f3c0edd35399db7e88f553e29e294f005204bb3b124df",
+          "git_blob_sha": "56335225178e2a456eab21ebdfd36250334b5771"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part008",
+          "offset": 73400320,
+          "size_bytes": 10485760,
+          "sha256": "6b6e979674c08a4199a6d3f9851ab46e7370d65bf6d5e773f88a314043757889",
+          "git_blob_sha": "04e0ef7e33fb8d731787e28256c6ba0b0d42c5d4"
+        },
+        {
+          "path": "alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part009",
+          "offset": 83886080,
+          "size_bytes": 913412,
+          "sha256": "cf774e1080c5b75e0703fa09bc04acb6f309bd6a25094fcf638c5ac774bf50d9",
+          "git_blob_sha": "5b9d422441c7aa440272846826db1e4972f6ff6e"
         }
       ],
       "status": "preserved"
