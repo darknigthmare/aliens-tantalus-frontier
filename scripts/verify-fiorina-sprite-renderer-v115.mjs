@@ -5,6 +5,8 @@ import { validateAlien3SpriteManifestV115, createAlien3SpriteBankV115, drawAlien
 import { GameEngine } from '../src/game-production-runtime.js';
 import { CAMPAIGNS, WORLDS, LEVEL_SEEDS, WEAPONS, ENEMIES } from '../src/content.js';
 import { buildFiorinaMissionV114 } from '../src/fiorina-campaign-v114.js';
+import { stationV105 } from '../src/alien3-encounter-v105.js';
+import { compileEvidencePropsV113 } from '../src/alien3-fidelity-v113.js';
 import { hostV136 } from './forge-native-host-v136.mjs';
 
 // Unit fixtures below substitute Image/Canvas only to verify contracts and
@@ -203,6 +205,22 @@ test('reduced motion freezes an admitted loop and context is restored on image f
   assert.equal(bad.stack.length, 0);
 });
 
+test('only Ripley reads an active operation and higher priority physical states keep their pose', () => {
+  const context = { phase: 'infirmary', encounter: 'rabattage', operationActive: true };
+  const actor = { grounded: true, vx: 0, vy: 0 };
+  const before = structuredClone(actor);
+  assert.equal(selectAlien3HumanSpriteV115('ripley', actor, context).id, 'ripley-prison-interact');
+  assert.equal(selectAlien3HumanSpriteV115('ripley', actor, { ...context, operationActive: false }).id, 'ripley-prison-idle');
+  assert.equal(selectAlien3HumanSpriteV115('ripley', actor, { ...context, operationActive: 'true' }).id, 'ripley-prison-idle');
+  assert.equal(selectAlien3HumanSpriteV115('dillon', actor, context).id, 'dillon-idle');
+  for (const [changes, pose] of [
+    [{ v52HurtClock: .2 }, 'hurt'], [{ downed: true }, 'downed'],
+    [{ climbing: true }, 'climb'], [{ grounded: false, vy: 0 }, 'jump'],
+    [{ crouching: true }, 'crouch'], [{ vx: 105, moving: true }, 'walk']
+  ]) assert.equal(selectAlien3HumanSpriteV115('ripley', { ...actor, ...changes }, context).pose, pose);
+  assert.deepEqual(actor, before, 'Pose selection does not add a timer or change the actor');
+});
+
 function native() {
   const host = hostV136();
   const engine = new GameEngine(host.canvas, { onEvent() {} });
@@ -214,6 +232,43 @@ function native() {
   engine.start(options);
   return { engine, context: host.canvas.getContext('2d'), options };
 }
+
+test('the native player renders a real sustained operation and returns to idle when its owner cancels', async () => {
+  const { engine, context: c } = native();
+  try {
+    assert.equal(engine.beginAlien3EncounterV105('traque'), true);
+    const placeAt = (key) => {
+      const station = stationV105(engine.alien3NavV105, key);
+      Object.assign(engine.player, { x: station.x + station.w / 2 - engine.player.w / 2,
+        y: station.y + station.h - engine.player.h, depth: 1, moving: false, vx: 0, vy: 0,
+        grounded: true, climbing: false, crouching: false, v52HurtClock: 0, shockClock: 0 });
+      engine.camera.x = Math.max(0, engine.player.x - 300);
+      engine.camera.y = 0;
+    };
+    placeAt('aaron');
+    engine.interact(engine.player);
+    assert.equal(engine.alien3EncounterV105.stage, 1, 'Existing Aaron interaction owns progression');
+    placeAt('report');
+    engine.keys.add('KeyE');
+    engine.interact(engine.player);
+    assert.equal(engine.alien3OperationsV107.active?.id, 'report', 'Existing operation owner accepted reach and support');
+    const bank = engine.registerAlien3SpriteManifestV115(manifest({ 'ripley-prison-interact': asset(),
+      'ripley-prison-idle': asset() }), { imageFactory: factory(), preloadAll: true });
+    await bank.ready;
+    const before = JSON.stringify({ player: engine.player, operation: engine.alien3OperationsV107,
+      saved: engine.captureResumeState() });
+    engine.drawActor(c, engine.player);
+    assert.equal(engine.getAlien3SpriteReportV115().receipts.ripley.id, 'ripley-prison-interact');
+    assert.equal(engine.getAlien3SpriteReportV115().receipts.ripley.drawn, true);
+    assert.equal(JSON.stringify({ player: engine.player, operation: engine.alien3OperationsV107,
+      saved: engine.captureResumeState() }), before, 'Drawing must not complete or advance the operation');
+    assert.equal(engine.cancelAlien3OperationV107('release', false), true);
+    engine.drawActor(c, engine.player);
+    assert.equal(engine.getAlien3SpriteReportV115().receipts.ripley.id, 'ripley-prison-idle');
+    assert.equal(engine.getAlien3SpriteReportV115().receipts.ripley.drawn, true);
+    assert.equal(engine.alien3EncounterV105.stage, 1, 'Cancelled rendering does not validate the document');
+  } finally { engine.stop(); }
+});
 
 test('native visibility gates requests and stop/campaign transitions dispose the instance bank', async () => {
   const { engine, context: c, options } = native();
@@ -236,6 +291,52 @@ test('native visibility gates requests and stop/campaign transitions dispose the
     const next = engine.registerAlien3SpriteManifestV115(manifest(), { imageFactory: factory() });
     await next.request('ripley-prison-idle'); engine.stop();
     assert.equal(next.report().disposed, true); assert.equal(next.report().cachedImages, 0);
+  } finally { engine.stop(); }
+});
+
+test('new catalogue images cannot revive deceased prisoners or turn inspection shells into native rooms', async () => {
+  const { engine, context: c } = native();
+  try {
+    const requests = [];
+    const ids = ['murphy-idle', 'boggs-idle', 'rains-idle', 'spike-idle', 'ox-assembly-idle'];
+    const bank = engine.registerAlien3SpriteManifestV115(manifest(Object.fromEntries(ids.map(id => [id, asset()]))),
+      { imageFactory: factory({ requests }) });
+    engine.alien3V88.phase = 'trap-prep';
+    engine.syncAlien3PrisonerRosterV89();
+    for (const id of ['murphy', 'boggs', 'rains']) {
+      assert.equal(engine.alien3PrisonersV89.find(actor => actor.id === id)?.status, 'deceased');
+    }
+    engine.drawAlien3PrisonersV89(c);
+    for (const id of ['murphy', 'boggs', 'rains']) assert.equal(engine.getAlien3SpriteReportV115().receipts[id], undefined);
+    assert.equal(engine.setAlien3InspectionRoomV114('dog-kennel'), false);
+    assert.equal(engine.setAlien3InspectionRoomV114('ox-approach'), false);
+    assert.equal(requests.length, 0, 'Catalogue-only actors are not requested by the native render loop');
+    assert.equal(bank.report().cachedImages, 0);
+  } finally { engine.stop(); }
+});
+
+test('the existing flare socket requests and draws its lit PNG only during the authored fire state', async () => {
+  const { engine, context: c } = native();
+  try {
+    const prop = compileEvidencePropsV113(engine.alien3SceneV103).find(item => item.id === 'fire-flare-v113');
+    assert.equal(prop?.nodeId, 'f161-chemical-store'); assert.equal(prop.condition, 'fire');
+    engine.camera.x = prop.x - 300;
+    const requests = [];
+    const bank = engine.registerAlien3SpriteManifestV115(manifest({ 'fire-flare': asset() }),
+      { imageFactory: factory({ requests }) });
+    engine.drawAlien3FidelitySceneryV113(c, engine.alien3SceneV103, { flags: {}, time: 0 });
+    assert.equal(requests.length, 0, 'The unlit scene does not load an optional lit prop');
+    assert.equal(engine.getAlien3SpriteReportV115().receipts[prop.id], undefined);
+    engine.drawAlien3FidelitySceneryV113(c, engine.alien3SceneV103, { flags: { fire: true }, time: 0 });
+    await bank.ready;
+    const before = JSON.stringify(engine.captureResumeState());
+    engine.drawAlien3FidelitySceneryV113(c, engine.alien3SceneV103, { flags: { fire: true }, time: 0 });
+    assert.equal(engine.getAlien3SpriteReportV115().receipts[prop.id]?.drawn, true);
+    assert.equal(engine.getAlien3SpriteReportV115().receipts[prop.id]?.id, 'fire-flare');
+    assert.equal(JSON.stringify(engine.captureResumeState()), before);
+    engine.alien3SpriteReceiptsV115.clear();
+    engine.drawAlien3FidelitySceneryV113(c, engine.alien3SceneV103, { flags: { fire: false }, time: 0 });
+    assert.equal(engine.getAlien3SpriteReportV115().receipts[prop.id], undefined, 'A decoded flame still stays hidden without fire');
   } finally { engine.stop(); }
 });
 

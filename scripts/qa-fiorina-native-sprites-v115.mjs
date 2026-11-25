@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { GameEngine } from '../src/game-production-runtime.js';
 import { CAMPAIGNS, WORLDS, LEVEL_SEEDS, WEAPONS, ENEMIES } from '../src/content.js';
 import { buildFiorinaMissionV114 } from '../src/fiorina-campaign-v114.js';
+import { stationV105 } from '../src/alien3-encounter-v105.js';
 import { hostV136 } from './forge-native-host-v136.mjs';
 
 // Real native production render methods and delivered PNGs on a Skia canvas.
@@ -40,9 +41,10 @@ const campaign = CAMPAIGNS.find((c) => c.id === 'special-alien3-fiorina-161');
 const world = WORLDS.find((w) => w.id === campaign.worldId) || WORLDS[0];
 const missionLevel = buildFiorinaMissionV114({ campaign, world, levelSeeds: LEVEL_SEEDS, seed: 114 });
 const options = { campaign, world, missionLevel, levelSeed: missionLevel.levelSeed, weapon: WEAPONS[0],
-  enemyCatalog: ENEMIES, equipment: [], crew: [], seed: 114 };
+  enemyCatalog: ENEMIES, equipment: [], crew: [], seed: 114, accessibility: { reducedMotion: false } };
 const report = { schemaVersion: 1, scope: 'Native GameEngine component rendering with actual delivered PNGs on Canvas/Skia; explicit DOM/RAF/image host doubles. Not a browser journey.',
   fixtures: ['native campaign seed114', 'injected narrative phase/pose/clock for render sampling',
+    'reduced motion disabled in the fixture to inspect both delivered poses',
     'existing cast positions', 'native traque encounter for player poses',
     'native rabattage encounter for Dillon/Morse walking poses', 'company arrival visibility fixture'],
   provenance: { manifestSha256: sha256(manifestBytes), sourceDigests },
@@ -60,6 +62,11 @@ const physicalSnapshot = () => JSON.stringify([engine.player, engine.alien3Runne
   ...(engine.alien3EncounterV105?.participants || [])].map((actor) => actor && Object.fromEntries(
   ['id','x','y','w','h','vx','vy','moving','grounded','climbing','crouching','alive','depth','facing','nav']
     .map((key) => [key, actor[key]]))));
+// The active Fiorina renderer reads the V104 owner clock, not the host animation clock.
+const setFixtureArtTime = (time) => {
+  engine.alien3V104.clock = time;
+  assert.equal(engine.alien3ArtTimeV102(), time, 'Native art clock must expose the injected fixture time');
+};
 let sheetNumber = 0;
 
 async function flushSamples() {
@@ -91,7 +98,7 @@ async function preloadFixture(ids, fixture) {
 }
 
 async function sample(id, renderer, { focus, fixture, expected = null, expectedFrame = null,
-  preload = [], absent = false, scale = 2.3 } = {}) {
+  preload = [], forbidden = [], absent = false, scale = 2.3 } = {}) {
   await preloadFixture([...(expected ? [expected] : []), ...preload], id);
   const canvas = createCanvas(600, 360), ctx = canvas.getContext('2d');
   const rawDraw = ctx.drawImage.bind(ctx), images = [];
@@ -102,6 +109,7 @@ async function sample(id, renderer, { focus, fixture, expected = null, expectedF
   engine.alien3SpriteReceiptsV115.clear();
   const before = JSON.stringify(engine.captureResumeState());
   const physicalBefore = physicalSnapshot();
+  const operationBefore = JSON.stringify(engine.alien3OperationsV107);
   ctx.translate(300 - focus.x * scale, 310 - focus.y * scale);
   ctx.scale(scale, scale);
   const transform = matrix(ctx);
@@ -110,6 +118,7 @@ async function sample(id, renderer, { focus, fixture, expected = null, expectedF
   checks(id + ': context restored', () => assert.deepEqual(matrix(ctx), transform));
   checks(id + ': saved actor/state unchanged by draw', () => assert.equal(JSON.stringify(engine.captureResumeState()), before));
   checks(id + ': actor physics unchanged by draw', () => assert.equal(physicalSnapshot(), physicalBefore));
+  checks(id + ': operation owner unchanged by draw', () => assert.equal(JSON.stringify(engine.alien3OperationsV107), operationBefore));
   if (expected) checks(id + ': native sprite hook', () => {
     const receipt = Object.values(receipts).find((r) => r.drawn && r.id === expected);
     assert.ok(receipt, JSON.stringify(receipts));
@@ -119,6 +128,11 @@ async function sample(id, renderer, { focus, fixture, expected = null, expectedF
     if (expectedFrame !== null) assert.equal(receipt.frameIndex, expectedFrame, 'Expected animation frame');
   });
   if (absent) checks(id + ': dormant sprite remains hidden', () => assert.equal(images.length, 0));
+  for (const sprite of forbidden) checks(id + ': guarded sprite stays hidden: ' + sprite, () => {
+    assert.equal(Object.values(receipts).some(receipt => receipt.drawn && receipt.id === sprite), false);
+    const row = bank.get(sprite);
+    if (row) assert.equal(row.frameImages.some(image => images.includes(image)), false);
+  });
   for (const receipt of Object.values(receipts)) if (receipt.drawn) drawnIds.add(receipt.id);
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   samples.push({ id, canvas, fixture });
@@ -131,6 +145,9 @@ let bank;
 try {
   await mkdir(output, { recursive: true });
   engine.start(options);
+  engine.reducedMotion = false;
+  assert.equal(engine.accessibilityRuntime?.reducedMotion, false, 'Native start must honor the motion-enabled fixture');
+  engine.alien3V104.settings.reducedMotion = false;
   bank = engine.registerAlien3SpriteManifestV115(manifest, { imageFactory: () => new DeliveredImage(),
     preloadAll, maxCachedImages: 6, maxDecodedBytes: 48 * 1024 * 1024 });
   await bank.ready;
@@ -145,6 +162,21 @@ try {
     await sample(id, (ctx) => engine.drawActor(ctx, engine.player), { focus: playerFocus(), expected: id,
       fixture: 'Native player draw; phase=' + phase + '; grounded idle.' });
   }
+  engine.alien3V88.phase = 'wreckage';
+  for (const [pose, speed] of [['walk', 120], ['run', 270]]) {
+    const sprite = 'ripley-crash-' + pose;
+    if (!hasAsset(sprite)) continue;
+    assert.equal(manifest.assets[sprite].frames?.length, 2, sprite + ': two delivered poses');
+    Object.assign(engine.player, { moving: true, vx: speed, vy: 0, grounded: true });
+    for (const frame of [0, 1]) {
+      setFixtureArtTime((frame + .1) / manifest.assets[sprite].fps);
+      await sample(sprite + '-frame-' + frame, ctx => engine.drawActor(ctx, engine.player), {
+        focus: playerFocus(), expected: sprite, expectedFrame: frame,
+        fixture: 'Native wreckage costume selection; injected grounded movement and render clock, no narrative progression.'
+      });
+    }
+  }
+  Object.assign(engine.player, { moving: false, vx: 0, vy: 0, grounded: true });
   engine.alien3V88.phase = 'infirmary';
   for (const id of ['dillon','clemens','andrews','aaron','morse','golic','junior',
     'david','arthur','kevin','gregor','william','jude','troy','frank','eric']) {
@@ -175,11 +207,13 @@ try {
     ['walk', { vx: 120 }, 'ripley-prison-walk'], ['run', { vx: 270 }, 'ripley-prison-run'],
     ['jump-apex', { grounded: false, vy: 0 }, 'ripley-prison-jump'],
     ['crouch', { moving: false, vx: 0, crouching: true }, 'ripley-prison-crouch'],
-    ['climb', { moving: false, vx: 0, crouching: false, climbing: true }, 'ripley-prison-climb']
+    ['climb', { moving: false, vx: 0, crouching: false, climbing: true }, 'ripley-prison-climb'],
+    ['crouch-walk', { moving: true, vx: 90, crouching: true }, 'ripley-prison-crouch-walk'],
+    ['hurt', { moving: false, vx: 0, v52HurtClock: .2 }, 'ripley-prison-hurt']
   ]) {
     Object.assign(engine.player, { moving: true, vx: 120, vy: 0, grounded: true,
-      crouching: false, climbing: false }, changes);
-    engine.alien3V104.clock = .2;
+      crouching: false, climbing: false, v52HurtClock: 0, shockClock: 0, interactionClock: 0 }, changes);
+    setFixtureArtTime(.2);
     if (pose === 'jump-apex') assert.ok(hasAsset(sprite), 'Apex fixture requires the delivered jump pose');
     await sample('player-' + pose, (ctx) => engine.drawActor(ctx, engine.player), { focus: playerFocus(),
       expected: hasAsset(sprite) ? sprite : null, fixture: 'Authored traque encounter; injected ' + pose + ' pose. Absent sprite keeps procedural renderer.' });
@@ -187,6 +221,38 @@ try {
       const receipt = engine.getAlien3SpriteReportV115().receipts.ripley;
       assert.equal(receipt?.drawn, false); assert.equal(receipt?.id, sprite);
     });
+    if (hasAsset(sprite) && ['climb', 'crouch-walk'].includes(pose)) {
+      assert.equal(manifest.assets[sprite].frames?.length, 2, sprite + ': two delivered poses');
+      for (const frame of [0, 1]) {
+        setFixtureArtTime((frame + .1) / manifest.assets[sprite].fps);
+        await sample('player-' + pose + '-frame-' + frame, ctx => engine.drawActor(ctx, engine.player), {
+          focus: playerFocus(), expected: sprite, expectedFrame: frame,
+          fixture: 'Native player hook; injected ' + pose + ' physical state and explicit two-pose frame.'
+        });
+      }
+    }
+  }
+  if (hasAsset('ripley-prison-interact')) {
+    const placeAt = (key) => {
+      const station = stationV105(engine.alien3NavV105, key);
+      Object.assign(engine.player, { x: station.x + station.w / 2 - engine.player.w / 2,
+        y: station.y + station.h - engine.player.h, depth: 1, moving: false, vx: 0, vy: 0,
+        grounded: true, climbing: false, crouching: false, v52HurtClock: 0, shockClock: 0, interactionClock: 0 });
+    };
+    placeAt('aaron'); engine.interact(engine.player);
+    assert.equal(engine.alien3EncounterV105.stage, 1);
+    placeAt('report'); engine.keys.add('KeyE'); engine.interact(engine.player);
+    assert.equal(engine.alien3OperationsV107.active?.id, 'report');
+    await sample('player-operation-active', ctx => engine.drawActor(ctx, engine.player), {
+      focus: playerFocus(), expected: 'ripley-prison-interact',
+      fixture: 'Player placed at authored stations; real Aaron interaction and V107 operation start accepted. Drawing does not advance the operation.'
+    });
+    assert.equal(engine.cancelAlien3OperationV107('release', false), true); engine.keys.delete('KeyE');
+    await sample('player-operation-cancelled', ctx => engine.drawActor(ctx, engine.player), {
+      focus: playerFocus(), expected: 'ripley-prison-idle',
+      fixture: 'Real operation owner cancelled; native sprite immediately returns to idle.'
+    });
+    assert.equal(engine.alien3EncounterV105.stage, 1, 'Cancelled interaction never validates the report');
   }
   if (hasAsset('runner-walk')) {
     Object.assign(engine.alien3RunnerV88, { vx: 120, moving: true });
@@ -251,9 +317,19 @@ try {
       focus: { x: evidence.x, y: evidence.y }, expected: id, scale: 3,
       fixture: 'Native fixed evidence prop at its authored support; no new interaction.' });
   }
+  if (hasAsset('fire-flare')) {
+    const node = engine.alien3SceneV103.nodes.find(item => item.id === 'f161-chemical-store');
+    const focus = { x: node.x - 40, y: node.y };
+    await sample('fire-flare-hidden', ctx => engine.drawAlien3FidelitySceneryV113(ctx, engine.alien3SceneV103,
+      { flags: { fire: false }, time: 0 }), { focus, preload: ['fire-flare'], forbidden: ['fire-flare'],
+      fixture: 'Existing chemical-store socket; lit PNG decoded but authored fire flag false, so the sprite stays hidden.' });
+    await sample('fire-flare-lit', ctx => engine.drawAlien3FidelitySceneryV113(ctx, engine.alien3SceneV103,
+      { flags: { fire: true }, time: 0 }), { focus, expected: 'fire-flare',
+      fixture: 'Existing chemical-store socket with explicit fire flag fixture; no carried torch, weapon or new interaction.' });
+  }
 
   report.catalogueOnly = Object.keys(manifest.assets).filter((id) => !drawnIds.has(id));
-  report.note = 'Unsampled assets remain listed, not silently counted as native playable. Coat shore/coast, Spike and ox are not reachable native narrative roles at V114.';
+  report.note = 'Unsampled assets remain listed, not silently counted as native playable. Coat shore/coast, Spike, ox and deceased prisoners stay outside these native narrative hooks; two-pose catalogue runs do not change participant movement.';
   await flushSamples();
   report.assetLoad = bank.report();
   report.passed = report.checks.every((c) => c.passed);

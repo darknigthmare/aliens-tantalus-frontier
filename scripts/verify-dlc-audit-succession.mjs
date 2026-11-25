@@ -14,6 +14,9 @@ import { AVP_HOST_BASELINE_20261125 as baseline, AVP_HOST_SUCCESSORS_20261125 as
   ALIENS_AVP_JOIN_SUCCESSORS_20261125 as aliasesFromAliens,
   AVP_FIORINA_SPRITES_BASELINE_20261125 as spriteBaseline,
   AVP_FIORINA_SPRITES_SUCCESSORS_20261125 as spriteSuccessors,
+  AVP_FIORINA_V116_BASELINE_20261125 as spriteV116Baseline,
+  AVP_FIORINA_V116_SUCCESSORS_20261125 as spriteV116Successors,
+  reviewedFiorinaV116HostDigest20261125 as advanceV116,
   reviewedFiorinaSpriteHostDigest20261125 as advanceSprites,
   reviewedAliensIncomingDigest20261125 as advanceAliens,
   reviewedAvpHostDigest20261125 as advance, avpHostRuntimeSources20261125 as runtimeView,
@@ -112,11 +115,13 @@ const expectedSpritePaths = [
   'src/game-production-runtime.js',
   'sw.js'
 ];
-const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge), ...expectedSpritePaths])];
+const expectedSpriteV116Paths = ['.github/workflows/fiorina-native-v114.yml',
+  'scripts/qa-fiorina-native-v114.mjs', 'scripts/verify-audit-v143.mjs', 'sw.js'];
+const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge), ...expectedSpritePaths, ...expectedSpriteV116Paths])];
 const firstEndpoint = path => (successors[path] || joinSuccessors[path] || qualitySuccessors[path] || aliensMerge[path] || spriteSuccessors[path]).previousSha256;
 const mergedEndpoint = path => (aliensMerge[path] || qualitySuccessors[path] || joinSuccessors[path] || successors[path])?.currentSha256;
-const finalEndpoint = path => spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
-const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites) source chain/;
+const finalEndpoint = path => spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
+const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116) source chain/;
 
 test('AVP published receipts remain immutable while the exact Fiorina join verifies current bytes', () => {
   assert.equal(baseline, '001a20bdc0f9f1a3c835e84d8f3c9434bc159330');
@@ -132,7 +137,8 @@ test('AVP published receipts remain immutable while the exact Fiorina join verif
   assert.deepEqual(verify(), { baselineCommit: baseline, successors: verifiedPaths.length,
     joinedSuccessors: expectedJoinPaths.length, qualitySuccessors: expectedQualityPaths.length,
     aliensMergedSuccessors: Object.keys(aliensMerge).length, aliensIncomingSuccessors: Object.keys(aliasesFromAliens).length,
-    spriteSuccessors: expectedSpritePaths.length, historicalEvidenceTransferred: false });
+    spriteSuccessors: expectedSpritePaths.length, spriteV116Successors: expectedSpriteV116Paths.length,
+    historicalEvidenceTransferred: false });
 });
 
 test('the Aliens merge joins both exact published parents and refuses any unrecorded incoming endpoint', () => {
@@ -271,6 +277,7 @@ test('the actual terminal imports no audit and cannot admit its own bytes', () =
   assert.equal(Object.hasOwn(aliasesFromAliens, audit), false);
   assert.equal(Object.hasOwn(aliensIncoming, audit), false);
   assert.equal(Object.hasOwn(spriteSuccessors, audit), false);
+  assert.equal(Object.hasOwn(spriteV116Successors, audit), false);
   assert.doesNotMatch(source, /from\s+['"].*audit-/);
 });
 
@@ -285,8 +292,8 @@ test('the V115 sprite host stage pins exactly its reviewed continuation changes'
     assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256'], path);
     assert.notEqual(receipt.previousSha256, receipt.currentSha256, path);
     if (mergedEndpoint(path)) assert.equal(receipt.previousSha256, mergedEndpoint(path), path);
-    assert.equal(sha(read(path)), receipt.currentSha256, path);
-    assert.equal(advanceSprites(path, receipt.previousSha256), receipt.currentSha256, path);
+    assert.equal(sha(read(path)), finalEndpoint(path), path);
+    assert.equal(advanceSprites(path, receipt.previousSha256), finalEndpoint(path), path);
   }
   assert.equal(Object.hasOwn(spriteSuccessors, audit), false);
 });
@@ -295,12 +302,33 @@ test('the sprite stage rejects wrong or repeated predecessors and both parents r
   for (const [path, receipt] of Object.entries(spriteSuccessors)) {
     for (const value of [receipt.currentSha256, '0'.repeat(64), undefined])
       assert.throws(() => advanceSprites(path, value), /Broken published-merge-to-Fiorina-sprites source chain/, path);
-    assert.equal(advance(path, firstEndpoint(path)), receipt.currentSha256, path);
+    assert.equal(advance(path, firstEndpoint(path)), finalEndpoint(path), path);
     if (Object.hasOwn(aliensIncoming, path))
-      assert.equal(advanceAliens(path, aliensIncoming[path]), receipt.currentSha256, path);
-    assert.deepEqual(runtimeView({ [path]: receipt.previousSha256 }), { [path]: receipt.currentSha256 });
-    assert.deepEqual(runtimeView({ [path]: receipt.currentSha256 }), { [path]: receipt.currentSha256 });
+      assert.equal(advanceAliens(path, aliensIncoming[path]), finalEndpoint(path), path);
+    assert.deepEqual(runtimeView({ [path]: receipt.previousSha256 }), { [path]: finalEndpoint(path) });
+    assert.deepEqual(runtimeView({ [path]: receipt.currentSha256 }), { [path]: finalEndpoint(path) });
   }
   for (const path of ['src/unreviewed.js', 'src/game-production-runtime.js/extra', '__proto__', 'constructor', audit])
     assert.equal(advanceSprites(path, 'unchanged'), 'unchanged', path);
+});
+
+test('V116 advances exactly four reviewed hosts after the merged V115 receipts', () => {
+  assert.equal(spriteV116Baseline, 'ae4e49bef5fea639d0c381466aefea85f8a57300');
+  assert.deepEqual(Object.keys(spriteV116Successors).sort(), [...expectedSpriteV116Paths].sort());
+  assert.equal(sha(JSON.stringify(spriteV116Successors)), 'c0ec33023116df2d63f3153eba08217f702526a3298f25246cfe12323f98f05e');
+  assert.ok(Object.isFrozen(spriteV116Successors));
+  for (const [path, receipt] of Object.entries(spriteV116Successors)) {
+    assert.ok(Object.isFrozen(receipt));
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.equal(receipt.previousSha256, spriteSuccessors[path].currentSha256, path);
+    assert.equal(sha(read(path)), receipt.currentSha256, path);
+    assert.equal(advanceV116(path, receipt.previousSha256), receipt.currentSha256, path);
+    assert.equal(advanceSprites(path, spriteSuccessors[path].previousSha256), receipt.currentSha256, path);
+    for (const value of [receipt.currentSha256, spriteSuccessors[path].previousSha256, '0'.repeat(64), undefined])
+      assert.throws(() => advanceV116(path, value), /Broken Fiorina-V115-to-V116 source chain/, path);
+    assert.deepEqual(runtimeView({ [path]: receipt.currentSha256 }), { [path]: receipt.currentSha256 });
+  }
+  for (const path of ['src/unreviewed.js', '__proto__', 'constructor', audit])
+    assert.equal(advanceV116(path, 'unchanged'), 'unchanged', path);
+  assert.equal(Object.hasOwn(spriteV116Successors, audit), false);
 });

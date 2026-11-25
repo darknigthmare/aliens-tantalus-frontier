@@ -75,7 +75,10 @@ export function withAlien3ProductionV115(Base) {
       if (!this.isAlien3ProductionV114() || !actor?.alive || !this.alien3SpriteBankV115) return false;
       if (!inView(this, actor)) return false;
       const costume = this.alien3CostumeContextV113();
-      const selected = selectAlien3HumanSpriteV115(id, actor, costume);
+      const selected = selectAlien3HumanSpriteV115(id, actor, {
+        ...costume,
+        operationActive: id === 'ripley' && actor === this.player && !!this.alien3OperationsV107?.active
+      });
       const lane = depth(actor);
       return this.recordAlien3SpriteV115(id, drawAlien3SpriteV115(context, this.alien3SpriteBankV115, selected.id, {
         x: actor.x + actor.w / 2, y: actor.y + actor.h + (lane - 1) * 23,
@@ -126,7 +129,7 @@ export function withAlien3ProductionV115(Base) {
     drawAlien3FidelitySceneryV113(context, scene, { flags = {}, time = 0 } = {}) {
       if (!this.isAlien3ProductionV114() || !this.alien3SpriteBankV115) return super.drawAlien3FidelitySceneryV113(context, scene, { flags, time });
       const cameraX = this.camera?.x || 0;
-      const evidenceIds = { bishop: 'bishop-damaged', recorder: 'flight-recorder', 'medical-kit': 'medical-kit' };
+      const evidenceIds = { bishop: 'bishop-damaged', recorder: 'flight-recorder', 'medical-kit': 'medical-kit', flare: 'fire-flare' };
       for (const prop of compileEvidencePropsV113(scene)) {
         if (prop.x + prop.w < cameraX - 30 || prop.x > cameraX + 1310 || prop.condition === 'fire' && !flags.fire) continue;
         const id = evidenceIds[prop.kind];
