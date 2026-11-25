@@ -8,6 +8,7 @@ import {
   TANTALUS_PRIORITIES_HADAL_V188, TANTALUS_PRIORITIES_BROODSTORM_V188, TANTALUS_PRIORITIES_QUEEN_MOTHER_V188,
   TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188, TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188, TANTALUS_PRIORITIES_LEAD_CONTINUATION_V188,
   TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188,
+  reviewedTantalusAliens1986DigestV188,
   TANTALUS_PRIORITIES_SOURCE_ONLY_PATHS_V188, reviewedTantalusPrioritiesDigestV188,
   verifyTantalusPrioritiesV188, TANTALUS_PRIORITIES_CARGO_REGISTRY_V188, verifyCargoRegistryContinuationV188,
   TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188, verifyBroodstormRegistryContinuationV188,
@@ -29,12 +30,12 @@ const bOperations = operations.map(operation => ({ ...operation, remainingMechan
   ? ['dedicated-queen-mother-animation', 'complete-royal-cast'] : [...operation.remainingMechanics] }));
 
 // The lead continuation (after b6e01ef1) and then the Xeno Trials join (after 0d1d9950) are the last
-// links: an endpoint they review maps to the current merged bytes.
+// links before the exact Aliens 1986 integration continuation.
 const leadEndV188 = (path, digest) => {
   const r = TANTALUS_PRIORITIES_LEAD_CONTINUATION_V188.successors[path];
   const lead = r && r.previousSha256 === digest ? r.currentSha256 : digest;
   const j = Object.hasOwn(TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors, path) ? TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors[path] : null;
-  return j && j.previousSha256 === lead ? j.currentSha256 : lead;
+  return reviewedTantalusAliens1986DigestV188(path, j && j.previousSha256 === lead ? j.currentSha256 : lead);
 };
 
 test('V188 registry continuation closes only the Cargo art debt and rejects neighboring promotions', () => {

@@ -2,6 +2,7 @@ import { findBuiltDevToolsPathV188, DEV_TOOLS_DEFAULT_PATH_V188 } from './build-
 import { TitleScreenController } from '../src/title-screen-v61.js';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
 import { cp, mkdir, mkdtemp, readFile, readdir, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
@@ -16,9 +17,18 @@ import {
 } from './public-aliens1986-dlc-admissions.mjs';
 import { buildAliens1986Dlc } from './build-aliens1986-dlc.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import {
+  TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188, reviewedTantalusAliens1986DigestV188,
+  reviewedTantalusPrioritiesDigestV188, verifyTantalusAliens1986V188,
+} from './audit-tantalus-priorities-v188.mjs';
+import {
+  XENO_TRIALS_ALIENS1986_JOIN_V206, reviewedXenoAliens1986DigestV206,
+  reviewedXenoTrialsTantalusJoinV206, verifyXenoAliens1986V206, xenoTrialsTantalusJoinRuntimeSourcesV206,
+} from './audit-xeno-production-assets-v206.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
+const sourceBytes = path => readFileSync(join(root, path));
 const encoded = value => Buffer.from(JSON.stringify(value, null, 2) + '\n');
 const member = 'source.txt';
 const original = Buffer.from('Preserved historical source.\r\n');
@@ -38,6 +48,74 @@ async function fixture(t) {
   await cp(join(root, ALIENS1986_RUNTIME_ROOT), join(directory, ALIENS1986_RUNTIME_ROOT), { recursive: true });
   return { directory, expectedSha256: hash(manifest) };
 }
+
+test('the two historical audit terminals agree on exactly six integration files and one expected-endpoint test', () => {
+  assert.deepEqual(TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188, XENO_TRIALS_ALIENS1986_JOIN_V206);
+  const paths = ['index.html', 'package.json', 'scripts/build.mjs', 'scripts/build-dev-tools-v188.mjs',
+    'scripts/verify-public-release-v86.mjs', 'src/title-screen-v61.js', 'scripts/verify-tantalus-priorities-v188.mjs'];
+  for (const join of [TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188, XENO_TRIALS_ALIENS1986_JOIN_V206]) {
+    assert.equal(join.baseline, '001a20bdc0f9f1a3c835e84d8f3c9434bc159330');
+    assert.deepEqual(Object.keys(join.successors), paths);
+    assert.ok(Object.isFrozen(join) && Object.isFrozen(join.successors));
+    for (const [path, receipt] of Object.entries(join.successors)) {
+      assert.ok(Object.isFrozen(receipt));
+      assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+      assert.equal(hash(sourceBytes(path)), receipt.currentSha256, path);
+      assert.notEqual(receipt.currentSha256, receipt.previousSha256, path);
+    }
+  }
+});
+
+test('the exact integration continuation rejects invented predecessors and reaches the title through both fallback paths', () => {
+  const entries = TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188.successors;
+  for (const resolver of [reviewedTantalusAliens1986DigestV188, reviewedXenoAliens1986DigestV206]) {
+    for (const [path, receipt] of Object.entries(entries)) {
+      assert.equal(resolver(path, receipt.previousSha256), receipt.currentSha256, path);
+      for (const bad of [receipt.currentSha256, '0'.repeat(64), undefined]) {
+        assert.throws(() => resolver(path, bad), /Broken 001a20b-to-aliens1986 source chain/, path);
+      }
+    }
+    for (const path of ['constructor', 'src/title-screen-v61.js/extra', 'src/unreviewed.js']) {
+      assert.equal(resolver(path, 'unchanged'), 'unchanged', path);
+    }
+  }
+  const path = 'src/title-screen-v61.js', receipt = entries[path];
+  for (const resolver of [reviewedTantalusPrioritiesDigestV188, reviewedXenoTrialsTantalusJoinV206]) {
+    assert.equal(resolver(path, receipt.previousSha256), receipt.currentSha256);
+    assert.throws(() => resolver(path, '0'.repeat(64)), /Broken 001a20b-to-aliens1986 source chain/);
+  }
+  const view = xenoTrialsTantalusJoinRuntimeSourcesV206({ [path]: receipt.previousSha256, unrelated: 'historical' });
+  assert.deepEqual(view, { [path]: receipt.currentSha256, unrelated: 'historical' });
+  assert.deepEqual(xenoTrialsTantalusJoinRuntimeSourcesV206(view), view);
+  assert.throws(() => xenoTrialsTantalusJoinRuntimeSourcesV206({ [path]: '0'.repeat(64) }), /Incorrect Aliens 1986 runtime view predecessor/);
+});
+
+test('both audit terminals reject a further changed byte in every integration successor', () => {
+  for (const verify of [verifyTantalusAliens1986V188, verifyXenoAliens1986V206]) {
+    assert.deepEqual(verify(), { baselineCommit: '001a20bdc0f9f1a3c835e84d8f3c9434bc159330', successors: 7,
+      historicalResultsTransferred: false });
+    for (const path of Object.keys(TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188.successors)) {
+      const changed = Buffer.from(sourceBytes(path)); changed[changed.length - 1] ^= 1;
+      assert.throws(() => verify(candidate => candidate === path ? changed : sourceBytes(candidate)),
+        error => error.message.includes('Unreviewed Aliens 1986 integration bytes: ' + path));
+    }
+  }
+});
+
+test('the complete pre-integration declarations stay byte-identical and both audit terminals remain independent', () => {
+  for (const [path, start, expected] of [
+    ['scripts/audit-tantalus-priorities-v188.mjs', 'export const TANTALUS_PRIORITIES_BASELINE_V188',
+      '193902152e4e5a352f8ee22503047d618a7d3e19001639dea6bdc2e22d704f0c'],
+    ['scripts/audit-xeno-production-assets-v206.mjs', 'export const XENO_PRODUCTION_ASSETS_BASELINE_V206',
+      '55e71be67a26c0e81b4196dbd0aa6a5e513a3ae5e9c00796eb3630d2b951e405'],
+  ]) {
+    const source = sourceBytes(path).toString();
+    const first = source.indexOf(start), last = source.indexOf('// BEGIN ALIENS 1986 INTEGRATION RECEIPTS');
+    assert.ok(first >= 0 && last > first, path);
+    assert.equal(hash(source.slice(first, last)), expected, path);
+    assert.doesNotMatch(source, /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  }
+});
 
 test('the actual recovered corpus and runtime match all reviewed bytes', async () => {
   const result = await verifyAliens1986DlcAdmissions(root);

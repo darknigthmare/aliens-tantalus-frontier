@@ -1730,6 +1730,65 @@ export function verifyQueenMotherChoirRegistryContinuationV188(operations, count
   return historical;
 }
 
+// BEGIN ALIENS 1986 INTEGRATION RECEIPTS
+// Six shared integration files and the expected-endpoint test, from exact 001a20b.
+// Historical declarations above remain unchanged; no old CI or art result transfers.
+export const TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188 = freeze({
+  baseline: '001a20bdc0f9f1a3c835e84d8f3c9434bc159330',
+  successors: {
+  "index.html": {
+    "previousSha256": "1ab4a1fd0e2a090c287e501e12f6476a15644ca8455a1689133fc1bbeae7f2fd",
+    "currentSha256": "d8152324df0054d7d81293c6a789583c06cbd2942e2a4e1983162b5b8671a431"
+  },
+  "package.json": {
+    "previousSha256": "6d261eda040a57d60f8b4039443517a0cfeddd55b657c77ae87d2c8f486a39be",
+    "currentSha256": "6e2348866bd60b9e21ca6c9b5d4ee078a7b65d527d61e2cbecb5c3f754b38c3c"
+  },
+  "scripts/build.mjs": {
+    "previousSha256": "fa817256bc9832c9390055ddab431e8dd9e1320b273904c39f2489ff6807ab12",
+    "currentSha256": "e3dbf1e40e79b18bebf4d987329044cc06ee546471a70d054b75ce3a492ac3cf"
+  },
+  "scripts/build-dev-tools-v188.mjs": {
+    "previousSha256": "888e76d1aa2a206c71696e69f58373197b8f7fff7179581b53f4dd5ea4fe94a2",
+    "currentSha256": "73c7963635cfadc00bf2819df2ba6282d8a299025efb767cc8fc8bd28c8c2afa"
+  },
+  "scripts/verify-public-release-v86.mjs": {
+    "previousSha256": "c5f3c645310d030cf6f4e9b89d5a6b4012f30b61d06fe3f3af9fcfb73582e9ae",
+    "currentSha256": "0221633221e2030cfe507aaff2c5694cf020f372aeb27c580959b426deb39aee"
+  },
+  "src/title-screen-v61.js": {
+    "previousSha256": "e0c10ca738df12c78b48a24d79cb049aea2ac3e1c08ec270d3eed750fe267342",
+    "currentSha256": "0f369985fe5f48f11b03a6711ba7accf2689f1d2ce68f43b6ed52b46c013cdf7"
+  },
+  "scripts/verify-tantalus-priorities-v188.mjs": {
+    "previousSha256": "cc0bda305eec62e3577e72091d2b6b7ca38a71d238950698f614e88b6ae84fc8",
+    "currentSha256": "f1b06df240f0bd2dc19aa2e1416d10fcd60b90fc1403c3ea109b8b4d3ffd7b30"
+  }
+}
+});
+
+export function reviewedTantalusAliens1986DigestV188(path, endpoint) {
+  if (!Object.hasOwn(TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188.successors, path)) return endpoint;
+  const receipt = TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188.successors[path];
+  assert.equal(endpoint, receipt.previousSha256, 'Broken 001a20b-to-aliens1986 source chain: ' + path);
+  assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256), 'Invalid Aliens 1986 digest: ' + path);
+  assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'An Aliens 1986 successor must identify changed bytes: ' + path);
+  return receipt.currentSha256;
+}
+
+export function verifyTantalusAliens1986V188(readSource = readRepository) {
+  const join = TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188;
+  assert.equal(join.baseline, '001a20bdc0f9f1a3c835e84d8f3c9434bc159330');
+  for (const [path, receipt] of Object.entries(join.successors)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.equal(sha(readSource(path)), reviewedTantalusAliens1986DigestV188(path, receipt.previousSha256),
+      'Unreviewed Aliens 1986 integration bytes: ' + path);
+  }
+  return Object.freeze({ baselineCommit: join.baseline, successors: Object.keys(join.successors).length,
+    historicalResultsTransferred: false });
+}
+// END ALIENS 1986 INTEGRATION RECEIPTS
+
 export function reviewedTantalusPrioritiesDigestV188(path, endpoint) {
   const historical = TANTALUS_PRIORITIES_SUCCESSORS_V188[path];
   const receipt = historical || TANTALUS_PRIORITIES_CONTINUATION_V188.successors[path];
@@ -1806,12 +1865,12 @@ export function reviewedTantalusPrioritiesDigestV188(path, endpoint) {
     assert.notEqual(lead.currentSha256, lead.previousSha256, 'A lead-continuation successor must identify changed bytes: ' + path);
     current = lead.currentSha256;
   }
-  if (!Object.hasOwn(TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors, path)) return current;
+  if (!Object.hasOwn(TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors, path)) return reviewedTantalusAliens1986DigestV188(path, current);
   const join = TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors[path];
   assert.equal(current, join.previousSha256, 'Broken 0d1d9950-to-xeno-trials-join source chain: ' + path);
   assert.ok(validHash(join.currentSha256), 'Invalid xeno-trials-join source digest: ' + path);
   assert.notEqual(join.currentSha256, join.previousSha256, 'A xeno-trials-join successor must identify changed bytes: ' + path);
-  return join.currentSha256;
+  return reviewedTantalusAliens1986DigestV188(path, join.currentSha256);
 }
 
 export function verifyTantalusPrioritiesV188(readSource = readRepository) {
@@ -1967,7 +2026,7 @@ export function verifyTantalusPrioritiesV188(readSource = readRepository) {
     // The lead endpoint is the reviewed 0d1d9950 predecessor of the Xeno Trials join.
     const joined = join.successors[path];
     if (joined) assert.equal(joined.previousSha256, receipt.currentSha256, 'Broken lead-to-xeno-trials-join endpoint: ' + path);
-    assert.equal(sha(readSource(path)), joined ? joined.currentSha256 : receipt.currentSha256,
+    assert.equal(sha(readSource(path)), reviewedTantalusAliens1986DigestV188(path, joined ? joined.currentSha256 : receipt.currentSha256),
       'Unreviewed lead-continuation source bytes: ' + path);
   }
   assert.match(join.baseline, /^[a-f0-9]{40}$/, 'The Xeno Trials join needs its exact 0d1d9950 baseline');
@@ -1975,8 +2034,9 @@ export function verifyTantalusPrioritiesV188(readSource = readRepository) {
     assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
     assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
     assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A xeno-trials-join successor must identify changed bytes: ' + path);
-    assert.equal(sha(readSource(path)), receipt.currentSha256, 'Unreviewed xeno-trials-join source bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedTantalusAliens1986DigestV188(path, receipt.currentSha256), 'Unreviewed xeno-trials-join source bytes: ' + path);
   }
+  verifyTantalusAliens1986V188(readSource);
   return Object.freeze({ successors: successors.size, addedSources: addedSources.size });
 }
 

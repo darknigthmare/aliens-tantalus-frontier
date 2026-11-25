@@ -20,7 +20,7 @@ Le fichier ZIP d’origine est identifié par le SHA-256 `c6dfb2baa886d7b1651463
 
 La suite historique du DLC a été rejouée : **665 tests réussis**, aucun échec ni test ignoré. Le contrôle d’intégrité a confirmé les 1 158 fichiers hachés du paquet (le manifeste constitue le 1 159e fichier).
 
-Les tests d’intégration couvrent l’admission exacte, les modifications à taille constante, les fichiers manquants ou supplémentaires, les chemins invalides, les liens symboliques, les fuites de sources dans un build, la copie du runtime et les gardes du bouton du menu. La suite finale passe **16/16**. Le contrôle source, le build global et le contrôle du build réussissent ; le build contient 2 515 fichiers empreintés et conserve le schéma de sauvegarde 52. Ces résultats portent sur les changements locaux avant commit, sans prétendre valider par anticipation une CI GitHub.
+Les tests d’intégration couvrent l’admission exacte, les modifications à taille constante, les fichiers manquants ou supplémentaires, les chemins invalides, les liens symboliques, les fuites de sources dans un build, la copie du runtime et les gardes du bouton du menu. La première suite passait **16/16**. Le contrôle source, le build global et le contrôle du build réussissent ; le build contient 2 515 fichiers empreintés et conserve le schéma de sauvegarde 52. Ces résultats portent sur les changements locaux avant commit, sans prétendre valider par anticipation une CI GitHub.
 
 La recette navigateur sur les fichiers servis du dépôt a réussi **21/21 contrôles** avec Playwright 1.65.2 et Chromium 159.0.8154.6. Elle a exécuté le lancement de l’opération, la marche de Ripley, l’ordre Tenir, l’approche du sas, son ouverture différée, la pause, la sauvegarde, le rechargement exact et l’aller-retour par le vrai menu Tantalus. Aucun état de progression n’a été injecté dans le DLC.
 
@@ -37,6 +37,14 @@ La première recette navigateur GitHub a réussi 16 contrôles de jeu et de pers
 Le lanceur déclare désormais l'icône PNG déjà distribuée par Tantalus. La recette enregistre les URL et statuts des erreurs HTTP ainsi que la localisation des messages console, sans filtrer les erreurs ni assouplir ses assertions. Elle utilise le navigateur installé par Playwright, sauf choix explicite avec `ATF_CHROMIUM_EXECUTABLE` ; la détection automatique d'un Chromium système est supprimée. Cette détection avait sélectionné Chromium 157 sur GitHub alors que Chromium 159 venait d'être installé pour la recette. Les résultats des nouveaux passages restent consultables dans la PR #57.
 
 Les empreintes des parcours consignés plus haut correspondent à leurs exécutions avant cet ajustement du lanceur. Le HTML V114 et les 1 159 fichiers récupérés restent identiques.
+
+## Succession exacte des registres historiques
+
+La première CI V163 a aussi refusé les nouveaux octets du vérificateur de distribution, encore comparés à leur empreinte antérieure. Les deux chaînes historiques indépendantes, Tantalus V188 et Xeno Trials V206, continuent désormais vers deux blocs identiques de transitions précises depuis `001a20bdc0f9f1a3c835e84d8f3c9434bc159330`. Ils couvrent les six fichiers partagés modifiés par l’intégration : shell, paquet, contrôleur du titre, build, repérage des outils DEV et vérificateur de distribution. Une septième transition concerne uniquement le test Tantalus dont le calcul de l’empreinte attendue doit suivre ce nouveau maillon.
+
+Chaque entrée exige le chemin, l’ancienne empreinte et la nouvelle empreinte exacts. Les anciens reçus et leurs empreintes restent inchangés ; les deux terminaux n’importent toujours aucun autre audit. La suite d’intégration enrichie passe **20/20** : quatre nouveaux cas vérifient l’égalité des blocs, les deux chemins de résolution du titre, le refus d’une mutation supplémentaire dans chacun des sept fichiers et l’identité des déclarations historiques. La suite d’audit i18n passe **4/4**, et les vérificateurs de succession V179/V180 ainsi que la convergence du titre par le relais QA natif passent en exécution directe.
+
+Les contrôles historiques qui parcourent les médias complets restent à rejouer en CI : le checkout local partiel ne contient pas tous ces assets ni tous les outils archivés. Les cas tentés qui les requièrent s’arrêtent sur ces fichiers absents, après avoir dépassé l’erreur d’empreinte initiale. Ces vérifications locales ne constituent pas une réussite anticipée de la CI du prochain commit. Le reçu JSON initial demeure la preuve datée de la première intégration.
 
 ## Limites conservées
 
