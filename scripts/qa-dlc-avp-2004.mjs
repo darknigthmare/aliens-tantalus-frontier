@@ -29,6 +29,7 @@ await new Promise(resolveReady => server.listen(0, '127.0.0.1', resolveReady));
 const base = 'http://127.0.0.1:' + server.address().port;
 let browser = null;
 const checks = [];
+const observedPageErrors = [];
 function check(name, condition, detail = null) {
   checks.push({ name, ok: Boolean(condition), ...(detail ? { detail } : {}) });
   assert.ok(condition, name);
@@ -77,7 +78,7 @@ try {
     const context = await browser.newContext({ viewport: profile.viewport, isMobile: !!profile.isMobile,
       hasTouch: !!profile.hasTouch, reducedMotion: 'reduce', acceptDownloads: true });
     const page = await context.newPage(), errors = [];
-    page.on('pageerror', error => errors.push(error.message));
+    page.on('pageerror', error => { errors.push(error.message); observedPageErrors.push({ profile: profile.name, message: error.message, stack: error.stack }); });
     await createNativeProfileFixture(page, profile.name);
     await openHostMenu(page);
     const before = await nativeSnapshot(page);
@@ -162,7 +163,15 @@ try {
   check('quota: unsaved notebook was not falsely created', await page.evaluate(() => localStorage.getItem('atf.dlc.avp2004.v1.slot1') === null));
   await blocked.close();
 } catch (error) {
-  fatal = { message: error.message, stack: error.stack };
+  const pages = [];
+  for (const [index, page] of (browser?.contexts().flatMap(context => context.pages()) || []).entries()) {
+    try {
+      const state = await page.evaluate(() => ({ url: location.href, activeElement: document.activeElement?.outerHTML?.slice(0,1000), titleHidden: document.getElementById('title-screen')?.hidden, titleState: document.getElementById('title-screen')?.dataset.state, menuHidden: document.getElementById('title-menu')?.hidden, galleryOpen: document.getElementById('dlc-expeditions')?.open, liveStatus: document.getElementById('title-live-status')?.textContent }));
+      pages.push(state);
+      await page.screenshot({ path: join(output, 'failure-' + index + '.png'), fullPage: true });
+    } catch (diagnosticError) { pages.push({ diagnosticError: diagnosticError.message }); }
+  }
+  fatal = { message: error.message, stack: error.stack, pages, observedPageErrors };
 } finally {
   await browser?.close();
   await new Promise(done => server.close(done));
