@@ -8,6 +8,11 @@ import { AVP_HOST_BASELINE_20261125 as baseline, AVP_HOST_SUCCESSORS_20261125 as
   AVP_FIORINA_JOIN_SUCCESSORS_20261125 as joinSuccessors,
   AVP_FIORINA_QA_BASELINE_20261125 as qualityBaseline,
   AVP_FIORINA_QA_SUCCESSORS_20261125 as qualitySuccessors,
+  AVP_ALIENS_JOIN_BASELINES_20261125 as aliensBaselines,
+  AVP_ALIENS_INCOMING_SOURCES_20261125 as aliensIncoming,
+  AVP_ALIENS_JOIN_SUCCESSORS_20261125 as aliensMerge,
+  ALIENS_AVP_JOIN_SUCCESSORS_20261125 as aliasesFromAliens,
+  reviewedAliensIncomingDigest20261125 as advanceAliens,
   reviewedAvpHostDigest20261125 as advance, avpHostRuntimeSources20261125 as runtimeView,
   verifyAvpHostSources20261125 as verify } from './audit-dlc-avp-2004-20261125.mjs';
 import { reviewedAfterNativeQaResourcesV187 } from './audit-native-qa-resources-v187.mjs';
@@ -93,10 +98,10 @@ const expectedQualityPaths = [
   "scripts/verify-m577-everywhere-v188.mjs",
   "src/i18n-en-catalog-v185.js"
 ];
-const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths])];
-const firstEndpoint = path => (successors[path] || joinSuccessors[path] || qualitySuccessors[path]).previousSha256;
-const finalEndpoint = path => (qualitySuccessors[path] || joinSuccessors[path] || successors[path]).currentSha256;
-const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA) source chain/;
+const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge)])];
+const firstEndpoint = path => (successors[path] || joinSuccessors[path] || qualitySuccessors[path] || aliensMerge[path]).previousSha256;
+const finalEndpoint = path => (aliensMerge[path] || qualitySuccessors[path] || joinSuccessors[path] || successors[path]).currentSha256;
+const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge) source chain/;
 
 test('AVP published receipts remain immutable while the exact Fiorina join verifies current bytes', () => {
   assert.equal(baseline, '001a20bdc0f9f1a3c835e84d8f3c9434bc159330');
@@ -105,11 +110,42 @@ test('AVP published receipts remain immutable while the exact Fiorina join verif
   assert.deepEqual(Object.keys(joinSuccessors).sort(), [...expectedJoinPaths].sort());
   assert.equal(sha(JSON.stringify(joinSuccessors)), publishedJoinReceiptsSha256);
   assert.deepEqual(Object.keys(qualitySuccessors).sort(), [...expectedQualityPaths].sort());
+  assert.equal(sha(JSON.stringify(qualitySuccessors)), 'ecd1c1d5d2f2c0756c107084269f6436b19d46e4269e77e390e618a0a89dce62');
   assert.equal(Object.hasOwn(successors, audit), false);
   assert.equal(Object.hasOwn(joinSuccessors, audit), false);
   assert.ok(Object.isFrozen(successors) && Object.isFrozen(joinSuccessors) && Object.isFrozen(qualitySuccessors));
   assert.deepEqual(verify(), { baselineCommit: baseline, successors: verifiedPaths.length,
-    joinedSuccessors: expectedJoinPaths.length, qualitySuccessors: expectedQualityPaths.length, historicalEvidenceTransferred: false });
+    joinedSuccessors: expectedJoinPaths.length, qualitySuccessors: expectedQualityPaths.length,
+    aliensMergedSuccessors: Object.keys(aliensMerge).length, aliensIncomingSuccessors: Object.keys(aliasesFromAliens).length,
+    historicalEvidenceTransferred: false });
+});
+
+test('the Aliens merge joins both exact published parents and refuses any unrecorded incoming endpoint', () => {
+  assert.deepEqual(aliensBaselines, {
+    avpCommit: '1290733d51b6be5d075ab8bbc3eb9e87d684e8f4',
+    aliensCommit: 'eb4a3107b3abe073acc536ab453be3b98ecb6685',
+    commonCommit: '38a4a2272ec48a9cd5011f8a0055caaca6ab0774'
+  });
+  assert.equal(Object.keys(aliensIncoming).length, 23);
+  for (const [path, digest] of Object.entries(aliensIncoming)) {
+    assert.equal(advanceAliens(path, digest), finalEndpoint(path), path);
+    assert.equal(sha(read(path)), finalEndpoint(path), path);
+    for (const unrecorded of ['0'.repeat(64), undefined])
+      assert.throws(() => advanceAliens(path, unrecorded), /Broken published-Aliens incoming source chain/, path);
+    if (aliasesFromAliens[path]) {
+      assert.equal(aliasesFromAliens[path].previousSha256, digest, path);
+      assert.notEqual(aliasesFromAliens[path].currentSha256, digest, path);
+      assert.throws(() => advanceAliens(path, aliasesFromAliens[path].currentSha256), /Broken published-Aliens incoming source chain/, path);
+    } else assert.equal(digest, finalEndpoint(path), 'An unchanged parent needs no invented successor: ' + path);
+  }
+  for (const [path, receipt] of Object.entries(aliensMerge)) {
+    const published = qualitySuccessors[path] || joinSuccessors[path] || successors[path];
+    if (published) assert.equal(receipt.previousSha256, published.currentSha256, path);
+    assert.notEqual(receipt.previousSha256, receipt.currentSha256, path);
+    assert.ok(Object.isFrozen(receipt));
+  }
+  for (const path of ['src/unreviewed.js', 'src/app.js/extra', '__proto__', 'constructor', audit])
+    assert.equal(advanceAliens(path, 'untouched'), 'untouched');
 });
 
 test('the Fiorina join identifies both exact parents and every changed incoming host source', () => {
@@ -174,7 +210,7 @@ test('both historical chains reach the merged sources without rewriting either j
   }
 });
 
-test('runtime views accept only recorded baseline, AVP, join or quality endpoints', () => {
+test('runtime views accept only recorded baseline, AVP, join, quality or final merge endpoints', () => {
   const predecessor = Object.fromEntries(verifiedPaths.map(path => [path, firstEndpoint(path)]));
   const publishedAvp = Object.fromEntries(verifiedPaths.map(path => [path, successors[path]?.currentSha256 || firstEndpoint(path)]));
   const joined = Object.fromEntries(verifiedPaths.map(path => [path, joinSuccessors[path]?.currentSha256 || successors[path]?.currentSha256 || firstEndpoint(path)]));
@@ -216,5 +252,8 @@ test('the actual terminal imports no audit and cannot admit its own bytes', () =
   assert.equal(Object.hasOwn(successors, audit), false);
   assert.equal(Object.hasOwn(joinSuccessors, audit), false);
   assert.equal(Object.hasOwn(qualitySuccessors, audit), false);
+  assert.equal(Object.hasOwn(aliensMerge, audit), false);
+  assert.equal(Object.hasOwn(aliasesFromAliens, audit), false);
+  assert.equal(Object.hasOwn(aliensIncoming, audit), false);
   assert.doesNotMatch(source, /from\s+['"].*audit-/);
 });

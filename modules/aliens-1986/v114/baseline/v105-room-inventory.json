@@ -1,0 +1,1536 @@
+{
+  "source": "DLC_CONTENT_MANIFEST_V105.json",
+  "retrieval": "text-lines 14374 onward; geometry coordinates not in this excerpt",
+  "baselineRelease": "105.0.0",
+  "totals": {
+    "chapters": 16,
+    "mainObjectives": 66,
+    "optionalObjectivesV90": 32,
+    "cinematicChallengesV91": 32,
+    "totalGameplayTargets": 162,
+    "archives": 48,
+    "props": 112,
+    "hazards": 23,
+    "cinematicBeats": 32,
+    "companions": 2,
+    "operationsMasteryV92": 32,
+    "operationEvents": 22,
+    "fieldCaches": 8,
+    "doctrines": 16,
+    "projectedRoles": 64,
+    "historicalCast": 16,
+    "continuityMilestones": 16,
+    "sequentialRunChapters": 16,
+    "setpieceProfiles": 16,
+    "setpieces": 64,
+    "specializedEncounterSignatures": 16,
+    "historicalCastProfiles": 16,
+    "historicalRoleFocusEntries": 62,
+    "historicalEmbodiedRoleEntries": 50,
+    "historicalVirtualRoleEntries": 12,
+    "historicalStageDirections": 64,
+    "roomActionStations": 64,
+    "roomActionChapters": 16,
+    "roomActionEffectFamilies": 13,
+    "choreographyDirectives": 64,
+    "choreographyChapters": 16,
+    "choreographyFormations": 10,
+    "choreographyStances": 12,
+    "choreographyReactions": 11,
+    "environmentReactions": 64,
+    "environmentChapters": 16,
+    "environmentLightModes": 45,
+    "environmentAtmospheres": 12,
+    "environmentMotions": 54,
+    "localDamageProps": 112,
+    "localDestructibleProps": 27,
+    "localProtectedProps": 85,
+    "localBurnableProps": 7,
+    "localBreakableLights": 8,
+    "localDamageMaterials": 7,
+    "goldAuditedSteps": 66,
+    "goldScopedClearSteps": 3,
+    "goldCriticalVehicleSteps": 16,
+    "goldCriticalQueenSteps": 6,
+    "goldSentryCriticalSteps": 5,
+    "goldQaPersonas": 4,
+    "presentationPhaseCues": 64,
+    "presentationAmbienceSlots": 16,
+    "presentationStingerSlots": 9,
+    "presentationEventSfxSlots": 8,
+    "presentationVfxPresets": 9,
+    "hybridRooms": 64,
+    "hybridTransitions": 48,
+    "hybridModeChanges": 34,
+    "hybridSideRooms": 13,
+    "hybridDepthRooms": 26,
+    "hybridMixedRooms": 17,
+    "hybridSetpieceRooms": 8,
+    "hybridPhysicsSchema": 103,
+    "visualGraphicFamiliesV104": 11,
+    "parallaxLayersV104": 10,
+    "visualChapterProfilesV104": 16,
+    "roomLayoutsV105": 64,
+    "roomArchetypesV105": 17,
+    "authoredCoversV105": 294,
+    "interLaneGatesV105": 196,
+    "laneBarriersV105": 116,
+    "optionalSecretsV105": 63
+  },
+  "roomByRoomV105": {
+    "schema": 105,
+    "report": {
+      "ok": true,
+      "errors": [],
+      "layouts": 64,
+      "templates": 17,
+      "covers": 294,
+      "gates": 196,
+      "barriers": 116,
+      "secrets": 63,
+      "chapters": 16
+    },
+    "layouts": [
+      {
+        "stageId": "c01-p1",
+        "chapter": 1,
+        "mode": "SIDE",
+        "template": "orbital-suite",
+        "label": "Orbital suite",
+        "lanes": 1,
+        "covers": 2,
+        "gates": 1,
+        "barriers": 0,
+        "secrets": 1,
+        "architecture": [
+          "window-band",
+          "ceiling-services",
+          "civilian-wall-bays"
+        ],
+        "foreground": [
+          "medical-frame",
+          "window-mullion"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c01-p2",
+        "chapter": 1,
+        "mode": "HYBRID",
+        "template": "orbital-suite",
+        "label": "Orbital suite",
+        "lanes": 3,
+        "covers": 2,
+        "gates": 1,
+        "barriers": 0,
+        "secrets": 1,
+        "architecture": [
+          "window-band",
+          "ceiling-services",
+          "civilian-wall-bays"
+        ],
+        "foreground": [
+          "medical-frame",
+          "window-mullion"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c01-p3",
+        "chapter": 1,
+        "mode": "SIDE",
+        "template": "orbital-suite",
+        "label": "Orbital suite",
+        "lanes": 1,
+        "covers": 2,
+        "gates": 1,
+        "barriers": 0,
+        "secrets": 1,
+        "architecture": [
+          "window-band",
+          "ceiling-services",
+          "civilian-wall-bays"
+        ],
+        "foreground": [
+          "medical-frame",
+          "window-mullion"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c01-p4",
+        "chapter": 1,
+        "mode": "SIDE",
+        "template": "orbital-suite",
+        "label": "Orbital suite",
+        "lanes": 1,
+        "covers": 2,
+        "gates": 1,
+        "barriers": 0,
+        "secrets": 1,
+        "architecture": [
+          "window-band",
+          "ceiling-services",
+          "civilian-wall-bays"
+        ],
+        "foreground": [
+          "medical-frame",
+          "window-mullion"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c02-p1",
+        "chapter": 2,
+        "mode": "DEPTH",
+        "template": "cryo-bay",
+        "label": "Cryo bay",
+        "lanes": 5,
+        "covers": 3,
+        "gates": 2,
+        "barriers": 1,
+        "secrets": 1,
+        "architecture": [
+          "cryo-columns",
+          "overhead-rail",
+          "weapons-cage"
+        ],
+        "foreground": [
+          "cryo-frame",
+          "hanging-hose"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c02-p2",
+        "chapter": 2,
+        "mode": "DEPTH",
+        "template": "cryo-bay",
+        "label": "Cryo bay",
+        "lanes": 5,
+        "covers": 3,
+        "gates": 2,
+        "barriers": 1,
+        "secrets": 1,
+        "architecture": [
+          "cryo-columns",
+          "overhead-rail",
+          "weapons-cage"
+        ],
+        "foreground": [
+          "cryo-frame",
+          "hanging-hose"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c02-p3",
+        "chapter": 2,
+        "mode": "SIDE",
+        "template": "cryo-bay",
+        "label": "Cryo bay",
+        "lanes": 1,
+        "covers": 3,
+        "gates": 2,
+        "barriers": 1,
+        "secrets": 1,
+        "architecture": [
+          "cryo-columns",
+          "overhead-rail",
+          "weapons-cage"
+        ],
+        "foreground": [
+          "cryo-frame",
+          "hanging-hose"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c02-p4",
+        "chapter": 2,
+        "mode": "SETPIECE",
+        "template": "cryo-bay",
+        "label": "Cryo bay",
+        "lanes": 2,
+        "covers": 3,
+        "gates": 2,
+        "barriers": 1,
+        "secrets": 1,
+        "architecture": [
+          "cryo-columns",
+          "overhead-rail",
+          "weapons-cage"
+        ],
+        "foreground": [
+          "cryo-frame",
+          "hanging-hose"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c03-p1",
+        "chapter": 3,
+        "mode": "DEPTH",
+        "template": "storm-approach",
+        "label": "Storm approach",
+        "lanes": 5,
+        "covers": 4,
+        "gates": 2,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "processor-silhouette",
+          "habitat-line",
+          "wind-breaks"
+        ],
+        "foreground": [
+          "rain-sheet",
+          "rock-edge"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c03-p2",
+        "chapter": 3,
+        "mode": "SETPIECE",
+        "template": "vehicle-road",
+        "label": "Vehicle road",
+        "lanes": 3,
+        "covers": 4,
+        "gates": 3,
+        "barriers": 1,
+        "secrets": 1,
+        "architecture": [
+          "road-markers",
+          "habitat-edge",
+          "processor-horizon"
+        ],
+        "foreground": [
+          "wind-debris",
+          "road-rail"
+        ],
+        "vehicleCorridor": {
+          "minLane": 0,
+          "maxLane": 2,
+          "minWidth": 0.18
+        }
+      },
+      {
+        "stageId": "c03-p3",
+        "chapter": 3,
+        "mode": "DEPTH",
+        "template": "storm-approach",
+        "label": "Storm approach",
+        "lanes": 5,
+        "covers": 4,
+        "gates": 2,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "processor-silhouette",
+          "habitat-line",
+          "wind-breaks"
+        ],
+        "foreground": [
+          "rain-sheet",
+          "rock-edge"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c03-p4",
+        "chapter": 3,
+        "mode": "HYBRID",
+        "template": "storm-approach",
+        "label": "Storm approach",
+        "lanes": 3,
+        "covers": 4,
+        "gates": 2,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "processor-silhouette",
+          "habitat-line",
+          "wind-breaks"
+        ],
+        "foreground": [
+          "rain-sheet",
+          "rock-edge"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c04-p1",
+        "chapter": 4,
+        "mode": "DEPTH",
+        "template": "colony-street",
+        "label": "Colony street",
+        "lanes": 5,
+        "covers": 5,
+        "gates": 3,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "habitat-facades",
+          "skybridges",
+          "street-services"
+        ],
+        "foreground": [
+          "pipe-cluster",
+          "broken-sign"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c04-p2",
+        "chapter": 4,
+        "mode": "HYBRID",
+        "template": "colony-street",
+        "label": "Colony street",
+        "lanes": 3,
+        "covers": 5,
+        "gates": 3,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "habitat-facades",
+          "skybridges",
+          "street-services"
+        ],
+        "foreground": [
+          "pipe-cluster",
+          "broken-sign"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c04-p3",
+        "chapter": 4,
+        "mode": "DEPTH",
+        "template": "operations-crossfire",
+        "label": "Operations crossfire",
+        "lanes": 5,
+        "covers": 5,
+        "gates": 3,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "command-wall",
+          "blast-door-ribs",
+          "ceiling-grid"
+        ],
+        "foreground": [
+          "hanging-cables",
+          "map-frame"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c04-p4",
+        "chapter": 4,
+        "mode": "HYBRID",
+        "template": "colony-street",
+        "label": "Colony street",
+        "lanes": 3,
+        "covers": 5,
+        "gates": 3,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "habitat-facades",
+          "skybridges",
+          "street-services"
+        ],
+        "foreground": [
+          "pipe-cluster",
+          "broken-sign"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c05-p1",
+        "chapter": 5,
+        "mode": "DEPTH",
+        "template": "operations-crossfire",
+        "label": "Operations crossfire",
+        "lanes": 5,
+        "covers": 5,
+        "gates": 3,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "command-wall",
+          "blast-door-ribs",
+          "ceiling-grid"
+        ],
+        "foreground": [
+          "hanging-cables",
+          "map-frame"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c05-p2",
+        "chapter": 5,
+        "mode": "SIDE",
+        "template": "operations-crossfire",
+        "label": "Operations crossfire",
+        "lanes": 1,
+        "covers": 5,
+        "gates": 3,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "command-wall",
+          "blast-door-ribs",
+          "ceiling-grid"
+        ],
+        "foreground": [
+          "hanging-cables",
+          "map-frame"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c05-p3",
+        "chapter": 5,
+        "mode": "HYBRID",
+        "template": "sentry-killbox",
+        "label": "Sentry killbox",
+        "lanes": 3,
+        "covers": 6,
+        "gates": 3,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "sentry-lines",
+          "ammo-walls",
+          "blast-door-depth"
+        ],
+        "foreground": [
+          "muzzle-smoke",
+          "cable-curtain"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c05-p4",
+        "chapter": 5,
+        "mode": "SIDE",
+        "template": "operations-crossfire",
+        "label": "Operations crossfire",
+        "lanes": 1,
+        "covers": 5,
+        "gates": 3,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "command-wall",
+          "blast-door-ribs",
+          "ceiling-grid"
+        ],
+        "foreground": [
+          "hanging-cables",
+          "map-frame"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c06-p1",
+        "chapter": 6,
+        "mode": "SIDE",
+        "template": "processor-gantry",
+        "label": "Processor gantry",
+        "lanes": 1,
+        "covers": 6,
+        "gates": 4,
+        "barriers": 3,
+        "secrets": 1,
+        "architecture": [
+          "reactor-columns",
+          "gantry-stack",
+          "cooling-tower"
+        ],
+        "foreground": [
+          "steam-pipe",
+          "gantry-truss"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c06-p2",
+        "chapter": 6,
+        "mode": "HYBRID",
+        "template": "hive-tunnel",
+        "label": "Hive tunnel",
+        "lanes": 3,
+        "covers": 5,
+        "gates": 4,
+        "barriers": 3,
+        "secrets": 1,
+        "architecture": [
+          "resin-ribs",
+          "cocoon-arches",
+          "buried-colony"
+        ],
+        "foreground": [
+          "slime-drip",
+          "resin-curtain"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c06-p3",
+        "chapter": 6,
+        "mode": "DEPTH",
+        "template": "hive-tunnel",
+        "label": "Hive tunnel",
+        "lanes": 5,
+        "covers": 5,
+        "gates": 4,
+        "barriers": 3,
+        "secrets": 1,
+        "architecture": [
+          "resin-ribs",
+          "cocoon-arches",
+          "buried-colony"
+        ],
+        "foreground": [
+          "slime-drip",
+          "resin-curtain"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c06-p4",
+        "chapter": 6,
+        "mode": "HYBRID",
+        "template": "processor-gantry",
+        "label": "Processor gantry",
+        "lanes": 3,
+        "covers": 6,
+        "gates": 4,
+        "barriers": 3,
+        "secrets": 1,
+        "architecture": [
+          "reactor-columns",
+          "gantry-stack",
+          "cooling-tower"
+        ],
+        "foreground": [
+          "steam-pipe",
+          "gantry-truss"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c07-p1",
+        "chapter": 7,
+        "mode": "HYBRID",
+        "template": "vehicle-road",
+        "label": "Vehicle road",
+        "lanes": 3,
+        "covers": 4,
+        "gates": 3,
+        "barriers": 1,
+        "secrets": 1,
+        "architecture": [
+          "road-markers",
+          "habitat-edge",
+          "processor-horizon"
+        ],
+        "foreground": [
+          "wind-debris",
+          "road-rail"
+        ],
+        "vehicleCorridor": {
+          "minLane": 0,
+          "maxLane": 2,
+          "minWidth": 0.18
+        }
+      },
+      {
+        "stageId": "c07-p2",
+        "chapter": 7,
+        "mode": "SETPIECE",
+        "template": "vehicle-road",
+        "label": "Vehicle road",
+        "lanes": 3,
+        "covers": 4,
+        "gates": 3,
+        "barriers": 1,
+        "secrets": 1,
+        "architecture": [
+          "road-markers",
+          "habitat-edge",
+          "processor-horizon"
+        ],
+        "foreground": [
+          "wind-debris",
+          "road-rail"
+        ],
+        "vehicleCorridor": {
+          "minLane": 0,
+          "maxLane": 2,
+          "minWidth": 0.18
+        }
+      },
+      {
+        "stageId": "c07-p3",
+        "chapter": 7,
+        "mode": "SETPIECE",
+        "template": "vehicle-road",
+        "label": "Vehicle road",
+        "lanes": 3,
+        "covers": 4,
+        "gates": 3,
+        "barriers": 1,
+        "secrets": 1,
+        "architecture": [
+          "road-markers",
+          "habitat-edge",
+          "processor-horizon"
+        ],
+        "foreground": [
+          "wind-debris",
+          "road-rail"
+        ],
+        "vehicleCorridor": {
+          "minLane": 0,
+          "maxLane": 2,
+          "minWidth": 0.18
+        }
+      },
+      {
+        "stageId": "c07-p4",
+        "chapter": 7,
+        "mode": "HYBRID",
+        "template": "colony-street",
+        "label": "Colony street",
+        "lanes": 3,
+        "covers": 5,
+        "gates": 3,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "habitat-facades",
+          "skybridges",
+          "street-services"
+        ],
+        "foreground": [
+          "pipe-cluster",
+          "broken-sign"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c08-p1",
+        "chapter": 8,
+        "mode": "DEPTH",
+        "template": "storm-approach",
+        "label": "Storm approach",
+        "lanes": 5,
+        "covers": 4,
+        "gates": 2,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "processor-silhouette",
+          "habitat-line",
+          "wind-breaks"
+        ],
+        "foreground": [
+          "rain-sheet",
+          "rock-edge"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c08-p2",
+        "chapter": 8,
+        "mode": "DEPTH",
+        "template": "crash-field",
+        "label": "Crash field",
+        "lanes": 5,
+        "covers": 5,
+        "gates": 3,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "dropship-wreck",
+          "landing-beacons",
+          "storm-skyline"
+        ],
+        "foreground": [
+          "burning-panel",
+          "smoke-column"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c08-p3",
+        "chapter": 8,
+        "mode": "SETPIECE",
+        "template": "crash-field",
+        "label": "Crash field",
+        "lanes": 3,
+        "covers": 5,
+        "gates": 3,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "dropship-wreck",
+          "landing-beacons",
+          "storm-skyline"
+        ],
+        "foreground": [
+          "burning-panel",
+          "smoke-column"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c08-p4",
+        "chapter": 8,
+        "mode": "DEPTH",
+        "template": "operations-crossfire",
+        "label": "Operations crossfire",
+        "lanes": 5,
+        "covers": 5,
+        "gates": 3,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "command-wall",
+          "blast-door-ribs",
+          "ceiling-grid"
+        ],
+        "foreground": [
+          "hanging-cables",
+          "map-frame"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c09-p1",
+        "chapter": 9,
+        "mode": "DEPTH",
+        "template": "sentry-killbox",
+        "label": "Sentry killbox",
+        "lanes": 5,
+        "covers": 6,
+        "gates": 3,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "sentry-lines",
+          "ammo-walls",
+          "blast-door-depth"
+        ],
+        "foreground": [
+          "muzzle-smoke",
+          "cable-curtain"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c09-p2",
+        "chapter": 9,
+        "mode": "DEPTH",
+        "template": "sentry-killbox",
+        "label": "Sentry killbox",
+        "lanes": 5,
+        "covers": 6,
+        "gates": 3,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "sentry-lines",
+          "ammo-walls",
+          "blast-door-depth"
+        ],
+        "foreground": [
+          "muzzle-smoke",
+          "cable-curtain"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c09-p3",
+        "chapter": 9,
+        "mode": "DEPTH",
+        "template": "sentry-killbox",
+        "label": "Sentry killbox",
+        "lanes": 5,
+        "covers": 6,
+        "gates": 3,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "sentry-lines",
+          "ammo-walls",
+          "blast-door-depth"
+        ],
+        "foreground": [
+          "muzzle-smoke",
+          "cable-curtain"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c09-p4",
+        "chapter": 9,
+        "mode": "HYBRID",
+        "template": "operations-crossfire",
+        "label": "Operations crossfire",
+        "lanes": 3,
+        "covers": 5,
+        "gates": 3,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "command-wall",
+          "blast-door-ribs",
+          "ceiling-grid"
+        ],
+        "foreground": [
+          "hanging-cables",
+          "map-frame"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c10-p1",
+        "chapter": 10,
+        "mode": "SIDE",
+        "template": "medlab-isolation",
+        "label": "Medlab isolation",
+        "lanes": 1,
+        "covers": 4,
+        "gates": 3,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "specimen-windows",
+          "isolation-doors",
+          "ceiling-rail"
+        ],
+        "foreground": [
+          "glass-frame",
+          "iv-rig"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c10-p2",
+        "chapter": 10,
+        "mode": "SIDE",
+        "template": "medlab-isolation",
+        "label": "Medlab isolation",
+        "lanes": 1,
+        "covers": 4,
+        "gates": 3,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "specimen-windows",
+          "isolation-doors",
+          "ceiling-rail"
+        ],
+        "foreground": [
+          "glass-frame",
+          "iv-rig"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c10-p3",
+        "chapter": 10,
+        "mode": "HYBRID",
+        "template": "medlab-isolation",
+        "label": "Medlab isolation",
+        "lanes": 3,
+        "covers": 4,
+        "gates": 3,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "specimen-windows",
+          "isolation-doors",
+          "ceiling-rail"
+        ],
+        "foreground": [
+          "glass-frame",
+          "iv-rig"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c10-p4",
+        "chapter": 10,
+        "mode": "SIDE",
+        "template": "medlab-isolation",
+        "label": "Medlab isolation",
+        "lanes": 1,
+        "covers": 4,
+        "gates": 3,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "specimen-windows",
+          "isolation-doors",
+          "ceiling-rail"
+        ],
+        "foreground": [
+          "glass-frame",
+          "iv-rig"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c11-p1",
+        "chapter": 11,
+        "mode": "SIDE",
+        "template": "operations-crossfire",
+        "label": "Operations crossfire",
+        "lanes": 1,
+        "covers": 5,
+        "gates": 3,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "command-wall",
+          "blast-door-ribs",
+          "ceiling-grid"
+        ],
+        "foreground": [
+          "hanging-cables",
+          "map-frame"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c11-p2",
+        "chapter": 11,
+        "mode": "HYBRID",
+        "template": "ceiling-ambush",
+        "label": "Ceiling ambush",
+        "lanes": 3,
+        "covers": 5,
+        "gates": 3,
+        "barriers": 1,
+        "secrets": 1,
+        "architecture": [
+          "ceiling-grid",
+          "operations-desks",
+          "vent-mouths"
+        ],
+        "foreground": [
+          "falling-cable",
+          "smoke-ribbon"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c11-p3",
+        "chapter": 11,
+        "mode": "DEPTH",
+        "template": "ceiling-ambush",
+        "label": "Ceiling ambush",
+        "lanes": 5,
+        "covers": 5,
+        "gates": 3,
+        "barriers": 1,
+        "secrets": 1,
+        "architecture": [
+          "ceiling-grid",
+          "operations-desks",
+          "vent-mouths"
+        ],
+        "foreground": [
+          "falling-cable",
+          "smoke-ribbon"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c11-p4",
+        "chapter": 11,
+        "mode": "HYBRID",
+        "template": "operations-crossfire",
+        "label": "Operations crossfire",
+        "lanes": 3,
+        "covers": 5,
+        "gates": 3,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "command-wall",
+          "blast-door-ribs",
+          "ceiling-grid"
+        ],
+        "foreground": [
+          "hanging-cables",
+          "map-frame"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c12-p1",
+        "chapter": 12,
+        "mode": "DEPTH",
+        "template": "remote-platform",
+        "label": "Remote platform",
+        "lanes": 5,
+        "covers": 4,
+        "gates": 3,
+        "barriers": 1,
+        "secrets": 1,
+        "architecture": [
+          "antenna-array",
+          "remote-pad",
+          "storm-horizon"
+        ],
+        "foreground": [
+          "antenna-strut",
+          "rain-sheet"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c12-p2",
+        "chapter": 12,
+        "mode": "SIDE",
+        "template": "remote-platform",
+        "label": "Remote platform",
+        "lanes": 1,
+        "covers": 4,
+        "gates": 3,
+        "barriers": 1,
+        "secrets": 1,
+        "architecture": [
+          "antenna-array",
+          "remote-pad",
+          "storm-horizon"
+        ],
+        "foreground": [
+          "antenna-strut",
+          "rain-sheet"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c12-p3",
+        "chapter": 12,
+        "mode": "DEPTH",
+        "template": "remote-platform",
+        "label": "Remote platform",
+        "lanes": 5,
+        "covers": 4,
+        "gates": 3,
+        "barriers": 1,
+        "secrets": 1,
+        "architecture": [
+          "antenna-array",
+          "remote-pad",
+          "storm-horizon"
+        ],
+        "foreground": [
+          "antenna-strut",
+          "rain-sheet"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c12-p4",
+        "chapter": 12,
+        "mode": "DEPTH",
+        "template": "remote-platform",
+        "label": "Remote platform",
+        "lanes": 5,
+        "covers": 4,
+        "gates": 3,
+        "barriers": 1,
+        "secrets": 1,
+        "architecture": [
+          "antenna-array",
+          "remote-pad",
+          "storm-horizon"
+        ],
+        "foreground": [
+          "antenna-strut",
+          "rain-sheet"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c13-p1",
+        "chapter": 13,
+        "mode": "SIDE",
+        "template": "hive-tunnel",
+        "label": "Hive tunnel",
+        "lanes": 1,
+        "covers": 5,
+        "gates": 4,
+        "barriers": 3,
+        "secrets": 1,
+        "architecture": [
+          "resin-ribs",
+          "cocoon-arches",
+          "buried-colony"
+        ],
+        "foreground": [
+          "slime-drip",
+          "resin-curtain"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c13-p2",
+        "chapter": 13,
+        "mode": "HYBRID",
+        "template": "hive-tunnel",
+        "label": "Hive tunnel",
+        "lanes": 3,
+        "covers": 5,
+        "gates": 4,
+        "barriers": 3,
+        "secrets": 1,
+        "architecture": [
+          "resin-ribs",
+          "cocoon-arches",
+          "buried-colony"
+        ],
+        "foreground": [
+          "slime-drip",
+          "resin-curtain"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c13-p3",
+        "chapter": 13,
+        "mode": "HYBRID",
+        "template": "hive-tunnel",
+        "label": "Hive tunnel",
+        "lanes": 3,
+        "covers": 5,
+        "gates": 4,
+        "barriers": 3,
+        "secrets": 1,
+        "architecture": [
+          "resin-ribs",
+          "cocoon-arches",
+          "buried-colony"
+        ],
+        "foreground": [
+          "slime-drip",
+          "resin-curtain"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c13-p4",
+        "chapter": 13,
+        "mode": "DEPTH",
+        "template": "hive-tunnel",
+        "label": "Hive tunnel",
+        "lanes": 5,
+        "covers": 5,
+        "gates": 4,
+        "barriers": 3,
+        "secrets": 1,
+        "architecture": [
+          "resin-ribs",
+          "cocoon-arches",
+          "buried-colony"
+        ],
+        "foreground": [
+          "slime-drip",
+          "resin-curtain"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c14-p1",
+        "chapter": 14,
+        "mode": "DEPTH",
+        "template": "nursery-basin",
+        "label": "Nursery basin",
+        "lanes": 5,
+        "covers": 6,
+        "gates": 5,
+        "barriers": 3,
+        "secrets": 1,
+        "architecture": [
+          "egg-field",
+          "ovipositor-frame",
+          "royal-ribs"
+        ],
+        "foreground": [
+          "egg-foreground",
+          "heavy-drip"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c14-p2",
+        "chapter": 14,
+        "mode": "DEPTH",
+        "template": "nursery-basin",
+        "label": "Nursery basin",
+        "lanes": 5,
+        "covers": 6,
+        "gates": 5,
+        "barriers": 3,
+        "secrets": 1,
+        "architecture": [
+          "egg-field",
+          "ovipositor-frame",
+          "royal-ribs"
+        ],
+        "foreground": [
+          "egg-foreground",
+          "heavy-drip"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c14-p3",
+        "chapter": 14,
+        "mode": "DEPTH",
+        "template": "nursery-basin",
+        "label": "Nursery basin",
+        "lanes": 5,
+        "covers": 6,
+        "gates": 5,
+        "barriers": 3,
+        "secrets": 1,
+        "architecture": [
+          "egg-field",
+          "ovipositor-frame",
+          "royal-ribs"
+        ],
+        "foreground": [
+          "egg-foreground",
+          "heavy-drip"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c14-p4",
+        "chapter": 14,
+        "mode": "HYBRID",
+        "template": "hive-tunnel",
+        "label": "Hive tunnel",
+        "lanes": 3,
+        "covers": 5,
+        "gates": 4,
+        "barriers": 3,
+        "secrets": 1,
+        "architecture": [
+          "resin-ribs",
+          "cocoon-arches",
+          "buried-colony"
+        ],
+        "foreground": [
+          "slime-drip",
+          "resin-curtain"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c15-p1",
+        "chapter": 15,
+        "mode": "HYBRID",
+        "template": "evac-run",
+        "label": "Evac run",
+        "lanes": 3,
+        "covers": 5,
+        "gates": 4,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "processor-collapse",
+          "evac-signage",
+          "landing-pad"
+        ],
+        "foreground": [
+          "fire-smoke",
+          "warning-frame"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c15-p2",
+        "chapter": 15,
+        "mode": "DEPTH",
+        "template": "evac-run",
+        "label": "Evac run",
+        "lanes": 5,
+        "covers": 5,
+        "gates": 4,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "processor-collapse",
+          "evac-signage",
+          "landing-pad"
+        ],
+        "foreground": [
+          "fire-smoke",
+          "warning-frame"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c15-p3",
+        "chapter": 15,
+        "mode": "DEPTH",
+        "template": "evac-run",
+        "label": "Evac run",
+        "lanes": 5,
+        "covers": 5,
+        "gates": 4,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "processor-collapse",
+          "evac-signage",
+          "landing-pad"
+        ],
+        "foreground": [
+          "fire-smoke",
+          "warning-frame"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c15-p4",
+        "chapter": 15,
+        "mode": "SETPIECE",
+        "template": "remote-platform",
+        "label": "Remote platform",
+        "lanes": 3,
+        "covers": 4,
+        "gates": 3,
+        "barriers": 1,
+        "secrets": 1,
+        "architecture": [
+          "antenna-array",
+          "remote-pad",
+          "storm-horizon"
+        ],
+        "foreground": [
+          "antenna-strut",
+          "rain-sheet"
+        ],
+        "vehicleCorridor": null
+      },
+      {
+        "stageId": "c16-p1",
+        "chapter": 16,
+        "mode": "DEPTH",
+        "template": "hangar-arena",
+        "label": "Hangar arena",
+        "lanes": 5,
+        "covers": 6,
+        "gates": 4,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "hangar-trusses",
+          "dropship-silhouette",
+          "airlock-frame"
+        ],
+        "foreground": [
+          "cargo-foreground",
+          "warning-strut"
+        ],
+        "vehicleCorridor": {
+          "minLane": 0,
+          "maxLane": 2,
+          "minWidth": 0.22
+        }
+      },
+      {
+        "stageId": "c16-p2",
+        "chapter": 16,
+        "mode": "DEPTH",
+        "template": "hangar-arena",
+        "label": "Hangar arena",
+        "lanes": 5,
+        "covers": 6,
+        "gates": 4,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "hangar-trusses",
+          "dropship-silhouette",
+          "airlock-frame"
+        ],
+        "foreground": [
+          "cargo-foreground",
+          "warning-strut"
+        ],
+        "vehicleCorridor": {
+          "minLane": 0,
+          "maxLane": 2,
+          "minWidth": 0.22
+        }
+      },
+      {
+        "stageId": "c16-p3",
+        "chapter": 16,
+        "mode": "SETPIECE",
+        "template": "hangar-arena",
+        "label": "Hangar arena",
+        "lanes": 3,
+        "covers": 6,
+        "gates": 4,
+        "barriers": 2,
+        "secrets": 1,
+        "architecture": [
+          "hangar-trusses",
+          "dropship-silhouette",
+          "airlock-frame"
+        ],
+        "foreground": [
+          "cargo-foreground",
+          "warning-strut"
+        ],
+        "vehicleCorridor": {
+          "minLane": 0,
+          "maxLane": 2,
+          "minWidth": 0.22
+        }
+      },
+      {
+        "stageId": "c16-p4",
+        "chapter": 16,
+        "mode": "SETPIECE",
+        "template": "airlock-finale",
+        "label": "Airlock finale",
+        "lanes": 3,
+        "covers": 4,
+        "gates": 2,
+        "barriers": 1,
+        "secrets": 0,
+        "architecture": [
+          "airlock-ring",
+          "hangar-trusses",
+          "vacuum-mouth"
+        ],
+        "foreground": [
+          "vacuum-debris",
+          "warning-strut"
+        ],
+        "vehicleCorridor": {
+          "minLane": 0,
+          "maxLane": 2,
+          "minWidth": 0.3
+        }
+      }
+    ]
+  }
+}

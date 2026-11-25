@@ -1,0 +1,349 @@
+{
+  "schema": 1,
+  "date": "2026-11-25",
+  "sourceCommit": "001a20bdc0f9f1a3c835e84d8f3c9434bc159330",
+  "sourceFiles": 1159,
+  "sourceBytes": 135643835,
+  "moduleTests": {
+    "passed": 665,
+    "failed": 0,
+    "skipped": 0
+  },
+  "integrationTests": {
+    "passed": 16,
+    "failed": 0
+  },
+  "browser": {
+    "version": {
+      "version": "159.0.8154.6",
+      "executable": "Playwright-managed"
+    },
+    "playwright": "1.65.2",
+    "ok": true,
+    "tests": [
+      {
+        "name": "La route DLC repond en HTTP",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Le jeu V114 charge avec 25 inspections",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Les profils natifs restent identiques au chargement",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Nouvelle operation reelle a Hadley",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Export des 25 lieux",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Deplacement reel de Ripley au clavier",
+        "ok": true,
+        "detail": {
+          "before": 220,
+          "after": 283.05519999999996
+        }
+      },
+      {
+        "name": "Ordre Tenir accepte sans deplacer Hicks",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Approche physique du sas",
+        "ok": true,
+        "detail": {
+          "id": "ripley",
+          "x": 555.3656000000007,
+          "z": 198,
+          "roomId": "v106-hadley",
+          "hp": 100,
+          "ammo": 48,
+          "alive": true,
+          "invulnerable": 0,
+          "phase": "idle",
+          "clock": 0,
+          "aim": null,
+          "order": "follow",
+          "anchor": null,
+          "facing": 1,
+          "recruited": true
+        }
+      },
+      {
+        "name": "E engage une ouverture differee",
+        "ok": true,
+        "detail": {
+          "kind": "open",
+          "roomId": "v106-hadley",
+          "id": "service-gate",
+          "elapsed": 0.8664000000000001,
+          "duration": 0.88,
+          "x": 555.3656000000007,
+          "z": 198,
+          "hp": 100
+        }
+      },
+      {
+        "name": "Pause exacte du geste",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Le sas s'ouvre apres le temps reellement joue",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Conserver un point ecrit seulement la cle DLC",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Checkpoint identique a l'export public",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Reprise exacte apres rechargement",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Porte, equipe et reserves conservees",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Aucun profil Tantalus ecrit par le DLC",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Aucune erreur JavaScript ou console DLC",
+        "ok": true,
+        "detail": {
+          "pageErrors": [],
+          "consoleErrors": []
+        }
+      },
+      {
+        "name": "Retour a la racine Tantalus",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Le bouton titre lance la route DLC",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Checkpoint conserve apres aller-retour titre",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Aucune erreur JavaScript de navigation parent",
+        "ok": true,
+        "detail": []
+      }
+    ],
+    "pageErrors": [],
+    "consoleErrors": [],
+    "abortedParentAssetRequests": 5,
+    "nativeCampaignGameplayTested": false,
+    "physicalPhoneTested": false
+  },
+  "sourceHashes": {
+    "dlc/aliens-1986/index.html": "bb63e521e719e1642d5867fb2578c6eafd40ce4f24b3a651b4510c2aac56f7ac",
+    "dlc/aliens-1986/game.html": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+    "index.html": "d8152324df0054d7d81293c6a789583c06cbd2942e2a4e1983162b5b8671a431",
+    "src/title-screen-v61.js": "0f369985fe5f48f11b03a6711ba7accf2689f1d2ce68f43b6ed52b46c013cdf7"
+  },
+  "scope": "Lancement depuis Tantalus, parcours du sas, sauvegarde, reprise et conservation des profils ; pas de fusion de campagne native.",
+  "distribution": {
+    "status": "passed",
+    "runtimePaths": [
+      "dlc/aliens-1986/index.html",
+      "dlc/aliens-1986/game.html"
+    ],
+    "sourceFilesChecked": 4692,
+    "assetsChecked": 1798,
+    "builtFilesHashed": 2515,
+    "saveSchema": 52,
+    "buildManifestSha256": "2f929422da3c79807dcd91fb5d5b7b07f8f82678c113babc3d9d6ba32ecf08a9",
+    "sourceCheck": true,
+    "build": true,
+    "builtCheck": true,
+    "note": "Build exécuté sur les changements locaux avant commit; ne constitue pas une CI du commit publié."
+  },
+  "unrecovered": [
+    "Chantier V115 non retrouvé : aucune fonctionnalité V115 revendiquée."
+  ],
+  "browserBuilt": {
+    "version": {
+      "version": "159.0.8154.6",
+      "executable": "Playwright-managed"
+    },
+    "playwright": "1.65.2",
+    "ok": true,
+    "tests": [
+      {
+        "name": "La route DLC repond en HTTP",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Le jeu V114 charge avec 25 inspections",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Les profils natifs restent identiques au chargement",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Nouvelle operation reelle a Hadley",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Export des 25 lieux",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Deplacement reel de Ripley au clavier",
+        "ok": true,
+        "detail": {
+          "before": 220,
+          "after": 280.16560000000004
+        }
+      },
+      {
+        "name": "Ordre Tenir accepte sans deplacer Hicks",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Approche physique du sas",
+        "ok": true,
+        "detail": {
+          "id": "ripley",
+          "x": 555.3312000000001,
+          "z": 198,
+          "roomId": "v106-hadley",
+          "hp": 100,
+          "ammo": 48,
+          "alive": true,
+          "invulnerable": 0,
+          "phase": "idle",
+          "clock": 0,
+          "aim": null,
+          "order": "follow",
+          "anchor": null,
+          "facing": 1,
+          "recruited": true
+        }
+      },
+      {
+        "name": "E engage une ouverture differee",
+        "ok": true,
+        "detail": {
+          "kind": "open",
+          "roomId": "v106-hadley",
+          "id": "service-gate",
+          "elapsed": 0.5833000000000004,
+          "duration": 0.88,
+          "x": 555.3312000000001,
+          "z": 198,
+          "hp": 100
+        }
+      },
+      {
+        "name": "Pause exacte du geste",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Le sas s'ouvre apres le temps reellement joue",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Conserver un point ecrit seulement la cle DLC",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Checkpoint identique a l'export public",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Reprise exacte apres rechargement",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Porte, equipe et reserves conservees",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Aucun profil Tantalus ecrit par le DLC",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Aucune erreur JavaScript ou console DLC",
+        "ok": true,
+        "detail": {
+          "pageErrors": [],
+          "consoleErrors": []
+        }
+      },
+      {
+        "name": "Retour a la racine Tantalus",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Le bouton titre lance la route DLC",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Checkpoint conserve apres aller-retour titre",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "name": "Aucune erreur JavaScript de navigation parent",
+        "ok": true,
+        "detail": []
+      }
+    ],
+    "pageErrors": [],
+    "consoleErrors": [],
+    "requestFailures": [],
+    "sameCasesAsSourceRun": true,
+    "sourceHashes": {
+      "dlc/aliens-1986/index.html": "bb63e521e719e1642d5867fb2578c6eafd40ce4f24b3a651b4510c2aac56f7ac",
+      "dlc/aliens-1986/game.html": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+      "index.html": "6055c9f96dfa8a181d677c6f886bd07c7a7dc732d3ea1e48587a7c376ba68454",
+      "src/title-screen-v61.js": "0f369985fe5f48f11b03a6711ba7accf2689f1d2ce68f43b6ed52b46c013cdf7"
+    }
+  }
+}

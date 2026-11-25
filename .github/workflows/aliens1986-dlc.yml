@@ -1,0 +1,60 @@
+name: Aliens 1986 DLC
+on:
+  pull_request:
+    paths:
+      - 'modules/aliens-1986/**'
+      - 'dlc/aliens-1986/**'
+      - 'src/title-screen-v61.js'
+      - 'index.html'
+      - 'scripts/*aliens1986*'
+      - 'scripts/build*.mjs'
+      - 'scripts/verify-public-release-v86.mjs'
+      - '.github/workflows/aliens1986-dlc.yml'
+  push:
+    branches: [main, 'claude/nifty-shannon-qpy1hl', 'codex/integrate-aliens-1986-local-20261125']
+    paths:
+      - 'modules/aliens-1986/**'
+      - 'dlc/aliens-1986/**'
+      - 'src/title-screen-v61.js'
+      - 'index.html'
+      - 'scripts/*aliens1986*'
+      - '.github/workflows/aliens1986-dlc.yml'
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Test recovered DLC and integration
+        run: npm run test:dlc:aliens1986
+      - name: Verify admitted files and build
+        run: |
+          npm run check:dlc:aliens1986
+          npm run check
+          npm run build
+          npm run check:built
+      - name: Install browser QA dependencies
+        run: |
+          python3 -m venv "$RUNNER_TEMP/aliens1986-browser"
+          "$RUNNER_TEMP/aliens1986-browser/bin/pip" install playwright==1.65.2
+          "$RUNNER_TEMP/aliens1986-browser/bin/python" -m playwright install --with-deps chromium
+      - name: Play built DLC, save, reload and return to Tantalus
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          "$RUNNER_TEMP/aliens1986-browser/bin/python" -B scripts/qa-aliens1986-integration.py --root dist --source-root . --output "$RUNNER_TEMP/aliens1986-evidence"
+      - name: Retain browser evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: aliens1986-browser-evidence
+          path: ${{ runner.temp }}/aliens1986-evidence
+          if-no-files-found: ignore
+          retention-days: 7

@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { tmpdir } from 'node:os';
 import { basename, join } from 'node:path';
 import { AUDIT_PREDECESSOR_DOCUMENTS_V157, verifyAuditSuccessionV157 } from './audit-succession-v157.mjs';
-import { verifyQueenMotherChoirRegistryContinuationV188 } from './audit-tantalus-priorities-v188.mjs';
+import { verifyQueenMotherChoirRegistryContinuationV188, projectFiorinaHistoricalRegistryV188 } from './audit-tantalus-priorities-v188.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { XENO_TRIALS_FIGHTERS_V96 as roster } from '../src/xeno-trials-data-v96.js';
 import { XENO_TRIALS_RIGS_V154 as rigs } from '../src/xeno-trials-rig-v154.js';
@@ -210,7 +210,8 @@ test('the operations appendix retains V157 while guard presentation preserves th
   assert.equal(historicalCounts.missing, 0);
   assert.equal(historicalCounts.partial, 20);
   assert.equal(historicalCounts.effective, 1);
-  assert.deepEqual(ids(current.tables['10_Operations']), operations.map(row => row.id));
+  const historicalRegistry = projectFiorinaHistoricalRegistryV188(operations, operationCounts);
+  assert.deepEqual(ids(current.tables['10_Operations']), historicalRegistry.operations.map(row => row.id));
   assert.match(current.runtimeContracts.operations.scope, /19.*2/);
   assert.match(current.runtimeContracts.operations.limitations.join(' '), /partiel/i);
 });

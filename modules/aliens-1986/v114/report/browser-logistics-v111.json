@@ -1,0 +1,309 @@
+{
+  "tests": [
+    {
+      "name": "Huit inspections visibles dans le catalogue",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Reprise exacte à la nouvelle galerie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Réserve affichée et HUD hors scène",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "E sur caisse vide ne duplique pas les lots",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "B commence un vrai ravitaillement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucun lot déduit avant fin",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pause conserve temps de travail et réserves",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Marche annule lot sans le dépenser",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Bouton ravitailler crédite exactement 18 cartouches",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Blessure réelle et soins non consommés à la reprise",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Soigner engage une action de 1,6 seconde",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La vie ne remonte pas avant la fin",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Tirer interrompt le soin et garde la trousse",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import reprend le geste médical au même temps",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Soin terminé plafonné à 100 et une trousse utilisée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import refuse lot inventé sans mutation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import refuse alarme immortelle sans mutation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import refuse stock inconnu sans mutation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import refuse propriété de soin inconnue sans mutation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "État sirène/recharge restauré exactement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "E ne relance pas une sirène pendant recharge",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le bruit de diagnostic existe dans la simulation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Durée alarme décroît réellement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "L’alarme n’a ajouté aucune identité ennemie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Geste cartouche exact à la reprise",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Cartouche crédite 40 au maximum 120, une seule fois",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Newt reste sans arme après la logistique",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Ravitaillement Newt désactivé dans l’interface",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Carte montre la boucle sans acteurs ennemis",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Archives contiennent les règles logistiques",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Opération complète affiche bilan logistique réel",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Migration V108 réelle sans soin ni munitions",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Migration V108 ne donne aucun stock",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Barre logistique hors terrain 844×390",
+      "ok": true,
+      "detail": {
+        "hud": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 44
+        },
+        "scene": {
+          "x": 0,
+          "y": 44,
+          "width": 844,
+          "height": 194
+        },
+        "contactbar": {
+          "x": 0,
+          "y": 238,
+          "width": 844,
+          "height": 46
+        },
+        "logisticsbar": {
+          "x": 0,
+          "y": 284,
+          "width": 844,
+          "height": 43
+        },
+        "squadbar": {
+          "x": 0,
+          "y": 327,
+          "width": 844,
+          "height": 36
+        },
+        "footer": {
+          "x": 0,
+          "y": 363,
+          "width": 844,
+          "height": 27
+        }
+      }
+    },
+    {
+      "name": "Aucun débordement horizontal V111",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Barre logistique reste visible en portrait",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Portrait sans débordement horizontal",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune requête externe nécessaire",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "Aucune erreur JavaScript ou console",
+      "ok": true,
+      "detail": {
+        "page": [],
+        "console": []
+      }
+    }
+  ],
+  "captures": [
+    {
+      "file": "16_galerie_entree.png",
+      "origin": "Export intact 02-galerie-arrivee du parcours public V111, puis reprise dans Chromium",
+      "htmlSHA256": "611c2cf49a15866e81a180f76dabcf11ded718a66a46c6c907c19d1e6eb59e24",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "17_galerie_stock_ouvert.png",
+      "origin": "Export intact 04-stock-munitions : caisse ouverte et réserve déjà gagnée par le pilote",
+      "htmlSHA256": "611c2cf49a15866e81a180f76dabcf11ded718a66a46c6c907c19d1e6eb59e24",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "18_soin_action_reelle.png",
+      "origin": "Export intact 06-secours-collectes (blessure réelle), puis clic Soigner dans Chromium",
+      "htmlSHA256": "611c2cf49a15866e81a180f76dabcf11ded718a66a46c6c907c19d1e6eb59e24",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "19_reserve_apres_soin.png",
+      "origin": "Même traitement commencé par clic, import du point au milieu du geste puis fin réelle",
+      "htmlSHA256": "611c2cf49a15866e81a180f76dabcf11ded718a66a46c6c907c19d1e6eb59e24",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "20_sirene_diagnostic.png",
+      "origin": "Export intact 09-diagnostic-actif, sirène poursuivie dans Chromium",
+      "htmlSHA256": "611c2cf49a15866e81a180f76dabcf11ded718a66a46c6c907c19d1e6eb59e24",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "21_sentinel_ravitaillement.png",
+      "origin": "Export intact 13-cartouche-en-cours puis animation et reprise dans Chromium",
+      "htmlSHA256": "611c2cf49a15866e81a180f76dabcf11ded718a66a46c6c907c19d1e6eb59e24",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "22_carte_boucle_service.png",
+      "origin": "Carte ouverte avec M après visite réelle des sept lieux dans le parcours public",
+      "htmlSHA256": "611c2cf49a15866e81a180f76dabcf11ded718a66a46c6c907c19d1e6eb59e24",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "23_bilan_logistique.png",
+      "origin": "État final intact du parcours public de la boucle avec les réserves restantes",
+      "htmlSHA256": "611c2cf49a15866e81a180f76dabcf11ded718a66a46c6c907c19d1e6eb59e24",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "24_logistique_844x390.png",
+      "origin": "Viewport Chromium émulé 844×390, même document et état réel de réserve",
+      "htmlSHA256": "611c2cf49a15866e81a180f76dabcf11ded718a66a46c6c907c19d1e6eb59e24",
+      "nativeTantalus": false,
+      "imageEdited": false
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "requests": [],
+  "htmlSHA256": "611c2cf49a15866e81a180f76dabcf11ded718a66a46c6c907c19d1e6eb59e24",
+  "nativeTantalus": false
+}

@@ -1,5 +1,6 @@
 import { avpPathAdmission, verifyAvpAdmission } from './dlc-admission-avp-2004.mjs';
 import { DEV_TOOLS_FILES_V188, isDevToolsPublicPathV188 } from './build-dev-tools-v188.mjs';
+import { publicAliens1986DlcPathAdmission, aliens1986RecoveryFile, verifyAliens1986DlcAdmissions } from './public-aliens1986-dlc-admissions.mjs';
 import { publicXenoProductionPathAdmissionV206, verifyXenoProductionAdmissionsV206 } from './public-xeno-production-admissions-v206.mjs';
 import { publicXenoVisualPathAdmissionV205, verifyXenoVisualAdmissionsV205 } from './public-xeno-visual-admissions-v205.mjs';
 import { publicXenoPriorityPathAdmissionV204, verifyXenoPriorityAdmissionsV204 } from './public-xeno-priority-admissions-v204.mjs';
@@ -1181,6 +1182,8 @@ const FIORINA_INTEGRATION_SOURCE_ONLY_V114 = new Set([
 ]);
 
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
+  const aliens1986Admission = publicAliens1986DlcPathAdmission(path, { directory, built });
+  if (aliens1986Admission !== null) return aliens1986Admission;
   const avpAdmission = avpPathAdmission(path, { directory, built });
   if (avpAdmission !== null) return avpAdmission;
   if (FIORINA_INTEGRATION_SOURCE_ONLY_V114.has(path)) return !built;
@@ -1310,6 +1313,16 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
       assert.equal(entry.isFile(), true, `Unsupported filesystem entry: ${path}`);
       files++; if (path.startsWith('assets/')) assets++;
       if (USER_REFERENCE_JPG_PATHS_V100.has(path)) userReferenceJpgs++;
+      const recoveredAliens1986 = !built && aliens1986RecoveryFile(path);
+      if (recoveredAliens1986) {
+        // Original QA receipts retain historical machine paths. The independently
+        // pinned inventory permits only these exact bytes, outside every build.
+        const bytes = await readFile(join(directory, entry.name));
+        assert.equal(bytes.length, recoveredAliens1986.bytes, 'Changed Aliens 1986 recovery size: ' + path);
+        assert.equal(createHash('sha256').update(bytes).digest('hex'), recoveredAliens1986.sha256,
+          'Changed Aliens 1986 recovery bytes: ' + path);
+        continue;
+      }
       if (!built && AI_TOOLS_FILE_SHA256_V188.has(path)) {
         // Third-party tooling keeps its exact upstream bytes (examples may name
         // generic home paths); it is source-only and rejected from any build.
@@ -1327,6 +1340,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   // Scan admitted paths and private text first, including partial adversarial
   // fixtures. A complete source validation still requires the exact archives.
   await verifyProjectRecoveryArchive20261116(root, { built });
+  await verifyAliens1986DlcAdmissions(root, { built });
   await verifyAvpAdmission(root, { built });
   const { USER_REFERENCE_LIBRARY_V100 } = await import(pathToFileURL(join(resolve(root), 'src/user-reference-library-v100.js')).href);
   const registeredJpgs = USER_REFERENCE_LIBRARY_V100.map(entry => entry.path.replace(/^\//, '')).filter(path => path.endsWith('.jpg'));

@@ -8,8 +8,10 @@ import {
   TANTALUS_PRIORITIES_HADAL_V188, TANTALUS_PRIORITIES_BROODSTORM_V188, TANTALUS_PRIORITIES_QUEEN_MOTHER_V188,
   TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188, TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188, TANTALUS_PRIORITIES_LEAD_CONTINUATION_V188,
   TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188,
+  reviewedTantalusMergedIntegrationDigestV188, projectFiorinaHistoricalRegistryV188,
+  fiorinaHistoricalRegistryReaderV188, FIORINA_HISTORICAL_REGISTRY_PROJECTION_V188, projectFiorinaHistoricalCampaignsV188, projectFiorinaRegistryV114,
   TANTALUS_PRIORITIES_SOURCE_ONLY_PATHS_V188, reviewedTantalusPrioritiesDigestV188,
-  verifyTantalusPrioritiesV188, projectFiorinaRegistryV114, TANTALUS_PRIORITIES_CARGO_REGISTRY_V188, verifyCargoRegistryContinuationV188,
+  verifyTantalusPrioritiesV188, TANTALUS_PRIORITIES_CARGO_REGISTRY_V188, verifyCargoRegistryContinuationV188,
   TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188, verifyBroodstormRegistryContinuationV188,
   TANTALUS_PRIORITIES_QUEEN_MOTHER_REGISTRY_V188, verifyQueenMotherRegistryContinuationV188,
   TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_REGISTRY_V188, verifyQueenMotherGuardRegistryContinuationV188,
@@ -19,7 +21,8 @@ import { verifyNativeQaResourcesV187 } from './audit-native-qa-resources-v187.mj
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
 import { SPECIAL_OPERATIONS_V131 as operations, SPECIAL_OPERATION_COUNTS_V131 as operationCounts } from '../src/special-operations-v131.js';
-import { AVP_HOST_SUCCESSORS_20261125, reviewedAvpHostDigest20261125 } from './audit-dlc-avp-2004-20261125.mjs';
+import { CAMPAIGNS, CONTENT_COUNTS, CONTENT_TARGETS } from '../src/content.js';
+import { AVP_HOST_SUCCESSORS_20261125 } from './audit-dlc-avp-2004-20261125.mjs';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -33,37 +36,102 @@ const importMutatedTerminalV188 = async source => {
     (_, quote) => quote + new URL(avpAuditSpecifier, import.meta.url).href + quote);
   return import('data:text/javascript;base64,' + Buffer.from(resolved).toString('base64'));
 };
-const historicalRegistryTextV188 = source => {
-  let historical = source;
-  for (const [name, message] of [
-    ['verifyCargoRegistryContinuationV188', 'Registry counters must describe its exact current rows'],
-    ['verifyBroodstormRegistryContinuationV188', 'Broodstorm art does not promote a whole operation'],
-    ['verifyQueenMotherRegistryContinuationV188', 'Queen Mother art does not promote a whole operation'],
-    ['verifyQueenMotherGuardRegistryContinuationV188', 'Guard presentation does not change registry counts'],
-    ['verifyQueenMotherChoirRegistryContinuationV188', 'Choir presentation does not change registry counts']
-  ]) {
-    const original = 'export function ' + name + '(operations, counts, readSource = readRepository) {\n';
-    const adapted = original + "  ({ operations, counts } = projectFiorinaRegistryV114(operations, counts, '" + message + "'));\n";
-    assert.equal(historical.split(adapted).length - 1, 1, 'Exactly one reviewed Fiorina projection at ' + name);
-    historical = historical.replace(adapted, original);
-  }
-  const digest = 'reviewedAvpHostDigest20261125(continuation.baselineRegistry.path, continuation.baselineRegistry.sha256)';
-  assert.equal(historical.split(digest).length - 1, 2, 'Only the Guard and Choir source comparisons advance');
-  return historical.replaceAll(digest, 'continuation.baselineRegistry.sha256');
-};
 
 // Historical verifiers keep their own inputs: restore Q to the exact B2
 // declarations first; only the Cargo test then restores Broodstorm to H.
 const bOperations = operations.map(operation => ({ ...operation, remainingMechanics: operation.id === 'queen-mother-song'
   ? ['dedicated-queen-mother-animation', 'complete-royal-cast'] : [...operation.remainingMechanics] }));
 
-// Preserve the lead and Xeno Trials receipts, then apply the exact AVP successor.
+// The lead continuation (after b6e01ef1) and then the Xeno Trials join (after 0d1d9950) are the last
+// links before the exact cumulative Aliens 1986 and inherited Fiorina continuations.
 const leadEndV188 = (path, digest) => {
   const r = TANTALUS_PRIORITIES_LEAD_CONTINUATION_V188.successors[path];
   const lead = r && r.previousSha256 === digest ? r.currentSha256 : digest;
   const j = Object.hasOwn(TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors, path) ? TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors[path] : null;
-  return reviewedAvpHostDigest20261125(path, j && j.previousSha256 === lead ? j.currentSha256 : lead);
+  return reviewedTantalusMergedIntegrationDigestV188(path, j && j.previousSha256 === lead ? j.currentSha256 : lead);
 };
+
+test('Fiorina projects the live registry and campaign catalog to their historical declarations without changing the inputs', () => {
+  const beforeRows = JSON.stringify(operations), beforeCounts = JSON.stringify(operationCounts);
+  const projection = projectFiorinaHistoricalRegistryV188(operations, operationCounts, read);
+  assert.deepEqual(operationCounts, { total: 22, effective: 2, partial: 20, missing: 0, playable: 22 });
+  assert.equal(operations[0].id, 'alien3-fiorina-161');
+  assert.deepEqual(projection.counts, { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 });
+  assert.equal(projection.operations.length, 21);
+  assert.ok(projection.operations.every((row, index) => row === operations[index + 1]), 'Every historical row retains its identity and position');
+  const declarations = projection.operations.map(row => Object.keys(row).filter(key => key !== 'campaign').sort().map(key => [key, row[key]]));
+  assert.equal(sha(JSON.stringify(declarations)), FIORINA_HISTORICAL_REGISTRY_PROJECTION_V188.currentDeclarationsSha256);
+  const path = FIORINA_HISTORICAL_REGISTRY_PROJECTION_V188.registryPath;
+  assert.equal(sha(read(path)), FIORINA_HISTORICAL_REGISTRY_PROJECTION_V188.currentSha256);
+  assert.equal(sha(projection.readSource(path)), FIORINA_HISTORICAL_REGISTRY_PROJECTION_V188.previousSha256);
+  assert.deepEqual(projection.readSource('docs/forge/xeno-trials/progress-v158.json'), read('docs/forge/xeno-trials/progress-v158.json'));
+  const repeated = projectFiorinaHistoricalRegistryV188(projection.operations, projection.counts, projection.readSource);
+  assert.deepEqual(repeated.operations, projection.operations);
+  assert.deepEqual(repeated.counts, projection.counts);
+  assert.deepEqual(repeated.readSource(path), projection.readSource(path));
+  assert.equal(JSON.stringify(operations), beforeRows);
+  assert.equal(JSON.stringify(operationCounts), beforeCounts);
+  const beforeCampaigns = JSON.stringify(CAMPAIGNS);
+  const campaigns = projectFiorinaHistoricalCampaignsV188(CAMPAIGNS);
+  assert.equal(campaigns.length, 526);
+  assert.equal(CAMPAIGNS.length, 527);
+  assert.equal(CONTENT_COUNTS.campaigns, 527);
+  assert.equal(CONTENT_TARGETS.campaigns, 527);
+  assert.ok(campaigns.every((campaign, index) => campaign === CAMPAIGNS[index]));
+  assert.ok(Object.isFrozen(campaigns));
+  assert.equal(JSON.stringify(CAMPAIGNS), beforeCampaigns);
+});
+
+test('Fiorina projection rejects unreviewed additions, deceptive declarations, inconsistent counts and further source changes', () => {
+  const clone = () => structuredClone(operations);
+  for (const [reason, mutate] of [
+    ['promoted Fiorina', rows => { rows[0].implementationStatus = 'effective'; }],
+    ['changed campaign', rows => { rows[0].campaign.objective += ' unreviewed'; }],
+    ['changed scope', rows => { rows[0].remainingMechanics.pop(); }],
+    ['extra field', rows => { rows[0].unreviewed = true; }],
+    ['hidden field', rows => { Object.defineProperty(rows[0], 'hidden', { value: true }); }],
+    ['symbol field', rows => { rows[0][Symbol('hidden')] = true; }],
+    ['undefined field', rows => { rows[0].unreviewed = undefined; }],
+    ['non-JSON value', rows => { rows[0].campaign.year = Infinity; }],
+    ['object accessor', rows => { const year = rows[0].campaign.year; Object.defineProperty(rows[0].campaign, 'year', { get: () => year, enumerable: true }); }],
+    ['array accessor', rows => { const value = rows[0].remainingMechanics[0]; Object.defineProperty(rows[0].remainingMechanics, '0', { get: () => value, enumerable: true }); }],
+    ['extra array field', rows => { rows[0].remainingMechanics.unreviewed = true; }],
+    ['array hole', rows => { delete rows[0].remainingMechanics[0]; }],
+    ['changed prototype', rows => { Object.setPrototypeOf(rows[0], { unreviewed: true }); }],
+    ['duplicate Fiorina', rows => { rows.push(structuredClone(rows[0])); }],
+    ['changed position', rows => { [rows[0], rows[1]] = [rows[1], rows[0]]; }],
+    ['unreviewed 22nd operation', rows => { rows[0].id = 'unreviewed-operation'; }],
+    ['23rd operation', rows => { rows.push({ ...rows[1], id: 'unreviewed-operation', productionOrder: 23 }); }],
+  ]) {
+    const rows = clone(); mutate(rows);
+    assert.throws(() => projectFiorinaHistoricalRegistryV188(rows, operationCounts, read), undefined, reason);
+  }
+  for (const counts of [{ ...operationCounts, total: 21 }, { ...operationCounts, partial: 19 }, { ...operationCounts, extra: 1 }])
+    assert.throws(() => projectFiorinaHistoricalRegistryV188(operations, counts, read), /Fiorina projection requires exact live registry counters/);
+  for (const [reason, mutate] of [
+    ['missing Fiorina campaign', rows => { rows.pop(); }],
+    ['duplicate Fiorina campaign', rows => { rows[0] = rows.at(-1); }],
+    ['another campaign instead of Fiorina', rows => { rows.at(-1).id = 'unreviewed-campaign'; }],
+    ['changed Fiorina objective', rows => { rows.at(-1).objective += ' unreviewed'; }],
+    ['changed Fiorina world', rows => { rows.at(-1).worldId = 'unreviewed-world'; }],
+    ['hidden Fiorina campaign field', rows => { Object.defineProperty(rows.at(-1), 'hidden', { value: true }); }],
+    ['reordered Fiorina campaign', rows => { [rows[0], rows[526]] = [rows[526], rows[0]]; }],
+    ['additional campaign', rows => { rows.push({ ...rows[0], id: 'unreviewed-campaign' }); }],
+    ['duplicate historical campaign identity', rows => { rows[1].id = rows[0].id; }],
+  ]) {
+    const campaigns = structuredClone(CAMPAIGNS); mutate(campaigns);
+    assert.throws(() => projectFiorinaHistoricalCampaignsV188(campaigns), undefined, reason);
+  }
+  const changed = clone();
+  changed.find(row => row.id === 'black-cocoon').promisedTitle += ' unreviewed';
+  assert.throws(() => verifyQueenMotherChoirRegistryContinuationV188(changed, operationCounts, read), /preserve every exact R registry declaration/);
+  for (const source of [read(FIORINA_HISTORICAL_REGISTRY_PROJECTION_V188.registryPath),
+    fiorinaHistoricalRegistryReaderV188(read)(FIORINA_HISTORICAL_REGISTRY_PROJECTION_V188.registryPath)]) {
+    const mutated = Buffer.from(source); mutated[mutated.length - 1] ^= 1;
+    const reader = fiorinaHistoricalRegistryReaderV188(path => path === FIORINA_HISTORICAL_REGISTRY_PROJECTION_V188.registryPath ? mutated : read(path));
+    assert.throws(() => reader(FIORINA_HISTORICAL_REGISTRY_PROJECTION_V188.registryPath), /Unreviewed Fiorina registry source bytes/);
+  }
+});
 
 test('Fiorina adds exactly one partial operation and projects the unchanged 21 historical declarations', () => {
   assert.deepEqual(operationCounts, { total: 22, effective: 2, partial: 20, missing: 0, playable: 22 });
@@ -161,7 +229,7 @@ test('V188 registry continuation closes only the Cargo art debt and rejects neig
   }
   for (const badCounts of [transition.previousCounts, { ...operationCounts, playable: 20 },
     { ...operationCounts, extra: 1 }]) {
-    assert.throws(() => verifyCargoRegistryContinuationV188(hOperations, badCounts), /Registry counters/);
+    assert.throws(() => verifyCargoRegistryContinuationV188(hOperations, badCounts), /Registry counters|Fiorina projection requires exact live registry counters/);
   }
   assert.throws(() => verifyCargoRegistryContinuationV188(hOperations, operationCounts,
     path => Buffer.concat([read(path), Buffer.from('\n')])), /Changed historical V158 operations snapshot/);
@@ -222,7 +290,7 @@ test('Broodstorm registry continuation removes only queen art, projects exact H 
     assert.throws(() => verifyBroodstormRegistryContinuationV188(mutated, operationCounts), undefined, reason);
   }
   assert.throws(() => verifyBroodstormRegistryContinuationV188(bOperations,
-    { ...operationCounts, partial: 18, effective: 3 }), /does not promote/);
+    { ...operationCounts, partial: 18, effective: 3 }), /does not promote|Fiorina projection requires exact live registry counters/);
   assert.throws(() => verifyBroodstormRegistryContinuationV188(bOperations, operationCounts,
     path => Buffer.concat([read(path), Buffer.from('\n')])), /Changed historical V158 operations snapshot/,
   'The new projection still verifies the immutable archive through the original Cargo verifier.');
@@ -294,7 +362,7 @@ test('Queen Mother registry continuation removes only animation, projects exact 
   }
   for (const badCounts of [{ ...operationCounts, partial: 18, effective: 3 },
     { ...operationCounts, playable: 20 }, { ...operationCounts, extra: 1 }]) {
-    assert.throws(() => verifyQueenMotherRegistryContinuationV188(operations, badCounts), /does not promote/);
+    assert.throws(() => verifyQueenMotherRegistryContinuationV188(operations, badCounts), /does not promote|Fiorina projection requires exact live registry counters/);
   }
   assert.throws(() => verifyQueenMotherRegistryContinuationV188(operations, operationCounts,
     path => Buffer.concat([read(path), Buffer.from('\n')])), /Changed historical V158 operations snapshot/,
@@ -360,7 +428,7 @@ test('Queen Mother guard presentation projects identically to Q, leaves every de
   }
   for (const badCounts of [{ ...operationCounts, partial: 18, effective: 3 },
     { ...operationCounts, playable: 20 }, { ...operationCounts, extra: 1 }]) {
-    assert.throws(() => verifyQueenMotherGuardRegistryContinuationV188(operations, badCounts), /does not change registry counts/);
+    assert.throws(() => verifyQueenMotherGuardRegistryContinuationV188(operations, badCounts), /does not change registry counts|Fiorina projection requires exact live registry counters/);
   }
   const presentationOnly = operations.map(operation => operation.id === 'queen-mother-song'
     ? { ...operation, campaign: { ...operation.campaign, description: 'A separately reviewed guard presentation.' } } : operation);
@@ -368,7 +436,7 @@ test('Queen Mother guard presentation projects identically to Q, leaves every de
     'Campaign presentation retains its separate source receipt without inventing a registry delta.');
   assert.throws(() => verifyQueenMotherGuardRegistryContinuationV188(operations, operationCounts,
     path => path === continuation.baselineRegistry.path ? Buffer.concat([read(path), Buffer.from('\n')]) : read(path)),
-  /retain the exact Q registry source bytes/);
+  /retain the exact Q registry source bytes|Unreviewed Fiorina registry source bytes/);
   const archive = TANTALUS_PRIORITIES_CARGO_REGISTRY_V188.historicalSnapshot.path;
   assert.throws(() => verifyQueenMotherGuardRegistryContinuationV188(operations, operationCounts,
     path => path === archive ? Buffer.concat([read(path), Buffer.from('\n')]) : read(path)),
@@ -434,7 +502,7 @@ test('Queen Mother choir presentation projects identically to R, leaves every de
   }
   for (const badCounts of [{ ...operationCounts, partial: 18, effective: 3 },
     { ...operationCounts, playable: 20 }, { ...operationCounts, extra: 1 }]) {
-    assert.throws(() => verifyQueenMotherChoirRegistryContinuationV188(operations, badCounts), /does not change registry counts/);
+    assert.throws(() => verifyQueenMotherChoirRegistryContinuationV188(operations, badCounts), /does not change registry counts|Fiorina projection requires exact live registry counters/);
   }
   const presentationOnly = operations.map(operation => operation.id === 'queen-mother-song'
     ? { ...operation, campaign: { ...operation.campaign, description: 'A separately reviewed choir presentation.' } } : operation);
@@ -442,7 +510,7 @@ test('Queen Mother choir presentation projects identically to R, leaves every de
     'Campaign presentation retains its separate source receipt without inventing a registry delta.');
   assert.throws(() => verifyQueenMotherChoirRegistryContinuationV188(operations, operationCounts,
     path => path === continuation.baselineRegistry.path ? Buffer.concat([read(path), Buffer.from('\n')]) : read(path)),
-  /retain the exact R registry source bytes/);
+  /retain the exact R registry source bytes|Unreviewed Fiorina registry source bytes/);
   const archive = TANTALUS_PRIORITIES_CARGO_REGISTRY_V188.historicalSnapshot.path;
   assert.throws(() => verifyQueenMotherChoirRegistryContinuationV188(operations, operationCounts,
     path => path === archive ? Buffer.concat([read(path), Buffer.from('\n')]) : read(path)),
@@ -633,8 +701,8 @@ test('V188 verifies every reviewed successor and keeps the V187 chain intact', (
   for (const map of [guards.successors, guards.addedSourceSuccessors, guards.addedSources]) assert.equal(Object.isFrozen(map), true);
   assert.equal(Object.hasOwn(guards.successors, 'src/special-operations-v131.js'), false,
     'The unchanged registry needs no invented source successor.');
-  assert.equal(sha(read('src/special-operations-v131.js')), reviewedAvpHostDigest20261125('src/special-operations-v131.js',
-    TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_REGISTRY_V188.baselineRegistry.sha256));
+  assert.equal(sha(fiorinaHistoricalRegistryReaderV188(read)('src/special-operations-v131.js')),
+    TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_REGISTRY_V188.baselineRegistry.sha256);
   const choirs = TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188;
   assert.equal(choirs.baseline, 'ded6ef34dd35a659313e9361b407f6b94b62fb96');
   assert.deepEqual(Object.fromEntries(Object.entries(choirs.successors).map(([path, receipt]) => [path, receipt.previousSha256])), {
@@ -667,7 +735,7 @@ test('V188 verifies every reviewed successor and keeps the V187 chain intact', (
   assert.equal([...noticeTest.matchAll(noticePattern)].length, 1);
   assert.equal(sha(noticeTest.replace(noticePattern, "const queenNotice='<reviewed R wording>';")),
     'bca3a3d10f6fd8fe21ad129a565ec3881e74d54f32f3487149966065d66b7baa', 'Only the Q notice literal may change; every other Q test byte remains historical.');
-  const terminal = historicalRegistryTextV188(read('scripts/audit-tantalus-priorities-v188.mjs').toString());
+  const terminal = read('scripts/audit-tantalus-priorities-v188.mjs').toString();
   for (const [startMarker, endMarker, digest] of [
     ['export const TANTALUS_PRIORITIES_BROODSTORM_V188 = freeze(',
       'export const TANTALUS_PRIORITIES_CARGO_REGISTRY_V188 = freeze(', 'e10a0158b99e4a4f7236edfc9e851229c6e6049a7b20d6a070876c5bbf75b774'],
@@ -889,14 +957,14 @@ test('Queen Mother terminal rejects a false B2 receipt or an added-source disgui
   const path = 'src/special-operations-v131.js';
   for (const [reason, mutate, error] of [
     ['false B2 predecessor', receipt => { receipt.successors[path].previousSha256 = '0'.repeat(64); }, /Broken historical-to-b9aee06a/],
-    ['unreviewed terminal bytes', receipt => { receipt.successors[path].currentSha256 = '0'.repeat(64); }, /Unreviewed V188 source bytes/],
+    ['unreviewed terminal bytes', receipt => { receipt.successors[path].currentSha256 = '0'.repeat(64); }, /Broken AVP-to-Fiorina host source chain: src\/special-operations-v131\.js/],
     ['duplicate successor as an added source', receipt => {
       receipt.addedSources[path] = receipt.successors[path].currentSha256;
     }, /A new V188 source cannot replace a successor/],
     ['replace successor with added source', receipt => {
       receipt.addedSources[path] = receipt.successors[path].currentSha256;
       delete receipt.successors[path];
-    }, /Unreviewed V188 source bytes/]
+    }, /Broken AVP-to-Fiorina host source chain: src\/special-operations-v131\.js/]
   ]) {
     const receipt = structuredClone(TANTALUS_PRIORITIES_QUEEN_MOTHER_V188);
     mutate(receipt);

@@ -257,6 +257,165 @@ export const AVP_FIORINA_QA_SUCCESSORS_20261125 = Object.freeze(Object.fromEntri
 ));
 // END FIORINA QA RECEIPTS
 
+// BEGIN ALIENS MERGE RECEIPTS
+// Both published branches remain immutable. These exact successors join AVP's
+// reviewed endpoint and the incoming Aliens endpoint at the same current bytes.
+export const AVP_ALIENS_JOIN_BASELINES_20261125 = Object.freeze({
+  avpCommit: '1290733d51b6be5d075ab8bbc3eb9e87d684e8f4',
+  aliensCommit: 'eb4a3107b3abe073acc536ab453be3b98ecb6685',
+  commonCommit: '38a4a2272ec48a9cd5011f8a0055caaca6ab0774'
+});
+export const AVP_ALIENS_INCOMING_SOURCES_20261125 = Object.freeze({
+  "index.html": "3cb5d844b1d7ea2726c8af2cb95b49f4515c0bf9322eca90cb4f241d219409a3",
+  "package.json": "dd592ca645bc15842d45ab48f30c83a1337039f96982fb40916eaa7c47bd8c0b",
+  "scripts/build.mjs": "e3dbf1e40e79b18bebf4d987329044cc06ee546471a70d054b75ce3a492ac3cf",
+  "scripts/build-dev-tools-v188.mjs": "73c7963635cfadc00bf2819df2ba6282d8a299025efb767cc8fc8bd28c8c2afa",
+  "scripts/verify-public-release-v86.mjs": "c72a3d56d3f83b8b19f321be5dc8b7d7b3423f0e391194d4c4e000f6c2d7bcbc",
+  "src/title-screen-v61.js": "0f369985fe5f48f11b03a6711ba7accf2689f1d2ce68f43b6ed52b46c013cdf7",
+  "scripts/verify-tantalus-priorities-v188.mjs": "0a9258c24914535d0aea43da726d8250a7ff63645860535b35c1835b94cfe737",
+  "scripts/verify-native-qa-resources-v187.mjs": "3e66e7ad4c4475632a2f216ee8efcb940f1bc2127b8e6efa2b09056f45a25734",
+  "scripts/verify-audit-continuation-v157.mjs": "a064c967dbd77143d24dbdab24134a0174cefaec30ac23efd42d4b9399afe15d",
+  "scripts/verify-audit-continuation-v158.mjs": "8181ebe5a7dbf226d09ce1ffa27e61ba7571dbc80da100ceecf8099df870e5db",
+  "scripts/verify-black-cocoon-presentation-v158.mjs": "2a84cef425228efbb08185a9886dd8be0aa11667804d22ce438d17f95d603290",
+  "scripts/verify-audit-v143.mjs": "e48029ce56f17da26b437ea4d2dbe2a4845bd45f57d454da1d12b1c9c5d51805",
+  "scripts/verify-colony-crew-v188.mjs": "07ca934406c79277efa9b231aa7ded7b2b1d996b760a3695506584c8f38cdf0b",
+  "scripts/verify-act5-endings-v188.mjs": "3f24ce7b499bc15f67cab2ae8b4763c1e46b66712cd864bdbab7596ffbfc1918",
+  "scripts/verify-xeno-arbiter-campaign-v190.mjs": "5bd55a456bf914f5b79d1c5fca0bac35a3a70083fd99e5415174fac3babac89a",
+  "src/i18n-en-catalog-v185.js": "387b5b5a5e4461044cc24ecfaa5fb2f451b69bac3493b11099609c19b901b9d2",
+  "src/app.js": "3419d730cc5988bfe30834a9e261567d84186c99f0a53eef513568bd820f01b5",
+  "src/content.js": "48376e6a33ef8fc6e71297df60723fa40724c12958b606b90fd7373715c08197",
+  "src/game-production-runtime.js": "e367fbb70e195c28194d0ee88fdeb8558ec4a7a4efc103b5bd1a0be45cd92f27",
+  "src/special-operations-v131.js": "b7cd05a89ca5aa86b3c46244234cb197e6c0044437ba65c038b8bfc3c8827391",
+  "sw.js": "7e868ce49b89a29380bb6d83988b24a31c8443a09ac898efb3131e0f6db3d071",
+  "scripts/audit-tantalus-priorities-v188.mjs": "2ed1add52188a55ae3a03fa776b0297a04efdd775533f83436d5821cd00d533a",
+  "scripts/audit-xeno-production-assets-v206.mjs": "db2e2f14fd702f2342a683c6b96d5ef584a3dd5dfa91a54eb2e83a306bf134f9"
+});
+export const AVP_ALIENS_JOIN_SUCCESSORS_20261125 = Object.freeze(Object.fromEntries(
+  Object.entries({
+  "index.html": {
+    "previousSha256": "41a0c2dce43e650e598d188ee655d5bd591c4e353a45a439480d4b6222dbf0d3",
+    "currentSha256": "8e6ef33ebd2e2ef5e7ce57e617d73c7de602ae4bb911fa81e328d4b2adac27a0"
+  },
+  "package.json": {
+    "previousSha256": "2312a3808228b5cfebb32b8903b910498ac1af6d734c4f6da2081476cd989729",
+    "currentSha256": "24f6777c878017c84d1c72f4cee6a26d160de26323b659094d4f49a79e887da3"
+  },
+  "scripts/audit-tantalus-priorities-v188.mjs": {
+    "previousSha256": "ebebe904c2093a30310eed8df035f7babd89dca914b07695260584ea2713bf61",
+    "currentSha256": "eee650275a769b271d0da34c13d13ecbb0178bcfe9e0af66b184b8a3e23f82a8"
+  },
+  "scripts/audit-xeno-production-assets-v206.mjs": {
+    "previousSha256": "9cce60b8ee74d60e8f525e7117885409455f0cdbc5e34ee745e45eb8cd48d48e",
+    "currentSha256": "a5364fa87e5dd2d8139f578a5b635e8af05ec866154bd082502fbedb2aabe4ae"
+  },
+  "scripts/build-dev-tools-v188.mjs": {
+    "previousSha256": "888e76d1aa2a206c71696e69f58373197b8f7fff7179581b53f4dd5ea4fe94a2",
+    "currentSha256": "73c7963635cfadc00bf2819df2ba6282d8a299025efb767cc8fc8bd28c8c2afa"
+  },
+  "scripts/build.mjs": {
+    "previousSha256": "c941cd1ffeb251289f1c89b7bae3f893cf87263a5beba1613a9f1c4a427bff42",
+    "currentSha256": "7332934b66a46995dcda3f5a51753f32b4743b17fd30a3e38e611bad2088bc12"
+  },
+  "scripts/verify-act5-endings-v188.mjs": {
+    "previousSha256": "2a0ee1020aa1f52e0fe6c115a81ffba2f8b5483142ffa5e7a998bf7c8677e24a",
+    "currentSha256": "3f24ce7b499bc15f67cab2ae8b4763c1e46b66712cd864bdbab7596ffbfc1918"
+  },
+  "scripts/verify-audit-continuation-v157.mjs": {
+    "previousSha256": "73cf9f322340a7d4e68e58bb772f74e6b9e54d14383b4fb72f8bf299ad0d3d8a",
+    "currentSha256": "a064c967dbd77143d24dbdab24134a0174cefaec30ac23efd42d4b9399afe15d"
+  },
+  "scripts/verify-audit-continuation-v158.mjs": {
+    "previousSha256": "09977386675167a50d8e399532c948c344d753237ca50383d93bb5cda112fc68",
+    "currentSha256": "8181ebe5a7dbf226d09ce1ffa27e61ba7571dbc80da100ceecf8099df870e5db"
+  },
+  "scripts/verify-audit-v143.mjs": {
+    "previousSha256": "4b15eb3268e935e3043879430487971e22460de9cbd1ff705284e9d0e3c51d72",
+    "currentSha256": "e48029ce56f17da26b437ea4d2dbe2a4845bd45f57d454da1d12b1c9c5d51805"
+  },
+  "scripts/verify-black-cocoon-presentation-v158.mjs": {
+    "previousSha256": "5c8363b00e2f32f3e53790a8c4eb8f271bc41a5acfbb25b637d5ce28e6da61cb",
+    "currentSha256": "2a84cef425228efbb08185a9886dd8be0aa11667804d22ce438d17f95d603290"
+  },
+  "scripts/verify-colony-crew-v188.mjs": {
+    "previousSha256": "6fbb3400b921376861a899ad099d1d29ffcbad2f32cceb24ff9b629396a8a9b9",
+    "currentSha256": "07ca934406c79277efa9b231aa7ded7b2b1d996b760a3695506584c8f38cdf0b"
+  },
+  "scripts/verify-public-release-v86.mjs": {
+    "previousSha256": "11c7fd32d4948c9e3ad25505f4bba519f92bcf005e994120330b6be566e56209",
+    "currentSha256": "b6a0bbe5637d6b613a05716ce8a0d1a17a45b5f40545da1eba280a953f6b2990"
+  },
+  "scripts/verify-tantalus-priorities-v188.mjs": {
+    "previousSha256": "c0a120981e36141b191d3c960583345fbe0424421ecbb6c8c2919ba4f4a1ee63",
+    "currentSha256": "97590d68b595a1a7f5519f386e91ceae39fcef87dcc7087006ed7955dd0ff5a3"
+  },
+  "scripts/verify-xeno-arbiter-campaign-v190.mjs": {
+    "previousSha256": "c5ca9d04eaf51570faef51e13ff94c2baa05ecfbf1752d0d9fb35f7ae02f3833",
+    "currentSha256": "5bd55a456bf914f5b79d1c5fca0bac35a3a70083fd99e5415174fac3babac89a"
+  },
+  "src/app.js": {
+    "previousSha256": "8723cae344d9f121137d64b24cb55552679624b37795a171c213069162edc254",
+    "currentSha256": "e3b968211e54bd08eed24b828780a7da0342bc3900541869d7ffb1face1af789"
+  },
+  "src/title-screen-v61.js": {
+    "previousSha256": "9f198a6cf6ee98ce3a5c2bbad7e41511a4d22bc65a18ccb4e07fa6e215e9a841",
+    "currentSha256": "c74ff44944d88cc95fb7fa1fabb39de24a309066097448688557e7ddb53b390c"
+  }
+}).map(([path, receipt]) => [path, Object.freeze(receipt)])
+));
+export const ALIENS_AVP_JOIN_SUCCESSORS_20261125 = Object.freeze(Object.fromEntries(
+  Object.entries({
+  "index.html": {
+    "previousSha256": "3cb5d844b1d7ea2726c8af2cb95b49f4515c0bf9322eca90cb4f241d219409a3",
+    "currentSha256": "8e6ef33ebd2e2ef5e7ce57e617d73c7de602ae4bb911fa81e328d4b2adac27a0"
+  },
+  "package.json": {
+    "previousSha256": "dd592ca645bc15842d45ab48f30c83a1337039f96982fb40916eaa7c47bd8c0b",
+    "currentSha256": "24f6777c878017c84d1c72f4cee6a26d160de26323b659094d4f49a79e887da3"
+  },
+  "scripts/audit-tantalus-priorities-v188.mjs": {
+    "previousSha256": "2ed1add52188a55ae3a03fa776b0297a04efdd775533f83436d5821cd00d533a",
+    "currentSha256": "eee650275a769b271d0da34c13d13ecbb0178bcfe9e0af66b184b8a3e23f82a8"
+  },
+  "scripts/audit-xeno-production-assets-v206.mjs": {
+    "previousSha256": "db2e2f14fd702f2342a683c6b96d5ef584a3dd5dfa91a54eb2e83a306bf134f9",
+    "currentSha256": "a5364fa87e5dd2d8139f578a5b635e8af05ec866154bd082502fbedb2aabe4ae"
+  },
+  "scripts/build.mjs": {
+    "previousSha256": "e3dbf1e40e79b18bebf4d987329044cc06ee546471a70d054b75ce3a492ac3cf",
+    "currentSha256": "7332934b66a46995dcda3f5a51753f32b4743b17fd30a3e38e611bad2088bc12"
+  },
+  "scripts/verify-native-qa-resources-v187.mjs": {
+    "previousSha256": "3e66e7ad4c4475632a2f216ee8efcb940f1bc2127b8e6efa2b09056f45a25734",
+    "currentSha256": "e740cb5d3567c64788787ba1e0c5d7f09813ac3d4da06f7697eb35914a6d682e"
+  },
+  "scripts/verify-public-release-v86.mjs": {
+    "previousSha256": "c72a3d56d3f83b8b19f321be5dc8b7d7b3423f0e391194d4c4e000f6c2d7bcbc",
+    "currentSha256": "b6a0bbe5637d6b613a05716ce8a0d1a17a45b5f40545da1eba280a953f6b2990"
+  },
+  "scripts/verify-tantalus-priorities-v188.mjs": {
+    "previousSha256": "0a9258c24914535d0aea43da726d8250a7ff63645860535b35c1835b94cfe737",
+    "currentSha256": "97590d68b595a1a7f5519f386e91ceae39fcef87dcc7087006ed7955dd0ff5a3"
+  },
+  "src/app.js": {
+    "previousSha256": "3419d730cc5988bfe30834a9e261567d84186c99f0a53eef513568bd820f01b5",
+    "currentSha256": "e3b968211e54bd08eed24b828780a7da0342bc3900541869d7ffb1face1af789"
+  },
+  "src/i18n-en-catalog-v185.js": {
+    "previousSha256": "387b5b5a5e4461044cc24ecfaa5fb2f451b69bac3493b11099609c19b901b9d2",
+    "currentSha256": "dc88d2ff0d09e81aebf9a8c90674aa37139a08ba45aa2abc75360ca369108096"
+  },
+  "src/title-screen-v61.js": {
+    "previousSha256": "0f369985fe5f48f11b03a6711ba7accf2689f1d2ce68f43b6ed52b46c013cdf7",
+    "currentSha256": "c74ff44944d88cc95fb7fa1fabb39de24a309066097448688557e7ddb53b390c"
+  },
+  "sw.js": {
+    "previousSha256": "7e868ce49b89a29380bb6d83988b24a31c8443a09ac898efb3131e0f6db3d071",
+    "currentSha256": "550d2ceab79ae17a97d5b5790a82f033307fdc057034103eb071f661da9c8c1a"
+  }
+}).map(([path, receipt]) => [path, Object.freeze(receipt)])
+));
+// END ALIENS MERGE RECEIPTS
+
 function advanceReceipt(path, endpoint, receipts, message) {
   if (!Object.hasOwn(receipts, path)) return endpoint;
   const receipt = receipts[path];
@@ -266,7 +425,7 @@ function advanceReceipt(path, endpoint, receipts, message) {
   return receipt.currentSha256;
 }
 
-export function reviewedAvpHostDigest20261125(path, endpoint) {
+function reviewedPublishedAvpHostDigest20261125(path, endpoint) {
   const avp = advanceReceipt(path, endpoint, AVP_HOST_SUCCESSORS_20261125,
     'Broken merged-Tantalus-to-AVP host source chain: ');
   const joined = advanceReceipt(path, avp, AVP_FIORINA_JOIN_SUCCESSORS_20261125,
@@ -275,8 +434,21 @@ export function reviewedAvpHostDigest20261125(path, endpoint) {
     'Broken joined-host-to-Fiorina-QA source chain: ');
 }
 
+export function reviewedAvpHostDigest20261125(path, endpoint) {
+  return advanceReceipt(path, reviewedPublishedAvpHostDigest20261125(path, endpoint), AVP_ALIENS_JOIN_SUCCESSORS_20261125,
+    'Broken published-AVP-to-Aliens-merge source chain: ');
+}
+
+export function reviewedAliensIncomingDigest20261125(path, endpoint) {
+  if (!Object.hasOwn(AVP_ALIENS_INCOMING_SOURCES_20261125, path)) return endpoint;
+  assert.equal(endpoint, AVP_ALIENS_INCOMING_SOURCES_20261125[path], 'Broken published-Aliens incoming source chain: ' + path);
+  return advanceReceipt(path, endpoint, ALIENS_AVP_JOIN_SUCCESSORS_20261125,
+    'Broken published-Aliens-to-AVP-merge source chain: ');
+}
+
 const hostPaths = () => [...new Set([...Object.keys(AVP_HOST_SUCCESSORS_20261125),
-  ...Object.keys(AVP_FIORINA_JOIN_SUCCESSORS_20261125), ...Object.keys(AVP_FIORINA_QA_SUCCESSORS_20261125)])];
+  ...Object.keys(AVP_FIORINA_JOIN_SUCCESSORS_20261125), ...Object.keys(AVP_FIORINA_QA_SUCCESSORS_20261125),
+  ...Object.keys(AVP_ALIENS_JOIN_SUCCESSORS_20261125)])];
 
 // A combined view may already resolve an earlier reviewed stage. Only its
 // recorded endpoints are accepted; independent incoming bytes still fail.
@@ -285,7 +457,7 @@ export function avpHostRuntimeSources20261125(view) {
   for (const path of hostPaths()) {
     if (!Object.hasOwn(result, path)) continue;
     const receipts = [AVP_HOST_SUCCESSORS_20261125[path], AVP_FIORINA_JOIN_SUCCESSORS_20261125[path],
-      AVP_FIORINA_QA_SUCCESSORS_20261125[path]].filter(Boolean);
+      AVP_FIORINA_QA_SUCCESSORS_20261125[path], AVP_ALIENS_JOIN_SUCCESSORS_20261125[path]].filter(Boolean);
     for (let i = 1; i < receipts.length; i++)
       assert.equal(receipts[i].previousSha256, receipts[i - 1].currentSha256,
         'Broken recorded host runtime view chain: ' + path);
@@ -301,7 +473,13 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
   assert.equal(AVP_FIORINA_JOIN_BASELINES_20261125.commonCommit, AVP_HOST_BASELINE_20261125);
   for (const commit of Object.values(AVP_FIORINA_JOIN_BASELINES_20261125)) assert.match(commit, /^[a-f0-9]{40}$/);
   assert.match(AVP_FIORINA_QA_BASELINE_20261125, /^[a-f0-9]{40}$/, 'Fiorina QA requires its exact combined baseline');
-  for (const receipts of [AVP_HOST_SUCCESSORS_20261125, AVP_FIORINA_JOIN_SUCCESSORS_20261125, AVP_FIORINA_QA_SUCCESSORS_20261125]) {
+  assert.deepEqual(AVP_ALIENS_JOIN_BASELINES_20261125, {
+    avpCommit: '1290733d51b6be5d075ab8bbc3eb9e87d684e8f4',
+    aliensCommit: 'eb4a3107b3abe073acc536ab453be3b98ecb6685',
+    commonCommit: '38a4a2272ec48a9cd5011f8a0055caaca6ab0774'
+  });
+  for (const receipts of [AVP_HOST_SUCCESSORS_20261125, AVP_FIORINA_JOIN_SUCCESSORS_20261125, AVP_FIORINA_QA_SUCCESSORS_20261125,
+    AVP_ALIENS_JOIN_SUCCESSORS_20261125, ALIENS_AVP_JOIN_SUCCESSORS_20261125]) {
     assert.equal(Object.hasOwn(receipts, ownPath), false, 'The AVP terminal cannot admit its own bytes');
     for (const [path, receipt] of Object.entries(receipts)) {
       assert.ok(/^[a-zA-Z0-9._/-]+$/.test(path) && !path.split('/').some(segment => !segment || segment === '.' || segment === '..'), 'Invalid AVP host source path: ' + path);
@@ -326,12 +504,30 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
     assert.notEqual(digest, AVP_FIORINA_JOIN_SUCCESSORS_20261125[path].previousSha256,
       'A reviewed Fiorina input must identify an actual branch change: ' + path);
   }
+  for (const [path, receipt] of Object.entries(AVP_ALIENS_JOIN_SUCCESSORS_20261125)) {
+    const prior = AVP_FIORINA_QA_SUCCESSORS_20261125[path] || AVP_FIORINA_JOIN_SUCCESSORS_20261125[path] || AVP_HOST_SUCCESSORS_20261125[path];
+    if (prior) assert.equal(receipt.previousSha256, prior.currentSha256, 'Aliens must follow the exact published AVP endpoint: ' + path);
+    else assert.ok(Object.hasOwn(AVP_ALIENS_INCOMING_SOURCES_20261125, path), 'A merge successor requires an exact reviewed parent: ' + path);
+  }
+  for (const [path, receipt] of Object.entries(ALIENS_AVP_JOIN_SUCCESSORS_20261125))
+    assert.equal(receipt.previousSha256, AVP_ALIENS_INCOMING_SOURCES_20261125[path], 'The Aliens parent must retain its exact published endpoint: ' + path);
+  for (const [path, digest] of Object.entries(AVP_ALIENS_INCOMING_SOURCES_20261125)) {
+    assert.notEqual(path, ownPath, 'The terminal cannot admit its own incoming bytes');
+    assert.ok(validHash(digest), 'Invalid incoming Aliens source digest: ' + path);
+    const merged = AVP_ALIENS_JOIN_SUCCESSORS_20261125[path] || AVP_FIORINA_QA_SUCCESSORS_20261125[path]
+      || AVP_FIORINA_JOIN_SUCCESSORS_20261125[path] || AVP_HOST_SUCCESSORS_20261125[path];
+    assert.ok(merged, 'An incoming Aliens path requires an exact merged endpoint: ' + path);
+    assert.equal(reviewedAliensIncomingDigest20261125(path, digest), merged.currentSha256, 'The two published parents must converge exactly: ' + path);
+  }
   const paths = hostPaths();
   for (const path of paths) {
-    const seed = (AVP_HOST_SUCCESSORS_20261125[path] || AVP_FIORINA_JOIN_SUCCESSORS_20261125[path] || AVP_FIORINA_QA_SUCCESSORS_20261125[path]).previousSha256;
+    const seed = (AVP_HOST_SUCCESSORS_20261125[path] || AVP_FIORINA_JOIN_SUCCESSORS_20261125[path]
+      || AVP_FIORINA_QA_SUCCESSORS_20261125[path] || AVP_ALIENS_JOIN_SUCCESSORS_20261125[path]).previousSha256;
     assert.equal(sha(readSource(path)), reviewedAvpHostDigest20261125(path, seed), 'Unreviewed AVP host source bytes: ' + path);
   }
   return Object.freeze({ baselineCommit: AVP_HOST_BASELINE_20261125, successors: paths.length,
     joinedSuccessors: Object.keys(AVP_FIORINA_JOIN_SUCCESSORS_20261125).length,
-    qualitySuccessors: Object.keys(AVP_FIORINA_QA_SUCCESSORS_20261125).length, historicalEvidenceTransferred: false });
+    qualitySuccessors: Object.keys(AVP_FIORINA_QA_SUCCESSORS_20261125).length,
+    aliensMergedSuccessors: Object.keys(AVP_ALIENS_JOIN_SUCCESSORS_20261125).length,
+    aliensIncomingSuccessors: Object.keys(ALIENS_AVP_JOIN_SUCCESSORS_20261125).length, historicalEvidenceTransferred: false });
 }

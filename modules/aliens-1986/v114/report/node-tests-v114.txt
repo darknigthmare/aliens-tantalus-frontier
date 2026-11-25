@@ -1,0 +1,4004 @@
+
+> aliens-1986-lieux-et-identites-v114@114.0.0-rc.1 check
+> node --test qa/*.test.mjs
+
+TAP version 13
+# Subtest: aucun contrat implicite / aucun générateur natif
+ok 1 - aucun contrat implicite / aucun générateur natif
+  ---
+  duration_ms: 1.891398
+  type: 'test'
+  ...
+# Subtest: déplacement explicite et callback hôte
+ok 2 - déplacement explicite et callback hôte
+  ---
+  duration_ms: 3.139944
+  type: 'test'
+  ...
+# Subtest: callback défaillant ne laisse pas acteur déplacé
+ok 3 - callback défaillant ne laisse pas acteur déplacé
+  ---
+  duration_ms: 1.710908
+  type: 'test'
+  ...
+# Subtest: import invalide refusé avant toute mutation hôte
+ok 4 - import invalide refusé avant toute mutation hôte
+  ---
+  duration_ms: 3.296717
+  type: 'test'
+  ...
+# Subtest: enveloppe native préservée; ajout spatial reprend en pause
+ok 5 - enveloppe native préservée; ajout spatial reprend en pause
+  ---
+  duration_ms: 1.151452
+  type: 'test'
+  ...
+# Subtest: import avant mapping explicite refuse de reconstruire une salle inventée
+ok 6 - import avant mapping explicite refuse de reconstruire une salle inventée
+  ---
+  duration_ms: 0.658251
+  type: 'test'
+  ...
+# Subtest: 112 catalogue: dix lieux, neuf connectés, onze couples
+ok 7 - 112 catalogue: dix lieux, neuf connectés, onze couples
+  ---
+  duration_ms: 1.364896
+  type: 'test'
+  ...
+# Subtest: géométrie valide et acteur debout : v106-hadley
+ok 8 - géométrie valide et acteur debout : v106-hadley
+  ---
+  duration_ms: 1.702334
+  type: 'test'
+  ...
+# Subtest: géométrie valide et acteur debout : v106-medlab
+ok 9 - géométrie valide et acteur debout : v106-medlab
+  ---
+  duration_ms: 0.506189
+  type: 'test'
+  ...
+# Subtest: géométrie valide et acteur debout : v106-sentry
+ok 10 - géométrie valide et acteur debout : v106-sentry
+  ---
+  duration_ms: 0.490658
+  type: 'test'
+  ...
+# Subtest: géométrie valide et acteur debout : v106-sulaco
+ok 11 - géométrie valide et acteur debout : v106-sulaco
+  ---
+  duration_ms: 0.599949
+  type: 'test'
+  ...
+# Subtest: géométrie valide et acteur debout : v107-operations
+ok 12 - géométrie valide et acteur debout : v107-operations
+  ---
+  duration_ms: 0.312044
+  type: 'test'
+  ...
+# Subtest: géométrie valide et acteur debout : v107-service
+ok 13 - géométrie valide et acteur debout : v107-service
+  ---
+  duration_ms: 0.463895
+  type: 'test'
+  ...
+# Subtest: géométrie valide et acteur debout : v109-logistics
+ok 14 - géométrie valide et acteur debout : v109-logistics
+  ---
+  duration_ms: 0.405675
+  type: 'test'
+  ...
+# Subtest: géométrie valide et acteur debout : v109-reserve
+ok 15 - géométrie valide et acteur debout : v109-reserve
+  ---
+  duration_ms: 0.659259
+  type: 'test'
+  ...
+# Subtest: géométrie valide et acteur debout : v112-workshop
+ok 16 - géométrie valide et acteur debout : v112-workshop
+  ---
+  duration_ms: 0.609572
+  type: 'test'
+  ...
+# Subtest: géométrie valide et acteur debout : v112-conduit
+ok 17 - géométrie valide et acteur debout : v112-conduit
+  ---
+  duration_ms: 0.364183
+  type: 'test'
+  ...
+# Subtest: raccord réciproque et arrivée libre : ops-optics
+ok 18 - raccord réciproque et arrivée libre : ops-optics
+  ---
+  duration_ms: 0.633494
+  type: 'test'
+  ...
+# Subtest: raccord réciproque et arrivée libre : optics-conduit
+ok 19 - raccord réciproque et arrivée libre : optics-conduit
+  ---
+  duration_ms: 0.41501
+  type: 'test'
+  ...
+# Subtest: raccord réciproque et arrivée libre : conduit-medical
+ok 20 - raccord réciproque et arrivée libre : conduit-medical
+  ---
+  duration_ms: 0.366202
+  type: 'test'
+  ...
+# Subtest: nouvelles entrées fermées, liaison atelier/coursive ouverte
+ok 21 - nouvelles entrées fermées, liaison atelier/coursive ouverte
+  ---
+  duration_ms: 3.712829
+  type: 'test'
+  ...
+# Subtest: nouvelles salles sombres, huit anciens circuits conservés
+ok 22 - nouvelles salles sombres, huit anciens circuits conservés
+  ---
+  duration_ms: 5.29749
+  type: 'test'
+  ...
+# Subtest: insertion sans ressource gratuite
+ok 23 - insertion sans ressource gratuite
+  ---
+  duration_ms: 2.630349
+  type: 'test'
+  ...
+# Subtest: coffret physique bloque marche et balles
+ok 24 - coffret physique bloque marche et balles
+  ---
+  duration_ms: 1.830356
+  type: 'test'
+  ...
+# Subtest: ouvrir sous scellés 1,05 s ; débit uniquement à la fin
+ok 25 - ouvrir sous scellés 1,05 s ; débit uniquement à la fin
+  ---
+  duration_ms: 5.544078
+  type: 'test'
+  ...
+# Subtest: coffret hors portée refusé
+ok 26 - coffret hors portée refusé
+  ---
+  duration_ms: 1.587656
+  type: 'test'
+  ...
+# Subtest: coffret non renouvelable après deuxième interaction
+ok 27 - coffret non renouvelable après deuxième interaction
+  ---
+  duration_ms: 2.694453
+  type: 'test'
+  ...
+# Subtest: coffret non renouvelable après import
+ok 28 - coffret non renouvelable après import
+  ---
+  duration_ms: 14.07712
+  type: 'test'
+  ...
+# Subtest: mouvement annule la collecte
+ok 29 - mouvement annule la collecte
+  ---
+  duration_ms: 2.357131
+  type: 'test'
+  ...
+# Subtest: tir annule la collecte sans crédit
+ok 30 - tir annule la collecte sans crédit
+  ---
+  duration_ms: 2.885545
+  type: 'test'
+  ...
+# Subtest: pause suspend la collecte
+ok 31 - pause suspend la collecte
+  ---
+  duration_ms: 2.877701
+  type: 'test'
+  ...
+# Subtest: lancer se prépare pendant .6 s
+ok 32 - lancer se prépare pendant .6 s
+  ---
+  duration_ms: 5.926709
+  type: 'test'
+  ...
+# Subtest: point visé engagé, nouvelle visée ne le change pas
+ok 33 - point visé engagé, nouvelle visée ne le change pas
+  ---
+  duration_ms: 5.501035
+  type: 'test'
+  ...
+# Subtest: lancer borné à 360 unités
+ok 34 - lancer borné à 360 unités
+  ---
+  duration_ms: 2.67157
+  type: 'test'
+  ...
+# Subtest: lancer arrêté par porte fermée, jamais derrière
+ok 35 - lancer arrêté par porte fermée, jamais derrière
+  ---
+  duration_ms: 3.282309
+  type: 'test'
+  ...
+# Subtest: porte ouverte permet de poursuivre le rayon
+ok 36 - porte ouverte permet de poursuivre le rayon
+  ---
+  duration_ms: 3.339944
+  type: 'test'
+  ...
+# Subtest: lancer arrêté par volume de mobilier
+ok 37 - lancer arrêté par volume de mobilier
+  ---
+  duration_ms: 3.566088
+  type: 'test'
+  ...
+# Subtest: arrivée ne traverse pas le verre solide
+ok 38 - arrivée ne traverse pas le verre solide
+  ---
+  duration_ms: 1.542147
+  type: 'test'
+  ...
+# Subtest: visée trop proche refusée sans consommation
+ok 39 - visée trop proche refusée sans consommation
+  ---
+  duration_ms: 2.93298
+  type: 'test'
+  ...
+# Subtest: visée invalide rejetée null
+ok 40 - visée invalide rejetée null
+  ---
+  duration_ms: 2.472313
+  type: 'test'
+  ...
+# Subtest: visée invalide rejetée {"x":null,"z":20}
+ok 41 - visée invalide rejetée {"x":null,"z":20}
+  ---
+  duration_ms: 3.60558
+  type: 'test'
+  ...
+# Subtest: visée invalide rejetée {"x":null,"z":20}
+ok 42 - visée invalide rejetée {"x":null,"z":20}
+  ---
+  duration_ms: 2.415522
+  type: 'test'
+  ...
+# Subtest: visée invalide rejetée {"x":"1250","z":195}
+ok 43 - visée invalide rejetée {"x":"1250","z":195}
+  ---
+  duration_ms: 3.147172
+  type: 'test'
+  ...
+# Subtest: lancer interrompu par déplacement
+ok 44 - lancer interrompu par déplacement
+  ---
+  duration_ms: 3.503314
+  type: 'test'
+  ...
+# Subtest: lancer interrompu par balle
+ok 45 - lancer interrompu par balle
+  ---
+  duration_ms: 2.775031
+  type: 'test'
+  ...
+# Subtest: lancer interrompu par blessure
+ok 46 - lancer interrompu par blessure
+  ---
+  duration_ms: 3.728957
+  type: 'test'
+  ...
+# Subtest: lancer exclusif avec autres gestes
+ok 47 - lancer exclusif avec autres gestes
+  ---
+  duration_ms: 2.020589
+  type: 'test'
+  ...
+# Subtest: lancer interdit en pause
+ok 48 - lancer interdit en pause
+  ---
+  duration_ms: 2.346174
+  type: 'test'
+  ...
+# Subtest: lancer interdit après échec
+ok 49 - lancer interdit après échec
+  ---
+  duration_ms: 1.782472
+  type: 'test'
+  ...
+# Subtest: changement de porte pendant geste tronque le lancer, pas de passe-muraille
+ok 50 - changement de porte pendant geste tronque le lancer, pas de passe-muraille
+  ---
+  duration_ms: 8.8564
+  type: 'test'
+  ...
+# Subtest: aucune recharge automatique après quatre lancers
+ok 51 - aucune recharge automatique après quatre lancers
+  ---
+  duration_ms: 21.608498
+  type: 'test'
+  ...
+# Subtest: source locale illumine sans remettre service
+ok 52 - source locale illumine sans remettre service
+  ---
+  duration_ms: 3.900346
+  type: 'test'
+  ...
+# Subtest: balise peut révéler un ennemi loin de la torche éteinte
+ok 53 - balise peut révéler un ennemi loin de la torche éteinte
+  ---
+  duration_ms: 3.098078
+  type: 'test'
+  ...
+# Subtest: lumière partagée révèle aussi le joueur à un ennemi
+ok 54 - lumière partagée révèle aussi le joueur à un ennemi
+  ---
+  duration_ms: 3.47001
+  type: 'test'
+  ...
+# Subtest: mur arrête la lumière de balise
+ok 55 - mur arrête la lumière de balise
+  ---
+  duration_ms: 8.715352
+  type: 'test'
+  ...
+# Subtest: rayons du polygone restent dans la pièce
+ok 56 - rayons du polygone restent dans la pièce
+  ---
+  duration_ms: 5.54069
+  type: 'test'
+  ...
+# Subtest: aucune lumière trans-pièce
+ok 57 - aucune lumière trans-pièce
+  ---
+  duration_ms: 3.017759
+  type: 'test'
+  ...
+# Subtest: décroissance les six dernières secondes
+ok 58 - décroissance les six dernières secondes
+  ---
+  duration_ms: 4.767378
+  type: 'test'
+  ...
+# Subtest: extinction exacte puis carcasse de balise conservée
+ok 59 - extinction exacte puis carcasse de balise conservée
+  ---
+  duration_ms: 5.062779
+  type: 'test'
+  ...
+# Subtest: pause arrête durée de balise
+ok 60 - pause arrête durée de balise
+  ---
+  duration_ms: 3.309719
+  type: 'test'
+  ...
+# Subtest: aucun dommage, vie, chargeur, plaque, objectif ou acteur créé
+ok 61 - aucun dommage, vie, chargeur, plaque, objectif ou acteur créé
+  ---
+  duration_ms: 3.07888
+  type: 'test'
+  ...
+# Subtest: bruit du lancer emprunte contact existant
+ok 62 - bruit du lancer emprunte contact existant
+  ---
+  duration_ms: 7.22114
+  type: 'test'
+  ...
+# Subtest: pas de marqueur lumineux sur le radar de mouvement
+ok 63 - pas de marqueur lumineux sur le radar de mouvement
+  ---
+  duration_ms: 3.119977
+  type: 'test'
+  ...
+# Subtest: snapshot exact : stock récupéré
+ok 64 - snapshot exact : stock récupéré
+  ---
+  duration_ms: 9.839824
+  type: 'test'
+  ...
+# Subtest: snapshot exact : amorçage
+ok 65 - snapshot exact : amorçage
+  ---
+  duration_ms: 10.790135
+  type: 'test'
+  ...
+# Subtest: snapshot exact : source active
+ok 66 - snapshot exact : source active
+  ---
+  duration_ms: 22.909356
+  type: 'test'
+  ...
+# Subtest: snapshot exact : source expirée
+ok 67 - snapshot exact : source expirée
+  ---
+  duration_ms: 16.746457
+  type: 'test'
+  ...
+# Subtest: checkpoint ne rend pas le stock déjà consommé avant snapshot
+ok 68 - checkpoint ne rend pas le stock déjà consommé avant snapshot
+  ---
+  duration_ms: 11.227932
+  type: 'test'
+  ...
+# Subtest: import atomique : charge inventée
+ok 69 - import atomique : charge inventée
+  ---
+  duration_ms: 12.139421
+  type: 'test'
+  ...
+# Subtest: import atomique : compte négatif
+ok 70 - import atomique : compte négatif
+  ---
+  duration_ms: 10.015308
+  type: 'test'
+  ...
+# Subtest: import atomique : doublon de marker
+ok 71 - import atomique : doublon de marker
+  ---
+  duration_ms: 8.027837
+  type: 'test'
+  ...
+# Subtest: import atomique : portée injectée
+ok 72 - import atomique : portée injectée
+  ---
+  duration_ms: 8.881485
+  type: 'test'
+  ...
+# Subtest: import atomique : source inconnue
+ok 73 - import atomique : source inconnue
+  ---
+  duration_ms: 7.73303
+  type: 'test'
+  ...
+# Subtest: import atomique : pièce inconnue
+ok 74 - import atomique : pièce inconnue
+  ---
+  duration_ms: 20.522102
+  type: 'test'
+  ...
+# Subtest: import atomique : coordonnée infinie
+ok 75 - import atomique : coordonnée infinie
+  ---
+  duration_ms: 7.855107
+  type: 'test'
+  ...
+# Subtest: import atomique : dans un support
+ok 76 - import atomique : dans un support
+  ---
+  duration_ms: 7.868271
+  type: 'test'
+  ...
+# Subtest: import atomique : durée allongée
+ok 77 - import atomique : durée allongée
+  ---
+  duration_ms: 7.249606
+  type: 'test'
+  ...
+# Subtest: import atomique : date future
+ok 78 - import atomique : date future
+  ---
+  duration_ms: 7.897022
+  type: 'test'
+  ...
+# Subtest: import atomique : bilan inventé
+ok 79 - import atomique : bilan inventé
+  ---
+  duration_ms: 8.4587
+  type: 'test'
+  ...
+# Subtest: import atomique : terrain de vie ajouté
+ok 80 - import atomique : terrain de vie ajouté
+  ---
+  duration_ms: 15.120482
+  type: 'test'
+  ...
+# Subtest: import atomique : collecte falsifiée
+ok 81 - import atomique : collecte falsifiée
+  ---
+  duration_ms: 8.420803
+  type: 'test'
+  ...
+# Subtest: migration V111 exacte sans stock ni soin
+ok 82 - migration V111 exacte sans stock ni soin
+  ---
+  duration_ms: 19.626925
+  type: 'test'
+  ...
+# Subtest: migration V111 invalide refusée
+ok 83 - migration V111 invalide refusée
+  ---
+  duration_ms: 5.552724
+  type: 'test'
+  ...
+# Subtest: nouvelle partie réinitialise balises
+ok 84 - nouvelle partie réinitialise balises
+  ---
+  duration_ms: 7.8415
+  type: 'test'
+  ...
+# Subtest: V108 crée six mondes et un registre strict sans changer les populations
+ok 85 - V108 crée six mondes et un registre strict sans changer les populations
+  ---
+  duration_ms: 16.289142
+  type: 'test'
+  ...
+# Subtest: Les six empreintes de géométrie V107 sont conservées
+ok 86 - Les six empreintes de géométrie V107 sont conservées
+  ---
+  duration_ms: 4.3251
+  type: 'test'
+  ...
+# Subtest: Les cinq cloisons de liaison ont un seul état réciproque
+ok 87 - Les cinq cloisons de liaison ont un seul état réciproque
+  ---
+  duration_ms: 1.206128
+  type: 'test'
+  ...
+# Subtest: Les cinq pièces de l’opération progressent au même pas
+ok 88 - Les cinq pièces de l’opération progressent au même pas
+  ---
+  duration_ms: 3.195142
+  type: 'test'
+  ...
+# Subtest: Une inspection reste isolée sans simulation du bloc entier
+ok 89 - Une inspection reste isolée sans simulation du bloc entier
+  ---
+  duration_ms: 2.105146
+  type: 'test'
+  ...
+# Subtest: Pause fige tous les mondes, les gestes et le détecteur
+ok 90 - Pause fige tous les mondes, les gestes et le détecteur
+  ---
+  duration_ms: 5.990816
+  type: 'test'
+  ...
+# Subtest: Un ennemi ne perçoit pas le joueur à travers la porte opaque
+ok 91 - Un ennemi ne perçoit pas le joueur à travers la porte opaque
+  ---
+  duration_ms: 4.633702
+  type: 'test'
+  ...
+# Subtest: Le vitrage laisse voir mais ne laisse pas attaquer ni marcher
+ok 92 - Le vitrage laisse voir mais ne laisse pas attaquer ni marcher
+  ---
+  duration_ms: 17.659919
+  type: 'test'
+  ...
+# Subtest: Un coup de feu alerte derrière un accès ouvert
+ok 93 - Un coup de feu alerte derrière un accès ouvert
+  ---
+  duration_ms: 16.229403
+  type: 'test'
+  ...
+# Subtest: Un son ne franchit pas une cloison locale fermée sans route
+ok 94 - Un son ne franchit pas une cloison locale fermée sans route
+  ---
+  duration_ms: 25.924834
+  type: 'test'
+  ...
+# Subtest: Propagation sonore par une liaison ouverte
+ok 95 - Propagation sonore par une liaison ouverte
+  ---
+  duration_ms: 54.314256
+  type: 'test'
+  ...
+# Subtest: Propagation coupée par le sas réciproque
+ok 96 - Propagation coupée par le sas réciproque
+  ---
+  duration_ms: 29.552126
+  type: 'test'
+  ...
+# Subtest: Un bruit ne transforme pas la destination en suivi omniscient
+ok 97 - Un bruit ne transforme pas la destination en suivi omniscient
+  ---
+  duration_ms: 9.989235
+  type: 'test'
+  ...
+# Subtest: La mémoire expire puis le contact cesse la recherche
+ok 98 - La mémoire expire puis le contact cesse la recherche
+  ---
+  duration_ms: 39.270595
+  type: 'test'
+  ...
+# Subtest: La marche prudente réduit de moitié le déplacement demandé
+ok 99 - La marche prudente réduit de moitié le déplacement demandé
+  ---
+  duration_ms: 2.991243
+  type: 'test'
+  ...
+# Subtest: La marche prudente n’émet pas de pas audibles
+ok 100 - La marche prudente n’émet pas de pas audibles
+  ---
+  duration_ms: 16.422249
+  type: 'test'
+  ...
+# Subtest: La course locale produit un vrai stimulus de pas
+ok 101 - La course locale produit un vrai stimulus de pas
+  ---
+  duration_ms: 8.313169
+  type: 'test'
+  ...
+# Subtest: L’état de prudence est refusé en pause
+ok 102 - L’état de prudence est refusé en pause
+  ---
+  duration_ms: 1.818766
+  type: 'test'
+  ...
+# Subtest: La file de bruit reste bornée
+ok 103 - La file de bruit reste bornée
+  ---
+  duration_ms: 179.056924
+  type: 'test'
+  ...
+# Subtest: Les tirs automatiques ne créent pas une file non bornée
+ok 104 - Les tirs automatiques ne créent pas une file non bornée
+  ---
+  duration_ms: 6.948262
+  type: 'test'
+  ...
+# Subtest: Une créature rejoint physiquement un seuil avant de traverser
+ok 105 - Une créature rejoint physiquement un seuil avant de traverser
+  ---
+  duration_ms: 2.041296
+  type: 'test'
+  ...
+# Subtest: Franchissement dure 0,85 s et conserve identité/vie
+ok 106 - Franchissement dure 0,85 s et conserve identité/vie
+  ---
+  duration_ms: 8.625349
+  type: 'test'
+  ...
+# Subtest: Une destination occupée retient la créature au seuil
+ok 107 - Une destination occupée retient la créature au seuil
+  ---
+  duration_ms: 24.070581
+  type: 'test'
+  ...
+# Subtest: Une liaison close interdit le franchissement
+ok 108 - Une liaison close interdit le franchissement
+  ---
+  duration_ms: 8.690073
+  type: 'test'
+  ...
+# Subtest: Une menace en transit empêche la fermeture du sas
+ok 109 - Une menace en transit empêche la fermeture du sas
+  ---
+  duration_ms: 5.930398
+  type: 'test'
+  ...
+# Subtest: Contrôle distant R refusé
+ok 110 - Contrôle distant R refusé
+  ---
+  duration_ms: 1.844422
+  type: 'test'
+  ...
+# Subtest: Fermeture de liaison partagée puis ouverture différée
+ok 111 - Fermeture de liaison partagée puis ouverture différée
+  ---
+  duration_ms: 24.156362
+  type: 'test'
+  ...
+# Subtest: Le déplacement interrompt la réouverture de liaison
+ok 112 - Le déplacement interrompt la réouverture de liaison
+  ---
+  duration_ms: 6.524114
+  type: 'test'
+  ...
+# Subtest: Le tir interrompt la réouverture de liaison
+ok 113 - Le tir interrompt la réouverture de liaison
+  ---
+  duration_ms: 3.678557
+  type: 'test'
+  ...
+# Subtest: Un groupe dans un seuil interdit sa fermeture
+ok 114 - Un groupe dans un seuil interdit sa fermeture
+  ---
+  duration_ms: 2.012974
+  type: 'test'
+  ...
+# Subtest: E ne traverse pas un sas de liaison fermé
+ok 115 - E ne traverse pas un sas de liaison fermé
+  ---
+  duration_ms: 2.342222
+  type: 'test'
+  ...
+# Subtest: Le détecteur n’affiche pas un ennemi immobile
+ok 116 - Le détecteur n’affiche pas un ennemi immobile
+  ---
+  duration_ms: 13.098925
+  type: 'test'
+  ...
+# Subtest: Le détecteur renvoie une mesure quantifiée sans identité ni PV
+ok 117 - Le détecteur renvoie une mesure quantifiée sans identité ni PV
+  ---
+  duration_ms: 3.1604
+  type: 'test'
+  ...
+# Subtest: La recharge du détecteur persiste
+ok 118 - La recharge du détecteur persiste
+  ---
+  duration_ms: 9.914406
+  type: 'test'
+  ...
+# Subtest: Les échos vieillissent et disparaissent
+ok 119 - Les échos vieillissent et disparaissent
+  ---
+  duration_ms: 4.636275
+  type: 'test'
+  ...
+# Subtest: Une menace déplacée se sauvegarde dans une seule pièce
+ok 120 - Une menace déplacée se sauvegarde dans une seule pièce
+  ---
+  duration_ms: 13.976895
+  type: 'test'
+  ...
+# Subtest: Le franchissement en cours est repris sans duplication
+ok 121 - Le franchissement en cours est repris sans duplication
+  ---
+  duration_ms: 9.640391
+  type: 'test'
+  ...
+# Subtest: Le checkpoint restitue les menaces, leur mémoire et les sas
+ok 122 - Le checkpoint restitue les menaces, leur mémoire et les sas
+  ---
+  duration_ms: 11.564104
+  type: 'test'
+  ...
+# Subtest: Un export V107 est migré sans guérir ni recharger
+ok 123 - Un export V107 est migré sans guérir ni recharger
+  ---
+  duration_ms: 14.104881
+  type: 'test'
+  ...
+# Subtest: Un import V107 invalide reste refusé
+ok 124 - Un import V107 invalide reste refusé
+  ---
+  duration_ms: 6.972357
+  type: 'test'
+  ...
+# Subtest: Rejet atomique : schema
+ok 125 - Rejet atomique : schema
+  ---
+  duration_ms: 2.98568
+  type: 'test'
+  ...
+# Subtest: Rejet atomique : contrat
+ok 126 - Rejet atomique : contrat
+  ---
+  duration_ms: 2.920392
+  type: 'test'
+  ...
+# Subtest: Rejet atomique : métadonnée inconnue
+ok 127 - Rejet atomique : métadonnée inconnue
+  ---
+  duration_ms: 5.064553
+  type: 'test'
+  ...
+# Subtest: Rejet atomique : registre ennemi manquant
+ok 128 - Rejet atomique : registre ennemi manquant
+  ---
+  duration_ms: 12.511084
+  type: 'test'
+  ...
+# Subtest: Rejet atomique : mémoire inconnue
+ok 129 - Rejet atomique : mémoire inconnue
+  ---
+  duration_ms: 7.043861
+  type: 'test'
+  ...
+# Subtest: Rejet atomique : vitesse NaN
+ok 130 - Rejet atomique : vitesse NaN
+  ---
+  duration_ms: 4.801816
+  type: 'test'
+  ...
+# Subtest: Rejet atomique : horloge future
+ok 131 - Rejet atomique : horloge future
+  ---
+  duration_ms: 6.315432
+  type: 'test'
+  ...
+# Subtest: Rejet atomique : signal non valide
+ok 132 - Rejet atomique : signal non valide
+  ---
+  duration_ms: 4.866132
+  type: 'test'
+  ...
+# Subtest: Rejet atomique : sas non booléen
+ok 133 - Rejet atomique : sas non booléen
+  ---
+  duration_ms: 3.821138
+  type: 'test'
+  ...
+# Subtest: Rejet atomique : recharge négative
+ok 134 - Rejet atomique : recharge négative
+  ---
+  duration_ms: 6.215524
+  type: 'test'
+  ...
+# Subtest: Rejet atomique : écho trop précis
+ok 135 - Rejet atomique : écho trop précis
+  ---
+  duration_ms: 6.663848
+  type: 'test'
+  ...
+# Subtest: Rejet atomique : espèce révélée
+ok 136 - Rejet atomique : espèce révélée
+  ---
+  duration_ms: 7.563785
+  type: 'test'
+  ...
+# Subtest: Rejet atomique : ennemi dupliqué
+ok 137 - Rejet atomique : ennemi dupliqué
+  ---
+  duration_ms: 3.154475
+  type: 'test'
+  ...
+# Subtest: Rejet atomique : ennemi supprimé
+ok 138 - Rejet atomique : ennemi supprimé
+  ---
+  duration_ms: 2.164766
+  type: 'test'
+  ...
+# Subtest: Rejet atomique : sentry déplacée
+ok 139 - Rejet atomique : sentry déplacée
+  ---
+  duration_ms: 1.93591
+  type: 'test'
+  ...
+# Subtest: Rejet atomique : franchissement invalide
+ok 140 - Rejet atomique : franchissement invalide
+  ---
+  duration_ms: 4.830321
+  type: 'test'
+  ...
+# Subtest: Rejet atomique : bruit futur
+ok 141 - Rejet atomique : bruit futur
+  ---
+  duration_ms: 6.72727
+  type: 'test'
+  ...
+# Subtest: Rejet atomique : rôle injecté
+ok 142 - Rejet atomique : rôle injecté
+  ---
+  duration_ms: 3.714658
+  type: 'test'
+  ...
+# Subtest: La sentinelle consomme hors champ seulement avec un tir libre
+ok 143 - La sentinelle consomme hors champ seulement avec un tir libre
+  ---
+  duration_ms: 84.399515
+  type: 'test'
+  ...
+# Subtest: Newt reste hors cible tant qu’elle n’est pas recrutée
+ok 144 - Newt reste hors cible tant qu’elle n’est pas recrutée
+  ---
+  duration_ms: 13.579821
+  type: 'test'
+  ...
+# Subtest: La caméra, les projets de chemin et la carte ne sont pas importables comme code
+ok 145 - La caméra, les projets de chemin et la carte ne sont pas importables comme code
+  ---
+  duration_ms: 1.870332
+  type: 'test'
+  ...
+# Subtest: La perception joueur ne révèle pas un contact derrière une porte fermée
+ok 146 - La perception joueur ne révèle pas un contact derrière une porte fermée
+  ---
+  duration_ms: 2.326001
+  type: 'test'
+  ...
+# Subtest: L’infirmerie derrière verre reste observable mais pas traversable
+ok 147 - L’infirmerie derrière verre reste observable mais pas traversable
+  ---
+  duration_ms: 1.759698
+  type: 'test'
+  ...
+# Subtest: Une menace sortie du couloir ne valide pas à tort la défense
+ok 148 - Une menace sortie du couloir ne valide pas à tort la défense
+  ---
+  duration_ms: 2.404718
+  type: 'test'
+  ...
+# Subtest: Le sas de liaison fermé possède un volume physique
+ok 149 - Le sas de liaison fermé possède un volume physique
+  ---
+  duration_ms: 1.827263
+  type: 'test'
+  ...
+# Subtest: Le volume du sas fermé arrête les tirs et la visibilité
+ok 150 - Le volume du sas fermé arrête les tirs et la visibilité
+  ---
+  duration_ms: 1.951255
+  type: 'test'
+  ...
+# Subtest: Les volumes du sas sont réciproques
+ok 151 - Les volumes du sas sont réciproques
+  ---
+  duration_ms: 2.091462
+  type: 'test'
+  ...
+# Subtest: Un acteur injecté dans le sas fermé invalide l’import
+ok 152 - Un acteur injecté dans le sas fermé invalide l’import
+  ---
+  duration_ms: 16.518042
+  type: 'test'
+  ...
+# Subtest: Ouvrir la liaison retire la même emprise de toutes les requêtes
+ok 153 - Ouvrir la liaison retire la même emprise de toutes les requêtes
+  ---
+  duration_ms: 6.688351
+  type: 'test'
+  ...
+# Subtest: scene valide et spawns dégagés : v106-hadley
+ok 154 - scene valide et spawns dégagés : v106-hadley
+  ---
+  duration_ms: 6.185652
+  type: 'test'
+  ...
+# Subtest: scene valide et spawns dégagés : v106-medlab
+ok 155 - scene valide et spawns dégagés : v106-medlab
+  ---
+  duration_ms: 1.484004
+  type: 'test'
+  ...
+# Subtest: scene valide et spawns dégagés : v106-sentry
+ok 156 - scene valide et spawns dégagés : v106-sentry
+  ---
+  duration_ms: 0.745232
+  type: 'test'
+  ...
+# Subtest: scene valide et spawns dégagés : v106-sulaco
+ok 157 - scene valide et spawns dégagés : v106-sulaco
+  ---
+  duration_ms: 1.080727
+  type: 'test'
+  ...
+# Subtest: source V105: inventaire 64 entrées intact; pas de coordonnées présentées comme récupérées
+ok 158 - source V105: inventaire 64 entrées intact; pas de coordonnées présentées comme récupérées
+  ---
+  duration_ms: 20.057332
+  type: 'test'
+  ...
+# Subtest: une porte fermée bloque déplacement continu, regard et balle
+ok 159 - une porte fermée bloque déplacement continu, regard et balle
+  ---
+  duration_ms: 2.12531
+  type: 'test'
+  ...
+# Subtest: la même porte ouverte permet mouvement, regard et balle
+ok 160 - la même porte ouverte permet mouvement, regard et balle
+  ---
+  duration_ms: 0.854144
+  type: 'test'
+  ...
+# Subtest: fermeture refusée sur acteur; fermeture possible dès le passage libéré
+ok 161 - fermeture refusée sur acteur; fermeture possible dès le passage libéré
+  ---
+  duration_ms: 0.82194
+  type: 'test'
+  ...
+# Subtest: pas de commande distante
+ok 162 - pas de commande distante
+  ---
+  duration_ms: 0.755772
+  type: 'test'
+  ...
+# Subtest: porte critique reste la propriété du scénario
+ok 163 - porte critique reste la propriété du scénario
+  ---
+  duration_ms: 0.939267
+  type: 'test'
+  ...
+# Subtest: pas de panne contournée sans manœuvre manuelle
+ok 164 - pas de panne contournée sans manœuvre manuelle
+  ---
+  duration_ms: 0.487008
+  type: 'test'
+  ...
+# Subtest: double commande identique sans double événement
+ok 165 - double commande identique sans double événement
+  ---
+  duration_ms: 0.340518
+  type: 'test'
+  ...
+# Subtest: interrupteur local ne change que son circuit
+ok 166 - interrupteur local ne change que son circuit
+  ---
+  duration_ms: 0.729968
+  type: 'test'
+  ...
+# Subtest: route impossible porte fermée; route validée point par point ouverte
+ok 167 - route impossible porte fermée; route validée point par point ouverte
+  ---
+  duration_ms: 9.26505
+  type: 'test'
+  ...
+# Subtest: rayon acteur large ne passe pas une fente trop étroite
+ok 168 - rayon acteur large ne passe pas une fente trop étroite
+  ---
+  duration_ms: 2.68067
+  type: 'test'
+  ...
+# Subtest: route recalculée après changement de porte, pas de téléportation
+ok 169 - route recalculée après changement de porte, pas de téléportation
+  ---
+  duration_ms: 17.388485
+  type: 'test'
+  ...
+# Subtest: préparation engagée : visée immuable, déplacement fait manquer
+ok 170 - préparation engagée : visée immuable, déplacement fait manquer
+  ---
+  duration_ms: 1.818279
+  type: 'test'
+  ...
+# Subtest: fermer une porte pendant la préparation empêche le coup
+ok 171 - fermer une porte pendant la préparation empêche le coup
+  ---
+  duration_ms: 0.522753
+  type: 'test'
+  ...
+# Subtest: reprise pendant préparation conserve point engagé, sans récompense
+ok 172 - reprise pendant préparation conserve point engagé, sans récompense
+  ---
+  duration_ms: 0.941744
+  type: 'test'
+  ...
+# Subtest: pause bloque temps, commandes et attaque
+ok 173 - pause bloque temps, commandes et attaque
+  ---
+  duration_ms: 0.193808
+  type: 'test'
+  ...
+# Subtest: sauvegarde restaure portes et munitions exactes en pause
+ok 174 - sauvegarde restaure portes et munitions exactes en pause
+  ---
+  duration_ms: 0.342728
+  type: 'test'
+  ...
+# Subtest: rejet atomique : NaN
+ok 175 - rejet atomique : NaN
+  ---
+  duration_ms: 0.391726
+  type: 'test'
+  ...
+# Subtest: rejet atomique : munition négative
+ok 176 - rejet atomique : munition négative
+  ---
+  duration_ms: 0.352195
+  type: 'test'
+  ...
+# Subtest: rejet atomique : autre salle
+ok 177 - rejet atomique : autre salle
+  ---
+  duration_ms: 0.185119
+  type: 'test'
+  ...
+# Subtest: rejet atomique : géométrie autre
+ok 178 - rejet atomique : géométrie autre
+  ---
+  duration_ms: 0.484958
+  type: 'test'
+  ...
+# Subtest: rejet atomique : porte inconnue
+ok 179 - rejet atomique : porte inconnue
+  ---
+  duration_ms: 0.21623
+  type: 'test'
+  ...
+# Subtest: rejet atomique : acteur doublé
+ok 180 - rejet atomique : acteur doublé
+  ---
+  duration_ms: 0.292768
+  type: 'test'
+  ...
+# Subtest: rejet atomique : visée résiduelle
+ok 181 - rejet atomique : visée résiduelle
+  ---
+  duration_ms: 8.632024
+  type: 'test'
+  ...
+# Subtest: rejet atomique : phase inconnue
+ok 182 - rejet atomique : phase inconnue
+  ---
+  duration_ms: 0.35794
+  type: 'test'
+  ...
+# Subtest: rejet atomique : carte révélée inventée
+ok 183 - rejet atomique : carte révélée inventée
+  ---
+  duration_ms: 0.492903
+  type: 'test'
+  ...
+# Subtest: rejet atomique : HP incohérents
+ok 184 - rejet atomique : HP incohérents
+  ---
+  duration_ms: 0.327462
+  type: 'test'
+  ...
+# Subtest: sauvegarde refusée si porte fermée traverse un acteur
+ok 185 - sauvegarde refusée si porte fermée traverse un acteur
+  ---
+  duration_ms: 0.34752
+  type: 'test'
+  ...
+# Subtest: checkpoint distinct puis nouveau monde propre
+ok 186 - checkpoint distinct puis nouveau monde propre
+  ---
+  duration_ms: 0.556936
+  type: 'test'
+  ...
+# Subtest: sentinelle ne dépense pas à travers un obstacle
+ok 187 - sentinelle ne dépense pas à travers un obstacle
+  ---
+  duration_ms: 5.054558
+  type: 'test'
+  ...
+# Subtest: escorte Newt non armée, aucun tir autonome
+ok 188 - escorte Newt non armée, aucun tir autonome
+  ---
+  duration_ms: 1.851538
+  type: 'test'
+  ...
+# Subtest: acteur mort initial valide et reprise identique
+ok 189 - acteur mort initial valide et reprise identique
+  ---
+  duration_ms: 0.363276
+  type: 'test'
+  ...
+# Subtest: propriété non autorisée : radius
+ok 190 - propriété non autorisée : radius
+  ---
+  duration_ms: 0.320693
+  type: 'test'
+  ...
+# Subtest: propriété non autorisée : kind
+ok 191 - propriété non autorisée : kind
+  ---
+  duration_ms: 0.221497
+  type: 'test'
+  ...
+# Subtest: propriété non autorisée : role
+ok 192 - propriété non autorisée : role
+  ---
+  duration_ms: 0.244279
+  type: 'test'
+  ...
+# Subtest: propriété non autorisée : __proto__
+ok 193 - propriété non autorisée : __proto__
+  ---
+  duration_ms: 0.208018
+  type: 'test'
+  ...
+# Subtest: vitre transparente: vision autorisée, balle et corps arrêtés
+ok 194 - vitre transparente: vision autorisée, balle et corps arrêtés
+  ---
+  duration_ms: 0.473743
+  type: 'test'
+  ...
+# Subtest: renderer pur : 60 dessins ne modifient ni portes, ni ressources, ni géométrie
+ok 195 - renderer pur : 60 dessins ne modifient ni portes, ni ressources, ni géométrie
+  ---
+  duration_ms: 139.35671
+  type: 'test'
+  ...
+# Subtest: V110 catalogue identique : huit lieux et huit sas, aucune population ajoutée
+ok 196 - V110 catalogue identique : huit lieux et huit sas, aucune population ajoutée
+  ---
+  duration_ms: 13.075536
+  type: 'test'
+  ...
+# Subtest: V110 caisse de maintenance portée physique et support existant
+ok 197 - V110 caisse de maintenance portée physique et support existant
+  ---
+  duration_ms: 16.624944
+  type: 'test'
+  ...
+# Subtest: V110 collecte 1,1 s ne crédite rien à mi-geste
+ok 198 - V110 collecte 1,1 s ne crédite rien à mi-geste
+  ---
+  duration_ms: 40.903115
+  type: 'test'
+  ...
+# Subtest: V110 caisse vide jamais renouvelée
+ok 199 - V110 caisse vide jamais renouvelée
+  ---
+  duration_ms: 19.214728
+  type: 'test'
+  ...
+# Subtest: V110 E reconnaît la caisse de génie
+ok 200 - V110 E reconnaît la caisse de génie
+  ---
+  duration_ms: 3.866336
+  type: 'test'
+  ...
+# Subtest: V110 collecte pause et reprise exactes
+ok 201 - V110 collecte pause et reprise exactes
+  ---
+  duration_ms: 19.900101
+  type: 'test'
+  ...
+# Subtest: V110 annulation scellés sans plaque offerte
+ok 202 - V110 annulation scellés sans plaque offerte
+  ---
+  duration_ms: 7.054651
+  type: 'test'
+  ...
+# Subtest: V110 plaque posée seulement au bout de 1,8 s
+ok 203 - V110 plaque posée seulement au bout de 1,8 s
+  ---
+  duration_ms: 114.259649
+  type: 'test'
+  ...
+# Subtest: V110 renfort interdit sur passage ouvert
+ok 204 - V110 renfort interdit sur passage ouvert
+  ---
+  duration_ms: 23.164116
+  type: 'test'
+  ...
+# Subtest: V110 renfort interdit sans ressources
+ok 205 - V110 renfort interdit sans ressources
+  ---
+  duration_ms: 2.719404
+  type: 'test'
+  ...
+# Subtest: V110 pas de seconde couche de plaques
+ok 206 - V110 pas de seconde couche de plaques
+  ---
+  duration_ms: 60.092905
+  type: 'test'
+  ...
+# Subtest: V110 portes intérieures et sas Sulaco hors périmètre
+ok 207 - V110 portes intérieures et sas Sulaco hors périmètre
+  ---
+  duration_ms: 2.5344
+  type: 'test'
+  ...
+# Subtest: V110 R refuse ouverture renfort soudé
+ok 208 - V110 R refuse ouverture renfort soudé
+  ---
+  duration_ms: 146.224888
+  type: 'test'
+  ...
+# Subtest: V110 fonction ouverture directe refuse aussi renfort
+ok 209 - V110 fonction ouverture directe refuse aussi renfort
+  ---
+  duration_ms: 30.47958
+  type: 'test'
+  ...
+# Subtest: V110 découpe 1,4 s ouvre sans remboursement
+ok 210 - V110 découpe 1,4 s ouvre sans remboursement
+  ---
+  duration_ms: 71.430745
+  type: 'test'
+  ...
+# Subtest: V110 découpe sans plaque présente refusée
+ok 211 - V110 découpe sans plaque présente refusée
+  ---
+  duration_ms: 10.125042
+  type: 'test'
+  ...
+# Subtest: V110 soudure interrompue par tir
+ok 212 - V110 soudure interrompue par tir
+  ---
+  duration_ms: 47.259301
+  type: 'test'
+  ...
+# Subtest: V110 soudure interrompue par impact sur opérateur
+ok 213 - V110 soudure interrompue par impact sur opérateur
+  ---
+  duration_ms: 20.643503
+  type: 'test'
+  ...
+# Subtest: V110 soudure suspendue en pause
+ok 214 - V110 soudure suspendue en pause
+  ---
+  duration_ms: 20.113645
+  type: 'test'
+  ...
+# Subtest: V110 gestes logistiques et techniques mutuellement exclusifs
+ok 215 - V110 gestes logistiques et techniques mutuellement exclusifs
+  ---
+  duration_ms: 9.491702
+  type: 'test'
+  ...
+# Subtest: V110 outils produisent bruit par la simulation
+ok 216 - V110 outils produisent bruit par la simulation
+  ---
+  duration_ms: 23.031359
+  type: 'test'
+  ...
+# Subtest: V110 sas fermé bloque corps vue et balles sur les deux faces
+ok 217 - V110 sas fermé bloque corps vue et balles sur les deux faces
+  ---
+  duration_ms: 5.953307
+  type: 'test'
+  ...
+# Subtest: V110 sans mémoire aucune attaque omnisciente de sas
+ok 218 - V110 sans mémoire aucune attaque omnisciente de sas
+  ---
+  duration_ms: 7.034986
+  type: 'test'
+  ...
+# Subtest: V110 piste expirée ne casse pas un sas
+ok 219 - V110 piste expirée ne casse pas un sas
+  ---
+  duration_ms: 10.503879
+  type: 'test'
+  ...
+# Subtest: V110 contact distant doit marcher jusqu’au seuil
+ok 220 - V110 contact distant doit marcher jusqu’au seuil
+  ---
+  duration_ms: 5.710378
+  type: 'test'
+  ...
+# Subtest: V110 phase préparatoire 0,8 s sans dégât immédiat
+ok 221 - V110 phase préparatoire 0,8 s sans dégât immédiat
+  ---
+  duration_ms: 5.751321
+  type: 'test'
+  ...
+# Subtest: V110 quatre frappes percent un battant simple
+ok 222 - V110 quatre frappes percent un battant simple
+  ---
+  duration_ms: 20.519374
+  type: 'test'
+  ...
+# Subtest: V110 plaque absorbe en premier, sept coups nécessaires
+ok 223 - V110 plaque absorbe en premier, sept coups nécessaires
+  ---
+  duration_ms: 75.905028
+  type: 'test'
+  ...
+# Subtest: V110 brèche supprime exactement les volumes partagés
+ok 224 - V110 brèche supprime exactement les volumes partagés
+  ---
+  duration_ms: 10.479211
+  type: 'test'
+  ...
+# Subtest: V110 porte percée ne se referme pas magiquement
+ok 225 - V110 porte percée ne se referme pas magiquement
+  ---
+  duration_ms: 16.226969
+  type: 'test'
+  ...
+# Subtest: V110 réfection 2,2 s consomme une plaque puis referme
+ok 226 - V110 réfection 2,2 s consomme une plaque puis referme
+  ---
+  duration_ms: 57.933832
+  type: 'test'
+  ...
+# Subtest: V110 réfection refusée si seuil occupé côté opposé
+ok 227 - V110 réfection refusée si seuil occupé côté opposé
+  ---
+  duration_ms: 8.305592
+  type: 'test'
+  ...
+# Subtest: V110 réfection interrompue si seuil devient occupé
+ok 228 - V110 réfection interrompue si seuil devient occupé
+  ---
+  duration_ms: 13.802917
+  type: 'test'
+  ...
+# Subtest: V110 réfection sans plaque refusée
+ok 229 - V110 réfection sans plaque refusée
+  ---
+  duration_ms: 6.956699
+  type: 'test'
+  ...
+# Subtest: V110 réparer battant intact refusé
+ok 230 - V110 réparer battant intact refusé
+  ---
+  duration_ms: 4.496824
+  type: 'test'
+  ...
+# Subtest: V110 renfort sur battant endommagé demande réparation
+ok 231 - V110 renfort sur battant endommagé demande réparation
+  ---
+  duration_ms: 4.587061
+  type: 'test'
+  ...
+# Subtest: V110 coup préparé annulé par ouverture avant contact
+ok 232 - V110 coup préparé annulé par ouverture avant contact
+  ---
+  duration_ms: 5.823091
+  type: 'test'
+  ...
+# Subtest: V110 déplacement de la créature fait manquer son coup engagé
+ok 233 - V110 déplacement de la créature fait manquer son coup engagé
+  ---
+  duration_ms: 4.798655
+  type: 'test'
+  ...
+# Subtest: V110 mort de créature annule frappe sans spawn
+ok 234 - V110 mort de créature annule frappe sans spawn
+  ---
+  duration_ms: 6.607141
+  type: 'test'
+  ...
+# Subtest: V110 impacts ne retirent aucun PV de l’équipe
+ok 235 - V110 impacts ne retirent aucun PV de l’équipe
+  ---
+  duration_ms: 11.707979
+  type: 'test'
+  ...
+# Subtest: V110 impact ne remplace pas propre piste par son bruit
+ok 236 - V110 impact ne remplace pas propre piste par son bruit
+  ---
+  duration_ms: 9.24588
+  type: 'test'
+  ...
+# Subtest: V110 pause gèle coups préparés et temps partagé
+ok 237 - V110 pause gèle coups préparés et temps partagé
+  ---
+  duration_ms: 10.730957
+  type: 'test'
+  ...
+# Subtest: V110 import conserve demi-soudure sans crédit
+ok 238 - V110 import conserve demi-soudure sans crédit
+  ---
+  duration_ms: 43.247987
+  type: 'test'
+  ...
+# Subtest: V110 import conserve préparation ennemie sans réinitialiser chrono
+ok 239 - V110 import conserve préparation ennemie sans réinitialiser chrono
+  ---
+  duration_ms: 19.661034
+  type: 'test'
+  ...
+# Subtest: V110 import conserve brèche et collision ouverte
+ok 240 - V110 import conserve brèche et collision ouverte
+  ---
+  duration_ms: 36.997434
+  type: 'test'
+  ...
+# Subtest: V110 reprise répétée ne duplique pas les plaques
+ok 241 - V110 reprise répétée ne duplique pas les plaques
+  ---
+  duration_ms: 42.85069
+  type: 'test'
+  ...
+# Subtest: V110 nouveau parcours efface dégâts et stocks locaux
+ok 242 - V110 nouveau parcours efface dégâts et stocks locaux
+  ---
+  duration_ms: 9.376107
+  type: 'test'
+  ...
+# Subtest: V110 refuse plaque inventée avant mutation
+ok 243 - V110 refuse plaque inventée avant mutation
+  ---
+  duration_ms: 8.785799
+  type: 'test'
+  ...
+# Subtest: V110 refuse quantité négative avant mutation
+ok 244 - V110 refuse quantité négative avant mutation
+  ---
+  duration_ms: 8.576189
+  type: 'test'
+  ...
+# Subtest: V110 refuse ressource inconnue avant mutation
+ok 245 - V110 refuse ressource inconnue avant mutation
+  ---
+  duration_ms: 11.266021
+  type: 'test'
+  ...
+# Subtest: V110 refuse spent fraudé avant mutation
+ok 246 - V110 refuse spent fraudé avant mutation
+  ---
+  duration_ms: 13.112448
+  type: 'test'
+  ...
+# Subtest: V110 refuse caisse fausse avant mutation
+ok 247 - V110 refuse caisse fausse avant mutation
+  ---
+  duration_ms: 12.987947
+  type: 'test'
+  ...
+# Subtest: V110 refuse caisse non visitée avant mutation
+ok 248 - V110 refuse caisse non visitée avant mutation
+  ---
+  duration_ms: 9.671798
+  type: 'test'
+  ...
+# Subtest: V110 refuse énergie infinie avant mutation
+ok 249 - V110 refuse énergie infinie avant mutation
+  ---
+  duration_ms: 10.61757
+  type: 'test'
+  ...
+# Subtest: V110 refuse porte hp 101 avant mutation
+ok 250 - V110 refuse porte hp 101 avant mutation
+  ---
+  duration_ms: 9.727117
+  type: 'test'
+  ...
+# Subtest: V110 refuse porte hp flottante avant mutation
+ok 251 - V110 refuse porte hp flottante avant mutation
+  ---
+  duration_ms: 15.160791
+  type: 'test'
+  ...
+# Subtest: V110 refuse sas inconnu avant mutation
+ok 252 - V110 refuse sas inconnu avant mutation
+  ---
+  duration_ms: 14.121629
+  type: 'test'
+  ...
+# Subtest: V110 refuse sas manquant avant mutation
+ok 253 - V110 refuse sas manquant avant mutation
+  ---
+  duration_ms: 11.61615
+  type: 'test'
+  ...
+# Subtest: V110 refuse brèche contradictoire avant mutation
+ok 254 - V110 refuse brèche contradictoire avant mutation
+  ---
+  duration_ms: 8.945788
+  type: 'test'
+  ...
+# Subtest: V110 refuse attaque inconnue avant mutation
+ok 255 - V110 refuse attaque inconnue avant mutation
+  ---
+  duration_ms: 13.621126
+  type: 'test'
+  ...
+# Subtest: V110 refuse métriques fausses avant mutation
+ok 256 - V110 refuse métriques fausses avant mutation
+  ---
+  duration_ms: 14.24179
+  type: 'test'
+  ...
+# Subtest: V110 refuse impact futur avant mutation
+ok 257 - V110 refuse impact futur avant mutation
+  ---
+  duration_ms: 16.169009
+  type: 'test'
+  ...
+# Subtest: V110 refuse télémétrie négative avant mutation
+ok 258 - V110 refuse télémétrie négative avant mutation
+  ---
+  duration_ms: 19.606891
+  type: 'test'
+  ...
+# Subtest: V110 refuse schéma incorrect avant mutation
+ok 259 - V110 refuse schéma incorrect avant mutation
+  ---
+  duration_ms: 11.743096
+  type: 'test'
+  ...
+# Subtest: V110 refuse acteur modifié avant mutation
+ok 260 - V110 refuse acteur modifié avant mutation
+  ---
+  duration_ms: 16.571407
+  type: 'test'
+  ...
+# Subtest: V110 migration V109 inspection v106-hadley
+ok 261 - V110 migration V109 inspection v106-hadley
+  ---
+  duration_ms: 27.34465
+  type: 'test'
+  ...
+# Subtest: V110 migration V109 inspection v106-medlab
+ok 262 - V110 migration V109 inspection v106-medlab
+  ---
+  duration_ms: 17.932525
+  type: 'test'
+  ...
+# Subtest: V110 migration V109 inspection v106-sentry
+ok 263 - V110 migration V109 inspection v106-sentry
+  ---
+  duration_ms: 24.624445
+  type: 'test'
+  ...
+# Subtest: V110 migration V109 inspection v106-sulaco
+ok 264 - V110 migration V109 inspection v106-sulaco
+  ---
+  duration_ms: 19.533036
+  type: 'test'
+  ...
+# Subtest: V110 migration V109 inspection v107-operations
+ok 265 - V110 migration V109 inspection v107-operations
+  ---
+  duration_ms: 12.685723
+  type: 'test'
+  ...
+# Subtest: V110 migration V109 inspection v107-service
+ok 266 - V110 migration V109 inspection v107-service
+  ---
+  duration_ms: 10.003433
+  type: 'test'
+  ...
+# Subtest: V110 migration V109 inspection v109-logistics
+ok 267 - V110 migration V109 inspection v109-logistics
+  ---
+  duration_ms: 10.166801
+  type: 'test'
+  ...
+# Subtest: V110 migration V109 inspection v109-reserve
+ok 268 - V110 migration V109 inspection v109-reserve
+  ---
+  duration_ms: 10.58622
+  type: 'test'
+  ...
+# Subtest: V110 migration V109 opération conserve tirs et mémoire
+ok 269 - V110 migration V109 opération conserve tirs et mémoire
+  ---
+  duration_ms: 16.280968
+  type: 'test'
+  ...
+# Subtest: V110 migration V109 corrompue refusée
+ok 270 - V110 migration V109 corrompue refusée
+  ---
+  duration_ms: 6.44949
+  type: 'test'
+  ...
+# Subtest: V110 Facehugger ne peut pas déchirer un sas métallique
+ok 271 - V110 Facehugger ne peut pas déchirer un sas métallique
+  ---
+  duration_ms: 18.26783
+  type: 'test'
+  ...
+# Subtest: V110 projectile humain ne devient pas dégât structurel implicite
+ok 272 - V110 projectile humain ne devient pas dégât structurel implicite
+  ---
+  duration_ms: 68.847399
+  type: 'test'
+  ...
+# Subtest: V110 trois plaques finies ne se rechargent pas en revenant
+ok 273 - V110 trois plaques finies ne se rechargent pas en revenant
+  ---
+  duration_ms: 181.244247
+  type: 'test'
+  ...
+# Subtest: V110 brèche et renfort partagés aux deux contrôles
+ok 274 - V110 brèche et renfort partagés aux deux contrôles
+  ---
+  duration_ms: 64.038233
+  type: 'test'
+  ...
+# Subtest: V110 ouverture d’une autre route fait abandonner la frappe
+ok 275 - V110 ouverture d’une autre route fait abandonner la frappe
+  ---
+  duration_ms: 8.724513
+  type: 'test'
+  ...
+# Subtest: V110 import refuse de cacher un renfort dans un sas ouvert
+ok 276 - V110 import refuse de cacher un renfort dans un sas ouvert
+  ---
+  duration_ms: 33.600097
+  type: 'test'
+  ...
+# Subtest: V110 import refuse de maintenir une brèche fermée
+ok 277 - V110 import refuse de maintenir une brèche fermée
+  ---
+  duration_ms: 29.423977
+  type: 'test'
+  ...
+# Subtest: V110 durée de soudure modifiée refusée à la reprise
+ok 278 - V110 durée de soudure modifiée refusée à la reprise
+  ---
+  duration_ms: 19.710736
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v106-hadley
+ok 279 - V114 room valid / roundtrip v106-hadley
+  ---
+  duration_ms: 31.036518
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v106-medlab
+ok 280 - V114 room valid / roundtrip v106-medlab
+  ---
+  duration_ms: 41.773202
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v106-sentry
+ok 281 - V114 room valid / roundtrip v106-sentry
+  ---
+  duration_ms: 24.148604
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v106-sulaco
+ok 282 - V114 room valid / roundtrip v106-sulaco
+  ---
+  duration_ms: 23.053233
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v107-operations
+ok 283 - V114 room valid / roundtrip v107-operations
+  ---
+  duration_ms: 19.6532
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v107-service
+ok 284 - V114 room valid / roundtrip v107-service
+  ---
+  duration_ms: 18.636945
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v109-logistics
+ok 285 - V114 room valid / roundtrip v109-logistics
+  ---
+  duration_ms: 12.321394
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v109-reserve
+ok 286 - V114 room valid / roundtrip v109-reserve
+  ---
+  duration_ms: 18.891369
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v112-workshop
+ok 287 - V114 room valid / roundtrip v112-workshop
+  ---
+  duration_ms: 15.051717
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v112-conduit
+ok 288 - V114 room valid / roundtrip v112-conduit
+  ---
+  duration_ms: 27.156055
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v114-gateway-medical
+ok 289 - V114 room valid / roundtrip v114-gateway-medical
+  ---
+  duration_ms: 34.840906
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v114-gateway-inquiry
+ok 290 - V114 room valid / roundtrip v114-gateway-inquiry
+  ---
+  duration_ms: 15.165429
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v114-sulaco-cryo
+ok 291 - V114 room valid / roundtrip v114-sulaco-cryo
+  ---
+  duration_ms: 13.133933
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v114-sulaco-mess
+ok 292 - V114 room valid / roundtrip v114-sulaco-mess
+  ---
+  duration_ms: 18.928962
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v114-sulaco-armory
+ok 293 - V114 room valid / roundtrip v114-sulaco-armory
+  ---
+  duration_ms: 12.951689
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v114-sulaco-cargo
+ok 294 - V114 room valid / roundtrip v114-sulaco-cargo
+  ---
+  duration_ms: 13.941457
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v114-dropship
+ok 295 - V114 room valid / roundtrip v114-dropship
+  ---
+  duration_ms: 11.392625
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v114-apc
+ok 296 - V114 room valid / roundtrip v114-apc
+  ---
+  duration_ms: 12.695102
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v114-colony-mess
+ok 297 - V114 room valid / roundtrip v114-colony-mess
+  ---
+  duration_ms: 12.935223
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v114-colony-drain
+ok 298 - V114 room valid / roundtrip v114-colony-drain
+  ---
+  duration_ms: 11.67275
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v114-processor-entry
+ok 299 - V114 room valid / roundtrip v114-processor-entry
+  ---
+  duration_ms: 11.927521
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v114-processor-gallery
+ok 300 - V114 room valid / roundtrip v114-processor-gallery
+  ---
+  duration_ms: 11.770433
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v114-hive-cocoons
+ok 301 - V114 room valid / roundtrip v114-hive-cocoons
+  ---
+  duration_ms: 13.685165
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v114-queen-nursery
+ok 302 - V114 room valid / roundtrip v114-queen-nursery
+  ---
+  duration_ms: 11.890618
+  type: 'test'
+  ...
+# Subtest: V114 room valid / roundtrip v114-landing-pad
+ok 303 - V114 room valid / roundtrip v114-landing-pad
+  ---
+  duration_ms: 13.69046
+  type: 'test'
+  ...
+# Subtest: V114 reciprocal jambed link residential-ops
+ok 304 - V114 reciprocal jambed link residential-ops
+  ---
+  duration_ms: 0.664341
+  type: 'test'
+  ...
+# Subtest: V114 reciprocal jambed link ops-service
+ok 305 - V114 reciprocal jambed link ops-service
+  ---
+  duration_ms: 0.298526
+  type: 'test'
+  ...
+# Subtest: V114 reciprocal jambed link ops-medlab
+ok 306 - V114 reciprocal jambed link ops-medlab
+  ---
+  duration_ms: 0.312522
+  type: 'test'
+  ...
+# Subtest: V114 reciprocal jambed link ops-sentry
+ok 307 - V114 reciprocal jambed link ops-sentry
+  ---
+  duration_ms: 0.47525
+  type: 'test'
+  ...
+# Subtest: V114 reciprocal jambed link medical-service
+ok 308 - V114 reciprocal jambed link medical-service
+  ---
+  duration_ms: 0.538661
+  type: 'test'
+  ...
+# Subtest: V114 reciprocal jambed link ops-logistics
+ok 309 - V114 reciprocal jambed link ops-logistics
+  ---
+  duration_ms: 0.274077
+  type: 'test'
+  ...
+# Subtest: V114 reciprocal jambed link logistics-reserve
+ok 310 - V114 reciprocal jambed link logistics-reserve
+  ---
+  duration_ms: 0.243131
+  type: 'test'
+  ...
+# Subtest: V114 reciprocal jambed link reserve-service
+ok 311 - V114 reciprocal jambed link reserve-service
+  ---
+  duration_ms: 0.252972
+  type: 'test'
+  ...
+# Subtest: V114 reciprocal jambed link ops-optics
+ok 312 - V114 reciprocal jambed link ops-optics
+  ---
+  duration_ms: 0.333099
+  type: 'test'
+  ...
+# Subtest: V114 reciprocal jambed link optics-conduit
+ok 313 - V114 reciprocal jambed link optics-conduit
+  ---
+  duration_ms: 0.235552
+  type: 'test'
+  ...
+# Subtest: V114 reciprocal jambed link conduit-medical
+ok 314 - V114 reciprocal jambed link conduit-medical
+  ---
+  duration_ms: 0.29425
+  type: 'test'
+  ...
+# Subtest: V114 reciprocal jambed link gateway-inquiry
+ok 315 - V114 reciprocal jambed link gateway-inquiry
+  ---
+  duration_ms: 0.266769
+  type: 'test'
+  ...
+# Subtest: V114 reciprocal jambed link sulaco-wakeup
+ok 316 - V114 reciprocal jambed link sulaco-wakeup
+  ---
+  duration_ms: 0.270701
+  type: 'test'
+  ...
+# Subtest: V114 reciprocal jambed link sulaco-loadout
+ok 317 - V114 reciprocal jambed link sulaco-loadout
+  ---
+  duration_ms: 0.235008
+  type: 'test'
+  ...
+# Subtest: V114 reciprocal jambed link sulaco-bay
+ok 318 - V114 reciprocal jambed link sulaco-bay
+  ---
+  duration_ms: 0.203514
+  type: 'test'
+  ...
+# Subtest: V114 reciprocal jambed link processor-walk
+ok 319 - V114 reciprocal jambed link processor-walk
+  ---
+  duration_ms: 0.227377
+  type: 'test'
+  ...
+# Subtest: V114 reciprocal jambed link processor-hive
+ok 320 - V114 reciprocal jambed link processor-hive
+  ---
+  duration_ms: 0.193115
+  type: 'test'
+  ...
+# Subtest: V114 reciprocal jambed link hive-nursery
+ok 321 - V114 reciprocal jambed link hive-nursery
+  ---
+  duration_ms: 0.176337
+  type: 'test'
+  ...
+# Subtest: V114 reciprocal jambed link residential-mess
+ok 322 - V114 reciprocal jambed link residential-mess
+  ---
+  duration_ms: 0.207123
+  type: 'test'
+  ...
+# Subtest: V114 reciprocal jambed link medical-drain
+ok 323 - V114 reciprocal jambed link medical-drain
+  ---
+  duration_ms: 0.241738
+  type: 'test'
+  ...
+# Subtest: V114 architecture audit, no unsupported internal door
+ok 324 - V114 architecture audit, no unsupported internal door
+  ---
+  duration_ms: 0.426024
+  type: 'test'
+  ...
+# Subtest: V114 film atlas admits absent scenes, separates edition
+ok 325 - V114 film atlas admits absent scenes, separates edition
+  ---
+  duration_ms: 0.111689
+  type: 'test'
+  ...
+# Subtest: V114 every named cast has unique identity
+ok 326 - V114 every named cast has unique identity
+  ---
+  duration_ms: 0.109255
+  type: 'test'
+  ...
+# Subtest: V114 Gateway civilian inspection excludes Marine team and firing
+ok 327 - V114 Gateway civilian inspection excludes Marine team and firing
+  ---
+  duration_ms: 3.993849
+  type: 'test'
+  ...
+# Subtest: V114 nursery return excludes dead Marines
+ok 328 - V114 nursery return excludes dead Marines
+  ---
+  duration_ms: 2.65038
+  type: 'test'
+  ...
+# Subtest: V114 briefing hangar separated from final
+ok 329 - V114 briefing hangar separated from final
+  ---
+  duration_ms: 2.82914
+  type: 'test'
+  ...
+# Subtest: V114 weapon functional finite trace pulse
+ok 330 - V114 weapon functional finite trace pulse
+  ---
+  duration_ms: 6.875275
+  type: 'test'
+  ...
+# Subtest: V114 weapon functional finite trace shotgun
+ok 331 - V114 weapon functional finite trace shotgun
+  ---
+  duration_ms: 7.14135
+  type: 'test'
+  ...
+# Subtest: V114 weapon functional finite trace flame
+ok 332 - V114 weapon functional finite trace flame
+  ---
+  duration_ms: 3.912519
+  type: 'test'
+  ...
+# Subtest: V114 weapon functional finite trace smartgun
+ok 333 - V114 weapon functional finite trace smartgun
+  ---
+  duration_ms: 3.559006
+  type: 'test'
+  ...
+# Subtest: V114 weapon functional finite trace pistol
+ok 334 - V114 weapon functional finite trace pistol
+  ---
+  duration_ms: 3.918472
+  type: 'test'
+  ...
+# Subtest: V114 weapon functional finite trace launcher
+ok 335 - V114 weapon functional finite trace launcher
+  ---
+  duration_ms: 4.290997
+  type: 'test'
+  ...
+# Subtest: V114 weapon functional finite trace grenade
+ok 336 - V114 weapon functional finite trace grenade
+  ---
+  duration_ms: 4.867379
+  type: 'test'
+  ...
+# Subtest: V114 weapon functional finite trace knife
+ok 337 - V114 weapon functional finite trace knife
+  ---
+  duration_ms: 4.34575
+  type: 'test'
+  ...
+# Subtest: V114 weapon stopped by fixed wall pulse
+ok 338 - V114 weapon stopped by fixed wall pulse
+  ---
+  duration_ms: 5.467303
+  type: 'test'
+  ...
+# Subtest: V114 weapon stopped by fixed wall shotgun
+ok 339 - V114 weapon stopped by fixed wall shotgun
+  ---
+  duration_ms: 5.645362
+  type: 'test'
+  ...
+# Subtest: V114 weapon stopped by fixed wall flame
+ok 340 - V114 weapon stopped by fixed wall flame
+  ---
+  duration_ms: 14.601982
+  type: 'test'
+  ...
+# Subtest: V114 weapon stopped by fixed wall smartgun
+ok 341 - V114 weapon stopped by fixed wall smartgun
+  ---
+  duration_ms: 7.376676
+  type: 'test'
+  ...
+# Subtest: V114 weapon stopped by fixed wall pistol
+ok 342 - V114 weapon stopped by fixed wall pistol
+  ---
+  duration_ms: 3.754034
+  type: 'test'
+  ...
+# Subtest: V114 weapon stopped by fixed wall launcher
+ok 343 - V114 weapon stopped by fixed wall launcher
+  ---
+  duration_ms: 5.076519
+  type: 'test'
+  ...
+# Subtest: V114 weapon stopped by fixed wall grenade
+ok 344 - V114 weapon stopped by fixed wall grenade
+  ---
+  duration_ms: 5.429516
+  type: 'test'
+  ...
+# Subtest: V114 weapon stopped by fixed wall knife
+ok 345 - V114 weapon stopped by fixed wall knife
+  ---
+  duration_ms: 4.616247
+  type: 'test'
+  ...
+# Subtest: V114 shotgun seven traces consume one shell
+ok 346 - V114 shotgun seven traces consume one shell
+  ---
+  duration_ms: 3.546683
+  type: 'test'
+  ...
+# Subtest: V114 no moving projectile beyond newly closed door
+ok 347 - V114 no moving projectile beyond newly closed door
+  ---
+  duration_ms: 3.473255
+  type: 'test'
+  ...
+# Subtest: V114 blast risks own team, never protection magic
+ok 348 - V114 blast risks own team, never protection magic
+  ---
+  duration_ms: 4.261534
+  type: 'test'
+  ...
+# Subtest: V114 grenade resume in flight and pause
+ok 349 - V114 grenade resume in flight and pause
+  ---
+  duration_ms: 15.958619
+  type: 'test'
+  ...
+# Subtest: V114 collect canceled by moving, no grant
+ok 350 - V114 collect canceled by moving, no grant
+  ---
+  duration_ms: 3.226434
+  type: 'test'
+  ...
+# Subtest: V114 collect mid-action roundtrip consumed once
+ok 351 - V114 collect mid-action roundtrip consumed once
+  ---
+  duration_ms: 13.705924
+  type: 'test'
+  ...
+# Subtest: V114 Newt cannot own, select or receive arms
+ok 352 - V114 Newt cannot own, select or receive arms
+  ---
+  duration_ms: 13.083757
+  type: 'test'
+  ...
+# Subtest: V114 secondary stock does not convert logistics pulse
+ok 353 - V114 secondary stock does not convert logistics pulse
+  ---
+  duration_ms: 3.124706
+  type: 'test'
+  ...
+# Subtest: V114 invalid state refused atomically stock
+ok 354 - V114 invalid state refused atomically stock
+  ---
+  duration_ms: 14.371747
+  type: 'test'
+  ...
+# Subtest: V114 invalid state refused atomically selected
+ok 355 - V114 invalid state refused atomically selected
+  ---
+  duration_ms: 29.351348
+  type: 'test'
+  ...
+# Subtest: V114 invalid state refused atomically unknown
+ok 356 - V114 invalid state refused atomically unknown
+  ---
+  duration_ms: 18.140164
+  type: 'test'
+  ...
+# Subtest: V114 invalid state refused atomically geometry
+ok 357 - V114 invalid state refused atomically geometry
+  ---
+  duration_ms: 12.298401
+  type: 'test'
+  ...
+# Subtest: V114 invalid state refused atomically actor-look
+ok 358 - V114 invalid state refused atomically actor-look
+  ---
+  duration_ms: 13.21303
+  type: 'test'
+  ...
+# Subtest: V114 invalid state refused atomically flight
+ok 359 - V114 invalid state refused atomically flight
+  ---
+  duration_ms: 19.2403
+  type: 'test'
+  ...
+# Subtest: V114 real V113 migration preserves v106-hadley
+ok 360 - V114 real V113 migration preserves v106-hadley
+  ---
+  duration_ms: 31.623978
+  type: 'test'
+  ...
+# Subtest: V114 real V113 migration preserves v107-operations
+ok 361 - V114 real V113 migration preserves v107-operations
+  ---
+  duration_ms: 20.288393
+  type: 'test'
+  ...
+# Subtest: V114 real V113 migration preserves v106-medlab
+ok 362 - V114 real V113 migration preserves v106-medlab
+  ---
+  duration_ms: 26.243242
+  type: 'test'
+  ...
+# Subtest: V114 real V113 migration preserves v106-sulaco
+ok 363 - V114 real V113 migration preserves v106-sulaco
+  ---
+  duration_ms: 21.390412
+  type: 'test'
+  ...
+# Subtest: V114 real V113 migration preserves v112-workshop
+ok 364 - V114 real V113 migration preserves v112-workshop
+  ---
+  duration_ms: 24.609993
+  type: 'test'
+  ...
+# Subtest: dry run n’écrit aucun addon
+ok 365 - dry run n’écrit aucun addon
+  ---
+  duration_ms: 41.460291
+  type: 'test'
+  ...
+# Subtest: staging garde paquet et source natifs inchangés
+ok 366 - staging garde paquet et source natifs inchangés
+  ---
+  duration_ms: 72.349209
+  type: 'test'
+  ...
+# Subtest: rollback après écriture et échec contrôle cible
+ok 367 - rollback après écriture et échec contrôle cible
+  ---
+  duration_ms: 63.845634
+  type: 'test'
+  ...
+# Subtest: refuse source native modifiée
+ok 368 - refuse source native modifiée
+  ---
+  duration_ms: 26.914488
+  type: 'test'
+  ...
+# Subtest: refuse source symbolique
+ok 369 - refuse source symbolique
+  ---
+  duration_ms: 5.612645
+  type: 'test'
+  ...
+# Subtest: refuse destination symbolique
+ok 370 - refuse destination symbolique
+  ---
+  duration_ms: 8.458012
+  type: 'test'
+  ...
+# Subtest: refuse d’écraser modification ultérieure du module
+ok 371 - refuse d’écraser modification ultérieure du module
+  ---
+  duration_ms: 71.443627
+  type: 'test'
+  ...
+# Subtest: version native incorrecte refusée
+ok 372 - version native incorrecte refusée
+  ---
+  duration_ms: 7.066727
+  type: 'test'
+  ...
+# Subtest: V111 huit profils issus des huit circuits et treize lampes existantes
+ok 373 - V111 huit profils issus des huit circuits et treize lampes existantes
+  ---
+  duration_ms: 2.801158
+  type: 'test'
+  ...
+# Subtest: V111 défaut nominal identique pour les corps et ressources
+ok 374 - V111 défaut nominal identique pour les corps et ressources
+  ---
+  duration_ms: 18.248723
+  type: 'test'
+  ...
+# Subtest: V111 contrôle K hors portée refusé
+ok 375 - V111 contrôle K hors portée refusé
+  ---
+  duration_ms: 18.482254
+  type: 'test'
+  ...
+# Subtest: V111 coupure exige 0,95 s sans changer avant la fin
+ok 376 - V111 coupure exige 0,95 s sans changer avant la fin
+  ---
+  duration_ms: 29.592803
+  type: 'test'
+  ...
+# Subtest: V111 E au contrôle service emprunte la même action
+ok 377 - V111 E au contrôle service emprunte la même action
+  ---
+  duration_ms: 9.039153
+  type: 'test'
+  ...
+# Subtest: V111 K répété annule sans manœuvrer
+ok 378 - V111 K répété annule sans manœuvrer
+  ---
+  duration_ms: 4.978324
+  type: 'test'
+  ...
+# Subtest: V111 mouvement interrompt sans toucher au circuit
+ok 379 - V111 mouvement interrompt sans toucher au circuit
+  ---
+  duration_ms: 4.568762
+  type: 'test'
+  ...
+# Subtest: V111 tir interrompt et garde la consommation normale de balle
+ok 380 - V111 tir interrompt et garde la consommation normale de balle
+  ---
+  duration_ms: 2.493322
+  type: 'test'
+  ...
+# Subtest: V111 impact interrompt sans débit artificiel
+ok 381 - V111 impact interrompt sans débit artificiel
+  ---
+  duration_ms: 2.040962
+  type: 'test'
+  ...
+# Subtest: V111 perte de portée détectée avant accomplissement
+ok 382 - V111 perte de portée détectée avant accomplissement
+  ---
+  duration_ms: 2.044366
+  type: 'test'
+  ...
+# Subtest: V111 pause suspend ouverture et orientation et touche K
+ok 383 - V111 pause suspend ouverture et orientation et touche K
+  ---
+  duration_ms: 2.821842
+  type: 'test'
+  ...
+# Subtest: V111 reprise exacte à mi-coupure
+ok 384 - V111 reprise exacte à mi-coupure
+  ---
+  duration_ms: 13.780405
+  type: 'test'
+  ...
+# Subtest: V111 restauration lampe ne touche ni portes ni relais réseau
+ok 385 - V111 restauration lampe ne touche ni portes ni relais réseau
+  ---
+  duration_ms: 2.323955
+  type: 'test'
+  ...
+# Subtest: V111 circuit changé extérieurement annule action
+ok 386 - V111 circuit changé extérieurement annule action
+  ---
+  duration_ms: 1.137006
+  type: 'test'
+  ...
+# Subtest: V111 aucun crédit de mission pour le service électrique
+ok 387 - V111 aucun crédit de mission pour le service électrique
+  ---
+  duration_ms: 10.184478
+  type: 'test'
+  ...
+# Subtest: V111 la torche ne consomme pas de ressources invisibles
+ok 388 - V111 la torche ne consomme pas de ressources invisibles
+  ---
+  duration_ms: 4.599081
+  type: 'test'
+  ...
+# Subtest: V111 visée invalide rejetée sans effet
+ok 389 - V111 visée invalide rejetée sans effet
+  ---
+  duration_ms: 2.64743
+  type: 'test'
+  ...
+# Subtest: V111 visée gauche/droite persistante sans mouvement
+ok 390 - V111 visée gauche/droite persistante sans mouvement
+  ---
+  duration_ms: 10.910552
+  type: 'test'
+  ...
+# Subtest: V111 faisceau révèle une cible éclairée à 330 unités
+ok 391 - V111 faisceau révèle une cible éclairée à 330 unités
+  ---
+  duration_ms: 0.506912
+  type: 'test'
+  ...
+# Subtest: V111 hors cône une cible éloignée disparaît sans changer sa vie
+ok 392 - V111 hors cône une cible éloignée disparaît sans changer sa vie
+  ---
+  duration_ms: 0.25978
+  type: 'test'
+  ...
+# Subtest: V111 torche éteinte et cible lointaine non reconnue
+ok 393 - V111 torche éteinte et cible lointaine non reconnue
+  ---
+  duration_ms: 0.166098
+  type: 'test'
+  ...
+# Subtest: V111 portée proche reste perceptible sans torche
+ok 394 - V111 portée proche reste perceptible sans torche
+  ---
+  duration_ms: 0.147473
+  type: 'test'
+  ...
+# Subtest: V111 la torche allumée expose aussi son porteur
+ok 395 - V111 la torche allumée expose aussi son porteur
+  ---
+  duration_ms: 0.146532
+  type: 'test'
+  ...
+# Subtest: V111 mur opaque bloque faisceau et perception
+ok 396 - V111 mur opaque bloque faisceau et perception
+  ---
+  duration_ms: 0.178911
+  type: 'test'
+  ...
+# Subtest: V111 verre laisse passer le faisceau mais pas les balles
+ok 397 - V111 verre laisse passer le faisceau mais pas les balles
+  ---
+  duration_ms: 0.208881
+  type: 'test'
+  ...
+# Subtest: V111 au-delà de 520 unités le cône ne révèle pas
+ok 398 - V111 au-delà de 520 unités le cône ne révèle pas
+  ---
+  duration_ms: 0.200514
+  type: 'test'
+  ...
+# Subtest: V111 chaque rayon de rendu s’arrête avant le mur
+ok 399 - V111 chaque rayon de rendu s’arrête avant le mur
+  ---
+  duration_ms: 1.196315
+  type: 'test'
+  ...
+# Subtest: V111 rayons jamais au-delà des limites physiques
+ok 400 - V111 rayons jamais au-delà des limites physiques
+  ---
+  duration_ms: 0.763109
+  type: 'test'
+  ...
+# Subtest: V111 pas de faisceau fantôme dans une pièce inactive
+ok 401 - V111 pas de faisceau fantôme dans une pièce inactive
+  ---
+  duration_ms: 0.229129
+  type: 'test'
+  ...
+# Subtest: V111 flash de tir expose puis expire réellement
+ok 402 - V111 flash de tir expose puis expire réellement
+  ---
+  duration_ms: 0.296673
+  type: 'test'
+  ...
+# Subtest: V111 le flash derrière le mur ne traverse pas
+ok 403 - V111 le flash derrière le mur ne traverse pas
+  ---
+  duration_ms: 0.243983
+  type: 'test'
+  ...
+# Subtest: V111 chalumeau éclaire seulement à proximité
+ok 404 - V111 chalumeau éclaire seulement à proximité
+  ---
+  duration_ms: 0.162737
+  type: 'test'
+  ...
+# Subtest: V111 corps et projectiles inchangés quand on coupe
+ok 405 - V111 corps et projectiles inchangés quand on coupe
+  ---
+  duration_ms: 3.047772
+  type: 'test'
+  ...
+# Subtest: V111 couper ne supprime pas un indice acoustique
+ok 406 - V111 couper ne supprime pas un indice acoustique
+  ---
+  duration_ms: 28.097107
+  type: 'test'
+  ...
+# Subtest: V111 IA sans lumière ne reçoit pas une vue omnisciente
+ok 407 - V111 IA sans lumière ne reçoit pas une vue omnisciente
+  ---
+  duration_ms: 2.20312
+  type: 'test'
+  ...
+# Subtest: V111 reconnaissance nominale égale à la géométrie V110
+ok 408 - V111 reconnaissance nominale égale à la géométrie V110
+  ---
+  duration_ms: 0.204161
+  type: 'test'
+  ...
+# Subtest: V111 migration V110 exacte : v106-hadley
+ok 409 - V111 migration V110 exacte : v106-hadley
+  ---
+  duration_ms: 18.71696
+  type: 'test'
+  ...
+# Subtest: V111 migration V110 exacte : v106-medlab
+ok 410 - V111 migration V110 exacte : v106-medlab
+  ---
+  duration_ms: 20.412
+  type: 'test'
+  ...
+# Subtest: V111 migration V110 exacte : v106-sentry
+ok 411 - V111 migration V110 exacte : v106-sentry
+  ---
+  duration_ms: 17.979156
+  type: 'test'
+  ...
+# Subtest: V111 migration V110 exacte : v106-sulaco
+ok 412 - V111 migration V110 exacte : v106-sulaco
+  ---
+  duration_ms: 16.843951
+  type: 'test'
+  ...
+# Subtest: V111 migration V110 exacte : v107-operations
+ok 413 - V111 migration V110 exacte : v107-operations
+  ---
+  duration_ms: 18.629719
+  type: 'test'
+  ...
+# Subtest: V111 migration V110 exacte : v107-service
+ok 414 - V111 migration V110 exacte : v107-service
+  ---
+  duration_ms: 17.410731
+  type: 'test'
+  ...
+# Subtest: V111 migration V110 exacte : v109-logistics
+ok 415 - V111 migration V110 exacte : v109-logistics
+  ---
+  duration_ms: 16.164202
+  type: 'test'
+  ...
+# Subtest: V111 migration V110 exacte : v109-reserve
+ok 416 - V111 migration V110 exacte : v109-reserve
+  ---
+  duration_ms: 21.541923
+  type: 'test'
+  ...
+# Subtest: V111 migration garde un ancien circuit déjà coupé
+ok 417 - V111 migration garde un ancien circuit déjà coupé
+  ---
+  duration_ms: 16.611217
+  type: 'test'
+  ...
+# Subtest: V111 import atomique refuse schema
+ok 418 - V111 import atomique refuse schema
+  ---
+  duration_ms: 11.734386
+  type: 'test'
+  ...
+# Subtest: V111 import atomique refuse angleInf
+ok 419 - V111 import atomique refuse angleInf
+  ---
+  duration_ms: 9.292041
+  type: 'test'
+  ...
+# Subtest: V111 import atomique refuse angleHorsPlage
+ok 420 - V111 import atomique refuse angleHorsPlage
+  ---
+  duration_ms: 11.092969
+  type: 'test'
+  ...
+# Subtest: V111 import atomique refuse onString
+ok 421 - V111 import atomique refuse onString
+  ---
+  duration_ms: 9.24872
+  type: 'test'
+  ...
+# Subtest: V111 import atomique refuse unknown
+ok 422 - V111 import atomique refuse unknown
+  ---
+  duration_ms: 8.378212
+  type: 'test'
+  ...
+# Subtest: V111 import atomique refuse metricsUnknown
+ok 423 - V111 import atomique refuse metricsUnknown
+  ---
+  duration_ms: 6.005029
+  type: 'test'
+  ...
+# Subtest: V111 import atomique refuse metricsNegative
+ok 424 - V111 import atomique refuse metricsNegative
+  ---
+  duration_ms: 6.686807
+  type: 'test'
+  ...
+# Subtest: V111 import atomique refuse missingTorch
+ok 425 - V111 import atomique refuse missingTorch
+  ---
+  duration_ms: 18.043984
+  type: 'test'
+  ...
+# Subtest: V111 import atomique refuse parity
+ok 426 - V111 import atomique refuse parity
+  ---
+  duration_ms: 10.481937
+  type: 'test'
+  ...
+# Subtest: V111 import atomique refuse falseBalance
+ok 427 - V111 import atomique refuse falseBalance
+  ---
+  duration_ms: 12.256228
+  type: 'test'
+  ...
+# Subtest: V111 import atomique refuse unknownActorField
+ok 428 - V111 import atomique refuse unknownActorField
+  ---
+  duration_ms: 9.237194
+  type: 'test'
+  ...
+# Subtest: V111 import atomique refuse unknownTop
+ok 429 - V111 import atomique refuse unknownTop
+  ---
+  duration_ms: 3.254562
+  type: 'test'
+  ...
+# Subtest: V111 geste sauvegardé refuse duration
+ok 430 - V111 geste sauvegardé refuse duration
+  ---
+  duration_ms: 9.464539
+  type: 'test'
+  ...
+# Subtest: V111 geste sauvegardé refuse id
+ok 431 - V111 geste sauvegardé refuse id
+  ---
+  duration_ms: 6.308709
+  type: 'test'
+  ...
+# Subtest: V111 geste sauvegardé refuse initial
+ok 432 - V111 geste sauvegardé refuse initial
+  ---
+  duration_ms: 5.945414
+  type: 'test'
+  ...
+# Subtest: V111 geste sauvegardé refuse x
+ok 433 - V111 geste sauvegardé refuse x
+  ---
+  duration_ms: 8.438619
+  type: 'test'
+  ...
+# Subtest: V111 geste sauvegardé refuse future
+ok 434 - V111 geste sauvegardé refuse future
+  ---
+  duration_ms: 8.243007
+  type: 'test'
+  ...
+# Subtest: V111 geste sauvegardé refuse foreign
+ok 435 - V111 geste sauvegardé refuse foreign
+  ---
+  duration_ms: 8.57607
+  type: 'test'
+  ...
+# Subtest: V111 geste sauvegardé refuse extra
+ok 436 - V111 geste sauvegardé refuse extra
+  ---
+  duration_ms: 8.687811
+  type: 'test'
+  ...
+# Subtest: V111 nouveau replay recrée les circuits sans conserver l’obscurité
+ok 437 - V111 nouveau replay recrée les circuits sans conserver l’obscurité
+  ---
+  duration_ms: 5.149728
+  type: 'test'
+  ...
+# Subtest: V109 géométrie et inspection v106-hadley
+ok 438 - V109 géométrie et inspection v106-hadley
+  ---
+  duration_ms: 14.99254
+  type: 'test'
+  ...
+# Subtest: V109 géométrie et inspection v106-medlab
+ok 439 - V109 géométrie et inspection v106-medlab
+  ---
+  duration_ms: 7.32918
+  type: 'test'
+  ...
+# Subtest: V109 géométrie et inspection v106-sentry
+ok 440 - V109 géométrie et inspection v106-sentry
+  ---
+  duration_ms: 6.348529
+  type: 'test'
+  ...
+# Subtest: V109 géométrie et inspection v106-sulaco
+ok 441 - V109 géométrie et inspection v106-sulaco
+  ---
+  duration_ms: 6.863038
+  type: 'test'
+  ...
+# Subtest: V109 géométrie et inspection v107-operations
+ok 442 - V109 géométrie et inspection v107-operations
+  ---
+  duration_ms: 5.824193
+  type: 'test'
+  ...
+# Subtest: V109 géométrie et inspection v107-service
+ok 443 - V109 géométrie et inspection v107-service
+  ---
+  duration_ms: 5.930532
+  type: 'test'
+  ...
+# Subtest: V109 géométrie et inspection v109-logistics
+ok 444 - V109 géométrie et inspection v109-logistics
+  ---
+  duration_ms: 7.25226
+  type: 'test'
+  ...
+# Subtest: V109 géométrie et inspection v109-reserve
+ok 445 - V109 géométrie et inspection v109-reserve
+  ---
+  duration_ms: 5.480751
+  type: 'test'
+  ...
+# Subtest: V109 liaison réciproque residential-ops
+ok 446 - V109 liaison réciproque residential-ops
+  ---
+  duration_ms: 0.803754
+  type: 'test'
+  ...
+# Subtest: V109 liaison réciproque ops-service
+ok 447 - V109 liaison réciproque ops-service
+  ---
+  duration_ms: 0.673963
+  type: 'test'
+  ...
+# Subtest: V109 liaison réciproque ops-medlab
+ok 448 - V109 liaison réciproque ops-medlab
+  ---
+  duration_ms: 0.475984
+  type: 'test'
+  ...
+# Subtest: V109 liaison réciproque ops-sentry
+ok 449 - V109 liaison réciproque ops-sentry
+  ---
+  duration_ms: 0.28097
+  type: 'test'
+  ...
+# Subtest: V109 liaison réciproque medical-service
+ok 450 - V109 liaison réciproque medical-service
+  ---
+  duration_ms: 0.292847
+  type: 'test'
+  ...
+# Subtest: V109 liaison réciproque ops-logistics
+ok 451 - V109 liaison réciproque ops-logistics
+  ---
+  duration_ms: 0.631973
+  type: 'test'
+  ...
+# Subtest: V109 liaison réciproque logistics-reserve
+ok 452 - V109 liaison réciproque logistics-reserve
+  ---
+  duration_ms: 0.310499
+  type: 'test'
+  ...
+# Subtest: V109 liaison réciproque reserve-service
+ok 453 - V109 liaison réciproque reserve-service
+  ---
+  duration_ms: 0.274016
+  type: 'test'
+  ...
+# Subtest: V109 huit lieux dont sept opérationnels, deux nouveaux ennemis seulement
+ok 454 - V109 huit lieux dont sept opérationnels, deux nouveaux ennemis seulement
+  ---
+  duration_ms: 0.11731
+  type: 'test'
+  ...
+# Subtest: V109 stocks absents à insertion
+ok 455 - V109 stocks absents à insertion
+  ---
+  duration_ms: 1.168673
+  type: 'test'
+  ...
+# Subtest: V109 caisse ne donne rien avant fin
+ok 456 - V109 caisse ne donne rien avant fin
+  ---
+  duration_ms: 3.908968
+  type: 'test'
+  ...
+# Subtest: V109 collecte finie et aucune duplication
+ok 457 - V109 collecte finie et aucune duplication
+  ---
+  duration_ms: 3.075929
+  type: 'test'
+  ...
+# Subtest: V109 collecte inaccessible depuis mauvaise pièce
+ok 458 - V109 collecte inaccessible depuis mauvaise pièce
+  ---
+  duration_ms: 1.081175
+  type: 'test'
+  ...
+# Subtest: V109 une cloison ferme la portée de collecte
+ok 459 - V109 une cloison ferme la portée de collecte
+  ---
+  duration_ms: 1.388426
+  type: 'test'
+  ...
+# Subtest: V109 mouvement annule stock sans ressource
+ok 460 - V109 mouvement annule stock sans ressource
+  ---
+  duration_ms: 1.508868
+  type: 'test'
+  ...
+# Subtest: V109 pause suspend stock
+ok 461 - V109 pause suspend stock
+  ---
+  duration_ms: 2.047104
+  type: 'test'
+  ...
+# Subtest: V109 tir annule collecte
+ok 462 - V109 tir annule collecte
+  ---
+  duration_ms: 1.835805
+  type: 'test'
+  ...
+# Subtest: V109 impact annule caisse
+ok 463 - V109 impact annule caisse
+  ---
+  duration_ms: 1.278813
+  type: 'test'
+  ...
+# Subtest: V109 18 cartouches exactes et un lot consommé
+ok 464 - V109 18 cartouches exactes et un lot consommé
+  ---
+  duration_ms: 3.950217
+  type: 'test'
+  ...
+# Subtest: V109 plafond de charge 96, pas de débordement
+ok 465 - V109 plafond de charge 96, pas de débordement
+  ---
+  duration_ms: 3.083396
+  type: 'test'
+  ...
+# Subtest: V109 ammo refuse réserve vide
+ok 466 - V109 ammo refuse réserve vide
+  ---
+  duration_ms: 1.089261
+  type: 'test'
+  ...
+# Subtest: V109 soin exact 30 points
+ok 467 - V109 soin exact 30 points
+  ---
+  duration_ms: 9.999687
+  type: 'test'
+  ...
+# Subtest: V109 soin plafonne à 100
+ok 468 - V109 soin plafonne à 100
+  ---
+  duration_ms: 6.793131
+  type: 'test'
+  ...
+# Subtest: V109 soin interdit sur mort et sans renaissance
+ok 469 - V109 soin interdit sur mort et sans renaissance
+  ---
+  duration_ms: 3.964343
+  type: 'test'
+  ...
+# Subtest: V109 Newt soignable, pas armable
+ok 470 - V109 Newt soignable, pas armable
+  ---
+  duration_ms: 6.556378
+  type: 'test'
+  ...
+# Subtest: V109 personnel aidé à portée obligatoire
+ok 471 - V109 personnel aidé à portée obligatoire
+  ---
+  duration_ms: 3.156238
+  type: 'test'
+  ...
+# Subtest: V109 soin annulé si cible bouge
+ok 472 - V109 soin annulé si cible bouge
+  ---
+  duration_ms: 3.552417
+  type: 'test'
+  ...
+# Subtest: V109 soin annulé si cible touchée
+ok 473 - V109 soin annulé si cible touchée
+  ---
+  duration_ms: 3.015125
+  type: 'test'
+  ...
+# Subtest: V109 ordre donné à cible annule soin
+ok 474 - V109 ordre donné à cible annule soin
+  ---
+  duration_ms: 2.835914
+  type: 'test'
+  ...
+# Subtest: V109 deux actions simultanées refusées
+ok 475 - V109 deux actions simultanées refusées
+  ---
+  duration_ms: 3.116357
+  type: 'test'
+  ...
+# Subtest: V109 aucun coût quand soin interrompu par pause puis marche
+ok 476 - V109 aucun coût quand soin interrompu par pause puis marche
+  ---
+  duration_ms: 3.189886
+  type: 'test'
+  ...
+# Subtest: V109 stock de cartouche exact
+ok 477 - V109 stock de cartouche exact
+  ---
+  duration_ms: 19.475209
+  type: 'test'
+  ...
+# Subtest: V109 sentinelle n’utilise pas lot personnel
+ok 478 - V109 sentinelle n’utilise pas lot personnel
+  ---
+  duration_ms: 1.677936
+  type: 'test'
+  ...
+# Subtest: V109 cartouche ravitaille 40 et pas davantage
+ok 479 - V109 cartouche ravitaille 40 et pas davantage
+  ---
+  duration_ms: 6.552571
+  type: 'test'
+  ...
+# Subtest: V109 cartouche refuse réserve déjà pleine
+ok 480 - V109 cartouche refuse réserve déjà pleine
+  ---
+  duration_ms: 3.981511
+  type: 'test'
+  ...
+# Subtest: V109 alarme ne change pas population
+ok 481 - V109 alarme ne change pas population
+  ---
+  duration_ms: 1.688735
+  type: 'test'
+  ...
+# Subtest: V109 alarme émet un stimulus réel
+ok 482 - V109 alarme émet un stimulus réel
+  ---
+  duration_ms: 4.294711
+  type: 'test'
+  ...
+# Subtest: V109 alarme bloquée par refroidissement
+ok 483 - V109 alarme bloquée par refroidissement
+  ---
+  duration_ms: 1.876185
+  type: 'test'
+  ...
+# Subtest: V109 alarme et refroidissement suspendus en pause
+ok 484 - V109 alarme et refroidissement suspendus en pause
+  ---
+  duration_ms: 1.644986
+  type: 'test'
+  ...
+# Subtest: V109 alarme finit à huit secondes, pas de relance automatique
+ok 485 - V109 alarme finit à huit secondes, pas de relance automatique
+  ---
+  duration_ms: 5.958552
+  type: 'test'
+  ...
+# Subtest: V109 sas nord isolé coupe propagation inter-pièces de la sirène
+ok 486 - V109 sas nord isolé coupe propagation inter-pièces de la sirène
+  ---
+  duration_ms: 1.256605
+  type: 'test'
+  ...
+# Subtest: V109 salle hors champ reçoit la sirène par le vrai réseau ouvert
+ok 487 - V109 salle hors champ reçoit la sirène par le vrai réseau ouvert
+  ---
+  duration_ms: 22.733272
+  type: 'test'
+  ...
+# Subtest: V109 nouvelle zone n’octroie aucun objectif principal
+ok 488 - V109 nouvelle zone n’octroie aucun objectif principal
+  ---
+  duration_ms: 1.344724
+  type: 'test'
+  ...
+# Subtest: V109 sauvegarde un geste en cours et reprend en pause
+ok 489 - V109 sauvegarde un geste en cours et reprend en pause
+  ---
+  duration_ms: 19.741377
+  type: 'test'
+  ...
+# Subtest: V109 répétition import n’ajoute pas de réserve
+ok 490 - V109 répétition import n’ajoute pas de réserve
+  ---
+  duration_ms: 98.503993
+  type: 'test'
+  ...
+# Subtest: V109 nouveau parcours réinitialise les stocks sans héritage
+ok 491 - V109 nouveau parcours réinitialise les stocks sans héritage
+  ---
+  duration_ms: 3.005564
+  type: 'test'
+  ...
+# Subtest: V109 import refuse quantité inventée atomiquement
+ok 492 - V109 import refuse quantité inventée atomiquement
+  ---
+  duration_ms: 15.359838
+  type: 'test'
+  ...
+# Subtest: V109 import refuse stock dupliqué atomiquement
+ok 493 - V109 import refuse stock dupliqué atomiquement
+  ---
+  duration_ms: 12.284252
+  type: 'test'
+  ...
+# Subtest: V109 import refuse stock inconnu atomiquement
+ok 494 - V109 import refuse stock inconnu atomiquement
+  ---
+  duration_ms: 6.384632
+  type: 'test'
+  ...
+# Subtest: V109 import refuse charge négative atomiquement
+ok 495 - V109 import refuse charge négative atomiquement
+  ---
+  duration_ms: 6.016609
+  type: 'test'
+  ...
+# Subtest: V109 import refuse soin illimité injecté atomiquement
+ok 496 - V109 import refuse soin illimité injecté atomiquement
+  ---
+  duration_ms: 5.947489
+  type: 'test'
+  ...
+# Subtest: V109 import refuse compteur consommation incohérent atomiquement
+ok 497 - V109 import refuse compteur consommation incohérent atomiquement
+  ---
+  duration_ms: 7.387433
+  type: 'test'
+  ...
+# Subtest: V109 import refuse compteur ouverture incohérent atomiquement
+ok 498 - V109 import refuse compteur ouverture incohérent atomiquement
+  ---
+  duration_ms: 7.009762
+  type: 'test'
+  ...
+# Subtest: V109 import refuse champ alarme inattendu atomiquement
+ok 499 - V109 import refuse champ alarme inattendu atomiquement
+  ---
+  duration_ms: 5.643437
+  type: 'test'
+  ...
+# Subtest: V109 import refuse alarme durée hors limites atomiquement
+ok 500 - V109 import refuse alarme durée hors limites atomiquement
+  ---
+  duration_ms: 14.055113
+  type: 'test'
+  ...
+# Subtest: V109 import refuse alarme volume inconnu atomiquement
+ok 501 - V109 import refuse alarme volume inconnu atomiquement
+  ---
+  duration_ms: 5.978097
+  type: 'test'
+  ...
+# Subtest: V109 import refuse champ logistique inconnu atomiquement
+ok 502 - V109 import refuse champ logistique inconnu atomiquement
+  ---
+  duration_ms: 5.777618
+  type: 'test'
+  ...
+# Subtest: V109 import refuse ancienne version fraudée atomiquement
+ok 503 - V109 import refuse ancienne version fraudée atomiquement
+  ---
+  duration_ms: 5.937751
+  type: 'test'
+  ...
+# Subtest: V109 import refuse nature acteur fraudée atomiquement
+ok 504 - V109 import refuse nature acteur fraudée atomiquement
+  ---
+  duration_ms: 4.92298
+  type: 'test'
+  ...
+# Subtest: V109 import refuse équipe dupliquée atomiquement
+ok 505 - V109 import refuse équipe dupliquée atomiquement
+  ---
+  duration_ms: 10.800444
+  type: 'test'
+  ...
+# Subtest: V109 import refuse lieu non visité mais stock acquis atomiquement
+ok 506 - V109 import refuse lieu non visité mais stock acquis atomiquement
+  ---
+  duration_ms: 13.766986
+  type: 'test'
+  ...
+# Subtest: V109 migration V108 inspection v106-hadley
+ok 507 - V109 migration V108 inspection v106-hadley
+  ---
+  duration_ms: 12.746522
+  type: 'test'
+  ...
+# Subtest: V109 migration V108 inspection v106-medlab
+ok 508 - V109 migration V108 inspection v106-medlab
+  ---
+  duration_ms: 13.529182
+  type: 'test'
+  ...
+# Subtest: V109 migration V108 inspection v107-operations
+ok 509 - V109 migration V108 inspection v107-operations
+  ---
+  duration_ms: 9.435705
+  type: 'test'
+  ...
+# Subtest: V109 migration V108 inspection v107-service
+ok 510 - V109 migration V108 inspection v107-service
+  ---
+  duration_ms: 7.826321
+  type: 'test'
+  ...
+# Subtest: V109 migration V108 inspection v106-sentry
+ok 511 - V109 migration V108 inspection v106-sentry
+  ---
+  duration_ms: 8.220946
+  type: 'test'
+  ...
+# Subtest: V109 migration V108 inspection v106-sulaco
+ok 512 - V109 migration V108 inspection v106-sulaco
+  ---
+  duration_ms: 7.522913
+  type: 'test'
+  ...
+# Subtest: V109 migration V108 opération conserve monde, contacts et chargeurs
+ok 513 - V109 migration V108 opération conserve monde, contacts et chargeurs
+  ---
+  duration_ms: 19.603984
+  type: 'test'
+  ...
+# Subtest: V109 migration V108 corrompue refusée
+ok 514 - V109 migration V108 corrompue refusée
+  ---
+  duration_ms: 3.133627
+  type: 'test'
+  ...
+# Subtest: V109 stock physique bloque la marche et les balles log-ammo
+ok 515 - V109 stock physique bloque la marche et les balles log-ammo
+  ---
+  duration_ms: 1.169163
+  type: 'test'
+  ...
+# Subtest: V109 stock physique bloque la marche et les balles reserve-sentry
+ok 516 - V109 stock physique bloque la marche et les balles reserve-sentry
+  ---
+  duration_ms: 1.014788
+  type: 'test'
+  ...
+# Subtest: V109 stock physique bloque la marche et les balles reserve-medical
+ok 517 - V109 stock physique bloque la marche et les balles reserve-medical
+  ---
+  duration_ms: 1.492736
+  type: 'test'
+  ...
+# Subtest: Validation géométrie v106-hadley
+ok 518 - Validation géométrie v106-hadley
+  ---
+  duration_ms: 3.017697
+  type: 'test'
+  ...
+# Subtest: Import inspection v106-hadley
+ok 519 - Import inspection v106-hadley
+  ---
+  duration_ms: 7.618871
+  type: 'test'
+  ...
+# Subtest: Validation géométrie v106-medlab
+ok 520 - Validation géométrie v106-medlab
+  ---
+  duration_ms: 0.244215
+  type: 'test'
+  ...
+# Subtest: Import inspection v106-medlab
+ok 521 - Import inspection v106-medlab
+  ---
+  duration_ms: 3.243996
+  type: 'test'
+  ...
+# Subtest: Validation géométrie v106-sentry
+ok 522 - Validation géométrie v106-sentry
+  ---
+  duration_ms: 0.12842
+  type: 'test'
+  ...
+# Subtest: Import inspection v106-sentry
+ok 523 - Import inspection v106-sentry
+  ---
+  duration_ms: 3.553394
+  type: 'test'
+  ...
+# Subtest: Validation géométrie v106-sulaco
+ok 524 - Validation géométrie v106-sulaco
+  ---
+  duration_ms: 0.108384
+  type: 'test'
+  ...
+# Subtest: Import inspection v106-sulaco
+ok 525 - Import inspection v106-sulaco
+  ---
+  duration_ms: 2.938149
+  type: 'test'
+  ...
+# Subtest: Validation géométrie v107-operations
+ok 526 - Validation géométrie v107-operations
+  ---
+  duration_ms: 0.382702
+  type: 'test'
+  ...
+# Subtest: Import inspection v107-operations
+ok 527 - Import inspection v107-operations
+  ---
+  duration_ms: 2.865296
+  type: 'test'
+  ...
+# Subtest: Validation géométrie v107-service
+ok 528 - Validation géométrie v107-service
+  ---
+  duration_ms: 0.192561
+  type: 'test'
+  ...
+# Subtest: Import inspection v107-service
+ok 529 - Import inspection v107-service
+  ---
+  duration_ms: 6.234374
+  type: 'test'
+  ...
+# Subtest: Arrivées praticables réciproques residential-ops
+ok 530 - Arrivées praticables réciproques residential-ops
+  ---
+  duration_ms: 3.049705
+  type: 'test'
+  ...
+# Subtest: Arrivées praticables réciproques ops-service
+ok 531 - Arrivées praticables réciproques ops-service
+  ---
+  duration_ms: 0.292687
+  type: 'test'
+  ...
+# Subtest: Arrivées praticables réciproques ops-medlab
+ok 532 - Arrivées praticables réciproques ops-medlab
+  ---
+  duration_ms: 0.578022
+  type: 'test'
+  ...
+# Subtest: Arrivées praticables réciproques ops-sentry
+ok 533 - Arrivées praticables réciproques ops-sentry
+  ---
+  duration_ms: 0.347242
+  type: 'test'
+  ...
+# Subtest: Arrivées praticables réciproques medical-service
+ok 534 - Arrivées praticables réciproques medical-service
+  ---
+  duration_ms: 0.335069
+  type: 'test'
+  ...
+# Subtest: Ouverture a une durée et la simulation continue
+ok 535 - Ouverture a une durée et la simulation continue
+  ---
+  duration_ms: 3.493642
+  type: 'test'
+  ...
+# Subtest: Déplacement interrompt sans ouvrir
+ok 536 - Déplacement interrompt sans ouvrir
+  ---
+  duration_ms: 6.825536
+  type: 'test'
+  ...
+# Subtest: Tir interrompt et ne rembourse pas la munition
+ok 537 - Tir interrompt et ne rembourse pas la munition
+  ---
+  duration_ms: 2.362948
+  type: 'test'
+  ...
+# Subtest: Coup reçu interrompt
+ok 538 - Coup reçu interrompt
+  ---
+  duration_ms: 1.076662
+  type: 'test'
+  ...
+# Subtest: Pause suspend exactement l’ouverture
+ok 539 - Pause suspend exactement l’ouverture
+  ---
+  duration_ms: 3.378622
+  type: 'test'
+  ...
+# Subtest: Ouverture en cours exportable sans rejeu
+ok 540 - Ouverture en cours exportable sans rejeu
+  ---
+  duration_ms: 8.006089
+  type: 'test'
+  ...
+# Subtest: Seuil occupé protège la fermeture
+ok 541 - Seuil occupé protège la fermeture
+  ---
+  duration_ms: 0.995457
+  type: 'test'
+  ...
+# Subtest: Sas natif protégé
+ok 542 - Sas natif protégé
+  ---
+  duration_ms: 1.182502
+  type: 'test'
+  ...
+# Subtest: Ordre Newt couvrir devient rester et jamais tirer
+ok 543 - Ordre Newt couvrir devient rester et jamais tirer
+  ---
+  duration_ms: 4.156677
+  type: 'test'
+  ...
+# Subtest: Ordre tenir garde les coordonnées
+ok 544 - Ordre tenir garde les coordonnées
+  ---
+  duration_ms: 332.114361
+  type: 'test'
+  ...
+# Subtest: Couvrir tire seulement quand une trajectoire est libre
+ok 545 - Couvrir tire seulement quand une trajectoire est libre
+  ---
+  duration_ms: 32.28032
+  type: 'test'
+  ...
+# Subtest: Équipe distante bloque le portail sans saut de position
+ok 546 - Équipe distante bloque le portail sans saut de position
+  ---
+  duration_ms: 2.530562
+  type: 'test'
+  ...
+# Subtest: Transfert groupé garde les ressources et monde antérieur
+ok 547 - Transfert groupé garde les ressources et monde antérieur
+  ---
+  duration_ms: 1.454978
+  type: 'test'
+  ...
+# Subtest: Inspection ne progresse ni ne traverse
+ok 548 - Inspection ne progresse ni ne traverse
+  ---
+  duration_ms: 0.796047
+  type: 'test'
+  ...
+# Subtest: Import complet sans mutations ni charges gagnées
+ok 549 - Import complet sans mutations ni charges gagnées
+  ---
+  duration_ms: 3.248887
+  type: 'test'
+  ...
+# Subtest: Attaque engagée vers un membre de l’équipe importable
+ok 550 - Attaque engagée vers un membre de l’équipe importable
+  ---
+  duration_ms: 4.689214
+  type: 'test'
+  ...
+# Subtest: Refus atomique : géométrie
+ok 551 - Refus atomique : géométrie
+  ---
+  duration_ms: 1.156838
+  type: 'test'
+  ...
+# Subtest: Refus atomique : chargeur négatif
+ok 552 - Refus atomique : chargeur négatif
+  ---
+  duration_ms: 2.894341
+  type: 'test'
+  ...
+# Subtest: Refus atomique : Newt armée
+ok 553 - Refus atomique : Newt armée
+  ---
+  duration_ms: 2.729794
+  type: 'test'
+  ...
+# Subtest: Refus atomique : identité dupliquée
+ok 554 - Refus atomique : identité dupliquée
+  ---
+  duration_ms: 2.955369
+  type: 'test'
+  ...
+# Subtest: Refus atomique : position dans un mur
+ok 555 - Refus atomique : position dans un mur
+  ---
+  duration_ms: 3.554323
+  type: 'test'
+  ...
+# Subtest: Refus atomique : ordre incohérent
+ok 556 - Refus atomique : ordre incohérent
+  ---
+  duration_ms: 3.325114
+  type: 'test'
+  ...
+# Subtest: Refus atomique : victoire anticipée
+ok 557 - Refus atomique : victoire anticipée
+  ---
+  duration_ms: 2.531925
+  type: 'test'
+  ...
+# Subtest: Refus atomique : progression anticipée
+ok 558 - Refus atomique : progression anticipée
+  ---
+  duration_ms: 3.257449
+  type: 'test'
+  ...
+# Subtest: Refus atomique : pièce manquante
+ok 559 - Refus atomique : pièce manquante
+  ---
+  duration_ms: 1.295634
+  type: 'test'
+  ...
+# Subtest: Refus atomique : champ inconnu
+ok 560 - Refus atomique : champ inconnu
+  ---
+  duration_ms: 1.661997
+  type: 'test'
+  ...
+# Subtest: Refus atomique : mauvaise visée
+ok 561 - Refus atomique : mauvaise visée
+  ---
+  duration_ms: 4.817865
+  type: 'test'
+  ...
+# Subtest: Refus atomique : timer infini
+ok 562 - Refus atomique : timer infini
+  ---
+  duration_ms: 1.834263
+  type: 'test'
+  ...
+# Subtest: Refus atomique : téléportation roster
+ok 563 - Refus atomique : téléportation roster
+  ---
+  duration_ms: 5.29122
+  type: 'test'
+  ...
+# Subtest: Refus atomique : rôle modifié
+ok 564 - Refus atomique : rôle modifié
+  ---
+  duration_ms: 5.330877
+  type: 'test'
+  ...
+# Subtest: Refus atomique : point de garde illégal
+ok 565 - Refus atomique : point de garde illégal
+  ---
+  duration_ms: 2.968385
+  type: 'test'
+  ...
+# Subtest: Migration inspection V106 v106-hadley
+ok 566 - Migration inspection V106 v106-hadley
+  ---
+  duration_ms: 3.867278
+  type: 'test'
+  ...
+# Subtest: Migration inspection V106 v106-medlab
+ok 567 - Migration inspection V106 v106-medlab
+  ---
+  duration_ms: 3.822783
+  type: 'test'
+  ...
+# Subtest: Migration inspection V106 v106-sentry
+ok 568 - Migration inspection V106 v106-sentry
+  ---
+  duration_ms: 3.28151
+  type: 'test'
+  ...
+# Subtest: Migration inspection V106 v106-sulaco
+ok 569 - Migration inspection V106 v106-sulaco
+  ---
+  duration_ms: 2.51275
+  type: 'test'
+  ...
+# Subtest: Checkpoint restaure tout le registre
+ok 570 - Checkpoint restaure tout le registre
+  ---
+  duration_ms: 2.240894
+  type: 'test'
+  ...
+# Subtest: Cadence de tir conservée à la reprise
+ok 571 - Cadence de tir conservée à la reprise
+  ---
+  duration_ms: 3.047529
+  type: 'test'
+  ...
+# Subtest: Newt cachée n’est pas une cible avant son recrutement
+ok 572 - Newt cachée n’est pas une cible avant son recrutement
+  ---
+  duration_ms: 4.101459
+  type: 'test'
+  ...
+# Subtest: contrat113 et aucune ressource / nouvel acteur offert
+ok 573 - contrat113 et aucune ressource / nouvel acteur offert
+  ---
+  duration_ms: 19.864887
+  type: 'test'
+  ...
+# Subtest: poste individuel distant sans mutation immédiate de position
+ok 574 - poste individuel distant sans mutation immédiate de position
+  ---
+  duration_ms: 9.873821
+  type: 'test'
+  ...
+# Subtest: le destinataire rejoint le poste par mouvement borné
+ok 575 - le destinataire rejoint le poste par mouvement borné
+  ---
+  duration_ms: 24.343471
+  type: 'test'
+  ...
+# Subtest: la pause suspend un déplacement ordonné
+ok 576 - la pause suspend un déplacement ordonné
+  ---
+  duration_ms: 5.923952
+  type: 'test'
+  ...
+# Subtest: en route, un import ne téléporte pas et reconstruit le chemin
+ok 577 - en route, un import ne téléporte pas et reconstruit le chemin
+  ---
+  duration_ms: 23.146563
+  type: 'test'
+  ...
+# Subtest: poste de groupe distinct pour les deux Marines
+ok 578 - poste de groupe distinct pour les deux Marines
+  ---
+  duration_ms: 12.67786
+  type: 'test'
+  ...
+# Subtest: prévisualisation pure sans mutation de session
+ok 579 - prévisualisation pure sans mutation de session
+  ---
+  duration_ms: 5.572608
+  type: 'test'
+  ...
+# Subtest: refus atomique poste NaN
+ok 580 - refus atomique poste NaN
+  ---
+  duration_ms: 2.767004
+  type: 'test'
+  ...
+# Subtest: refus atomique poste Infinity
+ok 581 - refus atomique poste Infinity
+  ---
+  duration_ms: 2.17192
+  type: 'test'
+  ...
+# Subtest: refus atomique poste bord négatif
+ok 582 - refus atomique poste bord négatif
+  ---
+  duration_ms: 5.756042
+  type: 'test'
+  ...
+# Subtest: refus atomique poste hors portée
+ok 583 - refus atomique poste hors portée
+  ---
+  duration_ms: 3.09996
+  type: 'test'
+  ...
+# Subtest: refus atomique poste table physique
+ok 584 - refus atomique poste table physique
+  ---
+  duration_ms: 5.389478
+  type: 'test'
+  ...
+# Subtest: refus atomique poste seuil ouvert
+ok 585 - refus atomique poste seuil ouvert
+  ---
+  duration_ms: 2.117336
+  type: 'test'
+  ...
+# Subtest: poste derrière une cloison opaque refusé
+ok 586 - poste derrière une cloison opaque refusé
+  ---
+  duration_ms: 3.693287
+  type: 'test'
+  ...
+# Subtest: ordre inconnu ne change rien
+ok 587 - ordre inconnu ne change rien
+  ---
+  duration_ms: 2.369939
+  type: 'test'
+  ...
+# Subtest: sentinelle fixe ne reçoit pas de poste
+ok 588 - sentinelle fixe ne reçoit pas de poste
+  ---
+  duration_ms: 5.10493
+  type: 'test'
+  ...
+# Subtest: Newt non recrutée ne reçoit pas de poste
+ok 589 - Newt non recrutée ne reçoit pas de poste
+  ---
+  duration_ms: 6.060648
+  type: 'test'
+  ...
+# Subtest: aucun poste pendant pause
+ok 590 - aucun poste pendant pause
+  ---
+  duration_ms: 2.019371
+  type: 'test'
+  ...
+# Subtest: aucun poste pendant ouverture
+ok 591 - aucun poste pendant ouverture
+  ---
+  duration_ms: 2.612604
+  type: 'test'
+  ...
+# Subtest: marche joueur n’annule pas le poste envoyé
+ok 592 - marche joueur n’annule pas le poste envoyé
+  ---
+  duration_ms: 2.475671
+  type: 'test'
+  ...
+# Subtest: ordre historique follow remplace le poste
+ok 593 - ordre historique follow remplace le poste
+  ---
+  duration_ms: 8.470438
+  type: 'test'
+  ...
+# Subtest: ordre historique hold remplace le poste
+ok 594 - ordre historique hold remplace le poste
+  ---
+  duration_ms: 7.442972
+  type: 'test'
+  ...
+# Subtest: ordre historique cover remplace le poste
+ok 595 - ordre historique cover remplace le poste
+  ---
+  duration_ms: 9.59765
+  type: 'test'
+  ...
+# Subtest: poste conserve route vers but derrière meuble
+ok 596 - poste conserve route vers but derrière meuble
+  ---
+  duration_ms: 16.028507
+  type: 'test'
+  ...
+# Subtest: fermeture en route arrête puis réouverture permet de rallier
+ok 597 - fermeture en route arrête puis réouverture permet de rallier
+  ---
+  duration_ms: 52.004884
+  type: 'test'
+  ...
+# Subtest: secteur de 100° fixé depuis un poste
+ok 598 - secteur de 100° fixé depuis un poste
+  ---
+  duration_ms: 13.206376
+  type: 'test'
+  ...
+# Subtest: secteur nul près du point refusé sans changement
+ok 599 - secteur nul près du point refusé sans changement
+  ---
+  duration_ms: 1.859113
+  type: 'test'
+  ...
+# Subtest: orienter Newt ne lui donne ni arme ni secteur
+ok 600 - orienter Newt ne lui donne ni arme ni secteur
+  ---
+  duration_ms: 2.181767
+  type: 'test'
+  ...
+# Subtest: Newt recrutée rallie un poste sans couvrir
+ok 601 - Newt recrutée rallie un poste sans couvrir
+  ---
+  duration_ms: 5.796015
+  type: 'test'
+  ...
+# Subtest: secteur avant
+ok 602 - secteur avant
+  ---
+  duration_ms: 0.273775
+  type: 'test'
+  ...
+# Subtest: secteur arrière
+ok 603 - secteur arrière
+  ---
+  duration_ms: 0.079702
+  type: 'test'
+  ...
+# Subtest: secteur hors côté
+ok 604 - secteur hors côté
+  ---
+  duration_ms: 0.05714
+  type: 'test'
+  ...
+# Subtest: secteur limite
+ok 605 - secteur limite
+  ---
+  duration_ms: 0.052945
+  type: 'test'
+  ...
+# Subtest: libre non orienté conserve couverture historique 360°
+ok 606 - libre non orienté conserve couverture historique 360°
+  ---
+  duration_ms: 0.152003
+  type: 'test'
+  ...
+# Subtest: retenir le feu ne détruit pas le poste
+ok 607 - retenir le feu ne détruit pas le poste
+  ---
+  duration_ms: 7.656146
+  type: 'test'
+  ...
+# Subtest: retenue et autorisation individuelles
+ok 608 - retenue et autorisation individuelles
+  ---
+  duration_ms: 1.508838
+  type: 'test'
+  ...
+# Subtest: retenir Newt refusé
+ok 609 - retenir Newt refusé
+  ---
+  duration_ms: 2.12035
+  type: 'test'
+  ...
+# Subtest: consigne de feu invalide refusée
+ok 610 - consigne de feu invalide refusée
+  ---
+  duration_ms: 1.626868
+  type: 'test'
+  ...
+# Subtest: ami sur ligne retient salve automatique
+ok 611 - ami sur ligne retient salve automatique
+  ---
+  duration_ms: 1.542349
+  type: 'test'
+  ...
+# Subtest: ami derrière premier ennemi ne bloque pas le tir
+ok 612 - ami derrière premier ennemi ne bloque pas le tir
+  ---
+  duration_ms: 1.305285
+  type: 'test'
+  ...
+# Subtest: Newt dans axe protège son corps sans dommages
+ok 613 - Newt dans axe protège son corps sans dommages
+  ---
+  duration_ms: 1.509286
+  type: 'test'
+  ...
+# Subtest: tourner une sentinelle exige présence physique
+ok 614 - tourner une sentinelle exige présence physique
+  ---
+  duration_ms: 1.790717
+  type: 'test'
+  ...
+# Subtest: affût ne change pas avant achèvement et ne recharge rien
+ok 615 - affût ne change pas avant achèvement et ne recharge rien
+  ---
+  duration_ms: 7.898888
+  type: 'test'
+  ...
+# Subtest: rotation en pause ne progresse pas
+ok 616 - rotation en pause ne progresse pas
+  ---
+  duration_ms: 2.087625
+  type: 'test'
+  ...
+# Subtest: rotation reprise à mi-geste avec même angle
+ok 617 - rotation reprise à mi-geste avec même angle
+  ---
+  duration_ms: 11.041957
+  type: 'test'
+  ...
+# Subtest: rotation interrompue par marche
+ok 618 - rotation interrompue par marche
+  ---
+  duration_ms: 1.456799
+  type: 'test'
+  ...
+# Subtest: rotation interrompue par tir
+ok 619 - rotation interrompue par tir
+  ---
+  duration_ms: 7.707371
+  type: 'test'
+  ...
+# Subtest: rotation interrompue par impact
+ok 620 - rotation interrompue par impact
+  ---
+  duration_ms: 1.529158
+  type: 'test'
+  ...
+# Subtest: rotation interrompue par portée
+ok 621 - rotation interrompue par portée
+  ---
+  duration_ms: 1.666925
+  type: 'test'
+  ...
+# Subtest: rotation interrompue par mort-tourelle
+ok 622 - rotation interrompue par mort-tourelle
+  ---
+  duration_ms: 1.826435
+  type: 'test'
+  ...
+# Subtest: retenue sentinelle à distance refusée
+ok 623 - retenue sentinelle à distance refusée
+  ---
+  duration_ms: 1.725171
+  type: 'test'
+  ...
+# Subtest: ordres ne modifient ressources ni objectif ni population
+ok 624 - ordres ne modifient ressources ni objectif ni population
+  ---
+  duration_ms: 1.78351
+  type: 'test'
+  ...
+# Subtest: import atomique rejette clé inconnue
+ok 625 - import atomique rejette clé inconnue
+  ---
+  duration_ms: 5.387853
+  type: 'test'
+  ...
+# Subtest: import atomique rejette schema
+ok 626 - import atomique rejette schema
+  ---
+  duration_ms: 5.234424
+  type: 'test'
+  ...
+# Subtest: import atomique rejette acteur supplémentaire
+ok 627 - import atomique rejette acteur supplémentaire
+  ---
+  duration_ms: 5.886905
+  type: 'test'
+  ...
+# Subtest: import atomique rejette arme Newt
+ok 628 - import atomique rejette arme Newt
+  ---
+  duration_ms: 6.441272
+  type: 'test'
+  ...
+# Subtest: import atomique rejette mode interdit
+ok 629 - import atomique rejette mode interdit
+  ---
+  duration_ms: 5.639374
+  type: 'test'
+  ...
+# Subtest: import atomique rejette NaN angle
+ok 630 - import atomique rejette NaN angle
+  ---
+  duration_ms: 5.763872
+  type: 'test'
+  ...
+# Subtest: import atomique rejette angle hors borne
+ok 631 - import atomique rejette angle hors borne
+  ---
+  duration_ms: 5.479157
+  type: 'test'
+  ...
+# Subtest: import atomique rejette rotation sans geste
+ok 632 - import atomique rejette rotation sans geste
+  ---
+  duration_ms: 6.124601
+  type: 'test'
+  ...
+# Subtest: import atomique rejette stat négative
+ok 633 - import atomique rejette stat négative
+  ---
+  duration_ms: 5.447372
+  type: 'test'
+  ...
+# Subtest: import atomique rejette stat fraction
+ok 634 - import atomique rejette stat fraction
+  ---
+  duration_ms: 5.423838
+  type: 'test'
+  ...
+# Subtest: import atomique rejette stat infinie
+ok 635 - import atomique rejette stat infinie
+  ---
+  duration_ms: 5.438167
+  type: 'test'
+  ...
+# Subtest: import atomique rejette tourelle inconnue
+ok 636 - import atomique rejette tourelle inconnue
+  ---
+  duration_ms: 6.86192
+  type: 'test'
+  ...
+# Subtest: import poste rejette poste autre salle
+ok 637 - import poste rejette poste autre salle
+  ---
+  duration_ms: 5.330425
+  type: 'test'
+  ...
+# Subtest: import poste rejette poste bloqué
+ok 638 - import poste rejette poste bloqué
+  ---
+  duration_ms: 4.878982
+  type: 'test'
+  ...
+# Subtest: import poste rejette arrivée anticipée
+ok 639 - import poste rejette arrivée anticipée
+  ---
+  duration_ms: 9.958487
+  type: 'test'
+  ...
+# Subtest: import poste rejette angle NaN
+ok 640 - import poste rejette angle NaN
+  ---
+  duration_ms: 7.040414
+  type: 'test'
+  ...
+# Subtest: import poste rejette propriété cachée
+ok 641 - import poste rejette propriété cachée
+  ---
+  duration_ms: 6.437918
+  type: 'test'
+  ...
+# Subtest: import poste rejette but non fini
+ok 642 - import poste rejette but non fini
+  ---
+  duration_ms: 5.302881
+  type: 'test'
+  ...
+# Subtest: reprise checkpoint conserve les postes et annule les ordres ultérieurs
+ok 643 - reprise checkpoint conserve les postes et annule les ordres ultérieurs
+  ---
+  duration_ms: 5.886903
+  type: 'test'
+  ...
+# Subtest: nouvelle partie sans contamination des ordres
+ok 644 - nouvelle partie sans contamination des ordres
+  ---
+  duration_ms: 2.658825
+  type: 'test'
+  ...
+# Subtest: migration réelle112 sans ressource ni circuit offert v106-hadley
+ok 645 - migration réelle112 sans ressource ni circuit offert v106-hadley
+  ---
+  duration_ms: 14.843256
+  type: 'test'
+  ...
+# Subtest: migration réelle112 sans ressource ni circuit offert v106-medlab
+ok 646 - migration réelle112 sans ressource ni circuit offert v106-medlab
+  ---
+  duration_ms: 11.014304
+  type: 'test'
+  ...
+# Subtest: migration réelle112 sans ressource ni circuit offert v106-sentry
+ok 647 - migration réelle112 sans ressource ni circuit offert v106-sentry
+  ---
+  duration_ms: 13.712257
+  type: 'test'
+  ...
+# Subtest: migration réelle112 sans ressource ni circuit offert v106-sulaco
+ok 648 - migration réelle112 sans ressource ni circuit offert v106-sulaco
+  ---
+  duration_ms: 10.976378
+  type: 'test'
+  ...
+# Subtest: migration réelle112 sans ressource ni circuit offert v107-operations
+ok 649 - migration réelle112 sans ressource ni circuit offert v107-operations
+  ---
+  duration_ms: 9.689076
+  type: 'test'
+  ...
+# Subtest: migration réelle112 sans ressource ni circuit offert v107-service
+ok 650 - migration réelle112 sans ressource ni circuit offert v107-service
+  ---
+  duration_ms: 11.245487
+  type: 'test'
+  ...
+# Subtest: migration réelle112 sans ressource ni circuit offert v109-logistics
+ok 651 - migration réelle112 sans ressource ni circuit offert v109-logistics
+  ---
+  duration_ms: 10.625056
+  type: 'test'
+  ...
+# Subtest: migration réelle112 sans ressource ni circuit offert v109-reserve
+ok 652 - migration réelle112 sans ressource ni circuit offert v109-reserve
+  ---
+  duration_ms: 9.899551
+  type: 'test'
+  ...
+# Subtest: migration réelle112 sans ressource ni circuit offert v112-workshop
+ok 653 - migration réelle112 sans ressource ni circuit offert v112-workshop
+  ---
+  duration_ms: 11.010642
+  type: 'test'
+  ...
+# Subtest: migration réelle112 sans ressource ni circuit offert v112-conduit
+ok 654 - migration réelle112 sans ressource ni circuit offert v112-conduit
+  ---
+  duration_ms: 10.436177
+  type: 'test'
+  ...
+# Subtest: migration refuse faux fichier112 au lieu de le réparer
+ok 655 - migration refuse faux fichier112 au lieu de le réparer
+  ---
+  duration_ms: 6.038503
+  type: 'test'
+  ...
+# Subtest: sentinelle suspend réellement sa salve devant Ripley
+ok 656 - sentinelle suspend réellement sa salve devant Ripley
+  ---
+  duration_ms: 3.357342
+  type: 'test'
+  ...
+# Subtest: sentinelle reprend le tir après dégagement de son axe
+ok 657 - sentinelle reprend le tir après dégagement de son axe
+  ---
+  duration_ms: 1.961828
+  type: 'test'
+  ...
+# Subtest: sentinelle avec feu retenu ne dépense rien sur cible visible
+ok 658 - sentinelle avec feu retenu ne dépense rien sur cible visible
+  ---
+  duration_ms: 3.642509
+  type: 'test'
+  ...
+# Subtest: affût orienté vers l’arrière ignore cible avant
+ok 659 - affût orienté vers l’arrière ignore cible avant
+  ---
+  duration_ms: 2.246654
+  type: 'test'
+  ...
+# Subtest: pas de tirs pendant rotation alors que cible visible
+ok 660 - pas de tirs pendant rotation alors que cible visible
+  ---
+  duration_ms: 3.442572
+  type: 'test'
+  ...
+# Subtest: deux postes trop proches refusés atomiquement en sectorisation
+ok 661 - deux postes trop proches refusés atomiquement en sectorisation
+  ---
+  duration_ms: 1.920135
+  type: 'test'
+  ...
+# Subtest: postes de groupe ne se superposent pas à une autre réservation
+ok 662 - postes de groupe ne se superposent pas à une autre réservation
+  ---
+  duration_ms: 10.35851
+  type: 'test'
+  ...
+# Subtest: poste annulé lors d’une mort sans mémoire graphique orpheline
+ok 663 - poste annulé lors d’une mort sans mémoire graphique orpheline
+  ---
+  duration_ms: 1.362172
+  type: 'test'
+  ...
+# Subtest: groupe en marche ne dépense pas ses munitions de poste
+ok 664 - groupe en marche ne dépense pas ses munitions de poste
+  ---
+  duration_ms: 2.308444
+  type: 'test'
+  ...
+# Subtest: rendu briefing tactique est lecture seule
+ok 665 - rendu briefing tactique est lecture seule
+  ---
+  duration_ms: 2.540543
+  type: 'test'
+  ...
+1..665
+# tests 665
+# suites 0
+# pass 665
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3146.353291

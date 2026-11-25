@@ -6,8 +6,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createDefaultSave, migrateSave } from '../src/save.js';
-import { CAMPAIGNS, validateContent } from '../src/content.js';
-import { FIORINA_CAMPAIGN_V114 } from '../src/fiorina-campaign-v114.js';
+import { CAMPAIGNS, CONTENT_COUNTS, CONTENT_TARGETS, validateContent } from '../src/content.js';
+import { projectFiorinaHistoricalCampaignsV188 } from './audit-tantalus-priorities-v188.mjs';
 import { selectMissionTemplateV52 } from '../src/mission-levels-v52.js';
 import { resolveMissionRegisterV188 } from '../src/mission-register-v188.js';
 import { normalizeStoryCampaignV188 } from '../src/story-campaign-v188.js';
@@ -86,10 +86,10 @@ function toEnding(save, recommended, options) {
 test('content: five Act V missions on Cocyte from existing templates, registers, ids unchanged elsewhere', () => {
   assert.deepEqual(ACT5_CAMPAIGN_IDS_V188, ['act5-last-run', 'act5-depot-queen', 'act5-port-walls', 'act5-evacuation']);
   assert.equal(validateContent().ok, true);
+  assert.equal(projectFiorinaHistoricalCampaignsV188(CAMPAIGNS).length, 526); // Original Tantalus, Arbiter and Queens catalog.
   assert.equal(CAMPAIGNS.length, 527);
-  assert.deepEqual(CAMPAIGNS.filter(entry => entry.id === FIORINA_CAMPAIGN_V114.id), [FIORINA_CAMPAIGN_V114]);
-  assert.equal(CAMPAIGNS.filter(entry => entry.id !== FIORINA_CAMPAIGN_V114.id).length, 526,
-    'Fiorina adds one archive without replacing any historical campaign.');
+  assert.equal(CONTENT_COUNTS.campaigns, CAMPAIGNS.length);
+  assert.equal(CONTENT_TARGETS.campaigns, CAMPAIGNS.length);
   for (const campaign of ACT5_CAMPAIGNS_V188) {
     assert.ok(CAMPAIGNS.some(entry => entry.id === campaign.id), campaign.id);
     assert.equal(selectMissionTemplateV52({ campaign }), campaign.templateId, campaign.id);

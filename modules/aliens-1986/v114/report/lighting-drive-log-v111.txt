@@ -1,0 +1,19 @@
+{
+  "complete": true,
+  "inputs": 4009,
+  "elapsed": 100.22500000000566,
+  "enemyTransfers": 6,
+  "lighting": {
+    "powered": true,
+    "torch": true,
+    "angle": -0.06934693658698725,
+    "exposure": "éclairé",
+    "control": null,
+    "metrics": {
+      "started": 3,
+      "completed": 3,
+      "interrupted": 0,
+      "torchSwitches": 2
+    }
+  }
+}

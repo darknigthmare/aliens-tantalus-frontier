@@ -9,7 +9,7 @@ import { basename, join } from 'node:path';
 import { AUDIT_PREDECESSOR_DOCUMENTS_V158, verifyAuditSuccessionV158 } from './audit-succession-v158.mjs';
 import { verifyAuditSuccessionV157 } from './audit-succession-v157.mjs';
 import { TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188, TANTALUS_PRIORITIES_QUEEN_MOTHER_REGISTRY_V188,
-  verifyQueenMotherChoirRegistryContinuationV188 } from './audit-tantalus-priorities-v188.mjs';
+  verifyQueenMotherChoirRegistryContinuationV188, projectFiorinaHistoricalRegistryV188 } from './audit-tantalus-priorities-v188.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { XENO_TRIALS_FIGHTERS_V96 as roster } from '../src/xeno-trials-data-v96.js';
 import { XENO_TRIALS_SEQUENCES_V156 as sequences } from '../src/xeno-trials-sequences-v155.js';
@@ -153,7 +153,8 @@ test('dedicated Cocon rendering is distinct from source-work certification and a
   assert.deepEqual(historicalCounts, registry.historicalCounts);
   assert.deepEqual(registry.changedIds, ['cargo-brutal', 'broodstorm', 'queen-mother-song']);
   assert.equal(registry.unchangedOperations, 18);
-  assert.deepEqual(ids(current.tables['10_Operations']), operations.map(row => row.id));
+  const historicalRegistry = projectFiorinaHistoricalRegistryV188(operations, operationCounts);
+  assert.deepEqual(ids(current.tables['10_Operations']), historicalRegistry.operations.map(row => row.id));
   for (const row of current.tables['10_Operations'].rows) {
     const operation = operations.find(entry => entry.id === row[0]);
     // The report keeps the original art debts; only Cargo changed status.

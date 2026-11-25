@@ -1,0 +1,172 @@
+{
+  "version": "112.0.0-rc.1",
+  "htmlSha256": "442b8146e28400d55c81c80cc40a8a4145cde9fca25ceb7f142fb2285bafd1f5",
+  "codexSha256": "04ff46d5b441ea4740b88be7bdb0bffd15300530b57a6ccfe89b259fd6750ff9",
+  "reportSha256": "14a02c675e28c5f27a04b0cb54eeada824156da937c64acd164cd40ad88043f2",
+  "checks": [
+    {
+      "name": "Initialisation du document exact V112",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Dix inspections présentes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Export réel au schéma 112",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inventaire logistique neuf vide",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune plaque offerte",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune balise offerte",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Onze structures intactes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Onze liaisons sauvegardées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Deux extrémités de dérivation commencent fermées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Dix lieux sauvegardés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Ancien contrat de torche conservé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Deux pièces nouvelles hors tension",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Les huit anciens services démarrent inchangés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Commande P unique et contrôles L/K conservés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Jeu sans demande réseau externe",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Dix fiches Codex",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Deux nouvelles fiches explicitement marquées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "48 règles de conception",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Recherche des nouveaux raccords",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Filtre sans résultat",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Retour aux dix fiches",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Dix plans présents et étiquetés comme calculés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Codex portrait sans débordement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Dix captures intégrées au rapport",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Les dix PNG décodent correctement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Images embarquées identiques aux PNG bruts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rapport sans dépendance externe",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rapport portrait sans débordement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Hash identique à celui de toutes les recettes gameplay",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune erreur JavaScript/console",
+      "ok": true,
+      "detail": {
+        "page": [],
+        "console": []
+      }
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "externalRequests": [],
+  "transport": {
+    "tested": "set_content of exact distributed bytes; unmodified Blob loader",
+    "directFileNavigation": {
+      "validated": false,
+      "reason": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/ALIENS_1986_V112_BALISER_LE_REPLI_RC1/JOUER_ALIENS_V112.html\nCall log:\n  - navigating to \"file:///mnt/data/ALIENS_1986_V112_BALISER_LE_REPLI_RC1/JOUER_ALIENS_V112.html\", waiting until \"load\"\n"
+    }
+  },
+  "nativeActivated": false
+}

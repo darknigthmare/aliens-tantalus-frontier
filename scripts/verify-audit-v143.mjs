@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
 import vm from 'node:vm';
-import { CAMPAIGNS, WORLDS, validateContent, RELEASE } from '../src/content.js';
+import { CAMPAIGNS, CONTENT_COUNTS, CONTENT_TARGETS, WORLDS, validateContent, RELEASE } from '../src/content.js';
+import { projectFiorinaHistoricalCampaignsV188 } from './audit-tantalus-priorities-v188.mjs';
 import { CAMPAIGNS as BEFORE } from '../src/content-core-v50.js';
 import { MIRE_SETTINGS_V143, MIRE_PENDING_SOURCES_V143, buildMireCampaignsV143, validateMireCampaignsV143 } from '../src/mire-settings-v143.js';
 import { APP_RELEASE_V143 } from '../src/release-info-v143.js';
@@ -22,7 +23,6 @@ import { ASPHODELE_CAMPAIGNS_V188 } from '../src/asphodele-missions-v188.js';
 import { ACT5_CAMPAIGNS_V188 } from '../src/story-act5-v188.js';
 import { COLONY_CAMPAIGNS_V188 } from '../src/colony-missions-v188.js';
 import { QUEENS_CAMPAIGNS_V188 } from '../src/side-campaign-queens-v188.js';
-import { FIORINA_CAMPAIGN_V114 } from '../src/fiorina-campaign-v114.js';
 
 const worker = await readFile(new URL('../sw.js', import.meta.url), 'utf8');
 const ASPHODELE_CARDS_V188 = ['asphodele-exterior', 'cassius-core', 'echo8-recording', 'order-documents', 'seal-fragment', 'david-memory']
@@ -104,22 +104,25 @@ test('MIRE keeps every stable ID and leaves original Frontier operations untouch
   assert.deepEqual(mapped.map(c => c.id), BEFORE.map(c => c.id));
   for (let i = 0; i < BEFORE.length; i++) if (BEFORE[i].mode !== 'MIRE') assert.equal(mapped[i], BEFORE[i]);
   assert.equal(validateContent().ok, true);
+  const historicalCampaigns = projectFiorinaHistoricalCampaignsV188(CAMPAIGNS);
+  assert.equal(CAMPAIGNS.length, 527);
+  assert.equal(CONTENT_COUNTS.campaigns, CAMPAIGNS.length);
+  assert.equal(CONTENT_TARGETS.campaigns, CAMPAIGNS.length);
   const historical = [...buildCampaignsWithSpecialOperationsV67(mapped), BLACK_COCOON_CAMPAIGN_V121,
     APC_CONVOY_CAMPAIGN_V121, C12_HORDE_CAMPAIGN_V121, ARCHIVE_RELAY_CAMPAIGN_V122, ...NEW_SPECIAL_CAMPAIGNS_V131];
   assert.equal(historical.length, 455);
-  assert.deepEqual(CAMPAIGNS.slice(0, 455), historical);
+  assert.deepEqual(historicalCampaigns.slice(0, 455), historical);
   // V188 Tantalus lot (specs 005/006/007 + orig-asphodele-2 + colony lot: C1-C4, 7 side missions, 8 contracts)
   const tantalus = [...STATION_CAMPAIGNS_V188, ...ASPHODELE_CAMPAIGNS_V188, ...ACT5_CAMPAIGNS_V188, ...COLONY_CAMPAIGNS_V188];
   assert.equal(tantalus.length, 41);
-  assert.deepEqual(CAMPAIGNS.slice(455, 496), tantalus);
+  assert.deepEqual(historicalCampaigns.slice(455, 496), tantalus);
   // V190 Xeno Arbiter special operations follow the Tantalus lot in the merged campaign order.
-  assert.deepEqual(CAMPAIGNS.slice(496, 502).map(c => c.id), ['special-arbiter-01-freight', 'special-arbiter-02-gallery',
+  assert.deepEqual(historicalCampaigns.slice(496, 502).map(c => c.id), ['special-arbiter-01-freight', 'special-arbiter-02-gallery',
     'special-arbiter-03-custody', 'special-arbiter-04-arbitration', 'special-arbiter-05-isolation', 'special-arbiter-06-local']);
-  // The 24 Queen campaigns retain their historical order before the sole Fiorina addition.
-  assert.deepEqual(CAMPAIGNS.slice(502, 526), QUEENS_CAMPAIGNS_V188);
-  assert.deepEqual(CAMPAIGNS.slice(526), [FIORINA_CAMPAIGN_V114]);
-  assert.equal(CAMPAIGNS.filter(c => c.id !== FIORINA_CAMPAIGN_V114.id).length, 526);
-  assert.equal(CAMPAIGNS.length, 527);
+  // V188 spec 011: the Queens missions end the historical catalog, before Fiorina.
+  assert.deepEqual(historicalCampaigns.slice(502, 526), QUEENS_CAMPAIGNS_V188);
+  assert.equal(historicalCampaigns.length, 526);
+  assert.equal(new Set(historicalCampaigns.map(c => c.id)).size, 526);
   assert.equal(new Set(CAMPAIGNS.map(c => c.id)).size, 527);
 });
 for (const source of MIRE_SETTINGS_V143) test(`MIRE setting: ${source.source}`, () => {

@@ -7,9 +7,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 import { createDefaultSave, migrateSave } from '../src/save.js';
-import { CAMPAIGNS, validateContent } from '../src/content.js';
+import { CAMPAIGNS, CONTENT_COUNTS, CONTENT_TARGETS, validateContent } from '../src/content.js';
+import { projectFiorinaHistoricalCampaignsV188 } from './audit-tantalus-priorities-v188.mjs';
 import { selectMissionTemplateV52, MISSION_TEMPLATE_IDS_V52 } from '../src/mission-levels-v52.js';
-import { FIORINA_CAMPAIGN_V114 } from '../src/fiorina-campaign-v114.js';
 import { resolveMissionRegisterV188 } from '../src/mission-register-v188.js';
 import {
   COLONY_CAMPAIGNS_V188, COLONY_CAMPAIGN_IDS_V188, COLONY_MAIN_MISSIONS_V188, COLONY_SIDE_MISSIONS_V188, COLONY_CONTRACTS_V188,
@@ -47,9 +47,9 @@ const restored = save => { const colony = normalizeColonyV188(save.colonyV188); 
 // —— Colony missions: content ——
 test('colony content: C1-C4, 7 side missions, 8 contracts on Cocyte from existing templates, §0.3 registers, C5 = act5-port-walls', () => {
   assert.equal(validateContent().ok, true);
+  assert.equal(projectFiorinaHistoricalCampaignsV188(CAMPAIGNS).length, 526);
   assert.equal(CAMPAIGNS.length, 527);
-  assert.deepEqual(CAMPAIGNS.filter(entry => entry.id === FIORINA_CAMPAIGN_V114.id), [FIORINA_CAMPAIGN_V114]);
-  assert.equal(CAMPAIGNS.filter(entry => entry.id !== FIORINA_CAMPAIGN_V114.id).length, 526);
+  assert.equal(CONTENT_COUNTS.campaigns, CAMPAIGNS.length);
   assert.deepEqual(COLONY_MAIN_MISSIONS_V188.map(entry => entry.id), ['colony-c1', 'colony-c2', 'colony-c3', 'colony-c4']);
   assert.deepEqual(COLONY_SIDE_MISSIONS_V188.map(entry => entry.id), ['colony-a-quai', 'colony-a-ferro', 'colony-a-abri', 'colony-a-seegson', 'colony-a-balise', 'colony-a-crucible', 'colony-a-converti']);
   assert.equal(COLONY_CONTRACTS_V188.length, 8);
@@ -62,7 +62,7 @@ test('colony content: C1-C4, 7 side missions, 8 contracts on Cocyte from existin
   assert.deepEqual(COLONY_SIDE_MISSIONS_V188.map(resolveMissionRegisterV188), ['tension', 'horror', 'tension', 'tension', 'horror', 'calm', 'horror']);
   assert.ok(CAMPAIGNS.some(entry => entry.id === COLONY_C5_CAMPAIGN_ID_V188), 'C5 is the Act V mission, id kept');
   assert.equal(new Set(CAMPAIGNS.map(entry => entry.id)).size, CAMPAIGNS.length);
-  assert.match(read('src/content.js'), /campaigns: 527/);
+  assert.equal(CONTENT_TARGETS.campaigns, CAMPAIGNS.length);
 });
 
 // —— Access ——

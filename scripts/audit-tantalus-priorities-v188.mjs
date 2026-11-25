@@ -6,13 +6,13 @@
  * published bytes; historical predecessors and earlier endpoints stay intact.
  * The owner lifted the save/catalogue protection for this lot on 2026-11-12
  * (bible §56.1): each changed byte still needs an exact receipt here, and
- * migrations stay additive. The AVP host successor continues the merged endpoint
- * without rewriting these receipts. It makes no inherited art or playtest claim.
+ * migrations stay additive. This historical chain continues only through the
+ * exact AVP/Aliens merge terminal. It makes no inherited art or playtest claim.
  */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
-import { reviewedAvpHostDigest20261125, verifyAvpHostSources20261125 } from './audit-dlc-avp-2004-20261125.mjs';
+import { reviewedAvpHostDigest20261125, reviewedAliensIncomingDigest20261125, verifyAvpHostSources20261125 } from './audit-dlc-avp-2004-20261125.mjs';
 
 const readRepository = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -852,7 +852,6 @@ export const TANTALUS_PRIORITIES_CARGO_REGISTRY_V188 = freeze({
 });
 
 export function verifyCargoRegistryContinuationV188(operations, counts, readSource = readRepository) {
-  ({ operations, counts } = projectFiorinaRegistryV114(operations, counts, 'Registry counters must describe its exact current rows'));
   const transition = TANTALUS_PRIORITIES_CARGO_REGISTRY_V188;
   const bytes = readSource(transition.historicalSnapshot.path);
   assert.equal(sha(bytes), transition.historicalSnapshot.sha256, 'Changed historical V158 operations snapshot');
@@ -910,7 +909,6 @@ export const TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188 = freeze({
 });
 
 export function verifyBroodstormRegistryContinuationV188(operations, counts, readSource = readRepository) {
-  ({ operations, counts } = projectFiorinaRegistryV114(operations, counts, 'Broodstorm art does not promote a whole operation'));
   const transition = TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188;
   const matches = operations.filter(operation => operation.id === transition.operationId);
   assert.equal(matches.length, 1, 'Exactly one Broodstorm registry declaration is required');
@@ -1020,7 +1018,6 @@ export const TANTALUS_PRIORITIES_QUEEN_MOTHER_REGISTRY_V188 = freeze({
 });
 
 export function verifyQueenMotherRegistryContinuationV188(operations, counts, readSource = readRepository) {
-  ({ operations, counts } = projectFiorinaRegistryV114(operations, counts, 'Queen Mother art does not promote a whole operation'));
   const transition = TANTALUS_PRIORITIES_QUEEN_MOTHER_REGISTRY_V188;
   const matches = operations.filter(operation => operation.id === transition.operationId);
   assert.equal(matches.length, 1, 'Exactly one Queen Mother registry declaration is required');
@@ -1132,9 +1129,8 @@ export const TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_REGISTRY_V188 = freeze({
 });
 
 export function verifyQueenMotherGuardRegistryContinuationV188(operations, counts, readSource = readRepository) {
-  ({ operations, counts } = projectFiorinaRegistryV114(operations, counts, 'Guard presentation does not change registry counts'));
   const continuation = TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_REGISTRY_V188;
-  assert.equal(sha(readSource(continuation.baselineRegistry.path)), reviewedAvpHostDigest20261125(continuation.baselineRegistry.path, continuation.baselineRegistry.sha256),
+  assert.equal(sha(readSource(continuation.baselineRegistry.path)), continuation.baselineRegistry.sha256,
     'Guard presentation must retain the exact Q registry source bytes');
   const matches = operations.filter(operation => operation.id === continuation.operationId);
   assert.equal(matches.length, 1, 'Exactly one Queen Mother registry declaration is required');
@@ -1711,9 +1707,8 @@ export const TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_REGISTRY_V188 = freeze({
 });
 
 export function verifyQueenMotherChoirRegistryContinuationV188(operations, counts, readSource = readRepository) {
-  ({ operations, counts } = projectFiorinaRegistryV114(operations, counts, 'Choir presentation does not change registry counts'));
   const continuation = TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_REGISTRY_V188;
-  assert.equal(sha(readSource(continuation.baselineRegistry.path)), reviewedAvpHostDigest20261125(continuation.baselineRegistry.path, continuation.baselineRegistry.sha256),
+  assert.equal(sha(readSource(continuation.baselineRegistry.path)), continuation.baselineRegistry.sha256,
     'Choir presentation must retain the exact R registry source bytes');
   const matches = operations.filter(operation => operation.id === continuation.operationId);
   assert.equal(matches.length, 1, 'Exactly one Queen Mother registry declaration is required');
@@ -1736,37 +1731,312 @@ export function verifyQueenMotherChoirRegistryContinuationV188(operations, count
   return historical;
 }
 
-// Fiorina is the sole post-V188 registry addition. Pin its full declaration,
-// including its campaign, before projecting the 21 immutable historical rows.
-// Historical callers may still supply those exact 21 rows and their counters.
-export function projectFiorinaRegistryV114(operations, counts, countMessage = 'Fiorina registry counters must match the exact current rows') {
-  assert.ok(Array.isArray(operations), 'Registry declarations must be an array');
-  const matches = operations.filter(operation => operation?.id === 'alien3-fiorina-161');
+// BEGIN ALIENS 1986 INTEGRATION RECEIPTS
+// Six shared integration files, one Fiorina English objective correction and nine
+// endpoint/registry/catalog test adaptations, from exact 001a20b. Historical
+// receipts remain intact; inherited Fiorina product bytes have a separate block.
+// Historical declarations above remain unchanged; no old CI or art result transfers.
+export const TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188 = freeze({
+  baseline: '001a20bdc0f9f1a3c835e84d8f3c9434bc159330',
+  successors: {
+  "index.html": {
+    "previousSha256": "1ab4a1fd0e2a090c287e501e12f6476a15644ca8455a1689133fc1bbeae7f2fd",
+    "currentSha256": "3cb5d844b1d7ea2726c8af2cb95b49f4515c0bf9322eca90cb4f241d219409a3"
+  },
+  "package.json": {
+    "previousSha256": "6d261eda040a57d60f8b4039443517a0cfeddd55b657c77ae87d2c8f486a39be",
+    "currentSha256": "dd592ca645bc15842d45ab48f30c83a1337039f96982fb40916eaa7c47bd8c0b"
+  },
+  "scripts/build.mjs": {
+    "previousSha256": "fa817256bc9832c9390055ddab431e8dd9e1320b273904c39f2489ff6807ab12",
+    "currentSha256": "e3dbf1e40e79b18bebf4d987329044cc06ee546471a70d054b75ce3a492ac3cf"
+  },
+  "scripts/build-dev-tools-v188.mjs": {
+    "previousSha256": "888e76d1aa2a206c71696e69f58373197b8f7fff7179581b53f4dd5ea4fe94a2",
+    "currentSha256": "73c7963635cfadc00bf2819df2ba6282d8a299025efb767cc8fc8bd28c8c2afa"
+  },
+  "scripts/verify-public-release-v86.mjs": {
+    "previousSha256": "c5f3c645310d030cf6f4e9b89d5a6b4012f30b61d06fe3f3af9fcfb73582e9ae",
+    "currentSha256": "c72a3d56d3f83b8b19f321be5dc8b7d7b3423f0e391194d4c4e000f6c2d7bcbc"
+  },
+  "src/title-screen-v61.js": {
+    "previousSha256": "e0c10ca738df12c78b48a24d79cb049aea2ac3e1c08ec270d3eed750fe267342",
+    "currentSha256": "0f369985fe5f48f11b03a6711ba7accf2689f1d2ce68f43b6ed52b46c013cdf7"
+  },
+  "scripts/verify-tantalus-priorities-v188.mjs": {
+    "previousSha256": "cc0bda305eec62e3577e72091d2b6b7ca38a71d238950698f614e88b6ae84fc8",
+    "currentSha256": "0a9258c24914535d0aea43da726d8250a7ff63645860535b35c1835b94cfe737"
+  },
+  "scripts/verify-native-qa-resources-v187.mjs": {
+    "previousSha256": "05367a5372ae834063f6fce495b70d431553977c46efef28337921eb71525bde",
+    "currentSha256": "3e66e7ad4c4475632a2f216ee8efcb940f1bc2127b8e6efa2b09056f45a25734"
+  },
+  "scripts/verify-audit-continuation-v157.mjs": {
+    "previousSha256": "73cf9f322340a7d4e68e58bb772f74e6b9e54d14383b4fb72f8bf299ad0d3d8a",
+    "currentSha256": "a064c967dbd77143d24dbdab24134a0174cefaec30ac23efd42d4b9399afe15d"
+  },
+  "scripts/verify-audit-continuation-v158.mjs": {
+    "previousSha256": "09977386675167a50d8e399532c948c344d753237ca50383d93bb5cda112fc68",
+    "currentSha256": "8181ebe5a7dbf226d09ce1ffa27e61ba7571dbc80da100ceecf8099df870e5db"
+  },
+  "scripts/verify-black-cocoon-presentation-v158.mjs": {
+    "previousSha256": "cb52f555918b941d0eed87a3e4b10fcfdab8563536e47187b8b42dad3db6e930",
+    "currentSha256": "2a84cef425228efbb08185a9886dd8be0aa11667804d22ce438d17f95d603290"
+  },
+  "scripts/verify-audit-v143.mjs": {
+    "previousSha256": "efd454272d2a8e251a8e6b2a7a82f9894eee47b3923a9a027bacb18a8a0202e4",
+    "currentSha256": "e48029ce56f17da26b437ea4d2dbe2a4845bd45f57d454da1d12b1c9c5d51805"
+  },
+  "scripts/verify-colony-crew-v188.mjs": {
+    "previousSha256": "912fdacd502be953cae671169f4917788d078a45106f07a649917d363d3e220f",
+    "currentSha256": "07ca934406c79277efa9b231aa7ded7b2b1d996b760a3695506584c8f38cdf0b"
+  },
+  "scripts/verify-act5-endings-v188.mjs": {
+    "previousSha256": "88dd846ac4a5cab51d9563ab6a31b434d96f678603644355b864798876e77214",
+    "currentSha256": "3f24ce7b499bc15f67cab2ae8b4763c1e46b66712cd864bdbab7596ffbfc1918"
+  },
+  "scripts/verify-xeno-arbiter-campaign-v190.mjs": {
+    "previousSha256": "781a07800a322dde2c3bfd8cc07f98c013ad84be9fa3d9e06e15bdb504faa7f3",
+    "currentSha256": "5bd55a456bf914f5b79d1c5fca0bac35a3a70083fd99e5415174fac3babac89a"
+  },
+  "src/i18n-en-catalog-v185.js": {
+    "previousSha256": "f503f6e7edbbbb4ea3acd0f583c1c102bc54e10fa829d4e1fb089bf32825d763",
+    "currentSha256": "387b5b5a5e4461044cc24ecfaa5fb2f451b69bac3493b11099609c19b901b9d2"
+  }
+}
+});
+
+export function reviewedTantalusAliens1986DigestV188(path, endpoint) {
+  if (!Object.hasOwn(TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188.successors, path)) return endpoint;
+  const receipt = TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188.successors[path];
+  assert.equal(endpoint, receipt.previousSha256, 'Broken 001a20b-to-aliens1986 source chain: ' + path);
+  assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256), 'Invalid Aliens 1986 digest: ' + path);
+  assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'An Aliens 1986 successor must identify changed bytes: ' + path);
+  return reviewedAliensIncomingDigest20261125(path, receipt.currentSha256);
+}
+
+export function verifyTantalusAliens1986V188(readSource = readRepository) {
+  const join = TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188;
+  assert.equal(join.baseline, '001a20bdc0f9f1a3c835e84d8f3c9434bc159330');
+  for (const [path, receipt] of Object.entries(join.successors)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.equal(sha(readSource(path)), reviewedTantalusAliens1986DigestV188(path, receipt.previousSha256),
+      'Unreviewed Aliens 1986 integration bytes: ' + path);
+  }
+  return Object.freeze({ baselineCommit: join.baseline, successors: Object.keys(join.successors).length,
+    historicalResultsTransferred: false });
+}
+// END ALIENS 1986 INTEGRATION RECEIPTS
+
+// BEGIN INHERITED FIORINA INTEGRATION RECEIPTS
+// Exact five product changes inherited from cumulative PR #56, not Aliens 1986 changes.
+// Shared index/package/release-verifier bytes are covered by the cumulative Aliens receipts.
+export const TANTALUS_PRIORITIES_FIORINA_JOIN_V188 = freeze({
+  baseline: '001a20bdc0f9f1a3c835e84d8f3c9434bc159330',
+  sourceCommit: '38a4a2272ec48a9cd5011f8a0055caaca6ab0774',
+  successors: {
+  "src/app.js": {
+    "previousSha256": "da0588f8b64d8a1afd8f2e5ac3871cdc17336369fd87a743a1d9ae807b664798",
+    "currentSha256": "3419d730cc5988bfe30834a9e261567d84186c99f0a53eef513568bd820f01b5"
+  },
+  "src/content.js": {
+    "previousSha256": "05844898c856f7142195a9abde62b99af25f1764f3d07e1803c90a9a1f833907",
+    "currentSha256": "48376e6a33ef8fc6e71297df60723fa40724c12958b606b90fd7373715c08197"
+  },
+  "src/game-production-runtime.js": {
+    "previousSha256": "c82536440c96ef5c08a683c34949d70644a347c1b3b1e9e03be20bad64f91658",
+    "currentSha256": "e367fbb70e195c28194d0ee88fdeb8558ec4a7a4efc103b5bd1a0be45cd92f27"
+  },
+  "src/special-operations-v131.js": {
+    "previousSha256": "433ddc7b821c98b973c10fc9e3aa39bc66c77e8cf9364dd9f1a25d03b70b08af",
+    "currentSha256": "b7cd05a89ca5aa86b3c46244234cb197e6c0044437ba65c038b8bfc3c8827391"
+  },
+  "sw.js": {
+    "previousSha256": "31a06e95264d7280f823c1a78d6cebacb67260ea5468e8466e4bb2cbe0e916a5",
+    "currentSha256": "7e868ce49b89a29380bb6d83988b24a31c8443a09ac898efb3131e0f6db3d071"
+  }
+}
+});
+
+export function reviewedTantalusFiorinaDigestV188(path, endpoint) {
+  if (!Object.hasOwn(TANTALUS_PRIORITIES_FIORINA_JOIN_V188.successors, path)) return endpoint;
+  const receipt = TANTALUS_PRIORITIES_FIORINA_JOIN_V188.successors[path];
+  assert.equal(endpoint, receipt.previousSha256, 'Broken 001a20b-to-fiorina source chain: ' + path);
+  assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256), 'Invalid Fiorina digest: ' + path);
+  assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A Fiorina successor must identify changed bytes: ' + path);
+  return reviewedAliensIncomingDigest20261125(path, receipt.currentSha256);
+}
+
+export function verifyTantalusFiorinaV188(readSource = readRepository) {
+  const join = TANTALUS_PRIORITIES_FIORINA_JOIN_V188;
+  assert.equal(join.baseline, '001a20bdc0f9f1a3c835e84d8f3c9434bc159330');
+  assert.equal(join.sourceCommit, '38a4a2272ec48a9cd5011f8a0055caaca6ab0774');
+  for (const [path, receipt] of Object.entries(join.successors)) {
+    assert.equal(Object.hasOwn(TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188.successors, path), false,
+      'Fiorina and Aliens receipts must have disjoint exact paths: ' + path);
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.equal(sha(readSource(path)), reviewedTantalusFiorinaDigestV188(path, receipt.previousSha256),
+      'Unreviewed inherited Fiorina bytes: ' + path);
+  }
+  return Object.freeze({ baselineCommit: join.baseline, sourceCommit: join.sourceCommit,
+    successors: Object.keys(join.successors).length, historicalResultsTransferred: false });
+}
+
+export function reviewedTantalusMergedIntegrationDigestV188(path, endpoint) {
+  return reviewedAvpHostDigest20261125(path, endpoint);
+}
+// END INHERITED FIORINA INTEGRATION RECEIPTS
+
+// Fiorina is a new, still-partial 22nd operation. The immutable H/B2/Q/R/C
+// contracts continue to describe their original 21 operations. This projection
+// checks the exact additional declaration, then lets each historical verifier
+// apply its own original debt, identity, source and counter checks.
+export const FIORINA_HISTORICAL_REGISTRY_PROJECTION_V188 = freeze({
+  sourceCommit: '38a4a2272ec48a9cd5011f8a0055caaca6ab0774',
+  operationId: 'alien3-fiorina-161',
+  operationSha256: 'c0f9fc29d54926db6f12d1766f25632dba473ab951f95f7524e142597e68af18',
+  currentDeclarationsSha256: '46cdb671b6cc3cb1591c5fe4cd124d85335278d93b79a386cddbd9cc4995618a',
+  registryPath: 'src/special-operations-v131.js',
+  previousSha256: '433ddc7b821c98b973c10fc9e3aa39bc66c77e8cf9364dd9f1a25d03b70b08af',
+  currentSha256: 'b7cd05a89ca5aa86b3c46244234cb197e6c0044437ba65c038b8bfc3c8827391'
+});
+
+function canonicalFiorinaJsonV188(value) {
+  if (value === null || typeof value === 'string' || typeof value === 'boolean') return value;
+  if (typeof value === 'number') {
+    assert.ok(Number.isFinite(value), 'Fiorina accepts only finite JSON numbers');
+    return value;
+  }
+  assert.equal(typeof value, 'object', 'Fiorina accepts only JSON declaration data');
+  if (Array.isArray(value)) {
+    assert.equal(Object.getPrototypeOf(value), Array.prototype, 'Fiorina requires plain declaration arrays');
+    assert.deepEqual(Reflect.ownKeys(value), [...Array.from({ length: value.length }, (_, index) => String(index)), 'length'],
+      'Fiorina arrays cannot have holes or additional fields');
+    for (let index = 0; index < value.length; index++)
+      assert.ok(Object.hasOwn(Object.getOwnPropertyDescriptor(value, index), 'value'), 'Fiorina cannot use declaration accessors');
+    return Array.from(value, canonicalFiorinaJsonV188);
+  }
+  assert.equal(Object.getPrototypeOf(value), Object.prototype, 'Fiorina requires plain declaration objects');
+  assert.equal(Reflect.ownKeys(value).length, Object.keys(value).length, 'Fiorina cannot hide declaration fields');
+  const entries = Object.keys(value).sort().map(key => {
+    assert.ok(Object.hasOwn(Object.getOwnPropertyDescriptor(value, key), 'value'), 'Fiorina cannot use declaration accessors');
+    return [key, canonicalFiorinaJsonV188(value[key])];
+  });
+  return Object.fromEntries(entries);
+}
+
+export const FIORINA_HISTORICAL_CAMPAIGNS_V188 = freeze({
+  sourceCommit: '38a4a2272ec48a9cd5011f8a0055caaca6ab0774',
+  campaignId: 'special-alien3-fiorina-161',
+  campaignSha256: '693c6c0888dcb7780fc9f72155eb26d24ff91c6bee65e40fcb6ca6900fcc9e2f',
+  previousCount: 526,
+  currentCount: 527
+});
+
+export function projectFiorinaHistoricalCampaignsV188(campaigns) {
+  const transition = FIORINA_HISTORICAL_CAMPAIGNS_V188;
+  assert.ok(Array.isArray(campaigns), 'Fiorina projection requires campaign rows');
+  assert.equal(campaigns.length, transition.currentCount, 'Fiorina adds exactly one historical campaign');
+  const matches = campaigns.filter(campaign => campaign?.id === transition.campaignId);
+  assert.equal(matches.length, 1, 'Exactly one Fiorina campaign is required');
+  assert.equal(campaigns[transition.previousCount], matches[0], 'Fiorina keeps its reviewed final campaign position');
+  assert.equal(new Set(campaigns.map(campaign => campaign.id)).size, transition.currentCount, 'Campaign identities must be unique');
+  assert.equal(sha(JSON.stringify(canonicalFiorinaJsonV188(matches[0]))), transition.campaignSha256,
+    'Unreviewed Fiorina campaign declaration');
+  // Keep every earlier object and its order. The historical catalog tests still
+  // compare all 526 entries to their original campaign modules.
+  return Object.freeze(campaigns.slice(0, transition.previousCount));
+}
+
+function historicalRegistryCountsV188(operations) {
+  return {
+    total: operations.length,
+    effective: operations.filter(row => row.implementationStatus === 'effective').length,
+    partial: operations.filter(row => row.implementationStatus === 'partial').length,
+    missing: operations.filter(row => row.implementationStatus === 'missing').length,
+    playable: operations.filter(row => row.playable === true).length
+  };
+}
+
+export function fiorinaHistoricalRegistryReaderV188(readSource = readRepository) {
+  return path => {
+    const bytes = readSource(path);
+    const transition = FIORINA_HISTORICAL_REGISTRY_PROJECTION_V188;
+    if (path !== transition.registryPath) return bytes;
+    // Recursive historical verifiers may already receive the exact old bytes.
+    if (sha(bytes) === transition.previousSha256) return bytes;
+    assert.equal(sha(bytes), transition.currentSha256, 'Unreviewed Fiorina registry source bytes');
+    let source = bytes.toString();
+    const fiorinaModule = './fiorina-campaign-v114.js';
+    for (const [from, to] of [
+      [`import { FIORINA_OPERATION_V114, FIORINA_CAMPAIGN_V114 } from '${fiorinaModule}';\n`, ''],
+      ['  freeze(FIORINA_OPERATION_V114),\n', ''],
+      ['return [FIORINA_CAMPAIGN_V114.id, BLACK_COCOON_CAMPAIGN_V121.id,', 'return [BLACK_COCOON_CAMPAIGN_V121.id,']
+    ]) {
+      assert.equal(source.split(from).length - 1, 1, 'Exactly one reviewed Fiorina registry insertion');
+      source = source.replace(from, to);
+    }
+    assert.equal(sha(source), transition.previousSha256, 'Fiorina projection must recover the exact historical registry bytes');
+    return Buffer.from(source);
+  };
+}
+
+export function projectFiorinaHistoricalRegistryV188(operations, counts, readSource = readRepository) {
+  assert.ok(Array.isArray(operations), 'Fiorina projection requires registry rows');
+  const transition = FIORINA_HISTORICAL_REGISTRY_PROJECTION_V188;
+  const matches = operations.filter(row => row?.id === transition.operationId);
+  const readHistorical = fiorinaHistoricalRegistryReaderV188(readSource);
   if (!matches.length) {
-    assert.equal(operations.length, 21, 'Only the historical registry or its exact Fiorina addition is admitted');
-    assert.deepEqual(counts, { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 }, countMessage);
-    return { operations, counts };
+    // Older-stage fixtures remain under their original verifier's contracts.
+    assert.equal(operations.length, 21, 'Only the reviewed Fiorina entry can extend the historical registry');
+    return Object.freeze({ operations, counts, readSource: readHistorical });
   }
   assert.equal(matches.length, 1, 'Exactly one Fiorina registry declaration is required');
-  assert.equal(operations.length, 22, 'Fiorina is the only additional registry declaration');
-  assert.equal(operations[0], matches[0], 'Fiorina retains its reviewed registry position');
-  const canonical = value => Array.isArray(value) ? '[' + value.map(canonical).join(',') + ']'
-    : value && typeof value === 'object' ? '{' + Object.keys(value).sort()
-      .map(key => JSON.stringify(key) + ':' + canonical(value[key])).join(',') + '}' : JSON.stringify(value);
-  assert.equal(sha(canonical(matches[0])), 'c0f9fc29d54926db6f12d1766f25632dba473ab951f95f7524e142597e68af18',
-    'Unreviewed Fiorina registry declaration or campaign');
-  const derive = rows => ({
-    total: rows.length, effective: rows.filter(row => row.implementationStatus === 'effective').length,
-    partial: rows.filter(row => row.implementationStatus === 'partial').length,
-    missing: rows.filter(row => row.implementationStatus === 'missing').length,
-    playable: rows.filter(row => row.playable).length
-  });
-  const derived = derive(operations);
-  assert.deepEqual(derived, { total: 22, effective: 2, partial: 20, missing: 0, playable: 22 }, countMessage);
-  assert.deepEqual(counts, derived, countMessage);
+  assert.equal(operations.length, 22, 'Fiorina adds exactly one historical registry row');
+  assert.equal(operations[0], matches[0], 'Fiorina keeps its reviewed registry position');
+  assert.equal(new Set(operations.map(row => row.id)).size, operations.length, 'Registry identities must be unique');
+  assert.equal(new Set(operations.map(row => row.productionOrder)).size, operations.length, 'Registry production orders must be unique');
+  assert.equal(sha(JSON.stringify(canonicalFiorinaJsonV188(matches[0]))), transition.operationSha256,
+    'Unreviewed Fiorina registry declaration');
+  for (const row of operations) {
+    assert.equal(typeof row.playable, 'boolean', 'Registry playability must be explicit');
+    assert.ok(['effective', 'partial', 'missing'].includes(row.implementationStatus), 'Registry status must be explicit');
+  }
+  assert.deepEqual(counts, historicalRegistryCountsV188(operations), 'Fiorina projection requires exact live registry counters');
   const historical = operations.slice(1);
-  return { operations: historical, counts: derive(historical) };
+  return Object.freeze({ operations: Object.freeze(historical),
+    counts: Object.freeze(historicalRegistryCountsV188(historical)), readSource: readHistorical });
 }
+
+// Compatibility export retained for the AVP branch; both names use the same
+// strict projection and the historical API wrappers remain the only adapter.
+export function projectFiorinaRegistryV114(operations, counts, countMessage = 'Fiorina registry counters must match the exact current rows') {
+  const historical = projectFiorinaHistoricalRegistryV188(operations, counts);
+  assert.deepEqual(historical.counts, historicalRegistryCountsV188(historical.operations), countMessage);
+  return Object.freeze({ operations: historical.operations, counts: historical.counts });
+}
+
+// Preserve the complete historical declarations and verifier bodies above.
+// Exported API bindings receive this explicit continuation, so every caller
+// (including V157/V158) gets the same checked projection, not a test-only filter.
+const historicalRegistryVerifiersV188 = Object.freeze({
+  cargo: verifyCargoRegistryContinuationV188,
+  broodstorm: verifyBroodstormRegistryContinuationV188,
+  queenMother: verifyQueenMotherRegistryContinuationV188,
+  guard: verifyQueenMotherGuardRegistryContinuationV188,
+  choir: verifyQueenMotherChoirRegistryContinuationV188
+});
+function withFiorinaRegistryContinuationV188(verifyHistorical) {
+  return (operations, counts, readSource = readRepository) => {
+    const historical = projectFiorinaHistoricalRegistryV188(operations, counts, readSource);
+    return verifyHistorical(historical.operations, historical.counts, historical.readSource);
+  };
+}
+verifyCargoRegistryContinuationV188 = withFiorinaRegistryContinuationV188(historicalRegistryVerifiersV188.cargo);
+verifyBroodstormRegistryContinuationV188 = withFiorinaRegistryContinuationV188(historicalRegistryVerifiersV188.broodstorm);
+verifyQueenMotherRegistryContinuationV188 = withFiorinaRegistryContinuationV188(historicalRegistryVerifiersV188.queenMother);
+verifyQueenMotherGuardRegistryContinuationV188 = withFiorinaRegistryContinuationV188(historicalRegistryVerifiersV188.guard);
+verifyQueenMotherChoirRegistryContinuationV188 = withFiorinaRegistryContinuationV188(historicalRegistryVerifiersV188.choir);
 
 export function reviewedTantalusPrioritiesDigestV188(path, endpoint) {
   const historical = TANTALUS_PRIORITIES_SUCCESSORS_V188[path];
@@ -1844,12 +2114,12 @@ export function reviewedTantalusPrioritiesDigestV188(path, endpoint) {
     assert.notEqual(lead.currentSha256, lead.previousSha256, 'A lead-continuation successor must identify changed bytes: ' + path);
     current = lead.currentSha256;
   }
-  if (!Object.hasOwn(TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors, path)) return reviewedAvpHostDigest20261125(path, current);
+  if (!Object.hasOwn(TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors, path)) return reviewedTantalusMergedIntegrationDigestV188(path, current);
   const join = TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors[path];
   assert.equal(current, join.previousSha256, 'Broken 0d1d9950-to-xeno-trials-join source chain: ' + path);
   assert.ok(validHash(join.currentSha256), 'Invalid xeno-trials-join source digest: ' + path);
   assert.notEqual(join.currentSha256, join.previousSha256, 'A xeno-trials-join successor must identify changed bytes: ' + path);
-  return reviewedAvpHostDigest20261125(path, join.currentSha256);
+  return reviewedTantalusMergedIntegrationDigestV188(path, join.currentSha256);
 }
 
 export function verifyTantalusPrioritiesV188(readSource = readRepository) {
@@ -2005,7 +2275,7 @@ export function verifyTantalusPrioritiesV188(readSource = readRepository) {
     // The lead endpoint is the reviewed 0d1d9950 predecessor of the Xeno Trials join.
     const joined = join.successors[path];
     if (joined) assert.equal(joined.previousSha256, receipt.currentSha256, 'Broken lead-to-xeno-trials-join endpoint: ' + path);
-    assert.equal(sha(readSource(path)), reviewedAvpHostDigest20261125(path, joined ? joined.currentSha256 : receipt.currentSha256),
+    assert.equal(sha(readSource(path)), reviewedTantalusMergedIntegrationDigestV188(path, joined ? joined.currentSha256 : receipt.currentSha256),
       'Unreviewed lead-continuation source bytes: ' + path);
   }
   assert.match(join.baseline, /^[a-f0-9]{40}$/, 'The Xeno Trials join needs its exact 0d1d9950 baseline');
@@ -2013,8 +2283,10 @@ export function verifyTantalusPrioritiesV188(readSource = readRepository) {
     assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
     assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
     assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A xeno-trials-join successor must identify changed bytes: ' + path);
-    assert.equal(sha(readSource(path)), reviewedAvpHostDigest20261125(path, receipt.currentSha256), 'Unreviewed xeno-trials-join source bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedTantalusMergedIntegrationDigestV188(path, receipt.currentSha256), 'Unreviewed xeno-trials-join source bytes: ' + path);
   }
+  verifyTantalusAliens1986V188(readSource);
+  verifyTantalusFiorinaV188(readSource);
   verifyAvpHostSources20261125(readSource);
   return Object.freeze({ successors: successors.size, addedSources: addedSources.size });
 }

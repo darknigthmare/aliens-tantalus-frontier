@@ -1034,6 +1034,16 @@ const titleScreen = new TitleScreenController({
   },
   onForge: () => openForgeContext(),
   onDlc: () => { void openDlcExtensions(); },
+  onAliens1986: () => {
+    try {
+      launchDlcExpedition({ href: '/dlc/aliens-1986/' });
+    } catch {
+      titleScreen.liveStatus.textContent = currentLanguageV185() === 'en'
+        ? 'Aliens (1986) could not be opened. Please try again.'
+        : 'Aliens (1986) ne peut pas être ouvert. Réessayez.';
+      titleScreen.scheduleFocus(titleScreen.aliens1986Button, 'menu');
+    }
+  },
   onOptions: () => {
     titleSceneV79.preservePlacementOnNextShowV87();
     showView('settings');
@@ -1478,6 +1488,23 @@ globalThis.addEventListener('pageshow', (event) => {
   if (event.persisted && standaloneContext === 'dlc') globalThis.location.reload();
 });
 
+function launchDlcExpedition(entry) {
+  const previousContext = standaloneContext;
+  standaloneContext = 'dlc';
+  try {
+    hubEngine.stop(false);
+    engine.stop();
+    bioforgeRuntimeV80.stop({ purge: false, reason: 'dlc-launch' });
+    if (typeof xenoTrialsUiV96 !== 'undefined') xenoTrialsUiV96?.close();
+    audio.setScene(null); audio.stopEffects(); audio.stopMusic(0);
+    globalThis.location.assign(entry.href);
+  } catch (error) {
+    standaloneContext = previousContext;
+    audio.setScene('menu');
+    throw error;
+  }
+}
+
 async function openDlcExtensions() {
   if (dlcGalleryLoading || titleScreen.root.hidden || titleScreen.state !== 'menu') return;
   dlcGalleryLoading = true;
@@ -1490,22 +1517,7 @@ async function openDlcExtensions() {
         showTitleScreen(); titleScreen.openMenu();
         titleScreen.scheduleFocus(titleScreen.dlcButton, 'menu');
       },
-      onLaunch: (entry) => {
-        const previousContext = standaloneContext;
-        standaloneContext = 'dlc';
-        try {
-          hubEngine.stop(false);
-          engine.stop();
-          bioforgeRuntimeV80.stop({ purge: false, reason: 'dlc-launch' });
-          if (typeof xenoTrialsUiV96 !== 'undefined') xenoTrialsUiV96?.close();
-          audio.setScene(null); audio.stopEffects(); audio.stopMusic(0);
-          globalThis.location.assign(entry.href);
-        } catch (error) {
-          standaloneContext = previousContext;
-          audio.setScene('menu');
-          throw error;
-        }
-      }
+      onLaunch: launchDlcExpedition
     });
     titleScreen.hide();
     byId('app').hidden = true;
