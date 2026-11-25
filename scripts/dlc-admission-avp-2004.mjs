@@ -14,6 +14,7 @@ const SOURCE_EXTRAS = new Set([
   'scripts/build-dlc-avp-2004.mjs', 'scripts/dlc-admission-avp-2004.mjs',
   'scripts/verify-dlc-avp-2004.mjs', 'scripts/verify-dlc-menu.mjs',
   'scripts/qa-dlc-avp-2004.mjs',
+  '.github/workflows/dlc-avp-2004.yml',
   'scripts/dlc/avp-2004/README.md',
   'docs/development/AVP_2004_GITHUB_INTEGRATION_20261125.md'
 ]);
