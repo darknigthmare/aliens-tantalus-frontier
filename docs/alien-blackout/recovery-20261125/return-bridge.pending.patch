@@ -1,0 +1,92 @@
+# PENDING RECOVERY PATCH — ALIEN BLACKOUT v0.7.0
+# Reconstructed from exact completed edits retained in the task transcript.
+# Python portable build and node --check succeeded before executor loss.
+# No browser or Node behavior-test pass is claimed. Browser executable absent;
+# the later Node suite attempt was interrupted by executor unavailability.
+# Keep this patch out of the active game until behavior and return flow are validated.
+# Apply against modules/alien-blackout restored from the original v0.7.0 package.
+
+diff --git a/modules/alien-blackout/index.html b/modules/alien-blackout/index.html
+--- a/modules/alien-blackout/index.html
++++ b/modules/alien-blackout/index.html
+@@ -11,3 +11,3 @@
+-<dialog id="title-dialog" class="modal title-dialog"><div class="title-art"><div class="letters">MENDEL / PLANS DE CONTRÔLE<small>UNE VOIX. QUATRE VIES. CINQ CANAUX.</small></div></div><div class="modal-content"><p class="intro">Vous êtes Amanda Ripley, retranchée dans les gaines de Mendel. Le <i>Haldin</i> a accosté pour réparer ses systèmes. Les quatre personnes à bord comptent désormais sur vos yeux.</p><div class="help-grid"><div><strong>01 / OBSERVER</strong><p>Choisissez une caméra sur le plan. Le capteur balaie toutes les 2,5 secondes. Les échos sont datés, jamais une garantie de sécurité.</p></div><div><strong>02 / GUIDER</strong><p>Sélectionnez quelqu’un, puis envoyez-le au terminal. Les déplacements sont physiques. Les autres commencent cachés.</p></div><div><strong>03 / SURVIVRE</strong><p>Une cloison retarde la menace, mais peut être forcée. Variez les leurres et cachez l’équipage. Scellez votre refuge dès l’alerte.</p></div></div><div class="title-bottom"><label>PROFIL DE TENSION<select id="difficulty"><option value="recit">Récit — 12 minutes / secteur</option><option value="survie">Survie — 8 minutes / secteur</option><option value="cauchemar">Cauchemar — 6 minutes / secteur</option></select></label><div class="row"><button id="resume" hidden>REPRENDRE</button><button id="start" class="primary">ÉTABLIR LA LIAISON</button></div></div><p class="notice">Sept réseaux distincts, 56 pièces et 21 interventions annexes (dont sept maintenances). Les circuits marqués + sur la carte offrent une recharge ou une isolation temporaire des gaines. Plans, objectifs et dialogues originaux : ce prototype autonome n’est pas un portage 1:1 du jeu mobile, ni une fusion au moteur Tantalus. Les pertes persistent entre secteurs ; recommencer restaure les effectifs et les ressources d’entrée du secteur.</p></div></dialog>
++<dialog id="title-dialog" class="modal title-dialog"><div class="title-art"><div class="letters">MENDEL / PLANS DE CONTRÔLE<small>UNE VOIX. QUATRE VIES. CINQ CANAUX.</small></div></div><div class="modal-content"><p class="intro">Vous êtes Amanda Ripley, retranchée dans les gaines de Mendel. Le <i>Haldin</i> a accosté pour réparer ses systèmes. Les quatre personnes à bord comptent désormais sur vos yeux.</p><div class="help-grid"><div><strong>01 / OBSERVER</strong><p>Choisissez une caméra sur le plan. Le capteur balaie toutes les 2,5 secondes. Les échos sont datés, jamais une garantie de sécurité.</p></div><div><strong>02 / GUIDER</strong><p>Sélectionnez quelqu’un, puis envoyez-le au terminal. Les déplacements sont physiques. Les autres commencent cachés.</p></div><div><strong>03 / SURVIVRE</strong><p>Une cloison retarde la menace, mais peut être forcée. Variez les leurres et cachez l’équipage. Scellez votre refuge dès l’alerte.</p></div></div><div class="title-bottom"><label>PROFIL DE TENSION<select id="difficulty"><option value="recit">Récit — 12 minutes / secteur</option><option value="survie">Survie — 8 minutes / secteur</option><option value="cauchemar">Cauchemar — 6 minutes / secteur</option></select></label><div class="row"><button id="resume" hidden>REPRENDRE</button><button id="start" class="primary">ÉTABLIR LA LIAISON</button></div></div><div data-tantalus-return-panel hidden><p class="notice">Votre liaison sera sauvegardée avant le retour. Les scènes d’inspection restent hors progression.</p><div class="row"><button type="button" id="tantalus-return-title" class="ghost" data-tantalus-return>RETOUR À TANTALUS</button><button type="button" id="tantalus-export-title" class="ghost" hidden>EXPORTER MA SAUVEGARDE</button></div><p id="tantalus-return-title-status" class="notice" role="status" aria-live="polite"></p></div><p class="notice">Sept réseaux distincts, 56 pièces et 21 interventions annexes (dont sept maintenances). Les circuits marqués + sur la carte offrent une recharge ou une isolation temporaire des gaines. Plans, objectifs et dialogues originaux : ce prototype autonome n’est pas un portage 1:1 du jeu mobile, ni une fusion au moteur Tantalus. Les pertes persistent entre secteurs ; recommencer restaure les effectifs et les ressources d’entrée du secteur.</p></div></dialog>
+ <dialog id="codex-dialog" class="modal codex-dialog"><header><div><div class="eyebrow">ARCHIVES / CONCEPTION</div><h2>Codex de Mendel</h2></div><button data-close="codex-dialog">FERMER</button></header><div class="codex-controls"><input id="codex-search" type="search" placeholder="Pièce, règle, équipement…" aria-label="Rechercher dans le codex"><select id="codex-filter" aria-label="Catégorie du codex"><option value="all">Toutes les fiches</option><option value="room">Pièces</option><option value="rule">Level design</option><option value="prop">Décor</option><option value="crew">Équipage</option><option value="chapter">Secteurs</option><option value="favorite">Favoris</option></select></div><div class="codex-body"><div id="codex-list" class="codex-list"></div><article id="codex-detail" class="codex-detail"></article></div></dialog>
+-<dialog id="system-dialog" class="modal system-dialog"><header><h2>Système & sauvegarde</h2><button data-close="system-dialog">FERMER</button></header><div class="modal-content"><p>Sauvegarde locale propre à Blackout. Les fichiers v0.1 à v0.6 sont migrés vers la v0.7 sans écraser leur sauvegarde d’origine. Une importation reprend toujours en pause ; aucune donnée de la campagne Tantalus n’est modifiée.</p><div class="row"><button id="save" class="primary">SAUVEGARDER</button><button id="load">CHARGER</button></div><div class="row"><button id="export">EXPORTER JSON</button><button id="import">IMPORTER JSON</button><input id="save-file" type="file" accept=".json,application/json" hidden></div><p id="save-status" role="status">Aucune opération récente.</p><div class="row"><button id="audio">SONS : NON</button><button id="fullscreen">PLEIN ÉCRAN</button></div><p><kbd>1–4</kbd> choisir · <kbd>O</kbd> objectif · <kbd>X</kbd> cacher · <kbd>E</kbd> utiliser · <kbd>Espace</kbd> sceller · <kbd>P</kbd> pause · <kbd>F2</kbd> codex.<br>En contrôle direct : flèches ou ZQSD / WASD. Les pièces latérales bloquent la profondeur ; les volumes permettent les deux axes.</p><div class="row"><button id="retry" class="ghost">RECOMMENCER LE SECTEUR</button><button id="new" class="ghost">NOUVELLE CAMPAGNE</button></div><p class="notice">F9 ouvre une inspection de développement explicitement marquée, hors progression. Aucun test ne démontre une adaptation graphique officielle ou l’intégration native à Tantalus.</p></div></dialog>
++<dialog id="system-dialog" class="modal system-dialog"><header><h2>Système & sauvegarde</h2><button data-close="system-dialog">FERMER</button></header><div class="modal-content"><p>Sauvegarde locale propre à Blackout. Les fichiers v0.1 à v0.6 sont migrés vers la v0.7 sans écraser leur sauvegarde d’origine. Une importation reprend toujours en pause ; aucune donnée de la campagne Tantalus n’est modifiée.</p><div class="row"><button id="save" class="primary">SAUVEGARDER</button><button id="load">CHARGER</button></div><div class="row"><button id="export">EXPORTER JSON</button><button id="import">IMPORTER JSON</button><input id="save-file" type="file" accept=".json,application/json" hidden></div><p id="save-status" role="status">Aucune opération récente.</p><div class="row"><button id="audio">SONS : NON</button><button id="fullscreen">PLEIN ÉCRAN</button></div><p><kbd>1–4</kbd> choisir · <kbd>O</kbd> objectif · <kbd>X</kbd> cacher · <kbd>E</kbd> utiliser · <kbd>Espace</kbd> sceller · <kbd>P</kbd> pause · <kbd>F2</kbd> codex.<br>En contrôle direct : flèches ou ZQSD / WASD. Les pièces latérales bloquent la profondeur ; les volumes permettent les deux axes.</p><div class="row"><button id="retry" class="ghost">RECOMMENCER LE SECTEUR</button><button id="new" class="ghost">NOUVELLE CAMPAGNE</button></div><div data-tantalus-return-panel hidden><p class="notice">Votre liaison sera sauvegardée avant le retour. Les scènes d’inspection restent hors progression.</p><div class="row"><button type="button" id="tantalus-return-system" class="ghost" data-tantalus-return>RETOUR À TANTALUS</button></div><p id="tantalus-return-system-status" class="notice" role="status" aria-live="polite"></p></div><p class="notice">F9 ouvre une inspection de développement explicitement marquée, hors progression. Aucun test ne démontre une adaptation graphique officielle ou l’intégration native à Tantalus.</p></div></dialog>
+@@ -16,2 +16,2 @@
+ <div class="toast" id="toast" role="status" hidden></div>
+-<script src="src/data.js"></script><script src="src/content-v3.js"></script><script src="src/content-v4.js"></script><script src="src/content-v5.js"></script><script src="src/content-v6.js"></script><script src="src/content-v7.js"></script><script src="src/assets.js"></script><script src="src/assets-v7.js"></script><script src="src/engine.js"></script><script src="src/protocol.js"></script><script src="src/survival-v3.js"></script><script src="src/liaison-v4.js"></script><script src="src/rescue-v5.js"></script><script src="src/field-v6.js"></script><script src="src/architecture-v7.js"></script><script src="src/scene-v7.js"></script><script src="src/render.js"></script><script src="src/render-v4.js"></script><script src="src/render-v5.js"></script><script src="src/render-v6.js"></script><script src="src/app.js"></script><script src="src/interface-v3.js"></script><script src="src/interface-v4.js"></script><script src="src/interface-v5.js"></script><script src="src/interface-v6.js"></script><script src="src/interface-v7.js"></script></body></html>
++<script src="src/data.js"></script><script src="src/content-v3.js"></script><script src="src/content-v4.js"></script><script src="src/content-v5.js"></script><script src="src/content-v6.js"></script><script src="src/content-v7.js"></script><script src="src/assets.js"></script><script src="src/assets-v7.js"></script><script src="src/engine.js"></script><script src="src/protocol.js"></script><script src="src/survival-v3.js"></script><script src="src/liaison-v4.js"></script><script src="src/rescue-v5.js"></script><script src="src/field-v6.js"></script><script src="src/architecture-v7.js"></script><script src="src/scene-v7.js"></script><script src="src/render.js"></script><script src="src/render-v4.js"></script><script src="src/render-v5.js"></script><script src="src/render-v6.js"></script><script src="src/app.js"></script><script src="src/interface-v3.js"></script><script src="src/interface-v4.js"></script><script src="src/interface-v5.js"></script><script src="src/interface-v6.js"></script><script src="src/interface-v7.js"></script><script src="src/repository-return.js"></script></body></html>
+diff --git a/modules/alien-blackout/tools/build.py b/modules/alien-blackout/tools/build.py
+--- a/modules/alien-blackout/tools/build.py
++++ b/modules/alien-blackout/tools/build.py
+@@ -8,2 +8,2 @@
+-for name in ('data','content-v3','content-v4','content-v5','content-v6','content-v7','assets','assets-v7','engine','protocol','survival-v3','liaison-v4','rescue-v5','field-v6','architecture-v7','scene-v7','render','render-v4','render-v5','render-v6','app','interface-v3','interface-v4','interface-v5','interface-v6','interface-v7'):
++for name in ('data','content-v3','content-v4','content-v5','content-v6','content-v7','assets','assets-v7','engine','protocol','survival-v3','liaison-v4','rescue-v5','field-v6','architecture-v7','scene-v7','render','render-v4','render-v5','render-v6','app','interface-v3','interface-v4','interface-v5','interface-v6','interface-v7','repository-return'):
+     source = (ROOT / 'src' / (name + '.js')).read_text(encoding='utf-8')
+diff --git a/modules/alien-blackout/src/repository-return.js b/modules/alien-blackout/src/repository-return.js
+new file mode 100644
+--- /dev/null
++++ b/modules/alien-blackout/src/repository-return.js
+@@ -0,0 +1,59 @@
++(() => {
++  'use strict';
++
++  // The repository serves this one entry point. A downloaded portable file,
++  // module preview or unrelated origin path must not gain a broken return link.
++  const current = new URL(window.location.href);
++  if (!['https:', 'http:'].includes(current.protocol)
++      || current.pathname !== '/dlc/alien-blackout/index.html') return;
++  const destination = new URL('../../index.html', current);
++  if (destination.origin !== current.origin) return;
++
++  const app = window.app;
++  if (!app?.engine || typeof app.save !== 'function') return;
++  const panels = [...document.querySelectorAll('[data-tantalus-return-panel]')];
++  const buttons = [...document.querySelectorAll('[data-tantalus-return]')];
++  const titleExport = document.getElementById('tantalus-export-title');
++  const exportButton = document.getElementById('export');
++  const statuses = [
++    document.getElementById('tantalus-return-title-status'),
++    document.getElementById('tantalus-return-system-status'),
++  ].filter(Boolean);
++  let returning = false;
++
++  function notify(text) {
++    statuses.forEach(status => { status.textContent = text; });
++  }
++
++  function returnToTantalus() {
++    if (returning) return;
++    const engine = app.engine;
++    engine.paused = true;
++    // Reuse the native v7 save contract. Never rewrite a slot in inspection,
++    // migrate a schema here, or touch the host campaign's storage.
++    if (engine.status !== 'menu' && !app.inspection) {
++      let saved = false;
++      try { saved = app.save(true) === true; } catch { /* Remain in Blackout. */ }
++      if (!saved) {
++        notify('Retour suspendu : la sauvegarde locale est indisponible. Exportez votre sauvegarde JSON avant de quitter.');
++        if (titleExport) titleExport.hidden = false;
++        const inTitle = document.getElementById('title-dialog')?.open;
++        (inTitle ? titleExport : exportButton)?.focus();
++        return;
++      }
++    }
++    returning = true;
++    buttons.forEach(button => { button.disabled = true; });
++    try {
++      window.location.assign(destination.href);
++    } catch {
++      returning = false;
++      buttons.forEach(button => { button.disabled = false; });
++      notify('Le navigateur a bloqué le retour. Vous pouvez réessayer.');
++    }
++  }
++
++  panels.forEach(panel => { panel.hidden = false; });
++  buttons.forEach(button => button.addEventListener('click', returnToTantalus));
++  titleExport?.addEventListener('click', () => exportButton?.click());
++})();
