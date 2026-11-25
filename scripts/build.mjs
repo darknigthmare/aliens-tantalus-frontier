@@ -1,3 +1,4 @@
+import { verifyAvpBundle } from './build-dlc-avp-2004.mjs';
 import { verifyXenoVisualAdmissionsV205 } from './public-xeno-visual-admissions-v205.mjs';
 import { verifyXenoPriorityAdmissionsV204 } from './public-xeno-priority-admissions-v204.mjs';
 import { verifyXenoPriorityAdmissionsV203 } from './public-xeno-priority-admissions-v203.mjs';
@@ -29,6 +30,7 @@ import { verifyPublicAdmissionsV122 } from './public-release-admissions-v122.mjs
 import { verifyPublicAdmissionsV123 } from './public-release-admissions-v123.mjs';
 
 const root = process.cwd();
+await verifyAvpBundle(root);
 await verifyPublicAdmissionsV163(root);
 await verifyXenoSpriteAdmissionsV188(root);
 await verifyXenoSpriteAdmissionsV189(root);

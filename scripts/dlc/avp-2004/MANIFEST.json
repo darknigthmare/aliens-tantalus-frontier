@@ -1,0 +1,920 @@
+{
+  "schema": 1,
+  "version": "0.11.0",
+  "integrationRevision": 1,
+  "upstreamArchive": {
+    "name": "ALIENS_TANTALUS_DLC_AVP_2004_v0.11.0.zip",
+    "bytes": 58704014,
+    "sha256": "0520c1d4ecc47ffd72ea2907807e978ca4fc0b8b26e49a80bc8c83166641a155",
+    "transferStatus": "pending_transfer"
+  },
+  "runtime": {
+    "path": "src/dlc/avp-2004/index.html",
+    "bytes": 1115546,
+    "sha256": "d8cd3141fb8e1468d5b108f20975ec359b74bec9f860c48359af7c559d3a455c"
+  },
+  "sources": [
+    {
+      "path": "scripts/dlc/avp-2004/MODULES.json",
+      "bytes": 3171,
+      "sha256": "69536281a6d2ff031a2dcd86bf5e844f1a80dac4bfb8c5d6fcdb8589e43fee95"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/template.html",
+      "bytes": 8436,
+      "sha256": "01b3d5dbf80e237fcd67d8cd32c0f922b48c9243edd4437cc819e14d608865d6"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/app.js",
+      "bytes": 70024,
+      "sha256": "71620aef2c155c5abd89be73ebc8483177266e73225d7df307278fc639efd8ca"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets.js",
+      "bytes": 296390,
+      "sha256": "dc52c0cb6f401a174770053b3b4293d3658ac65851faa9e6e013152efff8485f"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/altar.svg",
+      "bytes": 1758,
+      "sha256": "a23e5ebdc2db94d5e95d31ef7a98253a975ac73c745e49a9692e44b2fe1bf9fd"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/anchor.svg",
+      "bytes": 1354,
+      "sha256": "ae2fc7328cf0e9942612d02135c44770be9ab696c23d97d4f3383b21eefad092"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/antenna.svg",
+      "bytes": 1338,
+      "sha256": "85593ed84a65d1a30932af71a8057c3f0078ef548c5c251fa6881d85868beab8"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/barrel.svg",
+      "bytes": 1355,
+      "sha256": "ffc685200059f161b4fe80aeee36dc5d70898d2896fb7b2b482137b4806ec554"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/bedroll.svg",
+      "bytes": 1152,
+      "sha256": "5be6e3c37e996d24c3dac75292a342ecb96b1e16ea4155c341738d5ca8a447d5"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/bench.svg",
+      "bytes": 1721,
+      "sha256": "393eb121c8e9e78a1604eaa9463e31d576f78779a3766a1377c2042260d9308e"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/binoculars.svg",
+      "bytes": 1379,
+      "sha256": "10c86dddaf0bf3a6b553ecd0e443336269881b104e9a62b3c637e0345462eee2"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/boiler.svg",
+      "bytes": 1621,
+      "sha256": "a163550a4a7fee606315f6d4e04ced35677a00fc0dc97a49104d4ab4628b28f2"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/bollard.svg",
+      "bytes": 1641,
+      "sha256": "024718f2a131d191cc001f18a7756efa446cf48975452d442abe25d77b726d08"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/bones.svg",
+      "bytes": 1747,
+      "sha256": "dc6897db84a511231389135ff8cac30be1e46d15f5956ee6e3f80de805ebfcd6"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/boots.svg",
+      "bytes": 1358,
+      "sha256": "6527feeb7ebb341a0e008d2826ca076384ee86c5916456864dd0f1dc9430db04"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/brazier.svg",
+      "bytes": 1787,
+      "sha256": "c5ca41d6f57b59870814ff08d349b6e9acdf8d9707264d033a4c390c7ea26abc"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/braziertall.svg",
+      "bytes": 1366,
+      "sha256": "dca0655029f884b6a0a707401afc222dc5c979b007366c932a871d34f0aa0ca4"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/bunk.svg",
+      "bytes": 2424,
+      "sha256": "1bbee7380216899164f379480a285514e6f3eeeae3005ad30c64de6bc0fc7183"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/cablecoil.svg",
+      "bytes": 2081,
+      "sha256": "095a8ef3d94e17d4053b6e0092d4ed7f8c3245ed660337f7c9a066f6733a9122"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/calendar.svg",
+      "bytes": 2374,
+      "sha256": "346ca83aa6f85b99b23a4cf3acba7f294020a351560047447775a63d6d0a0f7d"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/case-field-open.svg",
+      "bytes": 1229,
+      "sha256": "b405551d58a86634c719f574c01f90c20a5e504d7d24db4a176ba476ce2e9c6f"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/case-field.svg",
+      "bytes": 1286,
+      "sha256": "350946a86493ff53f7cee3c3c4b3b6b4f9c2f49d1a765a0fc4ed54586e765ef8"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/celtic.svg",
+      "bytes": 4246,
+      "sha256": "48ada87aef539aeb39d407d23b4d2132c1a0c23c8e67ea70be811c88dd77740c"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/chain.svg",
+      "bytes": 2309,
+      "sha256": "a1a484bae6aad7c9c7330e04dbc51cce182606402fb4ba7e9edf9da1ade762cb"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/chopper.svg",
+      "bytes": 4616,
+      "sha256": "670cd268498fbca788e9dc57946f1947d311bdffd4714fa0a71c4b895e11a230"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/coat.svg",
+      "bytes": 1323,
+      "sha256": "2189f73a046b7b491e44cea34b9b1be00d86946f03fa889b72794282e77bb1b8"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/cocoon.svg",
+      "bytes": 1766,
+      "sha256": "8e859bcfdd6615659a5f7681cf1d109131bab0da4f37760b4fef4ba8237ba839"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/connors.svg",
+      "bytes": 3992,
+      "sha256": "3a8af28c1bf1d83e6006b1bd096325231d7a45c47d74b0afa7d8815314ca7ee2"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/counterweight.svg",
+      "bytes": 1490,
+      "sha256": "321d28eeccf84890a623c2ec470716c797eb14908f9bbc5f2b40c88991026a41"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/crate.svg",
+      "bytes": 1843,
+      "sha256": "87396cc1d39c18aa3cdbd33fae2cd34ef7735f7c10ed5afe2824561d254b8869"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/crates-stack.svg",
+      "bytes": 1323,
+      "sha256": "365fa9b21aabfe8053defd34b1843711b7aa8305ab97b908efa9da113accc9ba"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/diningtable.svg",
+      "bytes": 1256,
+      "sha256": "e30ff889102944d299160dbf83cf6d26a7d08d9a5ff985d4791fe41d36acf6d2"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/egg-broken.svg",
+      "bytes": 1272,
+      "sha256": "3df42d46ae93ffa93c6fae6e2ed02922b0afe257e99598356cf2899b2780f0b4"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/egg-open.svg",
+      "bytes": 1346,
+      "sha256": "52b14bb64a998d1ba299cb34164dbba95858dba9bb5ccd50f53798302418f02e"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/egg.svg",
+      "bytes": 1667,
+      "sha256": "5fc16f81be7bb0cfd9cdc0cb8dbb4b07da3902e8338717fdc7d9cebd80f7b60e"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/eggs.svg",
+      "bytes": 1854,
+      "sha256": "ec2d022ffb38da416123585c8fa7f7053a8227344a9e00d8ba5f42daae160ec1"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/eggtrack.svg",
+      "bytes": 1594,
+      "sha256": "0b612a068df04cf4c60530517155c4dda4aed320e75999f710330bfd51fb5970"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/elder.svg",
+      "bytes": 4855,
+      "sha256": "3db569e9fc840c066bebf61730b4f0d663daaf27de9b70ea330d7465bb81ef63"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/facehugger.svg",
+      "bytes": 1994,
+      "sha256": "577f73c57a6320dd531fc200e88ca4f7864435fc7ace04c6793caaf785ab7cbe"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/field-page.svg",
+      "bytes": 1375,
+      "sha256": "0f6229ffb3ff52ec3e2b339ce3d0443ac6f7b73e40b54ca68a1f75da0f1a6765"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-analysis-kit.svg",
+      "bytes": 1333,
+      "sha256": "ce0abe250dab62fa0d87c4c390ab1828af1aa5f36e586e0f1603e759f6dfe641"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-beacon.svg",
+      "bytes": 1203,
+      "sha256": "590e9d8c048bc29b1ae11d9d37366c30dd573d5962834f892e1e5dbae5749836"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-beretta.svg",
+      "bytes": 1233,
+      "sha256": "390617a82eeb817ab1c6eb656d9b5c51b17b062e69fd73355eddd4ffae0c1d79"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-camera.svg",
+      "bytes": 1324,
+      "sha256": "f8cc9c654c93723acb2ecb30478b9a3d95f261880d5c83f2a06d09c6fd6932f1"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-caster.svg",
+      "bytes": 1238,
+      "sha256": "d45ae4cf66da0fee193b9399ef079b60671f4d8fa6968abf7effc1f175b7c858"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-combistick.svg",
+      "bytes": 1249,
+      "sha256": "7de36fdfd8c65c35a9679459031d57063c53162268659d8c955aff33436e707e"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-crampons.svg",
+      "bytes": 1317,
+      "sha256": "b813a559b2567fc02da23da34b3925fdf1d8a9ed1d8a45bdc8f844b8ca497e28"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-dagger.svg",
+      "bytes": 1175,
+      "sha256": "d213e21cf2c60df44552e68d5449a6104424246c83547d3bd2d904fc2507f902"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-desert-eagle.svg",
+      "bytes": 1374,
+      "sha256": "c178c84bd730681f4cde4e365e1b166a1ee4d36160a96798e3cbd517b12354f6"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-drop-pod.svg",
+      "bytes": 1244,
+      "sha256": "762a4811708e048b3890b061410ae4bcc9547affb8dcdf6d46babcf4a9783231"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-egg-rail.svg",
+      "bytes": 1373,
+      "sha256": "79c6e3324eea4b830b6beb3223e748db5c54948018bce41c83e91eb5747e74ec"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-flare-pistol.svg",
+      "bytes": 1361,
+      "sha256": "4feb26f66d945403b31be29c75e35a874f1c30a41d80752975d67b34147bb868"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-flare.svg",
+      "bytes": 1228,
+      "sha256": "b0e601b31bf35e520acf863c317739b0aa46f8bcf4e0a761b0ac7462b8e903fe"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-g36c.svg",
+      "bytes": 1339,
+      "sha256": "037b1a14ff070ce61e4f310c4a7a8a3a24fe31337a69110f1d5560db01572534"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-headset.svg",
+      "bytes": 1303,
+      "sha256": "566196534b3acac33eb76f84a3c1f16c11d65df9ba0f4f11b887f9402d78364b"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-helicopter.svg",
+      "bytes": 1601,
+      "sha256": "455fb4984de54f88d950b31c7a50409932c9eccc0aa162689d09862aff3b144a"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-iceaxe.svg",
+      "bytes": 1181,
+      "sha256": "54ed2a98458f88b2568543a5a667a01c66d8e45ea61aedb51464980458daaf1d"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-inhaler.svg",
+      "bytes": 1204,
+      "sha256": "e9fe481e62047ba855a43cb9f0c944feceaabd60e43a1c38ecd6a94d6b3d1598"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-netgun.svg",
+      "bytes": 1236,
+      "sha256": "1d3dd50035c66e7b2f3bae9e17a20ca683662256c161d91358751edc185cce9d"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-newborn.svg",
+      "bytes": 1338,
+      "sha256": "59c60bce02514ec636ea6b42aff73ac69e91125b69ab4f388cb7913c9939068d"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-notebook.svg",
+      "bytes": 1252,
+      "sha256": "8315c69425c68566ffe1ca96729272b2818956f082480bd9cb665ead62b0b9d7"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-ovipositor.svg",
+      "bytes": 1470,
+      "sha256": "561b94b5e5d1c53d45d0707d13f51ad842388ed7b7d386e6e77ab90070bd86e4"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-piton.svg",
+      "bytes": 1310,
+      "sha256": "c52c76dd4df4ee2874a41ad6c31297af83b17c97f1f39d2bcde2f506588f39ec"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-queen-hoist.svg",
+      "bytes": 1345,
+      "sha256": "48a6a705fdfb825567a601c33fb85238b840cb787fcaa8a2c583e41fc55641db"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-radio-console.svg",
+      "bytes": 1379,
+      "sha256": "2dbedaa861b35565c10ad5ac789357c2a84ec34a69b406a619b996f4cd09f476"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-samplecase.svg",
+      "bytes": 1282,
+      "sha256": "e8fb114cb5a000802ce17864a1e09e2de8a962647f854895b1f6c4fcc42a6ac5"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-satphone.svg",
+      "bytes": 1261,
+      "sha256": "7e5680a159036df1ee01cd4801fd925dc784672fec6f6aa2240f5406cefbb5be"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-scanner.svg",
+      "bytes": 1304,
+      "sha256": "c193935f539f1b848552686cdab23e1f9c4720ba2e9ddd77d5b401fe68e40217"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-shield.svg",
+      "bytes": 1323,
+      "sha256": "9de7f8529e9cc2f948f9c0deed3bfd92061a09185a685ab51ef24bac0d6defbd"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-shuriken.svg",
+      "bytes": 1685,
+      "sha256": "7034328cb86d9cc0d1daf2331c58d12503ccd9e42cc747e79add758c2ae3801d"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-snowcat.svg",
+      "bytes": 1608,
+      "sha256": "608dcf5d2a03bab5b92a21698dfca7268a5a9840ccffd6865bd42dfc79a64cd3"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-tail-spear.svg",
+      "bytes": 1300,
+      "sha256": "e76ce37b7f2a0fe809b40c686221ac08e87d5808d5e948855b6bc0417cba20a6"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-video.svg",
+      "bytes": 1305,
+      "sha256": "8f6884bdbe4d77a827eec1734687a6b2a54860ea6dface9fa3e1238316493b05"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/film-wrist-unit.svg",
+      "bytes": 1225,
+      "sha256": "c394e15b415a9d229a94a079bd76c77033dfe8cc85418c8523477cb7198d94d9"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/floodlight.svg",
+      "bytes": 1372,
+      "sha256": "ed34ec9749d12ab86befc8be78c6a5a6df5c426cfe4e70de1d9c81ca0c287f56"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/frostwindow.svg",
+      "bytes": 1346,
+      "sha256": "d51163c90742b763bb26016f52170f9949c620eae4d85be4d70e8811ca611644"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/gear.svg",
+      "bytes": 1855,
+      "sha256": "14e8853ac3a3e983c83a7e62780a734d5e3df133fe92b600832656436d848c62"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/generator.svg",
+      "bytes": 2123,
+      "sha256": "e403468db4d58e72e1413e12e6bfac1b3cbb71586e27a58b1c181b1232cdaad5"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/grate.svg",
+      "bytes": 1752,
+      "sha256": "40c2f7a5218f2a31fb70f3e18b0d25fe9d85ce2afd927d3592a08854c229a94e"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/grid.svg",
+      "bytes": 4785,
+      "sha256": "8532c90e87aefbd53e8a6412f1e71f622f91746f006cea7839ec038d86167c48"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/guard.svg",
+      "bytes": 2307,
+      "sha256": "5bbc6badbc1fc674a21c049b2c01d7aa8d49a0fb5e246f061904116f7febca87"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/helmet.svg",
+      "bytes": 1301,
+      "sha256": "3effd95af36783d9f3eb4aef17d244a2498735cd0aa6eedbc82b1e568192449d"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/hide-niche.svg",
+      "bytes": 1136,
+      "sha256": "0568b214162049e8da08f654104aa80cce2292924e9456029b3c8bc0f39a853d"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/hook.svg",
+      "bytes": 1260,
+      "sha256": "556d2d2cd4986932de4c756d7379b04521afe4fffab55f4a3a54afeef90d9564"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/journal.svg",
+      "bytes": 1326,
+      "sha256": "bb3f8c6bdf70b299e748bb553d667625d6b1569f54fa461c29b2f595234f2cd1"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/lantern.svg",
+      "bytes": 1821,
+      "sha256": "6082ab87b2edce1c5726d47a739a54976b135a463620499b108a34ea19a9a833"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/lever.svg",
+      "bytes": 1361,
+      "sha256": "d4b6b04513e8818d99eafc99e7f8974ee68e4da0f8508c03b6f06adf71c46b34"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/lex-marked.svg",
+      "bytes": 3872,
+      "sha256": "a0e79573b50dade23841dc35919216649fa71c776062e1b6064820e5aace1f19"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/lex.svg",
+      "bytes": 3769,
+      "sha256": "9694f6fab4d5266ab5e69507a38f2219d4ff93b9a449ef6d5d3a810d4db3881a"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/lifering.svg",
+      "bytes": 1413,
+      "sha256": "bda01562c4719b3314a6b49568192a218173b9682aef817be07d997a67c51425"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/locker.svg",
+      "bytes": 1322,
+      "sha256": "1124fc6ad99893eb24213874c83611ba5923b6b0ce9618002699d7156a7d5f57"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/maptable.svg",
+      "bytes": 1814,
+      "sha256": "ecfe7086b21769ad82cf7bcbd4b048073daadf667f540241ed29d4eb45559c7c"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/medkit.svg",
+      "bytes": 1681,
+      "sha256": "2c984f0df7708e42a7ff6f2e2a0e2c4551247f9fcdbd6ca91533211c65f95c6e"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/miller.svg",
+      "bytes": 3277,
+      "sha256": "2a38d3039fa3d4fff01be48713bf08b6ff6ac58dde64ae825af4e05e8eeaa493"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/mug.svg",
+      "bytes": 1064,
+      "sha256": "6bcc75b86699c482500715ff6df12d2faaef928de5d2ec42365e3f1442488788"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/net.svg",
+      "bytes": 2299,
+      "sha256": "5a72d799ab9d36c50b4c99927ecd66cfdb0baedc5a912eec8a408cc2e175d148"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/obelisk.svg",
+      "bytes": 2049,
+      "sha256": "9a5bd8a01588e02eaa584abab8ca7e2521672eae030942fe636dd6df8b04b750"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/oilcan.svg",
+      "bytes": 1734,
+      "sha256": "ecbc7550b52fce5f961f05c480845fd526b9e0585211f5306e195b3ed0fa5600"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/parks.svg",
+      "bytes": 3914,
+      "sha256": "718f35e1604fdbb419e4c503595cf273f78beaad85359e459e466e626c87e3e7"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/pillar.svg",
+      "bytes": 1669,
+      "sha256": "1f3efde89dc7f6e0007a55b10ce4e5ae2021b79d5d9dae7acfb8538cce637b93"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/pipebank.svg",
+      "bytes": 1447,
+      "sha256": "9c8fdc0bab06946c233bc63c1157d2d4148db495cc08312cf0ce9b504c3f4ae4"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/plasmacase.svg",
+      "bytes": 1682,
+      "sha256": "bb13c18152e347cbe51390948e4a7d850ca906d3aa023df49e6e8361112601a9"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/pulley.svg",
+      "bytes": 1532,
+      "sha256": "bf452872894c0126356ffe2fba1de85589a80a8d344ba7b38dfeaedfc4c1856e"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/pylon.svg",
+      "bytes": 1807,
+      "sha256": "e75c3bc22dde6a379be46e414f69bf55dd03d9aa6772dcab9c7a0658fa7bb710"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/queen.svg",
+      "bytes": 6032,
+      "sha256": "509a682a8c15a83736469b47be60addb76b2254efd7a2e7e4d2f3c57d4044358"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/quinn.svg",
+      "bytes": 3360,
+      "sha256": "3c07fc60ad1c90ea49b997b24d8961d417743d43364fc45e7c39cc70d851e15e"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/radio.svg",
+      "bytes": 1926,
+      "sha256": "a178dcb31b6dbd7e196406485e627bb6191a4295b3c398e5449fbb7af23a9187"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/railingstone.svg",
+      "bytes": 1538,
+      "sha256": "6b5ad22f29674bcd307101b4a313c56191421af817d7f906887e760830620778"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/relief.svg",
+      "bytes": 1767,
+      "sha256": "8bcefb0e20bc6b3a796ce019595d759ba0bcc3dded58a581639027b25e36a27e"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/resin.svg",
+      "bytes": 1970,
+      "sha256": "e2fa19cac44afd5e4eb87629b927d49571265cdfb8d02489304f264db7d7bd99"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/rope.svg",
+      "bytes": 2369,
+      "sha256": "ce9be7d2a58f09756c29bcc3ebd342ec16afe1fbae9fdb3a93f2b5369b5fad1c"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/rousseau.svg",
+      "bytes": 3917,
+      "sha256": "9830921db5fdf18a7281de91821724463b909cc8d9bf4fc58b00ac243f726d07"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/rubble.svg",
+      "bytes": 1629,
+      "sha256": "42d5c9b208c84e3a580eb097156577f36db8b0c3cfac72394f09e4e1f1d8be48"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/sarcophagus.svg",
+      "bytes": 1893,
+      "sha256": "81cd380d60568986ff3416d066c446ef676e309e6c69db560baa18ad6dbac74a"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/scar-unarmed.svg",
+      "bytes": 4587,
+      "sha256": "63fb717853be7035786d709770b48630cad7fa267c9b7317aad07176cc0b6702"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/scar-unmasked.svg",
+      "bytes": 4825,
+      "sha256": "80a7a9430009c0d4630110cb635e562b3f57fa0641d72ffc62cf83939ed1eda3"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/scar.svg",
+      "bytes": 4822,
+      "sha256": "6df11c5667258476701e189ca0e0e548db1174a95650478f0a0f662887cdb539"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/sebastian.svg",
+      "bytes": 3424,
+      "sha256": "49dc43930928326e4aa22c44b69e91afa55c654391ea9149e3f29a991ad98935"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/shelf.svg",
+      "bytes": 2253,
+      "sha256": "182756d307e81d87f55a39be35cf1cdd632a5dd4590133a0301f6354b25416b1"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/slab.svg",
+      "bytes": 1719,
+      "sha256": "768184f75b17d17d427f9fc5940a26536a774ab9b5358510fe78cbaec403de45"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/sled.svg",
+      "bytes": 1375,
+      "sha256": "fa2ebfd507395a797d16b3399bed87d973650488a7fb01c3904ba615b6921f9a"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/stafford.svg",
+      "bytes": 3703,
+      "sha256": "a0ef6011f3cc8c2919272a39f177e582a9ef45d106a3c9cb86088f636b03da03"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/statue.svg",
+      "bytes": 1798,
+      "sha256": "be969e043b895ddfa933a066ec7b819eb4c5759f236656b69b269853c321374e"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/stonearch.svg",
+      "bytes": 1652,
+      "sha256": "d730cd2d8f5bfbe539ec5a59364a3c5c9e94279e45c33b65fca6a00760e85338"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/stove.svg",
+      "bytes": 1757,
+      "sha256": "4e79d8b23e2837d16f0bd4e867fec4f4fbc2ca8e62431bed209a03a9b20829c5"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/suitcase.svg",
+      "bytes": 1272,
+      "sha256": "863af6b1062bf002a7f7cbea59f458d05e32e469a324b480aed29d8daf83e602"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/switchboard.svg",
+      "bytes": 1484,
+      "sha256": "a2227a7ef5d0a547547373ca811e9d96e5e809abe55f685a5961a3e0c64c81c3"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/tablet.svg",
+      "bytes": 1504,
+      "sha256": "d308d8ded011dffa1065ba49872009d23817ba340abe5d6ff280f33ffe440c67"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/tank.svg",
+      "bytes": 1831,
+      "sha256": "bab865170b9fcac92be80d6f438d16973b5f9b3198cab0f62b2582c27fa20b06"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/thermalmap.svg",
+      "bytes": 1445,
+      "sha256": "7d0d491cfbeca67b9f9313b5fc097b6863f13d58b34dcd7db4a6fdd9a8322ea4"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/toolrack.svg",
+      "bytes": 1383,
+      "sha256": "8068b8cdab96c5abe7e00ae47394d20b82d25d1b899ee89d17a5dca4e85e73f1"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/utility-bolt.svg",
+      "bytes": 273,
+      "sha256": "6d34fee75b224da6176ff58d2c2cfe1b56047f329b2d2c9367255130aab28014"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/utility-bracket.svg",
+      "bytes": 488,
+      "sha256": "05d4674302159b8d09f3d7c73e4530070e2dcb5e2d792e3d160960509d091b0e"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/utility-chain.svg",
+      "bytes": 1281,
+      "sha256": "4807bb3f07cb8dac3bfb0a8f62c407b4381f5d0e1066c3466a6bad3b3edb8e27"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/utility-lamp-off.svg",
+      "bytes": 984,
+      "sha256": "94a4e23cfed6d2e744f43d5b83808675cfd82ff63dd1e270630c4dddc471e541"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/utility-lamp.svg",
+      "bytes": 984,
+      "sha256": "93eeeee44e952080200634274de72e8d947333e744bac9a10ad3a4d8b6acdf17"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/utility-piton.svg",
+      "bytes": 610,
+      "sha256": "fb25711dc2b64d2d5fe480ca63bb412040dc1e0b40c38faa3f82f54e58139f1e"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/utility-radio-on.svg",
+      "bytes": 799,
+      "sha256": "2f3d5bc7e5626a611ae5dab472c8bacbe975b53b248a88430c8e25178879135e"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/utility-radio.svg",
+      "bytes": 799,
+      "sha256": "dbef420a721a842111d80d70c7f7b0abbdda9d381ecd13a404d5006bc78c923c"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/utility-valve.svg",
+      "bytes": 702,
+      "sha256": "b71c3f25ae0402a7fea8728053e1cf5ac54270d1b3532577c776c9b1e48ad872"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/valve.svg",
+      "bytes": 1409,
+      "sha256": "1cd851728c35c29dfe1df6e8dbab1dcc92b6db65030927615f7805752523d353"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/verheiden.svg",
+      "bytes": 4002,
+      "sha256": "bcca4bf70b0ceb1afe33d0ffe74c71cc9cc61e6c8aa529d2652a1f963dd9bb9f"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/waterchannel.svg",
+      "bytes": 1154,
+      "sha256": "4c71d1a49d627960a7acda789ccc597be2204ac5333867864856690c456ac7aa"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/weyland.svg",
+      "bytes": 3353,
+      "sha256": "412b76c57fd2d596b7e66ca0914c7d0fac34cce72c203181cb3957ad726480b6"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/whalebone.svg",
+      "bytes": 2069,
+      "sha256": "ce54ea11252fae06a89aecafd1f2a55eec54f0fd3ec278c4fbfa36cea057b639"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/winch.svg",
+      "bytes": 2525,
+      "sha256": "e548fecf5da318cbdf3218632920618b18892001122aa798efc85fbd6cca9798"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/winchstone.svg",
+      "bytes": 1450,
+      "sha256": "35f695dcad57db192ec69b33ef5ccfb1bb8fb35065873cfc7af257e573804274"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/worklamp.svg",
+      "bytes": 1372,
+      "sha256": "0d3f091bcf00719b847aafcb416ac549e2ed91aa2aa8ec0da954c9a9527b067d"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/assets/xeno.svg",
+      "bytes": 4085,
+      "sha256": "a9c8a3a3d2c5b7859303079a6795dc4bf1c7ba942e4cbc4ac52884836dff5c15"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/core.js",
+      "bytes": 39907,
+      "sha256": "41e99f330ef65bc8bbf45fdff981016a269d841d19c1b9aa685d0eab39122a72"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/data.js",
+      "bytes": 240868,
+      "sha256": "39a66e315447a1ea860484c3edb2a5d6c33ba93c4be2ffbcb7845f7939d5eafd"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/encounter-data.js",
+      "bytes": 3879,
+      "sha256": "682f2661ebf8e12f3763e01896a8f0eb93504ea0c11c0a03ce607bfa675c3898"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/encounter.js",
+      "bytes": 14588,
+      "sha256": "4d1b744dd51bf4a9132cf6ddf0eb0b66b05b020d94f1ba324e27e7d69dc2c0c5"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/evacuation-data.js",
+      "bytes": 5196,
+      "sha256": "4422d7482370b38c4470c32a69af9c345371bb717a922765c9d35c818c37f67d"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/evacuation.js",
+      "bytes": 13862,
+      "sha256": "1521435fae644246b8ba6fa5ebd006f7cc325146cb58899cc7dd06c8df2308ed"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/fidelity-catalog.js",
+      "bytes": 185901,
+      "sha256": "d81a97ceb7ae74f68ea0f6e05a4e6f6c45b6bc5fc40605596210ac67cf98e57d"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/fidelity-data.js",
+      "bytes": 12940,
+      "sha256": "8eb52a30c4f1daed5ce5a6d209e4e74808f40d5b3469f48087c92496aa176c3c"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/hunt.js",
+      "bytes": 16404,
+      "sha256": "b407a8fe4338e88749c32075e7685703eb869d3a02a7c80199492a5e6568abc1"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/map-hunt.js",
+      "bytes": 4711,
+      "sha256": "cea4f15f0db1a072a79d639d09ab2fcfc62ab9b7677747ab489a65ddd3d6e37a"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/party-data.js",
+      "bytes": 12687,
+      "sha256": "6393e8aeec639730b2243693e4de68f82ce306a75917d58157fdb4a87657944e"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/party.js",
+      "bytes": 17433,
+      "sha256": "ca6202dd0ee012cb292d545eae2bf45eb12a36da3f26295cd661b4b605be3191"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/render-encounter.js",
+      "bytes": 3944,
+      "sha256": "6b6261ccf05175c5ba56e11a2b86f52693abde90a3c94419ee61e94be7b2bb31"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/render-evacuation.js",
+      "bytes": 1985,
+      "sha256": "f592ddcb31a9129981100df73100e0ebc746f957ea8e058ea0568c4880d2e343"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/render-expansion.js",
+      "bytes": 13231,
+      "sha256": "6be2ed1eb50b36aec79522ed53fcebea5861e804c1a1d3d4544ca8bb87b8674b"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/render-fidelity.js",
+      "bytes": 10439,
+      "sha256": "032c06b416b00fc16019132621f0b37b109b7e23ab81ca1f8c8bc03f8d820fbc"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/render-hunt.js",
+      "bytes": 4379,
+      "sha256": "7a5b8b209d205caf8ab2b4858d4c01bb06499c5a35cd809c3812f2c829353665"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/render-party.js",
+      "bytes": 1801,
+      "sha256": "58087446c37dce7d84c2d0d43d89c53c02c9b4f971b8c7db7e2f9ff4a5b09f59"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/render-rescue.js",
+      "bytes": 3093,
+      "sha256": "f776f17925725c706b06a06262568b71b83a69dd73b3bb78fa78bbcd8261ee7f"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/render-terrain.js",
+      "bytes": 8131,
+      "sha256": "ff37d77d831a5387146702ba58eba96e6eeb9377f586595968645a5d00eaf710"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/render-traces.js",
+      "bytes": 5406,
+      "sha256": "cb8738d373f508ceb1562198ad07cba19e90a5ed3fff62b5a8d290023b448548"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/render-traversal.js",
+      "bytes": 11733,
+      "sha256": "704d96f242acce161d016c9f45cf97672ef04e087858326fc2fbdf994661b314"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/render.js",
+      "bytes": 19680,
+      "sha256": "3df2eeaf2b6e4cb37e31ef0e707bc65c3e43ad34904ceba46b90da532b938972"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/rescue-data.js",
+      "bytes": 4909,
+      "sha256": "3db3128c5647809b90aa35c2d86bff178fa902d2d4588622063c1a65760ff216"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/rescue.js",
+      "bytes": 15622,
+      "sha256": "cda7d18b57211d2c92e23df40bfa2913d7bed59ab6367ac591ffad9563d942a8"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/style.css",
+      "bytes": 35106,
+      "sha256": "5fb344583fa2b5907f5295d378318c2384ae97274c8e8bbbdab3a05a345fe62d"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/terrain.js",
+      "bytes": 16982,
+      "sha256": "077248a8577616dcfe419092997f2ae9bf235b4a78713f1e9cf4b125ae1d8aba"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/traversal-data.js",
+      "bytes": 4606,
+      "sha256": "36ce11b14e1a016b9af00a653e3a93435c7d01b893e455ede53bcd392fe49712"
+    },
+    {
+      "path": "scripts/dlc/avp-2004/web/traversal.js",
+      "bytes": 11773,
+      "sha256": "243215d3f0426b289a678bc2425f570ee11d8b4f976dadda11454758c4b3fd31"
+    }
+  ],
+  "records": [
+    {
+      "path": "archives/local-recovery-20261125/avp-2004/original-standalone-v0.11.0.html",
+      "bytes": 1113967,
+      "sha256": "587fc2639b4d015fb9162e513702f25ca016ef5259bd27facef7249ef3141bfe"
+    },
+    {
+      "path": "archives/local-recovery-20261125/PENDING_TRANSFER.json",
+      "bytes": 5916,
+      "sha256": "9a4ec46b3ac1bf2734c23d50102ed431b72255f850bf04fd5682b7320a7440fe"
+    }
+  ]
+}

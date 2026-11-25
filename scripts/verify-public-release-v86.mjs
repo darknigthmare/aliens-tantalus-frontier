@@ -1,3 +1,4 @@
+import { avpPathAdmission, verifyAvpAdmission } from './dlc-admission-avp-2004.mjs';
 import { DEV_TOOLS_FILES_V188, isDevToolsPublicPathV188 } from './build-dev-tools-v188.mjs';
 import { publicXenoProductionPathAdmissionV206, verifyXenoProductionAdmissionsV206 } from './public-xeno-production-admissions-v206.mjs';
 import { publicXenoVisualPathAdmissionV205, verifyXenoVisualAdmissionsV205 } from './public-xeno-visual-admissions-v205.mjs';
@@ -1173,6 +1174,8 @@ const XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193 = new Set([
 // Pure checks are exported so adversarial cases can be verified without placing
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
+  const avpAdmission = avpPathAdmission(path, { directory, built });
+  if (avpAdmission !== null) return avpAdmission;
   const recoveryAdmission = projectRecoveryPathAdmission20261116(path, { directory, built });
   if (recoveryAdmission !== null) return recoveryAdmission;
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
@@ -1316,6 +1319,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   // Scan admitted paths and private text first, including partial adversarial
   // fixtures. A complete source validation still requires the exact archives.
   await verifyProjectRecoveryArchive20261116(root, { built });
+  await verifyAvpAdmission(root, { built });
   const { USER_REFERENCE_LIBRARY_V100 } = await import(pathToFileURL(join(resolve(root), 'src/user-reference-library-v100.js')).href);
   const registeredJpgs = USER_REFERENCE_LIBRARY_V100.map(entry => entry.path.replace(/^\//, '')).filter(path => path.endsWith('.jpg'));
   assert.deepEqual([...new Set(registeredJpgs)].sort(), [...USER_REFERENCE_JPG_PATHS_V100].sort(), 'Reference JPG allowlist differs from the runtime registry.');

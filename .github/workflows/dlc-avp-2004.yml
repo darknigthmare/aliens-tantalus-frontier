@@ -1,0 +1,54 @@
+name: AVP DLC integration
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'src/app.js'
+      - 'src/title-screen-v61.js'
+      - 'src/dlc-menu.js'
+      - 'src/dlc/avp-2004/**'
+      - 'scripts/dlc/**'
+      - 'scripts/*dlc*'
+      - 'scripts/build.mjs'
+      - 'scripts/verify-public-release-v86.mjs'
+      - 'archives/local-recovery-20261125/**'
+      - 'package.json'
+      - 'sw.js'
+      - '.github/workflows/dlc-avp-2004.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: avp-dlc-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  avp-integration:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Locked host dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Expedition, title controls and reproducible bundle
+        run: |
+          npm run test:dlc
+          npm run check:dlc:avp
+      - name: Source admission and real distribution
+        run: |
+          npm run check
+          npm run build
+          npm run check:built
+      - name: Browser tools outside the distribution
+        run: |
+          npm install --prefix "$RUNNER_TEMP/avp-browser" --no-save --ignore-scripts playwright@1.57.0
+          "$RUNNER_TEMP/avp-browser/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Desktop, mobile and notebook isolation
+        env:
+          ATF_PLAYWRIGHT_MODULE: ${{ runner.temp }}/avp-browser/node_modules/playwright/index.mjs
+          ATF_DLC_QA_OUTPUT: ${{ runner.temp }}/avp-integration-report
+        run: npm run qa:dlc:avp

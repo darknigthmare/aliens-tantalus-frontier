@@ -325,10 +325,10 @@ with sync_playwright() as pw:
                     page.keyboard.press('Home')
                     page.wait_for_function('()=>document.activeElement?.id==="title-continue"')
                     focus_order = []
-                    for _ in range(4):
+                    for _ in range(5):
                         focus_order.append(observed(page)['focus'])
                         page.keyboard.press('ArrowDown')
-                    check(label + ': native keyboard reaches each existing menu action once', focus_order == ['title-continue', 'title-new', 'title-forge', 'title-options'])
+                    check(label + ': native keyboard reaches each existing menu action once', focus_order == ['title-continue', 'title-new', 'title-dlc', 'title-forge', 'title-options'])
                     page.keyboard.press('End')
                     page.keyboard.press('Enter')
                     page.wait_for_function('()=>!__ATF_V61__.snapshot().visible&&document.querySelector("[data-panel=settings]").classList.contains("active")')

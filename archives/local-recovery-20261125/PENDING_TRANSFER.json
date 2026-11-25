@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-11-25",
+  "status": "pending_transfer",
+  "reference_commit": "001a20bdc0f9f1a3c835e84d8f3c9434bc159330",
+  "archive_count": 16,
+  "module_count": 7,
+  "total_source_bytes": 1189845299,
+  "evidence": "Original archive sizes and SHA-256 values observed and verified locally before the execution environment became unavailable. Archive byte transfer to GitHub has not been confirmed.",
+  "archives": [
+    {
+      "module": "alien-earth",
+      "version": "11",
+      "role": "current_recovered",
+      "original_name": "ALIEN_EARTH_DLC_V11_MODULE_COMPLET.zip",
+      "size_bytes": 23895722,
+      "sha256": "c6402939c7e3085609b191848f710cd2efe84c5bfe6547a2cf95ca39494c38f3",
+      "status": "pending_transfer"
+    },
+    {
+      "module": "alien-covenant",
+      "version": "0.10.0",
+      "role": "current_recovered",
+      "original_name": "ALIEN_COVENANT_v0.10.0_DLC_COMPLET.zip",
+      "size_bytes": 77435386,
+      "sha256": "b765f46776df1308d3872f4793478facc18f2b0603ade64fddbe4d996a4183d1",
+      "status": "pending_transfer"
+    },
+    {
+      "module": "alien-mer-des-chagrins",
+      "version": "0.10.0",
+      "role": "current_recovered",
+      "original_name": "ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip",
+      "size_bytes": 115170444,
+      "sha256": "7a2761f657d20c8c515f460df27b5701ca151aa1cd4ff1a81a7ef5b5dec6a56e",
+      "status": "pending_transfer"
+    },
+    {
+      "module": "alien-resurrection",
+      "version": "125",
+      "role": "current_recovered",
+      "original_name": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip",
+      "size_bytes": 249567896,
+      "sha256": "cf25334e8a5a08d259a36d8bb4a1dd99d30632e21a0f6f97adcd29b3ed1fefef",
+      "status": "pending_transfer"
+    },
+    {
+      "module": "alien-hors-des-ombres",
+      "version": "0.10",
+      "role": "current_recovered",
+      "original_name": "ALIEN_HORS_DES_OMBRES_V0_10_LE_MARION_PIECE_PAR_PIECE.zip",
+      "size_bytes": 93449215,
+      "sha256": "8faa1e9c18e8db3ecefc99605ced070cf3acdae1f74b1f65017cadfed5db0bf3",
+      "status": "pending_transfer"
+    },
+    {
+      "module": "mire-nostromo",
+      "version": "119",
+      "role": "current_recovered",
+      "original_name": "ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip",
+      "size_bytes": 133456534,
+      "sha256": "d25c5b914eb7f4c6535b828d75a24ff5a9541bcec6a274179ec6a71ed7600577",
+      "status": "pending_transfer"
+    },
+    {
+      "module": "avp-2004",
+      "version": "0.11.0",
+      "role": "current_recovered",
+      "original_name": "ALIENS_TANTALUS_DLC_AVP_2004_v0.11.0.zip",
+      "size_bytes": 58704014,
+      "sha256": "0520c1d4ecc47ffd72ea2907807e978ca4fc0b8b26e49a80bc8c83166641a155",
+      "library_source": {
+        "library_file_id": "libfile_072c902f36b08191a51827a5dfa8fa68",
+        "file_id": "file_00000000e920820aa0a94712cfc61650"
+      },
+      "status": "pending_transfer"
+    },
+    {
+      "module": "alien-mer-des-chagrins",
+      "version": "0.1.0",
+      "role": "historical",
+      "original_name": "ALIEN_MER_DES_CHAGRINS_v0.1.0_DLC_AUTONOME.zip",
+      "size_bytes": 8481728,
+      "sha256": "28d0fae31df52d8b30b18c56b0ee42bcef919ece5a085a82c17c3eb0d0df8fc5",
+      "status": "pending_transfer"
+    },
+    {
+      "module": "alien-mer-des-chagrins",
+      "version": "0.2.0",
+      "role": "historical",
+      "original_name": "ALIEN_MER_DES_CHAGRINS_v0.2.0_DLC_AUTONOME.zip",
+      "size_bytes": 11958546,
+      "sha256": "0f5a15c7b198f221639e278ea5c4c23bd4f4d77dc8a94f69e043ffa83a7b3e0d",
+      "status": "pending_transfer"
+    },
+    {
+      "module": "alien-mer-des-chagrins",
+      "version": "0.3.0",
+      "role": "historical",
+      "original_name": "ALIEN_MER_DES_CHAGRINS_v0.3.0_DLC_AUTONOME.zip",
+      "size_bytes": 28916956,
+      "sha256": "aa7934ffe009aae627391321202f88a6391b853254a669b710daaf18f6dc9dcd",
+      "status": "pending_transfer"
+    },
+    {
+      "module": "alien-mer-des-chagrins",
+      "version": "0.4.0",
+      "role": "historical",
+      "original_name": "ALIEN_MER_DES_CHAGRINS_v0.4.0_DLC_AUTONOME.zip",
+      "size_bytes": 42458559,
+      "sha256": "44ec3f786124c28f001d969c643bd0a7972450789a0dbfd744f603f47caf96d0",
+      "status": "pending_transfer"
+    },
+    {
+      "module": "alien-mer-des-chagrins",
+      "version": "0.5.0",
+      "role": "historical",
+      "original_name": "ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip",
+      "size_bytes": 54393612,
+      "sha256": "62dd32eb8cef50c1605b4835c6b3c0e5accaa77a564e22dbadda893e1f82229d",
+      "status": "pending_transfer"
+    },
+    {
+      "module": "alien-mer-des-chagrins",
+      "version": "0.6.0",
+      "role": "historical",
+      "original_name": "ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip",
+      "size_bytes": 59082214,
+      "sha256": "e36aa7867c7f5e57034b98d11eea452dd7fbac649dcc989321c4dc51993f9ea7",
+      "status": "pending_transfer"
+    },
+    {
+      "module": "alien-mer-des-chagrins",
+      "version": "0.7.0",
+      "role": "historical",
+      "original_name": "ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip",
+      "size_bytes": 68083017,
+      "sha256": "6899a71d15d3fceb18f5de228d1872d7340bf3711a7b866521a45ac11a3f5695",
+      "status": "pending_transfer"
+    },
+    {
+      "module": "alien-mer-des-chagrins",
+      "version": "0.8.0",
+      "role": "historical",
+      "original_name": "ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip",
+      "size_bytes": 79991964,
+      "sha256": "3a4f54a44b3c793b057f5d8d2f20b3779e5b956baa3eec8960ed16f8900c36e1",
+      "status": "pending_transfer"
+    },
+    {
+      "module": "alien-mer-des-chagrins",
+      "version": "0.9.0",
+      "role": "historical",
+      "original_name": "ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip",
+      "size_bytes": 84799492,
+      "sha256": "61dc9907fc3309ff4df73b45a1349dbb07e260aa21cdd36504147b2430123714",
+      "status": "pending_transfer"
+    }
+  ]
+}

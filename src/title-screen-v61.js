@@ -1,5 +1,5 @@
 import { resolveTitleMenuContextV89, titleMenuOwnerV89, sameTitleMenuOwnerV89 } from './title-menu-context-v89.js';
-import { tV185, tFromFrenchV185 } from './i18n-v185.js';
+import { tV185, tFromFrenchV185, currentLanguageV185 } from './i18n-v185.js';
 
 export const TITLE_SCREEN_SCHEMA = 61;
 
@@ -13,7 +13,7 @@ const START_KEYS = new Set(['Enter', 'Space', 'NumpadEnter']);
 const MENU_KEYS = new Set([...START_KEYS, 'ArrowUp', 'ArrowDown', 'Home', 'End', 'Tab', 'Escape']);
 
 export class TitleScreenController {
-  constructor({ root, app, scene = null, getSave, getRecoveryStatus = () => null, onUnlock, onContinue, onNewTimeline, onForge, onOptions }) {
+  constructor({ root, app, scene = null, getSave, getRecoveryStatus = () => null, onUnlock, onContinue, onNewTimeline, onForge, onOptions, onDlc }) {
     if (!root || !app) throw new Error('Surface écran titre V61 absente.');
     this.root = root;
     this.app = app;
@@ -25,6 +25,7 @@ export class TitleScreenController {
     this.onNewTimeline = onNewTimeline;
     this.onForge = onForge;
     this.onOptions = onOptions;
+    this.onDlc = onDlc;
     this.state = 'idle';
     this.gamepadFrame = 0;
     this.gamepads = new Map();
@@ -38,6 +39,7 @@ export class TitleScreenController {
     this.menu = root.querySelector('#title-menu');
     this.continueButton = root.querySelector('#title-continue');
     this.newButton = root.querySelector('#title-new');
+    this.dlcButton = root.querySelector('#title-dlc');
     this.forgeButton = root.querySelector('#title-forge');
     this.optionsButton = root.querySelector('#title-options');
     this.profileStatus = root.querySelector('#title-profile-status');
@@ -61,7 +63,8 @@ export class TitleScreenController {
       this.listeners.push(() => target.removeEventListener(type, listener));
     };
     for (const [button, action] of [[this.startButton, 'openMenu'], [this.continueButton, 'continueGame'],
-      [this.optionsButton, 'openOptions'], [this.newButton, 'requestNewTimeline'], [this.forgeButton, 'openForge']]) {
+      [this.optionsButton, 'openOptions'], [this.newButton, 'requestNewTimeline'], [this.dlcButton, 'openDlc'], [this.forgeButton, 'openForge']]) {
+      if (!button) continue; // Historical title fixtures have no extensions button.
       listen(button, 'click', (event) => {
         // A double click is a single intention, never confirmation of an overwrite.
         if (event.detail > 1) return;
@@ -99,7 +102,7 @@ export class TitleScreenController {
   }
 
   menuButtons() {
-    return [this.continueButton, this.newButton, this.forgeButton, this.optionsButton]
+    return [this.continueButton, this.newButton, this.dlcButton, this.forgeButton, this.optionsButton]
       .filter((button) => button && !button.hidden && !button.disabled);
   }
 
@@ -140,6 +143,7 @@ export class TitleScreenController {
       this.recoveryWarning.textContent = recovery ? tV185('title.recovery', `Profil ${recovery.profile} inaccessible. Sauvegarde préservée. Ouvrez Système pour récupérer les données ou choisir un autre profil.`, { profile: recovery.profile }) : '';
     }
     this.continueButton.textContent = tFromFrenchV185(this.menuContextV89.continueLabel);
+    if (this.dlcButton) this.dlcButton.textContent = currentLanguageV185() === 'en' ? 'EXPANSIONS' : 'EXTENSIONS';
     if (this.resumeContextV89) {
       this.resumeContextV89.hidden = Boolean(recovery);
       this.resumeContextV89.textContent = recovery ? '' : tFromFrenchV185(this.menuContextV89.summary);
@@ -208,6 +212,13 @@ export class TitleScreenController {
   }
 
   clearMenuReturnV89() { this.returnMenuOwnerV89 = null; }
+
+  openDlc() {
+    if (this.root.hidden || this.state !== 'menu' || !this.onDlc) return;
+    this.cancelNewTimelineConfirmation();
+    // Keep the title visible until its lazy-loaded gallery is ready.
+    this.onDlc();
+  }
 
   openForge() {
     if (this.root.hidden || this.state !== 'menu') return;
@@ -345,6 +356,7 @@ export class TitleScreenController {
       state: this.state,
       menuVisible: !this.menu.hidden,
       forgeAvailable: Boolean(this.forgeButton),
+      dlcAvailable: Boolean(this.dlcButton && this.onDlc),
       continueTarget: resolveTitleContinueTarget(this.getSave()),
       resumeContext: this.menuContextV89,
       scene: this.scene?.getSnapshot?.() || null
