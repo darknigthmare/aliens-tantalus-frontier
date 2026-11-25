@@ -23,6 +23,7 @@ import { mountCampaignDebriefV160 } from '../src/campaign-story-ui-v160.js';
 import { mountCampaignDebriefV161 } from '../src/campaign-convoy-story-ui-v161.js';
 import { getArbiterMissionV190 } from '../src/xeno-arbiter-campaign-v190.js';
 import { mountArbiterDossierV190 } from '../src/xeno-arbiter-ui-v190.js';
+import { FIORINA_CUTS_V114, isFiorinaCampaignV114, fiorinaCutForOperationV114 } from '../src/fiorina-campaign-v114.js';
 
 const clone = value => structuredClone(value);
 const campaign = id => CAMPAIGNS.find(c => c.id === id);
@@ -325,6 +326,9 @@ test('the actual app renderer atomically selects plans and records readings whil
     root.replaceChildren(); launch = document.createElement('button'); root.append(launch);
   } });
   const dependencies = { saveSystem: system, deriveStoryCampaignV188, markStoryDebriefSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, campaignObjectiveLabelV188, researchBonusRowV188: () => '', colonyPreparationCrewV188, clone, CAMPAIGNS, WORLDS, CREW, WEAPONS, EQUIPMENT, VEHICLES,
+    // Real archive selectors, with the app's explicit initial cut. This legacy
+    // renderer still exercises its own campaign and never launches Fiorina.
+    FIORINA_CUTS_V114, isFiorinaCampaignV114, fiorinaCutForOperationV114, pendingFiorinaCutV114: 'theatrical',
     preserveCampaignStoryReturnV160, preserveConvoyReturnHistoryV162, preserveLetheContinuityV163,
     recordCampaignStoryReviewV160, recordCampaignStoryReviewV161, recordLetheContinuityReviewV163,
     mountCampaignDebriefV160, mountCampaignDebriefV161, mountConvoyReturnHistoryV162, mountLetheContinuityV163,

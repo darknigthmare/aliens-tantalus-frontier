@@ -2,6 +2,13 @@
 // Keys are the exact French strings; patterns use {0}, {1}… for inserted values.
 // Exact French keys and numbered pattern slots are preserved.
 export const EN_CATALOG_V185 = Object.freeze({
+// Fiorina native integration: campaign objective and connected room plates.
+"Survivre à Fiorina 161, piéger le Runner et sceller l’archive.": "Survive Fiorina 161, trap the Runner and seal the archive.",
+"Côte et épave EEV": "Coast and EEV wreck",
+"Infirmerie / morgue": "Infirmary / morgue",
+"Bloc carcéral": "Cell block",
+"Fonderie / moule de plomb": "Leadworks / lead mold",
+"Four principal / plateforme": "Main furnace / platform",
 // V188 systems bug hunt (merged via i18n-catalog-maintenance-v186 review).
 "fichier illisible": "unreadable file",
 "stockage inaccessible": "storage unavailable",
@@ -5001,7 +5008,6 @@ export const EN_CATALOG_V185 = Object.freeze({
 "Survie et récupération": "Survival and recovery",
 "Survie, itinéraires de repli et autonomie en environnement hostile": "Survival, fallback routes, and self-sufficiency in hostile environments",
 "Survivre au sas C-12, tenir la défense puis rejoindre l’extraction.": "Survive airlock C-12, hold the defense, then reach extraction.",
-"Survivre à Fiorina 161, piéger le Runner et sceller l’archive.": "Survive on Fiorina 161, trap the Runner and seal the archive.",
 "Suspendre la lecture": "Pause playback",
 "Suspendu": "Suspended",
 "Symétrie de la sélection": "Mirror selection",

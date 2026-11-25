@@ -9,7 +9,7 @@ import {
   TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188, TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188, TANTALUS_PRIORITIES_LEAD_CONTINUATION_V188,
   TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188,
   reviewedTantalusMergedIntegrationDigestV188, projectFiorinaHistoricalRegistryV188,
-  fiorinaHistoricalRegistryReaderV188, FIORINA_HISTORICAL_REGISTRY_PROJECTION_V188, projectFiorinaHistoricalCampaignsV188,
+  fiorinaHistoricalRegistryReaderV188, FIORINA_HISTORICAL_REGISTRY_PROJECTION_V188, projectFiorinaHistoricalCampaignsV188, projectFiorinaRegistryV114,
   TANTALUS_PRIORITIES_SOURCE_ONLY_PATHS_V188, reviewedTantalusPrioritiesDigestV188,
   verifyTantalusPrioritiesV188, TANTALUS_PRIORITIES_CARGO_REGISTRY_V188, verifyCargoRegistryContinuationV188,
   TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188, verifyBroodstormRegistryContinuationV188,
@@ -22,9 +22,20 @@ import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
 import { SPECIAL_OPERATIONS_V131 as operations, SPECIAL_OPERATION_COUNTS_V131 as operationCounts } from '../src/special-operations-v131.js';
 import { CAMPAIGNS, CONTENT_COUNTS, CONTENT_TARGETS } from '../src/content.js';
+import { AVP_HOST_SUCCESSORS_20261125 } from './audit-dlc-avp-2004-20261125.mjs';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
+const avpAuditPath = 'scripts/audit-dlc-avp-2004-20261125.mjs';
+const avpAuditSpecifier = './audit-dlc-avp-2004-20261125.mjs';
+const relativeImports = source => [...source.matchAll(/(?:from\s*|import\s*\(?\s*)['"](\.{1,2}\/[^'"]+)['"]/g)].map(match => match[1]);
+const importMutatedTerminalV188 = async source => {
+  assert.deepEqual(relativeImports(source), [avpAuditSpecifier], 'Only the reviewed AVP terminal may be resolved in a mutation fixture.');
+  // data: modules need an absolute URL for this single, independently admitted dependency.
+  const resolved = source.replace(/(['"])\.\/audit-dlc-avp-2004-20261125\.mjs\1/,
+    (_, quote) => quote + new URL(avpAuditSpecifier, import.meta.url).href + quote);
+  return import('data:text/javascript;base64,' + Buffer.from(resolved).toString('base64'));
+};
 
 // Historical verifiers keep their own inputs: restore Q to the exact B2
 // declarations first; only the Cargo test then restores Broodstorm to H.
@@ -120,6 +131,43 @@ test('Fiorina projection rejects unreviewed additions, deceptive declarations, i
     const reader = fiorinaHistoricalRegistryReaderV188(path => path === FIORINA_HISTORICAL_REGISTRY_PROJECTION_V188.registryPath ? mutated : read(path));
     assert.throws(() => reader(FIORINA_HISTORICAL_REGISTRY_PROJECTION_V188.registryPath), /Unreviewed Fiorina registry source bytes/);
   }
+});
+
+test('Fiorina adds exactly one partial operation and projects the unchanged 21 historical declarations', () => {
+  assert.deepEqual(operationCounts, { total: 22, effective: 2, partial: 20, missing: 0, playable: 22 });
+  assert.equal(operations.filter(entry => entry.id === 'alien3-fiorina-161').length, 1);
+  const before = JSON.stringify(operations), projected = projectFiorinaRegistryV114(operations, operationCounts);
+  assert.equal(projected.operations.length, 21);
+  assert.deepEqual(projected.operations, operations.slice(1));
+  assert.deepEqual(projected.counts, { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 });
+  assert.deepEqual(verifyQueenMotherChoirRegistryContinuationV188(operations, operationCounts),
+    verifyQueenMotherChoirRegistryContinuationV188(projected.operations, projected.counts));
+  assert.equal(JSON.stringify(operations), before, 'Projection must not rewrite the current registry.');
+});
+
+test('Fiorina projection rejects every additional, duplicated, removed or changed declaration and counter', () => {
+  for (const [reason, change] of [
+    ['unknown addition', rows => rows.push({ ...rows[0], id: 'unreviewed-operation' })],
+    ['duplicate Fiorina', rows => rows.push(structuredClone(rows[0]))],
+    ['removed Fiorina', rows => rows.shift()],
+    ['Fiorina renamed', rows => { rows[0].id = 'unreviewed-operation'; }],
+    ['Fiorina reordered', rows => { rows.push(rows.shift()); }],
+    ['canonical claim', rows => { rows[0].canonExact = true; }],
+    ['promoted archive', rows => { rows[0].implementationStatus = 'effective'; }],
+    ['missing art debt', rows => { rows[0].remainingMechanics.pop(); }],
+    ['altered campaign', rows => { rows[0].campaign.worldId = 'unreviewed-world'; }],
+    ['unreviewed field', rows => { rows[0].unreviewed = undefined; }],
+    ['replaced historical neighbor', rows => { rows[1].id = 'unreviewed-neighbor'; }]
+  ]) {
+    const changed = structuredClone(operations);
+    change(changed);
+    assert.throws(() => verifyQueenMotherChoirRegistryContinuationV188(changed, operationCounts), undefined, reason);
+  }
+  for (const counts of [
+    { ...operationCounts, total: 21 }, { ...operationCounts, partial: 19 },
+    { ...operationCounts, effective: 3 }, { ...operationCounts, playable: 21 },
+    { ...operationCounts, unreviewed: 1 }
+  ]) assert.throws(() => projectFiorinaRegistryV114(operations, counts), /registry counters/);
 });
 
 test('V188 registry continuation closes only the Cargo art debt and rejects neighboring promotions', () => {
@@ -862,7 +910,9 @@ test('V188 rejects mutated bytes and arbitrary predecessor endpoints', () => {
   assert.equal(reviewedTantalusPrioritiesDigestV188('src/unreviewed.js', 'unchanged'), 'unchanged');
   assert.equal(Object.hasOwn(TANTALUS_PRIORITIES_SUCCESSORS_V188, 'scripts/audit-tantalus-priorities-v188.mjs'), false);
   const terminal = read('scripts/audit-tantalus-priorities-v188.mjs').toString();
-  assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(terminal), false, 'The terminal audit must not import another audit.');
+  assert.deepEqual(relativeImports(terminal), [avpAuditSpecifier], 'The historical chain may import only the reviewed AVP terminal.');
+  assert.deepEqual(relativeImports(read(avpAuditPath).toString()), [], 'The AVP terminal must not import another audit.');
+  assert.equal(Object.hasOwn(AVP_HOST_SUCCESSORS_20261125, avpAuditPath), false, 'The AVP terminal cannot admit its own bytes.');
 });
 
 test('Broodstorm terminal rejects a false H receipt or an added-source disguise for a successor', async () => {
@@ -894,7 +944,7 @@ test('Broodstorm terminal rejects a false H receipt or an added-source disguise 
     // readSource supplies repository bytes; no temporary module or source edit.
     const source = terminal.slice(0, start) + 'export const TANTALUS_PRIORITIES_BROODSTORM_V188 = freeze('
       + JSON.stringify(receipt) + ');' + terminal.slice(end);
-    const mutant = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
+    const mutant = await importMutatedTerminalV188(source);
     assert.throws(() => mutant.verifyTantalusPrioritiesV188(read), error, reason);
   }
 });
@@ -907,20 +957,20 @@ test('Queen Mother terminal rejects a false B2 receipt or an added-source disgui
   const path = 'src/special-operations-v131.js';
   for (const [reason, mutate, error] of [
     ['false B2 predecessor', receipt => { receipt.successors[path].previousSha256 = '0'.repeat(64); }, /Broken historical-to-b9aee06a/],
-    ['unreviewed terminal bytes', receipt => { receipt.successors[path].currentSha256 = '0'.repeat(64); }, /Broken 001a20b-to-fiorina source chain: src\/special-operations-v131\.js/],
+    ['unreviewed terminal bytes', receipt => { receipt.successors[path].currentSha256 = '0'.repeat(64); }, /Broken AVP-to-Fiorina host source chain: src\/special-operations-v131\.js/],
     ['duplicate successor as an added source', receipt => {
       receipt.addedSources[path] = receipt.successors[path].currentSha256;
     }, /A new V188 source cannot replace a successor/],
     ['replace successor with added source', receipt => {
       receipt.addedSources[path] = receipt.successors[path].currentSha256;
       delete receipt.successors[path];
-    }, /Broken 001a20b-to-fiorina source chain: src\/special-operations-v131\.js/]
+    }, /Broken AVP-to-Fiorina host source chain: src\/special-operations-v131\.js/]
   ]) {
     const receipt = structuredClone(TANTALUS_PRIORITIES_QUEEN_MOTHER_V188);
     mutate(receipt);
     const source = terminal.slice(0, start) + 'export const TANTALUS_PRIORITIES_QUEEN_MOTHER_V188 = freeze('
       + JSON.stringify(receipt) + ');' + terminal.slice(end);
-    const mutant = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
+    const mutant = await importMutatedTerminalV188(source);
     assert.throws(() => mutant.verifyTantalusPrioritiesV188(read), error, reason);
   }
 });
@@ -961,7 +1011,7 @@ test('Queen Mother guard terminal rejects false Q links, invented births and any
     mutate(receipt);
     const source = terminal.slice(0, start) + 'export const TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188 = freeze('
       + JSON.stringify(receipt) + ');' + terminal.slice(end);
-    const mutant = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
+    const mutant = await importMutatedTerminalV188(source);
     assert.throws(() => mutant.verifyTantalusPrioritiesV188(read), error, reason);
   }
 });
@@ -1025,7 +1075,7 @@ test('Queen Mother choir terminal rejects false R links, a skipped Q birth and s
     mutate(receipt);
     const source = terminal.slice(0, start) + 'export const TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188 = freeze('
       + JSON.stringify(receipt) + ');' + terminal.slice(end);
-    const mutant = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
+    const mutant = await importMutatedTerminalV188(source);
     assert.throws(() => mutant.verifyTantalusPrioritiesV188(read), error, reason);
   }
 });

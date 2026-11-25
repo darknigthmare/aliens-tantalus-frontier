@@ -1,3 +1,4 @@
+import { AVP_HOST_SUCCESSORS_20261125 } from './audit-dlc-avp-2004-20261125.mjs';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
@@ -96,7 +97,11 @@ test('V203 assets and runtime are exact public admissions, verified by the histo
 test('the V203 audit relays to V204 and release evidence stays at exact source-only paths', () => {
   assert.match(read(prior).toString(), /from '\.\/audit-xeno-priorities-v203\.mjs'/);
   assert.match(read(relay).toString(), /from '\.\/audit-xeno-priorities-v204\.mjs'/);
-  assert.doesNotMatch(read(terminal).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  const avpAudit = 'scripts/audit-dlc-avp-2004-20261125.mjs';
+  const relativeImports = source => [...source.matchAll(/(?:from\s*|import\s*\(?\s*)['"](\.{1,2}\/[^'"]+)['"]/g)].map(match => match[1]);
+  assert.deepEqual(relativeImports(read(terminal).toString()), ['./audit-dlc-avp-2004-20261125.mjs']);
+  assert.deepEqual(relativeImports(read(avpAudit).toString()), [], 'The AVP terminal must not import another audit.');
+  assert.equal(Object.hasOwn(AVP_HOST_SUCCESSORS_20261125, avpAudit), false, 'The AVP terminal cannot admit its own bytes.');
   for (const path of [relay, terminal, verifier, report]) {
     assert.equal(isPublicDistributionPathV86(path), true, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);

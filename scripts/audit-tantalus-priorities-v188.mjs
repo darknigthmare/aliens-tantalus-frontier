@@ -6,12 +6,13 @@
  * published bytes; historical predecessors and earlier endpoints stay intact.
  * The owner lifted the save/catalogue protection for this lot on 2026-11-12
  * (bible §56.1): each changed byte still needs an exact receipt here, and
- * migrations stay additive. This terminal module imports no audit and has no
- * receipt for itself. It makes no art, translation-coverage or playtest claim.
+ * migrations stay additive. This historical chain continues only through the
+ * exact AVP/Aliens merge terminal. It makes no inherited art or playtest claim.
  */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedAvpHostDigest20261125, reviewedAliensIncomingDigest20261125, verifyAvpHostSources20261125 } from './audit-dlc-avp-2004-20261125.mjs';
 
 const readRepository = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -1811,7 +1812,7 @@ export function reviewedTantalusAliens1986DigestV188(path, endpoint) {
   assert.equal(endpoint, receipt.previousSha256, 'Broken 001a20b-to-aliens1986 source chain: ' + path);
   assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256), 'Invalid Aliens 1986 digest: ' + path);
   assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'An Aliens 1986 successor must identify changed bytes: ' + path);
-  return receipt.currentSha256;
+  return reviewedAliensIncomingDigest20261125(path, receipt.currentSha256);
 }
 
 export function verifyTantalusAliens1986V188(readSource = readRepository) {
@@ -1863,7 +1864,7 @@ export function reviewedTantalusFiorinaDigestV188(path, endpoint) {
   assert.equal(endpoint, receipt.previousSha256, 'Broken 001a20b-to-fiorina source chain: ' + path);
   assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256), 'Invalid Fiorina digest: ' + path);
   assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A Fiorina successor must identify changed bytes: ' + path);
-  return receipt.currentSha256;
+  return reviewedAliensIncomingDigest20261125(path, receipt.currentSha256);
 }
 
 export function verifyTantalusFiorinaV188(readSource = readRepository) {
@@ -1882,7 +1883,7 @@ export function verifyTantalusFiorinaV188(readSource = readRepository) {
 }
 
 export function reviewedTantalusMergedIntegrationDigestV188(path, endpoint) {
-  return reviewedTantalusFiorinaDigestV188(path, reviewedTantalusAliens1986DigestV188(path, endpoint));
+  return reviewedAvpHostDigest20261125(path, endpoint);
 }
 // END INHERITED FIORINA INTEGRATION RECEIPTS
 
@@ -2005,6 +2006,14 @@ export function projectFiorinaHistoricalRegistryV188(operations, counts, readSou
   const historical = operations.slice(1);
   return Object.freeze({ operations: Object.freeze(historical),
     counts: Object.freeze(historicalRegistryCountsV188(historical)), readSource: readHistorical });
+}
+
+// Compatibility export retained for the AVP branch; both names use the same
+// strict projection and the historical API wrappers remain the only adapter.
+export function projectFiorinaRegistryV114(operations, counts, countMessage = 'Fiorina registry counters must match the exact current rows') {
+  const historical = projectFiorinaHistoricalRegistryV188(operations, counts);
+  assert.deepEqual(historical.counts, historicalRegistryCountsV188(historical.operations), countMessage);
+  return Object.freeze({ operations: historical.operations, counts: historical.counts });
 }
 
 // Preserve the complete historical declarations and verifier bodies above.
@@ -2256,7 +2265,7 @@ export function verifyTantalusPrioritiesV188(readSource = readRepository) {
     addedSources.add(path);
     assert.ok(validHash(digest), 'Invalid new V188 source digest: ' + path);
     const endpoint = Object.hasOwn(guards.addedSourceSuccessors, path) || Object.hasOwn(choirs.addedSourceSuccessors, path)
-      ? reviewedTantalusPrioritiesDigestV188(path, digest) : digest;
+      ? reviewedTantalusPrioritiesDigestV188(path, digest) : reviewedAvpHostDigest20261125(path, digest);
     assert.equal(sha(readSource(path)), endpoint, 'Unreviewed V188 source bytes: ' + path);
   }
   const join = TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188;
@@ -2278,6 +2287,7 @@ export function verifyTantalusPrioritiesV188(readSource = readRepository) {
   }
   verifyTantalusAliens1986V188(readSource);
   verifyTantalusFiorinaV188(readSource);
+  verifyAvpHostSources20261125(readSource);
   return Object.freeze({ successors: successors.size, addedSources: addedSources.size });
 }
 

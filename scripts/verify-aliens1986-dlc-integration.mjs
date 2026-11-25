@@ -16,6 +16,7 @@ import {
   verifyAliens1986DlcAdmissions, verifyAliens1986Runtime,
 } from './public-aliens1986-dlc-admissions.mjs';
 import { buildAliens1986Dlc } from './build-aliens1986-dlc.mjs';
+import { AVP_ALIENS_INCOMING_SOURCES_20261125, reviewedAliensIncomingDigest20261125 } from './audit-dlc-avp-2004-20261125.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import {
   TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188, reviewedTantalusAliens1986DigestV188,
@@ -54,6 +55,8 @@ async function fixture(t) {
 test('the two historical audit terminals agree on the exact integration changes, historical tests and inherited Fiorina sources', () => {
   assert.deepEqual(TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188, XENO_TRIALS_ALIENS1986_JOIN_V206);
   assert.deepEqual(TANTALUS_PRIORITIES_FIORINA_JOIN_V188, XENO_TRIALS_FIORINA_JOIN_V206);
+  assert.equal(hash(JSON.stringify(TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188)), 'a3b94e4988cd47ad6f85742a83d2089b3c39120e133a0e60e38f5a692d5d5b7c');
+  assert.equal(hash(JSON.stringify(TANTALUS_PRIORITIES_FIORINA_JOIN_V188)), 'e7bfefea0a97cb4809bce163157813bea77174cb10adca4dce5031a0774aa3be');
   const paths = ['index.html', 'package.json', 'scripts/build.mjs', 'scripts/build-dev-tools-v188.mjs',
     'scripts/verify-public-release-v86.mjs', 'src/title-screen-v61.js', 'scripts/verify-tantalus-priorities-v188.mjs',
     'scripts/verify-native-qa-resources-v187.mjs', 'scripts/verify-audit-continuation-v157.mjs',
@@ -72,7 +75,8 @@ test('the two historical audit terminals agree on the exact integration changes,
     for (const [path, receipt] of Object.entries(join.successors)) {
       assert.ok(Object.isFrozen(receipt));
       assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
-      assert.equal(hash(sourceBytes(path)), receipt.currentSha256, path);
+      assert.equal(AVP_ALIENS_INCOMING_SOURCES_20261125[path], receipt.currentSha256, path);
+      assert.equal(hash(sourceBytes(path)), reviewedAliensIncomingDigest20261125(path, receipt.currentSha256), path);
       assert.notEqual(receipt.currentSha256, receipt.previousSha256, path);
     }
   }
@@ -83,7 +87,7 @@ test('the exact integration continuation rejects invented predecessors and reach
   const entries = TANTALUS_PRIORITIES_ALIENS1986_JOIN_V188.successors;
   for (const resolver of [reviewedTantalusAliens1986DigestV188, reviewedXenoAliens1986DigestV206]) {
     for (const [path, receipt] of Object.entries(entries)) {
-      assert.equal(resolver(path, receipt.previousSha256), receipt.currentSha256, path);
+      assert.equal(resolver(path, receipt.previousSha256), reviewedAliensIncomingDigest20261125(path, receipt.currentSha256), path);
       for (const bad of [receipt.currentSha256, '0'.repeat(64), undefined]) {
         assert.throws(() => resolver(path, bad), /Broken 001a20b-to-aliens1986 source chain/, path);
       }
@@ -94,11 +98,11 @@ test('the exact integration continuation rejects invented predecessors and reach
   }
   for (const resolver of [reviewedTantalusFiorinaDigestV188, reviewedXenoFiorinaDigestV206]) {
     for (const [path, receipt] of Object.entries(TANTALUS_PRIORITIES_FIORINA_JOIN_V188.successors)) {
-      assert.equal(resolver(path, receipt.previousSha256), receipt.currentSha256, path);
+      assert.equal(resolver(path, receipt.previousSha256), reviewedAliensIncomingDigest20261125(path, receipt.currentSha256), path);
       for (const bad of [receipt.currentSha256, '0'.repeat(64), undefined])
         assert.throws(() => resolver(path, bad), /Broken 001a20b-to-fiorina source chain/, path);
       const view = xenoTrialsTantalusJoinRuntimeSourcesV206({ [path]: receipt.previousSha256 });
-      assert.deepEqual(view, { [path]: receipt.currentSha256 });
+      assert.deepEqual(view, { [path]: reviewedAliensIncomingDigest20261125(path, receipt.currentSha256) });
       assert.deepEqual(xenoTrialsTantalusJoinRuntimeSourcesV206(view), view);
       assert.throws(() => xenoTrialsTantalusJoinRuntimeSourcesV206({ [path]: '0'.repeat(64) }), /Incorrect .*runtime view predecessor/);
     }
@@ -107,13 +111,13 @@ test('the exact integration continuation rejects invented predecessors and reach
   }
   const path = 'src/title-screen-v61.js', receipt = entries[path];
   for (const resolver of [reviewedTantalusPrioritiesDigestV188, reviewedXenoTrialsTantalusJoinV206]) {
-    assert.equal(resolver(path, receipt.previousSha256), receipt.currentSha256);
-    assert.throws(() => resolver(path, '0'.repeat(64)), /Broken 001a20b-to-aliens1986 source chain/);
+    assert.equal(resolver(path, receipt.previousSha256), reviewedAliensIncomingDigest20261125(path, receipt.currentSha256));
+    assert.throws(() => resolver(path, '0'.repeat(64)), /Broken merged-Tantalus-to-AVP host source chain/);
   }
   const view = xenoTrialsTantalusJoinRuntimeSourcesV206({ [path]: receipt.previousSha256, unrelated: 'historical' });
-  assert.deepEqual(view, { [path]: receipt.currentSha256, unrelated: 'historical' });
+  assert.deepEqual(view, { [path]: reviewedAliensIncomingDigest20261125(path, receipt.currentSha256), unrelated: 'historical' });
   assert.deepEqual(xenoTrialsTantalusJoinRuntimeSourcesV206(view), view);
-  assert.throws(() => xenoTrialsTantalusJoinRuntimeSourcesV206({ [path]: '0'.repeat(64) }), /Incorrect Aliens 1986 runtime view predecessor/);
+  assert.throws(() => xenoTrialsTantalusJoinRuntimeSourcesV206({ [path]: '0'.repeat(64) }), /Incorrect AVP host runtime view predecessor/);
 });
 
 test('both audit terminals reject a further changed byte in every integration successor', () => {
@@ -137,7 +141,7 @@ test('both audit terminals reject a further changed byte in every integration su
   }
 });
 
-test('the complete pre-integration declarations stay byte-identical and both audit terminals remain independent', () => {
+test('the complete pre-integration declarations stay byte-identical and both historical chains use only the reviewed common terminal', () => {
   for (const [path, start, expected] of [
     ['scripts/audit-tantalus-priorities-v188.mjs', 'export const TANTALUS_PRIORITIES_BASELINE_V188',
       '193902152e4e5a352f8ee22503047d618a7d3e19001639dea6bdc2e22d704f0c'],
@@ -148,7 +152,8 @@ test('the complete pre-integration declarations stay byte-identical and both aud
     const first = source.indexOf(start), last = source.indexOf('// BEGIN ALIENS 1986 INTEGRATION RECEIPTS');
     assert.ok(first >= 0 && last > first, path);
     assert.equal(hash(source.slice(first, last)), expected, path);
-    assert.doesNotMatch(source, /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+    assert.deepEqual([...source.matchAll(/(?:from\s*|import\s*\(?\s*)['"](\.{1,2}\/[^'"]+)['"]/g)].map(match => match[1]),
+      ['./audit-dlc-avp-2004-20261125.mjs']);
   }
 });
 

@@ -58,6 +58,22 @@ Le catalogue de campagnes conserve également ses **526 références historiques
 
 Ces résultats concernent les fichiers fusionnés localement. Les workflows GitHub du prochain commit et les contrôles sur tous les médias restent à observer ; les réussites de la CI du commit précédent ne leur sont pas transférées. Le corpus V114, son manifeste de récupération et le reçu JSON initial demeurent identiques.
 
+## Fusion avec AVP 2004
+
+Après la validation complète de la fusion Aliens/Fiorina (`eb4a3107b3abe073acc536ab453be3b98ecb6685`), la branche cible a avancé vers `1290733d51b6be5d075ab8bbc3eb9e87d684e8f4`, intégration AVP 2004 de la PR #55. La vérification de tête précédant la fusion a détecté cette arrivée ; la PR Aliens est remise à jour pour conserver les trois intégrations.
+
+La CI dédiée du commit `eb4a3107` a réussi les **665 tests historiques, 20 tests d’intégration et 21 contrôles navigateur**. Admission, contrôle source, build et contrôle du build sont réussis. Le reçu navigateur constate zéro erreur JavaScript, console, HTTP ou requête échouée. Cette preuve est celle de [l’exécution 45671218755](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45671218755) ; elle ne remplace pas les validations du nouveau raccord AVP.
+
+Les contenus AVP, ses archives référencées et son entrée Extensions sont conservés. L’entrée directe Aliens (1986) garde sa route et son checkpoint. Le menu réunit Continuer, Nouvelle partie, Extensions, Frontier Forge, Aliens (1986) et Système. Les deux admissions et les deux raccords de construction restent actifs.
+
+Le bloc de six traductions Fiorina publié avec AVP remplace la ligne isolée de la première intégration Aliens : il ne subsiste aucune clé d’objectif dupliquée. Les témoins historiques des deux branches sont conservés et les nouveaux octets de fusion sont reliés par des transitions exactes dans le terminal commun introduit par AVP. Les résultats de la version réunie sont ceux des contrôles du dernier commit de la PR #57.
+
+Le lancement d’Aliens et celui d’AVP passent désormais par le même helper de l’application : le contexte DLC est posé avant l’arrêt des moteurs et la navigation, ce qui empêche l’autosauvegarde native de sortie. Un refus de navigation restaure le contexte précédent et l’audio du menu. Les **15 tests du menu** vérifient les deux raccords, leurs gardes et leurs reprises sur erreur ; ils exercent le véritable handler `beforeunload` avec l’accès aux sauvegardes natives interdit dans le double de test.
+
+La régression générale du commit précédent `eb4a3107` a ensuite terminé avec **6 694 réussites, 14 échecs et un test ignoré sur 6 709 tests**. Les échecs concernaient les textes Fiorina, les fixtures d’application et les comptes historiques de traduction, corrigés par les changements AVP reçus en parallèle. Ces **14 cas précis ont tous été rejoués avec succès** sur la version réunie, sans test ignoré. Cela clôt ces régressions identifiées ; ce résultat ciblé ne remplace pas une nouvelle exécution générale sur le dernier commit.
+
+Le lot final de raccord passe **59/59 contrôles ciblés** : 20 d’intégration Aliens, 10 de succession commune, 16 de contrats Tantalus/Fiorina, 9 de ressources QA et 4 d’audit i18n. Avec les 15 tests de lancement et les 14 régressions ci-dessus, **88 cas ciblés distincts** réussissent sur les fichiers réunis. La revue indépendante confirme les 46 sources courantes, les 23 convergences exactes et les anciens témoins inchangés.
+
 ## Limites conservées
 
 Cette intégration ne réalise pas la fusion du DLC dans la campagne native. La partie reste une opération indépendante et la chronologie de son équipe est adaptée. La V114 comporte 25 inspections et 11 salles d’opération ; huit repères du suivi restent absents. Ses 24 références d’équipement ne correspondent pas toutes à une mécanique jouable. Les véhicules pilotables, la Reine et le final P-5000/sas restent ouverts.

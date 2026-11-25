@@ -1,6 +1,7 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
 const CACHE = 'atf-v143-tantalus-decisions-arsenal-franchise-collier-s1-debat-bioforge-reines-arcs-20261123';
 const SHELL = Object.freeze([
+  '/src/dlc-menu.js',
   '/src/xeno-trials-visual-assets-v205.js',
   '/src/xeno-trials-priority-air-data-v204.js',
   '/src/xeno-trials-priority-ground-data-v204.js',

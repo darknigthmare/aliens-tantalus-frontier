@@ -3,6 +3,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedAvpHostDigest20261125, reviewedAliensIncomingDigest20261125, verifyAvpHostSources20261125, avpHostRuntimeSources20261125 } from './audit-dlc-avp-2004-20261125.mjs';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const readRepository = path => readFileSync(new URL('../' + path, import.meta.url));
@@ -964,7 +965,7 @@ export function reviewedXenoAliens1986DigestV206(path, endpoint) {
   assert.equal(endpoint, receipt.previousSha256, 'Broken 001a20b-to-aliens1986 source chain: ' + path);
   assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256), 'Invalid Aliens 1986 digest: ' + path);
   assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'An Aliens 1986 successor must identify changed bytes: ' + path);
-  return receipt.currentSha256;
+  return reviewedAliensIncomingDigest20261125(path, receipt.currentSha256);
 }
 
 export function verifyXenoAliens1986V206(readSource = readRepository) {
@@ -1016,7 +1017,7 @@ export function reviewedXenoFiorinaDigestV206(path, endpoint) {
   assert.equal(endpoint, receipt.previousSha256, 'Broken 001a20b-to-fiorina source chain: ' + path);
   assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256), 'Invalid Fiorina digest: ' + path);
   assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A Fiorina successor must identify changed bytes: ' + path);
-  return receipt.currentSha256;
+  return reviewedAliensIncomingDigest20261125(path, receipt.currentSha256);
 }
 
 export function verifyXenoFiorinaV206(readSource = readRepository) {
@@ -1035,7 +1036,7 @@ export function verifyXenoFiorinaV206(readSource = readRepository) {
 }
 
 export function reviewedXenoMergedIntegrationDigestV206(path, endpoint) {
-  return reviewedXenoFiorinaDigestV206(path, reviewedXenoAliens1986DigestV206(path, endpoint));
+  return reviewedAvpHostDigest20261125(path, endpoint);
 }
 // END INHERITED FIORINA INTEGRATION RECEIPTS
 
@@ -1055,21 +1056,10 @@ export function xenoTrialsTantalusJoinRuntimeSourcesV206(view) {
   for (const [path, receipt] of Object.entries(XENO_TRIALS_TANTALUS_JOIN_V206.successors)) {
     if (!Object.hasOwn(result, path)) continue;
     if (result[path] === receipt.previousSha256) result[path] = receipt.currentSha256;
-    else assert.ok(result[path] === receipt.currentSha256
-      || result[path] === reviewedXenoMergedIntegrationDigestV206(path, receipt.currentSha256),
-    'Incorrect tantalus-join runtime view predecessor: ' + path);
+    else if (result[path] !== receipt.currentSha256)
+      assert.equal(result[path], reviewedAvpHostDigest20261125(path, receipt.currentSha256), 'Incorrect tantalus-join runtime view predecessor: ' + path);
   }
-  for (const [path, receipt] of Object.entries(XENO_TRIALS_ALIENS1986_JOIN_V206.successors)) {
-    if (!Object.hasOwn(result, path)) continue;
-    if (result[path] === receipt.previousSha256) result[path] = reviewedXenoMergedIntegrationDigestV206(path, result[path]);
-    else assert.equal(result[path], receipt.currentSha256, 'Incorrect Aliens 1986 runtime view predecessor: ' + path);
-  }
-  for (const [path, receipt] of Object.entries(XENO_TRIALS_FIORINA_JOIN_V206.successors)) {
-    if (!Object.hasOwn(result, path)) continue;
-    if (result[path] === receipt.previousSha256) result[path] = reviewedXenoFiorinaDigestV206(path, result[path]);
-    else assert.equal(result[path], receipt.currentSha256, 'Incorrect Fiorina runtime view predecessor: ' + path);
-  }
-  return Object.freeze(result);
+  return avpHostRuntimeSources20261125(result);
 }
 
 export function reviewedXenoProductionAssetsDigestV206(path, endpointV205) {
@@ -1094,6 +1084,7 @@ export function verifyXenoTrialsTantalusJoinV206(readSource = readRepository) {
   }
   verifyXenoAliens1986V206(readSource);
   verifyXenoFiorinaV206(readSource);
+  verifyAvpHostSources20261125(readSource);
   return Object.freeze({ baselineCommit: join.baseline, successors: Object.keys(join.successors).length });
 }
 
