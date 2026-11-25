@@ -1192,7 +1192,7 @@
   "unrecovered": [
     "Version 0.10 locale mentionnée dans le suivi ; aucun fichier source ni paquet sauvegardé retrouvé."
   ],
-  "visualManifestSha256": "2e216a2470febdf55f2381d60fb394abf4e2117ac197d8560594f305f2baf9ae",
+  "visualManifestSha256": "21d9717d8f3956bb0131e1e9809fec67deaa50307314054169d5c2d11f71194d",
   "visualAssets": [
     {
       "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/newt-idle-right.png",
@@ -1361,6 +1361,118 @@
     {
       "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/voss-idle-right.png",
       "sha256": "dfd1e99b8a63f078f1a0625a2dc1373165b82bb8c56c3250e700f49b56a81016"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-natal-unit.png",
+      "sha256": "2891e27bae950d8cfe5a36992a1fe2b698dda3a9f54923ebaf032a951ac8c37b"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-white-monitor.png",
+      "sha256": "7e557b6ea267d8969408d1db9f4b602f36da48032e36a887aef6ef508e33ca64"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-microscope.png",
+      "sha256": "68da9a25b5d4d801fd6ceba6378ef00c9f5bbac09ff75842078c74c9663802ee"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-fire-cabinet.png",
+      "sha256": "90846c127d08147e7b1e2edbcd03b2caf81a270bd0c0b6cbd3a56080d62aabf7"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-oxygen.png",
+      "sha256": "b9439594714eaa28e0d16a19eda11407df8b1e1f86543c4028d3eebc3004c6c1"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-privacy-screen.png",
+      "sha256": "c9547990269df19322086cbae30164166fcc638c4b0b4336e8766150449ac146"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-gurney.png",
+      "sha256": "0e91dc3343d068f0dae8b269ebd64464ff00a15b020c2d2ede255a9cd75b4cd3"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-glass-cabinet.png",
+      "sha256": "8222c75ac12971c6683305a804d2fe23d18f4072e154d5d2418b805ddd70d711"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-medical-cross.png",
+      "sha256": "15cd29060aeec25840190b33cb5d6acda0f3b46bef189c82ad2453452883b186"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-sink.png",
+      "sha256": "7ddd42d9fee3e3fecd4b7e7dd0f6a20192b998ede900f7abd82a9c7fe4ea0b57"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-hose-reel.png",
+      "sha256": "ef6812960513eed33c70593231402cf8cce37bcd714d306e1fe8bab0f4e74bac"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-tool-board.png",
+      "sha256": "123ba2ef11ccbc9b693612ce492bee473f0378435ab9184c7fa8a2170ea9c248"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-hand-truck.png",
+      "sha256": "5072cb70f287e6d4109a1aa86acfc4fcd9da084cf95b2425b41921f0468da3f5"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-cable-spool.png",
+      "sha256": "818cc15439fe43275c979de972b6878444061334d380396665ba0107047288a3"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-tape-reel.png",
+      "sha256": "31ec1bd9669f970046c3c9d93d09e3a356a8036bebaabdd971deb7caca763c8d"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-radio.png",
+      "sha256": "db27211f3eb5e30daaac3b65860a230cbfa4beeb2412d15426de0dcd1cd6fd3b"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-monitor.png",
+      "sha256": "055f58b00a3c5fee1c353c11c865ff3fdef1ee52b15dcbad97c36979466fa798"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-locker.png",
+      "sha256": "0b0dd126dda170b90d5e3af22c0cc22f8a4361f6f4ca4638ad7e849b8be5414f"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-chair.png",
+      "sha256": "350ca4972bcecaeb20144fd0fb1ee57c1dfef06bef8f5d65cebacc880b1d2e57"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-wall-clock.png",
+      "sha256": "0453465572e8af35a53e8fcdee16c3718e4671cec5a341bfd8aef0849405790f"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-warning-board.png",
+      "sha256": "62ccde2ae0f3562f3e2d824c6c883bcb2bc3380974a68e79f69a5473deb0b7b4"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-noticeboard.png",
+      "sha256": "2bc8dde3c2015d30cb2474085da419414eea0502ac2951730aa747e63c59f193"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-plant.png",
+      "sha256": "1a81a3951801fe0ea332df3bfdc9af1ca4f0cb6964b765f0b90380de003a6ea2"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-hanging-coat.png",
+      "sha256": "23936ef2c1dc80b4f65022d948888abddd5453444a052c8f8a7c4093f2b42465"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-lab-bench.png",
+      "sha256": "0573234c16ddd1add8f612b3817ecdc716b4a264c802457572295a0430cc5dca"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-pump-motor.png",
+      "sha256": "8a213defb00e371233a0c1e6d4dbe21439aaf0a5d77a1c8afcde70f06a401f59"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-bench.png",
+      "sha256": "7aa627d57e49b7fd94ee2131284c3985e40a43a5b0f4f813fee906da4ce66ce2"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-vending.png",
+      "sha256": "26ac63de868e4ab6abcf96906db5af03a649ee3f51c852583cb914798f5dacfa"
     }
   ]
 }

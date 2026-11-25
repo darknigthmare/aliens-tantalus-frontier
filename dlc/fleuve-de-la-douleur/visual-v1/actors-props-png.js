@@ -6,6 +6,12 @@
   const originalPerson = P.person, originalResident = P.resident;
   const originalProp = P.prop, originalExtraProp = P.extraProp;
   const propKinds = new Set(['case', 'glass', 'egg', 'sealed-egg', 'egg-bed', 'specimen']);
+  const propCaptions = Object.freeze({
+    'natal-unit': ['UNITÉ OBSTÉTRICALE', 0, -123, 9, '#d4dfc8'],
+    'fire-cabinet': ['FIRE', 0, -112, 8, '#c0cbaa'],
+    locker: ['STOCK', 0, -98, 9, '#c3c4a2'],
+    'warning-board': ['!', 0, -115, 17, '#daca8c']
+  });
   P.person = function (body, id, player, multiplier) {
     player = Boolean(player);
     if (multiplier === undefined) multiplier = 1;
@@ -78,7 +84,16 @@
   };
   function drawPropImage(prop, room, state) {
     const sprites = root.ROP_SPRITES;
-    if (!sprites || !propKinds.has(prop.kind)) return false;
+    const layout = sprites && Object.hasOwn(sprites.propLayouts, prop.kind) && sprites.propLayouts[prop.kind];
+    if (!sprites || !propKinds.has(prop.kind) && !layout) return false;
+    if (layout) {
+      // Only a real decorative room prop can use this new presentation. Native
+      // objective hardware and interactive containers also call P.prop, but
+      // their synthesized bodies retain their own rendering and state cues.
+      const source = room && Array.isArray(room.props)
+        && room.props.find(row => row.id === prop.id && row.kind === prop.kind);
+      if (!source || source.collidable || source.footprint || prop.collidable || prop.footprint) return false;
+    }
     const entry = sprites.select({ category: 'prop', targetId: prop.kind,
       pose: 'static', weapon: 'none', state: 'normal', facing: 0 });
     if (!entry) return false;
@@ -103,6 +118,24 @@
     // footprint drawing stays authoritative; a jar image must not narrow it.
     if (prop.collidable || prop.footprint) return false;
     const position = this.project(prop.x, prop.z), scale = this.scale * (.8 + prop.z * .28);
+    if (layout) {
+      const visibleWidth = entry.asset.height * entry.asset.bounds.w / entry.asset.bounds.h;
+      const fit = Math.min(1, layout.width / visibleWidth);
+      // Preserve aspect ratio and the complete PNG, contained in the native
+      // body envelope. A wall clock must not descend to the floor, and a wide
+      // generated body must not expand into a neighbouring passage.
+      const drawn = sprites.draw(this.ctx, entry, {
+        x: position.x + layout.centerX * scale,
+        y: position.y + layout.bottom * scale, scale: scale * fit, facing: 0
+      });
+      if (drawn && Object.hasOwn(propCaptions, prop.kind)) {
+        const [text, x, y, size, color] = propCaptions[prop.kind];
+        this.ctx.save();
+        try { this.text(text, position.x + x * scale, position.y + y * scale, size * scale, color, 'center'); }
+        finally { this.ctx.restore(); }
+      }
+      return drawn;
+    }
     // The isolation "glass" asset is a wall window, not a door standing on the
     // floor. Native window drawings end 53 model units above their floor anchor.
     const mountHeight = prop.kind === 'glass' ? 53 * scale : 0;

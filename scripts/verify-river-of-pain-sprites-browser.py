@@ -76,8 +76,11 @@ COMPOSITION = r"""() => {
     const renderer=new ROP_Renderer(canvas), position={x:left+width*.5,y:top+height-26};
     const factor=a.category==='person'||a.category==='creature'?(.82+.7*.28)
       :a.category==='prop'?(.8+.7*.28):1;
-    const extent=Math.max(a.anchor.x-a.bounds.x,a.bounds.x+a.bounds.w-a.anchor.x)*a.height/a.bounds.h;
-    const above=(a.anchor.y-a.bounds.y)*a.height/a.bounds.h+(a.category==='prop'&&id==='glass'?53:0);
+    const layout=a.category==='prop'&&registry.propLayouts[id];
+    const extent=layout?Math.max(Math.abs(layout.left),Math.abs(layout.right))
+      :Math.max(a.anchor.x-a.bounds.x,a.bounds.x+a.bounds.w-a.anchor.x)*a.height/a.bounds.h;
+    const above=layout?Math.max(-layout.top,id==='natal-unit'?134:0)
+      :(a.anchor.y-a.bounds.y)*a.height/a.bounds.h+(a.category==='prop'&&id==='glass'?53:0);
     const inventory=a.category==='weapon'||a.category==='item';
     const below=(a.bounds.y+a.bounds.h-a.anchor.y)*a.height/a.bounds.h;
     const contentTop=52, contentBottom=height-18;
@@ -93,7 +96,7 @@ COMPOSITION = r"""() => {
     // This is a separate presentation context, not ROP_APP.simulation.s.
     renderer.fidelitySim={s:{room:'presentation-fixture',character:id,phase:0,status:'playing',player:{x:0,z:.7},
       passages:{transit:null},armory:{kits:{brackett:{selected:a.weapon},paris:{selected:a.weapon}}}},cooldown:0};
-    let draws=0;
+    let draws=0,sourcePropId=null,sourceRoom=null;
     const drawImage=ctx.drawImage;
     ctx.drawImage=function(){draws++;return drawImage.apply(this,arguments);};
     try{
@@ -107,9 +110,14 @@ COMPOSITION = r"""() => {
       }else if(a.category==='creature'){
         renderer.creature({...body,id:'presentation-'+id,kind:id,hp:72,state:'patrol'});
       }else if(a.category==='prop'){
-        const native=ROP_DATA.rooms.flatMap(room=>room.props).find(prop=>prop.kind===id);
-        renderer.prop({...native,...body,id:'presentation-'+id,kind:id,collidable:Boolean(native?.collidable)},
-          {kind:'depth'},renderer.fidelitySim.s);
+        // Keep the actual room/id contract, and select a decorative instance.
+        // The first instance of a kind can be physical cover; this fixture
+        // must exercise an admitted state, not pretend the cover is eligible.
+        const native=ROP_DATA.rooms.flatMap(room=>room.props.map(prop=>({room,prop})))
+          .find(({prop})=>prop.kind===id&&!prop.collidable&&!prop.footprint);
+        if(!native)throw new Error('No decorative fixture candidate for '+a.id);
+        sourcePropId=native.prop.id;sourceRoom=native.room.id;
+        renderer.prop({...native.prop,...body},native.room,renderer.fidelitySim.s);
       }else if(a.category==='weapon'||a.category==='item'){
         registry.draw(ctx,entry,{...position,scale:renderer.scale,facing:0});
       }
@@ -117,7 +125,8 @@ COMPOSITION = r"""() => {
     ctx.strokeStyle='#b3a277';ctx.lineWidth=1;ctx.beginPath();
     ctx.moveTo(position.x-12,position.y);ctx.lineTo(position.x+12,position.y);
     ctx.moveTo(position.x,position.y-4);ctx.lineTo(position.x,position.y+4);ctx.stroke();
-    results.push({id:a.id,category:a.category,target:id,accessory:a.accessory||null,pngDraws:draws});
+    results.push({id:a.id,category:a.category,target:id,accessory:a.accessory||null,
+      sourcePropId,sourceRoom,pngDraws:draws});
     }finally{ctx.restore();}
   });
   // A file:// image may taint this Canvas without preventing its display.

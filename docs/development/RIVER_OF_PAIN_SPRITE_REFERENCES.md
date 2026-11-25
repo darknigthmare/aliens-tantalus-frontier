@@ -1,8 +1,8 @@
 # Fleuve de la Douleur — références visuelles des sprites
 
 Recherche et comparaison : 25 novembre 2026. Périmètre : les sujets réellement
-présents dans la base récupérée `0.9.0-candidate.1`, puis le lot graphique
-`visual-v1`. Ce document complète
+présents dans la base récupérée `0.9.0-candidate.1`, puis les lots graphiques
+`visual-v1` et `visual-v2`. Ce document complète
 [l’inventaire des entités](RIVER_OF_PAIN_SPRITE_INVENTORY.md) ; il ne transforme
 pas une entrée documentaire en arme, personnage ou animation jouable.
 
@@ -103,6 +103,94 @@ visage vérifié demeurent des interprétations. Ne pas employer le visage d’u
 interprète ou d’un interprète du livre audio comme apparence canonique du roman.
 Les résidents créés pour le jeu restent des personnages originaux.
 
+## Lot 2 — mobilier médical, habitat et équipements utilitaires
+
+Contrat de référence du 25 novembre 2026 : **28 types de décor déjà présents**,
+avec le nom de fichier `prop-<kind>.png`. Le périmètre vise leurs instances
+décoratives sans collision ni empreinte physique. Les dimensions, la hauteur
+d’accrochage et les points d’appui viennent du rendu du DLC ; les dessins de
+production cités ici ne constituent pas un plan métrique des salles.
+
+### Repères attestés et limites de la comparaison
+
+L’extrait autorisé de *River of Pain* [S18] décrit des moniteurs blancs et lisses
+près du lit et au-dessus, avec des témoins verts et bleus. Il décrit aussi une
+grande unité de chirurgie natale coiffée d’un capot principalement transparent.
+Ces traits soutiennent `white-monitor` et `natal-unit`. Le pied du moniteur,
+le tracé ECG, le châssis de l’unité et son contrôleur latéral sont des choix du
+jeu ; le texte ne fournit pas leur dessin technique.
+
+Les notices des concepts originaux de Ron Cobb documentent un **Medlab** [S21],
+une **salle d’opération et un sas** [S22], et un espace **A.P. Control and
+Operations** [S23]. Elles établissent la provenance de ces dessins de
+production. Elles ne valident pas une forme précise de microscope, de chaise,
+de distributeur ou de pompe parmi les objets ci-dessous. Un concept ne prouve
+pas non plus que tous ses détails figurent dans le décor filmé. Les descriptions
+de ces notices servent ici à identifier les œuvres ; aucune couleur détaillée
+des 28 sprites n’est déduite d’une image de concept non comparée directement.
+
+L’habillage original d’Atmosphere Processor [S24] est décrit comme un dos de
+téléviseur ancien en plastique, réemployé en élément de décor. Il documente
+l’usage d’une coque utilitaire existante. Cela peut guider une construction
+visuelle simple et fonctionnelle, mais cet objet n’est ni un moniteur médical
+complet ni une preuve de présence de chacun des 28 équipements.
+
+Pour le lot, les gris verts, les métaux mats, les crèmes médicaux et les petites
+touches ocre reprennent donc **la palette native du DLC**, pas un nuancier
+canonique du film. Les matériaux, boutons, joints et usures ajoutés à cette
+base restent des interprétations graphiques. Aucun des 28 sujets n’a ici une
+validation de ressemblance filmique 1:1.
+
+### Contrat d’apparence par type
+
+**R** = certains traits sont décrits dans le roman [S18], avec dessin adapté.
+**N** = apparence définie par le jeu ; aucun accessoire filmique individuel
+correspondant n’a été vérifié dans cette recherche. **N/I** = le rôle peut être
+précisé graphiquement, mais cette précision dépasse le dessin natif partagé.
+
+Les descriptions natives se lisent dans
+[`render.js`](../../dlc/fleuve-de-la-douleur/src/river-of-pain/render.js),
+[`architecture.js`](../../dlc/fleuve-de-la-douleur/src/river-of-pain/architecture.js)
+et [`fidelity-visuals.js`](../../dlc/fleuve-de-la-douleur/src/river-of-pain/fidelity-visuals.js).
+
+| Identifiant | Forme, couleur et montage à conserver ou expliciter | Base |
+| --- | --- | --- |
+| `natal-unit` | Unité vide, large et basse ; corps crème trapézoïdal ; capot transparent à pans inclinés ; contrôleur intégré à droite. Conserver la séparation entre la coque, le volume transparent et ce contrôleur. | **R** : grande unité et capot ; détail du châssis **N**. |
+| `white-monitor` | Petit boîtier crème lisse, écran cyan sombre et tracé vert pâle, sur colonne mince. Le pied et l’ECG sont natifs ; ne pas transformer le dessin statique en indicateur clinique fonctionnel. | **R** : blanc et témoins vert/bleu ; support et interface **N**. |
+| `microscope` | Volume compact gris vert. Le dessin actuel partage le pupitre et l’écran génériques de `monitor` ; une optique reconnaissable serait une interprétation du rôle de laboratoire à déclarer. | **N/I** ; aucun microscope du film identifié. |
+| `fire-cabinet` | Armoire étroite rouge brun ; niche sombre, extincteur ocre et poignée distincte. Garder son décalage vertical natif, même lorsque l’instance est étiquetée au sol. | **N**. |
+| `oxygen` | Bouteille verticale gris vert, col étroit, robinet et petit manomètre rond sur le côté ; pied sombre. Ne pas lui attribuer un modèle industriel précis. | **N**. |
+| `privacy-screen` | Panneau rectangulaire translucide vert pâle ; deux montants métalliques, pieds en T et roulettes. La transparence fait partie de sa silhouette en jeu. | **N**. |
+| `gurney` | Brancard vide, bas et large ; matelas vert désaturé sur plateau clair, pieds métalliques et petites roulettes. Les roues doivent rester entièrement visibles. | **N**. |
+| `glass-cabinet` | Cadre mobile haut à vitrage vert bleuté, montants et pieds à roulettes. Le natif partage la structure du paravent ; un meuble opaque plein ne serait pas la même silhouette. | **N** ; détails de vitrine ajoutés à déclarer. |
+| `medical-cross` | Plaque carrée ivoire avec croix verte centrée et cadre fin ; conserver son accrochage en hauteur. | **N** ; la signalétique exacte du film n’est pas attestée. |
+| `sink` | Meuble gris vert intégrant un large bac sombre et un simple robinet coudé métallique à droite. Le bac appartient au meuble entier. | **N**. |
+| `hose-reel` | Bobine circulaire métallique, flexible sombre en spires, extrémité pendante à droite presque jusqu’au sol. Garder la queue du flexible dans le cadre. | **N**. |
+| `tool-board` | Tableau mural horizontal sombre, cadre gris vert et six outils longs suspendus, chacun distinct. Conserver la hauteur d’accrochage. | **N**. |
+| `hand-truck` | Diable vide : deux montants tubulaires, barre de poignée, bavette basse et deux roues sombres. Une caisse ajoutée changerait le sujet et sa silhouette. | **N**. |
+| `cable-spool` | Touret bas avec deux flasques métalliques circulaires, moyeux sombres et perforations. Le natif présente les deux disques côte à côte ; un support au sol supplémentaire serait une adaptation. | **N**. |
+| `tape-reel` | Deux bobines métalliques côte à côte, moyeux et trois perforations par bobine ; montage en hauteur. Le boîtier et le trajet détaillé de bande restent interprétés. | **N**. |
+| `radio` | Poste sur pupitre gris vert, petit écran sombre, commandes physiques inclinées et antenne verticale fine à droite. L’antenne appartient au contour complet. | **N**. |
+| `monitor` | Écran cyan sombre au-dessus d’un large socle de pupitre gris vert, commandes physiques sur plan incliné. Garder cette base distincte de la colonne de `white-monitor`. | **N**. |
+| `locker` | Casier haut vert bleu sombre, deux panneaux de porte, fentes d’aération, poignée claire et marquage de stockage. C’est le casier de décor, distinct de `hide-locker` et de `hab-door`. | **N**. |
+| `chair` | Chaise sans accoudoirs ; assise vert pâle, dossier rectangulaire vert sombre et pieds tubulaires gris vert. | **N**. |
+| `wall-clock` | Cadran rond crème, bord métallique, douze graduations et deux aiguilles sombres. Position murale et dessin statique ; ce n’est pas une horloge de simulation. | **N**. |
+| `warning-board` | Plaque horizontale à cadre gris vert, fond ocre et triangle noir avec point d’exclamation. Toute nouvelle consigne lisible serait un ajout de contenu. | **N**. |
+| `noticeboard` | Tableau horizontal, cadre métallique, fond vert pâle et petites fiches ou lignes claires. Les détails décoratifs ne doivent pas introduire une information de scénario inventée. | **N**. |
+| `plant` | Une plante domestique en pot cubique gris vert ; cinq feuilles ou tiges olive en éventail. Aucune espèce botanique précise n’est établie. | **N**. |
+| `hanging-coat` | Vêtement de travail vert désaturé suspendu à une petite barre ; deux manches, ouverture centrale et ourlet distincts. Le vêtement est vide. | **N**. |
+| `lab-bench` | Établi bas et large, plateau clair sur deux pieds, support vert et deux récipients translucides. Les instances servant d’obstacles conservent leur rendu physique natif. | **N**. |
+| `pump-motor` | Moteur de pompe horizontal, corps sombre à nombreuses ailettes gris vert, carter rond à droite et semelle rectangulaire. Les dimensions d’obstacle ne viennent pas de [S23] ou [S24]. | **N**. |
+| `bench` | Banc bas et large, assise gris vert, dossier sombre à séparations verticales et deux pieds épais. Distinguer les exemplaires décoratifs des obstacles. | **N**. |
+| `vending` | Distributeur haut gris vert ; fenêtre sombre montrant trois rangées de quatre produits, fente basse et petite commande à droite. Les produits font partie du même objet. | **N**. |
+
+Le rendu final doit conserver les différences utiles à la lecture : appareils
+médicaux clairs, mobilier vert sombre, équipements de manutention bas ou
+allongés, plaques et bobines accrochées à leur hauteur native. La présence d’un
+type dans ce tableau ne signifie pas que toutes ses instances sont remplacées
+ni qu’un nouvel équipement est devenu utilisable. La revue du PNG et de sa
+position en jeu reste distincte de la présente recherche de références.
+
 ## Contrôles visuels avant acceptation d’un sprite
 
 1. Comparer d’abord le contour et les grands volumes avec une photo précise,
@@ -153,3 +241,7 @@ guider une génération.
 | S18 | Christopher Golden, extrait fourni par Titan Books à Daily Dead ; chapitres Rebecca et Arrivals | [Extrait autorisé](https://dailydead.com/read-exclusive-excerpt-alien-river-pain/) · [fiche de l’éditeur](https://titanbooks.com/6486-alien-river-of-pain-book-3/) |
 | S19 | Propstore, dessin de production de Ron Cobb du tracteur des Jorden ; référence de véhicule uniquement | [Notice](https://usm.propstoreauction.com/lot-details/index/catalog/287/lot/73452/Lot-465-ALIENS-1986-Hand-Illustrated-Ron-Cobb-Daihotai-Tractor-Concept-Sketch) |
 | S20 | Propstore, détecteur complet Master Replicas ; réplique commerciale, pas accessoire de tournage | [Notice](https://propstore.com/product/aliens-1986/lot-489-master-replicas-motion-tracker-replica/) · [côté clavier](https://images.propstore.com/5ee9ee095c1fd9f04a83aaa0f729264a-1.jpeg) · [côté écran](https://images.propstore.com/f96ce76c3afa96e8e7b7f57a01adc9f7-1.jpeg) |
+| S21 | Propstore, concept original de Ron Cobb pour le Medlab, stock 103964 ; provenance de dessin de production, pas plan des 28 objets | [Notice](https://propstore.com/product/aliens-1986/hand-drawn-ron-cobb-medlab-concept-sketch/) |
+| S22 | Propstore, concepts originaux de Ron Cobb de salle d’opération et de sas, stock 103966 ; attribution des dessins seulement | [Notice](https://propstore.com/product/aliens-1986/hand-drawn-ron-cobb-colony-air-lock-and-operating-room-concept-sketches/) |
+| S23 | Propstore, concept original de Ron Cobb A.P. Control and Operations, stock 103965 ; contexte de salle technique, pas modèle individuel de moniteur ou de pompe | [Notice](https://propstore.com/product/aliens-1986/hand-drawn-ron-cobb-a-pcontrol-and-operations-concept-sketch/) |
+| S24 | Propstore, habillage original d’Atmosphere Processor, Harry Harris Collection, lot 655 / stock 144354 ; dos de téléviseur réemployé, état actuel avec usure | [Notice](https://propstore.com/product/aliens-1986/lot-655-harry-harris-collection-atmosphere-processor-set-dressing/) |

@@ -32,6 +32,31 @@
   const residentAccessories = Object.freeze({ vale: 'tools', rhee: 'mug', arden: 'tablet',
     becker: 'tablet', ferris: 'tools', corban: 'tablet', hale: 'tools', doran: 'tablet',
     sato: 'linen', bell: 'tools', kent: 'tablet', voss: 'tablet' });
+  // Body envelopes measured from the frozen v0.9 renderer, in its local model
+  // coordinates. They exclude cast shadows and captions; all four values are
+  // meaningful, including wall mounting and wheel bottoms below the origin.
+  // A test derives the corresponding geometry from the native Canvas calls.
+  const propEnvelopeRows = {
+    'natal-unit': [-93, 111, -109, 3], 'white-monitor': [-26, 27, -103, 0],
+    microscope: [-40, 50, -78, 0], 'fire-cabinet': [-31, 31, -128, -26],
+    oxygen: [-18, 18, -99, 1], 'privacy-screen': [-57, 57, -154, 3],
+    gurney: [-77, 77, -82, 5], 'glass-cabinet': [-57, 57, -154, 3],
+    'medical-cross': [-25, 25, -142, -90], sink: [-50, 60, -107, 0],
+    'hose-reel': [-37, 37, -107, -4], 'tool-board': [-53, 53, -139, -78],
+    'hand-truck': [-37, 38, -100, 11], 'cable-spool': [-51, 51, -67, -9],
+    'tape-reel': [-51, 51, -142, -84], radio: [-40, 50, -135, 0],
+    monitor: [-40, 50, -78, 0], locker: [-45, 45, -158, 0],
+    chair: [-24, 24, -86, 0], 'wall-clock': [-25, 25, -159, -109],
+    'warning-board': [-36, 36, -148, -99], noticeboard: [-36, 36, -148, -99],
+    plant: [-33, 33, -101.8414519259386, 0], 'hanging-coat': [-36, 36, -145, -33],
+    'lab-bench': [-77, 77, -114, -3], 'pump-motor': [-70, 79, -83, 0],
+    bench: [-64, 61, -69, 0], vending: [-41, 51, -176, 0]
+  };
+  const propLayouts = Object.freeze(Object.fromEntries(Object.entries(propEnvelopeRows)
+    .map(([kind, [left, right, top, bottom]]) => [kind, Object.freeze({
+      left, right, top, bottom, width: right - left, height: bottom - top,
+      centerX: (left + right) / 2, mountHeight: -bottom
+    })])));
   const identifier = /^[a-z][a-z0-9_-]{0,95}$/;
   const fileName = /^assets\/[a-z0-9][a-z0-9_/-]*\.png$/;
   const finite = value => typeof value === 'number' && Number.isFinite(value);
@@ -66,6 +91,13 @@
       requireValue(record(a) && finite(a.x) && finite(a.y)
         && a.x >= b.x && a.x <= b.x + b.w && a.y >= b.y && a.y <= b.y + b.h,
       'anchor must be inside the declared image bounds (bottom edge allowed).');
+      if (asset.category === 'prop') for (const id of asset.targetIds) {
+        if (!Object.hasOwn(propLayouts, id)) continue;
+        requireValue(Math.abs(asset.height - propLayouts[id].height) < 1e-6,
+          'decorative prop height must match its native body envelope: ' + id);
+        requireValue(Math.abs(a.x - (b.x + b.w / 2)) < 1e-6 && a.y === b.y + b.h,
+          'decorative prop anchor must be the bottom centre of its alpha bounds: ' + id);
+      }
       requireValue(['none', 'pulse', 'flame'].includes(asset.weapon), 'invalid weapon selector.');
       requireValue(!['creature', 'prop', 'item'].includes(asset.category) || asset.weapon === 'none',
         'creatures, props and inventory items cannot carry a weapon selector.');
@@ -134,6 +166,7 @@
     const registry = {
       manifest,
       entries,
+      propLayouts,
       settled: Promise.all(jobs),
       subscribe(listener) { listeners.add(listener); return () => listeners.delete(listener); },
       select(query) {
@@ -183,5 +216,5 @@
     };
     return registry;
   }
-  return { validateManifest, createRegistry };
+  return { validateManifest, createRegistry, propLayouts };
 });

@@ -13,7 +13,7 @@ const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const dlc = join(root, 'dlc/fleuve-de-la-douleur');
 const src = join(dlc, 'src/river-of-pain'), visual = join(dlc, 'visual-v1');
 const require = createRequire(import.meta.url);
-const { validateManifest, createRegistry } = require(join(visual, 'sprite-loader.js'));
+const { validateManifest, createRegistry, propLayouts } = require(join(visual, 'sprite-loader.js'));
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const empty = () => ({ schema: 1, id: 'river-of-pain-visual-v1', assets: [] });
 function asset(overrides = {}) {
@@ -23,24 +23,44 @@ function asset(overrides = {}) {
     weapon: 'pulse', state: 'normal', fidelity: { status: 'test-fixture', note: 'Synthetic unit fixture, not production art.' },
     sha256: 'a'.repeat(64), ...overrides };
 }
+function propAsset(kind, overrides = {}) {
+  return asset({ id: 'prop-' + kind, file: 'assets/prop-' + kind + '.png', targetIds: [kind],
+    category: 'prop', pose: 'static', facing: 0, weapon: 'none', height: propLayouts[kind].height,
+    ...overrides });
+}
 class FakeImage {
   constructor() { this.naturalWidth = 100; this.naturalHeight = 200; }
   set src(value) { this.url = value; queueMicrotask(() => this.onload && this.onload()); }
   get src() { return this.url; }
   decode() { return Promise.resolve(); }
 }
-function canvas() {
-  const calls = [];
-  const context = new Proxy({}, {
+function canvas(recordStyles = false) {
+  const calls = [], stack = [];
+  const drawingStyles = new Set(['fillStyle', 'strokeStyle', 'lineWidth', 'globalAlpha', 'font', 'textAlign']);
+  const state = { fillStyle: '#000000', strokeStyle: '#000000', lineWidth: 1,
+    globalAlpha: 1, font: '10px sans-serif', textAlign: 'start' };
+  const snapshot = () => Object.fromEntries([...drawingStyles].map(key => [key, state[key]]));
+  const context = new Proxy(state, {
     get(target, key) {
       if (key in target) return target[key];
       if (key === 'createLinearGradient' || key === 'createRadialGradient')
         return () => ({ addColorStop() {} });
-      return (...args) => { calls.push({ method: key, args }); };
+      return (...args) => {
+        const call = { method: key, args };
+        if (key === 'save') stack.push(snapshot());
+        else if (key === 'restore' && stack.length) Object.assign(target, stack.pop());
+        else if (key === 'fillText') call.styles = snapshot();
+        calls.push(call);
+      };
     },
-    set(target, key, value) { target[key] = value; return true; }
+    set(target, key, value) {
+      target[key] = value;
+      if (recordStyles && drawingStyles.has(key)) calls.push({ method: 'set:' + key, args: [value] });
+      return true;
+    }
   });
-  return { calls, context, element: { getContext: () => context,
+  return { calls, context, canvasState: () => ({ styles: snapshot(), depth: stack.length }),
+    element: { getContext: () => context,
     getBoundingClientRect: () => ({ width: 1440, height: 810 }) } };
 }
 const beforeRender = ['data.js', 'colony.js', 'exploration.js', 'passages.js', 'life.js',
@@ -48,7 +68,7 @@ const beforeRender = ['data.js', 'colony.js', 'exploration.js', 'passages.js', '
 const afterRender = ['architecture.js', 'field-visuals.js', 'passage-visuals.js', 'life-visuals.js',
   'life-ui.js', 'defense-visuals.js', 'defense-ui.js', 'ducts-visuals.js', 'ducts-ui.js',
   'mobility-visuals.js', 'mobility-ui.js', 'fidelity-visuals.js', 'fidelity-ui.js'];
-async function runtime(assets = [], document = null, { ImageClass = FakeImage } = {}) {
+async function runtime(assets = [], document = null, { ImageClass = FakeImage, recordStyles = false } = {}) {
   const doc = document || { baseURI: 'https://example.test/dlc/fleuve-de-la-douleur/visual-v1/JOUER.html',
     querySelector: () => null, querySelectorAll: () => [], addEventListener() {} };
   const context = vm.createContext({ URL, Promise, Image: ImageClass, document: doc,
@@ -64,7 +84,7 @@ async function runtime(assets = [], document = null, { ImageClass = FakeImage } 
   const nativeLifeDraws = context.ROP_Renderer.prototype.lifeDraws;
   await load(visual, 'actors-props-png.js');
   await context.ROP_SPRITES.settled;
-  const surface = canvas(), renderer = new context.ROP_Renderer(surface.element);
+  const surface = canvas(recordStyles), renderer = new context.ROP_Renderer(surface.element);
   renderer.fidelitySim = new context.ROP_CORE.Simulation();
   renderer.fidelitySim.s.character = 'brackett';
   return { ...surface, context, renderer, nativePerson, nativeResident, nativeLifeDraws,
@@ -73,6 +93,30 @@ async function runtime(assets = [], document = null, { ImageClass = FakeImage } 
 const pngs = calls => calls.filter(call => call.method === 'drawImage');
 const words = calls => calls.filter(call => call.method === 'fillText').map(call => call.args[0]);
 const person = changes => ({ x: 330, z: .7, facing: 1, walk: 0, hp: 100, ...changes });
+const roomProps = context => context.ROP_DATA.rooms.flatMap(room => room.props.map(prop => ({ room, prop })));
+const decorative = prop => !prop.collidable && !prop.footprint;
+
+// Independent measurements of the frozen native Canvas geometry, before any
+// PNG is selected. All admitted prop bodies use this flat local transform.
+// Text and the shared floor shadow are separate from the measured body.
+function nativeBodyBounds(calls) {
+  const points = [];
+  for (const { method, args } of calls) {
+    const [x, y, a, b] = args;
+    if (method === 'fillRect' || method === 'strokeRect') points.push([x, y], [x + a, y + b]);
+    else if (method === 'moveTo' || method === 'lineTo') points.push([x, y]);
+    else if (method === 'arc') points.push([x - a, y - a], [x + a, y + a]);
+    else if (method === 'ellipse') {
+      if (x === 0 && y === 1 && a === 45 && b === 7) continue;
+      points.push([x - a, y - b], [x + a, y + b]);
+    }
+    assert.ok(!['rotate', 'transform', 'bezierCurveTo', 'quadraticCurveTo'].includes(method),
+      'A newly complex body needs a new independent geometry measurement.');
+  }
+  assert.ok(points.length > 0, 'The native reference contains a visible body.');
+  return { left: Math.min(...points.map(point => point[0])), right: Math.max(...points.map(point => point[0])),
+    top: Math.min(...points.map(point => point[1])), bottom: Math.max(...points.map(point => point[1])) };
+}
 
 // Inject a failure in the fixture's Canvas boundary, not in the registry API.
 // The native call stream is captured independently from a runtime with no PNGs.
@@ -436,6 +480,203 @@ test('only static noncollidable props change; physical cover, portal and object 
   assert.equal(JSON.stringify(state), before);
   assert.match(String(renderer.portal), /cfg=p\.architecture/);
   assert.match(String(renderer.object), /o\.actorId/);
+});
+
+test('decorative prop contracts match real native body bounds, including wall mounts and wheel bottoms', async () => {
+  const fixture = await runtime(), candidates = roomProps(fixture.context);
+  assert.equal(Object.keys(propLayouts).length, 28);
+  for (const [kind, layout] of Object.entries(propLayouts)) {
+    const candidate = candidates.find(row => row.prop.kind === kind && decorative(row.prop));
+    assert.ok(candidate, kind + ' exists as decorative content in the frozen map.');
+    fixture.calls.length = 0;
+    fixture.renderer.prop(candidate.prop, candidate.room, fixture.sim.s);
+    const native = nativeBodyBounds(fixture.calls);
+    for (const side of ['left', 'right', 'top', 'bottom']) {
+      // The native plant's thick leaf strokes extend three units beyond their
+      // path centreline. Other rows are body geometry without stroke padding.
+      const tolerance = kind === 'plant' ? 3.000001 : .000001;
+      assert.ok(Math.abs(layout[side] - native[side]) < tolerance,
+        kind + ' ' + side + ': envelope ' + layout[side] + ', native body ' + native[side]);
+    }
+    assert.equal(pngs(fixture.calls).length, 0);
+    const valid = propAsset(kind);
+    assert.doesNotThrow(() => validateManifest({ ...empty(), assets: [valid] }));
+    assert.throws(() => validateManifest({ ...empty(), assets: [{ ...valid, height: valid.height + 1 }] }),
+      /native body envelope/);
+    assert.throws(() => validateManifest({ ...empty(), assets: [{ ...valid, anchor: { x: 51, y: 190 } }] }),
+      /bottom centre/);
+    assert.throws(() => validateManifest({ ...empty(), assets: [{ ...valid, anchor: { x: 50, y: 189 } }] }),
+      /bottom centre/);
+  }
+});
+
+test('all 122 admitted map instances use PNGs; all eight physical instances retain their exact native rendering', async () => {
+  const native = await runtime(), covered = await runtime(Object.keys(propLayouts).map(kind => propAsset(kind)));
+  const beforeMap = JSON.stringify(covered.context.ROP_DATA.rooms), beforeState = JSON.stringify(covered.sim.s);
+  let admitted = 0, physical = 0;
+  for (const { room, prop } of roomProps(covered.context).filter(row => Object.hasOwn(propLayouts, row.prop.kind))) {
+    native.calls.length = 0; covered.calls.length = 0;
+    native.renderer.prop(prop, room, native.sim.s);
+    covered.renderer.prop(prop, room, covered.sim.s);
+    if (decorative(prop)) {
+      admitted++;
+      assert.equal(pngs(covered.calls).length, 1, room.id + '/' + prop.id);
+      assert.ok(pngs(covered.calls)[0].args[0].src.endsWith('/prop-' + prop.kind + '.png'));
+    } else {
+      physical++;
+      assert.equal(pngs(covered.calls).length, 0, prop.id + ' must keep its physical cover.');
+      assert.equal(JSON.stringify(covered.calls), JSON.stringify(native.calls), prop.id + ': complete native body.');
+    }
+  }
+  assert.equal(admitted, 122); assert.equal(physical, 8);
+  assert.equal(JSON.stringify(covered.context.ROP_DATA.rooms), beforeMap, 'Positions, routes and footprints stay native.');
+  assert.equal(JSON.stringify(covered.sim.s), beforeState, 'Rendering does not mutate simulation or saves.');
+});
+
+test('decorative prop selection excludes synthesized hardware, another room and disguised collision bodies', async () => {
+  const native = await runtime(), covered = await runtime(Object.keys(propLayouts).map(kind => propAsset(kind)));
+  const candidates = roomProps(covered.context);
+  const clock = candidates.find(row => row.prop.kind === 'wall-clock');
+  const physical = candidates.find(row => row.prop.kind === 'lab-bench' && !decorative(row.prop));
+  const wrongRoom = covered.context.ROP_DATA.rooms.find(room => room.id !== clock.room.id);
+  for (const [body, room] of [
+    [{ ...clock.prop, id: 'objective-hardware' }, clock.room],
+    [clock.prop, wrongRoom],
+    [{ ...clock.prop, collidable: true }, clock.room],
+    [{ ...clock.prop, footprint: { w: 90, d: .1 } }, clock.room],
+    [{ ...physical.prop, collidable: false, footprint: undefined }, physical.room]
+  ]) {
+    native.calls.length = 0; covered.calls.length = 0;
+    native.renderer.prop(body, room, native.sim.s);
+    covered.renderer.prop(body, room, covered.sim.s);
+    assert.equal(pngs(covered.calls).length, 0);
+    assert.equal(JSON.stringify(covered.calls), JSON.stringify(native.calls));
+  }
+  // Real classic projection clones preserve id/kind while normalizing z.
+  covered.calls.length = 0;
+  covered.renderer.prop({ ...clock.prop, z: .7 }, clock.room, covered.sim.s);
+  assert.equal(pngs(covered.calls).length, 1);
+});
+
+test('each decorative image stays whole, proportional and inside its native body envelope at every tested depth', async () => {
+  for (const bounds of [{ x: 10, y: 10, w: 80, h: 180 }, { x: 10, y: 10, w: 80, h: 20 }]) {
+    const fixture = await runtime(Object.keys(propLayouts).map(kind => propAsset(kind, {
+      bounds, anchor: { x: bounds.x + bounds.w / 2, y: bounds.y + bounds.h }
+    })));
+    fixture.renderer.scale = 1.5; fixture.renderer.cam = 100; fixture.renderer.h = 760;
+    for (const [kind, layout] of Object.entries(propLayouts)) {
+      const { prop, room } = roomProps(fixture.context).find(row => row.prop.kind === kind && decorative(row.prop));
+      for (const z of [.22, .7, .88]) {
+        const body = { ...prop, z }, position = fixture.renderer.project(body.x, z);
+        fixture.calls.length = 0; fixture.renderer.prop(body, room, fixture.sim.s);
+        const image = pngs(fixture.calls)[0];
+        assert.ok(image, kind); assert.equal(image.args.length, 5, 'The complete PNG is drawn without an atlas crop.');
+        const [tx, ty] = fixture.calls.find(call => call.method === 'translate').args;
+        const [sx, sy] = fixture.calls.find(call => call.method === 'scale').args;
+        assert.equal(sx, sy, kind + ': aspect ratio is preserved.');
+        const [, dx, dy, dw, dh] = image.args, source = image.args[0];
+        const left = tx + (dx + bounds.x * dw / source.naturalWidth) * sx;
+        const right = left + bounds.w * dw / source.naturalWidth * sx;
+        const top = ty + (dy + bounds.y * dh / source.naturalHeight) * sy;
+        const bottom = top + bounds.h * dh / source.naturalHeight * sy;
+        const base = fixture.renderer.scale * (.8 + z * .28), epsilon = 1e-7;
+        assert.ok(left >= position.x + layout.left * base - epsilon, kind + ': left edge');
+        assert.ok(right <= position.x + layout.right * base + epsilon, kind + ': right edge');
+        assert.ok(top >= position.y + layout.top * base - epsilon, kind + ': top edge');
+        assert.ok(Math.abs(bottom - (position.y + layout.bottom * base)) < epsilon,
+          kind + ': wall mounting or wheel bottom stays at its original height.');
+      }
+    }
+  }
+});
+
+test('native captions retain their exact words, world position, size and colour above decorative PNGs', async () => {
+  const native = await runtime(), covered = await runtime(Object.keys(propLayouts).map(kind => propAsset(kind)));
+  native.renderer.scale = covered.renderer.scale = 1.35;
+  native.renderer.cam = covered.renderer.cam = 100;
+  native.renderer.h = covered.renderer.h = 760;
+  // Start with nondefault values so caption paint cannot leak silently into
+  // the next depth-sorted body. The mock restores these through a real stack.
+  for (const fixture of [native, covered]) Object.assign(fixture.renderer.ctx, {
+    fillStyle: '#123456', strokeStyle: '#654321', lineWidth: 2.25,
+    globalAlpha: .63, font: '13px serif', textAlign: 'right'
+  });
+  const labels = new Set();
+  for (const kind of Object.keys(propLayouts)) {
+    const { room, prop } = roomProps(covered.context).find(row => row.prop.kind === kind && decorative(row.prop));
+    native.calls.length = 0; covered.calls.length = 0;
+    const nativeBefore = native.canvasState(), coveredBefore = covered.canvasState();
+    native.renderer.prop(prop, room, native.sim.s);
+    covered.renderer.prop(prop, room, covered.sim.s);
+    assert.deepEqual(native.canvasState(), nativeBefore, kind + ': native Canvas state is restored.');
+    assert.deepEqual(covered.canvasState(), coveredBefore, kind + ': PNG caption Canvas state is restored.');
+    const originalLabels = native.calls.filter(call => call.method === 'fillText');
+    const imageLabels = covered.calls.filter(call => call.method === 'fillText');
+    assert.equal(imageLabels.length, originalLabels.length, kind + ': captions are never suppressed or duplicated.');
+    for (const [index, label] of originalLabels.entries()) {
+      labels.add(label.args[0]);
+      const [tx, ty] = native.calls.find(call => call.method === 'translate').args;
+      const [sx, sy] = native.calls.find(call => call.method === 'scale').args;
+      assert.deepEqual(imageLabels[index].args, [label.args[0], tx + label.args[1] * sx, ty + label.args[2] * sy]);
+      // Compare the paint captured at fillText, not the correctly restored
+      // post-draw context. Native text is scaled by its enclosing transform.
+      const originalPaint = label.styles, imagePaint = imageLabels[index].styles;
+      const expectedFont = originalPaint.font.replace(/^[\d.]+px/,
+        String(parseFloat(originalPaint.font) * sy) + 'px');
+      assert.equal(imagePaint.font, expectedFont);
+      assert.equal(imagePaint.fillStyle, originalPaint.fillStyle);
+      assert.equal(imagePaint.textAlign, originalPaint.textAlign);
+      assert.equal(imagePaint.globalAlpha, originalPaint.globalAlpha);
+    }
+  }
+  assert.deepEqual([...labels].sort(), ['!', 'FIRE', 'STOCK', 'UNITÉ OBSTÉTRICALE']);
+});
+
+test('new decorative PNG failures restore the whole native body and caption without changing save state', async () => {
+  // Exercise both native dispatch paths: fidelity P.prop and architecture
+  // P.extraProp. A failure in the outer adapter must not trigger a second PNG
+  // attempt when the original body delegates to extraProp.
+  for (const kind of ['natal-unit', 'fire-cabinet']) {
+    const native = await runtime(), { room, prop } = roomProps(native.context).find(row => row.prop.kind === kind);
+    native.calls.length = 0; native.renderer.prop(prop, room, native.sim.s);
+    const failedCanvas = await runtime([propAsset(prop.kind)]);
+    verifyNativeAfterCanvasError(failedCanvas,
+      () => failedCanvas.renderer.prop(prop, room, failedCanvas.sim.s), native.calls);
+    class FailedImage extends FakeImage { decode() { return Promise.reject(new Error('decorative PNG failed')); } }
+    const failedDecode = await runtime([propAsset(prop.kind)], null, { ImageClass: FailedImage });
+    failedDecode.renderer.prop(prop, room, failedDecode.sim.s);
+    assert.equal(pngs(failedDecode.calls).length, 0);
+    assert.equal(JSON.stringify(failedDecode.calls), JSON.stringify(native.calls));
+  }
+});
+
+test('admitted native props are static through phase, time and circuit changes; dynamic hardware remains native', async () => {
+  const fixture = await runtime([], null, { recordStyles: true });
+  const candidates = roomProps(fixture.context);
+  for (const kind of Object.keys(propLayouts)) {
+    const { room, prop } = candidates.find(row => row.prop.kind === kind && decorative(row.prop));
+    fixture.sim.s.phase = 0; fixture.renderer.time = 0;
+    fixture.calls.length = 0; fixture.renderer.prop(prop, room, fixture.sim.s);
+    const reference = JSON.stringify(fixture.calls);
+    for (const phase of [1, 2, 3, 4]) for (const powered of [false, true]) {
+      fixture.sim.s.phase = phase; fixture.renderer.time = 137;
+      for (const circuit of Object.keys(fixture.sim.s.systems.circuits))
+        fixture.sim.s.systems.circuits[circuit] = powered ? phase + 1 : 0;
+      fixture.calls.length = 0; fixture.renderer.prop(prop, room, fixture.sim.s);
+      assert.equal(JSON.stringify(fixture.calls), reference, kind + ': phase ' + phase + ', power ' + powered);
+    }
+  }
+  const dynamicKinds = ['server', 'lamp', 'floodlight', 'bed-lamp', 'fan', 'wheel'];
+  const covered = await runtime(dynamicKinds.map(kind => asset({ id: kind, file: 'assets/' + kind + '.png',
+    targetIds: [kind], category: 'prop', pose: 'static', facing: 0, weapon: 'none' })));
+  for (const kind of dynamicKinds) {
+    assert.equal(Object.hasOwn(propLayouts, kind), false);
+    const candidate = roomProps(covered.context).find(row => row.prop.kind === kind && decorative(row.prop));
+    if (!candidate) continue;
+    covered.calls.length = 0;
+    covered.renderer.prop(candidate.prop, candidate.room, covered.sim.s);
+    assert.equal(pngs(covered.calls).length, 0, kind + ': no static image masks dynamic cues.');
+  }
 });
 
 test('inventory PNGs decorate the real armory factory without replacing its controls or granting supplies', async () => {

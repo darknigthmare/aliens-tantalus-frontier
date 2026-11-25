@@ -1,6 +1,74 @@
 # Fleuve de la Douleur — qualification du rendu PNG
 
-## État vérifié le 25 novembre 2026
+## Lot 2 — 70 PNG admis
+
+Le deuxième lot ajoute **28 PNG individuels** au lot de 42 intégré par la PR 62.
+Le manifeste de production et son index de distribution contiennent désormais
+**70 entrées**. Les 28 nouvelles images occupent **48 930 500 octets** ; les 70
+fichiers totalisent **119 761 742 octets**. Les images complètes sont conservées
+sans découpe, redimensionnement ni réencodage par script.
+
+### Qualification locale du 25 novembre 2026
+
+- **49 tests Node réussis sur 49** : 28 tests de sprites et 21 tests d'intégration
+  et de lancement.
+- **70 PNG décodés sur 70**, tous RGBA avec une seule image et un vrai canal
+  transparent ; aucune erreur d'inspection.
+- Aucun bord touché à alpha >= 200. La seule alerte à alpha >= 16 reste celle
+  du PNG historique de Bronagh, déjà documentée dans le bilan du lot 1.
+- **222 fichiers récupérés, neuf archives historiques et 42 PNG du lot 1**
+  identiques à leur base ; les cinq points d'entrée hôte contrôlés sont inchangés.
+
+Les sept nouveaux contrôles Node comparent les enveloppes aux appels Canvas
+du moteur natif. Ils couvrent **122 instances décoratives** admissibles et
+**huit instances physiques** dont le dessin natif complet est conservé.
+L'identité et le type doivent correspondre à une vraie entrée de la pièce ;
+les consoles ou radios synthétiques des interactions ne deviennent pas des décors PNG.
+
+L'image entière est ajustée uniformément dans l'enveloppe native, sans étirement.
+Le centre et le bas de ses bornes alpha >= 16 conservent la hauteur des montages
+muraux, des pieds ou des roues. Les quatre inscriptions `UNITÉ OBSTÉTRICALE`,
+`FIRE`, `STOCK` et `!` restent natives. Le test de légende capture le style
+au moment de `fillText` et vérifie sa restauration au moyen d'une vraie pile
+de styles simulée. Retirer la paire `save/restore` est détecté par ce contrôle.
+
+Les vitrages du capot obstétrical et de la vitrine ont été régénérés après
+détection d'un fond peint presque opaque. Les fichiers retenus contiennent un
+véritable alpha partiel ; les cadres et le mobilier intérieur restent visibles.
+Leurs brouillons exclus et leurs prompts exacts sont consignés dans
+`GENERATION_LOG.json`. Les reflets ont été examinés sur fonds contrastés.
+
+### Revue indépendante des compositions
+
+Les 28 types ont été composés avec les véritables méthodes Canvas, dans une
+fixture isolée : 130 instances examinées, 122 dessins PNG et huit exclusions
+physiques comparées pixel à pixel au rendu natif. Les enveloppes et ancrages
+sont respectés, sans modification de la simulation. Les inscriptions STOCK
+et ! sont lisibles sans doublon ; les vitrages corrigés ont été revus sur
+fonds contrastés.
+
+La revue a demandé un cartouche plus haut pour FIRE. Le PNG a été régénéré,
+puis les neuf armoires incendie ont été contrôlées de nouveau avec la version
+finale : aucune erreur, aucun avertissement et légende entièrement contenue
+dans le cartouche. La position native du texte est conservée. Les 27 autres
+PNG ont des empreintes inchangées ; ce contrôle ciblé ne prétend pas être un
+second rendu complet des 28 types.
+
+### Empreintes du résultat construit
+
+| Fichier | SHA-256 |
+| --- | --- |
+| Manifeste des 70 images | `21d9717d8f3956bb0131e1e9809fec67deaa50307314054169d5c2d11f71194d` |
+| HTML dérivé, 936 928 octets | `1975c08689f91fa347e0f3ff5310b8f159880df75b1d07130d805d5e951fa175` |
+| Standalone original conservé | `91ae538879b939018cea5dc3ba2eb9e45faea7693fdd952efbe8531b33cdfced` |
+
+Le workflow DLC exécute séparément les parcours Chromium HTTP et `file://`
+sur le commit proposé. Les contrôles locaux ci-dessus ne sont pas un résultat
+navigateur. La composition de tous les PNG utilise une fixture identifiée ;
+elle ne constitue pas un parcours complet de toutes les missions.
+
+
+## Historique du lot 1 — état vérifié le 25 novembre 2026
 
 Les adaptateurs et le builder dérivé sont implémentés. La recette Node ciblée a réussi **21 tests sur 21** et couvre les images individuelles, les poses, les identités, les alertes et les interfaces existantes. Le contrôle indépendant du snapshot a confirmé **222 fichiers sur 222**, avec les tailles et SHA-256 du manifeste de récupération.
 

@@ -1190,6 +1190,790 @@
         "status": "interpretation",
         "note": "Anton Voss est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tablet repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
       }
+    },
+    {
+      "id": "prop-natal-unit",
+      "file": "assets/prop-natal-unit.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 9,
+        "y": 98,
+        "w": 1657,
+        "h": 770
+      },
+      "anchor": {
+        "x": 837.5,
+        "y": 868
+      },
+      "sha256": "2891e27bae950d8cfe5a36992a1fe2b698dda3a9f54923ebaf032a951ac8c37b",
+      "category": "prop",
+      "targetIds": [
+        "natal-unit"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 112,
+      "fidelity": {
+        "status": "reference-informed",
+        "note": "Unité obstétricale et capot principalement transparent décrits dans l’extrait autorisé Titan Books / Daily Dead (S18). Enveloppe, socle et commande à droite repris du DLC ; géométrie détaillée et matériaux interprétés. Vitrage à véritable alpha partiel ; aucun patient représenté."
+      }
+    },
+    {
+      "id": "prop-white-monitor",
+      "file": "assets/prop-white-monitor.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 75,
+        "y": 83,
+        "w": 755,
+        "h": 1623
+      },
+      "anchor": {
+        "x": 452.5,
+        "y": 1706
+      },
+      "sha256": "7e557b6ea267d8969408d1db9f4b602f36da48032e36a887aef6ef508e33ca64",
+      "category": "prop",
+      "targetIds": [
+        "white-monitor"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 103,
+      "fidelity": {
+        "status": "reference-informed",
+        "note": "Moniteurs blancs à indicateurs verts et bleus décrits dans l’extrait autorisé Titan Books / Daily Dead (S18). Silhouette sur pied et palette du DLC ; forme CRT et tracé ECG sont une adaptation, sans modèle exact authentifié."
+      }
+    },
+    {
+      "id": "prop-microscope",
+      "file": "assets/prop-microscope.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 12,
+        "y": 12,
+        "w": 1318,
+        "h": 1143
+      },
+      "anchor": {
+        "x": 671,
+        "y": 1155
+      },
+      "sha256": "68da9a25b5d4d801fd6ceba6378ef00c9f5bbac09ff75842078c74c9663802ee",
+      "category": "prop",
+      "targetIds": [
+        "microscope"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 78,
+      "fidelity": {
+        "status": "semantic-interpretation",
+        "note": "Le type microscope existait avec un pupitre générique. La forme optique individualise ce sens dans la même enveloppe de rendu ; dessin interprété, sans modèle filmique ou description détaillée authentifiée."
+      }
+    },
+    {
+      "id": "prop-fire-cabinet",
+      "file": "assets/prop-fire-cabinet.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 129,
+        "y": 69,
+        "w": 725,
+        "h": 1454
+      },
+      "anchor": {
+        "x": 491.5,
+        "y": 1523
+      },
+      "sha256": "90846c127d08147e7b1e2edbcd03b2caf81a270bd0c0b6cbd3a56080d62aabf7",
+      "category": "prop",
+      "targetIds": [
+        "fire-cabinet"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 102,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Armoire incendie verticale rouge-brun patiné, cadre rectangulaire et niche sombre montrant un extincteur ocre avec poignée, inscription FIRE. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-oxygen",
+      "file": "assets/prop-oxygen.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 82,
+        "y": 470,
+        "w": 571,
+        "h": 1494
+      },
+      "anchor": {
+        "x": 367.5,
+        "y": 1964
+      },
+      "sha256": "b9439594714eaa28e0d16a19eda11407df8b1e1f86543c4028d3eebc3004c6c1",
+      "category": "prop",
+      "targetIds": [
+        "oxygen"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 100,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Bouteille d’oxygène verticale gris-vert, col étroit avec robinet et petit manomètre rond à droite, pied rectangulaire sombre. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-privacy-screen",
+      "file": "assets/prop-privacy-screen.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 157,
+        "y": 29,
+        "w": 773,
+        "h": 1390
+      },
+      "anchor": {
+        "x": 543.5,
+        "y": 1419
+      },
+      "sha256": "c9547990269df19322086cbae30164166fcc638c4b0b4336e8766150449ac146",
+      "category": "prop",
+      "targetIds": [
+        "privacy-screen"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 157,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Paravent médical mobile à panneau rectangulaire translucide vert pâle, deux montants métalliques, pieds en T et petites roulettes. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-gurney",
+      "file": "assets/prop-gurney.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 20,
+        "y": 73,
+        "w": 1631,
+        "h": 813
+      },
+      "anchor": {
+        "x": 835.5,
+        "y": 886
+      },
+      "sha256": "0e91dc3343d068f0dae8b269ebd64464ff00a15b020c2d2ede255a9cd75b4cd3",
+      "category": "prop",
+      "targetIds": [
+        "gurney"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 87,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Brancard médical vide large et bas, matelas vert désaturé, plateau clair sur deux pieds métalliques à petites roulettes. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-glass-cabinet",
+      "file": "assets/prop-glass-cabinet.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 24,
+        "y": 72,
+        "w": 1019,
+        "h": 1329
+      },
+      "anchor": {
+        "x": 533.5,
+        "y": 1401
+      },
+      "sha256": "8222c75ac12971c6683305a804d2fe23d18f4072e154d5d2418b805ddd70d711",
+      "category": "prop",
+      "targetIds": [
+        "glass-cabinet"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 157,
+      "fidelity": {
+        "status": "semantic-interpretation",
+        "note": "Le type glass-cabinet partageait un panneau vitré mobile. La vitrine à deux étagères individualise ce type dans son enveloppe native, avec vrai vitrage transparent ; aménagement interprété, sans accessoire filmique exact authentifié."
+      }
+    },
+    {
+      "id": "prop-medical-cross",
+      "file": "assets/prop-medical-cross.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 140,
+        "y": 131,
+        "w": 977,
+        "h": 986
+      },
+      "anchor": {
+        "x": 628.5,
+        "y": 1117
+      },
+      "sha256": "15cd29060aeec25840190b33cb5d6acda0f3b46bef189c82ad2453452883b186",
+      "category": "prop",
+      "targetIds": [
+        "medical-cross"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 52,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Plaque carrée médicale ivoire, simple croix vert désaturé centrée, cadre fin. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-sink",
+      "file": "assets/prop-sink.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 125,
+        "y": 16,
+        "w": 973,
+        "h": 1212
+      },
+      "anchor": {
+        "x": 611.5,
+        "y": 1228
+      },
+      "sha256": "7ddd42d9fee3e3fecd4b7e7dd0f6a20192b998ede900f7abd82a9c7fe4ea0b57",
+      "category": "prop",
+      "targetIds": [
+        "sink"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 107,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Meuble évier industriel compact gris-vert, grand bac ovale sombre intégré au plan supérieur, robinet coudé métallique simple à droite. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-hose-reel",
+      "file": "assets/prop-hose-reel.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 89,
+        "y": 38,
+        "w": 998,
+        "h": 1253
+      },
+      "anchor": {
+        "x": 588,
+        "y": 1291
+      },
+      "sha256": "ef6812960513eed33c70593231402cf8cce37bcd714d306e1fe8bab0f4e74bac",
+      "category": "prop",
+      "targetIds": [
+        "hose-reel"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 103,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Enrouleur de flexible, grande bobine circulaire métallique avec tuyau sombre en spires concentriques et extrémité pendante à droite presque jusqu’au sol. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-tool-board",
+      "file": "assets/prop-tool-board.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 61,
+        "y": 89,
+        "w": 1530,
+        "h": 778
+      },
+      "anchor": {
+        "x": 826,
+        "y": 867
+      },
+      "sha256": "123ba2ef11ccbc9b693612ce492bee473f0378435ab9184c7fa8a2170ea9c248",
+      "category": "prop",
+      "targetIds": [
+        "tool-board"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 61,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Panneau mural horizontal métallique sombre, six outils manuels longs bien distincts suspendus verticalement, cadre gris-vert. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-hand-truck",
+      "file": "assets/prop-hand-truck.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 92,
+        "y": 20,
+        "w": 850,
+        "h": 1482
+      },
+      "anchor": {
+        "x": 517,
+        "y": 1502
+      },
+      "sha256": "5072cb70f287e6d4109a1aa86acfc4fcd9da084cf95b2425b41921f0468da3f5",
+      "category": "prop",
+      "targetIds": [
+        "hand-truck"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 111,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Diable de manutention vide, cadre tubulaire gris-vert à deux montants et barre de poignée, petite bavette basse, deux roues sombres. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-cable-spool",
+      "file": "assets/prop-cable-spool.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 48,
+        "y": 26,
+        "w": 1563,
+        "h": 893
+      },
+      "anchor": {
+        "x": 829.5,
+        "y": 919
+      },
+      "sha256": "818cc15439fe43275c979de972b6878444061334d380396665ba0107047288a3",
+      "category": "prop",
+      "targetIds": [
+        "cable-spool"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 58,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Touret de câble horizontal à deux flasques métalliques circulaires, moyeu sombre et trois perforations dans chaque flasque, câble entre les flasques. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-tape-reel",
+      "file": "assets/prop-tape-reel.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 18,
+        "y": 58,
+        "w": 1626,
+        "h": 810
+      },
+      "anchor": {
+        "x": 831,
+        "y": 868
+      },
+      "sha256": "31ec1bd9669f970046c3c9d93d09e3a356a8036bebaabdd971deb7caca763c8d",
+      "category": "prop",
+      "targetIds": [
+        "tape-reel"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 58,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Petit enregistreur industriel à deux bobines métalliques circulaires côte à côte, moyeux et trois perforations dans chaque bobine, bande sombre entre les deux. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-radio",
+      "file": "assets/prop-radio.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 118,
+        "y": 10,
+        "w": 780,
+        "h": 1515
+      },
+      "anchor": {
+        "x": 508,
+        "y": 1525
+      },
+      "sha256": "db27211f3eb5e30daaac3b65860a230cbfa4beeb2412d15426de0dcd1cd6fd3b",
+      "category": "prop",
+      "targetIds": [
+        "radio"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 135,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Poste de radio colonial fixe sur pupitre compact gris-vert, petit écran sombre, commandes physiques sur plan incliné, antenne verticale mince à droite. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-monitor",
+      "file": "assets/prop-monitor.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 113,
+        "y": 34,
+        "w": 1089,
+        "h": 1114
+      },
+      "anchor": {
+        "x": 657.5,
+        "y": 1148
+      },
+      "sha256": "055f58b00a3c5fee1c353c11c865ff3fdef1ee52b15dcbad97c36979466fa798",
+      "category": "prop",
+      "targetIds": [
+        "monitor"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 78,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Terminal médical rétro compact, écran cyan sombre au-dessus d’un socle pupitre gris-vert, commandes physiques sur une surface inclinée. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-locker",
+      "file": "assets/prop-locker.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 66,
+        "y": 27,
+        "w": 812,
+        "h": 1606
+      },
+      "anchor": {
+        "x": 472,
+        "y": 1633
+      },
+      "sha256": "0b0dd126dda170b90d5e3af22c0cc22f8a4361f6f4ca4638ad7e849b8be5414f",
+      "category": "prop",
+      "targetIds": [
+        "locker"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 158,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Casier de stockage colonial haut à deux portes étroites, acier vert-bleu sombre, fentes d’aération supérieures, poignée claire et marquage STOCK. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-chair",
+      "file": "assets/prop-chair.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 278,
+        "y": 33,
+        "w": 684,
+        "h": 1199
+      },
+      "anchor": {
+        "x": 620,
+        "y": 1232
+      },
+      "sha256": "350ca4972bcecaeb20144fd0fb1ee57c1dfef06bef8f5d65cebacc880b1d2e57",
+      "category": "prop",
+      "targetIds": [
+        "chair"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 86,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Chaise coloniale simple sans accoudoirs, assise vert pâle, dossier rectangulaire vert sombre et pieds tubulaires gris-vert. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-wall-clock",
+      "file": "assets/prop-wall-clock.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 62,
+        "y": 57,
+        "w": 1128,
+        "h": 1155
+      },
+      "anchor": {
+        "x": 626,
+        "y": 1212
+      },
+      "sha256": "0453465572e8af35a53e8fcdee16c3718e4671cec5a341bfd8aef0849405790f",
+      "category": "prop",
+      "targetIds": [
+        "wall-clock"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 50,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Horloge murale ronde, bord métal gris-vert, cadran crème jauni à douze graduations, deux aiguilles sombres orientées haut-droite et bas-gauche. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-warning-board",
+      "file": "assets/prop-warning-board.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 52,
+        "y": 122,
+        "w": 1416,
+        "h": 801
+      },
+      "anchor": {
+        "x": 760,
+        "y": 923
+      },
+      "sha256": "62ccde2ae0f3562f3e2d824c6c883bcb2bc3380974a68e79f69a5473deb0b7b4",
+      "category": "prop",
+      "targetIds": [
+        "warning-board"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 49,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Plaque d’avertissement murale horizontale, cadre gris-vert, fond ocre clair, triangle noir centré avec point d’exclamation. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-noticeboard",
+      "file": "assets/prop-noticeboard.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 80,
+        "y": 169,
+        "w": 1360,
+        "h": 694
+      },
+      "anchor": {
+        "x": 760,
+        "y": 863
+      },
+      "sha256": "2bc8dde3c2015d30cb2474085da419414eea0502ac2951730aa747e63c59f193",
+      "category": "prop",
+      "targetIds": [
+        "noticeboard"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 49,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Tableau mural colonial horizontal, cadre métal gris-vert, surface vert pâle et petites fiches ou lignes de consigne claires. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-plant",
+      "file": "assets/prop-plant.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 98,
+        "y": 18,
+        "w": 827,
+        "h": 1482
+      },
+      "anchor": {
+        "x": 511.5,
+        "y": 1500
+      },
+      "sha256": "1a81a3951801fe0ea332df3bfdc9af1ca4f0cb6964b765f0b90380de003a6ea2",
+      "category": "prop",
+      "targetIds": [
+        "plant"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 101.8414519259386,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Petite plante de logement en pot cubique gris-vert, cinq feuilles ou tiges longues vert olive en éventail, silhouette entière isolée. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-hanging-coat",
+      "file": "assets/prop-hanging-coat.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 97,
+        "y": 46,
+        "w": 827,
+        "h": 1473
+      },
+      "anchor": {
+        "x": 510.5,
+        "y": 1519
+      },
+      "sha256": "23936ef2c1dc80b4f65022d948888abddd5453444a052c8f8a7c4093f2b42465",
+      "category": "prop",
+      "targetIds": [
+        "hanging-coat"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 112,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Manteau de travail colonial vert désaturé suspendu à une petite barre et un cintre, deux manches baissées et fermeture verticale centrale. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-lab-bench",
+      "file": "assets/prop-lab-bench.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 16,
+        "y": 109,
+        "w": 1445,
+        "h": 848
+      },
+      "anchor": {
+        "x": 738.5,
+        "y": 957
+      },
+      "sha256": "0573234c16ddd1add8f612b3817ecdc716b4a264c802457572295a0430cc5dca",
+      "category": "prop",
+      "targetIds": [
+        "lab-bench"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 111,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Établi de laboratoire bas et large, plateau gris-vert clair sur deux pieds métalliques, petit tapis ou support vert et deux récipients translucides sur le plateau. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-pump-motor",
+      "file": "assets/prop-pump-motor.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 31,
+        "y": 18,
+        "w": 1634,
+        "h": 897
+      },
+      "anchor": {
+        "x": 848,
+        "y": 915
+      },
+      "sha256": "8a213defb00e371233a0c1e6d4dbe21439aaf0a5d77a1c8afcde70f06a401f59",
+      "category": "prop",
+      "targetIds": [
+        "pump-motor"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 83,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Groupe moteur de pompe bas horizontal, corps sombre à nombreuses ailettes verticales vert-gris, carter circulaire à droite et semelle métallique rectangulaire. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-bench",
+      "file": "assets/prop-bench.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 52,
+        "y": 114,
+        "w": 1581,
+        "h": 738
+      },
+      "anchor": {
+        "x": 842.5,
+        "y": 852
+      },
+      "sha256": "7aa627d57e49b7fd94ee2131284c3985e40a43a5b0f4f813fee906da4ce66ce2",
+      "category": "prop",
+      "targetIds": [
+        "bench"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 69,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Banc collectif bas et large, assise gris-vert, dossier rectangulaire vert sombre à cinq séparations verticales, deux pieds épais. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
+    },
+    {
+      "id": "prop-vending",
+      "file": "assets/prop-vending.png",
+      "weapon": "none",
+      "state": "normal",
+      "bounds": {
+        "x": 128,
+        "y": 38,
+        "w": 646,
+        "h": 1664
+      },
+      "anchor": {
+        "x": 451,
+        "y": 1702
+      },
+      "sha256": "26ac63de868e4ab6abcf96906db5af03a649ee3f51c852583cb914798f5dacfa",
+      "category": "prop",
+      "targetIds": [
+        "vending"
+      ],
+      "pose": "static",
+      "facing": 0,
+      "height": 176,
+      "fidelity": {
+        "status": "project-native-adaptation",
+        "note": "Distributeur automatique colonial haut et étroit gris-vert, grande vitre sombre montrant trois rangées de quatre produits, fente de livraison basse et petite commande à droite. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
+      }
     }
   ]
 }
