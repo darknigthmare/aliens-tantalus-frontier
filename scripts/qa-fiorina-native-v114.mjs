@@ -66,7 +66,7 @@ async function snapshot(page) {
     const { engine, saveSystem } = await import('/src/app.js');
     const state = engine.captureResumeState?.();
     return {
-      campaignId: engine.campaign?.id, active: engine.isAlien3V88?.() === true,
+      campaignId: engine.campaign?.id, active: engine.isAlien3ProductionV114?.() === true,
       cut: state?.specialOperation?.alien3V114?.cut,
       phase: engine.alien3V88?.phase, player: { x: engine.player?.x, y: engine.player?.y },
       flares: engine.alien3V88?.flares,
@@ -111,7 +111,7 @@ try {
     check(`${cut}: briefing identifies Ripley and the partial adaptation`, brief.includes('RIPLEY') && brief.includes('adaptation reste partielle') && brief.includes('FUSÉES DE DIVERSION'), brief);
     await screenshot(page, `${cut}-briefing`, '#operation-plan');
     await page.locator('#operation-launch').click();
-    await page.waitForFunction(async () => (await import('/src/app.js')).engine.isAlien3V88?.() === true);
+    await page.waitForFunction(() => { const engine = globalThis.__ATF_GAME__; return engine?.isAlien3ProductionV114?.() === true && engine.running && !engine.paused && engine.mission?.state === 'active' && !engine.enemyAtlasLoadingPausedV65 && !engine.userCasteLoadingV88; }, null, { timeout: 60000 });
     const started = await snapshot(page);
     report.cuts[cut] = { started };
     check(`${cut}: native production engine launches the selected cut`, started.active && started.campaignId === campaignId && started.cut === cut, started);
@@ -139,7 +139,7 @@ try {
     await page.locator('#fiorina-cut-v114').waitFor({ state: 'visible' });
     check(`${cut}: resumed briefing locks its stored cut`, await page.locator('#fiorina-cut-v114').inputValue() === cut && await page.locator('#fiorina-cut-v114').isDisabled());
     await page.locator('#operation-launch').click();
-    await page.waitForFunction(async () => (await import('/src/app.js')).engine.lastResumeResult?.applied === true);
+    await page.waitForFunction(() => globalThis.__ATF_GAME__?.lastResumeResult?.applied === true);
     const resumed = await snapshot(page);
     report.cuts[cut].resumed = { cut: resumed.cut, position: resumed.player, flares: resumed.flares, operationId: resumed.operationId };
     check(`${cut}: reload restores the same operation and cut`, resumed.operationId === stored.id && resumed.cut === cut && resumed.lastResumeApplied, report.cuts[cut].resumed);
