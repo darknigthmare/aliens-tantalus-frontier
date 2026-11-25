@@ -69,6 +69,7 @@ try {
     const box = await page.locator('#dlc-expeditions').boundingBox();
     check(profile.name + ': gallery fits viewport', box && box.x >= 0 && box.width <= profile.viewport.width && box.height <= profile.viewport.height);
     await page.keyboard.press('Escape');
+    await page.waitForFunction(() => document.activeElement?.id === 'title-dlc');
     check(profile.name + ': closing restores Extensions focus', await page.evaluate(() => document.activeElement?.id === 'title-dlc'));
     await openExpedition(page);
     check(profile.name + ': production page has no QA shortcut', await page.evaluate(() => typeof globalThis.__AVP_TEST__ === 'undefined'));
