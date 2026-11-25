@@ -1,0 +1,77 @@
+name: Import verified River of Pain bundle
+on:
+  push:
+    branches: [codex/transport-river-of-pain-20261125]
+    paths: [.github/workflows/transport-river-of-pain.yml]
+permissions:
+  contents: read
+concurrency:
+  group: river-of-pain-bundle-import-20261125
+  cancel-in-progress: false
+jobs:
+  import:
+    if: github.repository == 'darknigthmare/aliens-tantalus-frontier' && github.ref == 'refs/heads/codex/transport-river-of-pain-20261125'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    env:
+      ROP_BASE: 882ffdee7ed83a549bf2c1c4b9fa38de8e70edc2
+      ROP_COMMIT: 93d698c8b74e6509bd93254ee38d1c1fadb181f3
+      ROP_BUNDLE_SHA256: 6c8b62befaa64161e37f4c4832e39ec27ca70ffed29d56098c40a36816fb05c1
+      ROP_BUNDLE_URL: https://sb-2ljgewmntdyx.vercel.run/river-of-pain.bundle
+      ROP_TARGET: codex/integrate-river-of-pain-20261125
+      GIT_TERMINAL_PROMPT: "0"
+    steps:
+      - name: Checkout the verified base
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: 882ffdee7ed83a549bf2c1c4b9fa38de8e70edc2
+          fetch-depth: 1
+          sparse-checkout: |
+            .github/workflows
+          persist-credentials: true
+          submodules: false
+          lfs: false
+      - name: Download and authenticate the bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$ROP_COMMIT" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$ROP_BUNDLE_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          test "$(git rev-parse HEAD)" = "$ROP_BASE"
+          rop_bundle="$RUNNER_TEMP/river-of-pain.bundle"
+          curl --fail --silent --show-error --proto '=https' --tlsv1.2 \
+            --connect-timeout 20 --max-time 600 --max-filesize 335544320 \
+            --retry 2 --retry-delay 2 --output "$rop_bundle" "$ROP_BUNDLE_URL"
+          printf '%s  %s\n' "$ROP_BUNDLE_SHA256" "$rop_bundle" | sha256sum --check --status
+          git bundle verify "$rop_bundle"
+          test "$(git bundle list-heads "$rop_bundle")" = "$ROP_COMMIT refs/heads/$ROP_TARGET"
+      - name: Import verified objects without executing their code
+        shell: bash
+        run: |
+          set -euo pipefail
+          rop_bundle="$RUNNER_TEMP/river-of-pain.bundle"
+          git -c fetch.fsckObjects=true -c transfer.fsckObjects=true \
+            fetch --no-tags --no-recurse-submodules "$rop_bundle" \
+            "refs/heads/$ROP_TARGET:refs/remotes/river-import/verified"
+          test "$(git rev-parse refs/remotes/river-import/verified)" = "$ROP_COMMIT"
+          test "$(git rev-list --parents -n 1 "$ROP_COMMIT")" = "$ROP_COMMIT $ROP_BASE"
+          git diff --quiet "$ROP_BASE" "$ROP_COMMIT" -- .github/workflows
+          git fsck --strict --connectivity-only "$ROP_COMMIT"
+      - name: Push the exact commit without rewriting a branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          rop_current="$(git ls-remote --heads origin "refs/heads/$ROP_TARGET" | cut -f1)"
+          if [[ -n "$rop_current" && "$rop_current" != "$ROP_BASE" && "$rop_current" != "$ROP_COMMIT" ]]; then
+            printf '%s\n' "Target branch changed independently; refusing the push." >&2
+            exit 1
+          fi
+          git push --porcelain origin "$ROP_COMMIT:refs/heads/$ROP_TARGET"
+          test "$(git ls-remote --heads origin "refs/heads/$ROP_TARGET" | cut -f1)" = "$ROP_COMMIT"
+          printf 'Published verified commit %s to %s\n' "$ROP_COMMIT" "$ROP_TARGET"
+      - name: Remove the downloaded bundle
+        if: always()
+        shell: bash
+        run: rm -f "$RUNNER_TEMP/river-of-pain.bundle"
