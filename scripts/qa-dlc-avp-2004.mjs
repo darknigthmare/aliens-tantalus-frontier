@@ -56,6 +56,7 @@ async function createNativeProfileFixture(page, name) {
 async function openHostMenu(page) {
   await page.goto(base + '/', { waitUntil: 'domcontentloaded', timeout: 120000 });
   await page.waitForFunction(() => document.documentElement.classList.contains('title-mode'), null, { timeout: 120000 });
+  await page.locator('#intro-v188').waitFor({ state: 'detached', timeout: 20000 });
   const start = page.locator('#title-start');
   if (await start.isVisible()) await start.click();
   await page.locator('#title-dlc').waitFor({ state: 'visible' });
@@ -114,6 +115,7 @@ try {
     await page.locator('#pause-host-return').click();
     await page.waitForURL(base + '/');
     await page.waitForFunction(() => document.documentElement.classList.contains('title-mode'));
+    await page.locator('#intro-v188').waitFor({ state: 'detached', timeout: 20000 });
     check(profile.name + ': return retains the native profile', same(before, await nativeSnapshot(page)));
     const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('atf.dlc.avp2004.v1.slot1')));
     check(profile.name + ': return records the dedicated expedition notebook', saved && saved.schema === 10 && saved.player.x >= exported.player.x);
@@ -159,6 +161,7 @@ try {
   await page.locator('#host-leave').click();
   await page.waitForURL(base + '/');
   await page.waitForFunction(() => document.documentElement.classList.contains('title-mode'));
+  await page.locator('#intro-v188').waitFor({ state: 'detached', timeout: 20000 });
   check('quota: explicit unsaved exit retains native profile', same(before, await nativeSnapshot(page)));
   check('quota: unsaved notebook was not falsely created', await page.evaluate(() => localStorage.getItem('atf.dlc.avp2004.v1.slot1') === null));
   await blocked.close();

@@ -69,15 +69,21 @@ npm run qa:dlc:avp
 
 La CI **AVP DLC integration** exécute les contrôles du menu et du bundle, l'admission, le build réel puis Chromium sur origine HTTP. Le parcours navigateur teste le bureau et le téléphone, le lancement, le déplacement réel au clavier, la pause, l'export/import, la reprise et l'isolation des profils. Chaque contexte vierge reçoit un profil créé et validé par l'API réelle SaveSystem, puis charge normalement l'hôte avant les comparaisons octet par octet. Aucun avancement de campagne n'est injecté. Un contexte séparé refuse les seules écritures AVP pour exercer le secours par export. Les doublures des tests Node, la création du profil et cette injection de quota sont déclarées dans les rapports. Le workflow conserve le rapport et les captures navigateur pendant sept jours.
 
-La création d'une suite n'atteste pas son succès. Consulter les résultats du commit de la PR ; la validation navigateur locale a été interrompue avant exécution.
+Les 19 contrôles du bundle, les 11 contrôles du menu, la reproduction du bundle et les contrôles source/build ont réussi en CI. Le parcours Chromium est vérifié séparément sur le commit final de la PR. Son attente de démarrage comprend la disparition réelle de l'introduction : le titre est préparé sous son fondu tandis qu'elle possède encore les touches. La création d'une suite n'atteste pas son succès ; consulter le rapport du commit concerné.
 
-## Archives locales restant à transférer
+## Archives complètes préservées sur GitHub
 
-L'inventaire `archives/local-recovery-20261125/PENDING_TRANSFER.json` recense **16 ZIP, 7 modules, 1 189 845 299 octets** : AVP 2004, Alien Earth, Covenant, Mer des Chagrins, Résurrection, Hors des Ombres, MIRE/Nostromo, dont neuf anciennes versions de Mer des Chagrins.
+Les **16 ZIP, 7 modules, 1 189 845 299 octets** sont maintenant enregistrés dans la branche dédiée [archive/local-recovery-20261125](https://github.com/darknigthmare/aliens-tantalus-frontier/tree/archive/local-recovery-20261125).
 
-Les tailles et SHA-256 des sources ont été vérifiés localement. Les octets de ces ZIP **ne sont pas inclus dans cette intégration**. L'environnement a atteint sa capacité de stockage puis est devenu indisponible pendant leur préparation. Le jeu AVP et ses sources récupérées depuis le bundle sont présents ; cela ne remplace pas les captures, rapports complets et anciennes suites contenus dans son ZIP.
+Le commit vérifié est [6ed9b9210a09](https://github.com/darknigthmare/aliens-tantalus-frontier/commit/6ed9b9210a097bbdf90ec3a22043a3fe5845e541), arbre `ac4bff25eae9fc9c39eeec0a7a8243221efde3f8`. Ses **121 fragments** correspondent tous aux identifiants Git et aux tailles du plan local. Le manifeste donne aussi leurs SHA-256 et l'empreinte de chaque archive complète.
 
-À la reprise, comparer chaque fichier avec l'empreinte de cet inventaire. Pour les archives dépassant la limite d'un blob GitHub, conserver des fragments vérifiés et un reconstructeur. Actualiser un statut seulement après confirmation d'un commit contenant les octets. Les trois archives Predator antérieures du lot du 16 novembre restent intactes.
+Sont préservés : AVP 2004 v0.11, Alien Earth V11, Covenant v0.10, Mer des Chagrins v0.1 à v0.10, Résurrection V125, Hors des Ombres v0.10 et MIRE/Nostromo V119. Leurs sources, images, rapports et fichiers annexes sont conservés dans les ZIP d'origine.
+
+Les fragments mesurent au maximum 10 Mio, le premier AVP 6 Mio. Le script Python `reconstruct.py` vérifie leurs empreintes, reconstitue les ZIP dans un dossier extérieur au dépôt et refuse l'écrasement d'un fichier existant. Les instructions figurent dans le README de cette branche. La préservation n'atteste pas l'intégration jouable des six autres modules.
+
+Le fichier historique `archives/local-recovery-20261125/PENDING_TRANSFER.json` garde son nom pour conserver sa référence mais porte désormais le statut **preserved_on_github**, avec le commit d'archive. Aucun transfert de cet inventaire ne reste en attente.
+
+L'environnement local était devenu indisponible après saturation, puis a répondu de nouveau. La reprise a lu les sources par plages et transféré les fragments sans recopier les 1,19 Go sur le disque partagé. La branche d'archives contient seulement la sauvegarde et son outil ; les gros ZIP ne sont pas ajoutés au build du jeu.
 
 ## Base d'intégration
 

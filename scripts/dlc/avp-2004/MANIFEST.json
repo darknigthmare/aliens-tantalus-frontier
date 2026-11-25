@@ -913,8 +913,8 @@
     },
     {
       "path": "archives/local-recovery-20261125/PENDING_TRANSFER.json",
-      "bytes": 5916,
-      "sha256": "9a4ec46b3ac1bf2734c23d50102ed431b72255f850bf04fd5682b7320a7440fe"
+      "bytes": 7645,
+      "sha256": "cb4550b13e8bca6d2026753e3c98041797632bd1189db731cb7745c953b2a6d7"
     }
   ]
 }
