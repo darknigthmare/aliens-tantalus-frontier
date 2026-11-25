@@ -314,8 +314,14 @@
     },
     "fullRepositoryRegression": {
       "command": "npm run test:all",
-      "status": "pending",
-      "note": "Targeted DLC results do not qualify the full repository regression suite."
+      "status": "pending-github-ci",
+      "note": "The affected audit/succession tests and targeted DLC results are complete. The full repository release gate still requires its separate GitHub CI result.",
+      "initialLocalAttempt": {
+        "status": "stopped-before-completion",
+        "completeResultAvailable": false,
+        "knownFailure": "Unreviewed V182 source bytes after the host integration changed the admission checker.",
+        "correction": "Exact dated Fleuve successor receipts; the affected audit modules were then rerun with 143 of 143 tests passing."
+      }
     },
     "githubCi": {
       "status": "pending",
@@ -323,7 +329,113 @@
       "note": "No GitHub run is counted as passed in this working-tree report. The dedicated workflow repeats the full and slashless browser journeys and retains evidence outside the checkout."
     },
     "currentQaScriptSHA256": "fb446c9dc58e911ff3397456d598cc71dd6b8c3a630d05b915bd6bad0a092810",
-    "currentWorkflowSHA256": "882ddf137e3e582bb305c9daffb7135f0df4a661de064a05750858c5df199ed0"
+    "currentWorkflowSHA256": "7c27b4dbe8292bfd605009f7dfad16d11b62a1fbdfbfc3cc596df4e21ec7dc18",
+    "auditSuccession": {
+      "status": "passed",
+      "scope": "Complete tests from the twelve modules directly importing the affected audit/succession chain. This is separate from the full repository release gate.",
+      "command": [
+        "node",
+        "--test",
+        "--test-concurrency=2",
+        "scripts/verify-audit-continuation-v156.mjs",
+        "scripts/verify-audit-continuation-v157.mjs",
+        "scripts/verify-audit-continuation-v158.mjs",
+        "scripts/verify-audit-continuation-v159.mjs",
+        "scripts/verify-audit-continuation-v160.mjs",
+        "scripts/verify-audit-continuation-v161.mjs",
+        "scripts/verify-audit-continuation-v162.mjs",
+        "scripts/verify-audit-continuation-v163.mjs",
+        "scripts/verify-i18n-audit-v186.mjs",
+        "scripts/verify-native-qa-resources-v187.mjs",
+        "scripts/verify-parallel-completion-v165.mjs",
+        "scripts/verify-river-of-pain-succession.mjs"
+      ],
+      "modules": [
+        "scripts/verify-audit-continuation-v156.mjs",
+        "scripts/verify-audit-continuation-v157.mjs",
+        "scripts/verify-audit-continuation-v158.mjs",
+        "scripts/verify-audit-continuation-v159.mjs",
+        "scripts/verify-audit-continuation-v160.mjs",
+        "scripts/verify-audit-continuation-v161.mjs",
+        "scripts/verify-audit-continuation-v162.mjs",
+        "scripts/verify-audit-continuation-v163.mjs",
+        "scripts/verify-i18n-audit-v186.mjs",
+        "scripts/verify-native-qa-resources-v187.mjs",
+        "scripts/verify-parallel-completion-v165.mjs",
+        "scripts/verify-river-of-pain-succession.mjs"
+      ],
+      "passed": 143,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "startedAt": "2026-11-25T17:06:15.050163+00:00",
+      "finishedAt": "2026-11-25T17:13:46.333298+00:00",
+      "testedWorkingTreeBaseCommit": "882ffdee7ed83a549bf2c1c4b9fa38de8e70edc2",
+      "testedWorkingTreeSourceHashes": {
+        "index.html": "8df9ef8b6e8f36fef345f341d381e593cd6379701a0cc020fae92e9f62751765",
+        "package.json": "0234100bcf99e381765dc8febc1898e7e96f8b722bc164fdde7b193cf6bec508",
+        "scripts/verify-public-release-v86.mjs": "39af73bda1b4a2b6632814c4b6c9a2e56c6273b14dfafeee60c1401d610478fe",
+        "src/app.js": "b8332e8b8e4ae1af84177454175d57806dfa606dc48e8846892a6b383ad73313",
+        "src/title-screen-v61.js": "dffa0959d800ef2c8e13271408048b5350b624f570ad8928504d0a32b2ca4355",
+        "scripts/audit-native-qa-resources-v187.mjs": "50da4330f4b25c148c56ba3f31363e13266985040f2e372b7595552a6f1cdcc0",
+        "scripts/verify-river-of-pain-succession.mjs": "02a132c3a94be612d5e46ae65c1e17a6a2dbf4b3f3332bfff6e5bd7d0f87efd5"
+      },
+      "fix": {
+        "policy": "scripts/audit-native-qa-resources-v187.mjs",
+        "datedContinuation": "2026-11-25",
+        "hostSuccessors": 5,
+        "historicalReceiptValuesChanged": false,
+        "historicalPolicyPreservation": "Removing the dated Fleuve block and its two forwarding calls reconstructs the policy bytes at 882ffdee7ed83a549bf2c1c4b9fa38de8e70edc2 exactly.",
+        "historicalEvidenceTransferred": false
+      },
+      "earlierFocusedRuns": [
+        {
+          "scope": "V187/Obscura and the four Fleuve successor tests",
+          "passed": 12,
+          "failed": 0,
+          "exitCode": 0
+        },
+        {
+          "scope": "Complete anchored bridges V161 and V162",
+          "passed": 2,
+          "failed": 0,
+          "exitCode": 0
+        }
+      ],
+      "countingNote": "The earlier focused runs are subsets of the complete 143-test batch and must not be added to it."
+    },
+    "localBrowserEvidenceArchive": {
+      "path": "archives/river-of-pain/RIVER_OF_PAIN_QA_LOCAL_20261125.tar.gz",
+      "sha256": "02afdffa40872589c1955597d788848eaf254529353cbbf592e19fa4aa866f6d",
+      "bytes": 2644892,
+      "reports": [
+        {
+          "member": "RIVER_OF_PAIN_QA_LOCAL_20261125/integration/report.json",
+          "mode": "integration",
+          "passed": 26,
+          "failed": 0,
+          "scope": "Built Frontier menu to DLC and back, recorded before the final absolute-URL wrapper adjustment; see browserFullJourney for the exact scope."
+        },
+        {
+          "member": "RIVER_OF_PAIN_QA_LOCAL_20261125/slashless/report.json",
+          "mode": "no-slash",
+          "passed": 15,
+          "failed": 0,
+          "scope": "Corrected wrapper reached through the route without a trailing slash."
+        },
+        {
+          "member": "RIVER_OF_PAIN_QA_LOCAL_20261125/isolated-smoke/report.json",
+          "mode": "dlc-only",
+          "passed": 18,
+          "failed": 0,
+          "scope": "Standalone DLC controls, native save export/import and reload; this batch does not exercise the Frontier launcher."
+        }
+      ],
+      "countsAreAdditive": false,
+      "scope": "Preserved local browser evidence; it does not certify GitHub CI or deployment."
+    },
+    "auditResultsRecordedAt": "2026-11-25T17:16:20.664505+00:00"
   },
   "unrecovered": [
     "0.10 local work: no saved source artifact found"

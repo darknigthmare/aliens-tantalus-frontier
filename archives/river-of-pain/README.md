@@ -22,4 +22,4 @@ La version 0.10 mentionnée dans le travail précédent n’a pas été retrouv�
 
 ## Preuves du raccordement actuel
 
-RIVER_OF_PAIN_QA_LOCAL_20261125.tar.gz conserve trois parcours Chromium réels : intégration26/26, accès sans slash15/15 et campagne isolée18/18. Ce fichier de2644892 octets porte l’empreinte SHA-256 `02afdffa40872589c1955597d788848eaf254529353cbbf592e19fa4aa866f6d`. Il contient les rapports, captures, exports natifs et leur manifeste ; ce sont des preuves locales sur l’arbre de travail, sans résultat CI ni certification de fidélité1:1.
+RIVER_OF_PAIN_QA_LOCAL_20261125.tar.gz conserve trois parcours Chromium réels : intégration 26/26, accès sans slash 15/15 et campagne isolée 18/18. Ce fichier de 2 644 892 octets porte l’empreinte SHA-256 `02afdffa40872589c1955597d788848eaf254529353cbbf592e19fa4aa866f6d`. Il contient les rapports, captures, exports natifs et leur manifeste ; ce sont des preuves locales sur l’arbre de travail, sans résultat CI ni certification de fidélité 1:1.
