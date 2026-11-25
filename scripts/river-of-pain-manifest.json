@@ -1176,9 +1176,191 @@
     "dlc/fleuve-de-la-douleur/integration.css",
     "dlc/fleuve-de-la-douleur/integration.js",
     "dlc/fleuve-de-la-douleur/JOUER.html",
-    "dlc/fleuve-de-la-douleur/LICENSE_NOTICE.md"
+    "dlc/fleuve-de-la-douleur/LICENSE_NOTICE.md",
+    "dlc/fleuve-de-la-douleur/visual-v1/JOUER.html",
+    "dlc/fleuve-de-la-douleur/visual-v1/GALLERY.html"
+  ],
+  "visualManifest": "dlc/fleuve-de-la-douleur/visual-v1/sprite-manifest.json",
+  "visualSourceFiles": [
+    "dlc/fleuve-de-la-douleur/visual-v1/sprite-loader.js",
+    "dlc/fleuve-de-la-douleur/visual-v1/creature-png.js",
+    "dlc/fleuve-de-la-douleur/visual-v1/actors-props-png.js",
+    "dlc/fleuve-de-la-douleur/visual-v1/sprite-manifest.json",
+    "dlc/fleuve-de-la-douleur/visual-v1/GENERATION_LOG.json",
+    "dlc/fleuve-de-la-douleur/visual-v1/README.md"
   ],
   "unrecovered": [
     "Version 0.10 locale mentionnée dans le suivi ; aucun fichier source ni paquet sauvegardé retrouvé."
+  ],
+  "visualManifestSha256": "2e216a2470febdf55f2381d60fb394abf4e2117ac197d8560594f305f2baf9ae",
+  "visualAssets": [
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/newt-idle-right.png",
+      "sha256": "d05fa2224dc42bf5e5e9841560bd7aa948c81c255f9786cee81ecf9e29b1e1b5"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/anne-idle-right.png",
+      "sha256": "839d216f64558953911fa262b8696056f5261505d4aaa37e792ff27fb2d268bc"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/komiskey-idle-right.png",
+      "sha256": "0f861e5b99d4c74e1c47c6784b5777618f6aff8dd99f793baeda9b4fe668d4e7"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/facehugger-idle-right.png",
+      "sha256": "4d16634f91c3d03a47c00832cdd41fbf70ca5cbc85647380b7befcf910253249"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/egg-sealed.png",
+      "sha256": "16cfef03c669cbca5ce6064f4f83bce3ec0021655a76caf84c466a007ebc632c"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/russ-idle-right.png",
+      "sha256": "4282c95538e977790a58133d323c9cac3bce6e7a807f55306cdc1187de5ba565"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/tim-idle-right.png",
+      "sha256": "79ab22619bfa0221ba4e40f64c7eafd5ab308085345697a24a8096d666104def"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/luisa-idle-right.png",
+      "sha256": "613d023a2f734959a6d844fda455587bbdcc8c4eef4904c20d8b28f063eedc5e"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/mori-idle-right.png",
+      "sha256": "dd397d37ec935d0c187a6f37b0cb771090ac1d8bc26f9e0938376aeedd9e2208"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/simpson-idle-right.png",
+      "sha256": "a7aa907ded73f3aa3c25563073c912dda5bb42cad5613520c45ab42facdb9cb4"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/hansard-idle-right.png",
+      "sha256": "7df5b8f75594e3c9846a66f164a049802189708cf214a2b13c14d6057c11bd5e"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/joel-idle-right.png",
+      "sha256": "13ff0b658bc22d252ebfd3a77ed036570932d4d03ef4099c11c5b9aa5dc36224"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/bronagh-idle-right.png",
+      "sha256": "81801b5b4ad9d4bb35018e5eea2efced0fdd6c86d239f24b05ea3bdc723f521b"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/armory-case.png",
+      "sha256": "6656bac9e14d154b1c5eec4ebd3f62aaf52dd5594abf2feaf579ce725ed823d8"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/isolation-glass.png",
+      "sha256": "eab5ae1dc0934887cfc90669ee991186311dc793ab56d16cd3ae4d7d17ad4bf2"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/specimen-jar.png",
+      "sha256": "6bc3bb2e9310cd5b42ef9bdb64b3df521f3286868020dfdf1400886f359fdb47"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/brackett-stowed-right.png",
+      "sha256": "39187b73b56a75a0115c0589aad2c1986ea9a7426450db46378925c2c18ab5f9"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/paris-stowed-right.png",
+      "sha256": "1b51611c61d4ea40d247ec43604eceb8dcc398b8bfd99bef4a824f4573bc6944"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/civilian-idle-right.png",
+      "sha256": "fb00e3a28bcf13abd9f2dc08109c9dcf2aa9eb236542eca8d93c3a0354d253bb"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/item-cell.png",
+      "sha256": "6125c126a642acae17416d9bba824f0c5c5f0ba6410cfd779cbf95037d58d5b1"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/item-wire.png",
+      "sha256": "6cedc5b514c00dfec896d9f395ed3f7a289347852acbce4c0d05305368b06d0a"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/item-casing.png",
+      "sha256": "293c10fac5441475a41ca489441282596b4dffe6d02e83af5808706cac0feaae"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/item-decoy.png",
+      "sha256": "dc2266d89fb9dc2fcce2b57700b916dc525b86156fba72dbe44a878764bbcf6d"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/item-ration.png",
+      "sha256": "d3ec3f1df0cfae2f3f7f9f3e94400f496ee538e5f745be69a8205705e5e5f4e3"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/item-medkit.png",
+      "sha256": "79b74846845581e530f79cc108c40c506ea311e881dd452249a12bb23f8cbd1c"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/item-ammo.png",
+      "sha256": "c2cb45def685415533da6a129d957d28558a0ff2cd496d929d0749a0c71a7da5"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/item-flare.png",
+      "sha256": "3bb01ad9865e317225844bfd713e7dfebc204fdb72ae4d0b0f716721bd8ec343"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/item-weld.png",
+      "sha256": "75b54c1faba7033ecc589a1e934afbb50c87d22e436d249f61f400af5f0d1b75"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/item-light.png",
+      "sha256": "c5a3b025b64b5e0a1cf80877dddfc34bdd632747547ea0ffa8ade3fde2becb0f"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/item-tracker.png",
+      "sha256": "013ca34001c0e3053d28942b142549b83c275304fa159c2b5700caaa37f6d245"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/vale-idle-right.png",
+      "sha256": "db6802101e3560a9cb7b784f28a1eace1b91f02427552b25acba26a3055ffe65"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/rhee-idle-right.png",
+      "sha256": "f741c01534cfdfe7dd8c903d1a9fcc6cf3806ea90251062308ebbd6715e3c484"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/arden-idle-right.png",
+      "sha256": "3913c1be3fed538b29ff3e8ce41c6851e3e9f8812583de493397854bac508911"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/becker-idle-right.png",
+      "sha256": "aa229865395d0e493bac6a60721388f30f1b02dbcc8c82f451825fa5ed867288"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/ferris-idle-right.png",
+      "sha256": "123a17145eaa3fb203af4f79e26ae0d75db938cea1ce16f6295b9f7b853322aa"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/corban-idle-right.png",
+      "sha256": "04952fc6fcbfaf0bb396e2f668f9acda1abdac14d50fa110d426692e6132e0ef"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/hale-idle-right.png",
+      "sha256": "059782863dcff9def1b2de1832554d5e5cc7ad10cf93ed690db935d76e3b4c77"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/doran-idle-right.png",
+      "sha256": "36f6bccb48bc8272bd879cee6e1be0cdf4f5f8f9ba6833786648681a57ebb564"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/sato-idle-right.png",
+      "sha256": "ac91bb59be2cf284ad96d9234dd6a3adec14ae5949c68708b66dc09a8884e2df"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/bell-idle-right.png",
+      "sha256": "53ee90e0855ba8f3ba25016f68b315d1c3ab57bd2e9ff7683554e37e78f55d33"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/kent-idle-right.png",
+      "sha256": "6152a0a339d86f9a38bea238bf7e9f9a1106132dcd9564cdfe923eb1bfdcd45a"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/voss-idle-right.png",
+      "sha256": "dfd1e99b8a63f078f1a0625a2dc1373165b82bb8c56c3250e700f49b56a81016"
+    }
   ]
 }

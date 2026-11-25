@@ -229,8 +229,9 @@ test('wrapper resource and return URLs survive slash canonicalization', async ()
   const html = await readFile(new URL('../dlc/fleuve-de-la-douleur/index.html', import.meta.url), 'utf8');
   const resources = [...html.matchAll(/(?:src|href)="([^"]+)"/g)].map(match => match[1])
     .filter(value => /(?:integration\.(?:css|js)|JOUER\.html)$/.test(value));
-  assert.equal(resources.length, 4, 'The game iframe and its direct fallback must both be covered.');
-  const expected = ['/dlc/fleuve-de-la-douleur/JOUER.html', '/dlc/fleuve-de-la-douleur/JOUER.html',
+  assert.equal(resources.length, 5, 'Both presentations, iframe and direct fallback must be covered.');
+  const expected = ['/dlc/fleuve-de-la-douleur/JOUER.html',
+    '/dlc/fleuve-de-la-douleur/visual-v1/JOUER.html', '/dlc/fleuve-de-la-douleur/visual-v1/JOUER.html',
     '/dlc/fleuve-de-la-douleur/integration.css', '/dlc/fleuve-de-la-douleur/integration.js'].sort();
   const returnTag = html.match(/<a\b[^>]*id="river-return-tantalus"[^>]*>/)?.[0];
   assert.ok(returnTag, 'The return navigation must remain available.');
@@ -240,4 +241,19 @@ test('wrapper resource and return URLs survive slash canonicalization', async ()
     assert.deepEqual(resources.map(value => new URL(value, base).pathname).sort(), expected, base);
     assert.equal(new URL(returnHref, base).href, 'https://frontier.test/', base);
   }
+});
+
+test('the wrapper starts the derivative and keeps the original in the same named iframe', async () => {
+  const html = await readFile(new URL('../dlc/fleuve-de-la-douleur/index.html', import.meta.url), 'utf8');
+  const frameTag = html.match(/<iframe\b[^>]*id="river-of-pain-game"[^>]*>/)?.[0];
+  const originalTag = html.match(/<a\b[^>]*id="river-original-game"[^>]*>/)?.[0];
+  assert.ok(frameTag && originalTag, 'Both the default presentation and recovery navigation must exist.');
+  const attribute = (tag, name) => tag.match(new RegExp('\\b' + name + '="([^"]+)"'))?.[1];
+  assert.equal(attribute(frameTag, 'src'), '/dlc/fleuve-de-la-douleur/visual-v1/JOUER.html');
+  assert.equal(attribute(originalTag, 'href'), '/dlc/fleuve-de-la-douleur/JOUER.html');
+  assert.equal(attribute(originalTag, 'target'), attribute(frameTag, 'name'));
+  assert.equal(attribute(frameTag, 'name'), 'river-of-pain-game');
+  assert.equal(attribute(originalTag, 'aria-controls'), 'river-of-pain-game');
+  assert.doesNotMatch(shellSource, /(?:localStorage|sessionStorage|indexedDB|ROP_SAVE)/,
+    'Changing the presentation must remain independent of either campaign save.');
 });
