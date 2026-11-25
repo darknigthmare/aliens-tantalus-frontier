@@ -15,6 +15,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const baseUrl = process.env.BASE_URL || 'http://127.0.0.1:4399/';
 const out = resolve(process.argv[2] || 'qa-fiorina-native-v114');
 const campaignId = 'special-alien3-fiorina-161';
+const expectSpritesV115 = process.env.EXPECT_FIORINA_SPRITES_V115 === '1';
 await mkdir(out, { recursive: true });
 
 async function fixture() {
@@ -35,6 +36,7 @@ async function fixture() {
 const sourceFixture = await fixture();
 assert.equal(sourceFixture.inspection, 'ready', 'fixture must pass native save admission');
 const report = { schema: 114, surface: 'native-production-app', baseUrl,
+  expectSpritesV115, spriteResponses: [],
   fixture: { inspection: sourceFixture.inspection, injections: sourceFixture.injections },
   checks: [], cuts: {}, screenshots: [], pageErrors: [], consoleErrors: [] };
 const check = (name, condition, evidence = null) => {
@@ -81,6 +83,35 @@ async function snapshot(page) {
   });
 }
 
+async function verifySprites(page, cut, stage) {
+  if (!expectSpritesV115) return;
+  // Observe the natural idle render after launch/reload. Do not inject a pose,
+  // replace the image loader, or manually invoke a drawing method in this test.
+  await page.waitForFunction(() => {
+    const engine = globalThis.__ATF_GAME__;
+    const state = engine?.getAlien3SpriteReportV115?.();
+    return state?.active && state.assets?.ready > 0 && state.receipts?.ripley?.drawn === true;
+  }, null, { timeout: 60000 });
+  const sprites = await page.evaluate(async () => {
+    const engine = globalThis.__ATF_GAME__;
+    await engine.alien3SpritesReadyV115;
+    await engine.alien3SpriteBankV115.ready;
+    return engine.getAlien3SpriteReportV115();
+  });
+  report.cuts[cut][stage + 'Sprites'] = sprites;
+  check(`${cut}: ${stage} renders a delivered Ripley PNG`,
+    sprites.receipts.ripley.drawn && sprites.receipts.ripley.id === 'ripley-crash-idle', sprites.receipts.ripley);
+  check(`${cut}: ${stage} keeps the production image cache bounded`,
+    !sprites.assets.preloadAll && sprites.assets.unrequested > 0
+      && sprites.assets.cachedImages <= sprites.assets.maxCachedImages
+      && sprites.assets.estimatedRgbaBytes <= sprites.assets.maxDecodedBytes
+      && sprites.assets.errors.length === 0, sprites.assets);
+  const responses = report.spriteResponses.filter((entry) => entry.cut === cut);
+  check(`${cut}: ${stage} received real PNG resources`,
+    responses.some((entry) => entry.status === 200 && entry.path.endsWith('/ripley-crash-idle.png')),
+    responses);
+}
+
 try {
   browser = await chromium.launch({
     ...(process.env.CHROMIUM_EXECUTABLE ? { executablePath: process.env.CHROMIUM_EXECUTABLE } : {}),
@@ -92,6 +123,12 @@ try {
     page.setDefaultTimeout(20000);
     page.on('pageerror', error => report.pageErrors.push({ cut, message: error.message }));
     page.on('console', message => { if (message.type() === 'error') report.consoleErrors.push({ cut, message: message.text() }); });
+    page.on('response', response => {
+      const path = new URL(response.url()).pathname;
+      if (path.startsWith('/assets/openai/sprites/alien3-fiorina-v115/') && path.endsWith('.png')) {
+        report.spriteResponses.push({ cut, path, status: response.status() });
+      }
+    });
     await context.addInitScript(({ save }) => {
       if (localStorage.getItem('fiorina-qa-seeded-v114')) return;
       localStorage.setItem('atf-v47-profile-1', JSON.stringify(save));
@@ -118,6 +155,7 @@ try {
     check(`${cut}: no squad or cooperative actor`, started.allies === 0 && !started.coop && started.globalCoop === true, { allies: started.allies, coop: started.coop, globalCoop: started.globalCoop });
     check(`${cut}: no vehicle or dropship overlay`, !started.vehicle && await page.locator('.cinematic-v188').count() === 0 && !(await page.locator('#mission-insertion-v62').isVisible()), { vehicle: started.vehicle });
     check(`${cut}: native controls identify flares`, (await page.locator('.game-toolbar .controls').innerText()).includes('F : FUSÉE'));
+    await verifySprites(page, cut, 'started');
     await screenshot(page, `${cut}-mission`, '#game-canvas');
     await page.locator('#game-canvas').focus();
     await page.keyboard.down('d');
@@ -145,6 +183,7 @@ try {
     check(`${cut}: reload restores the same operation and cut`, resumed.operationId === stored.id && resumed.cut === cut && resumed.lastResumeApplied, report.cuts[cut].resumed);
     check(`${cut}: reload preserves position and flare resource`, Math.abs(resumed.player.x - saved.player.x) <= 12 && resumed.flares === saved.flares, { saved: report.cuts[cut].saved, resumed: report.cuts[cut].resumed });
     check(`${cut}: profile marine loadout is preserved`, JSON.stringify(resumed.marineProfile) === JSON.stringify(started.marineProfile), resumed.marineProfile);
+    await verifySprites(page, cut, 'resumed');
     await screenshot(page, `${cut}-resumed`, '#game-canvas');
     await context.close();
   }

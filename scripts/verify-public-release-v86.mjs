@@ -1,6 +1,7 @@
 import { avpPathAdmission, verifyAvpAdmission } from './dlc-admission-avp-2004.mjs';
 import { DEV_TOOLS_FILES_V188, isDevToolsPublicPathV188 } from './build-dev-tools-v188.mjs';
 import { publicAliens1986DlcPathAdmission, aliens1986RecoveryFile, verifyAliens1986DlcAdmissions } from './public-aliens1986-dlc-admissions.mjs';
+import { publicFiorinaSpritePathAdmissionV115, verifyFiorinaSpriteAdmissionsV115 } from './public-fiorina-sprite-admissions-v115.mjs';
 import { publicXenoProductionPathAdmissionV206, verifyXenoProductionAdmissionsV206 } from './public-xeno-production-admissions-v206.mjs';
 import { publicXenoVisualPathAdmissionV205, verifyXenoVisualAdmissionsV205 } from './public-xeno-visual-admissions-v205.mjs';
 import { publicXenoPriorityPathAdmissionV204, verifyXenoPriorityAdmissionsV204 } from './public-xeno-priority-admissions-v204.mjs';
@@ -1182,6 +1183,8 @@ const FIORINA_INTEGRATION_SOURCE_ONLY_V114 = new Set([
 ]);
 
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
+  const fiorinaSpriteAdmission = publicFiorinaSpritePathAdmissionV115(path, { directory, built });
+  if (fiorinaSpriteAdmission !== null) return fiorinaSpriteAdmission;
   const aliens1986Admission = publicAliens1986DlcPathAdmission(path, { directory, built });
   if (aliens1986Admission !== null) return aliens1986Admission;
   const avpAdmission = avpPathAdmission(path, { directory, built });
@@ -1341,6 +1344,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   // fixtures. A complete source validation still requires the exact archives.
   await verifyProjectRecoveryArchive20261116(root, { built });
   await verifyAliens1986DlcAdmissions(root, { built });
+  await verifyFiorinaSpriteAdmissionsV115(root);
   await verifyAvpAdmission(root, { built });
   const { USER_REFERENCE_LIBRARY_V100 } = await import(pathToFileURL(join(resolve(root), 'src/user-reference-library-v100.js')).href);
   const registeredJpgs = USER_REFERENCE_LIBRARY_V100.map(entry => entry.path.replace(/^\//, '')).filter(path => path.endsWith('.jpg'));

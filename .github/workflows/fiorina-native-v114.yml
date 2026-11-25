@@ -10,6 +10,21 @@ on:
       - 'src/special-operations-v131.js'
       - 'src/app.js'
       - 'scripts/verify-fiorina-production-v114.mjs'
+      - 'scripts/verify-fiorina-sprite-renderer-v115.mjs'
+      - 'scripts/verify-fiorina-sprite-admissions-v115.mjs'
+      - 'scripts/public-fiorina-sprite-admissions-v115.mjs'
+      - 'scripts/qa-fiorina-sprites-v115.mjs'
+      - 'scripts/qa-fiorina-native-sprites-v115.mjs'
+      - 'scripts/qa-fiorina-native-v114.mjs'
+      - 'scripts/build-asset-filter.mjs'
+      - 'scripts/build.mjs'
+      - 'scripts/verify-public-release-v86.mjs'
+      - 'docs/development/FIORINA_SPRITES_V115.md'
+      - 'docs/development/FIORINA_SPRITES_V115.json'
+      - 'assets/openai/sprites/alien3-fiorina-v115/**'
+      - 'sw.js'
+      - 'package.json'
+      - 'package-lock.json'
       - 'archives/project-recovery-20261116/**'
       - '.github/workflows/fiorina-native-v114.yml'
   workflow_dispatch:
@@ -29,7 +44,45 @@ jobs:
       - run: npm run check
       - run: npm run test:project-recovery
       - run: npm run test:fiorina
+      - run: npm run test:fiorina:sprites
       - run: node --test scripts/verify-save-lifecycle-v143.mjs scripts/verify-operations-integration-v131.mjs
+      - name: Install real Canvas harness
+        run: npm install --prefix "$RUNNER_TEMP/fiorina-canvas" --ignore-scripts --no-audit --no-fund @napi-rs/canvas@0.1.100
+      - name: Verify delivered Fiorina pixels
+        env:
+          CANVAS_MODULE: ${{ runner.temp }}/fiorina-canvas/node_modules/@napi-rs/canvas
+        run: node scripts/qa-fiorina-sprites-v115.mjs "$RUNNER_TEMP/fiorina-sprites-qa"
+      - name: Verify native sprite hooks
+        env:
+          CANVAS_MODULE: ${{ runner.temp }}/fiorina-canvas/node_modules/@napi-rs/canvas
+        run: node scripts/qa-fiorina-native-sprites-v115.mjs "$RUNNER_TEMP/fiorina-native-sprites-qa"
+      - name: Package reviewed sprite sources
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib, zipfile
+          root = pathlib.Path.cwd()
+          manifest_path = 'assets/openai/sprites/alien3-fiorina-v115/manifest.json'
+          manifest = json.loads((root / manifest_path).read_text())
+          images = {asset['src'] for asset in manifest['assets'].values()}
+          images.update(frame.get('src', asset['src']) for asset in manifest['assets'].values() for frame in asset.get('frames', []))
+          paths = [manifest_path, *sorted(images), 'docs/development/FIORINA_SPRITES_V115.json', 'docs/development/FIORINA_SPRITES_V115.md']
+          assert len(images) == 39 and len(set(paths)) == 42
+          target = pathlib.Path(os.environ['RUNNER_TEMP']) / 'FIORINA_SPRITES_V115.zip'
+          with zipfile.ZipFile(target, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=6) as archive:
+              for path in paths:
+                  file = root / path
+                  assert file.is_file() and not file.is_symlink() and file.resolve().is_relative_to(root)
+                  archive.write(file, path)
+          with zipfile.ZipFile(target) as archive:
+              assert archive.testzip() is None and set(archive.namelist()) == set(paths)
+          print(f'{len(paths)} reviewed files packaged: {target.name}')
+          PY
+      - name: Preserve downloadable sprite pack
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: fiorina-sprites-v115-pack
+          path: ${{ runner.temp }}/FIORINA_SPRITES_V115.zip
+          retention-days: 30
       - run: npm run build
       - run: npm run check:built
 
@@ -43,6 +96,7 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/fiorina-browser/node_modules/playwright
           BASE_URL: http://127.0.0.1:4399/
+          EXPECT_FIORINA_SPRITES_V115: '1'
         run: |
           python3 -c 'from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler; from functools import partial; Server = type("Server", (ThreadingHTTPServer,), {"request_queue_size": 1024}); Server(("127.0.0.1", 4399), partial(SimpleHTTPRequestHandler, directory="dist")).serve_forever()' > "$RUNNER_TEMP/fiorina-http.log" 2>&1 &
           fiorina_server_pid=$!
@@ -60,4 +114,13 @@ jobs:
           path: |
             ${{ runner.temp }}/fiorina-qa/
             ${{ runner.temp }}/fiorina-http.log
+          retention-days: 14
+      - name: Preserve sprite evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: fiorina-sprites-v115
+          path: |
+            ${{ runner.temp }}/fiorina-sprites-qa/
+            ${{ runner.temp }}/fiorina-native-sprites-qa/
           retention-days: 14
