@@ -1,0 +1,30 @@
+{
+  "version": "111.0.0-rc.1",
+  "scope": "independent package integrity, not gameplay",
+  "checks": [
+    {
+      "name": "Paquet intact accepté",
+      "ok": true
+    },
+    {
+      "name": "Manifeste non réécrit",
+      "ok": true
+    },
+    {
+      "name": "Composant modifié refusé",
+      "ok": true
+    },
+    {
+      "name": "Fichier non listé refusé",
+      "ok": true
+    },
+    {
+      "name": "Composant requis absent refusé",
+      "ok": true
+    },
+    {
+      "name": "Restauration des octets acceptée",
+      "ok": true
+    }
+  ]
+}

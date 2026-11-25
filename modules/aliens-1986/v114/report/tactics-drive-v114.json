@@ -1,0 +1,975 @@
+{
+  "method": "Parcours complet informé par lecture des données, uniquement entrées publiques. Départs normaux, deux reprises de ses propres exports, aucun champ de simulation édité.",
+  "complete": true,
+  "inputs": 4421,
+  "elapsed": 110.525000000008,
+  "team": [
+    {
+      "id": "ripley",
+      "hp": 100,
+      "ammo": 18
+    },
+    {
+      "id": "hicks",
+      "hp": 100,
+      "ammo": 19
+    },
+    {
+      "id": "hudson",
+      "hp": 100,
+      "ammo": 20
+    },
+    {
+      "id": "newt",
+      "hp": 100,
+      "ammo": 0
+    }
+  ],
+  "sentryAmmo": 111,
+  "orders": {
+    "rules": {
+      "commandRange": 520,
+      "arrival": 7,
+      "postGap": 7,
+      "halfAngle": 0.8726646259971648,
+      "turnTime": 1.15,
+      "turnReach": 76,
+      "allyMargin": 4
+    },
+    "metrics": {
+      "postOrders": 6,
+      "sectorOrders": 4,
+      "disciplineOrders": 6,
+      "arrivals": 6,
+      "safetyHolds": 0,
+      "turnsStarted": 1,
+      "turnsCompleted": 1,
+      "turnsInterrupted": 0
+    },
+    "posts": [
+      {
+        "id": "hicks",
+        "name": "Hicks",
+        "post": null,
+        "status": "suit",
+        "fire": "free"
+      },
+      {
+        "id": "hudson",
+        "name": "Hudson",
+        "post": null,
+        "status": "suit",
+        "fire": "free"
+      },
+      {
+        "id": "newt",
+        "name": "Newt",
+        "post": null,
+        "status": "suit",
+        "fire": "non armée"
+      }
+    ],
+    "sentries": []
+  },
+  "saves": [
+    {
+      "label": "00-insertion",
+      "room": "v106-hadley",
+      "elapsed": 0,
+      "step": 0,
+      "tactics": {
+        "rules": {
+          "commandRange": 520,
+          "arrival": 7,
+          "postGap": 7,
+          "halfAngle": 0.8726646259971648,
+          "turnTime": 1.15,
+          "turnReach": 76,
+          "allyMargin": 4
+        },
+        "metrics": {
+          "postOrders": 0,
+          "sectorOrders": 0,
+          "disciplineOrders": 0,
+          "arrivals": 0,
+          "safetyHolds": 0,
+          "turnsStarted": 0,
+          "turnsCompleted": 0,
+          "turnsInterrupted": 0
+        },
+        "posts": [
+          {
+            "id": "hicks",
+            "name": "Hicks",
+            "post": null,
+            "status": "suit",
+            "fire": "free"
+          },
+          {
+            "id": "hudson",
+            "name": "Hudson",
+            "post": null,
+            "status": "suit",
+            "fire": "free"
+          }
+        ],
+        "sentries": []
+      },
+      "team": [
+        {
+          "id": "ripley",
+          "hp": 100,
+          "ammo": 48
+        },
+        {
+          "id": "hicks",
+          "hp": 100,
+          "ammo": 24
+        },
+        {
+          "id": "hudson",
+          "hp": 100,
+          "ammo": 24
+        },
+        {
+          "id": "newt",
+          "hp": 100,
+          "ammo": 0
+        }
+      ]
+    },
+    {
+      "label": "01-operations-avant-ordres",
+      "room": "v107-operations",
+      "elapsed": 9.65000000000007,
+      "step": 1,
+      "tactics": {
+        "rules": {
+          "commandRange": 520,
+          "arrival": 7,
+          "postGap": 7,
+          "halfAngle": 0.8726646259971648,
+          "turnTime": 1.15,
+          "turnReach": 76,
+          "allyMargin": 4
+        },
+        "metrics": {
+          "postOrders": 0,
+          "sectorOrders": 0,
+          "disciplineOrders": 0,
+          "arrivals": 0,
+          "safetyHolds": 0,
+          "turnsStarted": 0,
+          "turnsCompleted": 0,
+          "turnsInterrupted": 0
+        },
+        "posts": [
+          {
+            "id": "hicks",
+            "name": "Hicks",
+            "post": null,
+            "status": "attend",
+            "fire": "free"
+          },
+          {
+            "id": "hudson",
+            "name": "Hudson",
+            "post": null,
+            "status": "attend",
+            "fire": "free"
+          }
+        ],
+        "sentries": []
+      },
+      "team": [
+        {
+          "id": "ripley",
+          "hp": 100,
+          "ammo": 38
+        },
+        {
+          "id": "hicks",
+          "hp": 100,
+          "ammo": 24
+        },
+        {
+          "id": "hudson",
+          "hp": 100,
+          "ammo": 24
+        },
+        {
+          "id": "newt",
+          "hp": 100,
+          "ammo": 0
+        }
+      ]
+    },
+    {
+      "label": "02-deplacement-ordonne",
+      "room": "v107-operations",
+      "elapsed": 10.100000000000076,
+      "step": 1,
+      "tactics": {
+        "rules": {
+          "commandRange": 520,
+          "arrival": 7,
+          "postGap": 7,
+          "halfAngle": 0.8726646259971648,
+          "turnTime": 1.15,
+          "turnReach": 76,
+          "allyMargin": 4
+        },
+        "metrics": {
+          "postOrders": 2,
+          "sectorOrders": 0,
+          "disciplineOrders": 0,
+          "arrivals": 0,
+          "safetyHolds": 0,
+          "turnsStarted": 0,
+          "turnsCompleted": 0,
+          "turnsInterrupted": 0
+        },
+        "posts": [
+          {
+            "id": "hicks",
+            "name": "Hicks",
+            "post": {
+              "roomId": "v107-operations",
+              "x": 600,
+              "z": 230,
+              "angle": null,
+              "arrived": false
+            },
+            "status": "en route",
+            "fire": "free"
+          },
+          {
+            "id": "hudson",
+            "name": "Hudson",
+            "post": {
+              "roomId": "v107-operations",
+              "x": 630,
+              "z": 300,
+              "angle": null,
+              "arrived": false
+            },
+            "status": "en route",
+            "fire": "free"
+          }
+        ],
+        "sentries": []
+      },
+      "team": [
+        {
+          "id": "ripley",
+          "hp": 100,
+          "ammo": 38
+        },
+        {
+          "id": "hicks",
+          "hp": 100,
+          "ammo": 24
+        },
+        {
+          "id": "hudson",
+          "hp": 100,
+          "ammo": 24
+        },
+        {
+          "id": "newt",
+          "hp": 100,
+          "ammo": 0
+        }
+      ]
+    },
+    {
+      "label": "03-angles-operations",
+      "room": "v107-operations",
+      "elapsed": 15.100000000000147,
+      "step": 1,
+      "tactics": {
+        "rules": {
+          "commandRange": 520,
+          "arrival": 7,
+          "postGap": 7,
+          "halfAngle": 0.8726646259971648,
+          "turnTime": 1.15,
+          "turnReach": 76,
+          "allyMargin": 4
+        },
+        "metrics": {
+          "postOrders": 2,
+          "sectorOrders": 2,
+          "disciplineOrders": 1,
+          "arrivals": 2,
+          "safetyHolds": 0,
+          "turnsStarted": 0,
+          "turnsCompleted": 0,
+          "turnsInterrupted": 0
+        },
+        "posts": [
+          {
+            "id": "hicks",
+            "name": "Hicks",
+            "post": {
+              "roomId": "v107-operations",
+              "x": 600,
+              "z": 230,
+              "angle": -0.08314123188844122,
+              "arrived": true
+            },
+            "status": "en poste",
+            "fire": "hold"
+          },
+          {
+            "id": "hudson",
+            "name": "Hudson",
+            "post": {
+              "roomId": "v107-operations",
+              "x": 630,
+              "z": 300,
+              "angle": -0.2942345651111878,
+              "arrived": true
+            },
+            "status": "en poste",
+            "fire": "hold"
+          }
+        ],
+        "sentries": []
+      },
+      "team": [
+        {
+          "id": "ripley",
+          "hp": 100,
+          "ammo": 38
+        },
+        {
+          "id": "hicks",
+          "hp": 100,
+          "ammo": 24
+        },
+        {
+          "id": "hudson",
+          "hp": 100,
+          "ammo": 24
+        },
+        {
+          "id": "newt",
+          "hp": 100,
+          "ammo": 0
+        }
+      ]
+    },
+    {
+      "label": "04-newt-au-poste",
+      "room": "v107-operations",
+      "elapsed": 61.59999999999757,
+      "step": 3,
+      "tactics": {
+        "rules": {
+          "commandRange": 520,
+          "arrival": 7,
+          "postGap": 7,
+          "halfAngle": 0.8726646259971648,
+          "turnTime": 1.15,
+          "turnReach": 76,
+          "allyMargin": 4
+        },
+        "metrics": {
+          "postOrders": 3,
+          "sectorOrders": 2,
+          "disciplineOrders": 2,
+          "arrivals": 3,
+          "safetyHolds": 0,
+          "turnsStarted": 0,
+          "turnsCompleted": 0,
+          "turnsInterrupted": 0
+        },
+        "posts": [
+          {
+            "id": "hicks",
+            "name": "Hicks",
+            "post": null,
+            "status": "attend",
+            "fire": "free"
+          },
+          {
+            "id": "hudson",
+            "name": "Hudson",
+            "post": null,
+            "status": "attend",
+            "fire": "free"
+          },
+          {
+            "id": "newt",
+            "name": "Newt",
+            "post": {
+              "roomId": "v107-operations",
+              "x": 608,
+              "z": 277,
+              "angle": null,
+              "arrived": true
+            },
+            "status": "en poste",
+            "fire": "non armée"
+          }
+        ],
+        "sentries": []
+      },
+      "team": [
+        {
+          "id": "ripley",
+          "hp": 100,
+          "ammo": 18
+        },
+        {
+          "id": "hicks",
+          "hp": 100,
+          "ammo": 24
+        },
+        {
+          "id": "hudson",
+          "hp": 100,
+          "ammo": 24
+        },
+        {
+          "id": "newt",
+          "hp": 100,
+          "ammo": 0
+        }
+      ]
+    },
+    {
+      "label": "05-affut-avant-rotation",
+      "room": "v106-sentry",
+      "elapsed": 70.52499999999891,
+      "step": 3,
+      "tactics": {
+        "rules": {
+          "commandRange": 520,
+          "arrival": 7,
+          "postGap": 7,
+          "halfAngle": 0.8726646259971648,
+          "turnTime": 1.15,
+          "turnReach": 76,
+          "allyMargin": 4
+        },
+        "metrics": {
+          "postOrders": 3,
+          "sectorOrders": 2,
+          "disciplineOrders": 4,
+          "arrivals": 3,
+          "safetyHolds": 0,
+          "turnsStarted": 0,
+          "turnsCompleted": 0,
+          "turnsInterrupted": 0
+        },
+        "posts": [
+          {
+            "id": "hicks",
+            "name": "Hicks",
+            "post": null,
+            "status": "attend",
+            "fire": "hold"
+          },
+          {
+            "id": "hudson",
+            "name": "Hudson",
+            "post": null,
+            "status": "attend",
+            "fire": "hold"
+          },
+          {
+            "id": "newt",
+            "name": "Newt",
+            "post": null,
+            "status": "attend",
+            "fire": "non armée"
+          }
+        ],
+        "sentries": [
+          {
+            "id": "sentry-a",
+            "alive": true,
+            "near": true,
+            "angle": null,
+            "fire": "hold"
+          }
+        ]
+      },
+      "team": [
+        {
+          "id": "ripley",
+          "hp": 100,
+          "ammo": 18
+        },
+        {
+          "id": "hicks",
+          "hp": 100,
+          "ammo": 24
+        },
+        {
+          "id": "hudson",
+          "hp": 100,
+          "ammo": 24
+        },
+        {
+          "id": "newt",
+          "hp": 100,
+          "ammo": 0
+        }
+      ]
+    },
+    {
+      "label": "06-affut-en-rotation",
+      "room": "v106-sentry",
+      "elapsed": 70.97499999999901,
+      "step": 3,
+      "tactics": {
+        "rules": {
+          "commandRange": 520,
+          "arrival": 7,
+          "postGap": 7,
+          "halfAngle": 0.8726646259971648,
+          "turnTime": 1.15,
+          "turnReach": 76,
+          "allyMargin": 4
+        },
+        "metrics": {
+          "postOrders": 3,
+          "sectorOrders": 2,
+          "disciplineOrders": 4,
+          "arrivals": 3,
+          "safetyHolds": 0,
+          "turnsStarted": 1,
+          "turnsCompleted": 0,
+          "turnsInterrupted": 0
+        },
+        "posts": [
+          {
+            "id": "hicks",
+            "name": "Hicks",
+            "post": null,
+            "status": "attend",
+            "fire": "hold"
+          },
+          {
+            "id": "hudson",
+            "name": "Hudson",
+            "post": null,
+            "status": "attend",
+            "fire": "hold"
+          },
+          {
+            "id": "newt",
+            "name": "Newt",
+            "post": null,
+            "status": "attend",
+            "fire": "non armée"
+          }
+        ],
+        "sentries": [
+          {
+            "id": "sentry-a",
+            "alive": true,
+            "near": true,
+            "angle": null,
+            "fire": "hold"
+          }
+        ]
+      },
+      "team": [
+        {
+          "id": "ripley",
+          "hp": 100,
+          "ammo": 18
+        },
+        {
+          "id": "hicks",
+          "hp": 100,
+          "ammo": 24
+        },
+        {
+          "id": "hudson",
+          "hp": 100,
+          "ammo": 24
+        },
+        {
+          "id": "newt",
+          "hp": 100,
+          "ammo": 0
+        }
+      ]
+    },
+    {
+      "label": "07-ligne-en-place",
+      "room": "v106-sentry",
+      "elapsed": 76.77500000000033,
+      "step": 3,
+      "tactics": {
+        "rules": {
+          "commandRange": 520,
+          "arrival": 7,
+          "postGap": 7,
+          "halfAngle": 0.8726646259971648,
+          "turnTime": 1.15,
+          "turnReach": 76,
+          "allyMargin": 4
+        },
+        "metrics": {
+          "postOrders": 6,
+          "sectorOrders": 4,
+          "disciplineOrders": 4,
+          "arrivals": 6,
+          "safetyHolds": 0,
+          "turnsStarted": 1,
+          "turnsCompleted": 1,
+          "turnsInterrupted": 0
+        },
+        "posts": [
+          {
+            "id": "hicks",
+            "name": "Hicks",
+            "post": {
+              "roomId": "v106-sentry",
+              "x": 600,
+              "z": 240,
+              "angle": -0.1046166576325197,
+              "arrived": true
+            },
+            "status": "en poste",
+            "fire": "hold"
+          },
+          {
+            "id": "hudson",
+            "name": "Hudson",
+            "post": {
+              "roomId": "v106-sentry",
+              "x": 600,
+              "z": 155,
+              "angle": 0.10708874881064884,
+              "arrived": true
+            },
+            "status": "en poste",
+            "fire": "hold"
+          },
+          {
+            "id": "newt",
+            "name": "Newt",
+            "post": {
+              "roomId": "v106-sentry",
+              "x": 350,
+              "z": 240,
+              "angle": null,
+              "arrived": true
+            },
+            "status": "en poste",
+            "fire": "non armée"
+          }
+        ],
+        "sentries": [
+          {
+            "id": "sentry-a",
+            "alive": true,
+            "near": true,
+            "angle": 0,
+            "fire": "hold"
+          }
+        ]
+      },
+      "team": [
+        {
+          "id": "ripley",
+          "hp": 100,
+          "ammo": 18
+        },
+        {
+          "id": "hicks",
+          "hp": 100,
+          "ammo": 24
+        },
+        {
+          "id": "hudson",
+          "hp": 100,
+          "ammo": 24
+        },
+        {
+          "id": "newt",
+          "hp": 100,
+          "ammo": 0
+        }
+      ]
+    },
+    {
+      "label": "08-axes-libres",
+      "room": "v106-sentry",
+      "elapsed": 79.22500000000089,
+      "step": 3,
+      "tactics": {
+        "rules": {
+          "commandRange": 520,
+          "arrival": 7,
+          "postGap": 7,
+          "halfAngle": 0.8726646259971648,
+          "turnTime": 1.15,
+          "turnReach": 76,
+          "allyMargin": 4
+        },
+        "metrics": {
+          "postOrders": 6,
+          "sectorOrders": 4,
+          "disciplineOrders": 6,
+          "arrivals": 6,
+          "safetyHolds": 0,
+          "turnsStarted": 1,
+          "turnsCompleted": 1,
+          "turnsInterrupted": 0
+        },
+        "posts": [
+          {
+            "id": "hicks",
+            "name": "Hicks",
+            "post": {
+              "roomId": "v106-sentry",
+              "x": 600,
+              "z": 240,
+              "angle": -0.1046166576325197,
+              "arrived": true
+            },
+            "status": "en poste",
+            "fire": "free"
+          },
+          {
+            "id": "hudson",
+            "name": "Hudson",
+            "post": {
+              "roomId": "v106-sentry",
+              "x": 600,
+              "z": 155,
+              "angle": 0.10708874881064884,
+              "arrived": true
+            },
+            "status": "en poste",
+            "fire": "free"
+          },
+          {
+            "id": "newt",
+            "name": "Newt",
+            "post": {
+              "roomId": "v106-sentry",
+              "x": 350,
+              "z": 240,
+              "angle": null,
+              "arrived": true
+            },
+            "status": "en poste",
+            "fire": "non armée"
+          }
+        ],
+        "sentries": [
+          {
+            "id": "sentry-a",
+            "alive": true,
+            "near": true,
+            "angle": 0,
+            "fire": "free"
+          }
+        ]
+      },
+      "team": [
+        {
+          "id": "ripley",
+          "hp": 100,
+          "ammo": 18
+        },
+        {
+          "id": "hicks",
+          "hp": 100,
+          "ammo": 24
+        },
+        {
+          "id": "hudson",
+          "hp": 100,
+          "ammo": 24
+        },
+        {
+          "id": "newt",
+          "hp": 100,
+          "ammo": 0
+        }
+      ]
+    },
+    {
+      "label": "09-defense-dirigee",
+      "room": "v106-sentry",
+      "elapsed": 91.22500000000362,
+      "step": 4,
+      "tactics": {
+        "rules": {
+          "commandRange": 520,
+          "arrival": 7,
+          "postGap": 7,
+          "halfAngle": 0.8726646259971648,
+          "turnTime": 1.15,
+          "turnReach": 76,
+          "allyMargin": 4
+        },
+        "metrics": {
+          "postOrders": 6,
+          "sectorOrders": 4,
+          "disciplineOrders": 6,
+          "arrivals": 6,
+          "safetyHolds": 0,
+          "turnsStarted": 1,
+          "turnsCompleted": 1,
+          "turnsInterrupted": 0
+        },
+        "posts": [
+          {
+            "id": "hicks",
+            "name": "Hicks",
+            "post": {
+              "roomId": "v106-sentry",
+              "x": 600,
+              "z": 240,
+              "angle": -0.1046166576325197,
+              "arrived": true
+            },
+            "status": "en poste",
+            "fire": "free"
+          },
+          {
+            "id": "hudson",
+            "name": "Hudson",
+            "post": {
+              "roomId": "v106-sentry",
+              "x": 600,
+              "z": 155,
+              "angle": 0.10708874881064884,
+              "arrived": true
+            },
+            "status": "en poste",
+            "fire": "free"
+          },
+          {
+            "id": "newt",
+            "name": "Newt",
+            "post": {
+              "roomId": "v106-sentry",
+              "x": 350,
+              "z": 240,
+              "angle": null,
+              "arrived": true
+            },
+            "status": "en poste",
+            "fire": "non armée"
+          }
+        ],
+        "sentries": [
+          {
+            "id": "sentry-a",
+            "alive": true,
+            "near": true,
+            "angle": 0,
+            "fire": "free"
+          }
+        ]
+      },
+      "team": [
+        {
+          "id": "ripley",
+          "hp": 100,
+          "ammo": 18
+        },
+        {
+          "id": "hicks",
+          "hp": 100,
+          "ammo": 19
+        },
+        {
+          "id": "hudson",
+          "hp": 100,
+          "ammo": 20
+        },
+        {
+          "id": "newt",
+          "hp": 100,
+          "ammo": 0
+        }
+      ]
+    },
+    {
+      "label": "10-repli-angles",
+      "room": "v106-hadley",
+      "elapsed": 110.525000000008,
+      "step": 4,
+      "tactics": {
+        "rules": {
+          "commandRange": 520,
+          "arrival": 7,
+          "postGap": 7,
+          "halfAngle": 0.8726646259971648,
+          "turnTime": 1.15,
+          "turnReach": 76,
+          "allyMargin": 4
+        },
+        "metrics": {
+          "postOrders": 6,
+          "sectorOrders": 4,
+          "disciplineOrders": 6,
+          "arrivals": 6,
+          "safetyHolds": 0,
+          "turnsStarted": 1,
+          "turnsCompleted": 1,
+          "turnsInterrupted": 0
+        },
+        "posts": [
+          {
+            "id": "hicks",
+            "name": "Hicks",
+            "post": null,
+            "status": "suit",
+            "fire": "free"
+          },
+          {
+            "id": "hudson",
+            "name": "Hudson",
+            "post": null,
+            "status": "suit",
+            "fire": "free"
+          },
+          {
+            "id": "newt",
+            "name": "Newt",
+            "post": null,
+            "status": "suit",
+            "fire": "non armée"
+          }
+        ],
+        "sentries": []
+      },
+      "team": [
+        {
+          "id": "ripley",
+          "hp": 100,
+          "ammo": 18
+        },
+        {
+          "id": "hicks",
+          "hp": 100,
+          "ammo": 19
+        },
+        {
+          "id": "hudson",
+          "hp": 100,
+          "ammo": 20
+        },
+        {
+          "id": "newt",
+          "hp": 100,
+          "ammo": 0
+        }
+      ]
+    }
+  ]
+}

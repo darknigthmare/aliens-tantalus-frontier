@@ -39,6 +39,7 @@ export class TitleScreenController {
     this.continueButton = root.querySelector('#title-continue');
     this.newButton = root.querySelector('#title-new');
     this.forgeButton = root.querySelector('#title-forge');
+    this.aliens1986Button = root.querySelector('#title-aliens1986');
     this.optionsButton = root.querySelector('#title-options');
     this.profileStatus = root.querySelector('#title-profile-status');
     this.liveStatus = root.querySelector('#title-live-status');
@@ -69,6 +70,9 @@ export class TitleScreenController {
       });
     }
     listen(this.newButton, 'blur', () => this.cancelNewTimelineConfirmation());
+    if (this.aliens1986Button) listen(this.aliens1986Button, 'click', (event) => {
+      if (event.detail <= 1) this.openAliens1986();
+    });
     listen(globalThis, 'keydown', (event) => this.handleKeydown(event));
     listen(globalThis, 'resize', () => this.resetHorizontalScroll());
     listen(globalThis, 'blur', () => this.suspendInput());
@@ -99,7 +103,7 @@ export class TitleScreenController {
   }
 
   menuButtons() {
-    return [this.continueButton, this.newButton, this.forgeButton, this.optionsButton]
+    return [this.continueButton, this.newButton, this.forgeButton, this.aliens1986Button, this.optionsButton]
       .filter((button) => button && !button.hidden && !button.disabled);
   }
 
@@ -213,6 +217,13 @@ export class TitleScreenController {
     if (this.root.hidden || this.state !== 'menu') return;
     this.hide();
     this.onForge?.();
+  }
+
+  openAliens1986() {
+    if (this.root.hidden || this.state !== 'menu') return;
+    this.cancelNewTimelineConfirmation();
+    this.suspendInput();
+    globalThis.location.assign('/dlc/aliens-1986/');
   }
 
   requestNewTimeline() {

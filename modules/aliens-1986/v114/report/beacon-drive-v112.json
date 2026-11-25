@@ -1,0 +1,760 @@
+{
+  "method": "Parcours continu depuis insertion; mouvement/actions/visée/ordres publics, lecture informée de l’état. Aucun écrit de position, PV, ressource, porte ou objectif. Deux imports de ses propres exports.",
+  "complete": true,
+  "inputs": 4566,
+  "elapsed": 114.15000000000883,
+  "enemyTransfers": 3,
+  "team": [
+    {
+      "id": "ripley",
+      "hp": 100,
+      "ammo": 6
+    },
+    {
+      "id": "hicks",
+      "hp": 100,
+      "ammo": 21
+    },
+    {
+      "id": "hudson",
+      "hp": 100,
+      "ammo": 21
+    },
+    {
+      "id": "newt",
+      "hp": 100,
+      "ammo": 0
+    }
+  ],
+  "beacons": {
+    "charges": 1,
+    "spent": 3,
+    "collected": true,
+    "local": [],
+    "routeVisited": true,
+    "metrics": {
+      "started": 4,
+      "completed": 4,
+      "interrupted": 0,
+      "stocks": 1,
+      "throws": 3
+    }
+  },
+  "darkRooms": [
+    "v106-sentry",
+    "v112-workshop",
+    "v112-conduit"
+  ],
+  "states": [
+    {
+      "label": "01-avant-sas-optique",
+      "room": "v107-operations",
+      "elapsed": 31.249999999999293,
+      "hp": 100,
+      "ammo": 18,
+      "lighting": {
+        "powered": true,
+        "torch": true,
+        "angle": 0.21165357665221934,
+        "exposure": "éclairé",
+        "control": null,
+        "metrics": {
+          "started": 0,
+          "completed": 0,
+          "interrupted": 0,
+          "torchSwitches": 0
+        }
+      },
+      "beacons": {
+        "charges": 0,
+        "spent": 0,
+        "collected": false,
+        "local": [],
+        "routeVisited": false,
+        "metrics": {
+          "started": 0,
+          "completed": 0,
+          "interrupted": 0,
+          "stocks": 0,
+          "throws": 0
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": {
+          "id": "ops-optics",
+          "label": "Atelier optique",
+          "open": false,
+          "hp": 100,
+          "brace": 0,
+          "breached": false,
+          "hits": 0,
+          "lastImpact": 0
+        },
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 3
+    },
+    {
+      "label": "02-entree-atelier",
+      "room": "v112-workshop",
+      "elapsed": 32.699999999999214,
+      "hp": 100,
+      "ammo": 18,
+      "lighting": {
+        "powered": false,
+        "torch": true,
+        "angle": 0.21165357665221934,
+        "exposure": "éclairé",
+        "control": null,
+        "metrics": {
+          "started": 0,
+          "completed": 0,
+          "interrupted": 0,
+          "torchSwitches": 0
+        }
+      },
+      "beacons": {
+        "charges": 0,
+        "spent": 0,
+        "collected": false,
+        "local": [],
+        "routeVisited": false,
+        "metrics": {
+          "started": 0,
+          "completed": 0,
+          "interrupted": 0,
+          "stocks": 0,
+          "throws": 0
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": {
+          "id": "ops-optics",
+          "label": "Operations",
+          "open": true,
+          "hp": 100,
+          "brace": 0,
+          "breached": false,
+          "hits": 0,
+          "lastImpact": 0
+        },
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 3
+    },
+    {
+      "label": "03-avant-coffret",
+      "room": "v112-workshop",
+      "elapsed": 43.249999999998614,
+      "hp": 100,
+      "ammo": 15,
+      "lighting": {
+        "powered": false,
+        "torch": true,
+        "angle": 0,
+        "exposure": "éclairé",
+        "control": null,
+        "metrics": {
+          "started": 0,
+          "completed": 0,
+          "interrupted": 0,
+          "torchSwitches": 0
+        }
+      },
+      "beacons": {
+        "charges": 0,
+        "spent": 0,
+        "collected": false,
+        "local": [],
+        "routeVisited": false,
+        "metrics": {
+          "started": 0,
+          "completed": 0,
+          "interrupted": 0,
+          "stocks": 0,
+          "throws": 0
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 3
+    },
+    {
+      "label": "04-scelles-en-cours",
+      "room": "v112-workshop",
+      "elapsed": 43.69999999999859,
+      "hp": 100,
+      "ammo": 15,
+      "lighting": {
+        "powered": false,
+        "torch": true,
+        "angle": 0,
+        "exposure": "éclairé",
+        "control": null,
+        "metrics": {
+          "started": 0,
+          "completed": 0,
+          "interrupted": 0,
+          "torchSwitches": 0
+        }
+      },
+      "beacons": {
+        "charges": 0,
+        "spent": 0,
+        "collected": false,
+        "local": [],
+        "routeVisited": false,
+        "metrics": {
+          "started": 1,
+          "completed": 0,
+          "interrupted": 0,
+          "stocks": 0,
+          "throws": 0
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 3
+    },
+    {
+      "label": "05-coffret-ouvert",
+      "room": "v112-workshop",
+      "elapsed": 44.34999999999855,
+      "hp": 100,
+      "ammo": 15,
+      "lighting": {
+        "powered": false,
+        "torch": true,
+        "angle": 0,
+        "exposure": "éclairé",
+        "control": null,
+        "metrics": {
+          "started": 0,
+          "completed": 0,
+          "interrupted": 0,
+          "torchSwitches": 0
+        }
+      },
+      "beacons": {
+        "charges": 4,
+        "spent": 0,
+        "collected": true,
+        "local": [],
+        "routeVisited": false,
+        "metrics": {
+          "started": 1,
+          "completed": 1,
+          "interrupted": 0,
+          "stocks": 1,
+          "throws": 0
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 3
+    },
+    {
+      "label": "06-amorcage",
+      "room": "v112-workshop",
+      "elapsed": 44.89999999999852,
+      "hp": 100,
+      "ammo": 15,
+      "lighting": {
+        "powered": false,
+        "torch": false,
+        "angle": -0.0450956601937563,
+        "exposure": "ombre",
+        "control": null,
+        "metrics": {
+          "started": 0,
+          "completed": 0,
+          "interrupted": 0,
+          "torchSwitches": 1
+        }
+      },
+      "beacons": {
+        "charges": 4,
+        "spent": 0,
+        "collected": true,
+        "local": [],
+        "routeVisited": false,
+        "metrics": {
+          "started": 2,
+          "completed": 1,
+          "interrupted": 0,
+          "stocks": 1,
+          "throws": 0
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 3
+    },
+    {
+      "label": "07-atelier-balise",
+      "room": "v112-workshop",
+      "elapsed": 45.2999999999985,
+      "hp": 100,
+      "ammo": 15,
+      "lighting": {
+        "powered": false,
+        "torch": false,
+        "angle": -0.0450956601937563,
+        "exposure": "ombre",
+        "control": null,
+        "metrics": {
+          "started": 0,
+          "completed": 0,
+          "interrupted": 0,
+          "torchSwitches": 1
+        }
+      },
+      "beacons": {
+        "charges": 3,
+        "spent": 1,
+        "collected": true,
+        "local": [
+          {
+            "id": "beacon-1",
+            "remaining": 35.949999999999996
+          }
+        ],
+        "routeVisited": false,
+        "metrics": {
+          "started": 2,
+          "completed": 2,
+          "interrupted": 0,
+          "stocks": 1,
+          "throws": 1
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 3
+    },
+    {
+      "label": "08-entree-conduites",
+      "room": "v112-conduit",
+      "elapsed": 48.22499999999833,
+      "hp": 100,
+      "ammo": 15,
+      "lighting": {
+        "powered": false,
+        "torch": false,
+        "angle": -0.0450956601937563,
+        "exposure": "ombre",
+        "control": null,
+        "metrics": {
+          "started": 0,
+          "completed": 0,
+          "interrupted": 0,
+          "torchSwitches": 1
+        }
+      },
+      "beacons": {
+        "charges": 3,
+        "spent": 1,
+        "collected": true,
+        "local": [],
+        "routeVisited": true,
+        "metrics": {
+          "started": 2,
+          "completed": 2,
+          "interrupted": 0,
+          "stocks": 1,
+          "throws": 1
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": {
+          "id": "optics-conduit",
+          "label": "Atelier optique",
+          "open": true,
+          "hp": 100,
+          "brace": 0,
+          "breached": false,
+          "hits": 0,
+          "lastImpact": 0
+        },
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 3
+    },
+    {
+      "label": "09-coursive-balisee",
+      "room": "v112-conduit",
+      "elapsed": 52.69999999999808,
+      "hp": 100,
+      "ammo": 15,
+      "lighting": {
+        "powered": false,
+        "torch": false,
+        "angle": 0,
+        "exposure": "ombre",
+        "control": null,
+        "metrics": {
+          "started": 0,
+          "completed": 0,
+          "interrupted": 0,
+          "torchSwitches": 1
+        }
+      },
+      "beacons": {
+        "charges": 2,
+        "spent": 2,
+        "collected": true,
+        "local": [
+          {
+            "id": "beacon-2",
+            "remaining": 35.949999999999996
+          }
+        ],
+        "routeVisited": true,
+        "metrics": {
+          "started": 3,
+          "completed": 3,
+          "interrupted": 0,
+          "stocks": 1,
+          "throws": 2
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 3
+    },
+    {
+      "label": "10-retour-medical",
+      "room": "v106-medlab",
+      "elapsed": 63.14999999999748,
+      "hp": 100,
+      "ammo": 14,
+      "lighting": {
+        "powered": true,
+        "torch": false,
+        "angle": 0.03418272993552797,
+        "exposure": "éclairé",
+        "control": null,
+        "metrics": {
+          "started": 0,
+          "completed": 0,
+          "interrupted": 0,
+          "torchSwitches": 1
+        }
+      },
+      "beacons": {
+        "charges": 2,
+        "spent": 2,
+        "collected": true,
+        "local": [],
+        "routeVisited": true,
+        "metrics": {
+          "started": 3,
+          "completed": 3,
+          "interrupted": 0,
+          "stocks": 1,
+          "throws": 2
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 3
+    },
+    {
+      "label": "11-sentinelle-balise",
+      "room": "v106-sentry",
+      "elapsed": 83.55000000000187,
+      "hp": 100,
+      "ammo": 14,
+      "lighting": {
+        "powered": false,
+        "torch": false,
+        "angle": 0.03418272993552797,
+        "exposure": "éclairé",
+        "control": null,
+        "metrics": {
+          "started": 1,
+          "completed": 1,
+          "interrupted": 0,
+          "torchSwitches": 1
+        }
+      },
+      "beacons": {
+        "charges": 1,
+        "spent": 3,
+        "collected": true,
+        "local": [
+          {
+            "id": "beacon-3",
+            "remaining": 35.94999999999999
+          }
+        ],
+        "routeVisited": true,
+        "metrics": {
+          "started": 4,
+          "completed": 4,
+          "interrupted": 0,
+          "stocks": 1,
+          "throws": 3
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 3
+    },
+    {
+      "label": "12-defense-balisee",
+      "room": "v106-sentry",
+      "elapsed": 94.55000000000437,
+      "hp": 100,
+      "ammo": 6,
+      "lighting": {
+        "powered": false,
+        "torch": false,
+        "angle": -0.0682296893075631,
+        "exposure": "ombre",
+        "control": null,
+        "metrics": {
+          "started": 1,
+          "completed": 1,
+          "interrupted": 0,
+          "torchSwitches": 1
+        }
+      },
+      "beacons": {
+        "charges": 1,
+        "spent": 3,
+        "collected": true,
+        "local": [
+          {
+            "id": "beacon-3",
+            "remaining": 24.949999999997488
+          }
+        ],
+        "routeVisited": true,
+        "metrics": {
+          "started": 4,
+          "completed": 4,
+          "interrupted": 0,
+          "stocks": 1,
+          "throws": 3
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 3
+    },
+    {
+      "label": "13-repli-balise",
+      "room": "v106-hadley",
+      "elapsed": 114.15000000000883,
+      "hp": 100,
+      "ammo": 6,
+      "lighting": {
+        "powered": true,
+        "torch": false,
+        "angle": -0.0682296893075631,
+        "exposure": "éclairé",
+        "control": null,
+        "metrics": {
+          "started": 1,
+          "completed": 1,
+          "interrupted": 0,
+          "torchSwitches": 1
+        }
+      },
+      "beacons": {
+        "charges": 1,
+        "spent": 3,
+        "collected": true,
+        "local": [],
+        "routeVisited": true,
+        "metrics": {
+          "started": 4,
+          "completed": 4,
+          "interrupted": 0,
+          "stocks": 1,
+          "throws": 3
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 3
+    }
+  ]
+}

@@ -1,0 +1,198 @@
+Huit inspections et une opération distincte True
+Démarrage opération à Hadley True
+Newt dans son lieu avant le secours True
+État contient les huit lieux sans HTML de contrôle True
+Ordre tenir au clavier conserve la position True
+Ouverture réellement différée True
+Pause ne consomme pas le temps du geste True
+Déplacement annule le geste sans ouvrir True
+Ouverture achevée au clavier True
+Tirs réels consomment les munitions True
+Deux contacts neutralisés par les tirs UI True
+Premier raccord traversé avec la vraie équipe True
+Porte de la salle quittée conservée True
+Objectif avancé seulement après transfert True
+Export/import exact de tous les lieux True
+Champ de rôle injecté refusé sans mutation True
+État de porte erroné refusé sans mutation True
+{"passed": 17, "total": 17, "errors": [], "captures": 3}
+Inspection sentinelle sans progression True
+Sentinelle ne gaspille pas devant la porte True
+Sentinelle tire après ouverture True
+Carte hors scène et HUD True
+Archives remplacent la scène True
+Perte de focus met en pause True
+Bilan du parcours terminé True
+HUD et ordres hors canvas 844×390 True
+Pas de débordement horizontal True
+Options accessibilité activables True
+Aucune erreur JavaScript True
+{"passed": 11, "total": 11, "errors": [], "captures": 4}
+Reprise du parcours V111 : 03-relais True
+Reprise du parcours V111 : 04-newt True
+Reprise du parcours V111 : 05-retour-operations True
+Deux menaces restent dans Hadley après le départ True
+Poursuite exécutée hors champ puis arrivée dans Operations True
+Une seule instance par menace après changement de pièce True
+Horloges des lieux hors champ avancées True
+Impulsion T produit une mesure de mouvement True
+Échos quantifiés sans identité, position précise ou PV True
+Double impulsion refusée pendant recharge True
+Échos périmés après deux secondes True
+Reprise exacte de la mémoire, des mondes et de la recharge True
+Champ de mémoire inconnu rejeté avant mutation True
+Créature dupliquée refusée atomiquement True
+Aucune erreur JavaScript contacts True
+{"passed": 15, "total": 15, "captures": 5, "errors": []}
+R lance une ouverture temporisée réelle True
+Pause fige le sas et toutes les mémoires True
+Marche annule la réouverture sans libérer la liaison True
+Réouverture à terme modifie le seul état partagé True
+Carte reste sans liste de menaces True
+V active la prudence dans la simulation True
+L’interface reflète la prudence True
+Import V107 préserve les ressources et le jalon True
+Aucune poursuite inventée à la migration True
+Audio local activable sans média externe True
+Aucune erreur JavaScript contacts True
+{"passed": 11, "total": 11, "captures": 3, "errors": []}
+Commandes tactiles visibles dans le flux de jeu True
+Détecteur et commandes tactiles hors canvas en 844×390 True
+Canvas visible en paysage tactile True
+Aucun débordement paysage True
+Bouton prudence accessible au tactile True
+Aucun débordement portrait 390×844 True
+Détecteur et pause accessibles en portrait True
+Options en pause tactile True
+Aucune requête réseau externe True
+Aucune erreur UI tactile True
+Huit inspections visibles dans le catalogue True
+Reprise exacte à la nouvelle galerie True
+Réserve affichée et HUD hors scène True
+E sur caisse vide ne duplique pas les lots True
+B commence un vrai ravitaillement True
+Aucun lot déduit avant fin True
+Pause conserve temps de travail et réserves True
+Marche annule lot sans le dépenser True
+Bouton ravitailler crédite exactement 18 cartouches True
+Blessure réelle et soins non consommés à la reprise True
+Soigner engage une action de 1,6 seconde True
+La vie ne remonte pas avant la fin True
+Tirer interrompt le soin et garde la trousse True
+Import reprend le geste médical au même temps True
+Soin terminé plafonné à 100 et une trousse utilisée True
+Import refuse lot inventé sans mutation True
+Import refuse alarme immortelle sans mutation True
+Import refuse stock inconnu sans mutation True
+Import refuse propriété de soin inconnue sans mutation True
+État sirène/recharge restauré exactement True
+E ne relance pas une sirène pendant recharge True
+Le bruit de diagnostic existe dans la simulation True
+Durée alarme décroît réellement True
+L’alarme n’a ajouté aucune identité ennemie True
+Geste cartouche exact à la reprise True
+Cartouche crédite 40 au maximum 120, une seule fois True
+Newt reste sans arme après la logistique True
+Ravitaillement Newt désactivé dans l’interface True
+Carte montre la boucle sans acteurs ennemis True
+Archives contiennent les règles logistiques True
+Opération complète affiche bilan logistique réel True
+Migration V108 réelle sans soin ni munitions True
+Migration V108 ne donne aucun stock True
+Barre logistique hors terrain 844×390 True
+Aucun débordement horizontal V111 True
+Barre logistique reste visible en portrait True
+Portrait sans débordement horizontal True
+Aucune requête externe nécessaire True
+Aucune erreur JavaScript ou console True
+{"passed": 39, "captures": 9}
+Insertion V111 sans plaque offerte True
+Huit battants réciproques intacts à l’insertion True
+Import exact après le premier choc réel True
+La pause suspend également la pression hors champ True
+Préparation ennemie restaurée sans la remettre à zéro True
+La pression exécute réellement les impacts restants True
+Le même sas est désormais traversable et bréché True
+Aucune identité ennemie créée par la brèche True
+E commence le déverrouillage de la caisse de maintenance True
+Avant fin, aucune plaque créditée True
+Collecte terminée : exactement trois plaques True
+La caisse ne recharge pas la réserve une seconde fois True
+Réfection exacte à mi-geste et stock non débité True
+J restaure 100 points et ferme les deux faces True
+Réfection consomme une seule plaque à la fin True
+O engage une soudure réelle de 1,8 seconde True
+Soudure en préparation : plaque toujours disponible True
+Pause garde exactement l’avancement du chalumeau True
+Marche interrompt la soudure sans dépenser la plaque True
+Tirer interrompt aussi la soudure True
+Export/import réel ne remet pas le geste à zéro True
+Soudure finie : 72 de renfort et une plaque dépensée True
+R ne traverse pas le renfort soudé True
+Renforcer déjà renforcé est désactivé True
+U démarre une découpe de 1,4 seconde True
+Découpe en cours ne libère pas encore le passage True
+Découpe finie : sas ouvert sans plaque rendue True
+Import refuse plaque inventée sans mutation True
+Import refuse renfort au-delà de sa capacité sans mutation True
+Import refuse battant indestructible sans mutation True
+Import refuse champ génie inconnu sans mutation True
+Import refuse pression avec acteur inconnu sans mutation True
+V109 migre vers V111 en gardant équipe et ressources True
+La migration ne donne aucune plaque et aucune réparation gratuite True
+Carte de liaisons sans identités ou attaques ennemies True
+Archives décrivent les nouvelles règles sans recouvrir le terrain True
+Repli terminé inclut la dépense réelle des plaques True
+Onglet Génie tactile hors terrain en paysage True
+Le volet génie remplace les stocks en écran court True
+Retour aux réserves sans fermer le jeu True
+Raccourci O expose le bon volet sur écran court True
+Portrait sans débordement horizontal True
+Les deux instruments restent disponibles en portrait True
+Aucun téléchargement externe nécessaire True
+Aucune erreur JavaScript ou console True
+{
+  "passed": 45,
+  "captures": 9
+}
+Insertion schema111 et torche sans ressources offertes True
+Huit circuits service existants conservés nominaux True
+Import exact avant manœuvre électrique True
+K déclenche une préparation réelle de 0,95 s True
+Lampe reste alimentée durant la préparation True
+Pause conserve exactement le geste True
+Marcher annule la coupure True
+Tirer annule et dépense une balle ordinaire True
+Import mi-geste ne remet pas le temps à zéro True
+Circuit coupé à l’achèvement seulement True
+Aucune porte de scène ou sas modifié par coupure True
+Aucune population créée True
+L éteint la torche indépendamment du circuit True
+Instrument indique ombre sans coordonnées ennemies True
+Orientation et torche ont été reprises du parcours True
+La souris oriente réellement la torche True
+Obscurité conservée au retour après maintenance True
+Circuit rétabli sans soin ni recharge offert True
+Défense achevée dans un circuit coupé True
+Sentinelle consomme ses munitions réelles True
+Refus atomique : angle non fini True
+Refus atomique : bilan incohérent True
+Refus atomique : propriété inconnue True
+Refus atomique : identité équipe True
+Migration V110 garde équipe et réserves True
+Migration garde tous les circuits et ajoute seulement la torche True
+Bouton torche reflète la touche L True
+Bouton torche réactive indépendamment du clavier True
+Carte reste séparée et sans radar True
+Réglages accessibilité disponibles True
+HUD et boutons hors terrain 844x390 True
+Scène non écrasée 844x390 True
+Torche et contrôle présents 844x390 True
+HUD et boutons hors terrain 390x844 True
+Scène non écrasée 390x844 True
+Torche et contrôle présents 390x844 True
+Opération importée complète donne le bilan True
+Zéro requête externe nécessaire True
+Aucune erreur JS/console True
+{"passed": 39, "total": 39, "captures": 9, "errors": []}
+{"passed": 187, "captures": 43, "errors": []}

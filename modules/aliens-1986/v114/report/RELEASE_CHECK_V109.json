@@ -1,0 +1,499 @@
+{
+  "ok": true,
+  "version": "109.0.0-rc.1",
+  "htmlSha256": "dd0228ae9027b840162eb437abc737b27eeb73957d1081e6027c472a8b9c7b13",
+  "baselineSha256": "177c499560ed77fc17af96341b1c1026478e28f65d16c181f2343b01f0a5fec8",
+  "contract": "bace7a01",
+  "nativeActivated": false,
+  "nativeCampaignRuns": 0,
+  "nodeTestsPassed": 260,
+  "gameBrowserChecksPassed": 103,
+  "separateDistributionChecksPassed": 20,
+  "automatedFullOperations": 4,
+  "pursuitEnemyTransfers": 2,
+  "directBrowserCaptures": 25,
+  "embeddedReportCaptures": 12,
+  "directFileNavigation": "not retested; not certified in this environment",
+  "checks": [
+    {
+      "name": "Syntaxe preview/app.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe preview/audio.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe preview/renderer.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/adapter.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/contact-v108.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/core.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-logistics-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-operation.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-pursuit-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-pursuit-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/installer.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/logistics-v109.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/operation.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/aliens-1986-spatial-v106.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/contact-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/contact-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/logistics-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/operation-scenes-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/operation-scenes-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/operation-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/operation-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/operation-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/spatial-core-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/spatial-core.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/validation-scenes.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/export-contracts-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/export-contracts-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/stage-v106.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-contact-a-v108.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-contact-a-v109.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-contact-b-v108.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-contact-b-v109.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-core-v108.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-core-v109.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-logistics-v109.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-tail-v108.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-tail-v109.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-touch-v108.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-touch-v109.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-v108.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-v109.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/distribution-smoke-v108.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/distribution-smoke-v109.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/build-docs-v108.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/build-docs-v109.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/build-preview.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/release-check-v108.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/release-check-v109.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/seal-v108.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/seal-v109.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/verify-package.py",
+      "ok": true
+    },
+    {
+      "name": "260 tests sans exclusion",
+      "ok": true
+    },
+    {
+      "name": "Le document testé est exactement celui livré",
+      "ok": true
+    },
+    {
+      "name": "Quatorze modules de la chaîne réelle",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/spatial-core.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/spatial-core.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/spatial-core-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/spatial-core-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/validation-scenes.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/validation-scenes.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/operation-scenes-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/operation-scenes-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/operation-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/operation-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/contact-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/contact-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/operation-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/operation-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/operation-scenes-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/operation-scenes-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/contact-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/contact-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/logistics-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/logistics-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/operation-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/operation-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact preview/audio.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus preview/audio.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact preview/renderer.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus preview/renderer.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact preview/app.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus preview/app.mjs",
+      "ok": true
+    },
+    {
+      "name": "103 contrôles gameplay navigateur",
+      "ok": true
+    },
+    {
+      "name": "Aucune erreur navigateur observée",
+      "ok": true
+    },
+    {
+      "name": "20 contrôles distribution séparés",
+      "ok": true
+    },
+    {
+      "name": "Aucune requête externe à la distribution",
+      "ok": true
+    },
+    {
+      "name": "Deux anciens itinéraires toujours terminables",
+      "ok": true
+    },
+    {
+      "name": "Deux nouvelles variantes complètes",
+      "ok": true
+    },
+    {
+      "name": "Réserves conservées supply-loop",
+      "ok": true
+    },
+    {
+      "name": "Newt non armée supply-loop",
+      "ok": true
+    },
+    {
+      "name": "Réserves conservées supply-loop-reloads",
+      "ok": true
+    },
+    {
+      "name": "Newt non armée supply-loop-reloads",
+      "ok": true
+    },
+    {
+      "name": "Poursuite réexécutée",
+      "ok": true
+    },
+    {
+      "name": "Géométrie et arrivées contrôlées",
+      "ok": true
+    },
+    {
+      "name": "8 pièces 7 reliées 2 nouvelles",
+      "ok": true
+    },
+    {
+      "name": "8 liaisons 16 volumes de seuil",
+      "ok": true
+    },
+    {
+      "name": "3 réserves et 1 diagnostic",
+      "ok": true
+    },
+    {
+      "name": "5 jalons locaux conservés",
+      "ok": true
+    },
+    {
+      "name": "12 PNG sélectionnés non retouchés",
+      "ok": true
+    },
+    {
+      "name": "25 captures uniques toutes présentes",
+      "ok": true
+    },
+    {
+      "name": "Huit fiches de Codex",
+      "ok": true
+    },
+    {
+      "name": "Préservation src/validation-scenes.mjs",
+      "ok": true
+    },
+    {
+      "name": "Préservation src/aliens-1986-spatial-v106.mjs",
+      "ok": true
+    },
+    {
+      "name": "Préservation src/operation-scenes-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Préservation src/operation-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Préservation src/spatial-core-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Préservation src/spatial-core.mjs",
+      "ok": true
+    },
+    {
+      "name": "Préservation src/contact-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Préservation src/operation-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Préservation qa/installer.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Préservation qa/operation.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Préservation qa/contact-v108.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Préservation qa/core.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Préservation qa/adapter.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Treize sources et tests préservés",
+      "ok": true
+    },
+    {
+      "name": "Aucune police distribuée",
+      "ok": true
+    },
+    {
+      "name": "Aucun lien symbolique",
+      "ok": true
+    },
+    {
+      "name": "Version et commandes de distribution exactes",
+      "ok": true
+    }
+  ]
+}

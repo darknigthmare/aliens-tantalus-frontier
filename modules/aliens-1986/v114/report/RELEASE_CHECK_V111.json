@@ -1,0 +1,1071 @@
+{
+  "ok": true,
+  "version": "111.0.0-rc.1",
+  "htmlSha256": "611c2cf49a15866e81a180f76dabcf11ded718a66a46c6c907c19d1e6eb59e24",
+  "sourceArchiveSha256": "ef3c6ce0db9d561314f2b40ea45581c44ec503a24d3dd28bf6b0bd70614acdce",
+  "contract": "cfdfea91",
+  "nativeActivated": false,
+  "nativeCampaignRuns": 0,
+  "nodeTestsPassed": 408,
+  "gameBrowserChecksPassed": 187,
+  "separateDistributionChecksPassed": 27,
+  "automatedFullOperations": 6,
+  "pursuitEnemyTransfers": 2,
+  "lightingOperationEnemyTransfers": 6,
+  "directBrowserCaptures": 43,
+  "embeddedReportCaptures": 10,
+  "directFileNavigation": {
+    "validated": false,
+    "reason": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/ALIENS_1986_V111_DANS_LE_NOIR_RC1/JOUER_ALIENS_V111.html\nCall log:\n  - navigating to \"file:///mnt/data/ALIENS_1986_V111_DANS_LE_NOIR_RC1/JOUER_ALIENS_V111.html\", waiting until \"load\"\n"
+  },
+  "checks": [
+    {
+      "name": "Syntaxe preview/app.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe preview/audio.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe preview/lighting-renderer.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe preview/renderer.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/adapter.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/contact-v108.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/core.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-breach-v110.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-breach-v111.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-lighting-v111.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-logistics-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-logistics-v110.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-logistics-v111.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-operation.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-pursuit-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-pursuit-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-pursuit-v110.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-pursuit-v111.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-v110.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/drive-v111.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/engineering-v110.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/installer.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/lighting-v111.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/logistics-v109.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/operation.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/aliens-1986-spatial-v106.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/contact-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/contact-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/contact-v110.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/contact-v111.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/engineering-v110.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/engineering-v111.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/lighting-v111.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/logistics-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/logistics-v110.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/logistics-v111.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/operation-scenes-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/operation-scenes-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/operation-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/operation-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/operation-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/operation-v110.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/operation-v111.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/spatial-core-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/spatial-core.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe src/validation-scenes.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/export-contracts-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/export-contracts-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/export-contracts-v110.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/export-contracts-v111.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/stage-v106.mjs",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-contact-a-v108.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-contact-a-v109.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-contact-a-v110.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-contact-a-v111.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-contact-b-v108.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-contact-b-v109.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-contact-b-v110.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-contact-b-v111.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-core-v108.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-core-v109.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-core-v110.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-core-v111.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-engineering-v110.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-engineering-v111.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-lighting-v111.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-logistics-v109.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-logistics-v110.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-logistics-v111.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-tail-v108.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-tail-v109.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-tail-v110.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-tail-v111.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-touch-v108.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-touch-v109.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-touch-v110.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-touch-v111.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-v108.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-v109.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-v110.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/browser-v111.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/distribution-smoke-v108.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/distribution-smoke-v109.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/distribution-smoke-v110.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/distribution-smoke-v111.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe qa/integrity-probe-v111.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/build-docs-v108.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/build-docs-v109.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/build-docs-v110.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/build-docs-v111.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/build-preview.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/release-check-v108.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/release-check-v109.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/release-check-v110.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/release-check-v111.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/seal-v108.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/seal-v109.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/seal-v110.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/seal-v111.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/verify-package.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/write-qa-v110.py",
+      "ok": true
+    },
+    {
+      "name": "Syntaxe tools/write-qa-v111.py",
+      "ok": true
+    },
+    {
+      "name": "408 tests sans exclusion",
+      "ok": true
+    },
+    {
+      "name": "Document testé égal au livré",
+      "ok": true
+    },
+    {
+      "name": "Version actuelle du reçu",
+      "ok": true
+    },
+    {
+      "name": "24 modules réels embarqués",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/spatial-core.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/spatial-core.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/spatial-core-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/spatial-core-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/validation-scenes.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/validation-scenes.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/operation-scenes-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/operation-scenes-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/operation-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/operation-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/contact-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/contact-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/operation-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/operation-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/operation-scenes-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/operation-scenes-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/contact-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/contact-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/logistics-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/logistics-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/operation-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/operation-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/engineering-v110.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/engineering-v110.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/contact-v110.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/contact-v110.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/logistics-v110.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/logistics-v110.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/operation-v110.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/operation-v110.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/lighting-v111.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/lighting-v111.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/engineering-v111.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/engineering-v111.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/contact-v111.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/contact-v111.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/logistics-v111.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/logistics-v111.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact src/operation-v111.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus src/operation-v111.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact preview/lighting-renderer.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus preview/lighting-renderer.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact preview/audio.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus preview/audio.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact preview/renderer.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus preview/renderer.mjs",
+      "ok": true
+    },
+    {
+      "name": "Module exact preview/app.mjs",
+      "ok": true
+    },
+    {
+      "name": "Imports résolus preview/app.mjs",
+      "ok": true
+    },
+    {
+      "name": "Feuille style exacte dans HTML",
+      "ok": true
+    },
+    {
+      "name": "187 contrôles gameplay navigateur",
+      "ok": true
+    },
+    {
+      "name": "Aucune erreur JS/console observée",
+      "ok": true
+    },
+    {
+      "name": "Recette exacte core",
+      "ok": true
+    },
+    {
+      "name": "Recette exacte tail",
+      "ok": true
+    },
+    {
+      "name": "Recette exacte contact-a",
+      "ok": true
+    },
+    {
+      "name": "Recette exacte contact-b",
+      "ok": true
+    },
+    {
+      "name": "Recette exacte touch",
+      "ok": true
+    },
+    {
+      "name": "Recette exacte logistics",
+      "ok": true
+    },
+    {
+      "name": "Recette exacte engineering",
+      "ok": true
+    },
+    {
+      "name": "Recette exacte lighting",
+      "ok": true
+    },
+    {
+      "name": "27 contrôles de distribution séparés",
+      "ok": true
+    },
+    {
+      "name": "Pas de réseau requis en distribution",
+      "ok": true
+    },
+    {
+      "name": "Deux routes historiques terminées",
+      "ok": true
+    },
+    {
+      "name": "Deux routes logistiques terminées",
+      "ok": true
+    },
+    {
+      "name": "Stocks logistiques supply-loop",
+      "ok": true
+    },
+    {
+      "name": "Stocks logistiques supply-loop-reloads",
+      "ok": true
+    },
+    {
+      "name": "Opération brèche terminée sans perte de mécaniques",
+      "ok": true
+    },
+    {
+      "name": "Parcours nocturne terminé depuis insertion",
+      "ok": true
+    },
+    {
+      "name": "Six passages ennemis dans parcours noir",
+      "ok": true
+    },
+    {
+      "name": "Hudson blessé, Newt non armée",
+      "ok": true
+    },
+    {
+      "name": "Retour Operations rétabli, sentinelle laissée dans le noir",
+      "ok": true
+    },
+    {
+      "name": "120 vers116 cartouches dans défense sombre",
+      "ok": true
+    },
+    {
+      "name": "Poursuite conservée séparément",
+      "ok": true
+    },
+    {
+      "name": "Catalogue validé",
+      "ok": true
+    },
+    {
+      "name": "Catalogue lightingProfiles",
+      "ok": true
+    },
+    {
+      "name": "Catalogue serviceLightingControls",
+      "ok": true
+    },
+    {
+      "name": "Catalogue existingServiceLamps",
+      "ok": true
+    },
+    {
+      "name": "Catalogue inspectableRooms",
+      "ok": true
+    },
+    {
+      "name": "Catalogue connectedOperationRooms",
+      "ok": true
+    },
+    {
+      "name": "Catalogue newRooms",
+      "ok": true
+    },
+    {
+      "name": "Catalogue localObjectives",
+      "ok": true
+    },
+    {
+      "name": "Catalogue enemies",
+      "ok": true
+    },
+    {
+      "name": "10 PNG exacts dans rapport",
+      "ok": true
+    },
+    {
+      "name": "43 captures présentes et uniques",
+      "ok": true
+    },
+    {
+      "name": "Provenance 00_menu.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 01_ouverture_en_cours.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 02_operations_arrivee.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 06_sentry_contact.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 07_carte_liaisons.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 08_bilan_repli.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 09_service_844x390.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 03_relais_retabli.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 04_newt_recrutee.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 05_escorte_operations.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 10_contact_poursuite.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 11_detecteur_mesure.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 12_sas_isole.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 13_reouverture_sas.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 14_carte_isolement.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 15_tactile_844.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 16_galerie_entree.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 17_galerie_stock_ouvert.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 18_soin_action_reelle.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 19_reserve_apres_soin.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 20_sirene_diagnostic.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 21_sentinel_ravitaillement.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 22_carte_boucle_service.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 23_bilan_logistique.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 24_logistique_844x390.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 25_battant_endommage.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 26_breche_sous_pression.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 27_plaques_recuperees.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 28_refection_en_cours.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 29_soudure_chalumeau.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 30_sas_soude.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 31_decoupe_en_cours.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 32_repli_genie.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 33_genie_844x390.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 35_coupure_electrique.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 36_operations_obscurite.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 37_piste_dans_le_noir.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 38_faisceau_contact.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 39_faisceau_cloison.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 40_retour_lampes.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 41_defense_nocturne.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 42_eclairage_paysage.png",
+      "ok": true
+    },
+    {
+      "name": "Provenance 43_repli_circuits.png",
+      "ok": true
+    },
+    {
+      "name": "Codex 8 lieux /36 règles",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact src/operation-scenes-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact src/spatial-core-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact src/spatial-core.mjs",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact src/validation-scenes.mjs",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact src/logistics-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact src/operation-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact src/aliens-1986-spatial-v106.mjs",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact src/engineering-v110.mjs",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact src/contact-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact src/operation-scenes-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact src/operation-v107.mjs",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact src/logistics-v110.mjs",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact src/operation-v110.mjs",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact src/contact-v109.mjs",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact src/operation-v108.mjs",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact src/contact-v110.mjs",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact qa/operation.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact qa/contact-v108.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact qa/adapter.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact qa/installer.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact qa/engineering-v110.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact qa/logistics-v109.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "Hérité exact qa/core.test.mjs",
+      "ok": true
+    },
+    {
+      "name": "23 sources/tests V110 conservés",
+      "ok": true
+    },
+    {
+      "name": "Pas de police distribuée",
+      "ok": true
+    },
+    {
+      "name": "Pas de lien symbolique",
+      "ok": true
+    },
+    {
+      "name": "Version et raccourci",
+      "ok": true
+    }
+  ]
+}

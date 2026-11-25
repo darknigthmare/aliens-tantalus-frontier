@@ -1,0 +1,369 @@
+{
+  "tests": [
+    {
+      "name": "Dix inspections et deux nouvelles cartes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Schéma113 et aucune balise offerte",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Deux nouvelles pièces et deux entrées fermées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Cinq objectifs locaux conservés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import avant nouveau raccord exact",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "R prépare le sas optique sans le débloquer immédiatement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Sas optique ouvert par le geste réel",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "E et regroupement conduisent au nouvel atelier",
+      "ok": true,
+      "detail": "v112-workshop"
+    },
+    {
+      "name": "Équipe réellement réunie au transfert",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "E ouvre les scellés en 1,05 s",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune balise avant achèvement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pause préserve le coffret en cours",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "F annule la collecte sans donner de balise",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Quatre balises à l’achèvement, une seule collecte",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Nouvelle interaction ne remplit pas le coffret",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "P engage un lancer .6 seconde",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Préparation ne débite pas la réserve",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pause fige l’amorçage",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Marche interrompt sans consommer",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import au milieu du lancer est exact",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Une balise autonome est créée par achèvement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Durée 36 s et point de lancement réellement engagé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucun PV, chargeur ni objectif changé par ce lancer",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Balise reste active après extinction de la torche",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import source allumée conserve position et expiration",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Deux identités de balise résident dans deux pièces",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Dérivation réelle raccordée à l’infirmerie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Carte séparée et sans noms de menaces",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Archives expliquent stock, occlusion et compromis",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Défense finie torche et circuit éteints",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Balises hors champ vieillissent et ne disparaissent pas du registre",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Sentinelle garde sa réserve consommée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Refus atomique : stock inventé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Refus atomique : durée rallongée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Refus atomique : rayon injecté",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Refus atomique : duplicata lumineux",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Migration V111 via validateur conserve état de travail et torche",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Migration conserve équipe, réserves et ancien réseau",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Migration ne donne aucune balise",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Bouton balise hors canvas en paysage court",
+      "ok": true,
+      "detail": {
+        "scene": {
+          "x": 0,
+          "y": 44,
+          "width": 844,
+          "height": 194
+        },
+        "contactbar": {
+          "x": 0,
+          "y": 238,
+          "width": 844,
+          "height": 46
+        },
+        "beacon-throw": {
+          "x": 707.9375,
+          "y": 247,
+          "width": 58.421875,
+          "height": 28
+        },
+        "hud": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 44
+        }
+      }
+    },
+    {
+      "name": "Terrain garde au moins 178 px en paysage",
+      "ok": true,
+      "detail": {
+        "scene": {
+          "x": 0,
+          "y": 44,
+          "width": 844,
+          "height": 194
+        },
+        "contactbar": {
+          "x": 0,
+          "y": 238,
+          "width": 844,
+          "height": 46
+        },
+        "beacon-throw": {
+          "x": 707.9375,
+          "y": 247,
+          "width": 58.421875,
+          "height": 28
+        },
+        "hud": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 44
+        }
+      }
+    },
+    {
+      "name": "Aucun débordement 844×390",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Bouton P fonctionne sur écran court",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Portrait garde au moins 245 px de terrain",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Portrait sans débordement et bouton visible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Accessibilité activable sans modifier le stock",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Parcours complet donne le bilan",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucun réseau externe nécessaire",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "Aucune erreur JS ou console",
+      "ok": true,
+      "detail": {
+        "page": [],
+        "console": []
+      }
+    }
+  ],
+  "captures": [
+    {
+      "file": "44_atelier_entree.png",
+      "origin": "Reprise avant seuil depuis le pilote, puis R, déplacement W et E au clavier dans Chromium ; aucune position injectée",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "45_coffret_ouvert.png",
+      "origin": "E terminé dans Chromium depuis un export réel à mi-collecte ; chariot désormais ouvert et vide",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "46_balise_sans_torche.png",
+      "origin": "P terminé dans Chromium puis L ; le cône personnel est éteint, la balise fixée au sol éclaire seule",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "47_atelier_balisage.png",
+      "origin": "Export non modifié 07-atelier-balise du parcours complet ; circuits et torche coupés, première source lancée par entrées publiques",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "48_coursive_conduites.png",
+      "origin": "Export 09-coursive-balisee non modifié ; seconde balise dans la nouvelle coursive, lumière calculée par occlusion",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "49_carte_derivation.png",
+      "origin": "Carte affichée par M depuis 10-retour-medical ; uniquement les lieux effectivement relevés",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "50_defense_sur_balise.png",
+      "origin": "Export 12-defense-balisee : défense terminée sans lampe personnelle ni éclairage de service, troisième balise encore active",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "51_balises_paysage.png",
+      "origin": "Viewport émulé 844×390 ; bouton P dans l’instrumentation extérieure au terrain, pas de téléphone physique",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "52_balises_portrait.png",
+      "origin": "Viewport émulé 390×844 ; source et réserves conservées au changement de format",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "53_repli_balises.png",
+      "origin": "Export final non modifié du parcours continu ; trois balises utilisées, une charge restante, équipe au repli",
+      "nativeTantalus": false,
+      "imageEdited": false
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "requests": [],
+  "htmlSHA256": "d7e6a797fda5a6c7774f32ba6191757e305734382c3f6b23407555372c992a0f",
+  "nativeTantalus": false
+}

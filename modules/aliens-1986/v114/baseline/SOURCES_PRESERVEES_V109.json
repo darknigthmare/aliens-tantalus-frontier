@@ -1,0 +1,98 @@
+{
+  "archive": "ALIENS_1986_V109_LOGISTIQUE_SOUS_PRESSION_RC1.zip",
+  "sha256": "080d26e72ec8a9cf39d4fac190aac2ceea9f11bf38682ed33a0fb23b8176db78",
+  "preserved": [
+    {
+      "path": "qa/adapter.test.mjs",
+      "size": 2235,
+      "sha256": "7e6e5237a16a74042e073998e5cd1c498d6ff59a07561c5e3d6c1422232f017c"
+    },
+    {
+      "path": "qa/contact-v108.test.mjs",
+      "size": 16584,
+      "sha256": "f524d3941e5d9001f51aa278bb678549006143973a1d33fa71cdbe391336bf27"
+    },
+    {
+      "path": "qa/core.test.mjs",
+      "size": 9631,
+      "sha256": "ecc82666217f9a1b76365192aeb3b880d1f7d93d4936797aab223ac37d32961c"
+    },
+    {
+      "path": "qa/installer.test.mjs",
+      "size": 3607,
+      "sha256": "e0181e70e659f38e95069ba56848120653ec283b04e0878c8d3cc0cc57d0e038"
+    },
+    {
+      "path": "qa/logistics-v109.test.mjs",
+      "size": 14410,
+      "sha256": "8ca8f08b2e3571f71c23339c8566c43bb6a64ace456da285db77ae1089257676"
+    },
+    {
+      "path": "qa/operation.test.mjs",
+      "size": 9124,
+      "sha256": "7b292f5302fd3bac360db397ca914a5529dc61157fd313ed3c13244e8f7d78b9"
+    },
+    {
+      "path": "src/aliens-1986-spatial-v106.mjs",
+      "size": 3423,
+      "sha256": "13ba52f166a4b2a5c8647c779d8cca59b84acfafbfdeea7ae0e49edc31fe5a43"
+    },
+    {
+      "path": "src/contact-v108.mjs",
+      "size": 15462,
+      "sha256": "142eab4666f72a93f6e761c39f7b41e06725c7b1f18bbcc1e691171826db81e7"
+    },
+    {
+      "path": "src/contact-v109.mjs",
+      "size": 15495,
+      "sha256": "dc79c46ab41d377ef80d973b69320f8003a942e2ebd0703fa65078ca2ebf61fc"
+    },
+    {
+      "path": "src/logistics-v109.mjs",
+      "size": 10521,
+      "sha256": "dfbf82528ca6047e85b8816ef4cdee701a3b6a9b8f19e2b9ec3169af221f4b20"
+    },
+    {
+      "path": "src/operation-scenes-v107.mjs",
+      "size": 6476,
+      "sha256": "41e351a13feeb1d9b5f6477fc2485446f73493b72425d9a5d23932be5f5a3bb3"
+    },
+    {
+      "path": "src/operation-scenes-v109.mjs",
+      "size": 6568,
+      "sha256": "c0f0b2847e107f1d83838c5a85d24fee9507298e96548baf5e4b30076e38ce41"
+    },
+    {
+      "path": "src/operation-v107.mjs",
+      "size": 24386,
+      "sha256": "012eb882162c7ffa3ab98e5b8b7f55931c21bbfd94c360cae452d76b5d975fa9"
+    },
+    {
+      "path": "src/operation-v108.mjs",
+      "size": 28522,
+      "sha256": "b5a8750cf07457afaff449d8c6854c74157f26602e025d95183bf0de59853fae"
+    },
+    {
+      "path": "src/operation-v109.mjs",
+      "size": 29094,
+      "sha256": "c22c23161eb2fc0f93ed245714e5b0949d337e4498322770e3414619262da086"
+    },
+    {
+      "path": "src/spatial-core-v108.mjs",
+      "size": 18588,
+      "sha256": "cbc5c2ad29666b181514604db48b399524e298403277237868021a36646e3edc"
+    },
+    {
+      "path": "src/spatial-core.mjs",
+      "size": 18415,
+      "sha256": "974cbdf30ee94e57d142c62e03cc249fc6e11dc4fff63d8214b39b19747bbd35"
+    },
+    {
+      "path": "src/validation-scenes.mjs",
+      "size": 6490,
+      "sha256": "9e2fd1a2b4f1d5303bb69918c4a0ef46d51e61f290ff8d6a0ad8b894634ddb19"
+    }
+  ],
+  "count": 18,
+  "scope": "Sources et tests historiques inchangés ; preview et recettes courantes mis à niveau. Aucun raccord natif."
+}
