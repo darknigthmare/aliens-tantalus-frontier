@@ -1,0 +1,292 @@
+# RECUPERATION DE TRAVAIL EN COURS — NE PAS ACTIVER TEL QUEL
+# Base: darknigthmare/aliens-tantalus-frontier
+# Commit de base: 882ffdee7ed83a549bf2c1c4b9fa38de8e70edc2 (main)
+# Date: 2026-11-25
+#
+# Ce patch conserve uniquement les six modifications dont l'application locale
+# avait ete confirmee avant l'indisponibilite de l'environnement.
+# Les fichiers de base ont ensuite ete relus sur le commit ci-dessus et le
+# patch reconstruit textuellement. Aucun test d'execution n'est revendique.
+#
+# INCLUS
+# - Entree ALIEN: BLACKOUT dans le menu et parcours clavier/manette.
+# - Navigation dans le meme onglet via le cycle de dechargement natif.
+# - Adaptation du parcours QA du menu de quatre a cinq entrees.
+# - Admission precise par manifeste et copie de la seule page jouable.
+#
+# A TERMINER AVANT APPLICATION AU JEU OU FUSION
+# - Le manifeste scripts/alien-blackout-files-v070.json n'a PAS ete genere.
+#   Son import est obligatoire: sans lui, check/build echoueraient.
+# - Finaliser les fichiers sources recuperes, leur provenance et leurs empreintes.
+# - Etendre isRecoveredSource uniquement aux 13 chemins de QA autorises sous
+#   docs/alien-blackout/validation-2026-11-25/, puis figer ces chemins.
+# - Ajouter la succession d'empreintes datee apres V187/Obscura, sans modifier
+#   les recus historiques ni desactiver les controles.
+# - Le fichier de tests verify-blackout-host-v070.mjs a seulement ete redige
+#   dans une requete interrompue: son ecriture n'a PAS ete confirmee. Il est
+#   donc exclu de ce patch. La nouvelle entree package.json reste a ajouter.
+# - Executer les tests du menu, des sauvegardes, d'admission, check, build,
+#   check:built et le parcours navigateur aller-retour, avec les vrais fichiers.
+# - Verifier le retour depuis le DLC et conserver les sauvegardes separees.
+#
+# Le contenu est une proposition d'integration au lanceur d'un module autonome,
+# pas une integration terminee au moteur natif de campagne/MIRE.
+# Conserver ce patch comme archive de reprise; ne pas l'appliquer automatiquement.
+#
+diff --git a/index.html b/index.html
+--- a/index.html
++++ b/index.html
+@@ -61,6 +61,7 @@
+         <button id="title-continue" type="button">CONTINUER</button>
+         <button id="title-new" type="button" data-confirm="false" data-i18n="title.new">NOUVELLE PARTIE</button>
+         <button id="title-forge" type="button" data-i18n="title.forge">FRONTIER FORGE</button>
++        <button id="title-blackout" type="button">ALIEN: BLACKOUT</button>
+         <button id="title-options" type="button" data-i18n="title.options">SYSTÈME</button>
+       </nav>
+       <p id="title-profile-status" class="title-profile-status">PROFIL 1 · SAUVEGARDE LOCALE</p>
+diff --git a/src/title-screen-v61.js b/src/title-screen-v61.js
+--- a/src/title-screen-v61.js
++++ b/src/title-screen-v61.js
+@@ -2,6 +2,7 @@
+ import { tV185, tFromFrenchV185 } from './i18n-v185.js';
+ 
+ export const TITLE_SCREEN_SCHEMA = 61;
++export const BLACKOUT_DLC_URL_V070 = '/dlc/alien-blackout/index.html';
+ 
+ export function resolveTitleContinueTarget(save) {
+   if (save?.strategy?.currentOperation) return 'operations';
+@@ -13,7 +14,8 @@
+ const MENU_KEYS = new Set([...START_KEYS, 'ArrowUp', 'ArrowDown', 'Home', 'End', 'Tab', 'Escape']);
+ 
+ export class TitleScreenController {
+-  constructor({ root, app, scene = null, getSave, getRecoveryStatus = () => null, onUnlock, onContinue, onNewTimeline, onForge, onOptions }) {
++  constructor({ root, app, scene = null, getSave, getRecoveryStatus = () => null, onUnlock, onContinue, onNewTimeline, onForge, onOptions,
++    onBlackout = () => globalThis.location.assign(BLACKOUT_DLC_URL_V070) }) {
+     if (!root || !app) throw new Error('Surface écran titre V61 absente.');
+     this.root = root;
+     this.app = app;
+@@ -25,6 +27,7 @@
+     this.onNewTimeline = onNewTimeline;
+     this.onForge = onForge;
+     this.onOptions = onOptions;
++    this.onBlackout = onBlackout;
+     this.state = 'idle';
+     this.gamepadFrame = 0;
+     this.gamepads = new Map();
+@@ -39,6 +42,7 @@
+     this.continueButton = root.querySelector('#title-continue');
+     this.newButton = root.querySelector('#title-new');
+     this.forgeButton = root.querySelector('#title-forge');
++    this.blackoutButton = root.querySelector('#title-blackout');
+     this.optionsButton = root.querySelector('#title-options');
+     this.profileStatus = root.querySelector('#title-profile-status');
+     this.liveStatus = root.querySelector('#title-live-status');
+@@ -61,7 +65,9 @@
+       this.listeners.push(() => target.removeEventListener(type, listener));
+     };
+     for (const [button, action] of [[this.startButton, 'openMenu'], [this.continueButton, 'continueGame'],
+-      [this.optionsButton, 'openOptions'], [this.newButton, 'requestNewTimeline'], [this.forgeButton, 'openForge']]) {
++      [this.optionsButton, 'openOptions'], [this.newButton, 'requestNewTimeline'], [this.forgeButton, 'openForge'],
++      [this.blackoutButton, 'openBlackout']]) {
++      if (!button) continue;
+       listen(button, 'click', (event) => {
+         // A double click is a single intention, never confirmation of an overwrite.
+         if (event.detail > 1) return;
+@@ -99,7 +105,7 @@
+   }
+ 
+   menuButtons() {
+-    return [this.continueButton, this.newButton, this.forgeButton, this.optionsButton]
++    return [this.continueButton, this.newButton, this.forgeButton, this.blackoutButton, this.optionsButton]
+       .filter((button) => button && !button.hidden && !button.disabled);
+   }
+ 
+@@ -215,6 +221,21 @@
+     this.onForge?.();
+   }
+ 
++  openBlackout() {
++    if (this.root.hidden || this.state !== 'menu' || !this.blackoutButton || this.blackoutButton.disabled) return false;
++    this.suspendInput();
++    // The title view has already stopped the host runtimes. Use ordinary
++    // same-tab navigation so app.js keeps its native unload/save lifecycle.
++    // Do not start a campaign, replace a timeline or merge the DLC save here.
++    try {
++      return this.onBlackout?.() !== false;
++    } catch {
++      this.liveStatus.textContent = 'ALIEN: BLACKOUT — ouverture indisponible. Réessayez.';
++      this.focusButton(this.blackoutButton);
++      return false;
++    }
++  }
++
+   requestNewTimeline() {
+     if (this.root.hidden || this.state !== 'menu') return;
+     if (this.newButton.dataset.confirm !== 'true') {
+diff --git a/scripts/qa-title-compositions-v163.py b/scripts/qa-title-compositions-v163.py
+--- a/scripts/qa-title-compositions-v163.py
++++ b/scripts/qa-title-compositions-v163.py
+@@ -239,14 +239,14 @@
+                           and c['x'] + c['w'] <= size['width'] + .5 and c['y'] + c['h'] <= size['height'] + .5) for c in before['controls']))
+                     capture(page, label + '-menu.png')
+                     # Real arrow keys exercise the complete focus ring including
+-                    # the deferred Forge button without entering that workspace.
++                    # Forge and the separate Blackout module without launching either.
+                     page.keyboard.press('Home')
+                     page.wait_for_function('()=>document.activeElement?.id==="title-continue"')
+                     focus_order = []
+-                    for _ in range(4):
++                    for _ in range(5):
+                         focus_order.append(observed(page)['focus'])
+                         page.keyboard.press('ArrowDown')
+-                    check(label + ': native keyboard reaches each existing menu action once', focus_order == ['title-continue', 'title-new', 'title-forge', 'title-options'])
++                    check(label + ': native keyboard reaches each existing menu action once', focus_order == ['title-continue', 'title-new', 'title-forge', 'title-blackout', 'title-options'])
+                     page.keyboard.press('End')
+                     page.keyboard.press('Enter')
+                     page.wait_for_function('()=>!__ATF_V61__.snapshot().visible&&document.querySelector("[data-panel=settings]").classList.contains("active")')
+diff --git a/scripts/build.mjs b/scripts/build.mjs
+--- a/scripts/build.mjs
++++ b/scripts/build.mjs
+@@ -1,4 +1,5 @@
+ import { verifyPublicAdmissionsV163 } from './public-release-admissions-v163.mjs';
++import { copyBlackoutPublicFilesV070 } from './alien-blackout-admission-v070.mjs';
+ import { access, cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+ import { join } from 'node:path';
+ import { RELEASE, validateContent } from '../src/content.js';
+@@ -33,6 +34,7 @@
+ for (const directory of ['src', 'assets']) {
+   await cp(join(root, directory), join(output, directory), { recursive: true, filter: assetFilter });
+ }
++await copyBlackoutPublicFilesV070(root, output);
+ await cp(join(root, 'user-reference-library-v100.css'), join(output, 'user-reference-library-v100.css'));
+ await cp(join(root, 'specimen-bench-v106.css'), join(output, 'specimen-bench-v106.css'));
+ await cp(join(root, 'command-v110.css'), join(output, 'command-v110.css'));
+diff --git a/scripts/verify-public-release-v86.mjs b/scripts/verify-public-release-v86.mjs
+--- a/scripts/verify-public-release-v86.mjs
++++ b/scripts/verify-public-release-v86.mjs
+@@ -1,4 +1,5 @@
+ import { publicReleasePathAdmissionV163, verifyPublicAdmissionsV163 } from './public-release-admissions-v163.mjs';
++import { blackoutPathAdmissionV070, verifyBlackoutFilesV070 } from './alien-blackout-admission-v070.mjs';
+ import assert from 'node:assert/strict';
+ import { readdir, readFile, lstat } from 'node:fs/promises';
+ import { basename, join, resolve } from 'node:path';
+@@ -558,6 +559,8 @@
+ // private fixtures anywhere inside the distribution tree.
+ export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
+   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
++  const blackoutAdmission = blackoutPathAdmissionV070(path, { directory, built });
++  if (blackoutAdmission !== null) return blackoutAdmission;
+   if (V179_SOURCE_ONLY_SCRIPTS.has(path)) return !built;
+   if (!built && FORGE_TOOLING_V140.has(path)) return true;
+   if (FORGE_STYLES_V140.has(path)) return true;
+@@ -622,6 +625,7 @@
+     }
+   }
+   await walk(resolve(root));
++  await verifyBlackoutFilesV070(root, { built });
+   const { USER_REFERENCE_LIBRARY_V100 } = await import(pathToFileURL(join(resolve(root), 'src/user-reference-library-v100.js')).href);
+   const registeredJpgs = USER_REFERENCE_LIBRARY_V100.map(entry => entry.path.replace(/^\//, '')).filter(path => path.endsWith('.jpg'));
+   assert.deepEqual([...new Set(registeredJpgs)].sort(), [...USER_REFERENCE_JPG_PATHS_V100].sort(), 'Reference JPG allowlist differs from the runtime registry.');
+diff --git a/scripts/alien-blackout-admission-v070.mjs b/scripts/alien-blackout-admission-v070.mjs
+new file mode 100644
+--- /dev/null
++++ b/scripts/alien-blackout-admission-v070.mjs
+@@ -0,0 +1,98 @@
++/** Exact Blackout source recovery and standalone delivery admission.
++ * Historical reports stay source-only; only the reviewed playable page ships.
++ */
++import assert from 'node:assert/strict';
++import { createHash } from 'node:crypto';
++import { readFileSync } from 'node:fs';
++import { lstat, readFile, mkdir, copyFile } from 'node:fs/promises';
++import { dirname, join, resolve } from 'node:path';
++
++const manifest = JSON.parse(readFileSync(new URL('./alien-blackout-files-v070.json', import.meta.url), 'utf8'));
++const sha = bytes => createHash('sha256').update(bytes).digest('hex');
++export const BLACKOUT_PUBLIC_FILES_V070 = Object.freeze(['dlc/alien-blackout/index.html']);
++export const BLACKOUT_SOURCE_TOOLS_V070 = Object.freeze([
++  'scripts/alien-blackout-admission-v070.mjs',
++  'scripts/alien-blackout-files-v070.json',
++  'scripts/verify-blackout-host-v070.mjs'
++]);
++const validPath = path => typeof path === 'string' && /^[A-Za-z0-9_./-]+$/.test(path)
++  && path.split('/').every(part => part && part !== '.' && part !== '..' && !part.startsWith('.'));
++const isRecoveredSource = path => path.startsWith('modules/alien-blackout/')
++  || path === 'archives/alien-blackout-20261125/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip'
++  || path === 'docs/alien-blackout/INTEGRATION_2026-11-25.md';
++
++assert.equal(manifest.schema, 1, 'Unsupported Blackout admission schema');
++assert.ok(Array.isArray(manifest.files) && manifest.files.length > 0, 'Blackout file admission is empty');
++const rows = manifest.files.map(row => {
++  assert.deepEqual(Object.keys(row).sort(), ['bytes', 'path', 'sha256']);
++  assert.ok(validPath(row.path) && (isRecoveredSource(row.path) || BLACKOUT_PUBLIC_FILES_V070.includes(row.path)),
++    'Unexpected Blackout manifest path: ' + row.path);
++  assert.ok(Number.isSafeInteger(row.bytes) && row.bytes > 0, 'Invalid Blackout file size: ' + row.path);
++  assert.match(row.sha256, /^[a-f0-9]{64}$/, 'Invalid Blackout file digest: ' + row.path);
++  return Object.freeze({ ...row });
++});
++assert.deepEqual(rows.map(row => row.path), [...new Set(rows.map(row => row.path))].sort(),
++  'Blackout admission must use unique, sorted paths');
++for (const path of BLACKOUT_PUBLIC_FILES_V070) assert.ok(rows.some(row => row.path === path), 'Missing Blackout playable admission');
++export const BLACKOUT_REPOSITORY_FILES_V070 = Object.freeze(rows);
++const sourcePaths = new Set([...rows.map(row => row.path), ...BLACKOUT_SOURCE_TOOLS_V070]);
++const publicPaths = new Set(BLACKOUT_PUBLIC_FILES_V070);
++const directoriesFor = paths => {
++  const directories = new Set();
++  for (const path of paths) {
++    const parts = path.split('/');
++    for (let count = 1; count < parts.length; count++) directories.add(parts.slice(0, count).join('/'));
++  }
++  return directories;
++};
++const sourceDirectories = directoriesFor(sourcePaths), publicDirectories = directoriesFor(publicPaths);
++const reserved = path => ['modules', 'archives', 'dlc'].some(root => path === root || path.startsWith(root + '/'))
++  || path === 'docs/alien-blackout' || path.startsWith('docs/alien-blackout/');
++
++/** null delegates unrelated paths to the existing host policy. No wildcard
++ * grants or manifest-controlled external destinations are accepted. */
++export function blackoutPathAdmissionV070(path, { directory = false, built = false } = {}) {
++  if (!validPath(path)) return reserved(String(path)) ? false : null;
++  if (BLACKOUT_SOURCE_TOOLS_V070.includes(path)) return !built && !directory;
++  if (built && (sourcePaths.has(path) || sourceDirectories.has(path)) && !publicPaths.has(path) && !publicDirectories.has(path)) {
++    return reserved(path) || path.startsWith('docs/alien-blackout') ? false : null;
++  }
++  const paths = built ? publicPaths : sourcePaths, directories = built ? publicDirectories : sourceDirectories;
++  if (directory && directories.has(path)) return true;
++  if (!directory && paths.has(path)) return true;
++  return reserved(path) ? false : null;
++}
++
++async function readVerified(root, row) {
++  const path = join(root, row.path);
++  // Reject links in every path component, including when used by the builder
++  // without the full source-tree walker.
++  let current = resolve(root);
++  assert.equal((await lstat(current)).isSymbolicLink(), false, 'Blackout root is a symbolic link');
++  for (const part of row.path.split('/')) {
++    current = join(current, part);
++    assert.equal((await lstat(current)).isSymbolicLink(), false, 'Blackout symbolic link: ' + row.path);
++  }
++  assert.equal((await lstat(path)).isFile(), true, 'Blackout entry is not a file: ' + row.path);
++  const bytes = await readFile(path);
++  assert.equal(bytes.length, row.bytes, 'Blackout size mismatch: ' + row.path);
++  assert.equal(sha(bytes), row.sha256, 'Blackout digest mismatch: ' + row.path);
++  return bytes;
++}
++
++export async function verifyBlackoutFilesV070(root, { built = false } = {}) {
++  const selected = built ? rows.filter(row => publicPaths.has(row.path)) : rows;
++  for (const row of selected) await readVerified(root, row);
++  return Object.freeze({ files: selected.length, publicFiles: publicPaths.size, nativeCampaign: false });
++}
++
++export async function copyBlackoutPublicFilesV070(root, output) {
++  assert.notEqual(resolve(root), resolve(output), 'Blackout build output must differ from source');
++  for (const row of rows.filter(row => publicPaths.has(row.path))) {
++    await readVerified(root, row);
++    const target = join(output, row.path);
++    await mkdir(dirname(target), { recursive: true });
++    await copyFile(join(root, row.path), target);
++  }
++  return verifyBlackoutFilesV070(output, { built: true });
++}
