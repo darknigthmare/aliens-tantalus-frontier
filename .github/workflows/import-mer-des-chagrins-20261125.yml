@@ -1,0 +1,345 @@
+name: Import reviewed Mer des Chagrins deliverables
+
+"on":
+  push:
+    branches:
+      - codex/mer-des-chagrins-github-20261125
+    paths:
+      - .github/workflows/import-mer-des-chagrins-20261125.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mer-des-chagrins-import-20261125
+  cancel-in-progress: false
+
+jobs:
+  import-reviewed-deliverables:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/codex/mer-des-chagrins-github-20261125'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - name: Check out the exact import branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: codex/mer-des-chagrins-github-20261125
+          fetch-depth: 2
+          persist-credentials: false
+          sparse-checkout: |
+            .github
+            .ai-tools
+            scripts
+            src
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+      - name: Download the reviewed transport
+        run: |
+          curl --fail --location --retry 3 --retry-all-errors --max-time 600 'https://sb-2n8beje605a0.vercel.run/mer-des-chagrins-import-20261125.tar.gz' --output "$RUNNER_TEMP/mer-des-chagrins-import-20261125.tar.gz"
+      - name: Verify every original and stage the exact payload
+        env:
+          TRANSFER_ARCHIVE_SHA256: 512cc15edf039cacd7978d8cfa981a7bee562980403ce5bfe72100088b56ae87
+          TRANSFER_MANIFEST_SHA256: 735a1078cb65032c66db09d9521d75bf7f38501e96f8ad63980d18466448c475
+        run: |
+          cat > "$RUNNER_TEMP/import_transport.py" <<'PY'
+          #!/usr/bin/env python3
+          """Verify and stage one pinned Mer des Chagrins transport; never commit or push."""
+          import argparse
+          import hashlib
+          import json
+          import os
+          from pathlib import Path, PurePosixPath
+          import re
+          import shutil
+          import stat
+          import subprocess
+          import sys
+          import tarfile
+          import tempfile
+          
+          sys.dont_write_bytecode = True
+          BASE = "001a20bdc0f9f1a3c835e84d8f3c9434bc159330"
+          BRANCH = "codex/mer-des-chagrins-github-20261125"
+          REPOSITORY = "darknigthmare/aliens-tantalus-frontier"
+          BOOTSTRAP = ".github/workflows/import-mer-des-chagrins-20261125.yml"
+          MANIFEST_NAME = "TRANSFER_MANIFEST.json"
+          ALLOWED_MODIFIED = {
+              ".gitattributes", ".vercelignore", "package.json", "index.html",
+              "title-screen-v61.css", "src/title-screen-v61.js", "scripts/build.mjs",
+              "scripts/build-asset-filter.mjs", "scripts/verify-public-release-v86.mjs",
+              "scripts/build-dev-tools-v188.mjs", "scripts/verify-dev-tools-v188.mjs",
+          }
+          ALLOWED_NEW = {
+              "scripts/mer-des-chagrins-admission-20261125.mjs",
+              "scripts/verify-mer-des-chagrins-admission-20261125.mjs",
+              "scripts/verify-mer-des-chagrins-campaign-20261125.mjs",
+              "scripts/restore-mer-des-chagrins-archives.py",
+              "scripts/verify-mer-des-chagrins-restore.py",
+              "docs/MER_DES_CHAGRINS_GITHUB_20261125.md",
+              "docs/MER_DES_CHAGRINS_VERIFICATION_20261125.json",
+          }
+          MAX_FILES = 10000
+          MAX_FILE_BYTES = 100 * 1024 * 1024
+          MAX_PAYLOAD_BYTES = 2 * 1024 * 1024 * 1024
+          MAX_MANIFEST_BYTES = 16 * 1024 * 1024
+          
+          def require(condition, message):
+              if not condition:
+                  raise ValueError(message)
+          
+          def git(repo, *args):
+              return subprocess.check_output(["git", "-C", str(repo), *args],
+                                             env={**os.environ, "GIT_LITERAL_PATHSPECS": "1"})
+          
+          def names(raw):
+              return [value.decode("utf-8", "strict") for value in raw.split(b"\0") if value]
+          
+          def safe_path(name):
+              return (isinstance(name, str) and name and
+                      not any(ord(c) < 32 or c == "\\" for c in name) and
+                      not name.startswith("/") and
+                      all(part and part not in (".", "..") and
+                          part.lower() not in (".git", ".github") for part in name.split("/")) and
+                      str(PurePosixPath(name)) == name)
+          
+          def allowed_path(name):
+              return safe_path(name) and (
+                  name in ALLOWED_MODIFIED or name in ALLOWED_NEW or
+                  name.startswith("dlc/") or name.startswith("archives/mer-des-chagrins-20261125/"))
+          
+          def sha256_stream(stream):
+              result = hashlib.sha256()
+              for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+                  result.update(chunk)
+              return result.hexdigest()
+          
+          def tree_entries(raw):
+              result = {}
+              for line in raw.split(b"\0"):
+                  if not line:
+                      continue
+                  header, name = line.split(b"\t", 1)
+                  mode, kind, sha = header.decode("ascii").split()
+                  path = name.decode("utf-8", "strict")
+                  require(path not in result, "Duplicate Git tree path.")
+                  result[path] = (mode, kind, sha)
+              return result
+          
+          def validate_checkout(repo):
+              require(git(repo, "rev-parse", "--show-toplevel").decode().strip() == str(repo),
+                      "The target must be the root of the checked-out repository.")
+              require(git(repo, "symbolic-ref", "--quiet", "--short", "HEAD").decode().strip() == BRANCH,
+                      "The target branch must be checked out by name.")
+              if os.environ.get("GITHUB_REPOSITORY"):
+                  require(os.environ["GITHUB_REPOSITORY"] == REPOSITORY, "Unexpected GitHub repository.")
+              if os.environ.get("GITHUB_REF"):
+                  require(os.environ["GITHUB_REF"] == "refs/heads/" + BRANCH, "Unexpected workflow ref.")
+              require(not git(repo, "status", "--porcelain=v1", "-z", "--untracked-files=all"),
+                      "The checkout must be clean before import.")
+              subprocess.run(["git", "-C", str(repo), "merge-base", "--is-ancestor", BASE, "HEAD"], check=True)
+              require(set(names(git(repo, "diff", "--name-only", "-z", BASE, "HEAD"))) == {BOOTSTRAP},
+                      "Only the exact bootstrap workflow may differ from the pinned base.")
+              base_tree = tree_entries(git(repo, "ls-tree", "-rz", BASE))
+              head_tree = tree_entries(git(repo, "ls-tree", "-rz", "HEAD"))
+              require(BOOTSTRAP not in base_tree, "Bootstrap workflow already exists in the base.")
+              require(head_tree.get(BOOTSTRAP, ())[:2] == ("100644", "blob"),
+                      "Bootstrap must be a new regular tracked workflow file.")
+              require({k: v for k, v in head_tree.items() if k != BOOTSTRAP} == base_tree,
+                      "The bootstrap commit altered another Git tree entry.")
+              return base_tree
+          
+          def validate_manifest(manifest, base_tree):
+              require(isinstance(manifest, dict) and manifest.get("schemaVersion") == 1,
+                      "Invalid transport manifest schema.")
+              require(manifest.get("baseCommit") == BASE, "Unexpected manifest base commit.")
+              require(manifest.get("branch") == BRANCH, "Unexpected manifest branch.")
+              rows = manifest.get("files")
+              require(isinstance(rows, list) and 0 < len(rows) <= MAX_FILES, "Invalid transport file list.")
+              require(type(manifest.get("fileCount")) is int and manifest["fileCount"] == len(rows),
+                      "Manifest file count differs.")
+              entries = {}
+              total = 0
+              for row in rows:
+                  require(isinstance(row, dict), "Invalid file record.")
+                  path = row.get("path")
+                  require(allowed_path(path), "Path is outside the authorized payload: " + repr(path))
+                  require(path not in entries, "Duplicate payload path: " + path)
+                  size = row.get("sizeBytes")
+                  require(type(size) is int and 0 <= size <= MAX_FILE_BYTES, "Invalid payload file size.")
+                  require(isinstance(row.get("sha256"), str) and re.fullmatch(r"[a-f0-9]{64}", row["sha256"]),
+                          "Invalid payload SHA-256.")
+                  require(isinstance(row.get("gitBlobSha1"), str) and re.fullmatch(r"[a-f0-9]{40}", row["gitBlobSha1"]),
+                          "Invalid payload Git blob SHA.")
+                  require(row.get("mode") in ("100644", "100755"), "Only regular Git file modes are allowed.")
+                  previous = base_tree.get(path)
+                  if previous is None:
+                      require(row.get("previousGitBlobSha1") is None, "A new file claims a previous Git blob.")
+                      require(row["mode"] == "100644", "New imported files must use regular non-executable mode.")
+                      require(path not in ALLOWED_MODIFIED, "An expected existing integration file is missing from the base.")
+                  else:
+                      require(path in ALLOWED_MODIFIED, "An unexpected existing file would be overwritten.")
+                      require(previous[1] == "blob" and previous[0] in ("100644", "100755"),
+                              "Existing target is not a regular Git blob.")
+                      require(row.get("previousGitBlobSha1") == previous[2], "Previous Git blob does not match the base.")
+                      require(row["mode"] == previous[0], "An existing Git file mode would change.")
+                  entries[path] = row
+                  total += size
+              require(total <= MAX_PAYLOAD_BYTES, "Transport payload exceeds the reviewed size bound.")
+              for path in entries:
+                  parts = path.split("/")
+                  require(not any("/".join(parts[:i]) in entries for i in range(1, len(parts))),
+                          "Payload file/directory collision.")
+              return entries
+          
+          def regular_target(repo, path, must_exist):
+              target = repo / path
+              parent = repo
+              for part in path.split("/")[:-1]:
+                  parent = parent / part
+                  if os.path.lexists(parent):
+                      require(stat.S_ISDIR(parent.lstat().st_mode), "Target parent is not a real directory: " + path)
+              exists = os.path.lexists(target)
+              require(exists == must_exist, "Unexpected existing or missing target: " + path)
+              if exists:
+                  require(stat.S_ISREG(target.lstat().st_mode), "Target is not a regular file: " + path)
+              return target
+          
+          def existing_blob(path):
+              size = path.stat().st_size
+              result = hashlib.sha1(b"blob " + str(size).encode("ascii") + b"\0")
+              with path.open("rb") as stream:
+                  for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+                      result.update(chunk)
+              return result.hexdigest()
+          
+          def extract_verified(archive, destination, archive_pin, manifest_pin, base_tree):
+              require(re.fullmatch(r"[a-f0-9]{64}", archive_pin or "") is not None, "Missing or invalid archive pin.")
+              require(re.fullmatch(r"[a-f0-9]{64}", manifest_pin or "") is not None, "Missing or invalid manifest pin.")
+              require(stat.S_ISREG(archive.lstat().st_mode), "Transport archive must be a regular file.")
+              with archive.open("rb") as raw:
+                  require(sha256_stream(raw) == archive_pin, "Transport archive SHA-256 mismatch.")
+                  raw.seek(0)
+                  with tarfile.open(fileobj=raw, mode="r|gz") as tar:
+                      first = tar.next()
+                      require(first is not None and first.name == MANIFEST_NAME and
+                              first.type in (tarfile.REGTYPE, tarfile.AREGTYPE) and
+                              0 < first.size <= MAX_MANIFEST_BYTES, "Invalid first transport member.")
+                      stream = tar.extractfile(first)
+                      require(stream is not None, "Missing transport manifest bytes.")
+                      manifest_bytes = stream.read(MAX_MANIFEST_BYTES + 1)
+                      require(len(manifest_bytes) == first.size, "Truncated transport manifest.")
+                      require(hashlib.sha256(manifest_bytes).hexdigest() == manifest_pin, "Transport manifest SHA-256 mismatch.")
+                      entries = validate_manifest(json.loads(manifest_bytes), base_tree)
+                      seen = set()
+                      while True:
+                          member = tar.next()
+                          if member is None:
+                              break
+                          require(member.type in (tarfile.REGTYPE, tarfile.AREGTYPE), "Non-regular tar member refused.")
+                          require(member.name.startswith("files/"), "Unexpected tar member: " + member.name)
+                          path = member.name[len("files/"):]
+                          require(path in entries and safe_path(path), "Unlisted or unsafe tar member: " + member.name)
+                          require(path not in seen, "Duplicate tar member: " + path)
+                          row = entries[path]
+                          require(member.size == row["sizeBytes"], "Tar size differs from manifest: " + path)
+                          output = destination / path
+                          output.parent.mkdir(parents=True, exist_ok=True)
+                          sha256 = hashlib.sha256()
+                          sha1 = hashlib.sha1(b"blob " + str(member.size).encode("ascii") + b"\0")
+                          source = tar.extractfile(member)
+                          require(source is not None, "Missing tar member bytes: " + path)
+                          count = 0
+                          with output.open("xb") as target:
+                              for chunk in iter(lambda: source.read(1024 * 1024), b""):
+                                  count += len(chunk)
+                                  require(count <= member.size, "Oversized tar payload.")
+                                  sha256.update(chunk); sha1.update(chunk); target.write(chunk)
+                          require(count == row["sizeBytes"] and sha256.hexdigest() == row["sha256"] and
+                                  sha1.hexdigest() == row["gitBlobSha1"], "Payload bytes or Git blob mismatch: " + path)
+                          output.chmod(0o755 if row["mode"] == "100755" else 0o644)
+                          seen.add(path)
+                      require(seen == set(entries), "Transport members are missing.")
+              return entries
+          
+          def install_and_stage(repo, prepared, entries):
+              # Validate all target states before the first worktree write.
+              for path, row in entries.items():
+                  target = regular_target(repo, path, row["previousGitBlobSha1"] is not None)
+                  if row["previousGitBlobSha1"] is not None:
+                      require(existing_blob(target) == row["previousGitBlobSha1"], "Local target differs from its previous Git blob.")
+              for path, row in entries.items():
+                  target = regular_target(repo, path, row["previousGitBlobSha1"] is not None)
+                  target.parent.mkdir(parents=True, exist_ok=True)
+                  # A temporary file in the destination directory makes each replacement atomic.
+                  with tempfile.NamedTemporaryFile(prefix=".mer-import-", dir=target.parent, delete=False) as temp:
+                      temp_path = Path(temp.name)
+                      try:
+                          with (prepared / path).open("rb") as source:
+                              shutil.copyfileobj(source, temp, 1024 * 1024)
+                          temp.flush()
+                          os.fchmod(temp.fileno(), 0o755 if row["mode"] == "100755" else 0o644)
+                          os.replace(temp_path, target)
+                      finally:
+                          if temp_path.exists():
+                              temp_path.unlink()
+              with tempfile.NamedTemporaryFile(prefix="mer-pathspec-", dir=prepared.parent) as paths:
+                  paths.write(b"".join(path.encode("utf-8") + b"\0" for path in sorted(entries))); paths.flush()
+                  git(repo, "add", "--sparse", "-f", "--pathspec-from-file=" + paths.name, "--pathspec-file-nul")
+              expected = {path for path, row in entries.items() if row["gitBlobSha1"] != row["previousGitBlobSha1"]}
+              require(set(names(git(repo, "diff", "--cached", "--name-only", "-z"))) == expected,
+                      "The staged change set differs from the exact payload.")
+              index = {}
+              for line in git(repo, "ls-files", "--stage", "-z").split(b"\0"):
+                  if not line:
+                      continue
+                  header, raw_path = line.split(b"\t", 1)
+                  mode, sha, stage = header.decode("ascii").split()
+                  path = raw_path.decode("utf-8", "strict")
+                  require(stage == "0", "Unmerged index entry.")
+                  index[path] = (mode, sha)
+              for path, row in entries.items():
+                  require(index.get(path) == (row["mode"], row["gitBlobSha1"]), "Staged mode or blob differs: " + path)
+          
+          def main():
+              parser = argparse.ArgumentParser(description=__doc__)
+              parser.add_argument("--repo", required=True, type=Path)
+              parser.add_argument("--archive", required=True, type=Path)
+              args = parser.parse_args()
+              repo = args.repo.resolve(strict=True)
+              archive = args.archive.absolute()
+              require(repo not in archive.parents, "Store the transport outside the checked-out repository.")
+              base_tree = validate_checkout(repo)
+              with tempfile.TemporaryDirectory(prefix="mer-verified-", dir=os.environ.get("RUNNER_TEMP")) as temp:
+                  prepared = Path(temp)
+                  entries = extract_verified(archive, prepared,
+                      os.environ.get("TRANSFER_ARCHIVE_SHA256"), os.environ.get("TRANSFER_MANIFEST_SHA256"), base_tree)
+                  # Refuse edits made during transfer validation.
+                  require(not git(repo, "status", "--porcelain=v1", "-z", "--untracked-files=all"),
+                          "Checkout changed during transport validation.")
+                  install_and_stage(repo, prepared, entries)
+              print(json.dumps({"ok": True, "baseCommit": BASE, "branch": BRANCH,
+                                "stagedFiles": len(entries), "payloadBytes": sum(row["sizeBytes"] for row in entries.values())}))
+          if __name__ == "__main__":
+              main()
+          
+          PY
+          python3 "$RUNNER_TEMP/import_transport.py" --repo "$GITHUB_WORKSPACE" --archive "$RUNNER_TEMP/mer-des-chagrins-import-20261125.tar.gz"
+      - name: Verify imported sources, history and distribution policy
+        run: |
+          npm run check:mer-des-chagrins-import
+          npm run test:mer-des-chagrins-import
+          npm run test:dlc:sea-of-sorrows
+          git diff --exit-code
+          test -z "$(git ls-files --others --exclude-standard)"
+      - name: Publish the verified files to the import branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m "Import Mer des Chagrins v0.10 and all 59 recovered deliverables"
+          gh auth setup-git
+          git push origin HEAD:refs/heads/codex/mer-des-chagrins-github-20261125
+          git rev-parse HEAD
