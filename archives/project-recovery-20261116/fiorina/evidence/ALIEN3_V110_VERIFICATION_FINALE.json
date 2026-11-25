@@ -1,0 +1,166 @@
+{
+  "ok": true,
+  "version": 110,
+  "scope": "Fresh extraction of delivered incremental patch. No full native production build or deployment.",
+  "archive": "ALIEN3_FIORINA_V110_GARDER_LE_PASSAGE_SUR_V109.zip",
+  "bytes": 27532055,
+  "sha256": "652719415c65111ac5dee8d812913ee96a61ca43b80ffa50b971488f03e72c17",
+  "manifestFiles": 455,
+  "missing": [],
+  "extra": [],
+  "badHashes": [],
+  "unchangedHistoricalSources": 47,
+  "replayed": [
+    {
+      "label": "V110 unit",
+      "cases": 65,
+      "ok": true
+    },
+    {
+      "label": "V110 install synthetic",
+      "cases": 19,
+      "ok": true
+    },
+    {
+      "label": "V109 regression unit",
+      "cases": 60,
+      "ok": true
+    },
+    {
+      "label": "V109 regression install synthetic",
+      "cases": 19,
+      "ok": true
+    },
+    {
+      "label": "Chromium traffic-route",
+      "controls": 18,
+      "ok": true
+    },
+    {
+      "label": "Chromium traffic-resume",
+      "controls": 13,
+      "ok": true
+    },
+    {
+      "label": "Chromium traffic-gesture",
+      "controls": 13,
+      "ok": true
+    },
+    {
+      "label": "Chromium traffic-hunt",
+      "controls": 6,
+      "ok": true
+    },
+    {
+      "label": "Chromium trap",
+      "controls": 12,
+      "ok": true
+    },
+    {
+      "label": "delivered",
+      "controls": 14,
+      "ok": true
+    },
+    {
+      "label": "codex-browser",
+      "controls": 56,
+      "ok": true
+    }
+  ],
+  "capturesReproduced": [
+    {
+      "file": "qa-v110/captures/06_attente_postes.png",
+      "byteIdentical": true,
+      "sha256": "c027befbd68397d71bd4feaecedc1e0a3c79a4dafa48b4fe44d6133ee24deaf2"
+    },
+    {
+      "file": "qa-v110/captures/06b_verrouillage.png",
+      "byteIdentical": true,
+      "sha256": "3523f19d1b2a1c523cbc3d6eef0087f8e531ddf8a6327d54fee040a3bfb19404"
+    },
+    {
+      "file": "qa-v110/captures/07_postes_tenus.png",
+      "byteIdentical": true,
+      "sha256": "c494ca19e3b337b10fe77a6743a727f5dae3a26d764bf7f2ca0a37d685583ce5"
+    },
+    {
+      "file": "qa-v110/captures/08_attaque_annoncee.png",
+      "byteIdentical": true,
+      "sha256": "a9770bfdfd548d8e9af81b1ee5d10982bd528b1dbdbe801ef720735bd4398ea5"
+    },
+    {
+      "file": "qa-v110/captures/09_coulee.png",
+      "byteIdentical": true,
+      "sha256": "e68c1211c9a617b0402ede9324b2b00fd48d63c6a97fad9cc7db315d0f51717d"
+    },
+    {
+      "file": "qa-v110/captures/10_refroidissement.png",
+      "byteIdentical": true,
+      "sha256": "834b44324153069fd682e8e0ed49d4e7d9aabb88f0027a6124f3f819d837de66"
+    },
+    {
+      "file": "qa-v110/captures/11_retour_morse.png",
+      "byteIdentical": true,
+      "sha256": "db9e6e913157abedafa177f45b4cb76f810e8c5b7889e97d8022e5a6f3f41d93"
+    },
+    {
+      "file": "qa-v110/captures/30_dillon_attend_le_jet.png",
+      "byteIdentical": true,
+      "sha256": "1bd132d29146bdc6d11e98d1b8403eeda7493ecf4f97c88e7886ec3a3eb4255d"
+    },
+    {
+      "file": "qa-v110/captures/31_refermer_en_cours.png",
+      "byteIdentical": true,
+      "sha256": "77bba50ee981a6bfa13515d9dac76fed679502db83f7291348919fcc907572d5"
+    },
+    {
+      "file": "qa-v110/captures/32_jet_referme.png",
+      "byteIdentical": true,
+      "sha256": "665f69046611d3188c63104c94cd23add6824dc158a695e98e3042016666be30"
+    },
+    {
+      "file": "qa-v110/captures/33_attente_volontaire.png",
+      "byteIdentical": true,
+      "sha256": "2f017af1db5c0146d8b7c5b1ac036790a379e857290d1c3186c659a1aa3fcf17"
+    },
+    {
+      "file": "qa-v110/captures/34_reprise_depuis_appui.png",
+      "byteIdentical": true,
+      "sha256": "a8c20a7a011ca8dbb97f4f0c0fcca8f1c30b8c1630690dd4dda5418d6f300f87"
+    },
+    {
+      "file": "qa-v110/captures/35_attente_reprise.png",
+      "byteIdentical": true,
+      "sha256": "1b7aad2ca3285ee17eccac72c0c57157fd2631d330685ec948e972fc82f52e0e"
+    },
+    {
+      "file": "qa-v110/captures/36_fermeture_accessible.png",
+      "byteIdentical": true,
+      "sha256": "1eaabefd22eda2d9464503eb264908953724810fedd67e8c71c7966c28b7ac55"
+    },
+    {
+      "file": "qa-v110/captures/37_postes_apres_attente.png",
+      "byteIdentical": true,
+      "sha256": "f529ebad219a6a7e3e374d77e3faf5bbcb23db470d93091da48a9ebf916e260f"
+    },
+    {
+      "file": "qa-v110/captures/38_retour_apres_fermeture.png",
+      "byteIdentical": true,
+      "sha256": "93ab61991c2bdb7753e1e329c0f5998243bed074bba0185a5efd66d522f49b2e"
+    },
+    {
+      "file": "qa-v110/captures/39_refermer_en_traque.png",
+      "byteIdentical": true,
+      "sha256": "d0be96e6da933b7097aab50438763eb190227e3b4b8d862a31f1fb993679d7e9"
+    },
+    {
+      "file": "qa-v110/captures/40_retour_traque.png",
+      "byteIdentical": true,
+      "sha256": "f03da30d89ff1255de45eb279972ffe1874f71a0b63873dc20fe821d9a67cd2d"
+    }
+  ],
+  "reproducedCaptureCount": 18,
+  "deliveredCaptureCount": 24,
+  "previewRegeneratedByteIdentical": true,
+  "sourceUntouchedAfterVerification": true
+}

@@ -1,0 +1,161 @@
+{
+  "ok": true,
+  "version": 113,
+  "archive": "ALIEN3_FIORINA_V113_SEUILS_DE_FIORINA_SUR_V112.zip",
+  "archiveBytes": 29199402,
+  "archiveSHA256": "cf2d907eb5cdc15da09f0b79ef1007a4858fd15bd2627623cc7e9e3f148c7123",
+  "manifestFiles": 650,
+  "manifestErrors": [],
+  "verificationScope": "Extracted into a clean directory, then reran unit, installation, V112 separate units, directed visuals, full trap after file import, codex, ordinary delivered HTML. No native build.",
+  "tests": {
+    "unit": {
+      "ok": true,
+      "count": 32
+    },
+    "installation": {
+      "ok": true,
+      "count": 19
+    },
+    "previousV112": {
+      "ok": true,
+      "count": 54
+    },
+    "codex": {
+      "ok": true,
+      "count": 85
+    },
+    "delivered": {
+      "ok": true,
+      "count": 20
+    }
+  },
+  "capturesReproduced": 20,
+  "totalCapturesDelivered": 28,
+  "captureComparisons": [
+    {
+      "file": "qa-v113/captures/010_soins_ferme.png",
+      "identical": true,
+      "expected": "f8b86e80c712c1a941d0a9d8085f760ad17f94be749e15160313733e273de880",
+      "actual": "f8b86e80c712c1a941d0a9d8085f760ad17f94be749e15160313733e273de880"
+    },
+    {
+      "file": "qa-v113/captures/020_soins_ouvert.png",
+      "identical": true,
+      "expected": "a8af520795e01564ec4405b49dd392ec12012cc9db1feaa0bbc0a54014ca325b",
+      "actual": "a8af520795e01564ec4405b49dd392ec12012cc9db1feaa0bbc0a54014ca325b"
+    },
+    {
+      "file": "qa-v113/captures/011_galeries_ferme.png",
+      "identical": true,
+      "expected": "132c282e2c3fadfb101f56e2c60be73872b25d41319b08a8d941ee59d78d8fe9",
+      "actual": "132c282e2c3fadfb101f56e2c60be73872b25d41319b08a8d941ee59d78d8fe9"
+    },
+    {
+      "file": "qa-v113/captures/021_galeries_ouvert.png",
+      "identical": true,
+      "expected": "d3811370c7bf40bcaf8a4df913b0cec8e2597b087cf139e0f5606637f0028d03",
+      "actual": "d3811370c7bf40bcaf8a4df913b0cec8e2597b087cf139e0f5606637f0028d03"
+    },
+    {
+      "file": "qa-v113/captures/012_fonderie_ferme.png",
+      "identical": true,
+      "expected": "857bccdf181fc4acc7d869aeebfef7060a78efd58ea803e26cfdc567478747bd",
+      "actual": "857bccdf181fc4acc7d869aeebfef7060a78efd58ea803e26cfdc567478747bd"
+    },
+    {
+      "file": "qa-v113/captures/022_fonderie_ouvert.png",
+      "identical": true,
+      "expected": "58e3d06c4530c5a85113ea68560ce417567bdb8eedd51e9c165bd974b0964bcc",
+      "actual": "58e3d06c4530c5a85113ea68560ce417567bdb8eedd51e9c165bd974b0964bcc"
+    },
+    {
+      "file": "qa-v113/captures/030_ripley_arrivee.png",
+      "identical": true,
+      "expected": "c6371760e9164a5029093bbae254cf2b6e812dee945c6a97ae7f10e90f0a07df",
+      "actual": "c6371760e9164a5029093bbae254cf2b6e812dee945c6a97ae7f10e90f0a07df"
+    },
+    {
+      "file": "qa-v113/captures/031_ripley_prison.png",
+      "identical": true,
+      "expected": "e61a6a250a04852b22b05299d13cf9aad85b1dc468b17fbf46382f54a181cc5e",
+      "actual": "e61a6a250a04852b22b05299d13cf9aad85b1dc468b17fbf46382f54a181cc5e"
+    },
+    {
+      "file": "qa-v113/captures/032_ripley_manteau.png",
+      "identical": true,
+      "expected": "3013f9511872eee3726d26d9091b5f0c78923060130a6e935b078316b1aa66fb",
+      "actual": "3013f9511872eee3726d26d9091b5f0c78923060130a6e935b078316b1aa66fb"
+    },
+    {
+      "file": "qa-v113/captures/033_enregistreur.png",
+      "identical": true,
+      "expected": "952fd23b9d9de626d06c5494db1bb59f6d7eb9e0ba4b7963f597a45e6b2d71e6",
+      "actual": "952fd23b9d9de626d06c5494db1bb59f6d7eb9e0ba4b7963f597a45e6b2d71e6"
+    },
+    {
+      "file": "qa-v113/captures/034_bishop.png",
+      "identical": true,
+      "expected": "5f09039ced7aedfdf52d683bc6833b2b3b004b0586d77b65dfd8918de9d90958",
+      "actual": "5f09039ced7aedfdf52d683bc6833b2b3b004b0586d77b65dfd8918de9d90958"
+    },
+    {
+      "file": "qa-v113/captures/035_torche.png",
+      "identical": true,
+      "expected": "fbe4bd70010baabb7a2de25ee1110754fc179e1ccd93b9874e3ac97bc3e5e3e8",
+      "actual": "fbe4bd70010baabb7a2de25ee1110754fc179e1ccd93b9874e3ac97bc3e5e3e8"
+    },
+    {
+      "file": "qa-v113/captures/036_avant_compagnie.png",
+      "identical": true,
+      "expected": "70e0ecd6418ca8ff3febb6aae46c16c7acc1cae0b4a8225fb9cc9dc4aa484f31",
+      "actual": "70e0ecd6418ca8ff3febb6aae46c16c7acc1cae0b4a8225fb9cc9dc4aa484f31"
+    },
+    {
+      "file": "qa-v113/captures/037_equipe_recuperation.png",
+      "identical": true,
+      "expected": "f63bd2c4d3976da229153b67493fec806096b5002320c4acacefbc1c9660a1a8",
+      "actual": "f63bd2c4d3976da229153b67493fec806096b5002320c4acacefbc1c9660a1a8"
+    },
+    {
+      "file": "qa-v113/captures/50_morse_attend_dillon_reprise.png",
+      "identical": true,
+      "expected": "0ce57664668c073cb7c1aeee065e924f5c75439e3e6a98e452740eccda4f0efb",
+      "actual": "0ce57664668c073cb7c1aeee065e924f5c75439e3e6a98e452740eccda4f0efb"
+    },
+    {
+      "file": "qa-v113/captures/55_file_apres_import.png",
+      "identical": true,
+      "expected": "bc577c204a836245795b2699302e9fe0576f8fb29718427bc0bc66174fa1baed",
+      "actual": "bc577c204a836245795b2699302e9fe0576f8fb29718427bc0bc66174fa1baed"
+    },
+    {
+      "file": "qa-v113/captures/51_le_groupe_repart_reprise.png",
+      "identical": true,
+      "expected": "4fc639482c91ee2ceb64babcd7123a61d225fd1bd84012516b94cf1995948bdc",
+      "actual": "4fc639482c91ee2ceb64babcd7123a61d225fd1bd84012516b94cf1995948bdc"
+    },
+    {
+      "file": "qa-v113/captures/52_postes_apres_file_reprise.png",
+      "identical": true,
+      "expected": "944257889102fd39c22d12f71ea33497d585c941b55e635c6f6ed070b5c2320c",
+      "actual": "944257889102fd39c22d12f71ea33497d585c941b55e635c6f6ed070b5c2320c"
+    },
+    {
+      "file": "qa-v113/captures/53_coulee_apres_file_reprise.png",
+      "identical": true,
+      "expected": "642e8e28e09807150bb6c0470de559296834fb5fed07ea6d61a9c1983581340b",
+      "actual": "642e8e28e09807150bb6c0470de559296834fb5fed07ea6d61a9c1983581340b"
+    },
+    {
+      "file": "qa-v113/captures/54_retour_apres_file_reprise.png",
+      "identical": true,
+      "expected": "974ff815e9a7739238861a75b1b3482578fccd970ec02ea53fd52cf1c02d3afa",
+      "actual": "974ff815e9a7739238861a75b1b3482578fccd970ec02ea53fd52cf1c02d3afa"
+    }
+  ],
+  "previewUnchangedAfterRebuild": true,
+  "saveSchemaPreserved": 112,
+  "nativeBuild": false,
+  "push": false,
+  "deployment": false
+}

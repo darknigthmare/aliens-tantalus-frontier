@@ -1,0 +1,178 @@
+{
+  "ok": true,
+  "archive": {
+    "ok": true,
+    "manifestFiles": 401,
+    "historicalArtifactsOmitted": 26,
+    "archive": "ALIEN3_FIORINA_V109_SOUFFLE_DES_CONDUITES_SUR_V108.zip",
+    "bytes": 30410333,
+    "sha256": "fe517f204c2908e90e5945ccb105f106390fbcfcede6fd18c891ecf79b0250b0"
+  },
+  "manifest": {
+    "ok": true,
+    "manifestFiles": 401,
+    "actualFiles": 401,
+    "missingOrMismatched": [],
+    "extra": [],
+    "verifiedBeforeTestReexecution": true
+  },
+  "freshExtraction": "v109-final-verify",
+  "afterExtraction": {
+    "unitCases": 60,
+    "installationScenarios": 19,
+    "priorV108UnitCases": 59,
+    "priorV108InstallationScenarios": 19,
+    "browserGroups": [
+      {
+        "file": "browser-steam-route.json",
+        "ok": true,
+        "assertions": 7,
+        "scope": "Shared V109 runtime in simplified local host; continuous keyboard routes separated from directed collision fixture. Not full native campaign."
+      },
+      {
+        "file": "browser-steam-resume.json",
+        "ok": true,
+        "assertions": 8,
+        "scope": "Shared V109 runtime in simplified local host; continuous keyboard routes separated from directed collision fixture. Not full native campaign."
+      },
+      {
+        "file": "browser-steam-ventilation.json",
+        "ok": true,
+        "assertions": 8,
+        "scope": "Shared V109 runtime in simplified local host; continuous keyboard routes separated from directed collision fixture. Not full native campaign."
+      },
+      {
+        "file": "browser-trap.json",
+        "ok": true,
+        "assertions": 12,
+        "scope": "Actual V109 modules in the simplified local host; neither full native game nor film campaign certified"
+      },
+      {
+        "file": "browser-steam-geometry.json",
+        "ok": true,
+        "assertions": 8,
+        "scope": "Shared V109 runtime in simplified local host; continuous keyboard routes separated from directed collision fixture. Not full native campaign."
+      }
+    ],
+    "ordinaryHtmlControls": 11,
+    "codexControls": 47,
+    "reproducedScreenshots": 18,
+    "deliveredScreenshots": 28,
+    "allReproducedScreenshotsByteIdentical": true,
+    "screenshots": [
+      {
+        "file": "qa-v109/captures/18_vanne_des_galeries.png",
+        "sha256": "07a38f3ae1829b3b6ed453cccddc4bbb24f8643d5ef6a2e0f050e4b161cd100a",
+        "identicalToDelivered": true
+      },
+      {
+        "file": "qa-v109/captures/19_ouverture_en_cours.png",
+        "sha256": "542647e4945589b357c5a1e7e14bfac3510f9c3adf0c4e3cd501dd132cdbebf2",
+        "identicalToDelivered": true
+      },
+      {
+        "file": "qa-v109/captures/20_purge_des_galeries.png",
+        "sha256": "4f70eafc66e41c9057e7748a58662c8bf6a1f64aa85c2e95303c35a205656c89",
+        "identicalToDelivered": true
+      },
+      {
+        "file": "qa-v109/captures/21_au_dela_du_jet.png",
+        "sha256": "9c9e87e41bbffedcf7b3aed01eaa98176dbdbf7d8392749433775b91b064d951",
+        "identicalToDelivered": true
+      },
+      {
+        "file": "qa-v109/captures/22_retour_apres_purge.png",
+        "sha256": "d2af20bd8139de7637bab2c1dd787aedb974b7dfc917a79bc6cb5e4b86a56d6c",
+        "identicalToDelivered": true
+      },
+      {
+        "file": "qa-v109/captures/27_jet_repris.png",
+        "sha256": "50c57785b5bf452d61b7624bb88212ac143b87c2a07cb2becf0ed581b02d0afc",
+        "identicalToDelivered": true
+      },
+      {
+        "file": "qa-v109/captures/29_purge_de_ventilation.png",
+        "sha256": "aecbb6d4f3904a5871a5a465fad1be98b30046330c76f1e5454cd62d057ef6d7",
+        "identicalToDelivered": true
+      },
+      {
+        "file": "qa-v109/captures/06_attente_postes.png",
+        "sha256": "c027befbd68397d71bd4feaecedc1e0a3c79a4dafa48b4fe44d6133ee24deaf2",
+        "identicalToDelivered": true
+      },
+      {
+        "file": "qa-v109/captures/06b_verrouillage.png",
+        "sha256": "3523f19d1b2a1c523cbc3d6eef0087f8e531ddf8a6327d54fee040a3bfb19404",
+        "identicalToDelivered": true
+      },
+      {
+        "file": "qa-v109/captures/07_postes_tenus.png",
+        "sha256": "c494ca19e3b337b10fe77a6743a727f5dae3a26d764bf7f2ca0a37d685583ce5",
+        "identicalToDelivered": true
+      },
+      {
+        "file": "qa-v109/captures/08_attaque_annoncee.png",
+        "sha256": "a9770bfdfd548d8e9af81b1ee5d10982bd528b1dbdbe801ef720735bd4398ea5",
+        "identicalToDelivered": true
+      },
+      {
+        "file": "qa-v109/captures/09_coulee.png",
+        "sha256": "e68c1211c9a617b0402ede9324b2b00fd48d63c6a97fad9cc7db315d0f51717d",
+        "identicalToDelivered": true
+      },
+      {
+        "file": "qa-v109/captures/10_refroidissement.png",
+        "sha256": "834b44324153069fd682e8e0ed49d4e7d9aabb88f0027a6124f3f819d837de66",
+        "identicalToDelivered": true
+      },
+      {
+        "file": "qa-v109/captures/11_retour_morse.png",
+        "sha256": "db9e6e913157abedafa177f45b4cb76f810e8c5b7889e97d8022e5a6f3f41d93",
+        "identicalToDelivered": true
+      },
+      {
+        "file": "qa-v109/captures/23_purge_de_fonderie.png",
+        "sha256": "7edd66ede42d2f5800d753ef9d4b17c8c71b76d588e51c92794e3d91cd24e5e4",
+        "identicalToDelivered": true
+      },
+      {
+        "file": "qa-v109/captures/24_danger_du_jet.png",
+        "sha256": "5f067251a6fc1724d1bd67e182b00ce0c8a55f2c48f04d1bd40bcc94916fec35",
+        "identicalToDelivered": true
+      },
+      {
+        "file": "qa-v109/captures/25_conduite_fermee.png",
+        "sha256": "fd75e661e431c419f98d9a673ec42e0cac7d9949e3fe4d3bf93743724257127a",
+        "identicalToDelivered": true
+      },
+      {
+        "file": "qa-v109/captures/26_conduite_ouverte.png",
+        "sha256": "9555a309fbfb2dc4f8a79992c97ccf7df726f774a9ec13a978d3b0899716c981",
+        "identicalToDelivered": true
+      }
+    ],
+    "sourceFilesUnchanged": true
+  },
+  "fullValidationBeforePackaging": {
+    "unitCases": 60,
+    "installationScenarios": 19,
+    "chromiumAssertions": 102,
+    "chromiumUniqueNames": 76,
+    "chromiumGroups": 12,
+    "ordinaryHtmlControls": 11,
+    "codexControls": 47,
+    "pdfPages": 19,
+    "pdfSelectedScreenshots": 16,
+    "nativeScreenshots": 28,
+    "codexCards": 575
+  },
+  "scope": {
+    "nativeGameBuild": false,
+    "nativeFilmCampaignComplete": false,
+    "push": false,
+    "deployment": false,
+    "browser": "Native Chromium screenshots of shared shipped modules in simplified local host",
+    "install": "Synthetic npm fixtures, not native Tantalus build",
+    "audio": "Context/event/pause checks, no physical listening test"
+  }
+}
