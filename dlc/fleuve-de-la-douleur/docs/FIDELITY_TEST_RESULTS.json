@@ -1,0 +1,1231 @@
+{
+  "version": "0.9.0-candidate.1",
+  "passed": true,
+  "cases": [
+    {
+      "name": "Actual counts, no promise of complete novel coverage",
+      "passed": true
+    },
+    {
+      "name": "All room IDs, map positions and global object IDs unique",
+      "passed": true
+    },
+    {
+      "name": "One fossil only in pilot chamber; eggs are not repeated at the threshold",
+      "passed": true
+    },
+    {
+      "name": "Protagonist and escort identity bindings",
+      "passed": true
+    },
+    {
+      "name": "Greenhouse presence is sourced; its exact plan is authored",
+      "passed": true
+    },
+    {
+      "name": "Named source contacts distinct from original local routines",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · pad>airlock",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · airlock>pad",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · airlock>concourse",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · concourse>airlock",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · concourse>ops",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · concourse>hab",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · concourse>med",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · concourse>garage",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · ops>concourse",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · ops>briefing",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · ops>relay",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · ops>aerial",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · ops>armory",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · briefing>ops",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · briefing>armory",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · hab>concourse",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · hab>jorden",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · hab>recreation",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · hab>wash",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · hab>pantry",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · jorden>hab",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · jorden>vent_hab",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · mess>recreation",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · mess>wash",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · mess>stores",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · mess>pantry",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · recreation>hab",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · recreation>mess",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · recreation>vent_hab",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · recreation>greenhouse",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · med>concourse",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · med>isolation",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · med>clinic_store",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · med>science",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · med>biomed",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · isolation>med",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · isolation>vent_med",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · science>med",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · science>records",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · science>service",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · science>hangar",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · records>science",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · records>relay",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · garage>concourse",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · garage>survey",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · garage>service",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · garage>road",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · garage>workshop",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · survey>garage",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · survey>stores",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · survey>vent_survey",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · stores>survey",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · stores>power",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · stores>mess",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · power>stores",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · power>pump",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · power>coolant",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · pump>power",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · pump>service",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · pump>approach",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · pump>drain",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · service>pump",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · service>science",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · service>garage",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · road>garage",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · road>plateau",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · road>processor6",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · plateau>road",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · plateau>derelict",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · derelict>plateau",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · derelict>derelict_gallery",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · processor6>road",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · processor6>workshop",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · approach>pump",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · approach>lift",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · lift>approach",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · lift>hive",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · hive>lift",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · hive>coolant",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · coolant>hive",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · coolant>power",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · coolant>drain",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · vent_hab>jorden",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · vent_hab>vent_med",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · vent_hab>vent_survey",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · vent_hab>recreation",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · vent_med>vent_hab",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · vent_med>isolation",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · vent_med>nest",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · vent_survey>vent_hab",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · vent_survey>survey",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · vent_survey>refuge",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · refuge>vent_survey",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · refuge>wash",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · refuge>nest",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · hangar>science",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · hangar>shuttle",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · shuttle>hangar",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · wash>refuge",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · wash>mess",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · wash>hab",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · wash>greenhouse",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · relay>records",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · relay>ops",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · relay>aerial",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · clinic_store>med",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · clinic_store>biomed",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · pantry>mess",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · pantry>hab",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · biomed>med",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · biomed>clinic_store",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · aerial>relay",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · aerial>ops",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · workshop>garage",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · workshop>processor6",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · drain>pump",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · drain>coolant",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · nest>vent_med",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · nest>refuge",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · greenhouse>recreation",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · greenhouse>wash",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · armory>briefing",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · armory>ops",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · derelict_gallery>derelict",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · derelict_gallery>pilot_chamber",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · pilot_chamber>derelict_gallery",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · pilot_chamber>egg_vault",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · hybrid · egg_vault>pilot_chamber",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · pad>airlock",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · airlock>pad",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · airlock>concourse",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · concourse>airlock",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · concourse>ops",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · concourse>hab",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · concourse>med",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · concourse>garage",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · ops>concourse",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · ops>briefing",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · ops>relay",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · ops>aerial",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · ops>armory",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · briefing>ops",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · briefing>armory",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · hab>concourse",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · hab>jorden",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · hab>recreation",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · hab>wash",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · hab>pantry",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · jorden>hab",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · jorden>vent_hab",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · mess>recreation",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · mess>wash",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · mess>stores",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · mess>pantry",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · recreation>hab",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · recreation>mess",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · recreation>vent_hab",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · recreation>greenhouse",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · med>concourse",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · med>isolation",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · med>clinic_store",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · med>science",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · med>biomed",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · isolation>med",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · isolation>vent_med",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · science>med",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · science>records",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · science>service",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · science>hangar",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · records>science",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · records>relay",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · garage>concourse",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · garage>survey",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · garage>service",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · garage>road",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · garage>workshop",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · survey>garage",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · survey>stores",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · survey>vent_survey",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · stores>survey",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · stores>power",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · stores>mess",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · power>stores",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · power>pump",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · power>coolant",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · pump>power",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · pump>service",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · pump>approach",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · pump>drain",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · service>pump",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · service>science",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · service>garage",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · road>garage",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · road>plateau",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · road>processor6",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · plateau>road",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · plateau>derelict",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · derelict>plateau",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · derelict>derelict_gallery",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · processor6>road",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · processor6>workshop",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · approach>pump",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · approach>lift",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · lift>approach",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · lift>hive",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · hive>lift",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · hive>coolant",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · coolant>hive",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · coolant>power",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · coolant>drain",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · vent_hab>jorden",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · vent_hab>vent_med",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · vent_hab>vent_survey",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · vent_hab>recreation",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · vent_med>vent_hab",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · vent_med>isolation",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · vent_med>nest",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · vent_survey>vent_hab",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · vent_survey>survey",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · vent_survey>refuge",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · refuge>vent_survey",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · refuge>wash",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · refuge>nest",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · hangar>science",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · hangar>shuttle",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · shuttle>hangar",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · wash>refuge",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · wash>mess",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · wash>hab",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · wash>greenhouse",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · relay>records",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · relay>ops",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · relay>aerial",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · clinic_store>med",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · clinic_store>biomed",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · pantry>mess",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · pantry>hab",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · biomed>med",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · biomed>clinic_store",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · aerial>relay",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · aerial>ops",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · workshop>garage",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · workshop>processor6",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · drain>pump",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · drain>coolant",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · nest>vent_med",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · nest>refuge",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · greenhouse>recreation",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · greenhouse>wash",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · armory>briefing",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · armory>ops",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · derelict_gallery>derelict",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · derelict_gallery>pilot_chamber",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · pilot_chamber>derelict_gallery",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · pilot_chamber>egg_vault",
+      "passed": true
+    },
+    {
+      "name": "Physical endpoint via E · classic · egg_vault>pilot_chamber",
+      "passed": true
+    },
+    {
+      "name": "hybrid · issue requires time and gives no main objective",
+      "passed": true
+    },
+    {
+      "name": "hybrid · repeated issue never replenishes",
+      "passed": true
+    },
+    {
+      "name": "hybrid · remote rack rejected",
+      "passed": true
+    },
+    {
+      "name": "hybrid · movement cancels without supplies",
+      "passed": true
+    },
+    {
+      "name": "hybrid · damage cancels without supplies",
+      "passed": true
+    },
+    {
+      "name": "hybrid · adult civilian / child never receives weapon · 1",
+      "passed": true
+    },
+    {
+      "name": "hybrid · adult civilian / child never receives weapon · 6",
+      "passed": true
+    },
+    {
+      "name": "hybrid · Paris has separate finite kit",
+      "passed": true
+    },
+    {
+      "name": "hybrid · flame consumes fuel, not pulse ammunition",
+      "passed": true
+    },
+    {
+      "name": "hybrid · flame kills existing adult, no duplication",
+      "passed": true
+    },
+    {
+      "name": "hybrid · flame obeys closed barrier",
+      "passed": true
+    },
+    {
+      "name": "hybrid · no fire with empty tank, switch back permitted",
+      "passed": true
+    },
+    {
+      "name": "hybrid · serialized grenade preserves count and owner",
+      "passed": true
+    },
+    {
+      "name": "hybrid · grenade cannot open menus/leave room via E during flight",
+      "passed": true
+    },
+    {
+      "name": "hybrid · grenade kills a contacted adult",
+      "passed": true
+    },
+    {
+      "name": "hybrid · explosion stopped by a closed shutter; shooter can be hurt",
+      "passed": true
+    },
+    {
+      "name": "hybrid · unissued and negative stock imports rejected",
+      "passed": true
+    },
+    {
+      "name": "hybrid · malformed / duplicate grenade imports rejected",
+      "passed": true
+    },
+    {
+      "name": "classic · issue requires time and gives no main objective",
+      "passed": true
+    },
+    {
+      "name": "classic · repeated issue never replenishes",
+      "passed": true
+    },
+    {
+      "name": "classic · remote rack rejected",
+      "passed": true
+    },
+    {
+      "name": "classic · movement cancels without supplies",
+      "passed": true
+    },
+    {
+      "name": "classic · damage cancels without supplies",
+      "passed": true
+    },
+    {
+      "name": "classic · adult civilian / child never receives weapon · 1",
+      "passed": true
+    },
+    {
+      "name": "classic · adult civilian / child never receives weapon · 6",
+      "passed": true
+    },
+    {
+      "name": "classic · Paris has separate finite kit",
+      "passed": true
+    },
+    {
+      "name": "classic · flame consumes fuel, not pulse ammunition",
+      "passed": true
+    },
+    {
+      "name": "classic · flame kills existing adult, no duplication",
+      "passed": true
+    },
+    {
+      "name": "classic · flame obeys closed barrier",
+      "passed": true
+    },
+    {
+      "name": "classic · no fire with empty tank, switch back permitted",
+      "passed": true
+    },
+    {
+      "name": "classic · serialized grenade preserves count and owner",
+      "passed": true
+    },
+    {
+      "name": "classic · grenade cannot open menus/leave room via E during flight",
+      "passed": true
+    },
+    {
+      "name": "classic · grenade kills a contacted adult",
+      "passed": true
+    },
+    {
+      "name": "classic · explosion stopped by a closed shutter; shooter can be hurt",
+      "passed": true
+    },
+    {
+      "name": "classic · unissued and negative stock imports rejected",
+      "passed": true
+    },
+    {
+      "name": "classic · malformed / duplicate grenade imports rejected",
+      "passed": true
+    },
+    {
+      "name": "Actual export 0.1 migration without free armament",
+      "passed": true
+    },
+    {
+      "name": "Actual export 0.2 migration without free armament",
+      "passed": true
+    },
+    {
+      "name": "Actual export 0.3 migration without free armament",
+      "passed": true
+    },
+    {
+      "name": "Actual export 0.4 migration without free armament",
+      "passed": true
+    },
+    {
+      "name": "Actual export 0.5 migration without free armament",
+      "passed": true
+    },
+    {
+      "name": "Actual export 0.6 migration without free armament",
+      "passed": true
+    },
+    {
+      "name": "Actual export 0.7 migration without free armament",
+      "passed": true
+    },
+    {
+      "name": "Actual export 0.8 migration without free armament",
+      "passed": true
+    }
+  ],
+  "method": "Architecture and armament fixtures. Every directed endpoint uses E and normal simulation time; fixture setup grants prerequisite flags explicitly. Not complete human playthroughs."
+}

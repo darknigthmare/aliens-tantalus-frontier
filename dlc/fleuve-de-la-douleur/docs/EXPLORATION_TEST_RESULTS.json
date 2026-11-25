@@ -1,0 +1,643 @@
+{
+  "passed": true,
+  "cases": 159,
+  "method": "Unit fixtures + collision movement coverage; not equivalent to human playthroughs",
+  "results": [
+    {
+      "name": "Contenu cumulatif : 47 lieux, 64 liens, 49 objectifs + 18 étapes facultatives",
+      "passed": true
+    },
+    {
+      "name": "Six salles ont chacune une entrée libre et une sortie verrouillée",
+      "passed": true
+    },
+    {
+      "name": "Aucun détour ni nouvelle archive ne modifie la liste des 49 objectifs historiques",
+      "passed": true
+    },
+    {
+      "name": "Tâches et emprises entièrement bornées et identifiants uniques",
+      "passed": true
+    },
+    {
+      "name": "Chaîne de détour et ressources, une seule récompense · pantry",
+      "passed": true
+    },
+    {
+      "name": "Détour : refus hors zone et hors personnage · pantry",
+      "passed": true
+    },
+    {
+      "name": "Sortie bloquée avant, libérée après les trois manœuvres · pantry",
+      "passed": true
+    },
+    {
+      "name": "Interruption de manœuvre ne consomme pas la pièce · pantry",
+      "passed": true
+    },
+    {
+      "name": "Chaîne de détour et ressources, une seule récompense · biomed",
+      "passed": true
+    },
+    {
+      "name": "Détour : refus hors zone et hors personnage · biomed",
+      "passed": true
+    },
+    {
+      "name": "Sortie bloquée avant, libérée après les trois manœuvres · biomed",
+      "passed": true
+    },
+    {
+      "name": "Interruption de manœuvre ne consomme pas la pièce · biomed",
+      "passed": true
+    },
+    {
+      "name": "Chaîne de détour et ressources, une seule récompense · aerial",
+      "passed": true
+    },
+    {
+      "name": "Détour : refus hors zone et hors personnage · aerial",
+      "passed": true
+    },
+    {
+      "name": "Sortie bloquée avant, libérée après les trois manœuvres · aerial",
+      "passed": true
+    },
+    {
+      "name": "Interruption de manœuvre ne consomme pas la pièce · aerial",
+      "passed": true
+    },
+    {
+      "name": "Chaîne de détour et ressources, une seule récompense · workshop",
+      "passed": true
+    },
+    {
+      "name": "Détour : refus hors zone et hors personnage · workshop",
+      "passed": true
+    },
+    {
+      "name": "Sortie bloquée avant, libérée après les trois manœuvres · workshop",
+      "passed": true
+    },
+    {
+      "name": "Interruption de manœuvre ne consomme pas la pièce · workshop",
+      "passed": true
+    },
+    {
+      "name": "Chaîne de détour et ressources, une seule récompense · drain",
+      "passed": true
+    },
+    {
+      "name": "Détour : refus hors zone et hors personnage · drain",
+      "passed": true
+    },
+    {
+      "name": "Sortie bloquée avant, libérée après les trois manœuvres · drain",
+      "passed": true
+    },
+    {
+      "name": "Interruption de manœuvre ne consomme pas la pièce · drain",
+      "passed": true
+    },
+    {
+      "name": "Chaîne de détour et ressources, une seule récompense · nest",
+      "passed": true
+    },
+    {
+      "name": "Détour : refus hors zone et hors personnage · nest",
+      "passed": true
+    },
+    {
+      "name": "Sortie bloquée avant, libérée après les trois manœuvres · nest",
+      "passed": true
+    },
+    {
+      "name": "Interruption de manœuvre ne consomme pas la pièce · nest",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · pad / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · airlock / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · concourse / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · ops / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · briefing / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · hab / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · jorden / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · mess / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · recreation / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · med / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · isolation / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · science / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · records / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · garage / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · survey / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · stores / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · power / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · pump / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · service / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · road / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · plateau / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · derelict / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · processor6 / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · approach / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · lift / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · hive / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · coolant / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · vent_hab / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · vent_med / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · vent_survey / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · refuge / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · hangar / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · shuttle / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · wash / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · relay / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · clinic_store / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · pantry / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · biomed / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · aerial / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · workshop / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · drain / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · nest / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · greenhouse / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · armory / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · derelict_gallery / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · pilot_chamber / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · egg_vault / hybrid",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · pad / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · airlock / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · concourse / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · ops / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · briefing / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · hab / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · jorden / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · mess / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · recreation / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · med / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · isolation / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · science / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · records / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · garage / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · survey / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · stores / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · power / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · pump / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · service / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · road / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · plateau / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · derelict / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · processor6 / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · approach / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · lift / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · hive / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · coolant / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · vent_hab / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · vent_med / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · vent_survey / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · refuge / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · hangar / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · shuttle / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · wash / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · relay / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · clinic_store / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · pantry / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · biomed / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · aerial / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · workshop / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · drain / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · nest / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · greenhouse / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · armory / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · derelict_gallery / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · pilot_chamber / classic",
+      "passed": true
+    },
+    {
+      "name": "Accessibilité physique de tous les points · egg_vault / classic",
+      "passed": true
+    },
+    {
+      "name": "Tir directionnel · axe 0",
+      "passed": true
+    },
+    {
+      "name": "Tir directionnel · axe 1",
+      "passed": true
+    },
+    {
+      "name": "Tir directionnel · axe 2",
+      "passed": true
+    },
+    {
+      "name": "Tir directionnel · axe 3",
+      "passed": true
+    },
+    {
+      "name": "Tir directionnel · axe 4",
+      "passed": true
+    },
+    {
+      "name": "Tir directionnel · axe 5",
+      "passed": true
+    },
+    {
+      "name": "Tir directionnel · axe 6",
+      "passed": true
+    },
+    {
+      "name": "Tir directionnel · axe 7",
+      "passed": true
+    },
+    {
+      "name": "Visée fixe : déplacement suspendu, direction et arme conservées",
+      "passed": true
+    },
+    {
+      "name": "Visée fixe et Maj : ni course fictive, ni bruit, ni perte de souffle",
+      "passed": true
+    },
+    {
+      "name": "La visée classique est horizontale et Newt reste désarmée",
+      "passed": true
+    },
+    {
+      "name": "La collision solide intercepte aussi les projectiles vectoriels",
+      "passed": true
+    },
+    {
+      "name": "Poursuite : dernière position connue, pas la position silencieuse invisible",
+      "passed": true
+    },
+    {
+      "name": "Une mémoire expirée rend la créature à la recherche locale",
+      "passed": true
+    },
+    {
+      "name": "Une entrée en cache non vue ne révèle pas la position courante",
+      "passed": true
+    },
+    {
+      "name": "Rencontre persistante annoncée, sans duplication · workshop-hatch",
+      "passed": true
+    },
+    {
+      "name": "Rencontre persistante annoncée, sans duplication · biomed-cabinet",
+      "passed": true
+    },
+    {
+      "name": "Rencontre persistante annoncée, sans duplication · drain-return",
+      "passed": true
+    },
+    {
+      "name": "Rencontre persistante annoncée, sans duplication · nest-shadow",
+      "passed": true
+    },
+    {
+      "name": "Rencontre persistante annoncée, sans duplication · aerial-wind",
+      "passed": true
+    },
+    {
+      "name": "Rencontre persistante annoncée, sans duplication · pantry-tap",
+      "passed": true
+    },
+    {
+      "name": "Intrusion : aucune apparition à moins de 380 unités du joueur",
+      "passed": true
+    },
+    {
+      "name": "Changement de pièce suspend les avertissements non résolus",
+      "passed": true
+    },
+    {
+      "name": "Export réel v02 : progression, réserves, marqueurs et anciennes portes préservés",
+      "passed": true
+    },
+    {
+      "name": "Ancienne position devenue solide : migration vers un appui libre proche",
+      "passed": true
+    },
+    {
+      "name": "Deux ouvertures et une pièce emportée survivent au point de vue suivant",
+      "passed": true
+    },
+    {
+      "name": "Import v03 invalide refusé · job",
+      "passed": true
+    },
+    {
+      "name": "Import v03 invalide refusé · step",
+      "passed": true
+    },
+    {
+      "name": "Import v03 invalide refusé · negative",
+      "passed": true
+    },
+    {
+      "name": "Import v03 invalide refusé · stepType",
+      "passed": true
+    },
+    {
+      "name": "Import v03 invalide refusé · tracking",
+      "passed": true
+    },
+    {
+      "name": "Import v03 invalide refusé · aim",
+      "passed": true
+    },
+    {
+      "name": "Import v03 invalide refusé · aimUnit",
+      "passed": true
+    },
+    {
+      "name": "Import v03 invalide refusé · aimType",
+      "passed": true
+    },
+    {
+      "name": "Import v03 invalide refusé · encounter",
+      "passed": true
+    },
+    {
+      "name": "Import v03 invalide refusé · timer",
+      "passed": true
+    },
+    {
+      "name": "Import v03 invalide refusé · falseGate",
+      "passed": true
+    }
+  ]
+}

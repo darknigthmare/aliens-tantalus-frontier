@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "name": "Ancien installateur et vrais modules 0.8 : installation sur shell de test",
+      "passed": true
+    },
+    {
+      "name": "Vrai payload 0.8 : rollback après commit conserve ses modules et son journal",
+      "passed": true
+    },
+    {
+      "name": "Vrai payload 0.8 remplacé par exactement les modules 0.9",
+      "passed": true
+    },
+    {
+      "name": "Désinstallation de la vraie chaîne 0.8→0.9 restaure le shell et préserve app.js",
+      "passed": true
+    }
+  ],
+  "sourcePackage": "Original extracted v0.8.0 archive; actual installer and payload, synthetic host shell",
+  "qualification": "No native Tantalus build/deployment"
+}

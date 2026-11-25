@@ -1,0 +1,484 @@
+{
+  "version": "0.8.0-candidate.1",
+  "passed": true,
+  "cases": [
+    {
+      "name": "Standalone égale ses 23 modules et son CSS",
+      "passed": true
+    },
+    {
+      "name": "Aucun script ou stylesheet externe requis",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe architecture.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe colony.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe core.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe data.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe defense-ui.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe defense-visuals.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe defense.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe ducts-ui.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe ducts-visuals.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe ducts.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe exploration.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe field-visuals.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe launcher.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe life-ui.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe life-visuals.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe life.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe mobility-ui.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe mobility-visuals.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe mobility.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe passage-visuals.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe passages.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe persistence.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe render.js",
+      "passed": true
+    },
+    {
+      "name": "Syntaxe ui.js",
+      "passed": true
+    },
+    {
+      "name": "Version exacte",
+      "passed": true
+    },
+    {
+      "name": "Comptage réel rooms",
+      "passed": true
+    },
+    {
+      "name": "Comptage réel props",
+      "passed": true
+    },
+    {
+      "name": "Comptage réel links",
+      "passed": true
+    },
+    {
+      "name": "Comptage réel objectives",
+      "passed": true
+    },
+    {
+      "name": "Comptage réel archives",
+      "passed": true
+    },
+    {
+      "name": "Comptage réel optionalSteps",
+      "passed": true
+    },
+    {
+      "name": "Comptage réel maintenanceDucts",
+      "passed": true
+    },
+    {
+      "name": "Comptage réel ductMouths",
+      "passed": true
+    },
+    {
+      "name": "Comptage réel driveableVehicles",
+      "passed": true
+    },
+    {
+      "name": "Comptage réel drivingRooms",
+      "passed": true
+    },
+    {
+      "name": "Comptage réel vehicleServiceStations",
+      "passed": true
+    },
+    {
+      "name": "Comptage réel drivingSurfaces",
+      "passed": true
+    },
+    {
+      "name": "Campagne préservée",
+      "passed": true
+    },
+    {
+      "name": "Cinq gaines restent séparées du graphe joueur",
+      "passed": true
+    },
+    {
+      "name": "Héritage des volets et avertisseurs",
+      "passed": true
+    },
+    {
+      "name": "Route réutilise une connexion existante ['road', 'plateau']",
+      "passed": true
+    },
+    {
+      "name": "Borne dans une vraie pièce de conduite service-road",
+      "passed": true
+    },
+    {
+      "name": "Borne dans une vraie pièce de conduite service-plateau",
+      "passed": true
+    },
+    {
+      "name": "Identité unique du véhicule",
+      "passed": true
+    },
+    {
+      "name": "Pas de véhicule décoratif dupliqué dans les lieux concernés",
+      "passed": true
+    },
+    {
+      "name": "Suite courante achevée CORE_TEST_RESULTS",
+      "passed": true
+    },
+    {
+      "name": "Suite courante achevée COLONY_TEST_RESULTS",
+      "passed": true
+    },
+    {
+      "name": "Suite courante achevée EXPLORATION_TEST_RESULTS",
+      "passed": true
+    },
+    {
+      "name": "Suite courante achevée PASSAGES_TEST_RESULTS",
+      "passed": true
+    },
+    {
+      "name": "Suite courante achevée PERSISTENCE_TEST_RESULTS",
+      "passed": true
+    },
+    {
+      "name": "Suite courante achevée LIFE_TEST_RESULTS",
+      "passed": true
+    },
+    {
+      "name": "Suite courante achevée DEFENSE_TEST_RESULTS",
+      "passed": true
+    },
+    {
+      "name": "Suite courante achevée DUCT_TEST_RESULTS",
+      "passed": true
+    },
+    {
+      "name": "Suite courante achevée MOBILITY_TEST_RESULTS",
+      "passed": true
+    },
+    {
+      "name": "Total modèle dérivé des neuf suites",
+      "passed": true
+    },
+    {
+      "name": "Pilotes achevés TRAVERSAL_RESULTS",
+      "passed": true
+    },
+    {
+      "name": "Pilotes achevés TRAVERSAL_EXPLORATION_RESULTS",
+      "passed": true
+    },
+    {
+      "name": "Pilotes achevés TRAVERSAL_LIFE_RESULTS",
+      "passed": true
+    },
+    {
+      "name": "Pilotes achevés TRAVERSAL_DEFENSE_RESULTS",
+      "passed": true
+    },
+    {
+      "name": "Pilotes achevés TRAVERSAL_DUCT_RESULTS",
+      "passed": true
+    },
+    {
+      "name": "Pilotes achevés TRAVERSAL_MOBILITY_RESULTS",
+      "passed": true
+    },
+    {
+      "name": "Total pilotes dérivé",
+      "passed": true
+    },
+    {
+      "name": "Version authentique déclarée real-v01-save.json",
+      "passed": true
+    },
+    {
+      "name": "Ancien fichier passe le codec actuel real-v01-save.json",
+      "passed": true
+    },
+    {
+      "name": "Version authentique déclarée real-v02-save.json",
+      "passed": true
+    },
+    {
+      "name": "Ancien fichier passe le codec actuel real-v02-save.json",
+      "passed": true
+    },
+    {
+      "name": "Version authentique déclarée real-v03-save.json",
+      "passed": true
+    },
+    {
+      "name": "Ancien fichier passe le codec actuel real-v03-save.json",
+      "passed": true
+    },
+    {
+      "name": "Version authentique déclarée real-v04-save.json",
+      "passed": true
+    },
+    {
+      "name": "Ancien fichier passe le codec actuel real-v04-save.json",
+      "passed": true
+    },
+    {
+      "name": "Version authentique déclarée real-v05-save.json",
+      "passed": true
+    },
+    {
+      "name": "Ancien fichier passe le codec actuel real-v05-save.json",
+      "passed": true
+    },
+    {
+      "name": "Version authentique déclarée real-v06-save.json",
+      "passed": true
+    },
+    {
+      "name": "Ancien fichier passe le codec actuel real-v06-save.json",
+      "passed": true
+    },
+    {
+      "name": "Version authentique déclarée real-v07-save.json",
+      "passed": true
+    },
+    {
+      "name": "Ancien fichier passe le codec actuel real-v07-save.json",
+      "passed": true
+    },
+    {
+      "name": "Navigateur final A",
+      "passed": true
+    },
+    {
+      "name": "Navigateur final B",
+      "passed": true
+    },
+    {
+      "name": "Navigateur final C",
+      "passed": true
+    },
+    {
+      "name": "Capture PNG et provenance 01-title-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Capture PNG et provenance 02-first-task-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Capture PNG et provenance 03-cabin-panel-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Capture PNG et provenance 04-boarded-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Capture PNG et provenance 05-driving-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Capture PNG et provenance 06-plateau-driving-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Capture PNG et provenance 07-parked-on-foot-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Capture PNG et provenance 08-finite-service-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Capture PNG et provenance 09-hull-under-attack-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Capture PNG et provenance 10-cabin-portrait-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Capture PNG et provenance 11-driving-portrait-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Capture PNG et provenance 12-cabin-landscape-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Vrai export courant relu browser-v08-damaged-hull.json",
+      "passed": true
+    },
+    {
+      "name": "Vrai export courant relu browser-v08-driving.json",
+      "passed": true
+    },
+    {
+      "name": "Vrai export courant relu browser-v08-serviced.json",
+      "passed": true
+    },
+    {
+      "name": "Douze figures exactes sans substitution",
+      "passed": true
+    },
+    {
+      "name": "Rapport visuel qualifié sur ses bytes",
+      "passed": true
+    },
+    {
+      "name": "Empreintes du code qualifié identiques",
+      "passed": true
+    },
+    {
+      "name": "Qualification comprend la mobilité et le vrai payload",
+      "passed": true
+    },
+    {
+      "name": "Installation réellement vérifiée INSTALLER_TEST_RESULTS",
+      "passed": true
+    },
+    {
+      "name": "Installation réellement vérifiée REAL_UPGRADE_TEST_RESULTS",
+      "passed": true
+    },
+    {
+      "name": "Notice README actuelle et retrait valide",
+      "passed": true
+    },
+    {
+      "name": "Installateur numéro courant",
+      "passed": true
+    },
+    {
+      "name": "Document réel non vide README.md",
+      "passed": true
+    },
+    {
+      "name": "Document réel non vide docs/CODEX_LEVEL_DESIGN.md",
+      "passed": true
+    },
+    {
+      "name": "Document réel non vide docs/QA_REPORT.md",
+      "passed": true
+    },
+    {
+      "name": "Document réel non vide docs/SOURCE_V08.json",
+      "passed": true
+    },
+    {
+      "name": "Document réel non vide docs/DOCTRINE_V08.md",
+      "passed": true
+    },
+    {
+      "name": "Document réel non vide docs/SOURCES_ET_CONTINUITE.md",
+      "passed": true
+    },
+    {
+      "name": "Document réel non vide LICENSE_NOTICE.md",
+      "passed": true
+    },
+    {
+      "name": "Reconstruction reproductible données et HTML",
+      "passed": true
+    }
+  ],
+  "standaloneSHA256": "53cafebbf4a43b9c2cf6d406452a7b491ac818c7f47bc5d40b21eef13dde83b7",
+  "sourceDigests": {
+    "src/river-of-pain/architecture.js": "a34089d2053893c9ca67cab4ad7bad5db878097c348388f090109dafb0e0d72d",
+    "src/river-of-pain/colony.js": "75031354405465bdde36b1723d37aef82e97e7e775f651187b4970eed0c6598a",
+    "src/river-of-pain/core.js": "5c5c65195884d59efb1517ecba0bd576b12e5c0b96b3f21202d61dfa88f1359a",
+    "src/river-of-pain/data.js": "cd1d4cc29b61aa1808c519a0ae9ecd286693c4d5c6c31da4c68a90f92af7eaee",
+    "src/river-of-pain/defense-ui.js": "3e13a8436f46a8e2b019051bab94aecc4d22461b6625e418d820bedaa418bba4",
+    "src/river-of-pain/defense-visuals.js": "cc3644399b9157d98aa0c67dc592428e64d71e18a3ccc76c637d403f7dfe156f",
+    "src/river-of-pain/defense.js": "7c5de88daeb50265086b276a4594a8be5d6c5adf88f801e8402afa787a92e832",
+    "src/river-of-pain/ducts-ui.js": "63bcc9f53fbd292034c5611bfedd75549da52b2ca52b8b28e71351c77cfc9a55",
+    "src/river-of-pain/ducts-visuals.js": "af40fd72608ecdec7f37595fa0695aff40bb4d276d4e6ae6a343d146807b814a",
+    "src/river-of-pain/ducts.js": "f6439f32c270bbd157964a86224e8b155a65e4d7e441292028acb02b33b23ed6",
+    "src/river-of-pain/exploration.js": "c0da4b60e00e5b051ba1f6f16ca76f189a4ee7c53f793d85da949989ac727a5d",
+    "src/river-of-pain/field-visuals.js": "655cd7eb6629aa8aed7b0aa18322a7e43bdb6671c8b1669a25ffc12e9e4b61b6",
+    "src/river-of-pain/index.html": "a6b09cffb7c7ea533e0390b8d17829cae2a1586587b045b40ac6888fc2ace075",
+    "src/river-of-pain/launcher.js": "ff68f93f874435950f480d4d3871b9d1bdae5b1e64e63d3db829490212f1eb0d",
+    "src/river-of-pain/life-ui.js": "d3196e7abe19d5863a6d372ff130723a85a89a6a03cc6e463c61e3d19277f93d",
+    "src/river-of-pain/life-visuals.js": "8c976bbe7c00ddf386c4223c678ffa044591835af87b9e12b012ee5f8f946b20",
+    "src/river-of-pain/life.js": "d9bf7442a61e60458cb2f332df34c134d4f8c5088858c57fe1dc9ef8ca0172c5",
+    "src/river-of-pain/mobility-ui.js": "b18f974ef1f6c5696b1e4ae4a1c9e08424c2be1735b435003f9b9698b4a3fe06",
+    "src/river-of-pain/mobility-visuals.js": "801e174e5a537742eb0ba07133575f3f4fa89afb55fdea0e73124d5da6335510",
+    "src/river-of-pain/mobility.js": "24f4013c366b0ec03890be06deb26f2bcce9b96e3c099d3542ad0b59753c9e67",
+    "src/river-of-pain/passage-visuals.js": "44e92dd29601f6342f49ca7d539c989afc840847725557e27a35c842930217aa",
+    "src/river-of-pain/passages.js": "1def3a76b14bf887b0f68aaabfbe6af3dc9ac3a06fa0b62155754d610880cdcb",
+    "src/river-of-pain/persistence.js": "5d0bff78d68cb15ec558c7c9b1a96a41fcf8e5dd69351fdd5e99bb6cc453d470",
+    "src/river-of-pain/render.js": "6f5ff88bc0f8287b8fb0d03b2abb077eee4adca472101971978b0a50c5441783",
+    "src/river-of-pain/style.css": "2218ce854ead2a636401d125177cd786d30c252bed3899942abfeb221ad2931d",
+    "src/river-of-pain/ui.js": "fadd8be16d352c87eeadf6ea524297659ec823797260ccb686a1dc72c98360d1"
+  },
+  "scope": "Current source syntax, data, true test results and deterministic artifacts. Distinct from gameplay and report checks."
+}

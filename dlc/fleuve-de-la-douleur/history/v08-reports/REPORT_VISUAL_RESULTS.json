@@ -1,0 +1,118 @@
+{
+  "version": "0.8.0-candidate.1",
+  "passed": true,
+  "cases": [
+    {
+      "name": "Browser capture source A",
+      "passed": true
+    },
+    {
+      "name": "Browser capture source B",
+      "passed": true
+    },
+    {
+      "name": "Browser capture source C",
+      "passed": true
+    },
+    {
+      "name": "Exactly twelve game figures",
+      "passed": true
+    },
+    {
+      "name": "Exact PNG bytes and alt captures/01-title-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Exact PNG bytes and alt captures/02-first-task-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Exact PNG bytes and alt captures/03-cabin-panel-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Exact PNG bytes and alt captures/04-boarded-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Exact PNG bytes and alt captures/05-driving-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Exact PNG bytes and alt captures/06-plateau-driving-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Exact PNG bytes and alt captures/07-parked-on-foot-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Exact PNG bytes and alt captures/08-finite-service-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Exact PNG bytes and alt captures/09-hull-under-attack-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Exact PNG bytes and alt captures/10-cabin-portrait-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Exact PNG bytes and alt captures/11-driving-portrait-v08.png",
+      "passed": true
+    },
+    {
+      "name": "Exact PNG bytes and alt captures/12-cabin-landscape-v08.png",
+      "passed": true
+    },
+    {
+      "name": "No missing local navigation links",
+      "passed": true
+    },
+    {
+      "name": "Current feature and totals text",
+      "passed": true
+    },
+    {
+      "name": "Native persistence caveat visible",
+      "passed": true
+    },
+    {
+      "name": "No duplicate game figures",
+      "passed": true
+    },
+    {
+      "name": "Report title loaded",
+      "passed": true
+    },
+    {
+      "name": "All embedded PNGs decode",
+      "passed": true
+    },
+    {
+      "name": "Desktop no document overflow",
+      "passed": true
+    },
+    {
+      "name": "Portrait no document overflow",
+      "passed": true
+    },
+    {
+      "name": "Portrait title readable",
+      "passed": true
+    },
+    {
+      "name": "PNG provenance expands",
+      "passed": true
+    },
+    {
+      "name": "No report JavaScript errors",
+      "passed": true
+    }
+  ],
+  "reportSHA256": "7b1706c8904529a5a918d5075e9e93d87d24e8df1b1151632ff3636f695fac82",
+  "standaloneSHA256": "53cafebbf4a43b9c2cf6d406452a7b491ac818c7f47bc5d40b21eef13dde83b7",
+  "errors": [],
+  "scope": "Current HTML report rendered in Chromium; local links checked from filesystem; no gameplay counts or native storage claim."
+}

@@ -1,0 +1,338 @@
+{
+  "date": "2026-11-25",
+  "sourceVersion": "0.9.0-candidate.1",
+  "recovery": {
+    "sourceFiles": 222,
+    "archives": 9,
+    "archiveBytes": 208383968,
+    "crcPassed": 9,
+    "sourceChecksumMatches": 220,
+    "separateCurrentDeliverablesIdentical": 5
+  },
+  "localBeforeInterruption": {
+    "model": {
+      "passed": 1246,
+      "failed": 0
+    },
+    "traversal": {
+      "passed": 42,
+      "failed": 0
+    },
+    "installer": {
+      "passed": 28,
+      "failed": 0
+    },
+    "realUpgrade": {
+      "passed": 4,
+      "failed": 0
+    },
+    "packageIntegrityChecks": 246,
+    "launcherNodeTests": 8,
+    "newBrowserCases": 0
+  },
+  "integrationVerification": {
+    "status": "passed-for-declared-local-scope",
+    "executionScope": "Working tree before publication; these results do not claim a successful GitHub CI run or deployment.",
+    "baseCommit": "882ffdee7ed83a549bf2c1c4b9fa38de8e70edc2",
+    "sourceVersion": "0.9.0-candidate.1",
+    "sourceArchiveSHA256": "4122a3b3f86314fdb44659ad7621632b7d9f77f1855fbd28c0bb5da05c7aa48b",
+    "playableSHA256": "91ae538879b939018cea5dc3ba2eb9e45faea7693fdd952efbe8531b33cdfced",
+    "launcherTests": {
+      "command": "npm run test:dlc:river",
+      "passed": 15,
+      "failed": 0,
+      "exitCode": 0,
+      "elapsedSeconds": 12.142
+    },
+    "recoveredSourceRunner": {
+      "command": "npm run test:dlc:river:source",
+      "status": "passed",
+      "model": {
+        "passed": 1246,
+        "failed": 0
+      },
+      "traversal": {
+        "passed": 42,
+        "failed": 0
+      },
+      "installer": {
+        "passed": 28,
+        "failed": 0
+      },
+      "packageIntegrity": {
+        "passed": 246,
+        "failed": 0
+      },
+      "realUpgrade": {
+        "passed": 4,
+        "failed": 0
+      },
+      "scope": "Runs in isolated temporary copies, including authentic recovered 0.8-to-0.9 upgrade payloads. Package verification includes byte-identical rebuild and consistency of historical evidence; it does not replay historical browser cases."
+    },
+    "productionBuild": {
+      "sourceAdmission": "passed",
+      "build": "passed",
+      "builtAdmission": "passed",
+      "builtFiles": 1993,
+      "shellFiles": 625,
+      "scope": "Locally built working tree; recorded source commit remains the base commit until publication. GitHub must rebuild the published revision."
+    },
+    "browserEnvironment": {
+      "os": "Ubuntu 26.04",
+      "playwright": "1.65.2",
+      "chromium": "159.0.8154.6",
+      "ciEnvironment": "Ubuntu 24.04 and Playwright 1.57.0, configured but not yet executed in GitHub."
+    },
+    "browserFullJourney": {
+      "command": "python -B scripts/qa-river-of-pain.py --root dist --output <external-output>",
+      "passed": 26,
+      "failed": 0,
+      "exitCode": 0,
+      "elapsedSeconds": 64.353,
+      "scope": "Actual built Frontier menu to DLC and back, before the later wrapper absolute-URL correction. Recovered playable bytes are unchanged. The separate slashless browser check below validates the corrected wrapper.",
+      "fixture": "One declared synthetic Frontier profile imported through the ordinary file chooser; no simulation or storage injection.",
+      "titleFocusOrder": [
+        "title-continue",
+        "title-new",
+        "title-river-of-pain"
+      ],
+      "checks": [
+        {
+          "name": "Served root has an index",
+          "passed": true
+        },
+        {
+          "name": "Recovered playable HTML exists",
+          "passed": true
+        },
+        {
+          "name": "Chromium executable is installed",
+          "passed": true
+        },
+        {
+          "name": "HTTP serves exact recovered playable bytes",
+          "passed": true
+        },
+        {
+          "name": "Native Frontier profile exists",
+          "passed": true
+        },
+        {
+          "name": "Imported campaign identity is intact",
+          "passed": true
+        },
+        {
+          "name": "DLC reachable using native title keyboard controls",
+          "passed": true
+        },
+        {
+          "name": "Host departure retains campaign identity",
+          "passed": true
+        },
+        {
+          "name": "Recovered DLC boots in integration frame",
+          "passed": true
+        },
+        {
+          "name": "Keyboard movement reaches game simulation",
+          "passed": true
+        },
+        {
+          "name": "DLC preferences use their own namespace",
+          "passed": true
+        },
+        {
+          "name": "Playing and preferences preserve all Frontier bytes",
+          "passed": true
+        },
+        {
+          "name": "Native export contains the observed position",
+          "passed": true
+        },
+        {
+          "name": "Normal menu exit writes native DLC slots",
+          "passed": true
+        },
+        {
+          "name": "DLC save preserves all Frontier bytes",
+          "passed": true
+        },
+        {
+          "name": "Actual page reload restores exact observed DLC state",
+          "passed": true
+        },
+        {
+          "name": "Ordinary preference survives reload",
+          "passed": true
+        },
+        {
+          "name": "DLC reload preserves all Frontier bytes",
+          "passed": true
+        },
+        {
+          "name": "F6 reaches wrapper return control from game",
+          "passed": true
+        },
+        {
+          "name": "Return opens actual Frontier title",
+          "passed": true
+        },
+        {
+          "name": "Return preserves all Frontier bytes",
+          "passed": true
+        },
+        {
+          "name": "Returned host loads original campaign identity",
+          "passed": true
+        },
+        {
+          "name": "Returned host retains independent DLC save",
+          "passed": true
+        },
+        {
+          "name": "No JavaScript page errors",
+          "passed": true
+        },
+        {
+          "name": "No failed HTTP response",
+          "passed": true
+        },
+        {
+          "name": "No failed non-navigation request",
+          "passed": true
+        }
+      ],
+      "frontierStorage": {
+        "baselineAfterNativeUnload": {
+          "keys": [
+            "atf-device-v119",
+            "atf-frontier-forge-workspace-v134",
+            "atf-v47-profile-1",
+            "atf-v78-selected-profile"
+          ],
+          "sha256": "1e42374f0634d9f5e7eca4f06bd6b6b3093e680367932f4dfa20b3dbc8ef4e76"
+        },
+        "nativeDepartureFlush": {
+          "changedKeys": [
+            "atf-v47-profile-1"
+          ],
+          "beforeSHA256": "caec9a83c9a78ffc8b7f33d4fb571c709ac7e947601b67c657cdbbfde5008439",
+          "afterSHA256": "1e42374f0634d9f5e7eca4f06bd6b6b3093e680367932f4dfa20b3dbc8ef4e76"
+        },
+        "allNonDlcBytesPreservedDuringPlaySaveReloadAndReturn": true,
+        "scope": "The native Frontier unload save is allowed before the preservation baseline. This is not a multi-tab or quota test."
+      },
+      "actualPageReloadRestoresObservedState": true,
+      "nativeExportSHA256": "7d82647baf98db9cb7a80c22cfa78de728c4f60f85a15cc5af4ee6ee80f5d32b",
+      "captures": [
+        "01-frontier-dlc-menu.png",
+        "02-dlc-pause-and-export.png",
+        "03-dlc-reloaded.png",
+        "04-frontier-return.png"
+      ],
+      "pageErrors": [],
+      "httpErrors": [],
+      "requestFailures": []
+    },
+    "browserSlashlessRoute": {
+      "command": "python -B scripts/qa-river-of-pain.py --root dist --no-slash-only --output <external-output>",
+      "passed": 15,
+      "failed": 0,
+      "elapsedSeconds": 19.798,
+      "route": "/dlc/fleuve-de-la-douleur",
+      "scope": "A controlled HTTP alias serves the exact built wrapper without redirecting the slashless URL. Checks resolve its CSS, integration script, playable iframe, real controls, F6 handling and root return URL. No claim is made about a hosting provider redirect policy.",
+      "wrapperSHA256": "1e76d22fa4d5a3ff97b00ce8ad23a334e6aeae4f8fd9028400ab7ea49a27f059",
+      "builtWrapperSHA256": "1e76d22fa4d5a3ff97b00ce8ad23a334e6aeae4f8fd9028400ab7ea49a27f059",
+      "checks": [
+        {
+          "name": "Served root has an index",
+          "passed": true
+        },
+        {
+          "name": "Recovered playable HTML exists",
+          "passed": true
+        },
+        {
+          "name": "Chromium executable is installed",
+          "passed": true
+        },
+        {
+          "name": "HTTP serves exact recovered playable bytes",
+          "passed": true
+        },
+        {
+          "name": "Slashless request retains its URL without a redirect",
+          "passed": true
+        },
+        {
+          "name": "Slashless wrapper resolves exact playable route",
+          "passed": true
+        },
+        {
+          "name": "Slashless wrapper resolves its stylesheet",
+          "passed": true
+        },
+        {
+          "name": "Slashless wrapper resolves its integration script",
+          "passed": true
+        },
+        {
+          "name": "Wrapper load handler has completed",
+          "passed": true
+        },
+        {
+          "name": "Slashless launch accepts normal game input",
+          "passed": true
+        },
+        {
+          "name": "Slashless wrapper has live return keyboard handling",
+          "passed": true
+        },
+        {
+          "name": "Slashless return resolves to host root",
+          "passed": true
+        },
+        {
+          "name": "No JavaScript page errors",
+          "passed": true
+        },
+        {
+          "name": "No failed HTTP response",
+          "passed": true
+        },
+        {
+          "name": "No failed non-navigation request",
+          "passed": true
+        }
+      ],
+      "captures": [
+        "slashless-wrapper.png"
+      ],
+      "pageErrors": [],
+      "httpErrors": [],
+      "requestFailures": []
+    },
+    "fullRepositoryRegression": {
+      "command": "npm run test:all",
+      "status": "pending",
+      "note": "Targeted DLC results do not qualify the full repository regression suite."
+    },
+    "githubCi": {
+      "status": "pending",
+      "workflow": ".github/workflows/river-of-pain.yml",
+      "note": "No GitHub run is counted as passed in this working-tree report. The dedicated workflow repeats the full and slashless browser journeys and retains evidence outside the checkout."
+    },
+    "currentQaScriptSHA256": "fb446c9dc58e911ff3397456d598cc71dd6b8c3a630d05b915bd6bad0a092810",
+    "currentWorkflowSHA256": "882ddf137e3e582bb305c9daffb7135f0df4a661de064a05750858c5df199ed0"
+  },
+  "unrecovered": [
+    "0.10 local work: no saved source artifact found"
+  ],
+  "notes": [
+    "Historical browser results are not counted as freshly executed tests.",
+    "Original recovered package files retain their exact bytes.",
+    "The new local browser evidence is separate from the historical 35-case package report.",
+    "The 0.10 working files were not recovered and are not presented as integrated.",
+    "The full repository suite and GitHub CI remain pending in this report."
+  ]
+}

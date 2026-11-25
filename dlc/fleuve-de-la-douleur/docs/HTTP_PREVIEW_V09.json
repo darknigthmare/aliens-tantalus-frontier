@@ -1,0 +1,23 @@
+{
+  "errors": [],
+  "captures": [
+    "/mnt/data/ALIEN_FLEUVE_DOULEUR_v0.9.0/qa-v09/preview-title.png",
+    "/mnt/data/ALIEN_FLEUVE_DOULEUR_v0.9.0/qa-v09/preview-medical.png",
+    "/mnt/data/ALIEN_FLEUVE_DOULEUR_v0.9.0/qa-v09/preview-family.png",
+    "/mnt/data/ALIEN_FLEUVE_DOULEUR_v0.9.0/qa-v09/preview-greenhouse.png",
+    "/mnt/data/ALIEN_FLEUVE_DOULEUR_v0.9.0/qa-v09/preview-pilot.png",
+    "/mnt/data/ALIEN_FLEUVE_DOULEUR_v0.9.0/qa-v09/preview-vault.png",
+    "/mnt/data/ALIEN_FLEUVE_DOULEUR_v0.9.0/qa-v09/preview-armory.png",
+    "/mnt/data/ALIEN_FLEUVE_DOULEUR_v0.9.0/qa-v09/preview-road.png",
+    "/mnt/data/ALIEN_FLEUVE_DOULEUR_v0.9.0/qa-v09/preview-stairs.png",
+    "/mnt/data/ALIEN_FLEUVE_DOULEUR_v0.9.0/qa-v09/preview-arsenal.png",
+    "/mnt/data/ALIEN_FLEUVE_DOULEUR_v0.9.0/qa-v09/preview-profiles.png"
+  ],
+  "http": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:38999/JOUER.html\nCall log:\n  - navigating to \"http://127.0.0.1:38999/JOUER.html\", waiting until \"load\"\n",
+  "hash": "848447af5ceb842e35930d60a5248f1bd0003eacb58ca0205dbce0f88cbcc066",
+  "state": {
+    "version": "0.9.0-candidate.1",
+    "rooms": 47,
+    "modal": "fidelity"
+  }
+}

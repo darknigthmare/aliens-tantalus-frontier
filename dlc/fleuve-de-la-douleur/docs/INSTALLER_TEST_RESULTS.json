@@ -1,0 +1,119 @@
+{
+  "passed": true,
+  "cases": 28,
+  "scope": "Fixtures using the observed host DOM, not the complete Tantalus repository",
+  "results": [
+    {
+      "name": "Installation additive sur fixture des ancrages observés",
+      "passed": true
+    },
+    {
+      "name": "Deuxième exécution sans doublon",
+      "passed": true
+    },
+    {
+      "name": "Retrait restauré octet pour octet",
+      "passed": true
+    },
+    {
+      "name": "Refus si index modifié après installation",
+      "passed": true
+    },
+    {
+      "name": "Refus si un module du DLC a été modifié",
+      "passed": true
+    },
+    {
+      "name": "Échec injecté après copie : restauration",
+      "passed": true
+    },
+    {
+      "name": "Dossier inconnu existant jamais écrasé",
+      "passed": true
+    },
+    {
+      "name": "Lien symbolique de destination refusé",
+      "passed": true
+    },
+    {
+      "name": "Autre projet refusé",
+      "passed": true
+    },
+    {
+      "name": "Ancrages manquants refusés",
+      "passed": true
+    },
+    {
+      "name": "v01 : mise à niveau exige --upgrade",
+      "passed": true
+    },
+    {
+      "name": "v01 vers v09 : pas de double lanceur ni ancien journal actif",
+      "passed": true
+    },
+    {
+      "name": "Retrait après upgrade : retour au shell pré-DLC",
+      "passed": true
+    },
+    {
+      "name": "Upgrade interrompue après commit : journal v01, index et modules restaurés",
+      "passed": true
+    },
+    {
+      "name": "Nouvelle tentative après rollback réussit",
+      "passed": true
+    },
+    {
+      "name": "v02 : remplacement exige aussi --upgrade",
+      "passed": true
+    },
+    {
+      "name": "v02 vers v04 : nouveaux modules, un seul journal actif",
+      "passed": true
+    },
+    {
+      "name": "Retrait du remplacement v02→v04 : shell initial exact",
+      "passed": true
+    },
+    {
+      "name": "Échec après commit v02→v04 : toutes les empreintes restaurées",
+      "passed": true
+    },
+    {
+      "name": "Deux journaux anciens concurrents : refus sans mutation",
+      "passed": true
+    },
+    {
+      "name": "Retrait et upgrade simultanés refusés",
+      "passed": true
+    },
+    {
+      "name": "Pas de faux upgrade sans version antérieure",
+      "passed": true
+    },
+    {
+      "name": "Fichier personnel ajouté au DLC préservé",
+      "passed": true
+    },
+    {
+      "name": "Backup v01 altérée : aucun upgrade",
+      "passed": true
+    },
+    {
+      "name": "Chemin sortant dans un journal : refus avant lecture ou écrasement",
+      "passed": true
+    },
+    {
+      "name": "Retrait interrompu après commit : v04 restaurée",
+      "passed": true
+    },
+    {
+      "name": "Installation neuve interrompue après commit : shell initial restauré",
+      "passed": true
+    },
+    {
+      "name": "Journaux concurrents : arrêt sans suppression",
+      "passed": true
+    }
+  ]
+}

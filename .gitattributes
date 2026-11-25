@@ -91,3 +91,7 @@ docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/s
 # V119 reviewed third-party distribution files are bound to their exact bytes.
 src/vendor/supabase-2.117.2.js -text
 src/vendor/supabase-LICENSE.txt -text
+
+# Recovered DLC source and original archives keep their published byte hashes.
+dlc/fleuve-de-la-douleur/** -text
+archives/river-of-pain/*.zip binary

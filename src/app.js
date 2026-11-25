@@ -888,6 +888,7 @@ const titleScreen = new TitleScreenController({
     return false;
   },
   onForge: () => openForgeContext(),
+  onDlc: () => globalThis.location.assign('/dlc/fleuve-de-la-douleur/'),
   onOptions: () => {
     titleSceneV79.preservePlacementOnNextShowV87();
     showView('settings');

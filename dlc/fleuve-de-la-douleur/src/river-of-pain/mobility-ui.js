@@ -1,0 +1,20 @@
+(function(root){'use strict';
+root.ROP_MOBILITY_UI=function({getSim,openDialog,closeDialog,events,esc}){
+ const M=root.ROP_MOBILITY,D=root.ROP_DATA,$=id=>document.getElementById(id);
+ function panel(station=null){
+  const sim=getSim(),s=sim.s,v=s.mobility.rover,inCab=M.mounted(s),local=D.mobility.stations.filter(d=>d.room===s.room);
+  const button=(action,label,id=null)=>{const why=M.reason(sim,action,id);return `<button data-rover-action="${action}" ${id?`data-station="${id}"`:''} ${why?'disabled':''}>${esc(why||label)}</button>`;};
+  const route=M.links(sim).map(p=>{const why=M.crossingReason(sim,p.to);return `<button data-drive-to="${p.to}" ${why?'disabled':''}>${esc(why||'PASSER VERS '+sim.roomName(p.to).toUpperCase())}</button>`;}).join('');
+  openDialog('rover',inCab?'Tracteur · Poste de conduite':'Le tracteur des prospecteurs',
+   `<div class="rover-panel"><section><span class="tiny">PROSPECTION / TRACTEUR 01</span><div class="rover-stat"><div><b>${Math.ceil(v.hp)} %</b><span>CHÂSSIS</span></div><div><b>${Math.ceil(v.battery)} %</b><span>BATTERIE</span></div><div><b>${inCab?'CABINE':'GARÉ'}</b><span>${esc(sim.roomName(v.room))}</span></div></div><p>${inCab?'Q/D : mouvement horizontal · Z/S : braquer en profondeur · ESPACE ou C : frein · F : avertisseur · L : phares.':'Le véhicule est accessible après sa préparation au chapitre Les coordonnées. La route reste entièrement praticable à pied.'}</p><div class="rover-actions">${inCab?button('exit','DESCENDRE À L’ARRÊT')+button('turn','DEMI-TOUR DE MANŒUVRE · 1,2 s')+button('lights',v.lights?'ÉTEINDRE LES PHARES':'ALLUMER LES PHARES')+button('horn','AVERTISSEUR LOCAL')+route:button('board','MONTER EN CABINE · 1,5 s')}</div><p class="tiny">Le garage, l’épave et les autres accès se visitent à pied. Pas d’écrasement d’ennemis, de siège compagnon ou de commande à distance. La 2D latérale réserve une bande de marche devant le tracteur garé.</p></section>
+   <section><span class="tiny">MAINTENANCE / RÉSERVES FINIES</span>${local.map(d=>{const q=s.mobility.stations[d.id];return `<article class="rover-station ${station===d.id?'selected':''}"><h3>${esc(d.label)}</h3><p>${q.repairs} trousse · ${q.charges} accumulateur. Garez le véhicule près de cette borne puis approchez-la à pied.</p><div class="rover-actions">${button('repair','RÉPARER · +55 MAX. · 3,2 s',d.id)}${button('charge','RECHARGER · +65 MAX. · 2,8 s',d.id)}</div></article>`;}).join('')||'<p>Aucune borne de prospection dans cette pièce.</p>'}<p class="rover-warning">Lecture en pause. Montée, descente et entretien reprennent dans le monde, sans invulnérabilité. Une batterie vide n’interdit pas de descendre.</p></section></div>`,[{label:'RETOUR AU TERRAIN',primary:true,run:()=>closeDialog()}],false,'VÉHICULE / TOUCHE 5');
+  for(const b of document.querySelectorAll('[data-rover-action]'))b.onclick=()=>{if(sim.useRover(b.dataset.roverAction,b.dataset.station||null)){closeDialog();events();}};
+  for(const b of document.querySelectorAll('[data-drive-to]'))b.onclick=()=>{if(sim.crossRover(b.dataset.driveTo)){closeDialog();events();}};
+ }
+ function hud(){const sim=getSim(),s=sim.s,v=s.mobility.rover,on=M.mounted(s),el=$('rover-hud');el.hidden=!on;document.documentElement.dataset.driving=on?'true':'false';
+  if(on){const terrain=M.surface(s),next=M.links(sim).find(p=>Math.abs(p.x-v.x)<170);el.innerHTML=`<div><small>TRACTEUR 01 · ${terrain?terrain.label:'PISTE DE PROSPECTION'}</small><strong>${Math.round(Math.abs(v.speed)*3.6/42)} <em>km/h simulés</em></strong></div><div><small>CHÂSSIS</small><b>${Math.ceil(v.hp)} %</b></div><div><small>BATTERIE</small><b>${Math.ceil(v.battery)} %</b></div><div class="rover-hint">${v.hp===0?'HORS SERVICE · E POUR DESCENDRE':next?'ARRÊTEZ-VOUS · E POUR LE PASSAGE':'ESPACE FREIN · E CABINE · F AVERTISSEUR'}<small>${v.lights?'PHARES ALLUMÉS':'PHARES ÉTEINTS'} · ${v.speed*v.heading<0?'MARCHE ARRIÈRE':'MARCHE AVANT'}</small></div>`;}
+  const b=document.querySelector('[data-held="crouch"]'),f=document.querySelector('[data-held="fire"]');if(b)b.textContent=on?'FREIN':'BAS';if(f)f.textContent=on?'BIP':'TIR';
+ }
+ return {panel,hud};
+};
+})(globalThis);

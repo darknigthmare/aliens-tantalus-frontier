@@ -1,0 +1,571 @@
+{
+  "version": "0.9.0-candidate.1",
+  "passed": true,
+  "cases": [
+    {
+      "name": "Périmètre inchangé : 46 pièces, 62 liens, 49 objectifs, 6 détours et 34 archives",
+      "passed": true
+    },
+    {
+      "name": "Registre original : 12 habitants / 24 thèmes / 12 réserves / 3 établis / 2 recettes",
+      "passed": true
+    },
+    {
+      "name": "vale hybrid : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "vale hybrid : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "rhee hybrid : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "rhee hybrid : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "arden hybrid : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "arden hybrid : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "becker hybrid : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "becker hybrid : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "ferris hybrid : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "ferris hybrid : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "corban hybrid : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "corban hybrid : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "hale hybrid : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "hale hybrid : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "doran hybrid : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "doran hybrid : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "sato hybrid : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "sato hybrid : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "bell hybrid : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "bell hybrid : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "kent hybrid : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "kent hybrid : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "voss hybrid : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "voss hybrid : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "vale classic : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "vale classic : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "rhee classic : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "rhee classic : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "arden classic : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "arden classic : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "becker classic : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "becker classic : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "ferris classic : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "ferris classic : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "corban classic : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "corban classic : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "hale classic : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "hale classic : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "doran classic : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "doran classic : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "sato classic : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "sato classic : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "bell classic : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "bell classic : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "kent classic : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "kent classic : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "voss classic : routine locale réelle et immobilité hors champ",
+      "passed": true
+    },
+    {
+      "name": "voss classic : approcher, E, parler et mémoriser sans crédit de mission",
+      "passed": true
+    },
+    {
+      "name": "vale : absence des routines après le début de l’effondrement, souvenir conservé",
+      "passed": true
+    },
+    {
+      "name": "rhee : absence des routines après le début de l’effondrement, souvenir conservé",
+      "passed": true
+    },
+    {
+      "name": "arden : absence des routines après le début de l’effondrement, souvenir conservé",
+      "passed": true
+    },
+    {
+      "name": "becker : absence des routines après le début de l’effondrement, souvenir conservé",
+      "passed": true
+    },
+    {
+      "name": "ferris : absence des routines après le début de l’effondrement, souvenir conservé",
+      "passed": true
+    },
+    {
+      "name": "corban : absence des routines après le début de l’effondrement, souvenir conservé",
+      "passed": true
+    },
+    {
+      "name": "hale : absence des routines après le début de l’effondrement, souvenir conservé",
+      "passed": true
+    },
+    {
+      "name": "doran : absence des routines après le début de l’effondrement, souvenir conservé",
+      "passed": true
+    },
+    {
+      "name": "sato : absence des routines après le début de l’effondrement, souvenir conservé",
+      "passed": true
+    },
+    {
+      "name": "bell : absence des routines après le début de l’effondrement, souvenir conservé",
+      "passed": true
+    },
+    {
+      "name": "kent : absence des routines après le début de l’effondrement, souvenir conservé",
+      "passed": true
+    },
+    {
+      "name": "voss : absence des routines après le début de l’effondrement, souvenir conservé",
+      "passed": true
+    },
+    {
+      "name": "supply-arrivals hybrid : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-garrison hybrid : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-kitchen hybrid : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-habitat hybrid : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-medical hybrid : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-biomedical hybrid : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-archive hybrid : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-garage hybrid : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-cargo hybrid : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-laundry hybrid : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-workshop hybrid : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-vent hybrid : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-arrivals classic : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-garrison classic : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-kitchen classic : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-habitat classic : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-medical classic : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-biomedical classic : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-archive classic : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-garage classic : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-cargo classic : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-laundry classic : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-workshop classic : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "supply-vent classic : E prioritaire, ouverture temporisée persistante sans duplication",
+      "passed": true
+    },
+    {
+      "name": "bench-garrison hybrid : position libre et E distinct des sorties",
+      "passed": true
+    },
+    {
+      "name": "bench-garrison classic : position libre et E distinct des sorties",
+      "passed": true
+    },
+    {
+      "name": "bench-biomed hybrid : position libre et E distinct des sorties",
+      "passed": true
+    },
+    {
+      "name": "bench-biomed classic : position libre et E distinct des sorties",
+      "passed": true
+    },
+    {
+      "name": "bench-workshop hybrid : position libre et E distinct des sorties",
+      "passed": true
+    },
+    {
+      "name": "bench-workshop classic : position libre et E distinct des sorties",
+      "passed": true
+    },
+    {
+      "name": "Interaction : résident accessible devant un conduit interdit en vue classique",
+      "passed": true
+    },
+    {
+      "name": "Conversation dédiée : P ne franchit pas une porte voisine",
+      "passed": true
+    },
+    {
+      "name": "Conversation : distance refusée et thème inconnu ne crée pas de souvenir",
+      "passed": true
+    },
+    {
+      "name": "Conversation : déplacement annule avant ouverture",
+      "passed": true
+    },
+    {
+      "name": "Conversation : tir déclenche mise à couvert, pas un dialogue pendant la panique",
+      "passed": true
+    },
+    {
+      "name": "Réserve : ouverture rapide plus bruyante, avant la méthode discrète",
+      "passed": true
+    },
+    {
+      "name": "Réserve : blessure interrompt, couvercle fermé et contenu intact",
+      "passed": true
+    },
+    {
+      "name": "Réserve : plafond de composant, surplus conservé et seconde collecte refusée",
+      "passed": true
+    },
+    {
+      "name": "Réserve : objet épuisé ne revient pas après sauvegarde et nouvelle entrée",
+      "passed": true
+    },
+    {
+      "name": "Ration : aucune consommation à pleine santé, soin plafonné à 100",
+      "passed": true
+    },
+    {
+      "name": "Newt : provisions autorisées, bricolage et équipement militaire refusés",
+      "passed": true
+    },
+    {
+      "name": "Anne : pas de munitions récupérées, composants autorisés",
+      "passed": true
+    },
+    {
+      "name": "Établi : consommation seulement au terme et recette reproductible",
+      "passed": true
+    },
+    {
+      "name": "Établi : déplacement interrompt sans débiter un composant",
+      "passed": true
+    },
+    {
+      "name": "Établi : rechargement utilise une pile, respecte le plafond",
+      "passed": true
+    },
+    {
+      "name": "Établi : import en cours abandonne la manœuvre sans consommation",
+      "passed": true
+    },
+    {
+      "name": "Établi : ingrédients insuffisants et portage plein refusés",
+      "passed": true
+    },
+    {
+      "name": "Balise : délai armement, aucun signal prématuré, pulsation non explosive",
+      "passed": true
+    },
+    {
+      "name": "Balise : limite deux actives, non duplication des ressources",
+      "passed": true
+    },
+    {
+      "name": "Balise : expiration hors champ, débris bornés et aucune restitution",
+      "passed": true
+    },
+    {
+      "name": "Balise : aucune attraction à travers le graphe ou hors portée",
+      "passed": true
+    },
+    {
+      "name": "Balise : cible perçue prioritaire sur le leurre",
+      "passed": true
+    },
+    {
+      "name": "Balise : détourne un adversaire sans contact visuel puis se fait détruire",
+      "passed": true
+    },
+    {
+      "name": "Balise : mémoire de poursuite vise le bip, pas le joueur hors portée",
+      "passed": true
+    },
+    {
+      "name": "Balise : import conserve minuteur et propriétaire sans double prélèvement",
+      "passed": true
+    },
+    {
+      "name": "Balise : changement en classique aligne le signal et sa représentation",
+      "passed": true
+    },
+    {
+      "name": "Poches séparées par protagoniste et état antérieur au checkpoint restauré",
+      "passed": true
+    },
+    {
+      "name": "Import refuse révision",
+      "passed": true
+    },
+    {
+      "name": "Import refuse poche absente",
+      "passed": true
+    },
+    {
+      "name": "Import refuse poche inconnue",
+      "passed": true
+    },
+    {
+      "name": "Import refuse surcapacité",
+      "passed": true
+    },
+    {
+      "name": "Import refuse fraction",
+      "passed": true
+    },
+    {
+      "name": "Import refuse matériel Newt",
+      "passed": true
+    },
+    {
+      "name": "Import refuse stat négative",
+      "passed": true
+    },
+    {
+      "name": "Import refuse stat additionnelle",
+      "passed": true
+    },
+    {
+      "name": "Import refuse contact inconnu",
+      "passed": true
+    },
+    {
+      "name": "Import refuse contact futur",
+      "passed": true
+    },
+    {
+      "name": "Import refuse contact thème faux",
+      "passed": true
+    },
+    {
+      "name": "Import refuse contact doublon",
+      "passed": true
+    },
+    {
+      "name": "Import refuse coffre inconnu",
+      "passed": true
+    },
+    {
+      "name": "Import refuse coffre rempli abusivement",
+      "passed": true
+    },
+    {
+      "name": "Import refuse coffre fermé dépensé",
+      "passed": true
+    },
+    {
+      "name": "Import refuse minuteur négatif",
+      "passed": true
+    },
+    {
+      "name": "Import refuse balise Newt",
+      "passed": true
+    },
+    {
+      "name": "Import refuse balise précoce",
+      "passed": true
+    },
+    {
+      "name": "Vrai export 01 : migration initialisée sans inventer rencontres ou ressources",
+      "passed": true
+    },
+    {
+      "name": "Vrai export 02 : migration initialisée sans inventer rencontres ou ressources",
+      "passed": true
+    },
+    {
+      "name": "Vrai export 03 : migration initialisée sans inventer rencontres ou ressources",
+      "passed": true
+    },
+    {
+      "name": "Vrai export 04 : migration initialisée sans inventer rencontres ou ressources",
+      "passed": true
+    }
+  ],
+  "scope": "Explicit local fixtures and real prior export files; simulation updates/actions execute the outcomes. Not a manual campaign."
+}

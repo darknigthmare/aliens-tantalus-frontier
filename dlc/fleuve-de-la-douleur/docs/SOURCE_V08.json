@@ -1,0 +1,14 @@
+{
+  "id": "river-of-pain",
+  "version": "0.8.0-candidate.1",
+  "sourceArchive": "ALIENS_TANTALUS_DLC_FLEUVE_DOULEUR_v0.7.0.zip",
+  "sha256": "3a9f88c5c8405b8dac6661a6c5e9662a4edd047aa990e193ed85eda61ebd5470",
+  "sourceStandaloneSHA256": "1debd06feb649074ce8aaaeb655d0041718edab1a4a42c74b02d96aaf783dbc0",
+  "sourceStatus": "Original 0.7 ZIP mounted and extracted; runtime files copied then modified. No remote repository source substituted.",
+  "previousExport": "tests/fixtures/real-v07-save.json",
+  "previousExportSHA256": "21842cd370ef7a8127b250b66aafc50446e91fca0ba5a32800678c312ec35e74",
+  "createdOn": "2026-09-29",
+  "published": false,
+  "nativeEngineIntegrated": false,
+  "scope": "Local additive playable module; original new mechanics, not authenticated vehicle specifications or chapter-by-chapter novel adaptation"
+}

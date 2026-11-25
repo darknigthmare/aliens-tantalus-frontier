@@ -18,6 +18,56 @@ const freeze = value => {
   return value;
 };
 
+// Fleuve de la Douleur is a separate, bounded admission after Obscura.
+// Only these five reviewed host entry/tooling files continue; historical
+// receipts, workbooks, saved games and execution claims remain unchanged.
+export const RIVER_OF_PAIN_BASELINE_20261125 = '882ffdee7ed83a549bf2c1c4b9fa38de8e70edc2';
+export const RIVER_OF_PAIN_SUCCESSORS_20261125 = freeze({
+  "index.html": {
+    "previousSha256": "337a0b230d0b075bf70e5122240f1ce8e0d2deaebbbd563a15496ea92b5f4d66",
+    "currentSha256": "8df9ef8b6e8f36fef345f341d381e593cd6379701a0cc020fae92e9f62751765"
+  },
+  "package.json": {
+    "previousSha256": "ff133a405bfc1ef2afa7085fcb2a6cde27a9f52c4af0de5172a058b47082eb48",
+    "currentSha256": "0234100bcf99e381765dc8febc1898e7e96f8b722bc164fdde7b193cf6bec508"
+  },
+  "scripts/verify-public-release-v86.mjs": {
+    "previousSha256": "a303c2a1d1ee26fb5fb0e9312efac2f6a093dc50d8c1c88a40ca99fefcd3f8e3",
+    "currentSha256": "39af73bda1b4a2b6632814c4b6c9a2e56c6273b14dfafeee60c1401d610478fe"
+  },
+  "src/app.js": {
+    "previousSha256": "482835e65677c536085a1344cf61c3ffa5e09e2af1b8029b949e000a533038ae",
+    "currentSha256": "b8332e8b8e4ae1af84177454175d57806dfa606dc48e8846892a6b383ad73313"
+  },
+  "src/title-screen-v61.js": {
+    "previousSha256": "e0c10ca738df12c78b48a24d79cb049aea2ac3e1c08ec270d3eed750fe267342",
+    "currentSha256": "dffa0959d800ef2c8e13271408048b5350b624f570ad8928504d0a32b2ca4355"
+  }
+});
+
+export function reviewedRiverOfPainDigest20261125(path, endpoint) {
+  const receipt = RIVER_OF_PAIN_SUCCESSORS_20261125[path];
+  if (!receipt) return endpoint;
+  assert.equal(endpoint, receipt.previousSha256, 'Broken Fleuve source predecessor: ' + path);
+  assert.ok(validHash(receipt.currentSha256), 'Invalid Fleuve source digest: ' + path);
+  assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'Fleuve successor must change bytes: ' + path);
+  return receipt.currentSha256;
+}
+
+export function verifyRiverOfPainSuccession20261125(readSource = readRepository) {
+  for (const [path, receipt] of Object.entries(RIVER_OF_PAIN_SUCCESSORS_20261125)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.ok(validHash(receipt.previousSha256));
+    assert.equal(sha(readSource(path)), reviewedRiverOfPainDigest20261125(path, receipt.previousSha256),
+      'Unreviewed Fleuve source bytes: ' + path);
+  }
+  return Object.freeze({
+    successors: Object.keys(RIVER_OF_PAIN_SUCCESSORS_20261125).length,
+    recoveredDlcVersion: '0.9.0-candidate.1',
+    historicalEvidenceTransferred: false,
+  });
+}
+
 // Obscura is a separate source admission after the published V187 endpoint.
 // The historical V187 maps below keep their original hashes and no execution
 // result is transferred. This terminal audit still imports no other audit.
@@ -53,11 +103,11 @@ export const OBSCURA_SOURCE_ONLY_PATHS_20261115 = Object.freeze([
 
 export function reviewedObscuraDigest20261115(path, endpoint) {
   const receipt = OBSCURA_VERIFIER_SUCCESSOR_20261115;
-  if (path !== receipt.path) return endpoint;
+  if (path !== receipt.path) return reviewedRiverOfPainDigest20261125(path, endpoint);
   assert.equal(endpoint, receipt.previousSha256, 'Broken V187-to-Obscura source chain: ' + path);
   assert.ok(validHash(receipt.currentSha256));
   assert.notEqual(receipt.currentSha256, receipt.previousSha256);
-  return receipt.currentSha256;
+  return reviewedRiverOfPainDigest20261125(path, receipt.currentSha256);
 }
 
 export function verifyObscuraSources20261115(readSource = readRepository) {

@@ -1,0 +1,79 @@
+{
+  "cases": 18,
+  "passed": true,
+  "scope": "SaveStore with explicit in-memory Storage fixtures. NOT a native browser localStorage/close-reopen certification.",
+  "results": [
+    {
+      "name": "Aucune donnée : pas de fausse sauvegarde",
+      "passed": true
+    },
+    {
+      "name": "Première écriture vérifiée sur un slot séparé de la clé héritée",
+      "passed": true
+    },
+    {
+      "name": "Alternance des copies : ancienne et nouvelle restent valides",
+      "passed": true
+    },
+    {
+      "name": "Nouvelle instance de lecteur : reprise de la copie la plus récente",
+      "passed": true
+    },
+    {
+      "name": "Copie la plus récente tronquée : récupération automatique de l’antérieure",
+      "passed": true
+    },
+    {
+      "name": "Somme altérée : ancienne copie retenue sans charger la mutation",
+      "passed": true
+    },
+    {
+      "name": "Somme recalculée mais état invalide : refus par le vrai validateur de jeu",
+      "passed": true
+    },
+    {
+      "name": "Quota lors d’une sauvegarde : la dernière copie reste intacte",
+      "passed": true
+    },
+    {
+      "name": "Écriture tronquée par le support : relecture échoue mais copie précédente conservée",
+      "passed": true
+    },
+    {
+      "name": "Deux copies invalides : pas d’écrasement automatique",
+      "passed": true
+    },
+    {
+      "name": "Remplacement explicite après confirmation : nouvelle copie lisible",
+      "passed": true
+    },
+    {
+      "name": "Reprise après récupération : le mauvais slot est réparé, le bon reste intact",
+      "passed": true
+    },
+    {
+      "name": "Clé héritée 0.3 : lue, migrée, jamais écrasée",
+      "passed": true
+    },
+    {
+      "name": "Clé du jeu principal et autre DLC : jamais touchées",
+      "passed": true
+    },
+    {
+      "name": "Politique navigateur refusant Storage : erreur visible, pas de faux succès",
+      "passed": true
+    },
+    {
+      "name": "Charge invalide refusée avant toute écriture",
+      "passed": true
+    },
+    {
+      "name": "Séquence non entière ou illimitée : refus de la copie",
+      "passed": true
+    },
+    {
+      "name": "Taille hors contrat refusée sans remplacer un slot valide",
+      "passed": true
+    }
+  ]
+}

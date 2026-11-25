@@ -1,0 +1,214 @@
+{
+  "version": "0.8.0-candidate.1",
+  "part": "B",
+  "htmlSHA256": "53cafebbf4a43b9c2cf6d406452a7b491ac818c7f47bc5d40b21eef13dde83b7",
+  "cases": [
+    {
+      "name": "Current HTML and new module load without external assets",
+      "passed": true
+    },
+    {
+      "name": "Exit denied while moving, with an explicit instruction",
+      "passed": true
+    },
+    {
+      "name": "Driving consumes rover battery and brakes stop inertia",
+      "passed": true
+    },
+    {
+      "name": "Real downloaded JSON contains a moving vehicle",
+      "passed": true,
+      "speed": 505.8333333333333
+    },
+    {
+      "name": "Downloaded moving vehicle imports without duplicate boarding or replenishment",
+      "passed": true
+    },
+    {
+      "name": "Physical keyboard driving traverses the whole road",
+      "passed": true
+    },
+    {
+      "name": "Stopped real road portal transfers vehicle and driver exactly once",
+      "passed": true
+    },
+    {
+      "name": "Driving has not remotely completed the beacon objective",
+      "passed": true
+    },
+    {
+      "name": "Walking away leaves the vehicle in place",
+      "passed": true
+    },
+    {
+      "name": "Local map shows actual parked rover and service station",
+      "passed": true
+    },
+    {
+      "name": "Classic driving stays on its lateral plane",
+      "passed": true
+    },
+    {
+      "name": "Classic parking frees the front walking strip without enclosing the player",
+      "passed": true
+    }
+  ],
+  "captures": [
+    {
+      "file": "captures/05-driving-v08.png",
+      "description": "Tracteur déplacé au clavier sur la piste ; pause ouverte pour conserver un export en mouvement",
+      "setup": "Localized prepared fixture: parked.json",
+      "state": {
+        "room": "road",
+        "chapter": 3,
+        "character": "anne",
+        "mode": "hybrid",
+        "elapsed": 5.099999999999987,
+        "mobility": {
+          "revision": 8,
+          "rover": {
+            "room": "road",
+            "x": 1616.7222222222163,
+            "z": 0.79,
+            "hp": 100,
+            "battery": 99.2376282051284,
+            "speed": 505.8333333333333,
+            "heading": 1,
+            "driver": "anne",
+            "lights": true,
+            "wheels": 29.897569444444258,
+            "hurt": 0,
+            "horn": 0,
+            "hornCooldown": 0
+          },
+          "stations": {
+            "service-road": {
+              "repairs": 1,
+              "charges": 1
+            },
+            "service-plateau": {
+              "repairs": 1,
+              "charges": 1
+            }
+          },
+          "stats": {
+            "boarded": 1,
+            "exits": 0,
+            "crossings": 0,
+            "collisions": 0,
+            "repairs": 0,
+            "charges": 0,
+            "horns": 0,
+            "distance": 956.7222222222163
+          }
+        },
+        "modal": "pause"
+      }
+    },
+    {
+      "file": "captures/06-plateau-driving-v08.png",
+      "description": "Arrivée sur le plateau après conduite et passage par la commande routière",
+      "setup": "Actual exported JSON: browser-v08-driving.json",
+      "state": {
+        "room": "plateau",
+        "chapter": 3,
+        "character": "anne",
+        "mode": "hybrid",
+        "elapsed": 13.183333333333568,
+        "mobility": {
+          "revision": 8,
+          "rover": {
+            "room": "plateau",
+            "x": 878.1250000000001,
+            "z": 0.78,
+            "hp": 100,
+            "battery": 97.31030448718042,
+            "speed": 0,
+            "heading": 1,
+            "driver": "anne",
+            "lights": true,
+            "wheels": 101.45572916666731,
+            "hurt": 0,
+            "horn": 0,
+            "hornCooldown": 0
+          },
+          "stations": {
+            "service-road": {
+              "repairs": 1,
+              "charges": 1
+            },
+            "service-plateau": {
+              "repairs": 1,
+              "charges": 1
+            }
+          },
+          "stats": {
+            "boarded": 1,
+            "exits": 0,
+            "crossings": 1,
+            "collisions": 0,
+            "repairs": 0,
+            "charges": 0,
+            "horns": 0,
+            "distance": 3246.583333333354
+          }
+        },
+        "modal": null
+      }
+    },
+    {
+      "file": "captures/07-parked-on-foot-v08.png",
+      "description": "Descente sur un appui libre ; le tracteur reste stationné",
+      "setup": "Actual exported JSON: browser-v08-driving.json",
+      "state": {
+        "room": "plateau",
+        "chapter": 3,
+        "character": "anne",
+        "mode": "hybrid",
+        "elapsed": 14.76666666666698,
+        "mobility": {
+          "revision": 8,
+          "rover": {
+            "room": "plateau",
+            "x": 878.1250000000001,
+            "z": 0.78,
+            "hp": 100,
+            "battery": 97.2253044871805,
+            "speed": 0,
+            "heading": 1,
+            "driver": null,
+            "lights": false,
+            "wheels": 101.45572916666731,
+            "hurt": 0,
+            "horn": 0,
+            "hornCooldown": 0
+          },
+          "stations": {
+            "service-road": {
+              "repairs": 1,
+              "charges": 1
+            },
+            "service-plateau": {
+              "repairs": 1,
+              "charges": 1
+            }
+          },
+          "stats": {
+            "boarded": 1,
+            "exits": 1,
+            "crossings": 1,
+            "collisions": 0,
+            "repairs": 0,
+            "charges": 0,
+            "horns": 0,
+            "distance": 3246.583333333354
+          }
+        },
+        "modal": null
+      }
+    }
+  ],
+  "errors": [],
+  "method": "Exact standalone via set_content after HTTP was blocked (SMOKE_V08.json). Public keyboard/buttons, ordinary file import, real downloads. No live state/health/objective/clock writes. Localized prepared fixtures are labelled.",
+  "passed": true
+}

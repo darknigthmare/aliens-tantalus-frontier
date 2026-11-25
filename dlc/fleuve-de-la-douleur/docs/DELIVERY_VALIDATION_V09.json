@@ -1,0 +1,991 @@
+{
+  "version": "0.9.0-candidate.1",
+  "passed": true,
+  "htmlSHA256": "91ae538879b939018cea5dc3ba2eb9e45faea7693fdd952efbe8531b33cdfced",
+  "checks": [
+    {
+      "name": "Version du contenu",
+      "passed": true
+    },
+    {
+      "name": "Version du paquet",
+      "passed": true
+    },
+    {
+      "name": "Données exécutées identiques au manifeste JSON",
+      "passed": true
+    },
+    {
+      "name": "47 identifiants de pièces distincts",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · pad>airlock",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · airlock>pad",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · airlock>concourse",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · concourse>airlock",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · concourse>ops",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · concourse>hab",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · concourse>med",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · concourse>garage",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · ops>concourse",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · ops>briefing",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · ops>relay",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · ops>aerial",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · ops>armory",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · briefing>ops",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · briefing>armory",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · hab>concourse",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · hab>jorden",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · hab>recreation",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · hab>wash",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · hab>pantry",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · jorden>hab",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · jorden>vent_hab",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · mess>recreation",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · mess>wash",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · mess>stores",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · mess>pantry",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · recreation>hab",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · recreation>mess",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · recreation>vent_hab",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · recreation>greenhouse",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · med>concourse",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · med>isolation",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · med>clinic_store",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · med>science",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · med>biomed",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · isolation>med",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · isolation>vent_med",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · science>med",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · science>records",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · science>service",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · science>hangar",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · records>science",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · records>relay",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · garage>concourse",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · garage>survey",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · garage>service",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · garage>road",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · garage>workshop",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · survey>garage",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · survey>stores",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · survey>vent_survey",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · stores>survey",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · stores>power",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · stores>mess",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · power>stores",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · power>pump",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · power>coolant",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · pump>power",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · pump>service",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · pump>approach",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · pump>drain",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · service>pump",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · service>science",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · service>garage",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · road>garage",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · road>plateau",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · road>processor6",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · plateau>road",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · plateau>derelict",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · derelict>plateau",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · derelict>derelict_gallery",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · processor6>road",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · processor6>workshop",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · approach>pump",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · approach>lift",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · lift>approach",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · lift>hive",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · hive>lift",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · hive>coolant",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · coolant>hive",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · coolant>power",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · coolant>drain",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · vent_hab>jorden",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · vent_hab>vent_med",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · vent_hab>vent_survey",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · vent_hab>recreation",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · vent_med>vent_hab",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · vent_med>isolation",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · vent_med>nest",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · vent_survey>vent_hab",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · vent_survey>survey",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · vent_survey>refuge",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · refuge>vent_survey",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · refuge>wash",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · refuge>nest",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · hangar>science",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · hangar>shuttle",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · shuttle>hangar",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · wash>refuge",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · wash>mess",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · wash>hab",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · wash>greenhouse",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · relay>records",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · relay>ops",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · relay>aerial",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · clinic_store>med",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · clinic_store>biomed",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · pantry>mess",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · pantry>hab",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · biomed>med",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · biomed>clinic_store",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · aerial>relay",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · aerial>ops",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · workshop>garage",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · workshop>processor6",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · drain>pump",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · drain>coolant",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · nest>vent_med",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · nest>refuge",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · greenhouse>recreation",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · greenhouse>wash",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · armory>briefing",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · armory>ops",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · derelict_gallery>derelict",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · derelict_gallery>pilot_chamber",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · pilot_chamber>derelict_gallery",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · pilot_chamber>egg_vault",
+      "passed": true
+    },
+    {
+      "name": "Retour et support · egg_vault>pilot_chamber",
+      "passed": true
+    },
+    {
+      "name": "64 liens / 128 extrémités uniques",
+      "passed": true
+    },
+    {
+      "name": "Graphe connexe, sans contourner les droits dans le jeu",
+      "passed": true
+    },
+    {
+      "name": "49 objectifs de 16 chapitres",
+      "passed": true
+    },
+    {
+      "name": "Toutes les cibles appartiennent au graphe",
+      "passed": true
+    },
+    {
+      "name": "547 placements dérivés",
+      "passed": true
+    },
+    {
+      "name": "74 couvertures dérivées",
+      "passed": true
+    },
+    {
+      "name": "Registre de 93 fiches",
+      "passed": true
+    },
+    {
+      "name": "14 profils, distincts des 4 protagonistes",
+      "passed": true
+    },
+    {
+      "name": "Les 4 lieux encore manquants restent indiqués",
+      "passed": true
+    },
+    {
+      "name": "Aucun script externe dans le HTML autonome",
+      "passed": true
+    },
+    {
+      "name": "Aucune feuille de style externe",
+      "passed": true
+    },
+    {
+      "name": "Numéro visible actualisé",
+      "passed": true
+    },
+    {
+      "name": "Navigateur achevé sans erreur ni dépendance réseau",
+      "passed": true
+    },
+    {
+      "name": "Empreinte exacte du HTML testé",
+      "passed": true
+    },
+    {
+      "name": "35 contrôles navigateur actuels",
+      "passed": true
+    },
+    {
+      "name": "20 captures actuelles",
+      "passed": true
+    },
+    {
+      "name": "PNG courant · 01-menu.png",
+      "passed": true
+    },
+    {
+      "name": "PNG courant · 02-seuil-armurerie.png",
+      "passed": true
+    },
+    {
+      "name": "PNG courant · 03-armement.png",
+      "passed": true
+    },
+    {
+      "name": "PNG courant · 04-m240.png",
+      "passed": true
+    },
+    {
+      "name": "PNG courant · 05-jorden.png",
+      "passed": true
+    },
+    {
+      "name": "PNG courant · 06-medical.png",
+      "passed": true
+    },
+    {
+      "name": "PNG courant · 07-unite-medicale.png",
+      "passed": true
+    },
+    {
+      "name": "PNG courant · 08-serre.png",
+      "passed": true
+    },
+    {
+      "name": "PNG courant · 09-pilote.png",
+      "passed": true
+    },
+    {
+      "name": "PNG courant · 10-corde.png",
+      "passed": true
+    },
+    {
+      "name": "PNG courant · 11-cale.png",
+      "passed": true
+    },
+    {
+      "name": "PNG courant · 12-piste.png",
+      "passed": true
+    },
+    {
+      "name": "PNG courant · 13-escalier.png",
+      "passed": true
+    },
+    {
+      "name": "PNG courant · 14-simpson.png",
+      "passed": true
+    },
+    {
+      "name": "PNG courant · 15-newt.png",
+      "passed": true
+    },
+    {
+      "name": "PNG courant · 16-personnages.png",
+      "passed": true
+    },
+    {
+      "name": "PNG courant · 17-manques.png",
+      "passed": true
+    },
+    {
+      "name": "PNG courant · 18-plan.png",
+      "passed": true
+    },
+    {
+      "name": "PNG courant · 19-portrait.png",
+      "passed": true
+    },
+    {
+      "name": "PNG courant · 20-paysage-court.png",
+      "passed": true
+    },
+    {
+      "name": "Toutes les suites du modèle achevées",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/fidelity-ui.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/defense-ui.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/ducts-visuals.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/render.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/architecture.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/exploration.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/style.css",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/ducts.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/core.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/passage-visuals.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/launcher.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/life-visuals.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/ui.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/armory.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/ducts-ui.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/mobility.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/life.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/colony.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/persistence.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/mobility-ui.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/fidelity-visuals.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/mobility-visuals.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/defense.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/defense-visuals.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/data.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/field-visuals.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/passages.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/life-ui.js",
+      "passed": true
+    },
+    {
+      "name": "Source testée · src/river-of-pain/index.html",
+      "passed": true
+    },
+    {
+      "name": "Tests courants · CORE",
+      "passed": true
+    },
+    {
+      "name": "Tests courants · COLONY",
+      "passed": true
+    },
+    {
+      "name": "Tests courants · EXPLORATION",
+      "passed": true
+    },
+    {
+      "name": "Tests courants · PASSAGES",
+      "passed": true
+    },
+    {
+      "name": "Tests courants · PERSISTENCE",
+      "passed": true
+    },
+    {
+      "name": "Tests courants · LIFE",
+      "passed": true
+    },
+    {
+      "name": "Tests courants · DEFENSE",
+      "passed": true
+    },
+    {
+      "name": "Tests courants · DUCT",
+      "passed": true
+    },
+    {
+      "name": "Tests courants · MOBILITY",
+      "passed": true
+    },
+    {
+      "name": "Tests courants · FIDELITY",
+      "passed": true
+    },
+    {
+      "name": "1246 cas et groupes du modèle",
+      "passed": true
+    },
+    {
+      "name": "6 parcours · principal",
+      "passed": true
+    },
+    {
+      "name": "6 parcours · _EXPLORATION",
+      "passed": true
+    },
+    {
+      "name": "6 parcours · _LIFE",
+      "passed": true
+    },
+    {
+      "name": "6 parcours · _DEFENSE",
+      "passed": true
+    },
+    {
+      "name": "6 parcours · _DUCT",
+      "passed": true
+    },
+    {
+      "name": "6 parcours · _MOBILITY",
+      "passed": true
+    },
+    {
+      "name": "6 parcours · _FIDELITY",
+      "passed": true
+    },
+    {
+      "name": "Recette · INSTALLER_TEST_RESULTS",
+      "passed": true
+    },
+    {
+      "name": "Recette · REAL_UPGRADE_TEST_RESULTS",
+      "passed": true
+    },
+    {
+      "name": "Export 0.8 non recréé",
+      "passed": true
+    },
+    {
+      "name": "Documentation liée au HTML courant",
+      "passed": true
+    },
+    {
+      "name": "Comptes documentés issus de la recette",
+      "passed": true
+    },
+    {
+      "name": "Rapport exécuté, empreinte et dimensions actuelles",
+      "passed": true
+    },
+    {
+      "name": "14 captures du rapport",
+      "passed": true
+    },
+    {
+      "name": "Capture intégrée exacte · 02-seuil-armurerie.png",
+      "passed": true
+    },
+    {
+      "name": "Capture intégrée exacte · 03-armement.png",
+      "passed": true
+    },
+    {
+      "name": "Capture intégrée exacte · 04-m240.png",
+      "passed": true
+    },
+    {
+      "name": "Capture intégrée exacte · 05-jorden.png",
+      "passed": true
+    },
+    {
+      "name": "Capture intégrée exacte · 06-medical.png",
+      "passed": true
+    },
+    {
+      "name": "Capture intégrée exacte · 08-serre.png",
+      "passed": true
+    },
+    {
+      "name": "Capture intégrée exacte · 09-pilote.png",
+      "passed": true
+    },
+    {
+      "name": "Capture intégrée exacte · 10-corde.png",
+      "passed": true
+    },
+    {
+      "name": "Capture intégrée exacte · 11-cale.png",
+      "passed": true
+    },
+    {
+      "name": "Capture intégrée exacte · 13-escalier.png",
+      "passed": true
+    },
+    {
+      "name": "Capture intégrée exacte · 16-personnages.png",
+      "passed": true
+    },
+    {
+      "name": "Capture intégrée exacte · 17-manques.png",
+      "passed": true
+    },
+    {
+      "name": "Capture intégrée exacte · 18-plan.png",
+      "passed": true
+    },
+    {
+      "name": "Capture intégrée exacte · 19-portrait.png",
+      "passed": true
+    },
+    {
+      "name": "Document courant · CODEX_LEVEL_DESIGN.md",
+      "passed": true
+    },
+    {
+      "name": "Document courant · QA_REPORT.md",
+      "passed": true
+    },
+    {
+      "name": "Document courant · REGISTRE_FIDELITE.md",
+      "passed": true
+    },
+    {
+      "name": "Document courant · SOURCES_ET_CONTINUITE.md",
+      "passed": true
+    },
+    {
+      "name": "Document courant · AUDIT_SEUILS_V09.json",
+      "passed": true
+    },
+    {
+      "name": "Reconstruction · build-content.py",
+      "passed": true
+    },
+    {
+      "name": "Reconstruction · build-standalone.py",
+      "passed": true
+    },
+    {
+      "name": "HTML reconstruit octet pour octet",
+      "passed": true
+    },
+    {
+      "name": "Données reconstruites identiques",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "tantalus-river-of-pain-dlc",
+  "version": "0.9.0-candidate.1",
+  "private": true,
+  "description": "Isolated playable fan DLC candidate for Tantalus Frontier",
+  "scripts": {
+    "test": "node tests/core.cjs && node tests/colony.cjs && node tests/exploration.cjs && node tests/passages.cjs && node tests/persistence.cjs && node tests/life.cjs && node tests/defense.cjs && node tests/ducts.cjs && node tests/mobility.cjs && node tests/fidelity.cjs && node tests/traversal.cjs && node tests/traversal-exploration.cjs && node tests/traversal-life.cjs && node tests/traversal-defense.cjs && node tests/traversal-ducts.cjs && node tests/traversal-mobility.cjs && node tests/traversal-fidelity.cjs && node tests/installer.mjs",
+    "build": "python -X utf8 tools/build-content.py && python -X utf8 tools/build-standalone.py",
+    "test:browser": "python -X utf8 tests/browser-v09.py",
+    "docs": "python -X utf8 tools/build-docs-v09.py",
+    "test:report": "python -X utf8 tests/report-v09.py",
+    "test:life-traversal": "node tests/traversal-life.cjs",
+    "test:defense-traversal": "node tests/traversal-defense.cjs",
+    "test:ducts": "node tests/ducts.cjs && node tests/traversal-ducts.cjs",
+    "verify": "python -X utf8 tools/verify-v09.py",
+    "package": "python -X utf8 tools/package-v09.py",
+    "test:qualify": "python -X utf8 tools/qualify-v09.py",
+    "test:mobility": "node tests/mobility.cjs && node tests/traversal-mobility.cjs",
+    "test:fidelity": "node tests/fidelity.cjs && node tests/traversal-fidelity.cjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

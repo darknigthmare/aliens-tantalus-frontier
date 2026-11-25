@@ -1,0 +1,69 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { mkdtemp, readFile, readdir, rm, writeFile, symlink, mkdir } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { RIVER_OF_PAIN_MANIFEST as manifest, RIVER_OF_PAIN_ROOT as dlc,
+  RIVER_OF_PAIN_RUNTIME as runtime, riverOfPainPathAdmission,
+  verifyRiverOfPainRecovery, copyRiverOfPainRuntime, verifyRiverOfPainRuntime } from './river-of-pain-distribution.mjs';
+import { isPublicDistributionPathV86, isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
+const root = dirname(dirname(fileURLToPath(import.meta.url)));
+test('recovery inventory preserves all 222 source files and nine original archives', async () => {
+  assert.equal(manifest.sourceFiles.length, 222);
+  assert.equal(manifest.archives.length, 9);
+  assert.equal(manifest.archives.reduce((sum, row) => sum + row.bytes, 0), 208383968);
+  assert.equal(new Set(manifest.sourceFiles.map(row => row.path)).size, 222);
+  assert.equal(manifest.version, '0.9.0-candidate.1');
+  assert.deepEqual(await verifyRiverOfPainRecovery(root), { files: 222, archives: 9, version: manifest.version });
+});
+test('every recovered source is explicitly admitted only in its intended distribution', async () => {
+  for (const row of [...manifest.sourceFiles, ...manifest.archives]) {
+    assert.equal(isPublicDistributionPathV86(row.path), true, row.path);
+    assert.equal(isPublicDistributionPathV86(row.path, { built: true }), runtime.includes(row.path), row.path);
+    if (/\.(?:js|mjs|py|json|css|html|md|webmanifest)$/i.test(row.path)) {
+      assert.equal(isPublicDistributionTextV86(await readFile(join(root, row.path), 'utf8')), true, row.path);
+    }
+  }
+});
+test('source-only policies never admit arbitrary files, traversal, secrets, or directories as files', () => {
+  for (const path of [dlc + '/extra.js', dlc + '/.env', dlc + '/../private.json',
+    '/' + dlc + '/JOUER.html', dlc + '//JOUER.html', dlc + '\\JOUER.html',
+    'archives/river-of-pain/unreviewed.zip', dlc + '/docs/new-report.md']) {
+    assert.equal(riverOfPainPathAdmission(path), false, path);
+    assert.equal(riverOfPainPathAdmission(path, { built: true }), false, path);
+  }
+  assert.equal(riverOfPainPathAdmission(dlc), false);
+  assert.equal(riverOfPainPathAdmission(dlc, { directory: true, built: true }), true);
+  assert.equal(riverOfPainPathAdmission('src/app.js'), null);
+  assert.equal(isPublicDistributionPathV86('docs/development/RIVER_OF_PAIN_INTEGRATION.md'), true);
+  assert.equal(isPublicDistributionPathV86('docs/development/RIVER_OF_PAIN_INTEGRATION.md', { built: true }), false);
+});
+test('the build copies five exact public files and rejects an injected report', async () => {
+  const output = await mkdtemp(join(tmpdir(), 'atf-rop-distribution-'));
+  try {
+    await copyRiverOfPainRuntime(root, output);
+    const result = await verifyRiverOfPainRuntime(output);
+    assert.equal(result.files, 5);
+    assert.equal(result.playableSha256, '91ae538879b939018cea5dc3ba2eb9e45faea7693fdd952efbe8531b33cdfced');
+    assert.deepEqual((await readdir(join(output, dlc))).sort(), runtime.map(path => path.slice(dlc.length + 1)).sort());
+    await writeFile(join(output, dlc, 'unexpected-report.md'), 'source-only');
+    await assert.rejects(verifyRiverOfPainRuntime(output), /unapproved or missing files/);
+  } finally { await rm(output, { recursive: true, force: true }); }
+});
+test('the public build refuses a symbolic link in its DLC', async () => {
+  const output = await mkdtemp(join(tmpdir(), 'atf-rop-link-'));
+  try {
+    await mkdir(join(output, dlc), { recursive: true });
+    await symlink(join(root, dlc, 'JOUER.html'), join(output, dlc, 'JOUER.html'));
+    await assert.rejects(verifyRiverOfPainRuntime(output), /Symbolic link/);
+  } finally { await rm(output, { recursive: true, force: true }); }
+});
+test('unknown DLC routes cannot become the Frontier HTML fallback', async () => {
+  const config = JSON.parse(await readFile(join(root, 'vercel.json'), 'utf8'));
+  const fallback = config.rewrites.find(row => row.destination === '/index.html');
+  const pattern = new RegExp('^' + fallback.source + '$');
+  assert.equal(pattern.test('/dlc/fleuve-de-la-douleur/missing'), false);
+  assert.equal(pattern.test('/archives/river-of-pain/missing'), false);
+  assert.equal(pattern.test('/hub'), true);
+});
