@@ -107,6 +107,7 @@ const expectedSpritePaths = [
   'scripts/build-asset-filter.mjs',
   'scripts/build.mjs',
   'scripts/qa-fiorina-native-v114.mjs',
+  'scripts/verify-audit-v143.mjs',
   'scripts/verify-public-release-v86.mjs',
   'src/game-production-runtime.js',
   'sw.js'
@@ -277,7 +278,7 @@ test('the actual terminal imports no audit and cannot admit its own bytes', () =
 test('the V115 sprite host stage pins exactly its reviewed continuation changes', () => {
   assert.equal(spriteBaseline, 'b89dc6ba47ee1ca90de29f3ccff47ddfe699d2d9');
   assert.deepEqual(Object.keys(spriteSuccessors).sort(), [...expectedSpritePaths].sort());
-  assert.equal(sha(JSON.stringify(spriteSuccessors)), '723e5cdec461703f924649d074ea34250816caea25808a93ca6b46b9c289951d');
+  assert.equal(sha(JSON.stringify(spriteSuccessors)), '9439407be7bf7587f66811d397d9d8e715e4087d4aed780abd776f532167be9a');
   assert.ok(Object.isFrozen(spriteSuccessors));
   for (const [path, receipt] of Object.entries(spriteSuccessors)) {
     assert.ok(Object.isFrozen(receipt), path);

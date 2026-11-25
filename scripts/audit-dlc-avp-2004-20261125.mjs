@@ -418,14 +418,14 @@ export const ALIENS_AVP_JOIN_SUCCESSORS_20261125 = Object.freeze(Object.fromEntr
 
 // BEGIN FIORINA V115 SPRITE HOST RECEIPTS
 // The published AVP/Aliens joins above remain byte-identical. This final stage
-// admits only the eight reviewed host changes from the exact continuation base.
+// admits only the nine reviewed host changes from the exact continuation base.
 // It does not transfer any earlier CI, browser or film-fidelity result.
 export const AVP_FIORINA_SPRITES_BASELINE_20261125 = 'b89dc6ba47ee1ca90de29f3ccff47ddfe699d2d9';
 export const AVP_FIORINA_SPRITES_SUCCESSORS_20261125 = Object.freeze(Object.fromEntries(
   Object.entries({
   ".github/workflows/fiorina-native-v114.yml": {
     "previousSha256": "d6f8329d2711ae1ce146e0a6af68bae3d4af2c9234abe792c4b46c55b42f72ce",
-    "currentSha256": "808d5f8e7fbccff6e0751c45bf3e630782134e06918b31a13e7d61a34bc0338b"
+    "currentSha256": "78a66ea9e928383dee07a54e890f67ac355317665d8dd93b49b80c943b491a36"
   },
   "package.json": {
     "previousSha256": "24f6777c878017c84d1c72f4cee6a26d160de26323b659094d4f49a79e887da3",
@@ -442,6 +442,10 @@ export const AVP_FIORINA_SPRITES_SUCCESSORS_20261125 = Object.freeze(Object.from
   "scripts/qa-fiorina-native-v114.mjs": {
     "previousSha256": "2814e9eacac551df6f4303953c6172f2d3cca1c77214bc2056380529f45250c5",
     "currentSha256": "e8d32bf4763b6fc04f10a080ab806d347f00af857a06f7af8216e6ea8ab8f6a6"
+  },
+  "scripts/verify-audit-v143.mjs": {
+    "previousSha256": "e48029ce56f17da26b437ea4d2dbe2a4845bd45f57d454da1d12b1c9c5d51805",
+    "currentSha256": "cefca33dc3843db3bf99b640f5df2e5722b9a81e260f1bdcb7cbf552a7289ddf"
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "b6a0bbe5637d6b613a05716ce8a0d1a17a45b5f40545da1eba280a953f6b2990",

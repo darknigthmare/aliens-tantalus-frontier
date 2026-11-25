@@ -19,6 +19,7 @@ on:
       - 'scripts/build-asset-filter.mjs'
       - 'scripts/build.mjs'
       - 'scripts/verify-public-release-v86.mjs'
+      - 'scripts/verify-audit-v143.mjs'
       - 'docs/development/FIORINA_SPRITES_V115.md'
       - 'docs/development/FIORINA_SPRITES_V115.json'
       - 'assets/openai/sprites/alien3-fiorina-v115/**'
@@ -45,7 +46,7 @@ jobs:
       - run: npm run test:project-recovery
       - run: npm run test:fiorina
       - run: npm run test:fiorina:sprites
-      - run: node --test scripts/verify-save-lifecycle-v143.mjs scripts/verify-operations-integration-v131.mjs
+      - run: node --test scripts/verify-audit-v143.mjs scripts/verify-save-lifecycle-v143.mjs scripts/verify-operations-integration-v131.mjs
       - name: Install real Canvas harness
         run: npm install --prefix "$RUNNER_TEMP/fiorina-canvas" --ignore-scripts --no-audit --no-fund @napi-rs/canvas@0.1.100
       - name: Verify delivered Fiorina pixels
