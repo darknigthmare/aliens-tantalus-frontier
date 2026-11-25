@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { cp, lstat, mkdir, readFile, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
-import { dirname, join } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildRiverOfPainVisuals, renderRiverOfPainVisuals } from './build-river-of-pain-visuals.mjs';
 import { buildRiverOfPainSpriteGallery } from './build-river-of-pain-sprite-gallery.mjs';
@@ -14,11 +14,14 @@ export const RIVER_OF_PAIN_ROOT = 'dlc/fleuve-de-la-douleur';
 export const RIVER_OF_PAIN_VISUAL_ROOT = RIVER_OF_PAIN_ROOT + '/visual-v1';
 const checkoutRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
-const { validateManifest } = createRequire(import.meta.url)('../dlc/fleuve-de-la-douleur/visual-v1/sprite-loader.js');
+const require = createRequire(import.meta.url);
 
 /** Admit only the concrete PNG paths declared by the validated sprite contract.
  * Reusing one PNG is allowed; contradictory hashes for that file are not. */
-export function riverOfPainVisualAssetRows(manifest) {
+export function riverOfPainVisualAssetRows(manifest, { sourceRoot = checkoutRoot } = {}) {
+  // Sparse host checkouts import the admission policy without the DLC. The
+  // complete visual contract is loaded only when its source is being checked.
+  const { validateManifest } = require(resolve(sourceRoot, RIVER_OF_PAIN_VISUAL_ROOT, 'sprite-loader.js'));
   validateManifest(manifest);
   const files = new Map();
   for (const asset of manifest.assets) {
@@ -30,9 +33,27 @@ export function riverOfPainVisualAssetRows(manifest) {
   return [...files.values()];
 }
 assert.equal(RIVER_OF_PAIN_MANIFEST.visualManifest, RIVER_OF_PAIN_VISUAL_ROOT + '/sprite-manifest.json');
-const spriteManifestBytes = readFileSync(join(checkoutRoot, RIVER_OF_PAIN_MANIFEST.visualManifest));
-export const RIVER_OF_PAIN_SPRITE_MANIFEST = Object.freeze(validateManifest(JSON.parse(spriteManifestBytes)));
-export const RIVER_OF_PAIN_VISUAL_ASSETS = Object.freeze(riverOfPainVisualAssetRows(RIVER_OF_PAIN_SPRITE_MANIFEST));
+assert.match(RIVER_OF_PAIN_MANIFEST.visualManifestSha256, /^[a-f0-9]{64}$/,
+  'Visual admission requires an exact manifest hash.');
+function admittedVisualRows(rows) {
+  assert.ok(Array.isArray(rows) && rows.length <= 512, 'Visual admission requires a bounded asset list.');
+  const paths = new Set();
+  return rows.map(row => {
+    assert.ok(row && typeof row === 'object' && !Array.isArray(row), 'Invalid visual admission row.');
+    assert.deepEqual(Object.keys(row).sort(), ['path', 'sha256'], 'Unexpected visual admission fields.');
+    assert.ok(typeof row.path === 'string'
+      && /^dlc\/fleuve-de-la-douleur\/visual-v1\/assets\/[a-z0-9][a-z0-9_/-]*\.png$/.test(row.path)
+      && !row.path.includes('//') && !row.path.split('/').some(part => !part || part === '.' || part === '..'),
+    'Visual admission paths must name concrete PNG files below visual-v1/assets/.');
+    assert.match(row.sha256, /^[a-f0-9]{64}$/, 'Visual admission requires an exact PNG hash.');
+    assert.ok(!paths.has(row.path), 'Duplicate visual admission path: ' + row.path);
+    paths.add(row.path);
+    return Object.freeze({ path: row.path, sha256: row.sha256 });
+  });
+}
+// This script-local index keeps path checks usable in a sparse checkout. It is
+// checked against the actual validated visual manifest before copying a build.
+export const RIVER_OF_PAIN_VISUAL_ASSETS = Object.freeze(admittedVisualRows(RIVER_OF_PAIN_MANIFEST.visualAssets));
 export const RIVER_OF_PAIN_RUNTIME = Object.freeze([
   ...RIVER_OF_PAIN_MANIFEST.runtimeFiles, ...RIVER_OF_PAIN_VISUAL_ASSETS.map(row => row.path)
 ]);
@@ -102,7 +123,18 @@ export async function verifyRiverOfPainRecovery(root, { includeArchives = true }
     archives: includeArchives ? RIVER_OF_PAIN_MANIFEST.archives.length : 0,
     version: RIVER_OF_PAIN_MANIFEST.version };
 }
+export async function verifyRiverOfPainVisualSource(root) {
+  const bytes = await readFile(await checkedFile(root, RIVER_OF_PAIN_MANIFEST.visualManifest));
+  assert.equal(hash(bytes), RIVER_OF_PAIN_MANIFEST.visualManifestSha256,
+    'Sprite manifest differs from its admitted hash.');
+  await checkedFile(root, RIVER_OF_PAIN_VISUAL_ROOT + '/sprite-loader.js');
+  const rows = riverOfPainVisualAssetRows(JSON.parse(bytes), { sourceRoot: root });
+  assert.deepEqual(rows, RIVER_OF_PAIN_VISUAL_ASSETS,
+    'Sprite files differ from the visual admission index.');
+  return { manifestSha256: hash(bytes), assets: rows.length };
+}
 export async function copyRiverOfPainRuntime(root, output) {
+  await verifyRiverOfPainVisualSource(root);
   await verifyRiverOfPainRecovery(root, { includeArchives: false });
   // The host's existing build hook produces the derivative from frozen inputs;
   // no archived builder runs and no original source is an output destination.
@@ -133,8 +165,9 @@ export async function verifyRiverOfPainRuntime(root, { sourceRoot = checkoutRoot
     assert.equal(createHash('sha256').update(bytes).digest('hex'), row.sha256,
       'DLC runtime differs from the recovered original: ' + row.path);
   }
+  await verifyRiverOfPainVisualSource(sourceRoot);
   const visual = await renderRiverOfPainVisuals({ root: sourceRoot });
-  assert.equal(visual.manifestSha256, hash(spriteManifestBytes),
+  assert.equal(visual.manifestSha256, RIVER_OF_PAIN_MANIFEST.visualManifestSha256,
     'Sprite manifest changed after distribution admission.');
   assert.equal(hash(await readFile(join(root, RIVER_OF_PAIN_VISUAL_ROOT, 'JOUER.html'))), visual.htmlSha256,
     'Visual DLC HTML differs from its canonical build.');

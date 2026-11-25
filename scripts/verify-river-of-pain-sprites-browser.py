@@ -65,6 +65,9 @@ COMPOSITION = r"""() => {
   const results=[];
   entries.forEach((entry,index)=>{
     const a=entry.asset, id=a.targetIds[0], left=(index%columns)*width, top=header+Math.floor(index/columns)*height;
+    ctx.save();
+    try{
+    ctx.textAlign='left';
     for(let y=0;y<height;y+=20)for(let x=0;x<width;x+=20){
       ctx.fillStyle=((x/20+y/20)%2)?'#284047':'#1c3239';
       ctx.fillRect(left+x,top+y,20,20);
@@ -76,8 +79,16 @@ COMPOSITION = r"""() => {
       :a.category==='prop'?(.8+.7*.28):1;
     const extent=Math.max(a.anchor.x-a.bounds.x,a.bounds.x+a.bounds.w-a.anchor.x)*a.height/a.bounds.h;
     const above=(a.anchor.y-a.bounds.y)*a.height/a.bounds.h+(a.category==='prop'&&id==='glass'?53:0);
+    const inventory=a.category==='weapon'||a.category==='item';
+    const below=(a.bounds.y+a.bounds.h-a.anchor.y)*a.height/a.bounds.h;
+    const contentTop=52, contentBottom=height-18;
     renderer.w=width;renderer.h=height;
-    renderer.scale=Math.min(1.3,(width/2-18)/Math.max(1,extent*factor),(height-75)/Math.max(1,above*factor));
+    renderer.scale=Math.min(1.3,(width/2-18)/Math.max(1,extent*factor),inventory
+      ?(contentBottom-contentTop)/Math.max(1,(above+below)*factor)
+      :(height-75)/Math.max(1,above*factor));
+    // Inventory anchors are near the image centre, not its feet. Centre the
+    // visible alpha bounds in the cell without covering the following row.
+    if(inventory)position.y=top+(contentTop+contentBottom)/2+(above-below)*renderer.scale*factor/2;
     renderer.reduced=true;
     renderer.project=()=>position;
     // This is a separate presentation context, not ROP_APP.simulation.s.
@@ -108,6 +119,7 @@ COMPOSITION = r"""() => {
     ctx.moveTo(position.x-12,position.y);ctx.lineTo(position.x+12,position.y);
     ctx.moveTo(position.x,position.y-4);ctx.lineTo(position.x,position.y+4);ctx.stroke();
     results.push({id:a.id,category:a.category,target:id,accessory:a.accessory||null,pngDraws:draws});
+    }finally{ctx.restore();}
   });
   return {dataUrl:canvas.toDataURL('image/png'),results,
     liveStateUnchanged:JSON.stringify(ROP_APP.simulation.s)===liveBefore};

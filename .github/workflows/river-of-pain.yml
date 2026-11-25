@@ -92,6 +92,7 @@ jobs:
         run: |
           set -o pipefail
           python -B scripts/verify-river-of-pain-sprites-browser.py --root dist --output "$RUNNER_TEMP/atf-river-of-pain/sprites-browser" 2>&1 | tee "$RUNNER_TEMP/atf-river-of-pain/sprites-browser.log"
+          python -B scripts/verify-river-of-pain-sprites-browser.py --root dist --file-only --output "$RUNNER_TEMP/atf-river-of-pain/sprites-file" 2>&1 | tee "$RUNNER_TEMP/atf-river-of-pain/sprites-file.log"
       - name: Check that validation did not rewrite tracked sources
         run: git diff --exit-code
       - name: Retain exact integration evidence

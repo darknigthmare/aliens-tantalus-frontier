@@ -1,9 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, readFile, rm, writeFile, symlink, mkdir } from 'node:fs/promises';
+import { mkdtemp, readFile, rm, writeFile, symlink, mkdir, copyFile } from 'node:fs/promises';
+import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { RIVER_OF_PAIN_MANIFEST as manifest, RIVER_OF_PAIN_ROOT as dlc,
   RIVER_OF_PAIN_RUNTIME as runtime, riverOfPainPathAdmission,
   RIVER_OF_PAIN_VISUAL_ROOT as visualRoot, RIVER_OF_PAIN_VISUAL_ASSETS as visualAssets,
@@ -11,6 +12,86 @@ import { RIVER_OF_PAIN_MANIFEST as manifest, RIVER_OF_PAIN_ROOT as dlc,
   verifyRiverOfPainRecovery, copyRiverOfPainRuntime, verifyRiverOfPainRuntime } from './river-of-pain-distribution.mjs';
 import { isPublicDistributionPathV86, isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
+async function sparseScripts() {
+  const folder = await mkdtemp(join(tmpdir(), 'atf-rop-sparse-'));
+  await mkdir(join(folder, 'scripts'));
+  for (const name of ['river-of-pain-distribution.mjs', 'river-of-pain-manifest.json',
+    'build-river-of-pain-visuals.mjs', 'build-river-of-pain-sprite-gallery.mjs']) {
+    await copyFile(join(root, 'scripts', name), join(folder, 'scripts', name));
+  }
+  return folder;
+}
+function isolatedAdmission(folder, assertions) {
+  const url = pathToFileURL(join(folder, 'scripts/river-of-pain-distribution.mjs')).href;
+  return spawnSync(process.execPath, ['--input-type=module', '-e',
+    "import assert from 'node:assert/strict';\nconst admission = await import(" + JSON.stringify(url) + ');\n' + assertions],
+  { cwd: folder, encoding: 'utf8', timeout: 15000 });
+}
+test('sparse host imports admit only the indexed PNGs without loading any DLC; a build still requires its source', async () => {
+  const folder = await sparseScripts();
+  try {
+    const result = isolatedAdmission(folder, `
+      const rows = admission.RIVER_OF_PAIN_VISUAL_ASSETS;
+      assert.equal(rows.length, ${visualAssets.length});
+      assert.equal(admission.riverOfPainPathAdmission(rows[0].path, { built: true }), true);
+      assert.equal(admission.riverOfPainPathAdmission('${visualRoot}/assets/unlisted.png', { built: true }), false);
+      assert.equal(admission.riverOfPainPathAdmission('${visualRoot}/assets/../private.png'), false);
+      assert.equal(admission.riverOfPainPathAdmission('src/app.js'), null);
+      await assert.rejects(admission.copyRiverOfPainRuntime(process.cwd(), process.cwd() + '/output'), { code: 'ENOENT' });
+      await assert.rejects(admission.verifyRiverOfPainRuntime(process.cwd()), { code: 'ENOENT' });
+    `);
+    assert.equal(result.status, 0, result.stderr || String(result.error));
+    await assert.rejects(readFile(join(folder, 'output', dlc, 'JOUER.html')), { code: 'ENOENT' });
+  } finally { await rm(folder, { recursive: true, force: true }); }
+});
+test('visual admission rejects malformed indexes and every mismatch with the real manifest before copying', async () => {
+  const folder = await sparseScripts(), original = JSON.parse(JSON.stringify(manifest));
+  const manifestPath = join(folder, 'scripts/river-of-pain-manifest.json');
+  const verify = expression => isolatedAdmission(folder, expression);
+  const writeIndex = value => writeFile(manifestPath, JSON.stringify(value));
+  try {
+    for (const changed of [
+      { ...original, visualManifestSha256: 'a'.repeat(64) },
+      { ...original, visualAssets: original.visualAssets.map((row, index) => index
+        ? row : { ...row, path: visualRoot + '/assets/unlisted.png' }) }
+    ]) {
+      await writeIndex(changed);
+      const result = verify(`
+        await assert.rejects(admission.verifyRiverOfPainVisualSource(${JSON.stringify(root)}), /admitted hash|admission index/);
+        await assert.rejects(admission.copyRiverOfPainRuntime(${JSON.stringify(root)}, process.cwd() + '/output'), /admitted hash|admission index/);
+      `);
+      assert.equal(result.status, 0, result.stderr || String(result.error));
+    }
+    for (const invalid of [
+      { path: visualRoot + '/assets/../private.png' },
+      { path: visualRoot + '/assets//unlisted.png' },
+      { path: 'assets/unlisted.png' },
+      { sha256: 'not-a-hash' },
+      { extra: true }
+    ]) {
+      await writeIndex({ ...original, visualAssets: [{ ...original.visualAssets[0], ...invalid }] });
+      const result = verify('');
+      assert.notEqual(result.status, 0);
+      assert.match(result.stderr, /Visual admission|Unexpected visual admission/);
+    }
+    await writeIndex({ ...original, visualAssets: [original.visualAssets[0], original.visualAssets[0]] });
+    const duplicate = verify('');
+    assert.notEqual(duplicate.status, 0);
+    assert.match(duplicate.stderr, /Duplicate visual admission path/);
+    await writeIndex(original);
+    const visualDirectory = join(folder, visualRoot);
+    await mkdir(visualDirectory, { recursive: true });
+    const visualManifest = await readFile(join(root, manifest.visualManifest));
+    await writeFile(join(folder, manifest.visualManifest), Buffer.concat([visualManifest, Buffer.from('\n')]));
+    let result = verify(`await assert.rejects(admission.verifyRiverOfPainVisualSource(process.cwd()), /admitted hash/);`);
+    assert.equal(result.status, 0, result.stderr || String(result.error));
+    await writeFile(join(folder, manifest.visualManifest), visualManifest);
+    await symlink(join(root, visualRoot, 'sprite-loader.js'), join(visualDirectory, 'sprite-loader.js'));
+    result = verify(`await assert.rejects(admission.verifyRiverOfPainVisualSource(process.cwd()), /Symbolic link/);`);
+    assert.equal(result.status, 0, result.stderr || String(result.error));
+    await assert.rejects(readFile(join(folder, 'output', dlc, 'JOUER.html')), { code: 'ENOENT' });
+  } finally { await rm(folder, { recursive: true, force: true }); }
+});
 test('recovery inventory preserves all 222 source files and nine original archives', async () => {
   assert.equal(manifest.sourceFiles.length, 222);
   assert.equal(manifest.archives.length, 9);

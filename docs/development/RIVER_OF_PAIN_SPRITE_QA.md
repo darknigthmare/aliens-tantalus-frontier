@@ -4,7 +4,54 @@
 
 Les adaptateurs et le builder dérivé sont implémentés. La recette Node ciblée a réussi **21 tests sur 21** et couvre les images individuelles, les poses, les identités, les alertes et les interfaces existantes. Le contrôle indépendant du snapshot a confirmé **222 fichiers sur 222**, avec les tailles et SHA-256 du manifeste de récupération.
 
-**La recette Chromium du nouvel habillage n’est pas encore qualifiée.** Playwright Python 1.62.0 est présent localement, mais le lanceur Chromium système n’a pas de binaire. L’installation officielle de Chrome Headless Shell 151.0.7922.34 dans un espace temporaire séparé a échoué avec une réponse HTTP403 du CDN. Aucun autre téléchargement ni modification du lanceur système n’a été effectué. Les anciennes recettes navigateur du DLC v0.9 ne qualifient pas les nouveaux PNG.
+La première CI Forge du lot a révélé une dépendance de chargement dans sa
+copie partielle du dépôt : importer la politique de distribution tentait de
+charger le dossier visuel absent. Ce défaut a été reproduit avec les quatre
+fichiers de scripts et de manifeste nécessaires, sans aucun fichier du DLC.
+L'admission s'appuie désormais sur un index exact de chemins PNG et de SHA-256
+dans le manifeste des scripts. Avant toute copie, la construction exige le
+véritable manifeste visuel, son empreinte exacte, sa validation complète et
+l'égalité de sa liste avec cet index. Les liens symboliques, fichiers absents,
+chemins non admis et index désynchronisés restent refusés.
+
+Les **21 tests d'intégration et de lancement** passent, dont deux nouvelles
+régressions pour cette copie partielle et les désynchronisations de manifeste.
+Avec les 21 tests de rendu, les trois suites ciblées totalisent **42 réussites**.
+Ces contrôles locaux ne constituent pas une réussite de la CI complète du
+nouveau commit. La correction de la copie partielle doit aussi passer dans
+le véritable workflow Forge.
+
+### Première qualification Chromium publiée
+
+Le [run DLC 45689142393](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45689142393)
+a réussi pour la PR au head `5ce9d153f2542f048181ca2929fa8b332f93937d`
+(merge de test `8271dbcc79e7159cede67683f3aeb695ec882935`). Il utilise
+Playwright **1.57.0** et Chromium **143.0.7499.4**. Les rapports téléchargés
+ont confirmé :
+
+- **111 contrôles réussis** pour le nouvel habillage : les 42 PNG sont
+  réellement décodés, leurs octets vérifiés et leur composition exercée ;
+  le parcours couvre équipement, sauvegarde, rechargement, export,
+  retour par F6 et passage vers la version d'origine ;
+- **26 contrôles réussis** pour le parcours hôte/DLC et la préservation
+  d'une sauvegarde Frontier existante ;
+- **15 contrôles réussis** pour l'URL du wrapper sans barre finale ;
+- aucune erreur de page dans les trois rapports, et réussite des étapes
+  `npm run check`, `npm run build`, `npm run check:built` et du contrôle
+  d'absence de modification des sources par la construction.
+
+Le HTML dérivé testé a pour SHA-256
+`8e3e1c5e879c1788d5d34899f0a6e039de4a590fc1e11e652815b1b6aa5e5511`.
+L'artefact `river-of-pain-integration-evidence` de ce run a pour SHA-256
+`106c5e7227b557ef5fb7dc8ceb462286a3a54305c73ea7c1b2be55595d723469`.
+Ces résultats qualifient ce run précis ; le workflow relance ces parcours
+sur chaque nouveau commit et ajoute désormais l'ouverture directe
+`file://`. Le résultat de cette dernière ne doit pas être déduit du
+parcours HTTP.
+
+Localement, le lanceur Chromium n'a pas de binaire et l'installation
+officielle a répondu HTTP 403. Cette exécution locale reste bloquée ; les
+résultats Chromium ci-dessus proviennent réellement de GitHub Actions.
 
 ## Inspection des 42 fichiers sélectionnés
 
@@ -28,9 +75,19 @@ touche un bord à alpha >= 200. Ce contrôle géométrique et la revue des image
 isolées ne remplacent pas l'observation des compositions en jeu.
 
 Le rapport d'inspection comporte une entrée par PNG sélectionné. Les copies
-de travail et les brouillons exclus ne sont pas ajoutés au total. La recette
-Chromium ci-dessous doit encore fournir ses propres résultats sur le commit
-publié ; l'inspection des pixels ne la qualifie pas.
+de travail et les brouillons exclus ne sont pas ajoutés au total.
+
+Une revue de composition indépendante a également dessiné les 42 images
+avec les véritables méthodes de rendu : 42 dessins PNG, aucun repli natif
+involontaire, aucun changement de la simulation isolée et aucun PNG source
+modifié. Quatre planches ont été examinées : personnages, résidents avec
+outils, inventaire, créature et décors. Les pieds, les silhouettes entières,
+les tailles relatives des enfants et les outils uniques des résidents sont
+cohérents ; le vitrage est translucide et surélevé à son ancrage mural.
+Cette fixture utilise pngjs pour décoder les octets vers un Canvas Skia,
+dont le décodeur direct refusait les PNG ; la cause précise de ce refus
+n'est pas établie. Elle qualifie la composition, pas un parcours navigateur.
+Le décodage Chromium est établi séparément par le run cité plus haut.
 
 ## Commandes reproductibles
 
@@ -72,7 +129,7 @@ Les huit œufs fermés du caveau utilisent `sealed-egg`. L’emprise `egg-bed` c
 
 Le helper `renderRiverOfPainVisuals` recompose le résultat canonique sans écriture. Le builder écrit seulement le HTML dérivé, vérifie l’original et laisse les scripts du modèle intacts. Le manifeste et les scripts sont inline ; les PNG utilisent le dossier relatif `assets/`.
 
-## Recette navigateur préparée
+## Parcours navigateur reproductible
 
 Le parcours normal passe par le bouton DLC du menu hôte, vérifie le wrapper, le décodage des PNG, leurs URL et leurs hashes, puis utilise les commandes normales du DLC. Il effectue un déplacement, un export natif, une sauvegarde par le menu et un véritable rechargement.
 
