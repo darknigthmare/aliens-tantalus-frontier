@@ -3,6 +3,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedAvpHostDigest20261125, avpHostRuntimeSources20261125, verifyAvpHostSources20261125 } from './audit-dlc-avp-2004-20261125.mjs';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const readRepository = path => readFileSync(new URL('../' + path, import.meta.url));
@@ -884,12 +885,12 @@ export const XENO_TRIALS_TANTALUS_JOIN_V206 = freezeJoin({ baseline: 'fa2d62feed
 // END TANTALUS JOIN RECEIPTS
 
 export function reviewedXenoTrialsTantalusJoinV206(path, endpointV206) {
-  if (!Object.hasOwn(XENO_TRIALS_TANTALUS_JOIN_V206.successors, path)) return endpointV206;
+  if (!Object.hasOwn(XENO_TRIALS_TANTALUS_JOIN_V206.successors, path)) return reviewedAvpHostDigest20261125(path, endpointV206);
   const join = XENO_TRIALS_TANTALUS_JOIN_V206.successors[path];
   assert.equal(endpointV206, join.previousSha256, 'Broken fa2d62fe-to-tantalus-join source chain: ' + path);
   assert.ok(validHash(join.currentSha256), 'Invalid tantalus-join source digest: ' + path);
   assert.notEqual(join.currentSha256, join.previousSha256, 'A tantalus-join successor must identify changed bytes: ' + path);
-  return join.currentSha256;
+  return reviewedAvpHostDigest20261125(path, join.currentSha256);
 }
 
 // Terminal runtime view: every runtime endpoint the V205 view publishes at fa2d62fe
@@ -899,9 +900,9 @@ export function xenoTrialsTantalusJoinRuntimeSourcesV206(view) {
   for (const [path, receipt] of Object.entries(XENO_TRIALS_TANTALUS_JOIN_V206.successors)) {
     if (!Object.hasOwn(result, path)) continue;
     if (result[path] === receipt.previousSha256) result[path] = receipt.currentSha256;
-    else assert.equal(result[path], receipt.currentSha256, 'Incorrect tantalus-join runtime view predecessor: ' + path);
+    else if (result[path] !== receipt.currentSha256) assert.equal(result[path], reviewedAvpHostDigest20261125(path, receipt.currentSha256), 'Incorrect tantalus-join runtime view predecessor: ' + path);
   }
-  return Object.freeze(result);
+  return avpHostRuntimeSources20261125(result);
 }
 
 export function reviewedXenoProductionAssetsDigestV206(path, endpointV205) {
@@ -922,8 +923,9 @@ export function verifyXenoTrialsTantalusJoinV206(readSource = readRepository) {
     assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
     assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
     assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A tantalus-join successor must identify changed bytes: ' + path);
-    assert.equal(sha(readSource(path)), receipt.currentSha256, 'Unreviewed tantalus-join source bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedAvpHostDigest20261125(path, receipt.currentSha256), 'Unreviewed tantalus-join source bytes: ' + path);
   }
+  verifyAvpHostSources20261125(readSource);
   return Object.freeze({ baselineCommit: join.baseline, successors: Object.keys(join.successors).length });
 }
 

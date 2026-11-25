@@ -1,3 +1,4 @@
+import { AVP_HOST_SUCCESSORS_20261125 } from './audit-dlc-avp-2004-20261125.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -59,7 +60,11 @@ test('V205 fails closed on modified images, source modules and missing relay end
 test('exact runtime images can ship while production poses, documentation, audit and tests remain source-only', () => {
   const audit = 'scripts/audit-xeno-visual-assets-v205.mjs';
   assert.match(read(audit).toString(), /from '\.\/audit-xeno-production-assets-v206\.mjs'/);
-  assert.doesNotMatch(read('scripts/audit-xeno-production-assets-v206.mjs').toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  const avpAudit = 'scripts/audit-dlc-avp-2004-20261125.mjs';
+  const relativeImports = source => [...source.matchAll(/(?:from\s*|import\s*\(?\s*)['"](\.{1,2}\/[^'"]+)['"]/g)].map(match => match[1]);
+  assert.deepEqual(relativeImports(read('scripts/audit-xeno-production-assets-v206.mjs').toString()), ['./audit-dlc-avp-2004-20261125.mjs']);
+  assert.deepEqual(relativeImports(read(avpAudit).toString()), [], 'The AVP terminal must not import another audit.');
+  assert.equal(Object.hasOwn(AVP_HOST_SUCCESSORS_20261125, avpAudit), false, 'The AVP terminal cannot admit its own bytes.');
   assert.match(read('scripts/audit-xeno-priorities-v204.mjs').toString(), /from '\.\/audit-xeno-visual-assets-v205\.mjs'/);
   for (const path of [audit, 'scripts/public-xeno-visual-admissions-v205.mjs',
     'scripts/verify-xeno-trials-visual-assets-v205.mjs', 'scripts/verify-xeno-visual-assets-audit-v205.mjs',

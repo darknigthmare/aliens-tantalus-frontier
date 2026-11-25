@@ -1033,6 +1033,7 @@ const titleScreen = new TitleScreenController({
     return false;
   },
   onForge: () => openForgeContext(),
+  onDlc: () => { void openDlcExtensions(); },
   onOptions: () => {
     titleSceneV79.preservePlacementOnNextShowV87();
     showView('settings');
@@ -1468,6 +1469,54 @@ function openForgeContext() {
   byId('breadcrumb').textContent = 'DEVELOPER // FRONTIER FORGE';
   byId('view-title').textContent = 'Frontier Forge';
   byId('return-title').textContent = 'FERMER FRONTIER FORGE';
+}
+
+let dlcGallery = null;
+let dlcGalleryLoading = false;
+globalThis.addEventListener('pageshow', (event) => {
+  // Browser Back can restore a frozen host whose audio was disposed at unload.
+  if (event.persisted && standaloneContext === 'dlc') globalThis.location.reload();
+});
+
+async function openDlcExtensions() {
+  if (dlcGalleryLoading || titleScreen.root.hidden || titleScreen.state !== 'menu') return;
+  dlcGalleryLoading = true;
+  try {
+    const { DlcMenu } = await import('./dlc-menu.js');
+    // A late module response must not interrupt a campaign or another menu.
+    if (titleScreen.root.hidden || titleScreen.state !== 'menu') return;
+    if (!dlcGallery) dlcGallery = new DlcMenu({
+      onClose: () => {
+        showTitleScreen(); titleScreen.openMenu();
+        titleScreen.scheduleFocus(titleScreen.dlcButton, 'menu');
+      },
+      onLaunch: (entry) => {
+        const previousContext = standaloneContext;
+        standaloneContext = 'dlc';
+        try {
+          hubEngine.stop(false);
+          engine.stop();
+          bioforgeRuntimeV80.stop({ purge: false, reason: 'dlc-launch' });
+          if (typeof xenoTrialsUiV96 !== 'undefined') xenoTrialsUiV96?.close();
+          audio.setScene(null); audio.stopEffects(); audio.stopMusic(0);
+          globalThis.location.assign(entry.href);
+        } catch (error) {
+          standaloneContext = previousContext;
+          audio.setScene('menu');
+          throw error;
+        }
+      }
+    });
+    titleScreen.hide();
+    byId('app').hidden = true;
+    dlcGallery.open({ language: currentLanguageV185() });
+  } catch (error) {
+    showTitleScreen(); titleScreen.openMenu();
+    titleScreen.liveStatus.textContent = currentLanguageV185() === 'en'
+      ? 'Expansions could not be opened. Please try again.'
+      : 'Les extensions ne peuvent pas être ouvertes. Réessayez.';
+    titleScreen.scheduleFocus(titleScreen.dlcButton, 'menu');
+  } finally { dlcGalleryLoading = false; }
 }
 
 function showTitleScreen() {
@@ -5827,6 +5876,9 @@ function bind() {
   byId('install-app').onclick = async () => { if (!deferredInstall) return; deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; byId('install-app').hidden = true; };
   globalThis.addEventListener('beforeunload', () => {
     disposePlayerAppearancePreviewV126();
+    // The expedition owns separate notebooks. Opening it must not rewrite the
+    // native campaign or its selection, even through the unload autosave.
+    if (standaloneContext === 'dlc') { audio.dispose(); return; }
     if (creatorOwnerV84 || saveSystem.data.needsPlayerCreationV84) return;
     hubDialogueUiV76.destroy({ restoreFocus: false });
     // Capture the live mission before stop releases projectiles, recoverable

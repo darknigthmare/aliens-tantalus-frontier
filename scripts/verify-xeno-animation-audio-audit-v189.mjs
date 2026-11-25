@@ -1,3 +1,4 @@
+import { AVP_HOST_SUCCESSORS_20261125 } from './audit-dlc-avp-2004-20261125.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -63,7 +64,11 @@ test('the complete legacy chain retains its archival default and exposes four ex
 
 test('V189 relays to V190 while pinning its changed V188 relay and keeps new tools and review inputs source-only with exact neighbours refused', () => {
   const terminal = 'scripts/audit-xeno-production-assets-v206.mjs', relay = 'scripts/audit-xeno-stage-operations-v188.mjs';
-  assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(read(terminal).toString()), false);
+  const avpAudit = 'scripts/audit-dlc-avp-2004-20261125.mjs';
+  const relativeImports = source => [...source.matchAll(/(?:from\s*|import\s*\(?\s*)['"](\.{1,2}\/[^'"]+)['"]/g)].map(match => match[1]);
+  assert.deepEqual(relativeImports(read(terminal).toString()), ['./audit-dlc-avp-2004-20261125.mjs']);
+  assert.deepEqual(relativeImports(read(avpAudit).toString()), [], 'The AVP terminal must not import another audit.');
+  assert.equal(Object.hasOwn(AVP_HOST_SUCCESSORS_20261125, avpAudit), false, 'The AVP terminal cannot admit its own bytes.');
   assert.equal(Object.hasOwn(successors, terminal) || Object.hasOwn(inputs, terminal), false);
   assert.ok(successors[relay]); assert.match(read(relay).toString(), /from '\.\/audit-xeno-animation-audio-v189\.mjs'/);
   assert.match(read('scripts/audit-xeno-animation-audio-v189.mjs').toString(), /from '\.\/audit-xeno-arbiter-campaign-v190\.mjs'/);

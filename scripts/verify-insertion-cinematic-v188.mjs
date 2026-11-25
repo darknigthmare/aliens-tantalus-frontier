@@ -498,7 +498,8 @@ test('app wiring: insertionHandoverV188 reaches engine.start; the extraction wai
   const app = read('src/app.js');
   assert.match(app, /engine\.start\(\{[\s\S]*?\n {4}insertionHandoverV188,\n[\s\S]*?\}\);/, 'additive option passed to engine.start');
   assert.match(app, /function startMissionRuntimeNowV62\(context, insertionHandoverV188 = null\)/);
-  assert.match(app, /if \(!context\?\.world \|\| context\.operationLoadout\?\.resumeState \|\| standaloneContext\) return null;/, 'resume and Forge play no cinematic');
+  assert.match(app, /if \(!context\?\.world \|\| context\.operationLoadout\?\.resumeState \|\| standaloneContext \|\| isFiorinaCampaignV114\(context\.campaign\)\) return null;/,
+    'resume, Forge and the authored Fiorina archive play no generic insertion cinematic');
   assert.match(app, /extractionFlowOnEventV188\(extractionFlowV188, event\)/);
   assert.match(app, /'setting-insertion-full-v188': \['insertionAlwaysFullV188'/);
   for (const engineFile of ['src/game-v51-runtime.js', 'src/game-v52-level-runtime.js', 'src/game-production-runtime.js']) assert.ok(!read(engineFile).includes('insertion-cinematic-v188'), engineFile);

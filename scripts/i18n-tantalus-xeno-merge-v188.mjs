@@ -1226,11 +1226,26 @@ for (const kind of Object.values(TANTALUS_I18N_DELTA_V188)) {
   Object.freeze(kind.added); Object.values(kind.changed).forEach(Object.freeze); Object.freeze(kind.changed); Object.freeze(kind);
 }
 
+// The native Fiorina integration adds only these reviewed translations after
+// the historical Tantalus/Xeno merge. Keep that original delta unchanged.
+export const FIORINA_I18N_ADDITIONS_V114 = Object.freeze({
+  "Survivre à Fiorina 161, piéger le Runner et sceller l’archive.": "Survive Fiorina 161, trap the Runner and seal the archive.",
+  "Côte et épave EEV": "Coast and EEV wreck",
+  "Infirmerie / morgue": "Infirmary / morgue",
+  "Bloc carcéral": "Cell block",
+  "Fonderie / moule de plomb": "Leadworks / lead mold",
+  "Four principal / plateforme": "Main furnace / platform"
+});
+
 /** The Xeno Trials view of a merged catalogue (kind: 'exact' or 'patterns'). */
 export function withoutTantalusI18nV188(catalog, kind) {
   const delta = TANTALUS_I18N_DELTA_V188[kind];
   assert.ok(delta, 'Unknown catalogue kind: ' + kind);
   const result = { ...catalog };
+  if (kind === 'exact') for (const [fr, en] of Object.entries(FIORINA_I18N_ADDITIONS_V114)) {
+    assert.equal(result[fr], en, 'Unreviewed or missing Fiorina catalogue entry: ' + fr);
+    delete result[fr];
+  }
   for (const fr of delta.added) {
     assert.ok(Object.hasOwn(result, fr), 'Missing Tantalus catalogue entry: ' + fr);
     delete result[fr];
