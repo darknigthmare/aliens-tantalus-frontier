@@ -32,3 +32,32 @@ jobs:
       - run: node --test scripts/verify-save-lifecycle-v143.mjs scripts/verify-operations-integration-v131.mjs
       - run: npm run build
       - run: npm run check:built
+
+
+      - name: Install browser harness
+        run: |
+          npm install --prefix "$RUNNER_TEMP/fiorina-browser" --ignore-scripts --no-audit --no-fund playwright@1.65.1
+          node "$RUNNER_TEMP/fiorina-browser/node_modules/playwright/cli.js" install --with-deps chromium
+      - name: Verify native browser journey
+        timeout-minutes: 8
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/fiorina-browser/node_modules/playwright
+          BASE_URL: http://127.0.0.1:4399/
+        run: |
+          python3 -c 'from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler; from functools import partial; Server = type("Server", (ThreadingHTTPServer,), {"request_queue_size": 1024}); Server(("127.0.0.1", 4399), partial(SimpleHTTPRequestHandler, directory="dist")).serve_forever()' > "$RUNNER_TEMP/fiorina-http.log" 2>&1 &
+          fiorina_server_pid=$!
+          trap 'kill "$fiorina_server_pid" 2>/dev/null || true' EXIT
+          for attempt in 1 2 3 4 5; do
+            if curl --silent --fail http://127.0.0.1:4399/ -o /dev/null; then break; fi
+            sleep 1
+          done
+          node scripts/qa-fiorina-native-v114.mjs "$RUNNER_TEMP/fiorina-qa"
+      - name: Preserve browser evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: fiorina-native-browser-v114
+          path: |
+            ${{ runner.temp }}/fiorina-qa/
+            ${{ runner.temp }}/fiorina-http.log
+          retention-days: 14

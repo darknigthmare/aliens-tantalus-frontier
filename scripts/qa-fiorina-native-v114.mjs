@@ -41,10 +41,7 @@ const check = (name, condition, evidence = null) => {
   report.checks.push({ name, passed: Boolean(condition), evidence });
   assert.ok(condition, `${name}: ${JSON.stringify(evidence)}`);
 };
-const browser = await chromium.launch({
-  ...(process.env.CHROMIUM_EXECUTABLE ? { executablePath: process.env.CHROMIUM_EXECUTABLE } : {}),
-  args: ['--no-sandbox', '--disable-dev-shm-usage']
-});
+let browser;
 const screenshot = async (page, name, selector = null) => {
   const path = join(out, `${name}.png`);
   if (selector) await page.locator(selector).screenshot({ path });
@@ -78,13 +75,17 @@ async function snapshot(page) {
       vehicle: Boolean(engine.vehicle?.active || engine.player?.inVehicle),
       operationId: saveSystem.data.strategy.currentOperation?.id,
       lastResumeApplied: engine.lastResumeResult?.applied === true,
-      marineProfile: { weapon: saveSystem.data.strategy.loadout?.weaponId,
-        equipment: saveSystem.data.strategy.loadout?.equipmentIds }
+      marineProfile: { weapons: [...saveSystem.data.player.weaponIds],
+        equipment: [...saveSystem.data.player.equipmentIds], costume: saveSystem.data.player.costumeId }
     };
   });
 }
 
 try {
+  browser = await chromium.launch({
+    ...(process.env.CHROMIUM_EXECUTABLE ? { executablePath: process.env.CHROMIUM_EXECUTABLE } : {}),
+    args: ['--no-sandbox', '--disable-dev-shm-usage']
+  });
   for (const cut of ['theatrical', 'assembly']) {
     const context = await browser.newContext({ serviceWorkers: 'block', viewport: { width: 1440, height: 1000 } });
     const page = await context.newPage();
@@ -155,5 +156,5 @@ try {
   report.ok = !report.error && report.checks.every(entry => entry.passed);
   await writeFile(join(out, 'fiorina-native-v114.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify({ ok: report.ok, checks: report.checks.length, failures: report.checks.filter(entry => !entry.passed).map(entry => entry.name), error: report.error?.slice(0, 700), report: join(out, 'fiorina-native-v114.json') }));
-  await browser.close();
+  await browser?.close();
 }
