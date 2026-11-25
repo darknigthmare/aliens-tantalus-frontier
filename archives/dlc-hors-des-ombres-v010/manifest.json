@@ -1,0 +1,2424 @@
+{
+  "schemaVersion": 1,
+  "archiveRoot": "archives/dlc-hors-des-ombres-v010",
+  "release": "0.10.0",
+  "recoveredOn": "2026-11-25",
+  "sourceArchive": {
+    "fileName": "ALIEN_HORS_DES_OMBRES_V0_10_LE_MARION_PIECE_PAR_PIECE.zip",
+    "sizeBytes": 93449215,
+    "sha256": "8faa1e9c18e8db3ecefc99605ced070cf3acdae1f74b1f65017cadfed5db0bf3",
+    "chunks": [
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part001",
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part002",
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part003",
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part004",
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part005",
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part006",
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part007",
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part008",
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part009",
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part010",
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part011",
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part012"
+    ],
+    "memberCount": 321,
+    "zipOnlyMembers": [
+      {
+        "originalPath": "RAPPORT_ILLUSTRE.html",
+        "sizeBytes": 16882212,
+        "sha256": "0736c07a0be24bec8dbaa8075dbd97e49f1768d5995575eee18f8492a4df9ae8"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part001",
+      "sizeBytes": 8388608,
+      "sha256": "2a1258d0c8aca5f2c783befd9db76ec512be16ec926f52f1b07b5b07a35d7d6c",
+      "kind": "original-archive-chunk",
+      "originalPath": null
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part002",
+      "sizeBytes": 8388608,
+      "sha256": "e3facccd51e47182e0e7d60b3602dabb1fb1f85e2bf6ede536db18351601a848",
+      "kind": "original-archive-chunk",
+      "originalPath": null
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part003",
+      "sizeBytes": 8388608,
+      "sha256": "d1a3fee4b91864bdb7026f865288d7b94bc90dcf23b419624d59e39b0bd64e67",
+      "kind": "original-archive-chunk",
+      "originalPath": null
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part004",
+      "sizeBytes": 8388608,
+      "sha256": "70e6ddf886c3d2e1d0015cede113f6189b044237d71db9fe00bc22f6abcd529e",
+      "kind": "original-archive-chunk",
+      "originalPath": null
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part005",
+      "sizeBytes": 8388608,
+      "sha256": "3dc4d7afbcb58c90dc8aff352d45215a65562a7f2d79c9095432ad8b4078fbf8",
+      "kind": "original-archive-chunk",
+      "originalPath": null
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part006",
+      "sizeBytes": 8388608,
+      "sha256": "26be893329d94ad4b67a77200921f24fb68bc3e14c68a0e8f1edf8353265c88a",
+      "kind": "original-archive-chunk",
+      "originalPath": null
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part007",
+      "sizeBytes": 8388608,
+      "sha256": "d477a9af257270120f948ff7dcccbbfdb7a0340881704b8fb5ba371335909c5d",
+      "kind": "original-archive-chunk",
+      "originalPath": null
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part008",
+      "sizeBytes": 8388608,
+      "sha256": "6121b36fa99a9372db609478c1d70b0eb2b01c5fb187fea9c732117585905375",
+      "kind": "original-archive-chunk",
+      "originalPath": null
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part009",
+      "sizeBytes": 8388608,
+      "sha256": "4d55e43e783e02a1fa98d066592e9e6c27b91313f8377300ca9fccea96e84736",
+      "kind": "original-archive-chunk",
+      "originalPath": null
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part010",
+      "sizeBytes": 8388608,
+      "sha256": "f19eb3bd100a4c7a7c5d80f70f2feaac3e2e7c61c057375e5875aa136eb167de",
+      "kind": "original-archive-chunk",
+      "originalPath": null
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part011",
+      "sizeBytes": 8388608,
+      "sha256": "e549a81759cd052c379d51350779da9e4a7a7538b5fc581449d11a5b2a2d5360",
+      "kind": "original-archive-chunk",
+      "originalPath": null
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part012",
+      "sizeBytes": 1174527,
+      "sha256": "a51b8c5adbda006b4734244bb605ed021df177709709f97d233cf3b198676773",
+      "kind": "original-archive-chunk",
+      "originalPath": null
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/archive/AUDIT_ARCHIVE_ORIGINAL.json",
+      "sizeBytes": 866,
+      "sha256": "dbd8e3990354b422ad36c7d30bb7b7c7d183fe43b54395c325f898d978c5fc94",
+      "kind": "original-archive-audit",
+      "originalPath": null
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/CHANGELOG_V0_10.md",
+      "sizeBytes": 1274,
+      "sha256": "879442afddd516309b5c8069d2e7684e7044a6f0dacb13a32f7143fac7b3603d",
+      "kind": "original-member",
+      "originalPath": "CHANGELOG_V0_10.md"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/CHANGELOG_V0_2.md",
+      "sizeBytes": 2087,
+      "sha256": "7e95e91eaaf7f22940d33733801f6b579124e2e470c1dfda0e12e72eeb8c302d",
+      "kind": "original-member",
+      "originalPath": "CHANGELOG_V0_2.md"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/CHANGELOG_V0_3.md",
+      "sizeBytes": 2441,
+      "sha256": "ec9e8221619b60754c405ff2c11cddd81add0e5741044a9a8800e4cd69c72894",
+      "kind": "original-member",
+      "originalPath": "CHANGELOG_V0_3.md"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/CHANGELOG_V0_4.md",
+      "sizeBytes": 2112,
+      "sha256": "81324a7a32f4ff265537bac2efa997db46775f9eda179ed13c2c0c86835c1905",
+      "kind": "original-member",
+      "originalPath": "CHANGELOG_V0_4.md"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/CHANGELOG_V0_5.md",
+      "sizeBytes": 3150,
+      "sha256": "97282d69aef12edf9109f6f394d2774a8319f42e7c5c7834d9fe605649577dd4",
+      "kind": "original-member",
+      "originalPath": "CHANGELOG_V0_5.md"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/CHANGELOG_V0_6.md",
+      "sizeBytes": 2505,
+      "sha256": "7cc123cf79323293ccc8b6f22f9d61f429f0146439869c162ced9fbcc73380a9",
+      "kind": "original-member",
+      "originalPath": "CHANGELOG_V0_6.md"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/CHANGELOG_V0_7.md",
+      "sizeBytes": 823,
+      "sha256": "05e448dae14d7a19acda42591d7475f579669b6c80de797b55bca7cac81ca677",
+      "kind": "original-member",
+      "originalPath": "CHANGELOG_V0_7.md"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/CHANGELOG_V0_8.md",
+      "sizeBytes": 2613,
+      "sha256": "febf28946262397d1a4a561c61be51d22a63fd8fda034d5690dbb97ef06071f5",
+      "kind": "original-member",
+      "originalPath": "CHANGELOG_V0_8.md"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/CHANGELOG_V0_9.md",
+      "sizeBytes": 2446,
+      "sha256": "d8324ee168d0752f65ada796d47352d5668ababf13cd5905ce226b890c400a4b",
+      "kind": "original-member",
+      "originalPath": "CHANGELOG_V0_9.md"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/JOUER_HORS_DES_OMBRES.html",
+      "sizeBytes": 734840,
+      "sha256": "de70265dbe081191816fd7b2c1c7398f92351530336c60f16a39a58341b631bc",
+      "kind": "original-member",
+      "originalPath": "JOUER_HORS_DES_OMBRES.html"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/LIRE_AVANT_DE_JOUER.md",
+      "sizeBytes": 10700,
+      "sha256": "0337524a7def89f73f9188c8c04bcd2de23ec9c1fae08df23fd1346474a9140f",
+      "kind": "original-member",
+      "originalPath": "LIRE_AVANT_DE_JOUER.md"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/LIVRAISON.json",
+      "sizeBytes": 2654,
+      "sha256": "eee79ef51d826581683f5906a3cd16ea21c5b5560b241d6cad7145f4f4ec0d9f",
+      "kind": "original-member",
+      "originalPath": "LIVRAISON.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/NOTICE.txt",
+      "sizeBytes": 779,
+      "sha256": "dd6fe14b345f38a4c4fbd5227ac07508ccba1692240fb3e11a371359fcef0d80",
+      "kind": "original-member",
+      "originalPath": "NOTICE.txt"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/SHA256SUMS.txt",
+      "sizeBytes": 30584,
+      "sha256": "5ad51476fb7309f7b2bc2f6ee1c060f27ded160f598629ccbcf8222ae382caf4",
+      "kind": "original-member",
+      "originalPath": "SHA256SUMS.txt"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/01_menu.png",
+      "sizeBytes": 1024044,
+      "sha256": "7b67054e4ac42d1b38c91f05a2b980afcb27657a4619bd7c02118cb553a0e1ec",
+      "kind": "original-member",
+      "originalPath": "captures/01_menu.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/02_jordan_passerelle.png",
+      "sizeBytes": 847330,
+      "sha256": "d5084e1b5f771c1448e91bd3f55d4d187f24c1aa29e1867c88872566a60525a0",
+      "kind": "original-member",
+      "originalPath": "captures/02_jordan_passerelle.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/03_dialogue.png",
+      "sizeBytes": 124639,
+      "sha256": "78e87265fd2d431f42e41c291e4d89600502b0df5bf57e7b619176def9aece98",
+      "kind": "original-member",
+      "originalPath": "captures/03_dialogue.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/04_beebees.png",
+      "sizeBytes": 777056,
+      "sha256": "29778c1e3eebbc05dcb7ae9df0011dc439f8d42ed96e96dee919afc8a5f4b922",
+      "kind": "original-member",
+      "originalPath": "captures/04_beebees.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/05_transcription.png",
+      "sizeBytes": 147776,
+      "sha256": "6ace0d0b54fa4de6f026b9887bb46878b0a20a7d3e54a7dd5b29453b006d84e4",
+      "kind": "original-member",
+      "originalPath": "captures/05_transcription.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/06_carnet.png",
+      "sizeBytes": 153421,
+      "sha256": "8decfbf43ba60794f34d0ebf2c24c805e3784704a3e91f56a5755c7a5eddf4a2",
+      "kind": "original-member",
+      "originalPath": "captures/06_carnet.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/07_derivation.png",
+      "sizeBytes": 131759,
+      "sha256": "dd65dedbb7ba560840ef93d8d78691af679ee68ef4d619af2d0a6a65a301059b",
+      "kind": "original-member",
+      "originalPath": "captures/07_derivation.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/08_auxiliaires.png",
+      "sizeBytes": 821386,
+      "sha256": "e177468a2a34b2616b7a4425c2a506c5db0d73c57a43c7769d5633da64d4ecc7",
+      "kind": "original-member",
+      "originalPath": "captures/08_auxiliaires.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/09_pression.png",
+      "sizeBytes": 140314,
+      "sha256": "6ab5c6d3887005a45e3f798dc2ce37a2101ec4a11742a49826f2960299d53430",
+      "kind": "original-member",
+      "originalPath": "captures/09_pression.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/100_confirmation_memoires.png",
+      "sizeBytes": 139996,
+      "sha256": "3bc02be607141b934f6509db36224cd06f3a4f3631069971b2168287f6de8f38",
+      "kind": "original-member",
+      "originalPath": "captures/100_confirmation_memoires.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/101_bilan.png",
+      "sizeBytes": 120300,
+      "sha256": "6cb6cabe46117b6a5bb3d2334b9878a7cb4028a2b01d015a941992cd1e04899e",
+      "kind": "original-member",
+      "originalPath": "captures/101_bilan.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/102_memoires_mobile.png",
+      "sizeBytes": 53842,
+      "sha256": "134122cf5743817bcc2aee63f363329ad43c83b989e26a9c4b60aedbda3f6932",
+      "kind": "original-member",
+      "originalPath": "captures/102_memoires_mobile.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/103_sequence_mobile.png",
+      "sizeBytes": 99176,
+      "sha256": "3738da00fa1de1fcfdfdafea75a35c550fdb9720b6520b75df25c4bccb010031",
+      "kind": "original-member",
+      "originalPath": "captures/103_sequence_mobile.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/104_titre_v09.png",
+      "sizeBytes": 1024044,
+      "sha256": "7b67054e4ac42d1b38c91f05a2b980afcb27657a4619bd7c02118cb553a0e1ec",
+      "kind": "original-member",
+      "originalPath": "captures/104_titre_v09.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/105_poignees_atelier.png",
+      "sizeBytes": 853777,
+      "sha256": "6450352d2f6668a013d0d6b578bbaa86c0b30eaab0c74aa53061b7b349cd080e",
+      "kind": "original-member",
+      "originalPath": "captures/105_poignees_atelier.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/106_servante_freinee.png",
+      "sizeBytes": 849498,
+      "sha256": "44f98e768a12a5c4e0ff21c6d9b2da405145c35f893e6e7d1169141bca31f7d4",
+      "kind": "original-member",
+      "originalPath": "captures/106_servante_freinee.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/107_releve_manutention.png",
+      "sizeBytes": 159263,
+      "sha256": "088fc44312dad26003b74e74ecca697d8a98fc11ff8f50055087ac6f6e44e5a8",
+      "kind": "original-member",
+      "originalPath": "captures/107_releve_manutention.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/108_plan_materiel.png",
+      "sizeBytes": 174764,
+      "sha256": "b4af7449da21a8d57b13ce9bf46eeb4e7b87713d605d1c46d2192cb07d1d85a3",
+      "kind": "original-member",
+      "originalPath": "captures/108_plan_materiel.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/109_servante_reserves.png",
+      "sizeBytes": 831191,
+      "sha256": "af5177612a3f342b1b97d267fe82e419f663e5b52f1111e79012ba34670fd6e2",
+      "kind": "original-member",
+      "originalPath": "captures/109_servante_reserves.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/10_decantation.png",
+      "sizeBytes": 774551,
+      "sha256": "9058fa6baebbafa33851ea80f75f6a1a07aca830bd726a05ace682508fba89e2",
+      "kind": "original-member",
+      "originalPath": "captures/10_decantation.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/110_benne_roulage.png",
+      "sizeBytes": 812369,
+      "sha256": "4a47817615a3ed372c4c4ecf8c6ed5d24a03b2d8b37aa18cd3bf13086bef9656",
+      "kind": "original-member",
+      "originalPath": "captures/110_benne_roulage.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/111_servante_pompage.png",
+      "sizeBytes": 845524,
+      "sha256": "58d85e58c0d2ed6f99983ad0fa8a4dfb72e962044d578b916e835988a949824e",
+      "kind": "original-member",
+      "originalPath": "captures/111_servante_pompage.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/112_benne_echangeurs.png",
+      "sizeBytes": 802018,
+      "sha256": "0fc4934ce3e263b9d0f8943ecdc0fee06313ce982d11e5d9054e1e93ab7627e4",
+      "kind": "original-member",
+      "originalPath": "captures/112_benne_echangeurs.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/113_benne_quarantaine.png",
+      "sizeBytes": 802233,
+      "sha256": "749763099afc7d130036f03da1eb47a18d6a25960138352d3044573f24d899fe",
+      "kind": "original-member",
+      "originalPath": "captures/113_benne_quarantaine.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/114_aucun_ecrasement.png",
+      "sizeBytes": 860338,
+      "sha256": "4c25e5ac139ae1a2241550ead322b577aeab65d74b6054c257414eef28a8f41d",
+      "kind": "original-member",
+      "originalPath": "captures/114_aucun_ecrasement.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/115_poignees_mobile.png",
+      "sizeBytes": 206048,
+      "sha256": "3da7f4125a5102780bd38acb5b119d0e2979fc509992b8a0d3c65c52fadf8206",
+      "kind": "original-member",
+      "originalPath": "captures/115_poignees_mobile.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/116_releve_mobile.png",
+      "sizeBytes": 58717,
+      "sha256": "a8b12b521f65f2deede4b2a8f52b02f46ac7c31cbc513e76c060202560569bb5",
+      "kind": "original-member",
+      "originalPath": "captures/116_releve_mobile.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/117_poignees_paysage.png",
+      "sizeBytes": 155836,
+      "sha256": "3a2969a42183f7815d5278a6ead2f90a9bcccc409f9cd74b21f76451061787dd",
+      "kind": "original-member",
+      "originalPath": "captures/117_poignees_paysage.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/118_manutention_repetition.png",
+      "sizeBytes": 850648,
+      "sha256": "c7784b3be1723dbe5a0ec10d8bbc7570c5f81b40081a69da001dbe4747c34864",
+      "kind": "original-member",
+      "originalPath": "captures/118_manutention_repetition.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/119_titre_v010.png",
+      "sizeBytes": 1024044,
+      "sha256": "7b67054e4ac42d1b38c91f05a2b980afcb27657a4619bd7c02118cb553a0e1ec",
+      "kind": "original-member",
+      "originalPath": "captures/119_titre_v010.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/11_alcove.png",
+      "sizeBytes": 903929,
+      "sha256": "1a1bd84985a7ba127fa2a9452586e1d832f0407c55f1a0934690cb9626089636",
+      "kind": "original-member",
+      "originalPath": "captures/11_alcove.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/120_vestibule.png",
+      "sizeBytes": 645210,
+      "sha256": "31d877395d8be043db1db5ce5884bb254cc99fae9554b14fa1ffd6947c00db64",
+      "kind": "original-member",
+      "originalPath": "captures/120_vestibule.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/121_sas.png",
+      "sizeBytes": 756864,
+      "sha256": "940e75d5a7775e97559cd2ef99b6658d174148ea6f0b123ae6b93e3038b51385",
+      "kind": "original-member",
+      "originalPath": "captures/121_sas.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/122_bras.png",
+      "sizeBytes": 696552,
+      "sha256": "e0ddff74577d6d7804ed783a5e14809fedc1796f34e2e670f5b5a3a725b4fbbf",
+      "kind": "original-member",
+      "originalPath": "captures/122_bras.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/123_samson.png",
+      "sizeBytes": 803741,
+      "sha256": "c30d39052390800a37a59d4ceb22d1236a63ef1516d4bfc134dec34bf143542b",
+      "kind": "original-member",
+      "originalPath": "captures/123_samson.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/124_ratelier_vide.png",
+      "sizeBytes": 663641,
+      "sha256": "d3131a2c00dcab70a5726451ea61622656d4401f7d0583fee5ec3c369f48f9df",
+      "kind": "original-member",
+      "originalPath": "captures/124_ratelier_vide.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/125_equipement.png",
+      "sizeBytes": 158760,
+      "sha256": "5379bb05a0e42fd1d041aaebf62e1a79679104d5eb3ee2117a7d7f5be8e1bab7",
+      "kind": "original-member",
+      "originalPath": "captures/125_equipement.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/126_filet.png",
+      "sizeBytes": 744781,
+      "sha256": "a71e505975173c32ff1847b955d9b2270db79b6e03af313183cceb075ad88e26",
+      "kind": "original-member",
+      "originalPath": "captures/126_filet.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/127_thumper.png",
+      "sizeBytes": 719185,
+      "sha256": "ebed8553bb0117f962ebdd5e381312831af834714fd63b96519135a9e0f89629",
+      "kind": "original-member",
+      "originalPath": "captures/127_thumper.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/128_cadavre_acide.png",
+      "sizeBytes": 711537,
+      "sha256": "6c1a820e1f1bd5995e03742468e88ffaec9db59ea0ec7c75def64ccc8f4fdabf",
+      "kind": "original-member",
+      "originalPath": "captures/128_cadavre_acide.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/129_pic.png",
+      "sizeBytes": 718444,
+      "sha256": "fbea89f3493e2cf7381eec1b0cdc6068f9659c96d0c828bc8306fa3374fb8465",
+      "kind": "original-member",
+      "originalPath": "captures/129_pic.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/12_infirmerie.png",
+      "sizeBytes": 844481,
+      "sha256": "67a46faa1bc783917b06138d3d0ed05cecac201448e9ced66a455bdebb74f441",
+      "kind": "original-member",
+      "originalPath": "captures/12_infirmerie.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/130_projecteur.png",
+      "sizeBytes": 717303,
+      "sha256": "da0b86cfcffe76caf1e220254ce7cce5e2540253d89241bcc25dec21cb74361c",
+      "kind": "original-member",
+      "originalPath": "captures/130_projecteur.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/131_equipage.png",
+      "sizeBytes": 166961,
+      "sha256": "3434b7d076bd7119dbc5900c8548ad4b68e28b0629fcf03f5beb0cfea0cf9adc",
+      "kind": "original-member",
+      "originalPath": "captures/131_equipage.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/132_personnel_vestibule.png",
+      "sizeBytes": 627518,
+      "sha256": "b7609f0fc5f434e4b5f45fbdc090e636607eed08ee2019a996ec541cef26bfdd",
+      "kind": "original-member",
+      "originalPath": "captures/132_personnel_vestibule.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/133_blessures.png",
+      "sizeBytes": 818430,
+      "sha256": "8373e9e06bac6e31bd20b30fde913579a67dd88b7a491f4ad6ea88ff6a7e7116",
+      "kind": "original-member",
+      "originalPath": "captures/133_blessures.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/134_fidelite.png",
+      "sizeBytes": 186235,
+      "sha256": "942bd79340711f113442d0c91d166de7e7a368b98bd66eaad6c197eea28c72e1",
+      "kind": "original-member",
+      "originalPath": "captures/134_fidelite.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/135_plan_bras.png",
+      "sizeBytes": 165079,
+      "sha256": "fea543c33a697ddb7bc069872b0af52d1de99e573736b26fc34432885a695b34",
+      "kind": "original-member",
+      "originalPath": "captures/135_plan_bras.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/136_mobile_equipement.png",
+      "sizeBytes": 44459,
+      "sha256": "87effd46e0ae42372775c53fd6d34eb0755fd0090597382219627cb5d7330075",
+      "kind": "original-member",
+      "originalPath": "captures/136_mobile_equipement.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/137_seuil_service.png",
+      "sizeBytes": 777657,
+      "sha256": "5aeb66c8e528be4ed63f2186c18eddc13d753ddd2d6591c56baa94ff2e32891d",
+      "kind": "original-member",
+      "originalPath": "captures/137_seuil_service.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/138_seuil_vestibule.png",
+      "sizeBytes": 664416,
+      "sha256": "b9682f0b1bd482aa181412d847e3e70b6512e63154bbbf6f75eceb7e9ea809f1",
+      "kind": "original-member",
+      "originalPath": "captures/138_seuil_vestibule.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/139_seuil_organique.png",
+      "sizeBytes": 835144,
+      "sha256": "a53e18c650168adae997d69279541fca0fdd449577cdd9aebbf3fa89579c0507",
+      "kind": "original-member",
+      "originalPath": "captures/139_seuil_organique.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/13_equipage.png",
+      "sizeBytes": 180474,
+      "sha256": "30c199791a6e7d6745e5e466e8acf4d4e4f15e804927f76e3abef72401029060",
+      "kind": "original-member",
+      "originalPath": "captures/13_equipage.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/14_programme_medical.png",
+      "sizeBytes": 153546,
+      "sha256": "5caf157a3def8d507634538853a834e3f909b077e8c75c9136e09f9124a3b400",
+      "kind": "original-member",
+      "originalPath": "captures/14_programme_medical.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/15_evacuation.png",
+      "sizeBytes": 841300,
+      "sha256": "40f6da13f71f7fb089b23576745ce58a6f246a5c32444b30f25c1501e058b608",
+      "kind": "original-member",
+      "originalPath": "captures/15_evacuation.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/16_quai_libere.png",
+      "sizeBytes": 827016,
+      "sha256": "4d9b16a66b6577cb7be5bbad6e563ae9adeace43ea11d8ad114d08f492af5cf3",
+      "kind": "original-member",
+      "originalPath": "captures/16_quai_libere.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/17_transmission.png",
+      "sizeBytes": 122277,
+      "sha256": "54a3d542b97523fd1bcab789390f343a4d98f08ab708b5571fef569f9c90542a",
+      "kind": "original-member",
+      "originalPath": "captures/17_transmission.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/18_conclusion.png",
+      "sizeBytes": 136329,
+      "sha256": "450f78613f4b8df097c73dbb3041aa668af7885830d17f91e32b2b9ea8650190",
+      "kind": "original-member",
+      "originalPath": "captures/18_conclusion.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/19_plan.png",
+      "sizeBytes": 169692,
+      "sha256": "6a5aaa5ec054e14a60a7572da625b8656275ecd4f390855582d7d3818016aa2c",
+      "kind": "original-member",
+      "originalPath": "captures/19_plan.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/20_mobile.png",
+      "sizeBytes": 153353,
+      "sha256": "1e1e4752e20b69d0182fabeae8077969e7126bfd401d3c1ea1374f2f0e392047",
+      "kind": "original-member",
+      "originalPath": "captures/20_mobile.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/21_contact.png",
+      "sizeBytes": 667194,
+      "sha256": "f6b1c6c1f7ed307a2a95bfb3a739e384d6fa7f41a7fc0d5315f73cb7201b08c6",
+      "kind": "original-member",
+      "originalPath": "captures/21_contact.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/22_baxter_suit.png",
+      "sizeBytes": 768968,
+      "sha256": "23ba10a7280f853bbd8d4405f7aacaaa81ee6ffd73c760f98467eae42b79bc5f",
+      "kind": "original-member",
+      "originalPath": "captures/22_baxter_suit.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/23_baxter_attend.png",
+      "sizeBytes": 754857,
+      "sha256": "d6c27fe17699fe048ede0ec9a459ea3763b87babe76096f69977d4ce2b1c8cb2",
+      "kind": "original-member",
+      "originalPath": "captures/23_baxter_attend.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/24_hoop_epave.png",
+      "sizeBytes": 833404,
+      "sha256": "6a8f230d3ea95e98da6cbf90c6a7e0619caa554c26abc82748b9628881922ca4",
+      "kind": "original-member",
+      "originalPath": "captures/24_hoop_epave.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/25_ripley_retour.png",
+      "sizeBytes": 794939,
+      "sha256": "c6329da07be55a260a625350e18d822ce10e58f6fd86b3c20616595b0b26df13",
+      "kind": "original-member",
+      "originalPath": "captures/25_ripley_retour.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/26_cachette.png",
+      "sizeBytes": 678302,
+      "sha256": "a9181c10f3e3e92c8d54649a54d688f3deaf4a7ea86a8aa9bd40a077bfd6972c",
+      "kind": "original-member",
+      "originalPath": "captures/26_cachette.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/27_appui_adulte.png",
+      "sizeBytes": 640105,
+      "sha256": "a429f225a795c168330de97df178869a0fb1bf63a460eac57ae0c42487851006",
+      "kind": "original-member",
+      "originalPath": "captures/27_appui_adulte.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/28_reserve_fermee.png",
+      "sizeBytes": 851090,
+      "sha256": "ff6eee26ceef877b42f88ff8ecf22f7aa8fbab37c1df4f90f7529ab80704b7b4",
+      "kind": "original-member",
+      "originalPath": "captures/28_reserve_fermee.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/29_reserve_ouverte.png",
+      "sizeBytes": 850835,
+      "sha256": "1deec61c36a6769f5e3539dc3377bd32919e4090a0b900869b835ba950da36e9",
+      "kind": "original-member",
+      "originalPath": "captures/29_reserve_ouverte.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/30_plan_initial.png",
+      "sizeBytes": 170031,
+      "sha256": "65213cb6d81b1762bff655995a3f05a7dd96c80ea3e19e1829c193d87a4b2d23",
+      "kind": "original-member",
+      "originalPath": "captures/30_plan_initial.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/31_plan_explore.png",
+      "sizeBytes": 158398,
+      "sha256": "b1b8ab9be66d04dc8e336d0e2a95e940c152bb787c29f676684fe7aeeb677c4d",
+      "kind": "original-member",
+      "originalPath": "captures/31_plan_explore.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/32_niche_organique.png",
+      "sizeBytes": 786619,
+      "sha256": "54837ccb777e959cb22e45c98dfe7e6c9a19dbf0bad231e922432c519336a743",
+      "kind": "original-member",
+      "originalPath": "captures/32_niche_organique.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/33_atelier_contraste.png",
+      "sizeBytes": 830116,
+      "sha256": "482074226e411b5e4a4a9b526bf6f99d975ff023c8db1e9c885cdd2f7e34f1aa",
+      "kind": "original-member",
+      "originalPath": "captures/33_atelier_contraste.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/34_mobile_escorte.png",
+      "sizeBytes": 153779,
+      "sha256": "7a6f92cdb44decef506469a8a294244cdec44633cabfe15c07e94538a3b9dd0b",
+      "kind": "original-member",
+      "originalPath": "captures/34_mobile_escorte.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/35_paysage.png",
+      "sizeBytes": 146538,
+      "sha256": "cf152f088d7b22200e178385c9e51e559097ee587ee428bfd92c23560dc6c02b",
+      "kind": "original-member",
+      "originalPath": "captures/35_paysage.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/36_lumieres_locales.png",
+      "sizeBytes": 733793,
+      "sha256": "0cf50681402dfff296898607e19547a1bc173030088a9ca2cb2006d6bf638d60",
+      "kind": "original-member",
+      "originalPath": "captures/36_lumieres_locales.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/37_menu_v04.png",
+      "sizeBytes": 1024044,
+      "sha256": "7b67054e4ac42d1b38c91f05a2b980afcb27657a4619bd7c02118cb553a0e1ec",
+      "kind": "original-member",
+      "originalPath": "captures/37_menu_v04.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/38_coursive_eclairee.png",
+      "sizeBytes": 770681,
+      "sha256": "5bf72458c2c85aadabc32761249153a9379e121e8980a1afde0f54d75ad4febb",
+      "kind": "original-member",
+      "originalPath": "captures/38_coursive_eclairee.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/39_coursive_secours.png",
+      "sizeBytes": 592160,
+      "sha256": "a7bacc7dd3f42c53803d5c41b03f8eaf63d8e99c7ff119aeae32fb30d8a65e86",
+      "kind": "original-member",
+      "originalPath": "captures/39_coursive_secours.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/40_services.png",
+      "sizeBytes": 151409,
+      "sha256": "aec87f523c154ebd9dd8fb103299dfc6efc0bbd2943cf19be3bba20ceffd93f8",
+      "kind": "original-member",
+      "originalPath": "captures/40_services.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/41_verrou_coursive.png",
+      "sizeBytes": 754026,
+      "sha256": "84d47f1597d9043d531afdfe1dc21465ce15d960184b09e6b7967685a813f299",
+      "kind": "original-member",
+      "originalPath": "captures/41_verrou_coursive.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/42_compresseur.png",
+      "sizeBytes": 835196,
+      "sha256": "cc67f012ded5280690804b9ffabf65421bc15f1503282b8e28fa2a78b9b86865",
+      "kind": "original-member",
+      "originalPath": "captures/42_compresseur.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/43_pression_pompage.png",
+      "sizeBytes": 845023,
+      "sha256": "d510b624cdd1af6193947250feeb39c47f412316a1b99971222d81b7e73d28c9",
+      "kind": "original-member",
+      "originalPath": "captures/43_pression_pompage.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/44_passage_creature.png",
+      "sizeBytes": 854513,
+      "sha256": "b85d80bdec962247a2836eca2cff1e03f912458cef370daefd2314dee59b2939",
+      "kind": "original-member",
+      "originalPath": "captures/44_passage_creature.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/45_seuil_epave.png",
+      "sizeBytes": 827431,
+      "sha256": "60397b5a65576b923c1d1676e6e2191151a52195f14744f12caf838828cf021c",
+      "kind": "original-member",
+      "originalPath": "captures/45_seuil_epave.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/46_mobile_cloison.png",
+      "sizeBytes": 153167,
+      "sha256": "918ce1b671ec02713698acdcda795b08dbd86f33b6e633ea39a4af64e8613505",
+      "kind": "original-member",
+      "originalPath": "captures/46_mobile_cloison.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/47_mobile_services.png",
+      "sizeBytes": 108520,
+      "sha256": "004bbadad54f6201c08d43da87f3c09eef9251990ac3d77e826264d52803cba0",
+      "kind": "original-member",
+      "originalPath": "captures/47_mobile_services.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/48_paysage_services.png",
+      "sizeBytes": 154556,
+      "sha256": "50ede9b1a02069af8b6ae4969c3975a942aefe540d7fe1896d5be8eb265db2c6",
+      "kind": "original-member",
+      "originalPath": "captures/48_paysage_services.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/49_menu_v05.png",
+      "sizeBytes": 1024044,
+      "sha256": "7b67054e4ac42d1b38c91f05a2b980afcb27657a4619bd7c02118cb553a0e1ec",
+      "kind": "original-member",
+      "originalPath": "captures/49_menu_v05.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/50_ecoute.png",
+      "sizeBytes": 845099,
+      "sha256": "4e8d7d1a3a659eaf69ea0e579158b75ad623772647d4ea127ce8069047333759",
+      "kind": "original-member",
+      "originalPath": "captures/50_ecoute.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/51_ecoute_cloison.png",
+      "sizeBytes": 843700,
+      "sha256": "911d63981cb9e47e8580ed11151acadf453be95d3ad958572a20064e595d86f5",
+      "kind": "original-member",
+      "originalPath": "captures/51_ecoute_cloison.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/52_enquete_sonore.png",
+      "sizeBytes": 850980,
+      "sha256": "7d8fceb92d9288aefbd9756025a56a9b0aa03a16fb841dbfff401e00c1c66efd",
+      "kind": "original-member",
+      "originalPath": "captures/52_enquete_sonore.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/53_masque_machine.png",
+      "sizeBytes": 851208,
+      "sha256": "14c97dcddf75088811682ea46db6dcdc22ce7d9e135ea33484c0dd2e7153a628",
+      "kind": "original-member",
+      "originalPath": "captures/53_masque_machine.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/54_leurre_actif.png",
+      "sizeBytes": 632111,
+      "sha256": "e9ba0a56ea823eb903cb17b5e41eae79cf57b23d313d9a3aefa3b75fd6a3b3bf",
+      "kind": "original-member",
+      "originalPath": "captures/54_leurre_actif.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/55_traces_sol.png",
+      "sizeBytes": 634677,
+      "sha256": "7f458a86165d3d873e59c3fda3bf863c4e0cc01c74cf2d01de57f4a9f360f020",
+      "kind": "original-member",
+      "originalPath": "captures/55_traces_sol.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/56_signal_reconnu.png",
+      "sizeBytes": 682739,
+      "sha256": "435f23eea7cdc445ab2e327abd5c9b415c77ce76483a8cc1f9fa4e60d1c3ee9e",
+      "kind": "original-member",
+      "originalPath": "captures/56_signal_reconnu.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/57_compagnon_prudence.png",
+      "sizeBytes": 861418,
+      "sha256": "ade632caab895bac5066c74c8b18224135a1ab970ad2de63b6a2569968140a59",
+      "kind": "original-member",
+      "originalPath": "captures/57_compagnon_prudence.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/58_journal_terrain.png",
+      "sizeBytes": 157816,
+      "sha256": "e099b0356c574ccf49b3f1c059d33e553c742deb563f66cd444bba977ad5d7b7",
+      "kind": "original-member",
+      "originalPath": "captures/58_journal_terrain.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/59_mobile_ecoute.png",
+      "sizeBytes": 160729,
+      "sha256": "ccdda645073cbdf64345e29ea1aec46e4f80d92cd57836f79c72770e6dfc5bf5",
+      "kind": "original-member",
+      "originalPath": "captures/59_mobile_ecoute.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/60_paysage_ecoute.png",
+      "sizeBytes": 152687,
+      "sha256": "64746f4fa70ca931e11e15c5edc9bf99088fe765cbebcfe85af78a78203e57e0",
+      "kind": "original-member",
+      "originalPath": "captures/60_paysage_ecoute.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/61_coffret_transparent.png",
+      "sizeBytes": 793264,
+      "sha256": "7b6e9e01c20ea959b823e1f961c605a9812e6755af445b4c7a62a2e44433847e",
+      "kind": "original-member",
+      "originalPath": "captures/61_coffret_transparent.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/62_menu_v06.png",
+      "sizeBytes": 1024044,
+      "sha256": "7b67054e4ac42d1b38c91f05a2b980afcb27657a4619bd7c02118cb553a0e1ec",
+      "kind": "original-member",
+      "originalPath": "captures/62_menu_v06.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/63_casier_ouvert.png",
+      "sizeBytes": 846289,
+      "sha256": "7cafca3c7924360e8da4da2c3feff262c782e15e50a0927fc3964bdc9ca8e433",
+      "kind": "original-member",
+      "originalPath": "captures/63_casier_ouvert.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/64_traverse_fermee.png",
+      "sizeBytes": 780189,
+      "sha256": "762e3a1874e092ddf6fa8be8bee81d13cfa58b23591b339fa5f0b2bf18c25ef5",
+      "kind": "original-member",
+      "originalPath": "captures/64_traverse_fermee.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/65_connecteurs_poses.png",
+      "sizeBytes": 781279,
+      "sha256": "67b92aa504f53bc46a20b597b02a09dd90970be04a43fa531b97fce7738a5236",
+      "kind": "original-member",
+      "originalPath": "captures/65_connecteurs_poses.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/66_sac_chantier.png",
+      "sizeBytes": 213537,
+      "sha256": "6106d2d39efc637de9d90ad01673099a80360b368762fd717afa84688b033f14",
+      "kind": "original-member",
+      "originalPath": "captures/66_sac_chantier.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/67_traverse_retablie.png",
+      "sizeBytes": 776685,
+      "sha256": "cddee12c729f3733dab792a7b72528d478cb016da609602e878068058b7d3ac9",
+      "kind": "original-member",
+      "originalPath": "captures/67_traverse_retablie.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/68_plan_proximite.png",
+      "sizeBytes": 169754,
+      "sha256": "755b92b518b3459cfe714b5048c618a5380422f412ac9b4aa707bb1d25a02195",
+      "kind": "original-member",
+      "originalPath": "captures/68_plan_proximite.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/69_etabli_reassort.png",
+      "sizeBytes": 238633,
+      "sha256": "2d72be9496f6be28ebcca53b4ede0c910d6ca98e1a55263ae381b8f3c2e698ae",
+      "kind": "original-member",
+      "originalPath": "captures/69_etabli_reassort.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/70_desserte_manutention.png",
+      "sizeBytes": 848053,
+      "sha256": "187d9bb23fe3ac61de584dbd35413bf73fdab9d822b4fa56d5449c262ef92546",
+      "kind": "original-member",
+      "originalPath": "captures/70_desserte_manutention.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/71_contact_traverse.png",
+      "sizeBytes": 782234,
+      "sha256": "fb099d4fe349c22572a0c4fb0d31e080269671695d5f29f1cdf7b4ef8ffe22d7",
+      "kind": "original-member",
+      "originalPath": "captures/71_contact_traverse.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/72_mobile_sac.png",
+      "sizeBytes": 91261,
+      "sha256": "bb196f3c03416c22135eb947089c6eed2af74d718dd8d4790bf11023bebcc91e",
+      "kind": "original-member",
+      "originalPath": "captures/72_mobile_sac.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/73_mobile_plan.png",
+      "sizeBytes": 59873,
+      "sha256": "d02c785a0521de468d253550b3a72b31405f4472ab83bff2066633697efed061",
+      "kind": "original-member",
+      "originalPath": "captures/73_mobile_plan.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/74_menu_v07.png",
+      "sizeBytes": 1024044,
+      "sha256": "7b67054e4ac42d1b38c91f05a2b980afcb27657a4619bd7c02118cb553a0e1ec",
+      "kind": "original-member",
+      "originalPath": "captures/74_menu_v07.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/75_caniveau.png",
+      "sizeBytes": 776345,
+      "sha256": "73bbff13f3ccd9c9b4b5c647a550c6c16e24beb0b13d981b6aae5daa46f9751a",
+      "kind": "original-member",
+      "originalPath": "captures/75_caniveau.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/76_echangeurs.png",
+      "sizeBytes": 776445,
+      "sha256": "0b2bd87dc4872f63e7b3edb30b1aee18ac735ef6dc05895df34cdb21ba11890f",
+      "kind": "original-member",
+      "originalPath": "captures/76_echangeurs.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/77_releve_pompage.png",
+      "sizeBytes": 149788,
+      "sha256": "26c4c30af9d27533753310946047a9be7ae8227d3134c0828ee4e0cce59d1d7e",
+      "kind": "original-member",
+      "originalPath": "captures/77_releve_pompage.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/78_traverse_ouverte.png",
+      "sizeBytes": 810245,
+      "sha256": "273a55723c25effd00159ca753c3576eb1344223de909e2be733e4a495d7badd",
+      "kind": "original-member",
+      "originalPath": "captures/78_traverse_ouverte.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/79_armoire.png",
+      "sizeBytes": 824769,
+      "sha256": "c4555f8a3caa731ee8ad6a8da04f2f621107ab00ba53fe8270da402b246741b0",
+      "kind": "original-member",
+      "originalPath": "captures/79_armoire.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/80_enregistreur_porte.png",
+      "sizeBytes": 806057,
+      "sha256": "03e1b632bb74c1538b407b66435c4ec1d18483405441f22e261121ffbd0fc0e4",
+      "kind": "original-member",
+      "originalPath": "captures/80_enregistreur_porte.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/81_enregistreur_pose.png",
+      "sizeBytes": 810232,
+      "sha256": "50831823c13cc4fde3ccc228bee02af97ef769ab74da419af081487b50cb0f38",
+      "kind": "original-member",
+      "originalPath": "captures/81_enregistreur_pose.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/82_poste_releve.png",
+      "sizeBytes": 832073,
+      "sha256": "34c1283b431433bf5add7957b6d201662cb29db73054500035d8f4a7ace77f67",
+      "kind": "original-member",
+      "originalPath": "captures/82_poste_releve.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/83_copie.png",
+      "sizeBytes": 149291,
+      "sha256": "261cc753f31b8fcecb5472d81053d97019b6fb6cb1a052f8ce0bc92f0e94fb3a",
+      "kind": "original-member",
+      "originalPath": "captures/83_copie.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/84_plan_caniveau.png",
+      "sizeBytes": 172380,
+      "sha256": "2a2075b680be8b42c8bf20a7f7d0fd6f4415fc07a17297c829b7675cc4c39299",
+      "kind": "original-member",
+      "originalPath": "captures/84_plan_caniveau.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/85_mobile_releve.png",
+      "sizeBytes": 48964,
+      "sha256": "0c4369afa1b077cc0b2a8be061f6b46a6b2bab36d8f93d41f964757f78d027b5",
+      "kind": "original-member",
+      "originalPath": "captures/85_mobile_releve.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/86_mobile_galerie.png",
+      "sizeBytes": 179563,
+      "sha256": "fc1ad1f2a16537321767dcd6d9a2cbe99d579cc7182dc13df9700ff66aaa897c",
+      "kind": "original-member",
+      "originalPath": "captures/86_mobile_galerie.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/87_interruption_adulte.png",
+      "sizeBytes": 802864,
+      "sha256": "eb6dbe47fa851b5eea91f0d210b66f23df48c3cb5fadae05c60fce4f8f3ed7d0",
+      "kind": "original-member",
+      "originalPath": "captures/87_interruption_adulte.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/88_menu_memoires.png",
+      "sizeBytes": 1024044,
+      "sha256": "7b67054e4ac42d1b38c91f05a2b980afcb27657a4619bd7c02118cb553a0e1ec",
+      "kind": "original-member",
+      "originalPath": "captures/88_menu_memoires.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/89_premiere_entree.png",
+      "sizeBytes": 188534,
+      "sha256": "bc107028f0be4a00c48e4dc0cc19069acc71901d1add0dada5f96bb93879a63c",
+      "kind": "original-member",
+      "originalPath": "captures/89_premiere_entree.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/90_marion_orbite.png",
+      "sizeBytes": 236551,
+      "sha256": "e57dd0f540ff7e4a50719cc4fc1ad130093e270fb3c3b3e8af621c7b76a18c6b",
+      "kind": "original-member",
+      "originalPath": "captures/90_marion_orbite.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/91_repetition_separee.png",
+      "sizeBytes": 864116,
+      "sha256": "d55ed13ab6fa536bdef3ac32ef5b464cf8013c313fef262e8e1faa9505a3d5d4",
+      "kind": "original-member",
+      "originalPath": "captures/91_repetition_separee.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/92_impact_delilah.png",
+      "sizeBytes": 449026,
+      "sha256": "8ee4aeb710d43d72ec791de303695fb4ac4458b2997b34643085aed677269bd6",
+      "kind": "original-member",
+      "originalPath": "captures/92_impact_delilah.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/93_bibliotheque_complete.png",
+      "sizeBytes": 143908,
+      "sha256": "424bca22f3a28493299d48f720ee0df97c95793f1401bc427cdf27d066e13426",
+      "kind": "original-member",
+      "originalPath": "captures/93_bibliotheque_complete.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/94_ripley.png",
+      "sizeBytes": 457062,
+      "sha256": "1bd67b070cb3007c8db9c2a1b0081faafa162df051d2afdeaff79812b647295c",
+      "kind": "original-member",
+      "originalPath": "captures/94_ripley.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/95_cage.png",
+      "sizeBytes": 445790,
+      "sha256": "558b368ac7c0396f3561073cb619e09375a938f25740c687ba0e58adef163ecc",
+      "kind": "original-member",
+      "originalPath": "captures/95_cage.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/96_unite_medicale.png",
+      "sizeBytes": 458232,
+      "sha256": "2eb04e5ec15f9576a14e2eec5cfea8a961c8dd677184a2085baeec3b28fed577",
+      "kind": "original-member",
+      "originalPath": "captures/96_unite_medicale.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/97_purge.png",
+      "sizeBytes": 449975,
+      "sha256": "0096c36ea951583ee23159e49d364035edf650a8ceb2870c1235591807b0f14f",
+      "kind": "original-member",
+      "originalPath": "captures/97_purge.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/98_narcissus.png",
+      "sizeBytes": 203057,
+      "sha256": "b9752c0649f55d1a9dcf45dabd87767afe7ffb84b107f5112358156a32d58518",
+      "kind": "original-member",
+      "originalPath": "captures/98_narcissus.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/99_silence.png",
+      "sizeBytes": 210604,
+      "sha256": "7900cb393e9d3362376dd435b5dd058609e9afe2d72e5c59adbd984c797ffaa2",
+      "kind": "original-member",
+      "originalPath": "captures/99_silence.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/CATALOGUE_CAPTURES_COMPLET_V09.json",
+      "sizeBytes": 50670,
+      "sha256": "b8f25e270f7400a96241bae06f33302dd8b18795a399d3ba7467cbebf5b3f609",
+      "kind": "original-member",
+      "originalPath": "captures/CATALOGUE_CAPTURES_COMPLET_V09.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/CATALOGUE_CAPTURES_V04.json",
+      "sizeBytes": 3859,
+      "sha256": "bfff5955632af35fc9b8a4892e0c487136747e1198082359b24790637a4d659d",
+      "kind": "original-member",
+      "originalPath": "captures/CATALOGUE_CAPTURES_V04.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/CATALOGUE_CAPTURES_V05.json",
+      "sizeBytes": 4773,
+      "sha256": "e355ae3f752884a6c16bd9aa4bc8686f16e8594910ce0921c2b54c9499b28a04",
+      "kind": "original-member",
+      "originalPath": "captures/CATALOGUE_CAPTURES_V05.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/CONTACT_SHEET_V09.jpg",
+      "sizeBytes": 1506891,
+      "sha256": "f4c1341b9ba1cb7587254d850ac37297db8334e6d7692b59aac6aa50b172ed8d",
+      "kind": "original-member",
+      "originalPath": "captures/CONTACT_SHEET_V09.jpg"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/LIRE_PROVENANCE_V010.md",
+      "sizeBytes": 983,
+      "sha256": "38f6158b21ef5c5dcc1a09b6c7f666bdb888d46a2292cd906df3e34e29197c73",
+      "kind": "original-member",
+      "originalPath": "captures/LIRE_PROVENANCE_V010.md"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/captures/NOUVELLES_CAPTURES_V09.jpg",
+      "sizeBytes": 212879,
+      "sha256": "5d42425523227d00e8defe6f46e8a737a773b6cd91a9aa3d009fc60bec3d3c6b",
+      "kind": "original-member",
+      "originalPath": "captures/NOUVELLES_CAPTURES_V09.jpg"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/dlc/alien-hors-des-ombres/index.html",
+      "sizeBytes": 544,
+      "sha256": "b375b4312a4ce3f8260502a3faab0ef3e7cabe7ba6f08f0a70c273309d59fa00",
+      "kind": "original-member",
+      "originalPath": "dlc/alien-hors-des-ombres/index.html"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/docs/AUDIT_FIDELITE_V010.json",
+      "sizeBytes": 108547,
+      "sha256": "dfb2d633e57e2ca95996e6adf10af7aa9595614740c9957d0951ee787b23a6c4",
+      "kind": "original-member",
+      "originalPath": "docs/AUDIT_FIDELITE_V010.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/docs/CAMPAGNE.md",
+      "sizeBytes": 20562,
+      "sha256": "d50cb52aa97e54f7122c9b376146fe216c09746575a2c0940a3c63b4ebd746a3",
+      "kind": "original-member",
+      "originalPath": "docs/CAMPAGNE.md"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/docs/CODEX_LEVEL_DESIGN.html",
+      "sizeBytes": 236681,
+      "sha256": "e9eff1a15c47d19bef8ebef4e4be04b6a5c946a570e141b147ab6e2a03da254a",
+      "kind": "original-member",
+      "originalPath": "docs/CODEX_LEVEL_DESIGN.html"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/docs/COMPTAGES_V010.json",
+      "sizeBytes": 303,
+      "sha256": "7e54f150a427505d5327afb786a9bbab34311665c1a23f23da4ad84385cb3e1d",
+      "kind": "original-member",
+      "originalPath": "docs/COMPTAGES_V010.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/docs/DIFF_SOURCES_V08_V09.patch",
+      "sizeBytes": 106893,
+      "sha256": "d52e394f28b796b1b29333f403f622093308bc203bc663d46e660c4345aa907f",
+      "kind": "original-member",
+      "originalPath": "docs/DIFF_SOURCES_V08_V09.patch"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/docs/DLC_CONTENT.json",
+      "sizeBytes": 385355,
+      "sha256": "c67633cb5a62ea20451545ccb6c9bae6421861fe802d8236b2c6e098856d31c8",
+      "kind": "original-member",
+      "originalPath": "docs/DLC_CONTENT.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/docs/FIDELITE_ET_SOURCES.md",
+      "sizeBytes": 5007,
+      "sha256": "b4069fd3ad1abc711a7cedefe6ae113a657e48b02426fdf256040c5a4398c4db",
+      "kind": "original-member",
+      "originalPath": "docs/FIDELITE_ET_SOURCES.md"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/docs/LIRE_HISTORIQUE.md",
+      "sizeBytes": 692,
+      "sha256": "4d0a44db0e39e3cc37e759ee1f1a6231c792fa744d3771ac17d67623fadae306",
+      "kind": "original-member",
+      "originalPath": "docs/LIRE_HISTORIQUE.md"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/docs/SYSTEMES_ET_IA.md",
+      "sizeBytes": 36050,
+      "sha256": "8f6a0a0d962533cbc6579f34d5a8d3733adeadd17ca4749ecff9f9c8b5378d2b",
+      "kind": "original-member",
+      "originalPath": "docs/SYSTEMES_ET_IA.md"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/package.json",
+      "sizeBytes": 643,
+      "sha256": "7eabafa212bff8b723cd22f224177ee55b09493664293e57d07f0790c84dccbd",
+      "kind": "original-member",
+      "originalPath": "package.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/BASE_PROVENANCE.json",
+      "sizeBytes": 274,
+      "sha256": "92002d66a75d35c23326103c157f74f1cc6b69127c0015cecf0bffa3917c6bd9",
+      "kind": "original-member",
+      "originalPath": "qa/BASE_PROVENANCE.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/BASE_V06_PROVENANCE.json",
+      "sizeBytes": 365,
+      "sha256": "25316dfb8341462f2ddc0627c7c3318b94068caa8628db06a8411d5fe8192754",
+      "kind": "original-member",
+      "originalPath": "qa/BASE_V06_PROVENANCE.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/BASE_V07_PROVENANCE.json",
+      "sizeBytes": 2308,
+      "sha256": "3e81bea54f72716a6ec1a2eadd9e0760e463f44e050aeb4e287a166f26564d72",
+      "kind": "original-member",
+      "originalPath": "qa/BASE_V07_PROVENANCE.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/CARNET_MANUTENTION_V09.json",
+      "sizeBytes": 2540,
+      "sha256": "0e552a762fdeaa10471117bcee1de8bf958aeaab1f4dbbb789b2d488aac95425",
+      "kind": "original-member",
+      "originalPath": "qa/CARNET_MANUTENTION_V09.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/EVOLUTION_TESTS_V010.md",
+      "sizeBytes": 1798,
+      "sha256": "eae2bb380ce4febb7b335c299cbcc8821c9f5aaa02e5ba2e77c45664ebeeb464",
+      "kind": "original-member",
+      "originalPath": "qa/EVOLUTION_TESTS_V010.md"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/LIRE_LES_PREUVES.md",
+      "sizeBytes": 2947,
+      "sha256": "075597670fedd121073cef7d72aa7c55e0696c35b11bc7f262c8c15dbb5ae01f",
+      "kind": "original-member",
+      "originalPath": "qa/LIRE_LES_PREUVES.md"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/MEMOIRES_EXPORT_V08.json",
+      "sizeBytes": 220796,
+      "sha256": "a72e5c0d0f0e989964cfc09184c584ce3964efcc743eb5afd8f5ac4a11fced82",
+      "kind": "original-member",
+      "originalPath": "qa/MEMOIRES_EXPORT_V08.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/MEMOIRES_QUOTA_RECOVERY_V08.json",
+      "sizeBytes": 10664,
+      "sha256": "006cedd263a1ed178392cac5e068362ad900cb20ae327322fe60742e2deebd6a",
+      "kind": "original-member",
+      "originalPath": "qa/MEMOIRES_QUOTA_RECOVERY_V08.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/PROVENANCE_BASE_V08.json",
+      "sizeBytes": 1469,
+      "sha256": "2cce157afe50c256598327aa1ab4e7369e7af660e1b481a803e51c907c342b2a",
+      "kind": "original-member",
+      "originalPath": "qa/PROVENANCE_BASE_V08.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/REPETITION_EXPORT_V08.json",
+      "sizeBytes": 2415,
+      "sha256": "59e89bfafa933c2ca6c42be6ddad106018a71a0acb04610a98548fcee56b8f29",
+      "kind": "original-member",
+      "originalPath": "qa/REPETITION_EXPORT_V08.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/RESULTATS_QA_V010.json",
+      "sizeBytes": 13168,
+      "sha256": "c6d7087d714dcfc46676bedaca5f96ceb2dea32d47bd64d02097f6c36ebac3f5",
+      "kind": "original-member",
+      "originalPath": "qa/RESULTATS_QA_V010.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/RESULTATS_QA_V09.json",
+      "sizeBytes": 239575,
+      "sha256": "107a4120d0168d6d552c9be532b61b201d15f8fb2caf2a8d8350f052c43dc464",
+      "kind": "original-member",
+      "originalPath": "qa/RESULTATS_QA_V09.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-execution-v010.json",
+      "sizeBytes": 687,
+      "sha256": "ce14fa61c0b1d346e4a298c6b8fb9a6d1a785e01f662ca000a2286b3e3d5a5b3",
+      "kind": "original-member",
+      "originalPath": "qa/browser-execution-v010.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-export-v010.json",
+      "sizeBytes": 5358,
+      "sha256": "7586491de1bf1855736a26d9548df3f1a632a78a8d7cd0ea9dd4df592a6fa5a0",
+      "kind": "original-member",
+      "originalPath": "qa/browser-export-v010.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-export-v02.json",
+      "sizeBytes": 3560,
+      "sha256": "1ea646cb07a4779f4b7904cd90e3b01bd4f661d094d5322700f68db520a724d3",
+      "kind": "original-member",
+      "originalPath": "qa/browser-export-v02.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-export-v03.json",
+      "sizeBytes": 2371,
+      "sha256": "8785a0488712c01e64830ed0ad9251ec2507765895301685f796572be2bf8b64",
+      "kind": "original-member",
+      "originalPath": "qa/browser-export-v03.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-export-v04.json",
+      "sizeBytes": 2446,
+      "sha256": "cf156f47ac8fe6325a7c8c155c87d10838de787991b8625c9459c84161ac63c1",
+      "kind": "original-member",
+      "originalPath": "qa/browser-export-v04.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-export-v05.json",
+      "sizeBytes": 4126,
+      "sha256": "bd0a36fec5845c458c6306dd4a819471eef661c5a7922ffb1f72dba433ea6f4d",
+      "kind": "original-member",
+      "originalPath": "qa/browser-export-v05.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-export-v06.json",
+      "sizeBytes": 2715,
+      "sha256": "b3ea1b1f5de94fb8a9a2a07a4b21b37517ec274c4d9c14367720f9c89ae644be",
+      "kind": "original-member",
+      "originalPath": "qa/browser-export-v06.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-export-v07.json",
+      "sizeBytes": 5796,
+      "sha256": "1432000a68ed3a42bfca0e43d717b1ffa0982a65199dbe481d7f55f1dba1e191",
+      "kind": "original-member",
+      "originalPath": "qa/browser-export-v07.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-results-v010.json",
+      "sizeBytes": 11755,
+      "sha256": "7943f4429732c16f67147815c9a6955d601d06ea4832ed69b1729d74bb0ce34b",
+      "kind": "original-member",
+      "originalPath": "qa/browser-results-v010.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-results-v02.json",
+      "sizeBytes": 5003,
+      "sha256": "8fc040a1bc7bc34765f1a3ef37dbd5c6ef4aa9b425b3009c847101ac32c12111",
+      "kind": "original-member",
+      "originalPath": "qa/browser-results-v02.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-results-v03.json",
+      "sizeBytes": 11448,
+      "sha256": "77bb3402dbd3ef43aa314792f43d78abcb43e51e14190a9b113d98854bd8f13e",
+      "kind": "original-member",
+      "originalPath": "qa/browser-results-v03.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-results-v04.json",
+      "sizeBytes": 12412,
+      "sha256": "07ccd7bfd8de2a2786c47f9a805fe160d87adf08e2405890c8382fee8ab83780",
+      "kind": "original-member",
+      "originalPath": "qa/browser-results-v04.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-results-v05.json",
+      "sizeBytes": 13766,
+      "sha256": "b3e9f5630c07da0288f308049946f889df723d7e7f04500fa50f2d77aa36e43a",
+      "kind": "original-member",
+      "originalPath": "qa/browser-results-v05.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-results-v06.json",
+      "sizeBytes": 8535,
+      "sha256": "515b2d5be450640a3be7e1b80f76dbfe6a1e0f5f71eefbe1dd64b08a7587f74f",
+      "kind": "original-member",
+      "originalPath": "qa/browser-results-v06.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-results-v07.json",
+      "sizeBytes": 8735,
+      "sha256": "106c3172a1fddb7ad72d20d5f1fea3a7c01c94ded5130a960fcb459512e9c8df",
+      "kind": "original-member",
+      "originalPath": "qa/browser-results-v07.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-results-v08.json",
+      "sizeBytes": 16711,
+      "sha256": "42027ffd8231e377424a46adf92a1bd4d182f628c049362616354486cdb89fec",
+      "kind": "original-member",
+      "originalPath": "qa/browser-results-v08.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-results-v09.json",
+      "sizeBytes": 9958,
+      "sha256": "fed7aa89f3c1f0b63910a496c11067e434885c56657d4e90aaf12e8bdb6b424d",
+      "kind": "original-member",
+      "originalPath": "qa/browser-results-v09.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-v010.py",
+      "sizeBytes": 13611,
+      "sha256": "387ddea40be3687ebd7f6ad545d377d0692e2ea441261743b7e23fdaf07ca815",
+      "kind": "original-member",
+      "originalPath": "qa/browser-v010.py"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-v02.py",
+      "sizeBytes": 11479,
+      "sha256": "1735f4a8b1d22ec898998f2c42d73c7d3e8c4b42b39b49510d79e1d2e486565a",
+      "kind": "original-member",
+      "originalPath": "qa/browser-v02.py"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-v03.py",
+      "sizeBytes": 13206,
+      "sha256": "e5c440d2117e51979a8f7052b4aff40ce6dae4014c1cf43fc92d8981ef003666",
+      "kind": "original-member",
+      "originalPath": "qa/browser-v03.py"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-v04.py",
+      "sizeBytes": 12497,
+      "sha256": "b6ff52cc57c989a7cfa67ebf468c3701b56dce1b5affb02a448e942745b39c34",
+      "kind": "original-member",
+      "originalPath": "qa/browser-v04.py"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-v05.py",
+      "sizeBytes": 14618,
+      "sha256": "1c5be2cda30af7bbf79ce66786357dc47c338b7cf9055e768830565790d4e87e",
+      "kind": "original-member",
+      "originalPath": "qa/browser-v05.py"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-v06.py",
+      "sizeBytes": 13192,
+      "sha256": "879978129ee62cfb7dd2cccd8e70560dc3907bb1427c984b115883f3db7e12c7",
+      "kind": "original-member",
+      "originalPath": "qa/browser-v06.py"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-v07.py",
+      "sizeBytes": 12687,
+      "sha256": "acde5aaf31102b54f818cd3a0f638caa681f596e7a5bb22868df0d32f4843684",
+      "kind": "original-member",
+      "originalPath": "qa/browser-v07.py"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-v08.py",
+      "sizeBytes": 19495,
+      "sha256": "448cda577ef2a491897f893bccf2a4f339a9325eea2a68b099c12cfac7031d6d",
+      "kind": "original-member",
+      "originalPath": "qa/browser-v08.py"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/browser-v09.py",
+      "sizeBytes": 14196,
+      "sha256": "1c563b40d917f71c4842ad48992eac6f3a93349e7e280f176336c00b15d528f1",
+      "kind": "original-member",
+      "originalPath": "qa/browser-v09.py"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/delivery-results-v02.json",
+      "sizeBytes": 2399,
+      "sha256": "027b39c30138dde04f2281dbd8d2463a5d196e7289c15e25d9179f648b579997",
+      "kind": "original-member",
+      "originalPath": "qa/delivery-results-v02.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/document-audit-v010.json",
+      "sizeBytes": 4078,
+      "sha256": "ed7dd695eef98033373dcbb1c38eab025574c6d66764c94c508636e47e7ecc3a",
+      "kind": "original-member",
+      "originalPath": "qa/document-audit-v010.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/document-audit-v09.json",
+      "sizeBytes": 6577,
+      "sha256": "69d0f405686b643e9ca9c9d15481a6d748a5687fba38cf51aeb9366baeeb5206",
+      "kind": "original-member",
+      "originalPath": "qa/document-audit-v09.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/document-previews-v010/codex-vestibule.png",
+      "sizeBytes": 77788,
+      "sha256": "bec0943fdb9c1a7294135b7c8795a285d08f8327981292a568d245295c02a16a",
+      "kind": "original-member",
+      "originalPath": "qa/document-previews-v010/codex-vestibule.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/document-previews-v010/rapport-haut.png",
+      "sizeBytes": 106102,
+      "sha256": "b0feb6d77189ef3fda2526f05c1cbe0dd2a38591e793b15cb724fda51260cf32",
+      "kind": "original-member",
+      "originalPath": "qa/document-previews-v010/rapport-haut.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/document-previews-v09/codex-haut.png",
+      "sizeBytes": 113699,
+      "sha256": "f8558db35a2aa456ea7c2722984e180f431d5e7d42ced4a0bbe64c0ec810434d",
+      "kind": "original-member",
+      "originalPath": "qa/document-previews-v09/codex-haut.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/document-previews-v09/codex-manutention.png",
+      "sizeBytes": 107182,
+      "sha256": "f918a328e3aca9c744249c8afcff54c6edf53a518d58759aacf099b0b5787e2a",
+      "kind": "original-member",
+      "originalPath": "qa/document-previews-v09/codex-manutention.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/document-previews-v09/codex-mobile.png",
+      "sizeBytes": 34135,
+      "sha256": "33770f9849774eba351a6f53df08516a06853247343452a386cfdcca530e00cd",
+      "kind": "original-member",
+      "originalPath": "qa/document-previews-v09/codex-mobile.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/document-previews-v09/rapport-haut.png",
+      "sizeBytes": 535080,
+      "sha256": "432e7816529dfd6f2b2beff9f5ab25c53e9bea04252b57e016359dd69a4bba88",
+      "kind": "original-member",
+      "originalPath": "qa/document-previews-v09/rapport-haut.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/document-previews-v09/rapport-mobile.png",
+      "sizeBytes": 82789,
+      "sha256": "cb49f71c0578aec0a6164f6f0651c1b9be9a6c758fa8ff53e06d81f0a0327ab7",
+      "kind": "original-member",
+      "originalPath": "qa/document-previews-v09/rapport-mobile.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/document-previews-v09/rapport-repetition.png",
+      "sizeBytes": 136721,
+      "sha256": "a228786b9494bc0f96af861611d8402785689d13849f73772e83d5190cfac2b7",
+      "kind": "original-member",
+      "originalPath": "qa/document-previews-v09/rapport-repetition.png"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/LEGACY_V07_PROVENANCE.json",
+      "sizeBytes": 1010,
+      "sha256": "03a370414336dfefa22dabedf0b28de53041b914a42efbd075bd960f86e6d1d5",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/LEGACY_V07_PROVENANCE.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/PROVENANCE.json",
+      "sizeBytes": 3585,
+      "sha256": "1e5ea39d7ca0640de2a7d928b8da4941382759ad18a56924bd9362dd33cc79a2",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/PROVENANCE.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/PROVENANCE_V03.json",
+      "sizeBytes": 2104,
+      "sha256": "72e2adbebe21937dccd1e27b760e344bb2433e39f8c3a2fe7eec427ba3218b73",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/PROVENANCE_V03.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/PROVENANCE_V04.json",
+      "sizeBytes": 1172,
+      "sha256": "68d451fea1c31ef3671b00919f36df06536855868aa45f7e1224fb946a11ea4d",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/PROVENANCE_V04.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/PROVENANCE_V05.json",
+      "sizeBytes": 1456,
+      "sha256": "0ea87bb6854786ca5f53c22bdf172527a825e162fea38cfc6c24f08f1adc3370",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/PROVENANCE_V05.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/PROVENANCE_V06.json",
+      "sizeBytes": 1027,
+      "sha256": "87301e0790667621d7421bfe7f2dad2c85acaf8ff4faefd87d086baea9126328",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/PROVENANCE_V06.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-1-chapter-11.json",
+      "sizeBytes": 12068,
+      "sha256": "65daf0c86efa6a2db9ee585132bd1c3eea43afd609b0d02ad168552e35a54df3",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-1-chapter-11.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-1-chapter-14.json",
+      "sizeBytes": 13202,
+      "sha256": "11a23b7134a06b48b325b4287adfda0e5f11f1b4e1be023abd67a3aa8e6436cd",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-1-chapter-14.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-1-chapter-3.json",
+      "sizeBytes": 3385,
+      "sha256": "15c86ab3957ddf16c016d0b52c9e33726e4a6118e4ee71c9ce56f21f2df8dc5b",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-1-chapter-3.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-1-final.json",
+      "sizeBytes": 13906,
+      "sha256": "e3278835065d661856a9b7f0158572895cd487274ff546332938acff47b5de48",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-1-final.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-2-chapter-11.json",
+      "sizeBytes": 13990,
+      "sha256": "41f53206d3ba230b335ea23274c2d923c1b17a3f60158f9c4b418c4ac0a1ad29",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-2-chapter-11.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-2-chapter-14.json",
+      "sizeBytes": 15942,
+      "sha256": "5ea8b740e0b1c0df72c1ebcd2d3e742e37b9b81cb11584507b3131bb035b1f6b",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-2-chapter-14.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-2-chapter-3.json",
+      "sizeBytes": 4240,
+      "sha256": "586ced5e6908432973d3dc26208f93b26371964a2188bc23229e9f08dba598e6",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-2-chapter-3.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-2-final.json",
+      "sizeBytes": 17034,
+      "sha256": "58837dc57a2c6a015e49ef4e4ec99268b08525fa099acb9ebe8d090d8d8f27bc",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-2-final.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-3-chapter-11.json",
+      "sizeBytes": 16652,
+      "sha256": "9a9243aa3360fd92520a1095ff925f05af5b2db09c64008721181d0c9593cc80",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-3-chapter-11.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-3-chapter-3.json",
+      "sizeBytes": 4893,
+      "sha256": "2f31b0318f73e4e50fbe353da09f571c14c3cd886bae3dc7ea8c99842e71a6e0",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-3-chapter-3.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-3-chapter-8.json",
+      "sizeBytes": 10862,
+      "sha256": "026388842a892baea605afe93f5a0f7a05438dcef6513596eb6a17014af357cc",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-3-chapter-8.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-3-final.json",
+      "sizeBytes": 19187,
+      "sha256": "066ccade001e411481c3ba4f31ac0c00445d2acaa535366d599dad4286e3e7cd",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-3-final.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-4-chapter-11.json",
+      "sizeBytes": 16928,
+      "sha256": "ed2ba6729340c054db36d94b3bc3322faa83cde475c7aaed6fb25497bc385334",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-4-chapter-11.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-4-chapter-3.json",
+      "sizeBytes": 5169,
+      "sha256": "3fe65cd1e20b4021c953fa4ebcfe4b6a86e749303a0cb447239e8095beefd2fd",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-4-chapter-3.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-4-chapter-8.json",
+      "sizeBytes": 11138,
+      "sha256": "0979859f9da66c53eee927a2bb438de397d1c0ff484c7c053e2f9fc94b945324",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-4-chapter-8.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-4-final.json",
+      "sizeBytes": 19463,
+      "sha256": "9886228f4b3304f765a040b5617ec326f701f46b48d619adca45a7a205c55b13",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-4-final.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-5-chapter-11.json",
+      "sizeBytes": 20909,
+      "sha256": "660076a0e1c21c142218e3430702675160fda6d91413bd163b2a8c5dd2608f5a",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-5-chapter-11.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-5-chapter-3.json",
+      "sizeBytes": 7114,
+      "sha256": "c9d0feea3b16b0302800a61423f2383299fa2caf779de462c51287d96c8a0e86",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-5-chapter-3.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-5-chapter-8.json",
+      "sizeBytes": 13657,
+      "sha256": "0f690470ba4cd21c39f642333d1a6af3ffc3acd796546d4b7d953d6a8d188a0c",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-5-chapter-8.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-5-final.json",
+      "sizeBytes": 23742,
+      "sha256": "080be3c795d34896bf29aa455b8f2ed6d262e488cd9f53507d4ea239979a5d90",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-5-final.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-6-chapter-11.json",
+      "sizeBytes": 21874,
+      "sha256": "d6f3e071e813b15848ac8ad4298af519ce3c5807a5bd13b0182b8524e065dc04",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-6-chapter-11.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-6-chapter-3.json",
+      "sizeBytes": 7604,
+      "sha256": "fe9f0ccbb5a7f5a20cf885134679d1f71c2a92a807c6b61577cd47b9c7d41a44",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-6-chapter-3.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-6-chapter-8.json",
+      "sizeBytes": 14531,
+      "sha256": "7aa907a9c0ee63a83abd6ecb9f1d81f3b900e507a2dedc473bb055101bf3c2e2",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-6-chapter-8.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-6-final.json",
+      "sizeBytes": 24850,
+      "sha256": "3fcf26a0ae946de10254a7164d7028a66bcbfc591b1340401a18f909258ab79d",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-6-final.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-7-chapter-11.json",
+      "sizeBytes": 22162,
+      "sha256": "15cf25bb54d0146e0d944020be7fe58fbff343c075a9447074197608dd477d2a",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-7-chapter-11.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-7-chapter-3.json",
+      "sizeBytes": 7834,
+      "sha256": "acdcf38b0c42097b5d7fe1284f561174a4a6f5f422dfd091550b6728fc471611",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-7-chapter-3.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-7-chapter-8.json",
+      "sizeBytes": 14789,
+      "sha256": "2959db20999f176c810d839f23efc0319a1e167399dca8ba36e8d7dc3f9652b8",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-7-chapter-8.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-7-final.json",
+      "sizeBytes": 25138,
+      "sha256": "7e1c2e51d351df020e46bfa4c71018a6535428dd076e2443a47d9bba57cf26a9",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-7-final.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-8-chapter-11.json",
+      "sizeBytes": 22390,
+      "sha256": "ece7b533de8051d7465af7de0502f9c158305acec9a19e1388d563d5d912c3f1",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-8-chapter-11.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-8-chapter-3.json",
+      "sizeBytes": 8000,
+      "sha256": "4d9c40faf3c94c500e47ec2e9813169f409c492d807e4c0cfc168fceb9f4a403",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-8-chapter-3.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-8-chapter-8.json",
+      "sizeBytes": 14986,
+      "sha256": "b27918d49788b50ce2d944b6bdb9f17e3c6ab4587d4447930eee34c82372db87",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-8-chapter-8.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-8-final.json",
+      "sizeBytes": 25446,
+      "sha256": "7d30cbabe488096dc042bb9c2320b52af158cafca209ab2aad33a45db6c48306",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-8-final.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-9-chapter-11.json",
+      "sizeBytes": 22432,
+      "sha256": "6b06c13e62b7e37ef3019a8d1a9d360860275e1d59a4ed11e6014a9a59bedf15",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-9-chapter-11.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-9-chapter-3.json",
+      "sizeBytes": 8189,
+      "sha256": "6617fb5931f680ef509a21df35226479079bdb91bfcb211c5f55568757026527",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-9-chapter-3.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-9-chapter-8.json",
+      "sizeBytes": 15129,
+      "sha256": "67dc45c961168b2dc9356a8277faf3ef45f242f8ca3924c50a5066564ee82a4a",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-9-chapter-8.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-schema-9-final.json",
+      "sizeBytes": 25636,
+      "sha256": "dced1f70ea6f976a4f79c853cd1ec27edcb153c5c6e740aa7dfb1ad230ac962d",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-schema-9-final.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-v08-provenance.json",
+      "sizeBytes": 1202,
+      "sha256": "8895efbf8a761f4cd8f4d9cf05e1f1d9649c32fefb97bccc1c980d11a55c422b",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-v08-provenance.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/fixtures/legacy-v09-provenance.json",
+      "sizeBytes": 1604,
+      "sha256": "7f29ddda74d62937b369c34458ca93b7ad6c7ba18defa9769656d6fd58059cb3",
+      "kind": "original-member",
+      "originalPath": "qa/fixtures/legacy-v09-provenance.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/navigation-v09-preview.json",
+      "sizeBytes": 35,
+      "sha256": "fc862a0c61231175139229a87c391c44c6993aa5917c2dd3adef4e0086bccfe0",
+      "kind": "original-member",
+      "originalPath": "qa/navigation-v09-preview.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/playthrough-assisted.json",
+      "sizeBytes": 536475,
+      "sha256": "d02e950e2e767c95fe7711c90799713e3d2df4b4fb056fe978b9734fa00e02e5",
+      "kind": "original-member",
+      "originalPath": "qa/playthrough-assisted.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/playthrough-complete-assisted.json",
+      "sizeBytes": 660497,
+      "sha256": "f9c79b55e10e9cb2e380c48ed989d914c3a18a61415333e0582972808fa1dfaf",
+      "kind": "original-member",
+      "originalPath": "qa/playthrough-complete-assisted.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/playthrough-complete-normal.json",
+      "sizeBytes": 649835,
+      "sha256": "62ccbcdae1290fef053b3ae8108617c9fff0d4144a75c5f32ae5f9a77f752f18",
+      "kind": "original-member",
+      "originalPath": "qa/playthrough-complete-normal.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/playthrough-excursion-assisted.json",
+      "sizeBytes": 614394,
+      "sha256": "bffc00c389d87e74e54b678e557a62d9ab3f0609ef6467782b36904154f26809",
+      "kind": "original-member",
+      "originalPath": "qa/playthrough-excursion-assisted.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/playthrough-excursion-normal.json",
+      "sizeBytes": 611945,
+      "sha256": "2a1a209209ea5d6a333986294bb47b5c2c369de752be0dc3f2951b2fe3e7307f",
+      "kind": "original-member",
+      "originalPath": "qa/playthrough-excursion-normal.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/playthrough-handling-assisted.json",
+      "sizeBytes": 667641,
+      "sha256": "a03e81b244170ed622a9b842525ef03c74f7fa7d99245d6f070dfe8c7a820234",
+      "kind": "original-member",
+      "originalPath": "qa/playthrough-handling-assisted.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/playthrough-handling-normal.json",
+      "sizeBytes": 671561,
+      "sha256": "659c903ae5a15eb0012b9d2aa9c1b7348830a7c477b9b3bb98dacf81a2f29a51",
+      "kind": "original-member",
+      "originalPath": "qa/playthrough-handling-normal.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/playthrough-maintenance-assisted.json",
+      "sizeBytes": 570031,
+      "sha256": "a4082b5b03dc4a4fac9f3f0af68379a7372f6a91c34e454b2ca76d1824836795",
+      "kind": "original-member",
+      "originalPath": "qa/playthrough-maintenance-assisted.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/playthrough-maintenance-normal.json",
+      "sizeBytes": 573879,
+      "sha256": "0aca2e0edfdf5df58398a65739e479600ceed65e65b27482143ee1902396d2af",
+      "kind": "original-member",
+      "originalPath": "qa/playthrough-maintenance-normal.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/playthrough-normal.json",
+      "sizeBytes": 538732,
+      "sha256": "0d7b497bb98ad6e4a6717231f44a1f8f72bc28c9284ce92b7c0973148a5519b5",
+      "kind": "original-member",
+      "originalPath": "qa/playthrough-normal.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/playthrough.mjs",
+      "sizeBytes": 7824,
+      "sha256": "1273621d1371ed5f4115ee5ff7928a43f72f539eabf178b0407fca75fa9b7691",
+      "kind": "original-member",
+      "originalPath": "qa/playthrough.mjs"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/results-v010.json",
+      "sizeBytes": 23716,
+      "sha256": "453b513eb5b498f064cfd083510065e0dbb34817ca58591a27cd1c1fb8393f50",
+      "kind": "original-member",
+      "originalPath": "qa/results-v010.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/results-v02.json",
+      "sizeBytes": 5706,
+      "sha256": "439ef45fbc566682d58df91733927655250991361efb313328fdb9f69768d62a",
+      "kind": "original-member",
+      "originalPath": "qa/results-v02.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/results-v03.json",
+      "sizeBytes": 13449,
+      "sha256": "9a3a80aaf253238a338337453d81e24c4c1137d3a585bc1285d6798f6b6be930",
+      "kind": "original-member",
+      "originalPath": "qa/results-v03.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/results-v04.json",
+      "sizeBytes": 15972,
+      "sha256": "bb51b3cf43cd36a34c31d1648c906b23800738271fa6a8ad01f9dda153428651",
+      "kind": "original-member",
+      "originalPath": "qa/results-v04.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/results-v05.json",
+      "sizeBytes": 11957,
+      "sha256": "e3b1c32fc15431b1ef939786e6b75f84dae0b8672d62afcf385be517ed88d105",
+      "kind": "original-member",
+      "originalPath": "qa/results-v05.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/results-v06.json",
+      "sizeBytes": 10161,
+      "sha256": "b2f5434508c42799400ca3e3cb47c62b24ffd4be3ae883eba75b048ee46632f8",
+      "kind": "original-member",
+      "originalPath": "qa/results-v06.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/results-v07.json",
+      "sizeBytes": 9945,
+      "sha256": "ee63a319ac5b0b3f96174252edc9f4fba73776e3c5328553886f973b0a0e6103",
+      "kind": "original-member",
+      "originalPath": "qa/results-v07.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/results-v08.json",
+      "sizeBytes": 10418,
+      "sha256": "283b914e9c44cd7d68f181f1e8f59e8913ea1af5099c2ebc8105b5e97da0a6d9",
+      "kind": "original-member",
+      "originalPath": "qa/results-v08.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/results-v09.json",
+      "sizeBytes": 16810,
+      "sha256": "2915962fde5dcd63f27c108929c2aadba3397567b7034e43a47bbbdba61a3fb7",
+      "kind": "original-member",
+      "originalPath": "qa/results-v09.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/results.json",
+      "sizeBytes": 4410,
+      "sha256": "f1c0e5fcff34a6d0520971366ded6f1347ff488c852821f195d80f9d90b7fa77",
+      "kind": "original-member",
+      "originalPath": "qa/results.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/run-browsers.py",
+      "sizeBytes": 539,
+      "sha256": "9513610d4438f088d9c580e7b92db1531508bfe393aa7c59ec02e6aa186b9cd1",
+      "kind": "original-member",
+      "originalPath": "qa/run-browsers.py"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/source-diff-v01-v02.patch",
+      "sizeBytes": 145332,
+      "sha256": "b7817dea6087d6493b4caba558e1d407e769c5fd4a2aa48faf3c53d072e4c2a6",
+      "kind": "original-member",
+      "originalPath": "qa/source-diff-v01-v02.patch"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/source-diff-v02-v03.patch",
+      "sizeBytes": 273544,
+      "sha256": "6cc67f9c7d820ad59168d86f04fe17fbd143d41dbf0d8d39d85cef9a7906ae72",
+      "kind": "original-member",
+      "originalPath": "qa/source-diff-v02-v03.patch"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/source-diff-v03-v04.patch",
+      "sizeBytes": 204302,
+      "sha256": "02b7bdcaf9845ace5ea6b6a1dcc316b95131dd7670f253f8f67a4c2ef1213420",
+      "kind": "original-member",
+      "originalPath": "qa/source-diff-v03-v04.patch"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/source-diff-v04-v05.patch",
+      "sizeBytes": 143299,
+      "sha256": "d5348482696d887891be14cd1dd7da17e64a0a1424e0153169472f649ae4b3e5",
+      "kind": "original-member",
+      "originalPath": "qa/source-diff-v04-v05.patch"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/source-diff-v05-v06.patch",
+      "sizeBytes": 188202,
+      "sha256": "1451ebe858632c360018dd573842c17e6476bbf2441cb8b8c52ecc8530eada55",
+      "kind": "original-member",
+      "originalPath": "qa/source-diff-v05-v06.patch"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/source-diff-v06-v07.patch",
+      "sizeBytes": 122017,
+      "sha256": "afc0be4446e8f6f7f839c6652369e8f5d8aa63ac0286f01b33caeec5c9295e24",
+      "kind": "original-member",
+      "originalPath": "qa/source-diff-v06-v07.patch"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/source-diff-v07-v08.patch",
+      "sizeBytes": 107117,
+      "sha256": "7abdb1bf713b43692a78d5ac54c8ddc0cfa51626dda56a2028adbb4c2e494fae",
+      "kind": "original-member",
+      "originalPath": "qa/source-diff-v07-v08.patch"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/verify-delivery.mjs",
+      "sizeBytes": 3843,
+      "sha256": "56f2dee123d7a91a680930afefde6cf6454fb52e946add66e3d6a16fda266a6d",
+      "kind": "original-member",
+      "originalPath": "qa/verify-delivery.mjs"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/verify-documents-v010.py",
+      "sizeBytes": 5100,
+      "sha256": "be114b292a00ebf7542a63b1d14a6fcf42881bb59d64e49f5cc1ae397731326f",
+      "kind": "original-member",
+      "originalPath": "qa/verify-documents-v010.py"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/verify-documents.py",
+      "sizeBytes": 229,
+      "sha256": "4b8ed92acc00cd031b98ed54f7ea01050b864d24e4baa8a29b093834a0421f37",
+      "kind": "original-member",
+      "originalPath": "qa/verify-documents.py"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/verify-v010.mjs",
+      "sizeBytes": 15746,
+      "sha256": "04977ba1ac18ee40b9b0a4df8719ec014dafcad29bde99155632bd6b2a1b715f",
+      "kind": "original-member",
+      "originalPath": "qa/verify-v010.mjs"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/verify-v02.mjs",
+      "sizeBytes": 11365,
+      "sha256": "0d24d5afb4d476f818bb4b19a34c4fdc53bea594f73774b9bf109f950e9dadcd",
+      "kind": "original-member",
+      "originalPath": "qa/verify-v02.mjs"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/verify-v03.mjs",
+      "sizeBytes": 12408,
+      "sha256": "11dfc4baba8c996889545418702ec329ff9ada672583d9119179040317ec9bb8",
+      "kind": "original-member",
+      "originalPath": "qa/verify-v03.mjs"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/verify-v04.mjs",
+      "sizeBytes": 14979,
+      "sha256": "270d8b44847076cb0b96b184d1b56c39a2e1e546ec36eee0b112fc55cf638140",
+      "kind": "original-member",
+      "originalPath": "qa/verify-v04.mjs"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/verify-v05.mjs",
+      "sizeBytes": 14661,
+      "sha256": "e624ead7d8d0e4f52c0700493977e7fd56e3076d721e63eca33379ce6d840ef3",
+      "kind": "original-member",
+      "originalPath": "qa/verify-v05.mjs"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/verify-v06.mjs",
+      "sizeBytes": 14537,
+      "sha256": "547ad51141e867f3ae120bda130bbbe0e6dc6c6310bd4ae7fe529d41127c8624",
+      "kind": "original-member",
+      "originalPath": "qa/verify-v06.mjs"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/verify-v07.mjs",
+      "sizeBytes": 13117,
+      "sha256": "4e8e6b53bb69c63e200b0e4b7250b28fefdd001024b1afd8d490fb6f1bf505ab",
+      "kind": "original-member",
+      "originalPath": "qa/verify-v07.mjs"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/verify-v08.mjs",
+      "sizeBytes": 8730,
+      "sha256": "13b99b426c5155b06e6e57b0cc6201f973d49259418c74c5a3d70ecd59e3382e",
+      "kind": "original-member",
+      "originalPath": "qa/verify-v08.mjs"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/verify-v09.mjs",
+      "sizeBytes": 14075,
+      "sha256": "284bce382b80ab7467a54c93a39dde6d9395bd23e2e6ea935c405d7c0465aba6",
+      "kind": "original-member",
+      "originalPath": "qa/verify-v09.mjs"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/qa/verify.mjs",
+      "sizeBytes": 10718,
+      "sha256": "87386a3a3615c0d31388d3adc876e1725ecd8cb2ce2589365ef4aff999d275bf",
+      "kind": "original-member",
+      "originalPath": "qa/verify.mjs"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/src/oth-v1/oth-bridge.js",
+      "sizeBytes": 1527,
+      "sha256": "72b962818a8bfc981ce2c671d15c580269fd95629660ebc8dc69ce3ad3153a4b",
+      "kind": "original-member",
+      "originalPath": "src/oth-v1/oth-bridge.js"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/src/oth-v1/oth-data.js",
+      "sizeBytes": 476811,
+      "sha256": "d32b15b2ed6c34179fa690356d619b7d38767a531e238f87d6da99bc4827b691",
+      "kind": "original-member",
+      "originalPath": "src/oth-v1/oth-data.js"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/src/oth-v1/oth-engine.js",
+      "sizeBytes": 93315,
+      "sha256": "1819e54741a58751a02e9dc8f557bec87541b5da63ff95ddb3c9b7c06cfd6bfb",
+      "kind": "original-member",
+      "originalPath": "src/oth-v1/oth-engine.js"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/src/oth-v1/oth-render.js",
+      "sizeBytes": 70518,
+      "sha256": "6866c6386b38ef026549be38a43026796dbc4ddfad2f84c0d4e9847c807bef41",
+      "kind": "original-member",
+      "originalPath": "src/oth-v1/oth-render.js"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/src/oth-v1/oth-ui.css",
+      "sizeBytes": 28696,
+      "sha256": "92b8803875c15e585e2b62dde23da411e03a7115267141b64965c115d10105ac",
+      "kind": "original-member",
+      "originalPath": "src/oth-v1/oth-ui.css"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/src/oth-v1/oth-ui.js",
+      "sizeBytes": 64479,
+      "sha256": "a97fcd213dae547adced55ee3906bcdc61e839f457e75f2828c3ec9e956c7a03",
+      "kind": "original-member",
+      "originalPath": "src/oth-v1/oth-ui.js"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/tools/build-docs-v010.py",
+      "sizeBytes": 21271,
+      "sha256": "5f909771fe9631bbf9e005e430b877a7677458555ac63edf7ef8d6ac0d5efe26",
+      "kind": "original-member",
+      "originalPath": "tools/build-docs-v010.py"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/tools/build-docs.py",
+      "sizeBytes": 223,
+      "sha256": "da133bccaeebec96d49b630fefa093176079a523cf1d067186b119ae407330ba",
+      "kind": "original-member",
+      "originalPath": "tools/build-docs.py"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/tools/bundle-inline.py",
+      "sizeBytes": 1468,
+      "sha256": "d8538ee6666762f43db4b420290a77427c7ea1fa63c50d4ed7bdb99b70c71065",
+      "kind": "original-member",
+      "originalPath": "tools/bundle-inline.py"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/tools/captions-base.json",
+      "sizeBytes": 3405,
+      "sha256": "8eb279da679a6d299b5ace3d350f58c193c4f4c81336e690cd6d501b765979c9",
+      "kind": "original-member",
+      "originalPath": "tools/captions-base.json"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/tools/install.mjs",
+      "sizeBytes": 6807,
+      "sha256": "249fbc5567596da4c024b268071411fd13b14fd442523db1ecc1fbc167d04bd3",
+      "kind": "original-member",
+      "originalPath": "tools/install.mjs"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/tools/package-release-v010.py",
+      "sizeBytes": 5323,
+      "sha256": "b93e6cc1d2feaddc3e0bc7d3d97d002c22a25887207f050540fb6130a9788a9f",
+      "kind": "original-member",
+      "originalPath": "tools/package-release-v010.py"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/tools/package-release.py",
+      "sizeBytes": 228,
+      "sha256": "08103a3a1eee8f962c3ac40bab97b82eded153938ed6c98e1511254a6f920819",
+      "kind": "original-member",
+      "originalPath": "tools/package-release.py"
+    },
+    {
+      "path": "archives/dlc-hors-des-ombres-v010/original/tools/serve.mjs",
+      "sizeBytes": 1273,
+      "sha256": "da319356f01db0625ee0256c09acb3534a74c4c9d308de3f01d5afb0dc42890a",
+      "kind": "original-member",
+      "originalPath": "tools/serve.mjs"
+    }
+  ],
+  "runtimeFiles": [
+    {
+      "path": "src/hors-des-ombres-launch-v010.js",
+      "sizeBytes": 453,
+      "sha256": "20c505494500d2c3c74243ab31fc7a0d636995a43804b76d82260c37ea11b0d6",
+      "sourcePath": null,
+      "adapted": true
+    },
+    {
+      "path": "dlc/alien-hors-des-ombres/index.html",
+      "sizeBytes": 544,
+      "sha256": "b375b4312a4ce3f8260502a3faab0ef3e7cabe7ba6f08f0a70c273309d59fa00",
+      "sourcePath": "archives/dlc-hors-des-ombres-v010/original/dlc/alien-hors-des-ombres/index.html",
+      "adapted": false
+    },
+    {
+      "path": "src/oth-v1/oth-data.js",
+      "sizeBytes": 476811,
+      "sha256": "d32b15b2ed6c34179fa690356d619b7d38767a531e238f87d6da99bc4827b691",
+      "sourcePath": "archives/dlc-hors-des-ombres-v010/original/src/oth-v1/oth-data.js",
+      "adapted": false
+    },
+    {
+      "path": "src/oth-v1/oth-engine.js",
+      "sizeBytes": 93315,
+      "sha256": "1819e54741a58751a02e9dc8f557bec87541b5da63ff95ddb3c9b7c06cfd6bfb",
+      "sourcePath": "archives/dlc-hors-des-ombres-v010/original/src/oth-v1/oth-engine.js",
+      "adapted": false
+    },
+    {
+      "path": "src/oth-v1/oth-render.js",
+      "sizeBytes": 70518,
+      "sha256": "6866c6386b38ef026549be38a43026796dbc4ddfad2f84c0d4e9847c807bef41",
+      "sourcePath": "archives/dlc-hors-des-ombres-v010/original/src/oth-v1/oth-render.js",
+      "adapted": false
+    },
+    {
+      "path": "src/oth-v1/oth-ui.js",
+      "sizeBytes": 64602,
+      "sha256": "a9a7d257703234a8d67ced5ab3c3f1df4e2181b338209e34859ca2eb22d39172",
+      "sourcePath": "archives/dlc-hors-des-ombres-v010/original/src/oth-v1/oth-ui.js",
+      "adapted": true
+    },
+    {
+      "path": "src/oth-v1/oth-ui.css",
+      "sizeBytes": 28696,
+      "sha256": "92b8803875c15e585e2b62dde23da411e03a7115267141b64965c115d10105ac",
+      "sourcePath": "archives/dlc-hors-des-ombres-v010/original/src/oth-v1/oth-ui.css",
+      "adapted": false
+    },
+    {
+      "path": "src/oth-v1/oth-bridge.js",
+      "sizeBytes": 1566,
+      "sha256": "3337fb7eb37127351fe71360c820d34a213db8f2d873d99ad2a93e6329f6f6f0",
+      "sourcePath": "archives/dlc-hors-des-ombres-v010/original/src/oth-v1/oth-bridge.js",
+      "adapted": true
+    }
+  ]
+}

@@ -1,0 +1,470 @@
+{
+  "version": "0.10.0",
+  "suite": "chromium-v05",
+  "tests": 77,
+  "passed": 77,
+  "failed": 0,
+  "htmlSHA256": "de70265dbe081191816fd7b2c1c7398f92351530336c60f16a39a58341b631bc",
+  "nativeNavigation": false,
+  "nativePersistenceCertified": false,
+  "fallback": "document injected; explicit Map-backed localStorage test double",
+  "navigationAttempts": [
+    "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:4173/?qa=1",
+    "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/ALIEN_HORS_DES_OMBRES_V0_10/JOUER_HORS_DES_OMBRES.html?qa=1"
+  ],
+  "errors": [],
+  "checks": [
+    {
+      "name": "Version HTML V0.5 chargée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "V immobilise le joueur malgré D",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "V ne suspend pas le temps",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le statut d’écoute est lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Relâcher V permet de repartir",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La flamme engage une enquête dans la pièce voisine",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le joueur n’a pas changé de pièce",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Une trace de chaleur est rendue",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "L’écoute distingue une pression au seuil",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La lecture suspend aussi l’enquête acoustique",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Même identité traverse après rupture",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Griffures enregistrées aux deux faces",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Une machine active masque les sons faibles",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Un appui R prolongé ne dépense qu’une charge",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Un boîtier épuisé persiste au sol",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Deux inspections suivies d’un leurre ignoré",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Compagnon avertit et prend une posture prudente",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "L’ordre attendre reste respecté malgré le danger",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Panneau Traces et sons disponible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Panneau terrain sans télécommande",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Traces réelles affichées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Relevé de terrain en pause",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Export schéma 5 avec preuves de terrain",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import rétablit les traces et les sons produits",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import corrompu ne remplace pas la partie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Nouvelle fiche de survie consultable",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "V tactile dans le viewport",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "V tactile maintient l’écoute",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Relâchement du pointeur arrête l’écoute",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pied d’écran complet en paysage",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pas de débordement horizontal global en paysage",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Coffret devant le joueur rendu avec transparence locale",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Signaux sonores procéduraux effectivement déclenchés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pause suspend le contexte sonore",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : bridge",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : comms",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : junction",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : engineering",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : airlock",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : hangar",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : breach",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : workshop",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : medical",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : server",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : dock",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : narcissus",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : samson",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : cockpit",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : landing",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : control",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : stores",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : lift_top",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : lift_bottom",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : haul",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : pump",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : refuge",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : vein",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : fissure",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : vestibule",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : fossils",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : eggs",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : bypass",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : lift_east",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : hold",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : rec",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : maintenance",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : drain",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : alcove",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : return_gallery",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : exchanger",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : survey",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : specimen_store",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : boarding",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : docking_airlock",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu V0.5 sans exception : docking_arm",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune exception JavaScript pendant la suite",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "Stockage des autres DLC laissé intact",
+      "ok": true,
+      "detail": null
+    }
+  ],
+  "captures": [
+    {
+      "file": "49_menu_v05.png",
+      "caption": "Menu de la V0.5 ; ouverture initiale, sans état de campagne injecté.",
+      "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+    },
+    {
+      "file": "50_ecoute.png",
+      "caption": "V tenu dans la passerelle. Le joueur s’arrête, mais la simulation continue ; aucun contact silencieux n’est inventé.",
+      "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+    },
+    {
+      "file": "51_ecoute_cloison.png",
+      "caption": "Scène préparée : un adulte dans la galerie. F émet le bruit, B ferme, puis V écoute sa pression depuis le pompage. Aucun changement de pièce du joueur.",
+      "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+    },
+    {
+      "file": "52_enquete_sonore.png",
+      "caption": "Même rencontre après simulation de la rupture et du passage. Le point du joueur a été préparé plus loin pour observer le transfert sans l’interrompre.",
+      "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+    },
+    {
+      "file": "53_masque_machine.png",
+      "caption": "Cycle de rinçage déclenché par E, écoute maintenue avec V. Le moteur masque les pas proches, sans désactiver la menace.",
+      "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+    },
+    {
+      "file": "54_leurre_actif.png",
+      "caption": "Un seul boîtier lancé malgré deux secondes de maintien de R. Le signal est actif à son point d’impact.",
+      "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+    },
+    {
+      "file": "55_traces_sol.png",
+      "caption": "Même secteur après expiration du leurre, puis une brève flamme. Boîtier et marque de chaleur restent au sol ; ils ne bloquent pas le passage.",
+      "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+    },
+    {
+      "file": "56_signal_reconnu.png",
+      "caption": "Trois lancers préparés au même endroit avec déplacements de fixture entre les essais. L’IA a effectué les deux inspections en simulation ; le troisième signal est ignoré.",
+      "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+    },
+    {
+      "file": "57_compagnon_prudence.png",
+      "caption": "Hoop auprès de Ripley : menace préparée dans sa ligne de vue. Son alerte et sa posture résultent des pas de simulation, pas d’un dialogue injecté.",
+      "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+    },
+    {
+      "file": "58_journal_terrain.png",
+      "caption": "Journal ouvert depuis la pause : sons émis et traces obtenues dans la séquence précédente. Il ne révèle pas les ennemis cachés.",
+      "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+    },
+    {
+      "file": "59_mobile_ecoute.png",
+      "caption": "390 × 844 : maintien réel du bouton tactile V avec un pointeur. Le relevé ne masque pas le personnage ni les directions.",
+      "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+    },
+    {
+      "file": "60_paysage_ecoute.png",
+      "caption": "844 × 390 : écoute active en paysage. La simulation n’est pas arrêtée ; les commandes et le pied d’écran restent dans le viewport.",
+      "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+    },
+    {
+      "file": "61_coffret_transparent.png",
+      "caption": "Correction trouvée à la revue des captures : même position devant le coffret du pompage. Le coffret au premier plan s’estompe pour laisser voir Ripley ; la collision n’est pas modifiée.",
+      "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+    }
+  ]
+}

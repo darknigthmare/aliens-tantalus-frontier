@@ -1,0 +1,639 @@
+{
+  "version": "0.10.0",
+  "suite": "v04-services-and-pursuit",
+  "tests": 94,
+  "passed": 94,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "V0.4 données cohérentes : 144 fiches, 10 services, 8 verrous, 13 passages de traque",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Service light-junction : accès réel, séparation des autres interactions et effet",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Service light-engineering : accès réel, séparation des autres interactions et effet",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Service light-workshop : accès réel, séparation des autres interactions et effet",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Service light-haul : accès réel, séparation des autres interactions et effet",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Service light-pump : accès réel, séparation des autres interactions et effet",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Service light-hold : accès réel, séparation des autres interactions et effet",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Service noise-workshop : accès réel, séparation des autres interactions et effet",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Service noise-haul : accès réel, séparation des autres interactions et effet",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Service noise-pump : accès réel, séparation des autres interactions et effet",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Service noise-drain : accès réel, séparation des autres interactions et effet",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Verrou e03 côté a : fermeture, symétrie, libération et sortie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Verrou e03 côté b : fermeture, symétrie, libération et sortie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Verrou e08 côté a : fermeture, symétrie, libération et sortie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Verrou e08 côté b : fermeture, symétrie, libération et sortie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Verrou e19 côté a : fermeture, symétrie, libération et sortie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Verrou e19 côté b : fermeture, symétrie, libération et sortie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Verrou e20 côté a : fermeture, symétrie, libération et sortie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Verrou e20 côté b : fermeture, symétrie, libération et sortie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Verrou e22 côté a : fermeture, symétrie, libération et sortie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Verrou e22 côté b : fermeture, symétrie, libération et sortie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Verrou e32 côté a : fermeture, symétrie, libération et sortie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Verrou e32 côté b : fermeture, symétrie, libération et sortie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Verrou oth-annex-drain-0 côté a : fermeture, symétrie, libération et sortie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Verrou oth-annex-drain-0 côté b : fermeture, symétrie, libération et sortie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Verrou oth-annex-drain-1 côté a : fermeture, symétrie, libération et sortie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Verrou oth-annex-drain-1 côté b : fermeture, symétrie, libération et sortie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucun verrou métallique ni poursuite autorisée sur un ascenseur ou une navette",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "B doit être maintenu ; pas de fermeture pendant la marche",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Maintenir E sur une cloison fermée libère sans téléportation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Réarmement immédiat refusé après libération",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Verrou expire après 14 s sans condamner définitivement le graphe",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pas de fermeture à distance ni pendant le portage médical",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Adulte alerté marche physiquement au seuil puis transfère une seule identité",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La poursuite ne reçoit pas la position suivante du joueur",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Recul dans la pièce d’origine annule le transit, sans clone",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pas de suivi sans capacité ou indice : {\"type\":\"hugger\"}",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pas de suivi sans capacité ou indice : {\"stun\":2}",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pas de suivi sans capacité ou indice : {\"noise\":0,\"xOffset\":780}",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le refuge demeure hors de la poursuite même avec une sortie bruyante",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Gagner une pièce ne donne pas un chemin omniscient à la créature",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Passage interdit par un nouveau chapitre annule la traque",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Un verrou retarde le même adulte ; pression, rupture et réarmement différé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Délai de franchissement sans coup instantané sur le seuil",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Maximum deux adultes par pièce, pas d’empilement en transit",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Extinction locale réduit la détection sans toucher à l’objectif ni à la lampe",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Machine : cycle fini puis refroidissement, sans consommer les leurres",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Machine attire hors du regard, pas face au joueur visible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Menus simulés arrêtent verrous, machines et traversées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Schéma 4 : transit, verrous, lumières, machines et compteurs persistent",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Ancien carnet schéma 1 : services initialisés sans perte",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Ancien carnet schéma 2 : services initialisés sans perte",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Ancien carnet schéma 3 : services initialisés sans perte",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import défensif : faux services, lien inconnu et timers extrêmes neutralisés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import défensif : une identité ne peut pas être dans deux pièces",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Plan observé indique le verrou sans dévoiler une nouvelle pièce",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "B maintenu longtemps ne rouvre pas le verrou automatiquement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "E prolongé ne rebascule pas les lumières ni une cachette",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Vraie sauvegarde V0.3 chapter-3 migre en conservant ressources et compagnon",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Vraie sauvegarde V0.3 chapter-8 migre en conservant ressources et compagnon",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Vraie sauvegarde V0.3 chapter-11 migre en conservant ressources et compagnon",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Vraie sauvegarde V0.3 final migre en conservant ressources et compagnon",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Traversée physique de traque e19 / a",
+      "ok": true,
+      "detail": {
+        "from": "lift_bottom",
+        "to": "haul",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque e19 / b",
+      "ok": true,
+      "detail": {
+        "from": "haul",
+        "to": "lift_bottom",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque e20 / a",
+      "ok": true,
+      "detail": {
+        "from": "haul",
+        "to": "pump",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque e20 / b",
+      "ok": true,
+      "detail": {
+        "from": "pump",
+        "to": "haul",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque e22 / a",
+      "ok": true,
+      "detail": {
+        "from": "haul",
+        "to": "vein",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque e22 / b",
+      "ok": true,
+      "detail": {
+        "from": "vein",
+        "to": "haul",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque e23 / a",
+      "ok": true,
+      "detail": {
+        "from": "vein",
+        "to": "fissure",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque e23 / b",
+      "ok": true,
+      "detail": {
+        "from": "fissure",
+        "to": "vein",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque e24 / a",
+      "ok": true,
+      "detail": {
+        "from": "fissure",
+        "to": "vestibule",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque e24 / b",
+      "ok": true,
+      "detail": {
+        "from": "vestibule",
+        "to": "fissure",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque e25 / a",
+      "ok": true,
+      "detail": {
+        "from": "vestibule",
+        "to": "fossils",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque e25 / b",
+      "ok": true,
+      "detail": {
+        "from": "fossils",
+        "to": "vestibule",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque e26 / a",
+      "ok": true,
+      "detail": {
+        "from": "fossils",
+        "to": "eggs",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque e26 / b",
+      "ok": true,
+      "detail": {
+        "from": "eggs",
+        "to": "fossils",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque e27 / a",
+      "ok": true,
+      "detail": {
+        "from": "eggs",
+        "to": "bypass",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque e27 / b",
+      "ok": true,
+      "detail": {
+        "from": "bypass",
+        "to": "eggs",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque e32 / a",
+      "ok": true,
+      "detail": {
+        "from": "pump",
+        "to": "vein",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque e32 / b",
+      "ok": true,
+      "detail": {
+        "from": "vein",
+        "to": "pump",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque oth-annex-drain-0 / a",
+      "ok": true,
+      "detail": {
+        "from": "haul",
+        "to": "drain",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque oth-annex-drain-0 / b",
+      "ok": true,
+      "detail": {
+        "from": "drain",
+        "to": "haul",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque oth-annex-drain-1 / a",
+      "ok": true,
+      "detail": {
+        "from": "pump",
+        "to": "drain",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque oth-annex-drain-1 / b",
+      "ok": true,
+      "detail": {
+        "from": "drain",
+        "to": "pump",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque oth-annex-alcove-0 / a",
+      "ok": true,
+      "detail": {
+        "from": "fossils",
+        "to": "alcove",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque oth-annex-alcove-0 / b",
+      "ok": true,
+      "detail": {
+        "from": "alcove",
+        "to": "fossils",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque oth-annex-alcove-1 / a",
+      "ok": true,
+      "detail": {
+        "from": "bypass",
+        "to": "alcove",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque oth-annex-alcove-1 / b",
+      "ok": true,
+      "detail": {
+        "from": "alcove",
+        "to": "bypass",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque v07-haul-return / a",
+      "ok": true,
+      "detail": {
+        "from": "haul",
+        "to": "return_gallery",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque v07-haul-return / b",
+      "ok": true,
+      "detail": {
+        "from": "return_gallery",
+        "to": "haul",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque v07-return-exchange / a",
+      "ok": true,
+      "detail": {
+        "from": "return_gallery",
+        "to": "exchanger",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque v07-return-exchange / b",
+      "ok": true,
+      "detail": {
+        "from": "exchanger",
+        "to": "return_gallery",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque v07-exchange-vein / a",
+      "ok": true,
+      "detail": {
+        "from": "exchanger",
+        "to": "vein",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    },
+    {
+      "name": "Traversée physique de traque v07-exchange-vein / b",
+      "ok": true,
+      "detail": {
+        "from": "vein",
+        "to": "exchanger",
+        "identity": "follow-test",
+        "passages": 1
+      }
+    }
+  ]
+}

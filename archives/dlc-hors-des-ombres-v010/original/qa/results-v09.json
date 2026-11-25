@@ -1,0 +1,688 @@
+{
+  "version": "0.10.0",
+  "suite": "engine-v09-handling",
+  "tests": 87,
+  "passed": 87,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Manifest V0.9 : six mobiles, deux modèles, 38 pièces et 49 liaisons",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "workshop-cart : stationnement valide, deux poignées dégagées",
+      "ok": true,
+      "detail": {
+        "room": "workshop",
+        "position": {
+          "x": 1438,
+          "y": 142
+        }
+      }
+    },
+    {
+      "name": "workshop-cart : prise et déplacement réel depuis le côté -1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "workshop-cart : prise et déplacement réel depuis le côté 1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "workshop-cart : profondeur partagée et freins au relâchement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "workshop-cart : butées sans téléportation ni sortie de l’aire",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "workshop-cart : grille de positions autorisées conserve les passages et commandes",
+      "ok": true,
+      "detail": {
+        "acceptedPoses": 12,
+        "paths": 132
+      }
+    },
+    {
+      "name": "workshop-cart : transformation reprise sans reprise automatique des poignées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "stores-cart : stationnement valide, deux poignées dégagées",
+      "ok": true,
+      "detail": {
+        "room": "stores",
+        "position": {
+          "x": 2080,
+          "y": 143
+        }
+      }
+    },
+    {
+      "name": "stores-cart : prise et déplacement réel depuis le côté -1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "stores-cart : prise et déplacement réel depuis le côté 1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "stores-cart : profondeur partagée et freins au relâchement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "stores-cart : butées sans téléportation ni sortie de l’aire",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "stores-cart : grille de positions autorisées conserve les passages et commandes",
+      "ok": true,
+      "detail": {
+        "acceptedPoses": 15,
+        "paths": 120
+      }
+    },
+    {
+      "name": "stores-cart : transformation reprise sans reprise automatique des poignées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "haul-cart : stationnement valide, deux poignées dégagées",
+      "ok": true,
+      "detail": {
+        "room": "haul",
+        "position": {
+          "x": 790,
+          "y": 143
+        }
+      }
+    },
+    {
+      "name": "haul-cart : prise et déplacement réel depuis le côté -1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "haul-cart : prise et déplacement réel depuis le côté 1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "haul-cart : profondeur partagée et freins au relâchement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "haul-cart : butées sans téléportation ni sortie de l’aire",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "haul-cart : grille de positions autorisées conserve les passages et commandes",
+      "ok": true,
+      "detail": {
+        "acceptedPoses": 15,
+        "paths": 180
+      }
+    },
+    {
+      "name": "haul-cart : transformation reprise sans reprise automatique des poignées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "pump-cart : stationnement valide, deux poignées dégagées",
+      "ok": true,
+      "detail": {
+        "room": "pump",
+        "position": {
+          "x": 785,
+          "y": 75
+        }
+      }
+    },
+    {
+      "name": "pump-cart : prise et déplacement réel depuis le côté -1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "pump-cart : prise et déplacement réel depuis le côté 1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "pump-cart : profondeur partagée et freins au relâchement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "pump-cart : butées sans téléportation ni sortie de l’aire",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "pump-cart : grille de positions autorisées conserve les passages et commandes",
+      "ok": true,
+      "detail": {
+        "acceptedPoses": 15,
+        "paths": 150
+      }
+    },
+    {
+      "name": "pump-cart : transformation reprise sans reprise automatique des poignées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "exchanger-cart : stationnement valide, deux poignées dégagées",
+      "ok": true,
+      "detail": {
+        "room": "exchanger",
+        "position": {
+          "x": 1350,
+          "y": 135
+        }
+      }
+    },
+    {
+      "name": "exchanger-cart : prise et déplacement réel depuis le côté -1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "exchanger-cart : prise et déplacement réel depuis le côté 1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "exchanger-cart : profondeur partagée et freins au relâchement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "exchanger-cart : butées sans téléportation ni sortie de l’aire",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "exchanger-cart : grille de positions autorisées conserve les passages et commandes",
+      "ok": true,
+      "detail": {
+        "acceptedPoses": 15,
+        "paths": 90
+      }
+    },
+    {
+      "name": "exchanger-cart : transformation reprise sans reprise automatique des poignées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "hold-cart : stationnement valide, deux poignées dégagées",
+      "ok": true,
+      "detail": {
+        "room": "hold",
+        "position": {
+          "x": 1080,
+          "y": 143
+        }
+      }
+    },
+    {
+      "name": "hold-cart : prise et déplacement réel depuis le côté -1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "hold-cart : prise et déplacement réel depuis le côté 1",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "hold-cart : profondeur partagée et freins au relâchement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "hold-cart : butées sans téléportation ni sortie de l’aire",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "hold-cart : grille de positions autorisées conserve les passages et commandes",
+      "ok": true,
+      "detail": {
+        "acceptedPoses": 15,
+        "paths": 105
+      }
+    },
+    {
+      "name": "hold-cart : transformation reprise sans reprise automatique des poignées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Un appui éloigné ne ramène ni chariot ni personnage",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Marcher contre le chariot sans X ne le déplace pas",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Prise refusée : caché",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Prise refusée : accroupi",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Prise refusée : Ripley portée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Prise refusée : cellule portée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Prise refusée : enregistreur sanglé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Prise refusée : mort",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Prise refusée : lecture",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Prise refusée : terminé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Action fire libère puis exige un nouvel appui X",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Action decoy libère puis exige un nouvel appui X",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Action heal libère puis exige un nouvel appui X",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Action crouch libère puis exige un nouvel appui X",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Action bulkhead libère puis exige un nouvel appui X",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Action interact libère puis exige un nouvel appui X",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Action listen libère puis exige un nouvel appui X",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Maj n’augmente pas la vitesse de manutention",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Tirer est plus lent que pousser, sans inversion de la prise",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Un adulte sur le trajet n’est ni déplacé ni endommagé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Une attaque interrompt la prise, sans resaisie automatique",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le personnage ne traverse pas le mobilier en tirant",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La benne coupe une ligne de vue puis la libère après déplacement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La géométrie, le relevé M et les positions partagent la même transformation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Chemin recalculé si la géométrie change, sans cache entre sessions",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Navigation physique autour d’une benne déplacée : adulte, marcheur et compagnon utilisent le même graphe",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Roues : bruit seulement lors d’un déplacement accepté",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Les sons de roues utilisent une adjacence sans apparition d’ennemi",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pause moteur : ni roues ni chronomètre pendant une lecture",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Les vignettes restent différées pendant la prise",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Reprise à l’ancien emplacement du chariot, désormais libre : aucune téléportation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Position malformée filtrée : {\"x\":-999,\"y\":0}",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Position malformée filtrée : {\"x\":1438,\"y\":999}",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Position malformée filtrée : {\"x\":\"1450\",\"y\":140}",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Position malformée filtrée : {\"x\":null,\"y\":140}",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Identifiants et compteurs abusifs ne s’introduisent pas dans le registre",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Vrai carnet V0.8 migré : chapter-3",
+      "ok": true,
+      "detail": {
+        "source": "fixtures/legacy-schema-8-chapter-3.json"
+      }
+    },
+    {
+      "name": "Vrai carnet V0.8 migré : chapter-8",
+      "ok": true,
+      "detail": {
+        "source": "fixtures/legacy-schema-8-chapter-8.json"
+      }
+    },
+    {
+      "name": "Vrai carnet V0.8 migré : chapter-11",
+      "ok": true,
+      "detail": {
+        "source": "fixtures/legacy-schema-8-chapter-11.json"
+      }
+    },
+    {
+      "name": "Vrai carnet V0.8 migré : final",
+      "ok": true,
+      "detail": {
+        "source": "fixtures/legacy-schema-8-final.json"
+      }
+    },
+    {
+      "name": "Une répétition détachée ne change ni la campagne ni DATA",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le paquet portable V0.8 reste lisible avec le schéma de terrain 9",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Campagne complète avec six manutentions physiques : normal",
+      "ok": true,
+      "detail": {
+        "goals": 48,
+        "rooms": 41,
+        "transitions": 99,
+        "physicalHandling": [
+          {
+            "id": "workshop-cart",
+            "room": "workshop",
+            "at": 9,
+            "before": {
+              "x": 1438,
+              "y": 142
+            },
+            "after": {
+              "x": 1450.3999999999996,
+              "y": 142
+            },
+            "seconds": 231.1000000000183
+          },
+          {
+            "id": "haul-cart",
+            "room": "haul",
+            "at": 20,
+            "before": {
+              "x": 790,
+              "y": 143
+            },
+            "after": {
+              "x": 802.3999999999996,
+              "y": 143
+            },
+            "seconds": 380.20000000005217
+          },
+          {
+            "id": "exchanger-cart",
+            "room": "exchanger",
+            "at": 21,
+            "before": {
+              "x": 1350,
+              "y": 135
+            },
+            "after": {
+              "x": 1363.4540000000002,
+              "y": 135
+            },
+            "seconds": 425.5500000000625
+          },
+          {
+            "id": "pump-cart",
+            "room": "pump",
+            "at": 21,
+            "before": {
+              "x": 785,
+              "y": 75
+            },
+            "after": {
+              "x": 797.3999999999996,
+              "y": 75
+            },
+            "seconds": 499.65000000007933
+          },
+          {
+            "id": "stores-cart",
+            "room": "stores",
+            "at": 31,
+            "before": {
+              "x": 2080,
+              "y": 143
+            },
+            "after": {
+              "x": 2092.4000000000015,
+              "y": 143
+            },
+            "seconds": 596.750000000005
+          },
+          {
+            "id": "hold-cart",
+            "room": "hold",
+            "at": 37,
+            "before": {
+              "x": 1080,
+              "y": 143
+            },
+            "after": {
+              "x": 1092.3999999999996,
+              "y": 143
+            },
+            "seconds": 689.4499999999207
+          }
+        ],
+        "damage": 63
+      }
+    },
+    {
+      "name": "Campagne complète avec six manutentions physiques : assisted",
+      "ok": true,
+      "detail": {
+        "goals": 48,
+        "rooms": 41,
+        "transitions": 99,
+        "physicalHandling": [
+          {
+            "id": "workshop-cart",
+            "room": "workshop",
+            "at": 9,
+            "before": {
+              "x": 1438,
+              "y": 142
+            },
+            "after": {
+              "x": 1450.3999999999996,
+              "y": 142
+            },
+            "seconds": 231.1000000000183
+          },
+          {
+            "id": "haul-cart",
+            "room": "haul",
+            "at": 20,
+            "before": {
+              "x": 790,
+              "y": 143
+            },
+            "after": {
+              "x": 802.3999999999996,
+              "y": 143
+            },
+            "seconds": 380.20000000005217
+          },
+          {
+            "id": "exchanger-cart",
+            "room": "exchanger",
+            "at": 21,
+            "before": {
+              "x": 1350,
+              "y": 135
+            },
+            "after": {
+              "x": 1363.4540000000002,
+              "y": 135
+            },
+            "seconds": 425.5500000000625
+          },
+          {
+            "id": "pump-cart",
+            "room": "pump",
+            "at": 21,
+            "before": {
+              "x": 785,
+              "y": 75
+            },
+            "after": {
+              "x": 797.3999999999996,
+              "y": 75
+            },
+            "seconds": 499.6000000000793
+          },
+          {
+            "id": "stores-cart",
+            "room": "stores",
+            "at": 31,
+            "before": {
+              "x": 2080,
+              "y": 143
+            },
+            "after": {
+              "x": 2092.4000000000015,
+              "y": 143
+            },
+            "seconds": 596.700000000005
+          },
+          {
+            "id": "hold-cart",
+            "room": "hold",
+            "at": 37,
+            "before": {
+              "x": 1080,
+              "y": 143
+            },
+            "after": {
+              "x": 1092.3999999999996,
+              "y": 143
+            },
+            "seconds": 689.3999999999207
+          }
+        ],
+        "damage": 28
+      }
+    }
+  ]
+}

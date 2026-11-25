@@ -1,0 +1,993 @@
+--- v0.4/dlc/alien-hors-des-ombres/index.html
++++ v0.5/dlc/alien-hors-des-ombres/index.html
+@@ -1 +1 @@
+-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b191e"><meta name="application-version" content="0.4.0"><title>Alien — Hors des ombres · Les portes ne suffisent plus</title><link rel="stylesheet" href="../../src/oth-v1/oth-ui.css"></head><body><div id="oth-root"></div><script type="module">import {mount} from '../../src/oth-v1/oth-ui.js';mount(document.getElementById('oth-root'));</script></body></html>
++<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b191e"><meta name="application-version" content="0.5.0"><title>Alien — Hors des ombres · Ce qui écoute dans le noir</title><link rel="stylesheet" href="../../src/oth-v1/oth-ui.css"></head><body><div id="oth-root"></div><script type="module">import {mount} from '../../src/oth-v1/oth-ui.js';mount(document.getElementById('oth-root'));</script></body></html>
+--- v0.4/package.json
++++ v0.5/package.json
+@@ -1,10 +1,10 @@
+ {
+   "name": "atf-dlc-out-of-shadows",
+-  "version": "0.4.0",
++  "version": "0.5.0",
+   "private": true,
+   "type": "module",
+   "scripts": {
+-    "check": "node qa/verify.mjs && node qa/verify-v02.mjs && node qa/verify-delivery.mjs && node qa/verify-v03.mjs && node qa/verify-v04.mjs",
++    "check": "node qa/verify.mjs && node qa/verify-v02.mjs && node qa/verify-delivery.mjs && node qa/verify-v03.mjs && node qa/verify-v04.mjs && node qa/verify-v05.mjs",
+     "serve": "node tools/serve.mjs",
+     "build": "python3 tools/bundle-inline.py",
+     "docs": "python3 tools/build-docs.py"
+--- v0.4/src/oth-v1/oth-data.js
++++ v0.5/src/oth-v1/oth-data.js
+@@ -1,6 +1,6 @@
+ export const DATA = {
+   "id": "mire-out-of-shadows",
+-  "version": "0.4.0",
++  "version": "0.5.0",
+   "title": "ALIEN — HORS DES OMBRES",
+   "subtitle": "LA SORTIE DES PROFONDEURS",
+   "saveKey": "atf:mire:out-of-shadows:v1",
+@@ -9078,6 +9078,118 @@
+       "title": "Reprendre sous pression",
+       "summary": "Le carnet conserve les délais restants.",
+       "text": "L’import conserve les verrous, les commandes et la traversée d’un adulte en cours. Il ne crée pas un deuxième spécimen. Les anciennes sauvegardes sans ces données restent acceptées."
++    },
++    {
++      "id": "oth-v05-01",
++      "category": "Survie",
++      "title": "Écouter sans radar",
++      "summary": "Maintenez V : le personnage s’arrête pour distinguer les bruits.",
++      "text": "La simulation continue. Les indications donnent une direction approximative, pas une position ni un nombre de créatures. Relâchez V avant de marcher ou d’agir."
++    },
++    {
++      "id": "oth-v05-02",
++      "category": "Survie",
++      "title": "Un seuil transmet le bruit",
++      "summary": "Une machine ou un leurre peut attirer une présence depuis la pièce voisine.",
++      "text": "Seuls les treize passages de traque autorisés transmettent cette enquête. Un adulte déjà instancié peut rejoindre le seuil ; aucun ennemi supplémentaire n’est créé par le son."
++    },
++    {
++      "id": "oth-v05-03",
++      "category": "Survie",
++      "title": "Une seule pièce de portée",
++      "summary": "Le bruit ne fournit pas de chemin jusqu’à votre nouvelle position.",
++      "text": "L’enquête mémorise le lieu du bruit au moment où il a été perçu. Elle ne propage pas le signal à une deuxième pièce. Une cloison fermée bloque le départ de cette enquête sonore."
++    },
++    {
++      "id": "oth-v05-04",
++      "category": "Survie",
++      "title": "Le bruit couvre le bruit",
++      "summary": "Un moteur lancé peut masquer des pas pendant l’écoute.",
++      "text": "Le ronflement dominant empêche de distinguer les contacts plus faibles dans sa portée. Couper la lampe n’arrête pas une machine ; attendez la fin du cycle."
++    },
++    {
++      "id": "oth-v05-05",
++      "category": "Survie",
++      "title": "Ne répétez pas le même piège",
++      "summary": "Un adulte retient temporairement les emplacements des faux signaux qu’il a inspectés.",
++      "text": "Après deux inspections achevées dans une même bande de sol, un nouveau leurre à cet endroit est ignoré. Déplacez la diversion. Ce souvenir s’efface après quatre-vingts secondes de simulation."
++    },
++    {
++      "id": "oth-v05-06",
++      "category": "Survie",
++      "title": "Un leurre ne rend pas invisible",
++      "summary": "Une cible directement vue reste prioritaire sur un faux signal.",
++      "text": "Rompez d’abord le regard, puis utilisez la diversion. La flamme peut toujours interrompre une attaque ; la mémoire des leurres ne réduit pas cet effet."
++    },
++    {
++      "id": "oth-v05-07",
++      "category": "Survie",
++      "title": "Un lancer, une charge",
++      "summary": "R maintenu ne vide plus automatiquement votre réserve.",
++      "text": "Relâchez puis appuyez à nouveau pour un deuxième lancer. Le petit boîtier s’arrête devant un obstacle solide ; il ne peut plus atterrir à travers un meuble."
++    },
++    {
++      "id": "oth-v05-08",
++      "category": "Survie",
++      "title": "Le signal reste sur place",
++      "summary": "Un leurre conserve son cycle après votre départ de la pièce.",
++      "text": "Les cinq secondes continuent hors champ. Son emplacement reste celui du lancer. Le bruit peut engager une enquête voisine, mais ne vous suit pas au passage."
++    },
++    {
++      "id": "oth-v05-09",
++      "category": "Traces",
++      "title": "Les boîtiers épuisés",
++      "summary": "Un leurre terminé laisse son boîtier au sol.",
++      "text": "Le boîtier est un repère visuel persistant, pas une nouvelle munition récupérable. Douze traces au maximum sont gardées dans chaque pièce, les plus anciennes étant retirées."
++    },
++    {
++      "id": "oth-v05-10",
++      "category": "Traces",
++      "title": "Traces de chaleur",
++      "summary": "Le chalumeau laisse une marque sombre sur le sol proche.",
++      "text": "Ces traces changent le décor, pas les collisions et pas les dégâts. Elles ne constituent pas une nappe de feu ni une réserve de carburant."
++    },
++    {
++      "id": "oth-v05-11",
++      "category": "Traces",
++      "title": "Griffures sur le verrou",
++      "summary": "Une rupture de cloison marque les deux faces du passage.",
++      "text": "Les marques subsistent au-delà du réarmement. La porte conserve les durées mécaniques de son verrou ; la trace seule ne la condamne pas."
++    },
++    {
++      "id": "oth-v05-12",
++      "category": "Survie",
++      "title": "Un avertissement à voix basse",
++      "summary": "Un compagnon proche remarque une menace dans sa ligne de vue.",
++      "text": "Son avertissement est local et temporisé, pas une connaissance de toutes les pièces. À l’arrêt ou accroupi, il prend une posture prudente ; quand vous vous éloignez, il continue de suivre."
++    },
++    {
++      "id": "oth-v05-13",
++      "category": "Survie",
++      "title": "Attendre reste un ordre",
++      "summary": "Un compagnon laissé sur place ne part pas seul au bruit.",
++      "text": "Il peut se baisser face à une menace visible, sans quitter son poste. Revenez dans sa pièce pour modifier son ordre. Les issues narratives ne sont pas modifiées."
++    },
++    {
++      "id": "oth-v05-14",
++      "category": "Survie",
++      "title": "Journal acoustique",
++      "summary": "Le carnet peut relever les sons que vous avez vous-même produits.",
++      "text": "Le relevé affiche la pièce connue et le type de bruit. Il ne confirme pas qu’une créature l’a entendu. Les traces de terrain sont enregistrées séparément des objectifs."
++    },
++    {
++      "id": "oth-v05-15",
++      "category": "Survie",
++      "title": "Écoute accessible",
++      "summary": "Les indications visuelles restent présentes lorsque le son est coupé.",
++      "text": "Le bouton V des commandes tactiles utilise la même action que le clavier. Les panneaux de lecture arrêtent les sons simulés, les enquêtes et les cycles."
++    },
++    {
++      "id": "oth-v05-16",
++      "category": "Survie",
++      "title": "Votre regard ne traverse pas les murs",
++      "summary": "Les compagnons n’annoncent que des menaces qu’ils peuvent voir.",
++      "text": "Les obstacles solides coupent leur ligne de vue. L’écoute, en revanche, peut percevoir un mouvement étouffé à un seuil proche sans en révéler le nom."
+     }
+   ],
+   "sources": [
+@@ -9149,8 +9261,8 @@
+       "Carte à découverte locale et éclairages de gameplay, non plans ni comportement officiels du roman."
+     ]
+   },
+-  "edition": "Les portes ne suffisent plus",
+-  "stateSchema": 4,
++  "edition": "Ce qui écoute dans le noir",
++  "stateSchema": 5,
+   "interactables": [
+     {
+       "id": "marion-note-01",
+@@ -10380,7 +10492,7 @@
+       "hint": "Accordez la porteuse sur le repère 65, puis transmettez. Aucune réception n’est garantie."
+     }
+   },
+-  "releaseName": "Les portes ne suffisent plus",
++  "releaseName": "Ce qui écoute dans le noir",
+   "companions": [
+     {
+       "id": "baxter-refuge",
+@@ -10510,5 +10622,33 @@
+       "jamSeconds": 35,
+       "label": "Pompage / décantation"
+     }
+-  ]
++  ],
++  "acoustics": {
++    "edges": [
++      "e19",
++      "e20",
++      "e22",
++      "e23",
++      "e24",
++      "e25",
++      "e26",
++      "e27",
++      "e32",
++      "oth-annex-drain-0",
++      "oth-annex-drain-1",
++      "oth-annex-alcove-0",
++      "oth-annex-alcove-1"
++    ],
++    "range": 980,
++    "memory": 12,
++    "pulseInterval": 2,
++    "listenRange": 780,
++    "sealedTransmission": 0.18,
++    "maskRadius": 540,
++    "decoyMemorySeconds": 80,
++    "decoyInspectSeconds": 0.75,
++    "decoySameAreaLimit": 2,
++    "maxResiduesPerRoom": 12,
++    "maxLures": 6
++  }
+ };
+--- v0.4/src/oth-v1/oth-engine.js
++++ v0.5/src/oth-v1/oth-engine.js
+@@ -4,7 +4,7 @@
+ const clamp=(v,a,b)=>Math.max(a,Math.min(b,Number(v)||0));
+ const clone=v=>JSON.parse(JSON.stringify(v));
+ export function createState(difficulty='normal'){
+- return {schema:4,doors:{},lightsOff:[],machines:{},doorHold:0,doorAction:null,doorPressDone:false,servicePressDone:false,companion:null,discoveredPortals:[],metrics:{dodged:0,attacks:0,companionPassages:0,trailsStarted:0,pursuitPassages:0,bulkheadsClosed:0,bulkheadsBreached:0,machinesStarted:0},reducedMotion:false,contrast:false,records:[],collected:[],disabledHazards:[],conversations:[],work:{},reading:null,story:null,hazardCooldown:0,chapter:0,goal:0,room:'bridge',player:{x:170,y:88,hp:100,fuel:65,decoys:8,kits:3,face:1,crouch:false},
++ return {schema:5,soundField:[],soundLog:[],soundSeq:0,acousticTimers:{},lures:[],residue:{},listening:false,listenHeld:0,decoyPressDone:false,doors:{},lightsOff:[],machines:{},doorHold:0,doorAction:null,doorPressDone:false,servicePressDone:false,companion:null,discoveredPortals:[],metrics:{dodged:0,attacks:0,companionPassages:0,trailsStarted:0,pursuitPassages:0,bulkheadsClosed:0,bulkheadsBreached:0,machinesStarted:0,soundInvestigations:0,decoysInspected:0,decoysIgnored:0,companionAlerts:0},reducedMotion:false,contrast:false,records:[],collected:[],disabledHazards:[],conversations:[],work:{},reading:null,story:null,hazardCooldown:0,chapter:0,goal:0,room:'bridge',player:{x:170,y:88,hp:100,fuel:65,decoys:8,kits:3,face:1,crouch:false},
+  difficulty:['normal','assisted'].includes(difficulty)?difficulty:'normal',visited:['bridge'],completed:[],world:{},flags:{},journal:[],elapsed:0,finished:false,dead:false,
+  flash:true,sound:false,hold:0,portalCooldown:0,invuln:0,flame:0,torchCooldown:0,decoyCooldown:0,healCooldown:0,noise:0,dirty:true,notice:'Le relais de la mine ne répond plus.',noticeTime:7,puzzle:null,shake:0};
+ }
+@@ -64,7 +64,7 @@
+  if(follower?.mode==='follow'&&follower.room===s.room&&Math.hypot(follower.x-s.player.x,follower.y-s.player.y)>240){notice(s,'Attendez '+follower.name+' au seuil, ou donnez-lui l’ordre de rester.');return false;}
+  const joins=follower?.mode==='follow'&&follower.room===s.room;
+  markExitTrail(s,portal);
+- s.player.hidden=null;s.decoy=null;s.room=target.id;s.player.x=clamp(back.x+(back.x>target.width/2?-100:100),30,target.width-30);s.player.y=target.mode==='profile'?88:clamp(back.y+((back.y<30)?70:0),0,180);
++ s.player.hidden=null;s.listening=false;s.listenHeld=0;s.decoy=null;s.room=target.id;s.player.x=clamp(back.x+(back.x>target.width/2?-100:100),30,target.width-30);s.player.y=target.mode==='profile'?88:clamp(back.y+((back.y<30)?70:0),0,180);
+  if(collision(target,s.player.x,s.player.y)){s.player.y=88;}
+  if(joins){follower.room=s.room;follower.x=s.player.x+(back.x>target.width/2?30:-30);follower.y=s.player.y;follower.path=[];follower.pathTimer=0;s.metrics.companionPassages++;}
+  s.portalCooldown=.8;s.hold=0;s.doorHold=0;s.doorAction=null;s.invuln=2.2;
+@@ -112,25 +112,32 @@
+  if(s.torchCooldown>0)return;
+  if(!s.flags.torchReady){notice(s,'Le chalumeau doit d’abord être préparé à l’atelier.');s.torchCooldown=.8;return;}
+  if(s.player.fuel<9){notice(s,'Réservoir insuffisant. Gardez vos distances.');s.torchCooldown=.8;return;}
+- s.player.fuel-=9;s.flame=.45;s.torchCooldown=.9;s.noise=1;
++ s.player.fuel-=9;emitSound(s,'torch',s.player.x,s.player.y,.95);addResidue(s,s.room,'scorch',clamp(s.player.x+s.player.face*80,30,ROOM[s.room].width-30),s.player.y);s.flame=.45;s.torchCooldown=.9;s.noise=1;
+  const r=ROOM[s.room];for(const e of roomWorld(s).enemies){if((e.x-s.player.x)*s.player.face>=0&&Math.abs(e.x-s.player.x)<250&&Math.abs(e.y-s.player.y)<65&&!lineBlocked(r,s.player.x,s.player.y,e.x,e.y)){e.stun=2.4;e.attack=0;e.state='recoil';e.targetX=clamp(e.x+s.player.face*200,40,r.width-40);}}
+ }
+ export function dropDecoy(s,free=false){
+- if(s.decoyCooldown>0)return false;
++ if(s.decoyCooldown>0||s.dead||s.finished)return false;
+  if(!free&&s.player.decoys<=0){notice(s,'Plus de leurres disponibles.');s.decoyCooldown=.7;return false;}
++ const r=ROOM[s.room],p=s.player;let x=p.x;
++ for(let i=8;i<=224;i+=8){const nx=clamp(p.x+p.face*i,30,r.width-30);if(collision(r,nx,p.y,8))break;x=nx;}
++ if(Math.abs(x-p.x)<24){notice(s,'Pas assez de place pour lancer le boîtier.');return false;}
+  if(!free)s.player.decoys--;
+- const r=ROOM[s.room];s.decoy={x:clamp(s.player.x+s.player.face*220,40,r.width-40),y:s.player.y,time:5};s.decoyCooldown=1.5;return true;
++ const a={id:'lure-'+(++s.soundSeq),room:s.room,x,y:p.y,time:5,pulse:2};
++ s.lures.push(a);if(s.lures.length>DATA.acoustics.maxLures){const old=s.lures.shift();addResidue(s,old.room,'decoy',old.x,old.y);}
++ s.decoy=a;s.decoyCooldown=1.5;s.dirty=true;emitSound(s,'decoy',x,p.y,1,s.room);return true;
+ }
+ export function step(s,input={},delta=1/60){
+  const dt=clamp(delta,0,.06);if(!dt||s.finished||s.dead||s.puzzle||s.reading)return s;
+  s.elapsed+=dt;if(s.story){s.story.time-=dt;if(s.story.time<=0)s.story=null;}for(const k of ['hazardCooldown','portalCooldown','invuln','torchCooldown','decoyCooldown','healCooldown','flame','noticeTime','shake'])s[k]=Math.max(0,(s[k]||0)-dt);
+- tickServices(s,dt);updatePursuit(s,dt);
++ tickServices(s,dt);tickAcoustics(s,dt);updatePursuit(s,dt);
+  const r=ROOM[s.room],p=s.player,w=roomWorld(s);
++ s.listening=!!input.listen;s.listenHeld=s.listening?s.listenHeld+dt:0;
++ if(s.listening)input={listen:true,crouch:input.crouch};
+  if(input.x||input.y||input.fire||input.decoy)p.hidden=null;
+  p.crouch=Boolean(input.crouch||p.hidden);discoverRoom(s);updateCompanion(s,dt);
+  let dx=clamp(input.x,-1,1),dy=r.mode==='profile'?0:clamp(input.y,-1,1),len=Math.hypot(dx,dy);if(len>1){dx/=len;dy/=len;}
+  const running=input.sprint&&!p.crouch&&!s.flags.cellCarried&&!s.flags.carryRipley;
+- const speed=s.flags.carryRipley?86:p.crouch?78:s.flags.cellCarried?108:running?238:158;
++ const speed=s.listening?0:s.flags.carryRipley?86:p.crouch?78:s.flags.cellCarried?108:running?238:158;
+  if(dx)p.face=dx>0?1:-1;
+  move(r,p,dx*speed*dt,dy*speed*.7*dt);
+  const moving=!!(dx||dy);
+@@ -139,9 +146,10 @@
+  s.noise=Math.max(0,s.noise-dt*1.3);if(moving)s.noise=Math.max(s.noise,running?.9:p.crouch?.08:.3);
+  if(input.fire&&!s.flags.carryRipley)useTorch(s);
+  for(const h of activeHazards(s)){if(h.active&&Math.abs(p.x-h.x)<h.width/2&&Math.abs(p.y-h.y)<30&&s.hazardCooldown<=0&&s.invuln<=0){p.hp-=s.difficulty==='assisted'?3:7;s.hazardCooldown=1.5;s.hold=0;s.dirty=true;notice(s,'Vapeur sous pression. Attendez la détente ou fermez la dérivation.');if(p.hp<=0){p.hp=0;s.dead=true;}}}
+- if(input.decoy)dropDecoy(s);
++ if(!input.decoy)s.decoyPressDone=false;
++ if(input.decoy&&!s.decoyPressDone){dropDecoy(s);s.decoyPressDone=true;}
+  if(input.heal&&s.healCooldown<=0){if(p.kits>0&&p.hp<100){p.kits--;p.hp=Math.min(100,p.hp+45);notice(s,'Pansement appliqué.');s.dirty=true;}s.healCooldown=1;}
+- if(s.decoy){s.decoy.time-=dt;if(s.decoy.time<=0)s.decoy=null;}
++ if(moving&&running&&(s.acousticTimers.steps||0)<=0){s.acousticTimers.steps=1.6;emitSound(s,'steps',p.x,p.y,.72);}
+  // Eggs stay tied to their actual placement; one hatch, with a readable delay.
+  for(const prop of r.props.filter(p=>p.type==='egg')){
+   const distance=Math.hypot(prop.x-p.x,(prop.y-p.y)*1.5),egg=w.eggs[prop.id]||{state:'dormant',time:0};
+@@ -170,13 +178,15 @@
+   const range=detectionRange(s);
+   const canSee=!p.hidden&&dist<range&&Math.abs(e.y-p.y)<110&&!lineBlocked(r,e.x,e.y,p.x,p.y);
+   const machine=machineAttractor(s,e,canSee,dist);
+-  if(s.decoy&&Math.abs(s.decoy.x-e.x)<1100){e.state='investigate';e.targetX=s.decoy.x;e.targetY=s.decoy.y;e.search=5;}
++  if(decoyAttractor(s,e,canSee)){e.state='investigate';e.targetX=s.decoy.x;e.targetY=s.decoy.y;e.search=5;}
+   else if(machine){e.state='investigate';e.targetX=machine.x;e.targetY=machine.y;e.search=3.4;}
+   else if(canSee){e.state='hunt';e.targetX=p.x;e.targetY=p.y;e.search=3.4;}
++  else if(localSound(s,e)){const heard=localSound(s,e);e.state='investigate';e.targetX=heard.x;e.targetY=heard.y;e.search=2.5;}
+   else if(!p.hidden&&s.noise>.55&&dist<850){e.state='investigate';e.targetX=p.x;e.targetY=p.y;e.search=3;}
+   else if(e.search<=0){e.state='patrol';e.targetX=e.home+Math.sin(s.elapsed*.23)*200;e.targetY=r.mode==='profile'?88:110;}
+   const isHunt=e.state==='hunt',espeed=(e.type==='hugger'?145:isHunt?187:75)*(s.difficulty==='assisted'?.65:1)*(e.cool>.65?.35:1);
+   navigateActor(r,e,{x:clamp(e.targetX,30,r.width-30),y:r.mode==='profile'?88:clamp(e.targetY,6,174)},espeed,dt);
++  inspectDecoy(s,e,dt);
+   dist=Math.hypot(e.x-p.x,(e.y-p.y)*1.5);
+   if(!p.hidden&&dist<(e.type==='hugger'?40:56)&&s.invuln<=0&&e.cool<=0&&!lineBlocked(r,e.x,e.y,p.x,p.y)){
+    e.attack=e.type==='hugger'?.36:.62;e.state='windup';notice(s,'La créature prend appui. Reculez !',1.1);
+@@ -191,11 +201,11 @@
+  }else{s.hold=0;}
+  return s;
+ }
+-export function serialize(s){const out=clone(s);for(const k of ['puzzle','reading','hold','flame','shake','doorHold'])out[k]=['puzzle','reading'].includes(k)?null:0;out.dead=false;if(out.companion){delete out.companion.path;delete out.companion.pathTimer;}for(const w of Object.values(out.world))for(const e of w.enemies){delete e.path;delete e.pathTimer;delete e.pathTarget;}return JSON.stringify(out);}
++export function serialize(s){const out=clone(s);for(const k of ['puzzle','reading','hold','flame','shake','doorHold'])out[k]=['puzzle','reading'].includes(k)?null:0;out.dead=false;out.listening=false;out.listenHeld=0;out.decoyPressDone=false;out.decoy=null;if(out.companion){delete out.companion.path;delete out.companion.pathTimer;}for(const w of Object.values(out.world))for(const e of w.enemies){delete e.path;delete e.pathTimer;delete e.pathTarget;}return JSON.stringify(out);}
+ export function restore(raw){
+  if(typeof raw!=='string'||raw.length>180000)return null;
+  try{
+-  const v=JSON.parse(raw);if(!v||![1,2,3,4].includes(v.schema)||!ROOM[v.room]||!Array.isArray(v.completed))return null;
++  const v=JSON.parse(raw);if(!v||![1,2,3,4,5].includes(v.schema)||!ROOM[v.room]||!Array.isArray(v.completed))return null;
+   const s=createState(v.difficulty),ordered=DATA.chapters.flatMap(c=>c.objectives.map(o=>o.id));let n=0;while(n<ordered.length&&v.completed[n]===ordered[n])n++;
+   s.completed=ordered.slice(0,n);s.finished=n===ordered.length;s.chapter=s.finished?15:Math.floor(n/3);s.goal=s.finished?2:n%3;
+   s.room=v.room;s.visited=[...new Set((Array.isArray(v.visited)?v.visited:[]).filter(x=>ROOM[x]))];if(!s.visited.includes(s.room))s.visited.push(s.room);
+@@ -232,7 +242,7 @@
+    const c=v.companion,r=ROOM[c.room],x=clamp(c.x,28,r.width-28),y=r.mode==='profile'?88:clamp(c.y,0,180);
+    s.companion={...def,room:c.room,x:collision(r,x,y)?170:x,y:collision(r,x,y)?88:y,mode:c.mode==='wait'?'wait':'follow',state:'idle',path:[],pathTimer:0,face:c.face===-1?-1:1};
+   }
+-  restoreServices(s,v);discoverRoom(s);s.dirty=false;return s;
++  restoreServices(s,v);restoreAcoustics(s,v);discoverRoom(s);s.dirty=false;return s;
+  }catch{return null;}
+ }
+ export function validateData(){
+@@ -251,7 +261,7 @@
+  const actor=DATA.chapters[s.chapter].actor;
+  const dynamic=syncCompanion(s);
+  const statics=DATA.crewPlacements.filter(n=>n.character!==dynamic?.character&&n.room===s.room&&n.start<=s.completed.length&&s.completed.length<n.end&&n.character!==actor&&!lost.has(n.character)&&!(n.character==='ripley'&&s.flags.carryRipley)).map(n=>({...n,pose:injured.has(n.character)&&n.pose!=='rest'?'injured':n.pose}));
+- if(dynamic&&dynamic.room===s.room)statics.push({...dynamic,id:'companion:'+dynamic.id,pose:injured.has(dynamic.character)?'injured':'work',moving:dynamic.moving,face:dynamic.face,dynamic:true});
++ if(dynamic&&dynamic.room===s.room)statics.push({...dynamic,id:'companion:'+dynamic.id,pose:injured.has(dynamic.character)?'injured':'work',moving:dynamic.moving,face:dynamic.face,crouch:dynamic.crouch,alert:dynamic.alert,dynamic:true});
+  return statics;
+ }
+ export function talkToCrew(s,id){const npc=crewInRoom(s).find(n=>n.id===id);if(!npc||Math.hypot(s.player.x-npc.x,s.player.y-npc.y)>85)return false;
+@@ -374,10 +384,13 @@
+ }
+ export function updateCompanion(s,dt){
+  const c=syncCompanion(s);if(!c||c.room!==s.room)return;
+- c.moving=false;if(c.mode==='wait'){c.state='waiting';return;}
++ c.moving=false;c.alert=Math.max(0,(c.alert||0)-dt);c.alertCooldown=Math.max(0,(c.alertCooldown||0)-dt);
++ const threat=(s.world[s.room]?.enemies||[]).find(e=>e.type==='adult'&&e.stun<=0&&Math.hypot(e.x-c.x,(e.y-c.y)*1.5)<370&&!lineBlocked(ROOM[s.room],c.x,c.y,e.x,e.y));
++ if(threat&&c.alertCooldown<=0){c.alert=3;c.alertCooldown=12;s.metrics.companionAlerts++;notice(s,c.name+' — Pas un geste brusque. Il y a quelque chose devant nous.',4);}
++ if(c.mode==='wait'){c.crouch=!!threat||s.player.crouch;c.state=threat?'watching-wait':'waiting';return;}
+  const distance=Math.hypot(c.x-s.player.x,c.y-s.player.y);
+- c.crouch=s.player.crouch||!!s.player.hidden;
+- if(distance<94){c.state=c.crouch?'cover':'ready';return;}
++ c.crouch=s.player.crouch||!!s.player.hidden||!!threat&&distance<180;
++ if(distance<94){c.state=threat?'watching':c.crouch?'cover':'ready';return;}
+  const r=ROOM[c.room],t={x:clamp(s.player.x+(c.x<s.player.x?-58:58),30,r.width-30),y:r.mode==='profile'?88:s.player.y};
+  if(collision(r,t.x,t.y))Object.assign(t,{x:s.player.x,y:s.player.y});
+  const h=activeHazards(s).find(h=>h.active&&Math.abs(c.x-h.x)<h.width*.5+65&&Math.abs(c.y-h.y)<32&&(t.x-c.x)*(h.x-c.x)>0);
+@@ -429,7 +442,7 @@
+  if(a.kind==='machine'){
+   const v=s.machines[a.id]||(s.machines[a.id]={remaining:0,cooldown:0});
+   if(v.remaining>0||v.cooldown>0){notice(s,'La machine est encore en cycle ou en refroidissement.');return false;}
+-  v.remaining=a.runSeconds;v.cooldown=a.coolSeconds;s.metrics.machinesStarted++;notice(s,a.title+' — cycle sonore lancé.',4);s.dirty=true;return true;
++  v.remaining=a.runSeconds;v.cooldown=a.coolSeconds;s.acousticTimers[a.id]=2;emitSound(s,'machine',a.x,a.y,1,a.room);s.metrics.machinesStarted++;notice(s,a.title+' — cycle sonore lancé.',4);s.dirty=true;return true;
+  }
+  return false;
+ }
+@@ -482,7 +495,7 @@
+   const gate=s.doors[trail.edge];
+   if(gate?.remaining>0){
+    e.state='battering';gate.strain+=dt;const def=DATA.bulkheads.find(b=>b.edge===trail.edge);
+-   if(gate.strain>=def.breakSeconds){gate.remaining=0;gate.strain=0;gate.jammed=def.jamSeconds;s.metrics.bulkheadsBreached++;s.dirty=true;if(trail.to===s.room)notice(s,'Le verrou cède derrière vous ! Éloignez-vous du seuil.',4);}
++   if(gate.strain>=def.breakSeconds){gate.remaining=0;gate.strain=0;gate.jammed=def.jamSeconds;s.metrics.bulkheadsBreached++;for(const rid of [trail.from,trail.to]){const pp=ROOM[rid].portals.find(p=>p.edge===trail.edge);if(pp)addResidue(s,rid,'scrape',pp.x,pp.y);}s.dirty=true;if(trail.to===s.room)notice(s,'Le verrou cède derrière vous ! Éloignez-vous du seuil.',4);}
+    continue;
+   }
+   e.state='crossing';trail.wait-=dt;
+@@ -496,7 +509,7 @@
+   let pos={x:back.x,y:to.mode==='profile'?88:back.y};
+   for(const offset of [28,-28,0]){const x=clamp(back.x+offset,30,to.width-30);if(!collision(to,x,pos.y)){pos.x=x;break;}}
+   if(collision(to,pos.x,pos.y)){trail.wait=.5;continue;}
+-  w.enemies.splice(w.enemies.indexOf(e),1);delete e.passage;Object.assign(e,{x:pos.x,y:pos.y,home:pos.x,targetX:clamp(pos.x+(pos.x>to.width/2?-100:100),30,to.width-30),targetY:pos.y,path:[],pathTimer:0,pathTarget:null,state:'investigate',search:3.4,cool:1,attack:0});dest.enemies.push(e);s.metrics.pursuitPassages++;s.dirty=true;
++  w.enemies.splice(w.enemies.indexOf(e),1);delete e.passage;Object.assign(e,{x:pos.x,y:pos.y,home:pos.x,targetX:clamp(pos.x+(pos.x>to.width/2?-100:100),30,to.width-30),targetY:pos.y,path:[],pathTimer:0,pathTarget:null,state:'investigate',search:3.4,cool:1,attack:0});if(trail.reason==='sound'&&trail.source){e.targetX=trail.source.x;e.targetY=trail.source.y;e.search=5;}dest.enemies.push(e);s.metrics.pursuitPassages++;s.dirty=true;
+   if(s.room===to.id)notice(s,'Des griffes passent le seuil. Rompez le contact.',3);
+  }
+ }
+@@ -510,7 +523,134 @@
+   for(const e of w.enemies){
+    const old=v.world?.[id]?.enemies?.find(o=>o?.id===e.id),p=old?.passage;
+    if(e.type!=='adult'||!p||p.from!==id||!ROOM[id].portals.some(q=>q.edge===p.edge&&q.target===p.to)||DATA.pursuitRules.safeRooms.includes(p.to)||!pursuitAllowed(s,p.edge)||s.chapter<6||s.chapter>10)continue;
+-   e.passage={edge:p.edge,from:id,to:p.to,remaining:clamp(p.remaining,0,DATA.pursuitRules.memory),wait:clamp(p.wait,0,DATA.pursuitRules.crossingTime)};
+-  }
+- }
+-}
++   e.passage={edge:p.edge,from:id,to:p.to,remaining:clamp(p.remaining,0,DATA.pursuitRules.memory),wait:clamp(p.wait,0,DATA.pursuitRules.crossingTime)};if(p.reason==='sound'&&p.source){e.passage.reason='sound';e.passage.source={x:clamp(p.source.x,30,ROOM[p.to].width-30),y:ROOM[p.to].mode==='profile'?88:clamp(p.source.y,0,180)};}
++  }
++ }
++}
++
++/** V0.5 — Local acoustics, bounded evidence and decoy memory.
++ * Sound may cross one authored adjacency. It never spawns an enemy or searches
++ * a route to the player. Rendering and listening are read-only consumers. */
++const SOUND_KINDS=['steps','torch','machine','decoy'];
++const SOUND_LABELS={steps:'Pas précipités',torch:'Souffle du chalumeau',machine:'Cycle de machine',decoy:'Signal d’un leurre'};
++export function addResidue(s,room,kind,x,y){
++ if(!ROOM[room]||!['decoy','scorch','scrape'].includes(kind))return false;
++ const list=s.residue[room]||(s.residue[room]=[]),r=ROOM[room];
++ if(kind!=='decoy'&&list.some(v=>v.kind===kind&&Math.hypot(v.x-x,v.y-y)<65))return false;
++ list.push({kind,x:clamp(x,28,r.width-28),y:r.mode==='profile'?88:clamp(y,0,180),at:s.elapsed});
++ if(list.length>DATA.acoustics.maxResiduesPerRoom)list.shift();s.dirty=true;return true;
++}
++export function emitSound(s,kind,x,y,volume=1,room=s.room){
++ if(!ROOM[room]||!SOUND_KINDS.includes(kind)||s.dead||s.finished)return null;
++ const cue={id:++s.soundSeq,kind,room,x:clamp(x,30,ROOM[room].width-30),y:ROOM[room].mode==='profile'?88:clamp(y,0,180),volume:clamp(volume,.1,1),ttl:2.1};
++ s.soundField.push(cue);s.soundField=s.soundField.slice(-16);
++ // The log contains only one's own emitted sounds, never a hidden enemy roster.
++ const last=s.soundLog.at(-1);
++ if(!last||last.kind!==kind||last.room!==room||s.elapsed-last.at>4){s.soundLog.push({kind,room,at:s.elapsed});s.soundLog=s.soundLog.slice(-16);}
++ if(s.chapter<6||s.chapter>10)return cue;
++ for(const portal of ROOM[room].portals){
++  if(!DATA.acoustics.edges.includes(portal.edge)||!pursuitAllowed(s,portal.edge)||DATA.pursuitRules.safeRooms.includes(room)||doorStatus(s,portal.edge).sealed)continue;
++  const origin=portal.target,back=ROOM[origin].portals.find(p=>p.edge===portal.edge),world=s.world[origin];
++  if(!world||!back)continue; // Never instantiate a distant room to populate it.
++  const toDoor=Math.hypot(cue.x-portal.x,(cue.y-portal.y)*1.4);
++  for(const e of world.enemies){
++   if(e.type!=='adult'||e.stun>0||e.attack>0||e.passage)continue;
++   const distance=toDoor+Math.hypot(e.x-back.x,(e.y-back.y)*1.4);
++   if(distance>DATA.acoustics.range*cue.volume)continue;
++   e.passage={edge:portal.edge,from:origin,to:room,remaining:DATA.acoustics.memory,wait:DATA.pursuitRules.crossingTime,reason:'sound',source:{x:cue.x,y:cue.y}};
++   e.targetX=back.x;e.targetY=back.y;e.path=[];e.pathTimer=0;e.state='track';e.attack=0;
++   s.metrics.soundInvestigations++;s.dirty=true;
++  }
++ }
++ return cue;
++}
++function tickAcoustics(s,dt){
++ for(const key of Object.keys(s.acousticTimers))s.acousticTimers[key]=Math.max(0,s.acousticTimers[key]-dt);
++ for(const q of s.soundField)q.ttl-=dt;s.soundField=s.soundField.filter(q=>q.ttl>0);
++ for(const a of DATA.interactables.filter(a=>a.kind==='machine')){
++  if(s.machines[a.id]?.remaining>0&&(s.acousticTimers[a.id]||0)<=0){s.acousticTimers[a.id]=2;emitSound(s,'machine',a.x,a.y,1,a.room);}
++ }
++ for(const lure of s.lures){lure.time-=dt;lure.pulse-=dt;if(lure.time<=0)addResidue(s,lure.room,'decoy',lure.x,lure.y);else if(lure.pulse<=0){lure.pulse=2;emitSound(s,'decoy',lure.x,lure.y,1,lure.room);}}
++ s.lures=s.lures.filter(l=>l.time>0);s.decoy=s.lures.filter(l=>l.room===s.room).at(-1)||null;
++ for(const w of Object.values(s.world))for(const e of w.enemies)e.decoyMemory=(e.decoyMemory||[]).filter(m=>m.until>s.elapsed);
++}
++function localSound(s,e){
++ // Portable lures and machines have their own priorities and adaptation rules.
++ return s.soundField.filter(q=>q.room===s.room&&['torch','steps'].includes(q.kind)&&Math.hypot(q.x-e.x,(q.y-e.y)*1.5)<q.volume*700).at(-1)||null;
++}
++function lureArea(s,lure){return lure.room+':'+Math.floor(lure.x/180);}
++function decoyAttractor(s,e,canSee){
++ const lure=s.decoy;if(!lure||canSee||Math.abs(lure.x-e.x)>=1100)return null;
++ if(e.type==='adult'){
++  const memory=(e.decoyMemory||[]).find(m=>m.area===lureArea(s,lure)&&m.until>s.elapsed);
++  if(memory?.count>=DATA.acoustics.decoySameAreaLimit&&e.checkedLure!==lure.id){
++   if(e.ignoredLure!==lure.id){e.ignoredLure=lure.id;s.metrics.decoysIgnored++;if(Math.abs(e.x-s.player.x)<520)notice(s,'Elle ne s’arrête plus au même signal. Changez l’emplacement du leurre.',4);}
++   return null;
++  }
++ }
++ return lure;
++}
++function inspectDecoy(s,e,dt){
++ const lure=s.decoy;
++ if(e.type!=='adult'||!lure||e.checkedLure===lure.id||e.state!=='investigate'||e.targetX!==lure.x||Math.hypot(e.x-lure.x,e.y-lure.y)>44){e.inspectTime=0;return;}
++ e.inspectTime=(e.inspectTime||0)+dt;
++ if(e.inspectTime<DATA.acoustics.decoyInspectSeconds)return;
++ e.checkedLure=lure.id;e.inspectTime=0;e.decoyMemory=e.decoyMemory||[];
++ const area=lureArea(s,lure);let memory=e.decoyMemory.find(m=>m.area===area);
++ if(!memory){memory={area,count:0,until:0};e.decoyMemory.push(memory);}
++ memory.count=Math.min(2,memory.count+1);memory.until=s.elapsed+DATA.acoustics.decoyMemorySeconds;
++ e.decoyMemory=e.decoyMemory.slice(-6);s.metrics.decoysInspected++;s.dirty=true;
++}
++export function listenReport(s){
++ const masked=DATA.interactables.some(a=>a.kind==='machine'&&a.room===s.room&&s.machines[a.id]?.remaining>0&&Math.abs(a.x-s.player.x)<DATA.acoustics.maskRadius);
++ if(masked)return {masked:true,signals:[],label:'LE MOTEUR COUVRE LES AUTRES BRUITS'};
++ const signals=[],r=ROOM[s.room],p=s.player;
++ const cue=(x,strength,label,edge=null)=>signals.push({direction:Math.abs(x-p.x)<70?'proche':x<p.x?'gauche':'droite',strength,label,edge});
++ // Only movement/impact emits a detectable contact. A stationary actor is not radar-visible.
++ for(const e of s.world[s.room]?.enemies||[]){
++  if(!(e.moving||e.attack>0||e.passage)||e.stun>0)continue;
++  const d=Math.hypot(e.x-p.x,(e.y-p.y)*1.5),occluded=lineBlocked(r,e.x,e.y,p.x,p.y),reach=DATA.acoustics.listenRange*(occluded?.55:1);
++  if(d<reach)cue(e.x,1-d/reach,occluded?'Frottement étouffé':'Mouvement au sol');
++ }
++ for(const portal of r.portals){
++  if(!DATA.acoustics.edges.includes(portal.edge)||!activeEdges(s,true).some(e=>e.id===portal.edge))continue;
++  const back=ROOM[portal.target].portals.find(p=>p.edge===portal.edge);if(!back)continue;
++  for(const e of s.world[portal.target]?.enemies||[]){
++   if(!e.passage||e.stun>0||!e.moving&&e.state!=='battering'&&e.state!=='crossing')continue;
++   const d=Math.hypot(p.x-portal.x,p.y-portal.y)+Math.hypot(e.x-back.x,e.y-back.y),sealed=doorStatus(s,portal.edge).sealed;
++   const reach=DATA.acoustics.listenRange*(sealed?.55:1);
++   if(d<reach)cue(portal.x,1-d/reach,sealed?'Chocs derrière la cloison':'Frottement au seuil',portal.edge);
++  }
++ }
++ for(const q of s.soundField){if(q.room!==s.room||!['decoy','machine'].includes(q.kind))continue;const d=Math.abs(q.x-p.x);if(d<DATA.acoustics.listenRange)cue(q.x,(1-d/DATA.acoustics.listenRange)*.5,SOUND_LABELS[q.kind]);}
++ signals.sort((a,b)=>b.strength-a.strength);
++ const limited=signals.filter((q,i,arr)=>arr.findIndex(t=>t.direction===q.direction&&t.label===q.label)===i).slice(0,3);
++ return {masked:false,signals:limited,label:limited.length?limited[0].label.toUpperCase()+' · '+limited[0].direction.toUpperCase():'AUCUN BRUIT DISTINCT'};
++}
++export function soundHistory(s){return s.soundLog.map(q=>({...q,label:SOUND_LABELS[q.kind],roomLabel:ROOM[q.room].name}));}
++function restoreAcoustics(s,v){
++ s.soundSeq=Math.floor(clamp(v.soundSeq,0,1000000));
++ const goodPoint=(x,y,r)=>({x:clamp(x,30,r.width-30),y:r.mode==='profile'?88:clamp(y,0,180)});
++ const ids=new Set();s.lures=[];
++ for(const l of (Array.isArray(v.lures)?v.lures:[]).slice(-DATA.acoustics.maxLures)){
++  if(!l||!ROOM[l.room]||typeof l.id!=='string'||!/^lure-\d{1,8}$/.test(l.id)||ids.has(l.id)||!(l.time>0))continue;
++  const pt=goodPoint(l.x,l.y,ROOM[l.room]);if(collision(ROOM[l.room],pt.x,pt.y,8))continue;
++  ids.add(l.id);s.lures.push({id:l.id,room:l.room,...pt,time:clamp(l.time,0,5),pulse:clamp(l.pulse,0,2)});s.soundSeq=Math.max(s.soundSeq,Number(l.id.slice(5)));
++ }
++ s.decoy=s.lures.filter(l=>l.room===s.room).at(-1)||null;
++ s.soundLog=(Array.isArray(v.soundLog)?v.soundLog:[]).filter(q=>q&&ROOM[q.room]&&SOUND_KINDS.includes(q.kind)).slice(-16).map(q=>({kind:q.kind,room:q.room,at:clamp(q.at,0,s.elapsed)}));
++ s.soundField=(Array.isArray(v.soundField)?v.soundField:[]).filter(q=>q&&ROOM[q.room]&&SOUND_KINDS.includes(q.kind)&&q.ttl>0).slice(-16).map(q=>({kind:q.kind,room:q.room,...goodPoint(q.x,q.y,ROOM[q.room]),ttl:clamp(q.ttl,0,2.1),volume:clamp(q.volume,.1,1),id:Math.floor(clamp(q.id,0,1000000))}));
++ for(const key of ['steps',...DATA.interactables.filter(a=>a.kind==='machine').map(a=>a.id)])if(v.acousticTimers?.[key])s.acousticTimers[key]=clamp(v.acousticTimers[key],0,2);
++ if(v.residue&&typeof v.residue==='object')for(const r of DATA.rooms){const entries=v.residue[r.id];if(!Array.isArray(entries))continue;s.residue[r.id]=entries.filter(q=>q&&['decoy','scorch','scrape'].includes(q.kind)).slice(-DATA.acoustics.maxResiduesPerRoom).map(q=>({kind:q.kind,...goodPoint(q.x,q.y,r),at:clamp(q.at,0,s.elapsed)}));}
++ for(const [room,w] of Object.entries(s.world))for(const e of w.enemies){
++  const old=v.world?.[room]?.enemies?.find(o=>o?.id===e.id);if(!old||e.type!=='adult')continue;
++  e.decoyMemory=[];
++  for(const m of (Array.isArray(old.decoyMemory)?old.decoyMemory:[]).slice(-6)){
++   if(!m||typeof m.area!=='string')continue;const [id,band]=m.area.split(':');
++   if(!ROOM[id]||!/^\d+$/.test(band)||Number(band)>Math.floor(ROOM[id].width/180)||!(m.until>s.elapsed))continue;
++   if(e.decoyMemory.some(t=>t.area===m.area))continue;
++   e.decoyMemory.push({area:m.area,count:Math.floor(clamp(m.count,0,2)),until:clamp(m.until,s.elapsed,s.elapsed+80)});
++  }
++  if(ids.has(old.checkedLure))e.checkedLure=old.checkedLure;
++ }
++}
+--- v0.4/src/oth-v1/oth-render.js
++++ v0.5/src/oth-v1/oth-render.js
+@@ -1,5 +1,5 @@
+ import { DATA } from './oth-data.js';
+-import {ROOM,PROP,currentObjective,activeEdges,nearby,roomWorld,route,crewInRoom,activeHazards,lightAt,stealthStatus,doorStatus,nearestBulkhead,serviceStatus,incomingThreats} from './oth-engine.js';
++import {ROOM,PROP,currentObjective,activeEdges,nearby,roomWorld,route,crewInRoom,activeHazards,lightAt,stealthStatus,doorStatus,nearestBulkhead,serviceStatus,incomingThreats,listenReport} from './oth-engine.js';
+ let W=1280; const H=650,Z=1.22;
+ const palette={ship:['#071017','#172d36','#78aaa9','#d4b277'],industrial:['#101617','#283738','#91ada2','#d4a568'],hangar:['#080f16','#243542','#79959f','#dfa45b'],wreck:['#140d0b','#31251e','#ad8971','#f1a662'],medical:['#121e20','#435256','#bdcbc5','#d6c6a0'],server:['#050f10','#162c2d','#709b83','#cbb673'],surface:['#181811','#666151','#aa9c78','#edcb89'],mine:['#0c1110','#34382c','#889074','#e0ba6d'],cavern:['#0a1113','#283239','#799092','#d1b778'],derelict:['#0b0e13','#232934','#817f94','#cdb594'],hive:['#0b0f11','#25312e','#8b9c83','#d4bc92']};
+ const rand=(i)=>{const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x);};
+@@ -133,14 +133,14 @@
+   rock(c,0,-h*.45,w*.5,h*.5,variant*93,type==='ore'?'#889f8d':type==='debris'?'#746d51':'#465c45');return;
+  }
+ }
+-function human(c,x,y,face,walk,t,character,hurt=false,carry=false,crouch=false,hasTorch=false){
++function human(c,x,y,face,walk,t,character,hurt=false,carry=false,crouch=false,hasTorch=false,signal=false){
+  c.save();c.translate(x,y);c.scale(face,crouch?.72:1);const a=walk?Math.sin(t*9)*6:0;
+  const suit=({ripley:'#aaa997',kasyanov:'#a2b8b3',garcia:'#c4bbb0',baxter:'#9b8d69',lachance:'#647c8d',sneddon:'#9ca598',jordan:'#77848c',welford:'#8b9167',powell:'#7f846d'})[character]||'#788977',trim=['ripley','garcia'].includes(character)?'#d6cbb1':'#c1bda2';
+  line(c,[[-5,-25],[-8+a,-13],[-8+a*.5,-3]],'#293a35',9);line(c,[[6,-26],[9-a,-12],[10-a*.5,-3]],'#3b4e42',9);
+  line(c,[[-8+a*.5,-2],[0+a*.5,-2]],'#8c9780',4);line(c,[[10-a*.5,-2],[19-a*.5,-2]],'#87917d',4);
+  poly(c,[[-11,-51],[-14,-34],[-8,-23],[11,-24],[13,-46],[7,-52]],suit,trim);
+  rect(c,-18,-47,7,21,'#384c40','#a6ae8c');rect(c,-12,-35,26,5,'#354e3e');rect(c,-5,-36,6,6,'#b1b996');
+- line(c,[[-10,-48],[-16,-33],[-6,-25]],suit,6);line(c,[[9,-48],[16,-37],[26,-37]],trim,6);
++ line(c,[[-10,-48],[-16,-33],[-6,-25]],suit,6);if(signal)line(c,[[9,-48],[18,-53],[13,-63]],trim,5);else line(c,[[9,-48],[16,-37],[26,-37]],trim,6);
+  ellipse(c,0,-57,8,10,'#c5b096','#e0d1b0');poly(c,[[-9,-57],[-9,-64],[-4,-68],[5,-67],[9,-60],[4,-59],[2,-63],[-4,-62]],character==='ripley'?'#51493c':'#869881','#c9c9a18a');rect(c,4,-60,7,3,'#192d2a');
+  if(['kasyanov','garcia'].includes(character)){rect(c,-5,-45,8,8,'#d7dcc5');rect(c,-2,-44,2,6,'#74746c');rect(c,-4,-42,6,2,'#74746c');}if(character==='baxter'){line(c,[[-7,-58],[7,-58]],'#172a2d',2);}if(character==='jordan'){rect(c,-9,-65,19,5,'#394a50','#acb89d');}if(character==='hoop'){rect(c,2,-69,6,3,'#ecdda7');}
+  if(hasTorch&&!carry){rect(c,23,-40,15,6,'#2c3d34','#a9b596');rect(c,31,-40,11,2,'#c9c9ae');c.beginPath();c.moveTo(27,-35);c.quadraticCurveTo(35,-10,-14,-39);c.strokeStyle='#aa927e';c.stroke();}rect(c,0,-47,5,5,'#ccb985');
+@@ -187,6 +187,7 @@
+  backdrop(c,r,cam,ambientTime,s);architecture(c,r,cam,ambientTime,s);if(s.lightsOff.includes(r.id))rect(c,0,0,W,H,'#01070b86');localDetails(c,r,cam,ambientTime,s);
+  const o=currentObjective(s),path=o?route(s,o.room):[],allowed=activeEdges(s);
+  for(const po of r.portals)door(c,po,r,cam,allowed.some(e=>e.id===po.edge),ROOM[po.target],path?.[0]?.edge===po.edge,s);
++ drawEvidence(c,s,r,cam);
+  const objs=r.props.map(prop=>({kind:'prop',y:prop.y,obj:prop}));
+  for(const npc of crewInRoom(s))objs.push({kind:'npc',y:npc.y,obj:npc});
+  for(const a of DATA.interactables){if(a.room!==r.id||s.records.includes(a.id)||a.kind==='valve'&&s.disabledHazards.includes(a.hazard))continue;objs.push({kind:'activity',y:a.y-46,obj:{...a,y:a.y-46,empty:s.collected.includes(a.id)}});}
+@@ -194,16 +195,16 @@
+  if(o?.room===r.id){const node=r.nodes.find(n=>n.id===o.node);objs.push({kind:'goal',y:node.y-48,obj:{...node,y:node.y-48}});}
+  const world=roomWorld(s);for(const e of world.enemies)objs.push({kind:'enemy',y:e.y,obj:e});
+  objs.push({kind:'player',y:p.y,obj:p});
+- if(s.decoy)objs.push({kind:'decoy',y:s.decoy.y,obj:s.decoy});
++ for(const lure of s.lures.filter(l=>l.room===s.room))objs.push({kind:'decoy',y:lure.y,obj:lure});
+  objs.sort((a,b)=>a.y-b.y||({prop:0,activity:1,goal:2,npc:3,enemy:4,player:5,decoy:6}[a.kind]-{prop:0,activity:1,goal:2,npc:3,enemy:4,player:5,decoy:6}[b.kind]));
+  for(const ent of objs){const obj=ent.obj,x=(obj.x-cam)*Z,fy=415+(obj.y-25)*.91,scale=(.91+obj.y/700)*Z;if(x<-150||x>W+170)continue;
+-  c.save();c.translate(x,fy);c.scale(scale,scale);
+-  if(ent.kind==='prop'){const def=PROP[obj.type];if(def.kind!=='decor')ellipse(c,2,1,def.width*.64,5,'#00080b80');if(obj.y>p.y&&Math.abs(obj.x-p.x)<72)c.globalAlpha=.35;propShape(c,obj.type,def.width,def.height,obj.variant,false,t);}
++  c.save();c.translate(x,fy);c.scale(scale,scale);c.globalAlpha=occlusionAlpha(s,ent.kind,obj);
++  if(ent.kind==='prop'){const def=PROP[obj.type];if(def.kind!=='decor')ellipse(c,2,1,def.width*.64,5,'#00080b80');propShape(c,obj.type,def.width,def.height,obj.variant,false,t);}
+   if(ent.kind==='goal'){ellipse(c,0,2,26,5,'#00080b90');const ty=({valve:'valve',carry:'cell',repair:'generator',install:'cell',release:'winch',seal:'valve',lure:'beacon'})[o.action]||(s.room==='fossils'?'fossil':s.room==='eggs'?'egg':s.room==='narcissus'?'catbox':s.room==='medical'?'medpod':'terminal');const pd=PROP[ty];propShape(c,ty,pd.width,pd.height,0,true,t);line(c,[[-19,-58],[-19,-69],[-8,-69]],'#ecd28e');line(c,[[19,-58],[19,-69],[8,-69]],'#ecd28e');text(c,'◆',0,-72,11,'#e7d39d','center');}
+   if(ent.kind==='activity'){ellipse(c,0,2,18,4,'#00070b88');if(obj.kind==='light'||obj.kind==='machine'){serviceSprite(c,obj,serviceStatus(s,obj),t);}else if(obj.kind==='archive'){rect(c,-10,-36,20,29,'#4e665d','#b6b799');rect(c,-7,-32,14,16,'#152a29','#819e84');for(let i=0;i<4;i++)rect(c,-5,-29+i*3,9-i,1,'#b1c09c');line(c,[[-5,-12],[5,-12]],'#d7c08c');}else if(obj.kind==='cache'){propShape(c,'supplyChest',43,31,0,obj.empty,t);if(!obj.empty){rect(c,-5,-27,10,9,'#d3c493');if(obj.resource==='kits'){rect(c,-1,-25,2,6,'#596d58');rect(c,-3,-23,6,2,'#596d58');}}}else if(obj.kind==='hide'){propShape(c,'hideNiche',68,106,['hive','derelict','cavern'].includes(r.style)?1:0,!!p.hidden,t);}else propShape(c,'valve',32,45,0,false,t);const close=Math.abs(obj.x-p.x)<90;if(!obj.empty)text(c,close?'E':'·',0,obj.kind==='hide'?-116:obj.kind==='machine'?-109:obj.kind==='light'?-88:-48,close?11:13,'#d3c28e','center');else if(close)text(c,'VIDE',0,-52,9,'#91a392','center');}
+-  if(ent.kind==='npc'){ellipse(c,0,2,22,5,'#00070baa');if(obj.pose==='rest'){c.save();c.translate(0,r.id==='narcissus'?-22:r.id==='medical'?-14:-2);patient(c,obj.character);c.restore();}else human(c,0,0,obj.dynamic?obj.face:Math.sin(obj.x)>0?1:-1,!!obj.moving,t,obj.character,false,false,obj.crouch||obj.pose==='injured',false);if(Math.abs(obj.x-p.x)<150){const name=DATA.dialogues[obj.character]?.[0]?.[0]||obj.character;text(c,name.toUpperCase()+(obj.dynamic?' · '+(obj.mode==='wait'?'ATTEND':'SUIT'):''),0,-82,9,'#c5cbb2','center');} }
++  if(ent.kind==='npc'){ellipse(c,0,2,22,5,'#00070baa');if(obj.pose==='rest'){c.save();c.translate(0,r.id==='narcissus'?-22:r.id==='medical'?-14:-2);patient(c,obj.character);c.restore();}else human(c,0,0,obj.dynamic?obj.face:Math.sin(obj.x)>0?1:-1,!!obj.moving,t,obj.character,false,false,obj.crouch||obj.pose==='injured',false,obj.alert>0);if(Math.abs(obj.x-p.x)<150){const name=DATA.dialogues[obj.character]?.[0]?.[0]||obj.character;text(c,name.toUpperCase()+(obj.dynamic?' · '+(obj.mode==='wait'?'ATTEND':obj.alert>0?'PRUDENCE':'SUIT'):''),0,-82,9,'#c5cbb2','center');} }
+   if(ent.kind==='enemy'){ellipse(c,0,1,26,5,'#00090a88');c.save();if(obj.attack>0){c.translate(-obj.dir*9,2);c.rotate(-obj.dir*.08);}alien(c,0,0,obj,t);c.restore();if(obj.attack>0){line(c,[[-28,-105],[0,-115],[28,-105]],'#eac196',2);text(c,'!',0,-121,17,'#f4d5a0','center');}}
+-  if(ent.kind==='player'){if(p.hidden)c.globalAlpha=.27;ellipse(c,2,2,21,5,'#00070bba');human(c,0,0,p.face,options.moving,t,DATA.chapters[s.chapter].actor,s.invuln>0,s.flags.cellCarried,p.crouch,s.flags.torchReady&&!s.flags.carryRipley&&!p.hidden);if(s.flags.carryRipley){c.save();c.translate(p.face*10,-29);c.scale(p.face,.9);patient(c,'ripley');c.restore();}if(s.flame>0){const lg=c.createLinearGradient(24*p.face,-37,200*p.face,-37);lg.addColorStop(0,'#f9e6a2dd');lg.addColorStop(.3,'#efa962bb');lg.addColorStop(1,'#e97e2b00');poly(c,[[34*p.face,-40],[205*p.face,-68],[185*p.face,-14],[34*p.face,-35]],lg);glow(c,98*p.face,-34,90,'#f6b45a4a');}}
++  if(ent.kind==='player'){if(p.hidden)c.globalAlpha=.27;ellipse(c,2,2,21,5,'#00070bba');human(c,0,0,p.face,options.moving,t,DATA.chapters[s.chapter].actor,s.invuln>0,s.flags.cellCarried,p.crouch,s.flags.torchReady&&!s.flags.carryRipley&&!p.hidden,s.listening);if(s.flags.carryRipley){c.save();c.translate(p.face*10,-29);c.scale(p.face,.9);patient(c,'ripley');c.restore();}if(s.flame>0){const lg=c.createLinearGradient(24*p.face,-37,200*p.face,-37);lg.addColorStop(0,'#f9e6a2dd');lg.addColorStop(.3,'#efa962bb');lg.addColorStop(1,'#e97e2b00');poly(c,[[34*p.face,-40],[205*p.face,-68],[185*p.face,-14],[34*p.face,-35]],lg);glow(c,98*p.face,-34,90,'#f6b45a4a');}}
+   if(ent.kind==='decoy'){rect(c,-6,-7,12,7,'#8d9d7b','#ddcb9e');c.beginPath();c.ellipse(0,0,22+(Math.sin(t*4)+1)*18,5,0,0,Math.PI*2);c.strokeStyle='#d4c37a70';c.stroke();}
+   c.restore();
+  }
+@@ -219,7 +220,8 @@
+  for(let i=0;i<8;i++){const x=i*230-(cam*1.12)%230;if(['derelict','hive','cavern','surface'].includes(r.style)){rock(c,x,661,160,32,i+392,'#0b181b');}else{rect(c,x,624,160,24,'#081315');rect(c,x+5,626,150,2,'#49645970');}}
+  const v=c.createRadialGradient(W/2,H*.54,260,W/2,H*.5,810);v.addColorStop(0,'#00000000');v.addColorStop(1,'#00040bb0');rect(c,0,0,W,H,v);
+  if(['surface','mine','cavern'].includes(r.style))for(let i=0;i<30;i++){const x=(rand(i+101)*W+ambientTime*(r.style==='surface'?17:2)+W)%W,y=rand(i+121)*H;rect(c,x,y,r.style==='surface'?8:2,1,'#d7ceac2f');}
+- const near=nearby(s);if(near&&!options.menu){const x=(p.x-cam)*Z,y=415+(p.y-25)*.91+27;const label=near.kind==='objective'?'MAINTENIR E':near.kind==='activity'?(near.item.kind==='hide'?(p.hidden?'E · SORTIR / MOUVEMENT':'E · SE CACHER'):'E · '+near.item.title.toUpperCase()):near.kind==='crew'?'E · PARLER':near.locked?'PASSAGE FERMÉ':'E · '+ROOM[near.item.target].name.toUpperCase();if(s.contrast){c.font='12px monospace';const tw=Math.min(W-18,c.measureText(label).width+28);rect(c,Math.max(4,Math.min(W-tw-4,x-tw/2)),y-16,tw,24,'#061017ed','#d8c78c');}text(c,label,Math.max(120,Math.min(W-120,x)),y,s.contrast?12:10,near.locked?'#b2b09c':'#e8d4a7','center');if(s.hold>0&&['objective','activity','crew'].includes(near.kind)){rect(c,x-40,y+6,80,3,'#1b312b');rect(c,x-40,y+6,80*Math.min(1,s.hold/(near.item.hold||.35)),3,'#e6cb88');}}
++ if(s.listening&&!options.menu)drawListening(c,s);
++ const near=nearby(s);if(near&&!options.menu&&!s.listening){const x=(p.x-cam)*Z,y=415+(p.y-25)*.91+27;const label=near.kind==='objective'?'MAINTENIR E':near.kind==='activity'?(near.item.kind==='hide'?(p.hidden?'E · SORTIR / MOUVEMENT':'E · SE CACHER'):'E · '+near.item.title.toUpperCase()):near.kind==='crew'?'E · PARLER':near.locked?'PASSAGE FERMÉ':'E · '+ROOM[near.item.target].name.toUpperCase();if(s.contrast){c.font='12px monospace';const tw=Math.min(W-18,c.measureText(label).width+28);rect(c,Math.max(4,Math.min(W-tw-4,x-tw/2)),y-16,tw,24,'#061017ed','#d8c78c');}text(c,label,Math.max(120,Math.min(W-120,x)),y,s.contrast?12:10,near.locked?'#b2b09c':'#e8d4a7','center');if(s.hold>0&&['objective','activity','crew'].includes(near.kind)){rect(c,x-40,y+6,80,3,'#1b312b');rect(c,x-40,y+6,80*Math.min(1,s.hold/(near.item.hold||.35)),3,'#e6cb88');}}
+  // Restrained signage occupies the architectural wall, never the gameplay floor.
+  text(c,r.deck+'  /  '+r.name.toUpperCase(),34,114,13,palette[r.style][2]);text(c,r.zone==='marion'?'DSMO MARION  ·  INDUSTRIAL OPERATIONS':r.zone==='derelict'?'SIGNAL PERDU':r.zone==='mine'?'LV-178  /  CONCESSION MINIÈRE':'LV-178  /  NAVIGATION LOCALE',34,135,9,'#96a890');
+ }
+@@ -351,3 +353,41 @@
+   text(c,status.label,0,-98,8,'#d5c999','center');
+  }
+ }
++
++
++function drawEvidence(c,s,r,cam){
++ for(const q of s.residue[r.id]||[]){
++  const x=(q.x-cam)*Z,y=415+(q.y-25)*.91,scale=(.91+q.y/700)*Z;
++  if(x<-100||x>W+100)continue;c.save();c.translate(x,y);c.scale(scale,scale);
++  if(q.kind==='scorch'){
++   ellipse(c,0,1,38,9,'#01050799');
++   for(let i=0;i<14;i++){const dx=(rand(i+q.x)-.5)*74,dy=(rand(i+q.y)-.5)*12;line(c,[[dx,dy],[dx+7,dy+2]],i%3?'#111816cc':'#89816b55',1);}
++  }else if(q.kind==='decoy'){
++   ellipse(c,0,2,12,3,'#02070bbc');poly(c,[[-7,0],[-4,-7],[6,-6],[8,0]],'#5b6358','#9da18a');
++   line(c,[[-4,-5],[4,-5]],'#383e38',2);line(c,[[6,-3],[15,-9],[21,-7]],'#73766b',1);
++  }else{
++   for(let i=0;i<4;i++)line(c,[[-13+i*9,-82+i*3],[-20+i*10,-43+i*2],[-17+i*10,-28]],'#c9c2a399',1.6);
++   for(let i=0;i<5;i++)poly(c,[[-20+i*10,3],[-17+i*10,-2],[-14+i*10,2]],'#7b8171');
++  }c.restore();
++ }
++}
++function drawListening(c,s){
++ const report=listenReport(s),width=Math.min(340,W-36),x=(W-width)/2,y=184;
++ rect(c,x,y,width,report.signals.length?105:86,'#07151ced','#9da786');
++ text(c,'ÉCOUTE / MAINTENIR V',x+17,y+21,10,'#d9cfa9');
++ const strength=report.masked?.4:Math.max(.05,...report.signals.map(q=>q.strength));
++ for(let i=0;i<22;i++){const h=(s.reducedMotion?8:4+Math.abs(Math.sin(s.elapsed*3+i*.8))*20)*strength;rect(c,x+16+i*(width-32)/22,y+43-h,3,h,'#a8c0a799');}
++ if(report.signals.length){report.signals.slice(0,2).forEach((q,i)=>text(c,(q.direction==='gauche'?'← ':q.direction==='droite'?'→ ':'↔ ')+q.label.toUpperCase(),x+17,y+66+i*20,10,'#dad6b6'));}
++ else {const label=report.masked?'LE MOTEUR MASQUE LES PAS':'AUCUN BRUIT DISTINCT';text(c,label,x+17,y+66,10,'#b8c7b1');}
++}
++
++/** Interactive foreground objects fade on projected overlap, not only generic props. */
++export function occlusionAlpha(s,kind,obj){
++ if(!['prop','activity','goal'].includes(kind)||obj.y<=s.player.y)return 1;
++ if(kind==='activity'&&obj.kind==='hide'&&s.player.hidden===obj.id)return 1;
++ const widths={light:54,machine:82,hide:68,cache:43,archive:20,valve:32};
++ const width=kind==='prop'?(PROP[obj.type]?.width||50):kind==='activity'?(widths[obj.kind]||54):90;
++ if(Math.abs(obj.x-s.player.x)>width*.6+18)return 1;
++ if((obj.y-s.player.y)*.91>125)return 1;
++ return .3;
++}
+--- v0.4/src/oth-v1/oth-ui.css
++++ v0.5/src/oth-v1/oth-ui.css
+@@ -25,3 +25,9 @@
+ }
+ /* V0.4 service readout: panels only, never a remote action. */
+ .service-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.service-card{border:1px solid #75846d55;padding:22px;background:linear-gradient(145deg,#1b3230,#102125)}.service-card small,.service-card span{font:10px 'Courier New',monospace;letter-spacing:.1em;color:#aaa98a}.service-card h3{font-size:18px;font-weight:400;margin:14px 0}.service-card strong{font:12px 'Courier New',monospace;color:#e0c68a}.service-card p{font-size:13px!important}.service-explainer{max-width:660px}.oth-presence{max-width:230px;line-height:1.6}.oth-touch button[data-touch=b]{border-color:#ad9768!important}@media(max-width:600px){.service-grid{grid-template-columns:1fr}.oth-touch>div{gap:2px}.oth-touch button{min-width:32px!important;padding:8px!important}}
++
++/* V0.5 listening is a held action, not a pause or a minimap. */
++.oth-touch>.listen-touch{position:absolute;right:16px;bottom:68px;pointer-events:auto!important;font:10px 'Courier New',monospace!important;border-color:#a39b7a!important;background:#142629e8!important;min-width:92px!important}
++#oth-root[data-listening="true"] .listen-touch{background:#b6af88!important;color:#101c20!important}
++.oth-dialog h3{font-size:18px;font-weight:400;color:#d4c79c;margin-top:28px}
++@media(max-height:470px) and (min-width:601px){.oth-touch>.listen-touch{bottom:53px}}
+--- v0.4/src/oth-v1/oth-ui.js
++++ v0.5/src/oth-v1/oth-ui.js
+@@ -1,23 +1,23 @@
+ import {DATA} from './oth-data.js';
+-import {ROOM,createState,currentObjective,step,serialize,restore,nearby,route,activeEdges,roomWorld,resolvePuzzle,crewInRoom,activeHazards,commandCompanion,syncCompanion,stealthStatus,chart,doorStatus,serviceStatus,incomingThreats} from './oth-engine.js';
++import {ROOM,createState,currentObjective,step,serialize,restore,nearby,route,activeEdges,roomWorld,resolvePuzzle,crewInRoom,activeHazards,commandCompanion,syncCompanion,stealthStatus,chart,doorStatus,serviceStatus,incomingThreats,listenReport,soundHistory} from './oth-engine.js';
+ import {draw,fitCanvas} from './oth-render.js';
+ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ export function mount(root){
+- let state=createState(),mode='title',keys=new Set(),last=0,frame=0,panel='',lastObjective='',saveWarning=false,audio=null,lastSound=0,saveClock=0,checkpoint=null;
+- const readSave=()=>{try{const raw=localStorage.getItem(DATA.saveKey);if(raw&&JSON.parse(raw).schema<4&&!localStorage.getItem(DATA.saveKey+':backup-before-v4'))localStorage.setItem(DATA.saveKey+':backup-before-v4',raw);return restore(raw);}catch{return null;}};
++ let state=createState(),mode='title',keys=new Set(),last=0,frame=0,panel='',lastObjective='',saveWarning=false,audio=null,lastSound=0,saveClock=0,checkpoint=null,lastCue=0,lastListenCue=0,cuesPlayed=0;
++ const readSave=()=>{try{const raw=localStorage.getItem(DATA.saveKey);if(raw&&JSON.parse(raw).schema<5&&!localStorage.getItem(DATA.saveKey+':backup-before-v5'))localStorage.setItem(DATA.saveKey+':backup-before-v5',raw);return restore(raw);}catch{return null;}};
+  const cached=readSave();if(cached)state=cached;
+- root.innerHTML=`<header class="oth-head"><div class="oth-location"><strong id="oth-ship">DSMO MARION</strong><span id="oth-roomcode">A-01 · PASSERELLE</span></div><div class="oth-objective"><small id="oth-chapter"></small><strong id="oth-goal"></strong></div><nav aria-label="Carnet de bord"><button data-panel="map">Plan [M]</button><button data-panel="codex">Carnet [J]</button><button data-panel="crew" class="crew-nav">Équipage</button><button data-panel="pause" aria-label="Mettre en pause">II</button></nav></header><main class="oth-stage"><canvas class="oth-canvas" width="1280" height="650" tabindex="0" aria-label="Exploration du Marion et de LV-178"></canvas><div class="oth-touch" aria-label="Commandes tactiles"><div class="touch-dir"><button class="up" data-touch="z" aria-label="Aller au fond">↑</button><button class="left" data-touch="q" aria-label="Aller à gauche">←</button><button class="down" data-touch="s" aria-label="Aller au premier plan">↓</button><button class="right" data-touch="d" aria-label="Aller à droite">→</button></div><div><button data-touch="c">C</button><button data-touch="b" aria-label="Verrou de cloison">B</button><button data-action="companion" aria-label="Suivre ou attendre">G</button><button data-touch="f">Feu</button><button data-touch="r">Leurre</button><button data-touch="e">E</button></div></div></main><footer class="oth-foot"><div class="oth-meters"><span class="oth-meter">VITALITÉ<b id="oth-hp"></b></span><span class="oth-meter">RÉSERVOIR<b id="oth-fuel"></b></span><span class="oth-meter">LEURRES<b id="oth-decoys"></b></span></div><div class="oth-foot-msg"><div id="oth-message" aria-live="polite"></div><small id="oth-controls">ZQSD / WASD · Maj courir · C s’accroupir · E agir · F flamme · R leurre · L lampe · H soin · G compagnon · B verrou · K services</small></div><div class="oth-presence" id="oth-presence">AUCUN CONTACT</div></footer><section class="oth-title" aria-label="Menu de la chronique"><div class="oth-title-content"><p class="oth-franchise">ALIEN</p><p class="eyebrow">CHRONIQUE DU MARION · LV-178</p><h1>HORS<br>DES OMBRES</h1><p class="subtitle">LA SORTIE DES PROFONDEURS</p><p class="tagline">Le secours est arrivé.<br>Ce n’est pas forcément une bonne nouvelle.</p><div class="oth-title-actions"><button class="primary" data-action="continue">${cached?'Reprendre la chronique':'Entrer dans le Marion'}</button><button data-panel="pause">Commandes & réglages</button>${cached?'<button data-action="new">Nouvelle chronique</button>':''}</div></div><div class="oth-title-location">DSMO MARION<br>ORBITE DE LV-178<br>RELAIS LOCAL SEULEMENT</div><div class="oth-title-footer"><span>TANTALUS FRONTIER / ARCHIVES</span><span>UNE ADAPTATION NON OFFICIELLE DE L’ŒUVRE DE TIM LEBBON</span></div></section><dialog class="oth-dialog" aria-labelledby="oth-dialog-title"></dialog>`;
++ root.innerHTML=`<header class="oth-head"><div class="oth-location"><strong id="oth-ship">DSMO MARION</strong><span id="oth-roomcode">A-01 · PASSERELLE</span></div><div class="oth-objective"><small id="oth-chapter"></small><strong id="oth-goal"></strong></div><nav aria-label="Carnet de bord"><button data-panel="map">Plan [M]</button><button data-panel="codex">Carnet [J]</button><button data-panel="crew" class="crew-nav">Équipage</button><button data-panel="pause" aria-label="Mettre en pause">II</button></nav></header><main class="oth-stage"><canvas class="oth-canvas" width="1280" height="650" tabindex="0" aria-label="Exploration du Marion et de LV-178"></canvas><div class="oth-touch" aria-label="Commandes tactiles"><button class="listen-touch" data-touch="v" aria-label="Écouter sans bouger">Écouter [V]</button><div class="touch-dir"><button class="up" data-touch="z" aria-label="Aller au fond">↑</button><button class="left" data-touch="q" aria-label="Aller à gauche">←</button><button class="down" data-touch="s" aria-label="Aller au premier plan">↓</button><button class="right" data-touch="d" aria-label="Aller à droite">→</button></div><div><button data-touch="c">C</button><button data-touch="b" aria-label="Verrou de cloison">B</button><button data-action="companion" aria-label="Suivre ou attendre">G</button><button data-touch="f">Feu</button><button data-touch="r">Leurre</button><button data-touch="e">E</button></div></div></main><footer class="oth-foot"><div class="oth-meters"><span class="oth-meter">VITALITÉ<b id="oth-hp"></b></span><span class="oth-meter">RÉSERVOIR<b id="oth-fuel"></b></span><span class="oth-meter">LEURRES<b id="oth-decoys"></b></span></div><div class="oth-foot-msg"><div id="oth-message" aria-live="polite"></div><small id="oth-controls">ZQSD / WASD · Maj courir · C s’accroupir · E agir · F flamme · R leurre · L lampe · H soin · G compagnon · B verrou · V écouter · K services</small></div><div class="oth-presence" id="oth-presence">AUCUN CONTACT</div></footer><section class="oth-title" aria-label="Menu de la chronique"><div class="oth-title-content"><p class="oth-franchise">ALIEN</p><p class="eyebrow">CHRONIQUE DU MARION · LV-178</p><h1>HORS<br>DES OMBRES</h1><p class="subtitle">LA SORTIE DES PROFONDEURS</p><p class="tagline">Le secours est arrivé.<br>Ce n’est pas forcément une bonne nouvelle.</p><div class="oth-title-actions"><button class="primary" data-action="continue">${cached?'Reprendre la chronique':'Entrer dans le Marion'}</button><button data-panel="pause">Commandes & réglages</button>${cached?'<button data-action="new">Nouvelle chronique</button>':''}</div></div><div class="oth-title-location">DSMO MARION<br>ORBITE DE LV-178<br>RELAIS LOCAL SEULEMENT</div><div class="oth-title-footer"><span>TANTALUS FRONTIER / ARCHIVES</span><span>UNE ADAPTATION NON OFFICIELLE DE L’ŒUVRE DE TIM LEBBON</span></div></section><dialog class="oth-dialog" aria-labelledby="oth-dialog-title"></dialog>`;
+  const canvas=root.querySelector('canvas'),title=root.querySelector('.oth-title'),dialog=root.querySelector('dialog'),el=id=>root.querySelector('#'+id);
+  const setText=(id,value)=>{const node=el(id);if(node&&node.textContent!==String(value))node.textContent=value;};
+  function save(){if(state.dead)return;saveClock=0;try{localStorage.setItem(DATA.saveKey,serialize(state));state.dirty=false;saveWarning=false;}catch{saveWarning=true;state.dirty=false;}}
+- function close(){state.reading=null;if(dialog.open)dialog.close();panel='';keys.clear();if(mode==='playing')canvas.focus({preventScroll:true});}
++ function close(){state.reading=null;state.listening=false;state.listenHeld=0;if(dialog.open)dialog.close();panel='';keys.clear();if(mode==='playing'){canvas.focus({preventScroll:true});startAudio();}}
+  function show(type,body,eyebrow='CARNET DE BORD'){
+-  keys.clear();panel=type;dialog.innerHTML=`<header><div><p class="eyebrow">${esc(eyebrow)}</p><h2 id="oth-dialog-title">${esc(({pause:'À l’abri, pour un instant',map:'Plan du site',codex:'Carnet du Marion',journal:'Dernières transmissions',puzzle:'Commande locale',dead:'Contact perdu',end:'Dernière transmission',new:'Recommencer la chronique',reading:'Document de bord',crew:'Équipage du Marion',services:'Services de la pièce'})[type]||type)}</h2></div>${!['dead','end','puzzle'].includes(type)?'<button data-close aria-label="Fermer">×</button>':''}</header><div class="dialog-body">${body}</div>`;
++  keys.clear();state.listening=false;state.listenHeld=0;audio?.suspend().catch(()=>{});panel=type;dialog.innerHTML=`<header><div><p class="eyebrow">${esc(eyebrow)}</p><h2 id="oth-dialog-title">${esc(({pause:'À l’abri, pour un instant',map:'Plan du site',codex:'Carnet du Marion',journal:'Dernières transmissions',puzzle:'Commande locale',dead:'Contact perdu',end:'Dernière transmission',new:'Recommencer la chronique',reading:'Document de bord',crew:'Équipage du Marion',services:'Services de la pièce',evidence:'Empreintes du passage'})[type]||type)}</h2></div>${!['dead','end','puzzle'].includes(type)?'<button data-close aria-label="Fermer">×</button>':''}</header><div class="dialog-body">${body}</div>`;
+   if(!dialog.open)dialog.showModal();dialog.scrollTop=0;
+  }
+  function pause(){
+-  const controls=[['ZQSD / WASD / flèches','Marcher · profondeur'],['Maj / C','Courir / s’accroupir'],['E maintenu','Utiliser une commande'],['F / R','Flamme / leurre'],['L / H','Lampe / soin'],['G','Compagnon : suivre / attendre'],['B maintenu','Verrouiller / libérer une cloison'],['K','Services locaux (relevé)'],['M / J / Échap','Plan / carnet / pause']];
+-  show('pause',`<p>La simulation est arrêtée pendant la lecture du carnet. Les travées se parcourent en profondeur ; les couloirs étroits gardent une vue latérale.</p><div class="controls-grid">${controls.map(([k,t])=>`<div class="control"><kbd>${k}</kbd><span>${t}</span></div>`).join('')}</div><div class="field"><label for="oth-difficulty">Conditions de survie</label><select id="oth-difficulty"><option value="normal" ${state.difficulty==='normal'?'selected':''}>Survie</option><option value="assisted" ${state.difficulty==='assisted'?'selected':''}>Exploration accompagnée</option></select></div><div class="field"><label for="oth-sound">Ambiance et signaux sonores</label><input id="oth-sound" type="checkbox" ${state.sound?'checked':''}></div><div class="field"><label for="oth-motion">Réduire les animations ambiantes</label><input id="oth-motion" type="checkbox" ${state.reducedMotion?'checked':''}></div><div class="field"><label for="oth-contrast">Renforcer la lisibilité des interactions</label><input id="oth-contrast" type="checkbox" ${state.contrast?'checked':''}></div><p class="hint">Les interventions de maintenance conservent leurs réglages lorsque vous fermez le panneau. Le son est facultatif. Aucun dialogue enregistré ni extrait sonore des films n’est utilisé. Soins restants : ${state.player.kits}.</p><div class="button-row"><button class="primary" data-action="resume">${mode==='title'?'Entrer dans le Marion':'Reprendre'}</button><button data-action="save">Sauvegarder</button><button data-action="export-save">Exporter le carnet</button><button data-action="import-save">Importer un carnet</button><input type="file" id="oth-import" accept=".json,application/json" hidden><button data-panel="journal">Journal</button><button data-panel="services">Services locaux [K]</button><button data-action="title">Menu principal</button><button data-action="exit">Retour au Tantalus</button></div>`,'SYSTÈMES DE BORD');
++  const controls=[['ZQSD / WASD / flèches','Marcher · profondeur'],['Maj / C','Courir / s’accroupir'],['E maintenu','Utiliser une commande'],['F / R','Flamme / leurre'],['L / H','Lampe / soin'],['G','Compagnon : suivre / attendre'],['B maintenu','Verrouiller / libérer une cloison'],['V maintenu','Écouter, sans arrêter la simulation'],['K','Services locaux (relevé)'],['M / J / Échap','Plan / carnet / pause']];
++  show('pause',`<p>La simulation est arrêtée pendant la lecture du carnet. Les travées se parcourent en profondeur ; les couloirs étroits gardent une vue latérale.</p><div class="controls-grid">${controls.map(([k,t])=>`<div class="control"><kbd>${k}</kbd><span>${t}</span></div>`).join('')}</div><div class="field"><label for="oth-difficulty">Conditions de survie</label><select id="oth-difficulty"><option value="normal" ${state.difficulty==='normal'?'selected':''}>Survie</option><option value="assisted" ${state.difficulty==='assisted'?'selected':''}>Exploration accompagnée</option></select></div><div class="field"><label for="oth-sound">Ambiance et signaux sonores</label><input id="oth-sound" type="checkbox" ${state.sound?'checked':''}></div><div class="field"><label for="oth-motion">Réduire les animations ambiantes</label><input id="oth-motion" type="checkbox" ${state.reducedMotion?'checked':''}></div><div class="field"><label for="oth-contrast">Renforcer la lisibilité des interactions</label><input id="oth-contrast" type="checkbox" ${state.contrast?'checked':''}></div><p class="hint">Les interventions de maintenance conservent leurs réglages lorsque vous fermez le panneau. Le son est facultatif. Aucun dialogue enregistré ni extrait sonore des films n’est utilisé. Soins restants : ${state.player.kits}.</p><div class="button-row"><button class="primary" data-action="resume">${mode==='title'?'Entrer dans le Marion':'Reprendre'}</button><button data-action="save">Sauvegarder</button><button data-action="export-save">Exporter le carnet</button><button data-action="import-save">Importer un carnet</button><input type="file" id="oth-import" accept=".json,application/json" hidden><button data-panel="journal">Journal</button><button data-panel="evidence">Traces & sons</button><button data-panel="services">Services locaux [K]</button><button data-action="title">Menu principal</button><button data-action="exit">Retour au Tantalus</button></div>`,'SYSTÈMES DE BORD');
+  }
+  function services(){
+   const r=ROOM[state.room],items=DATA.interactables.filter(a=>a.room===r.id&&['light','machine'].includes(a.kind));
+@@ -42,7 +42,7 @@
+  function codex(){
+   show('codex',`<p class="hint">${state.records.length} / ${DATA.interactables.filter(a=>a.kind==='archive').length} transcriptions retrouvées. Les documents se récupèrent sur place.</p><div class="oth-codex-tools"><input id="oth-search" type="search" aria-label="Rechercher dans le carnet" placeholder="Un lieu, un équipement, une trace…"><select id="oth-category" aria-label="Catégorie"><option value="">Tout le carnet</option>${['Équipage','Lieux','Matériel','Survie','Traces'].map(c=>`<option>${c}</option>`).join('')}</select></div><div class="oth-codex-grid" id="oth-codex-list"></div>`,'ARCHIVES PERSONNELLES');renderCodex();
+  }
+- function renderCodex(){const search=el('oth-search')?.value.toLocaleLowerCase('fr')||'',cat=el('oth-category')?.value||'';const entries=DATA.codex.filter(e=>(!e.unlockRoom||state.visited.includes(e.unlockRoom))&&(!e.unlockRecord||state.records.includes(e.unlockRecord))&&(!cat||e.category===cat)&&(!search||[e.title,e.summary,e.text].join(' ').toLocaleLowerCase('fr').includes(search)));el('oth-codex-list').innerHTML=entries.length?entries.map(e=>`<article class="oth-codex-card"><small>${esc(e.category.toUpperCase())}</small><h3>${esc(e.title)}</h3><p>${esc(e.summary)}</p><p class="detail">${esc(e.text)}</p></article>`).join(''):'<p>Aucune note ne correspond à cette recherche.</p>';}
++ function renderCodex(){const search=el('oth-search')?.value.toLocaleLowerCase('fr')||'',cat=el('oth-category')?.value||'';const entries=DATA.codex.filter(e=>(!e.unlockRoom||state.visited.includes(e.unlockRoom))&&(!e.unlockRecord||state.records.includes(e.unlockRecord))&&(!cat||e.category===cat)&&(!search||[e.title,e.summary,e.text].join(' ').toLocaleLowerCase('fr').includes(search)));el('oth-codex-list').innerHTML=entries.length?entries.map(e=>`<article class="oth-codex-card" data-codex-id="${esc(e.id)}"><small>${esc(e.category.toUpperCase())}</small><h3>${esc(e.title)}</h3><p>${esc(e.summary)}</p><p class="detail">${esc(e.text)}</p></article>`).join(''):'<p>Aucune note ne correspond à cette recherche.</p>';}
+  function crew(){
+   const lost=new Set(DATA.storyEvents.filter(e=>e.at<=state.completed.length).flatMap(e=>e.lost||[])),hurt=new Set(DATA.storyEvents.filter(e=>e.at<=state.completed.length).flatMap(e=>e.injured||[]));
+   const names={jordan:'Lucy Jordan',hoop:'Chris « Hoop » Hooper',ripley:'Ellen Ripley',baxter:'Josh Baxter',kasyanov:'Kasyanov',sneddon:'Karen Sneddon',lachance:'Lachance',garcia:'Garcia',welford:'Welford',powell:'Powell'};
+@@ -56,10 +56,16 @@
+   else body=`<div class="work-plaque">${p.type==='pressure'?'ZONE DE PRESSION':'FRÉQUENCE REPÈRE'} <strong>${p.target} ± ${p.tolerance}</strong></div><div class="work-gauge"><span class="safe-zone" style="left:${p.target-p.tolerance}%;width:${p.tolerance*2}%"></span><span class="gauge-needle" style="left:${p.progress.value}%"></span>${Array.from({length:11},(_,i)=>`<i style="left:${i*10}%">${i*10}</i>`).join('')}</div><p class="gauge-value">${p.progress.value} <small>${p.type==='pressure'?'pression locale':'porteuse'}</small></p><div class="work-commands"><button data-choice="minus">− 5</button><button data-choice="plus">+ 5</button><button class="primary" data-choice="commit">${p.type==='pressure'?'Verrouiller':'Transmettre'}</button></div>`;
+   show('puzzle',`<p>${esc(p.prompt)}</p>${body}<p class="work-error" role="status">${esc(p.error||'')}</p><p class="hint">Échap revient à la salle. Vos réglages sont conservés ; aucune pénalité de lecture.</p>`,p.title.toUpperCase());
+  }
++ function evidence(){
++  const rows=soundHistory(state).slice().reverse();
++  const traces=Object.entries(state.residue).filter(([room])=>state.visited.includes(room));
++  const labels={decoy:'Boîtier épuisé',scorch:'Trace de chaleur',scrape:'Griffures de cloison'};
++  show('evidence',`<p>Vos émissions sonores récentes, pas un relevé des créatures. Aucune ligne ne confirme que vous avez été entendu.</p><h3>Signaux produits</h3>${rows.length?rows.map(q=>`<div class="oth-journal-entry"><small>${Math.floor(q.at/60)}:${String(Math.floor(q.at%60)).padStart(2,'0')} · ${esc(q.roomLabel)}</small><p>${esc(q.label)}</p></div>`).join(''):'<p>Aucun signal consigné.</p>'}<h3>Traces au sol</h3><div class="service-grid">${traces.map(([room,list])=>`<article class="service-card"><h3>${esc(ROOM[room].name)}</h3>${Object.entries(labels).filter(([kind])=>list.some(q=>q.kind===kind)).map(([kind,label])=>`<p>${esc(label)} · ${list.filter(q=>q.kind===kind).length}</p>`).join('')}</article>`).join('')}</div><p class="hint">Les traces sont des repères de terrain, pas des ressources à récupérer. Douze traces au maximum par pièce.</p>`,'JOURNAL DE TERRAIN');
++ }
+  function journal(){show('journal',state.journal.length?state.journal.slice().reverse().map(j=>`<div class="oth-journal-entry"><small>${esc(DATA.chapters[j.chapter].title)}</small><p>${esc(j.text)}</p></div>`).join(''):'<p>Le carnet attend votre première intervention.</p>','TRANSMISSIONS');}
+- function openPanel(type){if(type==='pause')pause();if(type==='map')map();if(type==='codex')codex();if(type==='journal')journal();if(type==='crew')crew();if(type==='services')services();}
++ function openPanel(type){if(type==='pause')pause();if(type==='map')map();if(type==='codex')codex();if(type==='journal')journal();if(type==='crew')crew();if(type==='services')services();if(type==='evidence')evidence();}
+  function begin(){startAudio();mode='playing';title.hidden=true;close();state.noticeTime=6;canvas.focus({preventScroll:true});}
+- function changeState(s){state=s;checkpoint=serialize(s);lastObjective='';state.dirty=true;try{localStorage.setItem(DATA.saveKey+':checkpoint-v2',checkpoint);}catch{}}
++ function changeState(s){state=s;lastCue=state.soundSeq;checkpoint=serialize(s);lastObjective='';state.dirty=true;try{localStorage.setItem(DATA.saveKey+':checkpoint-v2',checkpoint);}catch{}}
+  function newGame(){if(state.completed.length){show('new','<p>La sauvegarde de cette chronique sera remplacée. Les données de Tantalus Frontier et des autres archives ne sont pas modifiées.</p><div class="button-row"><button data-close>Conserver la progression</button><button class="primary" data-action="confirm-new">Recommencer</button></div>');}else{changeState(createState(state.difficulty));begin();}}
+  root.addEventListener('click',event=>{
+   const b=event.target.closest('button');if(!b)return;
+@@ -77,10 +83,10 @@
+   if(a==='retry'){let next=checkpoint?restore(checkpoint):null;try{next=next||restore(localStorage.getItem(DATA.saveKey+':checkpoint-v2'));}catch{}next=next||readSave()||createState(state.difficulty);next.player.hp=Math.max(70,next.player.hp);next.dead=false;next.invuln=3;changeState(next);begin();}
+   if(a==='exit'){save();const u=new URL(location.href);if(u.searchParams.get('from')==='tantalus')location.href='/index.html';else{mode='title';title.hidden=false;close();}}
+  });
+- root.addEventListener('change',async event=>{if(event.target.id==='oth-import'){const file=event.target.files?.[0];if(!file)return;const restored=file.size<=180000?restore(await file.text()):null;if(!restored){const hint=dialog.querySelector('.hint');if(hint)hint.textContent='Ce carnet est invalide. La progression actuelle est conservée.';return;}changeState(restored);save();begin();return;}if(event.target.id==='oth-difficulty'){state.difficulty=event.target.value;save();}if(event.target.id==='oth-sound'){state.sound=event.target.checked;startAudio();save();}if(event.target.id==='oth-motion'){state.reducedMotion=event.target.checked;save();}if(event.target.id==='oth-contrast'){state.contrast=event.target.checked;save();}if(event.target.id==='oth-category')renderCodex();});
++ root.addEventListener('change',async event=>{if(event.target.id==='oth-import'){const file=event.target.files?.[0];if(!file)return;const restored=file.size<=180000?restore(await file.text()):null;if(!restored){const hint=dialog.querySelector('.hint');if(hint)hint.textContent='Ce carnet est invalide. La progression actuelle est conservée.';return;}changeState(restored);save();begin();return;}if(event.target.id==='oth-difficulty'){state.difficulty=event.target.value;save();}if(event.target.id==='oth-sound'){state.sound=event.target.checked;if(state.sound)startAudio();else audio?.suspend().catch(()=>{});save();}if(event.target.id==='oth-motion'){state.reducedMotion=event.target.checked;save();}if(event.target.id==='oth-contrast'){state.contrast=event.target.checked;save();}if(event.target.id==='oth-category')renderCodex();});
+  root.addEventListener('input',event=>{if(event.target.id==='oth-search')renderCodex();});
+  dialog.addEventListener('cancel',e=>{e.preventDefault();if(panel==='puzzle'){state.puzzle=null;}if(panel==='dead'||panel==='end')return;close();});
+- const gameplayKeys=new Set(['z','w','q','a','s','d','arrowleft','arrowright','arrowup','arrowdown','shift','c','e','f','r','h','l','g','b','k','m','j','escape',' ']);
++ const gameplayKeys=new Set(['z','w','q','a','s','d','arrowleft','arrowright','arrowup','arrowdown','shift','c','e','f','r','h','l','g','b','v','k','m','j','escape',' ']);
+  function keyDown(e){if(!root.isConnected)return;const k=e.key.toLowerCase();if(e.target.matches('input,select,textarea'))return;if(!gameplayKeys.has(k))return;
+   if(dialog.open){if(k==='escape'&&panel==='puzzle'){state.puzzle=null;close();e.preventDefault();}return;}
+   if(mode!=='playing')return;e.preventDefault();
+@@ -93,28 +99,42 @@
+   b.addEventListener('pointerdown',e=>{e.preventDefault();if(mode!=='playing'||dialog.open)return;b.setPointerCapture(e.pointerId);keys.add(b.dataset.touch);});
+   for(const name of ['pointerup','pointercancel','lostpointercapture'])b.addEventListener(name,()=>keys.delete(b.dataset.touch));
+  }
+- function input(){const has=(...k)=>k.some(k=>keys.has(k));return {x:(has('d','arrowright')?1:0)-(has('q','a','arrowleft')?1:0),y:(has('s','arrowdown')?1:0)-(has('z','w','arrowup')?1:0),sprint:has('shift'),crouch:has('c'),interact:has('e',' '),bulkhead:has('b'),fire:has('f'),decoy:has('r'),heal:has('h')};}
++ function input(){const has=(...k)=>k.some(k=>keys.has(k));return {x:(has('d','arrowright')?1:0)-(has('q','a','arrowleft')?1:0),y:(has('s','arrowdown')?1:0)-(has('z','w','arrowup')?1:0),sprint:has('shift'),crouch:has('c'),interact:has('e',' '),bulkhead:has('b'),fire:has('f'),decoy:has('r'),heal:has('h'),listen:has('v')};}
+  function startAudio(){if(!state.sound)return;try{if(!audio)audio=new(window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume().catch(()=>{});}catch{state.sound=false;}}
++ function playCue(kind,strength=.5,direction=0){
++  if(!audio||audio.state!=='running')return;
++  const now=audio.currentTime,osc=audio.createOscillator(),gain=audio.createGain();
++  const spec={machine:['sawtooth',49,.7],decoy:['square',810,.13],torch:['triangle',92,.24],steps:['triangle',112,.075],contact:['triangle',148,.11]}[kind]||['sine',100,.1];
++  osc.type=spec[0];osc.frequency.setValueAtTime(spec[1],now);osc.frequency.exponentialRampToValueAtTime(spec[1]*.6,now+spec[2]);
++  gain.gain.setValueAtTime(0,now);gain.gain.linearRampToValueAtTime(Math.max(.001,strength*.009),now+.012);gain.gain.exponentialRampToValueAtTime(.0001,now+spec[2]);
++  osc.connect(gain);const pan=audio.createStereoPanner?.();if(pan){pan.pan.value=Math.max(-.8,Math.min(.8,direction));gain.connect(pan);pan.connect(audio.destination);}else gain.connect(audio.destination);
++  osc.start(now);osc.stop(now+spec[2]+.02);osc.onended=()=>{osc.disconnect();gain.disconnect();pan?.disconnect();};cuesPlayed++;
++ }
++ function acousticAudio(){
++  if(!state.sound||mode!=='playing'||dialog.open||!audio)return;
++  for(const cue of state.soundField){if(cue.id<=lastCue)continue;lastCue=Math.max(lastCue,cue.id);if(cue.room!==state.room)continue;const dx=cue.x-state.player.x,d=Math.abs(dx);if(d<1000)playCue(cue.kind,(1-d/1000)*cue.volume,dx/600);}
++  if(state.listening&&audio.currentTime-lastListenCue>1){const report=listenReport(state),cue=report.signals[0];if(cue&&!report.masked){lastListenCue=audio.currentTime;playCue('contact',cue.strength,cue.direction==='gauche'?-.6:cue.direction==='droite'?.6:0);}}
++ }
+  function soundTick(danger){if(!state.sound||mode!=='playing'||dialog.open||!audio)return;const now=audio.currentTime;if(now-lastSound<(danger?.75:4))return;lastSound=now;const oscillator=audio.createOscillator(),gain=audio.createGain();oscillator.type='sine';oscillator.frequency.value=danger?390:62;gain.gain.setValueAtTime(0,now);gain.gain.linearRampToValueAtTime(danger?.014:.012,now+.04);gain.gain.exponentialRampToValueAtTime(.0001,now+(danger?.18:.9));oscillator.connect(gain);gain.connect(audio.destination);oscillator.start(now);oscillator.stop(now+1);}
+  function readout(){const r=ROOM[state.room],o=currentObjective(state),c=DATA.chapters[state.chapter];setText('oth-ship',({marion:'DSMO MARION',narcissus:'NARCISSUS',samson:'SAMSON',surface:'LV-178',mine:'LV-178',derelict:'ÉPAVE ENFOUIE'})[r.zone]);setText('oth-roomcode',r.deck+' · '+r.name.toUpperCase());setText('oth-chapter',`${String(state.chapter+1).padStart(2,'0')} / ${String(DATA.chapters.length).padStart(2,'0')}  —  ${c.title.toUpperCase()}  ·  ${c.actor==='ripley'?'RIPLEY':'HOOP'}`);setText('oth-goal',o?.label||'Transmission émise');setText('oth-hp',Math.ceil(state.player.hp));setText('oth-fuel',Math.floor(state.player.fuel));setText('oth-decoys',String(state.player.decoys).padStart(2,'0'));
+-  let hint=state.noticeTime>0?state.notice:o?.hint||'';if(state.story){const ev=DATA.storyEvents.find(e=>e.id===state.story.id);if(ev)hint=ev.speaker+' — '+ev.text;}if(state.flags.carryRipley)hint='Ripley portée · pas de sprint ni de flamme. '+hint;if(state.flags.cellCarried&&state.noticeTime<=0)hint='Cellule portée · sprint indisponible. '+hint;if(saveWarning)hint='Sauvegarde locale indisponible. '+hint;setText('oth-message',hint);
++  let hint=state.noticeTime>0?state.notice:o?.hint||'';if(state.story){const ev=DATA.storyEvents.find(e=>e.id===state.story.id);if(ev)hint=ev.speaker+' — '+ev.text;}if(state.flags.carryRipley)hint='Ripley portée · pas de sprint ni de flamme. '+hint;if(state.flags.cellCarried&&state.noticeTime<=0)hint='Cellule portée · sprint indisponible. '+hint;if(state.listening)hint='ÉCOUTE · '+listenReport(state).label+' — relâchez V pour bouger.';if(saveWarning)hint='Sauvegarde locale indisponible. '+hint;setText('oth-message',hint);
+   const es=roomWorld(state).enemies;const danger=es.some(e=>['hunt','windup'].includes(e.state)&&e.stun<=0);const n=es.reduce((m,e)=>Math.min(m,Math.abs(e.x-state.player.x)),Infinity);
+   const stealth=stealthStatus(state),comp=state.companion;
+-  const accompany=comp?(' · '+comp.name.toUpperCase()+' '+(comp.room!==state.room?'EN ATTENTE':comp.mode==='wait'?'ATTEND':comp.state==='hazard'?'ATTEND LA DÉTENTE':'SUIT')):'';
++  const accompany=comp?(' · '+comp.name.toUpperCase()+' '+(comp.room!==state.room?'EN ATTENTE':comp.mode==='wait'?'ATTEND':comp.state==='hazard'?'ATTEND LA DÉTENTE':comp.state==='watching'?'PRUDENCE':'SUIT')):'';
+   const incoming=incomingThreats(state);
+-  setText('oth-presence',(incoming.length?(incoming.some(a=>a.stage==='pressure')?'CLOISON SOUS PRESSION':'GRIFFES AU SEUIL'):danger?'CONTACT PROCHE':n<650?'BRUIT DANS LA SALLE':stealth.label)+accompany);el('oth-presence').classList.toggle('danger',danger||incoming.length>0);soundTick(danger||incoming.length>0);
++  setText('oth-presence',(incoming.length?(incoming.some(a=>a.stage==='pressure')?'CLOISON SOUS PRESSION':'GRIFFES AU SEUIL'):danger?'CONTACT PROCHE':n<650?'BRUIT DANS LA SALLE':stealth.label)+accompany);el('oth-presence').classList.toggle('danger',danger||incoming.length>0);soundTick(danger||incoming.length>0);acousticAudio();
+   if(o?.id!==lastObjective){lastObjective=o?.id||'';root.dataset.objective=lastObjective;keys.delete('e');if(!state.dead){checkpoint=serialize(state);try{localStorage.setItem(DATA.saveKey+':checkpoint-v2',checkpoint);}catch{}}}
+-  root.dataset.room=state.room;root.dataset.chapter=String(state.chapter);root.dataset.completed=String(state.completed.length);
++  root.dataset.listening=String(state.listening);root.dataset.room=state.room;root.dataset.chapter=String(state.chapter);root.dataset.completed=String(state.completed.length);
+  }
+  function tick(now){frame=requestAnimationFrame(tick);const dt=last?Math.min(.06,(now-last)/1000):0;last=now;const controls=input();
+   if(mode==='playing'&&!dialog.open){step(state,controls,dt);if(state.puzzle)workPanel();if(state.reading){const note=state.reading;show('reading',note.lines?note.lines.map(([who,line])=>`<div class="oth-dialogue-line"><small>${esc(who)}</small><p>${esc(line)}</p></div>`).join(''):`<p class="record-body">${esc(note.body)}</p>`,note.title.toUpperCase());setText('oth-dialog-title',note.title);}
+    if(state.dead&&panel!=='dead'){show('dead','<p>La liaison a été interrompue. Reprenez au dernier point enregistré.</p><div class="button-row"><button class="primary" data-action="retry">Reprendre au point de sauvegarde</button></div>','SIGNAL INTERROMPU');}
+    if(state.finished&&panel!=='end'){save();show('end',`<p>Le Narcissus s’éloigne. À bord du Samson, Hoop émet son appel de détresse.</p><p>Aucune réponse ne vient clore cette transmission.</p><div class="oth-map-summary">${state.completed.length} interventions enregistrées<br>${state.visited.length} lieux parcourus<br>${Math.floor(state.elapsed/60)} minutes dans la chronique</div><p class="hint">Le carnet conserve les derniers échanges. Aucun relais ne confirme encore la réception de l’appel.</p><div class="button-row"><button data-panel="journal">Relire le journal</button><button class="primary" data-action="title">Menu principal</button></div>`,'FIN DE LA CHRONIQUE');}
+   }
+-  saveClock+=dt;if((state.dirty||saveClock>=5)&&!state.dead&&mode==='playing')save();fitCanvas(canvas);draw(canvas,state,{menu:mode==='title',moving:mode==='playing'&&!dialog.open&&(controls.x||controls.y)});readout();
++  saveClock+=dt;if((state.dirty||saveClock>=5)&&!state.dead&&mode==='playing')save();fitCanvas(canvas);draw(canvas,state,{menu:mode==='title',moving:mode==='playing'&&!dialog.open&&!state.listening&&(controls.x||controls.y)});readout();
+  }
+  save();readout();frame=requestAnimationFrame(tick);const observer=new ResizeObserver(()=>fitCanvas(canvas));observer.observe(canvas);const onVisibility=()=>{if(document.hidden)onBlur();};document.addEventListener('visibilitychange',onVisibility);
+  window.addEventListener('beforeunload',save);
+- if(new URL(location.href).searchParams.get('qa')==='1'||window.__OTH_TEST_CONTEXT===true)window.__OTH_QA={get state(){return state;},replace(s){changeState(s);close();begin();},step(i,dt){return step(state,i,dt);},pause(){pause();},close,begin,save,get mode(){return mode;}};
++ if(new URL(location.href).searchParams.get('qa')==='1'||window.__OTH_TEST_CONTEXT===true)window.__OTH_QA={get state(){return state;},replace(s){changeState(s);close();begin();},step(i,dt){return step(state,i,dt);},pause(){pause();},close,begin,save,get mode(){return mode;},get audioStatus(){return {state:audio?.state||'none',cuesPlayed};}};
+  return {getState:()=>serialize(state),destroy(){cancelAnimationFrame(frame);observer.disconnect();window.removeEventListener('beforeunload',save);window.removeEventListener('blur',onBlur);document.removeEventListener('visibilitychange',onVisibility);window.removeEventListener('keydown',keyDown);window.removeEventListener('keyup',keyUp);audio?.close();root.innerHTML='';}};
+ }
+--- v0.4/tools/build-docs.py
++++ v0.5/tools/build-docs.py
+@@ -1,4 +1,4 @@
+-"""V0.4 documentation compiled from current ES modules, executed tests and real captures."""
++"""V0.5 documentation compiled from current ES modules, executed tests and real captures."""
+ from pathlib import Path
+ import json,html,io,base64,hashlib,subprocess,math
+ from PIL import Image,ImageDraw
+@@ -6,16 +6,20 @@
+ raw=subprocess.check_output(['node','--input-type=module','-e',"import {DATA} from './src/oth-v1/oth-data.js';console.log(JSON.stringify(DATA))"],cwd=R,text=True)
+ d=json.loads(raw);(R/'docs/DLC_CONTENT.json').write_text(json.dumps(d,ensure_ascii=False,indent=2))
+ rooms={r['id']:r for r in d['rooms']};props={p['id']:p for p in d['props']};cast={c['id']:c for c in d['cast']};edges={e['id']:e for e in d['edges']}
+-paths=['results.json','results-v02.json','delivery-results-v02.json','results-v03.json','results-v04.json','browser-results-v02.json','browser-results-v03.json','browser-results-v04.json']
++paths=['results.json','results-v02.json','delivery-results-v02.json','results-v03.json','results-v04.json','results-v05.json','browser-results-v02.json','browser-results-v03.json','browser-results-v04.json','browser-results-v05.json']
+ results=[json.loads((R/'qa'/p).read_text()) for p in paths]
+ if any(q['failed'] for q in results):raise RuntimeError('A suite failed: inspect QA results before generating delivery claims')
+-node_count=sum(q['tests'] for q in results[:5]);browser_count=sum(q['tests'] for q in results[5:]);total=node_count+browser_count
+-caps=sorted((R/'captures').glob('[0-9][0-9]_*.png'));assert len(caps)==48
++node_count=sum(q['tests'] for q in results[:6]);browser_count=sum(q['tests'] for q in results[6:]);total=node_count+browser_count
++caps=sorted((R/'captures').glob('[0-9][0-9]_*.png'));assert len(caps)==61
+ traces={k:json.loads((R/'qa'/('playthrough-'+k+'.json')).read_text()) for k in ['normal','assisted']}
+ counts={'chapters':len(d['chapters']),'objectives':sum(len(c['objectives']) for c in d['chapters']),'rooms':len(rooms),'edges':len(edges),'depthRooms':sum(r['mode']=='depth' for r in d['rooms']),'profileRooms':sum(r['mode']=='profile' for r in d['rooms']),'propTypes':len(props),'propInstances':sum(len(r['props']) for r in d['rooms']),'codex':len(d['codex']),'companions':len(d['companions']),'hides':sum(a['kind']=='hide' for a in d['interactables']),'records':sum(a['kind']=='archive' for a in d['interactables']),'caches':sum(a['kind']=='cache' for a in d['interactables']),'hazards':len(d['hazards']),'crewPlacements':len(d['crewPlacements']),'workOrders':len(d['workOrders']),'bulkheads':len(d['bulkheads']),'pursuitEdges':len(d['pursuitRules']['edges']),'switches':sum(a['kind']=='light' for a in d['interactables']),'machines':sum(a['kind']=='machine' for a in d['interactables']),'screenshots':len(caps)}
+ sourceHashes={str(p.relative_to(R)):hashlib.sha256(p.read_bytes()).hexdigest() for p in (R/'src').rglob('*') if p.is_file()}
+-qa={'version':d['version'],'date':'2026-09-29','totalTests':total,'passed':sum(q['passed'] for q in results),'failed':sum(q['failed'] for q in results),'scope':f'{node_count} Node checks + {browser_count} Chromium controls; not a human full playtest','sourceSHA256':sourceHashes,'nativeBrowserNavigation':False,'nativeStoragePersistence':False,'browserMethod':'set_content + explicit in-memory localStorage double after blocked HTTP/file attempts; agent-browser CLI unavailable, Playwright fallback','suites':results,'playthroughs':[{k:v for k,v in t.items() if k!='captures'} for t in traces.values()],'obstacleDetours':results[3]['obstacleChecks'],'genuineLegacySnapshots':12,'pursuitDirectionsTested':26,'annexRoundTrips':8,'screenshots':48}
+-(R/'qa/RESULTATS_QA_V04.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2))
++qa={'version':d['version'],'date':'2026-09-29','totalTests':total,'passed':sum(q['passed'] for q in results),'failed':sum(q['failed'] for q in results),'scope':f'{node_count} Node checks + {browser_count} Chromium controls; not a human full playtest','sourceSHA256':sourceHashes,'nativeBrowserNavigation':False,'nativeStoragePersistence':False,'browserMethod':'set_content + explicit in-memory localStorage double after blocked HTTP/file attempts; agent-browser CLI unavailable, Playwright fallback','suites':results,'playthroughs':[{k:v for k,v in t.items() if k!='captures'} for t in traces.values()],'obstacleDetours':results[3]['obstacleChecks'],'genuineLegacySnapshots':16,'pursuitDirectionsTested':26,'annexRoundTrips':8,'screenshots':61}
++qa['standaloneSHA256']=hashlib.sha256((R/'JOUER_HORS_DES_OMBRES.html').read_bytes()).hexdigest()
++qa['resultFilesSHA256']={name:hashlib.sha256((R/'qa'/name).read_bytes()).hexdigest() for name in paths}
++qa['acousticDirectionsTested']=26
++qa['browserAudioValidation']='WebAudio nodes and suspension exercised; no perceptual mix certification'
++(R/'qa/RESULTATS_QA_V05.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2))
+ H=lambda s:html.escape(str(s),quote=True)
+ style='''
+ :root{color-scheme:dark;--bg:#091319;--panel:#102128;--ink:#dce4da;--muted:#a3b6ad;--line:#425c59;--accent:#dbbf83;--cool:#86bfb4}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 Arial,Helvetica,sans-serif}a{color:var(--cool);text-underline-offset:4px}a:hover{color:var(--accent)}.wrap{max-width:1190px;margin:auto;padding:0 36px}header.hero{padding:66px 0 42px;background:radial-gradient(ellipse at 85% 10%,#32473e99,transparent 50%),linear-gradient(135deg,#112b31,#071318);border-bottom:1px solid var(--line)}.eyebrow{font:11px/1.8 'Courier New',monospace;letter-spacing:.19em;color:var(--accent);text-transform:uppercase}h1{font-size:clamp(42px,7vw,84px);font-weight:400;line-height:1.04;letter-spacing:-.04em;margin:20px 0 26px}h2{font-size:31px;font-weight:400;line-height:1.25;margin:0 0 22px}h3{font-size:19px;color:var(--accent);font-weight:400;margin:26px 0 14px}p{margin:0 0 19px}.lead{font-size:20px;max-width:820px;color:#c8d4c9}.small,.muted{font-size:13px;color:var(--muted)}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:32px}.metric{border-top:1px solid var(--line);padding-top:16px}.metric strong{font:38px/1.2 'Courier New',monospace;color:var(--accent);display:block}.metric span{font-size:12px;color:var(--muted)}main section{padding:46px 0;border-bottom:1px solid #36534c66}nav.index{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0}nav.index a{padding:8px 13px;background:#192c2f;text-decoration:none;font-size:12px;border:1px solid #4f6b5555}.note{padding:22px 25px;border-left:3px solid var(--accent);background:#29312a;color:#d7dccb;margin:25px 0}.note.good{border-color:var(--cool);background:#142b2a}.tag{display:inline-block;padding:4px 9px;border:1px solid #829b6955;font:11px/1.7 'Courier New',monospace;color:#c8c7a0;margin:0 6px 8px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.card{padding:24px;background:var(--panel);border:1px solid #324c46}.scroll{overflow:auto;margin:20px 0}table{width:100%;border-collapse:collapse;font-size:13px;line-height:1.6}th{text-align:left;font-weight:400;color:var(--accent);border-bottom:1px solid var(--line);padding:12px 12px}td{padding:12px 12px;border-bottom:1px solid #2b454044;vertical-align:top}tr:nth-child(even){background:#12252a66}code{font:12px/1.8 'Courier New',monospace;overflow-wrap:anywhere;color:#c8d8c9}pre{overflow:auto;background:#071015;padding:20px;font-size:13px;line-height:1.7;border-left:2px solid var(--line)}figure{margin:24px 0;background:#061117;border:1px solid #3d5b5155}figure img{width:100%;height:auto;display:block;max-height:790px;object-fit:contain}figcaption{padding:19px 23px;font-size:13px;color:var(--muted);line-height:1.65}figcaption strong{display:block;font-weight:400;color:var(--ink);font-size:16px;margin-bottom:8px}.twoshots{display:grid;grid-template-columns:1fr 1fr;gap:16px}.twoshots figure{margin:0}.roomplan{width:100%;height:auto;min-width:640px;background:#102026;border:1px solid #304e46}summary{cursor:pointer;padding:17px 20px;background:#162b2d;color:var(--accent)}details{margin:20px 0;border:1px solid #3d5b514d}details>div{padding:0 17px 17px}details[open]>summary{border-bottom:1px solid #3d5b514d}footer{padding:40px 0;color:var(--muted);font-size:12px;line-height:1.8}.room{scroll-margin-top:20px}.room h2{margin-top:14px}.room .intent{border-left:2px solid #536b6255;padding-left:20px;font-size:14px;color:var(--muted)}.warn{color:#ebbc99}@media(max-width:740px){.wrap{padding:0 20px}header.hero{padding:40px 0 30px}h2{font-size:26px}.metrics{grid-template-columns:repeat(2,1fr)}.grid,.twoshots{grid-template-columns:1fr}.lead{font-size:17px}main section{padding:33px 0}.note{padding:18px}.scroll{margin:15px -3px}td,th{padding:9px}figcaption{padding:16px}nav.index a{font-size:11px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{body{background:white;color:#1b2926}header.hero{background:white}.wrap{max-width:none;padding:0}a{color:#254b45}.room{break-before:page}figure{break-inside:avoid}nav.index{display:none}details{display:block}details>div{display:block}.note,.card{background:#eef2ec;color:#22352d}.metric strong,h3{color:#645535}table{font-size:10px}p,td,figcaption,.muted,.small{color:#283e33}.roomplan{min-width:0}}
+@@ -61,7 +65,8 @@
+ ('11 — Attaques lisibles',"Une préparation visible précède la résolution du coup. Portée, obstruction et protection sont recontrôlées à ce moment, afin qu’un recul puisse réellement changer l’issue."),
+ ('12 — Présentation honnête',"Une description d’intention, une règle validée, une capture de fixture et un parcours moteur ne sont pas la même preuve. Les illustrations ci-dessous sont des schémas de données, pas des plans officiels du Marion.")]
+ rule_text.extend([('13 — Piste de sortie','Un adulte suit un seuil observé ou entendu, jamais une route calculée vers le joueur hors champ. Le trajet et le délai de franchissement sont simulés.'),('14 — Verrou sans impasse','Huit cloisons humaines disposent de deux commandes liées au même état. Ouverture par B, E ou expiration ; aucun verrou sur les arches extraterrestres.'),('15 — Services séparés','Les dix nouvelles commandes gardent au moins 170 unités de séparation avec les autres interactions. Elles ne valident aucun objectif et se manipulent sur place.'),('16 — Garder sa pression','Les délais de machine et de verrou, la piste et l’identité de l’adulte restent dans le carnet. Les fenêtres de lecture suspendent ces délais.')])
+-body='<header class="hero"><div class="wrap"><p class="eyebrow">TANTALUS FRONTIER / HORS DES OMBRES / V0.4.0</p><h1>Codex<br>du Marion</h1><p class="lead">Pièce par pièce : déplacements, seuils, objets, lumières et accompagnants. Registre extrait du code livré.</p>'+metrics([('lieux',34),('liaisons',40),('placements explicites',268),('fiches en jeu',144)])+'</div></header><main class="wrap"><section><h2>Lire le registre</h2><p>Coordonnées locales, et non métrique officielle : X suit la longueur, Y suit la profondeur du sol. La profondeur des schémas est amplifiée pour montrer les voies. Dans les couloirs en profil, les mobiles restent sur y=88.</p><p><span class="tag">CYAN · SEUIL</span><span class="tag">OR · POINT D’OBJECTIF</span><span class="tag">VIOLET · CACHETTE</span><span class="tag">ROSE · ACTIVITÉ</span><span class="tag">BRUN · SOLIDE</span></p><div class="note">Document de production avec spoilers. Les registres de portes, lumières et placements sont réellement utilisés ; les descriptions d’ambiance sont des intentions héritées, pas une certification que chaque détail graphique est définitif.</div><nav class="index">'+''.join(f'<a href="#{r["id"]}">{H(r["deck"])} · {H(r["name"])}</a>' for r in d['rooms'])+'</nav></section><section><h2>Règles de cette passe</h2><div class="grid">'+''.join('<article class="card"><h3>'+H(a)+'</h3><p>'+H(b)+'</p></article>' for a,b in rule_text)+'</div></section>'
++rule_text.extend([('17 — Un seul seuil acoustique', 'Le bruit de course, flamme, machine ou leurre peut attirer un adulte déjà instancié dans une pièce immédiatement voisine. Ni génération ennemie ni propagation récursive. Portée de trajet 980 unités × volume, mémoire 12 secondes.'), ('18 — Écouter n’est pas arrêter', 'V immobilise le joueur, pas le monde. Une direction et un type de bruit sont montrés, sans coordonnées ni inventaire d’ennemis. Un adulte immobile n’est pas un contact radar.'), ('19 — Le bruit masque', 'À moins de 540 unités horizontales d’une machine active, le relevé d’écoute est masqué. La machine n’efface pas la vision directe d’un adulte.'), ('20 — Leurre situé', 'Le lancer s’arrête devant les solides ; une pression R ne dépense qu’une charge. Le signal dure cinq secondes même si le joueur quitte la salle.'), ('21 — Répétition mémorisée', 'Un adulte ayant terminé deux inspections de 0,75 seconde dans une même bande de 180 unités peut ignorer un nouveau signal placé dans cette bande pendant 80 secondes de simulation. Ce n’est pas une adaptation au chalumeau.'), ('22 — Traces bornées', 'Boîtiers vides, brûlures et griffures sont cosmétiques et persistent dans le carnet, douze traces au maximum par salle. Elles ne changent pas les collisions et ne sont pas de nouveaux modèles du catalogue.'), ('23 — Avertissement compagnon', 'Un accompagnant qui voit un adulte proche signale le danger et prend une posture basse. L’ordre attendre ne devient ni un téléportage ni un ordre de combat.'), ('24 — Lisibilité des avant-plans', 'Un meuble ou coffret au premier plan recouvrant le personnage devient partiellement transparent. Une cachette occupée reste opaque. Cette règle de rendu ne change ni la vision ennemie ni l’empreinte solide.')])
++body='<header class="hero"><div class="wrap"><p class="eyebrow">TANTALUS FRONTIER / HORS DES OMBRES / V0.5.0</p><h1>Codex<br>du Marion</h1><p class="lead">Pièce par pièce : déplacements, seuils, objets, lumières et accompagnants. Registre extrait du code livré.</p>'+metrics([('lieux',34),('liaisons',40),('placements explicites',268),('fiches en jeu',len(d['codex']))])+'</div></header><main class="wrap"><section><h2>Lire le registre</h2><p>Coordonnées locales, et non métrique officielle : X suit la longueur, Y suit la profondeur du sol. La profondeur des schémas est amplifiée pour montrer les voies. Dans les couloirs en profil, les mobiles restent sur y=88.</p><p><span class="tag">CYAN · SEUIL</span><span class="tag">OR · POINT D’OBJECTIF</span><span class="tag">VIOLET · CACHETTE</span><span class="tag">ROSE · ACTIVITÉ</span><span class="tag">BRUN · SOLIDE</span></p><div class="note">Document de production avec spoilers. Les registres de portes, lumières et placements sont réellement utilisés ; les descriptions d’ambiance sont des intentions héritées, pas une certification que chaque détail graphique est définitif.</div><nav class="index">'+''.join(f'<a href="#{r["id"]}">{H(r["deck"])} · {H(r["name"])}</a>' for r in d['rooms'])+'</nav></section><section><h2>Règles de cette passe</h2><div class="grid">'+''.join('<article class="card"><h3>'+H(a)+'</h3><p>'+H(b)+'</p></article>' for a,b in rule_text)+'</div></section>'
+ for r in d['rooms']:
+  body+=f'<section class="room" id="{r["id"]}"><p class="eyebrow">{H(r["zone"])} / {H(r["deck"])}</p><h2>{H(r["name"])}</h2><p class="intent"><b>Intention du lieu :</b> {H(r["description"])}</p><p><span class="tag">{"PROFONDEUR" if r["mode"]=="depth" else "PROFIL LATÉRAL"}</span><span class="tag">{r["width"]} × {r["depth"]} unités</span><code>{H(r["id"])}</code></p>'+room_plan(r)
+  pr=[]
+@@ -69,7 +74,7 @@
+   e=edges[p['edge']];back=next(q for q in rooms[p['target']]['portals'] if q['edge']==e['id']);cond=f"Chapitre ≥ {e['minChapter']+1}"
+   if e.get('blockedChapters'):cond+=' ; fermé aux chapitres '+', '.join(str(n+1) for n in e['blockedChapters'])
+   if 'narcissus' in [e['a'],e['b']]:cond+=' ; fermé après largage'
+-  if e['id'] in d['pursuitRules']['edges']:cond+=' ; adulte : traque sur sortie repérée'
++  if e['id'] in d['pursuitRules']['edges']:cond+=' ; adulte : sortie repérée ou son depuis une pièce voisine déjà instanciée'
+   if any(b['edge']==e['id'] for b in d['bulkheads']):cond+=' ; B : verrou temporaire 14 s, rupture sous pression 5,5 s'
+   pr.append([f'<a href="#{p["target"]}">{H(rooms[p["target"]]["name"])}</a><br><code>{H(e["id"])}</code>',H(p['kind']),f'{p["x"]} / {p["y"]}',f'{back["x"]} / {back["y"]}',H(cond)])
+  body+='<h3>Seuils et conditions</h3>'+table(['Destination','Nature','Seuil X / Y','Seuil inverse X / Y','Disponibilité'],pr)
+@@ -81,6 +86,13 @@
+  acts=[a for a in d['interactables'] if a['room']==r['id']]
+  if acts:
+   body+='<h3>Activités physiques</h3>'+table(['Repère','Fonction','X / Y','Effet conservé'],[[H(a['title'])+'<br><code>'+H(a['id'])+'</code>',H({'archive':'Transcription','cache':'Réserve','valve':'Vanne','hide':'Dissimulation','light':'Commande d’éclairage','machine':'Machine sonore'}[a['kind']]),f'{a["x"]} / {a["y"]}',H({'archive':'Déverrouille une fiche Traces','cache':'Stock fini ; ouvert/vide après collecte','valve':'Coupe la fuite indiquée','hide':'État temporaire ; le mouvement fait sortir','light':'État local persistant ; rampes ou secours, E pour basculer','machine':'Cycle 10 s puis refroidissement 18 s ; états persistants'}[a['kind']])] for a in acts])
++ acoustic=[p for p in r['portals'] if p['edge'] in d['acoustics']['edges']]
++ body+='<h3>Écoute, bruits et traces</h3>'
++ if acoustic:
++  body+=table(['Seuil sonore','Voisine immédiate','Activation'],[[H(p['edge']),H(rooms[p['target']]['name']),'Adulte déjà présent ; chapitre autorisé ; cloison ouverte au démarrage'] for p in acoustic])
++  body+='<p class="small">Une piste sonore pointe la position de la source au moment de son émission, pas la position actuelle cachée du joueur. Le franchissement conserve l’identité.</p>'
++ else:body+='<p class="small">Aucun transfert acoustique inter-pièces sur les seuils de cette salle. Les bruits, leurres, traces et écoute locaux restent disponibles.</p>'
++ body+='<p class="small">Traces cosmétiques : au plus douze ; ne bloquent pas le passage. V immobilise mais laisse la simulation active. Une machine active proche masque l’écoute. Le registre de sons ne dévoile pas de liste d’ennemis.</p>'
+  lighting=r['lighting'];body+='<h3>Éclairage utilisé par le moteur</h3><p class="small">Ambiance relative : '+H(lighting['ambient'])+'. Les halos du schéma sont indicatifs ; les coordonnées et rayons de calcul ci-dessous sont exacts.</p>'+table(['Source','X / Y','Rayon local','Intensité ajoutée'],[[i+1,f'{p["x"]} / {p["y"]}',p['radius'],p['strength']] for i,p in enumerate(lighting['pools'])])
+  crew=[n for n in d['crewPlacements'] if n['room']==r['id']]
+  if crew:body+='<h3>Présences scénarisées brutes</h3>'+table(['Contact','Plage de progression n','X / Y','Pose'],[[H(cast[n['character']]['name']),f'{n["start"]} ≤ n < {n["end"]}',f'{n["x"]} / {n["y"]}',H(n['pose'])] for n in crew])+'<p class="small">n = nombre d’objectifs accomplis. Le rendu filtre le protagoniste, les contacts perdus et les doublons avec l’accompagnant.</p>'
+@@ -90,31 +102,40 @@
+  if hazards:body+='<h3>Fuites locales</h3>'+table(['ID','X / Y','Largeur','Cycle / phase active','Vanne'],[[H(h['id']),f'{h["x"]} / {h["y"]}',h['width'],f'{h["period"]} s / {h["on"]} s',f'{h["valveX"]} / {h["valveY"]}'] for h in hazards])
+  body+='<details open><summary>Registre des '+str(len(r['props']))+' placements explicites</summary><div>'+table(['Identifiant','Famille','X / Y','Échelle du dessin','Solide','Rôle / placement'],[['<code>'+H(p['id'])+'</code>',H(props[p['type']]['label']),f'{p["x"]} / {p["y"]}',p.get('scale',1),'Oui' if p['solid'] else 'Non',H(p.get('purpose',props[p['type']]['placement']))] for p in r['props']])+'</div></details>'
+  body+='<p class="small"><b>Doctrine de circulation conservée :</b> '+H(r['designV03']['circulation'])+' '+H(r['designV03']['navigation'])+'</p><p class="small"><b>Rencontres :</b> '+H(r['encounterNotes'])+'</p></section>'
+-body+='<section id="catalogue"><h2>Les 46 familles de décor</h2><p>Une famille peut être instanciée par une activité ou un éclairage sans ajouter de ligne au compteur des 268 placements explicites. Les dimensions décrivent le dessin ; seule une instance marquée solide utilise une empreinte de collision.</p>'+table(['ID / famille','Largeur × hauteur de dessin','Nature','Placement','Règle'],[['<code>'+H(p['id'])+'</code><br>'+H(p['label']),f'{p["width"]} × {p["height"]}',H(p['kind']),H(p['placement']),H(p['rule'])] for p in d['props']])+'</section><section><h2>Vérifications et limites</h2><p>'+str(total)+' contrôles réussis : '+str(node_count)+' Node et '+str(browser_count)+' Chromium. Les contournements de 90 obstacles, les axes de circulation des 34 salles et les huit liaisons des annexes ont leurs tests dédiés. Les parcours moteur principaux accomplissent 48 objectifs, 30 lieux et 61 transitions par profil.</p><div class="note">Ce registre n’est pas un audit de tous les choix humains. L’interface a été exécutée dans Chromium par injection du document et double mémoire de stockage, après blocage des navigations natives. Pas de fusion native avec le dernier projet hôte ; aucun push/déploiement. Art vectoriel procédural provisoire.</div><p><a href="../qa/RESULTATS_QA_V04.json">Résultats structurés</a> · <a href="../RAPPORT_ILLUSTRE.html">Rapport avec captures</a> · <a href="SYSTEMES_ET_IA.md">Règles détaillées</a> · <a href="FIDELITE_ET_SOURCES.md">Références héritées et limites narratives</a></p></section></main><footer class="wrap">V0.4.0 · Les portes ne suffisent plus · Plans originaux compilés depuis src/oth-v1/oth-data.js. Aucun plan officiel ou dessin d’éditeur n’est reproduit ici.</footer>'
+-(R/'docs/CODEX_LEVEL_DESIGN.html').write_text(page('Hors des ombres — Codex V0.4',body))
+-# Current, standalone visual report. Screens are embedded, not fetched from a server.
++body+='<section id="catalogue"><h2>Les 46 familles de décor</h2><p>Une famille peut être instanciée par une activité ou un éclairage sans ajouter de ligne au compteur des 268 placements explicites. Les dimensions décrivent le dessin ; seule une instance marquée solide utilise une empreinte de collision.</p>'+table(['ID / famille','Largeur × hauteur de dessin','Nature','Placement','Règle'],[['<code>'+H(p['id'])+'</code><br>'+H(p['label']),f'{p["width"]} × {p["height"]}',H(p['kind']),H(p['placement']),H(p['rule'])] for p in d['props']])+'</section><section><h2>Vérifications et limites</h2><p>'+str(total)+' contrôles réussis : '+str(node_count)+' Node et '+str(browser_count)+' Chromium. Les contournements de 90 obstacles, les axes de circulation des 34 salles et les huit liaisons des annexes ont leurs tests dédiés. Les parcours moteur principaux accomplissent 48 objectifs, 30 lieux et 61 transitions par profil.</p><div class="note">Ce registre n’est pas un audit de tous les choix humains. L’interface a été exécutée dans Chromium par injection du document et double mémoire de stockage, après blocage des navigations natives. Pas de fusion native avec le dernier projet hôte ; aucun push/déploiement. Art vectoriel procédural provisoire.</div><p><a href="../qa/RESULTATS_QA_V05.json">Résultats structurés</a> · <a href="../RAPPORT_ILLUSTRE.html">Rapport avec captures</a> · <a href="SYSTEMES_ET_IA.md">Règles détaillées</a> · <a href="FIDELITE_ET_SOURCES.md">Références héritées et limites narratives</a></p></section></main><footer class="wrap">V0.5.0 · Ce qui écoute dans le noir · Plans originaux compilés depuis src/oth-v1/oth-data.js. Aucun plan officiel ou dessin d’éditeur n’est reproduit ici.</footer>'
++(R/'docs/CODEX_LEVEL_DESIGN.html').write_text(page('Hors des ombres — Codex V0.5',body))
++# All captures below are re-executions of the current build. No inherited QA total.
+ base=json.loads((R/'tools/captions-base.json').read_text())
+-captions=[{'file':a,'caption':c.replace('V0.3','V0.4'),'title':b} for a,b,c in base]
+-for q in results[6:]:
+- for cap in q['captures']:captions.append({**cap,'title':cap['file'][3:-4].replace('_',' ').capitalize()})
+-(R/'captures/CATALOGUE_CAPTURES_COMPLET_V04.json').write_text(json.dumps(captions,ensure_ascii=False,indent=2))
++captions=[{'file':a,'caption':c.replace('V0.3','V0.5').replace('V0.4','V0.5'),'title':b,'method':'Capture Chromium de la V0.5 ; scénario de non-régression, état préparé sauf mention contraire.'} for a,b,c in base]
++for q in results[7:]:
++ for cap in q['captures']:
++  captions.append({**cap,'title':cap.get('title',cap['file'][3:-4].replace('_',' ').capitalize())})
++assert len(captions)==len(caps)==len(set(c['file'] for c in captions))
++assert set(c['file'] for c in captions)==set(p.name for p in caps)
+ captiondict={c['file']:c for c in captions}
++(R/'captures/CATALOGUE_CAPTURES_COMPLET_V05.json').write_text(json.dumps(captions,ensure_ascii=False,indent=2))
+ def proof(file,title=None):
+- c=captiondict[file];return fig(file,title or c['title'],c['caption'])
+-body='<header class="hero"><div class="wrap"><p class="eyebrow">ALIEN / HORS DES OMBRES / V0.4.0</p><h1>Les portes<br>ne suffisent plus</h1><p class="lead">La traque passe le seuil. Verrous mécaniques, éclairage local et machines d’essai donnent de nouveaux moyens de préparer la fuite.</p>'+metrics([('passages de traque',counts['pursuitEdges']),('cloisons équipées',counts['bulkheads']),('services locaux',10),('contrôles réussis',total)])+'</div></header><main class="wrap">'
+-body+='<section><h2>Ce que contient cette livraison</h2><p>Version cumulative du DLC autonome : les 16 chapitres, 48 objectifs, 34 lieux et 40 liaisons de la V0.3 sont conservés. Cette passe ajoute des comportements et des interactions, pas de nouveaux chapitres.</p><div class="note">Prototype non officiel. Rendu vectoriel procédural provisoire, pas nouveaux sprites définitifs. Archive du DLC et de ses sources, pas du jeu Tantalus Frontier complet. Aucune fusion native, aucun push GitHub et aucun déploiement Vercel.</div><nav class="index"><a href="#traque">La traque</a><a href="#services">Services</a><a href="#qa">Vérifications</a><a href="#galerie">48 captures</a><a href="docs/CODEX_LEVEL_DESIGN.html">Codex des 34 pièces</a></nav></section>'
+-body+='<section id="traque"><h2>Une piste, pas une connaissance permanente</h2><p>Un adulte déjà présent peut rejoindre une sortie qu’il a vue ou entendue et la traverser. Son déplacement hors champ utilise le graphe de contournement local. Le même identifiant est déplacé : le système ne crée pas un remplaçant derrière le joueur.</p><p>La mémoire de sortie dure au plus 18 secondes. L’ouverture demande 1,4 seconde après l’arrivée au seuil. Le comportement ne calcule aucun chemin vers le joueur hors champ : gagner une pièce supplémentaire ne transmet pas automatiquement cette nouvelle position.</p>'+proof('44_passage_creature.png','Le même adulte, après le seuil')+'<p>Treize liaisons de la mine et de l’épave sont autorisées. Les ascenseurs, navettes et refuges désignés sont exclus. Au maximum deux adultes occupent une même pièce ; un transit attend si cette capacité est atteinte. La traque nouvelle concerne les adultes, pas les facehuggers.</p><h3>Retarder sans créer une impasse</h3><p>Huit cloisons humaines possèdent un verrou utilisable des deux côtés. Maintenir B pendant 0,85 seconde ferme pour quatorze secondes sans pression. Un adulte arrivé au seuil force le verrou en 5,5 secondes ; le mécanisme reste endommagé trente-cinq secondes.</p>'+proof('43_pression_pompage.png','La cloison encaisse la pression')+'<p>B permet de libérer, E offre aussi une libération de secours. Le chemin revient automatiquement à l’expiration. Une touche maintenue ne déclenche qu’une seule bascule, jusqu’à son relâchement. Aucun verrou métallique n’est ajouté aux arches extraterrestres.</p></section>'
+-body+='<section id="services"><h2>Préparer le terrain sur place</h2><div class="twoshots">'+proof('38_coursive_eclairee.png','Rampes allumées')+proof('39_coursive_secours.png','Balisage de secours')+'</div><p style="margin-top:24px">Six coffrets permettent d’isoler les rampes locales sans interrompre un objectif de maintenance. La détection est réduite, mais le balisage et la lampe personnelle restent disponibles. Le rendu conserve volontairement une lisibilité minimale ; ce n’est pas une simulation photométrique.</p><h3>Quatre machines d’essai</h3><p>Compresseur, vibreur de trémie, rinçage et soufflante produisent un cycle sonore de dix secondes, suivi de dix-huit secondes de refroidissement. Une machine peut attirer un adulte qui ne voit pas le joueur, mais ne remplace pas une cible visible. Elle ne consomme aucun leurre portatif.</p>'+proof('42_compresseur.png','Le compresseur en cycle')+'<p>Les dix nouveaux points d’action sont séparés d’au moins 170 unités locales des autres interactions. Ils sont non solides et associés à la machinerie du lieu. Le compteur reste à 268 placements de décor, 46 familles : ces commandes ont leur registre séparé plutôt que de gonfler artificiellement le nombre de modèles.</p>'+proof('40_services.png','K : relevé local, sans télécommande')+'<p>K ouvre une lecture de l’état local. Les actions E et B demandent toujours d’être sur place. La lecture suspend aussi bien les cycles que les verrous et la traque.</p></section>'
+-labels=['Moteur / installateur','Régressions V0.2','Livraison et serveur','Régressions V0.3','Traque et services V0.4','Chromium — base V0.2','Chromium — base V0.3','Chromium — V0.4']
+-body+='<section id="qa"><h2>Vérification et portée des résultats</h2>'+table(['Suite réexécutée sur le code V0.4','Réussis','Échecs'],[[H(name),q['passed'],q['failed']] for name,q in zip(labels,results)])+f'<p><strong>{node_count} contrôles Node + {browser_count} contrôles Chromium = {total} contrôles réussis.</strong> Les 13 liaisons de traque sont parcourues dans les deux sens, soit 26 vérifications physiques dédiées. Les 8 cloisons sont contrôlées depuis leurs deux côtés.</p>'+table(['Profil moteur','Objectifs','Pièces principales','Transitions','Passages compagnon'],[[H(k),v['goals'],v['roomsVisited'],v['transitions'],v['captures']['final']['metrics']['companionPassages']] for k,v in traces.items()])+'<p>Les quatre annexes conservent leurs huit allers-retours dédiés. La suite de navigation réalise 90 contournements d’obstacles et contrôle les axes des 34 pièces. Les scripts connaissent les routes et les solutions ; ils ne constituent pas un playtest humain et leur durée simulée ne prédit pas une durée de jeu.</p><div class="note"><strong>Limite technique observée :</strong> les ouvertures HTTP et fichier sont bloquées par Chromium dans cet environnement. La commande agent-browser n’est pas installée ; la vérification a utilisé Playwright. Le document est exécuté par injection avec un double mémoire explicite de localStorage. Le serveur est contrôlé séparément par Node. Le lancement par double-clic et la persistance native après fermeture du navigateur ne sont pas certifiés ici.</div><p>Les 48 captures sont nouvelles exécutions du code V0.4, y compris les vues de non-régression. Aucune exception JavaScript n’a été observée dans les trois suites navigateur. Certaines captures utilisent des scènes préparées et une simulation accélérée explicitement indiquée ; ce ne sont pas des images conceptuelles.</p><p><a href="qa/RESULTATS_QA_V04.json">Preuves structurées</a> · <a href="LIRE_AVANT_DE_JOUER.md">Lancement et migration</a> · <a href="docs/SYSTEMES_ET_IA.md">Règles détaillées</a></p></section>'
+-body+='<section><h2>Conserver la progression</h2><p>Le schéma 4 accepte les carnets 1, 2, 3 et 4. Douze instantanés réellement extraits des archives V0.1, V0.2 et V0.3 sont vérifiés. Les nouveaux états incluent les verrous, les cycles, les éclairages et le passage d’un adulte en cours. L’import filtre les faux liens, les identifiants inconnus, les délais excessifs et les identités dupliquées.</p><p>Exporter le carnet avant de déplacer le fichier ou de changer d’origine reste nécessaire. Les anciennes sources du lanceur sont conservées sous before-v04 lors de l’upgrade. Le raccordement reste isolé du moteur hôte.</p><p class="warn">Art définitif, cinématiques détaillées, IA de combat des compagnons, playtests humains, stockage natif et fusion avec le dernier hôte ne sont pas déclarés terminés. Les présentes règles de traque sont des choix de gameplay originaux, pas un nouvel audit du roman.</p></section>'
+-body+='<section id="galerie"><h2>48 captures du prototype exécuté</h2><p>Les premières vues couvrent la campagne et les systèmes conservés ; les vues 37 à 48 documentent cette passe.</p>'
+-for c in captions:body+=fig(c['file'],c['file'][:2]+' — '+c['title'],c['caption'])
+-body+='</section></main><footer class="wrap">V0.4.0 · Les portes ne suffisent plus · Livraison locale autonome.<br>SHA-256 du jeu : <code>'+hashlib.sha256((R/'JOUER_HORS_DES_OMBRES.html').read_bytes()).hexdigest()+'</code></footer>'
+-(R/'RAPPORT_ILLUSTRE.html').write_text(page('Hors des ombres — V0.4 / Rapport illustré',body))
+-sheet=Image.new('RGB',(1600,12*275+60),'#09171d');painter=ImageDraw.Draw(sheet);painter.text((20,15),'HORS DES OMBRES / V0.4 / 48 CAPTURES CHROMIUM',fill='#d5c291',font_size=21)
++ c=captiondict[file]
++ return fig(file,title or c['title'],c['caption']+' '+c.get('method',''))
++
++body='<header class="hero"><div class="wrap"><p class="eyebrow">ALIEN / HORS DES OMBRES / V0.5.0</p><h1>Ce qui écoute<br>dans le noir</h1><p class="lead">Un moteur couvre vos oreilles. Une course porte au-delà du seuil. Un leurre déjà inspecté ne trompe plus toujours le même adulte.</p>'+metrics([('liaisons acoustiques',13),('fiches du carnet',160),('captures réelles',61),('contrôles réussis',total)])+'</div></header><main class="wrap">'
++body+='''<section><h2>Le DLC continue, sans recommencer ailleurs</h2><p>Livraison cumulative depuis la V0.4 : 16 chapitres, 48 objectifs, 34 lieux, 40 liaisons. La passe approfondit la perception, les leurres et les traces. Elle n’ajoute pas de chapitres, de salles ou de familles graphiques.</p><div class="note">Prototype non officiel, autonome. Rendu vectoriel procédural provisoire ; les vues présentées ne sont pas des sprites définitifs. Le paquet contient le DLC et ses sources, pas le jeu Tantalus complet. Aucune fusion native, aucun push GitHub ni déploiement Vercel.</div><nav class="index"><a href="#ecoute">Écouter</a><a href="#leurres">Leurres</a><a href="#terrain">Traces et compagnons</a><a href="#qa">Contrôles</a><a href="#galerie">61 captures</a><a href="docs/CODEX_LEVEL_DESIGN.html">Les 34 pièces</a></nav></section>'''
++body+='''<section id="ecoute"><h2>Le bruit peut précéder le contact</h2><p>Sur treize liaisons autorisées, un bruit de course, de chalumeau, de machine ou de leurre peut maintenant attirer un adulte déjà instancié dans la pièce voisine. Il rejoint le seuil puis le franchit avec la même identité. La source est mémorisée pendant douze secondes : le système ne suit pas une position cachée mise à jour en permanence.</p><p>La portée combine les distances de part et d’autre du seuil. Une cloison fermée empêche le démarrage de cette nouvelle enquête sonore ; si l’adulte avait déjà commencé à venir, il peut toujours exercer sa pression sur le verrou. Pas de propagation en chaîne, pas de génération automatique d’un ennemi dans une salle jamais instanciée, pas de transfert de facehugger.</p>'''+proof('52_enquete_sonore.png','Un son a traversé le seuil')+'''<h3>Maintenir V pour écouter</h3><p>Le personnage s’immobilise et lève la main. L’interface donne une direction et une indication générale : frottement, déplacement ou chocs étouffés. Elle ne révèle ni coordonnées ni compteur d’ennemis. Un adulte immobile et silencieux n’est pas un point de radar.</p><p><strong>La simulation continue.</strong> Écouter ne met pas à l’abri des dégâts. Les lectures du carnet et du plan, elles, gardent leur pause habituelle. Près d’une machine en cycle, le bruit peut masquer les autres signaux ; il faut couper l’appareil ou s’en éloigner.</p><div class="twoshots">'''+proof('51_ecoute_cloison.png','Lire une direction, pas une position exacte')+proof('53_masque_machine.png','Le moteur couvre les autres bruits')+'''</div><p style="margin-top:24px">Les signaux essentiels restent visuels quand le son est désactivé. Des sons synthétisés facultatifs différencient machines, flamme, leurres et contacts ; la pause suspend le contexte audio. Les tests contrôlent leur déclenchement et leur suspension, pas la qualité d’un mix écouté au casque.</p></section>'''
++body+='''<section id="leurres"><h2>Un signal qui reste dans la pièce</h2><p>Le boîtier émet pendant cinq secondes, même après votre départ. Il garde sa salle et son point de chute. Le lancer s’arrête avant un obstacle solide au lieu de le traverser. Un appui prolongé sur R ne consomme qu’une charge jusqu’au relâchement.</p><p>Après deux inspections effectivement terminées dans une même bande de 180 unités, un adulte peut ignorer un nouveau leurre placé dans cette bande. Sa mémoire dure jusqu’à quatre-vingts secondes de simulation et reste attachée à son identité. Changer de point de chute reste utile ; une cible vue directement conserve la priorité. Aucune résistance nouvelle au chalumeau n’est ajoutée.</p><div class="twoshots">'''+proof('54_leurre_actif.png','Le boîtier possède un emplacement réel')+proof('56_signal_reconnu.png','La répétition cesse de suffire')+'''</div><p style="margin-top:24px">À l’expiration, le boîtier vide reste au sol. Il n’est ni une nouvelle réserve ni un objet récupérable. Le nombre de leurres actifs et les mémoires par individu sont bornés ; ce n’est pas un système d’apprentissage illimité.</p></section>'''
++body+='''<section id="terrain"><h2>Le terrain garde une trace</h2><p>Les leurres épuisés, les brûlures de chalumeau et les griffures d’une cloison forcée sont conservés entre les visites et dans le carnet. Douze traces cosmétiques sont retenues au maximum par salle, sans collision supplémentaire. Elles ne gonflent pas le compteur des 268 placements explicites ni celui des 46 familles de décor.</p>'''+proof('55_traces_sol.png','Boîtier vide et brûlure au sol')+'''<h3>Un avertissement de l’accompagnant</h3><p>Un compagnon qui voit un adulte proche peut lever la main, se baisser et avertir le joueur. Un ordre d’attente reste une attente : il ne se transforme pas en fuite magique ni en téléportation. Les trois séquences d’accompagnement précédentes, leurs passages et les issues narratives sont conservés. Pas de nouvelle santé, arme ou IA de combat autonome pour l’équipage.</p>'''+proof('57_compagnon_prudence.png','Hoop signale le danger')+'''<h3>Ce que montre le journal</h3><p>Dans la pause, « Traces &amp; sons » rassemble les propres bruits émis et les traces des pièces déjà connues. Ce relevé ne contient pas de liste d’ennemis cachés et ne commande rien à distance. Les génériques du carnet sont distingués des transcriptions physiques, toujours verrouillées avant collecte.</p><div class="twoshots">'''+proof('58_journal_terrain.png','Empreintes du passage')+proof('61_coffret_transparent.png','Un coffret ne masque plus complètement le personnage')+'''</div><p style="margin-top:24px">La passe visuelle a révélé un coffret de premier plan qui recouvrait le protagoniste. Les props, commandes et supports d’objectif superposés deviennent maintenant partiellement transparents. Les cachettes occupées restent opaques, et cette aide de lecture n’altère ni la collision ni la vision ennemie.</p></section>'''
++labels=['Moteur / installateur','Régressions V0.2','Livraison et serveur','Régressions V0.3','Régressions V0.4','Acoustique et traces V0.5','Chromium — base V0.2','Chromium — base V0.3','Chromium — base V0.4','Chromium — V0.5']
++body+='<section id="qa"><h2>Vérifications exécutées, limites conservées</h2>'+table(['Suite réexécutée sur la V0.5','Réussis','Échecs'],[[H(label),q['passed'],q['failed']] for label,q in zip(labels,results)])+f'<p><strong>{node_count} contrôles Node + {browser_count} contrôles Chromium = {total} contrôles réussis.</strong> Les anciens résultats n’ont pas simplement été additionnés : les dix suites sont réexécutées sur la source livrée. Les résultats structurés sont liés aux empreintes des sources et du HTML.</p>'+table(['Profil moteur','Objectifs','Pièces principales','Transitions','Passages compagnon'],[[H(k),v['goals'],v['roomsVisited'],v['transitions'],v['captures']['final']['metrics']['companionPassages']] for k,v in traces.items()])+'''<p>Les quatre annexes ont huit allers-retours dédiés. Les treize liaisons acoustiques sont contrôlées dans les deux sens. Les tests de navigation conservent les quatre-vingt-dix contournements d’obstacles et les axes des trente-quatre salles. Les parcours connaissent les solutions et les trajets ; leur temps simulé ne mesure pas une durée de jeu humaine.</p><div class="note"><strong>Limite constatée dans l’environnement :</strong> Chromium refuse les ouvertures HTTP et fichier avec ERR_BLOCKED_BY_ADMINISTRATOR ; la commande agent-browser n’est pas installée. Playwright exécute le HTML par injection, avec un double mémoire déclaré de localStorage. Le serveur est testé séparément. Le double-clic et la persistance native après fermeture du navigateur ne sont pas certifiés. Aucune exception JavaScript n’est observée dans les quatre suites navigateur.</div><p>Les 61 captures sont des rendus réels de la V0.5. Les scènes préparées, les commandes et les simulations sont décrites dans les légendes. Elles ne constituent pas une session humaine continue. Les documents et leurs liens font l’objet d’un audit distinct, hors du total des tests de jeu.</p><p><a href="qa/RESULTATS_QA_V05.json">Résultats structurés</a> · <a href="LIRE_AVANT_DE_JOUER.md">Lancement et migration</a> · <a href="docs/SYSTEMES_ET_IA.md">Algorithmes et limites</a></p></section>'''
++body+='''<section><h2>Un carnet conservé, un périmètre clair</h2><p>Le schéma 5 accepte les carnets 1 à 5. Seize instantanés réels issus des archives V0.1 à V0.4 ont passé la migration. Les leurres en cours, les traces, les cycles et la mémoire sonore valide sont conservés. Les touches, l’écoute active et les fenêtres ne sont pas restaurées comme des actions maintenues.</p><p>Exporter CARNET_MARION.json avant de déplacer le fichier ou de changer d’origine de navigateur reste prudent. L’installation ajoute une carte Opérations et sept fichiers indépendants. Son upgrade vérifie les empreintes et préserve la version remplacée sous before-v05 ; les essais concernent des projets de test, pas le dernier hôte complet.</p><p class="warn">Graphismes et animations définitifs, mise en scène individuelle complète, playtests humains, manette, stockage natif et fusion GameEngine / SaveSystem / MIRE restent à produire ou certifier. Les règles ajoutées ici sont des choix de jeu originaux ; le roman et la dramatique n’ont pas été relus intégralement dans cette passe.</p></section>'''
++body+='<section id="galerie"><h2>61 vues du document exécuté</h2><p>Les treize nouvelles vues de la passe 0.5 sont présentées en premier. Les quarante-huit scénarios de régression ont également été recapturés sur cette version.</p>'
++for subset,title in [(captions[48:],'49–61 · Écoute, traces et lisibilité'),(captions[:21],'01–21 · Campagne et interventions'),(captions[21:36],'22–36 · Compagnons et cachettes'),(captions[36:48],'37–48 · Portes et services')]:
++ body+='<details'+(' open' if subset is not None and subset[0]['file'].startswith('49') else '')+'><summary>'+H(title)+'</summary><div>'
++ for c in subset:body+=proof(c['file'],c['file'][:2]+' — '+c['title'])
++ body+='</div></details>'
++body+='</section></main><footer class="wrap">V0.5.0 · Ce qui écoute dans le noir · Livraison locale cumulative.<br>SHA-256 du HTML : <code>'+qa['standaloneSHA256']+'</code></footer>'
++(R/'RAPPORT_ILLUSTRE.html').write_text(page('Hors des ombres — V0.5 / Rapport illustré',body))
++sheet=Image.new('RGB',(1600,math.ceil(len(caps)/4)*275+60),'#09171d');painter=ImageDraw.Draw(sheet);painter.text((20,15),'HORS DES OMBRES / V0.5 / 61 CAPTURES CHROMIUM',fill='#d5c291',font_size=21)
+ for i,path in enumerate(caps):
+  im=Image.open(path).convert('RGB');im.thumbnail((382,238));x=12+(i%4)*397;y=55+(i//4)*275;sheet.paste(im,(x,y));painter.text((x,y+242),path.name[:32],fill='#b9c9bb',font_size=12)
+-sheet.save(R/'captures/CONTACT_SHEET_V04.jpg',quality=86)
+-manifest={'version':d['version'],'edition':d['edition'],'date':'2026-09-29','baseVersion':'0.3.0','scope':'cumulative-dlc-source-not-complete-host-game','counts':counts,'save':{'key':d['saveKey'],'schema':4,'accepts':[1,2,3,4],'preMigrationBackupSuffix':':backup-before-v4','checkpointSuffix':':checkpoint-v2'},'qa':{'nodeTests':node_count,'browserTests':browser_count,'passed':total,'failed':0,'screenshots':48,'mainPlaythroughs':2,'annexRoundTrips':8,'pursuitDirections':26,'genuineLegacySnapshots':12,'obstacleDetours':90,'nativeNavigationVerified':False,'nativeStorageVerified':False,'browserMethod':qa['browserMethod']},'integration':{'launcher':True,'copiedFiles':7,'nativeEngineMerge':False,'testedOnHostFixtures':True,'testedInFullHost':False,'githubPush':False,'vercelDeploy':False},'art':'procedural-vector-prototype-not-final-sprites','standaloneSHA256':hashlib.sha256((R/'JOUER_HORS_DES_OMBRES.html').read_bytes()).hexdigest()}
++sheet.save(R/'captures/CONTACT_SHEET_V05.jpg',quality=86)
++manifest={'version':d['version'],'edition':d['edition'],'date':'2026-09-29','baseVersion':'0.4.0','scope':'cumulative-dlc-source-not-complete-host-game','counts':{**counts,'acousticEdges':len(d['acoustics']['edges'])},'save':{'key':d['saveKey'],'schema':5,'accepts':[1,2,3,4,5],'preMigrationBackupSuffix':':backup-before-v5','checkpointSuffix':':checkpoint-v2'},'qa':{'nodeTests':node_count,'browserTests':browser_count,'passed':total,'failed':0,'screenshots':len(caps),'mainPlaythroughs':2,'annexRoundTrips':8,'pursuitDirections':26,'acousticDirections':26,'genuineLegacySnapshots':16,'obstacleDetours':90,'nativeNavigationVerified':False,'nativeStorageVerified':False,'browserMethod':qa['browserMethod']},'integration':{'launcher':True,'copiedFiles':7,'nativeEngineMerge':False,'testedOnHostFixtures':True,'testedInFullHost':False,'githubPush':False,'vercelDeploy':False},'art':'procedural-vector-prototype-not-final-sprites','standaloneSHA256':qa['standaloneSHA256']}
+ (R/'LIVRAISON.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2));print(json.dumps(manifest,ensure_ascii=False,indent=2))
+--- v0.4/tools/bundle-inline.py
++++ v0.5/tools/bundle-inline.py
+@@ -13,6 +13,6 @@
+  if re.search(r'^import ',text,re.M):raise ValueError('Unsupported import '+filename)
+  scripts.append('const OTH_'+name+'=(()=>{\n'+text+'\nreturn {'+','.join(exports)+'};\n})();')
+ text='\n'.join(scripts)+'\nOTH_UI.mount(document.getElementById("oth-root"));'
+-html='<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="application-version" content="0.4.0"><title>ALIEN — Hors des ombres · Les portes ne suffisent plus</title><style>'+(src/'oth-ui.css').read_text()+'</style></head><body><div id="oth-root"></div><script>'+text.replace('</script','<\\/script')+'</script></body></html>'
++html='<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="application-version" content="0.5.0"><title>ALIEN — Hors des ombres · Ce qui écoute dans le noir</title><style>'+(src/'oth-ui.css').read_text()+'</style></head><body><div id="oth-root"></div><script>'+text.replace('</script','<\\/script')+'</script></body></html>'
+ (root/'JOUER_HORS_DES_OMBRES.html').write_text(html)
+ print('Bundled',len(html.encode()),'bytes')
+--- v0.4/tools/install.mjs
++++ v0.5/tools/install.mjs
+@@ -22,16 +22,16 @@
+   for(const p of payload){const file=await safe(root,p);if(!(await exists(file))||sha(await fs.readFile(file))!==journal.files[p])throw new Error('Un fichier du DLC a changé : '+p);}
+   if(upgrade&&!remove){
+    const updates=new Map(),prior=new Map();for(const p of payload){const bytes=await fs.readFile(path.join(source,p));updates.set(p,bytes);prior.set(p,await fs.readFile(await safe(root,p)));}
+-   if([...updates].every(([p,b])=>sha(b)===journal.files[p]))return {ok:true,alreadyCurrent:true,version:'0.4.0'};
+-   if(check)return {ok:true,upgradeAvailable:true,version:'0.4.0',files:payload.length};
+-   const backup=await safe(root,backupDir+'/before-v04');if(await exists(backup))throw new Error('Une sauvegarde before-v04 existe déjà. Aucune écriture.');
++   if([...updates].every(([p,b])=>sha(b)===journal.files[p]))return {ok:true,alreadyCurrent:true,version:'0.5.0'};
++   if(check)return {ok:true,upgradeAvailable:true,version:'0.5.0',files:payload.length};
++   const backup=await safe(root,backupDir+'/before-v05');if(await exists(backup))throw new Error('Une sauvegarde before-v05 existe déjà. Aucune écriture.');
+    await fs.mkdir(backup,{recursive:true});
+    try{
+     for(const [p,b] of prior){const dest=path.join(backup,p);await fs.mkdir(path.dirname(dest),{recursive:true});await fs.writeFile(dest,b,{flag:'wx'});}
+     await fs.writeFile(path.join(backup,'installation.json'),JSON.stringify(journal,null,2),{flag:'wx'});
+     for(const [p,b] of updates)await fs.writeFile(await safe(root,p),b);
+-    await fs.writeFile(journalPath,JSON.stringify({...journal,version:'0.4.0',files:Object.fromEntries([...updates].map(([p,b])=>[p,sha(b)])),upgradeBackup:backupDir+'/before-v04'},null,2));
+-    return {ok:true,upgraded:true,version:'0.4.0',files:payload.length};
++    await fs.writeFile(journalPath,JSON.stringify({...journal,version:'0.5.0',files:Object.fromEntries([...updates].map(([p,b])=>[p,sha(b)])),upgradeBackup:backupDir+'/before-v05'},null,2));
++    return {ok:true,upgraded:true,version:'0.5.0',files:payload.length};
+    }catch(e){for(const [p,b] of prior)await fs.writeFile(await safe(root,p),b);await fs.writeFile(journalPath,JSON.stringify(journal,null,2));await fs.rm(backup,{recursive:true,force:true});throw e;}
+   }
+   if(!remove)return {ok:true,alreadyInstalled:true,files:payload.length,hostVersion:pkg.version,version:journal.version||'0.1.0',upgradeCommand:'--upgrade'};
+@@ -51,7 +51,7 @@
+   await fs.writeFile(path.join(backup,'index.before.html'),index,{flag:'wx'});
+   for(const [relative,data]of bytes){const target=await safe(root,relative);await fs.mkdir(path.dirname(target),{recursive:true});await fs.writeFile(target,data,{flag:'wx'});written.push(relative);}
+   await fs.writeFile(indexPath,patched);indexWritten=true;
+-  const journal={schema:1,version:'0.4.0',hostVersion:pkg.version,indexBefore:sha(index),indexAfter:sha(patched),files:Object.fromEntries([...bytes].map(([k,v])=>[k,sha(v)])),scope:'isolated-runtime-launcher-not-native-engine-merge'};
++  const journal={schema:1,version:'0.5.0',hostVersion:pkg.version,indexBefore:sha(index),indexAfter:sha(patched),files:Object.fromEntries([...bytes].map(([k,v])=>[k,sha(v)])),scope:'isolated-runtime-launcher-not-native-engine-merge'};
+   await fs.writeFile(journalPath,JSON.stringify(journal,null,2),{flag:'wx'});
+   return {ok:true,installed:true,files:payload.length,hostVersion:pkg.version,fullGameIntegrationCertified:false};
+  }catch(e){if(indexWritten&&sha(await fs.readFile(indexPath))===sha(patched))await fs.writeFile(indexPath,index);for(const p of written)await fs.unlink(path.join(root,p));throw e;}
+--- v0.4/tools/package-release.py
++++ v0.5/tools/package-release.py
+@@ -0,0 +1,65 @@
++"""Package the cumulative DLC after QA, then verify every archived byte.
++Run from any directory with Python 3. Creates ZIP, SHA256SUMS and external audit.
++The audit is outside the ZIP to avoid a self-referential hash.
++"""
++from pathlib import Path
++import hashlib
++import json
++import zipfile
++
++ROOT = Path(__file__).resolve().parents[1]
++NAME = 'ALIEN_HORS_DES_OMBRES_V0_5_CE_QUI_ECOUTE_DANS_LE_NOIR.zip'
++ARCHIVE = ROOT.parent / NAME
++AUDIT = ROOT.parent / 'ALIEN_HORS_DES_OMBRES_V0_5_AUDIT_ARCHIVE.json'
++
++
++def digest(data):
++    return hashlib.sha256(data).hexdigest()
++
++
++def main():
++    manifest = json.loads((ROOT / 'LIVRAISON.json').read_text())
++    qa = json.loads((ROOT / 'qa/RESULTATS_QA_V05.json').read_text())
++    documents = json.loads((ROOT / 'qa/document-audit-v05.json').read_text())
++    assert manifest['version'] == qa['version'] == '0.5.0'
++    assert qa['failed'] == documents['failed'] == 0
++    for rel, sha in qa['sourceSHA256'].items():
++        assert digest((ROOT / rel).read_bytes()) == sha, rel
++    for rel, sha in qa['resultFilesSHA256'].items():
++        assert digest((ROOT / 'qa' / rel).read_bytes()) == sha, rel
++    assert digest((ROOT / 'JOUER_HORS_DES_OMBRES.html').read_bytes()) == manifest['standaloneSHA256']
++    files = sorted(p for p in ROOT.rglob('*') if p.is_file()
++                   and '__pycache__' not in p.parts and p.name != 'SHA256SUMS.txt')
++    hashes = {p.relative_to(ROOT).as_posix(): digest(p.read_bytes()) for p in files}
++    sums = ROOT / 'SHA256SUMS.txt'
++    sums.write_text(''.join(f'{sha}  {rel}\n' for rel, sha in hashes.items()), encoding='utf-8')
++    files.append(sums)
++    with zipfile.ZipFile(ARCHIVE, 'w', zipfile.ZIP_DEFLATED, compresslevel=7) as z:
++        for p in files:
++            z.write(p, ROOT.name + '/' + p.relative_to(ROOT).as_posix())
++    with zipfile.ZipFile(ARCHIVE) as z:
++        assert z.testzip() is None
++        names = z.namelist()
++        assert len(names) == len(set(names)) == len(files)
++        for rel, sha in hashes.items():
++            assert digest(z.read(ROOT.name + '/' + rel)) == sha, rel
++        assert z.read(ROOT.name + '/SHA256SUMS.txt') == sums.read_bytes()
++        assert all('..' not in Path(n).parts and n.startswith(ROOT.name + '/') for n in names)
++    result = {
++        'version': manifest['version'], 'archive': ARCHIVE.name,
++        'bytes': ARCHIVE.stat().st_size, 'sha256': digest(ARCHIVE.read_bytes()),
++        'files': len(files), 'indexedSHA256Files': len(hashes),
++        'zipCRCVerified': True, 'allIndexedHashesVerified': True,
++        'sourceHashesMatchQA': True, 'duplicatesOrTraversalPaths': False,
++        'gameplayChecks': qa['totalTests'], 'documentChecks': documents['passed'],
++        'screenshots': manifest['counts']['screenshots'],
++        'nativeBrowserPersistenceCertified': False, 'nativeHostMerged': False,
++        'githubPush': False, 'vercelDeploy': False,
++        'auditOutsideArchive': True
++    }
++    AUDIT.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding='utf-8')
++    print(json.dumps(result, ensure_ascii=False, indent=2))
++
++
++if __name__ == '__main__':
++    main()

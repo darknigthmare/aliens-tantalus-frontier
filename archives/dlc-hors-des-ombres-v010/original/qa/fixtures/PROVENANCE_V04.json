@@ -1,0 +1,30 @@
+{
+  "archive": "ALIEN_HORS_DES_OMBRES_V0_4_LES_PORTES_NE_SUFFISENT_PLUS.zip",
+  "archiveSHA256": "fffe11537d252899f1d1675c37778740381bfcdfc608832cdfaab56df34a2151",
+  "snapshots": [
+    {
+      "file": "legacy-schema-4-chapter-3.json",
+      "source": "ALIEN_HORS_DES_OMBRES_V0_4/qa/playthrough-normal.json",
+      "snapshot": "chapter-3",
+      "sha256": "3fe65cd1e20b4021c953fa4ebcfe4b6a86e749303a0cb447239e8095beefd2fd"
+    },
+    {
+      "file": "legacy-schema-4-chapter-8.json",
+      "source": "ALIEN_HORS_DES_OMBRES_V0_4/qa/playthrough-normal.json",
+      "snapshot": "chapter-8",
+      "sha256": "0979859f9da66c53eee927a2bb438de397d1c0ff484c7c053e2f9fc94b945324"
+    },
+    {
+      "file": "legacy-schema-4-chapter-11.json",
+      "source": "ALIEN_HORS_DES_OMBRES_V0_4/qa/playthrough-normal.json",
+      "snapshot": "chapter-11",
+      "sha256": "ed2ba6729340c054db36d94b3bc3322faa83cde475c7aaed6fb25497bc385334"
+    },
+    {
+      "file": "legacy-schema-4-final.json",
+      "source": "ALIEN_HORS_DES_OMBRES_V0_4/qa/playthrough-normal.json",
+      "snapshot": "final",
+      "sha256": "9886228f4b3304f765a040b5617ec326f701f46b48d619adca45a7a205c55b13"
+    }
+  ]
+}

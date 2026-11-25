@@ -93,3 +93,6 @@ src/vendor/supabase-2.117.2.js -text
 src/vendor/supabase-LICENSE.txt -text
 # Historical ZIPs and their pinned archive inventory retain exact original bytes.
 archives/project-recovery-20261116/** -text
+
+# Original Hors des ombres delivery and signed receipts retain exact bytes.
+archives/dlc-hors-des-ombres-v010/** -text

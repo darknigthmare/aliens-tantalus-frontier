@@ -1,0 +1,268 @@
+{
+  "version": "0.10.0",
+  "suite": "chromium-v07-flooded-archives",
+  "tests": 35,
+  "passed": 35,
+  "failed": 0,
+  "htmlSHA256": "de70265dbe081191816fd7b2c1c7398f92351530336c60f16a39a58341b631bc",
+  "nativeNavigation": false,
+  "nativePersistenceCertified": false,
+  "navigationAttempts": [
+    "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:4173/?qa=1",
+    "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/ALIEN_HORS_DES_OMBRES_V0_10/JOUER_HORS_DES_OMBRES.html?qa=1"
+  ],
+  "fallback": "set_content + explicit in-memory localStorage test double",
+  "errors": [],
+  "checks": [
+    {
+      "name": "HTML V0.8 et schéma 8 chargés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "O initial ne révèle aucune annexe",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Entrée dans une annexe découvre le relevé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Marcher dans l’eau ralentit réellement le personnage",
+      "ok": true,
+      "detail": {
+        "wet": 34.27620400000001,
+        "dry": 57.922799999999825
+      }
+    },
+    {
+      "name": "Maintien incomplet : rien de validé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "O interrompt le geste sans le terminer",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Volant fermé par E",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Appui long ne duplique pas le premier geste",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Trois commandes physiques démarrent le cycle",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le relevé suspend le temps des pompes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Liste de huit gestes sans bouton de validation distante",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le repère secondaire peut être masqué",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Cycle conservé lors du changement de pièce",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Export JSON réel du cycle intermédiaire",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import conserve le cycle et la progression principale",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le groupe atteint un niveau bas puis s’arrête",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Récupération physique du boîtier",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "T pose un seul boîtier",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le relevé indique la salle du boîtier posé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Lecteur éloigné ne rappelle pas le boîtier",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "E reprend le même boîtier",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Copie facultative achevée sans modifier la campagne",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le nouveau dossier est lisible dans le carnet",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Copie distinguée des vingt documents à retrouver",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Échap ferme le carnet même depuis sa recherche",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le plan local représente le caniveau",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Attaque pendant une intervention : blessure sans validation du geste",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Relevé mobile reste dans la largeur",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "E tactile accessible sur la nouvelle opération",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Cadre 1280x720 sans dépassement horizontal",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Cadre 800x600 sans dépassement horizontal",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Cadre 844x390 sans dépassement horizontal",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import invalide ne détruit pas le relevé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Sauvegarde d’un autre DLC laissée intacte",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune exception JavaScript",
+      "ok": true,
+      "detail": []
+    }
+  ],
+  "captures": [
+    {
+      "file": "74_menu_v07.png",
+      "caption": "Écran titre au chargement du document V0.8.",
+      "method": "Chromium V0.8 ; scène préparée explicitement, puis commandes ordinaires et simulation."
+    },
+    {
+      "file": "75_caniveau.png",
+      "caption": "Fixture dans la galerie de retour. L’eau reste dans la bande avant ; la circulation arrière demeure sèche.",
+      "method": "Chromium V0.8 ; scène préparée explicitement, puis commandes ordinaires et simulation."
+    },
+    {
+      "file": "76_echangeurs.png",
+      "caption": "Vannes et démarreur actionnés par E. Les jauges et le temps restant lisent l’état du cycle, pas une animation indépendante.",
+      "method": "Chromium V0.8 ; scène préparée explicitement, puis commandes ordinaires et simulation."
+    },
+    {
+      "file": "77_releve_pompage.png",
+      "caption": "Le relevé ouvert par O pendant le cycle. La simulation est arrêtée pendant sa lecture.",
+      "method": "Chromium V0.8 ; scène préparée explicitement, puis commandes ordinaires et simulation."
+    },
+    {
+      "file": "78_traverse_ouverte.png",
+      "caption": "Après dix-huit secondes réelles de simulation cumulée, le caniveau est vidé et la traverse est libérée.",
+      "method": "Chromium V0.8 ; scène préparée explicitement, puis commandes ordinaires et simulation."
+    },
+    {
+      "file": "79_armoire.png",
+      "caption": "Armoire déverrouillée par E après baisse du niveau. Les prélèvements restent des carottes minérales, pas de nouveaux œufs.",
+      "method": "Chromium V0.8 ; scène préparée explicitement, puis commandes ordinaires et simulation."
+    },
+    {
+      "file": "80_enregistreur_porte.png",
+      "caption": "Enregistreur récupéré et représenté sur la sangle du personnage. Aucun transfert de dossier à distance.",
+      "method": "Chromium V0.8 ; scène préparée explicitement, puis commandes ordinaires et simulation."
+    },
+    {
+      "file": "81_enregistreur_pose.png",
+      "caption": "T a posé le boîtier à la position actuelle. Il demeure un objet local à reprendre.",
+      "method": "Chromium V0.8 ; scène préparée explicitement, puis commandes ordinaires et simulation."
+    },
+    {
+      "file": "82_poste_releve.png",
+      "caption": "Boîtier branché au lecteur par E. Le poste de relevé possède une architecture d’écrans distincte des échangeurs.",
+      "method": "Chromium V0.8 ; scène préparée explicitement, puis commandes ordinaires et simulation."
+    },
+    {
+      "file": "83_copie.png",
+      "caption": "Carnet ouvert après les huit gestes. Le texte est original à cette adaptation ; il ne prétend pas être un extrait du roman.",
+      "method": "Chromium V0.8 ; scène préparée explicitement, puis commandes ordinaires et simulation."
+    },
+    {
+      "file": "84_plan_caniveau.png",
+      "caption": "Plan de la galerie après assèchement : empreinte du caniveau, mobilier, position du joueur et accès observés. Aucun ennemi affiché.",
+      "method": "Chromium V0.8 ; scène préparée explicitement, puis commandes ordinaires et simulation."
+    },
+    {
+      "file": "87_interruption_adulte.png",
+      "caption": "Rencontre explicitement préparée près de la vanne. La créature est dans sa phase d’appui pendant le maintien E, sans pause de lecture.",
+      "method": "Chromium V0.8 ; scène préparée explicitement, puis commandes ordinaires et simulation."
+    },
+    {
+      "file": "85_mobile_releve.png",
+      "caption": "Viewport 390 × 844 : lecture du relevé, défilement des étapes et accès au retour. Émulation de format, pas certification d’un téléphone physique.",
+      "method": "Chromium V0.8 ; scène préparée explicitement, puis commandes ordinaires et simulation."
+    },
+    {
+      "file": "86_mobile_galerie.png",
+      "caption": "Viewport 390 × 844 : commande E et scène de galerie visibles. Les commandes tactiles existantes sont conservées.",
+      "method": "Chromium V0.8 ; scène préparée explicitement, puis commandes ordinaires et simulation."
+    }
+  ]
+}

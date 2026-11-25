@@ -1,0 +1,946 @@
+[
+  {
+    "file": "01_menu.png",
+    "title": "Entrée dans la chronique",
+    "caption": "Écran titre de la V0.9. Capture du document exécuté, sans image conceptuelle ajoutée.",
+    "method": "Scénario de régression exécuté sur la V0.9 ; document rendu dans Chromium.",
+    "sha256": "8ec216de3408f7ef8db4e4d3212408bda3b6d786280cfd55cfdd1e419e7ee8b5",
+    "version": "0.9.0"
+  },
+  {
+    "file": "02_jordan_passerelle.png",
+    "title": "Présence à la passerelle",
+    "caption": "Scène préparée au début de campagne ; les placements de personnages sont lus dans les données de scène.",
+    "method": "Scénario de régression exécuté sur la V0.9 ; document rendu dans Chromium.",
+    "sha256": "3ac58ad92b2af304d3da9303272b6482f68453bcadae33b81001a0a9f878a97a",
+    "version": "0.9.0"
+  },
+  {
+    "file": "03_dialogue.png",
+    "title": "Échange de bord",
+    "caption": "Dialogue ouvert par maintien de E à proximité de Jordan. Répliques originales du prototype.",
+    "method": "Scénario de régression exécuté sur la V0.9 ; document rendu dans Chromium.",
+    "sha256": "09406768b2370ed2fd4b54cc98de5153d7711aaaf3c4003aa926de801ddbf388",
+    "version": "0.9.0"
+  },
+  {
+    "file": "04_beebees.png",
+    "title": "BeeBee’s",
+    "caption": "Annexe de repos conservée de la V0.9 ; ce plan est une création du jeu.",
+    "method": "Scénario de régression exécuté sur la V0.9 ; document rendu dans Chromium.",
+    "sha256": "6b75dbb1ff08871e74f5865b5bae1aea98ca9dbe40c81101b639c38ca389cf99",
+    "version": "0.9.0"
+  },
+  {
+    "file": "05_transcription.png",
+    "title": "Document récupéré",
+    "caption": "Transcription affichée après maintien réel de E. Une fiche Traces est déverrouillée.",
+    "method": "Scénario de régression exécuté sur la V0.9 ; document rendu dans Chromium.",
+    "sha256": "e29775ed848f2d9cc119a2c856173efabc343d8d511f10929d6cd797baab6c25",
+    "version": "0.9.0"
+  },
+  {
+    "file": "06_carnet.png",
+    "title": "Carnet filtré",
+    "caption": "Le filtre Traces ne montre que le document collecté, pas les autres enregistrements.",
+    "method": "Scénario de régression exécuté sur la V0.9 ; document rendu dans Chromium.",
+    "sha256": "d799c1480811712db02a0ed4006596aef64ecacf84a95b2f0b13cf1bf18ec8e3",
+    "version": "0.9.0"
+  },
+  {
+    "file": "07_derivation.png",
+    "title": "Commande de dérivation",
+    "caption": "Panneau ouvert par interaction ; réglages partiels, erreur et validation testés par clics.",
+    "method": "Scénario de régression exécuté sur la V0.9 ; document rendu dans Chromium.",
+    "sha256": "e151034c8ce0918bfed573c4ad37b0af37edff47c6f192e7261d27cc3439728f",
+    "version": "0.9.0"
+  },
+  {
+    "file": "08_auxiliaires.png",
+    "title": "Galerie des auxiliaires",
+    "caption": "Scène préparée dans un passage latéral. La vanne locale de cette fuite a son contrôle physique dédié.",
+    "method": "Scénario de régression exécuté sur la V0.9 ; document rendu dans Chromium.",
+    "sha256": "1a012ca64a83d8fcd35bbbda5fe58e5965f24f47645d8ed8b37ddfcc3a1d36ad",
+    "version": "0.9.0"
+  },
+  {
+    "file": "09_pression.png",
+    "title": "Régler le collecteur",
+    "caption": "Jauge de pression distincte des commutateurs. Le monde est en pause pendant la manipulation.",
+    "method": "Scénario de régression exécuté sur la V0.9 ; document rendu dans Chromium.",
+    "sha256": "7931a9728a1a21c77f9fbfce8e3e9270558b9f5b28e65153e5d2cb666547565a",
+    "version": "0.9.0"
+  },
+  {
+    "file": "10_decantation.png",
+    "title": "Canal de décantation",
+    "caption": "Annexe profonde conservée ; le plan de sol permet de changer de bande.",
+    "method": "Scénario de régression exécuté sur la V0.9 ; document rendu dans Chromium.",
+    "sha256": "b03dc9dd94e7debe9ec5fb1fc7db6f398f0263c291e6103fa2c5b591f4d749d9",
+    "version": "0.9.0"
+  },
+  {
+    "file": "11_alcove.png",
+    "title": "Alcôve des vestiges",
+    "caption": "Architecture organique de l’annexe. Silhouettes stylisées, pas assets définitifs ou identification officielle.",
+    "method": "Scénario de régression exécuté sur la V0.9 ; document rendu dans Chromium.",
+    "sha256": "791351d2d84b35cddcab427c760085f495d291505bca333c84cdacdc71671786",
+    "version": "0.9.0"
+  },
+  {
+    "file": "12_infirmerie.png",
+    "title": "État de l’infirmerie",
+    "caption": "Scène tardive préparée ; blessure, pertes et présence de Ripley dépendent de la progression.",
+    "method": "Scénario de régression exécuté sur la V0.9 ; document rendu dans Chromium.",
+    "sha256": "9d1bb6bb2bc7060882a1888b4e312981ee14fdaa468c6342abbd068bedf5b720",
+    "version": "0.9.0"
+  },
+  {
+    "file": "13_equipage.png",
+    "title": "Tableau des contacts",
+    "caption": "Les contacts perdus sont distingués et ne sont pas traités comme une escouade disponible.",
+    "method": "Scénario de régression exécuté sur la V0.9 ; document rendu dans Chromium.",
+    "sha256": "cd95c2a892a47a894122a451b6ca9eadcce75edf6d06e4dc59bba4908815f79b",
+    "version": "0.9.0"
+  },
+  {
+    "file": "14_programme_medical.png",
+    "title": "Commande médicale fictionnelle",
+    "caption": "Séquence d’interface à quatre étapes, sans procédure médicale réelle.",
+    "method": "Scénario de régression exécuté sur la V0.9 ; document rendu dans Chromium.",
+    "sha256": "63f8d19d6802f243f27b269b0ee60fb57c73757c48d73518b36d3fcf81852386",
+    "version": "0.9.0"
+  },
+  {
+    "file": "15_evacuation.png",
+    "title": "Portage de Ripley",
+    "caption": "Scène préparée après l’événement médical ; pose allongée et interdiction de flamme pendant le portage.",
+    "method": "Scénario de régression exécuté sur la V0.9 ; document rendu dans Chromium.",
+    "sha256": "b37c445476cc531a1a56640642b3e893abe49b6281dfc057fcb12c6d05b33753",
+    "version": "0.9.0"
+  },
+  {
+    "file": "16_quai_libere.png",
+    "title": "Quai après largage",
+    "caption": "La silhouette du Narcissus est retirée lorsque le drapeau de largage est actif.",
+    "method": "Scénario de régression exécuté sur la V0.9 ; document rendu dans Chromium.",
+    "sha256": "1d2e469c996788bf076865f1e97308ef0260de565beedad3b1c03ca21ae2fa97",
+    "version": "0.9.0"
+  },
+  {
+    "file": "17_transmission.png",
+    "title": "Accorder la porteuse",
+    "caption": "Dernière commande ouverte et résolue via l’interface sur une scène préparée.",
+    "method": "Scénario de régression exécuté sur la V0.9 ; document rendu dans Chromium.",
+    "sha256": "07b33bb1ba789356a251638add8de75fb5e353d4be02779979e5bc80f90e97d1",
+    "version": "0.9.0"
+  },
+  {
+    "file": "18_conclusion.png",
+    "title": "Dernière transmission",
+    "caption": "Conclusion obtenue en terminant la commande finale depuis la fixture de fin ; pas preuve d’un parcours humain complet.",
+    "method": "Scénario de régression exécuté sur la V0.9 ; document rendu dans Chromium.",
+    "sha256": "776dd88bd74b199ecb516a739678c5157aad892ea2ecb17dcc5b8e41f9dde48f",
+    "version": "0.9.0"
+  },
+  {
+    "file": "19_plan.png",
+    "title": "Relevé et pause",
+    "caption": "Le monde est arrêté pendant la consultation. Capture de non-régression de la nouvelle carte.",
+    "method": "Scénario de régression exécuté sur la V0.9 ; document rendu dans Chromium.",
+    "sha256": "ac91786441aa3db3f9fee1a592bc1182c6b78b4a66eac91b8eb18f529946b172",
+    "version": "0.9.0"
+  },
+  {
+    "file": "20_mobile.png",
+    "title": "Exploration en portrait",
+    "caption": "Affichage 390 × 844 ; une commande de déplacement maintenue au pointeur a été testée.",
+    "method": "Scénario de régression exécuté sur la V0.9 ; document rendu dans Chromium.",
+    "sha256": "18c069bfb6513bbd23297f7a2e405f74ef248e4fc9dc77f7cf4df5c8ec527d9a",
+    "version": "0.9.0"
+  },
+  {
+    "file": "21_contact.png",
+    "title": "Flamme et recul",
+    "caption": "Rencontre préparée dans le Samson ; le feu est déclenché par la touche F et consomme du carburant.",
+    "method": "Scénario de régression exécuté sur la V0.9 ; document rendu dans Chromium.",
+    "sha256": "548af4778c31e5ff4e48f9129fbc079d3796cac1f62efe5d01cc7c2b7d75c371",
+    "version": "0.9.0"
+  },
+  {
+    "file": "22_baxter_suit.png",
+    "title": "Baxter suit",
+    "caption": "Baxter se déplace dans le refuge. Scène préparée à 22 objectifs ; suivi simulé sans injection de sa position après le départ.",
+    "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise.",
+    "sha256": "1ab6655114fe4d439813f4585ec7c591796a15c5313a255575c6aaca57a66160",
+    "version": "0.9.0"
+  },
+  {
+    "file": "23_baxter_attend.png",
+    "title": "Baxter attend",
+    "caption": "Ordre attendre donné par G : le joueur s’éloigne, Baxter conserve sa position.",
+    "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise.",
+    "sha256": "7fb52eea01cf0961087515f2bdd6d28ba7a59264f68664d40715b585a9d06d08",
+    "version": "0.9.0"
+  },
+  {
+    "file": "24_hoop_epave.png",
+    "title": "Hoop epave",
+    "caption": "Hoop accompagne Ripley dans le vestibule. Scène préparée ; déplacement du compagnon effectif.",
+    "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise.",
+    "sha256": "22be7205acf080b86326a5f21a2abd216834192dd1e6911ae6a4d1641c363d5d",
+    "version": "0.9.0"
+  },
+  {
+    "file": "25_ripley_retour.png",
+    "title": "Ripley retour",
+    "caption": "Ripley suit Hoop au retour vers la surface ; sa pose blessée est conservée. Ce n’est pas encore le portage médical.",
+    "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise.",
+    "sha256": "da58ae17aff7421c19b59f0aede7eb97fdd3d0875c99bb778e50b467ce1ab5f9",
+    "version": "0.9.0"
+  },
+  {
+    "file": "26_cachette.png",
+    "title": "Cachette",
+    "caption": "Dissimulation activée par maintien réel de E. Le personnage n’est pas déplacé vers une autre salle.",
+    "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise.",
+    "sha256": "15d3cc3214d7a6a4ba2578e76fda06df14d4fb7875a4f93890d9a25dffb89bdb",
+    "version": "0.9.0"
+  },
+  {
+    "file": "27_appui_adulte.png",
+    "title": "Appui adulte",
+    "caption": "Préparation d’attaque visible avant contact. Rencontre préparée ; le moteur déclenche et résout lui-même l’appui.",
+    "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise.",
+    "sha256": "a4574cc73c16633f2931415da5f1f69893326ef5ded63e0577b71861269d0dfc",
+    "version": "0.9.0"
+  },
+  {
+    "file": "28_reserve_fermee.png",
+    "title": "Reserve fermee",
+    "caption": "Réserve de carburant avant collecte, au même emplacement que la capture suivante.",
+    "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise.",
+    "sha256": "6c31c91947e491ef2195675be684c3dc84180564eefa8efb8c3e98fa153fa953",
+    "version": "0.9.0"
+  },
+  {
+    "file": "29_reserve_ouverte.png",
+    "title": "Reserve ouverte",
+    "caption": "Après collecte : le couvercle reste ouvert, le contenu disparaît, le conteneur ne disparaît pas.",
+    "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise.",
+    "sha256": "5bdc8f244adde7d2fd025f1cb13a7884b5ad6d3736600506c7dfb4250d352a8e",
+    "version": "0.9.0"
+  },
+  {
+    "file": "30_plan_initial.png",
+    "title": "Plan initial",
+    "caption": "Relevé initial : seule la passerelle est nommée ; les annexes et leurs sorties ne sont pas dévoilées.",
+    "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise.",
+    "sha256": "20d6ad57cd29be31078a988229a02927fed3a2d2bdcbf1aad6c2aea5b16687c3",
+    "version": "0.9.0"
+  },
+  {
+    "file": "31_plan_explore.png",
+    "title": "Plan explore",
+    "caption": "Plan depuis un état produit par le parcours moteur complet. Aucun ajout manuel de pièces visitées.",
+    "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise.",
+    "sha256": "3ae5ff2d991e7f30a00e2336eebae769ecb595740a04a077d0120c60d59f44f8",
+    "version": "0.9.0"
+  },
+  {
+    "file": "32_niche_organique.png",
+    "title": "Niche organique",
+    "caption": "Même mécanique de cachette, avec une alcôve de nervures dans l’épave et non un placard industriel.",
+    "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise.",
+    "sha256": "01f76ab4c0b4107e43460f1480e34e1c4436bdbe5001236e3885e5df41a4d6c0",
+    "version": "0.9.0"
+  },
+  {
+    "file": "33_atelier_contraste.png",
+    "title": "Atelier contraste",
+    "caption": "Atelier enrichi : touret, râtelier et trappe. La lisibilité renforcée n’ajoute aucune collision.",
+    "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise.",
+    "sha256": "0056ae38a53a2ea47d11f26bee1db4fbbd4dc77ed0aecd5755969220a584cdd2",
+    "version": "0.9.0"
+  },
+  {
+    "file": "34_mobile_escorte.png",
+    "title": "Mobile escorte",
+    "caption": "Affichage portrait 390 × 844 ; commande tactile G et compagnon en attente.",
+    "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise.",
+    "sha256": "472a5330483e8ba7d902e5d05e8f089c8dea9b750b12c81ce09a1b96158f3ad2",
+    "version": "0.9.0"
+  },
+  {
+    "file": "35_paysage.png",
+    "title": "Paysage",
+    "caption": "Affichage paysage 844 × 390 : le terrain et les commandes restent accessibles.",
+    "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise.",
+    "sha256": "21733082a7ebddeb9ca38082ff351d400f328a21cd544e66bb89e12763a62ccc",
+    "version": "0.9.0"
+  },
+  {
+    "file": "36_lumieres_locales.png",
+    "title": "Lumieres locales",
+    "caption": "Machinerie : éclairages localisés, touret et panneaux ; lampe du joueur éteinte.",
+    "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise.",
+    "sha256": "353b71b794ea0e763d68a2dc727254605f9c6d53d07c53e4baaa0c1c44ae9b01",
+    "version": "0.9.0"
+  },
+  {
+    "file": "37_menu_v04.png",
+    "title": "Menu v04",
+    "caption": "Menu de la V0.9, document chargé sans état de campagne injecté.",
+    "method": "Capture réelle Chromium de la V0.9 (scénario de non-régression V0.9) ; scène préparée puis commandes ou simulation indiquées dans la légende.",
+    "sha256": "8ec216de3408f7ef8db4e4d3212408bda3b6d786280cfd55cfdd1e419e7ee8b5",
+    "version": "0.9.0"
+  },
+  {
+    "file": "38_coursive_eclairee.png",
+    "title": "Coursive eclairee",
+    "caption": "Coursive, rampes allumées. Point de départ préparé devant la commande d’éclairage.",
+    "method": "Capture réelle Chromium de la V0.9 (scénario de non-régression V0.9) ; scène préparée puis commandes ou simulation indiquées dans la légende.",
+    "sha256": "b106df0c17d314f4b67020f4b278143f32b5f25307f9c2b19382107ff3481e3b",
+    "version": "0.9.0"
+  },
+  {
+    "file": "39_coursive_secours.png",
+    "title": "Coursive secours",
+    "caption": "Même position après interaction E : les rampes s’éteignent, le balisage reste visible.",
+    "method": "Capture réelle Chromium de la V0.9 (scénario de non-régression V0.9) ; scène préparée puis commandes ou simulation indiquées dans la légende.",
+    "sha256": "346d4d9e63ac444dd9f4960a3a8cce743e6f16c787ca37b284c06516844d9741",
+    "version": "0.9.0"
+  },
+  {
+    "file": "40_services.png",
+    "title": "Services",
+    "caption": "Relevé des services locaux ouvert par K. Aucune activation distante.",
+    "method": "Capture réelle Chromium de la V0.9 (scénario de non-régression V0.9) ; scène préparée puis commandes ou simulation indiquées dans la légende.",
+    "sha256": "acdd9b714801de94c2279c2746ef7046693541239d2f567b9103a67739b45739",
+    "version": "0.9.0"
+  },
+  {
+    "file": "41_verrou_coursive.png",
+    "title": "Verrou coursive",
+    "caption": "Fermeture du verrou par maintien de B. Le délai apparaît sur la porte.",
+    "method": "Capture réelle Chromium de la V0.9 (scénario de non-régression V0.9) ; scène préparée puis commandes ou simulation indiquées dans la légende.",
+    "sha256": "1791755f1df8d7b90cc95e85200f072e82d8033d837222020a666af77334e011",
+    "version": "0.9.0"
+  },
+  {
+    "file": "42_compresseur.png",
+    "title": "Compresseur",
+    "caption": "Compresseur déclenché par E. Rotation et état de cycle sont produits par la simulation, sur une scène préparée.",
+    "method": "Capture réelle Chromium de la V0.9 (scénario de non-régression V0.9) ; scène préparée puis commandes ou simulation indiquées dans la légende.",
+    "sha256": "62e7d58067c9407edd012ab64c8a92a11dbae3f3b412816da65b5b04addebcb4",
+    "version": "0.9.0"
+  },
+  {
+    "file": "43_pression_pompage.png",
+    "title": "Pression pompage",
+    "caption": "Rencontre préparée : E pour passer, B pour fermer. L’adulte rejoint réellement le seuil depuis la salle précédente, puis force la cloison.",
+    "method": "Capture réelle Chromium de la V0.9 (scénario de non-régression V0.9) ; scène préparée puis commandes ou simulation indiquées dans la légende.",
+    "sha256": "ce2e439a656d35fdfd747ef55dcf4f1661dad794180078259ce48f1ee57b460f",
+    "version": "0.9.0"
+  },
+  {
+    "file": "44_passage_creature.png",
+    "title": "Passage creature",
+    "caption": "Même rencontre après rupture du verrou. L’adulte porte la même identité ; aucun clone n’a été ajouté pour la capture.",
+    "method": "Capture réelle Chromium de la V0.9 (scénario de non-régression V0.9) ; scène préparée puis commandes ou simulation indiquées dans la légende.",
+    "sha256": "34a68b8a2dca919b0198892797125ded26805422761ed906f1f9a2c9d334dff4",
+    "version": "0.9.0"
+  },
+  {
+    "file": "45_seuil_epave.png",
+    "title": "Seuil epave",
+    "caption": "Seuil organique : absence de verrou industriel. Scène préparée dans l’épave.",
+    "method": "Capture réelle Chromium de la V0.9 (scénario de non-régression V0.9) ; scène préparée puis commandes ou simulation indiquées dans la légende.",
+    "sha256": "21bd845ee3f0dc88dace619478c0a406749f66af2c992d64ee47dbda6e5eab73",
+    "version": "0.9.0"
+  },
+  {
+    "file": "46_mobile_cloison.png",
+    "title": "Mobile cloison",
+    "caption": "Affichage 390 × 844, contrôle B visible et verrou engagé via le contrôle de terrain.",
+    "method": "Capture réelle Chromium de la V0.9 (scénario de non-régression V0.9) ; scène préparée puis commandes ou simulation indiquées dans la légende.",
+    "sha256": "d19421b4ac807daec1c4ab60683c0bcd04a6d0e5730380c7b463f7a4f293eb5d",
+    "version": "0.9.0"
+  },
+  {
+    "file": "47_mobile_services.png",
+    "title": "Mobile services",
+    "caption": "Relevé K en format mobile ; la simulation est suspendue.",
+    "method": "Capture réelle Chromium de la V0.9 (scénario de non-régression V0.9) ; scène préparée puis commandes ou simulation indiquées dans la légende.",
+    "sha256": "2468fc359a76793d9d9cd397da56bb4741b0d75eab0d06c454ab434d661fa86c",
+    "version": "0.9.0"
+  },
+  {
+    "file": "48_paysage_services.png",
+    "title": "Paysage services",
+    "caption": "Format paysage 844 × 390. La machine et les commandes de terrain restent accessibles.",
+    "method": "Capture réelle Chromium de la V0.9 (scénario de non-régression V0.9) ; scène préparée puis commandes ou simulation indiquées dans la légende.",
+    "sha256": "55aa3c41b35825a04be2b2a25ec20fbba9ff0b4a6fe53e1fc3f897a397c31afb",
+    "version": "0.9.0"
+  },
+  {
+    "file": "49_menu_v05.png",
+    "title": "Menu v05",
+    "caption": "Menu de la V0.9 ; ouverture initiale, sans état de campagne injecté.",
+    "method": "Capture réelle Chromium du HTML V0.9 (scénario de non-régression V0.9). Scène préparée puis touches ou simulation décrites dans la légende.",
+    "sha256": "8ec216de3408f7ef8db4e4d3212408bda3b6d786280cfd55cfdd1e419e7ee8b5",
+    "version": "0.9.0"
+  },
+  {
+    "file": "50_ecoute.png",
+    "title": "Ecoute",
+    "caption": "V tenu dans la passerelle. Le joueur s’arrête, mais la simulation continue ; aucun contact silencieux n’est inventé.",
+    "method": "Capture réelle Chromium du HTML V0.9 (scénario de non-régression V0.9). Scène préparée puis touches ou simulation décrites dans la légende.",
+    "sha256": "677ba520441c743d62a036254f675dcc45a038ee491de3ed1cc1f0ab4ca27a90",
+    "version": "0.9.0"
+  },
+  {
+    "file": "51_ecoute_cloison.png",
+    "title": "Ecoute cloison",
+    "caption": "Scène préparée : un adulte dans la galerie. F émet le bruit, B ferme, puis V écoute sa pression depuis le pompage. Aucun changement de pièce du joueur.",
+    "method": "Capture réelle Chromium du HTML V0.9 (scénario de non-régression V0.9). Scène préparée puis touches ou simulation décrites dans la légende.",
+    "sha256": "f37d023a450ad5de3f430dc4623efc6b054aeed4cffc672836f8425144e08cbe",
+    "version": "0.9.0"
+  },
+  {
+    "file": "52_enquete_sonore.png",
+    "title": "Enquete sonore",
+    "caption": "Même rencontre après simulation de la rupture et du passage. Le point du joueur a été préparé plus loin pour observer le transfert sans l’interrompre.",
+    "method": "Capture réelle Chromium du HTML V0.9 (scénario de non-régression V0.9). Scène préparée puis touches ou simulation décrites dans la légende.",
+    "sha256": "cc0e9a62df954bd581b3117040baf42564dd24ba5e9e5d4c125125c27c181e3a",
+    "version": "0.9.0"
+  },
+  {
+    "file": "53_masque_machine.png",
+    "title": "Masque machine",
+    "caption": "Cycle de rinçage déclenché par E, écoute maintenue avec V. Le moteur masque les pas proches, sans désactiver la menace.",
+    "method": "Capture réelle Chromium du HTML V0.9 (scénario de non-régression V0.9). Scène préparée puis touches ou simulation décrites dans la légende.",
+    "sha256": "bf96f7bf5e86ec65b328629e3ed724941db14ff86c3b18462f7bd5c5e1c38179",
+    "version": "0.9.0"
+  },
+  {
+    "file": "54_leurre_actif.png",
+    "title": "Leurre actif",
+    "caption": "Un seul boîtier lancé malgré deux secondes de maintien de R. Le signal est actif à son point d’impact.",
+    "method": "Capture réelle Chromium du HTML V0.9 (scénario de non-régression V0.9). Scène préparée puis touches ou simulation décrites dans la légende.",
+    "sha256": "e18e34614ccefaf0408121020fcb81939f999e70dc3288dbc15eadd40007b81b",
+    "version": "0.9.0"
+  },
+  {
+    "file": "55_traces_sol.png",
+    "title": "Traces sol",
+    "caption": "Même secteur après expiration du leurre, puis une brève flamme. Boîtier et marque de chaleur restent au sol ; ils ne bloquent pas le passage.",
+    "method": "Capture réelle Chromium du HTML V0.9 (scénario de non-régression V0.9). Scène préparée puis touches ou simulation décrites dans la légende.",
+    "sha256": "d6ad38e256e39d66718108eb7d57232ee3ec05b5a34e6ed7dc295b3c7100e13e",
+    "version": "0.9.0"
+  },
+  {
+    "file": "56_signal_reconnu.png",
+    "title": "Signal reconnu",
+    "caption": "Trois lancers préparés au même endroit avec déplacements de fixture entre les essais. L’IA a effectué les deux inspections en simulation ; le troisième signal est ignoré.",
+    "method": "Capture réelle Chromium du HTML V0.9 (scénario de non-régression V0.9). Scène préparée puis touches ou simulation décrites dans la légende.",
+    "sha256": "8c6e7fd32aed74b1fe25088da6b5b781803339cd8e743b234cef85cb9a8d9989",
+    "version": "0.9.0"
+  },
+  {
+    "file": "57_compagnon_prudence.png",
+    "title": "Compagnon prudence",
+    "caption": "Hoop auprès de Ripley : menace préparée dans sa ligne de vue. Son alerte et sa posture résultent des pas de simulation, pas d’un dialogue injecté.",
+    "method": "Capture réelle Chromium du HTML V0.9 (scénario de non-régression V0.9). Scène préparée puis touches ou simulation décrites dans la légende.",
+    "sha256": "42081ffbe503bf21b160983b940851564d2220468594cd823118c018ac866f54",
+    "version": "0.9.0"
+  },
+  {
+    "file": "58_journal_terrain.png",
+    "title": "Journal terrain",
+    "caption": "Journal ouvert depuis la pause : sons émis et traces obtenues dans la séquence précédente. Il ne révèle pas les ennemis cachés.",
+    "method": "Capture réelle Chromium du HTML V0.9 (scénario de non-régression V0.9). Scène préparée puis touches ou simulation décrites dans la légende.",
+    "sha256": "297738c1a79836a6918d4b8fbd343dcd361cd36d48012c482401638461461c62",
+    "version": "0.9.0"
+  },
+  {
+    "file": "59_mobile_ecoute.png",
+    "title": "Mobile ecoute",
+    "caption": "390 × 844 : maintien réel du bouton tactile V avec un pointeur. Le relevé ne masque pas le personnage ni les directions.",
+    "method": "Capture réelle Chromium du HTML V0.9 (scénario de non-régression V0.9). Scène préparée puis touches ou simulation décrites dans la légende.",
+    "sha256": "a3646e2e10823f8c95bcce3db59ac82452189d34363bed92e1ae0f769a14117d",
+    "version": "0.9.0"
+  },
+  {
+    "file": "60_paysage_ecoute.png",
+    "title": "Paysage ecoute",
+    "caption": "844 × 390 : écoute active en paysage. La simulation n’est pas arrêtée ; les commandes et le pied d’écran restent dans le viewport.",
+    "method": "Capture réelle Chromium du HTML V0.9 (scénario de non-régression V0.9). Scène préparée puis touches ou simulation décrites dans la légende.",
+    "sha256": "32cff9f9f588491c9f8467b5826cd2c8f157a522d39867087f9e22e570696854",
+    "version": "0.9.0"
+  },
+  {
+    "file": "61_coffret_transparent.png",
+    "title": "Coffret transparent",
+    "caption": "Correction trouvée à la revue des captures : même position devant le coffret du pompage. Le coffret au premier plan s’estompe pour laisser voir Ripley ; la collision n’est pas modifiée.",
+    "method": "Capture réelle Chromium du HTML V0.9 (scénario de non-régression V0.9). Scène préparée puis touches ou simulation décrites dans la légende.",
+    "sha256": "cd359712d0d3a79534eebc0d86bcd7bc02fb8b4767a94e1cdd2b4297ddeef881",
+    "version": "0.9.0"
+  },
+  {
+    "file": "62_menu_v06.png",
+    "title": "Menu v06",
+    "caption": "Menu au chargement initial. La marque V0.9 distingue cette archive des versions précédentes.",
+    "method": "Capture Chromium V0.9 ; états de scène préparés, puis commandes / simulation explicitement décrites.",
+    "sha256": "8ec216de3408f7ef8db4e4d3212408bda3b6d786280cfd55cfdd1e419e7ee8b5",
+    "version": "0.9.0"
+  },
+  {
+    "file": "63_casier_ouvert.png",
+    "title": "Casier ouvert",
+    "caption": "Fixture au casier des machines ; collecte par E. Le casier reste ouvert, sans disparition de son support.",
+    "method": "Capture Chromium V0.9 ; états de scène préparés, puis commandes / simulation explicitement décrites.",
+    "sha256": "132386f13a384e104df36c4092e16a16eec6b96c504952430d3483d080fde13b",
+    "version": "0.9.0"
+  },
+  {
+    "file": "64_traverse_fermee.png",
+    "title": "Traverse fermee",
+    "caption": "Fixture au seuil sanitaire non réparé. Les trois étapes et les pièces ne sont pas prévalidées.",
+    "method": "Capture Chromium V0.9 ; états de scène préparés, puis commandes / simulation explicitement décrites.",
+    "sha256": "b161203f11f4d69f3987da69a9431df7ea45bf1ff40591f07be83054a8f10eaf",
+    "version": "0.9.0"
+  },
+  {
+    "file": "65_connecteurs_poses.png",
+    "title": "Connecteurs poses",
+    "caption": "Deux étapes accomplies au clavier : le capot et les connecteurs changent visuellement. Le passage est encore fermé.",
+    "method": "Capture Chromium V0.9 ; états de scène préparés, puis commandes / simulation explicitement décrites.",
+    "sha256": "4b09642394e3f193301c5a782ddd8dda2523294b153181bfc51c4e3d4a7ee202",
+    "version": "0.9.0"
+  },
+  {
+    "file": "66_sac_chantier.png",
+    "title": "Sac chantier",
+    "caption": "Le chantier découvert figure dans le sac ; repère facultatif activé par son bouton. La progression principale n’est pas remplacée.",
+    "method": "Capture Chromium V0.9 ; états de scène préparés, puis commandes / simulation explicitement décrites.",
+    "sha256": "612e04a3086c6b3e538b1ac0791ec42d3883987549f1a3b73e65d0fda4465aa2",
+    "version": "0.9.0"
+  },
+  {
+    "file": "67_traverse_retablie.png",
+    "title": "Traverse retablie",
+    "caption": "Trois gestes terminés par E après réimport du carnet intermédiaire. Le même mécanisme ouvre les deux faces.",
+    "method": "Capture Chromium V0.9 ; états de scène préparés, puis commandes / simulation explicitement décrites.",
+    "sha256": "ff2bedfe10c3f327af4f9fa9cf304bed3f187bc99495592d196cd800eead1b8f",
+    "version": "0.9.0"
+  },
+  {
+    "file": "68_plan_proximite.png",
+    "title": "Plan proximite",
+    "caption": "Plan ouvert après le franchissement réel. Le relevé utilise les coordonnées de la pièce et ne place aucun ennemi.",
+    "method": "Capture Chromium V0.9 ; états de scène préparés, puis commandes / simulation explicitement décrites.",
+    "sha256": "cb3d5e6853719b332e850f98c35034d3e9c0d19c689e6155abc2a619562bba36",
+    "version": "0.9.0"
+  },
+  {
+    "file": "69_etabli_reassort.png",
+    "title": "Etabli reassort",
+    "caption": "Établi ouvert par E. Stock de composants préparé par collectes de fixture ; les trois recettes sont exécutées par leurs boutons et débitent neuf pièces au total.",
+    "method": "Capture Chromium V0.9 ; états de scène préparés, puis commandes / simulation explicitement décrites.",
+    "sha256": "8f11bcd5fa6d081fb4611a42948716f36c315047e631d7646576fc885c005fac",
+    "version": "0.9.0"
+  },
+  {
+    "file": "70_desserte_manutention.png",
+    "title": "Desserte manutention",
+    "caption": "Chapitre autorisé préparé ; les trois gestes ouvrent la desserte de l’atelier. Aucun changement des objectifs de campagne.",
+    "method": "Capture Chromium V0.9 ; états de scène préparés, puis commandes / simulation explicitement décrites.",
+    "sha256": "26effe2e8feadccdd614794ca9421d1887d24f6240228b6d4accaeb0fbf664b5",
+    "version": "0.9.0"
+  },
+  {
+    "file": "71_contact_traverse.png",
+    "title": "Contact traverse",
+    "caption": "Traverse minière réparée au clavier. Un adulte préparé dans la pièce voisine entend F, puis franchit le seuil avec le même identifiant ; le joueur est placé plus loin pour observer.",
+    "method": "Capture Chromium V0.9 ; états de scène préparés, puis commandes / simulation explicitement décrites.",
+    "sha256": "c566ce76abfd49616f983667b76f1ff0a0d35de4347a9e1c0103bb59622d5074",
+    "version": "0.9.0"
+  },
+  {
+    "file": "72_mobile_sac.png",
+    "title": "Mobile sac",
+    "caption": "390 × 844 : sac ouvert depuis le menu pause, sans raccourci clavier réservé au bureau. Le contenu reste défilable dans la fenêtre.",
+    "method": "Capture Chromium V0.9 ; états de scène préparés, puis commandes / simulation explicitement décrites.",
+    "sha256": "e13371e2d04fc95c0c25aa8dcc5d355ef6b7070599ad124fc1057155a13424ce",
+    "version": "0.9.0"
+  },
+  {
+    "file": "73_mobile_plan.png",
+    "title": "Mobile plan",
+    "caption": "390 × 844 : relevé de proximité et connexions accessibles dans la même fenêtre. Aucun voyage rapide.",
+    "method": "Capture Chromium V0.9 ; états de scène préparés, puis commandes / simulation explicitement décrites.",
+    "sha256": "e494f9df6c145647e4f8a2f6e293b0945a546e9ec7cbef0437e736cdc9bc13d3",
+    "version": "0.9.0"
+  },
+  {
+    "file": "74_menu_v07.png",
+    "title": "Menu v07",
+    "caption": "Écran titre au chargement du document V0.9.",
+    "method": "Chromium V0.9 ; scène préparée explicitement, puis commandes ordinaires et simulation.",
+    "sha256": "8ec216de3408f7ef8db4e4d3212408bda3b6d786280cfd55cfdd1e419e7ee8b5",
+    "version": "0.9.0"
+  },
+  {
+    "file": "75_caniveau.png",
+    "title": "Caniveau",
+    "caption": "Fixture dans la galerie de retour. L’eau reste dans la bande avant ; la circulation arrière demeure sèche.",
+    "method": "Chromium V0.9 ; scène préparée explicitement, puis commandes ordinaires et simulation.",
+    "sha256": "8d88afe52cd8346d4626d3b93fd1179f4fb5b72bdf03c5669426a186fb6b90ae",
+    "version": "0.9.0"
+  },
+  {
+    "file": "76_echangeurs.png",
+    "title": "Echangeurs",
+    "caption": "Vannes et démarreur actionnés par E. Les jauges et le temps restant lisent l’état du cycle, pas une animation indépendante.",
+    "method": "Chromium V0.9 ; scène préparée explicitement, puis commandes ordinaires et simulation.",
+    "sha256": "233e60277cd37f10ed3023078a3412df5054e53e969c861a8570240d57fc8661",
+    "version": "0.9.0"
+  },
+  {
+    "file": "77_releve_pompage.png",
+    "title": "Releve pompage",
+    "caption": "Le relevé ouvert par O pendant le cycle. La simulation est arrêtée pendant sa lecture.",
+    "method": "Chromium V0.9 ; scène préparée explicitement, puis commandes ordinaires et simulation.",
+    "sha256": "c72e6acd8bb001719f6e93ea16cb7c4215278121364f3757fa92c60cddc5a1bb",
+    "version": "0.9.0"
+  },
+  {
+    "file": "78_traverse_ouverte.png",
+    "title": "Traverse ouverte",
+    "caption": "Après dix-huit secondes réelles de simulation cumulée, le caniveau est vidé et la traverse est libérée.",
+    "method": "Chromium V0.9 ; scène préparée explicitement, puis commandes ordinaires et simulation.",
+    "sha256": "1dabeaab1b57e0aec024dfc709b0cf98224c9fd9f65f1e5151021736f7f269c3",
+    "version": "0.9.0"
+  },
+  {
+    "file": "79_armoire.png",
+    "title": "Armoire",
+    "caption": "Armoire déverrouillée par E après baisse du niveau. Les prélèvements restent des carottes minérales, pas de nouveaux œufs.",
+    "method": "Chromium V0.9 ; scène préparée explicitement, puis commandes ordinaires et simulation.",
+    "sha256": "dd774408917b5863bc60ac896d5369f0114444adf7b880fa8af8ef62af96fe1f",
+    "version": "0.9.0"
+  },
+  {
+    "file": "80_enregistreur_porte.png",
+    "title": "Enregistreur porte",
+    "caption": "Enregistreur récupéré et représenté sur la sangle du personnage. Aucun transfert de dossier à distance.",
+    "method": "Chromium V0.9 ; scène préparée explicitement, puis commandes ordinaires et simulation.",
+    "sha256": "6eb807d34d3a38fe1bc2b533a5466127ea898b5f2ba59e8f4906505aa08e41e7",
+    "version": "0.9.0"
+  },
+  {
+    "file": "81_enregistreur_pose.png",
+    "title": "Enregistreur pose",
+    "caption": "T a posé le boîtier à la position actuelle. Il demeure un objet local à reprendre.",
+    "method": "Chromium V0.9 ; scène préparée explicitement, puis commandes ordinaires et simulation.",
+    "sha256": "ac56cd1509322e74eab27c20c97f315c8a2c7bff938feadb7aa1b8d6c0b51fd4",
+    "version": "0.9.0"
+  },
+  {
+    "file": "82_poste_releve.png",
+    "title": "Poste releve",
+    "caption": "Boîtier branché au lecteur par E. Le poste de relevé possède une architecture d’écrans distincte des échangeurs.",
+    "method": "Chromium V0.9 ; scène préparée explicitement, puis commandes ordinaires et simulation.",
+    "sha256": "145bd137dd034d4bb385ea5657890f8e1d3c8925d8bb08b2e6ec86db39e7cb57",
+    "version": "0.9.0"
+  },
+  {
+    "file": "83_copie.png",
+    "title": "Copie",
+    "caption": "Carnet ouvert après les huit gestes. Le texte est original à cette adaptation ; il ne prétend pas être un extrait du roman.",
+    "method": "Chromium V0.9 ; scène préparée explicitement, puis commandes ordinaires et simulation.",
+    "sha256": "47fa5a67c6a222b26d6067d80ce4fc8ef49a10af363e7d11e98904446dd7f633",
+    "version": "0.9.0"
+  },
+  {
+    "file": "84_plan_caniveau.png",
+    "title": "Plan caniveau",
+    "caption": "Plan de la galerie après assèchement : empreinte du caniveau, mobilier, position du joueur et accès observés. Aucun ennemi affiché.",
+    "method": "Chromium V0.9 ; scène préparée explicitement, puis commandes ordinaires et simulation.",
+    "sha256": "43329cfae9530aace2ac571e3ec3163cf9253f8bf83cbb815af1b1dac1e8d0fa",
+    "version": "0.9.0"
+  },
+  {
+    "file": "85_mobile_releve.png",
+    "title": "Mobile releve",
+    "caption": "Viewport 390 × 844 : lecture du relevé, défilement des étapes et accès au retour. Émulation de format, pas certification d’un téléphone physique.",
+    "method": "Chromium V0.9 ; scène préparée explicitement, puis commandes ordinaires et simulation.",
+    "sha256": "4d629b555d688bf456314709ee134cf9f588dc94b10dba1d8ea00eb04e5bac9d",
+    "version": "0.9.0"
+  },
+  {
+    "file": "86_mobile_galerie.png",
+    "title": "Mobile galerie",
+    "caption": "Viewport 390 × 844 : commande E et scène de galerie visibles. Les commandes tactiles existantes sont conservées.",
+    "method": "Chromium V0.9 ; scène préparée explicitement, puis commandes ordinaires et simulation.",
+    "sha256": "1a88c712eb87442ea183e67aa2cdcba65cc969c5627432b9249bd0b499943c13",
+    "version": "0.9.0"
+  },
+  {
+    "file": "87_interruption_adulte.png",
+    "title": "Interruption adulte",
+    "caption": "Rencontre explicitement préparée près de la vanne. La créature est dans sa phase d’appui pendant le maintien E, sans pause de lecture.",
+    "method": "Chromium V0.9 ; scène préparée explicitement, puis commandes ordinaires et simulation.",
+    "sha256": "84c0aad2c9866caa54e165d110c064d878a71f37f690ae302fc925f9466527d8",
+    "version": "0.9.0"
+  },
+  {
+    "file": "88_menu_memoires.png",
+    "title": "Menu memoires",
+    "caption": "Écran titre V0.9 sans préparation de progression. Le nouveau carnet des chapitres est accessible depuis le menu.",
+    "method": "V0.9 Chromium actual rendering; source / preparation stated in caption.",
+    "sha256": "8ec216de3408f7ef8db4e4d3212408bda3b6d786280cfd55cfdd1e419e7ee8b5",
+    "version": "0.9.0"
+  },
+  {
+    "file": "89_premiere_entree.png",
+    "title": "Premiere entree",
+    "caption": "Début d’une nouvelle partie : seule la première entrée est enregistrée. Sa vignette provient du moteur ; aucun ancien chapitre n’est reconstruit.",
+    "method": "V0.9 Chromium actual rendering; source / preparation stated in caption.",
+    "sha256": "31e0300f76670e0327b33d4bbd73ab07ff24fe9ebb23bb2f1677afd0e2b249ad",
+    "version": "0.9.0"
+  },
+  {
+    "file": "90_marion_orbite.png",
+    "title": "Marion orbite",
+    "caption": "Premier tableau du prologue, ouvert depuis la galerie. Vue extérieure mise en scène avec le code du jeu, pas une zone pilotable ni une image officielle.",
+    "method": "V0.9 Chromium actual rendering; source / preparation stated in caption.",
+    "sha256": "4f95bf01d41a661ac7207d8a3f4302e0bf307a19e9d74b99e95f749a144c0243",
+    "version": "0.9.0"
+  },
+  {
+    "file": "91_repetition_separee.png",
+    "title": "Repetition separee",
+    "caption": "Répétition réellement ouverte depuis l’entrée enregistrée du chapitre 1, puis déplacement au clavier. Le HUD nomme la session séparée.",
+    "method": "V0.9 Chromium actual rendering; source / preparation stated in caption.",
+    "sha256": "d7d4aa6c596538de1528cee3f3fb991b5a8ba5879664ad2663defe31698b7236",
+    "version": "0.9.0"
+  },
+  {
+    "file": "92_impact_delilah.png",
+    "title": "Impact delilah",
+    "caption": "État préparé juste avant le cinquième objectif. E maintenu termine la cloison ; la scène de la Delilah s’ouvre ensuite automatiquement.",
+    "method": "V0.9 Chromium actual rendering; source / preparation stated in caption.",
+    "sha256": "565ee7233a11670f0720c666cfc3fb27b9cb0b845a20626a678cf18867828630",
+    "version": "0.9.0"
+  },
+  {
+    "file": "93_bibliotheque_complete.png",
+    "title": "Bibliotheque complete",
+    "caption": "Bibliothèque préparée avec les seize instantanés du parcours moteur complet. Ce n’est pas une progression effectuée manuellement dans cette fenêtre.",
+    "method": "V0.9 Chromium actual rendering; source / preparation stated in caption.",
+    "sha256": "0c3a0e622da89e6316d4476ba882b2b4921c23a0220ee3def35a4560ce1cae7a",
+    "version": "0.9.0"
+  },
+  {
+    "file": "94_ripley.png",
+    "title": "Ripley",
+    "caption": "Séquence ripley ouverte depuis la galerie d’un carnet terminé. Tableau mis en scène avec une copie détachée ; aucune progression jouable n’est modifiée.",
+    "method": "V0.9 Chromium actual rendering; source / preparation stated in caption.",
+    "sha256": "5ed24b04d3fa836d0db7359d7144bc9f3fd81169577571c1c61bf91634946679",
+    "version": "0.9.0"
+  },
+  {
+    "file": "95_cage.png",
+    "title": "Cage",
+    "caption": "Séquence cage ouverte depuis la galerie d’un carnet terminé. Tableau mis en scène avec une copie détachée ; aucune progression jouable n’est modifiée.",
+    "method": "V0.9 Chromium actual rendering; source / preparation stated in caption.",
+    "sha256": "bb28621207673c857cb8abffde3972f5f9286bd17185d44b0ba499e461a70a13",
+    "version": "0.9.0"
+  },
+  {
+    "file": "96_unite_medicale.png",
+    "title": "Unite medicale",
+    "caption": "Séquence medical ouverte depuis la galerie d’un carnet terminé. Tableau mis en scène avec une copie détachée ; aucune progression jouable n’est modifiée.",
+    "method": "V0.9 Chromium actual rendering; source / preparation stated in caption.",
+    "sha256": "f8dba9e2d72dd73960c537cdbcd5434279bc78d24c2e2bfb932681463ff398ef",
+    "version": "0.9.0"
+  },
+  {
+    "file": "97_purge.png",
+    "title": "Purge",
+    "caption": "Séquence ash ouverte depuis la galerie d’un carnet terminé. Tableau mis en scène avec une copie détachée ; aucune progression jouable n’est modifiée.",
+    "method": "V0.9 Chromium actual rendering; source / preparation stated in caption.",
+    "sha256": "9f6a96fc803d469fe917793b006bf1d658d768f56a5f37f14a47ab37a1466fc9",
+    "version": "0.9.0"
+  },
+  {
+    "file": "98_narcissus.png",
+    "title": "Narcissus",
+    "caption": "Séquence release ouverte depuis la galerie d’un carnet terminé. Tableau mis en scène avec une copie détachée ; aucune progression jouable n’est modifiée.",
+    "method": "V0.9 Chromium actual rendering; source / preparation stated in caption.",
+    "sha256": "eac80b54a6ddaea48ea49bbfbc0dd1ae70bfa7a7c70f1161ae2b66b34bf935c4",
+    "version": "0.9.0"
+  },
+  {
+    "file": "99_silence.png",
+    "title": "Silence",
+    "caption": "Séquence signal ouverte depuis la galerie d’un carnet terminé. Tableau mis en scène avec une copie détachée ; aucune progression jouable n’est modifiée.",
+    "method": "V0.9 Chromium actual rendering; source / preparation stated in caption.",
+    "sha256": "339a7755e19b1fea5faf9ffb519d47a3297185d7caa6723b8890c5a4aeaf9848",
+    "version": "0.9.0"
+  },
+  {
+    "file": "100_confirmation_memoires.png",
+    "title": "Confirmation memoires",
+    "caption": "Fichier des mémoires exporté par le navigateur puis sélectionné pour import. Aucune écriture du paquet avant la confirmation affichée.",
+    "method": "V0.9 Chromium actual rendering; source / preparation stated in caption.",
+    "sha256": "650f05be3a3ed2936240e735715b1d2d57b6d538bae1aad01425afb1a9312611",
+    "version": "0.9.0"
+  },
+  {
+    "file": "101_bilan.png",
+    "title": "Bilan",
+    "caption": "Bilan du carnet produit par le parcours moteur complet. Le temps affiché reste un temps de simulation, pas une mesure de durée humaine.",
+    "method": "V0.9 Chromium actual rendering; source / preparation stated in caption.",
+    "sha256": "48c502ff1e7e7bde8419bd930010956bf4b05116a4bc923b08584d22394c31cb",
+    "version": "0.9.0"
+  },
+  {
+    "file": "102_memoires_mobile.png",
+    "title": "Memoires mobile",
+    "caption": "Émulation 390 × 844 : bibliothèque scrollable et boutons de répétition. Pas une certification sur téléphone physique.",
+    "method": "V0.9 Chromium actual rendering; source / preparation stated in caption.",
+    "sha256": "667b1b071604d177bd68da8f291561bf0dd63d348979ed1819bcf96cc32b6cf6",
+    "version": "0.9.0"
+  },
+  {
+    "file": "103_sequence_mobile.png",
+    "title": "Sequence mobile",
+    "caption": "Émulation mobile : séquence en lecture manuelle, sous-titres en DOM et commandes défilables.",
+    "method": "V0.9 Chromium actual rendering; source / preparation stated in caption.",
+    "sha256": "c96b2f914ac2688d1db537e47cf80f78c95654a2db100674d505168e624ff1fe",
+    "version": "0.9.0"
+  },
+  {
+    "file": "104_titre_v09.png",
+    "title": "Titre v09",
+    "caption": "Écran titre V0.9, sans préparation de progression. Le jeu précédent n’a pas été remplacé par une simple fiche de démonstration.",
+    "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption.",
+    "sha256": "8ec216de3408f7ef8db4e4d3212408bda3b6d786280cfd55cfdd1e419e7ee8b5",
+    "version": "0.9.0"
+  },
+  {
+    "file": "105_poignees_atelier.png",
+    "title": "Poignees atelier",
+    "caption": "Scène préparée à l’atelier, sans ennemi. Prise avec X puis déplacement avec D. La pose des mains rejoint les poignées et les roues suivent la position du moteur.",
+    "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption.",
+    "sha256": "38e177d3a30c93a59e6a0612f05a71d08a9e492d3475f271fd6f4da0c934c722",
+    "version": "0.9.0"
+  },
+  {
+    "file": "106_servante_freinee.png",
+    "title": "Servante freinee",
+    "caption": "Après le déplacement réel de la capture précédente, X est relâché. La servante conserve sa nouvelle position avec les freins serrés.",
+    "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption.",
+    "sha256": "2bc1fba4f57ef305487241191fe948081e9c706bcfbefb51a6153398f5f33af3",
+    "version": "0.9.0"
+  },
+  {
+    "file": "107_releve_manutention.png",
+    "title": "Releve manutention",
+    "caption": "Panneau N ouvert après une manipulation. Il indique le stationnement modifié, sans bouton de télécommande.",
+    "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption.",
+    "sha256": "b1a1a84e5ab5665a04748f27842bf1171aa892b9844f6aac35f9bdafb5fb1c65",
+    "version": "0.9.0"
+  },
+  {
+    "file": "108_plan_materiel.png",
+    "title": "Plan materiel",
+    "caption": "Le plan M représente la servante déplacée. Aucune position de créature n’est ajoutée au relevé.",
+    "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption.",
+    "sha256": "b41ea1a0f3ac4f416e8542a02ca2f34a05e0457ecec6d894a801936200d5748d",
+    "version": "0.9.0"
+  },
+  {
+    "file": "109_servante_reserves.png",
+    "title": "Servante reserves",
+    "caption": "Réserves : prise réelle du chariot à partir de son stationnement préparé, puis déplacement.",
+    "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption.",
+    "sha256": "9e063517f30217c761c165ca1d0c8043acbc28e36ff55f35930df32b4a410b35",
+    "version": "0.9.0"
+  },
+  {
+    "file": "110_benne_roulage.png",
+    "title": "Benne roulage",
+    "caption": "Galerie de roulage : benne chargée et aire balisée. Situation préparée sans ennemi, puis X et D.",
+    "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption.",
+    "sha256": "f679ca75496b0b0973d9b299cbf3069f8822d816326412bc42a4a82128b8cec4",
+    "version": "0.9.0"
+  },
+  {
+    "file": "111_servante_pompage.png",
+    "title": "Servante pompage",
+    "caption": "Pompage : servante mobile placée dans le passage. Contrôle de déplacement à partir du stationnement initial.",
+    "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption.",
+    "sha256": "77a3ee2de9f940e11939327d20aff13b8257619e2d855dd2c955c5f12ca6bbf1",
+    "version": "0.9.0"
+  },
+  {
+    "file": "112_benne_echangeurs.png",
+    "title": "Benne echangeurs",
+    "caption": "Échangeurs : la benne avance plus lentement dans le caniveau encore en eau. Situation préparée, puis commandes normales.",
+    "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption.",
+    "sha256": "8cabf7baba0facf164a8ebfd81567a7eebdb916451faf9a9f06589f156aab3ad",
+    "version": "0.9.0"
+  },
+  {
+    "file": "113_benne_quarantaine.png",
+    "title": "Benne quarantaine",
+    "caption": "Soute de quarantaine : maintien des poignées et mouvement avec la position persistante du moteur.",
+    "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption.",
+    "sha256": "be2693996240582411977dd59d9a21b6aa843cae9518d82dc80de7ea5df204b8",
+    "version": "0.9.0"
+  },
+  {
+    "file": "114_aucun_ecrasement.png",
+    "title": "Aucun ecrasement",
+    "caption": "Test préparé : adulte immobilisé pour isoler la collision. Le chariot s’arrête avant le corps ; aucun déplacement forcé ni dégât d’écrasement.",
+    "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption.",
+    "sha256": "e6c75f4b5f234d3318c43cc97323cac219c15f12aba2aab44327e6e717048fc1",
+    "version": "0.9.0"
+  },
+  {
+    "file": "115_poignees_mobile.png",
+    "title": "Poignees mobile",
+    "caption": "Écran 390 × 844. Deux contacts tactiles Chromium maintiennent X et la direction droite ; la servante se déplace réellement.",
+    "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption.",
+    "sha256": "a57ce5c53e890252f814d883ab607e455af2e4bcf69ea1d9fb725818eb1280f1",
+    "version": "0.9.0"
+  },
+  {
+    "file": "116_releve_mobile.png",
+    "title": "Releve mobile",
+    "caption": "Relevé de manutention sur petit écran après annulation tactile. La lecture ne déplace pas le matériel.",
+    "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption.",
+    "sha256": "91fbbdd9f7b0970f01b76a81a545ecad31764ad897e89f75cb3733a2d6a490b0",
+    "version": "0.9.0"
+  },
+  {
+    "file": "117_poignees_paysage.png",
+    "title": "Poignees paysage",
+    "caption": "Écran paysage 844 × 390. Préparation au stationnement ; les commandes et le pied d’écran restent dans le cadre.",
+    "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption.",
+    "sha256": "df1af61ee399e8c5442d6e068caa3628f083d5fe0233bfdc10f7ac7fb30e7bc4",
+    "version": "0.9.0"
+  },
+  {
+    "file": "118_manutention_repetition.png",
+    "title": "Manutention repetition",
+    "caption": "Répétition ouverte depuis l’entrée préparée du chapitre 4, puis chariot déplacé au clavier. Le carnet principal est comparé avant et après, sans modification.",
+    "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption.",
+    "sha256": "46bbe97d1327e9fdf9c3a71506840e27c1340440219c1a911da4f349ad5e5b8e",
+    "version": "0.9.0"
+  }
+]

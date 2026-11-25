@@ -1,0 +1,580 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "generatedAt": "2026-11-25T17:09:22.129401+00:00",
+  "scope": "Recovered ALIEN — Hors des ombres V0.10.0; host launcher, isolated save, archive preservation and distribution. This is not a V0.11 recovery or a certification of franchise fidelity.",
+  "baseCommit": "001a20bdc0f9f1a3c835e84d8f3c9434bc159330",
+  "executionContext": "Commands ran in a complete temporary checkout before the GitHub integration commit. The built manifest identifies the parent commit, not a later CI run.",
+  "sourceArchive": {
+    "fileName": "ALIEN_HORS_DES_OMBRES_V0_10_LE_MARION_PIECE_PAR_PIECE.zip",
+    "sizeBytes": 93449215,
+    "sha256": "8faa1e9c18e8db3ecefc99605ced070cf3acdae1f74b1f65017cadfed5db0bf3",
+    "chunks": [
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part001",
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part002",
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part003",
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part004",
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part005",
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part006",
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part007",
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part008",
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part009",
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part010",
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part011",
+      "archives/dlc-hors-des-ombres-v010/archive/ALIEN_HORS_DES_OMBRES_V0_10.zip.part012"
+    ],
+    "memberCount": 321,
+    "zipOnlyMembers": [
+      {
+        "originalPath": "RAPPORT_ILLUSTRE.html",
+        "sizeBytes": 16882212,
+        "sha256": "0736c07a0be24bec8dbaa8075dbd97e49f1768d5995575eee18f8492a4df9ae8"
+      }
+    ]
+  },
+  "preservation": {
+    "directOriginalFiles": 320,
+    "zipOnlyOriginalFiles": 1,
+    "originalMembers": 321,
+    "archiveChunks": 12,
+    "manifestFiles": 333,
+    "runtimeFiles": 8,
+    "manifestSha256": "6cf308b61353541b18bfd8583435da4afe2d874875f77b7a6600c015622420d5",
+    "zipReconstruction": "Verified after repack with the CLI: exact size and SHA-256 of original."
+  },
+  "counts": {
+    "engineAndInstaller": 772,
+    "integrationContinuationAndHistoricalGuards": 51,
+    "browser": 13,
+    "totalDistinctControls": 836,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0
+  },
+  "engineAndInstaller": {
+    "schemaVersion": 1,
+    "testedAt": "2026-11-25T16:47:15.838Z",
+    "node": "v24.22.3",
+    "scope": "Recovered V0.10 engine and installer; host integration is a separate suite.",
+    "commands": [
+      {
+        "command": "npm run build",
+        "exitCode": 0,
+        "durationMs": 371,
+        "log": "/vercel/sandbox/tantalus/.qa/hors-des-ombres/build.log",
+        "error": null
+      },
+      {
+        "command": "npm run check",
+        "exitCode": 0,
+        "durationMs": 44965,
+        "log": "/vercel/sandbox/tantalus/.qa/hors-des-ombres/check.log",
+        "error": null
+      }
+    ],
+    "suites": [
+      {
+        "file": "results.json",
+        "suite": "engine-and-installer-v0.3-regression",
+        "tests": 47,
+        "passed": 47,
+        "failed": 0
+      },
+      {
+        "file": "results-v02.json",
+        "suite": "v0.2-features-retained-in-v0.3",
+        "tests": 53,
+        "passed": 53,
+        "failed": 0
+      },
+      {
+        "file": "delivery-results-v02.json",
+        "suite": "delivery-v0.3",
+        "tests": 14,
+        "passed": 14,
+        "failed": 0
+      },
+      {
+        "file": "results-v03.json",
+        "suite": "new-features-v0.3",
+        "tests": 81,
+        "passed": 81,
+        "failed": 0
+      },
+      {
+        "file": "results-v04.json",
+        "suite": "v04-services-and-pursuit",
+        "tests": 94,
+        "passed": 94,
+        "failed": 0
+      },
+      {
+        "file": "results-v05.json",
+        "suite": "v05-acoustics-evidence-companions",
+        "tests": 73,
+        "passed": 73,
+        "failed": 0
+      },
+      {
+        "file": "results-v06.json",
+        "suite": "v06-maintenance-shortcuts-salvage-local-map",
+        "tests": 66,
+        "passed": 66,
+        "failed": 0
+      },
+      {
+        "file": "results-v07.json",
+        "suite": "v07-flooded-archives",
+        "tests": 71,
+        "passed": 71,
+        "failed": 0
+      },
+      {
+        "file": "results-v08.json",
+        "suite": "engine-v08-memories",
+        "tests": 65,
+        "passed": 65,
+        "failed": 0
+      },
+      {
+        "file": "results-v09.json",
+        "suite": "engine-v09-handling",
+        "tests": 87,
+        "passed": 87,
+        "failed": 0
+      },
+      {
+        "file": "results-v010.json",
+        "suite": "v010-fidelity-topology-equipment",
+        "tests": 121,
+        "passed": 121,
+        "failed": 0
+      }
+    ],
+    "bundle": {
+      "sizeBytes": 734840,
+      "sha256": "de70265dbe081191816fd7b2c1c7398f92351530336c60f16a39a58341b631bc",
+      "originalSha256": "de70265dbe081191816fd7b2c1c7398f92351530336c60f16a39a58341b631bc",
+      "identical": true
+    },
+    "tests": 772,
+    "passed": 772,
+    "failed": 0,
+    "ok": true
+  },
+  "integrationContinuationAndHistoricalGuards": {
+    "command": [
+      "node",
+      "--test",
+      "scripts/verify-hors-des-ombres-integration.mjs",
+      "scripts/verify-hors-des-ombres-continuation-v010.mjs",
+      "scripts/verify-tantalus-priorities-v188.mjs",
+      "scripts/verify-native-qa-resources-v187.mjs",
+      "scripts/verify-xeno-production-assets-v206.mjs"
+    ],
+    "exit_code": 0,
+    "duration_seconds": 8.595,
+    "sha256": "77ea9b9d14fc7a3bc3a0b59caf6b06a7703b21b9d42da9344da37cd13bbe4484",
+    "size_bytes": 5493,
+    "summary_lines": [
+      "ℹ tests 51",
+      "ℹ pass 51",
+      "ℹ fail 0",
+      "ℹ cancelled 0",
+      "ℹ skipped 0",
+      "ℹ todo 0",
+      "ℹ duration_ms 8523.061649"
+    ],
+    "tests": 51,
+    "passed": 51,
+    "failed": 0,
+    "breakdown": {
+      "integration": 18,
+      "continuation": 8,
+      "tantalusV188": 13,
+      "nativeResourcesV187": 9,
+      "xenoV206": 3
+    },
+    "log": "✔ Hors des ombres binds the exact cumulative parent and every reviewed current byte (8.784634ms)\n✔ All historical Tantalus and Xeno declarations retain their exact pre-integration bytes (2.621815ms)\n✔ Each integration receipt refuses arbitrary predecessors, already-advanced inputs and tampered bytes (34.469448ms)\n✔ Independent unowned branches defer only before reaching the shared predecessor (0.854512ms)\n✔ Tantalus and Xeno resolve shared joins through the same bounded successor (3.061031ms)\n✔ Runtime source views accept only the baseline or current bytes and remain idempotent (2.362484ms)\n✔ Mutated continuation receipts cannot alter the parent, add neighbours or admit their own file (29.55023ms)\n✔ Built developer-tools discovery skips public DLC but still rejects unknown directories (19.002437ms)\n✔ recovered source: every original member, ZIP chunk and runtime byte is verified (1071.125312ms)\n✔ admission is exact, source-only and independent of unrelated DLC (9.819058ms)\n✔ changing manifest metadata cannot update the reviewed pin (6.010099ms)\n✔ manifest compiler rejects malformed inventories even with a recomputed test digest (45.67909ms)\n✔ ZIP-only report metadata is exact and cannot hide another direct source member (52.451817ms)\n✔ distribution copy ships exactly eight runtime files, with the standalone HTML entry (40.578305ms)\n✔ built verification rejects changed, missing and unreviewed runtime files (51.585273ms)\n✔ source-only reports and historical archives cannot enter a distribution (33.249769ms)\n✔ runtime symlinks and destination symlinks are refused before outside writes (61.619873ms)\n✔ copy refuses filesystem roots and source ancestors before making directories (1.453781ms)\n✔ HTML styles, mount import and runtime imports resolve to admitted shipped files (7.341805ms)\n✔ the real worker caches all eight runtime paths but refuses queries, archives and wrong MIME (67.494588ms)\n✔ host launch requires a synchronous strict-true save, then navigates once (0.971957ms)\n✔ title keyboard and gamepad menu order includes the optional DLC button (0.554943ms)\n✔ title DLC callback respects hidden, non-menu and recovery states (0.454939ms)\n✔ focus movement and activation reach the DLC callback without relying on browser tab order (0.480774ms)\n✔ Operations bridge is additive, installs once and delegates launch to the host event (4.383016ms)\n✔ host shell loads one bridge and exposes a dedicated title button (3.018634ms)\n✔ V187 verifies its exact QA sources, preserved scenario engine and historical V163 bytes (276.139689ms)\n✔ V187 rejects mutated QA sources, changed historical bytes and unreviewed predecessor endpoints (69.350183ms)\n✔ V187 continues the exact V180 dependency guard instead of removing its immutable witness (1.107023ms)\n✔ V187 resource selection and 55 minute job survive the exact V190 complete-history checkout addition (0.748619ms)\n✔ V187 audit and documentation stay source-only and the new audit test enters the release runner (5.976012ms)\n✔ Obscura admits only its exact source directories and files, never a public build (1.279937ms)\n✔ Obscura binds every skill, licence and guide byte without transferring old test receipts (1.929176ms)\n✔ Obscura continues the exact V187 verifier endpoint and refuses arbitrary predecessors (0.728975ms)\n✔ The Xeno Trials join resolves both V187 successor chains to the same merged bytes and refuses forged links (97.126844ms)\n✔ V188 registry continuation closes only the Cargo art debt and rejects neighboring promotions (167.592307ms)\n✔ Broodstorm registry continuation removes only queen art, projects exact H and keeps historical Cargo evidence (25.673079ms)\n✔ Queen Mother registry continuation removes only animation, projects exact B2 and preserves Broodstorm and Cargo evidence (24.698948ms)\n✔ Queen Mother guard presentation projects identically to Q, leaves every debt open and adds no changed operation (31.366452ms)\n✔ Queen Mother choir presentation projects identically to R, leaves every debt open and adds no changed operation (36.050381ms)\n✔ V188 verifies every reviewed successor and keeps the V187 chain intact (84.400841ms)\n✔ V188 rejects mutated bytes and arbitrary predecessor endpoints (1975.358305ms)\n✔ Broodstorm terminal rejects a false H receipt or an added-source disguise for a successor (134.091841ms)\n✔ Queen Mother terminal rejects a false B2 receipt or an added-source disguise for a successor (123.820858ms)\n✔ Queen Mother guard terminal rejects false Q links, invented births and any added-source exception beyond the Q notice test (302.778026ms)\n✔ Queen Mother choir resolves through exact R predecessors and rejects bypasses of the historical Q birth (4.11082ms)\n✔ Queen Mother choir terminal rejects false R links, a skipped Q birth and source duplication or extra exceptions (378.431813ms)\n✔ V188 audit and adopted AI tooling stay source-only with exact upstream bytes (118.92963ms)\n✔ V206 extends the published V205 commit while preserving its complete historical declarations (247.751707ms)\n✔ exact V206 poses and documentation are retained in sources and rejected by the real build filter (97.352235ms)\n✔ corrupt production bytes fail through the V205 relay without granting a runtime admission or transferring results (459.011242ms)\nℹ tests 51\nℹ suites 0\nℹ pass 51\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 8523.061649\n"
+  },
+  "browser": {
+    "generated_at": "2026-11-25T17:01:32.148115+00:00",
+    "suite": "hors-des-ombres-native-http-integration",
+    "environment": {
+      "python": "3.14.4",
+      "platform": "Linux-6.18.56-x86_64-with-glibc2.43",
+      "playwright": "1.65.2",
+      "chromium": "159.0.8154.6"
+    },
+    "method": {
+      "transport": "real HTTP",
+      "browser": "real headless Chromium",
+      "storage": "native localStorage, temporary persistent profile reused after browser shutdown",
+      "network_stubs": false,
+      "set_content": false,
+      "qa_api": false,
+      "progression_injections": [],
+      "fixtures": [
+        {
+          "kind": "unrelated localStorage sentinel",
+          "key": "atf:qa:hors-des-ombres:unrelated-profile",
+          "value": "{\"fixture\":\"unrelated profile preserved\",\"revision\":1}"
+        }
+      ],
+      "inputs": "UI clicks, actual keyboard keydown/keyup, viewport resizing; initial sequence skipped through its visible UI button",
+      "scope": "title-menu launch, new campaign movement, save/reload/restart, isolation, map/codex, mobile controls, return to host"
+    },
+    "checks": [
+      {
+        "name": "Chromium persistent context starts",
+        "ok": true,
+        "duration_seconds": 0.192,
+        "details": {
+          "profile": "temporary, reused in this run"
+        }
+      },
+      {
+        "name": "Host title exposes a real enabled DLC button",
+        "ok": true,
+        "duration_seconds": 22.996,
+        "details": {
+          "status": 200,
+          "button": "HORS DES OMBRES · DLC"
+        }
+      },
+      {
+        "name": "Native title callback opens the installed DLC",
+        "ok": true,
+        "duration_seconds": 3.327,
+        "details": {
+          "title": "Alien — Hors des ombres · Le Marion, pièce par pièce",
+          "url": "http://127.0.0.1:43379/dlc/alien-hors-des-ombres/index.html"
+        }
+      },
+      {
+        "name": "DLC starts through its visible UI",
+        "ok": true,
+        "duration_seconds": 2.869,
+        "details": {
+          "room_label": "A-01 · PASSERELLE DU MARION"
+        }
+      },
+      {
+        "name": "Keyboard moves the player and UI saves actual position",
+        "ok": true,
+        "duration_seconds": 2.079,
+        "details": {
+          "before": {
+            "schema": 10,
+            "room": "bridge",
+            "player": {
+              "x": 170,
+              "y": 88,
+              "hp": 100,
+              "fuel": 65,
+              "kits": 3,
+              "decoys": 8
+            },
+            "completed": [],
+            "gear": {
+              "selected": "torch",
+              "unlocked": [
+                "torch"
+              ],
+              "collected": [],
+              "charges": 0,
+              "nets": 0,
+              "acid": 0
+            }
+          },
+          "after": {
+            "schema": 10,
+            "room": "bridge",
+            "player": {
+              "x": 288.50000000000017,
+              "y": 88,
+              "hp": 100,
+              "fuel": 65,
+              "kits": 3,
+              "decoys": 8
+            },
+            "completed": [],
+            "gear": {
+              "selected": "torch",
+              "unlocked": [
+                "torch"
+              ],
+              "collected": [],
+              "charges": 0,
+              "nets": 0,
+              "acid": 0
+            }
+          }
+        }
+      },
+      {
+        "name": "Map opens from live campaign",
+        "ok": true,
+        "duration_seconds": 1.363,
+        "details": {
+          "local_map": true
+        }
+      },
+      {
+        "name": "Codex renders and filters its real entries",
+        "ok": true,
+        "duration_seconds": 0.981,
+        "details": {
+          "initial_cards": 98,
+          "marion_cards": 10
+        }
+      },
+      {
+        "name": "DLC actions preserve all unrelated localStorage keys",
+        "ok": true,
+        "duration_seconds": 0.021,
+        "details": {
+          "unchanged_keys": [
+            "atf-device-v119",
+            "atf-frontier-forge-workspace-v134",
+            "atf-v47-profile-1",
+            "atf-v78-selected-profile",
+            "atf:qa:hors-des-ombres:unrelated-profile"
+          ],
+          "sentinel": "{\"fixture\":\"unrelated profile preserved\",\"revision\":1}"
+        }
+      },
+      {
+        "name": "Native localStorage survives a real page reload",
+        "ok": true,
+        "duration_seconds": 2.192,
+        "details": {
+          "schema": 10,
+          "room": "bridge",
+          "player": {
+            "x": 288.50000000000017,
+            "y": 88,
+            "hp": 100,
+            "fuel": 65,
+            "kits": 3,
+            "decoys": 8
+          },
+          "completed": [],
+          "gear": {
+            "selected": "torch",
+            "unlocked": [
+              "torch"
+            ],
+            "collected": [],
+            "charges": 0,
+            "nets": 0,
+            "acid": 0
+          }
+        }
+      },
+      {
+        "name": "Save and unrelated keys survive full Chromium shutdown and restart",
+        "ok": true,
+        "duration_seconds": 2.601,
+        "details": {
+          "schema": 10,
+          "room": "bridge",
+          "player": {
+            "x": 288.50000000000017,
+            "y": 88,
+            "hp": 100,
+            "fuel": 65,
+            "kits": 3,
+            "decoys": 8
+          },
+          "completed": [],
+          "gear": {
+            "selected": "torch",
+            "unlocked": [
+              "torch"
+            ],
+            "collected": [],
+            "charges": 0,
+            "nets": 0,
+            "acid": 0
+          }
+        }
+      },
+      {
+        "name": "Mobile layout and visible directional control work",
+        "ok": true,
+        "duration_seconds": 2.184,
+        "details": {
+          "viewport": {
+            "viewport": 390,
+            "document": 390
+          },
+          "control_input": "real pointer hold on touch control",
+          "before_x": 288.50000000000017,
+          "after_x": 354.3386000000004
+        }
+      },
+      {
+        "name": "Pause exit returns to the real Tantalus title",
+        "ok": true,
+        "duration_seconds": 17.141,
+        "details": {
+          "url": "http://127.0.0.1:43379/index.html",
+          "button": "HORS DES OMBRES · DLC"
+        }
+      },
+      {
+        "name": "No uncaught runtime errors, HTTP errors, or failed resources",
+        "ok": true,
+        "duration_seconds": 0.0,
+        "details": {
+          "page_errors": 0,
+          "console_errors": 0,
+          "http_errors": 0,
+          "navigation_cancellations": 0
+        }
+      }
+    ],
+    "page_errors": [],
+    "console_errors": [],
+    "failed_requests": [],
+    "http_errors": [],
+    "screenshots": [
+      {
+        "file": "/vercel/sandbox/audit/hors-des-ombres/screenshots/01-tantalus-title.png",
+        "sha256": "b26923141c0fd53720e8c588445729b1a90b2cf1bf5702ceb0464d54f185bf70"
+      },
+      {
+        "file": "/vercel/sandbox/audit/hors-des-ombres/screenshots/02-dlc-title.png",
+        "sha256": "49c8a93e7d84c7c45064d4492c5b0881c8799a7ab2cb214a5ed32bd7d8ee634f"
+      },
+      {
+        "file": "/vercel/sandbox/audit/hors-des-ombres/screenshots/03-marion-after-keyboard.png",
+        "sha256": "bcd2ce6c2478a4bda44f1c5d8382e7d82a6fbe2494cb41fa0c74e55e60b1eed2"
+      },
+      {
+        "file": "/vercel/sandbox/audit/hors-des-ombres/screenshots/04-map.png",
+        "sha256": "4eec9f5e6f60f6a67ba670163afffee83ad0113c3d5631ebc262594ba5eeee3f"
+      },
+      {
+        "file": "/vercel/sandbox/audit/hors-des-ombres/screenshots/05-codex.png",
+        "sha256": "8993de41c49a6359f56e6b5229aadf648d91aed674b4e282b5e7223e325a66a9"
+      },
+      {
+        "file": "/vercel/sandbox/audit/hors-des-ombres/screenshots/06-after-browser-restart.png",
+        "sha256": "57ceaf302258ce970db896ef54d8cb3bf5ff58b7886fd02e3dd2d3a500ed6be0"
+      },
+      {
+        "file": "/vercel/sandbox/audit/hors-des-ombres/screenshots/07-mobile-map.png",
+        "sha256": "9f213fb967f6426241ce1aa089d31476c84e49cd435dee876cde7204345babcb"
+      },
+      {
+        "file": "/vercel/sandbox/audit/hors-des-ombres/screenshots/08-return-tantalus.png",
+        "sha256": "bc6af1a2fa7f888be39ae1a58f94ed93fd872456b8fd85ea4e939ab51f5cb593"
+      }
+    ],
+    "source_hashes": {
+      "index.html": "283c6f968b9240f0429c582c149515f45825b3ce01766ae71654e5ec5ae53baf",
+      "src/app.js": "c18c1e3c3dbaa8b6b3f877b9b52316650ae35a26b1f5f8d4714fe8ccde8bacc8",
+      "src/title-screen-v61.js": "17c1527c13c94f5330dadacac7ca291e5dac06fed1eb66a1d720bcdafecce810",
+      "src/hors-des-ombres-launch-v010.js": "20c505494500d2c3c74243ab31fc7a0d636995a43804b76d82260c37ea11b0d6",
+      "src/oth-v1/oth-ui.js": "a9a7d257703234a8d67ced5ab3c3f1df4e2181b338209e34859ca2eb22d39172",
+      "src/oth-v1/oth-data.js": "d32b15b2ed6c34179fa690356d619b7d38767a531e238f87d6da99bc4827b691",
+      "src/oth-v1/oth-engine.js": "1819e54741a58751a02e9dc8f557bec87541b5da63ff95ddb3c9b7c06cfd6bfb",
+      "src/oth-v1/oth-render.js": "6866c6386b38ef026549be38a43026796dbc4ddfad2f84c0d4e9847c807bef41",
+      "src/oth-v1/oth-ui.css": "92b8803875c15e585e2b62dde23da411e03a7115267141b64965c115d10105ac",
+      "dlc/alien-hors-des-ombres/index.html": "b375b4312a4ce3f8260502a3faab0ef3e7cabe7ba6f08f0a70c273309d59fa00",
+      "scripts/qa-hors-des-ombres-integration.py": "7e4d4f0002da17c04640d9ca457c99f8ec01ee16420d3b142d12b3558cb8d4d2"
+    },
+    "base_url": "http://127.0.0.1:43379/",
+    "tests": 13,
+    "passed": 13,
+    "failed": 0
+  },
+  "build": [
+    {
+      "command": [
+        "node",
+        "--test",
+        "scripts/verify-hors-des-ombres-continuation-v010.mjs"
+      ],
+      "name": "continuation-build-regression",
+      "exit_code": 0,
+      "duration_seconds": 0.443,
+      "log": "/vercel/sandbox/audit/hors-des-ombres/continuation-build-regression.log",
+      "sha256": "6b93a466e62c5b60934db622b99ddd60d48e569ccd3dd0a4074ec6e5940110ec"
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "name": "build-dlc-fixed",
+      "exit_code": 0,
+      "duration_seconds": 43.396,
+      "log": "/vercel/sandbox/audit/hors-des-ombres/build-dlc-fixed.log",
+      "sha256": "edc6ad583e51bab720cd4386d35a0b3a269b003441a4713c298f86c593155359"
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "check:built"
+      ],
+      "name": "check-built-dlc-fixed",
+      "exit_code": 0,
+      "duration_seconds": 21.09,
+      "log": "/vercel/sandbox/audit/hors-des-ombres/check-built-dlc-fixed.log",
+      "sha256": "310e09a37a1a0b7fe32884655936f47309c38bb87c0176719e4e15b8bcff877e"
+    }
+  ],
+  "buildLogs": {
+    "build-dlc-fixed.log": "\n> aliens-tantalus-frontier@143.0.0 build\n> node scripts/build-release-v143.mjs\n\nBuilt ALIENS: TANTALUS FRONTIER 143.0.0 with 3613 catalog entries.\nDeveloper tools shipped hidden: 9 files under a 18-character path (documented default).\nRelease 143.0.0+001a20bdc0f9: 2521 fingerprinted files; save schema 52.\n",
+    "check-built-dlc-fixed.log": "\n> aliens-tantalus-frontier@143.0.0 check:built\n> node scripts/verify-release-artifact-v143.mjs\n\n{\n  \"ok\": true,\n  \"buildId\": \"143.0.0+001a20bdc0f9\",\n  \"sourceCommit\": \"001a20bdc0f9f1a3c835e84d8f3c9434bc159330\",\n  \"files\": 2521,\n  \"shell\": 838,\n  \"manifestSha256\": \"7e5748feebf8e68e8d4069f59b5830919005096be1e603a4f4632c6b2eefbfc7\"\n}\n"
+  },
+  "archiveReconstructionLog": "{\n  \"ok\": true,\n  \"file\": \"/vercel/sandbox/audit/ALIEN_HORS_DES_OMBRES_V0_10_REPACK12.zip\",\n  \"sizeBytes\": 93449215,\n  \"sha256\": \"8faa1e9c18e8db3ecefc99605ced070cf3acdae1f74b1f65017cadfed5db0bf3\"\n}\n",
+  "testedSourceHashes": {
+    ".gitattributes": "dda662cd40c359de04104176836a6bcefbff6935fa16ada1a89df21295470366",
+    "archives/dlc-hors-des-ombres-v010/manifest.json": "6cf308b61353541b18bfd8583435da4afe2d874875f77b7a6600c015622420d5",
+    "dlc/alien-hors-des-ombres/index.html": "b375b4312a4ce3f8260502a3faab0ef3e7cabe7ba6f08f0a70c273309d59fa00",
+    "index.html": "283c6f968b9240f0429c582c149515f45825b3ce01766ae71654e5ec5ae53baf",
+    "package.json": "afbcc90092d59145b2affe73a9ee8e32dec7135988fe85aaabdf91c0b7c9784d",
+    "scripts/audit-hors-des-ombres-continuation-v010.mjs": "d88bb4743e61c84effae6a63de771746909dd24e39a4f24a3b7bc8bd6e16cb3c",
+    "scripts/audit-tantalus-priorities-v188.mjs": "74289d730a20177f0a3883e3b12ae11b416e668f997543a60efb683f5c659eef",
+    "scripts/audit-xeno-production-assets-v206.mjs": "9fdca1128bb28140117e4c2154b9e12b49a53a9c637290d7ccc8deec52da5124",
+    "scripts/build-dev-tools-v188.mjs": "73c7963635cfadc00bf2819df2ba6282d8a299025efb767cc8fc8bd28c8c2afa",
+    "scripts/build.mjs": "4b40e7a5f0c2ec18238b3f7f2a90ac4e7686af8fd456cf211c92f7883064c6e1",
+    "scripts/hors-des-ombres-admission-v010.mjs": "480a688f081bab65f1c2c4b8a398b21f6a2e6636622ad83f51085dec937ada4b",
+    "scripts/qa-hors-des-ombres-integration.py": "7e4d4f0002da17c04640d9ca457c99f8ec01ee16420d3b142d12b3558cb8d4d2",
+    "scripts/reconstruct-hors-des-ombres-archive.mjs": "f2e912b738c8e6d69f974cdfdbcc55270907c7eb3a465521ef9968ef1ddba654",
+    "scripts/run-hors-des-ombres-checks.mjs": "71738fcbbbab05b2f45b39b78c43d79db611e3f83c88a590c3e46c981566136d",
+    "scripts/verify-hors-des-ombres-continuation-v010.mjs": "0e9117c7b1a7327e11b7337d5d046ea57462ab2289096e40be5b589a0ed41338",
+    "scripts/verify-hors-des-ombres-integration.mjs": "b61f8d26f0f3091b920ca9110e274238cc321bbd7230900aa7a34822a3c43ddd",
+    "scripts/verify-native-qa-resources-v187.mjs": "ab2ae394b944e09721019ac94bc53aa1d8fd6f065060d20ac6471eb3176f8919",
+    "scripts/verify-public-release-v86.mjs": "dd8f8f4ac6583de69ea0e87762a199d9c035e8f65bf8fea458b3b0a91bb2e7e4",
+    "scripts/verify-tantalus-priorities-v188.mjs": "775420eb8e7c59bae4429c761d57c25df10f7ef2e02e65c69b1496ffbe22e594",
+    "scripts/verify-xeno-production-assets-v206.mjs": "f6624639816ceee44f20a6361ec23b60525904432e33637d10a0ec785ef565c2",
+    "src/app.js": "c18c1e3c3dbaa8b6b3f877b9b52316650ae35a26b1f5f8d4714fe8ccde8bacc8",
+    "src/hors-des-ombres-launch-v010.js": "20c505494500d2c3c74243ab31fc7a0d636995a43804b76d82260c37ea11b0d6",
+    "src/oth-v1/oth-bridge.js": "3337fb7eb37127351fe71360c820d34a213db8f2d873d99ad2a93e6329f6f6f0",
+    "src/oth-v1/oth-data.js": "d32b15b2ed6c34179fa690356d619b7d38767a531e238f87d6da99bc4827b691",
+    "src/oth-v1/oth-engine.js": "1819e54741a58751a02e9dc8f557bec87541b5da63ff95ddb3c9b7c06cfd6bfb",
+    "src/oth-v1/oth-render.js": "6866c6386b38ef026549be38a43026796dbc4ddfad2f84c0d4e9847c807bef41",
+    "src/oth-v1/oth-ui.css": "92b8803875c15e585e2b62dde23da411e03a7115267141b64965c115d10105ac",
+    "src/oth-v1/oth-ui.js": "a9a7d257703234a8d67ced5ab3c3f1df4e2181b338209e34859ca2eb22d39172",
+    "src/title-screen-v61.js": "17c1527c13c94f5330dadacac7ca291e5dac06fed1eb66a1d720bcdafecce810",
+    "sw.js": "ed9d0fc9731f36fea47b402d6e868c87238b0bf3f9a73c31802987694b314cbb",
+    "vercel.json": "44fb610c50058b930dd4f55d80835554d978f8dcc025244a655d62503a9a3924"
+  },
+  "limitations": [
+    "V0.11 source files were not recovered.",
+    "The DLC retains its own Canvas engine and save namespace; it is not converted into GameEngine, MIRE or Frontier Forge.",
+    "The source browser scenario covers launching and early play, saves, map/codex, mobile and return; it is not a complete browser playthrough of all chapters.",
+    "Other DLC checkouts and their independent PRs are outside this Hors des ombres change."
+  ],
+  "resolvedEnvironmentIssues": [
+    "Initial browser launch lacked libglib; official Playwright system dependencies were installed before the final successful run.",
+    "A secondary verification in the incomplete local checkout was not used as the result; all 51 checks were rerun successfully in the complete checkout."
+  ]
+}

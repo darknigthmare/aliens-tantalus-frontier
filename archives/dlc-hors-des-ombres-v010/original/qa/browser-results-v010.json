@@ -1,0 +1,300 @@
+{
+  "version": "0.10.0",
+  "suite": "chromium-v010-fidelity-tools-topology",
+  "tests": 35,
+  "passed": 35,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "V0.10 et intitulé courant dans le document",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "U ouvre cinq outils sans déverrouillage gratuit",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le projecteur est annoncé comme attestation secondaire",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "hangar vers boarding : seuil E réellement franchi",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "boarding vers docking_airlock : seuil E réellement franchi",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "docking_airlock vers docking_arm : seuil E réellement franchi",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "docking_arm vers samson : seuil E réellement franchi",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "samson vers docking_arm : retour E réciproque",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "docking_arm vers docking_airlock : retour E réciproque",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "docking_airlock vers boarding : retour E réciproque",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "boarding vers hangar : retour E réciproque",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Râtelier récupéré sur place par E",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pic, thumper et filet deviennent disponibles",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Sélection de l’outil dans le panneau",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Projecteur acquis dans le second casier",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Filet utilisé avec F : charge et immobilisation réelles",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Cible maintenue au même endroit pendant le filet",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Thumper : impact et charge retirée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Maintien F ne vide pas le thumper",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Troisième impact : cadavre sans clone",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pic sélectionné au clavier et dommage de proximité",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Projecteur : réserve finie et impact",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Cloison : une cible derrière reste indemne",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Dix portraits civils réellement dessinés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Les portraits ne sont pas présentés comme officiels",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Fidélité expose limites et éléments à vérifier",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Fichier exporté réellement au schéma 10",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import rétablit sélection et réserve sans maintenir le tir",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Plan local contient les nouveaux retours de cloison",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "U tactile visible et panneau sans dépassement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Panneau équipement 844×390 sans largeur perdue",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Panneau équipement 800×600 sans largeur perdue",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Panneau équipement 1280×720 sans largeur perdue",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune écriture dans un autre DLC",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune exception JavaScript observée",
+      "ok": true,
+      "detail": []
+    }
+  ],
+  "errors": [],
+  "captures": [
+    {
+      "file": "119_titre_v010.png",
+      "caption": "Écran titre de la V0.10, document effectivement exécuté. Le module reste autonome et le rendu provisoire.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "120_vestibule.png",
+      "caption": "Préparation au seuil de hangar, puis passage E vers boarding. Cadrage repositionné pour inspecter l’architecture ; plan reconstruit, pas plan officiel.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "121_sas.png",
+      "caption": "Préparation au seuil de boarding, puis passage E vers docking_airlock. Cadrage repositionné pour inspecter l’architecture ; plan reconstruit, pas plan officiel.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "122_bras.png",
+      "caption": "Préparation au seuil de docking_airlock, puis passage E vers docking_arm. Cadrage repositionné pour inspecter l’architecture ; plan reconstruit, pas plan officiel.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "123_samson.png",
+      "caption": "Préparation au seuil de docking_arm, puis passage E vers samson. Cadrage repositionné pour inspecter l’architecture ; plan reconstruit, pas plan officiel.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "124_ratelier_vide.png",
+      "caption": "Maintien E sur le râtelier : outils retirés et rack vide persistant. Fixture au chapitre 9, aucune dotation injectée.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "125_equipement.png",
+      "caption": "Panneau U après acquisition réelle du râtelier. Les valeurs sont un équilibrage original ; le filet individuel est une simplification explicitement signalée.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "126_filet.png",
+      "caption": "Adulte de test explicitement placé dans le bras, puis immobilisé avec 4 et F. Ce lieu ne génère pas cette rencontre dans la campagne normale.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "127_thumper.png",
+      "caption": "Cible de contrôle préparée ; premier impact réel du thumper. Les dégâts et la portée ne sont pas des spécifications canoniques.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "128_cadavre_acide.png",
+      "caption": "Troisième impact dans une rencontre de contrôle : corps conservé et flaques corrosives temporaires, pas une mort scénarisée de personnage.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "129_pic.png",
+      "caption": "Pic à sable équipé et frappe de proximité exécutée. L’ennemi est une fixture de test ; forme et animation restent provisoires.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "130_projecteur.png",
+      "caption": "Jet du projecteur contre la cible préparée. Présence du matériel attestée seulement par une source secondaire ; modèle original.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "131_equipage.png",
+      "caption": "Tableau de l’équipage : chaque vignette appelle le même dessin de personnage que le terrain. Visages, couleurs et tailles sont provisoires, non certifiés 1:1.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "132_personnel_vestibule.png",
+      "caption": "Présences préparées au chapitre 5 dans le vestibule ; rôles civils et coiffures différenciées. Ce n’est pas une chorégraphie complète du passage romanesque.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "137_seuil_service.png",
+      "caption": "Vue préparée au droit du seuil service-medical:rec. Retours architecturaux reliés au mur arrière et circulation laissée au premier plan ; géométrie de reconstruction, non plan officiel.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "138_seuil_vestibule.png",
+      "caption": "Vue préparée au droit du seuil e12:boarding. Retours architecturaux reliés au mur arrière et circulation laissée au premier plan ; géométrie de reconstruction, non plan officiel.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "139_seuil_organique.png",
+      "caption": "Vue préparée au droit du seuil e24:vestibule. Retours architecturaux reliés au mur arrière et circulation laissée au premier plan ; géométrie de reconstruction, non plan officiel.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "133_blessures.png",
+      "caption": "État de campagne préparé après l’événement de blessure. Les profils conservent leurs vêtements et changent leur marque de blessure ; pas une procédure médicale réelle.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "134_fidelite.png",
+      "caption": "Panneau de production ouvert depuis la pause : écarts au 1:1 explicitement répertoriés, sans effets sur la progression.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "135_plan_bras.png",
+      "caption": "Plan de proximité : retours de cloison et extrémités du bras sont issus de la même géométrie que le terrain, sans ennemis sur la carte.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "136_mobile_equipement.png",
+      "caption": "Émulation 390 × 844 : accès U depuis le HUD et cartes d’outils défilables. Ce test n’est pas une certification de téléphone physique.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    }
+  ],
+  "htmlSHA256": "de70265dbe081191816fd7b2c1c7398f92351530336c60f16a39a58341b631bc",
+  "nativeNavigation": false,
+  "nativePersistenceCertified": false,
+  "navigationAttempts": [
+    "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:4188/?qa=1",
+    "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/ALIEN_HORS_DES_OMBRES_V0_10/JOUER_HORS_DES_OMBRES.html?qa=1"
+  ],
+  "fallback": "set_content + explicit Map-backed storage"
+}

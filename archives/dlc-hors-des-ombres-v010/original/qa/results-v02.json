@@ -1,0 +1,220 @@
+{
+  "suite": "v0.2-features-retained-in-v0.3",
+  "tests": 53,
+  "passed": 53,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Migration schema 1 préserve les 27 premiers objectifs et ressources",
+      "ok": true
+    },
+    {
+      "name": "Import rejette les records inconnus et les doublons",
+      "ok": true
+    },
+    {
+      "name": "Coordonnées de toutes les activités accessibles sans obstacle au centre",
+      "ok": true
+    },
+    {
+      "name": "Annexes : huit liens et deux sorties par pièce",
+      "ok": true
+    },
+    {
+      "name": "Galerie auxiliaire connectée à la machinerie au chapitre 2",
+      "ok": true
+    },
+    {
+      "name": "Alcôve indisponible au début",
+      "ok": true
+    },
+    {
+      "name": "Alcôve reliée à deux sorties après ouverture du contournement",
+      "ok": true
+    },
+    {
+      "name": "Lire un document exige la proximité physique",
+      "ok": true
+    },
+    {
+      "name": "Une transcription rejoint le carnet une seule fois",
+      "ok": true
+    },
+    {
+      "name": "Lecture et dialogue mettent le moteur en pause",
+      "ok": true
+    },
+    {
+      "name": "Les documents collectés persistent au rechargement",
+      "ok": true
+    },
+    {
+      "name": "Réserve fuel : quantité bornée et pas de double collecte",
+      "ok": true
+    },
+    {
+      "name": "Réserve kits : quantité bornée et pas de double collecte",
+      "ok": true
+    },
+    {
+      "name": "Réserve decoys : quantité bornée et pas de double collecte",
+      "ok": true
+    },
+    {
+      "name": "Réserve non consommée quand les poches sont pleines",
+      "ok": true
+    },
+    {
+      "name": "Vapeur : phases warning / active / inactive distinctes",
+      "ok": true
+    },
+    {
+      "name": "Vanne locale coupe définitivement la fuite dans la sauvegarde",
+      "ok": true
+    },
+    {
+      "name": "Jet de vapeur cause des dégâts temporisés, pas à chaque frame",
+      "ok": true
+    },
+    {
+      "name": "Contournement du collecteur hors bande dangereuse",
+      "ok": true
+    },
+    {
+      "name": "Aucune fuite ne déborde dans le Narcissus",
+      "ok": true
+    },
+    {
+      "name": "PNJ proche ouvre une conversation originale",
+      "ok": true
+    },
+    {
+      "name": "PNJ éloigné ne parle pas à distance",
+      "ok": true
+    },
+    {
+      "name": "Le protagoniste joué ne se dédouble pas en PNJ",
+      "ok": true
+    },
+    {
+      "name": "Un personnage perdu ne réapparaît pas ensuite",
+      "ok": true
+    },
+    {
+      "name": "Portage de Ripley au terme de l’unité médicale",
+      "ok": true
+    },
+    {
+      "name": "Portage interdit sprint et chalumeau",
+      "ok": true
+    },
+    {
+      "name": "Purge désormais dans le Narcissus, pas dans la baie serveur",
+      "ok": true
+    },
+    {
+      "name": "La purge ne précède pas l’installation de Ripley",
+      "ok": true
+    },
+    {
+      "name": "Commande oth-c01-o2 / routing : toutes les étapes, un seul objectif",
+      "ok": true
+    },
+    {
+      "name": "Commande oth-c03-o1 / routing : toutes les étapes, un seul objectif",
+      "ok": true
+    },
+    {
+      "name": "Commande oth-c05-o3 / routing : toutes les étapes, un seul objectif",
+      "ok": true
+    },
+    {
+      "name": "Commande oth-c06-o3 / routing : toutes les étapes, un seul objectif",
+      "ok": true
+    },
+    {
+      "name": "Commande oth-c07-o3 / routing : toutes les étapes, un seul objectif",
+      "ok": true
+    },
+    {
+      "name": "Commande oth-c01-o3 / sequence : toutes les étapes, un seul objectif",
+      "ok": true
+    },
+    {
+      "name": "Commande oth-c04-o1 / sequence : toutes les étapes, un seul objectif",
+      "ok": true
+    },
+    {
+      "name": "Commande oth-c07-o1 / sequence : toutes les étapes, un seul objectif",
+      "ok": true
+    },
+    {
+      "name": "Commande oth-c08-o3 / sequence : toutes les étapes, un seul objectif",
+      "ok": true
+    },
+    {
+      "name": "Commande oth-c11-o1 / sequence : toutes les étapes, un seul objectif",
+      "ok": true
+    },
+    {
+      "name": "Commande oth-c14-o1 / sequence : toutes les étapes, un seul objectif",
+      "ok": true
+    },
+    {
+      "name": "Commande oth-c02-o1 / pressure : toutes les étapes, un seul objectif",
+      "ok": true
+    },
+    {
+      "name": "Commande oth-c08-o1 / pressure : toutes les étapes, un seul objectif",
+      "ok": true
+    },
+    {
+      "name": "Commande oth-c14-o2 / sequence : toutes les étapes, un seul objectif",
+      "ok": true
+    },
+    {
+      "name": "Commande oth-c15-o2 / sequence : toutes les étapes, un seul objectif",
+      "ok": true
+    },
+    {
+      "name": "Commande oth-c16-o3 / tuning : toutes les étapes, un seul objectif",
+      "ok": true
+    },
+    {
+      "name": "Mauvaise séquence repart au début sans valider",
+      "ok": true
+    },
+    {
+      "name": "Réglages de dérivation conservés à la fermeture et à l’import",
+      "ok": true
+    },
+    {
+      "name": "Pression hors zone ne valide rien",
+      "ok": true
+    },
+    {
+      "name": "Jauge bornée entre 0 et 100",
+      "ok": true
+    },
+    {
+      "name": "Import filtre les indices de commutateur malformés",
+      "ok": true
+    },
+    {
+      "name": "Leurre ne se téléporte pas au changement de pièce",
+      "ok": true
+    },
+    {
+      "name": "Toutes les archives sont référencées et déverrouillées par collecte",
+      "ok": true
+    },
+    {
+      "name": "Autonome ne dépend pas de requêtes réseau ni de CDN",
+      "ok": true
+    },
+    {
+      "name": "Installateur : dry-run de mise à niveau puis upgrade idempotent et désinstallation",
+      "ok": true
+    }
+  ]
+}

@@ -1,0 +1,333 @@
+{
+  "version": "0.10.0",
+  "method": "Suites moteur, installateur et serveur ; Chromium avec set_content et stockage Map explicite. Scènes préparées et scripts connaissant les solutions, pas playtest humain.",
+  "counts": {
+    "version": "0.10.0",
+    "chapters": 16,
+    "objectives": 48,
+    "rooms": 41,
+    "edges": 52,
+    "portals": 104,
+    "walls": 182,
+    "depthRooms": 26,
+    "profileRooms": 15,
+    "propTypes": 48,
+    "placements": 331,
+    "codex": 228,
+    "equipmentEntries": 18,
+    "appearanceProfiles": 10,
+    "crewPlacements": 28
+  },
+  "nodeTests": 772,
+  "browserTests": 468,
+  "passed": 1240,
+  "failed": 0,
+  "tests": 1240,
+  "nativeNavigation": false,
+  "nativePersistenceCertified": false,
+  "sourceHashes": {
+    "src/oth-v1/oth-data.js": "d32b15b2ed6c34179fa690356d619b7d38767a531e238f87d6da99bc4827b691",
+    "src/oth-v1/oth-engine.js": "1819e54741a58751a02e9dc8f557bec87541b5da63ff95ddb3c9b7c06cfd6bfb",
+    "src/oth-v1/oth-render.js": "6866c6386b38ef026549be38a43026796dbc4ddfad2f84c0d4e9847c807bef41",
+    "src/oth-v1/oth-ui.js": "a97fcd213dae547adced55ee3906bcdc61e839f457e75f2828c3ec9e956c7a03",
+    "src/oth-v1/oth-ui.css": "92b8803875c15e585e2b62dde23da411e03a7115267141b64965c115d10105ac",
+    "JOUER_HORS_DES_OMBRES.html": "de70265dbe081191816fd7b2c1c7398f92351530336c60f16a39a58341b631bc"
+  },
+  "results": [
+    {
+      "path": "qa/results.json",
+      "sha256": "f1c0e5fcff34a6d0520971366ded6f1347ff488c852821f195d80f9d90b7fa77",
+      "tests": 47,
+      "passed": 47,
+      "failed": 0
+    },
+    {
+      "path": "qa/results-v02.json",
+      "sha256": "439ef45fbc566682d58df91733927655250991361efb313328fdb9f69768d62a",
+      "tests": 53,
+      "passed": 53,
+      "failed": 0
+    },
+    {
+      "path": "qa/delivery-results-v02.json",
+      "sha256": "027b39c30138dde04f2281dbd8d2463a5d196e7289c15e25d9179f648b579997",
+      "tests": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    {
+      "path": "qa/results-v03.json",
+      "sha256": "9a3a80aaf253238a338337453d81e24c4c1137d3a585bc1285d6798f6b6be930",
+      "tests": 81,
+      "passed": 81,
+      "failed": 0
+    },
+    {
+      "path": "qa/results-v04.json",
+      "sha256": "bb51b3cf43cd36a34c31d1648c906b23800738271fa6a8ad01f9dda153428651",
+      "tests": 94,
+      "passed": 94,
+      "failed": 0
+    },
+    {
+      "path": "qa/results-v05.json",
+      "sha256": "e3b1c32fc15431b1ef939786e6b75f84dae0b8672d62afcf385be517ed88d105",
+      "tests": 73,
+      "passed": 73,
+      "failed": 0
+    },
+    {
+      "path": "qa/results-v06.json",
+      "sha256": "b2f5434508c42799400ca3e3cb47c62b24ffd4be3ae883eba75b048ee46632f8",
+      "tests": 66,
+      "passed": 66,
+      "failed": 0
+    },
+    {
+      "path": "qa/results-v07.json",
+      "sha256": "ee63a319ac5b0b3f96174252edc9f4fba73776e3c5328553886f973b0a0e6103",
+      "tests": 71,
+      "passed": 71,
+      "failed": 0
+    },
+    {
+      "path": "qa/results-v08.json",
+      "sha256": "283b914e9c44cd7d68f181f1e8f59e8913ea1af5099c2ebc8105b5e97da0a6d9",
+      "tests": 65,
+      "passed": 65,
+      "failed": 0
+    },
+    {
+      "path": "qa/results-v09.json",
+      "sha256": "2915962fde5dcd63f27c108929c2aadba3397567b7034e43a47bbbdba61a3fb7",
+      "tests": 87,
+      "passed": 87,
+      "failed": 0
+    },
+    {
+      "path": "qa/results-v010.json",
+      "sha256": "453b513eb5b498f064cfd083510065e0dbb34817ca58591a27cd1c1fb8393f50",
+      "tests": 121,
+      "passed": 121,
+      "failed": 0
+    },
+    {
+      "path": "qa/browser-results-v02.json",
+      "sha256": "8fc040a1bc7bc34765f1a3ef37dbd5c6ef4aa9b425b3009c847101ac32c12111",
+      "tests": 35,
+      "passed": 35,
+      "failed": 0
+    },
+    {
+      "path": "qa/browser-results-v03.json",
+      "sha256": "77bb3402dbd3ef43aa314792f43d78abcb43e51e14190a9b113d98854bd8f13e",
+      "tests": 41,
+      "passed": 41,
+      "failed": 0
+    },
+    {
+      "path": "qa/browser-results-v04.json",
+      "sha256": "07ccd7bfd8de2a2786c47f9a805fe160d87adf08e2405890c8382fee8ab83780",
+      "tests": 75,
+      "passed": 75,
+      "failed": 0
+    },
+    {
+      "path": "qa/browser-results-v05.json",
+      "sha256": "b3e9f5630c07da0288f308049946f889df723d7e7f04500fa50f2d77aa36e43a",
+      "tests": 77,
+      "passed": 77,
+      "failed": 0
+    },
+    {
+      "path": "qa/browser-results-v06.json",
+      "sha256": "515b2d5be450640a3be7e1b80f76dbfe6a1e0f5f71eefbe1dd64b08a7587f74f",
+      "tests": 36,
+      "passed": 36,
+      "failed": 0
+    },
+    {
+      "path": "qa/browser-results-v07.json",
+      "sha256": "106c3172a1fddb7ad72d20d5f1fea3a7c01c94ded5130a960fcb459512e9c8df",
+      "tests": 35,
+      "passed": 35,
+      "failed": 0
+    },
+    {
+      "path": "qa/browser-results-v08.json",
+      "sha256": "42027ffd8231e377424a46adf92a1bd4d182f628c049362616354486cdb89fec",
+      "tests": 93,
+      "passed": 93,
+      "failed": 0
+    },
+    {
+      "path": "qa/browser-results-v09.json",
+      "sha256": "fed7aa89f3c1f0b63910a496c11067e434885c56657d4e90aaf12e8bdb6b424d",
+      "tests": 41,
+      "passed": 41,
+      "failed": 0
+    },
+    {
+      "path": "qa/browser-results-v010.json",
+      "sha256": "7943f4429732c16f67147815c9a6955d601d06ea4832ed69b1729d74bb0ce34b",
+      "tests": 35,
+      "passed": 35,
+      "failed": 0
+    }
+  ],
+  "legacySnapshots": 36,
+  "browserRunExitCodes": [
+    {
+      "suite": "02",
+      "exit": 0,
+      "seconds": 29.49017357826233
+    },
+    {
+      "suite": "03",
+      "exit": 0,
+      "seconds": 20.038305521011353
+    },
+    {
+      "suite": "04",
+      "exit": 0,
+      "seconds": 23.61822748184204
+    },
+    {
+      "suite": "05",
+      "exit": 0,
+      "seconds": 20.795586824417114
+    },
+    {
+      "suite": "06",
+      "exit": 0,
+      "seconds": 34.581622838974
+    },
+    {
+      "suite": "07",
+      "exit": 0,
+      "seconds": 47.59528660774231
+    },
+    {
+      "suite": "08",
+      "exit": 0,
+      "seconds": 30.211445808410645
+    },
+    {
+      "suite": "09",
+      "exit": 0,
+      "seconds": 19.0682532787323
+    },
+    {
+      "suite": "010",
+      "exit": 0,
+      "seconds": 38.62774109840393
+    }
+  ],
+  "currentReviewScreenshots": [
+    {
+      "file": "119_titre_v010.png",
+      "caption": "Écran titre de la V0.10, document effectivement exécuté. Le module reste autonome et le rendu provisoire.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "120_vestibule.png",
+      "caption": "Préparation au seuil de hangar, puis passage E vers boarding. Cadrage repositionné pour inspecter l’architecture ; plan reconstruit, pas plan officiel.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "121_sas.png",
+      "caption": "Préparation au seuil de boarding, puis passage E vers docking_airlock. Cadrage repositionné pour inspecter l’architecture ; plan reconstruit, pas plan officiel.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "122_bras.png",
+      "caption": "Préparation au seuil de docking_airlock, puis passage E vers docking_arm. Cadrage repositionné pour inspecter l’architecture ; plan reconstruit, pas plan officiel.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "123_samson.png",
+      "caption": "Préparation au seuil de docking_arm, puis passage E vers samson. Cadrage repositionné pour inspecter l’architecture ; plan reconstruit, pas plan officiel.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "124_ratelier_vide.png",
+      "caption": "Maintien E sur le râtelier : outils retirés et rack vide persistant. Fixture au chapitre 9, aucune dotation injectée.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "125_equipement.png",
+      "caption": "Panneau U après acquisition réelle du râtelier. Les valeurs sont un équilibrage original ; le filet individuel est une simplification explicitement signalée.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "126_filet.png",
+      "caption": "Adulte de test explicitement placé dans le bras, puis immobilisé avec 4 et F. Ce lieu ne génère pas cette rencontre dans la campagne normale.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "127_thumper.png",
+      "caption": "Cible de contrôle préparée ; premier impact réel du thumper. Les dégâts et la portée ne sont pas des spécifications canoniques.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "128_cadavre_acide.png",
+      "caption": "Troisième impact dans une rencontre de contrôle : corps conservé et flaques corrosives temporaires, pas une mort scénarisée de personnage.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "129_pic.png",
+      "caption": "Pic à sable équipé et frappe de proximité exécutée. L’ennemi est une fixture de test ; forme et animation restent provisoires.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "130_projecteur.png",
+      "caption": "Jet du projecteur contre la cible préparée. Présence du matériel attestée seulement par une source secondaire ; modèle original.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "131_equipage.png",
+      "caption": "Tableau de l’équipage : chaque vignette appelle le même dessin de personnage que le terrain. Visages, couleurs et tailles sont provisoires, non certifiés 1:1.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "132_personnel_vestibule.png",
+      "caption": "Présences préparées au chapitre 5 dans le vestibule ; rôles civils et coiffures différenciées. Ce n’est pas une chorégraphie complète du passage romanesque.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "137_seuil_service.png",
+      "caption": "Vue préparée au droit du seuil service-medical:rec. Retours architecturaux reliés au mur arrière et circulation laissée au premier plan ; géométrie de reconstruction, non plan officiel.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "138_seuil_vestibule.png",
+      "caption": "Vue préparée au droit du seuil e12:boarding. Retours architecturaux reliés au mur arrière et circulation laissée au premier plan ; géométrie de reconstruction, non plan officiel.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "139_seuil_organique.png",
+      "caption": "Vue préparée au droit du seuil e24:vestibule. Retours architecturaux reliés au mur arrière et circulation laissée au premier plan ; géométrie de reconstruction, non plan officiel.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "133_blessures.png",
+      "caption": "État de campagne préparé après l’événement de blessure. Les profils conservent leurs vêtements et changent leur marque de blessure ; pas une procédure médicale réelle.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "134_fidelite.png",
+      "caption": "Panneau de production ouvert depuis la pause : écarts au 1:1 explicitement répertoriés, sans effets sur la progression.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "135_plan_bras.png",
+      "caption": "Plan de proximité : retours de cloison et extrémités du bras sont issus de la même géométrie que le terrain, sans ennemis sur la carte.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    },
+    {
+      "file": "136_mobile_equipement.png",
+      "caption": "Émulation 390 × 844 : accès U depuis le HUD et cartes d’outils défilables. Ce test n’est pas une certification de téléphone physique.",
+      "method": "Chromium V0.10 — état de scène préparé explicitement ; commandes et simulation réelles."
+    }
+  ]
+}

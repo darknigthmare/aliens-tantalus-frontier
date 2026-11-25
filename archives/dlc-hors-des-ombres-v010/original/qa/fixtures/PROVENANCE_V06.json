@@ -1,0 +1,26 @@
+{
+  "sourceArchive": "ALIEN_HORS_DES_OMBRES_V0_6_LES_CHEMINS_DE_TRAVERSE.zip",
+  "sourceArchiveSHA256": "7bacfee4d4f1d7b4081059ad984e66405e22e2abb45e79526c60164f5668ca0f",
+  "snapshots": [
+    {
+      "file": "legacy-schema-6-chapter-3.json",
+      "source": "qa/playthrough-normal.json#/captures/chapter-3",
+      "sha256": "fe9f0ccbb5a7f5a20cf885134679d1f71c2a92a807c6b61577cd47b9c7d41a44"
+    },
+    {
+      "file": "legacy-schema-6-chapter-8.json",
+      "source": "qa/playthrough-normal.json#/captures/chapter-8",
+      "sha256": "7aa907a9c0ee63a83abd6ecb9f1d81f3b900e507a2dedc473bb055101bf3c2e2"
+    },
+    {
+      "file": "legacy-schema-6-chapter-11.json",
+      "source": "qa/playthrough-normal.json#/captures/chapter-11",
+      "sha256": "d6f3e071e813b15848ac8ad4298af519ce3c5807a5bd13b0182b8524e065dc04"
+    },
+    {
+      "file": "legacy-schema-6-final.json",
+      "source": "qa/playthrough-normal.json#/captures/final",
+      "sha256": "3fcf26a0ae946de10254a7164d7028a66bcbfc591b1340401a18f909258ab79d"
+    }
+  ]
+}

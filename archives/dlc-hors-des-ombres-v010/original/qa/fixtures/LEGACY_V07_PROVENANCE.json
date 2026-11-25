@@ -1,0 +1,26 @@
+{
+  "sourceArchive": "ALIEN_HORS_DES_OMBRES_V0_7_LES_ARCHIVES_NOYEES.zip",
+  "sha256": "2e9dfb040586ee88d5fe08c990e84edf1d2ced01b5cf0af5ebb41ae7bb38f08d",
+  "snapshots": [
+    {
+      "name": "legacy-schema-7-chapter-3.json",
+      "sha256": "acdcf38b0c42097b5d7fe1284f561174a4a6f5f422dfd091550b6728fc471611",
+      "origin": "qa/playthrough-normal.json::captures.chapter-3"
+    },
+    {
+      "name": "legacy-schema-7-chapter-8.json",
+      "sha256": "2959db20999f176c810d839f23efc0319a1e167399dca8ba36e8d7dc3f9652b8",
+      "origin": "qa/playthrough-normal.json::captures.chapter-8"
+    },
+    {
+      "name": "legacy-schema-7-chapter-11.json",
+      "sha256": "15cf25bb54d0146e0d944020be7fe58fbff343c075a9447074197608dd477d2a",
+      "origin": "qa/playthrough-normal.json::captures.chapter-11"
+    },
+    {
+      "name": "legacy-schema-7-final.json",
+      "sha256": "7e1c2e51d351df020e46bfa4c71018a6535428dd076e2443a47d9bba57cf26a9",
+      "origin": "qa/playthrough-normal.json::captures.final"
+    }
+  ]
+}

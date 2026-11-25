@@ -1,0 +1,900 @@
+{
+  "version": "0.10.0",
+  "suite": "v010-fidelity-topology-equipment",
+  "tests": 121,
+  "passed": 121,
+  "failed": 0,
+  "sourceHashes": {
+    "src/oth-v1/oth-data.js": "d32b15b2ed6c34179fa690356d619b7d38767a531e238f87d6da99bc4827b691",
+    "src/oth-v1/oth-engine.js": "1819e54741a58751a02e9dc8f557bec87541b5da63ff95ddb3c9b7c06cfd6bfb",
+    "src/oth-v1/oth-render.js": "6866c6386b38ef026549be38a43026796dbc4ddfad2f84c0d4e9847c807bef41",
+    "src/oth-v1/oth-ui.js": "a97fcd213dae547adced55ee3906bcdc61e839f457e75f2828c3ec9e956c7a03",
+    "JOUER_HORS_DES_OMBRES.html": "de70265dbe081191816fd7b2c1c7398f92351530336c60f16a39a58341b631bc"
+  },
+  "checks": [
+    {
+      "name": "Contenu courant : 41 pièces, 52 connexions et 104 extrémités",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune pièce orpheline dans le graphe de construction",
+      "ok": true,
+      "detail": {
+        "rooms": 41
+      }
+    },
+    {
+      "name": "Passerelle du Marion : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 6,
+        "portals": 2,
+        "walls": 4
+      }
+    },
+    {
+      "name": "Relais des communications : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 4,
+        "portals": 1,
+        "walls": 2
+      }
+    },
+    {
+      "name": "Coursive des équipages : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 10,
+        "portals": 5,
+        "walls": 6
+      }
+    },
+    {
+      "name": "Distribution électrique : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 10,
+        "portals": 4,
+        "walls": 6
+      }
+    },
+    {
+      "name": "Sas de confinement : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 5,
+        "portals": 2,
+        "walls": 4
+      }
+    },
+    {
+      "name": "Hangar des navettes : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 9,
+        "portals": 6,
+        "walls": 6
+      }
+    },
+    {
+      "name": "Brèche de la Delilah : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 5,
+        "portals": 1,
+        "walls": 2
+      }
+    },
+    {
+      "name": "Atelier de bord : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 11,
+        "portals": 3,
+        "walls": 6
+      }
+    },
+    {
+      "name": "Infirmerie : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 8,
+        "portals": 3,
+        "walls": 6
+      }
+    },
+    {
+      "name": "Cœur informatique : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 5,
+        "portals": 2,
+        "walls": 4
+      }
+    },
+    {
+      "name": "Amarrage du Narcissus : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 5,
+        "portals": 2,
+        "walls": 4
+      }
+    },
+    {
+      "name": "Narcissus — cryostase : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 5,
+        "portals": 1,
+        "walls": 2
+      }
+    },
+    {
+      "name": "Samson — soute : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 6,
+        "portals": 2,
+        "walls": 4
+      }
+    },
+    {
+      "name": "Samson — cockpit : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 6,
+        "portals": 2,
+        "walls": 4
+      }
+    },
+    {
+      "name": "LV-178 — aire d’atterrissage : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 6,
+        "portals": 2,
+        "walls": 4
+      }
+    },
+    {
+      "name": "Poste de la concession : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 8,
+        "portals": 3,
+        "walls": 4
+      }
+    },
+    {
+      "name": "Réserve des cellules : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 8,
+        "portals": 2,
+        "walls": 4
+      }
+    },
+    {
+      "name": "Puits principal — tête : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 5,
+        "portals": 2,
+        "walls": 4
+      }
+    },
+    {
+      "name": "Puits principal — fond : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 5,
+        "portals": 2,
+        "walls": 4
+      }
+    },
+    {
+      "name": "Galerie de roulage : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 12,
+        "portals": 6,
+        "walls": 6
+      }
+    },
+    {
+      "name": "Station de pompage : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 10,
+        "portals": 3,
+        "walls": 6
+      }
+    },
+    {
+      "name": "Abri des mineurs : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 8,
+        "portals": 1,
+        "walls": 2
+      }
+    },
+    {
+      "name": "Front de trimonite : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 10,
+        "portals": 5,
+        "walls": 6
+      }
+    },
+    {
+      "name": "Faille d’accès : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 5,
+        "portals": 2,
+        "walls": 4
+      }
+    },
+    {
+      "name": "Épave enfouie — seuil : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 6,
+        "portals": 2,
+        "walls": 4
+      }
+    },
+    {
+      "name": "Chambre des vestiges : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 7,
+        "portals": 3,
+        "walls": 6
+      }
+    },
+    {
+      "name": "Chambre d’incubation : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 5,
+        "portals": 2,
+        "walls": 4
+      }
+    },
+    {
+      "name": "Suture de la coque : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 6,
+        "portals": 3,
+        "walls": 6
+      }
+    },
+    {
+      "name": "Puits secondaire — cage : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 5,
+        "portals": 2,
+        "walls": 4
+      }
+    },
+    {
+      "name": "Soute de quarantaine : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 7,
+        "portals": 2,
+        "walls": 4
+      }
+    },
+    {
+      "name": "BeeBee’s — carré de repos : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 7,
+        "portals": 3,
+        "walls": 6
+      }
+    },
+    {
+      "name": "Galerie des auxiliaires : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 7,
+        "portals": 2,
+        "walls": 4
+      }
+    },
+    {
+      "name": "Canal de décantation : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 9,
+        "portals": 3,
+        "walls": 6
+      }
+    },
+    {
+      "name": "Alcôve des vestiges : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 4,
+        "portals": 2,
+        "walls": 4
+      }
+    },
+    {
+      "name": "Galerie de retour : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 5,
+        "portals": 3,
+        "walls": 4
+      }
+    },
+    {
+      "name": "Salle des échangeurs : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 6,
+        "portals": 3,
+        "walls": 6
+      }
+    },
+    {
+      "name": "Poste de relevé : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 6,
+        "portals": 2,
+        "walls": 4
+      }
+    },
+    {
+      "name": "Réserve des prélèvements : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 5,
+        "portals": 2,
+        "walls": 4
+      }
+    },
+    {
+      "name": "Vestibule d’embarquement : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 6,
+        "portals": 2,
+        "walls": 4
+      }
+    },
+    {
+      "name": "Sas d’amarrage : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 5,
+        "portals": 2,
+        "walls": 4
+      }
+    },
+    {
+      "name": "Bras d’amarrage du Samson : accès montés, réciproques, libres et joignables",
+      "ok": true,
+      "detail": {
+        "points": 5,
+        "portals": 2,
+        "walls": 4
+      }
+    },
+    {
+      "name": "182 retours de cloison physiques : collision, vision et plan partagés",
+      "ok": true,
+      "detail": {
+        "walls": 182
+      }
+    },
+    {
+      "name": "Retour solide bloquant un personnage en déplacement réel",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le bras du Samson remplace la liaison directe ancienne",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "L’amarrage ne s’ouvre pas avant le chapitre prévu",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "52 liaisons : 104 transferts moteur dans leurs conditions ouvertes",
+      "ok": true,
+      "detail": {
+        "transfers": 104,
+        "method": "API transition, conditions préparées ; pas 104 essais humains"
+      }
+    },
+    {
+      "name": "Rencontre de chapitre 5 : vestibule, pas soute",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Tous les raccords extraterrestres gardent une structure organique",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "18 matériels classés sans convertir les absents en objets jouables",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Râtelier d’intervention : acquisition avec E, coût unique et reprise sauvegardée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Râtelier d’intervention : pas de ramassage à distance ni trop tôt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Casier du projecteur minier : acquisition avec E, coût unique et reprise sauvegardée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Casier du projecteur minier : pas de ramassage à distance ni trop tôt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "pick : contact réel, réserve bornée et un seul geste par appui",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "thumper : contact réel, réserve bornée et un seul geste par appui",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "net : contact réel, réserve bornée et un seul geste par appui",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "acid : contact réel, réserve bornée et un seul geste par appui",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Torche narrative : refus avant atelier et dommages après préparation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Outil absent ou inconnu non sélectionnable",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Une cartouche vide ne tire pas et ne blesse personne",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Un filet immobilise puis libère sans dégâts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Un tir rencontre le mobilier sans toucher derrière",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Un retour de cloison arrête un jet au même endroit que la marche",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le premier adulte reçoit le tir, sans traverser son corps",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Un équipier devant la cible bloque le tir et préserve la charge",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Trois impacts de thumper : même victime, cadavre persistant, pas de réapparition",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Facehugger : une frappe suffit, sans flaque adulte inventée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le sang corrosif blesse sur place et expire en simulation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Une lecture suspend filet, traces acides et vie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Reprise : points de vie adverses, filet et stock exacts mais touches relâchées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Utilisation incompatible refusée : Ripley portée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Utilisation incompatible refusée : cellule",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Utilisation incompatible refusée : enregistreur",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Utilisation incompatible refusée : chariot",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Utilisation incompatible refusée : cachette",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Utilisation incompatible refusée : mort",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Nettoyage des armes forgées ou réserves excessives à l’import",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Campagne et répétition n’échangent ni munitions ni victimes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Dix identités civiles avec statut d’apparence explicite",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Blessures de phase représentées sans les avancer au début",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Welford et Powell disparaissent après l’événement du vestibule",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Les portraits d’équipage appellent le même rendu humain que le terrain",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-1-chapter-11.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 1,
+        "sha256": "65daf0c86efa6a2db9ee585132bd1c3eea43afd609b0d02ad168552e35a54df3"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-1-chapter-14.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 1,
+        "sha256": "11a23b7134a06b48b325b4287adfda0e5f11f1b4e1be023abd67a3aa8e6436cd"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-1-chapter-3.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 1,
+        "sha256": "15c86ab3957ddf16c016d0b52c9e33726e4a6118e4ee71c9ce56f21f2df8dc5b"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-1-final.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 1,
+        "sha256": "e3278835065d661856a9b7f0158572895cd487274ff546332938acff47b5de48"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-2-chapter-11.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 2,
+        "sha256": "41f53206d3ba230b335ea23274c2d923c1b17a3f60158f9c4b418c4ac0a1ad29"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-2-chapter-14.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 2,
+        "sha256": "5ea8b740e0b1c0df72c1ebcd2d3e742e37b9b81cb11584507b3131bb035b1f6b"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-2-chapter-3.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 2,
+        "sha256": "586ced5e6908432973d3dc26208f93b26371964a2188bc23229e9f08dba598e6"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-2-final.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 2,
+        "sha256": "58837dc57a2c6a015e49ef4e4ec99268b08525fa099acb9ebe8d090d8d8f27bc"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-3-chapter-11.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 3,
+        "sha256": "9a9243aa3360fd92520a1095ff925f05af5b2db09c64008721181d0c9593cc80"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-3-chapter-3.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 3,
+        "sha256": "2f31b0318f73e4e50fbe353da09f571c14c3cd886bae3dc7ea8c99842e71a6e0"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-3-chapter-8.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 3,
+        "sha256": "026388842a892baea605afe93f5a0f7a05438dcef6513596eb6a17014af357cc"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-3-final.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 3,
+        "sha256": "066ccade001e411481c3ba4f31ac0c00445d2acaa535366d599dad4286e3e7cd"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-4-chapter-11.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 4,
+        "sha256": "ed2ba6729340c054db36d94b3bc3322faa83cde475c7aaed6fb25497bc385334"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-4-chapter-3.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 4,
+        "sha256": "3fe65cd1e20b4021c953fa4ebcfe4b6a86e749303a0cb447239e8095beefd2fd"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-4-chapter-8.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 4,
+        "sha256": "0979859f9da66c53eee927a2bb438de397d1c0ff484c7c053e2f9fc94b945324"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-4-final.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 4,
+        "sha256": "9886228f4b3304f765a040b5617ec326f701f46b48d619adca45a7a205c55b13"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-5-chapter-11.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 5,
+        "sha256": "660076a0e1c21c142218e3430702675160fda6d91413bd163b2a8c5dd2608f5a"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-5-chapter-3.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 5,
+        "sha256": "c9d0feea3b16b0302800a61423f2383299fa2caf779de462c51287d96c8a0e86"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-5-chapter-8.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 5,
+        "sha256": "0f690470ba4cd21c39f642333d1a6af3ffc3acd796546d4b7d953d6a8d188a0c"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-5-final.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 5,
+        "sha256": "080be3c795d34896bf29aa455b8f2ed6d262e488cd9f53507d4ea239979a5d90"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-6-chapter-11.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 6,
+        "sha256": "d6f3e071e813b15848ac8ad4298af519ce3c5807a5bd13b0182b8524e065dc04"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-6-chapter-3.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 6,
+        "sha256": "fe9f0ccbb5a7f5a20cf885134679d1f71c2a92a807c6b61577cd47b9c7d41a44"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-6-chapter-8.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 6,
+        "sha256": "7aa907a9c0ee63a83abd6ecb9f1d81f3b900e507a2dedc473bb055101bf3c2e2"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-6-final.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 6,
+        "sha256": "3fcf26a0ae946de10254a7164d7028a66bcbfc591b1340401a18f909258ab79d"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-7-chapter-11.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 7,
+        "sha256": "15cf25bb54d0146e0d944020be7fe58fbff343c075a9447074197608dd477d2a"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-7-chapter-3.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 7,
+        "sha256": "acdcf38b0c42097b5d7fe1284f561174a4a6f5f422dfd091550b6728fc471611"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-7-chapter-8.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 7,
+        "sha256": "2959db20999f176c810d839f23efc0319a1e167399dca8ba36e8d7dc3f9652b8"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-7-final.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 7,
+        "sha256": "7e1c2e51d351df020e46bfa4c71018a6535428dd076e2443a47d9bba57cf26a9"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-8-chapter-11.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 8,
+        "sha256": "ece7b533de8051d7465af7de0502f9c158305acec9a19e1388d563d5d912c3f1"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-8-chapter-3.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 8,
+        "sha256": "4d9c40faf3c94c500e47ec2e9813169f409c492d807e4c0cfc168fceb9f4a403"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-8-chapter-8.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 8,
+        "sha256": "b27918d49788b50ce2d944b6bdb9f17e3c6ab4587d4447930eee34c82372db87"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-8-final.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 8,
+        "sha256": "7d30cbabe488096dc042bb9c2320b52af158cafca209ab2aad33a45db6c48306"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-9-chapter-11.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 9,
+        "sha256": "6b06c13e62b7e37ef3019a8d1a9d360860275e1d59a4ed11e6014a9a59bedf15"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-9-chapter-3.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 9,
+        "sha256": "6617fb5931f680ef509a21df35226479079bdb91bfcb211c5f55568757026527"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-9-chapter-8.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 9,
+        "sha256": "67dc45c961168b2dc9356a8277faf3ef45f242f8ca3924c50a5066564ee82a4a"
+      }
+    },
+    {
+      "name": "Ancien carnet réel : legacy-schema-9-final.json",
+      "ok": true,
+      "detail": {
+        "oldSchema": 9,
+        "sha256": "dced1f70ea6f976a4f79c853cd1ec27edcb153c5c6e740aa7dfb1ad230ac962d"
+      }
+    },
+    {
+      "name": "Fidélité : limites publiées, annexes originales et source secondaire non masquée",
+      "ok": true,
+      "detail": null
+    }
+  ]
+}

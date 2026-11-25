@@ -1,0 +1,112 @@
+{
+  "suite": "delivery-v0.3",
+  "tests": 14,
+  "passed": 14,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Passage physique aller-retour : rec ↔ junction",
+      "ok": true,
+      "details": {
+        "frames": 83,
+        "transitions": 2,
+        "seededGoals": 0
+      }
+    },
+    {
+      "name": "Passage physique aller-retour : rec ↔ workshop",
+      "ok": true,
+      "details": {
+        "frames": 83,
+        "transitions": 2,
+        "seededGoals": 0
+      }
+    },
+    {
+      "name": "Passage physique aller-retour : maintenance ↔ engineering",
+      "ok": true,
+      "details": {
+        "frames": 85,
+        "transitions": 2,
+        "seededGoals": 9
+      }
+    },
+    {
+      "name": "Passage physique aller-retour : maintenance ↔ server",
+      "ok": true,
+      "details": {
+        "frames": 85,
+        "transitions": 2,
+        "seededGoals": 9
+      }
+    },
+    {
+      "name": "Passage physique aller-retour : drain ↔ haul",
+      "ok": true,
+      "details": {
+        "frames": 100,
+        "transitions": 2,
+        "seededGoals": 21
+      }
+    },
+    {
+      "name": "Passage physique aller-retour : drain ↔ pump",
+      "ok": true,
+      "details": {
+        "frames": 100,
+        "transitions": 2,
+        "seededGoals": 21
+      }
+    },
+    {
+      "name": "Passage physique aller-retour : alcove ↔ fossils",
+      "ok": true,
+      "details": {
+        "frames": 89,
+        "transitions": 2,
+        "seededGoals": 27
+      }
+    },
+    {
+      "name": "Passage physique aller-retour : alcove ↔ bypass",
+      "ok": true,
+      "details": {
+        "frames": 89,
+        "transitions": 2,
+        "seededGoals": 27
+      }
+    },
+    {
+      "name": "Serveur local : page autonome en HTTP 200",
+      "ok": true,
+      "details": {
+        "bytes": 734840
+      }
+    },
+    {
+      "name": "Serveur local : entrée modulaire et modules accessibles",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Serveur local : fichier absent répond 404",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Serveur local : HEAD sans corps",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Serveur local : méthode POST refusée",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Serveur local : parcours hors racine refusé",
+      "ok": true,
+      "details": null
+    }
+  ]
+}

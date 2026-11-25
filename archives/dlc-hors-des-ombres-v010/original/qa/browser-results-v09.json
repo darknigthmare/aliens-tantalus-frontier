@@ -1,0 +1,300 @@
+{
+  "version": "0.10.0",
+  "suite": "browser-v09-handling",
+  "tests": 41,
+  "passed": 41,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Titre et schéma V0.9 chargés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "N ouvre un relevé vide sans révéler les autres salles",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le relevé ne contient pas de commande de déplacement distante",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "X prend la poignée sans téléporter le personnage",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Direction droite déplace le chariot ET le personnage",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Prise sans consommation de carburant ou de composants",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le HUD nomme les poignées tenues",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Relâcher X serre les freins et conserve la position",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Après relâchement le texte ne prétend plus que les poignées sont tenues",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le relevé montre le chariot observé et pas les cinq autres",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La lecture met le monde en pause",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le plan représente un mobile identifié",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Position du plan dérivée du même état déplacé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Export JSON contient le schéma 9 et la transformation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import réel reprend la position sans resaisie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le déplacement en profondeur reste solidaire",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La poignée droite permet de tirer",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "stores-cart : contrôle clavier opérationnel",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "haul-cart : contrôle clavier opérationnel",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "pump-cart : contrôle clavier opérationnel",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "exchanger-cart : contrôle clavier opérationnel",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "hold-cart : contrôle clavier opérationnel",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le chariot bloque devant un acteur sans écrasement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Ouvrir un menu libère immédiatement les poignées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Fermer le menu ne reprend pas une touche tenue",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Perte de focus : pause et freins serrés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "L’entrée de chapitre préparée est enregistrée normalement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Manutention en répétition : campagne principale inchangée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Retour campagne restaure son propre stationnement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Bouton X tactile visible et dans le cadre",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "X ne recouvre ni la commande d’écoute ni un autre élément",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Maintien tactile saisit réellement la poignée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Deux contacts tactiles déplacent le chariot",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Annulation tactile relâche les deux actions",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucun déplacement résiduel après annulation tactile",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Relevé mobile sans débordement horizontal",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Petit paysage : pied d’écran dans la fenêtre",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "1280×720 : dialogue accessible sans débordement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "800×600 : dialogue accessible sans débordement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La clé d’un autre DLC reste intacte",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune exception JavaScript pendant les contrôles",
+      "ok": true,
+      "detail": []
+    }
+  ],
+  "consoleErrors": [],
+  "navigationAttempts": [
+    "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:4188/?qa=1",
+    "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/ALIEN_HORS_DES_OMBRES_V0_10/JOUER_HORS_DES_OMBRES.html?qa=1"
+  ],
+  "nativeNavigation": false,
+  "nativeStoragePersistence": false,
+  "storageMethod": "native for navigation if possible; otherwise explicit memory test double",
+  "htmlSHA256": "de70265dbe081191816fd7b2c1c7398f92351530336c60f16a39a58341b631bc",
+  "screenshots": [
+    {
+      "file": "104_titre_v09.png",
+      "caption": "Écran titre V0.9, sans préparation de progression. Le jeu précédent n’a pas été remplacé par une simple fiche de démonstration.",
+      "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption."
+    },
+    {
+      "file": "105_poignees_atelier.png",
+      "caption": "Scène préparée à l’atelier, sans ennemi. Prise avec X puis déplacement avec D. La pose des mains rejoint les poignées et les roues suivent la position du moteur.",
+      "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption."
+    },
+    {
+      "file": "106_servante_freinee.png",
+      "caption": "Après le déplacement réel de la capture précédente, X est relâché. La servante conserve sa nouvelle position avec les freins serrés.",
+      "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption."
+    },
+    {
+      "file": "107_releve_manutention.png",
+      "caption": "Panneau N ouvert après une manipulation. Il indique le stationnement modifié, sans bouton de télécommande.",
+      "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption."
+    },
+    {
+      "file": "108_plan_materiel.png",
+      "caption": "Le plan M représente la servante déplacée. Aucune position de créature n’est ajoutée au relevé.",
+      "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption."
+    },
+    {
+      "file": "109_servante_reserves.png",
+      "caption": "Réserves : prise réelle du chariot à partir de son stationnement préparé, puis déplacement.",
+      "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption."
+    },
+    {
+      "file": "110_benne_roulage.png",
+      "caption": "Galerie de roulage : benne chargée et aire balisée. Situation préparée sans ennemi, puis X et D.",
+      "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption."
+    },
+    {
+      "file": "111_servante_pompage.png",
+      "caption": "Pompage : servante mobile placée dans le passage. Contrôle de déplacement à partir du stationnement initial.",
+      "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption."
+    },
+    {
+      "file": "112_benne_echangeurs.png",
+      "caption": "Échangeurs : la benne avance plus lentement dans le caniveau encore en eau. Situation préparée, puis commandes normales.",
+      "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption."
+    },
+    {
+      "file": "113_benne_quarantaine.png",
+      "caption": "Soute de quarantaine : maintien des poignées et mouvement avec la position persistante du moteur.",
+      "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption."
+    },
+    {
+      "file": "114_aucun_ecrasement.png",
+      "caption": "Test préparé : adulte immobilisé pour isoler la collision. Le chariot s’arrête avant le corps ; aucun déplacement forcé ni dégât d’écrasement.",
+      "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption."
+    },
+    {
+      "file": "118_manutention_repetition.png",
+      "caption": "Répétition ouverte depuis l’entrée préparée du chapitre 4, puis chariot déplacé au clavier. Le carnet principal est comparé avant et après, sans modification.",
+      "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption."
+    },
+    {
+      "file": "115_poignees_mobile.png",
+      "caption": "Écran 390 × 844. Deux contacts tactiles Chromium maintiennent X et la direction droite ; la servante se déplace réellement.",
+      "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption."
+    },
+    {
+      "file": "116_releve_mobile.png",
+      "caption": "Relevé de manutention sur petit écran après annulation tactile. La lecture ne déplace pas le matériel.",
+      "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption."
+    },
+    {
+      "file": "117_poignees_paysage.png",
+      "caption": "Écran paysage 844 × 390. Préparation au stationnement ; les commandes et le pied d’écran restent dans le cadre.",
+      "method": "Actual Chromium rendering on V0.9; preparation and input specified in caption."
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "path": "qa/fixtures/legacy-schema-3-chapter-3.json",
+    "schema": 3,
+    "archive": "ALIEN_HORS_DES_OMBRES_V0_3_NE_RESTEZ_PAS_DERRIERE.zip",
+    "archiveSHA256": "6405ed58da4817dc25a3ad2f1f917fe09b98d91eef8d655ce754f1d1b67975f0",
+    "sourceEntry": "ALIEN_HORS_DES_OMBRES_V0_3/qa/playthrough-normal.json",
+    "sourceEntrySHA256": "4fc734ef346dcc2d6d90b823845802951f399ec2a7177bb9684ca356757d4bb7",
+    "snapshotKey": "chapter-3",
+    "sha256": "2f31b0318f73e4e50fbe353da09f571c14c3cd886bae3dc7ea8c99842e71a6e0"
+  },
+  {
+    "path": "qa/fixtures/legacy-schema-3-chapter-8.json",
+    "schema": 3,
+    "archive": "ALIEN_HORS_DES_OMBRES_V0_3_NE_RESTEZ_PAS_DERRIERE.zip",
+    "archiveSHA256": "6405ed58da4817dc25a3ad2f1f917fe09b98d91eef8d655ce754f1d1b67975f0",
+    "sourceEntry": "ALIEN_HORS_DES_OMBRES_V0_3/qa/playthrough-normal.json",
+    "sourceEntrySHA256": "4fc734ef346dcc2d6d90b823845802951f399ec2a7177bb9684ca356757d4bb7",
+    "snapshotKey": "chapter-8",
+    "sha256": "026388842a892baea605afe93f5a0f7a05438dcef6513596eb6a17014af357cc"
+  },
+  {
+    "path": "qa/fixtures/legacy-schema-3-chapter-11.json",
+    "schema": 3,
+    "archive": "ALIEN_HORS_DES_OMBRES_V0_3_NE_RESTEZ_PAS_DERRIERE.zip",
+    "archiveSHA256": "6405ed58da4817dc25a3ad2f1f917fe09b98d91eef8d655ce754f1d1b67975f0",
+    "sourceEntry": "ALIEN_HORS_DES_OMBRES_V0_3/qa/playthrough-normal.json",
+    "sourceEntrySHA256": "4fc734ef346dcc2d6d90b823845802951f399ec2a7177bb9684ca356757d4bb7",
+    "snapshotKey": "chapter-11",
+    "sha256": "9a9243aa3360fd92520a1095ff925f05af5b2db09c64008721181d0c9593cc80"
+  },
+  {
+    "path": "qa/fixtures/legacy-schema-3-final.json",
+    "schema": 3,
+    "archive": "ALIEN_HORS_DES_OMBRES_V0_3_NE_RESTEZ_PAS_DERRIERE.zip",
+    "archiveSHA256": "6405ed58da4817dc25a3ad2f1f917fe09b98d91eef8d655ce754f1d1b67975f0",
+    "sourceEntry": "ALIEN_HORS_DES_OMBRES_V0_3/qa/playthrough-normal.json",
+    "sourceEntrySHA256": "4fc734ef346dcc2d6d90b823845802951f399ec2a7177bb9684ca356757d4bb7",
+    "snapshotKey": "final",
+    "sha256": "066ccade001e411481c3ba4f31ac0c00445d2acaa535366d599dad4286e3e7cd"
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "baseArchive": "ALIEN_HORS_DES_OMBRES_V0_6_LES_CHEMINS_DE_TRAVERSE.zip",
+  "sha256": "7bacfee4d4f1d7b4081059ad984e66405e22e2abb45e79526c60164f5668ca0f",
+  "bytes": 45520144,
+  "version": "0.6.0",
+  "workingVersion": "0.7.0",
+  "diff": "source-diff-v06-v07.patch",
+  "method": "Raw supplied cumulative ZIP extracted; original preserved; source diff delivered."
+}

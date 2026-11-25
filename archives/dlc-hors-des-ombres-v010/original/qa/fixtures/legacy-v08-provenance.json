@@ -1,0 +1,30 @@
+{
+  "archive": "ALIEN_HORS_DES_OMBRES_V0_8_LES_MEMOIRES_DU_MARION.zip",
+  "archiveSHA256": "03eee85918c0c55d8e9977c8834b81f7bdaf3723a5d8a12ef5260c939c575886",
+  "snapshots": [
+    {
+      "file": "legacy-schema-8-chapter-3.json",
+      "archiveMember": "ALIEN_HORS_DES_OMBRES_V0_8/qa/playthrough-normal.json",
+      "captureKey": "chapter-3",
+      "sha256": "4d9c40faf3c94c500e47ec2e9813169f409c492d807e4c0cfc168fceb9f4a403"
+    },
+    {
+      "file": "legacy-schema-8-chapter-8.json",
+      "archiveMember": "ALIEN_HORS_DES_OMBRES_V0_8/qa/playthrough-normal.json",
+      "captureKey": "chapter-8",
+      "sha256": "b27918d49788b50ce2d944b6bdb9f17e3c6ab4587d4447930eee34c82372db87"
+    },
+    {
+      "file": "legacy-schema-8-chapter-11.json",
+      "archiveMember": "ALIEN_HORS_DES_OMBRES_V0_8/qa/playthrough-normal.json",
+      "captureKey": "chapter-11",
+      "sha256": "ece7b533de8051d7465af7de0502f9c158305acec9a19e1388d563d5d912c3f1"
+    },
+    {
+      "file": "legacy-schema-8-final.json",
+      "archiveMember": "ALIEN_HORS_DES_OMBRES_V0_8/qa/playthrough-normal.json",
+      "captureKey": "final",
+      "sha256": "7d30cbabe488096dc042bb9c2320b52af158cafca209ab2aad33a45db6c48306"
+    }
+  ]
+}

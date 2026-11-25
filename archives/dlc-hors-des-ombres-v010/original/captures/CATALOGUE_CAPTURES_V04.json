@@ -1,0 +1,62 @@
+[
+  {
+    "file": "37_menu_v04.png",
+    "caption": "Menu de la V0.5, document chargé sans état de campagne injecté.",
+    "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+  },
+  {
+    "file": "38_coursive_eclairee.png",
+    "caption": "Coursive, rampes allumées. Point de départ préparé devant la commande d’éclairage.",
+    "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+  },
+  {
+    "file": "39_coursive_secours.png",
+    "caption": "Même position après interaction E : les rampes s’éteignent, le balisage reste visible.",
+    "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+  },
+  {
+    "file": "40_services.png",
+    "caption": "Relevé des services locaux ouvert par K. Aucune activation distante.",
+    "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+  },
+  {
+    "file": "41_verrou_coursive.png",
+    "caption": "Fermeture du verrou par maintien de B. Le délai apparaît sur la porte.",
+    "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+  },
+  {
+    "file": "42_compresseur.png",
+    "caption": "Compresseur déclenché par E. Rotation et état de cycle sont produits par la simulation, sur une scène préparée.",
+    "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+  },
+  {
+    "file": "43_pression_pompage.png",
+    "caption": "Rencontre préparée : E pour passer, B pour fermer. L’adulte rejoint réellement le seuil depuis la salle précédente, puis force la cloison.",
+    "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+  },
+  {
+    "file": "44_passage_creature.png",
+    "caption": "Même rencontre après rupture du verrou. L’adulte porte la même identité ; aucun clone n’a été ajouté pour la capture.",
+    "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+  },
+  {
+    "file": "45_seuil_epave.png",
+    "caption": "Seuil organique : absence de verrou industriel. Scène préparée dans l’épave.",
+    "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+  },
+  {
+    "file": "46_mobile_cloison.png",
+    "caption": "Affichage 390 × 844, contrôle B visible et verrou engagé via le contrôle de terrain.",
+    "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+  },
+  {
+    "file": "47_mobile_services.png",
+    "caption": "Relevé K en format mobile ; la simulation est suspendue.",
+    "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+  },
+  {
+    "file": "48_paysage_services.png",
+    "caption": "Format paysage 844 × 390. La machine et les commandes de terrain restent accessibles.",
+    "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+  }
+]

@@ -1,3 +1,4 @@
+import { launchHorsDesOmbresV010, HORS_DES_OMBRES_EVENT_V010 } from './hors-des-ombres-launch-v010.js';
 import { colonySnapshotV188, investColonySiteV188, applyColonyOperationResultV188, COLONY_TIERS_V188, colonyRescuedV188,
   colonySupplySourcesTextV188, colonySuppliesLineV188 } from './colony-reconstruction-v188.js';
 import { filterUnlockedCampaignsV188, stationLockReasonV188, stationLockTextV188, stationSnapshotV188, cassiusChoicePendingV188, chooseCassiusV188, CASSIUS_CHOICES_V188, CASSIUS_DIALOG_V188, stationReturnSceneDueV188, markStationSceneSeenV188, STATION_SCENES_V188 } from './station-asphodele-v188.js';
@@ -1030,10 +1031,15 @@ const titleScreen = new TitleScreenController({
     return false;
   },
   onForge: () => openForgeContext(),
+  onHorsDesOmbres: () => openHorsDesOmbresV010(),
   onOptions: () => {
     titleSceneV79.preservePlacementOnNextShowV87();
     showView('settings');
   }
+});
+globalThis.addEventListener(HORS_DES_OMBRES_EVENT_V010, event => {
+  event.preventDefault();
+  openHorsDesOmbresV010();
 });
 // Title VFX (V188): runs only while the title screen is shown.
 const titleVfxV188 = new TitleVfxV188({ screen: byId('title-screen'), scene: byId('title-scene-v79'), canvas: byId('title-vfx-v188'),
@@ -3709,6 +3715,12 @@ function handleQuickSaveV86() {
     sessionStart = Date.now(); renderClock(); toast('Sauvegarde locale confirmée.');
     return true;
   } catch (error) { toast(error.message); return false; }
+}
+
+function openHorsDesOmbresV010() {
+  const opened = launchHorsDesOmbresV010({ save: handleQuickSaveV86 });
+  if (!opened) titleScreen.liveStatus.textContent = 'Le départ est suspendu : vérifiez la sauvegarde du Tantalus avant de réessayer.';
+  return opened;
 }
 
 function applyMissionResumeState(state) {

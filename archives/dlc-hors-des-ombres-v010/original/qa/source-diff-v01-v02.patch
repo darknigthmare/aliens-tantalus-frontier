@@ -1,0 +1,2980 @@
+--- v0.1/src/oth-v1/oth-data.js
++++ v0.2/src/oth-v1/oth-data.js
+@@ -1,6 +1,6 @@
+ export const DATA = {
+   "id": "mire-out-of-shadows",
+-  "version": "0.1.0",
++  "version": "0.2.0",
+   "title": "ALIEN — HORS DES OMBRES",
+   "subtitle": "LA SORTIE DES PROFONDEURS",
+   "saveKey": "atf:mire:out-of-shadows:v1",
+@@ -73,6 +73,42 @@
+           "scale": 1,
+           "solid": true,
+           "variant": 2
++        },
++        {
++          "id": "bridge:dressing:0",
++          "type": "cable",
++          "x": 415,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "bridge:dressing:1",
++          "type": "vent",
++          "x": 825,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
++        },
++        {
++          "id": "bridge:dressing:2",
++          "type": "extinguisher",
++          "x": 1505,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 2
++        },
++        {
++          "id": "bridge:dressing:3",
++          "type": "strap",
++          "x": 1950,
++          "y": 166,
++          "scale": 1,
++          "solid": false,
++          "variant": 3
+         }
+       ],
+       "nodes": [
+@@ -202,6 +238,24 @@
+           "scale": 1,
+           "solid": false,
+           "variant": 0
++        },
++        {
++          "id": "comms:dressing:0",
++          "type": "vent",
++          "x": 690,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "comms:dressing:1",
++          "type": "cable",
++          "x": 1120,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
+         }
+       ],
+       "nodes": [
+@@ -323,6 +377,33 @@
+           "scale": 1,
+           "solid": false,
+           "variant": 1
++        },
++        {
++          "id": "junction:dressing:0",
++          "type": "cable",
++          "x": 940,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "junction:dressing:1",
++          "type": "strap",
++          "x": 1740,
++          "y": 165,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
++        },
++        {
++          "id": "junction:dressing:2",
++          "type": "pallet",
++          "x": 2070,
++          "y": 164,
++          "scale": 1,
++          "solid": false,
++          "variant": 2
+         }
+       ],
+       "nodes": [
+@@ -398,6 +479,14 @@
+           "kind": "door",
+           "x": 1304,
+           "y": 5
++        },
++        {
++          "id": "oth-annex-rec-0:a",
++          "edge": "oth-annex-rec-0",
++          "target": "rec",
++          "x": 1697,
++          "y": 88,
++          "kind": "door"
+         }
+       ]
+     },
+@@ -468,6 +557,33 @@
+           "scale": 1,
+           "solid": false,
+           "variant": 2
++        },
++        {
++          "id": "engineering:dressing:0",
++          "type": "cable",
++          "x": 550,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "engineering:dressing:1",
++          "type": "vent",
++          "x": 970,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
++        },
++        {
++          "id": "engineering:dressing:2",
++          "type": "pallet",
++          "x": 1740,
++          "y": 164,
++          "scale": 1,
++          "solid": false,
++          "variant": 2
+         }
+       ],
+       "nodes": [
+@@ -535,6 +651,14 @@
+           "kind": "door",
+           "x": 882,
+           "y": 5
++        },
++        {
++          "id": "oth-annex-maintenance-0:a",
++          "edge": "oth-annex-maintenance-0",
++          "target": "maintenance",
++          "x": 1738,
++          "y": 88,
++          "kind": "door"
+         }
+       ]
+     },
+@@ -734,6 +858,42 @@
+           "scale": 1,
+           "solid": true,
+           "variant": 1
++        },
++        {
++          "id": "hangar:dressing:0",
++          "type": "strap",
++          "x": 440,
++          "y": 166,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "hangar:dressing:1",
++          "type": "cable",
++          "x": 1010,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
++        },
++        {
++          "id": "hangar:dressing:2",
++          "type": "pallet",
++          "x": 1450,
++          "y": 166,
++          "scale": 1,
++          "solid": false,
++          "variant": 2
++        },
++        {
++          "id": "hangar:dressing:3",
++          "type": "extinguisher",
++          "x": 2400,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 3
+         }
+       ],
+       "nodes": [
+@@ -1008,6 +1168,33 @@
+           "scale": 1,
+           "solid": false,
+           "variant": 0
++        },
++        {
++          "id": "workshop:dressing:0",
++          "type": "extinguisher",
++          "x": 490,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "workshop:dressing:1",
++          "type": "cable",
++          "x": 780,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
++        },
++        {
++          "id": "workshop:dressing:2",
++          "type": "pallet",
++          "x": 1420,
++          "y": 164,
++          "scale": 1,
++          "solid": false,
++          "variant": 2
+         }
+       ],
+       "nodes": [
+@@ -1059,6 +1246,14 @@
+           "kind": "door",
+           "x": 90,
+           "y": 88
++        },
++        {
++          "id": "oth-annex-rec-1:a",
++          "edge": "oth-annex-rec-1",
++          "target": "rec",
++          "x": 784,
++          "y": 88,
++          "kind": "door"
+         }
+       ]
+     },
+@@ -1129,6 +1324,33 @@
+           "scale": 1,
+           "solid": true,
+           "variant": 1
++        },
++        {
++          "id": "medical:dressing:0",
++          "type": "cable",
++          "x": 420,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "medical:dressing:1",
++          "type": "vent",
++          "x": 870,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
++        },
++        {
++          "id": "medical:dressing:2",
++          "type": "extinguisher",
++          "x": 1510,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 2
+         }
+       ],
+       "nodes": [
+@@ -1258,6 +1480,24 @@
+           "scale": 1,
+           "solid": false,
+           "variant": 2
++        },
++        {
++          "id": "server:dressing:0",
++          "type": "cable",
++          "x": 430,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "server:dressing:1",
++          "type": "vent",
++          "x": 1370,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
+         }
+       ],
+       "nodes": [
+@@ -1309,6 +1549,14 @@
+           "kind": "door",
+           "x": 90,
+           "y": 88
++        },
++        {
++          "id": "oth-annex-maintenance-1:a",
++          "edge": "oth-annex-maintenance-1",
++          "target": "maintenance",
++          "x": 784,
++          "y": 88,
++          "kind": "door"
+         }
+       ]
+     },
+@@ -1379,6 +1627,24 @@
+           "scale": 1,
+           "solid": true,
+           "variant": 0
++        },
++        {
++          "id": "dock:dressing:0",
++          "type": "cable",
++          "x": 480,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "dock:dressing:1",
++          "type": "strap",
++          "x": 1180,
++          "y": 164,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
+         }
+       ],
+       "nodes": [
+@@ -1629,6 +1895,24 @@
+           "scale": 1,
+           "solid": false,
+           "variant": 2
++        },
++        {
++          "id": "samson:dressing:0",
++          "type": "strap",
++          "x": 580,
++          "y": 166,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "samson:dressing:1",
++          "type": "cable",
++          "x": 1450,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
+         }
+       ],
+       "nodes": [
+@@ -1887,6 +2171,24 @@
+           "scale": 1,
+           "solid": false,
+           "variant": 1
++        },
++        {
++          "id": "landing:dressing:0",
++          "type": "cable",
++          "x": 1190,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "landing:dressing:1",
++          "type": "strap",
++          "x": 1840,
++          "y": 165,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
+         }
+       ],
+       "nodes": [
+@@ -2016,6 +2318,24 @@
+           "scale": 1,
+           "solid": true,
+           "variant": 2
++        },
++        {
++          "id": "control:dressing:0",
++          "type": "cable",
++          "x": 520,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "control:dressing:1",
++          "type": "vent",
++          "x": 1190,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
+         }
+       ],
+       "nodes": [
+@@ -2540,6 +2860,33 @@
+           "scale": 1,
+           "solid": true,
+           "variant": 0
++        },
++        {
++          "id": "haul:dressing:0",
++          "type": "beam",
++          "x": 470,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "haul:dressing:1",
++          "type": "cable",
++          "x": 1060,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
++        },
++        {
++          "id": "haul:dressing:2",
++          "type": "rail",
++          "x": 1860,
++          "y": 164,
++          "scale": 1,
++          "solid": false,
++          "variant": 2
+         }
+       ],
+       "nodes": [
+@@ -2615,6 +2962,14 @@
+           "kind": "door",
+           "x": 1505,
+           "y": 5
++        },
++        {
++          "id": "oth-annex-drain-0:a",
++          "edge": "oth-annex-drain-0",
++          "target": "drain",
++          "x": 1136,
++          "y": 88,
++          "kind": "door"
+         }
+       ]
+     },
+@@ -2685,6 +3040,24 @@
+           "scale": 1,
+           "solid": false,
+           "variant": 1
++        },
++        {
++          "id": "pump:dressing:0",
++          "type": "pipe",
++          "x": 920,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "pump:dressing:1",
++          "type": "cable",
++          "x": 1720,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
+         }
+       ],
+       "nodes": [
+@@ -2744,6 +3117,14 @@
+           "kind": "door",
+           "x": 2330,
+           "y": 88
++        },
++        {
++          "id": "oth-annex-drain-1:a",
++          "edge": "oth-annex-drain-1",
++          "target": "drain",
++          "x": 968,
++          "y": 88,
++          "kind": "door"
+         }
+       ]
+     },
+@@ -2935,6 +3316,24 @@
+           "scale": 1,
+           "solid": false,
+           "variant": 0
++        },
++        {
++          "id": "vein:dressing:0",
++          "type": "beam",
++          "x": 650,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "vein:dressing:1",
++          "type": "rail",
++          "x": 1450,
++          "y": 165,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
+         }
+       ],
+       "nodes": [
+@@ -3330,6 +3729,24 @@
+           "scale": 1,
+           "solid": false,
+           "variant": 0
++        },
++        {
++          "id": "fossils:dressing:0",
++          "type": "rib",
++          "x": 520,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "fossils:dressing:1",
++          "type": "resin",
++          "x": 970,
++          "y": 165,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
+         }
+       ],
+       "nodes": [
+@@ -3389,6 +3806,14 @@
+           "kind": "door",
+           "x": 2310,
+           "y": 88
++        },
++        {
++          "id": "oth-annex-alcove-0:a",
++          "edge": "oth-annex-alcove-0",
++          "target": "alcove",
++          "x": 960,
++          "y": 88,
++          "kind": "door"
+         }
+       ]
+     },
+@@ -3459,6 +3884,24 @@
+           "scale": 1,
+           "solid": true,
+           "variant": 1
++        },
++        {
++          "id": "eggs:dressing:0",
++          "type": "rib",
++          "x": 590,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "eggs:dressing:1",
++          "type": "rib",
++          "x": 2000,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
+         }
+       ],
+       "nodes": [
+@@ -3588,6 +4031,24 @@
+           "scale": 1,
+           "solid": false,
+           "variant": 2
++        },
++        {
++          "id": "bypass:dressing:0",
++          "type": "rib",
++          "x": 890,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "bypass:dressing:1",
++          "type": "rib",
++          "x": 1510,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
+         }
+       ],
+       "nodes": [
+@@ -3647,6 +4108,14 @@
+           "kind": "door",
+           "x": 2110,
+           "y": 88
++        },
++        {
++          "id": "oth-annex-alcove-1:a",
++          "edge": "oth-annex-alcove-1",
++          "target": "alcove",
++          "x": 880,
++          "y": 88,
++          "kind": "door"
+         }
+       ]
+     },
+@@ -3907,6 +4376,458 @@
+           "y": 88
+         }
+       ]
++    },
++    {
++      "id": "rec",
++      "name": "BeeBee’s — carré de repos",
++      "zone": "marion",
++      "style": "industrial",
++      "mode": "depth",
++      "width": 1780,
++      "depth": 180,
++      "deck": "B-03",
++      "motif": "recreation",
++      "description": "Le comptoir, les tables et le passe-plats laissent une allée centrale. Deux accès rejoignent la coursive et l’atelier.",
++      "sourceStatus": "original-layout",
++      "ambient": "amb_ship",
++      "props": [
++        {
++          "id": "rec:prop:0",
++          "type": "bench",
++          "x": 430,
++          "y": 145,
++          "scale": 1,
++          "solid": true,
++          "variant": 0
++        },
++        {
++          "id": "rec:prop:1",
++          "type": "console",
++          "x": 720,
++          "y": 12,
++          "scale": 1,
++          "solid": true,
++          "variant": 1
++        },
++        {
++          "id": "rec:prop:2",
++          "type": "cabinet",
++          "x": 1050,
++          "y": 155,
++          "scale": 1,
++          "solid": true,
++          "variant": 2
++        },
++        {
++          "id": "rec:prop:3",
++          "type": "terminal",
++          "x": 1390,
++          "y": 12,
++          "scale": 1,
++          "solid": false,
++          "variant": 3
++        },
++        {
++          "id": "rec:dressing:0",
++          "type": "cable",
++          "x": 950,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "rec:dressing:1",
++          "type": "vent",
++          "x": 1250,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
++        }
++      ],
++      "nodes": [],
++      "parallax": [
++        {
++          "layer": "far",
++          "factor": 0.08
++        },
++        {
++          "layer": "structure",
++          "factor": 0.32
++        },
++        {
++          "layer": "wall",
++          "factor": 0.7
++        },
++        {
++          "layer": "floor-and-actors",
++          "factor": 1
++        },
++        {
++          "layer": "foreground",
++          "factor": 1.12
++        }
++      ],
++      "artNotes": "Fond dès y=0 du champ de jeu ; le HUD occupe une bande extérieure. Tri des objets et acteurs par le pied, avant-plans translucides près du joueur.",
++      "encounterNotes": "Pas d’apparition dans la caméra ou sur un objectif. Les portes, la largeur libre et les voies de contournement sont validées.",
++      "portals": [
++        {
++          "id": "oth-annex-rec-0:b",
++          "edge": "oth-annex-rec-0",
++          "target": "junction",
++          "x": 110,
++          "y": 88,
++          "kind": "door"
++        },
++        {
++          "id": "oth-annex-rec-1:b",
++          "edge": "oth-annex-rec-1",
++          "target": "workshop",
++          "x": 1670,
++          "y": 88,
++          "kind": "door"
++        }
++      ]
++    },
++    {
++      "id": "maintenance",
++      "name": "Galerie des auxiliaires",
++      "zone": "marion",
++      "style": "industrial",
++      "mode": "profile",
++      "width": 1840,
++      "depth": 180,
++      "deck": "C-04",
++      "motif": "auxiliary",
++      "description": "Un chemin technique relie la machinerie à la baie des serveurs. Le collecteur possède une vanne locale et une fuite temporisée.",
++      "sourceStatus": "original-layout",
++      "ambient": "amb_ship",
++      "props": [
++        {
++          "id": "maintenance:prop:0",
++          "type": "generator",
++          "x": 390,
++          "y": 15,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "maintenance:prop:1",
++          "type": "pipe",
++          "x": 790,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
++        },
++        {
++          "id": "maintenance:prop:2",
++          "type": "rack",
++          "x": 1240,
++          "y": 165,
++          "scale": 1,
++          "solid": false,
++          "variant": 2
++        },
++        {
++          "id": "maintenance:prop:3",
++          "type": "valve",
++          "x": 1580,
++          "y": 12,
++          "scale": 1,
++          "solid": false,
++          "variant": 3
++        },
++        {
++          "id": "maintenance:dressing:0",
++          "type": "cable",
++          "x": 520,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "maintenance:dressing:1",
++          "type": "vent",
++          "x": 1020,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
++        }
++      ],
++      "nodes": [],
++      "parallax": [
++        {
++          "layer": "far",
++          "factor": 0.08
++        },
++        {
++          "layer": "structure",
++          "factor": 0.32
++        },
++        {
++          "layer": "wall",
++          "factor": 0.7
++        },
++        {
++          "layer": "floor-and-actors",
++          "factor": 1
++        },
++        {
++          "layer": "foreground",
++          "factor": 1.12
++        }
++      ],
++      "artNotes": "Fond dès y=0 du champ de jeu ; le HUD occupe une bande extérieure. Tri des objets et acteurs par le pied, avant-plans translucides près du joueur.",
++      "encounterNotes": "Pas d’apparition dans la caméra ou sur un objectif. Les portes, la largeur libre et les voies de contournement sont validées.",
++      "portals": [
++        {
++          "id": "oth-annex-maintenance-0:b",
++          "edge": "oth-annex-maintenance-0",
++          "target": "engineering",
++          "x": 110,
++          "y": 88,
++          "kind": "door"
++        },
++        {
++          "id": "oth-annex-maintenance-1:b",
++          "edge": "oth-annex-maintenance-1",
++          "target": "server",
++          "x": 1730,
++          "y": 88,
++          "kind": "door"
++        }
++      ]
++    },
++    {
++      "id": "drain",
++      "name": "Canal de décantation",
++      "zone": "mine",
++      "style": "mine",
++      "mode": "depth",
++      "width": 2200,
++      "depth": 180,
++      "deck": "M-02B",
++      "motif": "drain",
++      "description": "Une dérivation humide relie le roulage au pompage. Le passage avant contourne les conduites sous pression.",
++      "sourceStatus": "original-layout",
++      "ambient": "amb_mine",
++      "props": [
++        {
++          "id": "drain:prop:0",
++          "type": "pump",
++          "x": 390,
++          "y": 12,
++          "scale": 1,
++          "solid": true,
++          "variant": 0
++        },
++        {
++          "id": "drain:prop:1",
++          "type": "pipe",
++          "x": 810,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
++        },
++        {
++          "id": "drain:prop:2",
++          "type": "minecart",
++          "x": 1340,
++          "y": 160,
++          "scale": 1,
++          "solid": true,
++          "variant": 2
++        },
++        {
++          "id": "drain:prop:3",
++          "type": "terminal",
++          "x": 1820,
++          "y": 12,
++          "scale": 1,
++          "solid": false,
++          "variant": 3
++        },
++        {
++          "id": "drain:dressing:0",
++          "type": "rail",
++          "x": 1060,
++          "y": 165,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "drain:dressing:1",
++          "type": "beam",
++          "x": 1710,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
++        }
++      ],
++      "nodes": [],
++      "parallax": [
++        {
++          "layer": "far",
++          "factor": 0.08
++        },
++        {
++          "layer": "structure",
++          "factor": 0.32
++        },
++        {
++          "layer": "wall",
++          "factor": 0.7
++        },
++        {
++          "layer": "floor-and-actors",
++          "factor": 1
++        },
++        {
++          "layer": "foreground",
++          "factor": 1.12
++        }
++      ],
++      "artNotes": "Fond dès y=0 du champ de jeu ; le HUD occupe une bande extérieure. Tri des objets et acteurs par le pied, avant-plans translucides près du joueur.",
++      "encounterNotes": "Pas d’apparition dans la caméra ou sur un objectif. Les portes, la largeur libre et les voies de contournement sont validées.",
++      "portals": [
++        {
++          "id": "oth-annex-drain-0:b",
++          "edge": "oth-annex-drain-0",
++          "target": "haul",
++          "x": 110,
++          "y": 88,
++          "kind": "door"
++        },
++        {
++          "id": "oth-annex-drain-1:b",
++          "edge": "oth-annex-drain-1",
++          "target": "pump",
++          "x": 2090,
++          "y": 88,
++          "kind": "door"
++        }
++      ]
++    },
++    {
++      "id": "alcove",
++      "name": "Alcôve des vestiges",
++      "zone": "derelict",
++      "style": "derelict",
++      "mode": "depth",
++      "width": 1940,
++      "depth": 180,
++      "deck": "X-03B",
++      "motif": "alcove",
++      "description": "Un renfoncement derrière les structures costales. Une ouverture rejoint le contournement ; aucune installation humaine dans la paroi.",
++      "sourceStatus": "original-layout",
++      "ambient": "amb_mine",
++      "props": [
++        {
++          "id": "alcove:prop:0",
++          "type": "fossil",
++          "x": 360,
++          "y": 12,
++          "scale": 1,
++          "solid": true,
++          "variant": 0
++        },
++        {
++          "id": "alcove:prop:1",
++          "type": "rib",
++          "x": 760,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
++        },
++        {
++          "id": "alcove:prop:2",
++          "type": "resin",
++          "x": 1190,
++          "y": 155,
++          "scale": 1,
++          "solid": true,
++          "variant": 2
++        },
++        {
++          "id": "alcove:prop:3",
++          "type": "rock",
++          "x": 1560,
++          "y": 12,
++          "scale": 1,
++          "solid": true,
++          "variant": 3
++        },
++        {
++          "id": "alcove:dressing:0",
++          "type": "rib",
++          "x": 590,
++          "y": 8,
++          "scale": 1,
++          "solid": false,
++          "variant": 0
++        },
++        {
++          "id": "alcove:dressing:1",
++          "type": "resin",
++          "x": 1460,
++          "y": 166,
++          "scale": 1,
++          "solid": false,
++          "variant": 1
++        }
++      ],
++      "nodes": [],
++      "parallax": [
++        {
++          "layer": "far",
++          "factor": 0.08
++        },
++        {
++          "layer": "structure",
++          "factor": 0.32
++        },
++        {
++          "layer": "wall",
++          "factor": 0.7
++        },
++        {
++          "layer": "floor-and-actors",
++          "factor": 1
++        },
++        {
++          "layer": "foreground",
++          "factor": 1.12
++        }
++      ],
++      "artNotes": "Fond dès y=0 du champ de jeu ; le HUD occupe une bande extérieure. Tri des objets et acteurs par le pied, avant-plans translucides près du joueur.",
++      "encounterNotes": "Pas d’apparition dans la caméra ou sur un objectif. Les portes, la largeur libre et les voies de contournement sont validées.",
++      "portals": [
++        {
++          "id": "oth-annex-alcove-0:b",
++          "edge": "oth-annex-alcove-0",
++          "target": "fossils",
++          "x": 110,
++          "y": 88,
++          "kind": "door"
++        },
++        {
++          "id": "oth-annex-alcove-1:b",
++          "edge": "oth-annex-alcove-1",
++          "target": "bypass",
++          "x": 1830,
++          "y": 88,
++          "kind": "door"
++        }
++      ]
+     }
+   ],
+   "edges": [
+@@ -4146,6 +5067,62 @@
+       "b": "vein",
+       "kind": "door",
+       "minChapter": 7
++    },
++    {
++      "id": "oth-annex-rec-0",
++      "a": "junction",
++      "b": "rec",
++      "minChapter": 0,
++      "kind": "door"
++    },
++    {
++      "id": "oth-annex-rec-1",
++      "a": "workshop",
++      "b": "rec",
++      "minChapter": 0,
++      "kind": "door"
++    },
++    {
++      "id": "oth-annex-maintenance-0",
++      "a": "engineering",
++      "b": "maintenance",
++      "minChapter": 1,
++      "kind": "door"
++    },
++    {
++      "id": "oth-annex-maintenance-1",
++      "a": "server",
++      "b": "maintenance",
++      "minChapter": 3,
++      "kind": "door"
++    },
++    {
++      "id": "oth-annex-drain-0",
++      "a": "haul",
++      "b": "drain",
++      "minChapter": 7,
++      "kind": "door"
++    },
++    {
++      "id": "oth-annex-drain-1",
++      "a": "pump",
++      "b": "drain",
++      "minChapter": 7,
++      "kind": "door"
++    },
++    {
++      "id": "oth-annex-alcove-0",
++      "a": "fossils",
++      "b": "alcove",
++      "minChapter": 8,
++      "kind": "door"
++    },
++    {
++      "id": "oth-annex-alcove-1",
++      "a": "bypass",
++      "b": "alcove",
++      "minChapter": 9,
++      "kind": "door"
+     }
+   ],
+   "props": [
+@@ -5280,7 +6257,7 @@
+       "id": "oth-c13",
+       "index": 12,
+       "title": "Le passager restant",
+-      "actor": "ripley",
++      "actor": "hoop",
+       "startRoom": "cockpit",
+       "objectives": [
+         {
+@@ -5344,20 +6321,20 @@
+           "room": "medical",
+           "node": "c",
+           "action": "inspect",
+-          "label": "Préparer la stase de Ripley",
+-          "hint": "L’intervention ne doit pas être jouée comme un choix tactique récompensé.",
+-          "after": "Ripley doit rejoindre la navette.",
++          "label": "Accompagner Ripley dans l’unité médicale",
++          "hint": "Restez auprès de l’unité jusqu’à la fin du programme.",
++          "after": "Le programme de l’unité est terminé. Ripley reste inconsciente.",
+           "hold": 0.65,
+           "sourceStatus": "original-gameplay"
+         },
+         {
+           "id": "oth-c14-o3",
+-          "room": "server",
+-          "node": "a",
+-          "action": "circuit",
+-          "label": "Isoler la commande médicale",
+-          "hint": "Coupez le réseau compromis, pas le support vital.",
+-          "after": "L’ordinateur ne doit plus commander les soins.",
++          "room": "medical",
++          "node": "b",
++          "action": "inspect",
++          "label": "Vérifier l’alerte de l’unité médicale",
++          "hint": "Revenez au pupitre médical, près du lit.",
++          "after": "Le réseau a repris le contrôle. Kasyanov ne répond plus. Il faut évacuer Ripley.",
+           "hold": 1.25,
+           "sourceStatus": "original-gameplay"
+         }
+@@ -5375,23 +6352,23 @@
+       "objectives": [
+         {
+           "id": "oth-c15-o1",
+-          "room": "server",
+-          "node": "c",
+-          "action": "purge",
+-          "label": "Purger le relais compromis",
+-          "hint": "Confirmez l’isolement local avant la purge.",
+-          "after": "La copie locale ne répond plus.",
+-          "hold": 1.25,
+-          "sourceStatus": "original-gameplay"
+-        },
+-        {
+-          "id": "oth-c15-o2",
+           "room": "narcissus",
+           "node": "b",
+           "action": "install",
+-          "label": "Installer la cellule de retour",
+-          "hint": "Le transfert utilise le berceau récupéré au sol.",
+-          "after": "La navette a de l’énergie.",
++          "label": "Installer Ripley et la cellule de retour",
++          "hint": "Rejoignez le Narcissus en portant Ripley. Le sprint est indisponible.",
++          "after": "Ripley est en stase avec Jones. La cellule de retour est branchée.",
++          "hold": 1.25,
++          "sourceStatus": "original-gameplay"
++        },
++        {
++          "id": "oth-c15-o2",
++          "room": "narcissus",
++          "node": "c",
++          "action": "purge",
++          "label": "Purger la copie d’Ash",
++          "hint": "Le purificateur local doit être isolé du réseau avant de lancer la purge.",
++          "after": "Ash ne répond plus. La commande automatique des attaches ne fonctionne pas.",
+           "hold": 1.25,
+           "sourceStatus": "original-gameplay"
+         },
+@@ -5570,6 +6547,12 @@
+       "sources": [
+         "S3"
+       ]
++    },
++    {
++      "id": "jordan",
++      "name": "Lucy Jordan",
++      "role": "Commandement",
++      "sourceStatus": "source-character"
+     }
+   ],
+   "codex": [
+@@ -6653,6 +7636,195 @@
+       "sourceStatus": "game-design",
+       "sources": [],
+       "productionNote": "La conclusion littéraire est distincte des futures variantes originales de Tantalus Frontier."
++    },
++    {
++      "id": "room-rec",
++      "category": "Lieux",
++      "title": "BeeBee’s — carré de repos",
++      "summary": "Le comptoir, les tables et le passe-plats laissent une allée centrale. Deux accès rejoignent la coursive et l’atelier.",
++      "text": "Les deux issues se rejoignent sur le plan. Le mobilier laisse libre la voie de circulation.",
++      "unlockRoom": "rec",
++      "sourceStatus": "original-layout"
++    },
++    {
++      "id": "room-maintenance",
++      "category": "Lieux",
++      "title": "Galerie des auxiliaires",
++      "summary": "Un chemin technique relie la machinerie à la baie des serveurs. Le collecteur possède une vanne locale et une fuite temporisée.",
++      "text": "Les deux issues se rejoignent sur le plan. Le mobilier laisse libre la voie de circulation.",
++      "unlockRoom": "maintenance",
++      "sourceStatus": "original-layout"
++    },
++    {
++      "id": "room-drain",
++      "category": "Lieux",
++      "title": "Canal de décantation",
++      "summary": "Une dérivation humide relie le roulage au pompage. Le passage avant contourne les conduites sous pression.",
++      "text": "Les deux issues se rejoignent sur le plan. Le mobilier laisse libre la voie de circulation.",
++      "unlockRoom": "drain",
++      "sourceStatus": "original-layout"
++    },
++    {
++      "id": "room-alcove",
++      "category": "Lieux",
++      "title": "Alcôve des vestiges",
++      "summary": "Un renfoncement derrière les structures costales. Une ouverture rejoint le contournement ; aucune installation humaine dans la paroi.",
++      "text": "Les deux issues se rejoignent sur le plan. Le mobilier laisse libre la voie de circulation.",
++      "unlockRoom": "alcove",
++      "sourceStatus": "original-layout"
++    },
++    {
++      "id": "marion-note-01",
++      "category": "Traces",
++      "title": "Une chaise de trop",
++      "summary": "Baxter a laissé une tasse derrière le comptoir. Le fond a séché. Il faudra lui rappeler de dormir avant sa prochaine garde.",
++      "text": "Transcription conservée dans le carnet personnel.",
++      "unlockRecord": "marion-note-01",
++      "sourceStatus": "original-writing"
++    },
++    {
++      "id": "marion-note-02",
++      "category": "Traces",
++      "title": "La même chanson",
++      "summary": "Le lecteur saute toujours au même endroit. Personne ne le répare : pour une fois, quelque chose à bord nous prévient avant de se répéter.",
++      "text": "Transcription conservée dans le carnet personnel.",
++      "unlockRecord": "marion-note-02",
++      "sourceStatus": "original-writing"
++    },
++    {
++      "id": "marion-note-03",
++      "category": "Traces",
++      "title": "Liste de quart",
++      "summary": "Relais minier : sans réponse. Demande de vérification transmise. Ne pas effacer la dernière heure de réception.",
++      "text": "Transcription conservée dans le carnet personnel.",
++      "unlockRecord": "marion-note-03",
++      "sourceStatus": "original-writing"
++    },
++    {
++      "id": "marion-note-04",
++      "category": "Traces",
++      "title": "Retour de courant",
++      "summary": "Une ligne coupée au pupitre peut rester alimentée par le secours. Isoler ici avant de toucher au contacteur.",
++      "text": "Transcription conservée dans le carnet personnel.",
++      "unlockRecord": "marion-note-04",
++      "sourceStatus": "original-writing"
++    },
++    {
++      "id": "marion-note-05",
++      "category": "Traces",
++      "title": "Un ordre en double",
++      "summary": "La même demande de redémarrage est revenue avec deux identifiants. Le collecteur, lui, n’a qu’une seule vanne.",
++      "text": "Transcription conservée dans le carnet personnel.",
++      "unlockRecord": "marion-note-05",
++      "sourceStatus": "original-writing"
++    },
++    {
++      "id": "marion-note-06",
++      "category": "Traces",
++      "title": "Priorité au patient",
++      "summary": "Le pupitre distant n’a pas à décider qui entre dans l’unité. Garder le contrôle local tant que le réseau reste incertain.",
++      "text": "Transcription conservée dans le carnet personnel.",
++      "unlockRecord": "marion-note-06",
++      "sourceStatus": "original-writing"
++    },
++    {
++      "id": "marion-note-07",
++      "category": "Traces",
++      "title": "Outils de travail",
++      "summary": "Ce matériel n’a jamais été prévu pour tenir une ligne de défense. Les réservoirs sont petits. Les recharges le sont aussi.",
++      "text": "Transcription conservée dans le carnet personnel.",
++      "unlockRecord": "marion-note-07",
++      "sourceStatus": "original-writing"
++    },
++    {
++      "id": "marion-note-08",
++      "category": "Traces",
++      "title": "Avant le départ",
++      "summary": "Retirer l’assistance du réseau. Contrôler les attaches. Attendre le signal de la soute. Le pilote veut entendre des voix, pas des voyants.",
++      "text": "Transcription conservée dans le carnet personnel.",
++      "unlockRecord": "marion-note-08",
++      "sourceStatus": "original-writing"
++    },
++    {
++      "id": "marion-note-09",
++      "category": "Traces",
++      "title": "Poussière sur les balises",
++      "summary": "La balise orientale disparaît quand le vent tourne. Garder le bâtiment dans le dos jusqu’au premier abri.",
++      "text": "Transcription conservée dans le carnet personnel.",
++      "unlockRecord": "marion-note-09",
++      "sourceStatus": "original-writing"
++    },
++    {
++      "id": "marion-note-10",
++      "category": "Traces",
++      "title": "Le second chemin",
++      "summary": "Le collecteur est bruyant mais sa dérivation rejoint le roulage. Si la pompe tombe, ne pas revenir sous la conduite.",
++      "text": "Transcription conservée dans le carnet personnel.",
++      "unlockRecord": "marion-note-10",
++      "sourceStatus": "original-writing"
++    },
++    {
++      "id": "marion-note-11",
++      "category": "Traces",
++      "title": "Niveau haut",
++      "summary": "Les marques sur la paroi sont au-dessus de nos genoux. Ce n’est pas le ruissellement d’aujourd’hui.",
++      "text": "Transcription conservée dans le carnet personnel.",
++      "unlockRecord": "marion-note-11",
++      "sourceStatus": "original-writing"
++    },
++    {
++      "id": "marion-note-12",
++      "category": "Traces",
++      "title": "Il reste une réserve",
++      "summary": "Le casier de terrain contient ce qu’il reste du dernier quart. Prendre seulement ce qu’on peut porter.",
++      "text": "Transcription conservée dans le carnet personnel.",
++      "unlockRecord": "marion-note-12",
++      "sourceStatus": "original-writing"
++    },
++    {
++      "id": "marion-note-13",
++      "category": "Traces",
++      "title": "Un bruit sans machine",
++      "summary": "La foreuse était arrêtée. J’ai encore senti les vibrations dans les semelles.",
++      "text": "Transcription conservée dans le carnet personnel.",
++      "unlockRecord": "marion-note-13",
++      "sourceStatus": "original-writing"
++    },
++    {
++      "id": "marion-note-14",
++      "category": "Traces",
++      "title": "Ce ne sont pas nos os",
++      "summary": "Les proportions ne correspondent à rien dans les fiches du bord. Ne pas donner de nom à ce qu’on n’a pas compris.",
++      "text": "Transcription conservée dans le carnet personnel.",
++      "unlockRecord": "marion-note-14",
++      "sourceStatus": "original-writing"
++    },
++    {
++      "id": "marion-note-15",
++      "category": "Traces",
++      "title": "Un passage sans outil",
++      "summary": "La paroi s’incurve vers une seconde ouverture. Pas de serrure, pas de commande : seulement une brèche assez large pour passer.",
++      "text": "Transcription conservée dans le carnet personnel.",
++      "unlockRecord": "marion-note-15",
++      "sourceStatus": "original-writing"
++    },
++    {
++      "id": "marion-note-16",
++      "category": "Traces",
++      "title": "Près de la caisse",
++      "summary": "Jones est là. Le compartiment est calme. Fermer derrière soi, doucement.",
++      "text": "Transcription conservée dans le carnet personnel.",
++      "unlockRecord": "marion-note-16",
++      "sourceStatus": "original-writing"
++    },
++    {
++      "id": "cast-jordan",
++      "category": "Équipage",
++      "title": "Lucy Jordan",
++      "summary": "Commandement du Marion",
++      "text": "Le relais local et les équipes de quart passent par la passerelle.",
++      "unlockRoom": "bridge",
++      "sourceStatus": "source-character"
+     }
+   ],
+   "sources": [
+@@ -6713,6 +7885,1002 @@
+       "S2",
+       "S3",
+       "S4"
++    ],
++    "v02_notes": [
++      "Nouvelles répliques et positions de PNJ originales ; aucun dialogue du roman ou de la dramatique reproduit.",
++      "Annexes originales, pas plans officiels du Marion.",
++      "Pertes suggérées par signal et état, pas cinématiques intégrales du livre."
+     ]
++  },
++  "edition": "Les voix du Marion",
++  "stateSchema": 2,
++  "interactables": [
++    {
++      "id": "marion-note-01",
++      "kind": "archive",
++      "room": "rec",
++      "x": 600,
++      "y": 88,
++      "title": "Une chaise de trop",
++      "body": "Baxter a laissé une tasse derrière le comptoir. Le fond a séché. Il faudra lui rappeler de dormir avant sa prochaine garde.",
++      "prop": "terminal",
++      "hold": 0.65
++    },
++    {
++      "id": "marion-note-02",
++      "kind": "archive",
++      "room": "rec",
++      "x": 1250,
++      "y": 88,
++      "title": "La même chanson",
++      "body": "Le lecteur saute toujours au même endroit. Personne ne le répare : pour une fois, quelque chose à bord nous prévient avant de se répéter.",
++      "prop": "terminal",
++      "hold": 0.65
++    },
++    {
++      "id": "marion-note-03",
++      "kind": "archive",
++      "room": "bridge",
++      "x": 1500,
++      "y": 88,
++      "title": "Liste de quart",
++      "body": "Relais minier : sans réponse. Demande de vérification transmise. Ne pas effacer la dernière heure de réception.",
++      "prop": "terminal",
++      "hold": 0.65
++    },
++    {
++      "id": "marion-note-04",
++      "kind": "archive",
++      "room": "maintenance",
++      "x": 700,
++      "y": 88,
++      "title": "Retour de courant",
++      "body": "Une ligne coupée au pupitre peut rester alimentée par le secours. Isoler ici avant de toucher au contacteur.",
++      "prop": "terminal",
++      "hold": 0.65
++    },
++    {
++      "id": "marion-note-05",
++      "kind": "archive",
++      "room": "maintenance",
++      "x": 1450,
++      "y": 88,
++      "title": "Un ordre en double",
++      "body": "La même demande de redémarrage est revenue avec deux identifiants. Le collecteur, lui, n’a qu’une seule vanne.",
++      "prop": "terminal",
++      "hold": 0.65
++    },
++    {
++      "id": "marion-note-06",
++      "kind": "archive",
++      "room": "medical",
++      "x": 910,
++      "y": 88,
++      "title": "Priorité au patient",
++      "body": "Le pupitre distant n’a pas à décider qui entre dans l’unité. Garder le contrôle local tant que le réseau reste incertain.",
++      "prop": "terminal",
++      "hold": 0.65
++    },
++    {
++      "id": "marion-note-07",
++      "kind": "archive",
++      "room": "workshop",
++      "x": 1140,
++      "y": 88,
++      "title": "Outils de travail",
++      "body": "Ce matériel n’a jamais été prévu pour tenir une ligne de défense. Les réservoirs sont petits. Les recharges le sont aussi.",
++      "prop": "terminal",
++      "hold": 0.65
++    },
++    {
++      "id": "marion-note-08",
++      "kind": "archive",
++      "room": "cockpit",
++      "x": 1080,
++      "y": 88,
++      "title": "Avant le départ",
++      "body": "Retirer l’assistance du réseau. Contrôler les attaches. Attendre le signal de la soute. Le pilote veut entendre des voix, pas des voyants.",
++      "prop": "terminal",
++      "hold": 0.65
++    },
++    {
++      "id": "marion-note-09",
++      "kind": "archive",
++      "room": "landing",
++      "x": 1950,
++      "y": 88,
++      "title": "Poussière sur les balises",
++      "body": "La balise orientale disparaît quand le vent tourne. Garder le bâtiment dans le dos jusqu’au premier abri.",
++      "prop": "terminal",
++      "hold": 0.65
++    },
++    {
++      "id": "marion-note-10",
++      "kind": "archive",
++      "room": "drain",
++      "x": 680,
++      "y": 88,
++      "title": "Le second chemin",
++      "body": "Le collecteur est bruyant mais sa dérivation rejoint le roulage. Si la pompe tombe, ne pas revenir sous la conduite.",
++      "prop": "terminal",
++      "hold": 0.65
++    },
++    {
++      "id": "marion-note-11",
++      "kind": "archive",
++      "room": "drain",
++      "x": 1620,
++      "y": 88,
++      "title": "Niveau haut",
++      "body": "Les marques sur la paroi sont au-dessus de nos genoux. Ce n’est pas le ruissellement d’aujourd’hui.",
++      "prop": "terminal",
++      "hold": 0.65
++    },
++    {
++      "id": "marion-note-12",
++      "kind": "archive",
++      "room": "refuge",
++      "x": 1210,
++      "y": 88,
++      "title": "Il reste une réserve",
++      "body": "Le casier de terrain contient ce qu’il reste du dernier quart. Prendre seulement ce qu’on peut porter.",
++      "prop": "terminal",
++      "hold": 0.65
++    },
++    {
++      "id": "marion-note-13",
++      "kind": "archive",
++      "room": "vein",
++      "x": 1700,
++      "y": 88,
++      "title": "Un bruit sans machine",
++      "body": "La foreuse était arrêtée. J’ai encore senti les vibrations dans les semelles.",
++      "prop": "terminal",
++      "hold": 0.65
++    },
++    {
++      "id": "marion-note-14",
++      "kind": "archive",
++      "room": "alcove",
++      "x": 640,
++      "y": 88,
++      "title": "Ce ne sont pas nos os",
++      "body": "Les proportions ne correspondent à rien dans les fiches du bord. Ne pas donner de nom à ce qu’on n’a pas compris.",
++      "prop": "terminal",
++      "hold": 0.65
++    },
++    {
++      "id": "marion-note-15",
++      "kind": "archive",
++      "room": "alcove",
++      "x": 1450,
++      "y": 88,
++      "title": "Un passage sans outil",
++      "body": "La paroi s’incurve vers une seconde ouverture. Pas de serrure, pas de commande : seulement une brèche assez large pour passer.",
++      "prop": "terminal",
++      "hold": 0.65
++    },
++    {
++      "id": "marion-note-16",
++      "kind": "archive",
++      "room": "narcissus",
++      "x": 1080,
++      "y": 88,
++      "title": "Près de la caisse",
++      "body": "Jones est là. Le compartiment est calme. Fermer derrière soi, doucement.",
++      "prop": "terminal",
++      "hold": 0.65
++    },
++    {
++      "id": "marion-cache-01",
++      "kind": "cache",
++      "room": "rec",
++      "x": 1450,
++      "y": 88,
++      "title": "Trousse de terrain",
++      "resource": "kits",
++      "amount": 1,
++      "prop": "cabinet",
++      "hold": 0.9
++    },
++    {
++      "id": "marion-cache-02",
++      "kind": "cache",
++      "room": "workshop",
++      "x": 730,
++      "y": 88,
++      "title": "Recharge de chalumeau",
++      "resource": "fuel",
++      "amount": 25,
++      "prop": "cabinet",
++      "hold": 0.9
++    },
++    {
++      "id": "marion-cache-03",
++      "kind": "cache",
++      "room": "maintenance",
++      "x": 1170,
++      "y": 88,
++      "title": "Balises sonores",
++      "resource": "decoys",
++      "amount": 2,
++      "prop": "cabinet",
++      "hold": 0.9
++    },
++    {
++      "id": "marion-cache-04",
++      "kind": "cache",
++      "room": "control",
++      "x": 1400,
++      "y": 88,
++      "title": "Trousse de terrain",
++      "resource": "kits",
++      "amount": 1,
++      "prop": "cabinet",
++      "hold": 0.9
++    },
++    {
++      "id": "marion-cache-05",
++      "kind": "cache",
++      "room": "drain",
++      "x": 1100,
++      "y": 88,
++      "title": "Recharge de chalumeau",
++      "resource": "fuel",
++      "amount": 20,
++      "prop": "cabinet",
++      "hold": 0.9
++    },
++    {
++      "id": "marion-cache-06",
++      "kind": "cache",
++      "room": "refuge",
++      "x": 1460,
++      "y": 88,
++      "title": "Balises sonores",
++      "resource": "decoys",
++      "amount": 2,
++      "prop": "cabinet",
++      "hold": 0.9
++    },
++    {
++      "id": "marion-cache-07",
++      "kind": "cache",
++      "room": "stores",
++      "x": 1650,
++      "y": 88,
++      "title": "Recharge de chalumeau",
++      "resource": "fuel",
++      "amount": 25,
++      "prop": "cabinet",
++      "hold": 0.9
++    },
++    {
++      "id": "marion-cache-08",
++      "kind": "cache",
++      "room": "medical",
++      "x": 1120,
++      "y": 88,
++      "title": "Trousse de terrain",
++      "resource": "kits",
++      "amount": 1,
++      "prop": "cabinet",
++      "hold": 0.9
++    },
++    {
++      "id": "valve-aux-steam",
++      "kind": "valve",
++      "room": "maintenance",
++      "x": 760,
++      "y": 88,
++      "title": "Fermer la dérivation",
++      "hazard": "aux-steam",
++      "prop": "valve",
++      "hold": 1
++    },
++    {
++      "id": "valve-drain-steam",
++      "kind": "valve",
++      "room": "drain",
++      "x": 1000,
++      "y": 88,
++      "title": "Fermer la dérivation",
++      "hazard": "drain-steam",
++      "prop": "valve",
++      "hold": 1
++    },
++    {
++      "id": "valve-pump-steam",
++      "kind": "valve",
++      "room": "pump",
++      "x": 1410,
++      "y": 88,
++      "title": "Fermer la dérivation",
++      "hazard": "pump-steam",
++      "prop": "valve",
++      "hold": 1
++    }
++  ],
++  "hazards": [
++    {
++      "id": "aux-steam",
++      "room": "maintenance",
++      "x": 990,
++      "y": 88,
++      "width": 100,
++      "period": 8,
++      "on": 2.4,
++      "valveX": 760,
++      "valveY": 88,
++      "minChapter": 1
++    },
++    {
++      "id": "drain-steam",
++      "room": "drain",
++      "x": 1450,
++      "y": 30,
++      "width": 150,
++      "period": 7,
++      "on": 2.7,
++      "valveX": 1000,
++      "valveY": 88,
++      "minChapter": 7
++    },
++    {
++      "id": "pump-steam",
++      "room": "pump",
++      "x": 1660,
++      "y": 30,
++      "width": 130,
++      "period": 9,
++      "on": 3,
++      "valveX": 1410,
++      "valveY": 88,
++      "minChapter": 7
++    }
++  ],
++  "crewPlacements": [
++    {
++      "id": "crew-jordan-0-bridge",
++      "character": "jordan",
++      "room": "bridge",
++      "x": 850,
++      "y": 105,
++      "start": 0,
++      "end": 3,
++      "pose": "work"
++    },
++    {
++      "id": "crew-baxter-0-comms",
++      "character": "baxter",
++      "room": "comms",
++      "x": 650,
++      "y": 88,
++      "start": 0,
++      "end": 3,
++      "pose": "work"
++    },
++    {
++      "id": "crew-welford-0-workshop",
++      "character": "welford",
++      "room": "workshop",
++      "x": 1000,
++      "y": 105,
++      "start": 0,
++      "end": 12,
++      "pose": "work"
++    },
++    {
++      "id": "crew-powell-0-engineering",
++      "character": "powell",
++      "room": "engineering",
++      "x": 1000,
++      "y": 105,
++      "start": 0,
++      "end": 12,
++      "pose": "work"
++    },
++    {
++      "id": "crew-kasyanov-0-medical",
++      "character": "kasyanov",
++      "room": "medical",
++      "x": 1550,
++      "y": 105,
++      "start": 0,
++      "end": 12,
++      "pose": "work"
++    },
++    {
++      "id": "crew-garcia-6-medical",
++      "character": "garcia",
++      "room": "medical",
++      "x": 540,
++      "y": 105,
++      "start": 6,
++      "end": 12,
++      "pose": "work"
++    },
++    {
++      "id": "crew-ripley-6-narcissus",
++      "character": "ripley",
++      "room": "narcissus",
++      "x": 330,
++      "y": 16,
++      "start": 6,
++      "end": 9,
++      "pose": "rest"
++    },
++    {
++      "id": "crew-sneddon-9-server",
++      "character": "sneddon",
++      "room": "server",
++      "x": 1290,
++      "y": 88,
++      "start": 9,
++      "end": 12,
++      "pose": "work"
++    },
++    {
++      "id": "crew-lachance-12-cockpit",
++      "character": "lachance",
++      "room": "cockpit",
++      "x": 570,
++      "y": 88,
++      "start": 12,
++      "end": 18,
++      "pose": "work"
++    },
++    {
++      "id": "crew-garcia-12-hangar",
++      "character": "garcia",
++      "room": "hangar",
++      "x": 1920,
++      "y": 105,
++      "start": 12,
++      "end": 14,
++      "pose": "work"
++    },
++    {
++      "id": "crew-baxter-21-refuge",
++      "character": "baxter",
++      "room": "refuge",
++      "x": 650,
++      "y": 105,
++      "start": 21,
++      "end": 24,
++      "pose": "work"
++    },
++    {
++      "id": "crew-sneddon-21-vein",
++      "character": "sneddon",
++      "room": "vein",
++      "x": 1900,
++      "y": 105,
++      "start": 21,
++      "end": 24,
++      "pose": "work"
++    },
++    {
++      "id": "crew-hoop-24-vestibule",
++      "character": "hoop",
++      "room": "vestibule",
++      "x": 990,
++      "y": 105,
++      "start": 24,
++      "end": 27,
++      "pose": "work"
++    },
++    {
++      "id": "crew-baxter-24-fossils",
++      "character": "baxter",
++      "room": "fossils",
++      "x": 1600,
++      "y": 105,
++      "start": 24,
++      "end": 27,
++      "pose": "work"
++    },
++    {
++      "id": "crew-kasyanov-27-bypass",
++      "character": "kasyanov",
++      "room": "bypass",
++      "x": 1580,
++      "y": 88,
++      "start": 27,
++      "end": 30,
++      "pose": "injured"
++    },
++    {
++      "id": "crew-sneddon-27-bypass",
++      "character": "sneddon",
++      "room": "bypass",
++      "x": 1840,
++      "y": 88,
++      "start": 27,
++      "end": 30,
++      "pose": "rest"
++    },
++    {
++      "id": "crew-baxter-30-lift_east",
++      "character": "baxter",
++      "room": "lift_east",
++      "x": 910,
++      "y": 88,
++      "start": 30,
++      "end": 31,
++      "pose": "injured"
++    },
++    {
++      "id": "crew-ripley-31-stores",
++      "character": "ripley",
++      "room": "stores",
++      "x": 960,
++      "y": 105,
++      "start": 31,
++      "end": 36,
++      "pose": "injured"
++    },
++    {
++      "id": "crew-lachance-33-cockpit",
++      "character": "lachance",
++      "room": "cockpit",
++      "x": 570,
++      "y": 88,
++      "start": 33,
++      "end": 36,
++      "pose": "work"
++    },
++    {
++      "id": "crew-lachance-36-hangar",
++      "character": "lachance",
++      "room": "hangar",
++      "x": 1810,
++      "y": 105,
++      "start": 36,
++      "end": 37,
++      "pose": "work"
++    },
++    {
++      "id": "crew-sneddon-37-hold",
++      "character": "sneddon",
++      "room": "hold",
++      "x": 1830,
++      "y": 105,
++      "start": 37,
++      "end": 39,
++      "pose": "injured"
++    },
++    {
++      "id": "crew-kasyanov-39-medical",
++      "character": "kasyanov",
++      "room": "medical",
++      "x": 970,
++      "y": 105,
++      "start": 39,
++      "end": 42,
++      "pose": "injured"
++    },
++    {
++      "id": "crew-ripley-39-medical",
++      "character": "ripley",
++      "room": "medical",
++      "x": 1702,
++      "y": 18,
++      "start": 39,
++      "end": 42,
++      "pose": "rest"
++    },
++    {
++      "id": "crew-ripley-43-narcissus",
++      "character": "ripley",
++      "room": "narcissus",
++      "x": 330,
++      "y": 16,
++      "start": 43,
++      "end": 48,
++      "pose": "rest"
++    }
++  ],
++  "dialogues": {
++    "jordan": [
++      [
++        "Jordan",
++        "Le relais ne répond plus. Vérifiez les auxiliaires avant de rappeler la mine."
++      ],
++      [
++        "Hoop",
++        "Je passe par les commandes locales."
++      ]
++    ],
++    "baxter": [
++      [
++        "Baxter",
++        "Le silence est trop propre. Même la porteuse a disparu."
++      ],
++      [
++        "Hoop",
++        "Gardez la dernière réception. Ne relancez rien sur le réseau."
++      ]
++    ],
++    "welford": [
++      [
++        "Welford",
++        "J’ai trié ce qui tient encore la pression. Le reste, je n’y touche plus."
++      ]
++    ],
++    "powell": [
++      [
++        "Powell",
++        "Il y a un retour de courant dans la galerie auxiliaire. Coupez-le à la vanne, pas depuis le pupitre."
++      ]
++    ],
++    "kasyanov": [
++      [
++        "Kasyanov",
++        "Je garde la commande de l’unité ici. Si le pupitre vous demande autre chose, prévenez-moi."
++      ]
++    ],
++    "garcia": [
++      [
++        "Garcia",
++        "Les trousses sont prêtes. Je préférerais les remettre dans l’armoire."
++      ]
++    ],
++    "sneddon": [
++      [
++        "Sneddon",
++        "Nous avançons parce que rester ici ne nous protège pas. Regardez derrière, pas seulement devant."
++      ]
++    ],
++    "lachance": [
++      [
++        "Lachance",
++        "Je peux piloter sans leur assistance. J’ai besoin des attaches, du courant et d’un signal clair."
++      ]
++    ],
++    "hoop": [
++      [
++        "Hoop",
++        "On garde une sortie. Même si elle nous oblige à revenir sur nos pas."
++      ]
++    ],
++    "ripley": [
++      [
++        "Ripley",
++        "Ne comptez pas sur le bruit pour savoir où elle est. Comptez les sorties."
++      ]
++    ]
++  },
++  "storyEvents": [
++    {
++      "at": 3,
++      "id": "local",
++      "speaker": "Baxter",
++      "text": "Le relais tient. Il n’y a toujours personne au bout de la ligne.",
++      "effect": "relay"
++    },
++    {
++      "at": 5,
++      "id": "impact",
++      "speaker": "Hoop",
++      "text": "La Delilah a frappé. La passerelle ne répond plus. Jordan ne répond plus.",
++      "lost": [
++        "jordan"
++      ],
++      "effect": "impact"
++    },
++    {
++      "at": 9,
++      "id": "wake",
++      "speaker": "Ripley",
++      "text": "Avant de repartir, montrez-moi tous les accès de cette navette.",
++      "effect": "wake"
++    },
++    {
++      "at": 14,
++      "id": "garcia",
++      "speaker": "Kasyanov",
++      "text": "Garcia est restée derrière nous. La travée est vide.",
++      "lost": [
++        "garcia"
++      ],
++      "effect": "seal"
++    },
++    {
++      "at": 20,
++      "id": "lift",
++      "speaker": "Hoop",
++      "text": "Cette cage ne remontera pas. Le second puits est notre seule sortie.",
++      "effect": "lift"
++    },
++    {
++      "at": 27,
++      "id": "bones",
++      "speaker": "Ripley",
++      "text": "Ces restes n’étaient pas humains. Nous devons quitter cette chambre.",
++      "effect": "reveal"
++    },
++    {
++      "at": 30,
++      "id": "wounded",
++      "speaker": "Hoop",
++      "text": "Kasyanov a le bras touché. Sneddon ne tient plus debout. On remonte ensemble.",
++      "injured": [
++        "kasyanov",
++        "ripley",
++        "baxter"
++      ],
++      "effect": "wounded"
++    },
++    {
++      "at": 31,
++      "id": "baxter",
++      "speaker": "Hoop",
++      "text": "Baxter ! ... La cage continue de monter. Il n’est plus avec nous.",
++      "lost": [
++        "baxter"
++      ],
++      "effect": "lift"
++    },
++    {
++      "at": 37,
++      "id": "lachance",
++      "speaker": "Hoop",
++      "text": "Lachance vient de tomber. La présence nous a suivis jusqu’au quai.",
++      "lost": [
++        "lachance"
++      ],
++      "effect": "impact"
++    },
++    {
++      "at": 39,
++      "id": "sneddon",
++      "speaker": "Hoop",
++      "text": "Sneddon a condamné la soute de l’intérieur. Après l’éclair, plus aucun mouvement.",
++      "lost": [
++        "sneddon"
++      ],
++      "effect": "blast"
++    },
++    {
++      "at": 41,
++      "id": "consent",
++      "speaker": "Ripley",
++      "text": "Faites cesser ces images. Je ne veux plus revoir cet endroit.",
++      "effect": "medpod"
++    },
++    {
++      "at": 42,
++      "id": "medpod",
++      "speaker": "Hoop",
++      "text": "La commande vient de changer toute seule. Kasyanov ne répond plus. Je ramène Ripley au Narcissus.",
++      "lost": [
++        "kasyanov"
++      ],
++      "effect": "medpod"
++    },
++    {
++      "at": 44,
++      "id": "ash",
++      "speaker": "Hoop",
++      "text": "La copie a disparu. Mais les attaches automatiques sont mortes avec elle. Je dois revenir au quai.",
++      "effect": "purge"
++    },
++    {
++      "at": 46,
++      "id": "goodbye",
++      "speaker": "Hoop",
++      "text": "Le collier est ouvert. Le Narcissus s’éloigne.",
++      "effect": "release"
++    }
++  ],
++  "workOrders": {
++    "oth-c01-o2": {
++      "type": "routing",
++      "title": "Dérivation locale",
++      "target": [
++        1,
++        2,
++        1
++      ],
++      "initial": [
++        0,
++        0,
++        2
++      ],
++      "labels": [
++        "Entrée",
++        "Relais",
++        "Sortie"
++      ],
++      "hint": "Réglez les trois commutateurs sur la combinaison de la plaque locale, puis engagez le contacteur."
++    },
++    "oth-c03-o1": {
++      "type": "routing",
++      "title": "Dérivation locale",
++      "target": [
++        2,
++        1,
++        0
++      ],
++      "initial": [
++        0,
++        2,
++        1
++      ],
++      "labels": [
++        "Entrée",
++        "Relais",
++        "Sortie"
++      ],
++      "hint": "Réglez les trois commutateurs sur la combinaison de la plaque locale, puis engagez le contacteur."
++    },
++    "oth-c05-o3": {
++      "type": "routing",
++      "title": "Dérivation locale",
++      "target": [
++        1,
++        0,
++        2
++      ],
++      "initial": [
++        2,
++        1,
++        0
++      ],
++      "labels": [
++        "Entrée",
++        "Relais",
++        "Sortie"
++      ],
++      "hint": "Réglez les trois commutateurs sur la combinaison de la plaque locale, puis engagez le contacteur."
++    },
++    "oth-c06-o3": {
++      "type": "routing",
++      "title": "Dérivation locale",
++      "target": [
++        2,
++        2,
++        1
++      ],
++      "initial": [
++        0,
++        1,
++        0
++      ],
++      "labels": [
++        "Entrée",
++        "Relais",
++        "Sortie"
++      ],
++      "hint": "Réglez les trois commutateurs sur la combinaison de la plaque locale, puis engagez le contacteur."
++    },
++    "oth-c07-o3": {
++      "type": "routing",
++      "title": "Dérivation locale",
++      "target": [
++        0,
++        2,
++        2
++      ],
++      "initial": [
++        1,
++        0,
++        1
++      ],
++      "labels": [
++        "Entrée",
++        "Relais",
++        "Sortie"
++      ],
++      "hint": "Réglez les trois commutateurs sur la combinaison de la plaque locale, puis engagez le contacteur."
++    },
++    "oth-c01-o3": {
++      "type": "sequence",
++      "title": "Bus de secours",
++      "sequence": [
++        "isolate",
++        "lock",
++        "connect",
++        "test"
++      ],
++      "hint": "Suivez l’ordre de la plaque de maintenance. Une commande hors séquence ne valide aucune étape."
++    },
++    "oth-c04-o1": {
++      "type": "sequence",
++      "title": "Préparation du chalumeau",
++      "sequence": [
++        "isolate",
++        "connect",
++        "test"
++      ],
++      "hint": "Suivez l’ordre de la plaque de maintenance. Une commande hors séquence ne valide aucune étape."
++    },
++    "oth-c07-o1": {
++      "type": "sequence",
++      "title": "Frein de cage",
++      "sequence": [
++        "lock",
++        "connect",
++        "test"
++      ],
++      "hint": "Suivez l’ordre de la plaque de maintenance. Une commande hors séquence ne valide aucune étape."
++    },
++    "oth-c08-o3": {
++      "type": "sequence",
++      "title": "Bras de la foreuse",
++      "sequence": [
++        "isolate",
++        "lock",
++        "test"
++      ],
++      "hint": "Suivez l’ordre de la plaque de maintenance. Une commande hors séquence ne valide aucune étape."
++    },
++    "oth-c11-o1": {
++      "type": "sequence",
++      "title": "Cage secondaire",
++      "sequence": [
++        "lock",
++        "connect",
++        "test"
++      ],
++      "hint": "Suivez l’ordre de la plaque de maintenance. Une commande hors séquence ne valide aucune étape."
++    },
++    "oth-c14-o1": {
++      "type": "sequence",
++      "title": "Unité médicale — alimentation",
++      "sequence": [
++        "isolate",
++        "connect",
++        "test"
++      ],
++      "hint": "Suivez l’ordre de la plaque de maintenance. Une commande hors séquence ne valide aucune étape."
++    },
++    "oth-c02-o1": {
++      "type": "pressure",
++      "title": "Collecteur du quai",
++      "initial": 85,
++      "target": 35,
++      "tolerance": 5,
++      "hint": "Réglez la pression dans la zone repérée, puis verrouillez le circuit."
++    },
++    "oth-c08-o1": {
++      "type": "pressure",
++      "title": "Purge du collecteur",
++      "initial": 90,
++      "target": 40,
++      "tolerance": 5,
++      "hint": "Réglez la pression dans la zone repérée, puis verrouillez le circuit."
++    },
++    "oth-c14-o2": {
++      "type": "sequence",
++      "title": "Unité médicale — programme de bord",
++      "sequence": [
++        "local",
++        "consent",
++        "scan",
++        "stasis"
++      ],
++      "hint": "Le programme est fictionnel : commande locale, accord de Ripley, lecture du moniteur, puis stase."
++    },
++    "oth-c15-o2": {
++      "type": "sequence",
++      "title": "Purge de la copie",
++      "sequence": [
++        "isolate",
++        "local",
++        "purge",
++        "test"
++      ],
++      "hint": "Isolez le réseau avant la purge. Sinon une copie pourrait être réintroduite."
++    },
++    "oth-c16-o3": {
++      "type": "tuning",
++      "title": "Appel de détresse",
++      "initial": 20,
++      "target": 65,
++      "tolerance": 3,
++      "hint": "Accordez la porteuse sur le repère 65, puis transmettez. Aucune réception n’est garantie."
++    }
+   }
+ };
+--- v0.1/src/oth-v1/oth-engine.js
++++ v0.2/src/oth-v1/oth-engine.js
+@@ -4,7 +4,7 @@
+ const clamp=(v,a,b)=>Math.max(a,Math.min(b,Number(v)||0));
+ const clone=v=>JSON.parse(JSON.stringify(v));
+ export function createState(difficulty='normal'){
+- return {schema:1,chapter:0,goal:0,room:'bridge',player:{x:170,y:88,hp:100,fuel:65,decoys:8,kits:3,face:1,crouch:false},
++ return {schema:2,records:[],collected:[],disabledHazards:[],conversations:[],work:{},reading:null,story:null,hazardCooldown:0,chapter:0,goal:0,room:'bridge',player:{x:170,y:88,hp:100,fuel:65,decoys:8,kits:3,face:1,crouch:false},
+  difficulty:['normal','assisted'].includes(difficulty)?difficulty:'normal',visited:['bridge'],completed:[],world:{},flags:{},journal:[],elapsed:0,finished:false,dead:false,
+  flash:true,sound:false,hold:0,portalCooldown:0,invuln:0,flame:0,torchCooldown:0,decoyCooldown:0,healCooldown:0,noise:0,dirty:true,notice:'Le relais de la mine ne répond plus.',noticeTime:7,puzzle:null,shake:0};
+ }
+@@ -48,7 +48,10 @@
+ export function nearby(s){
+  const r=ROOM[s.room],p=s.player,o=currentObjective(s);
+  if(o?.room===s.room){const node=r.nodes.find(n=>n.id===o.node);if(Math.abs(p.x-node.x)<72&&Math.abs(p.y-node.y)<52)return {kind:'objective',item:o,node};}
+- let best=null,bestD=1000;
++ let best=null,bestD=72;
++ for(const a of DATA.interactables||[]){if(a.room!==s.room||s.collected.includes(a.id)||s.records.includes(a.id)||a.kind==='valve'&&s.disabledHazards.includes(a.hazard))continue;const d=Math.hypot(p.x-a.x,(p.y-a.y)*1.2);if(d<bestD){bestD=d;best={kind:'activity',item:a,node:a};}}
++ for(const npc of crewInRoom(s)){const d=Math.hypot(p.x-npc.x,(p.y-npc.y)*1.2);if(d<bestD){bestD=d;best={kind:'crew',item:npc,node:npc};}}
++
+  for(const portal of r.portals){const d=Math.hypot(p.x-portal.x,(p.y-portal.y)*1.2);if(d<80&&d<bestD){bestD=d;best={kind:'portal',item:portal,locked:!activeEdges(s).some(e=>e.id===portal.edge)};}}
+  return best;
+ }
+@@ -57,7 +60,7 @@
+  if(!activeEdges(s).some(e=>e.id===portal.edge)){notice(s,'Ce passage n’est pas disponible. Consultez le plan.');return false;}
+  const target=ROOM[portal.target],back=target.portals.find(p=>p.edge===portal.edge);
+  if(!back)return false;
+- s.room=target.id;s.player.x=clamp(back.x+(back.x>target.width/2?-100:100),30,target.width-30);s.player.y=target.mode==='profile'?88:clamp(back.y+((back.y<30)?70:0),0,180);
++ s.decoy=null;s.room=target.id;s.player.x=clamp(back.x+(back.x>target.width/2?-100:100),30,target.width-30);s.player.y=target.mode==='profile'?88:clamp(back.y+((back.y<30)?70:0),0,180);
+  if(collision(target,s.player.x,s.player.y)){s.player.y=88;}
+  s.portalCooldown=.8;s.hold=0;s.invuln=2.2;
+  if(!s.visited.includes(s.room))s.visited.push(s.room);
+@@ -67,13 +70,16 @@
+ }
+ export function getPuzzle(s){
+  const o=currentObjective(s);if(!o)return null;
++ if(DATA.workOrders?.[o.id])return prepareWork(s,o.id);
+  if(o.action==='purge')return {title:'Séparer avant de purger',prompt:'Le réseau de bord peut réinjecter une copie. Quelle ligne faut-il fermer ?',choices:[{id:'life',text:'Support vital'},{id:'network',text:'Liaison du réseau de bord'},{id:'drive',text:'Alimentation des propulseurs'}],correct:'network'};
+  if(o.id==='oth-c14-o3')return {title:'Commande médicale',prompt:'L’unité doit garder son alimentation, sans accepter les ordres distants.',choices:[{id:'life',text:'Couper le support vital'},{id:'network',text:'Isoler la commande distante'},{id:'all',text:'Couper toute l’infirmerie'}],correct:'network'};
+  if(o.id==='oth-c12-o1')return {title:'Réserves de la concession',prompt:'Le berceau de retour doit rester intact.',choices:[{id:'return',text:'Décharger le berceau de retour'},{id:'reserve',text:'Isoler la réserve du site'},{id:'all',text:'Relier tous les berceaux'}],correct:'reserve'};
+  return {title:'Distribution locale',prompt:'La ligne de commande est compromise. Le secours doit rester indépendant.',choices:[{id:'network',text:'Suivre l’ordre du réseau'},{id:'backup',text:'Basculer sur le secours local'},{id:'off',text:'Couper toutes les lignes'}],correct:'backup'};
+ }
+ export function resolvePuzzle(s,choice){
+- if(!s.puzzle)return false;const p=getPuzzle(s);
++ if(!s.puzzle)return false;
++ if(s.puzzle.type)return manipulateWork(s,choice);
++ const p=getPuzzle(s);
+  if(choice!==p.correct){s.noise=1;notice(s,'Le contacteur claque. La mauvaise ligne reste ouverte.');s.puzzle=null;s.hold=0;const w=roomWorld(s);w.enemies.forEach(e=>{e.state='investigate';e.targetX=s.player.x;e.targetY=s.player.y;e.search=4;});return false;}
+  s.puzzle=null;completeObjective(s);return true;
+ }
+@@ -89,6 +95,9 @@
+  if(o.id==='oth-c05-o2'||o.id==='oth-c13-o3'){const w=roomWorld(s);w.cleared=true;w.enemies=[];}
+  if(o.id==='oth-c07-o2'){s.flags.liftBroken=true;notice(s,'Le puits principal est endommagé. Il faudra trouver une autre cage.',7);}
+  if(o.action==='purge')s.flags.ashPurged=true;
++ if(o.id==='oth-c14-o3')s.flags.carryRipley=true;
++ if(o.id==='oth-c15-o1'){s.flags.carryRipley=false;s.flags.ripleyStasis=true;}
++ const ev=DATA.storyEvents?.find(e=>e.at===s.completed.length);if(ev){s.story={id:ev.id,time:8};s.journal.push({chapter:s.chapter,text:ev.speaker+' — '+ev.text});s.shake=['blast','impact','lift'].includes(ev.effect)?.2:0;}
+  if(o.action==='release'){s.flags.narcissusReleased=true;}
+  s.hold=0;s.goal++;
+  if(s.goal===3){s.goal=0;s.chapter++;if(s.chapter===DATA.chapters.length){s.chapter=DATA.chapters.length-1;s.goal=2;s.finished=true;notice(s,'Transmission émise. Aucune réponse, pour l’instant.',20);}else{roomWorld(s);}}
+@@ -108,17 +117,18 @@
+  const r=ROOM[s.room];s.decoy={x:clamp(s.player.x+s.player.face*220,40,r.width-40),y:s.player.y,time:5};s.decoyCooldown=1.5;return true;
+ }
+ export function step(s,input={},delta=1/60){
+- const dt=clamp(delta,0,.06);if(!dt||s.finished||s.dead||s.puzzle)return s;
+- s.elapsed+=dt;for(const k of ['portalCooldown','invuln','torchCooldown','decoyCooldown','healCooldown','flame','noticeTime','shake'])s[k]=Math.max(0,(s[k]||0)-dt);
++ const dt=clamp(delta,0,.06);if(!dt||s.finished||s.dead||s.puzzle||s.reading)return s;
++ s.elapsed+=dt;if(s.story){s.story.time-=dt;if(s.story.time<=0)s.story=null;}for(const k of ['hazardCooldown','portalCooldown','invuln','torchCooldown','decoyCooldown','healCooldown','flame','noticeTime','shake'])s[k]=Math.max(0,(s[k]||0)-dt);
+  const r=ROOM[s.room],p=s.player,w=roomWorld(s);
+  p.crouch=Boolean(input.crouch);
+  let dx=clamp(input.x,-1,1),dy=r.mode==='profile'?0:clamp(input.y,-1,1),len=Math.hypot(dx,dy);if(len>1){dx/=len;dy/=len;}
+- const running=input.sprint&&!p.crouch&&!s.flags.cellCarried;
+- const speed=p.crouch?78:s.flags.cellCarried?108:running?238:158;
++ const running=input.sprint&&!p.crouch&&!s.flags.cellCarried&&!s.flags.carryRipley;
++ const speed=s.flags.carryRipley?86:p.crouch?78:s.flags.cellCarried?108:running?238:158;
+  if(dx)p.face=dx>0?1:-1;
+  move(r,p,dx*speed*dt,dy*speed*.7*dt);
+  const moving=!!(dx||dy);s.noise=Math.max(0,s.noise-dt*1.3);if(moving)s.noise=Math.max(s.noise,running?.9:p.crouch?.08:.3);
+- if(input.fire)useTorch(s);
++ if(input.fire&&!s.flags.carryRipley)useTorch(s);
++ for(const h of activeHazards(s)){if(h.active&&Math.abs(p.x-h.x)<h.width/2&&Math.abs(p.y-h.y)<30&&s.hazardCooldown<=0&&s.invuln<=0){p.hp-=s.difficulty==='assisted'?3:7;s.hazardCooldown=1.5;s.hold=0;s.dirty=true;notice(s,'Vapeur sous pression. Attendez la détente ou fermez la dérivation.');if(p.hp<=0){p.hp=0;s.dead=true;}}}
+  if(input.decoy)dropDecoy(s);
+  if(input.heal&&s.healCooldown<=0){if(p.kits>0&&p.hp<100){p.kits--;p.hp=Math.min(100,p.hp+45);notice(s,'Pansement appliqué.');s.dirty=true;}s.healCooldown=1;}
+  if(s.decoy){s.decoy.time-=dt;if(s.decoy.time<=0)s.decoy=null;}
+@@ -148,24 +158,26 @@
+   }
+  }
+  if(input.interact&&!moving&&!s.dead){const at=nearby(s);if(at?.kind==='objective'){
+-  s.hold+=dt;if(s.hold>=at.item.hold){s.hold=0;if(['circuit','purge'].includes(at.item.action)){s.puzzle=getPuzzle(s);}else{if(at.item.action==='lure')dropDecoy(s,true);completeObjective(s);s.portalCooldown=.8;}}}
++  s.hold+=dt;if(s.hold>=at.item.hold){s.hold=0;if(DATA.workOrders?.[at.item.id]||['circuit','purge'].includes(at.item.action)){s.puzzle=getPuzzle(s);}else{if(at.item.action==='lure')dropDecoy(s,true);completeObjective(s);s.portalCooldown=.8;}}}
++  else if(at?.kind==='activity'&&s.portalCooldown<=0){s.hold+=dt;if(s.hold>=(at.item.hold||.6)){useActivity(s,at.item.id);s.hold=0;s.portalCooldown=.8;}}
++  else if(at?.kind==='crew'&&s.portalCooldown<=0){s.hold+=dt;if(s.hold>=.35){talkToCrew(s,at.item.id);s.hold=0;s.portalCooldown=.8;}}
+   else if(at?.kind==='portal'&&s.portalCooldown<=0){transition(s,at.item);}
+   else s.hold=0;
+  }else{s.hold=0;}
+  return s;
+ }
+-export function serialize(s){const out=clone(s);for(const k of ['puzzle','hold','flame','shake'])out[k]=k==='puzzle'?null:0;out.dead=false;return JSON.stringify(out);}
++export function serialize(s){const out=clone(s);for(const k of ['puzzle','reading','hold','flame','shake'])out[k]=['puzzle','reading'].includes(k)?null:0;out.dead=false;return JSON.stringify(out);}
+ export function restore(raw){
+  if(typeof raw!=='string'||raw.length>180000)return null;
+  try{
+-  const v=JSON.parse(raw);if(!v||v.schema!==1||!ROOM[v.room]||!Array.isArray(v.completed))return null;
++  const v=JSON.parse(raw);if(!v||![1,2].includes(v.schema)||!ROOM[v.room]||!Array.isArray(v.completed))return null;
+   const s=createState(v.difficulty),ordered=DATA.chapters.flatMap(c=>c.objectives.map(o=>o.id));let n=0;while(n<ordered.length&&v.completed[n]===ordered[n])n++;
+   s.completed=ordered.slice(0,n);s.finished=n===ordered.length;s.chapter=s.finished?15:Math.floor(n/3);s.goal=s.finished?2:n%3;
+   s.room=v.room;s.visited=[...new Set((Array.isArray(v.visited)?v.visited:[]).filter(x=>ROOM[x]))];if(!s.visited.includes(s.room))s.visited.push(s.room);
+   const r=ROOM[s.room],p=v.player||{};
+   Object.assign(s.player,{x:clamp(p.x,28,r.width-28),y:r.mode==='profile'?88:clamp(p.y,0,180),hp:clamp(p.hp,1,100),fuel:clamp(p.fuel,0,100),decoys:Math.floor(clamp(p.decoys,0,12)),kits:Math.floor(clamp(p.kits,0,5)),face:p.face===-1?-1:1});
+   if(collision(r,s.player.x,s.player.y)){s.player.x=170;s.player.y=88;}
+-  s.flags={torchReady:n>=10,cellCarried:n>=32&&n<33,cellSecured:n>=33,liftBroken:n>=20,ashPurged:n>=43,narcissusReleased:n>=46};
++  s.flags={torchReady:n>=10,cellCarried:n>=32&&n<33,cellSecured:n>=33,liftBroken:n>=20,ashPurged:n>=44,narcissusReleased:n>=46,carryRipley:n>=42&&n<43,ripleyStasis:n>=43};
+   s.flash=v.flash!==false;s.sound=v.sound===true;s.elapsed=clamp(v.elapsed,0,360000);s.notice='Le carnet de bord est repris.';s.invuln=2.2;
+   s.journal=DATA.chapters.flatMap(c=>c.objectives).slice(0,n).map((o,i)=>({chapter:Math.floor(i/3),text:o.after}));
+   if(v.world&&typeof v.world==='object')for(const id of Object.keys(v.world).filter(id=>ROOM[id])){
+@@ -177,6 +189,17 @@
+    }
+    for(const p of ROOM[id].props.filter(p=>p.type==='egg')){const ev=w.eggs?.[p.id];if(ev&&['dormant','opening','open'].includes(ev.state))s.world[id].eggs[p.id]={state:ev.state,time:clamp(ev.time,0,1.5)};}
+   }
++  s.records=uniqueKnown(v.records,DATA.interactables.filter(a=>a.kind==='archive').map(a=>a.id));
++  s.collected=uniqueKnown(v.collected,DATA.interactables.filter(a=>a.kind==='cache').map(a=>a.id));
++  s.disabledHazards=uniqueKnown(v.disabledHazards,DATA.hazards.map(h=>h.id));
++  s.conversations=uniqueKnown(v.conversations,DATA.crewPlacements.map(c=>c.id));
++  for(const [id,def] of Object.entries(DATA.workOrders)){const w=v.work?.[id];if(!w||typeof w!=='object'||s.completed.includes(id))continue;
++   if(def.type==='routing')s.work[id]={values:def.initial.map((x,i)=>Math.round(clamp(w.values?.[i],0,2)))};
++   else if(def.type==='sequence')s.work[id]={index:Math.floor(clamp(w.index,0,def.sequence.length-1))};
++   else s.work[id]={value:clamp(w.value,0,100)};
++  }
++  s.journal=[];for(let i=0;i<n;i++){const o=DATA.chapters.flatMap(c=>c.objectives)[i];s.journal.push({chapter:Math.floor(i/3),text:o.after});const ev=DATA.storyEvents.find(e=>e.at===i+1);if(ev)s.journal.push({chapter:Math.floor(i/3),text:ev.speaker+' — '+ev.text});}
++  if(s.flags.carryRipley)s.player.crouch=false;
+   s.dirty=false;return s;
+  }catch{return null;}
+ }
+@@ -188,3 +211,45 @@
+  const s=createState();for(const c of DATA.chapters){s.chapter=c.index;for(const o of c.objectives){check(!!ROOM[o.room]?.nodes.some(n=>n.id===o.node),'Missing objective node '+o.id);check(route(s,o.room)!==null,'Unreachable objective '+o.id);s.room=o.room;}}
+  return {ok:failures.length===0,failures,counts:{rooms:DATA.rooms.length,edges:DATA.edges.length,objectives:48,codex:DATA.codex.length,propTypes:DATA.props.length,propInstances:DATA.rooms.reduce((n,r)=>n+r.props.length,0)}};
+ }
++
++function uniqueKnown(value,allowed){return Array.isArray(value)?[...new Set(value.filter(x=>allowed.includes(x)))]:[];}
++export function crewInRoom(s){
++ const lost=new Set(DATA.storyEvents.filter(e=>e.at<=s.completed.length).flatMap(e=>e.lost||[]));
++ const injured=new Set(DATA.storyEvents.filter(e=>e.at<=s.completed.length).flatMap(e=>e.injured||[]));
++ const actor=DATA.chapters[s.chapter].actor;
++ return DATA.crewPlacements.filter(n=>n.room===s.room&&n.start<=s.completed.length&&s.completed.length<n.end&&n.character!==actor&&!lost.has(n.character)&&!(n.character==='ripley'&&s.flags.carryRipley)).map(n=>({...n,pose:injured.has(n.character)&&n.pose!=='rest'?'injured':n.pose}));
++}
++export function talkToCrew(s,id){const npc=crewInRoom(s).find(n=>n.id===id);if(!npc||Math.hypot(s.player.x-npc.x,s.player.y-npc.y)>85)return false;
++ const lines=DATA.dialogues[npc.character]||[];s.reading={kind:'crew',title:lines[0]?.[0]||npc.character,lines};
++ if(!s.conversations.includes(id))s.conversations.push(id);s.dirty=true;return true;}
++export function useActivity(s,id){
++ const a=DATA.interactables.find(a=>a.id===id);if(!a||a.room!==s.room||Math.hypot(a.x-s.player.x,a.y-s.player.y)>80)return false;
++ if(a.kind==='archive'){if(s.records.includes(id))return false;s.records.push(id);s.reading={kind:'archive',title:a.title,body:a.body};notice(s,'La transcription rejoint le carnet.');}
++ if(a.kind==='cache'){if(s.collected.includes(id))return false;const max={kits:5,fuel:100,decoys:12}[a.resource];if(s.player[a.resource]>=max){notice(s,'Vous ne pouvez pas en emporter davantage.');return false;}s.player[a.resource]=Math.min(max,s.player[a.resource]+a.amount);s.collected.push(id);notice(s,a.title+' récupéré.');}
++ if(a.kind==='valve'){if(s.disabledHazards.includes(a.hazard))return false;s.disabledHazards.push(a.hazard);notice(s,'La dérivation est fermée. La vapeur se dissipe.');}
++ s.dirty=true;return true;
++}
++export function activeHazards(s){return DATA.hazards.filter(h=>h.room===s.room&&s.chapter>=h.minChapter&&!s.disabledHazards.includes(h.id)).map(h=>{const phase=(s.elapsed+1)%h.period;return {...h,phase,active:phase<h.on,warning:phase>h.period-1};});}
++const WORK_LABELS={isolate:'Isoler la ligne',lock:'Bloquer le mécanisme',connect:'Relier le secours',test:'Contrôler la réponse',local:'Passer en commande locale',consent:'Confirmer la demande de Ripley',scan:'Lire le moniteur',stasis:'Terminer le programme',purge:'Lancer la purge'};
++export function prepareWork(s,id){
++ const def=DATA.workOrders[id];if(!def)return null;
++ if(!s.work[id])s.work[id]=def.type==='routing'?{values:[...def.initial]}:def.type==='sequence'?{index:0}:{value:def.initial};
++ return {id,type:def.type,title:def.title,prompt:def.hint,...def,progress:s.work[id],labelsText:WORK_LABELS};
++}
++export function manipulateWork(s,action){
++ const p=s.puzzle;if(!p?.type||currentObjective(s)?.id!==p.id)return false;const d=DATA.workOrders[p.id],w=s.work[p.id];let complete=false,invalid=false;
++ if(d.type==='routing'){
++  if(/^rotate:[012]$/.test(action)){const i=Number(action.split(':')[1]);w.values[i]=(w.values[i]+1)%3;}
++  else if(action==='commit'){complete=w.values.every((v,i)=>v===d.target[i]);invalid=!complete;}else invalid=true;
++ }else if(d.type==='sequence'){
++  if(action===d.sequence[w.index]){w.index++;complete=w.index===d.sequence.length;}else{invalid=true;w.index=0;}
++ }else{
++  if(action==='minus')w.value=clamp(w.value-5,0,100);else if(action==='plus')w.value=clamp(w.value+5,0,100);
++  else if(action==='commit'){complete=Math.abs(w.value-d.target)<=d.tolerance;invalid=!complete;}else invalid=true;
++ }
++ if(invalid){s.noise=1;s.puzzle.error='La commande ne répond pas. Reprenez depuis la plaque locale.';s.puzzle.failures=(s.puzzle.failures||0)+1;}else if(s.puzzle)s.puzzle.error='';
++ s.dirty=true;
++ if(complete){s.puzzle=null;completeObjective(s);return true;}
++ return false;
++}
++export function solveWorkAction(s){const p=s.puzzle;if(!p)return null;if(!p.type)return p.correct;const w=s.work[p.id],d=DATA.workOrders[p.id];if(d.type==='routing'){const i=w.values.findIndex((v,i)=>v!==d.target[i]);return i<0?'commit':'rotate:'+i;}if(d.type==='sequence')return d.sequence[w.index];return Math.abs(w.value-d.target)<=d.tolerance?'commit':w.value<d.target?'plus':'minus';}
+--- v0.1/src/oth-v1/oth-render.js
++++ v0.2/src/oth-v1/oth-render.js
+@@ -1,5 +1,5 @@
+ import { DATA } from './oth-data.js';
+-import {ROOM,PROP,currentObjective,activeEdges,nearby,roomWorld,route} from './oth-engine.js';
++import {ROOM,PROP,currentObjective,activeEdges,nearby,roomWorld,route,crewInRoom,activeHazards} from './oth-engine.js';
+ let W=1280; const H=650,Z=1.22;
+ const palette={ship:['#071017','#172d36','#78aaa9','#d4b277'],industrial:['#101617','#283738','#91ada2','#d4a568'],hangar:['#080f16','#243542','#79959f','#dfa45b'],wreck:['#140d0b','#31251e','#ad8971','#f1a662'],medical:['#121e20','#435256','#bdcbc5','#d6c6a0'],server:['#050f10','#162c2d','#709b83','#cbb673'],surface:['#181811','#666151','#aa9c78','#edcb89'],mine:['#0c1110','#34382c','#889074','#e0ba6d'],cavern:['#0a1113','#283239','#799092','#d1b778'],derelict:['#0b0e13','#232934','#817f94','#cdb594'],hive:['#0b0f11','#25312e','#8b9c83','#d4bc92']};
+ const rand=(i)=>{const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x);};
+@@ -13,13 +13,13 @@
+ function planet(c,x,y,r){c.save();c.beginPath();c.arc(x,y,r,0,Math.PI*2);c.clip();const g=c.createLinearGradient(x-r,y-r,x+r,y+r);g.addColorStop(0,'#b2b8ad');g.addColorStop(.2,'#737c79');g.addColorStop(.53,'#353f3d');g.addColorStop(.77,'#0c171c');g.addColorStop(1,'#04090d');c.fillStyle=g;c.fillRect(x-r,y-r,r*2,r*2);for(let i=0;i<18;i++){c.globalAlpha=.10;line(c,[[x-r,y-r+i*r/8],[x-r*.2,y-r+i*r/8+r*.1],[x+r,y-r+i*r/8-r*.18]],i%2?'#acb19b':'#030b10',6+i%5);}c.restore();c.beginPath();c.arc(x,y,r,Math.PI*1.05,Math.PI*1.7);c.strokeStyle='#c5c1a580';c.lineWidth=2;c.stroke();c.lineWidth=1;}
+ function ship(c,x,y,scale=1){c.save();c.translate(x,y);c.scale(scale,scale);ellipse(c,0,15,215,15,'#03070bc0');poly(c,[[-220,-30],[-170,-96],[-80,-112],[138,-100],[216,-50],[226,-17],[90,-4],[-198,-6]],'#34414a','#819199');poly(c,[[-160,-88],[-75,-106],[43,-102],[48,-73],[-147,-62]],'#08161f','#607278');for(let i=0;i<6;i++){rect(c,60+i*20,-77,14,27,'#192832','#495962');}poly(c,[[-220,-28],[-50,-39],[88,-29],[215,-43],[226,-17],[90,-4],[-198,-6]],'#1d2b33','#516269');line(c,[[-167,-58],[111,-62],[183,-41]],'#abb3aa',2);for(const k of [-150,145]){rect(c,k,-6,9,30,'#63716f');rect(c,k-20,21,51,5,'#1b2328');}rect(c,-30,-32,72,26,'#10191d','#91a397');text(c,'SAMSON',66,-45,14,'#d2cbbb');text(c,'CARGO / 02',-137,-20,9,'#c6b67a');c.restore();}
+ function rock(c,x,y,w,h,seed,color='#30372f'){const pts=[];for(let i=0;i<9;i++){const a=i/9*Math.PI*2;pts.push([x+Math.cos(a)*w*(.72+rand(seed+i)*.24),y+Math.sin(a)*h*(.7+rand(seed+i*3)*.28)]);}poly(c,pts,color,'#63726555');line(c,[pts[1],[x-10,y+8],pts[6]],'#8f95834d',1);}
+-function backdrop(c,r,cam,t){const p=palette[r.style];gradient(c,0,0,W,H,p[0],p[1]);
++function backdrop(c,r,cam,t,s){const p=palette[r.style];gradient(c,0,0,W,H,p[0],p[1]);
+  if(['ship','hangar','wreck'].includes(r.style)){
+   for(let i=0;i<70;i++){const x=(rand(i+10)*W-cam*.04+W*3)%W,y=rand(i+900)*310;rect(c,x,y,1+(i%7===0),1,'#bac1b08a');}
+   if(['nav','flight','dock'].includes(r.motif))planet(c,850-cam*.055,148,250);
+   for(let i=-1;i<7;i++){const x=i*310-(cam*.22)%310;poly(c,[[x,28],[x+240,28],[x+282,65],[x+282,311],[x+15,311],[x,290]],'#17303b20','#61737975');line(c,[[x+15,293],[x+265,293]],'#96b1af45',3);}
+   if(r.motif==='hangar'){ship(c,810-cam*.3,330,1.5);line(c,[[760-cam*.3,0],[760-cam*.3,170]],'#151e21',10);rect(c,735-cam*.3,140,51,22,'#43473c','#9c9672');}
+-  if(r.motif==='dock'){const dx=810-cam*.3;c.save();c.translate(dx,320);poly(c,[[-177,-11],[-136,-88],[-73,-126],[49,-130],[158,-94],[196,-22],[180,2],[-178,2]],'#415052','#9ba29a');poly(c,[[-72,-116],[-50,-92],[82,-89],[48,-123]],'#0c1a22','#778e8e');for(let i=0;i<5;i++)rect(c,-120+i*54,-60,36,16,'#253b40','#a0aaa066');rect(c,-59,-52,58,46,'#17272b','#84988c');line(c,[[-146,-12],[150,-12]],'#9eaaa0',3);text(c,'NARCISSUS',32,-27,12,'#dbd4b8');c.restore();}
++  if(r.motif==='dock'&&!s.flags.narcissusReleased){const dx=810-cam*.3;c.save();c.translate(dx,320);poly(c,[[-177,-11],[-136,-88],[-73,-126],[49,-130],[158,-94],[196,-22],[180,2],[-178,2]],'#415052','#9ba29a');poly(c,[[-72,-116],[-50,-92],[82,-89],[48,-123]],'#0c1a22','#778e8e');for(let i=0;i<5;i++)rect(c,-120+i*54,-60,36,16,'#253b40','#a0aaa066');rect(c,-59,-52,58,46,'#17272b','#84988c');line(c,[[-146,-12],[150,-12]],'#9eaaa0',3);text(c,'NARCISSUS',32,-27,12,'#dbd4b8');c.restore();}
+   if(r.zone==='samson'&&r.motif==='shuttle'){gradient(c,0,43,W,370,'#2b3f3f','#132625');for(let i=-1;i<9;i++){const xx=i*205-(cam*.3)%205;poly(c,[[xx,86],[xx+170,96],[xx+180,373],[xx-5,373]],'#32473f','#9aa69255');for(let k=0;k<9;k++)line(c,[[xx+12,125+k*24],[xx+152,125+k*24]],'#162b29',5);line(c,[[xx+17,101],[xx+151,365]],'#ae9b6270',6);line(c,[[xx+153,101],[xx+17,365]],'#ae9b6270',6);rect(c,xx+76,206,19,37,'#101f24','#c6b376');}text(c,'SAMSON / CARGO',64,182,22,'#aabdab55');}
+   if(r.style==='wreck'){poly(c,[[700-cam*.2,0],[1000-cam*.2,35],[880-cam*.2,140],[1050-cam*.2,260],[650-cam*.2,337],[760-cam*.2,110]],'#03070a','#725746');glow(c,890-cam*.2,355,230,'#dd6d2720');}
+  }
+@@ -117,21 +117,31 @@
+  }
+  if(['rock','ore','debris','resin','fossil','egg'].includes(type)){
+   if(type==='egg'){c.beginPath();c.moveTo(-w*.42,0);c.bezierCurveTo(-w*.63,-h*.4,-w*.43,-h*.97,0,-h);c.bezierCurveTo(w*.40,-h,w*.6,-h*.42,w*.4,0);c.closePath();const g=c.createLinearGradient(-w/2,-h,w/2,0);g.addColorStop(0,'#667562');g.addColorStop(.35,'#aaa48a');g.addColorStop(.64,'#445847');g.addColorStop(1,'#253a30');c.fillStyle=g;c.fill();c.strokeStyle='#bdba9566';c.stroke();line(c,[[0,-h],[5,-h*.7],[0,-h*.35]],'#263729',2);line(c,[[-w*.3,-h*.8],[0,-h],[w*.3,-h*.8]],'#c0b18d',2);return;}
+-  if(type==='fossil'){for(let i=0;i<6;i++){c.beginPath();c.ellipse(-w*.25+i*w*.08,-h*.4-i*2,w*.2,h*.15,-.5,0,Math.PI*2);c.strokeStyle='#aca68c';c.lineWidth=2;c.stroke();}ellipse(c,w*.29,-h*.65,w*.22,h*.2,'#8f9380','#c2bda2');ellipse(c,w*.39,-h*.65,3,3,'#253a32');line(c,[[-w*.15,-h*.22],[-w*.3,0],[-w*.5,-h*.08]],'#aab097',3);return;}
++  if(type==='fossil'){
++   // Fallen, long-limbed non-human remains. No named species or official reconstruction implied.
++   const bone='#a5aa98',edge='#d0c6aa';
++   line(c,[[-w*.4,-h*.24],[-w*.17,-h*.48],[w*.15,-h*.48],[w*.32,-h*.51]],bone,3);
++   for(let i=0;i<7;i++){const x=-w*.15+i*w*.04;c.beginPath();c.moveTo(x,-h*.48);c.bezierCurveTo(x-9,-h*.72,x+16,-h*.64,x+12,-h*.26);c.strokeStyle=bone;c.lineWidth=2;c.stroke();c.lineWidth=1;}
++   poly(c,[[w*.16,-h*.62],[w*.2,-h*.79],[w*.35,-h*.8],[w*.4,-h*.67],[w*.5,-h*.61],[w*.49,-h*.5],[w*.31,-h*.49]],'#89998c',edge);
++   ellipse(c,w*.3,-h*.66,w*.04,h*.06,'#1a2b28');line(c,[[w*.33,-h*.48],[w*.46,-h*.45],[w*.5,-h*.49]],edge,2);
++   for(let i=0;i<4;i++)rect(c,w*.38+i*w*.025,-h*.52,1,4,'#d9ceaf');
++   for(const side of [-1,1]){line(c,[[w*.05,-h*.42],[w*.15+side*w*.13,-h*.1],[w*.36+side*w*.12,-h*.05]],bone,3);line(c,[[-w*.23,-h*.4],[-w*.34,-h*.18],[-w*.43,-h*.025]],bone,4);}
++   for(let i=0;i<3;i++)line(c,[[w*.47,-h*.05],[w*.53+i*2,-h*.015-i*2]],edge,1);return;
++  }
+   if(type==='resin'){for(let i=0;i<7;i++){c.beginPath();c.moveTo(-w/2+i*w/7,0);c.bezierCurveTo(-w/2+i*w/7-15,-h*.5,w/2-i*w/7,-h*.65,0,-h);c.strokeStyle=i%2?'#7c947d':'#344d3a';c.lineWidth=4;c.stroke();}c.lineWidth=1;return;}
+   rock(c,0,-h*.45,w*.5,h*.5,variant*93,type==='ore'?'#889f8d':type==='debris'?'#746d51':'#465c45');return;
+  }
+ }
+ function human(c,x,y,face,walk,t,character,hurt=false,carry=false,crouch=false,hasTorch=false){
+  c.save();c.translate(x,y);c.scale(face,crouch?.72:1);const a=walk?Math.sin(t*9)*6:0;
+- const suit=character==='ripley'?'#aaa997':'#788977',trim=character==='ripley'?'#d6cbb1':'#c1bda2';
++ const suit=({ripley:'#aaa997',kasyanov:'#a2b8b3',garcia:'#c4bbb0',baxter:'#9b8d69',lachance:'#647c8d',sneddon:'#9ca598',jordan:'#77848c',welford:'#8b9167',powell:'#7f846d'})[character]||'#788977',trim=['ripley','garcia'].includes(character)?'#d6cbb1':'#c1bda2';
+  line(c,[[-5,-25],[-8+a,-13],[-8+a*.5,-3]],'#293a35',9);line(c,[[6,-26],[9-a,-12],[10-a*.5,-3]],'#3b4e42',9);
+  line(c,[[-8+a*.5,-2],[0+a*.5,-2]],'#8c9780',4);line(c,[[10-a*.5,-2],[19-a*.5,-2]],'#87917d',4);
+  poly(c,[[-11,-51],[-14,-34],[-8,-23],[11,-24],[13,-46],[7,-52]],suit,trim);
+  rect(c,-18,-47,7,21,'#384c40','#a6ae8c');rect(c,-12,-35,26,5,'#354e3e');rect(c,-5,-36,6,6,'#b1b996');
+  line(c,[[-10,-48],[-16,-33],[-6,-25]],suit,6);line(c,[[9,-48],[16,-37],[26,-37]],trim,6);
+  ellipse(c,0,-57,8,10,'#c5b096','#e0d1b0');poly(c,[[-9,-57],[-9,-64],[-4,-68],[5,-67],[9,-60],[4,-59],[2,-63],[-4,-62]],character==='ripley'?'#51493c':'#869881','#c9c9a18a');rect(c,4,-60,7,3,'#192d2a');
+- if(character==='hoop'){rect(c,2,-69,6,3,'#ecdda7');}
++ if(['kasyanov','garcia'].includes(character)){rect(c,-5,-45,8,8,'#d7dcc5');rect(c,-2,-44,2,6,'#74746c');rect(c,-4,-42,6,2,'#74746c');}if(character==='baxter'){line(c,[[-7,-58],[7,-58]],'#172a2d',2);}if(character==='jordan'){rect(c,-9,-65,19,5,'#394a50','#acb89d');}if(character==='hoop'){rect(c,2,-69,6,3,'#ecdda7');}
+  if(hasTorch&&!carry){rect(c,23,-40,15,6,'#2c3d34','#a9b596');rect(c,31,-40,11,2,'#c9c9ae');c.beginPath();c.moveTo(27,-35);c.quadraticCurveTo(35,-10,-14,-39);c.strokeStyle='#aa927e';c.stroke();}rect(c,0,-47,5,5,'#ccb985');
+  if(carry){c.save();c.translate(25,-28);propShape(c,'cell',28,21,0,false,t);c.restore();}
+  if(hurt){c.globalAlpha=.2;ellipse(c,0,-36,18,32,'#e5d3a0');}
+@@ -164,24 +174,30 @@
+  const c=canvas.getContext('2d',{alpha:false}),r=ROOM[s.room],p=s.player;
+  c.setTransform(canvas.width/W,0,0,canvas.height/H,0,0);c.clearRect(0,0,W,H);
+  const cam=Math.max(0,Math.min(r.width-W/Z,p.x-W/(2*Z))),t=s.elapsed;
+- backdrop(c,r,cam,t);
++ backdrop(c,r,cam,t,s);architecture(c,r,cam,t,s);
+  const o=currentObjective(s),path=o?route(s,o.room):[],allowed=activeEdges(s);
+  for(const po of r.portals)door(c,po,r,cam,allowed.some(e=>e.id===po.edge),ROOM[po.target],path?.[0]?.edge===po.edge);
+  const objs=r.props.map(prop=>({kind:'prop',y:prop.y,obj:prop}));
++ for(const npc of crewInRoom(s))objs.push({kind:'npc',y:npc.y,obj:npc});
++ for(const a of DATA.interactables){if(a.room!==r.id||s.records.includes(a.id)||s.collected.includes(a.id)||a.kind==='valve'&&s.disabledHazards.includes(a.hazard))continue;objs.push({kind:'activity',y:a.y-46,obj:{...a,y:a.y-46}});}
++
+  if(o?.room===r.id){const node=r.nodes.find(n=>n.id===o.node);objs.push({kind:'goal',y:node.y-48,obj:{...node,y:node.y-48}});}
+  const world=roomWorld(s);for(const e of world.enemies)objs.push({kind:'enemy',y:e.y,obj:e});
+  objs.push({kind:'player',y:p.y,obj:p});
+  if(s.decoy)objs.push({kind:'decoy',y:s.decoy.y,obj:s.decoy});
+- objs.sort((a,b)=>a.y-b.y||({prop:0,goal:1,enemy:2,player:3,decoy:4}[a.kind]-{prop:0,goal:1,enemy:2,player:3,decoy:4}[b.kind]));
++ objs.sort((a,b)=>a.y-b.y||({prop:0,activity:1,goal:2,npc:3,enemy:4,player:5,decoy:6}[a.kind]-{prop:0,activity:1,goal:2,npc:3,enemy:4,player:5,decoy:6}[b.kind]));
+  for(const ent of objs){const obj=ent.obj,x=(obj.x-cam)*Z,fy=415+(obj.y-25)*.91,scale=(.91+obj.y/700)*Z;if(x<-150||x>W+170)continue;
+   c.save();c.translate(x,fy);c.scale(scale,scale);
+   if(ent.kind==='prop'){const def=PROP[obj.type];if(def.kind!=='decor')ellipse(c,2,1,def.width*.64,5,'#00080b80');if(obj.y>p.y&&Math.abs(obj.x-p.x)<72)c.globalAlpha=.35;propShape(c,obj.type,def.width,def.height,obj.variant,false,t);}
+   if(ent.kind==='goal'){ellipse(c,0,2,26,5,'#00080b90');const ty=({valve:'valve',carry:'cell',repair:'generator',install:'cell',release:'winch',seal:'valve',lure:'beacon'})[o.action]||(s.room==='fossils'?'fossil':s.room==='eggs'?'egg':s.room==='narcissus'?'catbox':s.room==='medical'?'medpod':'terminal');const pd=PROP[ty];propShape(c,ty,pd.width,pd.height,0,true,t);line(c,[[-19,-58],[-19,-69],[-8,-69]],'#ecd28e');line(c,[[19,-58],[19,-69],[8,-69]],'#ecd28e');text(c,'◆',0,-72,11,'#e7d39d','center');}
++  if(ent.kind==='activity'){ellipse(c,0,2,18,4,'#00070b88');if(obj.kind==='archive'){rect(c,-10,-36,20,29,'#4e665d','#b6b799');rect(c,-7,-32,14,16,'#152a29','#819e84');for(let i=0;i<4;i++)rect(c,-5,-29+i*3,9-i,1,'#b1c09c');line(c,[[-5,-12],[5,-12]],'#d7c08c');}else if(obj.kind==='cache'){propShape(c,obj.resource==='fuel'?'cell':'cabinet',30,32,0,false,t);rect(c,-5,-27,10,9,'#d3c493');if(obj.resource==='kits'){rect(c,-1,-25,2,6,'#596d58');rect(c,-3,-23,6,2,'#596d58');}}else propShape(c,'valve',32,45,0,false,t);const close=Math.abs(obj.x-p.x)<90;text(c,close?'E':'·',0,-48,close?11:13,'#d3c28e','center');}
++  if(ent.kind==='npc'){ellipse(c,0,2,22,5,'#00070baa');if(obj.pose==='rest'){c.save();c.translate(0,r.id==='narcissus'?-22:r.id==='medical'?-14:-2);patient(c,obj.character);c.restore();}else human(c,0,0,Math.sin(obj.x)>0?1:-1,false,t,obj.character,false,false,obj.pose==='injured',false);if(Math.abs(obj.x-p.x)<150){const name=DATA.dialogues[obj.character]?.[0]?.[0]||obj.character;text(c,name.toUpperCase(),0,-82,9,'#c5cbb2','center');} }
+   if(ent.kind==='enemy'){ellipse(c,0,1,26,5,'#00090a88');alien(c,0,0,obj,t);}
+-  if(ent.kind==='player'){ellipse(c,2,2,21,5,'#00070bba');human(c,0,0,p.face,options.moving,t,DATA.chapters[s.chapter].actor,s.invuln>0,s.flags.cellCarried,p.crouch,s.flags.torchReady);if(s.flame>0){const lg=c.createLinearGradient(24*p.face,-37,200*p.face,-37);lg.addColorStop(0,'#f9e6a2dd');lg.addColorStop(.3,'#efa962bb');lg.addColorStop(1,'#e97e2b00');poly(c,[[34*p.face,-40],[205*p.face,-68],[185*p.face,-14],[34*p.face,-35]],lg);glow(c,98*p.face,-34,90,'#f6b45a4a');}}
++  if(ent.kind==='player'){ellipse(c,2,2,21,5,'#00070bba');human(c,0,0,p.face,options.moving,t,DATA.chapters[s.chapter].actor,s.invuln>0,s.flags.cellCarried,p.crouch,s.flags.torchReady&&!s.flags.carryRipley);if(s.flags.carryRipley){c.save();c.translate(p.face*10,-29);c.scale(p.face,.9);patient(c,'ripley');c.restore();}if(s.flame>0){const lg=c.createLinearGradient(24*p.face,-37,200*p.face,-37);lg.addColorStop(0,'#f9e6a2dd');lg.addColorStop(.3,'#efa962bb');lg.addColorStop(1,'#e97e2b00');poly(c,[[34*p.face,-40],[205*p.face,-68],[185*p.face,-14],[34*p.face,-35]],lg);glow(c,98*p.face,-34,90,'#f6b45a4a');}}
+   if(ent.kind==='decoy'){rect(c,-6,-7,12,7,'#8d9d7b','#ddcb9e');c.beginPath();c.ellipse(0,0,22+(Math.sin(t*4)+1)*18,5,0,0,Math.PI*2);c.strokeStyle='#d4c37a70';c.stroke();}
+   c.restore();
+  }
++ for(const h of activeHazards(s)){const x=(h.x-cam)*Z,y=415+(h.y-25)*.91;const active=h.active||h.warning;if(x<-140||x>W+140)continue;rect(c,x-h.width*.5,y+3,h.width,4,h.warning?'#d8bc69':'#70876c44');if(active){c.save();for(let i=0;i<(h.active?14:4);i++){const q=(t*1.4+i*.17)%1.6;glow(c,x+Math.sin(i*2.1+q)*20,y-q*105,18+q*16,h.active?'#d8e4d112':'#c7dfc008');}c.restore();if(Math.abs(h.x-p.x)<250)text(c,h.active?'PRESSION':'DÉTENTE',x,y-135,9,'#d8c995','center');}}
+  // Horizontal flashlight: local visibility without painting an opaque cone over the scene.
+  if(s.flash){const x=(p.x-cam)*Z,y=415+(p.y-25)*.91-48;c.save();c.globalCompositeOperation='screen';glow(c,x+p.face*85,y,180,'#c2d2a810');c.restore();}
+  // Foreground never covers the full playfield or the HUD.
+@@ -189,8 +205,49 @@
+  for(let i=0;i<8;i++){const x=i*230-(cam*1.12)%230;if(['derelict','hive','cavern','surface'].includes(r.style)){rock(c,x,661,160,32,i+392,'#0b181b');}else{rect(c,x,624,160,24,'#081315');rect(c,x+5,626,150,2,'#49645970');}}
+  const v=c.createRadialGradient(W/2,H*.54,260,W/2,H*.5,810);v.addColorStop(0,'#00000000');v.addColorStop(1,'#00040bb0');rect(c,0,0,W,H,v);
+  if(['surface','mine','cavern'].includes(r.style))for(let i=0;i<30;i++){const x=(rand(i+101)*W+t*(r.style==='surface'?17:2)+W)%W,y=rand(i+121)*H;rect(c,x,y,r.style==='surface'?8:2,1,'#d7ceac2f');}
+- const near=nearby(s);if(near&&!options.menu){const x=(p.x-cam)*Z,y=415+(p.y-25)*.91+27;const label=near.kind==='objective'?'MAINTENIR E':near.locked?'PASSAGE FERMÉ':'E · '+ROOM[near.item.target].name.toUpperCase();text(c,label,x,y,10,near.locked?'#b2b09c':'#e8d4a7','center');if(s.hold>0&&near.kind==='objective'){rect(c,x-40,y+6,80,3,'#1b312b');rect(c,x-40,y+6,80*Math.min(1,s.hold/near.item.hold),3,'#e6cb88');}}
++ const near=nearby(s);if(near&&!options.menu){const x=(p.x-cam)*Z,y=415+(p.y-25)*.91+27;const label=near.kind==='objective'?'MAINTENIR E':near.kind==='activity'?'E · '+near.item.title.toUpperCase():near.kind==='crew'?'E · PARLER':near.locked?'PASSAGE FERMÉ':'E · '+ROOM[near.item.target].name.toUpperCase();text(c,label,x,y,10,near.locked?'#b2b09c':'#e8d4a7','center');if(s.hold>0&&['objective','activity','crew'].includes(near.kind)){rect(c,x-40,y+6,80,3,'#1b312b');rect(c,x-40,y+6,80*Math.min(1,s.hold/(near.item.hold||.35)),3,'#e6cb88');}}
+  // Restrained signage occupies the architectural wall, never the gameplay floor.
+  text(c,r.deck+'  /  '+r.name.toUpperCase(),34,114,13,palette[r.style][2]);text(c,r.zone==='marion'?'DSMO MARION  ·  INDUSTRIAL OPERATIONS':r.zone==='derelict'?'SIGNAL PERDU':r.zone==='mine'?'LV-178  /  CONCESSION MINIÈRE':'LV-178  /  NAVIGATION LOCALE',34,135,9,'#96a890');
+ }
+ export function fitCanvas(canvas){const b=canvas.getBoundingClientRect(),d=Math.min(2,window.devicePixelRatio||1);const w=Math.max(1,Math.round(b.width*d)),h=Math.max(1,Math.round(b.height*d));if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}}
++
++function architecture(c,r,cam,t,s){
++ const px=x=>(x-cam*.42)*Z;
++ if(r.id==='rec'){
++  gradient(c,0,170,W,240,'#2c3832','#182724');const x=px(720);
++  rect(c,x-360,215,620,22,'#6a6550','#aaa380');rect(c,x-343,246,575,106,'#132a2b','#677f72');
++  for(let i=0;i<14;i++){const xx=x-320+i*37;rect(c,xx,270,12,45,'#445d51','#8b9874');rect(c,xx+3,259,6,12,'#a4976b');rect(c,xx-1,293,14,10,'#b7a876');}
++  rect(c,x-355,342,635,14,'#a49b79');rect(c,x-355,356,635,38,'#233631','#789279');text(c,'BEEBEE’S',x-20,191,32,'#d3b981','center');text(c,'LAISSEZ VOS OUTILS À L’ENTRÉE',x-20,214,9,'#b2baa7','center');
++  for(let i=0;i<6;i++){ellipse(c,x-240+i*87,383,18,6,'#8b7a5d','#aca583');rect(c,x-242+i*87,387,4,24,'#50685e');}
++ }
++ if(r.id==='medical'){
++  const x=px(1280);rect(c,x-120,170,240,132,'#13262b','#b8c4b3');rect(c,x-109,180,218,99,'#071c22','#657f75');
++  for(let lane=0;lane<3;lane++){const points=[];for(let i=0;i<90;i++){const xx=x-98+i*2,yy=195+lane*23+Math.sin(i*.22+t*.8)*2+((i+Math.floor(t*8))%40===0?-14:0);points.push([xx,yy]);}line(c,points,s.completed.length>=42?'#b58467':'#9fb997',1.5);}
++  text(c,s.completed.length>=42?'COMMANDE PERDUE':'UNITÉ MÉDICALE / LOCAL',x-99,293,9,'#ced5bf');
++  for(let i=0;i<5;i++){const xx=px(200+i*315);line(c,[[xx,150],[xx,369]],'#72928790',2);poly(c,[[xx,150],[xx+115,155],[xx+112,365],[xx,372]],'#a4b7aa19','#a1b6a759');}
++ }
++ if(['maintenance','engineering','pump','drain'].includes(r.id)){
++  for(let i=0;i<4;i++){const x=px(280+i*590);line(c,[[x,305],[x,188],[x+200,188],[x+200,365]],'#162a2b',25);line(c,[[x,304],[x,189],[x+199,189],[x+199,364]],'#7c8b7c',12);for(const yy of [239,277,325]){rect(c,x-13,yy,26,8,'#435d52','#b2b59a');for(const xx of [x-10,x+8])rect(c,xx,yy+2,3,3,'#c4c9ac');}ellipse(c,x+98,188,23,23,'#172b2d','#9ea887');ellipse(c,x+98,188,17,17,'#a6b099');const a=-1+t*.12;line(c,[[x+98,188],[x+98+Math.cos(a)*12,188+Math.sin(a)*12]],'#253f33',2);}
++  if(r.id==='drain'){for(let i=0;i<9;i++){const x=i*180-cam*.85%180;ellipse(c,x,546,110,12,'#829b9120','#9dbbb018');}text(c,'DÉCANTATION / NIVEAU BAS',36,177,12,'#c8bd8e');}
++ }
++ if(['fossils','alcove'].includes(r.id)){
++  const x=px(1040);rock(c,x,405,245,22,240,'#243330');c.save();c.translate(x,402);c.scale(2.4,2.4);propShape(c,'fossil',170,86,0,false,t);c.restore();
++  for(let i=0;i<18;i++){const xx=px(180+i*140),yy=195+Math.sin(i*1.3)*40;c.beginPath();c.moveTo(xx,yy);c.bezierCurveTo(xx+24,yy-40,xx+60,yy+50,xx+100,yy+90);c.strokeStyle='#9897a021';c.lineWidth=4;c.stroke();c.lineWidth=1;}
++ }
++ if(r.id==='vein'){
++  const x=px(1200);poly(c,[[x-230,360],[x-112,180],[x+15,211],[x+121,101],[x+274,370]],'#50665b55','#b4c5aa60');
++  for(let i=0;i<12;i++){const xx=x-130+i*31,yy=300-Math.sin(i*.7)*45;poly(c,[[xx,yy],[xx+8,yy-68],[xx+23,yy-104],[xx+33,yy-38],[xx+22,yy+8]],'#9fae955e','#e1d3a457');}
++ }
++ if(r.id==='bridge'&&s.completed.length>=5){for(let i=0;i<6;i++){const x=px(340+i*301);line(c,[[x,98],[x+39,160],[x+6,197],[x+89,260]],'#ababa647',2);}glow(c,px(940),260,180,'#d8955520');}
++ if(r.id==='server'&&s.completed.length>=30&&!s.flags.ashPurged){const x=px(780);rect(c,x-100,170,205,85,'#07171c','#879c78');text(c,'ORDRE PRIORITAIRE',x,199,12,'#c7c49c','center');text(c,'AUTORITÉ DISTANTE',x,224,9,'#95a38d','center');}
++ if(s.flags.narcissusReleased&&r.id==='dock'){const x=px(740);text(c,'COLLIER OUVERT',x,280,17,'#ccd1b0','center');}
++}
++
++// Dedicated resting pose: hands on the torso and a continuous support line.
++function patient(c,character){
++ const cloth=character==='ripley'?'#bbb7a2':'#889686';
++ line(c,[[5,-6],[18,-5],[29,-2]],'#45594d',6);line(c,[[6,-9],[22,-8],[32,-5]],'#5e6c59',6);rect(c,28,-6,7,4,'#263d36');
++ poly(c,[[-20,-9],[-13,-15],[5,-13],[12,-7],[5,-3],[-17,-3]],cloth,'#d0d0ae');
++ ellipse(c,-26,-8,7,7,'#c0ab8a','#d8c7a5');poly(c,[[-32,-10],[-31,-15],[-25,-16],[-20,-11],[-23,-10],[-26,-13]],'#594f3e');
++ line(c,[[-14,-12],[-4,-9],[6,-10]],'#d0c5a1',4);rect(c,-7,-9,4,3,'#e0c7a3');
++}
+--- v0.1/src/oth-v1/oth-ui.css
++++ v0.2/src/oth-v1/oth-ui.css
+@@ -6,3 +6,6 @@
+ @media(max-width:600px){#oth-root{grid-template-rows:115px minmax(0,1fr) 102px;min-height:500px}.oth-head{display:grid;grid-template-columns:1fr auto;gap:10px}.oth-location{border:0}.oth-objective{grid-column:1/3;grid-row:2}.oth-objective small{margin-bottom:6px}.oth-objective strong{white-space:normal;font-size:12px}.oth-foot{grid-template-columns:1fr;gap:9px}.oth-meters{gap:23px}.oth-meter b{display:inline;margin-left:5px;font-size:14px}.oth-foot-msg{line-height:1.4}.oth-foot-msg small{display:none}.oth-canvas{width:100%;height:100%;max-height:100%;aspect-ratio:auto;align-self:start}.oth-stage{align-items:start}.oth-title{padding:28px;background:linear-gradient(90deg,#08151aec,#08141ab8)}.oth-title h1{font-size:60px}.oth-franchise{font-size:26px;margin-bottom:25px}.oth-title .tagline{font-size:13px}.oth-title-actions{gap:9px}.oth-title-actions button{min-width:135px;font-size:11px}.oth-title-footer{left:28px;right:28px;bottom:22px;line-height:1.7;font-size:8px;display:block}.oth-title .subtitle{font-size:10px}.oth-dialog{width:calc(100vw - 24px);max-height:calc(100dvh - 24px)}.oth-dialog header{padding:20px}.oth-dialog h2{font-size:21px}.oth-dialog .dialog-body{padding:20px;max-height:calc(100dvh - 140px)}.oth-codex-grid,.oth-map-rooms,.oth-dialog .controls-grid{grid-template-columns:1fr}.oth-codex-tools{flex-direction:column}.oth-touch{display:flex}.oth-dialog .field{gap:12px}.oth-dialog select{max-width:155px}}
+ @media(pointer:coarse) and (min-width:601px){.oth-touch{display:flex}}
+ @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
++
++/* Les voix du Marion — panels only; no permanent overlay over the playfield. */
++.work-plaque{display:flex;justify-content:space-between;align-items:center;gap:20px;background:#09171e;border:1px solid #566b6855;padding:16px 20px;font:11px 'Courier New',monospace;letter-spacing:.13em}.work-plaque strong{font-size:22px;color:#e1c997;letter-spacing:.3em}.work-routing{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:28px 0}.work-switch{text-align:center}.work-switch small{display:block;font:12px monospace;margin-bottom:12px;color:#bac7c0}.oth-dialog .work-switch button{border-radius:50%;width:86px;height:86px;background:radial-gradient(circle at 40% 30%,#455950,#132725 75%);box-shadow:0 8px 0 #071518,inset 0 0 0 5px #73857540;position:relative}.work-switch span{font-size:26px;color:#efdaad}.work-switch i{font-style:normal;position:absolute;right:12px;top:7px;font-size:14px;color:#afbda9}.work-wire{height:5px;background:#683d30;margin:24px 0 0;box-shadow:0 0 0 3px #071217}.work-wire.connected{background:#a5bea1}.work-sequence{list-style:none;counter-reset:steps;padding:0;margin:24px 0;display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.work-sequence li{border:1px solid #6f88714a;background:#102025;padding:16px;color:#9baaa0;font-size:13px}.work-sequence li span{font:12px monospace;margin-right:12px;color:#c0ad84}.work-sequence .done{border-color:#758b70;color:#d1d9c6}.work-sequence .active{border-color:#cfb97e;background:#293931}.work-commands{display:flex;gap:12px;flex-wrap:wrap}.work-error{min-height:24px;color:#e4b798!important;font-size:12px!important}.work-gauge{position:relative;height:66px;margin:30px 18px 38px;background:repeating-linear-gradient(90deg,#12272a 0px,#12272a 8px,#6a7b6829 9px,#6a7b6829 10px);border-bottom:2px solid #7b8e7e}.work-gauge .safe-zone{position:absolute;top:0;height:100%;background:#cad59342;border-left:1px solid #d7d8a6;border-right:1px solid #d7d8a6}.work-gauge .gauge-needle{position:absolute;top:-7px;bottom:-7px;width:2px;background:#f5d895;box-shadow:0 0 9px #e3c87c99;transform:translateX(-1px)}.work-gauge i{position:absolute;top:76px;transform:translateX(-50%);font:10px monospace;color:#a2b5a7}.gauge-value{font:36px monospace!important;color:#d4dcbf!important}.gauge-value small{font-size:12px}.oth-dialogue-line{border-left:2px solid #d5bc81;padding:10px 20px;margin-bottom:20px;background:#192c2c}.oth-dialogue-line small{font:11px monospace;letter-spacing:.14em;text-transform:uppercase;color:#d7c48e}.oth-dialogue-line p{font-size:17px;line-height:1.7}.record-body{font-size:18px!important;line-height:1.9!important;max-width:640px}.oth-crew-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.crew-card{display:flex;gap:18px;padding:20px;background:#14282b;border:1px solid #6f83784a}.crew-card.lost{opacity:.62;background:#292925}.crew-monogram{width:50px;height:65px;flex:none;display:grid;place-items:center;font:24px monospace;color:#c8c9a7;border:1px solid #738577;background:linear-gradient(145deg,#31483d,#172b2d)}.crew-card h3{font-size:16px;font-weight:400;margin:0 0 10px}.crew-card small{font:10px monospace;color:#cbbd95}.crew-card p{font-size:12px;margin:9px 0 0}@media(max-width:600px){.crew-nav{display:none}.oth-crew-grid{grid-template-columns:1fr}.work-sequence{grid-template-columns:1fr}.work-plaque{padding:12px;font-size:9px}.work-plaque strong{font-size:18px}.work-routing{gap:10px}.oth-dialog .work-switch button{width:67px;height:67px}.work-commands button{flex:1}.record-body{font-size:15px!important}}
+--- v0.1/src/oth-v1/oth-ui.js
++++ v0.2/src/oth-v1/oth-ui.js
+@@ -1,23 +1,23 @@
+ import {DATA} from './oth-data.js';
+-import {ROOM,createState,currentObjective,step,serialize,restore,nearby,route,activeEdges,roomWorld,resolvePuzzle} from './oth-engine.js';
++import {ROOM,createState,currentObjective,step,serialize,restore,nearby,route,activeEdges,roomWorld,resolvePuzzle,crewInRoom,activeHazards} from './oth-engine.js';
+ import {draw,fitCanvas} from './oth-render.js';
+ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ export function mount(root){
+- let state=createState(),mode='title',keys=new Set(),last=0,frame=0,panel='',lastObjective='',saveWarning=false,audio=null,lastSound=0;
+- const readSave=()=>{try{return restore(localStorage.getItem(DATA.saveKey));}catch{return null;}};
++ let state=createState(),mode='title',keys=new Set(),last=0,frame=0,panel='',lastObjective='',saveWarning=false,audio=null,lastSound=0,saveClock=0,checkpoint=null;
++ const readSave=()=>{try{const raw=localStorage.getItem(DATA.saveKey);if(raw&&JSON.parse(raw).schema===1&&!localStorage.getItem(DATA.saveKey+':backup-v1'))localStorage.setItem(DATA.saveKey+':backup-v1',raw);return restore(raw);}catch{return null;}};
+  const cached=readSave();if(cached)state=cached;
+- root.innerHTML=`<header class="oth-head"><div class="oth-location"><strong id="oth-ship">DSMO MARION</strong><span id="oth-roomcode">A-01 · PASSERELLE</span></div><div class="oth-objective"><small id="oth-chapter"></small><strong id="oth-goal"></strong></div><nav aria-label="Carnet de bord"><button data-panel="map">Plan [M]</button><button data-panel="codex">Carnet [J]</button><button data-panel="pause" aria-label="Mettre en pause">II</button></nav></header><main class="oth-stage"><canvas class="oth-canvas" width="1280" height="650" tabindex="0" aria-label="Exploration du Marion et de LV-178"></canvas><div class="oth-touch" aria-label="Commandes tactiles"><div class="touch-dir"><button class="up" data-touch="z" aria-label="Aller au fond">↑</button><button class="left" data-touch="q" aria-label="Aller à gauche">←</button><button class="down" data-touch="s" aria-label="Aller au premier plan">↓</button><button class="right" data-touch="d" aria-label="Aller à droite">→</button></div><div><button data-touch="c">C</button><button data-touch="f">Feu</button><button data-touch="r">Leurre</button><button data-touch="e">E</button></div></div></main><footer class="oth-foot"><div class="oth-meters"><span class="oth-meter">VITALITÉ<b id="oth-hp"></b></span><span class="oth-meter">RÉSERVOIR<b id="oth-fuel"></b></span><span class="oth-meter">LEURRES<b id="oth-decoys"></b></span></div><div class="oth-foot-msg"><div id="oth-message" aria-live="polite"></div><small id="oth-controls">ZQSD / WASD · Maj courir · C s’accroupir · E agir · F flamme · R leurre · L lampe · H soin</small></div><div class="oth-presence" id="oth-presence">AUCUN CONTACT</div></footer><section class="oth-title" aria-label="Menu de la chronique"><div class="oth-title-content"><p class="oth-franchise">ALIEN</p><p class="eyebrow">CHRONIQUE DU MARION · LV-178</p><h1>HORS<br>DES OMBRES</h1><p class="subtitle">LA SORTIE DES PROFONDEURS</p><p class="tagline">Le secours est arrivé.<br>Ce n’est pas forcément une bonne nouvelle.</p><div class="oth-title-actions"><button class="primary" data-action="continue">${cached?'Reprendre la chronique':'Entrer dans le Marion'}</button><button data-panel="pause">Commandes & réglages</button>${cached?'<button data-action="new">Nouvelle chronique</button>':''}</div></div><div class="oth-title-location">DSMO MARION<br>ORBITE DE LV-178<br>RELAIS LOCAL SEULEMENT</div><div class="oth-title-footer"><span>TANTALUS FRONTIER / ARCHIVES</span><span>UNE ADAPTATION NON OFFICIELLE DE L’ŒUVRE DE TIM LEBBON</span></div></section><dialog class="oth-dialog" aria-labelledby="oth-dialog-title"></dialog>`;
++ root.innerHTML=`<header class="oth-head"><div class="oth-location"><strong id="oth-ship">DSMO MARION</strong><span id="oth-roomcode">A-01 · PASSERELLE</span></div><div class="oth-objective"><small id="oth-chapter"></small><strong id="oth-goal"></strong></div><nav aria-label="Carnet de bord"><button data-panel="map">Plan [M]</button><button data-panel="codex">Carnet [J]</button><button data-panel="crew" class="crew-nav">Équipage</button><button data-panel="pause" aria-label="Mettre en pause">II</button></nav></header><main class="oth-stage"><canvas class="oth-canvas" width="1280" height="650" tabindex="0" aria-label="Exploration du Marion et de LV-178"></canvas><div class="oth-touch" aria-label="Commandes tactiles"><div class="touch-dir"><button class="up" data-touch="z" aria-label="Aller au fond">↑</button><button class="left" data-touch="q" aria-label="Aller à gauche">←</button><button class="down" data-touch="s" aria-label="Aller au premier plan">↓</button><button class="right" data-touch="d" aria-label="Aller à droite">→</button></div><div><button data-touch="c">C</button><button data-touch="f">Feu</button><button data-touch="r">Leurre</button><button data-touch="e">E</button></div></div></main><footer class="oth-foot"><div class="oth-meters"><span class="oth-meter">VITALITÉ<b id="oth-hp"></b></span><span class="oth-meter">RÉSERVOIR<b id="oth-fuel"></b></span><span class="oth-meter">LEURRES<b id="oth-decoys"></b></span></div><div class="oth-foot-msg"><div id="oth-message" aria-live="polite"></div><small id="oth-controls">ZQSD / WASD · Maj courir · C s’accroupir · E agir · F flamme · R leurre · L lampe · H soin</small></div><div class="oth-presence" id="oth-presence">AUCUN CONTACT</div></footer><section class="oth-title" aria-label="Menu de la chronique"><div class="oth-title-content"><p class="oth-franchise">ALIEN</p><p class="eyebrow">CHRONIQUE DU MARION · LV-178</p><h1>HORS<br>DES OMBRES</h1><p class="subtitle">LA SORTIE DES PROFONDEURS</p><p class="tagline">Le secours est arrivé.<br>Ce n’est pas forcément une bonne nouvelle.</p><div class="oth-title-actions"><button class="primary" data-action="continue">${cached?'Reprendre la chronique':'Entrer dans le Marion'}</button><button data-panel="pause">Commandes & réglages</button>${cached?'<button data-action="new">Nouvelle chronique</button>':''}</div></div><div class="oth-title-location">DSMO MARION<br>ORBITE DE LV-178<br>RELAIS LOCAL SEULEMENT</div><div class="oth-title-footer"><span>TANTALUS FRONTIER / ARCHIVES</span><span>UNE ADAPTATION NON OFFICIELLE DE L’ŒUVRE DE TIM LEBBON</span></div></section><dialog class="oth-dialog" aria-labelledby="oth-dialog-title"></dialog>`;
+  const canvas=root.querySelector('canvas'),title=root.querySelector('.oth-title'),dialog=root.querySelector('dialog'),el=id=>root.querySelector('#'+id);
+  const setText=(id,value)=>{const node=el(id);if(node&&node.textContent!==String(value))node.textContent=value;};
+- function save(){if(state.dead)return;try{localStorage.setItem(DATA.saveKey,serialize(state));state.dirty=false;saveWarning=false;}catch{saveWarning=true;state.dirty=false;}}
+- function close(){if(dialog.open)dialog.close();panel='';keys.clear();if(mode==='playing')canvas.focus({preventScroll:true});}
++ function save(){if(state.dead)return;saveClock=0;try{localStorage.setItem(DATA.saveKey,serialize(state));state.dirty=false;saveWarning=false;}catch{saveWarning=true;state.dirty=false;}}
++ function close(){state.reading=null;if(dialog.open)dialog.close();panel='';keys.clear();if(mode==='playing')canvas.focus({preventScroll:true});}
+  function show(type,body,eyebrow='CARNET DE BORD'){
+-  keys.clear();panel=type;dialog.innerHTML=`<header><div><p class="eyebrow">${esc(eyebrow)}</p><h2 id="oth-dialog-title">${esc(({pause:'À l’abri, pour un instant',map:'Plan du site',codex:'Carnet du Marion',journal:'Dernières transmissions',puzzle:'Commande locale',dead:'Contact perdu',end:'Dernière transmission',new:'Recommencer la chronique'})[type]||type)}</h2></div>${!['dead','end','puzzle'].includes(type)?'<button data-close aria-label="Fermer">×</button>':''}</header><div class="dialog-body">${body}</div>`;
++  keys.clear();panel=type;dialog.innerHTML=`<header><div><p class="eyebrow">${esc(eyebrow)}</p><h2 id="oth-dialog-title">${esc(({pause:'À l’abri, pour un instant',map:'Plan du site',codex:'Carnet du Marion',journal:'Dernières transmissions',puzzle:'Commande locale',dead:'Contact perdu',end:'Dernière transmission',new:'Recommencer la chronique',reading:'Document de bord',crew:'Équipage du Marion'})[type]||type)}</h2></div>${!['dead','end','puzzle'].includes(type)?'<button data-close aria-label="Fermer">×</button>':''}</header><div class="dialog-body">${body}</div>`;
+   if(!dialog.open)dialog.showModal();dialog.scrollTop=0;
+  }
+  function pause(){
+   const controls=[['ZQSD / WASD / flèches','Marcher · profondeur'],['Maj / C','Courir / s’accroupir'],['E maintenu','Utiliser une commande'],['F / R','Flamme / leurre'],['L / H','Lampe / soin'],['M / J / Échap','Plan / carnet / pause']];
+-  show('pause',`<p>La simulation est arrêtée pendant la lecture du carnet. Les travées se parcourent en profondeur ; les couloirs étroits gardent une vue latérale.</p><div class="controls-grid">${controls.map(([k,t])=>`<div class="control"><kbd>${k}</kbd><span>${t}</span></div>`).join('')}</div><div class="field"><label for="oth-difficulty">Conditions de survie</label><select id="oth-difficulty"><option value="normal" ${state.difficulty==='normal'?'selected':''}>Survie</option><option value="assisted" ${state.difficulty==='assisted'?'selected':''}>Exploration accompagnée</option></select></div><div class="field"><label for="oth-sound">Ambiance et signaux sonores</label><input id="oth-sound" type="checkbox" ${state.sound?'checked':''}></div><p class="hint">Le son est facultatif. Aucun dialogue enregistré ni extrait sonore des films n’est utilisé. Soins restants : ${state.player.kits}.</p><div class="button-row"><button class="primary" data-action="resume">${mode==='title'?'Entrer dans le Marion':'Reprendre'}</button><button data-action="save">Sauvegarder</button><button data-action="export-save">Exporter le carnet</button><button data-action="import-save">Importer un carnet</button><input type="file" id="oth-import" accept=".json,application/json" hidden><button data-panel="journal">Journal</button><button data-action="title">Menu principal</button><button data-action="exit">Retour au Tantalus</button></div>`,'SYSTÈMES DE BORD');
++  show('pause',`<p>La simulation est arrêtée pendant la lecture du carnet. Les travées se parcourent en profondeur ; les couloirs étroits gardent une vue latérale.</p><div class="controls-grid">${controls.map(([k,t])=>`<div class="control"><kbd>${k}</kbd><span>${t}</span></div>`).join('')}</div><div class="field"><label for="oth-difficulty">Conditions de survie</label><select id="oth-difficulty"><option value="normal" ${state.difficulty==='normal'?'selected':''}>Survie</option><option value="assisted" ${state.difficulty==='assisted'?'selected':''}>Exploration accompagnée</option></select></div><div class="field"><label for="oth-sound">Ambiance et signaux sonores</label><input id="oth-sound" type="checkbox" ${state.sound?'checked':''}></div><p class="hint">Les interventions de maintenance conservent leurs réglages lorsque vous fermez le panneau. Le son est facultatif. Aucun dialogue enregistré ni extrait sonore des films n’est utilisé. Soins restants : ${state.player.kits}.</p><div class="button-row"><button class="primary" data-action="resume">${mode==='title'?'Entrer dans le Marion':'Reprendre'}</button><button data-action="save">Sauvegarder</button><button data-action="export-save">Exporter le carnet</button><button data-action="import-save">Importer un carnet</button><input type="file" id="oth-import" accept=".json,application/json" hidden><button data-panel="journal">Journal</button><button data-action="title">Menu principal</button><button data-action="exit">Retour au Tantalus</button></div>`,'SYSTÈMES DE BORD');
+  }
+  function map(){
+   const o=currentObjective(state),path=o?route(state,o.room):[];
+@@ -26,18 +26,31 @@
+   show('map',`<div class="oth-map-summary">${summary}</div>${['marion','narcissus','samson','surface','mine','derelict'].map(zone=>`<section class="oth-map-zone"><h3>${({marion:'DSMO MARION',narcissus:'NARCISSUS',samson:'SAMSON',surface:'LV-178 / SURFACE',mine:'LV-178 / SOUS-SOL',derelict:'ÉPAVE ENFOUIE'})[zone]}</h3><div class="oth-map-rooms">${DATA.rooms.filter(r=>r.zone===zone).map(r=>{const known=state.visited.includes(r.id)||o?.room===r.id;return `<div class="oth-map-room ${r.id===state.room?'current':''} ${known?'':'unknown'}">${r.id===state.room?'◆ ':''}${known?esc(r.name):'Secteur non visité'}<small>${esc(r.deck)}${o?.room===r.id?' · OBJECTIF':''}</small>${known?`<small>${r.portals.map(p=>`${open.has(p.edge)?'↔':'×'} ${esc(ROOM[p.target].name)}`).join('<br>')}</small>`:''}</div>`;}).join('')}</div></section>`).join('')}<p class="hint">Le plan n’offre pas de voyage rapide. Les passages fermés dépendent de l’état de la mission.</p>`,'NAVIGATION LOCALE');
+  }
+  function codex(){
+-  show('codex',`<div class="oth-codex-tools"><input id="oth-search" type="search" aria-label="Rechercher dans le carnet" placeholder="Un lieu, un équipement, une trace…"><select id="oth-category" aria-label="Catégorie"><option value="">Tout le carnet</option>${['Équipage','Lieux','Matériel','Survie'].map(c=>`<option>${c}</option>`).join('')}</select></div><div class="oth-codex-grid" id="oth-codex-list"></div>`,'ARCHIVES PERSONNELLES');renderCodex();
++  show('codex',`<p class="hint">${state.records.length} / ${DATA.interactables.filter(a=>a.kind==='archive').length} transcriptions retrouvées. Les documents se récupèrent sur place.</p><div class="oth-codex-tools"><input id="oth-search" type="search" aria-label="Rechercher dans le carnet" placeholder="Un lieu, un équipement, une trace…"><select id="oth-category" aria-label="Catégorie"><option value="">Tout le carnet</option>${['Équipage','Lieux','Matériel','Survie','Traces'].map(c=>`<option>${c}</option>`).join('')}</select></div><div class="oth-codex-grid" id="oth-codex-list"></div>`,'ARCHIVES PERSONNELLES');renderCodex();
+  }
+- function renderCodex(){const search=el('oth-search')?.value.toLocaleLowerCase('fr')||'',cat=el('oth-category')?.value||'';const entries=DATA.codex.filter(e=>(!e.unlockRoom||state.visited.includes(e.unlockRoom))&&(!cat||e.category===cat)&&(!search||[e.title,e.summary,e.text].join(' ').toLocaleLowerCase('fr').includes(search)));el('oth-codex-list').innerHTML=entries.length?entries.map(e=>`<article class="oth-codex-card"><small>${esc(e.category.toUpperCase())}</small><h3>${esc(e.title)}</h3><p>${esc(e.summary)}</p><p class="detail">${esc(e.text)}</p></article>`).join(''):'<p>Aucune note ne correspond à cette recherche.</p>';}
++ function renderCodex(){const search=el('oth-search')?.value.toLocaleLowerCase('fr')||'',cat=el('oth-category')?.value||'';const entries=DATA.codex.filter(e=>(!e.unlockRoom||state.visited.includes(e.unlockRoom))&&(!e.unlockRecord||state.records.includes(e.unlockRecord))&&(!cat||e.category===cat)&&(!search||[e.title,e.summary,e.text].join(' ').toLocaleLowerCase('fr').includes(search)));el('oth-codex-list').innerHTML=entries.length?entries.map(e=>`<article class="oth-codex-card"><small>${esc(e.category.toUpperCase())}</small><h3>${esc(e.title)}</h3><p>${esc(e.summary)}</p><p class="detail">${esc(e.text)}</p></article>`).join(''):'<p>Aucune note ne correspond à cette recherche.</p>';}
++ function crew(){
++  const lost=new Set(DATA.storyEvents.filter(e=>e.at<=state.completed.length).flatMap(e=>e.lost||[])),hurt=new Set(DATA.storyEvents.filter(e=>e.at<=state.completed.length).flatMap(e=>e.injured||[]));
++  const names={jordan:'Lucy Jordan',hoop:'Chris « Hoop » Hooper',ripley:'Ellen Ripley',baxter:'Josh Baxter',kasyanov:'Kasyanov',sneddon:'Karen Sneddon',lachance:'Lachance',garcia:'Garcia',welford:'Welford',powell:'Powell'};
++  show('crew',`<p>Derniers contacts confirmés par le carnet. Une absence de signal ne confirme pas une position.</p><div class="oth-crew-grid">${Object.entries(names).map(([id,name])=>{const at=DATA.crewPlacements.find(c=>c.character===id&&c.start<=state.completed.length&&state.completed.length<c.end),dead=lost.has(id);return `<article class="crew-card ${dead?'lost':''}"><span class="crew-monogram">${esc(name.split(' ').pop().slice(0,2).toUpperCase())}</span><div><h3>${esc(name)}</h3><small>${dead?'CONTACT PERDU':hurt.has(id)?'BLESSÉ':id===DATA.chapters[state.chapter].actor?'VOUS':'DERNIER CONTACT'}</small><p>${dead?'Le carnet conserve les derniers échanges.':at?esc(ROOM[at.room].name):'Position non confirmée.'}</p></div></article>`;}).join('')}</div>`,'PERSONNEL EMBARQUÉ');
++ }
++ function workPanel(){
++  const p=state.puzzle;if(!p)return;let body='';
++  if(!p.type)body=`<div class="choices">${p.choices.map(ch=>`<button data-choice="${esc(ch.id)}">${esc(ch.text)}</button>`).join('')}</div>`;
++  else if(p.type==='routing')body=`<div class="work-plaque">PLAQUE LOCALE <strong>${p.target.map(v=>String.fromCharCode(65+v)).join(' / ')}</strong></div><div class="work-routing">${p.progress.values.map((v,i)=>`<div class="work-switch"><small>${esc(p.labels[i])}</small><button data-choice="rotate:${i}" aria-label="Tourner ${esc(p.labels[i])}"><span>${String.fromCharCode(65+v)}</span><i>↻</i></button><div class="work-wire ${v===p.target[i]?'connected':''}"></div></div>`).join('')}</div><button class="primary" data-choice="commit">Engager le contacteur</button>`;
++  else if(p.type==='sequence')body=`<ol class="work-sequence">${p.sequence.map((id,i)=>`<li class="${i<p.progress.index?'done':i===p.progress.index?'active':''}"><span>${String(i+1).padStart(2,'0')}</span>${esc(p.labelsText[id])}</li>`).join('')}</ol><div class="work-commands">${[...p.sequence].sort().map(id=>`<button data-choice="${id}">${esc(p.labelsText[id])}</button>`).join('')}</div>`;
++  else body=`<div class="work-plaque">${p.type==='pressure'?'ZONE DE PRESSION':'FRÉQUENCE REPÈRE'} <strong>${p.target} ± ${p.tolerance}</strong></div><div class="work-gauge"><span class="safe-zone" style="left:${p.target-p.tolerance}%;width:${p.tolerance*2}%"></span><span class="gauge-needle" style="left:${p.progress.value}%"></span>${Array.from({length:11},(_,i)=>`<i style="left:${i*10}%">${i*10}</i>`).join('')}</div><p class="gauge-value">${p.progress.value} <small>${p.type==='pressure'?'pression locale':'porteuse'}</small></p><div class="work-commands"><button data-choice="minus">− 5</button><button data-choice="plus">+ 5</button><button class="primary" data-choice="commit">${p.type==='pressure'?'Verrouiller':'Transmettre'}</button></div>`;
++  show('puzzle',`<p>${esc(p.prompt)}</p>${body}<p class="work-error" role="status">${esc(p.error||'')}</p><p class="hint">Échap revient à la salle. Vos réglages sont conservés ; aucune pénalité de lecture.</p>`,p.title.toUpperCase());
++ }
+  function journal(){show('journal',state.journal.length?state.journal.slice().reverse().map(j=>`<div class="oth-journal-entry"><small>${esc(DATA.chapters[j.chapter].title)}</small><p>${esc(j.text)}</p></div>`).join(''):'<p>Le carnet attend votre première intervention.</p>','TRANSMISSIONS');}
+- function openPanel(type){if(type==='pause')pause();if(type==='map')map();if(type==='codex')codex();if(type==='journal')journal();}
++ function openPanel(type){if(type==='pause')pause();if(type==='map')map();if(type==='codex')codex();if(type==='journal')journal();if(type==='crew')crew();}
+  function begin(){startAudio();mode='playing';title.hidden=true;close();state.noticeTime=6;canvas.focus({preventScroll:true});}
+  function changeState(s){state=s;lastObjective='';state.dirty=true;}
+  function newGame(){if(state.completed.length){show('new','<p>La sauvegarde de cette chronique sera remplacée. Les données de Tantalus Frontier et des autres archives ne sont pas modifiées.</p><div class="button-row"><button data-close>Conserver la progression</button><button class="primary" data-action="confirm-new">Recommencer</button></div>');}else{changeState(createState(state.difficulty));begin();}}
+  root.addEventListener('click',event=>{
+   const b=event.target.closest('button');if(!b)return;
+   if(b.hasAttribute('data-close')){close();return;}if(b.dataset.panel){openPanel(b.dataset.panel);return;}
+-  if(b.dataset.choice){resolvePuzzle(state,b.dataset.choice);close();save();return;}
++  if(b.dataset.choice){resolvePuzzle(state,b.dataset.choice);if(state.puzzle)workPanel();else close();save();return;}
+   const a=b.dataset.action;
+   if(a==='export-save'){const blob=new Blob([serialize(state)],{type:'application/json'});const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='CARNET_MARION.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),2000);}
+   if(a==='import-save')el('oth-import')?.click();
+@@ -46,7 +59,7 @@
+   if(a==='confirm-new'){changeState(createState(state.difficulty));save();begin();}
+   if(a==='save'){save();const p=dialog.querySelector('.hint');if(p)p.textContent=saveWarning?'La sauvegarde locale est indisponible. Gardez cet onglet ouvert.':'Le carnet de bord a été sauvegardé.';}
+   if(a==='title'){save();mode='title';title.hidden=false;close();}
+-  if(a==='retry'){const next=readSave()||createState(state.difficulty);next.player.hp=Math.max(70,next.player.hp);next.dead=false;next.invuln=3;changeState(next);begin();}
++  if(a==='retry'){let next=checkpoint?restore(checkpoint):null;try{next=next||restore(localStorage.getItem(DATA.saveKey+':checkpoint-v2'));}catch{}next=next||readSave()||createState(state.difficulty);next.player.hp=Math.max(70,next.player.hp);next.dead=false;next.invuln=3;changeState(next);begin();}
+   if(a==='exit'){save();const u=new URL(location.href);if(u.searchParams.get('from')==='tantalus')location.href='/index.html';else{mode='title';title.hidden=false;close();}}
+  });
+  root.addEventListener('change',async event=>{if(event.target.id==='oth-import'){const file=event.target.files?.[0];if(!file)return;const restored=file.size<=180000?restore(await file.text()):null;if(!restored){const hint=dialog.querySelector('.hint');if(hint)hint.textContent='Ce carnet est invalide. La progression actuelle est conservée.';return;}changeState(restored);save();begin();return;}if(event.target.id==='oth-difficulty'){state.difficulty=event.target.value;save();}if(event.target.id==='oth-sound'){state.sound=event.target.checked;startAudio();save();}if(event.target.id==='oth-category')renderCodex();});
+@@ -60,7 +73,7 @@
+  }
+  function keyUp(e){keys.delete(e.key.toLowerCase());}
+  window.addEventListener('keydown',keyDown);window.addEventListener('keyup',keyUp);
+- window.addEventListener('blur',()=>{keys.clear();if(mode==='playing'&&!dialog.open&&!state.dead&&!state.finished)pause();});
++ const onBlur=()=>{keys.clear();if(mode==='playing'&&!dialog.open&&!state.dead&&!state.finished)pause();};window.addEventListener('blur',onBlur);
+  for(const b of root.querySelectorAll('[data-touch]')){
+   b.addEventListener('pointerdown',e=>{e.preventDefault();if(mode!=='playing'||dialog.open)return;b.setPointerCapture(e.pointerId);keys.add(b.dataset.touch);});
+   for(const name of ['pointerup','pointercancel','lostpointercapture'])b.addEventListener(name,()=>keys.delete(b.dataset.touch));
+@@ -69,21 +82,21 @@
+  function startAudio(){if(!state.sound)return;try{if(!audio)audio=new(window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume().catch(()=>{});}catch{state.sound=false;}}
+  function soundTick(danger){if(!state.sound||mode!=='playing'||dialog.open||!audio)return;const now=audio.currentTime;if(now-lastSound<(danger?.75:4))return;lastSound=now;const oscillator=audio.createOscillator(),gain=audio.createGain();oscillator.type='sine';oscillator.frequency.value=danger?390:62;gain.gain.setValueAtTime(0,now);gain.gain.linearRampToValueAtTime(danger?.014:.012,now+.04);gain.gain.exponentialRampToValueAtTime(.0001,now+(danger?.18:.9));oscillator.connect(gain);gain.connect(audio.destination);oscillator.start(now);oscillator.stop(now+1);}
+  function readout(){const r=ROOM[state.room],o=currentObjective(state),c=DATA.chapters[state.chapter];setText('oth-ship',({marion:'DSMO MARION',narcissus:'NARCISSUS',samson:'SAMSON',surface:'LV-178',mine:'LV-178',derelict:'ÉPAVE ENFOUIE'})[r.zone]);setText('oth-roomcode',r.deck+' · '+r.name.toUpperCase());setText('oth-chapter',`${String(state.chapter+1).padStart(2,'0')} / ${String(DATA.chapters.length).padStart(2,'0')}  —  ${c.title.toUpperCase()}  ·  ${c.actor==='ripley'?'RIPLEY':'HOOP'}`);setText('oth-goal',o?.label||'Transmission émise');setText('oth-hp',Math.ceil(state.player.hp));setText('oth-fuel',Math.floor(state.player.fuel));setText('oth-decoys',String(state.player.decoys).padStart(2,'0'));
+-  let hint=state.noticeTime>0?state.notice:o?.hint||'';if(state.flags.cellCarried&&state.noticeTime<=0)hint='Cellule portée · sprint indisponible. '+hint;if(saveWarning)hint='Sauvegarde locale indisponible. '+hint;setText('oth-message',hint);
++  let hint=state.noticeTime>0?state.notice:o?.hint||'';if(state.story){const ev=DATA.storyEvents.find(e=>e.id===state.story.id);if(ev)hint=ev.speaker+' — '+ev.text;}if(state.flags.carryRipley)hint='Ripley portée · pas de sprint ni de flamme. '+hint;if(state.flags.cellCarried&&state.noticeTime<=0)hint='Cellule portée · sprint indisponible. '+hint;if(saveWarning)hint='Sauvegarde locale indisponible. '+hint;setText('oth-message',hint);
+   const es=roomWorld(state).enemies;const danger=es.some(e=>e.state==='hunt'&&e.stun<=0);const n=es.reduce((m,e)=>Math.min(m,Math.abs(e.x-state.player.x)),Infinity);
+   setText('oth-presence',danger?'CONTACT PROCHE':n<650?'BRUIT DANS LA SALLE':'AUCUN CONTACT');el('oth-presence').classList.toggle('danger',danger);soundTick(danger);
+-  if(o?.id!==lastObjective){lastObjective=o?.id||'';root.dataset.objective=lastObjective;keys.delete('e');}
++  if(o?.id!==lastObjective){lastObjective=o?.id||'';root.dataset.objective=lastObjective;keys.delete('e');if(!state.dead){checkpoint=serialize(state);try{localStorage.setItem(DATA.saveKey+':checkpoint-v2',checkpoint);}catch{}}}
+   root.dataset.room=state.room;root.dataset.chapter=String(state.chapter);root.dataset.completed=String(state.completed.length);
+  }
+  function tick(now){frame=requestAnimationFrame(tick);const dt=last?Math.min(.06,(now-last)/1000):0;last=now;const controls=input();
+-  if(mode==='playing'&&!dialog.open){step(state,controls,dt);if(state.puzzle){const p=state.puzzle;show('puzzle',`<p>${esc(p.prompt)}</p><div class="choices">${p.choices.map(ch=>`<button data-choice="${esc(ch.id)}">${esc(ch.text)}</button>`).join('')}</div><p class="hint">La lecture est en pause. Échap annule la manipulation.</p>`,p.title.toUpperCase());}
++  if(mode==='playing'&&!dialog.open){step(state,controls,dt);if(state.puzzle)workPanel();if(state.reading){const note=state.reading;show('reading',note.lines?note.lines.map(([who,line])=>`<div class="oth-dialogue-line"><small>${esc(who)}</small><p>${esc(line)}</p></div>`).join(''):`<p class="record-body">${esc(note.body)}</p>`,note.title.toUpperCase());setText('oth-dialog-title',note.title);}
+    if(state.dead&&panel!=='dead'){show('dead','<p>La liaison a été interrompue. Reprenez au dernier point enregistré.</p><div class="button-row"><button class="primary" data-action="retry">Reprendre au point de sauvegarde</button></div>','SIGNAL INTERROMPU');}
+    if(state.finished&&panel!=='end'){save();show('end',`<p>Le Narcissus s’éloigne. À bord du Samson, Hoop émet son appel de détresse.</p><p>Aucune réponse ne vient clore cette transmission.</p><div class="oth-map-summary">${state.completed.length} interventions enregistrées<br>${state.visited.length} lieux parcourus<br>${Math.floor(state.elapsed/60)} minutes dans la chronique</div><p class="hint">Le carnet conserve les derniers échanges. Aucun relais ne confirme encore la réception de l’appel.</p><div class="button-row"><button data-panel="journal">Relire le journal</button><button class="primary" data-action="title">Menu principal</button></div>`,'FIN DE LA CHRONIQUE');}
+   }
+-  if(state.dirty&&!state.dead)save();fitCanvas(canvas);draw(canvas,state,{menu:mode==='title',moving:mode==='playing'&&!dialog.open&&(controls.x||controls.y)});readout();
++  saveClock+=dt;if((state.dirty||saveClock>=5)&&!state.dead&&mode==='playing')save();fitCanvas(canvas);draw(canvas,state,{menu:mode==='title',moving:mode==='playing'&&!dialog.open&&(controls.x||controls.y)});readout();
+  }
+- save();readout();frame=requestAnimationFrame(tick);new ResizeObserver(()=>fitCanvas(canvas)).observe(canvas);
++ save();readout();frame=requestAnimationFrame(tick);const observer=new ResizeObserver(()=>fitCanvas(canvas));observer.observe(canvas);const onVisibility=()=>{if(document.hidden)onBlur();};document.addEventListener('visibilitychange',onVisibility);
+  window.addEventListener('beforeunload',save);
+  if(new URL(location.href).searchParams.get('qa')==='1'||window.__OTH_TEST_CONTEXT===true)window.__OTH_QA={get state(){return state;},replace(s){changeState(s);close();begin();},step(i,dt){return step(state,i,dt);},pause(){pause();},close,begin,save,get mode(){return mode;}};
+- return {getState:()=>serialize(state),destroy(){cancelAnimationFrame(frame);window.removeEventListener('keydown',keyDown);window.removeEventListener('keyup',keyUp);audio?.close();root.innerHTML='';}};
++ return {getState:()=>serialize(state),destroy(){cancelAnimationFrame(frame);observer.disconnect();window.removeEventListener('beforeunload',save);window.removeEventListener('blur',onBlur);document.removeEventListener('visibilitychange',onVisibility);window.removeEventListener('keydown',keyDown);window.removeEventListener('keyup',keyUp);audio?.close();root.innerHTML='';}};
+ }
+--- v0.1/tools/install.mjs
++++ v0.2/tools/install.mjs
+@@ -10,7 +10,7 @@
+ const payload=['oth-data.js','oth-engine.js','oth-render.js','oth-ui.css','oth-ui.js','oth-bridge.js'].map(p=>'src/oth-v1/'+p).concat('dlc/alien-hors-des-ombres/index.html');
+ async function exists(p){try{await fs.lstat(p);return true;}catch(e){if(e.code==='ENOENT')return false;throw e;}}
+ async function safe(root,relative){const full=path.resolve(root,relative);if(!full.startsWith(root+path.sep))throw new Error('Chemin hors du projet');let at=root;for(const part of relative.split('/')){at=path.join(at,part);if(await exists(at)){if((await fs.lstat(at)).isSymbolicLink())throw new Error('Lien symbolique refusé : '+relative);}}return full;}
+-export async function install(rootInput,{remove=false,check=false}={}){
++export async function install(rootInput,{remove=false,check=false,upgrade=false}={}){
+  const root=await fs.realpath(rootInput);if(root===source)throw new Error('Choisissez une copie de Tantalus Frontier, pas le dossier du DLC.');
+  const packagePath=await safe(root,'package.json'),indexPath=await safe(root,'index.html');
+  const pkg=JSON.parse(await fs.readFile(packagePath,'utf8'));if(pkg.name!=='aliens-tantalus-frontier')throw new Error('Le dossier cible ne porte pas le nom de projet attendu.');
+@@ -20,7 +20,21 @@
+   const journal=JSON.parse(await fs.readFile(journalPath,'utf8'));
+   if(sha(index)!==journal.indexAfter)throw new Error('index.html a changé depuis l’installation. Réconciliez les modifications avant de retirer le DLC.');
+   for(const p of payload){const file=await safe(root,p);if(!(await exists(file))||sha(await fs.readFile(file))!==journal.files[p])throw new Error('Un fichier du DLC a changé : '+p);}
+-  if(!remove)return {ok:true,alreadyInstalled:true,files:payload.length,hostVersion:pkg.version};
++  if(upgrade&&!remove){
++   const updates=new Map(),prior=new Map();for(const p of payload){const bytes=await fs.readFile(path.join(source,p));updates.set(p,bytes);prior.set(p,await fs.readFile(await safe(root,p)));}
++   if([...updates].every(([p,b])=>sha(b)===journal.files[p]))return {ok:true,alreadyCurrent:true,version:'0.2.0'};
++   if(check)return {ok:true,upgradeAvailable:true,version:'0.2.0',files:payload.length};
++   const backup=await safe(root,backupDir+'/before-v02');if(await exists(backup))throw new Error('Une sauvegarde before-v02 existe déjà. Aucune écriture.');
++   await fs.mkdir(backup,{recursive:true});
++   try{
++    for(const [p,b] of prior){const dest=path.join(backup,p);await fs.mkdir(path.dirname(dest),{recursive:true});await fs.writeFile(dest,b,{flag:'wx'});}
++    await fs.writeFile(path.join(backup,'installation.json'),JSON.stringify(journal,null,2),{flag:'wx'});
++    for(const [p,b] of updates)await fs.writeFile(await safe(root,p),b);
++    await fs.writeFile(journalPath,JSON.stringify({...journal,version:'0.2.0',files:Object.fromEntries([...updates].map(([p,b])=>[p,sha(b)])),upgradeBackup:backupDir+'/before-v02'},null,2));
++    return {ok:true,upgraded:true,version:'0.2.0',files:payload.length};
++   }catch(e){for(const [p,b] of prior)await fs.writeFile(await safe(root,p),b);await fs.writeFile(journalPath,JSON.stringify(journal,null,2));await fs.rm(backup,{recursive:true,force:true});throw e;}
++  }
++  if(!remove)return {ok:true,alreadyInstalled:true,files:payload.length,hostVersion:pkg.version,version:journal.version||'0.1.0',upgradeCommand:'--upgrade'};
+   const original=await fs.readFile(await safe(root,backupDir+'/index.before.html'),'utf8');if(sha(original)!==journal.indexBefore)throw new Error('Sauvegarde index invalide');
+   if(!check){await fs.writeFile(indexPath,original);for(const p of payload)await fs.unlink(await safe(root,p));await fs.unlink(journalPath);await fs.unlink(path.join(root,backupDir,'index.before.html'));}
+   return {ok:true,removed:!check,files:payload.length};
+@@ -37,13 +51,13 @@
+   await fs.writeFile(path.join(backup,'index.before.html'),index,{flag:'wx'});
+   for(const [relative,data]of bytes){const target=await safe(root,relative);await fs.mkdir(path.dirname(target),{recursive:true});await fs.writeFile(target,data,{flag:'wx'});written.push(relative);}
+   await fs.writeFile(indexPath,patched);indexWritten=true;
+-  const journal={schema:1,hostVersion:pkg.version,indexBefore:sha(index),indexAfter:sha(patched),files:Object.fromEntries([...bytes].map(([k,v])=>[k,sha(v)])),scope:'isolated-runtime-launcher-not-native-engine-merge'};
++  const journal={schema:1,version:'0.2.0',hostVersion:pkg.version,indexBefore:sha(index),indexAfter:sha(patched),files:Object.fromEntries([...bytes].map(([k,v])=>[k,sha(v)])),scope:'isolated-runtime-launcher-not-native-engine-merge'};
+   await fs.writeFile(journalPath,JSON.stringify(journal,null,2),{flag:'wx'});
+   return {ok:true,installed:true,files:payload.length,hostVersion:pkg.version,fullGameIntegrationCertified:false};
+  }catch(e){if(indexWritten&&sha(await fs.readFile(indexPath))===sha(patched))await fs.writeFile(indexPath,index);for(const p of written)await fs.unlink(path.join(root,p));throw e;}
+ }
+ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
+  const args=process.argv.slice(2),target=args.find(x=>!x.startsWith('--'));
+- if(!target){console.error('Usage : node tools/install.mjs /chemin/vers/tantalus [--check | --uninstall]');process.exitCode=2;}
+- else try{console.log(JSON.stringify(await install(target,{check:args.includes('--check'),remove:args.includes('--uninstall')}),null,2));}catch(e){console.error('Installation arrêtée : '+e.message);process.exitCode=1;}
++ if(!target){console.error('Usage : node tools/install.mjs /chemin/vers/tantalus [--check | --upgrade | --uninstall]');process.exitCode=2;}
++ else try{console.log(JSON.stringify(await install(target,{check:args.includes('--check'),remove:args.includes('--uninstall'),upgrade:args.includes('--upgrade')}),null,2));}catch(e){console.error('Installation arrêtée : '+e.message);process.exitCode=1;}
+ }
+--- v0.1/tools/serve.mjs
++++ v0.2/tools/serve.mjs
+@@ -0,0 +1,5 @@
++import http from 'node:http';import fs from 'node:fs/promises';import path from 'node:path';import {fileURLToPath} from 'node:url';
++const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'),port=Number(process.argv[2]||4173);
++if(!Number.isInteger(port)||port<1024||port>65535)throw new Error('Port attendu entre 1024 et 65535');
++const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json','.png':'image/png','.jpg':'image/jpeg','.md':'text/plain; charset=utf-8'};
++http.createServer(async(req,res)=>{try{const name=decodeURIComponent(new URL(req.url,'http://localhost').pathname),file=path.resolve(root,'.'+(name==='/'?'/JOUER_HORS_DES_OMBRES.html':name));if(!file.startsWith(root+path.sep))throw new Error('Forbidden');if(!['GET','HEAD'].includes(req.method)){res.writeHead(405);res.end();return;}const data=await fs.readFile(file);res.writeHead(200,{'Content-Type':types[path.extname(file)]||'application/octet-stream','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});res.end(req.method==='HEAD'?undefined:data);}catch{res.writeHead(404);res.end('Introuvable');}}).listen(port,'127.0.0.1',()=>console.log(`Hors des ombres : http://127.0.0.1:${port}`));

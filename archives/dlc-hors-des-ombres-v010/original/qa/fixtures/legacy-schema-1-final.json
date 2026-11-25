@@ -1,0 +1,655 @@
+{
+  "schema": 1,
+  "chapter": 15,
+  "goal": 2,
+  "room": "cockpit",
+  "player": {
+    "x": 1276.0475500000007,
+    "y": 88,
+    "hp": 78,
+    "fuel": 1,
+    "decoys": 12,
+    "kits": 5,
+    "face": 1,
+    "crouch": false
+  },
+  "difficulty": "normal",
+  "visited": [
+    "bridge",
+    "comms",
+    "junction",
+    "engineering",
+    "airlock",
+    "hangar",
+    "breach",
+    "dock",
+    "narcissus",
+    "medical",
+    "workshop",
+    "server",
+    "samson",
+    "cockpit",
+    "landing",
+    "control",
+    "lift_top",
+    "lift_bottom",
+    "haul",
+    "pump",
+    "refuge",
+    "vein",
+    "fissure",
+    "vestibule",
+    "fossils",
+    "eggs",
+    "bypass",
+    "lift_east",
+    "stores",
+    "hold"
+  ],
+  "completed": [
+    "oth-c01-o1",
+    "oth-c01-o2",
+    "oth-c01-o3",
+    "oth-c02-o1",
+    "oth-c02-o2",
+    "oth-c02-o3",
+    "oth-c03-o1",
+    "oth-c03-o2",
+    "oth-c03-o3",
+    "oth-c04-o1",
+    "oth-c04-o2",
+    "oth-c04-o3",
+    "oth-c05-o1",
+    "oth-c05-o2",
+    "oth-c05-o3",
+    "oth-c06-o1",
+    "oth-c06-o2",
+    "oth-c06-o3",
+    "oth-c07-o1",
+    "oth-c07-o2",
+    "oth-c07-o3",
+    "oth-c08-o1",
+    "oth-c08-o2",
+    "oth-c08-o3",
+    "oth-c09-o1",
+    "oth-c09-o2",
+    "oth-c09-o3",
+    "oth-c10-o1",
+    "oth-c10-o2",
+    "oth-c10-o3",
+    "oth-c11-o1",
+    "oth-c11-o2",
+    "oth-c11-o3",
+    "oth-c12-o1",
+    "oth-c12-o2",
+    "oth-c12-o3",
+    "oth-c13-o1",
+    "oth-c13-o2",
+    "oth-c13-o3",
+    "oth-c14-o1",
+    "oth-c14-o2",
+    "oth-c14-o3",
+    "oth-c15-o1",
+    "oth-c15-o2",
+    "oth-c15-o3",
+    "oth-c16-o1",
+    "oth-c16-o2",
+    "oth-c16-o3"
+  ],
+  "world": {
+    "bridge": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 0,
+      "spawned": false
+    },
+    "comms": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 3.949999999999994,
+      "spawned": false
+    },
+    "junction": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 19.800000000000146,
+      "spawned": false
+    },
+    "engineering": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 29.000000000000277,
+      "spawned": false
+    },
+    "airlock": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 51.099999999999234,
+      "spawned": false
+    },
+    "hangar": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 58.39999999999882,
+      "spawned": false
+    },
+    "breach": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 69.2999999999982,
+      "spawned": false
+    },
+    "dock": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 82.14999999999748,
+      "spawned": false
+    },
+    "narcissus": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 91.14999999999696,
+      "spawned": false
+    },
+    "medical": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 114.19999999999565,
+      "spawned": false
+    },
+    "workshop": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 139.6499999999975,
+      "spawned": false
+    },
+    "server": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 150.39999999999995,
+      "spawned": false
+    },
+    "samson": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": true,
+      "visitTime": 179.7000000000066,
+      "spawned": true
+    },
+    "cockpit": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 191.70000000000934,
+      "spawned": false
+    },
+    "landing": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 199.70000000001116,
+      "spawned": false
+    },
+    "control": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 211.05000000001374,
+      "spawned": false
+    },
+    "lift_top": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 215.20000000001468,
+      "spawned": false
+    },
+    "lift_bottom": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 222.50000000001634,
+      "spawned": false
+    },
+    "haul": {
+      "enemies": [
+        {
+          "id": "haul:adult",
+          "type": "adult",
+          "x": 661.3096757064804,
+          "y": 102.17266185570413,
+          "home": 180,
+          "state": "investigate",
+          "targetX": 1438.6640724817312,
+          "targetY": 87.99999925441719,
+          "stun": 0,
+          "cool": 0,
+          "search": 2.150000000000003,
+          "dir": 1
+        }
+      ],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 230.55000000001817,
+      "spawned": true
+    },
+    "pump": {
+      "enemies": [
+        {
+          "id": "pump:adult",
+          "type": "adult",
+          "x": 2311.25,
+          "y": 110,
+          "home": 2240,
+          "state": "patrol",
+          "targetX": 2319.874490051866,
+          "targetY": 110,
+          "stun": 0,
+          "cool": 0,
+          "search": 0,
+          "dir": 1
+        }
+      ],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 242.65000000002092,
+      "spawned": true
+    },
+    "refuge": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 255.15000000002377,
+      "spawned": false
+    },
+    "vein": {
+      "enemies": [
+        {
+          "id": "vein:adult",
+          "type": "adult",
+          "x": 2415.5666149655285,
+          "y": 103.89212544648142,
+          "home": 2480,
+          "state": "recoil",
+          "targetX": 2513.5666149655285,
+          "targetY": 88,
+          "stun": 0.7000000000000002,
+          "cool": 0,
+          "search": 0,
+          "dir": -1
+        }
+      ],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 265.35000000002606,
+      "spawned": true
+    },
+    "fissure": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 276.75000000002865,
+      "spawned": false
+    },
+    "vestibule": {
+      "enemies": [
+        {
+          "id": "vestibule:adult",
+          "type": "adult",
+          "x": 2153.3142244575924,
+          "y": 103.97328283911492,
+          "home": 2400,
+          "state": "recoil",
+          "targetX": 1992.3142244575924,
+          "targetY": 88,
+          "stun": 1.750000000000001,
+          "cool": 0,
+          "search": 0.5000000000000036,
+          "dir": -1
+        }
+      ],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 285.20000000003057,
+      "spawned": true
+    },
+    "fossils": {
+      "enemies": [
+        {
+          "id": "fossils:adult",
+          "type": "adult",
+          "x": 2181.072669135369,
+          "y": 103.81451663088976,
+          "home": 2220,
+          "state": "recoil",
+          "targetX": 2261.072669135369,
+          "targetY": 88,
+          "stun": 0.4,
+          "cool": 0,
+          "search": 1.4000000000000044,
+          "dir": -1
+        }
+      ],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 295.70000000003296,
+      "spawned": true
+    },
+    "eggs": {
+      "enemies": [
+        {
+          "id": "eggs:adult",
+          "type": "adult",
+          "x": 2652.828944132178,
+          "y": 103.73601081678022,
+          "home": 2680,
+          "state": "recoil",
+          "targetX": 2476.828944132178,
+          "targetY": 88,
+          "stun": 2.0000000000000013,
+          "cool": 0,
+          "search": 0.7500000000000038,
+          "dir": -1
+        }
+      ],
+      "eggs": {
+        "eggs:prop:0": {
+          "state": "dormant",
+          "time": 0
+        },
+        "eggs:prop:2": {
+          "state": "dormant",
+          "time": 0
+        },
+        "eggs:prop:4": {
+          "state": "dormant",
+          "time": 0
+        }
+      },
+      "cleared": false,
+      "visitTime": 305.35000000003515,
+      "spawned": true
+    },
+    "bypass": {
+      "enemies": [
+        {
+          "id": "bypass:adult",
+          "type": "adult",
+          "x": 1633.6000000000008,
+          "y": 88,
+          "home": 2020,
+          "state": "recoil",
+          "targetX": 1499.6000000000008,
+          "targetY": 88,
+          "stun": 1.3000000000000007,
+          "cool": 0,
+          "search": 0.050000000000003625,
+          "dir": -1
+        }
+      ],
+      "eggs": {
+        "bypass:prop:3": {
+          "state": "dormant",
+          "time": 0
+        }
+      },
+      "cleared": false,
+      "visitTime": 317.70000000003796,
+      "spawned": true
+    },
+    "lift_east": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 327.2000000000401,
+      "spawned": false
+    },
+    "stores": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 335.60000000004203,
+      "spawned": false
+    },
+    "hold": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": true,
+      "visitTime": 399.1500000000565,
+      "spawned": true
+    }
+  },
+  "flags": {
+    "torchReady": true,
+    "liftBroken": true,
+    "cellCarried": false,
+    "cellSecured": true,
+    "ashPurged": true,
+    "narcissusReleased": true
+  },
+  "journal": [
+    {
+      "chapter": 0,
+      "text": "Le Marion ne reçoit plus les équipes au sol."
+    },
+    {
+      "chapter": 0,
+      "text": "La portée est courte. Quelqu’un doit encore pouvoir nous entendre."
+    },
+    {
+      "chapter": 0,
+      "text": "L’alimentation tient. Pour l’instant."
+    },
+    {
+      "chapter": 1,
+      "text": "La conduite du quai est isolée."
+    },
+    {
+      "chapter": 1,
+      "text": "La brèche est derrière la cloison."
+    },
+    {
+      "chapter": 1,
+      "text": "Le Samson tient encore au quai. Son intérieur n’est pas sûr."
+    },
+    {
+      "chapter": 2,
+      "text": "Le passage est alimenté."
+    },
+    {
+      "chapter": 2,
+      "text": "Jones reste ici, à l’abri."
+    },
+    {
+      "chapter": 2,
+      "text": "Nous descendrons équipés, pas armés comme une escouade."
+    },
+    {
+      "chapter": 3,
+      "text": "Le réservoir est plein. Évitez les longues rafales."
+    },
+    {
+      "chapter": 3,
+      "text": "Il manque une cellule compatible."
+    },
+    {
+      "chapter": 3,
+      "text": "La première travée est fermée."
+    },
+    {
+      "chapter": 4,
+      "text": "Le bruit l’éloigne de la rampe."
+    },
+    {
+      "chapter": 4,
+      "text": "La travée reste sous quarantaine."
+    },
+    {
+      "chapter": 4,
+      "text": "La commande locale répond."
+    },
+    {
+      "chapter": 5,
+      "text": "La route vers LV-178 est ouverte."
+    },
+    {
+      "chapter": 5,
+      "text": "Les balises dessinent encore une route."
+    },
+    {
+      "chapter": 5,
+      "text": "Le plan des galeries est lisible."
+    },
+    {
+      "chapter": 6,
+      "text": "La cage peut descendre."
+    },
+    {
+      "chapter": 6,
+      "text": "La remontée par cette cage est compromise."
+    },
+    {
+      "chapter": 6,
+      "text": "Les balises indiquent la galerie est."
+    },
+    {
+      "chapter": 7,
+      "text": "Le passage n’est plus sous pression."
+    },
+    {
+      "chapter": 7,
+      "text": "Des réserves. Pas assez pour rester."
+    },
+    {
+      "chapter": 7,
+      "text": "Une faille passe derrière la foreuse."
+    },
+    {
+      "chapter": 8,
+      "text": "La coque n’appartient pas à la concession."
+    },
+    {
+      "chapter": 8,
+      "text": "Il reste un passage entre les nervures."
+    },
+    {
+      "chapter": 8,
+      "text": "Ces restes ne sont pas humains."
+    },
+    {
+      "chapter": 9,
+      "text": "Le couloir se libère quelques instants."
+    },
+    {
+      "chapter": 9,
+      "text": "La suture de la coque mène vers la mine."
+    },
+    {
+      "chapter": 9,
+      "text": "Le passage est fermé. Il faut continuer."
+    },
+    {
+      "chapter": 10,
+      "text": "La remontée est possible par ce puits."
+    },
+    {
+      "chapter": 10,
+      "text": "La cellule est fixée au harnais."
+    },
+    {
+      "chapter": 10,
+      "text": "La cellule est prête pour le retour."
+    },
+    {
+      "chapter": 11,
+      "text": "La séquence d’abandon est armée."
+    },
+    {
+      "chapter": 11,
+      "text": "La concession n’est plus une route de repli."
+    },
+    {
+      "chapter": 11,
+      "text": "Le Marion dérive toujours."
+    },
+    {
+      "chapter": 12,
+      "text": "Quelque chose est resté à bord."
+    },
+    {
+      "chapter": 12,
+      "text": "Le leurre résonne dans le fret."
+    },
+    {
+      "chapter": 12,
+      "text": "La soute est perdue. La route vers l’infirmerie reste libre."
+    },
+    {
+      "chapter": 13,
+      "text": "Le matériel de soin est alimenté."
+    },
+    {
+      "chapter": 13,
+      "text": "Ripley doit rejoindre la navette."
+    },
+    {
+      "chapter": 13,
+      "text": "L’ordinateur ne doit plus commander les soins."
+    },
+    {
+      "chapter": 14,
+      "text": "La copie locale ne répond plus."
+    },
+    {
+      "chapter": 14,
+      "text": "La navette a de l’énergie."
+    },
+    {
+      "chapter": 14,
+      "text": "Le largage devra être manuel."
+    },
+    {
+      "chapter": 15,
+      "text": "La navette s’éloigne. Il faut rejoindre le Samson."
+    },
+    {
+      "chapter": 15,
+      "text": "La coque tient. La radio aussi."
+    },
+    {
+      "chapter": 15,
+      "text": "Le message part. Aucune réponse, pour l’instant."
+    }
+  ],
+  "elapsed": 518.3500000000763,
+  "finished": true,
+  "dead": false,
+  "flash": true,
+  "sound": false,
+  "hold": 0,
+  "portalCooldown": 0.8,
+  "invuln": 0,
+  "flame": 0,
+  "torchCooldown": 0,
+  "decoyCooldown": 0,
+  "healCooldown": 0,
+  "noise": 0,
+  "dirty": true,
+  "notice": "Transmission émise. Aucune réponse, pour l’instant.",
+  "noticeTime": 20,
+  "puzzle": null,
+  "shake": 0,
+  "decoy": null
+}
