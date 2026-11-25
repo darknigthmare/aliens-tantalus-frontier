@@ -67,7 +67,7 @@ npm run check:built
 npm run qa:dlc:avp
 ```
 
-La CI **AVP DLC integration** exécute les contrôles du menu et du bundle, l'admission, le build réel puis Chromium sur origine HTTP. Le parcours navigateur teste le bureau et le téléphone, le lancement, le déplacement réel au clavier, la pause, l'export/import, la reprise et l'isolation des profils. Un contexte séparé refuse les seules écritures AVP pour exercer le secours par export. Les doublures des tests Node et cette injection de quota sont déclarées dans les rapports.
+La CI **AVP DLC integration** exécute les contrôles du menu et du bundle, l'admission, le build réel puis Chromium sur origine HTTP. Le parcours navigateur teste le bureau et le téléphone, le lancement, le déplacement réel au clavier, la pause, l'export/import, la reprise et l'isolation des profils. Chaque contexte vierge reçoit un profil créé et validé par l'API réelle SaveSystem, puis charge normalement l'hôte avant les comparaisons octet par octet. Aucun avancement de campagne n'est injecté. Un contexte séparé refuse les seules écritures AVP pour exercer le secours par export. Les doublures des tests Node, la création du profil et cette injection de quota sont déclarées dans les rapports. Le workflow conserve le rapport et les captures navigateur pendant sept jours.
 
 La création d'une suite n'atteste pas son succès. Consulter les résultats du commit de la PR ; la validation navigateur locale a été interrompue avant exécution.
 

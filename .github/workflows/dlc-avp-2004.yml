@@ -52,3 +52,11 @@ jobs:
           ATF_PLAYWRIGHT_MODULE: ${{ runner.temp }}/avp-browser/node_modules/playwright/index.mjs
           ATF_DLC_QA_OUTPUT: ${{ runner.temp }}/avp-integration-report
         run: npm run qa:dlc:avp
+      - name: Retain expedition browser evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: avp-browser-evidence
+          path: ${{ runner.temp }}/avp-integration-report
+          retention-days: 7
+          if-no-files-found: warn

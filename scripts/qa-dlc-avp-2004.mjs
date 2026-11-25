@@ -27,8 +27,7 @@ const server = createServer(async (req, res) => {
 });
 await new Promise(resolveReady => server.listen(0, '127.0.0.1', resolveReady));
 const base = 'http://127.0.0.1:' + server.address().port;
-const browser = await chromium.launch({ headless: true,
-  ...(process.env.ATF_CHROMIUM_EXECUTABLE ? { executablePath: process.env.ATF_CHROMIUM_EXECUTABLE } : {}) });
+let browser = null;
 const checks = [];
 function check(name, condition, detail = null) {
   checks.push({ name, ok: Boolean(condition), ...(detail ? { detail } : {}) });
@@ -37,6 +36,22 @@ function check(name, condition, detail = null) {
 const nativeSnapshot = page => page.evaluate(() => Object.fromEntries(Object.keys(localStorage)
   .filter(key => key.startsWith('atf-v47-profile-')).sort().map(key => [key, localStorage.getItem(key)])));
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+// Explicit native-profile fixture: a fresh context does not persist a profile
+// merely by displaying the title. Use the real public SaveSystem API, validate
+// its stored slot, then navigate to a fresh native boot before taking snapshots.
+async function createNativeProfileFixture(page, name) {
+  await page.goto(base + '/src/dlc/avp-2004/index.html', { waitUntil: 'load', timeout: 120000 });
+  const fixture = await page.evaluate(async () => {
+    const { SaveSystem, SAVE_SCHEMA } = await import('/src/save.js');
+    const store = new SaveSystem(localStorage);
+    store.newGame(1);
+    const slot = store.listProfiles().find(candidate => candidate.profile === 1);
+    const persisted = JSON.parse(localStorage.getItem(store.key(1)));
+    return { status: slot?.status, schema: persisted?.schema, expectedSchema: SAVE_SCHEMA, profile: persisted?.profile };
+  });
+  check(name + ': native profile fixture passes real SaveSystem validation',
+    fixture.status === 'ready' && fixture.schema === fixture.expectedSchema && fixture.profile === 1, fixture);
+}
 async function openHostMenu(page) {
   await page.goto(base + '/', { waitUntil: 'domcontentloaded', timeout: 120000 });
   await page.waitForFunction(() => document.documentElement.classList.contains('title-mode'), null, { timeout: 120000 });
@@ -53,6 +68,8 @@ async function openExpedition(page) {
 }
 let fatal = null;
 try {
+  browser = await chromium.launch({ headless: true,
+    ...(process.env.ATF_CHROMIUM_EXECUTABLE ? { executablePath: process.env.ATF_CHROMIUM_EXECUTABLE } : {}) });
   for (const profile of [
     { name: 'desktop', viewport: { width: 1365, height: 900 } },
     { name: 'mobile', viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }
@@ -61,6 +78,7 @@ try {
       hasTouch: !!profile.hasTouch, reducedMotion: 'reduce', acceptDownloads: true });
     const page = await context.newPage(), errors = [];
     page.on('pageerror', error => errors.push(error.message));
+    await createNativeProfileFixture(page, profile.name);
     await openHostMenu(page);
     const before = await nativeSnapshot(page);
     check(profile.name + ': real native profile exists before launch', Object.keys(before).length > 0);
@@ -119,6 +137,7 @@ try {
     };
   });
   const page = await blocked.newPage();
+  await createNativeProfileFixture(page, 'quota');
   await openHostMenu(page);
   const before = await nativeSnapshot(page);
   await openExpedition(page);
@@ -145,9 +164,9 @@ try {
 } catch (error) {
   fatal = { message: error.message, stack: error.stack };
 } finally {
-  await browser.close();
+  await browser?.close();
   await new Promise(done => server.close(done));
-  const report = { suite: 'avp-host-browser', sourceRoot: root, method: 'Chromium on a real HTTP origin; actual menu, keyboard, navigation, export/import and notebook persistence. One isolated storage-quota fault fixture.',
+  const report = { suite: 'avp-host-browser', sourceRoot: root, method: 'Chromium on a real HTTP origin; actual host boot, menu, keyboard, navigation, export/import and notebook persistence. Each fresh browser context first receives a native profile created and validated by the real SaveSystem public API; no campaign advancement is injected. One isolated storage-quota fault fixture.',
     passed: checks.filter(check => check.ok).length, failed: checks.filter(check => !check.ok).length, checks, fatal };
   await writeFile(join(output, 'report.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify(report, null, 2));
