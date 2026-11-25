@@ -1,3 +1,4 @@
+import './verify-aliens1986-sprite-pack-admission-v115.mjs';
 import { findBuiltDevToolsPathV188, DEV_TOOLS_DEFAULT_PATH_V188 } from './build-dev-tools-v188.mjs';
 import { TitleScreenController } from '../src/title-screen-v61.js';
 import assert from 'node:assert/strict';

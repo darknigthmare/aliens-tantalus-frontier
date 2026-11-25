@@ -27,6 +27,16 @@ export const ALIENS1986_SOURCE_ONLY_FILES = Object.freeze([
   'docs/development/ALIENS_1986_GITHUB_INTEGRATION_20261125.md',
   'docs/development/ALIENS_1986_GITHUB_INTEGRATION_20261125.json',
 ]);
+export const ALIENS1986_SPRITE_REVIEW_ROOT_V115 = 'docs/development/aliens-1986-sprites-v115';
+export const ALIENS1986_SPRITE_SOURCE_ONLY_FILES_V115 = Object.freeze([
+  'docs/development/ALIENS_1986_SPRITE_INVENTORY_V115.json',
+  'docs/development/ALIENS_1986_SPRITE_INVENTORY_V115.md',
+  'docs/development/ALIENS_1986_RASTER_INTEGRATION_REVIEW_V115.md',
+  ALIENS1986_SPRITE_REVIEW_ROOT_V115 + '/index.html',
+  ALIENS1986_SPRITE_REVIEW_ROOT_V115 + '/manifest.json',
+  ALIENS1986_SPRITE_REVIEW_ROOT_V115 + '/README.md',
+  'scripts/verify-aliens1986-sprite-pack-admission-v115.mjs',
+]);
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const validPath = path => typeof path === 'string' && path.length > 0
   && !/[\\\x00-\x1f]/.test(path) && !path.startsWith('/')
@@ -78,6 +88,9 @@ export function aliens1986RecoveryFile(path) {
 /** null delegates unrelated modules to the established release policy. */
 export function publicAliens1986DlcPathAdmission(path, { directory = false, built = false } = {}) {
   if (!validPath(path)) return false;
+  if (ALIENS1986_SPRITE_SOURCE_ONLY_FILES_V115.includes(path)) return !built && !directory;
+  if (['docs', 'docs/development', ALIENS1986_SPRITE_REVIEW_ROOT_V115].includes(path)) return !built && directory;
+  if (path.startsWith(ALIENS1986_SPRITE_REVIEW_ROOT_V115 + '/')) return false;
   if (ALIENS1986_SOURCE_ONLY_FILES.includes(path)) return !built && !directory;
   if (path === 'dlc' || path === ALIENS1986_RUNTIME_ROOT) return directory;
   if (path.startsWith(ALIENS1986_RUNTIME_ROOT + '/')) return !directory && ALIENS1986_RUNTIME_FILES.includes(path);
