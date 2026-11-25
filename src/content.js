@@ -14,12 +14,20 @@ import { APC_CONVOY_CAMPAIGN_V121 } from './apc-convoy-state-v121.js';
 import { C12_HORDE_CAMPAIGN_V121 } from './c12-horde-state-v121.js';
 import { ARCHIVE_RELAY_CAMPAIGN_V122 } from './archive-relay-state-v122.js';
 import { NEW_SPECIAL_CAMPAIGNS_V131, validateSpecialOperationsV131 } from './special-operations-v131.js';
+import { STATION_CAMPAIGNS_V188 } from './station-asphodele-v188.js';
+import { ASPHODELE_CAMPAIGNS_V188 } from './asphodele-missions-v188.js';
+import { ACT5_CAMPAIGNS_V188 } from './story-act5-v188.js';
+import { COLONY_CAMPAIGNS_V188 } from './colony-missions-v188.js';
+import { ARBITER_CAMPAIGNS_V190 } from './xeno-arbiter-campaign-v190.js';
+import { QUEENS_CAMPAIGNS_V188 } from './side-campaign-queens-v188.js';
+import { FIORINA_CAMPAIGN_V114 } from './fiorina-campaign-v114.js';
 
 export * from './content-core-v50.js';
 
-export const CAMPAIGNS = Object.freeze([...buildCampaignsWithSpecialOperationsV67(buildMireCampaignsV143(CORE_CAMPAIGNS, WORLDS)), BLACK_COCOON_CAMPAIGN_V121, APC_CONVOY_CAMPAIGN_V121, C12_HORDE_CAMPAIGN_V121, ARCHIVE_RELAY_CAMPAIGN_V122, ...NEW_SPECIAL_CAMPAIGNS_V131]);
+export const CAMPAIGNS = Object.freeze([...buildCampaignsWithSpecialOperationsV67(buildMireCampaignsV143(CORE_CAMPAIGNS, WORLDS)), BLACK_COCOON_CAMPAIGN_V121, APC_CONVOY_CAMPAIGN_V121, C12_HORDE_CAMPAIGN_V121, ARCHIVE_RELAY_CAMPAIGN_V122, ...NEW_SPECIAL_CAMPAIGNS_V131, ...STATION_CAMPAIGNS_V188, ...ASPHODELE_CAMPAIGNS_V188, ...ACT5_CAMPAIGNS_V188, ...COLONY_CAMPAIGNS_V188, ...ARBITER_CAMPAIGNS_V190, ...QUEENS_CAMPAIGNS_V188, FIORINA_CAMPAIGN_V114]);
 export const CONTENT_COUNTS = Object.freeze({ ...CORE_CONTENT_COUNTS, campaigns: CAMPAIGNS.length });
-export const CONTENT_TARGETS = Object.freeze({ ...CORE_CONTENT_TARGETS, campaigns: 455 });
+// Fiorina V114 adds one native MIRE reconstruction to the 526 existing campaigns.
+export const CONTENT_TARGETS = Object.freeze({ ...CORE_CONTENT_TARGETS, campaigns: 527 }); // V188 spec 011: + the nine Arc 1 missions of « La Saison des Reines » (3 story, 3 side, 3 local contracts); V188: + the four Asphodèle station missions (spec 005), + 7 station side missions and 6 contracts (spec 007), + the four Act V missions (spec 006), + the lower-decks night mission orig-asphodele-2 (spec 007 follow-up) + 19 Port-Méridien colony missions and contracts; V190: + the six Xeno Arbiter special operations Second lot (2026-11-23): + 15 missions of Arc 2 (4 story, 4 side, 3 local contracts on Echo Basin) and Arc 3 (2 story, 2 side on TR-0) → 526.
 
 export function validateContent() {
   const core = validateCoreContent();

@@ -103,7 +103,7 @@ export function getXenoTrialsAcidEscapeV152(match, actor, body, arena) {
 }
 /** Draw in the same world transform as fighters. Borders describe the actual
  * hazard width; reduced motion keeps its warning and lifetime readable. */
-export function drawXenoTrialsAcidV152(ctx, match, arena, reducedMotion = false) {
+export function drawXenoTrialsAcidV152(ctx, match, arena, reducedMotion = false, drawDrop = null) {
   ctx.save();
   for (const pool of match.acidPoolsV152 || []) {
     if (match.tick >= pool.expiresTick) continue;
@@ -126,6 +126,9 @@ export function drawXenoTrialsAcidV152(ctx, match, arena, reducedMotion = false)
     }
   }
   ctx.fillStyle = '#cbea88';
-  for (const drop of match.acidDropsV152 || []) ctx.fillRect(drop.x - 2, arena.floor - drop.y - 3, 4, 6);
+  for (const drop of match.acidDropsV152 || []) {
+    if (typeof drawDrop === 'function' && drawDrop(ctx, drop, arena.floor)) continue;
+    ctx.fillRect(drop.x - 2, arena.floor - drop.y - 3, 4, 6);
+  }
   ctx.restore();
 }

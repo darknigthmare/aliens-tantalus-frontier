@@ -1,4 +1,7 @@
+import { colonyPreparationCrewV188 } from '../src/colony-mission-levels-v188.js';
 import test from 'node:test';
+import { deriveStoryCampaignV188, markStoryDebriefSeenV188, STORY_RELAY_CAMPAIGN_ID_V188 } from '../src/story-campaign-v188.js';
+import { campaignObjectiveLabelV188 } from '../src/mission-objective-panel-v188.js';
 import assert from 'node:assert/strict';
 import { openSync, readSync, closeSync, readFileSync } from 'node:fs';
 import { GameEngine } from '../src/game-production-runtime.js';
@@ -18,6 +21,8 @@ import { preserveConvoyReturnHistoryV162 } from '../src/campaign-convoy-history-
 import { mountConvoyReturnHistoryV162 } from '../src/campaign-convoy-history-ui-v162.js';
 import { mountCampaignDebriefV160 } from '../src/campaign-story-ui-v160.js';
 import { mountCampaignDebriefV161 } from '../src/campaign-convoy-story-ui-v161.js';
+import { getArbiterMissionV190 } from '../src/xeno-arbiter-campaign-v190.js';
+import { mountArbiterDossierV190 } from '../src/xeno-arbiter-ui-v190.js';
 
 const clone = value => structuredClone(value);
 const campaign = id => CAMPAIGNS.find(c => c.id === id);
@@ -319,10 +324,15 @@ test('the actual app renderer atomically selects plans and records readings whil
   Object.defineProperty(root, 'innerHTML', { set() {
     root.replaceChildren(); launch = document.createElement('button'); root.append(launch);
   } });
-  const dependencies = { saveSystem: system, clone, CAMPAIGNS, WORLDS, CREW, WEAPONS, EQUIPMENT, VEHICLES,
+  const dependencies = { saveSystem: system, deriveStoryCampaignV188, markStoryDebriefSeenV188, STORY_RELAY_CAMPAIGN_ID_V188, campaignObjectiveLabelV188, researchBonusRowV188: () => '', colonyPreparationCrewV188, clone, CAMPAIGNS, WORLDS, CREW, WEAPONS, EQUIPMENT, VEHICLES,
     preserveCampaignStoryReturnV160, preserveConvoyReturnHistoryV162, preserveLetheContinuityV163,
     recordCampaignStoryReviewV160, recordCampaignStoryReviewV161, recordLetheContinuityReviewV163,
     mountCampaignDebriefV160, mountCampaignDebriefV161, mountConvoyReturnHistoryV162, mountLetheContinuityV163,
+    getArbiterMissionV190, mountArbiterDossierV190,
+    // Keep the adjacent production dossier in the rendered tree; this legacy
+    // transaction must neither deploy its chapters nor navigate to Trials.
+    planArbiterMissionV190() { assert.fail('Legacy Lethe planning cannot plan an ARBITER mission.'); },
+    showView() { assert.fail('Legacy Lethe reading cannot open the Trials terminal.'); },
     getOperationBrief, resolveCrewDefinitionV85: m => m, getSpecialOperationByCampaignIdV67: () => null,
     isSoloSpecialOperationV131: () => true, getAlphaBravoStrategicRecoveryV69: () => ({ canAbandon: false }),
     APC_CONVOY_CAMPAIGN_V121: campaign('special-apc-convoy'), BLACK_COCOON_CAMPAIGN_V121: campaign('special-black-cocoon'),

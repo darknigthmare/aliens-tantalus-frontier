@@ -116,10 +116,13 @@ export const resolveHubCrisis = resolveHubCrisisEvent;
 
 function unlockEmergencyRoutes(result, sourceSave, hours) {
   if (hours < 12 || result.unlocks.length >= 2) return result;
-  const critical = Object.values(sourceSave.galaxy.worldState).some((state) => Number(state?.infestation) >= 85 || Number(state?.stability) <= 18);
+  // V188 spec 011: a hidden world (TR-0, wholly infested by design) neither triggers nor receives an emergency route.
+  const hiddenWorldIds = new Set(WORLDS.filter((world) => world.hiddenUntilV188).map((world) => world.id));
+  const critical = Object.entries(sourceSave.galaxy.worldState).some(([worldId, state]) => !hiddenWorldIds.has(worldId)
+    && (Number(state?.infestation) >= 85 || Number(state?.stability) <= 18));
   if (!critical) return result;
   const unlocked = new Set(result.save.galaxy.unlockedWorldIds);
-  const additions = WORLDS.filter((world) => !unlocked.has(world.id)).slice(0, 2 - result.unlocks.length);
+  const additions = WORLDS.filter((world) => !world.hiddenUntilV188 && !unlocked.has(world.id)).slice(0, 2 - result.unlocks.length);
   for (const world of additions) {
     result.save.galaxy.unlockedWorldIds.push(world.id);
     result.unlocks.push(world.id);

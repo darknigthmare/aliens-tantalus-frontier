@@ -1,4 +1,7 @@
 import { setNpcPortraitSourceV164, resolveHumanSpriteDrawableV164 } from './npc-matte-apertures-v164.js';
+import { getPlaceholderPortraitV188, drawPlaceholderPortraitV188 } from './placeholder-portraits-v188.js';
+import { getColonyPortraitV188, drawColonyPortraitV188 } from './colony-portraits-v188.js';
+import { colorblindPaletteActiveV188 } from './colorblind-palette-v188.js';
 
 const freeze = value => {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
@@ -66,7 +69,13 @@ export function setDialogueSpeakerPortraitV168(image, { crewId = null, name = ''
   const container = image?.parentElement;
   if (!image || !container?.dataset) return null;
   active.get(image)?.cleanup();
-  const profile = getNpcDialoguePortraitV168(crewId), source = profile?.source || paintedSource;
+  const profile = getNpcDialoguePortraitV168(crewId);
+  const colony = !profile && !paintedSource && !crewId ? getColonyPortraitV188(name) : null;
+  const source = profile?.source || paintedSource || colony?.source;
+  // Original colony portraits retain the existing shape-readable primitives
+  // while loading or on failure; they never borrow another speaker's face.
+  const placeholder = colony ? getPlaceholderPortraitV188(colony.fallbackId)
+    : !profile && !source && !crewId ? getPlaceholderPortraitV188(name) : null;
   const document = image.ownerDocument || globalThis.document;
   let canvas = container.querySelector?.('canvas[data-dialogue-avatar-v168]');
   if (!canvas && document?.createElement) {
@@ -79,18 +88,29 @@ export function setDialogueSpeakerPortraitV168(image, { crewId = null, name = ''
   container.setAttribute('role', 'img'); container.setAttribute('aria-label', `Portrait de ${name || 'l’interlocuteur'}`);
   container.dataset.dialoguePortraitCrewV168 = profile?.crewId || '';
   container.dataset.dialoguePortraitInitialsV168 = initials(name);
-  container.dataset.dialoguePortraitKindV168 = profile ? profile.framing : source ? 'painted-portrait' : 'initials';
+  container.dataset.dialoguePortraitKindV168 = profile ? profile.framing : colony ? 'colony-portrait' : source ? 'painted-portrait'
+    : placeholder ? 'placeholder-portrait' : 'initials';
+  container.dataset.dialoguePortraitFallbackV188 = '';
   container.dataset.dialoguePortraitStateV168 = source ? 'loading' : 'fallback';
   image.classList.remove('is-sprite-cell-v62'); image.hidden = true;
   image.alt = `Portrait de ${name || 'l’interlocuteur'}`; image.setAttribute('aria-hidden', 'true');
   if (canvas) { canvas.hidden = true; canvas.getContext?.('2d')?.clearRect(0, 0, canvas.width, canvas.height); }
   const token = { cleanup: () => {} }; active.set(image, token);
+  const drawFallback = () => {
+    if (!placeholder || !canvas) return false;
+    const ctx = canvas.getContext?.('2d'); ctx?.clearRect(0, 0, canvas.width, canvas.height);
+    const drawn = drawPlaceholderPortraitV188(ctx, placeholder,
+      { size: Math.min(canvas.width, canvas.height), colorblind: colorblindPaletteActiveV188(document) });
+    canvas.hidden = !drawn;
+    container.dataset.dialoguePortraitFallbackV188 = drawn ? 'placeholder-portrait' : '';
+    return Boolean(drawn);
+  };
   const cleanup = () => {
     image.removeEventListener?.('load', onLoad); image.removeEventListener?.('error', onError);
   };
   const onError = () => {
     if (active.get(image) !== token) return;
-    cleanup(); image.hidden = true; if (canvas) canvas.hidden = true;
+    cleanup(); image.hidden = true; if (canvas && !drawFallback()) canvas.hidden = true;
     container.dataset.dialoguePortraitStateV168 = 'fallback';
   };
   const onLoad = () => {
@@ -103,6 +123,16 @@ export function setDialogueSpeakerPortraitV168(image, { crewId = null, name = ''
         canvas.dataset.portraitSourceRectV168 = JSON.stringify(result.crop);
         canvas.hidden = false;
       } catch { onError(); return; }
+    } else if (colony) {
+      try {
+        const ctx = canvas?.getContext?.('2d');
+        ctx?.clearRect(0, 0, canvas.width, canvas.height);
+        const result = drawColonyPortraitV188(ctx, image, colony,
+          { width: canvas?.width, height: canvas?.height });
+        if (!result) { onError(); return; }
+        canvas.dataset.portraitSourceRectV168 = JSON.stringify(result.sourceRect);
+        canvas.hidden = false; container.dataset.dialoguePortraitFallbackV188 = '';
+      } catch { onError(); return; }
     } else {
       if (!(image.naturalWidth > 0 && image.naturalHeight > 0)) { onError(); return; }
       image.hidden = false;
@@ -113,10 +143,18 @@ export function setDialogueSpeakerPortraitV168(image, { crewId = null, name = ''
   if (!source) {
     // Also invalidate the previous V164 image/mask callback. A late source
     // must not put another crew member into an unknown speaker's frame.
-    setNpcPortraitSourceV164(image, ''); return { kind: 'initials', crewId, name };
+    setNpcPortraitSourceV164(image, '');
+    const drawn = drawFallback();
+    if (drawn) {
+      canvas.hidden = false; container.dataset.dialoguePortraitStateV168 = 'ready';
+      return { kind: 'placeholder-portrait', crewId: null, name, placeholderId: placeholder.id, sign: placeholder.sign };
+    }
+    container.dataset.dialoguePortraitKindV168 = 'initials';
+    return { kind: 'initials', crewId, name };
   }
+  if (colony) drawFallback();
   image.addEventListener?.('load', onLoad); image.addEventListener?.('error', onError);
   setNpcPortraitSourceV164(image, source); onLoad();
-  return { kind: profile ? profile.framing : 'painted-portrait', crewId: profile?.crewId || null,
-    source, crop: profile ? { ...profile.crop } : null };
+  return { kind: profile ? profile.framing : colony ? 'colony-portrait' : 'painted-portrait', crewId: profile?.crewId || null,
+    source, crop: profile ? { ...profile.crop } : null, ...(colony ? { colonyId: colony.id, sign: colony.sign } : {}) };
 }

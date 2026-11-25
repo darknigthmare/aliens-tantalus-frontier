@@ -5,6 +5,7 @@ import { PLAYER_HUMAN_PROPORTIONS_V160, PLAYER_MODULAR_SOURCE_ANCHORS_V160, getP
 import { PLAYER_VISUAL_CONTRACT_V81 } from './player-visual-contract-v81.js';
 import { getPlayerCostumeSkinV119 } from './player-costume-skins-v119.js';
 import { getPlayerArmReachV160, PLAYER_ARM_FLEXION_LIMITS_V160 } from './player-arm-constraints-v160.js';
+import { selectHadalPlayerPoseV188, adaptHadalPlayerBodyV188 } from './hadal-player-art-v188.js';
 
 /** Separate, reviewed Echo9 art. No full-body image is hidden by a torso mask:
  * these derived PNGs actually have no arms or gun. The native output is 1254
@@ -198,13 +199,13 @@ function selectPose(actor, timeSeconds, reducedMotion, motion) {
  * Image readiness is reported separately and never changes any coordinates.
  */
 export function resolvePlayerBodyRigV125({ actor, sample = null, timeSeconds = 0,
-  surface = 'mission', images = null, reducedMotion = false, neuroActive = false } = {}) {
+  surface = 'mission', images = null, reducedMotion = false, neuroActive = false, presentationContextV188 = null } = {}) {
   const reason = rejection(actor, sample, surface, neuroActive);
   if (reason) return freeze({ schema: 125, rigType: 'echo9', surface, eligible: false, ready: false, reason });
   const now = Math.max(0, finite(timeSeconds));
   const metrics = PLAYER_VISUAL_CONTRACT_V81.surfaces[surface];
   const motion = sampleHumanGaitV133(actor, metrics.height / 256);
-  const pose = selectPose(actor, now, reducedMotion, motion);
+  const pose = selectHadalPlayerPoseV188(selectPose(actor, now, reducedMotion, motion), presentationContextV188);
   const descriptor = pose.atlas === 'combat' ? COMBAT : LOCOMOTION;
   const frame = PLAYER_BODY_RIG_FRAMES_V125[pose.atlas][pose.frame];
   const standingHeight = metrics.height * REFERENCE_HEIGHT / 256;
@@ -236,8 +237,8 @@ export function resolvePlayerBodyRigV125({ actor, sample = null, timeSeconds = 0
   // The upright upper pose must not freeze a complete native-body fallback.
   // Retain a separately registered native lower frame from the same observed
   // travel phase. It has its own sole plane and never tilts the held weapon.
-  const fallbackLowerIndex = pose.atlas === 'locomotion' && pose.moving && pose.frame < 4
-    ? 4 + pose.frame : pose.frame;
+  const fallbackLowerIndex = pose.nativeFallbackFrameV188 ?? (pose.atlas === 'locomotion' && pose.moving && pose.frame < 4
+    ? 4 + pose.frame : pose.frame);
   const fallbackLowerFrame = PLAYER_BODY_RIG_FRAMES_V125[pose.atlas][fallbackLowerIndex];
   const lowerScale = standingHeight / fallbackLowerFrame.standingHeight;
   const lowerMatrix = { a: facing * lowerScale, b: 0, c: 0, d: lowerScale,
@@ -247,7 +248,7 @@ export function resolvePlayerBodyRigV125({ actor, sample = null, timeSeconds = 0
     sourceRect: fallbackLowerFrame.source, sourceFrame: fallbackLowerFrame, matrix: lowerMatrix };
   const ready = playerBodyRigImageReadyV125(imageFrom(images, descriptor.imageKey), descriptor)
     && playerBodyRigImageReadyV125(imageFrom(images, ARMS.imageKey), ARMS);
-  return freeze({ schema: 125, id: descriptor.id, sheetId: descriptor.id, rigType: 'echo9', exact: false,
+  return freeze(adaptHadalPlayerBodyV188({ schema: 125, id: descriptor.id, sheetId: descriptor.id, rigType: 'echo9', exact: false,
     eligible: true, ready, reason: ready ? null : 'rig-images-unavailable', surface,
     asset: descriptor, imageKey: descriptor.imageKey, requiredAssets: [descriptor, ARMS],
     armsAsset: ARMS, frame: pose.frame, atlas: pose.atlas, source, sourceFrame: frame,
@@ -266,7 +267,7 @@ export function resolvePlayerBodyRigV125({ actor, sample = null, timeSeconds = 0
     stance: pose.peeking ? 'cover-peek' : actor.crouching ? 'crouched' : 'standing',
     bodyExtension: 0, shoulderPeekRise,
     layers: ['far-arm', 'near-upper-arm', 'body', 'weapon', 'near-forearm', 'hands'],
-    visualStatus: descriptor.visualStatus });
+    visualStatus: descriptor.visualStatus }, { context: presentationContextV188 }));
 }
 
 /** Two-link analytic IK. A target outside the anatomical reach is explicitly

@@ -1,0 +1,6302 @@
+{
+  "lot": "V180",
+  "baseCommit": "d516dda",
+  "date": "2026-11-02",
+  "publicationState": "VERIFIED_FOR_PUBLICATION",
+  "protocols": [
+    {
+      "id": "xth180-incoming-1",
+      "sourceEventId": "xte179-incoming-1",
+      "title": "HORDE EN APPROCHE · 01",
+      "label": "HORDE EN APPROCHE · 01",
+      "description": "2 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "incoming",
+      "level": 1,
+      "stageId": "xt179-ship-habitation",
+      "difficulty": "easy",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "warrior",
+        "prowler",
+        "arachnoid"
+      ],
+      "rules": {},
+      "roundSeconds": 240,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 5,
+          "concurrent": 3,
+          "hp": 15,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "warrior",
+            "prowler",
+            "arachnoid",
+            "runner"
+          ],
+          "total": 7,
+          "concurrent": 4,
+          "hp": 17,
+          "damageScale": 0.30500000000000005
+        }
+      ],
+      "totalEnemies": 12,
+      "reward": 450,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-incoming-2",
+      "sourceEventId": "xte179-incoming-2",
+      "title": "HORDE EN APPROCHE · 02",
+      "label": "HORDE EN APPROCHE · 02",
+      "description": "3 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "incoming",
+      "level": 2,
+      "stageId": "xt179-ship-extraction",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "warrior",
+        "prowler",
+        "arachnoid"
+      ],
+      "rules": {},
+      "roundSeconds": 300,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 6,
+          "concurrent": 4,
+          "hp": 18,
+          "damageScale": 0.33
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "warrior",
+            "prowler",
+            "arachnoid",
+            "runner"
+          ],
+          "total": 8,
+          "concurrent": 5,
+          "hp": 20,
+          "damageScale": 0.33
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 10,
+          "concurrent": 6,
+          "hp": 22,
+          "damageScale": 0.33
+        }
+      ],
+      "totalEnemies": 24,
+      "reward": 550,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-incoming-3",
+      "sourceEventId": "xte179-incoming-3",
+      "title": "HORDE EN APPROCHE · 03",
+      "label": "HORDE EN APPROCHE · 03",
+      "description": "4 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "incoming",
+      "level": 3,
+      "stageId": "xt179-ship-engineering",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "warrior",
+        "prowler",
+        "arachnoid"
+      ],
+      "rules": {},
+      "roundSeconds": 360,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 7,
+          "concurrent": 5,
+          "hp": 21,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "warrior",
+            "prowler",
+            "arachnoid",
+            "runner"
+          ],
+          "total": 9,
+          "concurrent": 6,
+          "hp": 23,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 11,
+          "concurrent": 7,
+          "hp": 25,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "warrior",
+            "prowler",
+            "arachnoid",
+            "runner"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 27,
+          "damageScale": 0.35500000000000004
+        }
+      ],
+      "totalEnemies": 40,
+      "reward": 650,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-incoming-4",
+      "sourceEventId": "xte179-incoming-4",
+      "title": "HORDE EN APPROCHE · 04",
+      "label": "HORDE EN APPROCHE · 04",
+      "description": "5 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "incoming",
+      "level": 4,
+      "stageId": "xt179-ship-docking",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "warrior",
+        "prowler",
+        "arachnoid"
+      ],
+      "rules": {},
+      "roundSeconds": 420,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 8,
+          "concurrent": 6,
+          "hp": 24,
+          "damageScale": 0.38
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "warrior",
+            "prowler",
+            "arachnoid",
+            "runner"
+          ],
+          "total": 10,
+          "concurrent": 7,
+          "hp": 26,
+          "damageScale": 0.38
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 12,
+          "concurrent": 8,
+          "hp": 28,
+          "damageScale": 0.38
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "warrior",
+            "prowler",
+            "arachnoid",
+            "runner"
+          ],
+          "total": 14,
+          "concurrent": 8,
+          "hp": 30,
+          "damageScale": 0.38
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 16,
+          "concurrent": 8,
+          "hp": 32,
+          "damageScale": 0.38
+        }
+      ],
+      "totalEnemies": 60,
+      "reward": 750,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-incoming-5",
+      "sourceEventId": "xte179-incoming-5",
+      "title": "HORDE EN APPROCHE · 05",
+      "label": "HORDE EN APPROCHE · 05",
+      "description": "6 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "incoming",
+      "level": 5,
+      "stageId": "xt179-planet-surface",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "warrior",
+        "prowler",
+        "arachnoid"
+      ],
+      "rules": {},
+      "roundSeconds": 480,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 9,
+          "concurrent": 7,
+          "hp": 27,
+          "damageScale": 0.405
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "warrior",
+            "prowler",
+            "arachnoid",
+            "runner"
+          ],
+          "total": 11,
+          "concurrent": 8,
+          "hp": 29,
+          "damageScale": 0.405
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 31,
+          "damageScale": 0.405
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "warrior",
+            "prowler",
+            "arachnoid",
+            "runner"
+          ],
+          "total": 15,
+          "concurrent": 8,
+          "hp": 33,
+          "damageScale": 0.405
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 17,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 5,
+          "label": "PRESSION 6",
+          "opponentIds": [
+            "warrior",
+            "prowler",
+            "arachnoid",
+            "runner"
+          ],
+          "total": 19,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        }
+      ],
+      "totalEnemies": 84,
+      "reward": 850,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-quarantine-1",
+      "sourceEventId": "xte179-quarantine-1",
+      "title": "RUPTURE DE QUARANTAINE · 01",
+      "label": "RUPTURE DE QUARANTAINE · 01",
+      "description": "2 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "quarantine",
+      "level": 1,
+      "stageId": "xt179-planet-ruins",
+      "difficulty": "easy",
+      "factionId": "hive",
+      "opponentIds": [
+        "warrior",
+        "armored-runner",
+        "synth-guard",
+        "defender"
+      ],
+      "rules": {},
+      "roundSeconds": 240,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 5,
+          "concurrent": 3,
+          "hp": 15,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "armored-runner",
+            "synth-guard",
+            "defender",
+            "warrior"
+          ],
+          "total": 7,
+          "concurrent": 4,
+          "hp": 17,
+          "damageScale": 0.30500000000000005
+        }
+      ],
+      "totalEnemies": 12,
+      "reward": 450,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-quarantine-2",
+      "sourceEventId": "xte179-quarantine-2",
+      "title": "RUPTURE DE QUARANTAINE · 02",
+      "label": "RUPTURE DE QUARANTAINE · 02",
+      "description": "3 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "quarantine",
+      "level": 2,
+      "stageId": "xt179-planet-ridge",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "warrior",
+        "armored-runner",
+        "synth-guard",
+        "defender"
+      ],
+      "rules": {},
+      "roundSeconds": 300,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 6,
+          "concurrent": 4,
+          "hp": 18,
+          "damageScale": 0.33
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "armored-runner",
+            "synth-guard",
+            "defender",
+            "warrior"
+          ],
+          "total": 8,
+          "concurrent": 5,
+          "hp": 20,
+          "damageScale": 0.33
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 10,
+          "concurrent": 6,
+          "hp": 22,
+          "damageScale": 0.33
+        }
+      ],
+      "totalEnemies": 24,
+      "reward": 550,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-quarantine-3",
+      "sourceEventId": "xte179-quarantine-3",
+      "title": "RUPTURE DE QUARANTAINE · 03",
+      "label": "RUPTURE DE QUARANTAINE · 03",
+      "description": "4 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "quarantine",
+      "level": 3,
+      "stageId": "xt179-planet-evac",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "warrior",
+        "armored-runner",
+        "synth-guard",
+        "defender"
+      ],
+      "rules": {},
+      "roundSeconds": 360,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 7,
+          "concurrent": 5,
+          "hp": 21,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "armored-runner",
+            "synth-guard",
+            "defender",
+            "warrior"
+          ],
+          "total": 9,
+          "concurrent": 6,
+          "hp": 23,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 11,
+          "concurrent": 7,
+          "hp": 25,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "armored-runner",
+            "synth-guard",
+            "defender",
+            "warrior"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 27,
+          "damageScale": 0.35500000000000004
+        }
+      ],
+      "totalEnemies": 40,
+      "reward": 650,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-quarantine-4",
+      "sourceEventId": "xte179-quarantine-4",
+      "title": "RUPTURE DE QUARANTAINE · 04",
+      "label": "RUPTURE DE QUARANTAINE · 04",
+      "description": "5 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "quarantine",
+      "level": 4,
+      "stageId": "xt179-planet-caves",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "warrior",
+        "armored-runner",
+        "synth-guard",
+        "defender"
+      ],
+      "rules": {},
+      "roundSeconds": 420,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 8,
+          "concurrent": 6,
+          "hp": 24,
+          "damageScale": 0.38
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "armored-runner",
+            "synth-guard",
+            "defender",
+            "warrior"
+          ],
+          "total": 10,
+          "concurrent": 7,
+          "hp": 26,
+          "damageScale": 0.38
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 12,
+          "concurrent": 8,
+          "hp": 28,
+          "damageScale": 0.38
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "armored-runner",
+            "synth-guard",
+            "defender",
+            "warrior"
+          ],
+          "total": 14,
+          "concurrent": 8,
+          "hp": 30,
+          "damageScale": 0.38
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 16,
+          "concurrent": 8,
+          "hp": 32,
+          "damageScale": 0.38
+        }
+      ],
+      "totalEnemies": 60,
+      "reward": 750,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-quarantine-5",
+      "sourceEventId": "xte179-quarantine-5",
+      "title": "RUPTURE DE QUARANTAINE · 05",
+      "label": "RUPTURE DE QUARANTAINE · 05",
+      "description": "6 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "quarantine",
+      "level": 5,
+      "stageId": "xt179-planet-approach",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "warrior",
+        "armored-runner",
+        "synth-guard",
+        "defender"
+      ],
+      "rules": {},
+      "roundSeconds": 480,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 9,
+          "concurrent": 7,
+          "hp": 27,
+          "damageScale": 0.405
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "armored-runner",
+            "synth-guard",
+            "defender",
+            "warrior"
+          ],
+          "total": 11,
+          "concurrent": 8,
+          "hp": 29,
+          "damageScale": 0.405
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 31,
+          "damageScale": 0.405
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "armored-runner",
+            "synth-guard",
+            "defender",
+            "warrior"
+          ],
+          "total": 15,
+          "concurrent": 8,
+          "hp": 33,
+          "damageScale": 0.405
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 17,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 5,
+          "label": "PRESSION 6",
+          "opponentIds": [
+            "armored-runner",
+            "synth-guard",
+            "defender",
+            "warrior"
+          ],
+          "total": 19,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        }
+      ],
+      "totalEnemies": 84,
+      "reward": 850,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-extraction-1",
+      "sourceEventId": "xte179-extraction-1",
+      "title": "COULOIR D’EXTRACTION · 01",
+      "label": "COULOIR D’EXTRACTION · 01",
+      "description": "2 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "extraction",
+      "level": 1,
+      "stageId": "xt179-colony-utility",
+      "difficulty": "easy",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "prowler",
+        "spitter",
+        "warrior"
+      ],
+      "rules": {},
+      "roundSeconds": 240,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 5,
+          "concurrent": 3,
+          "hp": 15,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "prowler",
+            "spitter",
+            "warrior",
+            "runner"
+          ],
+          "total": 7,
+          "concurrent": 4,
+          "hp": 17,
+          "damageScale": 0.30500000000000005
+        }
+      ],
+      "totalEnemies": 12,
+      "reward": 450,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-extraction-2",
+      "sourceEventId": "xte179-extraction-2",
+      "title": "COULOIR D’EXTRACTION · 02",
+      "label": "COULOIR D’EXTRACTION · 02",
+      "description": "3 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "extraction",
+      "level": 2,
+      "stageId": "xt179-colony-security",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "prowler",
+        "spitter",
+        "warrior"
+      ],
+      "rules": {},
+      "roundSeconds": 300,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 6,
+          "concurrent": 4,
+          "hp": 18,
+          "damageScale": 0.33
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "prowler",
+            "spitter",
+            "warrior",
+            "runner"
+          ],
+          "total": 8,
+          "concurrent": 5,
+          "hp": 20,
+          "damageScale": 0.33
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 10,
+          "concurrent": 6,
+          "hp": 22,
+          "damageScale": 0.33
+        }
+      ],
+      "totalEnemies": 24,
+      "reward": 550,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-extraction-3",
+      "sourceEventId": "xte179-extraction-3",
+      "title": "COULOIR D’EXTRACTION · 03",
+      "label": "COULOIR D’EXTRACTION · 03",
+      "description": "4 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "extraction",
+      "level": 3,
+      "stageId": "xt179-colony-landing",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "prowler",
+        "spitter",
+        "warrior"
+      ],
+      "rules": {},
+      "roundSeconds": 360,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 7,
+          "concurrent": 5,
+          "hp": 21,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "prowler",
+            "spitter",
+            "warrior",
+            "runner"
+          ],
+          "total": 9,
+          "concurrent": 6,
+          "hp": 23,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 11,
+          "concurrent": 7,
+          "hp": 25,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "prowler",
+            "spitter",
+            "warrior",
+            "runner"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 27,
+          "damageScale": 0.35500000000000004
+        }
+      ],
+      "totalEnemies": 40,
+      "reward": 650,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-extraction-4",
+      "sourceEventId": "xte179-extraction-4",
+      "title": "COULOIR D’EXTRACTION · 04",
+      "label": "COULOIR D’EXTRACTION · 04",
+      "description": "5 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "extraction",
+      "level": 4,
+      "stageId": "xt179-colony-habitat",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "prowler",
+        "spitter",
+        "warrior"
+      ],
+      "rules": {},
+      "roundSeconds": 420,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 8,
+          "concurrent": 6,
+          "hp": 24,
+          "damageScale": 0.38
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "prowler",
+            "spitter",
+            "warrior",
+            "runner"
+          ],
+          "total": 10,
+          "concurrent": 7,
+          "hp": 26,
+          "damageScale": 0.38
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 12,
+          "concurrent": 8,
+          "hp": 28,
+          "damageScale": 0.38
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "prowler",
+            "spitter",
+            "warrior",
+            "runner"
+          ],
+          "total": 14,
+          "concurrent": 8,
+          "hp": 30,
+          "damageScale": 0.38
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 16,
+          "concurrent": 8,
+          "hp": 32,
+          "damageScale": 0.38
+        }
+      ],
+      "totalEnemies": 60,
+      "reward": 750,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-extraction-5",
+      "sourceEventId": "xte179-extraction-5",
+      "title": "COULOIR D’EXTRACTION · 05",
+      "label": "COULOIR D’EXTRACTION · 05",
+      "description": "6 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "extraction",
+      "level": 5,
+      "stageId": "xt179-colony-civic",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "prowler",
+        "spitter",
+        "warrior"
+      ],
+      "rules": {},
+      "roundSeconds": 480,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 9,
+          "concurrent": 7,
+          "hp": 27,
+          "damageScale": 0.405
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "prowler",
+            "spitter",
+            "warrior",
+            "runner"
+          ],
+          "total": 11,
+          "concurrent": 8,
+          "hp": 29,
+          "damageScale": 0.405
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 31,
+          "damageScale": 0.405
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "prowler",
+            "spitter",
+            "warrior",
+            "runner"
+          ],
+          "total": 15,
+          "concurrent": 8,
+          "hp": 33,
+          "damageScale": 0.405
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 17,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 5,
+          "label": "PRESSION 6",
+          "opponentIds": [
+            "prowler",
+            "spitter",
+            "warrior",
+            "runner"
+          ],
+          "total": 19,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        }
+      ],
+      "totalEnemies": 84,
+      "reward": 850,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-pursuit-1",
+      "sourceEventId": "xte179-pursuit-1",
+      "title": "MEUTE EN CHASSE · 01",
+      "label": "MEUTE EN CHASSE · 01",
+      "description": "2 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "pursuit",
+      "level": 1,
+      "stageId": "xt179-colony-approach",
+      "difficulty": "easy",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "panther",
+        "grid",
+        "stalker-arcade"
+      ],
+      "rules": {},
+      "roundSeconds": 240,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 5,
+          "concurrent": 3,
+          "hp": 15,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "panther",
+            "grid",
+            "stalker-arcade",
+            "runner"
+          ],
+          "total": 7,
+          "concurrent": 4,
+          "hp": 17,
+          "damageScale": 0.30500000000000005
+        }
+      ],
+      "totalEnemies": 12,
+      "reward": 450,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-pursuit-2",
+      "sourceEventId": "xte179-pursuit-2",
+      "title": "MEUTE EN CHASSE · 02",
+      "label": "MEUTE EN CHASSE · 02",
+      "description": "3 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "pursuit",
+      "level": 2,
+      "stageId": "xt179-workshop",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "panther",
+        "grid",
+        "stalker-arcade"
+      ],
+      "rules": {},
+      "roundSeconds": 300,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 6,
+          "concurrent": 4,
+          "hp": 18,
+          "damageScale": 0.33
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "panther",
+            "grid",
+            "stalker-arcade",
+            "runner"
+          ],
+          "total": 8,
+          "concurrent": 5,
+          "hp": 20,
+          "damageScale": 0.33
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 10,
+          "concurrent": 6,
+          "hp": 22,
+          "damageScale": 0.33
+        }
+      ],
+      "totalEnemies": 24,
+      "reward": 550,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-pursuit-3",
+      "sourceEventId": "xte179-pursuit-3",
+      "title": "MEUTE EN CHASSE · 03",
+      "label": "MEUTE EN CHASSE · 03",
+      "description": "4 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "pursuit",
+      "level": 3,
+      "stageId": "xt179-vehicle-bay",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "panther",
+        "grid",
+        "stalker-arcade"
+      ],
+      "rules": {},
+      "roundSeconds": 360,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 7,
+          "concurrent": 5,
+          "hp": 21,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "panther",
+            "grid",
+            "stalker-arcade",
+            "runner"
+          ],
+          "total": 9,
+          "concurrent": 6,
+          "hp": 23,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 11,
+          "concurrent": 7,
+          "hp": 25,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "panther",
+            "grid",
+            "stalker-arcade",
+            "runner"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 27,
+          "damageScale": 0.35500000000000004
+        }
+      ],
+      "totalEnemies": 40,
+      "reward": 650,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-pursuit-4",
+      "sourceEventId": "xte179-pursuit-4",
+      "title": "MEUTE EN CHASSE · 04",
+      "label": "MEUTE EN CHASSE · 04",
+      "description": "5 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "pursuit",
+      "level": 4,
+      "stageId": "xt179-quarantine",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "panther",
+        "grid",
+        "stalker-arcade"
+      ],
+      "rules": {},
+      "roundSeconds": 420,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 8,
+          "concurrent": 6,
+          "hp": 24,
+          "damageScale": 0.38
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "panther",
+            "grid",
+            "stalker-arcade",
+            "runner"
+          ],
+          "total": 10,
+          "concurrent": 7,
+          "hp": 26,
+          "damageScale": 0.38
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 12,
+          "concurrent": 8,
+          "hp": 28,
+          "damageScale": 0.38
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "panther",
+            "grid",
+            "stalker-arcade",
+            "runner"
+          ],
+          "total": 14,
+          "concurrent": 8,
+          "hp": 30,
+          "damageScale": 0.38
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 16,
+          "concurrent": 8,
+          "hp": 32,
+          "damageScale": 0.38
+        }
+      ],
+      "totalEnemies": 60,
+      "reward": 750,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-pursuit-5",
+      "sourceEventId": "xte179-pursuit-5",
+      "title": "MEUTE EN CHASSE · 05",
+      "label": "MEUTE EN CHASSE · 05",
+      "description": "6 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "pursuit",
+      "level": 5,
+      "stageId": "xt179-armory",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "panther",
+        "grid",
+        "stalker-arcade"
+      ],
+      "rules": {},
+      "roundSeconds": 480,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 9,
+          "concurrent": 7,
+          "hp": 27,
+          "damageScale": 0.405
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "panther",
+            "grid",
+            "stalker-arcade",
+            "runner"
+          ],
+          "total": 11,
+          "concurrent": 8,
+          "hp": 29,
+          "damageScale": 0.405
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 31,
+          "damageScale": 0.405
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "panther",
+            "grid",
+            "stalker-arcade",
+            "runner"
+          ],
+          "total": 15,
+          "concurrent": 8,
+          "hp": 33,
+          "damageScale": 0.405
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 17,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 5,
+          "label": "PRESSION 6",
+          "opponentIds": [
+            "panther",
+            "grid",
+            "stalker-arcade",
+            "runner"
+          ],
+          "total": 19,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        }
+      ],
+      "totalEnemies": 84,
+      "reward": 850,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-blackout-1",
+      "sourceEventId": "xte179-blackout-1",
+      "title": "ESSAIM SYNTHÉTIQUE · 01",
+      "label": "ESSAIM SYNTHÉTIQUE · 01",
+      "description": "2 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "blackout",
+      "level": 1,
+      "stageId": "xt179-quarters",
+      "difficulty": "easy",
+      "factionId": "rival-lab",
+      "opponentIds": [
+        "synth-trooper",
+        "synth-sniper",
+        "synth-guard",
+        "combat-synth"
+      ],
+      "rules": {},
+      "roundSeconds": 240,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 5,
+          "concurrent": 3,
+          "hp": 15,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth",
+            "synth-trooper"
+          ],
+          "total": 7,
+          "concurrent": 4,
+          "hp": 17,
+          "damageScale": 0.30500000000000005
+        }
+      ],
+      "totalEnemies": 12,
+      "reward": 450,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-blackout-2",
+      "sourceEventId": "xte179-blackout-2",
+      "title": "ESSAIM SYNTHÉTIQUE · 02",
+      "label": "ESSAIM SYNTHÉTIQUE · 02",
+      "description": "3 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "blackout",
+      "level": 2,
+      "stageId": "xt179-mess",
+      "difficulty": "normal",
+      "factionId": "rival-lab",
+      "opponentIds": [
+        "synth-trooper",
+        "synth-sniper",
+        "synth-guard",
+        "combat-synth"
+      ],
+      "rules": {},
+      "roundSeconds": 300,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 6,
+          "concurrent": 4,
+          "hp": 18,
+          "damageScale": 0.33
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth",
+            "synth-trooper"
+          ],
+          "total": 8,
+          "concurrent": 5,
+          "hp": 20,
+          "damageScale": 0.33
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 10,
+          "concurrent": 6,
+          "hp": 22,
+          "damageScale": 0.33
+        }
+      ],
+      "totalEnemies": 24,
+      "reward": 550,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-blackout-3",
+      "sourceEventId": "xte179-blackout-3",
+      "title": "ESSAIM SYNTHÉTIQUE · 03",
+      "label": "ESSAIM SYNTHÉTIQUE · 03",
+      "description": "4 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "blackout",
+      "level": 3,
+      "stageId": "xt179-medical",
+      "difficulty": "normal",
+      "factionId": "rival-lab",
+      "opponentIds": [
+        "synth-trooper",
+        "synth-sniper",
+        "synth-guard",
+        "combat-synth"
+      ],
+      "rules": {},
+      "roundSeconds": 360,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 7,
+          "concurrent": 5,
+          "hp": 21,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth",
+            "synth-trooper"
+          ],
+          "total": 9,
+          "concurrent": 6,
+          "hp": 23,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 11,
+          "concurrent": 7,
+          "hp": 25,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth",
+            "synth-trooper"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 27,
+          "damageScale": 0.35500000000000004
+        }
+      ],
+      "totalEnemies": 40,
+      "reward": 650,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-blackout-4",
+      "sourceEventId": "xte179-blackout-4",
+      "title": "ESSAIM SYNTHÉTIQUE · 04",
+      "label": "ESSAIM SYNTHÉTIQUE · 04",
+      "description": "5 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "blackout",
+      "level": 4,
+      "stageId": "xt179-laboratory",
+      "difficulty": "hard",
+      "factionId": "rival-lab",
+      "opponentIds": [
+        "synth-trooper",
+        "synth-sniper",
+        "synth-guard",
+        "combat-synth"
+      ],
+      "rules": {},
+      "roundSeconds": 420,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 8,
+          "concurrent": 6,
+          "hp": 24,
+          "damageScale": 0.38
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth",
+            "synth-trooper"
+          ],
+          "total": 10,
+          "concurrent": 7,
+          "hp": 26,
+          "damageScale": 0.38
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 12,
+          "concurrent": 8,
+          "hp": 28,
+          "damageScale": 0.38
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth",
+            "synth-trooper"
+          ],
+          "total": 14,
+          "concurrent": 8,
+          "hp": 30,
+          "damageScale": 0.38
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 16,
+          "concurrent": 8,
+          "hp": 32,
+          "damageScale": 0.38
+        }
+      ],
+      "totalEnemies": 60,
+      "reward": 750,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-blackout-5",
+      "sourceEventId": "xte179-blackout-5",
+      "title": "ESSAIM SYNTHÉTIQUE · 05",
+      "label": "ESSAIM SYNTHÉTIQUE · 05",
+      "description": "6 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "blackout",
+      "level": 5,
+      "stageId": "xt179-sensors",
+      "difficulty": "hard",
+      "factionId": "rival-lab",
+      "opponentIds": [
+        "synth-trooper",
+        "synth-sniper",
+        "synth-guard",
+        "combat-synth"
+      ],
+      "rules": {},
+      "roundSeconds": 480,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 9,
+          "concurrent": 7,
+          "hp": 27,
+          "damageScale": 0.405
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth",
+            "synth-trooper"
+          ],
+          "total": 11,
+          "concurrent": 8,
+          "hp": 29,
+          "damageScale": 0.405
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 31,
+          "damageScale": 0.405
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth",
+            "synth-trooper"
+          ],
+          "total": 15,
+          "concurrent": 8,
+          "hp": 33,
+          "damageScale": 0.405
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 17,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 5,
+          "label": "PRESSION 6",
+          "opponentIds": [
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth",
+            "synth-trooper"
+          ],
+          "total": 19,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        }
+      ],
+      "totalEnemies": 84,
+      "reward": 850,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-acid-1",
+      "sourceEventId": "xte179-acid-1",
+      "title": "SATURATION CORROSIVE · 01",
+      "label": "SATURATION CORROSIVE · 01",
+      "description": "2 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "acid",
+      "level": 1,
+      "stageId": "xt179-reactor",
+      "difficulty": "easy",
+      "factionId": "hive",
+      "opponentIds": [
+        "spitter",
+        "acid-runner",
+        "acid-lurker",
+        "boiler"
+      ],
+      "rules": {},
+      "roundSeconds": 240,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 5,
+          "concurrent": 3,
+          "hp": 15,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "acid-runner",
+            "acid-lurker",
+            "boiler",
+            "spitter"
+          ],
+          "total": 7,
+          "concurrent": 4,
+          "hp": 17,
+          "damageScale": 0.30500000000000005
+        }
+      ],
+      "totalEnemies": 12,
+      "reward": 450,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-acid-2",
+      "sourceEventId": "xte179-acid-2",
+      "title": "SATURATION CORROSIVE · 02",
+      "label": "SATURATION CORROSIVE · 02",
+      "description": "3 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "acid",
+      "level": 2,
+      "stageId": "xt179-life-support",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "spitter",
+        "acid-runner",
+        "acid-lurker",
+        "boiler"
+      ],
+      "rules": {},
+      "roundSeconds": 300,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 6,
+          "concurrent": 4,
+          "hp": 18,
+          "damageScale": 0.33
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "acid-runner",
+            "acid-lurker",
+            "boiler",
+            "spitter"
+          ],
+          "total": 8,
+          "concurrent": 5,
+          "hp": 20,
+          "damageScale": 0.33
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 10,
+          "concurrent": 6,
+          "hp": 22,
+          "damageScale": 0.33
+        }
+      ],
+      "totalEnemies": 24,
+      "reward": 550,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-acid-3",
+      "sourceEventId": "xte179-acid-3",
+      "title": "SATURATION CORROSIVE · 03",
+      "label": "SATURATION CORROSIVE · 03",
+      "description": "4 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "acid",
+      "level": 3,
+      "stageId": "xt179-hangar",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "spitter",
+        "acid-runner",
+        "acid-lurker",
+        "boiler"
+      ],
+      "rules": {},
+      "roundSeconds": 360,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 7,
+          "concurrent": 5,
+          "hp": 21,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "acid-runner",
+            "acid-lurker",
+            "boiler",
+            "spitter"
+          ],
+          "total": 9,
+          "concurrent": 6,
+          "hp": 23,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 11,
+          "concurrent": 7,
+          "hp": 25,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "acid-runner",
+            "acid-lurker",
+            "boiler",
+            "spitter"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 27,
+          "damageScale": 0.35500000000000004
+        }
+      ],
+      "totalEnemies": 40,
+      "reward": 650,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-acid-4",
+      "sourceEventId": "xte179-acid-4",
+      "title": "SATURATION CORROSIVE · 04",
+      "label": "SATURATION CORROSIVE · 04",
+      "description": "5 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "acid",
+      "level": 4,
+      "stageId": "xt179-cryo",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "spitter",
+        "acid-runner",
+        "acid-lurker",
+        "boiler"
+      ],
+      "rules": {},
+      "roundSeconds": 420,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 8,
+          "concurrent": 6,
+          "hp": 24,
+          "damageScale": 0.38
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "acid-runner",
+            "acid-lurker",
+            "boiler",
+            "spitter"
+          ],
+          "total": 10,
+          "concurrent": 7,
+          "hp": 26,
+          "damageScale": 0.38
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 12,
+          "concurrent": 8,
+          "hp": 28,
+          "damageScale": 0.38
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "acid-runner",
+            "acid-lurker",
+            "boiler",
+            "spitter"
+          ],
+          "total": 14,
+          "concurrent": 8,
+          "hp": 30,
+          "damageScale": 0.38
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 16,
+          "concurrent": 8,
+          "hp": 32,
+          "damageScale": 0.38
+        }
+      ],
+      "totalEnemies": 60,
+      "reward": 750,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-acid-5",
+      "sourceEventId": "xte179-acid-5",
+      "title": "SATURATION CORROSIVE · 05",
+      "label": "SATURATION CORROSIVE · 05",
+      "description": "6 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "acid",
+      "level": 5,
+      "stageId": "xt179-cic",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "spitter",
+        "acid-runner",
+        "acid-lurker",
+        "boiler"
+      ],
+      "rules": {},
+      "roundSeconds": 480,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 9,
+          "concurrent": 7,
+          "hp": 27,
+          "damageScale": 0.405
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "acid-runner",
+            "acid-lurker",
+            "boiler",
+            "spitter"
+          ],
+          "total": 11,
+          "concurrent": 8,
+          "hp": 29,
+          "damageScale": 0.405
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 31,
+          "damageScale": 0.405
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "acid-runner",
+            "acid-lurker",
+            "boiler",
+            "spitter"
+          ],
+          "total": 15,
+          "concurrent": 8,
+          "hp": 33,
+          "damageScale": 0.405
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 17,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 5,
+          "label": "PRESSION 6",
+          "opponentIds": [
+            "acid-runner",
+            "acid-lurker",
+            "boiler",
+            "spitter"
+          ],
+          "total": 19,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        }
+      ],
+      "totalEnemies": 84,
+      "reward": 850,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-sudden-death-1",
+      "sourceEventId": "xte179-sudden-death-1",
+      "title": "CONTACTS FRAGILES · 01",
+      "label": "CONTACTS FRAGILES · 01",
+      "description": "2 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "sudden-death",
+      "level": 1,
+      "stageId": "xt179-briefing",
+      "difficulty": "easy",
+      "factionId": "hive",
+      "opponentIds": [
+        "arachnoid",
+        "runner",
+        "warrior",
+        "prowler"
+      ],
+      "rules": {},
+      "roundSeconds": 240,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 5,
+          "concurrent": 3,
+          "hp": 15,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 7,
+          "concurrent": 4,
+          "hp": 17,
+          "damageScale": 0.30500000000000005
+        }
+      ],
+      "totalEnemies": 12,
+      "reward": 450,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-sudden-death-2",
+      "sourceEventId": "xte179-sudden-death-2",
+      "title": "CONTACTS FRAGILES · 02",
+      "label": "CONTACTS FRAGILES · 02",
+      "description": "3 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "sudden-death",
+      "level": 2,
+      "stageId": "xt179-bridge",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "arachnoid",
+        "runner",
+        "warrior",
+        "prowler"
+      ],
+      "rules": {},
+      "roundSeconds": 300,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 6,
+          "concurrent": 4,
+          "hp": 18,
+          "damageScale": 0.33
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 8,
+          "concurrent": 5,
+          "hp": 20,
+          "damageScale": 0.33
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 10,
+          "concurrent": 6,
+          "hp": 22,
+          "damageScale": 0.33
+        }
+      ],
+      "totalEnemies": 24,
+      "reward": 550,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-sudden-death-3",
+      "sourceEventId": "xte179-sudden-death-3",
+      "title": "CONTACTS FRAGILES · 03",
+      "label": "CONTACTS FRAGILES · 03",
+      "description": "4 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "sudden-death",
+      "level": 3,
+      "stageId": "xt179-synthetic-bay",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "arachnoid",
+        "runner",
+        "warrior",
+        "prowler"
+      ],
+      "rules": {},
+      "roundSeconds": 360,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 7,
+          "concurrent": 5,
+          "hp": 21,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 9,
+          "concurrent": 6,
+          "hp": 23,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 11,
+          "concurrent": 7,
+          "hp": 25,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 27,
+          "damageScale": 0.35500000000000004
+        }
+      ],
+      "totalEnemies": 40,
+      "reward": 650,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-sudden-death-4",
+      "sourceEventId": "xte179-sudden-death-4",
+      "title": "CONTACTS FRAGILES · 04",
+      "label": "CONTACTS FRAGILES · 04",
+      "description": "5 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "sudden-death",
+      "level": 4,
+      "stageId": "xt179-proving-ground",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "arachnoid",
+        "runner",
+        "warrior",
+        "prowler"
+      ],
+      "rules": {},
+      "roundSeconds": 420,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 8,
+          "concurrent": 6,
+          "hp": 24,
+          "damageScale": 0.38
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 10,
+          "concurrent": 7,
+          "hp": 26,
+          "damageScale": 0.38
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 12,
+          "concurrent": 8,
+          "hp": 28,
+          "damageScale": 0.38
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 14,
+          "concurrent": 8,
+          "hp": 30,
+          "damageScale": 0.38
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 16,
+          "concurrent": 8,
+          "hp": 32,
+          "damageScale": 0.38
+        }
+      ],
+      "totalEnemies": 60,
+      "reward": 750,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-sudden-death-5",
+      "sourceEventId": "xte179-sudden-death-5",
+      "title": "CONTACTS FRAGILES · 05",
+      "label": "CONTACTS FRAGILES · 05",
+      "description": "6 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "sudden-death",
+      "level": 5,
+      "stageId": "xt179-morgue",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "arachnoid",
+        "runner",
+        "warrior",
+        "prowler"
+      ],
+      "rules": {},
+      "roundSeconds": 480,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 9,
+          "concurrent": 7,
+          "hp": 27,
+          "damageScale": 0.405
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 11,
+          "concurrent": 8,
+          "hp": 29,
+          "damageScale": 0.405
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 31,
+          "damageScale": 0.405
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 15,
+          "concurrent": 8,
+          "hp": 33,
+          "damageScale": 0.405
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 17,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 5,
+          "label": "PRESSION 6",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 19,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        }
+      ],
+      "totalEnemies": 84,
+      "reward": 850,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-royal-1",
+      "sourceEventId": "xte179-royal-1",
+      "title": "CORDON DE LA RUCHE · 01",
+      "label": "CORDON DE LA RUCHE · 01",
+      "description": "2 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "royal",
+      "level": 1,
+      "stageId": "xt179-archives",
+      "difficulty": "easy",
+      "factionId": "hive",
+      "opponentIds": [
+        "warrior",
+        "armored-runner",
+        "armored-red",
+        "armored-k-series"
+      ],
+      "rules": {},
+      "roundSeconds": 240,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 5,
+          "concurrent": 3,
+          "hp": 15,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "armored-runner",
+            "armored-red",
+            "armored-k-series",
+            "warrior"
+          ],
+          "total": 7,
+          "concurrent": 4,
+          "hp": 17,
+          "damageScale": 0.30500000000000005
+        }
+      ],
+      "totalEnemies": 12,
+      "reward": 450,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-royal-2",
+      "sourceEventId": "xte179-royal-2",
+      "title": "CORDON DE LA RUCHE · 02",
+      "label": "CORDON DE LA RUCHE · 02",
+      "description": "3 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "royal",
+      "level": 2,
+      "stageId": "xt179-logistics",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "warrior",
+        "armored-runner",
+        "armored-red",
+        "armored-k-series"
+      ],
+      "rules": {},
+      "roundSeconds": 300,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 6,
+          "concurrent": 4,
+          "hp": 18,
+          "damageScale": 0.33
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "armored-runner",
+            "armored-red",
+            "armored-k-series",
+            "warrior"
+          ],
+          "total": 8,
+          "concurrent": 5,
+          "hp": 20,
+          "damageScale": 0.33
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 10,
+          "concurrent": 6,
+          "hp": 22,
+          "damageScale": 0.33
+        }
+      ],
+      "totalEnemies": 24,
+      "reward": 550,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-royal-3",
+      "sourceEventId": "xte179-royal-3",
+      "title": "CORDON DE LA RUCHE · 03",
+      "label": "CORDON DE LA RUCHE · 03",
+      "description": "4 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "royal",
+      "level": 3,
+      "stageId": "xt179-escape-pods",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "warrior",
+        "armored-runner",
+        "armored-red",
+        "armored-k-series"
+      ],
+      "rules": {},
+      "roundSeconds": 360,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 7,
+          "concurrent": 5,
+          "hp": 21,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "armored-runner",
+            "armored-red",
+            "armored-k-series",
+            "warrior"
+          ],
+          "total": 9,
+          "concurrent": 6,
+          "hp": 23,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 11,
+          "concurrent": 7,
+          "hp": 25,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "armored-runner",
+            "armored-red",
+            "armored-k-series",
+            "warrior"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 27,
+          "damageScale": 0.35500000000000004
+        }
+      ],
+      "totalEnemies": 40,
+      "reward": 650,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-royal-4",
+      "sourceEventId": "xte179-royal-4",
+      "title": "CORDON DE LA RUCHE · 04",
+      "label": "CORDON DE LA RUCHE · 04",
+      "description": "5 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "royal",
+      "level": 4,
+      "stageId": "xt179-arrival",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "warrior",
+        "armored-runner",
+        "armored-red",
+        "armored-k-series"
+      ],
+      "rules": {},
+      "roundSeconds": 420,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 8,
+          "concurrent": 6,
+          "hp": 24,
+          "damageScale": 0.38
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "armored-runner",
+            "armored-red",
+            "armored-k-series",
+            "warrior"
+          ],
+          "total": 10,
+          "concurrent": 7,
+          "hp": 26,
+          "damageScale": 0.38
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 12,
+          "concurrent": 8,
+          "hp": 28,
+          "damageScale": 0.38
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "armored-runner",
+            "armored-red",
+            "armored-k-series",
+            "warrior"
+          ],
+          "total": 14,
+          "concurrent": 8,
+          "hp": 30,
+          "damageScale": 0.38
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 16,
+          "concurrent": 8,
+          "hp": 32,
+          "damageScale": 0.38
+        }
+      ],
+      "totalEnemies": 60,
+      "reward": 750,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xth180-royal-5",
+      "sourceEventId": "xte179-royal-5",
+      "title": "CORDON DE LA RUCHE · 05",
+      "label": "CORDON DE LA RUCHE · 05",
+      "description": "6 vagues de contacts simultanés. De 3 à 8 adversaires actifs, avec 15 à 35 PV par contact. Neutraliser toutes les vagues avec le même spécimen ; aucune récupération automatique entre les vagues.",
+      "eventFamily": "royal",
+      "level": 5,
+      "stageId": "xt179-bioforge",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "warrior",
+        "armored-runner",
+        "armored-red",
+        "armored-k-series"
+      ],
+      "rules": {},
+      "roundSeconds": 480,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 9,
+          "concurrent": 7,
+          "hp": 27,
+          "damageScale": 0.405
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "armored-runner",
+            "armored-red",
+            "armored-k-series",
+            "warrior"
+          ],
+          "total": 11,
+          "concurrent": 8,
+          "hp": 29,
+          "damageScale": 0.405
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 31,
+          "damageScale": 0.405
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "armored-runner",
+            "armored-red",
+            "armored-k-series",
+            "warrior"
+          ],
+          "total": 15,
+          "concurrent": 8,
+          "hp": 33,
+          "damageScale": 0.405
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 17,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 5,
+          "label": "PRESSION 6",
+          "opponentIds": [
+            "armored-runner",
+            "armored-red",
+            "armored-k-series",
+            "warrior"
+          ],
+          "total": 19,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        }
+      ],
+      "totalEnemies": 84,
+      "reward": 850,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation"
+    }
+  ],
+  "stages": [
+    {
+      "stageId": "xt179-ship-habitation",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/metroidvania/zones/ship-habitation-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/metroidvania/zones/ship-habitation-mid.png",
+          "parallax": 0.24,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/metroidvania/zones/ship-habitation-foreground.png",
+          "parallax": 1.08,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/metroidvania/zones/ship-habitation-far.png",
+        "/assets/openai/metroidvania/zones/ship-habitation-mid.png",
+        "/assets/openai/metroidvania/zones/ship-habitation-foreground.png"
+      ],
+      "atmosphere": "vapor",
+      "atmosphereSeed": 1,
+      "lightColor": "#72b8bd",
+      "lightAnchors": [
+        0.22,
+        0.88
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-ship-extraction",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/metroidvania/zones/ship-extraction-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/metroidvania/zones/ship-extraction-mid.png",
+          "parallax": 0.265,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/metroidvania/zones/ship-extraction-foreground.png",
+          "parallax": 1.105,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/metroidvania/zones/ship-extraction-far.png",
+        "/assets/openai/metroidvania/zones/ship-extraction-mid.png",
+        "/assets/openai/metroidvania/zones/ship-extraction-foreground.png"
+      ],
+      "atmosphere": "condensation",
+      "atmosphereSeed": 2,
+      "lightColor": "#e2b56b",
+      "lightAnchors": [
+        0.12,
+        0.76
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-ship-engineering",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/metroidvania/zones/ship-engineering-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/metroidvania/zones/ship-engineering-mid.png",
+          "parallax": 0.29,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/metroidvania/zones/ship-engineering-foreground.png",
+          "parallax": 1.1300000000000001,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/metroidvania/zones/ship-engineering-far.png",
+        "/assets/openai/metroidvania/zones/ship-engineering-mid.png",
+        "/assets/openai/metroidvania/zones/ship-engineering-foreground.png"
+      ],
+      "atmosphere": "vapor",
+      "atmosphereSeed": 3,
+      "lightColor": "#d69058",
+      "lightAnchors": [
+        0.22,
+        0.88
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-ship-docking",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/metroidvania/zones/ship-docking-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/metroidvania/zones/ship-docking-mid.png",
+          "parallax": 0.24,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/metroidvania/zones/ship-docking-foreground.png",
+          "parallax": 1.155,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/metroidvania/zones/ship-docking-far.png",
+        "/assets/openai/metroidvania/zones/ship-docking-mid.png",
+        "/assets/openai/metroidvania/zones/ship-docking-foreground.png"
+      ],
+      "atmosphere": "condensation",
+      "atmosphereSeed": 4,
+      "lightColor": "#e2b56b",
+      "lightAnchors": [
+        0.12,
+        0.76
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-planet-surface",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-surface-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-surface-mid.png",
+          "parallax": 0.265,
+          "opacity": 0.82,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-surface-foreground.png",
+          "parallax": 1.08,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/metroidvania/zones/planet-exterior/planet-surface-far.png",
+        "/assets/openai/metroidvania/zones/planet-exterior/planet-surface-mid.png",
+        "/assets/openai/metroidvania/zones/planet-exterior/planet-surface-foreground.png"
+      ],
+      "atmosphere": "dust",
+      "atmosphereSeed": 5,
+      "lightColor": "#b3d39b",
+      "lightAnchors": [
+        0.22,
+        0.88
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-planet-ruins",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-ruins-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-ruins-mid.png",
+          "parallax": 0.29,
+          "opacity": 0.82,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-ruins-foreground.png",
+          "parallax": 1.105,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/metroidvania/zones/planet-exterior/planet-ruins-far.png",
+        "/assets/openai/metroidvania/zones/planet-exterior/planet-ruins-mid.png",
+        "/assets/openai/metroidvania/zones/planet-exterior/planet-ruins-foreground.png"
+      ],
+      "atmosphere": "dust",
+      "atmosphereSeed": 6,
+      "lightColor": "#b3d39b",
+      "lightAnchors": [
+        0.12,
+        0.76
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-planet-ridge",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-ridge-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-ridge-mid.png",
+          "parallax": 0.24,
+          "opacity": 0.82,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-ridge-foreground.png",
+          "parallax": 1.1300000000000001,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/metroidvania/zones/planet-exterior/planet-ridge-far.png",
+        "/assets/openai/metroidvania/zones/planet-exterior/planet-ridge-mid.png",
+        "/assets/openai/metroidvania/zones/planet-exterior/planet-ridge-foreground.png"
+      ],
+      "atmosphere": "dust",
+      "atmosphereSeed": 7,
+      "lightColor": "#b3d39b",
+      "lightAnchors": [
+        0.22,
+        0.88
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-planet-evac",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-evac-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-evac-mid.png",
+          "parallax": 0.265,
+          "opacity": 0.82,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-evac-foreground.png",
+          "parallax": 1.155,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/metroidvania/zones/planet-exterior/planet-evac-far.png",
+        "/assets/openai/metroidvania/zones/planet-exterior/planet-evac-mid.png",
+        "/assets/openai/metroidvania/zones/planet-exterior/planet-evac-foreground.png"
+      ],
+      "atmosphere": "dust",
+      "atmosphereSeed": 8,
+      "lightColor": "#b3d39b",
+      "lightAnchors": [
+        0.12,
+        0.76
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-planet-caves",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-caves-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-caves-mid.png",
+          "parallax": 0.29,
+          "opacity": 0.82,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-caves-foreground.png",
+          "parallax": 1.08,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/metroidvania/zones/planet-exterior/planet-caves-far.png",
+        "/assets/openai/metroidvania/zones/planet-exterior/planet-caves-mid.png",
+        "/assets/openai/metroidvania/zones/planet-exterior/planet-caves-foreground.png"
+      ],
+      "atmosphere": "spores",
+      "atmosphereSeed": 9,
+      "lightColor": "#aa8bbd",
+      "lightAnchors": [
+        0.22,
+        0.88
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-planet-approach",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-approach-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-approach-mid.png",
+          "parallax": 0.24,
+          "opacity": 0.82,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-approach-foreground.png",
+          "parallax": 1.105,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/metroidvania/zones/planet-exterior/planet-approach-far.png",
+        "/assets/openai/metroidvania/zones/planet-exterior/planet-approach-mid.png",
+        "/assets/openai/metroidvania/zones/planet-exterior/planet-approach-foreground.png"
+      ],
+      "atmosphere": "dust",
+      "atmosphereSeed": 10,
+      "lightColor": "#b3d39b",
+      "lightAnchors": [
+        0.12,
+        0.76
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-colony-utility",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-utility-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-utility-mid.png",
+          "parallax": 0.265,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-utility-foreground.png",
+          "parallax": 1.1300000000000001,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/metroidvania/zones/colony-multiroute/colony-utility-far.png",
+        "/assets/openai/metroidvania/zones/colony-multiroute/colony-utility-mid.png",
+        "/assets/openai/metroidvania/zones/colony-multiroute/colony-utility-foreground.png"
+      ],
+      "atmosphere": "mist",
+      "atmosphereSeed": 11,
+      "lightColor": "#d69058",
+      "lightAnchors": [
+        0.22,
+        0.88
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-colony-security",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-security-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-security-mid.png",
+          "parallax": 0.29,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-security-foreground.png",
+          "parallax": 1.155,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/metroidvania/zones/colony-multiroute/colony-security-far.png",
+        "/assets/openai/metroidvania/zones/colony-multiroute/colony-security-mid.png",
+        "/assets/openai/metroidvania/zones/colony-multiroute/colony-security-foreground.png"
+      ],
+      "atmosphere": "mist",
+      "atmosphereSeed": 12,
+      "lightColor": "#72b8bd",
+      "lightAnchors": [
+        0.12,
+        0.76
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-colony-landing",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-landing-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-landing-mid.png",
+          "parallax": 0.24,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-landing-foreground.png",
+          "parallax": 1.08,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/metroidvania/zones/colony-multiroute/colony-landing-far.png",
+        "/assets/openai/metroidvania/zones/colony-multiroute/colony-landing-mid.png",
+        "/assets/openai/metroidvania/zones/colony-multiroute/colony-landing-foreground.png"
+      ],
+      "atmosphere": "mist",
+      "atmosphereSeed": 13,
+      "lightColor": "#e2b56b",
+      "lightAnchors": [
+        0.22,
+        0.88
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-colony-habitat",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-habitat-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-habitat-mid.png",
+          "parallax": 0.265,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-habitat-foreground.png",
+          "parallax": 1.105,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/metroidvania/zones/colony-multiroute/colony-habitat-far.png",
+        "/assets/openai/metroidvania/zones/colony-multiroute/colony-habitat-mid.png",
+        "/assets/openai/metroidvania/zones/colony-multiroute/colony-habitat-foreground.png"
+      ],
+      "atmosphere": "mist",
+      "atmosphereSeed": 14,
+      "lightColor": "#aa8bbd",
+      "lightAnchors": [
+        0.12,
+        0.76
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-colony-civic",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-civic-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-civic-mid.png",
+          "parallax": 0.29,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-civic-foreground.png",
+          "parallax": 1.1300000000000001,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/metroidvania/zones/colony-multiroute/colony-civic-far.png",
+        "/assets/openai/metroidvania/zones/colony-multiroute/colony-civic-mid.png",
+        "/assets/openai/metroidvania/zones/colony-multiroute/colony-civic-foreground.png"
+      ],
+      "atmosphere": "mist",
+      "atmosphereSeed": 15,
+      "lightColor": "#72b8bd",
+      "lightAnchors": [
+        0.22,
+        0.88
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-colony-approach",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-approach-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-approach-mid.png",
+          "parallax": 0.24,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-approach-foreground.png",
+          "parallax": 1.155,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/metroidvania/zones/colony-multiroute/colony-approach-far.png",
+        "/assets/openai/metroidvania/zones/colony-multiroute/colony-approach-mid.png",
+        "/assets/openai/metroidvania/zones/colony-multiroute/colony-approach-foreground.png"
+      ],
+      "atmosphere": "mist",
+      "atmosphereSeed": 16,
+      "lightColor": "#b3d39b",
+      "lightAnchors": [
+        0.12,
+        0.76
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-workshop",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/layers/industrial-workshop-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/layers/industrial-workshop-mid.png",
+          "parallax": 0.265,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/layers/industrial-workshop-foreground.png",
+          "parallax": 1.08,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/layers/industrial-workshop-far.png",
+        "/assets/openai/hub/layers/industrial-workshop-mid.png",
+        "/assets/openai/hub/layers/industrial-workshop-foreground.png"
+      ],
+      "atmosphere": "vapor",
+      "atmosphereSeed": 17,
+      "lightColor": "#d69058",
+      "lightAnchors": [
+        0.22,
+        0.88
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-vehicle-bay",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/layers/industrial-vehicle-bay-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/layers/industrial-vehicle-bay-mid.png",
+          "parallax": 0.29,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/layers/industrial-vehicle-bay-foreground.png",
+          "parallax": 1.105,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/layers/industrial-vehicle-bay-far.png",
+        "/assets/openai/hub/layers/industrial-vehicle-bay-mid.png",
+        "/assets/openai/hub/layers/industrial-vehicle-bay-foreground.png"
+      ],
+      "atmosphere": "condensation",
+      "atmosphereSeed": 18,
+      "lightColor": "#e2b56b",
+      "lightAnchors": [
+        0.12,
+        0.76
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-quarantine",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/layers/industrial-quarantine-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/layers/industrial-quarantine-mid.png",
+          "parallax": 0.24,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/layers/industrial-quarantine-foreground.png",
+          "parallax": 1.1300000000000001,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/layers/industrial-quarantine-far.png",
+        "/assets/openai/hub/layers/industrial-quarantine-mid.png",
+        "/assets/openai/hub/layers/industrial-quarantine-foreground.png"
+      ],
+      "atmosphere": "vapor",
+      "atmosphereSeed": 19,
+      "lightColor": "#72b8bd",
+      "lightAnchors": [
+        0.22,
+        0.88
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-armory",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/layers/industrial-armory-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/layers/industrial-armory-mid.png",
+          "parallax": 0.265,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/layers/industrial-armory-foreground.png",
+          "parallax": 1.155,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/layers/industrial-armory-far.png",
+        "/assets/openai/hub/layers/industrial-armory-mid.png",
+        "/assets/openai/hub/layers/industrial-armory-foreground.png"
+      ],
+      "atmosphere": "vapor",
+      "atmosphereSeed": 20,
+      "lightColor": "#72b8bd",
+      "lightAnchors": [
+        0.12,
+        0.76
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-quarters",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/layers/habitat-quarters-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/layers/habitat-quarters-mid.png",
+          "parallax": 0.29,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/layers/habitat-quarters-foreground.png",
+          "parallax": 1.08,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/layers/habitat-quarters-far.png",
+        "/assets/openai/hub/layers/habitat-quarters-mid.png",
+        "/assets/openai/hub/layers/habitat-quarters-foreground.png"
+      ],
+      "atmosphere": "vapor",
+      "atmosphereSeed": 21,
+      "lightColor": "#72b8bd",
+      "lightAnchors": [
+        0.22,
+        0.88
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-mess",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/layers/habitat-mess-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/layers/habitat-mess-mid.png",
+          "parallax": 0.24,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/layers/habitat-mess-foreground.png",
+          "parallax": 1.105,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/layers/habitat-mess-far.png",
+        "/assets/openai/hub/layers/habitat-mess-mid.png",
+        "/assets/openai/hub/layers/habitat-mess-foreground.png"
+      ],
+      "atmosphere": "condensation",
+      "atmosphereSeed": 22,
+      "lightColor": "#e2b56b",
+      "lightAnchors": [
+        0.12,
+        0.76
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-medical",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/layers/habitat-medical-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/layers/habitat-medical-mid.png",
+          "parallax": 0.265,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/layers/habitat-medical-foreground.png",
+          "parallax": 1.1300000000000001,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/layers/habitat-medical-far.png",
+        "/assets/openai/hub/layers/habitat-medical-mid.png",
+        "/assets/openai/hub/layers/habitat-medical-foreground.png"
+      ],
+      "atmosphere": "vapor",
+      "atmosphereSeed": 23,
+      "lightColor": "#72b8bd",
+      "lightAnchors": [
+        0.22,
+        0.88
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-laboratory",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/layers/habitat-lab-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/layers/habitat-lab-mid.png",
+          "parallax": 0.29,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/layers/habitat-lab-foreground.png",
+          "parallax": 1.155,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/layers/habitat-lab-far.png",
+        "/assets/openai/hub/layers/habitat-lab-mid.png",
+        "/assets/openai/hub/layers/habitat-lab-foreground.png"
+      ],
+      "atmosphere": "vapor",
+      "atmosphereSeed": 24,
+      "lightColor": "#72b8bd",
+      "lightAnchors": [
+        0.12,
+        0.76
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-sensors",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/layers/engineering-sensors-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/layers/engineering-sensors-mid.png",
+          "parallax": 0.24,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/layers/engineering-sensors-foreground.png",
+          "parallax": 1.08,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/layers/engineering-sensors-far.png",
+        "/assets/openai/hub/layers/engineering-sensors-mid.png",
+        "/assets/openai/hub/layers/engineering-sensors-foreground.png"
+      ],
+      "atmosphere": "condensation",
+      "atmosphereSeed": 25,
+      "lightColor": "#74d9e7",
+      "lightAnchors": [
+        0.22,
+        0.88
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-reactor",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/layers/engineering-reactor-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/layers/engineering-reactor-mid.png",
+          "parallax": 0.265,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/layers/engineering-reactor-foreground.png",
+          "parallax": 1.105,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/layers/engineering-reactor-far.png",
+        "/assets/openai/hub/layers/engineering-reactor-mid.png",
+        "/assets/openai/hub/layers/engineering-reactor-foreground.png"
+      ],
+      "atmosphere": "vapor",
+      "atmosphereSeed": 26,
+      "lightColor": "#d69058",
+      "lightAnchors": [
+        0.12,
+        0.76
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-life-support",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/layers/engineering-life-support-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/layers/engineering-life-support-mid.png",
+          "parallax": 0.29,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/layers/engineering-life-support-foreground.png",
+          "parallax": 1.1300000000000001,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/layers/engineering-life-support-far.png",
+        "/assets/openai/hub/layers/engineering-life-support-mid.png",
+        "/assets/openai/hub/layers/engineering-life-support-foreground.png"
+      ],
+      "atmosphere": "vapor",
+      "atmosphereSeed": 27,
+      "lightColor": "#d69058",
+      "lightAnchors": [
+        0.22,
+        0.88
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-hangar",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/layers/engineering-hangar-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/layers/engineering-hangar-mid.png",
+          "parallax": 0.24,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/layers/engineering-hangar-foreground.png",
+          "parallax": 1.155,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/layers/engineering-hangar-far.png",
+        "/assets/openai/hub/layers/engineering-hangar-mid.png",
+        "/assets/openai/hub/layers/engineering-hangar-foreground.png"
+      ],
+      "atmosphere": "condensation",
+      "atmosphereSeed": 28,
+      "lightColor": "#e2b56b",
+      "lightAnchors": [
+        0.12,
+        0.76
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-cryo",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/layers/command-cryo-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/layers/command-cryo-mid.png",
+          "parallax": 0.265,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/layers/command-cryo-foreground.png",
+          "parallax": 1.08,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/layers/command-cryo-far.png",
+        "/assets/openai/hub/layers/command-cryo-mid.png",
+        "/assets/openai/hub/layers/command-cryo-foreground.png"
+      ],
+      "atmosphere": "vapor",
+      "atmosphereSeed": 29,
+      "lightColor": "#72b8bd",
+      "lightAnchors": [
+        0.22,
+        0.88
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-cic",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/layers/command-cic-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/layers/command-cic-mid.png",
+          "parallax": 0.29,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/layers/command-cic-foreground.png",
+          "parallax": 1.105,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/layers/command-cic-far.png",
+        "/assets/openai/hub/layers/command-cic-mid.png",
+        "/assets/openai/hub/layers/command-cic-foreground.png"
+      ],
+      "atmosphere": "condensation",
+      "atmosphereSeed": 30,
+      "lightColor": "#74d9e7",
+      "lightAnchors": [
+        0.12,
+        0.76
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-briefing",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/layers/command-briefing-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/layers/command-briefing-mid.png",
+          "parallax": 0.24,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/layers/command-briefing-foreground.png",
+          "parallax": 1.1300000000000001,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/layers/command-briefing-far.png",
+        "/assets/openai/hub/layers/command-briefing-mid.png",
+        "/assets/openai/hub/layers/command-briefing-foreground.png"
+      ],
+      "atmosphere": "condensation",
+      "atmosphereSeed": 31,
+      "lightColor": "#74d9e7",
+      "lightAnchors": [
+        0.22,
+        0.88
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-bridge",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/layers/command-bridge-far.png",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/layers/command-bridge-mid.png",
+          "parallax": 0.265,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/layers/command-bridge-foreground.png",
+          "parallax": 1.155,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/layers/command-bridge-far.png",
+        "/assets/openai/hub/layers/command-bridge-mid.png",
+        "/assets/openai/hub/layers/command-bridge-foreground.png"
+      ],
+      "atmosphere": "condensation",
+      "atmosphereSeed": 32,
+      "lightColor": "#74d9e7",
+      "lightAnchors": [
+        0.12,
+        0.76
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-synthetic-bay",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/annexes/v71/synthetic-bay/far.webp",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/annexes/v71/synthetic-bay/mid.webp",
+          "parallax": 0.29,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/annexes/v71/synthetic-bay/foreground.webp",
+          "parallax": 1.08,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/annexes/v71/synthetic-bay/far.webp",
+        "/assets/openai/hub/annexes/v71/synthetic-bay/mid.webp",
+        "/assets/openai/hub/annexes/v71/synthetic-bay/foreground.webp"
+      ],
+      "atmosphere": "vapor",
+      "atmosphereSeed": 33,
+      "lightColor": "#72b8bd",
+      "lightAnchors": [
+        0.22,
+        0.88
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-proving-ground",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/annexes/v71/proving-ground/far.webp",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/annexes/v71/proving-ground/mid.webp",
+          "parallax": 0.24,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/annexes/v71/proving-ground/foreground.webp",
+          "parallax": 1.105,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/annexes/v71/proving-ground/far.webp",
+        "/assets/openai/hub/annexes/v71/proving-ground/mid.webp",
+        "/assets/openai/hub/annexes/v71/proving-ground/foreground.webp"
+      ],
+      "atmosphere": "vapor",
+      "atmosphereSeed": 34,
+      "lightColor": "#72b8bd",
+      "lightAnchors": [
+        0.12,
+        0.76
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-morgue",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/annexes/v71/morgue/far.webp",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/annexes/v71/morgue/mid.webp",
+          "parallax": 0.265,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/annexes/v71/morgue/foreground.webp",
+          "parallax": 1.1300000000000001,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/annexes/v71/morgue/far.webp",
+        "/assets/openai/hub/annexes/v71/morgue/mid.webp",
+        "/assets/openai/hub/annexes/v71/morgue/foreground.webp"
+      ],
+      "atmosphere": "spores",
+      "atmosphereSeed": 35,
+      "lightColor": "#aa8bbd",
+      "lightAnchors": [
+        0.22,
+        0.88
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-archives",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/annexes/v71/mire-archives/far.webp",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/annexes/v71/mire-archives/mid.webp",
+          "parallax": 0.29,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/annexes/v71/mire-archives/foreground.webp",
+          "parallax": 1.155,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/annexes/v71/mire-archives/far.webp",
+        "/assets/openai/hub/annexes/v71/mire-archives/mid.webp",
+        "/assets/openai/hub/annexes/v71/mire-archives/foreground.webp"
+      ],
+      "atmosphere": "condensation",
+      "atmosphereSeed": 36,
+      "lightColor": "#74d9e7",
+      "lightAnchors": [
+        0.12,
+        0.76
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-logistics",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/annexes/v71/logistics/far.webp",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/annexes/v71/logistics/mid.webp",
+          "parallax": 0.24,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/annexes/v71/logistics/foreground.webp",
+          "parallax": 1.08,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/annexes/v71/logistics/far.webp",
+        "/assets/openai/hub/annexes/v71/logistics/mid.webp",
+        "/assets/openai/hub/annexes/v71/logistics/foreground.webp"
+      ],
+      "atmosphere": "condensation",
+      "atmosphereSeed": 37,
+      "lightColor": "#e2b56b",
+      "lightAnchors": [
+        0.22,
+        0.88
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-escape-pods",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/annexes/v71/escape-pods/far.webp",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/annexes/v71/escape-pods/mid.webp",
+          "parallax": 0.265,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/annexes/v71/escape-pods/foreground.webp",
+          "parallax": 1.105,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/annexes/v71/escape-pods/far.webp",
+        "/assets/openai/hub/annexes/v71/escape-pods/mid.webp",
+        "/assets/openai/hub/annexes/v71/escape-pods/foreground.webp"
+      ],
+      "atmosphere": "condensation",
+      "atmosphereSeed": 38,
+      "lightColor": "#e2b56b",
+      "lightAnchors": [
+        0.12,
+        0.76
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-arrival",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/annexes/v71/arrival-airlock/far.webp",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/annexes/v71/arrival-airlock/mid.webp",
+          "parallax": 0.29,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/annexes/v71/arrival-airlock/foreground.webp",
+          "parallax": 1.1300000000000001,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/annexes/v71/arrival-airlock/far.webp",
+        "/assets/openai/hub/annexes/v71/arrival-airlock/mid.webp",
+        "/assets/openai/hub/annexes/v71/arrival-airlock/foreground.webp"
+      ],
+      "atmosphere": "vapor",
+      "atmosphereSeed": 39,
+      "lightColor": "#72b8bd",
+      "lightAnchors": [
+        0.22,
+        0.88
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    },
+    {
+      "stageId": "xt179-bioforge",
+      "revision": 180,
+      "layers": [
+        {
+          "id": "far",
+          "path": "/assets/openai/hub/annexes/v71/bioforge/far.webp",
+          "parallax": 0.035,
+          "opacity": 1,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "middle",
+          "path": "/assets/openai/hub/annexes/v71/bioforge/mid.webp",
+          "parallax": 0.24,
+          "opacity": 0.72,
+          "plane": "behind-fighters"
+        },
+        {
+          "id": "foreground",
+          "path": "/assets/openai/hub/annexes/v71/bioforge/foreground.webp",
+          "parallax": 1.155,
+          "opacity": 0.78,
+          "plane": "below-feet"
+        }
+      ],
+      "assets": [
+        "/assets/openai/hub/annexes/v71/bioforge/far.webp",
+        "/assets/openai/hub/annexes/v71/bioforge/mid.webp",
+        "/assets/openai/hub/annexes/v71/bioforge/foreground.webp"
+      ],
+      "atmosphere": "spores",
+      "atmosphereSeed": 40,
+      "lightColor": "#aa8bbd",
+      "lightAnchors": [
+        0.12,
+        0.76
+      ],
+      "canonExact": false,
+      "assetStatus": "existing-project-layer-family",
+      "affectsCombat": false
+    }
+  ],
+  "sprites": [
+    {
+      "fighterId": "runner",
+      "sourceWork": "Alien 3 (1992)",
+      "stride": 68,
+      "lift": 17,
+      "radius": 74,
+      "chains": [
+        {
+          "contact": "footFar",
+          "points": [
+            [
+              743,
+              497
+            ],
+            [
+              651,
+              623
+            ],
+            [
+              448,
+              792
+            ]
+          ],
+          "phase": 0
+        },
+        {
+          "contact": "footNear",
+          "points": [
+            [
+              817,
+              532
+            ],
+            [
+              818,
+              692
+            ],
+            [
+              930,
+              779
+            ]
+          ],
+          "phase": 0.5
+        },
+        {
+          "contact": "handFar",
+          "points": [
+            [
+              1100,
+              490
+            ],
+            [
+              1158,
+              640
+            ],
+            [
+              1245,
+              792
+            ]
+          ],
+          "phase": 0.5
+        },
+        {
+          "contact": "handNear",
+          "points": [
+            [
+              1201,
+              492
+            ],
+            [
+              1268,
+              626
+            ],
+            [
+              1470,
+              755
+            ]
+          ],
+          "phase": 0
+        }
+      ],
+      "attackAngles": {
+        "spine": -0.3,
+        "head": -3.2
+      },
+      "profileId": "castes-film_runner_alien3_1992",
+      "path": "/assets/user/castes-v87/film_runner_alien3_1992.png",
+      "sourceSha256": "f117c7ad0e6da9a02d3a4ce315066d75acfd67a909620f560ff6cd8c3d7b64b3",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "sourceFacing": 1,
+      "evidence": "native-source-pixel-chains-and-eight-authored-short-stride-poses",
+      "canonExact": false,
+      "fullLocomotion": false,
+      "sourceProvenance": "fan-made-user-import",
+      "referenceStatus": "user-art-adaptation-not-film-or-source-game-motion",
+      "poses": [
+        {
+          "id": "swarm-v180-runner-step-0",
+          "phase": 0
+        },
+        {
+          "id": "swarm-v180-runner-step-1",
+          "phase": 0.125
+        },
+        {
+          "id": "swarm-v180-runner-step-2",
+          "phase": 0.25
+        },
+        {
+          "id": "swarm-v180-runner-step-3",
+          "phase": 0.375
+        },
+        {
+          "id": "swarm-v180-runner-step-4",
+          "phase": 0.5
+        },
+        {
+          "id": "swarm-v180-runner-step-5",
+          "phase": 0.625
+        },
+        {
+          "id": "swarm-v180-runner-step-6",
+          "phase": 0.75
+        },
+        {
+          "id": "swarm-v180-runner-step-7",
+          "phase": 0.875
+        }
+      ]
+    },
+    {
+      "fighterId": "warrior",
+      "sourceWork": "Aliens (1986)",
+      "stride": 62,
+      "lift": 18,
+      "radius": 76,
+      "chains": [
+        {
+          "contact": "footFar",
+          "points": [
+            [
+              1057,
+              548
+            ],
+            [
+              1005,
+              708
+            ],
+            [
+              851,
+              875
+            ],
+            [
+              879,
+              979
+            ]
+          ],
+          "phase": 0
+        },
+        {
+          "contact": "footNear",
+          "points": [
+            [
+              1121,
+              551
+            ],
+            [
+              1260,
+              697
+            ],
+            [
+              1167,
+              894
+            ],
+            [
+              1271,
+              968
+            ]
+          ],
+          "phase": 0.5
+        }
+      ],
+      "attackAngles": {
+        "spine": -0.7,
+        "head": -1.8,
+        "upper1": -5,
+        "fore1": 6.5,
+        "hand1": -2
+      },
+      "profileId": "castes-film_warrior_aliens_1986",
+      "path": "/assets/user/castes-v87/film_warrior_aliens_1986.png",
+      "sourceSha256": "c791a14045116531425d270c3edd61384b063d82a0bddf4e23195e9397ecb65f",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "sourceFacing": 1,
+      "evidence": "native-source-pixel-chains-and-eight-authored-short-stride-poses",
+      "canonExact": false,
+      "fullLocomotion": false,
+      "sourceProvenance": "fan-made-user-import",
+      "referenceStatus": "user-art-adaptation-not-film-or-source-game-motion",
+      "poses": [
+        {
+          "id": "swarm-v180-warrior-step-0",
+          "phase": 0
+        },
+        {
+          "id": "swarm-v180-warrior-step-1",
+          "phase": 0.125
+        },
+        {
+          "id": "swarm-v180-warrior-step-2",
+          "phase": 0.25
+        },
+        {
+          "id": "swarm-v180-warrior-step-3",
+          "phase": 0.375
+        },
+        {
+          "id": "swarm-v180-warrior-step-4",
+          "phase": 0.5
+        },
+        {
+          "id": "swarm-v180-warrior-step-5",
+          "phase": 0.625
+        },
+        {
+          "id": "swarm-v180-warrior-step-6",
+          "phase": 0.75
+        },
+        {
+          "id": "swarm-v180-warrior-step-7",
+          "phase": 0.875
+        }
+      ]
+    },
+    {
+      "fighterId": "prowler",
+      "sourceWork": "Aliens: Fireteam Elite (2021)",
+      "stride": 64,
+      "lift": 16,
+      "radius": 76,
+      "chains": [
+        {
+          "contact": "footFar",
+          "points": [
+            [
+              555,
+              578
+            ],
+            [
+              463,
+              754
+            ],
+            [
+              305,
+              724
+            ],
+            [
+              185,
+              937
+            ]
+          ],
+          "phase": 0
+        },
+        {
+          "contact": "footNear",
+          "points": [
+            [
+              655,
+              611
+            ],
+            [
+              749,
+              720
+            ],
+            [
+              638,
+              750
+            ],
+            [
+              751,
+              941
+            ]
+          ],
+          "phase": 0.5
+        },
+        {
+          "contact": "handFar",
+          "points": [
+            [
+              1005,
+              579
+            ],
+            [
+              1151,
+              749
+            ],
+            [
+              1415,
+              907
+            ]
+          ],
+          "phase": 0.5
+        },
+        {
+          "contact": "handNear",
+          "points": [
+            [
+              914,
+              583
+            ],
+            [
+              877,
+              752
+            ],
+            [
+              1181,
+              916
+            ]
+          ],
+          "phase": 0
+        }
+      ],
+      "attackAngles": {
+        "spine": -0.45,
+        "head": -2,
+        "upper0": -2.5,
+        "fore0": 3.5,
+        "upper1": 3,
+        "fore1": -3
+      },
+      "profileId": "castes-game_afe_prowler",
+      "path": "/assets/user/castes-v87/game_afe_prowler.png",
+      "sourceSha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "sourceFacing": 1,
+      "evidence": "native-source-pixel-chains-and-eight-authored-short-stride-poses",
+      "canonExact": false,
+      "fullLocomotion": false,
+      "sourceProvenance": "fan-made-user-import",
+      "referenceStatus": "user-art-adaptation-not-film-or-source-game-motion",
+      "poses": [
+        {
+          "id": "swarm-v180-prowler-step-0",
+          "phase": 0
+        },
+        {
+          "id": "swarm-v180-prowler-step-1",
+          "phase": 0.125
+        },
+        {
+          "id": "swarm-v180-prowler-step-2",
+          "phase": 0.25
+        },
+        {
+          "id": "swarm-v180-prowler-step-3",
+          "phase": 0.375
+        },
+        {
+          "id": "swarm-v180-prowler-step-4",
+          "phase": 0.5
+        },
+        {
+          "id": "swarm-v180-prowler-step-5",
+          "phase": 0.625
+        },
+        {
+          "id": "swarm-v180-prowler-step-6",
+          "phase": 0.75
+        },
+        {
+          "id": "swarm-v180-prowler-step-7",
+          "phase": 0.875
+        }
+      ]
+    },
+    {
+      "fighterId": "spitter",
+      "sourceWork": "Aliens: Colonial Marines (2013)",
+      "stride": 54,
+      "lift": 15,
+      "radius": 73,
+      "chains": [
+        {
+          "contact": "footFar",
+          "points": [
+            [
+              842,
+              616
+            ],
+            [
+              890,
+              749
+            ],
+            [
+              661,
+              735
+            ],
+            [
+              610,
+              937
+            ]
+          ],
+          "phase": 0
+        },
+        {
+          "contact": "footNear",
+          "points": [
+            [
+              964,
+              641
+            ],
+            [
+              1020,
+              746
+            ],
+            [
+              998,
+              823
+            ],
+            [
+              1125,
+              937
+            ]
+          ],
+          "phase": 0.5
+        }
+      ],
+      "attackAngles": {
+        "spine": -0.25,
+        "head": -3.8
+      },
+      "profileId": "castes-game_acm_spitter",
+      "path": "/assets/user/castes-v87/game_acm_spitter.png",
+      "sourceSha256": "c281ad7c020999e2796af1c904be45c028bd8643e45bfc45b93edaf5ba4642c7",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "sourceFacing": 1,
+      "evidence": "native-source-pixel-chains-and-eight-authored-short-stride-poses",
+      "canonExact": false,
+      "fullLocomotion": false,
+      "sourceProvenance": "fan-made-user-import",
+      "referenceStatus": "user-art-adaptation-not-film-or-source-game-motion",
+      "poses": [
+        {
+          "id": "swarm-v180-spitter-step-0",
+          "phase": 0
+        },
+        {
+          "id": "swarm-v180-spitter-step-1",
+          "phase": 0.125
+        },
+        {
+          "id": "swarm-v180-spitter-step-2",
+          "phase": 0.25
+        },
+        {
+          "id": "swarm-v180-spitter-step-3",
+          "phase": 0.375
+        },
+        {
+          "id": "swarm-v180-spitter-step-4",
+          "phase": 0.5
+        },
+        {
+          "id": "swarm-v180-spitter-step-5",
+          "phase": 0.625
+        },
+        {
+          "id": "swarm-v180-spitter-step-6",
+          "phase": 0.75
+        },
+        {
+          "id": "swarm-v180-spitter-step-7",
+          "phase": 0.875
+        }
+      ]
+    },
+    {
+      "fighterId": "burster",
+      "sourceWork": "Aliens: Fireteam Elite (2021)",
+      "stride": 60,
+      "lift": 16,
+      "radius": 72,
+      "chains": [
+        {
+          "contact": "footFar",
+          "points": [
+            [
+              862,
+              542
+            ],
+            [
+              741,
+              682
+            ],
+            [
+              475,
+              759
+            ],
+            [
+              552,
+              834
+            ]
+          ],
+          "phase": 0
+        },
+        {
+          "contact": "footNear",
+          "points": [
+            [
+              921,
+              574
+            ],
+            [
+              944,
+              690
+            ],
+            [
+              1000,
+              785
+            ],
+            [
+              1021,
+              796
+            ]
+          ],
+          "phase": 0.5
+        },
+        {
+          "contact": "handFar",
+          "points": [
+            [
+              1132,
+              528
+            ],
+            [
+              1186,
+              701
+            ],
+            [
+              1290,
+              869
+            ]
+          ],
+          "phase": 0.5
+        },
+        {
+          "contact": "handNear",
+          "points": [
+            [
+              1211,
+              540
+            ],
+            [
+              1320,
+              718
+            ],
+            [
+              1428,
+              784
+            ]
+          ],
+          "phase": 0
+        }
+      ],
+      "attackAngles": {
+        "spine": -0.2,
+        "head": -2.8
+      },
+      "profileId": "castes-game_afe_burster",
+      "path": "/assets/user/castes-v87/game_afe_burster.png",
+      "sourceSha256": "b2db2418502099d9f2551434cf207ef72fe0a09dc68914fbc85e18705720ce13",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "sourceFacing": 1,
+      "evidence": "native-source-pixel-chains-and-eight-authored-short-stride-poses",
+      "canonExact": false,
+      "fullLocomotion": false,
+      "sourceProvenance": "fan-made-user-import",
+      "referenceStatus": "user-art-adaptation-not-film-or-source-game-motion",
+      "poses": [
+        {
+          "id": "swarm-v180-burster-step-0",
+          "phase": 0
+        },
+        {
+          "id": "swarm-v180-burster-step-1",
+          "phase": 0.125
+        },
+        {
+          "id": "swarm-v180-burster-step-2",
+          "phase": 0.25
+        },
+        {
+          "id": "swarm-v180-burster-step-3",
+          "phase": 0.375
+        },
+        {
+          "id": "swarm-v180-burster-step-4",
+          "phase": 0.5
+        },
+        {
+          "id": "swarm-v180-burster-step-5",
+          "phase": 0.625
+        },
+        {
+          "id": "swarm-v180-burster-step-6",
+          "phase": 0.75
+        },
+        {
+          "id": "swarm-v180-burster-step-7",
+          "phase": 0.875
+        }
+      ]
+    }
+  ],
+  "illustrations": [
+    {
+      "id": "campaign-art-v180-pair-001-frontier-approach",
+      "assetId": "acheron-colony",
+      "campaignId": "pair-001-frontier",
+      "worldId": "world-01-acheron-lv-426",
+      "phaseKind": "approach",
+      "path": "/assets/openai/campaign/v180/acheron-colony.webp",
+      "type": "image",
+      "alt": "Acheron / LV-426 · création du projet : Colonie industrielle sous un orage, blocs préfabriqués et conduites mouillées, processeur atmosphérique au loin.",
+      "credit": "Acheron / LV-426 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-001-frontier-deployment",
+      "assetId": "acheron-colony",
+      "campaignId": "pair-001-frontier",
+      "worldId": "world-01-acheron-lv-426",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/campaign/v180/acheron-colony.webp",
+      "type": "image",
+      "alt": "Acheron / LV-426 · création du projet : Colonie industrielle sous un orage, blocs préfabriqués et conduites mouillées, processeur atmosphérique au loin.",
+      "credit": "Acheron / LV-426 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-002-mire-approach",
+      "assetId": "acheron-colony",
+      "campaignId": "pair-002-mire",
+      "worldId": "world-01-acheron-lv-426",
+      "phaseKind": "approach",
+      "path": "/assets/openai/campaign/v180/acheron-colony.webp",
+      "type": "image",
+      "alt": "Acheron / LV-426 · création du projet : Colonie industrielle sous un orage, blocs préfabriqués et conduites mouillées, processeur atmosphérique au loin.",
+      "credit": "Acheron / LV-426 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-002-mire-deployment",
+      "assetId": "acheron-colony",
+      "campaignId": "pair-002-mire",
+      "worldId": "world-01-acheron-lv-426",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/campaign/v180/acheron-colony.webp",
+      "type": "image",
+      "alt": "Acheron / LV-426 · création du projet : Colonie industrielle sous un orage, blocs préfabriqués et conduites mouillées, processeur atmosphérique au loin.",
+      "credit": "Acheron / LV-426 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-010-mire-approach",
+      "assetId": "acheron-colony",
+      "campaignId": "pair-010-mire",
+      "worldId": "world-01-acheron-lv-426",
+      "phaseKind": "approach",
+      "path": "/assets/openai/campaign/v180/acheron-colony.webp",
+      "type": "image",
+      "alt": "Acheron / LV-426 · création du projet : Colonie industrielle sous un orage, blocs préfabriqués et conduites mouillées, processeur atmosphérique au loin.",
+      "credit": "Acheron / LV-426 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-010-mire-deployment",
+      "assetId": "acheron-colony",
+      "campaignId": "pair-010-mire",
+      "worldId": "world-01-acheron-lv-426",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/campaign/v180/acheron-colony.webp",
+      "type": "image",
+      "alt": "Acheron / LV-426 · création du projet : Colonie industrielle sous un orage, blocs préfabriqués et conduites mouillées, processeur atmosphérique au loin.",
+      "credit": "Acheron / LV-426 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-030-mire-approach",
+      "assetId": "acheron-colony",
+      "campaignId": "pair-030-mire",
+      "worldId": "world-01-acheron-lv-426",
+      "phaseKind": "approach",
+      "path": "/assets/openai/campaign/v180/acheron-colony.webp",
+      "type": "image",
+      "alt": "Acheron / LV-426 · création du projet : Colonie industrielle sous un orage, blocs préfabriqués et conduites mouillées, processeur atmosphérique au loin.",
+      "credit": "Acheron / LV-426 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-030-mire-deployment",
+      "assetId": "acheron-colony",
+      "campaignId": "pair-030-mire",
+      "worldId": "world-01-acheron-lv-426",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/campaign/v180/acheron-colony.webp",
+      "type": "image",
+      "alt": "Acheron / LV-426 · création du projet : Colonie industrielle sous un orage, blocs préfabriqués et conduites mouillées, processeur atmosphérique au loin.",
+      "credit": "Acheron / LV-426 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-038-mire-approach",
+      "assetId": "acheron-colony",
+      "campaignId": "pair-038-mire",
+      "worldId": "world-01-acheron-lv-426",
+      "phaseKind": "approach",
+      "path": "/assets/openai/campaign/v180/acheron-colony.webp",
+      "type": "image",
+      "alt": "Acheron / LV-426 · création du projet : Colonie industrielle sous un orage, blocs préfabriqués et conduites mouillées, processeur atmosphérique au loin.",
+      "credit": "Acheron / LV-426 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-038-mire-deployment",
+      "assetId": "acheron-colony",
+      "campaignId": "pair-038-mire",
+      "worldId": "world-01-acheron-lv-426",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/campaign/v180/acheron-colony.webp",
+      "type": "image",
+      "alt": "Acheron / LV-426 · création du projet : Colonie industrielle sous un orage, blocs préfabriqués et conduites mouillées, processeur atmosphérique au loin.",
+      "credit": "Acheron / LV-426 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-002-frontier-approach",
+      "assetId": "lv223-engineer-temple",
+      "campaignId": "pair-002-frontier",
+      "worldId": "world-02-lv-223",
+      "phaseKind": "approach",
+      "path": "/assets/openai/campaign/v180/lv223-engineer-temple.webp",
+      "type": "image",
+      "alt": "LV-223 · création du projet : Dôme monumental nervuré au-dessus de basaltes noirs, porte sombre en forme de serrure et brumes dans la vallée.",
+      "credit": "LV-223 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-002-frontier-deployment",
+      "assetId": "lv223-engineer-temple",
+      "campaignId": "pair-002-frontier",
+      "worldId": "world-02-lv-223",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/campaign/v180/lv223-engineer-temple.webp",
+      "type": "image",
+      "alt": "LV-223 · création du projet : Dôme monumental nervuré au-dessus de basaltes noirs, porte sombre en forme de serrure et brumes dans la vallée.",
+      "credit": "LV-223 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-005-mire-approach",
+      "assetId": "lv223-engineer-temple",
+      "campaignId": "pair-005-mire",
+      "worldId": "world-02-lv-223",
+      "phaseKind": "approach",
+      "path": "/assets/openai/campaign/v180/lv223-engineer-temple.webp",
+      "type": "image",
+      "alt": "LV-223 · création du projet : Dôme monumental nervuré au-dessus de basaltes noirs, porte sombre en forme de serrure et brumes dans la vallée.",
+      "credit": "LV-223 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-005-mire-deployment",
+      "assetId": "lv223-engineer-temple",
+      "campaignId": "pair-005-mire",
+      "worldId": "world-02-lv-223",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/campaign/v180/lv223-engineer-temple.webp",
+      "type": "image",
+      "alt": "LV-223 · création du projet : Dôme monumental nervuré au-dessus de basaltes noirs, porte sombre en forme de serrure et brumes dans la vallée.",
+      "credit": "LV-223 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-033-mire-approach",
+      "assetId": "lv223-engineer-temple",
+      "campaignId": "pair-033-mire",
+      "worldId": "world-02-lv-223",
+      "phaseKind": "approach",
+      "path": "/assets/openai/campaign/v180/lv223-engineer-temple.webp",
+      "type": "image",
+      "alt": "LV-223 · création du projet : Dôme monumental nervuré au-dessus de basaltes noirs, porte sombre en forme de serrure et brumes dans la vallée.",
+      "credit": "LV-223 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-033-mire-deployment",
+      "assetId": "lv223-engineer-temple",
+      "campaignId": "pair-033-mire",
+      "worldId": "world-02-lv-223",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/campaign/v180/lv223-engineer-temple.webp",
+      "type": "image",
+      "alt": "LV-223 · création du projet : Dôme monumental nervuré au-dessus de basaltes noirs, porte sombre en forme de serrure et brumes dans la vallée.",
+      "credit": "LV-223 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-061-mire-approach",
+      "assetId": "lv223-engineer-temple",
+      "campaignId": "pair-061-mire",
+      "worldId": "world-02-lv-223",
+      "phaseKind": "approach",
+      "path": "/assets/openai/campaign/v180/lv223-engineer-temple.webp",
+      "type": "image",
+      "alt": "LV-223 · création du projet : Dôme monumental nervuré au-dessus de basaltes noirs, porte sombre en forme de serrure et brumes dans la vallée.",
+      "credit": "LV-223 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-061-mire-deployment",
+      "assetId": "lv223-engineer-temple",
+      "campaignId": "pair-061-mire",
+      "worldId": "world-02-lv-223",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/campaign/v180/lv223-engineer-temple.webp",
+      "type": "image",
+      "alt": "LV-223 · création du projet : Dôme monumental nervuré au-dessus de basaltes noirs, porte sombre en forme de serrure et brumes dans la vallée.",
+      "credit": "LV-223 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-066-frontier-approach",
+      "assetId": "lv223-engineer-temple",
+      "campaignId": "pair-066-frontier",
+      "worldId": "world-02-lv-223",
+      "phaseKind": "approach",
+      "path": "/assets/openai/campaign/v180/lv223-engineer-temple.webp",
+      "type": "image",
+      "alt": "LV-223 · création du projet : Dôme monumental nervuré au-dessus de basaltes noirs, porte sombre en forme de serrure et brumes dans la vallée.",
+      "credit": "LV-223 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-066-frontier-deployment",
+      "assetId": "lv223-engineer-temple",
+      "campaignId": "pair-066-frontier",
+      "worldId": "world-02-lv-223",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/campaign/v180/lv223-engineer-temple.webp",
+      "type": "image",
+      "alt": "LV-223 · création du projet : Dôme monumental nervuré au-dessus de basaltes noirs, porte sombre en forme de serrure et brumes dans la vallée.",
+      "credit": "LV-223 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-003-mire-approach",
+      "assetId": "fiorina-foundry",
+      "campaignId": "pair-003-mire",
+      "worldId": "world-03-fiorina-161",
+      "phaseKind": "approach",
+      "path": "/assets/openai/campaign/v180/fiorina-foundry.webp",
+      "type": "image",
+      "alt": "Fiorina 161 · création du projet : Fonderie sombre sous une voûte haute, passerelles grillagées, conduites rouillées et fours éclairés en orange.",
+      "credit": "Fiorina 161 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-003-mire-deployment",
+      "assetId": "fiorina-foundry",
+      "campaignId": "pair-003-mire",
+      "worldId": "world-03-fiorina-161",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/campaign/v180/fiorina-foundry.webp",
+      "type": "image",
+      "alt": "Fiorina 161 · création du projet : Fonderie sombre sous une voûte haute, passerelles grillagées, conduites rouillées et fours éclairés en orange.",
+      "credit": "Fiorina 161 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-003-frontier-approach",
+      "assetId": "fiorina-foundry",
+      "campaignId": "pair-003-frontier",
+      "worldId": "world-03-fiorina-161",
+      "phaseKind": "approach",
+      "path": "/assets/openai/campaign/v180/fiorina-foundry.webp",
+      "type": "image",
+      "alt": "Fiorina 161 · création du projet : Fonderie sombre sous une voûte haute, passerelles grillagées, conduites rouillées et fours éclairés en orange.",
+      "credit": "Fiorina 161 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-003-frontier-deployment",
+      "assetId": "fiorina-foundry",
+      "campaignId": "pair-003-frontier",
+      "worldId": "world-03-fiorina-161",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/campaign/v180/fiorina-foundry.webp",
+      "type": "image",
+      "alt": "Fiorina 161 · création du projet : Fonderie sombre sous une voûte haute, passerelles grillagées, conduites rouillées et fours éclairés en orange.",
+      "credit": "Fiorina 161 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-031-mire-approach",
+      "assetId": "fiorina-foundry",
+      "campaignId": "pair-031-mire",
+      "worldId": "world-03-fiorina-161",
+      "phaseKind": "approach",
+      "path": "/assets/openai/campaign/v180/fiorina-foundry.webp",
+      "type": "image",
+      "alt": "Fiorina 161 · création du projet : Fonderie sombre sous une voûte haute, passerelles grillagées, conduites rouillées et fours éclairés en orange.",
+      "credit": "Fiorina 161 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-031-mire-deployment",
+      "assetId": "fiorina-foundry",
+      "campaignId": "pair-031-mire",
+      "worldId": "world-03-fiorina-161",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/campaign/v180/fiorina-foundry.webp",
+      "type": "image",
+      "alt": "Fiorina 161 · création du projet : Fonderie sombre sous une voûte haute, passerelles grillagées, conduites rouillées et fours éclairés en orange.",
+      "credit": "Fiorina 161 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-059-mire-approach",
+      "assetId": "fiorina-foundry",
+      "campaignId": "pair-059-mire",
+      "worldId": "world-03-fiorina-161",
+      "phaseKind": "approach",
+      "path": "/assets/openai/campaign/v180/fiorina-foundry.webp",
+      "type": "image",
+      "alt": "Fiorina 161 · création du projet : Fonderie sombre sous une voûte haute, passerelles grillagées, conduites rouillées et fours éclairés en orange.",
+      "credit": "Fiorina 161 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-059-mire-deployment",
+      "assetId": "fiorina-foundry",
+      "campaignId": "pair-059-mire",
+      "worldId": "world-03-fiorina-161",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/campaign/v180/fiorina-foundry.webp",
+      "type": "image",
+      "alt": "Fiorina 161 · création du projet : Fonderie sombre sous une voûte haute, passerelles grillagées, conduites rouillées et fours éclairés en orange.",
+      "credit": "Fiorina 161 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-067-frontier-approach",
+      "assetId": "fiorina-foundry",
+      "campaignId": "pair-067-frontier",
+      "worldId": "world-03-fiorina-161",
+      "phaseKind": "approach",
+      "path": "/assets/openai/campaign/v180/fiorina-foundry.webp",
+      "type": "image",
+      "alt": "Fiorina 161 · création du projet : Fonderie sombre sous une voûte haute, passerelles grillagées, conduites rouillées et fours éclairés en orange.",
+      "credit": "Fiorina 161 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-067-frontier-deployment",
+      "assetId": "fiorina-foundry",
+      "campaignId": "pair-067-frontier",
+      "worldId": "world-03-fiorina-161",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/campaign/v180/fiorina-foundry.webp",
+      "type": "image",
+      "alt": "Fiorina 161 · création du projet : Fonderie sombre sous une voûte haute, passerelles grillagées, conduites rouillées et fours éclairés en orange.",
+      "credit": "Fiorina 161 · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-004-frontier-approach",
+      "assetId": "sevastopol-transit",
+      "campaignId": "pair-004-frontier",
+      "worldId": "world-04-sevastopol",
+      "phaseKind": "approach",
+      "path": "/assets/openai/campaign/v180/sevastopol-transit.webp",
+      "type": "image",
+      "alt": "Sevastopol · création du projet : Coursive rétroindustrielle aux panneaux crème et bruns, écrans cathodiques verts, sas capitonné et fenêtre sur une géante gazeuse.",
+      "credit": "Sevastopol · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-004-frontier-deployment",
+      "assetId": "sevastopol-transit",
+      "campaignId": "pair-004-frontier",
+      "worldId": "world-04-sevastopol",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/campaign/v180/sevastopol-transit.webp",
+      "type": "image",
+      "alt": "Sevastopol · création du projet : Coursive rétroindustrielle aux panneaux crème et bruns, écrans cathodiques verts, sas capitonné et fenêtre sur une géante gazeuse.",
+      "credit": "Sevastopol · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-009-mire-approach",
+      "assetId": "sevastopol-transit",
+      "campaignId": "pair-009-mire",
+      "worldId": "world-04-sevastopol",
+      "phaseKind": "approach",
+      "path": "/assets/openai/campaign/v180/sevastopol-transit.webp",
+      "type": "image",
+      "alt": "Sevastopol · création du projet : Coursive rétroindustrielle aux panneaux crème et bruns, écrans cathodiques verts, sas capitonné et fenêtre sur une géante gazeuse.",
+      "credit": "Sevastopol · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-009-mire-deployment",
+      "assetId": "sevastopol-transit",
+      "campaignId": "pair-009-mire",
+      "worldId": "world-04-sevastopol",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/campaign/v180/sevastopol-transit.webp",
+      "type": "image",
+      "alt": "Sevastopol · création du projet : Coursive rétroindustrielle aux panneaux crème et bruns, écrans cathodiques verts, sas capitonné et fenêtre sur une géante gazeuse.",
+      "credit": "Sevastopol · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-037-mire-approach",
+      "assetId": "sevastopol-transit",
+      "campaignId": "pair-037-mire",
+      "worldId": "world-04-sevastopol",
+      "phaseKind": "approach",
+      "path": "/assets/openai/campaign/v180/sevastopol-transit.webp",
+      "type": "image",
+      "alt": "Sevastopol · création du projet : Coursive rétroindustrielle aux panneaux crème et bruns, écrans cathodiques verts, sas capitonné et fenêtre sur une géante gazeuse.",
+      "credit": "Sevastopol · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-037-mire-deployment",
+      "assetId": "sevastopol-transit",
+      "campaignId": "pair-037-mire",
+      "worldId": "world-04-sevastopol",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/campaign/v180/sevastopol-transit.webp",
+      "type": "image",
+      "alt": "Sevastopol · création du projet : Coursive rétroindustrielle aux panneaux crème et bruns, écrans cathodiques verts, sas capitonné et fenêtre sur une géante gazeuse.",
+      "credit": "Sevastopol · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-065-mire-approach",
+      "assetId": "sevastopol-transit",
+      "campaignId": "pair-065-mire",
+      "worldId": "world-04-sevastopol",
+      "phaseKind": "approach",
+      "path": "/assets/openai/campaign/v180/sevastopol-transit.webp",
+      "type": "image",
+      "alt": "Sevastopol · création du projet : Coursive rétroindustrielle aux panneaux crème et bruns, écrans cathodiques verts, sas capitonné et fenêtre sur une géante gazeuse.",
+      "credit": "Sevastopol · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-065-mire-deployment",
+      "assetId": "sevastopol-transit",
+      "campaignId": "pair-065-mire",
+      "worldId": "world-04-sevastopol",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/campaign/v180/sevastopol-transit.webp",
+      "type": "image",
+      "alt": "Sevastopol · création du projet : Coursive rétroindustrielle aux panneaux crème et bruns, écrans cathodiques verts, sas capitonné et fenêtre sur une géante gazeuse.",
+      "credit": "Sevastopol · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-068-frontier-approach",
+      "assetId": "sevastopol-transit",
+      "campaignId": "pair-068-frontier",
+      "worldId": "world-04-sevastopol",
+      "phaseKind": "approach",
+      "path": "/assets/openai/campaign/v180/sevastopol-transit.webp",
+      "type": "image",
+      "alt": "Sevastopol · création du projet : Coursive rétroindustrielle aux panneaux crème et bruns, écrans cathodiques verts, sas capitonné et fenêtre sur une géante gazeuse.",
+      "credit": "Sevastopol · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    },
+    {
+      "id": "campaign-art-v180-pair-068-frontier-deployment",
+      "assetId": "sevastopol-transit",
+      "campaignId": "pair-068-frontier",
+      "worldId": "world-04-sevastopol",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/campaign/v180/sevastopol-transit.webp",
+      "type": "image",
+      "alt": "Sevastopol · création du projet : Coursive rétroindustrielle aux panneaux crème et bruns, écrans cathodiques verts, sas capitonné et fenêtre sur une géante gazeuse.",
+      "credit": "Sevastopol · nouvelle illustration du projet",
+      "provenance": "openai-imagegen-project-interpretation",
+      "canonExact": false,
+      "newImage": true
+    }
+  ],
+  "artwork": [
+    {
+      "id": "acheron-colony",
+      "worldId": "world-01-acheron-lv-426",
+      "label": "Acheron / LV-426",
+      "path": "/assets/openai/campaign/v180/acheron-colony.webp",
+      "width": 1672,
+      "height": 941,
+      "bytes": 1872422,
+      "sha256": "51c21987bdcc73fb1d7744ba4bd42263cf7a37bb66e311632fa288b7de43729a",
+      "alt": "Colonie industrielle sous un orage, blocs préfabriqués et conduites mouillées, processeur atmosphérique au loin.",
+      "designReference": "Aliens (1986) · architecture industrielle et palette froide, interprétation du projet",
+      "referencePath": "/assets/openai/metroidvania/zones/planet-exterior/planet-approach-far.png",
+      "campaignIds": [
+        "pair-001-frontier",
+        "pair-002-mire",
+        "pair-010-mire",
+        "pair-030-mire",
+        "pair-038-mire"
+      ]
+    },
+    {
+      "id": "lv223-engineer-temple",
+      "worldId": "world-02-lv-223",
+      "label": "LV-223",
+      "path": "/assets/openai/campaign/v180/lv223-engineer-temple.webp",
+      "width": 1672,
+      "height": 941,
+      "bytes": 1722456,
+      "sha256": "a2ea1f4807157deb2fd9c8d27f70beed1eee0963a7c04a8876ba443e53caed03",
+      "alt": "Dôme monumental nervuré au-dessus de basaltes noirs, porte sombre en forme de serrure et brumes dans la vallée.",
+      "designReference": "Prometheus (2012) · temple biomécanique et terrain volcanique, interprétation du projet",
+      "referencePath": "/assets/openai/metroidvania/zones/planet-exterior/planet-ruins-far.png",
+      "campaignIds": [
+        "pair-002-frontier",
+        "pair-005-mire",
+        "pair-033-mire",
+        "pair-061-mire",
+        "pair-066-frontier"
+      ]
+    },
+    {
+      "id": "fiorina-foundry",
+      "worldId": "world-03-fiorina-161",
+      "label": "Fiorina 161",
+      "path": "/assets/openai/campaign/v180/fiorina-foundry.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1828972,
+      "sha256": "45b496e9b36a6485635ed9bf36cd7474c114d8c3bdc591e781a3375d25de2114",
+      "alt": "Fonderie sombre sous une voûte haute, passerelles grillagées, conduites rouillées et fours éclairés en orange.",
+      "designReference": "Alien 3 (1992) · fonderie carcérale et palette ocre, interprétation du projet",
+      "referencePath": "/assets/openai/metroidvania/zones/ship-engineering-far.png",
+      "campaignIds": [
+        "pair-003-mire",
+        "pair-003-frontier",
+        "pair-031-mire",
+        "pair-059-mire",
+        "pair-067-frontier"
+      ]
+    },
+    {
+      "id": "sevastopol-transit",
+      "worldId": "world-04-sevastopol",
+      "label": "Sevastopol",
+      "path": "/assets/openai/campaign/v180/sevastopol-transit.webp",
+      "width": 1672,
+      "height": 941,
+      "bytes": 1662130,
+      "sha256": "02dad0a86ad3992e1253f567bb2e8b11018d7a280ea16df71cc51a070a6d50f3",
+      "alt": "Coursive rétroindustrielle aux panneaux crème et bruns, écrans cathodiques verts, sas capitonné et fenêtre sur une géante gazeuse.",
+      "designReference": "Alien: Isolation · panneaux moulés, CRT et éclairages pratiques, interprétation du projet",
+      "referencePath": "/assets/openai/metroidvania/zones/colony-multiroute/colony-security-far.png",
+      "campaignIds": [
+        "pair-004-frontier",
+        "pair-009-mire",
+        "pair-037-mire",
+        "pair-065-mire",
+        "pair-068-frontier"
+      ]
+    }
+  ],
+  "counts": {
+    "hordeProtocols": 40,
+    "stages": 40,
+    "layerImages": 120,
+    "animatedPoses": 40,
+    "spriteIdentities": 5,
+    "newImages": 4,
+    "newBindings": 40,
+    "publicArtworkBytes": 7085980
+  },
+  "fidelity": {
+    "requested": "1:1",
+    "canonExact": false,
+    "fullAnimation": false,
+    "scope": "Measured native sprite geometry and original campaign interpretations; no film or source-game frame match certified."
+  },
+  "validation": {
+    "state": "VERIFIED_LOCAL",
+    "fullSuite": {
+      "tests": 4338,
+      "passed": 4337,
+      "failed": 0,
+      "skipped": 1,
+      "files": 222,
+      "concurrency": 6,
+      "durationMs": 300416.662516,
+      "log": "/workspace/tantalus-inventory/reprise-v180/test-all-final.log"
+    },
+    "newSuites": {
+      "tests": 153,
+      "passed": 153,
+      "failed": 0,
+      "log": "/workspace/tantalus-inventory/reprise-v180/horde-targeted.log",
+      "includedInFullSuite": true
+    },
+    "browser": {
+      "checks": 28,
+      "captures": 7,
+      "errors": 0,
+      "report": "/workspace/tantalus-inventory/reprise-v180/native-final/report.json",
+      "sourceReceipt": "/workspace/tantalus-inventory/reprise-v180/native-final/source-receipt.json",
+      "filesUnchangedDuringRun": 561,
+      "httpSourcesMatch": 14,
+      "nativeInputs": true,
+      "injectedResult": false,
+      "injectedProgress": false
+    },
+    "assets": {
+      "images": 124,
+      "stageLayers": 120,
+      "newIllustrations": 4,
+      "report": "/workspace/tantalus-inventory/reprise-v180/assets-decode-v180.json"
+    },
+    "sourceAdmission": {
+      "ok": true,
+      "files": 2456,
+      "assets": 1430,
+      "privateDocuments": 0,
+      "log": "/workspace/tantalus-inventory/reprise-v180/check-initial.log"
+    },
+    "fidelityReview": {
+      "report": "/workspace/tantalus-inventory/reprise-v180/fidelity-review.json",
+      "primaryPagesRead": 7,
+      "primaryImagesViewed": 5,
+      "canonExact": false
+    },
+    "sourceFreeze": "/workspace/tantalus-inventory/reprise-v180/source-freeze.json",
+    "restartScope": "Saved ticket restarts the protocol at wave 1; exact mid-wave browser persistence is not claimed."
+  }
+}

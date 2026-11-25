@@ -650,7 +650,9 @@ export class HubGame {
     const bounds = room.propInteractionBounds;
     const playerCenter = this.player.x + this.player.w / 2;
     return bounds && playerCenter >= bounds.x && playerCenter <= bounds.x + bounds.w
-      ? { ...room, interactionPriority: 10, interactionBounds: bounds }
+      // V188 full run (2026-11-22): the briefing operations table is a priority station (story
+      // objectives send the marine there) so the crew standing around it cannot hide it.
+      ? { ...room, interactionPriority: room.id === 'briefing' ? 100 : 10, interactionBounds: bounds }
       : null;
   }
 

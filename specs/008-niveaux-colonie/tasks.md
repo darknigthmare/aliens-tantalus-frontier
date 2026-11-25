@@ -1,0 +1,23 @@
+# Tâches : niveaux dédiés C1-C4
+
+- [x] T001 Lieux mesurés sur les gabarits (`colony-level-places-v188.js`)
+- [x] T002 Couche de phases, checkpoints, apparitions avec zone sûre et grâce, interactions maintenues (`colony-mission-levels-v188.js`)
+- [x] T003 Couloir V2 de C1 (`colony-c1-port-corridor`), C2 maintenu en V1
+- [x] T004 C1 : rideau, patients, soudures A et B, sentinelles, pic au sas B, retour calme
+- [x] T005 C2 : passerelle, embuscade, purge du nid, disjoncteurs, console, surpression, extraction en haut
+- [x] T006 C3 : arrivées, scanner, porteur déterministe, panique, compte à rebours, Noor
+- [x] T007 C4 : nuit, indices, conduits et cache, convertis (éviter, maîtriser, tuer), cocon, décision existante
+- [x] T008 Emplacements d'art nommés (primitives), textes FR/EN, coque hors ligne, admission des sources
+- [x] T009 Tests moteur et parcours Chromium
+- [ ] T010 Art des emplacements (aucune image produite) — ouvert
+- [ ] T011 Voix et dialogues complets des PNJ (Jun Park, Lucia Ferro, Noor Okafor) — ouvert
+
+## Décisions du propriétaire (2026-11-22)
+
+- [x] T012 C3 : Noor Okafor retirée de l'escouade pour C3 seulement, réplique FR/EN
+- [x] T013 C1, C3, C4 : M577 du joueur rangé, insertion et extraction à pied
+- [x] T014 C4 : grille de la galerie et porte du toit soudées ; conduits obligatoires (contrôles logique et physique)
+- [x] T015 C1 : perspective du pont du couloir plafonnée à un demi-écran
+- [x] T016 M577 garé au quai de C3 confirmé (second tour, 2026-11-22) : à l'échelle (449 px), entièrement sur le sol du quai, décor non conduisible derrière la voie des marines
+- [x] T017 Écran de préparation de C3 : Noor Okafor listée « indisponible · à l'infirmerie » avec la raison (FR/EN)
+- [x] T018 M577 conduit des niveaux ordinaires et M577 du largage à l'échelle (voie de sol, stationnement, vol stationnaire du UD-4L) — `scripts/verify-m577-everywhere-v188.mjs`, `scripts/qa-apc-levels-v188.mjs`

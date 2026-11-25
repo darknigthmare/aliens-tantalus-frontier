@@ -46,6 +46,14 @@ Lire les références approfondies uniquement si la tâche en a besoin. Si une s
 - Dans la PR, expliquer le problème, le comportement obtenu, les vérifications réellement exécutées et les limites restantes. Mettre à jour le suivi existant concerné sans déclarer terminé un contenu seulement listé ou généré.
 
 <!-- BEGIN:shared-ai-tooling -->
+## Outils de développement du jeu (spec 012)
+
+- Lanceur de scènes caché. En développement : `npm run dev`, puis `/devtools/` (ou `/dev`). Dans le build public (décision du propriétaire du 2026-11-23) : `/<chemin>/`, où `<chemin>` vaut `labo-tantalus-v188` par défaut et se change au build par la variable `ATF_DEV_TOOLS_PATH` (un segment de 8 à 64 caractères `a-z`, `0-9`, `-`), par exemple dans les variables d'environnement de l'hébergeur, sans la consigner dans le dépôt.
+- « Caché » veut dire discret, pas protégé : aucun contrôle d'accès. Aucun écran joueur n'y mène, la page est en `noindex`, le nom du dossier n'apparaît dans aucun fichier publié hors de ce dossier (ni `index.html`, ni `sw.js`, ni `build-info.json`), mais toute personne qui connaît ou devine l'adresse l'ouvre. Ne rien y mettre de secret.
+- Chaque entrée construit une sauvegarde cohérente (`devtools/dev-fixtures-v188.js` : règles du jeu, `migrateSave`, `inspectSaveSlotV78`, injections déclarées) et ouvre `/?atf-dev=v188`. L'isolation est côté client : le premier script de `index.html` (ajouté par le build et par le serveur de développement, `scripts/build-dev-tools-v188.mjs`) teste la requête exacte et, seulement dans ce cas, remplace `localStorage` par un stockage de l'onglet et retire `indexedDB` avant tout script du jeu ; le profil réel n'est ni lu ni écrit. Sans la requête, le jeu ne fait qu'un test d'expression régulière. Le panneau DEV (options, surcouches, pause, image par image, sortie) se replie en une barre ; sur téléphone il démarre replié.
+- Stand de tir : entrée « Stand de tir » ; mission réelle relancée par `engine.start` avec l'arme, l'équipement et les cibles choisis ; mesures et réglages exportés en diff JSON pour revue (`__ATF_DEV_V188__.range`).
+- Distribution : les fichiers de `devtools/` sont des chemins de distribution approuvés, copiés sous le dossier caché et hors du précache du service worker ; `scripts/`, `specs/` et `docs/` restent en source seulement (`scripts/verify-public-release-v86.mjs`, `check:built`). Ne jamais relier le lanceur à un écran joueur. Contrôles : `node --test scripts/verify-dev-tools-v188.mjs` ; après `npm run build`, `npm run qa:dev-tools:built:v188 -- <sortie>` (Chromium sur le build servi en statique, profil sentinelle). Détails : `specs/012-outils-dev/plan.md`.
+
 ## Outils de développement IA
 
 Ce dépôt peut utiliser [Spec Kit](https://github.com/github/spec-kit),

@@ -1,10 +1,13 @@
 /** Byte-anchored V162 -> V163 continuation; historical documents stay immutable. */
 import assert from 'node:assert/strict';
+import { completionRuntimeSourcesV186, reviewedCompletionDigestV186, verifyCompletionV186 } from './audit-xeno-trials-completion-v186.mjs';
 import { reviewedOriginalNamesDigestV183 } from './audit-original-names-v183.mjs';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { historicalIntegrationViewV182, reviewedIntegrationDigestV182,
   integratedRuntimeSourcesV182, verifyIntegrationV182 } from './audit-pr-integration-v182.mjs';
+import { V179_RUNTIME_SUCCESSORS, V179_NEW_RUNTIME_SOURCES, reviewedDigestV179, verifyFollowupV179 as verifyTrialsBatchV179 } from './audit-succession-v179.mjs';
+import { V180_RUNTIME_SUCCESSORS, V180_NEW_RUNTIME_SOURCES, reviewedDigestV180, verifyFollowupV180 } from './audit-succession-v180.mjs';
 
 export const AUDIT_PREDECESSOR_DOCUMENTS_V163 = Object.freeze({
   "docs/forge/xeno-trials/V162-NON-FORGE-CONTINUATION.md": "a67a133e6cf8249cbc832c1ed6ff69eb6da18ecbe9a0993ffaaea015727949c2",
@@ -676,6 +679,10 @@ export function verifyFollowupV179(current, readSource = readRepository) {
   return Object.freeze({historicalRuntimeWitnesses:147,reviewedRuntimeSuccessors:Object.keys(V179_SOURCE_GROUPS.runtimeChanges).length,newRuntimeSources:Object.keys(V179_SOURCE_GROUPS.newRuntimeSources).length,sourceGroups:Object.keys(V179_SOURCE_GROUPS).length});
 }
 
+export function reviewedCurrentDigestV180(path, endpointMainM) {
+  return reviewedCompletionDigestV186(path, reviewedDigestV180(path, reviewedDigestV179(path, reviewedLiveDigestV178(path, endpointMainM))));
+}
+
 export function verifyFollowupV178(current, readSource = readRepository) {
   current = historicalProgressViewV179(current);
   const record = current.followupV178;
@@ -1183,6 +1190,9 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   }
   verifyOpenWorkstreamsV177(current, readSource);
   verifyFollowupV178(current, readSource);
+  verifyTrialsBatchV179(readSource);
+  verifyFollowupV180(readSource);
+  verifyCompletionV186(readSource);
   return Object.freeze({ inherited: 87, changed: changed.length, unchanged: 87 - changed.length,
     added: added.length, current: keys(after).length });
 }
@@ -1200,7 +1210,7 @@ export function resolveAuditSourcesV163(previous, readSource = readRepository, {
   verifyAuditSuccessionV163(previous, current, readSource);
   // Never mutate V163 archival hashes. An explicit effective read exports the
   // exact, previously validated successor set to legacy audit callers.
-  return effective ? integratedRuntimeSourcesV182({ ...current.runtimeSourceSha256,
+  return effective ? completionRuntimeSourcesV186(integratedRuntimeSourcesV182({ ...current.runtimeSourceSha256,
     ...Object.fromEntries(Object.entries(ARSENAL_V167_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARMORY_V169_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARSENAL_V170_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
@@ -1215,7 +1225,7 @@ export function resolveAuditSourcesV163(previous, readSource = readRepository, {
       .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(V178_RUNTIME_SUCCESSORS).map(([path,receipt]) => [path,receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(V179_SOURCE_GROUPS.runtimeChanges).map(([path,receipt])=>[path,receipt.currentSha256])),
-    ...Object.fromEntries(Object.entries(V179_SOURCE_GROUPS.newRuntimeSources).map(([path,receipt])=>[path,receipt.currentSha256])) })
+    ...Object.fromEntries(Object.entries(V179_SOURCE_GROUPS.newRuntimeSources).map(([path,receipt])=>[path,receipt.currentSha256])) }))
     : current.runtimeSourceSha256;
 }
 

@@ -1,0 +1,1514 @@
+{
+  "schema": "broodstorm-native-canvas-qa-v1",
+  "date": "2026-11-17",
+  "status": "passed",
+  "browserJourney": false,
+  "baselineCommit": "361e40670c393dd548b4faa081f12edb0e9b05c4",
+  "sourceBefore": {
+    "commit": "361e40670c393dd548b4faa081f12edb0e9b05c4",
+    "sourceHashes": {
+      "src/broodstorm-queen-art-v188.js": "634572ca055f5a82900d77b7c03f0c6f6124246336d56bcbf761e15767f05702",
+      "src/legacy-operations-v131.js": "ebeb8393217142382d16f0319df409eea4f3775aba25e62867000dedadcc4aec",
+      "src/legacy-operation-state-v131.js": "5c0b9b4d6cec901c4fd3050b823afb58b2c3aedc3b533d2754121e187c6f28c3",
+      "src/game-production-runtime.js": "5cfd2d4a4e5ca6d01529332d67f9afa0564cfa05dbcfabd06657f90559a7e141",
+      "src/game-production-core.js": "12482793f9379acbb06234af4efcefb94fd3b0f034d3f9af8dfa8004a3a24e01",
+      "src/game-v51-runtime.js": "8adb6bf47a43266b87227bf9539130b8dff2b8aaf09a3af59ae19cf69f188c19",
+      "src/game-v52-runtime.js": "e609f9ebe6f63a526ad3706d359bb7478578470414e75b7c5aae5b35341f9558",
+      "src/creature-scale-v188.js": "0f52c487bc029d4d528bd58b6ed6bdd9b94beae09b42dfc1355a631269038f78",
+      "src/sprite-animation-runtime.js": "33a86ab323c4694b670334a12cc89273c5953bcde8bccb21a0115b8bebe19d01",
+      "src/cargo-brutal-runtime-v67.js": "9487c281d5f07e40b1771c18033ac68928a96a7cfb51c1efda37791173b1af8a",
+      "scripts/engine-host-v188.mjs": "55080501a04c07aef5b7137dba4152d35a5622b628e83857f452d5f0bee38b38",
+      "scripts/verify-broodstorm-queen-art-v188.mjs": "bd82cf599d623cf2e9ed9db608a5577a8e229aee411c6c3c00dcf3e2159b5a6f",
+      "src/i18n-auto-v185.js": "d9b0f2405eeae7eb2b1ea0d1f6a389ac736f89f4558e9e66c965b58498ebd90c",
+      "src/i18n-v185.js": "5ca3bcd1416f0a342af209493b0d7e41613ac4a5efa8972ee6a451eda1502737",
+      "src/i18n-en-catalog-v185.js": "036ab689b713d326ab5e3cdbfadfb15436031d04fb32d873a10f779f1d4614f4",
+      "src/special-operations-v131.js": "99a629ceba7042ca320e50d384fe9b9e734bdefa452bd5485899661adca5b45a"
+    },
+    "imageHashes": {
+      "/assets/broodstorm/v188/flying-queen-idle.png": "9b52e84a350f6739f07338be766fddb7ca010c5f632d421aef934bf982884855",
+      "/assets/broodstorm/v188/flying-queen-chase.png": "3378038c5c052193b83b5fc9e0daa6b160f1f2d03deec1b7a6ad64ebe23c1cb7",
+      "/assets/broodstorm/v188/flying-queen-death.png": "660be861f23b3ad0a40c7c5a81cdcde7485f0752a98effda0e0055f77e51b350"
+    }
+  },
+  "sourceAfter": {
+    "commit": "361e40670c393dd548b4faa081f12edb0e9b05c4",
+    "sourceHashes": {
+      "src/broodstorm-queen-art-v188.js": "634572ca055f5a82900d77b7c03f0c6f6124246336d56bcbf761e15767f05702",
+      "src/legacy-operations-v131.js": "ebeb8393217142382d16f0319df409eea4f3775aba25e62867000dedadcc4aec",
+      "src/legacy-operation-state-v131.js": "5c0b9b4d6cec901c4fd3050b823afb58b2c3aedc3b533d2754121e187c6f28c3",
+      "src/game-production-runtime.js": "5cfd2d4a4e5ca6d01529332d67f9afa0564cfa05dbcfabd06657f90559a7e141",
+      "src/game-production-core.js": "12482793f9379acbb06234af4efcefb94fd3b0f034d3f9af8dfa8004a3a24e01",
+      "src/game-v51-runtime.js": "8adb6bf47a43266b87227bf9539130b8dff2b8aaf09a3af59ae19cf69f188c19",
+      "src/game-v52-runtime.js": "e609f9ebe6f63a526ad3706d359bb7478578470414e75b7c5aae5b35341f9558",
+      "src/creature-scale-v188.js": "0f52c487bc029d4d528bd58b6ed6bdd9b94beae09b42dfc1355a631269038f78",
+      "src/sprite-animation-runtime.js": "33a86ab323c4694b670334a12cc89273c5953bcde8bccb21a0115b8bebe19d01",
+      "src/cargo-brutal-runtime-v67.js": "9487c281d5f07e40b1771c18033ac68928a96a7cfb51c1efda37791173b1af8a",
+      "scripts/engine-host-v188.mjs": "55080501a04c07aef5b7137dba4152d35a5622b628e83857f452d5f0bee38b38",
+      "scripts/verify-broodstorm-queen-art-v188.mjs": "bd82cf599d623cf2e9ed9db608a5577a8e229aee411c6c3c00dcf3e2159b5a6f",
+      "src/i18n-auto-v185.js": "d9b0f2405eeae7eb2b1ea0d1f6a389ac736f89f4558e9e66c965b58498ebd90c",
+      "src/i18n-v185.js": "5ca3bcd1416f0a342af209493b0d7e41613ac4a5efa8972ee6a451eda1502737",
+      "src/i18n-en-catalog-v185.js": "036ab689b713d326ab5e3cdbfadfb15436031d04fb32d873a10f779f1d4614f4",
+      "src/special-operations-v131.js": "99a629ceba7042ca320e50d384fe9b9e734bdefa452bd5485899661adca5b45a"
+    },
+    "imageHashes": {
+      "/assets/broodstorm/v188/flying-queen-idle.png": "9b52e84a350f6739f07338be766fddb7ca010c5f632d421aef934bf982884855",
+      "/assets/broodstorm/v188/flying-queen-chase.png": "3378038c5c052193b83b5fc9e0daa6b160f1f2d03deec1b7a6ad64ebe23c1cb7",
+      "/assets/broodstorm/v188/flying-queen-death.png": "660be861f23b3ad0a40c7c5a81cdcde7485f0752a98effda0e0055f77e51b350"
+    }
+  },
+  "sourceStable": true,
+  "baselineSourceStable": true,
+  "fixture": {
+    "renderer": "Production GameEngine and its real mixins, drawEnemy, drawWorld and animation controller",
+    "catalogue": "Complete ENEMIES/CAMPAIGNS/WORLDS from content.js, as in the application",
+    "browserHost": "engine-host-v188 EventTarget, document, Image-shaped loaders, controlled RAF and keyboard events",
+    "pixelProvider": "@napi-rs/canvas with real decoded repository PNGs and offscreen production alpha-policy canvases",
+    "textProvider": "DejaVu Sans/Mono native fonts; production autoTranslateV185 for Canvas text",
+    "timing": "Explicit native update or animationTime samples, identified per condition",
+    "preparation": "Authored legacy stage fixture: advance through three native stage transitions, set nests destroyed and escort at x2110/arrived before boss stage (native resume-consistent)",
+    "lifecycleStarted": true,
+    "browserJourney": false,
+    "injectedActorDimensions": false,
+    "renderingFunctionsReplaced": false,
+    "poseMatrix": "24 declared native controller samples, 12 poses in 2 directions. No physical dimensions injected.",
+    "death": "Real defeatEnemy then native updates at 0, .15, .3, .5, 1.5 and 2.81 seconds; positive observation camera for corpse visibility.",
+    "pursuit": "Vehicle start x1400, y550, w180, h86 checked inside authored bounds and outside obstacles, then 8 seconds actual updates; no camera/HUD override during pursuit.",
+    "culling": "Four bounded valid actor-position fixtures at logical viewport edges, camera0. Unit suite separately covers strict conservative rejection; not rerun here."
+  },
+  "counts": {
+    "candidateCaptures": 51,
+    "parentComparatorCaptures": 3,
+    "poses": 24,
+    "fallbacks": 8,
+    "owner-exclusions": 2,
+    "pause": 3,
+    "resume": 2,
+    "native-death": 6,
+    "culling": 4,
+    "world-pursuit": 2
+  },
+  "checks": {
+    "guardedDrawStateUnchanged": true,
+    "canvasStateRestored": true,
+    "fallbackMasks0to6PixelIdenticalToParent": true,
+    "excludedOwnersPixelIdenticalToParent": true,
+    "all24PoseSourcesWholeAndUniform": true,
+    "all24PoseHipsCalibrated": true,
+    "healthBarsClearVisibleWings": true
+  },
+  "nativeDeath": [
+    {
+      "time": 0,
+      "deathClock": 2.8,
+      "stage": 4,
+      "visible": true,
+      "frame": 12,
+      "complete": false,
+      "artDraws": 1,
+      "body": {
+        "id": "legacy-queen-0",
+        "legacyIdV131": "queen-0",
+        "legacyRoleV131": "queen",
+        "x": 2330,
+        "y": 171.71875,
+        "w": 336,
+        "h": 268.28125,
+        "facing": -1,
+        "health": 0,
+        "maxHealth": 420,
+        "alive": false,
+        "deathClock": 2.8,
+        "attackClock": 1.5,
+        "hurtClock": 0,
+        "attackWindupClock": 0,
+        "visualSheetId": "enemy.xenomorph-queen.action.v56"
+      }
+    },
+    {
+      "time": 0.15,
+      "deathClock": 2.6500000000000004,
+      "stage": 4,
+      "visible": true,
+      "frame": 13,
+      "complete": false,
+      "artDraws": 1,
+      "body": {
+        "id": "legacy-queen-0",
+        "legacyIdV131": "queen-0",
+        "legacyRoleV131": "queen",
+        "x": 2330,
+        "y": 171.71875,
+        "w": 336,
+        "h": 268.28125,
+        "facing": -1,
+        "health": 0,
+        "maxHealth": 420,
+        "alive": false,
+        "deathClock": 2.6500000000000004,
+        "attackClock": 1.5,
+        "hurtClock": 0,
+        "attackWindupClock": 0,
+        "visualSheetId": "enemy.xenomorph-queen.action.v56"
+      }
+    },
+    {
+      "time": 0.3,
+      "deathClock": 2.500000000000001,
+      "stage": 4,
+      "visible": true,
+      "frame": 14,
+      "complete": false,
+      "artDraws": 1,
+      "body": {
+        "id": "legacy-queen-0",
+        "legacyIdV131": "queen-0",
+        "legacyRoleV131": "queen",
+        "x": 2330,
+        "y": 171.71875,
+        "w": 336,
+        "h": 268.28125,
+        "facing": -1,
+        "health": 0,
+        "maxHealth": 420,
+        "alive": false,
+        "deathClock": 2.500000000000001,
+        "attackClock": 1.5,
+        "hurtClock": 0,
+        "attackWindupClock": 0,
+        "visualSheetId": "enemy.xenomorph-queen.action.v56"
+      }
+    },
+    {
+      "time": 0.5,
+      "deathClock": 2.3000000000000016,
+      "stage": 4,
+      "visible": true,
+      "frame": 15,
+      "complete": true,
+      "artDraws": 1,
+      "body": {
+        "id": "legacy-queen-0",
+        "legacyIdV131": "queen-0",
+        "legacyRoleV131": "queen",
+        "x": 2330,
+        "y": 171.71875,
+        "w": 336,
+        "h": 268.28125,
+        "facing": -1,
+        "health": 0,
+        "maxHealth": 420,
+        "alive": false,
+        "deathClock": 2.3000000000000016,
+        "attackClock": 1.5,
+        "hurtClock": 0,
+        "attackWindupClock": 0,
+        "visualSheetId": "enemy.xenomorph-queen.action.v56"
+      }
+    },
+    {
+      "time": 1.5,
+      "deathClock": 1.3000000000000065,
+      "stage": 4,
+      "visible": true,
+      "frame": 15,
+      "complete": true,
+      "artDraws": 1,
+      "body": {
+        "id": "legacy-queen-0",
+        "legacyIdV131": "queen-0",
+        "legacyRoleV131": "queen",
+        "x": 2330,
+        "y": 171.71875,
+        "w": 336,
+        "h": 268.28125,
+        "facing": -1,
+        "health": 0,
+        "maxHealth": 420,
+        "alive": false,
+        "deathClock": 1.3000000000000065,
+        "attackClock": 1.5,
+        "hurtClock": 0,
+        "attackWindupClock": 0,
+        "visualSheetId": "enemy.xenomorph-queen.action.v56"
+      }
+    },
+    {
+      "time": 2.81,
+      "deathClock": 0,
+      "stage": 4,
+      "visible": false,
+      "frame": 15,
+      "complete": true,
+      "artDraws": 0,
+      "body": {
+        "id": "legacy-queen-0",
+        "legacyIdV131": "queen-0",
+        "legacyRoleV131": "queen",
+        "x": 2330,
+        "y": 171.71875,
+        "w": 336,
+        "h": 268.28125,
+        "facing": -1,
+        "health": 0,
+        "maxHealth": 420,
+        "alive": false,
+        "deathClock": 0,
+        "attackClock": 1.5,
+        "hurtClock": 0,
+        "attackWindupClock": 0,
+        "visualSheetId": "enemy.xenomorph-queen.action.v56"
+      }
+    }
+  ],
+  "worldPursuit": [
+    {
+      "language": "fr",
+      "pursuitSeconds": 8,
+      "declaredVehicleFixture": {
+        "queen": {
+          "id": "legacy-queen-0",
+          "legacyIdV131": "queen-0",
+          "legacyRoleV131": "queen",
+          "x": 2330,
+          "y": 171.71875,
+          "w": 336,
+          "h": 268.28125,
+          "facing": -1,
+          "health": 420,
+          "maxHealth": 420,
+          "alive": true,
+          "deathClock": 0,
+          "attackClock": 1.5,
+          "hurtClock": 0,
+          "attackWindupClock": 0,
+          "visualSheetId": "enemy.xenomorph-queen.action.v56"
+        },
+        "vehicle": {
+          "id": "vehicle-009-ud-4l-cheyenne-dropship",
+          "x": 1400,
+          "y": 550,
+          "w": 180,
+          "h": 86,
+          "vx": 0,
+          "vy": 0,
+          "facing": 1,
+          "active": true,
+          "hull": 260,
+          "fuel": 100,
+          "turretAmmo": 160,
+          "destroyed": false
+        },
+        "camera": {
+          "x": 0,
+          "y": 0
+        }
+      },
+      "nativeUpdateEnd": {
+        "queen": {
+          "id": "legacy-queen-0",
+          "legacyIdV131": "queen-0",
+          "legacyRoleV131": "queen",
+          "x": 1384.3689132525087,
+          "y": 441.09285840089666,
+          "w": 336,
+          "h": 268.28125,
+          "vx": 0,
+          "vy": 0,
+          "facing": -1,
+          "health": 408.75,
+          "maxHealth": 420,
+          "alive": true,
+          "deathClock": 0,
+          "attackClock": 0.233333333333333,
+          "hurtClock": 0,
+          "attackWindupClock": 0,
+          "visualSheetId": "enemy.xenomorph-queen.action.v56"
+        },
+        "vehicle": {
+          "id": "vehicle-009-ud-4l-cheyenne-dropship",
+          "x": 1400,
+          "y": 550,
+          "w": 180,
+          "h": 86,
+          "vx": 0,
+          "vy": 0,
+          "facing": 1,
+          "active": true,
+          "hull": 236,
+          "fuel": 99.04000000000224,
+          "turretAmmo": 160,
+          "destroyed": false
+        },
+        "camera": {
+          "x": 969.9999999999994,
+          "y": 129.99999999999983
+        },
+        "stage": 3,
+        "missionState": "active"
+      },
+      "artDraws": [
+        {
+          "path": "/assets/broodstorm/v188/flying-queen-chase.png",
+          "sourceRect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "destination": [
+            -410,
+            -384,
+            627,
+            627
+          ],
+          "matrix": [
+            -0.6543444991111755,
+            0,
+            0,
+            0.6543444991111755,
+            582.368896484375,
+            463.55511474609375
+          ],
+          "alpha": 1,
+          "inSource": true,
+          "uniformSampling": true,
+          "scaleX": 1,
+          "scaleY": 1,
+          "screenBounds": [
+            440.3761401772499,
+            212.28682708740234,
+            850.650141119957,
+            622.5608280301094
+          ],
+          "order": 42
+        }
+      ],
+      "texts": [
+        {
+          "text": "R1",
+          "bounds": [
+            -783,
+            332,
+            -770.960000038147,
+            340
+          ]
+        },
+        {
+          "text": "R1",
+          "bounds": [
+            988,
+            238,
+            1000.039999961853,
+            246
+          ]
+        },
+        {
+          "text": "R1",
+          "bounds": [
+            3230,
+            307,
+            3242.039999961853,
+            315
+          ]
+        },
+        {
+          "text": "R2",
+          "bounds": [
+            337,
+            100,
+            349.039999961853,
+            108
+          ]
+        },
+        {
+          "text": "R3",
+          "bounds": [
+            278,
+            396,
+            290.039999961853,
+            404
+          ]
+        },
+        {
+          "text": "R3",
+          "bounds": [
+            2545,
+            424,
+            2557.039999961853,
+            432
+          ]
+        },
+        {
+          "text": "NID 1 · 0",
+          "bounds": [
+            -70,
+            669,
+            -4.980003356933594,
+            678
+          ]
+        },
+        {
+          "text": "NID 2 · 0",
+          "bounds": [
+            530,
+            699,
+            595.0199966430664,
+            708
+          ]
+        },
+        {
+          "text": "ESCORTE · 164",
+          "bounds": [
+            1140,
+            167,
+            1233.9199981689453,
+            176
+          ]
+        },
+        {
+          "text": "AILE · follow",
+          "bounds": [
+            250,
+            296,
+            343.9199981689453,
+            306
+          ]
+        },
+        {
+          "text": "CHEYENNE · LANCEMENT",
+          "bounds": [
+            -850,
+            85,
+            -705.5099945068359,
+            94
+          ]
+        },
+        {
+          "text": "CORRIDOR · EXTRACTION",
+          "bounds": [
+            1620,
+            65,
+            1771.7200012207031,
+            74
+          ]
+        },
+        {
+          "text": "BROODSTORM · CORRIDOR AÉRIEN",
+          "bounds": [
+            34,
+            26,
+            253.14999389648438,
+            38
+          ]
+        },
+        {
+          "text": "PV 100  ARM 50  MUN 99/180",
+          "bounds": [
+            34,
+            51,
+            221.83999633789062,
+            62
+          ]
+        },
+        {
+          "text": "SECTEUR 2/6 · REINE AILÉE · BROODSTORM",
+          "bounds": [
+            34,
+            69,
+            308.5400085449219,
+            83
+          ]
+        },
+        {
+          "text": "MÉD 2 · RÉCUP 0 · TRACK 100%",
+          "bounds": [
+            34,
+            87,
+            236.2899932861328,
+            99
+          ]
+        },
+        {
+          "text": "UD-4L Cheyenne Dropshi · 236/260",
+          "bounds": [
+            838,
+            31,
+            1069.1900024414062,
+            44
+          ]
+        },
+        {
+          "text": "CARB 100 · ARMEMENT 160",
+          "bounds": [
+            838,
+            53,
+            1004.1699981689453,
+            62
+          ]
+        },
+        {
+          "text": "REINE AILÉE · BROODSTORM",
+          "bounds": [
+            488,
+            103,
+            646.9400024414062,
+            114
+          ]
+        },
+        {
+          "text": "A/D/W/S ou flèches : vol · F tirer · B bombarder · Q aile suivi/suppression · maintenir E au poste",
+          "bounds": [
+            488,
+            126,
+            1137.010009765625,
+            137
+          ]
+        },
+        {
+          "text": "CHAPITRE · BROODSTORM",
+          "bounds": [
+            484,
+            24,
+            610.4300003051758,
+            32
+          ]
+        },
+        {
+          "text": "REINE AILÉE · BROODSTORM · COQUE 236 · ESCORTE 164 · CARB 100 · BOMBES 6 · AILE follow",
+          "bounds": [
+            30,
+            120,
+            703.0900268554688,
+            134
+          ]
+        },
+        {
+          "text": "A/D/W/S ou flèches : vol · F tirer · B bombarder · Q aile suivi/suppression · maintenir E au poste",
+          "bounds": [
+            30,
+            142,
+            679.010009765625,
+            153
+          ]
+        },
+        {
+          "text": "CHARGES LIMITÉES · Viser avant le largage et protéger l’escorte.",
+          "bounds": [
+            30,
+            158,
+            453.8399963378906,
+            171
+          ]
+        },
+        {
+          "text": "",
+          "bounds": [
+            30,
+            179,
+            30,
+            190
+          ]
+        }
+      ]
+    },
+    {
+      "language": "en",
+      "pursuitSeconds": 8,
+      "declaredVehicleFixture": {
+        "queen": {
+          "id": "legacy-queen-0",
+          "legacyIdV131": "queen-0",
+          "legacyRoleV131": "queen",
+          "x": 2330,
+          "y": 171.71875,
+          "w": 336,
+          "h": 268.28125,
+          "facing": -1,
+          "health": 420,
+          "maxHealth": 420,
+          "alive": true,
+          "deathClock": 0,
+          "attackClock": 1.5,
+          "hurtClock": 0,
+          "attackWindupClock": 0,
+          "visualSheetId": "enemy.xenomorph-queen.action.v56"
+        },
+        "vehicle": {
+          "id": "vehicle-009-ud-4l-cheyenne-dropship",
+          "x": 1400,
+          "y": 550,
+          "w": 180,
+          "h": 86,
+          "vx": 0,
+          "vy": 0,
+          "facing": 1,
+          "active": true,
+          "hull": 260,
+          "fuel": 100,
+          "turretAmmo": 160,
+          "destroyed": false
+        },
+        "camera": {
+          "x": 0,
+          "y": 0
+        }
+      },
+      "nativeUpdateEnd": {
+        "queen": {
+          "id": "legacy-queen-0",
+          "legacyIdV131": "queen-0",
+          "legacyRoleV131": "queen",
+          "x": 1384.3689132525087,
+          "y": 441.09285840089666,
+          "w": 336,
+          "h": 268.28125,
+          "vx": 0,
+          "vy": 0,
+          "facing": -1,
+          "health": 408.75,
+          "maxHealth": 420,
+          "alive": true,
+          "deathClock": 0,
+          "attackClock": 0.233333333333333,
+          "hurtClock": 0,
+          "attackWindupClock": 0,
+          "visualSheetId": "enemy.xenomorph-queen.action.v56"
+        },
+        "vehicle": {
+          "id": "vehicle-009-ud-4l-cheyenne-dropship",
+          "x": 1400,
+          "y": 550,
+          "w": 180,
+          "h": 86,
+          "vx": 0,
+          "vy": 0,
+          "facing": 1,
+          "active": true,
+          "hull": 236,
+          "fuel": 99.04000000000224,
+          "turretAmmo": 160,
+          "destroyed": false
+        },
+        "camera": {
+          "x": 969.9999999999994,
+          "y": 129.99999999999983
+        },
+        "stage": 3,
+        "missionState": "active"
+      },
+      "artDraws": [
+        {
+          "path": "/assets/broodstorm/v188/flying-queen-chase.png",
+          "sourceRect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "destination": [
+            -410,
+            -384,
+            627,
+            627
+          ],
+          "matrix": [
+            -0.6543444991111755,
+            0,
+            0,
+            0.6543444991111755,
+            582.368896484375,
+            463.55511474609375
+          ],
+          "alpha": 1,
+          "inSource": true,
+          "uniformSampling": true,
+          "scaleX": 1,
+          "scaleY": 1,
+          "screenBounds": [
+            440.3761401772499,
+            212.28682708740234,
+            850.650141119957,
+            622.5608280301094
+          ],
+          "order": 42
+        }
+      ],
+      "texts": [
+        {
+          "text": "R1",
+          "bounds": [
+            -783,
+            332,
+            -770.960000038147,
+            340
+          ]
+        },
+        {
+          "text": "R1",
+          "bounds": [
+            988,
+            238,
+            1000.039999961853,
+            246
+          ]
+        },
+        {
+          "text": "R1",
+          "bounds": [
+            3230,
+            307,
+            3242.039999961853,
+            315
+          ]
+        },
+        {
+          "text": "R2",
+          "bounds": [
+            337,
+            100,
+            349.039999961853,
+            108
+          ]
+        },
+        {
+          "text": "R3",
+          "bounds": [
+            278,
+            396,
+            290.039999961853,
+            404
+          ]
+        },
+        {
+          "text": "R3",
+          "bounds": [
+            2545,
+            424,
+            2557.039999961853,
+            432
+          ]
+        },
+        {
+          "text": "NID 1 · 0",
+          "bounds": [
+            -70,
+            669,
+            -4.980003356933594,
+            678
+          ]
+        },
+        {
+          "text": "NID 2 · 0",
+          "bounds": [
+            530,
+            699,
+            595.0199966430664,
+            708
+          ]
+        },
+        {
+          "text": "ESCORTE · 164",
+          "bounds": [
+            1140,
+            167,
+            1233.9199981689453,
+            176
+          ]
+        },
+        {
+          "text": "AILE · follow",
+          "bounds": [
+            250,
+            296,
+            343.9199981689453,
+            306
+          ]
+        },
+        {
+          "text": "CHEYENNE · LANCEMENT",
+          "bounds": [
+            -850,
+            85,
+            -705.5099945068359,
+            94
+          ]
+        },
+        {
+          "text": "CORRIDOR · EXTRACTION",
+          "bounds": [
+            1620,
+            65,
+            1771.7200012207031,
+            74
+          ]
+        },
+        {
+          "text": "BROODSTORM · AIR CORRIDOR",
+          "bounds": [
+            34,
+            29,
+            229.6699981689453,
+            38
+          ]
+        },
+        {
+          "text": "HP 100  ARM 50  AMMO 99/180",
+          "bounds": [
+            34,
+            51,
+            229.05999755859375,
+            62
+          ]
+        },
+        {
+          "text": "SECTOR 2/6 · WINGED QUEEN · BROODSTORM",
+          "bounds": [
+            34,
+            72,
+            308.5400085449219,
+            83
+          ]
+        },
+        {
+          "text": "MED 2 · SALV 0 · TRACK 100%",
+          "bounds": [
+            34,
+            90,
+            229.05999755859375,
+            99
+          ]
+        },
+        {
+          "text": "UD-4L Cheyenne Dropshi · 236/260",
+          "bounds": [
+            838,
+            31,
+            1069.1900024414062,
+            44
+          ]
+        },
+        {
+          "text": "CARB 100 · ARMEMENT 160",
+          "bounds": [
+            838,
+            53,
+            1004.1699981689453,
+            62
+          ]
+        },
+        {
+          "text": "WINGED QUEEN · BROODSTORM",
+          "bounds": [
+            488,
+            106,
+            653.5599975585938,
+            116
+          ]
+        },
+        {
+          "text": "A/D/W/S or arrows: fly · F fire · B bomb · Q wing follow/suppress · hold E at the station",
+          "bounds": [
+            488,
+            126,
+            1077.4099731445312,
+            137
+          ]
+        },
+        {
+          "text": "CHAPITRE · BROODSTORM",
+          "bounds": [
+            484,
+            24,
+            610.4300003051758,
+            32
+          ]
+        },
+        {
+          "text": "REINE AILÉE · BROODSTORM · COQUE 236 · ESCORTE 164 · CARB 100 · BOMBES 6 · AILE follow",
+          "bounds": [
+            30,
+            120,
+            703.0900268554688,
+            134
+          ]
+        },
+        {
+          "text": "A/D/W/S or arrows: fly · F fire · B bomb · Q wing follow/suppress · hold E at the station",
+          "bounds": [
+            30,
+            142,
+            619.4099731445312,
+            153
+          ]
+        },
+        {
+          "text": "LIMITED PAYLOAD · Aim before release and protect the escort.",
+          "bounds": [
+            30,
+            160,
+            427.3500061035156,
+            171
+          ]
+        },
+        {
+          "text": "",
+          "bounds": [
+            30,
+            179,
+            30,
+            190
+          ]
+        }
+      ]
+    }
+  ],
+  "images": [
+    {
+      "id": "parent-chase0",
+      "file": "parent-chase0.png",
+      "sha256": "fa2872724558921c18a5e636b90840eccacd29c5bb3393ab3252b71fb01d1129",
+      "bytes": 51148
+    },
+    {
+      "id": "parent-detached",
+      "file": "parent-detached.png",
+      "sha256": "fa2872724558921c18a5e636b90840eccacd29c5bb3393ab3252b71fb01d1129",
+      "bytes": 51148
+    },
+    {
+      "id": "parent-foreign",
+      "file": "parent-foreign.png",
+      "sha256": "fa2872724558921c18a5e636b90840eccacd29c5bb3393ab3252b71fb01d1129",
+      "bytes": 51148
+    },
+    {
+      "id": "pose-chase-0-right",
+      "file": "pose-chase-0-right.png",
+      "sha256": "f2dc7db556ad80f31bbfee6faa68ca063bc286c522bc78d9ebf602335ef37be3",
+      "bytes": 144189
+    },
+    {
+      "id": "pose-chase-1-right",
+      "file": "pose-chase-1-right.png",
+      "sha256": "d7b6857f10e7e84c5a1f92bb7cad3bf05b1298f85a5145fb4aabaca8f89a99fc",
+      "bytes": 135744
+    },
+    {
+      "id": "pose-chase-2-right",
+      "file": "pose-chase-2-right.png",
+      "sha256": "501775eab7788d43b0aa1cdd9c468447a516587897c40928bf74911859874a16",
+      "bytes": 130598
+    },
+    {
+      "id": "pose-chase-3-right",
+      "file": "pose-chase-3-right.png",
+      "sha256": "67944758e87af1a7da50abe0c706dec769e242dcefb1099b1d0f6fdefcf3b687",
+      "bytes": 138830
+    },
+    {
+      "id": "pose-chase-0-left",
+      "file": "pose-chase-0-left.png",
+      "sha256": "8adb226762561f7380b6614138eeefa082bbebfe8863768cb1dff64d4dba6457",
+      "bytes": 144890
+    },
+    {
+      "id": "pose-chase-1-left",
+      "file": "pose-chase-1-left.png",
+      "sha256": "4e1dabc62705c003d526d8ad0ecc061dafff7029a5c4e467827e769ea2824770",
+      "bytes": 135604
+    },
+    {
+      "id": "pose-chase-2-left",
+      "file": "pose-chase-2-left.png",
+      "sha256": "b916cb3e7acbdaad4655805b1e6269d1cbc1fb6ac9b2cf28ae6d3d7421f61fca",
+      "bytes": 129581
+    },
+    {
+      "id": "pose-chase-3-left",
+      "file": "pose-chase-3-left.png",
+      "sha256": "2818579409008d628ca0501b0da12d3a8a99b074969b906bc2aaf5efb6d41d6c",
+      "bytes": 139388
+    },
+    {
+      "id": "pose-idle-0-right",
+      "file": "pose-idle-0-right.png",
+      "sha256": "6ac0718a6433fbc52ebb571a1f8b6163c266f6a65ceb3ba46042c5bb2d1e4cf0",
+      "bytes": 144597
+    },
+    {
+      "id": "pose-idle-1-right",
+      "file": "pose-idle-1-right.png",
+      "sha256": "aa73d7c821ec74d4ab77855ab8050032f6de7e25f48d054ddb97bdbe5d9fa65b",
+      "bytes": 137870
+    },
+    {
+      "id": "pose-idle-2-right",
+      "file": "pose-idle-2-right.png",
+      "sha256": "dd7388d0498f7f8743f527879adad08e72ca352f85b6cdeb06b32ab00e438442",
+      "bytes": 135134
+    },
+    {
+      "id": "pose-idle-3-right",
+      "file": "pose-idle-3-right.png",
+      "sha256": "5d9f40174cce738f6a2e957547708d894abb67585cf8d3e3b7bc1acc0979608c",
+      "bytes": 140638
+    },
+    {
+      "id": "pose-idle-0-left",
+      "file": "pose-idle-0-left.png",
+      "sha256": "c86e0b845f90f8468035f4ee7499f0227aa43c60c8cee07b5d69f34a8f678e2a",
+      "bytes": 145178
+    },
+    {
+      "id": "pose-idle-1-left",
+      "file": "pose-idle-1-left.png",
+      "sha256": "d83a0de38fd810bfd04f115f00e635e906d1a9dbd00c51b2bc8e85f770b714d7",
+      "bytes": 138957
+    },
+    {
+      "id": "pose-idle-2-left",
+      "file": "pose-idle-2-left.png",
+      "sha256": "079ea33e6ae7967d0209ba88ad1f7301176cf3f4dff20f3cba49cb2ce9afabe4",
+      "bytes": 136147
+    },
+    {
+      "id": "pose-idle-3-left",
+      "file": "pose-idle-3-left.png",
+      "sha256": "22c3703a84607b4f59fe157058438c95bab8db14cfc19a0ed8542830a18593ef",
+      "bytes": 141784
+    },
+    {
+      "id": "pose-death-0-right",
+      "file": "pose-death-0-right.png",
+      "sha256": "d94f44e9ffbc1434751f175925759c4e3ae8b5493ea6c83bc6fb8bd38d03f4a8",
+      "bytes": 142641
+    },
+    {
+      "id": "pose-death-1-right",
+      "file": "pose-death-1-right.png",
+      "sha256": "b4b4e2750dafa680c445c23e7d0be488ec2c83c5ee93ce4169f9a11f204250f7",
+      "bytes": 143480
+    },
+    {
+      "id": "pose-death-2-right",
+      "file": "pose-death-2-right.png",
+      "sha256": "648d504a2f7271daedef7d3e7a096f331fd32d6f5e64f20d076f2eb442953262",
+      "bytes": 134035
+    },
+    {
+      "id": "pose-death-3-right",
+      "file": "pose-death-3-right.png",
+      "sha256": "ca4ad6e01d68cae8be82ec20a68eac15ddd9a1818bfc02ffeb84eb61c90fe1c2",
+      "bytes": 132742
+    },
+    {
+      "id": "pose-death-0-left",
+      "file": "pose-death-0-left.png",
+      "sha256": "441e8ed4b3c5db514faabe5e7d8b37063a59d7d5c301cf02dcfe2dabfcf4d303",
+      "bytes": 143341
+    },
+    {
+      "id": "pose-death-1-left",
+      "file": "pose-death-1-left.png",
+      "sha256": "2b10074da3ddec66257bec0a94e9bb53eb32db1f9f1512bb046948c0a31e9fc9",
+      "bytes": 144120
+    },
+    {
+      "id": "pose-death-2-left",
+      "file": "pose-death-2-left.png",
+      "sha256": "6fb673a60175fe06153f9a05707a5dbf5c1c6ad8e6ef7653b7be06e0e1a6b64f",
+      "bytes": 133488
+    },
+    {
+      "id": "pose-death-3-left",
+      "file": "pose-death-3-left.png",
+      "sha256": "47a05dad93783152843cf6d368b867f2b9343de6da4a42ae4dfb3ac0bf3ad836",
+      "bytes": 132247
+    },
+    {
+      "id": "fallback-mask-0",
+      "file": "fallback-mask-0.png",
+      "sha256": "fa2872724558921c18a5e636b90840eccacd29c5bb3393ab3252b71fb01d1129",
+      "bytes": 51148
+    },
+    {
+      "id": "fallback-mask-1",
+      "file": "fallback-mask-1.png",
+      "sha256": "fa2872724558921c18a5e636b90840eccacd29c5bb3393ab3252b71fb01d1129",
+      "bytes": 51148
+    },
+    {
+      "id": "fallback-mask-2",
+      "file": "fallback-mask-2.png",
+      "sha256": "fa2872724558921c18a5e636b90840eccacd29c5bb3393ab3252b71fb01d1129",
+      "bytes": 51148
+    },
+    {
+      "id": "fallback-mask-3",
+      "file": "fallback-mask-3.png",
+      "sha256": "fa2872724558921c18a5e636b90840eccacd29c5bb3393ab3252b71fb01d1129",
+      "bytes": 51148
+    },
+    {
+      "id": "fallback-mask-4",
+      "file": "fallback-mask-4.png",
+      "sha256": "fa2872724558921c18a5e636b90840eccacd29c5bb3393ab3252b71fb01d1129",
+      "bytes": 51148
+    },
+    {
+      "id": "fallback-mask-5",
+      "file": "fallback-mask-5.png",
+      "sha256": "fa2872724558921c18a5e636b90840eccacd29c5bb3393ab3252b71fb01d1129",
+      "bytes": 51148
+    },
+    {
+      "id": "fallback-mask-6",
+      "file": "fallback-mask-6.png",
+      "sha256": "fa2872724558921c18a5e636b90840eccacd29c5bb3393ab3252b71fb01d1129",
+      "bytes": 51148
+    },
+    {
+      "id": "fallback-mask-7",
+      "file": "fallback-mask-7.png",
+      "sha256": "f2dc7db556ad80f31bbfee6faa68ca063bc286c522bc78d9ebf602335ef37be3",
+      "bytes": 144189
+    },
+    {
+      "id": "excluded-detached",
+      "file": "excluded-detached.png",
+      "sha256": "fa2872724558921c18a5e636b90840eccacd29c5bb3393ab3252b71fb01d1129",
+      "bytes": 51148
+    },
+    {
+      "id": "excluded-foreign",
+      "file": "excluded-foreign.png",
+      "sha256": "fa2872724558921c18a5e636b90840eccacd29c5bb3393ab3252b71fb01d1129",
+      "bytes": 51148
+    },
+    {
+      "id": "pause-0",
+      "file": "pause-0.png",
+      "sha256": "d7b6857f10e7e84c5a1f92bb7cad3bf05b1298f85a5145fb4aabaca8f89a99fc",
+      "bytes": 135744
+    },
+    {
+      "id": "pause-1",
+      "file": "pause-1.png",
+      "sha256": "d7b6857f10e7e84c5a1f92bb7cad3bf05b1298f85a5145fb4aabaca8f89a99fc",
+      "bytes": 135744
+    },
+    {
+      "id": "pause-released",
+      "file": "pause-released.png",
+      "sha256": "b916cb3e7acbdaad4655805b1e6269d1cbc1fb6ac9b2cf28ae6d3d7421f61fca",
+      "bytes": 129581
+    },
+    {
+      "id": "resume-current-owner",
+      "file": "resume-current-owner.png",
+      "sha256": "b916cb3e7acbdaad4655805b1e6269d1cbc1fb6ac9b2cf28ae6d3d7421f61fca",
+      "bytes": 129581
+    },
+    {
+      "id": "resume-obsolete-owner",
+      "file": "resume-obsolete-owner.png",
+      "sha256": "527396a46c09fac4120fad021b34af1e8bab716c375282b25fdef84ef764b7e2",
+      "bytes": 50227
+    },
+    {
+      "id": "death-native-0",
+      "file": "death-native-0.png",
+      "sha256": "441e8ed4b3c5db514faabe5e7d8b37063a59d7d5c301cf02dcfe2dabfcf4d303",
+      "bytes": 143341
+    },
+    {
+      "id": "death-native-0p15",
+      "file": "death-native-0p15.png",
+      "sha256": "2b10074da3ddec66257bec0a94e9bb53eb32db1f9f1512bb046948c0a31e9fc9",
+      "bytes": 144120
+    },
+    {
+      "id": "death-native-0p3",
+      "file": "death-native-0p3.png",
+      "sha256": "6fb673a60175fe06153f9a05707a5dbf5c1c6ad8e6ef7653b7be06e0e1a6b64f",
+      "bytes": 133488
+    },
+    {
+      "id": "death-native-0p5",
+      "file": "death-native-0p5.png",
+      "sha256": "47a05dad93783152843cf6d368b867f2b9343de6da4a42ae4dfb3ac0bf3ad836",
+      "bytes": 132247
+    },
+    {
+      "id": "death-native-1p5",
+      "file": "death-native-1p5.png",
+      "sha256": "47a05dad93783152843cf6d368b867f2b9343de6da4a42ae4dfb3ac0bf3ad836",
+      "bytes": 132247
+    },
+    {
+      "id": "death-native-2p81",
+      "file": "death-native-2p81.png",
+      "sha256": "1b28d106ba8efc716c5418949cfd98eeca2cc496f1335b18eabd7ab61795aad9",
+      "bytes": 1092502
+    },
+    {
+      "id": "culling-left",
+      "file": "culling-left.png",
+      "sha256": "cfb745ec4e689755a11c900e7db059d049d88b11a399a14cd8b0f221fe505eb0",
+      "bytes": 143255
+    },
+    {
+      "id": "culling-right",
+      "file": "culling-right.png",
+      "sha256": "8c8f51edd72ad0a2e4cf36b47b8d4f4a75314cc97654b97c3320ed250909db67",
+      "bytes": 76683
+    },
+    {
+      "id": "culling-top",
+      "file": "culling-top.png",
+      "sha256": "f78772e863c3ddcf1cec403ed81f5ac34253fada357dcf674bcce5fd9982e592",
+      "bytes": 124969
+    },
+    {
+      "id": "culling-bottom",
+      "file": "culling-bottom.png",
+      "sha256": "2c00f373d587269e22ef071bc0463f35ec28927c0914f8c913fff95c60ccb69f",
+      "bytes": 66901
+    },
+    {
+      "id": "world-pursuit-fr",
+      "file": "world-pursuit-fr.png",
+      "sha256": "f994051682edc334578ab337bb077e6e72561105e508f294e202c8e8718bec72",
+      "bytes": 1362642
+    },
+    {
+      "id": "world-pursuit-en",
+      "file": "world-pursuit-en.png",
+      "sha256": "6c05cbdff2374f9e355ab0f5cc10af7c9d43245efd977ddae2df98389dccc911",
+      "bytes": 1362639
+    },
+    {
+      "id": "overview",
+      "file": "broodstorm-queen-art-overview-20261117.png",
+      "sha256": "3f82631382aea546955112c2d431f5f0887aa2d19017592058c689a70b1ec18f",
+      "bytes": 1296199
+    }
+  ],
+  "overview": {
+    "file": "broodstorm-queen-art-overview-20261117.png",
+    "sha256": "3f82631382aea546955112c2d431f5f0887aa2d19017592058c689a70b1ec18f",
+    "publicPath": "docs/development/BROODSTORM_QUEEN_ART_OVERVIEW_20261117.png"
+  },
+  "details": {
+    "file": "native-canvas-details.json",
+    "sha256": "9a6ced41d094e069e0d200d9fbe766510d663b04c07b20de5923a74f4102378c"
+  },
+  "failures": [],
+  "limits": [
+    "Production renderer exercised in a declared Node browser-API host with real decoded PNGs; no browser journey claimed.",
+    "Frozen anatomical landmarks retain uncertainty, especially final DEATH ±8 source pixels and family ratio approximately±3–4%.",
+    "Initial high-spawn HUD occlusion is retained in earlier evidence; presented combat view follows a declared valid lower vehicle start and real pursuit.",
+    "Idle four-frame matrix is controller coverage; one isolated0.24second hurt normally shows only the first idle pose.",
+    "No landing mechanic, canon-exact franchise certification, full campaign completion or full modular Cheyenne corpus claimed.",
+    "Reduced-motion Canvas views were not produced. The separate existing unit suite covers 48 samples, 24 with reduced motion; those are not included in the 51 Canvas captures.",
+    "The native EN view retains some French status labels, including REINE AILEE and COQUE, while the instructions are translated. This report does not certify complete EN localization.",
+    "The six real-death samples prove controller progression, held final pose, clock decay and invisibility after 2.8 seconds. All five pre-expiry sampled renders have alpha1; the intermediate partial-fade interval was not visually sampled.",
+    "Strict equality across native resume is not claimed: the same tiny y round-trip and omission of transient vx/vy occur on parent H and candidate. Guarded draw immutability is a separate successful check.",
+    "Visual comparison is bounded to the stated pose, pursuit, corpse and edge fixtures; four edge observations are not an exhaustive traversal of the full campaign."
+  ],
+  "nativeResume": {
+    "comparison": "Exact same native pause/update/save/resume sequence executed separately on parent H and candidate; all comparisons passed.",
+    "probe": {
+      "file": "resume-equivalence-probe-v2.json",
+      "sha256": "cd0f3263e81a10751b94c3df29e7b026a413ff6844331d57def30e295a21172c"
+    },
+    "geometry": {
+      "before": [
+        2313.8042470428954,
+        171.3478239259242,
+        336,
+        268.28125
+      ],
+      "after": [
+        2313.8042470428954,
+        171.34782392592422,
+        336,
+        268.28125
+      ],
+      "delta": [
+        0,
+        2.842170943040401e-14,
+        0,
+        0
+      ],
+      "strictJsonEqual": false
+    },
+    "parentGeometry": {
+      "before": [
+        2313.8042470428954,
+        171.3478239259242,
+        336,
+        268.28125
+      ],
+      "after": [
+        2313.8042470428954,
+        171.34782392592422,
+        336,
+        268.28125
+      ],
+      "delta": [
+        0,
+        2.842170943040401e-14,
+        0,
+        0
+      ],
+      "strictJsonEqual": false
+    },
+    "observedNativeFieldDifferences": {
+      "y": {
+        "before": 171.3478239259242,
+        "after": 171.34782392592422,
+        "beforeFieldPresent": true,
+        "afterFieldPresent": true,
+        "delta": 2.842170943040401e-14
+      },
+      "vx": {
+        "before": -134.9646079758738,
+        "after": null,
+        "beforeFieldPresent": true,
+        "afterFieldPresent": false
+      },
+      "vy": {
+        "before": -3.0910506172983987,
+        "after": null,
+        "beforeFieldPresent": true,
+        "afterFieldPresent": false
+      }
+    },
+    "parentHasSameFieldDifferences": true,
+    "royalFootMigration": {
+      "formula": "saved y + saved bodyHeight - reconstructed h",
+      "computedY": 171.34782392592422,
+      "observedY": 171.34782392592422,
+      "matchesObserved": true
+    },
+    "nativeResumeSource": {
+      "file": "src/game-production-resume.js",
+      "sha256": "c73d044c8d19f3558a579148f3cf7c47e57075a58cbf53ee66695fb59995cf7b",
+      "sameOnParentAndCandidate": true
+    },
+    "actorRecreated": true,
+    "freshActorAnimationTelemetry": null,
+    "frameAudit": "The actual native drawImage path and source rectangle determine the displayed frame; newly reconstructed actor telemetry is null before the first update on both parent and candidate.",
+    "numericTolerancePixels": 1e-07,
+    "drawVersusResume": "Every captured draw preserves guarded physical and save state. Native update and native reconstruction may change state: resume removes the recorded transient vx/vy fields on both versions; this is explicitly not a claim of complete physical-state equality across resume."
+  },
+  "reducedMotionCoverage": {
+    "canvasCaptures": 0,
+    "sixOptionalExtremeViewsProduced": false,
+    "unitCoverageSeparate": true,
+    "unitSource": "scripts/verify-broodstorm-queen-art-v188.mjs",
+    "unitSourceSha256": "bd82cf599d623cf2e9ed9db608a5577a8e229aee411c6c3c00dcf3e2159b5a6f",
+    "unitSamples": 48,
+    "unitReducedMotionSamples": 24,
+    "description": "Previously executed unit coverage samples 12 poses in both directions with reduced motion false and true. It is not part of the 51 native Canvas captures and was not rerun for this receipt."
+  },
+  "preservedAttempts": [
+    {
+      "attempt": "01",
+      "candidateCapturesCompleted": 34,
+      "parentComparatorCaptures": 3,
+      "failure": "Native entry resume rejected with legacy-progress-inconsistent.",
+      "classification": "The stage fixture marked the escort arrived without placing it at its authored destination. Only the scratch fixture was corrected to x2110 before the final stage; no runtime change.",
+      "evidence": "final-native-attempt-01/tooling-failure.json",
+      "sha256": "6ff0f6c8d19821f04a2ae92795723618c3dcafbf8d70aa545974e20aa3216b48"
+    },
+    {
+      "attempt": "02",
+      "candidateCapturesCompleted": 37,
+      "parentComparatorCaptures": 3,
+      "separateIssues": [
+        {
+          "failure": "Resume changed native geometry or reused obsolete owner",
+          "classification": "Strict JSON geometry equality rejected the existing native floating-point y round-trip. The original failure did not record the after geometry; the exact unchanged sequence was subsequently reproduced on H and candidate and matches the attempt02 pre-resume body and final attempt03 before/after values. Both recreate the owner and both yield delta y +2.842170943040401e-14. The transient velocity omissions are recorded separately above."
+        },
+        {
+          "failure": "Independent hip landmark does not meet native target; TypeError reading expectedHipCanvas",
+          "classification": "The QA assumed v52Animation was populated immediately after native reconstruction. Null telemetry made the audit null and caused the exception; it was not a measured hip mismatch. The corrected audit identifies the frame from the observed native drawImage source window."
+        }
+      ],
+      "evidence": "final-native-attempt-02/tooling-failure.json",
+      "sha256": "4eeccb4d94063b6d509020862feb1dd3fbdb4f597da81267c1634c4081efd62a"
+    },
+    {
+      "attempt": "03",
+      "candidateCapturesCompleted": 51,
+      "parentComparatorCaptures": 3,
+      "status": "passed",
+      "failureCount": 0,
+      "evidence": "final-native-attempt-03/native-canvas-details.json",
+      "sha256": "9a6ced41d094e069e0d200d9fbe766510d663b04c07b20de5923a74f4102378c"
+    }
+  ],
+  "visualReview": {
+    "status": "accepted-for-candidate",
+    "reviewed": [
+      "overview",
+      "world-pursuit-fr",
+      "world-pursuit-en",
+      "death-native-1p5"
+    ],
+    "observations": [
+      "The crown, torso and full wings remain legible across the overview; family calibration keeps the estimated hip anchored while the death poses progressively lose suspended posture.",
+      "The final native death pose at 1.5 seconds remains a suspended corpse, without an invented landing.",
+      "The actual 8-second pursuit views show body and wings below the unchanged native HUD; the health bar is visibly clear of the wings."
+    ],
+    "minimumBodyPixelsDifferentFromBackground": 13542,
+    "maxCalibratedHipProjectionError24PosesPixels": 8.931974093684403e-06,
+    "minimumHealthBarClearanceToMeasuredAlpha32Pixels": 5.999998540413088,
+    "caveat": "The very small projection residual describes numerical placement of manually estimated landmarks, not anatomical certainty at that precision."
+  },
+  "postCaptureWordingFollowup": {
+    "schema": "broodstorm-dossier-wording-followup-v1",
+    "changedAtUtc": "2026-11-17T19:21:03.004767+00:00",
+    "previousCandidate": "e0b010f4459209fde299dee98fcc96f49a2916f9",
+    "previousCandidatePublished": false,
+    "parentRemains": "361e40670c393dd548b4faa081f12edb0e9b05c4",
+    "reason": "The inherited Legacy test requires the dossier to retain the explicit word adaptation; the first candidate notice had omitted it.",
+    "replacements": [
+      {
+        "old": "Reine ailée illustrée pour Broodstorm.",
+        "new": "Reine ailée illustrée pour Broodstorm (adaptation aérienne)."
+      },
+      {
+        "old": "Winged Queen illustrated for Broodstorm.",
+        "new": "Winged Queen illustrated for Broodstorm (aerial adaptation)."
+      }
+    ],
+    "runtimeSources": [
+      {
+        "path": "src/legacy-operation-state-v131.js",
+        "previousSha256": "5c0b9b4d6cec901c4fd3050b823afb58b2c3aedc3b533d2754121e187c6f28c3",
+        "currentSha256": "bda3ae3681cf383b1a8100e9110ba931ab62ba4d4f0f94a02d4a98ed80add7da"
+      },
+      {
+        "path": "src/i18n-en-catalog-v185.js",
+        "previousSha256": "036ab689b713d326ab5e3cdbfadfb15436031d04fb32d873a10f779f1d4614f4",
+        "currentSha256": "73d71fb68c960c112c3bf1cd792e5a522279de76f4f7d634a0d33257303d63ae"
+      }
+    ],
+    "renderingSourcesChanged": false,
+    "imageBytesChanged": false,
+    "firstFullGate": {
+      "tests": 4761,
+      "pass": 4759,
+      "fail": 1,
+      "skipped": 1,
+      "logSha256": "fcf3ffd43229df3397ae9f6d1dd2c4a335db6c8c1b52b03502b97e0324d27a80",
+      "failure": "scripts/verify-legacy-operations-v131.mjs:450, dossier /adaptation/i"
+    },
+    "originalNativeReceiptSha256": "0191d5b0b0e32b3b9e02465d7b5d8c84c0207881ecbe3977bf017a2d44f43cdc",
+    "existingNativeCapturesReusedWithoutClaimingNewCaptures": true
+  },
+  "captureSourceAttribution": "The original 51-capture evidence and its source hashes are retained unchanged above. The subsequent dossier-only FR/EN correction is recorded separately below; no new raster capture is claimed."
+}

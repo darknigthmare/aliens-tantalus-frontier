@@ -1,3 +1,4 @@
+import { AUDIO_CUE_IDS_V188 } from './audio-cues-v188.js';
 export const AUDIO_FORMATS_V77 = Object.freeze([
   { extension: 'mp3', mime: 'audio/mpeg' }, { extension: 'wav', mime: 'audio/wav' },
   { extension: 'ogg', mime: 'audio/ogg' }, { extension: 'm4a', mime: 'audio/mp4' },
@@ -7,11 +8,14 @@ export const AUDIO_MIME_V77 = Object.freeze(Object.fromEntries(AUDIO_FORMATS_V77
 // V184 (owner-approved, 2026-11-05): new slots for mission feedback and view music.
 // A slot without a file keeps the synth fallback (effects) or the legacy scene (music).
 export const AUDIO_SLOTS_V77 = Object.freeze({
-  sfx: Object.freeze(['shot', 'tracker', 'hit', 'ui', 'alarm', 'checkpoint', 'locked', 'kill', 'pickup', 'victory']),
-  music: Object.freeze(['menu', 'hub', 'mission', 'travel', 'briefing', 'archives'])
+  // V188 (bible §56, P0-2/P0-3): 40 priority cues and four in-mission music moods.
+  sfx: Object.freeze(['shot', 'tracker', 'hit', 'ui', 'alarm', 'checkpoint', 'locked', 'kill', 'pickup', 'victory', ...AUDIO_CUE_IDS_V188]),
+  music: Object.freeze(['menu', 'hub', 'mission', 'travel', 'briefing', 'archives', 'alert', 'boss', 'ending', 'calm'])
 });
 // New view scenes fall back to the legacy music they used before V184.
-export const AUDIO_MUSIC_FALLBACK_V184 = Object.freeze({ travel: 'menu', briefing: 'menu', archives: 'menu' });
+// V188 moods fall back to existing music until the owner's tracks exist (§53.2).
+export const AUDIO_MUSIC_FALLBACK_V184 = Object.freeze({ travel: 'menu', briefing: 'menu', archives: 'menu',
+  alert: 'mission', boss: 'mission', ending: 'menu', calm: 'hub' });
 // Leaving a playable world must invalidate its pending music and delayed effects.
 export const resolveViewAudioSceneV77 = view => ['play', 'bioforge'].includes(view) ? 'mission' : view === 'hub' ? 'hub'
   : view === 'galaxy' ? 'travel' : view === 'operations' ? 'briefing' : view === 'archives' ? 'archives' : 'menu';

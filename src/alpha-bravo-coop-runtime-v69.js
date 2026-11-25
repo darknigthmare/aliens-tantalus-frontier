@@ -58,6 +58,8 @@ const overlapsWithGap = (left, right, gap = 0) => (
   && Number(left?.y) + Number(left?.h) + gap > Number(right?.y)
 );
 const finiteDelta = (delta) => clampAlphaBravoV69(delta, 0, 0.1);
+// V188: the floors a lift serves (top, base and named stops).
+const liftStopsV188 = (lift) => [...new Set([Number(lift?.topY), Number(lift?.baseY), ...asList(lift?.stops).map((stop) => Number(stop?.y))])].filter(Number.isFinite);
 const boundedText = (value, fallback = '', maximum = 128) => {
   const source = typeof value === 'string' ? value.trim() : '';
   return (source || fallback).slice(0, maximum);
@@ -654,11 +656,17 @@ export function withAlphaBravoCoopRuntimeV69(BaseEngine) {
       const targetCenter = (Number(target.x) || 0) + (Number(target.w) || 0) / 2;
       const targetBottom = (Number(target.y) || 0) + (Number(target.h) || 0);
       const pairOffset = (memberIndex ? 1 : -1) * (target.taskId ? 44 : 64);
-      const desiredX = targetCenter + pairOffset - (Number(member.w) || 40) / 2;
-      const gapX = desiredX - (Number(member.x) || 0);
-      const gapY = targetBottom - ((Number(member.y) || 0) + (Number(member.h) || 0));
+      let desiredX = targetCenter + pairOffset - (Number(member.w) || 40) / 2;
+      let gapX = desiredX - (Number(member.x) || 0);
+      let gapY = targetBottom - ((Number(member.y) || 0) + (Number(member.h) || 0));
+      // V188 gameplay gaps: a pair whose station lies on another floor, or past a pit of
+      // its own floor, takes the level's connectors (ladders, lifts) through the shared
+      // mission navigation instead of walking straight into the void.
+      const waypoint = this.alphaBravoNavigateV69(member, { x: desiredX, y: targetBottom - (Number(member.h) || 0), w: member.w, h: member.h }, frame);
+      if (waypoint === true) return true;
+      if (waypoint) { desiredX = waypoint.x; gapX = desiredX - (Number(member.x) || 0); gapY = 0; } // walk (and vault covers) to the connector
       const ladder = typeof this.findSquadLadder === 'function' ? this.findSquadLadder(member, desiredX, targetBottom) : null;
-      if (ladder && Math.abs(gapY) > 80) {
+      if (!waypoint && ladder && Math.abs(gapY) > 80) {
         const ladderGap = Number(ladder.x) - ((Number(member.x) || 0) + (Number(member.w) || 0) / 2);
         if (Math.abs(ladderGap) < 38) {
           member.climbing = true;
@@ -673,7 +681,7 @@ export function withAlphaBravoCoopRuntimeV69(BaseEngine) {
       member.climbing = false;
       const performance = this.alphaBravoPerformanceV69(teamId);
       const speed = (team.order === 'rally' ? 238 : team.order === 'move' ? 220 : 202) * performance * individual.speed;
-      const stopDistance = target.taskId ? 24 : 38;
+      const stopDistance = waypoint ? 3 : target.taskId ? 24 : 38;
       const desiredVelocity = Math.abs(gapX) > stopDistance ? Math.sign(gapX) * speed : 0;
       member.vx = (Number(member.vx) || 0) + (desiredVelocity - (Number(member.vx) || 0)) * Math.min(1, frame * (member.grounded ? 11 : 7) * individual.acceleration);
       if (Math.abs(member.vx) > 4) member.facing = Math.sign(member.vx);
@@ -681,10 +689,19 @@ export function withAlphaBravoCoopRuntimeV69(BaseEngine) {
       const bounds = this.alphaBravoWorldBoundsV69();
       member.x = clampAlphaBravoV69(beforeX + member.vx * frame, 0, Math.max(0, bounds.width - (Number(member.w) || 40)));
       if (typeof this.resolveHorizontal === 'function') this.resolveHorizontal(member, beforeX);
+      // V188: never step off a floor edge above the void (no floor below the next step).
+      if (member.grounded && this.alphaBravoOverVoidV69(member)) { member.x = beforeX; member.vx = 0; }
+      // V188: an empty lift shaft is not walked into: the cabin is called to this floor and the marine waits at the edge.
+      const shaft = member.grounded ? this.alphaBravoShaftV69(member) : null;
+      if (shaft) {
+        // Wait clear of the shaft (a body over its edge would stop the cabin): beside it, on the side the marine stands.
+        const left = member.x + member.w / 2 < shaft.x + shaft.w / 2;
+        member.x = left ? Math.min(beforeX, shaft.x - member.w - 3) : Math.max(beforeX, shaft.x + shaft.w + 3); member.vx = 0; member.stuckClock = 0; member.alphaBravoWaitingLiftV188 = true; this.requestLiftV130?.(shaft, member.y + member.h, 'squad'); }
+      else member.alphaBravoWaitingLiftV188 = false;
       const travelled = Math.abs((Number(member.x) || 0) - beforeX);
       const blocked = travelled < Math.max(0.35, Math.abs(member.vx * frame) * 0.16) && Math.abs(gapX) > 70;
       member.stuckClock = blocked ? (Number(member.stuckClock) || 0) + frame : Math.max(0, (Number(member.stuckClock) || 0) - frame * 2);
-      if (member.grounded && (member.stuckClock > 0.28 || gapY < -95)) {
+      if (member.grounded && !member.alphaBravoWaitingLiftV188 && (member.stuckClock > 0.28 || gapY < -95)) {
         member.vy = -520 * individual.jump;
         member.grounded = false;
         member.stuckClock = 0;
@@ -693,13 +710,191 @@ export function withAlphaBravoCoopRuntimeV69(BaseEngine) {
       return true;
     }
 
+    // V188: a fireteam sent to its station (focus) or a ping (move) walks there.
+    // The anti-stacking pass pushes a member away from the marine on the side it
+    // already stands, so a pair spawned behind the player could never pass and
+    // the split tasks never started. Routed pairs keep their own slots (pair
+    // offsets); following members are still separated.
+    separateSquadFormation(members = this.activeSquadActors(), fixedActors = null) {
+      if (!this.isAlphaBravoMissionV69() || !this.alphaBravoV69) return super.separateSquadFormation(members, fixedActors);
+      const routed = (member) => ['focus', 'move'].includes(this.alphaBravoV69.teams[this.alphaBravoTeamForActorV69(member)]?.order);
+      return super.separateSquadFormation(asList(members).filter((member) => !routed(member)), fixedActors);
+    }
+
     updateSquadMovement(member, index, leader, delta) {
       if (!this.isAlphaBravoMissionV69() || !this.alphaBravoV69) return super.updateSquadMovement(member, index, leader, delta);
       if (member === this.player || member === this.coop) return false;
       const teamId = this.alphaBravoTeamForActorV69(member);
       if (!teamId) return super.updateSquadMovement(member, index, leader, delta);
       const target = this.alphaBravoMovementTargetV69(member, teamId);
-      return this.alphaBravoMoveMemberV69(member, target, teamId, delta);
+      const result = this.alphaBravoMoveMemberV69(member, target, teamId, delta);
+      this.recoverAlphaBravoFallV69(member);
+      return result;
+    }
+
+    // —— V188 gameplay gaps: floors, pits and connectors for the pairs ——
+    /** Platforms forming the floor at height y (lifts count only while standing at that floor). */
+    alphaBravoFloorV69(y) {
+      // A lift shaft is crossed at each of its stops once the cabin is called there (alphaBravoShaftV69 waits for it).
+      const cabins = new Set(asList(this.lifts).map((lift) => lift.id));
+      const shafts = asList(this.lifts).filter((lift) => liftStopsV188(lift).some((stop) => Math.abs(stop - y) <= 4))
+        .map((lift) => [Number(lift.x), Number(lift.x) + Number(lift.w)]);
+      return [...asList(this.platforms).filter((platform) => !cabins.has(platform.id) && Math.abs(Number(platform.y) - y) <= 4 && Number(platform.w) > 0)
+        .map((platform) => [Number(platform.x), Number(platform.x) + Number(platform.w)]), ...shafts].sort((a, b) => a[0] - b[0]);
+    }
+    /** The lift shaft the member would step into while its cabin stands at another floor, or null. */
+    alphaBravoShaftV69(member) {
+      const centre = member.x + member.w / 2, feet = member.y + member.h;
+      return asList(this.lifts).find((lift) => centre + member.w / 2 > lift.x - 2 && centre - member.w / 2 < lift.x + lift.w + 2
+        && liftStopsV188(lift).some((stop) => Math.abs(stop - feet) <= 6) && Math.abs(Number(lift.y) - feet) > 6) || null;
+    }
+    /** True when the floor at y runs without a pit (gap wider than 24 px) between xa and xb. */
+    alphaBravoFloorReachV69(y, xa, xb) {
+      const from = Math.min(xa, xb), to = Math.max(xa, xb);
+      let reach = null;
+      for (const [x0, x1] of this.alphaBravoFloorV69(y)) {
+        if (reach === null) { if (x0 <= from + 2 && x1 >= from - 2) reach = x1; continue; }
+        if (x0 > reach + 24) break;
+        reach = Math.max(reach, x1);
+      }
+      if (reach === null || reach < to - 2) return false;
+      // A wall or a closed door standing across the walking band also cuts the floor.
+      const band = { x0: from + 6, x1: to - 6, y0: y - 70, y1: y - 12 };
+      const blockers = [...asList(this.walls), ...(typeof this.closedDoorColliders === 'function' ? asList(this.closedDoorColliders()) : [])];
+      return !blockers.some((box) => !box?.destroyed && Number(box.x) < band.x1 && Number(box.x) + Number(box.w) > band.x0
+        && Number(box.y) < band.y1 && Number(box.y) + Number(box.h) > band.y0);
+    }
+    alphaBravoConnectorsV69() {
+      return [...asList(this.ladders).map((ladder) => ({ id: ladder.id, kind: 'ladder', x: Number(ladder.x), x0: Number(ladder.x), x1: Number(ladder.x), ends: [Number(ladder.top), Number(ladder.bottom)] })),
+        // A lift whose shaft a closed door cuts (or that is blocked) cannot carry the pair: it is left out.
+        ...asList(this.lifts).filter((lift) => lift.stateV130 !== 'blocked' && !(typeof this.closedDoorColliders === 'function' ? asList(this.closedDoorColliders()) : [])
+          .some((box) => Number(box.x) < Number(lift.x) + Number(lift.w) && Number(box.x) + Number(box.w) > Number(lift.x))).map((lift) => ({ id: lift.id, kind: 'lift', x: Number(lift.x) + Number(lift.w) / 2, x0: Number(lift.x), x1: Number(lift.x) + Number(lift.w),
+          ends: [...new Set([Number(lift.topY), Number(lift.baseY), ...asList(lift.stops).map((stop) => Number(stop.y))])] }))]
+        .filter((connector) => Number.isFinite(connector.x) && connector.ends.every(Number.isFinite));
+    }
+    /** Where a marine stands to use a connector from the side of x: on the ladder, or beside the shaft. */
+    alphaBravoApproachV69(connector, x) {
+      if (connector.kind !== 'lift') return connector.x;
+      return x < connector.x ? connector.x0 - 26 : connector.x1 + 26;
+    }
+    /** Next connector of the cheapest route (one or two connectors) from the member's floor to the target's. */
+    alphaBravoRouteV69(fromY, fromX, toY, toX) {
+      const floors = (connector, y) => connector.ends.filter((end) => Math.abs(end - y) > 4);
+      const on = (connector, y) => connector.ends.some((end) => Math.abs(end - y) <= 4);
+      const reach = (y, a, b) => this.alphaBravoFloorReachV69(y, a, b);
+      const connectors = this.alphaBravoConnectorsV69();
+      let best = null;
+      for (const first of connectors) {
+        const inA = this.alphaBravoApproachV69(first, fromX);
+        if (!on(first, fromY) || !reach(fromY, fromX, inA)) continue;
+        for (const middle of floors(first, fromY)) {
+          const legA = Math.abs(inA - fromX) + Math.abs(middle - fromY) + (first.kind === 'lift' ? 240 : 0); // ladders first: a cabin must be called
+          const outA = this.alphaBravoApproachV69(first, toX);
+          if (Math.abs(middle - toY) <= 4 && reach(toY, outA, toX)) {
+            const cost = legA + Math.abs(toX - outA);
+            if (!best || cost < best.cost) best = { cost, connector: first, destinationY: middle, approachX: inA };
+          }
+          for (const second of connectors) {
+            if (second === first || Math.abs(middle - toY) <= 4 || !on(second, middle) || !on(second, toY)) continue;
+            const exitA = this.alphaBravoApproachV69(first, second.x), inB = this.alphaBravoApproachV69(second, exitA), outB = this.alphaBravoApproachV69(second, toX);
+            if (!reach(middle, exitA, inB) || !reach(toY, outB, toX)) continue;
+            const cost = legA + Math.abs(inB - exitA) + Math.abs(toY - middle) + (second.kind === 'lift' ? 240 : 0) + Math.abs(toX - outB);
+            if (!best || cost < best.cost) best = { cost, connector: first, destinationY: middle, approachX: inA };
+          }
+        }
+      }
+      return best;
+    }
+    alphaBravoNavigateV69(member, target, frame) {
+      if (!this.missionLevelRuntime || typeof this.advanceEnemyMissionNavigation !== 'function' || typeof this.missionLevelSurfaceFor !== 'function') return false;
+      member.levelNavigation ||= { mode: 'surface', surfaceId: null, connectorId: null, destinationY: null, riding: false, lastSafeX: member.x, lastSafeY: member.y };
+      member.speed = 202 * crewMovementV85(member).speed;
+      const navigation = member.levelNavigation;
+      if (['ladder', 'lift'].includes(navigation.mode)) {
+        const handled = this.advanceEnemyMissionNavigation(member, target, this.missionLevelSurfaceFor(member, { tolerance: 8 }), null, frame);
+        member.climbing = navigation.mode === 'ladder'; member.vy = 0;
+        if (handled) return true;
+      }
+      const surface = this.missionLevelSurfaceFor(member, { tolerance: 8, includeLifts: false });
+      if (!surface || !member.grounded && !(Math.abs(member.y + member.h - surface.y) <= 2)) return false;
+      const fromY = Number(surface.y), fromX = member.x + member.w / 2, toX = target.x + target.w / 2;
+      const targetSurface = this.missionLevelSurfaceFor(target, { tolerance: 40, includeLifts: false }) || this.missionLevelSurfaceNear?.(target, { includeLifts: false });
+      if (!targetSurface) return false;
+      const toY = Number(targetSurface.y);
+      if (Math.abs(toY - fromY) <= 4 && this.alphaBravoFloorReachV69(fromY, fromX, toX)) return false; // the own walk
+      const route = this.alphaBravoRouteV69(fromY, fromX, toY, toX);
+      if (!route) return false; // no known way (a closed gate): the own walk, whose edge guards keep it out of pits
+      const boardingX = route.approachX - member.w / 2;
+      if (Math.abs(member.x - boardingX) > 7) {
+        // The surface step first (it never leaves the floor); a cover in the way is vaulted by the own walk.
+        const before = member.x; this.moveEnemyOnMissionSurface(member, boardingX, frame);
+        if (Math.abs(member.x - before) > .05) { member.climbing = false; member.vy = 0; member.grounded = true; return true; }
+        return { x: boardingX };
+      }
+      Object.assign(navigation, { mode: route.connector.kind, connectorId: route.connector.id, destinationY: route.destinationY, riding: false });
+      return true;
+    }
+    /** [PROPOSÉ] A marine of a pair who falls out of the playable area comes back on the nearest valid node (its last safe floor). */
+    recoverAlphaBravoFallV69(member) {
+      const bounds = this.missionLevelBounds;
+      if (!member?.alive || member.downed || !bounds) return false;
+      const surface = this.missionLevelSurfaceFor?.(member, { tolerance: 4, includeLifts: false });
+      if (surface && member.grounded !== false) member.alphaBravoSafeV188 = { x: member.x, y: Number(surface.y) - member.h };
+      const voidY = Number.isFinite(bounds.voidY) ? bounds.voidY : bounds.height;
+      if (member.y + member.h < voidY - 8) return false;
+      const safe = member.alphaBravoSafeV188 || (() => {
+        const platform = asList(this.platforms).filter((entry) => Number(entry.y) < voidY - 8)
+          .sort((a, b) => Math.abs(a.x + a.w / 2 - member.x) - Math.abs(b.x + b.w / 2 - member.x))[0];
+        return platform ? { x: clampAlphaBravoV69(member.x, platform.x + 2, platform.x + platform.w - member.w - 2), y: platform.y - member.h } : null;
+      })();
+      if (!safe) return false;
+      Object.assign(member, { x: safe.x, y: safe.y, vx: 0, vy: 0, grounded: true, climbing: false, stuckClock: 0 });
+      if (member.levelNavigation) Object.assign(member.levelNavigation, { mode: 'surface', connectorId: null, destinationY: null, riding: false });
+      this.onEvent?.({ type: 'fireteam-member-recovered-v188', operationId: ALPHA_BRAVO_OPERATION_ID_V69, crewId: actorCrewId(member) });
+      return true;
+    }
+    /** No floor under the member's centre between its feet and the void: a step there would be a fall out of the level. */
+    alphaBravoOverVoidV69(member) {
+      const bounds = this.missionLevelBounds, centre = member.x + member.w / 2, feet = member.y + member.h;
+      if (!bounds) return false;
+      return !asList(this.platforms).some((platform) => centre >= platform.x - 2 && centre <= platform.x + platform.w + 2 && Number(platform.y) >= feet - 4);
+    }
+    /**
+     * [PROPOSÉ] A lost pair member (killed, not downed) is replaced by the player at that pair's task, as a
+     * marine steps in for a fallen one; the player may stand in for one marine of a pair. When even that
+     * cannot complete a task, the mission fails cleanly (reason 'paire-alpha-bravo-perdue').
+     */
+    alphaBravoStandInV69(teamId) {
+      const actors = this.alphaBravoTeamActorsV69(teamId);
+      const lost = actors.filter((actor) => actor.alive === false && !actor.downed);
+      if (!lost.length || lost.length > 1) return actors;
+      const player = this.player;
+      if (!player?.alive || actors.includes(player)) return actors;
+      return [...actors.filter((actor) => !lost.includes(actor)), player];
+    }
+    alphaBravoTasksFeasibleV69() {
+      // Only a loss in the field can make a task impossible: a pair never manned keeps the old rules.
+      const lost = ALPHA_BRAVO_TEAM_IDS_V69.some((teamId) => this.alphaBravoTeamActorsV69(teamId).some((actor) => actor.alive === false && !actor.downed));
+      if (!lost) return true;
+      const players = [this.player, this.coopEnabled ? this.coop : null].filter((actor) => actor?.alive);
+      for (const task of asList(this.alphaBravoV69?.tasks)) {
+        if (task.complete) continue;
+        const teams = task.fireteamId === 'joint' ? ALPHA_BRAVO_TEAM_IDS_V69 : [task.fireteamId];
+        for (const teamId of teams) {
+          const living = this.alphaBravoTeamActorsV69(teamId).filter((actor) => actor.alive !== false || actor.downed).length;
+          const standIn = players.some((actor) => !this.alphaBravoTeamActorsV69(teamId).includes(actor)) ? 1 : 0;
+          if (living + standIn < 2) return false;
+        }
+      }
+      return true;
+    }
+
+    // V188: a pair sent to its station or a ping keeps its route; the automatic vent shortcut
+    // towards a distant leader (V62) would carry it away from the task it was ordered to.
+    beginMissionVentTraversalV62(actor, options = {}) {
+      if (options?.automatic && options.actorKind === 'ally' && this.isAlphaBravoMissionV69() && this.alphaBravoV69
+        && ['focus', 'move'].includes(this.alphaBravoV69.teams[this.alphaBravoTeamForActorV69(actor)]?.order)) return false;
+      return super.beginMissionVentTraversalV62(actor, options);
     }
 
     alphaBravoPerformanceV69(teamId) {
@@ -818,7 +1013,7 @@ export function withAlphaBravoCoopRuntimeV69(BaseEngine) {
       const result = [];
       const radius = task.fireteamId === 'joint' ? JOINT_TASK_RADIUS : SPLIT_TASK_RADIUS;
       for (const teamId of requiredTeams) {
-        const actors = this.alphaBravoTeamActorsV69(teamId);
+        const actors = this.alphaBravoStandInV69(teamId); // V188: the player stands in for a lost marine
         if (actors.length !== 2 || actors.some((actor) => !actor.alive || actor.downed || actor.inVehicle || distance(actor, station) > radius)) return [];
         result.push(...actors);
       }
@@ -902,6 +1097,8 @@ export function withAlphaBravoCoopRuntimeV69(BaseEngine) {
         this.syncAlphaBravoActorsV69();
         this.updateAlphaBravoTeamMetricsV69(delta);
         this.updateAlphaBravoTasksV69(delta);
+        // V188: a task no pair (even with the player standing in) can still complete ends the mission cleanly.
+        if (!this.alphaBravoV69.certified && this.mission?.state === 'active' && !this.alphaBravoTasksFeasibleV69()) this.failMission('paire-alpha-bravo-perdue');
       }
       return result;
     }
@@ -930,10 +1127,22 @@ export function withAlphaBravoCoopRuntimeV69(BaseEngine) {
         .sort((left, right) => left.distance - right.distance)[0] || null;
     }
 
+    // V188 "the prompt is always right": the nearest fireteam station is an
+    // action of the shared E selection, ahead of the native ones as before.
+    interactionCandidatesV188(actor = this.player) {
+      const list = super.interactionCandidatesV188(actor);
+      if (!this.isAlphaBravoMissionV69() || !this.alphaBravoV69 || !actor?.alive || actor.downed) return list;
+      const nearby = this.alphaBravoNearestStationV69(actor);
+      if (nearby) list.unshift({ kind: 'alpha-bravo-v69', category: 'action', target: nearby,
+        distance: this.interactionRankDistanceV188(actor, nearby.station), prompt: this.alphaBravoStationPromptV69(actor, nearby) });
+      return list;
+    }
+
     interact(actor = this.player) {
       if (!this.isAlphaBravoMissionV69() || !this.alphaBravoV69) return super.interact(actor);
-      const nearby = this.alphaBravoNearestStationV69(actor);
-      if (!nearby) return super.interact(actor);
+      const choice = this.selectInteractionTargetV188(actor);
+      if (choice?.kind !== 'alpha-bravo-v69') return super.interact(actor);
+      const nearby = choice.target;
       if (this.isIndependentAlphaBravoCommanderV84(actor)) {
         if (!this.running || this.paused || !actor.alive || actor.downed) return false;
         const teams = this.alphaBravoCommandTeamsForTaskV84(nearby.task);
@@ -978,9 +1187,14 @@ export function withAlphaBravoCoopRuntimeV69(BaseEngine) {
     }
 
     getInteractionPrompt(actor = this.player) {
-      if (!this.isAlphaBravoMissionV69() || !this.alphaBravoV69) return super.getInteractionPrompt(actor);
-      const nearby = this.alphaBravoNearestStationV69(actor);
-      if (!nearby) return super.getInteractionPrompt(actor);
+      if (this.isAlphaBravoMissionV69() && this.alphaBravoV69 && actor?.alive) {
+        const choice = this.selectInteractionTargetV188(actor);
+        if (choice?.kind === 'alpha-bravo-v69') return choice.prompt;
+      }
+      return super.getInteractionPrompt(actor);
+    }
+
+    alphaBravoStationPromptV69(actor, nearby) {
       if (this.isIndependentAlphaBravoCommanderV84(actor)) {
         const { task } = nearby;
         const teams = this.alphaBravoCommandTeamsForTaskV84(task);

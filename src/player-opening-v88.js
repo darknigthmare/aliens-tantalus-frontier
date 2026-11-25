@@ -101,7 +101,7 @@ export function getPlayerOpeningObjectiveV88(raw, onboarding) {
   const texts = {
     berth: 'UN LIT ET UN NOM · Pont Habitat : attribuez votre couchette dans les quartiers.',
     armory: 'DOTATION · Pont Industriel : contrôlez votre M41A au comptoir de l’armurerie.',
-    qualification: 'EXERCICE · Armurerie : deux échelles vers le sas supérieur du Proving Ground. W pour monter, ESPACE pour franchir chaque palier. Puis neuf cibles, trois directions et une recharge.',
+    qualification: 'EXERCICE · Armurerie : porte du Proving Ground, au niveau du sol. Dans l’annexe, armez la console, puis montez par l’échelle (W, puis ESPACE au palier) jusqu’au pas de tir : neuf cibles, trois directions et une recharge.', // V188 2026-11-23 (R3): one text, matching the room (floor door, one ladder)
     relay: 'APPEL INTERROMPU · Pont Ingénierie : rétablissez le relais au réacteur. Restez immobile pendant la réparation.',
     signal: 'LA VOIX DE PORT-MÉRIDIEN · Pont Commandement : écoutez le message au terminal de la passerelle.',
     manifest: 'LE MANIFESTE · Ingénierie : échelles du réacteur, passerelle vers la gauche, C dans le conduit. Rejoignez le pupitre du hangar au-dessus de l’arc électrique.',

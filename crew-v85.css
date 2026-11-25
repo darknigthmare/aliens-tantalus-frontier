@@ -46,3 +46,5 @@
 .costume-archive-card-v119 footer{margin-top:auto;padding-top:12px}.costume-archive-card-v119 footer .button{width:100%}.costume-archive-card-v119 button:disabled{cursor:not-allowed;opacity:.6}
 @media(max-width:600px){.costume-archives-v119{margin-top:24px;padding-top:18px}.costume-archives-filters-v119{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.costume-archives-filters-v119 label:first-child,.costume-archives-filters-v119>button{grid-column:1/-1}.costume-archives-grid-v119{grid-template-columns:1fr}.costume-archive-card-v119{padding:14px}.costume-archive-card-v119 header{min-height:0}.costume-archive-card-v119 dl>div{grid-template-columns:1fr;gap:3px}}
 @media(max-width:360px){.costume-archives-filters-v119{grid-template-columns:1fr}}
+/* V188 responsive sweep: the archive source link is a 44 px touch target on touch screens and phones. */
+@media (pointer: coarse), (max-width: 600px) { .costume-archive-reference-v119 a { display: inline-flex; align-items: center; min-height: 44px; } }

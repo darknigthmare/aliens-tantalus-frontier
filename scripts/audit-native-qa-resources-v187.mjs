@@ -3,12 +3,18 @@
  * Continues V186 and admits exact reviewed QA/tooling bytes, never gameplay.
  * The standard 900 s wall / 360 s native / 45 s stall contract stays the default.
  * ci-slow4 changes only the wall cap to 360 * 4 s. A native physical receipt
- * remains mandatory. This terminal module imports no audit and has no receipt
- * for itself. Historical source/workbook admissions do not inherit a CI pass.
+ * remains mandatory. Two successor chains continue this one without rewriting
+ * any of these receipts: the Tantalus V188 line and the Xeno Trials completion
+ * join (V186 completion to V206). reviewedAfterNativeQaResourcesV187 resolves
+ * both from the same endpoint and requires them to agree wherever both pin a
+ * path; neither terminal module imports an audit or has a receipt for itself.
+ * The V187 constants below remain historical. Historical source/workbook admissions do not inherit a CI pass.
  */
 import assert from 'node:assert/strict';
+import { reviewedCompletionDigestV186 } from './audit-xeno-trials-completion-v186.mjs';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedTantalusPrioritiesDigestV188 } from './audit-tantalus-priorities-v188.mjs';
 
 const readRepository = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -136,11 +142,27 @@ export const NATIVE_QA_RESOURCES_SOURCE_ONLY_PATHS_V187 = Object.freeze([
 
 export function reviewedNativeQaResourcesDigestV187(path, endpoint) {
   const receipt = NATIVE_QA_RESOURCES_SUCCESSORS_V187[path];
-  if (!receipt) return reviewedObscuraDigest20261115(path, endpoint);
+  if (!receipt) return reviewedAfterNativeQaResourcesV187(path, endpoint);
   assert.equal(endpoint, receipt.previousSha256, 'Broken V186-to-V187 source chain: ' + path);
   assert.ok(validHash(receipt.currentSha256), 'Invalid V187 source digest: ' + path);
   assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A V187 successor must identify changed bytes: ' + path);
-  return reviewedObscuraDigest20261115(path, receipt.currentSha256);
+  return reviewedAfterNativeQaResourcesV187(path, receipt.currentSha256);
+}
+
+// Join of the two successor chains after the merge of the Xeno Trials line
+// (V186 completion to V206) into the Tantalus line (V188). Both chains start
+// from the same V187 endpoint, so they are resolved side by side rather than
+// fed into each other: a path pinned by one chain takes that chain's endpoint;
+// a path pinned by both must reach the same reviewed merged bytes through each
+// chain's own final link (TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188 and
+// XENO_TRIALS_TANTALUS_JOIN_V206).
+export function reviewedAfterNativeQaResourcesV187(path, endpoint) {
+  const xenoTrials = reviewedCompletionDigestV186(path, endpoint);
+  const tantalus = reviewedTantalusPrioritiesDigestV188(path, endpoint);
+  if (xenoTrials === endpoint) return tantalus;
+  if (tantalus === endpoint) return xenoTrials;
+  assert.equal(tantalus, xenoTrials, 'Diverging Xeno Trials and Tantalus source chains: ' + path);
+  return tantalus;
 }
 
 export function reviewedNativeQaDependencyGuardDigestV187(endpoint) {
@@ -172,7 +194,7 @@ export function verifyNativeQaResourcesV187(readSource = readRepository) {
     NATIVE_QA_DEPENDENCY_GUARD_SUCCESSOR_V187.previousSha256), 'Unreviewed V187 prerequisite guard');
   verifyNativeQaDependencyBodyV187(guard[0][0]);
   for (const [path, expected] of Object.entries(NATIVE_QA_PRESERVED_SHA256_V187)) {
-    assert.equal(sha(readSource(path)), expected, 'V187 must preserve these source bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedAfterNativeQaResourcesV187(path, expected), 'V187 must preserve these source bytes: ' + path);
   }
   verifyObscuraSources20261115(readSource);
   return Object.freeze({ successors: Object.keys(NATIVE_QA_RESOURCES_SUCCESSORS_V187).length,

@@ -7,15 +7,19 @@ export const LEGACY_CAMPAIGNS_V131 = Object.freeze([
     summary: 'Chapitre solo : script physique, portes, synchronisation et compte à rebours.',
     limitations: 'Costume Nostromo existant adapté ; opérateur du casting actuel. Les sept membres et Jones ne disposent pas de leurs propres animations. Derelict et actes extérieurs non produits.' },
   { id: 'special-black-abyss-v131', kind: 'abyss', specialOperationId: 'black-abyss', name: 'ABYSSE NOIR · THALASSA-7',
-    worldId: 'world-10-ceto', year: 2204, mode: 'SUBAQUATIQUE', templateId: 'planet-exterior',
+    // V188 spec 011 (bible §13.4, Q15): the chapter now belongs to « La Saison des Reines », Arc 1, on Nacre-7.
+    // Additive move: deployments started before it keep their Ceto id (`legacyWorldIdsV188`, operation-receipts-v131.js).
+    worldId: 'world-31-nacre-7', legacyWorldIdsV188: Object.freeze(['world-10-ceto']), year: 2204, mode: 'SUBAQUATIQUE', templateId: 'planet-exterior',
     objective: 'Traverser le canyon, récupérer le noyau, stabiliser la ruche et revenir à la cloche.',
     summary: 'Nage libre, oxygène, pression, trois modes HADAL, MANTA et prédateur aquatique adapté.',
-    limitations: 'HADAL et MANTA-6 : prototypes de gameplay à présentation procédurale. Boss adapté du Ceto Reef Predator existant ; arsenal, dix castes, second boss et actes ultérieurs non produits.' },
+    limitations: 'Scaphandre HADAL et coque MANTA-6 illustrés ; nage dédiée et animations aquatiques incomplètes. Boss adapté du Ceto Reef Predator existant ; arsenal, dix castes, second boss et actes ultérieurs non produits.' },
   { id: 'special-broodstorm-v131', kind: 'broodstorm', specialOperationId: 'broodstorm', name: 'BROODSTORM · CORRIDOR AÉRIEN',
-    worldId: 'world-01-acheron-lv-426', year: 2204, mode: 'AÉRIEN', templateId: 'planet-exterior',
-    objective: 'Bombarder les nids, protéger le transport et vaincre la reine volante adaptée.',
+    // V188 spec 011 (bible §14.5, Q15): the chapter belongs to « La Saison des Reines », Arc 2, on Echo Basin (step 2.3).
+    // Additive move, as for Abysse Noir: a deployment started on Acheron keeps its id (`legacyWorldIdsV188`).
+    worldId: 'world-27-echo-basin', legacyWorldIdsV188: Object.freeze(['world-01-acheron-lv-426']), year: 2204, mode: 'AÉRIEN', templateId: 'planet-exterior',
+    objective: 'Bombarder les nids, protéger le transport et vaincre la Reine ailée.',
     summary: 'Vol libre de Cheyenne, aile alliée, escorte physique, bombes et directeur de vagues.',
-    limitations: 'Cheyenne existant réutilisé. FlyingQueen : adaptation de gameplay de la Queen existante, sans planche dédiée. Modularité complète et autres actes non produits.' }
+    limitations: 'Reine ailée illustrée pour Broodstorm (adaptation aérienne). Cheyenne existant réutilisé ; atterrissage de la Reine, modularité complète et autres actes non produits.' }
 ].map(campaign => Object.freeze({ ...campaign, source: 'Tantalus Special Operations', canon: 'project-adaptation',
   status: 'partial', playable: true, localPlayers: 1, routes: 1,
   description: `${campaign.summary} ${campaign.limitations}` })));
@@ -42,7 +46,7 @@ export const LEGACY_STATIONS_V131 = Object.freeze({
     { id: 'launch', label: 'CHEYENNE · LANCEMENT', x: 190, y: 260, seconds: 1.5 },
     { id: 'nests', label: 'BOMBARDER DEUX NIDS · B', x: 1100, y: 800, seconds: 0 },
     { id: 'escort', label: 'PROTÉGER LE TRANSPORT', x: 2110, y: 320, seconds: 0 },
-    { id: 'queen', label: 'FLYINGQUEEN · ADAPTATION', x: 2320, y: 350, seconds: 0 },
+    { id: 'queen', label: 'REINE AILÉE · BROODSTORM', x: 2320, y: 350, seconds: 0 },
     { id: 'extract', label: 'CORRIDOR · EXTRACTION', x: 2660, y: 240, seconds: 3 }
   ])
 });

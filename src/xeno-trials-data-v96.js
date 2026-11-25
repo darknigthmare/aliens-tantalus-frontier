@@ -13,6 +13,14 @@ import { XENO_TRIALS_RECONSTRUCTIONS_V113 } from './enemy-user-reconstructions-v
 import { XENO_TRIALS_AUTOMATONS_V116 } from './enemy-automaton-adaptations-v116.js';
 import { XENO_TRIALS_SOURCE_ADAPTATIONS_V118 } from './enemy-source-adaptations-v118.js';
 import { createXenoTrialsDriveImportsV123 } from './enemy-drive-imports-v123.js';
+import { XENO_TRIALS_BOSS_STAGES_V179 } from './xeno-trials-boss-stages-v179.js';
+import { XENO_TRIALS_CORPORATE_STAGES_V190 } from './xeno-trials-stage-scenes-v190.js';
+import { XENO_TRIALS_FRANCHISE_STAGES_V192 } from './xeno-trials-franchise-stages-v192.js';
+import { XENO_TRIALS_ORIGINAL_ARENAS_V193 } from './xeno-trials-original-arenas-v193.js';
+import { XENO_TRIALS_REFERENCED_STAGES_V196 } from './xeno-trials-referenced-stages-v196.js';
+import { XENO_TRIALS_PRIORITY_STAGES_V198 } from './xeno-trials-priority-stages-v198.js';
+import { XENO_TRIALS_ICONIC_STAGES_V194 } from './xeno-trials-iconic-stages-v194.js';
+import { XENO_TRIALS_STAGE_BACKDROPS_V205 } from './xeno-trials-visual-assets-v205.js';
 
 const ADAPTATIONS_V112 = Object.freeze([...XENO_TRIALS_AFE2_V112, ...XENO_TRIALS_AUTOMATONS_V112]);
 const ADAPTATIONS_V113 = Object.freeze([...XENO_TRIALS_AFE2_V113, ...XENO_TRIALS_RECONSTRUCTIONS_V113]);
@@ -278,13 +286,20 @@ export const XENO_TRIALS_FACTIONS_V96 = Object.freeze([
       ...XENO_TRIALS_DRIVE_IMPORTS_V123.filter(entry => entry.factionId === 'hive').map(entry => entry.id)]), projectOriginal: true })
 ]);
 export const XENO_TRIALS_STAGES_V96 = Object.freeze([
-  Object.freeze({ id: 'containment-deck', label: 'Banc de confinement', background: '#101d24', accent: '#48aab1', floor: '#23343c' }),
-  Object.freeze({ id: 'reactor-ring', label: 'Anneau réacteur simulé', background: '#241a18', accent: '#ce7645', floor: '#42302c' }),
-  Object.freeze({ id: 'hive-vault', label: 'Chambre de ruche simulée', background: '#191b23', accent: '#9970b7', floor: '#302b38' }),
+  Object.freeze({ id: 'containment-deck', label: 'Banc de confinement', background: '#101d24', accent: '#48aab1', floor: '#23343c', backdrop: XENO_TRIALS_STAGE_BACKDROPS_V205['containment-deck'] }),
+  Object.freeze({ id: 'reactor-ring', label: 'Anneau réacteur simulé', background: '#241a18', accent: '#ce7645', floor: '#42302c', backdrop: XENO_TRIALS_STAGE_BACKDROPS_V205['reactor-ring'] }),
+  Object.freeze({ id: 'hive-vault', label: 'Chambre de ruche simulée', background: '#191b23', accent: '#9970b7', floor: '#302b38', backdrop: XENO_TRIALS_STAGE_BACKDROPS_V205['hive-vault'] }),
   // Existing project backdrops reused as simulation skins: no DLC mission or depth gameplay.
   Object.freeze({ id: 'tantalus-bridge', label: 'Tantalus / Passerelle simulée', background: '#101d24', accent: '#74d9e7', floor: '#23343c', backdrop: '/assets/openai/metroidvania/zones/ship-command-far.png' }),
   Object.freeze({ id: 'tantalus-cargo', label: 'Tantalus / Soute simulée', background: '#241d18', accent: '#e2b56b', floor: '#352d25', backdrop: '/assets/openai/metroidvania/zones/ship-cargo-far.png' }),
-  Object.freeze({ id: 'planet-surface', label: 'Surface planétaire simulée', background: '#1b2425', accent: '#b3d39b', floor: '#2d3431', backdrop: '/assets/openai/metroidvania/planet-exterior-far.png' })
+  Object.freeze({ id: 'planet-surface', label: 'Surface planétaire simulée', background: '#1b2425', accent: '#b3d39b', floor: '#2d3431', backdrop: '/assets/openai/metroidvania/planet-exterior-far.png' }),
+  ...XENO_TRIALS_BOSS_STAGES_V179,
+  ...XENO_TRIALS_CORPORATE_STAGES_V190,
+  ...XENO_TRIALS_FRANCHISE_STAGES_V192,
+  ...XENO_TRIALS_ORIGINAL_ARENAS_V193,
+  ...XENO_TRIALS_ICONIC_STAGES_V194,
+  ...XENO_TRIALS_REFERENCED_STAGES_V196,
+  ...XENO_TRIALS_PRIORITY_STAGES_V198
 ]);
 export const XENO_TRIALS_CONTROLS_V96 = Object.freeze({
   left: '← / Q / A', right: '→ / D', jump: '↑ / Z / W / Espace',

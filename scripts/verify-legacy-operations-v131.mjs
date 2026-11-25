@@ -1,7 +1,12 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFileSync } from 'node:fs';
+import { spawn } from 'node:child_process';
+import { createInterface } from 'node:readline';
+import { fileURLToPath } from 'node:url';
+import { createContext, runInContext } from 'node:vm';
 import { GameEngine } from '../src/game-production-runtime.js';
+import { playIntroV188, INTRO_TIMING_V188 } from '../src/intro-sequence-v188.js';
 import { WORLDS, WEAPONS, ENEMIES, LEVEL_SEEDS } from '../src/content-core-v50.js';
 import { buildLegacyMissionV131, withLegacyMissionsV131, LEGACY_CAMPAIGNS_V131 } from '../src/legacy-operations-v131.js';
 import { LEGACY_STATIONS_V131, createLegacyOperationStateV131, validateLegacyOperationStateV131 } from '../src/legacy-operation-state-v131.js';
@@ -109,6 +114,229 @@ function steer(subject, point, seconds = 20) {
     `Input route blocked: ${JSON.stringify({ kind: e.legacyMissionV131.kind, target: point, body: { x: body.x, y: body.y }, reason: e.mission.failureReason })}`);
 }
 function keyboardHold(subject, seconds) { subject.key('keydown', 'KeyE'); tick(subject.engine, seconds + 0.04); subject.key('keyup', 'KeyE'); }
+
+async function driveNativeTitleEntry(site, timeout = null) {
+  const original = await fixture('broodstorm');
+  keyboardHold(original, 1.5); original.key('keydown', 'KeyB'); tick(original.engine, 1 / 60); original.key('keyup', 'KeyB');
+  const checkpoint = original.engine.captureResumeState(), saved = JSON.stringify(checkpoint);
+  assert.equal(original.engine.legacyBombsV131.length, 1); original.engine.running = false;
+  const browser = host(), engine = new GameEngine(browser.canvas), captures = new Set(), timers = [], calls = [];
+  // The host explicitly dispatches ancestor capture before native engine input.
+  // Node's EventTarget alone does not reproduce DOM capture ordering.
+  const target = {
+    addEventListener(type, listener, capture) { assert.equal(type, 'keydown'); assert.equal(capture, true); captures.add(listener); },
+    removeEventListener(type, listener, capture) { assert.equal(type, 'keydown'); assert.equal(capture, true); captures.delete(listener); }
+  };
+  let removed = false, fadeReady;
+  const faded = new Promise(resolve => { fadeReady = resolve; });
+  const overlay = Object.assign(new EventTarget(), { dataset: new Proxy({}, { set(object, key, value) {
+    object[key] = value; if (key === 'phase' && value === 'fade') fadeReady(); return true;
+  } }), remove() { removed = true; } });
+  const intro = playIntroV188({ overlay, target, storage: { getItem: () => '1', setItem() {} },
+    setTimer(fn, ms) { const timer = setTimeout(fn, ms); timers.push(timer); return timer; } });
+  await faded;
+  const python = String.raw`
+import ast,json,sys,time
+from pathlib import Path
+tree=ast.parse(Path(sys.argv[1]).read_text())
+def rpc(method,**data):
+ print(json.dumps({'method':method,**data}),flush=True)
+ response=json.loads(sys.stdin.readline())
+ if response.get('error'):raise TimeoutError(response['error'])
+ return response.get('value')
+class Locator:
+ def __init__(self,selector):self.selector=selector
+ def wait_for(self,**kwargs):return rpc('wait',selector=self.selector,**kwargs)
+ def click(self,**kwargs):return rpc('click',selector=self.selector,**kwargs)
+class Page:
+ def locator(self,selector):return Locator(selector)
+helpers=[node for node in tree.body if isinstance(node,ast.FunctionDef) and node.name=='open_title_menu_after_intro']
+scope={'page':Page(),'time':time}
+exec(compile(ast.Module(body=helpers,type_ignores=[]),sys.argv[1],'exec'),scope)
+function=next(node for node in tree.body if isinstance(node,ast.FunctionDef) and node.name==sys.argv[2])
+navigation=next(index for index,node in enumerate(function.body) if isinstance(node,ast.Expr)
+ and isinstance(node.value,ast.Call) and isinstance(node.value.func,ast.Attribute)
+ and isinstance(node.value.func.value,ast.Name) and node.value.func.value.id=='page' and node.value.func.attr in ['goto','reload'])
+try:
+ if sys.argv[3]!='default' and helpers:scope['open_title_menu_after_intro'](scope['page'],timeout=int(sys.argv[3]))
+ else:exec(compile(ast.Module(body=[function.body[navigation+1]],type_ignores=[]),sys.argv[1],'exec'),scope)
+ result={'ok':True}
+except TimeoutError as error:result={'ok':False,'error':str(error)}
+print(json.dumps({'method':'complete','result':result}),flush=True)
+`;
+  const source = fileURLToPath(new URL('./qa-trials-continuity-v163.py', import.meta.url));
+  const child = spawn('python3', ['-B', '-c', python, source, site, timeout === null ? 'default' : String(timeout)], { stdio: ['pipe', 'pipe', 'pipe'] });
+  let stderr = '', outcome, keyResult; child.stderr.on('data', chunk => { stderr += chunk; });
+  const done = new Promise(resolve => child.on('exit', code => resolve(code))), guard = setTimeout(() => child.kill('SIGKILL'), 10000);
+  try {
+    for await (const line of createInterface({ input: child.stdout })) {
+      const request = JSON.parse(line); let error;
+      if (request.method === 'complete') { outcome = request; continue; }
+      const call = { ...request, at: performance.now(), running: engine.running, removed }; calls.push(call);
+      try {
+        assert.ok(request.timeout > 0 && request.timeout <= (timeout ?? 45000));
+        if (request.method === 'wait') {
+          assert.equal(request.selector, '#intro-v188'); assert.equal(request.state, 'detached');
+          let timer;
+          try { await Promise.race([intro, new Promise((_, reject) => { timer = setTimeout(() => reject(Error('Intro did not detach within the original entry budget.')), request.timeout); })]); }
+          finally { clearTimeout(timer); }
+          assert.equal(removed, true); assert.equal(captures.size, 0); assert.equal(engine.running, false);
+        } else if (request.method === 'click') {
+          assert.equal(request.selector, '#title-start');
+          // Declared immediate menu/launch adapter: no gameplay tick occurs
+          // until the real Python entry has admitted this public mouse action.
+          engine.start({ ...original.options, resumeState: checkpoint });
+          for (let n = 0; n < 40; n++) await Promise.resolve();
+          assert.equal(engine.lastResumeResult.applied, true);
+          const before = structuredClone(engine.legacyBombsV131), event = new Event('keydown', { cancelable: true });
+          Object.assign(event, { code: 'KeyP', key: 'p', repeat: false, ctrlKey: false, metaKey: false, altKey: false, isComposing: false });
+          let stopped = false;
+          event.stopImmediatePropagation = () => { stopped = true; };
+          for (const listener of [...captures]) { listener(event); if (stopped) break; }
+          browser.canvas.focus(); if (!stopped) globalThis.dispatchEvent(event);
+          browser.key('keyup', 'KeyP'); tick(engine, 0.1);
+          keyResult = { stopped, defaultPrevented: event.defaultPrevented, paused: engine.paused,
+            projectileUnchanged: JSON.stringify(before) === JSON.stringify(engine.legacyBombsV131) };
+        } else throw Error('Unexpected entry operation: ' + request.method);
+      } catch (caught) { error = caught.message; }
+      call.elapsed = performance.now() - call.at;
+      child.stdin.write(JSON.stringify({ error }) + '\n');
+    }
+    assert.equal(await done, 0, stderr); assert.ok(outcome);
+    assert.equal(JSON.stringify(checkpoint), saved, 'Entry must not rewrite the native checkpoint.');
+    return { ...outcome, calls, keyResult, running: engine.running };
+  } finally { clearTimeout(guard); child.kill(); await intro; timers.forEach(clearTimeout); engine.running = false; }
+}
+
+test('QA title entry waits for native intro cleanup before starting or resuming a finite projectile', async t => {
+  for (const site of ['import_initial', 'run_brood', 'run_exit']) {
+    const observed = await driveNativeTitleEntry(site);
+    assert.equal(observed.result.ok, true, JSON.stringify(observed));
+    assert.deepEqual(observed.keyResult, { stopped: false, defaultPrevented: false, paused: true, projectileUnchanged: true },
+      site + ': the real intro must release KeyP before launch; ' + JSON.stringify(observed));
+    const [wait, click] = observed.calls;
+    assert.equal(wait.method, 'wait'); assert.equal(wait.running, false); assert.equal(click.removed, true);
+    assert.ok(wait.timeout <= 45000 && click.timeout > 0 && click.timeout < wait.timeout);
+    assert.ok(click.timeout <= wait.timeout - wait.elapsed + 50, 'Detachment and entry share the original 45 second budget.');
+    assert.ok(wait.elapsed >= INTRO_TIMING_V188.fade / 2, 'The test observes the real fade rather than an already detached overlay.');
+  }
+  t.diagnostic('Actual Python entry statements at all three sites; real playIntro timers and production checkpoint/input. Declared capture-first host and immediate menu/launch adapter, not Chromium or attribution of the remote timeout.');
+});
+
+test('QA title entry fails closed when native intro outlives its original remaining budget', async () => {
+  const observed = await driveNativeTitleEntry('import_initial', 40);
+  assert.equal(observed.result.ok, false); assert.match(observed.result.error, /budget/);
+  assert.equal(observed.calls.length, 1); assert.equal(observed.calls[0].method, 'wait');
+  assert.equal(observed.running, false); assert.equal(observed.keyResult, undefined);
+});
+
+async function driveNativeBroodPause({ stolenPresses = 0, alreadyPaused = false, kind = 'broodstorm' } = {}) {
+  const subject = await fixture(kind), e = subject.engine;
+  if (kind === 'broodstorm') {
+    keyboardHold(subject, 1.5); assert.equal(e.legacyMissionV131.stage, 1);
+    subject.key('keydown', 'KeyB'); tick(e, 1 / 60); subject.key('keyup', 'KeyB');
+    assert.equal(e.legacyBombsV131.length, 1, 'The native key/update created the finite projectile.');
+  }
+  const save = createDefaultSave(), before = JSON.stringify(save), bombBefore = structuredClone(e.legacyBombsV131);
+  const chapterBefore = structuredClone(e.legacyMissionV131);
+  const canvas = subject.canvas, document = globalThis.document;
+  Object.assign(canvas, { tagName: 'CANVAS', id: 'game-canvas', getClientRects: () => [{}], closest: () => null });
+  const button = { tagName: 'BUTTON', id: 'declared-focus-race', closest() { return this; } };
+  document.querySelector = selector => selector === '#game-canvas' ? canvas : null;
+  document.querySelectorAll = () => [];
+  canvas.focus();
+  if (alreadyPaused) { subject.key('keydown', 'KeyP'); subject.key('keyup', 'KeyP'); assert.equal(e.paused, true); }
+  let now = 0, presses = 0, focuses = 0;
+  const events = [], context = createContext({ document, structuredClone, __ATF_GAME__: e,
+    __ATF_V51__: { saveSystem: { data: save } }, performance: { now: () => now },
+    getComputedStyle: () => ({ visibility: 'visible', display: 'block' }) });
+  const python = String.raw`
+import ast,json,sys
+from pathlib import Path
+tree=ast.parse(Path(sys.argv[1]).read_text());now=0
+def rpc(method,**data):
+ global now
+ print(json.dumps({'method':method,**data}),flush=True)
+ response=json.loads(sys.stdin.readline());now=response['now']
+ if response.get('error'):raise AssertionError(response['error'])
+ return response.get('value')
+class Clock:
+ def monotonic(self):return now/1000
+class Keyboard:
+ def press(self,key):return rpc('key',key=key)
+class Locator:
+ def __init__(self,selector):self.selector=selector
+ def focus(self,**kwargs):return rpc('focus',selector=self.selector,**kwargs)
+class Page:
+ keyboard=Keyboard()
+ def locator(self,selector):return Locator(selector)
+ def evaluate(self,expression,arg=None):return rpc('evaluate',expression=expression,arg=arg)
+ def wait_for_function(self,expression,arg=None,**kwargs):return rpc('wait',expression=expression,arg=arg,**kwargs)
+helpers=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in ['brood','pause_brood_for_checkpoint']]
+assert len(helpers)==2
+scope={'time':Clock()};exec(compile(ast.Module(body=helpers,type_ignores=[]),sys.argv[1],'exec'),scope)
+report={}
+try:scope['pause_brood_for_checkpoint'](Page(),report,'declared-native-pause-regression');result={'ok':True}
+except (AssertionError,TimeoutError) as error:result={'ok':False,'error':str(error)}
+print(json.dumps({'method':'complete','result':result,'report':report}),flush=True)
+`;
+  const source = fileURLToPath(new URL('./qa-trials-continuity-v163.py', import.meta.url));
+  const child = spawn('python3', ['-B', '-c', python, source], { stdio: ['pipe', 'pipe', 'pipe'] });
+  let stderr = '', outcome; child.stderr.on('data', chunk => { stderr += chunk; });
+  const done = new Promise(resolve => child.on('exit', code => resolve(code))), timer = setTimeout(() => child.kill('SIGKILL'), 10000);
+  try {
+    for await (const line of createInterface({ input: child.stdout })) {
+      const request = JSON.parse(line); let value = null, error;
+      if (request.method === 'complete') { outcome = request; continue; }
+      try {
+        if (request.method === 'evaluate' || request.method === 'wait') {
+          value = runInContext('(' + request.expression + ')', context)(request.arg);
+          if (request.method === 'wait' && !value) { now += request.timeout || 30000; throw Error('The native engine did not acquire pause within the existing budget.'); }
+        } else if (request.method === 'focus') {
+          assert.equal(request.selector, '#game-canvas'); focuses++; canvas.focus();
+        } else if (request.method === 'key') {
+          assert.equal(request.key, 'KeyP'); presses++;
+          // Declared DOM-only race: focus moves after the driver's focus read.
+          // The actual production input guard decides whether KeyP is accepted.
+          if (presses <= stolenPresses) document.activeElement = button;
+          const target = document.activeElement, beforePause = e.paused;
+          for (const type of ['keydown', 'keyup']) {
+            const event = new Event(type, { cancelable: true });
+            Object.assign(event, { code: request.key, repeat: false, ctrlKey: false, metaKey: false, altKey: false, isComposing: false });
+            Object.defineProperty(event, 'composedPath', { value: () => [target] }); globalThis.dispatchEvent(event);
+          }
+          events.push({ target: target.id, beforePause, afterPause: e.paused });
+        } else throw Error('Unexpected driver operation: ' + request.method);
+      } catch (caught) { error = caught.message; }
+      child.stdin.write(JSON.stringify({ now, value, error }) + '\n');
+    }
+    assert.equal(await done, 0, stderr); assert.ok(outcome);
+    assert.equal(JSON.stringify(save), before); assert.deepEqual(e.legacyBombsV131, bombBefore);
+    assert.deepEqual(e.legacyMissionV131, chapterBefore, 'Pause acquisition cannot assign chapter progress or refund payload.');
+    return { ...outcome, events, presses, focuses, paused: e.paused, now };
+  } finally { clearTimeout(timer); child.kill(); }
+}
+
+test('QA Broodstorm pause observes native acceptance, reacquires declared lost focus and never toggles a paused engine', async t => {
+  for (const fixture of [{}, { stolenPresses: 1 }, { alreadyPaused: true }]) {
+    const observed = await driveNativeBroodPause(fixture);
+    assert.equal(observed.result.ok, true, JSON.stringify(observed)); assert.equal(observed.paused, true);
+    assert.equal(observed.presses, fixture.alreadyPaused ? 0 : fixture.stolenPresses ? 2 : 1);
+    assert.ok(observed.now < 30000);
+    if (fixture.stolenPresses) assert.deepEqual(observed.events, [
+      { target: 'declared-focus-race', beforePause: false, afterPause: false },
+      { target: 'game-canvas', beforePause: false, afterPause: true }
+    ]);
+  }
+  t.diagnostic('Actual Python helper and production Broodstorm/input guard; declared DOM focus race and frozen RAF host. This reproduces an ignored KeyP, not the unrecorded CI event target.');
+});
+
+test('QA Broodstorm pause fails closed for repeated rejected input and a foreign mission', async () => {
+  const rejected = await driveNativeBroodPause({ stolenPresses: 3 });
+  assert.equal(rejected.result.ok, false); assert.equal(rejected.presses, 3); assert.equal(rejected.paused, false);
+  const foreign = await driveNativeBroodPause({ kind: 'nostromo' });
+  assert.equal(foreign.result.ok, false); assert.equal(foreign.presses, 0); assert.equal(foreign.paused, false);
+});
 
 test('three admitted partial chapters build their own stations; wrong builders fail; mixin is idempotent', async () => {
   assert.equal(withLegacyMissionsV131(GameEngine), GameEngine);

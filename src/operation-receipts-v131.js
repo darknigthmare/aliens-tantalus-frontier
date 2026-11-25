@@ -115,6 +115,9 @@ function vehicleProofValid(raw,state,campaign) {
     && raw.vehicle.occupied===state.aboard && raw.vehicle.driver===(state.aboard?'player':null)
     && raw.vehicle.hull===state.hull && raw.vehicle.fuel===state.fuel;
 }
+// V188 spec 011: a chapter moved to its side campaign's world keeps its former world valid for the
+// deployments that were already under way (additive data change, bible §13.4).
+export const campaignWorldIdsV188 = campaign => [campaign?.worldId, ...(Array.isArray(campaign?.legacyWorldIdsV188) ? campaign.legacyWorldIdsV188 : [])];
 export function operationCampaignV131(id) { return NEW_SPECIAL_CAMPAIGNS_V131.find(c=>c.id===id) || null; }
 
 // A completed engine checkpoint, frozen to its strategic deployment, is the
@@ -125,8 +128,8 @@ export function validateOperationCompletionV131(operation,suppliedRewards=null) 
   const raw=operation.resumeState,proof=raw?.operationReceiptV131;
   const serial=Number(String(operation.id||'').match(/^operation-(\d+)-/)?.[1]);
   if(!Number.isSafeInteger(serial) || serial<1 || operation.id!==`operation-${serial}-${campaign.id}`
-    || operation.specialOperationId!==campaign.specialOperationId || operation.worldId!==campaign.worldId
-    || raw?.schema!==1 || raw.identity?.campaignId!==campaign.id || raw.identity?.worldId!==campaign.worldId
+    || operation.specialOperationId!==campaign.specialOperationId || !campaignWorldIdsV188(campaign).includes(operation.worldId)
+    || raw?.schema!==1 || raw.identity?.campaignId!==campaign.id || raw.identity?.worldId!==operation.worldId
     || operation.levelSeedId && raw.identity.levelSeedId!==operation.levelSeedId
     || !operation.missionLevelSignature || raw.missionLevel?.signature!==operation.missionLevelSignature
     || proof?.deploymentId!==operation.id || proof.campaignId!==campaign.id

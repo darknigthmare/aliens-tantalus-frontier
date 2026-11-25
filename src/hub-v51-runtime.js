@@ -16,6 +16,7 @@ import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 import { resolveHubServiceProfileV139 } from './hub-service-geometry-v139.js';
 import { constrainEditorRectV136 } from './editor-spatial-v136.js';
 import { normalizeEditorProjectV135 } from './editor-authoring-v135.js';
+import { signalColorV188 } from './colorblind-palette-v188.js';
 
 export const HUB_TRAVERSAL_ART_FILES = Object.freeze({
   catwalk: '/assets/openai/metroidvania/props/overhead-catwalk.png',
@@ -493,6 +494,7 @@ export class HubGame extends HubGameV50 {
   }
 
   configureCrisis(rawCrisis) {
+    this.crisisHeldV188 = [];
     if (!rawCrisis || rawCrisis.resolved) { this.crisis = null; return; }
     const kind = crisisKind(rawCrisis);
     const crisis = typeof rawCrisis === 'object' ? rawCrisis : { id: String(rawCrisis), kind };
@@ -510,6 +512,34 @@ export class HubGame extends HubGameV50 {
         y: this.floorY - height, w: width, h: height
       }, index, 'crisis'));
     }
+    // V188 owner decision 2026-11-23 (P-4): a crisis the host binds to its deck (the Interlude quarantine)
+    // spawns there, around its room; its threats wait on that deck until the marine arrives. Other crises
+    // keep the historical behaviour (threats on the marine's deck).
+    if (Number.isInteger(crisis.deck) && HUB_DECKS[crisis.deck] && this.crisisDeckBoundV188?.(crisis) === true) {
+      this.crisis.deckV188 = crisis.deck;
+      const roomIndex = HUB_DECKS[crisis.deck].rooms.findIndex((room) => room.id === crisis.roomId);
+      const centre = roomIndex >= 0 ? (roomIndex + 0.5) * HUB_WORLD.roomWidth : HUB_WORLD.width / 2;
+      const bound = this.enemies.filter((enemy) => enemy.source === 'crisis');
+      bound.forEach((enemy, index) => {
+        enemy.x = clamp(centre + (index - (bound.length - 1) / 2) * 190 - enemy.w / 2, 60, HUB_WORLD.width - enemy.w - 60);
+      });
+      this.syncCrisisDeckV188();
+    }
+  }
+
+  /** Deck-bound crisis threats are held aside while the marine is on another deck (never lost, never resolved). */
+  syncCrisisDeckV188() {
+    const deck = this.crisis?.deckV188;
+    if (!Number.isInteger(deck)) return;
+    const here = this.state?.deck === deck;
+    const all = [...this.enemies, ...(this.crisisHeldV188 || [])];
+    this.enemies = all.filter((enemy) => enemy.source !== 'crisis' || here);
+    this.crisisHeldV188 = all.filter((enemy) => enemy.source === 'crisis' && !here);
+  }
+  /** Living threats waiting on the crisis deck, and that deck (null when none wait). */
+  crisisHeldThreatsV188() {
+    const count = (this.crisisHeldV188 || []).filter((enemy) => enemy.alive).length;
+    return count ? { count, deck: this.crisis.deckV188 } : null;
   }
 
   createEnemy(spec, index, source) {
@@ -727,6 +757,7 @@ export class HubGame extends HubGameV50 {
   }
 
   updateCombat(delta) {
+    this.syncCrisisDeckV188();
     for (const projectile of this.projectiles) {
       projectile.x += projectile.vx * delta;
       projectile.life -= delta;
@@ -755,7 +786,8 @@ export class HubGame extends HubGameV50 {
         enemy.attackClock = 0.75;
       }
     }
-    if (this.crisis?.active && !this.enemies.some((enemy) => enemy.source === 'crisis' && enemy.alive)) {
+    if (this.crisis?.active && !this.enemies.some((enemy) => enemy.source === 'crisis' && enemy.alive)
+      && !(this.crisisHeldV188 || []).some((enemy) => enemy.alive)) {
       this.crisis.active = false;
       this.crisis.resolved = true;
       this.state.activeCrisis = null;
@@ -1087,7 +1119,7 @@ export class HubGame extends HubGameV50 {
     const visibleHeight = door.h * (1 - door.progress * 0.86);
     ctx.fillStyle = '#27342f';
     ctx.fillRect(door.x, door.y, door.w, visibleHeight);
-    ctx.strokeStyle = door.open ? '#7ed49a' : '#d2a957';
+    ctx.strokeStyle = signalColorV188(door.open ? 'hub-door-open' : 'hub-door-closed');
     ctx.strokeRect(door.x + 0.5, door.y + 0.5, door.w - 1, Math.max(2, visibleHeight - 1));
   }
 

@@ -1,8 +1,28 @@
+import { DEV_TOOLS_FILES_V188, isDevToolsPublicPathV188 } from './build-dev-tools-v188.mjs';
+import { publicXenoProductionPathAdmissionV206, verifyXenoProductionAdmissionsV206 } from './public-xeno-production-admissions-v206.mjs';
+import { publicXenoVisualPathAdmissionV205, verifyXenoVisualAdmissionsV205 } from './public-xeno-visual-admissions-v205.mjs';
+import { publicXenoPriorityPathAdmissionV204, verifyXenoPriorityAdmissionsV204 } from './public-xeno-priority-admissions-v204.mjs';
+import { publicXenoPriorityPathAdmissionV203, verifyXenoPriorityAdmissionsV203 } from './public-xeno-priority-admissions-v203.mjs';
+import { publicXenoPriorityPathAdmissionV202, verifyXenoPriorityAdmissionsV202 } from './public-xeno-priority-admissions-v202.mjs';
+import { publicXenoPriorityPathAdmissionV201, verifyXenoPriorityAdmissionsV201 } from './public-xeno-priority-admissions-v201.mjs';
+import { publicXenoSuperPathAdmissionV200, verifyXenoSuperAdmissionsV200 } from './public-xeno-super-admissions-v200.mjs';
+import { publicXenoActionPathAdmissionV199, verifyXenoActionAdmissionsV199 } from './public-xeno-action-admissions-v199.mjs';
+import { publicXenoPriorityStagePathAdmissionV198, verifyXenoPriorityStageAdmissionsV198 } from './public-xeno-priority-stage-admissions-v198.mjs';
+import { publicXenoSpritePathAdmissionV197, verifyXenoSpriteAdmissionsV197 } from './public-xeno-sprite-admissions-v197.mjs';
+import { publicXenoReferencedStagePathAdmissionV196, verifyXenoReferencedStageAdmissionsV196 } from './public-xeno-referenced-stage-admissions-v196.mjs';
+import { publicXenoIconicStagePathAdmissionV194, verifyXenoIconicStageAdmissionsV194 } from './public-xeno-iconic-stage-admissions-v194.mjs';
+import { publicXenoOriginalArenaPathAdmissionV193, verifyXenoOriginalArenaAdmissionsV193 } from './public-xeno-original-arena-admissions-v193.mjs';
+import { publicXenoFranchiseStagePathAdmissionV192, verifyXenoFranchiseStageAdmissionsV192 } from './public-xeno-franchise-stage-admissions-v192.mjs';
+import { publicXenoSpritePathAdmissionV191, verifyXenoSpriteAdmissionsV191 } from './public-xeno-sprite-admissions-v191.mjs';
+import { publicArbiterPathAdmissionV190, verifyArbiterImageAdmissionsV190 } from './public-xeno-arbiter-admissions-v190.mjs';
 import { publicReleasePathAdmissionV163, verifyPublicAdmissionsV163 } from './public-release-admissions-v163.mjs';
+import { projectRecoveryPathAdmission20261116, verifyProjectRecoveryArchive20261116 } from './project-recovery-admission-20261116.mjs';
 import assert from 'node:assert/strict';
 import { readdir, readFile, lstat } from 'node:fs/promises';
 import { basename, join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { validateContent, RELEASE } from '../src/content.js';
 import { APP_RELEASE_V143 } from '../src/release-info-v143.js';
 import { AUDIO_FORMATS_V77, AUDIO_SLOTS_V77 } from '../src/audio-assets-v77.js';
@@ -12,8 +32,12 @@ import { publicReleasePathAdmissionV121, verifyPublicAdmissionsV121 } from './pu
 import { publicReleasePathAdmissionV122, verifyPublicAdmissionsV122 } from './public-release-admissions-v122.mjs';
 import { publicReleasePathAdmissionV123, verifyPublicAdmissionsV123 } from './public-release-admissions-v123.mjs';
 import { publicCostumePathAdmissionV165, verifyPublicCostumeAdmissionsV165 } from './public-costume-admissions-v165.mjs';
+import { publicXenoSpritePathAdmissionV189, verifyXenoSpriteAdmissionsV189 } from './public-xeno-sprite-admissions-v189.mjs';
+import { publicXenoSpritePathAdmissionV188, verifyXenoSpriteAdmissionsV188 } from './public-xeno-sprite-admissions-v188.mjs';
+import { publicCampaignArtPathAdmissionV180, verifyCampaignArtAdmissionsV180 } from './public-campaign-art-admissions-v180.mjs';
 
 const ROOT_FILES = new Set([
+  'xeno-arbiter-v190.css',
   'campaign-lethe-continuity-v163.css',
   'campaign-convoy-history-v162.css',
   'command-v110.css', 'echo9-v110.css', 'player-appearance-v126.css',
@@ -25,6 +49,53 @@ const ROOT_FILES = new Set([
   'xeno-trials-v96.css', 'xeno-trials-fullscreen-v119.css', 'user-reference-library-v100.css', 'specimen-bench-v106.css'
 ]);
 const SCRIPT_FILES = new Set([
+  'public-xeno-sprite-admissions-v189.mjs',
+  'audit-xeno-animation-audio-v189.mjs',
+  'verify-xeno-animation-audio-audit-v189.mjs',
+  'verify-xeno-trials-sprite-atlas-v189.mjs',
+  'verify-xeno-trials-audio-v189.mjs',
+  'verify-xeno-trials-animation-coverage-v189.mjs',
+  'verify-xeno-trials-animation-audio-i18n-v189.mjs',
+  'verify-xeno-trials-runtime-animation-audio-v189.mjs',
+  'verify-xeno-trials-animation-ui-v189.mjs',
+  'qa-xeno-trials-animation-audio-v189.py',
+
+  'public-xeno-sprite-admissions-v188.mjs',
+  'audit-xeno-stage-operations-v188.mjs',
+  'verify-xeno-stage-operations-audit-v188.mjs',
+  'verify-xeno-trials-operations-v188.mjs',
+  'verify-xeno-trials-stage-hazards-v188.mjs',
+  'verify-xeno-trials-runtime-operations-v188.mjs',
+  'verify-xeno-trials-sprite-atlas-v188.mjs',
+  'verify-xeno-trials-operation-presentation-v188.mjs',
+  'verify-xeno-trials-operation-i18n-v188.mjs',
+  'verify-xeno-trials-operations-engine-v188.mjs',
+  'qa-xeno-trials-operations-v188.py',
+
+  'qa-xeno-trials-completion-v186.py',
+  'audit-xeno-trials-completion-v186.mjs',
+  'verify-xeno-trials-completion-audit-v186.mjs',
+  'verify-xeno-trials-horde-checkpoint-v186.mjs',
+  'verify-xeno-trials-horde-bosses-v186.mjs',
+  'verify-xeno-trials-gamepad-v186.mjs',
+  'verify-xeno-trials-reactions-v186.mjs',
+  'verify-xeno-trials-ui-v186.mjs',
+  'verify-xeno-trials-i18n-v186.mjs',
+  'verify-xeno-trials-runtime-completion-v186.mjs',
+  'public-campaign-art-admissions-v180.mjs',
+  'audit-succession-v180.mjs',
+  'verify-campaign-art-v180.mjs',
+  'verify-xeno-trials-horde-v180.mjs',
+  'verify-xeno-trials-horde-runtime-v180.mjs',
+  'verify-xeno-trials-horde-ui-v180.mjs',
+  'verify-xeno-trials-stage-depth-v180.mjs',
+  'verify-xeno-trials-swarm-sprites-v180.mjs',
+  'verify-xeno-trials-curriculum-v179.mjs',
+  'verify-xeno-trials-roster-v179.mjs',
+  'verify-xeno-trials-boss-stages-v179.mjs',
+  'verify-xeno-trials-events-v179.mjs',
+  'verify-xeno-trials-tickets-v179.mjs',
+  'verify-campaign-art-v179.mjs',
   'verify-capture-observation-v177.mjs',
   'verify-hub-armory-layering-v177.mjs',
   'verify-tantalus-enrichment-v177.mjs',
@@ -123,6 +194,7 @@ const SCRIPT_FILES = new Set([
 for (const file of ['build-release-v143.mjs', 'test-release-v143.mjs', 'verify-audit-v143.mjs',
   'verify-save-lifecycle-v143.mjs', 'verify-release-artifact-v143.mjs',
   'qa-service-worker-v143.py', 'qa-save-profiles-v144.py', 'verify-xeno-trials-v145.mjs', 'qa-xeno-trials-v145.py']) SCRIPT_FILES.add(file);
+SCRIPT_FILES.add('audit-succession-v179.mjs');
 SCRIPT_FILES.add('verify-xeno-trials-signatures-v147.mjs');
 SCRIPT_FILES.add('verify-xeno-trials-supers-v148.mjs');
 SCRIPT_FILES.add('qa-xeno-trials-signatures-v147.py');
@@ -232,6 +304,75 @@ SCRIPT_FILES.add('verify-hub-armory-v169.mjs');
 SCRIPT_FILES.add('verify-i18n-v185.mjs');
 // Exact V179 tooling stays source-only, independently of older script policy.
 const V179_SOURCE_ONLY_SCRIPTS = new Set(["scripts/sync-alien-base-v1.mjs", "scripts/export-alien-base-tantalus-v1.mjs", "scripts/alien-base-pr7-proposal-v1.mjs", "scripts/verify-alien-base-bridge-v1.mjs", "scripts/verify-alien-base-import-contract-v179.mjs", "scripts/verify-alien-base-pr7-proposal-v1.mjs", "scripts/verify-hub-door-bay-v178.mjs"]);
+const XENO_ARBITER_SOURCE_ONLY_V191 = new Set([
+  'scripts/audit-xeno-franchise-stages-v192.mjs',
+  'scripts/public-xeno-franchise-stage-admissions-v192.mjs',
+  'scripts/qa-xeno-trials-franchise-stages-v192.py',
+  'scripts/verify-xeno-franchise-stages-audit-v192.mjs',
+  'scripts/verify-xeno-trials-franchise-stages-v192.mjs',
+  'scripts/verify-xeno-trials-franchise-stage-render-v192.mjs',
+  'scripts/verify-xeno-trials-franchise-stage-ui-v192.mjs',
+  'scripts/audit-xeno-arbiter-protocols-v191.mjs',
+  'scripts/verify-xeno-arbiter-protocols-audit-v191.mjs',
+  'scripts/public-xeno-sprite-admissions-v191.mjs',
+  'scripts/qa-xeno-arbiter-protocols-v191.py',
+  'scripts/verify-xeno-arbiter-integration-v191.mjs',
+  'scripts/verify-xeno-arbiter-protocols-v191.mjs',
+  'scripts/verify-xeno-trials-sprite-atlas-v191.mjs',
+  'scripts/verify-xeno-trials-animation-coverage-v191.mjs',
+  'scripts/verify-xeno-trials-runtime-animation-v191.mjs',
+  'scripts/verify-xeno-arbiter-protocols-i18n-v191.mjs',
+]);
+const XENO_ARBITER_SOURCE_ONLY_V190 = new Set([
+  'scripts/public-xeno-arbiter-admissions-v190.mjs',
+  'scripts/audit-xeno-arbiter-campaign-v190.mjs',
+  'scripts/verify-xeno-arbiter-campaign-audit-v190.mjs',
+  'scripts/verify-xeno-arbiter-campaign-v190.mjs',
+  'scripts/verify-xeno-arbiter-scenery-v190.mjs',
+  'scripts/xeno-arbiter-test-helpers-v190.mjs',
+  'scripts/verify-xeno-arbiter-save-ui-v190.mjs',
+  'scripts/verify-xeno-trials-stage-scenes-v190.mjs',
+  'scripts/verify-xeno-arbiter-campaign-art-v190.mjs',
+  'scripts/verify-xeno-arbiter-i18n-v190.mjs',
+  'scripts/qa-xeno-arbiter-stages-v190.py',
+]);
+const XENO_ANIMATION_SOURCE_ONLY_V189 = new Set([
+  'scripts/public-xeno-sprite-admissions-v189.mjs',
+  'scripts/audit-xeno-animation-audio-v189.mjs',
+  'scripts/verify-xeno-animation-audio-audit-v189.mjs',
+  'scripts/verify-xeno-trials-sprite-atlas-v189.mjs',
+  'scripts/verify-xeno-trials-audio-v189.mjs',
+  'scripts/verify-xeno-trials-animation-coverage-v189.mjs',
+  'scripts/verify-xeno-trials-animation-audio-i18n-v189.mjs',
+  'scripts/verify-xeno-trials-runtime-animation-audio-v189.mjs',
+  'scripts/verify-xeno-trials-animation-ui-v189.mjs',
+  'scripts/qa-xeno-trials-animation-audio-v189.py',
+]);
+const XENO_OPERATIONS_SOURCE_ONLY_V188 = new Set([
+  'scripts/public-xeno-sprite-admissions-v188.mjs',
+  'scripts/audit-xeno-stage-operations-v188.mjs',
+  'scripts/verify-xeno-stage-operations-audit-v188.mjs',
+  'scripts/verify-xeno-trials-operations-v188.mjs',
+  'scripts/verify-xeno-trials-stage-hazards-v188.mjs',
+  'scripts/verify-xeno-trials-runtime-operations-v188.mjs',
+  'scripts/verify-xeno-trials-sprite-atlas-v188.mjs',
+  'scripts/verify-xeno-trials-operation-presentation-v188.mjs',
+  'scripts/verify-xeno-trials-operation-i18n-v188.mjs',
+  'scripts/verify-xeno-trials-operations-engine-v188.mjs',
+  'scripts/qa-xeno-trials-operations-v188.py',
+]);
+const XENO_COMPLETION_SOURCE_ONLY_V186 = new Set([
+  'scripts/qa-xeno-trials-completion-v186.py',
+  'scripts/audit-xeno-trials-completion-v186.mjs',
+  'scripts/verify-xeno-trials-completion-audit-v186.mjs',
+  'scripts/verify-xeno-trials-horde-checkpoint-v186.mjs',
+  'scripts/verify-xeno-trials-horde-bosses-v186.mjs',
+  'scripts/verify-xeno-trials-gamepad-v186.mjs',
+  'scripts/verify-xeno-trials-reactions-v186.mjs',
+  'scripts/verify-xeno-trials-ui-v186.mjs',
+  'scripts/verify-xeno-trials-i18n-v186.mjs',
+  'scripts/verify-xeno-trials-runtime-completion-v186.mjs'
+]);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 for (const file of [
   'audit-succession-v162.mjs', 'generate-audit-continuation-v162.py',
@@ -319,6 +460,303 @@ const FORGE_TOOLING_V140 = new Set([
   'scripts/audit-native-qa-resources-v187.mjs',
   'scripts/verify-native-qa-resources-v187.mjs',
   'docs/development/NATIVE_QA_RESOURCES_V187.md',
+  // V188 P0/P1 priority audit (bible §56), source-only exact paths.
+  'scripts/audit-tantalus-priorities-v188.mjs',
+  'scripts/verify-tantalus-priorities-v188.mjs',
+  'scripts/verify-tension-director-v188.mjs',
+  'scripts/verify-story-slice-v188.mjs',
+  'scripts/engine-host-v188.mjs',
+  'scripts/generate-audio-v188.mjs',
+  'scripts/verify-audio-cues-v188.mjs',
+  'scripts/verify-combat-feel-v188.mjs',
+  'scripts/verify-run-options-v188.mjs',
+  'scripts/verify-accessibility-v188.mjs',
+  'scripts/verify-reactive-lines-v188.mjs',
+  'scripts/verify-caste-behaviors-v188.mjs',
+  'scripts/verify-origin-abilities-v188.mjs',
+  'scripts/verify-story-cinematics-v188.mjs',
+  'scripts/verify-story-dossier-v188.mjs',
+  'scripts/verify-colony-reconstruction-v188.mjs',
+  'scripts/verify-intro-v188.mjs',
+  'scripts/verify-title-vfx-v188.mjs',
+  'scripts/verify-ingame-staging-v188.mjs',
+  'scripts/verify-hub-depth-rooms-v188.mjs',
+  // Spec Kit pointer to the active feature (source-only, never built).
+  '.specify/feature.json',
+  // Spec Kit feature folders (source-only design documents).
+  'specs',
+  'specs/001-salles-hybrides-2d-25d',
+  'specs/001-salles-hybrides-2d-25d/contracts',
+  'specs/001-salles-hybrides-2d-25d/checklists',
+  'specs/002-cales-qz17-profondeur-combat',
+  'specs/002-cales-qz17-profondeur-combat/checklists',
+  'specs/002-cales-qz17-profondeur-combat/spec.md',
+  'specs/002-cales-qz17-profondeur-combat/checklists/requirements.md',
+  'specs/002-cales-qz17-profondeur-combat/plan.md',
+  'specs/002-cales-qz17-profondeur-combat/research.md',
+  'specs/002-cales-qz17-profondeur-combat/tasks.md',
+  // V188 insertion / extraction cinematics (spec 003), source-only exact paths.
+  'specs/003-insertion-extraction-cinematiques',
+  'specs/003-insertion-extraction-cinematiques/checklists',
+  'specs/003-insertion-extraction-cinematiques/spec.md',
+  'specs/003-insertion-extraction-cinematiques/checklists/requirements.md',
+  'specs/003-insertion-extraction-cinematiques/plan.md',
+  'specs/003-insertion-extraction-cinematiques/tasks.md',
+  // V188 more mission holds in depth (spec 004), source-only exact paths.
+  'specs/004-cales-profondeur-suite',
+  'specs/004-cales-profondeur-suite/checklists',
+  'specs/004-cales-profondeur-suite/spec.md',
+  'specs/004-cales-profondeur-suite/checklists/requirements.md',
+  'specs/004-cales-profondeur-suite/plan.md',
+  'specs/004-cales-profondeur-suite/research.md',
+  'specs/004-cales-profondeur-suite/tasks.md',
+  'scripts/verify-depth-holds-v188.mjs',
+  // V188 content gaps (spec 005), source-only exact paths.
+  'specs/005-front-asphodele-quetes',
+  'specs/005-front-asphodele-quetes/checklists',
+  'specs/005-front-asphodele-quetes/spec.md',
+  'specs/005-front-asphodele-quetes/checklists/requirements.md',
+  'specs/005-front-asphodele-quetes/plan.md',
+  'specs/005-front-asphodele-quetes/research.md',
+  'specs/005-front-asphodele-quetes/tasks.md',
+  'scripts/verify-content-gaps-v188.mjs',
+  // V188 Asphodèle second hub (spec 007), source-only exact paths.
+  'specs/007-hub-asphodele',
+  'specs/007-hub-asphodele/checklists',
+  'specs/007-hub-asphodele/spec.md',
+  'specs/007-hub-asphodele/checklists/requirements.md',
+  'specs/007-hub-asphodele/plan.md',
+  'specs/007-hub-asphodele/research.md',
+  'specs/007-hub-asphodele/tasks.md',
+  'scripts/verify-asphodele-hub-v188.mjs',
+  'scripts/qa-asphodele-hub-v188.mjs',
+  // V188 Asphodèle follow-up (spec 007): second suite and browser QA, source-only exact paths.
+  'scripts/verify-asphodele-hub-2-v188.mjs',
+  'scripts/qa-asphodele-hub-2-v188.mjs',
+  // V188 Act V, endings and epilogue (spec 006), source-only exact paths.
+  'specs/006-acte-v-fins',
+  'specs/006-acte-v-fins/checklists',
+  'specs/006-acte-v-fins/spec.md',
+  'specs/006-acte-v-fins/checklists/requirements.md',
+  'specs/006-acte-v-fins/plan.md',
+  'specs/006-acte-v-fins/research.md',
+  'specs/006-acte-v-fins/tasks.md',
+  'scripts/verify-act5-endings-v188.mjs',
+  'scripts/verify-act5-convoy-race-v188.mjs',
+  'scripts/qa-act5-convoy-race-v188.mjs',
+  // V188 no-shooting hearing (spec 010): suite, browser QA and spec, source-only exact paths.
+  'scripts/verify-confrontation-v188.mjs',
+  'scripts/qa-confrontation-v188.mjs',
+  'specs/010-face-a-face',
+  'specs/010-face-a-face/spec.md',
+  'specs/010-face-a-face/plan.md',
+  'specs/010-face-a-face/tasks.md',
+  'scripts/verify-colony-crew-v188.mjs',
+  // V188 dedicated colony levels C1-C4: suite and spec, source-only exact paths.
+  'scripts/verify-colony-levels-v188.mjs',
+  'scripts/qa-colony-levels-v188.mjs',
+  // V188 the M577 to scale everywhere (owner decisions 2026-11-22, round 2): suite and browser pass, source-only exact paths.
+  'scripts/verify-m577-everywhere-v188.mjs',
+  'scripts/qa-apc-levels-v188.mjs',
+  'specs/008-niveaux-colonie',
+  'specs/008-niveaux-colonie/spec.md',
+  'specs/008-niveaux-colonie/plan.md',
+  'specs/008-niveaux-colonie/tasks.md',
+  // V188 dedicated Asphodèle station levels S1-S4: suite, browser QA and spec, source-only exact paths.
+  'scripts/verify-station-levels-v188.mjs',
+  'scripts/qa-station-levels-v188.mjs',
+  'specs/009-niveaux-station',
+  'specs/009-niveaux-station/spec.md',
+  'specs/009-niveaux-station/plan.md',
+  'specs/009-niveaux-station/tasks.md',
+  // V188 first side campaign « La Saison des Reines » (spec 011): suite, browser QA and spec, source-only exact paths.
+  'scripts/verify-side-campaign-queens-v188.mjs',
+  'scripts/qa-side-campaign-queens-v188.mjs',
+  'scripts/qa-side-campaign-queens-arcs-v188.mjs',
+  'specs/011-saison-des-reines',
+  'specs/011-saison-des-reines/spec.md',
+  'specs/011-saison-des-reines/plan.md',
+  'specs/011-saison-des-reines/tasks.md',
+  // V188 Bioforge containment-lab redesign (spec 013): audit, suite, browser QA and spec, source-only exact paths.
+  'docs/development/BIOFORGE_AUDIT_V188.md',
+  'scripts/verify-bioforge-lab-v188.mjs',
+  'scripts/qa-bioforge-lab-v188.mjs',
+  'specs/013-bioforge',
+  'specs/013-bioforge/spec.md',
+  'specs/013-bioforge/plan.md',
+  'specs/013-bioforge/tasks.md',
+  // V188 developer tools (spec 012): hidden scene launcher and shooting range. Source admission of
+  // the exact paths; since the owner decision of 2026-11-23 the devtools/ files are also shipped,
+  // under one hidden directory (see DEV_TOOLS_FILES_V188 below). Scripts, specs and docs stay source-only.
+  'devtools',
+  'devtools/dev-catalog-v188.js',
+  'devtools/dev-fixtures-v188.js',
+  'devtools/dev-launcher-v188.js',
+  'devtools/dev-range-metrics-v188.js',
+  'devtools/dev-range-v188.js',
+  'devtools/dev-session-v188.js',
+  'devtools/dev-storage-v188.js',
+  'devtools/dev-v188.css',
+  'devtools/index.html',
+  'scripts/dev-tools-server-v188.mjs',
+  'scripts/build-dev-tools-v188.mjs',
+  'scripts/qa-dev-tools-built-v188.mjs',
+  'scripts/verify-dev-tools-v188.mjs',
+  'scripts/qa-dev-tools-v188.mjs',
+  'specs/012-outils-dev',
+  'specs/012-outils-dev/spec.md',
+  'specs/012-outils-dev/plan.md',
+  'specs/012-outils-dev/tasks.md',
+  'scripts/qa-colony-crew-v188.mjs',
+  // V188 arsenal completion (spec 014): suite, browser QA, inventory and spec, source-only exact paths.
+  'scripts/verify-weapon-arsenal-v188.mjs',
+  'scripts/qa-arsenal-v188.mjs',
+  'scripts/verify-weapon-franchise-v188.mjs',
+  'scripts/qa-arsenal-franchise-v188.mjs',
+  'docs/development/ARSENAL_COMPLETION_V188.md',
+  'specs/014-arsenal',
+  'specs/014-arsenal/spec.md',
+  'specs/014-arsenal/plan.md',
+  'specs/014-arsenal/tasks.md',
+  'docs/development/INSERTION_ART_SLOTS_V188.md',
+  'docs/development/INSERTION_ART_PROVENANCE_20261116.json',
+  'docs/development/INSERTION_ART_QA_20261116.md',
+  'docs/development/INSERTION_ART_ATMOSPHERE_20261116.png',
+  'docs/development/INSERTION_ART_AIRLESS_20261116.png',
+  'docs/development/INSERTION_ART_SPACE_20261116.png',
+  'docs/development/INSERTION_ART_INTERIORS_20261116.png',
+  'docs/development/INSERTION_ART_RENDER_RECEIPT_20261116.json',
+  'docs/development/DEPTH_HOLD_ART_PROVENANCE_20261116.json',
+  'docs/development/DEPTH_HOLD_ART_QA_20261116.md',
+  'docs/development/DEPTH_HOLD_ART_OVERVIEW_20261116.png',
+  'docs/development/DEPTH_HOLD_ART_RENDER_RECEIPT_20261116.json',
+  'docs/development/COLONY_ART_PROVENANCE_20261116.json',
+  'docs/development/COLONY_ART_QA_20261116.md',
+  'docs/development/COLONY_ART_OVERVIEW_20261116.png',
+  'docs/development/COLONY_PORTRAITS_OVERVIEW_20261116.png',
+  'docs/development/COLONY_ART_RENDER_RECEIPT_20261116.json',
+  'docs/development/ASPHODELE_ART_PROVENANCE_20261116.json',
+  'docs/development/ASPHODELE_ART_QA_20261116.md',
+  'docs/development/ASPHODELE_ART_OVERVIEW_20261116.png',
+  'docs/development/ASPHODELE_ART_RENDER_RECEIPT_20261116.json',
+  'docs/development/ASPHODELE_ART_PRIMITIVE_REFERENCE_20261116.png',
+  'docs/development/ASPHODELE_MISSION_ART_PROVENANCE_20261116.json',
+  'docs/development/ASPHODELE_MISSION_ART_QA_20261116.md',
+  'docs/development/ASPHODELE_MISSION_ART_OVERVIEW_20261116.png',
+  'docs/development/ASPHODELE_MISSION_ART_RENDER_RECEIPT_20261116.json',
+  'docs/development/ASPHODELE_MISSION_ART_PRIMITIVE_REFERENCE_20261116.png',
+  'docs/development/ASPHODELE_HUB_WALL_ART_PROVENANCE_20261117.json',
+  'docs/development/ASPHODELE_HUB_WALL_ART_QA_20261117.md',
+  'docs/development/ASPHODELE_HUB_WALL_ART_OVERVIEW_20261117.png',
+  'docs/development/ASPHODELE_HUB_WALL_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/ASPHODELE_HUB_DETAIL_ART_PROVENANCE_20261117.json',
+  'docs/development/ASPHODELE_HUB_DETAIL_ART_QA_20261117.md',
+  'docs/development/ASPHODELE_HUB_DETAIL_ART_OVERVIEW_20261117.png',
+  'docs/development/ASPHODELE_HUB_DETAIL_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/ASPHODELE_CINEMATIC_ART_PROVENANCE_20261117.json',
+  'docs/development/ASPHODELE_CINEMATIC_ART_QA_20261117.md',
+  'docs/development/ASPHODELE_CINEMATIC_ART_OVERVIEW_20261117.png',
+  'docs/development/ASPHODELE_CINEMATIC_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/ACT5_ART_PROVENANCE_20261117.json',
+  'docs/development/ACT5_ART_QA_20261117.md',
+  'docs/development/ACT5_ART_OVERVIEW_20261117.png',
+  'docs/development/ACT5_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/BIOLOGICAL_ART_PROVENANCE_20261117.json',
+  'docs/development/BIOLOGICAL_ART_QA_20261117.md',
+  'docs/development/BIOLOGICAL_ART_OVERVIEW_20261117.png',
+  'docs/development/BIOLOGICAL_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/PROLOGUE_ART_PROVENANCE_20261117.json',
+  'docs/development/PROLOGUE_ART_QA_20261117.md',
+  'docs/development/PROLOGUE_ART_OVERVIEW_20261117.png',
+  'docs/development/PROLOGUE_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/PORT_QUAY_ART_PROVENANCE_20261117.json',
+  'docs/development/PORT_QUAY_ART_QA_20261117.md',
+  'docs/development/PORT_QUAY_ART_OVERVIEW_20261117.png',
+  'docs/development/PORT_QUAY_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/CARGO_ABYSS_ART_PROVENANCE_20261117.json',
+  'docs/development/CARGO_ABYSS_ART_QA_20261117.md',
+  'docs/development/CARGO_ABYSS_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/CARGO_ABYSS_ART_OVERVIEW_20261117.png',
+  'docs/development/HADAL_ART_PROVENANCE_20261117.json',
+  'docs/development/HADAL_ART_QA_20261117.md',
+  'docs/development/HADAL_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/HADAL_ART_OVERVIEW_20261117.png',
+  'docs/development/BROODSTORM_QUEEN_ART_PROVENANCE_20261117.json',
+  'docs/development/BROODSTORM_QUEEN_ART_QA_20261117.md',
+  'docs/development/BROODSTORM_QUEEN_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/BROODSTORM_QUEEN_ART_OVERVIEW_20261117.png',
+  'docs/development/QUEEN_MOTHER_ART_PROVENANCE_20261117.json',
+  'docs/development/QUEEN_MOTHER_ART_QA_20261117.md',
+  'docs/development/QUEEN_MOTHER_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/QUEEN_MOTHER_ART_OVERVIEW_20261117.png',
+  'docs/development/QUEEN_MOTHER_GUARD_ART_PROVENANCE_20261117.json',
+  'docs/development/QUEEN_MOTHER_GUARD_ART_QA_20261117.md',
+  'docs/development/QUEEN_MOTHER_GUARD_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/QUEEN_MOTHER_GUARD_ART_OVERVIEW_20261117.png',
+  'docs/development/QUEEN_MOTHER_CHOIR_ART_PROVENANCE_20261117.json',
+  'docs/development/QUEEN_MOTHER_CHOIR_ART_QA_20261117.md',
+  'docs/development/QUEEN_MOTHER_CHOIR_ART_RENDER_RECEIPT_20261117.json',
+  'docs/development/QUEEN_MOTHER_CHOIR_ART_OVERVIEW_20261117.png',
+  'scripts/verify-colony-portraits-v188.mjs',
+  'scripts/verify-insertion-cinematic-v188.mjs',
+  'scripts/verify-mission-depth-v188.mjs',
+  'scripts/verify-cinematic-coherence-v188.mjs',
+  'scripts/verify-placeholder-portraits-v188.mjs',
+  'scripts/verify-qz17-coherence-v188.mjs',
+  'scripts/verify-quay-coherence-v188.mjs',
+  'scripts/verify-cargo-matriarch-art-v188.mjs',
+  'scripts/verify-manta-art-v188.mjs',
+  'scripts/verify-hadal-player-art-v188.mjs',
+  'scripts/verify-broodstorm-queen-art-v188.mjs',
+  'scripts/verify-queen-mother-art-v188.mjs',
+  'scripts/verify-queen-mother-guard-art-v188.mjs',
+  'scripts/verify-queen-mother-choir-art-v188.mjs',
+  'scripts/verify-prologue-rooms-v188.mjs',
+  'scripts/verify-bugfix-campaign-v188.mjs',
+  'scripts/verify-bugfix-first-hour-v188.mjs',
+  'scripts/verify-bugfix-story-missions-v188.mjs',
+  'scripts/verify-bugfix-hub-ui-v188.mjs',
+  'scripts/verify-bugfix-interaction-v188.mjs',
+  'scripts/verify-bugfix-mobile-ui-v188.mjs',
+  'scripts/verify-bugfix-hub-story-v188.mjs',
+  'scripts/verify-bugfix-i18n-v188.mjs',
+  'scripts/verify-bugfix-systems-v188.mjs',
+  'scripts/verify-bugfix-i18n-ui-v188.mjs',
+  'scripts/verify-bugfix-missions-generic-v188.mjs',
+  'scripts/verify-bugfix-interaction-modes-v188.mjs',
+  'scripts/verify-bugfix-audio-settings-v188.mjs',
+  'scripts/verify-bugfix-insertion-v188.mjs',
+  'scripts/verify-dropship-handover-v188.mjs',
+  'scripts/verify-bugfix-texts-v188.mjs',
+  'scripts/verify-bugfix-playthrough-v188.mjs',
+  'scripts/verify-bugfix-decisions-v188.mjs',
+  'scripts/verify-bugfix-playthrough-modes-v188.mjs',
+  // V188 full main-campaign browser run of 2026-11-22 (regressions + run log), source-only exact paths.
+  'scripts/verify-bugfix-full-run-v188.mjs',
+  'scripts/verify-owner-decisions-20261123-v188.mjs',
+  'docs/development/PLAYTHROUGH_V188_20261122.md',
+  // V188 mission VFX pass (slots + sourcing table), source-only exact paths.
+  'scripts/verify-vfx-v188.mjs',
+  'docs/development/VFX_V188.md',
+  'scripts/verify-gameplay-gaps-v188.mjs',
+  // V188 graphics audit fixes (items 12–17), source-only exact paths.
+  'scripts/verify-visual-fixes-v188.mjs',
+  'docs/development/VISUAL_FIXES_V188.md',
+  // V188 creature scale (owner decision 2026-11-16), source-only exact path.
+  'scripts/verify-creature-scale-v188.mjs',
+  'specs/001-salles-hybrides-2d-25d/spec.md',
+  'specs/001-salles-hybrides-2d-25d/plan.md',
+  'specs/001-salles-hybrides-2d-25d/research.md',
+  'specs/001-salles-hybrides-2d-25d/data-model.md',
+  'specs/001-salles-hybrides-2d-25d/quickstart.md',
+  'specs/001-salles-hybrides-2d-25d/tasks.md',
+  'specs/001-salles-hybrides-2d-25d/contracts/hub-depth-room.md',
+  'specs/001-salles-hybrides-2d-25d/checklists/requirements.md',
+  'docs/development/PRIORITIES_P0_P1_V188.md',
+  // V188 owner decision questionnaire, source-only exact path.
+  'docs/development/QUESTIONS_PROPRIETAIRE_V188.md',
+  // V188 content audit (bible against code), source-only exact path.
+  'docs/development/AUDIT_CONTENU_V188.md',
   // Source-only narrative design bible; never shipped in a built distribution.
   'docs/narrative',
   'docs/narrative/CAMPAGNE_PRINCIPALE.md',
@@ -336,6 +774,41 @@ const FORGE_TOOLING_V140 = new Set([
   'docs/forge/xeno-trials/V168-DIALOGUE-AND-TANTALUS-BATCH100.md',
   'docs/forge/xeno-trials/batch100-v168.json',
   'docs/forge/xeno-trials/batch100-v177.json',
+  'docs/forge/xeno-trials/batch40-v179.json',
+  'docs/forge/xeno-trials/campaign-art-v180.json',
+  'docs/forge/xeno-trials/V180-SIMULTANEOUS-HORDE.md',
+  'docs/forge/xeno-trials/batch40-v180.json',
+  'docs/forge/xeno-trials/i18n-trials-review-v186.json',
+  'docs/forge/xeno-trials/i18n-operations-review-v188.json',
+  'docs/forge/xeno-trials/sprite-production-v188.json',
+  'docs/forge/xeno-trials/V188-STAGE-OPERATIONS.md',
+  'docs/forge/xeno-trials/operations-completion-v188.json',
+  'docs/forge/xeno-trials/V192-FRANCHISE-STAGES-50.md',
+  'docs/forge/xeno-trials/franchise-stage-completion-v192.json',
+  'docs/forge/xeno-trials/franchise-stage-sources-v192.json',
+  'docs/forge/xeno-trials/franchise-stage-art-production-v192.json',
+  'docs/forge/xeno-trials/i18n-franchise-stages-review-v192.json',
+  'docs/forge/xeno-trials/V192-FRANCHISE-STAGES-50.md',
+  'docs/forge/xeno-trials/V191-ARBITER-PROTOCOLS-ANIMATION.md',
+  'docs/forge/xeno-trials/arbiter-protocols-completion-v191.json',
+  'docs/forge/xeno-trials/sprite-combat-production-v191.json',
+  'docs/forge/xeno-trials/sprite-special-production-v191.json',
+  'docs/forge/xeno-trials/animation-coverage-v191.json',
+  'docs/forge/xeno-trials/i18n-arbiter-protocols-review-v191.json',
+  'docs/forge/xeno-trials/V190-ARBITER-CAMPAIGN.md',
+  'docs/forge/xeno-trials/arbiter-campaign-completion-v190.json',
+  'docs/forge/xeno-trials/stage-art-production-v190.json',
+  'docs/forge/xeno-trials/campaign-art-production-v190.json',
+  'docs/forge/xeno-trials/i18n-arbiter-review-v190.json',
+  'docs/forge/xeno-trials/V189-ANIMATION-AUDIO.md',
+  'docs/forge/xeno-trials/animation-audio-completion-v189.json',
+  'docs/forge/xeno-trials/i18n-animation-audio-review-v189.json',
+  'docs/forge/xeno-trials/animation-coverage-v189.json',
+  'docs/forge/xeno-trials/sprite-production-v189.json',
+  'docs/forge/xeno-trials/sprite-motion-production-v189.json',
+  'docs/forge/xeno-trials/V186-XENO-COMPLETION.md',
+  'docs/forge/xeno-trials/completion-v186.json',
+  'docs/forge/xeno-trials/V179-XENO-TRIALS-BATCH40.md',
   'docs/forge/xeno-trials/V167-HUMAN-MOVEMENT-AND-DOOR-SIGNS.md',
   'docs/forge/xeno-trials/V166-STATION-RELAYS.md',
   'docs/forge/xeno-trials/V165-PARALLEL-COMPLETION.md',
@@ -554,17 +1027,236 @@ const PRIVATE_TEXT = [
   /['"]V\d+_(?:BATCH_\d+|[A-Z_]*IMAGEGEN)/
 ];
 
+// V188 AI development tooling (Spec Kit, Claude Code Game Studios) stays
+// source-only: exact adopted paths from .ai-tools/adopted-v188.json and their
+// parent directories, never admitted in a built distribution.
+const AI_TOOLS_ADOPTED_V188 = (() => {
+  const manifest = JSON.parse(readFileSync(new URL('../.ai-tools/adopted-v188.json', import.meta.url), 'utf8'));
+  const paths = new Set(['.ai-tools/adopted-v188.json']);
+  for (const tool of manifest.tools) for (const { path } of tool.files) {
+    const segments = path.split('/');
+    for (let index = 1; index <= segments.length; index++) paths.add(segments.slice(0, index).join('/'));
+  }
+  for (const root of ['docs', '.ai-tools']) paths.delete(root);
+  return Object.freeze(paths);
+})();
+const AI_TOOLS_FILE_SHA256_V188 = new Map(JSON.parse(readFileSync(new URL('../.ai-tools/adopted-v188.json', import.meta.url), 'utf8'))
+  .tools.flatMap(tool => tool.files.map(({ path, sha256 }) => [path, sha256])));
+export const AI_TOOLS_SOURCE_ONLY_PATHS_V188 = AI_TOOLS_ADOPTED_V188;
+// Merge of the Xeno Trials line into the Tantalus line: the exact catalogue delta
+// record used by the Xeno Trials i18n tests stays source-only.
+const TANTALUS_XENO_MERGE_SOURCE_ONLY_V188 = new Set(['scripts/i18n-tantalus-xeno-merge-v188.mjs']);
+
+const XENO_PRODUCTION_SOURCE_ONLY_V206 = new Set([
+  'scripts/audit-xeno-production-assets-v206.mjs',
+  'scripts/public-xeno-production-admissions-v206.mjs',
+  'scripts/verify-xeno-production-assets-v206.mjs',
+  'docs/forge/xeno-trials/ASSET_LOT_V206.json',
+  'docs/forge/xeno-trials/V206-ASSETS.md'
+]);
+
+const XENO_VISUAL_SOURCE_ONLY_V205 = new Set([
+  'scripts/audit-xeno-visual-assets-v205.mjs',
+  'scripts/public-xeno-visual-admissions-v205.mjs',
+  'scripts/verify-xeno-trials-visual-assets-v205.mjs',
+  'scripts/verify-xeno-visual-assets-audit-v205.mjs',
+  'docs/forge/xeno-trials/ASSET_LOT_V205.json',
+  'docs/forge/xeno-trials/V205-ASSETS.md'
+]);
+
+const XENO_PRIORITIES_SOURCE_ONLY_V204 = new Set([
+  'docs/forge/xeno-trials/V204-PRIORITIES.md',
+  'scripts/audit-xeno-priorities-v204.mjs',
+  'scripts/verify-xeno-priorities-audit-v204.mjs',
+  'scripts/verify-xeno-trials-priority-actions-v204.mjs',
+  'scripts/verify-xeno-trials-purge-presentation-v204.mjs',
+  'scripts/verify-xeno-trials-defense-v204.mjs',
+  'scripts/public-xeno-priority-admissions-v204.mjs'
+]);
+
+const XENO_PRIORITIES_SOURCE_ONLY_V203 = new Set([
+  'docs/forge/xeno-trials/V203-PRIORITIES.md',
+  'scripts/audit-xeno-priorities-v203.mjs',
+  'scripts/verify-xeno-priorities-audit-v203.mjs',
+  'scripts/verify-xeno-trials-priority-actions-v203.mjs',
+  'scripts/verify-xeno-trials-extraction-presentation-v203.mjs',
+  'scripts/verify-xeno-trials-defense-v203.mjs',
+  'scripts/public-xeno-priority-admissions-v203.mjs'
+]);
+
+const XENO_PRIORITIES_SOURCE_ONLY_V202 = new Set([
+  'docs/forge/xeno-trials/V202-PRIORITIES.md',
+  'scripts/audit-xeno-priorities-v202.mjs',
+  'scripts/verify-xeno-priorities-audit-v202.mjs',
+  'scripts/verify-xeno-trials-priority-actions-v202.mjs',
+  'scripts/verify-xeno-trials-beacon-windows-v202.mjs',
+  'scripts/verify-xeno-trials-rig-v202.mjs',
+  'scripts/public-xeno-priority-admissions-v202.mjs'
+]);
+
+const XENO_PRIORITIES_SOURCE_ONLY_V201 = new Set([
+  'docs/forge/xeno-trials/V201-PRIORITIES.md',
+  'scripts/audit-xeno-priorities-v201.mjs',
+  'scripts/verify-xeno-priorities-audit-v201.mjs',
+  'scripts/verify-xeno-trials-priority-actions-v201.mjs',
+  'scripts/verify-xeno-trials-reinforcements-v201.mjs',
+  'scripts/verify-xeno-trials-rig-v201.mjs',
+  'scripts/public-xeno-priority-admissions-v201.mjs'
+]);
+
+const XENO_SUPERS_SOURCE_ONLY_V200 = new Set([
+  'docs/forge/xeno-trials/V200-SUPERS.md',
+  'scripts/audit-xeno-supers-v200.mjs',
+  'scripts/verify-xeno-supers-audit-v200.mjs',
+  'scripts/verify-xeno-trials-supers-v200.mjs',
+  'scripts/public-xeno-super-admissions-v200.mjs'
+]);
+
+const XENO_PRIORITIES_SOURCE_ONLY_V199 = new Set([
+  'docs/forge/xeno-trials/V199-PRIORITIES.md',
+  'scripts/audit-xeno-priorities-v199.mjs',
+  'scripts/public-xeno-action-admissions-v199.mjs',
+  'scripts/verify-xeno-priorities-audit-v199.mjs',
+  'scripts/verify-xeno-trials-actions-v199.mjs',
+  'scripts/verify-xeno-trials-rig-v199.mjs'
+]);
+
+const XENO_PRIORITY_STAGES_SOURCE_ONLY_V198 = new Set([
+  'docs/forge/xeno-trials/V198-PRIORITY-STAGES.md',
+  'scripts/audit-xeno-priority-stages-v198.mjs',
+  'scripts/public-xeno-priority-stage-admissions-v198.mjs',
+  'scripts/verify-xeno-priority-stages-audit-v198.mjs',
+  'scripts/verify-xeno-priority-stages-v198.mjs'
+]);
+
+const XENO_PRIORITIES_SOURCE_ONLY_V197 = new Set([
+  'docs/forge/xeno-trials/V197-PRIORITIES.md',
+  'scripts/audit-xeno-priorities-v197.mjs',
+  'scripts/public-xeno-sprite-admissions-v197.mjs',
+  'scripts/verify-xeno-priorities-audit-v197.mjs',
+  'scripts/verify-xeno-trials-priorities-v197.mjs',
+  'scripts/verify-xeno-trials-duel-checkpoint-v197.mjs',
+  'scripts/verify-xeno-trials-pilot-sequences-v197.mjs',
+  'scripts/verify-xeno-trials-rig-v197.mjs'
+]);
+
+const XENO_REFERENCED_STAGE_SOURCE_ONLY_V196 = new Set([
+  'docs/forge/xeno-trials/V196-REFERENCED-FILM-STAGES.md',
+  'scripts/public-xeno-referenced-stage-admissions-v196.mjs',
+  'scripts/audit-xeno-referenced-film-stages-v196.mjs',
+  'scripts/verify-xeno-referenced-film-stages-audit-v196.mjs',
+  'scripts/verify-xeno-referenced-film-stages-v196.mjs'
+]);
+
+const XENO_STAGE_CLASSIFICATION_SOURCE_ONLY_V195 = new Set([
+  'docs/forge/xeno-trials/V195-STAGE-CLASSIFICATION.md',
+  'scripts/audit-xeno-stage-classification-v195.mjs',
+  'scripts/verify-xeno-stage-classification-audit-v195.mjs'
+]);
+
+const XENO_ICONIC_STAGE_SOURCE_ONLY_V194 = new Set([
+  'docs/forge/xeno-trials/V194-ICONIC-STAGES.md',
+  'scripts/public-xeno-iconic-stage-admissions-v194.mjs',
+  'scripts/audit-xeno-iconic-stages-v194.mjs',
+  'scripts/verify-xeno-iconic-stages-audit-v194.mjs',
+  'scripts/verify-xeno-iconic-stages-v194.mjs'
+]);
+
+const XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193 = new Set([
+  'docs/forge/xeno-trials/V193-ORIGINAL-ARENAS.md',
+  'scripts/public-xeno-original-arena-admissions-v193.mjs',
+  'scripts/audit-xeno-original-arenas-v193.mjs',
+  'scripts/verify-xeno-original-arenas-audit-v193.mjs',
+  'scripts/verify-xeno-original-arenas-v193.mjs'
+]);
+
 // Pure checks are exported so adversarial cases can be verified without placing
 // private fixtures anywhere inside the distribution tree.
+const FIORINA_INTEGRATION_SOURCE_ONLY_V114 = new Set([
+  'scripts/verify-fiorina-production-v114.mjs',
+  'scripts/qa-fiorina-native-v114.mjs',
+  'docs/development/FIORINA_GITHUB_INTEGRATION_V114.md',
+  '.github/workflows/fiorina-native-v114.yml'
+]);
+
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
+  if (FIORINA_INTEGRATION_SOURCE_ONLY_V114.has(path)) return !built;
+  const recoveryAdmission = projectRecoveryPathAdmission20261116(path, { directory, built });
+  if (recoveryAdmission !== null) return recoveryAdmission;
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
+  if (TANTALUS_XENO_MERGE_SOURCE_ONLY_V188.has(path)) return !built;
+  if (XENO_PRODUCTION_SOURCE_ONLY_V206.has(path)) return !built;
+  const productionAdmissionV206 = publicXenoProductionPathAdmissionV206(path, { directory, built });
+  if (productionAdmissionV206 !== null) return productionAdmissionV206;
+  if (XENO_VISUAL_SOURCE_ONLY_V205.has(path)) return !built;
+  const visualAdmissionV205 = publicXenoVisualPathAdmissionV205(path, { directory, built });
+  if (visualAdmissionV205 !== null) return visualAdmissionV205;
+  if (XENO_PRIORITIES_SOURCE_ONLY_V204.has(path)) return !built;
+  if (XENO_PRIORITIES_SOURCE_ONLY_V203.has(path)) return !built;
+  if (XENO_PRIORITIES_SOURCE_ONLY_V202.has(path)) return !built;
+  if (XENO_PRIORITIES_SOURCE_ONLY_V201.has(path)) return !built;
+  if (XENO_SUPERS_SOURCE_ONLY_V200.has(path)) return !built;
+  if (XENO_PRIORITIES_SOURCE_ONLY_V199.has(path)) return !built;
+  if (XENO_PRIORITY_STAGES_SOURCE_ONLY_V198.has(path)) return !built;
+  if (XENO_PRIORITIES_SOURCE_ONLY_V197.has(path)) return !built;
+  if (XENO_REFERENCED_STAGE_SOURCE_ONLY_V196.has(path)) return !built;
+  if (XENO_STAGE_CLASSIFICATION_SOURCE_ONLY_V195.has(path)) return !built;
+  if (XENO_ICONIC_STAGE_SOURCE_ONLY_V194.has(path)) return !built;
+  if (XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193.has(path)) return !built;
   if (V179_SOURCE_ONLY_SCRIPTS.has(path)) return !built;
+  if (XENO_COMPLETION_SOURCE_ONLY_V186.has(path)) return !built;
+  if (XENO_OPERATIONS_SOURCE_ONLY_V188.has(path)) return !built;
+  if (XENO_ARBITER_SOURCE_ONLY_V191.has(path)) return !built;
+  if (XENO_ARBITER_SOURCE_ONLY_V190.has(path)) return !built;
+  if (XENO_ANIMATION_SOURCE_ONLY_V189.has(path)) return !built;
   if (!built && FORGE_TOOLING_V140.has(path)) return true;
+  // Built distribution: one hidden top-level directory with exactly the developer tool files
+  // (scripts/verify-release-artifact-v143.mjs checks there is a single one and its fingerprint).
+  if (built) {
+    const [devDirectory, devFile, ...devRest] = path.split('/');
+    if (isDevToolsPublicPathV188(devDirectory) && !PRIVATE_SEGMENT.test(devDirectory))
+      return devFile === undefined ? directory : !directory && devRest.length === 0 && DEV_TOOLS_FILES_V188.includes(devFile);
+  }
+  if (!built && AI_TOOLS_ADOPTED_V188.has(path)) return true;
   if (FORGE_STYLES_V140.has(path)) return true;
   const segments = path.split('/');
   if (segments.some(part => !part || part === '.' || part === '..' || PRIVATE_SEGMENT.test(part))) return false;
+  const priorityAdmissionV204 = publicXenoPriorityPathAdmissionV204(path, { directory });
+  if (priorityAdmissionV204 !== null) return priorityAdmissionV204;
+  const priorityAdmissionV203 = publicXenoPriorityPathAdmissionV203(path, { directory });
+  if (priorityAdmissionV203 !== null) return priorityAdmissionV203;
+  const priorityAdmissionV202 = publicXenoPriorityPathAdmissionV202(path, { directory });
+  if (priorityAdmissionV202 !== null) return priorityAdmissionV202;
+  const priorityAdmissionV201 = publicXenoPriorityPathAdmissionV201(path, { directory });
+  if (priorityAdmissionV201 !== null) return priorityAdmissionV201;
+  const superAdmissionV200 = publicXenoSuperPathAdmissionV200(path, { directory });
+  if (superAdmissionV200 !== null) return superAdmissionV200;
+  const actionAdmissionV199 = publicXenoActionPathAdmissionV199(path, { directory });
+  if (actionAdmissionV199 !== null) return actionAdmissionV199;
+  const spriteAdmissionV197 = publicXenoSpritePathAdmissionV197(path, { directory });
+  if (spriteAdmissionV197 !== null) return spriteAdmissionV197;
+  const spriteAdmissionV191 = publicXenoSpritePathAdmissionV191(path, { directory });
+  if (spriteAdmissionV191 !== null) return spriteAdmissionV191;
+  const priorityStageAdmissionV198 = publicXenoPriorityStagePathAdmissionV198(path, { directory });
+  if (priorityStageAdmissionV198 !== null) return priorityStageAdmissionV198;
+  const referencedStageAdmissionV196 = publicXenoReferencedStagePathAdmissionV196(path, { directory });
+  if (referencedStageAdmissionV196 !== null) return referencedStageAdmissionV196;
+  const iconicStageAdmissionV194 = publicXenoIconicStagePathAdmissionV194(path, { directory });
+  if (iconicStageAdmissionV194 !== null) return iconicStageAdmissionV194;
+  const originalArenaAdmissionV193 = publicXenoOriginalArenaPathAdmissionV193(path, { directory });
+  if (originalArenaAdmissionV193 !== null) return originalArenaAdmissionV193;
+  const franchiseAdmissionV192 = publicXenoFranchiseStagePathAdmissionV192(path, { directory });
+  if (franchiseAdmissionV192 !== null) return franchiseAdmissionV192;
+  const arbiterAdmissionV190 = publicArbiterPathAdmissionV190(path, { directory });
+  if (arbiterAdmissionV190 !== null) return arbiterAdmissionV190;
   const costumeAdmissionV165 = publicCostumePathAdmissionV165(path, { directory });
   if (costumeAdmissionV165 !== null) return costumeAdmissionV165;
+  const xenoSpriteAdmissionV189 = publicXenoSpritePathAdmissionV189(path, { directory });
+  if (xenoSpriteAdmissionV189 !== null) return xenoSpriteAdmissionV189;
+  const xenoSpriteAdmissionV188 = publicXenoSpritePathAdmissionV188(path, { directory });
+  if (xenoSpriteAdmissionV188 !== null) return xenoSpriteAdmissionV188;
+  const campaignAdmissionV180 = publicCampaignArtPathAdmissionV180(path, { directory });
+  if (campaignAdmissionV180 !== null) return campaignAdmissionV180;
   const v163Admission = publicReleasePathAdmissionV163(path, { directory });
   if (v163Admission !== null) return v163Admission;
   const v123Admission = publicReleasePathAdmissionV123(path, { directory });
@@ -615,6 +1307,13 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
       assert.equal(entry.isFile(), true, `Unsupported filesystem entry: ${path}`);
       files++; if (path.startsWith('assets/')) assets++;
       if (USER_REFERENCE_JPG_PATHS_V100.has(path)) userReferenceJpgs++;
+      if (!built && AI_TOOLS_FILE_SHA256_V188.has(path)) {
+        // Third-party tooling keeps its exact upstream bytes (examples may name
+        // generic home paths); it is source-only and rejected from any build.
+        const digest = createHash('sha256').update(await readFile(join(directory, entry.name))).digest('hex');
+        assert.equal(digest, AI_TOOLS_FILE_SHA256_V188.get(path), `Unreviewed AI tooling bytes: ${path}`);
+        continue;
+      }
       if (ROOT_FILES.has(path) || path === 'src/vendor/supabase-LICENSE.txt' || /\.(?:js|mjs|py|json|css|html|md|webmanifest)$/i.test(path)) {
         const text = await readFile(join(directory, entry.name), 'utf8');
         assert.equal(isPublicDistributionTextV86(text), true, `Private source metadata in distribution: ${path}`);
@@ -622,6 +1321,9 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
     }
   }
   await walk(resolve(root));
+  // Scan admitted paths and private text first, including partial adversarial
+  // fixtures. A complete source validation still requires the exact archives.
+  await verifyProjectRecoveryArchive20261116(root, { built });
   const { USER_REFERENCE_LIBRARY_V100 } = await import(pathToFileURL(join(resolve(root), 'src/user-reference-library-v100.js')).href);
   const registeredJpgs = USER_REFERENCE_LIBRARY_V100.map(entry => entry.path.replace(/^\//, '')).filter(path => path.endsWith('.jpg'));
   assert.deepEqual([...new Set(registeredJpgs)].sort(), [...USER_REFERENCE_JPG_PATHS_V100].sort(), 'Reference JPG allowlist differs from the runtime registry.');
@@ -633,6 +1335,25 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   await verifyPublicAdmissionsV123(root, { strict: true });
   await verifyPublicAdmissionsV163(root);
   await verifyPublicCostumeAdmissionsV165(root, { strict: true, built });
+  await verifyCampaignArtAdmissionsV180(root);
+  await verifyXenoSpriteAdmissionsV188(root);
+  await verifyXenoSpriteAdmissionsV189(root);
+  await verifyArbiterImageAdmissionsV190(root);
+  await verifyXenoSpriteAdmissionsV191(root);
+  await verifyXenoSpriteAdmissionsV197(root);
+  await verifyXenoActionAdmissionsV199(root);
+  await verifyXenoSuperAdmissionsV200(root);
+  await verifyXenoPriorityAdmissionsV201(root);
+  await verifyXenoPriorityAdmissionsV202(root);
+  await verifyXenoPriorityAdmissionsV203(root);
+  await verifyXenoPriorityAdmissionsV204(root);
+  await verifyXenoVisualAdmissionsV205(root);
+  if (!built) await verifyXenoProductionAdmissionsV206(root);
+  await verifyXenoFranchiseStageAdmissionsV192(root);
+  await verifyXenoOriginalArenaAdmissionsV193(root);
+  await verifyXenoIconicStageAdmissionsV194(root);
+  await verifyXenoReferencedStageAdmissionsV196(root);
+  await verifyXenoPriorityStageAdmissionsV198(root);
   return { ok: true, version: RELEASE.version, files, assets, privateDocuments: 0 };
 }
 

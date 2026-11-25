@@ -123,8 +123,21 @@ export function withMagazineRecoveryWorldV168(Base) {
       });
     }
 
+    // V188 shared E selection: a dropped magazine is a pickup, chosen only when nearest.
+    interactionCandidatesV188(actor = this.player) {
+      const list = super.interactionCandidatesV188?.(actor) || [];
+      const nearby = this.nearestMagazineV168(actor);
+      if (nearby) list.push({ kind: 'magazine-v168', category: 'pickup', target: nearby,
+        distance: this.interactionRankDistanceV188(actor, { x: nearby.x, y: nearby.y, w: 0, h: 0 }),
+        prompt: nearby.rounds === 0 ? 'E  RÉCUPÉRER CHARGEUR VIDE' : 'E  RÉCUPÉRER CHARGEUR · ' + nearby.rounds + ' CARTOUCHES' });
+      return list;
+    }
+
     interact(actor = this.player) {
-      const prior = super.interact(actor);
+      // Without the shared selection (isolated hosts) the historical fallback order applies.
+      const shared = typeof super.selectInteractionTargetV188 === 'function';
+      if (shared && this.selectInteractionTargetV188(actor)?.kind !== 'magazine-v168') return super.interact(actor);
+      const prior = shared ? false : super.interact(actor);
       if (prior || !this.canPerformGameplayAction?.(actor)) return prior;
       const nearby = this.nearestMagazineV168(actor);
       if (!nearby) return prior;
@@ -143,6 +156,13 @@ export function withMagazineRecoveryWorldV168(Base) {
     }
 
     getInteractionPrompt(actor = this.player) {
+      // V188: the magazine prompt is produced by the shared selection, never
+      // hidden behind a weapon hint and never shown when E acts on something else.
+      if (typeof super.selectInteractionTargetV188 === 'function') {
+        const choice = this.selectInteractionTargetV188(actor);
+        if (choice?.kind === 'magazine-v168' && actor?.alive) return choice.prompt;
+        return super.getInteractionPrompt(actor);
+      }
       const prior = super.getInteractionPrompt(actor);
       const nearby = this.nearestMagazineV168(actor);
       if (!nearby || prior && prior !== 'S  COUVERTURE · F  TIR · R  RECHARGER') return prior;

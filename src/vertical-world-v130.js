@@ -167,8 +167,19 @@ export function withVerticalWorldV130(BaseEngine) {
       return this.requestLiftV130(lift, destination.y, actor.coop ? 'coop' : 'player');
     }
 
+    // V188 shared E selection: the lift panel is an action, after the door,
+    // terminals, vent and extraction the prompt already named (W/S still call it).
+    interactionCandidatesV188(actor = this.player) {
+      const list = super.interactionCandidatesV188?.(actor) || [];
+      const lift = this.liftAtActorV130(actor);
+      if (lift && lift.stateV130 !== 'moving' && !(lift.dwellV130 > 0)) list.push({ kind: 'lift-v130', category: 'action', target: lift,
+        distance: this.interactionRankDistanceV188(actor, lift, { horizontal: true }), prompt: 'E  APPELER LE MONTE-CHARGE' });
+      return list;
+    }
+
     interact(actor = this.player) {
-      if (this.commandLiftV130(actor)) { this.audio?.ui?.(); return true; }
+      const shared = typeof this.selectInteractionTargetV188 === 'function';
+      if ((!shared || this.selectInteractionTargetV188(actor)?.kind === 'lift-v130') && this.commandLiftV130(actor)) { this.audio?.ui?.(); return true; }
       return super.interact(actor);
     }
 

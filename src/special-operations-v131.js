@@ -7,6 +7,7 @@ import { HIVE_CAMPAIGNS_V131 } from './hive-missions-v131.js';
 import { MECHA_CAMPAIGNS_V131 } from './mecha-missions-v131.js';
 import { ECOSYSTEM_CAMPAIGNS_V131 } from './ecosystem-missions-v131.js';
 import { LEGACY_CAMPAIGNS_V131 } from './legacy-operations-v131.js';
+import { FIORINA_OPERATION_V114, FIORINA_CAMPAIGN_V114 } from './fiorina-campaign-v114.js';
 
 export const NEW_SPECIAL_CAMPAIGNS_V131 = Object.freeze([
   ...HIVE_CAMPAIGNS_V131, ...MECHA_CAMPAIGNS_V131, ...ECOSYSTEM_CAMPAIGNS_V131, ...LEGACY_CAMPAIGNS_V131
@@ -15,7 +16,7 @@ const routes = new Map(NEW_SPECIAL_CAMPAIGNS_V131.map(c => [c.specialOperationId
 routes.set('black-cocoon', BLACK_COCOON_CAMPAIGN_V121);
 routes.set('last-course-tantalus', APC_CONVOY_CAMPAIGN_V121);
 const limitations = {
-  'queen-mother-song': ['dedicated-queen-mother-animation', 'complete-royal-cast'],
+  'queen-mother-song': ['complete-royal-cast'],
   'hive-world': ['dedicated-planet-queen-art', 'complete-organ-biomes'],
   'titan-equalizer': ['dedicated-talos-titan-art', 'canonical-mega-loader-corpus'],
   'eloise-uncrowned-queen': ['dedicated-eloise-animation', 'hush-six-and-mother-hunter-art'],
@@ -25,15 +26,17 @@ const limitations = {
   'protocol-z110': ['dedicated-z110-and-morrigan-art', 'complete-mecha-animation-corpus'],
   'black-abyss': ['dedicated-hadal-manta-art', 'complete-aquatic-bestiary'],
   'mire-archive-001': ['complete-nostromo-cast', 'complete-historical-campaign'],
-  broodstorm: ['dedicated-flying-queen-art', 'complete-modular-dropship-corpus'],
+  broodstorm: ['complete-modular-dropship-corpus'],
   'black-cocoon': ['dedicated-cocoon-bitmap-corpus', 'extended-survivor-campaign'],
-  'last-course-tantalus': ['local-convoy-coop'],
-  'cargo-brutal': ['dedicated-cargo-matriarch-art']
+  'last-course-tantalus': ['local-convoy-coop']
 };
+// V188: Cargo's four dedicated Matriarch clips are produced. Its V67 local
+// gameplay status applies again; canonExact remains false for this adaptation.
 const freeze = entry => Object.freeze({ ...entry, canonExact: false,
   requiredMechanics: Object.freeze([...entry.requiredMechanics]),
   remainingMechanics: Object.freeze([...(entry.remainingMechanics || [])]) });
 export const SPECIAL_OPERATIONS_V131 = Object.freeze([
+  freeze(FIORINA_OPERATION_V114),
   ...SPECIAL_OPERATIONS_V67.map(original => {
     const route = routes.get(original.id);
     return freeze({ ...original,
@@ -57,8 +60,11 @@ export const SPECIAL_OPERATION_COUNTS_V131 = Object.freeze({ total: SPECIAL_OPER
   playable: SPECIAL_OPERATIONS_V131.filter(o=>o.playable).length });
 const byCampaign = new Map(SPECIAL_OPERATIONS_V131.filter(o=>o.campaignId).map(o=>[o.campaignId,o]));
 export function getSpecialOperationByCampaignIdV131(id) { return byCampaign.get(id) || null; }
+// V188 owner decision (2026-11-15): Jeri's hive mission (« Le faux fils ») is solo;
+// the other hive chapters keep the selected squad.
+const JERI_SOLO_CAMPAIGN_ID_V188 = HIVE_CAMPAIGNS_V131.find(c=>c.specialOperationId==='jeri-false-son')?.id;
 export function isSoloSpecialOperationV131(id) {
-  return [BLACK_COCOON_CAMPAIGN_V121.id, APC_CONVOY_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id,
+  return [FIORINA_CAMPAIGN_V114.id, BLACK_COCOON_CAMPAIGN_V121.id, JERI_SOLO_CAMPAIGN_ID_V188, APC_CONVOY_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id,
     ...MECHA_CAMPAIGNS_V131.map(c=>c.id), ...ECOSYSTEM_CAMPAIGNS_V131.map(c=>c.id), ...LEGACY_CAMPAIGNS_V131.map(c=>c.id)].includes(id);
 }
 export function validateSpecialOperationsV131(campaigns) {

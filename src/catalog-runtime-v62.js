@@ -424,7 +424,8 @@ const enemyStage = (entry) => entry.visualRevision === 123 && entry.stage === 'l
 const taxonomyFor = (kind, entry, visual) => {
   if (kind === 'weapons') return freezeObject({
     family: knownString(entry.family),
-    category: knownString(visual?.category),
+    // V188 pending-plaque additions name their class without inventing art.
+    category: knownString(visual?.category || entry.placeholderCategoryV188),
     species: CATALOG_UNKNOWN_V62,
     subspecies: CATALOG_UNKNOWN_V62,
     caste: CATALOG_UNKNOWN_V62,

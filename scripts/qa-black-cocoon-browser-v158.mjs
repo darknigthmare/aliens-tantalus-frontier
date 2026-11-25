@@ -40,7 +40,8 @@ const observation = () => {
       heldWeaponId: p.heldWeaponVisualV125?.weaponId || null },
     native: { elapsed: s.elapsed, freed: s.freed, cut: s.cocoonProgress, freedAt: s.freedAtV158,
       noise: s.noise, equipmentRecovered: s.equipmentRecovered, phase: s.phase },
-    presentation: e.blackCocoonPresentationV158?.(), resume: structuredClone(e.lastResumeResult) };
+    presentation: e.blackCocoonPresentationV158?.(), resume: structuredClone(e.lastResumeResult),
+    terminalSave: e.terminalSaveV188 ? structuredClone(e.terminalSaveV188) : null };
 };
 const snapshot = () => page.evaluate(observation);
 const check = (name, evidence) => { report.checks.push({ name, evidence }); };
@@ -57,15 +58,33 @@ async function saveObservedFrame(handle, name) {
   return frame.observation;
 }
 async function ready() {
+  const deadline = performance.now() + 45000;
+  const remaining = () => {
+    const milliseconds = Math.floor(deadline - performance.now());
+    if (milliseconds <= 0) throw new Error('Cocon runtime readiness exceeded its launch budget.');
+    return milliseconds;
+  };
+  const skipSelector = '.insertion-cinematic-v188[data-direction="insertion"] .insertion-skip-v188';
+  const skip = page.locator(skipSelector);
   for (let i = 0; i < 30; i++) {
-    if (await page.evaluate(() => !!globalThis.__ATF_GAME__?.running)) break;
+    if (await page.evaluate(() => !!globalThis.__ATF_GAME__?.running) || await skip.isVisible()) break;
     const advance = page.locator('[data-insertion-action="advance"]');
-    if (await advance.isVisible()) await advance.click();
-    await page.waitForTimeout(200);
+    if (await advance.isVisible()) await advance.click({ timeout: remaining() });
+    await page.waitForTimeout(Math.min(200, remaining()));
   }
-  await page.waitForFunction(() => { const e = globalThis.__ATF_GAME__; return e?.running && !e.paused
-    && !e.enemyAtlasLoadingPausedV65 && !e.userCasteLoadingV88 && e.blackCocoonV121?.operationId === 'black-cocoon'; }, null, { timeout: 45000 });
-  await page.locator('#game-canvas').focus();
+  const runtimeReady = () => { const e = globalThis.__ATF_GAME__; return e?.running && !e.paused
+    && !e.enemyAtlasLoadingPausedV65 && !e.userCasteLoadingV88 && !e.dropshipHandoverBlocksV188?.()
+    && e.blackCocoonV121?.operationId === 'black-cocoon'; };
+  // Use the visible native flight control, retaining launches/resumes without
+  // a cinematic and one deadline for the briefing, handover and asset readiness.
+  await page.waitForFunction(`selector => {
+    const skip = document.querySelector(selector);
+    return (${runtimeReady.toString()})() || Boolean(skip && skip.getClientRects().length
+      && getComputedStyle(skip).visibility !== 'hidden');
+  }`, skipSelector, { timeout: remaining() });
+  if (await skip.isVisible()) await skip.click({ timeout: remaining() });
+  await page.waitForFunction(runtimeReady, null, { timeout: remaining() });
+  await page.locator('#game-canvas').focus({ timeout: remaining() });
 }
 async function launch() {
   const context = await browser.newContext({ viewport: { width: 1600, height: 1000 }, serviceWorkers: 'block' });
@@ -96,6 +115,57 @@ async function holdUntil(code, condition) {
   finally { await page.keyboard.up(code); }
 }
 
+async function savePartialCocoonAtTerminal(page, partial, timeout = 45000) {
+  const deadline = performance.now() + timeout;
+  const remaining = () => {
+    const milliseconds = Math.floor(deadline - performance.now());
+    if (milliseconds <= 0) throw Error('Cocon terminal save exceeded its original checkpoint budget.');
+    return milliseconds;
+  };
+  const before = await page.evaluate(() => {
+    const e = globalThis.__ATF_GAME__, s = globalThis.__ATF_V51__.saveSystem.data;
+    const key = `atf-v47-profile-${s.profile}`, stored = JSON.parse(localStorage.getItem(key));
+    return { key, updatedAt: stored?.updatedAt || 0, operationId: s.strategy.currentOperation?.id,
+      campaign: e.campaign?.id, active: e.running && e.mission?.state === 'active', paused: e.paused,
+      cut: e.blackCocoonV121?.cocoonProgress, freed: e.blackCocoonV121?.freed,
+      policy: e.missionSavePolicyV188?.() };
+  });
+  assert.ok(before.active && before.paused && before.operationId && before.campaign === 'special-black-cocoon');
+  assert.equal(before.cut, partial.native.cut); assert.equal(before.freed, false);
+  assert.equal(before.policy.mode, 'terminal'); assert.equal(before.policy.allowed, false);
+  await page.locator('#mission-save-v86').click({ timeout: remaining() });
+  await page.waitForFunction(() => {
+    const e = globalThis.__ATF_GAME__, terminal = e.terminalSaveV188;
+    return e.paused && terminal?.remaining > 0 && terminal.remaining <= terminal.total;
+  }, null, { timeout: remaining() });
+  const started = await page.evaluate(() => ({ ...globalThis.__ATF_GAME__.terminalSaveV188 }));
+  // Horror terminals require exposed native time. Resume without holding E so
+  // the partial cut stays exact while the real terminal countdown completes.
+  await page.locator('#game-canvas').focus({ timeout: remaining() });
+  await page.keyboard.press('KeyP');
+  await page.waitForFunction(() => globalThis.__ATF_GAME__.paused === false, null, { timeout: remaining() });
+  await page.waitForFunction(({ key, updatedAt, operationId, cut }) => {
+    const stored = JSON.parse(localStorage.getItem(key)), operation = stored?.strategy?.currentOperation;
+    const state = operation?.resumeState?.specialOperation?.blackCocoonV121;
+    return !globalThis.__ATF_GAME__.terminalSaveV188 && stored.updatedAt > updatedAt
+      && operation?.id === operationId && state?.cocoonProgress === cut && state.freed === false;
+  }, { ...before, cut: partial.native.cut }, { timeout: remaining() });
+  await page.locator('#game-canvas').focus({ timeout: remaining() });
+  if (!await page.evaluate(() => globalThis.__ATF_GAME__.paused)) await page.keyboard.press('KeyP');
+  await page.waitForFunction(() => globalThis.__ATF_GAME__.paused === true, null, { timeout: remaining() });
+  const after = await page.evaluate(key => {
+    const e = globalThis.__ATF_GAME__, p = e.player, stored = JSON.parse(localStorage.getItem(key));
+    return { operationId: stored.strategy.currentOperation.id, updatedAt: stored.updatedAt,
+      cut: e.blackCocoonV121.cocoonProgress, freed: e.blackCocoonV121.freed,
+      health: p.health, ammo: p.ammo, reserve: p.ammoReserve, appearance: structuredClone(p.appearanceV126) };
+  }, before.key);
+  assert.equal(after.operationId, before.operationId); assert.equal(after.cut, partial.native.cut); assert.equal(after.freed, false);
+  for (const key of ['health', 'ammo', 'reserve']) assert.equal(after[key], partial.player[key], key);
+  assert.equal(JSON.stringify(after.appearance), JSON.stringify(partial.player.appearance));
+  return { operationId: before.operationId, started, committedAt: after.updatedAt, previousCommitAt: before.updatedAt,
+    partialCut: after.cut, timeLimitSeconds: timeout / 1000 };
+}
+
 async function main() {
   await fs.mkdir(output, { recursive: true });
   const module = await playwright(), { chromium } = module.chromium ? module : module.default;
@@ -116,11 +186,8 @@ async function main() {
   await capture('02-partial-cut-paused.png'); check('Held native E cuts progressively and pause freezes the same cut, pose and clock', partial);
 
   phase('native mission save and real reload/Continue');
-  await page.locator('#mission-save-v86').click();
-  await page.waitForFunction(cut => {
-    const state = JSON.parse(localStorage.getItem('atf-v47-profile-1'))?.strategy?.currentOperation?.resumeState?.specialOperation?.blackCocoonV121;
-    return state?.cocoonProgress === cut && state.freed === false;
-  }, partial.native.cut);
+  report.nativeTerminalSave = await savePartialCocoonAtTerminal(page, partial);
+  check('Native terminal advances without cutting and commits the same partial cut and resources', report.nativeTerminalSave);
   await page.reload({ waitUntil: 'domcontentloaded' }); await page.locator('#title-start').click();
   if (await page.locator('#title-continue').isVisible()) await page.locator('#title-continue').click();
   await page.locator('[data-view="command"]').click(); await page.locator('#continue-operation').click(); await ready();

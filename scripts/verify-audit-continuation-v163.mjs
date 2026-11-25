@@ -1,4 +1,23 @@
+import { XENO_VISUAL_ASSETS_SUCCESSORS_V205, XENO_VISUAL_ASSETS_NEW_INPUTS_V205 } from './audit-xeno-visual-assets-v205.mjs';
 import test from 'node:test';
+import { COMPLETION_SOURCES_V186, completionRuntimeSourcesV186, reviewedCompletionDigestV186 } from './audit-xeno-trials-completion-v186.mjs';
+import { STAGE_OPERATIONS_SUCCESSORS_V188, STAGE_OPERATIONS_NEW_INPUTS_V188 } from './audit-xeno-stage-operations-v188.mjs';
+import { ANIMATION_AUDIO_SUCCESSORS_V189, ANIMATION_AUDIO_NEW_INPUTS_V189 } from './audit-xeno-animation-audio-v189.mjs';
+import { ARBITER_CAMPAIGN_SUCCESSORS_V190, ARBITER_CAMPAIGN_NEW_INPUTS_V190 } from './audit-xeno-arbiter-campaign-v190.mjs';
+import { ARBITER_PROTOCOLS_SUCCESSORS_V191, ARBITER_PROTOCOLS_NEW_INPUTS_V191 } from './audit-xeno-arbiter-protocols-v191.mjs';
+import { FRANCHISE_STAGES_SUCCESSORS_V192, FRANCHISE_STAGES_NEW_INPUTS_V192 } from './audit-xeno-franchise-stages-v192.mjs';
+import { ORIGINAL_ARENAS_SUCCESSORS_V193, ORIGINAL_ARENAS_NEW_INPUTS_V193 } from './audit-xeno-original-arenas-v193.mjs';
+import { ICONIC_STAGES_SUCCESSORS_V194, ICONIC_STAGES_NEW_INPUTS_V194 } from './audit-xeno-iconic-stages-v194.mjs';
+import { STAGE_CLASSIFICATION_SUCCESSORS_V195, STAGE_CLASSIFICATION_NEW_INPUTS_V195 } from './audit-xeno-stage-classification-v195.mjs';
+import { REFERENCED_FILM_STAGES_SUCCESSORS_V196, REFERENCED_FILM_STAGES_NEW_INPUTS_V196 } from './audit-xeno-referenced-film-stages-v196.mjs';
+import { XENO_PRIORITIES_SUCCESSORS_V197, XENO_PRIORITIES_NEW_INPUTS_V197 } from './audit-xeno-priorities-v197.mjs';
+import { XENO_PRIORITY_STAGES_SUCCESSORS_V198, XENO_PRIORITY_STAGES_NEW_INPUTS_V198 } from './audit-xeno-priority-stages-v198.mjs';
+import { XENO_PRIORITIES_SUCCESSORS_V199, XENO_PRIORITIES_NEW_INPUTS_V199 } from './audit-xeno-priorities-v199.mjs';
+import { XENO_SUPERS_SUCCESSORS_V200, XENO_SUPERS_NEW_INPUTS_V200 } from './audit-xeno-supers-v200.mjs';
+import { XENO_PRIORITIES_SUCCESSORS_V201, XENO_PRIORITIES_NEW_INPUTS_V201 } from './audit-xeno-priorities-v201.mjs';
+import { XENO_PRIORITIES_SUCCESSORS_V202, XENO_PRIORITIES_NEW_INPUTS_V202 } from './audit-xeno-priorities-v202.mjs';
+import { XENO_PRIORITIES_SUCCESSORS_V203, XENO_PRIORITIES_NEW_INPUTS_V203 } from './audit-xeno-priorities-v203.mjs';
+import { XENO_PRIORITIES_SUCCESSORS_V204, XENO_PRIORITIES_NEW_INPUTS_V204 } from './audit-xeno-priorities-v204.mjs';
 import { reviewedOriginalNamesDigestV183 } from './audit-original-names-v183.mjs';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -20,11 +39,13 @@ import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AU
   V165_VERIFIER_SUCCESSORS_V177, verifyReviewedVerifierV177,
   verifyOpenWorkstreamsV177, V177_ARSENAL_SOURCE_INPUTS, V177_RUNTIME_PREDECESSORS, V177_TOOL_SUCCESSORS,
   V178_RUNTIME_SUCCESSORS, V178_VERIFIER_SUCCESSORS, V178_QA_SUCCESSORS,
-  reviewedLiveDigestV178, reviewedCurrentDigestV179, reviewedMainNDigestV179, V179_SOURCE_GROUPS, verifyFollowupV179, historicalProgressViewV179, verifyFollowupV178 } from './audit-succession-v163.mjs';
+  reviewedLiveDigestV178, reviewedCurrentDigestV179, reviewedCurrentDigestV180, reviewedMainNDigestV179, V179_SOURCE_GROUPS, verifyFollowupV179, historicalProgressViewV179, verifyFollowupV178 } from './audit-succession-v163.mjs';
 import { INTEGRATION_SOURCES_V182, INTEGRATION_BASELINE_V182, INTEGRATION_SOURCE_ONLY_PATHS_V182,
   AI_TOOLING_FOLLOWUP_20261104, QA_BRANCH_CONSTANTS_V181, reviewedIntegrationDigestV182,
   historicalIntegrationViewV182, integratedRuntimeSourcesV182, verifyIntegrationV182,
   verifyQaBranchV181, qaProgressViewV181, reviewedQaBranchDigestV181 } from './audit-pr-integration-v182.mjs';
+import { V179_BASELINE_COMMIT, V179_RUNTIME_SUCCESSORS, V179_VERIFIER_SUCCESSORS, V179_BRIDGE_SUCCESSORS, V179_NEW_RUNTIME_SOURCES, V179_NEW_VERIFIERS, reviewedDigestV179, verifyFollowupV179 as verifyTrialsBatchV179 } from './audit-succession-v179.mjs';
+import { V180_BASELINE_COMMIT, V180_V179_CONSTANTS_SHA256, V180_PROGRESS_V163_SHA256, V180_RUNTIME_SUCCESSORS, V180_VERIFIER_SUCCESSORS, V180_BRIDGE_SUCCESSORS, V180_NEW_RUNTIME_SOURCES, V180_NEW_VERIFIERS, reviewedDigestV180, verifyFollowupV180 } from './audit-succession-v180.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
 import { resolveAuditSourcesV161 } from './audit-succession-v161.mjs';
 import { isPublicDistributionPathV86, isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
@@ -36,6 +57,75 @@ const current = JSON.parse(read(prefix + 'progress-v163.json'));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const clone = value => structuredClone(value);
 const effectiveSource = (path, historical) => reviewedCurrentDigestV179(path, V177_SOURCE_SUCCESSORS[path]?.currentSha256 || historical);
+
+test('V180 pins the real horde, MIRE terminal and admitted media without rewriting any V179 receipt', () => {
+  assert.equal(V180_BASELINE_COMMIT, 'd516dda1f39d5112d46c638d2d58a06fdd2ecee3');
+  const canonical = value => Array.isArray(value) ? '[' + value.map(canonical).join(',') + ']'
+    : value && typeof value === 'object' ? '{' + Object.keys(value).sort().map(key => JSON.stringify(key) + ':' + canonical(value[key])).join(',') + '}' : JSON.stringify(value);
+  assert.equal(sha(Buffer.from(canonical({ V179_BASELINE_COMMIT, V179_RUNTIME_SUCCESSORS,
+    V179_VERIFIER_SUCCESSORS, V179_BRIDGE_SUCCESSORS, V179_NEW_RUNTIME_SOURCES, V179_NEW_VERIFIERS }))), V180_V179_CONSTANTS_SHA256);
+  assert.equal(sha(read(prefix + 'progress-v163.json')), reviewedCompletionDigestV186(prefix + 'progress-v163.json', V180_PROGRESS_V163_SHA256));
+  assert.deepEqual(verifyFollowupV180(read), { baselineCommit: V180_BASELINE_COMMIT,
+    runtimeSuccessors: 10, verifierSuccessors: 4, bridgeSuccessors: 3, newRuntimeSources: 5, newVerifiers: 7 });
+  const effective = resolveAuditSourcesV163(previous, read, { effective: true });
+  for (const [path, receipt] of Object.entries(V180_RUNTIME_SUCCESSORS)) assert.equal(effective[path], reviewedCompletionDigestV186(path,receipt.currentSha256));
+  for (const [path, digest] of Object.entries(V180_NEW_RUNTIME_SOURCES)) assert.equal(effective[path], reviewedCompletionDigestV186(path,digest));
+  assert.ok(Object.hasOwn(V180_NEW_VERIFIERS, 'scripts/public-campaign-art-admissions-v180.mjs'));
+  for (const map of [V180_RUNTIME_SUCCESSORS, V180_VERIFIER_SUCCESSORS, V180_BRIDGE_SUCCESSORS]) {
+    for (const [path, receipt] of Object.entries(map)) {
+      assert.equal(reviewedDigestV180(path, receipt.previousSha256), receipt.currentSha256);
+      assert.equal(sha(read(path)), reviewedCompletionDigestV186(path,receipt.currentSha256), path);
+      assert.throws(() => reviewedDigestV180(path, '0'.repeat(64)), /Incorrect V179 endpoint/, path);
+      const corrupt = name => name === path ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
+      assert.throws(() => verifyFollowupV180(corrupt), /Unreviewed V180/, path);
+      assert.throws(() => verifyAuditSuccessionV163(previous, current, corrupt), undefined, path);
+    }
+  }
+  for (const [path, digest] of Object.entries({ ...V180_NEW_RUNTIME_SOURCES, ...V180_NEW_VERIFIERS })) {
+    assert.equal(sha(read(path)), reviewedCompletionDigestV186(path,digest), path);
+    const corrupt = name => name === path ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
+    assert.throws(() => verifyFollowupV180(corrupt), /Unreviewed V180/, path);
+    assert.throws(() => verifyAuditSuccessionV163(previous, current, corrupt), undefined, path);
+  }
+});
+
+test('Trials batch V179 admits only exact changed bytes and new sources after the immutable V178 witness', () => {
+  assert.equal(V179_BASELINE_COMMIT, 'd41b5fc120da2e7a5938308f9d3c852d20e53cc5');
+  assert.deepEqual(verifyTrialsBatchV179(read), {
+    baselineCommit: V179_BASELINE_COMMIT, runtimeSuccessors: 8, verifierSuccessors: 4,
+    bridgeSuccessors: 2, newRuntimeSources: 5, newVerifiers: 6
+  });
+  const historical = Buffer.from(read(prefix + 'progress-v163.json'));
+  const effective = resolveAuditSourcesV163(previous, read, { effective: true });
+  for (const [path, receipt] of Object.entries(V179_RUNTIME_SUCCESSORS)) {
+    assert.equal(effective[path], reviewedCompletionDigestV186(path,reviewedDigestV180(path, receipt.currentSha256)));
+    assert.throws(() => reviewedDigestV179(path, '0'.repeat(64)), /Incorrect V178 endpoint/);
+    assert.notEqual(receipt.previousSha256, receipt.currentSha256);
+  }
+  for (const [path, hash] of Object.entries(V179_NEW_RUNTIME_SOURCES)) assert.equal(effective[path], reviewedCompletionDigestV186(path,reviewedDigestV180(path, hash)));
+  for (const map of [V179_RUNTIME_SUCCESSORS, V179_VERIFIER_SUCCESSORS, V179_BRIDGE_SUCCESSORS]) {
+    for (const [path, receipt] of Object.entries(map)) {
+      assert.equal(sha(read(path)), reviewedCompletionDigestV186(path,reviewedDigestV180(path, receipt.currentSha256)), path);
+      assert.equal(reviewedDigestV179(path, receipt.previousSha256), receipt.currentSha256);
+      assert.throws(() => reviewedDigestV179(path, '0'.repeat(64)), /Incorrect V178 endpoint/, path);
+      const changed = name => name === path ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
+      assert.throws(() => verifyTrialsBatchV179(changed), /Unreviewed V179/, path);
+      assert.throws(() => verifyAuditSuccessionV163(previous, current, changed), undefined, path);
+    }
+  }
+  for (const [path, hash] of Object.entries({ ...V179_NEW_RUNTIME_SOURCES, ...V179_NEW_VERIFIERS })) {
+    assert.equal(sha(read(path)), reviewedCompletionDigestV186(path,reviewedDigestV180(path, hash)), path);
+    const changed = name => name === path ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
+    assert.throws(() => verifyTrialsBatchV179(changed), /Unreviewed V179/, path);
+    assert.throws(() => verifyAuditSuccessionV163(previous, current, changed), undefined, path);
+  }
+  assert.deepEqual(read(prefix + 'progress-v163.json'), historical);
+  assert.deepEqual(resolveAuditSourcesV163(previous), current.runtimeSourceSha256,
+    'The default resolver remains the historical record');
+  for (const [path, receipt] of Object.entries(V178_VERIFIER_SUCCESSORS))
+    assert.equal(reviewedLiveDigestV178(path, receipt.previousSha256), receipt.currentSha256,
+      'V178 still resolves its own historical endpoint: ' + path);
+});
 
 test('V163 keeps all original task identities, roster and historical table cells unchanged', () => {
   assert.equal(current.lot, 'V163');
@@ -98,7 +188,7 @@ test('the full current bridge validates runtime bytes and older default returns 
   const v161 = JSON.parse(read(prefix + 'progress-v161.json'));
   const v160 = JSON.parse(read(prefix + 'progress-v160.json'));
   assert.deepEqual(resolveAuditSourcesV162(v161), previous.runtimeSourceSha256);
-  const approvedEffectiveV174 = integratedRuntimeSourcesV182({ ...current.runtimeSourceSha256,
+  const approvedEffectiveV174 = completionRuntimeSourcesV186(integratedRuntimeSourcesV182({ ...current.runtimeSourceSha256,
     ...Object.fromEntries(Object.entries(ARSENAL_V167_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARMORY_V169_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARSENAL_V170_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
@@ -111,7 +201,7 @@ test('the full current bridge validates runtime bytes and older default returns 
       .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(V178_RUNTIME_SUCCESSORS).map(([path,receipt]) => [path,receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(V179_SOURCE_GROUPS.runtimeChanges).map(([path,receipt])=>[path,receipt.currentSha256])),
-    ...Object.fromEntries(Object.entries(V179_SOURCE_GROUPS.newRuntimeSources).map(([path,receipt])=>[path,receipt.currentSha256])) });
+    ...Object.fromEntries(Object.entries(V179_SOURCE_GROUPS.newRuntimeSources).map(([path,receipt])=>[path,receipt.currentSha256])) }));
   assert.deepEqual(resolveAuditSourcesV162(v161, read, { effective: true }), approvedEffectiveV174);
   assert.deepEqual(resolveAuditSourcesV161(v160), v161.runtimeSourceSha256);
   assert.deepEqual(resolveAuditSourcesV161(v160, read, { effective: true }), approvedEffectiveV174);
@@ -602,8 +692,37 @@ test('V178 resolves only exact MainM successors while every V177 witness stays h
   const effective=resolveAuditSourcesV163(previous,read,{effective:true});
   assert.deepEqual(Object.keys(effective).filter(path=>Object.hasOwn(current.runtimeSourceSha256,path)).sort(),
     Object.keys(current.runtimeSourceSha256).sort());
-  assert.deepEqual(Object.keys(effective).filter(path=>!Object.hasOwn(current.runtimeSourceSha256,path)).sort(),
-    [...new Set(['src/tactical-reload-v77.js','src/weapon-actions-v130.js',...Object.keys(V179_SOURCE_GROUPS.runtimeChanges),...Object.keys(V179_SOURCE_GROUPS.newRuntimeSources),...Object.entries(INTEGRATION_SOURCES_V182).filter(([,r])=>r.kind==='runtime').map(([path])=>path)].filter(path=>!Object.hasOwn(current.runtimeSourceSha256,path)))].sort(), 'Only explicitly reviewed V179 additions and two historic compatibility exports extend the147witness');
+  const laterReceipts = {
+    ...STAGE_OPERATIONS_SUCCESSORS_V188, ...STAGE_OPERATIONS_NEW_INPUTS_V188,
+    ...ANIMATION_AUDIO_SUCCESSORS_V189, ...ANIMATION_AUDIO_NEW_INPUTS_V189,
+    ...ARBITER_CAMPAIGN_SUCCESSORS_V190, ...ARBITER_CAMPAIGN_NEW_INPUTS_V190,
+    ...ARBITER_PROTOCOLS_SUCCESSORS_V191, ...ARBITER_PROTOCOLS_NEW_INPUTS_V191,
+    ...FRANCHISE_STAGES_SUCCESSORS_V192, ...FRANCHISE_STAGES_NEW_INPUTS_V192,
+    ...ORIGINAL_ARENAS_SUCCESSORS_V193, ...ORIGINAL_ARENAS_NEW_INPUTS_V193,
+    ...ICONIC_STAGES_SUCCESSORS_V194, ...ICONIC_STAGES_NEW_INPUTS_V194,
+    ...STAGE_CLASSIFICATION_SUCCESSORS_V195, ...STAGE_CLASSIFICATION_NEW_INPUTS_V195,
+    ...REFERENCED_FILM_STAGES_SUCCESSORS_V196, ...REFERENCED_FILM_STAGES_NEW_INPUTS_V196,
+    ...XENO_PRIORITIES_SUCCESSORS_V197, ...XENO_PRIORITIES_NEW_INPUTS_V197,
+    ...XENO_PRIORITY_STAGES_SUCCESSORS_V198, ...XENO_PRIORITY_STAGES_NEW_INPUTS_V198,
+    ...XENO_PRIORITIES_SUCCESSORS_V199, ...XENO_PRIORITIES_NEW_INPUTS_V199,
+    ...XENO_SUPERS_SUCCESSORS_V200, ...XENO_SUPERS_NEW_INPUTS_V200,
+    ...XENO_PRIORITIES_SUCCESSORS_V201, ...XENO_PRIORITIES_NEW_INPUTS_V201,
+    ...XENO_PRIORITIES_SUCCESSORS_V202, ...XENO_PRIORITIES_NEW_INPUTS_V202,
+    ...XENO_PRIORITIES_SUCCESSORS_V203, ...XENO_PRIORITIES_NEW_INPUTS_V203,
+    ...XENO_PRIORITIES_SUCCESSORS_V204, ...XENO_PRIORITIES_NEW_INPUTS_V204,
+    ...XENO_VISUAL_ASSETS_SUCCESSORS_V205, ...XENO_VISUAL_ASSETS_NEW_INPUTS_V205
+  };
+  const introducedRuntimePaths = [
+    'src/tactical-reload-v77.js', 'src/weapon-actions-v130.js',
+    ...Object.keys(V179_SOURCE_GROUPS.runtimeChanges),
+    ...Object.keys(V179_SOURCE_GROUPS.newRuntimeSources),
+    ...[INTEGRATION_SOURCES_V182, COMPLETION_SOURCES_V186, laterReceipts]
+      .flatMap(receipts => Object.entries(receipts).filter(([, receipt]) => receipt.kind === 'runtime').map(([path]) => path))
+  ];
+  const extendsWitness = path => !Object.hasOwn(current.runtimeSourceSha256, path);
+  assert.deepEqual(Object.keys(effective).filter(extendsWitness).sort(),
+    [...new Set(introducedRuntimePaths.filter(extendsWitness))].sort(),
+    'Only reviewed successor runtimes and two historic compatibility exports extend the V177 witness');
   assert.equal(current.runtimeSourceSha256['src/npc-interdeck-routes-v165.js'],
     '5330095a1f6d277e71e473c6b741c671fe02c4d4fc44133b3f5a37ccfebb103a');
   assert.equal(effective['src/npc-interdeck-routes-v165.js'],V178_RUNTIME_SUCCESSORS['src/npc-interdeck-routes-v165.js'].currentSha256);

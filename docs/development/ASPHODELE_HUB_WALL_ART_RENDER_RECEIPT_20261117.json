@@ -1,0 +1,2879 @@
+{
+  "schema": "tantalus-asphodele-wall-render-receipt-v1",
+  "tool": "@napi-rs/canvas; production draw methods; real source PNGs via loadImage",
+  "baseCommit": "8fe5d58c33a6ddb9473eb0148019a5f46eaef8bf",
+  "inspectedRevision": "Working tree over baseCommit; exact module hashes recorded below",
+  "sourceHashes": {
+    "src/asphodele-hub-slots-v188.js": "ea98415eab52c0e4c0a6bd66e57d9396848cbf08ca3be19ff4e5c604f2d2d287",
+    "src/hub-asphodele-v188.js": "00e2c1138f4d9726212b346b2c408dadfec98d8f8272d3f0fb019c6b6ea204c9",
+    "src/asphodele-hub-v188.js": "83ed7b2a4517cfacf95cad940379c7d4ec2c4fb08c9792bb01924871171edad0"
+  },
+  "fixture": {
+    "host": "Object with the production Asphodele mixin over HubGame prototype, populated with declared state; not a browser or gameplay traversal",
+    "progression": "Default save plus S1-S4 and journals/hydro/Grue complete; relay-drift=3, module=1, Grue accepted; five colony sites at level2",
+    "player": "Native echo9 locomotion sheet, idle, no custom modular appearance; static time0, reduced motion",
+    "rooms": "All rooms with PNGs are directly selected for raster inspection; camera positions injected; no traversal claim",
+    "language": [
+      "fr",
+      "en"
+    ],
+    "imagePolicy": "Real shipped bytes, unchanged; generated wall image injected into the loader only for slots with a file",
+    "crowd": "Native createAsphodeleCrowdV188 fixtures, frozen at initial positions"
+  },
+  "filesPresent": [
+    "asph-wall-docks",
+    "asph-wall-ring",
+    "asph-wall-spoke",
+    "asph-wall-control",
+    "asph-wall-relay",
+    "asph-wall-lab",
+    "asph-wall-memorial",
+    "asph-wall-greenhouse",
+    "asph-wall-market",
+    "asph-wall-quarters",
+    "asph-wall-medbay",
+    "asph-wall-lower",
+    "asph-wall-repair"
+  ],
+  "admittedWalls": [
+    "asph-wall-docks",
+    "asph-wall-ring",
+    "asph-wall-spoke",
+    "asph-wall-control",
+    "asph-wall-relay",
+    "asph-wall-lab",
+    "asph-wall-memorial",
+    "asph-wall-greenhouse",
+    "asph-wall-market",
+    "asph-wall-quarters",
+    "asph-wall-medbay",
+    "asph-wall-lower",
+    "asph-wall-repair"
+  ],
+  "results": [
+    {
+      "id": "asph-wall-docks",
+      "width": 1999,
+      "height": 787,
+      "bytes": 2288582,
+      "sha256": "64f9bd620c1c23cfde22272208c72a72510374cd1c01b582bbf5aea817bd424b",
+      "tileWidth": 1280.1728081321473,
+      "clip": {
+        "pixelsOutsideWallBounds": 0,
+        "nonOpaquePixelsInsideWallBounds": 0
+      },
+      "camera128Stability": {
+        "changedPixels": 0,
+        "maxChannel": 0,
+        "meanChannel": 0
+      },
+      "seam": {
+        "tileWidth": 1280.1728081321473,
+        "seamX": 1280,
+        "boundaryNeighborhood": [
+          {
+            "x": 1278,
+            "meanDelta": 1.789021164021164
+          },
+          {
+            "x": 1279,
+            "meanDelta": 2.378306878306878
+          },
+          {
+            "x": 1280,
+            "meanDelta": 5.101190476190476
+          },
+          {
+            "x": 1281,
+            "meanDelta": 2.5972222222222223
+          },
+          {
+            "x": 1282,
+            "meanDelta": 2.4041005291005293
+          }
+        ],
+        "allColumnsP95": 6.939814814814815,
+        "allColumnsMax": 17.279761904761905
+      },
+      "rendered": [
+        {
+          "camera": 0,
+          "language": "fr",
+          "path": "asph-docks-fr-cam0.png",
+          "slotUsage": {
+            "asph-wall-docks": "image",
+            "asph-ud4l-docked": "primitive",
+            "asph-door": "primitive",
+            "asph-crucible-shuttle": "primitive",
+            "asph-npc-docker": "primitive",
+            "asph-grue": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 128,
+          "language": "fr",
+          "path": "asph-docks-fr-cam128.png",
+          "slotUsage": {
+            "asph-wall-docks": "image",
+            "asph-ud4l-docked": "primitive",
+            "asph-door": "primitive",
+            "asph-crucible-shuttle": "primitive",
+            "asph-npc-docker": "primitive",
+            "asph-grue": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 768,
+          "language": "fr",
+          "path": "asph-docks-fr-cam768.png",
+          "slotUsage": {
+            "asph-wall-docks": "image",
+            "asph-crucible-shuttle": "primitive",
+            "asph-door": "primitive",
+            "asph-npc-docker": "primitive",
+            "asph-grue": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 0,
+          "language": "en",
+          "path": "asph-docks-en-cam0.png",
+          "slotUsage": {
+            "asph-wall-docks": "image",
+            "asph-ud4l-docked": "primitive",
+            "asph-door": "primitive",
+            "asph-crucible-shuttle": "primitive",
+            "asph-npc-docker": "primitive",
+            "asph-grue": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 128,
+          "language": "en",
+          "path": "asph-docks-en-cam128.png",
+          "slotUsage": {
+            "asph-wall-docks": "image",
+            "asph-ud4l-docked": "primitive",
+            "asph-door": "primitive",
+            "asph-crucible-shuttle": "primitive",
+            "asph-npc-docker": "primitive",
+            "asph-grue": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 768,
+          "language": "en",
+          "path": "asph-docks-en-cam768.png",
+          "slotUsage": {
+            "asph-wall-docks": "image",
+            "asph-crucible-shuttle": "primitive",
+            "asph-door": "primitive",
+            "asph-npc-docker": "primitive",
+            "asph-grue": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        }
+      ],
+      "doors": [
+        {
+          "id": "docks-tantalus",
+          "x": 150,
+          "state": "shuttle",
+          "opaqueNativePixels": 16936,
+          "differingOpaquePixels": 0,
+          "imageVsFallbackDoor": {
+            "changedPixels": 0,
+            "maxChannel": 0,
+            "meanChannel": 0
+          }
+        },
+        {
+          "id": "docks-echo8",
+          "x": 560,
+          "state": "locked",
+          "opaqueNativePixels": 16936,
+          "differingOpaquePixels": 0,
+          "imageVsFallbackDoor": {
+            "changedPixels": 0,
+            "maxChannel": 0,
+            "meanChannel": 0
+          }
+        },
+        {
+          "id": "docks-grue",
+          "x": 980,
+          "state": "locked",
+          "opaqueNativePixels": 16936,
+          "differingOpaquePixels": 0,
+          "imageVsFallbackDoor": {
+            "changedPixels": 0,
+            "maxChannel": 0,
+            "meanChannel": 0
+          }
+        }
+      ],
+      "layerAudits": [
+        {
+          "camera": 0,
+          "layers": [
+            {
+              "id": "docks-tantalus",
+              "type": "door",
+              "state": "shuttle",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "docks-echo8",
+              "type": "door",
+              "state": "locked",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "docks-grue",
+              "type": "door",
+              "state": "locked",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        },
+        {
+          "camera": 128,
+          "layers": [
+            {
+              "id": "docks-tantalus",
+              "type": "door",
+              "state": "shuttle",
+              "opaquePixels": 11820,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "docks-echo8",
+              "type": "door",
+              "state": "locked",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "docks-grue",
+              "type": "door",
+              "state": "locked",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        },
+        {
+          "camera": 768,
+          "layers": [
+            {
+              "id": "docks-grue",
+              "type": "door",
+              "state": "locked",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "docks-repair",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "docks-ring",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        }
+      ]
+    },
+    {
+      "id": "asph-wall-ring",
+      "width": 1983,
+      "height": 793,
+      "bytes": 2498984,
+      "sha256": "f4b10a096e0f350bd98e930fe45c87e63555ee3ab149a4e0f8d84c2501bdda2b",
+      "tileWidth": 1260.3177805800756,
+      "clip": {
+        "pixelsOutsideWallBounds": 0,
+        "nonOpaquePixelsInsideWallBounds": 0
+      },
+      "camera128Stability": {
+        "changedPixels": 0,
+        "maxChannel": 0,
+        "meanChannel": 0
+      },
+      "seam": {
+        "tileWidth": 1260.3177805800756,
+        "seamX": 1260,
+        "boundaryNeighborhood": [
+          {
+            "x": 1258,
+            "meanDelta": 5.319444444444445
+          },
+          {
+            "x": 1259,
+            "meanDelta": 11.268518518518519
+          },
+          {
+            "x": 1260,
+            "meanDelta": 4.828703703703703
+          },
+          {
+            "x": 1261,
+            "meanDelta": 14.025132275132275
+          },
+          {
+            "x": 1262,
+            "meanDelta": 9.015873015873016
+          }
+        ],
+        "allColumnsP95": 12.036375661375661,
+        "allColumnsMax": 23.662037037037038
+      },
+      "rendered": [
+        {
+          "camera": 0,
+          "language": "fr",
+          "path": "asph-ring-fr-cam0.png",
+          "slotUsage": {
+            "asph-wall-ring": "image",
+            "asph-door": "primitive",
+            "asph-qz-map": "primitive",
+            "asph-npc-merchant": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 128,
+          "language": "fr",
+          "path": "asph-ring-fr-cam128.png",
+          "slotUsage": {
+            "asph-wall-ring": "image",
+            "asph-door": "primitive",
+            "asph-qz-map": "primitive",
+            "asph-npc-merchant": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 1280,
+          "language": "fr",
+          "path": "asph-ring-fr-cam1280.png",
+          "slotUsage": {
+            "asph-wall-ring": "image",
+            "asph-door": "primitive",
+            "asph-qz-map": "primitive",
+            "asph-npc-merchant": "primitive",
+            "asph-npc-technician": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 0,
+          "language": "en",
+          "path": "asph-ring-en-cam0.png",
+          "slotUsage": {
+            "asph-wall-ring": "image",
+            "asph-door": "primitive",
+            "asph-qz-map": "primitive",
+            "asph-npc-merchant": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 128,
+          "language": "en",
+          "path": "asph-ring-en-cam128.png",
+          "slotUsage": {
+            "asph-wall-ring": "image",
+            "asph-door": "primitive",
+            "asph-qz-map": "primitive",
+            "asph-npc-merchant": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 1280,
+          "language": "en",
+          "path": "asph-ring-en-cam1280.png",
+          "slotUsage": {
+            "asph-wall-ring": "image",
+            "asph-door": "primitive",
+            "asph-qz-map": "primitive",
+            "asph-npc-merchant": "primitive",
+            "asph-npc-technician": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        }
+      ],
+      "doors": [
+        {
+          "id": "ring-docks",
+          "x": 130,
+          "state": "open",
+          "opaqueNativePixels": 16936,
+          "differingOpaquePixels": 0,
+          "imageVsFallbackDoor": {
+            "changedPixels": 0,
+            "maxChannel": 0,
+            "meanChannel": 0
+          }
+        },
+        {
+          "id": "ring-market",
+          "x": 560,
+          "state": "open",
+          "opaqueNativePixels": 16936,
+          "differingOpaquePixels": 0,
+          "imageVsFallbackDoor": {
+            "changedPixels": 0,
+            "maxChannel": 0,
+            "meanChannel": 0
+          }
+        },
+        {
+          "id": "ring-greenhouse",
+          "x": 1000,
+          "state": "open",
+          "opaqueNativePixels": 16936,
+          "differingOpaquePixels": 0,
+          "imageVsFallbackDoor": {
+            "changedPixels": 0,
+            "maxChannel": 0,
+            "meanChannel": 0
+          }
+        }
+      ],
+      "layerAudits": [
+        {
+          "camera": 0,
+          "layers": [
+            {
+              "id": "ring-docks",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "ring-market",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "ring-greenhouse",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        },
+        {
+          "camera": 128,
+          "layers": [
+            {
+              "id": "ring-docks",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 8844,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "ring-market",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "ring-greenhouse",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "ring-memorial",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 3796,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        },
+        {
+          "camera": 1280,
+          "layers": [
+            {
+              "id": "ring-memorial",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "ring-quarters",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "ring-spoke",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "ring-plan",
+              "type": "post",
+              "opaquePixels": 12464,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        }
+      ]
+    },
+    {
+      "id": "asph-wall-spoke",
+      "width": 1999,
+      "height": 786,
+      "bytes": 2512137,
+      "sha256": "75f52bf7e6c8ddac943f040e868acdc609c2304b382968ea7873e9a5e49681d0",
+      "tileWidth": 1281.8015267175572,
+      "clip": {
+        "pixelsOutsideWallBounds": 0,
+        "nonOpaquePixelsInsideWallBounds": 0
+      },
+      "camera128Stability": {
+        "changedPixels": 0,
+        "maxChannel": 0,
+        "meanChannel": 0
+      },
+      "seam": {
+        "tileWidth": 1281.8015267175572,
+        "seamX": 1282,
+        "boundaryNeighborhood": [
+          {
+            "x": 1280,
+            "meanDelta": 16.933201058201057
+          },
+          {
+            "x": 1281,
+            "meanDelta": 10.387566137566138
+          },
+          {
+            "x": 1282,
+            "meanDelta": 3.1494708994708995
+          },
+          {
+            "x": 1283,
+            "meanDelta": 22.519179894179896
+          },
+          {
+            "x": 1284,
+            "meanDelta": 5.197089947089947
+          }
+        ],
+        "allColumnsP95": 10.015873015873016,
+        "allColumnsMax": 23.23148148148148
+      },
+      "rendered": [
+        {
+          "camera": 0,
+          "language": "fr",
+          "path": "asph-spoke-fr-cam0.png",
+          "slotUsage": {
+            "asph-wall-spoke": "image",
+            "asph-door": "primitive",
+            "asph-npc-technician": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 128,
+          "language": "fr",
+          "path": "asph-spoke-fr-cam128.png",
+          "slotUsage": {
+            "asph-wall-spoke": "image",
+            "asph-door": "primitive",
+            "asph-npc-technician": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 256,
+          "language": "fr",
+          "path": "asph-spoke-fr-cam256.png",
+          "slotUsage": {
+            "asph-wall-spoke": "image",
+            "asph-door": "primitive",
+            "asph-npc-technician": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 0,
+          "language": "en",
+          "path": "asph-spoke-en-cam0.png",
+          "slotUsage": {
+            "asph-wall-spoke": "image",
+            "asph-door": "primitive",
+            "asph-npc-technician": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 128,
+          "language": "en",
+          "path": "asph-spoke-en-cam128.png",
+          "slotUsage": {
+            "asph-wall-spoke": "image",
+            "asph-door": "primitive",
+            "asph-npc-technician": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 256,
+          "language": "en",
+          "path": "asph-spoke-en-cam256.png",
+          "slotUsage": {
+            "asph-wall-spoke": "image",
+            "asph-door": "primitive",
+            "asph-npc-technician": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        }
+      ],
+      "doors": [
+        {
+          "id": "spoke-ring",
+          "x": 130,
+          "state": "open",
+          "opaqueNativePixels": 16936,
+          "differingOpaquePixels": 0,
+          "imageVsFallbackDoor": {
+            "changedPixels": 0,
+            "maxChannel": 0,
+            "meanChannel": 0
+          }
+        }
+      ],
+      "layerAudits": [
+        {
+          "camera": 0,
+          "layers": [
+            {
+              "id": "spoke-ring",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        },
+        {
+          "camera": 128,
+          "layers": [
+            {
+              "id": "spoke-ring",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 8844,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "spoke-hub",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 12696,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        },
+        {
+          "camera": 256,
+          "layers": [
+            {
+              "id": "spoke-hub",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        }
+      ]
+    },
+    {
+      "id": "asph-wall-control",
+      "width": 1999,
+      "height": 786,
+      "bytes": 2069253,
+      "sha256": "bcdb1bf3ea101cb0098dee6ed8028d15c13725726acd0eb7d02038799fcb4584",
+      "tileWidth": 1281.8015267175572,
+      "clip": {
+        "pixelsOutsideWallBounds": 0,
+        "nonOpaquePixelsInsideWallBounds": 0
+      },
+      "camera128Stability": {
+        "changedPixels": 0,
+        "maxChannel": 0,
+        "meanChannel": 0
+      },
+      "seam": {
+        "tileWidth": 1281.8015267175572,
+        "seamX": 1282,
+        "boundaryNeighborhood": [
+          {
+            "x": 1280,
+            "meanDelta": 17.641534391534393
+          },
+          {
+            "x": 1281,
+            "meanDelta": 6.610449735449736
+          },
+          {
+            "x": 1282,
+            "meanDelta": 5.337962962962963
+          },
+          {
+            "x": 1283,
+            "meanDelta": 13.238756613756614
+          },
+          {
+            "x": 1284,
+            "meanDelta": 16.352513227513228
+          }
+        ],
+        "allColumnsP95": 11.145502645502646,
+        "allColumnsMax": 25.355820105820104
+      },
+      "rendered": [
+        {
+          "camera": 0,
+          "language": "fr",
+          "path": "asph-control-fr-cam0.png",
+          "slotUsage": {
+            "asph-wall-control": "image",
+            "asph-door": "primitive",
+            "asph-qz-map": "primitive",
+            "asph-cassius-core": "primitive",
+            "asph-npc-technician": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 128,
+          "language": "fr",
+          "path": "asph-control-fr-cam128.png",
+          "slotUsage": {
+            "asph-wall-control": "image",
+            "asph-door": "primitive",
+            "asph-qz-map": "primitive",
+            "asph-cassius-core": "primitive",
+            "asph-npc-technician": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 768,
+          "language": "fr",
+          "path": "asph-control-fr-cam768.png",
+          "slotUsage": {
+            "asph-wall-control": "image",
+            "asph-door": "primitive",
+            "asph-qz-map": "primitive",
+            "asph-cassius-core": "primitive",
+            "asph-npc-technician": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 0,
+          "language": "en",
+          "path": "asph-control-en-cam0.png",
+          "slotUsage": {
+            "asph-wall-control": "image",
+            "asph-door": "primitive",
+            "asph-qz-map": "primitive",
+            "asph-cassius-core": "primitive",
+            "asph-npc-technician": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 128,
+          "language": "en",
+          "path": "asph-control-en-cam128.png",
+          "slotUsage": {
+            "asph-wall-control": "image",
+            "asph-door": "primitive",
+            "asph-qz-map": "primitive",
+            "asph-cassius-core": "primitive",
+            "asph-npc-technician": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 768,
+          "language": "en",
+          "path": "asph-control-en-cam768.png",
+          "slotUsage": {
+            "asph-wall-control": "image",
+            "asph-door": "primitive",
+            "asph-qz-map": "primitive",
+            "asph-cassius-core": "primitive",
+            "asph-npc-technician": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        }
+      ],
+      "doors": [
+        {
+          "id": "control-spoke",
+          "x": 130,
+          "state": "open",
+          "opaqueNativePixels": 16936,
+          "differingOpaquePixels": 0,
+          "imageVsFallbackDoor": {
+            "changedPixels": 0,
+            "maxChannel": 0,
+            "meanChannel": 0
+          }
+        },
+        {
+          "id": "control-relay",
+          "x": 1160,
+          "state": "open",
+          "opaqueNativePixels": 16936,
+          "differingOpaquePixels": 0,
+          "imageVsFallbackDoor": {
+            "changedPixels": 0,
+            "maxChannel": 0,
+            "meanChannel": 0
+          }
+        }
+      ],
+      "layerAudits": [
+        {
+          "camera": 0,
+          "layers": [
+            {
+              "id": "control-spoke",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "control-relay",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "control-board",
+              "type": "post",
+              "opaquePixels": 44880,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "control-cassius",
+              "type": "post",
+              "opaquePixels": 36128,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        },
+        {
+          "camera": 128,
+          "layers": [
+            {
+              "id": "control-spoke",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 8844,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "control-relay",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "control-lab",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 6716,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "control-board",
+              "type": "post",
+              "opaquePixels": 44880,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "control-cassius",
+              "type": "post",
+              "opaquePixels": 36128,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        },
+        {
+          "camera": 768,
+          "layers": [
+            {
+              "id": "control-relay",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "control-lab",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "control-medbay",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "control-lower",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "control-cassius",
+              "type": "post",
+              "opaquePixels": 16272,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        }
+      ]
+    },
+    {
+      "id": "asph-wall-relay",
+      "width": 1999,
+      "height": 786,
+      "bytes": 2378371,
+      "sha256": "b12d60009f10bcd31a118cde7477ae6f83f75bab5438fc08d2dd63a683c52804",
+      "tileWidth": 1281.8015267175572,
+      "clip": {
+        "pixelsOutsideWallBounds": 0,
+        "nonOpaquePixelsInsideWallBounds": 0
+      },
+      "camera128Stability": {
+        "changedPixels": 0,
+        "maxChannel": 0,
+        "meanChannel": 0
+      },
+      "seam": {
+        "tileWidth": 1281.8015267175572,
+        "seamX": 1282,
+        "boundaryNeighborhood": [
+          {
+            "x": 1280,
+            "meanDelta": 6.021825396825397
+          },
+          {
+            "x": 1281,
+            "meanDelta": 19.28968253968254
+          },
+          {
+            "x": 1282,
+            "meanDelta": 13.683201058201059
+          },
+          {
+            "x": 1283,
+            "meanDelta": 8.279761904761905
+          },
+          {
+            "x": 1284,
+            "meanDelta": 6.6878306878306875
+          }
+        ],
+        "allColumnsP95": 18.264550264550266,
+        "allColumnsMax": 52.50661375661376
+      },
+      "rendered": [
+        {
+          "camera": 0,
+          "language": "fr",
+          "path": "asph-relay-fr-cam0.png",
+          "slotUsage": {
+            "asph-wall-relay": "image",
+            "asph-door": "primitive",
+            "asph-relay-bays": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 0,
+          "language": "en",
+          "path": "asph-relay-en-cam0.png",
+          "slotUsage": {
+            "asph-wall-relay": "image",
+            "asph-door": "primitive",
+            "asph-relay-bays": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        }
+      ],
+      "doors": [
+        {
+          "id": "relay-control",
+          "x": 130,
+          "state": "open",
+          "opaqueNativePixels": 16936,
+          "differingOpaquePixels": 0,
+          "imageVsFallbackDoor": {
+            "changedPixels": 0,
+            "maxChannel": 0,
+            "meanChannel": 0
+          }
+        }
+      ],
+      "layerAudits": [
+        {
+          "camera": 0,
+          "layers": [
+            {
+              "id": "relay-control",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "relay-bays",
+              "type": "post",
+              "opaquePixels": 91260,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        }
+      ]
+    },
+    {
+      "id": "asph-wall-lab",
+      "width": 1999,
+      "height": 787,
+      "bytes": 2254877,
+      "sha256": "c1ac7ffce27196611bb9f4a383d5a47b23728f1794d7d8869b2b693c93d22fe6",
+      "tileWidth": 1280.1728081321473,
+      "clip": {
+        "pixelsOutsideWallBounds": 0,
+        "nonOpaquePixelsInsideWallBounds": 0
+      },
+      "camera128Stability": {
+        "changedPixels": 0,
+        "maxChannel": 0,
+        "meanChannel": 0
+      },
+      "seam": {
+        "tileWidth": 1280.1728081321473,
+        "seamX": 1280,
+        "boundaryNeighborhood": [
+          {
+            "x": 1278,
+            "meanDelta": 10.796296296296296
+          },
+          {
+            "x": 1279,
+            "meanDelta": 13.685185185185185
+          },
+          {
+            "x": 1280,
+            "meanDelta": 5.946428571428571
+          },
+          {
+            "x": 1281,
+            "meanDelta": 10.382275132275133
+          },
+          {
+            "x": 1282,
+            "meanDelta": 21.375661375661377
+          }
+        ],
+        "allColumnsP95": 11.25925925925926,
+        "allColumnsMax": 34.892195767195766
+      },
+      "rendered": [
+        {
+          "camera": 0,
+          "language": "fr",
+          "path": "asph-lab-fr-cam0.png",
+          "slotUsage": {
+            "asph-wall-lab": "image",
+            "asph-door": "primitive",
+            "asph-cradles": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 0,
+          "language": "en",
+          "path": "asph-lab-en-cam0.png",
+          "slotUsage": {
+            "asph-wall-lab": "image",
+            "asph-door": "primitive",
+            "asph-cradles": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        }
+      ],
+      "doors": [
+        {
+          "id": "lab-control",
+          "x": 130,
+          "state": "open",
+          "opaqueNativePixels": 16936,
+          "differingOpaquePixels": 0,
+          "imageVsFallbackDoor": {
+            "changedPixels": 0,
+            "maxChannel": 0,
+            "meanChannel": 0
+          }
+        }
+      ],
+      "layerAudits": [
+        {
+          "camera": 0,
+          "layers": [
+            {
+              "id": "lab-control",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "lab-archives",
+              "type": "post",
+              "opaquePixels": 15400,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        }
+      ]
+    },
+    {
+      "id": "asph-wall-memorial",
+      "width": 1983,
+      "height": 793,
+      "bytes": 2276153,
+      "sha256": "82472a606a996d52cf446559a15ee58debe09bc44cd86a453d1759f0a84d00d5",
+      "tileWidth": 1260.3177805800756,
+      "clip": {
+        "pixelsOutsideWallBounds": 0,
+        "nonOpaquePixelsInsideWallBounds": 0
+      },
+      "camera128Stability": {
+        "changedPixels": 0,
+        "maxChannel": 0,
+        "meanChannel": 0
+      },
+      "seam": {
+        "tileWidth": 1260.3177805800756,
+        "seamX": 1260,
+        "boundaryNeighborhood": [
+          {
+            "x": 1258,
+            "meanDelta": 8.734788359788359
+          },
+          {
+            "x": 1259,
+            "meanDelta": 11.94047619047619
+          },
+          {
+            "x": 1260,
+            "meanDelta": 4.7976190476190474
+          },
+          {
+            "x": 1261,
+            "meanDelta": 3.7123015873015874
+          },
+          {
+            "x": 1262,
+            "meanDelta": 7.5621693121693125
+          }
+        ],
+        "allColumnsP95": 7.152777777777778,
+        "allColumnsMax": 15.977513227513228
+      },
+      "rendered": [
+        {
+          "camera": 0,
+          "language": "fr",
+          "path": "asph-memorial-fr-cam0.png",
+          "slotUsage": {
+            "asph-wall-memorial": "image",
+            "asph-door": "primitive",
+            "asph-memorial-plaques": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 0,
+          "language": "en",
+          "path": "asph-memorial-en-cam0.png",
+          "slotUsage": {
+            "asph-wall-memorial": "image",
+            "asph-door": "primitive",
+            "asph-memorial-plaques": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        }
+      ],
+      "doors": [
+        {
+          "id": "memorial-ring",
+          "x": 130,
+          "state": "open",
+          "opaqueNativePixels": 16936,
+          "differingOpaquePixels": 0,
+          "imageVsFallbackDoor": {
+            "changedPixels": 0,
+            "maxChannel": 0,
+            "meanChannel": 0
+          }
+        }
+      ],
+      "layerAudits": [
+        {
+          "camera": 0,
+          "layers": [
+            {
+              "id": "memorial-ring",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "memorial-plaques",
+              "type": "post",
+              "opaquePixels": 72864,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        }
+      ]
+    },
+    {
+      "id": "asph-wall-greenhouse",
+      "width": 1999,
+      "height": 786,
+      "bytes": 2559213,
+      "sha256": "68fbf53eb13a2a78b04ba8d5ed7adf2c4bd93adda1357b63b40d8a5fcff1112b",
+      "tileWidth": 1281.8015267175572,
+      "clip": {
+        "pixelsOutsideWallBounds": 0,
+        "nonOpaquePixelsInsideWallBounds": 0
+      },
+      "camera128Stability": {
+        "changedPixels": 0,
+        "maxChannel": 0,
+        "meanChannel": 0
+      },
+      "seam": {
+        "tileWidth": 1281.8015267175572,
+        "seamX": 1282,
+        "boundaryNeighborhood": [
+          {
+            "x": 1280,
+            "meanDelta": 5.758597883597884
+          },
+          {
+            "x": 1281,
+            "meanDelta": 19.462962962962962
+          },
+          {
+            "x": 1282,
+            "meanDelta": 13.938492063492063
+          },
+          {
+            "x": 1283,
+            "meanDelta": 19.138227513227513
+          },
+          {
+            "x": 1284,
+            "meanDelta": 5.757275132275132
+          }
+        ],
+        "allColumnsP95": 9.626984126984127,
+        "allColumnsMax": 30.905423280423282
+      },
+      "rendered": [
+        {
+          "camera": 0,
+          "language": "fr",
+          "path": "asph-greenhouse-fr-cam0.png",
+          "slotUsage": {
+            "asph-wall-greenhouse": "image",
+            "asph-door": "primitive",
+            "asph-hydro-bays": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 0,
+          "language": "en",
+          "path": "asph-greenhouse-en-cam0.png",
+          "slotUsage": {
+            "asph-wall-greenhouse": "image",
+            "asph-door": "primitive",
+            "asph-hydro-bays": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        }
+      ],
+      "doors": [
+        {
+          "id": "greenhouse-ring",
+          "x": 130,
+          "state": "open",
+          "opaqueNativePixels": 16936,
+          "differingOpaquePixels": 0,
+          "imageVsFallbackDoor": {
+            "changedPixels": 0,
+            "maxChannel": 0,
+            "meanChannel": 0
+          }
+        }
+      ],
+      "layerAudits": [
+        {
+          "camera": 0,
+          "layers": [
+            {
+              "id": "greenhouse-ring",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "greenhouse-bays",
+              "type": "post",
+              "opaquePixels": 19008,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        }
+      ]
+    },
+    {
+      "id": "asph-wall-market",
+      "width": 1983,
+      "height": 793,
+      "bytes": 2359966,
+      "sha256": "411bdf3ffc66ed6cb2d6c082e5b371401bcb8ec8fc498d633c553b7fa665d141",
+      "tileWidth": 1260.3177805800756,
+      "clip": {
+        "pixelsOutsideWallBounds": 0,
+        "nonOpaquePixelsInsideWallBounds": 0
+      },
+      "camera128Stability": {
+        "changedPixels": 0,
+        "maxChannel": 0,
+        "meanChannel": 0
+      },
+      "seam": {
+        "tileWidth": 1260.3177805800756,
+        "seamX": 1260,
+        "boundaryNeighborhood": [
+          {
+            "x": 1258,
+            "meanDelta": 2.3544973544973544
+          },
+          {
+            "x": 1259,
+            "meanDelta": 3.9775132275132274
+          },
+          {
+            "x": 1260,
+            "meanDelta": 3.7268518518518516
+          },
+          {
+            "x": 1261,
+            "meanDelta": 3.0304232804232805
+          },
+          {
+            "x": 1262,
+            "meanDelta": 2.0972222222222223
+          }
+        ],
+        "allColumnsP95": 8.472222222222221,
+        "allColumnsMax": 15.720899470899472
+      },
+      "rendered": [
+        {
+          "camera": 0,
+          "language": "fr",
+          "path": "asph-market-fr-cam0.png",
+          "slotUsage": {
+            "asph-wall-market": "image",
+            "asph-door": "primitive",
+            "asph-crucible-stall": "primitive",
+            "asph-npc-merchant": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 0,
+          "language": "en",
+          "path": "asph-market-en-cam0.png",
+          "slotUsage": {
+            "asph-wall-market": "image",
+            "asph-door": "primitive",
+            "asph-crucible-stall": "primitive",
+            "asph-npc-merchant": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        }
+      ],
+      "doors": [
+        {
+          "id": "market-ring",
+          "x": 130,
+          "state": "open",
+          "opaqueNativePixels": 16936,
+          "differingOpaquePixels": 0,
+          "imageVsFallbackDoor": {
+            "changedPixels": 0,
+            "maxChannel": 0,
+            "meanChannel": 0
+          }
+        }
+      ],
+      "layerAudits": [
+        {
+          "camera": 0,
+          "layers": [
+            {
+              "id": "market-ring",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "market-counter",
+              "type": "post",
+              "opaquePixels": 41160,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        }
+      ]
+    },
+    {
+      "id": "asph-wall-quarters",
+      "width": 1999,
+      "height": 786,
+      "bytes": 2440059,
+      "sha256": "cad38af97b0eb421c4e7ae02470ecf4a5770596047480d66a51113d4d3fe040b",
+      "tileWidth": 1281.8015267175572,
+      "clip": {
+        "pixelsOutsideWallBounds": 0,
+        "nonOpaquePixelsInsideWallBounds": 0
+      },
+      "camera128Stability": {
+        "changedPixels": 0,
+        "maxChannel": 0,
+        "meanChannel": 0
+      },
+      "seam": {
+        "tileWidth": 1281.8015267175572,
+        "seamX": 1282,
+        "boundaryNeighborhood": [
+          {
+            "x": 1280,
+            "meanDelta": 9.746693121693122
+          },
+          {
+            "x": 1281,
+            "meanDelta": 21.15343915343915
+          },
+          {
+            "x": 1282,
+            "meanDelta": 13.987433862433862
+          },
+          {
+            "x": 1283,
+            "meanDelta": 5.128968253968254
+          },
+          {
+            "x": 1284,
+            "meanDelta": 3.812830687830688
+          }
+        ],
+        "allColumnsP95": 13.683862433862434,
+        "allColumnsMax": 54.96164021164021
+      },
+      "rendered": [
+        {
+          "camera": 0,
+          "language": "fr",
+          "path": "asph-quarters-fr-cam0.png",
+          "slotUsage": {
+            "asph-wall-quarters": "image",
+            "asph-door": "primitive",
+            "asph-bunks": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 0,
+          "language": "en",
+          "path": "asph-quarters-en-cam0.png",
+          "slotUsage": {
+            "asph-wall-quarters": "image",
+            "asph-door": "primitive",
+            "asph-bunks": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        }
+      ],
+      "doors": [
+        {
+          "id": "quarters-ring",
+          "x": 130,
+          "state": "open",
+          "opaqueNativePixels": 16936,
+          "differingOpaquePixels": 0,
+          "imageVsFallbackDoor": {
+            "changedPixels": 0,
+            "maxChannel": 0,
+            "meanChannel": 0
+          }
+        }
+      ],
+      "layerAudits": [
+        {
+          "camera": 0,
+          "layers": [
+            {
+              "id": "quarters-ring",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "quarters-register",
+              "type": "post",
+              "opaquePixels": 72000,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        }
+      ]
+    },
+    {
+      "id": "asph-wall-medbay",
+      "width": 1983,
+      "height": 793,
+      "bytes": 2187731,
+      "sha256": "b224bb82992bc16cbe0a40c72de36b932d69f80343bd5a1791e8917413a94442",
+      "tileWidth": 1260.3177805800756,
+      "clip": {
+        "pixelsOutsideWallBounds": 0,
+        "nonOpaquePixelsInsideWallBounds": 0
+      },
+      "camera128Stability": {
+        "changedPixels": 0,
+        "maxChannel": 0,
+        "meanChannel": 0
+      },
+      "seam": {
+        "tileWidth": 1260.3177805800756,
+        "seamX": 1260,
+        "boundaryNeighborhood": [
+          {
+            "x": 1258,
+            "meanDelta": 1.2857142857142858
+          },
+          {
+            "x": 1259,
+            "meanDelta": 8.182539682539682
+          },
+          {
+            "x": 1260,
+            "meanDelta": 8.314814814814815
+          },
+          {
+            "x": 1261,
+            "meanDelta": 12.304232804232804
+          },
+          {
+            "x": 1262,
+            "meanDelta": 1.9510582010582012
+          }
+        ],
+        "allColumnsP95": 10.701719576719576,
+        "allColumnsMax": 41.21494708994709
+      },
+      "rendered": [
+        {
+          "camera": 0,
+          "language": "fr",
+          "path": "asph-medbay-fr-cam0.png",
+          "slotUsage": {
+            "asph-wall-medbay": "image",
+            "asph-door": "primitive",
+            "asph-medbay-beds": "primitive",
+            "asph-medbay-scanner": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 0,
+          "language": "en",
+          "path": "asph-medbay-en-cam0.png",
+          "slotUsage": {
+            "asph-wall-medbay": "image",
+            "asph-door": "primitive",
+            "asph-medbay-beds": "primitive",
+            "asph-medbay-scanner": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        }
+      ],
+      "doors": [
+        {
+          "id": "medbay-control",
+          "x": 130,
+          "state": "open",
+          "opaqueNativePixels": 16936,
+          "differingOpaquePixels": 0,
+          "imageVsFallbackDoor": {
+            "changedPixels": 0,
+            "maxChannel": 0,
+            "meanChannel": 0
+          }
+        }
+      ],
+      "layerAudits": [
+        {
+          "camera": 0,
+          "layers": [
+            {
+              "id": "medbay-control",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "medbay-beds",
+              "type": "post",
+              "opaquePixels": 8368,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "medbay-scanner",
+              "type": "post",
+              "opaquePixels": 8372,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        }
+      ]
+    },
+    {
+      "id": "asph-wall-lower",
+      "width": 1999,
+      "height": 786,
+      "bytes": 2396219,
+      "sha256": "50d53bec481eb142bb99da241a48ef3dfa9abbe7db67604536c5fa7a7963d092",
+      "tileWidth": 1281.8015267175572,
+      "clip": {
+        "pixelsOutsideWallBounds": 0,
+        "nonOpaquePixelsInsideWallBounds": 0
+      },
+      "camera128Stability": {
+        "changedPixels": 0,
+        "maxChannel": 0,
+        "meanChannel": 0
+      },
+      "seam": {
+        "tileWidth": 1281.8015267175572,
+        "seamX": 1282,
+        "boundaryNeighborhood": [
+          {
+            "x": 1280,
+            "meanDelta": 3.8703703703703702
+          },
+          {
+            "x": 1281,
+            "meanDelta": 12.950396825396826
+          },
+          {
+            "x": 1282,
+            "meanDelta": 4.075396825396825
+          },
+          {
+            "x": 1283,
+            "meanDelta": 13.913359788359788
+          },
+          {
+            "x": 1284,
+            "meanDelta": 2.3492063492063493
+          }
+        ],
+        "allColumnsP95": 8.904100529100528,
+        "allColumnsMax": 22.764550264550266
+      },
+      "rendered": [
+        {
+          "camera": 0,
+          "language": "fr",
+          "path": "asph-lower-fr-cam0.png",
+          "slotUsage": {
+            "asph-wall-lower": "image",
+            "asph-door": "primitive",
+            "asph-echo8-barricade": "primitive",
+            "asph-night-board": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 0,
+          "language": "en",
+          "path": "asph-lower-en-cam0.png",
+          "slotUsage": {
+            "asph-wall-lower": "image",
+            "asph-door": "primitive",
+            "asph-echo8-barricade": "primitive",
+            "asph-night-board": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        }
+      ],
+      "doors": [
+        {
+          "id": "lower-control",
+          "x": 130,
+          "state": "open",
+          "opaqueNativePixels": 16936,
+          "differingOpaquePixels": 0,
+          "imageVsFallbackDoor": {
+            "changedPixels": 0,
+            "maxChannel": 0,
+            "meanChannel": 0
+          }
+        }
+      ],
+      "layerAudits": [
+        {
+          "camera": 0,
+          "layers": [
+            {
+              "id": "lower-control",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "lower-barricade",
+              "type": "post",
+              "opaquePixels": 21678,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "lower-night",
+              "type": "post",
+              "opaquePixels": 18944,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        }
+      ]
+    },
+    {
+      "id": "asph-wall-repair",
+      "width": 1999,
+      "height": 787,
+      "bytes": 2197699,
+      "sha256": "daaaa057b0ede1577ad65ab43f98917984107a7a211e56e125e67b8dcae49fcf",
+      "tileWidth": 1280.1728081321473,
+      "clip": {
+        "pixelsOutsideWallBounds": 0,
+        "nonOpaquePixelsInsideWallBounds": 0
+      },
+      "camera128Stability": {
+        "changedPixels": 0,
+        "maxChannel": 0,
+        "meanChannel": 0
+      },
+      "seam": {
+        "tileWidth": 1280.1728081321473,
+        "seamX": 1280,
+        "boundaryNeighborhood": [
+          {
+            "x": 1278,
+            "meanDelta": 4.185846560846561
+          },
+          {
+            "x": 1279,
+            "meanDelta": 6.134920634920635
+          },
+          {
+            "x": 1280,
+            "meanDelta": 6.203703703703703
+          },
+          {
+            "x": 1281,
+            "meanDelta": 5.628968253968254
+          },
+          {
+            "x": 1282,
+            "meanDelta": 3.6865079365079363
+          }
+        ],
+        "allColumnsP95": 7.981481481481482,
+        "allColumnsMax": 21.140873015873016
+      },
+      "rendered": [
+        {
+          "camera": 0,
+          "language": "fr",
+          "path": "asph-repair-fr-cam0.png",
+          "slotUsage": {
+            "asph-wall-repair": "image",
+            "asph-door": "primitive",
+            "asph-repair-cradle": "primitive",
+            "asph-npc-technician": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 128,
+          "language": "fr",
+          "path": "asph-repair-fr-cam128.png",
+          "slotUsage": {
+            "asph-wall-repair": "image",
+            "asph-door": "primitive",
+            "asph-repair-cradle": "primitive",
+            "asph-npc-technician": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 256,
+          "language": "fr",
+          "path": "asph-repair-fr-cam256.png",
+          "slotUsage": {
+            "asph-wall-repair": "image",
+            "asph-door": "primitive",
+            "asph-repair-cradle": "primitive",
+            "asph-npc-technician": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 0,
+          "language": "en",
+          "path": "asph-repair-en-cam0.png",
+          "slotUsage": {
+            "asph-wall-repair": "image",
+            "asph-door": "primitive",
+            "asph-repair-cradle": "primitive",
+            "asph-npc-technician": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 128,
+          "language": "en",
+          "path": "asph-repair-en-cam128.png",
+          "slotUsage": {
+            "asph-wall-repair": "image",
+            "asph-door": "primitive",
+            "asph-repair-cradle": "primitive",
+            "asph-npc-technician": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        },
+        {
+          "camera": 256,
+          "language": "en",
+          "path": "asph-repair-en-cam256.png",
+          "slotUsage": {
+            "asph-wall-repair": "image",
+            "asph-door": "primitive",
+            "asph-repair-cradle": "primitive",
+            "asph-npc-technician": "primitive"
+          },
+          "allDoorAndPostDrawsAfterWall": true,
+          "playerVisual": {
+            "schema": 81,
+            "sheetId": "player.echo9-marine.locomotion",
+            "fallback": false,
+            "reason": null,
+            "facing": 1
+          }
+        }
+      ],
+      "doors": [
+        {
+          "id": "repair-docks",
+          "x": 130,
+          "state": "open",
+          "opaqueNativePixels": 16936,
+          "differingOpaquePixels": 0,
+          "imageVsFallbackDoor": {
+            "changedPixels": 0,
+            "maxChannel": 0,
+            "meanChannel": 0
+          }
+        }
+      ],
+      "layerAudits": [
+        {
+          "camera": 0,
+          "layers": [
+            {
+              "id": "repair-docks",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 17076,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "repair-bench",
+              "type": "post",
+              "opaquePixels": 34292,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        },
+        {
+          "camera": 128,
+          "layers": [
+            {
+              "id": "repair-docks",
+              "type": "door",
+              "state": "open",
+              "opaquePixels": 8844,
+              "changedPixels": 0,
+              "maxChannel": 0
+            },
+            {
+              "id": "repair-bench",
+              "type": "post",
+              "opaquePixels": 34292,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        },
+        {
+          "camera": 256,
+          "layers": [
+            {
+              "id": "repair-bench",
+              "type": "post",
+              "opaquePixels": 34292,
+              "changedPixels": 0,
+              "maxChannel": 0
+            }
+          ],
+          "hazardPixelsInDoorFrames": 0
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "asph-wall-docks-repeat3.png",
+      "width": 3841,
+      "height": 720,
+      "sha256": "f234c395593fcb5afa170962af89f93569ba785ca92cf6949f294ec3ccac832b"
+    },
+    {
+      "path": "asph-docks-fr-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "f50a1b2ec37803832f84539f72ea9ee1abbbdfa75c418cf073d1768f2a5f4e96"
+    },
+    {
+      "path": "asph-docks-fr-cam128.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "061e997f08d3b866f28681ae329c76631367f587016af368706de3b26427e48f"
+    },
+    {
+      "path": "asph-docks-fr-cam768.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "d299e45b46dfb1aa8a6fa64822a34673dd277ce2f919483b7c39541108bf5add"
+    },
+    {
+      "path": "asph-docks-en-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "5b1935c5d432d69b6ceb6ea988354f160a193c2dc6529a7d17639096a630e785"
+    },
+    {
+      "path": "asph-docks-en-cam128.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "65b331ee28f7422a2c4dec693baa09821100ea7a844c55c44a4e9b1cbeb2d506"
+    },
+    {
+      "path": "asph-docks-en-cam768.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "13a155a810fd1ddf3270315ece037668db26f31f36a2c0949b983ff5637282b8"
+    },
+    {
+      "path": "asph-docks-fallback.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "e2fc47641d2389fc0f48850baf0f71acf11326a2fd2b1aaac66347b190910dee"
+    },
+    {
+      "path": "asph-wall-ring-repeat3.png",
+      "width": 3781,
+      "height": 720,
+      "sha256": "430e7946c29b9502646d3f514c96b2c76c4cef7035be1aee67f77e4a18b84a5c"
+    },
+    {
+      "path": "asph-ring-fr-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "8496a1cbf52a8c6550b1a6f9dd6e7862b4dab7c579c1d706b0aa7909f516f1df"
+    },
+    {
+      "path": "asph-ring-fr-cam128.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "fa91e55bdef1c30230de8eea3f3adfc5dbc2160b4af3c530c4575e32f48b6c45"
+    },
+    {
+      "path": "asph-ring-fr-cam1280.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "e5082080003004ef42952e5fdd73c967da0cc5305c8f36c18eaf95f5ed774710"
+    },
+    {
+      "path": "asph-ring-en-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "8fa512fc05aa1b86530b189a9c39b7ac15f58534a5ca32223c95c80f32a13c7c"
+    },
+    {
+      "path": "asph-ring-en-cam128.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "5a03dde884913f1fc18aa0e3918394eaa4c31af99590eea9a7e97d3fbe30dd55"
+    },
+    {
+      "path": "asph-ring-en-cam1280.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "a084f2beccaf82ec6cbbc595693daa25e38f24771a03ba9ecc7bc7517c3c5df3"
+    },
+    {
+      "path": "asph-ring-fallback.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "af54253adf5fea2fdcf7a2ec5f91f36af70a2157abb52859ac8dc177fd413423"
+    },
+    {
+      "path": "asph-wall-spoke-repeat3.png",
+      "width": 3846,
+      "height": 720,
+      "sha256": "b324517a1f9b1c3ff1e39c71975636c05ba02c391764243ab4b1a2e319e2be72"
+    },
+    {
+      "path": "asph-spoke-fr-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "e93dfcb7fdbeed4eead41836dae15cf9d47ee2f35559525e2dfd5923f50322ce"
+    },
+    {
+      "path": "asph-spoke-fr-cam128.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "482af537f1c439a514831e7e637ad3a2e9a0ae7257e6a4d70a01f71353af2d0b"
+    },
+    {
+      "path": "asph-spoke-fr-cam256.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "e28580328eb1e0ce8b52919a763b46194d5a65c5e23e2ef8671d9ae7eb86122e"
+    },
+    {
+      "path": "asph-spoke-en-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "7407f2bb3f088b458b7920e29084bf84468b403e4042b3775c76dbd6e29a4e31"
+    },
+    {
+      "path": "asph-spoke-en-cam128.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "436505593890e05b230ab8e087af7ad5d64258d42e38b13dff49adcf48f29588"
+    },
+    {
+      "path": "asph-spoke-en-cam256.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "b91c1a7c2cf5b6773f224a7aac451a542b4459faa109f829eaf861150846c090"
+    },
+    {
+      "path": "asph-spoke-fallback.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "a5d5360dea50a79c4085ff1842437d7959e6a19c726d4b7b4e934cc65d776c15"
+    },
+    {
+      "path": "asph-wall-control-repeat3.png",
+      "width": 3846,
+      "height": 720,
+      "sha256": "6ea5595ddfcd357f5d4622aaa7d11df0b452408c6138f26d285f78b2eb912d4c"
+    },
+    {
+      "path": "asph-control-fr-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "79fe046f7909b7dcc75d0587339e9ad825938b5113434e336e7ed26190cade8c"
+    },
+    {
+      "path": "asph-control-fr-cam128.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "2b6243d4543e4d2e3786e856a98c5f9b978dc830b02c7d35e69944ccb5648d10"
+    },
+    {
+      "path": "asph-control-fr-cam768.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "66b59ddbfdd27465c3b3e1e855098cdd83e4dfebdd881f5df2f07251a56078e6"
+    },
+    {
+      "path": "asph-control-en-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "c8fa7046de9a6c834d4515538a564199e3dfe3c635180f7d4eb2efa108cb5db3"
+    },
+    {
+      "path": "asph-control-en-cam128.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "635f6dc78c4e4c84e35c712ce760a8f274f89b6e2035b1df06c992c86aae3a76"
+    },
+    {
+      "path": "asph-control-en-cam768.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "6bb27c912d8e0593368c9be128bd8c192b34e06f9f3cf1e2e4a058b2eacef30d"
+    },
+    {
+      "path": "asph-control-fallback.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "cdbde71d01a1d26245119dac2d9806e9cdce9f59f8f5732fb276584c5317628b"
+    },
+    {
+      "path": "asph-wall-relay-repeat3.png",
+      "width": 3846,
+      "height": 720,
+      "sha256": "761a0ac8031fe9f1024dd10e02e39d66e7fd671efb5e58014976073f08c8090f"
+    },
+    {
+      "path": "asph-relay-fr-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "4b0eb74e242331a57c18b68be9bf61e9ffe8a8591ead7512da838a42531dad91"
+    },
+    {
+      "path": "asph-relay-en-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "c38e81e8f9b3ca4523b38402b9ba89835b07f32177d1275d357e897af21d06e5"
+    },
+    {
+      "path": "asph-relay-fallback.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "cdfec1e76ca4ee8aabf88088b973da707ff946a0cffcdc6380335b92a30139e2"
+    },
+    {
+      "path": "asph-wall-lab-repeat3.png",
+      "width": 3841,
+      "height": 720,
+      "sha256": "44d24e8fa30e85731c2c7955887f7944ab38cdaff737c5d3b89ddb5b19ae9df6"
+    },
+    {
+      "path": "asph-lab-fr-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "f4eb8c1d8817f9be118ade2069edac830f33d8707d3e426c38e007f86dd1255e"
+    },
+    {
+      "path": "asph-lab-en-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "0c67826ac5f85ec18bb9921858df0e034f813471727d9386ea76515548198557"
+    },
+    {
+      "path": "asph-lab-fallback.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "75b0edbf37f01afa8400f40b1d2cf1014e08aba5bf1e302426715f2ca3f1b219"
+    },
+    {
+      "path": "asph-wall-memorial-repeat3.png",
+      "width": 3781,
+      "height": 720,
+      "sha256": "f2d0246aa7da5658095ef16610629243a40a7b1b19a8758a7b1d43f1d1882ad4"
+    },
+    {
+      "path": "asph-memorial-fr-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "a324b52acba69b8d3b94926107b813b9fdaad73461c3f40ea5bed2d227f32230"
+    },
+    {
+      "path": "asph-memorial-en-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "5651d5042b0bbb60ee01ff6c2ddcd3230d1661951b2aa0455c722d97bd1c70f8"
+    },
+    {
+      "path": "asph-memorial-fallback.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "a4ec62333b284ac90be25d8263969696126d88ad24adf545cd68b0c44d0528ed"
+    },
+    {
+      "path": "asph-wall-greenhouse-repeat3.png",
+      "width": 3846,
+      "height": 720,
+      "sha256": "0e7000516c6bc5d2ac0e59c455fa969f00115916d074e8eacd1e2276d0273f56"
+    },
+    {
+      "path": "asph-greenhouse-fr-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "8b73b8c15ae15b0d4f42836cf58ef577a050613a590edc17c86cfed673cafce2"
+    },
+    {
+      "path": "asph-greenhouse-en-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "08077e82c09dcd933beac003fe25ee04f940e82cc7c8e534fce0fab77daa6f80"
+    },
+    {
+      "path": "asph-greenhouse-fallback.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "bc3a8c73235566ce44b87dbe44bceb6769b3d1b039908218dbbf2a256b28a9de"
+    },
+    {
+      "path": "asph-wall-market-repeat3.png",
+      "width": 3781,
+      "height": 720,
+      "sha256": "45545fda3049688c555b0bbae34dca1acc456a1b9b857d6b95ce09a7601fd288"
+    },
+    {
+      "path": "asph-market-fr-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "e8482b5ed50cacfeaded007d300fbebc74752fb16aae67ce2628105cab402d79"
+    },
+    {
+      "path": "asph-market-en-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "8cc50052405622c53e55acecb3fd2dc71f5ed70538e0aa47c149d526471c1f5c"
+    },
+    {
+      "path": "asph-market-fallback.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "fc2ce3a16ce0746b56e897722039898342c42385e26e410639e375aa70da3fd9"
+    },
+    {
+      "path": "asph-wall-quarters-repeat3.png",
+      "width": 3846,
+      "height": 720,
+      "sha256": "837716a20f814cf786ca1cbd34a93edc0baa49a5af5474650dc913b7e28c4414"
+    },
+    {
+      "path": "asph-quarters-fr-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "91e7fbdd6b59a468763910b02dae6d97c0305052db51ef59e5cdc0a6a88e2fb6"
+    },
+    {
+      "path": "asph-quarters-en-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "ae4b6340add64ebcce14fcef8de83178ed698bffbb3aefd1e330c79883aa56fb"
+    },
+    {
+      "path": "asph-quarters-fallback.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "321dcdd6b0e607b019a06478585ad4faebde4389afe8aa899e4773e9ca7c1bf7"
+    },
+    {
+      "path": "asph-wall-medbay-repeat3.png",
+      "width": 3781,
+      "height": 720,
+      "sha256": "23978c66d2ceee79f429b172ca010ed46626455945a4a94ff4c306c40ceff782"
+    },
+    {
+      "path": "asph-medbay-fr-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "136b8dc54f45b4ee347bed7f0c1f9949cade09d9b285042666c6ed8bdf614d82"
+    },
+    {
+      "path": "asph-medbay-en-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "159dd3e4f6cb865bd8c7fb5e87b80265b5b06a55e49f8e0c5800ec98fed5e85d"
+    },
+    {
+      "path": "asph-medbay-fallback.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "966c71d4a11ecbd35ad923e62810a23ca3acd21b6affc2af2e7f4f002077295c"
+    },
+    {
+      "path": "asph-wall-lower-repeat3.png",
+      "width": 3846,
+      "height": 720,
+      "sha256": "4e058481d550590e8e13dcbe501bb6776394da8383ad3237a48524c1c20c0926"
+    },
+    {
+      "path": "asph-lower-fr-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "06dd46c0bd4e9672e8f43502892441ad3cbbbcc28708c0227bf63587e9599613"
+    },
+    {
+      "path": "asph-lower-en-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "06f5515e6fcb505132ac7bce36acde2b033b64e35bfd58157e92024fc1748955"
+    },
+    {
+      "path": "asph-lower-fallback.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "55522dc2b92f7c1ab60427df8d7a26e802126111c4547bf244e6e0a9b03dadb0"
+    },
+    {
+      "path": "asph-wall-repair-repeat3.png",
+      "width": 3841,
+      "height": 720,
+      "sha256": "21386e57f3192579b1a8f8bf2bdabc3a0cf3d826fdaa05684a7049fb8f2739ad"
+    },
+    {
+      "path": "asph-repair-fr-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "d372d9e4b449ca2e71d063b00cc3b6bc061eb512a5f7c3b9182fe46984054aaa"
+    },
+    {
+      "path": "asph-repair-fr-cam128.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "454df44a83eb3dbb8fbd5367c3cfe0f1c1bc0760e706388c24e918e0b8bd705f"
+    },
+    {
+      "path": "asph-repair-fr-cam256.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "0d81ab1d6b9af5146dbc2041ae238412e7de97d8204c1c8c756005b86ef8bd1c"
+    },
+    {
+      "path": "asph-repair-en-cam0.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "d8481efd728b98cb178a2018c6295d2b3c51d0db2d7e5fadebe5ea1f33795fa7"
+    },
+    {
+      "path": "asph-repair-en-cam128.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "9aa65be1458be1316531a9e3f674b95a583a30b4d0a41f66eb670c22ec67a661"
+    },
+    {
+      "path": "asph-repair-en-cam256.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "01f7e67be6f5a4cc278866cbf1340c193c528257ea40dcb323baf216ffbd324f"
+    },
+    {
+      "path": "asph-repair-fallback.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "e8e18187a48039bbcf8130a3367ac6ef6184688ce654bb05d4531de4102841bf"
+    },
+    {
+      "path": "ASPHODELE_HUB_WALL_ART_OVERVIEW_20261117.png",
+      "width": 1920,
+      "height": 2014,
+      "sha256": "5bc46a98fd870b068cc219f8072aeb21c0e8afcd45be3c48cd5273dbb7a44e2f"
+    },
+    {
+      "path": "ASPHODELE_HUB_WALLS_OVERVIEW_EN_20261117.png",
+      "width": 1920,
+      "height": 2014,
+      "sha256": "97d1d9822e64e7fffff456520eab303574c9d0731fd747c6ef276a9fb73c90b3"
+    }
+  ],
+  "errors": [],
+  "date": "2026-11-17",
+  "timeZone": "Europe/Paris",
+  "capturePolicy": "Individual native captures are QA artifacts, identified by basename and digest; only the French overview is distributed in source documentation. They are not runtime assets.",
+  "browserValidation": {
+    "status": "BLOCKED_BEFORE_PAGE_OPEN",
+    "browser": "Chromium 156.0.8078.79",
+    "reason": "socket() failed: Operation not permitted; ptrace Operation not permitted; SIGABRT.",
+    "executedNavigationChecks": 0
+  },
+  "visualReview": {
+    "quartersCorrection": "Twenty closed small berth recesses in two rows of ten. Observed frame height approximately60-65 native pixels and width approximately120px; native marine92px high. Separate native bunk station, register and door preserved.",
+    "otherTwelveImagesUnchanged": true,
+    "openPassagePaintedInBackground": false,
+    "primarySourceReplicaCertified": false
+  }
+}

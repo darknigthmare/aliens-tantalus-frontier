@@ -1,0 +1,15 @@
+{
+  "format": "atf-i18n-review-v186",
+  "exact": [
+    {"fr": "Animation", "en": "Animation", "source": "src/xeno-trials-ui-v96.js"},
+    {"fr": "Tous les gestes", "en": "All motions", "source": "src/xeno-trials-ui-v96.js"},
+    {"fr": "Gestes dessinés", "en": "Drawn motions", "source": "src/xeno-trials-ui-v96.js; src/xeno-trials-animation-coverage-v189.js"},
+    {"fr": "Gestes articulés", "en": "Articulated motions", "source": "src/xeno-trials-animation-coverage-v189.js"},
+    {"fr": "Posture de référence", "en": "Reference pose", "source": "src/xeno-trials-animation-coverage-v189.js"},
+    {"fr": "COUPER LES SONS DE TRIALS", "en": "MUTE TRIALS SOUNDS", "source": "src/xeno-trials-ui-v96.js"},
+    {"fr": "ACTIVER LES SONS DE TRIALS", "en": "ENABLE TRIALS SOUNDS", "source": "src/xeno-trials-ui-v96.js"},
+    {"fr": "Sons de Trials", "en": "Trials sounds", "source": "src/xeno-trials-ui-v96.js"},
+    {"fr": "Le volume des effets suit les réglages audio du profil.", "en": "Effect volume follows the profile’s audio settings.", "source": "src/xeno-trials-ui-v96.js"}
+  ],
+  "patterns": []
+}

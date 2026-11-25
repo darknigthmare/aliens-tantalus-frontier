@@ -9,6 +9,8 @@ import { advancePlayerLocomotionStateV129, resolvePlayerLocomotionRigV129 } from
 import { PLAYER_COLONIAL_LEG_DEFINITIONS_V129 } from './player-colonial-art-v129.js';
 import { getPlayerColonialTorsoWithVariantsV141 } from './player-colonial-art-v141.js';
 import { getPlayerCostumeTorsoV165, PLAYER_COSTUME_LEG_DEFINITIONS_V165 } from './player-costume-parts-v165.js';
+import { HADAL_PLAYER_ART_V188, HADAL_PLAYER_LEG_DEFINITIONS_V188, resolveHadalPlayerContextV188,
+  adaptHadalPlayerBodyV188, hadalPlayerKitStatusV188 } from './hadal-player-art-v188.js';
 
 const CLOTHING_LEG_DEFINITIONS_V165 = Object.freeze({
   ...PLAYER_COLONIAL_LEG_DEFINITIONS_V129, ...PLAYER_COSTUME_LEG_DEFINITIONS_V165
@@ -17,6 +19,7 @@ const CLOTHING_LEG_DEFINITIONS_V165 = Object.freeze({
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const own = (value, key) => Boolean(value && Object.hasOwn(value, key));
 const bodyAssetKeys = new Set(PLAYER_BODY_RIG_ASSETS_V125.map(asset => asset.imageKey));
+const hadalAssetKeys = new Set(HADAL_PLAYER_ART_V188.map(asset => asset.imageKey));
 // Two independently dressed operators can share old and new pieces, opposite
 // facing torso pages, two carried weapons, a pickup and two active implements.
 export const PLAYER_APPEARANCE_IMAGE_LIMIT_V129 = 16;
@@ -33,6 +36,8 @@ export function playerAppearanceGroundSupportV129(actor, surfaces = []) {
 
 export function playerAppearanceVisualIsCurrentV129(last, status) {
   return Boolean(last?.supported && status.supported && status.ready
+    && Boolean(last.hadal?.kitReady) === Boolean(status.hadal?.kitReady)
+    && Boolean(last.hadal?.active) === Boolean(status.hadal?.active)
     && JSON.stringify(last.selected) === JSON.stringify(status.selected)
     && last.bodyFrame === status.bodyFrame && last.bodyAtlas === status.bodyAtlas
     && last.action?.kind === status.action?.kind && last.action?.serial === status.action?.serial
@@ -67,6 +72,7 @@ export function playerAppearanceStatusV126({ actor, appearance = actor?.appearan
   const supported = Boolean(bodyRig?.eligible && modular?.eligible);
   const ready = supported && Boolean(modular?.ready) && (!actionRig?.eligible || actionRig.ready)
     && (!transitRig?.eligible || transitRig.ready);
+  const hadal = hadalPlayerKitStatusV188(bodyRig, images);
   return { schema: 126, selected, supported, ready,
     drawn: Boolean(ready && render?.drawn && render.schema === 126),
     reason: !bodyRig?.eligible ? bodyRig?.reason || 'body-unavailable'
@@ -81,6 +87,7 @@ export function playerAppearanceStatusV126({ actor, appearance = actor?.appearan
     } : null,
     action: actionStatusV127(actionRig, render), sampledAt: bodyRig?.timeSeconds ?? null,
     transit: transitStatusV128(transitRig, render),
+    ...(hadal ? { hadal: { ...hadal, drawn: Boolean(ready && render?.drawn && render.contextualKitV188 === 'abyss-hadal') } } : {}),
     locomotion: bodyRig?.locomotionV129 ? { ...bodyRig.locomotionV129,
       drawn: Boolean(ready && render?.schema === 126 && render.drawn) } : null,
     layers: render?.schema === 126 && render.drawn ? render.layers || [] : [],
@@ -118,7 +125,18 @@ export function withPlayerAppearanceV126(Base) {
         surface: this.playerWeaponSurfaceV125(options.surface), images: this.images,
         timeSeconds: finite(this.animationTime),
         reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion || this.reducedMotion),
-        neuroActive: Boolean(this.neuro?.active && actor === this.player) };
+        neuroActive: Boolean(this.neuro?.active && actor === this.player),
+        presentationContextV188: this.playerBodyPresentationContextV188(options.ownerV188 || actor, actor, options.surface) };
+    }
+
+    playerBodyPresentationContextV188(owner = this.player, presentationActor = owner, surface) {
+      return resolveHadalPlayerContextV188({ owner, player: this.player, legacyMission: this.legacyMissionV131,
+        surface: this.playerWeaponSurfaceV125(surface), neuroActive: Boolean(this.neuro?.active && owner === this.player),
+        artAdmitted: this.hadalArtCacheAdmittedV188 !== false });
+    }
+
+    playerAppearanceLegDefinitionsV188(context) {
+      return context ? { ...CLOTHING_LEG_DEFINITIONS_V165, ...HADAL_PLAYER_LEG_DEFINITIONS_V188 } : CLOTHING_LEG_DEFINITIONS_V165;
     }
 
     playerAppearanceLadderV128(actor) {
@@ -143,10 +161,13 @@ export function withPlayerAppearanceV126(Base) {
       });
     }
 
-    decoratePlayerAppearanceBodyV129(actor, bodyRig) {
-      return resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance: actor?.appearanceV126,
+    decoratePlayerAppearanceBodyV129(actor, bodyRig, { ownerV188 = actor } = {}) {
+      const context = this.playerBodyPresentationContextV188(ownerV188, actor);
+      const base = bodyRig?.baseBodyRigV160 || bodyRig;
+      const registered = adaptHadalPlayerBodyV188(base, { context });
+      return resolvePlayerLocomotionRigV129({ actor, bodyRig: registered, appearance: actor?.appearanceV126,
         images: this.images, locomotionState: actor?.playerLocomotionStateV129,
-        legDefinitions: CLOTHING_LEG_DEFINITIONS_V165,
+        legDefinitions: this.playerAppearanceLegDefinitionsV188(context),
         groundSupport: playerAppearanceGroundSupportV129(actor,
           [...(this.platforms || []), ...(this.walls || []), ...(this.covers || []),
             ...(this.closedDoorColliders?.() || [])].filter(surface => !surface.destroyed)) }).bodyRig;
@@ -162,9 +183,11 @@ export function withPlayerAppearanceV126(Base) {
     }
 
     resolvePlayerAppearanceTransitV128(actor = this.player, options = {}) {
+      const context = this.playerBodyPresentationContextV188(actor, actor, options.surface);
       return resolvePlayerTransitRigV128({ ...this.playerAppearanceRigOptionsV127(actor, options),
         appearance: actor?.appearanceV126, ladder: this.playerAppearanceLadderV128(actor),
-        transitState: this.observePlayerTransitV128(actor), legDefinitions: CLOTHING_LEG_DEFINITIONS_V165 });
+        transitState: this.observePlayerTransitV128(actor), legDefinitions: this.playerAppearanceLegDefinitionsV188(context),
+        decorateBodyRigV188: body => adaptHadalPlayerBodyV188(body, { context, preserveContacts: true }) });
     }
 
     resolvePlayerAppearanceActionV127(actor = this.player, options = {}) {
@@ -211,13 +234,18 @@ export function withPlayerAppearanceV126(Base) {
       // pages are retained below from each admitted pose and selected pieces.
       const assets = super.collectPlayerWeaponAssetsV125().filter(asset => !bodyAssetKeys.has(asset.imageKey));
       const warmBodies = [];
+      let hadalRequested = false;
       for (const actor of this.playerWeaponActorsV125()) {
         const transit = this.resolvePlayerAppearanceTransitV128(actor);
         const action = transit.eligible ? null : this.resolvePlayerAppearanceActionV127(actor);
         const bodyRig = transit.eligible ? transit.bodyRig : action?.eligible ? action.bodyRig
           : this.decoratePlayerAppearanceBodyV129(actor, resolvePlayerBodyRigV125(this.playerAppearanceRigOptionsV127(actor)));
         if (bodyRig?.eligible) {
-          const modular = resolvePlayerModularRigV126({ bodyRig, appearance: actor.appearanceV126, images: this.images });
+          hadalRequested ||= Boolean(bodyRig.hadalPresentationV188);
+          // Keep the complete native kit resident before assigning any spare
+          // capacity to HADAL. A second operator/tool may need all16 slots.
+          const fallbackBody = bodyRig.hadalPresentationV188 ? { ...bodyRig, hadalPresentationV188: null } : bodyRig;
+          const modular = resolvePlayerModularRigV126({ bodyRig: fallbackBody, appearance: actor.appearanceV126, images: this.images });
           // A modular action already declares every texture it actually uses.
           // Its measured base body supplies geometry, not another full-body
           // bitmap or the old arms underneath the selected independent parts.
@@ -242,10 +270,13 @@ export function withPlayerAppearanceV126(Base) {
             }
           }
         }
-        if (action?.eligible) assets.push(...action.requiredAssets);
-        if (transit.eligible) assets.push(...transit.requiredAssets);
+        if (action?.eligible) assets.push(...action.requiredAssets.filter(asset => !hadalAssetKeys.has(asset.imageKey)));
+        if (transit.eligible) assets.push(...transit.requiredAssets.filter(asset => !hadalAssetKeys.has(asset.imageKey)));
       }
       const selected = new Map(assets.map(asset => [asset.imageKey, asset]));
+      this.hadalArtCacheAdmittedV188 = hadalRequested
+        && selected.size + HADAL_PLAYER_ART_V188.filter(asset => !selected.has(asset.imageKey)).length <= PLAYER_APPEARANCE_IMAGE_LIMIT_V129;
+      if (this.hadalArtCacheAdmittedV188) for (const asset of HADAL_PLAYER_ART_V188) selected.set(asset.imageKey, asset);
       // Prewarm only after BOTH operators' current components and implements
       // have their places. A future body/fallback may use a spare slot, but
       // cannot make retain() truncate the other operator's active tool.
@@ -266,7 +297,7 @@ export function withPlayerAppearanceV126(Base) {
       actor.playerAppearanceVisualV126 = playerAppearanceStatusV126({ actor,
         bodyRig, images: this.images, render });
       actor.playerLocomotionVisualV129 = actor.playerAppearanceVisualV126.locomotion;
-      return render.drawn ? render : super.drawPlayerBodyCompositionV125(ctx, actor, options);
+      return render.drawn ? render : super.drawPlayerBodyCompositionV125(ctx, actor, { ...options, bodyRig });
     }
 
     drawPlayerWeaponRigV125(ctx, actor = this.player, options = {}) {
@@ -357,6 +388,7 @@ export function withPlayerAppearanceV126(Base) {
 
     resetPlayerWeaponRigV125() {
       super.resetPlayerWeaponRigV125();
+      delete this.hadalArtCacheAdmittedV188;
       for (const actor of [this.player, this.coop].filter(Boolean)) {
         actor.playerAppearanceVisualV126 = null;
         actor.playerActionVisualV127 = null;

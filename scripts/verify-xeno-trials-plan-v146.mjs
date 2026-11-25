@@ -78,7 +78,9 @@ test('reference IDs resolve, with URLs and explicit evidence limits', () => {
   }
 });
 test('existing arenas remain separate from proposed arenas and excluded fighters', () => {
-  const actual = new Set(XENO_TRIALS_STAGES_V96.map(s => s.id));
+  // V146 is an immutable planning snapshot, not the live post-V179 catalogue.
+  // Later append-only simulation stages must not rewrite its historical workbook.
+  const actual = new Set(XENO_TRIALS_STAGES_V96.filter(s => !s.stageRevision || s.stageRevision <= 146).map(s => s.id));
   const listed = plan.tables['10_Arenes'].rows.filter(r => r[2] === 'Existante dans le roster');
   assert.deepEqual(new Set(listed.map(r => r[0])), actual);
   assert.deepEqual(new Set(plan.currentStageIds), actual);

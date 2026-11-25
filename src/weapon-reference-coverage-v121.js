@@ -2,6 +2,7 @@ import { WEAPONS } from './content-core-v50.js';
 import { WEAPON_GEOMETRY_COVERAGE_V120 } from './weapon-reference-coverage-v120.js';
 import { resolveAdmittedWeaponProfileV121 } from './weapon-release-v121.js';
 import { ADMITTED_WEAPON_ADDITIONS_V122 } from './weapon-release-v122.js';
+import { WEAPON_ADDITION_IDS_V188 } from './weapon-catalog-additions-v188.js';
 
 const freeze=value=>{
   if (!value || typeof value!=='object' || Object.isFrozen(value)) return value;
@@ -12,7 +13,7 @@ const historicById=new Map(WEAPON_GEOMETRY_COVERAGE_V120.flatMap(geometry=>geome
 const geometryMap=new Map();
 // Keep the published V121 receipt at its exact scope. Only independently
 // admitted later IDs are excluded; an unknown addition still fails closed.
-const laterIds=new Set(ADMITTED_WEAPON_ADDITIONS_V122.map(entry=>entry.id));
+const laterIds=new Set([...ADMITTED_WEAPON_ADDITIONS_V122.map(entry=>entry.id),...WEAPON_ADDITION_IDS_V188]);
 const baselineWeaponsV121=WEAPONS.filter(entry=>!laterIds.has(entry.id));
 const nativeGeometry=(entry,profile,historic)=>freeze({
   ...(historic||{}),baseNumber:profile.baseNumber,baseId:historic?.baseId||entry.id,

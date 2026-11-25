@@ -234,7 +234,7 @@ html.forge-mode .topbar {
   }
 
   .title-project {
-    font-size: 12px;
+    font-size: calc(12px * var(--atf-text-scale-v188, 1));
   }
 
   .title-start {
@@ -275,11 +275,11 @@ html.forge-mode .topbar {
     letter-spacing: .3em;
     text-indent: .3em;
   }
-  .title-project { margin-top: 8px; font-size: 11px; }
+  .title-project { margin-top: 8px; font-size: calc(11px * var(--atf-text-scale-v188, 1)); }
   .title-divider { display: none; }
   .title-start { margin-top: 32px; min-height: 44px; }
   .title-menu { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 600px; width: 100%; margin-top: 18px; }
-  .title-menu button { min-height: 44px; padding: 10px 12px; font-size: 10px; }
+  .title-menu button { min-height: 44px; padding: 10px 12px; font-size: calc(10px * var(--atf-text-scale-v188, 1)); }
   .title-profile-status { left: 24px; right: 24px; bottom: 48px; text-align: center; }
   .title-build { left: 24px; right: 24px; bottom: 12px; text-align: center; }
 }

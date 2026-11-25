@@ -194,6 +194,15 @@ export function withUserCasteCampaignV88(BaseEngine) {
       return this.userCasteLoadingV88;
     }
 
+    // The frame loop polls asset availability before update(). Outer mixins
+    // (enemy tactics V130, horde director V132) skip super.update() while this
+    // gate is up, so the gate must also be re-read here or it never lifts.
+    refreshEnemyAtlasAvailabilityV65() {
+      const result = super.refreshEnemyAtlasAvailabilityV65();
+      if (this.userCasteLoadingV88) this.refreshUserCasteLoadingV88();
+      return result;
+    }
+
     update(delta) {
       this.retryEnemyDiscoveryV88(delta);
       if (this.refreshUserCasteLoadingV88()) { this.clearGameplayInput?.(); return; }

@@ -42,12 +42,18 @@ function host() {
 function locate(engine,x,floorY=570){Object.assign(engine.player,{x:x-engine.player.w/2,y:floorY-engine.player.h,vx:0,vy:0,grounded:true});}
 function tick(engine,seconds){for(let elapsed=0;elapsed<seconds-1e-9;elapsed+=1/60)engine.update(Math.min(1/60,seconds-elapsed));}
 function destroy(engine,actor){return engine.applyEnemyDamage(actor,999,{owner:engine.player,kind:'rifle',x:actor.x-30,y:actor.y+20});}
-let ecologicalWitness=null;
-async function completedEcologicalWitness() {
-  if(ecologicalWitness)return structuredClone(ecologicalWitness);
+// V188 spec 011: the chapter moved from Cocyte to TR-0 (`world-65-tr-0`), a world hidden until the side campaign
+// reveals it. Fixture (declared): the route is opened on the save, as the end of Arc 2 does in play.
+// `worldId` builds the same witness for a deployment begun on the chapter's former world (`legacyWorldIdsV188`).
+const ecologicalWitnesses=new Map();
+async function completedEcologicalWitness(worldId=null) {
   const campaign=ECOSYSTEM_CAMPAIGNS_V131.find(campaign=>campaign.specialOperationId==='queen-mother-song');
-  const world=WORLDS.find(world=>world.id===campaign.worldId),plan=buildEcosystemMissionV131({campaign,world,levelSeeds:LEVEL_SEEDS});
-  const save=createDefaultSave(),operation=beginOperation(save,campaign,world).operation;
+  const key=worldId||campaign.worldId;
+  if(ecologicalWitnesses.has(key))return structuredClone(ecologicalWitnesses.get(key));
+  const world=WORLDS.find(world=>world.id===key),plan=buildEcosystemMissionV131({campaign,world,levelSeeds:LEVEL_SEEDS});
+  const save=createDefaultSave();
+  if(!save.galaxy.unlockedWorldIds.includes(world.id))save.galaxy.unlockedWorldIds.push(world.id);
+  const operation=beginOperation(save,campaign,world).operation;
   Object.assign(operation,{levelSeedId:plan.levelSeed.id,missionLevelSignature:plan.signature,missionTemplateId:plan.templateId});
   const engine=new GameEngine(host(),{onEvent:()=>{}});
   engine.start({campaign,world,levelSeed:plan.levelSeed,missionLevel:plan,weapon:WEAPONS[0],enemyCatalog:ENEMIES,equipment:[],crew:[],seed:426});
@@ -65,7 +71,7 @@ async function completedEcologicalWitness() {
   locate(engine,4950);engine.keys.add('KeyE');tick(engine,2.05);
   assert.equal(engine.mission.state,'complete');assert.ok(event);
   assert.equal(engine.validateEcosystemResumeV131(save.strategy.currentOperation.resumeState).valid,true);
-  ecologicalWitness={save,operation:save.strategy.currentOperation,rewards:event.rewards};return structuredClone(ecologicalWitness);
+  ecologicalWitnesses.set(key,{save,operation:save.strategy.currentOperation,rewards:event.rewards});return structuredClone(ecologicalWitnesses.get(key));
 }
 test('real Queen Mother terminal capture certifies its deployment and pays exactly once across migration',async()=>{
   const {save,operation,rewards}=await completedEcologicalWitness();
@@ -77,6 +83,23 @@ test('real Queen Mother terminal capture certifies its deployment and pays exact
   migrated.strategy.currentOperation=operation;
   assert.equal(resolveOperation(migrated,{success:true,rewards}).reason,'operation-already-resolved');
   assert.equal(migrated.galaxy.resources.credits,paid);
+});
+test('the Queen Mother chapter lives on TR-0; a deployment begun on Cocyte before the move still certifies and pays once',async()=>{
+  const campaign=ECOSYSTEM_CAMPAIGNS_V131.find(campaign=>campaign.specialOperationId==='queen-mother-song');
+  assert.equal(campaign.worldId,'world-65-tr-0');assert.deepEqual([...campaign.legacyWorldIdsV188],['world-05-lethe']);
+  const current=await completedEcologicalWitness();
+  assert.equal(current.operation.worldId,'world-65-tr-0');assert.equal(current.operation.resumeState.identity.worldId,'world-65-tr-0');
+  const {save,operation,rewards}=await completedEcologicalWitness('world-05-lethe');
+  assert.equal(operation.worldId,'world-05-lethe');assert.equal(operation.resumeState.identity.worldId,'world-05-lethe');
+  assert.equal(validateOperationCompletionV131(operation,rewards).valid,true,'the former world of the chapter is still accepted for its own deployment');
+  const before=save.galaxy.resources.credits,result=resolveOperation(save,{success:true,rewards,kills:operation.resumeState.player.kills});
+  assert.equal(result.ok,true);assert.equal(save.galaxy.resources.credits-before,rewards.credits);
+  // The receipt still binds the deployment to its own world: a TR-0 identity on a Cocyte deployment is refused.
+  const mixed=(await completedEcologicalWitness('world-05-lethe')).operation;mixed.resumeState.identity.worldId='world-65-tr-0';
+  assert.equal(validateOperationCompletionV131(mixed,rewards).valid,false);
+  // A world that was never the chapter's is refused.
+  const foreign=(await completedEcologicalWitness('world-05-lethe')).operation;foreign.worldId='world-10-ceto';foreign.resumeState.identity.worldId='world-10-ceto';
+  assert.equal(validateOperationCompletionV131(foreign,rewards).valid,false);
 });
 const corruptions={
   'deployment proof copied from another run':operation=>{operation.resumeState.operationReceiptV131.deploymentId='operation-999-other';},

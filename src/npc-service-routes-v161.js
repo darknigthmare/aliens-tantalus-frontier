@@ -6,7 +6,7 @@ import { getHubAnnexRuntimeGeometryV139 } from './hub-annex-runtime-geometry-v13
 import { getHubDoorDestinationDescriptorsV138 } from './hub-destination-signage-v138.js';
 import { annexNpcDutiesV141, createAnnexNpcsV141, getAnnexNpcPlacementV141 } from './hub-annex-npc-life-v141.js';
 import { getHubDoorFaceV142, projectHubDoorActorV142 } from './hub-door-passage-v142.js';
-import { advanceNpcLifeV136, moveNpcAgainstGeometryV136, spreadNpcStationSpawnsV136 } from './npc-life-v136.js';
+import { advanceNpcLifeV136, moveNpcAgainstGeometryV136, spreadNpcStationSpawnsV136, clearRoomDoorwayPostV188 } from './npc-life-v136.js';
 import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
 import { drawHumanAtlasV133 } from './human-visual-contract-v133.js';
 import { CREW_SPRITE_IDS, CREW_MISSION_SPRITE_IDS, resolveSpriteClip } from './sprite-animation-runtime.js';
@@ -128,7 +128,14 @@ function normalizeNpcAnnexCirculationV161(value) {
     && reasons.includes(rawHandoff.reason) && rawHandoff.observedTravel === false
     ? { crewId: ID, fromRoomId: rawHandoff.fromRoomId, toRoomId: rawHandoff.toRoomId,
       reason: rawHandoff.reason, observedTravel: false, owner: annexTarget ? 'native-v141-annex-watch' : 'native-v62-routine' } : null;
-  const empty = { schema: SCHEMA, actor: null, nativeHandoff }, a = value?.schema === SCHEMA && value.actor;
+  const empty = { schema: SCHEMA, actor: null, nativeHandoff }, saved = value?.schema === SCHEMA && value.actor;
+  // V188: an older save may hold the home post inside another doorway of the home room; move it aside.
+  // Only a post that was otherwise valid is repaired; an out-of-room post is still rejected.
+  const a = saved && finite(saved.homeX) && saved.homeX >= home.xStart + 96 && saved.homeX <= home.xEnd - 140
+    && clearRoomDoorwayPostV188(home, saved.homeX) !== saved.homeX
+    ? { ...saved, homeX: clearRoomDoorwayPostV188(home, saved.homeX),
+      x: saved.stage === 'service' && saved.roomId === HOME && saved.x === saved.homeX ? clearRoomDoorwayPostV188(home, saved.homeX) : saved.x }
+    : saved;
   if (!a || a.crewId !== ID || a.deck !== DECK || ![...mainIds, ANNEX].includes(a.roomId)
     || ![...mainIds, ANNEX].includes(a.targetRoomId) || !stages.includes(a.stage)
     || ![a.x, a.y, a.homeX, a.dutyX, a.velocity, a.time, a.distance, a.doorProgress].every(finite)
@@ -182,8 +189,10 @@ function npcAnnexInterruptionV161(resolution, actor) {
 
 function createNpcAnnexCirculationStateV161(actor, dutyActor) {
   if (actor?.crewId !== ID || ![HOME, ANNEX].includes(actor.roomId) || !dutyActor) return null;
+  // V188: a home post never stands in any doorway of its room (another annex's door included).
+  const homeX = clearRoomDoorwayPostV188(home, actor.roomId === HOME ? actor.x : homeTemplate().x);
   return normalizeNpcAnnexCirculationV161({ schema: SCHEMA, actor: { crewId: ID, deck: DECK,
-    roomId: actor.roomId, x: actor.x, y: actor.y, homeX: actor.roomId === HOME ? actor.x : homeTemplate().x,
+    roomId: actor.roomId, x: actor.roomId === HOME ? homeX : actor.x, y: actor.y, homeX,
     dutyX: dutyActor.x, targetRoomId: actor.roomId, stage: 'service', velocity: 0,
     facing: actor.facing === -1 ? -1 : 1, doorProgress: 0, time: 0, distance: 0,
     crossings: 0, arrivals: 0, admittedRoomId: actor.roomId, reason: 'daily-schedule' } }).actor;
@@ -270,6 +279,9 @@ function advanceNpcAnnexCirculationV161(previous, actor, delta, {
     && yieldGoalX >= mainLeft + 24 && yieldGoalX <= mainRight - 68;
   const goal = yielding ? yieldGoalX : serviceGoal ? s.targetRoomId === ANNEX ? s.dutyX : corridor ? s.targetPostX : s.homeX
     : socketX(s.roomId === ANNEX ? ANNEX : PARENT);
+  // V188: a body left off its post (an older post moved out of a doorway, a
+  // rehydrated pose) walks back to it instead of idling in the doorway.
+  if (s.stage === 'service' && !yielding && serviceGoal && Math.abs(s.x - goal) > .25) s.stage = 'walking';
   if (s.stage === 'service' && !yielding) {
     s.doorProgress = Math.max(0, s.doorProgress - dt / (reducedMotion ? .12 : .65));
     return { ...s, velocity: 0 };

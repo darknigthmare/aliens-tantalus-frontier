@@ -433,7 +433,7 @@ function resolveInfestation(hub, context = {}) {
 function resolveCrisis(hub, context = {}) {
   const raw = isRecord(context.crisis) ? context.crisis : isRecord(hub.activeCrisis) ? hub.activeCrisis : {};
   return {
-    active: context.crisisActive === true || Boolean(raw.active ?? raw.id),
+    active: context.crisisActive === true || (raw.resolved !== true && Boolean(raw.active ?? raw.id)),
     kind: text(raw.kind, '', 60),
     roomId: Object.hasOwn(ROOM_DECKS, raw.roomId) ? raw.roomId : '',
     id: text(raw.id, '', 120)

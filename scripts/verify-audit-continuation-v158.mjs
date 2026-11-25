@@ -8,6 +8,8 @@ import { tmpdir } from 'node:os';
 import { basename, join } from 'node:path';
 import { AUDIT_PREDECESSOR_DOCUMENTS_V158, verifyAuditSuccessionV158 } from './audit-succession-v158.mjs';
 import { verifyAuditSuccessionV157 } from './audit-succession-v157.mjs';
+import { TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188, TANTALUS_PRIORITIES_QUEEN_MOTHER_REGISTRY_V188,
+  verifyQueenMotherChoirRegistryContinuationV188 } from './audit-tantalus-priorities-v188.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { XENO_TRIALS_FIGHTERS_V96 as roster } from '../src/xeno-trials-data-v96.js';
 import { XENO_TRIALS_SEQUENCES_V156 as sequences } from '../src/xeno-trials-sequences-v155.js';
@@ -131,7 +133,11 @@ test('the physical ECHO-A circuit does not claim circulation among the annexes o
 
 test('dedicated Cocon rendering is distinct from source-work certification and an extended campaign', () => {
   const contract = current.runtimeContracts.operations.blackCocoonPresentation;
-  assert.deepEqual(contract.configuration, cocoon);
+  // The immutable V158 witness predates the empty raster support. Only the
+  // descriptive source changes; timing, bonds and all scope claims stay exact.
+  assert.equal(contract.configuration.source, 'original-procedural-human-resin-binding');
+  assert.equal(cocoon.source, 'original-resin-support-with-native-human-binding');
+  assert.deepEqual({ ...contract.configuration, source: cocoon.source }, cocoon);
   assert.equal(cocoon.canonExact, false);
   assert.equal(cocoon.operationId, 'black-cocoon');
   assert.equal(contract.newBitmapAtlas, false);
@@ -141,12 +147,22 @@ test('dedicated Cocon rendering is distinct from source-work certification and a
   assert.equal(contract.oldFreedSaveWithoutTimestamp, 'settled');
   assert.equal(contract.paintedResinClampedToSupport, true);
   assert.equal(contract.equipmentAcquiredThroughNativeBagOnly, true);
-  assert.deepEqual(current.runtimeContracts.operations.counts, operationCounts);
-  assert.deepEqual(operationCounts, previous.runtimeContracts.operations.counts);
+  const historicalCounts = current.runtimeContracts.operations.counts;
+  assert.deepEqual(historicalCounts, previous.runtimeContracts.operations.counts);
+  const registry = verifyQueenMotherChoirRegistryContinuationV188(operations, operationCounts);
+  assert.deepEqual(historicalCounts, registry.historicalCounts);
+  assert.deepEqual(registry.changedIds, ['cargo-brutal', 'broodstorm', 'queen-mother-song']);
+  assert.equal(registry.unchangedOperations, 18);
   assert.deepEqual(ids(current.tables['10_Operations']), operations.map(row => row.id));
   for (const row of current.tables['10_Operations'].rows) {
     const operation = operations.find(entry => entry.id === row[0]);
-    assert.equal(row[5], operation.remainingMechanics.join('; '));
+    // The report keeps the original art debts; only Cargo changed status.
+    assert.equal(row[3], row[0] === 'cargo-brutal' ? 'partial' : operation.implementationStatus);
+    const remaining = row[0] === 'broodstorm'
+      ? TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188.previousRemainingMechanics
+      : row[0] === 'queen-mother-song' ? TANTALUS_PRIORITIES_QUEEN_MOTHER_REGISTRY_V188.previousRemainingMechanics
+      : operation.remainingMechanics;
+    assert.equal(row[5], row[0] === 'cargo-brutal' ? 'dedicated-cargo-matriarch-art' : remaining.join('; '));
     assert.equal(row[6], 0);
   }
 });

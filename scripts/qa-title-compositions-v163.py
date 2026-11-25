@@ -11,6 +11,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import time
 import urllib.request
 from playwright.sync_api import sync_playwright
 
@@ -72,6 +73,12 @@ def composition_matches(before, preset, mode):
             and {layer['id']: layer['role'] for layer in layers} == expected
             and set(scene['roles']) == set(expected.values())
             and len(before['images']) == sum(layer_id.startswith('bitmap-') for layer_id in expected)
+            # V188 appends its planet-effects canvas beside the catalogue
+            # layers. It is a separate renderer, with one exact DOM contract;
+            # every other child still participates in the strict layer count.
+            and before.get('planetEffects') == [{'tag': 'CANVAS',
+                'classes': ['title-vfx-v188', 'title-vfx-v188--planet'],
+                'ariaHidden': 'true', 'id': '', 'dataset': {}, 'childCount': 0}]
             and all(layer['renderer'] == ('image' if layer['id'].startswith('bitmap-') else 'procedural')
                     and (not layer['id'].startswith('bitmap-') or layer['assetId'] == layer['id'][7:])
                     for layer in layers))
@@ -161,7 +168,11 @@ report['identityBefore'] = identity()
 OBSERVE = """()=>{const t=__ATF_V61__.snapshot(),root=document.querySelector('#title-scene-v79');
  return {title:t,focus:document.activeElement?.id,sceneData:{...root.dataset},
  flight:{x:root.style.getPropertyValue('--title-flight-x-v88'),y:root.style.getPropertyValue('--title-flight-y-v88')},
- layers:[...root.children].map(n=>({id:n.dataset.layerId,role:n.dataset.role,renderer:n.dataset.renderer,assetId:n.dataset.assetId||null})),
+layers:[...root.children].filter(n=>!n.matches('canvas.title-vfx-v188.title-vfx-v188--planet'))
+ .map(n=>({id:n.dataset.layerId,role:n.dataset.role,renderer:n.dataset.renderer,assetId:n.dataset.assetId||null})),
+planetEffects:[...root.children].filter(n=>n.matches('canvas.title-vfx-v188.title-vfx-v188--planet'))
+ .map(n=>({tag:n.tagName,classes:[...n.classList].sort(),ariaHidden:n.getAttribute('aria-hidden'),
+ id:n.id,dataset:{...n.dataset},childCount:n.children.length})),
  images:[...root.querySelectorAll('[data-renderer="image"]')].map(n=>({id:n.dataset.assetId,status:n.dataset.assetStatus,
  hidden:n.hidden,angle:n.dataset.shipAngle,background:getComputedStyle(n).backgroundImage})),
  controls:[...document.querySelectorAll('#title-menu button')].filter(n=>!n.hidden).map(n=>{const r=n.getBoundingClientRect();
@@ -194,7 +205,64 @@ def open_settings(page):
 def ready(page):
     page.wait_for_function('''()=>{const t=__ATF_V61__?.snapshot(),r=document.querySelector('#title-scene-v79');
       return t?.visible&&t.scene?.active&&t.scene.status==='ready'&&t.scene.readyAssetCount>0
+        &&r.querySelector(':scope > canvas.title-vfx-v188.title-vfx-v188--planet')
         &&![...r.querySelectorAll('[data-renderer="image"]')].some(n=>n.dataset.assetStatus==='loading');}''', timeout=90000)
+
+
+def open_preview_menu_after_intro(page, menu_key_trace, timeout=30000):
+    # Fade is mouse-transparent while its capture listener still owns keys.
+    # Detachment, the one Enter and menu admission share the existing 30 s.
+    deadline = time.monotonic() + timeout / 1000
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('Title preview entry exceeded its original budget.')
+        return milliseconds
+
+    page.locator('#intro-v188').wait_for(state='detached', timeout=remaining())
+    if page.evaluate('()=>__ATF_V61__.snapshot().state') == 'idle':
+        remaining()
+        menu_key_trace['keyRequested'] = True
+        page.keyboard.press('Enter')
+    page.wait_for_function('()=>__ATF_V61__.snapshot().state==="menu"', timeout=remaining())
+
+
+def start_title_menu_key_trace(page):
+    # Passive, bounded observation of this one Enter transition. No key is
+    # repeated and no title/runtime/profile field is assigned by the trace.
+    return page.evaluate_handle('''()=>{
+      const rows=[],listeners=[],timers=new Set(),maxRows=64;let dropped=0;
+      const identity=n=>n?{tag:n.tagName||n.nodeName||(n===window?'WINDOW':null),id:n.id||null,role:n.getAttribute?.('role')||null}:null;
+      const native=()=>{const t=__ATF_V61__.snapshot(),root=document.querySelector('#title-screen'),intro=document.querySelector('#intro-v188');
+        return {state:t.state,visible:t.visible,menuVisible:t.menuVisible,rootHidden:root?.hidden,
+          sceneStatus:t.scene?.status||null,sceneActive:t.scene?.active||false,
+          introPhase:intro?.dataset.phase||null,introHidden:intro?.hidden??null};};
+      const record=value=>{if(rows.length>=maxRows){dropped++;return;}
+        rows.push({...value,atMs:performance.now(),focus:identity(document.activeElement),
+          documentFocused:document.hasFocus(),documentHidden:document.hidden,native:native()});};
+      for(const [host,label] of [[window,'window'],[document,'document']])for(const capture of [true,false]){
+        const listener=event=>{
+          if(rows.length>=maxRows){dropped++;return;}
+          const entry={type:event.type,listener:label,capture,eventPhase:event.eventPhase,
+            key:event.key||null,code:event.code||null,repeat:!!event.repeat,defaultPrevented:event.defaultPrevented,
+            ctrlKey:!!event.ctrlKey,altKey:!!event.altKey,metaKey:!!event.metaKey,shiftKey:!!event.shiftKey,isComposing:!!event.isComposing,
+            trusted:event.isTrusted,target:identity(event.target),relatedTarget:identity(event.relatedTarget),
+            path:event.composedPath().slice(0,8).map(identity)};
+          record(entry);
+          if(label==='window'&&capture&&['keydown','keyup'].includes(event.type)){
+            const timer=setTimeout(()=>{timers.delete(timer);record({...entry,listener:'next-task',capture:null,
+              eventPhase:null,defaultPrevented:event.defaultPrevented});},0);timers.add(timer);
+          }
+        };
+        for(const type of ['keydown','keyup','focusin','focusout']){
+          host.addEventListener(type,listener,{capture,passive:true});listeners.push([host,type,listener,capture]);
+        }
+      }
+      record({type:'armed',expectedCode:'Enter'});
+      return {stop(){for(const [host,type,listener,capture] of listeners)host.removeEventListener(type,listener,capture);
+        for(const timer of timers)clearTimeout(timer);record({type:'collected'});return {maxRows,dropped,rows};}};
+    }''')
 
 
 with sync_playwright() as pw:
@@ -223,9 +291,23 @@ with sync_playwright() as pw:
                     open_settings(page)
                     page.locator('#setting-title-preview-v87').click()
                     ready(page)
-                    if observed(page)['title']['state'] == 'idle':
-                        page.keyboard.press('Enter')
-                    page.wait_for_function('()=>__ATF_V61__.snapshot().state==="menu"')
+                    key_trace = None
+                    menu_key_trace = {'keyRequested': False}
+                    report.setdefault('menuKeyTraces', {})[label] = menu_key_trace
+                    try:
+                        key_trace = start_title_menu_key_trace(page)
+                        open_preview_menu_after_intro(page, menu_key_trace)
+                    finally:
+                        if key_trace is not None:
+                            try:
+                                menu_key_trace['keyEvents'] = key_trace.evaluate('trace=>trace.stop()')
+                            except Exception as error:
+                                menu_key_trace['keyEvents'] = {'collectionError': str(error)}
+                            finally:
+                                try:
+                                    key_trace.dispose()
+                                except Exception:
+                                    pass
                     before = observed(page)
                     report['activeCompositionContract'] = {'id': label, 'preset': preset, 'mode': mode,
                         'shipId': PRESET_LAYERS[preset]['shipId'],

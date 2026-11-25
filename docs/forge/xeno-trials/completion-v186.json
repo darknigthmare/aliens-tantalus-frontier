@@ -1,0 +1,5824 @@
+{
+  "lot": "XENO-COMPLETION-V186",
+  "baseMain": "803db26dbd7ed453d9534eee237806053438f300",
+  "priorPublicTrials": "e0836d334a88b10efac06c4e7de31c6b5e9d4a68",
+  "restoredBase": "0ae6fc6",
+  "publicationState": "EXACT_COMMIT_RECEIPT_RECORDED_SEPARATELY",
+  "counts": {
+    "roster": 189,
+    "historicalHordes": 40,
+    "newBossProtocols": 40,
+    "totalHordes": 80,
+    "reactionStates": 40,
+    "reactionIdentities": 5,
+    "newImages": 0,
+    "newExactTranslations": 147,
+    "newTranslationPatterns": 20
+  },
+  "bossProtocols": [
+    {
+      "id": "xth186-incoming-1",
+      "sourceEventId": "xte179-incoming-1",
+      "title": "HORDE EN APPROCHE · 01 · FINALE",
+      "label": "HORDE EN APPROCHE · 01 · FINALE",
+      "description": "2 vagues de troupes à 15–35 PV, puis un contact majeur à 140 PV et 2 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "incoming",
+      "level": 1,
+      "stageId": "xt179-ship-habitation",
+      "difficulty": "easy",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "warrior",
+        "prowler",
+        "arachnoid",
+        "crusher-acm"
+      ],
+      "rules": {},
+      "roundSeconds": 360,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 5,
+          "concurrent": 3,
+          "hp": 15,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "warrior",
+            "prowler",
+            "arachnoid",
+            "runner"
+          ],
+          "total": 7,
+          "concurrent": 4,
+          "hp": 17,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 2,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "crusher-acm",
+            "runner",
+            "warrior"
+          ],
+          "total": 3,
+          "concurrent": 3,
+          "hp": 17,
+          "damageScale": 0.30500000000000005,
+          "enemySlotsV186": [
+            {
+              "fighterId": "crusher-acm",
+              "rank": "boss",
+              "hp": 140,
+              "damageScale": 0.7
+            },
+            {
+              "fighterId": "runner",
+              "rank": "troop",
+              "hp": 17,
+              "damageScale": 0.30500000000000005
+            },
+            {
+              "fighterId": "warrior",
+              "rank": "troop",
+              "hp": 17,
+              "damageScale": 0.30500000000000005
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 15,
+      "reward": 670,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-incoming-1",
+      "bossFinaleV186": {
+        "fighterId": "crusher-acm",
+        "hp": 140,
+        "damageScale": 0.7,
+        "wave": 3,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-incoming-2",
+      "sourceEventId": "xte179-incoming-2",
+      "title": "HORDE EN APPROCHE · 02 · FINALE",
+      "label": "HORDE EN APPROCHE · 02 · FINALE",
+      "description": "3 vagues de troupes à 15–35 PV, puis un contact majeur à 180 PV et 2 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "incoming",
+      "level": 2,
+      "stageId": "xt179-ship-extraction",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "warrior",
+        "prowler",
+        "arachnoid",
+        "ravager"
+      ],
+      "rules": {},
+      "roundSeconds": 420,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 6,
+          "concurrent": 4,
+          "hp": 18,
+          "damageScale": 0.33
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "warrior",
+            "prowler",
+            "arachnoid",
+            "runner"
+          ],
+          "total": 8,
+          "concurrent": 5,
+          "hp": 20,
+          "damageScale": 0.33
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 10,
+          "concurrent": 6,
+          "hp": 22,
+          "damageScale": 0.33
+        },
+        {
+          "index": 3,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "ravager",
+            "runner",
+            "warrior"
+          ],
+          "total": 3,
+          "concurrent": 3,
+          "hp": 22,
+          "damageScale": 0.33,
+          "enemySlotsV186": [
+            {
+              "fighterId": "ravager",
+              "rank": "boss",
+              "hp": 180,
+              "damageScale": 0.75
+            },
+            {
+              "fighterId": "runner",
+              "rank": "troop",
+              "hp": 22,
+              "damageScale": 0.33
+            },
+            {
+              "fighterId": "warrior",
+              "rank": "troop",
+              "hp": 22,
+              "damageScale": 0.33
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 27,
+      "reward": 770,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-incoming-2",
+      "bossFinaleV186": {
+        "fighterId": "ravager",
+        "hp": 180,
+        "damageScale": 0.75,
+        "wave": 4,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-incoming-3",
+      "sourceEventId": "xte179-incoming-3",
+      "title": "HORDE EN APPROCHE · 03 · FINALE",
+      "label": "HORDE EN APPROCHE · 03 · FINALE",
+      "description": "4 vagues de troupes à 15–35 PV, puis un contact majeur à 220 PV et 3 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "incoming",
+      "level": 3,
+      "stageId": "xt179-ship-engineering",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "warrior",
+        "prowler",
+        "arachnoid",
+        "royal-guard"
+      ],
+      "rules": {},
+      "roundSeconds": 480,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 7,
+          "concurrent": 5,
+          "hp": 21,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "warrior",
+            "prowler",
+            "arachnoid",
+            "runner"
+          ],
+          "total": 9,
+          "concurrent": 6,
+          "hp": 23,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 11,
+          "concurrent": 7,
+          "hp": 25,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "warrior",
+            "prowler",
+            "arachnoid",
+            "runner"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 27,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 4,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "royal-guard",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 4,
+          "concurrent": 4,
+          "hp": 27,
+          "damageScale": 0.35500000000000004,
+          "enemySlotsV186": [
+            {
+              "fighterId": "royal-guard",
+              "rank": "boss",
+              "hp": 220,
+              "damageScale": 0.8
+            },
+            {
+              "fighterId": "runner",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            },
+            {
+              "fighterId": "warrior",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            },
+            {
+              "fighterId": "prowler",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 44,
+      "reward": 870,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-incoming-3",
+      "bossFinaleV186": {
+        "fighterId": "royal-guard",
+        "hp": 220,
+        "damageScale": 0.8,
+        "wave": 5,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-incoming-4",
+      "sourceEventId": "xte179-incoming-4",
+      "title": "HORDE EN APPROCHE · 04 · FINALE",
+      "label": "HORDE EN APPROCHE · 04 · FINALE",
+      "description": "5 vagues de troupes à 15–35 PV, puis un contact majeur à 270 PV et 3 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "incoming",
+      "level": 4,
+      "stageId": "xt179-ship-docking",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "warrior",
+        "prowler",
+        "arachnoid",
+        "armored-ripper-queen"
+      ],
+      "rules": {},
+      "roundSeconds": 540,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 8,
+          "concurrent": 6,
+          "hp": 24,
+          "damageScale": 0.38
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "warrior",
+            "prowler",
+            "arachnoid",
+            "runner"
+          ],
+          "total": 10,
+          "concurrent": 7,
+          "hp": 26,
+          "damageScale": 0.38
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 12,
+          "concurrent": 8,
+          "hp": 28,
+          "damageScale": 0.38
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "warrior",
+            "prowler",
+            "arachnoid",
+            "runner"
+          ],
+          "total": 14,
+          "concurrent": 8,
+          "hp": 30,
+          "damageScale": 0.38
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 16,
+          "concurrent": 8,
+          "hp": 32,
+          "damageScale": 0.38
+        },
+        {
+          "index": 5,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "armored-ripper-queen",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 4,
+          "concurrent": 4,
+          "hp": 32,
+          "damageScale": 0.38,
+          "enemySlotsV186": [
+            {
+              "fighterId": "armored-ripper-queen",
+              "rank": "boss",
+              "hp": 270,
+              "damageScale": 0.85
+            },
+            {
+              "fighterId": "runner",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            },
+            {
+              "fighterId": "warrior",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            },
+            {
+              "fighterId": "prowler",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 64,
+      "reward": 970,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-incoming-4",
+      "bossFinaleV186": {
+        "fighterId": "armored-ripper-queen",
+        "hp": 270,
+        "damageScale": 0.85,
+        "wave": 6,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-incoming-5",
+      "sourceEventId": "xte179-incoming-5",
+      "title": "HORDE EN APPROCHE · 05 · FINALE",
+      "label": "HORDE EN APPROCHE · 05 · FINALE",
+      "description": "6 vagues de troupes à 15–35 PV, puis un contact majeur à 310 PV et 4 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "incoming",
+      "level": 5,
+      "stageId": "xt179-planet-surface",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "warrior",
+        "prowler",
+        "arachnoid",
+        "queen"
+      ],
+      "rules": {},
+      "roundSeconds": 600,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 9,
+          "concurrent": 7,
+          "hp": 27,
+          "damageScale": 0.405
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "warrior",
+            "prowler",
+            "arachnoid",
+            "runner"
+          ],
+          "total": 11,
+          "concurrent": 8,
+          "hp": 29,
+          "damageScale": 0.405
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 31,
+          "damageScale": 0.405
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "warrior",
+            "prowler",
+            "arachnoid",
+            "runner"
+          ],
+          "total": 15,
+          "concurrent": 8,
+          "hp": 33,
+          "damageScale": 0.405
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 17,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 5,
+          "label": "PRESSION 6",
+          "opponentIds": [
+            "warrior",
+            "prowler",
+            "arachnoid",
+            "runner"
+          ],
+          "total": 19,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 6,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "queen",
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 5,
+          "concurrent": 5,
+          "hp": 35,
+          "damageScale": 0.405,
+          "enemySlotsV186": [
+            {
+              "fighterId": "queen",
+              "rank": "boss",
+              "hp": 310,
+              "damageScale": 0.9
+            },
+            {
+              "fighterId": "runner",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "warrior",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "prowler",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "arachnoid",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 89,
+      "reward": 1070,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-incoming-5",
+      "bossFinaleV186": {
+        "fighterId": "queen",
+        "hp": 310,
+        "damageScale": 0.9,
+        "wave": 7,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-quarantine-1",
+      "sourceEventId": "xte179-quarantine-1",
+      "title": "RUPTURE DE QUARANTAINE · 01 · FINALE",
+      "label": "RUPTURE DE QUARANTAINE · 01 · FINALE",
+      "description": "2 vagues de troupes à 15–35 PV, puis un contact majeur à 140 PV et 2 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "quarantine",
+      "level": 1,
+      "stageId": "xt179-planet-ruins",
+      "difficulty": "easy",
+      "factionId": "hive",
+      "opponentIds": [
+        "warrior",
+        "armored-runner",
+        "synth-guard",
+        "defender",
+        "synth-enforcer"
+      ],
+      "rules": {},
+      "roundSeconds": 360,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 5,
+          "concurrent": 3,
+          "hp": 15,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "armored-runner",
+            "synth-guard",
+            "defender",
+            "warrior"
+          ],
+          "total": 7,
+          "concurrent": 4,
+          "hp": 17,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 2,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "synth-enforcer",
+            "warrior",
+            "armored-runner"
+          ],
+          "total": 3,
+          "concurrent": 3,
+          "hp": 17,
+          "damageScale": 0.30500000000000005,
+          "enemySlotsV186": [
+            {
+              "fighterId": "synth-enforcer",
+              "rank": "boss",
+              "hp": 140,
+              "damageScale": 0.7
+            },
+            {
+              "fighterId": "warrior",
+              "rank": "troop",
+              "hp": 17,
+              "damageScale": 0.30500000000000005
+            },
+            {
+              "fighterId": "armored-runner",
+              "rank": "troop",
+              "hp": 17,
+              "damageScale": 0.30500000000000005
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 15,
+      "reward": 670,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-quarantine-1",
+      "bossFinaleV186": {
+        "fighterId": "synth-enforcer",
+        "hp": 140,
+        "damageScale": 0.7,
+        "wave": 3,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-quarantine-2",
+      "sourceEventId": "xte179-quarantine-2",
+      "title": "RUPTURE DE QUARANTAINE · 02 · FINALE",
+      "label": "RUPTURE DE QUARANTAINE · 02 · FINALE",
+      "description": "3 vagues de troupes à 15–35 PV, puis un contact majeur à 180 PV et 2 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "quarantine",
+      "level": 2,
+      "stageId": "xt179-planet-ridge",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "warrior",
+        "armored-runner",
+        "synth-guard",
+        "defender",
+        "synth-containment"
+      ],
+      "rules": {},
+      "roundSeconds": 420,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 6,
+          "concurrent": 4,
+          "hp": 18,
+          "damageScale": 0.33
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "armored-runner",
+            "synth-guard",
+            "defender",
+            "warrior"
+          ],
+          "total": 8,
+          "concurrent": 5,
+          "hp": 20,
+          "damageScale": 0.33
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 10,
+          "concurrent": 6,
+          "hp": 22,
+          "damageScale": 0.33
+        },
+        {
+          "index": 3,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "synth-containment",
+            "warrior",
+            "armored-runner"
+          ],
+          "total": 3,
+          "concurrent": 3,
+          "hp": 22,
+          "damageScale": 0.33,
+          "enemySlotsV186": [
+            {
+              "fighterId": "synth-containment",
+              "rank": "boss",
+              "hp": 180,
+              "damageScale": 0.75
+            },
+            {
+              "fighterId": "warrior",
+              "rank": "troop",
+              "hp": 22,
+              "damageScale": 0.33
+            },
+            {
+              "fighterId": "armored-runner",
+              "rank": "troop",
+              "hp": 22,
+              "damageScale": 0.33
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 27,
+      "reward": 770,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-quarantine-2",
+      "bossFinaleV186": {
+        "fighterId": "synth-containment",
+        "hp": 180,
+        "damageScale": 0.75,
+        "wave": 4,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-quarantine-3",
+      "sourceEventId": "xte179-quarantine-3",
+      "title": "RUPTURE DE QUARANTAINE · 03 · FINALE",
+      "label": "RUPTURE DE QUARANTAINE · 03 · FINALE",
+      "description": "4 vagues de troupes à 15–35 PV, puis un contact majeur à 220 PV et 3 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "quarantine",
+      "level": 3,
+      "stageId": "xt179-planet-evac",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "warrior",
+        "armored-runner",
+        "synth-guard",
+        "defender",
+        "import-game-afe2-bulwark"
+      ],
+      "rules": {},
+      "roundSeconds": 480,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 7,
+          "concurrent": 5,
+          "hp": 21,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "armored-runner",
+            "synth-guard",
+            "defender",
+            "warrior"
+          ],
+          "total": 9,
+          "concurrent": 6,
+          "hp": 23,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 11,
+          "concurrent": 7,
+          "hp": 25,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "armored-runner",
+            "synth-guard",
+            "defender",
+            "warrior"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 27,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 4,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "import-game-afe2-bulwark",
+            "warrior",
+            "armored-runner",
+            "synth-guard"
+          ],
+          "total": 4,
+          "concurrent": 4,
+          "hp": 27,
+          "damageScale": 0.35500000000000004,
+          "enemySlotsV186": [
+            {
+              "fighterId": "import-game-afe2-bulwark",
+              "rank": "boss",
+              "hp": 220,
+              "damageScale": 0.8
+            },
+            {
+              "fighterId": "warrior",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            },
+            {
+              "fighterId": "armored-runner",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            },
+            {
+              "fighterId": "synth-guard",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 44,
+      "reward": 870,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-quarantine-3",
+      "bossFinaleV186": {
+        "fighterId": "import-game-afe2-bulwark",
+        "hp": 220,
+        "damageScale": 0.8,
+        "wave": 5,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-quarantine-4",
+      "sourceEventId": "xte179-quarantine-4",
+      "title": "RUPTURE DE QUARANTAINE · 04 · FINALE",
+      "label": "RUPTURE DE QUARANTAINE · 04 · FINALE",
+      "description": "5 vagues de troupes à 15–35 PV, puis un contact majeur à 270 PV et 3 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "quarantine",
+      "level": 4,
+      "stageId": "xt179-planet-caves",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "warrior",
+        "armored-runner",
+        "synth-guard",
+        "defender",
+        "royal-guard"
+      ],
+      "rules": {},
+      "roundSeconds": 540,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 8,
+          "concurrent": 6,
+          "hp": 24,
+          "damageScale": 0.38
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "armored-runner",
+            "synth-guard",
+            "defender",
+            "warrior"
+          ],
+          "total": 10,
+          "concurrent": 7,
+          "hp": 26,
+          "damageScale": 0.38
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 12,
+          "concurrent": 8,
+          "hp": 28,
+          "damageScale": 0.38
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "armored-runner",
+            "synth-guard",
+            "defender",
+            "warrior"
+          ],
+          "total": 14,
+          "concurrent": 8,
+          "hp": 30,
+          "damageScale": 0.38
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 16,
+          "concurrent": 8,
+          "hp": 32,
+          "damageScale": 0.38
+        },
+        {
+          "index": 5,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "royal-guard",
+            "warrior",
+            "armored-runner",
+            "synth-guard"
+          ],
+          "total": 4,
+          "concurrent": 4,
+          "hp": 32,
+          "damageScale": 0.38,
+          "enemySlotsV186": [
+            {
+              "fighterId": "royal-guard",
+              "rank": "boss",
+              "hp": 270,
+              "damageScale": 0.85
+            },
+            {
+              "fighterId": "warrior",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            },
+            {
+              "fighterId": "armored-runner",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            },
+            {
+              "fighterId": "synth-guard",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 64,
+      "reward": 970,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-quarantine-4",
+      "bossFinaleV186": {
+        "fighterId": "royal-guard",
+        "hp": 270,
+        "damageScale": 0.85,
+        "wave": 6,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-quarantine-5",
+      "sourceEventId": "xte179-quarantine-5",
+      "title": "RUPTURE DE QUARANTAINE · 05 · FINALE",
+      "label": "RUPTURE DE QUARANTAINE · 05 · FINALE",
+      "description": "6 vagues de troupes à 15–35 PV, puis un contact majeur à 310 PV et 4 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "quarantine",
+      "level": 5,
+      "stageId": "xt179-planet-approach",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "warrior",
+        "armored-runner",
+        "synth-guard",
+        "defender",
+        "queen"
+      ],
+      "rules": {},
+      "roundSeconds": 600,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 9,
+          "concurrent": 7,
+          "hp": 27,
+          "damageScale": 0.405
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "armored-runner",
+            "synth-guard",
+            "defender",
+            "warrior"
+          ],
+          "total": 11,
+          "concurrent": 8,
+          "hp": 29,
+          "damageScale": 0.405
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 31,
+          "damageScale": 0.405
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "armored-runner",
+            "synth-guard",
+            "defender",
+            "warrior"
+          ],
+          "total": 15,
+          "concurrent": 8,
+          "hp": 33,
+          "damageScale": 0.405
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 17,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 5,
+          "label": "PRESSION 6",
+          "opponentIds": [
+            "armored-runner",
+            "synth-guard",
+            "defender",
+            "warrior"
+          ],
+          "total": 19,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 6,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "queen",
+            "warrior",
+            "armored-runner",
+            "synth-guard",
+            "defender"
+          ],
+          "total": 5,
+          "concurrent": 5,
+          "hp": 35,
+          "damageScale": 0.405,
+          "enemySlotsV186": [
+            {
+              "fighterId": "queen",
+              "rank": "boss",
+              "hp": 310,
+              "damageScale": 0.9
+            },
+            {
+              "fighterId": "warrior",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "armored-runner",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "synth-guard",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "defender",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 89,
+      "reward": 1070,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-quarantine-5",
+      "bossFinaleV186": {
+        "fighterId": "queen",
+        "hp": 310,
+        "damageScale": 0.9,
+        "wave": 7,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-extraction-1",
+      "sourceEventId": "xte179-extraction-1",
+      "title": "COULOIR D’EXTRACTION · 01 · FINALE",
+      "label": "COULOIR D’EXTRACTION · 01 · FINALE",
+      "description": "2 vagues de troupes à 15–35 PV, puis un contact majeur à 140 PV et 2 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "extraction",
+      "level": 1,
+      "stageId": "xt179-colony-utility",
+      "difficulty": "easy",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "prowler",
+        "spitter",
+        "warrior",
+        "import-game-afe2-harbinger"
+      ],
+      "rules": {},
+      "roundSeconds": 360,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 5,
+          "concurrent": 3,
+          "hp": 15,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "prowler",
+            "spitter",
+            "warrior",
+            "runner"
+          ],
+          "total": 7,
+          "concurrent": 4,
+          "hp": 17,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 2,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "import-game-afe2-harbinger",
+            "runner",
+            "prowler"
+          ],
+          "total": 3,
+          "concurrent": 3,
+          "hp": 17,
+          "damageScale": 0.30500000000000005,
+          "enemySlotsV186": [
+            {
+              "fighterId": "import-game-afe2-harbinger",
+              "rank": "boss",
+              "hp": 140,
+              "damageScale": 0.7
+            },
+            {
+              "fighterId": "runner",
+              "rank": "troop",
+              "hp": 17,
+              "damageScale": 0.30500000000000005
+            },
+            {
+              "fighterId": "prowler",
+              "rank": "troop",
+              "hp": 17,
+              "damageScale": 0.30500000000000005
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 15,
+      "reward": 670,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-extraction-1",
+      "bossFinaleV186": {
+        "fighterId": "import-game-afe2-harbinger",
+        "hp": 140,
+        "damageScale": 0.7,
+        "wave": 3,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-extraction-2",
+      "sourceEventId": "xte179-extraction-2",
+      "title": "COULOIR D’EXTRACTION · 02 · FINALE",
+      "label": "COULOIR D’EXTRACTION · 02 · FINALE",
+      "description": "3 vagues de troupes à 15–35 PV, puis un contact majeur à 180 PV et 2 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "extraction",
+      "level": 2,
+      "stageId": "xt179-colony-security",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "prowler",
+        "spitter",
+        "warrior",
+        "crusher-acm"
+      ],
+      "rules": {},
+      "roundSeconds": 420,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 6,
+          "concurrent": 4,
+          "hp": 18,
+          "damageScale": 0.33
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "prowler",
+            "spitter",
+            "warrior",
+            "runner"
+          ],
+          "total": 8,
+          "concurrent": 5,
+          "hp": 20,
+          "damageScale": 0.33
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 10,
+          "concurrent": 6,
+          "hp": 22,
+          "damageScale": 0.33
+        },
+        {
+          "index": 3,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "crusher-acm",
+            "runner",
+            "prowler"
+          ],
+          "total": 3,
+          "concurrent": 3,
+          "hp": 22,
+          "damageScale": 0.33,
+          "enemySlotsV186": [
+            {
+              "fighterId": "crusher-acm",
+              "rank": "boss",
+              "hp": 180,
+              "damageScale": 0.75
+            },
+            {
+              "fighterId": "runner",
+              "rank": "troop",
+              "hp": 22,
+              "damageScale": 0.33
+            },
+            {
+              "fighterId": "prowler",
+              "rank": "troop",
+              "hp": 22,
+              "damageScale": 0.33
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 27,
+      "reward": 770,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-extraction-2",
+      "bossFinaleV186": {
+        "fighterId": "crusher-acm",
+        "hp": 180,
+        "damageScale": 0.75,
+        "wave": 4,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-extraction-3",
+      "sourceEventId": "xte179-extraction-3",
+      "title": "COULOIR D’EXTRACTION · 03 · FINALE",
+      "label": "COULOIR D’EXTRACTION · 03 · FINALE",
+      "description": "4 vagues de troupes à 15–35 PV, puis un contact majeur à 220 PV et 3 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "extraction",
+      "level": 3,
+      "stageId": "xt179-colony-landing",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "prowler",
+        "spitter",
+        "warrior",
+        "ravager"
+      ],
+      "rules": {},
+      "roundSeconds": 480,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 7,
+          "concurrent": 5,
+          "hp": 21,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "prowler",
+            "spitter",
+            "warrior",
+            "runner"
+          ],
+          "total": 9,
+          "concurrent": 6,
+          "hp": 23,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 11,
+          "concurrent": 7,
+          "hp": 25,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "prowler",
+            "spitter",
+            "warrior",
+            "runner"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 27,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 4,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "ravager",
+            "runner",
+            "prowler",
+            "spitter"
+          ],
+          "total": 4,
+          "concurrent": 4,
+          "hp": 27,
+          "damageScale": 0.35500000000000004,
+          "enemySlotsV186": [
+            {
+              "fighterId": "ravager",
+              "rank": "boss",
+              "hp": 220,
+              "damageScale": 0.8
+            },
+            {
+              "fighterId": "runner",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            },
+            {
+              "fighterId": "prowler",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            },
+            {
+              "fighterId": "spitter",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 44,
+      "reward": 870,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-extraction-3",
+      "bossFinaleV186": {
+        "fighterId": "ravager",
+        "hp": 220,
+        "damageScale": 0.8,
+        "wave": 5,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-extraction-4",
+      "sourceEventId": "xte179-extraction-4",
+      "title": "COULOIR D’EXTRACTION · 04 · FINALE",
+      "label": "COULOIR D’EXTRACTION · 04 · FINALE",
+      "description": "5 vagues de troupes à 15–35 PV, puis un contact majeur à 270 PV et 3 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "extraction",
+      "level": 4,
+      "stageId": "xt179-colony-habitat",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "prowler",
+        "spitter",
+        "warrior",
+        "royal-guard"
+      ],
+      "rules": {},
+      "roundSeconds": 540,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 8,
+          "concurrent": 6,
+          "hp": 24,
+          "damageScale": 0.38
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "prowler",
+            "spitter",
+            "warrior",
+            "runner"
+          ],
+          "total": 10,
+          "concurrent": 7,
+          "hp": 26,
+          "damageScale": 0.38
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 12,
+          "concurrent": 8,
+          "hp": 28,
+          "damageScale": 0.38
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "prowler",
+            "spitter",
+            "warrior",
+            "runner"
+          ],
+          "total": 14,
+          "concurrent": 8,
+          "hp": 30,
+          "damageScale": 0.38
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 16,
+          "concurrent": 8,
+          "hp": 32,
+          "damageScale": 0.38
+        },
+        {
+          "index": 5,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "royal-guard",
+            "runner",
+            "prowler",
+            "spitter"
+          ],
+          "total": 4,
+          "concurrent": 4,
+          "hp": 32,
+          "damageScale": 0.38,
+          "enemySlotsV186": [
+            {
+              "fighterId": "royal-guard",
+              "rank": "boss",
+              "hp": 270,
+              "damageScale": 0.85
+            },
+            {
+              "fighterId": "runner",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            },
+            {
+              "fighterId": "prowler",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            },
+            {
+              "fighterId": "spitter",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 64,
+      "reward": 970,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-extraction-4",
+      "bossFinaleV186": {
+        "fighterId": "royal-guard",
+        "hp": 270,
+        "damageScale": 0.85,
+        "wave": 6,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-extraction-5",
+      "sourceEventId": "xte179-extraction-5",
+      "title": "COULOIR D’EXTRACTION · 05 · FINALE",
+      "label": "COULOIR D’EXTRACTION · 05 · FINALE",
+      "description": "6 vagues de troupes à 15–35 PV, puis un contact majeur à 310 PV et 4 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "extraction",
+      "level": 5,
+      "stageId": "xt179-colony-civic",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "prowler",
+        "spitter",
+        "warrior",
+        "queen"
+      ],
+      "rules": {},
+      "roundSeconds": 600,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 9,
+          "concurrent": 7,
+          "hp": 27,
+          "damageScale": 0.405
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "prowler",
+            "spitter",
+            "warrior",
+            "runner"
+          ],
+          "total": 11,
+          "concurrent": 8,
+          "hp": 29,
+          "damageScale": 0.405
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 31,
+          "damageScale": 0.405
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "prowler",
+            "spitter",
+            "warrior",
+            "runner"
+          ],
+          "total": 15,
+          "concurrent": 8,
+          "hp": 33,
+          "damageScale": 0.405
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 17,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 5,
+          "label": "PRESSION 6",
+          "opponentIds": [
+            "prowler",
+            "spitter",
+            "warrior",
+            "runner"
+          ],
+          "total": 19,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 6,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "queen",
+            "runner",
+            "prowler",
+            "spitter",
+            "warrior"
+          ],
+          "total": 5,
+          "concurrent": 5,
+          "hp": 35,
+          "damageScale": 0.405,
+          "enemySlotsV186": [
+            {
+              "fighterId": "queen",
+              "rank": "boss",
+              "hp": 310,
+              "damageScale": 0.9
+            },
+            {
+              "fighterId": "runner",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "prowler",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "spitter",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "warrior",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 89,
+      "reward": 1070,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-extraction-5",
+      "bossFinaleV186": {
+        "fighterId": "queen",
+        "hp": 310,
+        "damageScale": 0.9,
+        "wave": 7,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-pursuit-1",
+      "sourceEventId": "xte179-pursuit-1",
+      "title": "MEUTE EN CHASSE · 01 · FINALE",
+      "label": "MEUTE EN CHASSE · 01 · FINALE",
+      "description": "2 vagues de troupes à 15–35 PV, puis un contact majeur à 140 PV et 2 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "pursuit",
+      "level": 1,
+      "stageId": "xt179-colony-approach",
+      "difficulty": "easy",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "panther",
+        "grid",
+        "stalker-arcade",
+        "predalien"
+      ],
+      "rules": {},
+      "roundSeconds": 360,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 5,
+          "concurrent": 3,
+          "hp": 15,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "panther",
+            "grid",
+            "stalker-arcade",
+            "runner"
+          ],
+          "total": 7,
+          "concurrent": 4,
+          "hp": 17,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 2,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "predalien",
+            "runner",
+            "panther"
+          ],
+          "total": 3,
+          "concurrent": 3,
+          "hp": 17,
+          "damageScale": 0.30500000000000005,
+          "enemySlotsV186": [
+            {
+              "fighterId": "predalien",
+              "rank": "boss",
+              "hp": 140,
+              "damageScale": 0.7
+            },
+            {
+              "fighterId": "runner",
+              "rank": "troop",
+              "hp": 17,
+              "damageScale": 0.30500000000000005
+            },
+            {
+              "fighterId": "panther",
+              "rank": "troop",
+              "hp": 17,
+              "damageScale": 0.30500000000000005
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 15,
+      "reward": 670,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-pursuit-1",
+      "bossFinaleV186": {
+        "fighterId": "predalien",
+        "hp": 140,
+        "damageScale": 0.7,
+        "wave": 3,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-pursuit-2",
+      "sourceEventId": "xte179-pursuit-2",
+      "title": "MEUTE EN CHASSE · 02 · FINALE",
+      "label": "MEUTE EN CHASSE · 02 · FINALE",
+      "description": "3 vagues de troupes à 15–35 PV, puis un contact majeur à 180 PV et 2 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "pursuit",
+      "level": 2,
+      "stageId": "xt179-workshop",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "panther",
+        "grid",
+        "stalker-arcade",
+        "razor-claws"
+      ],
+      "rules": {},
+      "roundSeconds": 420,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 6,
+          "concurrent": 4,
+          "hp": 18,
+          "damageScale": 0.33
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "panther",
+            "grid",
+            "stalker-arcade",
+            "runner"
+          ],
+          "total": 8,
+          "concurrent": 5,
+          "hp": 20,
+          "damageScale": 0.33
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 10,
+          "concurrent": 6,
+          "hp": 22,
+          "damageScale": 0.33
+        },
+        {
+          "index": 3,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "razor-claws",
+            "runner",
+            "panther"
+          ],
+          "total": 3,
+          "concurrent": 3,
+          "hp": 22,
+          "damageScale": 0.33,
+          "enemySlotsV186": [
+            {
+              "fighterId": "razor-claws",
+              "rank": "boss",
+              "hp": 180,
+              "damageScale": 0.75
+            },
+            {
+              "fighterId": "runner",
+              "rank": "troop",
+              "hp": 22,
+              "damageScale": 0.33
+            },
+            {
+              "fighterId": "panther",
+              "rank": "troop",
+              "hp": 22,
+              "damageScale": 0.33
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 27,
+      "reward": 770,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-pursuit-2",
+      "bossFinaleV186": {
+        "fighterId": "razor-claws",
+        "hp": 180,
+        "damageScale": 0.75,
+        "wave": 4,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-pursuit-3",
+      "sourceEventId": "xte179-pursuit-3",
+      "title": "MEUTE EN CHASSE · 03 · FINALE",
+      "label": "MEUTE EN CHASSE · 03 · FINALE",
+      "description": "4 vagues de troupes à 15–35 PV, puis un contact majeur à 220 PV et 3 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "pursuit",
+      "level": 3,
+      "stageId": "xt179-vehicle-bay",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "panther",
+        "grid",
+        "stalker-arcade",
+        "ravager"
+      ],
+      "rules": {},
+      "roundSeconds": 480,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 7,
+          "concurrent": 5,
+          "hp": 21,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "panther",
+            "grid",
+            "stalker-arcade",
+            "runner"
+          ],
+          "total": 9,
+          "concurrent": 6,
+          "hp": 23,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 11,
+          "concurrent": 7,
+          "hp": 25,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "panther",
+            "grid",
+            "stalker-arcade",
+            "runner"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 27,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 4,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "ravager",
+            "runner",
+            "panther",
+            "grid"
+          ],
+          "total": 4,
+          "concurrent": 4,
+          "hp": 27,
+          "damageScale": 0.35500000000000004,
+          "enemySlotsV186": [
+            {
+              "fighterId": "ravager",
+              "rank": "boss",
+              "hp": 220,
+              "damageScale": 0.8
+            },
+            {
+              "fighterId": "runner",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            },
+            {
+              "fighterId": "panther",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            },
+            {
+              "fighterId": "grid",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 44,
+      "reward": 870,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-pursuit-3",
+      "bossFinaleV186": {
+        "fighterId": "ravager",
+        "hp": 220,
+        "damageScale": 0.8,
+        "wave": 5,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-pursuit-4",
+      "sourceEventId": "xte179-pursuit-4",
+      "title": "MEUTE EN CHASSE · 04 · FINALE",
+      "label": "MEUTE EN CHASSE · 04 · FINALE",
+      "description": "5 vagues de troupes à 15–35 PV, puis un contact majeur à 270 PV et 3 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "pursuit",
+      "level": 4,
+      "stageId": "xt179-quarantine",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "panther",
+        "grid",
+        "stalker-arcade",
+        "armored-ravager"
+      ],
+      "rules": {},
+      "roundSeconds": 540,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 8,
+          "concurrent": 6,
+          "hp": 24,
+          "damageScale": 0.38
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "panther",
+            "grid",
+            "stalker-arcade",
+            "runner"
+          ],
+          "total": 10,
+          "concurrent": 7,
+          "hp": 26,
+          "damageScale": 0.38
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 12,
+          "concurrent": 8,
+          "hp": 28,
+          "damageScale": 0.38
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "panther",
+            "grid",
+            "stalker-arcade",
+            "runner"
+          ],
+          "total": 14,
+          "concurrent": 8,
+          "hp": 30,
+          "damageScale": 0.38
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 16,
+          "concurrent": 8,
+          "hp": 32,
+          "damageScale": 0.38
+        },
+        {
+          "index": 5,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "armored-ravager",
+            "runner",
+            "panther",
+            "grid"
+          ],
+          "total": 4,
+          "concurrent": 4,
+          "hp": 32,
+          "damageScale": 0.38,
+          "enemySlotsV186": [
+            {
+              "fighterId": "armored-ravager",
+              "rank": "boss",
+              "hp": 270,
+              "damageScale": 0.85
+            },
+            {
+              "fighterId": "runner",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            },
+            {
+              "fighterId": "panther",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            },
+            {
+              "fighterId": "grid",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 64,
+      "reward": 970,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-pursuit-4",
+      "bossFinaleV186": {
+        "fighterId": "armored-ravager",
+        "hp": 270,
+        "damageScale": 0.85,
+        "wave": 6,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-pursuit-5",
+      "sourceEventId": "xte179-pursuit-5",
+      "title": "MEUTE EN CHASSE · 05 · FINALE",
+      "label": "MEUTE EN CHASSE · 05 · FINALE",
+      "description": "6 vagues de troupes à 15–35 PV, puis un contact majeur à 310 PV et 4 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "pursuit",
+      "level": 5,
+      "stageId": "xt179-armory",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "runner",
+        "panther",
+        "grid",
+        "stalker-arcade",
+        "royal-guard"
+      ],
+      "rules": {},
+      "roundSeconds": 600,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 9,
+          "concurrent": 7,
+          "hp": 27,
+          "damageScale": 0.405
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "panther",
+            "grid",
+            "stalker-arcade",
+            "runner"
+          ],
+          "total": 11,
+          "concurrent": 8,
+          "hp": 29,
+          "damageScale": 0.405
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 31,
+          "damageScale": 0.405
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "panther",
+            "grid",
+            "stalker-arcade",
+            "runner"
+          ],
+          "total": 15,
+          "concurrent": 8,
+          "hp": 33,
+          "damageScale": 0.405
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 17,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 5,
+          "label": "PRESSION 6",
+          "opponentIds": [
+            "panther",
+            "grid",
+            "stalker-arcade",
+            "runner"
+          ],
+          "total": 19,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 6,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "royal-guard",
+            "runner",
+            "panther",
+            "grid",
+            "stalker-arcade"
+          ],
+          "total": 5,
+          "concurrent": 5,
+          "hp": 35,
+          "damageScale": 0.405,
+          "enemySlotsV186": [
+            {
+              "fighterId": "royal-guard",
+              "rank": "boss",
+              "hp": 310,
+              "damageScale": 0.9
+            },
+            {
+              "fighterId": "runner",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "panther",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "grid",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "stalker-arcade",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 89,
+      "reward": 1070,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-pursuit-5",
+      "bossFinaleV186": {
+        "fighterId": "royal-guard",
+        "hp": 310,
+        "damageScale": 0.9,
+        "wave": 7,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-blackout-1",
+      "sourceEventId": "xte179-blackout-1",
+      "title": "ESSAIM SYNTHÉTIQUE · 01 · FINALE",
+      "label": "ESSAIM SYNTHÉTIQUE · 01 · FINALE",
+      "description": "2 vagues de troupes à 15–35 PV, puis un contact majeur à 140 PV et 2 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "blackout",
+      "level": 1,
+      "stageId": "xt179-quarters",
+      "difficulty": "easy",
+      "factionId": "rival-lab",
+      "opponentIds": [
+        "synth-trooper",
+        "synth-sniper",
+        "synth-guard",
+        "combat-synth",
+        "synth-heavy"
+      ],
+      "rules": {},
+      "roundSeconds": 360,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 5,
+          "concurrent": 3,
+          "hp": 15,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth",
+            "synth-trooper"
+          ],
+          "total": 7,
+          "concurrent": 4,
+          "hp": 17,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 2,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "synth-heavy",
+            "synth-trooper",
+            "synth-sniper"
+          ],
+          "total": 3,
+          "concurrent": 3,
+          "hp": 17,
+          "damageScale": 0.30500000000000005,
+          "enemySlotsV186": [
+            {
+              "fighterId": "synth-heavy",
+              "rank": "boss",
+              "hp": 140,
+              "damageScale": 0.7
+            },
+            {
+              "fighterId": "synth-trooper",
+              "rank": "troop",
+              "hp": 17,
+              "damageScale": 0.30500000000000005
+            },
+            {
+              "fighterId": "synth-sniper",
+              "rank": "troop",
+              "hp": 17,
+              "damageScale": 0.30500000000000005
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 15,
+      "reward": 670,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-blackout-1",
+      "bossFinaleV186": {
+        "fighterId": "synth-heavy",
+        "hp": 140,
+        "damageScale": 0.7,
+        "wave": 3,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-blackout-2",
+      "sourceEventId": "xte179-blackout-2",
+      "title": "ESSAIM SYNTHÉTIQUE · 02 · FINALE",
+      "label": "ESSAIM SYNTHÉTIQUE · 02 · FINALE",
+      "description": "3 vagues de troupes à 15–35 PV, puis un contact majeur à 180 PV et 2 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "blackout",
+      "level": 2,
+      "stageId": "xt179-mess",
+      "difficulty": "normal",
+      "factionId": "rival-lab",
+      "opponentIds": [
+        "synth-trooper",
+        "synth-sniper",
+        "synth-guard",
+        "combat-synth",
+        "synth-enforcer"
+      ],
+      "rules": {},
+      "roundSeconds": 420,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 6,
+          "concurrent": 4,
+          "hp": 18,
+          "damageScale": 0.33
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth",
+            "synth-trooper"
+          ],
+          "total": 8,
+          "concurrent": 5,
+          "hp": 20,
+          "damageScale": 0.33
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 10,
+          "concurrent": 6,
+          "hp": 22,
+          "damageScale": 0.33
+        },
+        {
+          "index": 3,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "synth-enforcer",
+            "synth-trooper",
+            "synth-sniper"
+          ],
+          "total": 3,
+          "concurrent": 3,
+          "hp": 22,
+          "damageScale": 0.33,
+          "enemySlotsV186": [
+            {
+              "fighterId": "synth-enforcer",
+              "rank": "boss",
+              "hp": 180,
+              "damageScale": 0.75
+            },
+            {
+              "fighterId": "synth-trooper",
+              "rank": "troop",
+              "hp": 22,
+              "damageScale": 0.33
+            },
+            {
+              "fighterId": "synth-sniper",
+              "rank": "troop",
+              "hp": 22,
+              "damageScale": 0.33
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 27,
+      "reward": 770,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-blackout-2",
+      "bossFinaleV186": {
+        "fighterId": "synth-enforcer",
+        "hp": 180,
+        "damageScale": 0.75,
+        "wave": 4,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-blackout-3",
+      "sourceEventId": "xte179-blackout-3",
+      "title": "ESSAIM SYNTHÉTIQUE · 03 · FINALE",
+      "label": "ESSAIM SYNTHÉTIQUE · 03 · FINALE",
+      "description": "4 vagues de troupes à 15–35 PV, puis un contact majeur à 220 PV et 3 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "blackout",
+      "level": 3,
+      "stageId": "xt179-medical",
+      "difficulty": "normal",
+      "factionId": "rival-lab",
+      "opponentIds": [
+        "synth-trooper",
+        "synth-sniper",
+        "synth-guard",
+        "combat-synth",
+        "import-game-afe-synth-warden"
+      ],
+      "rules": {},
+      "roundSeconds": 480,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 7,
+          "concurrent": 5,
+          "hp": 21,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth",
+            "synth-trooper"
+          ],
+          "total": 9,
+          "concurrent": 6,
+          "hp": 23,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 11,
+          "concurrent": 7,
+          "hp": 25,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth",
+            "synth-trooper"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 27,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 4,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "import-game-afe-synth-warden",
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard"
+          ],
+          "total": 4,
+          "concurrent": 4,
+          "hp": 27,
+          "damageScale": 0.35500000000000004,
+          "enemySlotsV186": [
+            {
+              "fighterId": "import-game-afe-synth-warden",
+              "rank": "boss",
+              "hp": 220,
+              "damageScale": 0.8
+            },
+            {
+              "fighterId": "synth-trooper",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            },
+            {
+              "fighterId": "synth-sniper",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            },
+            {
+              "fighterId": "synth-guard",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 44,
+      "reward": 870,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-blackout-3",
+      "bossFinaleV186": {
+        "fighterId": "import-game-afe-synth-warden",
+        "hp": 220,
+        "damageScale": 0.8,
+        "wave": 5,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-blackout-4",
+      "sourceEventId": "xte179-blackout-4",
+      "title": "ESSAIM SYNTHÉTIQUE · 04 · FINALE",
+      "label": "ESSAIM SYNTHÉTIQUE · 04 · FINALE",
+      "description": "5 vagues de troupes à 15–35 PV, puis un contact majeur à 270 PV et 3 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "blackout",
+      "level": 4,
+      "stageId": "xt179-laboratory",
+      "difficulty": "hard",
+      "factionId": "rival-lab",
+      "opponentIds": [
+        "synth-trooper",
+        "synth-sniper",
+        "synth-guard",
+        "combat-synth",
+        "synth-containment"
+      ],
+      "rules": {},
+      "roundSeconds": 540,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 8,
+          "concurrent": 6,
+          "hp": 24,
+          "damageScale": 0.38
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth",
+            "synth-trooper"
+          ],
+          "total": 10,
+          "concurrent": 7,
+          "hp": 26,
+          "damageScale": 0.38
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 12,
+          "concurrent": 8,
+          "hp": 28,
+          "damageScale": 0.38
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth",
+            "synth-trooper"
+          ],
+          "total": 14,
+          "concurrent": 8,
+          "hp": 30,
+          "damageScale": 0.38
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 16,
+          "concurrent": 8,
+          "hp": 32,
+          "damageScale": 0.38
+        },
+        {
+          "index": 5,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "synth-containment",
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard"
+          ],
+          "total": 4,
+          "concurrent": 4,
+          "hp": 32,
+          "damageScale": 0.38,
+          "enemySlotsV186": [
+            {
+              "fighterId": "synth-containment",
+              "rank": "boss",
+              "hp": 270,
+              "damageScale": 0.85
+            },
+            {
+              "fighterId": "synth-trooper",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            },
+            {
+              "fighterId": "synth-sniper",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            },
+            {
+              "fighterId": "synth-guard",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 64,
+      "reward": 970,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-blackout-4",
+      "bossFinaleV186": {
+        "fighterId": "synth-containment",
+        "hp": 270,
+        "damageScale": 0.85,
+        "wave": 6,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-blackout-5",
+      "sourceEventId": "xte179-blackout-5",
+      "title": "ESSAIM SYNTHÉTIQUE · 05 · FINALE",
+      "label": "ESSAIM SYNTHÉTIQUE · 05 · FINALE",
+      "description": "6 vagues de troupes à 15–35 PV, puis un contact majeur à 310 PV et 4 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "blackout",
+      "level": 5,
+      "stageId": "xt179-sensors",
+      "difficulty": "hard",
+      "factionId": "rival-lab",
+      "opponentIds": [
+        "synth-trooper",
+        "synth-sniper",
+        "synth-guard",
+        "combat-synth",
+        "import-game-afe2-bulwark"
+      ],
+      "rules": {},
+      "roundSeconds": 600,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 9,
+          "concurrent": 7,
+          "hp": 27,
+          "damageScale": 0.405
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth",
+            "synth-trooper"
+          ],
+          "total": 11,
+          "concurrent": 8,
+          "hp": 29,
+          "damageScale": 0.405
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 31,
+          "damageScale": 0.405
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth",
+            "synth-trooper"
+          ],
+          "total": 15,
+          "concurrent": 8,
+          "hp": 33,
+          "damageScale": 0.405
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 17,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 5,
+          "label": "PRESSION 6",
+          "opponentIds": [
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth",
+            "synth-trooper"
+          ],
+          "total": 19,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 6,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "import-game-afe2-bulwark",
+            "synth-trooper",
+            "synth-sniper",
+            "synth-guard",
+            "combat-synth"
+          ],
+          "total": 5,
+          "concurrent": 5,
+          "hp": 35,
+          "damageScale": 0.405,
+          "enemySlotsV186": [
+            {
+              "fighterId": "import-game-afe2-bulwark",
+              "rank": "boss",
+              "hp": 310,
+              "damageScale": 0.9
+            },
+            {
+              "fighterId": "synth-trooper",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "synth-sniper",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "synth-guard",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "combat-synth",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 89,
+      "reward": 1070,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-blackout-5",
+      "bossFinaleV186": {
+        "fighterId": "import-game-afe2-bulwark",
+        "hp": 310,
+        "damageScale": 0.9,
+        "wave": 7,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-acid-1",
+      "sourceEventId": "xte179-acid-1",
+      "title": "SATURATION CORROSIVE · 01 · FINALE",
+      "label": "SATURATION CORROSIVE · 01 · FINALE",
+      "description": "2 vagues de troupes à 15–35 PV, puis un contact majeur à 140 PV et 2 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "acid",
+      "level": 1,
+      "stageId": "xt179-reactor",
+      "difficulty": "easy",
+      "factionId": "hive",
+      "opponentIds": [
+        "spitter",
+        "acid-runner",
+        "acid-lurker",
+        "boiler",
+        "import-game-afe2-warden"
+      ],
+      "rules": {},
+      "roundSeconds": 360,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 5,
+          "concurrent": 3,
+          "hp": 15,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "acid-runner",
+            "acid-lurker",
+            "boiler",
+            "spitter"
+          ],
+          "total": 7,
+          "concurrent": 4,
+          "hp": 17,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 2,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "import-game-afe2-warden",
+            "spitter",
+            "acid-runner"
+          ],
+          "total": 3,
+          "concurrent": 3,
+          "hp": 17,
+          "damageScale": 0.30500000000000005,
+          "enemySlotsV186": [
+            {
+              "fighterId": "import-game-afe2-warden",
+              "rank": "boss",
+              "hp": 140,
+              "damageScale": 0.7
+            },
+            {
+              "fighterId": "spitter",
+              "rank": "troop",
+              "hp": 17,
+              "damageScale": 0.30500000000000005
+            },
+            {
+              "fighterId": "acid-runner",
+              "rank": "troop",
+              "hp": 17,
+              "damageScale": 0.30500000000000005
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 15,
+      "reward": 670,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-acid-1",
+      "bossFinaleV186": {
+        "fighterId": "import-game-afe2-warden",
+        "hp": 140,
+        "damageScale": 0.7,
+        "wave": 3,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-acid-2",
+      "sourceEventId": "xte179-acid-2",
+      "title": "SATURATION CORROSIVE · 02 · FINALE",
+      "label": "SATURATION CORROSIVE · 02 · FINALE",
+      "description": "3 vagues de troupes à 15–35 PV, puis un contact majeur à 180 PV et 2 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "acid",
+      "level": 2,
+      "stageId": "xt179-life-support",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "spitter",
+        "acid-runner",
+        "acid-lurker",
+        "boiler",
+        "acid-ravager"
+      ],
+      "rules": {},
+      "roundSeconds": 420,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 6,
+          "concurrent": 4,
+          "hp": 18,
+          "damageScale": 0.33
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "acid-runner",
+            "acid-lurker",
+            "boiler",
+            "spitter"
+          ],
+          "total": 8,
+          "concurrent": 5,
+          "hp": 20,
+          "damageScale": 0.33
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 10,
+          "concurrent": 6,
+          "hp": 22,
+          "damageScale": 0.33
+        },
+        {
+          "index": 3,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "acid-ravager",
+            "spitter",
+            "acid-runner"
+          ],
+          "total": 3,
+          "concurrent": 3,
+          "hp": 22,
+          "damageScale": 0.33,
+          "enemySlotsV186": [
+            {
+              "fighterId": "acid-ravager",
+              "rank": "boss",
+              "hp": 180,
+              "damageScale": 0.75
+            },
+            {
+              "fighterId": "spitter",
+              "rank": "troop",
+              "hp": 22,
+              "damageScale": 0.33
+            },
+            {
+              "fighterId": "acid-runner",
+              "rank": "troop",
+              "hp": 22,
+              "damageScale": 0.33
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 27,
+      "reward": 770,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-acid-2",
+      "bossFinaleV186": {
+        "fighterId": "acid-ravager",
+        "hp": 180,
+        "damageScale": 0.75,
+        "wave": 4,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-acid-3",
+      "sourceEventId": "xte179-acid-3",
+      "title": "SATURATION CORROSIVE · 03 · FINALE",
+      "label": "SATURATION CORROSIVE · 03 · FINALE",
+      "description": "4 vagues de troupes à 15–35 PV, puis un contact majeur à 220 PV et 3 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "acid",
+      "level": 3,
+      "stageId": "xt179-hangar",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "spitter",
+        "acid-runner",
+        "acid-lurker",
+        "boiler",
+        "acid-crusher"
+      ],
+      "rules": {},
+      "roundSeconds": 480,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 7,
+          "concurrent": 5,
+          "hp": 21,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "acid-runner",
+            "acid-lurker",
+            "boiler",
+            "spitter"
+          ],
+          "total": 9,
+          "concurrent": 6,
+          "hp": 23,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 11,
+          "concurrent": 7,
+          "hp": 25,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "acid-runner",
+            "acid-lurker",
+            "boiler",
+            "spitter"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 27,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 4,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "acid-crusher",
+            "spitter",
+            "acid-runner",
+            "acid-lurker"
+          ],
+          "total": 4,
+          "concurrent": 4,
+          "hp": 27,
+          "damageScale": 0.35500000000000004,
+          "enemySlotsV186": [
+            {
+              "fighterId": "acid-crusher",
+              "rank": "boss",
+              "hp": 220,
+              "damageScale": 0.8
+            },
+            {
+              "fighterId": "spitter",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            },
+            {
+              "fighterId": "acid-runner",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            },
+            {
+              "fighterId": "acid-lurker",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 44,
+      "reward": 870,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-acid-3",
+      "bossFinaleV186": {
+        "fighterId": "acid-crusher",
+        "hp": 220,
+        "damageScale": 0.8,
+        "wave": 5,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-acid-4",
+      "sourceEventId": "xte179-acid-4",
+      "title": "SATURATION CORROSIVE · 04 · FINALE",
+      "label": "SATURATION CORROSIVE · 04 · FINALE",
+      "description": "5 vagues de troupes à 15–35 PV, puis un contact majeur à 270 PV et 3 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "acid",
+      "level": 4,
+      "stageId": "xt179-cryo",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "spitter",
+        "acid-runner",
+        "acid-lurker",
+        "boiler",
+        "acid-ripper-queen"
+      ],
+      "rules": {},
+      "roundSeconds": 540,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 8,
+          "concurrent": 6,
+          "hp": 24,
+          "damageScale": 0.38
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "acid-runner",
+            "acid-lurker",
+            "boiler",
+            "spitter"
+          ],
+          "total": 10,
+          "concurrent": 7,
+          "hp": 26,
+          "damageScale": 0.38
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 12,
+          "concurrent": 8,
+          "hp": 28,
+          "damageScale": 0.38
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "acid-runner",
+            "acid-lurker",
+            "boiler",
+            "spitter"
+          ],
+          "total": 14,
+          "concurrent": 8,
+          "hp": 30,
+          "damageScale": 0.38
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 16,
+          "concurrent": 8,
+          "hp": 32,
+          "damageScale": 0.38
+        },
+        {
+          "index": 5,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "acid-ripper-queen",
+            "spitter",
+            "acid-runner",
+            "acid-lurker"
+          ],
+          "total": 4,
+          "concurrent": 4,
+          "hp": 32,
+          "damageScale": 0.38,
+          "enemySlotsV186": [
+            {
+              "fighterId": "acid-ripper-queen",
+              "rank": "boss",
+              "hp": 270,
+              "damageScale": 0.85
+            },
+            {
+              "fighterId": "spitter",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            },
+            {
+              "fighterId": "acid-runner",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            },
+            {
+              "fighterId": "acid-lurker",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 64,
+      "reward": 970,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-acid-4",
+      "bossFinaleV186": {
+        "fighterId": "acid-ripper-queen",
+        "hp": 270,
+        "damageScale": 0.85,
+        "wave": 6,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-acid-5",
+      "sourceEventId": "xte179-acid-5",
+      "title": "SATURATION CORROSIVE · 05 · FINALE",
+      "label": "SATURATION CORROSIVE · 05 · FINALE",
+      "description": "6 vagues de troupes à 15–35 PV, puis un contact majeur à 310 PV et 4 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "acid",
+      "level": 5,
+      "stageId": "xt179-cic",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "spitter",
+        "acid-runner",
+        "acid-lurker",
+        "boiler",
+        "acid-queen"
+      ],
+      "rules": {},
+      "roundSeconds": 600,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 9,
+          "concurrent": 7,
+          "hp": 27,
+          "damageScale": 0.405
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "acid-runner",
+            "acid-lurker",
+            "boiler",
+            "spitter"
+          ],
+          "total": 11,
+          "concurrent": 8,
+          "hp": 29,
+          "damageScale": 0.405
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 31,
+          "damageScale": 0.405
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "acid-runner",
+            "acid-lurker",
+            "boiler",
+            "spitter"
+          ],
+          "total": 15,
+          "concurrent": 8,
+          "hp": 33,
+          "damageScale": 0.405
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 17,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 5,
+          "label": "PRESSION 6",
+          "opponentIds": [
+            "acid-runner",
+            "acid-lurker",
+            "boiler",
+            "spitter"
+          ],
+          "total": 19,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 6,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "acid-queen",
+            "spitter",
+            "acid-runner",
+            "acid-lurker",
+            "boiler"
+          ],
+          "total": 5,
+          "concurrent": 5,
+          "hp": 35,
+          "damageScale": 0.405,
+          "enemySlotsV186": [
+            {
+              "fighterId": "acid-queen",
+              "rank": "boss",
+              "hp": 310,
+              "damageScale": 0.9
+            },
+            {
+              "fighterId": "spitter",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "acid-runner",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "acid-lurker",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "boiler",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 89,
+      "reward": 1070,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-acid-5",
+      "bossFinaleV186": {
+        "fighterId": "acid-queen",
+        "hp": 310,
+        "damageScale": 0.9,
+        "wave": 7,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-sudden-death-1",
+      "sourceEventId": "xte179-sudden-death-1",
+      "title": "CONTACTS FRAGILES · 01 · FINALE",
+      "label": "CONTACTS FRAGILES · 01 · FINALE",
+      "description": "2 vagues de troupes à 15–35 PV, puis un contact majeur à 140 PV et 2 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "sudden-death",
+      "level": 1,
+      "stageId": "xt179-briefing",
+      "difficulty": "easy",
+      "factionId": "hive",
+      "opponentIds": [
+        "arachnoid",
+        "runner",
+        "warrior",
+        "prowler",
+        "crusher-acm"
+      ],
+      "rules": {},
+      "roundSeconds": 360,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 5,
+          "concurrent": 3,
+          "hp": 15,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 7,
+          "concurrent": 4,
+          "hp": 17,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 2,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "crusher-acm",
+            "arachnoid",
+            "runner"
+          ],
+          "total": 3,
+          "concurrent": 3,
+          "hp": 17,
+          "damageScale": 0.30500000000000005,
+          "enemySlotsV186": [
+            {
+              "fighterId": "crusher-acm",
+              "rank": "boss",
+              "hp": 140,
+              "damageScale": 0.7
+            },
+            {
+              "fighterId": "arachnoid",
+              "rank": "troop",
+              "hp": 17,
+              "damageScale": 0.30500000000000005
+            },
+            {
+              "fighterId": "runner",
+              "rank": "troop",
+              "hp": 17,
+              "damageScale": 0.30500000000000005
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 15,
+      "reward": 670,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-sudden-death-1",
+      "bossFinaleV186": {
+        "fighterId": "crusher-acm",
+        "hp": 140,
+        "damageScale": 0.7,
+        "wave": 3,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-sudden-death-2",
+      "sourceEventId": "xte179-sudden-death-2",
+      "title": "CONTACTS FRAGILES · 02 · FINALE",
+      "label": "CONTACTS FRAGILES · 02 · FINALE",
+      "description": "3 vagues de troupes à 15–35 PV, puis un contact majeur à 180 PV et 2 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "sudden-death",
+      "level": 2,
+      "stageId": "xt179-bridge",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "arachnoid",
+        "runner",
+        "warrior",
+        "prowler",
+        "predalien"
+      ],
+      "rules": {},
+      "roundSeconds": 420,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 6,
+          "concurrent": 4,
+          "hp": 18,
+          "damageScale": 0.33
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 8,
+          "concurrent": 5,
+          "hp": 20,
+          "damageScale": 0.33
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 10,
+          "concurrent": 6,
+          "hp": 22,
+          "damageScale": 0.33
+        },
+        {
+          "index": 3,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "predalien",
+            "arachnoid",
+            "runner"
+          ],
+          "total": 3,
+          "concurrent": 3,
+          "hp": 22,
+          "damageScale": 0.33,
+          "enemySlotsV186": [
+            {
+              "fighterId": "predalien",
+              "rank": "boss",
+              "hp": 180,
+              "damageScale": 0.75
+            },
+            {
+              "fighterId": "arachnoid",
+              "rank": "troop",
+              "hp": 22,
+              "damageScale": 0.33
+            },
+            {
+              "fighterId": "runner",
+              "rank": "troop",
+              "hp": 22,
+              "damageScale": 0.33
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 27,
+      "reward": 770,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-sudden-death-2",
+      "bossFinaleV186": {
+        "fighterId": "predalien",
+        "hp": 180,
+        "damageScale": 0.75,
+        "wave": 4,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-sudden-death-3",
+      "sourceEventId": "xte179-sudden-death-3",
+      "title": "CONTACTS FRAGILES · 03 · FINALE",
+      "label": "CONTACTS FRAGILES · 03 · FINALE",
+      "description": "4 vagues de troupes à 15–35 PV, puis un contact majeur à 220 PV et 3 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "sudden-death",
+      "level": 3,
+      "stageId": "xt179-synthetic-bay",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "arachnoid",
+        "runner",
+        "warrior",
+        "prowler",
+        "ravager"
+      ],
+      "rules": {},
+      "roundSeconds": 480,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 7,
+          "concurrent": 5,
+          "hp": 21,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 9,
+          "concurrent": 6,
+          "hp": 23,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 11,
+          "concurrent": 7,
+          "hp": 25,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 27,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 4,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "ravager",
+            "arachnoid",
+            "runner",
+            "warrior"
+          ],
+          "total": 4,
+          "concurrent": 4,
+          "hp": 27,
+          "damageScale": 0.35500000000000004,
+          "enemySlotsV186": [
+            {
+              "fighterId": "ravager",
+              "rank": "boss",
+              "hp": 220,
+              "damageScale": 0.8
+            },
+            {
+              "fighterId": "arachnoid",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            },
+            {
+              "fighterId": "runner",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            },
+            {
+              "fighterId": "warrior",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 44,
+      "reward": 870,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-sudden-death-3",
+      "bossFinaleV186": {
+        "fighterId": "ravager",
+        "hp": 220,
+        "damageScale": 0.8,
+        "wave": 5,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-sudden-death-4",
+      "sourceEventId": "xte179-sudden-death-4",
+      "title": "CONTACTS FRAGILES · 04 · FINALE",
+      "label": "CONTACTS FRAGILES · 04 · FINALE",
+      "description": "5 vagues de troupes à 15–35 PV, puis un contact majeur à 270 PV et 3 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "sudden-death",
+      "level": 4,
+      "stageId": "xt179-proving-ground",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "arachnoid",
+        "runner",
+        "warrior",
+        "prowler",
+        "royal-guard"
+      ],
+      "rules": {},
+      "roundSeconds": 540,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 8,
+          "concurrent": 6,
+          "hp": 24,
+          "damageScale": 0.38
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 10,
+          "concurrent": 7,
+          "hp": 26,
+          "damageScale": 0.38
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 12,
+          "concurrent": 8,
+          "hp": 28,
+          "damageScale": 0.38
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 14,
+          "concurrent": 8,
+          "hp": 30,
+          "damageScale": 0.38
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 16,
+          "concurrent": 8,
+          "hp": 32,
+          "damageScale": 0.38
+        },
+        {
+          "index": 5,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "royal-guard",
+            "arachnoid",
+            "runner",
+            "warrior"
+          ],
+          "total": 4,
+          "concurrent": 4,
+          "hp": 32,
+          "damageScale": 0.38,
+          "enemySlotsV186": [
+            {
+              "fighterId": "royal-guard",
+              "rank": "boss",
+              "hp": 270,
+              "damageScale": 0.85
+            },
+            {
+              "fighterId": "arachnoid",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            },
+            {
+              "fighterId": "runner",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            },
+            {
+              "fighterId": "warrior",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 64,
+      "reward": 970,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-sudden-death-4",
+      "bossFinaleV186": {
+        "fighterId": "royal-guard",
+        "hp": 270,
+        "damageScale": 0.85,
+        "wave": 6,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-sudden-death-5",
+      "sourceEventId": "xte179-sudden-death-5",
+      "title": "CONTACTS FRAGILES · 05 · FINALE",
+      "label": "CONTACTS FRAGILES · 05 · FINALE",
+      "description": "6 vagues de troupes à 15–35 PV, puis un contact majeur à 310 PV et 4 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "sudden-death",
+      "level": 5,
+      "stageId": "xt179-morgue",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "arachnoid",
+        "runner",
+        "warrior",
+        "prowler",
+        "queen"
+      ],
+      "rules": {},
+      "roundSeconds": 600,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 9,
+          "concurrent": 7,
+          "hp": 27,
+          "damageScale": 0.405
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 11,
+          "concurrent": 8,
+          "hp": 29,
+          "damageScale": 0.405
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 31,
+          "damageScale": 0.405
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 15,
+          "concurrent": 8,
+          "hp": 33,
+          "damageScale": 0.405
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 17,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 5,
+          "label": "PRESSION 6",
+          "opponentIds": [
+            "runner",
+            "warrior",
+            "prowler",
+            "arachnoid"
+          ],
+          "total": 19,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 6,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "queen",
+            "arachnoid",
+            "runner",
+            "warrior",
+            "prowler"
+          ],
+          "total": 5,
+          "concurrent": 5,
+          "hp": 35,
+          "damageScale": 0.405,
+          "enemySlotsV186": [
+            {
+              "fighterId": "queen",
+              "rank": "boss",
+              "hp": 310,
+              "damageScale": 0.9
+            },
+            {
+              "fighterId": "arachnoid",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "runner",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "warrior",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "prowler",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 89,
+      "reward": 1070,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-sudden-death-5",
+      "bossFinaleV186": {
+        "fighterId": "queen",
+        "hp": 310,
+        "damageScale": 0.9,
+        "wave": 7,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-royal-1",
+      "sourceEventId": "xte179-royal-1",
+      "title": "CORDON DE LA RUCHE · 01 · FINALE",
+      "label": "CORDON DE LA RUCHE · 01 · FINALE",
+      "description": "2 vagues de troupes à 15–35 PV, puis un contact majeur à 140 PV et 2 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "royal",
+      "level": 1,
+      "stageId": "xt179-archives",
+      "difficulty": "easy",
+      "factionId": "hive",
+      "opponentIds": [
+        "warrior",
+        "armored-runner",
+        "armored-red",
+        "armored-k-series",
+        "royal-guard"
+      ],
+      "rules": {},
+      "roundSeconds": 360,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 5,
+          "concurrent": 3,
+          "hp": 15,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "armored-runner",
+            "armored-red",
+            "armored-k-series",
+            "warrior"
+          ],
+          "total": 7,
+          "concurrent": 4,
+          "hp": 17,
+          "damageScale": 0.30500000000000005
+        },
+        {
+          "index": 2,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "royal-guard",
+            "warrior",
+            "armored-runner"
+          ],
+          "total": 3,
+          "concurrent": 3,
+          "hp": 17,
+          "damageScale": 0.30500000000000005,
+          "enemySlotsV186": [
+            {
+              "fighterId": "royal-guard",
+              "rank": "boss",
+              "hp": 140,
+              "damageScale": 0.7
+            },
+            {
+              "fighterId": "warrior",
+              "rank": "troop",
+              "hp": 17,
+              "damageScale": 0.30500000000000005
+            },
+            {
+              "fighterId": "armored-runner",
+              "rank": "troop",
+              "hp": 17,
+              "damageScale": 0.30500000000000005
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 15,
+      "reward": 670,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-royal-1",
+      "bossFinaleV186": {
+        "fighterId": "royal-guard",
+        "hp": 140,
+        "damageScale": 0.7,
+        "wave": 3,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-royal-2",
+      "sourceEventId": "xte179-royal-2",
+      "title": "CORDON DE LA RUCHE · 02 · FINALE",
+      "label": "CORDON DE LA RUCHE · 02 · FINALE",
+      "description": "3 vagues de troupes à 15–35 PV, puis un contact majeur à 180 PV et 2 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "royal",
+      "level": 2,
+      "stageId": "xt179-logistics",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "warrior",
+        "armored-runner",
+        "armored-red",
+        "armored-k-series",
+        "armored-ripper-queen"
+      ],
+      "rules": {},
+      "roundSeconds": 420,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 6,
+          "concurrent": 4,
+          "hp": 18,
+          "damageScale": 0.33
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "armored-runner",
+            "armored-red",
+            "armored-k-series",
+            "warrior"
+          ],
+          "total": 8,
+          "concurrent": 5,
+          "hp": 20,
+          "damageScale": 0.33
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 10,
+          "concurrent": 6,
+          "hp": 22,
+          "damageScale": 0.33
+        },
+        {
+          "index": 3,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "armored-ripper-queen",
+            "warrior",
+            "armored-runner"
+          ],
+          "total": 3,
+          "concurrent": 3,
+          "hp": 22,
+          "damageScale": 0.33,
+          "enemySlotsV186": [
+            {
+              "fighterId": "armored-ripper-queen",
+              "rank": "boss",
+              "hp": 180,
+              "damageScale": 0.75
+            },
+            {
+              "fighterId": "warrior",
+              "rank": "troop",
+              "hp": 22,
+              "damageScale": 0.33
+            },
+            {
+              "fighterId": "armored-runner",
+              "rank": "troop",
+              "hp": 22,
+              "damageScale": 0.33
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 27,
+      "reward": 770,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-royal-2",
+      "bossFinaleV186": {
+        "fighterId": "armored-ripper-queen",
+        "hp": 180,
+        "damageScale": 0.75,
+        "wave": 4,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-royal-3",
+      "sourceEventId": "xte179-royal-3",
+      "title": "CORDON DE LA RUCHE · 03 · FINALE",
+      "label": "CORDON DE LA RUCHE · 03 · FINALE",
+      "description": "4 vagues de troupes à 15–35 PV, puis un contact majeur à 220 PV et 3 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "royal",
+      "level": 3,
+      "stageId": "xt179-escape-pods",
+      "difficulty": "normal",
+      "factionId": "hive",
+      "opponentIds": [
+        "warrior",
+        "armored-runner",
+        "armored-red",
+        "armored-k-series",
+        "import-xeno-kingrogue"
+      ],
+      "rules": {},
+      "roundSeconds": 480,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 7,
+          "concurrent": 5,
+          "hp": 21,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "armored-runner",
+            "armored-red",
+            "armored-k-series",
+            "warrior"
+          ],
+          "total": 9,
+          "concurrent": 6,
+          "hp": 23,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 11,
+          "concurrent": 7,
+          "hp": 25,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "armored-runner",
+            "armored-red",
+            "armored-k-series",
+            "warrior"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 27,
+          "damageScale": 0.35500000000000004
+        },
+        {
+          "index": 4,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "import-xeno-kingrogue",
+            "warrior",
+            "armored-runner",
+            "armored-red"
+          ],
+          "total": 4,
+          "concurrent": 4,
+          "hp": 27,
+          "damageScale": 0.35500000000000004,
+          "enemySlotsV186": [
+            {
+              "fighterId": "import-xeno-kingrogue",
+              "rank": "boss",
+              "hp": 220,
+              "damageScale": 0.8
+            },
+            {
+              "fighterId": "warrior",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            },
+            {
+              "fighterId": "armored-runner",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            },
+            {
+              "fighterId": "armored-red",
+              "rank": "troop",
+              "hp": 27,
+              "damageScale": 0.35500000000000004
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 44,
+      "reward": 870,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-royal-3",
+      "bossFinaleV186": {
+        "fighterId": "import-xeno-kingrogue",
+        "hp": 220,
+        "damageScale": 0.8,
+        "wave": 5,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-royal-4",
+      "sourceEventId": "xte179-royal-4",
+      "title": "CORDON DE LA RUCHE · 04 · FINALE",
+      "label": "CORDON DE LA RUCHE · 04 · FINALE",
+      "description": "5 vagues de troupes à 15–35 PV, puis un contact majeur à 270 PV et 3 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "royal",
+      "level": 4,
+      "stageId": "xt179-arrival",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "warrior",
+        "armored-runner",
+        "armored-red",
+        "armored-k-series",
+        "drive-v123-fte-pathogen-queen-right-v13"
+      ],
+      "rules": {},
+      "roundSeconds": 540,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 8,
+          "concurrent": 6,
+          "hp": 24,
+          "damageScale": 0.38
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "armored-runner",
+            "armored-red",
+            "armored-k-series",
+            "warrior"
+          ],
+          "total": 10,
+          "concurrent": 7,
+          "hp": 26,
+          "damageScale": 0.38
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 12,
+          "concurrent": 8,
+          "hp": 28,
+          "damageScale": 0.38
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "armored-runner",
+            "armored-red",
+            "armored-k-series",
+            "warrior"
+          ],
+          "total": 14,
+          "concurrent": 8,
+          "hp": 30,
+          "damageScale": 0.38
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 16,
+          "concurrent": 8,
+          "hp": 32,
+          "damageScale": 0.38
+        },
+        {
+          "index": 5,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "drive-v123-fte-pathogen-queen-right-v13",
+            "warrior",
+            "armored-runner",
+            "armored-red"
+          ],
+          "total": 4,
+          "concurrent": 4,
+          "hp": 32,
+          "damageScale": 0.38,
+          "enemySlotsV186": [
+            {
+              "fighterId": "drive-v123-fte-pathogen-queen-right-v13",
+              "rank": "boss",
+              "hp": 270,
+              "damageScale": 0.85
+            },
+            {
+              "fighterId": "warrior",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            },
+            {
+              "fighterId": "armored-runner",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            },
+            {
+              "fighterId": "armored-red",
+              "rank": "troop",
+              "hp": 32,
+              "damageScale": 0.38
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 64,
+      "reward": 970,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-royal-4",
+      "bossFinaleV186": {
+        "fighterId": "drive-v123-fte-pathogen-queen-right-v13",
+        "hp": 270,
+        "damageScale": 0.85,
+        "wave": 6,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    },
+    {
+      "id": "xth186-royal-5",
+      "sourceEventId": "xte179-royal-5",
+      "title": "CORDON DE LA RUCHE · 05 · FINALE",
+      "label": "CORDON DE LA RUCHE · 05 · FINALE",
+      "description": "6 vagues de troupes à 15–35 PV, puis un contact majeur à 310 PV et 4 gardes. Le gabarit et les attaques de chaque spécimen sont conservés. Aucune récupération entre les vagues.",
+      "eventFamily": "royal",
+      "level": 5,
+      "stageId": "xt179-bioforge",
+      "difficulty": "hard",
+      "factionId": "hive",
+      "opponentIds": [
+        "warrior",
+        "armored-runner",
+        "armored-red",
+        "armored-k-series",
+        "queen"
+      ],
+      "rules": {},
+      "roundSeconds": 600,
+      "waves": [
+        {
+          "index": 0,
+          "label": "PRESSION 1",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 9,
+          "concurrent": 7,
+          "hp": 27,
+          "damageScale": 0.405
+        },
+        {
+          "index": 1,
+          "label": "PRESSION 2",
+          "opponentIds": [
+            "armored-runner",
+            "armored-red",
+            "armored-k-series",
+            "warrior"
+          ],
+          "total": 11,
+          "concurrent": 8,
+          "hp": 29,
+          "damageScale": 0.405
+        },
+        {
+          "index": 2,
+          "label": "PRESSION 3",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 13,
+          "concurrent": 8,
+          "hp": 31,
+          "damageScale": 0.405
+        },
+        {
+          "index": 3,
+          "label": "PRESSION 4",
+          "opponentIds": [
+            "armored-runner",
+            "armored-red",
+            "armored-k-series",
+            "warrior"
+          ],
+          "total": 15,
+          "concurrent": 8,
+          "hp": 33,
+          "damageScale": 0.405
+        },
+        {
+          "index": 4,
+          "label": "PRESSION 5",
+          "opponentIds": [
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 17,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 5,
+          "label": "PRESSION 6",
+          "opponentIds": [
+            "armored-runner",
+            "armored-red",
+            "armored-k-series",
+            "warrior"
+          ],
+          "total": 19,
+          "concurrent": 8,
+          "hp": 35,
+          "damageScale": 0.405
+        },
+        {
+          "index": 6,
+          "label": "FINALE · CONTACT MAJEUR",
+          "opponentIds": [
+            "queen",
+            "warrior",
+            "armored-runner",
+            "armored-red",
+            "armored-k-series"
+          ],
+          "total": 5,
+          "concurrent": 5,
+          "hp": 35,
+          "damageScale": 0.405,
+          "enemySlotsV186": [
+            {
+              "fighterId": "queen",
+              "rank": "boss",
+              "hp": 310,
+              "damageScale": 0.9
+            },
+            {
+              "fighterId": "warrior",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "armored-runner",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "armored-red",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            },
+            {
+              "fighterId": "armored-k-series",
+              "rank": "troop",
+              "hp": 35,
+              "damageScale": 0.405
+            }
+          ]
+        }
+      ],
+      "totalEnemies": 89,
+      "reward": 1070,
+      "canonExact": false,
+      "canonStatus": "original-tantalus-simulation",
+      "sourceProtocolIdV180": "xth180-royal-5",
+      "bossFinaleV186": {
+        "fighterId": "queen",
+        "hp": 310,
+        "damageScale": 0.9,
+        "wave": 7,
+        "label": "CONTACT MAJEUR"
+      },
+      "protocolRevision": 186
+    }
+  ],
+  "reactions": [
+    {
+      "fighterId": "runner",
+      "sourceWork": "Alien 3 (1992)",
+      "drop": 94,
+      "supports": [
+        "footFar",
+        "footNear",
+        "handFar",
+        "handNear"
+      ],
+      "guard": {
+        "spine": 0.6,
+        "head": 3.6
+      },
+      "hurt": {
+        "spine": -1.5,
+        "head": -5.3
+      },
+      "break": {
+        "spine": 1.1,
+        "head": 5
+      },
+      "ko": {
+        "spine": 1,
+        "head": 3.5
+      },
+      "windup": {
+        "spine": -1,
+        "head": -5.5
+      },
+      "contact": {
+        "spine": 1.3,
+        "head": 6.5
+      },
+      "profileId": "castes-film_runner_alien3_1992",
+      "path": "/assets/user/castes-v87/film_runner_alien3_1992.png",
+      "sourceSha256": "f117c7ad0e6da9a02d3a4ce315066d75acfd67a909620f560ff6cd8c3d7b64b3",
+      "sourceFacing": 1,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "sourceProvenance": "fan-made-user-import",
+      "canonExact": false,
+      "fullProne": false,
+      "states": [
+        {
+          "id": "reaction-v186-runner-guard",
+          "state": "guard"
+        },
+        {
+          "id": "reaction-v186-runner-hurt",
+          "state": "hurt"
+        },
+        {
+          "id": "reaction-v186-runner-guard-break",
+          "state": "guard-break"
+        },
+        {
+          "id": "reaction-v186-runner-recover",
+          "state": "recover"
+        },
+        {
+          "id": "reaction-v186-runner-ko",
+          "state": "ko"
+        },
+        {
+          "id": "reaction-v186-runner-heavy-windup",
+          "state": "heavy-windup"
+        },
+        {
+          "id": "reaction-v186-runner-heavy-contact",
+          "state": "heavy-contact"
+        },
+        {
+          "id": "reaction-v186-runner-heavy-recovery",
+          "state": "heavy-recovery"
+        }
+      ]
+    },
+    {
+      "fighterId": "warrior",
+      "sourceWork": "Aliens (1986)",
+      "drop": 158,
+      "supports": [
+        "footFar",
+        "footNear"
+      ],
+      "guard": {
+        "spine": 1.6,
+        "head": 3,
+        "upper0": -9,
+        "fore0": -7,
+        "upper1": 9,
+        "fore1": -13
+      },
+      "hurt": {
+        "spine": -2.4,
+        "head": -5,
+        "upper0": 3,
+        "fore0": 2,
+        "upper1": -3,
+        "fore1": 3
+      },
+      "break": {
+        "spine": 3,
+        "head": 6,
+        "upper0": 4,
+        "fore0": 5,
+        "upper1": -4,
+        "fore1": -5
+      },
+      "ko": {
+        "spine": 5,
+        "head": 8,
+        "upper0": 5,
+        "fore0": 7,
+        "upper1": -6,
+        "fore1": 5
+      },
+      "windup": {
+        "spine": -2.1,
+        "head": -3,
+        "upper1": -11,
+        "fore1": 10,
+        "upper0": 3
+      },
+      "contact": {
+        "spine": 2.4,
+        "head": 2,
+        "upper1": 13,
+        "fore1": -12,
+        "hand1": 4,
+        "upper0": -4
+      },
+      "profileId": "castes-film_warrior_aliens_1986",
+      "path": "/assets/user/castes-v87/film_warrior_aliens_1986.png",
+      "sourceSha256": "c791a14045116531425d270c3edd61384b063d82a0bddf4e23195e9397ecb65f",
+      "sourceFacing": 1,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "sourceProvenance": "fan-made-user-import",
+      "canonExact": false,
+      "fullProne": false,
+      "states": [
+        {
+          "id": "reaction-v186-warrior-guard",
+          "state": "guard"
+        },
+        {
+          "id": "reaction-v186-warrior-hurt",
+          "state": "hurt"
+        },
+        {
+          "id": "reaction-v186-warrior-guard-break",
+          "state": "guard-break"
+        },
+        {
+          "id": "reaction-v186-warrior-recover",
+          "state": "recover"
+        },
+        {
+          "id": "reaction-v186-warrior-ko",
+          "state": "ko"
+        },
+        {
+          "id": "reaction-v186-warrior-heavy-windup",
+          "state": "heavy-windup"
+        },
+        {
+          "id": "reaction-v186-warrior-heavy-contact",
+          "state": "heavy-contact"
+        },
+        {
+          "id": "reaction-v186-warrior-heavy-recovery",
+          "state": "heavy-recovery"
+        }
+      ]
+    },
+    {
+      "fighterId": "prowler",
+      "sourceWork": "Aliens: Fireteam Elite (2021)",
+      "drop": 108,
+      "supports": [
+        "footFar",
+        "footNear",
+        "handFar",
+        "handNear"
+      ],
+      "guard": {
+        "spine": 0.8,
+        "head": 3.2,
+        "upper0": -2,
+        "fore0": 4,
+        "upper1": 2,
+        "fore1": -3
+      },
+      "hurt": {
+        "spine": -1.3,
+        "head": -4.5,
+        "upper0": 2,
+        "fore0": -2,
+        "upper1": -2,
+        "fore1": 3
+      },
+      "break": {
+        "spine": 1.8,
+        "head": 5,
+        "upper0": -2,
+        "fore0": 3,
+        "upper1": 2,
+        "fore1": -3
+      },
+      "ko": {
+        "spine": 1.6,
+        "head": 3.5,
+        "upper0": -3,
+        "fore0": 5,
+        "upper1": 3,
+        "fore1": -4
+      },
+      "windup": {
+        "spine": -1.4,
+        "head": -4,
+        "upper0": -3,
+        "fore0": 5,
+        "upper1": 4,
+        "fore1": -4
+      },
+      "contact": {
+        "spine": 1.5,
+        "head": 5,
+        "upper0": 4,
+        "fore0": -5,
+        "upper1": -4,
+        "fore1": 5
+      },
+      "profileId": "castes-game_afe_prowler",
+      "path": "/assets/user/castes-v87/game_afe_prowler.png",
+      "sourceSha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+      "sourceFacing": 1,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "sourceProvenance": "fan-made-user-import",
+      "canonExact": false,
+      "fullProne": false,
+      "states": [
+        {
+          "id": "reaction-v186-prowler-guard",
+          "state": "guard"
+        },
+        {
+          "id": "reaction-v186-prowler-hurt",
+          "state": "hurt"
+        },
+        {
+          "id": "reaction-v186-prowler-guard-break",
+          "state": "guard-break"
+        },
+        {
+          "id": "reaction-v186-prowler-recover",
+          "state": "recover"
+        },
+        {
+          "id": "reaction-v186-prowler-ko",
+          "state": "ko"
+        },
+        {
+          "id": "reaction-v186-prowler-heavy-windup",
+          "state": "heavy-windup"
+        },
+        {
+          "id": "reaction-v186-prowler-heavy-contact",
+          "state": "heavy-contact"
+        },
+        {
+          "id": "reaction-v186-prowler-heavy-recovery",
+          "state": "heavy-recovery"
+        }
+      ]
+    },
+    {
+      "fighterId": "spitter",
+      "sourceWork": "Aliens: Colonial Marines (2013)",
+      "drop": 120,
+      "supports": [
+        "footFar",
+        "footNear"
+      ],
+      "guard": {
+        "spine": 0.7,
+        "head": 4.1
+      },
+      "hurt": {
+        "spine": -1.7,
+        "head": -5.8
+      },
+      "break": {
+        "spine": 1.5,
+        "head": 5.6
+      },
+      "ko": {
+        "spine": 1.5,
+        "head": 4
+      },
+      "windup": {
+        "spine": -1,
+        "head": -6
+      },
+      "contact": {
+        "spine": 1.5,
+        "head": 6.4
+      },
+      "profileId": "castes-game_acm_spitter",
+      "path": "/assets/user/castes-v87/game_acm_spitter.png",
+      "sourceSha256": "c281ad7c020999e2796af1c904be45c028bd8643e45bfc45b93edaf5ba4642c7",
+      "sourceFacing": 1,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "sourceProvenance": "fan-made-user-import",
+      "canonExact": false,
+      "fullProne": false,
+      "states": [
+        {
+          "id": "reaction-v186-spitter-guard",
+          "state": "guard"
+        },
+        {
+          "id": "reaction-v186-spitter-hurt",
+          "state": "hurt"
+        },
+        {
+          "id": "reaction-v186-spitter-guard-break",
+          "state": "guard-break"
+        },
+        {
+          "id": "reaction-v186-spitter-recover",
+          "state": "recover"
+        },
+        {
+          "id": "reaction-v186-spitter-ko",
+          "state": "ko"
+        },
+        {
+          "id": "reaction-v186-spitter-heavy-windup",
+          "state": "heavy-windup"
+        },
+        {
+          "id": "reaction-v186-spitter-heavy-contact",
+          "state": "heavy-contact"
+        },
+        {
+          "id": "reaction-v186-spitter-heavy-recovery",
+          "state": "heavy-recovery"
+        }
+      ]
+    },
+    {
+      "fighterId": "burster",
+      "sourceWork": "Aliens: Fireteam Elite (2021)",
+      "drop": 89,
+      "supports": [
+        "footFar",
+        "footNear",
+        "handFar",
+        "handNear"
+      ],
+      "guard": {
+        "spine": 0.6,
+        "head": 3.4
+      },
+      "hurt": {
+        "spine": -1.4,
+        "head": -5
+      },
+      "break": {
+        "spine": 1.4,
+        "head": 5.2
+      },
+      "ko": {
+        "spine": 2.6,
+        "head": 7.5
+      },
+      "windup": {
+        "spine": -1,
+        "head": -5.2
+      },
+      "contact": {
+        "spine": 1.4,
+        "head": 6
+      },
+      "profileId": "castes-game_afe_burster",
+      "path": "/assets/user/castes-v87/game_afe_burster.png",
+      "sourceSha256": "b2db2418502099d9f2551434cf207ef72fe0a09dc68914fbc85e18705720ce13",
+      "sourceFacing": 1,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "sourceProvenance": "fan-made-user-import",
+      "canonExact": false,
+      "fullProne": false,
+      "states": [
+        {
+          "id": "reaction-v186-burster-guard",
+          "state": "guard"
+        },
+        {
+          "id": "reaction-v186-burster-hurt",
+          "state": "hurt"
+        },
+        {
+          "id": "reaction-v186-burster-guard-break",
+          "state": "guard-break"
+        },
+        {
+          "id": "reaction-v186-burster-recover",
+          "state": "recover"
+        },
+        {
+          "id": "reaction-v186-burster-ko",
+          "state": "ko"
+        },
+        {
+          "id": "reaction-v186-burster-heavy-windup",
+          "state": "heavy-windup"
+        },
+        {
+          "id": "reaction-v186-burster-heavy-contact",
+          "state": "heavy-contact"
+        },
+        {
+          "id": "reaction-v186-burster-heavy-recovery",
+          "state": "heavy-recovery"
+        }
+      ]
+    }
+  ],
+  "controls": {
+    "deadzone": 0.3,
+    "triggerThreshold": 0.55,
+    "left": "Left stick / D-pad left",
+    "right": "Left stick / D-pad right",
+    "jump": "A / D-pad up",
+    "guard": "LT / LB / D-pad down",
+    "light": "X",
+    "heavy": "Y",
+    "special": "B",
+    "super": "RT / RB",
+    "pause": "Start / Back"
+  },
+  "checklist": [
+    {
+      "id": "XT-INTEGRATION",
+      "state": "INTEGRATED",
+      "scope": "Restore Trials179/180 over main803 preserving FR/EN and other 121 commits."
+    },
+    {
+      "id": "XT-CHECKPOINT",
+      "state": "INTEGRATED",
+      "scope": "Mid-wave native state persisted, strict ticket binding, paused restoration and unique settlement."
+    },
+    {
+      "id": "XT-BOSSES",
+      "state": "INTEGRATED",
+      "scope": "Forty native boss finales appended without changing historical protocols."
+    },
+    {
+      "id": "XT-REACTIONS",
+      "state": "INTEGRATED",
+      "scope": "Forty native-mesh reactions and bounded cosmetic defeats on five identities."
+    },
+    {
+      "id": "XT-GAMEPAD",
+      "state": "INTEGRATED",
+      "scope": "Eight standard actions, neutral gating, pause, focus and disconnect lifecycle."
+    },
+    {
+      "id": "XT-I18N",
+      "state": "INTEGRATED",
+      "scope": "Paged terminal, checkpoint/boss UI and append-only FR/EN maintenance."
+    },
+    {
+      "id": "XT-RELEASE",
+      "state": "LOCALLY_VERIFIED",
+      "scope": "Node 4638 pass / 0 fail / 1 skip, native browser 38/38, source admission and release artifact validated. Exact public commit and deployment receipts recorded separately."
+    }
+  ],
+  "remaining": [
+    {
+      "id": "XT-ART-ALL189",
+      "state": "OPEN",
+      "scope": "Fully drawn movesets and motions across every admitted fighter."
+    },
+    {
+      "id": "XT-KO-PRONE",
+      "state": "OPEN",
+      "scope": "Full prone anatomy, rather than supported mesh collapse, with target-specific transitions."
+    },
+    {
+      "id": "XT-ART-1TO1",
+      "state": "OPEN",
+      "scope": "Matched primary frames/models/motion and measured franchise fidelity."
+    },
+    {
+      "id": "XT-OTHER-CASTES",
+      "state": "OPEN",
+      "scope": "Measured reaction sets for identities outside the five authored plates."
+    },
+    {
+      "id": "XT-STAGE-GAMEPLAY",
+      "state": "OPEN",
+      "scope": "Scene-specific physical hazards and standalone escort/extraction mini-games."
+    },
+    {
+      "id": "XT-MULTIPLAYER",
+      "state": "OPEN",
+      "scope": "Simultaneous player cooperation or competition."
+    }
+  ],
+  "fidelity": {
+    "canonExact": false,
+    "fullArtTasksClosed": 0,
+    "newImages": 0
+  },
+  "validation": {
+    "state": "PASSED",
+    "evidenceDirectory": "/workspace/tantalus-inventory/reprise-v186",
+    "nativeBrowser": {
+      "state": "PASSED",
+      "checks": 38,
+      "captures": 8,
+      "javascriptErrors": 0,
+      "httpErrors": 0,
+      "requestFailures": 0,
+      "sourceFilesUnchanged": 573,
+      "httpFilesMatching": 15,
+      "harnessSha256": "795b4903b6bb5aa7531dfe6b8da397edd7771f361465475db831e1c10b9527a0",
+      "checkpointTick": 368,
+      "bossVictory": {
+        "nativeKeyboard": true,
+        "enemies": 15,
+        "waves": 3,
+        "bossHp": 140
+      },
+      "fixtures": [
+        "UI-imported progress and credit provision; Queen bought through actual UI",
+        "standard simulated gamepad; no physical controller claim"
+      ],
+      "evidence": "native-final-fixed/summary.json"
+    },
+    "sourceAdmission": {
+      "state": "PASSED",
+      "files": 2525,
+      "assets": 1430,
+      "privateDocuments": 0
+    },
+    "sourceSuccession": {
+      "state": "PASSED",
+      "pins": 71,
+      "runtime": 30,
+      "gitEndpoints": 284,
+      "historicalResultsTransferred": false
+    },
+    "node": {
+      "state": "PASSED",
+      "uniqueFiles": 239,
+      "tests": 4639,
+      "pass": 4638,
+      "fail": 0,
+      "skipped": 1,
+      "concurrency": 4,
+      "sourceFreezeUnchanged": true,
+      "evidence": "test-all-final.log"
+    },
+    "build": {
+      "state": "PASSED",
+      "files": 2008,
+      "shell": 641,
+      "finalCommitStamp": "CHECKED_AFTER_COMMIT",
+      "evidence": "check-built-final.log"
+    }
+  }
+}

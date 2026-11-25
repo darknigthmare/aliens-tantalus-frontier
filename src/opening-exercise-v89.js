@@ -43,6 +43,6 @@ export function getOpeningExerciseObjectiveV89(raw, opening, onboarding) {
     ? 'EXERCICE INTERROMPU · Liaison prioritaire perdue. Descendez de la passerelle par son échelle et rejoignez la console à gauche. E : rétablir, immobile 3 s. Cibles et chrono sont suspendus.'
     : state.phase === 'return'
       ? 'LIAISON RÉTABLIE · Remontez par l’échelle jusqu’au pas de tir. E : reprendre les cibles restantes. Vos tirs et munitions sont conservés.'
-      : 'EXERCICE · Armurerie : deux échelles (W, puis ESPACE au palier) vers le Proving Ground. Armez la console puis rejoignez le pas de tir : neuf cibles, trois directions et une recharge.';
+      : 'EXERCICE · Armurerie : porte du Proving Ground, au niveau du sol. Dans l’annexe, armez la console, puis montez par l’échelle (W, puis ESPACE au palier) jusqu’au pas de tir : neuf cibles, trois directions et une recharge.'; // V188 2026-11-23 (R3): same text as the opening objective
   return { phase: state.phase, roomId: 'proving-ground', text };
 }

@@ -1,3 +1,13 @@
+import { withMissionDepthRoomsV188 } from './mission-depth-v188.js';
+import { withFranchiseFidelityV188 } from './franchise-fidelity-v188.js';
+import { withGameplayGapsV188 } from './gameplay-gaps-v188.js';
+import { withMissionLayerMatteV188 } from './mission-layer-matte-v188.js';
+import { withInsertionSafeZoneV188 } from './insertion-safe-zone-v188.js';
+import { withMissionDropshipHandoverV188 } from './mission-dropship-handover-v188.js';
+import { withQz17LevelDressingV188 } from './qz17-level-dressing-v188.js';
+import { withAsphodeleMissionDressingV188 } from './asphodele-mission-dressing-v188.js';
+import { withColonyMissionLevelsV188 } from './colony-mission-levels-v188.js';
+import { withStationMissionLevelsV188 } from './station-mission-levels-v188.js';
 import {
   GameEngine as ProductionCoreEngine,
   buildEnemyEncounterEligibility as buildCoreEnemyEncounterEligibility
@@ -47,8 +57,21 @@ import { withForgeMissionRuntimeV141 } from './forge-mission-runtime-v141.js';
 import { withForgeDecorationV141 } from './forge-decoration-v141.js';
 import { withMotionTrackerV160 } from './motion-tracker-v160.js';
 import { withMagazineRecoveryWorldV168 } from './weapon-magazine-recovery-runtime-v168.js';
+import { withArsenalFeedsV188 } from './weapon-arsenal-runtime-v188.js';
 import { captureMagazineFeedV168, restoreEquippedMagazineFeedV177 } from './weapon-magazine-world-v168.js';
 import { withArchiveRelayPresentationV160 } from './archive-relay-presentation-v160.js';
+import { withAlien3ProductionV114, normalizeAlien3ProductionOptionsV114 } from './alien3-production-v114.js';
+import { withTensionDirectorV188 } from './tension-director-v188.js';
+import { withMissionObjectivePanelV188 } from './mission-objective-panel-v188.js';
+import { withFootstepCuesV188 } from './audio-cues-v188.js';
+import { withCombatFeelV188 } from './combat-feel-v188.js';
+import { withVfxV188 } from './vfx-v188.js';
+import { withRunOptionsRuntimeV188 } from './run-options-runtime-v188.js';
+import { withCasteBehaviorsV188 } from './caste-behaviors-v188.js';
+import { withCreatureScaleV188 } from './creature-scale-v188.js';
+import { beginQueenMotherGuardStepV188, finishQueenMotherGuardStepV188 } from './queen-mother-guard-art-v188.js';
+import { withArbiterCampaignRuntimeV190 } from './xeno-arbiter-runtime-v190.js';
+import { withAct5ConvoyRaceV188 } from './act5-convoy-race-runtime-v188.js';
 
 export * from './game-production-core.js';
 
@@ -71,7 +94,10 @@ const V131ProductionEngine = withLegacyMissionsV131(withEcosystemMissionsV131(wi
   withHiveMissionsV131(withApcCourseV131(withWeaponActionsV131(V130ProductionEngine))))));
 const V132ProductionEngine = withNarrativeEvidenceV132(withHordeDirectorV132(
   withSquadDoctrineV132(withPlaceablesExtensionV132(V131ProductionEngine))));
-const V158ProductionEngine = withBlackCocoonPresentationV158(V132ProductionEngine);
+// V188 Act V convoy race (act5-convoy-race-runtime-v188.js) owns the two race missions' scene; it
+// wraps the whole V158 chain (so it overrides the Act III convoy and the generic missions for its
+// own campaign ids only) and sits under every V188 layer, whose order is unchanged.
+const V158ProductionEngine = withAct5ConvoyRaceV188(withBlackCocoonPresentationV158(V132ProductionEngine));
 
 export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   const result = buildCoreEnemyEncounterEligibility(enemy, context);
@@ -84,9 +110,39 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   });
 }
 
-export class GameEngine extends withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(V158ProductionEngine))))) {
+// The insertion safe zone sits right under the caste behaviours: their dash and
+// lunge scale the step it holds, and every outer damage path reaches it. The
+// order of the existing layers is unchanged.
+// The creature scale (V188, creature-scale-v188.js) sits under the combat feel: every layer
+// above it (caste behaviours and their ceiling flip, QZ-17 dressing, depth holds, acid blood)
+// sees the rescaled bodies, and the flip of the body box maps the scaled sprite onto itself.
+// The arsenal feed bridge (V188, spec 014, weapon-arsenal-runtime-v188.js) sits just inside the
+// magazine recovery world: outside every weapon action layer (V124–V131) whose shots it
+// accounts, inside the footstep cues and VFX layers whose shot cue and emitters it uses.
+// The Xeno Arbiter campaign runtime (V190) sits just outside the magazine
+// recovery world, as on the Xeno Trials line; the V188 layers wrap it.
+// The dedicated colony levels C1-C4 (V188, colony-mission-levels-v188.js) sit just inside the
+// footstep cues, above the objective panel: their spawns, held interactions and phases run under
+// the combat feel, the creature scale, the caste behaviours, the depth holds (the C1 corridor) and
+// the handover, which all see the authored encounter. The adjacencies the other suites pin are kept.
+// The dedicated Asphodèle station levels S1-S4 (V188, station-mission-levels-v188.js, spec 009) sit
+// just inside the objective panel, above the tension director, under the same outer layers.
+// The in-level dropship handover (V188) wraps every mission layer: while it
+// withholds control nothing below it runs, so mission time (and with it the
+// insertion grace) only starts when control is given, and it can hold the
+// mission-complete event of any mode until the boarding is over.
+export class GameEngine extends withMissionDropshipHandoverV188(withMissionDepthRoomsV188(withQz17LevelDressingV188(withCasteBehaviorsV188(withInsertionSafeZoneV188(withRunOptionsRuntimeV188(withAsphodeleMissionDressingV188(withVfxV188(withFranchiseFidelityV188(withGameplayGapsV188(withCombatFeelV188(withCreatureScaleV188(withFootstepCuesV188(withColonyMissionLevelsV188(withMissionObjectivePanelV188(withStationMissionLevelsV188(withTensionDirectorV188(withArbiterCampaignRuntimeV190(withMagazineRecoveryWorldV168(withArsenalFeedsV188(withMotionTrackerV160(withArchiveRelayPresentationV160(withAlien3ProductionV114(withForgeDecorationV141(withForgeMissionRuntimeV141(withMissionLayerMatteV188(V158ProductionEngine)))))))))))))))))))))))))) {
+  updateEnemy(actor, delta) {
+    // Observe final accepted displacement after every existing wrapper,
+    // including insertion grace and depth holds. Their order is unchanged.
+    const step = beginQueenMotherGuardStepV188(this, actor, delta);
+    const result = super.updateEnemy(actor, delta);
+    if (step) finishQueenMotherGuardStepV188(this, actor, step);
+    return result;
+  }
+
   start(options = {}) {
-    options = isolateForgeMissionOptionsV136(options);
+    options = isolateForgeMissionOptionsV136(normalizeAlien3ProductionOptionsV114(options));
     this.expectedMissionSignatureV130 = options.missionLevel?.signature || null;
     this.weaponMasteryV167 ||= createWeaponMasteryV167();
     this.experimentalPhysicalMagazinesV167 = options.experimentalPhysicalMagazinesV167 === true;
@@ -161,7 +217,8 @@ export class GameEngine extends withMagazineRecoveryWorldV168(withMotionTrackerV
       && this.mission?.state === 'active' && actor?.alive && !actor.downed && (allowVent || !actor.ventTransit)
       && !(actor.hazardKind === 'electrical' && actor.hazardClock > 0)
       && (actor !== this.coop || this.coopEnabled) && !this.isPlaceableBusyV86(actor) && !this.isFieldActionBusyV124(actor)
-      && (allowSquadTask || !this.isSquadActionLockedV132?.(actor)));
+      && (allowSquadTask || !this.isSquadActionLockedV132?.(actor))
+      && !this.dropshipHandoverBlocksV188?.()); // V188: no action while the dropship handover withholds control
   }
 
   // Guard the outermost runtime so keyboard, touch/UI and internal dispatch share the same contract.
@@ -170,6 +227,10 @@ export class GameEngine extends withMagazineRecoveryWorldV168(withMotionTrackerV
   }
 
   fire(actor = this.player) {
+    if (this.isAlien3ProductionV114?.()) {
+      return this.canPerformGameplayAction(actor) && !actor.climbing && !(actor.toolUseClock > 0)
+        && !(actor.interactionClock > 0) ? this.fireAlien3ProductionV114(actor) : false;
+    }
     if (!this.canPerformGameplayAction(actor) || actor.climbing || actor.toolUseClock > 0
       || actor.interactionClock > 0 || this.playerWeaponFireBlockedV160?.(actor)) return false;
     const beforeShots = Number(actor?.shots) || 0;
@@ -191,6 +252,7 @@ export class GameEngine extends withMagazineRecoveryWorldV168(withMotionTrackerV
   }
 
   melee(actor = this.player) {
+    if (this.isAlien3ProductionV114?.()) return false;
     if (this.isMechaMissionV131?.() && actor?.inVehicle
       || this.isHiveMissionV131?.() && actor === this.player && this.hiveV131?.possession) {
       return this.canPerformGameplayAction(actor) ? super.melee(actor) : false;
@@ -230,19 +292,23 @@ export class GameEngine extends withMagazineRecoveryWorldV168(withMotionTrackerV
   }
 
   reload(actor = this.player) {
+    if (this.isAlien3ProductionV114?.()) return false;
     return this.canPerformGameplayAction(actor) && !actor.climbing && !(actor.meleeClock > 0)
       && !(actor.toolUseClock > 0) && !(actor.interactionClock > 0) ? super.reload(actor) : false;
   }
 
   useMedkit(actor = this.player) {
+    if (this.isAlien3ProductionV114?.()) return false;
     return this.canPerformGameplayAction(actor) ? super.useMedkit(actor) : false;
   }
 
   activateTracker(actor = this.player) {
+    if (this.isAlien3ProductionV114?.()) return false;
     return this.canPerformGameplayAction(actor) ? super.activateTracker(actor) : false;
   }
 
   toggleVehicle(actor = this.player) {
+    if (this.isAlien3ProductionV114?.()) return false;
     if (this.forgeNarrativeOpenV156) return false;
     if (!this.paused && this.running) this.cancelPlaceableV86(actor, 'vehicle');
     if (!this.paused && this.running) this.cancelFieldActionV124(actor, 'vehicle');
@@ -257,10 +323,12 @@ export class GameEngine extends withMagazineRecoveryWorldV168(withMotionTrackerV
   }
 
   useEquipment(equipmentId, actor = this.player) {
+    if (this.isAlien3ProductionV114?.()) return false;
     return this.canPerformGameplayAction(actor) ? super.useEquipment(equipmentId, actor) : false;
   }
 
   activateNeuroCountermeasure(actor = this.player) {
+    if (this.isAlien3ProductionV114?.()) return false;
     return this.canPerformGameplayAction(actor) ? super.activateNeuroCountermeasure(actor) : false;
   }
 

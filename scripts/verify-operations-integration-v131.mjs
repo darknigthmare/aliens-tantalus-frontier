@@ -288,7 +288,10 @@ test('real APC controls complete a finite course and archive one verified payout
 
 test('V131 result certification rejects ecosystem success while its recorded boss and organs are still alive', async () => {
   const {engine,selected,options}=await fixture('queen-mother-song');
-  const save=createDefaultSave(), operation=beginOperation(save,selected,options.world).operation;
+  // V188 spec 011: the chapter lives on TR-0, hidden until « La Saison des Reines » reveals it. Fixture (declared): route opened.
+  const save=createDefaultSave();
+  if(!save.galaxy.unlockedWorldIds.includes(options.world.id))save.galaxy.unlockedWorldIds.push(options.world.id);
+  const operation=beginOperation(save,selected,options.world).operation;
   operation.levelSeedId=engine.resumeIdentity.levelSeedId;
   operation.missionLevelSignature=options.missionLevel.signature;
   const raw=persistent(engine), terminal=raw.specialOperation.ecosystemV131;

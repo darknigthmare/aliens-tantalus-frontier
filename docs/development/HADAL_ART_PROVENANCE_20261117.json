@@ -1,0 +1,1916 @@
+{
+  "schema": "tantalus-hadal-art-provenance-v1",
+  "date": "2026-11-17",
+  "preparedAtUtc": "2026-11-17T16:55:09.010948+00:00",
+  "predecessor": "a3634de7c294ae82554d899057fab96088ccf769",
+  "scope": {
+    "newImages": 3,
+    "newImageBytes": 3235815,
+    "sourceParts": 19,
+    "currentPoseDrawnParts": 15,
+    "runtimeSources": [
+      "src/hadal-player-art-v188.js",
+      "src/player-appearance-runtime-v126.js",
+      "src/player-weapon-runtime-v125.js",
+      "src/player-body-rig-v125.js",
+      "src/player-modular-rig-v126.js",
+      "src/player-transit-rig-v128.js",
+      "src/player-locomotion-rig-v129.js",
+      "src/legacy-operations-v131.js",
+      "src/legacy-operation-state-v131.js",
+      "src/i18n-en-catalog-v185.js"
+    ],
+    "originalTantalusDesign": true,
+    "canonExact": false,
+    "dedicatedSwimCycleCreated": false,
+    "newPersistentAppearance": false
+  },
+  "assets": [
+    {
+      "id": "hadal-upper",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 1085136,
+      "sha256": "0756d843650c31bcddb4eef1dc8e432901527520f6251900ab86d6b01e7c4b1b",
+      "promptSha256": "c76164f422a46114977b580a61520e93904258d80e27d1a229999ccfe2863eeb",
+      "sourceFacing": 1,
+      "sourcePerspective": "right-facing side/three-quarter original Tantalus pressure suit",
+      "globalAlphaBounds": {
+        "1": [
+          0,
+          0,
+          1253,
+          1236
+        ],
+        "8": [
+          105,
+          13,
+          1161,
+          1230
+        ],
+        "32": [
+          105,
+          14,
+          1160,
+          1229
+        ],
+        "128": [
+          106,
+          15,
+          1160,
+          1229
+        ]
+      },
+      "alphaHistogramThresholdCounts": {
+        "1": 422170,
+        "8": 388423,
+        "32": 385003,
+        "128": 378746,
+        "250": 354113,
+        "254": 986,
+        "255": 411
+      },
+      "connectedComponentsAt32": 11,
+      "declaredVisualParts": 11,
+      "parts": [
+        {
+          "id": "torso-upright",
+          "proposedAnchors": {
+            "joints": {
+              "near": {
+                "x": 151,
+                "y": 130
+              },
+              "far": {
+                "x": 313,
+                "y": 105
+              },
+              "waist": {
+                "x": 224,
+                "y": 286
+              }
+            },
+            "neckClosure": {
+              "x": 240,
+              "y": 35
+            }
+          },
+          "anchorReviewNote": "Near shoulder and collar opening observed. Far shoulder is partly occluded: its pivot is inferred, not a visible socket center. Waist is the coupling/belt center.",
+          "alphaBounds": {
+            "greaterThan0Connected": [
+              99,
+              11,
+              339,
+              311
+            ],
+            "atLeast32": [
+              105,
+              14,
+              331,
+              308
+            ],
+            "atLeast128": [
+              106,
+              15,
+              330,
+              307
+            ]
+          },
+          "sourceRect": [
+            97,
+            9,
+            244,
+            304
+          ],
+          "sourceRectPolicy": "Full alpha>0 connected component containing the visible piece, plus two source pixels, without PNG edits.",
+          "alternativeTightSourceRect": [
+            103,
+            12,
+            230,
+            298
+          ],
+          "alternativeTightSourceRectPolicy": "Existing modular-rig convention, alpha>=32 bounds plus two pixels; not the preferred full-edge window in this receipt.",
+          "widthForNativePartContract": 226,
+          "opaquePixels32": 52834,
+          "connectedPixelsAnyAlpha": 56079
+        },
+        {
+          "id": "torso-forward",
+          "proposedAnchors": {
+            "joints": {
+              "near": {
+                "x": 548,
+                "y": 138
+              },
+              "far": {
+                "x": 720,
+                "y": 120
+              },
+              "waist": {
+                "x": 607,
+                "y": 289
+              }
+            },
+            "neckClosure": {
+              "x": 656,
+              "y": 53
+            }
+          },
+          "anchorReviewNote": "Near shoulder and collar opening observed. Far shoulder is partly occluded; confirm its inferred pivot and the collar under the helmet.",
+          "alphaBounds": {
+            "greaterThan0Connected": [
+              492,
+              22,
+              742,
+              317
+            ],
+            "atLeast32": [
+              497,
+              25,
+              739,
+              311
+            ],
+            "atLeast128": [
+              498,
+              26,
+              738,
+              310
+            ]
+          },
+          "sourceRect": [
+            490,
+            20,
+            254,
+            299
+          ],
+          "sourceRectPolicy": "Full alpha>0 connected component containing the visible piece, plus two source pixels, without PNG edits.",
+          "alternativeTightSourceRect": [
+            495,
+            23,
+            246,
+            290
+          ],
+          "alternativeTightSourceRectPolicy": "Existing modular-rig convention, alpha>=32 bounds plus two pixels; not the preferred full-edge window in this receipt.",
+          "widthForNativePartContract": 242,
+          "opaquePixels32": 53103,
+          "connectedPixelsAnyAlpha": 56143
+        },
+        {
+          "id": "torso-compact",
+          "proposedAnchors": {
+            "joints": {
+              "near": {
+                "x": 964,
+                "y": 162
+              },
+              "far": {
+                "x": 1142,
+                "y": 148
+              },
+              "waist": {
+                "x": 989,
+                "y": 297
+              }
+            },
+            "neckClosure": {
+              "x": 1095,
+              "y": 89
+            }
+          },
+          "anchorReviewNote": "Near shoulder and collar opening observed. Far shoulder is partly occluded. The actual silhouette crosses the nominal row-1 boundary: never crop at the grid line.",
+          "alphaBounds": {
+            "greaterThan0Connected": [
+              885,
+              47,
+              1164,
+              324
+            ],
+            "atLeast32": [
+              892,
+              54,
+              1160,
+              316
+            ],
+            "atLeast128": [
+              893,
+              55,
+              1160,
+              315
+            ]
+          },
+          "sourceRect": [
+            883,
+            45,
+            283,
+            281
+          ],
+          "sourceRectPolicy": "Full alpha>0 connected component containing the visible piece, plus two source pixels, without PNG edits.",
+          "alternativeTightSourceRect": [
+            890,
+            52,
+            272,
+            266
+          ],
+          "alternativeTightSourceRectPolicy": "Existing modular-rig convention, alpha>=32 bounds plus two pixels; not the preferred full-edge window in this receipt.",
+          "widthForNativePartContract": 268,
+          "opaquePixels32": 50346,
+          "connectedPixelsAnyAlpha": 53798
+        },
+        {
+          "id": "near-upper-arm",
+          "proposedAnchors": {
+            "proximal": {
+              "x": 290,
+              "y": 396
+            },
+            "distal": {
+              "x": 190,
+              "y": 580
+            }
+          },
+          "anchorReviewNote": "Proximal at the visible medial shoulder coupling; distal at the elbow-cap center. Validate the cap overlap under the torso.",
+          "alphaBounds": {
+            "greaterThan0Connected": [
+              143,
+              339,
+              313,
+              628
+            ],
+            "atLeast32": [
+              145,
+              346,
+              308,
+              623
+            ],
+            "atLeast128": [
+              146,
+              346,
+              308,
+              623
+            ]
+          },
+          "sourceRect": [
+            141,
+            337,
+            174,
+            293
+          ],
+          "sourceRectPolicy": "Full alpha>0 connected component containing the visible piece, plus two source pixels, without PNG edits.",
+          "alternativeTightSourceRect": [
+            143,
+            344,
+            167,
+            281
+          ],
+          "alternativeTightSourceRectPolicy": "Existing modular-rig convention, alpha>=32 bounds plus two pixels; not the preferred full-edge window in this receipt.",
+          "widthForNativePartContract": 163,
+          "opaquePixels32": 32186,
+          "connectedPixelsAnyAlpha": 34371,
+          "proposedAnchorDistance": 209.418242
+        },
+        {
+          "id": "near-forearm",
+          "proposedAnchors": {
+            "proximal": {
+              "x": 636,
+              "y": 369
+            },
+            "distal": {
+              "x": 625,
+              "y": 592
+            }
+          },
+          "anchorReviewNote": "Visually proposed anatomical pivots; confirm in the production composition.",
+          "alphaBounds": {
+            "greaterThan0Connected": [
+              546,
+              343,
+              697,
+              625
+            ],
+            "atLeast32": [
+              555,
+              347,
+              694,
+              620
+            ],
+            "atLeast128": [
+              555,
+              348,
+              693,
+              619
+            ]
+          },
+          "sourceRect": [
+            544,
+            341,
+            155,
+            286
+          ],
+          "sourceRectPolicy": "Full alpha>0 connected component containing the visible piece, plus two source pixels, without PNG edits.",
+          "alternativeTightSourceRect": [
+            553,
+            345,
+            143,
+            277
+          ],
+          "alternativeTightSourceRectPolicy": "Existing modular-rig convention, alpha>=32 bounds plus two pixels; not the preferred full-edge window in this receipt.",
+          "widthForNativePartContract": 139,
+          "opaquePixels32": 27464,
+          "connectedPixelsAnyAlpha": 29667,
+          "proposedAnchorDistance": 223.271136
+        },
+        {
+          "id": "near-grip-gauntlet",
+          "proposedAnchors": {
+            "proximal": {
+              "x": 1029,
+              "y": 403
+            },
+            "distal": {
+              "x": 1054,
+              "y": 510
+            }
+          },
+          "anchorReviewNote": "Wrist-to-palm/weapon-contact proposal; no weapon is baked in. Final weapon grip must be inspected with the real native weapon.",
+          "alphaBounds": {
+            "greaterThan0Connected": [
+              964,
+              362,
+              1140,
+              602
+            ],
+            "atLeast32": [
+              966,
+              365,
+              1135,
+              598
+            ],
+            "atLeast128": [
+              967,
+              366,
+              1135,
+              598
+            ]
+          },
+          "sourceRect": [
+            962,
+            360,
+            180,
+            244
+          ],
+          "sourceRectPolicy": "Full alpha>0 connected component containing the visible piece, plus two source pixels, without PNG edits.",
+          "alternativeTightSourceRect": [
+            964,
+            363,
+            173,
+            237
+          ],
+          "alternativeTightSourceRectPolicy": "Existing modular-rig convention, alpha>=32 bounds plus two pixels; not the preferred full-edge window in this receipt.",
+          "widthForNativePartContract": 169,
+          "opaquePixels32": 28562,
+          "connectedPixelsAnyAlpha": 30451,
+          "proposedAnchorDistance": 109.881755
+        },
+        {
+          "id": "near-service-gauntlet",
+          "proposedAnchors": {
+            "proximal": {
+              "x": 222,
+              "y": 686
+            },
+            "distal": {
+              "x": 217,
+              "y": 805
+            }
+          },
+          "anchorReviewNote": "Distal is the service palm/contact, not the fingertip; the five covered digits remain part of the same sprite.",
+          "alphaBounds": {
+            "greaterThan0Connected": [
+              143,
+              652,
+              332,
+              916
+            ],
+            "atLeast32": [
+              148,
+              655,
+              327,
+              912
+            ],
+            "atLeast128": [
+              149,
+              656,
+              326,
+              911
+            ]
+          },
+          "sourceRect": [
+            141,
+            650,
+            193,
+            268
+          ],
+          "sourceRectPolicy": "Full alpha>0 connected component containing the visible piece, plus two source pixels, without PNG edits.",
+          "alternativeTightSourceRect": [
+            146,
+            653,
+            183,
+            261
+          ],
+          "alternativeTightSourceRectPolicy": "Existing modular-rig convention, alpha>=32 bounds plus two pixels; not the preferred full-edge window in this receipt.",
+          "widthForNativePartContract": 179,
+          "opaquePixels32": 27787,
+          "connectedPixelsAnyAlpha": 30858,
+          "proposedAnchorDistance": 119.104996
+        },
+        {
+          "id": "far-upper-arm",
+          "proposedAnchors": {
+            "proximal": {
+              "x": 683,
+              "y": 692
+            },
+            "distal": {
+              "x": 577,
+              "y": 878
+            }
+          },
+          "anchorReviewNote": "Proximal at the visible medial shoulder coupling; distal at the elbow-cap center.",
+          "alphaBounds": {
+            "greaterThan0Connected": [
+              528,
+              641,
+              704,
+              928
+            ],
+            "atLeast32": [
+              535,
+              643,
+              700,
+              922
+            ],
+            "atLeast128": [
+              536,
+              644,
+              699,
+              922
+            ]
+          },
+          "sourceRect": [
+            526,
+            639,
+            180,
+            291
+          ],
+          "sourceRectPolicy": "Full alpha>0 connected component containing the visible piece, plus two source pixels, without PNG edits.",
+          "alternativeTightSourceRect": [
+            533,
+            641,
+            169,
+            283
+          ],
+          "alternativeTightSourceRectPolicy": "Existing modular-rig convention, alpha>=32 bounds plus two pixels; not the preferred full-edge window in this receipt.",
+          "widthForNativePartContract": 165,
+          "opaquePixels32": 30421,
+          "connectedPixelsAnyAlpha": 32776,
+          "proposedAnchorDistance": 214.084096
+        },
+        {
+          "id": "far-forearm",
+          "proposedAnchors": {
+            "proximal": {
+              "x": 1040,
+              "y": 668
+            },
+            "distal": {
+              "x": 1040,
+              "y": 896
+            }
+          },
+          "anchorReviewNote": "Visually proposed anatomical pivots; confirm in the production composition.",
+          "alphaBounds": {
+            "greaterThan0Connected": [
+              959,
+              641,
+              1106,
+              932
+            ],
+            "atLeast32": [
+              964,
+              644,
+              1099,
+              926
+            ],
+            "atLeast128": [
+              965,
+              644,
+              1099,
+              925
+            ]
+          },
+          "sourceRect": [
+            957,
+            639,
+            151,
+            295
+          ],
+          "sourceRectPolicy": "Full alpha>0 connected component containing the visible piece, plus two source pixels, without PNG edits.",
+          "alternativeTightSourceRect": [
+            962,
+            642,
+            139,
+            286
+          ],
+          "alternativeTightSourceRectPolicy": "Existing modular-rig convention, alpha>=32 bounds plus two pixels; not the preferred full-edge window in this receipt.",
+          "widthForNativePartContract": 135,
+          "opaquePixels32": 26943,
+          "connectedPixelsAnyAlpha": 29301,
+          "proposedAnchorDistance": 228.0
+        },
+        {
+          "id": "far-grip-gauntlet",
+          "proposedAnchors": {
+            "proximal": {
+              "x": 224,
+              "y": 1008
+            },
+            "distal": {
+              "x": 244,
+              "y": 1110
+            }
+          },
+          "anchorReviewNote": "Visually proposed anatomical pivots; confirm in the production composition.",
+          "alphaBounds": {
+            "greaterThan0Connected": [
+              160,
+              966,
+              326,
+              1206
+            ],
+            "atLeast32": [
+              164,
+              971,
+              323,
+              1196
+            ],
+            "atLeast128": [
+              165,
+              971,
+              322,
+              1195
+            ]
+          },
+          "sourceRect": [
+            158,
+            964,
+            170,
+            244
+          ],
+          "sourceRectPolicy": "Full alpha>0 connected component containing the visible piece, plus two source pixels, without PNG edits.",
+          "alternativeTightSourceRect": [
+            162,
+            969,
+            163,
+            229
+          ],
+          "alternativeTightSourceRectPolicy": "Existing modular-rig convention, alpha>=32 bounds plus two pixels; not the preferred full-edge window in this receipt.",
+          "widthForNativePartContract": 159,
+          "opaquePixels32": 26092,
+          "connectedPixelsAnyAlpha": 28205,
+          "proposedAnchorDistance": 103.942292
+        },
+        {
+          "id": "far-service-gauntlet",
+          "proposedAnchors": {
+            "proximal": {
+              "x": 619,
+              "y": 996
+            },
+            "distal": {
+              "x": 618,
+              "y": 1110
+            }
+          },
+          "anchorReviewNote": "Visually proposed anatomical pivots; confirm in the production composition.",
+          "alphaBounds": {
+            "greaterThan0Connected": [
+              517,
+              959,
+              729,
+              1236
+            ],
+            "atLeast32": [
+              525,
+              962,
+              720,
+              1229
+            ],
+            "atLeast128": [
+              526,
+              963,
+              719,
+              1229
+            ]
+          },
+          "sourceRect": [
+            515,
+            957,
+            216,
+            281
+          ],
+          "sourceRectPolicy": "Full alpha>0 connected component containing the visible piece, plus two source pixels, without PNG edits.",
+          "alternativeTightSourceRect": [
+            523,
+            960,
+            199,
+            271
+          ],
+          "alternativeTightSourceRectPolicy": "Existing modular-rig convention, alpha>=32 bounds plus two pixels; not the preferred full-edge window in this receipt.",
+          "widthForNativePartContract": 195,
+          "opaquePixels32": 29265,
+          "connectedPixelsAnyAlpha": 32773,
+          "proposedAnchorDistance": 114.004386
+        }
+      ],
+      "residueOutsideRecommendedWindows": {
+        "nonzeroPixels": 7305,
+        "maximumAlpha": 1,
+        "pixelsAtLeast32": 0
+      },
+      "nominalGrid": {
+        "columns": 3,
+        "rows": 4,
+        "croppingByGridApproved": false
+      },
+      "emptyCell": {
+        "column0Based": 2,
+        "row0Based": 3,
+        "rect": [
+          836,
+          940,
+          418,
+          314
+        ],
+        "nonzeroPixels": 487,
+        "maximumAlpha": 1,
+        "pixelsAtLeast32": 0
+      },
+      "path": "assets/abyss/v188/hadal-upper-parts.png",
+      "generator": "built-in image_gen",
+      "copiedWithoutReencoding": true,
+      "pixelsModified": false,
+      "initialPrompt": "Create a production-ready transparent modular sprite atlas for the HADAL sealed deep-sea suit in Aliens: Tantalus Frontier, a gritty hand-painted side-view 2D game. Use the first supplied reference ONLY for the rendering style and separated upper-body part craftsmanship; use the second supplied reference for the established project pressure-suit identity: charcoal rubber/fabric, worn muted olive structural plates, dull brass annular pressure seals, compact industrial fittings. This is an original project deep-sea suit, not a claim to a movie replica.\n\nOUTPUT: one square transparent PNG, no background at all, no checkerboard, no ground shadow, no typography, labels, numbers, logos or grid lines. Exactly ELEVEN fully isolated components, arranged in a strict 3 columns x 4 rows contact sheet with generous transparent gutters. The bottom-right slot is empty. No complete person and no joined limbs. Every component is shown entirely inside its cell, including faint edge paint. Keep one consistent right-facing side/three-quarter view and the same material design across every part. Crisp readable outlines, painterly worn metal and dark fabric, modest upper-left diffuse light; no halo.\n\nROW 1: (1) one upright sleeveless sealed-suit torso, (2) the SAME torso leaning forward a little, (3) the SAME torso compact and leaning further. These are three poses of exactly the same suit. Each torso ends at its independent waist coupling; the neck has an open circular pressure collar ready to receive a separate helmet, and the two shoulder attachment sockets are visible. NO head, helmet, forearm, glove, full arm, weapon, backpack or trousers painted onto any torso. Torso proportions human and compact, not a huge diving barrel. The suit neck-to-waist region has a small chest regulator, muted olive plate and charcoal bellows; no long hoses leaving the piece.\n\nROW 2: (1) NEAR upper arm from shoulder through elbow, full charcoal pressure sleeve and modest rounded olive shoulder cap, (2) NEAR forearm from elbow through wrist pressure ring, fully covered, (3) NEAR closed gauntlet hand in weapon-grip pose, thumb and curled fingers clear but NO weapon. All long limb pieces point downward in their own cell and have rounded overlapping attachment ends.\n\nROW 3: (1) NEAR service gauntlet with relaxed, slightly open fingers, (2) FAR upper arm, same sealed sleeve, (3) FAR forearm. Same part lengths and matching pressure rings as their near counterparts. Far side is slightly darker only, not a different suit. No bare skin anywhere.\n\nROW 4: (1) FAR closed weapon-grip gauntlet, (2) FAR service gauntlet, (3) fully transparent empty slot. Hands have five covered fingers, cuff seals matching the forearms, no fingerless gloves. Each part is detached and separated by transparent space.\n\nPreserve the rugged Tantalus art style of the supplied assets while replacing the marine's exposed skin and open clothing with a coherent fully sealed underwater pressure suit. No skull badges. These pieces will be independently attached to an existing animated human skeleton, so keep the shoulder/elbow/wrist attachment centers anatomically sensible and clearly formed, and do not bake a pose of the full character into a part.\n",
+      "toolImageInputs": [
+        {
+          "path": "assets/openai/sprites/player/rig-v126/echo9-upper-parts-v126.png",
+          "sha256": "5c8b3a6e993bfb2d6b0b1cabb37b84aa734af829f8dd391170720380f0d66dc0"
+        },
+        {
+          "path": "assets/openai/sprites/normalized/tools/pressure-suit-use-sheet.png",
+          "sha256": "ddff8e1f28f33893fc5ce37b0cc6a268b4b91b09adea8b9a63724e0df2b7f04a"
+        }
+      ],
+      "sourceMeasurementsAreProposals": true,
+      "finalRuntimeAnchors": "runtimeConfiguration.parts"
+    },
+    {
+      "id": "hadal-lower",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 942075,
+      "sha256": "e7e2ae1e4e996c94ce327ec2e91c2550291627ac58860b2ce856946ca36ea480",
+      "promptSha256": "dd87b515f957d60ae1d8c2e15e89629ba50380ea15427092aac1c028f07c3786",
+      "sourceFacing": 1,
+      "sourcePerspective": "right-facing side/three-quarter original Tantalus pressure suit",
+      "globalAlphaBounds": {
+        "1": [
+          0,
+          8,
+          1238,
+          1254
+        ],
+        "8": [
+          35,
+          148,
+          1221,
+          1112
+        ],
+        "32": [
+          36,
+          148,
+          1221,
+          1111
+        ],
+        "128": [
+          37,
+          149,
+          1220,
+          1111
+        ]
+      },
+      "alphaHistogramThresholdCounts": {
+        "1": 387686,
+        "8": 363756,
+        "32": 361512,
+        "128": 357409,
+        "250": 341785,
+        "254": 1727,
+        "255": 1097
+      },
+      "connectedComponentsAt32": 7,
+      "declaredVisualParts": 7,
+      "parts": [
+        {
+          "id": "pelvis",
+          "proposedAnchors": {
+            "waist": {
+              "x": 180,
+              "y": 312
+            },
+            "belt": {
+              "x": 180,
+              "y": 283
+            },
+            "waistCoupling": {
+              "x": 183,
+              "y": 239
+            },
+            "near": {
+              "x": 80,
+              "y": 388
+            },
+            "far": {
+              "x": 307,
+              "y": 373
+            }
+          },
+          "anchorReviewNote": "Waist is the anatomical interior pivot, belt is the frontal waist-band pivot, and waistCoupling is the upper annular opening. Do not substitute one for another without checking the torso/pelvis seam and native pelvisBelt path.",
+          "alphaBounds": {
+            "greaterThan0Connected": [
+              31,
+              213,
+              324,
+              460
+            ],
+            "atLeast32": [
+              36,
+              217,
+              322,
+              455
+            ],
+            "atLeast128": [
+              37,
+              218,
+              321,
+              454
+            ]
+          },
+          "sourceRect": [
+            29,
+            211,
+            297,
+            251
+          ],
+          "sourceRectPolicy": "Full alpha>0 connected component containing the visible piece, plus two source pixels, without PNG edits.",
+          "alternativeTightSourceRect": [
+            34,
+            215,
+            290,
+            242
+          ],
+          "alternativeTightSourceRectPolicy": "Existing modular-rig convention, alpha>=32 bounds plus two pixels; not the preferred full-edge window in this receipt.",
+          "widthForNativePartContract": 286,
+          "opaquePixels32": 54114,
+          "connectedPixelsAnyAlpha": 56573
+        },
+        {
+          "id": "near-thigh",
+          "proposedAnchors": {
+            "proximal": {
+              "x": 554,
+              "y": 218
+            },
+            "distal": {
+              "x": 462,
+              "y": 505
+            }
+          },
+          "anchorReviewNote": "Hip coupling and knee cap. The upper protection resembles the suit shoulder construction; human thigh length must come from the native skeleton, not from atlas cell size.",
+          "alphaBounds": {
+            "greaterThan0Connected": [
+              384,
+              145,
+              581,
+              563
+            ],
+            "atLeast32": [
+              387,
+              148,
+              579,
+              559
+            ],
+            "atLeast128": [
+              387,
+              149,
+              578,
+              558
+            ]
+          },
+          "sourceRect": [
+            382,
+            143,
+            201,
+            422
+          ],
+          "sourceRectPolicy": "Full alpha>0 connected component containing the visible piece, plus two source pixels, without PNG edits.",
+          "alternativeTightSourceRect": [
+            385,
+            146,
+            196,
+            415
+          ],
+          "alternativeTightSourceRectPolicy": "Existing modular-rig convention, alpha>=32 bounds plus two pixels; not the preferred full-edge window in this receipt.",
+          "widthForNativePartContract": 192,
+          "opaquePixels32": 57776,
+          "connectedPixelsAnyAlpha": 60779,
+          "proposedAnchorDistance": 301.385136
+        },
+        {
+          "id": "near-shin",
+          "proposedAnchors": {
+            "proximal": {
+              "x": 768,
+              "y": 182
+            },
+            "distal": {
+              "x": 748,
+              "y": 527
+            }
+          },
+          "anchorReviewNote": "Visually proposed anatomical pivots; confirm in the production composition.",
+          "alphaBounds": {
+            "greaterThan0Connected": [
+              672,
+              151,
+              844,
+              565
+            ],
+            "atLeast32": [
+              675,
+              159,
+              840,
+              559
+            ],
+            "atLeast128": [
+              675,
+              159,
+              840,
+              558
+            ]
+          },
+          "sourceRect": [
+            670,
+            149,
+            176,
+            418
+          ],
+          "sourceRectPolicy": "Full alpha>0 connected component containing the visible piece, plus two source pixels, without PNG edits.",
+          "alternativeTightSourceRect": [
+            673,
+            157,
+            169,
+            404
+          ],
+          "alternativeTightSourceRectPolicy": "Existing modular-rig convention, alpha>=32 bounds plus two pixels; not the preferred full-edge window in this receipt.",
+          "widthForNativePartContract": 165,
+          "opaquePixels32": 49483,
+          "connectedPixelsAnyAlpha": 52547,
+          "proposedAnchorDistance": 345.579224
+        },
+        {
+          "id": "near-boot",
+          "proposedAnchors": {
+            "ankle": {
+              "x": 1014,
+              "y": 430
+            },
+            "proximal": {
+              "x": 1014,
+              "y": 430
+            },
+            "sole": {
+              "x": 1112,
+              "y": 526
+            },
+            "distal": {
+              "x": 1112,
+              "y": 526
+            },
+            "heel": {
+              "x": 955,
+              "y": 516
+            },
+            "toe": {
+              "x": 1210,
+              "y": 513
+            },
+            "cuff": {
+              "x": 1016,
+              "y": 285
+            }
+          },
+          "anchorReviewNote": "Ankle is the anatomical ankle inside the shaft, not its upper cuff. Sole is the bottom boundary at alpha>=128, at median x of the deepest opaque row; heel/toe are measured lower boundaries at their source columns.",
+          "alphaBounds": {
+            "greaterThan0Connected": [
+              938,
+              265,
+              1224,
+              531
+            ],
+            "atLeast32": [
+              940,
+              268,
+              1220,
+              527
+            ],
+            "atLeast128": [
+              941,
+              268,
+              1220,
+              526
+            ]
+          },
+          "sourceRect": [
+            936,
+            263,
+            290,
+            270
+          ],
+          "sourceRectPolicy": "Full alpha>0 connected component containing the visible piece, plus two source pixels, without PNG edits.",
+          "alternativeTightSourceRect": [
+            938,
+            266,
+            284,
+            263
+          ],
+          "alternativeTightSourceRectPolicy": "Existing modular-rig convention, alpha>=32 bounds plus two pixels; not the preferred full-edge window in this receipt.",
+          "widthForNativePartContract": 280,
+          "opaquePixels32": 45405,
+          "connectedPixelsAnyAlpha": 47949,
+          "proposedAnchorDistance": 137.186005
+        },
+        {
+          "id": "far-thigh",
+          "proposedAnchors": {
+            "proximal": {
+              "x": 554,
+              "y": 765
+            },
+            "distal": {
+              "x": 462,
+              "y": 1057
+            }
+          },
+          "anchorReviewNote": "Visually proposed anatomical pivots; confirm in the production composition.",
+          "alphaBounds": {
+            "greaterThan0Connected": [
+              384,
+              690,
+              581,
+              1113
+            ],
+            "atLeast32": [
+              387,
+              697,
+              578,
+              1110
+            ],
+            "atLeast128": [
+              387,
+              698,
+              578,
+              1110
+            ]
+          },
+          "sourceRect": [
+            382,
+            688,
+            201,
+            427
+          ],
+          "sourceRectPolicy": "Full alpha>0 connected component containing the visible piece, plus two source pixels, without PNG edits.",
+          "alternativeTightSourceRect": [
+            385,
+            695,
+            195,
+            417
+          ],
+          "alternativeTightSourceRectPolicy": "Existing modular-rig convention, alpha>=32 bounds plus two pixels; not the preferred full-edge window in this receipt.",
+          "widthForNativePartContract": 191,
+          "opaquePixels32": 58418,
+          "connectedPixelsAnyAlpha": 61904,
+          "proposedAnchorDistance": 306.15029
+        },
+        {
+          "id": "far-shin",
+          "proposedAnchors": {
+            "proximal": {
+              "x": 768,
+              "y": 731
+            },
+            "distal": {
+              "x": 748,
+              "y": 1078
+            }
+          },
+          "anchorReviewNote": "Visually proposed anatomical pivots; confirm in the production composition.",
+          "alphaBounds": {
+            "greaterThan0Connected": [
+              671,
+              704,
+              846,
+              1119
+            ],
+            "atLeast32": [
+              675,
+              709,
+              841,
+              1111
+            ],
+            "atLeast128": [
+              676,
+              709,
+              840,
+              1111
+            ]
+          },
+          "sourceRect": [
+            669,
+            702,
+            179,
+            419
+          ],
+          "sourceRectPolicy": "Full alpha>0 connected component containing the visible piece, plus two source pixels, without PNG edits.",
+          "alternativeTightSourceRect": [
+            673,
+            707,
+            170,
+            406
+          ],
+          "alternativeTightSourceRectPolicy": "Existing modular-rig convention, alpha>=32 bounds plus two pixels; not the preferred full-edge window in this receipt.",
+          "widthForNativePartContract": 166,
+          "opaquePixels32": 50598,
+          "connectedPixelsAnyAlpha": 53479,
+          "proposedAnchorDistance": 347.575891
+        },
+        {
+          "id": "far-boot",
+          "proposedAnchors": {
+            "ankle": {
+              "x": 1012,
+              "y": 982
+            },
+            "proximal": {
+              "x": 1012,
+              "y": 982
+            },
+            "sole": {
+              "x": 1112,
+              "y": 1078
+            },
+            "distal": {
+              "x": 1112,
+              "y": 1078
+            },
+            "heel": {
+              "x": 955,
+              "y": 1067
+            },
+            "toe": {
+              "x": 1210,
+              "y": 1065
+            },
+            "cuff": {
+              "x": 1016,
+              "y": 836
+            }
+          },
+          "anchorReviewNote": "Same anatomical ankle convention as near boot. The sole coordinate is an edge, not a pixel-center sample; deepest alpha>=128 row is y1077.",
+          "alphaBounds": {
+            "greaterThan0Connected": [
+              933,
+              816,
+              1223,
+              1081
+            ],
+            "atLeast32": [
+              939,
+              818,
+              1221,
+              1078
+            ],
+            "atLeast128": [
+              940,
+              819,
+              1220,
+              1078
+            ]
+          },
+          "sourceRect": [
+            931,
+            814,
+            294,
+            269
+          ],
+          "sourceRectPolicy": "Full alpha>0 connected component containing the visible piece, plus two source pixels, without PNG edits.",
+          "alternativeTightSourceRect": [
+            937,
+            816,
+            286,
+            264
+          ],
+          "alternativeTightSourceRectPolicy": "Existing modular-rig convention, alpha>=32 bounds plus two pixels; not the preferred full-edge window in this receipt.",
+          "widthForNativePartContract": 282,
+          "opaquePixels32": 45718,
+          "connectedPixelsAnyAlpha": 48128,
+          "proposedAnchorDistance": 138.621788
+        }
+      ],
+      "residueOutsideRecommendedWindows": {
+        "nonzeroPixels": 5169,
+        "maximumAlpha": 1,
+        "pixelsAtLeast32": 0
+      },
+      "nominalGrid": {
+        "columns": 4,
+        "rows": 2,
+        "croppingByGridApproved": false
+      },
+      "emptyCell": {
+        "column0Based": 0,
+        "row0Based": 1,
+        "rect": [
+          0,
+          627,
+          314,
+          627
+        ],
+        "nonzeroPixels": 111,
+        "maximumAlpha": 1,
+        "pixelsAtLeast32": 0
+      },
+      "path": "assets/abyss/v188/hadal-leg-parts.png",
+      "generator": "built-in image_gen",
+      "copiedWithoutReencoding": true,
+      "pixelsModified": false,
+      "initialPrompt": "Create the lower-body modular sprite atlas for the HADAL sealed deep-sea suit in Aliens: Tantalus Frontier. The FIRST supplied image is the newly approved matching HADAL upper-body atlas: faithfully continue exactly its charcoal pressure fabric, worn muted olive protective plating, dull brass coupling rings, thick sealed construction, proportions, edge treatment and restrained hand-painted light. The SECOND image shows the project's separated leg construction and scale conventions, and the THIRD is the project's folded pressure-suit identity. Make new matching HADAL parts, not a recolor of exposed marine clothing.\n\nOUTPUT one square transparent PNG containing exactly SEVEN independently isolated components, no background, no shadows on an invisible floor, no checkerboard, no text, logos, labels, measurement lines or outlines around cells. Use a 4-column x 2-row arrangement centered vertically in the square canvas, generous transparent gutters, and exactly one empty slot. Show all seven parts fully, with ample alpha margin and no clipping. All parts have the same artwork scale and the same right-facing side/three-quarter view as the approved upper atlas. No full person, no assembled legs, no duplicate body, no weapon.\n\nTOP ROW, left to right:\n1. one separate sealed pelvis/hip piece, compact dark charcoal rubberized fabric, matching brass/olive waist coupling and rounded hip sockets; no long trouser legs attached.\n2. NEAR thigh from hip socket to knee socket, full sealed dark pressure fabric, a small worn olive protective plate, flexible bellows, no open skin.\n3. NEAR shin from knee joint to ankle pressure ring, full sealed dark fabric and practical reinforcement.\n4. NEAR sealed deep-sea boot, right-facing profile, heavy but human-proportioned dark boot with dull brass/olive toe and ankle protection, thick flat segmented magnetic sole. Rounded complete heel and toe, no fin.\n\nBOTTOM ROW:\n1. completely empty transparent slot.\n2. FAR thigh, matching the near thigh exactly in length and design; slightly darker to read behind the body.\n3. FAR shin, matching lengths and material.\n4. FAR sealed boot, same right-facing profile and flat segmented sole, slightly darker.\n\nThe thighs and shins point downward in neutral joint alignment. Use rounded overlapping attachment ends at hip, knee and ankle so the pieces can rotate on a real skeletal rig; do not connect any two pieces with painted fabric or hoses. Human anatomy: plausible thigh/shin lengths, no oversized boots or bulky diving barrel. The knees must remain visually flexible. Preserve the same gritty 2D Tantalus painterly craft as the approved upper-body atlas, with modest upper-left diffuse lighting, no glow and no sci-fi neon. The existing engine will animate all seven pieces independently.\n",
+      "toolImageInputs": [
+        {
+          "path": "assets/abyss/v188/hadal-upper-parts.png",
+          "sha256": "0756d843650c31bcddb4eef1dc8e432901527520f6251900ab86d6b01e7c4b1b"
+        },
+        {
+          "path": "assets/openai/sprites/player/rig-v128/echo9-leg-parts-v128.png",
+          "sha256": "b21eaa6697beae3bdc153820ec39837e7399cc350fe095d82e168ac4c27ac6ed"
+        },
+        {
+          "path": "assets/openai/sprites/normalized/tools/pressure-suit-use-sheet.png",
+          "sha256": "ddff8e1f28f33893fc5ce37b0cc6a268b4b91b09adea8b9a63724e0df2b7f04a"
+        }
+      ],
+      "sourceMeasurementsAreProposals": true,
+      "finalRuntimeAnchors": "runtimeConfiguration.parts"
+    },
+    {
+      "id": "hadal-helmet",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 1208604,
+      "sha256": "94a728c58b324f0bb8403a0cee2ba7dd1002483a14741fce5e5674784e56c2b2",
+      "promptSha256": "9eb83ec39ea186123149b68bc1ac2a920136dd6bf504bc3393ccc7254e4db301",
+      "sourceFacing": 1,
+      "sourcePerspective": "right-facing side/three-quarter original Tantalus pressure suit",
+      "globalAlphaBounds": {
+        "1": [
+          31,
+          45,
+          1226,
+          1254
+        ],
+        "8": [
+          259,
+          145,
+          994,
+          1062
+        ],
+        "32": [
+          261,
+          146,
+          992,
+          1061
+        ],
+        "128": [
+          261,
+          146,
+          991,
+          1061
+        ]
+      },
+      "alphaHistogramThresholdCounts": {
+        "1": 540602,
+        "8": 533908,
+        "32": 532917,
+        "128": 531213,
+        "250": 524308,
+        "254": 1754,
+        "255": 319
+      },
+      "connectedComponentsAt32": 1,
+      "declaredVisualParts": 1,
+      "parts": [
+        {
+          "id": "closed-helmet-neckseal",
+          "proposedAnchors": {
+            "neckSeal": {
+              "x": 618,
+              "y": 1020
+            },
+            "ear": {
+              "x": 465,
+              "y": 577
+            },
+            "visorCenter": {
+              "x": 820,
+              "y": 540
+            },
+            "respiratoryReference": {
+              "x": 850,
+              "y": 600
+            }
+          },
+          "anchorReviewNote": "Neck seal pivot is proposed at the lower annular mating plane. Ear is a hardware-side proxy, not a visible human ear. The respiratory reference is a measured opaque dark-glass presentation point, not a claim about an unseen mouth.",
+          "alphaBounds": {
+            "greaterThan0Connected": [
+              258,
+              143,
+              995,
+              1063
+            ],
+            "atLeast32": [
+              261,
+              146,
+              992,
+              1061
+            ],
+            "atLeast128": [
+              261,
+              146,
+              991,
+              1061
+            ]
+          },
+          "sourceRect": [
+            256,
+            141,
+            741,
+            924
+          ],
+          "sourceRectPolicy": "Full alpha>0 connected component containing the visible piece, plus two source pixels, without PNG edits.",
+          "alternativeTightSourceRect": [
+            259,
+            144,
+            735,
+            919
+          ],
+          "alternativeTightSourceRectPolicy": "Existing modular-rig convention, alpha>=32 bounds plus two pixels; not the preferred full-edge window in this receipt.",
+          "widthForNativePartContract": 731,
+          "opaquePixels32": 532917,
+          "connectedPixelsAnyAlpha": 539937
+        }
+      ],
+      "residueOutsideRecommendedWindows": {
+        "nonzeroPixels": 541,
+        "maximumAlpha": 1,
+        "pixelsAtLeast32": 0
+      },
+      "respiratoryVolume": {
+        "sourceRect": [
+          820,
+          580,
+          60,
+          40
+        ],
+        "center": {
+          "x": 850,
+          "y": 600
+        },
+        "meaning": "Closed dark visor area for presentation alignment to the unchanged native oxygen probe; no face or mouth is visible.",
+        "measuredAlphaRange": [
+          252,
+          253
+        ],
+        "meanRGB": [
+          22.925,
+          22.094,
+          21.123
+        ],
+        "maximumRGBChannel": 51
+      },
+      "path": "assets/abyss/v188/hadal-helmet.png",
+      "generator": "built-in image_gen",
+      "copiedWithoutReencoding": true,
+      "pixelsModified": false,
+      "initialPrompt": "Create ONE complete isolated HADAL deep-sea pressure helmet with its integral short neck seal, for Aliens: Tantalus Frontier's modular side-view human rig. The FIRST reference is the newly approved HADAL upper-body atlas. Match its charcoal pressure fabric, worn muted olive metal and dull brass annular couplings exactly. The SECOND reference is the project's existing folded pressure-suit prop and establishes the dark faceplate, compact helmet shape and industrial pressure collar. The THIRD reference shows the game's head-scale rendering style, but this new helmet is fully closed, unlike the open marine helmets.\n\nOUTPUT one square transparent PNG, one object only, centered, fully visible with at least 10% transparent margin on every side. No background, checkerboard, cast ground shadow, labels, typography, logos, pedestal, diagram arrows or other objects. Show a compact right-facing side/three-quarter profile matching the torso atlas's view, as if worn by a standing human looking right. The head must be upright rather than looking sharply down. Keep human head proportions; avoid an enormous spherical diving bell.\n\nThe complete helmet includes its rigid worn olive/charcoal shell, an opaque smoked-black slightly warm glass faceplate wrapping toward the right front, a compact side pressure regulator with subtle fasteners, and a short dark ribbed neck bellows ending in a dull brass ring that fits into the torso's circular collar. The rear is to the left, the visor projects toward the right. Glass is dark and reflective but NOT transparent: no face, skin, eyes, hair, mouth, empty alpha face opening or separate bare human head. Keep the helmet visually sealed, without holes or disconnected hoses. One small local valve and a short attached side breathing conduit may be integrated entirely within the helmet silhouette; no long external tubes. No antenna or backpack. No chin hanging below the neck coupling.\n\nRender it as a gritty hand-painted 2D game sprite, crisp readable silhouette and restrained material highlights matching the supplied HADAL suit exactly. This is an original project deep-sea suit, and the helmet will be a separately articulated piece, so preserve the complete bottom neck coupling and do not draw torso, shoulders, hands or arms.\n",
+      "toolImageInputs": [
+        {
+          "path": "assets/abyss/v188/hadal-upper-parts.png",
+          "sha256": "0756d843650c31bcddb4eef1dc8e432901527520f6251900ab86d6b01e7c4b1b"
+        },
+        {
+          "path": "assets/openai/sprites/normalized/tools/pressure-suit-use-sheet.png",
+          "sha256": "ddff8e1f28f33893fc5ce37b0cc6a268b4b91b09adea8b9a63724e0df2b7f04a"
+        },
+        {
+          "path": "assets/openai/sprites/player/rig-v126/echo9-head-back-parts-v126.png",
+          "sha256": "ac3bfbffd40fa16ee10fdcad1fe6f0818a0af1aeaa5b116cba402fd5927dd450"
+        }
+      ],
+      "sourceMeasurementsAreProposals": true,
+      "finalRuntimeAnchors": "runtimeConfiguration.parts"
+    }
+  ],
+  "sourceMeasurement": {
+    "sha256": "6bf72c8bd86d3614b4f58857ded0c3a60bfcd1c31f3d0551cb9570950ecf210f",
+    "method": {
+      "alphaThresholdForVisualComponents": 32,
+      "componentConnectivity": 8,
+      "recommendedSourcePaddingPixels": 2,
+      "boundsFormat": "left,top,right,bottom; right/bottom exclusive",
+      "sourceRectFormat": "x,y,width,height",
+      "anchorCoordinates": "Absolute native PNG pixels, proposed from visible anatomy; no grid-derived anchors.",
+      "pixelsModified": false,
+      "pngCopiesMade": false,
+      "productionFilesModified": false,
+      "runtimeTestsRun": false
+    },
+    "review": {
+      "upperVisualParts": 11,
+      "lowerVisualParts": 7,
+      "helmetVisualParts": 1,
+      "totalVisualParts": 19,
+      "materials": "Charcoal sealed pressure fabric, worn muted olive protective plates and dull brass coupling rings, consistent with the project pressure-suit prop.",
+      "noVisibleSkin": true,
+      "helmetGlassClosedOpaque": true,
+      "noBakedWeapon": true,
+      "originalTantalusDesign": true,
+      "canonExact": false,
+      "observations": [
+        "Nominally empty upper and lower cells contain isolated alpha=1 residue; no component at alpha>=32.",
+        "Torso compact and pelvis exceed nominal cell boundaries; use the measured component windows.",
+        "Far shoulder centers are partly hidden and inferred; refine their pivots against the composed shoulders and collar.",
+        "Thigh protection repeats the shoulder construction language; its proportions must be determined by the native human skeleton.",
+        "Helmet and torso each contain a pressure ring; verify their overlap as a single sealed neckline, without drawing bare head or face through the visor."
+      ]
+    },
+    "scope": "Source atlas measurements only. Final composed pose and support are assessed by the separate render receipt."
+  },
+  "runtimeConfiguration": {
+    "parts": {
+      "torso": {
+        "upright": {
+          "source": {
+            "x": 97,
+            "y": 9,
+            "width": 244,
+            "height": 304
+          },
+          "width": 226,
+          "joints": {
+            "near": {
+              "x": 151,
+              "y": 130
+            },
+            "far": {
+              "x": 313,
+              "y": 105
+            },
+            "waist": {
+              "x": 224,
+              "y": 286
+            }
+          },
+          "neckClosure": {
+            "x": 240,
+            "y": 35
+          }
+        },
+        "forward": {
+          "source": {
+            "x": 490,
+            "y": 20,
+            "width": 254,
+            "height": 299
+          },
+          "width": 242,
+          "joints": {
+            "near": {
+              "x": 548,
+              "y": 138
+            },
+            "far": {
+              "x": 720,
+              "y": 120
+            },
+            "waist": {
+              "x": 607,
+              "y": 289
+            }
+          },
+          "neckClosure": {
+            "x": 656,
+            "y": 53
+          }
+        },
+        "compact": {
+          "source": {
+            "x": 883,
+            "y": 45,
+            "width": 283,
+            "height": 281
+          },
+          "width": 268,
+          "joints": {
+            "near": {
+              "x": 964,
+              "y": 162
+            },
+            "far": {
+              "x": 1142,
+              "y": 148
+            },
+            "waist": {
+              "x": 989,
+              "y": 297
+            }
+          },
+          "neckClosure": {
+            "x": 1095,
+            "y": 89
+          }
+        }
+      },
+      "arms": {
+        "near": {
+          "upper": {
+            "source": {
+              "x": 141,
+              "y": 337,
+              "width": 174,
+              "height": 293
+            },
+            "width": 163,
+            "proximal": {
+              "x": 290,
+              "y": 396
+            },
+            "distal": {
+              "x": 190,
+              "y": 580
+            }
+          },
+          "fore": {
+            "source": {
+              "x": 544,
+              "y": 341,
+              "width": 155,
+              "height": 286
+            },
+            "width": 139,
+            "proximal": {
+              "x": 636,
+              "y": 369
+            },
+            "distal": {
+              "x": 625,
+              "y": 592
+            }
+          },
+          "grip": {
+            "source": {
+              "x": 962,
+              "y": 360,
+              "width": 180,
+              "height": 244
+            },
+            "width": 169,
+            "proximal": {
+              "x": 1029,
+              "y": 403
+            },
+            "distal": {
+              "x": 1054,
+              "y": 510
+            }
+          },
+          "service": {
+            "source": {
+              "x": 141,
+              "y": 650,
+              "width": 193,
+              "height": 268
+            },
+            "width": 179,
+            "proximal": {
+              "x": 222,
+              "y": 686
+            },
+            "distal": {
+              "x": 217,
+              "y": 805
+            }
+          }
+        },
+        "far": {
+          "upper": {
+            "source": {
+              "x": 526,
+              "y": 639,
+              "width": 180,
+              "height": 291
+            },
+            "width": 165,
+            "proximal": {
+              "x": 683,
+              "y": 692
+            },
+            "distal": {
+              "x": 577,
+              "y": 878
+            }
+          },
+          "fore": {
+            "source": {
+              "x": 957,
+              "y": 639,
+              "width": 151,
+              "height": 295
+            },
+            "width": 135,
+            "proximal": {
+              "x": 1040,
+              "y": 668
+            },
+            "distal": {
+              "x": 1040,
+              "y": 896
+            }
+          },
+          "grip": {
+            "source": {
+              "x": 158,
+              "y": 964,
+              "width": 170,
+              "height": 244
+            },
+            "width": 159,
+            "proximal": {
+              "x": 224,
+              "y": 1008
+            },
+            "distal": {
+              "x": 244,
+              "y": 1110
+            }
+          },
+          "service": {
+            "source": {
+              "x": 515,
+              "y": 957,
+              "width": 216,
+              "height": 281
+            },
+            "width": 195,
+            "proximal": {
+              "x": 619,
+              "y": 996
+            },
+            "distal": {
+              "x": 618,
+              "y": 1110
+            }
+          }
+        }
+      },
+      "legs": {
+        "pelvis": {
+          "source": {
+            "x": 29,
+            "y": 211,
+            "width": 297,
+            "height": 251
+          },
+          "width": 286,
+          "waist": {
+            "x": 180,
+            "y": 312
+          },
+          "belt": {
+            "x": 180,
+            "y": 283
+          },
+          "waistCoupling": {
+            "x": 183,
+            "y": 239
+          },
+          "near": {
+            "x": 80,
+            "y": 388
+          },
+          "far": {
+            "x": 307,
+            "y": 373
+          }
+        },
+        "near": {
+          "upper": {
+            "source": {
+              "x": 382,
+              "y": 143,
+              "width": 201,
+              "height": 422
+            },
+            "width": 192,
+            "proximal": {
+              "x": 554,
+              "y": 218
+            },
+            "distal": {
+              "x": 462,
+              "y": 505
+            }
+          },
+          "lower": {
+            "source": {
+              "x": 670,
+              "y": 149,
+              "width": 176,
+              "height": 418
+            },
+            "width": 165,
+            "proximal": {
+              "x": 768,
+              "y": 182
+            },
+            "distal": {
+              "x": 748,
+              "y": 527
+            }
+          },
+          "boot": {
+            "source": {
+              "x": 936,
+              "y": 263,
+              "width": 290,
+              "height": 270
+            },
+            "width": 280,
+            "proximal": {
+              "x": 1014,
+              "y": 430
+            },
+            "distal": {
+              "x": 1112,
+              "y": 526
+            },
+            "ankle": {
+              "x": 1014,
+              "y": 430
+            },
+            "sole": {
+              "x": 1112,
+              "y": 526
+            },
+            "heel": {
+              "x": 955,
+              "y": 516
+            },
+            "toe": {
+              "x": 1210,
+              "y": 513
+            }
+          }
+        },
+        "far": {
+          "upper": {
+            "source": {
+              "x": 382,
+              "y": 688,
+              "width": 201,
+              "height": 427
+            },
+            "width": 191,
+            "proximal": {
+              "x": 554,
+              "y": 765
+            },
+            "distal": {
+              "x": 462,
+              "y": 1057
+            }
+          },
+          "lower": {
+            "source": {
+              "x": 669,
+              "y": 702,
+              "width": 179,
+              "height": 419
+            },
+            "width": 166,
+            "proximal": {
+              "x": 768,
+              "y": 731
+            },
+            "distal": {
+              "x": 748,
+              "y": 1078
+            }
+          },
+          "boot": {
+            "source": {
+              "x": 931,
+              "y": 814,
+              "width": 294,
+              "height": 269
+            },
+            "width": 282,
+            "proximal": {
+              "x": 1012,
+              "y": 982
+            },
+            "distal": {
+              "x": 1112,
+              "y": 1078
+            },
+            "ankle": {
+              "x": 1012,
+              "y": 982
+            },
+            "sole": {
+              "x": 1112,
+              "y": 1078
+            },
+            "heel": {
+              "x": 955,
+              "y": 1067
+            },
+            "toe": {
+              "x": 1210,
+              "y": 1065
+            }
+          }
+        }
+      },
+      "helmet": {
+        "source": {
+          "x": 256,
+          "y": 141,
+          "width": 741,
+          "height": 924
+        },
+        "width": 731,
+        "alphaBounds": [
+          261,
+          146,
+          992,
+          1061
+        ],
+        "neckSeal": {
+          "x": 618,
+          "y": 1020
+        },
+        "ear": {
+          "x": 465,
+          "y": 577
+        },
+        "visorCenter": {
+          "x": 820,
+          "y": 540
+        },
+        "respiratoryReference": {
+          "x": 850,
+          "y": 600
+        },
+        "respiratoryRect": {
+          "x": 820,
+          "y": 580,
+          "width": 60,
+          "height": 40
+        }
+      }
+    },
+    "posture": {
+      "referenceStandingHeight": 96.5,
+      "helmetHeight": 18.5,
+      "respiratoryInsetY": 0.75,
+      "thoraxScale": 0.75,
+      "pelvisBelowWaist": 9,
+      "sourceMeasurementSha256": "6bf72c8bd86d3614b4f58857ded0c3a60bfcd1c31f3d0551cb9570950ecf210f",
+      "source": "measured-neck-seal-and-opaque-visor-area",
+      "animation": "native-locomotion-actions-and-transits-no-authored-swim-cycle"
+    }
+  },
+  "runtimeHashes": {
+    "src/hadal-player-art-v188.js": "7cc75eefd3b187c166368d037696865cc8072eefd827b8b0cd4da818ee33c5f3",
+    "src/player-appearance-runtime-v126.js": "8bb9769611a9c117fdebd039343d59a57e2e3c9c97a508224134c079cf1b5c11",
+    "src/player-weapon-runtime-v125.js": "88ab2fb9c476a8d07b1cecd961c9b7844833283406ea74b9fa1915401d534ca6",
+    "src/player-body-rig-v125.js": "f281fa6f7ff16263b5b6dc5a249e5db0a76e994bd2d680af7b637deaf26e0f71",
+    "src/player-modular-rig-v126.js": "a63248ee1295dd786ac030c3825e596fe4927f202c4cf7ccd82b5c9d9a4699c5",
+    "src/player-transit-rig-v128.js": "9ac395f6122f45f1c96b70238f81129bf501eab61d11c0529415cf71115f6b08",
+    "src/player-locomotion-rig-v129.js": "e3001bebca64500ccd12a0ba50fc3c16fe1700acbf89845a694f52e16f62bd06",
+    "src/legacy-operations-v131.js": "e3233ae75f5e81436cf920e28b9cf7ea52e03b3a99860992dd3d74449eda8d29",
+    "src/legacy-operation-state-v131.js": "68d888f3725d4fb06be41c30bee84e776cdc7dcad92e52f725e8511a8cb157ab",
+    "src/i18n-en-catalog-v185.js": "3148d98764e42a05192d72ad7c64e565ca3648c6922704a9db7fba99b8d8ee2d"
+  },
+  "nativeOwnersPreserved": [
+    {
+      "path": "src/player-field-actions-v124.js",
+      "sha256": "81b0f52f87a03e4f2d886e806223aa6d3a6f5f06f111ee8b55daf0751c22b9cd"
+    },
+    {
+      "path": "src/special-operations-v131.js",
+      "sha256": "5c412f4c3adb8df674b25740ce7b2227a0ead01844c82d219a226a3497035243"
+    },
+    {
+      "path": "src/save.js",
+      "sha256": "6b8a71b39143f289775ad5b8a497fbdbcddacec774bb2387904d030274c1f125"
+    }
+  ],
+  "contracts": {
+    "context": "Actual admitted player in the existing local Abyss chapter, outside MANTA; incompatible armor, foreign actors and neuro stay excluded.",
+    "atomicImages": "All three owned, complete images with exact dimensions and valid source rectangles are required before any HADAL piece is drawn.",
+    "geometry": "One image-independent registration is shared by the torso, sealed helmet, shoulders, arms and real weapon. Native legs and sole constraints remain the owner of locomotion.",
+    "shot": "The old airborne muzzle may move with the registered posture. Accepted projectiles and drawn hands/weapon use the same final pose with zero, partial or complete kit availability.",
+    "fallback": "Incomplete kits retain every native piece under the same new registered posture. Pixel identity to the predecessor is not claimed inside the active HADAL context.",
+    "oxygen": "The original 6 by 12 oxygen probe and the physical actor box are preserved. A measured opaque glass region provides the presentation alignment; no invisible mouth location is asserted.",
+    "legacyOverlay": "The cyan proxy is removed only after a new successful HADAL drawing receipt in the current pass; a stale receipt at the same clock is insufficient.",
+    "cache": "The existing appearance image manager retains its limit of 16. Required native assets have priority; the optional three-image kit is admitted atomically.",
+    "medicalFix": "Legacy now advances its already admitted native field action exactly once after its specialized physics. The unchanged owner completes a medkit in 2.2 active seconds, heals up to 48 health and spends one kit.",
+    "save": "No new costume, action or progress is serialized. The original save source and schema remain unchanged."
+  },
+  "limitations": [
+    "Original Tantalus suit; no individual canonical HADAL construction is specified by the project bible and no global 1:1 certification is claimed.",
+    "Native poses are reused. This lot does not author a dedicated swimming kick cycle, MANTA hatch or propulsion animation, aquatic enemy roster, or proposed Nacre-7 campaign.",
+    "Constrained transits preserve their native contact geometry. Artificial compatibility fixtures are not presented as playable ladders or vents in the Abyss chapter.",
+    "The medical fix does not add keyboard-intention cancellation to Legacy or guarantee instantaneous cancellation in every invalid early-return branch.",
+    "Source art measurements, native Canvas rendering, behavioral tests, Chromium journeys and full release verification are separate evidence categories."
+  ],
+  "proofs": {
+    "qa": "docs/development/HADAL_ART_QA_20261117.md",
+    "overview": "docs/development/HADAL_ART_OVERVIEW_20261117.png",
+    "renderReceipt": "docs/development/HADAL_ART_RENDER_RECEIPT_20261117.json"
+  }
+}

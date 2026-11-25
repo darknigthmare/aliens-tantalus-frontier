@@ -1,6 +1,7 @@
 import { WEAPONS_ADDITIONS_V116 } from './weapon-native-visuals-v116.js';
 import { ADMITTED_WEAPON_ADDITIONS_V121 } from './weapon-release-v121.js';
 import { ADMITTED_WEAPON_ADDITIONS_V122 } from './weapon-release-v122.js';
+import { WEAPON_CATALOG_ADDITIONS_V188 } from './weapon-catalog-additions-v188.js';
 import { VEHICLE_CATALOG_ADDITIONS_V121 } from './vehicle-catalog-additions-v121.js';
 import { VEHICLE_CATALOG_ADDITIONS_V122 } from './vehicle-catalog-additions-v122.js';
 import { VEHICLE_NATIVE_POSES_V122 } from './vehicle-native-visuals-v122.js';
@@ -58,7 +59,9 @@ const worldSeeds = [
   ['Fiorina 161', 'Neroidia', 'fonderie carcérale et tunnels', 'screen-canon'],
   ['Sevastopol', 'KG-348', 'station commerciale en désintégration', 'licensed-continuity'],
   ['Cocyte', 'Tantalus Reach', 'Port-Méridien, relais QZ, complexe C-12 et galeries du dépôt', 'project-canon', 'Lethe'],
-  ['LV-895', 'Outer Veil', 'colonies, ruines et installations Pala', 'licensed-continuity'],
+  // V188 [PROPOSÉ]: the description stopped at "installations Pala"; completed
+  // from CAMPAGNE_PRINCIPALE §22.10 (surface site contested by W-Y and Hyperdyne).
+  ['LV-895', 'Outer Veil', 'colonies, ruines et installations disputées par Weyland-Yutani et Hyperdyne', 'licensed-continuity'],
   ['Katanga', 'Frontier Line', 'raffinerie orbitale infestée', 'licensed-continuity'],
   ['Station Orphée', 'Tantalus Reach', 'station de recherche et réseau de défense', 'project-canon', 'Pioneer Station'],
   ['Purdan', 'Far Spinward', 'monde colonial et ruines xénobiologiques', 'licensed-continuity'],
@@ -110,7 +113,9 @@ const WORLD_ENVIRONMENT_CORRECTIONS = Object.freeze({
   'world-23-ryushi': { biomes: ['badlands', 'habitation'] },
   'world-25-lv-742': { biomes: ['industrial', 'hive'] }
 });
-export const WORLDS = Object.freeze(Array.from({ length: 64 }, (_, index) => {
+// The 64 generated worlds. The catalogue generators below (lore pairs, level seeds, encounters) keep
+// indexing this list, so adding a world to WORLDS never moves an existing id, pairing or seed.
+const GENERATED_WORLDS = Object.freeze(Array.from({ length: 64 }, (_, index) => {
   const seed = worldSeeds[index % worldSeeds.length];
   const secondPass = index >= worldSeeds.length;
   const suffix = worldSuffixes[index % worldSuffixes.length];
@@ -141,6 +146,18 @@ export const WORLDS = Object.freeze(Array.from({ length: 64 }, (_, index) => {
     kit: `kit-${String((index % 27) + 1).padStart(2, '0')}`
   };
 }));
+// V188 spec 011 (owner decision of 2026-11-23, bible §14.6): TR-0, the Hive World, is a 65th world,
+// original to the project (`project-canon`). Authored, not generated: no hash, no second pass.
+// `hiddenUntilV188`: absent from the galaxy map and never opened by the generic route unlocks; only
+// « La Saison des Reines » reveals it, when its Arc 3 opens (side-campaign-queens-v188.js).
+// Danger, infestation, stability and biomes are [PROPOSÉ] (a biosphere wholly colonised by the Red Hive).
+export const TR0_WORLD_V188 = Object.freeze({
+  id: 'world-65-tr-0', name: 'TR-0', sector: 'Tantalus Reach',
+  description: 'ruche-monde absente des cartes civiles : surface vivante, organes, Base Ombelle sous la résine',
+  provenance: 'project-canon', danger: 10, biomes: Object.freeze(['badlands', 'hive']), atmosphere: 'toxic',
+  infestation: 100, stability: 5, faction: 'red-hive', kit: 'kit-11', hiddenUntilV188: 'queens-arc3'
+});
+export const WORLDS = Object.freeze([...GENERATED_WORLDS, TR0_WORLD_V188]);
 
 const sourceContinuities = [
   'Alien 1979', 'Aliens 1986', 'Alien 3', 'Alien Resurrection', 'Prometheus', 'Alien Covenant',
@@ -158,7 +175,7 @@ const missionObjectives = [
 
 const lorePairs = Array.from({ length: 206 }, (_, index) => {
   const source = sourceContinuities[index % sourceContinuities.length];
-  const world = WORLDS[index % WORLDS.length];
+  const world = GENERATED_WORLDS[index % GENERATED_WORLDS.length];
   const objective = missionObjectives[index % missionObjectives.length];
   const pairId = `pair-${String(index + 1).padStart(3, '0')}`;
   return [
@@ -180,7 +197,7 @@ const lorePairs = Array.from({ length: 206 }, (_, index) => {
 }).flat();
 
 const signatureCampaigns = Array.from({ length: 24 }, (_, index) => {
-  const world = WORLDS[(index * 5 + 3) % WORLDS.length];
+  const world = GENERATED_WORLDS[(index * 5 + 3) % GENERATED_WORLDS.length];
   return {
     id: `signature-${String(index + 1).padStart(2, '0')}`,
     pairId: null,
@@ -237,7 +254,10 @@ export const WEAPONS = Object.freeze([...Array.from({ length: 146 }, (_, index) 
     rarity: rarity(index), provenance: index < weaponSeeds.length ? 'licensed-reference' : 'gameplay-variant',
     tags: [seed[1], index % 3 === 0 ? 'acid-safe' : 'field', index % 5 === 0 ? 'heavy' : 'portable']
   };
-}), ...WEAPONS_ADDITIONS_V116, ...ADMITTED_WEAPON_ADDITIONS_V121, ...ADMITTED_WEAPON_ADDITIONS_V122]);
+}), ...WEAPONS_ADDITIONS_V116, ...ADMITTED_WEAPON_ADDITIONS_V121, ...ADMITTED_WEAPON_ADDITIONS_V122,
+  // V188 (spec 014): franchise additions without a native plaque, sold behind a provisional drawn plaque since
+  // the owner decision of 2026-11-23 (`admissionV188`, weapon-provisional-plaque-v188.js).
+  ...WEAPON_CATALOG_ADDITIONS_V188]);
 
 const equipmentSeeds = [
   'Motion Tracker', 'Access Tuner', 'Maintenance Jack', 'Cutting Torch', 'Flashlight', 'Medkit',
@@ -300,7 +320,7 @@ const GENERATED_ENEMIES_V50 = Array.from({ length: 568 }, (_, index) => {
   const modifier = enemyModifiers[cycle % enemyModifiers.length];
   const name = index < enemySeeds.length ? seed[0] : `${modifier} ${seed[0]}`;
   const base = 18 + tier(index) * 8;
-  const world = WORLDS[(index * 9 + cycle) % WORLDS.length];
+  const world = GENERATED_WORLDS[(index * 9 + cycle) % GENERATED_WORLDS.length];
   return {
     id: `enemy-${String(index + 1).padStart(3, '0')}-${slug(name)}`,
     name, biologicalBase: seed[0], biology: seed[1], caste: seed[2], modifier,
@@ -309,7 +329,7 @@ const GENERATED_ENEMIES_V50 = Array.from({ length: 568 }, (_, index) => {
     armor: clamp((index * 23 + cycle * 7) % 101, 0, 100),
     acid: seed[1] === 'xenomorph' ? 25 + (index % 76) : seed[1] === 'pathogen' ? 12 : 0,
     frequency: pick(['common', 'uncommon', 'rare', 'apex', 'scripted'], index),
-    encounterWorldIds: [world.id, WORLDS[(index + 17) % WORLDS.length].id],
+    encounterWorldIds: [world.id, GENERATED_WORLDS[(index + 17) % GENERATED_WORLDS.length].id],
     habitats: [world.biomes[0], pick(['vents', 'hive', 'surface', 'reactor', 'water', 'ruins'], index)],
     behavior: resolveEnemyBehaviorV119({ biologicalBase: seed[0], biology: seed[1], caste: seed[2], modifier }).runtimeBehavior,
     provenance: seed[2].startsWith('concept-') ? 'licensed-concept-adaptation' : index < enemySeeds.length ? 'licensed-reference' : 'systemic-variant',
@@ -543,7 +563,7 @@ export const SHIP_MODULES = Object.freeze(Array.from({ length: 158 }, (_, index)
 })));
 
 export const LEVEL_SEEDS = Object.freeze(Array.from({ length: 800 }, (_, index) => {
-  const world = WORLDS[index % WORLDS.length];
+  const world = GENERATED_WORLDS[index % GENERATED_WORLDS.length];
   return {
     id: `level-${String(index + 1).padStart(3, '0')}`,
     name: `${world.name} — Plan ${String(index + 1).padStart(3, '0')}`,
@@ -574,9 +594,9 @@ export const CONTENT_COUNTS = Object.freeze({
 });
 
 export const CONTENT_TARGETS = Object.freeze({
-  worlds: 64,
+  worlds: 65, // 64 generated + TR-0 (V188 spec 011)
   campaigns: 436,
-  weapons: 146 + WEAPONS_ADDITIONS_V116.length + ADMITTED_WEAPON_ADDITIONS_V121.length + ADMITTED_WEAPON_ADDITIONS_V122.length,
+  weapons: 146 + WEAPONS_ADDITIONS_V116.length + ADMITTED_WEAPON_ADDITIONS_V121.length + ADMITTED_WEAPON_ADDITIONS_V122.length + WEAPON_CATALOG_ADDITIONS_V188.length,
   equipment: 106,
   enemies: 571,
   vehicles: VEHICLES.length,

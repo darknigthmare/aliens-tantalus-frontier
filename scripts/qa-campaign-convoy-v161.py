@@ -23,7 +23,7 @@ if output == repo or repo in output.parents:
     raise SystemExit('Evidence must remain outside the repository.')
 output.mkdir(parents=True, exist_ok=True)
 report = {'status': 'running', 'checks': [], 'captures': [], 'pageErrors': [], 'requestFailures': [], 'httpErrors': [],
-          'method': 'Native Save import of an unplayed convoy plan, five-phase insertion and choice, actual pause/reload, real keyboard M577 course, native extraction, committed reading and replay retreat.',
+          'method': 'Native Save import of an unplayed convoy plan, confirmation of the displayed M577 manifest, five-phase insertion and choice, actual pause/reload, real keyboard M577 course, native extraction, committed reading and replay retreat.',
           'limitations': ['Automated controls, not human QA or canonical artwork approval.',
                          'One original Tantalus operation; no complete campaign or franchise1:1 claim.',
                          'The bounded debrief follows strategy.lastOperation and can be replaced by a later operation.']}
@@ -113,6 +113,58 @@ def advance_to(page, target):
     raise AssertionError('Insertion phase unavailable: ' + target)
 
 
+def wait_convoy_runtime(page, timeout=30000):
+    # The public V188 flight follows the original insertion panel on first
+    # launch and replay. Its control and the original predicate share 30 s.
+    runtime_ready = '()=>__ATF_GAME__.running&&__ATF_GAME__.isApcConvoyV121?.()&&!__ATF_GAME__.enemyAtlasLoadingPausedV65'
+    deadline = time.monotonic() + timeout / 1000
+
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('Convoy runtime readiness exceeded its launch budget.')
+        return milliseconds
+
+    skip_selector = '.insertion-cinematic-v188[data-direction="insertion"] .insertion-skip-v188'
+    page.wait_for_function(f'''()=>{{
+      const skip = document.querySelector('{skip_selector}');
+      return ({runtime_ready})() || Boolean(skip && skip.getClientRects().length
+        && getComputedStyle(skip).visibility !== 'hidden');
+    }}''', timeout=remaining())
+    skip = page.locator(skip_selector)
+    if skip.is_visible():
+        skip.click(timeout=remaining())
+    page.wait_for_function(f'()=>({runtime_ready})()&&!__ATF_GAME__.dropshipHandoverBlocksV188?.()', timeout=remaining())
+
+
+def wait_convoy_return(page, operation_id, deadline):
+    # Boarding owns the terminal event until the real extraction has finished.
+    # Its public ascent control stays inside the existing 210 s course budget.
+    def remaining():
+        milliseconds = int((deadline - time.monotonic()) * 1000)
+        if milliseconds <= 0:
+            raise TimeoutError('Convoy return exceeded its course budget.')
+        return milliseconds
+
+    skip_selector = '.insertion-cinematic-v188[data-direction="extraction"] .insertion-skip-v188'
+    return_ready = '''id=>{const s=__ATF_V51__.saveSystem.data,c=document.querySelector('#game-canvas');
+      return __ATF_GAME__.mission?.state==='complete'&&s.strategy.lastOperation?.id===id
+        &&s.strategy.currentOperation===null&&!document.querySelector('.insertion-cinematic-v188[data-direction="extraction"]')
+        &&Boolean(c&&c.getClientRects().length&&getComputedStyle(c).visibility!=='hidden');}'''
+    page.wait_for_function(f'''id=>{{
+      const skip=document.querySelector('{skip_selector}');
+      return ({return_ready})(id)||Boolean(skip&&skip.getClientRects().length
+        &&getComputedStyle(skip).visibility!=='hidden');
+    }}''', arg=operation_id, timeout=remaining())
+    skip = page.locator(skip_selector)
+    skipped = skip.is_visible()
+    if skipped:
+        skip.click(timeout=remaining())
+    page.wait_for_function(return_ready, arg=operation_id, timeout=remaining())
+    report['nativeExtraction'] = {'operationId': operation_id, 'publicSkipUsed': skipped,
+                                  'courseBudgetSeconds': 210}
+
+
 source_start = manifest()
 (output / 'profile-source-start.json').write_text(json.dumps(source_start, indent=2))
 script = """import{createDefaultSave}from'./src/save.js';const s=createDefaultSave();s.needsPlayerCreationV84=false;s.player.name='QA CONVOY V161';s.strategy.plannedCampaignId='special-apc-convoy';s.worldId='world-05-lethe';s.scene='hub';console.log(JSON.stringify(s));"""
@@ -149,7 +201,23 @@ with sync_playwright() as pw:
         page.wait_for_function("()=>__ATF_V51__?.saveSystem.data.player.name==='QA CONVOY V161'")
         open_plan(page)
         page.locator('#operation-launch').click()
+        manifest_dialog = page.locator('dialog.m577-manifest-v188')
+        manifest_dialog.wait_for(state='visible')
+        manifest_choice = {'containers': int(manifest_dialog.locator('#m577-range-v188').input_value()),
+                           'colonists': int(manifest_dialog.locator('#m577-seats-v188').inner_text()), 'resolved': False}
+        before_manifest = observe(page)['save']
+        check('the first convoy launch requests the public manifest before creating its operation',
+              before_manifest['strategy']['currentOperation'] is None
+              and before_manifest.get('storyCampaignV188', {}).get('m577Manifest') is None
+              and manifest_choice == {'containers': 0, 'colonists': 6, 'resolved': False})
+        capture(page, '00-native-m577-manifest.png', 'dialog.m577-manifest-v188')
+        manifest_dialog.locator('[data-m577-confirm]').click()
+        manifest_dialog.wait_for(state='hidden')
         page.locator('#mission-insertion-v62[data-insertion-phase="briefing"]').wait_for(state='visible')
+        check('signing the unchanged displayed manifest persists its choice and launches the native convoy',
+              observe(page)['save']['storyCampaignV188']['m577Manifest'] == manifest_choice
+              and observe(page)['save']['strategy']['currentOperation']['campaignId'] == 'special-apc-convoy')
+        report['nativeManifest'] = manifest_choice
         check('a new solo APC operation enters its own original briefing', 'Ramener le blindé' in page.locator('#mission-insertion-v62').inner_text())
         capture(page, '01-convoy-briefing.png', '#mission-insertion-v62')
         advance_to(page, 'preparation')
@@ -172,7 +240,7 @@ with sync_playwright() as pw:
         capture(page, '03-convoy-deployment.png', '#mission-insertion-v62')
         advance_to(page, 'player-control')
         page.locator('[data-insertion-action="advance"]').click()
-        page.wait_for_function('()=>__ATF_GAME__.running&&__ATF_GAME__.isApcConvoyV121?.()&&!__ATF_GAME__.enemyAtlasLoadingPausedV65')
+        wait_convoy_runtime(page)
         page.locator('#game-canvas').focus()
         initial = observe(page)
         check('the real three-lane M577 waits for E with its finite issued resources', not initial['convoy']['briefed'] and initial['vehicle']['hull'] == 340 and initial['vehicle']['ammo'] == 110 and initial['course']['lane'] == 1)
@@ -216,6 +284,9 @@ with sync_playwright() as pw:
             page.wait_for_timeout(60)
         controls([])
         final = observe(page)
+        if final['mission'] == 'complete':
+            wait_convoy_return(page, chosen['strategy']['currentOperation']['id'], deadline)
+            final = observe(page)
         report['nativeCourse'] = {'state': final, 'seenPhases': sorted(seen_phases), 'radioSamples': radio_samples}
         check('actual inputs cross both Crushers and the final barrage and confirm the physical M577 extraction', final['mission'] == 'complete' and final['convoy']['complete'] and final['convoy']['crushersDefeated'] == [True, True] and final['convoy']['queenDefeated'] and final['vehicle']['hull'] > 0)
         check('the departure transmission belongs to the real convoy journal', 'depart' in final['convoy']['journal'] and any('Rook' in item['radio'] for item in radio_samples))
@@ -245,7 +316,7 @@ with sync_playwright() as pw:
         page.locator('#operation-launch').click()
         page.locator('[data-insertion-action="skip"]').wait_for(state='visible')
         page.locator('[data-insertion-action="skip"]').click()
-        page.wait_for_function('()=>__ATF_GAME__.running&&__ATF_GAME__.isApcConvoyV121?.()&&!__ATF_GAME__.enemyAtlasLoadingPausedV65')
+        wait_convoy_runtime(page)
         replay = observe(page)['save']
         check('the replay skip does not inherit the previous route-review selection', 'convoyStoryV161' not in preparation(replay))
         page.locator('#retreat-mission').click()

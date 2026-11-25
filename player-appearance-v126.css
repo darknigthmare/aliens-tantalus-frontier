@@ -120,3 +120,5 @@
 .appearance-wardrobe-parts-v140 label { display: flex; align-items: center; gap: .55rem; min-height: 44px; }
 .appearance-wardrobe-parts-v140 input[type="checkbox"] { flex: 0 0 1.1rem; width: 1.1rem; height: 1.1rem; margin: 0; accent-color: var(--accent, #8fc39c); }
 .appearance-wardrobe-parts-v140 .button { justify-self: start; max-width: 100%; white-space: normal; }
+/* V188 responsive sweep: appearance choices reach the 44 px touch target on touch screens and phones. */
+@media (pointer: coarse), (max-width: 600px) { .appearance-choices-v126 .button { min-height: 44px; } }

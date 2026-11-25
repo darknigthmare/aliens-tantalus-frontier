@@ -1,3 +1,6 @@
+import { getXenoTrialsStageDepthV180, drawXenoTrialsStageDepthRearV180, drawXenoTrialsStageDepthFrontV180 } from './xeno-trials-stage-depth-v180.js';
+import { XENO_TRIALS_STAGE_BACKDROPS_V205, XENO_TRIALS_STAGE_FLOORS_V205 } from './xeno-trials-visual-assets-v205.js';
+
 // Scenery only: the physics plane remains V105 world coordinates. Foreground
 // details are restricted below the contact line so low attacks stay readable.
 export const XENO_TRIALS_ARENA_LAYERS_V119 = Object.freeze([
@@ -6,24 +9,31 @@ export const XENO_TRIALS_ARENA_LAYERS_V119 = Object.freeze([
   { id: 'gameplay', parallax: 1 }, { id: 'atmosphere', parallax: .66 }, { id: 'foreground', parallax: 1.16 }
 ].map(Object.freeze));
 
-export function drawXenoTrialsArenaLayersV119(context, stage, images, camera, tick = 0) {
+export function drawXenoTrialsArenaLayersV119(context, stage, images, camera, tick = 0, options = {}) {
   const floor = camera.floor, offset = camera.center - 500;
   context.save();
   context.fillStyle = stage.background; context.fillRect(0, 0, 1000, 560);
+  const depth = getXenoTrialsStageDepthV180(stage.id);
   const backdrop = images.get(stage.backdrop);
-  if (backdrop?.naturalWidth > 0 && backdrop?.naturalHeight > 0) {
-    const factor = Math.max(1150 / backdrop.naturalWidth, floor / backdrop.naturalHeight);
+  const anchor = backdrop?.naturalWidth > 0 && backdrop?.naturalHeight > 0 && stage.backdrop === XENO_TRIALS_STAGE_BACKDROPS_V205[stage.id]
+    ? XENO_TRIALS_STAGE_FLOORS_V205[stage.id] : null;
+  if (depth) drawXenoTrialsStageDepthRearV180(context, stage, images, camera, tick, options);
+  else if (backdrop?.naturalWidth > 0 && backdrop?.naturalHeight > 0) {
+    const factor = Math.max(1150 / backdrop.naturalWidth, floor / (backdrop.naturalHeight * (anchor || 1)));
     const width = backdrop.naturalWidth * factor, height = backdrop.naturalHeight * factor;
-    context.drawImage(backdrop, (1000 - width) / 2 - offset * .02, (floor - height) / 2, width, height);
+    const top = anchor ? floor - height * anchor : (floor - height) / 2;
+    context.drawImage(backdrop, (1000 - width) / 2 - offset * .02, top, width, height);
   }
   const layerRect = (coefficient, spacing, width, height, y, alpha) => {
     context.globalAlpha = alpha; context.strokeStyle = stage.accent; context.lineWidth = 2;
     const start = -spacing - ((offset * coefficient) % spacing);
     for (let x = start; x < 1000 + spacing; x += spacing) context.strokeRect(x, y, width, height);
   };
-  layerRect(.1, 230, 155, floor * .52, floor * .22, .12);
-  layerRect(.23, 180, 110, floor * .7, floor * .16, .16);
-  layerRect(.42, 320, 16, floor, 0, .25);
+  if ((!depth || !backdrop?.naturalWidth) && !anchor) {
+    layerRect(.1, 230, 155, floor * .52, floor * .22, .12);
+    layerRect(.23, 180, 110, floor * .7, floor * .16, .16);
+    layerRect(.42, 320, 16, floor, 0, .25);
+  }
   context.globalAlpha = 1;
   context.fillStyle = '#06101930'; context.fillRect(0, 0, 1000, floor);
   context.fillStyle = stage.floor; context.fillRect(0, floor, 1000, 560 - floor);
@@ -36,7 +46,11 @@ export function drawXenoTrialsArenaLayersV119(context, stage, images, camera, ti
 }
 
 /** The two final layers are painted after the gameplay plane, before its HUD. */
-export function drawXenoTrialsArenaOverlayV119(context, stage, camera, tick = 0) {
+export function drawXenoTrialsArenaOverlayV119(context, stage, camera, tick = 0, options = {}) {
+  if (getXenoTrialsStageDepthV180(stage.id)) {
+    drawXenoTrialsStageDepthFrontV180(context, stage, options.images, camera, tick, options);
+    return;
+  }
   const offset = camera.center - 500;
   context.save();
   // Suspended atmosphere, deliberately low-opacity and never an opaque front wall.

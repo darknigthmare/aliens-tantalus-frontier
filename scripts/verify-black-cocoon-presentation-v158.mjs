@@ -1,15 +1,18 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFileSync } from 'node:fs';
+import { createContext, runInContext } from 'node:vm';
 import { GameEngine } from '../src/game-production-runtime.js';
 import { CAMPAIGNS, WORLDS, WEAPONS, ENEMIES, LEVEL_SEEDS } from '../src/content.js';
 import { buildBlackCocoonLevelV121 } from '../src/black-cocoon-runtime-v121.js';
 import { buildMissionLevelV52 } from '../src/mission-levels-v52.js';
 import { createBlackCocoonStateV121, validateBlackCocoonStateV121 } from '../src/black-cocoon-state-v121.js';
-import { resolveBlackCocoonPresentationV158, resolveBlackCocoonPlayerRigV158,
+import { resolveBlackCocoonPresentationV158, resolveBlackCocoonPlayerRigV158, resolveBlackCocoonResinLayoutV158,
   blackCocoonResinGeometryV158, drawBlackCocoonResinV158, BLACK_COCOON_PRESENTATION_V158 } from '../src/black-cocoon-presentation-v158.js';
-import { beginOperation, createDefaultSave, recordOperationResumeState, migrateSave } from '../src/save.js';
+import { SaveSystem, beginOperation, createDefaultSave, recordOperationResumeState, migrateSave } from '../src/save.js';
 import { SPECIAL_OPERATIONS_V131, SPECIAL_OPERATION_COUNTS_V131 } from '../src/special-operations-v131.js';
+import { verifyQueenMotherChoirRegistryContinuationV188 } from './audit-tantalus-priorities-v188.mjs';
+import { BIOLOGICAL_ART_V188, biologicalArtAnchorV188, drawHumanResinSupportV188 } from '../src/biological-art-v188.js';
 
 // Real production composition and shipped raster dimensions; only the browser
 // host is supplied. Tests neither substitute an engine method nor grant progress.
@@ -55,8 +58,8 @@ function host() {
     Object.assign(event, { code, repeat: false, ctrlKey: false, metaKey: false, altKey: false }); bus.dispatchEvent(event); };
   return { canvas, ctx, key, drawings, paths, stack };
 }
-async function fixture(resumeState, campaignId = 'special-black-cocoon') {
-  const browser = host(), events = [], engine = new GameEngine(browser.canvas, { onEvent: event => events.push(event) });
+async function fixture(resumeState, campaignId = 'special-black-cocoon', onEvent = null) {
+  const browser = host(), events = [], engine = new GameEngine(browser.canvas, { onEvent: event => { events.push(event); onEvent?.(event, engine); } });
   const campaign = CAMPAIGNS.find(value => value.id === campaignId), world = WORLDS.find(value => value.id === campaign.worldId);
   const options = { campaign, world, weapon: WEAPONS[0], enemyCatalog: ENEMIES, equipment: [], crew: [], seed: 158121,
     missionLevel: (campaignId === 'special-black-cocoon' ? buildBlackCocoonLevelV121 : buildMissionLevelV52)(
@@ -75,6 +78,70 @@ function hold(subject, code, seconds) { subject.key('keydown', code); tick(subje
 const payload = engine => JSON.parse(JSON.stringify(engine.captureResumeState()));
 const native = engine => { const actor = engine.player; return { x: actor.x, y: actor.y, health: actor.health,
   ammo: actor.ammo, reserve: actor.ammoReserve, inventory: structuredClone(engine.inventory), coop: engine.coopEnabled }; };
+
+test('QA terminal save resumes native time without E, then pauses the exact committed partial cut', async t => {
+  const data = new Map(), storage = { getItem: key => data.get(key) ?? null, setItem: (key, value) => data.set(key, String(value)), removeItem: key => data.delete(key) };
+  const system = new SaveSystem(storage); system.newGame(1);
+  const subject = await fixture(undefined, 'special-black-cocoon', (event, engine) => {
+    if (event.type !== 'terminal-save-v188') return;
+    const candidate = structuredClone(system.data);
+    assert.equal(recordOperationResumeState(candidate, engine.captureResumeState()), true);
+    system.commit(candidate);
+  }), e = subject.engine;
+  system.data.galaxy.unlockedWorldIds.push(subject.options.world.id);
+  const operation = beginOperation(system.data, subject.options.campaign, subject.options.world).operation;
+  operation.missionLevelSignature = subject.options.missionLevel.signature; operation.levelSeedId = e.resumeIdentity.levelSeedId;
+  system.commit(system.data);
+  hold(subject, 'KeyE', 1.21); subject.key('keydown', 'KeyP'); subject.key('keyup', 'KeyP');
+  const before = native(e), partial = { native: { cut: e.blackCocoonV121.cocoonProgress, freed: false },
+    player: { health: e.player.health, ammo: e.player.ammo, reserve: e.player.ammoReserve, appearance: structuredClone(e.player.appearanceV126) } };
+  let now = 0; const keys = [], clicks = [];
+  const context = createContext({ assert, structuredClone, localStorage: storage, performance: { now: () => now },
+    __ATF_GAME__: e, __ATF_V51__: { saveSystem: system } });
+  const evaluate = (fn, arg) => runInContext('(' + fn.toString() + ')', context)(arg);
+  const page = {
+    evaluate: async (fn, arg) => structuredClone(evaluate(fn, arg)),
+    locator: selector => ({
+      click: async () => { assert.equal(selector, '#mission-save-v86'); clicks.push(selector);
+        assert.equal(e.missionSavePolicyV188().mode, 'terminal'); assert.equal(e.beginTerminalSaveV188().allowed, true); },
+      focus: async () => { assert.equal(selector, '#game-canvas'); subject.canvas.focus(); }
+    }),
+    keyboard: { press: async code => { keys.push(code); subject.key('keydown', code); subject.key('keyup', code); } },
+    waitForFunction: async (fn, arg, options = {}) => {
+      const deadline = now + (options.timeout || 45000);
+      while (!evaluate(fn, arg) && now < deadline) { tick(e, 1 / 60); now += 1000 / 60; }
+      assert.ok(evaluate(fn, arg), 'The actual terminal cannot commit while native time remains paused.');
+    }
+  };
+  const source = readFileSync(new URL('./qa-black-cocoon-browser-v158.mjs', import.meta.url), 'utf8');
+  const start = source.indexOf('async function savePartialCocoonAtTerminal(');
+  assert.ok(start >= 0);
+  const body = source.slice(start, source.indexOf('\nasync function main()', start));
+  const helper = runInContext('(' + body + ')', context);
+  try {
+    const receipt = await helper(page, partial);
+    assert.deepEqual(clicks, ['#mission-save-v86']); assert.deepEqual(keys, ['KeyP', 'KeyP']);
+    assert.equal(e.paused, true); assert.deepEqual(native(e), before);
+    assert.equal(e.blackCocoonV121.cocoonProgress, partial.native.cut); assert.equal(e.blackCocoonV121.freed, false);
+    const saved = new SaveSystem(storage).load(1).strategy.currentOperation;
+    assert.equal(saved.id, operation.id); assert.equal(saved.resumeState.specialOperation.blackCocoonV121.cocoonProgress, partial.native.cut);
+    assert.equal(subject.events.filter(event => event.type === 'terminal-save-v188').length, 1);
+    assert.equal(receipt.operationId, operation.id); assert.equal(receipt.started.total, 3);
+    assert.ok(now >= 3000 && now < 45000);
+    t.diagnostic('Actual JS QA helper, production Cocon runtime and SaveSystem. Declared DOM/Canvas/RAF/storage host; visible save click delegates to the observed native terminal branch, whose event commits the real captured checkpoint.');
+  } finally { e.stop(); }
+});
+
+test('native Cocon terminal countdown stays pending during pause and cannot fabricate a receipt', async () => {
+  const subject = await fixture(), e = subject.engine;
+  hold(subject, 'KeyE', 1.21); subject.key('keydown', 'KeyP'); subject.key('keyup', 'KeyP');
+  assert.equal(e.beginTerminalSaveV188().allowed, true);
+  const pending = structuredClone(e.terminalSaveV188), cut = e.blackCocoonV121.cocoonProgress;
+  tick(e, 45);
+  assert.deepEqual(e.terminalSaveV188, pending); assert.equal(pending.remaining, 3);
+  assert.equal(e.blackCocoonV121.cocoonProgress, cut);
+  assert.equal(subject.events.some(event => event.type === 'terminal-save-v188'), false); e.stop();
+});
 
 test('real captured insertion keeps identity/resources/physical body while native kit and resin animate', async () => {
   const subject = await fixture(), e = subject.engine;
@@ -200,7 +267,11 @@ test('the registry records procedural binding separately from the unfinished bit
   assert.equal(BLACK_COCOON_PRESENTATION_V158.animationStatus, 'dedicated-procedural-animation');
   assert.equal(BLACK_COCOON_PRESENTATION_V158.canonExact, false);
   assert.equal(SPECIAL_OPERATION_COUNTS_V131.total, 21); assert.equal(SPECIAL_OPERATION_COUNTS_V131.playable, 21);
-  assert.equal(SPECIAL_OPERATION_COUNTS_V131.partial, 20); assert.equal(SPECIAL_OPERATION_COUNTS_V131.effective, 1);
+  assert.equal(SPECIAL_OPERATION_COUNTS_V131.partial, 19); assert.equal(SPECIAL_OPERATION_COUNTS_V131.effective, 2);
+  const registry = verifyQueenMotherChoirRegistryContinuationV188(SPECIAL_OPERATIONS_V131, SPECIAL_OPERATION_COUNTS_V131);
+  assert.deepEqual(registry.changedIds, ['cargo-brutal', 'broodstorm', 'queen-mother-song'],
+    'Guard presentation adds no registry change; Cargo alone changes the counts and the two historical queen debts stay distinct.');
+  assert.equal(registry.unchangedOperations, 18);
 });
 
 test('actual Canvas paths, control points, round strokes and base fill never sink through the support while resin falls', () => {
@@ -240,4 +311,63 @@ test('release keeps native empty hands until the real nearby bag is recovered, w
   e.drawActor(subject.ctx, e.player); assert.equal(e.player.heldWeaponVisualV125?.weaponId, WEAPONS[0].id);
   assert.equal(e.player.ammo, before.ammo); assert.equal(e.player.ammoReserve, before.reserve);
   assert.deepEqual(e.inventory, before.inventory); e.stop();
+});
+
+test('human resin art: the empty support is a rear layer, while all nine native cut/release bands remain identical', () => {
+  const path = BIOLOGICAL_ART_V188['human-resin-support'].path, bytes = readFileSync(new URL(`..${path}`, import.meta.url));
+  const image = { src: path, complete: true, naturalWidth: bytes.readUInt32BE(16), naturalHeight: bytes.readUInt32BE(20) };
+  const images = new Map([[path, image]]), anchor = { x: 700, groundY: 570 };
+  for (const reducedMotion of [false, true]) for (const [progress, freed, elapsed, freedAtV158] of [[0, false, .2, null], [1.5, false, 2, null], [3.5, false, 4, null], [4, true, 5.3, 5], [4, true, 7, null]]) {
+    const state = { operationId: 'black-cocoon', cocoonProgress: progress, freed, elapsed, freedAtV158 }, before = structuredClone(state);
+    const presentation = resolveBlackCocoonPresentationV158(state, anchor, { reducedMotion }), a = host(), b = host();
+    const geometry = drawBlackCocoonResinV158(a.ctx, presentation, { images, layer: 'front' });
+    drawBlackCocoonResinV158(b.ctx, presentation, { layer: 'front' });
+    assert.equal(geometry.bands.length, 9); assert.deepEqual(a.paths, b.paths, 'front bonds use their exact native geometry');
+    assert.equal(a.drawings.length, 0, 'no baked foreground person or ties');
+    drawBlackCocoonResinV158(a.ctx, presentation, { images, layer: 'back' });
+    assert.deepEqual(a.drawings.map(item => item.path), [path]);
+    const fit = drawHumanResinSupportV188(b.ctx, images, geometry); assert.ok(fit);
+    assert.ok(Math.abs(biologicalArtAnchorV188(fit, 'ground')[1] - anchor.groundY) < 1e-9, 'unstroked bitmap roots meet the real floor');
+    assert.deepEqual(state, before); assert.equal(a.stack.length, 0); assert.equal(b.stack.length, 0);
+  }
+  const hidden = resolveBlackCocoonPresentationV158({ operationId: 'black-cocoon', boarded: true }, anchor), subject = host();
+  assert.equal(drawBlackCocoonResinV158(subject.ctx, hidden, { images, layer: 'back' }), null); assert.equal(subject.drawings.length, 0);
+});
+
+test('human resin art: production start loads only its support and drawing preserves native actor, injuries, equipment and save', async () => {
+  const subject = await fixture(), e = subject.engine, path = BIOLOGICAL_ART_V188['human-resin-support'].path;
+  assert.ok(e.images.get(path)?.naturalWidth > 0, 'prepared by the real production start');
+  assert.equal(e.images.has(BIOLOGICAL_ART_V188['qz17-cradle-breached'].path), false);
+  const state = payload(e), actor = native(e); e.drawActor(subject.ctx, e.player);
+  assert.ok(subject.drawings.some(item => item.path === path)); assert.ok(e.player.blackCocoonVisualV158?.nativeBody);
+  assert.equal(subject.drawings.some(item => item.path.includes('xeno-cocoon-front')), false);
+  assert.deepEqual(payload(e), state); assert.deepEqual(native(e), actor);
+  e.stop();
+  const unrelated = await fixture(undefined, 'pair-001-mire');
+  assert.equal(unrelated.engine.images.has(path), false); unrelated.engine.stop();
+});
+
+test('human resin layout follows the standing rig scale, clears the face and stays on the original wall after release', async () => {
+  const subject = await fixture(), e = subject.engine, presentation = e.blackCocoonPresentationV158(), actor = e.player;
+  const original = structuredClone(actor), state = payload(e);
+  const layout = resolveBlackCocoonResinLayoutV158({ actor, presentation, images: e.images });
+  assert.ok(layout.height > actor.h * .8 && layout.height < actor.h * 1.15, 'support is at native human scale');
+  assert.ok(layout.headBounds && layout.detailScale < .8);
+  const geometry = blackCocoonResinGeometryV158(presentation, layout);
+  assert.equal(geometry.bands.length, 9);
+  assert.ok(geometry.bands[0].y - 9.5 * layout.detailScale > layout.headBounds.y + layout.headBounds.height, 'the up-curve and stroke clear the whole face');
+  const stable = result => ['height', 'width', 'bandTop', 'bandBottom', 'detailScale'].map(key => result[key]);
+  for (const patch of [{ x: actor.x + 180, crouching: true, vx: -80 }, { y: actor.y - 50, grounded: false, vy: -100 }, { facing: -1, v52HurtClock: .7, downed: true }]) {
+    const moved = { ...actor, ...patch }, released = { ...presentation, actorPose: false, freed: true, release: .6 };
+    const later = resolveBlackCocoonResinLayoutV158({ actor: moved, presentation: released, images: e.images });
+    assert.deepEqual(stable(later), stable(layout), 'player motion or injury cannot move/resize the mural residue');
+    const residue = blackCocoonResinGeometryV158(released, later); assert.deepEqual(residue.anchor, presentation.anchor);
+  }
+  for (const cut of [0, .1, .4, .8, 1]) for (const release of [0, .2, .6, 1]) {
+    const p = { ...presentation, cut, release };
+    const old = blackCocoonResinGeometryV158(p), current = blackCocoonResinGeometryV158(p, layout);
+    assert.deepEqual(current.bands.map(band => band.severed), old.bands.map(band => band.severed), 'all nine cut thresholds stay unchanged');
+    if (release === 1) assert.ok(current.bands.every(band => Math.abs(band.y - (presentation.anchor.groundY - 4)) < 1e-9));
+  }
+  assert.deepEqual(actor, original); assert.deepEqual(payload(e), state); e.stop();
 });

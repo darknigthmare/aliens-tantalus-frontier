@@ -1,0 +1,1679 @@
+{
+  "schema": "act5-art-provenance-v1",
+  "date": "2026-11-17",
+  "timeZone": "Europe/Paris",
+  "baseCommit": "6b34f3097cbc3fd73d692e7e295f7615cab1a510",
+  "baseTree": "64ebc042c71ebc3183edb34ee66be52ce6459dfd",
+  "pullRequestTarget": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/49",
+  "scope": "Nine new PNGs cover fourteen active Act V slots: five dialogue slots and nine cinematic slots used across seven existing sequences with seventeen existing shots. The relay-room slot remains unused and requests no file.",
+  "tool": "image_gen.imagegen",
+  "generationOutputCount": 10,
+  "selectedOutputCount": 9,
+  "selectedBytes": 20244249,
+  "rejectedIterations": [
+    {
+      "id": "bridge-collapse-dawn",
+      "path": "assets/act5/v188/bridge-collapse.png",
+      "sha256": "9c9c3097c30f600f19d5eb510cdc412577d843c9b4a908e91b22a10d86b53acd",
+      "bytes": 2320293,
+      "width": 1939,
+      "height": 811,
+      "mode": "RGB",
+      "alphaBounds128": null,
+      "alphaExtrema": null,
+      "selected": false,
+      "sourceBytesPreserved": true,
+      "runtimeCopyReplaced": true,
+      "reason": "Dawn sky and visible sun broke visual continuity after the nocturnal departure; controlled night-lighting correction selected instead.",
+      "prompt": "Use case: compositing. Derive an industrial bridge environment in the same established game art style as the reference. Detailed grounded industrial science-fiction game art matching the supplied project image: practical 1980s retrofuturist construction, heavy welded steel panels, visible fasteners, weathered olive charcoal paint, cold blue ambient light and sparse warm industrial lamps. Restrained realistic texture, crisp readable forms at 640x280 and 1280x536, not cartoon, not glossy modern concept design. No writing, words, lettering, logos, watermarks, UI, or black letterbox bars. Ultra-wide landscape about 2.39:1, strict SIDE VIEW, not a view looking along the bridge. A heavy steel service bridge crosses a deep dark rocky ravine from left to right. The near bridge edge and rolling deck run horizontally at about 64 percent image height across the left and central two thirds, leaving ample unobstructed sky and background above it for separate vehicles. The far-right span has begun to buckle and sag slightly, with bent truss members underneath and one stressed joint; the bridge remains visibly continuous rather than a large absent section. Strong readable triangular steel trusses below the road, distant dark rock face and faint industrial lamps, blue-grey predawn mist. Do not put railings or foreground beams across the clear vehicle silhouette band above the deck. Empty scene: no APC, no trailer, no people, no dangling coupling, no labels, no painted decision/result. No actual rain streaks, they are animated separately. Keep the visual cause of danger legible without painting the outcome of the player's choice. Full bleed opaque backdrop, no border.",
+      "inputReferences": [
+        "/workspace/scratch/ebe12fa31d4e/aliens-tantalus-frontier/assets/content/v188/colony/colony-walls.png"
+      ],
+      "generatorOutputSha256": "9c9c3097c30f600f19d5eb510cdc412577d843c9b4a908e91b22a10d86b53acd"
+    }
+  ],
+  "primaryVisualReferences": [
+    {
+      "id": "propstore-apc-01",
+      "sourcePage": "https://propstore.com/product/aliens-1986/lot-6-light-up-remote-controlled-photo-matched-1-12th-scale-apc-model-miniature-and-collection-of-production-materials/",
+      "sourceImage": "https://images.propstore.com/df52cb8662710cdc64e26dc88efb30a1-1.jpg",
+      "path": "/workspace/scratch/ebe12fa31d4e/references/act5/propstore-apc-01.jpg",
+      "width": 734,
+      "height": 734,
+      "bytes": 36872,
+      "sha256": "ae6e9d4d77cb3efe238603e6ec31bb674676b323cb14ef7c46ba3d0b2e1dd4a3",
+      "downloadedAt": "2026-11-17T09:59:50.134022+00:00",
+      "visuallyInspected": true,
+      "runtimeRedistribution": false,
+      "observedContent": "Vue de trois-quarts avant de la miniature de tournage : coque basse en coin, deux roues visibles sur le flanc proche, grande porte entre ces roues, tourelle arrière et affût frontal.",
+      "referenceRole": "Validation du nombre de roues et de la silhouette générale du M577 ; composition du convoi propre au projet.",
+      "attribution": "Propstore — miniature APC 1/12 de production, photo-matched, Aliens (1986)",
+      "limitations": "La fiche signale des restaurations (un canon et des cache-roues), pneus de remplacement de production et accessoires supérieurs retirés ; ce n’est pas une capture du film ni une preuve des remorques du projet.",
+      "usedAsGenerationInput": true
+    },
+    {
+      "id": "propstore-apc-02",
+      "sourcePage": "https://propstore.com/product/aliens-1986/lot-6-light-up-remote-controlled-photo-matched-1-12th-scale-apc-model-miniature-and-collection-of-production-materials/",
+      "sourceImage": "https://images.propstore.com/8de3a0f134d6fe252c0232bd7b7455b5-1.jpg",
+      "path": "/workspace/scratch/ebe12fa31d4e/references/act5/propstore-apc-02.jpg",
+      "width": 734,
+      "height": 734,
+      "bytes": 47446,
+      "sha256": "489d84a9ed5592129cdd151b0341d4a629ac3fb559fd723dde53bbae17891be1",
+      "downloadedAt": "2026-11-17T09:59:49.593217+00:00",
+      "visuallyInspected": true,
+      "runtimeRedistribution": false,
+      "observedContent": "Gros plan du nez : affût frontal bas à deux bouches, glacis en pente, bande de vitrage sous toit et phares bas.",
+      "referenceRole": "Détails de façade seulement ; aucun témoignage de remorque ou de capacité de traction.",
+      "attribution": "Propstore — miniature APC 1/12 de production, photo-matched, Aliens (1986)",
+      "limitations": "La fiche signale des restaurations (un canon et des cache-roues), pneus de remplacement de production et accessoires supérieurs retirés ; ce n’est pas une capture du film ni une preuve des remorques du projet.",
+      "usedAsGenerationInput": true
+    },
+    {
+      "id": "propstore-apc-03",
+      "sourcePage": "https://propstore.com/product/aliens-1986/lot-6-light-up-remote-controlled-photo-matched-1-12th-scale-apc-model-miniature-and-collection-of-production-materials/",
+      "sourceImage": "https://images.propstore.com/b7ce2142c3d5f02a33524e388fdb2fb2-1.jpg",
+      "path": "/workspace/scratch/ebe12fa31d4e/references/act5/propstore-apc-03.jpg",
+      "width": 734,
+      "height": 734,
+      "bytes": 53346,
+      "sha256": "445dbd52d7ed6939f4f9bffda231fcac3b4db50e6f38174c03760f3c51dd7631",
+      "downloadedAt": "2026-11-17T09:59:49.583497+00:00",
+      "visuallyInspected": true,
+      "runtimeRedistribution": false,
+      "observedContent": "Gros plan du flanc : grande porte au milieu entre deux roues, charnières à droite, petit voyant au-dessus ; zones du nez et de la tourelle hors cadre.",
+      "referenceRole": "Contrôle de la porte latérale du M577 ; démontre la limite du PNG insertion actuel.",
+      "attribution": "Propstore — miniature APC 1/12 de production, photo-matched, Aliens (1986)",
+      "limitations": "La fiche signale des restaurations (un canon et des cache-roues), pneus de remplacement de production et accessoires supérieurs retirés ; ce n’est pas une capture du film ni une preuve des remorques du projet.",
+      "usedAsGenerationInput": true
+    },
+    {
+      "id": "neca-alien3-series8-group",
+      "sourcePage": "https://store.necaonline.com/blogs/toy-fair/172396743-toy-fair-2016-day-1-harley-quinn-1-4-scale-aliens-hubsnaps-and-body-knockers",
+      "sourceImage": "https://necaonline.com/wp-content/uploads/2016/02/1300x-Alien-Series-8-group.jpg",
+      "path": "/workspace/scratch/ebe12fa31d4e/references/act5/neca-alien3-series8-group.jpg",
+      "width": 1300,
+      "height": 1300,
+      "bytes": 290341,
+      "sha256": "9d93db8371f9777ecf559404fdd40fd9b91d51e409ee7ce00506b13066bad824",
+      "downloadedAt": "2026-11-17T09:59:47.308410+00:00",
+      "visuallyInspected": true,
+      "runtimeRedistribution": false,
+      "observedContent": "Planche officielle de figurines Alien3 : le commando en haut à droite porte une combinaison crème rembourrée, des éléments métal gris et un casque à masque grillagé/lunettes. Les autres figures ne sont pas des références du lot.",
+      "referenceRole": "Vérification de la famille visuelle du commando existant ; figurine licenciée, pas costume de tournage.",
+      "attribution": "NECA — photographie officielle de la série 8 Alien3 (2016), figurine sous licence",
+      "limitations": "La figurine n’est pas un photogramme ni un costume de tournage ; aucune nouvelle apparition de Ripley ou du Dog Alien n’est autorisée par cette référence.",
+      "usedAsGenerationInput": false
+    }
+  ],
+  "projectVisualReferences": [
+    {
+      "path": "assets/content/v188/colony/colony-walls.png",
+      "width": 1893,
+      "height": 831,
+      "mode": "RGB",
+      "bytes": 2514990,
+      "sha256": "a427764a9d312d81afb4bd9ac1d4a3b0c1ded7445e487a824302c1a60c73f3d1",
+      "visuallyInspected": true,
+      "role": "Existing project continuity reference, not a primary franchise source."
+    },
+    {
+      "path": "assets/openai/hub/rooms/command-cryo.png",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "bytes": 2097334,
+      "sha256": "a0fa2e8f553cf114bffc249cae8b701699c7af3551800c46d43f96c155d50f0b",
+      "visuallyInspected": true,
+      "role": "Existing project continuity reference, not a primary franchise source."
+    },
+    {
+      "path": "assets/insertion/v188/m577-side.png",
+      "width": 1942,
+      "height": 809,
+      "mode": "RGBA",
+      "bytes": 2026708,
+      "sha256": "097eb242998b926c433126462ca97a99cd26db5010759d4743b2fb20a37b25b4",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "transparentPixels": 631740,
+      "opaquePixels": 660,
+      "intermediateAlphaPixels": 938678,
+      "visibleBoundsAtAlpha128": [
+        16,
+        29,
+        1918,
+        782
+      ],
+      "visuallyInspected": true,
+      "role": "Existing project continuity reference, not a primary franchise source."
+    }
+  ],
+  "selectedOutputs": [
+    {
+      "id": "bridge-collapse",
+      "path": "assets/act5/v188/bridge-collapse.png",
+      "width": 1939,
+      "height": 811,
+      "mode": "RGB",
+      "bytes": 2176823,
+      "sha256": "88c277293d59ac8caa2dd3eedfb93f3f243b1c8720ce53f80c4b3b3bbc705eb5",
+      "sourceBytesPreserved": true,
+      "tool": "image_gen.imagegen",
+      "transparentBackgroundRequested": false,
+      "prompt": "Use case: lighting-weather. Edit this exact game background ONLY to change its time of day from dawn to a rainy moonless NIGHT. Keep the exact side-on bridge structure, sagging right-hand span, all deck heights and x/y positions, trusses, piers, ravine, composition and image aspect unchanged so vehicles already aligned to the bridge will still fit. Remove the visible sun and all pink/orange sunrise sky; replace that sky with dark blue-grey dense storm clouds. The warm amber caged utility lamps on the bridge remain on and illuminate nearby edges. Faint cold blue diffuse ambient light keeps the steel deck edge and trusses clearly readable at small game scale, never crushed into black. Dark wet metal with subtle amber reflections, distant industrial compound with a few dim windows. Do not add rain streaks, because rain is an animated game overlay. Do not add or remove beams, alter the sag, change camera, or add vehicles, people, lettering, labels, fog that obscures the road, or extra props. Full bleed opaque image, preserve approximately1939x811 framing. This is a single controlled lighting correction, not a redesign.",
+      "inputReferences": [
+        {
+          "path": "assets/act5/v188/bridge-collapse.png",
+          "sha256": "9c9c3097c30f600f19d5eb510cdc412577d843c9b4a908e91b22a10d86b53acd",
+          "visuallyInspected": true,
+          "immutableInputSnapshotSha256": "9c9c3097c30f600f19d5eb510cdc412577d843c9b4a908e91b22a10d86b53acd",
+          "rejectedIterationId": "bridge-collapse-dawn"
+        }
+      ],
+      "generatorOutputSha256": "88c277293d59ac8caa2dd3eedfb93f3f243b1c8720ce53f80c4b3b3bbc705eb5"
+    },
+    {
+      "id": "m577-rain-departure",
+      "path": "assets/act5/v188/m577-rain-departure.png",
+      "width": 1916,
+      "height": 821,
+      "mode": "RGB",
+      "bytes": 2587562,
+      "sha256": "96294fd97831238f91427e895e5ce722bbf1ad9da32723f88ae3160ff884594e",
+      "sourceBytesPreserved": true,
+      "tool": "image_gen.imagegen",
+      "transparentBackgroundRequested": false,
+      "prompt": "Use case: compositing. Derive a new empty departure background for the same game environment as the reference. Detailed grounded industrial science-fiction game art matching the supplied project image: practical 1980s retrofuturist construction, heavy welded steel panels, visible fasteners, weathered olive charcoal paint, cold blue ambient light and sparse warm industrial lamps. Restrained realistic texture, crisp readable forms at 640x280 and 1280x536, not cartoon, not glossy modern concept design. No writing, words, lettering, logos, watermarks, UI, or black letterbox bars. Ultra-wide cinematic landscape about 2.39:1. Side-facing view across the service road outside Cocyte's huge industrial compound at night. Heavy blocky industrial structures, pipe runs and one recessed service gate occupy the upper half and middle distance. Wet level tarmac and a few low reflective puddles occupy the lower third, with a completely clear lateral path for a convoy travelling right-to-left. Ground plane runs horizontally around 74 percent image height with foreground floor visible beneath; no large foreground obstruction. The atmosphere is damp and cold, lamps illuminate readable edges and reflections. The road is EMPTY: do not include any vehicle, trailer, human, animal, alien, fixed rain streak, explosion or smoke column. Rain and moving convoy will be drawn separately by the engine. Preserve the same construction palette and practical detail density as the reference while changing the location and lighting to the night departure yard. Full bleed opaque image.",
+      "inputReferences": [
+        {
+          "path": "assets/content/v188/colony/colony-walls.png",
+          "sha256": "a427764a9d312d81afb4bd9ac1d4a3b0c1ded7445e487a824302c1a60c73f3d1",
+          "visuallyInspected": true
+        }
+      ],
+      "generatorOutputSha256": "96294fd97831238f91427e895e5ce722bbf1ad9da32723f88ae3160ff884594e"
+    },
+    {
+      "id": "port-meridien-epilogue",
+      "path": "assets/act5/v188/port-meridien-epilogue.png",
+      "width": 1939,
+      "height": 811,
+      "mode": "RGB",
+      "bytes": 2556371,
+      "sha256": "1cdeb08cd138f6fbe9e61c5a6201b0dfb56e1685a85917057b5b671b81fb03e2",
+      "sourceBytesPreserved": true,
+      "tool": "image_gen.imagegen",
+      "transparentBackgroundRequested": false,
+      "prompt": "Use case: compositing. Derive a quiet closing panorama of Port-Meridien consistent with the established colony-wall reference. Detailed grounded industrial science-fiction game art matching the supplied project image: practical 1980s retrofuturist construction, heavy welded steel panels, visible fasteners, weathered olive charcoal paint, cold blue ambient light and sparse warm industrial lamps. Restrained realistic texture, crisp readable forms at 640x280 and 1280x536, not cartoon, not glossy modern concept design. No writing, words, lettering, logos, watermarks, UI, or black letterbox bars. Ultra-wide 2.39:1, fixed cinematic establishing view from an empty landing platform overlooking the industrial colony. Keep a broad unoccupied platform ledge in the foreground; in the middle distance, low modular hab-blocks with small warm windows and practical pipework; behind them one tall monumental atmosphere-processing tower with a broad mechanical crown and dense vertical structural ribs. Far mountain horizon under pale cold early-morning sky, restrained rose-gold dawn near the horizon. Calm composition, no triumphant propaganda. Tower and settlement clearly readable at game scale. This is the project's existing colony, not a new fantasy city: heavy practical Aliens-style architecture, no glass skyscrapers or sleek futuristic spires. No persons, spacecraft, vehicles, banners, words, counters, victory icons, fireballs or prepainted ending-state lights. Window glow may be subtle ambient architecture, no conditional event. Full bleed opaque image.",
+      "inputReferences": [
+        {
+          "path": "assets/content/v188/colony/colony-walls.png",
+          "sha256": "a427764a9d312d81afb4bd9ac1d4a3b0c1ded7445e487a824302c1a60c73f3d1",
+          "visuallyInspected": true
+        }
+      ],
+      "generatorOutputSha256": "1cdeb08cd138f6fbe9e61c5a6201b0dfb56e1685a85917057b5b671b81fb03e2"
+    },
+    {
+      "id": "echo8-locker-epilogue",
+      "path": "assets/act5/v188/echo8-locker-epilogue.png",
+      "width": 802,
+      "height": 1960,
+      "mode": "RGBA",
+      "bytes": 1966134,
+      "sha256": "f2387865f38f7abf8e71869e8e098b792d5f96149898cb94eae00a1b993b3e8b",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "transparentPixels": 593757,
+      "opaquePixels": 2233,
+      "intermediateAlphaPixels": 975930,
+      "visibleBoundsAtAlpha128": [
+        118,
+        120,
+        681,
+        1850
+      ],
+      "sourceBytesPreserved": true,
+      "tool": "image_gen.imagegen",
+      "transparentBackgroundRequested": true,
+      "prompt": "Use case: compositing. Asset type: single original project sealed personal locker for the cryobay in the reference image. Match the surrounding practical weathered blue-grey retrofuturist metal and warm small utility detailing, but output ONLY the locker on true transparent RGBA. Straight-on frontal orthographic view, tall narrow rectangle about .9m wide by2.2m tall. Complete floor-to-top silhouette inside generous transparent padding. One robust closed metal door with clipped corners, restrained vertical seams, two sturdy visible hinges, a mechanical latch, small surface wear. Broad BLANK rectangular label plate across the upper-middle area, at least 60 percent of door width, flat and unobscured so game code can draw ECHO-8 and a changing status. The label plate must have no writing or symbols of any kind. No monitor content, no person, no room, no cryopod, no vignette, no cast shadow or floor; do not render the surrounding reference room. Clear readable edges, quiet functional design, no excessive pipes or ornamental greebles. Portrait image, full object, neutral lighting compatible with the room.",
+      "inputReferences": [
+        {
+          "path": "assets/openai/hub/rooms/command-cryo.png",
+          "sha256": "a0fa2e8f553cf114bffc249cae8b701699c7af3551800c46d43f96c155d50f0b",
+          "visuallyInspected": true
+        }
+      ],
+      "generatorOutputSha256": "f2387865f38f7abf8e71869e8e098b792d5f96149898cb94eae00a1b993b3e8b"
+    },
+    {
+      "id": "freight-trailer",
+      "path": "assets/act5/v188/freight-trailer.png",
+      "width": 2172,
+      "height": 724,
+      "mode": "RGBA",
+      "bytes": 1917534,
+      "sha256": "de1df7c1c78b828eebc6cbc22f93e488f029c649fbda9eca3af0753e8f5f23ec",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "transparentPixels": 628287,
+      "opaquePixels": 1452,
+      "intermediateAlphaPixels": 942789,
+      "visibleBoundsAtAlpha128": [
+        30,
+        52,
+        2152,
+        706
+      ],
+      "sourceBytesPreserved": true,
+      "tool": "image_gen.imagegen",
+      "transparentBackgroundRequested": true,
+      "prompt": "Use case: compositing. Asset type: original project cargo trailer compatible with the M577 shown in the references. Build ONE complete transparent side-profile trailer, an unpowered sealed freight carrier, using the practical weathered olive-drab steel material and low blocky 1980s military-industrial family of the reference APC, but NOT another APC and not claimed to be a film vehicle. Orthographic strict side elevation, front hitch points RIGHT. Wide 3:1 canvas. Low rigid chassis with two visible rugged wheels and a sealed rectangular freight box with chamfered corners, locking ribs and heavy latches. All compartments closed and blank. Two hitch connectors completely visible: front drawbar at far RIGHT near x=.96W, rear coupling at far LEFT near x=.04W, both at the same height approximately .73H. Wheel contact line near .92H. Keep the entire outline within transparent padding. Neutral soft lighting, crisp texture readable at a small game scale, no perspective showing the front or roof excessively, no ground shadow. No lettering, logos, plate numbers, luminous state indicators, people, ropes or cargo spilling out. Actual transparent RGBA background, no checkerboard baked.",
+      "inputReferences": [
+        {
+          "path": "assets/insertion/v188/m577-side.png",
+          "sha256": "097eb242998b926c433126462ca97a99cd26db5010759d4743b2fb20a37b25b4",
+          "visuallyInspected": true
+        },
+        {
+          "path": "/workspace/scratch/ebe12fa31d4e/references/act5/propstore-apc-01.jpg",
+          "sha256": "ae6e9d4d77cb3efe238603e6ec31bb674676b323cb14ef7c46ba3d0b2e1dd4a3",
+          "visuallyInspected": true
+        }
+      ],
+      "generatorOutputSha256": "de1df7c1c78b828eebc6cbc22f93e488f029c649fbda9eca3af0753e8f5f23ec"
+    },
+    {
+      "id": "m577-side-corrected",
+      "path": "assets/act5/v188/m577-side-corrected.png",
+      "width": 2172,
+      "height": 724,
+      "mode": "RGBA",
+      "bytes": 2064185,
+      "sha256": "55d8bc21f48c11e21cff3d7eeeff9395896e1e1ca4efd03fd44d98232b47553e",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "transparentPixels": 567816,
+      "opaquePixels": 958,
+      "intermediateAlphaPixels": 1003754,
+      "visibleBoundsAtAlpha128": [
+        23,
+        20,
+        2137,
+        723
+      ],
+      "sourceBytesPreserved": true,
+      "tool": "image_gen.imagegen",
+      "transparentBackgroundRequested": true,
+      "prompt": "Use case: precise-object-edit. Asset type: single transparent side-profile game vehicle. Correct the M577 APC sprite in image 1 to closely match the actual ALIENS 1986 filming-miniature morphology shown in images 2,3,4. Image 1 is the editable project style/framing reference, images 2-4 are the authoritative vehicle geometry references. Keep clean game-sprite presentation and right-facing orthographic side elevation, entire vehicle visible with transparent padding, no ground or cast shadow. Correct the hull to the exceptionally long, low angular wedge of the reference, exactly TWO road wheels visible on this flank, flat armored wheel covers and knobbly dark tires. Put the large side access door centrally BETWEEN the wheels, with chamfered top corners; remove the erroneous door ahead of the front wheel and the central ventilation clutter. Correct the small roof turret toward the rear: low angular casing, TWO parallel cannon barrels pointing right, mounted above the back of the long hull. At the far right nose keep the separate squat cylindrical twin weapon mounting in its lowered nose recess; avoid a giant single cannon or modern tank silhouette. The nose includes the sloped recessed cockpit glazing seen in image 3. Muted weathered olive/brown metal as the miniature, subtle cool edge light, neutral readable illumination. No extra armor, no invented antennas, no soldiers, no flames or muzzle flashes, no text. Wide image about 3:1, source facing right, wheel contact line level, all edges and attachments complete. True transparent RGBA background.",
+      "inputReferences": [
+        {
+          "path": "assets/insertion/v188/m577-side.png",
+          "sha256": "097eb242998b926c433126462ca97a99cd26db5010759d4743b2fb20a37b25b4",
+          "visuallyInspected": true
+        },
+        {
+          "path": "/workspace/scratch/ebe12fa31d4e/references/act5/propstore-apc-01.jpg",
+          "sha256": "ae6e9d4d77cb3efe238603e6ec31bb674676b323cb14ef7c46ba3d0b2e1dd4a3",
+          "visuallyInspected": true
+        },
+        {
+          "path": "/workspace/scratch/ebe12fa31d4e/references/act5/propstore-apc-02.jpg",
+          "sha256": "489d84a9ed5592129cdd151b0341d4a629ac3fb559fd723dde53bbae17891be1",
+          "visuallyInspected": true
+        },
+        {
+          "path": "/workspace/scratch/ebe12fa31d4e/references/act5/propstore-apc-03.jpg",
+          "sha256": "445dbd52d7ed6939f4f9bffda231fcac3b4db50e6f38174c03760f3c51dd7631",
+          "visuallyInspected": true
+        }
+      ],
+      "generatorOutputSha256": "55d8bc21f48c11e21cff3d7eeeff9395896e1e1ca4efd03fd44d98232b47553e"
+    },
+    {
+      "id": "quay-standoff",
+      "path": "assets/act5/v188/quay-standoff.png",
+      "width": 1935,
+      "height": 813,
+      "mode": "RGB",
+      "bytes": 2682911,
+      "sha256": "36c427b8ce6a592431568e73f7c81f0367d3901aea6d813219db94ac9fb711b2",
+      "sourceBytesPreserved": true,
+      "tool": "image_gen.imagegen",
+      "transparentBackgroundRequested": false,
+      "prompt": "Use case: compositing. Derive a new empty cargo-quay scene in the same project as the reference. Detailed grounded industrial science-fiction game art matching the supplied project image: practical 1980s retrofuturist construction, heavy welded steel panels, visible fasteners, weathered olive charcoal paint, cold blue ambient light and sparse warm industrial lamps. Restrained realistic texture, crisp readable forms at 640x280 and 1280x536, not cartoon, not glossy modern concept design. No writing, words, lettering, logos, watermarks, UI, or black letterbox bars. Ultra-wide about 2.39:1. Eye-level side-on view across a broad industrial spaceport loading apron at night, not a maritime waterfront. Heavy angled steel colony walls, a large reinforced loading gate in the central background, cable trays, gantry shadows, cold floodlights and small amber utility lamps. The lower 40 percent is a flat empty wet loading surface, continuous and uncluttered. Leave a clear stage on the left for colonists and clear space on the right for corporate soldiers and a small spacecraft to be rendered later; preserve the central gate as the shared background landmark. No people, no vehicle, no shuttle, no freight container in the foreground, no weapons, no flag, no text. Keep both lateral groups' eventual positions readable against mid-value background steel rather than pure black. Full bleed opaque background.",
+      "inputReferences": [
+        {
+          "path": "assets/content/v188/colony/colony-walls.png",
+          "sha256": "a427764a9d312d81afb4bd9ac1d4a3b0c1ded7445e487a824302c1a60c73f3d1",
+          "visuallyInspected": true
+        }
+      ],
+      "generatorOutputSha256": "36c427b8ce6a592431568e73f7c81f0367d3901aea6d813219db94ac9fb711b2"
+    },
+    {
+      "id": "port-gates-rollcall",
+      "path": "assets/act5/v188/port-gates-rollcall.png",
+      "width": 1939,
+      "height": 811,
+      "mode": "RGB",
+      "bytes": 2497230,
+      "sha256": "36f4db866f35dd5e064d7c5364ef29619a06d8c2a23c1eed80b64c67cd893ce2",
+      "sourceBytesPreserved": true,
+      "tool": "image_gen.imagegen",
+      "transparentBackgroundRequested": false,
+      "prompt": "Use case: precise-object-edit. Adapt the supplied established Port-Meridien colony-wall artwork into a matching scene with the main gateway OPEN at dawn. Detailed grounded industrial science-fiction game art matching the supplied project image: practical 1980s retrofuturist construction, heavy welded steel panels, visible fasteners, weathered olive charcoal paint, cold blue ambient light and sparse warm industrial lamps. Restrained realistic texture, crisp readable forms at 640x280 and 1280x536, not cartoon, not glossy modern concept design. No writing, words, lettering, logos, watermarks, UI, or black letterbox bars. Preserve its heavy weathered industrial perimeter wall, angled buttresses, utility pipes, warm caged lamps, distant colony silhouettes, mountain ridge and pale rose dawn light. Keep the visible architectural family, materials and scale. Reframe as an ultra-wide 2.39:1 backdrop with the doorway centered: show a fully clear rectangular opening between x=34% and x=66%, dark interior road visible beyond. Both separate thick sliding gate leaves are retracted and remain entirely visible against the wall to the left and right; the central threshold must be visibly open. Lower 25 percent is clear ground across the width for separately animated arrivals. No people, no queue, no convoy, no vehicles, no numbers, no rollcall counter, no labels, no fixed text or narrative symbols. The gate will be closed by separate runtime layers, so do not paint it closed or partially obstruct the aperture. Full bleed, opaque, no borders.",
+      "inputReferences": [
+        {
+          "path": "assets/content/v188/colony/colony-walls.png",
+          "sha256": "a427764a9d312d81afb4bd9ac1d4a3b0c1ded7445e487a824302c1a60c73f3d1",
+          "visuallyInspected": true
+        }
+      ],
+      "generatorOutputSha256": "36f4db866f35dd5e064d7c5364ef29619a06d8c2a23c1eed80b64c67cd893ce2"
+    },
+    {
+      "id": "colonist-trailer",
+      "path": "assets/act5/v188/colonist-trailer.png",
+      "width": 2172,
+      "height": 724,
+      "mode": "RGBA",
+      "bytes": 1795499,
+      "sha256": "e791090fea9332894f2c1a1727a2ef5c856ee97a6d7f3b8e40c905b69fcd6f97",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "transparentPixels": 622054,
+      "opaquePixels": 1378,
+      "intermediateAlphaPixels": 949096,
+      "visibleBoundsAtAlpha128": [
+        29,
+        49,
+        2159,
+        707
+      ],
+      "sourceBytesPreserved": true,
+      "tool": "image_gen.imagegen",
+      "transparentBackgroundRequested": true,
+      "prompt": "Use case: precise-object-edit. Asset type: transparent side-elevation passenger trailer matching the supplied freight trailer exactly as one mechanical family. Edit ONLY the sealed upper freight compartment of the reference into an EMPTY enclosed colonist passenger cabin. Keep the chassis, entire wheel assemblies, both hitch connectors, overall width, outline orientation, neutral lighting, weathered olive metal, camera and transparent padding unchanged. Front drawbar remains at far RIGHT; rear jaw coupling remains at far LEFT; preserve their exact height and positions and the exact wheel contact line. The passenger cabin has a low flat roof at the same height, three large rectangular dark glazed windows along the side with metal pillars; behind the windows show empty bench seats, absolutely no people, faces or fixed passenger count. Add a simple closed access door in the upper body at one end only if it fits without changing the chassis. Strong practical 1980s industrial design, no modern bus styling. No writing, text, labels, logos, lights indicating a story state, decorations, background, floor or cast shadow. Keep a strict flat side elevation and one complete vehicle in wide approximately3:1 framing. True RGBA alpha around the silhouette, no checkerboard or black baked background.",
+      "inputReferences": [
+        {
+          "sha256": "de1df7c1c78b828eebc6cbc22f93e488f029c649fbda9eca3af0753e8f5f23ec",
+          "visuallyInspected": true,
+          "sourceAssetId": "freight-trailer",
+          "sourceKind": "Unmodified generator output, identified by SHA-256"
+        }
+      ],
+      "generatorOutputSha256": "e791090fea9332894f2c1a1727a2ef5c856ee97a6d7f3b8e40c905b69fcd6f97"
+    }
+  ],
+  "reusedRuntimeImages": [
+    {
+      "id": "briefing-room",
+      "path": "assets/openai/hub/rooms/command-briefing.png",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "bytes": 1595975,
+      "sha256": "23808a5630773e9c4c294a738c4d720b50a004d68c12195a7f007bf3d602ca34",
+      "copiedIntoThisLot": false
+    },
+    {
+      "id": "tactical-table",
+      "path": "assets/openai/hub/props/operations-table-v61.png",
+      "width": 1024,
+      "height": 512,
+      "mode": "RGBA",
+      "bytes": 675195,
+      "sha256": "d236cc5324de598591cfb412e8f47b504d255b4119481137f893796155034c46",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "transparentPixels": 247176,
+      "opaquePixels": 274105,
+      "intermediateAlphaPixels": 3007,
+      "visibleBoundsAtAlpha128": [
+        59,
+        62,
+        986,
+        459
+      ],
+      "copiedIntoThisLot": false
+    },
+    {
+      "id": "cryo-room",
+      "path": "assets/openai/hub/rooms/command-cryo.png",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "bytes": 2097334,
+      "sha256": "a0fa2e8f553cf114bffc249cae8b701699c7af3551800c46d43f96c155d50f0b",
+      "copiedIntoThisLot": false
+    },
+    {
+      "id": "cryopod",
+      "path": "assets/openai/hub/props/cryopod.png",
+      "width": 241,
+      "height": 131,
+      "mode": "RGBA",
+      "bytes": 53492,
+      "sha256": "5792ee4f6296348e15e3870f6d3b61c210e3df7bb30d3519fb545393ba8aa6cb",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "transparentPixels": 9545,
+      "opaquePixels": 19923,
+      "intermediateAlphaPixels": 2103,
+      "visibleBoundsAtAlpha128": [
+        10,
+        11,
+        230,
+        121
+      ],
+      "copiedIntoThisLot": false
+    },
+    {
+      "id": "company-shuttle",
+      "path": "assets/openai/equipment/v121-vehicles/weyland-yutani-executive-shuttle-native-v121.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "bytes": 1976158,
+      "sha256": "4a91a70d7f040e65a220b76700603cdf1d3b98f317e9a4d44ff2795b10a66edf",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "transparentPixels": 937725,
+      "opaquePixels": 0,
+      "intermediateAlphaPixels": 635139,
+      "visibleBoundsAtAlpha128": [
+        157,
+        188,
+        1368,
+        897
+      ],
+      "copiedIntoThisLot": false
+    },
+    {
+      "id": "colony-walls",
+      "path": "assets/content/v188/colony/colony-walls.png",
+      "width": 1893,
+      "height": 831,
+      "mode": "RGB",
+      "bytes": 2514990,
+      "sha256": "a427764a9d312d81afb4bd9ac1d4a3b0c1ded7445e487a824302c1a60c73f3d1",
+      "copiedIntoThisLot": false
+    },
+    {
+      "id": "crt-bezel",
+      "path": "assets/insertion/v188/crt-bezel.png",
+      "width": 1484,
+      "height": 1060,
+      "mode": "RGBA",
+      "bytes": 877924,
+      "sha256": "6c6b8af55ac7567e6fbd31c3c8b1ee89c4a9ac893d598d87b342f397df021796",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "transparentPixels": 1152366,
+      "opaquePixels": 2712,
+      "intermediateAlphaPixels": 417962,
+      "visibleBoundsAtAlpha128": [
+        15,
+        15,
+        1470,
+        1041
+      ],
+      "copiedIntoThisLot": false
+    },
+    {
+      "id": "starfield",
+      "path": "assets/insertion/v188/starfield-deep.png",
+      "width": 1774,
+      "height": 887,
+      "mode": "RGB",
+      "bytes": 393869,
+      "sha256": "de296f7872af06b731346401f41595c4ab55d099615fb674b6a139600543108e",
+      "copiedIntoThisLot": false
+    },
+    {
+      "id": "planet",
+      "path": "assets/insertion/v188/planet-limb.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 2439135,
+      "sha256": "382253806da653f165547ca24c6dd146926d4e574a95e8f5ff231fe4934fabc3",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "transparentPixels": 369182,
+      "opaquePixels": 5,
+      "intermediateAlphaPixels": 1203329,
+      "visibleBoundsAtAlpha128": [
+        14,
+        22,
+        1234,
+        1230
+      ],
+      "copiedIntoThisLot": false
+    },
+    {
+      "id": "asph-ring",
+      "path": "assets/asphodele/v188/cinematics/asph-cin-ring.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 1229267,
+      "sha256": "2f5e24f61b6bde87d6719f371bb58836aa162806aeba390721e4d5c87518a652",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "transparentPixels": 1089367,
+      "opaquePixels": 719,
+      "intermediateAlphaPixels": 482430,
+      "visibleBoundsAtAlpha128": [
+        37,
+        34,
+        1216,
+        1218
+      ],
+      "copiedIntoThisLot": false
+    },
+    {
+      "id": "asph-hub",
+      "path": "assets/asphodele/v188/cinematics/asph-cin-hub.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 1959228,
+      "sha256": "4d98f277eea7de3fbf41674c6d2255d3c95615c6975e1f97a55b5332e94dd4cd",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "transparentPixels": 633812,
+      "opaquePixels": 435,
+      "intermediateAlphaPixels": 938269,
+      "visibleBoundsAtAlpha128": [
+        93,
+        81,
+        1162,
+        1174
+      ],
+      "copiedIntoThisLot": false
+    },
+    {
+      "id": "rook-quarters",
+      "path": "assets/asphodele/v188/cinematics/asph-cin-rook-quarters.png",
+      "width": 1939,
+      "height": 811,
+      "mode": "RGB",
+      "bytes": 1819959,
+      "sha256": "a6adaf3a7f2206e1e25cd29c12bf34a43768f34b817a86b1df5cc675a783c137",
+      "copiedIntoThisLot": false
+    },
+    {
+      "id": "marine",
+      "path": "assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGBA",
+      "bytes": 628213,
+      "sha256": "f5b25ca6189d0a2891d1a6f60635417238d7dc52bfece7ae20a2cd9dffa21ca3",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "transparentPixels": 846944,
+      "opaquePixels": 167687,
+      "intermediateAlphaPixels": 33945,
+      "visibleBoundsAtAlpha128": [
+        57,
+        47,
+        965,
+        1008
+      ],
+      "copiedIntoThisLot": false
+    },
+    {
+      "id": "commando",
+      "path": "assets/openai/sprites/normalized/enemies/weyland-yutani-commando-action-sheet-v56.png",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGBA",
+      "bytes": 560378,
+      "sha256": "6e932e77244abc0186b0258812ef1391628d597147c560c77c3c11c813b7d918",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "transparentPixels": 888483,
+      "opaquePixels": 112224,
+      "intermediateAlphaPixels": 47869,
+      "visibleBoundsAtAlpha128": [
+        65,
+        65,
+        1008,
+        1008
+      ],
+      "copiedIntoThisLot": false
+    },
+    {
+      "id": "asph-npc-docker",
+      "path": "assets/asphodele/v188/asph-npc-docker.png",
+      "width": 1774,
+      "height": 887,
+      "mode": "RGBA",
+      "bytes": 1112083,
+      "sha256": "9ab758528b1b317c1cfc4277ce3f3444e35ebf1a3090bdaa939dd9aa4d8f0e89",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "transparentPixels": 1071495,
+      "opaquePixels": 1219,
+      "intermediateAlphaPixels": 500824,
+      "visibleBoundsAtAlpha128": [
+        132,
+        73,
+        1738,
+        829
+      ],
+      "copiedIntoThisLot": false
+    },
+    {
+      "id": "asph-npc-merchant",
+      "path": "assets/asphodele/v188/asph-npc-merchant.png",
+      "width": 1774,
+      "height": 887,
+      "mode": "RGBA",
+      "bytes": 1012530,
+      "sha256": "106d2657fbafeb802b5e638f66ad8f2695f84597ad18114346751571d93d7bf8",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "transparentPixels": 1123219,
+      "opaquePixels": 894,
+      "intermediateAlphaPixels": 449425,
+      "visibleBoundsAtAlpha128": [
+        128,
+        61,
+        1757,
+        827
+      ],
+      "copiedIntoThisLot": false
+    },
+    {
+      "id": "asph-npc-technician",
+      "path": "assets/asphodele/v188/asph-npc-technician.png",
+      "width": 1774,
+      "height": 887,
+      "mode": "RGBA",
+      "bytes": 1051126,
+      "sha256": "bb2f1e1712d5162a871c63ae9c755130f3a9c08e337a6eb6c0ef22ab3046d861",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "transparentPixels": 1128299,
+      "opaquePixels": 1630,
+      "intermediateAlphaPixels": 443609,
+      "visibleBoundsAtAlpha128": [
+        137,
+        56,
+        1751,
+        837
+      ],
+      "copiedIntoThisLot": false
+    },
+    {
+      "id": "crew-vega",
+      "path": "assets/openai/sprites/normalized/npcs/mara-vega-locomotion-sheet.png",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGBA",
+      "bytes": 494920,
+      "sha256": "b74106a299e1d48fc7acb160940a54285faf405f7e60bd6293203db5f6d4ac35",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "transparentPixels": 888020,
+      "opaquePixels": 138051,
+      "intermediateAlphaPixels": 22505,
+      "visibleBoundsAtAlpha128": [
+        62,
+        22,
+        950,
+        1008
+      ],
+      "copiedIntoThisLot": false
+    },
+    {
+      "id": "crew-sanaa",
+      "path": "assets/openai/sprites/normalized/npcs/sanaa-doyle-locomotion-sheet.png",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGBA",
+      "bytes": 674822,
+      "sha256": "8ead349e09a9d4beac48eb0677d46106d2b07fbc679684d4462e02e8126272b6",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "transparentPixels": 826797,
+      "opaquePixels": 198250,
+      "intermediateAlphaPixels": 23529,
+      "visibleBoundsAtAlpha128": [
+        58,
+        16,
+        968,
+        1008
+      ],
+      "copiedIntoThisLot": false
+    },
+    {
+      "id": "crew-cal",
+      "path": "assets/openai/sprites/normalized/npcs/cal-mercer-locomotion-sheet.png",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGBA",
+      "bytes": 640881,
+      "sha256": "c6731fed56e4285981cccab648fd46c4312790214b41039fe2e8ee5d4d082cdf",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "transparentPixels": 835567,
+      "opaquePixels": 181698,
+      "intermediateAlphaPixels": 31311,
+      "visibleBoundsAtAlpha128": [
+        66,
+        32,
+        962,
+        1008
+      ],
+      "copiedIntoThisLot": false
+    },
+    {
+      "id": "crew-leila",
+      "path": "assets/openai/sprites/normalized/npcs/leila-s-rensen-locomotion-sheet.png",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGBA",
+      "bytes": 685456,
+      "sha256": "1704b354c43e5c3231a5fd8b624736fa4c14df8bf016b29fd9e067fd39e8e62b",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "transparentPixels": 832473,
+      "opaquePixels": 177966,
+      "intermediateAlphaPixels": 38137,
+      "visibleBoundsAtAlpha128": [
+        52,
+        16,
+        973,
+        1008
+      ],
+      "copiedIntoThisLot": false
+    },
+    {
+      "id": "crew-orlov",
+      "path": "assets/openai/sprites/normalized/npcs/maksim-orlov-locomotion-sheet.png",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGBA",
+      "bytes": 615362,
+      "sha256": "cfde33f66024ff7962c6ab250e6962fec4ef9e157af2f20d748adf6c385c6f94",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "transparentPixels": 842766,
+      "opaquePixels": 185499,
+      "intermediateAlphaPixels": 20311,
+      "visibleBoundsAtAlpha128": [
+        68,
+        16,
+        959,
+        1008
+      ],
+      "copiedIntoThisLot": false
+    },
+    {
+      "id": "crew-rook",
+      "path": "assets/openai/sprites/normalized/npcs/rook-locomotion-sheet.png",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGBA",
+      "bytes": 730100,
+      "sha256": "96fa8b879c3ecf3ceae35d4457ffbb47b8c970391cb8f3706c93a4db270d7331",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "transparentPixels": 808738,
+      "opaquePixels": 197303,
+      "intermediateAlphaPixels": 42535,
+      "visibleBoundsAtAlpha128": [
+        63,
+        16,
+        957,
+        1008
+      ],
+      "copiedIntoThisLot": false
+    }
+  ],
+  "runtime": {
+    "activeSlots": [
+      "war-council-table",
+      "halloran-order",
+      "bridge-collapse",
+      "quay-standoff",
+      "tantalus-epilogue",
+      "m577-rain-departure",
+      "port-gates-rollcall",
+      "ending-relay-transmit",
+      "ending-freight-handover",
+      "ending-living-dawn",
+      "port-meridien-epilogue",
+      "asphodele-epilogue",
+      "echo8-locker-epilogue",
+      "credits-starfield"
+    ],
+    "unusedSlots": [
+      "relay-room"
+    ],
+    "art": {
+      "m577-rain-departure": {
+        "path": "/assets/act5/v188/m577-rain-departure.png"
+      },
+      "bridge-collapse": {
+        "path": "/assets/act5/v188/bridge-collapse.png"
+      },
+      "quay-standoff": {
+        "path": "/assets/act5/v188/quay-standoff.png"
+      },
+      "port-gates-rollcall": {
+        "path": "/assets/act5/v188/port-gates-rollcall.png"
+      },
+      "port-meridien-epilogue": {
+        "path": "/assets/act5/v188/port-meridien-epilogue.png"
+      },
+      "freight-trailer": {
+        "path": "/assets/act5/v188/freight-trailer.png"
+      },
+      "colonist-trailer": {
+        "path": "/assets/act5/v188/colonist-trailer.png"
+      },
+      "echo8-locker-epilogue": {
+        "path": "/assets/act5/v188/echo8-locker-epilogue.png"
+      },
+      "m577-side-corrected": {
+        "path": "/assets/act5/v188/m577-side-corrected.png"
+      },
+      "briefing-room": {
+        "path": "/assets/openai/hub/rooms/command-briefing.png"
+      },
+      "tactical-table": {
+        "path": "/assets/openai/hub/props/operations-table-v61.png"
+      },
+      "cryo-room": {
+        "path": "/assets/openai/hub/rooms/command-cryo.png"
+      },
+      "cryopod": {
+        "path": "/assets/openai/hub/props/cryopod.png"
+      },
+      "company-shuttle": {
+        "path": "/assets/openai/equipment/v121-vehicles/weyland-yutani-executive-shuttle-native-v121.png"
+      },
+      "colony-walls": {
+        "path": "/assets/content/v188/colony/colony-walls.png"
+      },
+      "crt-bezel": {
+        "path": "/assets/insertion/v188/crt-bezel.png"
+      },
+      "starfield": {
+        "path": "/assets/insertion/v188/starfield-deep.png"
+      },
+      "planet": {
+        "path": "/assets/insertion/v188/planet-limb.png"
+      },
+      "asph-ring": {
+        "path": "/assets/asphodele/v188/cinematics/asph-cin-ring.png"
+      },
+      "asph-hub": {
+        "path": "/assets/asphodele/v188/cinematics/asph-cin-hub.png"
+      },
+      "rook-quarters": {
+        "path": "/assets/asphodele/v188/cinematics/asph-cin-rook-quarters.png"
+      },
+      "marine": {
+        "path": "/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png"
+      },
+      "commando": {
+        "path": "/assets/openai/sprites/normalized/enemies/weyland-yutani-commando-action-sheet-v56.png"
+      },
+      "asph-npc-docker": {
+        "path": "/assets/asphodele/v188/asph-npc-docker.png"
+      },
+      "asph-npc-merchant": {
+        "path": "/assets/asphodele/v188/asph-npc-merchant.png"
+      },
+      "asph-npc-technician": {
+        "path": "/assets/asphodele/v188/asph-npc-technician.png"
+      },
+      "crew-vega": {
+        "path": "/assets/openai/sprites/normalized/npcs/mara-vega-locomotion-sheet.png"
+      },
+      "crew-sanaa": {
+        "path": "/assets/openai/sprites/normalized/npcs/sanaa-doyle-locomotion-sheet.png"
+      },
+      "crew-cal": {
+        "path": "/assets/openai/sprites/normalized/npcs/cal-mercer-locomotion-sheet.png"
+      },
+      "crew-leila": {
+        "path": "/assets/openai/sprites/normalized/npcs/leila-s-rensen-locomotion-sheet.png"
+      },
+      "crew-orlov": {
+        "path": "/assets/openai/sprites/normalized/npcs/maksim-orlov-locomotion-sheet.png"
+      },
+      "crew-rook": {
+        "path": "/assets/openai/sprites/normalized/npcs/rook-locomotion-sheet.png"
+      }
+    },
+    "newIds": [
+      "m577-rain-departure",
+      "bridge-collapse",
+      "quay-standoff",
+      "port-gates-rollcall",
+      "port-meridien-epilogue",
+      "freight-trailer",
+      "colonist-trailer",
+      "echo8-locker-epilogue",
+      "m577-side-corrected"
+    ],
+    "bySlot": {
+      "war-council-table": [
+        "briefing-room",
+        "tactical-table",
+        "crew-vega",
+        "crew-sanaa",
+        "crew-cal",
+        "crew-leila",
+        "crew-orlov",
+        "crew-rook"
+      ],
+      "halloran-order": [
+        "crt-bezel"
+      ],
+      "bridge-collapse": [
+        "bridge-collapse",
+        "m577-side-corrected",
+        "colonist-trailer",
+        "freight-trailer",
+        "asph-npc-docker",
+        "asph-npc-merchant",
+        "asph-npc-technician"
+      ],
+      "quay-standoff": [
+        "quay-standoff",
+        "marine",
+        "commando",
+        "asph-npc-docker",
+        "asph-npc-merchant",
+        "asph-npc-technician"
+      ],
+      "relay-room": [],
+      "tantalus-epilogue": [
+        "cryo-room"
+      ],
+      "m577-rain-departure": [
+        "m577-rain-departure",
+        "m577-side-corrected",
+        "asph-npc-docker",
+        "asph-npc-merchant",
+        "asph-npc-technician"
+      ],
+      "port-gates-rollcall": [
+        "port-gates-rollcall",
+        "asph-npc-docker",
+        "asph-npc-merchant",
+        "asph-npc-technician"
+      ],
+      "ending-relay-transmit": [
+        "starfield",
+        "planet",
+        "asph-ring",
+        "asph-hub"
+      ],
+      "ending-freight-handover": [
+        "quay-standoff",
+        "company-shuttle",
+        "freight-trailer",
+        "commando",
+        "asph-npc-docker",
+        "asph-npc-merchant",
+        "asph-npc-technician"
+      ],
+      "ending-living-dawn": [
+        "colony-walls",
+        "company-shuttle",
+        "asph-npc-docker",
+        "asph-npc-merchant",
+        "asph-npc-technician"
+      ],
+      "port-meridien-epilogue": [
+        "port-meridien-epilogue"
+      ],
+      "asphodele-epilogue": [
+        "starfield",
+        "asph-ring",
+        "asph-hub"
+      ],
+      "echo8-locker-epilogue": [
+        "cryo-room",
+        "cryopod",
+        "echo8-locker-epilogue"
+      ],
+      "credits-starfield": [
+        "starfield"
+      ]
+    },
+    "sourceRects": {
+      "m577-side-corrected": [
+        19,
+        18,
+        2124,
+        706
+      ],
+      "colonist-trailer": [
+        27,
+        47,
+        2134,
+        662
+      ],
+      "freight-trailer": [
+        28,
+        50,
+        2126,
+        658
+      ],
+      "echo8-locker-epilogue": [
+        116,
+        118,
+        567,
+        1734
+      ],
+      "tactical-table": [
+        57,
+        60,
+        932,
+        402
+      ],
+      "cryopod": [
+        8,
+        9,
+        224,
+        114
+      ],
+      "company-shuttle": [
+        155,
+        186,
+        1215,
+        713
+      ],
+      "asph-ring": [
+        31,
+        31,
+        1192,
+        1192
+      ],
+      "asph-hub": [
+        72,
+        72,
+        1110,
+        1110
+      ],
+      "planet": [
+        13,
+        21,
+        1222,
+        1210
+      ],
+      "marine": [
+        68,
+        45,
+        119,
+        197
+      ],
+      "commando": [
+        76,
+        63,
+        103,
+        179
+      ],
+      "crew-vega": [
+        92,
+        21,
+        71,
+        221
+      ],
+      "crew-sanaa": [
+        70,
+        15,
+        115,
+        227
+      ],
+      "crew-cal": [
+        83,
+        30,
+        89,
+        212
+      ],
+      "crew-leila": [
+        79,
+        14,
+        98,
+        228
+      ],
+      "crew-orlov": [
+        86,
+        14,
+        83,
+        228
+      ],
+      "crew-rook": [
+        70,
+        14,
+        116,
+        228
+      ]
+    },
+    "anchors": {
+      "m577-rain-departure": {
+        "ground": [
+          958,
+          720
+        ]
+      },
+      "port-gates-rollcall": {
+        "aperture": [
+          831,
+          399,
+          403,
+          286
+        ],
+        "leftPocket": [
+          640,
+          407,
+          177,
+          272
+        ],
+        "rightPocket": [
+          1293,
+          408,
+          183,
+          274
+        ]
+      },
+      "echo8-locker-epilogue": {
+        "label": [
+          220,
+          565,
+          362,
+          106
+        ]
+      },
+      "cryopod": {
+        "lid": [
+          44,
+          15,
+          136,
+          56
+        ],
+        "hinge": [
+          174,
+          66
+        ]
+      },
+      "crt-bezel": {
+        "screen": [
+          106,
+          110,
+          1270,
+          790
+        ]
+      },
+      "asph-ring": {
+        "pivot": [
+          627,
+          627
+        ]
+      },
+      "asph-hub": {
+        "pivot": [
+          627,
+          627
+        ],
+        "quarantine": [
+          616,
+          616,
+          23,
+          23
+        ]
+      },
+      "marine": {
+        "foot": [
+          128,
+          240
+        ]
+      },
+      "commando": {
+        "foot": [
+          118,
+          240
+        ]
+      },
+      "crew-vega": {
+        "foot": [
+          128,
+          240
+        ]
+      },
+      "crew-sanaa": {
+        "foot": [
+          128,
+          240
+        ]
+      },
+      "crew-cal": {
+        "foot": [
+          128,
+          240
+        ]
+      },
+      "crew-leila": {
+        "foot": [
+          128,
+          240
+        ]
+      },
+      "crew-orlov": {
+        "foot": [
+          128,
+          240
+        ]
+      },
+      "crew-rook": {
+        "foot": [
+          128,
+          240
+        ]
+      }
+    },
+    "convoy": {
+      "m577-side-corrected": {
+        "ground": [
+          874,
+          720.5
+        ],
+        "front": [
+          2133,
+          499
+        ],
+        "rear": [
+          44,
+          475
+        ],
+        "rearMount": [
+          44,
+          326
+        ],
+        "wheels": [
+          [
+            283,
+            718
+          ],
+          [
+            1465,
+            723
+          ]
+        ]
+      },
+      "colonist-trailer": {
+        "ground": [
+          1059,
+          706
+        ],
+        "front": [
+          2120,
+          376
+        ],
+        "rear": [
+          77,
+          370
+        ],
+        "wheels": [
+          [
+            589,
+            706
+          ],
+          [
+            1529,
+            706
+          ]
+        ]
+      },
+      "freight-trailer": {
+        "ground": [
+          1058.5,
+          705
+        ],
+        "front": [
+          2117,
+          376
+        ],
+        "rear": [
+          77,
+          370
+        ],
+        "wheels": [
+          [
+            589,
+            705
+          ],
+          [
+            1528,
+            705
+          ]
+        ]
+      }
+    },
+    "gate": {
+      "sourceSize": [
+        1939,
+        811
+      ],
+      "aperture": [
+        831,
+        399,
+        403,
+        286
+      ],
+      "leftPocket": [
+        640,
+        407,
+        177,
+        272
+      ],
+      "rightPocket": [
+        1293,
+        408,
+        183,
+        274
+      ],
+      "counter": [
+        0.5,
+        0.15
+      ]
+    },
+    "bridgeRoad": [
+      [
+        0,
+        344
+      ],
+      [
+        740,
+        347
+      ],
+      [
+        1238,
+        354
+      ],
+      [
+        1485,
+        376
+      ],
+      [
+        1620,
+        385
+      ],
+      [
+        1745,
+        373
+      ],
+      [
+        1939,
+        333
+      ]
+    ],
+    "trailerPassengers": [
+      [
+        520,
+        460
+      ],
+      [
+        720,
+        460
+      ],
+      [
+        1030,
+        460
+      ],
+      [
+        1480,
+        460
+      ]
+    ],
+    "cryopodLid": {
+      "closed": {
+        "open": 0,
+        "angle": 0,
+        "hinge": [
+          174,
+          66
+        ]
+      },
+      "open": {
+        "open": 1,
+        "angle": 0.72,
+        "hinge": [
+          174,
+          66
+        ]
+      },
+      "reducedMotion": {
+        "open": 1,
+        "angle": 0.72,
+        "hinge": [
+          174,
+          66
+        ]
+      }
+    },
+    "cinematics": {
+      "cin-60": {
+        "sources": [
+          "/assets/act5/v188/m577-rain-departure.png",
+          "/assets/act5/v188/m577-side-corrected.png",
+          "/assets/asphodele/v188/asph-npc-docker.png",
+          "/assets/asphodele/v188/asph-npc-merchant.png",
+          "/assets/asphodele/v188/asph-npc-technician.png"
+        ],
+        "shots": 3,
+        "duration": 30,
+        "portraits": [
+          "/assets/openai/sprites/normalized/npcs/cal-mercer-locomotion-sheet.png"
+        ]
+      },
+      "cin-61": {
+        "sources": [
+          "/assets/act5/v188/port-gates-rollcall.png",
+          "/assets/asphodele/v188/asph-npc-docker.png",
+          "/assets/asphodele/v188/asph-npc-merchant.png",
+          "/assets/asphodele/v188/asph-npc-technician.png",
+          "/assets/asphodele/v188/cinematics/asph-cin-rook-quarters.png"
+        ],
+        "shots": 3,
+        "duration": 45,
+        "portraits": [
+          "/assets/openai/sprites/normalized/npcs/rook-locomotion-sheet.png"
+        ]
+      },
+      "cin-90-relay": {
+        "sources": [
+          "/assets/insertion/v188/starfield-deep.png",
+          "/assets/insertion/v188/planet-limb.png",
+          "/assets/asphodele/v188/cinematics/asph-cin-ring.png",
+          "/assets/asphodele/v188/cinematics/asph-cin-hub.png"
+        ],
+        "shots": 2,
+        "duration": 60,
+        "portraits": []
+      },
+      "cin-90-freight": {
+        "sources": [
+          "/assets/act5/v188/quay-standoff.png",
+          "/assets/openai/equipment/v121-vehicles/weyland-yutani-executive-shuttle-native-v121.png",
+          "/assets/act5/v188/freight-trailer.png",
+          "/assets/openai/sprites/normalized/enemies/weyland-yutani-commando-action-sheet-v56.png",
+          "/assets/asphodele/v188/asph-npc-docker.png",
+          "/assets/asphodele/v188/asph-npc-merchant.png",
+          "/assets/asphodele/v188/asph-npc-technician.png"
+        ],
+        "shots": 2,
+        "duration": 60,
+        "portraits": []
+      },
+      "cin-90-living": {
+        "sources": [
+          "/assets/content/v188/colony/colony-walls.png",
+          "/assets/openai/equipment/v121-vehicles/weyland-yutani-executive-shuttle-native-v121.png",
+          "/assets/asphodele/v188/asph-npc-docker.png",
+          "/assets/asphodele/v188/asph-npc-merchant.png",
+          "/assets/asphodele/v188/asph-npc-technician.png"
+        ],
+        "shots": 2,
+        "duration": 60,
+        "portraits": []
+      },
+      "cin-92": {
+        "sources": [
+          "/assets/act5/v188/port-meridien-epilogue.png",
+          "/assets/insertion/v188/starfield-deep.png",
+          "/assets/asphodele/v188/cinematics/asph-cin-ring.png",
+          "/assets/asphodele/v188/cinematics/asph-cin-hub.png",
+          "/assets/openai/hub/rooms/command-cryo.png",
+          "/assets/openai/hub/props/cryopod.png",
+          "/assets/act5/v188/echo8-locker-epilogue.png"
+        ],
+        "shots": 4,
+        "duration": 49,
+        "portraits": []
+      },
+      "cin-99-credits": {
+        "sources": [
+          "/assets/insertion/v188/starfield-deep.png"
+        ],
+        "shots": 1,
+        "duration": 24,
+        "portraits": []
+      }
+    },
+    "sourceSha256": {
+      "src/act5-slots-v188.js": "348fb81b62690cb14cfdf94dbbadd740761e4e92507b35ebd2a7a01b92b47328",
+      "src/story-cinematics-v188.js": "1b0783003a58b4dca02193b6c9048750b068ac99c3023534479786f6009c6465",
+      "src/app.js": "2db6b8019a1e5fd30d96a43f89f09da34d1246c7127e2e89bd2d3cbab6735968",
+      "src/station-cinematics-v188.js": "b346d65c9cf4a7bb3d155da9b1a72bd6e9439be2facced644b330e654b46bf87",
+      "src/asphodele-hub-slots-v188.js": "95d74e5bfb2e3e9e1fd17f5359408c8daf5a97ce73aa1094df9339fb7bbb5f7e",
+      "sw.js": "3eb76597671f0049ef66dc27955b0cd34a61230ee9b564b4b6537abb95c38a38"
+    }
+  },
+  "fidelity": {
+    "documented": "The M577 was compared to three photographs of the Aliens (1986) production miniature: two wheels per visible flank, central side door, low wedge hull, separate nose and rear roof turrets.",
+    "correction": "The former insertion sprite remains unchanged. The sibling corrected M577 is consumed by Act V; its central door and turrets replace the visibly incorrect layout in that context.",
+    "adaptation": "The 2D side elevation is a reconstruction. Both trailers, Port-Meridien, Cocyte compound, bridge and Echo-8 locker are original project adaptations; their composition is not claimed to appear in the films.",
+    "pixelPerfectReplicaCertified": false,
+    "primaryReferenceLimit": "Propstore documents restoration, replacement production tires and removed roof details. The reference photographs are not shipped in the public build.",
+    "commandoReference": "The reused catalogue commando follows the Alien3 cream/grey enclosed-helmet family reviewed with official NECA reference photography, distinct from the Dark Descent adaptation catalogue."
+  },
+  "priorPublication": {
+    "repository": "darknigthmare/aliens-tantalus-frontier",
+    "branch": "codex/insertion-images-20261116",
+    "expectedRemoteHead": "8fe5d58c33a6ddb9473eb0148019a5f46eaef8bf",
+    "targetRemoteHead": "6b34f3097cbc3fd73d692e7e295f7615cab1a510",
+    "commits": [
+      {
+        "localSha": "e1d5b9a4e8167e0f5193695f2cea9db4508df35b",
+        "remoteSha": "9a7596a1c4a33098eea973cf481b96ef4aaf980e",
+        "treeSha": "61df4d68de480b46ccd06bfb767e0689cb472c5c",
+        "parentSha": "8fe5d58c33a6ddb9473eb0148019a5f46eaef8bf",
+        "messageExact": true,
+        "treeExact": true
+      },
+      {
+        "localSha": "cd44257822a649a7532eec5a70d60f6663640a77",
+        "remoteSha": "1bdfed215f75ffc1baad15612a3d2bdc9c2f95ff",
+        "treeSha": "10c166c120e0b65d49664bcc923324c48ab9682b",
+        "parentSha": "9a7596a1c4a33098eea973cf481b96ef4aaf980e",
+        "messageExact": true,
+        "treeExact": true
+      },
+      {
+        "localSha": "17dff144ba198e272ab68abd817e0b35953269b5",
+        "remoteSha": "6b34f3097cbc3fd73d692e7e295f7615cab1a510",
+        "treeSha": "64ebc042c71ebc3183edb34ee66be52ce6459dfd",
+        "parentSha": "1bdfed215f75ffc1baad15612a3d2bdc9c2f95ff",
+        "messageExact": true,
+        "treeExact": true
+      }
+    ],
+    "verifiedBlobCount": 78,
+    "verifiedBlobBytes": 89856851,
+    "fastForward": true,
+    "workingTreeReadOrModified": false,
+    "method": "Connector git-object writes, verified by public fetch with --no-write-fetch-head; author and committer metadata differ.",
+    "published": true,
+    "refUpdate": {
+      "expectedSha": "8fe5d58c33a6ddb9473eb0148019a5f46eaef8bf",
+      "force": false,
+      "success": true
+    },
+    "gitLsRemote": "6b34f3097cbc3fd73d692e7e295f7615cab1a510\trefs/heads/codex/insertion-images-20261116",
+    "pullRequest": {
+      "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/49",
+      "head": "codex/insertion-images-20261116",
+      "head_sha": "6b34f3097cbc3fd73d692e7e295f7615cab1a510",
+      "state": "open",
+      "base": "claude/nifty-shannon-qpy1hl"
+    },
+    "localBranchModified": false
+  },
+  "qa": {
+    "report": "docs/development/ACT5_ART_QA_20261117.md",
+    "overview": "docs/development/ACT5_ART_OVERVIEW_20261117.png",
+    "receipt": "docs/development/ACT5_ART_RENDER_RECEIPT_20261117.json",
+    "method": "Production Canvas renderer with real PNGs decoded by local path, native Canvas backend and explicit fixtures; browser gameplay journey is a separate unexecuted gate."
+  },
+  "transientPathPolicy": "Generator execution identifiers are omitted from the published document. Raw output and input identities are preserved by SHA-256; full prompts and byte-for-byte checks are retained."
+}

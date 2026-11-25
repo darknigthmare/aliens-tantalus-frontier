@@ -1,0 +1,581 @@
+{
+  "schema": 191,
+  "lot": "XENO-TRIALS-V191-COMBAT-KEYPOSES",
+  "baseCommit": "07f9525c18c9b55cf21ae93fe758209f64ed8ff4",
+  "counts": {
+    "acceptedPngs": 4,
+    "newDrawnPoses": 40,
+    "posesPerIdentity": 10,
+    "pngBytes": 5776840,
+    "imageGenCalls": 4,
+    "rejectedCandidates": 0,
+    "postGenerationBitmapEdits": 0,
+    "newPrimaryFranchiseFrameReferences": 0,
+    "canon1to1Closures": 0
+  },
+  "method": "The four active source plates were visually inspected and supplied to OpenAI image_gen as identity references. Four ten-pose sheets were generated in parallel. Each admitted PNG was copied byte-identically, without local cleanup, resizing, recoloring, compositing or pose synthesis. Python was used only for read-only PNG measurements and metadata; Chromium Canvas rendered diagnostic contact sheets without altering admitted pixels.",
+  "generator": "OpenAI image_gen",
+  "contract": {
+    "layout": "Five columns by two rows; variable transparent-gutter crop boundaries measured from each actual row.",
+    "dimensions": [
+      1983,
+      793
+    ],
+    "alphaBoundsThreshold": 16,
+    "alphaBoundsPredicate": "alpha > 16",
+    "cutEdgeAlphaMax": 1,
+    "supportAlphaMin": 128,
+    "lowAlphaMassUpperExclusive": 0.008,
+    "lowAlphaMassPredicate": "sum(alpha where alpha <= 16) / sum(alpha)",
+    "scale": "One scale derived from neutral referenceHeight per identity; no per-pose stretching.",
+    "feet": "Each supported logical root is at its measured silhouette baseline. Contacts name actual alpha>=128 pixels within4pixels of that baseline.",
+    "scope": "Primary grounded J/K key poses; no special, super, complete gait or airborne attack claim."
+  },
+  "fidelity": {
+    "canonExact": false,
+    "basis": "Exact active project identities and inspected native plates, not primary franchise orthographic or motion references.",
+    "open": [
+      "Complete locomotion, jumps and airborne primary attacks for these four identities remain undrawn.",
+      "Native ram specials and supers retain their own existing behavior and fallback visuals.",
+      "Franchise-exact body measurements, complete movesets and original motion cadence remain unverified.",
+      "Defender retains its qualified quadrupedal user adaptation; Xeno-Brute remains a noncanonical user-project identity."
+    ]
+  },
+  "historicalAssets": "No earlier atlas or source plate was modified.",
+  "images": [
+    {
+      "fighterId": "defender",
+      "profileId": "pose-v95-user-xeno-defender",
+      "sourcePose": {
+        "profileId": "pose-v95-user-xeno-defender",
+        "path": "/assets/openai/sprites/static-enemy-v95/ref-56-xeno-defender.png",
+        "sha256": "729a6d131424591995e8f948f9f0e6059fe0a82397a5c54f28d1269a0b46cb83",
+        "width": 1024,
+        "height": 1536,
+        "facing": 1,
+        "alphaBounds": [
+          193,
+          133,
+          927,
+          1418
+        ],
+        "anatomy": "armored-quadruped",
+        "work": "Alien vs. Predator — Capcom, arcade (1994) · adaptation visuelle utilisateur"
+      },
+      "acceptedTexture": {
+        "path": "/assets/openai/sprites/xeno-trials-v191/defender-combat-sheet.png",
+        "sha256": "dcfe59cdde5c6fcd53f94d1b2e994f7f987d7a32c2127f7d5dd6e0495d0b8584",
+        "width": 1983,
+        "height": 793,
+        "facing": 1,
+        "bytes": 1754277,
+        "format": "PNG/RGBA8",
+        "originalRetention": "Unmodified generated PNG is retained in external production evidence; the published file has the identical SHA-256."
+      },
+      "primaryAction": "forelimb-contact",
+      "review": {
+        "identity": "Cool blue-gray quadrupedal project adaptation; smooth long skull, ridged carapace and very long segmented high-arched tail. No biped redesign or invented physical shield.",
+        "contact": "Low planted forelimb/forebody reach; separate from its native ram special.",
+        "poseLimits": "Only two contact steps are drawn, not complete quadruped gait or airborne locomotion. The active project plate is not certified identical to Capcom Defender anatomy."
+      },
+      "lowAlphaMassFraction": 0.006534856207647896,
+      "referenceHeight": 351,
+      "frames": [
+        {
+          "frameId": "idle",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            187,
+            170
+          ],
+          "silhouettePixels": 36433
+        },
+        {
+          "frameId": "walk-a",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            173
+          ],
+          "silhouettePixels": 37384
+        },
+        {
+          "frameId": "walk-b",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            192
+          ],
+          "silhouettePixels": 36575
+        },
+        {
+          "frameId": "attack-windup",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            181,
+            203
+          ],
+          "silhouettePixels": 36746
+        },
+        {
+          "frameId": "attack-impact",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            144,
+            132
+          ],
+          "silhouettePixels": 39564
+        },
+        {
+          "frameId": "attack-recovery",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            173,
+            177
+          ],
+          "silhouettePixels": 37612
+        },
+        {
+          "frameId": "guard",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            162,
+            178,
+            138
+          ],
+          "silhouettePixels": 36759
+        },
+        {
+          "frameId": "hit-recoil",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            150
+          ],
+          "silhouettePixels": 36114
+        },
+        {
+          "frameId": "ko-fall",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            157,
+            136,
+            160
+          ],
+          "silhouettePixels": 36693
+        },
+        {
+          "frameId": "ko-ground",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            130
+          ],
+          "silhouettePixels": 31102
+        }
+      ],
+      "anchorReview": "Per-frame logical ground projections were annotated from the visible trunk/pelvis, then all forty crops were rendered at one scale per identity over a common baseline. Green markers show actual opaque supports; the red mark is a logical root projection, not a painted contact.",
+      "generationPromptSummary": "One referenced character plate; exactly ten changed full-body drawings in five columns and two rows; facing right; constant skull/body scale; idle, two contact steps, primary contact anticipation/impact/recovery, guard, recoil, falling KO, full sideways prone KO. True transparent background, no floor/shadow/glow/text/projectile, generous gutters, no clipped anatomy. Cool blue-gray quadrupedal project adaptation; smooth long skull, ridged carapace and very long segmented high-arched tail. No biped redesign or invented physical shield. Low planted forelimb/forebody reach; separate from its native ram special."
+    },
+    {
+      "fighterId": "chrysalis",
+      "profileId": "castes-game_avp_capcom_chrysalis",
+      "sourcePose": {
+        "profileId": "castes-game_avp_capcom_chrysalis",
+        "path": "/assets/openai/sprites/static-enemy-v93/game_avp_capcom_chrysalis.png",
+        "sha256": "616aeca6329e615cd42be6324d50de450d22b62d8950c7891acaf56e4a70abb7",
+        "width": 1536,
+        "height": 1024,
+        "facing": 1,
+        "alphaBounds": [
+          56,
+          170,
+          1463,
+          851
+        ],
+        "anatomy": "armored-biped",
+        "work": "Alien vs. Predator — Capcom (1994)"
+      },
+      "acceptedTexture": {
+        "path": "/assets/openai/sprites/xeno-trials-v191/chrysalis-combat-sheet.png",
+        "sha256": "a1b3a1f3129d3d0e719d8bfa72ac2570f30d597496b7caeb2e50993d6b89c488",
+        "width": 1983,
+        "height": 793,
+        "facing": 1,
+        "bytes": 1216581,
+        "format": "PNG/RGBA8",
+        "originalRetention": "Unmodified generated PNG is retained in external production evidence; the published file has the identical SHA-256."
+      },
+      "primaryAction": "foreclaw",
+      "review": {
+        "identity": "Gray-green heavy biped with broad segmented gold cranial/back carapace, gold forearm armor, toes and tail blade. The tail and shell stay whole across all ten crops.",
+        "contact": "Near foreclaw reaches forward under the armored head while support remains planted.",
+        "poseLimits": "A project adaptation of the existing Capcom-inspired plate, not original extracted arcade frames or motion timing."
+      },
+      "lowAlphaMassFraction": 0.004924155835713423,
+      "referenceHeight": 237,
+      "frames": [
+        {
+          "frameId": "idle",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            205
+          ],
+          "silhouettePixels": 31438
+        },
+        {
+          "frameId": "walk-a",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            143,
+            200
+          ],
+          "silhouettePixels": 30701
+        },
+        {
+          "frameId": "walk-b",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            186
+          ],
+          "silhouettePixels": 28879
+        },
+        {
+          "frameId": "attack-windup",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            172
+          ],
+          "silhouettePixels": 30380
+        },
+        {
+          "frameId": "attack-impact",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            136
+          ],
+          "silhouettePixels": 30565
+        },
+        {
+          "frameId": "attack-recovery",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            186,
+            158
+          ],
+          "silhouettePixels": 31599
+        },
+        {
+          "frameId": "guard",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            146,
+            132
+          ],
+          "silhouettePixels": 31037
+        },
+        {
+          "frameId": "hit-recoil",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            155
+          ],
+          "silhouettePixels": 33082
+        },
+        {
+          "frameId": "ko-fall",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            217,
+            160
+          ],
+          "silhouettePixels": 31625
+        },
+        {
+          "frameId": "ko-ground",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            217,
+            129,
+            194
+          ],
+          "silhouettePixels": 25939
+        }
+      ],
+      "anchorReview": "Per-frame logical ground projections were annotated from the visible trunk/pelvis, then all forty crops were rendered at one scale per identity over a common baseline. Green markers show actual opaque supports; the red mark is a logical root projection, not a painted contact.",
+      "generationPromptSummary": "One referenced character plate; exactly ten changed full-body drawings in five columns and two rows; facing right; constant skull/body scale; idle, two contact steps, primary contact anticipation/impact/recovery, guard, recoil, falling KO, full sideways prone KO. True transparent background, no floor/shadow/glow/text/projectile, generous gutters, no clipped anatomy. Gray-green heavy biped with broad segmented gold cranial/back carapace, gold forearm armor, toes and tail blade. The tail and shell stay whole across all ten crops. Near foreclaw reaches forward under the armored head while support remains planted."
+    },
+    {
+      "fighterId": "smasher",
+      "profileId": "castes-game_avp_capcom_smasher",
+      "sourcePose": {
+        "profileId": "castes-game_avp_capcom_smasher",
+        "path": "/assets/openai/sprites/static-enemy-v92/game_avp_capcom_smasher.png",
+        "sha256": "0efaa9b6afe6f817567725d7aae0b57c15093d1f68a8e480bb34ede566c7dee8",
+        "width": 1536,
+        "height": 1024,
+        "facing": 1,
+        "alphaBounds": [
+          137,
+          172,
+          1308,
+          894
+        ],
+        "anatomy": "heavy-biped",
+        "work": "Alien vs. Predator — Capcom (1994)"
+      },
+      "acceptedTexture": {
+        "path": "/assets/openai/sprites/xeno-trials-v191/smasher-combat-sheet.png",
+        "sha256": "96ffec697770ee5fe2c15e0d504693f6ac566003567d936a81145f3d1493c681",
+        "width": 1983,
+        "height": 793,
+        "facing": 1,
+        "bytes": 1064174,
+        "format": "PNG/RGBA8",
+        "originalRetention": "Unmodified generated PNG is retained in external production evidence; the published file has the identical SHA-256."
+      },
+      "primaryAction": "forearm-strike",
+      "review": {
+        "identity": "Olive/gold biped with elongated ridged head and jaw, dorsal tubes and thin segmented tail; distinct from Chrysalis shell and blue Defender.",
+        "contact": "Forearm/foreclaw strike in primary-contact windows, separate from its native ram special.",
+        "poseLimits": "Only the active project palette and pose identity are matched; no claim of exact arcade pixels or frame cadence."
+      },
+      "lowAlphaMassFraction": 0.006145984430431004,
+      "referenceHeight": 261,
+      "frames": [
+        {
+          "frameId": "idle",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            136
+          ],
+          "silhouettePixels": 25679
+        },
+        {
+          "frameId": "walk-a",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            143,
+            233
+          ],
+          "silhouettePixels": 26575
+        },
+        {
+          "frameId": "walk-b",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            184,
+            144
+          ],
+          "silhouettePixels": 26803
+        },
+        {
+          "frameId": "attack-windup",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            220,
+            215
+          ],
+          "silhouettePixels": 28526
+        },
+        {
+          "frameId": "attack-impact",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            198,
+            161
+          ],
+          "silhouettePixels": 27777
+        },
+        {
+          "frameId": "attack-recovery",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            225,
+            240
+          ],
+          "silhouettePixels": 26399
+        },
+        {
+          "frameId": "guard",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            214,
+            224
+          ],
+          "silhouettePixels": 27123
+        },
+        {
+          "frameId": "hit-recoil",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            236
+          ],
+          "silhouettePixels": 28219
+        },
+        {
+          "frameId": "ko-fall",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            255,
+            170
+          ],
+          "silhouettePixels": 26489
+        },
+        {
+          "frameId": "ko-ground",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            177
+          ],
+          "silhouettePixels": 24386
+        }
+      ],
+      "anchorReview": "Per-frame logical ground projections were annotated from the visible trunk/pelvis, then all forty crops were rendered at one scale per identity over a common baseline. Green markers show actual opaque supports; the red mark is a logical root projection, not a painted contact.",
+      "generationPromptSummary": "One referenced character plate; exactly ten changed full-body drawings in five columns and two rows; facing right; constant skull/body scale; idle, two contact steps, primary contact anticipation/impact/recovery, guard, recoil, falling KO, full sideways prone KO. True transparent background, no floor/shadow/glow/text/projectile, generous gutters, no clipped anatomy. Olive/gold biped with elongated ridged head and jaw, dorsal tubes and thin segmented tail; distinct from Chrysalis shell and blue Defender. Forearm/foreclaw strike in primary-contact windows, separate from its native ram special."
+    },
+    {
+      "fighterId": "user-brute",
+      "profileId": "pose-v95-user-xeno-brute",
+      "sourcePose": {
+        "profileId": "pose-v95-user-xeno-brute",
+        "path": "/assets/openai/sprites/static-enemy-v95/xeno-brute.png",
+        "sha256": "c093b0f9bf4ab5b6fa79de9f5787d2552957d1959670c639054c1c01875fca13",
+        "width": 1121,
+        "height": 1403,
+        "facing": -1,
+        "alphaBounds": [
+          99,
+          133,
+          1072,
+          1292
+        ],
+        "anatomy": "horned-biped",
+        "work": "Lot AlienTentalus — adaptation de jeu non canonique"
+      },
+      "acceptedTexture": {
+        "path": "/assets/openai/sprites/xeno-trials-v191/user-brute-combat-sheet.png",
+        "sha256": "b209caa8a98a62d12b5df640f4bcd78654b951bfeb7b9d951727a277e6adeb8a",
+        "width": 1983,
+        "height": 793,
+        "facing": 1,
+        "bytes": 1741808,
+        "format": "PNG/RGBA8",
+        "originalRetention": "Unmodified generated PNG is retained in external production evidence; the published file has the identical SHA-256."
+      },
+      "primaryAction": "foreclaw",
+      "review": {
+        "identity": "Stocky bronze/copper horned biped with black-blue ribbing, huge foreclaws, thick segmented tail and dorsal horns. The native left-facing plate remains unchanged; all new drawings face right.",
+        "contact": "Heavy forward/downward foreclaw contact, not the ram special.",
+        "poseLimits": "The final torso, hip and skull lie sideways. Dorsal horns retain height, giving final alpha height177 versus idle324; full-prone review uses anatomy, not a generic half-height rule. Noncanonical user-project identity."
+      },
+      "lowAlphaMassFraction": 0.004035304922544361,
+      "referenceHeight": 324,
+      "frames": [
+        {
+          "frameId": "idle",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            219,
+            214
+          ],
+          "silhouettePixels": 41080
+        },
+        {
+          "frameId": "walk-a",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            134,
+            129
+          ],
+          "silhouettePixels": 39001
+        },
+        {
+          "frameId": "walk-b",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            185
+          ],
+          "silhouettePixels": 37638
+        },
+        {
+          "frameId": "attack-windup",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            236,
+            226
+          ],
+          "silhouettePixels": 43645
+        },
+        {
+          "frameId": "attack-impact",
+          "cutEdgeAlphaMax": 0,
+          "supportsAlpha": [
+            229,
+            134,
+            148
+          ],
+          "silhouettePixels": 44353
+        },
+        {
+          "frameId": "attack-recovery",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            215,
+            214,
+            238
+          ],
+          "silhouettePixels": 42837
+        },
+        {
+          "frameId": "guard",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            191,
+            128
+          ],
+          "silhouettePixels": 39015
+        },
+        {
+          "frameId": "hit-recoil",
+          "cutEdgeAlphaMax": 0,
+          "supportsAlpha": [
+            160,
+            201,
+            181
+          ],
+          "silhouettePixels": 44651
+        },
+        {
+          "frameId": "ko-fall",
+          "cutEdgeAlphaMax": 1,
+          "supportsAlpha": [
+            138
+          ],
+          "silhouettePixels": 40018
+        },
+        {
+          "frameId": "ko-ground",
+          "cutEdgeAlphaMax": 0,
+          "supportsAlpha": [
+            128,
+            160,
+            207,
+            149
+          ],
+          "silhouettePixels": 41152
+        }
+      ],
+      "anchorReview": "Per-frame logical ground projections were annotated from the visible trunk/pelvis, then all forty crops were rendered at one scale per identity over a common baseline. Green markers show actual opaque supports; the red mark is a logical root projection, not a painted contact.",
+      "generationPromptSummary": "One referenced character plate; exactly ten changed full-body drawings in five columns and two rows; facing right; constant skull/body scale; idle, two contact steps, primary contact anticipation/impact/recovery, guard, recoil, falling KO, full sideways prone KO. True transparent background, no floor/shadow/glow/text/projectile, generous gutters, no clipped anatomy. Stocky bronze/copper horned biped with black-blue ribbing, huge foreclaws, thick segmented tail and dorsal horns. The native left-facing plate remains unchanged; all new drawings face right. Heavy forward/downward foreclaw contact, not the ram special."
+    }
+  ],
+  "visualReview": {
+    "state": "PASSED_CONTACT_COMPOSITION",
+    "method": "Forty actual crop draws from four decoded real PNGs in Chromium154, fixed scale per identity, baseline and opaque-contact overlays.",
+    "artifacts": "Four identity contact sheets and their source measurements are kept in external evidence under reprise-v191/combat.",
+    "observed": [
+      "All forty poses remain complete with no crop-edge silhouette loss.",
+      "Both step contacts and the three attack keys differ visibly; hit recoil and falling KO lower/rotate joints rather than using rigid rotation.",
+      "Final KO poses are sideways and low; Brute dorsal horns remain raised over its prone torso.",
+      "Tail tips, horns, foreclaws and feet remain within their actual PNG crops."
+    ],
+    "limits": "These are diagnostic compositions, not played matches or victories. Native runtime selection and full gameplay require the parent integration and QA."
+  }
+}

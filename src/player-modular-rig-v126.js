@@ -11,6 +11,8 @@ import { getPlayerColonialTorsoWithVariantsV141 } from './player-colonial-art-v1
 import { getPlayerCostumeTorsoV165, getPlayerCostumeArmsV165,
   getPlayerCostumeHelmetV165, PLAYER_COSTUME_LEG_DEFINITIONS_V165 } from './player-costume-parts-v165.js';
 import { PLAYER_HUMAN_PROPORTIONS_V160, PLAYER_MODULAR_SOURCE_ANCHORS_V160 } from './player-human-proportions-v160.js';
+import { HADAL_PLAYER_ART_V188, HADAL_PLAYER_PARTS_V188, HADAL_PLAYER_RENDER_SLOTS_V188,
+  hadalPlayerArtReadyV188 } from './hadal-player-art-v188.js';
 
 const freeze = value => {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
@@ -185,6 +187,24 @@ export function resolvePlayerModularRigV126({bodyRig,appearance,images}={}) {
         ? 'modular-lower-body-unavailable' : null;
   if(reason) return freeze({schema:126,eligible:false,ready:false,reason,fallbackReason:reason,
     requestedSlots:slots,effectiveSlots:null,requiredAssets:[],layers:[],bodyRig});
+  const hadal=bodyRig.hadalPresentationV188,hadalSlots=HADAL_PLAYER_RENDER_SLOTS_V188;
+  const hadalLower=bodyRig.modularLowerLayersV128?.[hadalSlots.legs];
+  if(hadal?.context?.artAdmitted && hadalPlayerArtReadyV188(images)
+    && validLowerLayersV128(hadalLower,hadalSlots.legs)) {
+    const [upper,,helmet]=HADAL_PLAYER_ART_V188;
+    // No native bare head, open gloves, mask or pack is painted beneath the
+    // sealed suit. All three sources pass admission before the first layer.
+    const layers=[...hadalLower,
+      layer('torso','torso',hadalSlots.torso,upper,hadal.family,
+        HADAL_PLAYER_PARTS_V188.torso[hadal.family],hadal.torsoMatrix),
+      layer('helmet','helmet',hadalSlots.helmet,helmet,'closed-pressure-helmet',
+        HADAL_PLAYER_PARTS_V188.helmet,hadal.helmetMatrix)];
+    return freeze({schema:126,eligible:true,ready:true,reason:null,fallbackReason:null,
+      requestedSlots:slots,effectiveSlots:hadalSlots,requiredAssets:HADAL_PLAYER_ART_V188,missingAssets:[],
+      layers,bodyRig,armAsset:upper,armParts:HADAL_PLAYER_PARTS_V188.arms,anatomical,
+      contextualKitV188:'abyss-hadal',visualStatus:'original-tantalus-hadal-parts',
+      sourceSeparation:'nineteen-independent-sealed-parts'});
+  }
   const m=bodyRig.matrix,sourceShoulders=bodyRig.sourceFrame.sourceShoulders;
   const colonialTorso=getPlayerCostumeTorsoV165(slots.torso,bodyRig.facing,anatomical.family)
     || getPlayerColonialTorsoWithVariantsV141(slots.torso,bodyRig.facing,anatomical.family);
@@ -344,7 +364,7 @@ export function drawPlayerModularRigV126(ctx,options={}) {
     const to=kind==='upper'?arm.elbow:kind==='fore'?arm.wrist:arm.hand;
     const width=(kind==='upper'?15:kind==='fore'?11.5:10)*bodyRig.scale;
     const matrix=armMatrix(p,from,to,width,bodyRig.facing);
-    if(matrix)draw(layer(`${side}-${kind}`,'arms',resolved.requestedSlots.arms,resolved.armAsset,`${side}-${type}`,p,matrix));
+    if(matrix)draw(layer(`${side}-${kind}`,'arms',resolved.effectiveSlots?.arms || resolved.requestedSlots.arms,resolved.armAsset,`${side}-${type}`,p,matrix));
   };
   ctx.save();
   const back=resolved.layers.find(l=>l.id==='back');if(back)draw(back);
@@ -366,5 +386,5 @@ export function drawPlayerModularRigV126(ctx,options={}) {
   return {...resolved,drawn:true,fallback:false,reason:null,fallbackReason:null,arms,layers,
     sheetId:`player.echo9-marine.modular-v126.${bodyRig.atlas}`,frame:bodyRig.frame,
     facing:bodyRig.facing,pivot:bodyRig.pivot,unarmed:!hasWeapon,
-    effectiveSlots:{...resolved.requestedSlots},hiddenBakedParts:['head','helmet','torso','arms','back']};
+    effectiveSlots:{...(resolved.effectiveSlots || resolved.requestedSlots)},hiddenBakedParts:['head','helmet','torso','arms','back']};
 }

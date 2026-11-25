@@ -1,0 +1,1910 @@
+{
+  "schema": 191,
+  "lot": "SPECIAL-DRAWN-KEYS-V191",
+  "baseCommit": "07f9525c18c9b55cf21ae93fe758209f64ed8ff4",
+  "state": "ART_AND_MEASURED_ATLAS_ACCEPTED_RUNTIME_QA_SEPARATE",
+  "counts": {
+    "newImages": 4,
+    "drawnSpecialKeys": 40,
+    "posesPerIdentity": 10,
+    "groundedKeys": 37,
+    "freeKeys": 3,
+    "pngBytes": 5841419,
+    "newPrimaryMotionReferenceSets": 0,
+    "canon1to1Closures": 0
+  },
+  "method": "Four parallel OpenAI image_gen reference-image calls create new complete special-attack key sheets. Each call used its exact fan-made project plate and accepted V188 combat sheet after visual inspection. Published PNG bytes are copied without local alpha cleanup, repainting, cropping, resizing or synthesis. Numerical measurements read alpha and metadata only; all crops are runtime Canvas source rectangles. Native runtime tests and browser gameplay receipts are separate evidence.",
+  "generator": {
+    "provider": "OpenAI ImageGen",
+    "generationCalls": 4,
+    "editCallsAfterGeneration": 0,
+    "transparentBackground": true,
+    "publishedBytesMatchGeneratedBytes": true
+  },
+  "phaseFrameIds": [
+    "special-windup-0",
+    "special-windup-1",
+    "special-windup-2",
+    "special-active-0",
+    "special-active-1",
+    "special-active-2",
+    "special-recovery-0",
+    "special-recovery-1",
+    "special-recovery-2",
+    "special-recovery-3"
+  ],
+  "calibration": {
+    "frameId": "special-windup-0",
+    "basis": "neutral-preparation-key",
+    "scale": "One common scale for every key within an atlas, derived from its neutral preparation silhouette. No per-frame enlargement to fill a cell.",
+    "freeAnchor": "Prowler active0..2 use pelvisX and pelvisY plus the neutral pelvis-to-ground distance108px; they contain no support contacts. Native fighter.y supplies world height.",
+    "groundedAnchor": "The logical ground is the alpha16 silhouette bottom, with real alpha128 foot/toe contacts within4px.",
+    "runtimeOwner": "Native engine controls attack acceptance, age, launch, position, height, contact, damage and projectiles. Metadata does not change gameplay."
+  },
+  "nativeContracts": [
+    {
+      "fighterId": "warrior",
+      "style": "tail",
+      "startup": 0.29,
+      "active": 0.12,
+      "recovery": 0.55,
+      "motion": "Grounded tail whip; no new physics or special effects."
+    },
+    {
+      "fighterId": "runner",
+      "style": "pounce",
+      "startup": 0.29,
+      "active": 0.12,
+      "recovery": 0.55,
+      "motion": "Horizontal native rush420px/s only during active; no Y impulse, every drawn key remains grounded."
+    },
+    {
+      "fighterId": "prowler",
+      "style": "leap",
+      "startup": 0.32,
+      "active": 0.44,
+      "recovery": 0.62,
+      "motion": "Existing physical launch at active start with native impulse270 and speed360. Only active keys are free-limbed. If the actor has already landed late in active, renderer must defer rather than invent ground support."
+    },
+    {
+      "fighterId": "spitter",
+      "style": "acid",
+      "startup": 0.29,
+      "active": 0.12,
+      "recovery": 0.55,
+      "motion": "Grounded body anticipation/exhalation/recovery. No projectile, spray, droplet or glow is baked into the sprite; native projectile emission is preserved."
+    }
+  ],
+  "sourceEvidence": {
+    "nativeGameplayModules": [
+      "src/xeno-trials-engine-v96.js",
+      "src/xeno-trials-signatures-v147.js",
+      "src/xeno-trials-castes-v151.js",
+      "src/xeno-trials-combat-contract-v186.js"
+    ],
+    "capabilitySourceAlreadyRecordedByProject": "Cold Iron Studios developer descriptions reproduced by AVP Galaxy in2021, as attributed in xeno-trials-castes-v151.js; only Prowler capability is referenced, with no measured frames or timings claimed.",
+    "primaryVisualEvidence": "Four user-supplied fan-made identity plates and accepted project combat atlases, not primary orthographic franchise motion references."
+  },
+  "alphaReview": {
+    "silhouetteThreshold": 16,
+    "cutEdgeAlphaMax": 1,
+    "supportAlphaMin": 128,
+    "weakAlphaMassLimitExclusive": 0.008,
+    "gutterClaim": "Measured cuts cross pixels of alpha<=1. Faint alpha1 edge dust is retained; completely alpha-zero gutters are not claimed.",
+    "noThresholdRelaxation": true
+  },
+  "images": [
+    {
+      "fighterId": "warrior",
+      "profileId": "castes-film_warrior_aliens_1986",
+      "primaryAction": "tail",
+      "references": [
+        {
+          "path": "assets/user/castes-v87/film_warrior_aliens_1986.png",
+          "sha256": "c791a14045116531425d270c3edd61384b063d82a0bddf4e23195e9397ecb65f",
+          "width": 1536,
+          "height": 1024,
+          "role": "exact project fan-made identity plate",
+          "canonExact": false
+        },
+        {
+          "path": "assets/openai/sprites/xeno-trials-v188/warrior-combat-sheet.png",
+          "sha256": "2ef7903a864d621f42d4720cf61483b7445141519a5752c36e39fb6418148e91",
+          "width": 1983,
+          "height": 793,
+          "role": "unchanged V188 combat-style reference",
+          "canonExact": false
+        }
+      ],
+      "texture": {
+        "path": "assets/openai/sprites/xeno-trials-v191/warrior-special-sheet.png",
+        "sha256": "8a604d14ced932d5386ecc552601c285e135d61b168057f6bb7d748d867a11fd",
+        "width": 1774,
+        "height": 887,
+        "facing": 1,
+        "bytes": 1598400
+      },
+      "generatorOriginal": "Original generated PNG retained in external production evidence; byte-identical to the published texture SHA-256.",
+      "postGenerationPixelEditing": false,
+      "review": {
+        "sourcePlatePreserved": true,
+        "wholeSilhouettes": true,
+        "identityMatchesProjectReferences": true,
+        "singleScaleFromNeutralPreparation": true,
+        "projectileOrEffectsPainted": false,
+        "frames": 10,
+        "freeFrames": [],
+        "gutterMaxAlpha": 1,
+        "weakAlphaMassFraction": 0.006648314195878369,
+        "referenceHeight": 309,
+        "landmarks": "Pelvis locations manually reviewed on the drawn pelvic plates, then registered to the nearest alpha>=128 pixel (maximum allowed adjustment12px). Ground contacts are measured opaque pixels, not inferred transparent floor supports."
+      },
+      "frameMeasurements": [
+        {
+          "id": "special-windup-0",
+          "rect": [
+            0,
+            0,
+            355,
+            443
+          ],
+          "alphaBounds": [
+            34,
+            86,
+            321,
+            395
+          ],
+          "pelvis": [
+            224,
+            264
+          ],
+          "anchor": [
+            224,
+            395
+          ],
+          "supports": [
+            [
+              170,
+              392
+            ],
+            [
+              254,
+              391
+            ],
+            [
+              271,
+              391
+            ],
+            [
+              287,
+              391
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-windup-1",
+          "rect": [
+            355,
+            0,
+            355,
+            443
+          ],
+          "alphaBounds": [
+            43,
+            91,
+            300,
+            394
+          ],
+          "pelvis": [
+            218,
+            268
+          ],
+          "anchor": [
+            218,
+            394
+          ],
+          "supports": [
+            [
+              137,
+              392
+            ],
+            [
+              250,
+              391
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-windup-2",
+          "rect": [
+            710,
+            0,
+            348,
+            443
+          ],
+          "alphaBounds": [
+            13,
+            86,
+            271,
+            395
+          ],
+          "pelvis": [
+            200,
+            258
+          ],
+          "anchor": [
+            200,
+            395
+          ],
+          "supports": [
+            [
+              81,
+              392
+            ],
+            [
+              107,
+              391
+            ],
+            [
+              219,
+              391
+            ],
+            [
+              237,
+              391
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-active-0",
+          "rect": [
+            1058,
+            0,
+            327,
+            443
+          ],
+          "alphaBounds": [
+            6,
+            98,
+            301,
+            394
+          ],
+          "pelvis": [
+            185,
+            273
+          ],
+          "anchor": [
+            185,
+            394
+          ],
+          "supports": [
+            [
+              51,
+              393
+            ],
+            [
+              183,
+              391
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-active-1",
+          "rect": [
+            1385,
+            0,
+            389,
+            443
+          ],
+          "alphaBounds": [
+            10,
+            96,
+            369,
+            395
+          ],
+          "pelvis": [
+            189,
+            277
+          ],
+          "anchor": [
+            189,
+            395
+          ],
+          "supports": [
+            [
+              41,
+              392
+            ],
+            [
+              66,
+              392
+            ],
+            [
+              196,
+              391
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-active-2",
+          "rect": [
+            0,
+            443,
+            395,
+            444
+          ],
+          "alphaBounds": [
+            49,
+            66,
+            393,
+            364
+          ],
+          "pelvis": [
+            165,
+            242
+          ],
+          "anchor": [
+            165,
+            364
+          ],
+          "supports": [
+            [
+              87,
+              362
+            ],
+            [
+              240,
+              361
+            ],
+            [
+              270,
+              360
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-recovery-0",
+          "rect": [
+            395,
+            443,
+            315,
+            444
+          ],
+          "alphaBounds": [
+            31,
+            59,
+            267,
+            365
+          ],
+          "pelvis": [
+            153,
+            230
+          ],
+          "anchor": [
+            153,
+            365
+          ],
+          "supports": [
+            [
+              59,
+              361
+            ],
+            [
+              179,
+              361
+            ],
+            [
+              196,
+              361
+            ],
+            [
+              214,
+              361
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-recovery-1",
+          "rect": [
+            710,
+            443,
+            352,
+            444
+          ],
+          "alphaBounds": [
+            28,
+            58,
+            282,
+            366
+          ],
+          "pelvis": [
+            194,
+            236
+          ],
+          "anchor": [
+            194,
+            366
+          ],
+          "supports": [
+            [
+              122,
+              364
+            ],
+            [
+              242,
+              362
+            ],
+            [
+              260,
+              362
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-recovery-2",
+          "rect": [
+            1062,
+            443,
+            343,
+            444
+          ],
+          "alphaBounds": [
+            7,
+            59,
+            275,
+            365
+          ],
+          "pelvis": [
+            187,
+            233
+          ],
+          "anchor": [
+            187,
+            365
+          ],
+          "supports": [
+            [
+              121,
+              363
+            ],
+            [
+              234,
+              362
+            ],
+            [
+              265,
+              361
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-recovery-3",
+          "rect": [
+            1405,
+            443,
+            369,
+            444
+          ],
+          "alphaBounds": [
+            7,
+            58,
+            289,
+            366
+          ],
+          "pelvis": [
+            194,
+            230
+          ],
+          "anchor": [
+            194,
+            366
+          ],
+          "supports": [
+            [
+              148,
+              363
+            ],
+            [
+              237,
+              362
+            ],
+            [
+              261,
+              362
+            ]
+          ],
+          "supportMode": "grounded"
+        }
+      ]
+    },
+    {
+      "fighterId": "runner",
+      "profileId": "castes-film_runner_alien3_1992",
+      "primaryAction": "pounce",
+      "references": [
+        {
+          "path": "assets/user/castes-v87/film_runner_alien3_1992.png",
+          "sha256": "f117c7ad0e6da9a02d3a4ce315066d75acfd67a909620f560ff6cd8c3d7b64b3",
+          "width": 1536,
+          "height": 1024,
+          "role": "exact project fan-made identity plate",
+          "canonExact": false
+        },
+        {
+          "path": "assets/openai/sprites/xeno-trials-v188/runner-combat-sheet.png",
+          "sha256": "3df7c0df3b7c7d4109d888c46ac1a9f2beffbe89b6fd8cf065e63abdba14ea74",
+          "width": 1983,
+          "height": 793,
+          "role": "unchanged V188 combat-style reference",
+          "canonExact": false
+        }
+      ],
+      "texture": {
+        "path": "assets/openai/sprites/xeno-trials-v191/runner-special-sheet.png",
+        "sha256": "8e10cdcb418f83391d800df3d179d4454bcd80edf5c0f4266a148fd988dc0d3a",
+        "width": 1983,
+        "height": 793,
+        "facing": 1,
+        "bytes": 1079895
+      },
+      "generatorOriginal": "Original generated PNG retained in external production evidence; byte-identical to the published texture SHA-256.",
+      "postGenerationPixelEditing": false,
+      "review": {
+        "sourcePlatePreserved": true,
+        "wholeSilhouettes": true,
+        "identityMatchesProjectReferences": true,
+        "singleScaleFromNeutralPreparation": true,
+        "projectileOrEffectsPainted": false,
+        "frames": 10,
+        "freeFrames": [],
+        "gutterMaxAlpha": 1,
+        "weakAlphaMassFraction": 0.003975991352810879,
+        "referenceHeight": 171,
+        "landmarks": "Pelvis locations manually reviewed on the drawn pelvic plates, then registered to the nearest alpha>=128 pixel (maximum allowed adjustment12px). Ground contacts are measured opaque pixels, not inferred transparent floor supports."
+      },
+      "frameMeasurements": [
+        {
+          "id": "special-windup-0",
+          "rect": [
+            0,
+            0,
+            397,
+            396
+          ],
+          "alphaBounds": [
+            22,
+            145,
+            390,
+            316
+          ],
+          "pelvis": [
+            217,
+            228
+          ],
+          "anchor": [
+            217,
+            316
+          ],
+          "supports": [
+            [
+              122,
+              313
+            ],
+            [
+              288,
+              312
+            ],
+            [
+              302,
+              313
+            ],
+            [
+              360,
+              314
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-windup-1",
+          "rect": [
+            397,
+            0,
+            396,
+            396
+          ],
+          "alphaBounds": [
+            29,
+            162,
+            387,
+            315
+          ],
+          "pelvis": [
+            210,
+            241
+          ],
+          "anchor": [
+            210,
+            315
+          ],
+          "supports": [
+            [
+              116,
+              312
+            ],
+            [
+              211,
+              311
+            ],
+            [
+              272,
+              311
+            ],
+            [
+              370,
+              311
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-windup-2",
+          "rect": [
+            793,
+            0,
+            394,
+            396
+          ],
+          "alphaBounds": [
+            25,
+            174,
+            358,
+            315
+          ],
+          "pelvis": [
+            188,
+            243
+          ],
+          "anchor": [
+            188,
+            315
+          ],
+          "supports": [
+            [
+              87,
+              313
+            ],
+            [
+              104,
+              312
+            ],
+            [
+              193,
+              311
+            ],
+            [
+              235,
+              311
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-active-0",
+          "rect": [
+            1187,
+            0,
+            377,
+            396
+          ],
+          "alphaBounds": [
+            4,
+            165,
+            345,
+            315
+          ],
+          "pelvis": [
+            164,
+            231
+          ],
+          "anchor": [
+            164,
+            315
+          ],
+          "supports": [
+            [
+              74,
+              314
+            ],
+            [
+              90,
+              311
+            ],
+            [
+              178,
+              311
+            ],
+            [
+              195,
+              311
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-active-1",
+          "rect": [
+            1564,
+            0,
+            419,
+            396
+          ],
+          "alphaBounds": [
+            6,
+            168,
+            390,
+            316
+          ],
+          "pelvis": [
+            179,
+            238
+          ],
+          "anchor": [
+            179,
+            316
+          ],
+          "supports": [
+            [
+              60,
+              313
+            ],
+            [
+              78,
+              312
+            ],
+            [
+              179,
+              312
+            ],
+            [
+              193,
+              312
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-active-2",
+          "rect": [
+            0,
+            396,
+            397,
+            397
+          ],
+          "alphaBounds": [
+            31,
+            133,
+            386,
+            302
+          ],
+          "pelvis": [
+            201,
+            216
+          ],
+          "anchor": [
+            201,
+            302
+          ],
+          "supports": [
+            [
+              96,
+              299
+            ],
+            [
+              208,
+              299
+            ],
+            [
+              225,
+              298
+            ],
+            [
+              297,
+              299
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-recovery-0",
+          "rect": [
+            397,
+            396,
+            396,
+            397
+          ],
+          "alphaBounds": [
+            29,
+            144,
+            372,
+            302
+          ],
+          "pelvis": [
+            199,
+            239
+          ],
+          "anchor": [
+            199,
+            302
+          ],
+          "supports": [
+            [
+              105,
+              300
+            ],
+            [
+              199,
+              298
+            ],
+            [
+              284,
+              298
+            ],
+            [
+              351,
+              298
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-recovery-1",
+          "rect": [
+            793,
+            396,
+            384,
+            397
+          ],
+          "alphaBounds": [
+            23,
+            121,
+            345,
+            302
+          ],
+          "pelvis": [
+            209,
+            223
+          ],
+          "anchor": [
+            209,
+            302
+          ],
+          "supports": [
+            [
+              120,
+              300
+            ],
+            [
+              206,
+              298
+            ],
+            [
+              268,
+              299
+            ],
+            [
+              311,
+              299
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-recovery-2",
+          "rect": [
+            1177,
+            396,
+            400,
+            397
+          ],
+          "alphaBounds": [
+            11,
+            148,
+            362,
+            302
+          ],
+          "pelvis": [
+            185,
+            238
+          ],
+          "anchor": [
+            185,
+            302
+          ],
+          "supports": [
+            [
+              97,
+              299
+            ],
+            [
+              199,
+              299
+            ],
+            [
+              260,
+              299
+            ],
+            [
+              335,
+              298
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-recovery-3",
+          "rect": [
+            1577,
+            396,
+            406,
+            397
+          ],
+          "alphaBounds": [
+            3,
+            127,
+            360,
+            302
+          ],
+          "pelvis": [
+            201,
+            211
+          ],
+          "anchor": [
+            201,
+            302
+          ],
+          "supports": [
+            [
+              100,
+              300
+            ],
+            [
+              205,
+              298
+            ],
+            [
+              264,
+              299
+            ],
+            [
+              332,
+              300
+            ]
+          ],
+          "supportMode": "grounded"
+        }
+      ]
+    },
+    {
+      "fighterId": "prowler",
+      "profileId": "castes-game_afe_prowler",
+      "primaryAction": "leap",
+      "references": [
+        {
+          "path": "assets/user/castes-v87/game_afe_prowler.png",
+          "sha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+          "width": 1536,
+          "height": 1024,
+          "role": "exact project fan-made identity plate",
+          "canonExact": false
+        },
+        {
+          "path": "assets/openai/sprites/xeno-trials-v188/prowler-combat-sheet.png",
+          "sha256": "602d78555ace3a5ed55a5ea35165fffa3689dba21fbd345d1956f53fc4b6bf35",
+          "width": 1983,
+          "height": 793,
+          "role": "unchanged V188 combat-style reference",
+          "canonExact": false
+        }
+      ],
+      "texture": {
+        "path": "assets/openai/sprites/xeno-trials-v191/prowler-special-sheet.png",
+        "sha256": "68b21b568fc9e31298955a0f8ec1c2c1e3fa4cdd8a3eff7f40454ea1dac135bc",
+        "width": 1983,
+        "height": 793,
+        "facing": 1,
+        "bytes": 1620176
+      },
+      "generatorOriginal": "Original generated PNG retained in external production evidence; byte-identical to the published texture SHA-256.",
+      "postGenerationPixelEditing": false,
+      "review": {
+        "sourcePlatePreserved": true,
+        "wholeSilhouettes": true,
+        "identityMatchesProjectReferences": true,
+        "singleScaleFromNeutralPreparation": true,
+        "projectileOrEffectsPainted": false,
+        "frames": 10,
+        "freeFrames": [
+          "special-active-0",
+          "special-active-1",
+          "special-active-2"
+        ],
+        "gutterMaxAlpha": 1,
+        "weakAlphaMassFraction": 0.004599111844379395,
+        "referenceHeight": 245,
+        "landmarks": "Pelvis locations manually reviewed on the drawn pelvic plates, then registered to the nearest alpha>=128 pixel (maximum allowed adjustment12px). Ground contacts are measured opaque pixels, not inferred transparent floor supports."
+      },
+      "frameMeasurements": [
+        {
+          "id": "special-windup-0",
+          "rect": [
+            0,
+            0,
+            397,
+            396
+          ],
+          "alphaBounds": [
+            52,
+            116,
+            376,
+            361
+          ],
+          "pelvis": [
+            225,
+            253
+          ],
+          "anchor": [
+            225,
+            361
+          ],
+          "supports": [
+            [
+              85,
+              357
+            ],
+            [
+              101,
+              358
+            ],
+            [
+              258,
+              357
+            ],
+            [
+              274,
+              358
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-windup-1",
+          "rect": [
+            397,
+            0,
+            396,
+            396
+          ],
+          "alphaBounds": [
+            38,
+            146,
+            359,
+            360
+          ],
+          "pelvis": [
+            226,
+            283
+          ],
+          "anchor": [
+            226,
+            360
+          ],
+          "supports": [
+            [
+              231,
+              356
+            ],
+            [
+              246,
+              356
+            ],
+            [
+              262,
+              357
+            ],
+            [
+              277,
+              357
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-windup-2",
+          "rect": [
+            793,
+            0,
+            397,
+            396
+          ],
+          "alphaBounds": [
+            23,
+            154,
+            345,
+            360
+          ],
+          "pelvis": [
+            217,
+            290
+          ],
+          "anchor": [
+            217,
+            360
+          ],
+          "supports": [
+            [
+              141,
+              356
+            ],
+            [
+              256,
+              356
+            ],
+            [
+              272,
+              356
+            ],
+            [
+              288,
+              357
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-active-0",
+          "rect": [
+            1190,
+            0,
+            390,
+            396
+          ],
+          "alphaBounds": [
+            17,
+            92,
+            343,
+            323
+          ],
+          "pelvis": [
+            211,
+            221
+          ],
+          "anchor": [
+            211,
+            329
+          ],
+          "supports": [],
+          "supportMode": "free"
+        },
+        {
+          "id": "special-active-1",
+          "rect": [
+            1580,
+            0,
+            403,
+            396
+          ],
+          "alphaBounds": [
+            12,
+            61,
+            366,
+            276
+          ],
+          "pelvis": [
+            229,
+            188
+          ],
+          "anchor": [
+            229,
+            296
+          ],
+          "supports": [],
+          "supportMode": "free"
+        },
+        {
+          "id": "special-active-2",
+          "rect": [
+            0,
+            396,
+            397,
+            397
+          ],
+          "alphaBounds": [
+            42,
+            66,
+            361,
+            330
+          ],
+          "pelvis": [
+            210,
+            228
+          ],
+          "anchor": [
+            210,
+            336
+          ],
+          "supports": [],
+          "supportMode": "free"
+        },
+        {
+          "id": "special-recovery-0",
+          "rect": [
+            397,
+            396,
+            396,
+            397
+          ],
+          "alphaBounds": [
+            34,
+            106,
+            360,
+            344
+          ],
+          "pelvis": [
+            217,
+            278
+          ],
+          "anchor": [
+            217,
+            344
+          ],
+          "supports": [
+            [
+              74,
+              340
+            ],
+            [
+              91,
+              341
+            ],
+            [
+              106,
+              341
+            ],
+            [
+              282,
+              342
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-recovery-1",
+          "rect": [
+            793,
+            396,
+            397,
+            397
+          ],
+          "alphaBounds": [
+            23,
+            96,
+            349,
+            344
+          ],
+          "pelvis": [
+            207,
+            243
+          ],
+          "anchor": [
+            207,
+            344
+          ],
+          "supports": [
+            [
+              86,
+              342
+            ],
+            [
+              100,
+              341
+            ],
+            [
+              236,
+              340
+            ],
+            [
+              255,
+              342
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-recovery-2",
+          "rect": [
+            1190,
+            396,
+            396,
+            397
+          ],
+          "alphaBounds": [
+            12,
+            101,
+            347,
+            344
+          ],
+          "pelvis": [
+            213,
+            254
+          ],
+          "anchor": [
+            213,
+            344
+          ],
+          "supports": [
+            [
+              62,
+              340
+            ],
+            [
+              80,
+              341
+            ],
+            [
+              238,
+              340
+            ],
+            [
+              254,
+              342
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-recovery-3",
+          "rect": [
+            1586,
+            396,
+            397,
+            397
+          ],
+          "alphaBounds": [
+            13,
+            98,
+            346,
+            344
+          ],
+          "pelvis": [
+            220,
+            252
+          ],
+          "anchor": [
+            220,
+            344
+          ],
+          "supports": [
+            [
+              58,
+              340
+            ],
+            [
+              75,
+              342
+            ],
+            [
+              216,
+              340
+            ],
+            [
+              232,
+              340
+            ]
+          ],
+          "supportMode": "grounded"
+        }
+      ]
+    },
+    {
+      "fighterId": "spitter",
+      "profileId": "castes-game_acm_spitter",
+      "primaryAction": "acid",
+      "references": [
+        {
+          "path": "assets/user/castes-v87/game_acm_spitter.png",
+          "sha256": "c281ad7c020999e2796af1c904be45c028bd8643e45bfc45b93edaf5ba4642c7",
+          "width": 1536,
+          "height": 1024,
+          "role": "exact project fan-made identity plate",
+          "canonExact": false
+        },
+        {
+          "path": "assets/openai/sprites/xeno-trials-v188/spitter-combat-sheet.png",
+          "sha256": "e59450c2680221e2080682bd77c2c83352dd9d72125aa2f6bca27c8277a6f2b5",
+          "width": 1983,
+          "height": 793,
+          "role": "unchanged V188 combat-style reference",
+          "canonExact": false
+        }
+      ],
+      "texture": {
+        "path": "assets/openai/sprites/xeno-trials-v191/spitter-special-sheet.png",
+        "sha256": "0702ca1702cc57c61affe3c7fb39d10068084314e83d5868c58e4cffef280929",
+        "width": 1774,
+        "height": 887,
+        "facing": 1,
+        "bytes": 1542948
+      },
+      "generatorOriginal": "Original generated PNG retained in external production evidence; byte-identical to the published texture SHA-256.",
+      "postGenerationPixelEditing": false,
+      "review": {
+        "sourcePlatePreserved": true,
+        "wholeSilhouettes": true,
+        "identityMatchesProjectReferences": true,
+        "singleScaleFromNeutralPreparation": true,
+        "projectileOrEffectsPainted": false,
+        "frames": 10,
+        "freeFrames": [],
+        "gutterMaxAlpha": 1,
+        "weakAlphaMassFraction": 0.00697550274754788,
+        "referenceHeight": 247,
+        "landmarks": "Pelvis locations manually reviewed on the drawn pelvic plates, then registered to the nearest alpha>=128 pixel (maximum allowed adjustment12px). Ground contacts are measured opaque pixels, not inferred transparent floor supports."
+      },
+      "frameMeasurements": [
+        {
+          "id": "special-windup-0",
+          "rect": [
+            0,
+            0,
+            358,
+            443
+          ],
+          "alphaBounds": [
+            26,
+            132,
+            352,
+            379
+          ],
+          "pelvis": [
+            230,
+            281
+          ],
+          "anchor": [
+            230,
+            379
+          ],
+          "supports": [
+            [
+              135,
+              376
+            ],
+            [
+              155,
+              375
+            ],
+            [
+              175,
+              375
+            ],
+            [
+              273,
+              375
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-windup-1",
+          "rect": [
+            358,
+            0,
+            352,
+            443
+          ],
+          "alphaBounds": [
+            25,
+            128,
+            331,
+            379
+          ],
+          "pelvis": [
+            224,
+            280
+          ],
+          "anchor": [
+            224,
+            379
+          ],
+          "supports": [
+            [
+              134,
+              377
+            ],
+            [
+              154,
+              375
+            ],
+            [
+              269,
+              375
+            ],
+            [
+              281,
+              376
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-windup-2",
+          "rect": [
+            710,
+            0,
+            351,
+            443
+          ],
+          "alphaBounds": [
+            15,
+            123,
+            308,
+            379
+          ],
+          "pelvis": [
+            199,
+            286
+          ],
+          "anchor": [
+            199,
+            379
+          ],
+          "supports": [
+            [
+              128,
+              376
+            ],
+            [
+              148,
+              375
+            ],
+            [
+              171,
+              375
+            ],
+            [
+              267,
+              375
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-active-0",
+          "rect": [
+            1061,
+            0,
+            342,
+            443
+          ],
+          "alphaBounds": [
+            3,
+            132,
+            314,
+            379
+          ],
+          "pelvis": [
+            197,
+            286
+          ],
+          "anchor": [
+            197,
+            379
+          ],
+          "supports": [
+            [
+              121,
+              377
+            ],
+            [
+              141,
+              375
+            ],
+            [
+              164,
+              375
+            ],
+            [
+              257,
+              375
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-active-1",
+          "rect": [
+            1403,
+            0,
+            371,
+            443
+          ],
+          "alphaBounds": [
+            5,
+            147,
+            344,
+            379
+          ],
+          "pelvis": [
+            202,
+            287
+          ],
+          "anchor": [
+            202,
+            379
+          ],
+          "supports": [
+            [
+              118,
+              377
+            ],
+            [
+              137,
+              375
+            ],
+            [
+              159,
+              375
+            ],
+            [
+              257,
+              375
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-active-2",
+          "rect": [
+            0,
+            443,
+            362,
+            444
+          ],
+          "alphaBounds": [
+            28,
+            86,
+            358,
+            319
+          ],
+          "pelvis": [
+            225,
+            236
+          ],
+          "anchor": [
+            225,
+            319
+          ],
+          "supports": [
+            [
+              135,
+              317
+            ],
+            [
+              155,
+              315
+            ],
+            [
+              279,
+              315
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-recovery-0",
+          "rect": [
+            362,
+            443,
+            348,
+            444
+          ],
+          "alphaBounds": [
+            21,
+            74,
+            326,
+            319
+          ],
+          "pelvis": [
+            213,
+            220
+          ],
+          "anchor": [
+            213,
+            319
+          ],
+          "supports": [
+            [
+              125,
+              317
+            ],
+            [
+              147,
+              315
+            ],
+            [
+              170,
+              315
+            ],
+            [
+              269,
+              315
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-recovery-1",
+          "rect": [
+            710,
+            443,
+            352,
+            444
+          ],
+          "alphaBounds": [
+            16,
+            72,
+            317,
+            319
+          ],
+          "pelvis": [
+            220,
+            222
+          ],
+          "anchor": [
+            220,
+            319
+          ],
+          "supports": [
+            [
+              126,
+              316
+            ],
+            [
+              146,
+              316
+            ],
+            [
+              170,
+              315
+            ],
+            [
+              270,
+              315
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-recovery-2",
+          "rect": [
+            1062,
+            443,
+            341,
+            444
+          ],
+          "alphaBounds": [
+            3,
+            72,
+            316,
+            319
+          ],
+          "pelvis": [
+            212,
+            221
+          ],
+          "anchor": [
+            212,
+            319
+          ],
+          "supports": [
+            [
+              119,
+              317
+            ],
+            [
+              139,
+              315
+            ],
+            [
+              162,
+              315
+            ],
+            [
+              258,
+              316
+            ]
+          ],
+          "supportMode": "grounded"
+        },
+        {
+          "id": "special-recovery-3",
+          "rect": [
+            1403,
+            443,
+            371,
+            444
+          ],
+          "alphaBounds": [
+            10,
+            72,
+            334,
+            319
+          ],
+          "pelvis": [
+            217,
+            219
+          ],
+          "anchor": [
+            217,
+            319
+          ],
+          "supports": [
+            [
+              121,
+              316
+            ],
+            [
+              143,
+              315
+            ],
+            [
+              167,
+              315
+            ],
+            [
+              264,
+              315
+            ]
+          ],
+          "supportMode": "grounded"
+        }
+      ]
+    }
+  ],
+  "remaining": [
+    "The ten drawings per identity are selected key poses, not full continuous choreography or motion capture.",
+    "Air attacks, supers, paired captures and other roster identities remain separate work.",
+    "Specials launched in an unsupported physical height or late Prowler phases defer to the prior native renderer.",
+    "No 1:1 franchise anatomy, exact source-game timing or canonical combat balance is certified.",
+    "Production and alpha/contact inspection do not substitute for native gameplay observations or match victories."
+  ],
+  "validation": {
+    "pixelAndMetadataMeasurement": "PASSED",
+    "visualSourceAndSheetInspection": "PASSED",
+    "runtimeAndNativeGameplay": "SEPARATE_PARENT_RELEASE_CHECKS",
+    "nativeCanvasComposition": {
+      "state": "PASSED",
+      "drawCalls": 80,
+      "uniqueKeys": 40,
+      "facings": 2,
+      "decodedPngs": 4,
+      "sourceFilesUnchanged": 7,
+      "javascriptErrors": 0,
+      "sourceEvidence": "External production evidence: special/special-production-native-receipt.json",
+      "visualContact": "External production evidence: special/special-production-native-contact.png",
+      "scope": "Actual Chromium Canvas with the production atlas sampler/layout/draw, declared phase/height fixtures and two contrasting backgrounds. It is not a match, hit, jump, victory or physical-peripheral receipt.",
+      "visualReview": "All40 key poses render without fallback in both facings. Tail whip, grounded rush, free-limbed Prowler active keys and Spitter exhalation are distinct; no baked projectile or opaque backdrop. Ground contacts align within the measured4px tolerance."
+    }
+  },
+  "sourceOnly": true,
+  "productionInstructionsRetention": "Full production instructions remain in external production evidence. This public dossier retains art direction, exact references, image hashes, phase contracts and pixel measurements."
+}

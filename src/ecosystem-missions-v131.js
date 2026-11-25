@@ -4,7 +4,16 @@ import { sweepProjectileAabbV83 } from './projectile-collision-v83.js';
 import { updateEnemySupportStatusesV72 } from './gameplay-support-v72.js';
 import { ECOSYSTEM_OPERATIONS_V131, SAURIA_CASTES_V131, createEcosystemStateV131,
   validateEcosystemStateV131, advancePopulationV131, biosphereIntegrityV131,
-  ecosystemPhaseV131, ecosystemDossierV131 } from './ecosystem-systems-v131.js';
+  ecosystemPhaseV131, ecosystemDossierV131, ecosystemPhaseLabelV188, ecosystemArtworkStatusV188 } from './ecosystem-systems-v131.js';
+import { autoTranslateV185 } from './i18n-auto-v185.js';
+import { preloadQueenMotherArtV188, queenMotherArtReadyV188, isQueenMotherArtOwnerV188,
+  markQueenMotherSalvoV188, advanceQueenMotherSalvoV188, clearQueenMotherSalvoV188,
+  drawQueenMotherArtV188, queenMotherVisualBoundsV188 } from './queen-mother-art-v188.js';
+import { preloadQueenMotherGuardArtV188, queenMotherGuardArtReadyV188, isQueenMotherGuardArtOwnerV188,
+  markQueenMotherGuardContactV188, advanceQueenMotherGuardContactV188, clearQueenMotherGuardPresentationV188,
+  drawQueenMotherGuardArtV188, queenMotherGuardVisualBoundsV188 } from './queen-mother-guard-art-v188.js';
+import { preloadQueenMotherChoirArtV188, queenMotherChoirArtReadyV188, isQueenMotherChoirArtOwnerV188,
+  drawQueenMotherChoirArtV188, queenMotherChoirVisualBoundsV188 } from './queen-mother-choir-art-v188.js';
 
 const clone = value => structuredClone(value);
 const list = value => Array.isArray(value) ? value : [];
@@ -13,11 +22,19 @@ const center = actor => ({ x: actor.x + actor.w / 2, y: actor.y + actor.h });
 const near = (actor, prop, radius = 86) => actor && prop && Math.hypot(center(actor).x - prop.x, center(actor).y - prop.floorY) <= radius;
 const overlap = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
 const own = actor => Boolean(actor?.ecosystemActorV131);
+// V188 spec 011 (bible §14.6, Q15; owner decision of 2026-11-23): the two Red Hive chapters belong to
+// « La Saison des Reines », Arc 3, on TR-0 (`world-65-tr-0`). Additive move: a deployment started on
+// Cocyte keeps its id (`legacyWorldIdsV188`, operation-receipts-v131.js). Pangaea stays where it was.
+const TR0_CHAPTER_OPERATIONS_V188 = Object.freeze(['queen-mother-song', 'hive-world']);
 const campaign = (id, operationId, name, summary, objective) => Object.freeze({ id, specialOperationId: operationId,
-  name, summary, objective, mode: 'STORY', worldId: 'world-05-lethe', year: 2204, canon: 'project-continuity',
+  name, summary, objective, mode: 'STORY', ...(TR0_CHAPTER_OPERATIONS_V188.includes(operationId)
+    ? { worldId: 'world-65-tr-0', legacyWorldIdsV188: Object.freeze(['world-05-lethe']) } : { worldId: 'world-05-lethe' }),
+  year: 2204, canon: 'project-continuity',
   source: 'Tantalus Special Operations', routes: 2, templateId: 'planet-exterior',
-  description: 'Adaptation jouable originale : acteurs biologiques vectoriels provisoires. Les planches dédiées et le scénario complet restent à produire.',
-  artworkStatus: 'original-vector-prototype', canonExact: false, implementationStatus: 'partial' });
+  description: operationId === 'queen-mother-song'
+    ? 'Adaptation jouable originale : Reine-Mère rouge, gardes et trois Chœurs locaux illustrés et animés. Le casting royal complet et les actes étendus restent à produire.'
+    : 'Adaptation jouable originale : acteurs biologiques vectoriels provisoires. Les planches dédiées et le scénario complet restent à produire.',
+  artworkStatus: ecosystemArtworkStatusV188(operationId), canonExact: false, implementationStatus: 'partial' });
 export const ECOSYSTEM_CAMPAIGNS_V131 = Object.freeze([
   campaign('special-queen-mother-v131', 'queen-mother-song', 'LE CHANT DE LA REINE-MÈRE',
     'Trois Chœurs entretiennent une emprise maternelle. La nurserie et les balises déterminent le repli.', 'Rompre les Chœurs, battre la Reine-Mère en quatre phases puis défendre les balises.'),
@@ -79,7 +96,7 @@ export function buildEcosystemMissionV131(options = {}) {
     routeRuntime: { ...base.routeRuntime, source: 'ecosystem-authored-v131', platforms, ladders, hazards: [], biomeZones,
       routeNodes: graph.nodes.map(node => ({ ...node, routeIds: node.y === 355 ? ['upper'] : ['lower'] })), routes: 2, maxTier: 2, verticalSpan: 215 },
     verticalWorldV130: { enabled: false },
-    ecosystemV131: { schema: 131, operationId: selected.specialOperationId, props: clone(props), artworkStatus: 'original-vector-prototype' },
+    ecosystemV131: { schema: 131, operationId: selected.specialOperationId, props: clone(props), artworkStatus: selected.artworkStatus },
     rearEntrancesV130: [{ id: 'eco-rear-a', x: 2070, y: 454, w: 76, h: 116, floorY: 570 },
       { id: 'eco-rear-b', x: 4180, y: 454, w: 76, h: 116, floorY: 570 }],
     destructibleSceneryV130: [{ id: 'eco-observation-glass', x: 1450, y: 464, w: 18, h: 106, hp: 24, material: 'glass', plane: 'gameplay' }] };
@@ -103,11 +120,15 @@ export function withEcosystemMissionsV131(BaseEngine) {
         throw new Error('An ecosystem operation requires its authored and validated mission level.');
       const result = super.start({ ...options, resumeState: undefined, userCasteCampaignV88: false });
       this.configureEcosystemWorldV131();
+      if (this.ecosystemV131.operationId === 'queen-mother-song') {
+        preloadQueenMotherArtV188(this.images);preloadQueenMotherGuardArtV188(this.images);
+        preloadQueenMotherChoirArtV188(this.images);
+      }
       if (options.resumeState) this.lastResumeResult = this.applyResumeState(options.resumeState);
       this.syncEcosystemV131();
       this.ecosystemCheckpointV131 ||= this.captureEcosystemCheckpointV131();
       this.onEvent?.({ type: 'special-operation-started', operationId: this.ecosystemV131.operationId,
-        artworkStatus: 'original-vector-prototype', canonExact: false });
+        artworkStatus: ecosystemArtworkStatusV188(this.ecosystemV131.operationId), canonExact: false });
       return { ...result, ecosystemV131: this.ecosystemSnapshotV131() };
     }
     isEcosystemV131() { return Boolean(this.ecosystemActiveV131 && this.ecosystemV131); }
@@ -228,9 +249,27 @@ export function withEcosystemMissionsV131(BaseEngine) {
       if (state.bossDefeated && near(actor, exit, 115)) return { id: 'extract', text: 'MAINTENIR E 2 S · SAS D’EXTRACTION' };
       return null;
     }
+    // V188 "the prompt is always right": the ecosystem owns its scene; its E
+    // entry is one action of the shared selection, ranked by distance to its prop.
+    ecosystemChoiceV188(actor = this.player) {
+      const choice = this.selectInteractionTargetV188(actor);
+      return choice?.kind === 'ecosystem-v131' ? choice.target : null;
+    }
+    interactionCandidatesV188(actor = this.player) {
+      if (!this.isEcosystemV131()) return super.interactionCandidatesV188(actor);
+      const interaction = this.ecosystemInteractionV131(actor);
+      if (!interaction) return [];
+      const state = this.ecosystemV131, prop = interaction.id === 'supply' ? props.supply : interaction.id === 'focus' ? props.focus
+        : interaction.id.startsWith('nursery-') ? props.nursery[Number(interaction.id.at(-1))]
+          : interaction.id.startsWith('beacon-') ? props.beacons[Number(interaction.id.at(-1))]
+            : interaction.id === 'extract' ? (state.operationId === 'hive-world' ? props.insertion : props.extraction) : null;
+      const point = prop ? { x: prop.x, y: prop.floorY } : center(this.ecosystemActorV131(interaction.id) || actor);
+      return [{ kind: 'ecosystem-v131', category: 'action', target: interaction, prompt: interaction.text,
+        distance: Math.hypot(center(actor).x - point.x, center(actor).y - point.y) }];
+    }
     interact(actor = this.player) {
       if (!this.isEcosystemV131()) return super.interact(actor);
-      const interaction = this.ecosystemInteractionV131(actor);
+      const interaction = this.ecosystemCanActV131(actor) ? this.ecosystemChoiceV188(actor) : null;
       if (!interaction) return false;
       const state = this.ecosystemV131;
       if (interaction.id === 'supply') {
@@ -252,7 +291,7 @@ export function withEcosystemMissionsV131(BaseEngine) {
       if (!this.player?.alive && !(this.coopEnabled && this.coop?.alive)) { this.failMission('L’équipe ne peut plus rejoindre le sas.'); return; }
       if (!Number.isFinite(delta) || delta <= 0) return;
       const dt = Math.min(delta, .1), state = this.ecosystemV131;
-      const active = this.ecosystemCanActV131(this.player), interaction = active && this.keys.has('KeyE') ? this.ecosystemInteractionV131(this.player) : null;
+      const active = this.ecosystemCanActV131(this.player), interaction = active && this.keys.has('KeyE') ? this.ecosystemChoiceV188(this.player) : null;
       if (interaction && ['supply', 'focus'].includes(interaction.id) || interaction?.id.startsWith('beacon-')) this.interact();
       if (interaction && (interaction.id === 'extract' || interaction.id.startsWith('nursery-') || interaction.id.startsWith('eco131-population-'))) {
         if (state.interactionTarget !== interaction.id) { state.interactionTarget = interaction.id; state.interactionProgress = 0; }
@@ -334,6 +373,8 @@ export function withEcosystemMissionsV131(BaseEngine) {
       if (!actor.alive || this.paused || this.mission?.state !== 'active') return;
       const dt = Math.min(delta, .1), state = this.ecosystemV131, descriptor = actor.ecosystemActorV131;
       actor.clock = (actor.clock + dt) % 60; actor.attackClock = Math.max(0, actor.attackClock - dt);
+      advanceQueenMotherSalvoV188(this, actor, dt);
+      advanceQueenMotherGuardContactV188(this, actor, dt);
       actor.hurtClock = Math.max(0, actor.hurtClock - dt);
       const baseSpeed = actor.speed; let speedScale = 1;
       updateEnemySupportStatusesV72(actor, dt, () => { speedScale = baseSpeed > 0 ? actor.speed / baseSpeed : 1; });
@@ -384,13 +425,16 @@ export function withEcosystemMissionsV131(BaseEngine) {
           actor.windup = 0; actor.attackClock = boss ? 2.4 - state.bossPhase * .25 : charge ? 3.1 : 1.65;
           if (ranged) {
             const spreads = boss && state.bossPhase >= 3 ? [-.18, 0, .18] : [0];
+            const firstQueenProjectile = isQueenMotherArtOwnerV188(this, actor) ? this.hostileProjectiles.length : -1;
             for (const angle of spreads) this.ecosystemProjectileV131(actor, target, angle, boss ? 17 + state.bossPhase * 2 : caste.damage);
+            if (firstQueenProjectile >= 0) markQueenMotherSalvoV188(this, actor, firstQueenProjectile);
             if (boss && state.bossPhase === 4) state.pressure = Math.min(99.5, state.pressure + 5);
           } else if (charge || leaper) {
             actor.actionPhase = 2;
             if (leaper) { actor.vy = -360; actor.grounded = false; }
           } else if (distance < 84 && sameFloor && this.ecosystemLineClearV131(actor, target)) {
-            this.damagePlayer(target, caste?.damage || 14, { source: 'ecosystem-contact-v131', attackKind: 'melee', sourceX: actor.x, sourceY: actor.y });
+            const acceptedDamage = this.damagePlayer(target, caste?.damage || 14, { source: 'ecosystem-contact-v131', attackKind: 'melee', sourceX: actor.x, sourceY: actor.y });
+            markQueenMotherGuardContactV188(this, actor, acceptedDamage);
           }
         }
       }
@@ -434,6 +478,8 @@ export function withEcosystemMissionsV131(BaseEngine) {
     defeatEnemy(actor, owner = this.player) {
       if (!this.isEcosystemV131() || !own(actor)) return super.defeatEnemy(actor, owner);
       if (!actor.alive) return;
+      clearQueenMotherSalvoV188(actor);
+      clearQueenMotherGuardPresentationV188(actor);
       actor.health = 0; actor.alive = false; actor.deathClock = 1.2;
       const state = this.ecosystemV131, descriptor = actor.ecosystemActorV131;
       if (descriptor.role === 'target') {
@@ -516,6 +562,8 @@ export function withEcosystemMissionsV131(BaseEngine) {
       if (!checked.valid) return checked;
       const state = checked.state, expected = this.resumeIdentity || {}, identity = raw?.identity || {};
       const boss = raw.enemies?.find(actor => actor.id === 'eco131-boss');
+      // Any position inside the 5200 px arena is legal; the former 5150 cap rejected a marine at the right wall.
+      const maxX = Math.max(5150, Number(this.missionLevelBounds?.width) || 5200);
       const phases = state.operationId === 'queen-mother-song' ? 4 : 3, bossHealth = state.operationId === 'queen-mother-song' ? 600 : 540;
       const authored = list(this.ecosystemAuthoredActorsV131);
       const expectedKeys = ['id', 'role', 'x', 'floorY', 'targetIndex', 'caste'];
@@ -537,7 +585,7 @@ export function withEcosystemMissionsV131(BaseEngine) {
         || !Array.isArray(raw.enemies) || raw.enemies.length !== state.actors.length
         || new Set(raw.enemies.map(actor => actor.id)).size !== state.actors.length
         || raw.enemies.some(actor => !state.actors.some(descriptor => descriptor.id === actor.id)
-          || !Number.isFinite(actor.x) || actor.x < 0 || actor.x > 5150 || !Number.isFinite(actor.y) || actor.y < 0 || actor.y > 570
+          || !Number.isFinite(actor.x) || actor.x < 0 || actor.x > maxX || !Number.isFinite(actor.y) || actor.y < 0 || actor.y > 570
           || !Number.isFinite(actor.health) || actor.health < 0 || actor.health > 600 || typeof actor.alive !== 'boolean'
           || actor.alive !== (actor.health > 0))
         || state.targets.some((done, index) => done !== (raw.enemies.find(actor => actor.id === `eco131-target-${index}`)?.alive === false))
@@ -546,7 +594,7 @@ export function withEcosystemMissionsV131(BaseEngine) {
           || boss.health <= bossHealth * (1 - state.bossPhase / phases) - .001)
         || state.bossDefeated && state.bossPhase !== phases
         || state.population.some(member => ['dead', 'rescued'].includes(member.status) !== (raw.enemies.find(actor => actor.id === member.id)?.alive === false))
-        || !Number.isFinite(raw.player?.x) || raw.player.x < 0 || raw.player.x > 5150 || !Number.isFinite(raw.player.y) || raw.player.y < 0 || raw.player.y > 570)
+        || !Number.isFinite(raw.player?.x) || raw.player.x < 0 || raw.player.x > maxX || !Number.isFinite(raw.player.y) || raw.player.y < 0 || raw.player.y > 570)
         return { valid: false, reason: 'ecosystem-identity-mismatch' };
       return checked;
     }
@@ -560,6 +608,10 @@ export function withEcosystemMissionsV131(BaseEngine) {
       const result = super.applyResumeState(raw);
       if (!result?.applied) { this.ecosystemV131 = previousState; this.enemies = previousEnemies; return result; }
       this.bullets = []; this.hostileProjectiles = [];
+      if (this.ecosystemV131.operationId === 'queen-mother-song') {
+        preloadQueenMotherArtV188(this.images);preloadQueenMotherGuardArtV188(this.images);
+        preloadQueenMotherChoirArtV188(this.images);
+      }
       const checkpoint = raw.specialOperation.ecosystemCheckpointV131;
       if (checkpoint && this.validateEcosystemResumeV131(checkpoint).valid) {
         this.ecosystemCheckpointV131 = clone(checkpoint); delete this.ecosystemCheckpointV131.specialOperation.ecosystemCheckpointV131;
@@ -585,11 +637,30 @@ export function withEcosystemMissionsV131(BaseEngine) {
     }
     phaseLabel() { return this.isEcosystemV131() ? ecosystemDossierV131(this.ecosystemV131).title : super.phaseLabel(); }
     objectiveProgressText() { return this.isEcosystemV131() ? ecosystemDossierV131(this.ecosystemV131).instruction : super.objectiveProgressText(); }
-    getInteractionPrompt() { return this.isEcosystemV131() ? this.ecosystemInteractionV131()?.text || '' : super.getInteractionPrompt(); }
+    getInteractionPrompt() { return this.isEcosystemV131() ? this.selectInteractionTargetV188(this.player)?.prompt || '' : super.getInteractionPrompt(); }
     getSnapshot() { return { ...super.getSnapshot(), ...(this.isEcosystemV131() ? { ecosystemV131: this.ecosystemSnapshotV131() } : {}) }; }
     getGameplayReport() { return { ...super.getGameplayReport(), ...(this.isEcosystemV131() ? { ecosystemV131: this.ecosystemSnapshotV131() } : {}) }; }
     getVisibleEnemyAtlasSheetsV65(enemies = this.getVisibleEnemiesV65()) {
       return super.getVisibleEnemyAtlasSheetsV65(enemies.filter(actor => !own(actor)));
+    }
+    getVisibleEnemiesV65() {
+      const visible = super.getVisibleEnemiesV65();
+      if (!this.isEcosystemV131() || this.ecosystemV131.operationId !== 'queen-mother-song'
+        || !this.camera) return visible;
+      const queenReady = queenMotherArtReadyV188(this.images), guardReady = queenMotherGuardArtReadyV188(this.images),
+        choirReady = queenMotherChoirArtReadyV188(this.images);
+      if (!queenReady && !guardReady && !choirReady) return visible;
+      const admitted = new Set(visible);
+      for (const actor of this.enemies) {
+        if (admitted.has(actor) || actor.dormant
+          || (!actor.alive && !(actor.deathClock > 0))) continue;
+        const bounds = queenReady && isQueenMotherArtOwnerV188(this, actor) ? queenMotherVisualBoundsV188(actor)
+          : guardReady && isQueenMotherGuardArtOwnerV188(this, actor) ? queenMotherGuardVisualBoundsV188(actor)
+          : choirReady && isQueenMotherChoirArtOwnerV188(this, actor) ? queenMotherChoirVisualBoundsV188(actor) : null;
+        if (bounds && bounds.x + bounds.w >= this.camera.x - 64 && bounds.x <= this.camera.x + 1280 + 64
+          && bounds.y + bounds.h >= this.camera.y - 64 && bounds.y <= this.camera.y + 720 + 64) admitted.add(actor);
+      }
+      return this.enemies.filter(actor => admitted.has(actor));
     }
     drawBackdrop(ctx) {
       if (!this.isEcosystemV131()) return super.drawBackdrop(ctx);
@@ -630,27 +701,45 @@ export function withEcosystemMissionsV131(BaseEngine) {
       const descriptor = actor.ecosystemActorV131, member = this.ecosystemV131.population.find(member => member.id === actor.id);
       const caste = SAURIA_CASTES_V131.find(caste => caste.id === (member?.caste || descriptor.caste));
       const healthy = member?.status === 'healthy', target = descriptor.role === 'target', boss = descriptor.role === 'boss';
-      ctx.save(); ctx.globalAlpha = !actor.alive ? .3 : actor.actionPhase === 1 ? .35 : 1;
-      ctx.translate(actor.x + actor.w / 2, actor.y + actor.h);
-      ctx.scale(actor.facing < 0 ? -1 : 1, 1);
-      const w = actor.w, h = actor.h;
-      ctx.fillStyle = healthy ? '#8da77b' : target ? '#b47791' : boss ? '#787089' : '#3e766e';
-      ctx.strokeStyle = actor.windup > 0 ? '#ffcb68' : healthy ? '#d8dea4' : '#b8c6bf'; ctx.lineWidth = actor.windup > 0 ? 4 : 2;
-      ctx.beginPath(); ctx.ellipse(0, -h * .48, w * .47, h * .39, target ? .18 : -.1, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-      if (!target) {
-        ctx.beginPath(); ctx.moveTo(-w * .35, -h * .6); ctx.lineTo(-w * .88, -h * .2); ctx.lineTo(-w * .35, -h * .4); ctx.fill();
-        ctx.fillRect(w * .25, -h * .8, w * .35, h * .22);
-        ctx.fillRect(-w * .22, -h * .3, w * .12, h * .3); ctx.fillRect(w * .12, -h * .3, w * .12, h * .3);
+      const illustrated = drawQueenMotherArtV188(ctx, this.images, this, actor)
+        || drawQueenMotherGuardArtV188(ctx, this.images, this, actor)
+        || drawQueenMotherChoirArtV188(ctx, this.images, this, actor);
+      if (!illustrated) {
+        ctx.save(); ctx.globalAlpha = !actor.alive ? .3 : actor.actionPhase === 1 ? .35 : 1;
+        ctx.translate(actor.x + actor.w / 2, actor.y + actor.h);
+        ctx.scale(actor.facing < 0 ? -1 : 1, 1);
+        const w = actor.w, h = actor.h;
+        ctx.fillStyle = healthy ? '#8da77b' : target ? '#b47791' : boss ? '#787089' : '#3e766e';
+        ctx.strokeStyle = actor.windup > 0 ? '#ffcb68' : healthy ? '#d8dea4' : '#b8c6bf'; ctx.lineWidth = actor.windup > 0 ? 4 : 2;
+        ctx.beginPath(); ctx.ellipse(0, -h * .48, w * .47, h * .39, target ? .18 : -.1, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        if (!target) {
+          ctx.beginPath(); ctx.moveTo(-w * .35, -h * .6); ctx.lineTo(-w * .88, -h * .2); ctx.lineTo(-w * .35, -h * .4); ctx.fill();
+          ctx.fillRect(w * .25, -h * .8, w * .35, h * .22);
+          ctx.fillRect(-w * .22, -h * .3, w * .12, h * .3); ctx.fillRect(w * .12, -h * .3, w * .12, h * .3);
+        }
+        if (boss || caste?.shape === 'plates' || caste?.shape === 'spikes') {
+          for (let index = 0; index < (boss ? 7 : 4); index++) { const x = -w * .45 + index * w * .13;
+            ctx.beginPath(); ctx.moveTo(x, -h * .78); ctx.lineTo(x + w * .08, -h * .98); ctx.lineTo(x + w * .13, -h * .72); ctx.fill(); ctx.stroke(); }
+        }
+        if (caste?.shape === 'horns') { ctx.beginPath(); ctx.moveTo(w * .4, -h * .82); ctx.lineTo(w * .7, -h * .99); ctx.lineTo(w * .55, -h * .7); ctx.fill(); }
+        if (caste?.shape === 'sail' || caste?.shape === 'wings' || caste?.shape === 'fin') {
+          ctx.beginPath(); ctx.moveTo(-w * .3, -h * .5); ctx.lineTo(0, -h * 1.16); ctx.lineTo(w * .2, -h * .5); ctx.fill(); ctx.stroke();
+        }
+        ctx.restore();
+      } else if (actor.windup > 0) {
+        // Keep each role's native warning above its illustrated body. The
+        // guard and Choir have their own ellipse; the adult keeps its seven
+        // extra points. A residual target windup is not a new Choir attack.
+        ctx.save(); ctx.globalAlpha = !actor.alive ? .3 : actor.actionPhase === 1 ? .35 : 1;
+        ctx.translate(actor.x + actor.w / 2, actor.y + actor.h); ctx.scale(actor.facing < 0 ? -1 : 1, 1);
+        const w = actor.w, h = actor.h;
+        ctx.strokeStyle = '#ffcb68'; ctx.lineWidth = 4;
+        ctx.beginPath(); ctx.ellipse(0, -h * .48, w * .47, h * .39, target ? .18 : -.1, 0, Math.PI * 2); ctx.stroke();
+        if (boss) for (let index = 0; index < 7; index++) { const x = -w * .45 + index * w * .13;
+          ctx.beginPath(); ctx.moveTo(x, -h * .78); ctx.lineTo(x + w * .08, -h * .98); ctx.lineTo(x + w * .13, -h * .72); ctx.stroke(); }
+        ctx.restore();
       }
-      if (boss || caste?.shape === 'plates' || caste?.shape === 'spikes') {
-        for (let index = 0; index < (boss ? 7 : 4); index++) { const x = -w * .45 + index * w * .13;
-          ctx.beginPath(); ctx.moveTo(x, -h * .78); ctx.lineTo(x + w * .08, -h * .98); ctx.lineTo(x + w * .13, -h * .72); ctx.fill(); ctx.stroke(); }
-      }
-      if (caste?.shape === 'horns') { ctx.beginPath(); ctx.moveTo(w * .4, -h * .82); ctx.lineTo(w * .7, -h * .99); ctx.lineTo(w * .55, -h * .7); ctx.fill(); }
-      if (caste?.shape === 'sail' || caste?.shape === 'wings' || caste?.shape === 'fin') {
-        ctx.beginPath(); ctx.moveTo(-w * .3, -h * .5); ctx.lineTo(0, -h * 1.16); ctx.lineTo(w * .2, -h * .5); ctx.fill(); ctx.stroke();
-      }
-      ctx.restore(); ctx.save(); ctx.font = '10px monospace'; ctx.fillStyle = healthy ? '#d8eab5' : '#e0d3d4';
+      ctx.save(); ctx.font = '10px monospace'; ctx.fillStyle = healthy ? '#d8eab5' : '#e0d3d4';
       ctx.fillText(actor.name, actor.x - 10, actor.y - 15);
       if (actor.alive) { ctx.fillStyle = '#1d2225'; ctx.fillRect(actor.x, actor.y - 8, actor.w, 4);
         ctx.fillStyle = healthy ? '#91bd78' : '#b88d9b'; ctx.fillRect(actor.x, actor.y - 8, actor.w * actor.health / actor.maxHealth, 4); }
@@ -660,12 +749,18 @@ export function withEcosystemMissionsV131(BaseEngine) {
       super.drawHud(ctx); if (!this.isEcosystemV131()) return;
       const state = this.ecosystemV131, dossier = ecosystemDossierV131(state);
       ctx.save(); ctx.fillStyle = '#091819ed'; ctx.fillRect(18, 113, 1235, 87); ctx.fillStyle = '#d0dfd4'; ctx.font = '700 13px monospace';
-      ctx.fillText(`${dossier.title} · ${dossier.pressureLabel} ${Math.round(dossier.pressure)}% · ${state.phase.toUpperCase()}`, 30, 134);
+      // V188: each part is translated on its own (the joined line has no catalog
+      // entry) and the phase is named, not drawn as its internal id.
+      const tr = autoTranslateV185;
+      ctx.fillText(`${tr(dossier.title)} · ${tr(dossier.pressureLabel)} ${Math.round(dossier.pressure)}% · ${tr(ecosystemPhaseLabelV188(state.phase))}`, 30, 134);
       ctx.font = '11px monospace'; ctx.fillText(dossier.instruction, 30, 155);
       const extra = state.operationId === 'hive-world' ? `SAS ORBITAL : ${Math.ceil(state.collapseRemaining)} S · L’ALERTE ≥70 FERME L’ARTÈRE BASSE ; ROUTE HAUTE ACCESSIBLE`
         : state.operationId === 'queen-mother-song' ? `NURSERIE ${state.nursery.filter(Boolean).length}/3 · BALISES ${state.beacons.filter(Boolean).length}/2 · DÉFENSE ${Math.floor(state.defenceElapsed)}/22 S`
           : `HÔTES SAUVÉS ${state.rescued}/3 · VACCINS ${state.vaccineCharges} · SEPT CASTES : TRAQUEUR / BÉLIER / CRACHEUR / BOND / FOUISSEUR / NAGEUR / SENTINELLE`;
-      ctx.fillText(extra, 30, 174); ctx.fillStyle = '#a5b8b5'; ctx.fillText('ADAPTATION ORIGINALE · PERSONNAGES VECTORIELS PROVISOIRES · PLANCHES DÉDIÉES À PRODUIRE', 30, 191); ctx.restore();
+      ctx.fillText(extra, 30, 174); ctx.fillStyle = '#a5b8b5';
+      ctx.fillText(state.operationId === 'queen-mother-song'
+        ? 'ADAPTATION ORIGINALE · REINE-MÈRE, GARDES ET CHŒURS ILLUSTRÉS'
+        : 'ADAPTATION ORIGINALE · PERSONNAGES VECTORIELS PROVISOIRES · PLANCHES DÉDIÉES À PRODUIRE', 30, 191); ctx.restore();
     }
   };
 }

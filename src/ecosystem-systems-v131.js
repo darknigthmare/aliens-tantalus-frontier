@@ -1,6 +1,9 @@
-// Original playable adaptations. These prototypes do not certify absent
-// dedicated creature artwork or the complete narrative campaign corpus.
+// Original playable adaptations. The illustrated Queen Mother, guards and local
+// Choirs do not certify the complete royal cast or extended narrative corpus.
 export const ECOSYSTEM_OPERATIONS_V131 = Object.freeze(['queen-mother-song', 'hive-world', 'pangaea-second-extinction']);
+export function ecosystemArtworkStatusV188(operationId) {
+  return operationId === 'queen-mother-song' ? 'queen-mother-local-cast-illustrated' : 'original-vector-prototype';
+}
 export const SAURIA_CASTES_V131 = Object.freeze([
   Object.freeze({ id: 'hunter', label: 'Traqueur', speed: 105, health: 110, damage: 12, shape: 'raptor', action: 'flank' }),
   Object.freeze({ id: 'charger', label: 'Bélier', speed: 58, health: 190, damage: 22, shape: 'horns', action: 'charge' }),
@@ -122,5 +125,15 @@ export function ecosystemDossierV131(state) {
   return { phase: ecosystemPhaseV131(state), title: queen ? 'LE CHANT DE LA REINE-MÈRE' : hive ? 'TR-0 · LA RUCHE-MONDE' : 'PANGAEA · LA SECONDE EXTINCTION',
     instruction, pressureLabel: queen ? 'EMPRISE' : hive ? 'ALERTE PLANÈTE' : 'INTÉGRITÉ BIOSPHÈRE',
     pressure: queen || hive ? state.pressure : state.integrity,
-    artworkStatus: 'original-vector-prototype', canonExact: false, implementationStatus: 'partial' };
+    artworkStatus: ecosystemArtworkStatusV188(state.operationId), canonExact: false, implementationStatus: 'partial' };
+}
+
+// V188: the HUD names the phase, not its internal id (« ORGANS », « NUCLEUS-1 »
+// were drawn as raw ids). French source; the English catalog carries each label.
+const ECOSYSTEM_PHASE_LABELS_V188 = Object.freeze({ choirs: 'CHŒURS', beacons: 'BALISES', extract: 'EXTRACTION',
+  organs: 'ORGANES', collapse: 'EFFONDREMENT', containment: 'CONFINEMENT', rescue: 'SAUVETAGE', colossus: 'COLOSSE', complete: 'TERMINÉ' });
+export function ecosystemPhaseLabelV188(phase) {
+  const staged = /^(mother|nucleus)-(\d+)$/.exec(String(phase));
+  if (staged) return `${staged[1] === 'mother' ? 'REINE-MÈRE' : 'NOYAU'} · PHASE ${staged[2]}`;
+  return ECOSYSTEM_PHASE_LABELS_V188[phase] || 'OPÉRATION';
 }

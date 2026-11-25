@@ -4,9 +4,10 @@ import { validateMissionTopologyV58 } from './topology-coherence-v58.js';
 import { firstProjectileObstacleV83, sweepProjectileAabbV83 } from './projectile-collision-v83.js';
 import { resolveCombatAimV83 } from './combat-aim-v83.js';
 import { cancelTacticalReloadV77 } from './tactical-reload-v77.js';
+import { autoTranslateV185 } from './i18n-auto-v185.js';
 import { MECHA_LOADOUTS_V131, MECHA_SUBSYSTEMS_V131, createMechaSystemsV131, mechaReadyV131, mechaMobilityV131,
   spendMechaActionV131, resolveMechaHitRegionV131, damageMechaSystemsV131, beginMechaCoolingV131,
-  beginMechaRepairV131, advanceMechaSystemsV131, validateMechaSystemsV131, drawMechaPrototypeV131 } from './mecha-systems-v131.js';
+  beginMechaRepairV131, canBeginMechaRepairV131, advanceMechaSystemsV131, validateMechaSystemsV131, drawMechaPrototypeV131 } from './mecha-systems-v131.js';
 
 export const MECHA_CAMPAIGNS_V131 = Object.freeze([
   Object.freeze({ id: 'special-titan-v131', specialOperationId: 'titan-equalizer', name: 'TALOS CONTRE LE TITAN',
@@ -307,32 +308,58 @@ export function withMechaMissionsV131(Base) {
       this.onEvent?.({ type: 'mecha-pilot-exited-v131' }); return true;
     }
 
+    // V188 "the prompt is always right": the mecha mission owns its scene; the
+    // step E performs is one action of the shared selection, and the prompt
+    // shows it (the phase instruction where that instruction names the E step).
+    mechaInteractionV188(actor = this.player) {
+      if (!this.isMechaMissionV131() || actor !== this.player || !actor?.alive || actor.downed) return null;
+      const state = this.mechaMissionV131, text = this.objectiveProgressText();
+      const entry = (step, prompt, target = null) => ({ kind: 'mecha-v131', category: 'action', step, prompt, target,
+        distance: target ? distance(state.mounted ? this.vehicle : actor, target) : 0 });
+      if (state.phase === 'hangar') return entry('hangar', text);
+      if (!state.mounted && this.vehicle && distance(actor, this.vehicle) <= 245) return entry('mount', 'E  ENTRER DANS LE PROTOTYPE', this.vehicle);
+      if (state.phase === 'route') return entry('route', text);
+      const boss = (this.enemies || []).find(enemy => enemy.mechaBossV131 && enemy.alive);
+      if (state.finishReady && boss && state.mounted && distance(this.vehicle, boss) <= 370 && state.systems.energy >= 12
+        && this.mechaLineClearV131(center(this.vehicle), center(boss))) return entry('finish', text);
+      if (state.finishReady) return null;
+      const maintenance = this.mechaPlanV131?.mechaMissionV131?.maintenance;
+      if (!state.maintenanceUsed && maintenance && distance(state.mounted ? this.vehicle : actor, maintenance) <= 170) {
+        return entry('maintenance', 'E  RESTAURER LES RÉSERVES DE MAINTENANCE', maintenance);
+      }
+      if (state.phase === 'extract' && state.mounted && distance(this.vehicle, this.objective) < 210) return entry('extract', text);
+      if (state.mounted && state.phase !== 'extract' && canBeginMechaRepairV131(state.systems)) return entry('repair', 'E  RÉPARER LE PROTOTYPE');
+      return null;
+    }
+    interactionCandidatesV188(actor = this.player) {
+      if (!this.isMechaMissionV131()) return super.interactionCandidatesV188(actor);
+      const entry = this.mechaInteractionV188(actor);
+      return entry ? [entry] : [];
+    }
     interact(actor = this.player) {
       if (!this.isMechaMissionV131()) return super.interact(actor);
       if (!this.canMechaActV131(actor)) return false;
-      const state = this.mechaMissionV131;
-      if (state.phase === 'hangar') {
+      const state = this.mechaMissionV131, choice = this.selectInteractionTargetV188(actor);
+      if (choice?.kind !== 'mecha-v131') return false;
+      if (choice.step === 'hangar') {
         if (!this.mountMechaV131(actor)) return false;
         state.phase = isTitan(this.campaign) ? 'tutorial' : 'route'; this.syncMechaWorldV131(); this.queueMechaCheckpointV131('mounted'); return true;
       }
-      if (!state.mounted && distance(actor, this.vehicle) <= 245) return this.mountMechaV131(actor);
-      if (state.phase === 'route') {
+      if (choice.step === 'mount') return this.mountMechaV131(actor);
+      if (choice.step === 'route') {
         state.phase = 'siege'; this.spawnMechaWaveV131(); this.syncMechaWorldV131(); this.queueMechaCheckpointV131('route-selected'); return true;
       }
-      const boss = this.enemies.find(enemy => enemy.mechaBossV131 && enemy.alive);
-      if (state.finishReady && boss && state.mounted && distance(this.vehicle, boss) <= 370 && state.systems.energy >= 12
-        && this.mechaLineClearV131(center(this.vehicle), center(boss))) {
+      if (choice.step === 'finish') {
+        const boss = this.enemies.find(enemy => enemy.mechaBossV131 && enemy.alive);
         state.systems.energy -= 12; this.defeatEnemy(boss, actor); this.queueMechaCheckpointV131('boss-cleared'); return true;
       }
-      if (state.finishReady) return false;
-      if (!state.maintenanceUsed && distance(state.mounted ? this.vehicle : actor, this.mechaPlanV131.mechaMissionV131.maintenance) <= 170) {
+      if (choice.step === 'maintenance') {
         state.maintenanceUsed = true; state.systems.coolant = 4; state.systems.repairKits = 2; state.systems.corrosion = 0;
         state.systems.energy = 100; state.systems.heat = 0; state.systems.overheated = false;
         this.onEvent?.({ type: 'mecha-maintenance-v131', message: 'Réserves de maintenance restaurées une fois.' }); this.queueMechaCheckpointV131('maintenance'); return true;
       }
-      if (state.phase === 'extract' && state.mounted && distance(this.vehicle, this.objective) < 210) return true;
-      if (state.mounted && state.phase !== 'extract') return beginMechaRepairV131(state.systems);
-      return false;
+      if (choice.step === 'extract') return true;
+      return beginMechaRepairV131(state.systems);
     }
 
     reload(actor = this.player) {
@@ -667,7 +694,7 @@ export function withMechaMissionsV131(Base) {
           else { this.spawnMechaWaveV131(); this.queueMechaCheckpointV131(`siege-${state.wave}`); }
         }
       }
-      if (state.phase === 'extract' && state.mounted && distance(this.vehicle, this.objective) < 210 && this.keys.has('KeyE')) {
+      if (state.phase === 'extract' && state.mounted && distance(this.vehicle, this.objective) < 210 && this.keys.has('KeyE') && this.selectInteractionTargetV188(this.player)?.kind === 'mecha-v131') {
         state.extractionProgress = Math.min(2, state.extractionProgress + delta);
         if (state.extractionProgress >= 2) this.completeMission();
       } else if (state.phase === 'extract') state.extractionProgress = 0;
@@ -854,7 +881,7 @@ export function withMechaMissionsV131(Base) {
       if (state.phase === 'extract') return 'Rejoindre le sas de récupération à droite et maintenir E pendant 2 secondes.';
       return 'F : canon · C : hydraulique · R : refroidissement · E : réparation · V : sortie de secours.';
     }
-    getInteractionPrompt() { return this.isMechaMissionV131() ? this.objectiveProgressText() : super.getInteractionPrompt(); }
+    getInteractionPrompt() { return this.isMechaMissionV131() ? this.selectInteractionTargetV188(this.player)?.prompt || this.objectiveProgressText() : super.getInteractionPrompt(); }
     getSnapshot() {
       const base = super.getSnapshot();
       if (!this.isMechaMissionV131()) return base;
@@ -921,7 +948,10 @@ export function withMechaMissionsV131(Base) {
       ctx.fillText(`${this.campaign.name} · ${phaseTitles[state.phase]} · ${MECHA_LOADOUTS_V131[state.loadoutId].name.toUpperCase()}`, 32, 132);
       ctx.font = '12px monospace'; ctx.fillText(this.objectiveProgressText(), 32, 153);
       ctx.fillStyle = systems.overheated ? '#f4a875' : '#a9cec4';
-      ctx.fillText(`COQUE ${Math.ceil(systems.hull)}/${systems.maxHull} · ÉNERGIE ${Math.floor(systems.energy)} · CHALEUR ${Math.floor(systems.heat)}${systems.overheated ? ' SURCHAUFFE' : ''} · CORROSION ${Math.floor(systems.corrosion)} · GEL ${systems.coolant} · RÉPARATIONS ${systems.repairKits}`, 32, 174);
+      // V188: the overheat marker lives inside the heat value, so the catalog
+      // template always has a non-empty slot (an empty slot left the line French).
+      const heat = `${Math.floor(systems.heat)}${systems.overheated ? ` ${autoTranslateV185('SURCHAUFFE')}` : ''}`;
+      ctx.fillText(`COQUE ${Math.ceil(systems.hull)}/${systems.maxHull} · ÉNERGIE ${Math.floor(systems.energy)} · CHALEUR ${heat} · CORROSION ${Math.floor(systems.corrosion)} · GEL ${systems.coolant} · RÉPARATIONS ${systems.repairKits}`, 32, 174);
       ctx.fillStyle = '#c3c9ac'; ctx.fillText(`COCKPIT ${Math.ceil(systems.systems.cockpit)} · RÉACTEUR ${Math.ceil(systems.systems.reactor)} · HYDRAULIQUE ${Math.ceil(systems.systems.hydraulics)} · BRAS G/D ${Math.ceil(systems.systems.leftArm)}/${Math.ceil(systems.systems.rightArm)} · ART ORIGINAL DE PROTOTYPE`, 32, 195);
       const boss = this.enemies.find(enemy => enemy.mechaBossV131 && enemy.alive);
       if (boss) {

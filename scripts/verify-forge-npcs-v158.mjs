@@ -2,6 +2,10 @@
  * Canvas/Image/RAF and browser event hosts are the declared V136 doubles. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { spawn } from 'node:child_process';
+import { createInterface } from 'node:readline';
+import { fileURLToPath } from 'node:url';
+import { playIntroV188, INTRO_TIMING_V188 } from '../src/intro-sequence-v188.js';
 import { ForgeModel, parseProject, nativeTiles } from '../src/forge-model-v130.js';
 import { FORGE_NPC_LIMITS_V158, FORGE_NPC_PRESETS_V158, forgeNpcActorsV158, drawForgeNpcsV158 } from '../src/forge-npcs-v158.js';
 import { inspectForgeJourneyV141 } from '../src/forge-journey-admission-v141.js';
@@ -65,6 +69,134 @@ const nearestNpc = (engine, kind) => kind === 'ship' ? engine.nearestForgeIntera
   : Boolean(engine.forgeNarrativeNpcV158());
 const nearestDoor = (engine, kind) => kind === 'ship' ? engine.nearestForgeInteractionV141()?.type === 'door'
   : Boolean(engine.forgeLinkedDoorV141());
+
+async function driveNativeForgeEntry(t, { titleStart = true, timeout = null } = {}) {
+  const input = project(), first = runtime(t), e = first.engine, local = storage();
+  walk(e, () => nearestNpc(e, 'mission')); tap(first); assert.equal(e.chooseForgeNarrativeV156('take').ok, true); e.closeForgeNarrativeV156();
+  walk(e, () => nearestDoor(e, 'mission')); tap(first);
+  walk(e, () => nearestNpc(e, 'mission')); tap(first); assert.equal(e.chooseForgeNarrativeV156('deliver').ok, true); e.closeForgeNarrativeV156();
+  const checkpoint = new ForgePlaytestCheckpointStoreV157(local); await checkpoint.save(e);
+  const saved = JSON.stringify(checkpoint.raw()); e.stop();
+  const next = runtime(t), n = next.engine; n.stop();
+  const captures = new Set(), timers = [], calls = [];
+  // Explicit ancestor capture precedes the V136 host's native engine listeners.
+  const target = {
+    addEventListener(type, listener, capture) { assert.equal(type, 'keydown'); assert.equal(capture, true); captures.add(listener); },
+    removeEventListener(type, listener, capture) { assert.equal(type, 'keydown'); assert.equal(capture, true); captures.delete(listener); }
+  };
+  let removed = false, fadeReady, resumed = false;
+  const faded = new Promise(resolve => { fadeReady = resolve; });
+  const overlay = Object.assign(new EventTarget(), { dataset: new Proxy({}, { set(object, key, value) {
+    object[key] = value; if (key === 'phase' && value === 'fade') fadeReady(); return true;
+  } }), remove() { removed = true; } });
+  const intro = playIntroV188({ overlay, target, storage: { getItem: () => '1', setItem() {} },
+    setTimer(fn, ms) { const timer = setTimeout(fn, ms); timers.push(timer); return timer; } });
+  await faded;
+  const python = String.raw`
+import ast,json,sys,time
+from pathlib import Path
+tree=ast.parse(Path(sys.argv[1]).read_text())
+def rpc(method,**data):
+ print(json.dumps({'method':method,**data}),flush=True)
+ response=json.loads(sys.stdin.readline())
+ if response.get('error'):raise TimeoutError(response['error'])
+ return response.get('value')
+class Locator:
+ def __init__(self,selector):self.selector=selector
+ @property
+ def first(self):return self
+ def wait_for(self,**kwargs):return rpc('wait',selector=self.selector,**kwargs)
+ def click(self,**kwargs):return rpc('click',selector=self.selector,**kwargs)
+ def is_visible(self):return rpc('visible',selector=self.selector)
+class Page:
+ def locator(self,selector):return Locator(selector)
+entry=next(node for node in tree.body if isinstance(node,ast.FunctionDef) and node.name=='enter_forge')
+scope={'time':time};exec(compile(ast.Module(body=[entry],type_ignores=[]),sys.argv[1],'exec'),scope)
+try:
+ if sys.argv[2]=='default':scope['enter_forge'](Page())
+ else:scope['enter_forge'](Page(),timeout=int(sys.argv[2]))
+ result={'ok':True}
+except TimeoutError as error:result={'ok':False,'error':str(error)}
+print(json.dumps({'method':'complete','result':result}),flush=True)
+`;
+  const source = fileURLToPath(new URL('./qa-forge-npcs-v158.py', import.meta.url));
+  const child = spawn('python3', ['-B', '-c', python, source, timeout === null ? 'default' : String(timeout)], { stdio: ['pipe', 'pipe', 'pipe'] });
+  let stderr = '', outcome, keyResult; child.stderr.on('data', chunk => { stderr += chunk; });
+  const done = new Promise(resolve => child.on('exit', code => resolve(code))), guard = setTimeout(() => child.kill('SIGKILL'), 10000);
+  try {
+    for await (const line of createInterface({ input: child.stdout })) {
+      const request = JSON.parse(line); let value = null, error;
+      if (request.method === 'complete') { outcome = request; continue; }
+      const call = { ...request, at: performance.now(), running: n.running, removed }; calls.push(call);
+      try {
+        if (request.method !== 'visible') assert.ok((request.timeout ?? 30000) > 0 && (request.timeout ?? 30000) <= (timeout ?? 45000));
+        if (request.method === 'wait' && request.selector === '#intro-v188') {
+          assert.equal(request.state, 'detached'); let timer;
+          try { await Promise.race([intro, new Promise((_, reject) => { timer = setTimeout(() => reject(Error('Intro did not detach within the Forge entry budget.')), request.timeout); })]); }
+          finally { clearTimeout(timer); }
+          assert.equal(removed, true); assert.equal(captures.size, 0); assert.equal(n.running, false);
+        } else if (request.method === 'wait') {
+          assert.ok(['#title-start:visible, #title-forge:visible', '#editor-canvas'].includes(request.selector));
+          assert.equal(request.state, 'visible');
+        } else if (request.method === 'visible') {
+          assert.equal(request.selector, '#title-start'); value = titleStart;
+        } else if (request.method === 'click') {
+          assert.ok(['#title-start', '#title-forge'].includes(request.selector));
+          if (request.selector === '#title-forge') {
+            // Declared immediate editor/resume adapter. The real saved playtest
+            // starts only after the actual Python entry admits its menu click.
+            n.start(next.options); assert.equal((await checkpoint.resume(n, input)).applied, true); resumed = true;
+          }
+        } else throw Error('Unexpected Forge entry operation: ' + request.method);
+      } catch (caught) { error = caught.message; }
+      call.elapsed = performance.now() - call.at;
+      child.stdin.write(JSON.stringify({ value, error }) + '\n');
+    }
+    assert.equal(await done, 0, stderr); assert.ok(outcome);
+    if (outcome.result.ok) {
+      assert.equal(resumed, true); assert.equal(n.forgeSessionV141.currentRoomId, 'b'); assert.equal(nearestNpc(n, 'mission'), true);
+      const history = structuredClone(n.forgeSessionV141.narrativeV156), seconds = n.forgeSessionV141.narrativePlaySecondsV157;
+      const event = new Event('keydown', { cancelable: true });
+      Object.assign(event, { code: 'KeyE', key: 'e', repeat: false, ctrlKey: false, altKey: false, metaKey: false });
+      let stopped = false; event.stopImmediatePropagation = () => { stopped = true; };
+      next.canvas.focus();
+      for (const listener of [...captures]) { listener(event); if (stopped) break; }
+      event.stopImmediatePropagation = Event.prototype.stopImmediatePropagation.bind(event);
+      if (!stopped) next.events.dispatchEvent(event);
+      const up = new Event('keyup'); Object.assign(up, { code: 'KeyE' }); next.events.dispatchEvent(up);
+      keyResult = { stopped, dialog: n.forgeNarrativeOpenV156 || null,
+        finished: Boolean(n.forgeNarrativeOpenV156 && forgeNarrativeViewV156(n.forgeSessionV141, 'b-npc').finished) };
+      assert.deepEqual(n.forgeSessionV141.narrativeV156, history); assert.equal(n.forgeSessionV141.narrativePlaySecondsV157, seconds);
+      assert.deepEqual(n.forgeSessionV141.narrativeInventoryV157, []); assert.deepEqual(n.forgeSessionV141.completedObjectives, ['b-goal']);
+    }
+    assert.equal(JSON.stringify(checkpoint.raw()), saved, 'Entry does not rewrite the native checkpoint.');
+    return { ...outcome, calls, keyResult, resumed };
+  } finally { clearTimeout(guard); child.kill(); await intro; timers.forEach(clearTimeout); n.stop(); }
+}
+
+test('V158 QA Forge entry releases the native intro before one E reopens the saved finished NPC dialogue', async t => {
+  for (const titleStart of [true, false]) {
+    const observed = await driveNativeForgeEntry(t, { titleStart });
+    assert.equal(observed.result.ok, true, JSON.stringify(observed));
+    assert.deepEqual(observed.keyResult, { stopped: false, dialog: 'b-npc', finished: true }, JSON.stringify(observed));
+    const wait = observed.calls[0], clicks = observed.calls.filter(call => call.method === 'click');
+    assert.equal(wait.selector, '#intro-v188'); assert.equal(wait.running, false);
+    assert.equal(clicks.length, titleStart ? 2 : 1); assert.ok(clicks.every(call => call.removed));
+    assert.ok(wait.elapsed >= INTRO_TIMING_V188.fade / 2);
+    for (const call of observed.calls.filter(call => call.method !== 'visible')) {
+      assert.ok(call.timeout > 0 && call.timeout <= 45000);
+      if (call !== wait) assert.ok(call.timeout <= wait.timeout - wait.elapsed + 50, 'All entry operations share the original 45 second budget.');
+    }
+  }
+  t.diagnostic('Actual enter_forge Python, real intro/timers, native authored walk/checkpoint/resume/dialogue. V136 DOM/Image/RAF doubles and a declared immediate editor/resume adapter; one E, no remote-cause claim.');
+});
+
+test('V158 QA Forge entry times out before any click or checkpoint resume when the intro remains attached', async t => {
+  const observed = await driveNativeForgeEntry(t, { timeout: 40 });
+  assert.equal(observed.result.ok, false); assert.match(observed.result.error, /budget/);
+  assert.equal(observed.calls.length, 1); assert.equal(observed.calls[0].selector, '#intro-v188');
+  assert.equal(observed.resumed, false); assert.equal(observed.keyResult, undefined);
+});
 
 test('V158 NPC cells are a strict authored identity with local atlas presets, not a legacy terminal/enemy', () => {
   const input = parseProject(project()), cell = npcCell(input);

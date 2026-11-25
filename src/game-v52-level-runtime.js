@@ -30,9 +30,24 @@ const WORLD_WIDTH = 6200;
 const WORLD_HEIGHT = 1080;
 const LOGICAL_WIDTH = 1280;
 const LOGICAL_HEIGHT = 720;
+// [PROPOSÉ] V188: nodes kept this far past the insertion safe radius (patrol spread ±76 px + body).
+const INSERTION_SAFE_MARGIN_V188 = 100;
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const asList = (value) => Array.isArray(value) ? value : [];
 const entityDistance = (a, b) => Math.hypot((a.x + (a.w || 0) / 2) - (b.x + (b.w || 0) / 2), (a.y + (a.h || 0) / 2) - (b.y + (b.h || 0) / 2));
+// A soft elliptical wisp: one unit radial gradient drawn through a scale, so it has no edge.
+const fogWispGradientsV188 = new WeakMap();
+function drawFogWispV188(ctx, cx, cy, rx, ry) {
+  let gradient = fogWispGradientsV188.get(ctx);
+  if (!gradient && ctx.createRadialGradient) {
+    gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, 1);
+    gradient.addColorStop(0, 'rgba(184,200,191,1)'); gradient.addColorStop(.55, 'rgba(184,200,191,.55)'); gradient.addColorStop(1, 'rgba(184,200,191,0)');
+    fogWispGradientsV188.set(ctx, gradient);
+  }
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(rx, ry);
+  ctx.fillStyle = gradient || 'rgba(184,200,191,.5)'; ctx.fillRect(-1, -1, 2, 2);
+  ctx.restore();
+}
 const imageReady = (image) => Boolean(image?.complete && (image.naturalWidth || image.width) > 0);
 const MISSION_VENT_RUNTIME_SCHEMA_V62 = 62;
 const MISSION_VENT_PLAYER_SPEED_V62 = 620;
@@ -297,6 +312,12 @@ export const MISSION_LEVEL_ZONE_LAYER_FILES_V58 = Object.freeze({
   })
 });
 
+/** V188: templates where an M577 ground vehicle can physically be deployed. */
+export const APC_MISSION_TEMPLATE_IDS_V188 = Object.freeze(['colony-multiroute', 'planet-exterior']);
+export function missionTemplateCarriesApcV188(templateId) {
+  return !templateId || APC_MISSION_TEMPLATE_IDS_V188.includes(templateId);
+}
+
 export function resolveMissionLevelLayerFilesV56(templateId, zoneId) {
   const fallback = MISSION_LEVEL_LAYER_FILES_V52[templateId] || null;
   if (!fallback) return null;
@@ -391,6 +412,7 @@ export function withV52LevelRuntime(BaseEngine) {
       this.onEvent({
         type: 'mission-level-ready',
         templateId: plan.templateId,
+        templateLabel: plan.templateLabel,
         signature: plan.signature,
         routes: plan.graph.routes.length,
         zones: plan.biomeZones.length,
@@ -563,6 +585,15 @@ export function withV52LevelRuntime(BaseEngine) {
         destroyed: false,
         zoneId: node.zoneId
       }));
+      // V188: no ground APC exists inside a ship. The first lower node past x 3000
+      // of the ship template is the command deck: an M577 there offered
+      // "V PILOTER" on the bridge. Ship templates keep the vehicle stowed; a
+      // mode that issues its own machine (cargo P-5000) re-enables it itself.
+      if (this.vehicle?.active && !missionTemplateCarriesApcV188(plan.templateId)) {
+        this.vehicle.active = false; this.vehicle.occupied = false; this.vehicle.driver = null; this.vehicle.passengers = [];
+        this.vehicle.deploymentStatus = 'not-in-template';
+        for (const actor of [this.player, this.coop]) if (actor) actor.inVehicle = false;
+      }
       if (this.vehicle?.active) {
         const vehicleNode = nodes.find((node) => node.x > 3000 && node.y >= 380) || nodes.at(-3);
         if (vehicleNode) {
@@ -612,19 +643,39 @@ export function withV52LevelRuntime(BaseEngine) {
         nodesByZone.get(node.zoneId).push(node);
       }
       let cursor = 0;
+      // V188 safe zone at insertion (owner decision, [PROPOSÉ] radius, see
+      // insertion-safe-zone-v188.js): set by the outer layer for generic and
+      // mode missions only (null for story chapters, Forge playtests and the hub).
+      const safeRadius = Number(this.insertionSafeZoneV188?.radius) || 0, insertion = plan.anchors?.spawn;
+      const graphNodes = asList(plan.graph?.nodes);
+      const fromInsertion = (node) => insertion ? Math.hypot(node.x - insertion.x, node.y - insertion.y) : Infinity;
+      // Node spread (±76 px) and body offsets stay inside the margin.
+      const safeNodeFor = (node) => {
+        if (!safeRadius || !insertion || fromInsertion(node) >= safeRadius + INSERTION_SAFE_MARGIN_V188) return node;
+        const clear = graphNodes.filter((candidate) => candidate.anchor !== 'spawn' && fromInsertion(candidate) >= safeRadius + INSERTION_SAFE_MARGIN_V188);
+        if (!clear.length) return node;
+        // Nearest clear node, the same zone first: the patrol keeps its sector.
+        const by = (list) => list.sort((a, b) => Math.hypot(a.x - node.x, a.y - node.y) - Math.hypot(b.x - node.x, b.y - node.y))[0];
+        return by(clear.filter((candidate) => candidate.zoneId === node.zoneId)) || by(clear);
+      };
       for (const spawn of this.missionLevelSpawns.values()) {
-        const nodes = nodesByZone.get(spawn.zoneId) || [];
+        // Never on the player's insertion node: an awake patrol there attacks during the landing.
+        const nodes = nodesByZone.get(spawn.zoneId) || [], awayFromInsertion = nodes.filter((node) => node.anchor !== 'spawn');
         const zone = zones.get(spawn.zoneId);
         const count = Math.min(spawn.count || spawn.baseCount || 1, activeEnemies.length - cursor);
         for (let index = 0; index < count; index += 1) {
           const enemy = activeEnemies[cursor++];
-          const node = nodes[index % Math.max(1, nodes.length)] || { x: (zone?.x || 600) + 120 + index * 90, y: fallbackGroundY };
+          let node = nodes[index % Math.max(1, nodes.length)] || { x: (zone?.x || 600) + 120 + index * 90, y: fallbackGroundY };
+          if (node.anchor === 'spawn' && awayFromInsertion.length) node = awayFromInsertion[index % awayFromInsertion.length];
+          // Awake patrols only: delayed waves stay where their event wakes them.
+          const safeNode = spawn.active ? safeNodeFor(node) : node;
+          if (safeNode !== node) { enemy.insertionSafeZoneMovedV188 = { from: node.id || null, to: safeNode.id || null }; node = safeNode; }
           enemy.x = clamp(node.x + (index % 3 - 1) * 76, 0, this.missionLevelBounds.width - enemy.w);
           enemy.y = node.y - enemy.h;
           enemy.groundY = node.y;
           enemy.spawnX = enemy.x;
           enemy.levelSpawnId = spawn.id;
-          enemy.levelZoneId = spawn.zoneId;
+          enemy.levelZoneId = node.zoneId || spawn.zoneId;
           enemy.dormant = !spawn.active;
           enemy.alive = spawn.active;
           enemy.deathClock = 0;
@@ -1084,7 +1135,9 @@ export function withV52LevelRuntime(BaseEngine) {
       if (actorKind === 'ally') this.missionVentTelemetryV62.allyPlans += 1;
       if (actorKind === 'enemy') this.missionVentTelemetryV62.enemyPlans += 1;
       const portal = this.vents.find((entry) => entry.portalId === entranceId);
-      if (portal) portal.open = true;
+      // The portal opens for every crawler (AI movement keeps using it); only the
+      // controlled marine's own traversal maps it for the vent objective (V188).
+      if (portal) { portal.open = true; if (actorKind === 'player' && actor === this.player) portal.playerTraversedV188 = true; }
       this.onEvent({
         type: 'mission-vent-enter',
         networkId: network.id,
@@ -1096,6 +1149,10 @@ export function withV52LevelRuntime(BaseEngine) {
       });
       return actor.ventTransit;
     }
+
+    // V188: portals hidden from the legacy V51 vent branch during interact()
+    // still count for the vent objective, so extraction E cannot refuse.
+    objectiveVentsV188() { return this.interactionHiddenVentsV188 || super.objectiveVentsV188?.() || this.vents || []; }
 
     enterMissionVentV62(actor = this.player) {
       const network = this.missionVentNetworkV62;
@@ -1304,9 +1361,23 @@ export function withV52LevelRuntime(BaseEngine) {
       this.missionLevelVisualState.eventFlash = Math.max(0, this.missionLevelVisualState.eventFlash - delta * 1.8);
       this.updateMissionLevelTimers(delta);
       this.refreshMissionLevelZone(false);
+      this.updateExtractionWalkwayCheckpointV188();
       if (this.mission?.objectives?.extract) {
         for (const event of this.missionLevelEvents.values()) if (event.trigger?.type === 'objective-complete') this.triggerMissionLevelEvent(event.id, 'objective-complete');
       }
+    }
+
+    // V188 owner decision (2026-11-15): on planet-exterior a fall into the pit
+    // under the extraction walkway sent the marine back to the insertion. The
+    // beacon platform, just before the walkway, now sets a checkpoint once.
+    updateExtractionWalkwayCheckpointV188() {
+      if (this.missionLevelRuntime?.templateId !== 'planet-exterior' || this.checkpoint?.id === 'extraction-walkway') return false;
+      const actor = this.player, pad = asList(this.platforms).find((entry) => entry.id === 'node-platform-planet-beacon');
+      if (!pad || !actor?.alive || actor.downed || actor.inVehicle || actor.ventTransit || !actor.grounded) return false;
+      const centre = actor.x + actor.w / 2;
+      if (centre < pad.x + 24 || centre > pad.x + pad.w - 24 || Math.abs(actor.y + actor.h - pad.y) > 8) return false;
+      this.setCheckpoint?.('extraction-walkway', actor.x, pad.y - actor.h);
+      return true;
     }
 
     updateEnemy(enemy, delta) {
@@ -1447,6 +1518,12 @@ export function withV52LevelRuntime(BaseEngine) {
       const wasBoss = Boolean(enemy?.isBoss && enemy.alive);
       const result = super.defeatEnemy(enemy, owner);
       if (wasBoss && !enemy.alive) {
+        // V188 full run (2026-11-22): the base « containment » checkpoint uses the legacy world
+        // floor (930). A level has its own surfaces (QZ-17: 868), so a restart there fell under
+        // the floor and was downed again. Keep the checkpoint on the surface the boss stood on.
+        if (this.missionLevelRuntime && this.checkpoint?.id === 'containment' && Number.isFinite(enemy.groundY) && this.player) {
+          this.checkpoint = { ...this.checkpoint, x: Math.max(20, enemy.x + (enemy.w || 0) / 2 - this.player.w / 2), y: Math.max(0, enemy.groundY - this.player.h) };
+        }
         for (const door of this.doors.filter((candidate) => candidate.lockedBy === 'boss' && candidate.levelLocked)) {
           door.levelLocked = false;
           this.missionLevelTelemetry.doorChanges += 1;
@@ -1560,6 +1637,11 @@ export function withV52LevelRuntime(BaseEngine) {
       this.missionLevelVisualState.eventFlash = 1;
       const consequences = [];
       for (const action of asList(event.actions)) consequences.push(this.applyMissionLevelAction(action, event));
+      // A spawn declared with this event as its trigger wakes with it, even when the
+      // event's action list does not repeat it (ship decompression, colony generator).
+      for (const spawn of this.missionLevelSpawns?.values?.() || []) {
+        if (spawn.triggerEventId === eventId && !spawn.active) consequences.push(this.applyMissionLevelAction(`spawn:${spawn.id}`, event));
+      }
       this.onEvent({ type: 'mission-level-event', eventId, source, actions: [...event.actions], consequences });
       return true;
     }
@@ -1586,6 +1668,9 @@ export function withV52LevelRuntime(BaseEngine) {
       }
       if (kind === 'activate' || kind === 'toggle') {
         const hazard = this.hazards.find((candidate) => candidate.id === value);
+        // V188: a mission layer that replaced a template hazard with its own
+        // system (survival pressure) can refuse the level event's change.
+        if (hazard && this.admitMissionLevelHazardChangeV188?.(hazard, kind) === false) return { action, changed: false, refused: true };
         if (hazard) {
           hazard.active = kind === 'toggle' ? !hazard.active : true;
           this.missionLevelTelemetry.hazardChanges += 1;
@@ -1633,6 +1718,29 @@ export function withV52LevelRuntime(BaseEngine) {
       return { action, changed: false, eventId: event.id };
     }
 
+    // V188: the nearest V62 vent entrance within reach, as an action of the
+    // shared selection. It stays first among the actions (it used to pre-empt
+    // them all); a pickup still wins only when strictly nearer.
+    missionVentCandidateV188(actor = this.player) {
+      const network = this.missionVentNetworkV62;
+      if (!network || !actor?.alive || actor.downed || actor.ventTransit || actor.inVehicle) return null;
+      const entrance = [...network.entrances]
+        .sort((left, right) => missionVentDistanceV62(actor, left) - missionVentDistanceV62(actor, right))
+        .find((candidate) => missionVentDistanceV62(actor, candidate) <= 135);
+      if (!entrance) return null;
+      const portal = asList(this.vents).find((entry) => entry.portalId === entrance.id) || null;
+      return { kind: 'mission-vent-v62', category: 'action', target: portal || entrance, entranceId: entrance.id,
+        // Same centre-to-centre rank as the other candidates, on the drawn portal.
+        distance: portal ? this.interactionRankDistanceV188(actor, portal) : missionVentDistanceV62(actor, entrance),
+        prompt: portal?.requiresTool && !this.inventory?.cutter ? 'CHALUMEAU REQUIS' : 'E  OUVRIR / EMPRUNTER LE CONDUIT' };
+    }
+
+    interactionCandidatesV188(actor = this.player) {
+      const list = super.interactionCandidatesV188(actor), vent = this.missionVentCandidateV188(actor);
+      if (vent) list.unshift(vent);
+      return list;
+    }
+
     interact(actor = this.player) {
       if (actor?.ventTransit && this.missionVentNetworkV62
         && actor.ventTransit.networkId === this.missionVentNetworkV62.id) {
@@ -1640,19 +1748,25 @@ export function withV52LevelRuntime(BaseEngine) {
       }
       const anchors = this.missionLevelRuntime?.anchors || {};
       const nearAnchor = Object.entries(anchors).find(([, anchor]) => entityDistance(actor, { x: anchor.x - 20, y: anchor.y - 60, w: 40, h: 60 }) < 150);
-      const ventTransit = this.enterMissionVentV62(actor);
-      if (ventTransit) return true;
+      // V188: the vent entry is one action of the shared E selection (it used to
+      // run before it and took E from a strictly nearer pickup the prompt named).
+      const shared = typeof this.selectInteractionTargetV188 === 'function';
+      if (!shared || this.selectInteractionTargetV188(actor)?.kind === 'mission-vent-v62') {
+        const ventTransit = this.enterMissionVentV62(actor);
+        if (ventTransit) return true;
+      }
       // The inherited V51 interaction treats every entry in this.vents as an
       // instant shortcut. V62 portals are already handled above and must stay
       // out of that legacy branch so nearby relays, doors and terminals remain
       // interactable without reintroducing teleportation.
       const authoredVents = this.vents;
-      if (this.missionVentNetworkV62) this.vents = [];
+      if (this.missionVentNetworkV62) { this.vents = []; this.interactionHiddenVentsV188 = authoredVents; }
       let result;
       try {
         result = super.interact(actor);
       } finally {
         this.vents = authoredVents;
+        this.interactionHiddenVentsV188 = null;
       }
       if (nearAnchor) {
         const [anchorId] = nearAnchor;
@@ -1695,8 +1809,9 @@ export function withV52LevelRuntime(BaseEngine) {
       const actorCenter = this.player.x + this.player.w / 2;
       if (Math.abs(actorCenter - (door.x + door.w / 2)) > 520) return;
       const zones = new Map(asList(this.missionLevelRuntime.biomeZones).map((zone) => [zone.id, zone.label]));
-      const from = zones.get(door.fromZoneId) || door.fromZoneId || '';
-      const to = zones.get(door.toZoneId) || door.toZoneId || '';
+      // Zone ids never reach the plate; the catalog translates labels and "{0} ↔ {1}".
+      const from = zones.get(door.fromZoneId) || 'secteur';
+      const to = zones.get(door.toZoneId) || 'secteur';
       const role = door.visualRole === 'colony-gate' ? 'PORTAIL COLONIAL'
         : door.visualRole === 'security-shutter' ? 'VOLET DE SÉCURITÉ'
           : door.visualRole === 'pressure-airlock' ? 'SAS PRESSURISÉ' : 'CLOISON ÉTANCHE';
@@ -1808,9 +1923,9 @@ export function withV52LevelRuntime(BaseEngine) {
           ctx.fillStyle = zone.visual?.tint || plan.palette?.haze || '#243b36';
           ctx.fillRect(zone.x, 110, zone.w, 820);
           if (zone.visual?.fog) {
+            // V188 (graphics audit item 16): feathered fog wisps, no hard-edged translucent bands on the wall.
             ctx.globalAlpha = zone.visual.fog * 0.18;
-            ctx.fillStyle = '#b8c8bf';
-            for (let x = zone.x; x < zone.x + zone.w; x += 190) ctx.fillRect(x, 300 + (x % 170), 120, 14);
+            for (let x = zone.x; x < zone.x + zone.w; x += 190) drawFogWispV188(ctx, x + 60, 300 + (x % 170) + 7, 72, 11);
           }
         }
         ctx.restore();

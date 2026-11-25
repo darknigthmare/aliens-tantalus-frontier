@@ -1,0 +1,664 @@
+{
+  "schema": "tantalus-asphodele-mission-art-provenance-v1",
+  "date": "2026-11-16",
+  "timeZone": "Europe/Paris",
+  "baseCommit": "3be2a402aa2e8149b4fb3bc557d9ba67a75523d8",
+  "authorization": "Owner requested continued generation of missing images, with fidelity to the Alien franchise.",
+  "scope": "Nine existing asph-msn-* mission dressing slots; 33 hub slots remain without image assets.",
+  "tool": "image_gen.imagegen",
+  "runtimePngCount": 9,
+  "generationOutputCount": 9,
+  "selectedBytes": 20552215,
+  "sourcePolicy": "The nine original generated PNGs are copied byte-for-byte. Canvas samples declared windows and uses uniform scaling inside fixed clipped slots. No source pixels are resized, re-encoded or edited.",
+  "fidelityScope": "The primary images establish the material and construction language of Alien: Isolation. The Asphodele assemblies, labels and slot dimensions are original project adaptations. No pixel-perfect or canonical 1:1 replica certification is claimed.",
+  "primaryVisualReferences": [
+    {
+      "id": "abbott-artstyles",
+      "sourcePage": "https://www.pauldavidabbott.co.uk/alien-isolation",
+      "sourceImageLinkText": "ArtStyles.jpg",
+      "attribution": "Paul Abbott, Lead Environment Artist on Alien: Isolation; published portfolio images.",
+      "sha256": "18c22f4020bae25bdb2846dec468a15780f7da354cc6e8723e2c1773ad2809ba",
+      "bytes": 657391,
+      "visuallyInspected": true,
+      "observedContent": "Published direction boards: engineering, municipal and science construction and material references. A style board is not proof of a particular final prop.",
+      "runtimeRedistribution": false
+    },
+    {
+      "id": "abbott-engineering-corridor",
+      "sourcePage": "https://www.pauldavidabbott.co.uk/alien-isolation",
+      "sourceImageLinkText": "Engineering Corridor.png",
+      "attribution": "Paul Abbott, Lead Environment Artist on Alien: Isolation; published portfolio images.",
+      "sha256": "bd4751a8062e8912a966fb3f2f4a0262a9b85d3aa241b81be1acc7c885f77c8c",
+      "bytes": 1254999,
+      "visuallyInspected": true,
+      "observedContent": "Actual first-person engineering corridor: layered wall panels, practical pipework, cable runs and dark industrial materials.",
+      "runtimeRedistribution": false
+    },
+    {
+      "id": "abbott-habitation-doorway",
+      "sourcePage": "https://www.pauldavidabbott.co.uk/alien-isolation",
+      "sourceImageLinkText": "Habitation_Doorway.jpg",
+      "attribution": "Paul Abbott, Lead Environment Artist on Alien: Isolation; published portfolio images.",
+      "sha256": "11edb63311b1445924a6afbf6b338da034eb45afbc30e90bb2a4726d7467af73",
+      "bytes": 154692,
+      "visuallyInspected": true,
+      "observedContent": "Frontal doorway with stepped geometric seams and trapezoidal recesses, off-white metal and dark padded wall components.",
+      "runtimeRedistribution": false
+    },
+    {
+      "id": "gary_napper_save_terminal_2014",
+      "sourcePage": "https://www.gamedeveloper.com/design/game-design-deep-dive-the-save-system-of-i-alien-isolation-i-",
+      "sourceImageUrl": "https://eu-images.contentstack.com/v3/assets/blt740a130ae3c5d529/blt449c69edaedb799e/670403c89736aa66e1c8b6e0/Alien_20Isolation_20Save_201.webp",
+      "attribution": "Article by Gary Napper, Creative Assembly lead designer, Game Developer 2015-02-11",
+      "sha256": "ed54d3338faa1c3aa2999d9f4c42810a4c8d09d72c4af46ffaf0645a185b5ad7",
+      "bytes": 17156,
+      "visuallyInspected": true,
+      "imageType": "game screenshot",
+      "observedContent": "Save terminal EMERGENCY; black rounded frame, cream label, grey screw-mounted control panel, three vertical amber indicators, tactile buttons, black handset and cord, square green indicator.",
+      "runtimeRedistribution": false
+    },
+    {
+      "id": "gary_napper_save_terminal_2014_02",
+      "sourcePage": "https://www.gamedeveloper.com/design/game-design-deep-dive-the-save-system-of-i-alien-isolation-i-",
+      "sourceImageUrl": "https://eu-images.contentstack.com/v3/assets/blt740a130ae3c5d529/blt6f3ad58187189fec/650e63d9b6a69a6be124bb99/Alien_20Isolation_20Save_202.jpg",
+      "attribution": "Article by Gary Napper, Creative Assembly lead designer, Game Developer 2015-02-11",
+      "sha256": "9b06cae9b3c73a400216cc8c2dd2c418eed1358e90ec9fa3eb71e5f9568e802f",
+      "bytes": 52227,
+      "visuallyInspected": true,
+      "imageType": "game screenshot",
+      "observedContent": "Cargo area with Alien and rigid light-grey stacked crates at right. Historical downloaded filename is misleading: this image does not show a save terminal.",
+      "runtimeRedistribution": false
+    }
+  ],
+  "additionalInspectedReferenceNotPassedToGenerator": [
+    {
+      "id": "gary_napper_alien1979_mother_card_access",
+      "sourcePage": "https://www.gamedeveloper.com/design/game-design-deep-dive-the-save-system-of-i-alien-isolation-i-",
+      "sourceImageUrl": "https://eu-images.contentstack.com/v3/assets/blt740a130ae3c5d529/bltb03a816bff6825f8/650e63d5b6495c56ebb25d71/Alien_20Isolation_20Save_203.jpg",
+      "attribution": "Article by Gary Napper, Creative Assembly lead designer, Game Developer 2015-02-11",
+      "sha256": "f0f991699be152faf05542e3fa74297630ed6a869dfd4fb901f45aadcc6018f0",
+      "bytes": 45218,
+      "visuallyInspected": true,
+      "imageType": "film still",
+      "observedContent": "Alien (1979), Dallas uses a card at Mother access panel; modular rectangular metal components. Article explicitly connects interaction to game save mechanism.",
+      "runtimeRedistribution": false
+    }
+  ],
+  "textualPrimaryContext": {
+    "sourcePage": "https://alienisolation.sega.jp/special_conceptart.html",
+    "scope": "Official SEGA description of functional materials and the 1979 practical-construction constraint; gallery images not used as inputs."
+  },
+  "unavailablePrimaryCloseups": [
+    {
+      "sourcePage": "https://tunde_glover.artstation.com/projects/49VVLY",
+      "scope": "Interaction assets and recorder author attribution; images were not retrieved or visually verified."
+    },
+    {
+      "sourcePage": "https://pogop.artstation.com/projects/Ze1zN",
+      "scope": "Interactive laptop author attribution; image was not retrieved or visually verified."
+    },
+    {
+      "sourcePage": "https://bradwright.artstation.com/projects/4XZPL",
+      "scope": "Alien hive concept attribution; image was not retrieved or visually verified."
+    }
+  ],
+  "nativeOverlayPolicy": "Exact FR/EN sector and feature labels, the three CRT status lines, dial needles and the camera lamp are drawn by the existing game renderer; loaded-image anchors are calibrated to source pixels. Fallbacks retain their original geometric anchors.",
+  "runtimeInvariants": {
+    "pxPerMetre": 51,
+    "horizontalRhythm": 306,
+    "passageClearance": 18,
+    "ceilingY": 110,
+    "hazardBandHeight": 5,
+    "featuresPerEligibleMission": 1,
+    "eligibleCampaigns": 14,
+    "saveSchemaChanged": false,
+    "collisionsChanged": false
+  },
+  "assets": [
+    {
+      "id": "asph-msn-panel",
+      "path": "assets/asphodele/v188/asph-msn-panel.png",
+      "metadata": {
+        "width": 1341,
+        "height": 1173,
+        "mode": "RGBA",
+        "bytes": 2922043,
+        "sha256": "03418f78683662d6d9f740a3ffa7bc6cc80451ce527be2621495565ddef0aba2",
+        "alphaExtrema": [
+          0,
+          255
+        ]
+      },
+      "gameFrame": [
+        128,
+        112
+      ],
+      "sourceWindow": [
+        16,
+        24,
+        1309,
+        1131
+      ],
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "prompt": "Generate ONE production game sprite, a wall-mounted industrial service panel for Aliens: Tantalus Frontier / Asphodèle. Use the supplied actual Alien: Isolation reference photographs for the faithful 1979 Alien / Alien Isolation practical prop design language: off-white aged metal front plates, heavy dark graphite supporting frame, chunky physical catches, rounded rectangular pressed-metal recesses, visible bolts, dark brown / grey / worn beige palette, subdued abrasion. This is an original service-panel assembly in that documented visual language, not a copy of the save terminal: do not include a telephone or text. Front elevation EXACTLY orthographic, screen plane parallel to the entire face, no isometric angle, no visible top or lateral faces, no perspective, no floor, no background or atmospheric setting. One complete closed service panel, broad rectangular silhouette with width:height exactly 128:112 (8:7), four mounting rivets, 2 recessed access plates, a few restrained mechanical vents, a narrow worn ochre-and-black hazard stripe across its bottom edge (about 5/112 of panel height). No screen, no lights, no human, no creature, no logos, no numbers, no letters, no fake labeling. The panel must fill most of the image with only a small fully transparent margin. Real alpha transparency around its contour, no opaque black background, no checkerboard artwork, no ground or cast shadow. High-quality detailed realistic game texture, naturally lit from slightly above left but broad neutral illumination so the whole form reads when downsampled to 128 by112 pixels. Avoid cinematic darkness, teal glow, lens effects, photographic depth of field and cartoon/vector treatment. Preserve a clean horizontal/vertical silhouette and functional late-1970s industrial construction.",
+        "transparentBackground": true,
+        "references": [
+          {
+            "referenceId": "abbott-engineering-corridor",
+            "sha256": "bd4751a8062e8912a966fb3f2f4a0262a9b85d3aa241b81be1acc7c885f77c8c",
+            "passedAsImageInput": true
+          },
+          {
+            "referenceId": "gary_napper_save_terminal_2014",
+            "sha256": "ed54d3338faa1c3aa2999d9f4c42810a4c8d09d72c4af46ffaf0645a185b5ad7",
+            "passedAsImageInput": true
+          }
+        ],
+        "selectedOutputSha256": "03418f78683662d6d9f740a3ffa7bc6cc80451ce527be2621495565ddef0aba2"
+      },
+      "originalSelectedPngBytesPreserved": true,
+      "sourcePixelPostprocessing": false,
+      "observedInvariants": [
+        "One closed service panel; two inset access plates, rivets and a hazard stripe."
+      ]
+    },
+    {
+      "id": "asph-msn-crt",
+      "path": "assets/asphodele/v188/asph-msn-crt.png",
+      "metadata": {
+        "width": 1399,
+        "height": 1124,
+        "mode": "RGBA",
+        "bytes": 2511186,
+        "sha256": "d52455a1ed4ebe25d2f6affbbcfc4ccb4ddf8dcadde7918336d872d9225942e3",
+        "alphaExtrema": [
+          0,
+          255
+        ]
+      },
+      "gameFrame": [
+        51,
+        41
+      ],
+      "sourceWindow": [
+        0,
+        6,
+        1396,
+        1115
+      ],
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "prompt": "Create ONE production-ready isolated sprite for the side-view Canvas game Aliens: Tantalus Frontier, faithfully grounded in the supplied primary Alien (1979) / Alien Isolation reference photos for practical prop materials and construction. Original Asphodèle assembly, not a claim of a canonical object. Strict orthographic front elevation, face parallel to screen, zero perspective, no visible top or side faces. A complete self-contained object with only a small transparent margin; real alpha outside its physical contour, no background/floor/scene, no cast shadow, no checkerboard. Detailed realistic neutral lit game texture, dirty off-white painted metal / graphite steel / brown rubber, restrained scuffs, chunky late-1970s mechanical construction, no neon sci-fi fantasy. Keep edges sharp and the shape readable at small native size. No people or creatures. Never render any words, numerals, logos or invented lettering. The last input image is a native game GEOMETRY GUIDE ONLY: honor its relative positions, but replace its flat placeholders with the referenced physical materials; REMOVE its text, indicator lines and needles, since these are live game overlays. Small wall-mounted CRT STATUS BOX, outer object width:height precisely51:41. Use a thick chamfered beige-and-graphite metal shell with little rounded glass corners. Coordinate layout in the outer object's logical51x41 plane: the dark green-black glass display opening spans x5..46,y5..32 (41wide27high); leave it COMPLETELY BLANK, dark uniform low sheen with only extremely subtle curved CRT glass shading at edges. No green lines, no waveform, no screen writing. At bottom below y34 is a narrow mechanical bezel with two tiny physical pushbuttons or screwheads, not a keyboard. The whole object must be frontal, with rectangular alignment and no stand, cable tail or extra screen; no glow spilling outside. Native game code will add three green status lines atx9,y10/17/24, keep these positions inside unobstructed glass. Center the complete object with very little transparent margin; preserve the51:41ratio of its physical bounding box.",
+        "transparentBackground": true,
+        "references": [
+          {
+            "referenceId": "abbott-artstyles",
+            "sha256": "18c22f4020bae25bdb2846dec468a15780f7da354cc6e8723e2c1773ad2809ba",
+            "passedAsImageInput": true
+          },
+          {
+            "referenceId": "gary_napper_save_terminal_2014",
+            "sha256": "ed54d3338faa1c3aa2999d9f4c42810a4c8d09d72c4af46ffaf0645a185b5ad7",
+            "passedAsImageInput": true
+          },
+          {
+            "kind": "native-primitive-geometry-guide",
+            "slot": "asph-msn-crt",
+            "sourceModule": "src/asphodele-mission-dressing-v188.js",
+            "sourceCommit": "3be2a402aa2e8149b4fb3bc557d9ba67a75523d8",
+            "sha256": "b17b4482ea40d75376046c2724530b6bbbb22dd75144262a92acf2c8edb72c58",
+            "gameFrame": [
+              51,
+              41
+            ],
+            "aggregatePreview": "docs/development/ASPHODELE_MISSION_ART_PRIMITIVE_REFERENCE_20261116.png",
+            "visuallyInspected": true,
+            "passedAsImageInput": true,
+            "franchiseEvidence": false
+          }
+        ],
+        "selectedOutputSha256": "d52455a1ed4ebe25d2f6affbbcfc4ccb4ddf8dcadde7918336d872d9225942e3"
+      },
+      "originalSelectedPngBytesPreserved": true,
+      "sourcePixelPostprocessing": false,
+      "observedInvariants": [
+        "One blank dark-green CRT; three changing status lines belong to the game overlay."
+      ]
+    },
+    {
+      "id": "asph-msn-sign",
+      "path": "assets/asphodele/v188/asph-msn-sign.png",
+      "metadata": {
+        "width": 2172,
+        "height": 724,
+        "mode": "RGBA",
+        "bytes": 1249882,
+        "sha256": "c412e401d623d57b17a3ad6cea320ca6bc0a3862f4dac85fd380f82ac10598ec",
+        "alphaExtrema": [
+          0,
+          255
+        ]
+      },
+      "gameFrame": [
+        153,
+        26
+      ],
+      "sourceWindow": [
+        20,
+        193,
+        2132,
+        335
+      ],
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "prompt": "Create ONE isolated game sprite: an EMPTY wall-mounted sector sign enclosure for the Alien (1979) / Alien Isolation visual universe, faithfully following the physical pressed-metal / cream plastic / black rubber construction of the supplied primary reference photos. This must be an empty reusable frame, without words; exact live French or English sector wording will be drawn by the game. Strict front orthographic elevation, no perspective, no top or side surfaces, no scenery. The physical object has width:height 153:26, a very long thin horizontal rectangle, approximately 5.885 times wider than tall. Center the whole object on a wide canvas with real alpha transparency; use transparent space above and below if needed to keep this precise long horizontal silhouette. Two dark graphite rounded ends with small screws, subtle beige/off-white powder-coated metal inset, rubber gasket, worn restrained edges, interior text area large, flat and dark desaturated charcoal to support light text. A thin aged ivory trim. The inner blank lettering area occupies x=8 to145 and y=5 to21 in the object's logical153x26 coordinates; keep this area uniformly empty and calm. Exactly ONE complete sign, no second label, no terminal, no handles, no screen content, absolutely NO lettering, numbers, icons, logos, decorative glyphs or fake typography. No floor, no shadow extending beyond the physical object, no opaque backdrop, no checkerboard. Sharp silhouette and neutral realistic materials readable at153x26pixels; avoid excessive micro-detail. This is an original Asphodèle sector plate built from documented Alien Isolation material language.",
+        "transparentBackground": true,
+        "references": [
+          {
+            "referenceId": "abbott-habitation-doorway",
+            "sha256": "11edb63311b1445924a6afbf6b338da034eb45afbc30e90bb2a4726d7467af73",
+            "passedAsImageInput": true
+          },
+          {
+            "referenceId": "gary_napper_save_terminal_2014",
+            "sha256": "ed54d3338faa1c3aa2999d9f4c42810a4c8d09d72c4af46ffaf0645a185b5ad7",
+            "passedAsImageInput": true
+          }
+        ],
+        "selectedOutputSha256": "c412e401d623d57b17a3ad6cea320ca6bc0a3862f4dac85fd380f82ac10598ec"
+      },
+      "originalSelectedPngBytesPreserved": true,
+      "sourcePixelPostprocessing": false,
+      "observedInvariants": [
+        "One blank sector plaque; bilingual wording belongs to the game overlay."
+      ]
+    },
+    {
+      "id": "asph-msn-conduit",
+      "path": "assets/asphodele/v188/asph-msn-conduit.png",
+      "metadata": {
+        "width": 2002,
+        "height": 786,
+        "mode": "RGBA",
+        "bytes": 312306,
+        "sha256": "25a96167fd756439c7d7987519d5e78b376a6bf5ec322de029f512cbf2f91a04",
+        "alphaExtrema": [
+          0,
+          254
+        ]
+      },
+      "gameFrame": [
+        306,
+        12
+      ],
+      "sourceWindow": [
+        8,
+        359,
+        1991,
+        66
+      ],
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "prompt": "Generate ONE isolated horizontal cable-tray sprite for a side-view game in the documented Alien (1979) / Alien Isolation engineering visual language, using the supplied actual in-game engineering corridor as the primary materials and construction reference. Extreme long, thin front-elevation object: total physical bounding box ratio EXACTLY306:12, i.e.25.5times wider than tall. On a wide landscape canvas place a single thin horizontal bundle across almost the full width, vertically centered, with abundant fully transparent space above and below so the object itself remains25.5:1. DO NOT make a thick rectangular wall panel. Exactly three parallel black rubber cables or ribbed conduits, laid perfectly horizontal in a slim dark steel service channel, full length left edge to right edge; small aged orange/ochre steel retaining straps at regular intervals about40logicalpixels along306logicalpixels, approximately8clamps. Ends are simple straight continuation cuts and can meet another identical segment; no sockets, no bulky junction boxes, no end plates. Practical industrial wear, dark gunmetal, warm dirty orange clamps, soft restrained highlights on ribbing, no LEDs, no neon, no futuristic energy tubes. Entire object in strict orthographic front elevation, zero perspective or diagonal lines, no depth scene, no wall behind it. No text, symbols, logos, screws floating beyond the object, creatures, people, floor, shadow backdrop, opaque black or painted checkerboard. True transparent alpha everywhere outside the thin cable strip. Make the whole long silhouette crisp and readable when displayed at306x12 pixels; realistic game asset not vector illustration.",
+        "transparentBackground": true,
+        "references": [
+          {
+            "referenceId": "abbott-engineering-corridor",
+            "sha256": "bd4751a8062e8912a966fb3f2f4a0262a9b85d3aa241b81be1acc7c885f77c8c",
+            "passedAsImageInput": true
+          }
+        ],
+        "selectedOutputSha256": "25a96167fd756439c7d7987519d5e78b376a6bf5ec322de029f512cbf2f91a04"
+      },
+      "originalSelectedPngBytesPreserved": true,
+      "sourcePixelPostprocessing": false,
+      "observedInvariants": [
+        "Three parallel dark conduits and eight orange retaining straps.",
+        "Uniform scaling; the visible strip may be thinner than the 12 px bounding slot. A shortened span is clipped rather than squeezed."
+      ]
+    },
+    {
+      "id": "asph-msn-blackbox",
+      "path": "assets/asphodele/v188/asph-msn-blackbox.png",
+      "metadata": {
+        "width": 1536,
+        "height": 1024,
+        "mode": "RGBA",
+        "bytes": 2976606,
+        "sha256": "ce1d5994d95ae20d4d2bb254ec860a9cd9bffbfddf0d5ee87af60f732f20a1b2",
+        "alphaExtrema": [
+          0,
+          254
+        ]
+      },
+      "gameFrame": [
+        153,
+        102
+      ],
+      "sourceWindow": [
+        12,
+        12,
+        1510,
+        999
+      ],
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "prompt": "Create ONE production-ready isolated sprite for the side-view Canvas game Aliens: Tantalus Frontier, faithfully grounded in the supplied primary Alien (1979) / Alien Isolation reference photos for practical prop materials and construction. Original Asphodèle assembly, not a claim of a canonical object. Strict orthographic front elevation, face parallel to screen, zero perspective, no visible top or side faces. A complete self-contained object with only a small transparent margin; real alpha outside its physical contour, no background/floor/scene, no cast shadow, no checkerboard. Detailed realistic neutral lit game texture, dirty off-white painted metal / graphite steel / brown rubber, restrained scuffs, chunky late-1970s mechanical construction, no neon sci-fi fantasy. Keep edges sharp and the shape readable at small native size. No people or creatures. Never render any words, numerals, logos or invented lettering. The last input image is a native game GEOMETRY GUIDE ONLY: honor its relative positions, but replace its flat placeholders with the referenced physical materials; REMOVE its text, indicator lines and needles, since these are live game overlays. One rectangular wall rack holding EXACTLY THREE separate orange industrial flight/crash recorders, side by side. Outer rack aspect ratio153:102=3:2. Coordinate layout in logical153x102: reserve top y0..25 as a dark uninterrupted header plate (native label will be x10,y18); three vertical orange rectangular recorder modules each34wide44high are placed at(x14,y30),(x58,y30),(x102,y30). Keep these three positions and identical sizes; no extra box. Each recorder has a deep dark horizontal recessed handle/connector slot near its upper third, sturdy battered burnt-orange painted metal casing, black protective side strips, a few small screws and realistic industrial wear, mechanical retaining catches. Surround with one graphite wall rack with off-white structural trim and subtle vents below y80. All three orange bodies must remain visually distinct and exactly frontal; no stacked or overlapping units, no protruding packages or phones. No text anywhere (in particular no QZ/brand labels), no screen graphics, no lamps painted over the header. The main rack occupies nearly the whole3:2physical silhouette with tiny real transparent margin. This is the project's three-recorder QZ assembly using the referenced physical construction language.",
+        "transparentBackground": true,
+        "references": [
+          {
+            "referenceId": "gary_napper_save_terminal_2014",
+            "sha256": "ed54d3338faa1c3aa2999d9f4c42810a4c8d09d72c4af46ffaf0645a185b5ad7",
+            "passedAsImageInput": true
+          },
+          {
+            "referenceId": "abbott-engineering-corridor",
+            "sha256": "bd4751a8062e8912a966fb3f2f4a0262a9b85d3aa241b81be1acc7c885f77c8c",
+            "passedAsImageInput": true
+          },
+          {
+            "kind": "native-primitive-geometry-guide",
+            "slot": "asph-msn-blackbox",
+            "sourceModule": "src/asphodele-mission-dressing-v188.js",
+            "sourceCommit": "3be2a402aa2e8149b4fb3bc557d9ba67a75523d8",
+            "sha256": "e5744fe7e32139bd721fb87a37a0390cc5a5030345f148dd02d33eea40198ef0",
+            "gameFrame": [
+              153,
+              102
+            ],
+            "aggregatePreview": "docs/development/ASPHODELE_MISSION_ART_PRIMITIVE_REFERENCE_20261116.png",
+            "visuallyInspected": true,
+            "passedAsImageInput": true,
+            "franchiseEvidence": false
+          }
+        ],
+        "selectedOutputSha256": "ce1d5994d95ae20d4d2bb254ec860a9cd9bffbfddf0d5ee87af60f732f20a1b2"
+      },
+      "originalSelectedPngBytesPreserved": true,
+      "sourcePixelPostprocessing": false,
+      "observedInvariants": [
+        "Exactly three distinct orange recorders in one rack; no baked-in text."
+      ]
+    },
+    {
+      "id": "asph-msn-resin",
+      "path": "assets/asphodele/v188/asph-msn-resin.png",
+      "metadata": {
+        "width": 1536,
+        "height": 1024,
+        "mode": "RGBA",
+        "bytes": 2891395,
+        "sha256": "4c3c59ee567159784b2b236c9c9529d86a577d214ea5081c93d65403dacbffc2",
+        "alphaExtrema": [
+          0,
+          254
+        ]
+      },
+      "gameFrame": [
+        153,
+        102
+      ],
+      "sourceWindow": [
+        22,
+        12,
+        1495,
+        1002
+      ],
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "prompt": "Generate ONE finished isolated 2D game sprite for Aliens: Tantalus Frontier / Asphodèle, using supplied primary Alien Isolation imagery for faithful practical late-1970s industrial construction, weathered off-white steel, graphite rubber edging, screw fasteners and tactile analog equipment. This is an original project assembly placed in the franchise's visual universe. Strict front ORTHOGRAPHIC elevation, perfectly parallel to the camera, no visible top/side surfaces, no isometric perspective. The object is a complete rectangular wall module with width:height153:102=3:2, almost filling the canvas with a small margin. TRUE alpha transparency outside the physical module, no wall/scene/floor/background, no drop shadow. Header area logicalx10..143,y7..22 must stay calm dark charcoal and COMPLETELY EMPTY for the game's live label. Never generate ANY text, letters, numbers, signage, logos or false glyphs. Realistic neutral softly lit detailed materials, all readable when displayed153x102pixels, no cinematic bloom, no lens flare, no neon, no excessive darkness. Final supplied image is the native game layout guide: preserve the basic arrangement but REMOVE its text; create the physical objects with the authentic reference materials. A SEALED maintenance hatch, approximately HALF COVERED by black-brown Xenomorph hive resin from Aliens. The metal hatch has the angular nested step-and-trapezoid recessed construction of the supplied Sevastopol door reference, adapted to a broad3:2small maintenance module; dark grey metal frame with dirty ivory inner plates and clearly closed seams. Keep its top third and top header completely uncovered. Across the LOWER HALF of the hatch only, thick irregular organic biomechanical resin grows in ribbed sinewy layered arches, black-brown with restrained wet highlights; believable Alien hive material, not plants or rocks or expanding foam. Organic coverage about45-50%of the hatch face, rising unevenly from the bottom, with a few thin tendrils along edges. No creature, no eggs, no facehugger, no visible body, no skull, no face, no blood or gore. Still recognize the sealed hatch behind resin in upperhalf. No warning text or icons; live red warning text belongs to game overlay in the blank header. Resin remains inside the module's bounding rectangle except very small organic edge irregularities; keep outer contour fully isolated on alpha.",
+        "transparentBackground": true,
+        "references": [
+          {
+            "referenceId": "abbott-habitation-doorway",
+            "sha256": "11edb63311b1445924a6afbf6b338da034eb45afbc30e90bb2a4726d7467af73",
+            "passedAsImageInput": true
+          },
+          {
+            "referenceId": "abbott-engineering-corridor",
+            "sha256": "bd4751a8062e8912a966fb3f2f4a0262a9b85d3aa241b81be1acc7c885f77c8c",
+            "passedAsImageInput": true
+          },
+          {
+            "kind": "native-primitive-geometry-guide",
+            "slot": "asph-msn-resin",
+            "sourceModule": "src/asphodele-mission-dressing-v188.js",
+            "sourceCommit": "3be2a402aa2e8149b4fb3bc557d9ba67a75523d8",
+            "sha256": "3b11f573906721c7950c098d484739f84fb1c6c51693e831ac44c7eaa50b4813",
+            "gameFrame": [
+              153,
+              102
+            ],
+            "aggregatePreview": "docs/development/ASPHODELE_MISSION_ART_PRIMITIVE_REFERENCE_20261116.png",
+            "visuallyInspected": true,
+            "passedAsImageInput": true,
+            "franchiseEvidence": false
+          }
+        ],
+        "selectedOutputSha256": "4c3c59ee567159784b2b236c9c9529d86a577d214ea5081c93d65403dacbffc2"
+      },
+      "originalSelectedPngBytesPreserved": true,
+      "sourcePixelPostprocessing": false,
+      "observedInvariants": [
+        "A closed hatch with dark ribbed resin over its lower portion; no creature or egg.",
+        "No exact resin surface from a primary close-up was inspected in this pass."
+      ]
+    },
+    {
+      "id": "asph-msn-salvage",
+      "path": "assets/asphodele/v188/asph-msn-salvage.png",
+      "metadata": {
+        "width": 1536,
+        "height": 1024,
+        "mode": "RGBA",
+        "bytes": 2513756,
+        "sha256": "81897aa68e5e19c89a089ac6f36c26858d488db13a77cc7e487e9a32891de9e6",
+        "alphaExtrema": [
+          0,
+          254
+        ]
+      },
+      "gameFrame": [
+        153,
+        102
+      ],
+      "sourceWindow": [
+        29,
+        30,
+        1479,
+        967
+      ],
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "prompt": "Generate ONE finished isolated 2D game sprite for Aliens: Tantalus Frontier / Asphodèle, using supplied primary Alien Isolation imagery for faithful practical late-1970s industrial construction, weathered off-white steel, graphite rubber edging, screw fasteners and tactile analog equipment. This is an original project assembly placed in the franchise's visual universe. Strict front ORTHOGRAPHIC elevation, perfectly parallel to the camera, no visible top/side surfaces, no isometric perspective. The object is a complete rectangular wall module with width:height153:102=3:2, almost filling the canvas with a small margin. TRUE alpha transparency outside the physical module, no wall/scene/floor/background, no drop shadow. Header area logicalx10..143,y7..22 must stay calm dark charcoal and COMPLETELY EMPTY for the game's live label. Never generate ANY text, letters, numbers, signage, logos or false glyphs. Realistic neutral softly lit detailed materials, all readable when displayed153x102pixels, no cinematic bloom, no lens flare, no neon, no excessive darkness. Final supplied image is the native game layout guide: preserve the basic arrangement but REMOVE its text; create the physical objects with the authentic reference materials. EXACTLY TWO salvaged rigid industrial cargo crates mounted in a shallow graphite wall-storage rack. Use the grey-white rectangular framed cargo crate construction visible in the right of the first supplied in-game cargo reference, with battered ribbed metal casings and recessed black handles; neutral grey with a few dirty ochre/rust-brown edge remnants. Coordinate layout in the153x102logicalmodule: LEFT crate occupies x12..73,y46..92 (61wide46high); RIGHT crate occupiesx80..141,y58..92(61wide34high). The left crate is taller, right crate shorter, both on SAME bottom liney92, neither overlaps the other. NO additional crate, no barrels, no loose tools, no extra packages. Preserve the deliberately staggered heights and small horizontal gap. A thin dark wall rack frame around the whole153x102module, broad EMPTY dark header at top for live Crucible label, and subtle mechanical rails behind the two boxes. Each crate has industrial reinforcements and a modest closed latch, no glowing screens, no labels baked in. Objects occupy the lower half and are shown directly from front with zero depth projection; do not turn them diagonally or put them on a floor. No creature or player from the first reference. Fully transparent outside the rack.",
+        "transparentBackground": true,
+        "references": [
+          {
+            "referenceId": "gary_napper_save_terminal_2014_02",
+            "sha256": "9b06cae9b3c73a400216cc8c2dd2c418eed1358e90ec9fa3eb71e5f9568e802f",
+            "passedAsImageInput": true
+          },
+          {
+            "referenceId": "abbott-engineering-corridor",
+            "sha256": "bd4751a8062e8912a966fb3f2f4a0262a9b85d3aa241b81be1acc7c885f77c8c",
+            "passedAsImageInput": true
+          },
+          {
+            "kind": "native-primitive-geometry-guide",
+            "slot": "asph-msn-salvage",
+            "sourceModule": "src/asphodele-mission-dressing-v188.js",
+            "sourceCommit": "3be2a402aa2e8149b4fb3bc557d9ba67a75523d8",
+            "sha256": "7def3424125f6f05ccd0377abbb36fad28523a8e51e92d29403c3ead73a4abf0",
+            "gameFrame": [
+              153,
+              102
+            ],
+            "aggregatePreview": "docs/development/ASPHODELE_MISSION_ART_PRIMITIVE_REFERENCE_20261116.png",
+            "visuallyInspected": true,
+            "passedAsImageInput": true,
+            "franchiseEvidence": false
+          }
+        ],
+        "selectedOutputSha256": "81897aa68e5e19c89a089ac6f36c26858d488db13a77cc7e487e9a32891de9e6"
+      },
+      "originalSelectedPngBytesPreserved": true,
+      "sourcePixelPostprocessing": false,
+      "observedInvariants": [
+        "Exactly two rigid crates; taller on the left, shorter on the right, with a shared bottom line."
+      ]
+    },
+    {
+      "id": "asph-msn-gauge",
+      "path": "assets/asphodele/v188/asph-msn-gauge.png",
+      "metadata": {
+        "width": 1536,
+        "height": 1024,
+        "mode": "RGBA",
+        "bytes": 2875222,
+        "sha256": "ca9307d98b3065a5c39ce3daaa84f8fc4e44cf3787b171afa9438e9667cf9622",
+        "alphaExtrema": [
+          0,
+          254
+        ]
+      },
+      "gameFrame": [
+        153,
+        102
+      ],
+      "sourceWindow": [
+        27,
+        11,
+        1482,
+        1001
+      ],
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "prompt": "Create ONE production-ready isolated sprite for the side-view Canvas game Aliens: Tantalus Frontier, faithfully grounded in the supplied primary Alien (1979) / Alien Isolation reference photos for practical prop materials and construction. Original Asphodèle assembly, not a claim of a canonical object. Strict orthographic front elevation, face parallel to screen, zero perspective, no visible top or side faces. A complete self-contained object with only a small transparent margin; real alpha outside its physical contour, no background/floor/scene, no cast shadow, no checkerboard. Detailed realistic neutral lit game texture, dirty off-white painted metal / graphite steel / brown rubber, restrained scuffs, chunky late-1970s mechanical construction, no neon sci-fi fantasy. Keep edges sharp and the shape readable at small native size. No people or creatures. Never render any words, numerals, logos or invented lettering. The last input image is a native game GEOMETRY GUIDE ONLY: honor its relative positions, but replace its flat placeholders with the referenced physical materials; REMOVE its text, indicator lines and needles, since these are live game overlays. One rectangular wall-mounted pressure manifold with EXACTLY THREE ANALOGUE GAUGE DIALS in a horizontal row and one mechanical valve wheel below them. Outer body ratio153:102 (3:2). CRITICAL PLACEMENT in153x102 logical coords: the three dial CENTERS must be(30,56),(76,56),(122,56), each outer radius16; no fourth gauge. Each circular dial has a thick brushed metal rim, very dark charcoal-green face, understated fine light ticks around the edge, a tiny central pivot but ABSOLUTELY NO NEEDLES, no hands, no numeric labels. The game will animate the needles from those exact centers. One small rust-brown mechanical valve wheel at logical(76,86),radius9, connected to subtle pipes below the dials; this wheel is obviously an open spoked valve, NOT another dial. Reserve the entire top y0..25 as a blank flat dark graphite nameplate area, no intruding pipes or bolts in the text zone x10..143,y8..20. The surrounding industrial body has chunky aged grey/ivory steel edging and restrained fasteners, 1970s engineered practical equipment. No screen. Match the precise front geometry of the guide including dial layout but remove all its text and all its needles. Neutral legible lighting, no floor, physical object with transparent surrounding.",
+        "transparentBackground": true,
+        "references": [
+          {
+            "referenceId": "abbott-engineering-corridor",
+            "sha256": "bd4751a8062e8912a966fb3f2f4a0262a9b85d3aa241b81be1acc7c885f77c8c",
+            "passedAsImageInput": true
+          },
+          {
+            "referenceId": "gary_napper_save_terminal_2014",
+            "sha256": "ed54d3338faa1c3aa2999d9f4c42810a4c8d09d72c4af46ffaf0645a185b5ad7",
+            "passedAsImageInput": true
+          },
+          {
+            "kind": "native-primitive-geometry-guide",
+            "slot": "asph-msn-gauge",
+            "sourceModule": "src/asphodele-mission-dressing-v188.js",
+            "sourceCommit": "3be2a402aa2e8149b4fb3bc557d9ba67a75523d8",
+            "sha256": "3c58273271eba02eb4e1cf53a640f4730e0a8fae29e4752bad70a70aef667a7e",
+            "gameFrame": [
+              153,
+              102
+            ],
+            "aggregatePreview": "docs/development/ASPHODELE_MISSION_ART_PRIMITIVE_REFERENCE_20261116.png",
+            "visuallyInspected": true,
+            "passedAsImageInput": true,
+            "franchiseEvidence": false
+          }
+        ],
+        "selectedOutputSha256": "ca9307d98b3065a5c39ce3daaa84f8fc4e44cf3787b171afa9438e9667cf9622"
+      },
+      "originalSelectedPngBytesPreserved": true,
+      "sourcePixelPostprocessing": false,
+      "observedInvariants": [
+        "Exactly three circular analogue dials and one open-spoked valve wheel.",
+        "No baked-in dial needles; live needles are projected onto the three image pivots."
+      ],
+      "nativeImageAnchors": {
+        "needlePivots": [
+          [
+            324,
+            485
+          ],
+          [
+            768,
+            485
+          ],
+          [
+            1212,
+            485
+          ]
+        ]
+      }
+    },
+    {
+      "id": "asph-msn-camera",
+      "path": "assets/asphodele/v188/asph-msn-camera.png",
+      "metadata": {
+        "width": 1536,
+        "height": 1024,
+        "mode": "RGBA",
+        "bytes": 2299819,
+        "sha256": "8d51a720217e49831d08507a463f28b68075fa54dc160e1bea8539f8cede9857",
+        "alphaExtrema": [
+          0,
+          254
+        ]
+      },
+      "gameFrame": [
+        153,
+        102
+      ],
+      "sourceWindow": [
+        32,
+        24,
+        1472,
+        978
+      ],
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "prompt": "Generate ONE finished isolated 2D game sprite for Aliens: Tantalus Frontier / Asphodèle, using supplied primary Alien Isolation imagery for faithful practical late-1970s industrial construction, weathered off-white steel, graphite rubber edging, screw fasteners and tactile analog equipment. This is an original project assembly placed in the franchise's visual universe. Strict front ORTHOGRAPHIC elevation, perfectly parallel to the camera, no visible top/side surfaces, no isometric perspective. The object is a complete rectangular wall module with width:height153:102=3:2, almost filling the canvas with a small margin. TRUE alpha transparency outside the physical module, no wall/scene/floor/background, no drop shadow. Header area logicalx10..143,y7..22 must stay calm dark charcoal and COMPLETELY EMPTY for the game's live label. Never generate ANY text, letters, numbers, signage, logos or false glyphs. Realistic neutral softly lit detailed materials, all readable when displayed153x102pixels, no cinematic bloom, no lens flare, no neon, no excessive darkness. Final supplied image is the native game layout guide: preserve the basic arrangement but REMOVE its text; create the physical objects with the authentic reference materials. One CASSIUS surveillance wall module with ONE small analog box camera above ONE wide green-black CRT monitoring glass. No anthropomorphic face or humanoid. Precise layout on153x102logicalcanvas: a dark mechanical rectangular CAMERA BODY atx54.5..98.5,y34..54, width44height20, camera facing directly outward, one small dark round glass lens in left-central area aroundx68,y44. A small inset square UNLIT dark-red status lamp in its right face atx90.5..95.5,y40..45, dark enough for the game to draw a live red overlay. Old cast-metal box with ribs and screw fasteners, no modern dome. Below camera a wide shallow CRT glass aperture atx12..141,y62..92, width129height30, ratio4.3:1, behind heavy low-profile black rubber/metal frame; the glass must be EMPTY, uniformly near-black green with subtle curved glass edge highlights only, no diagrams, bars, waves or letters. Reserve entire top y0..25 as completely blank charcoal header panel, no intruding camera or pipe. Offwhite metal perimeter frame and modest bolts match references, dark inner backing, a short bracket or conduit joins camera to backing without obscuring header or glass. No phone handset, keyboard, human portrait or decorative symbols. Realistic low-tech film prop construction, clean front elevation, transparent outside complete3:2module.",
+        "transparentBackground": true,
+        "references": [
+          {
+            "referenceId": "gary_napper_save_terminal_2014",
+            "sha256": "ed54d3338faa1c3aa2999d9f4c42810a4c8d09d72c4af46ffaf0645a185b5ad7",
+            "passedAsImageInput": true
+          },
+          {
+            "referenceId": "abbott-artstyles",
+            "sha256": "18c22f4020bae25bdb2846dec468a15780f7da354cc6e8723e2c1773ad2809ba",
+            "passedAsImageInput": true
+          },
+          {
+            "kind": "native-primitive-geometry-guide",
+            "slot": "asph-msn-camera",
+            "sourceModule": "src/asphodele-mission-dressing-v188.js",
+            "sourceCommit": "3be2a402aa2e8149b4fb3bc557d9ba67a75523d8",
+            "sha256": "63a13176ef1f2af448768e9f364fb9afd3df11ed893fbae472a01b21605ff312",
+            "gameFrame": [
+              153,
+              102
+            ],
+            "aggregatePreview": "docs/development/ASPHODELE_MISSION_ART_PRIMITIVE_REFERENCE_20261116.png",
+            "visuallyInspected": true,
+            "passedAsImageInput": true,
+            "franchiseEvidence": false
+          }
+        ],
+        "selectedOutputSha256": "8d51a720217e49831d08507a463f28b68075fa54dc160e1bea8539f8cede9857"
+      },
+      "originalSelectedPngBytesPreserved": true,
+      "sourcePixelPostprocessing": false,
+      "observedInvariants": [
+        "One camera, one green-black screen and no face.",
+        "The red lamp is native; the image glass remains intact on the loaded path."
+      ],
+      "nativeImageAnchors": {
+        "lampRect": [
+          882,
+          392,
+          33,
+          36
+        ]
+      }
+    }
+  ]
+}

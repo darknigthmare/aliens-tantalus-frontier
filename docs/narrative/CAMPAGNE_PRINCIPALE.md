@@ -15,7 +15,7 @@
 - **Partie VII — Vues et organisation des hubs** : §40 trois vues (latérale, couloir de profondeur, plan au sol à 35°) · §41 Tantalus pièce par pièce · §42 Asphodèle · §43 Port-Méridien · §44 liste complète de ce qui reste à faire et à générer
 - **Décisions validées** : §45, cadrage des deuxième et troisième séries §45.1-45.2 · registres des missions §0.3 · origines d'Echo-9 §2.4
 - **Partie VIII — Musique : prompts pour Google Flow Music** : §46 méthode et palette · §47 hub et voyage · §48 campagne principale · §49 campagnes annexes · §50 archives et missions spéciales · §51 récapitulatif
-- **Partie IX — Feuille de route pour rendre le jeu attractif** : §52 principes, état et renommage · §53 feuille de route détaillée · §54 ordre de travail · §55 conception technique des décisions de cadrage
+- **Partie IX — Feuille de route pour rendre le jeu attractif** : §52 principes, état et renommage · §53 feuille de route détaillée · §54 ordre de travail · §55 conception technique des décisions de cadrage · §56 priorités P0 et P1 (validées le 2026-11-12)
 
 # PARTIE I — Campagne principale : Cocyte
 
@@ -306,6 +306,16 @@ Postes et salles : `HUB_NPC_ROSTER` (`src/hub-v52-runtime.js`). Fonctions narrat
 | **Adèle Sarrazin** | Port-Méridien | Doyenne élue. Pragmatique, épuisée, ne fait confiance à aucun uniforme ni à aucun contrat. |
 | **Tomas Wren** | Port-Méridien | Chef de quai. A vu passer les conteneurs scellés ; se tait pour ne pas perdre son contrat. |
 | **Lucia Ferro** | Port-Méridien | Médecin de la colonie. A vu les premiers cas « d'intoxication » qui n'en étaient pas. |
+
+**Portraits de Sarrazin, Wren et Ferro (V188, continuation du 16 novembre 2026).** La demande de génération du propriétaire succède au choix provisoire Q78/Q79. Trois PNG originaux sont maintenant raccordés par `src/colony-portraits-v188.js`, dans les dialogues et les sous-titres des cinématiques (`cin-p3-wren` sur le quai, `cin-p3-ferro` au triage, `cin-doyenne`). Leur cadrage tête-épaules, fond transparent, lumière principale en haut à droite et signes distinctifs reprennent la définition ci-dessous. Les primitives de `src/placeholder-portraits-v188.js` restent le repli pendant le chargement et en cas d'échec. Les choix physiques sont des adaptations du projet **[PROPOSÉ]**, sans ressemblance d'acteur revendiquée. Les images gardent la même identité dans tous les réglages daltoniens ; les variantes de couleurs décrites dans la table concernent le repli Canvas. La table de reconstruction ne montre aujourd'hui ni nom ni portrait. Provenance, contrôles à 80 px et limites : [rapport du lot](../development/COLONY_ART_QA_20261116.md).
+
+| Personnage | Documenté | Adapté **[PROPOSÉ]** | À définir |
+| --- | --- | --- | --- |
+| **Adèle Sarrazin** | Doyenne élue, pragmatique, épuisée (§2.3) ; légère voûte de la silhouette en cinématique (§56.11). | Environ 68 ans ; cheveux argentés en chignon bas ; visage marqué de quelques rides ; manteau de laine sombre. **Signe :** écharpe de doyenne nouée au cou, deux pans rayés et frangés. Couleurs rouille et crème, conservées en mode daltonien, où elles restent contrastées. | Âge exact, origine, coiffure, couleur et motif définitifs de l'écharpe, et sens de ce signe dans la colonie. |
+| **Tomas Wren** | Chef de quai (§2.3) ; gilet haute visibilité et tablette (§56.12, passe de cohérence du quai). | Environ 45 ans ; cheveux courts grisonnants, barbe de quelques jours ; veste de travail anthracite. **Signe :** gilet haute visibilité, avec deux bretelles et deux bandes réfléchissantes qui forment un « H ». Orange haute visibilité, vermillon en mode daltonien. La tablette n'est pas dessinée dans le portrait. | Âge, origine, couleur exacte du gilet et logo éventuel de l'employeur du port. |
+| **Lucia Ferro** | Médecin de la colonie (§2.3) ; brassard à croix (§56.12). | Environ 38 ans ; cheveux sombres noués en chignon ; veste de terrain olive sur une tenue de soins claire. **Signe :** brassard blanc sur le haut du bras droit, avec une croix pleine. Croix rouge, vermillon en mode daltonien. Les proportions de la croix ne reprennent pas l'emblème protégé de la Croix-Rouge. | Âge, origine, blouse ou tenue d'isolement (§2.4.4 : variantes de `hazmat-suit` à créer) et emblème médical définitif. |
+
+Les trois portraits de base sont produits et intégrés. Les autres portraits prévus au §2.4.4 et les expressions (question 84) restent à produire ; ce lot ne crée ni pose corporelle ni nouveau PNJ.
 | **I. Voss** | QZ-18 | Contremaître dont le badge a signé la priorité de fret à 18:43 (`archive-relay-state-v122.js`). Disparu. |
 | **Directrice Halloran** | Weyland-Yutani | Responsable régionale du réseau QZ. Ne s'adresse au Tantalus que par messages différés. Cite toujours une clause. |
 | **CASSIUS** | Station Asphodèle | Système de gestion Seegson de la station. Applique la quarantaine à la lettre depuis des semaines, sans personne pour la corriger. Ni malveillant ni conscient : obéissant. |
@@ -517,9 +527,9 @@ Réservé à `origin-20`. Quatre fragments, un par lieu, sans combat propre :
 
 **But :** apprendre les commandes, comprendre pourquoi le Tantalus est là, rencontrer l'équipage et poser la question centrale (le fret contre les vivants) avant le premier contact.
 
-### CIN-00 · Ouverture — [PROPOSÉ]
+### CIN-00 · Ouverture — [EXISTANT] (V188, `story-cinematics-v188.js`)
 
-60 à 75 s, passable.
+60 à 75 s, passable. Jouée à chaque nouvelle partie avant le créateur (65 s). Plans dessinés en primitives Canvas ; l'espace, la planète et le Tantalus reprennent les couches existantes de l'écran titre.
 
 | Plan | Image | Son / texte |
 | --- | --- | --- |
@@ -536,7 +546,9 @@ Réservé à `origin-20`. Quatre fragments, un par lieu, sans combat propre :
 
 Le poste de cryostase attend la confirmation ; DAVID-8R accueille la Relève Echo-9. Création du personnage. Tamsin Velez rappelle la règle : avant une sortie, on identifie l'objectif et la voie de retour.
 
-**Ajout [PROPOSÉ]** — DAVID-8R, pendant le réveil : « Vous remplacez l'équipe Echo-8. Elle a abordé la station Asphodèle il y a trente et une heures. Le contact a été perdu à la sixième. Je n'ai pas d'autre information. » **CIN-01 « Le casier vide »** (20 s) : le casier `ECHO-8`, vidé et scellé.
+**Mise en scène en jeu [EXISTANT] (V188) · [PROPOSÉ]** — avant la reprise du contrôle, dans la baie cryo réelle : l'image passe du noir à un flou froid puis se précise. Le terminal affiche `MU/TH/UR · RELÈVE ECHO-9 · CAPSULE 03 · RÉVEIL D'URGENCE`. Le sous-titre sonore dit « [La capsule siffle. Le givre fond sur la verrière.] ». Le journal de bord : « Relève Echo-9 sortie d'hypersommeil. Fonctions vitales stables. Confirmez votre réveil au poste de cryostase. »
+
+**Ajout [EXISTANT] (V188)** — DAVID-8R, pendant le réveil : « Vous remplacez l'équipe Echo-8. Elle a abordé la station Asphodèle il y a trente et une heures. Le contact a été perdu à la sixième. Je n'ai pas d'autre information. » **CIN-01 « Le casier vide »** (20 s) : le casier `ECHO-8`, vidé et scellé. Elle est jouée juste après la confirmation du réveil, une seule fois par partie.
 
 *Ancrage Alien : réveil d'hypersommeil, relève d'une équipe perdue, synthétique de bord.*
 
@@ -544,11 +556,19 @@ Le poste de cryostase attend la confirmation ; DAVID-8R accueille la Relève Ech
 
 `hub-opening-exercise-v89.js` : échelle, pas de tir, cibles, rétablissement de la liaison prioritaire.
 
-**[PROPOSÉ]** La liaison prioritaire, rétablie à la fin de l'exercice, laisse passer un paquet de messages de Port-Méridien vieux de plusieurs jours, d'un coup. Le dernier date de quatre heures. Mara Vega coupe l'exercice.
+**[EXISTANT] (V188, séquence `cin-p2`)** La liaison prioritaire, rétablie à la fin de l'exercice, laisse passer un paquet de messages de Port-Méridien vieux de plusieurs jours, d'un coup. Le dernier date de quatre heures. Mara Vega coupe l'exercice.
+
+**Mise en scène en jeu [EXISTANT] (V188) · [PROPOSÉ]** — quand le signal prioritaire interrompt la qualification, une alerte ambre passe sur le pas de tir.
+
+> **Rook** (radio) — Velez, un signal prioritaire force la liaison. Il demande la console du pas de tir.
+>
+> **Tamsin Velez** — Echo-9, arme au repos. Rejoignez la console.
 
 *Ancrage Alien : communications retardées, colonie isolée.*
 
-### CIN-02 · Le briefing — [PROPOSÉ]
+### CIN-02 · Le briefing — [EXISTANT] (V188)
+
+Jouée une fois, avant le premier embarquement vers Port-Méridien (42 s), sur une carte holographique de Cocyte et d'Asphodèle dessinée en primitives.
 
 Salle de briefing. Mara Vega projette Cocyte et la station.
 
@@ -562,11 +582,33 @@ Salle de briefing. Mara Vega projette Cocyte et la station.
 
 *Ancrage Alien : réquisition des Marines, consigne de la compagnie, quarantaine.*
 
+### CIN-03 · Descente sur Port-Méridien — [EXISTANT] (V188) · [PROPOSÉ]
+
+Jouée une fois, entre CIN-02 et le débarquement (33 s). Le dropship d'Orlov descend sous la pluie ; la soute est éclairée en rouge et les hublots ruissellent.
+
+> **Maksim Orlov** — Turbulences jusqu'à deux mille mètres. Le port n'émet plus de balise : je pose à vue.
+>
+> **Tamsin Velez** — Quand la rampe touche, Echo-9 sort en premier. Les vivants d'abord. Le matériel ensuite.
+
+Dernier plan : les lumières du port sous la pluie, le processeur atmosphérique qui fume, les balises rouges de l'aire de pose. `PORT-MÉRIDIEN · QUAI SUD`.
+
+*Ancrage Alien : descente en dropship, colonie sans balise, Marines qui passent en premier.*
+
 ### P-3 · Intro — Le quai des vivants (Port-Méridien) — [EXISTANT]
 
 `port-meridien-v90.js` (reçu existant `port-meridien:quai-des-vivants:v90`) : porter un lot au triage, assister un blessé, réalimenter le sas, rassembler trois habitants et les guider vers le sas éclairé.
 
-**[PROPOSÉ]** C'est aussi l'intro du front colonie (§6). Premier choix « vivants ou matériel » : lot médical ou batterie de sas. Tomas Wren, en passant : « Les conteneurs scellés partent avant nous depuis trois semaines. » Lucia Ferro montre un blessé dont la poitrine est bandée : « Il est tombé malade après une nuit au quai nord. Il ne se souvient pas de la nuit. » Le joueur ne voit rien de plus. Noor Okafor, à la radio : « Ramenez-le en quarantaine. Pas au triage. »
+**[EXISTANT] (V188, séquences `cin-p3-wren` à l'arrivée et `cin-p3-ferro` après le triage)** C'est aussi l'intro du front colonie (§6). Premier choix « vivants ou matériel » : lot médical ou batterie de sas. Tomas Wren, en passant : « Les conteneurs scellés partent avant nous depuis trois semaines. » Lucia Ferro montre un blessé dont la poitrine est bandée : « Il est tombé malade après une nuit au quai nord. Il ne se souvient pas de la nuit. » Le joueur ne voit rien de plus. Noor Okafor, à la radio : « Ramenez-le en quarantaine. Pas au triage. »
+
+**Mise en scène en jeu [EXISTANT] (V188) · [PROPOSÉ]** — à la descente de la rampe, sous la pluie et avant la réplique de Wren : « [Les vérins de la rampe. La pluie sur la tôle.] »
+
+> **Tamsin Velez** (radio) — Rampe au sol. Echo-9, le quai est à vous. Trouvez qui tient encore ce port.
+
+Au constat :
+
+> **Rook** (radio) — La balise automatique du port annonce toujours « aucun survivant ». Elle se trompe de trois.
+>
+> **Tamsin Velez** (radio) — Notez-le. Tout ce qui ment ici finira dans le rapport.
 
 *Ancrage Alien : premier signe du cycle biologique (hôte qui ne se souvient pas), évacuation de colons.*
 
@@ -575,6 +617,8 @@ Salle de briefing. Mara Vega projette Cocyte et la station.
 ## 5. Enquête — campagne principale
 
 ### 5.1 Acte I — « La cargaison fantôme » (QZ-17)
+
+**Ordre conseillé (décision du 2026-11-23)** : après le prologue, l'objectif et l'étoile ★ de la table tactique recommandent l'Acte I (QZ-17), puis l'Acte II (QZ-18). QZ-18 n'est pas verrouillé : une sauvegarde qui l'a joué d'abord reste valide (`deriveStoryCampaignV188`).
 
 **Statut :** **[PARTIEL]** — `special-narrative-qz17`, `narrative-collectables-v68.js`. Intérieur vertical, 4 routes, 2204.
 
@@ -593,14 +637,14 @@ Preuve secondaire du code (`narrative-evidence-v132.js`) : *la colonie reçoit u
 
 **Déroulé [PROPOSÉ] :**
 
-1. **CIN-10 « Les quais déserts »** (30 s) : dropship d'Orlov, approche sous la pluie. Rook : « Quatre accès. Aucun ne répond. Le détecteur est calme. Trop calme. »
+1. **CIN-10 « Les quais déserts »** (30 s) — **[EXISTANT] (V188)**, à la prise de contrôle de QZ-17 : dropship d'Orlov, approche sous la pluie. Rook : « Quatre accès. Aucun ne répond. Le détecteur est calme. Trop calme. »
 2. Exploration verticale, peu de combats, beaucoup de signes : un conteneur réfrigéré marqué « échantillons géologiques », du givre à l'intérieur alors que le froid est coupé, des traces d'acide dans un conduit.
 3. **Choix existant** : *suivre la trace par la maintenance* ou *sécuriser la preuve en quarantaine*.
    - Maintenance → l'alcôve : un berceau de transport réfrigéré, ouvert de l'intérieur. Contact avec un parasite (facehugger, déjà au catalogue).
    - Quarantaine → le fragment de sceau revient intact ; Inez peut l'analyser (annexe *Le sceau*).
-4. **CIN-11 « Ouvert de l'intérieur »** (25 s) : sur la paroi du berceau, des fixations faites pour retenir quelque chose de vivant. Inez : « Ne concluez pas. Rapportez. »
+4. **CIN-11 « Ouvert de l'intérieur »** (25 s) — **[EXISTANT] (V188)**, au déverrouillage de la route de maintenance : sur la paroi du berceau, des fixations faites pour retenir quelque chose de vivant. Inez : « Ne concluez pas. Rapportez. »
 
-**Retour** avec Inez : *qu'est-ce qui a bougé* (une charge vivante, réfrigérée, non déclarée), *qui ment* (le PDA et le courriel ne peuvent pas être vrais ensemble ; la boîte noire soutient le PDA), *que transportait-on* (**non établi** sans prélèvement).
+**Retour** avec Inez — **[EXISTANT] (V188, séquence `cin-qz17-retour` à la table tactique)** : *qu'est-ce qui a bougé* (une charge vivante, réfrigérée, non déclarée), *qui ment* (le PDA et le courriel ne peuvent pas être vrais ensemble ; la boîte noire soutient le PDA), *que transportait-on* (**non établi** sans prélèvement).
 
 *Ancrage Alien : cargaison biologique déguisée en fret, parasite, la compagnie qui ment par procédure.*
 
@@ -617,7 +661,7 @@ Contenu existant : briefing « Le message arrivé trop tard » ; protocoles *Aud
 - Le message retenu (« Secours immédiat, personnel coincé au quai nord ») venait du quai nord de QZ-18, où partaient les navettes vers Port-Méridien. Les treize minutes ont laissé une navette partir avec un conteneur QZ17 et sans les blessés.
 - Quatrième question optionnelle au retour, si l'Acte I est terminé : *« Quel fret avait la priorité ? »* — la série de scellés QZ17.
 - Le profil « priorité cargaison » ne s'active pas au relais : il est **autorisé à distance par la station Asphodèle**. Rook identifie la signature. Cela débloque l'intro du front station.
-- **CIN-20 « Treize minutes »** (40 s) : Asha Mbaye lit le message libéré à 18:54. Les noms du personnel du quai nord défilent. Pas de musique.
+- **CIN-20 « Treize minutes »** (40 s) — **[EXISTANT] (V188)**, avec la réponse de Halloran en dernier plan, au premier compte rendu de QZ-18 : Asha Mbaye lit le message libéré à 18:54. Les noms du personnel du quai nord défilent. Pas de musique.
 - Mara Vega transmet le dossier par le seul canal disponible, le réseau QZ. Réponse différée de la Directrice Halloran : « Priorité cargaison maintenue, conformément à la clause d'acheminement. Toute ouverture de scellé engage la responsabilité de l'unité. »
 
 *Ancrage Alien : la compagnie contrôle les communications ; la vie humaine passe après le contrat.*
@@ -630,15 +674,19 @@ Contenu existant : briefing « Le message arrivé trop tard » ; protocoles *Aud
 
 **Tissage [PROPOSÉ] :**
 
-- **Le manifeste du M577 est le choix moral de l'acte.** La consigne de la compagnie exige de ramener trois conteneurs scellés du complexe ; Asha demande des places pour les ouvriers retranchés à C-12. Chaque conteneur retire deux places.
-- Pendant les 45 secondes de C-12, si un conteneur est à bord, il **frappe de l'intérieur** (son seul). Inez : « Notez l'heure. »
-- **CIN-31 « Le sas refermé »** : les rescapés descendent à Port-Méridien, ou les conteneurs partent sous scellés vers le Tantalus, sur ordre. Écran de quarantaine du Tantalus : `CONTRÔLE BIOLOGIQUE · 1 ANOMALIE`.
+- **[EXISTANT] (V188)** **Le manifeste du M577 est le choix moral de l'acte.** Une boîte de dialogue s'ouvre avant le départ du convoi ; le choix est enregistré dans `storyCampaignV188.m577Manifest`. La consigne de la compagnie exige de ramener trois conteneurs scellés du complexe ; Asha demande des places pour les ouvriers retranchés à C-12. Chaque conteneur retire deux places.
+- **[EXISTANT] (V188)** Pendant les 45 secondes de C-12, si un conteneur est à bord, il **frappe de l'intérieur** (son seul, son original `container-knock`). Inez : « Notez l'heure. »
+- **CIN-31 « Le sas refermé »** — **[EXISTANT] (V188)**, au premier passage à la table tactique après C-12, dessinée d'après le manifeste : les rescapés descendent à Port-Méridien, ou les conteneurs partent sous scellés vers le Tantalus, sur ordre. Écran de quarantaine du Tantalus : `CONTRÔLE BIOLOGIQUE · 1 ANOMALIE`.
 
 *Ancrage Alien : APC, horde, Reine, choix entre fret et vivants.*
 
-**Conséquence :** `story-m577-manifest` = colons (0-6) et conteneurs (0-3). Les colons ramenés rejoignent la population de Port-Méridien.
+**Conséquence :** `story-m577-manifest` = colons (0-6) et conteneurs (0-3). Les colons ramenés rejoignent la population de Port-Méridien. **[EXISTANT] (V188)** : la population du monde de C-12 est augmentée une seule fois. Les conteneurs restent consignés pour l'Interlude (§5.4), qui n'est pas encore jouable.
 
-### 5.4 Interlude — « Quarantaine » (à bord du Tantalus) — [PROPOSÉ]
+### 5.4 Interlude — « Quarantaine » (à bord du Tantalus) — [PARTIEL] V188
+
+**Pont 2 (décision du 2026-11-23)** : les menaces de la crise apparaissent autour de la salle de quarantaine du pont 2 et y attendent ; le joueur doit s'y rendre. Sur un autre pont, le relevé du hub les nomme (« … AU PONT 2 »). Les autres crises du hub ne changent pas.
+
+**Raccordé (V188)** : après CIN-31, CIN-40 se joue, puis une crise xénomorphe forcée s'ouvre dans la salle de quarantaine du pont 2. Elle utilise le système de crise du hub existant. Une fois la crise résolue dans le niveau, le choix détruire ou capturer s'affiche ; il ne peut pas être esquivé et revient s'il a été interrompu. CIN-41 suit, et la loyauté de BISHOP-9 baisse de 20, soit un niveau de confiance. Un objectif dédié s'affiche au hub. Pendant la crise, tout l'équipage suit la routine `alert`, qui prend fin quand la crise est résolue. Jun Park est coincé dans le conduit du support-vie (pont 3) : le joueur doit l'y rejoindre par le réseau de conduits. Le choix ne s'ouvre qu'une fois la créature neutralisée et Jun ramené, dans n'importe quel ordre (§56.9). **Pas encore fait** : Jun Park visible dans le conduit et blessé à l'infirmerie (pose à créer).
 
 Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-missions-v131.js`) et des crises à bord par route de salles (`world-crisis-core.js`, type `xenomorph`).
 
@@ -659,27 +707,27 @@ Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-m
 
 **Tissage [PROPOSÉ] :**
 
-- **CIN-50 « Les dernières images »** (35 s) : caméra casque dégradée. Echo-9 suit la destination absente du bon de QZ-17 jusqu'au **dépôt**. Silhouette au plafond. Coupure. La capture n'est pas jouée : elle reste « sans témoin exploitable », comme dans le code.
+- **CIN-50 « Les dernières images »** (35 s) — **[EXISTANT] (V188)**, au réveil dans le cocon : caméra casque dégradée. Echo-9 suit la destination absente du bon de QZ-17 jusqu'au **dépôt**. Silhouette au plafond. Coupure. La capture n'est pas jouée : elle reste « sans témoin exploitable », comme dans le code.
 - Dans la galerie basse : des **berceaux réfrigérés de la série QZ17**, vides, et des cocons humains (le libellé « COCON HUMAIN » existe déjà dans `hive-missions-v131.js`) portant des badges de Port-Méridien et de QZ-18. **Révélation :** le dépôt n'expédiait pas des organismes, il les **élevait**. Les conteneurs amenaient des œufs ; les disparus de la colonie servaient d'hôtes. La priorité de fret gardait ces départs et ces disparitions hors des registres.
 - Un enregistreur fixé aux berceaux porte la signature de la station Asphodèle : les ordres de livraison venaient de là (lien avec S2-S3).
-- **CIN-51 « Contrôle biologique »** : scanner, Noor Okafor attend. `NÉGATIF`. « Bon retour. Cette fois, je l'écris. »
+- **CIN-51 « Contrôle biologique »** — **[EXISTANT] (V188)**, au premier passage à la table tactique après l'Acte IV : scanner, Noor Okafor attend. `NÉGATIF`. « Bon retour. Cette fois, je l'écris. »
 
 *Ancrage Alien : cocons, hôtes humains, ruche nourrie par la compagnie, contrôle biologique.*
 
 ### 5.6 Acte V — « Non viable »
 
-**Statut :** **[PARTIEL]** comme base — le registre `special-operations-v131.js` rattache `last-course-tantalus` au chapitre `special-apc-convoy`, déjà utilisé à l'Acte III. Un Acte V distinct, sa course et la poursuite de Reine restent **[PROPOSÉ]**.
+**Statut :** **[PARTIEL] V188** (spec 006, 2026-11-15) — conseil de guerre, choix final, trois missions finales, face-à-face au quai, CIN-60, CIN-61 et les trois fins sont jouables ; détail et valeurs au §5.11. **[PARTIEL] V188 (2026-11-21)** : *Dernier départ* est une course APC dédiée (M577, remorques physiques, largage, pont jouable qui s'effondre) et *La Reine du dépôt* une poursuite de la Reine (§5.11, « Course du convoi ») ; la Reine reste un **substitut Canvas** en attente de son art. Le registre `special-operations-v131.js` rattache toujours `last-course-tantalus` au chapitre de l'Acte III.
 
 **Situation [PROPOSÉ] :** Halloran déclare Port-Méridien **non viable** au titre de la charte, avec effet à l'arrivée d'une équipe de récupération de la compagnie. L'équipe (commandos Weyland-Yutani, déjà au catalogue) vient « sécuriser les actifs » du dépôt et de la colonie. Pendant ce temps, la ruche du dépôt, privée de livraisons, sort vers la surface et coupe la route du complexe au port.
 
 1. **Conseil de guerre** au Tantalus : chaque membre dont la confiance est *solide* propose un avantage (tourelles de Sanaa, blindage de Cal, fenêtre d'Orlov, route de Leila).
 2. **Choix final du joueur** (décision §45.2) : Echo-9 recommande une ligne à Mara Vega. Les options proposées dépendent des choix cumulés de la campagne (§5.7.1). Vega suit la recommandation si sa confiance envers l'escouade est au moins *operationnel* (`NPC_TRUST_LEVELS_V62`) ; sinon elle tranche elle-même selon le dossier : protéger la colonie avec 5 pièces ou plus, laisser la compagnie récupérer le dépôt en dessous.
 3. **CIN-60 « Dernier départ »** : le M577 quitte le complexe sous la pluie avec les derniers ouvriers.
-4. Nouvelle course APC **[PROPOSÉ]**, à construire à partir du chapitre existant.
-5. Point médian **[PROPOSÉ]** : un pont cède ; lâcher la remorque de fret ou celle des colons en retard.
-6. Poursuite de Reine **[PROPOSÉ]** : la Reine du dépôt, nourrie par les livraisons QZ17.
+4. Course APC **[PARTIEL] V188** : `act5-last-run`, M577 et deux remorques attelées (§5.11).
+5. Point médian **[PARTIEL] V188** : le pont cède sous les deux remorques ; lâcher celle du fret ou celle des colons en retard, en conduisant.
+6. Poursuite de Reine **[PARTIEL] V188** : `act5-depot-queen`, la Reine du dépôt poursuit le convoi ; sprite à produire (substitut Canvas).
 7. Arrivée aux murs de Port-Méridien : la course débouche sur C5 (§6.2).
-8. Si la colonie est protégée : face-à-face au quai avec l'équipe de récupération. Le joueur ne gagne pas en tirant : il gagne si le dossier est assez solide pour que les commandos reçoivent l'ordre de se retirer (ou si l'ICC est saisie via Asphodèle, §7).
+8. Si la colonie est protégée : face-à-face au quai avec l'équipe de récupération. Le joueur ne gagne pas en tirant : il gagne si le dossier est assez solide pour que les commandos reçoivent l'ordre de se retirer (ou si l'ICC est saisie via Asphodèle, §7). **[PARTIEL] V188 (spec 010, 2026-11-22)** : avec *Tenir la colonie*, ce face-à-face est une audience sans tir avec la Directrice Halloran, par la liaison QZ du quai (§5.11, « Audience au quai »).
 
 **CIN-61 « Les portes du port »** : Rook fait l'appel des colons arrivés. Le nombre affiché est la somme réelle des sauvetages de la campagne.
 
@@ -699,6 +747,14 @@ Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-m
 | Ordres de livraison archivés par CASSIUS | Station S2 |
 | Témoignage de Tomas Wren | Colonie, annexe *Ce que le quai a vu* |
 
+**[EXISTANT] V188 (`story-dossier-v188.js`)** : le dossier est calculé uniquement depuis l'état enregistré, et affiché au Commandement (« DOSSIER QZ17 · n/7 »). Pièces lisibles aujourd'hui :
+- les deux pièces de l'Acte I : la contradiction PDA / courriel découverte, puis la piste choisie ;
+- le verdict de QZ-18, avec la signature de Rook ;
+- l'issue de l'Interlude ;
+- l'Acte IV terminé.
+
+Les pièces de CASSIUS (S2) et de Wren (annexe colonie) étaient affichées « pas encore jouables ». *Mise à jour V188 : CASSIUS est jouable depuis la spec 005 ; le témoignage de Wren s'obtient avec `colony-a-quai` depuis le lot colonie et équipage (§6.4) : les 7 pièces sont jouables.*
+
 **Validé (2026-11-05) :** l'identité du signataire du badge est établie seulement si le joueur réunit 6 pièces sur 7. Le texte de retour rappelle alors ce qui reste non prouvé. Avec moins de pièces, elle reste « non établie ».
 
 **Fins [PROPOSÉ] :**
@@ -711,6 +767,16 @@ Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-m
 
 #### 5.7.1 Choix final : options ouvertes par les choix cumulés — validé le 2026-11-06
 
+**Un seul conteneur (décision du 2026-11-23)** : le conseil écrit « Un seul conteneur à rendre : insuffisant pour une restitution. » ; la restitution demande toujours 2 conteneurs ou plus.
+
+**Logique [EXISTANT] V188** (`finalChoiceOptionsV188`, `resolveFinalChoiceV188`, testée) :
+- *Transmettre* n'est ouvert que si Asphodèle est reprise et sa salle des relais ouverte ; **V188** : la salle est fournie par le hub Asphodèle (`asphodeleRelayReadyV188`) et lue par défaut par `finalChoiceOptionsV188` ; l'Acte V (§5.11) s'appuie dessus.
+- Les modificateurs sont appliqués : *restitution* avec 2 conteneurs ou plus, tentative de récupération à bord si la créature a été capturée.
+- Vega suit la recommandation si la loyauté de Mara Vega est d'au moins 55 (niveau *operationnel*).
+- Sinon, avec 5 pièces mais sans canal sûr, Vega tient la colonie (**[PROPOSÉ]**, cas non écrit).
+
+Le conseil de guerre et les fins sont jouables depuis V188 (spec 006) : §5.11.
+
 | Option recommandée par Echo-9 | Toujours proposée ? | Condition pour qu'elle apparaisse | Fin |
 | --- | --- | --- | --- |
 | **Transmettre** : protéger la colonie et envoyer le dossier à l'ICC et aux Marshals coloniaux | Non | Asphodèle reprise (S4) **et** salle des relais ouverte (*Relais en dérive* ×3) **et** dossier ≥ 5 pièces | « Le relais parle » |
@@ -721,7 +787,7 @@ Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-m
 
 | Choix cumulé | Effet sur le choix final |
 | --- | --- |
-| Conteneurs ramenés à l'Acte III (`story-m577-manifest`) | Chaque conteneur à bord est une pièce que la compagnie réclame : avec 2 ou 3 conteneurs, *Céder le dépôt* est présenté par Halloran comme « restitution » et ne coûte aucun moral à l'équipage. |
+| Conteneurs ramenés à l'Acte III (`story-m577-manifest`) | Chaque conteneur à bord est une pièce que la compagnie réclame : avec 2 ou 3 conteneurs, *Céder le dépôt* est présenté par Halloran comme « restitution » et ne coûte aucun moral à l'équipage. **Décision du 2026-11-22** : les conteneurs voyagent dans la remorque de fret de l'Acte V ; si elle est lâchée (au pont, choix ou délai, ou plus tard sur la route), ils ne comptent plus comme ramenés. Halloran ne parle alors plus de « restitution » : la cession coûte le moral de *Céder* sans restitution (une fois, au passage à la fin) et la fin comme l'épilogue mentionnent le fret perdu (§5.11). |
 | Créature capturée à l'Interlude (`story-quarantine-outcome` = `captured`) | Halloran l'exige en plus du dépôt ; *Tenir la colonie* déclenche une tentative de récupération à bord du Tantalus pendant C5. |
 | Palier de la colonie (§6.3) | Avec *Autonome*, la clause de non-viabilité tombe dans « Le relais parle ». En dessous, la charte est seulement suspendue en attente d'enquête. |
 | Choix CASSIUS (S2-S4) | CASSIUS conservé : il confirme les ordres de livraison devant Halloran (réplique au conseil). Effacé : la pièce *Ordres de livraison archivés par CASSIUS* n'est acquise que si elle a été récupérée en S2. |
@@ -730,7 +796,7 @@ Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-m
 
 La fin affichée et le nombre de colons arrivés (CIN-61) viennent toujours de l'état réel de la sauvegarde ; aucune option n'est accordée par une cinématique.
 
-### 5.8 Épilogue — « Ce que le retour devra raconter » — [PROPOSÉ]
+### 5.8 Épilogue — « Ce que le retour devra raconter » — [PARTIEL] V188 (§5.11)
 
 Jouable, sans combat. Visite du Tantalus, de Port-Méridien et, si elle est reprise, d'Asphodèle. Chaque personnage a une réplique finale selon la fin. Le Tantalus se prépare à repartir : la baie cryo rouvre ses caissons. Sur le casier de l'Echo-8 : `RETOUR CONFIRMÉ` ou `POSTE LIBÉRÉ` (§7.4).
 
@@ -858,6 +924,81 @@ Statuts de production : **[PRÉSENT]** dans le dépôt, **[À CRÉER]**, comme a
 
 **Cinématiques ajoutées :** CIN-21, CIN-59, CIN-73 (CIN-49 n'est pas nécessaire : `story-route-depot` enchaîne sur CIN-50). Elles suivent les contraintes du §10.
 
+### 5.11 Acte V jouable, fins et épilogue — [PARTIEL] V188 (spec 006, 2026-11-15)
+
+Décisions par défaut appliquées (questionnaire `QUESTIONS_PROPRIETAIRE_V188.md`, option recommandée faute de réponse) : Q1 A adaptée, Q2 A, Q3 A, Q4 A, Q5 A, Q12 A, Q79 A. Feature : `specs/006-acte-v-fins/`. Code : `src/story-act5-v188.js`, `src/story-act5-state-v188.js`, `src/act5-slots-v188.js`, `src/story-cinematics-v188.js` ; sauvegarde additive `storyCampaignV188.act5` (absente des anciennes sauvegardes). Tests : `scripts/verify-act5-endings-v188.mjs`.
+
+**Enchaînement.**
+
+1. **Seuil** : Actes II, III et IV terminés (`special-archive-relay`, `special-apc-convoy`, `special-c12-horde`, `special-black-cocoon`), retour de l'Acte IV lu (CIN-51), aucune étape de l'Interlude en attente.
+2. **Conseil de guerre** (table tactique, non refermable) : ordre de Halloran ; avantages des membres en confiance *solide* ; réplique de CASSIUS s'il est conservé ou mention de son effacement ; réplique d'Echo-9 pour `origin-03` et `origin-10` ; dossier n/7 ; options et raisons d'une option fermée.
+3. **Décision** : Echo-9 recommande ; `resolveFinalChoiceV188` décide (Vega suit à 55). Q3 A validée par défaut : avec 5 pièces sans canal sûr, Vega tient la colonie. CIN-60 suit.
+4. **Missions finales**, dans l'ordre : `act5-last-run` *Dernier départ* (`escort a colony convoy`, extérieur) → `act5-depot-queen` *La Reine du dépôt* (`track an apex specimen`, boss) → `act5-port-walls` *Les portes du port* (`defend the colony`) pour *Transmettre* et *Tenir*, ou `act5-evacuation` *L'évacuation* (`hold the extraction zone`) pour *Céder*. Registre Action.
+5. **Pont** (Q2 A) : choix sans pause entre le fret et les colons en retard. Depuis la course dédiée (2026-11-21), il se joue sur le tablier en conduisant (`C` / `X`) ; la boîte chronométrée au premier checkpoint reste un repli hors course.
+6. **Quai** (Q4 A) : *Transmettre* → ICC saisie, retrait ; *Tenir* → audience sans tir avec Halloran (spec 010, ci-dessous) : gagnée → retrait des commandos, perdue → siège jusqu'à l'aube, sans tir ; sans audience jouée (ancien flux), 5 pièces → retrait. *Céder* : pas de face-à-face.
+7. **CIN-61** : appel des arrivés = civils du quai (P-3) + colons du M577 + colons en retard arrivés.
+8. **Fin** (CIN-90) : texte de la fin du §5.7 ; avec « Le relais parle », clause levée au palier *Autonome*, charte suspendue en dessous (§5.7.1).
+9. **Épilogue** (Q5 A) : au Tantalus, « ÉPILOGUE · Dernier mot » dans la conversation de huit membres de l'équipage ; le casier d'Echo-8 porte `RETOUR CONFIRMÉ` (plaque de Kessler ramenée de S3) ou `POSTE LIBÉRÉ`. Le lire joue CIN-92 : Port-Méridien, Asphodèle (éclairée si reprise), la baie cryo, puis les faits de la partie (colonie, appel, CASSIUS, dossier et ce qui reste non prouvé, confiance de l'équipage, créature de l'Interlude, réplique « Retour » de l'origine d'Echo-9, §2.4.2).
+10. **Générique** dans le style du crédit d'ouverture (« A fan game by Darknigthmare »), puis **partie libre** sur la même sauvegarde (§45.2) : missions, colonie et station restent ouvertes ; les missions finales se rejouent sans effet d'histoire.
+
+**Reprise** : chaque phase (`council`, `final`, `ending`, `epilogue`, `credits`, `complete`) est enregistrée avant la cinématique qui la suit ; un rechargement rejoue l'étape en cours. Le pont n'est jamais redemandé.
+
+**Valeurs et textes [PROPOSÉ]** (réglables sans nouvelle décision, §56.1) :
+
+| Élément | Valeur |
+| --- | --- |
+| Confiance *solide* d'un conseiller | loyauté ≥ 75 (bande `NPC_TRUST_LEVELS_V62`) |
+| Sanaa Doyle · tourelles | +120 munitions au départ de chaque mission finale |
+| Cal Mercer · blindage | blindage porté à 100 au départ |
+| Maksim Orlov · fenêtre | +6 s au pont |
+| Leila Sørensen · route | 2 colons en retard sur 4 rejoignent le port si leur remorque est lâchée |
+| Pont | 15 s ; sans réponse, le fret cède ; 4 colons dans la remorque en retard |
+| *Céder* sans restitution | stress +10 pour chaque membre de l'équipage |
+| Textes | ordre de Halloran, répliques des conseillers, de CASSIUS et d'Echo-9 au conseil, textes du pont et du quai, répliques de Cal (CIN-60) et de Rook (CIN-61), 24 derniers mots (Vega, Harlow, Rook, DAVID-8R, BISHOP-9, Okafor, Orlov, Mbaye × 3 fins), faits de l'épilogue |
+
+**Fidélité** : aucune fidélité « 1:1 ». Repères documentés cités dans la spec 006 : cofinancement de la colonie avec l'Administration coloniale et audience de l'ICC (*Aliens*, 1986) ; Marshals coloniaux (*Alien: Isolation*, 2014) ; équipe de la compagnie venue récupérer l'« actif » (*Alien 3*, 1992, dernière scène) ; « Special Order 937 » (*Alien*, 1979) ; M577 sous la pluie, Reine et retour en hypersommeil (*Aliens*, 1986). Adaptations du projet : charte et clause, conseil, pont, appel, casier d'Echo-8. À définir : sprite de la Reine (substitut Canvas dans la course, voir « Course du convoi »), art des 15 emplacements (`src/act5-slots-v188.js`).
+
+**Salle des relais** : condition de *Transmettre* fournie par le hub Asphodèle (`asphodeleRelayReadyV188`), lue par défaut par `finalChoiceOptionsV188` ; l'Acte V ne la reconstruit pas.
+
+**Course du convoi — [PARTIEL] V188 (2026-11-21, Q1 A au sens strict).** Code : `src/act5-convoy-race-v188.js` (règles pures, textes FR/EN, emplacements d'art, substituts Canvas), `src/act5-convoy-race-runtime-v188.js` (mission, composé juste au-dessus de la chaîne V158, sous toutes les couches V188) ; écritures de sauvegarde dans `src/story-act5-v188.js` ; tests `scripts/verify-act5-convoy-race-v188.mjs` ; parcours navigateur `scripts/qa-act5-convoy-race-v188.mjs`.
+
+- **Lancement** : depuis la ligne décidée au conseil, comme avant (identifiants `act5-last-run` et `act5-depot-queen` inchangés). Le M577 est attribué d'office ; insertion et extraction passent par le UD-4L en mode `apc` (gabarit `planet-exterior`).
+- **Remorques** (ordre M577 → colons → fret) : la remorque des colons porte les 4 colons en retard ; celle du fret porte les conteneurs scellés du manifeste de l'Acte III (`storyCampaignV188.m577Manifest.containers`) ; les colons du manifeste voyagent dans le M577 et ne sont pas largables. Chaque remorque suit sur un timon à ressort amorti avec butées ; masse, roulement et traînée réduisent la vitesse du convoi.
+- **Largage** : `C` lâche les colons, `X` le fret. Pendant *Dernier départ*, la première remorque lâchée **est** la décision du pont (`act5.bridge`, même règle Q2 A) ; une remorque lâchée sur la route arrête les poursuivants qui l'atteignent. Pendant la poursuite, la remorque restante peut servir de leurre : la Reine s'arrête pour la déchiqueter.
+- **Pont jouable** : à 24 m sur le tablier avec deux remorques, le tablier s'affaisse et le convoi s'enlise ; la fenêtre de décision reste 15 s (+6 avec Orlov). Sans décision, l'attelage arrière (fret) cède seul. L'effondrement progresse derrière le convoi ; un convoi arrêté sur le tablier y bascule (échec, reprise au checkpoint du pont, la décision enregistrée restant acquise). La boîte de choix chronométrée précédente reste en repli hors de cette course.
+- **Reine** : admise seulement si le profil du catalogue est `enemy-008-queen`, de caste royale (`royal`/`boss`) et de la classe de stature 4,8 m (`creature-scale-v188.js`) ; elle est dessinée à **245 px** (1 m ≈ 51 px). Machine à états explicite : traque → préparation → bond → reprise, déséquilibre sous le feu, recul, festin sur une remorque abandonnée, mort. Elle n'entre pas dans `this.enemies` : aucune logique commune (tactiques, castes, horde) ne lui est appliquée. **Décision du 2026-11-22 : elle atteint toujours le carrefour.** Pendant la poursuite, elle est blessée et déséquilibrée, mais sa santé s'arrête à un plancher ; touchée à ce plancher, elle est repoussée (`recoil`) puis revient. Elle ne peut mourir qu'au carrefour du port, où le convoi s'arrête et doit l'abattre.
+- **M577 à l'échelle (décision du 2026-11-22)** : `src/m577-scale-v188.js`, 8,8 m **[À VÉRIFIER]** à 51 px/m = **449 px** (boîte de collision 449 × 112, coque de 2,2 m [PROPOSÉ] ; 140 px dessinés avec la tourelle), dans les deux missions de la course et le convoi de l'Acte III (`special-apc-convoy`, voies comprises). Substitut Canvas derrière l'emplacement nommé `m577-mission-side-scale` (aucun fichier demandé tant qu'il est absent) : deux roues par flanc sur la ligne des pieds, porte latérale entre elles, tourelle de toit arrière à deux canons, affût de nez, attelage arrière à 24 px du sol où s'accroche le premier timon. Remorques : 4,6 m [PROPOSÉ] (235 px). Cadrage : M577 de la course à x 780 (nez à 1 229 px), convoi entier dans la vue ; M577 de l'Acte III à x 805, nez à gauche (une reprise enregistrée avec l'ancienne boîte, x 955, reste acceptée). Sources de la longueur, divergentes et sans source primaire : question au propriétaire (≈ 8,8 m ≈ 450 px) ; AvP Central, « M577 APC » (9,22 m tourelle rentrée, 8,58 m tourelle levée) ; wiki de fans Weyland-Yutani (environ 7 m). La miniature de tournage (Propstore, lot 6) reste la référence de morphologie, pas de mesure.
+- **Le M577 à l'échelle partout (second tour du 2026-11-22)** : le M577 conduit dans les niveaux ordinaires (véhicules 001 et 002, la variante de commandement partage la coque) et celui que le UD-4L descend ont la même coque de 449 × 112 px. Garé sans toucher à la géométrie sur une voie de sol continue qui mène à l'extraction (jamais sur une cabine d'ascenseur ni sous un pont plus bas que ses 140 px, jamais au travers d'une porte), conduit dans cette voie, sortie par la porte latérale. Le UD-4L reste en vol stationnaire (150 px [PROPOSÉ]) pour le descendre ou le hisser : sur ses patins, son ventre est à 36 px du sol. Le M577 de transport repart hissé avec le vaisseau. Cadrage de la poursuite [PROPOSÉ] : quand la Reine approche, la caméra garde sa silhouette entière et la tourelle du M577 dans la vue (décalage, puis recul jusqu'à 0,78 avec deux remorques). Détail : `docs/development/QUESTIONS_PROPRIETAIRE_V188.md`, D5 et D8.
+- **Checkpoints** : un par phase (route, pont, rive nord, approche du port ; poursuite, carrefour).
+- **Sauvegarde additive** : `storyCampaignV188.act5.convoyV188 = { drops: [{ trailer, mission, cause, metres }], bridgeCrossed, queen }`, absent des anciennes sauvegardes, validé par `normalizeAct5ConvoyV188` ; le validateur de `src/save.js` n'est pas modifié. Conséquence : des colons en retard perdus après le pont ne rejoignent pas le port (appel de CIN-61) ; la route de Leila ne ramène que ceux laissés pendant *Dernier départ*.
+- **Retours** : sons existants V188 (tourelle, cri du coureur et de la Reine, alarme du pont, attelage), particules de la couche VFX V188, journal radio FR/EN.
+
+| Valeur [PROPOSÉ] | Réglage |
+| --- | --- |
+| M577 | 22 t, traction 62 kN, blindage 340 |
+| Remorque | 9 t, timon 1,6 m, ressort 120 kN/m, amortisseur 24 kN·s/m, intégrité 100 |
+| Tracé | course 1 500 m, pont à 700 m sur 90 m, effondrement 2 m/s (enlisé) puis 7 m/s ; poursuite 1 600 m |
+| Tourelle arrière | 8 coups/s, 12 dégâts, portée 70 m, surchauffe à 100 % |
+| Coureurs | `enemy-006-runner`, 80 PV, 19 m/s, vagues de 2 toutes les 7 s, arrêtés 4 s par une remorque |
+| Reine | santé du catalogue × 12, traque 20 m/s, bond 24 m/s, 34 dégâts à une remorque, dégâts du catalogue au blindage, festin 6 s ; avant le carrefour, plancher de santé 30 %, recul de 8 m en 0,8 s |
+| M577 et remorques (2026-11-22) | M577 8,8 m [À VÉRIFIER] = 449 px, coque 2,2 m = 112 px ; remorque 4,6 m = 235 px |
+
+**Fidélité** : documenté (*Aliens*, 1986) — le M577 et sa fuite du processeur, la Reine qui poursuit les survivants jusqu'à la plate-forme d'évacuation du *Sulaco*. Adaptation du projet — remorques, pont, poursuite routière, tourelle tirant vers l'arrière, festin sur une remorque. À définir — sprite de la Reine (emplacement `act5-queen-chase-side`, 520 × 245, aucun fichier demandé tant qu'il est absent), sprite de mission du M577 (emplacement `m577-mission-side-scale`, 449 × 140) et sa longueur documentée (8,8 m [À VÉRIFIER]). Aucune fidélité « 1:1 ».
+
+- **Fret perdu (décision du 2026-11-22)** : les conteneurs du manifeste voyagent dans la remorque de fret. Une remorque de fret lâchée au pont (choix ou délai) ou sur la route les emporte : `act5ContainersBroughtBackV188` vaut alors 0, *Céder le dépôt* n'est plus une « restitution » (`act5RestitutionHeldV188`), le coût moral s'applique une fois au passage à la fin (champ additif `act5.restitutionLostV188`), la fin ajoute « Le fret perdu en route ne revient pas : Halloran ne parle plus de « restitution »… » et l'épilogue un fait « Fret perdu : … au fond du ravin du pont / sur la route du port avec n conteneur(s) QZ17 » (FR + EN). Avec le fret ramené, la fin dit « Halloran présente la cession du dépôt comme une « restitution » : n conteneurs QZ17 rendus ».
+
+**Audience au quai — [PARTIEL] V188 (spec 010, 2026-11-22).** Première mécanique nouvelle de Q17 A (« face-à-face sans tir »). Code : `src/confrontation-state-v188.js` (règles), `src/confrontation-entries-v188.js` (données FR/EN), `src/confrontation-v188.js` (registre, sauvegarde), `src/confrontation-ui-v188.js` (présentation) ; raccordement dans `src/story-act5-v188.js` et `src/app.js` ; tests `scripts/verify-confrontation-v188.mjs`, parcours `scripts/qa-confrontation-v188.mjs`.
+
+- **Déroulé** : ligne *Tenir la colonie*, après les trois missions finales, à la table tactique. L'officier des commandos tient la liaison QZ ; la Directrice Halloran répond depuis la direction régionale (§2.3 : elle ne s'adresse au Tantalus que par messages). Sept échanges : elle cite une clause (charte, clause 14 ; manifeste QZ17 ; protocole d'expédition, article 3 ; délégation d'Asphodèle ; protocole des synthétiques ; annexe de viabilité ; règlement des enquêtes internes). Echo-9 répond par une pièce du dossier QZ17 détenue, ou se tait.
+- **Règles [PROPOSÉ]** : pièce décisive +2 de terrain, partielle +1 (pièce dépensée), hors sujet −1 de crédibilité (pièce gardée), silence sans effet ; crédibilité 3 ; cible 10 ; gagnée dès la cible, perdue à crédibilité 0 ou après le dernier échange. Chaque pièce est décisive à un seul échange : l'audience est impossible sous 5 pièces et gagnable à partir de 5 (borne de Q4 A conservée). Avec 5 pièces exactement, il faut chacune au bon moment.
+- **Issue** : gagnée → `act5.standoff = 'withdrawn'`, perdue → `'held'` ; la scène du quai, CIN-61, la fin et l'épilogue existants suivent. Aucune fin nouvelle. *Transmettre* et *Céder* inchangés.
+- **Sauvegarde additive** : `storyCampaignV188.confrontationsV188['act5-halloran-quay']`, écrite à chaque échange ; un rechargement reprend à l'échange suivant ; absente des anciennes sauvegardes, qui gardent la règle Q4 A.
+- **Accessibilité** : aucune limite de temps ; mouvement réduit respecté ; clavier (1-9, S), souris, toucher ; texte lisible hors du Canvas ; Échap ne ferme pas l'audience.
+- **Fidélité** : ton de la compagnie qui « cite » (§1.3) ; audience de l'ICC (*Aliens*, 1986). Clause 14 reprise du §21 (CE-05) ; autres numéros de clause et répliques **[PROPOSÉ]**. Portrait de Halloran : substitut Canvas (buste sur écran CRT, emplacement `confrontation-halloran-crt`), aucune fidélité « 1:1 ».
+- **Entrée prête pour S2** : interrogatoire de CASSIUS (`station-s2-cassius`, §7.2), non raccordé (lot des niveaux de la station) ; voir spec 010.
+
+**Reste à faire** : art de la Reine en poursuite et du M577 de mission, longueur documentée du M577, palier *Libre* après « Le relais parle », effets durables de la relève de Vega et de la démission d'Inez en partie libre, nouvelle partie +.
+
 ---
 
 ## 6. Front colonie — Port-Méridien : sauver, puis reconstruire
@@ -872,12 +1013,14 @@ C'est ce qui relie la reconstruction à l'intrigue : **chaque chantier terminé 
 
 ### 6.2 Missions
 
+> **État V188 (lot colonie et équipage, 2026-11-16) — [PARTIEL].** C1-C4, les 7 annexes et les 8 contrats locaux sont jouables (`src/colony-missions-v188.js`) ; C5 se joue comme la mission de l'Acte V `act5-port-walls` (§5.6, étape 7). Accès, récompenses, décisions et valeurs au §6.4. `colony-intro-*` inchangés.
+
 **Intro**
 
 | ID | Titre | Statut | Résumé | Ancrage Alien |
 | --- | --- | --- | --- | --- |
 | `colony-intro-quai` (ID proposé) | **Le quai des vivants** | Séquence **[EXISTANT]** / raccordement **[PROPOSÉ]** | Triage, blessé, sas, trois civils (`port-meridien-v90.js`). Rencontre de Tomas Wren et Lucia Ferro. | Évacuation de colons, premier hôte. |
-| `colony-intro-doyenne` | **La doyenne** | **[PROPOSÉ]** | Asha présente Echo-9 à Adèle Sarrazin. Visite du port : quais, infirmerie, processeur atmosphérique, mur nord. Adèle montre la dette de la colonie envers la compagnie : « S'ils nous déclarent non viables, ils reprennent tout, nous compris. » | Colonie endettée envers la compagnie. |
+| `colony-intro-doyenne` | **La doyenne** | **[EXISTANT] V188 en visite guidée** (séquence `cin-doyenne` à la fin du quai ; la visite libre attend un hub Port-Méridien, §43) | Asha présente Echo-9 à Adèle Sarrazin. Visite du port : quais, infirmerie, processeur atmosphérique, mur nord. Adèle montre la dette de la colonie envers la compagnie : « S'ils nous déclarent non viables, ils reprennent tout, nous compris. » | Colonie endettée envers la compagnie. |
 
 **Principales**
 
@@ -914,7 +1057,9 @@ C'est ce qui relie la reconstruction à l'intrigue : **chaque chantier terminé 
 | Chargeur bloqué | `secure the power loader` | Vitesse des chantiers + |
 | Sceller une ouverture | `seal the hive` | Infestation − |
 
-### 6.3 Reconstruction — [PROPOSÉ]
+### 6.3 Reconstruction — [PARTIEL] V188
+
+> **État V188.** La table existe dans la vue Commandement (« RECONSTRUCTION DE PORT-MÉRIDIEN », `src/colony-reconstruction-v188.js`, sauvegarde `colonyV188`). Les adaptations et valeurs retenues sont au §56.8.
 
 Après C2, Asha ouvre la **table de reconstruction** (salle commune de Port-Méridien, ou console des quartiers du Tantalus). Chaque chantier a trois niveaux et correspond à un **critère de viabilité** de la charte.
 
@@ -944,6 +1089,51 @@ Après C2, Asha ouvre la **table de reconstruction** (salle commune de Port-Mér
 | **Rétablie** | 3 chantiers niveau 1 | Annexes de la colonie ; recrutement de Nadia Bensaïd. |
 | **Autonome** | 5 chantiers niveau 2 | La colonie remplit les critères de viabilité ; condition de la fin « Le relais parle ». Ressources régulières. |
 | **Libre** | 7 chantiers niveau 3 + fin « Le relais parle » | Épilogue spécial : premier convoi civil hors réseau QZ. |
+
+### 6.4 Missions de la colonie jouables — [PARTIEL] V188 (lot colonie et équipage, 2026-11-16)
+
+**Ravitaillement rendu par la colonie (décision du 2026-11-23) [PROPOSÉ]** : chaque mission de Port-Méridien réussie rend **8** de ravitaillement (rejouées et contrats compris), chaque niveau de chantier validé **4** ; soute plafonnée à 100 (`COLONY_SUPPLY_RETURNS_V188`). Une sortie sur Cocyte coûte 6. Le Commandement affiche ces sources ; le bilan nomme le montant reçu. Le carburant n'est pas concerné.
+
+Décision par défaut Q25 A : C1 puis C5 d'abord ; C2-C4, les annexes et les contrats suivent le même gabarit. Code : `src/colony-missions-v188.js` (données et règles), `src/colony-reconstruction-v188.js` (validation locale, volontaires), `src/colony-crew-slots-v188.js` (emplacements d'art) ; sauvegarde additive `colonyMissionsV188` (missions déjà payées, scènes vues, décisions C4 et Grue, compteurs de contrats, volontaires). Lancement depuis l'ordre de mission du Commandement, comme toute opération : départ du hangar, insertion, mission sur un gabarit existant, extraction, retour au hangar du Tantalus. Les missions verrouillées n'apparaissent pas dans les listes et le lancement les refuse.
+
+**Ce qui est joué et comment on y accède [PROPOSÉ pour les verrous]**
+
+| Mission | Ouverture | Gabarit · objectif existant | Chantier | Récompense unique [PROPOSÉ] |
+| --- | --- | --- | --- | --- |
+| `colony-c1` Tenir le port | Acte I (QZ-17) | `colony-multiroute` · `defend the colony` | Murs et sas | construit et valide le niveau suivant (sas soudés) ; infestation −4 ; **remplace la validation provisoire** |
+| `colony-c2` L'air du port | Acte II + C1 | `ship-interior-vertical` · `restore atmospheric processing` | Processeur | niveau suivant ; stabilité +2 |
+| `colony-c3` Le convoi des rescapés | convoi du M577 (Acte III) + C2 | `colony-multiroute` · `rescue survivors` | Infirmerie | niveau suivant ; quarantaine −3 |
+| `colony-c4` Le culte du port | Acte IV + C3 | `colony-multiroute` · `navigate the vent network` | Habitat | niveau suivant ; puis décision Marshals / exil / médiation |
+| C5 La nuit des murs = `act5-port-walls` | ligne *Transmettre* ou *Tenir* de l'Acte V | mission de l'Acte V, id conservé | Murs et sas | valide le niveau payé en attente ; stabilité +5 |
+| `colony-a-quai` Ce que le quai a vu | après C1 | `escort a colony convoy` | Quais | **témoignage de Wren, 7e pièce du dossier QZ17** |
+| `colony-a-ferro`, `-abri`, `-seegson`, `-balise`, `-crucible` | palier *Rétablie* | objectifs du §6.2 | Infirmerie, Habitat, Énergie, Contact, Quais | recherche +4 ; stabilité +4 ; alliage +30 ; 2 volontaires ; décision de Grue |
+| `colony-a-converti` Mon frère est parti | entre C3 et C4 | `navigate the vent network` | Habitat | 1 volontaire ; ouvre la **médiation** de C4 |
+| 8 contrats `colony-l-*` (rejouables) | défensifs (réservoir, ronde des murs, ouverture) en *Survie*, tous en *Rétablie* | objectifs du tableau « Locales » | voir ci-dessous | valident le niveau en attente de leur chantier, à chaque réussite |
+
+Contrats et chantiers [PROPOSÉ] : Purge du réservoir → Énergie (nid contre le réacteur, infestation −3) ; Escorte des moissonneurs → Habitat (+1 volontaire) ; Ronde des murs → Murs et sas ; Filtres du processeur → Processeur ; Récupération en périphérie → Communications (boîtes noires des relais, +120 crédits, +12 alliage) ; Recherche de disparus → Infirmerie (+1 volontaire) ; Chargeur bloqué → Quais ; Sceller une ouverture → Murs et sas (infestation −3). Le « chantier Eau » du tableau « Locales » n'existe pas au §6.3 : la purge du réservoir est rattachée à l'Énergie.
+
+**Règles appliquées.** Après C1, une opération ordinaire sur Cocyte ne valide plus de niveau ; seule une mission locale le fait (§6.3) ; une mission ratée endommage toujours un chantier. Chaque mission principale ou annexe ne paie qu'une fois (un rejouage ne change rien) ; les contrats se répètent. Les volontaires (annexes, contrats, quête d'Asha) relèvent la limite de chantiers actifs mais ne comptent pas dans l'appel de CIN-61. Au retour, une scène par mission s'ouvre une fois à la table tactique ; la décision de C4 et celle de Grue ne se referment pas avant d'être prises et ne se reprennent pas. La table de reconstruction liste les missions, leur chantier, les contrats ×n, les volontaires et le bonus de C5.
+
+**C5 [PROPOSÉ].** Le niveau validé des Murs et sas règle la défense au lancement de `act5-port-walls` (une fois par lancement, pas à la reprise) : sas soudés +40 munitions ; mur nord blindage 60 ; tourelles sentinelles +80 munitions.
+
+**Décisions [PROPOSÉ].** C4 : Marshals (stabilité +4, quarantaine +2), exil (stabilité +2, infestation +3), médiation d'Adèle si le frère a été ramené (stabilité +6, 2 volontaires). Grue : accepter (alliage +60, stabilité −2) ou refuser (stabilité +2).
+
+**Fidélité.** Aucune fidélité « 1:1 ». Repères documentés : portes soudées et tourelles sentinelles UA 571-C (*Aliens*, 1986, et son édition spéciale, 1991) ; processeur atmosphérique de Hadley's Hope (*Aliens*, 1986) ; embryon révélé par un scanner médical (*Alien 3*, 1992) ; Marshals coloniaux et matériel Seegson à bas coût, synthétiques bloqués sur une consigne (*Alien: Isolation*, 2014) ; chargeur P-5000 et M577 (*Aliens*, 1986). Adaptations du projet : charte et chantiers, carnets de Wren et ses deux bordereaux, culte des « Enfants de l'Hôte Parfait » (§1.5, art original à refaire, Q47), Grue. Textes des scènes et décisions [PROPOSÉ]. Les 7 illustrations de retour de colonie sont désormais produites et chargées par `colony-crew-slots-v188.js` (continuation du 16 novembre 2026) ; les indices et légendes restent natifs FR/EN. Ces illustrations de dialogue ne constituent pas des décors de niveau ni de nouveaux acteurs. Les niveaux dédiés de C1-C4 sont décrits ci-dessous ; leurs décors restent des primitives.
+
+**Niveaux dédiés C1-C4 — [PARTIEL] V188 (2026-11-21, spec `008-niveaux-colonie`).** Une couche par mission (`src/colony-mission-levels-v188.js`, lieux mesurés par `src/colony-level-places-v188.js`, emplacements d'art `src/colony-level-art-v188.js`) se pose sur les gabarits existants : identifiants, objectifs de campagne, récompenses, `colonyMissionsV188`, décision C4 et règles de reconstruction inchangés. La rencontre générique (roster, reine du gabarit, générateur) laisse place aux phases écrites ; l'objectif existant (défendre, rétablir l'air, secourir, traverser les conduits) est rempli par ces phases. Règles communes [PROPOSÉ] : 51 px/m, marine 44 × 92 ; toute apparition hostile naît derrière une zone sûre de 900 px et attend 4 s ; un checkpoint par phase, écrit au début de la phase (reprise et nouvelle tentative y reviennent, phase telle qu'au début, champ de reprise additif `colonyLevelV188`) ; interactions sur le rail ; une interaction maintenue (E) avance tant qu'on la tient à portée, un coup la met en pause sans la remettre à zéro.
+
+| Mission | Rendu | Phases jouées | Valeurs [PROPOSÉ] |
+| --- | --- | --- | --- |
+| C1 Tenir le port | V2 : couloir de profondeur `colony-c1-port-corridor` (≈ 4 450 px de rue, quai → plate-forme ; ascenseurs garés à la rue) | largage → quai → entrepôt QZ17-04 (conteneur ouvert, rideau à baisser, 2 s maintenues) → rue → infirmerie (Lucia Ferro, 3 patients à mener à la plate-forme, à pied, s'ils voient le marine) → sas A (volet de la rue) et sas B (mur nord, dessiné sur la paroi) soudés 6 s chacun, étincelles et cordon → 2 sentinelles UA 571-C prises sur la plate-forme et posées sur le rail → pic au sas B, puis retour calme vers l'extraction | entrepôt : 4 drones, 2 à la fois, 1 / 9 s ; évacuation : 6, 3 à la fois, 1 / 7 s ; sas A : 4 ; pic au sas B : 8, 5 à la fois, 1 / 2,2 s ; sentinelle : 220 cartouches, 520 px, 9 dégâts / 0,18 s ; aucune apparition vers l'extraction |
+| C2 L'air du port | V1 (intérieur, §43.1) ; la cale procédurale du gabarit vaisseau n'est plus appliquée à C2 | passerelle (radio de Jun Park, repos) → conduits (embuscade, détecteur de mouvement) → échangeurs (nid de résine et cocons, purge maintenue 5 s) → salle de contrôle (3 disjoncteurs, console de relance) → surpression (deux évents de vapeur pulsés) sur la route éclairée → extraction sur le pont haut | embuscade 3 drones ; réveil du nid 3 ; surpression 4 ; vapeur 1,2 s sur 3 s |
+| C3 Le convoi des rescapés | V1 | quai du M577 → couloir de triage → poste de scanner (5 rescapés, 2,5 s chacun) → infirmerie de Noor Okafor (décision du 2026-11-22 : Noor tient l'infirmerie et n'est pas déployée avec l'escouade dans C3 ; elle la rejoint de nouveau ensuite ; réplique FR/EN au départ) | porteur tiré de la graine de mission et conservé dans le checkpoint ; panique : viser (Maj ou tir) +35/s, courir près d'eux +25/s, −12/s sinon, dispersion à 100 vers les salles voisines (rassurer un par un, pas d'échec) ; éclosion 240 s après la révélation, échec et reprise à la phase si elle survient ; 2 drones rôdeurs |
+| C4 Le culte du port | V1, nuit (lampe du marine, dortoirs plus sombres) | dortoirs : 3 indices (journal du sas ouvert de l'intérieur, inscription « élus », scellé forcé) → conduits du réseau V62 : la branche du toit médical est un cul-de-sac avec une cache facultative (+1 renseignement), l'autre mène au rassemblement ; le volet de sécurité est scellé de l'intérieur ; décision du 2026-11-22 : une grille de service soudée ferme la galerie technique (entre les échelles de la rue B et de la sécurité, du sol au plafond) et une porte de toit soudée ferme le toit du bloc des communications, qui contournait lui aussi les conduits ; les conduits sont le seul chemin (le chalumeau reste dans la galerie, à l'ouest de la grille) → rassemblement : 3 convertis en ronde (vue 240 px), un élu dans un cocon (résine maintenue 4 s) → extraction, puis la décision C4 existante | convertis évitables, maîtrisables sans les tuer (E de dos ou quand ils sont étourdis) ; un converti tué : stabilité −1 (au plus −3), appliqué une fois au règlement de l'opération réussie |
+
+Sources et fidélité (aucune fidélité « 1:1 ») — documenté : portes soudées et tourelles sentinelles UA 571-C avec compteur de munitions (*Aliens*, 1986, et son édition spéciale, 1991) ; ruche dans la chaleur du processeur atmosphérique, colons cocoonés sur ses parois (*Aliens*, 1986) ; embryon révélé par un scanner médical (*Alien 3*, 1992) ; détecteur de mouvement (*Aliens*). Adapté par le projet : conteneur QZ17-04, plan de Port-Méridien, deux sentinelles posées par le joueur, jauge de panique, compte à rebours d'éclosion, convertis des Enfants de l'Hôte Parfait et leurs « élus » (§1.5), maîtrise non létale, coût de stabilité. À définir : l'art de tous les emplacements (primitives Canvas ; aucune image générée) ; les patients, rescapés et l'élu réemploient provisoirement la planche des trois survivants du cargo (`cargo-brutal-visuals-v67.js`) et le M577 la primitive du largage, sans valeur d'identité.
+
+**Décisions du 2026-11-22 (C1, C3, C4).** Le M577 du joueur reste à bord dans C1, C3 et C4 : véhicule rangé au démarrage, insertion et extraction à pied (le M577 garé au quai de C3 reste un décor de l'arrivée des rescapés ; second tour du 2026-11-22 : il est à l'échelle, 449 px entièrement sur le sol du quai, nez vers le début du niveau, porte arrière vers les rescapés, sur le tablier derrière la voie des marines, non conduisible ; l'écran de préparation de C3 liste Noor Okafor « indisponible · à l'infirmerie » avec la raison). C1 : la perspective du pont du couloir est plafonnée à un demi-écran (`deckPerspectiveSpan` 640 px [PROPOSÉ]) ; aux deux bouts, les joints penchent comme au bord d'un écran centré, ≈ 85 px au lieu de ≈ 296 px.
+
+**Reste à faire.** Art des niveaux dédiés de C1-C4 (20 emplacements en primitives, dont la grille et la porte de toit soudées de C4) et voix ; console du quai (Q26) ; quartiers V2 (Q24) ; palier *Libre* ; recrutement de Nadia Bensaïd à *Rétablie* (§8.3) ; vie de la colonie entre deux missions (Q29). Les annexes et contrats gardent leurs gabarits génériques.
 
 ---
 
@@ -981,6 +1171,8 @@ Le joueur doit **l'aborder**, **la remettre en service**, découvrir ce qui s'y 
 | **Réécrire ses priorités** (« les vivants d'abord ») | CASSIUS reste au service du hub ; meilleur réseau ; il peut être repris si la compagnie retrouve un accès administrateur. |
 | **Le brider** | Fonctions réduites, aucun risque ; certaines annexes indisponibles. |
 | **L'effacer** | Station en mode manuel ; ponts inférieurs ouverts à la force, plus dangereux ; perte de ses archives (une pièce du dossier en moins). |
+
+**Interrogatoire de CASSIUS — [PROPOSÉ] (spec 010, 2026-11-22)** : une entrée d'audience sans tir est prête (`station-s2-cassius`, `src/confrontation-entries-v188.js`) : CASSIUS cite cinq consignes (Q-1 quarantaine, P-2 priorité cargaison, A-3 préservation des actifs, journal des personnes, intégrité des journaux) ; Echo-9 lui oppose les pièces détenues (pas les ordres de livraison, récupérés en S2 même). Elle n'est pas encore raccordée ; son issue (`conceded` / `held`) nourrirait la décision existante ci-dessus sans nouvelle option (question Q-010-2).
 
 **Annexes**
 
@@ -1031,9 +1223,181 @@ Révélé par morceaux dans S1-S3 et les annexes :
 
 Echo-9 retrouve la plaque du sergent Kessler et le dernier enregistrement de l'équipe. Si la plaque est ramenée au Tantalus, elle est déposée dans le casier vide.
 
+### 7.5 Première version jouable — [PARTIEL] V188 (spec 005, 2026-11-15)
+
+Décisions par défaut appliquées : Q6 (S1-S4 comme missions avant le hub), Q7 (choix CASSIUS définitif), Q103 (feature Spec Kit `specs/005-front-asphodele-quetes/`). Code : `src/station-asphodele-v188.js`, raccordé à `content.js`, `save.js` (`stationV188`), `story-dossier-v188.js` et au Commandement.
+
+- **Accès** : Acte II terminé → quête de Rook « Six heures », dont la fin joue *Six heures de silence* (§8.4) → S1 → S2 → décision CASSIUS → S3 → S4. Les missions verrouillées ne sont pas proposées ; le lancement est refusé avec la raison. Une mission en cours reste reprise.
+- **Missions** : `station-s1` à `station-s4` sur Cocyte (`world-05-lethe`), gabarit intérieur de vaisseau, objectifs et registres de §7.2 et §0.3 (Horreur, Tension, Horreur, Action). Le décor est l'intérieur de vaisseau générique : les illustrations de scène de §7.8 ne remplacent pas l'art jouable encore à produire (§29.4). *Mise à jour du 2026-11-22 : niveaux dédiés posés sur ce gabarit, voir §7.10.*
+- **Dossier** : S2 donne la pièce *Ordres de livraison archivés par CASSIUS*, même si CASSIUS est effacé ensuite (§5.7.1). S4 rend la condition « Asphodèle reprise » vraie ; la salle des relais vient du hub Asphodèle (`asphodeleRelayReadyV188`), condition lue par l'Acte V (§5.11).
+- **Effets CASSIUS [PROPOSÉ]** : réécrit, quarantaine de Cocyte −6 et stabilité +3 ; bridé, quarantaine −3 ; effacé, aucun effet. Les annexes fermées par le bridage n'existent pas encore.
+- **Scènes de retour** (S1, S3, S4) et décision CASSIUS : au Commandement, une seule fois, illustrations de `src/content-gap-slots-v188.js` depuis la continuation du 16 novembre 2026 (§7.8), avec repli en primitives Canvas.
+- **[PROPOSÉ]** : la consigne qui ferme le sas 3 à 6:00:05 est appliquée par CASSIUS (indice de la quête de Rook) ; les journaux des survivants s'arrêtent au quatrième jour.
+- **Fidélité** : aucune fidélité « 1:1 ». Apparence documentée citée dans la spec 005 (détecteur trompé par l'air en mouvement et caméras de casque, *Aliens*, 1986 ; Seegson et son IA qui applique ses consignes, *Alien: Isolation*, 2014). CASSIUS, Asphodèle, Echo-8 et Kessler sont des créations du projet. À définir : décor, interface vocale de CASSIUS, visage de Kessler.
+- **Reste à faire** (mis à jour par §7.6 et §7.10) : ~~hub Asphodèle, annexes, contrats, CIN-70 à CIN-72, plaque de Kessler~~ → première version en §7.6 ; ~~niveaux de S1-S4 sur le gabarit générique~~ → niveaux dédiés en §7.10 ; restent les points listés en §7.6 et §7.10.
+
+### 7.6 Hub Asphodèle, missions de la station, contrats — [PARTIEL] V188 (spec 007, 2026-11-15)
+
+Décisions par défaut appliquées : Q22 (A, modules construits dans le moteur du hub), Q23 (A, anneau et rayon en couloirs de profondeur V2, modules en V1, tout parcouru à pied). Feature : `specs/007-hub-asphodele/`. Code : `src/asphodele-hub-v188.js`, `src/asphodele-missions-v188.js`, `src/hub-asphodele-v188.js`, `src/asphodele-hub-slots-v188.js`, `src/station-cinematics-v188.js`.
+
+- **Accès** : après S4. Au hangar du Tantalus, le dialogue d'embarquement de l'UD-4L propose « NAVETTE · STATION ASPHODÈLE » si le Tantalus est en orbite de Cocyte, sans saut en charge ni opération en cours. Arrivée au sas 1 des quais ; retour par le même sas, à la pose d'avant le départ dans le hangar.
+- **Pourquoi pas le saut galactique** : la station est dans l'orbite de Cocyte ; un saut coûte 14 jours d'hypersommeil (§13.6). Les quais sont déjà, en §7.3 et §42.2, le lieu des navettes vers le Tantalus.
+- **Pièces construites (9)** : quais d'arrimage (V2), anneau extérieur (V2), rayon A (V2), pont de contrôle, salle des relais, laboratoire de transit, mémorial, serre, marché de l'anneau (V1). Les quais restent en profondeur : grand sol d'arrimage, sprites jamais mis à l'échelle.
+- **Portes scellées visibles, avec leur raison** : sas 2 (UD-4L d'Echo-8, laissé en place), sas 3 (navette Crucible de Grue), hangar de réparation, quartiers (colonie *Autonome*), infirmerie de station, ponts inférieurs (missions de nuit). Ces quatre modules de §42.2 ne sont **pas** construits.
+- **Ouverture des modules** : pont de contrôle et anneau à S4 ; laboratoire à S3 ; mémorial après *Les journaux de l'équipage* ; serre après *La serre* ; marché après *Le pacte de l'anneau* **et** le pacte accepté auprès de Grue aux quais (expulsés : marché fermé) ; salle des relais après trois *Relais en dérive*.
+- **Missions annexes (7)** : les identifiants de §7.2, sur Cocyte, gabarit d'intérieur de vaisseau, objectifs existants. **[PROPOSÉ]** : toutes après S4 ; *Ce que CASSIUS a vu* exige CASSIUS réécrit (bridé, ses archives font partie des annexes fermées) ; *Accès administrateur* exige CASSIUS conservé. Objectifs [PROPOSÉ] : `recover black-box data` (Echo-8, balise, caméras), `board a drifting vessel` (Grue), `navigate the vent network` (journaux), `restore atmospheric processing` (serre), `destroy a neuro-link relay` (BISHOP-9).
+- **Contrats locaux (6), rejouables** : `station-c-conduits`, `station-c-relais` (*Relais en dérive*, `recover black-box data`), `station-c-epave`, `station-c-pression`, `station-c-nid`, `station-c-synthetique`, objectifs de §7.2. Chaque opération réussie compte une fois. Effets : voir §7.7 (suite du 2026-11-16).
+- **Carte du réseau QZ** (pont de contrôle) : liste missions et contrats, avec leurs verrous ; une mission ouverte se planifie et part du hangar du Tantalus. **[PROPOSÉ]** : lancer une opération depuis la station ramène d'abord l'UD-4L au Tantalus.
+- **Transmettre** : dans la salle des relais, E sur les baies de transmission les met en ligne. `asphodeleRelayReadyV188(save)` = station reprise ∧ trois *Relais en dérive* ∧ baies en ligne ; `finalChoiceOptionsV188` le lit par défaut. Le choix final et les fins appartiennent à l'Acte V (spec 006).
+- **Cinématiques** : CIN-70 (fin de la quête de Rook, avant S1), CIN-71 (après S2, avant la décision), CIN-72 (après S3, avant la scène de retour). Une sauvegarde qui a passé ces moments n'y est pas renvoyée. Lignes [PROPOSÉ].
+- **Plaque de Kessler** (§7.4) : après S3, le casier d'Echo-8 du Tantalus propose de la déposer ; elle y pend ensuite. §42.2 cite un « casier de Kessler » au mémorial : interprété comme son nom au mémorial, avec renvoi au casier du Tantalus **[PROPOSÉ, à confirmer]**.
+- **Valeurs [PROPOSÉ]** : navette sans coût ; noms du mémorial autres que Solène Ivarsson et Dario Kessler (R. Achterberg, M. Oyelaran, T. Vasquez-Brandt, H. Kowalczyk ; Cpl A. Nwosu, Pvt L. Sato, Pvt J. Merrow) ; répliques de Grue, de CASSIUS au noyau, de Kwan, d'Orlov, de Rook et de Kessler.
+- **Sauvegarde** : champ additif `asphodeleHubV188` (lieu, pièce, x, profondeur, pièces visitées, contrats, baies, plaque, pacte). Ancienne sauvegarde : à bord du Tantalus. Lieu « station » sans S4, ou dans un module scellé : ramené au Tantalus ou aux quais.
+- **Fidélité** : aucune fidélité « 1:1 ».
+
+| Élément | Apparence documentée (source citée) | Adaptation du projet | À définir |
+| --- | --- | --- | --- |
+| Quais, coursives, portes | Station Sevastopol, *Alien: Isolation* (2014) : tôles rivetées, bandes jaune-noir, CRT, portes massives | Asphodèle, station Seegson du réseau QZ (création du projet) ; anneau, rayon, moyeu | Décors, portes, props (emplacements `asph-*`) |
+| Pont de contrôle | Salle des opérations de Hadley's Hope, *Aliens* (1986) : moniteurs, carte murale | Carte du réseau QZ, noyau de CASSIUS | Interface, voix de CASSIUS |
+| CASSIUS | IA Seegson qui applique ses consignes, *Alien: Isolation* (2014) | Création du projet ; CRT verts et une onde, sans visage | Voix, typographie |
+| UD-4L | *Aliens* (1986) | Vu au hublot du sas 1 | Image |
+| Echo-8, Kessler, Grue, Crucible | — | Créations du projet, silhouettes en primitives | Visages, costumes |
+
+- **Art du hub** : 20 emplacements nommés (`src/asphodele-hub-slots-v188.js`), placeholders en primitives Canvas, 1 m ≈ 51 px ; aucune image générée pour ces emplacements. Les illustrations de scène de §7.8 sont distinctes.
+- **Reste à faire** (mis à jour par §7.7) : ~~quartiers, infirmerie, ponts inférieurs et hangar de réparation ; commerce du marché (Q30) ; effets des contrats autres que *Relais en dérive* ; décors de station pour les missions annexes et les contrats~~ → §7.7 ; restent la rotation visuelle de l'anneau en jeu, l'art final et le plan V3 (Q23 B, non retenu).
+
+### 7.7 Modules rouverts, effets des contrats, marché, foules — [PARTIEL] V188 (suite de la spec 007, 2026-11-16)
+
+Décision par défaut appliquée : Q30 (A, économie existante et stock limité par cycle). Code : `src/asphodele-hub-v188.js` (quatre pièces), `src/asphodele-missions-v188.js` (effets, ronde de nuit), `src/asphodele-economy-v188.js` (marché, révision du Cheyenne, quartiers, infirmerie), `src/asphodele-crowd-v188.js` (foules), `src/asphodele-mission-dressing-v188.js` (habillage des missions).
+
+| Module | Vue | Ouverture | Interactions |
+| --- | --- | --- | --- |
+| **Quartiers** (anneau) | V1 | Port-Méridien au palier *Autonome* (§7.3) | Registre des cabines : équipage et colons ramenés ; installer les volontaires une fois, moral de l'équipage +4 **[PROPOSÉ]** |
+| **Infirmerie de station** (pont de contrôle) | V1 | S4 (§42.2) | Lits : le membre le plus blessé est soigné par la règle existante (1 MÉDICAL, 1 h, `treatCrewMember`) ; scanner de quarantaine : infestation de la station |
+| **Ponts inférieurs** (pont de contrôle) | V1 | S3 (§42.2), hub actif | Barricades d'Echo-8 (« E-8 05:52 », **[PROPOSÉ]**) ; ronde de nuit : planifie `orig-asphodele-2` *Inspection de nuit* (§39.2, type L, `navigate the vent network`, rejouable) |
+| **Hangar de réparation** (quais) | V2 | S4 et une *Remise en pression d'un module* **[PROPOSÉ]** (§7.2 : « ouvre un module du hub ») | Atelier du Cheyenne : révision 1 (600 CR, 30 alliage, −1 carburant par déploiement), révision 2 (1 000 CR, 60 alliage, 8 R&D, −2) **[PROPOSÉ]** |
+
+- **Effets des contrats [PROPOSÉ]**, additifs, appliqués une fois par opération réussie (garde : identifiant d'opération), affichés au compte rendu et sur la carte du réseau QZ : *Inspection des conduits* sécurité de la station +10 (plafond 60) ; *Inspection de nuit* +5 ; la sécurité réduit de 1 point par tranche de 10 le risque des opérations de la station ; *Purge d'un nid* infestation de la station −10 (départ 40) et de Cocyte −3 ; *Récupérer un synthétique* main-d'œuvre +1 (plafond 3), +1 au stock de chaque achat du marché ; *Épave à proximité* +12 alliage, +6 carburant ; *Remise en pression d'un module* ouvre le hangar de réparation.
+- **Marché Crucible (Q30 A) [PROPOSÉ]** : pièces de récupération (240 CR → 10 alliage, 3 par cycle), cellules de carburant (200 CR → 8, 3), trousses médicales (180 CR → 3, 2), revente d'alliage (10 → 120 CR, 2). Un cycle est un jour stratégique ; l'alliage se revend deux fois moins cher qu'il ne s'achète : aucune suite d'échanges ne rapporte. Refus nommés (stock épuisé, ressources manquantes au format des refus de `save.js`, opération en cours) ; aucune ressource négative. Armes : non vendues **[À DÉFINIR]**.
+- **Foules (§42.2)** : dockers aux quais (4), marchands Crucible et techniciens sur l'anneau (4), techniciens au rayon, au pont de contrôle et au hangar, marchands au marché. Vie des PNJ du hub (`advanceNpcLifeV136`) ; règle de `clearRoomDoorwayPostV188` appliquée aux portes, au sas de l'UD-4L et aux postes muraux. Silhouettes en primitives (1,75 m ≈ 89 px) ; les marchands partent si les récupérateurs sont expulsés. Effectifs **[PROPOSÉ]**.
+- **Habillage des missions de la station** : missions annexes, contrats et ronde de nuit gardent la géométrie du gabarit d'intérieur de vaisseau ; une couche de fond y pose des panneaux rivetés, boîtiers CRT, chemins de câbles et panneaux de secteur (« ASPHODÈLE · MOYEU »…) tous les 6 m, une bande de danger coupée à chaque passage, et un élément propre à la mission (enregistreurs, résine, récupération, manomètres, caméra de CASSIUS).
+- **Corrections** : l'objectif du Tantalus n'est plus affiché à bord de la station ; la bande de danger des quais s'arrête aux portes ; la passerelle du port affiche un libellé FR/EN au lieu de `UNDOCKED` ; les noms précédés de « ★ » sont traduits.
+- **Sauvegarde** : champs additifs de `asphodeleHubV188` (`quartersSettled`, `cheyenne`, `market`, `lastContractOpV188`, compteur `night`) ; une sauvegarde de la spec 007 se charge avec leurs valeurs par défaut.
+- **Fidélité** : aucune fidélité « 1:1 ».
+
+| Élément | Apparence documentée (source citée) | Adaptation du projet | À définir |
+| --- | --- | --- | --- |
+| Coursives des missions | Sevastopol, *Alien: Isolation* (2014) : tôles rivetées, bandes jaune-noir, boîtiers CRT | Station Seegson du réseau QZ, panneaux de secteur | Décors (`asph-msn-*`) |
+| Infirmerie | Laboratoires médicaux de Hadley's Hope, *Aliens* (1986) : moniteurs verts | Petite infirmerie de station, arche de scanner | Médecin, art |
+| Hangar de réparation | Hangar du *Sulaco*, *Aliens* (1986) : rails de grue, bandes de danger | Atelier du Cheyenne | Vaisseau en réparation, art |
+| Dockers, marchands, techniciens | Techniciens de Sevastopol, *Alien: Isolation* (2014) | Silhouettes en primitives | Costumes, visages |
+
+- **Art du hub et des missions** : 22 emplacements ajoutés (42 au total), 1 m ≈ 51 px. La continuation de §7.9 fournit les neuf images `asph-msn-*` de mission ; les 33 emplacements du hub restent en primitives Canvas. Les illustrations de scène de §7.8 constituent un lot distinct.
+- **Reste à faire** : art final ; commerce d'armes ; médecin, jardiniers et mécaniciens ; `orig-asphodele-1`, `-3` et `-4` (§39.2) ; rotation visuelle de l'anneau ; plan V3.
+
+### 7.8 Illustrations de scène Asphodèle — [PARTIEL] V188 (continuation du 16 novembre 2026)
+
+À la demande de continuation du propriétaire, six PNG complètent les six emplacements de `src/content-gap-slots-v188.js`, dans `assets/content/v188/`. Ils illustrent les dialogues et les preuves, dans un cadre logique de 640 × 280 px. Les cinq cartes de preuve réservent leurs surfaces au texte, aux nombres et aux graphes dessinés par Canvas en FR/EN ; les primitives restent le repli du chargement.
+
+| Emplacement | Composition du projet | Invariant narratif |
+| --- | --- | --- |
+| `asphodele-exterior` | Anneau sur rayons autour d'un moyeu sombre, espace noir, gris froid | Feux éteints ; navette Crucible sur l'anneau et dropship d'Echo-8 au sas |
+| `cassius-core` | CRT verts et une seule onde, sans visage ni avatar | Quarantaine, priorité cargaison, préservation des actifs ; les consignes sont présentées comme archives, sans imposer l'état de CASSIUS après S2 |
+| `echo8-recording` | Écran de capteurs de Rook et onde audio de caméra casque | Fenêtre 05:58 à 06:00, repère de coupure rouge ; les secondes des scènes et de la quête ne sont pas réécrites |
+| `order-documents` | Deux feuilles côte à côte sous une lampe, sans logo de compagnie | Articles 2 et 5 de l'Administration, points 4 et 7 de la compagnie ; les quatre citations de la quête (`crew-quests-v188.js`, §8.4) restent exactes en FR/EN |
+| `seal-fragment` | Sceau électronique rompu dans un plateau, lentille et lumière froide | Résine sur la face interne, QZ17-04, tampon « ASPHODÈLE · TRANSIT VÉRIFIÉ » ; référence de matière : atlas QZ17 existant |
+| `david-memory` | Grille mémoire sur CRT et trois composants de relais | Un secteur cible ; aucun « 3/3 », état de restauration terminé ou effacement des journaux imposé avant l'achèvement de la quête |
+
+**Références et fidélité.** Les matières et la mise en scène prolongent les cartes du lot colonie/équipage, l'UD-4L existant et l'atlas des collectables QZ17. Les références de franchise restent celles de §7.6 et §8.4 ; Asphodèle, CASSIUS, Echo-8, Kessler, Crucible, les deux ordres et les autres preuves sont des créations du projet. Ces illustrations ne certifient pas une reproduction canonique « 1:1 » et n'ajoutent aucun visage de Kessler ni portrait de DAVID-8R.
+
+**Limites conservées.** Ce lot de cartes laissait les 42 emplacements `asph-*` des décors, props et acteurs jouables en primitives ; neuf sont ensuite complétés par §7.9. La carte `cassius-core` ne remplace pas le prop `asph-cassius-core`. CIN-70 à CIN-72 continuent d'utiliser leurs plans Canvas dans `station-cinematics-v188.js` ; la rotation de l'anneau, les poses des personnages et l'art final des niveaux ne sont pas achevés par ce lot. La chronologie de l'enregistrement d'Echo-8 n'est pas modifiée.
+
+Traçabilité : [prompts, références et empreintes des six PNG](../development/ASPHODELE_ART_PROVENANCE_20261116.json), [contrôles et limites](../development/ASPHODELE_ART_QA_20261116.md), [planche des illustrations](../development/ASPHODELE_ART_OVERVIEW_20261116.png), [primitive extérieure de référence](../development/ASPHODELE_ART_PRIMITIVE_REFERENCE_20261116.png).
+
+### 7.9 Objets de mission Asphodèle — [PARTIEL] V188 (continuation du 16 novembre 2026)
+
+La demande de continuation avec fidélité à la franchise produit les neuf PNG de `assets/asphodele/v188/asph-msn-*.png`. Ils remplacent les primitives d'habillage des sept missions annexes, six contrats et de l'inspection nocturne, dans leurs emplacements existants. Les 33 emplacements du hub restent à produire.
+
+| Emplacement | Composition contrôlée | Surface native conservée |
+| --- | --- | --- |
+| `asph-msn-panel` | Panneau frontal riveté, deux plaques d'accès, bande de danger | Cadre 128 × 112 px |
+| `asph-msn-crt` | Boîtier analogique, verre vert sombre, deux boutons | Trois lignes d'état animées ; 51 × 41 px |
+| `asph-msn-sign` | Plaque de secteur vide, encadrement ivoire et graphite | Secteur exact FR/EN dans le cadre 153 × 26 px |
+| `asph-msn-conduit` | Trois conduits parallèles, huit brides orange | Échelle de 306 × 12 px ; fin de travée rognée sans compression |
+| `asph-msn-blackbox` | Trois enregistreurs orange distincts dans leur rack | Libellé QZ exact FR/EN |
+| `asph-msn-resin` | Trappe fermée, résine sombre sur sa partie inférieure | Avertissement biologique exact FR/EN |
+| `asph-msn-salvage` | Deux caisses de récupération, hauteurs décalées | Libellé Crucible exact FR/EN |
+| `asph-msn-gauge` | Trois cadrans analogiques et un volant de vanne | Aiguilles animées alignées sur les pivots ; libellé FR/EN |
+| `asph-msn-camera` | Une caméra sans visage, un voyant et un écran vert sombre | Voyant rouge et titre CASSIUS natifs |
+
+Les cinq éléments propres à une mission restent dans un cadre de 153 × 102 px. Le rythme de 306 px, le plafond y = 110, les marges de 18 px autour des portes, échelles, ascenseurs et conduits, ainsi que l'unique élément de mission restent ceux du plan existant. Les images sont dessinées proportionnellement dans une fenêtre source déclarée ; aucun PNG original n'est redimensionné ou réencodé. Les primitives demeurent le repli pendant le chargement et en cas d'échec. Les missions demandent leurs neuf images ; une visite du hub ne les télécharge pas. Le cache runtime admet ces neuf chemins exacts après leur premier chargement public valide.
+
+**Références et portée de la fidélité.** Les images de couloir, de porte et la planche de direction artistique publiées par [Paul Abbott, Lead Environment Artist](https://www.pauldavidabbott.co.uk/alien-isolation), ainsi que les captures de terminal et de zone cargo présentées par [Gary Napper, lead designer](https://www.gamedeveloper.com/design/game-design-deep-dive-the-save-system-of-i-alien-isolation-i-), ont été inspectées et fournies au générateur. Elles fixent les matières et le vocabulaire de construction. Asphodèle, le rack QZ, les caisses Crucible, le module de pression et CASSIUS restent des assemblages du projet. Les images primaires des props précis de Tunde Glover, Liam Tart et Brad Wright n'ont pas été récupérées ; leurs pages textuelles ne certifient donc aucun contour exact. La résine est une adaptation du motif de ruche cité par la bible, sans référence rapprochée primaire inspectée dans cette passe. Ce lot ne revendique pas neuf répliques canoniques « 1:1 ».
+
+Traçabilité : [prompts, références, fenêtres et empreintes](../development/ASPHODELE_MISSION_ART_PROVENANCE_20261116.json), [validation et limites](../development/ASPHODELE_MISSION_ART_QA_20261116.md), [planche des objets intégrés](../development/ASPHODELE_MISSION_ART_OVERVIEW_20261116.png).
+
+
+### 7.10 Niveaux dédiés des missions S1-S4 — [PARTIEL] V188 (2026-11-22, spec `009-niveaux-station`)
+
+Sur le modèle des niveaux dédiés de la colonie (§6.4), une couche par mission (`src/station-mission-levels-v188.js`, lieux mesurés par `src/station-level-places-v188.js`, emplacements d'art `src/station-level-art-v188.js`) se pose sur le gabarit `ship-interior-vertical` déjà utilisé par S1-S4. Inchangés : identifiants, titres, objectifs de campagne, récompenses, `stationV188`, chaîne d'accès (§7.5), décision CASSIUS (prise une fois au Commandement après S2), scènes de retour, pièces du dossier, condition « Asphodèle reprise ». La rencontre générique (roster, générateur, terminal d'archives) et la cale de cargo procédurale (V2, caisses d'un cargo) laissent place aux phases écrites, en V1. L'intro *Six heures de silence* reste la fin de la quête de Rook et CIN-70, à bord : elle n'a pas de niveau.
+
+Règles communes [PROPOSÉ], reprises du lot colonie : 51 px/m, marine 44 × 92 ; apparition hostile derrière une zone sûre de 900 px (ni derrière une porte fermée ni derrière un cadre scellé), 4 s de grâce ; un checkpoint par phase, écrit à son début (champ de reprise additif `stationLevelV188`) ; interaction maintenue (E) mise en pause par un coup sans remise à zéro.
+
+**Plan de la station sur le gabarit [PROPOSÉ].** Pont inférieur : collier et sas 1 → section de l'anneau → cloison de l'anneau → pont du réacteur → section arrière → cloison arrière → sas extérieur → dropship du Tantalus. Pont médian : galerie de l'anneau, habitation, puits de jonction. Pont haut : passerelle de coque, pont de contrôle. **Parcours vérifié** (accès logique, passage physique) : les conduits sont scellés par la quarantaine (aucune traversée, l'entrée le dit) ; deux cadres scellés prolongent les cloisons sur les ponts supérieurs — cloison de coque au-dessus de la cloison de l'anneau (pont haut), grille soudée sur l'échelle du puits de jonction (pont médian) — si bien que chaque cloison du pont inférieur est le seul passage de sa section, pour le marine comme pour les créatures. Chaque porte fermée par le niveau affiche sa raison (« SAS SANS COURANT · CYCLER À LA MAIN », « SAS 3 SCELLÉ PAR CASSIUS »…).
+
+| Mission | Phases jouées | Valeurs [PROPOSÉ] |
+| --- | --- | --- |
+| S1 L'arrimage (horreur) | sas d'arrimage sans courant cyclé à la manivelle, dropship d'Echo-8 au collier → anneau éteint (lampe du marine), ventilateurs qui saturent le détecteur, deux traces d'Echo-8 (barricade « E-8 · 05:52 », six traits de craie) → récupérateurs de Grue à la cloison de l'anneau : **négocier** (ils ouvrent) ou **forcer** (ils reviennent armés) → pont de contrôle : alimentation de secours (le reste de la station reste éteint, Kwan prépare S2) → dropship du Tantalus au sas extérieur | manivelle 4 s ; forcer 5 s ; 3 récupérateurs armés si forcé ; anneau : 2 rôdeurs, 1 à la fois ; pont : 3 ; retour : 2 ; obscurité 0,62 puis 0,4 |
+| S2 La voix de CASSIUS (tension) | trois disjoncteurs de secteur (quais, galerie de l'anneau, passerelle de coque) avec Idris Kwan à la radio → cloison de l'anneau → réacteur auxiliaire relancé, air en circulation → CASSIUS se réveille au pont de contrôle : **interrogatoire** de la spec 010 (`CASSIUS_INTERROGATION_V188`, cinq consignes citées — quarantaine Q-1, priorité cargaison P-2, préservation des actifs A-3, journal des personnes, intégrité des journaux — auxquelles Echo-9 oppose les pièces du dossier QZ17 ou se tait), ouvert sur la mission en pause, chaque échange enregistré → copie des ordres de livraison QZ17 → extraction ; **la décision reste celle du Commandement** : l'issue de l'interrogatoire ajoute seulement la dernière réponse de CASSIUS au texte de la décision (gagné : il ne s'oppose pas à la réécriture ; perdu : il ne concède rien), sans autre effet | réacteur 5 s ; ordres 3 s ; réveil : 3 drones ; retour : 3 ; interrogatoire : valeurs de la spec 010 (5 échanges, cible 6, crédibilité 3) |
+| S3 Les ponts scellés (horreur) | sas 3 selon la décision : réécrit, CASSIUS l'ouvre ; bridé, code manuel ; effacé, forcé à la main, plus dangereux (§7.2) → laboratoire de transit : berceaux QZ17 ouverts de l'intérieur, journaux des survivants arrêtés au quatrième jour, deux œufs (s'ouvrent à l'approche, saut du parasite si l'on reste, brûlables) → routage d'énergie : deux circuits pour trois (sas + éclairage, ou sas + ventilation qui ferme les conduits) → combat confiné à l'arrière, plaque du sergent Kessler et dernier enregistrement → sortie avant la fermeture de la quarantaine (échec « quarantaine refermée », reprise à la phase) | code 3 s, forçage 6 s ; œuf : déclenchement à 100 px (≈ 2 m), 1,5 s, 22 dégâts ; brûler 2 s ; compte à rebours 150 s (remplace le minuteur générique de 105 s) ; arrière : 6 créatures (4 si ventilation), +2 si CASSIUS effacé |
+| S4 Le hub Asphodèle (action) | purge du dernier nid au puits de jonction → trois vannes de secteur, remise en pression → tenir le quai, cloison maintenue ouverte pour l'arrimage, jusqu'à la navette de l'équipe technique du Tantalus (Grue selon l'issue de S1, §7.11 ; les colons volontaires de la sauvegarde suivent l'équipe) → extraction au quai | purge 5 s ; vannes 3 s ; tenue 60 s (arrêtée hors du quai), 9 créatures, 4 à la fois, guerriers dans la seconde moitié ; remplace la tenue de zone générique (12 s) |
+
+**Art.** Réemploi déclaré de PNG Asphodèle déjà admis : UD-4L à quai (dropship d'Echo-8 ; adaptation, même modèle que celui du Tantalus), barricade d'Echo-8, noyau de CASSIUS, carte QZ, berceaux, manomètres, résine, technicien, marchand Crucible (récupérateurs), Grue, et l'habillage `asph-msn-*` (panneaux, CRT, chemins de câbles, panneaux de secteur). Dix emplacements restent en primitives Canvas (manivelle, ventilateur, craie, disjoncteur, panneau du réacteur, scellé du sas 3, œuf, journal, plaque, routeur), ainsi que les deux cadres scellés. Aucune image générée.
+
+**Sources et fidélité** (aucune fidélité « 1:1 ») — documenté : stations Seegson et système de gestion qui applique ses consignes, cycle manuel des sas, détecteur trompé par l'air en mouvement, coursives rivetées (*Alien: Isolation*, 2014, station Sevastopol ; direction artistique d'environnement publiée par Paul Abbott, citée en §7.9) ; détecteur de mouvement, caméras de casque, équipe perdue (*Aliens*, 1986) ; œufs et saut du parasite (*Alien*, 1979 ; *Aliens*, 1986) ; nids de résine (*Aliens*, 1986). Adapté par le projet : Asphodèle, CASSIUS, Echo-8, Kessler, Grue et Crucible (créations du projet), laboratoire de transit, routage d'énergie, compte à rebours de S3, issue des récupérateurs. À définir : art des emplacements en primitives, voix de CASSIUS et de Kwan.
+
+**Reste à faire.** Art des dix emplacements en primitives et des deux cadres scellés ; voix ; annexes, contrats et ronde de nuit gardent leur gabarit générique et leur habillage (§7.7). L'issue des récupérateurs de S1, le collier en profondeur, les colons volontaires de S4 et les noms des zones sont traités au §7.11 (décisions du 23 novembre 2026).
+
+### 7.11 Décisions du 23 novembre 2026 : collier en profondeur, récupérateurs, colons, noms des zones — [PARTIEL] V188
+
+Quatre décisions du propriétaire (questions S9-1, S9-2 et S9-5 du document des questions, plus les libellés de zone), appliquées sur la couche du §7.10. Identifiants, objectifs, récompenses, chaîne d'accès et décision CASSIUS inchangés. Toutes les valeurs sont **[PROPOSÉ]** ; les figures et objets restent des substituts Canvas ou des PNG déjà admis (aucune image générée).
+
+**S9-1 — Le collier d'arrimage de S1 en profondeur.** Le sas d'arrimage de S1, du début du plancher du collier à la cloison du quai (≈ 16,5 m), devient un couloir de profondeur 2,5D sur le modèle de C1 (`colony-c1-port-corridor`) : définition `station-s1-docking-collar` (`src/depth-hold-sections-v188.js`), W/S pour avancer et reculer, tirs dans le couloir du tireur. Le dropship d'Echo-8 reste au collier, derrière la baie du mur ; l'équipe perdue a laissé trois objets sur le plancher (fûts devant la baie, palette de caisses « E8 » près de l'échelle, caisse médicale scellée avant le sas ; emplacements d'art des cales déjà livrés). Le reste de S1 (anneau, pont du réacteur, pont de contrôle) reste en vue de côté. Le monte-charge du collier repose au niveau du pont pendant toute la mission (la station est sans courant) ; l'échelle reste. Liste de contrôle du niveau : accès logique inchangé (`stationAccessV188`) ; passage physique vérifié sur grille (aucune poche, couloirs de 20 unités, les deux extrémités atteintes sur le rail) ; arrivée sur le rail, sur une case libre ; la manivelle, comme le sas, ne se manœuvre que contre la paroi (ni invite ni progression depuis les couloirs avant ; s'écarter met la manivelle en pause sans la remettre à zéro) ; aller-retour par le sas cyclé (profondeur nulle dans l'anneau, retrouvée au retour) ; reprise : phase, checkpoint et profondeur du marine restaurés. Un checkpoint par phase après la première, qui commence à l'insertion.
+
+**S9-2 — L'issue des récupérateurs de S1 est enregistrée.** Champ additif `stationV188.s1Salvagers` (`negotiated` ou `forced`), absent tant que S1 n'a pas été réussie avec ce niveau ; écrit une seule fois, par la première réussite de S1 (une relecture de la mission ne le réécrit pas) ; normalisé par `normalizeStationV188`, validateur de `src/save.js` inchangé. S4 lit d'abord cette issue (`stationGrueAtDockV188`) ; la décision de la colonie « Le prix de Grue » (`colonyMissionsV188.grue`, §6.2) ne compte qu'après une cloison forcée, ou quand rien n'a été enregistré :
+
+| Issue de S1 | Prix de Grue (colonie) | Grue au quai de S4 | Effet |
+| --- | --- | --- | --- |
+| Négociée | accepté, refusé ou non décidé | **Alliée** | Ses récupérateurs couvrent le quai : la tenue passe de 9 à 6 créatures, 3 à la fois au lieu de 4 ; deux récupérateurs se tiennent à la cloison du quai ; Grue monte à bord avec l'équipe technique. L'accord de l'anneau est le sien, pas celui de la colonie : un prix refusé ne le rompt pas |
+| Forcée | refusé ou non décidé | **Hostile** | Deux récupérateurs armés prennent la 2ᵉ et la 5ᵉ place de la tenue (9 arrivées en tout), derrière la zone sûre et après la grâce ; elle ne monte pas à bord |
+| Forcée | accepté | **Absente** | Le commerce avec la colonie continue, personne ne vient au quai ; tenue inchangée (9 créatures) |
+| Non enregistrée (S1 terminée avant ce champ) | accepté | **Présente** | Comportement antérieur : elle monte à bord avec l'équipe, sans aide pendant la tenue |
+| Non enregistrée | refusé ou non décidé | **Absente** | Comportement antérieur |
+
+Pendant la tenue, Grue parle une fois à la radio (alliée ou hostile). Correction trouvée en écrivant ces règles : une apparition dont l'écart de vague tombait derrière la cloison de l'anneau fermée était abandonnée, si bien que la tenue de S4 ne recevait que deux de ses neuf créatures tant que cette cloison restait fermée ; elle apparaît désormais au bord de la zone sûre, du côté des marines.
+
+**S9-5 — Les colons volontaires arrivent au quai.** À la fin de la tenue, les colons volontaires de Port-Méridien entrent par le collier derrière l'équipe technique et se rangent sur le quai. Leur nombre est celui de la sauvegarde (`colonyMissionsV188.population`, les volontaires des quêtes et missions du §6.4) ; six silhouettes au plus sont dessinées, le texte d'arrivée donne le nombre réel ; aucun colon si le compte est nul. Emplacement d'art `station-volunteer-colonist` en primitive Canvas (trois teintes de vêtement de travail) : la silhouette définitive reste à produire.
+
+**Noms des zones.** Le gabarit de vaisseau nommait ses zones « Tube d'amarrage », « Soutes dépressurisées », « Puits d'ingénierie », « Pont d'habitation », « Passerelle », « Sas arrière » ; ces noms apparaissaient sur les plaques des cloisons, la ligne de zone et le plan local de S1-S4. Ils sont remplacés, pour ces quatre niveaux seulement, par ceux de la station (identifiants de zone inchangés ; annexes et contrats gardent les noms du gabarit) :
+
+| Zone du gabarit | S1, S2 | S3 | S4 |
+| --- | --- | --- | --- |
+| `ship-docking` | Collier d'arrimage / *Docking collar* | Palier du sas 3 / *Airlock 3 landing* | Quai d'arrimage / *Docking quay* |
+| `ship-cargo` | Anneau extérieur / *Outer ring* | Laboratoire de transit / *Transit laboratory* | Anneau extérieur |
+| `ship-engineering` | Pont du réacteur / *Reactor deck* | Routage d'énergie / *Power routing* | Pont du réacteur |
+| `ship-habitation` | Quartiers d'habitation / *Habitation quarters* | idem | idem |
+| `ship-command` | Pont de contrôle / *Control deck* | idem | idem |
+| `ship-extraction` | Sas extérieur / *Outer airlock* | Sortie des ponts inférieurs / *Lower decks exit* | Sas extérieur |
+
+**Fidélité** (aucune fidélité « 1:1 »). Documenté : collier et sas d'arrimage d'une station Seegson, appareil resté amarré (*Alien: Isolation*, 2014) ; UD-4L (*Aliens*, 1986). Adapté par le projet : le collier d'Asphodèle et ce qu'Echo-8 y a laissé, Grue et ses récupérateurs, l'accord de l'anneau, les volontaires de Port-Méridien, tous les noms de zone. À définir : silhouette des colons, art des objets du collier propres à la station (ceux des cales sont réemployés).
+
+**Reste à faire.** Art dédié du collier et des colons ; comportement d'alliés armés pour les récupérateurs (aujourd'hui leur aide réduit la vague, ils ne tirent pas) ; équilibrage de la tenue après playtest (S9-4) ; une scène de retour qui cite l'issue de S1.
+
 ---
 
 ## 8. Quêtes du Tantalus — [PROPOSÉ]
+
+> **État V188 (lot colonie et équipage, 2026-11-16) — [PARTIEL].** Les 16 quêtes de l'équipage du §8.1 sont jouables (§8.4 et §8.5). La vie à bord (§8.2) et les recrues (§8.3) restent à faire.
 
 Elles utilisent le système de rapport existant (`npc-dialogue-v62.js`) : confiance `fragile → prudent → operationnel → solide`, choix de rapport `request-candid-assessment`, `acknowledge-welfare`, `review-mission`, `confirm-alert-role`, `request-infestation-evidence`, renouvellement après 8 heures de jeu. Aucune récompense avant la preuve de réalisation.
 
@@ -1067,7 +1431,7 @@ Elles utilisent le système de rapport existant (`npc-dialogue-v62.js`) : confia
 | `ship-sensor` | **Écoute de nuit** | Capteurs | Pendant la phase `break`, capter des messages retenus par le réseau QZ ; chaque fragment ajoute un nom à *Les noms de Port-Méridien*. |
 | `ship-armory` | **Inventaire contradictoire** | Armurerie | Le registre ne correspond pas aux râteliers. Petite enquête qui forme aux méthodes de l'Acte II. |
 | `ship-vehicle` | **Les plaques du M577** | Baie véhicules | Une plaque d'un ancien équipage, trouvée dans le blindé. |
-| `ship-bioforge` | **Ce qu'on garde en vie** | Bioforge | Débat Inez / BISHOP-9 sur la conservation des spécimens ; ouvre l'accès narratif à la Bioforge (**[PARTIEL]** comme système). |
+| `ship-bioforge` | **Ce qu'on garde en vie** | Bioforge | Débat Inez / BISHOP-9 sur la conservation des spécimens ; ouvre l'accès narratif à la Bioforge. **[PARTIEL]** : quête jouable depuis le 23 novembre 2026 comme face-à-face sans tir (§8.6) ; portraits en substituts Canvas. Le laboratoire de confinement (spec 013, 2026-11-22) affiche le protocole décidé au stockage froid et sous la file d'admission ; la présence d'Inez et de BISHOP-9 dans la galerie d'observation derrière verre blindé reste **[À DÉFINIR]**. |
 
 ### 8.3 Recrutement
 
@@ -1077,6 +1441,79 @@ Elles utilisent le système de rapport existant (`npc-dialogue-v62.js`) : confia
 | **Nadia Bensaïd « SUTURE »** | **Pas de blessé sans extraction** | Colonie | Venue d'une colonie isolée ; rejoint l'équipage quand Port-Méridien atteint *Rétablie*. |
 | **Jonas Reed « BASTION »** | **Sécurité embarquée** | Enquête | Ancien agent de sécurité de cargos ; il a convoyé des scellés QZ17 sans savoir ce qu'ils contenaient. Témoignage au dossier. |
 | **Jun Seo « BALISE »** | **Itinéraires terrestres** | Colonie | Connaît les routes de convoi ; le recruter avant l'Acte III facilite le corridor. |
+
+### 8.4 Premières quêtes jouables — [PARTIEL] V188 (spec 005, 2026-11-15)
+
+Décision par défaut Q9 : DAVID-8R, Harlow, Rook et Vega. Code : `src/crew-quests-v188.js`, sauvegarde `crewQuestsV188`. Le personnage propose sa quête dans la conversation du hub, après les six choix de rapport qui ne changent pas ; le Commandement liste les quêtes et où trouver chaque donneur. Une mauvaise lecture ne coûte rien et ne paie rien.
+
+| Quête | Ouverture | Preuve | Effet [PROPOSÉ] |
+| --- | --- | --- | --- |
+| `ship-rook` Six heures | Acte II | Trois passages de l'enregistrement lus correctement (ventilation, sas 3 côté laboratoire, sas fermé par la station) | Loyauté +5 ; joue *Six heures de silence* et ouvre S1 |
+| `ship-vega` La ligne de commandement | Acte II | Deux contradictions relevées, puis la ligne choisie | Loyauté +10 (Administration) ou +4 (compagnie) ; sert le seuil 55 de l'Acte V |
+| `ship-harlow` Le sceau | Acte I et preuve de la piste (sceau ou berceau) | Joint ouvert de l'intérieur ; tampon « Asphodèle · transit vérifié » | Loyauté +5, recherche +6 |
+| `ship-david` Mémoire récupérée | Acte I | Trois composants, un par opération réussie sur Cocyte | Loyauté +5 ; note « poste de relais QZ-9 » jointe au dossier, hors décompte des 7 pièces |
+
+Fidélité : la quête de Vega reprend un thème documenté, la consigne de la compagnie qui passe avant l'équipage (« Special Order 937 », *Alien*, 1979, scène de MU/TH/UR) ; les deux ordres sont des textes du projet. Reste : la vie à bord (§8.2) et les recrues (§8.3) ; les 12 autres quêtes sont au §8.5.
+
+**Illustrations (continuation du 16 novembre 2026).** Les quatre cartes de Rook (`echo8-recording`), Vega (`order-documents`), Harlow (`seal-fragment`) et DAVID-8R (`david-memory`) sont produites dans le lot de six de §7.8. Les preuves et libellés exacts restent natifs FR/EN ; aucune nouvelle seconde de coupure, décision ni résultat de quête n'est figé dans les PNG. Les poses de dialogue, objets animés et décors jouables restent des besoins distincts.
+
+### 8.5 Les douze autres quêtes — [PARTIEL] V188 (lot colonie et équipage, 2026-11-16)
+
+Code : `src/crew-quests-tantalus-v188.js` (données), lues par `src/crew-quests-v188.js` (mêmes règles et même sauvegarde `crewQuestsV188`, champ additif `mark` pour une preuve). Proposées dans la conversation du hub ; listées à la table tactique (16 quêtes). Conseillers de l'Acte V d'abord (Sanaa, Cal, Orlov, Leila : leur avantage au conseil demande une loyauté ≥ 75). Une mauvaise lecture ne coûte rien ; rien n'est payé avant la preuve ; chaque quête paie une fois. Preuves, lectures, répliques et valeurs [PROPOSÉ].
+
+| Quête | Ouverture | Preuve | Effet [PROPOSÉ] |
+| --- | --- | --- | --- |
+| `ship-doyle` Les sentinelles | après C1 | 2 tourelles, une par opération réussie sur Cocyte | loyauté +12 ; Murs et sas +1 niveau ; « Portable Sentry » à l'inventaire |
+| `ship-mercer` Remettre le M577 en état | convoi du M577 | 3 pièces, une par opération réussie sur Cocyte | loyauté +12 (blindage de l'Acte V à 75) |
+| `ship-orlov` Fenêtre de tir | Acte IV | enregistreurs du Kappa : créneau réservé au fret, même priorité QZ17 que QZ-18 | loyauté +12 (fenêtre de l'Acte V à 75) |
+| `ship-sorensen` La route des fermes | après C2 | relevés : baliser le sentier sous le pont, passer par la rivière | loyauté +12 (route de l'Acte V à 75) |
+| `ship-velez` Ceux d'Echo-8 | prologue | **nouvelle qualification M41A au pas de tir** après acceptation (reçu du pas de tir V81), puis les marques de Kessler | loyauté +8 ; dotation d'assaut : « Ammo Satchel » à l'inventaire |
+| `ship-echo-a` Deux relèves | S3 | protocole 4.2 contre le choix de Kessler (sas 3, survivants) | loyauté +8 ; **réplique d'épilogue** dans la conversation de l'épilogue de l'Acte V |
+| `ship-mbaye` Les noms de Port-Méridien | Acte II | appels de la ferme 12 retenus à QZ-18, position au hameau de la balise | loyauté +6 ; 2 volontaires pour la colonie |
+| `ship-okafor` Le registre des pertes | convoi du M577 | 3 plaques, une par opération réussie sur Cocyte | loyauté +6 ; Infirmerie +1 niveau |
+| `ship-bishop` Directive de préservation | Interlude résolu | question posée ; la réponse dépend de la confiance (≥ 55 : franche, sinon réservée) | loyauté +10 |
+| `ship-reyes` La charge de trop | convoi du M577 | registre : civils coupés à 13:58, ordre à 14:01, charge à 14:02 | loyauté +8 ; grenades « M40 HEDP » à l'inventaire (charges de brèche adaptées) |
+| `ship-kwan` Le réacteur ne ment pas | prologue | **service du réacteur** (`service:power`) utilisé après acceptation, puis les relevés du pont 2 | loyauté +6 ; recherche +4 ; indice de l'Interlude noté à la table |
+| `ship-park` Après les conduits | Interlude résolu | une mission réussie dans un réseau de conduits | loyauté +6 ; stress de l'équipage −8 ; oxygène du bord +10 |
+
+**Adaptations.** « Battre ses temps au pas de tir » devient : réussir une nouvelle qualification M41A après avoir accepté (le pas de tir ne garde pas de chronomètre par escouade). Les « charges de brèche » de Reyes sont des grenades M40 HEDP du catalogue (aucune charge de brèche n'y existe). Les composants de Mercer, Doyle et Okafor viennent d'opérations réussies sur Cocyte, comme ceux de DAVID-8R. La loyauté gagnée ne suffit pas seule pour Sanaa (56 + 12) : les choix de rapport du §8 complètent.
+
+**Fidélité.** Aucune fidélité « 1:1 ». Repères documentés : tourelles sentinelles UA 571-C (*Aliens*, édition spéciale, 1991) ; M577 et détecteur de mouvement (*Aliens*, 1986) ; lance-grenades U1 du M41A (*Aliens*, 1986 ; désignation M40 HEDP du *Colonial Marines Technical Manual*, 1995) ; directive d'un synthétique de la compagnie, thème de « Special Order 937 » (*Alien*, 1979). Adaptations du projet : Echo-8, Kessler, transport Kappa, ferme 12, registres, relevés du réacteur. Les 11 illustrations de quête sont désormais produites et chargées à la demande par `colony-crew-slots-v188.js` (continuation du 16 novembre 2026). Les heures, quantités, graphes et itinéraire restent dessinés par le jeu en FR/EN, indépendamment des PNG. Les poses de dialogue restent à définir.
+
+**Reste à faire.** Vie à bord (§8.2, dont *Écoute de nuit* et *Le casier vide* comme fil de quête ; *Ce qu'on garde en vie* est jouable, §8.6), recrues (§8.3, dont Nadia Bensaïd à *Rétablie*), effets sur la course APC dédiée de l'Acte V.
+
+### 8.6 « Ce qu'on garde en vie » (`ship-bioforge`) — [PARTIEL] V188 (décision du 23 novembre 2026)
+
+Première quête de la vie à bord (§8.2) qui soit jouable. Elle ouvre l'accès narratif à la Bioforge et se joue comme un face-à-face sans tir (spec 010, §5.6) : nouvelle entrée de données `ship-bioforge-care` du même système, aucune règle d'échange changée. Code : `src/confrontation-entries-v188.js` (entrée), `src/crew-quests-tantalus-v188.js` (quête), `src/crew-quests-v188.js` (ouverture, clôture, accès, protocole), `src/confrontation-ui-v188.js` (portraits), `src/app.js` (porte de la Bioforge), `src/bioforge-lab-*-v188.js` (affichage du protocole). Tous les arguments, relevés, répliques, valeurs et les deux protocoles sont **[PROPOSÉ]**.
+
+**Déroulé.** À la première visite, devant le sas de la Bioforge, Inez Harlow barre le passage à BISHOP-9 : il veut garder les spécimens en vie entre deux sessions, elle veut tout brûler après étude. Le joueur peut écouter ou remettre à plus tard (la porte reste alors fermée, sans temps de bord dépensé). BISHOP-9 expose cinq raisons, une par échange ; Inez écoute. Echo-9 répond à chacune par un relevé du bord, par une pièce du dossier QZ17 qu'il détient, ou laisse passer : **chaque argument laissé debout compte pour BISHOP-9**. Le débat ne se perd pas : il se pèse.
+
+| Échange | BISHOP-9 cite | Réponse décisive (+2) | Réponse partielle (+1) |
+| --- | --- | --- | --- |
+| 1 | Protocole scientifique : un spécimen vivant répond à ce qu'un tissu mort ne dit pas | Journal des purges de la cellule (relevé du bord) | Relevé de consommation nocturne |
+| 2 | Consigne de confinement : la cellule tient | Fragment de sceau ou berceau ouvert (Acte I) | Compteur du stockage froid (relevé du bord) |
+| 3 | Sa directive de préservation | Directive de préservation de BISHOP-9 (Interlude) | Journal des purges |
+| 4 | Conserver ne coûte rien | Relevé de consommation nocturne du pont de quarantaine (relevé du bord ; l'indice de la quête de Kwan, §8.5) | Compteur du stockage froid |
+| 5 | Aucun blessé par un spécimen conservé | Berceaux et cocons du dépôt (Acte IV) | Fragment de sceau |
+
+Trois relevés du bord sont toujours disponibles (ce ne sont pas des pièces du dossier : ils ne comptent pas dans les 7 pièces du §5.7) ; les trois pièces du dossier suivent la sauvegarde. Seuil 5, crédibilité 3 : les trois relevés, chacun placé au bon échange, suffisent tout juste ; une pièce du dossier donne de la marge ; une réponse hors sujet coûte un point de crédibilité, le silence ne coûte rien.
+
+**Issue enregistrée** (additive, aucun champ nouveau à la racine de la sauvegarde) : le déroulé dans `storyCampaignV188.confrontationsV188['ship-bioforge-care']`, la réponse de la quête dans `crewQuestsV188.quests['ship-bioforge'].answer`.
+
+| Issue | Protocole | Effets (valeurs existantes seulement) | Texte dans le laboratoire |
+| --- | --- | --- | --- |
+| Seuil atteint (`limit`) | **Protocole Harlow** : étude pendant la session, puis incinération ; rien n'est gardé en vie | Loyauté d'Inez Harlow +5 ; stress de tout l'équipage −2 | « PROTOCOLE HARLOW · ÉTUDE, PUIS INCINÉRATION » au stockage froid, plaque sous la file d'admission |
+| Seuil non atteint (`keep`) | **Protocole BISHOP-9** : conservation sous scellés entre les sessions, sous la clé d'Inez | Loyauté de BISHOP-9 +5 ; recherche +6 | « PROTOCOLE BISHOP-9 · CONSERVATION SOUS SCELLÉS » |
+
+Conséquence morale, pas mécanique : les règles de session de la Bioforge, ses compteurs, sa purge et ses admissions V132 ne changent pas ; aucune fin n'est ajoutée ni modifiée ; aucune pièce du dossier n'est accordée. La loyauté de BISHOP-9 compte déjà ailleurs (sa réponse sur la directive, §8.5).
+
+**Accès.** La Bioforge s'ouvre dès que le débat est tranché, quelle qu'en soit l'issue. Une sauvegarde qui a déjà utilisé la Bioforge (au moins une session créée) garde son accès ; Inez propose alors le débat dans sa conversation du hub, sans refermer la porte. Un débat interrompu (rechargement) reprend à l'argument suivant, à la porte ou auprès d'Inez. Le lanceur de scènes de développement ouvre la vue directement (hors parcours joueur).
+
+**Portraits.** Substituts Canvas, sans ressemblance d'acteur : BISHOP-9 en buste de synthétique (traits réguliers, col de laboratoire, un voyant d'état) devant les cuves ; Inez Harlow en petit buste de scientifique (blouse, lunettes relevées) sous les jauges. Emplacements nommés `confrontation-bishop9-bust` et `confrontation-harlow-bust` ; les portraits définitifs restent à produire.
+
+**Fidélité** (aucune fidélité « 1:1 »). Documenté : le synthétique qui protège un spécimen contre l'équipage (*Alien*, 1979) ; la compagnie qui veut des spécimens ramenés vivants (*Aliens*, 1986) ; des spécimens élevés et observés derrière une vitre (*Alien Resurrection*, 1997). Adapté par le projet : BISHOP-9, Inez Harlow, la Bioforge, ses protocoles, tous les arguments et relevés. À définir : portraits, voix, présence des deux personnages dans la galerie d'observation.
+
+**Reste à faire.** Portraits et voix ; les deux personnages dans le laboratoire (galerie d'observation, §8.2) ; un effet de jeu du protocole au-delà du texte, s'il est souhaité (question B7).
 
 ---
 
@@ -1088,7 +1525,7 @@ Classement d'après le registre courant `special-operations-v131.js`, utilisé p
 
 | Opération | Statut | Place | Accroche [PROPOSÉ] | Ancrage Alien |
 | --- | --- | --- | --- | --- |
-| **Cargo Brutal** | Chapitre **[EXISTANT]** / promesse **[PARTIEL]** | Avant Acte I | Un cargo civil en route vers Port-Méridien transporte un conteneur QZ17 mal scellé. L'art dédié de la Matriarche manque encore. | Cargo infesté. |
+| **Cargo Brutal** | Chapitre **[EXISTANT]** / art Matriarche **[PRÉSENT]** | Avant Acte I | Un cargo civil en route vers Port-Méridien transporte un conteneur QZ17 mal scellé. Quatre planches dédiées et seize poses sont intégrées depuis la continuation V188 du 17 novembre 2026 ; design original du projet. | Cargo infesté. |
 | **Systèmes de survie Alien** | **[EXISTANT]** effective | Entre Actes I et II | Évasion d'un poste médical en quarantaine près du port ; mécaniques réutilisées dans l'interlude et S3. | Auto-destruction, soudure, acide. |
 | **Doctrine Alpha / Bravo** | **[PARTIEL]** | Avant C1 ou C5 | Défense de colonie à cinq routes, quatre membres minimum : tenir Port-Méridien. | Escouade de Marines. |
 
@@ -1104,29 +1541,52 @@ Les chapitres Mire Archive 001, Protocole Z-110, Jeri, Éloïse, A.T.A.X.-Q, Le 
 
 | ID | Titre | Partie | Durée | Statut |
 | --- | --- | --- | --- | --- |
-| CIN-00 | Ouverture | Titre | 60-75 s | [PROPOSÉ] |
-| CIN-01 | Le casier vide | Prologue | 20 s | [PROPOSÉ] |
-| CIN-02 | Le briefing | Prologue | 45 s | [PROPOSÉ] |
-| CIN-10 | Les quais déserts | Acte I | 30 s | [PROPOSÉ] |
-| CIN-11 | Ouvert de l'intérieur | Acte I | 25 s | [PROPOSÉ] |
-| CIN-20 | Treize minutes | Acte II | 40 s | [PROPOSÉ] |
+| CIN-00 | Ouverture | Titre | 60-75 s | [EXISTANT] V188 (placeholder Canvas) |
+| CIN-01 | Le casier vide | Prologue | 20 s | [EXISTANT] V188 (placeholder Canvas) |
+| CIN-02 | Le briefing | Prologue | 45 s | [EXISTANT] V188 (placeholder Canvas) |
+| CIN-03 | Descente sur Port-Méridien | Prologue | 33 s | [EXISTANT] V188 (placeholder Canvas) ; [PROPOSÉ] §56.11 |
+| CIN-10 | Les quais déserts | Acte I | 30 s | [EXISTANT] V188 |
+| CIN-11 | Ouvert de l'intérieur | Acte I | 25 s | [EXISTANT] V188 (placeholder Canvas) |
+| CIN-20 | Treize minutes | Acte II | 40 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-21 | Le quai nord | `story-quai-nord` | 25 s | [PROPOSÉ] |
-| CIN-31 | Le sas refermé | Acte III | 30 s | [PROPOSÉ] |
-| CIN-40 | Jun Park ne répond plus | Interlude | 30 s | [PROPOSÉ] |
-| CIN-41 | Ce que BISHOP-9 savait | Interlude | 45 s | [PROPOSÉ] |
-| CIN-50 | Les dernières images | Acte IV | 35 s | [PROPOSÉ] |
-| CIN-51 | Contrôle biologique | Acte IV | 25 s | [PROPOSÉ] |
+| CIN-31 | Le sas refermé | Acte III | 30 s | [EXISTANT] V188 (placeholder Canvas) |
+| CIN-40 | Jun Park ne répond plus | Interlude | 30 s | [EXISTANT] V188 (placeholder Canvas) |
+| CIN-41 | Ce que BISHOP-9 savait | Interlude | 45 s | [EXISTANT] V188 (placeholder Canvas) |
+| CIN-50 | Les dernières images | Acte IV | 35 s | [EXISTANT] V188 (placeholder Canvas) |
+| CIN-51 | Contrôle biologique | Acte IV | 25 s | [EXISTANT] V188 (placeholder Canvas) |
 | CIN-59 | L'atterrissage | `story-recuperation` | 20 s | [PROPOSÉ] |
 | CIN-60 | Dernier départ | Acte V | 30 s | [PROPOSÉ] |
 | CIN-61 | Les portes du port | Acte V | 45 s | [PROPOSÉ] |
+| CIN-70 | Six heures de silence | Station | 40 s | [EXISTANT] V188 (placeholder Canvas, §7.6) |
+| CIN-71 | La voix de CASSIUS | Station S2 | 40 s | [EXISTANT] V188 (placeholder Canvas, §7.6) |
+| CIN-72 | Le dernier enregistrement d'Echo-8 | Station S3 | 30 s | [EXISTANT] V188 (placeholder Canvas, §7.6) |
+| CIN-60 | Dernier départ | Acte V | 30 s | [EXISTANT] V188 (placeholder Canvas, §5.11) |
+| CIN-61 | Les portes du port | Acte V | 45 s | [EXISTANT] V188 (placeholder Canvas, §5.11) |
 | CIN-70 | Six heures de silence | Station | 40 s | [PROPOSÉ] |
 | CIN-71 | La voix de CASSIUS | Station S2 | 40 s | [PROPOSÉ] |
 | CIN-72 | Le dernier enregistrement d'Echo-8 | Station S3 | 30 s | [PROPOSÉ] |
 | CIN-73 | Le moyeu | `story-moyeu` | 20 s | [PROPOSÉ] |
 | CIN-80 | Premières lumières | Colonie, palier *Rétablie* | 30 s | [PROPOSÉ] |
-| CIN-90 | Fins (×3) | Épilogue | 60 s | [PROPOSÉ] |
+| CIN-90 | Fins (×3) | Épilogue | 60 s | [EXISTANT] V188 (`cin-90-relay`, `cin-90-freight`, `cin-90-living`, placeholder Canvas) |
+| CIN-92 | Ce que le retour devra raconter | Épilogue | 49 s | [EXISTANT] V188 (placeholder Canvas) ; identifiant [PROPOSÉ] |
+| Générique | A fan game by Darknigthmare | Fin | 24 s | [EXISTANT] V188 (`cin-99-credits`) ; identifiant [PROPOSÉ] |
 
 **Contraintes :** séquences scriptées dans le moteur Canvas 2D (plans fixes, parallaxe, panoramiques, cadres de dialogue avec portraits `npc-dialogue-portraits-v168.js`), pas de vidéos précalculées. Toutes passables et relisibles ; aucune récompense liée à leur affichage. Musique et sons originaux uniquement.
+
+
+### 10.1 Insertion et extraction : tableau de fidélité (V188, 2026-11-15)
+
+Séquences d’insertion et d’extraction de mission (Tantalus ↔ UD-4L ↔ sol), spécification [specs/003](../../specs/003-insertion-extraction-cinematiques/spec.md). Version complète (45–60 s) la première fois sur un monde, version courte (12–15 s) ensuite, sauf option « toujours la version complète ». Rendu en primitives Canvas, comme placeholders ; emplacements d’art dans [INSERTION_ART_SLOTS_V188.md](../development/INSERTION_ART_SLOTS_V188.md). Le projet ne revendique pas de fidélité « 1:1 » : la colonne de gauche décrit ce que le film montre, les deux autres ce que le projet en fait.
+
+| Apparence documentée (*Aliens*, 1986) | Adaptation du projet | À définir |
+| --- | --- | --- |
+| Le largage : le dropship UD-4L Cheyenne descend de la soute du *Sulaco* en orbite, accroché à son bras, puis se détache et plonge vers LV-426. | Le vaisseau est l’USS Tantalus, pas le *Sulaco*. Sa « baie de largage 2 » reprend l’idée : rail, pince, portes ouvertes sur l’espace, compte à rebours de largage. Opérateur radio « TANTALUS · OPS » [PROPOSÉ]. | Plan de coupe et dimensions de la baie ; nom de l’opérateur. |
+| Silhouette de l’UD-4L dans les plans de vol : coque anguleuse, tourelle sous le nez, ailes courtes porte-armes, double dérive sur poutres de queue, rampe arrière. | Profil latéral simplifié en primitives (`ud4l-side`), mêmes repères. Couleur vert olive et marquages ambre repris du hangar du hub. Pilote : Maksim Orlov (CIN-03). | Image de référence produite et validée pour l’emplacement `ud4l-side`. |
+| Le M577 est transporté dans la soute ventrale du dropship et en sort au sol, sur Hadley’s Hope. | Si la mission déploie le M577 (véhicule `vehicle-001`/`vehicle-002`, gabarit `colony-multiroute` ou `planet-exterior`), il est dessiné sous le ventre, largué au contact, puis réembarqué à l’extraction. Sinon, les marines descendent par la rampe. | Proportions exactes M577/UD-4L ; séquence d’arrimage. |
+| La soute de troupe étroite : sièges face à face, arceaux de harnais abaissés, éclairage rouge, secousses pendant la descente. | Plan « soute de troupe » : six sièges (quatre avec le M577), harnais, éclairage rouge, petit écran d’état lié aux mêmes données de vol. Ligne de Tamsin Velez [PROPOSÉ]. | Nombre de sièges de référence. |
+| Les écrans du cockpit : moniteurs monochromes à vecteurs, terrain filaire, grille, lectures de télémétrie pendant l’approche dans la tempête. | Quatre écrans CRT animés par un seul état de vol : NAV (monde, coordonnées, cap, heure locale, météo), TERRAIN filaire défilant ou réticule d’amarrage, TÉLÉMÉTRIE (altitude, vitesse, assiette, température de coque), SYSTÈMES (alertes forme + couleur, compte à rebours). Coordonnées et heures sans donnée de monde : [PROPOSÉ]. | Contenu exact des écrans du film ; typographie. |
+| L’arrivée sur LV-426 se fait de nuit, par vent fort et pluie. | Acheron : tempête de nuit. Cocyte : pluie au crépuscule (CIN-00, CIN-03). Autres mondes : météo déduite de l’atmosphère et du biome ; heure locale [PROPOSÉ]. | Météo des mondes de projet non décrits. |
+| — (le film ne montre pas de descente sans atmosphère ni d’amarrage du dropship) | Lune ou astéroïde sans air : descente propulsée, sans plasma ni nuages. Vaisseau ou station : approche et amarrage par la rampe arrière. Les deux sont des inventions du projet [PROPOSÉ]. | Procédure d’amarrage de l’UD-4L. |
 
 ---
 
@@ -1155,6 +1615,7 @@ Les chapitres Mire Archive 001, Protocole Z-110, Jeri, Éloïse, A.T.A.X.-Q, Le 
 | 7 | Valider les nouveaux lieux des campagnes annexes (TR-0, Kéos, Murmure, Tyndare, Pangaea comme monde, Hiéron, *Clémence*, *Bonne-Espérance*, Base Ombelle) et leurs personnages (Navarre, Rask, Oyelaran, Viret, Szabo, Moreau, Asch). | §14-18 — **Validé** |
 | 8 | Définir MIRE comme programme de modélisation de la compagnie ? | §18.3 — **Validé (archives fidèles et originales)** |
 | 9 | Ordre et conditions de déblocage des campagnes annexes. | §13.5 — **Validé : déblocage progressif** |
+| 10 | Parcours complet du 2026-11-22 (`docs/development/PLAYTHROUGH_V188_20261122.md`) : ravitaillement de la ligne principale, infestation à bord qui bloque le saut vers Nacre-7, ordre conseillé QZ-18 avant QZ-17, pont de la crise de l'Interlude. | §5, §13.5 — **Ouvert** (questions P-1 à P-5) |
 
 
 ---
@@ -1181,7 +1642,7 @@ Chaque campagne annexe :
 | Règle | Effet en jeu |
 | --- | --- |
 | **Le voyage se fait en hypersommeil.** Un trajet entre systèmes prend des semaines. | Chaque départ fait passer du temps stratégique. Les colonies laissées derrière évoluent (chantiers, infestation). |
-| **Les messages suivent avec retard.** | Un appel reçu date déjà de plusieurs jours : la situation à l'arrivée est pire que le message. |
+| **Les messages suivent avec retard.** | Un appel reçu date déjà de plusieurs jours : la situation à l'arrivée est pire que le message. **[PARTIEL] V188, §13.7.** |
 | **Le carburant et les réserves sont comptés.** | Ressource `fuel` existante : choisir l'ordre des campagnes a un coût. |
 | **L'équipage vieillit avec les missions.** | Stress, fatigue et blessures (`CREW`, `content-core-v50.js`) persistent d'une campagne à l'autre. |
 | **Asphodèle et Port-Méridien restent des bases.** | Si la station est reprise, elle relaie les appels et ravitaille ; Port-Méridien fournit des volontaires selon son palier. |
@@ -1211,7 +1672,7 @@ Les missions locales restent disponibles sur chaque lieu tant qu'il n'est pas pe
 
 Les lieux Nacre-7, Echo Basin, Sable Meridian, Pallas Rift, MIRE-9, Palimpste et Khepri Forge existent déjà dans le catalogue comme mondes originaux du projet (provenance `project-canon`, secteur Tantalus Reach, `content-core-v50.js`). Kéos, Murmure, Tyndare, Pangaea (comme monde), Hiéron, *Clémence* et *Bonne-Espérance* sont **[PROPOSÉ]**.
 
-**Chapitres existants :** tous les chapitres V131 cités sont **[PARTIEL]** et `playable: true` dans `special-operations-v131.js`, mais leur `worldId` actuel est `world-05-lethe`. Les déplacer vers le monde de leur campagne est un changement de données **[PROPOSÉ]**. Cette Partie II remplace le classement « archives MIRE » proposé au §9.2.
+**Chapitres existants :** tous les chapitres V131 cités sont **[PARTIEL]** et `playable: true` dans `special-operations-v131.js`. Leur `worldId` n'est pas toujours `world-05-lethe` : relevé du 22 novembre 2026, Abysse Noir était sur `world-10-ceto`, Broodstorm sur `world-01-acheron-lv-426`, Reine-Mère, Ruche-monde, Pangaea, les chapitres de ruche et de mécas sur `world-05-lethe`, MIRE sur `world-15-uscss-nostromo`. Les déplacer vers le monde de leur campagne est un changement de données additif, campagne par campagne (Q15 B). **[FAIT] V188 spec 011 :** Opération Abysse Noir (`special-black-abyss-v131`) est sur `world-31-nacre-7` ; `legacyWorldIdsV188: ['world-10-ceto']` garde valides les déploiements déjà en cours, l'identifiant et les succès enregistrés sont conservés. **[FAIT] V188 spec 011, second lot (2026-11-23) :** Broodstorm (`special-broodstorm-v131`) est sur `world-27-echo-basin` (ancien monde accepté : `world-01-acheron-lv-426`) ; « Le chant de la Reine-Mère » et « TR-0 · la Ruche-monde » sont sur `world-65-tr-0`, le 65e monde, créé pour la campagne (ancien monde accepté : `world-05-lethe`). Décision du propriétaire du 2026-11-23 : un chapitre réutilisé est verrouillé jusqu'à sa place dans son arc, puis librement rejouable depuis le registre des opérations sans refaire avancer la campagne. Les chapitres des autres campagnes restent sur leur monde actuel jusqu'à leur arc. Cette Partie II remplace le classement « archives MIRE » proposé au §9.2.
 
 ### 13.5 Déblocage et ordre
 
@@ -1223,9 +1684,33 @@ Les lieux Nacre-7, Echo Basin, Sable Meridian, Pallas Rift, MIRE-9, Palimpste et
 | 3 · Les Bâtisseurs | Après 2 campagnes annexes, dont la 4 | Élevé |
 | 5 · Le banc d'essai | Après 3 campagnes annexes | Maximal ; conclut le fil QZ17 |
 
+**[PARTIEL] V188 spec 011 (2026-11-22) :** la campagne 1 s'ouvre à la fin de la campagne principale, c'est-à-dire quand le générique de l'Acte V a été joué (`storyCampaignV188.act5.phase === 'complete'`) ; l'appel arrive alors à la salle de briefing (§14.11). Les campagnes 2 à 5 ne sont pas raccordées.
+
+### 13.6 Temps de voyage — [PARTIEL] V188 (2026-11-15)
+
+**Saut refusé pour infestation (décision du 2026-11-23)** : le refus reste. La préparation hyperspatiale dit pourquoi (étape de la chaîne) et où agir à bord : console du sas d'arrivée, matrice CCTV, contrôle du sas BIOFORGE ; si le confinement a cédé, éliminer l'intrusion (`infestationJumpGuidanceV188`, FR/EN).
+
+Décision par défaut Q21 : coût fixe par saut. Le carburant garde la règle existante (`2 + ⌈danger/3⌉`, `galaxy-jump-v115.js`) ; chaque saut ajoute **14 jours [PROPOSÉ]** d'hypersommeil, affichés avant le départ (« … unités de carburant · 14 jours en hypersommeil ») et ajoutés à l'arrivée (`src/galaxy-travel-v188.js`). La simulation existante fait évoluer les mondes pendant ces jours. Messages reçus en retard : §13.7. Reste : vieillissement de l'équipage pendant le voyage.
+
+### 13.7 Messages en retard — [PARTIEL] V188 (lot colonie et équipage, 2026-11-16)
+
+Code : `src/travel-messages-v188.js`, sauvegarde additive `travelMessagesV188` (30 messages au plus, reçu du saut). À l'arrivée d'un saut, dans la même transaction que les 14 jours d'hypersommeil, le Tantalus reçoit les messages qui l'ont suivi, une seule fois par saut (un rechargement ne les redonne pas). Ils s'affichent en tête du journal des alertes du Commandement (« Signaux prioritaires »), datés, en français ou en anglais selon la langue choisie, et un message de bord annonce leur nombre.
+
+| Message | Quand | Retard [PROPOSÉ] |
+| --- | --- | --- |
+| Port-Méridien · Adèle Sarrazin (palier, infestation autour du port) | pendant le saut, dès l'Acte I, si le Tantalus quitte Cocyte | 6 j par le réseau QZ ; 3 j avec le relais indépendant (Communications niveau 2) ; 2 j par la salle des relais d'Asphodèle |
+| Station Asphodèle · salle des relais (appels du secteur) | pendant le saut, après S4 | 2 j |
+| Weyland-Yutani · consigne (« préserver le matériel sous scellés ») | pendant le saut | 4 j (comme au §4, CIN-02) |
+| Monde laissé derrière (bulletin, puis valeur d'aujourd'hui) | à l'arrivée | envoyé 3 j après le départ |
+| Appel de la destination (valeur du message, puis valeur à l'arrivée) | à l'arrivée | 9 j |
+| Appel d'une campagne annexe (type `campaign`, spec 011) : Sous-Récif, Nacre-7 | à la salle de briefing, une fois, après l'Acte V | 9 j par le réseau QZ ; 2 j si Asphodèle est reprise et sa salle des relais en service |
+| Arrivée de la campagne annexe : Dr Ilse Navarre | au premier saut vers Nacre-7 après l'acceptation, dans la transaction du saut | 0 j |
+
+Les valeurs citées sont celles des mondes avant les 14 jours de simulation ; la table montre à côté la valeur du jour, souvent pire (« la situation à l'arrivée est pire que le message », §13.2). Fidélité : règle d'univers du projet (§1.3, §13.2) ; repère documenté, le silence de Hadley's Hope connu après coup et la traversée en hypersommeil du Sulaco (*Aliens*, 1986). Textes [PROPOSÉ]. Reste : vieillissement de l'équipage pendant le voyage, appels qui ouvrent les campagnes annexes (§13.3).
+
 ---
 
-## 14. Campagne annexe 1 — « La Saison des Reines »
+## 14. Campagne annexe 1 — « La Saison des Reines » — [PARTIEL] V188 (spec 011 : cadre et arcs 1 à 3 sur gabarits génériques)
 
 ### 14.1 Fiche
 
@@ -1284,7 +1769,7 @@ Lieu : réseau de canyons rouges, tours relais perchées, station minière de **
 | 2.1 | Intro | **Relais Gorge-Seize** | Le dropship d'Orlov se pose sur une tour relais. Les mineurs parlent de « bruits dans la roche ». Le détecteur de mouvement s'affole à cause des échos : il faut apprendre à lire les faux signaux. | `defend the colony` | Détecteur de mouvement, menace invisible. | — | 25 min |
 | 2.2 | Principale | **Le sol qui s'ouvre** | Escorter un convoi de mineurs vers la ville troglodyte. La lignée fouisseuse attaque par-dessous : il faut surveiller les vibrations et rester sur les dalles renforcées. | `escort a colony convoy` | Attaque par les conduits et le sol. | — | 35 min |
 | 2.3 | Principale | **Les nids sous les surplombs** | Couvrir à bord du Cheyenne l'évacuation d'un avant-poste attaqué en piqué par la lignée aérienne. Escorte, appui, tir sur les nids des falaises. | `hold the extraction zone` | Dropship, appui aérien. | **Broodstorm** (Cheyenne, falaises, surplombs) | 40 min |
-| 2.4 | Principale | **La Reine volante** | Traquer la Reine aérienne jusqu'à son aire, au sommet d'une aiguille rocheuse. Combat en hauteur, vent, chutes. | `track an apex specimen` | Reine adaptée à son milieu. | **Broodstorm** (Flying Queen, art dédié encore manquant) | 40 min |
+| 2.4 | Principale | **La Reine volante** | Traquer la Reine aérienne jusqu'à son aire, au sommet d'une aiguille rocheuse. Combat en hauteur, vent, chutes. | `track an apex specimen` | Reine adaptée à son milieu. | **Broodstorm** (Reine ailée illustrée dans le chapitre local ; arc proposé à produire) | 40 min |
 | 2.5 | Principale | **La carte des lignées** | Inez croise les données de Nacre-7 et d'Echo Basin : les deux lignées ont été **déposées**, pas arrivées par hasard. Un registre de vol de la tour relais montre des cargos W-Y passés six mois plus tôt, venant d'un monde absent des cartes civiles : TR-0. | `recover black-box data` | La compagnie sème des œufs pour observer. | — | 25 min |
 
 **Annexes de l'arc 2**
@@ -1349,6 +1834,37 @@ Lieu : monde absent des cartes civiles. La Red Hive a colonisé toute sa biosph�
 ### 14.10 Récompenses
 
 Arme ou munitions anti-Reine (si Inez garde le spécimen), amélioration du Cheyenne, scaphandre HADAL pour les autres campagnes, entrées de bestiaire « lignées », recrue possible : **Dr Ilse Navarre** (scientifique).
+
+### 14.11 État de production — [PARTIEL] V188 (spec 011, 2026-11-22 puis 2026-11-23)
+
+Spec `specs/011-saison-des-reines`. Code : `src/side-campaign-queens-v188.js` (règles, données FR/EN des trois arcs), `src/queens-cinematics-v188.js` (CQ-01 à CQ-06), `src/queens-crew-quests-v188.js` (quêtes de §14.9), raccordement dans `src/app.js`, `src/save.js`, `src/content.js`, `src/content-core-v50.js` (monde TR-0), `src/travel-messages-v188.js`, `src/legacy-operation-state-v131.js`, `src/ecosystem-missions-v131.js`, `src/operation-receipts-v131.js`, `src/crew-quests-v188.js`. Décisions appliquées : Q13 B, Q15 B, Q16 B, Q21 A, et les décisions du propriétaire du 2026-11-23 (R1 confirmé ; chapitres verrouillés jusqu'à leur place puis librement rejouables ; crise de l'œuf saisi différée à l'arc 2 ou 3 ; TR-0, 65e monde, caché jusqu'à l'arc 3).
+
+« Partiel » ci-dessous signifie : jouable de bout en bout avec les systèmes existants, sur des gabarits de niveau génériques et avec un art provisoire. Aucun niveau dédié ni aucune image n'a été produit pour cette campagne.
+
+| Élément | Statut | Détail |
+| --- | --- | --- |
+| Appel (§13.3 étape 1) | Fait | Après le générique de l'Acte V (R1 confirmé), une fois : message daté au journal des alertes (§13.7), CQ-01, briefing avec le coût du saut, **ACCEPTER** ou **PLUS TARD** (l'appel reste lisible depuis le panneau) |
+| Voyage (§13.2, §13.6) | Fait | Sauts par la carte galactique existante (carburant `2 + ⌈danger/3⌉` : 4 pour Nacre-7, 6 pour Echo Basin, 6 pour TR-0 ; 14 jours chacun). Accepter ouvre Nacre-7 ; le choix de Rask ouvre Echo Basin ; la fin de 2.5 révèle TR-0. Première arrivée de chaque arc enregistrée avec un message (Navarre, relais de Gorge-Seize, balise de Base Ombelle) et une scène à la table |
+| Monde TR-0 (§14.6) | Fait | `world-65-tr-0`, 65e monde, provenance `project-canon`, ajouté sans modifier les 64 mondes générés ni ce qui en dérive. Caché : absent de la carte galactique et de sa recherche, jamais ouvert par les déblocages génériques ; révélé par la fin de l'arc 2. Danger 10, infestation 100, stabilité 5, biomes `badlands` / `hive` **[PROPOSÉ]** |
+| Arc 1, histoire (§14.4) | Partiel | 1.1 `queens-1-1-quai`, 1.2 `queens-1-2-bassins`, 1.3-1.4 chapitre Opération Abysse Noir (une partie couvre les deux lignes), 1.5 `queens-1-5-rask` ; ordre strict ; orbite de Nacre-7. Gabarits génériques |
+| Arc 1, annexes et locales | Partiel | `queens-a-navarre`, `queens-a-filets`, `queens-a-phare` (une fois) ; contrats `queens-l-bassin`, `queens-l-canots`, `queens-l-boites` (rejouables) ; après 1.1 ; gabarits génériques |
+| Arc 2, histoire (§14.5) | Partiel | 2.1 `queens-2-1-relais`, 2.2 `queens-2-2-sol`, 2.3 chapitre **Broodstorm** (déplacé d'Acheron vers Echo Basin, identifiant conservé), 2.4 `queens-2-4-aire`, 2.5 `queens-2-5-carte` ; ordre strict ; orbite d'Echo Basin. Gabarits génériques : les faux signaux du détecteur (2.1), le sol qui s'ouvre (2.2) et le combat en hauteur (2.4) ne sont pas produits ; 2.4 se joue au sol contre la caste royale du catalogue |
+| Arc 2, annexes et locales | Partiel | `queens-a-mineurs`, `queens-a-sorensen` ; `queens-a-rask` seulement si l'œuf a été laissé à Rask **[PROPOSÉ]** ; `queens-a-grue` seulement si Grue est alliée ; contrats `queens-l-galerie`, `queens-l-falaise`, `queens-l-chargeur` ; après 2.1 |
+| Arc 3, histoire (§14.6) | Partiel | 3.1 `queens-3-1-peau`, 3.2 `queens-3-2-ombelle`, 3.3-3.4 chapitre **Le chant de la Reine-Mère**, 3.5 chapitre **TR-0 · la Ruche-monde** (tous deux déplacés de Cocyte vers TR-0, identifiants conservés) ; ordre strict ; orbite de TR-0. 3.1 et 3.2 sur gabarits génériques : l'alerte planétaire au bruit n'est pas produite |
+| Arc 3, annexes | Partiel | `queens-a-ombelle`, `queens-a-echantillon` (`capture a live organism`) ; après 3.1 ; gabarits génériques |
+| Chapitres réutilisés (§13.4) | Fait | Verrouillés jusqu'à leur place dans leur arc ; une fois joués à leur place, librement rejouables depuis le registre des opérations, depuis n'importe quelle orbite ; un succès rejoué ne fait pas avancer la campagne. Un déploiement commencé sur l'ancien monde reste valide (`legacyWorldIdsV188`) |
+| Ennemis (§14.3) | Partiel | Rosters par lignée **[PROPOSÉ]**, castes existantes du catalogue : récifale (Drone, Lurker, Runner, Reef Stalker, Reef Spitter), fouisseuse (Drone, Crusher, Burster), aérienne (Runner, Spitter), Mère (Drone, Praetorian). Caste royale admise seulement sur la traque 2.4. Non admis sur les gabarits terrestres : prédateur aquatique, Reine ailée en vol, Reine-Mère, qui restent les boss de leurs chapitres. Variantes propres aux lignées **[À CRÉER]** |
+| Choix (§14.8) | Partiel | Œuf de Rask (laisser / saisir / détruire) et Praetorian vivant (Inez : recherche +15, recherche anti-Reine ouverte ; BISHOP-9 : confiance +10, spécimen réclamé plus tard **[PROPOSÉ]**), une fois chacun, sauvegardés. Rask sauvé : dérivé de `queens-a-rask`. Effets sur la campagne 5 seulement enregistrés |
+| Crise de l'œuf saisi (§14.8) | Fait | Risque enregistré à l'arc 1. Moment choisi **[PROPOSÉ]** : le réveil d'hypersommeil en orbite de TR-0. Crise du hub existante (xénomorphe, pont 2, quarantaine), créée par l'API du hub dans la transaction du saut ; l'arc 3 et le compte rendu attendent ; deux issues (créature abattue, ou équipe évacuée avec les dégâts des règles existantes), reprises par le compte rendu |
+| Retour et fin (§13.3 étape 6, §14.8) | Fait | Scène de retour de chaque mission d'histoire et annexe ; comptes rendus des arcs 1 et 2 ; fin unique : compte rendu de campagne nuancé par chaque choix (Base Ombelle, adresse de Khepri Forge) |
+| Cinématiques (§14.7) | Partiel | CQ-01 à CQ-06 jouées en jeu (appel ; retour de 1.4 ; retour de 2.4 ; orbite de TR-0 ; retour du chapitre de la Reine-Mère ; retour de 3.5), en primitives provisoires (emplacements `queens-cin-*`) |
+| Quêtes liées (§14.9) | Partiel | `ship-q-doyle`, `ship-q-orlov`, `ship-q-harlow` après l'arc 2 (quêtes d'analyse). Effets produits : loyauté, recherche, bestiaire. Réglages du smartgun et amélioration du Cheyenne seulement enregistrés |
+| Récompenses (§14.10) | Partiel | Bestiaire des adaptations à la table de briefing (une entrée par lignée dont l'arc est terminé). Non produits : arme anti-Reine, statistiques du Cheyenne, scaphandre HADAL hors chapitre, recrutement de Navarre (proposé au compte rendu seulement) |
+| Niveaux dédiés, art (§30) | Manquant | Toutes les missions propres à la campagne sur gabarits génériques ; emplacements `queens-*` en primitives ; aucune image |
+
+Valeurs **[PROPOSÉ]** : retards de l'appel (9 j réseau QZ, 2 j relais d'Asphodèle) ; annexes et locales ouvertes après la première mission de chaque arc ; une mission d'histoire ou annexe jouée une fois par campagne ; rosters des lignées et caste royale de 2.4 ; condition de `queens-a-rask` (œuf laissé à Rask) ; objectifs de base des annexes de l'arc 2 que la bible ne fixe pas (`queens-a-mineurs` et `queens-a-rask` : `rescue survivors` ; `queens-a-sorensen` : `escort a colony convoy` ; `queens-a-grue` : `recover black-box data`) et de `queens-a-ombelle` (`rescue survivors`) ; moment de la crise de l'œuf ; effets immédiats du choix du Praetorian ; caractéristiques du monde TR-0 ; moment de CQ-05 ; tous les textes des scènes, des messages, des choix, des comptes rendus et des quêtes. Sauvegarde additive `sideCampaignsV188.queens` (phase, jours d'appel, d'acceptation et d'arrivée par arc, missions faites pendant la campagne, contrats, choix, crise, scènes vues). Un succès d'un chapitre antérieur à la campagne reste enregistré mais ne compte pas pour son arc.
+
+Fidélité : rien n'est déclaré « 1:1 ». Documenté : adaptation de l'organisme à son hôte et à son milieu, dépendance de la ruche envers sa Reine, œuf porté à bord d'un vaisseau et éclosion en transit (*Alien*, 1979 ; *Aliens*, 1986 ; *Alien 3*, 1992) ; hypersommeil et nouvelles arrivées après coup (*Aliens*, 1986). Adapté par le projet : Sous-Récif, Gorge-Seize, Base Ombelle, Navarre, Rask, les lignées, la Red Hive, TR-0. À définir : l'art des arcs et des cinématiques (aucune image produite), les voix, les variantes de castes.
 
 ---
 
@@ -1443,6 +1959,8 @@ Lieu : monde forestier pâle, presque sans vent. Une base Hyperdyne / W-Y a reli
 | 3.2 | Principale | **Le faux fils** | Jouer **Jeri**, synthétique segmenté capable de se déplacer aux murs et au plafond, porteur de profils phéromonaux : traverser les inspections de la ruche, sauver un captif humain et neutraliser SAINT (boss en trois phases) avant l'inspection royale. | `rescue survivors` | Infiltration chimique d'une ruche. | **Jeri · le faux fils** (inspections ouvrière, nourrice, reine ; SAINT) | 45 min |
 | 3.3 | Principale | **HUSH-6** | Récupérer la mémoire locale HUSH-6 : l'enregistrement de la mise en service d'Éloïse et l'ordre qui l'a reliée à la ruche. | `recover black-box data` | Mémoire synthétique. | **Éloïse** (station HUSH-6) | 25 min |
 | 3.4 | Finale | **La reine sans couronne** | Résoudre les trois pylônes (Mémoire, Douleur, Chœur), affronter le Chasseur de Mères, puis choisir la conclusion. | `seal the hive` | Synthétique-ruche, choix moral. | **Éloïse · la reine sans couronne** (pylônes, Chœur, carte mutable, quatre fins existantes) | 60 min |
+
+**« Le faux fils » est solo (décision du propriétaire, 2026-11-15).** Jeri infiltre seul la ruche : aucun marine IA n'est déployé et le reste de l'escouade attend au Tantalus sans fatigue ni blessure. Les objectifs (pupitre, inspections Ouvrier/Nourrice, sauvetage du captif, SAINT, inspection royale, extraction) reposent tous sur les actions de Jeri et ne supposaient aucun allié. Code : `isSoloSpecialOperationV131` (`src/special-operations-v131.js`) et `configureMissionSquad` (`src/hive-missions-v131.js`). Voir §56.4.
 
 **Annexes de l'arc 3**
 
@@ -2563,6 +3081,8 @@ Les fichiers de `assets/user/` sont des **références** fournies par le propri�
 
 **Socle de l'arc [À CRÉER] :** décor de station orbitale en trois couches (anneau extérieur, pont de contrôle, laboratoire de transit, ponts inférieurs, serre, salle des relais, mémorial) ; PNJ Grue, récupérateurs Crucible ; interface vocale de CASSIUS ; dropship d'Echo-8 amarré.
 
+**Mise à jour art de scène (16 novembre 2026, §7.8).** Les cartes d'extérieur, de CASSIUS et de l'enregistrement d'Echo-8 sont produites, ainsi que les trois autres cartes de preuve du lot. Elles servent les dialogues ; les besoins du tableau ci-dessous en décors jouables, props de hub, acteurs, animations et plans de CIN-70 à CIN-72 restent distincts. Le statut d'une illustration ne vaut pas achèvement d'une mission.
+
 | Mission | Props spécifiques | Personnages / ennemis | Animations | VFX | Actions |
 | --- | --- | --- | --- | --- | --- |
 | Six heures de silence | Enregistrement casque à l'écran **[À CRÉER]** | Rook **[PRÉSENT]** | — | Bruit radio **[À CRÉER]** | — |
@@ -2577,6 +3097,8 @@ Les fichiers de `assets/user/` sont des **références** fournies par le propri�
 
 Elles se jouent surtout au hub, avec des PNJ **[PRÉSENT]**. Besoins **[À CRÉER]** : poses de dialogue assises ou au poste pour chaque membre (au moins une par personnage), objets de quête (composants de DAVID-8R, plaques de colons, fragment de sceau, tourelles sentinelles, enregistreurs de Kappa), écran de sélection des recrues (Voss, Bensaïd, Reed, Seo : planches de déplacement et de mission à créer pour chacun).
 
+**Illustrations disponibles (16 novembre 2026).** Les onze cartes de §8.5 et les quatre cartes des premières quêtes de §8.4 sont produites. Leur présence ne fournit pas les poses ni les props animés de la liste ci-dessus. La carte d'Echo-8 est aussi réutilisée par la quête d'ECHO-A.
+
 ---
 
 ## 30. Campagne annexe 1 — La Saison des Reines
@@ -2589,36 +3111,38 @@ Elles se jouent surtout au hub, avec des PNJ **[PRÉSENT]**. Besoins **[À CRÉE
 | --- | --- | --- | --- | --- | --- |
 | 1.1 Le quai noyé | Tables servies, pompes **[À CRÉER]** | Navarre **[À CRÉER]** | — | Pluie sur l'eau **[À CRÉER]** | — |
 | 1.2 Les bassins | Œufs fixés comme des coraux **[À CRÉER]** ; filets avec cocons **[DETTE]** | Drones récifaux | Bassin qui se vide (niveau d'eau) **[À CRÉER]** | Écoulement **[À CRÉER]** | Pompage **[À CRÉER]** |
-| 1.3 Plongée HADAL | Coque immergée, nid **[À CRÉER]** | Lurker récifal | Nage en scaphandre **[DETTE]** (`dedicated-hadal-manta-art`) | Bulles, particules, lampe **[À CRÉER]** | Nage **[CODE]** ; oxygène limité **[À CRÉER]** |
-| 1.4 Reine des récifs | Fossé, nid royal **[À CRÉER]** | Reine récifale **[À CRÉER]** | MANTA-6 **[DETTE]** ; Reine nageant **[À CRÉER]** | Torpilles, traînées, projecteurs **[À CRÉER]** | Pilotage sous-marin **[CODE]** (chapitre existant) |
+| 1.3 Plongée HADAL | Coque immergée, nid **[À CRÉER]** | Lurker récifal | Tenue HADAL modulaire **[PRÉSENT]** dans le chapitre local ; cycle de nage dédié **[DETTE]** (`dedicated-hadal-manta-art`) | Bulles, particules, lampe **[À CRÉER]** | Nage **[CODE]** ; oxygène limité **[À CRÉER]** dans cet arc proposé |
+| 1.4 Reine des récifs | Fossé, nid royal **[À CRÉER]** | Reine récifale **[À CRÉER]** | Coque statique MANTA-6 **[PRÉSENT]** dans le chapitre local ; animations supplémentaires **[DETTE]** ; Reine nageant **[À CRÉER]** | Torpilles, traînées, projecteurs **[À CRÉER]** | Pilotage sous-marin **[CODE]** (chapitre existant) ; arc Nacre-7 proposé distinct |
 | 1.5 Ce que Rask voulait | Œuf royal en caisson **[À CRÉER]** | Rask, escouade W-Y | — | — | Choix laisser/saisir/détruire **[À CRÉER]** |
 | Annexes (3) | Laboratoire inondé, filets, phare **[À CRÉER]** | Pêcheur survivant **[À CRÉER]** | Canots qui approchent **[À CRÉER]** | Faisceau du phare **[À CRÉER]** | Hissage de filet **[À CRÉER]** |
 | Cinématiques CQ-01, CQ-02 | Trois coquilles d'œuf, fossé éclairé **[À CRÉER]** | Inez **[PRÉSENT]** | — | — | — |
 
+**V188 spec 011 :** missions, choix laisser/saisir/détruire et scènes de retour **[CODE]** (§14.11) ; décors, props, Navarre, Rask, Reine récifale nageant et VFX ci-dessus restent **[À CRÉER]** : les scènes et CQ-01/CQ-02 les remplacent par des primitives Canvas nommées (`queens-quay`, `queens-pools`, `queens-trench`, `queens-rask`, `queens-cin-three-shells`, `queens-cin-trench-queen`…). Les missions 1.1, 1.2 et 1.5 tournent sur des gabarits génériques.
+
 ### 30.2 Arc 2 · Echo Basin
 
-**Socle de l'arc :** canyons rouges, tour relais, ville troglodyte de Gorge-Seize, aiguille rocheuse **[À CRÉER]** (fond `planet-exterior` **[PRÉSENT]** comme base) ; mineurs **[À CRÉER]** ; lignée fouisseuse (base `xenomorph-crusher-action-sheet`, `xenomorph-burster-action-sheet-v56` **[PRÉSENT]**, variante **[À CRÉER]**) ; lignée aérienne et Reine volante **[DETTE]** (`dedicated-flying-queen-art`) ; Cheyenne **[PRÉSENT]** (`ud-4l-cheyenne-dropship-action-sheet`), version modulaire **[DETTE]** (`complete-modular-dropship-corpus`).
+**Socle de l'arc :** canyons rouges, tour relais, ville troglodyte de Gorge-Seize, aiguille rocheuse **[À CRÉER]** (fond `planet-exterior` **[PRÉSENT]** comme base) ; mineurs **[À CRÉER]** ; lignée fouisseuse (base `xenomorph-crusher-action-sheet`, `xenomorph-burster-action-sheet-v56` **[PRÉSENT]**, variante **[À CRÉER]**) ; lignée aérienne **[DETTE]** ; Reine ailée **[PRÉSENT]** dans le chapitre local Broodstorm (douze poses, voir §56.17), réemploi dans cet arc et atterrissage **[À CRÉER]** ; Cheyenne **[PRÉSENT]** (`ud-4l-cheyenne-dropship-action-sheet`), version modulaire **[DETTE]** (`complete-modular-dropship-corpus`).
 
 | Mission | Props | Personnages / ennemis | Animations | VFX | Actions |
 | --- | --- | --- | --- | --- | --- |
 | 2.1 Relais Gorge-Seize | Tour relais **[À CRÉER]** | Mineurs **[À CRÉER]** | — | Faux échos sur le détecteur (interface) **[À CRÉER]** | Lecture des faux signaux **[À CRÉER]** |
 | 2.2 Le sol qui s'ouvre | Dalles renforcées, galeries qui s'ouvrent **[À CRÉER]** | Fouisseurs **[À CRÉER]** | Sortie de sol **[À CRÉER]** | Fissures, poussière **[À CRÉER]** | Vibrations à surveiller **[À CRÉER]** |
 | 2.3 Nids sous les surplombs | Nids de falaise **[À CRÉER]** | Planeurs **[À CRÉER]** | Piqué **[À CRÉER]** | Tir aérien, explosions **[PRÉSENT]** (`combat-vfx-animation-sheet`) | Tir depuis l'appareil **[CODE]** (Broodstorm) |
-| 2.4 La Reine volante | Aire au sommet **[À CRÉER]** | Reine volante **[DETTE]** | Vol, atterrissage **[DETTE]** | Vent, chutes de pierres **[À CRÉER]** | Combat en hauteur **[À CRÉER]** |
+| 2.4 La Reine volante | Aire au sommet **[À CRÉER]** | Art local Broodstorm **[PRÉSENT]** ; rencontre de cet arc **[À CRÉER]** | Poursuite, réaction et mort en vol **[PRÉSENT]** dans Broodstorm ; atterrissage **[DETTE]** | Vent, chutes de pierres **[À CRÉER]** | Combat en hauteur de cet arc **[À CRÉER]** |
 | 2.5 Carte des lignées | Registre de vol **[À CRÉER]** | Inez **[PRÉSENT]** | — | — | Lecture **[CODE]** |
 | Annexes (4) | Puits 7, épave Crucible, capteurs sismiques, route des crêtes **[À CRÉER]** | Contremaître, Rask, Grue **[À CRÉER]** | Remontée de puits (ascenseur) **[À CRÉER]** | — | — |
-| CQ-03 | Coucher de soleil sur le canyon **[À CRÉER]** | Reine volante **[DETTE]** | — | — | — |
+| CQ-03 | Coucher de soleil sur le canyon **[À CRÉER]** | Référence Broodstorm **[PRÉSENT]** ; mise en scène CQ-03 **[À CRÉER]** | — | — | — |
 
 ### 30.3 Arc 3 · TR-0, la Ruche-monde
 
-**Socle de l'arc :** surface vivante, organes, noyau **[DETTE]** (`complete-organ-biomes`, `dedicated-planet-queen-art`) ; Base Ombelle sous la résine **[À CRÉER]** ; Reine-Mère et Chœurs **[DETTE]** (`dedicated-queen-mother-animation`, `complete-royal-cast`) ; praetorian **[PRÉSENT]**.
+**Socle de l'arc :** surface vivante, organes, noyau **[DETTE]** (`complete-organ-biomes`, `dedicated-planet-queen-art`) ; Base Ombelle sous la résine **[À CRÉER]** ; adulte Reine-Mère rouge **[PRÉSENT]** dans le chapitre local « Le chant de la Reine-Mère » (huit poses composées, §56.18), gardes locaux illustrés par réemploi adapté de l'atlas praetorian **[PRÉSENT]** (§56.19), réemploi dans l'arc étendu **[À CRÉER]** ; trois Chœurs locaux illustrés par création originale **[PRÉSENT]** (§56.20) ; casting royal complet **[DETTE]** (`complete-royal-cast`) ; praetorian **[PRÉSENT]**.
 
 | Mission | Props | Personnages / ennemis | Animations | VFX | Actions |
 | --- | --- | --- | --- | --- | --- |
 | 3.1 Atterrissage | Croûte qui respire **[DETTE]** | — | Surface animée **[DETTE]** | Pulsations **[À CRÉER]** | Jauge de bruit **[CODE]** (alerte existante) |
 | 3.2 Base Ombelle | Laboratoire W-Y sous résine, registres d'expédition **[À CRÉER]** | — | — | — | Lecture **[CODE]** |
-| 3.3 Trois Chœurs | Nurserie, artère royale, balises **[CODE]** (chapitre existant) | Castes reliées **[DETTE]** | — | Ondes du Chœur **[À CRÉER]** | Rupture des Chœurs **[CODE]** |
-| 3.4 La Reine-Mère | Salle royale **[CODE]** | Reine-Mère **[DETTE]** | 4 phases **[DETTE]** | — | Boss **[CODE]** |
+| 3.3 Trois Chœurs | Nurserie, artère royale, balises **[CODE]** (chapitre existant) | Trois cibles locales illustrées **[PRÉSENT]** ; castes reliées **[DETTE]** | Quatre états de présentation originaux **[PRÉSENT]** (§56.20) | Ondes du Chœur **[À CRÉER]** | Rupture des Chœurs **[CODE]** |
+| 3.4 La Reine-Mère | Salle royale **[CODE]** (chapitre existant) | Adulte rouge et gardes locaux illustrés **[PRÉSENT]** ; rencontre de l'arc étendu **[À CRÉER]** | Huit poses composées de l'adulte et seize cellules réemployées pour les gardes **[PRÉSENT]** ; quatre phases natives **[CODE]** | — | Boss local **[CODE]** |
 | 3.5 Le noyau | Organes, noyau, sas **[CODE]** | — | Effondrement **[À CRÉER]** | Effondrement, poussière organique **[À CRÉER]** | Fuite chronométrée **[CODE]** |
 | Annexes (2) | Chambre froide **[À CRÉER]** | Chercheur survivant **[À CRÉER]** ; praetorian capturé **[PRÉSENT]** | Créature entravée **[À CRÉER]** | — | Capture d'organisme **[À CRÉER]** |
 | CQ-04 à 06 | Vue orbitale de TR-0, décollage **[À CRÉER]** | — | — | — | — |
@@ -2803,8 +3327,11 @@ Ces missions réutilisent au maximum les décors de zone **[PRÉSENT]** (`ship-*
 | Créature | Statut |
 | --- | --- |
 | Reine récifale, lignée fouisseuse, lignée aérienne | [À CRÉER] (variantes de castes [PRÉSENT]) |
-| Reine volante | [DETTE] |
-| Reine-Mère, Chœurs, Ruche-monde | [DETTE] |
+| Reine volante | Art local Broodstorm [PRÉSENT] ; atterrissage et autres rencontres [À CRÉER] |
+| Reine-Mère adulte | Art et huit poses du chapitre local [PRÉSENT] ; autres rencontres [À CRÉER] |
+| Gardes de la Reine-Mère | Présentation locale adaptée de l'atlas praetorian [PRÉSENT] ; aucune nouvelle attribution de caste |
+| Chœurs locaux de la Reine-Mère | Présentation originale des trois cibles [PRÉSENT] ; aucune attribution de caste |
+| Casting royal complet et Ruche-monde | [DETTE] |
 | Jeri, SAINT, Éloïse, HUSH-6, Chasseur de Mères | [DETTE] |
 | Synthétique de maintenance industrielle (boss de Kéos) | [À CRÉER] |
 | Faune de Pangaea, castes Sauria, Porte-Ruche Colosse | [DETTE] |
@@ -2887,8 +3414,11 @@ Pour chaque élément à créer, un **lot de génération** type est indiqué :
 | Reine récifale | [À CRÉER] | `xenomorph-queen-*` |
 | Lignée fouisseuse | Variante [À CRÉER] | `xenomorph-crusher`, `xenomorph-burster` |
 | Lignée aérienne (planeurs) | [À CRÉER] | — |
-| Reine volante | [DETTE] | — |
-| Reine-Mère, Chœurs, Ruche-monde | [DETTE] | — |
+| Reine volante | Art local Broodstorm [PRÉSENT] ; autres rencontres [À CRÉER] | Trois planches de quatre poses ; §56.17 |
+| Reine-Mère adulte | Art local [PRÉSENT] ; autres rencontres [À CRÉER] | Deux planches de corps, quatre bras composés ; §56.18 |
+| Gardes de la Reine-Mère | Présentation locale adaptée [PRÉSENT] | Atlas praetorian existant, seize cellules, six gardes initiaux et douze renforts possibles ; §56.19 |
+| Chœurs locaux de la Reine-Mère | Présentation originale [PRÉSENT] | Une même arche costale pour les trois cibles, quatre états et appuis fixes ; §56.20 |
+| Casting royal complet et Ruche-monde | [DETTE] | Les trois objets locaux illustrés ne définissent pas les trois castes reliées ni le casting étendu de TR-0 |
 | Jeri, SAINT, Éloïse, HUSH-6, Chasseur de Mères | [DETTE] | — |
 | Faune de Pangaea, castes Sauria, Porte-Ruche Colosse | [DETTE] | `wild-boar-host` (principe d'hôte animal) |
 | Ingénieur (le Dormeur) | [À CRÉER] | — |
@@ -2910,7 +3440,7 @@ Pour chaque élément à créer, un **lot de génération** type est indiqué :
 | --- | --- | --- |
 | M577 | Acte III, Acte V, missions | [PRÉSENT] |
 | Cheyenne | Insertion, Echo Basin, Broodstorm | [PRÉSENT] ; modulaire [DETTE] |
-| Scaphandre HADAL, sous-marin MANTA-6 | Nacre-7 | [DETTE] (`dedicated-hadal-manta-art`) |
+| Scaphandre HADAL, sous-marin MANTA-6 | Chapitre local Abysse Noir ; arc Nacre-7 proposé | Tenue HADAL modulaire et coque statique MANTA-6 [PRÉSENT] (V188, 17 novembre 2026) ; cycle de nage et animations supplémentaires [DETTE] (`dedicated-hadal-manta-art`) |
 | USS Tantalus, vue extérieure | Cinématiques, carte galactique | [À CRÉER] (aucun fichier trouvé ; `tantalus-command-skiff` est une navette) |
 | Station Asphodèle, vue extérieure et anneau | Cinématiques, hub | [À CRÉER] |
 | Vaisseau de Grue (Crucible) | Asphodèle, Tyndare | [À CRÉER] |
@@ -2945,6 +3475,10 @@ Pour chaque élément à créer, un **lot de génération** type est indiqué :
 | Fusées éclairantes | C5, missions de nuit | [À CRÉER] |
 | Armes Hyperdyne | Campagne 2, LV-895 | [À CRÉER] (base : catalogue d'armes existant) |
 
+**Arsenal (spec 014, 22 novembre 2026).** Le catalogue garde ses 178 armes et en ajoute trois sans plaque native, donc non achetables : le fusil à pompe de Hicks (*Aliens*, 1986 ; identification Ithaca 37 par l'IMFDB, source secondaire), le fusil à pompe et le lance-flammes de Sevastopol (*Alien: Isolation*, classes nommées par le manuel Feral) — silhouettes Canvas provisoires [À CRÉER : plaques]. Alimentations raccordées au jeu pour les armes des marines : tube et pompe (M37A2, fusils ajoutés), barillet (.357), bande (M56), réservoir (M240, lance-flammes de Sevastopol), une roquette par tube (M6B, M83, M5). Seul le M41A garde un chargeur physique (preuve V193) ; aucun autre chargeur n'est inventé. Capacités, cadences et temps : réglages du projet [PROPOSÉ]. Animations natives de pompe, barillet, bande et réservoir, sons propres et plaques : [À CRÉER]. Inventaire complet : `docs/development/ARSENAL_COMPLETION_V188.md`. Aucune arme n'est déclarée fidèle « 1:1 ».
+
+**Arsenal, lot B (spec 014, 23 novembre 2026).** Trente-huit armes de la franchise rejoignent le catalogue (197–235), achetables avec une **plaque provisoire dessinée** [À CRÉER : plaques natives] : le lance-flammes, l'aiguillon électrique et le pistolet du Nostromo (*Alien*, 1979) ; le pistolet de Vasquez (*Aliens*, 1986) ; le Lacrima 99, le Draco Double Burner et six armes d'*Alien Resurrection* (les six dernières connues par leur seul nom de suivi [À VÉRIFIER]) ; l'ES-7 Supernova et le lance-flammes de *Prometheus* ; cinq armes d'*Alien: Covenant* ; cinq armes d'*Alien: Earth* (identifications de la presse spécialisée) ; le M39-U, le XM99A1 et le M42A3 d'*Aliens: Dark Descent* ; six armes d'*Aliens vs Predator* (2010) et cinq d'*Aliens versus Predator 2*. Les identités viennent de sources secondaires citées arme par arme ; dégâts, cadences, temps et la plupart des capacités sont des réglages du projet [PROPOSÉ] (cinq capacités seulement viennent d'une liste de jeu). Le M41A cite désormais « 900 coups/min » comme chiffre documenté de source secondaire, sans changer sa cadence de jeu. Le VP70 reçoit un chargeur physique (accessoire réel Heckler & Koch VP70) ; le M4A3 et le F44AA restent sans preuve propre au modèle. Restent à faire : lance-grenades sous le M41A et combinaison de Ripley (tir secondaire), familles *Fireteam Elite*, *Colonial Marines*, *Alien RPG*, comics et romans. Aucune arme n'est déclarée fidèle « 1:1 ».
+
 ### 38.7 Costumes — manques
 
 | Costume | Pour | Statut |
@@ -2958,7 +3492,7 @@ Pour chaque élément à créer, un **lot de génération** type est indiqué :
 | Tenue de colon d'Hadley's Hope (archive 004) | Akintola, colons | [À CRÉER] (adaptation originale, pas une copie) |
 | Tenue d'expédition W-Y | Viret, Rask | Base `weyland-yutani-commando` [PRÉSENT] ; variantes [À CRÉER] |
 | Tenue de récupérateur Crucible | Grue, récupérateurs | [À CRÉER] |
-| Scaphandre HADAL | Nacre-7 | [DETTE] |
+| Scaphandre HADAL | Nacre-7 | Art modulaire [PRÉSENT] dans le chapitre local Abysse Noir ; arc Nacre-7 proposé distinct |
 
 ### 38.8 Props — manques par famille
 
@@ -3275,7 +3809,7 @@ Reprises du contrat du homeworld de Yautja, adaptées à ce moteur Canvas 2D :
 | Atelier `workshop` | V1 | V1 | 6 | Établi, pièces de chargeur, tête synthétique sur un étau (campagne 2) | Étincelles de meuleuse | Fabrication des récompenses |
 | Baie véhicules `vehicle-bay` | V1 | **V2** | 6 | M577 garé, pont élévateur, pièces de blindage, chargeur P-5000 | Fumée d'échappement, gyrophares | Réparation du M577 (quête de Cal) |
 | Logistique `logistics` | V1 | **V2** | 8 | Rayonnages de fret, palettes, chariot élévateur, caisses scellées | Chariot qui circule, scanner de caisse | Gestion des ressources, fret de Port-Méridien |
-| Bioforge `bioforge` | V1 | V1 | 6 | Cuves, sas biologique | Liquides, bulles | Accès narratif (quête « Ce qu'on garde en vie ») |
+| Bioforge `bioforge` | V1 | V1 (laboratoire de confinement, spec 013) | 6 salles → 8 zones | Stockage froid, salle de contrôle, sas biologique, admission, hall des cuves (2 cuves de stase de la file), cellule de confinement et galerie d'observation (profondeur), baie d'analyse et incinérateur, sas de sortie — **primitives Canvas** derrière des emplacements nommés `bioforge-lab-*`, PNG V80 conservés | Liquides et bulles des cuves (VFX V188 `bubble`), brume de décontamination, givre, braises, cycle de purge animé | Console → terminal ; stockage froid, analyse, incinérateur en lecture ; décontamination de sortie obligatoire puis retour au hub à pied. Accès narratif (quête « Ce qu'on garde en vie ») **non codé** |
 | Pas de tir `proving-ground` | V1 | V1 (enveloppe protégée) | 6 | Cibles mobiles, tableau des scores | Impacts sur cibles | Temps de Velez (quête) |
 
 **Secteur ingénierie**
@@ -3338,6 +3872,12 @@ La station tourne sur elle-même : son **anneau extérieur** (quais, marché) do
 | Effets et animations | ≈ 30 |
 | PNJ génériques | Dockers, marchands, techniciens, jardiniers, mécaniciens, médecin (6 silhouettes) |
 | Systèmes | Plan V3, commerce, relais, rotation de la station (visuelle) |
+
+### 42.4 Première version — [PARTIEL] V188 (spec 007, 2026-11-15)
+
+Construits : plan (anneau + rayon A, en V2, sans vue V3, Q23 A), quais (V2), pont de contrôle, salle des relais, laboratoire de transit, mémorial, serre, marché (V1) : 8 modules sur 12, en placeholders Canvas. Scellés, visibles avec leur raison : quartiers, infirmerie de station, ponts inférieurs, hangar de réparation. PNJ : Grue seule (silhouette) ; dockers, marchands, techniciens, jardiniers, mécaniciens et médecin restent à faire. Commerce (Q30) et rotation visuelle de l'anneau non faits. Détail en §7.6.
+
+**Suite du 2026-11-16 (§7.7)** : les 12 modules sont atteignables à pied — quartiers (*Autonome*), infirmerie (S4), ponts inférieurs (S3) et hangar de réparation (V2, après une remise en pression) rouverts avec leurs interactions. Commerce Crucible ouvert (Q30 A). PNJ : dockers, marchands et techniciens (foules, primitives) ; jardiniers, mécaniciens nommés et médecin restent à faire. Rotation visuelle de l'anneau et plan V3 non faits.
 
 ---
 
@@ -4211,3 +4751,490 @@ Le registre devient un champ de la fiche de mission. Il est lu par :
 | 6 | Continuer et nouvelle partie + (§55.8) | Après la fin de la campagne principale |
 
 Les lots 2 à 6 modifient la sauvegarde : chacun demande la levée de protection décrite en tête de section.
+
+---
+
+## 56. Priorités P0 et P1 — validées le 2026-11-12
+
+**Décision du propriétaire (2026-11-12) :** la bible ne classait pas ses tâches par priorité. Le classement ci-dessous est validé. Il reprend l'ordre des §54 et §55.9 : la tranche verticale passe d'abord, puis les choix de création de partie et les options.
+
+### 56.1 Cadre du lot V188
+
+- **Levée de protection accordée** pour `src/save.js` et les autres `protectedGameplayBytes` touchés par ces priorités (§52.3, §55). Chaque octet modifié reçoit un reçu exact dans `scripts/audit-tantalus-priorities-v188.mjs`, qui prolonge la chaîne V183 → V187 sans réécrire les reçus existants.
+- Les migrations restent **additives**. Une sauvegarde sans le nouveau champ reçoit une valeur par défaut et ne perd rien. Les identifiants existants sont conservés.
+- Les valeurs chiffrées ci-dessous sont **[PROPOSÉ]** : elles ont été choisies prudentes et réglables, et elles restent à confirmer par les tests de jeu (§53.11). Une valeur peut être réglée sans nouvelle décision. Changer une règle demande une décision.
+- **Outils de développement :** Spec Kit et Claude Code Game Studios ont été adoptés aux révisions de `.ai-tools/sources.json`. Leurs fichiers sont listés avec leur empreinte dans `.ai-tools/adopted-v188.json`. Ils restent source uniquement et sont refusés dans un build.
+
+### 56.2 P0 — tranche verticale de la première heure
+
+| # | Tâche | Source | Statut |
+| --- | --- | --- | --- |
+| P0-1 | Enchaînement prologue → Port-Méridien → briefing → Acte II (QZ-18) → retour, suivi par un état de campagne `storyCampaign` | §53.1, §11 | Fait (V188) : QZ-18 en tête et présélectionné au Commandement, compte rendu suivi ; test joueurs à faire |
+| P0-2 | Environ 40 bruitages prioritaires synthétisés hors ligne, et provenance audio mise à jour | §53.2 | Fait (V188) : 40 sons originaux branchés ; provenance dans `LICENSE_NOTICE.md` |
+| P0-3 | Emplacements musicaux alerte, boss, fins et retour au calme, avec leurs points d'accroche | §53.2, §55.7 | Fait (V188) : emplacements et accroches, `ending` compris ; morceaux Flow attendus du propriétaire |
+| P0-4 | Écran d'objectif toujours accessible, en mission comme au hub | §53.9 | Fait (V188) : pause et touche M, FR/EN |
+| P0-5 | Réglage du tir (recul, impact, réaction, son), mesuré avant et après sur une même scène | §53.3 | Fait (V188), mesuré avant/après ; ressenti à confirmer en test de jeu |
+| P0-6 | Directeur de tension piloté par le registre | §53.3, §55.7 | Fait (V188) |
+| P0-7 | Fausses alertes du détecteur de mouvement | §53.3, §14.5, §7.2 | Fait (V188) |
+| P0-8 | Registre de mission (champ de la fiche) et sauvegarde en mission selon le registre : terminaux et sauvegarde libre hors combat | §0.3, §55.3, §55.7 | Fait (V188) : terminal placeholder dessiné au checkpoint sécurisé ; art définitif à produire |
+
+### 56.3 P1 — après la tranche
+
+| # | Tâche | Source | Statut |
+| --- | --- | --- | --- |
+| P1-1 | Comportements propres à chaque caste : plafond, contournement, fuite de la lumière, embuscade | §53.3 | Fait (V188) : drone (recul, plafond), rôdeur, embusqué |
+| P1-2 | Mort définitive de l'équipage optionnelle, choisie à la création de la partie | §55.5 | Fait (V188) |
+| P1-3 | Origines d'Echo-9 : choix au créateur et capacités bornées | §2.4, §55.6 | Fait (V188) : 19 capacités raccordées, dont 03, 11 et 16 selon les propositions du §56.6 ; fil caviardé lié à Asphodèle |
+| P1-4 | Difficulté à la carte (`custom`) | §55.4 | Fait (V188) |
+| P1-5 | Accessibilité : mode daltonien, taille du texte, sous-titres des sons importants, remappage des commandes | §53.8 | Fait (V188) ; palette Canvas dédiée pour les signaux d'état (§56.10) |
+| P1-6 | Répliques réactives : mission ratée, colon mort, retour blessé | §53.6 | Fait (V188) : notification au retour et reprise au mess pendant 3 jours |
+
+Les tâches suivantes ne font partie ni du P0 ni du P1 : coop étendue (§55.2), nouvelle partie + (§55.8), présentation publique (§53.10) et production d'images (§53.4, faite par le propriétaire).
+
+### 56.4 Valeurs proposées — [PROPOSÉ]
+
+**Sauvegarde libre « hors combat » (§55.3).** Le bouton est accepté seulement si les trois conditions suivantes sont réunies :
+
+- aucun ennemi n'est en état d'alerte ou de poursuite ;
+- aucun ennemi vivant ne se trouve à moins de **640 px** du joueur, soit environ un écran de large ;
+- le joueur n'a reçu aucun dégât depuis **8 s**.
+
+Sinon, le refus s'affiche en jeu : « Impossible de sauvegarder : menace à proximité. » Le terminal physique demande **3 s** d'interaction exposée. Il est refusé pour la même menace proche, mais il reste accepté si le joueur a reçu un dégât récent.
+
+**Directeur de tension (§53.3).** L'intensité va de 0 à 100. Elle monte avec les dégâts reçus (+1 par point de vie perdu), les ennemis visibles à moins de 640 px (+4 par ennemi et par seconde, plafonnés à +12 par seconde) et le manque de munitions (+5 sous 20 % du chargeur et de la réserve). Hors contact, elle baisse de 6 par seconde.
+
+Le directeur passe par trois phases :
+
+1. **Montée** : les apparitions suivent le registre.
+2. **Pic** : il s'enclenche quand l'intensité atteint 85 ou plus. Aucune nouvelle apparition.
+3. **Relâche** : elle commence quand l'intensité redescend sous 30. Aucune apparition pendant une durée garantie de **30 s en Horreur, 20 s en Tension et 10 s en Action**. Le registre Calme n'a pas d'apparitions.
+
+| Registre | Multiplicateur d'apparition en montée |
+| --- | --- |
+| Horreur | 0,5 |
+| Tension | 0,8 |
+| Action | 1,2 |
+
+**Fausses alertes du détecteur (§53.3).** Elles se produisent en Horreur et en Tension seulement, toutes les **45 à 90 s** tirées au hasard, à condition qu'aucun contact réel n'ait eu lieu depuis 15 s. L'écho dure **1,2 s**. Il est placé à 300-600 px, dans la direction d'une source plausible : ventilation, porte ou machine. En se rapprochant, le joueur voit la cause sous forme d'un sous-titre : « Écho : ventilation ».
+
+**Capacités des origines (§2.4).** Toutes les capacités restent modestes : de **10 à 15 %** quand elles sont chiffrées, une seule fois par mission quand elles sont ponctuelles. `origin-20` n'a pas de capacité.
+
+| Origine | Valeur proposée |
+| --- | --- |
+| 01 | −15 % de dispersion en alerte |
+| 02 | Panique des civils escortés −25 % |
+| 03 | Première pièce lue : un indice de recoupement (§56.6) |
+| 04 | Chargeur P-5000 : vitesse +10 % |
+| 05 | Réparation des systèmes atmosphériques +20 % |
+| 06 | Abris et sas sûrs signalés sur la carte |
+| 07 | Vitesse en conduit +15 % |
+| 08 | Soin d'un équipier +20 % |
+| 09 | Fenêtre d'extraction +10 s |
+| 10 | Une porte de la compagnie par mission ouverte sans piratage |
+| 11 | +10 % de dégâts avec une arme UPP (§56.6) |
+| 12 | Matériaux par caisse +10 % |
+| 13 | Échos du détecteur : faux échos identifiés, rayon −30 % |
+| 14 | Casiers ouverts sans outil |
+| 15 | Réparation du M577 et des tourelles +20 % |
+| 16 | +1 échantillon biologique par mission réussie (§56.6) |
+| 17 | Ordres d'escouade exécutés 15 % plus vite |
+| 18 | Dégâts subis par le véhicule escorté −10 % |
+| 19 | Dégâts en couloir étroit +10 % |
+
+**Bruitages prioritaires (§53.2), 40 sons synthétisés.** Ils sont générés hors ligne par `scripts/generate-audio-v132.mjs`, sans échantillon externe.
+
+| Famille | Sons |
+| --- | --- |
+| Détecteur (4) | impulsion, contact proche, contact lointain, écho faux |
+| Pas (5) | métal, grille, béton, eau, résine |
+| Portes et sas (6) | porte qui s'ouvre, porte qui se ferme, porte verrouillée, sas qui se pressurise, sas qui se dépressurise, porte forcée |
+| Ascenseurs (2) | départ, arrivée |
+| Alarmes (3) | alerte générale, quarantaine, compte à rebours |
+| Ambiance (4) | pluie extérieure, pluie sur tôle, ventilation, bourdonnement de relais |
+| Cris par caste (8) | drone, guerrier, rôdeur, cracheur, Crusher, reine, facehugger, chestburster |
+| Armes principales (8) | rafale du M41A, grenade du M41A, pistolet, fusil à pompe, smartgun, lance-flammes, rechargement, cliquetis à vide |
+
+**Zone sûre à l'insertion (décision du propriétaire, 2026-11-14).** Un marine immobile à l'insertion mourait en 5 à 10 s sur `pair-001-mire`, `pair-001-frontier`, `special-cargo-brutal` et `special-alpha-bravo-doctrine` : les patrouilles éveillées partaient à 380-420 px. Valeurs retenues :
+
+- les patrouilles éveillées partent à au moins **900 px** du point d'insertion (environ 17,6 m à 51 px/m) ; le nœud de départ est conservé au-delà de 900 + **100 px** de marge pour l'écart de patrouille. Les vagues différées restent sur leur nœud ;
+- pendant les **4 s** de mission qui suivent la prise de contrôle, aucun ennemi n'attaque ni ne réduit la distance. Le directeur de horde ne prévient jamais avant 45 s : aucune vague ne tombe dans cet intervalle ;
+- portée : missions génériques et missions de mode. Les chapitres d'histoire (QZ-17, QZ-18, convoi APC, C-12, Cocon noir), les essais de la Forge et les missions reprises gardent leurs rencontres et positions écrites ;
+- **QZ-17 : délai de grâce seul, sans déplacement (décision du propriétaire, 2026-11-15).** Les patrouilles de `special-narrative-qz17` gardent leurs positions écrites (pas de placement à 900 px), mais les 4 s de grâce s'appliquent : aucun ennemi n'attaque ni ne réduit la distance, et un tir lancé pendant ces 4 s est retenu. Mesure d'un marine immobile, moteur de production en Node, niveaux 0/1/2 : premier dégât à 1,02 / 3,62 / 2,88 s avant, 5,43 / 7,48 / 6,75 s après. QZ-18, convoi APC, C-12 et Cocon noir restent entièrement exclus (ni placement ni grâce).
+
+Code : `src/insertion-safe-zone-v188.js` (gardes `insertionSafeZoneAppliesV188` pour le placement et `insertionGraceAppliesV188` pour la grâce) et `compileMissionLevelActors` (`src/game-v52-level-runtime.js`). Tests : `scripts/verify-bugfix-insertion-v188.mjs`, `scripts/verify-bugfix-decisions-v188.mjs`.
+
+**Escouade du « Faux fils » (décision du propriétaire, 2026-11-15).** §15.7 (ligne 3.2) fait jouer Jeri, synthétique en infiltration chimique. Le chapitre est désormais **solo** : aucun marine IA n'est déployé, la sélection d'escouade est gelée à un opérateur comme pour les autres opérations solo, le plan opérationnel affiche « Infiltration solo » et le journal de mission annonce « JERI EN INFILTRATION SOLO · aucun marine IA déployé ». Aucun objectif de la ruche ne supposait d'allié. Les autres chapitres de ruche (A.T.A.X.-Q, Éloïse) gardent l'escouade sélectionnée. Équilibrage de SAINT sans appui : à confirmer en test de jeu.
+
+**Un checkpoint par phase dans Cargo brutal (décision du propriétaire, 2026-11-15).** La phase d'énergie part du checkpoint d'insertion ; le chargement (`cargo-loader`, « chargeur P-5000 »), l'escorte (`cargo-escort`) et la matriarche (`cargo-matriarch`) posent chacun un checkpoint à leur début. Il retient la position, la coque et l'hydraulique du P-5000 ; une reprise le replace à cet endroit, intact, avec au moins **45 %** de coque [PROPOSÉ], le marine à pied à portée pour remonter. Même décision pour l'extérieur planétaire : la plateforme de la balise, juste avant la passerelle d'extraction, pose le checkpoint `extraction-walkway` (« passerelle d'extraction ») ; une chute dans le gouffre sous la passerelle n'y renvoie plus à l'insertion. Code : `src/cargo-brutal-runtime-v67.js`, `updateExtractionWalkwayCheckpointV188` (`src/game-v52-level-runtime.js`).
+
+**Phases du P-5000 adoucies (décision du propriétaire, 2026-11-15) — [PROPOSÉ].** Pendant les phases où le marine travaille avec le chargeur (dégager le couloir, escorter, récupérer et installer le noyau), seule la pression ennemie baisse : les attaques ennemies (hors boss) reviennent **1,6 fois** plus lentement et chaque vague du convoi compte **une créature de moins** (au moins une). Le P-5000, partagé avec d'autres chapitres, n'est pas modifié ; la matriarche et ses vagues non plus. Mesure, moteur de production en Node, même entrée scriptée (énergie rétablie, marine assis dans le chargeur, aucune autre commande) : couloir cargo, chargeur détruit à 12,6 / 6,4 s avant et 18,9 / 9,3 s après (niveaux 0 / 1 ; intact sur 120 s au niveau 2 dans les deux cas) ; escorte, coque restante à la perte du convoi 70/340 à 15,8 s avant, 89/340 à 18,2 s après. Code : `CARGO_LOADER_PRESSURE_V188` (`src/cargo-brutal-runtime-v67.js`).
+
+**Recherche payée = recherche annoncée (décision du propriétaire, 2026-11-15).** `pair-030-mire` versait +15 R&D pour une récompense annoncée de +8. Les +7 venaient de la conséquence de campagne (`src/campaign-consequences.js`) : +3 pour l'objectif « cartographier les conduits » et +4 pour toute mission MIRE, ajoutés après la récompense sans être annoncés. Ce n'était pas un double paiement mais une seconde source, présente sur toutes les missions de paire (FRONTIER +3 à +7, MIRE +7 à +11). Décision confirmée par le propriétaire le même jour : le bonus est **gardé et annoncé**. Le plan d'opération affiche une ligne « BONUS R&D · +N R&D si succès (objectif +3, MIRE +4, archive MIRE +2) », et le débriefing montre ce qui est réellement versé. La conséquence garde aussi ses effets sur le monde, le niveau de recherche du hub et la pénalité d'échec.
+
+**Répliques réactives (§53.6).** Les déclencheurs sont une mission ratée, un colon mort et un retour blessé. Il y a une réplique par déclencheur et par profil (humain et synthétique), en français et en anglais. La même réplique ne se répète pas pendant 3 jours de jeu.
+
+**Lacunes de gameplay V188 (2026-11-15) — [PROPOSÉ].** Valeurs inventées par le projet, aucune ne provient d'une source franchise.
+
+- **Cales en profondeur, escouade** (`SQUAD_DEPTH_LANES_V188`, `src/mission-depth-v188.js`) : les marines IA prennent un couloir à **−14, +14, −26, +26** unités du chef selon leur rang, rejoignent le couloir de l'ennemi qu'ils engagent et tirent avec les règles du joueur (bande de tir 22, recentrage de 30 %, bande d'attaque 24, conteneurs et caisses murales dans leur couloir).
+- **Cales en profondeur, ennemis** (`ENEMY_DEPTH_SPREAD_V188`) : les ennemis qui poursuivent un marine sont classés par distance et décalés de **0, +10, −10, +16, −16** unités autour de son couloir (tous dans la bande d'attaque). **Un seul** engage au corps à corps à la fois ; les autres attendent à **150 px** dans leur couloir de flanc, avec une hystérésis de 40 px. Les castes à distance, les reines et castes trop grandes, les rôdeurs (`ambusher`) et coureurs (`runner`) gardent leur propre rythme. Mesure scriptée (cale cargo, Echo-9 immobile qui tire, 3 ennemis de mêlée) : Echo-9 mourait en 3,2 à 4,0 s sur 4 graines, sans gagner ; après, il tient 5,6 et 6,9 s sur deux graines et gagne les deux autres (4,7 et 4,8 s, 3 ennemis tués).
+- **Projectiles ennemis en cale** : un crachat voyage dans le couloir où il a été craché ; les objets de la cale (conteneurs, caisses murales) l'arrêtent dans ce couloir, et il n'atteint un marine, un équipier ou une pose qu'à moins de 24 unités.
+- **Embarquement défendu** (`DEFENDED_BOARDING_V188`, `src/mission-dropship-handover-v188.js`) : pendant l'embarquement final, les ennemis continuent d'avancer et d'attaquer ; chaque traçante de la tourelle de nez ou du marine de la soute inflige **14** dégâts jusqu'à **900 px** ; les marines sont blessés mais ne descendent pas sous **1 PV** (l'extraction est déjà acquise et ses récompenses fixées) ; les marines embarqués sont hors d'atteinte.
+- **Alpha/Bravo** (`src/alpha-bravo-coop-runtime-v69.js`) : un marine qui tombe hors du niveau revient sur son dernier sol sûr. Un marine perdu (tué, non à terre) est remplacé par le joueur à la tâche de son binôme, comme un marine prend la place d'un camarade tombé (cohérent avec *Aliens*, 1986, où les survivants reprennent les rôles des disparus). Si même ce remplacement ne suffit pas, la mission échoue proprement : « binôme Alpha/Bravo perdu, tâche impossible » (`paire-alpha-bravo-perdue`).
+
+**Comportements documentés par la franchise (2026-11-15).** Le jeu en suit l'esprit ; ce n'est pas une reproduction 1:1, et chaque adaptation est marquée.
+
+| Comportement | Source | Ce que montre la source | Dans le jeu |
+| --- | --- | --- | --- |
+| Sang acide | *Alien* (1979), le sang du facehugger perce deux ponts ; *Aliens* (1986), « acid for blood », l'acide qui ronge l'armure d'un marine | Le sang des xénomorphes est un acide qui ronge le métal | [PROPOSÉ] Un xénomorphe tué hors de l'opération Lethe laisse une flaque de **6 s**, **5** dégâts par contact (règle des sols d'acide existante), au plus **6** à la fois, à sa profondeur en cale (`src/franchise-fidelity-v188.js`). Lethe garde ses flaques persistantes. |
+| Guidage du smartgun M56 | *Aliens* (1986), Vasquez et Drake : bras articulé, viseur de casque | Le système oriente la rafale sur la cible désignée | [PROPOSÉ] La rafale du joueur s'infléchit vers l'ennemi visible le plus proche de l'axe, dans un cône de **25°** et à **700 px**. Le tireur choisit toujours sa direction ; pas de cible derrière lui ni à travers un mur. |
+| Fusil à impulsions M41A | *Aliens* (1986), compteur à deux chiffres, chargeur de 99 coups | Chargeur 99 coups, compteur de munitions | Déjà conforme : chargeur de 99 (`content-core-v50.js`). Cadence de jeu 7,7 coups/s, réglage du projet. La cadence « 900 coups/min » souvent citée vient de documents dérivés (*Colonial Marines Technical Manual*, 1995), non vérifiés ici : **à définir** par le propriétaire avant tout changement, qui doublerait les dégâts de l'arme de départ. |
+| Détecteur de mouvement M314 | *Aliens* (1986), Hudson annonce les distances en mètres, impulsion sonore qui s'accélère | Portée de l'ordre de la vingtaine de mètres, cadence liée à la distance | Déjà proche : 900 px ≈ 17,6 m, impulsion toutes les 0,2 à 1,2 s selon la distance (`src/motion-tracker-v160.js`). Portée exacte : **à définir**. |
+| Meute, conduits et plafonds | *Alien* (1979), conduits ; *Aliens* (1986), « they're coming out of the walls », attaque par le faux plafond | Les xénomorphes contournent par les conduits et les plafonds | Déjà présent : entrées arrière par conduit (`enemy-tactics-v130.js`), drones au plafond et coureurs qui contournent (`caste-behaviors-v188.js`). Ajout : flanc en profondeur dans les cales (ci-dessus). |
+
+Les numéros de scène et les dialogues exacts ne sont pas cités ; les films restent les sources de référence, les documents dérivés sont signalés comme tels.
+
+**Échelle des créatures (décision du propriétaire, 2026-11-16) — [PROPOSÉ].** Les tailles s'alignent sur les tailles documentées de la franchise, à l'échelle du projet : **1 m ≈ 51 px**, le marine mesure **92 px (1,8 m)**. Un guerrier (≈ 2,3 m) est dessiné à **118 px**, la reine (≈ 4,8 m) à **245 px**. Les autres castes gardent la proportion au guerrier déjà déclarée par `ENEMY_DISPLAY_STATURES_V110` (facteur 118 / 156) ; une créature sans stature déclarée garde sa hauteur actuelle multipliée par ce même facteur. Les humains et synthétiques ne changent pas en mission (contrat visuel humain V133) ; au catalogue ils suivent la référence du marine (126 → 92). Ce sont des adaptations : aucune ne prétend à une fidélité 1:1.
+
+Code : `src/creature-scale-v188.js` (`CREATURE_SCALE_V188`, `ENEMY_DISPLAY_STATURES_V188`, `withCreatureScaleV188`), composé dans `src/game-production-runtime.js` sous la couche de ressenti du combat (les comportements de caste, l'habillage QZ-17 et les cales voient les nouveaux corps) ; catalogue : `src/catalog-scale-v72.js`. Les images ne sont pas modifiées : la mission les met à l'échelle au dessin, le catalogue par son unité de monde. Test : `scripts/verify-creature-scale-v188.mjs`.
+
+- **Dessin en mission** : une échelle mesurée par visuel, autour du point des pieds et du centre ; la pose de repos atteint la taille visée, une pose d'alerte, d'attaque ou de blessure ne la dépasse jamais. Un profil mesuré pendant le chargement d'un atlas est remesuré jusqu'à deux mesures concordantes.
+- **Boîte de collision** : hauteur = hauteur opaque dessinée ; largeur = moitié centrale de la largeur opaque dessinée (queue, crête et membres tendus exclus, comme l'ancienne boîte du guerrier), 90 % pour un œuf, au moins 0,3 × la hauteur pour une silhouette fine (sans dépasser l'ancienne largeur). Les pieds et le centre horizontal sont conservés ; la boîte de cellule de sprite (V52) est remplacée par cette boîte. Deux règles existantes gardent leur verdict : « plus de 120 px de large = grande caste » des cales en profondeur, et « grand acteur ≥ 300 × 200 » du placement V72 (la reine garde 300 px de large). Exception mesurée : les deux reines juvéniles, sans stature déclarée, passent à ≈ 151–153 px et ne sont plus des « grands acteurs » ; elles restent inaptes aux cales (règle par identifiant).
+- **Compensation de visée [PROPOSÉ]** : avec l'aide à la visée active, un tir qui aurait touché l'ancienne silhouette (mêmes pieds, même centre) mais passe à côté de la nouvelle est infléchi vers le haut du corps (30 % de la hauteur). Les dégâts ne changent pas ; aide désactivée, rien ne change.
+- **Sauvegardes** : identifiants et format inchangés. Une reprise écrite avant V188 (coin supérieur de l'ancien corps) est reposée sur son sol.
+
+| Profil (variantes du même nom) | Caste | Avant : dessin mission px (variantes) | Avant : boîte l×h | Après : dessin px [PROPOSÉ] (variantes) | Après : boîte l×h | Fidélité : apparence documentée / adaptation du projet / à définir |
+| --- | --- | --- | --- | --- | --- | --- |
+| `enemy-001-ovomorph` Ovomorph | egg | 55 (55–96) | 39×56 | 42 (42–72) | 27×42 | Documentée : œuf coriace à lobes, *Alien* (1979), *Aliens* (1986). Adaptation : 0,82 m (56 × 118/156). |
+| `enemy-002-facehugger` Facehugger | parasite | 15 (15–20) | 79×28 | 15 (15) | 45×15 | Documentée : parasite à huit pattes et longue queue, *Alien* (1979). Adaptation : 0,3 m de haut au repos. Boîte corrigée : 28 px de haut pour un dessin de 15. |
+| `enemy-003-chestburster` Chestburster | juvenile | 17 (17–23) | 35×20 | 17 (17) | 42×17 | Documentée : larve sortant de la poitrine de Kane, *Alien* (1979). Adaptation : 0,33 m. Boîte corrigée : 20 px pour un dessin de 17. |
+| `enemy-004-drone-big-chap` Drone / Big Chap | stalker | 144 (88–144) | 54×146 | 118 (67–118) | 62×118 | Documentée : silhouette du « Big Chap », *Alien* (1979). Adaptation : 2,3 m, comme le guerrier. |
+| `enemy-005-warrior` Warrior | assault | 135 (55–135) | 62×136 | 118 (41–118) | 56×118 | Documentée : guerrier à dôme lisse ou strié, *Aliens* (1986). Adaptation : **2,3 m = 118 px** (décision du propriétaire). Les variantes juvéniles (41 px) n'ont pas de stature déclarée. |
+| `enemy-006-runner` Runner | runner | 80 (32–82) | 78×82 | 62 (24–62) | 55×62 | Documentée : quadrupède né d'un animal, *Alien³* (1992). Adaptation : 1,2 m au garrot. |
+| `enemy-007-praetorian` Praetorian | guardian | 94 (94) | 52×74 | 159 (71–159) | 101×159 | Documentée : garde royale à grande crête, jeux *Aliens versus Predator*. Adaptation : 3,1 m ; elle était dessinée plus petite que le guerrier en mission. |
+| `enemy-008-queen` Queen | royal | 202 (202–340) | 336×268 | **245** (153–245) | 300×245 | Documentée : reine à couronne et sac ovigère, *Aliens* (1986). Adaptation : **4,8 m = 245 px** (décision du propriétaire), sans sac ovigère. Variantes juvéniles à 153 px. |
+| `enemy-009-crusher` Crusher | siege | 124 (68–152) | 116×100 | 115 (51–115) | 103×115 | Documentée : caste à bouclier frontal, jeux *Aliens: Colonial Marines* (2013) et *Aliens: Fireteam Elite* (2021). Adaptation : 2,25 m. |
+| `enemy-010-spitter` Spitter | ranged | 138 (59–138) | 60×132 | 109 (45–109) | 53×109 | Documentée : cracheur d'acide, *Aliens: Colonial Marines* (2013). Adaptation : 2,1 m. |
+| `enemy-011-lurker` Lurker | ambush | 32 (32–92) | 52×74 | 70 (24–70) | 116×70 | Documentée : chasseur bas, *Aliens: Colonial Marines* (2013). Adaptation : 1,4 m, silhouette longue (boîte large de 116 px). |
+| `enemy-012-carrier` Carrier | carrier | 88 (88) | 52×74 | 133 (66–133) | 108×133 | Documentée : porteur de facehuggers, *Aliens versus Predator: Extinction* (2003). Adaptation : 2,6 m. |
+| `enemy-013-ravager` Ravager | assault | 99 (99–158) | 52×74 | 147 (75–147) | 92×147 | Documentée : grande caste à faux, *Aliens versus Predator: Extinction* (2003). Adaptation : 2,9 m. |
+| `enemy-014-boiler` Boiler | explosive | 70 (70–110) | 52×74 | 100 (53–100) | 70×100 | Documentée : caste gonflée d'acide, *Aliens: Colonial Marines* (2013). Adaptation : 2 m. |
+| `enemy-015-prowler` Prowler | ambush | 116 (43–116) | 96×88 | 67 (32–67) | 38×67 | Documentée : rôdeur, *Aliens: Fireteam Elite* (2021). Adaptation : 1,3 m. |
+| `enemy-016-burster` Burster | explosive | 124 (40–124) | 88×88 | 67 (30–67) | 46×67 | Documentée : caste explosive, *Aliens: Fireteam Elite* (2021). Adaptation : 1,3 m. |
+| `enemy-017-monica-line` Monica Line | stalker | 88 (88–126) | 52×74 | 118 (66–118) | 78×118 | À définir : lignée du projet, taille du guerrier par défaut. |
+| `enemy-018-specimen-six-line` Specimen Six Line | adaptive | 64 (64–122) | 52×74 | 118 (49–118) | 83×118 | À définir : lignée du projet, taille du guerrier par défaut. |
+| `enemy-019-red-xenomorph` Red Xenomorph | rival-hive | 77 (77–104) | 52×74 | 118 (59–118) | 101×118 | À définir : ruche rivale rouge, référence à préciser ; taille du guerrier. |
+| `enemy-020-k-series-yellow-xenomorph` K-Series Yellow | rival-hive | 143 (77–156) | 62×136 | 118 (59–118) | 56×118 | À définir : lignée du projet ; était dessinée à 156 px (≈ 3 m), ramenée au guerrier. |
+| `enemy-021-neuro-xeno-drone` Neuro-Xeno Drone | controlled | 46 (46) | 52×74 | 34 (34) | 46×34 | Adaptation du projet, sans stature déclarée : × 118/156. |
+| `enemy-022-xenoborg` Xenoborg | cybernetic | 100 (100) | 52×74 | 126 (76–126) | 53×126 | Documentée : xénomorphe cybernétique, *Aliens versus Predator* (1999). Adaptation : 2,5 m. |
+| `enemy-023-atarax-ripper` ATARAX Ripper | armored | 60 (60–112) | 52×74 | 46 (46–85) | 37×46 | Adaptation du projet, sans stature déclarée. |
+| `enemy-024-ripper-queen` Ripper Queen | royal | 199 (199–340) | 336×268 | **245** (75–245) | 300×245 | Adaptation du projet : classe des reines, 4,8 m. Variante juvénile à 75 px. |
+| `enemy-025`…`enemy-034` concepts ACM et Crucible | concept-acm / concept-crucible | 29–101 (29–142) | 52×74 ou 82×112 | 22–76 (22–107) | 32–52 × 22–76 | Adaptation du projet (concepts originaux), sans stature déclarée : × 118/156. À définir : statures propres. |
+| `enemy-035`…`enemy-040` pathogènes et ingénieurs (Trilobite, Deacon, Neomorph, Protomorph, Abomination, Mimic) | apex / stalker / assault / brute / adaptive | 36–95 (36–136) | 42×88 | 27–72 (27–103) | 21–45 × 27–72 | Documentée : Trilobite et Deacon, *Prometheus* (2012) ; Neomorph et Protomorph, *Alien: Covenant* (2017). Adaptation : hauteur actuelle × 118/156. À définir : statures propres (le Neomorph à 53 px reste bas). |
+| `enemy-041`…`enemy-048` humains et synthétiques | security / assault / … | 96–112 | 42×88 | inchangé | inchangé | Hors périmètre en mission (contrat V133) ; catalogue × 92/126. |
+| `enemy-049`…`enemy-052` faune (sanglier hôte, Korari, Ceto, vermine) | host / predator / aquatic / swarm | 21–75 (19–384) | 42×88 à 156×100 | 16–57 (14–290) | 44–121 × 16–57 | Adaptation du projet, sans stature déclarée. À définir : certaines variantes (Korari 218 px, Ceto 290 px) restent hors d'échelle. |
+| `enemy-569-newborn`, `enemy-570-offspring` | apex | 160 / 165 | 58×118 / 52×124 | 121 / 125 | 36×121 / 38×125 | Documentée : le Newborn, *Alien, la résurrection* (1997). Adaptation : hauteur actuelle × 118/156. |
+| `enemy-571-predalien` Predalien | royal | 142 | 96×126 | 107 | 32×107 | Documentée : *Aliens vs. Predator: Requiem* (2007), jeu *Aliens versus Predator 2* (2001). Adaptation : hauteur actuelle × 118/156 ; la fiche de caste du catalogue (188 → 142) est plus haute. À définir : une stature unique. |
+
+Les castes du catalogue sans profil de mission suivent la même règle (`ENEMY_DISPLAY_STATURES_V188`, mêmes clés que V110) : Grid 118, Predalien 142, Abomination 159, Royal Guard 174, Pathogen Queen 245, reine titan 245, etc. La reine juvénile d'*Alien³* (28 px) n'est pas une reine.
+
+Mesures (Node, `scripts/verify-creature-scale-v188.mjs`, scène scriptée : tir horizontal debout, accroupi et à 12 hauteurs de saut de 0 à 140 px, 14 tirs par distance, cible immobile) :
+
+| Taux de touche | Aide désactivée, avant → après | Aide standard (0,62), avant → après (avec compensation) |
+| --- | --- | --- |
+| Guerrier à 200 px | 64 % → 50 % | 64 % → 64 % |
+| Guerrier à 400 px | 64 % → 50 % | 71 % → 64 % |
+| Guerrier à 600 px | 64 % → 50 % | 93 % → 93 % |
+| Reine à 200 / 400 / 600 px | 100 % → 100 % | 100 % → 100 % |
+
+Debout ou accroupi, chaque tir touche avant comme après ; les tirs perdus partent d'un saut, au-dessus de la tête plus basse du guerrier. Sans la compensation, l'aide standard donnait 50 % à 200 px.
+
+Dépendances vérifiées : cloisons de mission de 132 px (guerrier, drone, runner, spitter passent, la reine non) ; conduits de 84 × 64 px (facehugger, chestburster et runner y tiennent, un guerrier debout non) ; entrées arrière de 116 px (mêmes entrées admises qu'avant ; le guerrier de 118 px dépasse leur cadre de 2 px, dans la tolérance de 4 px) ; règle des grandes castes des cales et placement des grands acteurs (verdict inchangé sauf les deux reines juvéniles) ; portée de mêlée (constantes inchangées, mesurée depuis le bord gauche : décalage ≤ (ancienne largeur − nouvelle) / 2, 3 px pour le guerrier, 18 px pour la reine) ; flaque d'acide (`max(48, 0,8 × largeur)` : 50 → 48 px pour le guerrier, 269 → 240 px pour la reine) ; détecteur de mouvement (point des pieds au centre : inchangé) ; arènes de boss (une reine plus petite tient dans les mêmes placements) ; silhouettes des cinématiques (`story-cinematics-v188.js` : seule l'ombre au plafond de la caméra de casque, vue subjective sans référence d'échelle, inchangée ; `insertion-cinematic-v188.js` : aucune créature).
+
+Reste à définir : statures propres des créatures sans stature déclarée (concepts, pathogènes, faune, juvéniles) ; variantes faune hors d'échelle ; quatre profils sans hauteur dans la comparaison du catalogue (Red Xenomorph, Xenoborg, Deacon Line, Combat Synthetic : 0, déjà le cas avant V188) ; validation à l'œil par le propriétaire ; test de la tranche par des joueurs.
+
+### 56.5 Suivi du lot V188
+
+Réalisation, mesures, vérifications et limites : [rapport V188](../development/PRIORITIES_P0_P1_V188.md). Les statuts « Fait » ci-dessus désignent un raccordement au jeu vérifié par des tests Node sur le moteur réel et des contrôles Chromium. Ils ne remplacent pas le test de la tranche par 3 à 5 joueurs (§53.11), qui reste à faire.
+
+### 56.6 Origines 03, 11 et 16 — [PROPOSÉ], implémenté le 2026-11-12
+
+Le propriétaire a demandé une solution pour chaque question. Les trois propositions sont raccordées au jeu ; elles restent révisables.
+
+| # | Origine | Problème | Solution proposée et implémentée |
+| --- | --- | --- | --- |
+| 1 | `origin-03` *Procès-verbal* | La capacité ne peut pas inventer des faits d'enquête | La **première pièce lue** dans la mission affiche un indice de recoupement. Chaque indice relie seulement des faits déjà écrits dans d'autres pièces du même dossier : heures 18:39 à 18:54, accès local du badge, télémétrie sans défaut, série QZ17. Il y a un indice par pièce de QZ-18 et des pièces de terrain, en FR et EN. |
+| 2 | `origin-16` *Échantillons* | Le jeu n'a aucun système de prélèvement | La capacité est réinterprétée en **+1 échantillon biologique** (ressource `pathogen`) après chaque mission réussie. La règle actuelle reste respectée : un dossier documentaire comme QZ-18 n'en donne pas. Un vrai système de prélèvement pourra la remplacer plus tard. |
+| 3 | `origin-11` *Matériel de l'Union* | Aucune pénalité n'existe pour les armes UPP | Je n'ajoute **pas de pénalité** aux 19 autres origines, car cela changerait l'équilibrage de tout le jeu. La capacité devient **+10 % de dégâts** avec une arme principale de fabrication UPP (Type 88, AK-4047…). |
+
+**Reste à faire pour les origines :** le fil du dossier caviardé (`origin-20`, §2.4.3). Ses quatre fragments sont placés dans des lieux qui n'existent pas encore dans le jeu : la quête de DAVID-8R, CASSIUS en S2, la salle des relais d'Asphodèle et l'épilogue. **Proposition :** l'intégrer avec le second hub Asphodèle (§42). Le placer ailleurs déplacerait des scènes de la bible.
+
+### 56.7 Refonte du prologue (V188, 2026-11-13)
+
+Les ajouts **[PROPOSÉ]** du §4, CIN-20 et la réponse de Halloran (§5.2) sont désormais jouables. Ils reposent sur un lecteur de cinématiques Canvas 2D conforme au §10 : plans scriptés, cadres de dialogue avec les portraits relus de l'équipage, passables avec Échap, plan suivant avec Espace ou un clic. Les cinématiques sont revisibles dans Système → Cinématiques et ne donnent aucune récompense.
+
+| Moment | Séquence | Déclencheur |
+| --- | --- | --- |
+| Nouvelle partie | CIN-00 *Ouverture* (8 plans, 65 s) | Avant le créateur de personnage, à chaque nouvelle partie |
+| P-1 | CIN-01 *Le casier vide* (réplique de DAVID-8R, puis le casier scellé) | Confirmation du réveil |
+| P-2 | `cin-p2` *La liaison prioritaire* (paquet de messages, puis Mara Vega) | Liaison rétablie à la console de l'exercice |
+| Avant P-3 | CIN-02 *Le briefing* (Vega, Vega, Harlow, Velez) | Premier embarquement depuis la salle de briefing |
+| P-3 | `cin-p3-wren` puis `cin-p3-ferro` (Lucia Ferro, Noor Okafor à la radio) | Arrivée au quai, puis fin du triage |
+| Retour de QZ-18 | CIN-20 *Treize minutes*, puis Halloran ; ensuite `cin-20-rook` *La signature* | Premier compte rendu de QZ-18 lu |
+| Fin du quai des vivants | `cin-doyenne` *La doyenne* : Asha présente Adèle Sarrazin, puis les quais, l'infirmerie, le processeur et le mur nord, et enfin la réplique d'Adèle sur la dette | Rapport final du quai, avant les Opérations |
+| Acte III, départ du convoi | Manifeste du M577 (0 à 3 conteneurs, 6 places moins 2 par conteneur) | Lancement de `special-apc-convoy` sans manifeste signé |
+| Acte III, C-12 | Coups dans le conteneur et « Notez l'heure. » | 13 s de défense, s'il y a au moins un conteneur |
+| Retour de C-12 | CIN-31 *Le sas refermé*, d'après le manifeste ; colons ajoutés une fois | Première table tactique après C-12 |
+| Interlude | CIN-40, puis une crise xénomorphe forcée (pont 2, quarantaine) ; une fois résolue, le choix détruire ou capturer, puis CIN-41 | Après CIN-31 |
+| Acte IV, réveil | CIN-50 *Les dernières images* | Début du cocon noir |
+| Retour de l'Acte IV | CIN-51 *Contrôle biologique* (NÉGATIF, Noor) | Première table tactique après le cocon noir |
+| Acte I, prise de contrôle | CIN-10 *Les quais déserts* (peinture existante du dropship, pluie), puis Rook | Fin de l'insertion de QZ-17 |
+| Acte I, route de maintenance | CIN-11 *Ouvert de l'intérieur* (berceau givré, fixations arrachées), puis Inez à la radio | Choix « Suivre la trace par la maintenance » |
+| Retour de QZ-17 | `cin-qz17-retour` : les trois conclusions d'Inez | Première ouverture de la table tactique après QZ-17 |
+
+Après QZ-18, la table tactique recommande l'Acte I (★) tant qu'il n'est pas terminé, conformément à la chronologie du §3.
+
+**Textes écrits pour combler la bible — [PROPOSÉ] :**
+
+- La réplique de Mara Vega qui coupe l'exercice : « Velez, on coupe l'exercice. Echo-9, rendez l'arme au pas de tir et montez en salle de briefing. » La règle de l'exercice V89 (retour au pas de tir) reste inchangée.
+- Le nombre de messages retardés : 37 sur six jours, le dernier datant de 4 h.
+- Les noms du personnel du quai nord dans CIN-20 : E. Okonjo, P. Lindqvist, S. Arenas, D. Haddad, K. Brandt. Ce sont aussi les noms à la craie de `story-quai-nord`.
+- Les répliques de l'Interlude : Velez à la radio (CIN-40) ; le journal 02:14-02:31, BISHOP-9 et Inez (CIN-41).
+- La réplique d'Asha qui présente Adèle : « Echo-9, voici Adèle Sarrazin. C'est elle qui tient le port ensemble. » La visite libre de la doyenne est adaptée en visite guidée, faute de hub Port-Méridien.
+- La réplique de Rook sur la signature d'Asphodèle (tissage du §5.2) : « Le profil « priorité cargaison » n'a pas été activé au relais. Il a été autorisé à distance. La signature vient de la station Asphodèle. »
+- Toutes les versions anglaises des répliques du prologue.
+
+**Toujours à faire :**
+
+- L'art définitif des plans (§29.1). Les décors actuels sont des placeholders en primitives Canvas.
+- ~~L'interaction physique avec le casier `ECHO-8` dans la baie cryo~~ : **fait (V188)**. Le casier scellé est dessiné en primitives dans la baie cryo ; E affiche les faits établis jusque-là. Ces trois notes sont **[PROPOSÉ]** : sceau et abordage, puis quarantaine (après CIN-02), puis signature d'Asphodèle (après « La signature »). Le reste du fil `ship-cryo` (effets de Kessler, étiquettes de l'épilogue) dépend de la station.
+- Une voix et un geste de pointage sur la carte (CIN-02).
+
+### 56.8 Reconstruction de Port-Méridien (V188, 2026-11-13)
+
+La table du §6.3 est jouable dans la vue Commandement. Les sept chantiers, leurs trois niveaux, leurs critères et leurs référents reprennent le tableau du §6.3. La sauvegarde ajoute `colonyV188` (niveaux investis et validés par chantier) ; les anciennes sauvegardes reçoivent une table vide.
+
+| Règle du §6.3 | Mise en œuvre V188 | Statut |
+| --- | --- | --- |
+| Ouverture après C2 | Ouverture après QZ-18 (Acte II), C2 n'étant pas jouable | [PROPOSÉ] |
+| Ressources et temps stratégique ; rien pendant une mission | Coût payé en ressources existantes, horloge avancée ; refus si une opération est en cours | [EXISTANT] V188 |
+| Validation par une mission locale | Validation du plus ancien niveau en attente après une opération réussie sur Cocyte (`world-05-lethe`), en attendant les missions C1–C5 | [PROPOSÉ] |
+| Échec : perte d'un niveau de fonctionnement | Opération ratée sur Cocyte : le chantier le plus avancé perd un niveau validé ; l'investissement reste | [EXISTANT] V188 |
+| Population et chantiers actifs | 1 chantier en attente + 1 par tranche de deux personnes ramenées (3 civils du quai, colons du manifeste M577) | [PROPOSÉ] |
+| Stabilité | +3 de stabilité de Cocyte par niveau validé | [PROPOSÉ] |
+| Paliers | Survie, Rétablie (3 chantiers niveau 1), Autonome (5 chantiers niveau 2) ; Libre attend la fin « Le relais parle » | [PARTIEL] |
+| Ressources régulières (Autonome) | +150 crédits et +10 alliage à chaque opération réussie sur Cocyte | [PROPOSÉ] |
+
+**Coûts [PROPOSÉ] :** niveau 1 : 400 crédits, 20 alliage, 6 h ; niveau 2 : 900 crédits, 45 alliage, 5 recherche, 12 h ; niveau 3 : 1 600 crédits, 80 alliage, 12 recherche, 24 h.
+
+**Toujours à faire :** les missions locales C1–C5 et les annexes, le recrutement de Nadia Bensaïd (palier Rétablie), la console physique dans la salle commune ou les quartiers, l'épilogue du palier Libre.
+
+### 56.9 Interlude : Jun Park et routine d'alerte (V188, 2026-11-13)
+
+- **Routine `alert`** : la crise forcée de l'Interlude met les seize PNJ en routine `alert` (`resolveNpcRoutineV62`). Correction : une crise marquée résolue ne maintient plus l'équipage en alerte.
+- **Sauvetage** : Jun Park est dans le nœud de conduit `hub-life-support`. L'atteindre pendant l'alerte le ramène. Le choix détruire ou capturer attend les deux conditions ; l'objectif du hub indique celle qui manque. Les deux conditions sont sauvegardées pendant l'alerte.
+- **Réplique [PROPOSÉ]** : « J'ai cru qu'elle était dans le conduit avec moi. » (EN : “I thought it was in the duct with me.”) Jun rampe ensuite vers l'infirmerie.
+- **Adaptation [PROPOSÉ]** : Jun n'est pas dessiné dans le conduit ; le message et le journal stratégique marquent le sauvetage.
+
+### 56.10 Mode daltonien : palette dédiée (V188, 2026-11-13)
+
+- **Correction** : la première version appliquait au canvas et aux panneaux des matrices de *simulation* du daltonisme. Elles montraient au joueur ce qu'il voit déjà, sans rendre de contraste. Ce filtre global est retiré.
+- **Palette** : `src/colorblind-palette-v188.js`. Les signaux d'état dessinés sur le canvas passent par une palette Okabe–Ito : portes verrouillée, ouverte et fermée des missions, du hub, des cloisons, du Bioforge et du relais, ainsi que le guide de déplacement bloqué ou libre. Ces couleurs diffèrent aussi en luminosité. Mode désactivé : couleurs d'origine, octet pour octet.
+- **Mesure** : sous les trois simulations, l'écart minimal entre états passe d'environ 0,12–0,29 à au moins 0,4 (test `verify-accessibility-v188`).
+- **Reste à faire** : les signaux d'interface HTML (panneaux) et les autres codes couleur du canvas, à recenser.
+
+### 56.11 Prologue cinématographique (V188, 2026-11-13)
+
+**Cinématiques (toutes, `story-cinematics-v188.js`)** :
+
+- **Cadre** : format 2,39:1 entre deux bandes noires. Les légendes s'affichent dans les bandes, hors du mouvement de caméra.
+- **Caméra** : chaque plan a sa caméra, soit un mouvement lent par défaut, soit un `camera` explicite. Le mode « mouvement réduit » fige la caméra.
+- **Raccords** : les répliques d'une même conversation s'enchaînent sans fondu ; le noir n'intervient qu'aux changements de scène.
+- **Sous-titres** : bas d'écran avec petit portrait, nom et réplique tapée. Une voix radio s'affiche en ambre, avec de la neige sur le portrait.
+- **Image** : grain et vignettage.
+- **Décors** en primitives, toujours des placeholders :
+  - baie cryo : capsules horizontales à verrière givrée, la n° 3 ouverte, celle d'Echo-9 ;
+  - pas de tir : couloirs, silhouettes de cible, lampes au sodium ;
+  - salle holographique : projection qui scintille, équipage en contre-jour ;
+  - quai : grues, conteneurs, projecteurs dans la pluie, reflets ;
+  - triage : rideaux, scialytique ;
+  - quartiers : lampe de bureau ;
+  - soute du dropship : lumière rouge, harnais, hublots sous la pluie, secousses.
+- **Nouvelle séquence** : CIN-03 *Descente sur Port-Méridien*, présentée au §4. Ses répliques sont **[PROPOSÉ]**.
+- **Passe de cohérence des décors (2026-11-14)** : chaque décor a une échelle unique (personnes de 1,2 à 1,95 m), les quantités suivent le jeu et le canon, et le test `verify-cinematic-coherence-v188` les vérifie.
+  - **Baie cryo (CIN-01 et salle du jeu)** : le plan et la salle montrent la même disposition : le casier ECHO-8, la porte des capsules de sauvetage, DAVID-8R, la capsule 03 ouverte contre le mur et les capsules 01, 02 et 04 au premier plan. La salle ajoute un poste de cryostase en tête de la capsule 03 **[PROPOSÉ]**.
+  - **Casier** : un seul casier ECHO-8 scellé, aux proportions du jeu.
+  - **Briefing (CIN-02)** : Harlow, Vega, Velez et Echo-9 autour d'une table de 3,1 m **[PROPOSÉ]**.
+  - **Quai** : conteneurs de 10 pieds, Wren et trois habitants à l'arrivée, Asha et Adèle Sarrazin pour la visite.
+  - **Triage** : le blessé allongé, Lucia Ferro à côté.
+  - **CIN-11** : berceau QZ17 de 2,4 × 1,0 m **[PROPOSÉ]**, couvercle forcé vers l'extérieur, trois sangles arrachées, Echo-9 à la torche pour l'échelle.
+  - **CIN-10** : Rook parle par radio, conformément au tableau de l'équipage.
+  - **CIN-31** : les comptes du manifeste ne sont plus cachés par la bande du bas.
+
+**Mise en scène en jeu (`ingame-staging-v188.js`)** :
+
+- Des moments courts se jouent par-dessus le niveau vivant, sans changer d'écran : bandes cinémascope, étalonnage de l'image, sous-titres, puis retour du contrôle.
+- Le monde continue de tourner ; seules les entrées du joueur sont retenues. Entrée passe à la suite, Échap passe la scène.
+- L'habillage du niveau (boutons, bandeau d'objectif) s'efface pendant la scène.
+- Étalonnages : hypersommeil (noir, flou froid, puis net), pluie (rideau animé) et alerte (pulsation ambre).
+- Chaque moment se joue une fois par campagne : la sauvegarde ajoute `storyCampaignV188.beatsSeen`. Aucune récompense.
+- Moments : réveil (P-1), interruption de la qualification (P-2), arrivée sur le quai et constat (P-3). Les textes sont au §4, **[PROPOSÉ]**.
+- **Mouvement réduit** : pas d'animation de bandes, de pluie ni de transition de flou.
+
+**Toujours à faire** : voix, plans de caméra déplacée dans le niveau (le hub suit le joueur), art définitif.
+
+### 56.12 Salles hybrides 2D / 2,5D (V188, 2026-11-13)
+
+Décision du propriétaire : certaines salles passent en **profondeur** (2,5D, déplacement au sol vers la caméra), les autres restent **de profil** (2D, hauteur, échelles, coursives, conduits). Cadrage Spec Kit : `specs/001-salles-hybrides-2d-25d/` (spec, plan, recherche, tâches).
+
+- **Prototype** : le hangar du dropship, sans combat. Le rail actuel, le long du mur (portes, échelles, pupitres), est la limite du fond. W/S avancent vers la caméra ou reculent vers le mur, jusqu'à 80 unités.
+- **Le UD-4L** quitte le mur : on le contourne par une allée étroite derrière lui, le long du mur, ou par l'avant. On peut passer sous la queue et sous le nez. Deux piles de caisses et un chariot (placeholders en primitives) créent les passages.
+- **Lecture de la profondeur** : sprites jamais mis à l'échelle (décision du propriétaire). Décalage vertical, ombre au sol, sol plus sombre près du mur, repères au sol. Le dropship et les caisses masquent qui passe derrière eux ; le joueur masqué garde un contour en pointillé.
+- **Interactions** : celles du mur (portes, annexes, pupitre d'amarrage, échelles) se font depuis le mur. L'embarquement se fait devant le UD-4L. Un PNJ répond dans sa bande de profondeur.
+- **Échelles** : E s'accroche au pied d'une échelle, puis W/S montent. Les coursives restent en 2D.
+- **Équipage** : Maksim Orlov tient son poste devant le nez du UD-4L. Les PNJ marchent dans l'allée avant le long du vaisseau et sur le rail ailleurs.
+- **Portes** : annonce à l'approche (« SALLE EN PROFONDEUR · W/S : AVANCER / RECULER »). La cloison du réacteur ne se franchit que près du mur.
+- **Sauvegarde** : `hub.depthV188` (profondeur dans la salle, champ additif) ; une ancienne sauvegarde revient au mur.
+- **Tir futur** (non branché tant qu'il n'y a pas de combat en profondeur) : tir horizontal qui touche une cible dans une bande de ±22 ; le tireur se recale de 30 % vers elle.
+- **Quai de Port-Méridien (P-3)** — deuxième salle en profondeur :
+  - les postes de mission (lot de secours, triage, relais du sas, constat) restent contre le mur ;
+  - la caisse de la rampe reste franchissable d'un saut près du mur, et se contourne par l'avant ;
+  - des conteneurs, des fûts et une palette (placeholders en primitives) occupent le sol ;
+  - le sas fermé barre tout le quai, du mur jusqu'à l'avant ;
+  - pendant l'escorte, les trois habitants suivent Echo-9 en profondeur, en file, un pas derrière ; ils contournent un objet plutôt que d'y entrer ;
+  - une pluie fine tombe sur le quai, comme dans CIN-03 ; la sauvegarde du quai garde la profondeur (`portMeridienV90.z`, additif).
+  - **Passe de cohérence (2026-11-14)**, valeurs **[PROPOSÉ]** :
+    - **Arrivée** : l'arrière du UD-4L est dessiné, rampe baissée sous deux projecteurs.
+    - **Personnages** : Tomas Wren (gilet haute visibilité, tablette), Lucia Ferro (brassard à croix) et le blessé du quai nord, allongé sur la civière, la poitrine bandée. Les trois habitants attendent à côté du triage.
+    - **Lot de secours** : il porte la croix rouge (médical) ou l'éclair (énergie), selon le choix.
+    - **Sas** : la porte fait 2,6 m dans une cloison qui monte jusqu'au collisionneur, avec un gyrophare (ambre fermé, vert ouvert).
+    - **Tailles** : conteneur ISO de 10 pieds, fûts de 0,9 m, palette de 1,2 m.
+    - **Allées** : 20 de profondeur au minimum ; la palette ne barre plus l'escorte.
+    - **Escorte** : les habitants s'arrêtent devant le terminal du constat sans le masquer ; les anciennes sauvegardes sont ramenées à ces places, jamais refusées.
+    - **Panneaux** : chacun a sa version FR et EN (RAMPE · FRET / RAMP · FREIGHT, TRIAGE · HABITANTS / TRIAGE · RESIDENTS, RELAIS DU SAS / AIRLOCK RELAY, SECTEUR NORMAL ? / NORMAL SECTOR?).
+- **Ordre entre personnages** : un PNJ placé devant Echo-9 le masque, puisque le joueur est alors dessiné avant l'équipage.
+- **Pièces du prologue à bord (passe de cohérence 2026-11-14, `src/hub-prologue-rooms-v188.js`)**, valeurs **[PROPOSÉ]** :
+  - **Baie cryo** :
+    - la capsule de la salle devient la **capsule 03**, vidée, verrière levée ;
+    - les capsules 01, 02 et 04 sont au premier plan ;
+    - un poste de cryostase se trouve en tête de la capsule 03 : ambre pendant le réveil, vert ensuite ;
+    - DAVID-8R se tient à portée de voix ;
+    - la porte des capsules de sauvetage s'appelle désormais ainsi, pour ne pas être confondue avec les capsules d'hypersommeil ;
+    - l'invite du bas nomme l'étape que sert E.
+  - **Briefing** :
+    - une projection de Cocyte et d'Asphodèle, avec le voyant QZ rouge, flotte au-dessus de la table ;
+    - Velez donne ses consignes à la table, et non plus dans l'embrasure des archives ;
+    - Vega, Harlow et Velez attendent à la table tant que CIN-02 n'a pas été jouée.
+  - **Pas de tir** : il était déjà cohérent (9 cibles de 1,88 m, de 5,9 à 16,1 m) ; il n'a pas été modifié.
+  - **Hangar** :
+    - caisses de 1,2 m, sur une seule rangée ;
+    - chariot près du nez du UD-4L ;
+    - plus rien devant le sas ;
+    - au sol : ancrages des patins, vanne de carburant avec son tuyau, zone « EMBARQUEMENT UD-4L ».
+- **Cales de QZ-17 (Acte I), avec combat** — spec `specs/002-cales-qz17-profondeur-combat/` :
+  - le pont bas des soutes dépressurisées, entre les deux sas, est la première section de mission en profondeur ;
+  - trois rangées de conteneurs scellés marqués QZ17 (placeholders en primitives, cohérents avec CIN-31) laissent une allée le long du mur et deux allées vers la caméra ;
+  - la couverture de caisses existante se franchit près du mur et se contourne par l'avant ;
+  - **tir** : une salve horizontale touche un xénomorphe à ±22 de profondeur, Echo-9 se recale de 30 % vers lui, et un conteneur sur la ligne arrête la salve ; l'aide à la visée et le corps à corps suivent la même bande ;
+  - **ennemis** : les rôdeurs de la dépressurisation rejoignent la profondeur d'Echo-9 en contournant les conteneurs ; une attaque, ou un projectile, ne porte qu'à ±24 ;
+  - **détecteur** : il compte la profondeur dans la distance ;
+  - **preuves, ravitaillement et sas** : accessibles depuis l'allée du mur ;
+  - la reprise de mission garde la profondeur d'Echo-9, du marine coop et des xénomorphes.
+  - Dans la cale, W/S ne servent plus à viser vers le haut ou le bas : le tir y est horizontal, décision (3).
+  - **Passe de cohérence (2026-11-14)**, `src/qz17-level-dressing-v188.js`, valeurs **[PROPOSÉ]** :
+    - **Conteneurs** : ils passent à la taille ISO 10 pieds (150 × 132 px, à 51 px par mètre). La soute n'en contient plus qu'**un**, QZ17-01, à l'avant. QZ17-02 et QZ17-03 sont empilés contre le mur du pont de service.
+    - **La cargaison fantôme** : l'emplacement **QZ17-04** est vide, avec ses saisines coupées sous une grue dont l'élingue tranchée pend encore. Trois conteneurs scellés, comme la commande de l'Acte III, et un quatrième manquant.
+    - **Sol** : rails d'arrimage et une palette basse comme couverture ; la couverture de caisses du rail est retirée. L'allée du mur fait 36 de profondeur, et deux obstacles sont toujours séparés d'au moins 1 m.
+    - **Preuves et ravitaillement** : le courriel de logistique et les munitions sont déplacés hors de l'embrasure du mur arrière.
+    - **Vide** : la bande de vide s'arrête au sas de la soute.
+    - **Rôdeurs** : ils dorment derrière QZ17-01, dans l'emplacement vide et dans la bouche du conduit. Les castes inadaptées (Reine, Crusher, trop larges) sont reportées au pont de service.
+    - **Berceau de CIN-11** : il est désormais physique, dans une alcôve de maintenance près de la sortie du conduit. Berceau QZ17-04 givré, couvercle forcé de l'intérieur, sangles arrachées. L'alcôve est scellée si l'on n'a pas pris la route de maintenance.
+    - **« Quatre accès »** : un tableau dans le tube d'amarrage liste les quatre accès réels : sas principal, échelle de service, ascenseur de coque, conduit de maintenance.
+    - **Limites** : l'ascenseur de service « B » (preuve du fragment de sceau) n'est pas placé ; le nombre de rôdeurs peut dépasser trois.
+- **Limites** : Frontier Forge n'édite pas les salles en profondeur. Prochaines candidates : d'autres soutes ou cales de mission, après évaluation de QZ-17.
+
+
+### 56.13 Manques de contenu (V188, 2026-11-15)
+
+Audit bible contre code : [`AUDIT_CONTENU_V188.md`](../development/AUDIT_CONTENU_V188.md) (66 lignes au commit `250d81a` : 14 faites, 18 partielles, 32 manquantes, 2 bloquées par l'art). Comblés en partie dans ce lot, sans être terminés : front station Asphodèle S1-S4 et choix CASSIUS (§7.5), quatre quêtes de l'équipage (§8.4), temps de voyage (§13.6). Feature : `specs/005-front-asphodele-quetes/`. Tests : `scripts/verify-content-gaps-v188.mjs` ; contrôle Chromium sur fixture importée (déclaré dans la spec). À la fin de cette phase, aucun de ces éléments n'avait son art final. La continuation du 16 novembre 2026 ajoute les six illustrations de scène de §7.8 ; les décors, acteurs et animations jouables restent à produire.
+
+Suite (spec 007, `specs/007-hub-asphodele/`) : hub Asphodèle atteignable (8 modules sur 12 de §42.2), 7 missions annexes, 6 contrats dont *Relais en dérive*, prédicat de *Transmettre*, CIN-70 à CIN-72, plaque de Kessler au casier d'Echo-8 (§7.6, §42.4). Tests : `scripts/verify-asphodele-hub-v188.mjs` ; QA Chromium au clavier `scripts/qa-asphodele-hub-v188.mjs` (fixtures déclarées). Rien n'est déclaré terminé.
+### 56.14 Acte V, fins et épilogue (V188, 2026-11-15)
+
+Manque n° 3 de l'audit comblé en partie : conseil de guerre, choix final, missions finales, face-à-face, trois fins, épilogue au Tantalus, générique et partie libre (§5.11). Feature : `specs/006-acte-v-fins/`. Tests : `scripts/verify-act5-endings-v188.mjs` (dans `test:priorities:v188`) ; contrôle Chromium de la fin « Les vivants, sans preuve » sur fixture importée (FR et EN), avec deux injections déclarées (checkpoint, fin de mission). Statut : **Partiel** — la course APC dédiée, la Reine dédiée et l'art restent à faire ; rien n'est déclaré terminé.
+
+### 56.15 Matriarche de Soute et coque MANTA-6 (V188, 2026-11-17)
+
+La continuation d'art produit quatre planches dédiées de la Matriarche de Soute : attente, marche, griffes/queue, rugissement/réaction, chacune de quatre poses. Le combat Cargo conserve les mêmes clips, événements, gabarit physique, phases, checkpoints et reprises. Les impacts visuels sont raccordés aux marqueurs natifs : griffes en frame 9, queue en frame 11. Seul l'acteur de cette rencontre prend la nouvelle identité ; les Reines du reste du jeu et le repli restent inchangés. Le statut local de Cargo redevient effectif dans le registre courant, avec `canonExact:false`.
+
+Le chapitre existant Abysse Noir reçoit une coque MANTA-6 originale, bleu pétrole usé, en profil latéral. Elle remplace le rectangle provisoire sans changer la boîte 180 × 86, l'accès, la visée ou le tir. C'est une coque statique : les poses HADAL, la nage dédiée, le bestiaire aquatique, les animations de trappe/propulsion/dégâts et l'arc Nacre-7 proposé ne sont pas produits par cette livraison. La dette combinée `dedicated-hadal-manta-art` reste donc ouverte.
+
+Les cinq PNG sont reliés à leurs prompts, empreintes et consommateurs dans [`CARGO_ABYSS_ART_PROVENANCE_20261117.json`](../development/CARGO_ABYSS_ART_PROVENANCE_20261117.json). La [planche de contrôle](../development/CARGO_ABYSS_ART_OVERVIEW_20261117.png) et le [rapport de revue](../development/CARGO_ABYSS_ART_QA_20261117.md) documentent les 16 poses et leurs limites. Il s'agit de designs originaux du projet à partir de ses références ; aucun modèle individuel de Matriarche ou de MANTA n'était fixé plus précisément dans la bible, et aucune certification canonique globale n'est ajoutée.
+
+### 56.16 Scaphandre HADAL modulaire et posture immergée (V188, 2026-11-17)
+
+Le chapitre local Abysse Noir reçoit trois PNG dédiés au scaphandre : trois torses, huit pièces de bras et gants, un bassin, six pièces de jambes et bottes, et un casque fermé avec joint cervical. Les 19 pièces disponibles se composent sur le rig humain existant ; une pose courante en emploie 15. Les matières reprennent l'équipement pressurisé du projet : tissu anthracite, plaques olive usées, raccords en laiton terne et visière opaque. Les pixels des trois sources sont conservés. Il s'agit d'un design original de Tantalus, sans modèle canonique individuel de HADAL fixé dans la bible.
+
+Le raccord s'applique au véritable joueur admissible dans Abysse Noir, hors MANTA, sans modifier sa sélection persistante. Les trois sources basculent ensemble ; si l'une manque, les pièces natives sont conservées ensemble. La posture commune relie thorax, cou, bassin, bras et arme à la sonde d'oxygène existante, avec semelles et solveurs natifs. Le casque reste attaché au col ; il n'est pas déplacé seul. Cette posture vaut aussi pendant le repli. Le point de tir des anciennes poses aériennes peut donc changer, mais le projectile accepté, les mains et l'arme dessinée partagent le même point, indépendamment du chargement des images. Le gabarit physique de 42 × 92, les modes, les vitesses, la pression et les règles d'oxygène restent inchangés.
+
+L'ancienne bande cyan de visière et le cadre provisoire sont omis seulement si le kit a effectivement été dessiné pendant la passe courante ; un reçu ancien ne suffit pas. Les autres acteurs, les tenues incompatibles, le neuro et les transits à contacts imposés gardent leurs exclusions ou contraintes natives. Les sources sont gérées par le cache d'apparence existant, sans ajouter de boucle d'animation ni de costume sauvegardé.
+
+Un défaut de service révélé pendant cette intégration est corrigé : le déplacement Legacy court-circuitait l'avance des manipulations admises. Un appel à leur propriétaire natif permet maintenant au soin de se terminer en 2,2 secondes actives, avec un seul kit et 48 points de santé plafonnés. Pause, impacts, annulation et restauration conservent leurs règles. Aucune nouvelle règle d'annulation par intention clavier n'est ajoutée à Legacy.
+
+Les poses de support, suspension, montée, descente, visée, tir, recharge et service utilisent les animations natives. Aucun nouveau cycle de battement de nage, animation de trappe/propulsion du MANTA, bestiaire aquatique ou chapitre de l'arc Nacre-7 n'est livré par ce raccord. La dette combinée `dedicated-hadal-manta-art` reste ouverte, le registre reste à 19 chapitres partiels et deux effectifs, et `canonExact` reste faux. Les preuves et leurs limites sont dans [`HADAL_ART_QA_20261117.md`](../development/HADAL_ART_QA_20261117.md), la [planche intégrée](../development/HADAL_ART_OVERVIEW_20261117.png) et la [provenance](../development/HADAL_ART_PROVENANCE_20261117.json).
+
+
+### 56.17 Reine ailée de Broodstorm (V188, 2026-11-17)
+
+Le chapitre local Broodstorm reçoit trois planches de quatre poses pour sa Reine ailée : battements de poursuite, vol retenu/réaction et perte de tenue en suspension. Les douze images reprennent la référence 36 du corpus Tantalus (`ref-36-queen-xeno-winged-2.png`) : crête noire métallique, corps biomécanique sombre, membranes orangées et queue articulée. La référence 37, dont l'angle et l'identité diffèrent, n'est pas mélangée à cette série. Les trois PNG conservent leurs pixels de génération. Ce corpus porte sur le design original du projet ; la génération ne certifie pas une identité de franchise « 1:1 ».
+
+Le raccord est réservé au véritable acteur `legacy-queen-0` de Broodstorm, y compris après le passage natif de la phase de combat à l'extraction. Les images se chargent ensemble à l'entrée du chapitre. Une source absente, incomplète ou étrangère conserve le dessin natif entier. Les autres Reines, la Matriarche Cargo, les acteurs détachés et les autres missions restent exclus. Les battements et réactions ne modifient ni la boîte physique de 336 × 268,28125, ni la vitesse, les contacts, les dégâts, les ressources, les portes ou les sauvegardes.
+
+Les hanches sont recalées à partir de repères anatomiques documentés. Une échelle uniforme par famille compense la différence de taille des dessins source ; les ailes ne déterminent jamais la taille du corps. La variation volontaire de posture pendant la mort reste visible. Les ailes et la queue prolongent les seules bornes de visibilité. La barre de santé conserve ses valeurs et son style ; son nouveau plafond fixe dégage les membranes sans suivre chaque battement.
+
+Le contrôleur existant conserve les clips et leurs cadences : poursuite à 10 images par seconde, repos/réaction à 4 et mort à 7, avec la dernière pose maintenue jusqu'à la disparition native du corps. La réaction ordinaire de 0,24 seconde montre généralement la première pose du clip de repos ; disposer de quatre images ne signifie pas que chaque impact les joue toutes. Aucun nouvel événement d'attaque n'est associé aux images. Aucun atterrissage, chute physique ou nouveau comportement de boss n'est introduit.
+
+La dette locale `dedicated-flying-queen-art` est close. Broodstorm reste partiel : `complete-modular-dropship-corpus` demeure ouvert. L'aire d'Echo Basin, la rencontre 2.4, la cinématique CQ-03, l'atterrissage et les actes ultérieurs restent distincts de ce chapitre existant. Le registre conserve 21 opérations jouables, 19 partielles et deux effectives ; aucune autre dette ni valeur `canonExact` n'est promue. Les snapshots historiques restent inchangés.
+
+Les [mesures et la provenance](../development/BROODSTORM_QUEEN_ART_PROVENANCE_20261117.json), la [planche du rendu intégré](../development/BROODSTORM_QUEEN_ART_OVERVIEW_20261117.png) et le [rapport de vérification](../development/BROODSTORM_QUEEN_ART_QA_20261117.md) distinguent les dessins générés, les observations natives, les fixtures et les limites de validation.
+
+### 56.18 Reine-Mère adulte rouge (V188, 2026-11-17)
+
+Le chapitre existant « Le chant de la Reine-Mère » reçoit trois PNG dédiés : quatre corps de repos/anticipation, quatre corps d'émission/réaction/effondrement et quatre bras séparés. Une pose assemble un corps et ses quatre bras ; les douze pièces dessinées ne sont donc pas douze frames d'animation. Les deux grands bras et les deux petits gardent leurs propres attaches. Les membres lointains passent derrière le corps, les proches devant, puis l'ensemble est inversé pour l'autre direction.
+
+L'identité vient du dossier `yhw:XEN-032` du corpus du projet et des photographies officielles de la Red Queen Mother de *Genocide* présentée par NECA : rouge cramoisi, crête allongée, cou côtelé, quatre bras, appendices ivoire et queue segmentée. Les vues en perspective d'une figurine ne définissent pas toutes les poses d'un adulte vivant en profil latéral. Le résultat est une adaptation documentée de cette référence ; `visual1to1:false` et `canonExact:false` restent inchangés. L'œuf Reine-Mère historique n'est pas utilisé comme anatomie adulte, et cette identité n'est pas assimilée à une Empress.
+
+Le raccord concerne uniquement l'objet boss courant de cette opération. Les Chœurs, les gardes et les deux autres écosystèmes qui réemploient son identifiant conservent leur présentation. Les trois sources se chargent à l'entrée ou après une reprise réussie et sont admises ensemble ; une source manquante, incorrecte ou étrangère conserve le corps vectoriel entier. Le rendu ne charge pas les images et ne fait avancer aucune horloge.
+
+Le moteur garde son corps physique de 170 × 210, ses 600 points de santé, sa protection par les trois Chœurs, ses quatre phases et ses vraies salves. La pose d'émission suit l'ajout effectif d'un projectile de l'acteur ; une transition de phase seule ne la déclenche pas. Son marqueur privé expire dans la mise à jour native, même sans dessin. Il n'est pas sauvegardé et ne se rejoue pas après un tour d'horloge ou une reprise réussie. L'origine physique du tir reste celle du combat existant ; elle n'est pas déplacée vers la bouche dessinée.
+
+Une même échelle anatomique lie les huit corps aux quatre membres. Les appuis des poses repliées sont recalés au sol sans redimensionner l'acteur. Le nom, la barre de santé et l'avertissement jaune d'anticipation restent dans le passage natif, au-dessus de la composition. La mort lit la durée native de 1,2 seconde et conserve l'alpha 0,3. Seules les bornes de visibilité tiennent compte de la crête, de la queue et des bras ; les collisions restent inchangées.
+
+La dette locale `dedicated-queen-mother-animation` est close par ce raccord. Le chapitre reste partiel : `complete-royal-cast` demeure ouvert, comme les lieux, cinématiques et rencontres proposés pour l'arc étendu de TR-0. Le registre conserve 21 opérations jouables, 19 partielles et deux effectives, avec ses snapshots historiques intacts. Les [sources et prompts](../development/QUEEN_MOTHER_ART_PROVENANCE_20261117.json), la [planche intégrée](../development/QUEEN_MOTHER_ART_OVERVIEW_20261117.png) et la [QA](../development/QUEEN_MOTHER_ART_QA_20261117.md) documentent les itérations rejetées, la composition, les contrôles exécutés et leurs limites.
+
+### 56.19 Gardes du chapitre Reine-Mère (V188, 2026-11-17)
+
+Les six gardes initiaux et les douze renforts possibles du chapitre existant reçoivent une présentation animée issue de l'atlas normalisé `xenomorph-praetorian-action-sheet.png`, déjà présent dans le projet. Le PNG de 1024 × 1024 et ses seize cellules de 256 × 256 sont réemployés intacts. Cette adaptation visuelle du rôle `guard` ne transforme pas les acteurs en une nouvelle caste : leurs descripteurs restent sans caste, sans profil de catalogue importé et sans changement de statut canonique. Les trois Chœurs restent vectoriels. Le registre garde `complete-royal-cast` ouvert et ses 21 opérations jouables, 19 partielles et deux effectives ; aucune dette supplémentaire n'est déclarée close.
+
+Une échelle commune de 70/161 conserve les proportions entre les seize poses. Chaque cellule est dessinée entière, dans les deux directions, avec son ancrage horizontal anatomique et la ligne d'appui source à Y = 240. Le bassin n'est pas immobilisé verticalement : les flexions et l'effondrement restent visibles. Cette calibration manuelle ne mesure pas une taille canonique ; elle ajuste la présentation au corps physique natif de 58 × 70. La santé de 105, la vitesse de 72 et les règles de contact restent celles du garde existant.
+
+Les cellules 0–3 servent au repos, 4–7 au déplacement, 8 à l'anticipation, 9 au contact accepté, 10–11 à sa récupération et 12–15 à la mort. Le déplacement est observé après le retour de toutes les couches natives du moteur, y compris celles qui retiennent l'acteur pendant la grâce d'insertion. Le cycle de marche dépend de la distance effectivement parcourue, à raison de 7,2 pixels par cellule. La vitesse déclarée, l'alerte ou une tentative de déplacement bloquée ne suffisent pas à l'avancer. L'événement de frappe du catalogue praetorian n'est pas importé : l'image de contact suit uniquement le retour positif de la vraie fonction de dommage native. Son marqueur privé dure 0,3 seconde et expire pendant la mise à jour, même hors champ.
+
+Le chargement appartient à l'entrée et à la reprise réussie du chapitre. Une source absente, incomplète ou étrangère conserve le corps vectoriel entier. La disponibilité de cet atlas est indépendante de celle des trois sources de l'adulte. Les anciens objets après reprise, les Chœurs, le boss adulte et les deux autres écosystèmes sont exclus de ce raccord. Les données sauvegardées ne reçoivent ni distance d'animation ni marqueur de contact. Le nom, la barre de santé et l'ellipse jaune d'anticipation restent dessinés par leur propriétaire natif ; les sept pointes de la Reine-Mère ne sont pas appliquées aux gardes.
+
+La mort lit les 1,2 seconde natives et conserve l'alpha 0,3. La dernière cellule est maintenue jusqu'à la disparition du corps. L'atlas ne possède pas de ligne de blessure distincte : les effets natifs restent responsables de ce retour visuel. Le mouvement réduit fixe les cycles ordinaires de repos et de marche sans supprimer l'anticipation, le contact ou la mort. Les bornes visuelles couvrent les cellules complètes et leurs miroirs, sans agrandir les collisions ni la portée d'attaque. Les [références et la provenance](../development/QUEEN_MOTHER_GUARD_ART_PROVENANCE_20261117.json), la [planche du rendu intégré](../development/QUEEN_MOTHER_GUARD_ART_OVERVIEW_20261117.png) et le [rapport de vérification](../development/QUEEN_MOTHER_GUARD_ART_QA_20261117.md) distinguent la calibration statique, les poses de contrôle et les événements réellement exécutés par le moteur.
+
+### 56.20 Chœurs du chapitre Reine-Mère (V188, 2026-11-17)
+
+Les trois cibles nommées CHŒUR 1, CHŒUR 2 et CHŒUR 3 du chapitre existant reçoivent une même présentation originale Tantalus. Une base basse à deux appuis fusionnés soutient une arche costale ouverte, étranglée en son milieu, avec une membrane bordeaux/mauve. Cette forme distingue les cibles de l'œuf, du garde et de la crête de l'adulte. Les références locales ont guidé les matières et le contraste ; elles n'établissent pas une anatomie de Chœur. Aucun nom de caste, lien à Genocide ou identité du Chœur d'Éloïse n'est attribué à cette création.
+
+La planche intacte `assets/queen-mother/v188/choirs-original.png` fournit quatre cellules complètes de 627 × 627 dans un PNG RGBA de 1254 × 1254, soit 920 091 octets. Les quatre fonctions sont présence A, présence B, contraction au coup reçu et neutralisé. Elles emploient une échelle unique de 90/525 et les appuis de la base centrale mesurés par pose. La vue est presque frontale ; le miroir inverse l'asymétrie des lames. Il ne transforme pas cette vue en profil latéral documenté.
+
+Le corps physique demeure 66 × 90, avec 110 points de santé, sans locomotion ni attaque propres au Chœur. Le recul générique produit par les dégâts natifs reste possible et inchangé. Le cycle discret A/B lit l'horloge existante à une cellule par seconde ; le mouvement réduit conserve A. La réaction lit le vrai `hurtClock`, sans marqueur privé, et la mort est prioritaire. La présence B est environ deux pixels plus basse, la réaction mesure 72 pixels et le neutralisé 37,2 pixels à l'échelle commune. Aucun agrandissement par pose ne masque ces proportions. Les franges rougeâtres et la quasi-opacité du corps source, majoritairement à alpha 253, restent conservées.
+
+Les trois objets courants sont admis par leur identité, leur ID, leur rôle et leur indice natifs. L'admission n'est pas limitée à la phase « choirs » : le dernier cadavre reste illustré après le passage à « mother-1 », jusqu'à l'expiration native. Un ancien objet après reprise, une copie détachée, un garde, l'adulte ou une cible homonyme des deux autres écosystèmes ne reçoit pas cette présentation. Le chargement du Chœur reste indépendant de celui de l'adulte et des gardes ; une source indisponible conserve le dessin vectoriel entier.
+
+Les effets de neutralisation restent ceux du chapitre : un seul indice est coché, la pression perd 16 avec plancher à zéro et le jalon existant est produit une fois. Le boss reste protégé tant qu'une cible subsiste ; la composante de pression liée à sa phase demeure après leur disparition. Les trois cibles ne deviennent ni des nurseries, ni des artères, ni des balises. La sauvegarde conserve les états déjà prévus ; une blessure passée n'est pas rejouée à la reprise et un cadavre conserve seulement son temps restant.
+
+Le nom et la barre restent dans leur passage natif. Un éventuel avertissement résiduel conserve l'ellipse target inclinée à +0,18 radian, sans pointes royales ; cet état de compatibilité n'ajoute aucune attaque. Le corps neutralisé garde l'alpha natif 0,3 et la durée de 1,2 seconde, avec sa faible hauteur et les occultations possibles du monde. Les bornes de visibilité sont conservatrices et ne modifient ni collision, ni portée, ni ordre des acteurs.
+
+L'adulte, les gardes et les trois cibles locales disposent ainsi d'un habillage illustré. Cela ne définit pas les « trois castes reliées » de l'arc proposé, ne produit ni les ondes, ni la vibration collective CQ-05, ni les lieux ou rencontres étendus de TR-0. `complete-royal-cast` demeure ouverte, avec 21 opérations jouables, 19 partielles et deux effectives ; aucune déclaration canonique n'est promue. Les [sources et choix de création](../development/QUEEN_MOTHER_CHOIR_ART_PROVENANCE_20261117.json), la [planche intégrée](../development/QUEEN_MOTHER_CHOIR_ART_OVERVIEW_20261117.png) et la [QA](../development/QUEEN_MOTHER_CHOIR_ART_QA_20261117.md) distinguent les prototypes de placement, les événements natifs, les rendus observés et leurs limites.

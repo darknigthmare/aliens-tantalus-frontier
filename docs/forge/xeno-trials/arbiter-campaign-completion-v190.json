@@ -1,0 +1,178 @@
+{
+  "lot": "XENO-ARBITER-CAMPAIGN-STAGES-V190",
+  "baseCommit": "3a6c1410f606b83a7be881f93b6e87f8d0008a98",
+  "state": "VERIFIED_FROZEN_SOURCE",
+  "counts": {
+    "campaignMissions": 6,
+    "physicalEvidenceStations": 14,
+    "preservedRoster": 189,
+    "preservedHordeProtocols": 80,
+    "preservedFieldOperations": 40,
+    "preservedStageIds": 46,
+    "enrichedExistingStages": 40,
+    "newCorporateStages": 4,
+    "totalStages": 50,
+    "newStageAtlases": 4,
+    "newStageImagePlanes": 12,
+    "newStagePngBytes": 6305765,
+    "newCampaignPaintings": 1,
+    "newCampaignPngBytes": 2266447,
+    "newExactTranslations": 95,
+    "newTranslationPatterns": 6,
+    "campaignInteriorSceneryBindings": 5,
+    "additionalCampaignSceneryBitmaps": 0
+  },
+  "device": {
+    "name": "ARBITER",
+    "model": "AB-40",
+    "serial": "AB40-LT-074",
+    "provenance": "tantalus-project-original",
+    "canonExact": false,
+    "biologicalRemoteControl": false,
+    "recoveredDuringChapter": 3,
+    "isolatedDuringChapter": 5,
+    "localMireDuringChapter": 6,
+    "legacyTrialsAccessPreserved": true
+  },
+  "persistence": {
+    "mainSaveSchema": 52,
+    "field": "xenoArbiterV190",
+    "maximumReturns": 6,
+    "requiresExactDeploymentSnapshot": true,
+    "readingGrantsEvidence": false,
+    "copyInteractionProgress": "cumulative and preserved on release/pause/reload",
+    "exitInteractionProgress": "two seconds of local validation at the physical airlock while stationary and holding E; control suspension can retain partial progress; releasing E while stationary resets it"
+  },
+  "scopeLimits": [
+    "Six quiet physical investigations in an evacuated site, not six tactical combat missions",
+    "One new campaign painting, not six",
+    "Forty background enrichments, not forty new illustrations",
+    "Cosmetic stage events do not imply new physical damage hazards",
+    "The 189 playable identities remain MIRE models, not captives on the Tantalus",
+    "Complete drawn movesets, special choreography and measured franchise 1:1 fidelity remain open"
+  ],
+  "validation": {
+    "state": "PASSED",
+    "evidenceDirectory": "/workspace/tantalus-inventory/reprise-v190",
+    "targetedProduct": {
+      "state": "PASSED",
+      "uniqueTests": 143,
+      "evidence": [
+        "product-targeted-final.log:142 before the build-filter regression",
+        "art-build-filter-final.log:4 including the three already counted art cases"
+      ]
+    },
+    "sharedRegression": {
+      "state": "PASSED",
+      "uiSaveRuntimeTests": 71,
+      "releaseCoreTests": 71,
+      "recheckedInFullRelease": true
+    },
+    "sourceAdmission": {
+      "state": "PASSED",
+      "files": 2607,
+      "assets": 1447,
+      "privateDocuments": 0
+    },
+    "build": {
+      "state": "PASSED_AT_FROZEN_SOURCE",
+      "files": 2043,
+      "shell": 659,
+      "commitMetadata": "FINAL_SHA_IN_EXTERNAL_RECEIPT"
+    },
+    "earlierBuildFailure": {
+      "state": "FIXED_AND_REBUILT",
+      "reason": "Existing V180 copy filter excluded the admitted V190 campaign-art subdirectory",
+      "correction": "Exact V190 admission precedes V180 and has a real copy-filter regression test"
+    },
+    "nativeBrowser": {
+      "state": "PASSED_AFTER_LEGACY_PROMPT_FIX",
+      "assertions": 110,
+      "captures": 23,
+      "pageErrors": 0,
+      "httpErrors": 0,
+      "requestFailures": 0,
+      "sourceFilesUnchanged": 594,
+      "httpBodiesMatching": 13,
+      "pngBodiesMatching": 5,
+      "stylesheetSourceAndHttpMatch": true,
+      "harnessSha256": "b060f1fe98971a8a3507a12644e2e668d2c18220676a47f6e45257a6a84b2463",
+      "completeInvestigationMissions": 6,
+      "heldStationInteractions": 14,
+      "physicalExtractions": 6,
+      "campaignInteriorsExplicitlyObserved": [
+        2,
+        3,
+        5
+      ],
+      "newCorporateStagesObserved": 4,
+      "partialTrialsVisits": 6,
+      "completeTrialsMatches": 0,
+      "checkpointReload": "same operation, state, body, health, armour, ammunition, resources and clock; partial interaction preserved; no second deployment cost",
+      "fixtures": [
+        "Ordinary imported unplayed profile with setup, route and preferences prepared; no ARBITER return prefilled",
+        "Native keyboard walking with Shift fixed aim to settle, E interactions and actual UI clicks; no live actor, HP, position, clock, RNG, receipt or result injection"
+      ],
+      "evidence": "native-final/summary.json",
+      "priorPassArchive": "native-before-coop-prompt-fix",
+      "testedRuntimeSha256": "e5380991a5eaeb995f6e309b6053412376169caac98da722258417fff38ce7a0",
+      "historicalVerdictTransferred": false
+    },
+    "sourceSuccession": {
+      "state": "PASSED_INDEPENDENT_READBACK",
+      "baseline": "3a6c1410f606b83a7be881f93b6e87f8d0008a98",
+      "successors": 35,
+      "newInputs": 26,
+      "preservedPlates": 4,
+      "physicalPins": 65,
+      "preservedDeclarationBlocks": [
+        "V186",
+        "V187",
+        "V188",
+        "V189"
+      ],
+      "historicalV186PredecessorFields": {
+        "total": 288,
+        "sha256Present": 170,
+        "recordedAbsences": 118
+      },
+      "historicalResultsTransferred": false,
+      "effectiveRuntimeSources": 200
+    },
+    "firstGlobalRun": {
+      "state": "FAILED_AND_NOT_TRANSFERRED",
+      "reason": "Two legacy renderer VM contexts lacked new bindings; ARBITER omitted actor forwarding for legacy coop prompts; two old scenery suites applied V147/V149 render expectations to the four new V190-owned stages",
+      "correction": "Real production bindings added to both VM contexts; runtime forwards actor to its parent outside ARBITER; native E/Y revive regression passes",
+      "fullRerun": "PASSED_ON_FINAL_FROZEN_SOURCE",
+      "tests": 5262,
+      "pass": 5249,
+      "fail": 12,
+      "skipped": 1,
+      "evidence": "test-all-before-final-regression-fixes.log",
+      "historicalVerdictTransferred": false
+    },
+    "node": {
+      "tests": 5256,
+      "pass": 5255,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 1,
+      "todo": 0,
+      "uniqueTestFiles": 261,
+      "concurrency": 4,
+      "evidence": "test-all-final.log"
+    },
+    "sourceFreeze": {
+      "state": "UNCHANGED",
+      "files": 62,
+      "excludedMutableReports": 2
+    }
+  },
+  "publication": {
+    "state": "COMMIT_AND_DEPLOYMENT_STATUS_TRACKED_EXTERNALLY",
+    "externalReceipt": "/workspace/tantalus-inventory/reprise-v190/publication-final.json",
+    "priorQuotaResource": "api-deployments-free-per-day",
+    "retryAfterSeconds": 86400,
+    "settingsChanged": false
+  }
+}

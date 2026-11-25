@@ -1687,6 +1687,9 @@ export const WEAPON_RESEARCH_INDEX_V171 = Object.freeze(
 const normalize = x=>String(x||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'')
   .toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 const exactCatalogNames = new Map(WEAPONS.map(w=>[normalize(w.name),w.id]));
+// V188 (spec 014): exact research → pending-plaque catalogue promotions, by the
+// addition's own researchId (never by name). The row stays RESEARCH_ONLY.
+const promotedCatalogIdsV188 = new Map(WEAPONS.filter(w=>w.admissionV188&&w.researchId).map(w=>[w.researchId,w.id]));
 export function validateWeaponResearchIndexV171(rows=WEAPON_RESEARCH_INDEX_V171) {
  const errors=[],seen=new Set();
  for(const row of rows){
@@ -1710,7 +1713,8 @@ const escapeHtml = x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','
 export function getWeaponResearchIndexV171({ priority=null, work=null }={}){
  return WEAPON_RESEARCH_INDEX_V171.filter(row=>
   (priority===null||row.priority===priority)&&(work===null||row.work===work)).map(row=>({
-   ...row,possibleCatalogId:exactCatalogNames.get(normalize(row.name))||null
+   ...row,possibleCatalogId:exactCatalogNames.get(normalize(row.name))||promotedCatalogIdsV188.get(row.id)||null,
+   promotedCatalogIdV188:promotedCatalogIdsV188.get(row.id)||null
   }));
 }
 export function renderWeaponResearchIndexV171(){
