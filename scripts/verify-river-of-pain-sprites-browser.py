@@ -6,7 +6,6 @@ it does not modify the live simulation or stand in for a campaign playthrough.
 """
 from __future__ import annotations
 import argparse
-import base64
 import hashlib
 import importlib.metadata
 import json
@@ -121,7 +120,14 @@ COMPOSITION = r"""() => {
     results.push({id:a.id,category:a.category,target:id,accessory:a.accessory||null,pngDraws:draws});
     }finally{ctx.restore();}
   });
-  return {dataUrl:canvas.toDataURL('image/png'),results,
+  // A file:// image may taint this Canvas without preventing its display.
+  // Keep browser origin protections intact and let Playwright capture the
+  // displayed element instead of reading its pixels through Canvas export.
+  canvas.id='river-sprite-composition-fixture';
+  canvas.style.cssText='position:fixed;left:0;top:0;z-index:2147483647;display:block;'
+    +'width:'+canvas.width+'px;height:'+canvas.height+'px;max-width:none;max-height:none;pointer-events:none';
+  document.body.appendChild(canvas);
+  return {canvasId:canvas.id,width:canvas.width,height:canvas.height,results,
     liveStateUnchanged:JSON.stringify(ROP_APP.simulation.s)===liveBefore};
 }"""
 
@@ -274,12 +280,27 @@ def main():
             check("Actual reload restores the same observed state", observed(frame) == expected_state)
             check("Actual reload preserves non-DLC storage", storage(frame) == baseline)
             frame.evaluate("() => ROP_SPRITES.settled")
-            composition = frame.evaluate(COMPOSITION)
-            check("Presentation fixture leaves live simulation unchanged", composition["liveStateUnchanged"])
-            check("Every admitted asset reaches its renderer", all(row["pngDraws"] == 1 for row in composition["results"]))
-            (output / "02-renderer-composition.png").write_bytes(base64.b64decode(composition["dataUrl"].split(",", 1)[1]))
-            report["composition"] = composition["results"]
-            report["captures"].append({"file": "02-renderer-composition.png", "kind": "labelled-canvas-presentation-fixture"})
+            original_viewport = page.viewport_size
+            fixture_id = "river-sprite-composition-fixture"
+            try:
+                composition = frame.evaluate(COMPOSITION)
+                check("Presentation fixture leaves live simulation unchanged", composition["liveStateUnchanged"])
+                check("Every admitted asset reaches its renderer", all(row["pngDraws"] == 1 for row in composition["results"]))
+                # The native game is paused. Extra vertical room also contains
+                # the wrapper header so its iframe cannot crop the fixture.
+                page.set_viewport_size({
+                    "width": max(original_viewport["width"], composition["width"] + 32),
+                    "height": max(original_viewport["height"], composition["height"] + 160),
+                })
+                frame.locator("#" + composition["canvasId"]).screenshot(
+                    path=str(output / "02-renderer-composition.png"))
+                report["composition"] = composition["results"]
+                report["captures"].append({"file": "02-renderer-composition.png", "kind": "labelled-canvas-presentation-fixture"})
+            finally:
+                try:
+                    frame.evaluate("id => document.getElementById(id)?.remove()", fixture_id)
+                finally:
+                    page.set_viewport_size(original_viewport)
             declared_items = {identity for a in assets if a["category"] == "item" for identity in a["targetIds"]}
             if declared_items:
                 frame.get_by_role("button", name="REPRENDRE LE PARCOURS", exact=True).click()
