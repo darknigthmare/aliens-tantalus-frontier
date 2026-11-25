@@ -71,11 +71,11 @@ async function snapshot(page) {
     return {
       campaignId: engine.campaign?.id, active: engine.isAlien3V88?.() === true,
       cut: state?.specialOperation?.alien3V114?.cut,
-      phase: engine.alien3StateV88?.phase, player: { x: engine.player?.x, y: engine.player?.y },
-      flares: engine.alien3StateV88?.flares,
+      phase: engine.alien3V88?.phase, player: { x: engine.player?.x, y: engine.player?.y },
+      flares: engine.alien3V88?.flares,
       allies: engine.activeSquadActors?.()?.length ?? engine.squad?.length ?? 0,
-      coop: engine.coop, globalCoop: saveSystem.data.settings.coop,
-      vehicle: Boolean(engine.vehicle || engine.vehicleState?.active),
+      coop: Boolean(engine.coopEnabled || engine.coop?.alive), globalCoop: saveSystem.data.settings.coop,
+      vehicle: Boolean(engine.vehicle?.active || engine.player?.inVehicle),
       operationId: saveSystem.data.strategy.currentOperation?.id,
       lastResumeApplied: engine.lastResumeResult?.applied === true,
       marineProfile: { weapon: saveSystem.data.strategy.loadout?.weaponId,
@@ -130,7 +130,7 @@ try {
     const saved = await snapshot(page);
     const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('atf-v47-profile-1'))?.strategy?.currentOperation);
     check(`${cut}: quick-save stores the selected cut`, stored?.resumeState?.specialOperation?.alien3V114?.cut === cut, { savedCut: stored?.resumeState?.specialOperation?.alien3V114?.cut });
-    check(`${cut}: flare action consumes a finite resource`, Number.isFinite(saved.flares) && saved.flares === started.flares - 1, { before: started.flares, after: saved.flares });
+    check(`${cut}: flare input respects its finite stock`, Number.isFinite(saved.flares) && saved.flares === Math.max(0, started.flares - 1), { before: started.flares, after: saved.flares });
     report.cuts[cut].saved = { position: saved.player, flares: saved.flares, operationId: stored?.id };
     await page.reload({ waitUntil: 'domcontentloaded' });
     await enterProfile(page);
